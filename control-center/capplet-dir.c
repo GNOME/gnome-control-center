@@ -68,6 +68,8 @@ find_icon (GnomeDesktopItem *dentry)
 	res = gtk_icon_theme_load_icon (icon_theme, icon, 48, 0, NULL);
 	if (res == NULL)
 		res = gtk_icon_theme_load_icon (icon_theme, "gnome-unknown", 48, 0, NULL);
+	if (res == NULL)
+		res = gtk_icon_theme_load_icon (icon_theme, "gtk-missing-image", 48, 0, NULL);
 	return res;
 }
 

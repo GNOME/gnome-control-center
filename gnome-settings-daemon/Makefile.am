@@ -4,7 +4,7 @@ INCLUDES=$(LIBXKLAVIER_CFLAGS) $(GNOME_SETTINGS_DAEMON_CFLAGS) -I$(top_srcdir)/l
   -DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
   -DESD_SERVER="\"$(ESD_SERVER)\""	\
   -DDATADIR="\"$(datadir)\""
-bin_PROGRAMS=gnome-settings-daemon
+libexec_PROGRAMS=gnome-settings-daemon
 
 gnome_settings_daemon_SOURCES =	\
 	factory.c			\
@@ -88,8 +88,11 @@ serverdir	= $(libdir)/bonobo/servers
 server_in_files = GNOME_SettingsDaemon.server.in
 server_DATA     = $(server_in_files:.server.in=.server)
 
+$(server_in_files): $(server_in_files).in
+	sed -e "s|\@LIBEXECDIR\@|$(libexecdir)|" $< > $@
+
 @INTLTOOL_SERVER_RULE@
 
 CLEANFILES = $(BUILT_SOURCES)
 
-EXTRA_DIST = $(server_in_files)	
+EXTRA_DIST = $(server_in_files)	GNOME_SettingsDaemon.server.in.in
