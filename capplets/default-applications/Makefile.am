@@ -7,21 +7,18 @@ INCLUDES = -I. -I$(srcdir) 				\
 
 bin_PROGRAMS = default-application-properties-capplet
 
-default_application_properties_capplet_SOURCES = \
-					 default-application-properties.c \
-					 interface.c \
-					 callbacks.c \
-					 support.c
-					 
+default_application_properties_capplet_SOURCES =	\
+	default-application-properties.c		\
+	interface.c interface.h				\
+	callbacks.c callbacks.h				\
+	support.c support.h				\
+	defaults.h
 
 default_application_properties_capplet_LDADD = @CAPPLET_LIBS@ 
 
-EXTRA_DIST =					\
-	default-application-properties.desktop.in       \
-	default-application-properties.desktop    	\
-	interface.h				\
-	callbacks.h				\
-	support.h
+EXTRA_DIST =						\
+	default-application-properties.desktop.in	\
+	default-application-properties.desktop
 
 sysdir = $(datadir)/control-center/capplets/
 sys_in_files = default-application-properties.desktop.in
