@@ -230,6 +230,7 @@ control_center_get_information (void)
 	MenuTree                 *menu_tree;
 	MenuTreeDirectory        *menu_root;
 	GSList                   *categories;
+	GSList                   *prev, *curr;
 
 	information = g_new0 (ControlCenterInformation, 1);
 
@@ -246,6 +247,15 @@ control_center_get_information (void)
 
 	categories = g_slist_append (categories,
 				     control_center_category_new (menu_root, _("Others"), FALSE));
+
+	for (prev = NULL, curr = categories; curr; prev = curr, curr = curr ? curr->next : categories) {
+		ControlCenterCategory *category = curr->data;
+		if (category->n_entries == 0) {
+			control_center_category_free (category);
+			categories = g_slist_delete_link (categories, curr);
+			curr = prev;
+		}
+	}
 
 	menu_tree_directory_unref (menu_root);
 
