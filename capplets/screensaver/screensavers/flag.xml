@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<screensaver name="flag">
+    <command arg="-root"/>
+
+<!-- This is an XLOCKMORE based hack -->
+
+<!-- Specific options for XLOCKMORE program ... -->
+
+<!-- Neither of these can be done currently... 
+     ******************************************
+    <string id="text" label="Text for flag" 
+             arg-set="-text" test="text"/>
+    <picture id="bitmap" type="xbm" label="Bitmap for flag" 
+             arg-set="-bitmap" test="bitmap"/>
+     ******************************************
+-->
+
+
+<!-- Generic XLOCKMORE options... -->
+
+    <number id="speed" label="Speed" low-label="Slow" high-label="Fast" 
+            type="slider" low="0" high="80000" arg="-delay %" 
+            from-cli-conv="80000 - var" to-cli-conv="80000 - var"
+            default="79000"/>
+    <number id="cycles" label="Timeout" low-label="Small" high-label="Large" 
+            type="slider" low="0" high="8000000" arg="-cycles %" 
+            default="40000"/>
+    
+    <hgroup>
+        <select id="rand_size">
+            <option id="rand" label="Random size upto" enable="neg_size"/>
+            <option id="specific" label="Specific size of" 
+                    test="size > 0" enable="pos_size"/>
+        </select>
+<!-- **** Need to be able to say "if rand: -size" -->
+        <number id="pos_size"
+                type="spinbutton" low="0" high="18" arg="-size %"
+                default="8"/>
+        <number id="neg_size"
+                type="spinbutton" low="0" high="18" arg="-size -%"
+                default="12"/>
+    </hgroup>
+
+    <number id="ncolours" label="Number of colours" 
+            low-label="Two" high-label="Many"
+            type="slider" low="2" high="16384" arg="-ncolors %"
+            default="64"/>
+
+    <select id="use_color">
+	<option id="color" label="Full Color"/>
+	<option id="mono" label="Monochrome" arg-set="-mono" test="mono"/>
+    </select>
+
+    
+
+</screensaver>
