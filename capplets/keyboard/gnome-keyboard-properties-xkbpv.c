@@ -60,6 +60,9 @@ init_preview (GladeXML * dialog)
 
   keyboard_drawing_set_track_group (KEYBOARD_DRAWING (kbdraw), TRUE);
   keyboard_drawing_set_track_config (KEYBOARD_DRAWING (kbdraw), TRUE);
+// show levels 1 and 2 - hoping that no more levels are used
+  keyboard_drawing_set_levels (KEYBOARD_DRAWING (kbdraw), 0, 1);
+
   gtk_container_add (GTK_CONTAINER (previewWindow), kbdraw);
 
   g_signal_connect (G_OBJECT (previewWindow), "delete-event",
