@@ -1,5 +1,11 @@
 2001-10-26  Bradford Hovinen  <hovinen@ximian.com>
 
+	* capplets/Makefile.am: Remove screensaver from
+	always_built_SUBDIRS and add $(SCREENSAVER) to SUBDIRS
+
+	* capplets/{background|keyboard|mouse|sound}/Makefile.am:
+	Fix so that automake does not choke on these files
+
 	* README: Updated to reflect current status porting to GNOME 2
 
 	* configure.in: Cleanup for GNOME 2 port

@@ -21,7 +21,6 @@ defaults_DATA = sound-properties.xml
 
 oafdir = $(datadir)/oaf
 oaf_DATA = Bonobo_Control_Capplet_sound_properties.oaf
-oaffile = $(oaf_DATA)
 
 ##
 ## You should not need to modify anything below this line
@@ -32,8 +31,8 @@ $(bin_SCRIPTS): $(top_srcdir)/capplets/common/wrapper-script.in
 	sed -e "s#@BINDIR@#$(bindir)#" -e "s#@CAPPLET_NAME@#$(cappletname)-properties#" < $< > $@
 	chmod a+x $@
 
-$(oaffile): %.oaf: $(top_srcdir)/capplets/common/Bonobo_Control_Capplet_generic.oaf.in
-	sed -e "s#@BINDIR@#$(bindir)#" -e "s#@SHORT_CAPPLET_NAME@#$(cappletname)#" -e "s#@CAPPLET_BINARY_NAME@#$(bin_PROGRAMS)#" < $< > ${oaffile}
+$(oaf_DATA): %.oaf: $(top_srcdir)/capplets/common/Bonobo_Control_Capplet_generic.oaf.in
+	sed -e "s#@BINDIR@#$(bindir)#" -e "s#@SHORT_CAPPLET_NAME@#$(cappletname)#" -e "s#@CAPPLET_BINARY_NAME@#$(bin_PROGRAMS)#" < $< > $@
 
 ####@###GNOMECC_CAPPLETS_DESKTOP_IN_RULE@
 $(desktop).in: %.desktop.in: %.desktop.in.in
