@@ -76,7 +76,7 @@ apply_settings (Bonobo_ConfigDatabase db)
                 den = 1;
         }
 
-        threshold = bonobo_config_get_ulong (db, "/main/threshold", NULL);
+        threshold = MAX_THRESH - bonobo_config_get_ulong (db, "/main/threshold", NULL);
 
         XChangePointerControl (GDK_DISPLAY (), True, True,
                                num, den, threshold);
