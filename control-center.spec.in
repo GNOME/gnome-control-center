@@ -1,6 +1,6 @@
 # Note that this is NOT a relocatable package
-%define ver      0.99.5
-%define rel      SNAP
+%define ver      @VERSION@
+%define rel      1
 %define prefix   /usr
 
 Summary: GNOME control center
@@ -10,14 +10,17 @@ Release: %rel
 Copyright: LGPL
 Group: X11/Libraries
 Source: ftp://ftp.gnome.org/pub/control-center-%{ver}.tar.gz
-BuildRoot: /var/tmp/control-center-root
+
+BuildRoot: /var/tmp/control-center-%{PACKAGE_VERSION}-root
 Obsoletes: gnome
-Packager: Jonathan Blandford <jrb@redhat.com>
+
 URL: http://www.gnome.org
 Docdir: %{prefix}/doc
+
+
 Requires: xscreensaver >= 2.34
-Requires: gnome-core >= 0.99
-Requires: ORBit >= 0.3.0
+Requires: gnome-libs >= 0.99.8
+Requires: ORBit >= 0.3.97
 
 %description
 A Configuration tool for easily setting up your GNOME environment.
@@ -36,8 +39,34 @@ Capplet development stuff
 
 %changelog
 
-* Wed Dec 16 1998 Jonathan Blandford <jrb@redhat.com>
+* Mon Feb 15 1999 Michael Fulbright <drmike@redhat.com>
+- version 0.99.8.1
+- added etc/CORBA/servers/* to file list
 
+* Fri Feb 12 1999 Michael Fulbright <drmike@redhat.com>
+- update to 0.99.8
+- added /usr/lib/cappletConf.sh
+
+* Mon Feb 08 1999 The Rasterman <raster@redhat.com>
+- update to 0.99.5.1
+
+* Wed Feb 03 1999 Michael Fulbright <drmike@redhat.com>
+- update to 0.99.5
+
+* Mon Jan 20 1999 Michael Fulbright <drmike@redhat.com>
+- update to 0.99.3.1
+
+* Mon Jan 18 1999 Michael Fulbright <drmike@redhat.com>
+- update to 0.99.3
+- seems like patch for non-standard xscreensaver placement was already in
+  prestine sources(?)
+
+* Wed Jan 06 1999 Jonathan Blandford <jrb@redhat.com>
+- updated to 0.99.1
+- temporary hack patch to get path to work to non-standard placement
+  of xscreensaver binaries in RH 5.2
+
+* Wed Dec 16 1998 Jonathan Blandford <jrb@redhat.com>
 - Created for the new control-center branch
 
 
@@ -45,7 +74,9 @@ Capplet development stuff
 %setup
 
 %build
-CFLAGS="$RPM_OPT_FLAGS" ./configure --prefix=%prefix
+
+CFLAGS="$RPM_OPT_FLAGS" ./configure --prefix=%prefix 
+make
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -53,7 +84,7 @@ rm -rf $RPM_BUILD_ROOT
 make prefix=$RPM_BUILD_ROOT%{prefix} install
 
 %clean
-#rm -rf $RPM_BUILD_ROOT
+rm -rf $RPM_BUILD_ROOT
 
 %post -p /sbin/ldconfig
 
@@ -64,18 +95,18 @@ make prefix=$RPM_BUILD_ROOT%{prefix} install
 
 %doc AUTHORS COPYING ChangeLog NEWS README
 %{prefix}/bin/*
-%{prefix}/etc/CORBA/servers/gnomecc.gnorba
 %{prefix}/lib/lib*.so.*
+%{prefix}/etc/CORBA/servers/*
 %{prefix}/share/control-center
+%{prefix}/share/pixmaps/*
 %{prefix}/share/locale/*/*/*
-%{prefix}/share/apps/System/gnomecc.desktop
-%{prefix}/share/pixmaps/control-center.png
+%{prefix}/share/apps/System/*
 
 %files devel
 %defattr(-, root, root)
 
 %{prefix}/lib/lib*.so
-%{prefix}/lib/*sh
 %{prefix}/lib/*a
+%{prefix}/lib/*Conf.sh
 %{prefix}/share/idl
 %{prefix}/include/*

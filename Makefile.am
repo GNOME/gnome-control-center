@@ -7,7 +7,10 @@ SUBDIRS = intl po macros \
 #DIST_SUBDIRS = intl po macros $(always_built_SUBDIRS)
 
 
-EXTRA_DIST = control-center.spec
+EXTRA_DIST = control-center.spec.in
+
+dist-hook:
+	cp control-center.spec $(distdir)
 
 ## to automatically rebuild aclocal.m4 if any of the macros in `macros/' change
 @MAINT@include macros/macros.dep
