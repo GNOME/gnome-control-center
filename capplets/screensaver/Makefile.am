@@ -29,6 +29,9 @@ Glade_DATA = screensaver-properties.glade
 iconsdir   = $(GNOMECC_ICONS_DIR)
 icons_DATA = screensaver-capplet.png
 
+desktop_iconsdir = $(datadir)/pixmaps
+desktop_icons_DATA = screensaver-capplet.png
+
 desktopdir = $(GNOMECC_DESKTOP_DIR)
 desktop_DATA = screensaver.desktop
 
