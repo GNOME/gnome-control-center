@@ -23,8 +23,7 @@ nautilus_mime_type_capplet_LDADD =\
 			$(CAPPLET_LIBS) \
 			$(ORBIT_LIBS) \
 			$(INTLLIBS) \
-			$(VFS_LIBS) \
-			-lgnomevfs
+			$(top_builddir)/libgnomevfs/libgnomevfs.la
 
 EXTRA_DIST = \
 	nautilus-mime-type.desktop
@@ -35,3 +34,8 @@ sys_DATA = nautilus-mime-type.desktop
 
 install-data-local:
 	$(INSTALL_DATA) $(srcdir)/nautilus-mime-type.desktop $(DESTDIR)$(datadir)/gnome/apps/Settings/nautilus-mime-type.desktop
+
+
+
+
+
