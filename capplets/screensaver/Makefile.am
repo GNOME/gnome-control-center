@@ -18,10 +18,10 @@ INCLUDES = \
 	-DG_LOG_DOMAIN=\"screensaver-properties\" \
 	$(GNOME_INCLUDEDIR) \
 	$(XML_CFLAGS) \
-	-I$(top_srcdir)/
-	-I../intl
-	-I$(top_srcdir)/intl
-	-I$(top_srcdir)/control-center
+	-I$(top_srcdir)/ \
+	-I../intl \
+	-I$(top_srcdir)/intl \
+	-I$(top_srcdir)/libcapplet
 
 bin_PROGRAMS = screensaver-properties-capplet
 
