@@ -1,0 +1,34 @@
+<?xml version="1.0"?> <!--*- mode: xml -*-->
+
+<oaf_info>
+  <oaf_server iid="OAFIID:Fontilus_Context_Menu_Factory"
+              type="exe" location="@LIBEXECDIR@/fontilus-context-menu">
+    <oaf_attribute name="repo_ids" type="stringv">
+      <item value="IDL:GNOME/ObjectFactory:1.0" />
+    </oaf_attribute>
+    <oaf_attribute name="name" type="string" _value="Fontilus context menu factory" />
+    <oaf_attribute name="description" type="string" _value="Factory for the fontilus context menu" />
+  </oaf_server>
+
+  <oaf_server iid="OAFIID:Fontilus_Context_Menu"
+              type="factory" location="OAFIID:Fontilus_Context_Menu_Factory">
+    <oaf_attribute name="repo_ids" type="stringv">
+      <item value="IDL:Bonobo/Unknown:1.0" />
+      <item value="IDL:Bonobo/Listener:1.0" />
+    </oaf_attribute>
+    <oaf_attribute name="name" type="string" _value="Fontilus context menu" />
+    <oaf_attribute name="description" type="string" _value="Nautilus context menu entries for fonts" />
+    <oaf_attribute name="bonobo:supported_uri_schemes" type="stringv">
+      <item value="fonts" />
+    </oaf_attribute>
+    <oaf_attribute name="bonobo:supported_mime_types" type="stringv">
+      <item value="application/x-font-ttf" />
+      <item value="application/x-font-type1" />
+      <item value="application/x-font-pcf" />
+      <item value="application/x-font-otf" />
+    </oaf_attribute>
+    <oaf_attribute name="nautilus:context_menu_handler" type="boolean" value="true" />
+    <oaf_attribute name="nautilus:can_handle_multiple_files" type="boolean" value="false" />
+    <oaf_attribute name="nautilusverb:UseAsApplicationFont" type="string" _value="Use as application font" />
+  </oaf_server>
+</oaf_info>

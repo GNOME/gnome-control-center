@@ -364,7 +364,7 @@ set_icon(GtkWindow *window, const gchar *uri)
     if (!pixbuf) goto end;
 
     gtk_window_set_icon(window, pixbuf);
-end:
+ end:
     if (pixbuf) g_object_unref(pixbuf);
     g_free(icon_file);
     g_free(icon_name);
