@@ -7,8 +7,8 @@
 
 <!-- Specific options for XLOCKMORE program ... -->
 
-    <string id="text" label="Text for flag" arg="-text"/>
-    <file id="bitmap" label="Bitmap for flag" arg="-bitmap"/>
+    <string id="text" label="Text for flag" arg="-text %"/>
+    <file id="bitmap" label="Bitmap for flag" arg="-bitmap %"/>
 
 <!-- Generic XLOCKMORE options... -->
 
@@ -41,7 +41,7 @@
             default="64"/>
 
     <select id="use_color">
-	<option id="color" label="Full Color"/>
+	<option id="color" label="Full Color" enable="ncolours"/>
 	<option id="mono" label="Monochrome" arg-set="-mono" test="mono"/>
     </select>
 

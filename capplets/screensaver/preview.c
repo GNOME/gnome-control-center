@@ -143,6 +143,46 @@ add_window_arg (char **args, GdkWindow *window)
 	return args;
 }
 
+/* fix_arguments
+ *
+ * Given an array of CLI arguments naively split, convert them into actual CLI 
+ * arguments. Note: leaks memory a lot.
+ */
+
+static char **
+fix_arguments (char **argv) 
+{
+	char **out;
+	gchar *tmp, *tmp1;
+	int i, j, argc;
+
+	for (argc = 0; argv[argc]; argc++);
+
+	out = g_new0 (char *, argc + 1);
+
+	for (i = 0, j = 0; i < argc; i++) {
+		if (argv[i][0] != '\"') {
+			out[j++] = argv[i];
+		} else {
+			tmp = g_strdup (argv[i] + 1);
+			while (i < argc) {
+				if (argv[i][strlen (argv[i]) - 1] == '\"') {
+					tmp[strlen (tmp) - 1] = '\0';
+					break;
+				}
+				i++;
+				tmp1 = g_strconcat (tmp, " ", argv[i], NULL);
+				g_free (tmp);
+				tmp = tmp1;
+			}
+
+			out[j++] = tmp;
+		}
+	}
+
+	return out;
+}
+
 /* show_screensaver
  *
  * Given a GdkWindow in which to render and a particular screensaver,
@@ -164,6 +204,7 @@ show_screensaver (GdkWindow *window, Screensaver *saver, pid_t *pid)
 		nice (20);    /* Very low priority */
 
 		args = g_strsplit (saver->command_line, " ", -1);
+		args = fix_arguments (args);
 		args = strip_arg (args, "-root");
 		args = add_window_arg (args, window);
 
