@@ -9,6 +9,8 @@ INCLUDES = -I. -I$(srcdir) 				\
 bin_PROGRAMS = nautilus-mime-type-capplet
 
 nautilus_mime_type_capplet_SOURCES =\
+	nautilus-mime-type-capplet.h \
+	nautilus-mime-type-capplet-dialogs.h \
 	nautilus-mime-type-capplet.c\
 	nautilus-mime-type-capplet-dialogs.c
 
