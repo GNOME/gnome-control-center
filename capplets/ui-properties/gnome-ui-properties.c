@@ -38,7 +38,7 @@ enum
 
 static GConfEnumStringPair toolbar_style_enums[] = {
   { 0, "both" },
-  { 1, "both_horiz" },
+  { 1, "both-horiz" },
   { 2, "icons" },
   { 3, "text" },
   { -1, NULL }
