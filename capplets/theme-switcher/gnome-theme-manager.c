@@ -60,6 +60,12 @@ static GdkPixbuf *default_image = NULL;
 static GnomeThemeMetaInfo custom_meta_theme_info = {};
 static GnomeThemeMetaInfo initial_meta_theme_info = {};
 
+const char *meta_theme_default_name = NULL; 
+const char *gtk_theme_default_name = NULL; 
+const char *window_theme_default_name = NULL; 
+const char *icon_theme_default_name = NULL; 
+
+
 /* Function Prototypes */
 static void      idle_async_func                 (GdkPixbuf          *pixbuf,
 						  gpointer            data);
@@ -67,8 +73,7 @@ static void      list_data_free                  (gpointer            data);
 static gboolean  load_theme_in_idle              (gpointer            data);
 static void      add_pixbuf_idle                 (void);
 static void      load_meta_themes                (GtkTreeView        *tree_view,
-						  GList              *meta_theme_list,
-						  char               *default_theme);
+						  GList              *meta_theme_list);
 static void      meta_theme_setup_info           (GnomeThemeMetaInfo *meta_theme_info,
 						  GladeXML           *dialog);
 static void      meta_theme_set                  (GnomeThemeMetaInfo *meta_theme_info);
@@ -238,9 +243,9 @@ sort_meta_theme_list_func (gconstpointer  a,
   g_assert (a_meta_theme_info->name);
   g_assert (b_meta_theme_info->name);
 
-  if (! strcmp (META_THEME_DEFAULT_NAME, a_meta_theme_info->name))
+  if (meta_theme_default_name && strcmp (meta_theme_default_name, a_meta_theme_info->name) == 0)
     a_flag |= THEME_FLAG_DEFAULT;
-  if (! strcmp (META_THEME_DEFAULT_NAME, b_meta_theme_info->name))
+  if (meta_theme_default_name && strcmp (meta_theme_default_name, b_meta_theme_info->name) == 0)
     b_flag |= THEME_FLAG_DEFAULT;
 
   return gnome_theme_manager_sort_func (a_meta_theme_info->readable_name,
@@ -254,8 +259,7 @@ sort_meta_theme_list_func (gconstpointer  a,
  */
 static void
 load_meta_themes (GtkTreeView *tree_view,
-		  GList       *meta_theme_list,
-		  char        *default_theme)
+		  GList       *meta_theme_list)
 {
   GList *list;
   GtkTreeModel *model;
@@ -292,14 +296,14 @@ load_meta_themes (GtkTreeView *tree_view,
     }
   else
     {
-      current_window_theme = g_strdup ("");
+      current_window_theme = g_strdup (window_theme_default_name);
     }
 
   /* FIXME: What do we really do when there is no theme? */
   if (current_icon_theme == NULL)
-    current_icon_theme = g_strdup ("Default");
+    current_icon_theme = g_strdup (icon_theme_default_name);
   if (current_gtk_theme == NULL)
-    current_gtk_theme = g_strdup ("Default");
+    current_gtk_theme = g_strdup (gtk_theme_default_name);
 
   /* handle first time */
   if (first_time)
@@ -307,8 +311,20 @@ load_meta_themes (GtkTreeView *tree_view,
       initial_meta_theme_info.gtk_theme_name = g_strdup (current_gtk_theme);
       initial_meta_theme_info.icon_theme_name = g_strdup (current_icon_theme);
       initial_meta_theme_info.metacity_theme_name = g_strdup (current_window_theme);
-    }
 
+      for (list = meta_theme_list; list; list = list->next)
+	{
+	  GnomeThemeMetaInfo *theme_info = list->data;
+
+	  if ((theme_info->gtk_theme_name && !strcmp (theme_info->gtk_theme_name, gtk_theme_default_name)) &&
+	      (theme_info->metacity_theme_name && !strcmp (theme_info->metacity_theme_name, window_theme_default_name)) &&
+	      (theme_info->icon_theme_name && !strcmp (theme_info->icon_theme_name, icon_theme_default_name)))
+	    {
+	      meta_theme_default_name = g_strdup (theme_info->name);
+	      break;
+	    }
+	}
+    }
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (swindow),
 				  GTK_POLICY_NEVER, GTK_POLICY_NEVER);
   gtk_widget_set_usize (swindow, -1, -1);
@@ -331,7 +347,7 @@ load_meta_themes (GtkTreeView *tree_view,
       if (list)
 	{
 	  list_meta_theme_info = list->data;
-	  if (strcmp (default_theme, list_meta_theme_info->name) == 0)
+	  if (meta_theme_default_name && strcmp (meta_theme_default_name, list_meta_theme_info->name) == 0)
 	    list_is_default = TRUE;
 	  else
 	    list_is_default = FALSE;
@@ -592,7 +608,7 @@ update_themes_from_disk (GladeXML *dialog)
     {
       have_meta_theme = TRUE;
       gtk_widget_show (WID ("meta_theme_hbox"));
-      load_meta_themes (GTK_TREE_VIEW (WID ("meta_theme_treeview")), theme_list, META_THEME_DEFAULT_NAME);
+      load_meta_themes (GTK_TREE_VIEW (WID ("meta_theme_treeview")), theme_list);
     }
   g_list_free (theme_list);
 
@@ -1120,6 +1136,7 @@ setup_dialog (GladeXML *dialog)
   default_image = gdk_pixbuf_new_from_file(GNOMECC_DATA_DIR "/pixmaps/theme-thumbnailing.png", NULL);
 
   client = gconf_client_get_default ();
+
   window_manager = gnome_wm_manager_get_current (gdk_display_get_default_screen (gdk_display_get_default ()));
   
   parent = WID ("theme_dialog");
@@ -1356,6 +1373,33 @@ gnome_theme_manager_drag_data_received_cb (GtkWidget *widget, GdkDragContext *co
 }
 
 
+static gchar *
+get_default_string_from_key (const char *key)
+{
+  GConfClient *client;
+  GConfValue *value;
+  GError *error = NULL;
+  gchar *str = NULL;
+
+  client = gconf_client_get_default ();
+  value = gconf_client_get_default_from_schema (client, key, &error);
+
+  if (error)
+    {
+      g_clear_error (&error);
+      return NULL;
+    }
+
+  if (value)
+    {
+      if (value->type == GCONF_VALUE_STRING)
+	str = gconf_value_to_string (value);
+      gconf_value_free (value);
+    }
+
+  return str;
+}
+
 int
 main (int argc, char *argv[])
 {
@@ -1372,6 +1416,27 @@ main (int argc, char *argv[])
 		      LIBGNOMEUI_MODULE, argc, argv,
 		      GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
 		      NULL);
+
+  gtk_theme_default_name = get_default_string_from_key (GTK_THEME_KEY);
+  window_theme_default_name = get_default_string_from_key (METACITY_THEME_KEY);
+  icon_theme_default_name = get_default_string_from_key (ICON_THEME_KEY);
+
+  if (gtk_theme_default_name == NULL ||
+      window_theme_default_name == NULL ||
+      icon_theme_default_name == NULL)
+    {
+      GtkWidget *dialog;
+
+      dialog = gtk_message_dialog_new (NULL,
+				       GTK_DIALOG_MODAL,
+				       GTK_MESSAGE_ERROR,
+				       GTK_BUTTONS_OK,
+				       _("The default theme schemas could not be found on.  This means that you probably don't have metacity installed, or that your gconf is configured incorrectly."));
+      gtk_dialog_run (GTK_DIALOG (dialog));
+      gtk_widget_destroy (dialog);
+      exit (0);
+    }
+
   gnome_theme_init (NULL);
 
   gnome_wm_manager_init ();

@@ -6,17 +6,16 @@
 
 
 #define GTK_THEME_KEY      "/desktop/gnome/interface/gtk_theme"
-#define WINDOW_THEME_KEY   "/desktop/gnome/applications/window_manager/theme"
 #define ICON_THEME_KEY     "/desktop/gnome/interface/icon_theme"
 #define FONT_KEY	   "/desktop/gnome/interface/font_name"
 
 #define METACITY_THEME_DIR "/apps/metacity/general"
 #define METACITY_THEME_KEY METACITY_THEME_DIR "/theme"
 
-#define META_THEME_DEFAULT_NAME   "Default"
-#define GTK_THEME_DEFAULT_NAME    "Default"
-#define WINDOW_THEME_DEFAULT_NAME "Atlanta"
-#define ICON_THEME_DEFAULT_NAME   "Default"
+extern const char *meta_theme_default_name; 
+extern const char *gtk_theme_default_name; 
+extern const char *window_theme_default_name; 
+extern const char *icon_theme_default_name; 
 
 
 /* Drag and drop info */

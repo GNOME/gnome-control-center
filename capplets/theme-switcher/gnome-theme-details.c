@@ -39,7 +39,7 @@ static void update_gconf_key_from_selection (GtkTreeSelection *selection,
 					     const gchar      *gconf_key);
 static void load_theme_names                (GtkTreeView        *tree_view,
 					     GList              *theme_list,
-					     gchar              *default_theme);
+					     const gchar        *default_theme);
 static char *path_to_theme_id               (const char *path);
 
 
@@ -186,7 +186,7 @@ icon_theme_selection_changed (GtkTreeSelection *selection,
 static void
 load_theme_names (GtkTreeView *tree_view,
 		  GList       *theme_list,
-		  gchar       *default_theme)
+		  const gchar *default_theme)
 {
   GList *list;
   GtkTreeModel *model;
@@ -213,7 +213,7 @@ load_theme_names (GtkTreeView *tree_view,
 
       gtk_list_store_prepend (GTK_LIST_STORE (model), &iter);
 
-      if (strcmp (default_theme, name) == 0)
+      if (default_theme && strcmp (default_theme, name) == 0)
 	is_default = TRUE;
       else
 	is_default = FALSE;
@@ -417,7 +417,7 @@ gnome_theme_details_reread_themes_from_disk (void)
     {
       have_gtk_theme = TRUE;
       gtk_widget_show (WID ("control_theme_vbox"));
-      load_theme_names (GTK_TREE_VIEW (WID ("control_theme_treeview")), string_list, GTK_THEME_DEFAULT_NAME);
+      load_theme_names (GTK_TREE_VIEW (WID ("control_theme_treeview")), string_list, gtk_theme_default_name);
       g_list_free (string_list);
     }
   g_list_free (theme_list);
@@ -440,7 +440,7 @@ gnome_theme_details_reread_themes_from_disk (void)
     {
       have_window_theme = TRUE;
       gtk_widget_show (WID ("window_theme_vbox"));
-      load_theme_names (GTK_TREE_VIEW (WID ("window_theme_treeview")), string_list, WINDOW_THEME_DEFAULT_NAME);
+      load_theme_names (GTK_TREE_VIEW (WID ("window_theme_treeview")), string_list, window_theme_default_name);
       g_list_free (string_list);
     }
   g_list_free (theme_list);
@@ -465,7 +465,7 @@ gnome_theme_details_reread_themes_from_disk (void)
     {
       have_icon_theme = TRUE;
       gtk_widget_show (WID ("icon_theme_vbox"));
-      load_theme_names (GTK_TREE_VIEW (WID ("icon_theme_treeview")), string_list, ICON_THEME_DEFAULT_NAME);
+      load_theme_names (GTK_TREE_VIEW (WID ("icon_theme_treeview")), string_list, icon_theme_default_name);
       g_list_free (string_list);
     }
   g_list_free (theme_list);
