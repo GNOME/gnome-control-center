@@ -31,12 +31,6 @@ vfsmoduleconf_DATA = font-method.conf
 vfsdirectorydir = $(datadir)/gnome/vfolders
 vfsdirectory_DATA = font-method.directory
 
-mimeinfodir = $(datadir)/mime-info
-mimeinfo_DATA = fontilus.keys fontilus.mime
-
-appregdir = $(datadir)/application-registry
-appreg_DATA = fontilus.applications
-
 schemasdir = $(GCONF_SCHEMA_FILE_DIR)
 schemas_DATA = fontilus.schemas
 

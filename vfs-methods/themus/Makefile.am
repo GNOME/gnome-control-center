@@ -55,13 +55,11 @@ schemasdir       = $(GCONF_SCHEMA_FILE_DIR)
 schemas_in_files = themus.schemas.in
 schemas_DATA     = $(schemas_in_files:.schemas.in=.schemas)
 
-mimeinfodir = $(datadir)/mime-info
-mimeinfo_DATA = themus.keys
+desktopdir = $(datadir)/applications
+desktop_in_files = themus-theme-applier.desktop.in
+desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
-appregdir = $(datadir)/application-registry
-appreg_DATA = themus.applications
-
-CLEANFILES = Themus_Properties_View.server Themus_Properties_View.server.in
+CLEANFILES = themus-theme-applier.desktop themus-theme-applier.desktop.in
 
 if GCONF_SCHEMAS_INSTALL
 install-data-local:
@@ -72,7 +70,7 @@ else
 install-data-local:
 endif
 
-@INTLTOOL_KEYS_RULE@
+@INTLTOOL_DESKTOP_RULE@
 @INTLTOOL_SCHEMAS_RULE@
 
 EXTRA_DIST = \
@@ -82,9 +80,7 @@ EXTRA_DIST = \
   theme-method.conf \
   $(schemas_DATA)	\
   $(schemas_in_files)	\
-  themus.applications \
-  themus.keys \
-  ChangeLog
+  themus-theme-applier.desktop.in.in
 
 DISTCLEANFILES = \
   theme-method.directory \
