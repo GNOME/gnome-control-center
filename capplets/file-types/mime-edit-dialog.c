@@ -406,11 +406,9 @@ mime_add_dialog_new (GtkTreeModel *model, GtkWindow *parent,
 		     char const *file_name) 
 {
 	GObject *dialog = g_object_new (mime_edit_dialog_get_type (),
-		"model", model,	/* must be before is-add */
+		"model", model,	"is-add", TRUE, /* model must be before is-add */
 		NULL);
-	g_object_set (dialog,
-		      "is-add", TRUE,
-		      NULL);
+
 	if (parent != NULL)
 		gtk_window_set_transient_for (
 			GTK_WINDOW (MIME_EDIT_DIALOG (dialog)->p->dialog_win),
