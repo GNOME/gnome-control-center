@@ -62,6 +62,8 @@ static gboolean reload_themes;
 static gboolean initial_meta_theme_set = FALSE;
 static GdkPixbuf *default_image = NULL;
 static GdkPixbuf *broken_image = NULL;
+static gboolean themes_loaded = FALSE;
+static gboolean reverted = FALSE;
 
 static GnomeThemeMetaInfo custom_meta_theme_info;
 static GnomeThemeMetaInfo initial_meta_theme_info;
@@ -534,7 +536,13 @@ meta_theme_selection_changed (GtkTreeSelection *selection,
   GtkTreeIter iter;
   gchar *meta_theme_name;
   GtkTreeModel *model;
-
+  gchar *current_gtk_theme;
+  gchar *current_window_theme;
+  gchar *current_icon_theme;
+  GConfClient *client;
+  GnomeWindowManager *window_manager;
+  GnomeWMSettings wm_settings;
+  
   if (gtk_tree_selection_get_selected (selection, &model, &iter))
     {
       gtk_tree_model_get (model, &iter,
@@ -561,8 +569,35 @@ meta_theme_selection_changed (GtkTreeSelection *selection,
   if (setting_model)
     return;
 
-  if (meta_theme_info)
+  if (meta_theme_info) 
     gnome_meta_theme_set (meta_theme_info);
+  
+  if (!themes_loaded) {
+    client = gconf_client_get_default ();
+
+    /* Get the settings */
+    current_gtk_theme = gconf_client_get_string (client, GTK_THEME_KEY, NULL);
+    current_icon_theme = gconf_client_get_string (client, ICON_THEME_KEY, NULL);
+    window_manager = gnome_wm_manager_get_current (gdk_display_get_default_screen (gdk_display_get_default ()));
+    wm_settings.flags = GNOME_WM_SETTING_THEME;
+    if (window_manager) {
+      gnome_window_manager_get_settings (window_manager, &wm_settings);
+      current_window_theme = g_strdup (wm_settings.theme);
+    } else
+      current_window_theme = g_strdup ("");
+
+	initial_meta_theme_info.name = g_strdup ("__Initial Theme__");
+	initial_meta_theme_info.gtk_theme_name = g_strdup (current_gtk_theme);
+	initial_meta_theme_info.metacity_theme_name = g_strdup (current_window_theme);
+ 	initial_meta_theme_info.icon_theme_name = g_strdup (current_icon_theme);
+	themes_loaded = TRUE;
+  } else {
+	  if (!reverted) {
+        gtk_widget_set_sensitive(WID("meta_theme_revert_button"),TRUE);
+	  } else {
+		reverted = FALSE;
+	  }
+  }
 }
 
 /* This function will adjust the list to reflect the current theme
@@ -1080,8 +1115,20 @@ apply_font_clicked (GtkWidget *button,
       gconf_client_set_string (client, FONT_KEY, meta_theme_info->application_font, NULL);
     }  
 }
-	    
-	    
+
+static void
+revert_theme_clicked (GtkWidget *button,
+						gpointer data)
+{
+  GladeXML *dialog;
+
+  gnome_meta_theme_set(&initial_meta_theme_info);
+  
+  dialog = gnome_theme_manager_get_theme_dialog ();
+  gtk_widget_set_sensitive(WID("meta_theme_revert_button"), FALSE);  
+  reverted = TRUE;
+}
+	
 static void
 setup_dialog (GladeXML *dialog)
 {
@@ -1107,13 +1154,18 @@ setup_dialog (GladeXML *dialog)
   gtk_size_group_add_widget (size_group, WID ("meta_theme_background1_button"));
   gtk_size_group_add_widget (size_group, WID ("meta_theme_font2_button"));
   gtk_size_group_add_widget (size_group, WID ("meta_theme_background2_button"));
+  gtk_size_group_add_widget (size_group, WID ("meta_theme_revert_button"));
   g_object_unref (size_group);
+
+  gtk_widget_set_sensitive(WID("meta_theme_revert_button"),FALSE);
 
   g_signal_connect (G_OBJECT (WID ("meta_theme_install_button")), "clicked", G_CALLBACK (gnome_meta_theme_installer_run_cb), parent);
 
   g_signal_connect (G_OBJECT (WID ("meta_theme_details_button")), "clicked", gnome_theme_details_show, NULL);
 
   g_signal_connect (G_OBJECT (WID ("meta_theme_font1_button")), "clicked", G_CALLBACK (apply_font_clicked), dialog);
+
+  g_signal_connect (G_OBJECT (WID ("meta_theme_revert_button")), "clicked", G_CALLBACK (revert_theme_clicked),NULL);
 
   setup_meta_tree_view (GTK_TREE_VIEW (WID ("meta_theme_treeview")),
 			(GCallback) meta_theme_selection_changed,

@@ -1,3 +1,19 @@
+2004-06-20  David Sedeño <david@alderia.com>
+
+	(http://bugzilla.gnome.org/show_bug.cgi?id=143958)
+	* gnome-theme-manager.c, theme-properties.glade: Revert option added.
+	Two now gboolean global var: 'themes_loaded' to check if its the first 
+	time that has cold meta_theme_selection_changed. 'rervert' to known 
+	in the same function if the selection has change because a revert.
+	(meta_theme_selection_changed):  If it's the same time, save the
+	initial theme in initial_meta_theme_info. If the selection has change
+	because a revert click, set the sensitive of the revert button 
+	to false. 
+	(revert_theme_clicked): callback for the revert button clicked signal.
+	Set the initial_meta_theme and set sensitive to FALSE.
+	(setup_dialog): Added the revert button to the gtk_size_group, connect
+	the clicked callback and set sensitive initially to FALSE.
+ 
 2004-05-27  Padraig O'Briain <padraig.obriain@sun.com>
 
 	* theme-properties.glade: Set accessible name for GtkTreeViews
