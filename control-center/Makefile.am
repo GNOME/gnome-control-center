@@ -28,13 +28,12 @@ IMAGES = text-selection-frame.png
 VARIABLES = \
 	gnomecc_rounded_rect_frame		$(srcdir)/text-selection-frame.png
 
-pixbuf_file = $(top_builddir)/control-center/gnomecc-rounded-rect-pixbuf.h
 pixbuf_file = gnomecc-rounded-rect-pixbuf.h
 
 $(pixbuf_file) : $(IMAGES)
 	   $(GDK_PIXBUF_CSOURCE) --raw --build-list $(VARIABLES) > $@
 
-EXTRA_DIST = gnomecc.desktop.in	$(IMAGES)
+EXTRA_DIST = gnomecc.desktop.in	$(IMAGES) $(icon_DATA)
 
 BUILT_SOURCES =	$(pixbuf_file)
 DISTCLEANFILES = gnomecc.desktop $(pixbuf_file)

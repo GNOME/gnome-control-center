@@ -22,5 +22,5 @@ INCLUDES   = $(DISPLAY_CAPPLET_CFLAGS)     \
 	     -DGLADEDIR=\""$(gladedir)"\" \
 	     -DPIXMAPDIR=\""$(pixmapdir)"\"
 
-CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
-EXTRA_DIST = $(Desktop_in_files) $(icons_DATA)
+CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)
+EXTRA_DIST = $(icons_DATA)

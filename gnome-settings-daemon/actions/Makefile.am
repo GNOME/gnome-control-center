@@ -1,36 +1,36 @@
 
+INCLUDES = $(GNOME_CFLAGS) -I$(top_srcdir) $(GST_CFLAGS)
+
 noinst_LTLIBRARIES = libacme.la
 
-if HAVE_ALSA
-ALSA_CFLAGS = -DHAVE_ALSA
-ALSA_files = acme-volume-alsa.c acme-volume-alsa.h
-endif
-
-if HAVE_OSS
-OSS_CFLAGS = -DHAVE_OSS
-OSS_files = acme-volume-oss.c acme-volume-oss.h
-endif
-
-if HAVE_FB
-FB_CFLAGS = -DHAVE_FB
-FB_files = acme-fb-level.c acme-fb-level.h
-endif
-
-if HAVE_GSTREAMER
-HAVE_GST_CFLAGS = -DHAVE_GSTREAMER
-GST_files = acme-volume-gstreamer.c acme-volume-gstreamer.h
-endif
-
-INCLUDES = $(GNOME_CFLAGS) -I$(top_srcdir) $(ALSA_CFLAGS) $(OSS_CFLAGS) $(FB_CFLAGS) $(HAVE_GST_CFLAGS) $(GST_CFLAGS)
-
 libacme_la_SOURCES = \
-	$(FB_files) $(OSS_files) $(ALSA_files)	\
-	$(GST_files)				\
 	acme-volume.c acme-volume.h		\
 	acme-volume-dummy.c acme-volume-dummy.h
 
 libacme_la_LIBADD = \
 	$(GST_LIBS) $(ALSA_LIBS)
+
+
+if HAVE_ALSA
+INCLUDES += -DHAVE_ALSA
+libacme_la_SOURCES += acme-volume-alsa.c acme-volume-alsa.h
+endif
+
+if HAVE_OSS
+INCLUDES += -DHAVE_OSS
+libacme_la_SOURCES += acme-volume-oss.c acme-volume-oss.h
+endif
+
+if HAVE_FB
+INCLUDES += -DHAVE_FB
+libacme_la_SOURCES += acme-fb-level.c acme-fb-level.h
+endif
+
+if HAVE_GSTREAMER
+INCLUDES += -DHAVE_GSTREAMER
+libacme_la_SOURCES += acme-volume-gstreamer.c acme-volume-gstreamer.h
+endif
+
 
 Datadir = $(datadir)/control-center-2.0/interfaces/
 Data_DATA = acme.glade

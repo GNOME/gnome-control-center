@@ -37,11 +37,11 @@ install-data-local:
 	$(mkinstalldirs) $(DESTDIR)$(WALLPAPER_DATADIR)
 
 EXTRA_DIST = \
-	$(desktop_in_files) \
+	background.desktop.in.in \
 	$(glade_DATA)
 
 CLEANFILES = \
-	$(desktop_DATA)
+	$(desktop_in_files) $(desktop_DATA)
 
 MAINTAINERCLEANFILES = \
 	Makefile.in

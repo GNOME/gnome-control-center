@@ -1,5 +1,39 @@
 2004-11-28  James Henstridge  <james@jamesh.id.au>
 
+	* vfs-methods/themus/themus-properties-main.c: use GNOMELOCALEDIR.
+
+	* vfs-methods/themus/Makefile.am: similar changes to the fontilus
+	ones.
+
+	* vfs-methods/fontilus/fontilus-context-menu.c: same here.
+
+	* vfs-methods/fontilus/font-view.c: use GNOMELOCALEDIR rather than
+	FONTILUS_LOCALEDIR in the bindtextdomain() call, to match the rest
+	of gnome-control-center.
+
+	* vfs-methods/fontilus/Makefile.am: similar schema and desktop
+	file fixes.  Don't include the old mime files in the dist.
+
+	* schemas/Makefile.am: remove .schemas files on clean, when
+	installing schemas, look for them in builddir rather than srcdir.
+
+	* gnome-settings-daemon/actions/Makefile.am: fix up build rules so
+	that ALSA_CFLAGS isn't defined multiple times (use the newer
+	automake += syntax).
+
+	* control-center/Makefile.am: distribute $(icon_DATA).
+
+	* capplets/*/Makefile.am: put the .desktop and .desktop.in files
+	in CLEANFILES.  The .desktop.in.in file gets included because it
+	is listed in the configure script.
+
+	* configure.in: update configure script, and remove macro calls
+	that are not needed by modern versions of Automake.
+
+	* Makefile.am: remove intltool files on distclean.
+
+	* autogen.sh: request Automake >= 1.7.
+
 	* configure.in (FONT_THUMBNAILER_LIBS): fix up typo that I
 	introduced in the configure script.  Should fix the build properly
 	now.

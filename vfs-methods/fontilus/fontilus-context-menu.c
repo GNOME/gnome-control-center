@@ -206,7 +206,7 @@ nautilus_module_initialize (GTypeModule *module)
     default_client = gconf_client_get_default();
 
     /* set up translation catalog */
-    bindtextdomain (GETTEXT_PACKAGE, FONTILUS_LOCALEDIR);
+    bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
     bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 }
 

@@ -64,7 +64,7 @@ CLEANFILES = themus-theme-applier.desktop themus-theme-applier.desktop.in
 if GCONF_SCHEMAS_INSTALL
 install-data-local:
 	if test -z "$(DESTDIR)"; then \
-	  GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(srcdir)/themus.schemas; \
+	  GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule themus.schemas; \
 	fi
 else
 install-data-local:
@@ -73,15 +73,13 @@ endif
 @INTLTOOL_DESKTOP_RULE@
 @INTLTOOL_SCHEMAS_RULE@
 
+CLEANFILES = $(desktop_in_files) $(desktop_DATA) \
+  $(schemas_DATA) $(vfsdirectory_DATA)
+
 EXTRA_DIST = \
   $(Glade_DATA) \
   apply-font.glade \
   theme-method.directory.in \
   theme-method.conf \
-  $(schemas_DATA)	\
   $(schemas_in_files)	\
   themus-theme-applier.desktop.in.in
-
-DISTCLEANFILES = \
-  theme-method.directory \
-  themus.schemas

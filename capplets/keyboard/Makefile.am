@@ -30,5 +30,5 @@ Desktop_in_files = keyboard.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS) $(LIBXKLAVIER_CFLAGS)
-CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
-EXTRA_DIST = $(Glade_DATA) $(pixmaps_DATA) $(Desktop_in_files)
+CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES) $(Desktop_in_files) $(desktop_DATA)
+EXTRA_DIST = $(Glade_DATA) $(pixmaps_DATA)

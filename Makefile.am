@@ -11,14 +11,13 @@ SUBDIRS = po libsounds libbackground libwindow-settings libgswitchit libkbdraw g
 dist-hook: control-center.spec
 	cp control-center.spec $(distdir)
 
-#MAINTAINERCLEANFILES = \
-#	intltool-extract \
-#	intltool-merge \
-#	intltool-update
+DISTCLEANFILES = \
+  intltool-extract \
+  intltool-merge \
+  intltool-update
 
 EXTRA_DIST = \
 	control-center.spec.in	\
 	intltool-extract.in \
 	intltool-merge.in \
-	intltool-update.in \
-	control-center2.png
+	intltool-update.in

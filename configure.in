@@ -1,9 +1,13 @@
-AC_INIT(control-center)
+AC_INIT([control-center], [2.9.0],
+        [http://bugzilla.gnome.org/enter_bug.cgi?product=control-center])
 
-AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(control-center, 2.9.0)
+AC_CONFIG_SRCDIR([control-center])
+AC_CONFIG_HEADERS([config.h])
 
+AM_INIT_AUTOMAKE
 AM_MAINTAINER_MODE
+
+AC_SUBST([ACLOCAL_AMFLAGS], ["\${ACLOCAL_FLAGS}"])
 
 AC_PROG_INTLTOOL
 GNOME_COMPILE_WARNINGS
@@ -13,14 +17,12 @@ AC_PROG_CC
 AC_STDC_HEADERS
 AM_PROG_LIBTOOL
 
-
-m4_define(fontilus_version, 0.4)
 m4_define(gnomevfs_minver, 2.0.0)
 m4_define(fontconfig_minver, 1.0.0)
 m4_define(xft_minver, 2.0.0)
 m4_define(gtk_minver, 2.0.0)
 m4_define(libbonobo_minver, 2.0.0)
-m4_define(libgnomeui_minver, 2.1.90)
+m4_define(libgnomeui_minver, 2.2.0)
 m4_define(nautilus_minver, 2.6.0)
 
 changequote(,)dnl
@@ -40,6 +42,8 @@ AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [Gettext package])
 
 AM_GLIB_GNU_GETTEXT
+
+GLIB_DEFINE_LOCALEDIR(GNOMELOCALEDIR)
 
 AC_CHECK_FUNCS(usleep)
 AC_CHECK_FUNCS(putenv)
@@ -89,10 +93,17 @@ dnl ==============================================
 dnl Check that we meet the  dependencies
 dnl ==============================================
 
-COMMON_MODULES="gtk+-2.0 >= 2.3.0 gconf-2.0 libgnomeui-2.0 >= 2.2.0 libglade-2.0 >= 1.99.12 libbonobo-2.0 libbonoboui-2.0 libglade-2.0 gconf-2.0 gnome-desktop-2.0 >= 2.2.0"
+COMMON_MODULES="gtk+-2.0 >= 2.3.0 dnl
+ gconf-2.0 dnl
+ libgnomeui-2.0 >= 2.2.0 dnl
+ libglade-2.0 >= 2.0.0 dnl
+ libbonobo-2.0 dnl
+ libbonoboui-2.0 dnl
+ gnome-desktop-2.0 >= 2.2.0"
 PKG_CHECK_MODULES(CAPPLET, $COMMON_MODULES)
 PKG_CHECK_MODULES(GNOMECC, $COMMON_MODULES libgnome-menu >= 2.9.1)
-PKG_CHECK_MODULES(GNOME_SETTINGS_DAEMON, gtk+-2.0 gconf-2.0 libgnomeui-2.0 esound gnome-desktop-2.0 libglade-2.0)
+PKG_CHECK_MODULES(GNOME_SETTINGS_DAEMON,
+  [gtk+-2.0 gconf-2.0 libgnomeui-2.0 esound gnome-desktop-2.0 libglade-2.0])
 PKG_CHECK_MODULES(OLD_CAPPLET, libgnomeui-2.0 libglade-2.0)
 PKG_CHECK_MODULES(GNOME, libgnomeui-2.0)
 PKG_CHECK_MODULES(GTK, gtk+-2.0)
@@ -183,7 +194,10 @@ dnl ==============================================
 dnl themus and fontilust dependencies
 dnl ==============================================
 
-AC_ARG_ENABLE(vfs-methods, [  --disable-vfs-methods        Do not build the fonts:/// and themes:/// uri schemes],, enable_vfs_methods=yes)
+AC_ARG_ENABLE(vfs-methods,
+  AC_HELP_STRING([--disable-vfs-methods],
+                 [Do not build the fonts:/// and themes:/// uri schemes]),,
+  enable_vfs_methods=yes)
 
 if test x$enable_vfs_methods = xyes; then 
 
@@ -230,26 +244,7 @@ if test x$enable_vfs_methods = xyes; then
 
   THEMUS=themus
   FONTILUS=fontilus
-
-  AC_SUBST(THEME_METHOD_CFLAGS)
-  AC_SUBST(THEME_METHOD_LIBS)
-  AC_SUBST(THEMUS_THUMBNAILER_CFLAGS)
-  AC_SUBST(THEMUS_THUMBNAILER_LIBS)
-  AC_SUBST(THEMUS_COMPONENT_CFLAGS)
-  AC_SUBST(THEMUS_COMPONENT_LIBS)
-  AC_SUBST(THEMUS_APPLIER_CFLAGS)
-  AC_SUBST(THEMUS_APPLIER_LIBS)
   AC_SUBST(THEMUS)
-  AC_SUBST(FONT_THUMBNAILER_CFLAGS)
-  AC_SUBST(FONT_THUMBNAILER_LIBS)
-  AC_SUBST(FONT_VIEW_CFLAGS)
-  AC_SUBST(FONT_VIEW_LIBS)
-  AC_SUBST(FONT_METHOD_CFLAGS)
-  AC_SUBST(FONT_METHOD_LIBS)
-  AC_SUBST(FONT_METHOD_CFLAGS)
-  AC_SUBST(FONT_METHOD_LIBS)
-  AC_SUBST(FONT_CONTEXT_MENU_CFLAGS)
-  AC_SUBST(FONT_CONTEXT_MENU_LIBS)
   AC_SUBST(FONTILUS)
 
   # update LIBS for $export_dynamic
@@ -262,7 +257,6 @@ if test x$enable_vfs_methods = xyes; then
     FONT_THUMBNAILER_LIBS=`echo $FONT_THUMBNAILER_LIBS | sed -e "s/$export_dynamic//"`
     FONT_METHOD_LIBS=`echo $FONT_METHOD_LIBS | sed -e "s/$export_dynamic//"`
   fi
-  GLIB_DEFINE_LOCALEDIR(FONTILUS_LOCALEDIR)
 fi
 
 dnl ==============================================
@@ -351,7 +345,8 @@ dnl ALSA section
 dnl ==============================================
 have_alsa=no
 AC_ARG_ENABLE(alsa,
-       AC_HELP_STRING([--disable-alsa],[Turn off support for ALSA version 0.9 or higher]),
+  AC_HELP_STRING([--disable-alsa],
+                 [Turn off support for ALSA version 0.9 or higher]),
        [case "${enableval}" in
                yes) WANT_ALSA=yes ;;
                no)  WANT_ALSA=no ;;
@@ -418,7 +413,7 @@ dnl ==============================================
 COMMON_CFLAGS="-I\$(top_srcdir)/capplets/common"
 COMMON_LIBS="\$(top_builddir)/capplets/common/libcommon.la"
 
-EXTRA_CFLAGS="-I\$(top_srcdir)/ -DG_LOG_DOMAIN=\"\\\"\$(cappletname)-properties\\\"\" -DGNOMELOCALEDIR=\"\\\"${prefix}/${DATADIRNAME}/locale\\\"\""
+EXTRA_CFLAGS="-I\$(top_srcdir)/ -DG_LOG_DOMAIN=\"\\\"\$(cappletname)-properties\\\"\""
 
 GNOMECC_CAPPLETS_CFLAGS="${COMMON_CFLAGS} ${CAPPLET_CFLAGS} ${EXTRA_CFLAGS}"
 GNOMECC_CAPPLETS_LIBS="${COMMON_LIBS} ${CAPPLET_LIBS}"
@@ -431,48 +426,15 @@ AC_SUBST(GNOMECC_CAPPLETS_CLEANFILES)
 AC_SUBST(GNOMECC_CAPPLETS_CFLAGS)
 AC_SUBST(GNOMECC_CAPPLETS_LIBS)
 
-AC_SUBST(GTK_CFLAGS)
-AC_SUBST(GTK_LIBS)
-
-AC_SUBST(GNOME_CFLAGS)
-AC_SUBST(GNOME_LIBS)
-
-AC_SUBST(GNOME_SETTINGS_DAEMON_CFLAGS)
-AC_SUBST(GNOME_SETTINGS_DAEMON_LIBS)
-
-AC_SUBST(VFS_CAPPLET_CFLAGS)
-AC_SUBST(VFS_CAPPLET_LIBS)
-
-AC_SUBST(SOUND_CAPPLET_CFLAGS)
-AC_SUBST(SOUND_CAPPLET_LIBS)
-
-AC_SUBST(FONT_CAPPLET_CFLAGS)
-AC_SUBST(FONT_CAPPLET_LIBS)
-
-AC_SUBST(AT_CAPPLET_CFLAGS)
-AC_SUBST(AT_CAPPLET_LIBS)
-
-AC_SUBST(DISPLAY_CAPPLET_CFLAGS)
-AC_SUBST(DISPLAY_CAPPLET_LIBS)
-
-AC_SUBST(GNOMECC_CFLAGS)
-AC_SUBST(GNOMECC_LIBS)
-
-AC_SUBST(GNOME_DESKTOP_CFLAGS)
-AC_SUBST(GNOME_DESKTOP_LIBS)
-
-AC_SUBST(METACITY_CFLAGS)
-AC_SUBST(METACITY_LIBS)
-
-AC_SUBST(LIBXKLAVIER_CFLAGS)
-AC_SUBST(LIBXKLAVIER_LIBS)
-
 dnl ==============================================
 dnl End: Define the main variables
 dnl ==============================================
 
 GCONF_CONFIG_SOURCE=
-AC_ARG_ENABLE(gconf-source, [  --enable-gconf-source=sourceaddress      Where to install schema files.],GCONF_CONFIG_SOURCE=$enable_gconf_source,)
+AC_ARG_ENABLE(gconf-source,
+  AC_HELP_STRING([--enable-gconf-source=sourceaddress],
+                 [Where to install schema files.]),
+  GCONF_CONFIG_SOURCE=$enable_gconf_source,)
 
 if test "x$GCONF_CONFIG_SOURCE" = "x"; then
         GCONF_CONFIG_SOURCE="xml::\${DESTDIR}\${sysconfdir}/gconf/gconf.xml.defaults"
@@ -526,7 +488,7 @@ dnl =======================================
 dnl End: Variables for config_archiverConf.sh.in
 dnl =======================================
 
-AC_OUTPUT([
+AC_CONFIG_FILES([
 Makefile
 po/Makefile.in
 idl/Makefile
@@ -575,14 +537,18 @@ capplets/default-applications/default-applications.desktop.in
 capplets/accessibility/at-properties/at-properties.desktop.in
 capplets/accessibility/keyboard/accessibility-keyboard.desktop.in
 capplets/background/background.desktop.in
-capplets/url-properties/url-properties.desktop.in
 capplets/ui-properties/gnome-ui-properties.desktop.in
 capplets/network/gnome-network-preferences.desktop.in
-capplets/file-types/file-types-capplet.desktop.in
-capplets/file-types/file-types.desktop.in
 capplets/windows/window-properties.desktop.in
-capplets/localization/localization.desktop.in
 capplets/keyboard/keyboard.desktop.in
 control-center/gnomecc.desktop.in
 ])
+
+dnl *** the following desktop files don't seem to be included in "make dist"
+dnl capplets/url-properties/url-properties.desktop.in
+dnl capplets/file-types/file-types-capplet.desktop.in
+dnl capplets/file-types/file-types.desktop.in
+dnl capplets/localization/localization.desktop.in
+
 dnl due to a bug in intltool we need to expand something from the root last control-center.spec
+AC_OUTPUT

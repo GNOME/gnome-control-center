@@ -41,7 +41,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 if GCONF_SCHEMAS_INSTALL
 install-data-local:
 	if test -z "$(DESTDIR)"; then \
-	  GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(srcdir)/fontilus.schemas; \
+	  GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule fontilus.schemas; \
 	fi
 else
 install-data-local:
@@ -51,12 +51,11 @@ endif
 @INTLTOOL_DIRECTORY_RULE@
 @INTLTOOL_SCHEMAS_RULE@
 
+CLEANFILES = $(desktop_in_files) $(desktop_DATA) \
+  $(schemas_DATA) $(vfsdirectory_DATA)
+
 EXTRA_DIST = \
   font-method.conf \
   font-method.directory.in \
-  fontilus.keys \
-  fontilus.mime \
-  fontilus.applications \
-  fontilus.schemas	\
   fontilus.schemas.in \
-  gnome-font-viewer.desktop.in
+  gnome-font-viewer.desktop.in.in
