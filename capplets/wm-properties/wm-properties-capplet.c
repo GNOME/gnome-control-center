@@ -969,6 +969,7 @@ select_row (GtkCList   *the_clist,
 
         if (!in_fill) {
                 wm = gtk_clist_get_row_data (GTK_CLIST (clist), row);
+                gtk_widget_set_sensitive (edit_button, wm->is_user);
                 gtk_widget_set_sensitive (delete_button, wm->is_user);
                 
                 if (wm != selected_wm) {
