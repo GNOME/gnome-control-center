@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.6\n"
-"POT-Creation-Date: 2000-04-01 18:32+0200\n"
-"PO-Revision-Date: 2000-04-01 18:32+02:00\n"
+"POT-Creation-Date: 2000-04-18 16:09+0200\n"
+"PO-Revision-Date: 2000-04-18 16:09+02:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -714,7 +714,9 @@ msgstr "Lagrer"
 msgid "Saving session details."
 msgstr "Lagrer detaljer om sesjonen."
 
-#: capplets/session-properties/gsm-client-row.c:43
+#. This is about the only case where we'll put Unknown instead
+#. of simply not showing the info.
+#: capplets/session-properties/gsm-client-row.c:43 control-center/splash.c:168
 msgid "Unknown"
 msgstr "Ukjent"
 
@@ -1297,7 +1299,7 @@ msgstr ""
 #: capplets/wm-properties/wm-properties-capplet.c:860
 #: capplets/wm-properties/wm-properties-capplet.c:867
 #: capplets/wm-properties/wm-properties-capplet.c:1013
-#: control-center/capplet-manager.c:172
+#: control-center/capplet-manager.c:187
 msgid "OK"
 msgstr "OK"
 
@@ -1344,7 +1346,7 @@ msgid "Add New Window Manager"
 msgstr "Legg til ny vindusbehandler"
 
 #: capplets/wm-properties/wm-properties-capplet.c:752
-#: control-center/capplet-manager.c:177
+#: control-center/capplet-manager.c:192
 msgid "Cancel"
 msgstr "Avbryt"
 
@@ -1405,16 +1407,16 @@ msgstr "GNOME Kontrollsenter"
 msgid "Desktop Properties manager."
 msgstr "Egenskaper for skrivebord."
 
-#: control-center/capplet-manager.c:162
+#: control-center/capplet-manager.c:177
 msgid "Try"
 msgstr "Prøv"
 
-#: control-center/capplet-manager.c:167
+#: control-center/capplet-manager.c:182
 msgid "Revert"
 msgstr "Forkast"
 
 #. set the help item
-#: control-center/capplet-manager.c:190
+#: control-center/capplet-manager.c:205
 #, c-format
 msgid "Help with '%s' settings"
 msgstr "Hjelp for '%s' instillinger"
@@ -1472,37 +1474,37 @@ msgstr "capplet-kommando som skal kjøres."
 msgid "CAPPLET"
 msgstr "CAPPLET"
 
-#: control-center/main.c:34
+#: control-center/main.c:35
 msgid "Help on control-center"
 msgstr "Hjelp for kontrollsenter"
 
-#: control-center/main.c:34
+#: control-center/main.c:35
 msgid "Help with the GNOME control-center."
 msgstr "Hjelp for GNOME kontrollsenter."
 
-#: control-center/main.c:36
+#: control-center/main.c:37
 msgid "Help with the current configuration page."
 msgstr "Hjelp for denne konfigurasjonsfanen."
 
-#: control-center/main.c:39
+#: control-center/main.c:40
 msgid "About"
 msgstr "Om"
 
-#: control-center/main.c:39
+#: control-center/main.c:40
 msgid "About the GNOME control-center."
 msgstr "Om GNOME kontrollsenter."
 
 #. we create the widgets
-#: control-center/main.c:66
+#: control-center/main.c:68
 msgid "Warning:"
 msgstr "Advarsel:"
 
-#: control-center/main.c:66
+#: control-center/main.c:68
 msgid "Discard all changes"
 msgstr "Forkast alle endringer"
 
 #. ...labels, etc
-#: control-center/main.c:75
+#: control-center/main.c:77
 msgid ""
 "The following modules have had changes made, but not committed.  If you "
 "would like to edit them, please double click on the appropriate entry."
@@ -1511,6 +1513,26 @@ msgstr ""
 "ønsker å redigere dem, vær snill å dobbeltklikk på den riktige oppføringen"
 
 #. create the app
-#: control-center/main.c:194
+#: control-center/main.c:196 control-center/splash.c:237
 msgid "Control Center"
 msgstr "Kontrollsenter"
+
+#: control-center/splash.c:48
+msgid "Operating System:"
+msgstr "Operativsystem:"
+
+#: control-center/splash.c:49
+msgid "Distribution Version:"
+msgstr "Distribusjonens versjon:"
+
+#: control-center/splash.c:50
+msgid "Processor Type:"
+msgstr "Prosessortype:"
+
+#: control-center/splash.c:51
+msgid "User Name:"
+msgstr "Brukernavn:"
+
+#: control-center/splash.c:52
+msgid "Host Name:"
+msgstr "Vertsnavn:"
