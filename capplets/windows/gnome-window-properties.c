@@ -39,6 +39,7 @@ typedef struct
         int number;
         char *name;
         const char *value; /* machine-readable name for storing config */
+        GtkWidget *radio;
 } MouseClickModifier;
 
 static GConfClient *gconf_client;
@@ -47,11 +48,11 @@ static GnomeWindowManager *current_wm; /* may be NULL */
 static GtkWidget *dialog_win;
 static GtkWidget *focus_mode_checkbutton;
 static GtkWidget *autoraise_checkbutton;
-static GtkWidget *autoraise_delay_spinbutton;
+static GtkWidget *autoraise_delay_slider;
 static GtkWidget *autoraise_delay_hbox;
 static GtkWidget *double_click_titlebar_optionmenu;
 static GtkWidget *double_click_titlebar_hbox;
-static GtkWidget *alt_click_optionmenu;
+static GtkWidget *alt_click_hbox;
 
 static GnomeWMSettings settings;
 static const GnomeWMDoubleClickAction *double_click_actions = NULL;
@@ -92,14 +93,14 @@ autoraise_toggled_callback (GtkWidget *button,
 }
 
 static void
-autoraise_delay_value_changed_callback (GtkWidget *spinbutton,
+autoraise_delay_value_changed_callback (GtkWidget *slider,
                                         void      *data)
 {
         GnomeWMSettings new_settings;
 
         new_settings.flags = GNOME_WM_SETTING_AUTORAISE_DELAY;
         new_settings.autoraise_delay =
-                gtk_spin_button_get_value (GTK_SPIN_BUTTON (spinbutton)) * 100;
+                gtk_range_get_value (GTK_RANGE (slider)) * 1000;
 
         if (current_wm != NULL && new_settings.autoraise_delay != settings.autoraise_delay)
                 gnome_window_manager_change_settings (current_wm, &new_settings);
@@ -119,6 +120,8 @@ double_click_titlebar_changed_callback (GtkWidget *optionmenu,
                 gnome_window_manager_change_settings (current_wm, &new_settings);
 }
 
+#if 0
+/* This was for option menu */
 static void
 alt_click_modifier_changed_callback (GtkWidget *optionmenu,
                                      void      *data)
@@ -139,6 +142,28 @@ alt_click_modifier_changed_callback (GtkWidget *optionmenu,
                     settings.mouse_move_modifier) != 0)
                 gnome_window_manager_change_settings (current_wm, &new_settings);
 }
+#else
+static void
+alt_click_radio_toggled_callback (GtkWidget *radio,
+                                  void      *data)
+{
+        GnomeWMSettings new_settings;
+        gboolean active;
+        MouseClickModifier *modifier = data;
+        
+        new_settings.flags = GNOME_WM_SETTING_MOUSE_MOVE_MODIFIER;
+        active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (radio));
+
+        if (active) {
+                new_settings.mouse_move_modifier = modifier->value;
+        
+                if (current_wm != NULL &&
+                    strcmp (new_settings.mouse_move_modifier,
+                            settings.mouse_move_modifier) != 0)
+                        gnome_window_manager_change_settings (current_wm, &new_settings);
+        }
+}
+#endif
 
 static void
 update_sensitivity (void)
@@ -182,7 +207,7 @@ init_settings_struct (GnomeWMSettings *settings)
 }
 
 static void
-set_alt_click_optionmenu_value (const GnomeWMSettings *settings)
+set_alt_click_value (const GnomeWMSettings *settings)
 {
         int i;
         
@@ -194,9 +219,10 @@ set_alt_click_optionmenu_value (const GnomeWMSettings *settings)
                 ++i;
         }
         
-        if (i < n_mouse_modifiers)
-                gtk_option_menu_set_history (GTK_OPTION_MENU (alt_click_optionmenu),
-                                             i);
+        if (i < n_mouse_modifiers) {
+                gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (mouse_modifiers[i].radio),
+                                              TRUE);
+        }
 }
 
 static void
@@ -254,8 +280,8 @@ reload_settings (void)
                                               new_settings.autoraise);
 
         if (new_settings.autoraise_delay != settings.autoraise_delay)
-                gtk_spin_button_set_value (GTK_SPIN_BUTTON (autoraise_delay_spinbutton),
-                                           new_settings.autoraise_delay / 100);
+                gtk_range_set_value (GTK_RANGE (autoraise_delay_slider),
+                                     new_settings.autoraise_delay / 1000.0);
         
         if (n_double_click_actions > 0 &&
             new_settings.double_click_action != settings.double_click_action) {
@@ -267,7 +293,7 @@ reload_settings (void)
         if (settings.mouse_move_modifier == NULL ||
             strcmp (settings.mouse_move_modifier,
                     new_settings.mouse_move_modifier) != 0) {
-                set_alt_click_optionmenu_value (&new_settings);
+                set_alt_click_value (&new_settings);
         }
 
         settings = new_settings;
@@ -383,7 +409,7 @@ int
 main (int argc, char **argv)
 {
         GdkScreen *screen;
-        GtkSizeGroup *size_group;
+        int i;
         
         bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
 	bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
@@ -417,32 +443,34 @@ main (int argc, char **argv)
         dialog_win = WID ("main-dialog");
         focus_mode_checkbutton = WID ("focus-mode-checkbutton");
         autoraise_checkbutton = WID ("autoraise-checkbutton");
-        autoraise_delay_spinbutton = WID ("autoraise-delay-spinbutton");
+        autoraise_delay_slider = WID ("autoraise-delay-slider");
         autoraise_delay_hbox = WID ("autoraise-delay-hbox");
         double_click_titlebar_optionmenu = WID ("double-click-titlebar-optionmenu");
         double_click_titlebar_hbox = WID ("double-click-titlebar-hbox");
-        alt_click_optionmenu = WID ("alt-click-optionmenu");
+        alt_click_hbox = WID ("alt-click-box");
 
-        gtk_spin_button_set_range (GTK_SPIN_BUTTON (autoraise_delay_spinbutton),
-                                   0, 100);
+        gtk_range_set_range (GTK_RANGE (autoraise_delay_slider),
+                             0, 10);
 
-        gtk_spin_button_set_increments (GTK_SPIN_BUTTON (autoraise_delay_spinbutton),
-                                        1, 5);
+        gtk_range_set_increments (GTK_RANGE (autoraise_delay_slider),
+                                  0.2, 1.0);
 
+#if 0
         size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
         gtk_size_group_add_widget (size_group, double_click_titlebar_optionmenu);
         gtk_size_group_add_widget (size_group, alt_click_optionmenu);
         g_object_unref (G_OBJECT (size_group));
-
+#endif
+        
         settings.flags = 0;
         init_settings_struct (&settings);
 
         reload_mouse_modifiers ();
         update_wm (screen, FALSE);
         
-        set_alt_click_optionmenu_value (&settings);
-        gtk_spin_button_set_value (GTK_SPIN_BUTTON (autoraise_delay_spinbutton),
-                                   settings.autoraise_delay / 100);
+        set_alt_click_value (&settings);
+        gtk_range_set_value (GTK_RANGE (autoraise_delay_slider),
+                             settings.autoraise_delay / 1000.0);
         gtk_option_menu_set_history (GTK_OPTION_MENU (double_click_titlebar_optionmenu),
                                      settings.double_click_action);
         
@@ -461,17 +489,22 @@ main (int argc, char **argv)
         g_signal_connect (G_OBJECT (autoraise_checkbutton), "toggled",
                           G_CALLBACK (autoraise_toggled_callback), NULL);
 
-        g_signal_connect (G_OBJECT (autoraise_delay_spinbutton), "value_changed",
+        g_signal_connect (G_OBJECT (autoraise_delay_slider), "value_changed",
                           G_CALLBACK (autoraise_delay_value_changed_callback), NULL);
 
         g_signal_connect (G_OBJECT (double_click_titlebar_optionmenu), "changed",
                           G_CALLBACK (double_click_titlebar_changed_callback), NULL);
-                
-        g_signal_connect (G_OBJECT (alt_click_optionmenu), "changed",
-                          G_CALLBACK (alt_click_modifier_changed_callback), NULL);
         
         g_signal_connect (G_OBJECT (screen), "window_manager_changed",
                           G_CALLBACK (wm_changed_callback), NULL);
+
+        i = 0;
+        while (i < n_mouse_modifiers) {
+                g_signal_connect (G_OBJECT (mouse_modifiers[i].radio), "toggled",
+                                  G_CALLBACK (alt_click_radio_toggled_callback),
+                                  &mouse_modifiers[i]);
+                ++i;
+        }
         
         gtk_widget_show (dialog_win);
         
@@ -483,146 +516,171 @@ main (int argc, char **argv)
 #include <X11/Xlib.h>
 #include <X11/keysym.h>
 #include <gdk/gdkx.h>
+
+static void
+fill_radio (GtkRadioButton     *group,
+            MouseClickModifier *modifier)
+{
+        modifier->radio =
+                gtk_radio_button_new_with_label_from_widget (group,
+                                                             modifier->name);
+        gtk_box_pack_start (GTK_BOX (alt_click_hbox),
+                            modifier->radio, FALSE, FALSE, 0);
+        
+        gtk_widget_show (modifier->radio);
+}
+
 static void
 reload_mouse_modifiers (void)
 {
-  XModifierKeymap *modmap;
-  KeySym *keymap;
-  int keysyms_per_keycode;
-  int map_size;
-  int i;
-  gboolean have_meta;
-  gboolean have_hyper;
-  gboolean have_super;
-  int min_keycode, max_keycode;
+        XModifierKeymap *modmap;
+        KeySym *keymap;
+        int keysyms_per_keycode;
+        int map_size;
+        int i;
+        gboolean have_meta;
+        gboolean have_hyper;
+        gboolean have_super;
+        int min_keycode, max_keycode;
   
-  XDisplayKeycodes (gdk_display,
-                    &min_keycode,
-                    &max_keycode);
+        XDisplayKeycodes (gdk_display,
+                          &min_keycode,
+                          &max_keycode);
 
-  keymap = XGetKeyboardMapping (gdk_display,
-                                min_keycode,
-                                max_keycode - min_keycode,
-                                &keysyms_per_keycode);
+        keymap = XGetKeyboardMapping (gdk_display,
+                                      min_keycode,
+                                      max_keycode - min_keycode,
+                                      &keysyms_per_keycode);
   
-  modmap = XGetModifierMapping (gdk_display);
+        modmap = XGetModifierMapping (gdk_display);
 
-  have_super = FALSE;
-  have_meta = FALSE;
-  have_hyper = FALSE;
+        have_super = FALSE;
+        have_meta = FALSE;
+        have_hyper = FALSE;
   
-  /* there are 8 modifiers, and the first 3 are shift, shift lock,
-   * and control
-   */
-  map_size = 8 * modmap->max_keypermod;
-  i = 3 * modmap->max_keypermod;
-  while (i < map_size) {
-          /* get the key code at this point in the map,
-           * see if its keysym is one we're interested in
-           */
-          int keycode = modmap->modifiermap[i];
+        /* there are 8 modifiers, and the first 3 are shift, shift lock,
+         * and control
+         */
+        map_size = 8 * modmap->max_keypermod;
+        i = 3 * modmap->max_keypermod;
+        while (i < map_size) {
+                /* get the key code at this point in the map,
+                 * see if its keysym is one we're interested in
+                 */
+                int keycode = modmap->modifiermap[i];
           
-          if (keycode >= min_keycode &&
-              keycode <= max_keycode) {
-                  int j = 0;
-                  KeySym *syms = keymap + (keycode - min_keycode) * keysyms_per_keycode;
+                if (keycode >= min_keycode &&
+                    keycode <= max_keycode) {
+                        int j = 0;
+                        KeySym *syms = keymap + (keycode - min_keycode) * keysyms_per_keycode;
                   
-                  while (j < keysyms_per_keycode) {              
-                          if (syms[j] == XK_Super_L ||
-                              syms[j] == XK_Super_R)
-                                  have_super = TRUE;
-                          else if (syms[j] == XK_Hyper_L ||
-                                   syms[j] == XK_Hyper_R)
-                                  have_hyper = TRUE;                          
-                          else if ((syms[j] == XK_Meta_L ||
-                                    syms[j] == XK_Meta_R) &&
-                                   (1 << ( i / modmap->max_keypermod)) != Mod1Mask)
-                                  have_meta = TRUE;
-                          ++j;
-                  }
-          }
+                        while (j < keysyms_per_keycode) {              
+                                if (syms[j] == XK_Super_L ||
+                                    syms[j] == XK_Super_R)
+                                        have_super = TRUE;
+                                else if (syms[j] == XK_Hyper_L ||
+                                         syms[j] == XK_Hyper_R)
+                                        have_hyper = TRUE;                          
+                                else if ((syms[j] == XK_Meta_L ||
+                                          syms[j] == XK_Meta_R) &&
+                                         (1 << ( i / modmap->max_keypermod)) != Mod1Mask)
+                                        have_meta = TRUE;
+                                ++j;
+                        }
+                }
           
-          ++i;
-  }
+                ++i;
+        }
 
-  XFreeModifiermap (modmap);
-  XFree (keymap);
+        XFreeModifiermap (modmap);
+        XFree (keymap);
 
-  i = 0;
-  while (i < n_mouse_modifiers) {
-          g_free (mouse_modifiers[i].name);
-          ++i;
-  }
-  g_free (mouse_modifiers);
-  mouse_modifiers = NULL;
+        i = 0;
+        while (i < n_mouse_modifiers) {
+                g_free (mouse_modifiers[i].name);
+                if (mouse_modifiers[i].radio)
+                        gtk_widget_destroy (mouse_modifiers[i].radio);
+                ++i;
+        }
+        g_free (mouse_modifiers);
+        mouse_modifiers = NULL;
                   
   
-  n_mouse_modifiers = 2; /* control, alt */
-  if (have_super)
-          ++n_mouse_modifiers;
-  if (have_hyper)
-          ++n_mouse_modifiers;
-  if (have_meta)
-          ++n_mouse_modifiers;
+        n_mouse_modifiers = 2; /* control, alt */
+        if (have_super)
+                ++n_mouse_modifiers;
+        if (have_hyper)
+                ++n_mouse_modifiers;
+        if (have_meta)
+                ++n_mouse_modifiers;
 
-  g_free (mouse_modifiers);
+        g_free (mouse_modifiers);
 
-  mouse_modifiers = g_new0 (MouseClickModifier, n_mouse_modifiers);
+        mouse_modifiers = g_new0 (MouseClickModifier, n_mouse_modifiers);
 
-  i = 0;
+        i = 0;
 
-  mouse_modifiers[i].number = i;
-  mouse_modifiers[i].name = g_strdup (_("Control"));
-  mouse_modifiers[i].value = "Control";
-  ++i;
+        mouse_modifiers[i].number = i;
+        mouse_modifiers[i].name = g_strdup (_("Control"));
+        mouse_modifiers[i].value = "Control";
+        ++i;
 
-  mouse_modifiers[i].number = i;
-  mouse_modifiers[i].name = g_strdup (_("Alt"));
-  mouse_modifiers[i].value = "Alt";
-  ++i;
+        mouse_modifiers[i].number = i;
+        mouse_modifiers[i].name = g_strdup (_("Alt"));
+        mouse_modifiers[i].value = "Alt";
+        ++i;
 
-  if (have_hyper) {
-          mouse_modifiers[i].number = i;
-          mouse_modifiers[i].name = g_strdup (_("Hyper"));
-          mouse_modifiers[i].value = "Hyper";
-          ++i;
-  }
+        if (have_hyper) {
+                mouse_modifiers[i].number = i;
+                mouse_modifiers[i].name = g_strdup (_("Hyper"));
+                mouse_modifiers[i].value = "Hyper";
+                ++i;
+        }
 
-  if (have_super) {
-          mouse_modifiers[i].number = i;
-          mouse_modifiers[i].name = g_strdup (_("Super"));
-          mouse_modifiers[i].value = "Super";
-          ++i;
-  }
+        if (have_super) {
+                mouse_modifiers[i].number = i;
+                mouse_modifiers[i].name = g_strdup (_("Super (or \"Windows logo\")"));
+                mouse_modifiers[i].value = "Super";
+                ++i;
+        }
 
-  if (have_meta) {
-          mouse_modifiers[i].number = i;
-          mouse_modifiers[i].name = g_strdup (_("Meta"));
-          mouse_modifiers[i].value = "Meta";
-          ++i;
-  }
+        if (have_meta) {
+                mouse_modifiers[i].number = i;
+                mouse_modifiers[i].name = g_strdup (_("Meta"));
+                mouse_modifiers[i].value = "Meta";
+                ++i;
+        }
 
-  g_assert (i == n_mouse_modifiers);
-  
-  /* Build modifier option menu */
-  {
-          GtkWidget *menu;
+        g_assert (i == n_mouse_modifiers);
+
+        i = 0;
+        while (i < n_mouse_modifiers) {
+                fill_radio (i == 0 ? NULL : GTK_RADIO_BUTTON (mouse_modifiers[i-1].radio),
+                            &mouse_modifiers[i]);
+                ++i;
+        }
+        
+#if 0
+        /* Build modifier option menu */
+        {
+                GtkWidget *menu;
           
-          menu = gtk_menu_new ();
-          i = 0;
-          while (i < n_mouse_modifiers) {
-                  GtkWidget *mi;
+                menu = gtk_menu_new ();
+                i = 0;
+                while (i < n_mouse_modifiers) {
+                        GtkWidget *mi;
                   
-                  mi = gtk_menu_item_new_with_label (mouse_modifiers[i].name);
-                  gtk_menu_shell_append (GTK_MENU_SHELL (menu),
-                                         mi);
+                        mi = gtk_menu_item_new_with_label (mouse_modifiers[i].name);
+                        gtk_menu_shell_append (GTK_MENU_SHELL (menu),
+                                               mi);
                   
-                  gtk_widget_show (mi);
+                        gtk_widget_show (mi);
                   
-                  ++i;
-          }
+                        ++i;
+                }
           
-          gtk_option_menu_set_menu (GTK_OPTION_MENU (alt_click_optionmenu),
-                                    menu);
-  }
+                gtk_option_menu_set_menu (GTK_OPTION_MENU (alt_click_optionmenu),
+                                          menu);
+        }
+#endif
 }
