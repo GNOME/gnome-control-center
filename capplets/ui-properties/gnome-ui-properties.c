@@ -220,16 +220,20 @@ static void
 setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 {
   GtkWidget *widget;
-  GConfPropertyEditor *peditor;
+  GObject *peditor;
   char *toolbar_style;
 
   peditor = gconf_peditor_new_boolean
     (changeset, "/desktop/gnome/interface/toolbar_detachable", WID ("detachable_toolbars_toggle"), NULL);
-  g_signal_connect (peditor, "value_changed", toolbar_detachable_cb, dialog);
+  g_signal_connect (peditor,
+    "value_changed",
+    G_CALLBACK (toolbar_detachable_cb), dialog);
 
   peditor = gconf_peditor_new_boolean
     (changeset, "/desktop/gnome/interface/menus_have_icons", WID ("menu_icons_toggle"), NULL);
-  g_signal_connect (peditor, "value_changed", menus_have_icons_cb, dialog);
+  g_signal_connect (peditor,
+    "value_changed",
+    G_CALLBACK (menus_have_icons_cb), dialog);
   
   set_have_icons (dialog, 
 		  gconf_client_get_bool (gconf_client_get_default (),
@@ -241,15 +245,19 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
      "conv-to-widget-cb", toolbar_to_widget,
      "conv-from-widget-cb", toolbar_from_widget,
      NULL);
-  g_signal_connect (peditor, "value_changed", 
+  g_signal_connect (peditor,
+    "value_changed", 
 		    G_CALLBACK (toolbar_style_cb), dialog);
 
   widget = WID ("toolbar_handlebox");
-  g_signal_connect (G_OBJECT (widget), "button_press_event", button_press_blocker, NULL);
+  g_signal_connect (G_OBJECT (widget),
+    "button_press_event",
+    G_CALLBACK (button_press_blocker), NULL);
 
   widget = WID ("gnome_ui_properties_dialog");
-  g_signal_connect (G_OBJECT (widget), "response",
-		    (GCallback) dialog_button_clicked_cb, changeset);
+  g_signal_connect (G_OBJECT (widget),
+	"response",
+	G_CALLBACK (dialog_button_clicked_cb), changeset);
 
   show_handlebar (dialog, 
 		  gconf_client_get_bool (gconf_client_get_default (),
