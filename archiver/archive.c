@@ -405,18 +405,24 @@ archive_unregister_location (Archive *archive, Location *location)
  * 
  * Convenience function to get a pointer to the current location
  * 
- * Return value: Pointer to current location
+ * Return value: Pointer to current location, or NULL if the current location
+ * does not exist and a default location could not be created
  **/
 
 Location *
 archive_get_current_location (Archive *archive)
 {
+	gchar *locid;
+
 	g_return_val_if_fail (archive != NULL, NULL);
 	g_return_val_if_fail (IS_ARCHIVE (archive), NULL);
 
-	return archive_get_location (archive,
-				     archive_get_current_location_id
-				     (archive));
+	locid = archive_get_current_location_id (archive);
+
+	if (locid == NULL)
+		return NULL;
+	else
+		return archive_get_location (archive, locid);
 }
 
 /**
@@ -484,7 +490,9 @@ archive_set_current_location_id (Archive *archive, const gchar *locid)
  * 
  * Get the name of the current location
  * 
- * Return value: String containing current location, should not be freed
+ * Return value: String containing current location, should not be freed, or
+ * NULL if no current location exists and the default location could not be
+ * created
  **/
 
 const gchar *
@@ -514,7 +522,10 @@ archive_get_current_location_id (Archive *archive)
 				(location_new (archive,
 					       archive->current_location_id,
 					       NULL));
-			location_store_full_snapshot (loc);
+			if (location_store_full_snapshot (loc) < 0) {
+				location_delete (loc);
+				return NULL;
+			}
 		}
 	}
 

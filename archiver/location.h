@@ -79,7 +79,7 @@ GtkObject *location_open           (Archive *archive,
 void location_close                (Location *location);
 void location_delete               (Location *location);
 
-void location_store                (Location *location, 
+gint location_store                (Location *location, 
 				    gchar *backend_id, 
 				    FILE *input,
 				    StoreType store_type);
@@ -139,7 +139,7 @@ const gchar *location_get_id       (Location *location);
 
 void location_set_id               (Location *location, const gchar *locid);
 
-void location_store_full_snapshot  (Location *location);
+gint location_store_full_snapshot  (Location *location);
 
 GList *location_get_changed_backends (Location *location,
 				      Location *location1);

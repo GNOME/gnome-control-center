@@ -28,6 +28,7 @@
 #include <stdio.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <sys/wait.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <tree.h>
@@ -91,9 +92,6 @@ static gboolean location_do_rollback (Location *location,
 				      gchar *backend_id, 
 				      xmlDocPtr xml_doc);
 
-static gint store_snapshot_cb        (Location *location,
-				      gchar *backend_id);
-
 static gint get_backends_cb          (BackendList *backend_list,
 				      gchar *backend_id,
 				      Location *location);
@@ -109,7 +107,8 @@ static void write_metadata_file      (Location *location,
 
 static xmlDocPtr load_xml_data       (gchar *fullpath, gint id);
 static gint run_backend_proc         (gchar *backend_id,
-				      gboolean do_get);
+				      gboolean do_get,
+				      pid_t *pid);
 
 static BackendNote *backend_note_new (gchar *backend_id, 
 				      ContainmentType type);
@@ -398,8 +397,9 @@ location_finalize (GtkObject *object)
 static gboolean
 location_do_rollback (Location *location, gchar *backend_id, xmlDocPtr doc) 
 {
-	int fd;
+	int fd, status;
 	FILE *output;
+	pid_t pid;
 
 	g_return_val_if_fail (location != NULL, FALSE);
 	g_return_val_if_fail (IS_LOCATION (location), FALSE);
@@ -411,7 +411,7 @@ location_do_rollback (Location *location, gchar *backend_id, xmlDocPtr doc)
 	 */
 	if (doc == NULL) return FALSE;
 
-	fd = run_backend_proc (backend_id, FALSE);
+	fd = run_backend_proc (backend_id, FALSE, &pid);
 	if (fd == -1) return FALSE;
 
 	output = fdopen (fd, "w");
@@ -429,6 +429,8 @@ location_do_rollback (Location *location, gchar *backend_id, xmlDocPtr doc)
 			    __FUNCTION__, g_strerror (errno));
 		return FALSE;
 	}
+
+	waitpid (pid, &status, 0);
 
 	return TRUE;
 }
@@ -503,9 +505,12 @@ location_delete (Location *location)
  * 
  * Store configuration data from the given stream in the location under the
  * given backend id
+ *
+ * Return value: 0 on success, -1 if it cannot parse the XML, and -2 if no
+ * data were supplied
  **/
 
-void 
+gint
 location_store (Location *location, gchar *backend_id, FILE *input,
 		StoreType store_type) 
 {
@@ -532,18 +537,18 @@ location_store (Location *location, gchar *backend_id, FILE *input,
 		doc = xmlParseDoc (doc_str->str);
 
 		if (doc == NULL) {
-			g_warning ("Could not parse XML");
 			g_string_free (doc_str, TRUE);
-			return;
+			return -1;
 		}
 
 		location_store_xml (location, backend_id, doc, store_type);
 		xmlFreeDoc (doc);
 	} else {
-		g_critical ("No data to store");
+		return -2;
 	}
 
 	g_string_free (doc_str, TRUE);
+	return 0;
 }
 
 /**
@@ -1173,17 +1178,37 @@ location_set_id (Location *location, const gchar *locid)
  *
  * Gets XML snapshot data from all the backends contained in this location and
  * archives those data
+ *
+ * Return value: 0 on success and -1 if any of the backends failed
  **/
 
-void
+gint
 location_store_full_snapshot (Location *location)
 {
+	int fd;
+	gint ret;
+	FILE *pipe;
+	GList *c;
+	BackendNote *note;
+
 	g_return_if_fail (location != NULL);
 	g_return_if_fail (IS_LOCATION (location));
 
-	location_foreach_backend (location,
-				  (LocationBackendCB) store_snapshot_cb,
-				  NULL);
+	for (c = location->p->contains_list; c; c = c->next) {
+		note = c->data;
+		DEBUG_MSG ("Storing %s", note->backend_id);
+
+		fd = run_backend_proc (note->backend_id, TRUE, NULL);
+		pipe = fdopen (fd, "r");
+		ret = location_store (location, note->backend_id,
+				      pipe, STORE_DEFAULT);
+		fclose (pipe);
+
+		if (ret < 0)
+			return -1;
+	}
+
+	return 0;
 }
 
 /**
@@ -1239,22 +1264,6 @@ location_does_backend_change (Location *location, Location *location1,
 	g_list_free (backends);
 
 	return ret;
-}
-
-static gint
-store_snapshot_cb (Location *location, gchar *backend_id) 
-{
-	int fd;
-	FILE *pipe;
-
-	DEBUG_MSG ("Storing %s", backend_id);
-
-	fd = run_backend_proc (backend_id, TRUE);
-	pipe = fdopen (fd, "r");
-	location_store (location, backend_id, pipe, STORE_DEFAULT);
-	fclose (pipe);
-
-	return FALSE;
 }
 
 static gint
@@ -1530,7 +1539,7 @@ load_xml_data (gchar *fullpath, gint id)
  */
 
 static gint
-run_backend_proc (gchar *backend_id, gboolean do_get) 
+run_backend_proc (gchar *backend_id, gboolean do_get, pid_t *pid_r) 
 {
 	char *args[3];
 	int fd[2];
@@ -1577,6 +1586,9 @@ run_backend_proc (gchar *backend_id, gboolean do_get)
 		exit (-1);
 		return 0;
 	} else {
+		if (pid_r != NULL)
+			*pid_r = pid;
+
  		close (fd[c_fd]);
 		return fd[p_fd];
 	}

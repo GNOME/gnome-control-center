@@ -1,4 +1,23 @@
+2001-06-22  Bradford Hovinen  <hovinen@ximian.com>
+
+	* archive.c (archive_get_current_location): Return NULL if the
+	location id is NULL
+	(archive_get_current_location_id): Return NULL if storing the
+	snapshot results in an error
+
+	* location.c (location_store): Add return values for error
+	conditions; remove g_warning's and g_critical's
+	(location_store_full_snapshot): Folded in store_snapshot_cb; don't
+	call location_foreach_backend
+	(location_store_full_snapshot): Return error condition; 0 on
+	success, -1 if any backend failed
+
 2001-06-21  Bradford Hovinen  <hovinen@ximian.com>
+
+	* location.c (location_do_rollback): Wait for child process to
+	terminate
+	(run_backend_proc): Take an extra argument -- where to store the
+	PID of the child process
 
 	* archive.c (archive_set_current_location): Use
 	location_get_changed_backends
