@@ -279,8 +279,8 @@ set_scale (GtkToggleButton *toggle, GtkWidget **arr)
 	int i, retval = 0;
 
 	for (i = 0; i < 4; i++) {
-		if (arr[i] == toggle) retval = i;
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (arr[i]), arr[i] == toggle);
+		if (arr[i] == GTK_WIDGET (toggle)) retval = i;
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (arr[i]), arr[i] == GTK_WIDGET (toggle));
 	}
 	
 	return retval;

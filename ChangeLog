@@ -1,3 +1,19 @@
+2001-07-05  Bradford Hovinen  <hovinen@ximian.com>
+
+	* capplets/Makefile.am: Removed rules pertaining to
+	sound-properties
+
+	* capplets/sound-properties-capplet.c (set_moniker_cb): Change
+	BonoboPropertyEditor to BonoboPEditor
+
+	* configure.in: Update AC_INIT to use correct directory name
+	(AC_OUTPUT): Update to current directory structure
+
+	* Makefile.am (SUBDIRS): Update to current directory structure
+
+	* capplets/Makefile.am (always_built_SUBDIRS): Updated to current
+	directory structure
+
 2001-07-03  Bradford Hovinen  <hovinen@ximian.com>
 
 	* archiver/Makefile.am (bonobo_moniker_archiver_LDADD): Use @...@

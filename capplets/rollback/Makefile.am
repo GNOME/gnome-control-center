@@ -22,7 +22,8 @@ INCLUDES = \
 	-DGLADE_DATADIR=\""$(Gladedir)"\"		\
 	@ROLLBACK_CAPPLET_CFLAGS@			\
 	-I$(top_srcdir)/				\
-	-I$(top_srcdir)/intl
+	-I$(top_srcdir)/intl				\
+	-I$(top_srcdir)/archiver
 
 bin_PROGRAMS = rollback-capplet
 
@@ -33,4 +34,5 @@ rollback_capplet_SOURCES = \
 	main.c
 
 rollback_capplet_LDADD = \
+	$(top_builddir)/archiver/libximian_archiver.la		\
 	@ROLLBACK_CAPPLET_LIBS@

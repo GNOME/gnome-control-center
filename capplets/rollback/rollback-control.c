@@ -180,9 +180,9 @@ rollback_control_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		rollback_control->p->location =
 			archive_get_current_location
 			(rollback_control->p->archive);
-		rollback_control->p->config_log =
-			location_get_config_log
-			(rollback_control->p->location);
+/*  		rollback_control->p->config_log = */
+/*  			location_get_config_log */
+/*  			(rollback_control->p->location); */
 		break;
 
 	default:

@@ -1,3 +1,16 @@
+2001-07-05  Bradford Hovinen  <hovinen@ximian.com>
+
+	* bonobo-moniker-archiver.c (archiver_resolve): Update call to
+	Bonobo_ConfigDatabase_addDatabase
+
+	* bonobo-config-archiver.h: Fix include directories
+
+	* Makefile.am (INCLUDES): Update to use pkg-config standards; add
+	BONOBO_CFLAGS
+	Include configuration moniker-related material
+	(SUBDIRS): Remove
+	(bin_PROGRAMS): Added ximian-archiver
+
 2001-07-02  Tambet Ingo  <tambet@ximian.com>
 
 	* default-global.xml: Added display-conf backend.
