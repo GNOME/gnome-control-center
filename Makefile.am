@@ -9,8 +9,8 @@ SUBDIRS = libsounds libbackground gnome-settings-daemon capplets control-center 
 # remove it from the default build. Chema
 
 pixmapdir = $(datadir)/pixmaps
-pixmap_DATA = control-center.png
- 
+pixmap_DATA = control-center2.png
+
 dist-hook: control-center.spec
 	cp control-center.spec $(distdir)
 
@@ -24,4 +24,4 @@ EXTRA_DIST = \
 	intltool-extract.in \
 	intltool-merge.in \
 	intltool-update.in \
-	control-center.png
+	control-center2.png
