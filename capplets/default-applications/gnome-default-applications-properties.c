@@ -117,7 +117,7 @@ on_text_custom_properties_clicked (GtkWidget *w, GladeXML *dialog)
 		g_free (mime_app->name);
 		g_free (mime_app->command);
 	} else {
-		mime_app = g_new0 (GnomeVFSMimeApplication, 1);	
+		mime_app = g_new0 (GnomeVFSMimeApplication, 1);
 		mime_app->id = g_strdup (MIME_APPLICATION_ID);
 	}
 
@@ -139,7 +139,7 @@ on_text_custom_properties_clicked (GtkWidget *w, GladeXML *dialog)
 	gnome_vfs_mime_set_default_application ("text/plain", mime_app->id);
 	gnome_vfs_mime_application_free (mime_app);
 
-	gnome_vfs_application_registry_sync ();	
+	gnome_vfs_application_registry_sync ();
 }
 
 static void
@@ -149,7 +149,7 @@ on_text_default_viewer_toggle (GtkWidget *toggle, GladeXML *dialog)
 
 	old_action_type = gnome_vfs_mime_get_default_action_type ("text/plain");
 	new_action_type = GTK_TOGGLE_BUTTON (toggle)->active
-		? GNOME_VFS_MIME_ACTION_TYPE_APPLICATION 
+		? GNOME_VFS_MIME_ACTION_TYPE_APPLICATION
 		: GNOME_VFS_MIME_ACTION_TYPE_COMPONENT;
 
 	if (new_action_type == old_action_type)
@@ -182,56 +182,50 @@ generic_guard (GtkWidget *toggle, GtkWidget *widget)
 	}
 }
 
+static gboolean
+validate (GHashTable *unique, char const *name, char const *exec_name)
+{
+	if (NULL == g_hash_table_lookup (unique, name)) {
+		char *path = g_find_program_in_path (exec_name);
+		if (path != NULL) {
+			g_hash_table_insert (unique, (gpointer)name, (gpointer)exec_name);
+			g_free (path);
+			return TRUE;
+		}
+	}
+	return FALSE;
+}
+
 static void
 initialize_default_applications (void)
 {
         gint i;
-	/* This is used to only have one Evolution entry in the dropdown box
-	 * in case the user has installed both evo for gnome1 and for gnome2
-	 */
-	gboolean evo_already_in_list = FALSE;
+	GHashTable *unique;
 
 	text_editors = gnome_vfs_mime_get_all_applications ("text/plain");
 
-        for (i = 0; i < G_N_ELEMENTS (possible_browsers); i++ ) {
-		gchar *browsers = g_find_program_in_path (possible_browsers[i].executable_name);
-                if (browsers) {
-			possible_browsers[i].in_path = TRUE;
-			g_free(browsers);
-		}
-        }
-        for (i = 0; i < G_N_ELEMENTS (possible_mailers); i++ ) {	  
-		gchar *mailers;
-		gchar *exec_name = possible_mailers[i].executable_name;
+	unique = g_hash_table_new (g_str_hash, g_str_equal);
+        for (i = 0; i < G_N_ELEMENTS (possible_browsers); i++ )
+		possible_browsers[i].in_path = validate (unique,
+			possible_browsers[i].name, possible_browsers[i].executable_name);
+	g_hash_table_destroy (unique);
 
-		mailers =  g_find_program_in_path (exec_name);
-                if (mailers) {
-			if (g_str_has_prefix (exec_name, "evolution")) {
-				if (evo_already_in_list) {
-					g_free (mailers);
-					continue;
-				} else {
-					evo_already_in_list = TRUE;
-				}
-			}
+	unique = g_hash_table_new (g_str_hash, g_str_equal);
+        for (i = 0; i < G_N_ELEMENTS (possible_mailers); i++ )
+		possible_mailers[i].in_path = validate (unique,
+			possible_mailers[i].name, possible_mailers[i].executable_name);
+	g_hash_table_destroy (unique);
 
-			possible_mailers[i].in_path = TRUE;
-			g_free(mailers);
-		}
-        }
-
-        for (i = 0; i < G_N_ELEMENTS (possible_terminals); i++ ) {
-                gchar *terminals = g_find_program_in_path (possible_terminals[i].exec);
-		if (terminals) {
-			possible_terminals[i].in_path = TRUE;
-			g_free (terminals);
-		}
-        }
+	unique = g_hash_table_new (g_str_hash, g_str_equal);
+        for (i = 0; i < G_N_ELEMENTS (possible_terminals); i++ )
+		possible_terminals[i].in_path = validate (unique,
+			possible_terminals[i].name, possible_terminals[i].exec);
+	g_hash_table_destroy (unique);
 }
 
 static void
 update_editor_sensitivity (GladeXML *dialog)
-{ 
+{
 	gboolean predefined = GTK_TOGGLE_BUTTON (WID ("text_select_radio"))->active;
 
 	gtk_widget_set_sensitive (WID ("text_select_combo"), predefined);
@@ -266,7 +260,7 @@ read_editor (GConfClient *client,
 		}
         }
 
-	/* 
+	/*
 	 * the default editor wasn't set by us, and it wasn't in the
 	 * list.
 	 */
@@ -277,7 +271,7 @@ read_editor (GConfClient *client,
 	gnome_vfs_application_registry_save_mime_application (mime_app);
 
 	gnome_vfs_mime_set_default_application ("text/plain", mime_app->id);
-	gnome_vfs_application_registry_sync ();	
+	gnome_vfs_application_registry_sync ();
 
  read_editor_custom:
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("text_select_radio")), TRUE);
@@ -309,7 +303,7 @@ text_apply_editor (GtkWidget *entry,
 		mime_app = li->data;
 		if (! strcmp (mime_app->name, editor)) {
 			gnome_vfs_mime_set_default_application ("text/plain", mime_app->id);
-			gnome_vfs_application_registry_sync ();	
+			gnome_vfs_application_registry_sync ();
 			return;
 		}
 	}
@@ -337,19 +331,19 @@ text_apply_custom (GtkWidget *entry,
 	} else {
 		gnome_vfs_mime_set_default_application ("text/plain", mime_app->id);
 		gnome_vfs_mime_application_free (mime_app);
-		
-		gnome_vfs_application_registry_sync ();	
+
+		gnome_vfs_application_registry_sync ();
 	}
 
 	update_editor_sensitivity (dialog);
 }
 
-static void 
+static void
 setup_peditors (GConfClient *client,
 		GladeXML    *dialog)
 {
         GConfChangeSet *changeset = NULL;
-	
+
 	gconf_peditor_new_boolean (changeset, DEFAULT_APPS_KEY_BROWSER_NEEDS_TERM,
 				   WID ("web_custom_terminal_toggle"), NULL);
 	gconf_peditor_new_string  (changeset, DEFAULT_APPS_KEY_BROWSER_EXEC,
@@ -388,7 +382,7 @@ read_browser (GConfClient *client,
 	for (i = 0; i < G_N_ELEMENTS (possible_browsers); i++ ) {
 		if (possible_browsers[i].in_path == FALSE)
 			continue;
-		
+
 		if (browser && strcmp (browser, possible_browsers[i].command) == 0 &&
 		    needs_term == possible_browsers[i].needs_term) {
 			gtk_entry_set_text (GTK_ENTRY (WID ("web_select_combo_entry")),
@@ -426,7 +420,7 @@ read_mailer (GConfClient *client,
 	for (i = 0; i < G_N_ELEMENTS (possible_mailers); i++ ) {
 		if (possible_mailers[i].in_path == FALSE)
 			continue;
-		
+
 		if (mailer && strcmp (mailer, possible_mailers[i].command) == 0 &&
 		    needs_term == possible_mailers[i].needs_term) {
 			gtk_entry_set_text (GTK_ENTRY (WID ("mail_select_combo_entry")),
@@ -441,7 +435,7 @@ read_mailer (GConfClient *client,
 	gtk_toggle_button_set_inconsistent (GTK_TOGGLE_BUTTON (WID ("mail_custom_radio")), TRUE);
 	g_free (mailer);
 
-	
+
 }
 
 static void
@@ -505,7 +499,7 @@ read_terminal (GConfClient *client,
 	for (i = 0; i < G_N_ELEMENTS (possible_terminals); i++ ) {
 		if (possible_terminals[i].in_path == FALSE)
 			continue;
-		
+
 		if (strcmp (exec?exec:"", possible_terminals[i].exec) == 0 &&
 		    strcmp (exec_arg?exec_arg:"", possible_terminals[i].exec_arg) == 0) {
 			gtk_entry_set_text (GTK_ENTRY (WID ("terminal_select_combo_entry")),
@@ -572,7 +566,7 @@ create_dialog (GConfClient *client)
 	gint i;
 	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gnome-default-applications-properties.glade", NULL, NULL);
 	capplet_set_icon (WID ("default_applications_dialog"), "default-applications-capplet.png");
-	
+
 	setup_peditors (client, dialog);
 
 	/* Editors page */
@@ -595,7 +589,7 @@ create_dialog (GConfClient *client)
 	g_signal_connect (G_OBJECT (WID ("text_select_combo_entry")),
 			  "changed", G_CALLBACK (text_apply_editor),
 			  dialog);
-	g_signal_connect (WID ("text_custom_properties"), "clicked",			  
+	g_signal_connect (WID ("text_custom_properties"), "clicked",
 			  G_CALLBACK (on_text_custom_properties_clicked),
 			  dialog);
 	g_signal_connect (WID ("text_default_viewer_toggle"), "toggled",
@@ -673,7 +667,7 @@ create_dialog (GConfClient *client)
 
 
 	/* Terminal */
-	
+
 	for (i = 0; i < G_N_ELEMENTS (possible_terminals); i++ ) {
 		if (possible_terminals[i].in_path)
 			strings = g_list_append (strings, _(possible_terminals[i].name));
@@ -702,21 +696,20 @@ create_dialog (GConfClient *client)
 	g_signal_connect (G_OBJECT (WID ("terminal_custom_radio")),
 			  "toggled", (GCallback) generic_guard,
 			  WID ("terminal_custom_table"));
-	read_terminal (client, dialog);	
+	read_terminal (client, dialog);
 
 
 	g_signal_connect (G_OBJECT (client), "value-changed", (GCallback) value_changed_cb, dialog);
 	g_signal_connect (G_OBJECT (WID ("default_applications_dialog")), "response", (GCallback) dialog_response, dialog);
-	
+
 	gtk_widget_show (WID ("default_applications_dialog"));
 
 	return dialog;
 }
 
 static void
-get_legacy_settings (void) 
+get_legacy_settings (void)
 {
-
 }
 
 int

@@ -1,3 +1,13 @@
+2004-02-13  Jody Goldberg <jody@gnome.org>
+
+	* gnome-default-applications-properties.c : Unique-ify the lists so
+	  that we can handle multiple excutable names for the same browser
+	  when the list jumps to gconf.  Remove the vile hack specifict to
+	  evolution.
+
+	* gnome-default-applications-properties-structs.c (};) : remove the
+	  nremote flag and add a few new browsers.
+
 2004-02-12  Mark McLoughlin  <mark@skynet.ie>
 
 	* gnome-default-applications-properties.c: (dialog_response): Update
