@@ -1,6 +1,17 @@
-2002-03-17  Jonathan Blandford  <set EMAIL_ADDRESS environment variable>
+2002-03-27  Lauris Kaplinski  <lauris@ximian.com>
 
-	reviewed by: <delete if not using a buddy>
+	* main.c (response_cb): No responses here
+	(font_capplet_custom_toggled): New signal handler
+	(font_capplet_font_set): Ditto
+	(font_capplet_value_notify): Ditto
+	(setup_dialog): Removed peditor stuff, as I do not know, how to
+	mix it with NULL == unset, string == set
+	(main): Get GConfClient and activate directory
+
+	* font-properties.glade: Reverted to original version,
+	added label telling about applying
+
+2002-03-17  Jonathan Blandford  <jrb@redhat.com>
 
 	* font-properties.glade:
 	* main.c: (setup_dialog):
