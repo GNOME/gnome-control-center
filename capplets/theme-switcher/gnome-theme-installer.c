@@ -45,8 +45,8 @@ transfer_done_targz_idle_cb (gpointer data)
 	gchar *path = data;
 
 	/* this should be something more clever and nonblocking */
-	command = g_strdup_printf ("sh -c 'gzip -d -c < \"%s\" | tar xf - -C \"%s/.themes\"'",
-				   path, g_get_home_dir ());
+	command = g_strdup_printf ("sh -c 'cd \"%s/.themes\"; gzip -d -c < \"%s\" | tar xf -'",
+				   g_get_home_dir (), path);
 	if (g_spawn_command_line_sync (command, NULL, NULL, &status, NULL) && status == 0)
 		gnome_vfs_unlink (path);
 	g_free (command);
@@ -74,8 +74,8 @@ transfer_done_tarbz2_idle_cb (gpointer data)
 	gchar *path = data;
 
 	/* this should be something more clever and nonblocking */
-	command = g_strdup_printf ("sh -c 'bzip2 -d -c < \"%s\" | tar xf - -C \"%s/.themes\"'",
-				   path, g_get_home_dir ());
+	command = g_strdup_printf ("sh -c 'cd \"%s/.themes\"; bzip2 -d -c < \"%s\" | tar xf -'",
+				   g_get_home_dir (), path);
 	if (g_spawn_command_line_sync (command, NULL, NULL, &status, NULL) && status == 0)
 		gnome_vfs_unlink (path);
 	g_free (command);

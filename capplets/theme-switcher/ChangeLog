@@ -1,5 +1,12 @@
 2004-10-27  Sebastien Bacher  <seb128@debian.org>
 
+	* gnome-theme-installer.c: (transfer_done_targz_idle_cb),
+	(transfer_done_tarbz2_idle_cb): *
+	patch by Rajkumar <rajkumar.siva@wipro.com> to fix the themes
+	installation with the non GNU versions of tar (Closes: #114553).
+
+2004-10-27  Sebastien Bacher  <seb128@debian.org>
+
 	* gnome-theme-save.c: (setup_directory_structure):
 	patch by David Sedeño Fernández <david@alderia.com> to fix a 
 	warning during the compilation (Closes: #148345).
