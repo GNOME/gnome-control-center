@@ -560,6 +560,7 @@ main (int argc, char **argv)
 
 		dialog_win = gtk_dialog_new_with_buttons
 			(_("Background Preferences"), NULL, -1,
+			 GTK_STOCK_HELP, GTK_RESPONSE_HELP,
 			 GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
 			 NULL);
 
