@@ -362,7 +362,8 @@ populate_application_list (MimeEditDialog *dialog)
 	for (tmp = app_list, i = 0; tmp != NULL; tmp = tmp->next, i++) {
 		app = tmp->data;
 
-		if (!strcmp (app->id, dialog->p->info->default_action->id))
+		if (dialog->p->info->default_action != NULL &&
+		    !strcmp (app->id, dialog->p->info->default_action->id))
 			found_idx = i;
 
 		menu_item = gtk_menu_item_new_with_label (app->name);

@@ -1,5 +1,19 @@
 2002-01-11  Bradford Hovinen  <hovinen@ximian.com>
 
+	* mime-edit-dialog.c (populate_application_list): Don't check
+	default action id if default action is NULL
+
+	* mime-type-info.c (mime_type_info_free): Remove data from
+	mime_type_table
+
+	* service-info.c (service_info_free): Free the info structure
+
+	* mime-type-info.c (mime_type_info_load): Ditto below
+
+	* service-info.c (service_info_load): Use service_info_table as a
+	cache
+	(service_info_free): Remove data from service_info_table
+
 	* mime-edit-dialog.c (populate_application_list): Use custom_line
 	for program_entry
 

@@ -32,6 +32,10 @@
 #include "service-info.h"
 #include "mime-types-model.h"
 
+/* Hash table of service info structures */
+
+static GHashTable *service_info_table = NULL;
+
 /* This is a hash table of GLists indexed by protocol name; each entry in each
  * list is a GnomeVFSMimeApplication that can handle that protocol */
 
@@ -168,8 +172,18 @@ service_info_load (GtkTreeModel *model, GtkTreeIter *iter, GConfChangeSet *chang
 	gchar       *id;
 	GValue       protocol;
 
+	if (service_info_table == NULL)
+		service_info_table = g_hash_table_new (g_str_hash, g_str_equal);
+
 	protocol.g_type = G_TYPE_INVALID;
 	gtk_tree_model_get_value (model, iter, MIME_TYPE_COLUMN, &protocol);
+
+	info = g_hash_table_lookup (service_info_table, g_value_get_string (&protocol));
+
+	if (info != NULL) {
+		g_value_unset (&protocol);
+		return info;
+	}
 
 	info = g_new0 (ServiceInfo, 1);
 	info->model = model;
@@ -185,6 +199,9 @@ service_info_load (GtkTreeModel *model, GtkTreeIter *iter, GConfChangeSet *chang
 	if (id != NULL)
 		info->app = gnome_vfs_mime_application_new_from_id (id);
 	g_free (id);
+
+	g_hash_table_insert (service_info_table, info->protocol, info);
+	g_value_unset (&protocol);
 
 	return info;
 }
@@ -217,10 +234,13 @@ service_info_update (ServiceInfo *info)
 void
 service_info_free (ServiceInfo *info)
 {
+	g_hash_table_remove (service_info_table, info->protocol);
+
 	g_free (info->protocol);
 	g_free (info->description);
 	gnome_vfs_mime_application_free (info->app);
 	g_free (info->custom_line);
+	g_free (info);
 }
 
 const GList *

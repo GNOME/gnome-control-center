@@ -35,6 +35,10 @@
 #include "mime-type-info.h"
 #include "mime-types-model.h"
 
+/* Hash table of mime type info structures */
+
+static GHashTable *mime_type_table = NULL;
+
 static GList *dirty_list = NULL;
 
 static GSList *
@@ -90,8 +94,18 @@ mime_type_info_load (GtkTreeModel *model, GtkTreeIter *iter)
 	Bonobo_ServerInfo *component_info;
 	GValue             mime_type;
 
+	if (mime_type_table == NULL)
+		mime_type_table = g_hash_table_new (g_str_hash, g_str_equal);
+
 	mime_type.g_type = G_TYPE_INVALID;
 	gtk_tree_model_get_value (model, iter, MIME_TYPE_COLUMN, &mime_type);
+
+	info = g_hash_table_lookup (mime_type_table, g_value_get_string (&mime_type));
+
+	if (info != NULL) {
+		g_value_unset (&mime_type);
+		return info;
+	}
 
 	info = g_new0 (MimeTypeInfo, 1);
 	info->model           = model;
@@ -117,6 +131,7 @@ mime_type_info_load (GtkTreeModel *model, GtkTreeIter *iter)
 		CORBA_free (component_info);
 	}
 
+	g_hash_table_insert (mime_type_table, g_strdup (info->mime_type), info);
 	g_value_unset (&mime_type);
 
 	return info;
@@ -173,6 +188,8 @@ mime_type_info_update (MimeTypeInfo *info)
 void
 mime_type_info_free (MimeTypeInfo *info)
 {
+	g_hash_table_remove (mime_type_table, info->mime_type);
+
 	g_free (info->mime_type);
 	g_free (info->description);
 	g_free (info->icon_name);
