@@ -186,7 +186,7 @@ drw_break_window_init (DrwBreakWindow *window)
 		
 		gtk_container_set_border_width (GTK_CONTAINER (button_box), 12);
 		
-		priv->postpone_button = gtk_button_new_with_label (_("Postpone break"));
+		priv->postpone_button = gtk_button_new_with_mnemonic (_("_Postpone break"));
 		gtk_widget_show (priv->postpone_button);
 
 		g_signal_connect (priv->postpone_button,

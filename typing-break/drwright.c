@@ -291,6 +291,20 @@ stop_blinking (DrWright *dr)
 }
 
 static gboolean
+grab_keyboard_on_window (GdkWindow *window,
+			 guint32    activate_time)
+{
+	GdkGrabStatus status;
+	
+	status = gdk_keyboard_grab (window, TRUE, activate_time);
+	if (status == GDK_GRAB_SUCCESS) {
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
+static gboolean
 maybe_change_state (DrWright *dr)
 {
 	gint elapsed_time;
@@ -401,6 +415,8 @@ maybe_change_state (DrWright *dr)
 
 		gtk_widget_show (dr->break_window);
 
+		grab_keyboard_on_window (dr->break_window->window, gtk_get_current_event_time ());
+		
 		dr->state = STATE_BREAK;
 		break;
 	       
