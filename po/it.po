@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.2.0\n"
-"POT-Creation-Date: 2001-02-09 03:07+0100\n"
+"POT-Creation-Date: 2001-02-14 20:16-0500\n"
 "PO-Revision-Date: 2000-10-24 16:09+02:00\n"
 "Last-Translator: Christopher R. Gabriel <cgabriel@pluto.linux.it>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -113,7 +113,6 @@ msgstr "Affiancata"
 #: capplets/keyboard-properties/keyboard-properties.c:422
 #: capplets/mouse-properties/mouse-properties.c:112
 #: capplets/screensaver-properties/callbacks.c:802
-#: capplets/session-properties/session-properties.c:323
 #: capplets/sound-properties/sound-properties.c:693
 #: capplets/theme-switcher/gui.c:367
 #: capplets/ui-properties/ui-properties.c:516
@@ -134,7 +133,6 @@ msgstr ""
 #: capplets/mime-type/mime-type-capplet.c:81
 #: capplets/mouse-properties/mouse-properties.c:114
 #: capplets/screensaver-properties/callbacks.c:804
-#: capplets/session-properties/session-properties.c:325
 #: capplets/sound-properties/sound-properties.c:695
 #: capplets/sound-properties/sound-properties.c:756
 #: capplets/theme-switcher/gui.c:369
@@ -370,19 +368,16 @@ msgstr ""
 "di avere la Guida Utente di GNOME installata sul vostro sistema."
 
 #: capplets/mime-type/mime-type-capplet.c:95
-#: capplets/session-properties/session-properties.c:215
 #: capplets/wm-properties/wm-properties-capplet.c:1098
 msgid "Delete"
 msgstr "Rimuovi"
 
 #: capplets/mime-type/mime-type-capplet.c:105
-#: capplets/session-properties/session-properties.c:205
 #: capplets/wm-properties/wm-properties-capplet.c:1088
 msgid "Add..."
 msgstr "Aggiungi..."
 
 #: capplets/mime-type/mime-type-capplet.c:109
-#: capplets/session-properties/session-properties.c:210
 #: capplets/wm-properties/wm-properties-capplet.c:1093
 msgid "Edit..."
 msgstr "Impostazioni..."
@@ -521,7 +516,6 @@ msgid "Author: UNKNOWN"
 msgstr "Autore: SCONOSCIUTO"
 
 #: capplets/screensaver-properties/screensaver-dialog.c:78
-#: capplets/session-properties/gsm-client-row.c:59
 msgid "Settings"
 msgstr "Impostazioni"
 
@@ -639,228 +633,6 @@ msgstr ""
 "Un errore di inizializzazione è avvenuto durante l'avvio di "
 "`keyboard-properties-capplet'.\n"
 "Operazione annullata...\n"
-
-#: capplets/session-properties/chooser.c:57
-msgid "Session"
-msgstr "Sessione"
-
-#. dialog
-#: capplets/session-properties/chooser.c:93
-msgid "Session Chooser"
-msgstr "Scelta Sessione"
-
-#: capplets/session-properties/chooser.c:96
-msgid "Start Session"
-msgstr "Inizia Sessione"
-
-#: capplets/session-properties/chooser.c:99
-msgid "Cancel Login"
-msgstr "Annulla login"
-
-#: capplets/session-properties/gsm-client-editor.c:100
-msgid "Order: "
-msgstr "Ordine: "
-
-#: capplets/session-properties/gsm-client-editor.c:110
-msgid "Style: "
-msgstr "Stile: "
-
-#: capplets/session-properties/gsm-client-list.c:30
-msgid "This button sets the start order of the selected programs.\n"
-msgstr "Questo pulsante imposta l'ordine di avvio dei programmi selezionati.\n"
-
-#: capplets/session-properties/gsm-client-list.c:31
-msgid ""
-"This button sets the restart style of the selected programs:\n"
-"Normal programs are unaffected by logouts but can die;\n"
-"Respawn programs are never allowed to die;\n"
-"Trash programs are discarded on logout and can die;\n"
-"Settings programs are always started on every login."
-msgstr ""
-"Questo pulsante imposta le modalità di riavvio dei programmi selezionati:\n"
-"i programmi \"Normali\" non sono controllati dal logout ma possono "
-"terminare;\n"
-"i programmi \"Rieseguiti\" vengono riavviati non appena terminano;\n"
-"i programmi \"Trash\" vengono ignorati all'uscita e possono morire;\n"
-"i programmi \"Impostazioni\" vengono avviati ad ogni login."
-
-#: capplets/session-properties/gsm-client-list.c:36
-msgid ""
-"This button produces a key to the program states below:\n"
-"Inactive programs are waiting to start or have finished;\n"
-"Starting programs are being given time to get running;\n"
-"Running programs are normal members of the session;\n"
-"Saving programs are saving their session details;\n"
-"Programs which make no contact have Unknown states.\n"
-msgstr ""
-"Questo pulsante produce una chiave agli stati di programma sotto:\n"
-"I programmi \"Inattivi\" sono in attesa di essere avviati ho sono già "
-"terminati;\n"
-"I programmi \"In avvio\" sono nella fase di avvio;\n"
-"I programmi \"In funzione\" sono elementi normali della sessione;\n"
-"I programmi \"In salvataggio\" stanno memorizzando le proprie informazioni "
-"di sessione;\n"
-"I programmi che non sono in contatto con il gestore di sessione sono in "
-"stato \"Sconociuto\".\n"
-
-#: capplets/session-properties/gsm-client-list.c:42
-msgid "This column gives the command used to start a program."
-msgstr "Questa colonna specifica il comando usato per avviare un programma."
-
-#: capplets/session-properties/gsm-client-list.c:135
-msgid "Order"
-msgstr "Ordine"
-
-#: capplets/session-properties/gsm-client-list.c:136
-msgid "Style"
-msgstr "Stile"
-
-#: capplets/session-properties/gsm-client-list.c:137
-msgid "State"
-msgstr "Stato"
-
-#: capplets/session-properties/gsm-client-list.c:138
-msgid "Program"
-msgstr "Programma"
-
-#: capplets/session-properties/gsm-client-row.c:31
-msgid "Inactive"
-msgstr "Inattivo"
-
-#: capplets/session-properties/gsm-client-row.c:32
-msgid "Waiting to start or already finished."
-msgstr "In attesa di avvio o già terminato."
-
-#: capplets/session-properties/gsm-client-row.c:34
-msgid "Starting"
-msgstr "In avvio"
-
-#: capplets/session-properties/gsm-client-row.c:35
-msgid "Started but has not yet reported state."
-msgstr "Avviato ma senza aver riportato alcuno stato."
-
-#: capplets/session-properties/gsm-client-row.c:37
-msgid "Running"
-msgstr "In funzione"
-
-#: capplets/session-properties/gsm-client-row.c:38
-msgid "A normal member of the session."
-msgstr "Un elemento normale della sessione."
-
-#: capplets/session-properties/gsm-client-row.c:40
-msgid "Saving"
-msgstr "In salvataggio"
-
-#: capplets/session-properties/gsm-client-row.c:41
-msgid "Saving session details."
-msgstr "In fase di memorizzazione dei dati di sessione."
-
-#. This is about the only case where we'll put Unknown instead
-#. of simply not showing the info.
-#: capplets/session-properties/gsm-client-row.c:43 control-center/splash.c:178
-msgid "Unknown"
-msgstr "Sconociuto"
-
-#: capplets/session-properties/gsm-client-row.c:44
-msgid "State not reported within timeout."
-msgstr "Stato non riportato nel tempo richiesto."
-
-#: capplets/session-properties/gsm-client-row.c:50
-msgid "Normal"
-msgstr "Normale"
-
-#: capplets/session-properties/gsm-client-row.c:51
-msgid "Unaffected by logouts but can die."
-msgstr "Non soggetti a logout ma possono terminare."
-
-#: capplets/session-properties/gsm-client-row.c:53
-msgid "Respawn"
-msgstr "Rieseguito"
-
-#: capplets/session-properties/gsm-client-row.c:54
-msgid "Never allowed to die."
-msgstr "Mai lasciati morire."
-
-#: capplets/session-properties/gsm-client-row.c:56
-msgid "Trash"
-msgstr "Trash"
-
-#: capplets/session-properties/gsm-client-row.c:57
-msgid "Discarded on logout and can die."
-msgstr "Ignorati al logout e possono morire."
-
-#: capplets/session-properties/gsm-client-row.c:60
-msgid "Always started on every login."
-msgstr "Avviati ad ogni login."
-
-#: capplets/session-properties/gsm-protocol.c:500
-msgid "Remove Program"
-msgstr "Rimuovi applicazione"
-
-#. frame for options
-#: capplets/session-properties/session-properties.c:148
-msgid "Options"
-msgstr "Opzioni"
-
-#: capplets/session-properties/session-properties.c:159
-msgid "Show splash screen on login"
-msgstr "Mostra lo splash screen all'avvio"
-
-#: capplets/session-properties/session-properties.c:166
-msgid "Prompt on logout"
-msgstr "Conferma di uscita"
-
-#: capplets/session-properties/session-properties.c:173
-msgid "Automatically save changes to session"
-msgstr "Salva automaticamente i dati della sessione"
-
-#. frame for manually started programs
-#: capplets/session-properties/session-properties.c:178
-msgid "Non-session-managed Startup Programs"
-msgstr "Programmi avviati automatica non gestiti dalla sessione"
-
-#: capplets/session-properties/session-properties.c:195
-#: capplets/session-properties/startup-programs.c:305
-msgid "Priority"
-msgstr "Priorità"
-
-#: capplets/session-properties/session-properties.c:196
-#: capplets/url-properties/url-properties.c:76
-msgid "Command"
-msgstr "Comando"
-
-#: capplets/session-properties/session-properties.c:225
-msgid "Browse Currently Running Programs..."
-msgstr "Sfoglia i programmi attualmente in esecuzione..."
-
-#: capplets/session-properties/session-properties.c:417
-msgid "Only display warnings."
-msgstr "Mostra solo gli avvertimenti."
-
-#: capplets/session-properties/startup-programs.c:289
-#: capplets/session-properties/startup-programs.c:296
-msgid "Startup Command"
-msgstr "Comando di avvio"
-
-#: capplets/session-properties/startup-programs.c:320
-msgid ""
-"Programs with smaller values are started before programs with higher values. "
-"The default value should be OK"
-msgstr ""
-"I programmi con valori inferiori verrano avviati prima di quelli maggiori.\n"
-"Il valore predefinito è considerato giusto."
-
-#: capplets/session-properties/startup-programs.c:339
-msgid "The startup command cannot be empty"
-msgstr "Il comando di avvio non può essere nullo"
-
-#: capplets/session-properties/startup-programs.c:379
-msgid "Add Startup Program"
-msgstr "Aggiungi programma"
-
-#: capplets/session-properties/startup-programs.c:397
-msgid "Edit Startup Program"
-msgstr "Modifica programma"
 
 #: capplets/sound-properties/sound-properties.c:97
 msgid ""
@@ -1251,6 +1023,10 @@ msgstr "Errore durante l'inizializzazione della capplet 'url-properties'"
 msgid "Protocol"
 msgstr "Protocollo"
 
+#: capplets/url-properties/url-properties.c:76
+msgid "Command"
+msgstr "Comando"
+
 #: capplets/url-properties/url-properties.c:92
 msgid "handler:"
 msgstr "gestore:"
@@ -1437,11 +1213,11 @@ msgstr ""
 "`wm-properties-capplet'.\n"
 "Operazione annullata...\n"
 
-#: control-center/callbacks.c:101
+#: control-center/callbacks.c:102
 msgid "GNOME Control Center"
 msgstr "GNOME Control Center"
 
-#: control-center/callbacks.c:104
+#: control-center/callbacks.c:105
 msgid "Desktop Properties manager."
 msgstr "Gestore delle proprietà del desktop."
 
@@ -1575,3 +1351,171 @@ msgstr "Nome Utente:"
 msgid "Host Name:"
 msgstr "Nome Host:"
 
+#. This is about the only case where we'll put Unknown instead
+#. of simply not showing the info.
+#: control-center/splash.c:178
+msgid "Unknown"
+msgstr "Sconociuto"
+
+#~ msgid "Session"
+#~ msgstr "Sessione"
+
+#~ msgid "Session Chooser"
+#~ msgstr "Scelta Sessione"
+
+#~ msgid "Start Session"
+#~ msgstr "Inizia Sessione"
+
+#~ msgid "Cancel Login"
+#~ msgstr "Annulla login"
+
+#~ msgid "Order: "
+#~ msgstr "Ordine: "
+
+#~ msgid "Style: "
+#~ msgstr "Stile: "
+
+#~ msgid "This button sets the start order of the selected programs.\n"
+#~ msgstr ""
+#~ "Questo pulsante imposta l'ordine di avvio dei programmi selezionati.\n"
+
+#~ msgid ""
+#~ "This button sets the restart style of the selected programs:\n"
+#~ "Normal programs are unaffected by logouts but can die;\n"
+#~ "Respawn programs are never allowed to die;\n"
+#~ "Trash programs are discarded on logout and can die;\n"
+#~ "Settings programs are always started on every login."
+#~ msgstr ""
+#~ "Questo pulsante imposta le modalità di riavvio dei programmi selezionati:\n"
+#~ "i programmi \"Normali\" non sono controllati dal logout ma possono "
+#~ "terminare;\n"
+#~ "i programmi \"Rieseguiti\" vengono riavviati non appena terminano;\n"
+#~ "i programmi \"Trash\" vengono ignorati all'uscita e possono morire;\n"
+#~ "i programmi \"Impostazioni\" vengono avviati ad ogni login."
+
+#~ msgid ""
+#~ "This button produces a key to the program states below:\n"
+#~ "Inactive programs are waiting to start or have finished;\n"
+#~ "Starting programs are being given time to get running;\n"
+#~ "Running programs are normal members of the session;\n"
+#~ "Saving programs are saving their session details;\n"
+#~ "Programs which make no contact have Unknown states.\n"
+#~ msgstr ""
+#~ "Questo pulsante produce una chiave agli stati di programma sotto:\n"
+#~ "I programmi \"Inattivi\" sono in attesa di essere avviati ho sono già "
+#~ "terminati;\n"
+#~ "I programmi \"In avvio\" sono nella fase di avvio;\n"
+#~ "I programmi \"In funzione\" sono elementi normali della sessione;\n"
+#~ "I programmi \"In salvataggio\" stanno memorizzando le proprie informazioni "
+#~ "di sessione;\n"
+#~ "I programmi che non sono in contatto con il gestore di sessione sono in "
+#~ "stato \"Sconociuto\".\n"
+
+#~ msgid "This column gives the command used to start a program."
+#~ msgstr "Questa colonna specifica il comando usato per avviare un programma."
+
+#~ msgid "Order"
+#~ msgstr "Ordine"
+
+#~ msgid "Style"
+#~ msgstr "Stile"
+
+#~ msgid "State"
+#~ msgstr "Stato"
+
+#~ msgid "Program"
+#~ msgstr "Programma"
+
+#~ msgid "Inactive"
+#~ msgstr "Inattivo"
+
+#~ msgid "Waiting to start or already finished."
+#~ msgstr "In attesa di avvio o già terminato."
+
+#~ msgid "Starting"
+#~ msgstr "In avvio"
+
+#~ msgid "Started but has not yet reported state."
+#~ msgstr "Avviato ma senza aver riportato alcuno stato."
+
+#~ msgid "Running"
+#~ msgstr "In funzione"
+
+#~ msgid "A normal member of the session."
+#~ msgstr "Un elemento normale della sessione."
+
+#~ msgid "Saving"
+#~ msgstr "In salvataggio"
+
+#~ msgid "Saving session details."
+#~ msgstr "In fase di memorizzazione dei dati di sessione."
+
+#~ msgid "State not reported within timeout."
+#~ msgstr "Stato non riportato nel tempo richiesto."
+
+#~ msgid "Normal"
+#~ msgstr "Normale"
+
+#~ msgid "Unaffected by logouts but can die."
+#~ msgstr "Non soggetti a logout ma possono terminare."
+
+#~ msgid "Respawn"
+#~ msgstr "Rieseguito"
+
+#~ msgid "Never allowed to die."
+#~ msgstr "Mai lasciati morire."
+
+#~ msgid "Trash"
+#~ msgstr "Trash"
+
+#~ msgid "Discarded on logout and can die."
+#~ msgstr "Ignorati al logout e possono morire."
+
+#~ msgid "Always started on every login."
+#~ msgstr "Avviati ad ogni login."
+
+#~ msgid "Remove Program"
+#~ msgstr "Rimuovi applicazione"
+
+#~ msgid "Options"
+#~ msgstr "Opzioni"
+
+#~ msgid "Show splash screen on login"
+#~ msgstr "Mostra lo splash screen all'avvio"
+
+#~ msgid "Prompt on logout"
+#~ msgstr "Conferma di uscita"
+
+#~ msgid "Automatically save changes to session"
+#~ msgstr "Salva automaticamente i dati della sessione"
+
+#~ msgid "Non-session-managed Startup Programs"
+#~ msgstr "Programmi avviati automatica non gestiti dalla sessione"
+
+#~ msgid "Priority"
+#~ msgstr "Priorità"
+
+#~ msgid "Browse Currently Running Programs..."
+#~ msgstr "Sfoglia i programmi attualmente in esecuzione..."
+
+#~ msgid "Only display warnings."
+#~ msgstr "Mostra solo gli avvertimenti."
+
+#~ msgid "Startup Command"
+#~ msgstr "Comando di avvio"
+
+#~ msgid ""
+#~ "Programs with smaller values are started before programs with higher values. "
+#~ "The default value should be OK"
+#~ msgstr ""
+#~ "I programmi con valori inferiori verrano avviati prima di quelli maggiori.\n"
+#~ "Il valore predefinito è considerato giusto."
+
+#~ msgid "The startup command cannot be empty"
+#~ msgstr "Il comando di avvio non può essere nullo"
+
+#~ msgid "Add Startup Program"
+#~ msgstr "Aggiungi programma"
+
+#~ msgid "Edit Startup Program"
+#~ msgstr "Modifica programma"

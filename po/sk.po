@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center CVS\n"
-"POT-Creation-Date: 2000-12-11 22:05+0100\n"
+"POT-Creation-Date: 2001-02-14 20:16-0500\n"
 "PO-Revision-Date: 2000-10-31 16:33CET\n"
 "Last-Translator: Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>\n"
 "Language-Team: Slovak <bednar@isternet.sk>\n"
@@ -114,7 +114,6 @@ msgstr "Dla¾dice"
 #: capplets/keyboard-properties/keyboard-properties.c:422
 #: capplets/mouse-properties/mouse-properties.c:112
 #: capplets/screensaver-properties/callbacks.c:802
-#: capplets/session-properties/session-properties.c:323
 #: capplets/sound-properties/sound-properties.c:693
 #: capplets/theme-switcher/gui.c:367
 #: capplets/ui-properties/ui-properties.c:516
@@ -134,7 +133,6 @@ msgstr ""
 #: capplets/mime-type/mime-type-capplet.c:81
 #: capplets/mouse-properties/mouse-properties.c:114
 #: capplets/screensaver-properties/callbacks.c:804
-#: capplets/session-properties/session-properties.c:325
 #: capplets/sound-properties/sound-properties.c:695
 #: capplets/sound-properties/sound-properties.c:756
 #: capplets/theme-switcher/gui.c:369
@@ -368,19 +366,16 @@ msgstr ""
 "máte nain¹talovanú dokumentáciu k Ovládaciemu centru."
 
 #: capplets/mime-type/mime-type-capplet.c:95
-#: capplets/session-properties/session-properties.c:215
 #: capplets/wm-properties/wm-properties-capplet.c:1098
 msgid "Delete"
 msgstr "Zmaza»"
 
 #: capplets/mime-type/mime-type-capplet.c:105
-#: capplets/session-properties/session-properties.c:205
 #: capplets/wm-properties/wm-properties-capplet.c:1088
 msgid "Add..."
 msgstr "Prida»..."
 
 #: capplets/mime-type/mime-type-capplet.c:109
-#: capplets/session-properties/session-properties.c:210
 #: capplets/wm-properties/wm-properties-capplet.c:1093
 msgid "Edit..."
 msgstr "Upravi»..."
@@ -518,7 +513,6 @@ msgid "Author: UNKNOWN"
 msgstr "Autor: Neznámy"
 
 #: capplets/screensaver-properties/screensaver-dialog.c:78
-#: capplets/session-properties/gsm-client-row.c:59
 msgid "Settings"
 msgstr "Nastavenie"
 
@@ -636,224 +630,6 @@ msgstr ""
 "nastala inicializaèná chyba pri ¹tarte apletuovládacieho centra pre "
 "klávesnicu.\n"
 "konèím...\n"
-
-#: capplets/session-properties/chooser.c:57
-msgid "Session"
-msgstr "Sedenie"
-
-#. dialog
-#: capplets/session-properties/chooser.c:93
-msgid "Session Chooser"
-msgstr "Výber sedenia"
-
-#: capplets/session-properties/chooser.c:96
-msgid "Start Session"
-msgstr "©tart sedenia"
-
-#: capplets/session-properties/chooser.c:99
-msgid "Cancel Login"
-msgstr "Zru¹i» prihlásenie"
-
-#: capplets/session-properties/gsm-client-editor.c:100
-msgid "Order: "
-msgstr "Poradie: "
-
-#: capplets/session-properties/gsm-client-editor.c:110
-msgid "Style: "
-msgstr "©týl: "
-
-#: capplets/session-properties/gsm-client-list.c:30
-msgid "This button sets the start order of the selected programs.\n"
-msgstr "Toto tlaèidlo nastaví poradie ¹tartu vybraných programov.\n"
-
-#: capplets/session-properties/gsm-client-list.c:31
-msgid ""
-"This button sets the restart style of the selected programs:\n"
-"Normal programs are unaffected by logouts but can die;\n"
-"Respawn programs are never allowed to die;\n"
-"Trash programs are discarded on logout and can die;\n"
-"Settings programs are always started on every login."
-msgstr ""
-"Toto tlaèidlo nastaví znovuspú¹»anie vybraných programov:\n"
-"Normálne programy sú neovplyvnené odhlásením, ale mô¾u skonèi»;\n"
-"Obnovujúce sa programy nesmú nikdy skonèi»;\n"
-"Odpadové programy sú zahodené pri odhlásení a mô¾u skonèi»;\n"
-"Nastavovacie programy sú v¾dy spustené pri ka¾dom prihlásení."
-
-#: capplets/session-properties/gsm-client-list.c:36
-msgid ""
-"This button produces a key to the program states below:\n"
-"Inactive programs are waiting to start or have finished;\n"
-"Starting programs are being given time to get running;\n"
-"Running programs are normal members of the session;\n"
-"Saving programs are saving their session details;\n"
-"Programs which make no contact have Unknown states.\n"
-msgstr ""
-"Toto tlaèidlo vytvorí kµúè pre stav programu dole:\n"
-"Neaktívne programy èakajú na ¹tart alebo u¾ skonèili;\n"
-"©tartujúce programy dostávajú èas na spustenie;\n"
-"Be¾iace programy sú normálny èlenovia sedenia;\n"
-"Ukladajúce programy ukladajú svoje detaily sedenia;\n"
-"Programy, s ktorými nie je kontakt majú neznámy stav.\n"
-
-#: capplets/session-properties/gsm-client-list.c:42
-msgid "This column gives the command used to start a program."
-msgstr "Tento ståpec uvádza príkaz pou¾ívaný pre ¹tart programu."
-
-#: capplets/session-properties/gsm-client-list.c:135
-msgid "Order"
-msgstr "Poradie"
-
-#: capplets/session-properties/gsm-client-list.c:136
-msgid "Style"
-msgstr "©týl"
-
-#: capplets/session-properties/gsm-client-list.c:137
-msgid "State"
-msgstr "Stav"
-
-#: capplets/session-properties/gsm-client-list.c:138
-msgid "Program"
-msgstr "Program"
-
-#: capplets/session-properties/gsm-client-row.c:31
-msgid "Inactive"
-msgstr "Neaktívny"
-
-#: capplets/session-properties/gsm-client-row.c:32
-msgid "Waiting to start or already finished."
-msgstr "Èakajúci na ¹tart alebo u¾ skonèený."
-
-#: capplets/session-properties/gsm-client-row.c:34
-msgid "Starting"
-msgstr "©tartuje"
-
-#: capplets/session-properties/gsm-client-row.c:35
-msgid "Started but has not yet reported state."
-msgstr "Spustený, ale e¹te nenahlásil stav."
-
-#: capplets/session-properties/gsm-client-row.c:37
-msgid "Running"
-msgstr "Be¾iaci"
-
-#: capplets/session-properties/gsm-client-row.c:38
-msgid "A normal member of the session."
-msgstr "Normálny èlen sedenia."
-
-#: capplets/session-properties/gsm-client-row.c:40
-msgid "Saving"
-msgstr "Ukladá sa"
-
-#: capplets/session-properties/gsm-client-row.c:41
-msgid "Saving session details."
-msgstr "Ukladá detaily sedenia."
-
-#. This is about the only case where we'll put Unknown instead
-#. of simply not showing the info.
-#: capplets/session-properties/gsm-client-row.c:43 control-center/splash.c:168
-msgid "Unknown"
-msgstr "Neznámy"
-
-#: capplets/session-properties/gsm-client-row.c:44
-msgid "State not reported within timeout."
-msgstr "Stav nenahlásený v danom èasovom úseku."
-
-#: capplets/session-properties/gsm-client-row.c:50
-msgid "Normal"
-msgstr "Normálny"
-
-#: capplets/session-properties/gsm-client-row.c:51
-msgid "Unaffected by logouts but can die."
-msgstr "Neovplyvnený odhlásením a mô¾e skonèi»."
-
-#: capplets/session-properties/gsm-client-row.c:53
-msgid "Respawn"
-msgstr "Obnovujúci sa"
-
-#: capplets/session-properties/gsm-client-row.c:54
-msgid "Never allowed to die."
-msgstr "Nesmie skonèi»."
-
-#: capplets/session-properties/gsm-client-row.c:56
-msgid "Trash"
-msgstr "Odpad"
-
-#: capplets/session-properties/gsm-client-row.c:57
-msgid "Discarded on logout and can die."
-msgstr "Zahodený pri odhlásení a mô¾e skonèi»."
-
-#: capplets/session-properties/gsm-client-row.c:60
-msgid "Always started on every login."
-msgstr "V¾dy spustený pri ka¾dom prihlásení."
-
-#: capplets/session-properties/gsm-protocol.c:500
-msgid "Remove Program"
-msgstr "Odstráni» program"
-
-#. frame for options
-#: capplets/session-properties/session-properties.c:148
-msgid "Options"
-msgstr "Mo¾nosti"
-
-#: capplets/session-properties/session-properties.c:159
-msgid "Show splash screen on login"
-msgstr "Zobrazi» obrázok pri prihlásení"
-
-#: capplets/session-properties/session-properties.c:166
-msgid "Prompt on logout"
-msgstr "Výzva pri odhlásení"
-
-#: capplets/session-properties/session-properties.c:173
-msgid "Automatically save changes to session"
-msgstr "Automaticky uklada» zmeny sedenia"
-
-#. frame for manually started programs
-#: capplets/session-properties/session-properties.c:178
-msgid "Non-session-managed Startup Programs"
-msgstr "Spú¹tacie programy nespravované sedením"
-
-#: capplets/session-properties/session-properties.c:195
-#: capplets/session-properties/startup-programs.c:305
-msgid "Priority"
-msgstr "Priorita"
-
-#: capplets/session-properties/session-properties.c:196
-#: capplets/url-properties/url-properties.c:76
-msgid "Command"
-msgstr "Príkaz"
-
-#: capplets/session-properties/session-properties.c:225
-msgid "Browse Currently Running Programs..."
-msgstr "Prechádza» aktuálne be¾iace programy..."
-
-#: capplets/session-properties/session-properties.c:417
-msgid "Only display warnings."
-msgstr "Zobrazova» iba varovania."
-
-#: capplets/session-properties/startup-programs.c:289
-#: capplets/session-properties/startup-programs.c:296
-msgid "Startup Command"
-msgstr "©tartovací príkaz"
-
-#: capplets/session-properties/startup-programs.c:320
-msgid ""
-"Programs with smaller values are started before programs with higher values. "
-"The default value should be OK"
-msgstr ""
-"Programy s men¹ími hodnotami sú spustené pred programami s väè¹ími "
-"hodnotami. ©tandardná hodnota by mala by» OK."
-
-#: capplets/session-properties/startup-programs.c:339
-msgid "The startup command cannot be empty"
-msgstr "Spú¹»ací príkaz nesmie by» prázdny"
-
-#: capplets/session-properties/startup-programs.c:379
-msgid "Add Startup Program"
-msgstr "Prida» spú¹tací program"
-
-#: capplets/session-properties/startup-programs.c:397
-msgid "Edit Startup Program"
-msgstr "Upravi» spú¹»ací program"
 
 #: capplets/sound-properties/sound-properties.c:97
 msgid ""
@@ -1239,6 +1015,10 @@ msgstr ""
 msgid "Protocol"
 msgstr "Protokol"
 
+#: capplets/url-properties/url-properties.c:76
+msgid "Command"
+msgstr "Príkaz"
+
 #: capplets/url-properties/url-properties.c:92
 msgid "handler:"
 msgstr "obsluhovaè:"
@@ -1421,11 +1201,11 @@ msgstr ""
 "okien.\n"
 "konèím...\n"
 
-#: control-center/callbacks.c:101
+#: control-center/callbacks.c:102
 msgid "GNOME Control Center"
 msgstr "GNOME Ovládacie centrum"
 
-#: control-center/callbacks.c:104
+#: control-center/callbacks.c:105
 msgid "Desktop Properties manager."
 msgstr "Správca vlastností plochy."
 
@@ -1536,7 +1316,7 @@ msgstr ""
 "upravi», prosím, dvojite kliknite na danej polo¾ke."
 
 #. create the app
-#: control-center/main.c:197 control-center/splash.c:231
+#: control-center/main.c:197 control-center/splash.c:247
 msgid "Control Center"
 msgstr "Ovládacie centrum"
 
@@ -1559,3 +1339,167 @@ msgstr "Pou¾ívateµské meno:"
 #: control-center/splash.c:52
 msgid "Host Name:"
 msgstr "Meno hostiteµa:"
+
+#. This is about the only case where we'll put Unknown instead
+#. of simply not showing the info.
+#: control-center/splash.c:178
+msgid "Unknown"
+msgstr "Neznámy"
+
+#~ msgid "Session"
+#~ msgstr "Sedenie"
+
+#~ msgid "Session Chooser"
+#~ msgstr "Výber sedenia"
+
+#~ msgid "Start Session"
+#~ msgstr "©tart sedenia"
+
+#~ msgid "Cancel Login"
+#~ msgstr "Zru¹i» prihlásenie"
+
+#~ msgid "Order: "
+#~ msgstr "Poradie: "
+
+#~ msgid "Style: "
+#~ msgstr "©týl: "
+
+#~ msgid "This button sets the start order of the selected programs.\n"
+#~ msgstr "Toto tlaèidlo nastaví poradie ¹tartu vybraných programov.\n"
+
+#~ msgid ""
+#~ "This button sets the restart style of the selected programs:\n"
+#~ "Normal programs are unaffected by logouts but can die;\n"
+#~ "Respawn programs are never allowed to die;\n"
+#~ "Trash programs are discarded on logout and can die;\n"
+#~ "Settings programs are always started on every login."
+#~ msgstr ""
+#~ "Toto tlaèidlo nastaví znovuspú¹»anie vybraných programov:\n"
+#~ "Normálne programy sú neovplyvnené odhlásením, ale mô¾u skonèi»;\n"
+#~ "Obnovujúce sa programy nesmú nikdy skonèi»;\n"
+#~ "Odpadové programy sú zahodené pri odhlásení a mô¾u skonèi»;\n"
+#~ "Nastavovacie programy sú v¾dy spustené pri ka¾dom prihlásení."
+
+#~ msgid ""
+#~ "This button produces a key to the program states below:\n"
+#~ "Inactive programs are waiting to start or have finished;\n"
+#~ "Starting programs are being given time to get running;\n"
+#~ "Running programs are normal members of the session;\n"
+#~ "Saving programs are saving their session details;\n"
+#~ "Programs which make no contact have Unknown states.\n"
+#~ msgstr ""
+#~ "Toto tlaèidlo vytvorí kµúè pre stav programu dole:\n"
+#~ "Neaktívne programy èakajú na ¹tart alebo u¾ skonèili;\n"
+#~ "©tartujúce programy dostávajú èas na spustenie;\n"
+#~ "Be¾iace programy sú normálny èlenovia sedenia;\n"
+#~ "Ukladajúce programy ukladajú svoje detaily sedenia;\n"
+#~ "Programy, s ktorými nie je kontakt majú neznámy stav.\n"
+
+#~ msgid "This column gives the command used to start a program."
+#~ msgstr "Tento ståpec uvádza príkaz pou¾ívaný pre ¹tart programu."
+
+#~ msgid "Order"
+#~ msgstr "Poradie"
+
+#~ msgid "Style"
+#~ msgstr "©týl"
+
+#~ msgid "State"
+#~ msgstr "Stav"
+
+#~ msgid "Program"
+#~ msgstr "Program"
+
+#~ msgid "Inactive"
+#~ msgstr "Neaktívny"
+
+#~ msgid "Waiting to start or already finished."
+#~ msgstr "Èakajúci na ¹tart alebo u¾ skonèený."
+
+#~ msgid "Starting"
+#~ msgstr "©tartuje"
+
+#~ msgid "Started but has not yet reported state."
+#~ msgstr "Spustený, ale e¹te nenahlásil stav."
+
+#~ msgid "Running"
+#~ msgstr "Be¾iaci"
+
+#~ msgid "A normal member of the session."
+#~ msgstr "Normálny èlen sedenia."
+
+#~ msgid "Saving"
+#~ msgstr "Ukladá sa"
+
+#~ msgid "Saving session details."
+#~ msgstr "Ukladá detaily sedenia."
+
+#~ msgid "State not reported within timeout."
+#~ msgstr "Stav nenahlásený v danom èasovom úseku."
+
+#~ msgid "Normal"
+#~ msgstr "Normálny"
+
+#~ msgid "Unaffected by logouts but can die."
+#~ msgstr "Neovplyvnený odhlásením a mô¾e skonèi»."
+
+#~ msgid "Respawn"
+#~ msgstr "Obnovujúci sa"
+
+#~ msgid "Never allowed to die."
+#~ msgstr "Nesmie skonèi»."
+
+#~ msgid "Trash"
+#~ msgstr "Odpad"
+
+#~ msgid "Discarded on logout and can die."
+#~ msgstr "Zahodený pri odhlásení a mô¾e skonèi»."
+
+#~ msgid "Always started on every login."
+#~ msgstr "V¾dy spustený pri ka¾dom prihlásení."
+
+#~ msgid "Remove Program"
+#~ msgstr "Odstráni» program"
+
+#~ msgid "Options"
+#~ msgstr "Mo¾nosti"
+
+#~ msgid "Show splash screen on login"
+#~ msgstr "Zobrazi» obrázok pri prihlásení"
+
+#~ msgid "Prompt on logout"
+#~ msgstr "Výzva pri odhlásení"
+
+#~ msgid "Automatically save changes to session"
+#~ msgstr "Automaticky uklada» zmeny sedenia"
+
+#~ msgid "Non-session-managed Startup Programs"
+#~ msgstr "Spú¹tacie programy nespravované sedením"
+
+#~ msgid "Priority"
+#~ msgstr "Priorita"
+
+#~ msgid "Browse Currently Running Programs..."
+#~ msgstr "Prechádza» aktuálne be¾iace programy..."
+
+#~ msgid "Only display warnings."
+#~ msgstr "Zobrazova» iba varovania."
+
+#~ msgid "Startup Command"
+#~ msgstr "©tartovací príkaz"
+
+#~ msgid ""
+#~ "Programs with smaller values are started before programs with higher values. "
+#~ "The default value should be OK"
+#~ msgstr ""
+#~ "Programy s men¹ími hodnotami sú spustené pred programami s väè¹ími "
+#~ "hodnotami. ©tandardná hodnota by mala by» OK."
+
+#~ msgid "The startup command cannot be empty"
+#~ msgstr "Spú¹»ací príkaz nesmie by» prázdny"
+
+#~ msgid "Add Startup Program"
+#~ msgstr "Prida» spú¹tací program"
+
+#~ msgid "Edit Startup Program"
+#~ msgstr "Upravi» spú¹»ací program"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center VERSION\n"
-"POT-Creation-Date: 2001-01-25 15:53+0100\n"
+"POT-Creation-Date: 2001-02-14 20:16-0500\n"
 "PO-Revision-Date: 2001-01-25 16:00+01:00\n"
 "Last-Translator: Emese Kovacs <emese@gnome.hu>\n"
 "Language-Team: Hungarian <hu@gnome.hu>\n"
@@ -112,7 +112,6 @@ msgstr "Csempézett"
 #: capplets/keyboard-properties/keyboard-properties.c:422
 #: capplets/mouse-properties/mouse-properties.c:112
 #: capplets/screensaver-properties/callbacks.c:802
-#: capplets/session-properties/session-properties.c:323
 #: capplets/sound-properties/sound-properties.c:693
 #: capplets/theme-switcher/gui.c:367
 #: capplets/ui-properties/ui-properties.c:516
@@ -132,7 +131,6 @@ msgstr ""
 #: capplets/mime-type/mime-type-capplet.c:81
 #: capplets/mouse-properties/mouse-properties.c:114
 #: capplets/screensaver-properties/callbacks.c:804
-#: capplets/session-properties/session-properties.c:325
 #: capplets/sound-properties/sound-properties.c:695
 #: capplets/sound-properties/sound-properties.c:756
 #: capplets/theme-switcher/gui.c:369
@@ -366,19 +364,16 @@ msgstr ""
 "meg arról, hogy telepítetted a Vezérlõpult dokumentációját."
 
 #: capplets/mime-type/mime-type-capplet.c:95
-#: capplets/session-properties/session-properties.c:215
 #: capplets/wm-properties/wm-properties-capplet.c:1098
 msgid "Delete"
 msgstr "Törlés"
 
 #: capplets/mime-type/mime-type-capplet.c:105
-#: capplets/session-properties/session-properties.c:205
 #: capplets/wm-properties/wm-properties-capplet.c:1088
 msgid "Add..."
 msgstr "Hozzáadás..."
 
 #: capplets/mime-type/mime-type-capplet.c:109
-#: capplets/session-properties/session-properties.c:210
 #: capplets/wm-properties/wm-properties-capplet.c:1093
 msgid "Edit..."
 msgstr "Szerkesztés..."
@@ -516,7 +511,6 @@ msgid "Author: UNKNOWN"
 msgstr "Szerzõ: Ismeretlen"
 
 #: capplets/screensaver-properties/screensaver-dialog.c:78
-#: capplets/session-properties/gsm-client-row.c:59
 msgid "Settings"
 msgstr "Beállítások"
 
@@ -633,227 +627,6 @@ msgid ""
 msgstr ""
 "a keyboard-properties-capplet futtatása közben hiba történt,\n"
 "kilépek....\n"
-
-#: capplets/session-properties/chooser.c:57
-msgid "Session"
-msgstr "Munkafolyamat"
-
-#. dialog
-#: capplets/session-properties/chooser.c:93
-msgid "Session Chooser"
-msgstr "Munkafolyamat-választó"
-
-#: capplets/session-properties/chooser.c:96
-msgid "Start Session"
-msgstr "Munkafolyamat indítása"
-
-#: capplets/session-properties/chooser.c:99
-msgid "Cancel Login"
-msgstr "Mégsem lépek be"
-
-#: capplets/session-properties/gsm-client-editor.c:100
-msgid "Order: "
-msgstr "Sorrend: "
-
-#: capplets/session-properties/gsm-client-editor.c:110
-msgid "Style: "
-msgstr "Stílus: "
-
-#: capplets/session-properties/gsm-client-list.c:30
-msgid "This button sets the start order of the selected programs.\n"
-msgstr "Ezek a gombok beállítják a kiválasztott programok sorrendjét.\n"
-
-#: capplets/session-properties/gsm-client-list.c:31
-msgid ""
-"This button sets the restart style of the selected programs:\n"
-"Normal programs are unaffected by logouts but can die;\n"
-"Respawn programs are never allowed to die;\n"
-"Trash programs are discarded on logout and can die;\n"
-"Settings programs are always started on every login."
-msgstr ""
-"Ez a gomb állítja be az újraindítás stílusát a kiválasztott programoknál:\n"
-"Normális programok: kilépés után visszatöltõdnek, kilövõdhetnek \n"
-"Respawn programok: nem lövõdhetnek ki \n"
-"Trash programok: kilépéskor elfelejtõdnek, kilövõdhetnek \n"
-"Settings programok: minden belépéskor elindulnak."
-
-#: capplets/session-properties/gsm-client-list.c:36
-msgid ""
-"This button produces a key to the program states below:\n"
-"Inactive programs are waiting to start or have finished;\n"
-"Starting programs are being given time to get running;\n"
-"Running programs are normal members of the session;\n"
-"Saving programs are saving their session details;\n"
-"Programs which make no contact have Unknown states.\n"
-msgstr ""
-"Ez a gomb a következõ programállapotok között vált:\n"
-"Nem aktív: indításra vár, vagy befejezõdött\n"
-"Induló: épp indul\n"
-"Futó: ez a normális állapot\n"
-"Mentõdõ: a program menti állapotát\n"
-"Ismeretlen: nincs kapcsolat a programmal\n"
-
-#: capplets/session-properties/gsm-client-list.c:42
-msgid "This column gives the command used to start a program."
-msgstr "Ez az oszlop a program indításához szükséges parancsot adja meg."
-
-#: capplets/session-properties/gsm-client-list.c:135
-msgid "Order"
-msgstr "Sorrend"
-
-#: capplets/session-properties/gsm-client-list.c:136
-msgid "Style"
-msgstr "Stílus"
-
-#: capplets/session-properties/gsm-client-list.c:137
-msgid "State"
-msgstr "Állapot"
-
-#: capplets/session-properties/gsm-client-list.c:138
-msgid "Program"
-msgstr "Program"
-
-#: capplets/session-properties/gsm-client-row.c:31
-msgid "Inactive"
-msgstr "Nem aktív"
-
-#: capplets/session-properties/gsm-client-row.c:32
-msgid "Waiting to start or already finished."
-msgstr "Indításra vár, vagy már végzett."
-
-#: capplets/session-properties/gsm-client-row.c:34
-msgid "Starting"
-msgstr "Indítás"
-
-#: capplets/session-properties/gsm-client-row.c:35
-msgid "Started but has not yet reported state."
-msgstr "El lett indítva, de állapotáról nem tudunk."
-
-#: capplets/session-properties/gsm-client-row.c:37
-msgid "Running"
-msgstr "Futó"
-
-#: capplets/session-properties/gsm-client-row.c:38
-msgid "A normal member of the session."
-msgstr "Munkafolyamat részét képezõ program."
-
-#: capplets/session-properties/gsm-client-row.c:40
-msgid "Saving"
-msgstr "Mentõdõ"
-
-#: capplets/session-properties/gsm-client-row.c:41
-msgid "Saving session details."
-msgstr "Mentõdik a folyamat állapota."
-
-#. This is about the only case where we'll put Unknown instead
-#. of simply not showing the info.
-#: capplets/session-properties/gsm-client-row.c:43 control-center/splash.c:178
-msgid "Unknown"
-msgstr "Ismeretlen"
-
-#: capplets/session-properties/gsm-client-row.c:44
-msgid "State not reported within timeout."
-msgstr "Az állapotát nem közli a program."
-
-#: capplets/session-properties/gsm-client-row.c:50
-msgid "Normal"
-msgstr "Normális"
-
-#: capplets/session-properties/gsm-client-row.c:51
-msgid "Unaffected by logouts but can die."
-msgstr "Belépéskor újratöltõdik, de megállhat."
-
-#: capplets/session-properties/gsm-client-row.c:53
-msgid "Respawn"
-msgstr "Újraindul"
-
-#: capplets/session-properties/gsm-client-row.c:54
-msgid "Never allowed to die."
-msgstr "Nem lövõdhet ki."
-
-#: capplets/session-properties/gsm-client-row.c:56
-msgid "Trash"
-msgstr "Kuka"
-
-#: capplets/session-properties/gsm-client-row.c:57
-msgid "Discarded on logout and can die."
-msgstr "Kilövõdhet, nem fog belépéskor elindulni."
-
-#: capplets/session-properties/gsm-client-row.c:60
-msgid "Always started on every login."
-msgstr "Minden belépéskor elindul."
-
-#: capplets/session-properties/gsm-protocol.c:500
-msgid "Remove Program"
-msgstr "Program törlése"
-
-#. frame for options
-#: capplets/session-properties/session-properties.c:148
-msgid "Options"
-msgstr "Beállítások"
-
-#: capplets/session-properties/session-properties.c:159
-msgid "Show splash screen on login"
-msgstr "Indítási üzenet belépéskor"
-
-#: capplets/session-properties/session-properties.c:166
-msgid "Prompt on logout"
-msgstr "Kilépésnél kérdezzen"
-
-#: capplets/session-properties/session-properties.c:173
-msgid "Automatically save changes to session"
-msgstr "Automatikusan mentsd a munkafolyamat beállításait"
-
-# capplets/session-properties/session-properties.c:178
-#. frame for manually started programs
-#: capplets/session-properties/session-properties.c:178
-msgid "Non-session-managed Startup Programs"
-msgstr "Munkafolyamat-vezérlésre képtelen elindítandó programok"
-
-# capplets/session-properties/session-properties.c:195
-# capplets/session-properties/startup-programs.c:305
-#: capplets/session-properties/session-properties.c:195
-#: capplets/session-properties/startup-programs.c:305
-msgid "Priority"
-msgstr "Prioritás"
-
-#: capplets/session-properties/session-properties.c:196
-#: capplets/url-properties/url-properties.c:76
-msgid "Command"
-msgstr "Parancs"
-
-#: capplets/session-properties/session-properties.c:225
-msgid "Browse Currently Running Programs..."
-msgstr "Az épp futó programok megtekintése..."
-
-#: capplets/session-properties/session-properties.c:417
-msgid "Only display warnings."
-msgstr "Csak figyelmeztetések megjelenítése."
-
-#: capplets/session-properties/startup-programs.c:289
-#: capplets/session-properties/startup-programs.c:296
-msgid "Startup Command"
-msgstr "Indítási parancs"
-
-#: capplets/session-properties/startup-programs.c:320
-msgid ""
-"Programs with smaller values are started before programs with higher values. "
-"The default value should be OK"
-msgstr ""
-"A kisebb értékekkel rendelkezõ programok indulnak hamarabb. Az alapértéknek "
-"OK-nak kell lennie"
-
-#: capplets/session-properties/startup-programs.c:339
-msgid "The startup command cannot be empty"
-msgstr "Nem lehet a parancs üres"
-
-#: capplets/session-properties/startup-programs.c:379
-msgid "Add Startup Program"
-msgstr "Induló program hozzáadása"
-
-#: capplets/session-properties/startup-programs.c:397
-msgid "Edit Startup Program"
-msgstr "Induló program szerkeszése"
 
 #: capplets/sound-properties/sound-properties.c:97
 msgid ""
@@ -1237,6 +1010,10 @@ msgstr "Hiba az 'url-properties' capplet indítása közben"
 msgid "Protocol"
 msgstr "Protokoll"
 
+#: capplets/url-properties/url-properties.c:76
+msgid "Command"
+msgstr "Parancs"
+
 #: capplets/url-properties/url-properties.c:92
 msgid "handler:"
 msgstr "kezelõ:"
@@ -1424,11 +1201,11 @@ msgstr ""
 "a wm-properties-capplet futtatása közben hiba történt,\n"
 "kilépek....\n"
 
-#: control-center/callbacks.c:101
+#: control-center/callbacks.c:102
 msgid "GNOME Control Center"
 msgstr "GNOME Vezérlõpult"
 
-#: control-center/callbacks.c:104
+#: control-center/callbacks.c:105
 msgid "Desktop Properties manager."
 msgstr "Munkaasztal tulajdonságkezelõje"
 
@@ -1564,3 +1341,170 @@ msgstr "Felhasználónév:"
 #: control-center/splash.c:52
 msgid "Host Name:"
 msgstr "Gépnév:"
+
+#. This is about the only case where we'll put Unknown instead
+#. of simply not showing the info.
+#: control-center/splash.c:178
+msgid "Unknown"
+msgstr "Ismeretlen"
+
+#~ msgid "Session"
+#~ msgstr "Munkafolyamat"
+
+#~ msgid "Session Chooser"
+#~ msgstr "Munkafolyamat-választó"
+
+#~ msgid "Start Session"
+#~ msgstr "Munkafolyamat indítása"
+
+#~ msgid "Cancel Login"
+#~ msgstr "Mégsem lépek be"
+
+#~ msgid "Order: "
+#~ msgstr "Sorrend: "
+
+#~ msgid "Style: "
+#~ msgstr "Stílus: "
+
+#~ msgid "This button sets the start order of the selected programs.\n"
+#~ msgstr "Ezek a gombok beállítják a kiválasztott programok sorrendjét.\n"
+
+#~ msgid ""
+#~ "This button sets the restart style of the selected programs:\n"
+#~ "Normal programs are unaffected by logouts but can die;\n"
+#~ "Respawn programs are never allowed to die;\n"
+#~ "Trash programs are discarded on logout and can die;\n"
+#~ "Settings programs are always started on every login."
+#~ msgstr ""
+#~ "Ez a gomb állítja be az újraindítás stílusát a kiválasztott programoknál:\n"
+#~ "Normális programok: kilépés után visszatöltõdnek, kilövõdhetnek \n"
+#~ "Respawn programok: nem lövõdhetnek ki \n"
+#~ "Trash programok: kilépéskor elfelejtõdnek, kilövõdhetnek \n"
+#~ "Settings programok: minden belépéskor elindulnak."
+
+#~ msgid ""
+#~ "This button produces a key to the program states below:\n"
+#~ "Inactive programs are waiting to start or have finished;\n"
+#~ "Starting programs are being given time to get running;\n"
+#~ "Running programs are normal members of the session;\n"
+#~ "Saving programs are saving their session details;\n"
+#~ "Programs which make no contact have Unknown states.\n"
+#~ msgstr ""
+#~ "Ez a gomb a következõ programállapotok között vált:\n"
+#~ "Nem aktív: indításra vár, vagy befejezõdött\n"
+#~ "Induló: épp indul\n"
+#~ "Futó: ez a normális állapot\n"
+#~ "Mentõdõ: a program menti állapotát\n"
+#~ "Ismeretlen: nincs kapcsolat a programmal\n"
+
+#~ msgid "This column gives the command used to start a program."
+#~ msgstr "Ez az oszlop a program indításához szükséges parancsot adja meg."
+
+#~ msgid "Order"
+#~ msgstr "Sorrend"
+
+#~ msgid "Style"
+#~ msgstr "Stílus"
+
+#~ msgid "State"
+#~ msgstr "Állapot"
+
+#~ msgid "Program"
+#~ msgstr "Program"
+
+#~ msgid "Inactive"
+#~ msgstr "Nem aktív"
+
+#~ msgid "Waiting to start or already finished."
+#~ msgstr "Indításra vár, vagy már végzett."
+
+#~ msgid "Starting"
+#~ msgstr "Indítás"
+
+#~ msgid "Started but has not yet reported state."
+#~ msgstr "El lett indítva, de állapotáról nem tudunk."
+
+#~ msgid "Running"
+#~ msgstr "Futó"
+
+#~ msgid "A normal member of the session."
+#~ msgstr "Munkafolyamat részét képezõ program."
+
+#~ msgid "Saving"
+#~ msgstr "Mentõdõ"
+
+#~ msgid "Saving session details."
+#~ msgstr "Mentõdik a folyamat állapota."
+
+#~ msgid "State not reported within timeout."
+#~ msgstr "Az állapotát nem közli a program."
+
+#~ msgid "Normal"
+#~ msgstr "Normális"
+
+#~ msgid "Unaffected by logouts but can die."
+#~ msgstr "Belépéskor újratöltõdik, de megállhat."
+
+#~ msgid "Respawn"
+#~ msgstr "Újraindul"
+
+#~ msgid "Never allowed to die."
+#~ msgstr "Nem lövõdhet ki."
+
+#~ msgid "Trash"
+#~ msgstr "Kuka"
+
+#~ msgid "Discarded on logout and can die."
+#~ msgstr "Kilövõdhet, nem fog belépéskor elindulni."
+
+#~ msgid "Always started on every login."
+#~ msgstr "Minden belépéskor elindul."
+
+#~ msgid "Remove Program"
+#~ msgstr "Program törlése"
+
+#~ msgid "Options"
+#~ msgstr "Beállítások"
+
+#~ msgid "Show splash screen on login"
+#~ msgstr "Indítási üzenet belépéskor"
+
+#~ msgid "Prompt on logout"
+#~ msgstr "Kilépésnél kérdezzen"
+
+#~ msgid "Automatically save changes to session"
+#~ msgstr "Automatikusan mentsd a munkafolyamat beállításait"
+
+# capplets/session-properties/session-properties.c:178
+#~ msgid "Non-session-managed Startup Programs"
+#~ msgstr "Munkafolyamat-vezérlésre képtelen elindítandó programok"
+
+# capplets/session-properties/session-properties.c:195
+# capplets/session-properties/startup-programs.c:305
+#~ msgid "Priority"
+#~ msgstr "Prioritás"
+
+#~ msgid "Browse Currently Running Programs..."
+#~ msgstr "Az épp futó programok megtekintése..."
+
+#~ msgid "Only display warnings."
+#~ msgstr "Csak figyelmeztetések megjelenítése."
+
+#~ msgid "Startup Command"
+#~ msgstr "Indítási parancs"
+
+#~ msgid ""
+#~ "Programs with smaller values are started before programs with higher values. "
+#~ "The default value should be OK"
+#~ msgstr ""
+#~ "A kisebb értékekkel rendelkezõ programok indulnak hamarabb. Az alapértéknek "
+#~ "OK-nak kell lennie"
+
+#~ msgid "The startup command cannot be empty"
+#~ msgstr "Nem lehet a parancs üres"
+
+#~ msgid "Add Startup Program"
+#~ msgstr "Induló program hozzáadása"
+
+#~ msgid "Edit Startup Program"
+#~ msgstr "Induló program szerkeszése"

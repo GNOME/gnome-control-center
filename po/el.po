@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.2.0\n"
-"POT-Creation-Date: 2001-02-05 00:30+0000\n"
+"POT-Creation-Date: 2001-02-14 20:16-0500\n"
 "PO-Revision-Date: 2001-02-05 00:43:13+0900\n"
 "Last-Translator: Simos Xenitellis <simos@hellug.gr>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
@@ -122,7 +122,6 @@ msgstr "Μωσαϊκό"
 #: capplets/keyboard-properties/keyboard-properties.c:422
 #: capplets/mouse-properties/mouse-properties.c:112
 #: capplets/screensaver-properties/callbacks.c:802
-#: capplets/session-properties/session-properties.c:323
 #: capplets/sound-properties/sound-properties.c:693
 #: capplets/theme-switcher/gui.c:367
 #: capplets/ui-properties/ui-properties.c:516
@@ -143,7 +142,6 @@ msgstr ""
 #: capplets/mime-type/mime-type-capplet.c:81
 #: capplets/mouse-properties/mouse-properties.c:114
 #: capplets/screensaver-properties/callbacks.c:804
-#: capplets/session-properties/session-properties.c:325
 #: capplets/sound-properties/sound-properties.c:695
 #: capplets/sound-properties/sound-properties.c:756
 #: capplets/theme-switcher/gui.c:369
@@ -374,24 +372,22 @@ msgid ""
 "No help is available/installed for these settings. Please make sure you\n"
 "have the Control Center documentation installed on your system."
 msgstr ""
-"Δεν υπάρχει βοήθεια εγκατεστημένη/διαθέσιμη για αυτές τις ρυθμίσεις. Παρακαλώ\n"
-"βεβαιωθείτε ότι ο Οδηγός Χρήσης του Κέντρου Ελέγχου είναι εγκατεστημένος στο σύστημα "
-"σας."
+"Δεν υπάρχει βοήθεια εγκατεστημένη/διαθέσιμη για αυτές τις ρυθμίσεις. "
+"Παρακαλώ\n"
+"βεβαιωθείτε ότι ο Οδηγός Χρήσης του Κέντρου Ελέγχου είναι εγκατεστημένος στο "
+"σύστημα σας."
 
 #: capplets/mime-type/mime-type-capplet.c:95
-#: capplets/session-properties/session-properties.c:215
 #: capplets/wm-properties/wm-properties-capplet.c:1098
 msgid "Delete"
 msgstr "Διαγραφή"
 
 #: capplets/mime-type/mime-type-capplet.c:105
-#: capplets/session-properties/session-properties.c:205
 #: capplets/wm-properties/wm-properties-capplet.c:1088
 msgid "Add..."
 msgstr "Νέος..."
 
 #: capplets/mime-type/mime-type-capplet.c:109
-#: capplets/session-properties/session-properties.c:210
 #: capplets/wm-properties/wm-properties-capplet.c:1093
 msgid "Edit..."
 msgstr "Διόρθωση..."
@@ -530,7 +526,6 @@ msgid "Author: UNKNOWN"
 msgstr "Συγγραφέας: ΑΓΝΩΣΤΟΣ"
 
 #: capplets/screensaver-properties/screensaver-dialog.c:78
-#: capplets/session-properties/gsm-client-row.c:59
 msgid "Settings"
 msgstr "Ρυθμίσεις"
 
@@ -647,228 +642,6 @@ msgid ""
 msgstr ""
 "σφάλμα αρχικοποίησης κατά την εκκίνηση του 'keyboard-properties-capplet'.\n"
 "τερματισμός...\n"
-
-#: capplets/session-properties/chooser.c:57
-msgid "Session"
-msgstr "Συνεδρία"
-
-#. dialog
-#: capplets/session-properties/chooser.c:93
-msgid "Session Chooser"
-msgstr "Επιλογέας συνεδρίας"
-
-#: capplets/session-properties/chooser.c:96
-msgid "Start Session"
-msgstr "Εκκίνηση συνεδρίας"
-
-#: capplets/session-properties/chooser.c:99
-msgid "Cancel Login"
-msgstr "Ακύρωση Έναρξης Συνεδρίας"
-
-#: capplets/session-properties/gsm-client-editor.c:100
-msgid "Order: "
-msgstr "Σειρά: "
-
-#: capplets/session-properties/gsm-client-editor.c:110
-msgid "Style: "
-msgstr "Είδος: "
-
-#: capplets/session-properties/gsm-client-list.c:30
-msgid "This button sets the start order of the selected programs.\n"
-msgstr ""
-"Το κουμπί αυτό καθορίζει τη σειρά εκκίνησης των επιλεγμένων προγραμμάτων.\n"
-
-# Needs some improvement...
-#: capplets/session-properties/gsm-client-list.c:31
-msgid ""
-"This button sets the restart style of the selected programs:\n"
-"Normal programs are unaffected by logouts but can die;\n"
-"Respawn programs are never allowed to die;\n"
-"Trash programs are discarded on logout and can die;\n"
-"Settings programs are always started on every login."
-msgstr ""
-"Το κουμπί αυτό καθορίζει τον είδος εππανεκίνησης των επιλεγμένων "
-"προγραμμάτων:\n"
-"Κανονικά προγράμματα παραμένουν κατά την έξοδο από το GNOME,\n"
-"Εππανεκινούμενα προγράμματα δεν επιτρέπεται να τερματίσουν ποτέ,\n"
-"Προγράμματα μίας χρήσης δεν παραμένουν μετά την έξοδο από το GNOME,\n"
-"Προγράμματα ρυθμίσεων εκκινούνται σε κάθε έναρξη του GNOME."
-
-#: capplets/session-properties/gsm-client-list.c:36
-msgid ""
-"This button produces a key to the program states below:\n"
-"Inactive programs are waiting to start or have finished;\n"
-"Starting programs are being given time to get running;\n"
-"Running programs are normal members of the session;\n"
-"Saving programs are saving their session details;\n"
-"Programs which make no contact have Unknown states.\n"
-msgstr ""
-"Το κουμπί αυτό δίνει πληροφορίες για την κατάσταση των προγραμμάτων:\n"
-"Ανενεργά προγράμματα αναμένουν εκκίνηση ή έχουν τερματιστεί,\n"
-"Εκκινούμενα προγράμματα βρίσκονται στο στάδιο έναρξης εκτέλεσης,\n"
-"Εκτελούμενα προγράμματα είναι κανονικά μέλη της συνεδρίας,\n"
-"Αποθηκευόμενα προγράμματα αποθηκεύουν τις πληροφορίες συνεδρίας,\n"
-"Προγράμματα που δεν απαντούν έχουν Άγνωστη κατάσταση.\n"
-
-#: capplets/session-properties/gsm-client-list.c:42
-msgid "This column gives the command used to start a program."
-msgstr "Στήλη ονόματος εντολής για την εκκίνηση του προγράμματος."
-
-#: capplets/session-properties/gsm-client-list.c:135
-msgid "Order"
-msgstr "Σειρά"
-
-#: capplets/session-properties/gsm-client-list.c:136
-msgid "Style"
-msgstr "Είδος"
-
-#: capplets/session-properties/gsm-client-list.c:137
-msgid "State"
-msgstr "Κατάσταση"
-
-#: capplets/session-properties/gsm-client-list.c:138
-msgid "Program"
-msgstr "Πρόγραμμα"
-
-#: capplets/session-properties/gsm-client-row.c:31
-msgid "Inactive"
-msgstr "Ανενεργό"
-
-#: capplets/session-properties/gsm-client-row.c:32
-msgid "Waiting to start or already finished."
-msgstr "Αναμονή εκκίνησης ή ήδη τερματισμένο."
-
-#: capplets/session-properties/gsm-client-row.c:34
-msgid "Starting"
-msgstr "Εκκινείται"
-
-#: capplets/session-properties/gsm-client-row.c:35
-msgid "Started but has not yet reported state."
-msgstr "Έχει εκκινηθεί αλλά δεν έχει αναφέρει κατάσταση ακόμα."
-
-#: capplets/session-properties/gsm-client-row.c:37
-msgid "Running"
-msgstr "Εκτελείται"
-
-#: capplets/session-properties/gsm-client-row.c:38
-msgid "A normal member of the session."
-msgstr "Κανονικό μέλος της συνεδρίας."
-
-#: capplets/session-properties/gsm-client-row.c:40
-msgid "Saving"
-msgstr "Αποθηκεύεται"
-
-#: capplets/session-properties/gsm-client-row.c:41
-msgid "Saving session details."
-msgstr "Αποθήκευση πληροφοριών συνεδρίας."
-
-#. This is about the only case where we'll put Unknown instead
-#. of simply not showing the info.
-#: capplets/session-properties/gsm-client-row.c:43 control-center/splash.c:178
-msgid "Unknown"
-msgstr "Άγνωστο"
-
-#: capplets/session-properties/gsm-client-row.c:44
-msgid "State not reported within timeout."
-msgstr "Καμία αναφορά κατάστασης εντός χρονικού περιθωρίου."
-
-#: capplets/session-properties/gsm-client-row.c:50
-msgid "Normal"
-msgstr "Κανονικό"
-
-#: capplets/session-properties/gsm-client-row.c:51
-msgid "Unaffected by logouts but can die."
-msgstr "Επανεκκινείται κατά την επόμενη έναρξη του GNOME."
-
-#: capplets/session-properties/gsm-client-row.c:53
-msgid "Respawn"
-msgstr "Επανεκκινούμενο"
-
-#: capplets/session-properties/gsm-client-row.c:54
-msgid "Never allowed to die."
-msgstr "Δεν επιτρέπεται να τερματίσει ποτέ."
-
-#: capplets/session-properties/gsm-client-row.c:56
-msgid "Trash"
-msgstr "Μίας χρήσης"
-
-#: capplets/session-properties/gsm-client-row.c:57
-msgid "Discarded on logout and can die."
-msgstr "Δεν παραμένει μετά την έξοδο από GNOME."
-
-#: capplets/session-properties/gsm-client-row.c:60
-msgid "Always started on every login."
-msgstr "Εκκινείται σε κάθε έναρξη του GNOME."
-
-#: capplets/session-properties/gsm-protocol.c:500
-msgid "Remove Program"
-msgstr "Αφαίρεση προγράμματος"
-
-#. frame for options
-#: capplets/session-properties/session-properties.c:148
-msgid "Options"
-msgstr "Επιλογές"
-
-#: capplets/session-properties/session-properties.c:159
-msgid "Show splash screen on login"
-msgstr "Εμφάνιση εικόνας παφλασμού κατά την έναρξη συνεδρίας"
-
-#: capplets/session-properties/session-properties.c:166
-msgid "Prompt on logout"
-msgstr "Ερώτηση κατά τον τερματισμό του GNOME"
-
-#: capplets/session-properties/session-properties.c:173
-msgid "Automatically save changes to session"
-msgstr "Αυτόματη αποθήκευση συνεδρίας κατά τον τερματισμό"
-
-# It is getting late and the translation sucks more and more...
-#. frame for manually started programs
-#: capplets/session-properties/session-properties.c:178
-msgid "Non-session-managed Startup Programs"
-msgstr "Προγράμματα εκτός διαχειριστή συνεδρίας"
-
-#: capplets/session-properties/session-properties.c:195
-#: capplets/session-properties/startup-programs.c:305
-msgid "Priority"
-msgstr "Προτεραιότητα"
-
-#: capplets/session-properties/session-properties.c:196
-#: capplets/url-properties/url-properties.c:76
-msgid "Command"
-msgstr "Εντολή"
-
-#: capplets/session-properties/session-properties.c:225
-msgid "Browse Currently Running Programs..."
-msgstr "Εμφάνιση Εκτελούμενων Προγραμμάτων..."
-
-#: capplets/session-properties/session-properties.c:417
-msgid "Only display warnings."
-msgstr "Μόνο εμφάνιση προειδοποιήσεων"
-
-#: capplets/session-properties/startup-programs.c:289
-#: capplets/session-properties/startup-programs.c:296
-msgid "Startup Command"
-msgstr "Εντολή εκκίνησης"
-
-#: capplets/session-properties/startup-programs.c:320
-msgid ""
-"Programs with smaller values are started before programs with higher values. "
-"The default value should be OK"
-msgstr ""
-"Τα προγράμματα με μικρότερες τιμές εκκινούνται πρίν απο αυτά με μεγαλύτερες "
-"τιμές.. Η εξ' ορισμού τιμή πρέπει να είναι εντάξει"
-
-#: capplets/session-properties/startup-programs.c:339
-msgid "The startup command cannot be empty"
-msgstr "Η εντολή εκκίνησης δε μπορεί να είναι άδεια"
-
-#: capplets/session-properties/startup-programs.c:379
-msgid "Add Startup Program"
-msgstr "Νέο Πρόγραμμα Εκκίνησης"
-
-#: capplets/session-properties/startup-programs.c:397
-msgid "Edit Startup Program"
-msgstr "Διόρθωση Προγράμματος Εκκίνησης"
 
 #: capplets/sound-properties/sound-properties.c:97
 msgid ""
@@ -1259,6 +1032,10 @@ msgstr "Σφάλμα αριχκοποίησης εφαρμογιδίου `url-properties'."
 msgid "Protocol"
 msgstr "Πρωτόκολο"
 
+#: capplets/url-properties/url-properties.c:76
+msgid "Command"
+msgstr "Εντολή"
+
 #: capplets/url-properties/url-properties.c:92
 msgid "handler:"
 msgstr "διαχειριστής:"
@@ -1446,11 +1223,11 @@ msgstr ""
 "σφάλμα αρχικοποίησης κατά την εκκίνηση του 'wm-properties-capplet'.\n"
 "τερματισμός...\n"
 
-#: control-center/callbacks.c:101
+#: control-center/callbacks.c:102
 msgid "GNOME Control Center"
 msgstr "Κέντρο Ελέγχου GNOME"
 
-#: control-center/callbacks.c:104
+#: control-center/callbacks.c:105
 msgid "Desktop Properties manager."
 msgstr "Ρυθμίσεις επιφάνειας εργασίας."
 
@@ -1583,6 +1360,174 @@ msgstr "Όνομα Χρήστη:"
 #: control-center/splash.c:52
 msgid "Host Name:"
 msgstr "Όνομα Συστήματος:"
+
+#. This is about the only case where we'll put Unknown instead
+#. of simply not showing the info.
+#: control-center/splash.c:178
+msgid "Unknown"
+msgstr "Άγνωστο"
+
+#~ msgid "Session"
+#~ msgstr "Συνεδρία"
+
+#~ msgid "Session Chooser"
+#~ msgstr "Επιλογέας συνεδρίας"
+
+#~ msgid "Start Session"
+#~ msgstr "Εκκίνηση συνεδρίας"
+
+#~ msgid "Cancel Login"
+#~ msgstr "Ακύρωση Έναρξης Συνεδρίας"
+
+#~ msgid "Order: "
+#~ msgstr "Σειρά: "
+
+#~ msgid "Style: "
+#~ msgstr "Είδος: "
+
+#~ msgid "This button sets the start order of the selected programs.\n"
+#~ msgstr ""
+#~ "Το κουμπί αυτό καθορίζει τη σειρά εκκίνησης των επιλεγμένων προγραμμάτων.\n"
+
+# Needs some improvement...
+#~ msgid ""
+#~ "This button sets the restart style of the selected programs:\n"
+#~ "Normal programs are unaffected by logouts but can die;\n"
+#~ "Respawn programs are never allowed to die;\n"
+#~ "Trash programs are discarded on logout and can die;\n"
+#~ "Settings programs are always started on every login."
+#~ msgstr ""
+#~ "Το κουμπί αυτό καθορίζει τον είδος εππανεκίνησης των επιλεγμένων "
+#~ "προγραμμάτων:\n"
+#~ "Κανονικά προγράμματα παραμένουν κατά την έξοδο από το GNOME,\n"
+#~ "Εππανεκινούμενα προγράμματα δεν επιτρέπεται να τερματίσουν ποτέ,\n"
+#~ "Προγράμματα μίας χρήσης δεν παραμένουν μετά την έξοδο από το GNOME,\n"
+#~ "Προγράμματα ρυθμίσεων εκκινούνται σε κάθε έναρξη του GNOME."
+
+#~ msgid ""
+#~ "This button produces a key to the program states below:\n"
+#~ "Inactive programs are waiting to start or have finished;\n"
+#~ "Starting programs are being given time to get running;\n"
+#~ "Running programs are normal members of the session;\n"
+#~ "Saving programs are saving their session details;\n"
+#~ "Programs which make no contact have Unknown states.\n"
+#~ msgstr ""
+#~ "Το κουμπί αυτό δίνει πληροφορίες για την κατάσταση των προγραμμάτων:\n"
+#~ "Ανενεργά προγράμματα αναμένουν εκκίνηση ή έχουν τερματιστεί,\n"
+#~ "Εκκινούμενα προγράμματα βρίσκονται στο στάδιο έναρξης εκτέλεσης,\n"
+#~ "Εκτελούμενα προγράμματα είναι κανονικά μέλη της συνεδρίας,\n"
+#~ "Αποθηκευόμενα προγράμματα αποθηκεύουν τις πληροφορίες συνεδρίας,\n"
+#~ "Προγράμματα που δεν απαντούν έχουν Άγνωστη κατάσταση.\n"
+
+#~ msgid "This column gives the command used to start a program."
+#~ msgstr "Στήλη ονόματος εντολής για την εκκίνηση του προγράμματος."
+
+#~ msgid "Order"
+#~ msgstr "Σειρά"
+
+#~ msgid "Style"
+#~ msgstr "Είδος"
+
+#~ msgid "State"
+#~ msgstr "Κατάσταση"
+
+#~ msgid "Program"
+#~ msgstr "Πρόγραμμα"
+
+#~ msgid "Inactive"
+#~ msgstr "Ανενεργό"
+
+#~ msgid "Waiting to start or already finished."
+#~ msgstr "Αναμονή εκκίνησης ή ήδη τερματισμένο."
+
+#~ msgid "Starting"
+#~ msgstr "Εκκινείται"
+
+#~ msgid "Started but has not yet reported state."
+#~ msgstr "Έχει εκκινηθεί αλλά δεν έχει αναφέρει κατάσταση ακόμα."
+
+#~ msgid "Running"
+#~ msgstr "Εκτελείται"
+
+#~ msgid "A normal member of the session."
+#~ msgstr "Κανονικό μέλος της συνεδρίας."
+
+#~ msgid "Saving"
+#~ msgstr "Αποθηκεύεται"
+
+#~ msgid "Saving session details."
+#~ msgstr "Αποθήκευση πληροφοριών συνεδρίας."
+
+#~ msgid "State not reported within timeout."
+#~ msgstr "Καμία αναφορά κατάστασης εντός χρονικού περιθωρίου."
+
+#~ msgid "Normal"
+#~ msgstr "Κανονικό"
+
+#~ msgid "Unaffected by logouts but can die."
+#~ msgstr "Επανεκκινείται κατά την επόμενη έναρξη του GNOME."
+
+#~ msgid "Respawn"
+#~ msgstr "Επανεκκινούμενο"
+
+#~ msgid "Never allowed to die."
+#~ msgstr "Δεν επιτρέπεται να τερματίσει ποτέ."
+
+#~ msgid "Trash"
+#~ msgstr "Μίας χρήσης"
+
+#~ msgid "Discarded on logout and can die."
+#~ msgstr "Δεν παραμένει μετά την έξοδο από GNOME."
+
+#~ msgid "Always started on every login."
+#~ msgstr "Εκκινείται σε κάθε έναρξη του GNOME."
+
+#~ msgid "Remove Program"
+#~ msgstr "Αφαίρεση προγράμματος"
+
+#~ msgid "Options"
+#~ msgstr "Επιλογές"
+
+#~ msgid "Show splash screen on login"
+#~ msgstr "Εμφάνιση εικόνας παφλασμού κατά την έναρξη συνεδρίας"
+
+#~ msgid "Prompt on logout"
+#~ msgstr "Ερώτηση κατά τον τερματισμό του GNOME"
+
+#~ msgid "Automatically save changes to session"
+#~ msgstr "Αυτόματη αποθήκευση συνεδρίας κατά τον τερματισμό"
+
+# It is getting late and the translation sucks more and more...
+#~ msgid "Non-session-managed Startup Programs"
+#~ msgstr "Προγράμματα εκτός διαχειριστή συνεδρίας"
+
+#~ msgid "Priority"
+#~ msgstr "Προτεραιότητα"
+
+#~ msgid "Browse Currently Running Programs..."
+#~ msgstr "Εμφάνιση Εκτελούμενων Προγραμμάτων..."
+
+#~ msgid "Only display warnings."
+#~ msgstr "Μόνο εμφάνιση προειδοποιήσεων"
+
+#~ msgid "Startup Command"
+#~ msgstr "Εντολή εκκίνησης"
+
+#~ msgid ""
+#~ "Programs with smaller values are started before programs with higher values. "
+#~ "The default value should be OK"
+#~ msgstr ""
+#~ "Τα προγράμματα με μικρότερες τιμές εκκινούνται πρίν απο αυτά με μεγαλύτερες "
+#~ "τιμές.. Η εξ' ορισμού τιμή πρέπει να είναι εντάξει"
+
+#~ msgid "The startup command cannot be empty"
+#~ msgstr "Η εντολή εκκίνησης δε μπορεί να είναι άδεια"
+
+#~ msgid "Add Startup Program"
+#~ msgstr "Νέο Πρόγραμμα Εκκίνησης"
+
+#~ msgid "Edit Startup Program"
+#~ msgstr "Διόρθωση Προγράμματος Εκκίνησης"
 
 #~ msgid ""
 #~ "No help is available/installed. Please make sure you\n"

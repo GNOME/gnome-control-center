@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.40\n"
-"POT-Creation-Date: 2000-12-18 04:40+0200\n"
+"POT-Creation-Date: 2001-02-14 20:16-0500\n"
 "PO-Revision-Date: 2000-12-18 04:56+02:00\n"
 "Last-Translator: Dan Damian <dand@dnttm.ro>\n"
 "Language-Team: Romanian <ro@li.org>\n"
@@ -113,7 +113,6 @@ msgstr "Repetatã"
 #: capplets/keyboard-properties/keyboard-properties.c:422
 #: capplets/mouse-properties/mouse-properties.c:112
 #: capplets/screensaver-properties/callbacks.c:802
-#: capplets/session-properties/session-properties.c:323
 #: capplets/sound-properties/sound-properties.c:693
 #: capplets/theme-switcher/gui.c:367
 #: capplets/ui-properties/ui-properties.c:516
@@ -134,7 +133,6 @@ msgstr ""
 #: capplets/mime-type/mime-type-capplet.c:81
 #: capplets/mouse-properties/mouse-properties.c:114
 #: capplets/screensaver-properties/callbacks.c:804
-#: capplets/session-properties/session-properties.c:325
 #: capplets/sound-properties/sound-properties.c:695
 #: capplets/sound-properties/sound-properties.c:756
 #: capplets/theme-switcher/gui.c:369
@@ -366,23 +364,21 @@ msgid ""
 "No help is available/installed for these settings. Please make sure you\n"
 "have the Control Center documentation installed on your system."
 msgstr ""
-"Nu existã ajutor disponibil/instalat pentru aceste setãri. Vã rog sã vã asiguraþi\n"
+"Nu existã ajutor disponibil/instalat pentru aceste setãri. Vã rog sã vã "
+"asiguraþi\n"
 "cã aþi instalat documentaþia Centrului de control pe sistemul dvs."
 
 #: capplets/mime-type/mime-type-capplet.c:95
-#: capplets/session-properties/session-properties.c:215
 #: capplets/wm-properties/wm-properties-capplet.c:1098
 msgid "Delete"
 msgstr "ªterge"
 
 #: capplets/mime-type/mime-type-capplet.c:105
-#: capplets/session-properties/session-properties.c:205
 #: capplets/wm-properties/wm-properties-capplet.c:1088
 msgid "Add..."
 msgstr "Adaugã..."
 
 #: capplets/mime-type/mime-type-capplet.c:109
-#: capplets/session-properties/session-properties.c:210
 #: capplets/wm-properties/wm-properties-capplet.c:1093
 msgid "Edit..."
 msgstr "Editeazã"
@@ -520,7 +516,6 @@ msgid "Author: UNKNOWN"
 msgstr "Autor: NECUNOSCUT"
 
 #: capplets/screensaver-properties/screensaver-dialog.c:78
-#: capplets/session-properties/gsm-client-row.c:59
 msgid "Settings"
 msgstr "Setãri"
 
@@ -638,224 +633,6 @@ msgstr ""
 "o eroare de iniþializare s-a produs la pornirea "
 "'keyboard-properties-capplet'.\n"
 "renunþ...\n"
-
-#: capplets/session-properties/chooser.c:57
-msgid "Session"
-msgstr "Sesiune"
-
-#. dialog
-#: capplets/session-properties/chooser.c:93
-msgid "Session Chooser"
-msgstr "Selector de sesiune"
-
-#: capplets/session-properties/chooser.c:96
-msgid "Start Session"
-msgstr "Porneºte sesiunea"
-
-#: capplets/session-properties/chooser.c:99
-msgid "Cancel Login"
-msgstr "Renunþã la login"
-
-#: capplets/session-properties/gsm-client-editor.c:100
-msgid "Order: "
-msgstr "Ordine: "
-
-#: capplets/session-properties/gsm-client-editor.c:110
-msgid "Style: "
-msgstr "Stil: "
-
-#: capplets/session-properties/gsm-client-list.c:30
-msgid "This button sets the start order of the selected programs.\n"
-msgstr "Acest buton seteazã ordinea de start a programelor selectate.\n"
-
-#: capplets/session-properties/gsm-client-list.c:31
-msgid ""
-"This button sets the restart style of the selected programs:\n"
-"Normal programs are unaffected by logouts but can die;\n"
-"Respawn programs are never allowed to die;\n"
-"Trash programs are discarded on logout and can die;\n"
-"Settings programs are always started on every login."
-msgstr ""
-"Acest buton seteazã ordinea de restartare a programelor selectate:\n"
-"Programele normale nu vor fi afectate de logout-uri, însã pot muri;\n"
-"Programele repornite nu li se permite sã moarã ;)\n"
-"Programele \"gunoi\" nu sunt loate în seamã la logout ºi pot sã moarã;\n"
-"Programele de setãri sunt întotdeauna pornite la fiecare login."
-
-#: capplets/session-properties/gsm-client-list.c:36
-msgid ""
-"This button produces a key to the program states below:\n"
-"Inactive programs are waiting to start or have finished;\n"
-"Starting programs are being given time to get running;\n"
-"Running programs are normal members of the session;\n"
-"Saving programs are saving their session details;\n"
-"Programs which make no contact have Unknown states.\n"
-msgstr ""
-"Acest buton produce o cheie stãrilor de program de mai jos:\n"
-"Programele inactive aºteaptã sã porneascã sau au terminat;\n"
-"Programele ce pornesc le este dat timp sã înceapã sã ruleze;\n"
-"Programele ce ruleaza sunt membri normali ai sesiunii;\n"
-"Programele ce salveazã vor stoca detaliile lor de sesiune;\n"
-"Programele care nu au nici un contact vor avea status necunoscut.\n"
-
-#: capplets/session-properties/gsm-client-list.c:42
-msgid "This column gives the command used to start a program."
-msgstr "Aceastã coloanã indicã comanda utilizatã pentru pornirea unui program."
-
-#: capplets/session-properties/gsm-client-list.c:135
-msgid "Order"
-msgstr "Ordine"
-
-#: capplets/session-properties/gsm-client-list.c:136
-msgid "Style"
-msgstr "Stil"
-
-#: capplets/session-properties/gsm-client-list.c:137
-msgid "State"
-msgstr "Status"
-
-#: capplets/session-properties/gsm-client-list.c:138
-msgid "Program"
-msgstr "Program"
-
-#: capplets/session-properties/gsm-client-row.c:31
-msgid "Inactive"
-msgstr "Inactiv"
-
-#: capplets/session-properties/gsm-client-row.c:32
-msgid "Waiting to start or already finished."
-msgstr "Aºteaptã sã porneascã sau deja s-a terminat."
-
-#: capplets/session-properties/gsm-client-row.c:34
-msgid "Starting"
-msgstr "Porneºte"
-
-#: capplets/session-properties/gsm-client-row.c:35
-msgid "Started but has not yet reported state."
-msgstr "Pornit, însã nu a raportat încã status-ul"
-
-#: capplets/session-properties/gsm-client-row.c:37
-msgid "Running"
-msgstr "Ruleazã"
-
-#: capplets/session-properties/gsm-client-row.c:38
-msgid "A normal member of the session."
-msgstr "Un membru normal al sesiunii"
-
-#: capplets/session-properties/gsm-client-row.c:40
-msgid "Saving"
-msgstr "Salvez"
-
-#: capplets/session-properties/gsm-client-row.c:41
-msgid "Saving session details."
-msgstr "Salvez detaliile de sesiune."
-
-#. This is about the only case where we'll put Unknown instead
-#. of simply not showing the info.
-#: capplets/session-properties/gsm-client-row.c:43 control-center/splash.c:178
-msgid "Unknown"
-msgstr "Necunoscut"
-
-#: capplets/session-properties/gsm-client-row.c:44
-msgid "State not reported within timeout."
-msgstr "Status "
-
-#: capplets/session-properties/gsm-client-row.c:50
-msgid "Normal"
-msgstr "Normal"
-
-#: capplets/session-properties/gsm-client-row.c:51
-msgid "Unaffected by logouts but can die."
-msgstr "Neafectat de logout-uri, însã poate muri."
-
-#: capplets/session-properties/gsm-client-row.c:53
-msgid "Respawn"
-msgstr "Restartat"
-
-#: capplets/session-properties/gsm-client-row.c:54
-msgid "Never allowed to die."
-msgstr "Nu i se permite sã moarã."
-
-#: capplets/session-properties/gsm-client-row.c:56
-msgid "Trash"
-msgstr "Gunoi"
-
-#: capplets/session-properties/gsm-client-row.c:57
-msgid "Discarded on logout and can die."
-msgstr "Neluat în seamã la logout ºi poate muri"
-
-#: capplets/session-properties/gsm-client-row.c:60
-msgid "Always started on every login."
-msgstr "Pornit în totdeauna la fiecare login."
-
-#: capplets/session-properties/gsm-protocol.c:500
-msgid "Remove Program"
-msgstr "Eliminã program"
-
-#. frame for options
-#: capplets/session-properties/session-properties.c:148
-msgid "Options"
-msgstr "Opþiuni"
-
-#: capplets/session-properties/session-properties.c:159
-msgid "Show splash screen on login"
-msgstr "Afiºeazã ecranul de pornire la început"
-
-#: capplets/session-properties/session-properties.c:166
-msgid "Prompt on logout"
-msgstr "Întreabã la logout"
-
-#: capplets/session-properties/session-properties.c:173
-msgid "Automatically save changes to session"
-msgstr "Salveazã automat schimbãrile sesiunii"
-
-#. frame for manually started programs
-#: capplets/session-properties/session-properties.c:178
-msgid "Non-session-managed Startup Programs"
-msgstr "Programe Startup, non-session-managed"
-
-#: capplets/session-properties/session-properties.c:195
-#: capplets/session-properties/startup-programs.c:305
-msgid "Priority"
-msgstr "Prioritate"
-
-#: capplets/session-properties/session-properties.c:196
-#: capplets/url-properties/url-properties.c:76
-msgid "Command"
-msgstr "Comandã "
-
-#: capplets/session-properties/session-properties.c:225
-msgid "Browse Currently Running Programs..."
-msgstr "Rãsfoieºte programele ce ruleazã în mod curent... "
-
-#: capplets/session-properties/session-properties.c:417
-msgid "Only display warnings."
-msgstr "Afiºeazã doar avertizãrile."
-
-#: capplets/session-properties/startup-programs.c:289
-#: capplets/session-properties/startup-programs.c:296
-msgid "Startup Command"
-msgstr "Comandã Startup"
-
-#: capplets/session-properties/startup-programs.c:320
-msgid ""
-"Programs with smaller values are started before programs with higher values. "
-"The default value should be OK"
-msgstr ""
-"Programele cu valori mai mici vor fi pornite înaintea programelor cu valori "
-"mai mari. Valoarea implicitã ar trebui sã fie OK"
-
-#: capplets/session-properties/startup-programs.c:339
-msgid "The startup command cannot be empty"
-msgstr "Comanda startup nu poate fi goalã"
-
-#: capplets/session-properties/startup-programs.c:379
-msgid "Add Startup Program"
-msgstr "Adaugã un program Startup"
-
-#: capplets/session-properties/startup-programs.c:397
-msgid "Edit Startup Program"
-msgstr "Editeazã programul Startup"
 
 #: capplets/sound-properties/sound-properties.c:97
 msgid ""
@@ -1242,6 +1019,10 @@ msgstr "Eroare la iniþializarea `url-properties' capplet."
 msgid "Protocol"
 msgstr "Protocol"
 
+#: capplets/url-properties/url-properties.c:76
+msgid "Command"
+msgstr "Comandã "
+
 #: capplets/url-properties/url-properties.c:92
 msgid "handler:"
 msgstr "handler:"
@@ -1353,7 +1134,8 @@ msgstr ""
 "sã fie salvatã, va trebui sã salvaþi sesiunea curentã.\n"
 "Puteþi face asta imediat prin selectarea \"Salveazã sesiunea curentã\"\n"
 "de mai jos, sau puteþi salva sesiunea mai târziu. Aceasta poate fi fãcutã\n"
-"fie prin selectarea \"Salveazã sesiunea curentã\" din \"Settings\" în meniul\n"
+"fie prin selectarea \"Salveazã sesiunea curentã\" din \"Settings\" în "
+"meniul\n"
 "principal, ori prin activarea \"Salveazã setãrile curente\" din dialogul\n"
 "de logout.\n"
 
@@ -1424,11 +1206,11 @@ msgstr ""
 "o eroare de iniþializare s-a produs la pornirea 'wm-properties-capplet'.\n"
 "renunþ...\n"
 
-#: control-center/callbacks.c:101
+#: control-center/callbacks.c:102
 msgid "GNOME Control Center"
 msgstr "Centrul de control GNOME"
 
-#: control-center/callbacks.c:104
+#: control-center/callbacks.c:105
 msgid "Desktop Properties manager."
 msgstr "Managerul de proprietãþi desktop"
 
@@ -1561,3 +1343,168 @@ msgstr "Nume utilizator:"
 #: control-center/splash.c:52
 msgid "Host Name:"
 msgstr "Nume host:"
+
+#. This is about the only case where we'll put Unknown instead
+#. of simply not showing the info.
+#: control-center/splash.c:178
+msgid "Unknown"
+msgstr "Necunoscut"
+
+#~ msgid "Session"
+#~ msgstr "Sesiune"
+
+#~ msgid "Session Chooser"
+#~ msgstr "Selector de sesiune"
+
+#~ msgid "Start Session"
+#~ msgstr "Porneºte sesiunea"
+
+#~ msgid "Cancel Login"
+#~ msgstr "Renunþã la login"
+
+#~ msgid "Order: "
+#~ msgstr "Ordine: "
+
+#~ msgid "Style: "
+#~ msgstr "Stil: "
+
+#~ msgid "This button sets the start order of the selected programs.\n"
+#~ msgstr "Acest buton seteazã ordinea de start a programelor selectate.\n"
+
+#~ msgid ""
+#~ "This button sets the restart style of the selected programs:\n"
+#~ "Normal programs are unaffected by logouts but can die;\n"
+#~ "Respawn programs are never allowed to die;\n"
+#~ "Trash programs are discarded on logout and can die;\n"
+#~ "Settings programs are always started on every login."
+#~ msgstr ""
+#~ "Acest buton seteazã ordinea de restartare a programelor selectate:\n"
+#~ "Programele normale nu vor fi afectate de logout-uri, însã pot muri;\n"
+#~ "Programele repornite nu li se permite sã moarã ;)\n"
+#~ "Programele \"gunoi\" nu sunt loate în seamã la logout ºi pot sã moarã;\n"
+#~ "Programele de setãri sunt întotdeauna pornite la fiecare login."
+
+#~ msgid ""
+#~ "This button produces a key to the program states below:\n"
+#~ "Inactive programs are waiting to start or have finished;\n"
+#~ "Starting programs are being given time to get running;\n"
+#~ "Running programs are normal members of the session;\n"
+#~ "Saving programs are saving their session details;\n"
+#~ "Programs which make no contact have Unknown states.\n"
+#~ msgstr ""
+#~ "Acest buton produce o cheie stãrilor de program de mai jos:\n"
+#~ "Programele inactive aºteaptã sã porneascã sau au terminat;\n"
+#~ "Programele ce pornesc le este dat timp sã înceapã sã ruleze;\n"
+#~ "Programele ce ruleaza sunt membri normali ai sesiunii;\n"
+#~ "Programele ce salveazã vor stoca detaliile lor de sesiune;\n"
+#~ "Programele care nu au nici un contact vor avea status necunoscut.\n"
+
+#~ msgid "This column gives the command used to start a program."
+#~ msgstr ""
+#~ "Aceastã coloanã indicã comanda utilizatã pentru pornirea unui program."
+
+#~ msgid "Order"
+#~ msgstr "Ordine"
+
+#~ msgid "Style"
+#~ msgstr "Stil"
+
+#~ msgid "State"
+#~ msgstr "Status"
+
+#~ msgid "Program"
+#~ msgstr "Program"
+
+#~ msgid "Inactive"
+#~ msgstr "Inactiv"
+
+#~ msgid "Waiting to start or already finished."
+#~ msgstr "Aºteaptã sã porneascã sau deja s-a terminat."
+
+#~ msgid "Starting"
+#~ msgstr "Porneºte"
+
+#~ msgid "Started but has not yet reported state."
+#~ msgstr "Pornit, însã nu a raportat încã status-ul"
+
+#~ msgid "Running"
+#~ msgstr "Ruleazã"
+
+#~ msgid "A normal member of the session."
+#~ msgstr "Un membru normal al sesiunii"
+
+#~ msgid "Saving"
+#~ msgstr "Salvez"
+
+#~ msgid "Saving session details."
+#~ msgstr "Salvez detaliile de sesiune."
+
+#~ msgid "State not reported within timeout."
+#~ msgstr "Status "
+
+#~ msgid "Normal"
+#~ msgstr "Normal"
+
+#~ msgid "Unaffected by logouts but can die."
+#~ msgstr "Neafectat de logout-uri, însã poate muri."
+
+#~ msgid "Respawn"
+#~ msgstr "Restartat"
+
+#~ msgid "Never allowed to die."
+#~ msgstr "Nu i se permite sã moarã."
+
+#~ msgid "Trash"
+#~ msgstr "Gunoi"
+
+#~ msgid "Discarded on logout and can die."
+#~ msgstr "Neluat în seamã la logout ºi poate muri"
+
+#~ msgid "Always started on every login."
+#~ msgstr "Pornit în totdeauna la fiecare login."
+
+#~ msgid "Remove Program"
+#~ msgstr "Eliminã program"
+
+#~ msgid "Options"
+#~ msgstr "Opþiuni"
+
+#~ msgid "Show splash screen on login"
+#~ msgstr "Afiºeazã ecranul de pornire la început"
+
+#~ msgid "Prompt on logout"
+#~ msgstr "Întreabã la logout"
+
+#~ msgid "Automatically save changes to session"
+#~ msgstr "Salveazã automat schimbãrile sesiunii"
+
+#~ msgid "Non-session-managed Startup Programs"
+#~ msgstr "Programe Startup, non-session-managed"
+
+#~ msgid "Priority"
+#~ msgstr "Prioritate"
+
+#~ msgid "Browse Currently Running Programs..."
+#~ msgstr "Rãsfoieºte programele ce ruleazã în mod curent... "
+
+#~ msgid "Only display warnings."
+#~ msgstr "Afiºeazã doar avertizãrile."
+
+#~ msgid "Startup Command"
+#~ msgstr "Comandã Startup"
+
+#~ msgid ""
+#~ "Programs with smaller values are started before programs with higher values. "
+#~ "The default value should be OK"
+#~ msgstr ""
+#~ "Programele cu valori mai mici vor fi pornite înaintea programelor cu valori "
+#~ "mai mari. Valoarea implicitã ar trebui sã fie OK"
+
+#~ msgid "The startup command cannot be empty"
+#~ msgstr "Comanda startup nu poate fi goalã"
+
+#~ msgid "Add Startup Program"
+#~ msgstr "Adaugã un program Startup"
+
+#~ msgid "Edit Startup Program"
+#~ msgstr "Editeazã programul Startup"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.2.3\n"
-"POT-Creation-Date: 2000-11-10 12:40+0100\n"
+"POT-Creation-Date: 2001-02-14 20:16-0500\n"
 "PO-Revision-Date: 2000-11-11 21:14+02:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -112,7 +112,6 @@ msgstr "Side-ved-side"
 #: capplets/keyboard-properties/keyboard-properties.c:422
 #: capplets/mouse-properties/mouse-properties.c:112
 #: capplets/screensaver-properties/callbacks.c:802
-#: capplets/session-properties/session-properties.c:323
 #: capplets/sound-properties/sound-properties.c:693
 #: capplets/theme-switcher/gui.c:367
 #: capplets/ui-properties/ui-properties.c:516
@@ -132,7 +131,6 @@ msgstr ""
 #: capplets/mime-type/mime-type-capplet.c:81
 #: capplets/mouse-properties/mouse-properties.c:114
 #: capplets/screensaver-properties/callbacks.c:804
-#: capplets/session-properties/session-properties.c:325
 #: capplets/sound-properties/sound-properties.c:695
 #: capplets/sound-properties/sound-properties.c:756
 #: capplets/theme-switcher/gui.c:369
@@ -366,19 +364,16 @@ msgstr ""
 "sjekk om dokumentasjonen til kontrollsenteret er installert på ditt system."
 
 #: capplets/mime-type/mime-type-capplet.c:95
-#: capplets/session-properties/session-properties.c:215
 #: capplets/wm-properties/wm-properties-capplet.c:1098
 msgid "Delete"
 msgstr "Slett"
 
 #: capplets/mime-type/mime-type-capplet.c:105
-#: capplets/session-properties/session-properties.c:205
 #: capplets/wm-properties/wm-properties-capplet.c:1088
 msgid "Add..."
 msgstr "Legg til..."
 
 #: capplets/mime-type/mime-type-capplet.c:109
-#: capplets/session-properties/session-properties.c:210
 #: capplets/wm-properties/wm-properties-capplet.c:1093
 msgid "Edit..."
 msgstr "Redigér..."
@@ -516,7 +511,6 @@ msgid "Author: UNKNOWN"
 msgstr "Forfatter: UKJENT"
 
 #: capplets/screensaver-properties/screensaver-dialog.c:78
-#: capplets/session-properties/gsm-client-row.c:59
 msgid "Settings"
 msgstr "Innstillinger"
 
@@ -633,224 +627,6 @@ msgid ""
 msgstr ""
 "en initieringsfeil oppstod under start av 'keyboard-properties-capplet'.\n"
 "avbryter...\n"
-
-#: capplets/session-properties/chooser.c:57
-msgid "Session"
-msgstr "Sesjon"
-
-#. dialog
-#: capplets/session-properties/chooser.c:93
-msgid "Session Chooser"
-msgstr "Sesjonsvelger"
-
-#: capplets/session-properties/chooser.c:96
-msgid "Start Session"
-msgstr "Start sesjon"
-
-#: capplets/session-properties/chooser.c:99
-msgid "Cancel Login"
-msgstr "Avbryt innlogging"
-
-#: capplets/session-properties/gsm-client-editor.c:100
-msgid "Order: "
-msgstr "Rekkefølge: "
-
-#: capplets/session-properties/gsm-client-editor.c:110
-msgid "Style: "
-msgstr "Stil: "
-
-#: capplets/session-properties/gsm-client-list.c:30
-msgid "This button sets the start order of the selected programs.\n"
-msgstr "Denne knappen setter startrekkefølgen for de valgte programmene.\n"
-
-#: capplets/session-properties/gsm-client-list.c:31
-msgid ""
-"This button sets the restart style of the selected programs:\n"
-"Normal programs are unaffected by logouts but can die;\n"
-"Respawn programs are never allowed to die;\n"
-"Trash programs are discarded on logout and can die;\n"
-"Settings programs are always started on every login."
-msgstr ""
-"Denne knappen setter stil for de valgte programmene ved omstart:\n"
-"Vanlig - programmer blir ikke påvirket ved utlogging, men kan dø;\n"
-"Gjenoppliv - programmer kan aldri få dø;\n"
-"Søppel - programmer forkastes ved utlogging og kan dø;\n"
-"Innstillinger - programmer startes alltid ved innlogging."
-
-#: capplets/session-properties/gsm-client-list.c:36
-msgid ""
-"This button produces a key to the program states below:\n"
-"Inactive programs are waiting to start or have finished;\n"
-"Starting programs are being given time to get running;\n"
-"Running programs are normal members of the session;\n"
-"Saving programs are saving their session details;\n"
-"Programs which make no contact have Unknown states.\n"
-msgstr ""
-"Denne knappen viser en nøkkel til programtilstanden under:\n"
-"Inaktive programmer venter på å starte eller er ferdig;\n"
-"Oppstartende programmer blir gitt tid til å komme igang;\n"
-"Kjørende programmer er vanlige medlemmer av sesjonen;\n"
-"Lagrende programmer lagrer sine sesjonsdetaljer;\n"
-"Programmer som ikke tar kontakt har Ukjent status.\n"
-
-#: capplets/session-properties/gsm-client-list.c:42
-msgid "This column gives the command used to start a program."
-msgstr "Denne kolonnen viser kommandoen som brukes til å starte et program."
-
-#: capplets/session-properties/gsm-client-list.c:135
-msgid "Order"
-msgstr "Rekkefølge"
-
-#: capplets/session-properties/gsm-client-list.c:136
-msgid "Style"
-msgstr "Type"
-
-#: capplets/session-properties/gsm-client-list.c:137
-msgid "State"
-msgstr "Tilstand"
-
-#: capplets/session-properties/gsm-client-list.c:138
-msgid "Program"
-msgstr "Program"
-
-#: capplets/session-properties/gsm-client-row.c:31
-msgid "Inactive"
-msgstr "Inaktiv"
-
-#: capplets/session-properties/gsm-client-row.c:32
-msgid "Waiting to start or already finished."
-msgstr "Venter på å starte eller er allerede ferdig."
-
-#: capplets/session-properties/gsm-client-row.c:34
-msgid "Starting"
-msgstr "Starter"
-
-#: capplets/session-properties/gsm-client-row.c:35
-msgid "Started but has not yet reported state."
-msgstr "Startet, men har ikke ennå rapportert status"
-
-#: capplets/session-properties/gsm-client-row.c:37
-msgid "Running"
-msgstr "Kjører"
-
-#: capplets/session-properties/gsm-client-row.c:38
-msgid "A normal member of the session."
-msgstr "Et vanlig medlem av sesjonen."
-
-#: capplets/session-properties/gsm-client-row.c:40
-msgid "Saving"
-msgstr "Lagrer"
-
-#: capplets/session-properties/gsm-client-row.c:41
-msgid "Saving session details."
-msgstr "Lagrer detaljer om sesjonen."
-
-#. This is about the only case where we'll put Unknown instead
-#. of simply not showing the info.
-#: capplets/session-properties/gsm-client-row.c:43 control-center/splash.c:178
-msgid "Unknown"
-msgstr "Ukjent"
-
-#: capplets/session-properties/gsm-client-row.c:44
-msgid "State not reported within timeout."
-msgstr "Tilstand ikke rapportert før tidsavbrudd."
-
-#: capplets/session-properties/gsm-client-row.c:50
-msgid "Normal"
-msgstr "Normal"
-
-#: capplets/session-properties/gsm-client-row.c:51
-msgid "Unaffected by logouts but can die."
-msgstr "Ikke påvirket av utlogging, men kan dø."
-
-#: capplets/session-properties/gsm-client-row.c:53
-msgid "Respawn"
-msgstr "Gjenoppliv"
-
-#: capplets/session-properties/gsm-client-row.c:54
-msgid "Never allowed to die."
-msgstr "Kan aldri dø."
-
-#: capplets/session-properties/gsm-client-row.c:56
-msgid "Trash"
-msgstr "Søppel"
-
-#: capplets/session-properties/gsm-client-row.c:57
-msgid "Discarded on logout and can die."
-msgstr "Forkastes ved utlogging og kan dø."
-
-#: capplets/session-properties/gsm-client-row.c:60
-msgid "Always started on every login."
-msgstr "Startes alltid ved hver innlogging."
-
-#: capplets/session-properties/gsm-protocol.c:500
-msgid "Remove Program"
-msgstr "Fjern program"
-
-#. frame for options
-#: capplets/session-properties/session-properties.c:148
-msgid "Options"
-msgstr "Alternativer"
-
-#: capplets/session-properties/session-properties.c:159
-msgid "Show splash screen on login"
-msgstr "Vis velkomstbilde ved innlogging"
-
-#: capplets/session-properties/session-properties.c:166
-msgid "Prompt on logout"
-msgstr "Spør ved utlogging"
-
-#: capplets/session-properties/session-properties.c:173
-msgid "Automatically save changes to session"
-msgstr "Lagre endringer i sesjonen automatisk"
-
-#. frame for manually started programs
-#: capplets/session-properties/session-properties.c:178
-msgid "Non-session-managed Startup Programs"
-msgstr "Ikke-sesjonshåndtert program i oppstart"
-
-#: capplets/session-properties/session-properties.c:195
-#: capplets/session-properties/startup-programs.c:305
-msgid "Priority"
-msgstr "Prioritet"
-
-#: capplets/session-properties/session-properties.c:196
-#: capplets/url-properties/url-properties.c:76
-msgid "Command"
-msgstr "Kommando"
-
-#: capplets/session-properties/session-properties.c:225
-msgid "Browse Currently Running Programs..."
-msgstr "Bla gjennom aktive programmer..."
-
-#: capplets/session-properties/session-properties.c:417
-msgid "Only display warnings."
-msgstr "Vis kun advarsler."
-
-#: capplets/session-properties/startup-programs.c:289
-#: capplets/session-properties/startup-programs.c:296
-msgid "Startup Command"
-msgstr "Oppstartskommando"
-
-#: capplets/session-properties/startup-programs.c:320
-msgid ""
-"Programs with smaller values are started before programs with higher values. "
-"The default value should be OK"
-msgstr ""
-"Programmer med mindre verdier startes før programmer med høyere verdier. "
-"Standardverdien skal være OK"
-
-#: capplets/session-properties/startup-programs.c:339
-msgid "The startup command cannot be empty"
-msgstr "Oppstartskommandoen kan ikke være tom"
-
-#: capplets/session-properties/startup-programs.c:379
-msgid "Add Startup Program"
-msgstr "Legg til program for oppstart"
-
-#: capplets/session-properties/startup-programs.c:397
-msgid "Edit Startup Program"
-msgstr "Redigér program i oppstart"
 
 #: capplets/sound-properties/sound-properties.c:97
 msgid ""
@@ -1235,6 +1011,10 @@ msgstr "Feil under initialisering av `url-properties' cappleten."
 msgid "Protocol"
 msgstr "Protokoll"
 
+#: capplets/url-properties/url-properties.c:76
+msgid "Command"
+msgstr "Kommando"
+
 #: capplets/url-properties/url-properties.c:92
 msgid "handler:"
 msgstr "håndterer:"
@@ -1415,11 +1195,11 @@ msgstr ""
 "en initieringsfeil oppstod under start av 'wm-properties-capplet'.\n"
 "avbryter...\n"
 
-#: control-center/callbacks.c:101
+#: control-center/callbacks.c:102
 msgid "GNOME Control Center"
 msgstr "GNOME Kontrollsenter"
 
-#: control-center/callbacks.c:104
+#: control-center/callbacks.c:105
 msgid "Desktop Properties manager."
 msgstr "Egenskaper for skrivebord."
 
@@ -1551,3 +1331,167 @@ msgstr "Brukernavn:"
 #: control-center/splash.c:52
 msgid "Host Name:"
 msgstr "Vertsnavn:"
+
+#. This is about the only case where we'll put Unknown instead
+#. of simply not showing the info.
+#: control-center/splash.c:178
+msgid "Unknown"
+msgstr "Ukjent"
+
+#~ msgid "Session"
+#~ msgstr "Sesjon"
+
+#~ msgid "Session Chooser"
+#~ msgstr "Sesjonsvelger"
+
+#~ msgid "Start Session"
+#~ msgstr "Start sesjon"
+
+#~ msgid "Cancel Login"
+#~ msgstr "Avbryt innlogging"
+
+#~ msgid "Order: "
+#~ msgstr "Rekkefølge: "
+
+#~ msgid "Style: "
+#~ msgstr "Stil: "
+
+#~ msgid "This button sets the start order of the selected programs.\n"
+#~ msgstr "Denne knappen setter startrekkefølgen for de valgte programmene.\n"
+
+#~ msgid ""
+#~ "This button sets the restart style of the selected programs:\n"
+#~ "Normal programs are unaffected by logouts but can die;\n"
+#~ "Respawn programs are never allowed to die;\n"
+#~ "Trash programs are discarded on logout and can die;\n"
+#~ "Settings programs are always started on every login."
+#~ msgstr ""
+#~ "Denne knappen setter stil for de valgte programmene ved omstart:\n"
+#~ "Vanlig - programmer blir ikke påvirket ved utlogging, men kan dø;\n"
+#~ "Gjenoppliv - programmer kan aldri få dø;\n"
+#~ "Søppel - programmer forkastes ved utlogging og kan dø;\n"
+#~ "Innstillinger - programmer startes alltid ved innlogging."
+
+#~ msgid ""
+#~ "This button produces a key to the program states below:\n"
+#~ "Inactive programs are waiting to start or have finished;\n"
+#~ "Starting programs are being given time to get running;\n"
+#~ "Running programs are normal members of the session;\n"
+#~ "Saving programs are saving their session details;\n"
+#~ "Programs which make no contact have Unknown states.\n"
+#~ msgstr ""
+#~ "Denne knappen viser en nøkkel til programtilstanden under:\n"
+#~ "Inaktive programmer venter på å starte eller er ferdig;\n"
+#~ "Oppstartende programmer blir gitt tid til å komme igang;\n"
+#~ "Kjørende programmer er vanlige medlemmer av sesjonen;\n"
+#~ "Lagrende programmer lagrer sine sesjonsdetaljer;\n"
+#~ "Programmer som ikke tar kontakt har Ukjent status.\n"
+
+#~ msgid "This column gives the command used to start a program."
+#~ msgstr "Denne kolonnen viser kommandoen som brukes til å starte et program."
+
+#~ msgid "Order"
+#~ msgstr "Rekkefølge"
+
+#~ msgid "Style"
+#~ msgstr "Type"
+
+#~ msgid "State"
+#~ msgstr "Tilstand"
+
+#~ msgid "Program"
+#~ msgstr "Program"
+
+#~ msgid "Inactive"
+#~ msgstr "Inaktiv"
+
+#~ msgid "Waiting to start or already finished."
+#~ msgstr "Venter på å starte eller er allerede ferdig."
+
+#~ msgid "Starting"
+#~ msgstr "Starter"
+
+#~ msgid "Started but has not yet reported state."
+#~ msgstr "Startet, men har ikke ennå rapportert status"
+
+#~ msgid "Running"
+#~ msgstr "Kjører"
+
+#~ msgid "A normal member of the session."
+#~ msgstr "Et vanlig medlem av sesjonen."
+
+#~ msgid "Saving"
+#~ msgstr "Lagrer"
+
+#~ msgid "Saving session details."
+#~ msgstr "Lagrer detaljer om sesjonen."
+
+#~ msgid "State not reported within timeout."
+#~ msgstr "Tilstand ikke rapportert før tidsavbrudd."
+
+#~ msgid "Normal"
+#~ msgstr "Normal"
+
+#~ msgid "Unaffected by logouts but can die."
+#~ msgstr "Ikke påvirket av utlogging, men kan dø."
+
+#~ msgid "Respawn"
+#~ msgstr "Gjenoppliv"
+
+#~ msgid "Never allowed to die."
+#~ msgstr "Kan aldri dø."
+
+#~ msgid "Trash"
+#~ msgstr "Søppel"
+
+#~ msgid "Discarded on logout and can die."
+#~ msgstr "Forkastes ved utlogging og kan dø."
+
+#~ msgid "Always started on every login."
+#~ msgstr "Startes alltid ved hver innlogging."
+
+#~ msgid "Remove Program"
+#~ msgstr "Fjern program"
+
+#~ msgid "Options"
+#~ msgstr "Alternativer"
+
+#~ msgid "Show splash screen on login"
+#~ msgstr "Vis velkomstbilde ved innlogging"
+
+#~ msgid "Prompt on logout"
+#~ msgstr "Spør ved utlogging"
+
+#~ msgid "Automatically save changes to session"
+#~ msgstr "Lagre endringer i sesjonen automatisk"
+
+#~ msgid "Non-session-managed Startup Programs"
+#~ msgstr "Ikke-sesjonshåndtert program i oppstart"
+
+#~ msgid "Priority"
+#~ msgstr "Prioritet"
+
+#~ msgid "Browse Currently Running Programs..."
+#~ msgstr "Bla gjennom aktive programmer..."
+
+#~ msgid "Only display warnings."
+#~ msgstr "Vis kun advarsler."
+
+#~ msgid "Startup Command"
+#~ msgstr "Oppstartskommando"
+
+#~ msgid ""
+#~ "Programs with smaller values are started before programs with higher values. "
+#~ "The default value should be OK"
+#~ msgstr ""
+#~ "Programmer med mindre verdier startes før programmer med høyere verdier. "
+#~ "Standardverdien skal være OK"
+
+#~ msgid "The startup command cannot be empty"
+#~ msgstr "Oppstartskommandoen kan ikke være tom"
+
+#~ msgid "Add Startup Program"
+#~ msgstr "Legg til program for oppstart"
+
+#~ msgid "Edit Startup Program"
+#~ msgstr "Redigér program i oppstart"
