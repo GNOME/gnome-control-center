@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gnome kontrolcenter 1.3.0\n"
 "POT-Creation-Date: 2000-10-08 17:01-0400\n"
-"PO-Revision-Date: 2000-12-25 13:19+01:00\n"
+"PO-Revision-Date: 2000-12-26 13:19+01:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: danish <sslug-locale@sslug.dk>\n"
 "MIME-Version: 1.0\n"
@@ -30,8 +30,7 @@ msgstr ""
 #: capplets/session-properties/session-properties.c:345
 #: capplets/theme-switcher/gui.c:368
 #: capplets/wm-properties/wm-properties-capplet.c:646
-#: new-control-center/capplet-dir-view.c:130
-#: new-control-center/capplet-dir-view.c:580
+#: new-control-center/capplet-dir-view.c:495
 msgid "Close"
 msgstr "Luk"
 
@@ -279,7 +278,12 @@ msgstr ""
 "Du kan her vælge 2 regulære udtryk som kan bruges til identificere\n"
 "mime-typen.  Disse felter er valgfri."
 
-#: capplets/new-background-properties/applier.c:486
+#: capplets/new-background-properties/applier.c:353
+#, c-format
+msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
+msgstr "Kunne ikke indlæse pixbuf '%s'; deaktiverer baggrundsbillede"
+
+#: capplets/new-background-properties/applier.c:493
 msgid "Disabled"
 msgstr "Deaktiveret"
 
@@ -292,82 +296,98 @@ msgstr "Deaktiveret"
 #: capplets/new-keyboard-properties/keyboard-properties.glade.h:7
 #: capplets/new-mouse-properties/mouse-properties.glade.h:7
 #: capplets/new-sound-properties/sound-properties.glade.h:7
-#: capplets/new-ui-properties/ui-properties.glade.h:7
 msgid "window1"
 msgstr "vindue1"
 
 #: capplets/new-background-properties/background-properties.glade.h:8
-msgid "Color"
-msgstr "Farve"
+msgid "Use GNOME for setting background"
+msgstr "Brug GNOME til at insdtille baggrunden"
 
 #: capplets/new-background-properties/background-properties.glade.h:9
+msgid "Colors"
+msgstr "Farver"
+
+#: capplets/new-background-properties/background-properties.glade.h:10
+#: capplets/new-background-properties/background-properties.glade.h:20
+msgid "Effect"
+msgstr "Effekt"
+
+#: capplets/new-background-properties/background-properties.glade.h:11
 msgid "Color 1"
 msgstr "Farve 1"
 
-#: capplets/new-background-properties/background-properties.glade.h:10
+#: capplets/new-background-properties/background-properties.glade.h:12
 msgid "Color 2"
 msgstr "Farve 2"
 
-#: capplets/new-background-properties/background-properties.glade.h:11
-#: capplets/new-background-properties/background-properties.glade.h:12
+#: capplets/new-background-properties/background-properties.glade.h:13
+#: capplets/new-background-properties/background-properties.glade.h:14
 msgid "Pick a color"
 msgstr "Vælg en farve"
 
-#: capplets/new-background-properties/background-properties.glade.h:13
-msgid "Solid"
-msgstr "Ensfarvet"
-
-#: capplets/new-background-properties/background-properties.glade.h:14
-msgid "Gradient"
-msgstr "Overgang"
-
 #: capplets/new-background-properties/background-properties.glade.h:15
-msgid "Vertical"
-msgstr "Lodret"
+msgid "Solid Color"
+msgstr "Fast farve"
 
 #: capplets/new-background-properties/background-properties.glade.h:16
-msgid "Horizontal"
-msgstr "Vandret"
+msgid "Vertical Gradient"
+msgstr "Lodret farveovergang"
 
 #: capplets/new-background-properties/background-properties.glade.h:17
+msgid "Horizontal Gradent"
+msgstr "Vandret farveovergang"
+
+#: capplets/new-background-properties/background-properties.glade.h:18
 msgid "Wallpaper"
 msgstr "Baggrundsbillede"
 
-#: capplets/new-background-properties/background-properties.glade.h:18
-msgid "Tiled"
-msgstr "Side-om-side"
-
 #: capplets/new-background-properties/background-properties.glade.h:19
+msgid "File"
+msgstr "Fil"
+
+#: capplets/new-background-properties/background-properties.glade.h:21
+msgid "Tiled"
+msgstr "Stablet"
+
+#: capplets/new-background-properties/background-properties.glade.h:22
 msgid "Centered"
 msgstr "Centreret"
 
-#: capplets/new-background-properties/background-properties.glade.h:20
-msgid "Scaled (keep aspect)"
-msgstr "Skaleret (behold højde-/breddeforhold)"
-
-#: capplets/new-background-properties/background-properties.glade.h:21
-msgid "Scaled"
-msgstr "Skaleret"
-
-#: capplets/new-background-properties/background-properties.glade.h:22
-msgid "Disable background selection"
-msgstr "Brug ikke baggrundsvælger"
-
 #: capplets/new-background-properties/background-properties.glade.h:23
-msgid "Apply changes automatically"
-msgstr "Anvend ændringer automatisk"
+msgid "Scaled (keep aspect ratio)"
+msgstr "Skaleret (bevar størrelsesforhold)"
 
 #: capplets/new-background-properties/background-properties.glade.h:24
+msgid "Stretched (change aspect ratio)"
+msgstr "Strukket (ændr størrelsesforhold)"
+
+#: capplets/new-background-properties/background-properties.glade.h:25
+msgid "Embossed"
+msgstr "Forhøjet"
+
+#: capplets/new-background-properties/background-properties.glade.h:26
+msgid "Browse..."
+msgstr "Gennemse... "
+
+#: capplets/new-background-properties/background-properties.glade.h:27
+msgid "(None)"
+msgstr "(Ingen)"
+
+#: capplets/new-background-properties/background-properties.glade.h:28
 msgid "Adjust wallpaper's opacity"
 msgstr "Justér tapets gennemsigtighed"
 
-#: capplets/new-background-properties/background-properties.glade.h:25
+#: capplets/new-background-properties/background-properties.glade.h:29
 msgid "More Transparent"
 msgstr "Mere gennemsigtig"
 
-#: capplets/new-background-properties/background-properties.glade.h:26
+#: capplets/new-background-properties/background-properties.glade.h:30
 msgid "More Solid"
 msgstr "Mere uigennemsigtig"
+
+#: capplets/new-background-properties/background-properties.glade.h:31
+msgid "Apply changes automatically"
+msgstr "Anvend ændringer automatisk"
 
 #.
 #. * Translatable strings file generated by Glade.
@@ -375,7 +395,6 @@ msgstr "Mere uigennemsigtig"
 #. * DO NOT compile it as part of your application.
 #.
 #: capplets/new-bell-properties/bell-properties.glade.h:7
-#: capplets/new-ui-properties/ui-properties.glade.h:22
 msgid "window2"
 msgstr "vindue2"
 
@@ -400,42 +419,64 @@ msgid "Test"
 msgstr "Test"
 
 #: capplets/new-keyboard-properties/keyboard-properties.glade.h:8
-msgid "Auto-repeat"
-msgstr "Auto-gentag"
+msgid "Enable Keyboard Repeat"
+msgstr "Brug tastatur-gentagelse"
 
 #: capplets/new-keyboard-properties/keyboard-properties.glade.h:9
-msgid "Enable auto-repeat"
-msgstr "Brug auto-gentagelse"
+msgid "Delay Until Repeat"
+msgstr "Forsink indtil gentagelse"
 
 #: capplets/new-keyboard-properties/keyboard-properties.glade.h:10
-msgid "Repeat rate"
-msgstr "Gentagelsesinterval"
+msgid "....a"
+msgstr "....a"
 
 #: capplets/new-keyboard-properties/keyboard-properties.glade.h:11
-msgid "Repeat delay"
-msgstr "Ventetid før gentagelse"
+msgid "...a"
+msgstr "...a"
 
 #: capplets/new-keyboard-properties/keyboard-properties.glade.h:12
+msgid "..a"
+msgstr "..a"
+
+#: capplets/new-keyboard-properties/keyboard-properties.glade.h:13
+msgid ".a"
+msgstr ".a"
+
+#: capplets/new-keyboard-properties/keyboard-properties.glade.h:14
+msgid "Key Repeat Rate"
+msgstr "Gentagelsesrate for taster"
+
+#: capplets/new-keyboard-properties/keyboard-properties.glade.h:15
+msgid "a....a"
+msgstr "a....a"
+
+#: capplets/new-keyboard-properties/keyboard-properties.glade.h:16
+msgid "a...a"
+msgstr "a..a"
+
+#: capplets/new-keyboard-properties/keyboard-properties.glade.h:17
+msgid "a..a"
+msgstr "a..a"
+
+#: capplets/new-keyboard-properties/keyboard-properties.glade.h:18
+msgid "a.a"
+msgstr "a.a"
+
+#: capplets/new-keyboard-properties/keyboard-properties.glade.h:19
+msgid "Enable Keyboard Click"
+msgstr "Aktivér tastatur-klik"
+
+#: capplets/new-keyboard-properties/keyboard-properties.glade.h:20
 msgid "Keyboard click"
 msgstr "Tastatur-klik"
 
-#: capplets/new-keyboard-properties/keyboard-properties.glade.h:13
-msgid "Click on keypress"
-msgstr "Klik ved tastetryk"
-
-#: capplets/new-keyboard-properties/keyboard-properties.glade.h:14
+#: capplets/new-keyboard-properties/keyboard-properties.glade.h:21
 msgid "Click volume"
 msgstr "Kliklydstyrke"
 
-#: capplets/new-keyboard-properties/keyboard-properties.glade.h:15
-#: capplets/new-screensaver-properties/prefs-widget.c:301
-#: capplets/theme-switcher/gui.c:230 capplets/theme-switcher/gui.c:302
-msgid "Preview"
-msgstr "Vis resultat"
-
-#: capplets/new-keyboard-properties/keyboard-properties.glade.h:16
-msgid "Test settings"
-msgstr "Testindstillinger"
+#: capplets/new-keyboard-properties/keyboard-properties.glade.h:22
+msgid "Type here to test setting"
+msgstr "Indtast her for at afprøve indstillinger"
 
 #: capplets/new-mouse-properties/mouse-properties.glade.h:8
 msgid "Mouse buttons"
@@ -550,6 +591,11 @@ msgstr "Vis næste"
 #: capplets/new-screensaver-properties/prefs-widget.c:295
 msgid "Demo Previous"
 msgstr "Vis forrige"
+
+#: capplets/new-screensaver-properties/prefs-widget.c:301
+#: capplets/theme-switcher/gui.c:230 capplets/theme-switcher/gui.c:302
+msgid "Preview"
+msgstr "Vis resultat"
 
 #: capplets/new-screensaver-properties/prefs-widget.c:318
 #: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:204
@@ -1738,163 +1784,198 @@ msgstr "Fil at afspilles"
 msgid "Sound Events"
 msgstr "Lydhændelser"
 
+#.
+#. * Translatable strings file generated by Glade.
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: capplets/new-ui-properties/ui-properties.glade.h:7
+msgid "window4"
+msgstr "vindue4"
+
 #: capplets/new-ui-properties/ui-properties.glade.h:8
-msgid "Menu Options"
-msgstr "Menuindstillinger"
+msgid "Menus"
+msgstr "Menuer"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:9
-msgid "Can detach and move menus"
-msgstr "Kan afrive og flytte menulinier"
+msgid "Menu bars are detachable"
+msgstr "Menulinjer kan løsrives"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:10
-msgid "Menus have relieved border"
-msgstr "Menulinier har afslebet kant"
+msgid "Menu bars have a border"
+msgstr "Menulinjer har en kant"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:11
-msgid "Submenus can be torn off"
-msgstr "Undermenuer kan rives af"
+msgid "Menus can be torn off"
+msgstr "Menuer kan rives af"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:12
 msgid "Menu items have icons"
 msgstr "Menupunkter har ikoner"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:13
-msgid "Statusbar Options"
-msgstr "Statuslinieindstillinger"
+msgid "Status Bar"
+msgstr "Statuslinje"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:14
-msgid "Statusbar is interactive when possible"
-msgstr "Statuslinien er interaktiv om muligt"
+msgid "Use status bar instead of dialog when possible"
+msgstr "Brug statuslinie i stedet for dialog hvis muligt"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:15
-msgid "Statusbar progress meter is on the right"
-msgstr "Statusliniefremgangsmåler er til højre"
+msgid "Status bar is interactive when possible"
+msgstr "Statuslinien er interaktiv om muligt"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:16
-msgid "Toolbar Options"
-msgstr "Værktøjslinieindstillinger"
+msgid "Progress bar is on the left"
+msgstr "Fremgangslinje er til højre"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:17
-msgid "Can detach and move toolbars"
-msgstr "Kan afrive og flytte værktøjslinier"
+msgid "Progress bar is on the right"
+msgstr "fremgangslinje er til højre"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:18
-msgid "Toolbars have relieved border"
-msgstr "Værktøjslinier har afslebet kant"
+msgid "Tool Bars"
+msgstr "Værktøjslinjer"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:19
-msgid "Toolbar buttons have relieved border"
-msgstr "Værktøjslinieknapper har afslebet kant"
+msgid "Tool bars have a border"
+msgstr "Værktøjslinier har en kant"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:20
-msgid "Toolbars have line separators"
-msgstr "Værktøjslinier har skillelinier"
+msgid "Tool bar buttons pop up on mouse over"
+msgstr "Værktøjslinieknapper kommer frem når musen er over"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:21
-msgid "Toolbars have text labels"
-msgstr "Værktøjslinier har tekstetiketter"
+msgid "Tool bars have line separators"
+msgstr "Værktøjslinier har skillelinier"
+
+#: capplets/new-ui-properties/ui-properties.glade.h:22
+msgid "Tool bars are detachable"
+msgstr "Værktøjslinier kan løsrives"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:23
-msgid "Dialog Layout"
-msgstr "Dialogudseende"
+msgid "Tool bar buttons are icons only"
+msgstr "Værktøjslinieknapper er kun ikoner"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:24
-msgid "Dialog Buttons:"
-msgstr "Dialogknapper:"
+msgid "Tool bar buttons are text below icons"
+msgstr "Værktøjslinierknapper har tekst under ikoner"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:25
-msgid ""
-"Default value\n"
-"Spread buttons out\n"
-"Put buttons on edges\n"
-"Left-justify buttons\n"
-"Right-justify buttons\n"
-msgstr ""
-"Standardværdi\n"
-"Spred knapper ud\n"
-"Placér knapper ved kanten\n"
-"Venstrejustér knapper\n"
-"Højrejustér knapper\n"
+msgid "Interface"
+msgstr "Brugerflade"
 
-#: capplets/new-ui-properties/ui-properties.glade.h:31
+#: capplets/new-ui-properties/ui-properties.glade.h:26
+msgid "Dialogs"
+msgstr "Dialoger"
+
+#: capplets/new-ui-properties/ui-properties.glade.h:27
 msgid "Dialog buttons have icons"
 msgstr "Dialogknapper har ikoner"
 
-#: capplets/new-ui-properties/ui-properties.glade.h:32
-msgid "Use statusbar instead of dialog when possible"
-msgstr "Brug statuslinie i stedet for dialog hvis muligt"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:33
-msgid "Dialog Behavior"
-msgstr "Dialogopførsel"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:34
-msgid "Dialog position:"
-msgstr "Dialogplacering:"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:35
-msgid "Dialog hints:"
-msgstr "Dialogtip:"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:36
-msgid ""
-"Let window manager decide\n"
-"Center of the screen\n"
-"At the mouse pointer\n"
-msgstr ""
-"Lad vindushåndtereren bestemme\n"
-"Midt på skærmen\n"
-"Ved musepegeren\n"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:40
-msgid ""
-"Dialogs are like other windows\n"
-"Dialogs are treated specially by the window manager\n"
-msgstr ""
-"Dialoger er som andre vinduer\n"
-"Dialoger behandles som specielle af vindusbehandleren\n"
-
-#: capplets/new-ui-properties/ui-properties.glade.h:43
+#: capplets/new-ui-properties/ui-properties.glade.h:28
 msgid "Place dialogs over application window when possible"
 msgstr "Placér dialogerne over applikationsvinduet om muligt"
 
+#: capplets/new-ui-properties/ui-properties.glade.h:29
+msgid "Dialogs open"
+msgstr "Dialoger åbnes"
+
+#: capplets/new-ui-properties/ui-properties.glade.h:30
+msgid "Wherever the Window Manager places them"
+msgstr "Hovor end vinduesbehandleren placerer dem"
+
+#: capplets/new-ui-properties/ui-properties.glade.h:31
+msgid "At the center of the screen"
+msgstr "I centrum af skærmen"
+
+#: capplets/new-ui-properties/ui-properties.glade.h:32
+msgid "At the mouse pointer"
+msgstr "Ved musepilen"
+
+#: capplets/new-ui-properties/ui-properties.glade.h:33
+msgid "Dialogs are treated"
+msgstr "Dialoger behandles"
+
+#: capplets/new-ui-properties/ui-properties.glade.h:34
+msgid "Like any other window"
+msgstr "Som andre vinduer"
+
+#: capplets/new-ui-properties/ui-properties.glade.h:35
+msgid "Specially by the window manager"
+msgstr "Specielt af vindueshåndteringen"
+
+#: capplets/new-ui-properties/ui-properties.glade.h:36
+msgid "Dialog Buttons"
+msgstr "Dialogknapper"
+
+#: capplets/new-ui-properties/ui-properties.glade.h:37
+msgid "Default  (Spread out - big)"
+msgstr "Standard (Spredt ud - stort)"
+
+#: capplets/new-ui-properties/ui-properties.glade.h:38
+msgid "Spread out"
+msgstr "Spredt ud"
+
+#: capplets/new-ui-properties/ui-properties.glade.h:39
+msgid "Spread out (big)"
+msgstr "Spredt ud (stort)"
+
+#: capplets/new-ui-properties/ui-properties.glade.h:40
+msgid "Left aligned"
+msgstr "Venstrejusteret"
+
+#: capplets/new-ui-properties/ui-properties.glade.h:41
+msgid "Right aligned"
+msgstr "Højrejusteret"
+
+#: capplets/new-ui-properties/ui-properties.glade.h:42
+msgid "Multiple Documents"
+msgstr "Flere dokumenter"
+
+#: capplets/new-ui-properties/ui-properties.glade.h:43
+msgid "Notebook tabs"
+msgstr "Faner for notesblok"
+
 #: capplets/new-ui-properties/ui-properties.glade.h:44
-msgid "window3"
-msgstr "vindue3"
+msgid "Seperate windows"
+msgstr "Separate vinduer"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:45
-msgid "GNOME MDI Options"
-msgstr "GNOME MDI-indstillinger"
+msgid "The same window"
+msgstr "Det samme vindue"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:46
-msgid "Default MDI Mode:"
-msgstr "Standard MDI-modus:"
+msgid "Left"
+msgstr "Venstre"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:47
-msgid "MDI notebook tab position:"
-msgstr "Arkfaneposition for MDI-notesblok:"
+msgid "Right"
+msgstr "Højre"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:48
-msgid ""
-"Notebook\n"
-"Toplevel\n"
-"Modal\n"
-msgstr ""
-"Notesblok\n"
-"Topniveau\n"
-"Modal\n"
+msgid "Top"
+msgstr "Øverst"
+
+#: capplets/new-ui-properties/ui-properties.glade.h:49
+msgid "Bottom"
+msgstr "Nederst"
+
+#: capplets/new-ui-properties/ui-properties.glade.h:50
+msgid "When opening Multiple documents, use"
+msgstr "Ved åbning af flere dokumenter, brug"
+
+#: capplets/new-ui-properties/ui-properties.glade.h:51
+msgid "When using Notebook tabs, place the tabs on the"
+msgstr "Ved brug af faneblade for nostesblok, placer fanerne på den"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:52
-msgid ""
-"Left\n"
-"Right\n"
-"Top\n"
-"Bottom\n"
-msgstr ""
-"Venstre\n"
-"Højre\n"
-"Top\n"
-"Bund\n"
+msgid "Miscellaneous"
+msgstr "Forskelligt"
+
+#: capplets/new-ui-properties/ui-properties.glade.h:53
+msgid "Settings will not take effect until applications restart"
+msgstr "Indstillinger vil ikke blive udført før anvendelserne genstarter"
 
 #: capplets/session-properties/chooser.c:61
 msgid "Session"
@@ -2435,104 +2516,15 @@ msgstr ""
 "En opstartsfejl opstod da 'wm-properties-capplet' startede.\n"
 "Afbryder...\n"
 
-#: libcapplet/capplet-widget.c:72
-msgid "id of the capplet -- assigned by the control-center"
-msgstr "kappletens id -- tildelt af kontrolcenteret"
+#: new-control-center/capplet-dir-view.c:289
+msgid "GNOME Control Center"
+msgstr "GNOME kontrolcenter"
 
-#: libcapplet/capplet-widget.c:72
-msgid "ID"
-msgstr "ID"
+#: new-control-center/capplet-dir-view.c:290
+msgid "Desktop properties manager."
+msgstr "Behandling af egenskaber for skrivebord."
 
-#: libcapplet/capplet-widget.c:74
-msgid "Multi-capplet id."
-msgstr "Multi-kapplet-id."
-
-#: libcapplet/capplet-widget.c:74
-msgid "CAPID"
-msgstr "CAPID"
-
-#: libcapplet/capplet-widget.c:76
-msgid "X ID of the socket it's plugged into"
-msgstr "X-id af sokkelen som den er tilsluttet"
-
-#: libcapplet/capplet-widget.c:76
-msgid "XID"
-msgstr "XID"
-
-#: libcapplet/capplet-widget.c:78
-msgid "IOR of the control-center"
-msgstr "Kontrolcenterets IOR"
-
-#: libcapplet/capplet-widget.c:78
-msgid "IOR"
-msgstr "IOR"
-
-#: libcapplet/capplet-widget.c:80
-msgid "Initialize session settings"
-msgstr "Start sessionsindstillinger"
-
-#: libcapplet/capplet-widget.c:82
-msgid "Ignore default action.  Used for custom init-session cases"
-msgstr ""
-"Ignorer standard handling. Bruges når du anvender din egen init-session"
-
-#: libcapplet/capplet-widget.c:85
-msgid "Get an XML description of the capplet's state"
-msgstr "Find en XML beskrivelse af cappletens status"
-
-#: libcapplet/capplet-widget.c:85
-msgid "DO_GET"
-msgstr "DO_GET"
-
-#: libcapplet/capplet-widget.c:87
-msgid "Read an XML description of the capplet's state and apply it"
-msgstr "Læs en XML beskrivelse af cappletens status og anvend den"
-
-#: libcapplet/capplet-widget.c:88
-msgid "DO_SET"
-msgstr "DO_SET"
-
-#: new-control-center/capplet-dir-view.c:107
-msgid "Help on control-center"
-msgstr "Hjælp til kontrolcentret"
-
-#: new-control-center/capplet-dir-view.c:108
-msgid "Help with the GNOME control-center."
-msgstr "GNOME kontrolcenterets hjælp."
-
-#: new-control-center/capplet-dir-view.c:111
-msgid "About"
-msgstr "Om..."
-
-#: new-control-center/capplet-dir-view.c:112
-msgid "About the GNOME control-center."
-msgstr "Om GNOME kontrolcentret."
-
-#: new-control-center/capplet-dir-view.c:124
-msgid "Up"
-msgstr "Op"
-
-#: new-control-center/capplet-dir-view.c:124
-msgid "Parent Group"
-msgstr "Forældergruppe"
-
-#: new-control-center/capplet-dir-view.c:126
-msgid "Preferences"
-msgstr "Brugervalg"
-
-#: new-control-center/capplet-dir-view.c:127
-msgid "Control Center Preferences"
-msgstr "Brugervalg for kontrolcenter"
-
-#: new-control-center/capplet-dir-view.c:130
-msgid "Close this Window"
-msgstr "Luk dette vindue"
-
-#: new-control-center/capplet-dir-view.c:166
-msgid "Control Center"
-msgstr "Kontrolcenter"
-
-#: new-control-center/capplet-dir-view.c:577
+#: new-control-center/capplet-dir-view.c:492
 msgid ""
 "No help is available/installed. Please make sure you\n"
 "have the GNOME User's Guide installed on your system."
@@ -2540,13 +2532,187 @@ msgstr ""
 "Ingen hjælp tilgængelig/installeret. Sørg venligst for\n"
 "at du har Gnome brugerguide installeret på dit system."
 
-#: new-control-center/capplet-dir-view.c:596
-msgid "GNOME Control Center"
-msgstr "GNOME kontrolcenter"
+#~ msgid "Color"
+#~ msgstr "Farve"
 
-#: new-control-center/capplet-dir-view.c:599
-msgid "Desktop Properties manager."
-msgstr "Egenskaber for skrivebord."
+#~ msgid "Solid"
+#~ msgstr "Ensfarvet"
+
+#~ msgid "Vertical"
+#~ msgstr "Lodret"
+
+#~ msgid "Scaled"
+#~ msgstr "Skaleret"
+
+#~ msgid "Disable background selection"
+#~ msgstr "Brug ikke baggrundsvælger"
+
+#~ msgid "Auto-repeat"
+#~ msgstr "Auto-gentag"
+
+#~ msgid "Repeat delay"
+#~ msgstr "Ventetid før gentagelse"
+
+#~ msgid "Click on keypress"
+#~ msgstr "Klik ved tastetryk"
+
+#~ msgid "Menu Options"
+#~ msgstr "Menuindstillinger"
+
+#~ msgid "Can detach and move menus"
+#~ msgstr "Kan afrive og flytte menulinier"
+
+#~ msgid "Statusbar Options"
+#~ msgstr "Statuslinieindstillinger"
+
+#~ msgid "Toolbar Options"
+#~ msgstr "Værktøjslinieindstillinger"
+
+#~ msgid "Can detach and move toolbars"
+#~ msgstr "Kan afrive og flytte værktøjslinier"
+
+#~ msgid "Dialog Layout"
+#~ msgstr "Dialogudseende"
+
+#~ msgid ""
+#~ "Default value\n"
+#~ "Spread buttons out\n"
+#~ "Put buttons on edges\n"
+#~ "Left-justify buttons\n"
+#~ "Right-justify buttons\n"
+#~ msgstr ""
+#~ "Standardværdi\n"
+#~ "Spred knapper ud\n"
+#~ "Placér knapper ved kanten\n"
+#~ "Venstrejustér knapper\n"
+#~ "Højrejustér knapper\n"
+
+#~ msgid "Dialog Behavior"
+#~ msgstr "Dialogopførsel"
+
+#~ msgid "Dialog position:"
+#~ msgstr "Dialogplacering:"
+
+#~ msgid ""
+#~ "Let window manager decide\n"
+#~ "Center of the screen\n"
+#~ "At the mouse pointer\n"
+#~ msgstr ""
+#~ "Lad vindushåndtereren bestemme\n"
+#~ "Midt på skærmen\n"
+#~ "Ved musepegeren\n"
+
+#~ msgid ""
+#~ "Dialogs are like other windows\n"
+#~ "Dialogs are treated specially by the window manager\n"
+#~ msgstr ""
+#~ "Dialoger er som andre vinduer\n"
+#~ "Dialoger behandles som specielle af vindusbehandleren\n"
+
+#~ msgid "window3"
+#~ msgstr "vindue3"
+
+#~ msgid "GNOME MDI Options"
+#~ msgstr "GNOME MDI-indstillinger"
+
+#~ msgid "Default MDI Mode:"
+#~ msgstr "Standard MDI-modus:"
+
+#~ msgid "MDI notebook tab position:"
+#~ msgstr "Arkfaneposition for MDI-notesblok:"
+
+#~ msgid ""
+#~ "Notebook\n"
+#~ "Toplevel\n"
+#~ "Modal\n"
+#~ msgstr ""
+#~ "Notesblok\n"
+#~ "Topniveau\n"
+#~ "Modal\n"
+
+#~ msgid ""
+#~ "Left\n"
+#~ "Right\n"
+#~ "Top\n"
+#~ "Bottom\n"
+#~ msgstr ""
+#~ "Venstre\n"
+#~ "Højre\n"
+#~ "Top\n"
+#~ "Bund\n"
+
+#~ msgid "id of the capplet -- assigned by the control-center"
+#~ msgstr "kappletens id -- tildelt af kontrolcenteret"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Multi-capplet id."
+#~ msgstr "Multi-kapplet-id."
+
+#~ msgid "CAPID"
+#~ msgstr "CAPID"
+
+#~ msgid "X ID of the socket it's plugged into"
+#~ msgstr "X-id af sokkelen som den er tilsluttet"
+
+#~ msgid "XID"
+#~ msgstr "XID"
+
+#~ msgid "IOR of the control-center"
+#~ msgstr "Kontrolcenterets IOR"
+
+#~ msgid "IOR"
+#~ msgstr "IOR"
+
+#~ msgid "Initialize session settings"
+#~ msgstr "Start sessionsindstillinger"
+
+#~ msgid "Ignore default action.  Used for custom init-session cases"
+#~ msgstr ""
+#~ "Ignorer standard handling. Bruges når du anvender din egen init-session"
+
+#~ msgid "Get an XML description of the capplet's state"
+#~ msgstr "Find en XML beskrivelse af cappletens status"
+
+#~ msgid "DO_GET"
+#~ msgstr "DO_GET"
+
+#~ msgid "Read an XML description of the capplet's state and apply it"
+#~ msgstr "Læs en XML beskrivelse af cappletens status og anvend den"
+
+#~ msgid "DO_SET"
+#~ msgstr "DO_SET"
+
+#~ msgid "Help on control-center"
+#~ msgstr "Hjælp til kontrolcentret"
+
+#~ msgid "Help with the GNOME control-center."
+#~ msgstr "GNOME kontrolcenterets hjælp."
+
+#~ msgid "About"
+#~ msgstr "Om..."
+
+#~ msgid "About the GNOME control-center."
+#~ msgstr "Om GNOME kontrolcentret."
+
+#~ msgid "Up"
+#~ msgstr "Op"
+
+#~ msgid "Parent Group"
+#~ msgstr "Forældergruppe"
+
+#~ msgid "Preferences"
+#~ msgstr "Brugervalg"
+
+#~ msgid "Control Center Preferences"
+#~ msgstr "Brugervalg for kontrolcenter"
+
+#~ msgid "Close this Window"
+#~ msgstr "Luk dette vindue"
+
+#~ msgid "Control Center"
+#~ msgstr "Kontrolcenter"
 
 #~ msgid "Set background image."
 #~ msgstr "Vælg baggrundsbillede"
@@ -2567,12 +2733,6 @@ msgstr "Egenskaber for skrivebord."
 
 #~ msgid "Can't find an hbox, using a normal file selection"
 #~ msgstr "Kan ikke finde en hbox, bruger normal filvælger"
-
-#~ msgid " Browse... "
-#~ msgstr " Gennemse... "
-
-#~ msgid "none"
-#~ msgstr "ingen"
 
 #~ msgid "Set parameters from saved state and exit"
 #~ msgstr "Brug parametre fra gemt status og afslut"
@@ -2597,9 +2757,6 @@ msgstr "Egenskaber for skrivebord."
 
 #~ msgid "Gradient orientation: vertical or horizontal"
 #~ msgstr "Overgangsorientering: lodret eller vandret"
-
-#~ msgid "Use a solid fill for the background"
-#~ msgstr "Udfyld hele baggrunden med én farve"
 
 #~ msgid "MODE"
 #~ msgstr "MODE"
@@ -2656,9 +2813,6 @@ msgstr "Egenskaber for skrivebord."
 #~ msgid "Default value"
 #~ msgstr "Standardværdi"
 
-#~ msgid "Spread buttons out"
-#~ msgstr "Bred knapperne ud"
-
 #~ msgid "Put buttons on edges"
 #~ msgstr "Placér knapper på kanterne"
 
@@ -2668,32 +2822,8 @@ msgstr "Egenskaber for skrivebord."
 #~ msgid "Right-justify buttons"
 #~ msgstr "Højrejustér knapper"
 
-#~ msgid "Let window manager decide"
-#~ msgstr "Lad vindueshåndteringen afgøre"
-
-#~ msgid "At the mouse pointer"
-#~ msgstr "Ved musepilen"
-
-#~ msgid "Dialogs are like other windows"
-#~ msgstr "Dialoger behandles som andre vinduer"
-
-#~ msgid "Notebook"
-#~ msgstr "Notesblok"
-
 #~ msgid "Toplevel"
 #~ msgstr "Topniveau"
 
 #~ msgid "Modal"
 #~ msgstr "Modal"
-
-#~ msgid "Left"
-#~ msgstr "Venstre"
-
-#~ msgid "Right"
-#~ msgstr "Højre"
-
-#~ msgid "Top"
-#~ msgstr "Øverst"
-
-#~ msgid "Bottom"
-#~ msgstr "Nederst"
