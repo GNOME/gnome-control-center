@@ -1,3 +1,10 @@
+2004-02-17  Jody Goldberg <jody@gnome.org>
+
+	http://bugzilla.gnome.org/show_bug.cgi?id=128164
+	* gnome-keybinding-properties.c (accel_edited_callback) : don't use
+	  get_real_model.  The selection is based on the sorted model.
+	(accel_cleared_callback) : ditto, and fix a leak while I'm in here.
+
 2004-02-13  Jody Goldberg <jody@gnome.org>
 
 	* Release 2.5.3

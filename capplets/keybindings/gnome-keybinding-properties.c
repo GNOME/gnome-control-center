@@ -697,19 +697,18 @@ accel_edited_callback (GtkCellRendererText   *cell,
   GError *err = NULL;
   char *str;
 
-  model = get_real_model (view);
+  model = gtk_tree_view_get_model (view);
   gtk_tree_model_get_iter (model, &iter, path);
+  gtk_tree_path_free (path);
   gtk_tree_model_get (model, &iter,
 		      KEYENTRY_COLUMN, &key_entry,
 		      -1);
 
   /* sanity check */
   if (key_entry == NULL)
-    {
-      gtk_tree_path_free (path);
-      return;
-    }
+    return;
 
+  model = get_real_model (view);
   tmp_key.model  = model;
   tmp_key.keyval = keyval;
   tmp_key.keycode = keycode;
@@ -745,7 +744,6 @@ accel_edited_callback (GtkCellRendererText   *cell,
       /* set it back to its previous value. */
       egg_cell_renderer_keys_set_accelerator (EGG_CELL_RENDERER_KEYS (cell),
 					      key_entry->keyval, key_entry->keycode, key_entry->mask);
-      gtk_tree_path_free (path);
       return;
     }
 
@@ -773,8 +771,6 @@ accel_edited_callback (GtkCellRendererText   *cell,
       g_error_free (err);
       key_entry->editable = FALSE;
     }
-  
-  gtk_tree_path_free (path);
 }
 
 static void
@@ -789,18 +785,16 @@ accel_cleared_callback (GtkCellRendererText *cell,
   GError *err = NULL;
   GtkTreeModel *model;
 
-  model = get_real_model (view);
+  model = gtk_tree_view_get_model (view);
   gtk_tree_model_get_iter (model, &iter, path);
+  gtk_tree_path_free (path);
   gtk_tree_model_get (model, &iter,
 		      KEYENTRY_COLUMN, &key_entry,
 		      -1);
 
   /* sanity check */
   if (key_entry == NULL)
-    {
-      gtk_tree_path_free (path);
-      return;
-    }
+    return;
 
   /* Unset the key */
   gconf_client_set_string (gconf_client_get_default(),
@@ -823,7 +817,6 @@ accel_cleared_callback (GtkCellRendererText *cell,
       g_error_free (err);
       key_entry->editable = FALSE;
     }
-  
 }
 
 static void
