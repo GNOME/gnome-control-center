@@ -20,7 +20,7 @@ theme_selector_capplet_SOURCES = \
 theme_selector_capplet_LDADD = ../../control-center/libcapplet.la \
 	$(GNOME_LIBDIR) $(ORB_LIBS) \
 	$(GNOMEUI_LIBS) $(INTLLIBS) \
-	-lImlib  $(GTKXMHTML_LIBS)
+	-lImlib  $(GTKXMHTML_LIBS) -lgnorba
 
 EXTRA_DIST = \
 	theme-selector.desktop
