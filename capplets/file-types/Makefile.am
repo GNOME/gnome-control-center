@@ -22,8 +22,8 @@ nautilus_mime_type_capplet_LDADD =\
 sysdir = $(datadir)/control-center
 sys_DATA = nautilus-mime-type.desktop 
 
-install-data-local:
-	$(INSTALL_DATA) -D -c $(srcdir)/nautilus-mime-type.desktop $(DESTDIR)$(datadir)/gnome/apps/Settings/nautilus-mime-type.desktop
+settingsdir = $(datadir)/gnome/apps/Settings
+settings_DATA = nautilus-mime-type.desktop
 
 EXTRA_DIST = \
 	$(sys_DATA)
