@@ -210,12 +210,14 @@ preferences_load (Preferences *prefs)
 		gnome_config_get_int ("/Background/Default/wallpaperAlign=0");
 
 	prefs->wallpaper_filename = 
-		gnome_config_get_string ("/Background/Default/wallpaper=(None)");
+		gnome_config_get_string
+		("/Background/Default/wallpaper=(None)");
 	prefs->wallpaper_sel_path = 
 		gnome_config_get_string 
 		("/Background/Default/wallpapers_dir=./");
 
-	prefs->auto_apply = gnome_config_get_bool ("/Background/Default/autoApply=true");
+	prefs->auto_apply =
+		gnome_config_get_bool ("/Background/Default/autoApply=true");
 
 	if (!g_strcasecmp (prefs->wallpaper_filename, "(None)")) {
 		g_free(prefs->wallpaper_filename);
@@ -226,21 +228,25 @@ preferences_load (Preferences *prefs)
 	}
 	
 	wps = gnome_config_get_int ("/Background/Default/wallpapers=0");
-	
+
 	for (i = 0; i < wps; i++) {
 		wp = g_strdup_printf ("/Background/Default/wallpaper%d", i+1);
 		wp1 = gnome_config_get_string (wp);
 		g_free (wp);
 
-		if (!wp1) continue;			
+		if (wp1 == NULL) continue;			
 
 		prefs->wallpapers = g_slist_prepend (prefs->wallpapers, wp1);
 	}
+
 	prefs->wallpapers = g_slist_reverse (prefs->wallpapers);
 
-	prefs->adjust_opacity = gnome_config_get_bool ("/Background/Default/adjustOpacity=true");
+	prefs->adjust_opacity =
+		gnome_config_get_bool
+		("/Background/Default/adjustOpacity=true");
 
-	prefs->opacity = gnome_config_get_int ("/Background/Default/opacity=255");
+	prefs->opacity =
+		gnome_config_get_int ("/Background/Default/opacity=255");
 }
 
 void 

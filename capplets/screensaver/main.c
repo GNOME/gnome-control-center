@@ -62,7 +62,7 @@ store_archive_data (void)
 	location = archive_get_current_location (archive);
 	xml_doc = preferences_write_xml (prefs);
 	location_store_xml (location, "screensaver-properties-capplet",
-			    xml_doc);
+			    xml_doc, STORE_MASK_PREVIOUS);
 	xmlFreeDoc (xml_doc);
 	archive_close (archive);
 }
