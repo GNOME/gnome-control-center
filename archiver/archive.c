@@ -33,6 +33,7 @@
 #include <errno.h>
 
 #include "archive.h"
+#include "util.h"
 
 typedef struct _GRealTree  GRealTree;
 typedef struct _GTreeNode  GTreeNode;
@@ -233,6 +234,8 @@ archive_destroy (GtkObject *object)
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (IS_ARCHIVE (object));
 
+	DEBUG_MSG ("Enter");
+
 	archive = ARCHIVE (object);
 
 	g_tree_traverse (archive->locations, 
@@ -246,6 +249,8 @@ archive_destroy (GtkObject *object)
 		g_free (archive->current_location_id);
 
 	GTK_OBJECT_CLASS (parent_class)->destroy (GTK_OBJECT (archive));
+
+	DEBUG_MSG ("Exit");
 }
 
 /**
@@ -341,8 +346,9 @@ archive_unregister_location (Archive *archive, Location *location)
 	g_return_if_fail (location != NULL);
 	g_return_if_fail (IS_LOCATION (location));
 
-	/* FIXME: We might be screwing things up here if we're traversing... */
-	g_tree_remove (archive->locations, location);
+	if (GTK_OBJECT_DESTROYED (archive)) return;
+
+	g_tree_remove (archive->locations, location_get_id (location));
 }
 
 /**
@@ -460,6 +466,7 @@ const gchar *
 archive_get_current_location_id (Archive *archive) 
 {
 	gboolean def;
+	Location *loc;
 
 	g_return_val_if_fail (archive != NULL, NULL);
 	g_return_val_if_fail (IS_ARCHIVE (archive), NULL);
@@ -477,8 +484,13 @@ archive_get_current_location_id (Archive *archive)
 		/* Create default location if it does not exist */
 		if (def && archive_get_location
 		    (archive, archive->current_location_id) == NULL)
-			location_new (archive, archive->current_location_id,
-				      NULL);
+		{
+			loc = LOCATION
+				(location_new (archive,
+					       archive->current_location_id,
+					       NULL));
+			location_store_full_snapshot (loc);
+		}
 	}
 
 	return archive->current_location_id;

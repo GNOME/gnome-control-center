@@ -135,4 +135,6 @@ const gchar *location_get_id       (Location *location);
 
 void location_set_id               (Location *location, const gchar *locid);
 
+void location_store_full_snapshot  (Location *location);
+
 #endif /* __LOCATION */

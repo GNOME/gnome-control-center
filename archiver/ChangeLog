@@ -1,3 +1,62 @@
+2001-04-24  Bradford Hovinen  <hovinen@ximian.com>
+
+	* location.c (location_store): Use read rather than fread
+
+2001-04-23  Bradford Hovinen  <hovinen@ximian.com>
+
+	* location.c (location_store): Block SIGPIPE
+	(location_store): Fix off-by-one bug
+
+	* archive.c (archive_get_current_location_id): Store a full
+	snapshot of the system after the default location is created
+
+	* location.c (run_backend_proc): Added parameter do_get to allow
+	control of whether pipe is opened to read or write
+	(store_snapshot_cb): Implement. Invokes the given backend with
+	--get and stores the XML data
+	(location_store_full_snapshot): Implement. Stores a complete
+	snapshot with all backend data
+	(subtract_xml_node): Assume all nodes are the same
+	(location_store): Add string termination character
+	(location_store): Only store data if any data were actually read
+
+2001-04-22  Bradford Hovinen  <hovinen@ximian.com>
+
+	* config-log.c (config_log_iterate): Use the correct data pointer
+	to pass to the callback
+
+	* location.c (location_new): Save the metadata for the newly
+	created location right away
+
+	* util.h: Defined DEBUG_MSG macro for debugging messages
+
+	* archive.c (archive_unregister_location): Don't remove the
+	location from the tree if the object is marked destroyed
+
+2001-04-21  Bradford Hovinen  <hovinen@ximian.com>
+
+	* archive.c (archive_destroy): Return if the archive was already
+	destroyed
+
+	* location.c (location_delete): Unregister the location before
+	destroying it
+
+	* config-log.c (config_log_delete): Set deleted flag
+	(config_log_destroy): Only dump the log if the log is not marked
+	deleted
+
+	* location.c (location_delete): Check return value of rmdir
+
+	* config-log.c (io_buffer_destroy): Call g_io_channel_close to
+	close the GIOChannel
+	(disconnect_socket): Force the removal of the source id from the
+	main loop
+	(config_log_destroy): Disconnect the socket after unloading, not
+	before
+
+	* location.c (location_delete): Remember to have a NULL at the end
+	of arguments to g_strconcat ()
+
 2001-04-20  Bradford Hovinen  <hovinen@ximian.com>
 
 	* config-log.c: Added InputBuffer, removed get_line

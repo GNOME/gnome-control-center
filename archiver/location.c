@@ -33,9 +33,11 @@
 #include <tree.h>
 #include <parser.h>
 #include <errno.h>
+#include <signal.h>
 
 #include "location.h"
 #include "archive.h"
+#include "util.h"
 
 static GtkObjectClass *parent_class;
 
@@ -85,6 +87,9 @@ static void location_get_arg       (GtkObject *object,
 static void location_destroy       (GtkObject *object);
 static void location_finalize      (GtkObject *object);
 
+static gint store_snapshot_cb      (Location *location,
+				    gchar *backend_id);
+
 static gint get_backends_cb        (BackendList *backend_list,
 				    gchar *backend_id,
 				    Location *location);
@@ -101,7 +106,8 @@ static void write_metadata_file    (Location *location,
 static gboolean do_rollback        (gchar *backend_id, 
 				    xmlDocPtr xml_doc);
 static xmlDocPtr load_xml_data     (gchar *fullpath, gint id);
-static gint run_backend_proc       (gchar *backend_id);
+static gint run_backend_proc       (gchar *backend_id,
+				    gboolean do_get);
 
 static BackendNote *backend_note_new (gchar *backend_id, 
 				      ContainmentType type);
@@ -290,6 +296,7 @@ location_new (Archive *archive, const gchar *locid, Location *inherits)
 	LOCATION (object)->p->is_new = TRUE;
 
 	archive_register_location (archive, LOCATION (object));
+	save_metadata (LOCATION (object));
 
 	return object;
 }
@@ -412,7 +419,7 @@ location_delete (Location *location)
 	g_return_if_fail (IS_LOCATION (location));
 
 	metadata_filename = g_strconcat (location->p->fullpath,
-					 "/location.xml");
+					 "/location.xml", NULL);
 	unlink (metadata_filename);
 	g_free (metadata_filename);
 
@@ -420,7 +427,10 @@ location_delete (Location *location)
 			    (ConfigLogIteratorCB) data_delete_cb, location);
 	config_log_delete (location->p->config_log);
 
-	rmdir (location->p->fullpath);
+	if (rmdir (location->p->fullpath) == -1)
+		g_warning ("%s: Could not remove directory: %s\n",
+			   __FUNCTION__, g_strerror (errno));
+
 	gtk_object_destroy (GTK_OBJECT (location));
 }
 
@@ -445,24 +455,33 @@ location_store (Location *location, gchar *backend_id, FILE *input,
 {
 	xmlDocPtr doc;
 	char *buffer = NULL;
-	int len = 0;
+	int len = 0, bytes_read = 0;
 
 	g_return_if_fail (location != NULL);
 	g_return_if_fail (IS_LOCATION (location));
 
-	while (!feof (input)) {
-		if (!len) buffer = g_new (char, 16384);
-		else buffer = g_renew (char, buffer, len + 16384);
-		fread (buffer + len, 1, 16384, input);
-		len += 16384;
+	fflush (input);
+
+	do {
+		DEBUG_MSG ("Iteration");
+		if (!len) buffer = g_new (char, 4097);
+		else buffer = g_renew (char, buffer, len + 4097);
+		bytes_read = read (fileno (input), buffer + len, 4096);
+		buffer[len + bytes_read] = '\0';
+		len += 4096;
+	} while (bytes_read == 4096);
+
+	if (len >= 4096 && len > 0) {
+		DEBUG_MSG ("Data found; parsing");
+		doc = xmlParseMemory (buffer, len - 4096 + bytes_read);
+		g_free (buffer);
+
+		location_store_xml (location, backend_id, doc, store_type);
+
+		xmlFreeDoc (doc);
+	} else {
+		g_critical ("No data to store");
 	}
-
-	doc = xmlParseMemory (buffer, strlen (buffer));
-	g_free (buffer);
-
-	location_store_xml (location, backend_id, doc, store_type);
-
-	xmlFreeDoc (doc);
 }
 
 /**
@@ -1077,6 +1096,41 @@ location_set_id (Location *location, const gchar *locid)
 	config_log_reset_filenames (location->p->config_log);
 }
 
+/**
+ * location_store_full_snapshot:
+ * @location:
+ *
+ * Gets XML snapshot data from all the backends contained in this location and
+ * archives those data
+ */
+
+void
+location_store_full_snapshot (Location *location)
+{
+	g_return_if_fail (location != NULL);
+	g_return_if_fail (IS_LOCATION (location));
+
+	location_foreach_backend (location,
+				  (LocationBackendCB) store_snapshot_cb,
+				  NULL);
+}
+
+static gint
+store_snapshot_cb (Location *location, gchar *backend_id) 
+{
+	int fd;
+	FILE *pipe;
+
+	DEBUG_MSG ("Storing %s", backend_id);
+
+	fd = run_backend_proc (backend_id, TRUE);
+	pipe = fdopen (fd, "r");
+	location_store (location, backend_id, pipe, STORE_MASK_PREVIOUS);
+	fclose (pipe);
+
+	return FALSE;
+}
+
 static gint
 get_backends_cb (BackendList *backend_list, gchar *backend_id,
 		 Location *location) 
@@ -1349,7 +1403,7 @@ do_rollback (gchar *backend_id, xmlDocPtr doc)
 	 */
 	if (doc == NULL) return FALSE;
 
-	fd = run_backend_proc (backend_id);
+	fd = run_backend_proc (backend_id, FALSE);
 	if (fd == -1) return FALSE;
 
 	output = fdopen (fd, "w");
@@ -1372,21 +1426,25 @@ load_xml_data (gchar *fullpath, gint id)
 	return xml_doc;
 }
 
-/* Run the given backend and return the file descriptor used to write
+/* Run the given backend and return the file descriptor used to read or write
  * XML to it
  */
 
 static gint
-run_backend_proc (gchar *backend_id) 
+run_backend_proc (gchar *backend_id, gboolean do_get) 
 {
 	char *args[3];
 	int fd[2];
 	pid_t pid;
+	int p_fd, c_fd;
 
 	if (pipe (fd) == -1)
 		return -1;
 
 	pid = fork ();
+
+	p_fd = do_get ? 0 : 1;
+	c_fd = do_get ? 1 : 0;
 
 	if (pid == (pid_t) -1) {
 		return -1;
@@ -1395,7 +1453,7 @@ run_backend_proc (gchar *backend_id)
 		int i;
 		gchar *path, *path1;
 
-		dup2 (fd[0], 0);
+		dup2 (fd[c_fd], c_fd);
 		for (i = 3; i < FOPEN_MAX; i++) close (i);
 
 		path = g_getenv ("PATH");
@@ -1408,11 +1466,12 @@ run_backend_proc (gchar *backend_id)
 		}
 
 		args[0] = gnome_is_program_in_path (backend_id);
-		args[1] = "--set";
+		args[1] = do_get ? "--get" : "--set";
 		args[2] = NULL;
 
 		if (!args[0]) {
 			g_warning ("Backend not in path: %s", backend_id);
+			close (c_fd);
 			exit (-1);
 		}
 			
@@ -1421,7 +1480,7 @@ run_backend_proc (gchar *backend_id)
 
 		return 0;
 	} else {
-		return fd[1];
+		return fd[p_fd];
 	}
 }
 
@@ -1573,7 +1632,7 @@ subtract_xml_node (xmlNodePtr node1, xmlNodePtr node2, gboolean strict)
 {
 	xmlNodePtr child, tmp, iref;
 	GList *node2_children = NULL, *i;
-	gboolean found, same, all_same;
+	gboolean found, same, all_same = TRUE;
 
 	if (node1->type == XML_TEXT_NODE) {
 		if (node2->type == XML_TEXT_NODE &&

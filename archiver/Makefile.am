@@ -13,6 +13,7 @@ INCLUDES = 			\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\
 	-I$(includedir) $(GNOME_INCLUDEDIR)		\
 	-DVERSION=\""$(VERSION)"\"			\
+	-DG_LOG_DOMAIN=\"libximian-archiver\"		\
 	-DCONFIGDIR=\""/etc"\"				\
 	-DLOCATION_DIR=\""$(datadir)/ximian-config/default"\"	\
 	-DGLADE_DIR=\""$(datadir)/ximian-config/glade"\"		\

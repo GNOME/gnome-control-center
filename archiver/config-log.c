@@ -83,6 +83,7 @@ struct _ConfigLogPrivate
 
 	IOBuffer    *file_buffer;
 	char        *filename;
+	gboolean     deleted;
 
 	GList       *log_data;
 	GList       *first_old;
@@ -287,8 +288,8 @@ config_log_destroy (GtkObject *object)
 
 	config_log = CONFIG_LOG (object);
 
+	do_unload (config_log, !config_log->p->deleted);
 	disconnect_socket (config_log);
-	do_unload (config_log, TRUE);
 
 	GTK_OBJECT_CLASS (parent_class)->destroy (GTK_OBJECT (config_log));
 }
@@ -351,6 +352,7 @@ config_log_delete (ConfigLog *config_log)
 	if (config_log->p->filename != NULL)
 		unlink (config_log->p->filename);
 
+	config_log->p->deleted = TRUE;
 	gtk_object_destroy (GTK_OBJECT (config_log));
 }
 
@@ -530,7 +532,7 @@ config_log_iterate (ConfigLog *config_log, ConfigLogIteratorCB callback,
 	while (node != NULL) {
 		entry = (ConfigLogEntry *) node->data;
 		if (callback (config_log, entry->id, entry->backend_id,
-			      entry->date, node->data)) break;
+			      entry->date, data)) break;
 
 		if (node->next == NULL) 
 			node = load_log_entry (config_log, FALSE,
@@ -957,8 +959,7 @@ write_log (IOBuffer *output, ConfigLogEntry *entry)
 			       entry->date->tm_mon + 1, entry->date->tm_mday, 
 			       entry->date->tm_hour, entry->date->tm_min, 
 			       entry->date->tm_sec, entry->backend_id);
-	g_log (G_LOG_DOMAIN, G_LOG_LEVEL_DEBUG,
-	       "%s (pid %d): Writing %s", __FUNCTION__, getpid (), str);
+	DEBUG_MSG ("Writing %s", str);
 	io_buffer_write (output, str);
 	g_free (str);
 }
@@ -970,6 +971,8 @@ dump_log (ConfigLog *config_log)
 	GList *first;
 	int out_fd;
 	IOBuffer *output;
+
+	DEBUG_MSG ("Enter");
 
 	g_return_if_fail (config_log != NULL);
 	g_return_if_fail (IS_CONFIG_LOG (config_log));
@@ -1005,6 +1008,8 @@ dump_log (ConfigLog *config_log)
 
 	if (config_log->p->filename)
 		rename (filename_out, config_log->p->filename);
+
+	DEBUG_MSG ("Exit");
 }
 
 static gboolean
@@ -1037,9 +1042,7 @@ connect_socket (ConfigLog *config_log)
 					(GIOFunc) socket_connect_cb,
 					config_log);
 	} else {
-		g_log (G_LOG_DOMAIN, G_LOG_LEVEL_DEBUG,
-		       "%s (pid %d): Adding watch to listen for data\n",
-		       __FUNCTION__, getpid ()); 
+		DEBUG_MSG ("Adding watch to listen for data"); 
 
 		config_log->p->input_id = 
 			g_io_add_watch (config_log->p->socket_buffer->channel,
@@ -1116,8 +1119,7 @@ bind_socket (ConfigLog *config_log, int fd, gboolean do_connect)
 	}
 
 	if (do_connect && !config_log->p->socket_owner) {
-		g_log (G_LOG_DOMAIN, G_LOG_LEVEL_DEBUG,
-		       "Trying to connect to socket (pid %d)", getpid ());
+		DEBUG_MSG ("Trying to connect to socket");
 
 		if (!connect (fd, (struct sockaddr *) &name, SUN_LEN (&name)))
 			return TRUE;
@@ -1154,6 +1156,8 @@ disconnect_socket (ConfigLog *config_log)
 		g_list_foreach (config_log->p->slaves,
 				(GFunc) slave_destroy, NULL);
 
+	g_source_remove (config_log->p->input_id);
+
 	if (config_log->p->socket_buffer != NULL)
 		io_buffer_destroy (config_log->p->socket_buffer);
 }
@@ -1166,8 +1170,7 @@ socket_connect_cb (GIOChannel *channel, GIOCondition condition,
 	struct sockaddr_un addr;
 	socklen_t len;
 
-	g_log (G_LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "Enter %s (pid %d)",
-	       __FUNCTION__, getpid ());
+	DEBUG_MSG ("Enter");
 
 	g_return_val_if_fail (config_log != NULL, FALSE);
 	g_return_val_if_fail (IS_CONFIG_LOG (config_log), FALSE);
@@ -1188,8 +1191,7 @@ socket_connect_cb (GIOChannel *channel, GIOCondition condition,
 					slave_new (config_log, fd));
 	}
 
-	g_log (G_LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "Exit %s (pid %d)",
-	       __FUNCTION__, getpid ());
+	DEBUG_MSG ("Exit");
 
 	return TRUE;
 }
@@ -1204,8 +1206,7 @@ socket_data_cb (GIOChannel *channel, GIOCondition condition,
 	g_return_val_if_fail (config_log != NULL, FALSE);
 	g_return_val_if_fail (IS_CONFIG_LOG (config_log), FALSE);
 
-	g_log (G_LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "Enter %s (pid %d)",
-	       __FUNCTION__, getpid ());
+	DEBUG_MSG ("Enter");
 
 	if (condition == G_IO_IN) {
 		load_log_entry (config_log, TRUE,
@@ -1217,8 +1218,7 @@ socket_data_cb (GIOChannel *channel, GIOCondition condition,
 		return FALSE;
 	}
 
-	g_log (G_LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "Exit %s (pid %d)",
-	       __FUNCTION__, getpid ());
+	DEBUG_MSG ("Exit");
 
 	return TRUE;
 }
@@ -1270,8 +1270,7 @@ static gboolean
 slave_data_cb (GIOChannel *channel, GIOCondition condition,
 	       Slave *slave)
 {
-	g_log (G_LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "Enter %s (pid %d)",
-	       __FUNCTION__, getpid ());
+	DEBUG_MSG ("Enter");
 
 	g_return_val_if_fail (slave != NULL, FALSE);
 	g_return_val_if_fail (slave->config_log != NULL, FALSE);
@@ -1287,7 +1286,7 @@ slave_data_cb (GIOChannel *channel, GIOCondition condition,
 			slave_broadcast_data (slave, slave->config_log);
 	}
 
-	g_log (G_LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "Exit %s", __FUNCTION__);
+	DEBUG_MSG ("Exit");
 
 	return TRUE;
 }
@@ -1348,11 +1347,8 @@ io_buffer_new (GIOChannel *channel, gboolean from_socket)
 static void
 io_buffer_destroy (IOBuffer *buffer)
 {
-	int fd;
-
-	fd = g_io_channel_unix_get_fd (buffer->channel);
+	g_io_channel_close (buffer->channel);
 	g_io_channel_unref (buffer->channel);
-	close (fd);
 	g_free (buffer);
 }
 
@@ -1426,9 +1422,8 @@ io_buffer_read_line (IOBuffer *buffer) {
 	start_ptr = buffer->read_ptr;
 	buffer->read_ptr = end_ptr + 1;
 
-	g_log (G_LOG_DOMAIN, G_LOG_LEVEL_DEBUG,
-	       "%s (pid %d): Line read was %s; from_socket = %d",
-	       __FUNCTION__, getpid (), start_ptr, buffer->from_socket);
+	DEBUG_MSG ("Line read was %s; from_socket = %d",
+		   start_ptr, buffer->from_socket);
 
 	return start_ptr;
 }
