@@ -42,4 +42,4 @@ if test -z "$gnome_autogen" ; then
   exit 1
 fi
 
-GNOME_DATADIR="$gnome_datadir" USE_GNOME2_MACROS=1 . $gnome_autogen
+REQUIRED_AUTOMAKE_VERSION=1.4 GNOME_DATADIR="$gnome_datadir" USE_GNOME2_MACROS=1 . $gnome_autogen
