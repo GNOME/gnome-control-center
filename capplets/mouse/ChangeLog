@@ -8,6 +8,9 @@
 	(drawing_area_button_press_event): Use response of
 	gconf_change_set_check_value to determine if value is in changeset
 	(main): Remove --apply and --init-session-settings
+	(setup_dialog): Use g_object_set to set the conversion callbacks
+	(*_{to|from}_gconf): Update to reflect changes in gconf peditors
+	(setup_dialog): Use numeric_range
 
 2001-12-18  Bradford Hovinen  <hovinen@ximian.com>
 

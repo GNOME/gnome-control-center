@@ -65,44 +65,68 @@ gint double_click_state = DOUBLE_CLICK_TEST_OFF;
 /* All of our scales but double_click are on the range 1->10 as a result, we
  * have a few routines to convert from whatever the gconf key is to our range.
  */
-static gfloat
-double_click_from_gconf (gfloat double_click)
+static GConfValue *
+double_click_from_gconf (const GConfValue *value)
 {
-	return CLAMP (floor ((double_click + 50) / 100) * 100, 0, 1000) / 1000.0;
+	GConfValue *new_value;
+
+	new_value = gconf_value_new (GCONF_VALUE_FLOAT);
+	gconf_value_set_float (new_value, CLAMP (floor ((gconf_value_get_int (value) + 50) / 100) * 100, 0, 1000) / 1000.0);
+	return new_value;
 }
 
-static gfloat
-double_click_to_gconf (gfloat double_click)
+static GConfValue *
+double_click_to_gconf (const GConfValue *value)
 {
-	return double_click * 1000.0;
+	GConfValue *new_value;
+
+	new_value = gconf_value_new (GCONF_VALUE_INT);
+	gconf_value_set_int (new_value, gconf_value_get_float (value) * 1000.0);
+	return new_value;
 }
 
-static gfloat
-motion_acceleration_from_gconf (gfloat motion_acceleration)
+static GConfValue *
+motion_acceleration_from_gconf (const GConfValue *value)
 {
-	motion_acceleration = CLAMP (motion_acceleration, 0.2, 6.0);
+	GConfValue *new_value;
+	gfloat motion_acceleration;
+
+	new_value = gconf_value_new (GCONF_VALUE_FLOAT);
+	motion_acceleration = CLAMP (gconf_value_get_float (value), 0.2, 6.0);
 
 	if (motion_acceleration >= 1)
-		return motion_acceleration + 4;
+		gconf_value_set_float (new_value, motion_acceleration + 4);
 	else
-		return motion_acceleration * 5;
+		gconf_value_set_float (new_value, motion_acceleration * 5);
+
+	return new_value;
 }
 
-static gfloat
-motion_acceleration_to_gconf (gfloat motion_acceleration)
+static GConfValue *
+motion_acceleration_to_gconf (const GConfValue *value)
 {
-	motion_acceleration = CLAMP (motion_acceleration, 1.0, 10.0);
+	GConfValue *new_value;
+	gfloat motion_acceleration;
+
+	new_value = gconf_value_new (GCONF_VALUE_FLOAT);
+	motion_acceleration = CLAMP (gconf_value_get_float (value), 1.0, 10.0);
 
 	if (motion_acceleration < 5)
-		return motion_acceleration / 5.0;
+		gconf_value_set_float (new_value, motion_acceleration / 5.0);
 	else
-		return motion_acceleration - 4;
+		gconf_value_set_float (new_value, motion_acceleration - 4);
+
+	return new_value;
 }
 
-static gfloat
-threshold_from_gconf (gfloat drag_threshold)
+static GConfValue *
+threshold_from_gconf (const GConfValue *value)
 {
-	return CLAMP (drag_threshold, 1, 10);
+	GConfValue *new_value;
+
+	new_value = gconf_value_new (GCONF_VALUE_FLOAT);
+	gconf_value_set_float (new_value, CLAMP (gconf_value_get_int (value), 1, 10));
+	return new_value;
 }
 
 /* Retrieve legacy settings */
@@ -301,18 +325,30 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 	/* Double-click time */
 	g_signal_connect (WID ("double_click_darea"), "expose_event", (GCallback) drawing_area_expose_event, changeset);
 
-	gconf_peditor_new_int_range
-		(changeset, DOUBLE_CLICK_KEY, WID ("delay_scale"),
-		 double_click_from_gconf, double_click_to_gconf);
-	gconf_peditor_new_float_range
-		(changeset, "/desktop/gnome/peripherals/mouse/motion_acceleration", WID ("accel_scale"),
-		 motion_acceleration_from_gconf, motion_acceleration_to_gconf);
-	gconf_peditor_new_float_range
+	peditor = gconf_peditor_new_numeric_range
+		(changeset, DOUBLE_CLICK_KEY, WID ("delay_scale"));
+	g_object_set (peditor,
+		      "conv-to-widget-cb", double_click_from_gconf,
+		      "conv-from-widget-cb", double_click_to_gconf,
+		      NULL);
+
+	peditor = gconf_peditor_new_numeric_range
+		(changeset, "/desktop/gnome/peripherals/mouse/motion_acceleration", WID ("accel_scale"));
+	g_object_set (peditor,
+		      "conv-to-widget-cb", motion_acceleration_from_gconf,
+		      "conv-from-widget-cb", motion_acceleration_to_gconf,
+		      NULL);
+
+	gconf_peditor_new_numeric_range
 		(changeset, "/desktop/gnome/peripherals/mouse/motion_threshold",
-		 WID ("sensitivity_scale"), NULL, NULL);
-	gconf_peditor_new_int_range
-		(changeset, "/desktop/gnome/peripherals/mouse/drag_threshold", WID ("drag_threshold_scale"),
-		 threshold_from_gconf, NULL);
+		 WID ("sensitivity_scale"));
+
+	peditor = gconf_peditor_new_numeric_range
+		(changeset, "/desktop/gnome/peripherals/mouse/drag_threshold", WID ("drag_threshold_scale"));
+	g_object_set (peditor,
+		      "conv-to-widget-cb", threshold_from_gconf,
+		      "conv-from-widget-cb", gconf_value_float_to_int,
+		      NULL);
 }
 
 /* Construct the dialog */
