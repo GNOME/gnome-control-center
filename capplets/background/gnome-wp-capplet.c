@@ -101,7 +101,7 @@ static void gnome_wp_add_image (GnomeWPCapplet * capplet,
 
   item = g_new0 (GnomeWPItem, 1);
   
-  item->filename = g_strdup (filename);
+  item->filename = gnome_vfs_unescape_string_for_display (filename);
 
   item->fileinfo = gnome_wp_info_new (item->filename, capplet->thumbs);
 
