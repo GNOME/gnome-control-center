@@ -121,21 +121,19 @@ double_click_from_gconf (GConfPropertyEditor *peditor, const GConfValue *value)
 {
 	GConfValue *new_value;
 
-	new_value = gconf_value_new (GCONF_VALUE_FLOAT);
-	gconf_value_set_float (new_value, CLAMP (floor ((gconf_value_get_int (value) + 50) / 100) * 100, 0, 1000) / 1000.0);
-	return new_value;
-}
-
-static GConfValue *
-double_click_to_gconf (GConfPropertyEditor *peditor, const GConfValue *value)
-{
-	GConfValue *new_value;
-
 	new_value = gconf_value_new (GCONF_VALUE_INT);
-	gconf_value_set_int (new_value, gconf_value_get_float (value) * 1000.0);
+	gconf_value_set_int (new_value, CLAMP ((int) floor ((gconf_value_get_int (value) + 50) / 100.0) * 100, 100, 1000));
 	return new_value;
 }
 
+static void
+delay_value_changed_cb (GtkWidget *range,
+			gpointer   dialog)
+{
+	gchar *message = g_strdup_printf ("%.1f %s", gtk_range_get_value (GTK_RANGE (WID ("delay_scale"))) / 1000.0, _("seconds"));
+	gtk_label_set_label (WID ("delay_label"), message);
+	g_free (message);
+}
 
 static void
 get_default_mouse_info (int *default_numerator, int *default_denominator, int *default_threshold)
@@ -564,6 +562,7 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 	gconf_value_free (value);
 
 	/* Double-click time */
+	gtk_widget_set_size_request (WID ("delay_scale"), 150, -1);
 	gtk_image_set_from_stock (GTK_IMAGE (WID ("double_click_image")), MOUSE_DBLCLCK_OFF, mouse_capplet_dblclck_icon_get_size ());
 	g_object_set_data (G_OBJECT (WID ("double_click_eventbox")), "image", WID ("double_click_image"));
 	g_signal_connect (WID ("double_click_eventbox"), "button_press_event",
@@ -696,12 +695,11 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 
         /* Motion page */
 	/* speed */
-	gconf_peditor_new_numeric_range
+	peditor = gconf_peditor_new_numeric_range
 		(changeset, DOUBLE_CLICK_KEY, WID ("delay_scale"),
 		 "conv-to-widget-cb", double_click_from_gconf,
-		 "conv-from-widget-cb", double_click_to_gconf,
 		 NULL);
-
+	g_signal_connect (G_OBJECT (WID ("delay_scale")), "value_changed", delay_value_changed_cb, dialog);
 	gconf_peditor_new_numeric_range
 		(changeset, "/desktop/gnome/peripherals/mouse/motion_acceleration", WID ("accel_scale"),
 		 "conv-to-widget-cb", motion_acceleration_from_gconf,
@@ -788,8 +786,8 @@ dialog_response_cb (GtkDialog *dialog, gint response_id, GConfChangeSet *changes
 {
 	if (response_id == GTK_RESPONSE_HELP)
 		capplet_help (GTK_WINDOW (dialog),
-			"wgoscustdesk.xml",
-			"goscustperiph-5");
+			      "wgoscustdesk.xml",
+			      "goscustperiph-5");
 	else
 		gtk_main_quit ();
 }

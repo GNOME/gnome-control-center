@@ -76,7 +76,7 @@ blink_from_widget (GConfPropertyEditor *peditor, const GConfValue *value)
 	GConfValue *new_value;
 
 	new_value = gconf_value_new (GCONF_VALUE_INT);
-	gconf_value_set_int (new_value, 2600 - (int) gconf_value_get_float (value));
+	gconf_value_set_int (new_value, 2600 - gconf_value_get_int (value));
 
 	return new_value;
 }
@@ -88,8 +88,8 @@ blink_to_widget (GConfPropertyEditor *peditor, const GConfValue *value)
 	gint current_rate;
 
 	current_rate = gconf_value_get_int (value);
-	new_value = gconf_value_new (GCONF_VALUE_FLOAT);
-	gconf_value_set_float (new_value, CLAMP (2600 - current_rate, 100, 2500));
+	new_value = gconf_value_new (GCONF_VALUE_INT);
+	gconf_value_set_int (new_value, CLAMP (2600 - current_rate, 100, 2500));
 
 	return new_value;
 }
@@ -138,14 +138,10 @@ setup_dialog (GladeXML       *dialog,
 
 	gconf_peditor_new_numeric_range
 		(changeset, "/desktop/gnome/peripherals/keyboard/delay", WID ("repeat_delay_scale"),
-		 "conv-to-widget-cb",   gconf_value_int_to_float,
-		 "conv-from-widget-cb", gconf_value_float_to_int,
 		 NULL);
 
 	gconf_peditor_new_numeric_range
 		(changeset, "/desktop/gnome/peripherals/keyboard/rate", WID ("repeat_speed_scale"),
-		 "conv-to-widget-cb",   gconf_value_int_to_float,
-		 "conv-from-widget-cb", gconf_value_float_to_int,
 		 NULL);
 
 	peditor = gconf_peditor_new_boolean

@@ -84,7 +84,7 @@ static struct {
 } const ranges [] = {
 	{ "repeatkeys_delay_slide",	"repeatkeys_delay_spin",     500, 100, 1500,   10,
 	  "/desktop/gnome/peripherals/keyboard/delay" },
-	{ "repeatkeys_rate_slide",	"repeatkeys_rate_spin",      90,   10,  210,   10,
+	{ "repeatkeys_rate_slide",	"repeatkeys_rate_spin",      90,   10,  110,   10,
 	  "/desktop/gnome/peripherals/keyboard/rate" },
 	{ "bouncekeys_delay_slide",	"bouncekeys_delay_spin",       0,   0,  900,   10,
 	  CONFIG_ROOT "/bouncekeys_delay" },
@@ -212,8 +212,6 @@ setup_ranges (GladeXML *dialog, GConfChangeSet *changeset)
 			ranges [i].step_size, 0);
 		peditor = gconf_peditor_new_numeric_range (changeset,
 			(gchar *)ranges [i].gconf_key, slide,
-			 "conv-to-widget-cb",   gconf_value_int_to_float,
-			 "conv-from-widget-cb", gconf_value_float_to_int,
 			 NULL);
 	}
 }

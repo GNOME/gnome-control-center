@@ -320,12 +320,12 @@
 					<widget class="GtkHScale" id="delay_scale">
 					  <property name="visible">True</property>
 					  <property name="can_focus">True</property>
-					  <property name="draw_value">True</property>
+					  <property name="draw_value">False</property>
 					  <property name="value_pos">GTK_POS_RIGHT</property>
 					  <property name="digits">1</property>
 					  <property name="update_policy">GTK_UPDATE_DISCONTINUOUS</property>
 					  <property name="inverted">False</property>
-					  <property name="adjustment">0.4 0.1 1 0.1 0.1 0</property>
+					  <property name="adjustment">400 100 1000 100 100 0</property>
 					</widget>
 					<packing>
 					  <property name="padding">0</property>
@@ -335,7 +335,7 @@
 				      </child>
 
 				      <child>
-					<widget class="GtkLabel" id="label14">
+					<widget class="GtkLabel" id="delay_label">
 					  <property name="visible">True</property>
 					  <property name="label" translatable="yes">seconds</property>
 					  <property name="use_underline">False</property>
