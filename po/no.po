@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.5.8\n"
-"POT-Creation-Date: 2001-12-14 21:42+0100\n"
+"POT-Creation-Date: 2001-12-20 10:42-0500\n"
 "PO-Revision-Date: 2001-12-14 21:43+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -187,153 +187,170 @@ msgstr "Bakgrunn"
 msgid "Configuration of the desktop's background"
 msgstr "Konfigurasjon av skrivebordsbakgrunn"
 
-#: capplets/background/background-properties-capplet.c:274
-#: capplets/background/background-properties-capplet.c:276
-#: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
-msgid "Just apply settings and quit"
-msgstr "Bare aktiver innstillingene og avslutt"
-
-#: capplets/background/background-properties-capplet.c:278
-#: capplets/common/capplet-util.c:243
+#: capplets/background/background-properties-capplet.c:288
+#: capplets/common/capplet-util.c:249
 msgid "Retrieve and store legacy settings"
 msgstr "Hent og lagre gamle innstillinger"
 
-#: capplets/background/background-properties-capplet.c:302
+#: capplets/background/background-properties-capplet.c:313
 msgid "Background properties"
 msgstr "Egenskaper for bakgrunn"
 
-#: capplets/common/gconf-property-editor.c:123
+#: capplets/common/capplet-util.c:245 capplets/common/capplet-util.c:247
+msgid "Just apply settings and quit"
+msgstr "Bare aktiver innstillingene og avslutt"
+
+#: capplets/common/gconf-property-editor.c:140
 msgid "Key"
 msgstr "Nøkkel"
 
-#: capplets/common/gconf-property-editor.c:124
+#: capplets/common/gconf-property-editor.c:141
 msgid "GConf key to which this property editor is attached"
 msgstr "GConf-nøkkel hvor egenskapsredigereren er festet"
 
-#: capplets/common/gconf-property-editor.c:130
+#: capplets/common/gconf-property-editor.c:147
 msgid "Callback"
 msgstr "Tilbakekall"
 
-#: capplets/common/gconf-property-editor.c:131
+#: capplets/common/gconf-property-editor.c:148
 msgid "Issue this callback when the value associated with key gets changed"
 msgstr ""
 "Send dette tilbakekallet når verdien som er assosiert med nøkkelen blir "
 "endret"
 
-#: capplets/common/gconf-property-editor.c:136
-msgid "Destroy notify object"
-msgstr "Ødelegg meldingsobjekt"
-
-#: capplets/common/gconf-property-editor.c:137
-msgid "Destroy the property editor when this object gets destroyed"
-msgstr "Ødelegg egenskapsredigering når dette objektet blir ødelagt"
-
-#: capplets/common/gconf-property-editor.c:143
+#: capplets/common/gconf-property-editor.c:153
 msgid "Change set"
 msgstr "Endringssett"
 
-#: capplets/common/gconf-property-editor.c:144
+#: capplets/common/gconf-property-editor.c:154
+#, fuzzy
 msgid ""
-"GConf change set containing data to be forwarded to the gconf engine on apply"
+"GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
 "GConf endringssett inneholder data som skal videresendes til gconf-motoren "
 "når det aktiveres"
+
+#: capplets/common/gconf-property-editor.c:159
+msgid "Conversion to widget callback"
+msgstr ""
+
+#: capplets/common/gconf-property-editor.c:160
+msgid ""
+"Callback to be issued when data are to be converted from GConf to the widget"
+msgstr ""
+
+#: capplets/common/gconf-property-editor.c:165
+msgid "Conversion from widget callback"
+msgstr ""
+
+#: capplets/common/gconf-property-editor.c:166
+msgid ""
+"Callback to be issued when data are to be converted to GConf from the widget"
+msgstr ""
+
+#: capplets/common/gconf-property-editor.c:171
+msgid "UI Control"
+msgstr ""
+
+#: capplets/common/gconf-property-editor.c:172
+msgid "Object that controls the property (normally a widget)"
+msgstr ""
 
 #: capplets/default-applications/default-applications.desktop.in.in.h:1
 msgid "Choose the applications used by default"
 msgstr "Velg applikasjonene som brukes som standard"
 
 #: capplets/default-applications/default-applications.desktop.in.in.h:2
-#: capplets/default-applications/interface.c:98
-#: capplets/screensaver/main.c:220
+#: capplets/default-applications/interface.c:97
+#: capplets/screensaver/main.c:168
 msgid "Default Applications"
 msgstr "Standard applikasjoner"
 
-#: capplets/default-applications/interface.c:114
+#: capplets/default-applications/interface.c:113
 msgid "Gnome Default Editor"
 msgstr "Standard redigeringsprogram for GNOME"
 
-#: capplets/default-applications/interface.c:131
+#: capplets/default-applications/interface.c:130
 msgid "Select an Editor"
 msgstr "Velg et redigeringsprogram"
 
-#: capplets/default-applications/interface.c:140
+#: capplets/default-applications/interface.c:139
 msgid "With this option, you can select a predefined Editor as your default"
 msgstr "Her kan du velge et forhåndsdefinert redigeringsprogram som standard"
 
-#: capplets/default-applications/interface.c:160
+#: capplets/default-applications/interface.c:159
 msgid "Custom Editor"
 msgstr "Egendefinert redigerer"
 
-#: capplets/default-applications/interface.c:169
+#: capplets/default-applications/interface.c:168
 msgid "With this option you can create your own default editor"
 msgstr "Her kan du velge ditt eget standard redigeringsprogram"
 
-#: capplets/default-applications/interface.c:180
-#: capplets/default-applications/interface.c:311
-#: capplets/default-applications/interface.c:442
+#: capplets/default-applications/interface.c:179
+#: capplets/default-applications/interface.c:310
+#: capplets/default-applications/interface.c:441
 msgid "Start in Terminal"
 msgstr "Start i terminal"
 
-#: capplets/default-applications/interface.c:188
+#: capplets/default-applications/interface.c:187
 msgid "Does this editor need to start in an xterm?"
 msgstr "Må redigeringsprogrammet startes i et terminalvindu?"
 
-#: capplets/default-applications/interface.c:190
+#: capplets/default-applications/interface.c:189
 msgid "Accepts Line Number"
 msgstr "Aksepterer linjenummer"
 
-#: capplets/default-applications/interface.c:198
+#: capplets/default-applications/interface.c:197
 msgid "Does this editor accept line numbers from the command line?"
 msgstr "Tar dette redigeringsprogrammet imot linjenummer fra kommandolinjen?"
 
-#: capplets/default-applications/interface.c:209
-#: capplets/default-applications/interface.c:340
-#: capplets/default-applications/interface.c:471
-#: capplets/default-applications/interface.c:582
+#: capplets/default-applications/interface.c:208
+#: capplets/default-applications/interface.c:339
+#: capplets/default-applications/interface.c:470
+#: capplets/default-applications/interface.c:581
 msgid "Command:"
 msgstr "Kommando:"
 
-#: capplets/default-applications/interface.c:227
+#: capplets/default-applications/interface.c:226
 msgid "Please enter the command line used to start this editor"
 msgstr ""
 "Vennligst skriv inn kommandolinjen som brukes for å starte dette "
 "redigeringsprogrammet"
 
-#: capplets/default-applications/interface.c:238
+#: capplets/default-applications/interface.c:237
 msgid "Text Editor"
 msgstr "Teksteditor"
 
-#: capplets/default-applications/interface.c:245
+#: capplets/default-applications/interface.c:244
 msgid "Gnome Default Web Browser"
 msgstr "Forvalgt nettleser for GNOME"
 
-#: capplets/default-applications/interface.c:262
+#: capplets/default-applications/interface.c:261
 msgid "Select a Web Browser"
 msgstr "Velg en nettleser"
 
-#: capplets/default-applications/interface.c:271
+#: capplets/default-applications/interface.c:270
 msgid ""
 "With this option, you can select a predefined Web Browser as your default"
 msgstr "Her kan du sette forvalgt nettleser"
 
-#: capplets/default-applications/interface.c:291
+#: capplets/default-applications/interface.c:290
 msgid "Custom Web Browser"
 msgstr "Egendefinert nettleser"
 
-#: capplets/default-applications/interface.c:300
+#: capplets/default-applications/interface.c:299
 msgid "With this option you can create your own default web browser"
 msgstr "Her har du sette din egen forvalgte nettleser"
 
-#: capplets/default-applications/interface.c:319
+#: capplets/default-applications/interface.c:318
 msgid "Does this web browser need to display in an xterm?"
 msgstr "Må denne nettleseren vises i et terminalvindu?"
 
-#: capplets/default-applications/interface.c:321
+#: capplets/default-applications/interface.c:320
 msgid "Understands Netscape Remote Control"
 msgstr "Forstår Netscape Remote Control"
 
-#: capplets/default-applications/interface.c:329
+#: capplets/default-applications/interface.c:328
 msgid ""
 "Does this web browser support the netscape remote control protocol?  If in "
 "doubt, and this web browser isn't Netscape or Mozilla, it probably doesn't."
@@ -342,82 +359,82 @@ msgstr ""
 "tvil, og nettleseren er en annen enn Netscape eller Mozilla, så gjør den det "
 "sannsynligvis ikke."
 
-#: capplets/default-applications/interface.c:358
+#: capplets/default-applications/interface.c:357
 msgid "Please enter the command line used to start this web browser"
 msgstr ""
 "Vennligst skriv inn kommandolinjen som brukes for å starte denne nettleseren"
 
-#: capplets/default-applications/interface.c:369
+#: capplets/default-applications/interface.c:368
 msgid "Web Browser"
 msgstr "Nettleser"
 
-#: capplets/default-applications/interface.c:376
+#: capplets/default-applications/interface.c:375
 msgid "Default Help Viewer"
 msgstr "Standard hjelp-leser"
 
-#: capplets/default-applications/interface.c:393
+#: capplets/default-applications/interface.c:392
 msgid "Select a Viewer"
 msgstr "Velg et visningsprogram"
 
-#: capplets/default-applications/interface.c:402
+#: capplets/default-applications/interface.c:401
 msgid "With this option you can select a predefined help viewer."
 msgstr "Her kan du sette forvalgt hjelp-leser."
 
-#: capplets/default-applications/interface.c:422
+#: capplets/default-applications/interface.c:421
 msgid "Custom Help Viewer"
 msgstr "Egendefinert hjelp-leser"
 
-#: capplets/default-applications/interface.c:431
+#: capplets/default-applications/interface.c:430
 msgid "With this option you can create your own help viewer"
 msgstr "Her kan du sette en egendefinert hjelp-leser"
 
-#: capplets/default-applications/interface.c:450
+#: capplets/default-applications/interface.c:449
 msgid "Does this help viewer need an xterm for display?"
 msgstr "Må denne hjelp-leseren vises i et terminalvindu?"
 
-#: capplets/default-applications/interface.c:452
+#: capplets/default-applications/interface.c:451
 msgid "Accepts URLs"
 msgstr "Godtar URLer"
 
-#: capplets/default-applications/interface.c:460
+#: capplets/default-applications/interface.c:459
 msgid "Does this help viewer allow URLs for help?"
 msgstr "Godtar denne hjelp-leseren URLer for hjelp?"
 
-#: capplets/default-applications/interface.c:489
+#: capplets/default-applications/interface.c:488
 msgid "Please enter the command line used to start this help viewer"
 msgstr ""
 "Vennligst skriv inn kommandolinjen som brukes for å starte denne hjelp-"
 "leseren"
 
-#: capplets/default-applications/interface.c:500
+#: capplets/default-applications/interface.c:499
 msgid "Help Viewer"
 msgstr "Hjelp-leser"
 
-#: capplets/default-applications/interface.c:507
+#: capplets/default-applications/interface.c:506
 msgid "Default Terminal"
 msgstr "Forvalgt terminal"
 
-#: capplets/default-applications/interface.c:524
+#: capplets/default-applications/interface.c:523
 msgid "Select a Terminal"
 msgstr "Velg en terminal"
 
-#: capplets/default-applications/interface.c:533
+#: capplets/default-applications/interface.c:532
 msgid "With this option you can select a predefined terminal."
 msgstr "Her kan du sette forvalgt terminal."
 
-#: capplets/default-applications/interface.c:553
+#: capplets/default-applications/interface.c:552
 msgid "Custom Terminal"
 msgstr "Egendefinert terminal"
 
-#: capplets/default-applications/interface.c:562
+#: capplets/default-applications/interface.c:561
 msgid "With this option you can create your own terminal"
 msgstr "Her kan du sette en egendefinert terminal"
 
-#: capplets/default-applications/interface.c:592
+#: capplets/default-applications/interface.c:591
 msgid "Exec Flag:"
 msgstr "Exec-flagg:"
 
-#: capplets/default-applications/interface.c:610
+#: capplets/default-applications/interface.c:609
 msgid ""
 "Please enter the flag used by this terminal to specify the command to run on "
 "startup.  For example, in 'xterm' this would be '-e'."
@@ -426,12 +443,12 @@ msgstr ""
 "kommandoen som skal kjøres ved oppstart. I 'xterm' vil dette være '-e', for "
 "eksempel."
 
-#: capplets/default-applications/interface.c:620
+#: capplets/default-applications/interface.c:619
 msgid "Please enter the command line used to start this terminal"
 msgstr ""
 "Vennligst skriv inn kommandolinjen som brukes for å starte denne terminalen"
 
-#: capplets/default-applications/interface.c:631
+#: capplets/default-applications/interface.c:630
 msgid "Terminal"
 msgstr "Terminal"
 
@@ -445,15 +462,6 @@ msgstr "Kunne ikke finne pixmap-fil: %s"
 msgid "Couldn't create pixmap from file: %s"
 msgstr "Kunne ikke opprette pixmap fra fil: %s"
 
-#: capplets/desktop-links/gnome-hint-properties.desktop.in.h:1
-msgid "Options for the startup hint dialog"
-msgstr "Alternativer for dialogen for hint ved oppstart"
-
-#: capplets/desktop-links/gnome-hint-properties.desktop.in.h:2
-msgid "Startup Hint"
-msgstr "Hint ved oppstart"
-
-#: capplets/keyboard/keyboard-properties.glade.h:9
 #: capplets/keyboard/keyboard.desktop.in.in.h:1
 msgid "Keyboard"
 msgstr "Tastatur"
@@ -462,98 +470,6 @@ msgstr "Tastatur"
 msgid "Keyboard Properties"
 msgstr "Egenskaper for tastatur"
 
-#: capplets/keyboard/keyboard-properties.glade.h:1
-msgid "Bell"
-msgstr "Klokke"
-
-#: capplets/keyboard/keyboard-properties.glade.h:2
-msgid "Click volume"
-msgstr "Klikkvolum"
-
-#: capplets/keyboard/keyboard-properties.glade.h:3
-msgid "Delay before repeat:"
-msgstr "Pause før repetering:"
-
-#: capplets/keyboard/keyboard-properties.glade.h:4
-msgid "Duration (ms)"
-msgstr "Varighet (ms)"
-
-#: capplets/keyboard/keyboard-properties.glade.h:5
-msgid "Enable Keyboard Click"
-msgstr "Slå på tastatur-klikk"
-
-#: capplets/keyboard/keyboard-properties.glade.h:6
-msgid "Enable Keyboard Repeat"
-msgstr "Slå på auto-repetering"
-
-#: capplets/keyboard/keyboard-properties.glade.h:7
-#: capplets/mouse/mouse-properties.glade.h:1
-#: capplets/screensaver/screensavers/3d_clock.xml.h:2
-#: capplets/screensaver/screensavers/ant.xml.h:3
-#: capplets/screensaver/screensavers/attraction.xml.h:4
-#: capplets/screensaver/screensavers/bsod.xml.h:3
-#: capplets/screensaver/screensavers/compass.xml.h:3
-#: capplets/screensaver/screensavers/flag.xml.h:2
-#: capplets/screensaver/screensavers/qix.xml.h:3
-#: capplets/screensaver/screensavers/starfish.xml.h:3
-msgid "Fast"
-msgstr "Fort"
-
-#: capplets/keyboard/keyboard-properties.glade.h:8
-msgid "Key repeat rate:"
-msgstr "Repeteringsintervall:"
-
-#: capplets/keyboard/keyboard-properties.glade.h:10
-#: capplets/screensaver/screensavers/attraction.xml.h:11
-#: capplets/screensaver/screensavers/qix.xml.h:8
-#: capplets/screensaver/screensavers/rorschach.xml.h:3
-msgid "Long"
-msgstr "Langt"
-
-#: capplets/keyboard/keyboard-properties.glade.h:11
-msgid "Medium"
-msgstr "Middels"
-
-#: capplets/keyboard/keyboard-properties.glade.h:12
-msgid "Pitch (Hz)"
-msgstr "Tonehøyde (Hz)"
-
-#: capplets/keyboard/keyboard-properties.glade.h:13
-#: capplets/screensaver/screensavers/attraction.xml.h:16
-#: capplets/screensaver/screensavers/qix.xml.h:16
-#: capplets/screensaver/screensavers/rorschach.xml.h:7
-msgid "Short"
-msgstr "Kort"
-
-#: capplets/keyboard/keyboard-properties.glade.h:14
-#: capplets/mouse/mouse-properties.glade.h:10
-#: capplets/screensaver/screensavers/3d_clock.xml.h:7
-#: capplets/screensaver/screensavers/ant.xml.h:16
-#: capplets/screensaver/screensavers/attraction.xml.h:17
-#: capplets/screensaver/screensavers/bsod.xml.h:6
-#: capplets/screensaver/screensavers/compass.xml.h:6
-#: capplets/screensaver/screensavers/flag.xml.h:10
-#: capplets/screensaver/screensavers/qix.xml.h:17
-#: capplets/screensaver/screensavers/starfish.xml.h:7
-msgid "Slow"
-msgstr "Sakte"
-
-#: capplets/keyboard/keyboard-properties.glade.h:15
-msgid "Test"
-msgstr "Test"
-
-#: capplets/keyboard/keyboard-properties.glade.h:16
-msgid "Very fast"
-msgstr "Meget raskt"
-
-#: capplets/keyboard/keyboard-properties.glade.h:17
-msgid "Very long"
-msgstr "Meget langt"
-
-#: capplets/keyboard/keyboard-properties.glade.h:18
-msgid "Volume"
-msgstr "Volum"
-
 #: capplets/mouse/mouse.desktop.in.in.h:1
 msgid "Mouse"
 msgstr "Mus"
@@ -561,48 +477,6 @@ msgstr "Mus"
 #: capplets/mouse/mouse.desktop.in.in.h:2
 msgid "Mouse Properties"
 msgstr "Egenskaper for mus"
-
-#: capplets/mouse/mouse-properties.glade.h:2
-#: capplets/screensaver/screensavers/3d_clock.xml.h:3
-#: capplets/screensaver/screensavers/attraction.xml.h:6
-#: capplets/screensaver/screensavers/qix.xml.h:5
-msgid "High"
-msgstr "Høy"
-
-#: capplets/mouse/mouse-properties.glade.h:3
-msgid "Left handed"
-msgstr "Venstrehendt"
-
-#: capplets/mouse/mouse-properties.glade.h:4
-#: capplets/screensaver/screensavers/3d_clock.xml.h:5
-#: capplets/screensaver/screensavers/attraction.xml.h:12
-#: capplets/screensaver/screensavers/qix.xml.h:9
-msgid "Low"
-msgstr "Lav "
-
-#: capplets/mouse/mouse-properties.glade.h:5
-msgid "Mouse Configuration"
-msgstr "Konfigurasjon av mus"
-
-#: capplets/mouse/mouse-properties.glade.h:6
-msgid "Mouse speed:"
-msgstr "Mushastighet:"
-
-#: capplets/mouse/mouse-properties.glade.h:7
-msgid "My mouse is:"
-msgstr "Min mus er:"
-
-#: capplets/mouse/mouse-properties.glade.h:8
-msgid "Right handed"
-msgstr "Høyrehendt"
-
-#: capplets/mouse/mouse-properties.glade.h:9
-msgid "Sensitivity:"
-msgstr "Følsomhet:"
-
-#: capplets/screensaver/main.c:61
-msgid "Initialize session settings"
-msgstr "Initier innstillinger for sesjon"
 
 #: capplets/screensaver/preferences.c:813
 msgid "Custom screensaver. No description available"
@@ -676,6 +550,23 @@ msgstr "Enhver"
 msgid "3d clock"
 msgstr "3D-klokke"
 
+#: capplets/screensaver/screensavers/3d_clock.xml.h:2
+#: capplets/screensaver/screensavers/ant.xml.h:3
+#: capplets/screensaver/screensavers/attraction.xml.h:4
+#: capplets/screensaver/screensavers/bsod.xml.h:3
+#: capplets/screensaver/screensavers/compass.xml.h:3
+#: capplets/screensaver/screensavers/flag.xml.h:2
+#: capplets/screensaver/screensavers/qix.xml.h:3
+#: capplets/screensaver/screensavers/starfish.xml.h:3
+msgid "Fast"
+msgstr "Fort"
+
+#: capplets/screensaver/screensavers/3d_clock.xml.h:3
+#: capplets/screensaver/screensavers/attraction.xml.h:6
+#: capplets/screensaver/screensavers/qix.xml.h:5
+msgid "High"
+msgstr "Høy"
+
 #: capplets/screensaver/screensavers/3d_clock.xml.h:4
 #: capplets/screensaver/screensavers/ant.xml.h:6
 #: capplets/screensaver/screensavers/attraction.xml.h:7
@@ -684,9 +575,26 @@ msgstr "3D-klokke"
 msgid "Large"
 msgstr "Stor"
 
+#: capplets/screensaver/screensavers/3d_clock.xml.h:5
+#: capplets/screensaver/screensavers/attraction.xml.h:12
+#: capplets/screensaver/screensavers/qix.xml.h:9
+msgid "Low"
+msgstr "Lav "
+
 #: capplets/screensaver/screensavers/3d_clock.xml.h:6
 msgid "Size:"
 msgstr "Størrelse:"
+
+#: capplets/screensaver/screensavers/3d_clock.xml.h:7
+#: capplets/screensaver/screensavers/ant.xml.h:16
+#: capplets/screensaver/screensavers/attraction.xml.h:17
+#: capplets/screensaver/screensavers/bsod.xml.h:6
+#: capplets/screensaver/screensavers/compass.xml.h:6
+#: capplets/screensaver/screensavers/flag.xml.h:10
+#: capplets/screensaver/screensavers/qix.xml.h:17
+#: capplets/screensaver/screensavers/starfish.xml.h:7
+msgid "Slow"
+msgstr "Sakte"
 
 #: capplets/screensaver/screensavers/3d_clock.xml.h:8
 #: capplets/screensaver/screensavers/ant.xml.h:17
@@ -866,6 +774,12 @@ msgstr ""
 msgid "Lines"
 msgstr "Linjer"
 
+#: capplets/screensaver/screensavers/attraction.xml.h:11
+#: capplets/screensaver/screensavers/qix.xml.h:8
+#: capplets/screensaver/screensavers/rorschach.xml.h:3
+msgid "Long"
+msgstr "Langt"
+
 #: capplets/screensaver/screensavers/attraction.xml.h:14
 #: capplets/screensaver/screensavers/braid.xml.h:5
 #: capplets/screensaver/screensavers/fadeplot.xml.h:9
@@ -880,6 +794,12 @@ msgstr "Antall farger"
 #: capplets/screensaver/screensavers/qix.xml.h:14
 msgid "Polygons"
 msgstr "Polygoner"
+
+#: capplets/screensaver/screensavers/attraction.xml.h:16
+#: capplets/screensaver/screensavers/qix.xml.h:16
+#: capplets/screensaver/screensavers/rorschach.xml.h:7
+msgid "Short"
+msgstr "Kort"
 
 #: capplets/screensaver/screensavers/attraction.xml.h:20
 msgid "Splines"
@@ -3079,20 +2999,36 @@ msgstr "Lydhendelser"
 msgid "Sounds for events"
 msgstr "Slå på lyd for hendelser"
 
-#: control-center/capplet-dir-view.c:308 control-center/gnomecc.desktop.in.h:1
+#: control-center/capplet-dir-view.c:147
+msgid "Layout"
+msgstr ""
+
+#: control-center/capplet-dir-view.c:148
+msgid "Layout to use for this view of the capplets"
+msgstr ""
+
+#: control-center/capplet-dir-view.c:154
+msgid "Capplet directory object"
+msgstr ""
+
+#: control-center/capplet-dir-view.c:155
+msgid "Capplet directory that this view is viewing"
+msgstr ""
+
+#: control-center/capplet-dir-view.c:320 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
 msgstr "GNOME Kontrollsenter"
 
-#: control-center/capplet-dir-view.c:311
+#: control-center/capplet-dir-view.c:323
 msgid "Desktop properties manager."
 msgstr "Håndtering av egenskaper for skrivebord."
 
-#: control-center/capplet-dir-view.c:423
+#: control-center/capplet-dir-view.c:448
 #, c-format
 msgid "Gnome Control Center : %s"
 msgstr "GNOME Kontrollsenter: %s"
 
-#: control-center/capplet-dir-view.c:468
+#: control-center/capplet-dir-view.c:493
 msgid ""
 "No help is available/installed. Please make sure you\n"
 "have the GNOME User's Guide installed on your system."
@@ -3100,7 +3036,7 @@ msgstr ""
 "Ingen hjelp tilgjengelig/installert. Vennligst forsikre\n"
 "deg om at du har GNOME brukerhåndboken installert."
 
-#: control-center/capplet-dir-view.c:471
+#: control-center/capplet-dir-view.c:496
 msgid "Close"
 msgstr "Lukk"
 
@@ -3108,7 +3044,7 @@ msgstr "Lukk"
 msgid "GNOME Control Center:"
 msgstr "GNOME Kontrollsenter:"
 
-#: control-center/capplet-dir-view-list.c:327
+#: control-center/capplet-dir-view-list.c:321
 #, c-format
 msgid "GNOME Control Center: %s"
 msgstr "GNOME Kontrollsenter: %s"
@@ -3125,25 +3061,14 @@ msgstr "Hoved"
 msgid "Main Settings"
 msgstr "Hovedinnstillinger"
 
-#: control-center/main.c:40
-msgid "Configuration"
-msgstr "Konfigurasjon"
-
-#: control-center/main.c:63
-msgid "Run the capplet CAPPLET"
-msgstr "Kjør cappleten CAPPLET"
-
-#: control-center/main.c:63
-msgid "CAPPLET"
-msgstr "CAPPLET"
-
 #: libbackground/applier.c:229
 msgid "Type"
 msgstr "Type"
 
 #: libbackground/applier.c:230
 msgid ""
-"Type of applier: APPLIER_ROOT for root window or APPLIER_PREVIEW for preview"
+"Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
+"for preview"
 msgstr ""
 
 #: libbackground/applier.c:385
@@ -3151,7 +3076,7 @@ msgstr ""
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "Kunne ikke laste pixbuf \"%s\"; slår av bakgrunn."
 
-#: libbackground/applier.c:492
+#: libbackground/applier.c:501
 msgid "Disabled"
 msgstr "Slått av"
 
@@ -3184,6 +3109,87 @@ msgstr "Spill"
 #: libsounds/sound-view.c:190
 msgid "Select sound file"
 msgstr "Velg lydfil"
+
+#~ msgid "Destroy notify object"
+#~ msgstr "Ødelegg meldingsobjekt"
+
+#~ msgid "Destroy the property editor when this object gets destroyed"
+#~ msgstr "Ødelegg egenskapsredigering når dette objektet blir ødelagt"
+
+#~ msgid "Options for the startup hint dialog"
+#~ msgstr "Alternativer for dialogen for hint ved oppstart"
+
+#~ msgid "Startup Hint"
+#~ msgstr "Hint ved oppstart"
+
+#~ msgid "Bell"
+#~ msgstr "Klokke"
+
+#~ msgid "Click volume"
+#~ msgstr "Klikkvolum"
+
+#~ msgid "Delay before repeat:"
+#~ msgstr "Pause før repetering:"
+
+#~ msgid "Duration (ms)"
+#~ msgstr "Varighet (ms)"
+
+#~ msgid "Enable Keyboard Click"
+#~ msgstr "Slå på tastatur-klikk"
+
+#~ msgid "Enable Keyboard Repeat"
+#~ msgstr "Slå på auto-repetering"
+
+#~ msgid "Key repeat rate:"
+#~ msgstr "Repeteringsintervall:"
+
+#~ msgid "Medium"
+#~ msgstr "Middels"
+
+#~ msgid "Pitch (Hz)"
+#~ msgstr "Tonehøyde (Hz)"
+
+#~ msgid "Test"
+#~ msgstr "Test"
+
+#~ msgid "Very fast"
+#~ msgstr "Meget raskt"
+
+#~ msgid "Very long"
+#~ msgstr "Meget langt"
+
+#~ msgid "Volume"
+#~ msgstr "Volum"
+
+#~ msgid "Left handed"
+#~ msgstr "Venstrehendt"
+
+#~ msgid "Mouse Configuration"
+#~ msgstr "Konfigurasjon av mus"
+
+#~ msgid "Mouse speed:"
+#~ msgstr "Mushastighet:"
+
+#~ msgid "My mouse is:"
+#~ msgstr "Min mus er:"
+
+#~ msgid "Right handed"
+#~ msgstr "Høyrehendt"
+
+#~ msgid "Sensitivity:"
+#~ msgstr "Følsomhet:"
+
+#~ msgid "Initialize session settings"
+#~ msgstr "Initier innstillinger for sesjon"
+
+#~ msgid "Configuration"
+#~ msgstr "Konfigurasjon"
+
+#~ msgid "Run the capplet CAPPLET"
+#~ msgstr "Kjør cappleten CAPPLET"
+
+#~ msgid "CAPPLET"
+#~ msgstr "CAPPLET"
 
 #~ msgid "Background picture"
 #~ msgstr "Bakgrunnsbilde"

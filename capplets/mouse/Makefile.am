@@ -1,9 +1,9 @@
 bin_PROGRAMS = gnome-mouse-properties
 
 gnome_mouse_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
+gnome_mouse_properties_SOURCES = mouse-properties-capplet.c
 
-gnome_mouse_properties_SOURCES = \
-	mouse-properties-capplet.c
+@INTLTOOL_DESKTOP_RULE@
 
 pixmapdir  = $(GNOMECC_PIXMAPS_DIR)
 pixmap_DATA = \
@@ -14,14 +14,11 @@ pixmap_DATA = \
 	mouse-right.png
 
 Gladedir   = $(GNOMECC_GLADE_DIR)
-Glade_DATA = gnome-mouse-properties.glade
+Glade_DATA = mouse-properties.glade
 
-##
-## You should not need to modify anything below this line
-##
-@INTLTOOL_DESKTOP_RULE@
-
-## install-data-am: install-data-local
+iconsdir   = $(GNOMECC_ICONS_DIR)
+icons_DATA = mouse-capplet.png
 
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
+EXTRA_DIST = $(Glade_DATA) $(icons_DATA) $(pixmap_DATA)

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.99.0\n"
-"POT-Creation-Date: 2001-12-13 07:35-0500\n"
+"POT-Creation-Date: 2001-12-20 10:42-0500\n"
 "PO-Revision-Date: 2001-12-03 13:26+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: Chinese\n"
@@ -186,114 +186,164 @@ msgstr "背景"
 msgid "Configuration of the desktop's background"
 msgstr "桌面背景的組態"
 
-#: capplets/background/background-properties-capplet.c:274
-#: capplets/background/background-properties-capplet.c:276
-#: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
-msgid "Just apply settings and quit"
-msgstr "只套用設定並離開"
-
-#: capplets/background/background-properties-capplet.c:278
-#: capplets/common/capplet-util.c:243
+#: capplets/background/background-properties-capplet.c:288
+#: capplets/common/capplet-util.c:249
 msgid "Retrieve and store legacy settings"
 msgstr "復原以往的設定"
 
-#: capplets/background/background-properties-capplet.c:302
+#: capplets/background/background-properties-capplet.c:313
 #, fuzzy
 msgid "Background properties"
 msgstr "背景顏色"
+
+#: capplets/common/capplet-util.c:245 capplets/common/capplet-util.c:247
+msgid "Just apply settings and quit"
+msgstr "只套用設定並離開"
+
+#: capplets/common/gconf-property-editor.c:140
+msgid "Key"
+msgstr ""
+
+#: capplets/common/gconf-property-editor.c:141
+msgid "GConf key to which this property editor is attached"
+msgstr ""
+
+#: capplets/common/gconf-property-editor.c:147
+msgid "Callback"
+msgstr ""
+
+#: capplets/common/gconf-property-editor.c:148
+msgid "Issue this callback when the value associated with key gets changed"
+msgstr ""
+
+#: capplets/common/gconf-property-editor.c:153
+msgid "Change set"
+msgstr ""
+
+#: capplets/common/gconf-property-editor.c:154
+msgid ""
+"GConf change set containing data to be forwarded to the gconf client on apply"
+msgstr ""
+
+#: capplets/common/gconf-property-editor.c:159
+msgid "Conversion to widget callback"
+msgstr ""
+
+#: capplets/common/gconf-property-editor.c:160
+msgid ""
+"Callback to be issued when data are to be converted from GConf to the widget"
+msgstr ""
+
+#: capplets/common/gconf-property-editor.c:165
+msgid "Conversion from widget callback"
+msgstr ""
+
+#: capplets/common/gconf-property-editor.c:166
+msgid ""
+"Callback to be issued when data are to be converted to GConf from the widget"
+msgstr ""
+
+#: capplets/common/gconf-property-editor.c:171
+msgid "UI Control"
+msgstr ""
+
+#: capplets/common/gconf-property-editor.c:172
+msgid "Object that controls the property (normally a widget)"
+msgstr ""
 
 #: capplets/default-applications/default-applications.desktop.in.in.h:1
 msgid "Choose the applications used by default"
 msgstr "選擇預設使用的應用軟件"
 
 #: capplets/default-applications/default-applications.desktop.in.in.h:2
-#: capplets/default-applications/interface.c:98
+#: capplets/default-applications/interface.c:97
+#: capplets/screensaver/main.c:168
 msgid "Default Applications"
 msgstr "預設應用軟件"
 
-#: capplets/default-applications/interface.c:114
+#: capplets/default-applications/interface.c:113
 msgid "Gnome Default Editor"
 msgstr "預設 Gnome 編輯器"
 
-#: capplets/default-applications/interface.c:131
+#: capplets/default-applications/interface.c:130
 msgid "Select an Editor"
 msgstr "選擇編輯器"
 
-#: capplets/default-applications/interface.c:140
+#: capplets/default-applications/interface.c:139
 msgid "With this option, you can select a predefined Editor as your default"
 msgstr "透過此選項，你可以選擇預先定義的編輯器作為預設編輯器"
 
-#: capplets/default-applications/interface.c:160
+#: capplets/default-applications/interface.c:159
 msgid "Custom Editor"
 msgstr "自訂編輯器"
 
-#: capplets/default-applications/interface.c:169
+#: capplets/default-applications/interface.c:168
 msgid "With this option you can create your own default editor"
 msgstr "透過此選項你可以自行定義編輯器"
 
-#: capplets/default-applications/interface.c:180
-#: capplets/default-applications/interface.c:311
-#: capplets/default-applications/interface.c:442
+#: capplets/default-applications/interface.c:179
+#: capplets/default-applications/interface.c:310
+#: capplets/default-applications/interface.c:441
 msgid "Start in Terminal"
 msgstr "在終端機中執行"
 
-#: capplets/default-applications/interface.c:188
+#: capplets/default-applications/interface.c:187
 msgid "Does this editor need to start in an xterm?"
 msgstr "此文字編輯器是否需要 xterm？"
 
-#: capplets/default-applications/interface.c:190
+#: capplets/default-applications/interface.c:189
 msgid "Accepts Line Number"
 msgstr "接受編輯行號"
 
-#: capplets/default-applications/interface.c:198
+#: capplets/default-applications/interface.c:197
 msgid "Does this editor accept line numbers from the command line?"
 msgstr "此文字編輯器是否支援由指令列指定編輯的行號？"
 
-#: capplets/default-applications/interface.c:209
-#: capplets/default-applications/interface.c:340
-#: capplets/default-applications/interface.c:471
-#: capplets/default-applications/interface.c:582
+#: capplets/default-applications/interface.c:208
+#: capplets/default-applications/interface.c:339
+#: capplets/default-applications/interface.c:470
+#: capplets/default-applications/interface.c:581
 msgid "Command:"
 msgstr "指令："
 
-#: capplets/default-applications/interface.c:227
+#: capplets/default-applications/interface.c:226
 msgid "Please enter the command line used to start this editor"
 msgstr "請輸入執行此文字編輯器用的指令"
 
-#: capplets/default-applications/interface.c:238
+#: capplets/default-applications/interface.c:237
 msgid "Text Editor"
 msgstr "文字編輯器"
 
-#: capplets/default-applications/interface.c:245
+#: capplets/default-applications/interface.c:244
 msgid "Gnome Default Web Browser"
 msgstr "預設 Gnome 網頁瀏覽器"
 
-#: capplets/default-applications/interface.c:262
+#: capplets/default-applications/interface.c:261
 msgid "Select a Web Browser"
 msgstr "選擇網頁瀏覽器"
 
-#: capplets/default-applications/interface.c:271
+#: capplets/default-applications/interface.c:270
 msgid ""
 "With this option, you can select a predefined Web Browser as your default"
 msgstr "透過此選項，你可以選擇預先定義的網頁瀏覽器作為預設瀏覽器"
 
-#: capplets/default-applications/interface.c:291
+#: capplets/default-applications/interface.c:290
 msgid "Custom Web Browser"
 msgstr "自訂網頁瀏覽器"
 
-#: capplets/default-applications/interface.c:300
+#: capplets/default-applications/interface.c:299
 msgid "With this option you can create your own default web browser"
 msgstr "透過此選項，你可以自行定義預設的網頁瀏覽器"
 
-#: capplets/default-applications/interface.c:319
+#: capplets/default-applications/interface.c:318
 msgid "Does this web browser need to display in an xterm?"
 msgstr "此網頁瀏覽器是否需要 xterm？"
 
-#: capplets/default-applications/interface.c:321
+#: capplets/default-applications/interface.c:320
 msgid "Understands Netscape Remote Control"
 msgstr "可使用 Netscape 遠端控制選項"
 
-#: capplets/default-applications/interface.c:329
+#: capplets/default-applications/interface.c:328
 msgid ""
 "Does this web browser support the netscape remote control protocol?  If in "
 "doubt, and this web browser isn't Netscape or Mozilla, it probably doesn't."
@@ -302,79 +352,79 @@ msgstr ""
 "如果不清楚，而它又不是 Netscape 或 Mozilla，\n"
 "那麼就應該不支援了。"
 
-#: capplets/default-applications/interface.c:358
+#: capplets/default-applications/interface.c:357
 msgid "Please enter the command line used to start this web browser"
 msgstr "請輸入執行此網頁瀏覽器用的指令"
 
-#: capplets/default-applications/interface.c:369
+#: capplets/default-applications/interface.c:368
 msgid "Web Browser"
 msgstr "網頁瀏覽器"
 
-#: capplets/default-applications/interface.c:376
+#: capplets/default-applications/interface.c:375
 msgid "Default Help Viewer"
 msgstr "預設輔助說明檢視器"
 
-#: capplets/default-applications/interface.c:393
+#: capplets/default-applications/interface.c:392
 msgid "Select a Viewer"
 msgstr "選擇檢視器"
 
-#: capplets/default-applications/interface.c:402
+#: capplets/default-applications/interface.c:401
 msgid "With this option you can select a predefined help viewer."
 msgstr "透過此選項你可以選擇預先定義的輔助說明檢視器。"
 
-#: capplets/default-applications/interface.c:422
+#: capplets/default-applications/interface.c:421
 msgid "Custom Help Viewer"
 msgstr "自訂輔助說明檢視器"
 
-#: capplets/default-applications/interface.c:431
+#: capplets/default-applications/interface.c:430
 msgid "With this option you can create your own help viewer"
 msgstr "透過此選項你可以自行定義輔助說明檢視器"
 
-#: capplets/default-applications/interface.c:450
+#: capplets/default-applications/interface.c:449
 msgid "Does this help viewer need an xterm for display?"
 msgstr "此輔助說明檢視器是否需要 xterm？"
 
-#: capplets/default-applications/interface.c:452
+#: capplets/default-applications/interface.c:451
 msgid "Accepts URLs"
 msgstr "可接受 URL"
 
-#: capplets/default-applications/interface.c:460
+#: capplets/default-applications/interface.c:459
 msgid "Does this help viewer allow URLs for help?"
 msgstr "此輔助說明檢視器可否接受 URL？"
 
-#: capplets/default-applications/interface.c:489
+#: capplets/default-applications/interface.c:488
 msgid "Please enter the command line used to start this help viewer"
 msgstr "請輸入執行此輔助說明檢視器用的指令"
 
-#: capplets/default-applications/interface.c:500
+#: capplets/default-applications/interface.c:499
 msgid "Help Viewer"
 msgstr "輔助說明檢視器"
 
-#: capplets/default-applications/interface.c:507
+#: capplets/default-applications/interface.c:506
 msgid "Default Terminal"
 msgstr "預設終端機"
 
-#: capplets/default-applications/interface.c:524
+#: capplets/default-applications/interface.c:523
 msgid "Select a Terminal"
 msgstr "選擇終端機"
 
-#: capplets/default-applications/interface.c:533
+#: capplets/default-applications/interface.c:532
 msgid "With this option you can select a predefined terminal."
 msgstr "透過此選項你可以選擇預先定義的終端機"
 
-#: capplets/default-applications/interface.c:553
+#: capplets/default-applications/interface.c:552
 msgid "Custom Terminal"
 msgstr "自訂終端機"
 
-#: capplets/default-applications/interface.c:562
+#: capplets/default-applications/interface.c:561
 msgid "With this option you can create your own terminal"
 msgstr "透過此選項你可以自行定義終端機"
 
-#: capplets/default-applications/interface.c:592
+#: capplets/default-applications/interface.c:591
 msgid "Exec Flag:"
 msgstr "執行選項："
 
-#: capplets/default-applications/interface.c:610
+#: capplets/default-applications/interface.c:609
 msgid ""
 "Please enter the flag used by this terminal to specify the command to run on "
 "startup.  For example, in 'xterm' this would be '-e'."
@@ -382,11 +432,11 @@ msgstr ""
 "請輸入終端機程式的選項來指定啟動終端機的指令列。\n"
 "例如，若是使用 'xterm' 選項就是 '-e'。"
 
-#: capplets/default-applications/interface.c:620
+#: capplets/default-applications/interface.c:619
 msgid "Please enter the command line used to start this terminal"
 msgstr "請輸入用以啟動此終端機的指令。"
 
-#: capplets/default-applications/interface.c:631
+#: capplets/default-applications/interface.c:630
 msgid "Terminal"
 msgstr "終端機"
 
@@ -400,15 +450,6 @@ msgstr "找不到 pixmap 檔案：%s"
 msgid "Couldn't create pixmap from file: %s"
 msgstr "無法由檔案建立 pixmap：%s"
 
-#: capplets/desktop-links/gnome-hint-properties.desktop.in.h:1
-msgid "Options for the startup hint dialog"
-msgstr "啟動提示對話視窗的選項"
-
-#: capplets/desktop-links/gnome-hint-properties.desktop.in.h:2
-msgid "Startup Hint"
-msgstr "啟動提示"
-
-#: capplets/keyboard/keyboard-properties.glade.h:9
 #: capplets/keyboard/keyboard.desktop.in.in.h:1
 msgid "Keyboard"
 msgstr "鍵盤"
@@ -417,98 +458,6 @@ msgstr "鍵盤"
 msgid "Keyboard Properties"
 msgstr "鍵盤設定"
 
-#: capplets/keyboard/keyboard-properties.glade.h:1
-msgid "Bell"
-msgstr "響聲"
-
-#: capplets/keyboard/keyboard-properties.glade.h:2
-msgid "Click volume"
-msgstr "鍵盤敲擊聲音量"
-
-#: capplets/keyboard/keyboard-properties.glade.h:3
-msgid "Delay before repeat:"
-msgstr "按鍵重複前的延遲時間"
-
-#: capplets/keyboard/keyboard-properties.glade.h:4
-msgid "Duration (ms)"
-msgstr "持續時間（毫秒）"
-
-#: capplets/keyboard/keyboard-properties.glade.h:5
-msgid "Enable Keyboard Click"
-msgstr "使用鍵盤敲擊聲"
-
-#: capplets/keyboard/keyboard-properties.glade.h:6
-msgid "Enable Keyboard Repeat"
-msgstr "使用按鍵重複"
-
-#: capplets/keyboard/keyboard-properties.glade.h:7
-#: capplets/mouse/mouse-properties.glade.h:1
-#: capplets/screensaver/screensavers/3d_clock.xml.h:2
-#: capplets/screensaver/screensavers/ant.xml.h:3
-#: capplets/screensaver/screensavers/attraction.xml.h:4
-#: capplets/screensaver/screensavers/bsod.xml.h:3
-#: capplets/screensaver/screensavers/compass.xml.h:3
-#: capplets/screensaver/screensavers/flag.xml.h:2
-#: capplets/screensaver/screensavers/qix.xml.h:3
-#: capplets/screensaver/screensavers/starfish.xml.h:3
-msgid "Fast"
-msgstr "快"
-
-#: capplets/keyboard/keyboard-properties.glade.h:8
-msgid "Key repeat rate:"
-msgstr "按鍵重複速率："
-
-#: capplets/keyboard/keyboard-properties.glade.h:10
-#: capplets/screensaver/screensavers/attraction.xml.h:11
-#: capplets/screensaver/screensavers/qix.xml.h:8
-#: capplets/screensaver/screensavers/rorschach.xml.h:3
-msgid "Long"
-msgstr "長"
-
-#: capplets/keyboard/keyboard-properties.glade.h:11
-msgid "Medium"
-msgstr "中等"
-
-#: capplets/keyboard/keyboard-properties.glade.h:12
-msgid "Pitch (Hz)"
-msgstr "音高 (Hz)"
-
-#: capplets/keyboard/keyboard-properties.glade.h:13
-#: capplets/screensaver/screensavers/attraction.xml.h:16
-#: capplets/screensaver/screensavers/qix.xml.h:16
-#: capplets/screensaver/screensavers/rorschach.xml.h:7
-msgid "Short"
-msgstr "短"
-
-#: capplets/keyboard/keyboard-properties.glade.h:14
-#: capplets/mouse/mouse-properties.glade.h:10
-#: capplets/screensaver/screensavers/3d_clock.xml.h:7
-#: capplets/screensaver/screensavers/ant.xml.h:16
-#: capplets/screensaver/screensavers/attraction.xml.h:17
-#: capplets/screensaver/screensavers/bsod.xml.h:6
-#: capplets/screensaver/screensavers/compass.xml.h:6
-#: capplets/screensaver/screensavers/flag.xml.h:10
-#: capplets/screensaver/screensavers/qix.xml.h:17
-#: capplets/screensaver/screensavers/starfish.xml.h:7
-msgid "Slow"
-msgstr "慢"
-
-#: capplets/keyboard/keyboard-properties.glade.h:15
-msgid "Test"
-msgstr "測試"
-
-#: capplets/keyboard/keyboard-properties.glade.h:16
-msgid "Very fast"
-msgstr "非常快"
-
-#: capplets/keyboard/keyboard-properties.glade.h:17
-msgid "Very long"
-msgstr "非常長"
-
-#: capplets/keyboard/keyboard-properties.glade.h:18
-msgid "Volume"
-msgstr "音量"
-
 #: capplets/mouse/mouse.desktop.in.in.h:1
 msgid "Mouse"
 msgstr "滑鼠"
@@ -516,44 +465,6 @@ msgstr "滑鼠"
 #: capplets/mouse/mouse.desktop.in.in.h:2
 msgid "Mouse Properties"
 msgstr "滑鼠設定"
-
-#: capplets/mouse/mouse-properties.glade.h:2
-#: capplets/screensaver/screensavers/3d_clock.xml.h:3
-#: capplets/screensaver/screensavers/attraction.xml.h:6
-#: capplets/screensaver/screensavers/qix.xml.h:5
-msgid "High"
-msgstr "高"
-
-#: capplets/mouse/mouse-properties.glade.h:3
-msgid "Left handed"
-msgstr "左手操作"
-
-#: capplets/mouse/mouse-properties.glade.h:4
-#: capplets/screensaver/screensavers/3d_clock.xml.h:5
-#: capplets/screensaver/screensavers/attraction.xml.h:12
-#: capplets/screensaver/screensavers/qix.xml.h:9
-msgid "Low"
-msgstr "低"
-
-#: capplets/mouse/mouse-properties.glade.h:5
-msgid "Mouse Configuration"
-msgstr "滑鼠設定"
-
-#: capplets/mouse/mouse-properties.glade.h:6
-msgid "Mouse speed:"
-msgstr "滑鼠速度："
-
-#: capplets/mouse/mouse-properties.glade.h:7
-msgid "My mouse is:"
-msgstr "我的滑鼠是："
-
-#: capplets/mouse/mouse-properties.glade.h:8
-msgid "Right handed"
-msgstr "右手操作"
-
-#: capplets/mouse/mouse-properties.glade.h:9
-msgid "Sensitivity:"
-msgstr "敏感度："
 
 #: capplets/screensaver/preferences.c:813
 msgid "Custom screensaver. No description available"
@@ -625,6 +536,23 @@ msgstr "任選"
 msgid "3d clock"
 msgstr "3D 時鐘"
 
+#: capplets/screensaver/screensavers/3d_clock.xml.h:2
+#: capplets/screensaver/screensavers/ant.xml.h:3
+#: capplets/screensaver/screensavers/attraction.xml.h:4
+#: capplets/screensaver/screensavers/bsod.xml.h:3
+#: capplets/screensaver/screensavers/compass.xml.h:3
+#: capplets/screensaver/screensavers/flag.xml.h:2
+#: capplets/screensaver/screensavers/qix.xml.h:3
+#: capplets/screensaver/screensavers/starfish.xml.h:3
+msgid "Fast"
+msgstr "快"
+
+#: capplets/screensaver/screensavers/3d_clock.xml.h:3
+#: capplets/screensaver/screensavers/attraction.xml.h:6
+#: capplets/screensaver/screensavers/qix.xml.h:5
+msgid "High"
+msgstr "高"
+
 #: capplets/screensaver/screensavers/3d_clock.xml.h:4
 #: capplets/screensaver/screensavers/ant.xml.h:6
 #: capplets/screensaver/screensavers/attraction.xml.h:7
@@ -633,9 +561,26 @@ msgstr "3D 時鐘"
 msgid "Large"
 msgstr "大"
 
+#: capplets/screensaver/screensavers/3d_clock.xml.h:5
+#: capplets/screensaver/screensavers/attraction.xml.h:12
+#: capplets/screensaver/screensavers/qix.xml.h:9
+msgid "Low"
+msgstr "低"
+
 #: capplets/screensaver/screensavers/3d_clock.xml.h:6
 msgid "Size:"
 msgstr "大小："
+
+#: capplets/screensaver/screensavers/3d_clock.xml.h:7
+#: capplets/screensaver/screensavers/ant.xml.h:16
+#: capplets/screensaver/screensavers/attraction.xml.h:17
+#: capplets/screensaver/screensavers/bsod.xml.h:6
+#: capplets/screensaver/screensavers/compass.xml.h:6
+#: capplets/screensaver/screensavers/flag.xml.h:10
+#: capplets/screensaver/screensavers/qix.xml.h:17
+#: capplets/screensaver/screensavers/starfish.xml.h:7
+msgid "Slow"
+msgstr "慢"
 
 #: capplets/screensaver/screensavers/3d_clock.xml.h:8
 #: capplets/screensaver/screensavers/ant.xml.h:17
@@ -832,6 +777,12 @@ msgstr ""
 msgid "Lines"
 msgstr "線"
 
+#: capplets/screensaver/screensavers/attraction.xml.h:11
+#: capplets/screensaver/screensavers/qix.xml.h:8
+#: capplets/screensaver/screensavers/rorschach.xml.h:3
+msgid "Long"
+msgstr "長"
+
 #: capplets/screensaver/screensavers/attraction.xml.h:14
 #: capplets/screensaver/screensavers/braid.xml.h:5
 #: capplets/screensaver/screensavers/fadeplot.xml.h:9
@@ -846,6 +797,12 @@ msgstr "顏色的數目"
 #: capplets/screensaver/screensavers/qix.xml.h:14
 msgid "Polygons"
 msgstr "多邊形"
+
+#: capplets/screensaver/screensavers/attraction.xml.h:16
+#: capplets/screensaver/screensavers/qix.xml.h:16
+#: capplets/screensaver/screensavers/rorschach.xml.h:7
+msgid "Short"
+msgstr "短"
 
 #: capplets/screensaver/screensavers/attraction.xml.h:20
 msgid "Splines"
@@ -3051,20 +3008,36 @@ msgstr "音效事件"
 msgid "Sounds for events"
 msgstr "事件音效"
 
-#: control-center/capplet-dir-view.c:308 control-center/gnomecc.desktop.in.h:1
+#: control-center/capplet-dir-view.c:147
+msgid "Layout"
+msgstr ""
+
+#: control-center/capplet-dir-view.c:148
+msgid "Layout to use for this view of the capplets"
+msgstr ""
+
+#: control-center/capplet-dir-view.c:154
+msgid "Capplet directory object"
+msgstr ""
+
+#: control-center/capplet-dir-view.c:155
+msgid "Capplet directory that this view is viewing"
+msgstr ""
+
+#: control-center/capplet-dir-view.c:320 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
 msgstr "GNOME 控制台"
 
-#: control-center/capplet-dir-view.c:311
+#: control-center/capplet-dir-view.c:323
 msgid "Desktop properties manager."
 msgstr "桌面設定總管。"
 
-#: control-center/capplet-dir-view.c:423
+#: control-center/capplet-dir-view.c:448
 #, c-format
 msgid "Gnome Control Center : %s"
 msgstr "Gnome 控制台：%s"
 
-#: control-center/capplet-dir-view.c:468
+#: control-center/capplet-dir-view.c:493
 msgid ""
 "No help is available/installed. Please make sure you\n"
 "have the GNOME User's Guide installed on your system."
@@ -3072,12 +3045,17 @@ msgstr ""
 "輔助說明尚未安裝或不存在，請確定你已經安裝\n"
 "GNOME 的使用者指南到你的系統中。"
 
-#: control-center/capplet-dir-view.c:471
+#: control-center/capplet-dir-view.c:496
 msgid "Close"
 msgstr "關閉"
 
 #: control-center/capplet-dir-view-html.c:145
 msgid "GNOME Control Center:"
+msgstr "GNOME 控制台："
+
+#: control-center/capplet-dir-view-list.c:321
+#, fuzzy, c-format
+msgid "GNOME Control Center: %s"
 msgstr "GNOME 控制台："
 
 #: control-center/gnomecc.desktop.in.h:2
@@ -3092,23 +3070,128 @@ msgstr "主要"
 msgid "Main Settings"
 msgstr "主要設定"
 
-#: control-center/main.c:40
-msgid "Configuration"
-msgstr "設定組態"
+#: libbackground/applier.c:229
+#, fuzzy
+msgid "Type"
+msgstr "Mime 類型"
 
-#: control-center/main.c:63
-msgid "Run the capplet CAPPLET"
-msgstr "執行 CAPPLET 面板控制程式"
+#: libbackground/applier.c:230
+msgid ""
+"Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
+"for preview"
+msgstr ""
 
-#: control-center/main.c:63
-msgid "CAPPLET"
-msgstr "CAPPLET"
+#: libbackground/applier.c:385
+#, c-format
+msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
+msgstr "無法載入 pixbuf \"%s\"；不使用桌布。"
 
-#~ msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
-#~ msgstr "無法載入 pixbuf \"%s\"；不使用桌布。"
+#: libbackground/applier.c:501
+msgid "Disabled"
+msgstr "不使用"
 
-#~ msgid "Disabled"
-#~ msgstr "不使用"
+#: libsounds/sound-view.c:98
+msgid "The sound file for this event does not exist."
+msgstr "這個事件所用的音效檔不存在。"
+
+#: libsounds/sound-view.c:100
+msgid ""
+"The sound file for this event does not exist.\n"
+"You may want to install the gnome-audio package\n"
+"for a set of default sounds."
+msgstr ""
+"這個事件所用的音效檔不存在,\n"
+"你可以安裝 gnome-audio 套件\n"
+"來取得一些預設音效。"
+
+#: libsounds/sound-view.c:152
+msgid "Event"
+msgstr "事件"
+
+#: libsounds/sound-view.c:152
+msgid "File to Play"
+msgstr "播放的音效檔"
+
+#: libsounds/sound-view.c:185
+msgid "Play"
+msgstr "播放"
+
+#: libsounds/sound-view.c:190
+#, fuzzy
+msgid "Select sound file"
+msgstr "選擇檢視器"
+
+#~ msgid "Options for the startup hint dialog"
+#~ msgstr "啟動提示對話視窗的選項"
+
+#~ msgid "Startup Hint"
+#~ msgstr "啟動提示"
+
+#~ msgid "Bell"
+#~ msgstr "響聲"
+
+#~ msgid "Click volume"
+#~ msgstr "鍵盤敲擊聲音量"
+
+#~ msgid "Delay before repeat:"
+#~ msgstr "按鍵重複前的延遲時間"
+
+#~ msgid "Duration (ms)"
+#~ msgstr "持續時間（毫秒）"
+
+#~ msgid "Enable Keyboard Click"
+#~ msgstr "使用鍵盤敲擊聲"
+
+#~ msgid "Enable Keyboard Repeat"
+#~ msgstr "使用按鍵重複"
+
+#~ msgid "Key repeat rate:"
+#~ msgstr "按鍵重複速率："
+
+#~ msgid "Medium"
+#~ msgstr "中等"
+
+#~ msgid "Pitch (Hz)"
+#~ msgstr "音高 (Hz)"
+
+#~ msgid "Test"
+#~ msgstr "測試"
+
+#~ msgid "Very fast"
+#~ msgstr "非常快"
+
+#~ msgid "Very long"
+#~ msgstr "非常長"
+
+#~ msgid "Volume"
+#~ msgstr "音量"
+
+#~ msgid "Left handed"
+#~ msgstr "左手操作"
+
+#~ msgid "Mouse Configuration"
+#~ msgstr "滑鼠設定"
+
+#~ msgid "Mouse speed:"
+#~ msgstr "滑鼠速度："
+
+#~ msgid "My mouse is:"
+#~ msgstr "我的滑鼠是："
+
+#~ msgid "Right handed"
+#~ msgstr "右手操作"
+
+#~ msgid "Sensitivity:"
+#~ msgstr "敏感度："
+
+#~ msgid "Configuration"
+#~ msgstr "設定組態"
+
+#~ msgid "Run the capplet CAPPLET"
+#~ msgstr "執行 CAPPLET 面板控制程式"
+
+#~ msgid "CAPPLET"
+#~ msgstr "CAPPLET"
 
 #~ msgid "Background picture"
 #~ msgstr "背景圖案"
@@ -3311,9 +3394,6 @@ msgstr "CAPPLET"
 #~ msgid "Set actions for %s"
 #~ msgstr "設定 %s 的動作"
 
-#~ msgid "Mime Type"
-#~ msgstr "Mime 類型"
-
 #~ msgid "You must enter a mime-type"
 #~ msgstr "你必須輸入一個 MIME 類型"
 
@@ -3507,17 +3587,8 @@ msgstr "CAPPLET"
 #~ msgid "Advanced Properties"
 #~ msgstr "進階設定"
 
-#~ msgid "Play"
-#~ msgstr "播放"
-
 #~ msgid "Enable"
 #~ msgstr "啟用"
-
-#~ msgid "Event"
-#~ msgstr "事件"
-
-#~ msgid "File to Play"
-#~ msgstr "播放的音效檔"
 
 #~ msgid "Menus"
 #~ msgstr "選單"
@@ -4116,18 +4187,6 @@ msgstr "CAPPLET"
 #~ msgid ""
 #~ "This copy of the GNOME control center was not compiled with sound support"
 #~ msgstr "這份 GNOME 控制台的複製版本在編譯時沒有將音效支援加入"
-
-#~ msgid "The sound file for this event does not exist."
-#~ msgstr "這個事件所用的音效檔不存在。"
-
-#~ msgid ""
-#~ "The sound file for this event does not exist.\n"
-#~ "You may want to install the gnome-audio package\n"
-#~ "for a set of default sounds."
-#~ msgstr ""
-#~ "這個事件所用的音效檔不存在,\n"
-#~ "你可以安裝 gnome-audio 套件\n"
-#~ "來取得一些預設音效。"
 
 #~ msgid "Can detach and move toolbars"
 #~ msgstr "可以取出並移動工具列"

@@ -1,9 +1,7 @@
 bin_PROGRAMS = gnome-keyboard-properties
 
 gnome_keyboard_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
-
-gnome_keyboard_properties_SOURCES =		\
-	keyboard-properties.c
+gnome_keyboard_properties_SOURCES = keyboard-properties.c
 
 @INTLTOOL_DESKTOP_RULE@
 
@@ -15,4 +13,4 @@ icons_DATA = keyboard-capplet.png
 
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
-
+EXTRA_DIST = $(Glade_DATA) $(icons_DATA)

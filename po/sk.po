@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.5.1\n"
-"POT-Creation-Date: 2001-12-13 14:16+0100\n"
+"POT-Creation-Date: 2001-12-20 10:42-0500\n"
 "PO-Revision-Date: 2001-12-13 14:17CET\n"
 "Last-Translator: Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -186,112 +186,163 @@ msgstr "Pozadie"
 msgid "Configuration of the desktop's background"
 msgstr "Nastavenie pozadia plochy"
 
-#: capplets/background/background-properties-capplet.c:274
-#: capplets/background/background-properties-capplet.c:276
-#: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
-msgid "Just apply settings and quit"
-msgstr "Iba pou¾i» nastavenie a skonèi»"
-
-#: capplets/background/background-properties-capplet.c:278
-#: capplets/common/capplet-util.c:243
+#: capplets/background/background-properties-capplet.c:288
+#: capplets/common/capplet-util.c:249
 msgid "Retrieve and store legacy settings"
 msgstr "Získa» a ulo¾i» predchádzajúce nastavenie"
 
-#: capplets/background/background-properties-capplet.c:302
+#: capplets/background/background-properties-capplet.c:313
 msgid "Background properties"
 msgstr "Vlastnosti pozadia"
+
+#: capplets/common/capplet-util.c:245 capplets/common/capplet-util.c:247
+msgid "Just apply settings and quit"
+msgstr "Iba pou¾i» nastavenie a skonèi»"
+
+#: capplets/common/gconf-property-editor.c:140
+msgid "Key"
+msgstr ""
+
+#: capplets/common/gconf-property-editor.c:141
+msgid "GConf key to which this property editor is attached"
+msgstr ""
+
+#: capplets/common/gconf-property-editor.c:147
+msgid "Callback"
+msgstr ""
+
+#: capplets/common/gconf-property-editor.c:148
+msgid "Issue this callback when the value associated with key gets changed"
+msgstr ""
+
+#: capplets/common/gconf-property-editor.c:153
+msgid "Change set"
+msgstr ""
+
+#: capplets/common/gconf-property-editor.c:154
+msgid ""
+"GConf change set containing data to be forwarded to the gconf client on apply"
+msgstr ""
+
+#: capplets/common/gconf-property-editor.c:159
+msgid "Conversion to widget callback"
+msgstr ""
+
+#: capplets/common/gconf-property-editor.c:160
+msgid ""
+"Callback to be issued when data are to be converted from GConf to the widget"
+msgstr ""
+
+#: capplets/common/gconf-property-editor.c:165
+msgid "Conversion from widget callback"
+msgstr ""
+
+#: capplets/common/gconf-property-editor.c:166
+msgid ""
+"Callback to be issued when data are to be converted to GConf from the widget"
+msgstr ""
+
+#: capplets/common/gconf-property-editor.c:171
+msgid "UI Control"
+msgstr ""
+
+#: capplets/common/gconf-property-editor.c:172
+msgid "Object that controls the property (normally a widget)"
+msgstr ""
 
 #: capplets/default-applications/default-applications.desktop.in.in.h:1
 msgid "Choose the applications used by default"
 msgstr "Vyberte ¹tandardné aplikácie"
 
 #: capplets/default-applications/default-applications.desktop.in.in.h:2
-#: capplets/default-applications/interface.c:98
+#: capplets/default-applications/interface.c:97
+#: capplets/screensaver/main.c:168
 msgid "Default Applications"
 msgstr "©tandardné aplikácie"
 
-#: capplets/default-applications/interface.c:114
+#: capplets/default-applications/interface.c:113
 msgid "Gnome Default Editor"
 msgstr "GNOME Editor ¹tandardného nastavenia"
 
-#: capplets/default-applications/interface.c:131
+#: capplets/default-applications/interface.c:130
 msgid "Select an Editor"
 msgstr "Vyberte editor"
 
-#: capplets/default-applications/interface.c:140
+#: capplets/default-applications/interface.c:139
 msgid "With this option, you can select a predefined Editor as your default"
 msgstr "Táto voµba umo¾òuje výber ¹tandardného editora"
 
-#: capplets/default-applications/interface.c:160
+#: capplets/default-applications/interface.c:159
 msgid "Custom Editor"
 msgstr "Vlastný editor"
 
-#: capplets/default-applications/interface.c:169
+#: capplets/default-applications/interface.c:168
 msgid "With this option you can create your own default editor"
 msgstr "Táto voµba umo¾òuje výber vlastného ¹tandardného editora"
 
-#: capplets/default-applications/interface.c:180
-#: capplets/default-applications/interface.c:311
-#: capplets/default-applications/interface.c:442
+#: capplets/default-applications/interface.c:179
+#: capplets/default-applications/interface.c:310
+#: capplets/default-applications/interface.c:441
 msgid "Start in Terminal"
 msgstr "Spusti» v termináli"
 
-#: capplets/default-applications/interface.c:188
+#: capplets/default-applications/interface.c:187
 msgid "Does this editor need to start in an xterm?"
 msgstr "Potrebuje tento editor xterm?"
 
-#: capplets/default-applications/interface.c:190
+#: capplets/default-applications/interface.c:189
 msgid "Accepts Line Number"
 msgstr "Akceptuje èísla riadkov"
 
-#: capplets/default-applications/interface.c:198
+#: capplets/default-applications/interface.c:197
 msgid "Does this editor accept line numbers from the command line?"
 msgstr "Akceptuje tento editor èísla riadkov z príkazového riadku?"
 
-#: capplets/default-applications/interface.c:209
-#: capplets/default-applications/interface.c:340
-#: capplets/default-applications/interface.c:471
-#: capplets/default-applications/interface.c:582
+#: capplets/default-applications/interface.c:208
+#: capplets/default-applications/interface.c:339
+#: capplets/default-applications/interface.c:470
+#: capplets/default-applications/interface.c:581
 msgid "Command:"
 msgstr "Príkaz:"
 
-#: capplets/default-applications/interface.c:227
+#: capplets/default-applications/interface.c:226
 msgid "Please enter the command line used to start this editor"
 msgstr "Prosím, zadajte príkazový riadok pre spustenie editora"
 
-#: capplets/default-applications/interface.c:238
+#: capplets/default-applications/interface.c:237
 msgid "Text Editor"
 msgstr "Textový editor"
 
-#: capplets/default-applications/interface.c:245
+#: capplets/default-applications/interface.c:244
 msgid "Gnome Default Web Browser"
 msgstr "GNOME ¹tandardný prehliadaè WWW"
 
-#: capplets/default-applications/interface.c:262
+#: capplets/default-applications/interface.c:261
 msgid "Select a Web Browser"
 msgstr "Vyberte prehliadaè WWW"
 
-#: capplets/default-applications/interface.c:271
-msgid "With this option, you can select a predefined Web Browser as your default"
+#: capplets/default-applications/interface.c:270
+msgid ""
+"With this option, you can select a predefined Web Browser as your default"
 msgstr "Táto voµba umo¾òuje vybra» ¹tandardný prehliadaè WWW"
 
-#: capplets/default-applications/interface.c:291
+#: capplets/default-applications/interface.c:290
 msgid "Custom Web Browser"
 msgstr "Vlastný prehliadaè WWW"
 
-#: capplets/default-applications/interface.c:300
+#: capplets/default-applications/interface.c:299
 msgid "With this option you can create your own default web browser"
 msgstr "Táto voµba umo¾òuje definova» vlastný ¹tandardný prehliadaè WWW"
 
-#: capplets/default-applications/interface.c:319
+#: capplets/default-applications/interface.c:318
 msgid "Does this web browser need to display in an xterm?"
 msgstr "Potrebuje tento prehliadaè xterm?"
 
-#: capplets/default-applications/interface.c:321
+#: capplets/default-applications/interface.c:320
 msgid "Understands Netscape Remote Control"
 msgstr "Podporuje Netscape Remote Control"
 
-#: capplets/default-applications/interface.c:329
+#: capplets/default-applications/interface.c:328
 msgid ""
 "Does this web browser support the netscape remote control protocol?  If in "
 "doubt, and this web browser isn't Netscape or Mozilla, it probably doesn't."
@@ -299,79 +350,79 @@ msgstr ""
 "Podporuje tento prehliadaè Netscape protokol pre vzdialené ovládanie? Ak to "
 "nie je Netscape alebo Mozilla, tak asi nie."
 
-#: capplets/default-applications/interface.c:358
+#: capplets/default-applications/interface.c:357
 msgid "Please enter the command line used to start this web browser"
 msgstr "Prosím, zadajte príkazový riadok pre spustenie prehliadaèa"
 
-#: capplets/default-applications/interface.c:369
+#: capplets/default-applications/interface.c:368
 msgid "Web Browser"
 msgstr "WWW prehliadaè"
 
-#: capplets/default-applications/interface.c:376
+#: capplets/default-applications/interface.c:375
 msgid "Default Help Viewer"
 msgstr "©tandardný prehliadaè pomocníka"
 
-#: capplets/default-applications/interface.c:393
+#: capplets/default-applications/interface.c:392
 msgid "Select a Viewer"
 msgstr "Vyberte prehliadaè"
 
-#: capplets/default-applications/interface.c:402
+#: capplets/default-applications/interface.c:401
 msgid "With this option you can select a predefined help viewer."
 msgstr "Táto voµba umo¾òuje vybra» preddefinovaný prehliadaè pomocníka."
 
-#: capplets/default-applications/interface.c:422
+#: capplets/default-applications/interface.c:421
 msgid "Custom Help Viewer"
 msgstr "Vlastný prehliadaè pomocníka"
 
-#: capplets/default-applications/interface.c:431
+#: capplets/default-applications/interface.c:430
 msgid "With this option you can create your own help viewer"
 msgstr "Táto voµba umo¾òuje nastavi» vlastný prehliadaè pre pomocníka"
 
-#: capplets/default-applications/interface.c:450
+#: capplets/default-applications/interface.c:449
 msgid "Does this help viewer need an xterm for display?"
 msgstr "Vy¾aduje tento prehliadaè xterm?"
 
-#: capplets/default-applications/interface.c:452
+#: capplets/default-applications/interface.c:451
 msgid "Accepts URLs"
 msgstr "Akceptuje URL"
 
-#: capplets/default-applications/interface.c:460
+#: capplets/default-applications/interface.c:459
 msgid "Does this help viewer allow URLs for help?"
 msgstr "Podporuje tento prehliadaè pomocníka URL ako argumenty?"
 
-#: capplets/default-applications/interface.c:489
+#: capplets/default-applications/interface.c:488
 msgid "Please enter the command line used to start this help viewer"
 msgstr "Prosím, zadajte príkazový riadok pre spustenie prehliadaèa"
 
-#: capplets/default-applications/interface.c:500
+#: capplets/default-applications/interface.c:499
 msgid "Help Viewer"
 msgstr "Prehliadaè Pomocníka"
 
-#: capplets/default-applications/interface.c:507
+#: capplets/default-applications/interface.c:506
 msgid "Default Terminal"
 msgstr "©tandardný terminál"
 
-#: capplets/default-applications/interface.c:524
+#: capplets/default-applications/interface.c:523
 msgid "Select a Terminal"
 msgstr "Vyberte terminál"
 
-#: capplets/default-applications/interface.c:533
+#: capplets/default-applications/interface.c:532
 msgid "With this option you can select a predefined terminal."
 msgstr "Táto voµba umo¾òuje vybra» ¹tandardný terminál."
 
-#: capplets/default-applications/interface.c:553
+#: capplets/default-applications/interface.c:552
 msgid "Custom Terminal"
 msgstr "Vlastný terminál"
 
-#: capplets/default-applications/interface.c:562
+#: capplets/default-applications/interface.c:561
 msgid "With this option you can create your own terminal"
 msgstr "Táto voµba umo¾òuje výber vlastného ¹tandardného terminálu."
 
-#: capplets/default-applications/interface.c:592
+#: capplets/default-applications/interface.c:591
 msgid "Exec Flag:"
 msgstr "Prepínaè pre spustenie:"
 
-#: capplets/default-applications/interface.c:610
+#: capplets/default-applications/interface.c:609
 msgid ""
 "Please enter the flag used by this terminal to specify the command to run on "
 "startup.  For example, in 'xterm' this would be '-e'."
@@ -379,11 +430,11 @@ msgstr ""
 "Prosím, zadajte prepínaè terminálu, ktorým je mo¾né zada» príkaz, ktorý sa "
 "má spusti». Napr. pre 'xterm' je to '-e'."
 
-#: capplets/default-applications/interface.c:620
+#: capplets/default-applications/interface.c:619
 msgid "Please enter the command line used to start this terminal"
 msgstr "Prosím, zadajte príkazový riadok pre spustenie terminálu"
 
-#: capplets/default-applications/interface.c:631
+#: capplets/default-applications/interface.c:630
 msgid "Terminal"
 msgstr "Terminál"
 
@@ -397,15 +448,6 @@ msgstr "Nepodarilo sa nájs» súbor pixmap: %s"
 msgid "Couldn't create pixmap from file: %s"
 msgstr "Neporadilo sa vytvori» pixmap zo súboru: %s"
 
-#: capplets/desktop-links/gnome-hint-properties.desktop.in.h:1
-msgid "Options for the startup hint dialog"
-msgstr "Mo¾nosti pre dialóg rád pri ¹tarte"
-
-#: capplets/desktop-links/gnome-hint-properties.desktop.in.h:2
-msgid "Startup Hint"
-msgstr "Rady pri ¹tarte"
-
-#: capplets/keyboard/keyboard-properties.glade.h:9
 #: capplets/keyboard/keyboard.desktop.in.in.h:1
 msgid "Keyboard"
 msgstr "Klávesnica"
@@ -414,98 +456,6 @@ msgstr "Klávesnica"
 msgid "Keyboard Properties"
 msgstr "Vlastnosti klávesnice"
 
-#: capplets/keyboard/keyboard-properties.glade.h:1
-msgid "Bell"
-msgstr "Zvonèek"
-
-#: capplets/keyboard/keyboard-properties.glade.h:2
-msgid "Click volume"
-msgstr "Hlasitos» stlaèenia klávesy"
-
-#: capplets/keyboard/keyboard-properties.glade.h:3
-msgid "Delay before repeat:"
-msgstr "Pauza pred opakovaním:"
-
-#: capplets/keyboard/keyboard-properties.glade.h:4
-msgid "Duration (ms)"
-msgstr "Då¾ka (ms)"
-
-#: capplets/keyboard/keyboard-properties.glade.h:5
-msgid "Enable Keyboard Click"
-msgstr "Povoli» zvuk klávesnice"
-
-#: capplets/keyboard/keyboard-properties.glade.h:6
-msgid "Enable Keyboard Repeat"
-msgstr "Povoli» automatické opakovanie"
-
-#: capplets/keyboard/keyboard-properties.glade.h:7
-#: capplets/mouse/mouse-properties.glade.h:1
-#: capplets/screensaver/screensavers/3d_clock.xml.h:2
-#: capplets/screensaver/screensavers/ant.xml.h:3
-#: capplets/screensaver/screensavers/attraction.xml.h:4
-#: capplets/screensaver/screensavers/bsod.xml.h:3
-#: capplets/screensaver/screensavers/compass.xml.h:3
-#: capplets/screensaver/screensavers/flag.xml.h:2
-#: capplets/screensaver/screensavers/qix.xml.h:3
-#: capplets/screensaver/screensavers/starfish.xml.h:3
-msgid "Fast"
-msgstr "Rýchlo"
-
-#: capplets/keyboard/keyboard-properties.glade.h:8
-msgid "Key repeat rate:"
-msgstr "Rýchlos» opakovania kláves:"
-
-#: capplets/keyboard/keyboard-properties.glade.h:10
-#: capplets/screensaver/screensavers/attraction.xml.h:11
-#: capplets/screensaver/screensavers/qix.xml.h:8
-#: capplets/screensaver/screensavers/rorschach.xml.h:3
-msgid "Long"
-msgstr "Dlhé"
-
-#: capplets/keyboard/keyboard-properties.glade.h:11
-msgid "Medium"
-msgstr "Stredné"
-
-#: capplets/keyboard/keyboard-properties.glade.h:12
-msgid "Pitch (Hz)"
-msgstr "Vý¹ka (Hz)"
-
-#: capplets/keyboard/keyboard-properties.glade.h:13
-#: capplets/screensaver/screensavers/attraction.xml.h:16
-#: capplets/screensaver/screensavers/qix.xml.h:16
-#: capplets/screensaver/screensavers/rorschach.xml.h:7
-msgid "Short"
-msgstr "Krátke"
-
-#: capplets/keyboard/keyboard-properties.glade.h:14
-#: capplets/mouse/mouse-properties.glade.h:10
-#: capplets/screensaver/screensavers/3d_clock.xml.h:7
-#: capplets/screensaver/screensavers/ant.xml.h:16
-#: capplets/screensaver/screensavers/attraction.xml.h:17
-#: capplets/screensaver/screensavers/bsod.xml.h:6
-#: capplets/screensaver/screensavers/compass.xml.h:6
-#: capplets/screensaver/screensavers/flag.xml.h:10
-#: capplets/screensaver/screensavers/qix.xml.h:17
-#: capplets/screensaver/screensavers/starfish.xml.h:7
-msgid "Slow"
-msgstr "Pomaly"
-
-#: capplets/keyboard/keyboard-properties.glade.h:15
-msgid "Test"
-msgstr "Test"
-
-#: capplets/keyboard/keyboard-properties.glade.h:16
-msgid "Very fast"
-msgstr "Veµmi rýchle"
-
-#: capplets/keyboard/keyboard-properties.glade.h:17
-msgid "Very long"
-msgstr "Veµmi dlhé"
-
-#: capplets/keyboard/keyboard-properties.glade.h:18
-msgid "Volume"
-msgstr "Hlasitos»"
-
 #: capplets/mouse/mouse.desktop.in.in.h:1
 msgid "Mouse"
 msgstr "My¹"
@@ -513,44 +463,6 @@ msgstr "My¹"
 #: capplets/mouse/mouse.desktop.in.in.h:2
 msgid "Mouse Properties"
 msgstr "Vlastnosti my¹i"
-
-#: capplets/mouse/mouse-properties.glade.h:2
-#: capplets/screensaver/screensavers/3d_clock.xml.h:3
-#: capplets/screensaver/screensavers/attraction.xml.h:6
-#: capplets/screensaver/screensavers/qix.xml.h:5
-msgid "High"
-msgstr "Vysoká"
-
-#: capplets/mouse/mouse-properties.glade.h:3
-msgid "Left handed"
-msgstr "Pre µavákov"
-
-#: capplets/mouse/mouse-properties.glade.h:4
-#: capplets/screensaver/screensavers/3d_clock.xml.h:5
-#: capplets/screensaver/screensavers/attraction.xml.h:12
-#: capplets/screensaver/screensavers/qix.xml.h:9
-msgid "Low"
-msgstr "Nízka"
-
-#: capplets/mouse/mouse-properties.glade.h:5
-msgid "Mouse Configuration"
-msgstr "Nastavenie my¹i"
-
-#: capplets/mouse/mouse-properties.glade.h:6
-msgid "Mouse speed:"
-msgstr "Rýchlos» pohybu:"
-
-#: capplets/mouse/mouse-properties.glade.h:7
-msgid "My mouse is:"
-msgstr "Moja my¹ je:"
-
-#: capplets/mouse/mouse-properties.glade.h:8
-msgid "Right handed"
-msgstr "Pre pravákov"
-
-#: capplets/mouse/mouse-properties.glade.h:9
-msgid "Sensitivity:"
-msgstr "Citlivos»:"
 
 #: capplets/screensaver/preferences.c:813
 msgid "Custom screensaver. No description available"
@@ -624,6 +536,23 @@ msgstr "¥ubovoµné"
 msgid "3d clock"
 msgstr "3d hodiny"
 
+#: capplets/screensaver/screensavers/3d_clock.xml.h:2
+#: capplets/screensaver/screensavers/ant.xml.h:3
+#: capplets/screensaver/screensavers/attraction.xml.h:4
+#: capplets/screensaver/screensavers/bsod.xml.h:3
+#: capplets/screensaver/screensavers/compass.xml.h:3
+#: capplets/screensaver/screensavers/flag.xml.h:2
+#: capplets/screensaver/screensavers/qix.xml.h:3
+#: capplets/screensaver/screensavers/starfish.xml.h:3
+msgid "Fast"
+msgstr "Rýchlo"
+
+#: capplets/screensaver/screensavers/3d_clock.xml.h:3
+#: capplets/screensaver/screensavers/attraction.xml.h:6
+#: capplets/screensaver/screensavers/qix.xml.h:5
+msgid "High"
+msgstr "Vysoká"
+
 #: capplets/screensaver/screensavers/3d_clock.xml.h:4
 #: capplets/screensaver/screensavers/ant.xml.h:6
 #: capplets/screensaver/screensavers/attraction.xml.h:7
@@ -632,9 +561,26 @@ msgstr "3d hodiny"
 msgid "Large"
 msgstr "Veµké"
 
+#: capplets/screensaver/screensavers/3d_clock.xml.h:5
+#: capplets/screensaver/screensavers/attraction.xml.h:12
+#: capplets/screensaver/screensavers/qix.xml.h:9
+msgid "Low"
+msgstr "Nízka"
+
 #: capplets/screensaver/screensavers/3d_clock.xml.h:6
 msgid "Size:"
 msgstr "Veµkos»:"
+
+#: capplets/screensaver/screensavers/3d_clock.xml.h:7
+#: capplets/screensaver/screensavers/ant.xml.h:16
+#: capplets/screensaver/screensavers/attraction.xml.h:17
+#: capplets/screensaver/screensavers/bsod.xml.h:6
+#: capplets/screensaver/screensavers/compass.xml.h:6
+#: capplets/screensaver/screensavers/flag.xml.h:10
+#: capplets/screensaver/screensavers/qix.xml.h:17
+#: capplets/screensaver/screensavers/starfish.xml.h:7
+msgid "Slow"
+msgstr "Pomaly"
 
 #: capplets/screensaver/screensavers/3d_clock.xml.h:8
 #: capplets/screensaver/screensavers/ant.xml.h:17
@@ -827,6 +773,12 @@ msgstr ""
 msgid "Lines"
 msgstr "Èiary"
 
+#: capplets/screensaver/screensavers/attraction.xml.h:11
+#: capplets/screensaver/screensavers/qix.xml.h:8
+#: capplets/screensaver/screensavers/rorschach.xml.h:3
+msgid "Long"
+msgstr "Dlhé"
+
 #: capplets/screensaver/screensavers/attraction.xml.h:14
 #: capplets/screensaver/screensavers/braid.xml.h:5
 #: capplets/screensaver/screensavers/fadeplot.xml.h:9
@@ -841,6 +793,12 @@ msgstr "Poèet farieb"
 #: capplets/screensaver/screensavers/qix.xml.h:14
 msgid "Polygons"
 msgstr "Mnohouholníky"
+
+#: capplets/screensaver/screensavers/attraction.xml.h:16
+#: capplets/screensaver/screensavers/qix.xml.h:16
+#: capplets/screensaver/screensavers/rorschach.xml.h:7
+msgid "Short"
+msgstr "Krátke"
 
 #: capplets/screensaver/screensavers/attraction.xml.h:20
 msgid "Splines"
@@ -1294,7 +1252,8 @@ msgstr "Urèi» maximálnu veµkos»"
 msgid ""
 "Moving polygons, similar to a kaleidescope (more like a kaleidescope than "
 "the hack called `kaleid,' actually.) This one by Jouk Jansen."
-msgstr "Posúvajúce sa mnohouholníky, podobné kaleidoskopu. Vytvoril Jouk Jansen."
+msgstr ""
+"Posúvajúce sa mnohouholníky, podobné kaleidoskopu. Vytvoril Jouk Jansen."
 
 #: capplets/screensaver/screensavers/crystal.xml.h:11
 msgid "Number of polygons to use."
@@ -1348,7 +1307,8 @@ msgstr "DangerBall"
 msgid ""
 "Draws a ball that periodically extrudes many random spikes. Ouch! Written by "
 "Jamie Zawinski."
-msgstr "Kreslí loptu, z ktorej sa opakovane vysúvajú kopie. Napísal Jamie Zawinski."
+msgstr ""
+"Kreslí loptu, z ktorej sa opakovane vysúvajú kopie. Napísal Jamie Zawinski."
 
 #: capplets/screensaver/screensavers/decayscreen.xml.h:1
 msgid "DecayScreen"
@@ -1652,7 +1612,8 @@ msgstr "Poèet stromov."
 msgid ""
 "This draws fractal trees. Written by Peter Baumung. Everybody loves "
 "fractals, right?"
-msgstr "Kreslí fraktálne stromy. Napísal Paterm Baumung. Ka¾dý má rád fraktály, v¹ak?"
+msgstr ""
+"Kreslí fraktálne stromy. Napísal Paterm Baumung. Ka¾dý má rád fraktály, v¹ak?"
 
 #: capplets/screensaver/screensavers/galaxy.xml.h:1
 msgid "Galaxy"
@@ -1684,7 +1645,8 @@ msgstr ""
 msgid ""
 "Draws a rippling waves on a rotating wireframe grid, using GL. Written by "
 "Josiah Pease."
-msgstr "Kreslí vlny rotujúceho mrie¾kového modelu pomocou GL. Napísal Josiah Pease."
+msgstr ""
+"Kreslí vlny rotujúceho mrie¾kového modelu pomocou GL. Napísal Josiah Pease."
 
 #: capplets/screensaver/screensavers/gflux.xml.h:2
 msgid "GFlux"
@@ -1783,7 +1745,8 @@ msgid "Greynetic"
 msgstr "Greynetic"
 
 #: capplets/screensaver/screensavers/greynetic.xml.h:6
-msgid "This draws random colored and stippled rectangles. Written by Jamie Zawinski."
+msgid ""
+"This draws random colored and stippled rectangles. Written by Jamie Zawinski."
 msgstr "Kreslí náhodne vyfarbené a vyplnené obdå¾niky. Napísal Jamie Zawinski."
 
 #: capplets/screensaver/screensavers/halo.xml.h:1
@@ -2469,7 +2432,8 @@ msgid "Pyro"
 msgstr "Pyro"
 
 #: capplets/screensaver/screensavers/pyro.xml.h:9
-msgid "Pyro draws exploding fireworks. Blah blah blah. Written by Jamie Zawinski."
+msgid ""
+"Pyro draws exploding fireworks. Blah blah blah. Written by Jamie Zawinski."
 msgstr "Pyro kreslí ohòostroj. Bla bla bla. Napísal Jamie Zawinski."
 
 #: capplets/screensaver/screensavers/qix.xml.h:1
@@ -2758,7 +2722,8 @@ msgid ""
 "============================================================================= ! ! "
 "Documentation for some programs that are not bundled with XScreenSaver ! !"
 "============================================================================="
-msgstr "Simuluje zrýchµujúce kamene alebo tancujúceho èerva. Napísal Conrad Parker."
+msgstr ""
+"Simuluje zrýchµujúce kamene alebo tancujúceho èerva. Napísal Conrad Parker."
 
 #: capplets/screensaver/screensavers/speedmine.xml.h:2
 msgid "SpeedMine"
@@ -2969,7 +2934,8 @@ msgstr "T3D"
 msgid ""
 "This draws a working analog clock composed of floating, throbbing bubbles. "
 "Written by Bernd Paysan."
-msgstr "Kreslí analógové hodiny zlo¾ené z plávajúcich bublín. Napísal Bernd Paysan."
+msgstr ""
+"Kreslí analógové hodiny zlo¾ené z plávajúcich bublín. Napísal Bernd Paysan."
 
 #: capplets/screensaver/screensavers/triangle.xml.h:3
 msgid ""
@@ -2987,7 +2953,8 @@ msgstr "Triangle"
 msgid ""
 "This draws line- and arc-based Truchet patterns that tile the screen. "
 "Written by Adrian Likins."
-msgstr "Kreslí Truchetove vzory zlo¾ené z èiar a oblúkov. Napísal Adrian Likins."
+msgstr ""
+"Kreslí Truchetove vzory zlo¾ené z èiar a oblúkov. Napísal Adrian Likins."
 
 #: capplets/screensaver/screensavers/truchet.xml.h:2
 msgid "Truchet"
@@ -3032,7 +2999,8 @@ msgid "Vines"
 msgstr "Vines"
 
 #: capplets/screensaver/screensavers/wander.xml.h:1
-msgid "Draws a colorful random-walk, in various forms. Written by Rick Campbell."
+msgid ""
+"Draws a colorful random-walk, in various forms. Written by Rick Campbell."
 msgstr "Kreslí farebnú cestu v rôznych formách. Napísal Rick Campbell."
 
 #: capplets/screensaver/screensavers/wander.xml.h:2
@@ -3075,7 +3043,8 @@ msgstr "WhirlwindWarp"
 
 #: capplets/screensaver/screensavers/whirlygig.xml.h:1
 msgid "Draws zooming chains of sinusoidal spots. Written by Ashton Trey Belew."
-msgstr "Kreslí zväè¹ujúce sa re»azce sinusoidových bodov. Napísal Ashton Trey Belew."
+msgstr ""
+"Kreslí zväè¹ujúce sa re»azce sinusoidových bodov. Napísal Ashton Trey Belew."
 
 #: capplets/screensaver/screensavers/whirlygig.xml.h:2
 msgid "WhirlyGig"
@@ -3199,7 +3168,8 @@ msgstr "Xlyap"
 msgid ""
 "A rendition of the text scrolls seen in the movie ``The Matrix.'' Written by "
 "Jamie Zawinski."
-msgstr "Obraz posúvajúceho sa textu ako vo filme \"Matrix\". Napísal Jamie Zawinski."
+msgstr ""
+"Obraz posúvajúceho sa textu ako vo filme \"Matrix\". Napísal Jamie Zawinski."
 
 #: capplets/screensaver/screensavers/xmatrix.xml.h:2
 msgid "Xmatrix"
@@ -3336,20 +3306,36 @@ msgstr "Zvukové udalosti"
 msgid "Sounds for events"
 msgstr "Zvuky pre udalosti"
 
-#: control-center/capplet-dir-view.c:308 control-center/gnomecc.desktop.in.h:1
+#: control-center/capplet-dir-view.c:147
+msgid "Layout"
+msgstr ""
+
+#: control-center/capplet-dir-view.c:148
+msgid "Layout to use for this view of the capplets"
+msgstr ""
+
+#: control-center/capplet-dir-view.c:154
+msgid "Capplet directory object"
+msgstr ""
+
+#: control-center/capplet-dir-view.c:155
+msgid "Capplet directory that this view is viewing"
+msgstr ""
+
+#: control-center/capplet-dir-view.c:320 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
 msgstr "GNOME Ovládacie centrum"
 
-#: control-center/capplet-dir-view.c:311
+#: control-center/capplet-dir-view.c:323
 msgid "Desktop properties manager."
 msgstr "Správca nastavenia."
 
-#: control-center/capplet-dir-view.c:423
+#: control-center/capplet-dir-view.c:448
 #, c-format
 msgid "Gnome Control Center : %s"
 msgstr "GNOME Ovládacie centrum: %s"
 
-#: control-center/capplet-dir-view.c:468
+#: control-center/capplet-dir-view.c:493
 msgid ""
 "No help is available/installed. Please make sure you\n"
 "have the GNOME User's Guide installed on your system."
@@ -3357,12 +3343,17 @@ msgstr ""
 "Pre tieto nastavenia nie je pomocník k dispozícii. Prosím, overte, ¾e\n"
 "máte nain¹talovaný Pou¾ívateµský manuál GNOME."
 
-#: control-center/capplet-dir-view.c:471
+#: control-center/capplet-dir-view.c:496
 msgid "Close"
 msgstr "Zavrie»"
 
 #: control-center/capplet-dir-view-html.c:145
 msgid "GNOME Control Center:"
+msgstr "GNOME Ovládacie centrum:"
+
+#: control-center/capplet-dir-view-list.c:321
+#, fuzzy, c-format
+msgid "GNOME Control Center: %s"
 msgstr "GNOME Ovládacie centrum:"
 
 #: control-center/gnomecc.desktop.in.h:2
@@ -3377,15 +3368,122 @@ msgstr "Hlavné"
 msgid "Main Settings"
 msgstr "Hlavné nastavenie"
 
-#: control-center/main.c:40
-msgid "Configuration"
-msgstr "Nastavenie"
+#: libbackground/applier.c:229
+msgid "Type"
+msgstr ""
 
-#: control-center/main.c:63
-msgid "Run the capplet CAPPLET"
-msgstr "Spusti» applet pre ovládacie centrum CAPPLET"
+#: libbackground/applier.c:230
+msgid ""
+"Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
+"for preview"
+msgstr ""
 
-#: control-center/main.c:63
-msgid "CAPPLET"
-msgstr "CAPPLET"
+#: libbackground/applier.c:385
+#, c-format
+msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
+msgstr ""
 
+#: libbackground/applier.c:501
+msgid "Disabled"
+msgstr ""
+
+#: libsounds/sound-view.c:98
+msgid "The sound file for this event does not exist."
+msgstr ""
+
+#: libsounds/sound-view.c:100
+msgid ""
+"The sound file for this event does not exist.\n"
+"You may want to install the gnome-audio package\n"
+"for a set of default sounds."
+msgstr ""
+
+#: libsounds/sound-view.c:152
+msgid "Event"
+msgstr ""
+
+#: libsounds/sound-view.c:152
+msgid "File to Play"
+msgstr ""
+
+#: libsounds/sound-view.c:185
+#, fuzzy
+msgid "Play"
+msgstr "Pulsar"
+
+#: libsounds/sound-view.c:190
+#, fuzzy
+msgid "Select sound file"
+msgstr "Vyberte prehliadaè"
+
+#~ msgid "Options for the startup hint dialog"
+#~ msgstr "Mo¾nosti pre dialóg rád pri ¹tarte"
+
+#~ msgid "Startup Hint"
+#~ msgstr "Rady pri ¹tarte"
+
+#~ msgid "Bell"
+#~ msgstr "Zvonèek"
+
+#~ msgid "Click volume"
+#~ msgstr "Hlasitos» stlaèenia klávesy"
+
+#~ msgid "Delay before repeat:"
+#~ msgstr "Pauza pred opakovaním:"
+
+#~ msgid "Duration (ms)"
+#~ msgstr "Då¾ka (ms)"
+
+#~ msgid "Enable Keyboard Click"
+#~ msgstr "Povoli» zvuk klávesnice"
+
+#~ msgid "Enable Keyboard Repeat"
+#~ msgstr "Povoli» automatické opakovanie"
+
+#~ msgid "Key repeat rate:"
+#~ msgstr "Rýchlos» opakovania kláves:"
+
+#~ msgid "Medium"
+#~ msgstr "Stredné"
+
+#~ msgid "Pitch (Hz)"
+#~ msgstr "Vý¹ka (Hz)"
+
+#~ msgid "Test"
+#~ msgstr "Test"
+
+#~ msgid "Very fast"
+#~ msgstr "Veµmi rýchle"
+
+#~ msgid "Very long"
+#~ msgstr "Veµmi dlhé"
+
+#~ msgid "Volume"
+#~ msgstr "Hlasitos»"
+
+#~ msgid "Left handed"
+#~ msgstr "Pre µavákov"
+
+#~ msgid "Mouse Configuration"
+#~ msgstr "Nastavenie my¹i"
+
+#~ msgid "Mouse speed:"
+#~ msgstr "Rýchlos» pohybu:"
+
+#~ msgid "My mouse is:"
+#~ msgstr "Moja my¹ je:"
+
+#~ msgid "Right handed"
+#~ msgstr "Pre pravákov"
+
+#~ msgid "Sensitivity:"
+#~ msgstr "Citlivos»:"
+
+#~ msgid "Configuration"
+#~ msgstr "Nastavenie"
+
+#~ msgid "Run the capplet CAPPLET"
+#~ msgstr "Spusti» applet pre ovládacie centrum CAPPLET"
+
+#~ msgid "CAPPLET"
+#~ msgstr "CAPPLET"
