@@ -256,7 +256,7 @@ initialize_main_win ()
 	gtk_box_pack_start (GTK_BOX (vbox2), main_win->ext_entry, TRUE, TRUE, 0);
 
 	/* Defaults box */
-	frame = gtk_frame_new (_("Display Options"));
+	frame = gtk_frame_new (NULL);
 	vbox2 = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
 	gtk_box_pack_start (GTK_BOX (vbox), frame, TRUE, TRUE, 0);
 	table = gtk_table_new (3, 2, FALSE);
@@ -421,37 +421,74 @@ show_edit_window (void)
 
 
 static void
-populate_application_menu (GtkWidget *application_menu, const char *mime_string)
+populate_application_menu (GtkWidget *application_menu, const char *mime_type)
 {
-	GtkWidget *new_menu;
-	GtkWidget *menu_item;
+	GtkWidget *new_menu, *menu_item;
 	GList *mime_list;
-	GnomeVFSMimeApplication *application;
-	gboolean has_none;
-	gchar *mime_copy;
+	GnomeVFSMimeApplication *default_app, *application;
+	gboolean has_none, found_match;
+	char *mime_copy;
+	const char *name;
+	GList *children;
+	int index;
 
 	has_none = TRUE;
+	found_match = FALSE;
 
-	mime_copy = g_strdup (mime_string);
+	mime_copy = g_strdup (mime_type);
 	
 	new_menu = gtk_menu_new ();
+	
+	/* Get the default application */
+	default_app = gnome_vfs_mime_get_default_application (mime_type);
 
-	mime_list = gnome_vfs_mime_get_short_list_applications (mime_string);
-	while (mime_list != NULL) {
+	/* Get the application short list */
+	for (mime_list = gnome_vfs_mime_get_short_list_applications (mime_type); mime_list != NULL; mime_list = mime_list->next) {
 		has_none = FALSE;
 
 		application = mime_list->data;
 		menu_item = gtk_menu_item_new_with_label (application->name);
+
+		/* Store copy of application name in item; free when item destroyed. */
+		gtk_object_set_data_full (GTK_OBJECT (menu_item),
+					  "application",
+					  g_strdup (application->name),
+					  g_free);
+
 		gtk_menu_append (GTK_MENU (new_menu), menu_item);
 		gtk_widget_show (menu_item);
-		mime_list = g_list_next (mime_list);
 	}
-	
+	gnome_vfs_mime_application_list_free (mime_list);
+
 	/* Add None menu item */
-	if (has_none) {
+	if (has_none && default_app == NULL) {
 		menu_item = gtk_menu_item_new_with_label (_("None"));
 		gtk_menu_append (GTK_MENU (new_menu), menu_item);
 		gtk_widget_show (menu_item);
+	} else {
+		/* Check and see if default is in the short list */
+		if (default_app != NULL) {
+			/* Iterate */
+			children = gtk_container_children (GTK_CONTAINER (new_menu));
+			for (index = 0; children != NULL; children = children->next, ++index) {				
+				name = (const char *)(gtk_object_get_data (GTK_OBJECT (children->data), "application"));
+				if (name != NULL) {											
+					if (strcmp (default_app->name, name) == 0) {
+						found_match = TRUE;
+						break;
+					}
+				}
+			}
+			g_list_free (children);
+
+			/* See if we have a match */
+			if (found_match) {
+				/* Have menu appear with default application selected */
+				gtk_menu_set_active ( GTK_MENU (new_menu), index);
+			} else {
+				/* FIXME: What should we do in this case? */
+			}
+		}
 	}
 
 	/* Add default seperator and Add application menu item */
@@ -547,14 +584,13 @@ add_application (GtkWidget *widget, gpointer user_data)
 		application->can_open_multiple_files = FALSE;
 		application->can_open_uris = FALSE;
 		
-		/* FIXME:(for gzr) should register app if not already
-		   registered, then pass only the id to
-		   set_default_application */
-		/* gnome_vfs_mime_set_default_application ((const char *)user_data, application); */	
+		gnome_vfs_mime_define_application (application);
+		gnome_vfs_mime_set_default_application ((const char *)user_data, application->id);
 
 		/* Reload menu and set index to default item */
 		populate_application_menu (main_win->application_menu, (const char *)user_data);
 
+		gnome_vfs_mime_application_free (application);
 		g_free (user_data);
 	}
 }
