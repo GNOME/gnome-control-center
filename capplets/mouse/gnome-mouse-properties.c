@@ -188,7 +188,7 @@ drawing_area_button_press_event (GtkWidget      *widget,
 	if (event->type != GDK_BUTTON_PRESS)
 		return FALSE;
 
-	if (!gconf_change_set_check_value (changeset, DOUBLE_CLICK_KEY, &value)) 
+	if (!(changeset && gconf_change_set_check_value (changeset, DOUBLE_CLICK_KEY, &value))) 
 		double_click_time = gconf_client_get_int (gconf_client_get_default (), DOUBLE_CLICK_KEY, NULL);
 	else
 		double_click_time = gconf_value_get_int (value);
