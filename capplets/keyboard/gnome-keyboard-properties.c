@@ -186,6 +186,17 @@ blink_to_widget (GConfPropertyEditor *peditor, const GConfValue *value)
 	return new_value;
 }
 
+static GConfValue *
+volume_to_widget (GConfPropertyEditor *peditor, const GConfValue *value)
+{
+	return gconf_value_int_to_float (value);
+}
+static GConfValue *
+volume_from_widget (GConfPropertyEditor *peditor, const GConfValue *value)
+{
+	return gconf_value_float_to_int (value);
+}
+
 static void
 bell_guard (GtkWidget *toggle,
 	    GladeXML  *dialog)
@@ -272,7 +283,10 @@ setup_dialog (GladeXML       *dialog,
 		(changeset, "/desktop/gnome/peripherals/keyboard/click", WID ("volume_toggle"), NULL);
 	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("volume_hbox"));
 	gconf_peditor_new_numeric_range
-		(changeset, "/desktop/gnome/peripherals/keyboard/click_volume", WID ("volume_scale"), NULL);
+		(changeset, "/desktop/gnome/peripherals/keyboard/click_volume", WID ("volume_scale"),
+		 "conv-to-widget-cb",   volume_to_widget,
+		 "conv-from-widget-cb", volume_from_widget,
+		 NULL);
 	
 	g_signal_connect (G_OBJECT (WID ("bell_custom_radio")), "toggled", (GCallback) bell_guard, dialog);
 	peditor = gconf_peditor_new_select_radio
