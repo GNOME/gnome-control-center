@@ -1,3 +1,14 @@
+2002-09-09  Jody Goldberg <jody@gnome.org>
+
+	http://bugzilla.gnome.org/show_bug.cgi?id=91223
+	* gnome-settings-wm.c (gnome_settings_wm_load) : add some valdation to
+	ensure that we don't set the number of workspaces to 0
+	(which pisses off kde).  Also apply fcrozat's patch to restore the
+	names.
+
+	* gnome-settings-accessibility-keyboard.c (set_server_from_gconf) :
+	  the feature beep is not related the the feature timeout.
+
 2002-08-21  Jody Goldberg <jody@gnome.org>
 
 	* Release 2.1.0

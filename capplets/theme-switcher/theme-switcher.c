@@ -10,6 +10,7 @@
 #include <glade/glade.h>
 #include <libgnomevfs/gnome-vfs-async-ops.h>
 #include <libgnomevfs/gnome-vfs-ops.h>
+#include <libgnomevfs/gnome-vfs-utils.h>
 
 #include <libwindow-settings/gnome-wm-manager.h>
 
@@ -274,8 +275,11 @@ window_read_themes (GladeXML *dialog)
   client = gconf_client_get_default ();
 
   wm = gnome_wm_manager_get_current ();  
-  window_theme_list = gnome_window_manager_get_theme_list (wm);
-  g_object_unref (G_OBJECT (wm));
+  if (wm != NULL) {
+    window_theme_list = gnome_window_manager_get_theme_list (wm);
+    g_object_unref (G_OBJECT (wm));
+  } else
+    window_theme_list = NULL;
 
   tree_view = GTK_TREE_VIEW (WID ("window_theme_treeview"));
   model = gtk_tree_view_get_model (tree_view);
@@ -652,20 +656,18 @@ drag_data_received_cb (GtkWidget *widget, GdkDragContext *context,
 		       guint info, guint time, gpointer data)
 {
 	GList *uris;
-	gchar *filename;
+	gchar *filename = NULL;
 
 	if (!(info == TARGET_URI_LIST || info == TARGET_NS_URL))
 		return;
 
 	uris = gnome_vfs_uri_list_parse ((gchar *) selection_data->data);
-
-	filename = gnome_vfs_uri_to_string (uris->data, GNOME_VFS_URI_HIDE_NONE);
-	if (strncmp (filename, "http://", 7) && strncmp (filename, "ftp://", 6))
-	{
-		g_free (filename);
-		filename = gnome_vfs_uri_to_string (uris->data, GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD);
+	if (uris != NULL && uris->data != NULL) {
+		GnomeVFSURI *uri = (GnomeVFSURI *) uris->data;
+		filename = gnome_vfs_unescape_string (
+			gnome_vfs_uri_get_path (uri), G_DIR_SEPARATOR_S);
+		gnome_vfs_uri_list_unref (uris);
 	}
-	gnome_vfs_uri_list_unref (uris);
 
 	real_show_install_dialog (widget, filename);
 	g_free (filename);

@@ -100,7 +100,22 @@ gnome_settings_wm_init (GConfClient *client)
 void
 gnome_settings_wm_load (GConfClient *client)
 {
-	set_number_of_workspaces (gconf_client_get_int (client, "/desktop/gnome/applications/window_manager/number_of_workspaces", NULL));
-	set_workspace_names (gconf_client_get_list (client, "/desktop/gnome/applications/window_manager/workspace_names", GCONF_VALUE_LIST, NULL));
+    GConfValue *value;
+    GSList * workspace_list, *li;
+    int n;
+    
+    n = gconf_client_get_int (client, "/desktop/gnome/applications/window_manager/number_of_workspaces", NULL);
+    set_number_of_workspaces (n >= 1 ? n : 1);
+
+    value = gconf_client_get (client, "/desktop/gnome/applications/window_manager/workspace_names", NULL);
+    if (gconf_value_get_list_type (value) == GCONF_VALUE_STRING) {
+	workspace_list = gconf_value_get_list (value);
+	set_workspace_names (workspace_list);
+	for (li = workspace_list; li != NULL; li = li->next) {
+	    g_free (li->data);
+	    li->data = NULL;
+	}
+	g_slist_free (workspace_list);
+    }
 }
 

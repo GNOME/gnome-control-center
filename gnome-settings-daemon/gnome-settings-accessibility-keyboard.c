@@ -169,13 +169,13 @@ set_server_from_gconf (GConfEntry *ignored)
 		XkbAccessXKeysMask | XkbAccessXFeedbackMask);
 
 	if (set_ctrl_from_gconf (desc, client, CONFIG_ROOT "/timeout_enable",
-		XkbAccessXTimeoutMask, enable_accessX)) {
+		XkbAccessXTimeoutMask, enable_accessX))
 		desc->ctrls->ax_timeout = get_int (client,
 			CONFIG_ROOT "/timeout");
-		desc->ctrls->ax_options = set_clear (
-			gconf_client_get_bool (client, CONFIG_ROOT "/feature_state_change_beep", NULL),
-			desc->ctrls->ax_options, XkbAX_FeatureFBMask | XkbAX_SlowWarnFBMask);
-	}
+
+	desc->ctrls->ax_options = set_clear (enable_accessX &&
+		gconf_client_get_bool (client, CONFIG_ROOT "/feature_state_change_beep", NULL),
+		desc->ctrls->ax_options, XkbAX_FeatureFBMask | XkbAX_SlowWarnFBMask);
 
 	/* bounce keys */
 	if (set_ctrl_from_gconf (desc, client, CONFIG_ROOT "/bouncekeys_enable",
