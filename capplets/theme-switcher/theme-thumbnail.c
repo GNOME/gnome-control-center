@@ -4,6 +4,7 @@
 #include <metacity-private/theme.h>
 #include <metacity-private/theme-parser.h>
 #include <metacity-private/preview-widget.h>
+#include <signal.h>
 
 /* We have to #undef this as metacity #defines these. */
 #undef _
@@ -14,6 +15,8 @@
 
 #include "theme-thumbnail.h"
 #include "capplet-util.h"
+
+static gint child_pid;
 
 
 /* Protocol */
@@ -270,7 +273,7 @@ message_from_capplet (GIOChannel   *source,
 {
   gchar buffer[1024];
   GIOStatus status;
-  gint bytes_read;
+  gsize bytes_read;
   GdkPixbuf *pixbuf;
   gint i, rowstride;
   char *pixels;
@@ -283,6 +286,7 @@ message_from_capplet (GIOChannel   *source,
                                     1024,
                                     &bytes_read,
                                     NULL);
+
   switch (status)
     {
     case G_IO_STATUS_NORMAL:
@@ -309,7 +313,7 @@ message_from_capplet (GIOChannel   *source,
       return TRUE;
     case G_IO_STATUS_EOF:
     case G_IO_STATUS_ERROR:
-      break;
+      _exit (0);
     default:
       g_assert_not_reached ();
     }
@@ -340,23 +344,21 @@ generate_theme_thumbnail (GnomeThemeMetaInfo *meta_theme_info)
   return retval;
 }
 
-
 void
 setup_theme_thumbnail_factory (int argc, char *argv[])
 {
-  gint pid;
-
   pipe (pipe_to_factory_fd);
   pipe (pipe_from_factory_fd);
 
-  pid = fork ();
-  if (pid == 0)
+  child_pid = fork ();
+  if (child_pid == 0)
     {
       GIOChannel *channel;
       ThemeThumbnailData data;
 
       /* Child */
       gtk_init (&argc, &argv);
+
       close (pipe_to_factory_fd[1]);
       close (pipe_from_factory_fd[0]);
 
@@ -366,9 +368,10 @@ setup_theme_thumbnail_factory (int argc, char *argv[])
       data.icon_theme_name = g_byte_array_new ();
 
       channel = g_io_channel_unix_new (pipe_to_factory_fd[0]);
-      g_io_channel_set_flags (channel, g_io_channel_get_flags (channel) | G_IO_FLAG_NONBLOCK, NULL);
+      g_io_channel_set_flags (channel, g_io_channel_get_flags (channel) |
+			      G_IO_FLAG_NONBLOCK, NULL);
       g_io_channel_set_encoding (channel, NULL, NULL);
-      g_io_add_watch (channel, G_IO_IN, message_from_capplet, &data);
+      g_io_add_watch (channel, G_IO_IN | G_IO_HUP, message_from_capplet, &data);
       g_io_channel_unref (channel);
 
       gtk_main ();

@@ -794,7 +794,7 @@ setup_dialog (GladeXML *dialog)
 						     gtk_cell_renderer_text_new (),
 						     "text", DESCRIPTION_COLUMN,
 						     NULL);
-  gtk_tree_view_column_set_resizable (column, TRUE);
+  gtk_tree_view_column_set_resizable (column, FALSE);
 
   gtk_tree_view_append_column (GTK_TREE_VIEW (WID ("shortcut_treeview")), column);
 
@@ -810,7 +810,7 @@ setup_dialog (GladeXML *dialog)
 
   column = gtk_tree_view_column_new_with_attributes (_("Shortcut"), renderer, NULL);
   gtk_tree_view_column_set_cell_data_func (column, renderer, accel_set_func, NULL, NULL);
-  gtk_tree_view_column_set_resizable (column, TRUE);
+  gtk_tree_view_column_set_resizable (column, FALSE);
 
   gtk_tree_view_append_column (GTK_TREE_VIEW (WID ("shortcut_treeview")), column);
 
