@@ -35,7 +35,7 @@
 
 static GtkWidget * previewWindow = NULL;
 
-void
+static void
 init_preview ( void )
 {
   GtkWidget *kbdraw = keyboard_drawing_new ();
