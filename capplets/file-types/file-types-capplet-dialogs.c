@@ -33,7 +33,6 @@
 #include <gtk/gtklistitem.h>
 #include <libgnomevfs/gnome-vfs-mime-handlers.h>
 #include <libgnomevfs/gnome-vfs-application-registry.h>
-#include <libgnomevfs/gnome-vfs-mime-info.h>
 #include <libgnomevfs/gnome-vfs-utils.h>
 
 #include "libuuid/uuid.h"
