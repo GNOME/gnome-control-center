@@ -52,8 +52,12 @@
 		      <child>
 			<widget class="GtkButton" id="background_image_button">
 			  <property name="visible">True</property>
+			  <property name="tooltip" translatable="yes">To set the background picture, drop an image or click to browse.</property>
 			  <property name="can_focus">True</property>
 			  <property name="relief">GTK_RELIEF_NORMAL</property>
+			  <accessibility>
+			    <atkproperty name="AtkObject::accessible_name" translatable="yes">Background Preview</atkproperty>
+			  </accessibility>
 
 			  <child>
 			    <widget class="GtkVBox" id="vbox21">
@@ -68,6 +72,10 @@
 				  <property name="yalign">0.5</property>
 				  <property name="xpad">0</property>
 				  <property name="ypad">0</property>
+				  <accessibility>
+				    <atkproperty name="AtkObject::accessible_name" translatable="yes">Preview</atkproperty>
+				    <atkproperty name="AtkObject::accessible_description" translatable="yes">A preview of the background picture.</atkproperty>
+				  </accessibility>
 				</widget>
 				<packing>
 				  <property name="padding">0</property>
@@ -89,6 +97,9 @@
 				  <property name="yalign">0.5</property>
 				  <property name="xpad">0</property>
 				  <property name="ypad">0</property>
+				  <accessibility>
+				    <atkproperty name="AtkObject::accessible_description" translatable="yes">The background picture's file name.</atkproperty>
+				  </accessibility>
 				</widget>
 				<packing>
 				  <property name="padding">0</property>
