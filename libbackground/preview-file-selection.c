@@ -149,7 +149,7 @@ preview_file_selection_intelligent_scale (GdkPixbuf *buf, guint scale)
 		else
 		{
 			h = scale;
-			w = scale * (((double)ow)/(double)ow);
+			w = scale * (((double)ow)/(double)oh);
 		}
 			
 		scaled = gdk_pixbuf_scale_simple (buf, w, h, GDK_INTERP_BILINEAR);
