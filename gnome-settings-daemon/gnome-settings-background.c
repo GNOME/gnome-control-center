@@ -54,7 +54,7 @@ gnome_settings_background_init (GConfClient *client)
 	prefs = BG_PREFERENCES (bg_preferences_new ());
 	bg_preferences_load (prefs);
 
-	gnome_settings_daemon_register_callback ("/desktop/gnome/peripherals/keyboard", background_callback);
+	gnome_settings_daemon_register_callback ("/desktop/gnome/background", background_callback);
 }
 
 void
