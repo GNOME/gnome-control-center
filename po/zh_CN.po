@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-22 04:18+0100\n"
+"POT-Creation-Date: 2005-02-01 05:31+0100\n"
 "PO-Revision-Date: 2005-01-22 17:04+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -36,8 +36,7 @@ msgstr "输入的密码无效"
 msgid ""
 "Check that you typed it correctly and that you haven't activated the \"caps "
 "lock\" key"
-msgstr ""
-"请检查您输入的密码是否正确，您是否无意间激活了“Caps Lock”键"
+msgstr "请检查您输入的密码是否正确，您是否无意间激活了“Caps Lock”键"
 
 #: capplets/about-me/gnome-about-me-password.c:95
 msgid "Could not run passwd"
@@ -1738,7 +1737,12 @@ msgstr "未知"
 msgid "Layout"
 msgstr "布局"
 
+#. The first radio in a group is to be "Default", meaning none of
+#. the below options are to be included in the selected list.
+#. This is a HIG-compliant alternative to allowing no
+#. selection in the group.
 #: capplets/keyboard/gnome-keyboard-properties-xkblt.c:255
+#: capplets/keyboard/gnome-keyboard-properties-xkbot.c:206
 msgid "Default"
 msgstr "默认"
 
@@ -2628,12 +2632,12 @@ msgstr "查看为控制中心"
 msgid "Others"
 msgstr "其它"
 
-#: control-center/control-center.c:1005
+#: control-center/control-center.c:1010
 #: control-center/gnomecc.desktop.in.in.h:1
 msgid "GNOME Control Center"
 msgstr "GNOME 控制中心"
 
-#: control-center/control-center.c:1121
+#: control-center/control-center.c:1126
 msgid "Desktop Preferences"
 msgstr "桌面首选项"
 
@@ -2747,7 +2751,7 @@ msgstr ""
 "试图运行(%s)时出错\n"
 "与按键(%s)相关联"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:96
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:99
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2778,7 +2782,7 @@ msgstr ""
 "- <b>xprop -root | grep XKB</b> 的结果\n"
 "- <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b> 的结果"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:110
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:113
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2789,29 +2793,19 @@ msgstr ""
 "复杂的 XKB 配置有一些已知的问题。\n"
 "请试着使用较简单的配置，或者获得更新版本的 XFree 软件。"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:213
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:216
 msgid ""
 "The X system keyboard settings differ from your current GNOME keyboard "
 "settings.  Which set would you like to use?"
 msgstr "X 系统键盘设置与您当前的 GNOME 键盘设置不同。您想要使用哪一个设置？"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:216
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:219
 msgid "Use X settings"
 msgstr "使用 X 设置"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:218
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:221
 msgid "Use GNOME settings"
 msgstr "使用 GNOME 设置"
-
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:270
-#, c-format
-msgid ""
-"You have a keyboard remapping file (%s) in your home directory whose "
-"contents will now be ignored. You can use the keyboard preferences to "
-"restore them."
-msgstr ""
-"在您的主目录中存在一个键盘映射文件(%s)，该文件的内容现在将被忽略。您可以使用"
-"键盘首选项进行恢复。"
 
 #: gnome-settings-daemon/gnome-settings-multimedia-keys.c:126
 #, c-format
@@ -3213,61 +3207,68 @@ msgid ""
 msgstr "重新装入键盘状态时要运行的脚本集。用于重新分配基于 xmodmap 的调整"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
-msgid "Default group, assigned on window creation"
-msgstr "默认组、在窗口创建时指派"
+msgid "A list of modmap files available in the $HOME directory."
+msgstr "$HOME 目录中 modmap 文件的列表。"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
+msgid "Default group, assigned on window creation"
+msgstr "在窗口创建时指派的默认组"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
 msgid "Keep and manage separate group per window"
 msgstr "保留并管理每个窗口的区分组"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
 msgid "Keyboard Update Handlers"
 msgstr "键盘更新处理程序"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:6
 msgid "Keyboard layout"
 msgstr "键盘布局"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:6
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:7
 msgid "Keyboard model"
 msgstr "键盘型号"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:7
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:8
 msgid "Keyboard options"
 msgstr "键盘选项"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:8
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
 msgid "Keyboard settings in gconf will be overridden from the system ASAP"
 msgstr "gconf 中的键盘设置将会被系统立即覆盖"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
 msgid "Save/restore indicators together with layout groups"
 msgstr "将标识符与布局组一起保存/恢复"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:11
 msgid "Show layout names instead of group names"
 msgstr "显示布局名称而不是组名称"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:11
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:12
 msgid ""
 "Show layout names instead of group names (only for versions of XFree "
 "supporting multiple layouts)"
-msgstr ""
-"显示布局名称而非组名称(仅对支持多个布局的 XFree)"
+msgstr "显示布局名称而非组名称(仅对支持多个布局的 XFree)"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:12
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:13
 msgid ""
 "Very soon, keyboard settings in gconf will be overridden (from the system "
 "configuration)"
 msgstr "gconf 中的 XKB 设置将会被立即覆盖(来自系统配置)"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:13
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
 msgid "keyboard layout"
 msgstr "键盘布局"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
 msgid "keyboard model"
 msgstr "键盘型号"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:16
+msgid "modmap file list"
+msgstr ""
 
 #: typing-break/drw-break-window.c:209
 msgid "_Postpone break"
@@ -3540,3 +3541,10 @@ msgstr "是否将已安装的主题显示为缩略图"
 msgid "Whether to thumbnail themes"
 msgstr "是否将主题显示为缩略图"
 
+#~ msgid ""
+#~ "You have a keyboard remapping file (%s) in your home directory whose "
+#~ "contents will now be ignored. You can use the keyboard preferences to "
+#~ "restore them."
+#~ msgstr ""
+#~ "在您的主目录中存在一个键盘映射文件(%s)，该文件的内容现在将被忽略。您可以使"
+#~ "用键盘首选项进行恢复。"
