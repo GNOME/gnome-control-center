@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 1.99.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-13 09:32-0500\n"
-"PO-Revision-Date: 2004-02-11 00:45+0200\n"
+"POT-Creation-Date: 2004-02-28 18:56+0200\n"
+"PO-Revision-Date: 2004-02-28 19:28+0200\n"
 "Last-Translator: Pauli Virtanen <pauli.virtanen@hut.fi>\n"
 "Language-Team: Gnome Finnish Translation Team <gnome-fi-laatu@lists."
 "sourceforge.net>\n"
@@ -112,14 +112,18 @@ msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr "Hiiren asetusikkunan käynnistys epäonnistui: %s"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:337
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:395
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:396
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "AccessX-asetusten tuonti tiedostosta \"%s\" epäonnistui"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:468
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:433
 msgid "Import Feature Settings File"
 msgstr "Tuo ominaisuuksien asetustiedosto"
+
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:437
+msgid "_Import"
+msgstr "_Tuo"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:18
@@ -343,49 +347,49 @@ msgid "seconds"
 msgstr "sekuntia"
 
 #. solid
-#: capplets/background/background-properties-capplet.c:228
+#: capplets/background/background-properties-capplet.c:227
 msgid "Co_lor:"
 msgstr "Vä_ri:"
 
 #. horiz
-#: capplets/background/background-properties-capplet.c:232
+#: capplets/background/background-properties-capplet.c:231
 msgid "_Left color:"
 msgstr "Vasen v_äri:"
 
-#: capplets/background/background-properties-capplet.c:233
+#: capplets/background/background-properties-capplet.c:232
 msgid "_Right color:"
 msgstr "O_ikea väri:"
 
 #. vert
-#: capplets/background/background-properties-capplet.c:236
+#: capplets/background/background-properties-capplet.c:235
 msgid "Top co_lor:"
 msgstr "_Yläväri:"
 
-#: capplets/background/background-properties-capplet.c:237
+#: capplets/background/background-properties-capplet.c:236
 msgid "_Bottom color:"
 msgstr "_Alaväri:"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "_Tile"
 msgstr "_Vierekkäin"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "C_enter"
 msgstr "_Keskellä"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "Sc_ale"
 msgstr "Sov_itettu"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "_Stretch"
 msgstr "Ve_nytetty"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "_No Picture"
 msgstr "_Ei kuvaa"
 
-#: capplets/background/background-properties-capplet.c:559
+#: capplets/background/background-properties-capplet.c:558
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:723
 #: capplets/keyboard/gnome-keyboard-properties.c:224
@@ -394,7 +398,7 @@ msgstr "_Ei kuvaa"
 msgid "Retrieve and store legacy settings"
 msgstr "Hae ja tallenna aikaisempien versioiden asetukset"
 
-#: capplets/background/background-properties-capplet.c:585
+#: capplets/background/background-properties-capplet.c:584
 #: capplets/background/background-properties.glade.h:2
 msgid "Background Preferences"
 msgstr "Taustan asetukset"
@@ -412,6 +416,7 @@ msgid "Horizontal gradient"
 msgstr "Vaakaväriliuku"
 
 #: capplets/background/background-properties.glade.h:5
+#: capplets/background/gnome-background-properties.glade.h:4
 msgid "Pick a color"
 msgstr "Valitse väri"
 
@@ -468,10 +473,6 @@ msgstr "<b>_Työpöydän värit</b> "
 msgid "Desktop Background Preferences"
 msgstr "Työpöydän taustan asetukset"
 
-#: capplets/background/gnome-background-properties.glade.h:4
-msgid "Zgjidh një ngjyrë"
-msgstr "Zgjidh një ngjyrë"
-
 #: capplets/background/gnome-background-properties.glade.h:5
 msgid "_Add Wallpaper"
 msgstr "_Lisää tausta"
@@ -482,6 +483,7 @@ msgstr "_Tyyli:"
 
 #: capplets/background/gnome-wp-capplet.c:72
 #: capplets/common/capplet-util.c:340
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:326
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Virhe ohjeen näyttämisessä: %s"
@@ -518,7 +520,7 @@ msgstr "Vaakaväriliuku"
 msgid "Vertical Gradient"
 msgstr "Pystyväriliuku"
 
-#: capplets/background/gnome-wp-info.c:46
+#: capplets/background/gnome-wp-info.c:49
 msgid "No Wallpaper"
 msgstr "Ei taustaa"
 
@@ -615,78 +617,78 @@ msgstr "Yhdistyy..."
 msgid "Downloading..."
 msgstr "Tallentuu..."
 
-#: capplets/common/gconf-property-editor.c:172
+#: capplets/common/gconf-property-editor.c:170
 msgid "Key"
 msgstr "Avain"
 
-#: capplets/common/gconf-property-editor.c:173
+#: capplets/common/gconf-property-editor.c:171
 msgid "GConf key to which this property editor is attached"
 msgstr "GConf-avain, johon tämä ominaisuuseditori on liitetty"
 
-#: capplets/common/gconf-property-editor.c:179
+#: capplets/common/gconf-property-editor.c:177
 msgid "Callback"
 msgstr "Paluukutsu"
 
-#: capplets/common/gconf-property-editor.c:180
+#: capplets/common/gconf-property-editor.c:178
 msgid "Issue this callback when the value associated with key gets changed"
 msgstr "Kutsu tätä, kun avaimeen liittyvä arvo muuttuu"
 
-#: capplets/common/gconf-property-editor.c:185
+#: capplets/common/gconf-property-editor.c:183
 msgid "Change set"
 msgstr "Muutosjoukko"
 
-#: capplets/common/gconf-property-editor.c:186
+#: capplets/common/gconf-property-editor.c:184
 msgid ""
 "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
 "GConf-muutosjoukko, joka sisältää datan, joka lähtee asetukset "
 "toteutettaessa gconf-asiakkaalle"
 
-#: capplets/common/gconf-property-editor.c:191
+#: capplets/common/gconf-property-editor.c:189
 msgid "Conversion to widget callback"
 msgstr "Säätimeenmuunnoksen kutsu"
 
-#: capplets/common/gconf-property-editor.c:192
+#: capplets/common/gconf-property-editor.c:190
 msgid ""
 "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr "Funktio, jota kutsutaan, kun data muuntuu GConfista säätimeen"
 
-#: capplets/common/gconf-property-editor.c:197
+#: capplets/common/gconf-property-editor.c:195
 msgid "Conversion from widget callback"
 msgstr "Säätimestämuunnoksen kutsu"
 
-#: capplets/common/gconf-property-editor.c:198
+#: capplets/common/gconf-property-editor.c:196
 msgid ""
 "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr "Funktio, jota kutsutaan, kun data muuntuu säätimestä GConfiin"
 
-#: capplets/common/gconf-property-editor.c:203
+#: capplets/common/gconf-property-editor.c:201
 msgid "UI Control"
 msgstr "Käyttöliittymäsäädin"
 
-#: capplets/common/gconf-property-editor.c:204
+#: capplets/common/gconf-property-editor.c:202
 msgid "Object that controls the property (normally a widget)"
 msgstr "Olio (yleensä säädin), joka säätää ominaisuutta"
 
-#: capplets/common/gconf-property-editor.c:219
+#: capplets/common/gconf-property-editor.c:217
 msgid "Property editor object data"
 msgstr "Ominaisuusmuokkaimen oliotietoja"
 
-#: capplets/common/gconf-property-editor.c:220
+#: capplets/common/gconf-property-editor.c:218
 msgid "Custom data required by the specific property editor"
 msgstr "Tietyn ominaisuusmuokkaimen vaatima muu data"
 
-#: capplets/common/gconf-property-editor.c:226
+#: capplets/common/gconf-property-editor.c:224
 msgid "Property editor data freeing callback"
 msgstr "Ominaisuusmuokkaimen datan vapauttamisen paluukutsu"
 
-#: capplets/common/gconf-property-editor.c:227
+#: capplets/common/gconf-property-editor.c:225
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr ""
 "Funktio, joka saa kutsun kun ominaisuusmuokkainolion dataa ollaan "
 "vapauttamassa"
 
-#: capplets/common/gconf-property-editor.c:1541
+#: capplets/common/gconf-property-editor.c:1538
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -699,7 +701,7 @@ msgstr ""
 "Varmista, että se on olemassa ja yritä uudelleen tai valitse toinen "
 "taustakuva."
 
-#: capplets/common/gconf-property-editor.c:1549
+#: capplets/common/gconf-property-editor.c:1546
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -712,9 +714,13 @@ msgstr ""
 "\n"
 "Valitse toinen kuva."
 
-#: capplets/common/gconf-property-editor.c:1640
+#: capplets/common/gconf-property-editor.c:1665
 msgid "Please select an image."
 msgstr "Valitse kuva"
+
+#: capplets/common/gconf-property-editor.c:1670
+msgid "_Select"
+msgstr "_Valittu"
 
 #: capplets/default-applications/default-applications.desktop.in.h:1
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:18
@@ -739,7 +745,7 @@ msgstr "Encompass"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:12
 msgid "Firebird/FireFox"
-msgstr ""
+msgstr "Firebird/Firefox"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:13
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:14
@@ -755,9 +761,8 @@ msgid "Konqueror"
 msgstr "Konqueror"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:17
-#, fuzzy
 msgid "W3M Text Browser"
-msgstr "Lynx, WWW-tekstiselain"
+msgstr "W3M, WWW-tekstiselain"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:18
 msgid "Lynx Text Browser"
@@ -1106,20 +1111,20 @@ msgstr "Oletusasetukset"
 msgid "Screen %d Settings\n"
 msgstr "Näytön %d asetukset\n"
 
-#: capplets/display/main.c:444
+#: capplets/display/main.c:445
 msgid "Screen Resolution Preferences"
 msgstr "Näytön tarkkuuden asetukset"
 
-#: capplets/display/main.c:476
+#: capplets/display/main.c:482
 #, c-format
 msgid "_Make default for this computer (%s) only"
 msgstr "Aseta vain tämän _koneen (%s) oletusarvoksi"
 
-#: capplets/display/main.c:494
+#: capplets/display/main.c:500
 msgid "Options"
 msgstr "Asetukset"
 
-#: capplets/display/main.c:515
+#: capplets/display/main.c:521
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
@@ -1134,19 +1139,19 @@ msgstr[1] ""
 "Uusien asetusten kokeilu. Jos et vastaa %d sekunnin kuluessa, edelliset "
 "asetukset palautuvat."
 
-#: capplets/display/main.c:564
+#: capplets/display/main.c:570
 msgid "Do you want to keep this resolution?"
 msgstr "Haluatko käyttää tätä tarkkuutta?"
 
-#: capplets/display/main.c:589
+#: capplets/display/main.c:595
 msgid "Use _previous resolution"
 msgstr "Käytä _edellistä tarkkuutta"
 
-#: capplets/display/main.c:589
+#: capplets/display/main.c:595
 msgid "_Keep resolution"
 msgstr "_Pidä tarkkuus"
 
-#: capplets/display/main.c:740
+#: capplets/display/main.c:746
 msgid ""
 "The XServer does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
@@ -1154,7 +1159,7 @@ msgstr ""
 "X-palvelin ei tue XRandR-laajennosta, joten tarkkuutta ei voi vaihtaa sen "
 "ollessa käynnissä."
 
-#: capplets/display/main.c:748
+#: capplets/display/main.c:754
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
@@ -1162,12 +1167,16 @@ msgstr ""
 "XRandR-laajennoksen versio ei ole yhteensopiva tämän ohjelman kanssa, joten "
 "tarkkuutta ei voi muuttaa käytön aikana."
 
-#: capplets/file-types/file-types-capplet.c:196
+#: capplets/file-types/file-types-capplet.c:158
+msgid "Are you sure you want to permanently delete this entry?"
+msgstr "Haluatko varmasti poistaa tämän kohdan pysyvästi?"
+
+#: capplets/file-types/file-types-capplet.c:210
 #: vfs-methods/themus/themus-properties-view.c:163
 msgid "Description"
 msgstr "Kuvaus"
 
-#: capplets/file-types/file-types-capplet.c:218
+#: capplets/file-types/file-types-capplet.c:232
 msgid "Extensions"
 msgstr "Tiedostopäätteet"
 
@@ -1674,7 +1683,7 @@ msgstr "Pikanäppäimen tyyppi."
 
 #: capplets/keybindings/eggcellrendererkeys.c:240
 #: capplets/keybindings/gnome-keybinding-properties.c:235
-#: libbackground/applier.c:588 typing-break/drwright.c:464
+#: libbackground/applier.c:588 typing-break/drwright.c:473
 msgid "Disabled"
 msgstr "Ei käytössä"
 
@@ -1703,7 +1712,7 @@ msgstr "Työpöytä"
 msgid "Window Management"
 msgstr "Ikkunointi"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:737
+#: capplets/keybindings/gnome-keybinding-properties.c:736
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1712,17 +1721,17 @@ msgstr ""
 "Pikanäppäimeen \"%s\" on jo kytketty toiminto\n"
 "\"%s\"\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:768
+#: capplets/keybindings/gnome-keybinding-properties.c:766
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Virhe uuden pikanäppäimen asetustietokantaan asettamisessa: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:818
+#: capplets/keybindings/gnome-keybinding-properties.c:812
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "Virhe pikanäppäimen asetustietokannasta poistamisessa: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:967
+#: capplets/keybindings/gnome-keybinding-properties.c:960
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1730,11 +1739,11 @@ msgstr ""
 "Näppäimistöteemoja ei löytynyt. Tämä merkitsee, että GTK+ on asennettu "
 "puutteellisesti."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:989
+#: capplets/keybindings/gnome-keybinding-properties.c:982
 msgid "Action"
 msgstr "Toiminto"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:1013
+#: capplets/keybindings/gnome-keybinding-properties.c:1006
 msgid "Shortcut"
 msgstr "Pikanäppäin"
 
@@ -2658,15 +2667,11 @@ msgstr "Käytä omaa ikkunaa vaikka Nautilus olisi käynnissä"
 msgid "Could not initialize Bonobo"
 msgstr "Bonobon alustus epäonnistui"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:325
-msgid "There was an error displaying help:"
-msgstr "Virhe ohjeen näyttämisessä:"
-
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
 msgid "Slow Keys Alert"
 msgstr "Hitaat näppäimet -ilmoitus"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
 msgid ""
 "You just held down the Shift key for 8 seconds.  This is the shortcut for "
 "the Slow Keys feature, which affects the way your keyboard works."
@@ -2674,20 +2679,19 @@ msgstr ""
 "Pidit juuri vaihtonäppäintä painettuna 8 sekuntia. Tämä on hitaat näppäimet -"
 "ominaisuuden pikanäppäily, ja muuttaa tapaa, jolla näppäimistö toimii."
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
 msgid "Do you want to activate Slow Keys?"
 msgstr "Haluatko ottaa hitaat näppäimet käyttöön?"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
-msgid "Do you want to deactivate Sticky Keys?"
-msgstr "Haluatko poistaa pohjaan jäävät näppäimet käytöstä?"
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:414
+msgid "Do you want to deactivate Slow Keys?"
+msgstr "Haluatko poistaa hitaat näppäimet käytöstä?"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:424
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:425
 msgid "Sticky Keys Alert"
 msgstr "Pohjaan jäävät näppäimet -ilmoitus"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:425
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
 msgid ""
 "You just pressed the Shift key 5 times in a row.  This is the shortcut for "
 "the Sticky Keys feature, which affects the way your keyboard works."
@@ -2696,7 +2700,7 @@ msgstr ""
 "näppäimet -ominaisuuden pikanäppäily, ja muuttaa tapaa, jolla näppäimistö "
 "toimii."
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
 msgid ""
 "You just pressed two keys at once, or pressed the Shift key 5 times in a "
 "row.  This turns off the Sticky Keys feature, which affects the way your "
@@ -2706,9 +2710,13 @@ msgstr ""
 "peräkkäin. Tämä on pohjaan jäävät näppäimet -ominaisuuden pikanäppäily, ja "
 "muuttaa tapaa, jolla näppäimistö toimii."
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
 msgid "Do you want to activate Sticky Keys?"
 msgstr "Haluatko ottaa pohjaan jäävät näppäimet käyttöön?"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:429
+msgid "Do you want to deactivate Sticky Keys?"
+msgstr "Haluatko poistaa pohjaan jäävät näppäimet käytöstä?"
 
 #: gnome-settings-daemon/gnome-settings-font.c:102
 #, c-format
@@ -2758,7 +2766,7 @@ msgstr ""
 "Näppäimeen (%2$s) kytketyn toiminnon\n"
 "(%1$s) suorittaminen epäonnistui."
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:61
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:65
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2785,7 +2793,7 @@ msgstr ""
 "- Komennon <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b> "
 "tuloste"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:71
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:75
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2797,6 +2805,14 @@ msgstr ""
 "Yritä yksinkertaisempien asetusten käyttämistä tai uudemman XFree-"
 "ohjelmiston\n"
 "version hankkimista."
+
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:151
+#, c-format
+msgid ""
+"You have a keyboard remapping file (%s) in your home directory whose "
+"contents will now be ignored. You can use the keyboard preferences to "
+"restore them."
+msgstr "Kotihakemistossasi on näppäinkartta (%s), jonka sisältö jää huomiotta. Voit käyttää näppäimistöasetuksia vastaavien asetusten luomiseen."
 
 #: gnome-settings-daemon/gnome-settings-screensaver.c:92
 #, c-format
@@ -2871,14 +2887,6 @@ msgstr "Näyttö"
 #: libbackground/applier.c:280
 msgid "Screen on which BGApplier is to draw"
 msgstr "Näyttö, jolle BGApplier piirtää"
-
-#: libbackground/preview-file-selection.c:207
-msgid "Can't find an hbox, using a normal file selection"
-msgstr "Vaakalaatikkoa (hboxia) ei löytynyt: tiedostovalitsin on tavallinen"
-
-#: libbackground/preview-file-selection.c:212
-msgid "Preview"
-msgstr "Esikatselu"
 
 #: libsounds/sound-view.c:121 libsounds/sound-view.c:146
 msgid "The sound file for this event does not exist."
@@ -3040,39 +3048,39 @@ msgstr "XKB-valinnat"
 msgid "XKB settings in gconf will be overridden from the system ASAP"
 msgstr "XKB-asetukset GConfissa tehdään tarpeettomiksi mahdollisimman nopeasti"
 
-#: typing-break/drw-break-window.c:189
+#: typing-break/drw-break-window.c:191
 msgid "_Postpone break"
 msgstr "_Lykkää taukoa"
 
-#: typing-break/drw-break-window.c:227
+#: typing-break/drw-break-window.c:239
 msgid "Take a break!"
 msgstr "Pidäpä tauko!"
 
 #. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
-#: typing-break/drwright.c:135
+#: typing-break/drwright.c:136
 msgid "/_Preferences"
 msgstr "/_Asetukset"
 
-#: typing-break/drwright.c:136
+#: typing-break/drwright.c:137
 msgid "/_About"
 msgstr "/_Tietoja"
 
-#: typing-break/drwright.c:138
+#: typing-break/drwright.c:139
 msgid "/_Take a Break"
 msgstr "/_Pidä tauko"
 
-#: typing-break/drwright.c:482
+#: typing-break/drwright.c:491
 #, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
 msgstr[0] "%d minuutti seuraavaan taukoon"
 msgstr[1] "%d minuuttia seuraavaan taukoon"
 
-#: typing-break/drwright.c:486
+#: typing-break/drwright.c:495
 msgid "Less than one minute until the next break"
 msgstr "Alle yksi minuutti seuraavaan taukoon"
 
-#: typing-break/drwright.c:581
+#: typing-break/drwright.c:590
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
@@ -3081,31 +3089,31 @@ msgstr ""
 "Kirjoitustaukojen ominaisuusikkunan avaaminen ei onnistunut, sillä seuraava "
 "virhe tapahtui: %s"
 
-#: typing-break/drwright.c:621
+#: typing-break/drwright.c:638
 msgid "About GNOME Typing Monitor"
 msgstr "Gnomen kirjoituksen tarkkailin"
 
-#: typing-break/drwright.c:645
+#: typing-break/drwright.c:662
 msgid "A computer break reminder."
 msgstr "Tietokoneen käyttötauoista muistuttava ohjelma."
 
-#: typing-break/drwright.c:646
+#: typing-break/drwright.c:663
 msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
 msgstr "Tehnyt Richard Hult &lt;richard@imendio.com&gt;"
 
-#: typing-break/drwright.c:647
+#: typing-break/drwright.c:664
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Anders Carlsson lisäsi silmänruokaa"
 
-#: typing-break/drwright.c:820
+#: typing-break/drwright.c:839
 msgid "Break reminder"
 msgstr "Taukomuistutin"
 
-#: typing-break/main.c:94
+#: typing-break/main.c:93
 msgid "The typing monitor is already running."
 msgstr "Kirjoituksen tarkkailin on jo käynnissä."
 
-#: typing-break/main.c:107
+#: typing-break/main.c:106
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
@@ -3526,6 +3534,18 @@ msgstr "Kasvata äänenvoimakkuutta"
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
 msgid "Volume up's shortcut."
 msgstr "Äänenvoimakkuutta kasvattava pikanäppäin."
+
+#~ msgid "Zgjidh një ngjyrë"
+#~ msgstr "Zgjidh një ngjyrë"
+
+#~ msgid "There was an error displaying help:"
+#~ msgstr "Virhe ohjeen näyttämisessä:"
+
+#~ msgid "Can't find an hbox, using a normal file selection"
+#~ msgstr "Vaakalaatikkoa (hboxia) ei löytynyt: tiedostovalitsin on tavallinen"
+
+#~ msgid "Preview"
+#~ msgstr "Esikatselu"
 
 #~ msgid "Desktop Wallpaper"
 #~ msgstr "Työpöydän tausta"
