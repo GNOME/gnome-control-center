@@ -73,7 +73,7 @@ start_esd (void)
         }
 }
 
-static gboolean set_standby = FALSE;
+static gboolean set_standby = TRUE;
 
 /* stop_esd
  *

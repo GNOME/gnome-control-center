@@ -1,5 +1,12 @@
 2002-10-08  Jody Goldberg <jody@gnome.org>
 
+	http://bugzilla.gnome.org/show_bug.cgi?id=91535
+	* gnome-settings-sound.c : as michael points out it is silly to start
+	  the daemon just so that we can stop it.  Dunno much about esound
+	  code so the funky logic is left untouched.
+
+2002-10-08  Jody Goldberg <jody@gnome.org>
+
 	http://bugzilla.gnome.org/show_bug.cgi?id=95179
 	* gnome-settings-accessibility-keyboard.c
 	(gnome_settings_accessibility_keyboard_init) : do nothing here.
