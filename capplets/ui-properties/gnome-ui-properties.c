@@ -274,7 +274,7 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
   g_free (toolbar_style);
 
   gtk_window_set_resizable (GTK_WINDOW (widget), FALSE);
-  capplet_set_icon (widget, "behavior-capplet.png");
+  capplet_set_icon (widget, "gnome-settings-ui-behavior");
   gtk_widget_show_all (widget);
 }
 

@@ -278,7 +278,7 @@ main (int argc, char **argv)
 		gtk_dialog_set_default_response (GTK_DIALOG (dialog_win), GTK_RESPONSE_CLOSE);
 		g_signal_connect (G_OBJECT (dialog_win), "response", (GCallback) dialog_button_clicked_cb, changeset);
 		gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog_win)->vbox), WID ("prefs_widget"), TRUE, TRUE, 0);
-		capplet_set_icon (dialog_win, "sound-capplet.png");
+		capplet_set_icon (dialog_win, "gnome-settings-sound");
 		gtk_widget_show_all (dialog_win);
 
 		gtk_main ();

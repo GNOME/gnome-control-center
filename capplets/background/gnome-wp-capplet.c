@@ -821,7 +821,7 @@ static void gnome_wp_icon_theme_changed (GnomeIconTheme * theme,
   gchar * icofile;
 
   icofile = gnome_icon_theme_lookup_icon (capplet->theme,
-					  "background-capplet",
+					  "gnome-settings-background",
 					  48, NULL, NULL);
   if (icofile != NULL) {
     pixbuf = gdk_pixbuf_new_from_file (icofile, NULL);
@@ -988,7 +988,7 @@ static void wallpaper_properties_init (void) {
   capplet->window = glade_xml_get_widget (dialog,"gnome_wp_properties");
 
   icofile = gnome_icon_theme_lookup_icon (capplet->theme,
-					  "background-capplet",
+					  "gnome-settings-background",
 					  48, NULL, NULL);
   if (icofile != NULL) {
     pixbuf = gdk_pixbuf_new_from_file (icofile, NULL);

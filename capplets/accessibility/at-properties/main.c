@@ -257,7 +257,7 @@ setup_dialog (GladeXML *dialog)
 			  dialog);
 	
 	widget = WID ("at_properties_dialog");
-	capplet_set_icon (widget, "at-enable-capplet.png");
+	capplet_set_icon (widget, "gnome-settings-accessibility-technologies");
 	
 	g_signal_connect (G_OBJECT (widget),
 			  "response",

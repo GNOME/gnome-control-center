@@ -841,7 +841,7 @@ main (int argc, char **argv)
 		g_signal_connect (dialog_win, "response",
 				  G_CALLBACK (dialog_response_cb), changeset);
 
-		capplet_set_icon (dialog_win, "mouse-capplet.png");
+		capplet_set_icon (dialog_win, "gnome-dev-mouse-optical");
 		gtk_widget_show (dialog_win);
 
 		gtk_main ();

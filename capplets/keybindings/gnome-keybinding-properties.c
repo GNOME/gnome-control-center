@@ -870,7 +870,7 @@ setup_dialog (GladeXML *dialog)
   reload_key_entries (wm_common_get_current_window_manager(), dialog);
 
   widget = WID ("gnome-keybinding-dialog");
-  capplet_set_icon (widget, "keyboard-shortcut.png");
+  capplet_set_icon (widget, "gnome-settings-keybindings");
   gtk_widget_show (widget);
 
   g_signal_connect (G_OBJECT (widget), "response", G_CALLBACK(cb_dialog_response), NULL);

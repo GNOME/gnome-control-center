@@ -806,7 +806,7 @@ setup_dialog (GladeXML *dialog)
 		    G_CALLBACK (drag_data_received_cb),
 		    dialog);
 
-  capplet_set_icon (parent, "gnome-ccthemes.png");
+  capplet_set_icon (parent, "gnome-settings-theme");
   gtk_widget_show (parent);
 }
 

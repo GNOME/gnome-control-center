@@ -518,7 +518,7 @@ main (int argc, char **argv)
                 ++i;
         }
         
-        capplet_set_icon (dialog_win, "window-capplet.png");
+        capplet_set_icon (dialog_win, "gnome-window-manager");
         gtk_widget_show (dialog_win);
         
         gtk_main ();

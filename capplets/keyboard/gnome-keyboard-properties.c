@@ -252,7 +252,7 @@ main (int argc, char **argv)
 			gtk_notebook_set_current_page (GTK_NOTEBOOK (WID ("keyboard_notebook")), 3);
 		}
 		capplet_set_icon (WID ("keyboard_dialog"),
-				  "keyboard-capplet.png");
+				  "gnome-dev-keyboard");
 		gtk_widget_show (WID ("keyboard_dialog"));
 		gtk_main ();
 	}

@@ -339,7 +339,7 @@ gnome_theme_details_init (void)
   g_signal_connect (G_OBJECT (parent), "drag-leave", G_CALLBACK (gnome_theme_manager_drag_leave_cb), NULL);
   g_signal_connect (G_OBJECT (parent), "drag-data-received", G_CALLBACK (gnome_theme_manager_drag_data_received_cb), NULL);
 
-  capplet_set_icon (parent, "gnome-ccthemes.png");
+  capplet_set_icon (parent, "gnome-settings-theme");
 
   gnome_theme_details_reread_themes_from_disk ();
 }
