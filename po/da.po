@@ -24,8 +24,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-27 16:32+0200\n"
-"PO-Revision-Date: 2004-10-27 16:32+0200\n"
+"POT-Creation-Date: 2004-11-22 16:36+0100\n"
+"PO-Revision-Date: 2004-11-22 16:40+0100\n"
 "Last-Translator: Martin Willemoes Hansen <mwh@sysrq.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -907,22 +907,6 @@ msgstr "_Vælg en webbrowser:"
 msgid "_Select an Editor:"
 msgstr "_Vælg et redigeringsprogram:"
 
-#: capplets/desktop-links/Accessibility.directory.in.h:1
-msgid "Accessibility"
-msgstr "Tilgængelighed"
-
-#: capplets/desktop-links/Accessibility.directory.in.h:2
-msgid "Accessibility Settings"
-msgstr "Indstillinger for tilgængelighed"
-
-#: capplets/desktop-links/Advanced.directory.in.h:1
-msgid "Advanced"
-msgstr "Avanceret"
-
-#: capplets/desktop-links/Advanced.directory.in.h:2
-msgid "Advanced Settings"
-msgstr "Avancerede indstillinger"
-
 #: capplets/display/display-properties.desktop.in.h:1
 msgid "Change screen resolution"
 msgstr "Skift skærmopløsning"
@@ -1126,6 +1110,7 @@ msgid "_Protocol:"
 msgstr "_Protokol:"
 
 #: capplets/file-types/file-types-properties.glade.h:26
+#: libsounds/sound-view.c:366
 msgid "_Remove"
 msgstr "_Fjern"
 
@@ -2103,15 +2088,28 @@ msgstr ""
 "\"Temaindstillinger\"-vinduet blev installeret forkert eller at \"gnome-"
 "themes\" pakken ikke er installeret."
 
-#: capplets/theme-switcher/gnome-theme-installer.c:127
+#: capplets/theme-switcher/gnome-theme-installer.c:104
+msgid "This theme is not in a supported format."
+msgstr "Dette tema benytter et format som ikke er understøttet."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:140
 msgid "No theme file location specified to install"
 msgstr "Ingen temafilplacering angivet til installering"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:146
+#: capplets/theme-switcher/gnome-theme-installer.c:157
 msgid "The theme file location specified to install is invalid"
 msgstr "Ingen temafilplacering angivet til installering var ugyldig"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:173
+#: capplets/theme-switcher/gnome-theme-installer.c:177
+#, c-format
+msgid ""
+"Insufficient permissions to install the theme in:\n"
+"%s"
+msgstr ""
+"Mangler rettigheder til at installere temaet i:\n"
+"%s"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:196
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
@@ -2336,7 +2334,6 @@ msgid "_Edit"
 msgstr "_Redigér"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:18
-#: control-center/gnomecc-ui.xml.h:5
 msgid "_File"
 msgstr "_Fil"
 
@@ -2467,40 +2464,20 @@ msgstr "Kontrolcenter-visningsfabrik"
 msgid "View as Control Center"
 msgstr "Vis som kontrolcenter"
 
-#: control-center/control-center-categories.c:333
+#: control-center/control-center-categories.c:248
 msgid "Others"
 msgstr "Andre"
 
-#: control-center/control-center-categories.c:424
-#: control-center/control-center.c:1091 control-center/gnomecc.desktop.in.h:1
+#: control-center/control-center.c:1005 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
 msgstr "Gnome-kontrolcenter"
 
-#: control-center/control-center.c:78
-msgid "Use nautilus if it is running."
-msgstr "Benyt nautilus hvis den kører"
-
-#: control-center/gnomecc-ui.xml.h:1
-msgid "About this application"
-msgstr "Om dette program"
-
-#: control-center/gnomecc-ui.xml.h:2
-msgid "Overview of the control center"
-msgstr "Oversigt over kontrolcentret"
-
-#: control-center/gnomecc-ui.xml.h:3
-msgid "_About"
-msgstr "_Om"
-
-#: control-center/gnomecc-ui.xml.h:4
-msgid "_Contents"
-msgstr "_Indhold"
-
-#: control-center/gnomecc-ui.xml.h:6
-msgid "_Help"
-msgstr "_Hjælp"
+#: control-center/control-center.c:1121
+msgid "Desktop Preferences"
+msgstr "Skrivebordsindstillinger"
 
 #: control-center/gnomecc.desktop.in.h:2
+#: vfs-methods/fontilus/gnome-font-viewer.desktop.in.h:2
 msgid "The GNOME configuration tool"
 msgstr "Et centralt opsætningsværktøj til Gnome"
 
@@ -2727,8 +2704,8 @@ msgstr "_Vis ikke denne besked igen"
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Kunne ikke indlæse lydfilen %s som lydklip %s"
 
-#: gnome-settings-daemon/gnome-settings-xrdb.c:212
-#: gnome-settings-daemon/gnome-settings-xrdb.c:260
+#: gnome-settings-daemon/gnome-settings-xrdb.c:213
+#: gnome-settings-daemon/gnome-settings-xrdb.c:261
 msgid "Cannot determine user's home directory"
 msgstr "Kan ikke bestemme brugers hjemmemappe"
 
@@ -2777,11 +2754,11 @@ msgstr "Skærm"
 msgid "Screen on which BGApplier is to draw"
 msgstr "Skærm som anvenderen skal tegne på"
 
-#: libsounds/sound-view.c:121 libsounds/sound-view.c:146
+#: libsounds/sound-view.c:122 libsounds/sound-view.c:147
 msgid "The sound file for this event does not exist."
 msgstr "Lydfilen for denne hændelse eksisterer ikke."
 
-#: libsounds/sound-view.c:148
+#: libsounds/sound-view.c:149
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -2791,32 +2768,32 @@ msgstr ""
 "Du kan evt. installere gnome-audio-pakken\n"
 "for et sæt standardlyde."
 
-#: libsounds/sound-view.c:192
+#: libsounds/sound-view.c:224
 #, c-format
 msgid "The file %s is not a valid wav file"
 msgstr "Filen %s er ikke en gyldig wav-fil"
 
-#: libsounds/sound-view.c:257
+#: libsounds/sound-view.c:289
 msgid "Event"
 msgstr "Hændelse"
 
-#: libsounds/sound-view.c:266
+#: libsounds/sound-view.c:298
 msgid "Sound File"
 msgstr "Lydfil"
 
-#: libsounds/sound-view.c:282
+#: libsounds/sound-view.c:314
 msgid "_Sounds:"
 msgstr "_Lyde:"
 
-#: libsounds/sound-view.c:296
+#: libsounds/sound-view.c:328
 msgid "Sound _file:"
 msgstr "Lyd_fil:"
 
-#: libsounds/sound-view.c:300
+#: libsounds/sound-view.c:332
 msgid "Select Sound File"
 msgstr "Vælg en lydfil"
 
-#: libsounds/sound-view.c:324
+#: libsounds/sound-view.c:356
 msgid "_Play"
 msgstr "_Afspil"
 
@@ -3318,6 +3295,10 @@ msgstr "Kontekstmenupunkter for skriftyper"
 msgid "Set as Application Font"
 msgstr "Vælg som programskrifttype"
 
+#: vfs-methods/fontilus/gnome-font-viewer.desktop.in.h:1
+msgid "GNOME Font Viewer"
+msgstr "Gnome-skrifttypeviser"
+
 #: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
 msgid "Theme Properties content view component"
 msgstr "Indholdsvisningskomponent til temaegenskaber"
@@ -3413,6 +3394,36 @@ msgstr "Generér miniaturer for installerede temaer"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Generér miniaturer for temaer"
+
+#~ msgid "Accessibility"
+#~ msgstr "Tilgængelighed"
+
+#~ msgid "Accessibility Settings"
+#~ msgstr "Indstillinger for tilgængelighed"
+
+#~ msgid "Advanced"
+#~ msgstr "Avanceret"
+
+#~ msgid "Advanced Settings"
+#~ msgstr "Avancerede indstillinger"
+
+#~ msgid "Use nautilus if it is running."
+#~ msgstr "Benyt nautilus hvis den kører"
+
+#~ msgid "About this application"
+#~ msgstr "Om dette program"
+
+#~ msgid "Overview of the control center"
+#~ msgstr "Oversigt over kontrolcentret"
+
+#~ msgid "_About"
+#~ msgstr "_Om"
+
+#~ msgid "_Contents"
+#~ msgstr "_Indhold"
+
+#~ msgid "_Help"
+#~ msgstr "_Hjælp"
 
 #~ msgid "Gnome Terminal"
 #~ msgstr "Gnome Terminal"
