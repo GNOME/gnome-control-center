@@ -18,6 +18,7 @@ libcommon_la_SOURCES = \
 	gconf-property-editor-marshal.c	gconf-property-editor-marshal.h \
 	file-transfer-dialog.c		file-transfer-dialog.h		\
 	theme-common.c			theme-common.h			\
+	gnome-theme-info.c		gnome-theme-info.h		\
 	wm-common.c			wm-common.h
 
 libcommon_la_LIBADD = $(top_builddir)/libbackground/libbackground.la
