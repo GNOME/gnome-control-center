@@ -1,0 +1,359 @@
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook V4.1//EN"[
+
+<!ENTITY VERSION "1.5.7">
+]>
+
+<article id="index" lang="en">
+
+  <artheader>
+    <title>Control Center</title>
+    <authorgroup><firstname>Kevin</firstname><surname>Breit</surname></authorgroup>
+    <copyright>
+      <year>2001</year>
+      <holder>Ximian, Inc.</holder>
+    </copyright>
+
+    <legalnotice id="legalnotice">
+      <para>
+	Permission is granted to copy, distribute and/or modify this document
+        under the terms of the
+        <ulink type="help" url="gnome-help:fdl">
+          <citetitle>
+            GNU Free Documentation License
+          </citetitle>
+        </ulink>, Version 1.1 or any later version
+        published by the Free Software Foundation with no Invariant Sections,
+        no Front-Cover Texts, and no Back-Cover Texts.  A copy of the license
+        can be found <ulink type="help" url="gnome-help:fdl">here</ulink>.
+      </para>
+      <para>
+        Many of the names used by companies to distinguish their products and
+        services are claimed as trademarks. Where those names appear in any
+        GNOME documentation, and those trademarks are made aware to the members
+        of the GNOME Documentation Project, the names have been printed in caps
+        or initial caps.
+      </para>
+    </legalnotice>
+
+    <releaseinfo>
+      This manual describes version $VERSION; of the GNOME Control Center.
+    </releaseinfo>
+    </artheader>
+  
+  <sect1 id="intro">
+    <title>Introduction</title>
+    <para>
+      The <application>GNOME Control Center</application> provides a central place for the user to setup their GNOME experience.  It can let you configure anything from the behavior of your window borders to the default font type.
+    </para>
+    <para>
+      To open the <application>GNOME Control Center</application>, type <command>gnomecc</command> in a terminal window.  If you have Ximian GNOME, you can open the <application>GNOME Control Center</application> by using
+      <menuchoice>
+	<guimenu>System</guimenu>
+	<guimenuitem>Settings</guimenuitem>
+      </menuchoice>.
+    </para>
+  </sect1>
+  
+  <sect1 id="gnomecc-interface">
+    <title>The GNOME Control Center Interface</title>
+    <para>
+      The <application>GNOME Control Center</application> can come in two forms.  The first is the basic one that you have if you have the default package installed.  However, if you have the <application>GNOME Control Center Plus</application> installed, you will get the ability to configure advanced options and customize the <application>Sawfish</application> window manager.
+    </para>
+    <para>
+     Assuming you have the <application>GNOME Control Center Plus</application> package installed, you will have the following sections listed on the left side of the window:
+      <variablelist>
+	<varlistitem>
+	  <term>Main</term>
+	  <listitem>
+	    <para>
+	      Lets you control the basic functionality of the desktop.  This features items such as sound and background.
+	    </para>
+	  </listitem>
+	</varlistitem>
+	<varlistitem>
+	  <term>Advanced</term>
+	  <listitem>
+	    <para>
+	      Lets you control more advanced parts of GNOME, such as behavior and Palm Pilot sync options.
+	    </para>
+	  </listitem>
+	</varlistitem>
+	<varlistitem>
+	  <term>Sawfish window manager</term>
+	  <listitem>
+	    <para>
+	      Lets you control the most intimate details about the <application>Sawfish</application> window manager.
+	    </para>
+	  </listitem>
+	</varlistitem>
+      </variablelist>
+      <note>
+	<title>What does <application>GNOME Control Center Plus</application> provide?</title>
+	<para>
+	  The <application>GNOME Control Center Plus</application> provides both the <guilabel>Advanced</guilabel> and <guilabel>Sawfish window manager</guilabel> sections.  If you don't have the package installed, they will simply not show up.
+	</para>
+      </note>
+      You just need to click the section name, and the capplets will show up in the right section.
+    </para>
+    <para>
+      To open a capplet, just click on its graphic or text.
+    </para>
+  </sect1>
+
+<sect1 id="main-section">
+    <title>The Main Section</title>
+    <para>
+      The main section includes basic capplets, geared more towards the new user.  These include:
+      <variablelist>
+	<varlistitem>
+	  <term>Background</term>
+	  <listitem>
+	    <para>
+	      Configures the background image on your desktop.
+	    </para>
+	  </listitem>
+	</varlistitem>
+	<varlistitem>
+	  <term>Default Applications</term>
+	  <listitem>
+	    <para>
+	      Selects the default applications to be used for editing text files and more.
+	    </para>
+	  </listitem>
+	</varlistitem>
+	<varlistitem>
+	  <term>Keyboard</term>
+	  <listitem>
+	    <para>
+	      Configures properties of the keyboard such as beep settings and repeating.
+	    </para>
+	  </listitem>
+	</varlistitem>
+	<varlistitem>
+	  <term>Screensaver</term>
+	  <listitem>
+	    <para>
+	      Selects the screensaver of choice and other properties of the screensaver.
+	    </para>
+	  </listitem>
+	</varlistitem>
+	<varlistitem>
+	  <term>Sound</term>
+	  <listitem>
+	    <para>
+	      Configures the GNOME sound daemon.
+	    </para>
+	  </listitem>
+	</varlistitem>
+	<varlistitem>
+	  <term>Startup Hint</term>
+	  <listitem>
+	    <para>
+	      Sets up the startup hint.
+	    </para>
+	  </listitem>
+	</varlistitem>
+      </variablelist>
+    </para>
+  </sect1>
+
+  <sect1 id="advanced-section">
+    <title>The Advanced Section</title>
+    <para>
+      The advanced section is included in the <application>GNOME Control Center Plus</application> package.  This lets you configure more advanced properties of your GNOME environment.
+      <variablelist>
+	<varlistitem>
+	  <term>Behavior</term>
+	  <listitem>
+	    <para>
+	      Configures small user interface options such as where buttons are located.
+	    </para>
+	  </listitem>
+	</varlistitem>
+	<varlistitem>
+	  <term>CD Properties</term>
+	  <listitem>
+	    <para>
+	      Sets up how GNOME treats your CD-ROM.
+	    </para>
+	  </listitem>
+	</varlistitem>
+	<varlistitem>
+	  <term>File Types and Programs</term>
+	  <listitem>
+	    <para>
+	      Configures what application should be used to open different file types.  This is for your GNOME 1.4 applications.
+	    </para>
+	  </listitem>
+	</varlistitem>
+	<varlistitem>
+	  <term>Gtk+ Theme selector</term>
+	  <listitem>
+	    <para>
+	      Configures the look of your buttons, menus, text, and more in your GNOME environment.
+	    </para>
+	  </listitem>
+	</varlistitem>
+	<varlistitem>
+	  <term>Legacy Applications</term>
+	  <listitem>
+	    <para>
+	      Configures how to treat legacy applications such as Netscape.
+	    </para>
+	  </listitem>
+	</varlistitem>
+	<varlistitem>
+	  <term>Mime Types</term>
+	  <listitem>
+	    <para>
+	      Configures what programs to use for your file types.  This is for your GNOME 1.0 based applications.
+	    </para>
+	  </listitem>
+	</varlistitem>
+	<varlistitem>
+	  <term>Panel</term>
+	  <listitem>
+	    <para>
+	      Sets up properties of your GNOME panel.
+	    </para>
+	  </listitem>
+	</varlistitem>
+	<varlistitem>
+	  <term>Pilot Conduits</term>
+	  <listitem>
+	    <para>
+	      Configures how applications interact with your PalmOS(TM) based handheld.
+	    </para>
+	  </listitem>
+	</varlistitem>
+	<varlistitem>
+	  <term>Pilot Link</term>
+	  <listitem>
+	    <para>
+	      Configures how your computer talks to your PalmOS(TM) based handheld.
+	    </para>
+	  </listitem>
+	</varlistitem>
+	<varlistitem>
+	  <term>Startup Applications</term>
+	  <listitem>
+	    <para>
+	      Sets up what programs start when GNOME intially starts.
+	    </para>
+	  </listitem>
+	</varlistitem>
+	<varlistitem>
+	  <term>URL Handlers</term>
+	  <listitem>
+	    <para>
+	      Lets you set what action GNOME takes when you click on links.
+	    </para>
+	  </listitem>
+	</varlistitem>
+	<varlistitem>
+	  <term>Window Manager Selector</term>
+	  <listitem>
+	    <para>
+	      Configures what window manager to use in GNOME.
+	    </para>
+	  </listitem>
+	</varlistitem>
+      </variablelist>
+    </para>
+  </sect1>
+  <sect1 id="sawfish-section">
+    <title>Sawfish Window Manager Section</title>
+    <para>
+      The <guilabel>Sawfish Window Manager</guilabel> section lets you configure every facet of your Sawfish window manager.  The <application>Sawfish Window Manager</application> comes only in the <application>GNOME Control Center Plus</application> package.
+      <variablelist>
+	<varlistitem>
+	  <term>Appearance</term>
+	  <listitem>
+	    <para>
+	      Configures the theme to use for your window borders.
+	    </para>
+	  </listitem>
+	</varlistitem>
+	<varlistitem>
+	  <term>Focus Behavior</term>
+	  <listitem>
+	    <para>
+	      Configures how <application>Sawfish</application> selects which is the application with focus.
+	    </para>
+	  </listitem>
+	</varlistitem>
+	<varlistitem>
+	  <term>Matched Windows</term>
+	  <listitem>
+	    <para>
+	    </para>
+	  </listitem>
+	</varlistitem>
+	<varlistitem>
+	  <term>Meta</term>
+	  <listitem>
+	    <para>
+	      Sets the skill level of the user, and changes the amount of options based on the selection.
+	    </para>
+	  </listitem>
+	</varlistitem>
+	<varlistitem>
+	  <term>Minimizing and Maximizing</term>
+	  <listitem>
+	    <para>
+	      How <application>Sawfish</application> treats windows when they're minimized or maximized.
+	    </para>
+	  </listitem>
+	</varlistitem>
+	<varlistitem>
+	  <term>Miscellaneous</term>
+	  <listitem>
+	    <para>
+	      Configures miscellaneous options of <application>Sawfish</application>.
+	    </para>
+	  </listitem>
+	</varlistitem>
+	<varlistitem>
+	  <term>Moving and Resizing</term>
+	  <listitem>
+	    <para>
+	      Configures how windows are handled while being resized or moved.
+	    </para>
+	  </listitem>
+	</varlistitem>
+	<varlistitem>
+	  <term>Placement</term>
+	  <listitem>
+	    <para>
+	      Lets you set how windows are placed when they're open.
+	    </para>
+	  </listitem>
+	</varlistitem>
+	<varlistitem>
+	  <term>Shortcuts</term>
+	  <listitem>
+	    <para>
+	      Lets you setup keybindings for faster interaction with your GNOME environment.
+	    </para>
+	  </listitem>
+	</varlistitem>
+	<varlistitem>
+	  <term>Sound</term>
+	  <listitem>
+	    <para>
+	      Configures if and when sounds should be played for window events.
+	    </para>
+	  </listitem>
+	</varlistitem>
+	<varlistitem>
+	  <term>Workspaces</term>
+	  <listitem>
+	    <para>
+	      Sets up your workspaces and viewports.
+	    </para>
+	  </listitem>
+	</varlistitem>
+      </variablelist>
+    </para>
+  </sect1>
+</article>
