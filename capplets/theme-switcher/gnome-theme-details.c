@@ -257,8 +257,6 @@ gnome_theme_details_init (void)
   		   (GCallback) icon_theme_selection_changed,
 		   dialog);
 
-  //  read_themes (dialog);
-
   /* gtk themes */
   widget = WID ("control_install_button");
   g_signal_connect_swapped (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_installer_run), parent);

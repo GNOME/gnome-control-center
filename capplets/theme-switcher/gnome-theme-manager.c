@@ -14,6 +14,7 @@
 #include <libwindow-settings/gnome-wm-manager.h>
 
 #include "gnome-theme-info.h"
+#include "gnome-theme-save.h"
 #include "capplet-util.h"
 #include "activate-settings-daemon.h"
 #include "gconf-property-editor.h"
@@ -520,6 +521,7 @@ add_custom_row_to_meta_theme (const gchar  *current_gtk_theme,
 		      META_THEME_FLAG_COLUMN, THEME_FLAG_CUSTOM,
 		      META_THEME_PIXBUF_COLUMN, default_image,
 		      -1);
+  gtk_widget_set_sensitive (WID ("meta_theme_save_button"), TRUE);
   path = gtk_tree_model_get_path (model, &iter);
   gtk_tree_view_set_cursor (GTK_TREE_VIEW (tree_view), path, NULL, FALSE);
   gtk_tree_path_free (path);
@@ -530,9 +532,12 @@ add_custom_row_to_meta_theme (const gchar  *current_gtk_theme,
 static void
 remove_custom_row_from_meta_theme (GtkTreeModel *model)
 {
+  GladeXML *dialog;
   GtkTreeIter iter;
   GtkTreeIter next_iter;
   gboolean valid;
+
+  dialog = gnome_theme_manager_get_theme_dialog ();
 
   valid = gtk_tree_model_get_iter_first (model, &iter);
   while (valid)
@@ -555,6 +560,8 @@ remove_custom_row_from_meta_theme (GtkTreeModel *model)
   g_free (custom_meta_theme_info.gtk_theme_name);
   g_free (custom_meta_theme_info.metacity_theme_name);
   g_free (custom_meta_theme_info.icon_theme_name);
+
+  gtk_widget_set_sensitive (WID ("meta_theme_save_button"), FALSE);
 
   custom_meta_theme_info.gtk_theme_name = NULL;
   custom_meta_theme_info.metacity_theme_name = NULL;
@@ -750,6 +757,17 @@ setup_meta_tree_view (GtkTreeView *tree_view,
 }
 
 static void
+gnome_theme_save_clicked (GtkWidget *button,
+			  gpointer   data)
+{
+  GladeXML *dialog;
+
+  dialog = gnome_theme_manager_get_theme_dialog ();
+
+  gnome_theme_save_show_dialog (WID ("theme_dialog"), &custom_meta_theme_info);
+}
+
+static void
 setup_dialog (GladeXML *dialog)
 {
   GConfClient *client;
@@ -810,8 +828,10 @@ setup_dialog (GladeXML *dialog)
   widget = WID ("icon_install_button");
   g_signal_connect_swapped (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_installer_run), parent);
   widget = WID ("icon_manage_button");
-  g_signal_connect (G_OBJECT (widget), "clicked",G_CALLBACK (gnome_theme_manager_show_manage_themes), dialog);
+  g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_manager_show_manage_themes), dialog);
 
+  widget = WID ("meta_theme_save_button");
+  g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_save_clicked), NULL);
 
 
 /*
@@ -832,7 +852,7 @@ setup_dialog (GladeXML *dialog)
   gtk_widget_show (parent);
 }
 
-/* Non static fucntions */
+/* Non static functions */
 GladeXML *
 gnome_theme_manager_get_theme_dialog (void)
 {
@@ -868,7 +888,11 @@ gnome_theme_manager_tree_sort_func (GtkTreeModel *model,
   if (a_str == NULL) a_str = g_strdup ("");
   if (b_str == NULL) b_str = g_strdup ("");
 
-  if (a_default & THEME_FLAG_DEFAULT)
+  if (a_default & THEME_FLAG_CUSTOM)
+    retval = -1;
+  else if (b_default & THEME_FLAG_CUSTOM)
+    retval = 1;
+  else if (a_default & THEME_FLAG_DEFAULT)
     retval = -1;
   else if (b_default & THEME_FLAG_DEFAULT)
     retval = 1;

@@ -6,6 +6,8 @@ gnome_theme_manager_LDADD = 						\
 	$(top_builddir)/libwindow-settings/libgnome-window-settings.la
 
 gnome_theme_manager_SOURCES =	\
+	gnome-theme-save.c	\
+	gnome-theme-save.h	\
 	gnome-theme-manager.c	\
 	gnome-theme-manager.h	\
 	gnome-theme-details.c	\
