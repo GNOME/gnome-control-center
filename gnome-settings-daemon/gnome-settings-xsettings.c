@@ -42,13 +42,13 @@ translate_string_string (TranslationEntry *trans,
 }
 
 static TranslationEntry translations [] = {
-  { "/desktop/standard/double-click-time", "Net/DoubleClickTime", GCONF_VALUE_INT,    
+  { "/desktop/gnome/double-click-time", "Net/DoubleClickTime", GCONF_VALUE_INT,    
     translate_int_int },
-  { "/desktop/gtk/gtk-color-palette", "Gtk/ColorPalette", GCONF_VALUE_STRING,
+  { "/desktop/gnome/gtk-color-palette", "Gtk/ColorPalette", GCONF_VALUE_STRING,
     translate_string_string },
-  { "/desktop/gtk/gtk-toolbar-style", "Gtk/ToolbarStyle", GCONF_VALUE_STRING,
+  { "/desktop/gnome/gtk-toolbar-style", "Gtk/ToolbarStyle", GCONF_VALUE_STRING,
     translate_string_string },
-  { "/desktop/gtk/gtk-toolbar-icon-size", "Gtk/ToolbarIconSize", GCONF_VALUE_STRING,
+  { "/desktop/gnome/gtk-toolbar-icon-size", "Gtk/ToolbarIconSize", GCONF_VALUE_STRING,
     translate_string_string }
 };
 
