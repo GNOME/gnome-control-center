@@ -1208,7 +1208,7 @@ set_root_pixmap (Pixmap pixmap)
 	gint format;
 	guchar *data_esetroot;
 
-/*  	XGrabServer (GDK_DISPLAY ()); */
+	XGrabServer (GDK_DISPLAY ());
 
 	XGetWindowProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (),
 			    gdk_atom_intern ("ESETROOT_PMAP_ID", FALSE),
@@ -1249,7 +1249,7 @@ set_root_pixmap (Pixmap pixmap)
 	}
 
 	XClearWindow (GDK_DISPLAY (), GDK_ROOT_WINDOW ());
-/*  	XUngrabServer (GDK_DISPLAY ()); */
+	XUngrabServer (GDK_DISPLAY ());
 	XFlush(GDK_DISPLAY ());
 }
 
