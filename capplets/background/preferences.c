@@ -192,20 +192,21 @@ bonobo_color_to_gdk (Bonobo_Config_Color *color)
 }
 
 static gulong
-pb_get_value_ulong (Bonobo_PropertyBag bag, const gchar *prop)
+bonobo_property_bag_client_get_value_gulong (Bonobo_PropertyBag pb, gchar *propname, CORBA_Environment *ev) 
 {
 	BonoboArg *arg;
-	gulong val;
-	
-	arg = bonobo_property_bag_client_get_value_any (bag, prop, NULL);
-	val = BONOBO_ARG_GET_GENERAL (arg, TC_ulong, CORBA_unsigned_long, NULL);
+	gulong retval;
+
+	arg = bonobo_property_bag_client_get_value_any (pb, propname, ev);
+	if (BONOBO_EX (ev)) return 0;
+	retval = BONOBO_ARG_GET_GENERAL (arg, TC_ulong, CORBA_long, ev);
 	bonobo_arg_release (arg);
-	return val;
+
+	return retval;
 }
 
 #define PB_GET_VALUE(v) (bonobo_property_bag_client_get_value_any (pb, (v), NULL))
 
-/* Probably has CORBA memory leaks */
 GtkObject*
 preferences_new_from_bonobo_pbag (Bonobo_PropertyBag pb, CORBA_Environment *ev)
 {
@@ -216,14 +217,15 @@ preferences_new_from_bonobo_pbag (Bonobo_PropertyBag pb, CORBA_Environment *ev)
 
 	prefs = PREFERENCES (preferences_new ());
 	
-	prefs->orientation = pb_get_value_ulong (pb, "orientation");
-	if (prefs->orientation != ORIENTATION_SOLID)
-		prefs->gradient_enabled = TRUE;
-
-	prefs->wallpaper_type = pb_get_value_ulong (pb, "wallpaper_type");
+	prefs->wallpaper_type = bonobo_property_bag_client_get_value_gulong (pb, "wallpaper_type", ev);
 	prefs->wallpaper_filename = g_strdup (*((CORBA_char **)(PB_GET_VALUE ("wallpaper_filename"))->_value));
-	if (prefs->wallpaper_filename && strcmp (prefs->wallpaper_filename, "") != 0)
+
+	if (prefs->wallpaper_filename != NULL &&
+	    strcmp (prefs->wallpaper_filename, "") != 0 &&
+	    strcmp (prefs->wallpaper_filename, "(none)") != 0)
 		prefs->wallpaper_enabled = TRUE;
+	else
+		prefs->wallpaper_enabled = FALSE;
 	
 	prefs->color1 = bonobo_color_to_gdk ((Bonobo_Config_Color *)(PB_GET_VALUE ("color1"))->_value);
 	prefs->color2 = bonobo_color_to_gdk ((Bonobo_Config_Color *)(PB_GET_VALUE ("color2"))->_value);
@@ -231,6 +233,13 @@ preferences_new_from_bonobo_pbag (Bonobo_PropertyBag pb, CORBA_Environment *ev)
 	prefs->opacity = BONOBO_ARG_GET_LONG (PB_GET_VALUE ("opacity"));
 	if (prefs->opacity != 100)
 		prefs->adjust_opacity = FALSE;
+
+	prefs->orientation = bonobo_property_bag_client_get_value_gulong (pb, "orientation", ev);
+
+	if (prefs->orientation == ORIENTATION_SOLID)
+		prefs->gradient_enabled = FALSE;
+	else
+		prefs->gradient_enabled = TRUE;
 
 	return GTK_OBJECT (prefs);
 }
@@ -251,11 +260,17 @@ preferences_new_from_bonobo_db (Bonobo_ConfigDatabase db, CORBA_Environment *ev)
 
 	if (prefs->orientation != ORIENTATION_SOLID)
 		prefs->gradient_enabled = TRUE;
+	else
+		prefs->gradient_enabled = FALSE;
 
 	prefs->wallpaper_type = bonobo_config_get_ulong (db, "/main/wallpaper_type", NULL);
 	prefs->wallpaper_filename = g_strdup (*((CORBA_char **)(DB_GET_VALUE ("/main/wallpaper_filename"))->_value));
-	if (prefs->wallpaper_filename && strcmp (prefs->wallpaper_filename, "") != 0)
+	if (prefs->wallpaper_filename && 
+	    strcmp (prefs->wallpaper_filename, "") != 0 &&
+	    strcmp (prefs->wallpaper_filename, "(none)") != 0)
 		prefs->wallpaper_enabled = TRUE;
+	else
+		prefs->wallpaper_enabled = FALSE;
 	
 	prefs->color1 = bonobo_color_to_gdk ((Bonobo_Config_Color *)(DB_GET_VALUE ("/main/color1"))->_value);
 	prefs->color2 = bonobo_color_to_gdk ((Bonobo_Config_Color *)(DB_GET_VALUE ("/main/color2"))->_value);

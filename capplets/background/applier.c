@@ -339,7 +339,8 @@ applier_apply_prefs (Applier *applier, Preferences *prefs,
 		applier->private->wallpaper_pixbuf = NULL;
 	}
 
-	if (prefs->wallpaper_filename && 
+	if (prefs->wallpaper_enabled &&
+	    prefs->wallpaper_filename && 
 	    (applier->private->wallpaper_filename == NULL ||
 	     strcmp (applier->private->wallpaper_filename, 
 		     prefs->wallpaper_filename)))

@@ -1,5 +1,15 @@
 2001-07-26  Bradford Hovinen  <hovinen@ximian.com>
 
+	* applier.c (applier_apply_prefs): Don't try to load the wallpaper
+	if it's not enabled
+
+	* preferences.c (preferences_new_from_bonobo_pbag): Use
+	bonobo_property_editor_client_get_value_*
+	(preferences_new_from_bonobo_pbag): Set gradient_enabled properly
+	from property bag
+	(preferences_new_from_bonobo_pbag): Check for wallpaper == "(none)"
+	(preferences_new_from_bonobo_db): Ditto above
+
 	* applier.c (renderer_render_wallpaper): Restore some lost tweaks
 	from earlier.
 
