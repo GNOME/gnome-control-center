@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-07-17 23:17+0200\n"
+"POT-Creation-Date: 2003-07-18 00:19+0200\n"
 "PO-Revision-Date: 2003-07-12 01:00+0100\n"
 "Last-Translator: Gnome PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -82,8 +82,8 @@ msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Nie można zaimportować ustawień AccessX z pliku \"%s\""
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:465
-msgid "Select CDE AccessX file"
-msgstr "Wybór pliku CDE AccessX"
+msgid "Import Feature Settings File"
+msgstr "Zaimportowanie pliku ustawienia właściwości"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:12
@@ -104,6 +104,12 @@ msgstr ""
 "klawiatury nie będą bez niego działać."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
+#: capplets/mouse/gnome-mouse-properties.glade.h:1
+#: capplets/ui-properties/gnome-ui-properties.glade.h:1
+msgid "    "
+msgstr "    "
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:1
 #: capplets/file-types/file-types-properties.glade.h:1
 #: capplets/network/gnome-network-preferences.glade.h:2
@@ -112,33 +118,29 @@ msgstr ""
 msgid "*"
 msgstr "*"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
 msgid "<b>Enable Bo_unce Keys</b>"
 msgstr "<b>Od_skakujące klawisze</b>"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
 msgid "<b>Enable Slo_w Keys</b>"
 msgstr "<b>Po_wolne klawisze</b>"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
 msgid "<b>Enable _Mouse Keys</b>"
 msgstr "<b>_Emulacja myszy</b>"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
 msgid "<b>Enable _Repeat Keys</b>"
 msgstr "<b>_Powtarzanie klawiszy</b>"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
 msgid "<b>Enable _Sticky Keys</b>"
 msgstr "<b>_Klawisze trwałe</b>"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
 msgid "<b>Features</b>"
 msgstr "<b>Własności</b>"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
-msgid "<b>Mouse</b>"
-msgstr "<b>Mysz</b>"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
 msgid "<b>Toggle Keys</b>"
@@ -211,9 +213,8 @@ msgid "Ma_ximum pointer speed:"
 msgstr "Ma_ksymalna szybkość wskaźnika:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
-#: capplets/mouse/mouse.desktop.in.h:1
-msgid "Mouse"
-msgstr "Mysz"
+msgid "Mouse Keys"
+msgstr "Klawisze myszy"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
 msgid "Mouse _Preferences..."
@@ -1734,11 +1735,6 @@ msgstr ""
 "<b>Duży biały wskaźnik</b>\n"
 "Duża odmiana białego wskaźnika"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:1
-#: capplets/ui-properties/gnome-ui-properties.glade.h:1
-msgid "    "
-msgstr "    "
-
 #: capplets/mouse/gnome-mouse-properties.glade.h:2
 msgid "<b>Cursor Theme</b>"
 msgstr "<b>Motyw kursora</b>"
@@ -1838,6 +1834,10 @@ msgstr "Prz_esunięcie progowe:"
 #: capplets/mouse/gnome-mouse-properties.glade.h:25
 msgid "_Timeout:"
 msgstr "_Opóźnienie:"
+
+#: capplets/mouse/mouse.desktop.in.h:1
+msgid "Mouse"
+msgstr "Mysz"
 
 #: capplets/mouse/mouse.desktop.in.h:2
 msgid "Set your mouse preferences"
@@ -2729,11 +2729,11 @@ msgstr "Grafika autorstwa Andresa Carlssona"
 msgid "Break reminder"
 msgstr "Program do przypominania o przerwach"
 
-#: typing-break/main.c:126
+#: typing-break/main.c:94
 msgid "The typing monitor is already running."
 msgstr "Monitor pisania na klawiaturze jest już uruchomiony."
 
-#: typing-break/main.c:139
+#: typing-break/main.c:107
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
@@ -2951,6 +2951,12 @@ msgstr "Tworzenie miniaturek zainstalowanych motywów"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Tworzenie miniaturek motywów"
+
+#~ msgid "Select CDE AccessX file"
+#~ msgstr "Wybór pliku CDE AccessX"
+
+#~ msgid "<b>Mouse</b>"
+#~ msgstr "<b>Mysz</b>"
 
 #~ msgid "A preview of what a menubar looks like with these settings."
 #~ msgstr "Podgląd paska menu przy wybranych ustawieniach wyglądu."
