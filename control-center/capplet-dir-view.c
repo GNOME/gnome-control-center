@@ -328,6 +328,12 @@ about_menu_cb (BonoboUIComponent *uic, gpointer data, const char *cname)
 		NULL
 	};
 
+	static gchar *documenters[] = {
+		NULL
+	};
+
+	gchar *translator_credits = _("translator_credits");
+
 	if (about != NULL) {
 		gdk_window_show (about->window);
 		gdk_window_raise (about->window);
@@ -340,7 +346,9 @@ about_menu_cb (BonoboUIComponent *uic, gpointer data, const char *cname)
 		 "Copyright (C) 1999 Red Hat Software, Inc.",
 		 _("Desktop properties manager."),
 		 (const gchar **) authors,
-		 NULL, NULL, NULL);
+		 (const gchar **) documenters,
+		 strcmp (translator_credits, "translator_credits") != 0 ? translator_credits : NULL,
+		 NULL);
 
 	g_signal_connect (G_OBJECT (about), "destroy",
 			  (GCallback) gtk_widget_destroyed, 
