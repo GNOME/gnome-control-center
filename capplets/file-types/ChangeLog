@@ -1,10 +1,20 @@
 2002-01-27  Bradford Hovinen  <hovinen@ximian.com>
 
+	* mime-edit-dialog.c (choose_cat_cb): Use
+	mime_category_info_get_full_name
+
 	* mime-type-info.c (mime_type_info_load_all, mime_type_info_save):
 	Rename override_category as use_category; give it the opposite
 	meaning
 	(reduce_supported_app_list, find_possible_supported_apps): Update
 	according to the above
+	(set_subcategory_ids): Implement
+	(mime_category_info_save): Implement
+	(mime_category_info_load_all): Implement
+	(mime_category_info_get_full_name): Implement; copy from
+	mime_type_info_get_category_name
+	(mime_type_info_get_category_name): Call
+	mime_category_info_get_full_name
 
 	* mime-edit-dialog.c (fill_dialog): Set
 	use_category_defaults_toggle

@@ -101,6 +101,7 @@ MimeCategoryInfo *mime_category_info_new           (MimeCategoryInfo   *parent,
 void          mime_category_info_load_all          (MimeCategoryInfo   *category);
 void          mime_category_info_save              (MimeCategoryInfo   *category);
 GList        *mime_category_info_find_apps         (MimeCategoryInfo   *info);
+gchar        *mime_category_info_get_full_name     (MimeCategoryInfo   *info);
 
 gchar        *mime_type_get_pretty_name_for_server (Bonobo_ServerInfo  *server);
 

@@ -741,7 +741,7 @@ choose_cat_cb (MimeEditDialog *dialog)
 	if (gtk_dialog_run (GTK_DIALOG (dialog_win)) == GTK_RESPONSE_OK) {
 		gtk_tree_selection_get_selected (selection, &model, &iter);
 		gtk_entry_set_text (GTK_ENTRY (WID ("category_entry")),
-				    mime_type_info_get_category_name (MIME_TYPE_INFO (MODEL_ENTRY_FROM_ITER (&iter))));
+				    mime_category_info_get_full_name (MIME_CATEGORY_INFO (MODEL_ENTRY_FROM_ITER (&iter))));
 	}
 
 	gtk_widget_destroy (dialog_win);
