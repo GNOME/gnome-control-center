@@ -116,7 +116,7 @@ model_to_widget (GConfPropertyEditor * peditor, GConfValue * value)
 }
 
 static void
-cleanup_xkb_tabs (GtkWidget * widget, GladeXML * dialog)
+cleanup_xkb_tabs (GladeXML * dialog)
 {
 	XklConfigFreeRegistry ();
 	XklConfigTerm ();
@@ -178,11 +178,19 @@ setup_xkb_tabs (GladeXML * dialog, GConfChangeSet * changeset)
 	     "conv-from-widget-cb", model_from_widget, NULL);
 
 	fill_available_layouts_tree (dialog);
+	fill_available_options_tree (dialog);
 	prepare_selected_layouts_tree (dialog);
+	prepare_selected_options_tree (dialog);
 	fill_selected_layouts_tree (dialog);
-	register_layouts_buttons_handlers (dialog);
-	register_layouts_gconf_listener (dialog);
+	fill_selected_options_tree (dialog);
 
-	g_signal_connect (G_OBJECT (WID ("keyboard_dialog")), "destroy",
-			  (GCallback) cleanup_xkb_tabs, NULL);
+	register_layouts_buttons_handlers (dialog);
+	register_options_buttons_handlers (dialog);
+
+	register_layouts_gconf_listener (dialog);
+	register_options_gconf_listener (dialog);
+
+	g_signal_connect (G_OBJECT (WID ("keyboard_dialog")),
+			  "destroy", G_CALLBACK (cleanup_xkb_tabs),
+			  dialog);
 }

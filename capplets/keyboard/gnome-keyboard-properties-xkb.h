@@ -27,20 +27,34 @@
 #include <libxklavier/xklavier_config.h>
 
 G_BEGIN_DECLS
-    extern void setup_xkb_tabs (GladeXML * dialog,
-				GConfChangeSet * changeset);
+
+extern void setup_xkb_tabs (GladeXML * dialog,
+			GConfChangeSet * changeset);
 
 extern void fill_available_layouts_tree (GladeXML * dialog);
 
-extern void prepare_selected_layouts_tree (GladeXML * dialog);
+extern void fill_available_options_tree (GladeXML * dialog);
 
 extern void fill_selected_layouts_tree (GladeXML * dialog);
 
-extern char *xci_desc_to_utf8 (XklConfigItem * ci);
+extern void fill_selected_options_tree (GladeXML * dialog);
 
 extern void register_layouts_buttons_handlers (GladeXML * dialog);
 
+extern void register_options_buttons_handlers (GladeXML * dialog);
+
 extern void register_layouts_gconf_listener (GladeXML * dialog);
 
+extern void register_options_gconf_listener (GladeXML * dialog);
+
+extern void prepare_selected_layouts_tree (GladeXML * dialog);
+
+extern void prepare_selected_options_tree (GladeXML * dialog);
+
+extern void clear_xkb_elements_list (GSList * list);
+
+extern char *xci_desc_to_utf8 (XklConfigItem * ci);
+
 G_END_DECLS
+
 #endif				/* __GNOME_KEYBOARD_PROPERTY_XKB_H */

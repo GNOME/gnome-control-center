@@ -3,6 +3,7 @@ bin_PROGRAMS = gnome-keyboard-properties
 gnome_keyboard_properties_SOURCES = gnome-keyboard-properties.c \
                                     gnome-keyboard-properties-xkb.c \
                                     gnome-keyboard-properties-xkblt.c \
+                                    gnome-keyboard-properties-xkbot.c \
                                     gnome-keyboard-properties-xkb.h
 gnome_keyboard_properties_LDADD =				\
 	../accessibility/keyboard/libaccessibility-keyboard.a 	\
