@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center\n"
-"POT-Creation-Date: 2001-03-11 19:25+0200\n"
+"POT-Creation-Date: 2001-03-15 14:08-0500\n"
 "PO-Revision-Date: 2000-12-13 18:51+02:00\n"
 "Last-Translator: Pauli Virtanen <pauli.virtanen@saunalahti.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -33,6 +33,14 @@ msgstr ""
 "ohjelman 'background-properties-capplet' k‰ynnistyksess‰ tapahtui virhe.\n"
 "Keskeytet‰‰n.\n"
 
+#: capplets/background-properties/background-properties.desktop.in.h:1
+msgid "Background"
+msgstr "Tausta"
+
+#: capplets/background-properties/background-properties.desktop.in.h:2
+msgid "Configuration of the desktop's background"
+msgstr "Tyˆpˆyd‰n taustan asetukset"
+
 #: capplets/background-properties/property-background.c:116
 msgid "Disabled"
 msgstr "Pois k‰ytˆst‰"
@@ -42,7 +50,7 @@ msgid "Color"
 msgstr "V‰ri"
 
 #: capplets/background-properties/property-background.c:330
-#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:12
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:23
 msgid "Solid"
 msgstr "Yksiv‰rinen"
 
@@ -205,21 +213,60 @@ msgid "Display wallpaper: tiled, centered, scaled or ratio"
 msgstr ""
 "Taustakuva: vierekk‰in, keskell‰, suurennettu tai kuvasuhteet s‰ilytt‰v‰"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:238
-msgid "Gnome editor"
-msgstr "Gnomen editori"
+#: capplets/desktop-links/Desktop.directory.in.h:1
+#: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:1
+msgid "Desktop"
+msgstr "Tyˆpˆyt‰"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:249
-msgid "Run In Terminal"
-msgstr "Aja p‰‰teikkunassa"
+#: capplets/desktop-links/Documents.directory.in.h:1
+msgid "Configure how document types are handled"
+msgstr "M‰‰rit‰, miten erilaisia asiakirjoja k‰sitell‰‰n."
 
-#: capplets/file-types/file-types-capplet.desktop.in.h:1
-msgid "File Types and Programs"
-msgstr "Tiedostotyypit ja ohjelmat"
+#: capplets/desktop-links/Documents.directory.in.h:2
+msgid "Document Handlers"
+msgstr "Asiakirjak‰sittelimet"
 
-#: capplets/file-types/file-types-capplet.desktop.in.h:2
-msgid "Specify which programs are used to open or view each file type"
-msgstr "M‰‰rit‰, mill‰ ohjelmilla tiedostoja k‰sitell‰‰n"
+#. create the app
+#: capplets/desktop-links/Gnome.directory.in.h:1 control-center/main.c:197
+#: control-center/splash.c:247
+msgid "Control Center"
+msgstr "Hallintakeskus"
+
+#: capplets/desktop-links/Gnome.directory.in.h:2
+msgid "Control Center Menu"
+msgstr "Hallintakeskuksen valikko"
+
+#: capplets/desktop-links/Multimedia.directory.in.h:1
+msgid "Configure the settings of your Multimedia devices"
+msgstr "Muuta multimedia-asetuksia"
+
+#: capplets/desktop-links/Multimedia.directory.in.h:2
+msgid "Multimedia"
+msgstr "Multimedia"
+
+#: capplets/desktop-links/Peripherals.directory.in.h:1
+msgid "Configure your external devices"
+msgstr "Oheislaiteasetukset"
+
+#: capplets/desktop-links/Peripherals.directory.in.h:2
+msgid "Peripherals"
+msgstr "Oheislaitteet"
+
+#: capplets/desktop-links/Session.directory.in.h:1
+msgid "Session"
+msgstr "Istunto"
+
+#: capplets/desktop-links/Session.directory.in.h:2
+msgid "Session Management Settings"
+msgstr "N‰ytˆns‰‰st‰j‰n asetukset"
+
+#: capplets/desktop-links/UIOptions.directory.in.h:1
+msgid "Configure the global settings of your GNOME applications"
+msgstr "Muuta GNOME-sovellusten oletusk‰ytt‰ytymist‰"
+
+#: capplets/desktop-links/UIOptions.directory.in.h:2
+msgid "User Interface"
+msgstr "K‰yttˆliittym‰"
 
 #: capplets/file-types/file-types-capplet-dialogs.c:387
 msgid "Edit Applications List"
@@ -450,9 +497,102 @@ msgstr "P‰‰te"
 msgid "Default Action"
 msgstr "Oletustoiminto"
 
+#: capplets/file-types/file-types-capplet.desktop.in.h:1
+msgid "File Types and Programs"
+msgstr "Tiedostotyypit ja ohjelmat"
+
+#: capplets/file-types/file-types-capplet.desktop.in.h:2
+msgid "Specify which programs are used to open or view each file type"
+msgstr "M‰‰rit‰, mill‰ ohjelmilla tiedostoja k‰sitell‰‰n"
+
 #: capplets/file-types/file-types-icon-entry.c:381
 msgid "Select an icon"
 msgstr "Valitse kuvake"
+
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:238
+msgid "Gnome editor"
+msgstr "Gnomen editori"
+
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:249
+msgid "Run In Terminal"
+msgstr "Aja p‰‰teikkunassa"
+
+#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:1
+msgid "Choose the editor that is invoked by gnome-edit"
+msgstr "Valitse editori, jonka gnome-edit k‰ynnist‰‰."
+
+#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:2
+msgid "Default Editor"
+msgstr "Oletuseditori"
+
+#: capplets/keyboard-properties/keyboard-properties.c:262
+msgid "Keyboard bell"
+msgstr "N‰pp‰imistˆ‰‰ni"
+
+#: capplets/keyboard-properties/keyboard-properties.c:270
+msgid "Volume"
+msgstr "Voimakkuus"
+
+#: capplets/keyboard-properties/keyboard-properties.c:273
+msgid "Pitch (Hz)"
+msgstr "Korkeus (Hz)"
+
+#: capplets/keyboard-properties/keyboard-properties.c:276
+msgid "Duration (ms)"
+msgstr "Kesto (ms)"
+
+#: capplets/keyboard-properties/keyboard-properties.c:288
+msgid "Test"
+msgstr "Kokeile"
+
+#: capplets/keyboard-properties/keyboard-properties.c:306
+msgid "Keyboard repeat rate"
+msgstr "Toistonopeus"
+
+#: capplets/keyboard-properties/keyboard-properties.c:316
+msgid "Enable auto-repeat"
+msgstr "Toista n‰pp‰imet"
+
+#: capplets/keyboard-properties/keyboard-properties.c:325
+msgid "Repeat rate"
+msgstr "Toistonopeus"
+
+#: capplets/keyboard-properties/keyboard-properties.c:328
+msgid "Repeat Delay"
+msgstr "Toistoviive"
+
+#: capplets/keyboard-properties/keyboard-properties.c:330
+msgid "Keyboard click"
+msgstr "N‰pp‰in‰‰ni"
+
+#: capplets/keyboard-properties/keyboard-properties.c:339
+msgid "Click on keypress"
+msgstr "Naksaus n‰pp‰imenpainalluksella"
+
+#: capplets/keyboard-properties/keyboard-properties.c:348
+msgid "Click volume"
+msgstr "Naksauksen ‰‰nenvoimakkuus"
+
+#: capplets/keyboard-properties/keyboard-properties.c:359
+msgid "Test settings"
+msgstr "Kokeile asetuksia"
+
+#: capplets/keyboard-properties/keyboard-properties.c:466
+msgid ""
+"an initialization error occurred while starting "
+"'keyboard-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"Ohjelman 'keyboard-properties-capplet' k‰ynnistyksess‰ tapahtui virhe.\n"
+"Keskeytet‰‰n\n"
+
+#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:1
+msgid "Keyboard"
+msgstr "N‰pp‰imistˆ"
+
+#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:2
+msgid "Keyboard Properties"
+msgstr "N‰pp‰imistˆasetukset"
 
 #: capplets/mouse-properties/mouse-properties.c:267
 msgid "Mouse buttons"
@@ -476,23 +616,35 @@ msgid "Acceleration"
 msgstr "Kiihdytys"
 
 #: capplets/mouse-properties/mouse-properties.c:314
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:4
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:8
+#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:11
 msgid "Fast"
 msgstr "Nopea"
 
 #: capplets/mouse-properties/mouse-properties.c:314
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:13
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:21
+#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:19
 msgid "Slow"
 msgstr "Hidas"
 
 #: capplets/mouse-properties/mouse-properties.c:325
-#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:16
+#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:30
 msgid "Threshold"
 msgstr "Kynnys"
 
 #: capplets/mouse-properties/mouse-properties.c:325
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:10
 msgid "Large"
 msgstr "Suuri"
 
 #: capplets/mouse-properties/mouse-properties.c:325
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:14
+#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:15
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:22
 msgid "Small"
 msgstr "Pieni"
 
@@ -503,6 +655,14 @@ msgid ""
 msgstr ""
 "ohjelman 'mouse-properties-capplet' k‰ynnistyksess‰ tapahtui virhe.\n"
 "Keskeytet‰‰n.\n"
+
+#: capplets/mouse-properties/mouse-properties.desktop.in.h:1
+msgid "Mouse"
+msgstr "Hiiri"
+
+#: capplets/mouse-properties/mouse-properties.desktop.in.h:2
+msgid "Mouse Properties"
+msgstr "Hiiriasetukset"
 
 #: capplets/screensaver-properties/callbacks.c:102
 msgid "Require Password"
@@ -534,6 +694,2744 @@ msgstr "Satunnaisasetukset"
 #, c-format
 msgid "%s Settings..."
 msgstr "Asetukset (%s)..."
+
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:1
+msgid "3D Clock"
+msgstr "3D-kello"
+
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:2
+msgid "Bernd Paysan"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:3
+msgid "Changes the magnification of original picture."
+msgstr "Muuttaa alkuper‰isen kuvan suurennosta."
+
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:5
+#, fuzzy
+msgid "High"
+msgstr "Oikea"
+
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:7
+#, fuzzy
+msgid "Low"
+msgstr "Alhainen "
+
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:8
+msgid "Modifies the direction move."
+msgstr "Muuttaa liikkumissuuntaa."
+
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:9
+msgid "Modifies the wobbling."
+msgstr "Muuttaa huojuntaa."
+
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:10
+msgid "Sets the moving cycle time."
+msgstr "Asettaa pyˆrimisajan."
+
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:11
+#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:13
+#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:25
+#: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:17
+#: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:17
+#: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:21
+msgid "Size"
+msgstr "Koko"
+
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:12
+#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:14
+#: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:19
+#: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:19
+#, fuzzy
+msgid "Size:"
+msgstr "Koko"
+
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:15
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:24
+msgid "Speed"
+msgstr "Nopeus"
+
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:16
+msgid ""
+"This draws a working analog clock composed of floating, throbbing bubbles."
+msgstr "Piirt‰‰ toimivan viisarikellon sykkivist‰ leijuvista kuplista."
+
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:17
+msgid ""
+"Time 3D is a clock.  It uses flying balls to display the time.  The balls "
+"move and wobble around to give you the impression your graphic workstation "
+"with its many XStone is doing something."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:18
+msgid "Twist"
+msgstr "Kierto"
+
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:19
+msgid "Twist speed:"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:20
+#, fuzzy
+msgid "Twist:"
+msgstr "Kierto"
+
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:21
+msgid "Wobble"
+msgstr "Huojunta"
+
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:22
+#, fuzzy
+msgid "Wobble:"
+msgstr "Huojunta"
+
+#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:1
+msgid ""
+"A cellular automaton that is really a two-dimensional Turing machine: as the "
+"heads (``ants'') walk along the screen, they change pixel values in their "
+"path. Then, as they pass over changed pixels, their behavior is influenced."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:2
+msgid "Ant"
+msgstr "Muurahaiset"
+
+#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:3
+#, fuzzy
+msgid "Ants:"
+msgstr "Muurahaiset"
+
+#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:4
+msgid "Changes the number of ants marching across the screen."
+msgstr "Muuta pitkin ruutua liikkuvien muurahaisten m‰‰r‰‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:5
+msgid "Changes the size of the ants."
+msgstr "Muuta muurahaisten kokoa."
+
+#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:10
+#: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:11
+#: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:10
+#: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:7
+#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:10
+#: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:7
+#: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:8
+#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:12
+#: capplets/screensaver-properties/screensaver-desktops/Hopalong.desktop.in.h:7
+#: capplets/screensaver-properties/screensaver-desktops/Julia.desktop.in.h:7
+#: capplets/screensaver-properties/screensaver-desktops/Laser.desktop.in.h:2
+#: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:2
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:3
+#: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:8
+msgid "Count"
+msgstr "Lukum‰‰r‰"
+
+#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:7
+msgid "David Bagely"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:8
+msgid ""
+"Determines whether or not the ant leaves a truchet in the path it leaves "
+"behind."
+msgstr "M‰‰r‰‰, j‰tt‰‰kˆ muurahainen viivan j‰lkeens‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:10
+msgid "Little Ants walk around, leaving colored trails."
+msgstr ""
+"Pienet muurahaiset k‰velev‰t ymp‰riins‰ ja j‰tt‰v‰t v‰rillisi‰ vanoja "
+"j‰lkeens‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:11
+#, fuzzy
+msgid "Number of ants."
+msgstr "Muuta osien lukum‰‰r‰‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:12
+msgid "Print the path that the ant took in the trail."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:16
+#: capplets/screensaver-properties/screensaver-desktops/Truchet.desktop.in.h:1
+msgid "Truchet"
+msgstr "Ruudukko"
+
+#: capplets/screensaver-properties/screensaver-desktops/Atlantis.desktop.in.h:1
+msgid "Atlantis"
+msgstr "Atlantis"
+
+#: capplets/screensaver-properties/screensaver-desktops/Atlantis.desktop.in.h:2
+msgid "Whales, dolphins and sharks swimming around, in 3D"
+msgstr "Valaat, delfiinit ja hait uivat ymp‰riins‰ kolmiulotteisessa meress‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:1
+#, fuzzy
+msgid "A show of objects interacting through attractive and repulsive forces."
+msgstr ""
+" N‰ytˆs kappaleista, jotka vaikuttavat toisiinsa veto- ja poistovoimilla."
+
+#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:2
+msgid "Attraction"
+msgstr "Vetovoima"
+
+#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:3
+msgid ""
+"Attraction is based on interactions of points which attract each other up to "
+"a certain distance and then begin to repel each other."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:4
+msgid "Change distance at which attractive force becomes repulsive."
+msgstr "Aseta et‰isyys, jolla vetovoima muuttuu poistovoimaksi."
+
+#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:5
+msgid "Change size of points."
+msgstr "Aseta pisteiden koko."
+
+#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:5
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:1
+#: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:4
+#: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:1
+#: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:1
+#: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:1
+#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:1
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:1
+#: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:1
+#: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:3
+#: capplets/screensaver-properties/screensaver-desktops/Greynetic.desktop.in.h:1
+#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:3
+#: capplets/screensaver-properties/screensaver-desktops/Helix.desktop.in.h:1
+#: capplets/screensaver-properties/screensaver-desktops/Hopalong.desktop.in.h:1
+#: capplets/screensaver-properties/screensaver-desktops/Hypercube.desktop.in.h:2
+#: capplets/screensaver-properties/screensaver-desktops/Jigsaw.desktop.in.h:1
+#: capplets/screensaver-properties/screensaver-desktops/Julia.desktop.in.h:1
+#: capplets/screensaver-properties/screensaver-desktops/Kaleidescope.desktop.in.h:3
+#: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:2
+#: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:3
+#: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:1
+#: capplets/screensaver-properties/screensaver-desktops/Munch.desktop.in.h:1
+#: capplets/screensaver-properties/screensaver-desktops/Sierpinski.desktop.in.h:1
+#: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:1
+msgid "Change the delay in cycles."
+msgstr "Aseta viive kierroksina."
+
+#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:7
+#: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:4
+msgid "Change the number of points to use."
+msgstr "Aseta pisteiden lukum‰‰r‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:8
+msgid "Change the spacing radius of the points."
+msgstr "Muuttaa pisteiden sijoitteluet‰isyytt‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Hypercube.desktop.in.h:5
+#, fuzzy
+msgid "Closer"
+msgstr "Sulje"
+
+#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:11
+#: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:12
+#: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:11
+#: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:8
+#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:10
+#: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:11
+#: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:8
+#: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:7
+#: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:13
+#: capplets/screensaver-properties/screensaver-desktops/Julia.desktop.in.h:8
+#: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:10
+#: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:3
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:4
+#: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:9
+#, fuzzy
+msgid "Count:"
+msgstr "Lukum‰‰r‰"
+
+#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:12
+#: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:13
+#: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:8
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:5
+#: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:13
+#: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:5
+#: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:11
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:3
+#: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:13
+#: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:8
+#: capplets/screensaver-properties/screensaver-desktops/Greynetic.desktop.in.h:3
+#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:16
+#: capplets/screensaver-properties/screensaver-desktops/Helix.desktop.in.h:3
+#: capplets/screensaver-properties/screensaver-desktops/Hypercube.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Jigsaw.desktop.in.h:2
+#: capplets/screensaver-properties/screensaver-desktops/Kaleidescope.desktop.in.h:5
+#: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Munch.desktop.in.h:5
+#: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:8
+msgid "Delay"
+msgstr "Viive"
+
+#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:13
+msgid "Distance of attraction."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:14
+#: capplets/screensaver-properties/screensaver-desktops/Hypercube.desktop.in.h:10
+msgid "Farther"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:15
+#: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:15
+#: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:8
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:12
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:8
+#: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:15
+#: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:11
+#: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:7
+#: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:13
+#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:16
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:8
+#: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:17
+#: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:12
+#: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:12
+#: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:13
+#: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:10
+#: capplets/screensaver-properties/screensaver-desktops/Greynetic.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:19
+#: capplets/screensaver-properties/screensaver-desktops/Helix.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Hopalong.desktop.in.h:11
+#: capplets/screensaver-properties/screensaver-desktops/Hypercube.desktop.in.h:11
+#: capplets/screensaver-properties/screensaver-desktops/Jigsaw.desktop.in.h:3
+#: capplets/screensaver-properties/screensaver-desktops/Julia.desktop.in.h:12
+#: capplets/screensaver-properties/screensaver-desktops/Kaleidescope.desktop.in.h:8
+#: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:14
+#: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:8
+#: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Munch.desktop.in.h:8
+#: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:4
+#: capplets/screensaver-properties/screensaver-desktops/Sierpinski.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:13
+#, fuzzy
+msgid "Faster"
+msgstr "Nopea"
+
+#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:16
+msgid "Glow"
+msgstr "Hohto"
+
+#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:17
+msgid "Have initial forces on each point be tangential to original circle."
+msgstr "Aseta aloitusvoimat ympyr‰n keh‰‰ sivuavien suorien suuntaisiksi."
+
+#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:18
+msgid "Have points glow vary with acceleration."
+msgstr "Aseta pisteiden kirkkaus kiihtyvyyden mukaan."
+
+#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:19
+#, fuzzy
+msgid "Initial spacing radius of points."
+msgstr "Muuttaa pisteiden sijoitteluet‰isyytt‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:20
+#: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:10
+#: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:9
+msgid "Jamie Zawinski <jwz@netscape.com>"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:21
+#: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:15
+#: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:11
+#, fuzzy
+msgid "Larger"
+msgstr "Suuri"
+
+#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:22
+#, fuzzy
+msgid "Number of points to use."
+msgstr "Aseta pisteiden lukum‰‰r‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:23
+msgid "Orbit"
+msgstr "Kiertorata"
+
+#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:24
+msgid "Radius"
+msgstr "S‰de"
+
+#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:26
+#, fuzzy
+msgid "Size of point."
+msgstr "Aseta pisteiden koko."
+
+#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:27
+#: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:13
+#: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:20
+#: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:11
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:17
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:14
+#: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:23
+#: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:19
+#: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:10
+#: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:17
+#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:24
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:13
+#: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:23
+#: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:20
+#: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:20
+#: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:20
+#: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:17
+#: capplets/screensaver-properties/screensaver-desktops/Greynetic.desktop.in.h:11
+#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:27
+#: capplets/screensaver-properties/screensaver-desktops/Helix.desktop.in.h:11
+#: capplets/screensaver-properties/screensaver-desktops/Hopalong.desktop.in.h:20
+#: capplets/screensaver-properties/screensaver-desktops/Hypercube.desktop.in.h:16
+#: capplets/screensaver-properties/screensaver-desktops/Jigsaw.desktop.in.h:8
+#: capplets/screensaver-properties/screensaver-desktops/Julia.desktop.in.h:19
+#: capplets/screensaver-properties/screensaver-desktops/Kaleidescope.desktop.in.h:18
+#: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:23
+#: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:21
+#: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:18
+#: capplets/screensaver-properties/screensaver-desktops/Munch.desktop.in.h:14
+#: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:16
+#: capplets/screensaver-properties/screensaver-desktops/Sierpinski.desktop.in.h:13
+#: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:18
+#, fuzzy
+msgid "Slower"
+msgstr "Hidas"
+
+#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:28
+#: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:24
+#: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:19
+#, fuzzy
+msgid "Smaller"
+msgstr "Pieni"
+
+#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:29
+#: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:21
+#: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:12
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:18
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:15
+#: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:24
+#: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:20
+#: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:11
+#: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:18
+#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:25
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:14
+#: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:18
+#: capplets/screensaver-properties/screensaver-desktops/Greynetic.desktop.in.h:12
+#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:28
+#: capplets/screensaver-properties/screensaver-desktops/Hopalong.desktop.in.h:21
+#: capplets/screensaver-properties/screensaver-desktops/Hypercube.desktop.in.h:17
+#: capplets/screensaver-properties/screensaver-desktops/Jigsaw.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Julia.desktop.in.h:20
+#: capplets/screensaver-properties/screensaver-desktops/Kaleidescope.desktop.in.h:19
+#: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:25
+#: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:22
+#: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:20
+#: capplets/screensaver-properties/screensaver-desktops/Munch.desktop.in.h:15
+#: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:19
+msgid "Speed of Motion."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:1
+msgid "Blitspin"
+msgstr "Blitspin"
+
+#: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:2
+msgid ""
+"Blitspin takes a bitmap and repeatedly rotates it by 90 degrees using "
+"logical operations."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:3
+msgid "Change the delay between each 90 degree rotation."
+msgstr "Aseta 90:n asteen kierrosten v‰lisen viiveen."
+
+#: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:4
+msgid "Change the delay between steps of rotation process."
+msgstr "Aseta pyˆrityksen eri vaiheiden v‰linen viive."
+
+#: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:5
+#: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:8
+#: capplets/screensaver-properties/screensaver-desktops/Braid.desktop.in.h:3
+#: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:5
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:7
+#: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:7
+#: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:4
+#: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:2
+#: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:4
+#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:4
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:2
+#: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:4
+#: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:4
+#: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:4
+#: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:5
+#: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:3
+#: capplets/screensaver-properties/screensaver-desktops/Greynetic.desktop.in.h:2
+#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Helix.desktop.in.h:2
+#: capplets/screensaver-properties/screensaver-desktops/Hopalong.desktop.in.h:4
+#: capplets/screensaver-properties/screensaver-desktops/Hypercube.desktop.in.h:4
+#: capplets/screensaver-properties/screensaver-desktops/Ifs.desktop.in.h:2
+#: capplets/screensaver-properties/screensaver-desktops/Julia.desktop.in.h:4
+#: capplets/screensaver-properties/screensaver-desktops/Kaleidescope.desktop.in.h:4
+#: capplets/screensaver-properties/screensaver-desktops/Laser.desktop.in.h:1
+#: capplets/screensaver-properties/screensaver-desktops/Lightning.desktop.in.h:2
+#: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:5
+#: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:3
+#: capplets/screensaver-properties/screensaver-desktops/Munch.desktop.in.h:2
+#: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:4
+#: capplets/screensaver-properties/screensaver-desktops/Sierpinski.desktop.in.h:3
+#: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:4
+#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:7
+#: capplets/screensaver-properties/screensaver-desktops/Triangle.desktop.in.h:2
+#: capplets/screensaver-properties/screensaver-desktops/Vines.desktop.in.h:2
+#: capplets/screensaver-properties/screensaver-desktops/Xroger.desktop.in.h:1
+msgid "Change to display in monochrome."
+msgstr "N‰yt‰ yksiv‰risen‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:7
+msgid "Delay2"
+msgstr "Viive2"
+
+#: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:8
+#: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:14
+#: capplets/screensaver-properties/screensaver-desktops/Braid.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:7
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:14
+#: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:10
+#: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:12
+#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:12
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:4
+#: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:14
+#: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:10
+#: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:10
+#: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:11
+#: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:11
+#: capplets/screensaver-properties/screensaver-desktops/Greynetic.desktop.in.h:4
+#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:17
+#: capplets/screensaver-properties/screensaver-desktops/Helix.desktop.in.h:4
+#: capplets/screensaver-properties/screensaver-desktops/Hopalong.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Hypercube.desktop.in.h:7
+#: capplets/screensaver-properties/screensaver-desktops/Ifs.desktop.in.h:5
+#: capplets/screensaver-properties/screensaver-desktops/Julia.desktop.in.h:10
+#: capplets/screensaver-properties/screensaver-desktops/Kaleidescope.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Laser.desktop.in.h:3
+#: capplets/screensaver-properties/screensaver-desktops/Lightning.desktop.in.h:5
+#: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:12
+#: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:7
+#: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:7
+#: capplets/screensaver-properties/screensaver-desktops/Munch.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:7
+#: capplets/screensaver-properties/screensaver-desktops/Sierpinski.desktop.in.h:8
+#: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:12
+#: capplets/screensaver-properties/screensaver-desktops/Triangle.desktop.in.h:5
+#: capplets/screensaver-properties/screensaver-desktops/Vines.desktop.in.h:5
+#: capplets/screensaver-properties/screensaver-desktops/Xroger.desktop.in.h:2
+#, fuzzy
+msgid "Display screensaver in monochrome."
+msgstr "N‰yt‰ yksiv‰risen‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:11
+#: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:17
+#: capplets/screensaver-properties/screensaver-desktops/Braid.desktop.in.h:8
+#: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:10
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:15
+#: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:19
+#: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:15
+#: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:14
+#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:20
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:11
+#: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:18
+#: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:15
+#: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:15
+#: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:16
+#: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:15
+#: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:16
+#: capplets/screensaver-properties/screensaver-desktops/Greynetic.desktop.in.h:10
+#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:24
+#: capplets/screensaver-properties/screensaver-desktops/Helix.desktop.in.h:10
+#: capplets/screensaver-properties/screensaver-desktops/Hopalong.desktop.in.h:15
+#: capplets/screensaver-properties/screensaver-desktops/Hypercube.desktop.in.h:15
+#: capplets/screensaver-properties/screensaver-desktops/Ifs.desktop.in.h:10
+#: capplets/screensaver-properties/screensaver-desktops/Julia.desktop.in.h:15
+#: capplets/screensaver-properties/screensaver-desktops/Kaleidescope.desktop.in.h:12
+#: capplets/screensaver-properties/screensaver-desktops/Lightning.desktop.in.h:10
+#: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:18
+#: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:13
+#: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:15
+#: capplets/screensaver-properties/screensaver-desktops/Munch.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:13
+#: capplets/screensaver-properties/screensaver-desktops/Sierpinski.desktop.in.h:10
+#: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:14
+#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:15
+#: capplets/screensaver-properties/screensaver-desktops/Triangle.desktop.in.h:7
+#: capplets/screensaver-properties/screensaver-desktops/Vines.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Xroger.desktop.in.h:4
+msgid "Monochrome"
+msgstr "Yksiv‰rinen"
+
+#: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:12
+msgid "Rotates a bitmap in an interesting way."
+msgstr "Pyˆritt‰‰ kuvaa kiinnostavasti."
+
+#: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:14
+msgid "Speed of rotation"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:15
+#, fuzzy
+msgid "Speed of the 90 degree rotation."
+msgstr "Aseta 90:n asteen kierrosten v‰lisen viiveen."
+
+#: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:1
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:1
+msgid "3D"
+msgstr "3D"
+
+#: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:2
+msgid "A blob of bubbles spinning/moving around the screen."
+msgstr "Soikioista muodostuva pallo pyˆrii ja liikkuu ruudulla."
+
+#: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:3
+msgid "Bouboule"
+msgstr "Bouboule"
+
+#: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:4
+msgid "Bouboule changes shape and size in a blob like form."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:2
+#: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:4
+msgid "Change the number of bubbles to use."
+msgstr "Aseta soikioiden m‰‰r‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:7
+#: capplets/screensaver-properties/screensaver-desktops/Braid.desktop.in.h:2
+#: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:5
+#: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:2
+#: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:2
+#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:3
+#: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:4
+#: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:2
+#: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:2
+#: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:2
+#: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:1
+#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:5
+#: capplets/screensaver-properties/screensaver-desktops/Hopalong.desktop.in.h:2
+#: capplets/screensaver-properties/screensaver-desktops/Ifs.desktop.in.h:1
+#: capplets/screensaver-properties/screensaver-desktops/Julia.desktop.in.h:2
+#: capplets/screensaver-properties/screensaver-desktops/Lightning.desktop.in.h:1
+#: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:3
+#: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:2
+#: capplets/screensaver-properties/screensaver-desktops/Sierpinski.desktop.in.h:2
+#: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:2
+#: capplets/screensaver-properties/screensaver-desktops/Triangle.desktop.in.h:1
+#: capplets/screensaver-properties/screensaver-desktops/Vines.desktop.in.h:1
+msgid "Change the number of colors to use."
+msgstr "Aseta v‰rien m‰‰r‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Braid.desktop.in.h:4
+#: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:8
+#: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:5
+#: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:5
+#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:7
+#: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:8
+#: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:5
+#: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:10
+#: capplets/screensaver-properties/screensaver-desktops/Hopalong.desktop.in.h:5
+#: capplets/screensaver-properties/screensaver-desktops/Ifs.desktop.in.h:3
+#: capplets/screensaver-properties/screensaver-desktops/Julia.desktop.in.h:5
+#: capplets/screensaver-properties/screensaver-desktops/Lightning.desktop.in.h:3
+#: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:7
+#: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:4
+#: capplets/screensaver-properties/screensaver-desktops/Sierpinski.desktop.in.h:4
+#: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Triangle.desktop.in.h:3
+#: capplets/screensaver-properties/screensaver-desktops/Vines.desktop.in.h:3
+msgid "Colors"
+msgstr "V‰rit"
+
+#: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:10
+#: capplets/screensaver-properties/screensaver-desktops/Braid.desktop.in.h:5
+#: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:8
+#: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:7
+#: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:7
+#: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:7
+#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:11
+#: capplets/screensaver-properties/screensaver-desktops/Hopalong.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Ifs.desktop.in.h:4
+#: capplets/screensaver-properties/screensaver-desktops/Julia.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Lightning.desktop.in.h:4
+#: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:8
+#: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:5
+#: capplets/screensaver-properties/screensaver-desktops/Sierpinski.desktop.in.h:5
+#: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:7
+#: capplets/screensaver-properties/screensaver-desktops/Triangle.desktop.in.h:4
+#: capplets/screensaver-properties/screensaver-desktops/Vines.desktop.in.h:4
+#, fuzzy
+msgid "Colors:"
+msgstr "V‰rit"
+
+#: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:16
+msgid "Jeremie Petit <jpetit@essi.fr>"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:18
+#: capplets/screensaver-properties/screensaver-desktops/Braid.desktop.in.h:10
+#: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:21
+#: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:17
+#: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:15
+#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:21
+#: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:16
+#: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:16
+#: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:17
+#: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:17
+#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:25
+#: capplets/screensaver-properties/screensaver-desktops/Hopalong.desktop.in.h:17
+#: capplets/screensaver-properties/screensaver-desktops/Ifs.desktop.in.h:11
+#: capplets/screensaver-properties/screensaver-desktops/Julia.desktop.in.h:16
+#: capplets/screensaver-properties/screensaver-desktops/Lightning.desktop.in.h:11
+#: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:19
+#: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:16
+msgid "Number of Colors."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:19
+#: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:16
+#, fuzzy
+msgid "Number of bubbles to use."
+msgstr "Aseta soikioiden m‰‰r‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:22
+msgid "Use red/blue 3d seperation."
+msgstr "Erottele sininen ja punainen 3d-tapaan."
+
+#: capplets/screensaver-properties/screensaver-desktops/Braid.desktop.in.h:1
+msgid "Braid"
+msgstr "Nauhat"
+
+#: capplets/screensaver-properties/screensaver-desktops/Braid.desktop.in.h:7
+msgid "John Neil <neil@math.idbsu.edu>"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Braid.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:21
+#: capplets/screensaver-properties/screensaver-desktops/Sierpinski.desktop.in.h:11
+#: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:15
+#: capplets/screensaver-properties/screensaver-desktops/Triangle.desktop.in.h:8
+#: capplets/screensaver-properties/screensaver-desktops/Vines.desktop.in.h:7
+#, fuzzy
+msgid "Number of Colors"
+msgstr "Ymp‰rˆiv‰ v‰ri"
+
+#: capplets/screensaver-properties/screensaver-desktops/Braid.desktop.in.h:11
+msgid "Random color-cycling braids in a circle."
+msgstr "Satunnaisia pyˆriv‰v‰risi‰ nauhoja keh‰ss‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Braid.desktop.in.h:12
+#, fuzzy
+msgid "The braid program draws random color-cycling braids around a circle."
+msgstr "Satunnaisia pyˆriv‰v‰risi‰ nauhoja keh‰ss‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:1
+msgid "Blue Screen of Death"
+msgstr "Virheilmoitukset"
+
+#: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:2
+msgid "Bsod"
+msgstr "Virheilmoitukset"
+
+#: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:3
+msgid "Bsod simulates crash screens from other operating systems."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:4
+msgid "Change the delay."
+msgstr "Aseta viive."
+
+#: capplets/screensaver-properties/screensaver-desktops/Bubble3d.desktop.in.h:1
+msgid "Bubble3d"
+msgstr "3D-kupla"
+
+#: capplets/screensaver-properties/screensaver-desktops/Bubble3d.desktop.in.h:2
+msgid "Lots of bubbles floating around, in 3d"
+msgstr "Piirt‰‰ useita 3d-kuplia."
+
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:2
+msgid "Broken"
+msgstr "Rikki"
+
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:3
+msgid "Bubbles"
+msgstr "Kuplat"
+
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:4
+msgid "Bubbles exist in three dimensions."
+msgstr "Kuplia on monessa tasossa."
+
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:5
+#, fuzzy
+msgid "Bubbles sprays tiny bubbles which grow until they go pop."
+msgstr "Piirt‰‰ kasvavia ja sitten puhkeavia kuplia."
+
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:10
+msgid "Don't hide bubbles when they pop."
+msgstr "ƒl‰ piilota puhjenneita kuplia."
+
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:11
+msgid "Draw circles instead of pixmap bubbles."
+msgstr "Piirr‰ ympyrˆit‰ kuvioitujen kuplien sijaan."
+
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:13
+msgid "James Macnicol <J.Macnicol@student.anu.edu.au>"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:14
+msgid "Lots of random bubbles grow until they pop."
+msgstr "Piirt‰‰ kasvavia ja sitten puhkeavia kuplia."
+
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:16
+msgid "Simple"
+msgstr "Yksinkertainen"
+
+#: capplets/screensaver-properties/screensaver-desktops/Bumps.desktop.in.h:1
+msgid "Bumps"
+msgstr "Kuhmut"
+
+#: capplets/screensaver-properties/screensaver-desktops/Bumps.desktop.in.h:2
+#: capplets/screensaver-properties/screensaver-desktops/Shadebobs.desktop.in.h:3
+msgid "Shane Smit"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Bumps.desktop.in.h:3
+msgid "Spotlights a bump map of your desktop."
+msgstr "Piirt‰‰ tyˆpˆyt‰si kuhmuisena valokeilassa."
+
+#: capplets/screensaver-properties/screensaver-desktops/Cage.desktop.in.h:1
+msgid "Cage"
+msgstr "Kuutio"
+
+#: capplets/screensaver-properties/screensaver-desktops/Cage.desktop.in.h:2
+msgid "The famous, M.C. Escher, impossible cage"
+msgstr "M.C. Escherin kuuluisa mahdoton kuutio"
+
+#: capplets/screensaver-properties/screensaver-desktops/Compass.desktop.in.h:1
+msgid "Compass"
+msgstr "Kompassi"
+
+#: capplets/screensaver-properties/screensaver-desktops/Compass.desktop.in.h:2
+msgid "Display a spinning compass "
+msgstr "Piirt‰‰ pyˆriv‰n kompassin."
+
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:2
+msgid "Change the density."
+msgstr "Muuta tiheytt‰"
+
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:3
+#, fuzzy
+msgid "Change the number of seeds."
+msgstr "Aseta m‰‰r‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:4
+msgid "Coral"
+msgstr "Koralli"
+
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:6
+#, fuzzy
+msgid "Denser"
+msgstr "Yleinen"
+
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:7
+msgid "Density"
+msgstr "Tiheys"
+
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:9
+msgid "Frederick Roeber"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:10
+#, fuzzy
+msgid "Number of seeds"
+msgstr "Muuta osien lukum‰‰r‰‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:11
+msgid "Seeds"
+msgstr "Siemeni‰"
+
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:12
+msgid "Simulates coral growth"
+msgstr "J‰ljittelee korallien kasvua"
+
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:13
+#, fuzzy
+msgid "Simulates coral growth."
+msgstr "J‰ljittelee korallien kasvua"
+
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:16
+#, fuzzy
+msgid "Thinner"
+msgstr "Kissun"
+
+#: capplets/screensaver-properties/screensaver-desktops/Critical.desktop.in.h:1
+msgid "Critical"
+msgstr "Kriittinen"
+
+#: capplets/screensaver-properties/screensaver-desktops/Critical.desktop.in.h:2
+msgid "Display coloured polylines"
+msgstr "Piirt‰‰ v‰rillisi‰ viivoja."
+
+#: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:1
+msgid "Cell"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:2
+#, fuzzy
+msgid "Center image."
+msgstr "Keskell‰"
+
+#: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:3
+#, fuzzy
+msgid "Centre"
+msgstr "Keskell‰"
+
+#: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:6
+#, fuzzy
+msgid "Change the number of polygons to use."
+msgstr "Aseta pisteiden lukum‰‰r‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:12
+#, fuzzy
+msgid "Crystal"
+msgstr "Koralli"
+
+#: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:16
+msgid "Have at maximum size"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:17
+msgid "Jouk Jansen"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:18
+#, fuzzy
+msgid "Maxsize"
+msgstr "Sokkelo"
+
+#: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:20
+msgid "Moving polygons, similar to a kaleidescope."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:22
+#, fuzzy
+msgid "Number of polygons to use."
+msgstr "Aseta pisteiden lukum‰‰r‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:3
+msgid "Change the number of iterations."
+msgstr "Aseta kierrosten m‰‰r‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:7
+msgid "Cynosure"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:8
+#, fuzzy
+msgid "Cynosure franticly displays colored rectangles."
+msgstr "Piirt‰‰ v‰rillisi‰ neliˆit‰ vauhdikkaasti."
+
+#: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:12
+msgid "Franticly displays colored rectangles."
+msgstr "Piirt‰‰ v‰rillisi‰ neliˆit‰ vauhdikkaasti."
+
+#: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:13
+msgid "Iterations"
+msgstr "Kierroksia"
+
+#: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:14
+#: capplets/screensaver-properties/screensaver-desktops/Hopalong.desktop.in.h:14
+#: capplets/screensaver-properties/screensaver-desktops/Kaleidescope.desktop.in.h:11
+#: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:10
+#: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:10
+#, fuzzy
+msgid "Less"
+msgstr "Vieteri"
+
+#: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:16
+#: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:19
+#: capplets/screensaver-properties/screensaver-desktops/Hopalong.desktop.in.h:16
+#: capplets/screensaver-properties/screensaver-desktops/Kaleidescope.desktop.in.h:13
+#: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:14
+#: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:14
+#: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:11
+#, fuzzy
+msgid "More"
+msgstr "Moire"
+
+#: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:18
+#, fuzzy
+msgid "Number of iterations."
+msgstr "Aseta kierrosten m‰‰r‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:21
+msgid "Stephen Linhart, Ozymandias Desiderata, Jamie Zawinski"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:3
+msgid "Decayscreen"
+msgstr "Valuma"
+
+#: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:4
+msgid "Decayscreen makes a screen look like its melting down."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:8
+msgid "Makes a screen melt down"
+msgstr "Saa kuvan valumaan n‰ytˆll‰"
+
+#: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:12
+msgid "Vivek Khera <khera@cs.duke.edu>"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Deco.desktop.in.h:1
+#: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:5
+msgid "Changes the time between redrawing the screen."
+msgstr "Aseta n‰ytˆn p‰ivitysten v‰linen aika."
+
+#: capplets/screensaver-properties/screensaver-desktops/Deco.desktop.in.h:2
+#, fuzzy
+msgid "Cycle through colors."
+msgstr "Kierr‰t‰ v‰rikarttaa."
+
+#: capplets/screensaver-properties/screensaver-desktops/Deco.desktop.in.h:3
+msgid "Deco"
+msgstr "Koristus"
+
+#: capplets/screensaver-properties/screensaver-desktops/Deco.desktop.in.h:4
+#, fuzzy
+msgid "Deco draws tacky 70s basement wall panelling."
+msgstr "Piirt‰‰ 70-luvun pohjakerrosten sein‰kuvioita."
+
+#: capplets/screensaver-properties/screensaver-desktops/Deco.desktop.in.h:5
+msgid "Determines whether to draw the panels in color, or in black and white."
+msgstr "M‰‰ritt‰‰, piirret‰‰nkˆ kuviot v‰rillisin‰ vai mustavalkoisina."
+
+#: capplets/screensaver-properties/screensaver-desktops/Deco.desktop.in.h:6
+msgid "Draw tacky 70s basement wall panelling."
+msgstr "Piirt‰‰ 70-luvun pohjakerrosten sein‰kuvioita."
+
+#: capplets/screensaver-properties/screensaver-desktops/Deco.desktop.in.h:7
+msgid ""
+"Jamie Zawinski <jwz@jwz.org>\n"
+"Michael D. Bayne <mdb@go2net.com>"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Deco.desktop.in.h:8
+msgid "This will cause the panes to flash."
+msgstr "T‰m‰ saa kuviot v‰lkkym‰‰n."
+
+#: capplets/screensaver-properties/screensaver-desktops/Deco.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:22
+msgid "Time between redraws:"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Deco.desktop.in.h:10
+msgid "Use color when drawing."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Deco.desktop.in.h:11
+msgid "color"
+msgstr "v‰ri"
+
+#: capplets/screensaver-properties/screensaver-desktops/Deco.desktop.in.h:12
+msgid "color-cycle"
+msgstr "v‰rikierto"
+
+#: capplets/screensaver-properties/screensaver-desktops/Deco.desktop.in.h:13
+#: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:23
+msgid "delay"
+msgstr "Viive"
+
+#: capplets/screensaver-properties/screensaver-desktops/Deco.desktop.in.h:14
+msgid "seconds"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Deluxe.desktop.in.h:1
+msgid "Deluxe"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Deluxe.desktop.in.h:2
+msgid "Display nice stuff "
+msgstr "Piirr‰ jotakin kivaa"
+
+#: capplets/screensaver-properties/screensaver-desktops/Demon.desktop.in.h:1
+msgid ""
+"A cellular automata that starts with a random field, and organizes it into "
+"stripes and spirals."
+msgstr ""
+"Soluautomaatti, joka aloittaa satunnaisesta ruudusta, ja j‰rjest‰‰ sen "
+"viivoiksi ja spiraaleiksi."
+
+#: capplets/screensaver-properties/screensaver-desktops/Demon.desktop.in.h:2
+msgid "Demon"
+msgstr "Demoni"
+
+#: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:3
+#: capplets/screensaver-properties/screensaver-desktops/Julia.desktop.in.h:3
+#: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:4
+#: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:3
+msgid "Change the number to use."
+msgstr "Aseta m‰‰r‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:10
+msgid "Discrete"
+msgstr "Diskreetti"
+
+#: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:11
+msgid "Discrete map systems"
+msgstr "Diskreettej‰ kentt‰kuvauksia"
+
+#: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:16
+#: capplets/screensaver-properties/screensaver-desktops/Julia.desktop.in.h:17
+#: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:20
+#: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:16
+#, fuzzy
+msgid "Number to use."
+msgstr "Aseta m‰‰r‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:19
+msgid "Tim Auckland"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Distort.desktop.in.h:1
+msgid "Distort"
+msgstr "V‰‰rist‰"
+
+#: capplets/screensaver-properties/screensaver-desktops/Distort.desktop.in.h:2
+msgid "Distort the screen"
+msgstr "V‰‰rist‰‰ n‰ytˆn"
+
+#: capplets/screensaver-properties/screensaver-desktops/Distort.desktop.in.h:3
+msgid ""
+"This screensaver does distortions of some areas of the screen, as if some "
+"object was moving under the image"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:5
+msgid "Change whether fractals should grow."
+msgstr "M‰‰ritt‰‰, kasvavatko fraktaalit."
+
+#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:6
+msgid "Change whether to use lissajous figures to get points."
+msgstr "M‰‰ritt‰‰, ketjuuntuvatko pisteet."
+
+#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:13
+msgid "Drift"
+msgstr "Virta"
+
+#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:14
+#, fuzzy
+msgid "Drift draws drifting recursive fractal cosmic flames."
+msgstr "Piirt‰‰ \"virtaavia\" rekursiivisia fraktaaleja."
+
+#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:15
+msgid "Drifting recursive fractal cosmic flames."
+msgstr "Piirt‰‰ \"virtaavia\" rekursiivisia fraktaaleja."
+
+#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:17
+#, fuzzy
+msgid "Fractals should grow."
+msgstr "M‰‰ritt‰‰, kasvavatko fraktaalit."
+
+#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:18
+msgid "Grow"
+msgstr "Kasvata"
+
+#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:19
+msgid "Lissajous"
+msgstr "Ketjuunnuta"
+
+#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:22
+#, fuzzy
+msgid "Number of pixels to use."
+msgstr "Aseta pisteiden lukum‰‰r‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:23
+msgid "Scot Draves <spot@cs.cmu.edu>"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:26
+#, fuzzy
+msgid "Use lissajous figures to get points."
+msgstr "M‰‰ritt‰‰, ketjuuntuvatko pisteet."
+
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:5
+msgid "Draws a point moving around a circle which moves around a circle."
+msgstr ""
+"Piirt‰‰ ympyr‰rataa kulkevan pisteen, joka kiert‰‰ ympyr‰rataa kulkevaa "
+"pistett‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:6
+#, fuzzy
+msgid "Epicycle"
+msgstr "Kierros"
+
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:7
+msgid ""
+"Epicycle draws the path traced out by a point on the edge of a circle that "
+"is rotating around the rim of another circle, and so on."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:9
+msgid "Holdtime"
+msgstr "Pitoaika"
+
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:10
+msgid "James Youngman <jay@gnu.org>"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:12
+#: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:17
+#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:17
+#, fuzzy
+msgid "Seconds"
+msgstr "ƒ‰ni"
+
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:15
+msgid "Time finished product is shown."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:16
+msgid "When the figure is complete, epicycle pauses this number of seconds."
+msgstr "Kun kuva on valmis, odota n‰in monta sekuntia."
+
+#: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:1
+msgid "A waving ribbon"
+msgstr "Liehuva nauha"
+
+#: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:2
+msgid "Bas van Gaalen and Charles Vidal"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:3
+msgid "Change the delay in movement."
+msgstr "Muuta liikeviivett‰"
+
+#: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:5
+msgid "Change the number of cycles."
+msgstr "Muuttaa kierrosten m‰‰r‰‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:7
+msgid "Changes the count."
+msgstr "Muuta lukum‰‰r‰‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:12
+#: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:8
+#: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:8
+#: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Hopalong.desktop.in.h:8
+#: capplets/screensaver-properties/screensaver-desktops/Julia.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:11
+#: capplets/screensaver-properties/screensaver-desktops/Sierpinski.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:10
+msgid "Cycles"
+msgstr "Kierroksia"
+
+#: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:15
+msgid "Draws what looks like a waving ribbon following a sinusoidal path."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:16
+msgid "Fadeplot"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:20
+msgid "Number"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:22
+#, fuzzy
+msgid "Number of cycles"
+msgstr "Muuttaa kierrosten m‰‰r‰‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:24
+#: capplets/screensaver-properties/screensaver-desktops/Sierpinski.desktop.in.h:14
+msgid "Speed of Motion"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:1
+#: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:1
+msgid "Change the delay between changing modes."
+msgstr "Muuta tilojen vaihtamisviivett‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:3
+#: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:3
+msgid "Change the size of pixels in the flag."
+msgstr "Muuta lipun pisteiden kokoa."
+
+#: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:5
+#: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:5
+msgid "Charles Vidal <vidalc@univ-mlv.fr>"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:9
+msgid "Delay between switches."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:11
+#: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:11
+msgid "Draws a waving flag."
+msgstr "Piirt‰‰ liehuvan lipun."
+
+#: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:13
+#: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:13
+msgid "Flag"
+msgstr "Lippu"
+
+#: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:14
+#: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:14
+msgid "Flag draws a waving flab, containing text or an image."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:18
+#: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:18
+msgid "Size of pixels"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Flow.desktop.in.h:1
+msgid "Draws a flow of colored points"
+msgstr "Piirt‰‰ virtaavia v‰ripisteit‰"
+
+#: capplets/screensaver-properties/screensaver-desktops/Flow.desktop.in.h:2
+msgid "Flow"
+msgstr "Virtaus"
+
+#: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:3
+msgid "Change the number of trees to use."
+msgstr "Muuta puiden m‰‰r‰‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:10
+msgid "Delay between redraws."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:12
+msgid "Draws a fractal forest."
+msgstr "Piirt‰‰ fraktaalimets‰n."
+
+#: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:14
+msgid "Forest"
+msgstr "Mets‰"
+
+#: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:15
+#, fuzzy
+msgid "Fractal draws a fractal forest."
+msgstr "Piirt‰‰ fraktaalimets‰n."
+
+#: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:18
+#, fuzzy
+msgid "Number of trees to use."
+msgstr "Muuta puiden m‰‰r‰‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:19
+msgid "Pascal Pensa <pensa@aurora.unice.fr>"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/GLPlanet.desktop.in.h:1
+msgid "A 3d globe"
+msgstr "3D-planeetta"
+
+#: capplets/screensaver-properties/screensaver-desktops/GLPlanet.desktop.in.h:2
+msgid "GLPlanet"
+msgstr "GLPlaneetta"
+
+#: capplets/screensaver-properties/screensaver-desktops/Galaxy.desktop.in.h:1
+msgid "Galaxy"
+msgstr "Galaksi"
+
+#: capplets/screensaver-properties/screensaver-desktops/Gears.desktop.in.h:1
+msgid "Gears"
+msgstr "Rattaat"
+
+#: capplets/screensaver-properties/screensaver-desktops/Gears.desktop.in.h:2
+msgid "The 3d mesa demo, of gears"
+msgstr "Mesan 3d-ratasn‰ytˆs"
+
+#: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:1
+msgid "Additive"
+msgstr "Lis‰‰v‰"
+
+#: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:2
+msgid "Causes the colors to mix when overlapped."
+msgstr "Saa v‰rit sekoittumaan, kun ne menev‰t p‰‰llekk‰in."
+
+#: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:11
+msgid "Goop"
+msgstr "Mˆykyt"
+
+#: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:12
+msgid "Goop draws a simulation of bubbles in layers."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:13
+#, fuzzy
+msgid "Have transparent bubbles."
+msgstr "Venyv‰‰ ja l‰pin‰kyv‰‰ ˆljy‰ sek‰ kuplia"
+
+#: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:14
+#: capplets/screensaver-properties/screensaver-desktops/Greynetic.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:22
+#: capplets/screensaver-properties/screensaver-desktops/Hypercube.desktop.in.h:14
+#: capplets/screensaver-properties/screensaver-desktops/Jigsaw.desktop.in.h:4
+#: capplets/screensaver-properties/screensaver-desktops/Phosphor.desktop.in.h:2
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:13
+msgid "Jamie Zawinski <jwz@jwz.org>"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:19
+msgid "Transparent"
+msgstr "L‰pin‰kyv‰"
+
+#: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:20
+msgid "Use additive color model."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:21
+msgid "squishy transparent oil and bubbles"
+msgstr "Venyv‰‰ ja l‰pin‰kyv‰‰ ˆljy‰ sek‰ kuplia"
+
+#: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:2
+msgid "Change the number of planets to use."
+msgstr "Vaihda planeettojen m‰‰r‰‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:4
+msgid "Change whether objects should leave a trail."
+msgstr "Aseta, j‰tt‰v‰tkˆ planeetat j‰lki‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:5
+msgid "Change whether orbit should decay."
+msgstr "Aseta, suistuvatko kappaleet kiertoradoiltaan."
+
+#: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:10
+msgid "Decay"
+msgstr "Suista"
+
+#: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:12
+msgid "Draws a simple orbital simulation."
+msgstr "Piirt‰‰ yksinkertaisen kiertoratamallin."
+
+#: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:13
+msgid "Grav"
+msgstr "Painovoima"
+
+#: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:14
+#, fuzzy
+msgid "Grav draws a simple orbital simulation."
+msgstr "Piirt‰‰ yksinkertaisen kiertoratamallin."
+
+#: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:15
+msgid "Greg Bowering <greg@smug.student.adelaide.edu.au>"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:18
+#, fuzzy
+msgid "Number of planets to use."
+msgstr "Vaihda planeettojen m‰‰r‰‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:19
+#, fuzzy
+msgid "Objects should leave trails behind them."
+msgstr "Aseta, j‰tt‰v‰tkˆ planeetat j‰lki‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:20
+#, fuzzy
+msgid "Orbit should decay."
+msgstr "Aseta, suistuvatko kappaleet kiertoradoiltaan."
+
+#: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:21
+msgid "Trail"
+msgstr "J‰ljet"
+
+#: capplets/screensaver-properties/screensaver-desktops/Greynetic.desktop.in.h:5
+msgid "Draws random color rectangles."
+msgstr "Piirt‰‰ satunnaisen v‰risi‰ suorakulmioita."
+
+#: capplets/screensaver-properties/screensaver-desktops/Greynetic.desktop.in.h:7
+msgid "Greynetic"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Greynetic.desktop.in.h:8
+#, fuzzy
+msgid "Greynetic draws random rectangles."
+msgstr "Piirt‰‰ satunnaisen v‰risi‰ suorakulmioita."
+
+#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:1
+msgid "Animate"
+msgstr "Liikuta"
+
+#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:2
+#, fuzzy
+msgid "Animate circles."
+msgstr "Liikuta ympyrˆit‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:4
+msgid "Change the number of circles to use."
+msgstr "Aseta ympyrˆiden m‰‰r‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:6
+msgid "Change to alternating striped curves."
+msgstr "Piirr‰ vaihtelevan v‰risi‰ kaaria."
+
+#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:7
+msgid "Change to animated circles."
+msgstr "Liikuta ympyrˆit‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:8
+msgid "Change to cycle through colormap."
+msgstr "Kierr‰t‰ v‰rikarttaa."
+
+#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:14
+#: capplets/screensaver-properties/screensaver-desktops/Xteevee.desktop.in.h:2
+msgid "Cycle"
+msgstr "Kierros"
+
+#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:15
+#, fuzzy
+msgid "Cycle through colormap."
+msgstr "Kierr‰t‰ v‰rikarttaa."
+
+#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:18
+msgid "Draw circular patterns."
+msgstr "Piirt‰‰ ympyr‰m‰isi‰ kuvioita."
+
+#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:20
+msgid "Halo"
+msgstr "Halo"
+
+#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:21
+msgid "Halo draws patterns based on circles."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:23
+msgid "Mode"
+msgstr "Tila"
+
+#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:26
+#, fuzzy
+msgid "Number of circles to use."
+msgstr "Aseta ympyrˆiden m‰‰r‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:29
+#, fuzzy
+msgid "Use a gradient of colors between circles."
+msgstr "Liukuv‰ritausta"
+
+#: capplets/screensaver-properties/screensaver-desktops/Helix.desktop.in.h:5
+msgid "Draws helical string-art patterns"
+msgstr "Piirt‰‰ kierukkamaisia viivapiirroksia"
+
+#: capplets/screensaver-properties/screensaver-desktops/Helix.desktop.in.h:7
+msgid "Helix"
+msgstr "Kierukka"
+
+#: capplets/screensaver-properties/screensaver-desktops/Helix.desktop.in.h:8
+#, fuzzy
+msgid "Helix draws patterns composed of line segments."
+msgstr "Piirt‰‰ pyˆrivi‰ viivanosia."
+
+#: capplets/screensaver-properties/screensaver-desktops/Helix.desktop.in.h:9
+msgid "Jamie  Zawinski  <jwz@jwz.org> "
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Helix.desktop.in.h:12
+msgid "Time between redraws."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Hopalong.desktop.in.h:3
+msgid "Change the number of pixels before a color change."
+msgstr "Muuta v‰rinvaihtojen v‰listen kuvapisteiden m‰‰r‰‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Hopalong.desktop.in.h:10
+msgid "Draws real plane fractals"
+msgstr "Piirt‰‰ reaalitason fraktaaleja"
+
+#: capplets/screensaver-properties/screensaver-desktops/Hopalong.desktop.in.h:12
+msgid "Hopalong"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Hopalong.desktop.in.h:13
+#, fuzzy
+msgid "Hopalong generates real plan fractals."
+msgstr "Piirt‰‰ reaalitason fraktaaleja"
+
+#: capplets/screensaver-properties/screensaver-desktops/Hopalong.desktop.in.h:18
+#, fuzzy
+msgid "Number of pixels before a color change."
+msgstr "Muuta v‰rinvaihtojen v‰listen kuvapisteiden m‰‰r‰‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Hopalong.desktop.in.h:19
+msgid "Patrick J. Naughton <naughton@eng.sun.com>"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Hypercube.desktop.in.h:1
+msgid "2D projection of a hypercube"
+msgstr "2-ulotteinen kuvaus hyperkuutiosta"
+
+#: capplets/screensaver-properties/screensaver-desktops/Hypercube.desktop.in.h:3
+msgid "Change the distance from center of cube"
+msgstr "Muuta et‰isyytt‰ kuution keskelt‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Hypercube.desktop.in.h:8
+msgid "Distance"
+msgstr "Et‰isyys"
+
+#: capplets/screensaver-properties/screensaver-desktops/Hypercube.desktop.in.h:9
+#, fuzzy
+msgid "Distance from center of cube"
+msgstr "Muuta et‰isyytt‰ kuution keskelt‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Hypercube.desktop.in.h:12
+msgid "Hypercube"
+msgstr "Hyperkuutio"
+
+#: capplets/screensaver-properties/screensaver-desktops/Hypercube.desktop.in.h:13
+#, fuzzy
+msgid "Hypercube displays a wireframe projection of a hypercube."
+msgstr "2-ulotteinen kuvaus hyperkuutiosta"
+
+#: capplets/screensaver-properties/screensaver-desktops/Ifs.desktop.in.h:6
+msgid "Draws spinning, colliding, iterated-function-system images."
+msgstr "Piirt‰‰ pyˆrivi‰ ja tˆrm‰‰vi‰ iteroidun funktioj‰rjestelm‰n kuvia."
+
+#: capplets/screensaver-properties/screensaver-desktops/Ifs.desktop.in.h:7
+msgid "Ifs"
+msgstr "Ifs"
+
+#: capplets/screensaver-properties/screensaver-desktops/Ifs.desktop.in.h:8
+#, fuzzy
+msgid "Ifs draws spinning, colliding, iterated-function-system images."
+msgstr "Piirt‰‰ pyˆrivi‰ ja tˆrm‰‰vi‰ iteroidun funktioj‰rjestelm‰n kuvia."
+
+#: capplets/screensaver-properties/screensaver-desktops/Ifs.desktop.in.h:9
+msgid "Massimino Pascal <Pascal.Massimon@ens.fr>"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Imsmap.desktop.in.h:1
+msgid "Imsmap"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Interference.desktop.in.h:1
+msgid "Interference"
+msgstr "Interferenssi"
+
+#: capplets/screensaver-properties/screensaver-desktops/Jigsaw.desktop.in.h:5
+msgid "Jigsaw"
+msgstr "Palapeli"
+
+#: capplets/screensaver-properties/screensaver-desktops/Jigsaw.desktop.in.h:6
+msgid ""
+"Jigsaw takes an image of the screen, carves it up into jigsaw puzzle pieces, "
+"shuffles it, and solves it."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Jigsaw.desktop.in.h:7
+msgid "Permutes the screen image like a jigsaw puzzle."
+msgstr "Jakaa kuvan palapelin paloiksi ja sekoittaa ne."
+
+#: capplets/screensaver-properties/screensaver-desktops/Julia.desktop.in.h:11
+msgid "Draws spinning, animating, julia-set fractals."
+msgstr "Piirt‰‰ pyˆrivi‰ ja liikkuvia julia-joukon fraktaaleja."
+
+#: capplets/screensaver-properties/screensaver-desktops/Julia.desktop.in.h:13
+msgid "Julia"
+msgstr "Julia"
+
+#: capplets/screensaver-properties/screensaver-desktops/Julia.desktop.in.h:14
+#, fuzzy
+msgid "Julia draws spinning, animating, julia-set fractals."
+msgstr "Piirt‰‰ pyˆrivi‰ ja liikkuvia julia-joukon fraktaaleja."
+
+#: capplets/screensaver-properties/screensaver-desktops/Julia.desktop.in.h:18
+msgid "Sean McCullough <bankshot@mailhost.nmt.edu>"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Kaleidescope.desktop.in.h:1
+msgid "Change number of segments."
+msgstr "Muuta osien lukum‰‰r‰‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Kaleidescope.desktop.in.h:2
+msgid "Change number of trails."
+msgstr "Muuta j‰lkien lukum‰‰r‰‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Kaleidescope.desktop.in.h:7
+msgid "Draws rotating line segments."
+msgstr "Piirt‰‰ pyˆrivi‰ viivanosia."
+
+#: capplets/screensaver-properties/screensaver-desktops/Kaleidescope.desktop.in.h:9
+msgid "Kaleidescope"
+msgstr "Kaleidoskooppi"
+
+#: capplets/screensaver-properties/screensaver-desktops/Kaleidescope.desktop.in.h:10
+msgid "Kaleidescope draws line segments in a symmetric pattern."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Kaleidescope.desktop.in.h:14
+#, fuzzy
+msgid "Number of segments."
+msgstr "Muuta osien lukum‰‰r‰‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Kaleidescope.desktop.in.h:15
+#, fuzzy
+msgid "Number of trails."
+msgstr "Muuta j‰lkien lukum‰‰r‰‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Kaleidescope.desktop.in.h:16
+msgid "Ron Tapia <tapia@nmia.com>"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Kaleidescope.desktop.in.h:17
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:16
+msgid "Segments"
+msgstr "Osia"
+
+#: capplets/screensaver-properties/screensaver-desktops/Kaleidescope.desktop.in.h:20
+msgid "Trails"
+msgstr "J‰ljet"
+
+#: capplets/screensaver-properties/screensaver-desktops/Kumppa.desktop.in.h:1
+msgid "Kumppa"
+msgstr "Kumppa"
+
+#: capplets/screensaver-properties/screensaver-desktops/Lament.desktop.in.h:1
+msgid "A 3d cube floats around"
+msgstr "3-ulotteinen kuutio k‰‰ntyilee"
+
+#: capplets/screensaver-properties/screensaver-desktops/Lament.desktop.in.h:2
+msgid "Lament"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Laser.desktop.in.h:4
+msgid ""
+"Draws laser-like lines moving around a central focal point in varying "
+"numbers and colors."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Laser.desktop.in.h:5
+msgid "Draws vaguely laser-like moving lines."
+msgstr "Piirt‰‰ et‰isesti laseria muistuttavia liikkuvia viivoja."
+
+#: capplets/screensaver-properties/screensaver-desktops/Laser.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:9
+msgid "Duration"
+msgstr "Kesto"
+
+#: capplets/screensaver-properties/screensaver-desktops/Laser.desktop.in.h:7
+#, fuzzy
+msgid "Duration of laser burst."
+msgstr "Viivojen lukum‰‰r‰ purskeessa."
+
+#: capplets/screensaver-properties/screensaver-desktops/Laser.desktop.in.h:8
+msgid ""
+"Duration of the laser burst.  After the burst has finished, It will move to "
+"a new location on the screen."
+msgstr ""
+"Laserpurskeen kesto. Kun t‰m‰ aika on kulunut, niin purske siirtyy toiseen "
+"paikkaan ruudulla."
+
+#: capplets/screensaver-properties/screensaver-desktops/Laser.desktop.in.h:9
+msgid "Laser"
+msgstr "Laser"
+
+#: capplets/screensaver-properties/screensaver-desktops/Laser.desktop.in.h:10
+#: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:10
+#, fuzzy
+msgid "Longer"
+msgstr "Xroger"
+
+#: capplets/screensaver-properties/screensaver-desktops/Laser.desktop.in.h:11
+msgid "Mono"
+msgstr "Yksiv‰rinen"
+
+#: capplets/screensaver-properties/screensaver-desktops/Laser.desktop.in.h:12
+msgid "Number of segments per laser burst."
+msgstr "Viivojen lukum‰‰r‰ purskeessa."
+
+#: capplets/screensaver-properties/screensaver-desktops/Laser.desktop.in.h:13
+msgid "Pascal Pensa"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Laser.desktop.in.h:14
+#, fuzzy
+msgid "Segments:"
+msgstr "Osia"
+
+#: capplets/screensaver-properties/screensaver-desktops/Laser.desktop.in.h:15
+#: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:18
+#, fuzzy
+msgid "Shorter"
+msgstr "Pallot"
+
+#: capplets/screensaver-properties/screensaver-desktops/Laser.desktop.in.h:16
+msgid "Size of burst."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Lightning.desktop.in.h:6
+msgid "Draws fractal lightning bolts."
+msgstr "Piirt‰‰ fraktaalisalamoita."
+
+#: capplets/screensaver-properties/screensaver-desktops/Lightning.desktop.in.h:7
+msgid "Keith Romberg <kromberg@saxe.com>"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Lightning.desktop.in.h:8
+msgid "Lightning"
+msgstr "Salama"
+
+#: capplets/screensaver-properties/screensaver-desktops/Lightning.desktop.in.h:9
+#, fuzzy
+msgid "Lightning draws fractal lightning bolts."
+msgstr "Piirt‰‰ fraktaalisalamoita."
+
+#: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:1
+msgid "Caleb Cullen"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:5
+msgid "Change the size of object."
+msgstr "Aseta osan koko."
+
+#: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:13
+msgid "Draws animated full-loop lisajous figures"
+msgstr "Piirt‰‰ liikkuvia silmukoita"
+
+#: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:16
+msgid "Lisa"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:17
+#, fuzzy
+msgid "Lisa draws animated full-loop lisajous figures."
+msgstr "Piirt‰‰ liikkuvia silmukoita"
+
+#: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:22
+#, fuzzy
+msgid "Size of object."
+msgstr "Aseta osan koko."
+
+#: capplets/screensaver-properties/screensaver-desktops/Lissie.desktop.in.h:1
+msgid "Lissie"
+msgstr "Vieteri"
+
+#: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:1
+msgid "Change from closed to open figures."
+msgstr "Piirr‰ avoimia kuvioita sulkeisten sijaan."
+
+#: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:2
+msgid "Change number of interpolation steps."
+msgstr "Muuta v‰livaiheiden m‰‰r‰‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:9
+msgid "Figtype"
+msgstr "Kuvatyyppi"
+
+#: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:11
+msgid "Lmorph"
+msgstr "Lmorph"
+
+#: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:12
+msgid "Lmorph morphs between simple linedrawings using bilinear interpolation."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:15
+msgid "Morphing lines."
+msgstr "Muotoaan muuttavia viivoja."
+
+#: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:16
+#, fuzzy
+msgid "Number of interpolation steps."
+msgstr "Muuta v‰livaiheiden m‰‰r‰‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:17
+#, fuzzy
+msgid "Number of points."
+msgstr "Aseta pisteiden koko."
+
+#: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:18
+msgid "Open figures."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:19
+msgid "Points"
+msgstr "Pisteit‰"
+
+#: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:20
+#, fuzzy
+msgid "Points:"
+msgstr "Pisteit‰"
+
+#: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:23
+msgid "Steps"
+msgstr "Askelia"
+
+#: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:24
+msgid ""
+"Sverre  H.  Huseby <sverrehu@online.no> & Glenn T. Lines <gtl@si.sintef.no>"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Loop.desktop.in.h:1
+msgid "Loop"
+msgstr "Silmukka"
+
+#: capplets/screensaver-properties/screensaver-desktops/Loop.desktop.in.h:2
+msgid ""
+"This one produces loop-shaped colonies that spawn, age, and eventually die."
+msgstr ""
+"T‰m‰ n‰ytˆns‰‰st‰j‰ tuottaa silmukan muotoisia kasvustoja, jotka "
+"lis‰‰ntyv‰t, vanhenevat ja lopulta kuolevat."
+
+#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:1
+msgid "Bridge"
+msgstr "Silta"
+
+#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:2
+msgid "Color for filling completely closed off areas."
+msgstr "T‰ysin katettujen alueiden v‰ri."
+
+#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:3
+#, fuzzy
+msgid "Color of a skipped path"
+msgstr "Polun v‰ri."
+
+#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:4
+#, fuzzy
+msgid "Color of failed path"
+msgstr "Polun v‰ri."
+
+#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:5
+#, fuzzy
+msgid "Color of path"
+msgstr "Polun v‰ri."
+
+#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:6
+msgid "Color of surrounded area"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:7
+msgid "Controls whether or not a 'bridge' will appear over the logo."
+msgstr "M‰‰ritt‰‰, viekˆ logon yli silta."
+
+#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:8
+msgid "Copyright (C) 1988 by Sun Microsystems, Inc."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:9
+msgid "Dead Color"
+msgstr "Kuollut v‰ri"
+
+#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:10
+#, fuzzy
+msgid "Delay between drawing the maze and starting the solution."
+msgstr ""
+"Viive (mikrosekunteina) sokkelon luonnin j‰lkeen ja ennen sen ratkaisemista."
+
+#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:11
+msgid "Delay between each step in the maze."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:12
+#, fuzzy
+msgid "Delay between finishing the maze and starting a new one."
+msgstr ""
+"Viive (mikrosekunteina) sokkelon luonnin j‰lkeen ja ennen sen ratkaisemista."
+
+#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:13
+msgid "If the solver can "
+msgstr "Jos ratkaisin voi "
+
+#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:13
+msgid " the end of a corridor it will color it this color."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:14
+#, fuzzy
+msgid "Less Delay"
+msgstr "Viive"
+
+#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:15
+msgid "Live Color"
+msgstr "El‰v‰ v‰ri"
+
+#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:16
+msgid "Maze"
+msgstr "Sokkelo"
+
+#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:17
+#, fuzzy
+msgid "More Delay"
+msgstr "Viive"
+
+#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:18
+msgid "Post-Solving Delay"
+msgstr "Ratkaisun j‰lkeinen viive"
+
+#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:19
+msgid "Pre-Solving Delay"
+msgstr "Ratkaisua edelt‰v‰ viive"
+
+#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:20
+msgid "Put a bridge over the logo?"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:21
+msgid "Repeatedly create and solve a maze"
+msgstr "Luo ja ratkaise labyrintti toistuvasti"
+
+#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:22
+msgid "Skip Color"
+msgstr "Ohitettu v‰ri"
+
+#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:23
+msgid "Speed Delay"
+msgstr "Nopeusviive"
+
+#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:24
+msgid "Surround Color"
+msgstr "Ymp‰rˆiv‰ v‰ri"
+
+#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:26
+#, no-c-format
+msgid "The color of a failed path (stippled with a 50% pattern)"
+msgstr "Umpikujien v‰ri (pilkuttuu puoliksi taustav‰rill‰)"
+
+#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:27
+msgid "The color of the path."
+msgstr "Polun v‰ri."
+
+#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:28
+msgid ""
+"The delay (in microseconds) after solving a maze and before generating a new "
+"one."
+msgstr ""
+"Viive (mikrosekunteina) sokkelon ratkaisun j‰lkeen ja ennen uuden "
+"aloittamista"
+
+#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:29
+msgid "The delay (in microseconds) between each step of the solution path."
+msgstr "Viive (mikrosekunteina) jokaisen ratkaisuaskeleen j‰lkeen."
+
+#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:30
+msgid ""
+"The delay (in microseconds) between generating a maze and starting to solve "
+"it."
+msgstr ""
+"Viive (mikrosekunteina) sokkelon luonnin j‰lkeen ja ennen sen ratkaisemista."
+
+#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:31
+msgid ""
+"The maze program creates a random maze and then solves it with graphical "
+"feedback."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Moebius.desktop.in.h:1
+msgid "M.C. Escher inspired ants.. in 3d"
+msgstr "Escherin inspiroimia muurahaisia 3-ulotteisena"
+
+#: capplets/screensaver-properties/screensaver-desktops/Moebius.desktop.in.h:2
+msgid "Moebius"
+msgstr "Mˆbius"
+
+#: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:8
+msgid "Draw circular interference patterns"
+msgstr "Piirr‰ ympyr‰nmuotoisia interferenssikuvioita"
+
+#: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:10
+msgid "Jamie  Zawinski <jwz@jwz.org>"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:12
+msgid "Maximum radius increment"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:13
+msgid "Moire"
+msgstr "Moire"
+
+#: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:14
+#, fuzzy
+msgid "Moire draws circular interference patterns."
+msgstr "Piirr‰ ympyr‰nmuotoisia interferenssikuvioita"
+
+#: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:17
+msgid "Offset"
+msgstr "Et‰isyys"
+
+#: capplets/screensaver-properties/screensaver-desktops/Moire2.desktop.in.h:1
+msgid "Moire2"
+msgstr "Moire2"
+
+#: capplets/screensaver-properties/screensaver-desktops/Morph3d.desktop.in.h:1
+msgid "A 3d flower morphs into a sphear"
+msgstr "3-ulotteinen kukka muotoutuu palloksi"
+
+#: capplets/screensaver-properties/screensaver-desktops/Morph3d.desktop.in.h:2
+msgid "Morph3d"
+msgstr "3D-muodonmuutos"
+
+#: capplets/screensaver-properties/screensaver-desktops/Mountain.desktop.in.h:1
+msgid "Mountain"
+msgstr "Vuori"
+
+#: capplets/screensaver-properties/screensaver-desktops/Munch.desktop.in.h:3
+msgid "Change to draw square at weird starting points."
+msgstr "Piirr‰ neliˆ kummallisiin aloituspaikkoihin."
+
+#: capplets/screensaver-properties/screensaver-desktops/Munch.desktop.in.h:4
+msgid "Change to use XOR drawing function."
+msgstr "Piirr‰ XOR-funktiolla."
+
+#: capplets/screensaver-properties/screensaver-desktops/Munch.desktop.in.h:7
+#, fuzzy
+msgid "Draw square at weird starting points."
+msgstr "Piirr‰ neliˆ kummallisiin aloituspaikkoihin."
+
+#: capplets/screensaver-properties/screensaver-desktops/Munch.desktop.in.h:10
+msgid "Munch"
+msgstr "Rouskutin"
+
+#: capplets/screensaver-properties/screensaver-desktops/Munch.desktop.in.h:11
+msgid "Munch munches squares until killed."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Munch.desktop.in.h:12
+msgid "Munching squares."
+msgstr "Rouskuttaa neliˆit‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Munch.desktop.in.h:13
+msgid "Shift"
+msgstr "Vaihto"
+
+#: capplets/screensaver-properties/screensaver-desktops/Munch.desktop.in.h:16
+msgid "Tim  Showalter  <tjs@andrew.cmu.edu>"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Munch.desktop.in.h:17
+#, fuzzy
+msgid "Use XOR drawing function."
+msgstr "Piirr‰ XOR-funktiolla."
+
+#: capplets/screensaver-properties/screensaver-desktops/Munch.desktop.in.h:18
+msgid "XOR"
+msgstr "XOR"
+
+#: capplets/screensaver-properties/screensaver-desktops/Noseguy.desktop.in.h:1
+msgid "Noseguy"
+msgstr "Nen‰k‰s"
+
+#: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:1
+msgid "Change maximum number of lines."
+msgstr "Muuta suurinta viivojen m‰‰r‰‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:2
+msgid "Change the time each picture is shown."
+msgstr "Muuta kuvan n‰kymisaikaa."
+
+#: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:3
+msgid "Change time to fade away."
+msgstr "Muuta h‰ivytysaikaa."
+
+#: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:5
+msgid "Dale Moore <Dale.Moore@cs.cmu.edu>"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:8
+msgid "Fadedelay"
+msgstr "H‰ivytysviive"
+
+#: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:11
+#, fuzzy
+msgid "Maximum number of lines."
+msgstr "Muuta suurinta viivojen m‰‰r‰‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:12
+msgid "Maxlines"
+msgstr "Viivoja"
+
+#: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:15
+msgid "Pedal"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:16
+#, fuzzy
+msgid "Pedal Displays pretty geometric pictures."
+msgstr "Kauniita geometrisia kuvioita."
+
+#: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:17
+msgid "Pretty geometric picture program."
+msgstr "Kauniita geometrisia kuvioita."
+
+#: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:19
+#, fuzzy
+msgid "Time to fade away."
+msgstr "Muuta h‰ivytysaikaa."
+
+#: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:20
+msgid "Time to show each picture."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Penetrate.desktop.in.h:1
+msgid "Display an arcade game"
+msgstr "Videopeli"
+
+#: capplets/screensaver-properties/screensaver-desktops/Penetrate.desktop.in.h:2
+msgid "Penetrate"
+msgstr "L‰p‰isy"
+
+#: capplets/screensaver-properties/screensaver-desktops/Penrose.desktop.in.h:1
+msgid "Penrose"
+msgstr "Penrose"
+
+#: capplets/screensaver-properties/screensaver-desktops/Phosphor.desktop.in.h:1
+msgid ""
+"Draws a simulation of an old terminal, with large pixels and long-sustain "
+"phosphor."
+msgstr ""
+"J‰ljittelee vanhaa p‰‰tett‰, jossa on suuret kuvapisteet ja hidas fosfori."
+
+#: capplets/screensaver-properties/screensaver-desktops/Phosphor.desktop.in.h:3
+msgid "Phosphor"
+msgstr "Fosfori"
+
+#: capplets/screensaver-properties/screensaver-desktops/Pipes.desktop.in.h:1
+msgid "3d pipes flow around the screen"
+msgstr "3-ulotteisia putkia ruudun t‰ydelt‰"
+
+#: capplets/screensaver-properties/screensaver-desktops/Pipes.desktop.in.h:2
+msgid "Pipes"
+msgstr "Putket"
+
+#: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:1
+msgid "Changes frequency of missile launch."
+msgstr "Muuta rakettien laukaisun taajuutta"
+
+#: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:5
+msgid "Frequency"
+msgstr "Taajuus"
+
+#: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:6
+#, fuzzy
+msgid "Frequency of missile launch"
+msgstr "Muuta rakettien laukaisun taajuutta"
+
+#: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:7
+msgid "How many particles should appear when a missile explodes."
+msgstr "Kuinka monta hiukkasta ilmestyy kun raketti r‰j‰ht‰‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:8
+msgid "How many particles should be allowed on the screen at once."
+msgstr "Kuinka monta hiukkasta voi olla kerralla ruudulla."
+
+#: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Xroger.desktop.in.h:3
+msgid "Jamie Zawinski"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:12
+#, fuzzy
+msgid "Number of particles"
+msgstr "Muuta j‰lkien lukum‰‰r‰‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:13
+msgid "Particles on screen"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:14
+msgid "Pyro"
+msgstr "Ilotulitus"
+
+#: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:15
+msgid "Scatter"
+msgstr "Hajonta"
+
+#: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:17
+#, fuzzy
+msgid "The pyro program simulates fireworks."
+msgstr "J‰ljittelee ilotulitusta"
+
+#: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:18
+msgid "simulates fireworks"
+msgstr "J‰ljittelee ilotulitusta"
+
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:1
+msgid "Bounce colored lines around a window."
+msgstr "Pomppivia v‰rillisi‰ viivoja."
+
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:2
+msgid "Changes the speed at which the Qix moves."
+msgstr "Muuttaa viivan liikkumanopeutta."
+
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:5
+msgid ""
+"Determines whether the lines move erraticly, or bounce off the walls "
+"linearly."
+msgstr "M‰‰rit‰, liikkuvatko viivat satunnaisesti vai kimpoilevat reunoista."
+
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:6
+msgid "Determines whether to fill in the gaps between the lines."
+msgstr "M‰‰rit‰, t‰yttyv‰tkˆ viivojen v‰liset alueet."
+
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:7
+msgid "Draw solid Qix."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:11
+#, fuzzy
+msgid "Length of the Trail:"
+msgstr "N‰ytˆn keskipiste"
+
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:12
+msgid "Number of Qix:"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:13
+msgid "Qix"
+msgstr "Qix"
+
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:14
+msgid ""
+"Qix bounces a series of line segments around its window. This is truly the "
+"swiss army chainsaw of qix programs."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:15
+msgid "Random"
+msgstr "Satunnainen"
+
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:17
+msgid "Set random motion for the Qix."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:18
+msgid "Sets the distance between each line segment."
+msgstr "Asettaa viivanp‰tkien v‰lisen et‰isyyden."
+
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:19
+msgid "Sets the number of Qix you have running at once."
+msgstr "Aseta kerralla n‰kyviss‰ olevien viivojen m‰‰r‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:20
+msgid "Sets the number of line segments to be drawn."
+msgstr "Aseta piirtyvien viivanp‰tkien lukum‰‰r‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:25
+#, fuzzy
+msgid "Speed:"
+msgstr "Nopeus"
+
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:26
+msgid "Spread"
+msgstr "V‰li"
+
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:27
+msgid "Width of segment:"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Rd-bomb.desktop.in.h:1
+msgid "Rd-bomb"
+msgstr "Rd-bomb"
+
+#: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:2
+msgid "Display oily drops."
+msgstr "Piirt‰‰ v‰reit‰ ˆljyyn."
+
+#: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:3
+msgid "Draws rippling interference patterns like splashing water."
+msgstr ""
+"Piirt‰‰ v‰reilevi‰ interferenssikuvioita, jotka muistuttavat veden "
+"liplatusta."
+
+#: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:4
+msgid "Drip onto desktop."
+msgstr "V‰reilyt‰ tyˆpˆyt‰‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:5
+msgid "Oily"
+msgstr "÷ljym‰inen"
+
+#: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:6
+msgid "Ripples"
+msgstr "V‰reit‰"
+
+#: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:7
+msgid "Stir"
+msgstr "Sekoitin"
+
+#: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:8
+msgid "Stir it up."
+msgstr "Sekoita."
+
+#: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:9
+#, fuzzy
+msgid "Stir."
+msgstr "Sekoitin"
+
+#: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:10
+msgid "Tom Hammersley"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Rocks.desktop.in.h:1
+msgid "Rocks"
+msgstr "Kivet"
+
+#: capplets/screensaver-properties/screensaver-desktops/Rorschach.desktop.in.h:1
+msgid "Rorschach"
+msgstr "Rorschach"
+
+#: capplets/screensaver-properties/screensaver-desktops/Rotor.desktop.in.h:1
+msgid "Rotor"
+msgstr "Roottori"
+
+#: capplets/screensaver-properties/screensaver-desktops/Rubik.desktop.in.h:1
+msgid "A 3d Rubiks cube floats and twists around"
+msgstr "3-ulotteinen leijuva ja pyˆriv‰ Rubikin kuutio."
+
+#: capplets/screensaver-properties/screensaver-desktops/Rubik.desktop.in.h:2
+msgid "Rubiks Cube"
+msgstr "Rubikin kuutio"
+
+#: capplets/screensaver-properties/screensaver-desktops/Shadebobs.desktop.in.h:1
+msgid ""
+"Draws smoothly-shaded oscillating oval patterns which resemble vapor trails."
+msgstr ""
+"Piirt‰‰ pehme‰sti varjostettuja soikiokuvioita, jotka muistuttavat "
+"savuj‰lki‰."
+
+#: capplets/screensaver-properties/screensaver-desktops/Shadebobs.desktop.in.h:2
+msgid "Shadebobs"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Sierpinski.desktop.in.h:7
+msgid "Desmond  Daignault"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Sierpinski.desktop.in.h:12
+msgid "Sierpinski"
+msgstr "Sierpinskin kolmio"
+
+#: capplets/screensaver-properties/screensaver-desktops/Sierpinski.desktop.in.h:15
+msgid "The sierpinski program draws Sierpinski triangle fractals."
+msgstr "Piirt‰‰ Sierpinskin kolmiofraktaaleja."
+
+#: capplets/screensaver-properties/screensaver-desktops/Slidescreen.desktop.in.h:1
+msgid "Slidescreen"
+msgstr "Palapeli"
+
+#: capplets/screensaver-properties/screensaver-desktops/Slip.desktop.in.h:1
+msgid "Slip"
+msgstr "Luisto"
+
+#: capplets/screensaver-properties/screensaver-desktops/Sonar.desktop.in.h:1
+msgid "Display a Sonar scope."
+msgstr "N‰ytt‰‰ tutkan n‰ytˆn"
+
+#: capplets/screensaver-properties/screensaver-desktops/Sonar.desktop.in.h:2
+msgid "Sonar"
+msgstr "Tutka"
+
+#: capplets/screensaver-properties/screensaver-desktops/Sphere.desktop.in.h:1
+msgid "Sphere"
+msgstr "Pallot"
+
+#: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:11
+msgid "Darrick Brown, Peter Schmitzberger, and Jamie Zawinski"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:20
+msgid "Spiral"
+msgstr "Spiraali"
+
+#: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:21
+msgid "The spiral program draws moving circular spiral patterns."
+msgstr "Piirt‰‰ liikkuvia spiraalikuvioita"
+
+#: capplets/screensaver-properties/screensaver-desktops/Spotlight.desktop.in.h:1
+msgid "Display the desktop in a spotlight"
+msgstr "N‰ytt‰‰ tyˆpˆyd‰n valokiilassa"
+
+#: capplets/screensaver-properties/screensaver-desktops/Spotlight.desktop.in.h:2
+msgid "Spotlight"
+msgstr "Valokiila"
+
+#: capplets/screensaver-properties/screensaver-desktops/Sproingies.desktop.in.h:1
+msgid "Sproingies"
+msgstr "Pomput"
+
+#: capplets/screensaver-properties/screensaver-desktops/Sproingies.desktop.in.h:2
+msgid "Uhm.. *poing*"
+msgstr "Boinks."
+
+#: capplets/screensaver-properties/screensaver-desktops/Squiral.desktop.in.h:1
+msgid "Display squared spirales"
+msgstr "Piirt‰‰ neliˆspiraaleja"
+
+#: capplets/screensaver-properties/screensaver-desktops/Squiral.desktop.in.h:2
+msgid "Squiral"
+msgstr "Spiraali"
+
+#: capplets/screensaver-properties/screensaver-desktops/Stairs.desktop.in.h:1
+msgid "Stairs"
+msgstr "Portaat"
+
+#: capplets/screensaver-properties/screensaver-desktops/Stairs.desktop.in.h:2
+msgid "The famous, M.C. Escher, impossible stairs"
+msgstr "Kuuluisat M.C. Escherin mahdottomat portaat"
+
+#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:1
+#, fuzzy
+msgid " Random)"
+msgstr "Satunnainen"
+
+#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:2
+msgid "Blob"
+msgstr "L‰isk‰"
+
+#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:3
+msgid "Change the animation step delay."
+msgstr "Aseta piirtonopeus."
+
+#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:4
+msgid "Change the number of colors to use in star."
+msgstr "Aseta t‰hden v‰rien m‰‰r‰"
+
+#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:5
+msgid "Change the quickness of rotation at each step."
+msgstr "Aseta joka askeleen kierron nopeus."
+
+#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:6
+msgid "Change the thickness of color bands."
+msgstr "Aseta v‰rinauhojen paksuus."
+
+#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:10
+msgid "Duration of current shape."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:12
+msgid "How long to run before choosing a new shape."
+msgstr "Kuinka kauan on k‰ynniss‰ ennen uutta muodonvaihtoa."
+
+#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:14
+msgid "Make a star like formation using arcs."
+msgstr "Luo t‰hdenkaltaisen muodostelman kaaria k‰ytt‰en."
+
+#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:16
+msgid "Rotation"
+msgstr "Kierto"
+
+#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:18
+#, fuzzy
+msgid "Slim"
+msgstr "Luisto"
+
+#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:20
+msgid "Speed of animation."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:21
+msgid "Starfish"
+msgstr "Merit‰hti"
+
+#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:22
+msgid ""
+"Starfish bounces a series of arcs around its window in a star like "
+"formation. It uses multiple colors and multiple patterns. "
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:23
+msgid "Thickness"
+msgstr "Paksuus"
+
+#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:24
+msgid "Use raw shapes "
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:25
+#, fuzzy
+msgid "Wide"
+msgstr "Silta"
+
+#: capplets/screensaver-properties/screensaver-desktops/Strange.desktop.in.h:1
+msgid "Strange"
+msgstr "Outo"
+
+#: capplets/screensaver-properties/screensaver-desktops/Superquadrics.desktop.in.h:1
+msgid "Superquadrics"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Swirl.desktop.in.h:1
+msgid "Swirl"
+msgstr "Pyˆrre"
+
+#: capplets/screensaver-properties/screensaver-desktops/Triangle.desktop.in.h:6
+msgid ""
+"Generates random mountain ranges using iterative subdivision of triangles. "
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Triangle.desktop.in.h:9
+msgid "Random mountain ranges"
+msgstr "Satunnaisia vuoristoja"
+
+#: capplets/screensaver-properties/screensaver-desktops/Triangle.desktop.in.h:10
+msgid "Tobias Gloth"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Triangle.desktop.in.h:11
+msgid "Triangle"
+msgstr "Kolmio"
+
+#: capplets/screensaver-properties/screensaver-desktops/Vines.desktop.in.h:8
+msgid ""
+"The vines program is yet another geometric pattern generator, this one's "
+"claim to fame being a pseudo-fractal looking vine like pattern that creates "
+"nifty whirls and loops."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Vines.desktop.in.h:9
+msgid "Tracy Camp"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Vines.desktop.in.h:10
+msgid "Vines"
+msgstr "Kˆynnˆkset"
+
+#: capplets/screensaver-properties/screensaver-desktops/Vines.desktop.in.h:11
+msgid "draws pseudo-fractal geometric patterns"
+msgstr "Piirt‰‰ geometrisia pseudofraktaalikuvioita"
+
+#: capplets/screensaver-properties/screensaver-desktops/Worm.desktop.in.h:1
+msgid "Worm"
+msgstr "Mato"
+
+#: capplets/screensaver-properties/screensaver-desktops/Xflame.desktop.in.h:1
+msgid "Display flames at the bottom of the screen"
+msgstr "Piirt‰‰ liekkej‰ n‰ytˆn alaosaan"
+
+#: capplets/screensaver-properties/screensaver-desktops/Xflame.desktop.in.h:2
+msgid "Xflame"
+msgstr "Xliekki"
+
+#: capplets/screensaver-properties/screensaver-desktops/Xjack.desktop.in.h:1
+msgid "Xjack"
+msgstr "Xjack"
+
+#: capplets/screensaver-properties/screensaver-desktops/Xlyap.desktop.in.h:1
+msgid "Xlyap"
+msgstr "Xlyap"
+
+#: capplets/screensaver-properties/screensaver-desktops/Xmatrix.desktop.in.h:1
+msgid "Screens from the movie The Matrix"
+msgstr "Ruutu elokuvan Matrix tapaan."
+
+#: capplets/screensaver-properties/screensaver-desktops/Xmatrix.desktop.in.h:2
+msgid "Xmatrix"
+msgstr "Xmatrix"
+
+#: capplets/screensaver-properties/screensaver-desktops/Xroger.desktop.in.h:5
+#, fuzzy
+msgid ""
+"The  xroger  program displays a replacement for the X logo with a more "
+"accurate Look and Feel."
+msgstr "Xroger n‰ytt‰‰ korvaavan X-logon"
+
+#: capplets/screensaver-properties/screensaver-desktops/Xroger.desktop.in.h:6
+msgid "The  xroger  program displays a replacement for the X logo."
+msgstr "Xroger n‰ytt‰‰ korvaavan X-logon"
+
+#: capplets/screensaver-properties/screensaver-desktops/Xroger.desktop.in.h:7
+msgid "Xroger"
+msgstr "Xroger"
+
+#: capplets/screensaver-properties/screensaver-desktops/Xteevee.desktop.in.h:1
+msgid "Bars"
+msgstr "Palkit"
+
+#: capplets/screensaver-properties/screensaver-desktops/Xteevee.desktop.in.h:3
+#, fuzzy
+msgid "Cycle modes."
+msgstr "Kierroksia"
+
+#: capplets/screensaver-properties/screensaver-desktops/Xteevee.desktop.in.h:4
+msgid "Cycle through all the available modes."
+msgstr "K‰y kaikki tilat l‰pi."
+
+#: capplets/screensaver-properties/screensaver-desktops/Xteevee.desktop.in.h:5
+msgid "Display color bars."
+msgstr "N‰yt‰ v‰ripalkit."
+
+#: capplets/screensaver-properties/screensaver-desktops/Xteevee.desktop.in.h:6
+msgid "Display static."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Xteevee.desktop.in.h:7
+msgid "Greg Knauss"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-desktops/Xteevee.desktop.in.h:8
+msgid "Roll"
+msgstr "Vierit‰"
+
+#: capplets/screensaver-properties/screensaver-desktops/Xteevee.desktop.in.h:9
+msgid ""
+"Simulates various television problems such as static, loss of vertical hold, "
+"and test patterns."
+msgstr ""
+"J‰ljittelee er‰it‰ TV-ongelmia, kuten lumisadetta, kuvan vierimist‰ ja "
+"testikuvaa."
+
+#: capplets/screensaver-properties/screensaver-desktops/Xteevee.desktop.in.h:10
+msgid "Static"
+msgstr "Lumisade"
+
+#: capplets/screensaver-properties/screensaver-desktops/Xteevee.desktop.in.h:11
+msgid "Static."
+msgstr "Lumisade."
+
+#: capplets/screensaver-properties/screensaver-desktops/Xteevee.desktop.in.h:12
+msgid "Vertical roll."
+msgstr "Pystysuora vieriminen"
+
+#: capplets/screensaver-properties/screensaver-desktops/Xteevee.desktop.in.h:13
+msgid "Xteevee"
+msgstr "Xtelevisio"
 
 #: capplets/screensaver-properties/screensaver-dialog.c:46
 msgid "About:"
@@ -604,66 +3502,13 @@ msgstr " minuuttia n‰ytˆns‰‰st‰j‰n k‰ynnistymisest‰."
 msgid "Screen Saver Demo"
 msgstr "Esikatselu"
 
-#: capplets/keyboard-properties/keyboard-properties.c:262
-msgid "Keyboard bell"
-msgstr "N‰pp‰imistˆ‰‰ni"
+#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:1
+msgid "Configure the settings of the screensaver"
+msgstr "Muokkaa n‰ytˆns‰‰st‰j‰n asetuksia."
 
-#: capplets/keyboard-properties/keyboard-properties.c:270
-msgid "Volume"
-msgstr "Voimakkuus"
-
-#: capplets/keyboard-properties/keyboard-properties.c:273
-msgid "Pitch (Hz)"
-msgstr "Korkeus (Hz)"
-
-#: capplets/keyboard-properties/keyboard-properties.c:276
-msgid "Duration (ms)"
-msgstr "Kesto (ms)"
-
-#: capplets/keyboard-properties/keyboard-properties.c:288
-msgid "Test"
-msgstr "Kokeile"
-
-#: capplets/keyboard-properties/keyboard-properties.c:306
-msgid "Keyboard repeat rate"
-msgstr "Toistonopeus"
-
-#: capplets/keyboard-properties/keyboard-properties.c:316
-msgid "Enable auto-repeat"
-msgstr "Toista n‰pp‰imet"
-
-#: capplets/keyboard-properties/keyboard-properties.c:325
-msgid "Repeat rate"
-msgstr "Toistonopeus"
-
-#: capplets/keyboard-properties/keyboard-properties.c:328
-msgid "Repeat Delay"
-msgstr "Toistoviive"
-
-#: capplets/keyboard-properties/keyboard-properties.c:330
-msgid "Keyboard click"
-msgstr "N‰pp‰in‰‰ni"
-
-#: capplets/keyboard-properties/keyboard-properties.c:339
-msgid "Click on keypress"
-msgstr "Naksaus n‰pp‰imenpainalluksella"
-
-#: capplets/keyboard-properties/keyboard-properties.c:348
-msgid "Click volume"
-msgstr "Naksauksen ‰‰nenvoimakkuus"
-
-#: capplets/keyboard-properties/keyboard-properties.c:359
-msgid "Test settings"
-msgstr "Kokeile asetuksia"
-
-#: capplets/keyboard-properties/keyboard-properties.c:466
-msgid ""
-"an initialization error occurred while starting "
-"'keyboard-properties-capplet'.\n"
-"aborting...\n"
-msgstr ""
-"Ohjelman 'keyboard-properties-capplet' k‰ynnistyksess‰ tapahtui virhe.\n"
-"Keskeytet‰‰n\n"
+#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:2
+msgid "Screensaver"
+msgstr "N‰ytˆns‰‰st‰j‰"
 
 #: capplets/sound-properties/sound-properties.c:97
 msgid ""
@@ -724,6 +3569,14 @@ msgstr ""
 "Tapahtuman ‰‰nitiedostoa ei ole olemassa.\n"
 "On suositeltavaa, ett‰ asennat gnome-audio-paketin,\n"
 "joka sis‰lt‰‰ valikoiman oletus‰‰ni‰."
+
+#: capplets/sound-properties/sound-properties.desktop.in.h:1
+msgid "Configure GNOME's use of sound"
+msgstr "Gnomen ‰‰niasetukset"
+
+#: capplets/sound-properties/sound-properties.desktop.in.h:2
+msgid "Sound"
+msgstr "ƒ‰ni"
 
 #: capplets/theme-switcher/demo.c:50
 msgid "One"
@@ -870,6 +3723,30 @@ msgstr "Komento '%s' ep‰onnistui"
 #: capplets/theme-switcher/install.c:73
 msgid "Unknown file format"
 msgstr "Tuntematon tiedostomuoto"
+
+#: capplets/theme-switcher/theme-selector.desktop.in.h:1
+msgid "Select which desktop theme to use"
+msgstr "Valitse tyˆpˆyt‰teema"
+
+#: capplets/theme-switcher/theme-selector.desktop.in.h:2
+msgid "Theme Selector"
+msgstr "Teemavalitsin"
+
+#: capplets/ui-properties/application.desktop.in.h:1
+msgid "Applications"
+msgstr "Sovellukset"
+
+#: capplets/ui-properties/application.desktop.in.h:2
+msgid "Sets the default feel of GNOME applications"
+msgstr "M‰‰rit‰ GNOME-sovellusten oletustoiminnallisuutta."
+
+#: capplets/ui-properties/dialogs.desktop.in.h:1
+msgid "Dialogs"
+msgstr "Valintaikkunat"
+
+#: capplets/ui-properties/mdi.desktop.in.h:1
+msgid "MDI"
+msgstr "Usean asiakirjan k‰yttˆ"
 
 #: capplets/ui-properties/ui-properties.c:54
 msgid "Can detach and move toolbars"
@@ -1039,6 +3916,14 @@ msgstr "Alareuna"
 msgid "GNOME MDI Options"
 msgstr "Gnomen useiden asiakirjojen k‰yttˆasetukset"
 
+#: capplets/ui-properties/ui-properties.directory.in.h:1
+msgid "Look and Feel"
+msgstr "K‰yttˆtuntuma"
+
+#: capplets/ui-properties/ui-properties.directory.in.h:2
+msgid "Look and Feel Properties"
+msgstr "K‰yttˆtuntuman asetukset"
+
 #: capplets/url-properties/url-properties.c:51
 msgid "Error initializing the `url-properties' capplet."
 msgstr "Ohjelmaa 'url-properties' k‰ynnistett‰ess‰ tapahtui virhe."
@@ -1079,6 +3964,34 @@ msgstr "Aseta"
 #: capplets/url-properties/url-properties.c:148
 msgid "Remove"
 msgstr "Poista"
+
+#: capplets/url-properties/url-properties.desktop.in.h:1
+msgid "Configure which programs are used to display URLs"
+msgstr "Aseta, mit‰ ohjelmia k‰ytet‰‰n URL:ien n‰ytt‰miseen"
+
+#: capplets/url-properties/url-properties.desktop.in.h:2
+msgid "URL Handlers"
+msgstr "URL-k‰sittelimet"
+
+#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.h:1
+msgid "Enlightenment"
+msgstr "Enlightenment"
+
+#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.h:1
+msgid "Ice WM"
+msgstr "Ice WM"
+
+#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.h:1
+msgid "Scwm"
+msgstr "Scwm"
+
+#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.h:1
+msgid "Window Maker"
+msgstr "Window Maker"
+
+#: capplets/wm-properties/wm-desktops/twm.desktop.in.h:1
+msgid "twm"
+msgstr "twm"
 
 #: capplets/wm-properties/wm-properties-capplet.c:142
 #, c-format
@@ -1242,6 +4155,14 @@ msgstr ""
 "Ohjelmaa 'wm-properties-capplet' k‰ynnistett‰ess‰ tapahtui virhe.\n"
 "Keskeytet‰‰n.\n"
 
+#: capplets/wm-properties/wm-properties.desktop.in.h:1
+msgid "Choose a window manager"
+msgstr "Valitse ikkunointiohjelma"
+
+#: capplets/wm-properties/wm-properties.desktop.in.h:2
+msgid "Window Manager"
+msgstr "Ikkunointiohjelma"
+
 #: control-center/callbacks.c:102 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
 msgstr "GNOMEn hallintakeskus"
@@ -1319,6 +4240,10 @@ msgstr "Ajettava capplet-komento."
 msgid "CAPPLET"
 msgstr "CAPPLET"
 
+#: control-center/gnomecc.desktop.in.h:2
+msgid "The GNOME configuration tool"
+msgstr "Gnomen hallintatyˆkalu"
+
 #: control-center/main.c:36
 msgid "Help on control-center"
 msgstr "Hallintakeskuksen ohje"
@@ -1357,12 +4282,6 @@ msgstr ""
 "Seuraavissa osissa on tehty muutoksia, joita ei ole tallennettu. Jos haluat "
 "muokata niit‰, ole hyv‰ ja kaksoisnapsauta asianmukaista kohtaa."
 
-#. create the app
-#: capplets/desktop-links/Gnome.directory.in.h:1 control-center/main.c:197
-#: control-center/splash.c:247
-msgid "Control Center"
-msgstr "Hallintakeskus"
-
 #: control-center/splash.c:48
 msgid "Operating System:"
 msgstr "K‰yttˆj‰rjestelm‰:"
@@ -1388,1734 +4307,3 @@ msgstr "Hostname:"
 #: control-center/splash.c:178
 msgid "Unknown"
 msgstr "Tuntematon"
-
-#: control-center/gnomecc.desktop.in.h:2
-msgid "The GNOME configuration tool"
-msgstr "Gnomen hallintatyˆkalu"
-
-#: capplets/wm-properties/wm-properties.desktop.in.h:1
-msgid "Choose a window manager"
-msgstr "Valitse ikkunointiohjelma"
-
-#: capplets/wm-properties/wm-properties.desktop.in.h:2
-msgid "Window Manager"
-msgstr "Ikkunointiohjelma"
-
-#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.h:1
-msgid "Enlightenment"
-msgstr "Enlightenment"
-
-#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.h:1
-msgid "Ice WM"
-msgstr "Ice WM"
-
-#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.h:1
-msgid "Scwm"
-msgstr "Scwm"
-
-#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.h:1
-msgid "Window Maker"
-msgstr "Window Maker"
-
-#: capplets/wm-properties/wm-desktops/twm.desktop.in.h:1
-msgid "twm"
-msgstr "twm"
-
-#: capplets/url-properties/url-properties.desktop.in.h:1
-msgid "Configure which programs are used to display URLs"
-msgstr "Aseta, mit‰ ohjelmia k‰ytet‰‰n URL:ien n‰ytt‰miseen"
-
-#: capplets/url-properties/url-properties.desktop.in.h:2
-msgid "URL Handlers"
-msgstr "URL-k‰sittelimet"
-
-#: capplets/ui-properties/application.desktop.in.h:1
-msgid "Applications"
-msgstr "Sovellukset"
-
-#: capplets/ui-properties/application.desktop.in.h:2
-msgid "Sets the default feel of GNOME applications"
-msgstr "M‰‰rit‰ GNOME-sovellusten oletustoiminnallisuutta."
-
-#: capplets/ui-properties/dialogs.desktop.in.h:1
-msgid "Dialogs"
-msgstr "Valintaikkunat"
-
-#: capplets/ui-properties/mdi.desktop.in.h:1
-msgid "MDI"
-msgstr "Usean asiakirjan k‰yttˆ"
-
-#: capplets/theme-switcher/theme-selector.desktop.in.h:1
-msgid "Select which desktop theme to use"
-msgstr "Valitse tyˆpˆyt‰teema"
-
-#: capplets/theme-switcher/theme-selector.desktop.in.h:2
-msgid "Theme Selector"
-msgstr "Teemavalitsin"
-
-#: capplets/sound-properties/sound-properties.desktop.in.h:1
-msgid "Configure GNOME's use of sound"
-msgstr "Gnomen ‰‰niasetukset"
-
-#: capplets/sound-properties/sound-properties.desktop.in.h:2
-msgid "Sound"
-msgstr "ƒ‰ni"
-
-#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:1
-msgid "Configure the settings of the screensaver"
-msgstr "Muokkaa n‰ytˆns‰‰st‰j‰n asetuksia."
-
-#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:2
-msgid "Screensaver"
-msgstr "N‰ytˆns‰‰st‰j‰"
-
-#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:1
-msgid "3D Clock"
-msgstr "3D-kello"
-
-#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:2
-msgid "Changes the magnification of original picture."
-msgstr "Muuttaa alkuper‰isen kuvan suurennosta."
-
-#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:3
-msgid "Modifies the direction move."
-msgstr "Muuttaa liikkumissuuntaa."
-
-#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:4
-msgid "Modifies the wobbling."
-msgstr "Muuttaa huojuntaa."
-
-#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:5
-msgid "Sets the moving cycle time."
-msgstr "Asettaa pyˆrimisajan."
-
-#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:6
-#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:7
-#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:15
-#: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:10
-#: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:10
-#: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:12
-msgid "Size"
-msgstr "Koko"
-
-#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:7
-#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:13
-msgid "Speed"
-msgstr "Nopeus"
-
-#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:8
-msgid ""
-"This draws a working analog clock composed of floating, throbbing bubbles."
-msgstr "Piirt‰‰ toimivan viisarikellon sykkivist‰ leijuvista kuplista."
-
-#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:9
-msgid "Twist"
-msgstr "Kierto"
-
-#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:10
-msgid "Wobble"
-msgstr "Huojunta"
-
-#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:1
-msgid "Ant"
-msgstr "Muurahaiset"
-
-#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:2
-msgid "Changes the number of ants marching across the screen."
-msgstr "Muuta pitkin ruutua liikkuvien muurahaisten m‰‰r‰‰."
-
-#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:3
-msgid "Changes the size of the ants."
-msgstr "Muuta muurahaisten kokoa."
-
-#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:4
-#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:8
-#: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:9
-#: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:6
-#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:8
-#: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:8
-#: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:6
-#: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:6
-#: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:7
-#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:10
-#: capplets/screensaver-properties/screensaver-desktops/Hopalong.desktop.in.h:6
-#: capplets/screensaver-properties/screensaver-desktops/Julia.desktop.in.h:6
-#: capplets/screensaver-properties/screensaver-desktops/Laser.desktop.in.h:2
-#: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:7
-#: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:2
-#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:3
-#: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:7
-msgid "Count"
-msgstr "Lukum‰‰r‰"
-
-#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:5
-msgid ""
-"Determines whether or not the ant leaves a truchet in the path it leaves "
-"behind."
-msgstr "M‰‰r‰‰, j‰tt‰‰kˆ muurahainen viivan j‰lkeens‰."
-
-#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:6
-msgid "Little Ants walk around, leaving colored trails."
-msgstr ""
-"Pienet muurahaiset k‰velev‰t ymp‰riins‰ ja j‰tt‰v‰t v‰rillisi‰ vanoja "
-"j‰lkeens‰."
-
-#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:8
-#: capplets/screensaver-properties/screensaver-desktops/Truchet.desktop.in.h:1
-msgid "Truchet"
-msgstr "Ruudukko"
-
-#: capplets/screensaver-properties/screensaver-desktops/Atlantis.desktop.in.h:1
-msgid "Atlantis"
-msgstr "Atlantis"
-
-#: capplets/screensaver-properties/screensaver-desktops/Atlantis.desktop.in.h:2
-msgid "Whales, dolphins and sharks swimming around, in 3D"
-msgstr "Valaat, delfiinit ja hait uivat ymp‰riins‰ kolmiulotteisessa meress‰."
-
-#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:1
-msgid " A show of objects interacting through attractive and repulsive forces."
-msgstr ""
-" N‰ytˆs kappaleista, jotka vaikuttavat toisiinsa veto- ja poistovoimilla."
-
-#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:2
-msgid "Attraction"
-msgstr "Vetovoima"
-
-#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:3
-msgid "Change distance at which attractive force becomes repulsive."
-msgstr "Aseta et‰isyys, jolla vetovoima muuttuu poistovoimaksi."
-
-#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:4
-msgid "Change size of points."
-msgstr "Aseta pisteiden koko."
-
-#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:5
-#: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:4
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:5
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:1
-#: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:1
-#: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:1
-#: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:1
-#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:1
-#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:1
-#: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:1
-#: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:3
-#: capplets/screensaver-properties/screensaver-desktops/Greynetic.desktop.in.h:1
-#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:2
-#: capplets/screensaver-properties/screensaver-desktops/Helix.desktop.in.h:1
-#: capplets/screensaver-properties/screensaver-desktops/Hopalong.desktop.in.h:1
-#: capplets/screensaver-properties/screensaver-desktops/Hypercube.desktop.in.h:2
-#: capplets/screensaver-properties/screensaver-desktops/Jigsaw.desktop.in.h:1
-#: capplets/screensaver-properties/screensaver-desktops/Julia.desktop.in.h:1
-#: capplets/screensaver-properties/screensaver-desktops/Kaleidescope.desktop.in.h:3
-#: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:1
-#: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:3
-#: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:1
-#: capplets/screensaver-properties/screensaver-desktops/Munch.desktop.in.h:1
-#: capplets/screensaver-properties/screensaver-desktops/Sierpinski.desktop.in.h:1
-#: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:1
-msgid "Change the delay in cycles."
-msgstr "Aseta viive kierroksina."
-
-#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:6
-#: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:4
-msgid "Change the number of points to use."
-msgstr "Aseta pisteiden lukum‰‰r‰."
-
-#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:7
-msgid "Change the spacing radius of the points."
-msgstr "Muuttaa pisteiden sijoitteluet‰isyytt‰."
-
-#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:9
-#: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:5
-#: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:10
-#: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:5
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:7
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:4
-#: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:7
-#: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:4
-#: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:7
-#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:9
-#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:3
-#: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:10
-#: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:7
-#: capplets/screensaver-properties/screensaver-desktops/Greynetic.desktop.in.h:3
-#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:12
-#: capplets/screensaver-properties/screensaver-desktops/Helix.desktop.in.h:3
-#: capplets/screensaver-properties/screensaver-desktops/Hypercube.desktop.in.h:5
-#: capplets/screensaver-properties/screensaver-desktops/Jigsaw.desktop.in.h:2
-#: capplets/screensaver-properties/screensaver-desktops/Kaleidescope.desktop.in.h:5
-#: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:6
-#: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:5
-#: capplets/screensaver-properties/screensaver-desktops/Munch.desktop.in.h:5
-#: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:5
-#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:7
-msgid "Delay"
-msgstr "Viive"
-
-#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:10
-msgid "Glow"
-msgstr "Hohto"
-
-#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:11
-msgid "Have initial forces on each point be tangential to original circle."
-msgstr "Aseta aloitusvoimat ympyr‰n keh‰‰ sivuavien suorien suuntaisiksi."
-
-#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:12
-msgid "Have points glow vary with acceleration."
-msgstr "Aseta pisteiden kirkkaus kiihtyvyyden mukaan."
-
-#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:13
-msgid "Orbit"
-msgstr "Kiertorata"
-
-#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:14
-msgid "Radius"
-msgstr "S‰de"
-
-#: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:1
-msgid "Blitspin"
-msgstr "Blitspin"
-
-#: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:2
-msgid "Change the delay between each 90 degree rotation."
-msgstr "Aseta 90:n asteen kierrosten v‰lisen viiveen."
-
-#: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:3
-msgid "Change the delay between steps of rotation process."
-msgstr "Aseta pyˆrityksen eri vaiheiden v‰linen viive."
-
-#: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:4
-#: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:7
-#: capplets/screensaver-properties/screensaver-desktops/Braid.desktop.in.h:3
-#: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:4
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:6
-#: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:4
-#: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:2
-#: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:4
-#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:4
-#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:2
-#: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:5
-#: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:4
-#: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:4
-#: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:4
-#: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:5
-#: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:3
-#: capplets/screensaver-properties/screensaver-desktops/Greynetic.desktop.in.h:2
-#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:8
-#: capplets/screensaver-properties/screensaver-desktops/Helix.desktop.in.h:2
-#: capplets/screensaver-properties/screensaver-desktops/Hopalong.desktop.in.h:4
-#: capplets/screensaver-properties/screensaver-desktops/Hypercube.desktop.in.h:4
-#: capplets/screensaver-properties/screensaver-desktops/Ifs.desktop.in.h:2
-#: capplets/screensaver-properties/screensaver-desktops/Julia.desktop.in.h:4
-#: capplets/screensaver-properties/screensaver-desktops/Kaleidescope.desktop.in.h:4
-#: capplets/screensaver-properties/screensaver-desktops/Laser.desktop.in.h:1
-#: capplets/screensaver-properties/screensaver-desktops/Lightning.desktop.in.h:2
-#: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:5
-#: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:5
-#: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:3
-#: capplets/screensaver-properties/screensaver-desktops/Munch.desktop.in.h:2
-#: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:4
-#: capplets/screensaver-properties/screensaver-desktops/Sierpinski.desktop.in.h:3
-#: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:4
-#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:6
-#: capplets/screensaver-properties/screensaver-desktops/Triangle.desktop.in.h:2
-#: capplets/screensaver-properties/screensaver-desktops/Vines.desktop.in.h:2
-#: capplets/screensaver-properties/screensaver-desktops/Xroger.desktop.in.h:1
-msgid "Change to display in monochrome."
-msgstr "N‰yt‰ yksiv‰risen‰."
-
-#: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:6
-msgid "Delay2"
-msgstr "Viive2"
-
-#: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:7
-#: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:11
-#: capplets/screensaver-properties/screensaver-desktops/Braid.desktop.in.h:5
-#: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:6
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:11
-#: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:10
-#: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:6
-#: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:10
-#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:14
-#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:6
-#: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:12
-#: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:9
-#: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:9
-#: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:10
-#: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:9
-#: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:11
-#: capplets/screensaver-properties/screensaver-desktops/Greynetic.desktop.in.h:6
-#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:16
-#: capplets/screensaver-properties/screensaver-desktops/Helix.desktop.in.h:6
-#: capplets/screensaver-properties/screensaver-desktops/Hopalong.desktop.in.h:10
-#: capplets/screensaver-properties/screensaver-desktops/Hypercube.desktop.in.h:8
-#: capplets/screensaver-properties/screensaver-desktops/Ifs.desktop.in.h:6
-#: capplets/screensaver-properties/screensaver-desktops/Julia.desktop.in.h:10
-#: capplets/screensaver-properties/screensaver-desktops/Kaleidescope.desktop.in.h:8
-#: capplets/screensaver-properties/screensaver-desktops/Lightning.desktop.in.h:6
-#: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:11
-#: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:9
-#: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:8
-#: capplets/screensaver-properties/screensaver-desktops/Munch.desktop.in.h:6
-#: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:8
-#: capplets/screensaver-properties/screensaver-desktops/Sierpinski.desktop.in.h:6
-#: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:9
-#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:11
-#: capplets/screensaver-properties/screensaver-desktops/Triangle.desktop.in.h:4
-#: capplets/screensaver-properties/screensaver-desktops/Vines.desktop.in.h:4
-#: capplets/screensaver-properties/screensaver-desktops/Xroger.desktop.in.h:2
-msgid "Monochrome"
-msgstr "Yksiv‰rinen"
-
-#: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:8
-msgid "Rotates a bitmap in an interesting way."
-msgstr "Pyˆritt‰‰ kuvaa kiinnostavasti."
-
-#: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:1
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:1
-msgid "3D"
-msgstr "3D"
-
-#: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:2
-msgid "A blob of bubbles spinning/moving around the screen."
-msgstr "Soikioista muodostuva pallo pyˆrii ja liikkuu ruudulla."
-
-#: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:3
-msgid "Bouboule"
-msgstr "Bouboule"
-
-#: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:5
-#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:2
-#: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:4
-msgid "Change the number of bubbles to use."
-msgstr "Aseta soikioiden m‰‰r‰."
-
-#: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:6
-#: capplets/screensaver-properties/screensaver-desktops/Braid.desktop.in.h:2
-#: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:2
-#: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:2
-#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:3
-#: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:3
-#: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:2
-#: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:2
-#: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:2
-#: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:1
-#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:4
-#: capplets/screensaver-properties/screensaver-desktops/Hopalong.desktop.in.h:2
-#: capplets/screensaver-properties/screensaver-desktops/Ifs.desktop.in.h:1
-#: capplets/screensaver-properties/screensaver-desktops/Julia.desktop.in.h:2
-#: capplets/screensaver-properties/screensaver-desktops/Lightning.desktop.in.h:1
-#: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:2
-#: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:2
-#: capplets/screensaver-properties/screensaver-desktops/Sierpinski.desktop.in.h:2
-#: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:2
-#: capplets/screensaver-properties/screensaver-desktops/Triangle.desktop.in.h:1
-#: capplets/screensaver-properties/screensaver-desktops/Vines.desktop.in.h:1
-msgid "Change the number of colors to use."
-msgstr "Aseta v‰rien m‰‰r‰."
-
-#: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:8
-#: capplets/screensaver-properties/screensaver-desktops/Braid.desktop.in.h:4
-#: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:5
-#: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:5
-#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:7
-#: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:7
-#: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:5
-#: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:5
-#: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:5
-#: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:6
-#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:9
-#: capplets/screensaver-properties/screensaver-desktops/Hopalong.desktop.in.h:5
-#: capplets/screensaver-properties/screensaver-desktops/Ifs.desktop.in.h:3
-#: capplets/screensaver-properties/screensaver-desktops/Julia.desktop.in.h:5
-#: capplets/screensaver-properties/screensaver-desktops/Lightning.desktop.in.h:3
-#: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:6
-#: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:4
-#: capplets/screensaver-properties/screensaver-desktops/Sierpinski.desktop.in.h:4
-#: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:6
-#: capplets/screensaver-properties/screensaver-desktops/Triangle.desktop.in.h:3
-#: capplets/screensaver-properties/screensaver-desktops/Vines.desktop.in.h:3
-msgid "Colors"
-msgstr "V‰rit"
-
-#: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:12
-msgid "Use red/blue 3d seperation."
-msgstr "Erottele sininen ja punainen 3d-tapaan."
-
-#: capplets/screensaver-properties/screensaver-desktops/Braid.desktop.in.h:1
-msgid "Braid"
-msgstr "Nauhat"
-
-#: capplets/screensaver-properties/screensaver-desktops/Braid.desktop.in.h:6
-msgid "Random color-cycling braids in a circle."
-msgstr "Satunnaisia pyˆriv‰v‰risi‰ nauhoja keh‰ss‰."
-
-#: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:1
-msgid "Blue Screen of Death"
-msgstr "Virheilmoitukset"
-
-#: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:2
-msgid "Bsod"
-msgstr "Virheilmoitukset"
-
-#: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:3
-msgid "Change the delay."
-msgstr "Aseta viive."
-
-#: capplets/screensaver-properties/screensaver-desktops/Bubble3d.desktop.in.h:1
-msgid "Bubble3d"
-msgstr "3D-kupla"
-
-#: capplets/screensaver-properties/screensaver-desktops/Bubble3d.desktop.in.h:2
-msgid "Lots of bubbles floating around, in 3d"
-msgstr "Piirt‰‰ useita 3d-kuplia."
-
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:2
-msgid "Broken"
-msgstr "Rikki"
-
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:3
-msgid "Bubbles"
-msgstr "Kuplat"
-
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:4
-msgid "Bubbles exist in three dimensions."
-msgstr "Kuplia on monessa tasossa."
-
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:8
-msgid "Don't hide bubbles when they pop."
-msgstr "ƒl‰ piilota puhjenneita kuplia."
-
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:9
-msgid "Draw circles instead of pixmap bubbles."
-msgstr "Piirr‰ ympyrˆit‰ kuvioitujen kuplien sijaan."
-
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:10
-msgid "Lots of random bubbles grow until they pop."
-msgstr "Piirt‰‰ kasvavia ja sitten puhkeavia kuplia."
-
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:12
-msgid "Simple"
-msgstr "Yksinkertainen"
-
-#: capplets/screensaver-properties/screensaver-desktops/Bumps.desktop.in.h:1
-msgid "Bumps"
-msgstr "Kuhmut"
-
-#: capplets/screensaver-properties/screensaver-desktops/Bumps.desktop.in.h:2
-msgid "Spotlights a bump map of your desktop."
-msgstr "Piirt‰‰ tyˆpˆyt‰si kuhmuisena valokeilassa."
-
-#: capplets/screensaver-properties/screensaver-desktops/Cage.desktop.in.h:1
-msgid "Cage"
-msgstr "Kuutio"
-
-#: capplets/screensaver-properties/screensaver-desktops/Cage.desktop.in.h:2
-msgid "The famous, M.C. Escher, impossible cage"
-msgstr "M.C. Escherin kuuluisa mahdoton kuutio"
-
-#: capplets/screensaver-properties/screensaver-desktops/Compass.desktop.in.h:1
-msgid "Compass"
-msgstr "Kompassi"
-
-#: capplets/screensaver-properties/screensaver-desktops/Compass.desktop.in.h:2
-msgid "Display a spinning compass "
-msgstr "Piirt‰‰ pyˆriv‰n kompassin."
-
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:2
-msgid "Change the density."
-msgstr "Muuta tiheytt‰"
-
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:3
-msgid "Coral"
-msgstr "Koralli"
-
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:5
-msgid "Density"
-msgstr "Tiheys"
-
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:6
-msgid "Seeds"
-msgstr "Siemeni‰"
-
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:7
-msgid "Simulates coral growth"
-msgstr "J‰ljittelee korallien kasvua"
-
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:8
-msgid "œÓÏÂÌˇ ·Óˇ Ì‡ ÒÂÏÂÌ‡Ú‡."
-msgstr ""
-
-#: capplets/screensaver-properties/screensaver-desktops/Critical.desktop.in.h:1
-msgid "Critical"
-msgstr "Kriittinen"
-
-#: capplets/screensaver-properties/screensaver-desktops/Critical.desktop.in.h:2
-msgid "Display coloured polylines"
-msgstr "Piirt‰‰ v‰rillisi‰ viivoja."
-
-#: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:3
-msgid "Change the number of iterations."
-msgstr "Aseta kierrosten m‰‰r‰."
-
-#: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:6
-msgid "Cynosure"
-msgstr ""
-
-#: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:8
-msgid "Franticly displays colored rectangles."
-msgstr "Piirt‰‰ v‰rillisi‰ neliˆit‰ vauhdikkaasti."
-
-#: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:9
-msgid "Iterations"
-msgstr "Kierroksia"
-
-#: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:3
-msgid "Decayscreen"
-msgstr "Valuma"
-
-#: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:5
-msgid "Makes a screen melt down"
-msgstr "Saa kuvan valumaan n‰ytˆll‰"
-
-#: capplets/screensaver-properties/screensaver-desktops/Deco.desktop.in.h:1
-#: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:5
-msgid "Changes the time between redrawing the screen."
-msgstr "Aseta n‰ytˆn p‰ivitysten v‰linen aika."
-
-#: capplets/screensaver-properties/screensaver-desktops/Deco.desktop.in.h:2
-msgid "Deco"
-msgstr "Koristus"
-
-#: capplets/screensaver-properties/screensaver-desktops/Deco.desktop.in.h:3
-msgid "Determines whether to draw the panels in color, or in black and white."
-msgstr "M‰‰ritt‰‰, piirret‰‰nkˆ kuviot v‰rillisin‰ vai mustavalkoisina."
-
-#: capplets/screensaver-properties/screensaver-desktops/Deco.desktop.in.h:4
-msgid "Draw tacky 70s basement wall panelling."
-msgstr "Piirt‰‰ 70-luvun pohjakerrosten sein‰kuvioita."
-
-#: capplets/screensaver-properties/screensaver-desktops/Deco.desktop.in.h:5
-msgid "This will cause the panes to flash."
-msgstr "T‰m‰ saa kuviot v‰lkkym‰‰n."
-
-#: capplets/screensaver-properties/screensaver-desktops/Deco.desktop.in.h:6
-msgid "color"
-msgstr "v‰ri"
-
-#: capplets/screensaver-properties/screensaver-desktops/Deco.desktop.in.h:7
-msgid "color-cycle"
-msgstr "v‰rikierto"
-
-#: capplets/screensaver-properties/screensaver-desktops/Deco.desktop.in.h:8
-#: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:12
-msgid "delay"
-msgstr "Viive"
-
-#: capplets/screensaver-properties/screensaver-desktops/Deluxe.desktop.in.h:1
-msgid "Deluxe"
-msgstr ""
-
-#: capplets/screensaver-properties/screensaver-desktops/Deluxe.desktop.in.h:2
-msgid "Display nice stuff "
-msgstr "Piirr‰ jotakin kivaa"
-
-#: capplets/screensaver-properties/screensaver-desktops/Demon.desktop.in.h:1
-msgid ""
-"A cellular automata that starts with a random field, and organizes it into "
-"stripes and spirals."
-msgstr ""
-"Soluautomaatti, joka aloittaa satunnaisesta ruudusta, ja j‰rjest‰‰ sen "
-"viivoiksi ja spiraaleiksi."
-
-#: capplets/screensaver-properties/screensaver-desktops/Demon.desktop.in.h:2
-msgid "Demon"
-msgstr "Demoni"
-
-#: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:3
-#: capplets/screensaver-properties/screensaver-desktops/Julia.desktop.in.h:3
-#: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:3
-#: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:3
-msgid "Change the number to use."
-msgstr "Aseta m‰‰r‰."
-
-#: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:8
-msgid "Discrete"
-msgstr "Diskreetti"
-
-#: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:9
-msgid "Discrete map systems"
-msgstr "Diskreettej‰ kentt‰kuvauksia"
-
-#: capplets/screensaver-properties/screensaver-desktops/Distort.desktop.in.h:1
-msgid "Distort"
-msgstr "V‰‰rist‰"
-
-#: capplets/screensaver-properties/screensaver-desktops/Distort.desktop.in.h:2
-msgid "Distort the screen"
-msgstr "V‰‰rist‰‰ n‰ytˆn"
-
-#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:5
-msgid "Change whether fractals should grow."
-msgstr "M‰‰ritt‰‰, kasvavatko fraktaalit."
-
-#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:6
-msgid "Change whether to use lissajous figures to get points."
-msgstr "M‰‰ritt‰‰, ketjuuntuvatko pisteet."
-
-#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:10
-msgid "Drift"
-msgstr "Virta"
-
-#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:11
-msgid "Drifting recursive fractal cosmic flames."
-msgstr "Piirt‰‰ \"virtaavia\" rekursiivisia fraktaaleja."
-
-#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:12
-msgid "Grow"
-msgstr "Kasvata"
-
-#: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:13
-msgid "Lissajous"
-msgstr "Ketjuunnuta"
-
-#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:4
-msgid "Draws a point moving around a circle which moves around a circle."
-msgstr ""
-"Piirt‰‰ ympyr‰rataa kulkevan pisteen, joka kiert‰‰ ympyr‰rataa kulkevaa "
-"pistett‰."
-
-#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:5
-msgid "Holdtime"
-msgstr "Pitoaika"
-
-#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:7
-msgid "When the figure is complete, epicycle pauses this number of seconds."
-msgstr "Kun kuva on valmis, odota n‰in monta sekuntia."
-
-#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:8
-msgid "ÀÂÌÚ‡"
-msgstr ""
-
-#: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:1
-msgid "A waving ribbon"
-msgstr "Liehuva nauha"
-
-#: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:2
-msgid "Change the delay in movement."
-msgstr "Muuta liikeviivett‰"
-
-#: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:4
-msgid "Change the number of cycles."
-msgstr "Muuttaa kierrosten m‰‰r‰‰."
-
-#: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:6
-msgid "Changes the count."
-msgstr "Muuta lukum‰‰r‰‰."
-
-#: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:9
-#: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:6
-#: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:6
-#: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:7
-#: capplets/screensaver-properties/screensaver-desktops/Hopalong.desktop.in.h:7
-#: capplets/screensaver-properties/screensaver-desktops/Julia.desktop.in.h:7
-#: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:8
-#: capplets/screensaver-properties/screensaver-desktops/Sierpinski.desktop.in.h:5
-#: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:8
-msgid "Cycles"
-msgstr "Kierroksia"
-
-#: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:11
-msgid "Fadeplot"
-msgstr ""
-
-#: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:1
-#: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:1
-msgid "Change the delay between changing modes."
-msgstr "Muuta tilojen vaihtamisviivett‰."
-
-#: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:3
-#: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:3
-msgid "Change the size of pixels in the flag."
-msgstr "Muuta lipun pisteiden kokoa."
-
-#: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:7
-#: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:7
-msgid "Draws a waving flag."
-msgstr "Piirt‰‰ liehuvan lipun."
-
-#: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:8
-#: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:8
-msgid "Flag"
-msgstr "Lippu"
-
-#: capplets/screensaver-properties/screensaver-desktops/Flow.desktop.in.h:1
-msgid "Draws a flow of colored points"
-msgstr "Piirt‰‰ virtaavia v‰ripisteit‰"
-
-#: capplets/screensaver-properties/screensaver-desktops/Flow.desktop.in.h:2
-msgid "Flow"
-msgstr "Virtaus"
-
-#: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:3
-msgid "Change the number of trees to use."
-msgstr "Muuta puiden m‰‰r‰‰."
-
-#: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:8
-msgid "Draws a fractal forest."
-msgstr "Piirt‰‰ fraktaalimets‰n."
-
-#: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:9
-msgid "Forest"
-msgstr "Mets‰"
-
-#: capplets/screensaver-properties/screensaver-desktops/GLPlanet.desktop.in.h:1
-msgid "A 3d globe"
-msgstr "3D-planeetta"
-
-#: capplets/screensaver-properties/screensaver-desktops/GLPlanet.desktop.in.h:2
-msgid "GLPlanet"
-msgstr "GLPlaneetta"
-
-#: capplets/screensaver-properties/screensaver-desktops/Galaxy.desktop.in.h:1
-msgid "Galaxy"
-msgstr "Galaksi"
-
-#: capplets/screensaver-properties/screensaver-desktops/Gears.desktop.in.h:1
-msgid "Gears"
-msgstr "Rattaat"
-
-#: capplets/screensaver-properties/screensaver-desktops/Gears.desktop.in.h:2
-msgid "The 3d mesa demo, of gears"
-msgstr "Mesan 3d-ratasn‰ytˆs"
-
-#: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:1
-msgid "Additive"
-msgstr "Lis‰‰v‰"
-
-#: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:2
-msgid "Causes the colors to mix when overlapped."
-msgstr "Saa v‰rit sekoittumaan, kun ne menev‰t p‰‰llekk‰in."
-
-#: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:8
-msgid "Goop"
-msgstr "Mˆykyt"
-
-#: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:10
-msgid "Transparent"
-msgstr "L‰pin‰kyv‰"
-
-#: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:11
-msgid "squishy transparent oil and bubbles"
-msgstr "Venyv‰‰ ja l‰pin‰kyv‰‰ ˆljy‰ sek‰ kuplia"
-
-#: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:2
-msgid "Change the number of planets to use."
-msgstr "Vaihda planeettojen m‰‰r‰‰."
-
-#: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:4
-msgid "Change whether objects should leave a trail."
-msgstr "Aseta, j‰tt‰v‰tkˆ planeetat j‰lki‰."
-
-#: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:5
-msgid "Change whether orbit should decay."
-msgstr "Aseta, suistuvatko kappaleet kiertoradoiltaan."
-
-#: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:8
-msgid "Decay"
-msgstr "Suista"
-
-#: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:9
-msgid "Draws a simple orbital simulation."
-msgstr "Piirt‰‰ yksinkertaisen kiertoratamallin."
-
-#: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:10
-msgid "Grav"
-msgstr "Painovoima"
-
-#: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:12
-msgid "Trail"
-msgstr "J‰ljet"
-
-#: capplets/screensaver-properties/screensaver-desktops/Greynetic.desktop.in.h:4
-msgid "Draws random color rectangles."
-msgstr "Piirt‰‰ satunnaisen v‰risi‰ suorakulmioita."
-
-#: capplets/screensaver-properties/screensaver-desktops/Greynetic.desktop.in.h:5
-msgid "Greynetic"
-msgstr ""
-
-#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:1
-msgid "Animate"
-msgstr "Liikuta"
-
-#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:3
-msgid "Change the number of circles to use."
-msgstr "Aseta ympyrˆiden m‰‰r‰."
-
-#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:5
-msgid "Change to alternating striped curves."
-msgstr "Piirr‰ vaihtelevan v‰risi‰ kaaria."
-
-#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:6
-msgid "Change to animated circles."
-msgstr "Liikuta ympyrˆit‰."
-
-#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:7
-msgid "Change to cycle through colormap."
-msgstr "Kierr‰t‰ v‰rikarttaa."
-
-#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:11
-#: capplets/screensaver-properties/screensaver-desktops/Xteevee.desktop.in.h:2
-msgid "Cycle"
-msgstr "Kierros"
-
-#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:13
-msgid "Draw circular patterns."
-msgstr "Piirt‰‰ ympyr‰m‰isi‰ kuvioita."
-
-#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:14
-msgid "Halo"
-msgstr "Halo"
-
-#: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:15
-msgid "Mode"
-msgstr "Tila"
-
-#: capplets/screensaver-properties/screensaver-desktops/Helix.desktop.in.h:4
-msgid "Draws helical string-art patterns"
-msgstr "Piirt‰‰ kierukkamaisia viivapiirroksia"
-
-#: capplets/screensaver-properties/screensaver-desktops/Helix.desktop.in.h:5
-msgid "Helix"
-msgstr "Kierukka"
-
-#: capplets/screensaver-properties/screensaver-desktops/Hopalong.desktop.in.h:3
-msgid "Change the number of pixels before a color change."
-msgstr "Muuta v‰rinvaihtojen v‰listen kuvapisteiden m‰‰r‰‰."
-
-#: capplets/screensaver-properties/screensaver-desktops/Hopalong.desktop.in.h:8
-msgid "Draws real plane fractals"
-msgstr "Piirt‰‰ reaalitason fraktaaleja"
-
-#: capplets/screensaver-properties/screensaver-desktops/Hopalong.desktop.in.h:9
-msgid "Hopalong"
-msgstr ""
-
-#: capplets/screensaver-properties/screensaver-desktops/Hypercube.desktop.in.h:1
-msgid "2D projection of a hypercube"
-msgstr "2-ulotteinen kuvaus hyperkuutiosta"
-
-#: capplets/screensaver-properties/screensaver-desktops/Hypercube.desktop.in.h:3
-msgid "Change the distance from center of cube"
-msgstr "Muuta et‰isyytt‰ kuution keskelt‰."
-
-#: capplets/screensaver-properties/screensaver-desktops/Hypercube.desktop.in.h:6
-msgid "Distance"
-msgstr "Et‰isyys"
-
-#: capplets/screensaver-properties/screensaver-desktops/Hypercube.desktop.in.h:7
-msgid "Hypercube"
-msgstr "Hyperkuutio"
-
-#: capplets/screensaver-properties/screensaver-desktops/Ifs.desktop.in.h:4
-msgid "Draws spinning, colliding, iterated-function-system images."
-msgstr "Piirt‰‰ pyˆrivi‰ ja tˆrm‰‰vi‰ iteroidun funktioj‰rjestelm‰n kuvia."
-
-#: capplets/screensaver-properties/screensaver-desktops/Ifs.desktop.in.h:5
-msgid "Ifs"
-msgstr "Ifs"
-
-#: capplets/screensaver-properties/screensaver-desktops/Imsmap.desktop.in.h:1
-msgid "Imsmap"
-msgstr ""
-
-#: capplets/screensaver-properties/screensaver-desktops/Interference.desktop.in.h:1
-msgid "Interference"
-msgstr "Interferenssi"
-
-#: capplets/screensaver-properties/screensaver-desktops/Jigsaw.desktop.in.h:3
-msgid "Jigsaw"
-msgstr "Palapeli"
-
-#: capplets/screensaver-properties/screensaver-desktops/Jigsaw.desktop.in.h:4
-msgid "Permutes the screen image like a jigsaw puzzle."
-msgstr "Jakaa kuvan palapelin paloiksi ja sekoittaa ne."
-
-#: capplets/screensaver-properties/screensaver-desktops/Julia.desktop.in.h:8
-msgid "Draws spinning, animating, julia-set fractals."
-msgstr "Piirt‰‰ pyˆrivi‰ ja liikkuvia julia-joukon fraktaaleja."
-
-#: capplets/screensaver-properties/screensaver-desktops/Julia.desktop.in.h:9
-msgid "Julia"
-msgstr "Julia"
-
-#: capplets/screensaver-properties/screensaver-desktops/Kaleidescope.desktop.in.h:1
-msgid "Change number of segments."
-msgstr "Muuta osien lukum‰‰r‰‰."
-
-#: capplets/screensaver-properties/screensaver-desktops/Kaleidescope.desktop.in.h:2
-msgid "Change number of trails."
-msgstr "Muuta j‰lkien lukum‰‰r‰‰."
-
-#: capplets/screensaver-properties/screensaver-desktops/Kaleidescope.desktop.in.h:6
-msgid "Draws rotating line segments."
-msgstr "Piirt‰‰ pyˆrivi‰ viivanosia."
-
-#: capplets/screensaver-properties/screensaver-desktops/Kaleidescope.desktop.in.h:7
-msgid "Kaleidescope"
-msgstr "Kaleidoskooppi"
-
-#: capplets/screensaver-properties/screensaver-desktops/Kaleidescope.desktop.in.h:9
-#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:8
-msgid "Segments"
-msgstr "Osia"
-
-#: capplets/screensaver-properties/screensaver-desktops/Kaleidescope.desktop.in.h:10
-msgid "Trails"
-msgstr "J‰ljet"
-
-#: capplets/screensaver-properties/screensaver-desktops/Kumppa.desktop.in.h:1
-msgid "Kumppa"
-msgstr "Kumppa"
-
-#: capplets/screensaver-properties/screensaver-desktops/Lament.desktop.in.h:1
-msgid "A 3d cube floats around"
-msgstr "3-ulotteinen kuutio k‰‰ntyilee"
-
-#: capplets/screensaver-properties/screensaver-desktops/Lament.desktop.in.h:2
-msgid "Lament"
-msgstr ""
-
-#: capplets/screensaver-properties/screensaver-desktops/Laser.desktop.in.h:3
-msgid "Draws vaguely laser-like moving lines."
-msgstr "Piirt‰‰ et‰isesti laseria muistuttavia liikkuvia viivoja."
-
-#: capplets/screensaver-properties/screensaver-desktops/Laser.desktop.in.h:4
-#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:8
-msgid "Duration"
-msgstr "Kesto"
-
-#: capplets/screensaver-properties/screensaver-desktops/Laser.desktop.in.h:5
-msgid ""
-"Duration of the laser burst.  After the burst has finished, It will move to "
-"a new location on the screen."
-msgstr ""
-"Laserpurskeen kesto. Kun t‰m‰ aika on kulunut, niin purske siirtyy toiseen "
-"paikkaan ruudulla."
-
-#: capplets/screensaver-properties/screensaver-desktops/Laser.desktop.in.h:6
-msgid "Laser"
-msgstr "Laser"
-
-#: capplets/screensaver-properties/screensaver-desktops/Laser.desktop.in.h:7
-msgid "Mono"
-msgstr "Yksiv‰rinen"
-
-#: capplets/screensaver-properties/screensaver-desktops/Laser.desktop.in.h:8
-msgid "Number of segments per laser burst."
-msgstr "Viivojen lukum‰‰r‰ purskeessa."
-
-#: capplets/screensaver-properties/screensaver-desktops/Lightning.desktop.in.h:4
-msgid "Draws fractal lightning bolts."
-msgstr "Piirt‰‰ fraktaalisalamoita."
-
-#: capplets/screensaver-properties/screensaver-desktops/Lightning.desktop.in.h:5
-msgid "Lightning"
-msgstr "Salama"
-
-#: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:4
-msgid "Change the size of object."
-msgstr "Aseta osan koko."
-
-#: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:9
-msgid "Draws animated full-loop lisajous figures"
-msgstr "Piirt‰‰ liikkuvia silmukoita"
-
-#: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:10
-msgid "Lisa"
-msgstr ""
-
-#: capplets/screensaver-properties/screensaver-desktops/Lissie.desktop.in.h:1
-msgid "Lissie"
-msgstr "Vieteri"
-
-#: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:1
-msgid "Change from closed to open figures."
-msgstr "Piirr‰ avoimia kuvioita sulkeisten sijaan."
-
-#: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:2
-msgid "Change number of interpolation steps."
-msgstr "Muuta v‰livaiheiden m‰‰r‰‰."
-
-#: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:7
-msgid "Figtype"
-msgstr "Kuvatyyppi"
-
-#: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:8
-msgid "Lmorph"
-msgstr "Lmorph"
-
-#: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:10
-msgid "Morphing lines."
-msgstr "Muotoaan muuttavia viivoja."
-
-#: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:11
-msgid "Points"
-msgstr "Pisteit‰"
-
-#: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:12
-msgid "Steps"
-msgstr "Askelia"
-
-#: capplets/screensaver-properties/screensaver-desktops/Loop.desktop.in.h:1
-msgid "Loop"
-msgstr "Silmukka"
-
-#: capplets/screensaver-properties/screensaver-desktops/Loop.desktop.in.h:2
-msgid ""
-"This one produces loop-shaped colonies that spawn, age, and eventually die."
-msgstr ""
-"T‰m‰ n‰ytˆns‰‰st‰j‰ tuottaa silmukan muotoisia kasvustoja, jotka "
-"lis‰‰ntyv‰t, vanhenevat ja lopulta kuolevat."
-
-#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:1
-msgid "Bridge"
-msgstr "Silta"
-
-#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:2
-msgid "Color for filling completely closed off areas."
-msgstr "T‰ysin katettujen alueiden v‰ri."
-
-#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:3
-msgid "Controls whether or not a 'bridge' will appear over the logo."
-msgstr "M‰‰ritt‰‰, viekˆ logon yli silta."
-
-#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:4
-msgid "Dead Color"
-msgstr "Kuollut v‰ri"
-
-#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:5
-msgid "If the solver can "
-msgstr "Jos ratkaisin voi "
-
-#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:6
-msgid "Live Color"
-msgstr "El‰v‰ v‰ri"
-
-#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:7
-msgid "Maze"
-msgstr "Sokkelo"
-
-#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:8
-msgid "Post-Solving Delay"
-msgstr "Ratkaisun j‰lkeinen viive"
-
-#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:9
-msgid "Pre-Solving Delay"
-msgstr "Ratkaisua edelt‰v‰ viive"
-
-#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:10
-msgid "Repeatedly create and solve a maze"
-msgstr "Luo ja ratkaise labyrintti toistuvasti"
-
-#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:11
-msgid "Skip Color"
-msgstr "Ohitettu v‰ri"
-
-#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:12
-msgid "Speed Delay"
-msgstr "Nopeusviive"
-
-#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:13
-msgid "Surround Color"
-msgstr "Ymp‰rˆiv‰ v‰ri"
-
-#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:15
-#, no-c-format
-msgid "The color of a failed path (stippled with a 50% pattern)"
-msgstr "Umpikujien v‰ri (pilkuttuu puoliksi taustav‰rill‰)"
-
-#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:16
-msgid "The color of the path."
-msgstr "Polun v‰ri."
-
-#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:17
-msgid ""
-"The delay (in microseconds) after solving a maze and before generating a new "
-"one."
-msgstr ""
-"Viive (mikrosekunteina) sokkelon ratkaisun j‰lkeen ja ennen uuden "
-"aloittamista"
-
-#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:18
-msgid "The delay (in microseconds) between each step of the solution path."
-msgstr "Viive (mikrosekunteina) jokaisen ratkaisuaskeleen j‰lkeen."
-
-#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:19
-msgid ""
-"The delay (in microseconds) between generating a maze and starting to solve "
-"it."
-msgstr ""
-"Viive (mikrosekunteina) sokkelon luonnin j‰lkeen ja ennen sen ratkaisemista."
-
-#: capplets/screensaver-properties/screensaver-desktops/Moebius.desktop.in.h:1
-msgid "M.C. Escher inspired ants.. in 3d"
-msgstr "Escherin inspiroimia muurahaisia 3-ulotteisena"
-
-#: capplets/screensaver-properties/screensaver-desktops/Moebius.desktop.in.h:2
-msgid "Moebius"
-msgstr "Mˆbius"
-
-#: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:6
-msgid "Draw circular interference patterns"
-msgstr "Piirr‰ ympyr‰nmuotoisia interferenssikuvioita"
-
-#: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:7
-msgid "Moire"
-msgstr "Moire"
-
-#: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:9
-msgid "Offset"
-msgstr "Et‰isyys"
-
-#: capplets/screensaver-properties/screensaver-desktops/Moire2.desktop.in.h:1
-msgid "Moire2"
-msgstr "Moire2"
-
-#: capplets/screensaver-properties/screensaver-desktops/Morph3d.desktop.in.h:1
-msgid "A 3d flower morphs into a sphear"
-msgstr "3-ulotteinen kukka muotoutuu palloksi"
-
-#: capplets/screensaver-properties/screensaver-desktops/Morph3d.desktop.in.h:2
-msgid "Morph3d"
-msgstr "3D-muodonmuutos"
-
-#: capplets/screensaver-properties/screensaver-desktops/Mountain.desktop.in.h:1
-msgid "Mountain"
-msgstr "Vuori"
-
-#: capplets/screensaver-properties/screensaver-desktops/Munch.desktop.in.h:3
-msgid "Change to draw square at weird starting points."
-msgstr "Piirr‰ neliˆ kummallisiin aloituspaikkoihin."
-
-#: capplets/screensaver-properties/screensaver-desktops/Munch.desktop.in.h:4
-msgid "Change to use XOR drawing function."
-msgstr "Piirr‰ XOR-funktiolla."
-
-#: capplets/screensaver-properties/screensaver-desktops/Munch.desktop.in.h:7
-msgid "Munch"
-msgstr "Rouskutin"
-
-#: capplets/screensaver-properties/screensaver-desktops/Munch.desktop.in.h:8
-msgid "Munching squares."
-msgstr "Rouskuttaa neliˆit‰."
-
-#: capplets/screensaver-properties/screensaver-desktops/Munch.desktop.in.h:9
-msgid "Shift"
-msgstr "Vaihto"
-
-#: capplets/screensaver-properties/screensaver-desktops/Munch.desktop.in.h:10
-msgid "XOR"
-msgstr "XOR"
-
-#: capplets/screensaver-properties/screensaver-desktops/Noseguy.desktop.in.h:1
-msgid "Noseguy"
-msgstr "Nen‰k‰s"
-
-#: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:1
-msgid "Change maximum number of lines."
-msgstr "Muuta suurinta viivojen m‰‰r‰‰."
-
-#: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:2
-msgid "Change the time each picture is shown."
-msgstr "Muuta kuvan n‰kymisaikaa."
-
-#: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:3
-msgid "Change time to fade away."
-msgstr "Muuta h‰ivytysaikaa."
-
-#: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:6
-msgid "Fadedelay"
-msgstr "H‰ivytysviive"
-
-#: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:7
-msgid "Maxlines"
-msgstr "Viivoja"
-
-#: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:9
-msgid "Pedal"
-msgstr ""
-
-#: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:10
-msgid "Pretty geometric picture program."
-msgstr "Kauniita geometrisia kuvioita."
-
-#: capplets/screensaver-properties/screensaver-desktops/Penetrate.desktop.in.h:1
-msgid "Display an arcade game"
-msgstr "Videopeli"
-
-#: capplets/screensaver-properties/screensaver-desktops/Penetrate.desktop.in.h:2
-msgid "Penetrate"
-msgstr "L‰p‰isy"
-
-#: capplets/screensaver-properties/screensaver-desktops/Penrose.desktop.in.h:1
-msgid "Penrose"
-msgstr "Penrose"
-
-#: capplets/screensaver-properties/screensaver-desktops/Phosphor.desktop.in.h:1
-msgid ""
-"Draws a simulation of an old terminal, with large pixels and long-sustain "
-"phosphor."
-msgstr ""
-"J‰ljittelee vanhaa p‰‰tett‰, jossa on suuret kuvapisteet ja hidas fosfori."
-
-#: capplets/screensaver-properties/screensaver-desktops/Phosphor.desktop.in.h:2
-msgid "Phosphor"
-msgstr "Fosfori"
-
-#: capplets/screensaver-properties/screensaver-desktops/Pipes.desktop.in.h:1
-msgid "3d pipes flow around the screen"
-msgstr "3-ulotteisia putkia ruudun t‰ydelt‰"
-
-#: capplets/screensaver-properties/screensaver-desktops/Pipes.desktop.in.h:2
-msgid "Pipes"
-msgstr "Putket"
-
-#: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:1
-msgid "Changes frequency of missile launch."
-msgstr "Muuta rakettien laukaisun taajuutta"
-
-#: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:3
-msgid "Frequency"
-msgstr "Taajuus"
-
-#: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:4
-msgid "How many particles should appear when a missile explodes."
-msgstr "Kuinka monta hiukkasta ilmestyy kun raketti r‰j‰ht‰‰."
-
-#: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:5
-msgid "How many particles should be allowed on the screen at once."
-msgstr "Kuinka monta hiukkasta voi olla kerralla ruudulla."
-
-#: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:6
-msgid "Pyro"
-msgstr "Ilotulitus"
-
-#: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:7
-msgid "Scatter"
-msgstr "Hajonta"
-
-#: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:8
-msgid "simulates fireworks"
-msgstr "J‰ljittelee ilotulitusta"
-
-#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:1
-msgid "Bounce colored lines around a window."
-msgstr "Pomppivia v‰rillisi‰ viivoja."
-
-#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:2
-msgid "Changes the speed at which the Qix moves."
-msgstr "Muuttaa viivan liikkumanopeutta."
-
-#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:4
-msgid ""
-"Determines whether the lines move erraticly, or bounce off the walls "
-"linearly."
-msgstr "M‰‰rit‰, liikkuvatko viivat satunnaisesti vai kimpoilevat reunoista."
-
-#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:5
-msgid "Determines whether to fill in the gaps between the lines."
-msgstr "M‰‰rit‰, t‰yttyv‰tkˆ viivojen v‰liset alueet."
-
-#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:6
-msgid "Qix"
-msgstr "Qix"
-
-#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:7
-msgid "Random"
-msgstr "Satunnainen"
-
-#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:9
-msgid "Sets the distance between each line segment."
-msgstr "Asettaa viivanp‰tkien v‰lisen et‰isyyden."
-
-#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:10
-msgid "Sets the number of Qix you have running at once."
-msgstr "Aseta kerralla n‰kyviss‰ olevien viivojen m‰‰r‰."
-
-#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:11
-msgid "Sets the number of line segments to be drawn."
-msgstr "Aseta piirtyvien viivanp‰tkien lukum‰‰r‰."
-
-#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:14
-msgid "Spread"
-msgstr "V‰li"
-
-#: capplets/screensaver-properties/screensaver-desktops/Rd-bomb.desktop.in.h:1
-msgid "Rd-bomb"
-msgstr "Rd-bomb"
-
-#: capplets/desktop-links/Desktop.directory.in.h:1
-#: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:1
-msgid "Desktop"
-msgstr "Tyˆpˆyt‰"
-
-#: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:2
-msgid "Display oily drops."
-msgstr "Piirt‰‰ v‰reit‰ ˆljyyn."
-
-#: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:3
-msgid "Draws rippling interference patterns like splashing water."
-msgstr ""
-"Piirt‰‰ v‰reilevi‰ interferenssikuvioita, jotka muistuttavat veden "
-"liplatusta."
-
-#: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:4
-msgid "Drip onto desktop."
-msgstr "V‰reilyt‰ tyˆpˆyt‰‰."
-
-#: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:5
-msgid "Oily"
-msgstr "÷ljym‰inen"
-
-#: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:6
-msgid "Ripples"
-msgstr "V‰reit‰"
-
-#: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:7
-msgid "Stir"
-msgstr "Sekoitin"
-
-#: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:8
-msgid "Stir it up."
-msgstr "Sekoita."
-
-#: capplets/screensaver-properties/screensaver-desktops/Rocks.desktop.in.h:1
-msgid "Rocks"
-msgstr "Kivet"
-
-#: capplets/screensaver-properties/screensaver-desktops/Rorschach.desktop.in.h:1
-msgid "Rorschach"
-msgstr "Rorschach"
-
-#: capplets/screensaver-properties/screensaver-desktops/Rotor.desktop.in.h:1
-msgid "Rotor"
-msgstr "Roottori"
-
-#: capplets/screensaver-properties/screensaver-desktops/Rubik.desktop.in.h:1
-msgid "A 3d Rubiks cube floats and twists around"
-msgstr "3-ulotteinen leijuva ja pyˆriv‰ Rubikin kuutio."
-
-#: capplets/screensaver-properties/screensaver-desktops/Rubik.desktop.in.h:2
-msgid "Rubiks Cube"
-msgstr "Rubikin kuutio"
-
-#: capplets/screensaver-properties/screensaver-desktops/Shadebobs.desktop.in.h:1
-msgid ""
-"Draws smoothly-shaded oscillating oval patterns which resemble vapor trails."
-msgstr ""
-"Piirt‰‰ pehme‰sti varjostettuja soikiokuvioita, jotka muistuttavat "
-"savuj‰lki‰."
-
-#: capplets/screensaver-properties/screensaver-desktops/Shadebobs.desktop.in.h:2
-msgid "Shadebobs"
-msgstr ""
-
-#: capplets/screensaver-properties/screensaver-desktops/Sierpinski.desktop.in.h:7
-msgid "Sierpinski"
-msgstr "Sierpinskin kolmio"
-
-#: capplets/screensaver-properties/screensaver-desktops/Sierpinski.desktop.in.h:8
-msgid "The sierpinski program draws Sierpinski triangle fractals."
-msgstr "Piirt‰‰ Sierpinskin kolmiofraktaaleja."
-
-#: capplets/screensaver-properties/screensaver-desktops/Slidescreen.desktop.in.h:1
-msgid "Slidescreen"
-msgstr "Palapeli"
-
-#: capplets/screensaver-properties/screensaver-desktops/Slip.desktop.in.h:1
-msgid "Slip"
-msgstr "Luisto"
-
-#: capplets/screensaver-properties/screensaver-desktops/Sonar.desktop.in.h:1
-msgid "Display a Sonar scope."
-msgstr "N‰ytt‰‰ tutkan n‰ytˆn"
-
-#: capplets/screensaver-properties/screensaver-desktops/Sonar.desktop.in.h:2
-msgid "Sonar"
-msgstr "Tutka"
-
-#: capplets/screensaver-properties/screensaver-desktops/Sphere.desktop.in.h:1
-msgid "Sphere"
-msgstr "Pallot"
-
-#: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:10
-msgid "Spiral"
-msgstr "Spiraali"
-
-#: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:11
-msgid "The spiral program draws moving circular spiral patterns."
-msgstr "Piirt‰‰ liikkuvia spiraalikuvioita"
-
-#: capplets/screensaver-properties/screensaver-desktops/Spotlight.desktop.in.h:1
-msgid "Display the desktop in a spotlight"
-msgstr "N‰ytt‰‰ tyˆpˆyd‰n valokiilassa"
-
-#: capplets/screensaver-properties/screensaver-desktops/Spotlight.desktop.in.h:2
-msgid "Spotlight"
-msgstr "Valokiila"
-
-#: capplets/screensaver-properties/screensaver-desktops/Sproingies.desktop.in.h:1
-msgid "Sproingies"
-msgstr "Pomput"
-
-#: capplets/screensaver-properties/screensaver-desktops/Sproingies.desktop.in.h:2
-msgid "Uhm.. *poing*"
-msgstr "Boinks."
-
-#: capplets/screensaver-properties/screensaver-desktops/Squiral.desktop.in.h:1
-msgid "Display squared spirales"
-msgstr "Piirt‰‰ neliˆspiraaleja"
-
-#: capplets/screensaver-properties/screensaver-desktops/Squiral.desktop.in.h:2
-msgid "Squiral"
-msgstr "Spiraali"
-
-#: capplets/screensaver-properties/screensaver-desktops/Stairs.desktop.in.h:1
-msgid "Stairs"
-msgstr "Portaat"
-
-#: capplets/screensaver-properties/screensaver-desktops/Stairs.desktop.in.h:2
-msgid "The famous, M.C. Escher, impossible stairs"
-msgstr "Kuuluisat M.C. Escherin mahdottomat portaat"
-
-#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:1
-msgid "Blob"
-msgstr "L‰isk‰"
-
-#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:2
-msgid "Change the animation step delay."
-msgstr "Aseta piirtonopeus."
-
-#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:3
-msgid "Change the number of colors to use in star."
-msgstr "Aseta t‰hden v‰rien m‰‰r‰"
-
-#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:4
-msgid "Change the quickness of rotation at each step."
-msgstr "Aseta joka askeleen kierron nopeus."
-
-#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:5
-msgid "Change the thickness of color bands."
-msgstr "Aseta v‰rinauhojen paksuus."
-
-#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:9
-msgid "How long to run before choosing a new shape."
-msgstr "Kuinka kauan on k‰ynniss‰ ennen uutta muodonvaihtoa."
-
-#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:10
-msgid "Make a star like formation using arcs."
-msgstr "Luo t‰hdenkaltaisen muodostelman kaaria k‰ytt‰en."
-
-#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:12
-msgid "Rotation"
-msgstr "Kierto"
-
-#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:13
-msgid "Starfish"
-msgstr "Merit‰hti"
-
-#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:14
-msgid "Thickness"
-msgstr "Paksuus"
-
-#: capplets/screensaver-properties/screensaver-desktops/Strange.desktop.in.h:1
-msgid "Strange"
-msgstr "Outo"
-
-#: capplets/screensaver-properties/screensaver-desktops/Superquadrics.desktop.in.h:1
-msgid "Superquadrics"
-msgstr ""
-
-#: capplets/screensaver-properties/screensaver-desktops/Swirl.desktop.in.h:1
-msgid "Swirl"
-msgstr "Pyˆrre"
-
-#: capplets/screensaver-properties/screensaver-desktops/Triangle.desktop.in.h:5
-msgid "Random mountain ranges"
-msgstr "Satunnaisia vuoristoja"
-
-#: capplets/screensaver-properties/screensaver-desktops/Triangle.desktop.in.h:6
-msgid "Triangle"
-msgstr "Kolmio"
-
-#: capplets/screensaver-properties/screensaver-desktops/Vines.desktop.in.h:5
-msgid "Vines"
-msgstr "Kˆynnˆkset"
-
-#: capplets/screensaver-properties/screensaver-desktops/Vines.desktop.in.h:6
-msgid "draws pseudo-fractal geometric patterns"
-msgstr "Piirt‰‰ geometrisia pseudofraktaalikuvioita"
-
-#: capplets/screensaver-properties/screensaver-desktops/Worm.desktop.in.h:1
-msgid "Worm"
-msgstr "Mato"
-
-#: capplets/screensaver-properties/screensaver-desktops/Xflame.desktop.in.h:1
-msgid "Display flames at the bottom of the screen"
-msgstr "Piirt‰‰ liekkej‰ n‰ytˆn alaosaan"
-
-#: capplets/screensaver-properties/screensaver-desktops/Xflame.desktop.in.h:2
-msgid "Xflame"
-msgstr "Xliekki"
-
-#: capplets/screensaver-properties/screensaver-desktops/Xjack.desktop.in.h:1
-msgid "Xjack"
-msgstr "Xjack"
-
-#: capplets/screensaver-properties/screensaver-desktops/Xlyap.desktop.in.h:1
-msgid "Xlyap"
-msgstr "Xlyap"
-
-#: capplets/screensaver-properties/screensaver-desktops/Xmatrix.desktop.in.h:1
-msgid "Screens from the movie The Matrix"
-msgstr "Ruutu elokuvan Matrix tapaan."
-
-#: capplets/screensaver-properties/screensaver-desktops/Xmatrix.desktop.in.h:2
-msgid "Xmatrix"
-msgstr "Xmatrix"
-
-#: capplets/screensaver-properties/screensaver-desktops/Xroger.desktop.in.h:3
-msgid "The  xroger  program displays a replacement for the X logo."
-msgstr "Xroger n‰ytt‰‰ korvaavan X-logon"
-
-#: capplets/screensaver-properties/screensaver-desktops/Xroger.desktop.in.h:4
-msgid "Xroger"
-msgstr "Xroger"
-
-#: capplets/screensaver-properties/screensaver-desktops/Xteevee.desktop.in.h:1
-msgid "Bars"
-msgstr "Palkit"
-
-#: capplets/screensaver-properties/screensaver-desktops/Xteevee.desktop.in.h:3
-msgid "Cycle through all the available modes."
-msgstr "K‰y kaikki tilat l‰pi."
-
-#: capplets/screensaver-properties/screensaver-desktops/Xteevee.desktop.in.h:4
-msgid "Display color bars."
-msgstr "N‰yt‰ v‰ripalkit."
-
-#: capplets/screensaver-properties/screensaver-desktops/Xteevee.desktop.in.h:5
-msgid "Roll"
-msgstr "Vierit‰"
-
-#: capplets/screensaver-properties/screensaver-desktops/Xteevee.desktop.in.h:6
-msgid ""
-"Simulates various television problems such as static, loss of vertical hold, "
-"and test patterns."
-msgstr ""
-"J‰ljittelee er‰it‰ TV-ongelmia, kuten lumisadetta, kuvan vierimist‰ ja "
-"testikuvaa."
-
-#: capplets/screensaver-properties/screensaver-desktops/Xteevee.desktop.in.h:7
-msgid "Static"
-msgstr "Lumisade"
-
-#: capplets/screensaver-properties/screensaver-desktops/Xteevee.desktop.in.h:8
-msgid "Static."
-msgstr "Lumisade."
-
-#: capplets/screensaver-properties/screensaver-desktops/Xteevee.desktop.in.h:9
-msgid "Vertical roll."
-msgstr "Pystysuora vieriminen"
-
-#: capplets/screensaver-properties/screensaver-desktops/Xteevee.desktop.in.h:10
-msgid "Xteevee"
-msgstr "Xtelevisio"
-
-#: capplets/mouse-properties/mouse-properties.desktop.in.h:1
-msgid "Mouse"
-msgstr "Hiiri"
-
-#: capplets/mouse-properties/mouse-properties.desktop.in.h:2
-msgid "Mouse Properties"
-msgstr "Hiiriasetukset"
-
-#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:1
-msgid "Keyboard"
-msgstr "N‰pp‰imistˆ"
-
-#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:2
-msgid "Keyboard Properties"
-msgstr "N‰pp‰imistˆasetukset"
-
-#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:1
-msgid "Choose the editor that is invoked by gnome-edit"
-msgstr "Valitse editori, jonka gnome-edit k‰ynnist‰‰."
-
-#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:2
-msgid "Default Editor"
-msgstr "Oletuseditori"
-
-#: capplets/background-properties/background-properties.desktop.in.h:1
-msgid "Background"
-msgstr "Tausta"
-
-#: capplets/background-properties/background-properties.desktop.in.h:2
-msgid "Configuration of the desktop's background"
-msgstr "Tyˆpˆyd‰n taustan asetukset"
-
-#: capplets/desktop-links/Documents.directory.in.h:1
-msgid "Configure how document types are handled"
-msgstr "M‰‰rit‰, miten erilaisia asiakirjoja k‰sitell‰‰n."
-
-#: capplets/desktop-links/Documents.directory.in.h:2
-msgid "Document Handlers"
-msgstr "Asiakirjak‰sittelimet"
-
-#: capplets/desktop-links/Gnome.directory.in.h:2
-msgid "Control Center Menu"
-msgstr "Hallintakeskuksen valikko"
-
-#: capplets/desktop-links/Multimedia.directory.in.h:1
-msgid "Configure the settings of your Multimedia devices"
-msgstr "Muuta multimedia-asetuksia"
-
-#: capplets/desktop-links/Multimedia.directory.in.h:2
-msgid "Multimedia"
-msgstr "Multimedia"
-
-#: capplets/desktop-links/Peripherals.directory.in.h:1
-msgid "Configure your external devices"
-msgstr "Oheislaiteasetukset"
-
-#: capplets/desktop-links/Peripherals.directory.in.h:2
-msgid "Peripherals"
-msgstr "Oheislaitteet"
-
-#: capplets/desktop-links/Session.directory.in.h:1
-msgid "Session"
-msgstr "Istunto"
-
-#: capplets/desktop-links/Session.directory.in.h:2
-msgid "Session Management Settings"
-msgstr "N‰ytˆns‰‰st‰j‰n asetukset"
-
-#: capplets/desktop-links/UIOptions.directory.in.h:1
-msgid "Configure the global settings of your GNOME applications"
-msgstr "Muuta GNOME-sovellusten oletusk‰ytt‰ytymist‰"
-
-#: capplets/desktop-links/UIOptions.directory.in.h:2
-msgid "User Interface"
-msgstr "K‰yttˆliittym‰"
-
-#: capplets/ui-properties/ui-properties.directory.in.h:1
-msgid "Look and Feel"
-msgstr "K‰yttˆtuntuma"
-
-#: capplets/ui-properties/ui-properties.directory.in.h:2
-msgid "Look and Feel Properties"
-msgstr "K‰yttˆtuntuman asetukset"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.51\n"
-"POT-Creation-Date: 2001-03-11 13:07+0100\n"
+"POT-Creation-Date: 2001-03-15 14:08-0500\n"
 "PO-Revision-Date: 2001-02-21 12:37+0900\n"
 "Last-Translator: Young-Ho, Cha <ganadist@chollian.net>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -29,6 +29,14 @@ msgid ""
 msgstr ""
 "'background-properties-capplet'À» ½ÃÀÛÇÏ´Â µ¥ ÃÊ±âÈ­ ¹®Á¦ ¹ß»ı.\n"
 "ÁßÁö...\n"
+
+#: capplets/background-properties/background-properties.desktop.in.h:1
+msgid "Background"
+msgstr "¹è°æ"
+
+#: capplets/background-properties/background-properties.desktop.in.h:2
+msgid "Configuration of the desktop's background"
+msgstr ""
 
 #: capplets/background-properties/property-background.c:116
 msgid "Disabled"
@@ -202,21 +210,63 @@ msgstr ""
 "¹è°æ±×¸² Ç¥½Ã¹æ¹ı: tiled(¹ÙµÏÆÇ), centered(Áß¾Ó), scaled(±×¸²Å©±âÁ¶Á¤), È¤Àº "
 "ratio(±×¸² °¡·Î¼¼·ÎºñÀ² °íÁ¤)"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:238
-msgid "Gnome editor"
-msgstr "±×³ğ ÆíÁı±â"
+#: capplets/desktop-links/Desktop.directory.in.h:1
+#: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:1
+msgid "Desktop"
+msgstr "µ¥½ºÅ©Å¾"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:249
-msgid "Run In Terminal"
-msgstr "ÅÍ¹Ì³Î¿¡¼­ ½ÇÇà"
-
-#: capplets/file-types/file-types-capplet.desktop.in.h:1
-msgid "File Types and Programs"
+#: capplets/desktop-links/Documents.directory.in.h:1
+msgid "Configure how document types are handled"
 msgstr ""
 
-#: capplets/file-types/file-types-capplet.desktop.in.h:2
-msgid "Specify which programs are used to open or view each file type"
-msgstr ""
+#: capplets/desktop-links/Documents.directory.in.h:2
+#, fuzzy
+msgid "Document Handlers"
+msgstr "URL Ã³¸®"
+
+#. create the app
+#: capplets/desktop-links/Gnome.directory.in.h:1 control-center/main.c:197
+#: control-center/splash.c:247
+msgid "Control Center"
+msgstr "Á¶Á¾ ¼¾ÅÍ"
+
+#: capplets/desktop-links/Gnome.directory.in.h:2
+msgid "Control Center Menu"
+msgstr "Á¶Á¾ÆÇ ¸Ş´º"
+
+#: capplets/desktop-links/Multimedia.directory.in.h:1
+msgid "Configure the settings of your Multimedia devices"
+msgstr "¸ÖÆ¼ ¹Ìµğ¾î ÀåÄ¡ÀÇ ¼³Á¤À» º¯°æÇÕ´Ï´Ù."
+
+#: capplets/desktop-links/Multimedia.directory.in.h:2
+msgid "Multimedia"
+msgstr "¸ÖÆ¼ ¹Ìµğ¾î"
+
+#: capplets/desktop-links/Peripherals.directory.in.h:1
+msgid "Configure your external devices"
+msgstr "¿ÜºÎ ÀåÄ¡ ¼³Á¤"
+
+#: capplets/desktop-links/Peripherals.directory.in.h:2
+msgid "Peripherals"
+msgstr "ÁÖº¯ÀåÄ¡"
+
+#: capplets/desktop-links/Session.directory.in.h:1
+#, fuzzy
+msgid "Session"
+msgstr "È®ÀåÀÚ"
+
+#: capplets/desktop-links/Session.directory.in.h:2
+#, fuzzy
+msgid "Session Management Settings"
+msgstr "È­¸é º¸È£±â ¼³Á¤"
+
+#: capplets/desktop-links/UIOptions.directory.in.h:1
+msgid "Configure the global settings of your GNOME applications"
+msgstr "±×³ğ ÇÁ·Î±×·¥µéÀÇ ÀüÃ¼ ¼¼ÆÃ ¸ÂÃß±â"
+
+#: capplets/desktop-links/UIOptions.directory.in.h:2
+msgid "User Interface"
+msgstr "»ç¿ëÀÚ ÀÎÅÍÆäÀÌ½º ¼±ÅÃ»çÇ×"
 
 #: capplets/file-types/file-types-capplet-dialogs.c:387
 #, fuzzy
@@ -464,10 +514,103 @@ msgstr "È®ÀåÀÚ"
 msgid "Default Action"
 msgstr "±×³ğ ÆíÁı±â ¼±ÅÃ"
 
+#: capplets/file-types/file-types-capplet.desktop.in.h:1
+msgid "File Types and Programs"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet.desktop.in.h:2
+msgid "Specify which programs are used to open or view each file type"
+msgstr ""
+
 #: capplets/file-types/file-types-icon-entry.c:381
 #, fuzzy
 msgid "Select an icon"
 msgstr "¾ÆÀÌÄÜ ¼±ÅÃ..."
+
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:238
+msgid "Gnome editor"
+msgstr "±×³ğ ÆíÁı±â"
+
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:249
+msgid "Run In Terminal"
+msgstr "ÅÍ¹Ì³Î¿¡¼­ ½ÇÇà"
+
+#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:1
+msgid "Choose the editor that is invoked by gnome-edit"
+msgstr "gnome-edit°¡ »ç¿ëÇÒ ÆíÁı±â ¼±ÅÃ"
+
+#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:2
+msgid "Default Editor"
+msgstr "±×³ğ ÆíÁı±â ¼±ÅÃ"
+
+#: capplets/keyboard-properties/keyboard-properties.c:262
+msgid "Keyboard bell"
+msgstr "Å°º¸µå »à¼Ò¸®"
+
+#: capplets/keyboard-properties/keyboard-properties.c:270
+msgid "Volume"
+msgstr "Å©±â"
+
+#: capplets/keyboard-properties/keyboard-properties.c:273
+msgid "Pitch (Hz)"
+msgstr "Áøµ¿¼ö (Çì¸£Âê)"
+
+#: capplets/keyboard-properties/keyboard-properties.c:276
+msgid "Duration (ms)"
+msgstr "±æÀÌ (ÃµºĞÀÇ ÀÏÃÊ)"
+
+#: capplets/keyboard-properties/keyboard-properties.c:288
+msgid "Test"
+msgstr "Å×½ºÆ®"
+
+#: capplets/keyboard-properties/keyboard-properties.c:306
+msgid "Keyboard repeat rate"
+msgstr "¹İº¹Á¤µµ"
+
+#: capplets/keyboard-properties/keyboard-properties.c:316
+msgid "Enable auto-repeat"
+msgstr "ÀÚµ¿¹İº¹ÇÏ±â"
+
+#: capplets/keyboard-properties/keyboard-properties.c:325
+msgid "Repeat rate"
+msgstr "¹İº¹Á¤µµ"
+
+#: capplets/keyboard-properties/keyboard-properties.c:328
+msgid "Repeat Delay"
+msgstr "¹İº¹ Áö¿¬"
+
+#: capplets/keyboard-properties/keyboard-properties.c:330
+msgid "Keyboard click"
+msgstr "Å°º¸µå ´©¸¦¶§ ¼Ò¸®"
+
+#: capplets/keyboard-properties/keyboard-properties.c:339
+msgid "Click on keypress"
+msgstr "´©¸¦¶§ ¼Ò¸® ³»±â"
+
+#: capplets/keyboard-properties/keyboard-properties.c:348
+msgid "Click volume"
+msgstr "´©¸¦¶§ ¼Ò¸® Å©±â"
+
+#: capplets/keyboard-properties/keyboard-properties.c:359
+msgid "Test settings"
+msgstr "¼³Á¤ Å×½ºÆ®"
+
+#: capplets/keyboard-properties/keyboard-properties.c:466
+msgid ""
+"an initialization error occurred while starting "
+"'keyboard-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"'keyboard-properties-capplet'À» ½ÃÀÛÇÏ´Â µ¥ ÃÊ±âÈ­ ¹®Á¦ ¹ß»ı.\n"
+"ÁßÁö...\n"
+
+#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:1
+msgid "Keyboard"
+msgstr "ÀÚÆÇ"
+
+#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:2
+msgid "Keyboard Properties"
+msgstr "ÀÚÆÇ ¼Ó¼º"
 
 #: capplets/mouse-properties/mouse-properties.c:267
 msgid "Mouse buttons"
@@ -531,6 +674,14 @@ msgstr ""
 "'mouse-properties-capplet'À» ½ÃÀÛÇÏ´Â µ¥ ÃÊ±âÈ­ ¹®Á¦ ¹ß»ı.\n"
 "ÁßÁö...\n"
 
+#: capplets/mouse-properties/mouse-properties.desktop.in.h:1
+msgid "Mouse"
+msgstr "¸¶¿ì½º ¼³Á¤"
+
+#: capplets/mouse-properties/mouse-properties.desktop.in.h:2
+msgid "Mouse Properties"
+msgstr "¸¶¿ì½º ¼³Á¤"
+
 #: capplets/screensaver-properties/callbacks.c:102
 msgid "Require Password"
 msgstr "¾ÏÈ£ ÇÊ¿ä"
@@ -561,942 +712,6 @@ msgstr "¾Æ¹«°Å³ª ¸ÂÃß±â"
 #, c-format
 msgid "%s Settings..."
 msgstr "%s ¼³Á¤..."
-
-#: capplets/screensaver-properties/screensaver-dialog.c:46
-msgid "About:"
-msgstr "ÀÌ ÇÁ·Î±×·¥Àº:"
-
-#: capplets/screensaver-properties/screensaver-dialog.c:51
-msgid "Author:"
-msgstr "°³¹ßÀÚ:"
-
-#: capplets/screensaver-properties/screensaver-dialog.c:61
-msgid "Author: UNKNOWN"
-msgstr "°³¹ßÀÚ: ¾Ë¼ö ¾øÀ½"
-
-#: capplets/screensaver-properties/screensaver-dialog.c:78
-msgid "Settings"
-msgstr "¼³Á¤"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:38
-msgid "RANDOM SCREENSAVER"
-msgstr "È­¸éº¸È£±â ¾Æ¹«°Å³ª"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:49
-msgid "Screen Saver"
-msgstr "È­¸é º¸È£±â"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:61
-msgid ""
-"Pressing this button will popup a dialogbox that will help you setup the "
-"current screensaver."
-msgstr "ÀÌ ¹öÆ°À» ´©¸£¸é ÇöÀç È­¸éº¸È£±âÀÇ ¼Â¾÷À» µµ¿ÍÁÖ´Â ´ëÈ­Ã¢ÀÌ ³ª¿É´Ï´Ù."
-
-#. set up the initial frame, and get a vbox in which to pack things.
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:88
-msgid "Screen Saver Settings"
-msgstr "È­¸é º¸È£±â ¼³Á¤"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:96
-msgid "Start After "
-msgstr "¾ó¸¶ ÈÄ¿¡ ½ÃÀÛ:"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:102
-msgid " Minutes."
-msgstr " ºĞ."
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:117
-msgid "Priority:"
-msgstr "¿ì¼±¼øÀ§:"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:124
-msgid "Low "
-msgstr "³·À½"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:126
-msgid " Normal"
-msgstr "º¸Åë"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:137
-msgid "Shutdown monitor "
-msgstr "¸ğ´ÏÅÍ ¼Ë´Ù¿î"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:139
-msgid " minutes after screen saver has started."
-msgstr " ºĞ (È­¸éº¸È£±â°¡ ½ÃÀÛÇÑ ÈÄ·ÎºÎÅÍ)"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:152
-msgid "Screen Saver Demo"
-msgstr "È­¸é º¸È£±â µ¥¸ğ"
-
-#: capplets/keyboard-properties/keyboard-properties.c:262
-msgid "Keyboard bell"
-msgstr "Å°º¸µå »à¼Ò¸®"
-
-#: capplets/keyboard-properties/keyboard-properties.c:270
-msgid "Volume"
-msgstr "Å©±â"
-
-#: capplets/keyboard-properties/keyboard-properties.c:273
-msgid "Pitch (Hz)"
-msgstr "Áøµ¿¼ö (Çì¸£Âê)"
-
-#: capplets/keyboard-properties/keyboard-properties.c:276
-msgid "Duration (ms)"
-msgstr "±æÀÌ (ÃµºĞÀÇ ÀÏÃÊ)"
-
-#: capplets/keyboard-properties/keyboard-properties.c:288
-msgid "Test"
-msgstr "Å×½ºÆ®"
-
-#: capplets/keyboard-properties/keyboard-properties.c:306
-msgid "Keyboard repeat rate"
-msgstr "¹İº¹Á¤µµ"
-
-#: capplets/keyboard-properties/keyboard-properties.c:316
-msgid "Enable auto-repeat"
-msgstr "ÀÚµ¿¹İº¹ÇÏ±â"
-
-#: capplets/keyboard-properties/keyboard-properties.c:325
-msgid "Repeat rate"
-msgstr "¹İº¹Á¤µµ"
-
-#: capplets/keyboard-properties/keyboard-properties.c:328
-msgid "Repeat Delay"
-msgstr "¹İº¹ Áö¿¬"
-
-#: capplets/keyboard-properties/keyboard-properties.c:330
-msgid "Keyboard click"
-msgstr "Å°º¸µå ´©¸¦¶§ ¼Ò¸®"
-
-#: capplets/keyboard-properties/keyboard-properties.c:339
-msgid "Click on keypress"
-msgstr "´©¸¦¶§ ¼Ò¸® ³»±â"
-
-#: capplets/keyboard-properties/keyboard-properties.c:348
-msgid "Click volume"
-msgstr "´©¸¦¶§ ¼Ò¸® Å©±â"
-
-#: capplets/keyboard-properties/keyboard-properties.c:359
-msgid "Test settings"
-msgstr "¼³Á¤ Å×½ºÆ®"
-
-#: capplets/keyboard-properties/keyboard-properties.c:466
-msgid ""
-"an initialization error occurred while starting "
-"'keyboard-properties-capplet'.\n"
-"aborting...\n"
-msgstr ""
-"'keyboard-properties-capplet'À» ½ÃÀÛÇÏ´Â µ¥ ÃÊ±âÈ­ ¹®Á¦ ¹ß»ı.\n"
-"ÁßÁö...\n"
-
-#: capplets/sound-properties/sound-properties.c:97
-msgid ""
-"an initialization error occurred while starting 'sound-properties-capplet'."
-msgstr "'sound-properties-capplet'À» ½ÃÀÛÇÏ´Â µ¥ ÃÊ±âÈ­ ¹®Á¦ ¹ß»ı."
-
-#: capplets/sound-properties/sound-properties.c:188
-msgid "Event"
-msgstr "ÀÌº¥Æ®"
-
-#: capplets/sound-properties/sound-properties.c:189
-msgid "File to Play"
-msgstr "¼Ò¸®³¾ ÆÄÀÏ"
-
-#: capplets/sound-properties/sound-properties.c:243
-msgid "Enable"
-msgstr "»ç¿ëÇÏ±â"
-
-#: capplets/sound-properties/sound-properties.c:250
-msgid "Enable sound server startup"
-msgstr "»ç¿îµå ¼­¹ö ½ÃÀÛÇÏ±â"
-
-#: capplets/sound-properties/sound-properties.c:258
-msgid "Sounds for events"
-msgstr "È¿°úÀ½"
-
-#: capplets/sound-properties/sound-properties.c:279
-msgid "General"
-msgstr "ÀÏ¹İ"
-
-#: capplets/sound-properties/sound-properties.c:286
-msgid "Select sound file"
-msgstr "¼Ò¸® ÆÄÀÏ ¼±ÅÃ"
-
-#: capplets/sound-properties/sound-properties.c:325
-msgid "Play"
-msgstr "¼Ò¸® ³»±â"
-
-#: capplets/sound-properties/sound-properties.c:336
-msgid "Sound Events"
-msgstr "¼Ò¸® ÀÌº¥Æ®"
-
-#: capplets/sound-properties/sound-properties.c:355
-msgid ""
-"This copy of the GNOME control center was not compiled with sound support"
-msgstr "ÀÌ ±×³ğ Á¶Á¾¼¾ÅÍ´Â ¼Ò¸® Áö¿ø ±â´ÉÀÌ ÄÄÆÄÀÏ °úÁ¤¿¡¼­ ºüÁ³½À´Ï´Ù."
-
-#: capplets/sound-properties/sound-properties.c:748
-msgid "The sound file for this event does not exist."
-msgstr "ÀÌ ÀÌº¥Æ®¿¡ ´ëÇÑ »ç¿îµå ÆÄÀÏÀÌ ¾ø½À´Ï´Ù."
-
-#: capplets/sound-properties/sound-properties.c:750
-msgid ""
-"The sound file for this event does not exist.\n"
-"You may want to install the gnome-audio package\n"
-"for a set of default sounds."
-msgstr ""
-"ÀÌ ÀÌº¥Æ®¿¡ ´ëÇÑ »ç¿îµå ÆÄÀÏÀÌ ¾ø½À´Ï´Ù.\n"
-"±âº»ÀûÀÎ ¼Ò¸®°¡ µé¾î ÀÖ´Â gnome-audio ÆĞÅ°Áö¸¦\n"
-"¼³Ä¡ÇØ¾ß ÇÒ °ÍÀÔ´Ï´Ù."
-
-#: capplets/theme-switcher/demo.c:50
-msgid "One"
-msgstr "ÇÏ³ª"
-
-#: capplets/theme-switcher/demo.c:50
-msgid "Two"
-msgstr "µÑ"
-
-# ÀÌ·± ¸ÚÁø À¯¸ğ¾î¸¦ ¾î¶»°Ô ¹ø¿ªÇÏ¶õ ¸»ÀÎ°¡?
-#. just 8 short names that will serve as samples for titles in demo
-#: capplets/theme-switcher/demo.c:52
-msgid "Eenie"
-msgstr "Eenie"
-
-#: capplets/theme-switcher/demo.c:52
-msgid "Meenie"
-msgstr "Meenie"
-
-#: capplets/theme-switcher/demo.c:53
-msgid "Mynie"
-msgstr "Mynie"
-
-#: capplets/theme-switcher/demo.c:53
-msgid "Moe"
-msgstr "Moe"
-
-#: capplets/theme-switcher/demo.c:54
-msgid "Catcha"
-msgstr "Catcha"
-
-#: capplets/theme-switcher/demo.c:54
-msgid "Tiger"
-msgstr "Tiger"
-
-#: capplets/theme-switcher/demo.c:55
-msgid "By Its"
-msgstr "By Its"
-
-#: capplets/theme-switcher/demo.c:55
-msgid "Toe"
-msgstr "Toe"
-
-#: capplets/theme-switcher/demo.c:114
-msgid "Selected themes from above will be tested by previewing here."
-msgstr "À§¿¡¼­ °í¸¥ Å×¸¶´Â ¿©±â¼­ ¹Ì¸® Å×½ºÆ®ÇÒ ¼ö ÀÖ½À´Ï´Ù."
-
-#. column one
-#: capplets/theme-switcher/demo.c:119
-msgid "Sample Button"
-msgstr "¿¹Á¦ ¹öÆ°"
-
-#: capplets/theme-switcher/demo.c:123
-msgid "Sample Check Button"
-msgstr "¿¹Á¦ Ã¼Å©¹öÆ°"
-
-#: capplets/theme-switcher/demo.c:128
-msgid "Sample Text Entry Field"
-msgstr "¿¹Á¦ ÅØ½ºÆ® ¿£Æ®¸® ÇÊµå"
-
-#: capplets/theme-switcher/demo.c:139
-msgid "Submenu"
-msgstr "¾Æ·¡ ¸Ş´º"
-
-#: capplets/theme-switcher/demo.c:146
-msgid "Item 1"
-msgstr "¾ÆÀÌÅÛ 1"
-
-#: capplets/theme-switcher/demo.c:149
-msgid "Another item"
-msgstr "¶Ç ¾ÆÀÌÅÛ"
-
-#: capplets/theme-switcher/demo.c:154
-msgid "Radio Button 1"
-msgstr "¶óµğ¿À ¹öÆ° 1"
-
-#: capplets/theme-switcher/demo.c:160
-msgid "Radio Button 2"
-msgstr "¶óµğ¿À ¹öÆ° 2"
-
-#: capplets/theme-switcher/gui.c:89
-#, c-format
-msgid ""
-"Error installing theme:\n"
-"'%s'\n"
-"%s"
-msgstr ""
-"Å×¸¶ ¼³Ä¡ÇÏ´Â µ¥ ¿À·ù:\n"
-"'%s'\n"
-"%s"
-
-#: capplets/theme-switcher/gui.c:120
-msgid "Select a theme to install"
-msgstr "¼³Ä¡ÇÒ Å×¸¶¸¦ ¼±ÅÃÇÏ¼¼¿ä"
-
-#: capplets/theme-switcher/gui.c:197
-msgid "Available Themes"
-msgstr "»ç¿ë°¡´ÉÇÑ Å×¸¶"
-
-#: capplets/theme-switcher/gui.c:221
-msgid ""
-"Auto\n"
-"Preview"
-msgstr ""
-"ÀÚµ¿À¸·Î\n"
-"¹Ì¸®º¸±â"
-
-#: capplets/theme-switcher/gui.c:233
-msgid ""
-"Install new\n"
-"theme..."
-msgstr ""
-"»õ·Î¿î Å×¸¶\n"
-"¼±ÅÃ..."
-
-#. Font selector.
-#.
-#: capplets/theme-switcher/gui.c:239
-msgid "User Font"
-msgstr "»ç¿ëÀÚ ÆùÆ®"
-
-#. FIXME - should really get this from X somehow
-#. for now we just assume default gtk font
-#: capplets/theme-switcher/gui.c:257
-msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
-msgstr ""
-"-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*,-*-gulim-medium-r-normal-"
-"-*-120-*-*-*-*-*-*,-*-kodig-medium-r-normal--*-120-*-*-*-*-*-*,-*-*-medium-r-"
-"normal--*-120-*-*-*-*-*-*,*"
-
-#: capplets/theme-switcher/gui.c:276
-msgid "Use custom font."
-msgstr "µû·Î ¼³Á¤ÇÑ ÆùÆ® »ç¿ë."
-
-#: capplets/theme-switcher/install.c:26
-msgid "Home directory doesn't exist!\n"
-msgstr "È¨ µğ·ºÅä¸®°¡ ¾ø½À´Ï´Ù!\n"
-
-#: capplets/theme-switcher/install.c:36
-msgid "Theme does not exist"
-msgstr "Å×¸¶°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù"
-
-#: capplets/theme-switcher/install.c:68
-#, c-format
-msgid "Command '%s' failed"
-msgstr "'%s' ¸í·É¾î°¡ ½ÇÆĞÇß½À´Ï´Ù"
-
-#: capplets/theme-switcher/install.c:73
-msgid "Unknown file format"
-msgstr "¾Ë ¼ö ¾ø´Â ÆÄÀÏ Çü½Ä"
-
-#: capplets/ui-properties/ui-properties.c:54
-msgid "Can detach and move toolbars"
-msgstr "µµ±¸»óÀÚ¸¦ ¶¼¾î¼­ ¿Å±æ ¼ö ÀÖµµ·Ï"
-
-#: capplets/ui-properties/ui-properties.c:59
-msgid "Toolbars have relieved border"
-msgstr "µµ±¸»óÀÚÀÇ Å×µÎ¸®°¡ µé¾î°¡ º¸ÀÌµµ·Ï"
-
-#: capplets/ui-properties/ui-properties.c:64
-msgid "Toolbar buttons have relieved border"
-msgstr "µµ±¸»óÀÚ ¹öÆ°ÀÇ Å×µÎ¸®°¡ µé¾î°¡ º¸ÀÌµµ·Ï"
-
-#: capplets/ui-properties/ui-properties.c:69
-msgid "Toolbars have line separators"
-msgstr "µµ±¸»óÀÚ¿¡¼­ ÁÙ ±¸ºĞÀÚ¸¦ ³ÖÀ½"
-
-#: capplets/ui-properties/ui-properties.c:74
-msgid "Toolbars have text labels"
-msgstr "µµ±¸»óÀÚ¿¡ ±ÛÀÚ ·¹ÀÌºíÀ» ´à"
-
-#: capplets/ui-properties/ui-properties.c:103
-msgid "Can detach and move menus"
-msgstr "¸Ş´º¸¦ ¶¼¾î¼­ ¿Å±æ ¼ö ÀÖµµ·Ï"
-
-#: capplets/ui-properties/ui-properties.c:108
-msgid "Menus have relieved border"
-msgstr "¸Ş´ºÀÇ Å×µÎ¸®°¡ µé¾î°¡ º¸ÀÌµµ·Ï"
-
-#: capplets/ui-properties/ui-properties.c:112
-msgid "Submenus can be torn off"
-msgstr "¾Æ·¡ ¸Ş´º¸¦ ¶¼¾î³¾ ¼ö ÀÖµµ·Ï"
-
-#: capplets/ui-properties/ui-properties.c:116
-msgid "Menu items have icons"
-msgstr "¸Ş´º¿¡ ¾ÆÀÌÄÜ »ç¿ë"
-
-#: capplets/ui-properties/ui-properties.c:140
-msgid "Statusbar is interactive when possible"
-msgstr "°¡´ÉÇÏ¸é »óÅÂ¹Ù°¡ interactiveÇÏµµ·Ï"
-
-#: capplets/ui-properties/ui-properties.c:145
-msgid "Statusbar progress meter is on the right"
-msgstr "»óÅÂ¸·´ë¸¦ ¿À¸¥ÂÊ¿¡¼­ºÎÅÍ ÁøÇà"
-
-#: capplets/ui-properties/ui-properties.c:162
-msgid "Menu Options"
-msgstr "¸Ş´º ¼±ÅÃ»çÇ×"
-
-#: capplets/ui-properties/ui-properties.c:163
-msgid "Statusbar Options"
-msgstr "»óÅÂ¸·´ë ¼±ÅÃ»çÇ×"
-
-#: capplets/ui-properties/ui-properties.c:164
-msgid "Toolbar Options"
-msgstr "µµ±¸»óÀÚ ¼±ÅÃ»çÇ×"
-
-#: capplets/ui-properties/ui-properties.c:170
-msgid "Dialog buttons"
-msgstr "¸¶¿ì½º ¹öÆ°"
-
-#: capplets/ui-properties/ui-properties.c:171
-msgid "Default value"
-msgstr "±âº»°ª"
-
-#: capplets/ui-properties/ui-properties.c:172
-msgid "Spread buttons out"
-msgstr "¹öÆ°À» ÁÖÀ§¿¡ °ñ°í·ç ¹èÄ¡"
-
-#: capplets/ui-properties/ui-properties.c:173
-msgid "Put buttons on edges"
-msgstr "¹öÆ°À» ³¡ºÎºĞ¿¡ ¹èÄ¡"
-
-#: capplets/ui-properties/ui-properties.c:174
-msgid "Left-justify buttons"
-msgstr "¿ŞÂÊÀ¸·Î Ä¡¿ìÃÄÁø ¹öÆ°"
-
-#: capplets/ui-properties/ui-properties.c:175
-msgid "Right-justify buttons"
-msgstr "¿À¸¥ÂÊÀ¸·Î Ä¡¿ìÃÄÁø ¹öÆ°"
-
-#: capplets/ui-properties/ui-properties.c:180
-msgid "Dialog buttons have icons"
-msgstr "´ëÈ­Ã¢ÀÇ ¹öÆ°¿¡ ¾ÆÀÌÄÜ »ç¿ë"
-
-#: capplets/ui-properties/ui-properties.c:185
-msgid "Use statusbar instead of dialog when possible"
-msgstr "°¡´ÉÇÑ °æ¿ì¿¡ ´ëÈ­Ã¢ ´ë½Å¿¡ »óÅÂ¸·´ë¸¦ »ç¿ë"
-
-#: capplets/ui-properties/ui-properties.c:207
-msgid "Dialog position"
-msgstr "À§Ä¡"
-
-#: capplets/ui-properties/ui-properties.c:208
-msgid "Let window manager decide"
-msgstr "Ã¢ °ü¸®ÀÚ°¡ °áÁ¤"
-
-#: capplets/ui-properties/ui-properties.c:209
-msgid "Center of the screen"
-msgstr "È­¸éÀÇ Áß¾Ó"
-
-#: capplets/ui-properties/ui-properties.c:210
-msgid "At the mouse pointer"
-msgstr "¸¶¿ì½º Æ÷ÀÎÅÍ À§Ä¡"
-
-#: capplets/ui-properties/ui-properties.c:215
-msgid "Dialog hints"
-msgstr "´ëÈ­Ã¢ ÈùÆ®"
-
-#: capplets/ui-properties/ui-properties.c:216
-msgid "Dialogs are like other windows"
-msgstr "´ëÈ­Ã¢Àº ´Ù¸¥ Ã¢°ú ¸¶Âù°¡Áö"
-
-#: capplets/ui-properties/ui-properties.c:217
-msgid "Dialogs are treated specially by window manager"
-msgstr "´ëÈ­Ã¢Àº Ã¢ °ü¸®ÀÚ¿¡ ÀÇÇØ Æ¯º°Ãë±Ş"
-
-#: capplets/ui-properties/ui-properties.c:222
-msgid "Place dialogs over application window when possible"
-msgstr "°¡´ÉÇÑ °æ¿ì ´ëÈ­Ã¢À» ÇÁ·Î±×·¥ Ã¢ À§¿¡ À§Ä¡"
-
-#: capplets/ui-properties/ui-properties.c:243
-msgid "Dialog Layout"
-msgstr "´ëÈ­Ã¢ ¹èÄ¡"
-
-#: capplets/ui-properties/ui-properties.c:244
-msgid "Dialog Behavior"
-msgstr "´ëÈ­Ã¢ µ¿ÀÛ"
-
-#: capplets/ui-properties/ui-properties.c:250
-msgid "Default MDI Mode"
-msgstr "±âº» ´ÙÁß¹®¼­ÀÎÅÍÆäÀÌ½º ¸ğµå"
-
-#: capplets/ui-properties/ui-properties.c:251
-msgid "Notebook"
-msgstr "³ëÆ®ºÏ"
-
-#: capplets/ui-properties/ui-properties.c:252
-msgid "Toplevel"
-msgstr "º°µµÀÇ Ã¢"
-
-#: capplets/ui-properties/ui-properties.c:253
-msgid "Modal"
-msgstr "¸ğ´Ş"
-
-#: capplets/ui-properties/ui-properties.c:258
-msgid "MDI notebook tab position"
-msgstr "´ÙÁß¹®¼­ÀÎÅÍÆäÀÌ½º ³ëÆ®ºÏ ÅÇ À§Ä¡"
-
-#: capplets/ui-properties/ui-properties.c:259
-msgid "Left"
-msgstr "¿ŞÂÊ"
-
-#: capplets/ui-properties/ui-properties.c:260
-msgid "Right"
-msgstr "¿À¸¥ÂÊ"
-
-#: capplets/ui-properties/ui-properties.c:261
-msgid "Top"
-msgstr "À§"
-
-#: capplets/ui-properties/ui-properties.c:262
-msgid "Bottom"
-msgstr "¾Æ·¡"
-
-#: capplets/ui-properties/ui-properties.c:277
-msgid "GNOME MDI Options"
-msgstr "±×³ğ ´ÙÁß¹®¼­ÀÎÅÍÆäÀÌ½º ¼±ÅÃ»çÇ×"
-
-#: capplets/url-properties/url-properties.c:51
-msgid "Error initializing the `url-properties' capplet."
-msgstr "`url-properties' Ä³ÇÃ¸´ ÃÊ±âÈ­ ¿À·ù."
-
-#: capplets/url-properties/url-properties.c:76
-msgid "Protocol"
-msgstr "ÇÁ·ÎÅäÄİ"
-
-#: capplets/url-properties/url-properties.c:76
-msgid "Command"
-msgstr "¸í·É¾î"
-
-#: capplets/url-properties/url-properties.c:93
-msgid "handler:"
-msgstr "ÇÚµé·¯:"
-
-#. set some commonly used handlers
-#: capplets/url-properties/url-properties.c:103
-msgid "Netscape"
-msgstr "³İ½ºÄÉÀÌÇÁ"
-
-#: capplets/url-properties/url-properties.c:108
-msgid "Netscape (new window)"
-msgstr "³İ½ºÄÉÀÌÇÁ (»õ·Î¿î Ã¢)"
-
-#: capplets/url-properties/url-properties.c:121
-msgid "Help browser"
-msgstr "µµ¿ò¸» º¸±â ÇÁ·Î±×·¥"
-
-#: capplets/url-properties/url-properties.c:127
-msgid "Help browser (new window)"
-msgstr "µµ¿ò¸» º¸±â ÇÁ·Î±×·¥ (»õ·Î¿î Ã¢)"
-
-#: capplets/url-properties/url-properties.c:140
-msgid "Set"
-msgstr "¼³Á¤"
-
-#: capplets/url-properties/url-properties.c:148
-msgid "Remove"
-msgstr "»èÁ¦"
-
-#: capplets/wm-properties/wm-properties-capplet.c:142
-#, c-format
-msgid ""
-"Starting %s\n"
-"(%d seconds left before operation times out)"
-msgstr ""
-"%s ½ÃÀÛ\n"
-"(Á¦ÇÑ½Ã°£ÀÌ %dÃÊ ³²¾Ò½À´Ï´Ù)"
-
-#: capplets/wm-properties/wm-properties-capplet.c:303
-#, c-format
-msgid "%s (Current)"
-msgstr "%s (ÇöÀç)"
-
-#: capplets/wm-properties/wm-properties-capplet.c:306
-#, c-format
-msgid "Run Configuration Tool for %s"
-msgstr "%sÀÇ ¼³Á¤ µµ±¸ ½ÃÀÛ"
-
-#: capplets/wm-properties/wm-properties-capplet.c:317
-msgid " (Not found)"
-msgstr " (Ã£À» ¼ö ¾øÀ½)"
-
-#: capplets/wm-properties/wm-properties-capplet.c:356
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\tAnother window manager is already running and could not be killed\n"
-msgstr ""
-"wm-properties-capplet: Ã¢ °ü¸®ÀÚ¸¦ ÃÊ±âÈ­ÇÒ ¼ö ¾ø½À´Ï´Ù.\n"
-"\tÀÌ¹Ì ´Ù¸¥ Ã¢ °ü¸®ÀÚ°¡ ½ÇÇàÁßÀÌ°í Áß´Ü½ÃÅ³ ¼ö ¾ø½À´Ï´Ù\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:360
-#, c-format
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\t'%s' didn't start\n"
-msgstr ""
-"wm-properties-capplet: Ã¢ °ü¸®ÀÚ¸¦ ÃÊ±âÈ­ÇÒ ¼ö ¾ø½À´Ï´Ù.\n"
-"\t'%s'ÀÌ(°¡) ½ÃÀÛÇÏÁö ¾Ê½À´Ï´Ù\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:413
-msgid "Previous window manager did not die\n"
-msgstr "ÀÌÀüÀÇ Ã¢ °ü¸®ÀÚ°¡ Á×Áö ¾Ê¾Ò½À´Ï´Ù\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:446
-#, c-format
-msgid ""
-"Could not start '%s'.\n"
-"Falling back to previous window manager '%s'\n"
-msgstr ""
-"'%s'¸¦ ½ÃÀÛÇÒ ¼ö ¾ø½À´Ï´Ù.\n"
-"´Ù½Ã ÀÌÀü Ã¢°ü¸®ÀÚ '%s'¿¡°Ô µ¹¾Æ°©´Ï´Ù.\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:477
-msgid ""
-"Could not start fallback window manager.\n"
-"Please run a window manager manually. You can\n"
-"do this by selecting \"Run Program\" in the\n"
-"foot menu\n"
-msgstr ""
-"µ¹¾Æ°¥ Ã¢ °ü¸®ÀÚ¸¦ ½ÃÀÛÇÒ ¼ö ¾ø½À´Ï´Ù.\n"
-"¼öµ¿À¸·Î Ã¢ °ü¸®ÀÚ¸¦ ½ÇÇàÇÏ¼¼¿ä.  ¹ß¹Ù´Ú\n"
-"¸Ş´º¿¡¼­ \"Run Program\"À» ¼±ÅÃÇÏ¸é\n"
-"¼öµ¿À¸·Î ½ÇÇàÇÒ ¼ö ÀÖ½À´Ï´Ù.\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:502
-#: capplets/wm-properties/wm-properties-capplet.c:868
-#: capplets/wm-properties/wm-properties-capplet.c:875
-#: capplets/wm-properties/wm-properties-capplet.c:1021
-msgid "OK"
-msgstr "È®ÀÎ"
-
-#: capplets/wm-properties/wm-properties-capplet.c:520
-msgid ""
-"Your current window manager has been changed. In order for\n"
-"this change to be saved, you will need to save your current\n"
-"session. You can do so immediately by selecting the \"Save session\n"
-"now\" below, or you can save your session later.  This can be\n"
-"done either selecting \"Save Current Session\" under \"Settings\"\n"
-"in the main menu, or by turning on \"Save Current Setup\" when\n"
-"you log out.\n"
-msgstr ""
-"ÇöÀç Ã¢ °ü¸®ÀÚ°¡ ¹Ù²î¾ú½À´Ï´Ù.  ÀÌ ¹Ù²ï »çÇ×À»\n"
-"ÀúÀåÇÏ·Á¸é, ÇöÀç ¼¼¼ÇÀ» ÀúÀåÇØ¾ß ÇÕ´Ï´Ù.  ¾Æ·¡ÀÇ \"Áö±İ\n"
-"¼¼¼Ç ÀúÀåÇÏ±â\"¸¦ ¼±ÅÃÇÏ¸é Áö±İ Áï½Ã ÀúÀåÇÒ ¼ö ÀÖ°í,\n"
-"³ªÁß¿¡ ¼¼¼ÇÀ» ÀúÀåÇÒ ¼öµµ ÀÖ½À´Ï´Ù.  ¼¼¼Ç ÀúÀåÀº ÁÖ ¸Ş´ºÀÇ\n"
-"\"¼³Á¤\" ¾Æ·¡ÀÇ \"ÇöÀç µ¥½ºÅ©Å¾ ÀúÀåÇÏ±â\"¿¡¼­ ÇÒ ¼ö ÀÖ°í, ¾Æ´Ï¸é\n"
-"·Î±×¾Æ¿ô½Ã¿¡ \"ÇöÀç µ¥½ºÅ©Å¾ ÀúÀåÇÏ±â\"À» ÄÒ ´ÙÀ½¿¡ ·Î±×¾Æ¿ôÇÏ¸é\n"
-"ÀúÀåµË´Ï´Ù.\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:527
-msgid "Save Session Later"
-msgstr "³ªÁß¿¡ ¼¼¼Ç ÀúÀåÇÏ±â"
-
-#: capplets/wm-properties/wm-properties-capplet.c:527
-msgid "Save Session Now"
-msgstr "Áö±İ ¼¼¼Ç ÀúÀåÇÏ±â"
-
-#: capplets/wm-properties/wm-properties-capplet.c:530
-msgid ""
-"Your current window manager has been changed. In order for\n"
-"this change to be saved, you will need to save your current\n"
-"session. This can be done by either selecting \"Save Current Session\"\n"
-"under \"Settings\" in the main menu, or by turning on\n"
-"\"Save Current Setup\" when you log out.\n"
-msgstr ""
-"ÇöÀç Ã¢ °ü¸®ÀÚ°¡ ¹Ù²î¾ú½À´Ï´Ù.  ÀÌ ¹Ù²ï »çÇ×À»\n"
-"ÀúÀåÇÏ·Á¸é, ÇöÀç ¼¼¼ÇÀ» ÀúÀåÇØ¾ß ÇÕ´Ï´Ù.  ¼¼¼Ç ÀúÀåÀº ÁÖ\n"
-"¸Ş´ºÀÇ \"¼³Á¤\" ¾Æ·¡ÀÇ \"ÇöÀç µ¥½ºÅ©Å¾ ÀúÀåÇÏ±â\"¿¡¼­ ÇÒ ¼ö ÀÖ°í,\n"
-"¾Æ´Ï¸é ·Î±×¾Æ¿ô½Ã¿¡ \"ÇöÀç µ¥½ºÅ©Å¾ ÀúÀå\"À» Ã¼Å©ÇÑ ´ÙÀ½¿¡\n"
-"·Î±×¾Æ¿ôÇÏ¸é ÀúÀåµË´Ï´Ù.\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:757
-msgid "Add New Window Manager"
-msgstr "»õ Ã¢ °ü¸®ÀÚ ½ÃÀÛ"
-
-#: capplets/wm-properties/wm-properties-capplet.c:771
-msgid "Name:"
-msgstr "ÀÌ¸§:"
-
-#: capplets/wm-properties/wm-properties-capplet.c:784
-msgid "Command:"
-msgstr "¸í·É¾î:"
-
-#: capplets/wm-properties/wm-properties-capplet.c:797
-msgid "Configuration Command:"
-msgstr "¼³Á¤ ¸í·É¾î:"
-
-#: capplets/wm-properties/wm-properties-capplet.c:816
-msgid "Window manager is session managed"
-msgstr "Ã¢ °ü¸®ÀÚ°¡ ¼¼¼Ç °ü¸®µË´Ï´Ù."
-
-#: capplets/wm-properties/wm-properties-capplet.c:866
-msgid "Name cannot be empty"
-msgstr "ÀÌ¸§Àº ºñ¾îÀÖÀ¸¸é ¾È µË´Ï´Ù"
-
-#: capplets/wm-properties/wm-properties-capplet.c:873
-msgid "Command cannot be empty"
-msgstr "¸í·É¾î´Â ºñ¾îÀÖÀ¸¸é ¾È µË´Ï´Ù"
-
-#: capplets/wm-properties/wm-properties-capplet.c:922
-#: capplets/wm-properties/wm-properties-capplet.c:964
-msgid "Edit Window Manager"
-msgstr "Ã¢ °ü¸®ÀÚ ÆíÁı"
-
-#: capplets/wm-properties/wm-properties-capplet.c:1020
-msgid "You cannot delete the current Window Manager"
-msgstr "ÇöÀç Ã¢°ü¸®ÀÚ¸¦ Áö¿ï ¼ö ¾ø½À´Ï´Ù"
-
-#: capplets/wm-properties/wm-properties-capplet.c:1093
-msgid "Edit..."
-msgstr "ÆíÁı..."
-
-#: capplets/wm-properties/wm-properties-capplet.c:1098
-msgid "Delete"
-msgstr "Áö¿ì±â"
-
-#: capplets/wm-properties/wm-properties-capplet.c:1134
-msgid ""
-"an initialization error occurred while starting 'wm-properties-capplet'.\n"
-"aborting...\n"
-msgstr ""
-"'wm-properties-capplet'À» ½ÃÀÛÇÏ´Â µ¥ ÃÊ±âÈ­ ¹®Á¦ ¹ß»ı.\n"
-"ÁßÁö...\n"
-
-#: control-center/callbacks.c:102 control-center/gnomecc.desktop.in.h:1
-msgid "GNOME Control Center"
-msgstr "±×³ğ Á¶Á¾ÆÇ"
-
-#: control-center/callbacks.c:105
-msgid "Desktop Properties manager."
-msgstr "µ¥½ºÅ©Å¾ ¼Ó¼º °ü¸®ÀÚ."
-
-#: control-center/capplet-manager.c:179
-msgid "Try"
-msgstr "½Ãµµ"
-
-#: control-center/capplet-manager.c:185
-msgid "Revert"
-msgstr "µÇµ¹¸®±â"
-
-#. set the help item
-#: control-center/capplet-manager.c:208
-#, c-format
-msgid "Help with '%s' settings"
-msgstr "'%s'¼³Á¤ µµ¿ò¸»"
-
-#: control-center/capplet-widget-libs.c:46
-msgid "id of the capplet -- assigned by the control-center"
-msgstr "Ä³ÇÃ¸´ ¾ÆÀÌµğ -- Á¶Á¾ÆÇÀ¸·Î ÁöÁ¤ÇÔ"
-
-#: control-center/capplet-widget-libs.c:46
-msgid "ID"
-msgstr "¾ÆÀÌµğ"
-
-#: control-center/capplet-widget-libs.c:47
-msgid "Multi-capplet id."
-msgstr "¸ÖÆ¼-Ä³ÇÃ¸´ ¾ÆÀÌµğ."
-
-#: control-center/capplet-widget-libs.c:47
-msgid "CAPID"
-msgstr "Ä³ÇÃ¸´¾ÆÀÌµğ"
-
-#: control-center/capplet-widget-libs.c:48
-msgid "X ID of the socket it's plugged into"
-msgstr "ÇÃ·¯±×ÀÎµÈ ¼ÒÄÏÀÇ X ¾ÆÀÌµğ"
-
-#: control-center/capplet-widget-libs.c:48
-msgid "XID"
-msgstr "X¾ÆÀÌµğ"
-
-#: control-center/capplet-widget-libs.c:49
-msgid "IOR of the control-center"
-msgstr "ÄÜÆ®·Ñ ¼¾ÅÍÀÇ IOR"
-
-#: control-center/capplet-widget-libs.c:49
-msgid "IOR"
-msgstr "IOR"
-
-#: control-center/capplet-widget-libs.c:50
-msgid "Initialize session settings"
-msgstr "¼¼¼Ç ¼³Á¤ ÃÊ±âÈ­"
-
-#: control-center/capplet-widget-libs.c:51
-msgid "Ignore default action.  Used for custom init-session cases"
-msgstr "±âº» µ¿ÀÛ ¹«½Ã.  ¼¼¼ÇÀ» ÃÊ±âÈ­ÇÏ´Â Æ¯¼öÇÑ °æ¿ì »ç¿ëµÊ"
-
-#: control-center/capplet-widget.c:272
-msgid "Sorry, no help is available for these settings."
-msgstr "¹Ì¾ÈÇÕ´Ï´Ù. ÇöÀç »óÅÂ¿¡¼­ µµ¿ò¸»À» ÀÌ¿ëÇÒ ¼ö ¾ø½À´Ï´Ù."
-
-#: control-center/corba-glue.c:77
-msgid "capplet-command to be run."
-msgstr "½ÇÇàÇÒ Ä³ÇÃ¸´ ¸í·É."
-
-#: control-center/corba-glue.c:77
-msgid "CAPPLET"
-msgstr "<Ä³ÇÃ¸´>"
-
-#: control-center/main.c:36
-msgid "Help on control-center"
-msgstr "Á¶Á¤ ¼¾ÅÍÀÇ µµ¿ò¸»"
-
-#: control-center/main.c:36
-msgid "Help with the GNOME control-center."
-msgstr "±×³ğ Á¶Á¾ ¼¾ÅÍÀÇ µµ¿ò¸»."
-
-#: control-center/main.c:38
-msgid "Help with the current configuration page."
-msgstr "ÇöÀç ¼³Á¤ ÆäÀÌÁöÀÇ µµ¿ò¸»."
-
-#: control-center/main.c:41
-msgid "About"
-msgstr "ÀÌ ÇÁ·Î±×·¥Àº"
-
-#: control-center/main.c:41
-msgid "About the GNOME control-center."
-msgstr "±×³ğ Á¶Á¾ ¼¾ÅÍ¿¡ ´ëÇÏ¿©."
-
-#. we create the widgets
-#: control-center/main.c:69
-msgid "Warning:"
-msgstr "°æ°í:"
-
-#: control-center/main.c:69
-msgid "Discard all changes"
-msgstr "º¯°æ »çÇ× ¸ğµÎ ¹ö¸®±â"
-
-#. ...labels, etc
-#: control-center/main.c:78
-msgid ""
-"The following modules have had changes made, but not committed.  If you "
-"would like to edit them, please double click on the appropriate entry."
-msgstr ""
-"´ÙÀ½ ¸ğµâ¿¡¼­ º¯°æÇÑ »çÇ×ÀÌ ÀÖÁö¸¸, º¯°æ»çÇ×À» ÀúÀåÇÏÁö ¾Ê¾Ò½À´Ï´Ù.  ÀÌ "
-"¸ğµâ¿¡¼­ ÇÒ ÀÏÀÌ ÀÖÀ¸¸é ÇØ´ç ¸ğµâÇ×¸ñ¿¡ ´õºíÅ¬¸¯ÇÏ¼¼¿ä."
-
-#. create the app
-#: capplets/desktop-links/Gnome.directory.in.h:1 control-center/main.c:197
-#: control-center/splash.c:247
-msgid "Control Center"
-msgstr "Á¶Á¾ ¼¾ÅÍ"
-
-#: control-center/splash.c:48
-msgid "Operating System:"
-msgstr "¿î¿µ Ã¼Á¦:"
-
-#: control-center/splash.c:49
-msgid "Distribution Version:"
-msgstr "¹èÆ÷ÆÇ ¹öÁ¯:"
-
-#: control-center/splash.c:50
-msgid "Processor Type:"
-msgstr "ÇÁ·Î¼¼¼­ ÇüÅÂ:"
-
-#: control-center/splash.c:51
-msgid "User Name:"
-msgstr "»ç¿ëÀÚ ÀÌ¸§:"
-
-#: control-center/splash.c:52
-msgid "Host Name:"
-msgstr "È£½ºÆ® ÀÌ¸§:"
-
-#. This is about the only case where we'll put Unknown instead
-#. of simply not showing the info.
-#: control-center/splash.c:178
-msgid "Unknown"
-msgstr "¾Ë¼ö ¾øÀ½"
-
-#: control-center/gnomecc.desktop.in.h:2
-msgid "The GNOME configuration tool"
-msgstr "±×³ğ ¼³Á¤ ÇÁ·Î±×·¥"
-
-#: capplets/wm-properties/wm-properties.desktop.in.h:1
-msgid "Choose a window manager"
-msgstr "Ã¢ °ü¸®ÀÚ ¼±ÅÃ"
-
-#: capplets/wm-properties/wm-properties.desktop.in.h:2
-msgid "Window Manager"
-msgstr "Ã¢ °ü¸®ÀÚ"
-
-#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.h:1
-msgid "Enlightenment"
-msgstr "ÀÎ¶óÀÌÆ°¸ÕÆ®"
-
-#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.h:1
-msgid "Ice WM"
-msgstr "Ice WM"
-
-#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.h:1
-msgid "Scwm"
-msgstr "scwm"
-
-#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.h:1
-msgid "Window Maker"
-msgstr "À©µµ¿ì ¸ŞÀÌÄ¿"
-
-#: capplets/wm-properties/wm-desktops/twm.desktop.in.h:1
-msgid "twm"
-msgstr "twm"
-
-#: capplets/url-properties/url-properties.desktop.in.h:1
-msgid "Configure which programs are used to display URLs"
-msgstr "URLÀ» Ç¥½ÃÇÒ ¶§ »ç¿ëÇÒ ÇÁ·Î±×·¥ ¼±ÅÃ"
-
-#: capplets/url-properties/url-properties.desktop.in.h:2
-msgid "URL Handlers"
-msgstr "URL Ã³¸®"
-
-#: capplets/ui-properties/application.desktop.in.h:1
-msgid "Applications"
-msgstr "ÀÀ¿ë ÇÁ·Î±×·¥ ±âº»»çÇ×"
-
-#: capplets/ui-properties/application.desktop.in.h:2
-msgid "Sets the default feel of GNOME applications"
-msgstr "±×³ğ ÀÀ¿ë ÇÁ·Î±×·¥ÀÇ ±âº» »çÇ× °áÁ¤"
-
-#: capplets/ui-properties/dialogs.desktop.in.h:1
-msgid "Dialogs"
-msgstr "´ëÈ­»óÀÚ"
-
-#: capplets/ui-properties/mdi.desktop.in.h:1
-msgid "MDI"
-msgstr "¿©·¯¹®¼­"
-
-#: capplets/theme-switcher/theme-selector.desktop.in.h:1
-msgid "Select which desktop theme to use"
-msgstr "¾î¶² µ¥½ºÅ©Å¾ Å×¸¶¸¦ »ç¿ëÇÒ Áö ¼±ÅÃ"
-
-#: capplets/theme-switcher/theme-selector.desktop.in.h:2
-msgid "Theme Selector"
-msgstr "Å×¸¶ ¼±ÅÃ"
-
-#: capplets/sound-properties/sound-properties.desktop.in.h:1
-msgid "Configure GNOME's use of sound"
-msgstr "±×³ğ¿¡¼­ »ç¿ëÇÒ ¼Ò¸® ¼³Á¤"
-
-#: capplets/sound-properties/sound-properties.desktop.in.h:2
-msgid "Sound"
-msgstr "¼Ò¸®"
-
-#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:1
-msgid "Configure the settings of the screensaver"
-msgstr "È­¸é º¸È£±â ¼³Á¤"
-
-#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:2
-msgid "Screensaver"
-msgstr "È­¸é º¸È£±â"
 
 #: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:1
 msgid "3D Clock"
@@ -1670,7 +885,7 @@ msgid "Whales, dolphins and sharks swimming around, in 3D"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:1
-msgid " A show of objects interacting through attractive and repulsive forces."
+msgid "A show of objects interacting through attractive and repulsive forces."
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:2
@@ -1760,7 +975,7 @@ msgstr "ÀÌ ÇÁ·Î±×·¥Àº:"
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:13
 #: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:6
 #: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:8
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:4
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:5
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:13
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:9
 #: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:5
@@ -1798,12 +1013,13 @@ msgstr ""
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:8
 #: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:12
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:8
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:11
 #: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:7
 #: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:13
 #: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:16
-#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:7
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:8
 #: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:17
 #: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:12
 #: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:12
@@ -1878,14 +1094,14 @@ msgstr ""
 #: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:13
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:20
 #: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:11
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:18
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:12
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:17
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:14
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:23
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:19
 #: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:10
 #: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:17
 #: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:24
-#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:12
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:13
 #: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:23
 #: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:20
 #: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:20
@@ -1920,14 +1136,14 @@ msgstr "ÀÛ°Ô"
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:29
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:21
 #: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:12
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:19
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:13
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:18
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:24
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:20
 #: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:11
 #: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:18
 #: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:25
-#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:13
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:14
 #: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:18
 #: capplets/screensaver-properties/screensaver-desktops/Greynetic.desktop.in.h:12
 #: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:28
@@ -1942,10 +1158,6 @@ msgstr "ÀÛ°Ô"
 #: capplets/screensaver-properties/screensaver-desktops/Munch.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:19
 msgid "Speed of Motion."
-msgstr ""
-
-#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:31
-msgid "Ïî-áëèçêî"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:1
@@ -2056,13 +1268,13 @@ msgstr ""
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:17
 #: capplets/screensaver-properties/screensaver-desktops/Braid.desktop.in.h:8
 #: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:10
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:16
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:19
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:9
 #: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:14
 #: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:20
-#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:10
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:11
 #: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:18
 #: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:15
@@ -2315,16 +1527,10 @@ msgid "James Macnicol <J.Macnicol@student.anu.edu.au>"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:14
-msgid ""
-"James Macnicol <J.Macnicol@student.anu.edu.au>, Ïğåäîâ: Äèëÿí Ïàëàóçîâ "
-"<didopalauzov@uk2.net>"
-msgstr ""
-
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:15
 msgid "Lots of random bubbles grow until they pop."
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:17
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:16
 msgid "Simple"
 msgstr ""
 
@@ -2364,50 +1570,47 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:3
 #, fuzzy
+msgid "Change the number of seeds."
+msgstr "È­¸é º¸È£±â ¼³Á¤"
+
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:4
+#, fuzzy
 msgid "Coral"
 msgstr "º¸Åë"
 
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:5
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:6
 #, fuzzy
 msgid "Denser"
 msgstr "ÀÏ¹İ"
 
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:7
 msgid "Density"
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:7
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:9
 msgid "Frederick Roeber"
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:8
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:10
 msgid "Number of seeds"
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:11
 msgid "Seeds"
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:10
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:12
 msgid "Simulates coral growth"
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:11
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:13
 msgid "Simulates coral growth."
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:14
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:16
 #, fuzzy
 msgid "Thinner"
 msgstr "Tiger"
-
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:15
-msgid "Ïî-áúğçî"
-msgstr ""
-
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:16
-msgid "Ïğîìåíÿ áğîÿ íà ñåìåíàòà."
-msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Critical.desktop.in.h:1
 msgid "Critical"
@@ -2507,12 +1710,6 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:21
 msgid "Stephen Linhart, Ozymandias Desiderata, Jamie Zawinski"
-msgstr ""
-
-#: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:22
-msgid ""
-"Stephen Linhart, Ozymandias Desiderata, Jamie Zawinski, Ïğåâîä: Äèëÿí "
-"Ïàëàóçîâ <didopalauzov@uk2.net>"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:3
@@ -2703,36 +1900,37 @@ msgid "Draws a point moving around a circle which moves around a circle."
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:6
+#, fuzzy
+msgid "Epicycle"
+msgstr "´İ±â"
+
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:7
 msgid ""
 "Epicycle draws the path traced out by a point on the edge of a circle that "
 "is rotating around the rim of another circle, and so on."
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:8
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:9
 msgid "Holdtime"
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:10
 msgid "James Youngman <jay@gnu.org>"
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:11
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:12
 #: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:17
 #: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:17
 #, fuzzy
 msgid "Seconds"
 msgstr "¼Ò¸®"
 
-#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:14
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:15
 msgid "Time finished product is shown."
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:15
-msgid "When the figure is complete, epicycle pauses this number of seconds."
-msgstr ""
-
 #: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:16
-msgid "Ëåíòà"
+msgid "When the figure is complete, epicycle pauses this number of seconds."
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:1
@@ -3452,6 +2650,10 @@ msgstr ""
 msgid "If the solver can "
 msgstr ""
 
+#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:13
+msgid " the end of a corridor it will color it this color."
+msgstr ""
+
 #: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:14
 #, fuzzy
 msgid "Less Delay"
@@ -3838,11 +3040,6 @@ msgstr ""
 msgid "Rd-bomb"
 msgstr ""
 
-#: capplets/desktop-links/Desktop.directory.in.h:1
-#: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:1
-msgid "Desktop"
-msgstr "µ¥½ºÅ©Å¾"
-
 #: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:2
 msgid "Display oily drops."
 msgstr ""
@@ -4202,84 +3399,490 @@ msgstr "¼öÁ÷À¸·Î ¼­¼­È÷ º¯È­"
 msgid "Xteevee"
 msgstr ""
 
-#: capplets/mouse-properties/mouse-properties.desktop.in.h:1
-msgid "Mouse"
-msgstr "¸¶¿ì½º ¼³Á¤"
+#: capplets/screensaver-properties/screensaver-dialog.c:46
+msgid "About:"
+msgstr "ÀÌ ÇÁ·Î±×·¥Àº:"
 
-#: capplets/mouse-properties/mouse-properties.desktop.in.h:2
-msgid "Mouse Properties"
-msgstr "¸¶¿ì½º ¼³Á¤"
+#: capplets/screensaver-properties/screensaver-dialog.c:51
+msgid "Author:"
+msgstr "°³¹ßÀÚ:"
 
-#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:1
-msgid "Keyboard"
-msgstr "ÀÚÆÇ"
+#: capplets/screensaver-properties/screensaver-dialog.c:61
+msgid "Author: UNKNOWN"
+msgstr "°³¹ßÀÚ: ¾Ë¼ö ¾øÀ½"
 
-#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:2
-msgid "Keyboard Properties"
-msgstr "ÀÚÆÇ ¼Ó¼º"
+#: capplets/screensaver-properties/screensaver-dialog.c:78
+msgid "Settings"
+msgstr "¼³Á¤"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:1
-msgid "Choose the editor that is invoked by gnome-edit"
-msgstr "gnome-edit°¡ »ç¿ëÇÒ ÆíÁı±â ¼±ÅÃ"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:38
+msgid "RANDOM SCREENSAVER"
+msgstr "È­¸éº¸È£±â ¾Æ¹«°Å³ª"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:2
-msgid "Default Editor"
-msgstr "±×³ğ ÆíÁı±â ¼±ÅÃ"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:49
+msgid "Screen Saver"
+msgstr "È­¸é º¸È£±â"
 
-#: capplets/background-properties/background-properties.desktop.in.h:1
-msgid "Background"
-msgstr "¹è°æ"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:61
+msgid ""
+"Pressing this button will popup a dialogbox that will help you setup the "
+"current screensaver."
+msgstr "ÀÌ ¹öÆ°À» ´©¸£¸é ÇöÀç È­¸éº¸È£±âÀÇ ¼Â¾÷À» µµ¿ÍÁÖ´Â ´ëÈ­Ã¢ÀÌ ³ª¿É´Ï´Ù."
 
-#: capplets/background-properties/background-properties.desktop.in.h:2
-msgid "Configuration of the desktop's background"
-msgstr ""
-
-#: capplets/desktop-links/Documents.directory.in.h:1
-msgid "Configure how document types are handled"
-msgstr ""
-
-#: capplets/desktop-links/Documents.directory.in.h:2
-#, fuzzy
-msgid "Document Handlers"
-msgstr "URL Ã³¸®"
-
-#: capplets/desktop-links/Gnome.directory.in.h:2
-msgid "Control Center Menu"
-msgstr "Á¶Á¾ÆÇ ¸Ş´º"
-
-#: capplets/desktop-links/Multimedia.directory.in.h:1
-msgid "Configure the settings of your Multimedia devices"
-msgstr "¸ÖÆ¼ ¹Ìµğ¾î ÀåÄ¡ÀÇ ¼³Á¤À» º¯°æÇÕ´Ï´Ù."
-
-#: capplets/desktop-links/Multimedia.directory.in.h:2
-msgid "Multimedia"
-msgstr "¸ÖÆ¼ ¹Ìµğ¾î"
-
-#: capplets/desktop-links/Peripherals.directory.in.h:1
-msgid "Configure your external devices"
-msgstr "¿ÜºÎ ÀåÄ¡ ¼³Á¤"
-
-#: capplets/desktop-links/Peripherals.directory.in.h:2
-msgid "Peripherals"
-msgstr "ÁÖº¯ÀåÄ¡"
-
-#: capplets/desktop-links/Session.directory.in.h:1
-#, fuzzy
-msgid "Session"
-msgstr "È®ÀåÀÚ"
-
-#: capplets/desktop-links/Session.directory.in.h:2
-#, fuzzy
-msgid "Session Management Settings"
+#. set up the initial frame, and get a vbox in which to pack things.
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:88
+msgid "Screen Saver Settings"
 msgstr "È­¸é º¸È£±â ¼³Á¤"
 
-#: capplets/desktop-links/UIOptions.directory.in.h:1
-msgid "Configure the global settings of your GNOME applications"
-msgstr "±×³ğ ÇÁ·Î±×·¥µéÀÇ ÀüÃ¼ ¼¼ÆÃ ¸ÂÃß±â"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:96
+msgid "Start After "
+msgstr "¾ó¸¶ ÈÄ¿¡ ½ÃÀÛ:"
 
-#: capplets/desktop-links/UIOptions.directory.in.h:2
-msgid "User Interface"
-msgstr "»ç¿ëÀÚ ÀÎÅÍÆäÀÌ½º ¼±ÅÃ»çÇ×"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:102
+msgid " Minutes."
+msgstr " ºĞ."
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:117
+msgid "Priority:"
+msgstr "¿ì¼±¼øÀ§:"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:124
+msgid "Low "
+msgstr "³·À½"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:126
+msgid " Normal"
+msgstr "º¸Åë"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:137
+msgid "Shutdown monitor "
+msgstr "¸ğ´ÏÅÍ ¼Ë´Ù¿î"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:139
+msgid " minutes after screen saver has started."
+msgstr " ºĞ (È­¸éº¸È£±â°¡ ½ÃÀÛÇÑ ÈÄ·ÎºÎÅÍ)"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:152
+msgid "Screen Saver Demo"
+msgstr "È­¸é º¸È£±â µ¥¸ğ"
+
+#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:1
+msgid "Configure the settings of the screensaver"
+msgstr "È­¸é º¸È£±â ¼³Á¤"
+
+#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:2
+msgid "Screensaver"
+msgstr "È­¸é º¸È£±â"
+
+#: capplets/sound-properties/sound-properties.c:97
+msgid ""
+"an initialization error occurred while starting 'sound-properties-capplet'."
+msgstr "'sound-properties-capplet'À» ½ÃÀÛÇÏ´Â µ¥ ÃÊ±âÈ­ ¹®Á¦ ¹ß»ı."
+
+#: capplets/sound-properties/sound-properties.c:188
+msgid "Event"
+msgstr "ÀÌº¥Æ®"
+
+#: capplets/sound-properties/sound-properties.c:189
+msgid "File to Play"
+msgstr "¼Ò¸®³¾ ÆÄÀÏ"
+
+#: capplets/sound-properties/sound-properties.c:243
+msgid "Enable"
+msgstr "»ç¿ëÇÏ±â"
+
+#: capplets/sound-properties/sound-properties.c:250
+msgid "Enable sound server startup"
+msgstr "»ç¿îµå ¼­¹ö ½ÃÀÛÇÏ±â"
+
+#: capplets/sound-properties/sound-properties.c:258
+msgid "Sounds for events"
+msgstr "È¿°úÀ½"
+
+#: capplets/sound-properties/sound-properties.c:279
+msgid "General"
+msgstr "ÀÏ¹İ"
+
+#: capplets/sound-properties/sound-properties.c:286
+msgid "Select sound file"
+msgstr "¼Ò¸® ÆÄÀÏ ¼±ÅÃ"
+
+#: capplets/sound-properties/sound-properties.c:325
+msgid "Play"
+msgstr "¼Ò¸® ³»±â"
+
+#: capplets/sound-properties/sound-properties.c:336
+msgid "Sound Events"
+msgstr "¼Ò¸® ÀÌº¥Æ®"
+
+#: capplets/sound-properties/sound-properties.c:355
+msgid ""
+"This copy of the GNOME control center was not compiled with sound support"
+msgstr "ÀÌ ±×³ğ Á¶Á¾¼¾ÅÍ´Â ¼Ò¸® Áö¿ø ±â´ÉÀÌ ÄÄÆÄÀÏ °úÁ¤¿¡¼­ ºüÁ³½À´Ï´Ù."
+
+#: capplets/sound-properties/sound-properties.c:748
+msgid "The sound file for this event does not exist."
+msgstr "ÀÌ ÀÌº¥Æ®¿¡ ´ëÇÑ »ç¿îµå ÆÄÀÏÀÌ ¾ø½À´Ï´Ù."
+
+#: capplets/sound-properties/sound-properties.c:750
+msgid ""
+"The sound file for this event does not exist.\n"
+"You may want to install the gnome-audio package\n"
+"for a set of default sounds."
+msgstr ""
+"ÀÌ ÀÌº¥Æ®¿¡ ´ëÇÑ »ç¿îµå ÆÄÀÏÀÌ ¾ø½À´Ï´Ù.\n"
+"±âº»ÀûÀÎ ¼Ò¸®°¡ µé¾î ÀÖ´Â gnome-audio ÆĞÅ°Áö¸¦\n"
+"¼³Ä¡ÇØ¾ß ÇÒ °ÍÀÔ´Ï´Ù."
+
+#: capplets/sound-properties/sound-properties.desktop.in.h:1
+msgid "Configure GNOME's use of sound"
+msgstr "±×³ğ¿¡¼­ »ç¿ëÇÒ ¼Ò¸® ¼³Á¤"
+
+#: capplets/sound-properties/sound-properties.desktop.in.h:2
+msgid "Sound"
+msgstr "¼Ò¸®"
+
+#: capplets/theme-switcher/demo.c:50
+msgid "One"
+msgstr "ÇÏ³ª"
+
+#: capplets/theme-switcher/demo.c:50
+msgid "Two"
+msgstr "µÑ"
+
+# ÀÌ·± ¸ÚÁø À¯¸ğ¾î¸¦ ¾î¶»°Ô ¹ø¿ªÇÏ¶õ ¸»ÀÎ°¡?
+#. just 8 short names that will serve as samples for titles in demo
+#: capplets/theme-switcher/demo.c:52
+msgid "Eenie"
+msgstr "Eenie"
+
+#: capplets/theme-switcher/demo.c:52
+msgid "Meenie"
+msgstr "Meenie"
+
+#: capplets/theme-switcher/demo.c:53
+msgid "Mynie"
+msgstr "Mynie"
+
+#: capplets/theme-switcher/demo.c:53
+msgid "Moe"
+msgstr "Moe"
+
+#: capplets/theme-switcher/demo.c:54
+msgid "Catcha"
+msgstr "Catcha"
+
+#: capplets/theme-switcher/demo.c:54
+msgid "Tiger"
+msgstr "Tiger"
+
+#: capplets/theme-switcher/demo.c:55
+msgid "By Its"
+msgstr "By Its"
+
+#: capplets/theme-switcher/demo.c:55
+msgid "Toe"
+msgstr "Toe"
+
+#: capplets/theme-switcher/demo.c:114
+msgid "Selected themes from above will be tested by previewing here."
+msgstr "À§¿¡¼­ °í¸¥ Å×¸¶´Â ¿©±â¼­ ¹Ì¸® Å×½ºÆ®ÇÒ ¼ö ÀÖ½À´Ï´Ù."
+
+#. column one
+#: capplets/theme-switcher/demo.c:119
+msgid "Sample Button"
+msgstr "¿¹Á¦ ¹öÆ°"
+
+#: capplets/theme-switcher/demo.c:123
+msgid "Sample Check Button"
+msgstr "¿¹Á¦ Ã¼Å©¹öÆ°"
+
+#: capplets/theme-switcher/demo.c:128
+msgid "Sample Text Entry Field"
+msgstr "¿¹Á¦ ÅØ½ºÆ® ¿£Æ®¸® ÇÊµå"
+
+#: capplets/theme-switcher/demo.c:139
+msgid "Submenu"
+msgstr "¾Æ·¡ ¸Ş´º"
+
+#: capplets/theme-switcher/demo.c:146
+msgid "Item 1"
+msgstr "¾ÆÀÌÅÛ 1"
+
+#: capplets/theme-switcher/demo.c:149
+msgid "Another item"
+msgstr "¶Ç ¾ÆÀÌÅÛ"
+
+#: capplets/theme-switcher/demo.c:154
+msgid "Radio Button 1"
+msgstr "¶óµğ¿À ¹öÆ° 1"
+
+#: capplets/theme-switcher/demo.c:160
+msgid "Radio Button 2"
+msgstr "¶óµğ¿À ¹öÆ° 2"
+
+#: capplets/theme-switcher/gui.c:89
+#, c-format
+msgid ""
+"Error installing theme:\n"
+"'%s'\n"
+"%s"
+msgstr ""
+"Å×¸¶ ¼³Ä¡ÇÏ´Â µ¥ ¿À·ù:\n"
+"'%s'\n"
+"%s"
+
+#: capplets/theme-switcher/gui.c:120
+msgid "Select a theme to install"
+msgstr "¼³Ä¡ÇÒ Å×¸¶¸¦ ¼±ÅÃÇÏ¼¼¿ä"
+
+#: capplets/theme-switcher/gui.c:197
+msgid "Available Themes"
+msgstr "»ç¿ë°¡´ÉÇÑ Å×¸¶"
+
+#: capplets/theme-switcher/gui.c:221
+msgid ""
+"Auto\n"
+"Preview"
+msgstr ""
+"ÀÚµ¿À¸·Î\n"
+"¹Ì¸®º¸±â"
+
+#: capplets/theme-switcher/gui.c:233
+msgid ""
+"Install new\n"
+"theme..."
+msgstr ""
+"»õ·Î¿î Å×¸¶\n"
+"¼±ÅÃ..."
+
+#. Font selector.
+#.
+#: capplets/theme-switcher/gui.c:239
+msgid "User Font"
+msgstr "»ç¿ëÀÚ ÆùÆ®"
+
+#. FIXME - should really get this from X somehow
+#. for now we just assume default gtk font
+#: capplets/theme-switcher/gui.c:257
+msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
+msgstr ""
+"-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*,-*-gulim-medium-r-normal-"
+"-*-120-*-*-*-*-*-*,-*-kodig-medium-r-normal--*-120-*-*-*-*-*-*,-*-*-medium-r-"
+"normal--*-120-*-*-*-*-*-*,*"
+
+#: capplets/theme-switcher/gui.c:276
+msgid "Use custom font."
+msgstr "µû·Î ¼³Á¤ÇÑ ÆùÆ® »ç¿ë."
+
+#: capplets/theme-switcher/install.c:26
+msgid "Home directory doesn't exist!\n"
+msgstr "È¨ µğ·ºÅä¸®°¡ ¾ø½À´Ï´Ù!\n"
+
+#: capplets/theme-switcher/install.c:36
+msgid "Theme does not exist"
+msgstr "Å×¸¶°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù"
+
+#: capplets/theme-switcher/install.c:68
+#, c-format
+msgid "Command '%s' failed"
+msgstr "'%s' ¸í·É¾î°¡ ½ÇÆĞÇß½À´Ï´Ù"
+
+#: capplets/theme-switcher/install.c:73
+msgid "Unknown file format"
+msgstr "¾Ë ¼ö ¾ø´Â ÆÄÀÏ Çü½Ä"
+
+#: capplets/theme-switcher/theme-selector.desktop.in.h:1
+msgid "Select which desktop theme to use"
+msgstr "¾î¶² µ¥½ºÅ©Å¾ Å×¸¶¸¦ »ç¿ëÇÒ Áö ¼±ÅÃ"
+
+#: capplets/theme-switcher/theme-selector.desktop.in.h:2
+msgid "Theme Selector"
+msgstr "Å×¸¶ ¼±ÅÃ"
+
+#: capplets/ui-properties/application.desktop.in.h:1
+msgid "Applications"
+msgstr "ÀÀ¿ë ÇÁ·Î±×·¥ ±âº»»çÇ×"
+
+#: capplets/ui-properties/application.desktop.in.h:2
+msgid "Sets the default feel of GNOME applications"
+msgstr "±×³ğ ÀÀ¿ë ÇÁ·Î±×·¥ÀÇ ±âº» »çÇ× °áÁ¤"
+
+#: capplets/ui-properties/dialogs.desktop.in.h:1
+msgid "Dialogs"
+msgstr "´ëÈ­»óÀÚ"
+
+#: capplets/ui-properties/mdi.desktop.in.h:1
+msgid "MDI"
+msgstr "¿©·¯¹®¼­"
+
+#: capplets/ui-properties/ui-properties.c:54
+msgid "Can detach and move toolbars"
+msgstr "µµ±¸»óÀÚ¸¦ ¶¼¾î¼­ ¿Å±æ ¼ö ÀÖµµ·Ï"
+
+#: capplets/ui-properties/ui-properties.c:59
+msgid "Toolbars have relieved border"
+msgstr "µµ±¸»óÀÚÀÇ Å×µÎ¸®°¡ µé¾î°¡ º¸ÀÌµµ·Ï"
+
+#: capplets/ui-properties/ui-properties.c:64
+msgid "Toolbar buttons have relieved border"
+msgstr "µµ±¸»óÀÚ ¹öÆ°ÀÇ Å×µÎ¸®°¡ µé¾î°¡ º¸ÀÌµµ·Ï"
+
+#: capplets/ui-properties/ui-properties.c:69
+msgid "Toolbars have line separators"
+msgstr "µµ±¸»óÀÚ¿¡¼­ ÁÙ ±¸ºĞÀÚ¸¦ ³ÖÀ½"
+
+#: capplets/ui-properties/ui-properties.c:74
+msgid "Toolbars have text labels"
+msgstr "µµ±¸»óÀÚ¿¡ ±ÛÀÚ ·¹ÀÌºíÀ» ´à"
+
+#: capplets/ui-properties/ui-properties.c:103
+msgid "Can detach and move menus"
+msgstr "¸Ş´º¸¦ ¶¼¾î¼­ ¿Å±æ ¼ö ÀÖµµ·Ï"
+
+#: capplets/ui-properties/ui-properties.c:108
+msgid "Menus have relieved border"
+msgstr "¸Ş´ºÀÇ Å×µÎ¸®°¡ µé¾î°¡ º¸ÀÌµµ·Ï"
+
+#: capplets/ui-properties/ui-properties.c:112
+msgid "Submenus can be torn off"
+msgstr "¾Æ·¡ ¸Ş´º¸¦ ¶¼¾î³¾ ¼ö ÀÖµµ·Ï"
+
+#: capplets/ui-properties/ui-properties.c:116
+msgid "Menu items have icons"
+msgstr "¸Ş´º¿¡ ¾ÆÀÌÄÜ »ç¿ë"
+
+#: capplets/ui-properties/ui-properties.c:140
+msgid "Statusbar is interactive when possible"
+msgstr "°¡´ÉÇÏ¸é »óÅÂ¹Ù°¡ interactiveÇÏµµ·Ï"
+
+#: capplets/ui-properties/ui-properties.c:145
+msgid "Statusbar progress meter is on the right"
+msgstr "»óÅÂ¸·´ë¸¦ ¿À¸¥ÂÊ¿¡¼­ºÎÅÍ ÁøÇà"
+
+#: capplets/ui-properties/ui-properties.c:162
+msgid "Menu Options"
+msgstr "¸Ş´º ¼±ÅÃ»çÇ×"
+
+#: capplets/ui-properties/ui-properties.c:163
+msgid "Statusbar Options"
+msgstr "»óÅÂ¸·´ë ¼±ÅÃ»çÇ×"
+
+#: capplets/ui-properties/ui-properties.c:164
+msgid "Toolbar Options"
+msgstr "µµ±¸»óÀÚ ¼±ÅÃ»çÇ×"
+
+#: capplets/ui-properties/ui-properties.c:170
+msgid "Dialog buttons"
+msgstr "¸¶¿ì½º ¹öÆ°"
+
+#: capplets/ui-properties/ui-properties.c:171
+msgid "Default value"
+msgstr "±âº»°ª"
+
+#: capplets/ui-properties/ui-properties.c:172
+msgid "Spread buttons out"
+msgstr "¹öÆ°À» ÁÖÀ§¿¡ °ñ°í·ç ¹èÄ¡"
+
+#: capplets/ui-properties/ui-properties.c:173
+msgid "Put buttons on edges"
+msgstr "¹öÆ°À» ³¡ºÎºĞ¿¡ ¹èÄ¡"
+
+#: capplets/ui-properties/ui-properties.c:174
+msgid "Left-justify buttons"
+msgstr "¿ŞÂÊÀ¸·Î Ä¡¿ìÃÄÁø ¹öÆ°"
+
+#: capplets/ui-properties/ui-properties.c:175
+msgid "Right-justify buttons"
+msgstr "¿À¸¥ÂÊÀ¸·Î Ä¡¿ìÃÄÁø ¹öÆ°"
+
+#: capplets/ui-properties/ui-properties.c:180
+msgid "Dialog buttons have icons"
+msgstr "´ëÈ­Ã¢ÀÇ ¹öÆ°¿¡ ¾ÆÀÌÄÜ »ç¿ë"
+
+#: capplets/ui-properties/ui-properties.c:185
+msgid "Use statusbar instead of dialog when possible"
+msgstr "°¡´ÉÇÑ °æ¿ì¿¡ ´ëÈ­Ã¢ ´ë½Å¿¡ »óÅÂ¸·´ë¸¦ »ç¿ë"
+
+#: capplets/ui-properties/ui-properties.c:207
+msgid "Dialog position"
+msgstr "À§Ä¡"
+
+#: capplets/ui-properties/ui-properties.c:208
+msgid "Let window manager decide"
+msgstr "Ã¢ °ü¸®ÀÚ°¡ °áÁ¤"
+
+#: capplets/ui-properties/ui-properties.c:209
+msgid "Center of the screen"
+msgstr "È­¸éÀÇ Áß¾Ó"
+
+#: capplets/ui-properties/ui-properties.c:210
+msgid "At the mouse pointer"
+msgstr "¸¶¿ì½º Æ÷ÀÎÅÍ À§Ä¡"
+
+#: capplets/ui-properties/ui-properties.c:215
+msgid "Dialog hints"
+msgstr "´ëÈ­Ã¢ ÈùÆ®"
+
+#: capplets/ui-properties/ui-properties.c:216
+msgid "Dialogs are like other windows"
+msgstr "´ëÈ­Ã¢Àº ´Ù¸¥ Ã¢°ú ¸¶Âù°¡Áö"
+
+#: capplets/ui-properties/ui-properties.c:217
+msgid "Dialogs are treated specially by window manager"
+msgstr "´ëÈ­Ã¢Àº Ã¢ °ü¸®ÀÚ¿¡ ÀÇÇØ Æ¯º°Ãë±Ş"
+
+#: capplets/ui-properties/ui-properties.c:222
+msgid "Place dialogs over application window when possible"
+msgstr "°¡´ÉÇÑ °æ¿ì ´ëÈ­Ã¢À» ÇÁ·Î±×·¥ Ã¢ À§¿¡ À§Ä¡"
+
+#: capplets/ui-properties/ui-properties.c:243
+msgid "Dialog Layout"
+msgstr "´ëÈ­Ã¢ ¹èÄ¡"
+
+#: capplets/ui-properties/ui-properties.c:244
+msgid "Dialog Behavior"
+msgstr "´ëÈ­Ã¢ µ¿ÀÛ"
+
+#: capplets/ui-properties/ui-properties.c:250
+msgid "Default MDI Mode"
+msgstr "±âº» ´ÙÁß¹®¼­ÀÎÅÍÆäÀÌ½º ¸ğµå"
+
+#: capplets/ui-properties/ui-properties.c:251
+msgid "Notebook"
+msgstr "³ëÆ®ºÏ"
+
+#: capplets/ui-properties/ui-properties.c:252
+msgid "Toplevel"
+msgstr "º°µµÀÇ Ã¢"
+
+#: capplets/ui-properties/ui-properties.c:253
+msgid "Modal"
+msgstr "¸ğ´Ş"
+
+#: capplets/ui-properties/ui-properties.c:258
+msgid "MDI notebook tab position"
+msgstr "´ÙÁß¹®¼­ÀÎÅÍÆäÀÌ½º ³ëÆ®ºÏ ÅÇ À§Ä¡"
+
+#: capplets/ui-properties/ui-properties.c:259
+msgid "Left"
+msgstr "¿ŞÂÊ"
+
+#: capplets/ui-properties/ui-properties.c:260
+msgid "Right"
+msgstr "¿À¸¥ÂÊ"
+
+#: capplets/ui-properties/ui-properties.c:261
+msgid "Top"
+msgstr "À§"
+
+#: capplets/ui-properties/ui-properties.c:262
+msgid "Bottom"
+msgstr "¾Æ·¡"
+
+#: capplets/ui-properties/ui-properties.c:277
+msgid "GNOME MDI Options"
+msgstr "±×³ğ ´ÙÁß¹®¼­ÀÎÅÍÆäÀÌ½º ¼±ÅÃ»çÇ×"
 
 #: capplets/ui-properties/ui-properties.directory.in.h:1
 msgid "Look and Feel"
@@ -4288,6 +3891,390 @@ msgstr "°Ñ¸ğ½À ¼³Á¤"
 #: capplets/ui-properties/ui-properties.directory.in.h:2
 msgid "Look and Feel Properties"
 msgstr "°Ñ¸ğ½À ¼³Á¤"
+
+#: capplets/url-properties/url-properties.c:51
+msgid "Error initializing the `url-properties' capplet."
+msgstr "`url-properties' Ä³ÇÃ¸´ ÃÊ±âÈ­ ¿À·ù."
+
+#: capplets/url-properties/url-properties.c:76
+msgid "Protocol"
+msgstr "ÇÁ·ÎÅäÄİ"
+
+#: capplets/url-properties/url-properties.c:76
+msgid "Command"
+msgstr "¸í·É¾î"
+
+#: capplets/url-properties/url-properties.c:93
+msgid "handler:"
+msgstr "ÇÚµé·¯:"
+
+#. set some commonly used handlers
+#: capplets/url-properties/url-properties.c:103
+msgid "Netscape"
+msgstr "³İ½ºÄÉÀÌÇÁ"
+
+#: capplets/url-properties/url-properties.c:108
+msgid "Netscape (new window)"
+msgstr "³İ½ºÄÉÀÌÇÁ (»õ·Î¿î Ã¢)"
+
+#: capplets/url-properties/url-properties.c:121
+msgid "Help browser"
+msgstr "µµ¿ò¸» º¸±â ÇÁ·Î±×·¥"
+
+#: capplets/url-properties/url-properties.c:127
+msgid "Help browser (new window)"
+msgstr "µµ¿ò¸» º¸±â ÇÁ·Î±×·¥ (»õ·Î¿î Ã¢)"
+
+#: capplets/url-properties/url-properties.c:140
+msgid "Set"
+msgstr "¼³Á¤"
+
+#: capplets/url-properties/url-properties.c:148
+msgid "Remove"
+msgstr "»èÁ¦"
+
+#: capplets/url-properties/url-properties.desktop.in.h:1
+msgid "Configure which programs are used to display URLs"
+msgstr "URLÀ» Ç¥½ÃÇÒ ¶§ »ç¿ëÇÒ ÇÁ·Î±×·¥ ¼±ÅÃ"
+
+#: capplets/url-properties/url-properties.desktop.in.h:2
+msgid "URL Handlers"
+msgstr "URL Ã³¸®"
+
+#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.h:1
+msgid "Enlightenment"
+msgstr "ÀÎ¶óÀÌÆ°¸ÕÆ®"
+
+#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.h:1
+msgid "Ice WM"
+msgstr "Ice WM"
+
+#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.h:1
+msgid "Scwm"
+msgstr "scwm"
+
+#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.h:1
+msgid "Window Maker"
+msgstr "À©µµ¿ì ¸ŞÀÌÄ¿"
+
+#: capplets/wm-properties/wm-desktops/twm.desktop.in.h:1
+msgid "twm"
+msgstr "twm"
+
+#: capplets/wm-properties/wm-properties-capplet.c:142
+#, c-format
+msgid ""
+"Starting %s\n"
+"(%d seconds left before operation times out)"
+msgstr ""
+"%s ½ÃÀÛ\n"
+"(Á¦ÇÑ½Ã°£ÀÌ %dÃÊ ³²¾Ò½À´Ï´Ù)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:303
+#, c-format
+msgid "%s (Current)"
+msgstr "%s (ÇöÀç)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:306
+#, c-format
+msgid "Run Configuration Tool for %s"
+msgstr "%sÀÇ ¼³Á¤ µµ±¸ ½ÃÀÛ"
+
+#: capplets/wm-properties/wm-properties-capplet.c:317
+msgid " (Not found)"
+msgstr " (Ã£À» ¼ö ¾øÀ½)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:356
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\tAnother window manager is already running and could not be killed\n"
+msgstr ""
+"wm-properties-capplet: Ã¢ °ü¸®ÀÚ¸¦ ÃÊ±âÈ­ÇÒ ¼ö ¾ø½À´Ï´Ù.\n"
+"\tÀÌ¹Ì ´Ù¸¥ Ã¢ °ü¸®ÀÚ°¡ ½ÇÇàÁßÀÌ°í Áß´Ü½ÃÅ³ ¼ö ¾ø½À´Ï´Ù\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:360
+#, c-format
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\t'%s' didn't start\n"
+msgstr ""
+"wm-properties-capplet: Ã¢ °ü¸®ÀÚ¸¦ ÃÊ±âÈ­ÇÒ ¼ö ¾ø½À´Ï´Ù.\n"
+"\t'%s'ÀÌ(°¡) ½ÃÀÛÇÏÁö ¾Ê½À´Ï´Ù\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:413
+msgid "Previous window manager did not die\n"
+msgstr "ÀÌÀüÀÇ Ã¢ °ü¸®ÀÚ°¡ Á×Áö ¾Ê¾Ò½À´Ï´Ù\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:446
+#, c-format
+msgid ""
+"Could not start '%s'.\n"
+"Falling back to previous window manager '%s'\n"
+msgstr ""
+"'%s'¸¦ ½ÃÀÛÇÒ ¼ö ¾ø½À´Ï´Ù.\n"
+"´Ù½Ã ÀÌÀü Ã¢°ü¸®ÀÚ '%s'¿¡°Ô µ¹¾Æ°©´Ï´Ù.\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:477
+msgid ""
+"Could not start fallback window manager.\n"
+"Please run a window manager manually. You can\n"
+"do this by selecting \"Run Program\" in the\n"
+"foot menu\n"
+msgstr ""
+"µ¹¾Æ°¥ Ã¢ °ü¸®ÀÚ¸¦ ½ÃÀÛÇÒ ¼ö ¾ø½À´Ï´Ù.\n"
+"¼öµ¿À¸·Î Ã¢ °ü¸®ÀÚ¸¦ ½ÇÇàÇÏ¼¼¿ä.  ¹ß¹Ù´Ú\n"
+"¸Ş´º¿¡¼­ \"Run Program\"À» ¼±ÅÃÇÏ¸é\n"
+"¼öµ¿À¸·Î ½ÇÇàÇÒ ¼ö ÀÖ½À´Ï´Ù.\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:502
+#: capplets/wm-properties/wm-properties-capplet.c:868
+#: capplets/wm-properties/wm-properties-capplet.c:875
+#: capplets/wm-properties/wm-properties-capplet.c:1021
+msgid "OK"
+msgstr "È®ÀÎ"
+
+#: capplets/wm-properties/wm-properties-capplet.c:520
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. You can do so immediately by selecting the \"Save session\n"
+"now\" below, or you can save your session later.  This can be\n"
+"done either selecting \"Save Current Session\" under \"Settings\"\n"
+"in the main menu, or by turning on \"Save Current Setup\" when\n"
+"you log out.\n"
+msgstr ""
+"ÇöÀç Ã¢ °ü¸®ÀÚ°¡ ¹Ù²î¾ú½À´Ï´Ù.  ÀÌ ¹Ù²ï »çÇ×À»\n"
+"ÀúÀåÇÏ·Á¸é, ÇöÀç ¼¼¼ÇÀ» ÀúÀåÇØ¾ß ÇÕ´Ï´Ù.  ¾Æ·¡ÀÇ \"Áö±İ\n"
+"¼¼¼Ç ÀúÀåÇÏ±â\"¸¦ ¼±ÅÃÇÏ¸é Áö±İ Áï½Ã ÀúÀåÇÒ ¼ö ÀÖ°í,\n"
+"³ªÁß¿¡ ¼¼¼ÇÀ» ÀúÀåÇÒ ¼öµµ ÀÖ½À´Ï´Ù.  ¼¼¼Ç ÀúÀåÀº ÁÖ ¸Ş´ºÀÇ\n"
+"\"¼³Á¤\" ¾Æ·¡ÀÇ \"ÇöÀç µ¥½ºÅ©Å¾ ÀúÀåÇÏ±â\"¿¡¼­ ÇÒ ¼ö ÀÖ°í, ¾Æ´Ï¸é\n"
+"·Î±×¾Æ¿ô½Ã¿¡ \"ÇöÀç µ¥½ºÅ©Å¾ ÀúÀåÇÏ±â\"À» ÄÒ ´ÙÀ½¿¡ ·Î±×¾Æ¿ôÇÏ¸é\n"
+"ÀúÀåµË´Ï´Ù.\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:527
+msgid "Save Session Later"
+msgstr "³ªÁß¿¡ ¼¼¼Ç ÀúÀåÇÏ±â"
+
+#: capplets/wm-properties/wm-properties-capplet.c:527
+msgid "Save Session Now"
+msgstr "Áö±İ ¼¼¼Ç ÀúÀåÇÏ±â"
+
+#: capplets/wm-properties/wm-properties-capplet.c:530
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. This can be done by either selecting \"Save Current Session\"\n"
+"under \"Settings\" in the main menu, or by turning on\n"
+"\"Save Current Setup\" when you log out.\n"
+msgstr ""
+"ÇöÀç Ã¢ °ü¸®ÀÚ°¡ ¹Ù²î¾ú½À´Ï´Ù.  ÀÌ ¹Ù²ï »çÇ×À»\n"
+"ÀúÀåÇÏ·Á¸é, ÇöÀç ¼¼¼ÇÀ» ÀúÀåÇØ¾ß ÇÕ´Ï´Ù.  ¼¼¼Ç ÀúÀåÀº ÁÖ\n"
+"¸Ş´ºÀÇ \"¼³Á¤\" ¾Æ·¡ÀÇ \"ÇöÀç µ¥½ºÅ©Å¾ ÀúÀåÇÏ±â\"¿¡¼­ ÇÒ ¼ö ÀÖ°í,\n"
+"¾Æ´Ï¸é ·Î±×¾Æ¿ô½Ã¿¡ \"ÇöÀç µ¥½ºÅ©Å¾ ÀúÀå\"À» Ã¼Å©ÇÑ ´ÙÀ½¿¡\n"
+"·Î±×¾Æ¿ôÇÏ¸é ÀúÀåµË´Ï´Ù.\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:757
+msgid "Add New Window Manager"
+msgstr "»õ Ã¢ °ü¸®ÀÚ ½ÃÀÛ"
+
+#: capplets/wm-properties/wm-properties-capplet.c:771
+msgid "Name:"
+msgstr "ÀÌ¸§:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:784
+msgid "Command:"
+msgstr "¸í·É¾î:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:797
+msgid "Configuration Command:"
+msgstr "¼³Á¤ ¸í·É¾î:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:816
+msgid "Window manager is session managed"
+msgstr "Ã¢ °ü¸®ÀÚ°¡ ¼¼¼Ç °ü¸®µË´Ï´Ù."
+
+#: capplets/wm-properties/wm-properties-capplet.c:866
+msgid "Name cannot be empty"
+msgstr "ÀÌ¸§Àº ºñ¾îÀÖÀ¸¸é ¾È µË´Ï´Ù"
+
+#: capplets/wm-properties/wm-properties-capplet.c:873
+msgid "Command cannot be empty"
+msgstr "¸í·É¾î´Â ºñ¾îÀÖÀ¸¸é ¾È µË´Ï´Ù"
+
+#: capplets/wm-properties/wm-properties-capplet.c:922
+#: capplets/wm-properties/wm-properties-capplet.c:964
+msgid "Edit Window Manager"
+msgstr "Ã¢ °ü¸®ÀÚ ÆíÁı"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1020
+msgid "You cannot delete the current Window Manager"
+msgstr "ÇöÀç Ã¢°ü¸®ÀÚ¸¦ Áö¿ï ¼ö ¾ø½À´Ï´Ù"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1093
+msgid "Edit..."
+msgstr "ÆíÁı..."
+
+#: capplets/wm-properties/wm-properties-capplet.c:1098
+msgid "Delete"
+msgstr "Áö¿ì±â"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1134
+msgid ""
+"an initialization error occurred while starting 'wm-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"'wm-properties-capplet'À» ½ÃÀÛÇÏ´Â µ¥ ÃÊ±âÈ­ ¹®Á¦ ¹ß»ı.\n"
+"ÁßÁö...\n"
+
+#: capplets/wm-properties/wm-properties.desktop.in.h:1
+msgid "Choose a window manager"
+msgstr "Ã¢ °ü¸®ÀÚ ¼±ÅÃ"
+
+#: capplets/wm-properties/wm-properties.desktop.in.h:2
+msgid "Window Manager"
+msgstr "Ã¢ °ü¸®ÀÚ"
+
+#: control-center/callbacks.c:102 control-center/gnomecc.desktop.in.h:1
+msgid "GNOME Control Center"
+msgstr "±×³ğ Á¶Á¾ÆÇ"
+
+#: control-center/callbacks.c:105
+msgid "Desktop Properties manager."
+msgstr "µ¥½ºÅ©Å¾ ¼Ó¼º °ü¸®ÀÚ."
+
+#: control-center/capplet-manager.c:179
+msgid "Try"
+msgstr "½Ãµµ"
+
+#: control-center/capplet-manager.c:185
+msgid "Revert"
+msgstr "µÇµ¹¸®±â"
+
+#. set the help item
+#: control-center/capplet-manager.c:208
+#, c-format
+msgid "Help with '%s' settings"
+msgstr "'%s'¼³Á¤ µµ¿ò¸»"
+
+#: control-center/capplet-widget-libs.c:46
+msgid "id of the capplet -- assigned by the control-center"
+msgstr "Ä³ÇÃ¸´ ¾ÆÀÌµğ -- Á¶Á¾ÆÇÀ¸·Î ÁöÁ¤ÇÔ"
+
+#: control-center/capplet-widget-libs.c:46
+msgid "ID"
+msgstr "¾ÆÀÌµğ"
+
+#: control-center/capplet-widget-libs.c:47
+msgid "Multi-capplet id."
+msgstr "¸ÖÆ¼-Ä³ÇÃ¸´ ¾ÆÀÌµğ."
+
+#: control-center/capplet-widget-libs.c:47
+msgid "CAPID"
+msgstr "Ä³ÇÃ¸´¾ÆÀÌµğ"
+
+#: control-center/capplet-widget-libs.c:48
+msgid "X ID of the socket it's plugged into"
+msgstr "ÇÃ·¯±×ÀÎµÈ ¼ÒÄÏÀÇ X ¾ÆÀÌµğ"
+
+#: control-center/capplet-widget-libs.c:48
+msgid "XID"
+msgstr "X¾ÆÀÌµğ"
+
+#: control-center/capplet-widget-libs.c:49
+msgid "IOR of the control-center"
+msgstr "ÄÜÆ®·Ñ ¼¾ÅÍÀÇ IOR"
+
+#: control-center/capplet-widget-libs.c:49
+msgid "IOR"
+msgstr "IOR"
+
+#: control-center/capplet-widget-libs.c:50
+msgid "Initialize session settings"
+msgstr "¼¼¼Ç ¼³Á¤ ÃÊ±âÈ­"
+
+#: control-center/capplet-widget-libs.c:51
+msgid "Ignore default action.  Used for custom init-session cases"
+msgstr "±âº» µ¿ÀÛ ¹«½Ã.  ¼¼¼ÇÀ» ÃÊ±âÈ­ÇÏ´Â Æ¯¼öÇÑ °æ¿ì »ç¿ëµÊ"
+
+#: control-center/capplet-widget.c:272
+msgid "Sorry, no help is available for these settings."
+msgstr "¹Ì¾ÈÇÕ´Ï´Ù. ÇöÀç »óÅÂ¿¡¼­ µµ¿ò¸»À» ÀÌ¿ëÇÒ ¼ö ¾ø½À´Ï´Ù."
+
+#: control-center/corba-glue.c:77
+msgid "capplet-command to be run."
+msgstr "½ÇÇàÇÒ Ä³ÇÃ¸´ ¸í·É."
+
+#: control-center/corba-glue.c:77
+msgid "CAPPLET"
+msgstr "<Ä³ÇÃ¸´>"
+
+#: control-center/gnomecc.desktop.in.h:2
+msgid "The GNOME configuration tool"
+msgstr "±×³ğ ¼³Á¤ ÇÁ·Î±×·¥"
+
+#: control-center/main.c:36
+msgid "Help on control-center"
+msgstr "Á¶Á¤ ¼¾ÅÍÀÇ µµ¿ò¸»"
+
+#: control-center/main.c:36
+msgid "Help with the GNOME control-center."
+msgstr "±×³ğ Á¶Á¾ ¼¾ÅÍÀÇ µµ¿ò¸»."
+
+#: control-center/main.c:38
+msgid "Help with the current configuration page."
+msgstr "ÇöÀç ¼³Á¤ ÆäÀÌÁöÀÇ µµ¿ò¸»."
+
+#: control-center/main.c:41
+msgid "About"
+msgstr "ÀÌ ÇÁ·Î±×·¥Àº"
+
+#: control-center/main.c:41
+msgid "About the GNOME control-center."
+msgstr "±×³ğ Á¶Á¾ ¼¾ÅÍ¿¡ ´ëÇÏ¿©."
+
+#. we create the widgets
+#: control-center/main.c:69
+msgid "Warning:"
+msgstr "°æ°í:"
+
+#: control-center/main.c:69
+msgid "Discard all changes"
+msgstr "º¯°æ »çÇ× ¸ğµÎ ¹ö¸®±â"
+
+#. ...labels, etc
+#: control-center/main.c:78
+msgid ""
+"The following modules have had changes made, but not committed.  If you "
+"would like to edit them, please double click on the appropriate entry."
+msgstr ""
+"´ÙÀ½ ¸ğµâ¿¡¼­ º¯°æÇÑ »çÇ×ÀÌ ÀÖÁö¸¸, º¯°æ»çÇ×À» ÀúÀåÇÏÁö ¾Ê¾Ò½À´Ï´Ù.  ÀÌ "
+"¸ğµâ¿¡¼­ ÇÒ ÀÏÀÌ ÀÖÀ¸¸é ÇØ´ç ¸ğµâÇ×¸ñ¿¡ ´õºíÅ¬¸¯ÇÏ¼¼¿ä."
+
+#: control-center/splash.c:48
+msgid "Operating System:"
+msgstr "¿î¿µ Ã¼Á¦:"
+
+#: control-center/splash.c:49
+msgid "Distribution Version:"
+msgstr "¹èÆ÷ÆÇ ¹öÁ¯:"
+
+#: control-center/splash.c:50
+msgid "Processor Type:"
+msgstr "ÇÁ·Î¼¼¼­ ÇüÅÂ:"
+
+#: control-center/splash.c:51
+msgid "User Name:"
+msgstr "»ç¿ëÀÚ ÀÌ¸§:"
+
+#: control-center/splash.c:52
+msgid "Host Name:"
+msgstr "È£½ºÆ® ÀÌ¸§:"
+
+#. This is about the only case where we'll put Unknown instead
+#. of simply not showing the info.
+#: control-center/splash.c:178
+msgid "Unknown"
+msgstr "¾Ë¼ö ¾øÀ½"
 
 #~ msgid "Mime Type: "
 #~ msgstr "MIME Å¸ÀÔ: "

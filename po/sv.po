@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.5\n"
-"POT-Creation-Date: 2001-03-13 11:43+0100\n"
+"POT-Creation-Date: 2001-03-15 14:08-0500\n"
 "PO-Revision-Date: 2000-10-08 14:39+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -132,7 +132,6 @@ msgstr "Sida-vid-sida"
 #: capplets/keyboard-properties/keyboard-properties.c:422
 #: capplets/mouse-properties/mouse-properties.c:112
 #: capplets/screensaver-properties/callbacks.c:802
-#: capplets/session-properties/session-properties.c:323
 #: capplets/sound-properties/sound-properties.c:693
 #: capplets/theme-switcher/gui.c:367
 #: capplets/ui-properties/ui-properties.c:516
@@ -151,7 +150,6 @@ msgstr ""
 #: capplets/keyboard-properties/keyboard-properties.c:424
 #: capplets/mouse-properties/mouse-properties.c:114
 #: capplets/screensaver-properties/callbacks.c:804
-#: capplets/session-properties/session-properties.c:325
 #: capplets/sound-properties/sound-properties.c:695
 #: capplets/sound-properties/sound-properties.c:756
 #: capplets/theme-switcher/gui.c:369
@@ -255,7 +253,6 @@ msgid "Peripherals"
 msgstr "Kringutrustning"
 
 #: capplets/desktop-links/Session.directory.in.h:1
-#: capplets/session-properties/chooser.c:57
 msgid "Session"
 msgstr "Session"
 
@@ -332,7 +329,6 @@ msgid "File Extensions "
 msgstr "Filändelser"
 
 #: capplets/file-types/file-types-capplet-dialogs.c:967
-#: capplets/session-properties/session-properties.c:205
 #: capplets/wm-properties/wm-properties-capplet.c:1088
 msgid "Add..."
 msgstr "Lägg till..."
@@ -871,7 +867,9 @@ msgstr "Valar, delfiner och hajar som simmar runt i 3D"
 
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:1
 msgid "A show of objects interacting through attractive and repulsive forces."
-msgstr "En föreställning med objekt som interagerar genom attraktiva och repellerande krafter."
+msgstr ""
+"En föreställning med objekt som interagerar genom attraktiva och "
+"repellerande krafter."
 
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:2
 msgid "Attraction"
@@ -2613,6 +2611,10 @@ msgstr "Tid mellan det att labyrinten är avklarad och en ny startar."
 msgid "If the solver can "
 msgstr "Om lösaren kan"
 
+#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:13
+msgid " the end of a corridor it will color it this color."
+msgstr ""
+
 #: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:14
 msgid "Less Delay"
 msgstr "Mindre tid"
@@ -3365,7 +3367,6 @@ msgid "Author: UNKNOWN"
 msgstr "Författare: OKÄND"
 
 #: capplets/screensaver-properties/screensaver-dialog.c:78
-#: capplets/session-properties/gsm-client-row.c:59
 msgid "Settings"
 msgstr "Inställningar"
 
@@ -3429,230 +3430,6 @@ msgstr "Ändra inställningar för skärmsläckare"
 #: capplets/screensaver-properties/screensaver-properties.desktop.in.h:2
 msgid "Screensaver"
 msgstr "Skärmsläckare"
-
-#. dialog
-#: capplets/session-properties/chooser.c:93
-msgid "Session Chooser"
-msgstr "Sessionväljare"
-
-#: capplets/session-properties/chooser.c:96
-msgid "Start Session"
-msgstr "Starta session"
-
-#: capplets/session-properties/chooser.c:99
-msgid "Cancel Login"
-msgstr "Avbryt inloggning"
-
-#: capplets/session-properties/gsm-client-editor.c:100
-msgid "Order: "
-msgstr "Ordning: "
-
-#: capplets/session-properties/gsm-client-editor.c:110
-msgid "Style: "
-msgstr "Typ: "
-
-#: capplets/session-properties/gsm-client-list.c:30
-msgid "This button sets the start order of the selected programs.\n"
-msgstr "Ställ in startordningen för markerade program.\n"
-
-#: capplets/session-properties/gsm-client-list.c:31
-msgid ""
-"This button sets the restart style of the selected programs:\n"
-"Normal programs are unaffected by logouts but can die;\n"
-"Respawn programs are never allowed to die;\n"
-"Trash programs are discarded on logout and can die;\n"
-"Settings programs are always started on every login."
-msgstr ""
-"Ställ in omstartstyp för markerade program:\n"
-"Normala program påverkas inte vid utloggning, men kan avslutas;\n"
-"Återuppstå-program får inte avslutas;\n"
-"Skräp-program försvinner vid utloggning och kan avslutas;\n"
-"Inställnings-program startas alltid vid inloggning."
-
-#: capplets/session-properties/gsm-client-list.c:36
-msgid ""
-"This button produces a key to the program states below:\n"
-"Inactive programs are waiting to start or have finished;\n"
-"Starting programs are being given time to get running;\n"
-"Running programs are normal members of the session;\n"
-"Saving programs are saving their session details;\n"
-"Programs which make no contact have Unknown states.\n"
-msgstr ""
-"Visar vilka lägen olika program befinner sig i:\n"
-"Inaktiva program väntar på att starta, eller har avslutats;\n"
-"Startande program ges tid för att köras;\n"
-"Körande program är normala medlemmar av aktuell session;\n"
-"Sparande program håller på att spara sitt sessionsdata;\n"
-"Program som inte har kontakt med sessionshanteraren har Okända lägen.\n"
-
-#: capplets/session-properties/gsm-client-list.c:42
-msgid "This column gives the command used to start a program."
-msgstr "Visar kommandot som används för att starta programmet."
-
-#: capplets/session-properties/gsm-client-list.c:135
-msgid "Order"
-msgstr "Ordning"
-
-#: capplets/session-properties/gsm-client-list.c:136
-msgid "Style"
-msgstr "Stil"
-
-#: capplets/session-properties/gsm-client-list.c:137
-msgid "State"
-msgstr "Tillstånd"
-
-#: capplets/session-properties/gsm-client-list.c:138
-msgid "Program"
-msgstr "Program"
-
-#: capplets/session-properties/gsm-client-row.c:31
-msgid "Inactive"
-msgstr "Inaktiv"
-
-#: capplets/session-properties/gsm-client-row.c:32
-msgid "Waiting to start or already finished."
-msgstr "Väntar på att starta, eller har redan avslutats."
-
-#: capplets/session-properties/gsm-client-row.c:34
-msgid "Starting"
-msgstr "Startar"
-
-#: capplets/session-properties/gsm-client-row.c:35
-msgid "Started but has not yet reported state."
-msgstr "Startat men har ännu inte rapporterat läget."
-
-#: capplets/session-properties/gsm-client-row.c:37
-msgid "Running"
-msgstr "Körande"
-
-#: capplets/session-properties/gsm-client-row.c:38
-msgid "A normal member of the session."
-msgstr "En normal medlem av sessionen."
-
-#: capplets/session-properties/gsm-client-row.c:40
-msgid "Saving"
-msgstr "Sparande"
-
-#: capplets/session-properties/gsm-client-row.c:41
-msgid "Saving session details."
-msgstr "Håller på att spara sessionsdata."
-
-#. This is about the only case where we'll put Unknown instead
-#. of simply not showing the info.
-#: capplets/session-properties/gsm-client-row.c:43 control-center/splash.c:178
-msgid "Unknown"
-msgstr "Okänd"
-
-#: capplets/session-properties/gsm-client-row.c:44
-msgid "State not reported within timeout."
-msgstr "Har inte rapporterat läge innan timeout."
-
-#: capplets/session-properties/gsm-client-row.c:50
-msgid "Normal"
-msgstr "Normal"
-
-#: capplets/session-properties/gsm-client-row.c:51
-msgid "Unaffected by logouts but can die."
-msgstr "Påverkas ej av utloggningar, men kan avslutas."
-
-#: capplets/session-properties/gsm-client-row.c:53
-msgid "Respawn"
-msgstr "Återuppstå"
-
-#: capplets/session-properties/gsm-client-row.c:54
-msgid "Never allowed to die."
-msgstr "Får inte avslutas."
-
-#: capplets/session-properties/gsm-client-row.c:56
-msgid "Trash"
-msgstr "Skräp"
-
-#: capplets/session-properties/gsm-client-row.c:57
-msgid "Discarded on logout and can die."
-msgstr "Försvinner vid utloggning och kan avslutas."
-
-#: capplets/session-properties/gsm-client-row.c:60
-msgid "Always started on every login."
-msgstr "Startas alltid vid inloggning."
-
-#: capplets/session-properties/gsm-protocol.c:500
-msgid "Remove Program"
-msgstr "Ta bort program"
-
-#. frame for options
-#: capplets/session-properties/session-properties.c:148
-msgid "Options"
-msgstr "Alternativ"
-
-#: capplets/session-properties/session-properties.c:159
-msgid "Show splash screen on login"
-msgstr "Visa startbild vid inloggning"
-
-#: capplets/session-properties/session-properties.c:166
-msgid "Prompt on logout"
-msgstr "Fråga innan utloggning sker"
-
-#: capplets/session-properties/session-properties.c:173
-msgid "Automatically save changes to session"
-msgstr "Spara ändringar till session automatiskt"
-
-#. frame for manually started programs
-#: capplets/session-properties/session-properties.c:178
-msgid "Non-session-managed Startup Programs"
-msgstr "Icke-sessionshanterade autostart-program"
-
-#: capplets/session-properties/session-properties.c:195
-#: capplets/session-properties/startup-programs.c:305
-msgid "Priority"
-msgstr "Prioritet"
-
-#: capplets/session-properties/session-properties.c:196
-#: capplets/url-properties/url-properties.c:76
-msgid "Command"
-msgstr "Kommando"
-
-#: capplets/session-properties/session-properties.c:210
-#: capplets/wm-properties/wm-properties-capplet.c:1093
-msgid "Edit..."
-msgstr "Redigera..."
-
-#: capplets/session-properties/session-properties.c:215
-#: capplets/wm-properties/wm-properties-capplet.c:1098
-msgid "Delete"
-msgstr "Radera"
-
-#: capplets/session-properties/session-properties.c:225
-msgid "Browse Currently Running Programs..."
-msgstr "Visa aktuella program..."
-
-#: capplets/session-properties/session-properties.c:417
-msgid "Only display warnings."
-msgstr "Visa bara varningar."
-
-#: capplets/session-properties/startup-programs.c:289
-#: capplets/session-properties/startup-programs.c:296
-msgid "Startup Command"
-msgstr "Startkommando"
-
-#: capplets/session-properties/startup-programs.c:320
-msgid ""
-"Programs with smaller values are started before programs with higher values. "
-"The default value should be OK"
-msgstr ""
-"Program med lägre värden startar före program med högre värden. "
-"Standardvärdet är oftast ok"
-
-#: capplets/session-properties/startup-programs.c:339
-msgid "The startup command cannot be empty"
-msgstr "Startkommandot kan inte vara tomt"
-
-#: capplets/session-properties/startup-programs.c:379
-msgid "Add Startup Program"
-msgstr "Lägg till autostart-program"
-
-#: capplets/session-properties/startup-programs.c:397
-msgid "Edit Startup Program"
-msgstr "Redigera autostart-program"
 
 #: capplets/sound-properties/sound-properties.c:97
 msgid ""
@@ -4076,6 +3853,10 @@ msgstr "Kunde inte köra 'url-properties' capplet."
 msgid "Protocol"
 msgstr "Protokoll"
 
+#: capplets/url-properties/url-properties.c:76
+msgid "Command"
+msgstr "Kommando"
+
 #: capplets/url-properties/url-properties.c:93
 msgid "handler:"
 msgstr "hanterare:"
@@ -4282,6 +4063,14 @@ msgstr "Redigera fönsterhanterare"
 msgid "You cannot delete the current Window Manager"
 msgstr "Du kan inte ta bort den aktuella fönsterhanteraren"
 
+#: capplets/wm-properties/wm-properties-capplet.c:1093
+msgid "Edit..."
+msgstr "Redigera..."
+
+#: capplets/wm-properties/wm-properties-capplet.c:1098
+msgid "Delete"
+msgstr "Radera"
+
 #: capplets/wm-properties/wm-properties-capplet.c:1134
 msgid ""
 "an initialization error occurred while starting 'wm-properties-capplet'.\n"
@@ -4433,6 +4222,167 @@ msgstr "Användarnamn:"
 #: control-center/splash.c:52
 msgid "Host Name:"
 msgstr "Värdnamn:"
+
+#. This is about the only case where we'll put Unknown instead
+#. of simply not showing the info.
+#: control-center/splash.c:178
+msgid "Unknown"
+msgstr "Okänd"
+
+#~ msgid "Session Chooser"
+#~ msgstr "Sessionväljare"
+
+#~ msgid "Start Session"
+#~ msgstr "Starta session"
+
+#~ msgid "Cancel Login"
+#~ msgstr "Avbryt inloggning"
+
+#~ msgid "Order: "
+#~ msgstr "Ordning: "
+
+#~ msgid "Style: "
+#~ msgstr "Typ: "
+
+#~ msgid "This button sets the start order of the selected programs.\n"
+#~ msgstr "Ställ in startordningen för markerade program.\n"
+
+#~ msgid ""
+#~ "This button sets the restart style of the selected programs:\n"
+#~ "Normal programs are unaffected by logouts but can die;\n"
+#~ "Respawn programs are never allowed to die;\n"
+#~ "Trash programs are discarded on logout and can die;\n"
+#~ "Settings programs are always started on every login."
+#~ msgstr ""
+#~ "Ställ in omstartstyp för markerade program:\n"
+#~ "Normala program påverkas inte vid utloggning, men kan avslutas;\n"
+#~ "Återuppstå-program får inte avslutas;\n"
+#~ "Skräp-program försvinner vid utloggning och kan avslutas;\n"
+#~ "Inställnings-program startas alltid vid inloggning."
+
+#~ msgid ""
+#~ "This button produces a key to the program states below:\n"
+#~ "Inactive programs are waiting to start or have finished;\n"
+#~ "Starting programs are being given time to get running;\n"
+#~ "Running programs are normal members of the session;\n"
+#~ "Saving programs are saving their session details;\n"
+#~ "Programs which make no contact have Unknown states.\n"
+#~ msgstr ""
+#~ "Visar vilka lägen olika program befinner sig i:\n"
+#~ "Inaktiva program väntar på att starta, eller har avslutats;\n"
+#~ "Startande program ges tid för att köras;\n"
+#~ "Körande program är normala medlemmar av aktuell session;\n"
+#~ "Sparande program håller på att spara sitt sessionsdata;\n"
+#~ "Program som inte har kontakt med sessionshanteraren har Okända lägen.\n"
+
+#~ msgid "This column gives the command used to start a program."
+#~ msgstr "Visar kommandot som används för att starta programmet."
+
+#~ msgid "Order"
+#~ msgstr "Ordning"
+
+#~ msgid "Style"
+#~ msgstr "Stil"
+
+#~ msgid "State"
+#~ msgstr "Tillstånd"
+
+#~ msgid "Program"
+#~ msgstr "Program"
+
+#~ msgid "Inactive"
+#~ msgstr "Inaktiv"
+
+#~ msgid "Waiting to start or already finished."
+#~ msgstr "Väntar på att starta, eller har redan avslutats."
+
+#~ msgid "Starting"
+#~ msgstr "Startar"
+
+#~ msgid "Started but has not yet reported state."
+#~ msgstr "Startat men har ännu inte rapporterat läget."
+
+#~ msgid "Running"
+#~ msgstr "Körande"
+
+#~ msgid "A normal member of the session."
+#~ msgstr "En normal medlem av sessionen."
+
+#~ msgid "Saving"
+#~ msgstr "Sparande"
+
+#~ msgid "Saving session details."
+#~ msgstr "Håller på att spara sessionsdata."
+
+#~ msgid "State not reported within timeout."
+#~ msgstr "Har inte rapporterat läge innan timeout."
+
+#~ msgid "Normal"
+#~ msgstr "Normal"
+
+#~ msgid "Unaffected by logouts but can die."
+#~ msgstr "Påverkas ej av utloggningar, men kan avslutas."
+
+#~ msgid "Respawn"
+#~ msgstr "Återuppstå"
+
+#~ msgid "Never allowed to die."
+#~ msgstr "Får inte avslutas."
+
+#~ msgid "Trash"
+#~ msgstr "Skräp"
+
+#~ msgid "Discarded on logout and can die."
+#~ msgstr "Försvinner vid utloggning och kan avslutas."
+
+#~ msgid "Always started on every login."
+#~ msgstr "Startas alltid vid inloggning."
+
+#~ msgid "Remove Program"
+#~ msgstr "Ta bort program"
+
+#~ msgid "Options"
+#~ msgstr "Alternativ"
+
+#~ msgid "Show splash screen on login"
+#~ msgstr "Visa startbild vid inloggning"
+
+#~ msgid "Prompt on logout"
+#~ msgstr "Fråga innan utloggning sker"
+
+#~ msgid "Automatically save changes to session"
+#~ msgstr "Spara ändringar till session automatiskt"
+
+#~ msgid "Non-session-managed Startup Programs"
+#~ msgstr "Icke-sessionshanterade autostart-program"
+
+#~ msgid "Priority"
+#~ msgstr "Prioritet"
+
+#~ msgid "Browse Currently Running Programs..."
+#~ msgstr "Visa aktuella program..."
+
+#~ msgid "Only display warnings."
+#~ msgstr "Visa bara varningar."
+
+#~ msgid "Startup Command"
+#~ msgstr "Startkommando"
+
+#~ msgid ""
+#~ "Programs with smaller values are started before programs with higher values. "
+#~ "The default value should be OK"
+#~ msgstr ""
+#~ "Program med lägre värden startar före program med högre värden. "
+#~ "Standardvärdet är oftast ok"
+
+#~ msgid "The startup command cannot be empty"
+#~ msgstr "Startkommandot kan inte vara tomt"
+
+#~ msgid "Add Startup Program"
+#~ msgstr "Lägg till autostart-program"
+
+#~ msgid "Edit Startup Program"
+#~ msgstr "Redigera autostart-program"
 
 #~ msgid "Ïî-áëèçêî"
 #~ msgstr "Närmare"

@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.3.90\n"
-"POT-Creation-Date: 2001-03-13 11:40+0100\n"
+"POT-Creation-Date: 2001-03-15 14:08-0500\n"
 "PO-Revision-Date: 2001-03-11 17:23+0100\n"
 "Last-Translator: Christophe Merlet (RedFox) <redfox@eikonex.org>\n"
 "Language-Team: Gnome French Team <gnomefr@gnomefr.traduc.org>\n"
@@ -132,7 +132,6 @@ msgstr "Mosaïque"
 #: capplets/keyboard-properties/keyboard-properties.c:422
 #: capplets/mouse-properties/mouse-properties.c:112
 #: capplets/screensaver-properties/callbacks.c:802
-#: capplets/session-properties/session-properties.c:323
 #: capplets/sound-properties/sound-properties.c:693
 #: capplets/theme-switcher/gui.c:367
 #: capplets/ui-properties/ui-properties.c:516
@@ -151,7 +150,6 @@ msgstr ""
 #: capplets/keyboard-properties/keyboard-properties.c:424
 #: capplets/mouse-properties/mouse-properties.c:114
 #: capplets/screensaver-properties/callbacks.c:804
-#: capplets/session-properties/session-properties.c:325
 #: capplets/sound-properties/sound-properties.c:695
 #: capplets/sound-properties/sound-properties.c:756
 #: capplets/theme-switcher/gui.c:369
@@ -257,7 +255,6 @@ msgid "Peripherals"
 msgstr "Périphériques"
 
 #: capplets/desktop-links/Session.directory.in.h:1
-#: capplets/session-properties/chooser.c:57
 msgid "Session"
 msgstr "Session"
 
@@ -338,7 +335,6 @@ msgid "File Extensions "
 msgstr "Extensions de fichier"
 
 #: capplets/file-types/file-types-capplet-dialogs.c:967
-#: capplets/session-properties/session-properties.c:205
 #: capplets/wm-properties/wm-properties-capplet.c:1088
 msgid "Add..."
 msgstr "Ajouter..."
@@ -2659,6 +2655,12 @@ msgstr "Délai après la résolution d'un labyrinthe et le début d'un nouveau."
 msgid "If the solver can "
 msgstr ""
 
+#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:13
+#, fuzzy
+msgid " the end of a corridor it will color it this color."
+msgstr ""
+"Couleur d'un chemin évité si le solutionneur \"voit\" la fin d'un corridor."
+
 #: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:14
 msgid "Less Delay"
 msgstr "Plus court"
@@ -3426,7 +3428,6 @@ msgid "Author: UNKNOWN"
 msgstr "Auteur : INCONNU"
 
 #: capplets/screensaver-properties/screensaver-dialog.c:78
-#: capplets/session-properties/gsm-client-row.c:59
 msgid "Settings"
 msgstr "Paramètres"
 
@@ -3490,234 +3491,6 @@ msgstr "Configure l'économiseur d'écran"
 #: capplets/screensaver-properties/screensaver-properties.desktop.in.h:2
 msgid "Screensaver"
 msgstr "Économiseur d'écran"
-
-#. dialog
-#: capplets/session-properties/chooser.c:93
-msgid "Session Chooser"
-msgstr "Sélecteur de session"
-
-#: capplets/session-properties/chooser.c:96
-msgid "Start Session"
-msgstr "Démarrer une session"
-
-#: capplets/session-properties/chooser.c:99
-msgid "Cancel Login"
-msgstr "Annuler la connexion"
-
-#: capplets/session-properties/gsm-client-editor.c:100
-msgid "Order: "
-msgstr "Ordre : "
-
-#: capplets/session-properties/gsm-client-editor.c:110
-msgid "Style: "
-msgstr "Style : "
-
-#: capplets/session-properties/gsm-client-list.c:30
-msgid "This button sets the start order of the selected programs.\n"
-msgstr "Ce bouton définit l'ordre de démarrage des programmes sélectionnés.\n"
-
-#: capplets/session-properties/gsm-client-list.c:31
-msgid ""
-"This button sets the restart style of the selected programs:\n"
-"Normal programs are unaffected by logouts but can die;\n"
-"Respawn programs are never allowed to die;\n"
-"Trash programs are discarded on logout and can die;\n"
-"Settings programs are always started on every login."
-msgstr ""
-"Ce bouton définit le style du redémarrage des programmes sélectionnés :\n"
-"Les programmes normaux ne sont pas affectés par les fin de session \n"
-"mais peuvent se terminer ;\n"
-"Les programmes regénérés ne sont pas autorisé à se terminer ;\n"
-"Les programmes « trash » sont ignorés en fin de session et peuvent\n"
-"se terminer ;\n"
-"Les programmes de paramètrage sont lancés à chaque début de session."
-
-#: capplets/session-properties/gsm-client-list.c:36
-msgid ""
-"This button produces a key to the program states below:\n"
-"Inactive programs are waiting to start or have finished;\n"
-"Starting programs are being given time to get running;\n"
-"Running programs are normal members of the session;\n"
-"Saving programs are saving their session details;\n"
-"Programs which make no contact have Unknown states.\n"
-msgstr ""
-"Ce bouton produit une clé pour les états de programme suivants :\n"
-"Les programmes inactifs attendent de démarrer ou ont terminé ;\n"
-"Les programmes en cours de démarrage ont du temps pour démarrer ;\n"
-"Les programmes en cours d'exécution sont les membres normaux de la session "
-";\n"
-"Les programmes en cours de sauvegarde archivent les éléments de leur session "
-";\n"
-"Les programmes qui ne donnent pas signe de vie ont un état Inconnu.\n"
-
-#: capplets/session-properties/gsm-client-list.c:42
-msgid "This column gives the command used to start a program."
-msgstr "Cette colonne donne la commande utilisée pour démarrer un programme."
-
-#: capplets/session-properties/gsm-client-list.c:135
-msgid "Order"
-msgstr "Ordre"
-
-#: capplets/session-properties/gsm-client-list.c:136
-msgid "Style"
-msgstr "Style"
-
-#: capplets/session-properties/gsm-client-list.c:137
-msgid "State"
-msgstr "État"
-
-#: capplets/session-properties/gsm-client-list.c:138
-msgid "Program"
-msgstr "Programme"
-
-#: capplets/session-properties/gsm-client-row.c:31
-msgid "Inactive"
-msgstr "Inactif"
-
-#: capplets/session-properties/gsm-client-row.c:32
-msgid "Waiting to start or already finished."
-msgstr "En attente du démarrage ou déjà terminé."
-
-#: capplets/session-properties/gsm-client-row.c:34
-msgid "Starting"
-msgstr "Démarre"
-
-#: capplets/session-properties/gsm-client-row.c:35
-msgid "Started but has not yet reported state."
-msgstr "A démarré mais n'a pas encore signalé son état."
-
-#: capplets/session-properties/gsm-client-row.c:37
-msgid "Running"
-msgstr "En cours d'exécution"
-
-#: capplets/session-properties/gsm-client-row.c:38
-msgid "A normal member of the session."
-msgstr "Membre normal de la session."
-
-#: capplets/session-properties/gsm-client-row.c:40
-msgid "Saving"
-msgstr "En train d'enregistrer"
-
-#: capplets/session-properties/gsm-client-row.c:41
-msgid "Saving session details."
-msgstr "Enregistre les paramètres de session"
-
-#. This is about the only case where we'll put Unknown instead
-#. of simply not showing the info.
-#: capplets/session-properties/gsm-client-row.c:43 control-center/splash.c:178
-msgid "Unknown"
-msgstr "Inconnu"
-
-#: capplets/session-properties/gsm-client-row.c:44
-msgid "State not reported within timeout."
-msgstr "État non signalé dans le temps imparti."
-
-#: capplets/session-properties/gsm-client-row.c:50
-msgid "Normal"
-msgstr "Normal"
-
-#: capplets/session-properties/gsm-client-row.c:51
-msgid "Unaffected by logouts but can die."
-msgstr "Insensible aux fins de sessions, mais peut se terminer."
-
-#: capplets/session-properties/gsm-client-row.c:53
-msgid "Respawn"
-msgstr "Perpétuel"
-
-#: capplets/session-properties/gsm-client-row.c:54
-msgid "Never allowed to die."
-msgstr "Jamais autorisé a terminer."
-
-#: capplets/session-properties/gsm-client-row.c:56
-msgid "Trash"
-msgstr "Corbeille"
-
-#: capplets/session-properties/gsm-client-row.c:57
-msgid "Discarded on logout and can die."
-msgstr "Tué à la fin de la session et peut mourir."
-
-#: capplets/session-properties/gsm-client-row.c:60
-msgid "Always started on every login."
-msgstr "Toujours démarré à chaque nouvelle session."
-
-#: capplets/session-properties/gsm-protocol.c:500
-msgid "Remove Program"
-msgstr "Enlever Programme"
-
-#. frame for options
-#: capplets/session-properties/session-properties.c:148
-msgid "Options"
-msgstr "Options"
-
-#: capplets/session-properties/session-properties.c:159
-msgid "Show splash screen on login"
-msgstr "Afficher l'écran d'acceuil à la connexion"
-
-#: capplets/session-properties/session-properties.c:166
-msgid "Prompt on logout"
-msgstr "Confirmer la fin de session"
-
-#: capplets/session-properties/session-properties.c:173
-msgid "Automatically save changes to session"
-msgstr "Enregistrer automatiquement les changements à la session"
-
-#. frame for manually started programs
-#: capplets/session-properties/session-properties.c:178
-msgid "Non-session-managed Startup Programs"
-msgstr "Programmes de démarrage sans gestion de session"
-
-#: capplets/session-properties/session-properties.c:195
-#: capplets/session-properties/startup-programs.c:305
-msgid "Priority"
-msgstr "Priorité"
-
-#: capplets/session-properties/session-properties.c:196
-#: capplets/url-properties/url-properties.c:76
-msgid "Command"
-msgstr "Commande"
-
-#: capplets/session-properties/session-properties.c:210
-#: capplets/wm-properties/wm-properties-capplet.c:1093
-msgid "Edit..."
-msgstr "Éditer..."
-
-#: capplets/session-properties/session-properties.c:215
-#: capplets/wm-properties/wm-properties-capplet.c:1098
-msgid "Delete"
-msgstr "Effacer"
-
-#: capplets/session-properties/session-properties.c:225
-msgid "Browse Currently Running Programs..."
-msgstr "Voir les programmes en cours d'exécution..."
-
-#: capplets/session-properties/session-properties.c:417
-msgid "Only display warnings."
-msgstr "Afficher seulement les avertissements."
-
-#: capplets/session-properties/startup-programs.c:289
-#: capplets/session-properties/startup-programs.c:296
-msgid "Startup Command"
-msgstr "Commande de démarrage"
-
-#: capplets/session-properties/startup-programs.c:320
-msgid ""
-"Programs with smaller values are started before programs with higher values. "
-"The default value should be OK"
-msgstr ""
-"Les programmes avec des valeurs plus petites sont démarrées avant ceux ayant "
-"des valeurs plus élevées. La valeur par défaut devrait convenir."
-
-#: capplets/session-properties/startup-programs.c:339
-msgid "The startup command cannot be empty"
-msgstr "La commande de démarrage ne peux être vide"
-
-#: capplets/session-properties/startup-programs.c:379
-msgid "Add Startup Program"
-msgstr "Ajouter un programme de démarrage"
-
-#: capplets/session-properties/startup-programs.c:397
-msgid "Edit Startup Program"
-msgstr "Éditer le programme de démarrage"
 
 #: capplets/sound-properties/sound-properties.c:97
 msgid ""
@@ -4149,6 +3922,10 @@ msgstr "Erreur lors de l'initialisation du capplet « url-properties »"
 msgid "Protocol"
 msgstr "Protocole"
 
+#: capplets/url-properties/url-properties.c:76
+msgid "Command"
+msgstr "Commande"
+
 #: capplets/url-properties/url-properties.c:93
 msgid "handler:"
 msgstr "gestionnaire :"
@@ -4359,6 +4136,14 @@ msgstr "Éditer le gestionnaire de fenêtres"
 msgid "You cannot delete the current Window Manager"
 msgstr "Vous ne pouvez pas supprimer le gestionnaire de fenêtres actuel"
 
+#: capplets/wm-properties/wm-properties-capplet.c:1093
+msgid "Edit..."
+msgstr "Éditer..."
+
+#: capplets/wm-properties/wm-properties-capplet.c:1098
+msgid "Delete"
+msgstr "Effacer"
+
 #: capplets/wm-properties/wm-properties-capplet.c:1134
 msgid ""
 "an initialization error occurred while starting 'wm-properties-capplet'.\n"
@@ -4513,6 +4298,173 @@ msgstr "Nom d'utilisateur :"
 #: control-center/splash.c:52
 msgid "Host Name:"
 msgstr "Nom d'hôte :"
+
+#. This is about the only case where we'll put Unknown instead
+#. of simply not showing the info.
+#: control-center/splash.c:178
+msgid "Unknown"
+msgstr "Inconnu"
+
+#~ msgid "Session Chooser"
+#~ msgstr "Sélecteur de session"
+
+#~ msgid "Start Session"
+#~ msgstr "Démarrer une session"
+
+#~ msgid "Cancel Login"
+#~ msgstr "Annuler la connexion"
+
+#~ msgid "Order: "
+#~ msgstr "Ordre : "
+
+#~ msgid "Style: "
+#~ msgstr "Style : "
+
+#~ msgid "This button sets the start order of the selected programs.\n"
+#~ msgstr ""
+#~ "Ce bouton définit l'ordre de démarrage des programmes sélectionnés.\n"
+
+#~ msgid ""
+#~ "This button sets the restart style of the selected programs:\n"
+#~ "Normal programs are unaffected by logouts but can die;\n"
+#~ "Respawn programs are never allowed to die;\n"
+#~ "Trash programs are discarded on logout and can die;\n"
+#~ "Settings programs are always started on every login."
+#~ msgstr ""
+#~ "Ce bouton définit le style du redémarrage des programmes sélectionnés :\n"
+#~ "Les programmes normaux ne sont pas affectés par les fin de session \n"
+#~ "mais peuvent se terminer ;\n"
+#~ "Les programmes regénérés ne sont pas autorisé à se terminer ;\n"
+#~ "Les programmes « trash » sont ignorés en fin de session et peuvent\n"
+#~ "se terminer ;\n"
+#~ "Les programmes de paramètrage sont lancés à chaque début de session."
+
+#~ msgid ""
+#~ "This button produces a key to the program states below:\n"
+#~ "Inactive programs are waiting to start or have finished;\n"
+#~ "Starting programs are being given time to get running;\n"
+#~ "Running programs are normal members of the session;\n"
+#~ "Saving programs are saving their session details;\n"
+#~ "Programs which make no contact have Unknown states.\n"
+#~ msgstr ""
+#~ "Ce bouton produit une clé pour les états de programme suivants :\n"
+#~ "Les programmes inactifs attendent de démarrer ou ont terminé ;\n"
+#~ "Les programmes en cours de démarrage ont du temps pour démarrer ;\n"
+#~ "Les programmes en cours d'exécution sont les membres normaux de la session "
+#~ ";\n"
+#~ "Les programmes en cours de sauvegarde archivent les éléments de leur session "
+#~ ";\n"
+#~ "Les programmes qui ne donnent pas signe de vie ont un état Inconnu.\n"
+
+#~ msgid "This column gives the command used to start a program."
+#~ msgstr ""
+#~ "Cette colonne donne la commande utilisée pour démarrer un programme."
+
+#~ msgid "Order"
+#~ msgstr "Ordre"
+
+#~ msgid "Style"
+#~ msgstr "Style"
+
+#~ msgid "State"
+#~ msgstr "État"
+
+#~ msgid "Program"
+#~ msgstr "Programme"
+
+#~ msgid "Inactive"
+#~ msgstr "Inactif"
+
+#~ msgid "Waiting to start or already finished."
+#~ msgstr "En attente du démarrage ou déjà terminé."
+
+#~ msgid "Starting"
+#~ msgstr "Démarre"
+
+#~ msgid "Started but has not yet reported state."
+#~ msgstr "A démarré mais n'a pas encore signalé son état."
+
+#~ msgid "Running"
+#~ msgstr "En cours d'exécution"
+
+#~ msgid "A normal member of the session."
+#~ msgstr "Membre normal de la session."
+
+#~ msgid "Saving"
+#~ msgstr "En train d'enregistrer"
+
+#~ msgid "Saving session details."
+#~ msgstr "Enregistre les paramètres de session"
+
+#~ msgid "State not reported within timeout."
+#~ msgstr "État non signalé dans le temps imparti."
+
+#~ msgid "Normal"
+#~ msgstr "Normal"
+
+#~ msgid "Unaffected by logouts but can die."
+#~ msgstr "Insensible aux fins de sessions, mais peut se terminer."
+
+#~ msgid "Respawn"
+#~ msgstr "Perpétuel"
+
+#~ msgid "Never allowed to die."
+#~ msgstr "Jamais autorisé a terminer."
+
+#~ msgid "Trash"
+#~ msgstr "Corbeille"
+
+#~ msgid "Discarded on logout and can die."
+#~ msgstr "Tué à la fin de la session et peut mourir."
+
+#~ msgid "Always started on every login."
+#~ msgstr "Toujours démarré à chaque nouvelle session."
+
+#~ msgid "Remove Program"
+#~ msgstr "Enlever Programme"
+
+#~ msgid "Options"
+#~ msgstr "Options"
+
+#~ msgid "Show splash screen on login"
+#~ msgstr "Afficher l'écran d'acceuil à la connexion"
+
+#~ msgid "Prompt on logout"
+#~ msgstr "Confirmer la fin de session"
+
+#~ msgid "Automatically save changes to session"
+#~ msgstr "Enregistrer automatiquement les changements à la session"
+
+#~ msgid "Non-session-managed Startup Programs"
+#~ msgstr "Programmes de démarrage sans gestion de session"
+
+#~ msgid "Priority"
+#~ msgstr "Priorité"
+
+#~ msgid "Browse Currently Running Programs..."
+#~ msgstr "Voir les programmes en cours d'exécution..."
+
+#~ msgid "Only display warnings."
+#~ msgstr "Afficher seulement les avertissements."
+
+#~ msgid "Startup Command"
+#~ msgstr "Commande de démarrage"
+
+#~ msgid ""
+#~ "Programs with smaller values are started before programs with higher values. "
+#~ "The default value should be OK"
+#~ msgstr ""
+#~ "Les programmes avec des valeurs plus petites sont démarrées avant ceux ayant "
+#~ "des valeurs plus élevées. La valeur par défaut devrait convenir."
+
+#~ msgid "The startup command cannot be empty"
+#~ msgstr "La commande de démarrage ne peux être vide"
+
+#~ msgid "Add Startup Program"
+#~ msgstr "Ajouter un programme de démarrage"
+
+#~ msgid "Edit Startup Program"
+#~ msgstr "Éditer le programme de démarrage"
 
 #~ msgid "Ïî-áëèçêî"
 #~ msgstr "Proche"
@@ -4681,11 +4633,6 @@ msgstr "Nom d'hôte :"
 
 #~ msgid "Category"
 #~ msgstr "Catégorie"
-
-#~ msgid ""
-#~ "If the solver can \"see\" the end of a corridor it will color it this color."
-#~ msgstr ""
-#~ "Couleur d'un chemin évité si le solutionneur \"voit\" la fin d'un corridor."
 
 #~ msgid "Thickness of color bands (0 = Random)"
 #~ msgstr "Épaisseur des bandes de couleur (0 = aléatoire)"

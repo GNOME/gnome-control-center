@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.40\n"
-"POT-Creation-Date: 2001-03-11 13:07+0100\n"
+"POT-Creation-Date: 2001-03-15 14:08-0500\n"
 "PO-Revision-Date: 2001-02-09 10:56+02:00\n"
 "Last-Translator: Marius Andreiana <mandreiana@yahoo.com>\n"
 "Language-Team: Romanian <ro@li.org>\n"
@@ -32,6 +32,14 @@ msgstr ""
 "o eroare de iniþializare s-a produs la pornirea "
 "'background-properties-capplet'.\n"
 "renunþ...\n"
+
+#: capplets/background-properties/background-properties.desktop.in.h:1
+msgid "Background"
+msgstr ""
+
+#: capplets/background-properties/background-properties.desktop.in.h:2
+msgid "Configuration of the desktop's background"
+msgstr ""
 
 #: capplets/background-properties/property-background.c:116
 msgid "Disabled"
@@ -215,21 +223,63 @@ msgstr ""
 "Afiºeazã imaginea fundal: repetatã, centratã, scalatã sau cu menþinerea "
 "aspectului"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:238
-msgid "Gnome editor"
-msgstr "Editor Gnome"
-
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:249
-msgid "Run In Terminal"
-msgstr "Ruleazã în Terminal"
-
-#: capplets/file-types/file-types-capplet.desktop.in.h:1
-msgid "File Types and Programs"
+#: capplets/desktop-links/Desktop.directory.in.h:1
+#: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:1
+msgid "Desktop"
 msgstr ""
 
-#: capplets/file-types/file-types-capplet.desktop.in.h:2
-msgid "Specify which programs are used to open or view each file type"
+#: capplets/desktop-links/Documents.directory.in.h:1
+msgid "Configure how document types are handled"
 msgstr ""
+
+#: capplets/desktop-links/Documents.directory.in.h:2
+msgid "Document Handlers"
+msgstr ""
+
+#. create the app
+#: capplets/desktop-links/Gnome.directory.in.h:1 control-center/main.c:197
+#: control-center/splash.c:247
+msgid "Control Center"
+msgstr "Centrul de control"
+
+#: capplets/desktop-links/Gnome.directory.in.h:2
+#, fuzzy
+msgid "Control Center Menu"
+msgstr "Centrul de control"
+
+#: capplets/desktop-links/Multimedia.directory.in.h:1
+msgid "Configure the settings of your Multimedia devices"
+msgstr ""
+
+#: capplets/desktop-links/Multimedia.directory.in.h:2
+msgid "Multimedia"
+msgstr ""
+
+#: capplets/desktop-links/Peripherals.directory.in.h:1
+msgid "Configure your external devices"
+msgstr ""
+
+#: capplets/desktop-links/Peripherals.directory.in.h:2
+msgid "Peripherals"
+msgstr ""
+
+#: capplets/desktop-links/Session.directory.in.h:1
+msgid "Session"
+msgstr "Sesiune"
+
+#: capplets/desktop-links/Session.directory.in.h:2
+#, fuzzy
+msgid "Session Management Settings"
+msgstr "Selecþie screensaver"
+
+#: capplets/desktop-links/UIOptions.directory.in.h:1
+msgid "Configure the global settings of your GNOME applications"
+msgstr ""
+
+#: capplets/desktop-links/UIOptions.directory.in.h:2
+#, fuzzy
+msgid "User Interface"
+msgstr "Interfaþã"
 
 #: capplets/file-types/file-types-capplet-dialogs.c:387
 msgid "Edit Applications List"
@@ -468,183 +518,35 @@ msgstr "Extensie"
 msgid "Default Action"
 msgstr "Selecþie"
 
+#: capplets/file-types/file-types-capplet.desktop.in.h:1
+msgid "File Types and Programs"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet.desktop.in.h:2
+msgid "Specify which programs are used to open or view each file type"
+msgstr ""
+
 #: capplets/file-types/file-types-icon-entry.c:381
 #, fuzzy
 msgid "Select an icon"
 msgstr "Selecteazã un icon..."
 
-#: capplets/mouse-properties/mouse-properties.c:267
-msgid "Mouse buttons"
-msgstr "Butoane mouse"
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:238
+msgid "Gnome editor"
+msgstr "Editor Gnome"
 
-#: capplets/mouse-properties/mouse-properties.c:276
-msgid "Left handed"
-msgstr "Pentru stângaci"
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:249
+msgid "Run In Terminal"
+msgstr "Ruleazã în Terminal"
 
-#: capplets/mouse-properties/mouse-properties.c:278
-msgid "Right handed"
-msgstr "Pentru dreptaci"
-
-#. Mouse motion
-#: capplets/mouse-properties/mouse-properties.c:304
-msgid "Mouse motion"
-msgstr "Miºcare mouse"
-
-#: capplets/mouse-properties/mouse-properties.c:314
-msgid "Acceleration"
-msgstr "Accelerare"
-
-#: capplets/mouse-properties/mouse-properties.c:314
-#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:4
-#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:8
-#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:11
-msgid "Fast"
-msgstr "Rapidã"
-
-#: capplets/mouse-properties/mouse-properties.c:314
-#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:13
-#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:21
-#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:19
-msgid "Slow"
-msgstr "Înceatã"
-
-#: capplets/mouse-properties/mouse-properties.c:325
-#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:30
-msgid "Threshold"
-msgstr "Limitã"
-
-#: capplets/mouse-properties/mouse-properties.c:325
-#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:6
-#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:9
-#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:10
-msgid "Large"
-msgstr "Mare"
-
-#: capplets/mouse-properties/mouse-properties.c:325
-#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:14
-#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:15
-#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:22
-msgid "Small"
-msgstr "Micã"
-
-#: capplets/mouse-properties/mouse-properties.c:350
-msgid ""
-"an initialization error occurred while starting 'mouse-properties-capplet'.\n"
-"aborting...\n"
+#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:1
+msgid "Choose the editor that is invoked by gnome-edit"
 msgstr ""
-"o eroare de iniþializare s-a produs la pornirea 'mouse-properties-capplet'.\n"
-"renunþ...\n"
 
-#: capplets/screensaver-properties/callbacks.c:102
+#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:2
 #, fuzzy
-msgid "Require Password"
-msgstr "Necesitã parolã pentru deschidere"
-
-#: capplets/screensaver-properties/callbacks.c:154
-#, fuzzy
-msgid "Use power management."
-msgstr "Activeazã management putere"
-
-#: capplets/screensaver-properties/callbacks.c:309
-#, fuzzy
-msgid "No Screensaver"
-msgstr "Screensaver nou"
-
-#: capplets/screensaver-properties/callbacks.c:314
-#, fuzzy
-msgid "Random Screensaver"
-msgstr "Adaugã un nou screensaver"
-
-#: capplets/screensaver-properties/callbacks.c:483
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:56
-msgid "Settings..."
-msgstr "Setãri..."
-
-#. we need to special case random
-#: capplets/screensaver-properties/callbacks.c:491
-msgid "Random Settings"
-msgstr "Setãri aleatoare"
-
-#: capplets/screensaver-properties/callbacks.c:501
-#, c-format
-msgid "%s Settings..."
-msgstr "%s Setãri..."
-
-#: capplets/screensaver-properties/screensaver-dialog.c:46
-#, fuzzy
-msgid "About:"
-msgstr "Despre"
-
-#: capplets/screensaver-properties/screensaver-dialog.c:51
-msgid "Author:"
-msgstr "Autor:"
-
-#: capplets/screensaver-properties/screensaver-dialog.c:61
-msgid "Author: UNKNOWN"
-msgstr "Autor: NECUNOSCUT"
-
-#: capplets/screensaver-properties/screensaver-dialog.c:78
-msgid "Settings"
-msgstr "Setãri"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:38
-msgid "RANDOM SCREENSAVER"
-msgstr "SCREENSAVER ALEATOR"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:49
-msgid "Screen Saver"
-msgstr "Screensaver"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:61
-msgid ""
-"Pressing this button will popup a dialogbox that will help you setup the "
-"current screensaver."
-msgstr ""
-"Apãsând acest buton veþi vedea o fereastrã de dialog care vã va ajuta sã "
-"setaþi screensaver-ul curent."
-
-#. set up the initial frame, and get a vbox in which to pack things.
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:88
-#, fuzzy
-msgid "Screen Saver Settings"
-msgstr "Selecþie screensaver"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:96
-msgid "Start After "
-msgstr "Porneºte dupã "
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:102
-#, fuzzy
-msgid " Minutes."
-msgstr " minute"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:117
-#, fuzzy
-msgid "Priority:"
-msgstr "Prioritate"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:124
-#, fuzzy
-msgid "Low "
-msgstr "Micã"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:126
-msgid " Normal"
-msgstr " Normalã "
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:137
-#, fuzzy
-msgid "Shutdown monitor "
-msgstr "Închide monitorul dupã"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:139
-#, fuzzy
-msgid " minutes after screen saver has started."
-msgstr "Numai dupã ce screensaver-ul a rulat"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:152
-msgid "Screen Saver Demo"
-msgstr "Demo screensaver"
+msgid "Default Editor"
+msgstr "Mod MDI Implicit"
 
 #: capplets/keyboard-properties/keyboard-properties.c:262
 #, fuzzy
@@ -712,842 +614,122 @@ msgstr ""
 "'keyboard-properties-capplet'.\n"
 "renunþ...\n"
 
-#: capplets/sound-properties/sound-properties.c:97
+#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:1
+#, fuzzy
+msgid "Keyboard"
+msgstr "Sunet tastaturã"
+
+#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:2
+#, fuzzy
+msgid "Keyboard Properties"
+msgstr "Ratã de repetare tastaturã"
+
+#: capplets/mouse-properties/mouse-properties.c:267
+msgid "Mouse buttons"
+msgstr "Butoane mouse"
+
+#: capplets/mouse-properties/mouse-properties.c:276
+msgid "Left handed"
+msgstr "Pentru stângaci"
+
+#: capplets/mouse-properties/mouse-properties.c:278
+msgid "Right handed"
+msgstr "Pentru dreptaci"
+
+#. Mouse motion
+#: capplets/mouse-properties/mouse-properties.c:304
+msgid "Mouse motion"
+msgstr "Miºcare mouse"
+
+#: capplets/mouse-properties/mouse-properties.c:314
+msgid "Acceleration"
+msgstr "Accelerare"
+
+#: capplets/mouse-properties/mouse-properties.c:314
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:4
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:8
+#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:11
+msgid "Fast"
+msgstr "Rapidã"
+
+#: capplets/mouse-properties/mouse-properties.c:314
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:13
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:21
+#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:19
+msgid "Slow"
+msgstr "Înceatã"
+
+#: capplets/mouse-properties/mouse-properties.c:325
+#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:30
+msgid "Threshold"
+msgstr "Limitã"
+
+#: capplets/mouse-properties/mouse-properties.c:325
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:10
+msgid "Large"
+msgstr "Mare"
+
+#: capplets/mouse-properties/mouse-properties.c:325
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:14
+#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:15
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:22
+msgid "Small"
+msgstr "Micã"
+
+#: capplets/mouse-properties/mouse-properties.c:350
 msgid ""
-"an initialization error occurred while starting 'sound-properties-capplet'."
-msgstr ""
-"o eroare de iniþializare s-a produs la pornirea 'sound-properties-capplet'."
-
-#: capplets/sound-properties/sound-properties.c:188
-msgid "Event"
-msgstr "Eveniment"
-
-#: capplets/sound-properties/sound-properties.c:189
-msgid "File to Play"
-msgstr "Fiºier de redat"
-
-#: capplets/sound-properties/sound-properties.c:243
-msgid "Enable"
-msgstr "Activat"
-
-#: capplets/sound-properties/sound-properties.c:250
-msgid "Enable sound server startup"
-msgstr "Activeazã serverul de sunet la startup"
-
-#: capplets/sound-properties/sound-properties.c:258
-msgid "Sounds for events"
-msgstr "Sunete pentru evenimente"
-
-#: capplets/sound-properties/sound-properties.c:279
-msgid "General"
-msgstr "General"
-
-#: capplets/sound-properties/sound-properties.c:286
-msgid "Select sound file"
-msgstr "Selecteazã fiºierul de sunet"
-
-#: capplets/sound-properties/sound-properties.c:325
-msgid "Play"
-msgstr "Redare"
-
-#: capplets/sound-properties/sound-properties.c:336
-msgid "Sound Events"
-msgstr "Evenimente de sunet"
-
-#: capplets/sound-properties/sound-properties.c:355
-msgid ""
-"This copy of the GNOME control center was not compiled with sound support"
-msgstr ""
-"Aceastã copie a Centrului de Control GNOME nu a fost compilatã cu suport de "
-"sunet"
-
-#: capplets/sound-properties/sound-properties.c:748
-msgid "The sound file for this event does not exist."
-msgstr "Fiºierul de sunet pentru acest eveniment nu existã."
-
-#: capplets/sound-properties/sound-properties.c:750
-msgid ""
-"The sound file for this event does not exist.\n"
-"You may want to install the gnome-audio package\n"
-"for a set of default sounds."
-msgstr ""
-"Fiºierul de sunet pentru acest eveniment nu existã.\n"
-"Poate doriþi sã instalaþi pachetul gnome-audio\n"
-"pentru un set de sunete implicite."
-
-#: capplets/theme-switcher/demo.c:50
-msgid "One"
-msgstr "Unu"
-
-#: capplets/theme-switcher/demo.c:50
-msgid "Two"
-msgstr "Doi"
-
-#. just 8 short names that will serve as samples for titles in demo
-#: capplets/theme-switcher/demo.c:52
-msgid "Eenie"
-msgstr "Dã'"
-
-#: capplets/theme-switcher/demo.c:52
-msgid "Meenie"
-msgstr "ºi"
-
-#: capplets/theme-switcher/demo.c:53
-msgid "Mynie"
-msgstr "mie"
-
-#: capplets/theme-switcher/demo.c:53
-msgid "Moe"
-msgstr "o"
-
-#: capplets/theme-switcher/demo.c:54
-msgid "Catcha"
-msgstr "pungã"
-
-#: capplets/theme-switcher/demo.c:54
-msgid "Tiger"
-msgstr "Dacã"
-
-#: capplets/theme-switcher/demo.c:55
-msgid "By Its"
-msgstr "nu-ti"
-
-#: capplets/theme-switcher/demo.c:55
-msgid "Toe"
-msgstr "repugnã"
-
-#: capplets/theme-switcher/demo.c:114
-msgid "Selected themes from above will be tested by previewing here."
-msgstr "Temele selectate de mai sus vor fi testate pentru previzualizare aici."
-
-#. column one
-#: capplets/theme-switcher/demo.c:119
-msgid "Sample Button"
-msgstr "Exemplu de buton"
-
-#: capplets/theme-switcher/demo.c:123
-msgid "Sample Check Button"
-msgstr "Exemplu de buton bifare"
-
-#: capplets/theme-switcher/demo.c:128
-msgid "Sample Text Entry Field"
-msgstr "Exemplu de câmp de editare text"
-
-#: capplets/theme-switcher/demo.c:139
-msgid "Submenu"
-msgstr "Submeniu"
-
-#: capplets/theme-switcher/demo.c:146
-msgid "Item 1"
-msgstr "Element 1"
-
-#: capplets/theme-switcher/demo.c:149
-msgid "Another item"
-msgstr "Alt element"
-
-#: capplets/theme-switcher/demo.c:154
-msgid "Radio Button 1"
-msgstr "Buton radio 1"
-
-#: capplets/theme-switcher/demo.c:160
-msgid "Radio Button 2"
-msgstr "Buton radio 2"
-
-#: capplets/theme-switcher/gui.c:89
-#, c-format
-msgid ""
-"Error installing theme:\n"
-"'%s'\n"
-"%s"
-msgstr ""
-"Eroare la instalarea temei:\n"
-"'%s'\n"
-"%s"
-
-#: capplets/theme-switcher/gui.c:120
-msgid "Select a theme to install"
-msgstr "Selectaþi o temã pentru instalare"
-
-#: capplets/theme-switcher/gui.c:197
-msgid "Available Themes"
-msgstr "Teme disponibile"
-
-#: capplets/theme-switcher/gui.c:221
-msgid ""
-"Auto\n"
-"Preview"
-msgstr ""
-"Previzualizare\n"
-"automatã"
-
-#: capplets/theme-switcher/gui.c:233
-msgid ""
-"Install new\n"
-"theme..."
-msgstr ""
-"Instaleazã o nouã  \n"
-"temã..."
-
-#. Font selector.
-#.
-#: capplets/theme-switcher/gui.c:239
-msgid "User Font"
-msgstr "Font utilizator"
-
-#. FIXME - should really get this from X somehow
-#. for now we just assume default gtk font
-#: capplets/theme-switcher/gui.c:257
-msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
-msgstr "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-iso8859-2"
-
-#: capplets/theme-switcher/gui.c:276
-msgid "Use custom font."
-msgstr "Utilizeazã un font specific"
-
-#: capplets/theme-switcher/install.c:26
-msgid "Home directory doesn't exist!\n"
-msgstr "Directorul acasã nu existã!\n"
-
-#: capplets/theme-switcher/install.c:36
-msgid "Theme does not exist"
-msgstr "Tema nu existã"
-
-#: capplets/theme-switcher/install.c:68
-#, c-format
-msgid "Command '%s' failed"
-msgstr "Comanda '%s' a eºuat"
-
-#: capplets/theme-switcher/install.c:73
-msgid "Unknown file format"
-msgstr "Format fiºier necunoscut"
-
-#: capplets/ui-properties/ui-properties.c:54
-msgid "Can detach and move toolbars"
-msgstr "Poate detaºa ºi muta barele de unelte"
-
-#: capplets/ui-properties/ui-properties.c:59
-#, fuzzy
-msgid "Toolbars have relieved border"
-msgstr "Barele de unelte au chenar vizibil"
-
-#: capplets/ui-properties/ui-properties.c:64
-#, fuzzy
-msgid "Toolbar buttons have relieved border"
-msgstr "Barele de unelte au chenar vizibil"
-
-#: capplets/ui-properties/ui-properties.c:69
-#, fuzzy
-msgid "Toolbars have line separators"
-msgstr "Barele de unelte au linii de separare"
-
-#: capplets/ui-properties/ui-properties.c:74
-#, fuzzy
-msgid "Toolbars have text labels"
-msgstr "Barele de unelte au chenar vizibil"
-
-#: capplets/ui-properties/ui-properties.c:103
-msgid "Can detach and move menus"
-msgstr "Poate detaºa ºi muta meniuri"
-
-#: capplets/ui-properties/ui-properties.c:108
-#, fuzzy
-msgid "Menus have relieved border"
-msgstr "Barele meniurile au chenar"
-
-#: capplets/ui-properties/ui-properties.c:112
-#, fuzzy
-msgid "Submenus can be torn off"
-msgstr "Meniurile pot fi dezactivate"
-
-#: capplets/ui-properties/ui-properties.c:116
-msgid "Menu items have icons"
-msgstr "Elementele din meniu pot avea icon-uri"
-
-#: capplets/ui-properties/ui-properties.c:140
-#, fuzzy
-msgid "Statusbar is interactive when possible"
-msgstr "Bara de status este inactivã când e posibil"
-
-#: capplets/ui-properties/ui-properties.c:145
-#, fuzzy
-msgid "Statusbar progress meter is on the right"
-msgstr "Indicatorul de progres din bara de status este în dreapta"
-
-#: capplets/ui-properties/ui-properties.c:162
-msgid "Menu Options"
-msgstr "Opþiuni meniu"
-
-#: capplets/ui-properties/ui-properties.c:163
-msgid "Statusbar Options"
-msgstr "Opþiuni barã de status"
-
-#: capplets/ui-properties/ui-properties.c:164
-msgid "Toolbar Options"
-msgstr "Opþiuni barã de unelte"
-
-#: capplets/ui-properties/ui-properties.c:170
-#, fuzzy
-msgid "Dialog buttons"
-msgstr "Butoane de dialog"
-
-#: capplets/ui-properties/ui-properties.c:171
-msgid "Default value"
-msgstr "Valoare implicitã"
-
-#: capplets/ui-properties/ui-properties.c:172
-#, fuzzy
-msgid "Spread buttons out"
-msgstr "Întins"
-
-#: capplets/ui-properties/ui-properties.c:173
-msgid "Put buttons on edges"
-msgstr "Pune butoanele pe margini"
-
-#: capplets/ui-properties/ui-properties.c:174
-msgid "Left-justify buttons"
-msgstr "Aliniazã butoanele la stânga"
-
-#: capplets/ui-properties/ui-properties.c:175
-msgid "Right-justify buttons"
-msgstr "Aliniazã butoanele la dreapta"
-
-#: capplets/ui-properties/ui-properties.c:180
-msgid "Dialog buttons have icons"
-msgstr "Butoanele de dialog au icon-uri"
-
-#: capplets/ui-properties/ui-properties.c:185
-#, fuzzy
-msgid "Use statusbar instead of dialog when possible"
-msgstr "Utilizeazã bara de status în locul dialogurilor când este posibil"
-
-#: capplets/ui-properties/ui-properties.c:207
-msgid "Dialog position"
-msgstr "Poziþie dialoguri"
-
-#: capplets/ui-properties/ui-properties.c:208
-msgid "Let window manager decide"
-msgstr "Lasã managerul de ferestre sã decidã"
-
-#: capplets/ui-properties/ui-properties.c:209
-#, fuzzy
-msgid "Center of the screen"
-msgstr "În centrul ecranului"
-
-#: capplets/ui-properties/ui-properties.c:210
-msgid "At the mouse pointer"
-msgstr "La cursorul mouse-ului"
-
-#: capplets/ui-properties/ui-properties.c:215
-#, fuzzy
-msgid "Dialog hints"
-msgstr "Dialoguri"
-
-#: capplets/ui-properties/ui-properties.c:216
-#, fuzzy
-msgid "Dialogs are like other windows"
-msgstr "Dialogurile sunt tratate"
-
-#: capplets/ui-properties/ui-properties.c:217
-#, fuzzy
-msgid "Dialogs are treated specially by window manager"
-msgstr "Special de cãtre managerul de ferestre"
-
-#: capplets/ui-properties/ui-properties.c:222
-msgid "Place dialogs over application window when possible"
-msgstr "Plaseazã dialogurile peste ferestrele aplicaþiilor când este posibil"
-
-#: capplets/ui-properties/ui-properties.c:243
-msgid "Dialog Layout"
-msgstr "Aspect dialog"
-
-#: capplets/ui-properties/ui-properties.c:244
-msgid "Dialog Behavior"
-msgstr "Comportament dialog"
-
-#: capplets/ui-properties/ui-properties.c:250
-msgid "Default MDI Mode"
-msgstr "Mod MDI Implicit"
-
-#: capplets/ui-properties/ui-properties.c:251
-#, fuzzy
-msgid "Notebook"
-msgstr "Taburi notebook"
-
-#: capplets/ui-properties/ui-properties.c:252
-msgid "Toplevel"
-msgstr "Toplevel"
-
-#: capplets/ui-properties/ui-properties.c:253
-msgid "Modal"
-msgstr "Modal"
-
-#: capplets/ui-properties/ui-properties.c:258
-msgid "MDI notebook tab position"
-msgstr "Poziþia tab-ului MDI notebook"
-
-#: capplets/ui-properties/ui-properties.c:259
-msgid "Left"
-msgstr "Stânga"
-
-#: capplets/ui-properties/ui-properties.c:260
-msgid "Right"
-msgstr "Dreapta"
-
-#: capplets/ui-properties/ui-properties.c:261
-msgid "Top"
-msgstr "Sus"
-
-#: capplets/ui-properties/ui-properties.c:262
-msgid "Bottom"
-msgstr "Jos"
-
-#: capplets/ui-properties/ui-properties.c:277
-msgid "GNOME MDI Options"
-msgstr "Opþiuni MDI GNOME"
-
-#: capplets/url-properties/url-properties.c:51
-msgid "Error initializing the `url-properties' capplet."
-msgstr "Eroare la iniþializarea capplet-ului `url-properties'."
-
-#: capplets/url-properties/url-properties.c:76
-msgid "Protocol"
-msgstr "Protocol"
-
-#: capplets/url-properties/url-properties.c:76
-msgid "Command"
-msgstr "Comandã "
-
-#: capplets/url-properties/url-properties.c:93
-msgid "handler:"
-msgstr "handler:"
-
-#. set some commonly used handlers
-#: capplets/url-properties/url-properties.c:103
-msgid "Netscape"
-msgstr "Netscape"
-
-#: capplets/url-properties/url-properties.c:108
-msgid "Netscape (new window)"
-msgstr "Netscape (fereastrã nouã)"
-
-#: capplets/url-properties/url-properties.c:121
-msgid "Help browser"
-msgstr "Browser ajutor"
-
-#: capplets/url-properties/url-properties.c:127
-msgid "Help browser (new window)"
-msgstr "Browser ajutor (fereastrã nouã)"
-
-#: capplets/url-properties/url-properties.c:140
-msgid "Set"
-msgstr "Seteazã "
-
-#: capplets/url-properties/url-properties.c:148
-msgid "Remove"
-msgstr "Eliminã "
-
-#: capplets/wm-properties/wm-properties-capplet.c:142
-#, c-format
-msgid ""
-"Starting %s\n"
-"(%d seconds left before operation times out)"
-msgstr ""
-"Pornesc %s\n"
-"(%d de secunde au mai rãmas pânã timpul alocat operaþiei va expira)"
-
-#: capplets/wm-properties/wm-properties-capplet.c:303
-#, c-format
-msgid "%s (Current)"
-msgstr "%s (Curent)"
-
-#: capplets/wm-properties/wm-properties-capplet.c:306
-#, c-format
-msgid "Run Configuration Tool for %s"
-msgstr "Ruleazã unealta de configurare pentru %s"
-
-#: capplets/wm-properties/wm-properties-capplet.c:317
-msgid " (Not found)"
-msgstr " (Negãsit)"
-
-#: capplets/wm-properties/wm-properties-capplet.c:356
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\tAnother window manager is already running and could not be killed\n"
-msgstr ""
-"wm-properties-capplet: Nu se poate iniþializa managerul de ferestre.\n"
-"\tAlt manager de ferestre ruleazã ºi nu poate fi oprit\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:360
-#, c-format
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\t'%s' didn't start\n"
-msgstr ""
-"wm-properties-capplet: Nu se poate iniþializa managerul de ferestre.\n"
-"\t'%s' nu a pornit\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:413
-msgid "Previous window manager did not die\n"
-msgstr "Managerul de ferestre precedent nu a fost oprit\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:446
-#, c-format
-msgid ""
-"Could not start '%s'.\n"
-"Falling back to previous window manager '%s'\n"
-msgstr ""
-"Nu am putut porni '%s'.\n"
-"Reîntoarcere la managerul de ferestre precedent '%s'\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:477
-msgid ""
-"Could not start fallback window manager.\n"
-"Please run a window manager manually. You can\n"
-"do this by selecting \"Run Program\" in the\n"
-"foot menu\n"
-msgstr ""
-"Nu am putut porni managerul de ferestre de fallback.\n"
-"Vã rog sã rulaþi manual un manager de ferestre. Puteþi\n"
-"face aceasta selectând \"Ruleazã program\" în meniul\n"
-"GNOME\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:502
-#: capplets/wm-properties/wm-properties-capplet.c:868
-#: capplets/wm-properties/wm-properties-capplet.c:875
-#: capplets/wm-properties/wm-properties-capplet.c:1021
-msgid "OK"
-msgstr "OK"
-
-#: capplets/wm-properties/wm-properties-capplet.c:520
-msgid ""
-"Your current window manager has been changed. In order for\n"
-"this change to be saved, you will need to save your current\n"
-"session. You can do so immediately by selecting the \"Save session\n"
-"now\" below, or you can save your session later.  This can be\n"
-"done either selecting \"Save Current Session\" under \"Settings\"\n"
-"in the main menu, or by turning on \"Save Current Setup\" when\n"
-"you log out.\n"
-msgstr ""
-"Managerul de ferestre curent a fost schimbat. Pentru ca schimbarea\n"
-"sã fie salvatã, va trebui sã salvaþi sesiunea curentã.\n"
-"Puteþi face asta imediat prin selectarea \"Salveazã sesiunea curentã\"\n"
-"de mai jos, sau puteþi salva sesiunea mai târziu. Aceasta poate fi fãcutã\n"
-"fie prin selectarea \"Salveazã sesiunea curentã\" din \"Settings\" în "
-"meniul\n"
-"principal, ori prin activarea \"Salveazã setãrile curente\" din dialogul\n"
-"de logout.\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:527
-msgid "Save Session Later"
-msgstr "Salveazã sesiunea mai târziu"
-
-#: capplets/wm-properties/wm-properties-capplet.c:527
-msgid "Save Session Now"
-msgstr "Salveazã sesiunea acum"
-
-#: capplets/wm-properties/wm-properties-capplet.c:530
-msgid ""
-"Your current window manager has been changed. In order for\n"
-"this change to be saved, you will need to save your current\n"
-"session. This can be done by either selecting \"Save Current Session\"\n"
-"under \"Settings\" in the main menu, or by turning on\n"
-"\"Save Current Setup\" when you log out.\n"
-msgstr ""
-"Managerul de ferestre curent a fost schimbat. Pentru ca schimbarea\n"
-"sã fie salvatã, va trebui sã salvaþi sesiunea curentã.\n"
-"Aceasta poate fi fãcutã fie prin selectarea \"Salveazã sesiunea curentã\"\n"
-"din meniul \"Setãri\" în meniul principal, sau prin activarea\n"
-"\"Salveazã setãrile curente\" din dialogul de logout.\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:757
-msgid "Add New Window Manager"
-msgstr "Adaugã un nou maanager de ferestre"
-
-#: capplets/wm-properties/wm-properties-capplet.c:771
-msgid "Name:"
-msgstr "Nume:"
-
-#: capplets/wm-properties/wm-properties-capplet.c:784
-msgid "Command:"
-msgstr "Comandã:"
-
-#: capplets/wm-properties/wm-properties-capplet.c:797
-msgid "Configuration Command:"
-msgstr "Comandã configurare:"
-
-#: capplets/wm-properties/wm-properties-capplet.c:816
-msgid "Window manager is session managed"
-msgstr "Managerul de ferestre este \"session managed\""
-
-#: capplets/wm-properties/wm-properties-capplet.c:866
-msgid "Name cannot be empty"
-msgstr "Numele nu poate fi vid"
-
-#: capplets/wm-properties/wm-properties-capplet.c:873
-msgid "Command cannot be empty"
-msgstr "Comanda nu poate fi vidã"
-
-#: capplets/wm-properties/wm-properties-capplet.c:922
-#: capplets/wm-properties/wm-properties-capplet.c:964
-msgid "Edit Window Manager"
-msgstr "Editeazã managerul de ferestre"
-
-#: capplets/wm-properties/wm-properties-capplet.c:1020
-msgid "You cannot delete the current Window Manager"
-msgstr "Nu puteþi ºterge managerul de ferestre curent"
-
-#: capplets/wm-properties/wm-properties-capplet.c:1093
-msgid "Edit..."
-msgstr "Editeazã"
-
-#: capplets/wm-properties/wm-properties-capplet.c:1098
-msgid "Delete"
-msgstr "ªterge"
-
-#: capplets/wm-properties/wm-properties-capplet.c:1134
-msgid ""
-"an initialization error occurred while starting 'wm-properties-capplet'.\n"
+"an initialization error occurred while starting 'mouse-properties-capplet'.\n"
 "aborting...\n"
 msgstr ""
-"o eroare de iniþializare s-a produs la pornirea 'wm-properties-capplet'.\n"
+"o eroare de iniþializare s-a produs la pornirea 'mouse-properties-capplet'.\n"
 "renunþ...\n"
 
-#: control-center/callbacks.c:102 control-center/gnomecc.desktop.in.h:1
-msgid "GNOME Control Center"
-msgstr "Centrul de control GNOME"
-
-#: control-center/callbacks.c:105
+#: capplets/mouse-properties/mouse-properties.desktop.in.h:1
 #, fuzzy
-msgid "Desktop Properties manager."
-msgstr "Managerul de proprietãþi desktop."
+msgid "Mouse"
+msgstr "o"
 
-#: control-center/capplet-manager.c:179
-msgid "Try"
-msgstr "Încearcã"
-
-#: control-center/capplet-manager.c:185
-msgid "Revert"
-msgstr "Anuleazã"
-
-#. set the help item
-#: control-center/capplet-manager.c:208
-#, c-format
-msgid "Help with '%s' settings"
-msgstr "Ajutor cu setãrile '%s'"
-
-#: control-center/capplet-widget-libs.c:46
-msgid "id of the capplet -- assigned by the control-center"
-msgstr "id capplet -- asignat de control-center"
-
-#: control-center/capplet-widget-libs.c:46
-msgid "ID"
-msgstr "ID"
-
-#: control-center/capplet-widget-libs.c:47
-msgid "Multi-capplet id."
-msgstr "Multi-capplet id."
-
-#: control-center/capplet-widget-libs.c:47
-msgid "CAPID"
-msgstr "CAPID"
-
-#: control-center/capplet-widget-libs.c:48
-msgid "X ID of the socket it's plugged into"
-msgstr "X ID-ul socket-ului este conectat la"
-
-#: control-center/capplet-widget-libs.c:48
-msgid "XID"
-msgstr "XID"
-
-#: control-center/capplet-widget-libs.c:49
-msgid "IOR of the control-center"
-msgstr "IOR-ul control-center-ului"
-
-#: control-center/capplet-widget-libs.c:49
-msgid "IOR"
-msgstr "IOR"
-
-#: control-center/capplet-widget-libs.c:50
-msgid "Initialize session settings"
-msgstr "Iniþializare setãri sesiune"
-
-#: control-center/capplet-widget-libs.c:51
-msgid "Ignore default action.  Used for custom init-session cases"
-msgstr ""
-"Ignorã acþiunea implicitã. Utilizat pentru cazuri init-session specifice"
-
-#: control-center/capplet-widget.c:272
-msgid "Sorry, no help is available for these settings."
-msgstr "Îmi pare rãu, nu este disponibil ajutor pentru aceste setãri."
-
-#: control-center/corba-glue.c:77
-msgid "capplet-command to be run."
-msgstr "comanda capplet ce trebuie rulatã."
-
-#: control-center/corba-glue.c:77
-msgid "CAPPLET"
-msgstr "CAPPLET"
-
-#: control-center/main.c:36
+#: capplets/mouse-properties/mouse-properties.desktop.in.h:2
 #, fuzzy
-msgid "Help on control-center"
-msgstr "Noul Centrul de control"
+msgid "Mouse Properties"
+msgstr "Proprietãþi generale"
 
-#: control-center/main.c:36
-msgid "Help with the GNOME control-center."
-msgstr "Ajutorul GNOME control-center"
-
-#: control-center/main.c:38
-msgid "Help with the current configuration page."
-msgstr "Ajutor cu pagina curentã de configurare."
-
-#: control-center/main.c:41
-msgid "About"
-msgstr "Despre"
-
-#: control-center/main.c:41
-msgid "About the GNOME control-center."
-msgstr "Despre Centrul de control GNOME"
-
-#. we create the widgets
-#: control-center/main.c:69
-msgid "Warning:"
-msgstr "Atenþie:"
-
-#: control-center/main.c:69
-msgid "Discard all changes"
-msgstr "Anuleazã toate schimbãrile"
-
-#. ...labels, etc
-#: control-center/main.c:78
-msgid ""
-"The following modules have had changes made, but not committed.  If you "
-"would like to edit them, please double click on the appropriate entry."
-msgstr ""
-"Urmãtoarele module au fost modificate, însã nu au fost salvate. Dacã doriþi "
-"sã le editaþi, vã rog sã faceþi dublu-clic pe elementul corespunzãtor."
-
-#. create the app
-#: capplets/desktop-links/Gnome.directory.in.h:1 control-center/main.c:197
-#: control-center/splash.c:247
-msgid "Control Center"
-msgstr "Centrul de control"
-
-#: control-center/splash.c:48
-msgid "Operating System:"
-msgstr "Sistem de operare:"
-
-#: control-center/splash.c:49
-msgid "Distribution Version:"
-msgstr "Versiune distribuþie:"
-
-#: control-center/splash.c:50
-msgid "Processor Type:"
-msgstr "Tip procesor:"
-
-#: control-center/splash.c:51
-msgid "User Name:"
-msgstr "Nume utilizator:"
-
-#: control-center/splash.c:52
-msgid "Host Name:"
-msgstr "Nume host:"
-
-#. This is about the only case where we'll put Unknown instead
-#. of simply not showing the info.
-#: control-center/splash.c:178
-msgid "Unknown"
-msgstr "Necunoscut"
-
-#: control-center/gnomecc.desktop.in.h:2
-msgid "The GNOME configuration tool"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties.desktop.in.h:1
+#: capplets/screensaver-properties/callbacks.c:102
 #, fuzzy
-msgid "Choose a window manager"
-msgstr "Lasã managerul de ferestre sã decidã"
+msgid "Require Password"
+msgstr "Necesitã parolã pentru deschidere"
 
-#: capplets/wm-properties/wm-properties.desktop.in.h:2
+#: capplets/screensaver-properties/callbacks.c:154
 #, fuzzy
-msgid "Window Manager"
-msgstr "Editeazã managerul de ferestre"
+msgid "Use power management."
+msgstr "Activeazã management putere"
 
-#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.h:1
-msgid "Enlightenment"
-msgstr ""
-
-#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.h:1
-msgid "Ice WM"
-msgstr ""
-
-#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.h:1
-msgid "Scwm"
-msgstr ""
-
-#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.h:1
+#: capplets/screensaver-properties/callbacks.c:309
 #, fuzzy
-msgid "Window Maker"
-msgstr "Editeazã managerul de ferestre"
-
-#: capplets/wm-properties/wm-desktops/twm.desktop.in.h:1
-msgid "twm"
-msgstr ""
-
-#: capplets/url-properties/url-properties.desktop.in.h:1
-msgid "Configure which programs are used to display URLs"
-msgstr ""
-
-#: capplets/url-properties/url-properties.desktop.in.h:2
-#, fuzzy
-msgid "URL Handlers"
-msgstr "handler:"
-
-#: capplets/ui-properties/application.desktop.in.h:1
-#, fuzzy
-msgid "Applications"
-msgstr "Opþiuni"
-
-#: capplets/ui-properties/application.desktop.in.h:2
-msgid "Sets the default feel of GNOME applications"
-msgstr ""
-
-#: capplets/ui-properties/dialogs.desktop.in.h:1
-#, fuzzy
-msgid "Dialogs"
-msgstr "Dialoguri"
-
-#: capplets/ui-properties/mdi.desktop.in.h:1
-msgid "MDI"
-msgstr ""
-
-#: capplets/theme-switcher/theme-selector.desktop.in.h:1
-#, fuzzy
-msgid "Select which desktop theme to use"
-msgstr "Selectaþi o temã pentru instalare"
-
-#: capplets/theme-switcher/theme-selector.desktop.in.h:2
-#, fuzzy
-msgid "Theme Selector"
-msgstr "Selecþie"
-
-#: capplets/sound-properties/sound-properties.desktop.in.h:1
-msgid "Configure GNOME's use of sound"
-msgstr ""
-
-#: capplets/sound-properties/sound-properties.desktop.in.h:2
-#, fuzzy
-msgid "Sound"
-msgstr "Mai solid"
-
-#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:1
-msgid "Configure the settings of the screensaver"
-msgstr ""
-
-#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:2
-#, fuzzy
-msgid "Screensaver"
+msgid "No Screensaver"
 msgstr "Screensaver nou"
+
+#: capplets/screensaver-properties/callbacks.c:314
+#, fuzzy
+msgid "Random Screensaver"
+msgstr "Adaugã un nou screensaver"
+
+#: capplets/screensaver-properties/callbacks.c:483
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:56
+msgid "Settings..."
+msgstr "Setãri..."
+
+#. we need to special case random
+#: capplets/screensaver-properties/callbacks.c:491
+msgid "Random Settings"
+msgstr "Setãri aleatoare"
+
+#: capplets/screensaver-properties/callbacks.c:501
+#, c-format
+msgid "%s Settings..."
+msgstr "%s Setãri..."
 
 #: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:1
 msgid "3D Clock"
@@ -1721,7 +903,7 @@ msgid "Whales, dolphins and sharks swimming around, in 3D"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:1
-msgid " A show of objects interacting through attractive and repulsive forces."
+msgid "A show of objects interacting through attractive and repulsive forces."
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:2
@@ -1811,7 +993,7 @@ msgstr "Despre"
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:13
 #: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:6
 #: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:8
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:4
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:5
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:13
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:9
 #: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:5
@@ -1850,12 +1032,13 @@ msgstr "Mai repede"
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:8
 #: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:12
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:8
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:11
 #: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:7
 #: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:13
 #: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:16
-#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:7
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:8
 #: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:17
 #: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:12
 #: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:12
@@ -1930,14 +1113,14 @@ msgstr ""
 #: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:13
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:20
 #: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:11
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:18
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:12
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:17
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:14
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:23
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:19
 #: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:10
 #: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:17
 #: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:24
-#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:12
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:13
 #: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:23
 #: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:20
 #: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:20
@@ -1971,14 +1154,14 @@ msgstr "Micã"
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:29
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:21
 #: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:12
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:19
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:13
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:18
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:24
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:20
 #: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:11
 #: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:18
 #: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:25
-#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:13
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:14
 #: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:18
 #: capplets/screensaver-properties/screensaver-desktops/Greynetic.desktop.in.h:12
 #: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:28
@@ -1993,10 +1176,6 @@ msgstr "Micã"
 #: capplets/screensaver-properties/screensaver-desktops/Munch.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:19
 msgid "Speed of Motion."
-msgstr ""
-
-#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:31
-msgid "Ïî-áëèçêî"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:1
@@ -2108,13 +1287,13 @@ msgstr "Dezactiveazã screensaver-ul"
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:17
 #: capplets/screensaver-properties/screensaver-desktops/Braid.desktop.in.h:8
 #: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:10
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:16
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:19
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:9
 #: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:14
 #: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:20
-#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:10
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:11
 #: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:18
 #: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:15
@@ -2369,16 +1548,10 @@ msgid "James Macnicol <J.Macnicol@student.anu.edu.au>"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:14
-msgid ""
-"James Macnicol <J.Macnicol@student.anu.edu.au>, Ïðåäîâ: Äèëÿí Ïàëàóçîâ "
-"<didopalauzov@uk2.net>"
-msgstr ""
-
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:15
 msgid "Lots of random bubbles grow until they pop."
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:17
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:16
 msgid "Simple"
 msgstr ""
 
@@ -2418,52 +1591,49 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:3
 #, fuzzy
+msgid "Change the number of seeds."
+msgstr "numãr de furnici"
+
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:4
+#, fuzzy
 msgid "Coral"
 msgstr "Normal"
 
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:5
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:6
 #, fuzzy
 msgid "Denser"
 msgstr "General"
 
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:7
 msgid "Density"
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:7
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:9
 msgid "Frederick Roeber"
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:8
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:10
 #, fuzzy
 msgid "Number of seeds"
 msgstr "numãr de furnici"
 
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:11
 #, fuzzy
 msgid "Seeds"
 msgstr "Vitezã"
 
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:10
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:12
 msgid "Simulates coral growth"
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:11
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:13
 msgid "Simulates coral growth."
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:14
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:16
 #, fuzzy
 msgid "Thinner"
 msgstr "Dacã"
-
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:15
-msgid "Ïî-áúðçî"
-msgstr ""
-
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:16
-msgid "Ïðîìåíÿ áðîÿ íà ñåìåíàòà."
-msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Critical.desktop.in.h:1
 msgid "Critical"
@@ -2566,12 +1736,6 @@ msgstr "numãr de furnici"
 
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:21
 msgid "Stephen Linhart, Ozymandias Desiderata, Jamie Zawinski"
-msgstr ""
-
-#: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:22
-msgid ""
-"Stephen Linhart, Ozymandias Desiderata, Jamie Zawinski, Ïðåâîä: Äèëÿí "
-"Ïàëàóçîâ <didopalauzov@uk2.net>"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:3
@@ -2765,36 +1929,37 @@ msgid "Draws a point moving around a circle which moves around a circle."
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:6
+#, fuzzy
+msgid "Epicycle"
+msgstr "Închide"
+
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:7
 msgid ""
 "Epicycle draws the path traced out by a point on the edge of a circle that "
 "is rotating around the rim of another circle, and so on."
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:8
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:9
 msgid "Holdtime"
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:10
 msgid "James Youngman <jay@gnu.org>"
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:11
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:12
 #: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:17
 #: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:17
 #, fuzzy
 msgid "Seconds"
 msgstr "Selecþie"
 
-#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:14
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:15
 msgid "Time finished product is shown."
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:15
-msgid "When the figure is complete, epicycle pauses this number of seconds."
-msgstr ""
-
 #: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:16
-msgid "Ëåíòà"
+msgid "When the figure is complete, epicycle pauses this number of seconds."
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:1
@@ -3526,6 +2691,10 @@ msgstr ""
 msgid "If the solver can "
 msgstr ""
 
+#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:13
+msgid " the end of a corridor it will color it this color."
+msgstr ""
+
 #: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:14
 msgid "Less Delay"
 msgstr ""
@@ -3917,11 +3086,6 @@ msgstr ""
 msgid "Rd-bomb"
 msgstr "Aleator"
 
-#: capplets/desktop-links/Desktop.directory.in.h:1
-#: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:1
-msgid "Desktop"
-msgstr ""
-
 #: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:2
 msgid "Display oily drops."
 msgstr ""
@@ -4291,89 +3455,520 @@ msgstr "Degrade vertical"
 msgid "Xteevee"
 msgstr ""
 
-#: capplets/mouse-properties/mouse-properties.desktop.in.h:1
+#: capplets/screensaver-properties/screensaver-dialog.c:46
 #, fuzzy
-msgid "Mouse"
-msgstr "o"
+msgid "About:"
+msgstr "Despre"
 
-#: capplets/mouse-properties/mouse-properties.desktop.in.h:2
+#: capplets/screensaver-properties/screensaver-dialog.c:51
+msgid "Author:"
+msgstr "Autor:"
+
+#: capplets/screensaver-properties/screensaver-dialog.c:61
+msgid "Author: UNKNOWN"
+msgstr "Autor: NECUNOSCUT"
+
+#: capplets/screensaver-properties/screensaver-dialog.c:78
+msgid "Settings"
+msgstr "Setãri"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:38
+msgid "RANDOM SCREENSAVER"
+msgstr "SCREENSAVER ALEATOR"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:49
+msgid "Screen Saver"
+msgstr "Screensaver"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:61
+msgid ""
+"Pressing this button will popup a dialogbox that will help you setup the "
+"current screensaver."
+msgstr ""
+"Apãsând acest buton veþi vedea o fereastrã de dialog care vã va ajuta sã "
+"setaþi screensaver-ul curent."
+
+#. set up the initial frame, and get a vbox in which to pack things.
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:88
 #, fuzzy
-msgid "Mouse Properties"
-msgstr "Proprietãþi generale"
-
-#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:1
-#, fuzzy
-msgid "Keyboard"
-msgstr "Sunet tastaturã"
-
-#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:2
-#, fuzzy
-msgid "Keyboard Properties"
-msgstr "Ratã de repetare tastaturã"
-
-#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:1
-msgid "Choose the editor that is invoked by gnome-edit"
-msgstr ""
-
-#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:2
-#, fuzzy
-msgid "Default Editor"
-msgstr "Mod MDI Implicit"
-
-#: capplets/background-properties/background-properties.desktop.in.h:1
-msgid "Background"
-msgstr ""
-
-#: capplets/background-properties/background-properties.desktop.in.h:2
-msgid "Configuration of the desktop's background"
-msgstr ""
-
-#: capplets/desktop-links/Documents.directory.in.h:1
-msgid "Configure how document types are handled"
-msgstr ""
-
-#: capplets/desktop-links/Documents.directory.in.h:2
-msgid "Document Handlers"
-msgstr ""
-
-#: capplets/desktop-links/Gnome.directory.in.h:2
-#, fuzzy
-msgid "Control Center Menu"
-msgstr "Centrul de control"
-
-#: capplets/desktop-links/Multimedia.directory.in.h:1
-msgid "Configure the settings of your Multimedia devices"
-msgstr ""
-
-#: capplets/desktop-links/Multimedia.directory.in.h:2
-msgid "Multimedia"
-msgstr ""
-
-#: capplets/desktop-links/Peripherals.directory.in.h:1
-msgid "Configure your external devices"
-msgstr ""
-
-#: capplets/desktop-links/Peripherals.directory.in.h:2
-msgid "Peripherals"
-msgstr ""
-
-#: capplets/desktop-links/Session.directory.in.h:1
-msgid "Session"
-msgstr "Sesiune"
-
-#: capplets/desktop-links/Session.directory.in.h:2
-#, fuzzy
-msgid "Session Management Settings"
+msgid "Screen Saver Settings"
 msgstr "Selecþie screensaver"
 
-#: capplets/desktop-links/UIOptions.directory.in.h:1
-msgid "Configure the global settings of your GNOME applications"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:96
+msgid "Start After "
+msgstr "Porneºte dupã "
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:102
+#, fuzzy
+msgid " Minutes."
+msgstr " minute"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:117
+#, fuzzy
+msgid "Priority:"
+msgstr "Prioritate"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:124
+#, fuzzy
+msgid "Low "
+msgstr "Micã"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:126
+msgid " Normal"
+msgstr " Normalã "
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:137
+#, fuzzy
+msgid "Shutdown monitor "
+msgstr "Închide monitorul dupã"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:139
+#, fuzzy
+msgid " minutes after screen saver has started."
+msgstr "Numai dupã ce screensaver-ul a rulat"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:152
+msgid "Screen Saver Demo"
+msgstr "Demo screensaver"
+
+#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:1
+msgid "Configure the settings of the screensaver"
 msgstr ""
 
-#: capplets/desktop-links/UIOptions.directory.in.h:2
+#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:2
 #, fuzzy
-msgid "User Interface"
-msgstr "Interfaþã"
+msgid "Screensaver"
+msgstr "Screensaver nou"
+
+#: capplets/sound-properties/sound-properties.c:97
+msgid ""
+"an initialization error occurred while starting 'sound-properties-capplet'."
+msgstr ""
+"o eroare de iniþializare s-a produs la pornirea 'sound-properties-capplet'."
+
+#: capplets/sound-properties/sound-properties.c:188
+msgid "Event"
+msgstr "Eveniment"
+
+#: capplets/sound-properties/sound-properties.c:189
+msgid "File to Play"
+msgstr "Fiºier de redat"
+
+#: capplets/sound-properties/sound-properties.c:243
+msgid "Enable"
+msgstr "Activat"
+
+#: capplets/sound-properties/sound-properties.c:250
+msgid "Enable sound server startup"
+msgstr "Activeazã serverul de sunet la startup"
+
+#: capplets/sound-properties/sound-properties.c:258
+msgid "Sounds for events"
+msgstr "Sunete pentru evenimente"
+
+#: capplets/sound-properties/sound-properties.c:279
+msgid "General"
+msgstr "General"
+
+#: capplets/sound-properties/sound-properties.c:286
+msgid "Select sound file"
+msgstr "Selecteazã fiºierul de sunet"
+
+#: capplets/sound-properties/sound-properties.c:325
+msgid "Play"
+msgstr "Redare"
+
+#: capplets/sound-properties/sound-properties.c:336
+msgid "Sound Events"
+msgstr "Evenimente de sunet"
+
+#: capplets/sound-properties/sound-properties.c:355
+msgid ""
+"This copy of the GNOME control center was not compiled with sound support"
+msgstr ""
+"Aceastã copie a Centrului de Control GNOME nu a fost compilatã cu suport de "
+"sunet"
+
+#: capplets/sound-properties/sound-properties.c:748
+msgid "The sound file for this event does not exist."
+msgstr "Fiºierul de sunet pentru acest eveniment nu existã."
+
+#: capplets/sound-properties/sound-properties.c:750
+msgid ""
+"The sound file for this event does not exist.\n"
+"You may want to install the gnome-audio package\n"
+"for a set of default sounds."
+msgstr ""
+"Fiºierul de sunet pentru acest eveniment nu existã.\n"
+"Poate doriþi sã instalaþi pachetul gnome-audio\n"
+"pentru un set de sunete implicite."
+
+#: capplets/sound-properties/sound-properties.desktop.in.h:1
+msgid "Configure GNOME's use of sound"
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.desktop.in.h:2
+#, fuzzy
+msgid "Sound"
+msgstr "Mai solid"
+
+#: capplets/theme-switcher/demo.c:50
+msgid "One"
+msgstr "Unu"
+
+#: capplets/theme-switcher/demo.c:50
+msgid "Two"
+msgstr "Doi"
+
+#. just 8 short names that will serve as samples for titles in demo
+#: capplets/theme-switcher/demo.c:52
+msgid "Eenie"
+msgstr "Dã'"
+
+#: capplets/theme-switcher/demo.c:52
+msgid "Meenie"
+msgstr "ºi"
+
+#: capplets/theme-switcher/demo.c:53
+msgid "Mynie"
+msgstr "mie"
+
+#: capplets/theme-switcher/demo.c:53
+msgid "Moe"
+msgstr "o"
+
+#: capplets/theme-switcher/demo.c:54
+msgid "Catcha"
+msgstr "pungã"
+
+#: capplets/theme-switcher/demo.c:54
+msgid "Tiger"
+msgstr "Dacã"
+
+#: capplets/theme-switcher/demo.c:55
+msgid "By Its"
+msgstr "nu-ti"
+
+#: capplets/theme-switcher/demo.c:55
+msgid "Toe"
+msgstr "repugnã"
+
+#: capplets/theme-switcher/demo.c:114
+msgid "Selected themes from above will be tested by previewing here."
+msgstr "Temele selectate de mai sus vor fi testate pentru previzualizare aici."
+
+#. column one
+#: capplets/theme-switcher/demo.c:119
+msgid "Sample Button"
+msgstr "Exemplu de buton"
+
+#: capplets/theme-switcher/demo.c:123
+msgid "Sample Check Button"
+msgstr "Exemplu de buton bifare"
+
+#: capplets/theme-switcher/demo.c:128
+msgid "Sample Text Entry Field"
+msgstr "Exemplu de câmp de editare text"
+
+#: capplets/theme-switcher/demo.c:139
+msgid "Submenu"
+msgstr "Submeniu"
+
+#: capplets/theme-switcher/demo.c:146
+msgid "Item 1"
+msgstr "Element 1"
+
+#: capplets/theme-switcher/demo.c:149
+msgid "Another item"
+msgstr "Alt element"
+
+#: capplets/theme-switcher/demo.c:154
+msgid "Radio Button 1"
+msgstr "Buton radio 1"
+
+#: capplets/theme-switcher/demo.c:160
+msgid "Radio Button 2"
+msgstr "Buton radio 2"
+
+#: capplets/theme-switcher/gui.c:89
+#, c-format
+msgid ""
+"Error installing theme:\n"
+"'%s'\n"
+"%s"
+msgstr ""
+"Eroare la instalarea temei:\n"
+"'%s'\n"
+"%s"
+
+#: capplets/theme-switcher/gui.c:120
+msgid "Select a theme to install"
+msgstr "Selectaþi o temã pentru instalare"
+
+#: capplets/theme-switcher/gui.c:197
+msgid "Available Themes"
+msgstr "Teme disponibile"
+
+#: capplets/theme-switcher/gui.c:221
+msgid ""
+"Auto\n"
+"Preview"
+msgstr ""
+"Previzualizare\n"
+"automatã"
+
+#: capplets/theme-switcher/gui.c:233
+msgid ""
+"Install new\n"
+"theme..."
+msgstr ""
+"Instaleazã o nouã  \n"
+"temã..."
+
+#. Font selector.
+#.
+#: capplets/theme-switcher/gui.c:239
+msgid "User Font"
+msgstr "Font utilizator"
+
+#. FIXME - should really get this from X somehow
+#. for now we just assume default gtk font
+#: capplets/theme-switcher/gui.c:257
+msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
+msgstr "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-iso8859-2"
+
+#: capplets/theme-switcher/gui.c:276
+msgid "Use custom font."
+msgstr "Utilizeazã un font specific"
+
+#: capplets/theme-switcher/install.c:26
+msgid "Home directory doesn't exist!\n"
+msgstr "Directorul acasã nu existã!\n"
+
+#: capplets/theme-switcher/install.c:36
+msgid "Theme does not exist"
+msgstr "Tema nu existã"
+
+#: capplets/theme-switcher/install.c:68
+#, c-format
+msgid "Command '%s' failed"
+msgstr "Comanda '%s' a eºuat"
+
+#: capplets/theme-switcher/install.c:73
+msgid "Unknown file format"
+msgstr "Format fiºier necunoscut"
+
+#: capplets/theme-switcher/theme-selector.desktop.in.h:1
+#, fuzzy
+msgid "Select which desktop theme to use"
+msgstr "Selectaþi o temã pentru instalare"
+
+#: capplets/theme-switcher/theme-selector.desktop.in.h:2
+#, fuzzy
+msgid "Theme Selector"
+msgstr "Selecþie"
+
+#: capplets/ui-properties/application.desktop.in.h:1
+#, fuzzy
+msgid "Applications"
+msgstr "Opþiuni"
+
+#: capplets/ui-properties/application.desktop.in.h:2
+msgid "Sets the default feel of GNOME applications"
+msgstr ""
+
+#: capplets/ui-properties/dialogs.desktop.in.h:1
+#, fuzzy
+msgid "Dialogs"
+msgstr "Dialoguri"
+
+#: capplets/ui-properties/mdi.desktop.in.h:1
+msgid "MDI"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:54
+msgid "Can detach and move toolbars"
+msgstr "Poate detaºa ºi muta barele de unelte"
+
+#: capplets/ui-properties/ui-properties.c:59
+#, fuzzy
+msgid "Toolbars have relieved border"
+msgstr "Barele de unelte au chenar vizibil"
+
+#: capplets/ui-properties/ui-properties.c:64
+#, fuzzy
+msgid "Toolbar buttons have relieved border"
+msgstr "Barele de unelte au chenar vizibil"
+
+#: capplets/ui-properties/ui-properties.c:69
+#, fuzzy
+msgid "Toolbars have line separators"
+msgstr "Barele de unelte au linii de separare"
+
+#: capplets/ui-properties/ui-properties.c:74
+#, fuzzy
+msgid "Toolbars have text labels"
+msgstr "Barele de unelte au chenar vizibil"
+
+#: capplets/ui-properties/ui-properties.c:103
+msgid "Can detach and move menus"
+msgstr "Poate detaºa ºi muta meniuri"
+
+#: capplets/ui-properties/ui-properties.c:108
+#, fuzzy
+msgid "Menus have relieved border"
+msgstr "Barele meniurile au chenar"
+
+#: capplets/ui-properties/ui-properties.c:112
+#, fuzzy
+msgid "Submenus can be torn off"
+msgstr "Meniurile pot fi dezactivate"
+
+#: capplets/ui-properties/ui-properties.c:116
+msgid "Menu items have icons"
+msgstr "Elementele din meniu pot avea icon-uri"
+
+#: capplets/ui-properties/ui-properties.c:140
+#, fuzzy
+msgid "Statusbar is interactive when possible"
+msgstr "Bara de status este inactivã când e posibil"
+
+#: capplets/ui-properties/ui-properties.c:145
+#, fuzzy
+msgid "Statusbar progress meter is on the right"
+msgstr "Indicatorul de progres din bara de status este în dreapta"
+
+#: capplets/ui-properties/ui-properties.c:162
+msgid "Menu Options"
+msgstr "Opþiuni meniu"
+
+#: capplets/ui-properties/ui-properties.c:163
+msgid "Statusbar Options"
+msgstr "Opþiuni barã de status"
+
+#: capplets/ui-properties/ui-properties.c:164
+msgid "Toolbar Options"
+msgstr "Opþiuni barã de unelte"
+
+#: capplets/ui-properties/ui-properties.c:170
+#, fuzzy
+msgid "Dialog buttons"
+msgstr "Butoane de dialog"
+
+#: capplets/ui-properties/ui-properties.c:171
+msgid "Default value"
+msgstr "Valoare implicitã"
+
+#: capplets/ui-properties/ui-properties.c:172
+#, fuzzy
+msgid "Spread buttons out"
+msgstr "Întins"
+
+#: capplets/ui-properties/ui-properties.c:173
+msgid "Put buttons on edges"
+msgstr "Pune butoanele pe margini"
+
+#: capplets/ui-properties/ui-properties.c:174
+msgid "Left-justify buttons"
+msgstr "Aliniazã butoanele la stânga"
+
+#: capplets/ui-properties/ui-properties.c:175
+msgid "Right-justify buttons"
+msgstr "Aliniazã butoanele la dreapta"
+
+#: capplets/ui-properties/ui-properties.c:180
+msgid "Dialog buttons have icons"
+msgstr "Butoanele de dialog au icon-uri"
+
+#: capplets/ui-properties/ui-properties.c:185
+#, fuzzy
+msgid "Use statusbar instead of dialog when possible"
+msgstr "Utilizeazã bara de status în locul dialogurilor când este posibil"
+
+#: capplets/ui-properties/ui-properties.c:207
+msgid "Dialog position"
+msgstr "Poziþie dialoguri"
+
+#: capplets/ui-properties/ui-properties.c:208
+msgid "Let window manager decide"
+msgstr "Lasã managerul de ferestre sã decidã"
+
+#: capplets/ui-properties/ui-properties.c:209
+#, fuzzy
+msgid "Center of the screen"
+msgstr "În centrul ecranului"
+
+#: capplets/ui-properties/ui-properties.c:210
+msgid "At the mouse pointer"
+msgstr "La cursorul mouse-ului"
+
+#: capplets/ui-properties/ui-properties.c:215
+#, fuzzy
+msgid "Dialog hints"
+msgstr "Dialoguri"
+
+#: capplets/ui-properties/ui-properties.c:216
+#, fuzzy
+msgid "Dialogs are like other windows"
+msgstr "Dialogurile sunt tratate"
+
+#: capplets/ui-properties/ui-properties.c:217
+#, fuzzy
+msgid "Dialogs are treated specially by window manager"
+msgstr "Special de cãtre managerul de ferestre"
+
+#: capplets/ui-properties/ui-properties.c:222
+msgid "Place dialogs over application window when possible"
+msgstr "Plaseazã dialogurile peste ferestrele aplicaþiilor când este posibil"
+
+#: capplets/ui-properties/ui-properties.c:243
+msgid "Dialog Layout"
+msgstr "Aspect dialog"
+
+#: capplets/ui-properties/ui-properties.c:244
+msgid "Dialog Behavior"
+msgstr "Comportament dialog"
+
+#: capplets/ui-properties/ui-properties.c:250
+msgid "Default MDI Mode"
+msgstr "Mod MDI Implicit"
+
+#: capplets/ui-properties/ui-properties.c:251
+#, fuzzy
+msgid "Notebook"
+msgstr "Taburi notebook"
+
+#: capplets/ui-properties/ui-properties.c:252
+msgid "Toplevel"
+msgstr "Toplevel"
+
+#: capplets/ui-properties/ui-properties.c:253
+msgid "Modal"
+msgstr "Modal"
+
+#: capplets/ui-properties/ui-properties.c:258
+msgid "MDI notebook tab position"
+msgstr "Poziþia tab-ului MDI notebook"
+
+#: capplets/ui-properties/ui-properties.c:259
+msgid "Left"
+msgstr "Stânga"
+
+#: capplets/ui-properties/ui-properties.c:260
+msgid "Right"
+msgstr "Dreapta"
+
+#: capplets/ui-properties/ui-properties.c:261
+msgid "Top"
+msgstr "Sus"
+
+#: capplets/ui-properties/ui-properties.c:262
+msgid "Bottom"
+msgstr "Jos"
+
+#: capplets/ui-properties/ui-properties.c:277
+msgid "GNOME MDI Options"
+msgstr "Opþiuni MDI GNOME"
 
 #: capplets/ui-properties/ui-properties.directory.in.h:1
 msgid "Look and Feel"
@@ -4383,6 +3978,398 @@ msgstr ""
 #, fuzzy
 msgid "Look and Feel Properties"
 msgstr "Proprietãþi generale"
+
+#: capplets/url-properties/url-properties.c:51
+msgid "Error initializing the `url-properties' capplet."
+msgstr "Eroare la iniþializarea capplet-ului `url-properties'."
+
+#: capplets/url-properties/url-properties.c:76
+msgid "Protocol"
+msgstr "Protocol"
+
+#: capplets/url-properties/url-properties.c:76
+msgid "Command"
+msgstr "Comandã "
+
+#: capplets/url-properties/url-properties.c:93
+msgid "handler:"
+msgstr "handler:"
+
+#. set some commonly used handlers
+#: capplets/url-properties/url-properties.c:103
+msgid "Netscape"
+msgstr "Netscape"
+
+#: capplets/url-properties/url-properties.c:108
+msgid "Netscape (new window)"
+msgstr "Netscape (fereastrã nouã)"
+
+#: capplets/url-properties/url-properties.c:121
+msgid "Help browser"
+msgstr "Browser ajutor"
+
+#: capplets/url-properties/url-properties.c:127
+msgid "Help browser (new window)"
+msgstr "Browser ajutor (fereastrã nouã)"
+
+#: capplets/url-properties/url-properties.c:140
+msgid "Set"
+msgstr "Seteazã "
+
+#: capplets/url-properties/url-properties.c:148
+msgid "Remove"
+msgstr "Eliminã "
+
+#: capplets/url-properties/url-properties.desktop.in.h:1
+msgid "Configure which programs are used to display URLs"
+msgstr ""
+
+#: capplets/url-properties/url-properties.desktop.in.h:2
+#, fuzzy
+msgid "URL Handlers"
+msgstr "handler:"
+
+#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.h:1
+msgid "Enlightenment"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.h:1
+msgid "Ice WM"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.h:1
+msgid "Scwm"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.h:1
+#, fuzzy
+msgid "Window Maker"
+msgstr "Editeazã managerul de ferestre"
+
+#: capplets/wm-properties/wm-desktops/twm.desktop.in.h:1
+msgid "twm"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:142
+#, c-format
+msgid ""
+"Starting %s\n"
+"(%d seconds left before operation times out)"
+msgstr ""
+"Pornesc %s\n"
+"(%d de secunde au mai rãmas pânã timpul alocat operaþiei va expira)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:303
+#, c-format
+msgid "%s (Current)"
+msgstr "%s (Curent)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:306
+#, c-format
+msgid "Run Configuration Tool for %s"
+msgstr "Ruleazã unealta de configurare pentru %s"
+
+#: capplets/wm-properties/wm-properties-capplet.c:317
+msgid " (Not found)"
+msgstr " (Negãsit)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:356
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\tAnother window manager is already running and could not be killed\n"
+msgstr ""
+"wm-properties-capplet: Nu se poate iniþializa managerul de ferestre.\n"
+"\tAlt manager de ferestre ruleazã ºi nu poate fi oprit\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:360
+#, c-format
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\t'%s' didn't start\n"
+msgstr ""
+"wm-properties-capplet: Nu se poate iniþializa managerul de ferestre.\n"
+"\t'%s' nu a pornit\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:413
+msgid "Previous window manager did not die\n"
+msgstr "Managerul de ferestre precedent nu a fost oprit\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:446
+#, c-format
+msgid ""
+"Could not start '%s'.\n"
+"Falling back to previous window manager '%s'\n"
+msgstr ""
+"Nu am putut porni '%s'.\n"
+"Reîntoarcere la managerul de ferestre precedent '%s'\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:477
+msgid ""
+"Could not start fallback window manager.\n"
+"Please run a window manager manually. You can\n"
+"do this by selecting \"Run Program\" in the\n"
+"foot menu\n"
+msgstr ""
+"Nu am putut porni managerul de ferestre de fallback.\n"
+"Vã rog sã rulaþi manual un manager de ferestre. Puteþi\n"
+"face aceasta selectând \"Ruleazã program\" în meniul\n"
+"GNOME\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:502
+#: capplets/wm-properties/wm-properties-capplet.c:868
+#: capplets/wm-properties/wm-properties-capplet.c:875
+#: capplets/wm-properties/wm-properties-capplet.c:1021
+msgid "OK"
+msgstr "OK"
+
+#: capplets/wm-properties/wm-properties-capplet.c:520
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. You can do so immediately by selecting the \"Save session\n"
+"now\" below, or you can save your session later.  This can be\n"
+"done either selecting \"Save Current Session\" under \"Settings\"\n"
+"in the main menu, or by turning on \"Save Current Setup\" when\n"
+"you log out.\n"
+msgstr ""
+"Managerul de ferestre curent a fost schimbat. Pentru ca schimbarea\n"
+"sã fie salvatã, va trebui sã salvaþi sesiunea curentã.\n"
+"Puteþi face asta imediat prin selectarea \"Salveazã sesiunea curentã\"\n"
+"de mai jos, sau puteþi salva sesiunea mai târziu. Aceasta poate fi fãcutã\n"
+"fie prin selectarea \"Salveazã sesiunea curentã\" din \"Settings\" în "
+"meniul\n"
+"principal, ori prin activarea \"Salveazã setãrile curente\" din dialogul\n"
+"de logout.\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:527
+msgid "Save Session Later"
+msgstr "Salveazã sesiunea mai târziu"
+
+#: capplets/wm-properties/wm-properties-capplet.c:527
+msgid "Save Session Now"
+msgstr "Salveazã sesiunea acum"
+
+#: capplets/wm-properties/wm-properties-capplet.c:530
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. This can be done by either selecting \"Save Current Session\"\n"
+"under \"Settings\" in the main menu, or by turning on\n"
+"\"Save Current Setup\" when you log out.\n"
+msgstr ""
+"Managerul de ferestre curent a fost schimbat. Pentru ca schimbarea\n"
+"sã fie salvatã, va trebui sã salvaþi sesiunea curentã.\n"
+"Aceasta poate fi fãcutã fie prin selectarea \"Salveazã sesiunea curentã\"\n"
+"din meniul \"Setãri\" în meniul principal, sau prin activarea\n"
+"\"Salveazã setãrile curente\" din dialogul de logout.\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:757
+msgid "Add New Window Manager"
+msgstr "Adaugã un nou maanager de ferestre"
+
+#: capplets/wm-properties/wm-properties-capplet.c:771
+msgid "Name:"
+msgstr "Nume:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:784
+msgid "Command:"
+msgstr "Comandã:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:797
+msgid "Configuration Command:"
+msgstr "Comandã configurare:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:816
+msgid "Window manager is session managed"
+msgstr "Managerul de ferestre este \"session managed\""
+
+#: capplets/wm-properties/wm-properties-capplet.c:866
+msgid "Name cannot be empty"
+msgstr "Numele nu poate fi vid"
+
+#: capplets/wm-properties/wm-properties-capplet.c:873
+msgid "Command cannot be empty"
+msgstr "Comanda nu poate fi vidã"
+
+#: capplets/wm-properties/wm-properties-capplet.c:922
+#: capplets/wm-properties/wm-properties-capplet.c:964
+msgid "Edit Window Manager"
+msgstr "Editeazã managerul de ferestre"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1020
+msgid "You cannot delete the current Window Manager"
+msgstr "Nu puteþi ºterge managerul de ferestre curent"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1093
+msgid "Edit..."
+msgstr "Editeazã"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1098
+msgid "Delete"
+msgstr "ªterge"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1134
+msgid ""
+"an initialization error occurred while starting 'wm-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"o eroare de iniþializare s-a produs la pornirea 'wm-properties-capplet'.\n"
+"renunþ...\n"
+
+#: capplets/wm-properties/wm-properties.desktop.in.h:1
+#, fuzzy
+msgid "Choose a window manager"
+msgstr "Lasã managerul de ferestre sã decidã"
+
+#: capplets/wm-properties/wm-properties.desktop.in.h:2
+#, fuzzy
+msgid "Window Manager"
+msgstr "Editeazã managerul de ferestre"
+
+#: control-center/callbacks.c:102 control-center/gnomecc.desktop.in.h:1
+msgid "GNOME Control Center"
+msgstr "Centrul de control GNOME"
+
+#: control-center/callbacks.c:105
+#, fuzzy
+msgid "Desktop Properties manager."
+msgstr "Managerul de proprietãþi desktop."
+
+#: control-center/capplet-manager.c:179
+msgid "Try"
+msgstr "Încearcã"
+
+#: control-center/capplet-manager.c:185
+msgid "Revert"
+msgstr "Anuleazã"
+
+#. set the help item
+#: control-center/capplet-manager.c:208
+#, c-format
+msgid "Help with '%s' settings"
+msgstr "Ajutor cu setãrile '%s'"
+
+#: control-center/capplet-widget-libs.c:46
+msgid "id of the capplet -- assigned by the control-center"
+msgstr "id capplet -- asignat de control-center"
+
+#: control-center/capplet-widget-libs.c:46
+msgid "ID"
+msgstr "ID"
+
+#: control-center/capplet-widget-libs.c:47
+msgid "Multi-capplet id."
+msgstr "Multi-capplet id."
+
+#: control-center/capplet-widget-libs.c:47
+msgid "CAPID"
+msgstr "CAPID"
+
+#: control-center/capplet-widget-libs.c:48
+msgid "X ID of the socket it's plugged into"
+msgstr "X ID-ul socket-ului este conectat la"
+
+#: control-center/capplet-widget-libs.c:48
+msgid "XID"
+msgstr "XID"
+
+#: control-center/capplet-widget-libs.c:49
+msgid "IOR of the control-center"
+msgstr "IOR-ul control-center-ului"
+
+#: control-center/capplet-widget-libs.c:49
+msgid "IOR"
+msgstr "IOR"
+
+#: control-center/capplet-widget-libs.c:50
+msgid "Initialize session settings"
+msgstr "Iniþializare setãri sesiune"
+
+#: control-center/capplet-widget-libs.c:51
+msgid "Ignore default action.  Used for custom init-session cases"
+msgstr ""
+"Ignorã acþiunea implicitã. Utilizat pentru cazuri init-session specifice"
+
+#: control-center/capplet-widget.c:272
+msgid "Sorry, no help is available for these settings."
+msgstr "Îmi pare rãu, nu este disponibil ajutor pentru aceste setãri."
+
+#: control-center/corba-glue.c:77
+msgid "capplet-command to be run."
+msgstr "comanda capplet ce trebuie rulatã."
+
+#: control-center/corba-glue.c:77
+msgid "CAPPLET"
+msgstr "CAPPLET"
+
+#: control-center/gnomecc.desktop.in.h:2
+msgid "The GNOME configuration tool"
+msgstr ""
+
+#: control-center/main.c:36
+#, fuzzy
+msgid "Help on control-center"
+msgstr "Noul Centrul de control"
+
+#: control-center/main.c:36
+msgid "Help with the GNOME control-center."
+msgstr "Ajutorul GNOME control-center"
+
+#: control-center/main.c:38
+msgid "Help with the current configuration page."
+msgstr "Ajutor cu pagina curentã de configurare."
+
+#: control-center/main.c:41
+msgid "About"
+msgstr "Despre"
+
+#: control-center/main.c:41
+msgid "About the GNOME control-center."
+msgstr "Despre Centrul de control GNOME"
+
+#. we create the widgets
+#: control-center/main.c:69
+msgid "Warning:"
+msgstr "Atenþie:"
+
+#: control-center/main.c:69
+msgid "Discard all changes"
+msgstr "Anuleazã toate schimbãrile"
+
+#. ...labels, etc
+#: control-center/main.c:78
+msgid ""
+"The following modules have had changes made, but not committed.  If you "
+"would like to edit them, please double click on the appropriate entry."
+msgstr ""
+"Urmãtoarele module au fost modificate, însã nu au fost salvate. Dacã doriþi "
+"sã le editaþi, vã rog sã faceþi dublu-clic pe elementul corespunzãtor."
+
+#: control-center/splash.c:48
+msgid "Operating System:"
+msgstr "Sistem de operare:"
+
+#: control-center/splash.c:49
+msgid "Distribution Version:"
+msgstr "Versiune distribuþie:"
+
+#: control-center/splash.c:50
+msgid "Processor Type:"
+msgstr "Tip procesor:"
+
+#: control-center/splash.c:51
+msgid "User Name:"
+msgstr "Nume utilizator:"
+
+#: control-center/splash.c:52
+msgid "Host Name:"
+msgstr "Nume host:"
+
+#. This is about the only case where we'll put Unknown instead
+#. of simply not showing the info.
+#: control-center/splash.c:178
+msgid "Unknown"
+msgstr "Necunoscut"
 
 #~ msgid "Mime Type: "
 #~ msgstr "Tip Mime: "

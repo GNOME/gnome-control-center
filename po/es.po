@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.2.1\n"
-"POT-Creation-Date: 2001-03-12 23:10+0100\n"
+"POT-Creation-Date: 2001-03-15 14:08-0500\n"
 "PO-Revision-Date: 2001-03-12 23:32+0100\n"
 "Last-Translator: Carlos Perelló Marín <carlos@gnome-db.org>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -29,7 +29,16 @@ msgid ""
 "aborting...\n"
 msgstr ""
 "ocurrió un error de inicialización al lanzar "
-"'background-properties-capplet'.\nabortando...\n"
+"'background-properties-capplet'.\n"
+"abortando...\n"
+
+#: capplets/background-properties/background-properties.desktop.in.h:1
+msgid "Background"
+msgstr "Propiedades del tapiz"
+
+#: capplets/background-properties/background-properties.desktop.in.h:2
+msgid "Configuration of the desktop's background"
+msgstr "Configuración del tapiz del escritorio"
 
 #: capplets/background-properties/property-background.c:116
 msgid "Disabled"
@@ -201,21 +210,60 @@ msgstr "MODO"
 msgid "Display wallpaper: tiled, centered, scaled or ratio"
 msgstr "Imagen de fondo: mosaico, centrada, redimensionada o ratio"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:238
-msgid "Gnome editor"
-msgstr "Editor de Gnome"
+#: capplets/desktop-links/Desktop.directory.in.h:1
+#: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:1
+msgid "Desktop"
+msgstr "Escritorio"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:249
-msgid "Run In Terminal"
-msgstr "Lanzar en una terminal"
+#: capplets/desktop-links/Documents.directory.in.h:1
+msgid "Configure how document types are handled"
+msgstr "Configura cómo manejar los tipos de documentos"
 
-#: capplets/file-types/file-types-capplet.desktop.in.h:1
-msgid "File Types and Programs"
-msgstr "Tipos de archivos y programas"
+#: capplets/desktop-links/Documents.directory.in.h:2
+msgid "Document Handlers"
+msgstr "Manejadores de Documentos"
 
-#: capplets/file-types/file-types-capplet.desktop.in.h:2
-msgid "Specify which programs are used to open or view each file type"
-msgstr "Especifica que programas se usan para abrir o ver cada tipo de archivo"
+#. create the app
+#: capplets/desktop-links/Gnome.directory.in.h:1 control-center/main.c:197
+#: control-center/splash.c:247
+msgid "Control Center"
+msgstr "Centro de control"
+
+#: capplets/desktop-links/Gnome.directory.in.h:2
+msgid "Control Center Menu"
+msgstr "Menú del Centro de Control de Gnome"
+
+#: capplets/desktop-links/Multimedia.directory.in.h:1
+msgid "Configure the settings of your Multimedia devices"
+msgstr "Configurar los dispositivos multimedios"
+
+#: capplets/desktop-links/Multimedia.directory.in.h:2
+msgid "Multimedia"
+msgstr "Multimedios"
+
+#: capplets/desktop-links/Peripherals.directory.in.h:1
+msgid "Configure your external devices"
+msgstr "Configurar sus dispositivos externos."
+
+#: capplets/desktop-links/Peripherals.directory.in.h:2
+msgid "Peripherals"
+msgstr "Periféricos"
+
+#: capplets/desktop-links/Session.directory.in.h:1
+msgid "Session"
+msgstr "Sesión"
+
+#: capplets/desktop-links/Session.directory.in.h:2
+msgid "Session Management Settings"
+msgstr "Opciones de la gestión de sesiones"
+
+#: capplets/desktop-links/UIOptions.directory.in.h:1
+msgid "Configure the global settings of your GNOME applications"
+msgstr "Configurar las opciones globales de las aplicaciones Gnome."
+
+#: capplets/desktop-links/UIOptions.directory.in.h:2
+msgid "User Interface"
+msgstr "Opciones de la interfaz gráfica"
 
 #: capplets/file-types/file-types-capplet-dialogs.c:387
 msgid "Edit Applications List"
@@ -449,9 +497,102 @@ msgstr "Extensión"
 msgid "Default Action"
 msgstr "Acción predeterminada"
 
+#: capplets/file-types/file-types-capplet.desktop.in.h:1
+msgid "File Types and Programs"
+msgstr "Tipos de archivos y programas"
+
+#: capplets/file-types/file-types-capplet.desktop.in.h:2
+msgid "Specify which programs are used to open or view each file type"
+msgstr "Especifica que programas se usan para abrir o ver cada tipo de archivo"
+
 #: capplets/file-types/file-types-icon-entry.c:381
 msgid "Select an icon"
 msgstr "Seleccione un icono"
+
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:238
+msgid "Gnome editor"
+msgstr "Editor de Gnome"
+
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:249
+msgid "Run In Terminal"
+msgstr "Lanzar en una terminal"
+
+#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:1
+msgid "Choose the editor that is invoked by gnome-edit"
+msgstr "Elegir el editor invocado por gnome-edit."
+
+#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:2
+msgid "Default Editor"
+msgstr "Propiedades Gnome Edit"
+
+#: capplets/keyboard-properties/keyboard-properties.c:262
+msgid "Keyboard bell"
+msgstr "Bip del teclado"
+
+#: capplets/keyboard-properties/keyboard-properties.c:270
+msgid "Volume"
+msgstr "Volumen"
+
+#: capplets/keyboard-properties/keyboard-properties.c:273
+msgid "Pitch (Hz)"
+msgstr "Tono (Hz)"
+
+#: capplets/keyboard-properties/keyboard-properties.c:276
+msgid "Duration (ms)"
+msgstr "Duración (ms)"
+
+#: capplets/keyboard-properties/keyboard-properties.c:288
+msgid "Test"
+msgstr "Prueba"
+
+#: capplets/keyboard-properties/keyboard-properties.c:306
+msgid "Keyboard repeat rate"
+msgstr "Velocidad de repetición"
+
+#: capplets/keyboard-properties/keyboard-properties.c:316
+msgid "Enable auto-repeat"
+msgstr "Activar auto-repetición"
+
+#: capplets/keyboard-properties/keyboard-properties.c:325
+msgid "Repeat rate"
+msgstr "Velocidad de repetición"
+
+#: capplets/keyboard-properties/keyboard-properties.c:328
+msgid "Repeat Delay"
+msgstr "Tiempo antes de repetición"
+
+#: capplets/keyboard-properties/keyboard-properties.c:330
+msgid "Keyboard click"
+msgstr "Clic del teclado"
+
+#: capplets/keyboard-properties/keyboard-properties.c:339
+msgid "Click on keypress"
+msgstr "Clic al teclear"
+
+#: capplets/keyboard-properties/keyboard-properties.c:348
+msgid "Click volume"
+msgstr "Volumen del clic"
+
+#: capplets/keyboard-properties/keyboard-properties.c:359
+msgid "Test settings"
+msgstr "Probar la configuración"
+
+#: capplets/keyboard-properties/keyboard-properties.c:466
+msgid ""
+"an initialization error occurred while starting "
+"'keyboard-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"ocurrió un error de inicialización al lanzar 'keyboard-properties-capplet'.\n"
+"abortando...\n"
+
+#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:1
+msgid "Keyboard"
+msgstr "Propiedades del Teclado"
+
+#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:2
+msgid "Keyboard Properties"
+msgstr "Modifica las propiedades del teclado"
 
 #: capplets/mouse-properties/mouse-properties.c:267
 msgid "Mouse buttons"
@@ -516,6 +657,14 @@ msgstr ""
 "ocurrió un error de inicialización al lanzar 'mouse-properties-capplet'.\n"
 "abortando...\n"
 
+#: capplets/mouse-properties/mouse-properties.desktop.in.h:1
+msgid "Mouse"
+msgstr "Propiedades del ratón"
+
+#: capplets/mouse-properties/mouse-properties.desktop.in.h:2
+msgid "Mouse Properties"
+msgstr "Modifica las propiedades del ratón"
+
 #: capplets/screensaver-properties/callbacks.c:102
 msgid "Require Password"
 msgstr "Requiere Contraseña"
@@ -546,948 +695,6 @@ msgstr "Parámetros al azar"
 #, c-format
 msgid "%s Settings..."
 msgstr "Propiedades %s..."
-
-#: capplets/screensaver-properties/screensaver-dialog.c:46
-msgid "About:"
-msgstr "Acerca:"
-
-#: capplets/screensaver-properties/screensaver-dialog.c:51
-msgid "Author:"
-msgstr "Autor:"
-
-#: capplets/screensaver-properties/screensaver-dialog.c:61
-msgid "Author: UNKNOWN"
-msgstr "Autor: DESCONOCIDO"
-
-#: capplets/screensaver-properties/screensaver-dialog.c:78
-msgid "Settings"
-msgstr "Parámetros"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:38
-msgid "RANDOM SCREENSAVER"
-msgstr "SALVAPANTALLAS AL AZAR"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:49
-msgid "Screen Saver"
-msgstr "Salvapantalla"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:61
-msgid ""
-"Pressing this button will popup a dialogbox that will help you setup the "
-"current screensaver."
-msgstr ""
-"Este botón abre una ventana de diálogo que le ayudará a configurar el "
-"salvapantalla actual."
-
-#. set up the initial frame, and get a vbox in which to pack things.
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:88
-msgid "Screen Saver Settings"
-msgstr "Configuración del salvapantalla"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:96
-msgid "Start After "
-msgstr "Activar después de "
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:102
-msgid " Minutes."
-msgstr " minutos."
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:117
-msgid "Priority:"
-msgstr "Prioridad:"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:124
-msgid "Low "
-msgstr "Baja "
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:126
-msgid " Normal"
-msgstr " Normal"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:137
-msgid "Shutdown monitor "
-msgstr "Apagar el monitor "
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:139
-msgid " minutes after screen saver has started."
-msgstr " minutos después de haberse iniciado el salvapantalla."
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:152
-msgid "Screen Saver Demo"
-msgstr "Demostración del salvapantalla"
-
-#: capplets/keyboard-properties/keyboard-properties.c:262
-msgid "Keyboard bell"
-msgstr "Bip del teclado"
-
-#: capplets/keyboard-properties/keyboard-properties.c:270
-msgid "Volume"
-msgstr "Volumen"
-
-#: capplets/keyboard-properties/keyboard-properties.c:273
-msgid "Pitch (Hz)"
-msgstr "Tono (Hz)"
-
-#: capplets/keyboard-properties/keyboard-properties.c:276
-msgid "Duration (ms)"
-msgstr "Duración (ms)"
-
-#: capplets/keyboard-properties/keyboard-properties.c:288
-msgid "Test"
-msgstr "Prueba"
-
-#: capplets/keyboard-properties/keyboard-properties.c:306
-msgid "Keyboard repeat rate"
-msgstr "Velocidad de repetición"
-
-#: capplets/keyboard-properties/keyboard-properties.c:316
-msgid "Enable auto-repeat"
-msgstr "Activar auto-repetición"
-
-#: capplets/keyboard-properties/keyboard-properties.c:325
-msgid "Repeat rate"
-msgstr "Velocidad de repetición"
-
-#: capplets/keyboard-properties/keyboard-properties.c:328
-msgid "Repeat Delay"
-msgstr "Tiempo antes de repetición"
-
-#: capplets/keyboard-properties/keyboard-properties.c:330
-msgid "Keyboard click"
-msgstr "Clic del teclado"
-
-#: capplets/keyboard-properties/keyboard-properties.c:339
-msgid "Click on keypress"
-msgstr "Clic al teclear"
-
-#: capplets/keyboard-properties/keyboard-properties.c:348
-msgid "Click volume"
-msgstr "Volumen del clic"
-
-#: capplets/keyboard-properties/keyboard-properties.c:359
-msgid "Test settings"
-msgstr "Probar la configuración"
-
-#: capplets/keyboard-properties/keyboard-properties.c:466
-msgid ""
-"an initialization error occurred while starting "
-"'keyboard-properties-capplet'.\n"
-"aborting...\n"
-msgstr ""
-"ocurrió un error de inicialización al lanzar 'keyboard-properties-capplet'.\n"
-"abortando...\n"
-
-#: capplets/sound-properties/sound-properties.c:97
-msgid ""
-"an initialization error occurred while starting 'sound-properties-capplet'."
-msgstr ""
-"ocurrió un error de inicialización al lanzar 'sound-properties-capplet'."
-
-#: capplets/sound-properties/sound-properties.c:188
-msgid "Event"
-msgstr "Evento"
-
-#: capplets/sound-properties/sound-properties.c:189
-msgid "File to Play"
-msgstr "Archivo a reproducir"
-
-#: capplets/sound-properties/sound-properties.c:243
-msgid "Enable"
-msgstr "Activar"
-
-#: capplets/sound-properties/sound-properties.c:250
-msgid "Enable sound server startup"
-msgstr "Activar el lanzamiento del servidor de sonido"
-
-#: capplets/sound-properties/sound-properties.c:258
-msgid "Sounds for events"
-msgstr "Sonidos para los eventos"
-
-#: capplets/sound-properties/sound-properties.c:279
-msgid "General"
-msgstr "General"
-
-#: capplets/sound-properties/sound-properties.c:286
-msgid "Select sound file"
-msgstr "Seleccionar archivo de sonido"
-
-#: capplets/sound-properties/sound-properties.c:325
-msgid "Play"
-msgstr "Reproducir"
-
-#: capplets/sound-properties/sound-properties.c:336
-msgid "Sound Events"
-msgstr "Eventos de sonido"
-
-#: capplets/sound-properties/sound-properties.c:355
-msgid ""
-"This copy of the GNOME control center was not compiled with sound support"
-msgstr ""
-"Esta copia del centro de control de GNOME fue compilada sin soporte para el "
-"sonido"
-
-#: capplets/sound-properties/sound-properties.c:748
-msgid "The sound file for this event does not exist."
-msgstr "El archivo de sonido para este evento no existe."
-
-#: capplets/sound-properties/sound-properties.c:750
-msgid ""
-"The sound file for this event does not exist.\n"
-"You may want to install the gnome-audio package\n"
-"for a set of default sounds."
-msgstr ""
-"El archivo de sonido para este evento no existe.\n"
-"Quizás desee instalar el paquete gnome-audio para\n"
-"un conjunto de sonidos de base."
-
-#: capplets/theme-switcher/demo.c:50
-msgid "One"
-msgstr "Uno"
-
-#: capplets/theme-switcher/demo.c:50
-msgid "Two"
-msgstr "Dos"
-
-#. just 8 short names that will serve as samples for titles in demo
-#: capplets/theme-switcher/demo.c:52
-msgid "Eenie"
-msgstr "Erre"
-
-#: capplets/theme-switcher/demo.c:52
-msgid "Meenie"
-msgstr "Con"
-
-#: capplets/theme-switcher/demo.c:53
-msgid "Mynie"
-msgstr "Erre"
-
-#: capplets/theme-switcher/demo.c:53
-msgid "Moe"
-msgstr "Carril"
-
-#: capplets/theme-switcher/demo.c:54
-msgid "Catcha"
-msgstr "Erre"
-
-#: capplets/theme-switcher/demo.c:54
-msgid "Tiger"
-msgstr "con"
-
-#: capplets/theme-switcher/demo.c:55
-msgid "By Its"
-msgstr "Erre"
-
-#: capplets/theme-switcher/demo.c:55
-msgid "Toe"
-msgstr "Guitarra"
-
-#: capplets/theme-switcher/demo.c:114
-msgid "Selected themes from above will be tested by previewing here."
-msgstr "Los temas seleccionados serán previsualizados aquí."
-
-#. column one
-#: capplets/theme-switcher/demo.c:119
-msgid "Sample Button"
-msgstr "Botón de ejemplo"
-
-#: capplets/theme-switcher/demo.c:123
-msgid "Sample Check Button"
-msgstr "Ejemplo de botón de opción"
-
-#: capplets/theme-switcher/demo.c:128
-msgid "Sample Text Entry Field"
-msgstr "Ejemplo de campo de entrada de texto"
-
-#: capplets/theme-switcher/demo.c:139
-msgid "Submenu"
-msgstr "Submenú"
-
-#: capplets/theme-switcher/demo.c:146
-msgid "Item 1"
-msgstr "Elemento 1"
-
-#: capplets/theme-switcher/demo.c:149
-msgid "Another item"
-msgstr "Otro elemento"
-
-#: capplets/theme-switcher/demo.c:154
-msgid "Radio Button 1"
-msgstr "Botón de radio 1"
-
-#: capplets/theme-switcher/demo.c:160
-msgid "Radio Button 2"
-msgstr "Botón de radio 2"
-
-#: capplets/theme-switcher/gui.c:89
-#, c-format
-msgid ""
-"Error installing theme:\n"
-"'%s'\n"
-"%s"
-msgstr ""
-"Error al instalar el tema:\n"
-"'%s'\n"
-"%s"
-
-#: capplets/theme-switcher/gui.c:120
-msgid "Select a theme to install"
-msgstr "Seleccione un tema a instalar"
-
-#: capplets/theme-switcher/gui.c:197
-msgid "Available Themes"
-msgstr "Temas disponibles"
-
-#: capplets/theme-switcher/gui.c:221
-msgid ""
-"Auto\n"
-"Preview"
-msgstr ""
-"Auto\n"
-"Previsualización"
-
-#: capplets/theme-switcher/gui.c:233
-msgid ""
-"Install new\n"
-"theme..."
-msgstr ""
-"Instalar\n"
-"nuevo tema..."
-
-#. Font selector.
-#.
-#: capplets/theme-switcher/gui.c:239
-msgid "User Font"
-msgstr "Tipo de letra del Usuario"
-
-#. FIXME - should really get this from X somehow
-#. for now we just assume default gtk font
-#: capplets/theme-switcher/gui.c:257
-msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
-msgstr "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
-
-#: capplets/theme-switcher/gui.c:276
-msgid "Use custom font."
-msgstr "Usar un tipo de letra personalizada."
-
-#: capplets/theme-switcher/install.c:26
-msgid "Home directory doesn't exist!\n"
-msgstr "¡El directorio personal no existe!\n"
-
-#: capplets/theme-switcher/install.c:36
-msgid "Theme does not exist"
-msgstr "El tema no existe"
-
-#: capplets/theme-switcher/install.c:68
-#, c-format
-msgid "Command '%s' failed"
-msgstr "Falló el comando '%s'"
-
-#: capplets/theme-switcher/install.c:73
-msgid "Unknown file format"
-msgstr "Formato de archivo desconocido"
-
-#: capplets/ui-properties/ui-properties.c:54
-msgid "Can detach and move toolbars"
-msgstr "Barras de iconos desprendibles y desplazables"
-
-#: capplets/ui-properties/ui-properties.c:59
-msgid "Toolbars have relieved border"
-msgstr "Barras de iconos con bordes en relieve"
-
-#: capplets/ui-properties/ui-properties.c:64
-msgid "Toolbar buttons have relieved border"
-msgstr "Botones de la barra de iconos con bordes en relieve"
-
-#: capplets/ui-properties/ui-properties.c:69
-msgid "Toolbars have line separators"
-msgstr "Barras de iconos con líneas de separación"
-
-#: capplets/ui-properties/ui-properties.c:74
-msgid "Toolbars have text labels"
-msgstr "Barras de iconos con textos"
-
-#: capplets/ui-properties/ui-properties.c:103
-msgid "Can detach and move menus"
-msgstr "Menúes desprendibles y desplazables"
-
-#: capplets/ui-properties/ui-properties.c:108
-msgid "Menus have relieved border"
-msgstr "Menúes con bordes en relieve"
-
-#: capplets/ui-properties/ui-properties.c:112
-msgid "Submenus can be torn off"
-msgstr "Los submenúes pueden desprenderse"
-
-#: capplets/ui-properties/ui-properties.c:116
-msgid "Menu items have icons"
-msgstr "Menúes con iconos"
-
-#: capplets/ui-properties/ui-properties.c:140
-msgid "Statusbar is interactive when possible"
-msgstr "Barra de estado interactiva siempre que sea posible"
-
-#: capplets/ui-properties/ui-properties.c:145
-msgid "Statusbar progress meter is on the right"
-msgstr "Barra de progresión a la derecha de la barra de estado"
-
-#: capplets/ui-properties/ui-properties.c:162
-msgid "Menu Options"
-msgstr "Opciones de los menúes"
-
-#: capplets/ui-properties/ui-properties.c:163
-msgid "Statusbar Options"
-msgstr "Opciones de las barras de estado"
-
-#: capplets/ui-properties/ui-properties.c:164
-msgid "Toolbar Options"
-msgstr "Opciones de las barras de herramientas"
-
-#: capplets/ui-properties/ui-properties.c:170
-msgid "Dialog buttons"
-msgstr "Botones de diálogo"
-
-#: capplets/ui-properties/ui-properties.c:171
-msgid "Default value"
-msgstr "Valor predeterminado"
-
-#: capplets/ui-properties/ui-properties.c:172
-msgid "Spread buttons out"
-msgstr "Espaciar los botones"
-
-#: capplets/ui-properties/ui-properties.c:173
-msgid "Put buttons on edges"
-msgstr "Poner los botones sobre los lados"
-
-#: capplets/ui-properties/ui-properties.c:174
-msgid "Left-justify buttons"
-msgstr "Justificar los botones a la izquierda"
-
-#: capplets/ui-properties/ui-properties.c:175
-msgid "Right-justify buttons"
-msgstr "Justificar los botones a la derecha"
-
-#: capplets/ui-properties/ui-properties.c:180
-msgid "Dialog buttons have icons"
-msgstr "Botones de diálogo con iconos"
-
-#: capplets/ui-properties/ui-properties.c:185
-msgid "Use statusbar instead of dialog when possible"
-msgstr "Usar barra de estado en vez del diálogo, siempre que sea posible"
-
-#: capplets/ui-properties/ui-properties.c:207
-msgid "Dialog position"
-msgstr "Posición de las ventanas de diálogo"
-
-#: capplets/ui-properties/ui-properties.c:208
-msgid "Let window manager decide"
-msgstr "Dejar que el gestor de ventanas decida"
-
-#: capplets/ui-properties/ui-properties.c:209
-msgid "Center of the screen"
-msgstr "Al centro de la pantalla"
-
-#: capplets/ui-properties/ui-properties.c:210
-msgid "At the mouse pointer"
-msgstr "A la posición del ratón"
-
-#: capplets/ui-properties/ui-properties.c:215
-msgid "Dialog hints"
-msgstr "Tratamiento"
-
-#: capplets/ui-properties/ui-properties.c:216
-msgid "Dialogs are like other windows"
-msgstr "Las ventanas de diálogo son como las demás ventanas"
-
-#: capplets/ui-properties/ui-properties.c:217
-msgid "Dialogs are treated specially by window manager"
-msgstr ""
-"Las ventanas de diálogo son tratadas de manera especial por el gestor de "
-"ventanas"
-
-#: capplets/ui-properties/ui-properties.c:222
-msgid "Place dialogs over application window when possible"
-msgstr ""
-"Poner las ventanas de diálogo encima de las aplicaciones siempre que posible"
-
-#: capplets/ui-properties/ui-properties.c:243
-msgid "Dialog Layout"
-msgstr "Presentación de las ventanas de diálogo"
-
-#: capplets/ui-properties/ui-properties.c:244
-msgid "Dialog Behavior"
-msgstr "Comportamiento de las ventanas de diálogo"
-
-#: capplets/ui-properties/ui-properties.c:250
-msgid "Default MDI Mode"
-msgstr "Modo MDI predeterminado"
-
-#: capplets/ui-properties/ui-properties.c:251
-msgid "Notebook"
-msgstr "Bloc de notas"
-
-#: capplets/ui-properties/ui-properties.c:252
-msgid "Toplevel"
-msgstr "Primer plano"
-
-#: capplets/ui-properties/ui-properties.c:253
-msgid "Modal"
-msgstr "Modal"
-
-#: capplets/ui-properties/ui-properties.c:258
-msgid "MDI notebook tab position"
-msgstr "Posición de la etiqueta del bloc de notas MDI"
-
-#: capplets/ui-properties/ui-properties.c:259
-msgid "Left"
-msgstr "Izquierda"
-
-#: capplets/ui-properties/ui-properties.c:260
-msgid "Right"
-msgstr "Derecha"
-
-#: capplets/ui-properties/ui-properties.c:261
-msgid "Top"
-msgstr "Arriba"
-
-#: capplets/ui-properties/ui-properties.c:262
-msgid "Bottom"
-msgstr "Abajo"
-
-#: capplets/ui-properties/ui-properties.c:277
-msgid "GNOME MDI Options"
-msgstr "Opciones MDI de GNOME"
-
-#: capplets/url-properties/url-properties.c:51
-msgid "Error initializing the `url-properties' capplet."
-msgstr "Error al inicializar el capplet 'url-properties'."
-
-#: capplets/url-properties/url-properties.c:76
-msgid "Protocol"
-msgstr "Protocolo"
-
-#: capplets/url-properties/url-properties.c:76
-msgid "Command"
-msgstr "Comando"
-
-#: capplets/url-properties/url-properties.c:93
-msgid "handler:"
-msgstr "selector:"
-
-#. set some commonly used handlers
-#: capplets/url-properties/url-properties.c:103
-msgid "Netscape"
-msgstr "Netscape"
-
-#: capplets/url-properties/url-properties.c:108
-msgid "Netscape (new window)"
-msgstr "Netscape (nueva ventana)"
-
-#: capplets/url-properties/url-properties.c:121
-msgid "Help browser"
-msgstr "Visualizador de ayuda"
-
-#: capplets/url-properties/url-properties.c:127
-msgid "Help browser (new window)"
-msgstr "Visualizador de ayuda (nueva ventana)"
-
-#: capplets/url-properties/url-properties.c:140
-msgid "Set"
-msgstr "Definir"
-
-#: capplets/url-properties/url-properties.c:148
-msgid "Remove"
-msgstr "Quitar"
-
-#: capplets/wm-properties/wm-properties-capplet.c:142
-#, c-format
-msgid ""
-"Starting %s\n"
-"(%d seconds left before operation times out)"
-msgstr ""
-"Iniciando %s\n"
-"(quedan %d segundos antes de la expiración de la operación)"
-
-#: capplets/wm-properties/wm-properties-capplet.c:303
-#, c-format
-msgid "%s (Current)"
-msgstr "%s (Actual)"
-
-#: capplets/wm-properties/wm-properties-capplet.c:306
-#, c-format
-msgid "Run Configuration Tool for %s"
-msgstr "Lanzar la herramienta de configuración de %s"
-
-#: capplets/wm-properties/wm-properties-capplet.c:317
-msgid " (Not found)"
-msgstr " (No se encontró)"
-
-#: capplets/wm-properties/wm-properties-capplet.c:356
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\tAnother window manager is already running and could not be killed\n"
-msgstr ""
-"wm-properties-capplet:Imposible de inicializar el gestor de ventanas.\n"
-"\tOtro gestor de ventanas esta activo y no puede ser matado\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:360
-#, c-format
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\t'%s' didn't start\n"
-msgstr ""
-"wm-properties-capplet: Imposible de inicializar el gestor de "
-"ventanas.\n\tNo se lanzó '%s'\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:413
-msgid "Previous window manager did not die\n"
-msgstr "El gestor de ventanas anterior no murió\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:446
-#, c-format
-msgid ""
-"Could not start '%s'.\n"
-"Falling back to previous window manager '%s'\n"
-msgstr ""
-"No pude iniciar '%s'.\n"
-"Volviendo al anterior gestor de ventanas ('%s')\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:477
-msgid ""
-"Could not start fallback window manager.\n"
-"Please run a window manager manually. You can\n"
-"do this by selecting \"Run Program\" in the\n"
-"foot menu\n"
-msgstr ""
-"No pude iniciar el gestor de ventanas anterior.\n"
-"Lance uno manualmente. Puede hacer eso\n"
-"seleccionando \"Lanzar...\" en el menú con\n"
-"el logotipo de Gnome en forma de pié\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:502
-#: capplets/wm-properties/wm-properties-capplet.c:868
-#: capplets/wm-properties/wm-properties-capplet.c:875
-#: capplets/wm-properties/wm-properties-capplet.c:1021
-msgid "OK"
-msgstr "Aceptar"
-
-#: capplets/wm-properties/wm-properties-capplet.c:520
-msgid ""
-"Your current window manager has been changed. In order for\n"
-"this change to be saved, you will need to save your current\n"
-"session. You can do so immediately by selecting the \"Save session\n"
-"now\" below, or you can save your session later.  This can be\n"
-"done either selecting \"Save Current Session\" under \"Settings\"\n"
-"in the main menu, or by turning on \"Save Current Setup\" when\n"
-"you log out.\n"
-msgstr ""
-"El gestor de ventanas fue cambiado. Para que este cambio\n"
-"sea permanente, debe guardar su sesión actual. Puede hacerlo\n"
-"inmediatamente seleccionando «Guardar la sesión ahora» abajo,\n"
-"o puede guardar la sesión más tarde. Esto se puede hacer\n"
-"seleccionando «Guardar sesión actual» del submenú\n"
-"«Configuración» del menú principal de Gnome, o activando\n"
-"«Guardar configuración actual» al quitar la sesión.\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:527
-msgid "Save Session Later"
-msgstr "Guardar la sesión más tarde"
-
-#: capplets/wm-properties/wm-properties-capplet.c:527
-msgid "Save Session Now"
-msgstr "Guardar la sesión ahora"
-
-#: capplets/wm-properties/wm-properties-capplet.c:530
-msgid ""
-"Your current window manager has been changed. In order for\n"
-"this change to be saved, you will need to save your current\n"
-"session. This can be done by either selecting \"Save Current Session\"\n"
-"under \"Settings\" in the main menu, or by turning on\n"
-"\"Save Current Setup\" when you log out.\n"
-msgstr ""
-"El gestor de ventanas fue cambiado. Para que este cambio\n"
-"sea permanente, debe guardar su sesión actual. Esto se puede\n"
-"hacer seleccionando «Guardar sesión actual» del submenú\n"
-"«Configuración» del menú principal de Gnome, o activando\n"
-"«Guardar configuración actual» al quitar la sesión.\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:757
-msgid "Add New Window Manager"
-msgstr "Añadir un nuevo gestor de ventanas"
-
-#: capplets/wm-properties/wm-properties-capplet.c:771
-msgid "Name:"
-msgstr "Nombre:"
-
-#: capplets/wm-properties/wm-properties-capplet.c:784
-msgid "Command:"
-msgstr "Comando:"
-
-#: capplets/wm-properties/wm-properties-capplet.c:797
-msgid "Configuration Command:"
-msgstr "Comando para la configuración:"
-
-#: capplets/wm-properties/wm-properties-capplet.c:816
-msgid "Window manager is session managed"
-msgstr "El gestor de ventanas es manejado por el gestor de sesiones"
-
-#: capplets/wm-properties/wm-properties-capplet.c:866
-msgid "Name cannot be empty"
-msgstr "El nombre no puede quedar en blanco"
-
-#: capplets/wm-properties/wm-properties-capplet.c:873
-msgid "Command cannot be empty"
-msgstr "El comando no puede quedar en blanco"
-
-#: capplets/wm-properties/wm-properties-capplet.c:922
-#: capplets/wm-properties/wm-properties-capplet.c:964
-msgid "Edit Window Manager"
-msgstr "Editar Gestor de Ventanas"
-
-#: capplets/wm-properties/wm-properties-capplet.c:1020
-msgid "You cannot delete the current Window Manager"
-msgstr "No puede borrar el gestor de ventanas en uso"
-
-#: capplets/wm-properties/wm-properties-capplet.c:1093
-msgid "Edit..."
-msgstr "Editar..."
-
-#: capplets/wm-properties/wm-properties-capplet.c:1098
-msgid "Delete"
-msgstr "Borrar"
-
-#: capplets/wm-properties/wm-properties-capplet.c:1134
-msgid ""
-"an initialization error occurred while starting 'wm-properties-capplet'.\n"
-"aborting...\n"
-msgstr ""
-"ocurrió un error de inicialización al lanzar 'wm-properties-capplet'.\n"
-"abortando...\n"
-
-#: control-center/callbacks.c:102 control-center/gnomecc.desktop.in.h:1
-msgid "GNOME Control Center"
-msgstr "Centro de Control de GNOME"
-
-#: control-center/callbacks.c:105
-msgid "Desktop Properties manager."
-msgstr "Gestor de propiedades del escritorio."
-
-#: control-center/capplet-manager.c:179
-msgid "Try"
-msgstr "Probar"
-
-#: control-center/capplet-manager.c:185
-msgid "Revert"
-msgstr "Revertir"
-
-#. set the help item
-#: control-center/capplet-manager.c:208
-#, c-format
-msgid "Help with '%s' settings"
-msgstr "Ayuda con la configuración de «%s»"
-
-#: control-center/capplet-widget-libs.c:46
-msgid "id of the capplet -- assigned by the control-center"
-msgstr "id del capplet - asignado por el centro de control"
-
-#: control-center/capplet-widget-libs.c:46
-msgid "ID"
-msgstr "ID"
-
-#: control-center/capplet-widget-libs.c:47
-msgid "Multi-capplet id."
-msgstr "Id de capplet múltiple"
-
-#: control-center/capplet-widget-libs.c:47
-msgid "CAPID"
-msgstr "CAPID"
-
-#: control-center/capplet-widget-libs.c:48
-msgid "X ID of the socket it's plugged into"
-msgstr "ID X del zócalo al cual está conectado"
-
-#: control-center/capplet-widget-libs.c:48
-msgid "XID"
-msgstr "XID"
-
-#: control-center/capplet-widget-libs.c:49
-msgid "IOR of the control-center"
-msgstr "IOR del centro de control (control-center)"
-
-#: control-center/capplet-widget-libs.c:49
-msgid "IOR"
-msgstr "IOR"
-
-#: control-center/capplet-widget-libs.c:50
-msgid "Initialize session settings"
-msgstr "Inicializar la configuración de la sesión"
-
-#: control-center/capplet-widget-libs.c:51
-msgid "Ignore default action.  Used for custom init-session cases"
-msgstr ""
-"Ignorar la acción predeterminada. Usado para casos de inicialización de "
-"sesión personalizados"
-
-#: control-center/capplet-widget.c:272
-msgid "Sorry, no help is available for these settings."
-msgstr "Disculpe, no existe ayuda sobre esas opciones."
-
-#: control-center/corba-glue.c:77
-msgid "capplet-command to be run."
-msgstr "comando capplet a lanzar."
-
-#: control-center/corba-glue.c:77
-msgid "CAPPLET"
-msgstr "CAPPLET"
-
-#: control-center/main.c:36
-msgid "Help on control-center"
-msgstr "Ayuda con el centro de control"
-
-#: control-center/main.c:36
-msgid "Help with the GNOME control-center."
-msgstr "Ayuda con centro de control de GNOME."
-
-#: control-center/main.c:38
-msgid "Help with the current configuration page."
-msgstr "Ayuda con la página ce configuración actual."
-
-#: control-center/main.c:41
-msgid "About"
-msgstr "Acerca"
-
-#: control-center/main.c:41
-msgid "About the GNOME control-center."
-msgstr "Acerca del centro de control de GNOME."
-
-#. we create the widgets
-#: control-center/main.c:69
-msgid "Warning:"
-msgstr "Advertencia:"
-
-#: control-center/main.c:69
-msgid "Discard all changes"
-msgstr "Descartar todos los cambios"
-
-#. ...labels, etc
-#: control-center/main.c:78
-msgid ""
-"The following modules have had changes made, but not committed.  If you would "
-"like to edit them, please double click on the appropriate entry."
-msgstr ""
-"Los módulos siguientes han hecho cambios, pero no fueron guardados. Si desea "
-"editarlos por favor haga un doble-clic en la entrada apropiada."
-
-#. create the app
-#: capplets/desktop-links/Gnome.directory.in.h:1 control-center/main.c:197
-#: control-center/splash.c:247
-msgid "Control Center"
-msgstr "Centro de control"
-
-#: control-center/splash.c:48
-msgid "Operating System:"
-msgstr "Sistema operativo:"
-
-#: control-center/splash.c:49
-msgid "Distribution Version:"
-msgstr "Versión de la distribución:"
-
-#: control-center/splash.c:50
-msgid "Processor Type:"
-msgstr "Tipo de procesador:"
-
-#: control-center/splash.c:51
-msgid "User Name:"
-msgstr "Nombre de usuario:"
-
-#: control-center/splash.c:52
-msgid "Host Name:"
-msgstr "Nombre del ordenador:"
-
-#. This is about the only case where we'll put Unknown instead
-#. of simply not showing the info.
-#: control-center/splash.c:178
-msgid "Unknown"
-msgstr "Desconocido"
-
-#: control-center/gnomecc.desktop.in.h:2
-msgid "The GNOME configuration tool"
-msgstr "Herramienta de configuración del entorno GNOME"
-
-#: capplets/wm-properties/wm-properties.desktop.in.h:1
-msgid "Choose a window manager"
-msgstr "Permite elegir un gestor de ventanas"
-
-#: capplets/wm-properties/wm-properties.desktop.in.h:2
-msgid "Window Manager"
-msgstr "Gestor de ventanas"
-
-#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.h:1
-msgid "Enlightenment"
-msgstr "Enlightenment"
-
-#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.h:1
-msgid "Ice WM"
-msgstr "Ice WM"
-
-#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.h:1
-msgid "Scwm"
-msgstr "Scwm"
-
-#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.h:1
-msgid "Window Maker"
-msgstr "Window Maker"
-
-#: capplets/wm-properties/wm-desktops/twm.desktop.in.h:1
-msgid "twm"
-msgstr "twm"
-
-#: capplets/url-properties/url-properties.desktop.in.h:1
-msgid "Configure which programs are used to display URLs"
-msgstr "Configura que programas usar para navegar por las URLs"
-
-#: capplets/url-properties/url-properties.desktop.in.h:2
-msgid "URL Handlers"
-msgstr "Navegador de URLs"
-
-#: capplets/ui-properties/application.desktop.in.h:1
-msgid "Applications"
-msgstr "Aplicaciones"
-
-#: capplets/ui-properties/application.desktop.in.h:2
-msgid "Sets the default feel of GNOME applications"
-msgstr "Establece el comportamiento predeterminado de las aplicaciones GNOME"
-
-#: capplets/ui-properties/dialogs.desktop.in.h:1
-msgid "Dialogs"
-msgstr "Diálogos"
-
-#: capplets/ui-properties/mdi.desktop.in.h:1
-msgid "MDI"
-msgstr "MDI"
-
-#: capplets/theme-switcher/theme-selector.desktop.in.h:1
-msgid "Select which desktop theme to use"
-msgstr "Selecciona el tema deseado para el escritorio"
-
-#: capplets/theme-switcher/theme-selector.desktop.in.h:2
-msgid "Theme Selector"
-msgstr "Selector de temas"
-
-#: capplets/sound-properties/sound-properties.desktop.in.h:1
-msgid "Configure GNOME's use of sound"
-msgstr "Configurar los sonidos de GNOME"
-
-#: capplets/sound-properties/sound-properties.desktop.in.h:2
-msgid "Sound"
-msgstr "Sonido"
-
-#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:1
-msgid "Configure the settings of the screensaver"
-msgstr "Configurar el salvapantalla"
-
-#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:2
-msgid "Screensaver"
-msgstr "Salvapantalla"
 
 #: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:1
 msgid "3D Clock"
@@ -1585,8 +792,8 @@ msgid ""
 msgstr ""
 "Un autómata celular que es en realidad una máquina de Türing de dos "
 "dimensiones: ya que las hormigas mientras caminan por la pantalla van "
-"cambiando el valor de los pixeles sobre los cuales pasan. Luego, cuando pasan "
-"de vuelta sobre un pixel modificado su comportamiento cambia."
+"cambiando el valor de los pixeles sobre los cuales pasan. Luego, cuando "
+"pasan de vuelta sobre un pixel modificado su comportamiento cambia."
 
 #: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:2
 msgid "Ant"
@@ -1938,8 +1145,8 @@ msgstr "Blitspin"
 
 #: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:2
 msgid ""
-"Blitspin takes a bitmap and repeatedly rotates it by 90 degrees using logical "
-"operations."
+"Blitspin takes a bitmap and repeatedly rotates it by 90 degrees using "
+"logical operations."
 msgstr ""
 "Blitspin hace repetidamente rotaciones de 90° con una imagen bitmap, usando "
 "operaciones lógicas."
@@ -2511,8 +1718,8 @@ msgstr "Deco"
 #: capplets/screensaver-properties/screensaver-desktops/Deco.desktop.in.h:4
 msgid "Deco draws tacky 70s basement wall panelling."
 msgstr ""
-"Dibuja motivos de colores similares a los que se usaban para el empapelado en "
-"los años 70."
+"Dibuja motivos de colores similares a los que se usaban para el empapelado "
+"en los años 70."
 
 #: capplets/screensaver-properties/screensaver-desktops/Deco.desktop.in.h:5
 msgid "Determines whether to draw the panels in color, or in black and white."
@@ -2672,8 +1879,8 @@ msgstr "Epicycle"
 
 #: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:7
 msgid ""
-"Epicycle draws the path traced out by a point on the edge of a circle that is "
-"rotating around the rim of another circle, and so on."
+"Epicycle draws the path traced out by a point on the edge of a circle that "
+"is rotating around the rim of another circle, and so on."
 msgstr ""
 "Este salvapantallas dibuja la trajectoria de un punto sobre un círculo en "
 "rotación que se desplaza sobre otro círculo"
@@ -2699,8 +1906,8 @@ msgstr "Tiempo de espera"
 #: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:16
 msgid "When the figure is complete, epicycle pauses this number of seconds."
 msgstr ""
-"Cuando la figura está completada, el salvapantallas espera por la cantidad de "
-"segundos especificada."
+"Cuando la figura está completada, el salvapantallas espera por la cantidad "
+"de segundos especificada."
 
 #: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:1
 msgid "A waving ribbon"
@@ -3192,8 +2399,8 @@ msgstr "Lament"
 
 #: capplets/screensaver-properties/screensaver-desktops/Laser.desktop.in.h:4
 msgid ""
-"Draws laser-like lines moving around a central focal point in varying numbers "
-"and colors."
+"Draws laser-like lines moving around a central focal point in varying "
+"numbers and colors."
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Laser.desktop.in.h:5
@@ -3211,8 +2418,8 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Laser.desktop.in.h:8
 msgid ""
-"Duration of the laser burst.  After the burst has finished, It will move to a "
-"new location on the screen."
+"Duration of the laser burst.  After the burst has finished, It will move to "
+"a new location on the screen."
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Laser.desktop.in.h:9
@@ -3310,8 +2517,7 @@ msgid "Lmorph"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:12
-msgid ""
-"Lmorph morphs between simple linedrawings using bilinear interpolation."
+msgid "Lmorph morphs between simple linedrawings using bilinear interpolation."
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:15
@@ -3409,6 +2615,10 @@ msgstr "Demora después de la resolución"
 msgid "If the solver can "
 msgstr ""
 
+#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:13
+msgid " the end of a corridor it will color it this color."
+msgstr ""
+
 #: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:14
 msgid "Less Delay"
 msgstr "Menos tiempo"
@@ -3480,8 +2690,8 @@ msgid ""
 "The delay (in microseconds) between generating a maze and starting to solve "
 "it."
 msgstr ""
-"La demora (en microsegundos) entre la creación del laberinto y el comienzo de "
-"la resolución gráfica."
+"La demora (en microsegundos) entre la creación del laberinto y el comienzo "
+"de la resolución gráfica."
 
 #: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:31
 msgid ""
@@ -3722,8 +2932,8 @@ msgid ""
 "Determines whether the lines move erraticly, or bounce off the walls "
 "linearly."
 msgstr ""
-"Determina si las lineas se mueven de manera errática, o si tienen que rebotar "
-"de manera lineal."
+"Determina si las lineas se mueven de manera errática, o si tienen que "
+"rebotar de manera lineal."
 
 #: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:6
 msgid "Determines whether to fill in the gaps between the lines."
@@ -3789,11 +2999,6 @@ msgstr "Ancho:"
 #: capplets/screensaver-properties/screensaver-desktops/Rd-bomb.desktop.in.h:1
 msgid "Rd-bomb"
 msgstr ""
-
-#: capplets/desktop-links/Desktop.directory.in.h:1
-#: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:1
-msgid "Desktop"
-msgstr "Escritorio"
 
 #: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:2
 msgid "Display oily drops."
@@ -3990,8 +3195,8 @@ msgstr "Estrella de mar"
 
 #: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:22
 msgid ""
-"Starfish bounces a series of arcs around its window in a star like formation. "
-"It uses multiple colors and multiple patterns. "
+"Starfish bounces a series of arcs around its window in a star like "
+"formation. It uses multiple colors and multiple patterns. "
 msgstr ""
 "La estrella de mar despide una serie de arcos alrededor de su ventana en una "
 "formación en estrella. Utiliza colores múltiples y modelos múltiples."
@@ -4148,81 +3353,494 @@ msgstr ""
 msgid "Xteevee"
 msgstr ""
 
-#: capplets/mouse-properties/mouse-properties.desktop.in.h:1
-msgid "Mouse"
-msgstr "Propiedades del ratón"
+#: capplets/screensaver-properties/screensaver-dialog.c:46
+msgid "About:"
+msgstr "Acerca:"
 
-#: capplets/mouse-properties/mouse-properties.desktop.in.h:2
-msgid "Mouse Properties"
-msgstr "Modifica las propiedades del ratón"
+#: capplets/screensaver-properties/screensaver-dialog.c:51
+msgid "Author:"
+msgstr "Autor:"
 
-#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:1
-msgid "Keyboard"
-msgstr "Propiedades del Teclado"
+#: capplets/screensaver-properties/screensaver-dialog.c:61
+msgid "Author: UNKNOWN"
+msgstr "Autor: DESCONOCIDO"
 
-#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:2
-msgid "Keyboard Properties"
-msgstr "Modifica las propiedades del teclado"
+#: capplets/screensaver-properties/screensaver-dialog.c:78
+msgid "Settings"
+msgstr "Parámetros"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:1
-msgid "Choose the editor that is invoked by gnome-edit"
-msgstr "Elegir el editor invocado por gnome-edit."
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:38
+msgid "RANDOM SCREENSAVER"
+msgstr "SALVAPANTALLAS AL AZAR"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:2
-msgid "Default Editor"
-msgstr "Propiedades Gnome Edit"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:49
+msgid "Screen Saver"
+msgstr "Salvapantalla"
 
-#: capplets/background-properties/background-properties.desktop.in.h:1
-msgid "Background"
-msgstr "Propiedades del tapiz"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:61
+msgid ""
+"Pressing this button will popup a dialogbox that will help you setup the "
+"current screensaver."
+msgstr ""
+"Este botón abre una ventana de diálogo que le ayudará a configurar el "
+"salvapantalla actual."
 
-#: capplets/background-properties/background-properties.desktop.in.h:2
-msgid "Configuration of the desktop's background"
-msgstr "Configuración del tapiz del escritorio"
+#. set up the initial frame, and get a vbox in which to pack things.
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:88
+msgid "Screen Saver Settings"
+msgstr "Configuración del salvapantalla"
 
-#: capplets/desktop-links/Documents.directory.in.h:1
-msgid "Configure how document types are handled"
-msgstr "Configura cómo manejar los tipos de documentos"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:96
+msgid "Start After "
+msgstr "Activar después de "
 
-#: capplets/desktop-links/Documents.directory.in.h:2
-msgid "Document Handlers"
-msgstr "Manejadores de Documentos"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:102
+msgid " Minutes."
+msgstr " minutos."
 
-#: capplets/desktop-links/Gnome.directory.in.h:2
-msgid "Control Center Menu"
-msgstr "Menú del Centro de Control de Gnome"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:117
+msgid "Priority:"
+msgstr "Prioridad:"
 
-#: capplets/desktop-links/Multimedia.directory.in.h:1
-msgid "Configure the settings of your Multimedia devices"
-msgstr "Configurar los dispositivos multimedios"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:124
+msgid "Low "
+msgstr "Baja "
 
-#: capplets/desktop-links/Multimedia.directory.in.h:2
-msgid "Multimedia"
-msgstr "Multimedios"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:126
+msgid " Normal"
+msgstr " Normal"
 
-#: capplets/desktop-links/Peripherals.directory.in.h:1
-msgid "Configure your external devices"
-msgstr "Configurar sus dispositivos externos."
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:137
+msgid "Shutdown monitor "
+msgstr "Apagar el monitor "
 
-#: capplets/desktop-links/Peripherals.directory.in.h:2
-msgid "Peripherals"
-msgstr "Periféricos"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:139
+msgid " minutes after screen saver has started."
+msgstr " minutos después de haberse iniciado el salvapantalla."
 
-#: capplets/desktop-links/Session.directory.in.h:1
-msgid "Session"
-msgstr "Sesión"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:152
+msgid "Screen Saver Demo"
+msgstr "Demostración del salvapantalla"
 
-#: capplets/desktop-links/Session.directory.in.h:2
-msgid "Session Management Settings"
-msgstr "Opciones de la gestión de sesiones"
+#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:1
+msgid "Configure the settings of the screensaver"
+msgstr "Configurar el salvapantalla"
 
-#: capplets/desktop-links/UIOptions.directory.in.h:1
-msgid "Configure the global settings of your GNOME applications"
-msgstr "Configurar las opciones globales de las aplicaciones Gnome."
+#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:2
+msgid "Screensaver"
+msgstr "Salvapantalla"
 
-#: capplets/desktop-links/UIOptions.directory.in.h:2
-msgid "User Interface"
-msgstr "Opciones de la interfaz gráfica"
+#: capplets/sound-properties/sound-properties.c:97
+msgid ""
+"an initialization error occurred while starting 'sound-properties-capplet'."
+msgstr ""
+"ocurrió un error de inicialización al lanzar 'sound-properties-capplet'."
+
+#: capplets/sound-properties/sound-properties.c:188
+msgid "Event"
+msgstr "Evento"
+
+#: capplets/sound-properties/sound-properties.c:189
+msgid "File to Play"
+msgstr "Archivo a reproducir"
+
+#: capplets/sound-properties/sound-properties.c:243
+msgid "Enable"
+msgstr "Activar"
+
+#: capplets/sound-properties/sound-properties.c:250
+msgid "Enable sound server startup"
+msgstr "Activar el lanzamiento del servidor de sonido"
+
+#: capplets/sound-properties/sound-properties.c:258
+msgid "Sounds for events"
+msgstr "Sonidos para los eventos"
+
+#: capplets/sound-properties/sound-properties.c:279
+msgid "General"
+msgstr "General"
+
+#: capplets/sound-properties/sound-properties.c:286
+msgid "Select sound file"
+msgstr "Seleccionar archivo de sonido"
+
+#: capplets/sound-properties/sound-properties.c:325
+msgid "Play"
+msgstr "Reproducir"
+
+#: capplets/sound-properties/sound-properties.c:336
+msgid "Sound Events"
+msgstr "Eventos de sonido"
+
+#: capplets/sound-properties/sound-properties.c:355
+msgid ""
+"This copy of the GNOME control center was not compiled with sound support"
+msgstr ""
+"Esta copia del centro de control de GNOME fue compilada sin soporte para el "
+"sonido"
+
+#: capplets/sound-properties/sound-properties.c:748
+msgid "The sound file for this event does not exist."
+msgstr "El archivo de sonido para este evento no existe."
+
+#: capplets/sound-properties/sound-properties.c:750
+msgid ""
+"The sound file for this event does not exist.\n"
+"You may want to install the gnome-audio package\n"
+"for a set of default sounds."
+msgstr ""
+"El archivo de sonido para este evento no existe.\n"
+"Quizás desee instalar el paquete gnome-audio para\n"
+"un conjunto de sonidos de base."
+
+#: capplets/sound-properties/sound-properties.desktop.in.h:1
+msgid "Configure GNOME's use of sound"
+msgstr "Configurar los sonidos de GNOME"
+
+#: capplets/sound-properties/sound-properties.desktop.in.h:2
+msgid "Sound"
+msgstr "Sonido"
+
+#: capplets/theme-switcher/demo.c:50
+msgid "One"
+msgstr "Uno"
+
+#: capplets/theme-switcher/demo.c:50
+msgid "Two"
+msgstr "Dos"
+
+#. just 8 short names that will serve as samples for titles in demo
+#: capplets/theme-switcher/demo.c:52
+msgid "Eenie"
+msgstr "Erre"
+
+#: capplets/theme-switcher/demo.c:52
+msgid "Meenie"
+msgstr "Con"
+
+#: capplets/theme-switcher/demo.c:53
+msgid "Mynie"
+msgstr "Erre"
+
+#: capplets/theme-switcher/demo.c:53
+msgid "Moe"
+msgstr "Carril"
+
+#: capplets/theme-switcher/demo.c:54
+msgid "Catcha"
+msgstr "Erre"
+
+#: capplets/theme-switcher/demo.c:54
+msgid "Tiger"
+msgstr "con"
+
+#: capplets/theme-switcher/demo.c:55
+msgid "By Its"
+msgstr "Erre"
+
+#: capplets/theme-switcher/demo.c:55
+msgid "Toe"
+msgstr "Guitarra"
+
+#: capplets/theme-switcher/demo.c:114
+msgid "Selected themes from above will be tested by previewing here."
+msgstr "Los temas seleccionados serán previsualizados aquí."
+
+#. column one
+#: capplets/theme-switcher/demo.c:119
+msgid "Sample Button"
+msgstr "Botón de ejemplo"
+
+#: capplets/theme-switcher/demo.c:123
+msgid "Sample Check Button"
+msgstr "Ejemplo de botón de opción"
+
+#: capplets/theme-switcher/demo.c:128
+msgid "Sample Text Entry Field"
+msgstr "Ejemplo de campo de entrada de texto"
+
+#: capplets/theme-switcher/demo.c:139
+msgid "Submenu"
+msgstr "Submenú"
+
+#: capplets/theme-switcher/demo.c:146
+msgid "Item 1"
+msgstr "Elemento 1"
+
+#: capplets/theme-switcher/demo.c:149
+msgid "Another item"
+msgstr "Otro elemento"
+
+#: capplets/theme-switcher/demo.c:154
+msgid "Radio Button 1"
+msgstr "Botón de radio 1"
+
+#: capplets/theme-switcher/demo.c:160
+msgid "Radio Button 2"
+msgstr "Botón de radio 2"
+
+#: capplets/theme-switcher/gui.c:89
+#, c-format
+msgid ""
+"Error installing theme:\n"
+"'%s'\n"
+"%s"
+msgstr ""
+"Error al instalar el tema:\n"
+"'%s'\n"
+"%s"
+
+#: capplets/theme-switcher/gui.c:120
+msgid "Select a theme to install"
+msgstr "Seleccione un tema a instalar"
+
+#: capplets/theme-switcher/gui.c:197
+msgid "Available Themes"
+msgstr "Temas disponibles"
+
+#: capplets/theme-switcher/gui.c:221
+msgid ""
+"Auto\n"
+"Preview"
+msgstr ""
+"Auto\n"
+"Previsualización"
+
+#: capplets/theme-switcher/gui.c:233
+msgid ""
+"Install new\n"
+"theme..."
+msgstr ""
+"Instalar\n"
+"nuevo tema..."
+
+#. Font selector.
+#.
+#: capplets/theme-switcher/gui.c:239
+msgid "User Font"
+msgstr "Tipo de letra del Usuario"
+
+#. FIXME - should really get this from X somehow
+#. for now we just assume default gtk font
+#: capplets/theme-switcher/gui.c:257
+msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
+msgstr "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
+
+#: capplets/theme-switcher/gui.c:276
+msgid "Use custom font."
+msgstr "Usar un tipo de letra personalizada."
+
+#: capplets/theme-switcher/install.c:26
+msgid "Home directory doesn't exist!\n"
+msgstr "¡El directorio personal no existe!\n"
+
+#: capplets/theme-switcher/install.c:36
+msgid "Theme does not exist"
+msgstr "El tema no existe"
+
+#: capplets/theme-switcher/install.c:68
+#, c-format
+msgid "Command '%s' failed"
+msgstr "Falló el comando '%s'"
+
+#: capplets/theme-switcher/install.c:73
+msgid "Unknown file format"
+msgstr "Formato de archivo desconocido"
+
+#: capplets/theme-switcher/theme-selector.desktop.in.h:1
+msgid "Select which desktop theme to use"
+msgstr "Selecciona el tema deseado para el escritorio"
+
+#: capplets/theme-switcher/theme-selector.desktop.in.h:2
+msgid "Theme Selector"
+msgstr "Selector de temas"
+
+#: capplets/ui-properties/application.desktop.in.h:1
+msgid "Applications"
+msgstr "Aplicaciones"
+
+#: capplets/ui-properties/application.desktop.in.h:2
+msgid "Sets the default feel of GNOME applications"
+msgstr "Establece el comportamiento predeterminado de las aplicaciones GNOME"
+
+#: capplets/ui-properties/dialogs.desktop.in.h:1
+msgid "Dialogs"
+msgstr "Diálogos"
+
+#: capplets/ui-properties/mdi.desktop.in.h:1
+msgid "MDI"
+msgstr "MDI"
+
+#: capplets/ui-properties/ui-properties.c:54
+msgid "Can detach and move toolbars"
+msgstr "Barras de iconos desprendibles y desplazables"
+
+#: capplets/ui-properties/ui-properties.c:59
+msgid "Toolbars have relieved border"
+msgstr "Barras de iconos con bordes en relieve"
+
+#: capplets/ui-properties/ui-properties.c:64
+msgid "Toolbar buttons have relieved border"
+msgstr "Botones de la barra de iconos con bordes en relieve"
+
+#: capplets/ui-properties/ui-properties.c:69
+msgid "Toolbars have line separators"
+msgstr "Barras de iconos con líneas de separación"
+
+#: capplets/ui-properties/ui-properties.c:74
+msgid "Toolbars have text labels"
+msgstr "Barras de iconos con textos"
+
+#: capplets/ui-properties/ui-properties.c:103
+msgid "Can detach and move menus"
+msgstr "Menúes desprendibles y desplazables"
+
+#: capplets/ui-properties/ui-properties.c:108
+msgid "Menus have relieved border"
+msgstr "Menúes con bordes en relieve"
+
+#: capplets/ui-properties/ui-properties.c:112
+msgid "Submenus can be torn off"
+msgstr "Los submenúes pueden desprenderse"
+
+#: capplets/ui-properties/ui-properties.c:116
+msgid "Menu items have icons"
+msgstr "Menúes con iconos"
+
+#: capplets/ui-properties/ui-properties.c:140
+msgid "Statusbar is interactive when possible"
+msgstr "Barra de estado interactiva siempre que sea posible"
+
+#: capplets/ui-properties/ui-properties.c:145
+msgid "Statusbar progress meter is on the right"
+msgstr "Barra de progresión a la derecha de la barra de estado"
+
+#: capplets/ui-properties/ui-properties.c:162
+msgid "Menu Options"
+msgstr "Opciones de los menúes"
+
+#: capplets/ui-properties/ui-properties.c:163
+msgid "Statusbar Options"
+msgstr "Opciones de las barras de estado"
+
+#: capplets/ui-properties/ui-properties.c:164
+msgid "Toolbar Options"
+msgstr "Opciones de las barras de herramientas"
+
+#: capplets/ui-properties/ui-properties.c:170
+msgid "Dialog buttons"
+msgstr "Botones de diálogo"
+
+#: capplets/ui-properties/ui-properties.c:171
+msgid "Default value"
+msgstr "Valor predeterminado"
+
+#: capplets/ui-properties/ui-properties.c:172
+msgid "Spread buttons out"
+msgstr "Espaciar los botones"
+
+#: capplets/ui-properties/ui-properties.c:173
+msgid "Put buttons on edges"
+msgstr "Poner los botones sobre los lados"
+
+#: capplets/ui-properties/ui-properties.c:174
+msgid "Left-justify buttons"
+msgstr "Justificar los botones a la izquierda"
+
+#: capplets/ui-properties/ui-properties.c:175
+msgid "Right-justify buttons"
+msgstr "Justificar los botones a la derecha"
+
+#: capplets/ui-properties/ui-properties.c:180
+msgid "Dialog buttons have icons"
+msgstr "Botones de diálogo con iconos"
+
+#: capplets/ui-properties/ui-properties.c:185
+msgid "Use statusbar instead of dialog when possible"
+msgstr "Usar barra de estado en vez del diálogo, siempre que sea posible"
+
+#: capplets/ui-properties/ui-properties.c:207
+msgid "Dialog position"
+msgstr "Posición de las ventanas de diálogo"
+
+#: capplets/ui-properties/ui-properties.c:208
+msgid "Let window manager decide"
+msgstr "Dejar que el gestor de ventanas decida"
+
+#: capplets/ui-properties/ui-properties.c:209
+msgid "Center of the screen"
+msgstr "Al centro de la pantalla"
+
+#: capplets/ui-properties/ui-properties.c:210
+msgid "At the mouse pointer"
+msgstr "A la posición del ratón"
+
+#: capplets/ui-properties/ui-properties.c:215
+msgid "Dialog hints"
+msgstr "Tratamiento"
+
+#: capplets/ui-properties/ui-properties.c:216
+msgid "Dialogs are like other windows"
+msgstr "Las ventanas de diálogo son como las demás ventanas"
+
+#: capplets/ui-properties/ui-properties.c:217
+msgid "Dialogs are treated specially by window manager"
+msgstr ""
+"Las ventanas de diálogo son tratadas de manera especial por el gestor de "
+"ventanas"
+
+#: capplets/ui-properties/ui-properties.c:222
+msgid "Place dialogs over application window when possible"
+msgstr ""
+"Poner las ventanas de diálogo encima de las aplicaciones siempre que posible"
+
+#: capplets/ui-properties/ui-properties.c:243
+msgid "Dialog Layout"
+msgstr "Presentación de las ventanas de diálogo"
+
+#: capplets/ui-properties/ui-properties.c:244
+msgid "Dialog Behavior"
+msgstr "Comportamiento de las ventanas de diálogo"
+
+#: capplets/ui-properties/ui-properties.c:250
+msgid "Default MDI Mode"
+msgstr "Modo MDI predeterminado"
+
+#: capplets/ui-properties/ui-properties.c:251
+msgid "Notebook"
+msgstr "Bloc de notas"
+
+#: capplets/ui-properties/ui-properties.c:252
+msgid "Toplevel"
+msgstr "Primer plano"
+
+#: capplets/ui-properties/ui-properties.c:253
+msgid "Modal"
+msgstr "Modal"
+
+#: capplets/ui-properties/ui-properties.c:258
+msgid "MDI notebook tab position"
+msgstr "Posición de la etiqueta del bloc de notas MDI"
+
+#: capplets/ui-properties/ui-properties.c:259
+msgid "Left"
+msgstr "Izquierda"
+
+#: capplets/ui-properties/ui-properties.c:260
+msgid "Right"
+msgstr "Derecha"
+
+#: capplets/ui-properties/ui-properties.c:261
+msgid "Top"
+msgstr "Arriba"
+
+#: capplets/ui-properties/ui-properties.c:262
+msgid "Bottom"
+msgstr "Abajo"
+
+#: capplets/ui-properties/ui-properties.c:277
+msgid "GNOME MDI Options"
+msgstr "Opciones MDI de GNOME"
 
 #: capplets/ui-properties/ui-properties.directory.in.h:1
 msgid "Look and Feel"
@@ -4232,148 +3850,528 @@ msgstr "Propriedades de la Interfaz gráfica"
 msgid "Look and Feel Properties"
 msgstr "Modifica las propiedades de la interfaz con el usuario"
 
-msgid "Ïî-áëèçêî"
-msgstr "Cercana"
+#: capplets/url-properties/url-properties.c:51
+msgid "Error initializing the `url-properties' capplet."
+msgstr "Error al inicializar el capplet 'url-properties'."
 
-msgid "Ïî-áúðçî"
-msgstr "Rápido"
+#: capplets/url-properties/url-properties.c:76
+msgid "Protocol"
+msgstr "Protocolo"
 
-msgid "Ïðîìåíÿ áðîÿ íà ñåìåíàòà."
-msgstr "Cambiar la cantidad de focos de los cuales se inicia e lcrecimiento."
+#: capplets/url-properties/url-properties.c:76
+msgid "Command"
+msgstr "Comando"
 
-msgid "Ëåíòà"
-msgstr "Epiciclo"
+#: capplets/url-properties/url-properties.c:93
+msgid "handler:"
+msgstr "selector:"
 
-msgid "Mime Type: "
-msgstr "Tipo Mime:"
+#. set some commonly used handlers
+#: capplets/url-properties/url-properties.c:103
+msgid "Netscape"
+msgstr "Netscape"
 
-msgid "Add"
-msgstr "Añadir"
+#: capplets/url-properties/url-properties.c:108
+msgid "Netscape (new window)"
+msgstr "Netscape (nueva ventana)"
 
-msgid "First Regular Expression: "
-msgstr "Primera expresión regular: "
+#: capplets/url-properties/url-properties.c:121
+msgid "Help browser"
+msgstr "Visualizador de ayuda"
 
-msgid "Second Regular Expression: "
-msgstr "Segunda expresión regular: "
+#: capplets/url-properties/url-properties.c:127
+msgid "Help browser (new window)"
+msgstr "Visualizador de ayuda (nueva ventana)"
 
-msgid "Mime Type Actions"
-msgstr "Acciones de los tipos Mime"
+#: capplets/url-properties/url-properties.c:140
+msgid "Set"
+msgstr "Definir"
 
-msgid "Example: emacs %f"
-msgstr "Ejemplo: emacs %f"
+#: capplets/url-properties/url-properties.c:148
+msgid "Remove"
+msgstr "Quitar"
 
-msgid "Open"
-msgstr "Abrir"
+#: capplets/url-properties/url-properties.desktop.in.h:1
+msgid "Configure which programs are used to display URLs"
+msgstr "Configura que programas usar para navegar por las URLs"
 
-msgid "Select a file..."
-msgstr "Seleccionar un archivo..."
+#: capplets/url-properties/url-properties.desktop.in.h:2
+msgid "URL Handlers"
+msgstr "Navegador de URLs"
 
-msgid "Set actions for %s"
-msgstr "Definir las acciones para %s"
+#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.h:1
+msgid "Enlightenment"
+msgstr "Enlightenment"
 
+#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.h:1
+msgid "Ice WM"
+msgstr "Ice WM"
+
+#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.h:1
+msgid "Scwm"
+msgstr "Scwm"
+
+#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.h:1
+msgid "Window Maker"
+msgstr "Window Maker"
+
+#: capplets/wm-properties/wm-desktops/twm.desktop.in.h:1
+msgid "twm"
+msgstr "twm"
+
+#: capplets/wm-properties/wm-properties-capplet.c:142
+#, c-format
 msgid ""
-"You must add either a regular-expression or\n"
-"a file-name extension"
+"Starting %s\n"
+"(%d seconds left before operation times out)"
 msgstr ""
-"Debe añadir un expresión regular\n"
-"o una extensión de nombre de archivo"
+"Iniciando %s\n"
+"(quedan %d segundos antes de la expiración de la operación)"
 
+#: capplets/wm-properties/wm-properties-capplet.c:303
+#, c-format
+msgid "%s (Current)"
+msgstr "%s (Actual)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:306
+#, c-format
+msgid "Run Configuration Tool for %s"
+msgstr "Lanzar la herramienta de configuración de %s"
+
+#: capplets/wm-properties/wm-properties-capplet.c:317
+msgid " (Not found)"
+msgstr " (No se encontró)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:356
 msgid ""
-"Please put your mime-type in the format:\n"
-"CATEGORY/TYPE\n"
-"\n"
-"For Example:\n"
-"image/png"
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\tAnother window manager is already running and could not be killed\n"
 msgstr ""
-"Ponga el tipo mime en el formato siguiente:\n"
-"CATEGORÍA/TIPO\n"
-"\n"
-"Por ejemplo:\n"
-"image/png"
+"wm-properties-capplet:Imposible de inicializar el gestor de ventanas.\n"
+"\tOtro gestor de ventanas esta activo y no puede ser matado\n"
 
-msgid "This mime-type already exists"
-msgstr "Este tipo mime ya existe"
-
+#: capplets/wm-properties/wm-properties-capplet.c:360
+#, c-format
 msgid ""
-"We are unable to create the directory\n"
-"~/.gnome/mime-info\n"
-"\n"
-"We will not be able to save the state."
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\t'%s' didn't start\n"
 msgstr ""
-"No puedo crear el directorio\n"
-"~/.gnome/mime-info\n"
-"\n"
-"No será posible guardar el estado actual."
+"wm-properties-capplet: Imposible de inicializar el gestor de ventanas.\n"
+"\tNo se lanzó '%s'\n"
 
+#: capplets/wm-properties/wm-properties-capplet.c:413
+msgid "Previous window manager did not die\n"
+msgstr "El gestor de ventanas anterior no murió\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:446
+#, c-format
 msgid ""
-"We are unable to access the directory\n"
-"~/.gnome/mime-info\n"
-"\n"
-"We will not be able to save the state."
+"Could not start '%s'.\n"
+"Falling back to previous window manager '%s'\n"
 msgstr ""
-"No puedo acceder al directorio\n"
-"~/.gnome/mime-info\n"
-"\n"
-"No será posible guardar el estado actual."
+"No pude iniciar '%s'.\n"
+"Volviendo al anterior gestor de ventanas ('%s')\n"
 
+#: capplets/wm-properties/wm-properties-capplet.c:477
 msgid ""
-"Cannot create the file\n"
-"~/.gnome/mime-info/user.mime\n"
-"\n"
-"We will not be able to save the state"
+"Could not start fallback window manager.\n"
+"Please run a window manager manually. You can\n"
+"do this by selecting \"Run Program\" in the\n"
+"foot menu\n"
 msgstr ""
-"No puedo crear el archivo\n"
-"~/.gnome/mime-info/user.mime\n"
-"\n"
-"No será posible guardar el estado actual"
+"No pude iniciar el gestor de ventanas anterior.\n"
+"Lance uno manualmente. Puede hacer eso\n"
+"seleccionando \"Lanzar...\" en el menú con\n"
+"el logotipo de Gnome en forma de pié\n"
 
+#: capplets/wm-properties/wm-properties-capplet.c:502
+#: capplets/wm-properties/wm-properties-capplet.c:868
+#: capplets/wm-properties/wm-properties-capplet.c:875
+#: capplets/wm-properties/wm-properties-capplet.c:1021
+msgid "OK"
+msgstr "Aceptar"
+
+#: capplets/wm-properties/wm-properties-capplet.c:520
 msgid ""
-"Cannot create the file\n"
-"~/.gnome/mime-info/user.keys\n"
-"\n"
-"We will not be able to save the state"
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. You can do so immediately by selecting the \"Save session\n"
+"now\" below, or you can save your session later.  This can be\n"
+"done either selecting \"Save Current Session\" under \"Settings\"\n"
+"in the main menu, or by turning on \"Save Current Setup\" when\n"
+"you log out.\n"
 msgstr ""
-"No puedo crear el archivo\n"
-"~/.gnome/mime-info/user.keys\n"
-"\n"
-"No será posible guardar el estado actual"
+"El gestor de ventanas fue cambiado. Para que este cambio\n"
+"sea permanente, debe guardar su sesión actual. Puede hacerlo\n"
+"inmediatamente seleccionando «Guardar la sesión ahora» abajo,\n"
+"o puede guardar la sesión más tarde. Esto se puede hacer\n"
+"seleccionando «Guardar sesión actual» del submenú\n"
+"«Configuración» del menú principal de Gnome, o activando\n"
+"«Guardar configuración actual» al quitar la sesión.\n"
 
+#: capplets/wm-properties/wm-properties-capplet.c:527
+msgid "Save Session Later"
+msgstr "Guardar la sesión más tarde"
+
+#: capplets/wm-properties/wm-properties-capplet.c:527
+msgid "Save Session Now"
+msgstr "Guardar la sesión ahora"
+
+#: capplets/wm-properties/wm-properties-capplet.c:530
 msgid ""
-"No help is available/installed for these settings. Please make sure you\n"
-"have the Control Center documentation installed on your system."
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. This can be done by either selecting \"Save Current Session\"\n"
+"under \"Settings\" in the main menu, or by turning on\n"
+"\"Save Current Setup\" when you log out.\n"
 msgstr ""
-"No hay ayuda disponible/instalada para esas opciones. Asegúrese que\n"
-"tiene instalada en sus sistema la documentación del Centro de Control."
+"El gestor de ventanas fue cambiado. Para que este cambio\n"
+"sea permanente, debe guardar su sesión actual. Esto se puede\n"
+"hacer seleccionando «Guardar sesión actual» del submenú\n"
+"«Configuración» del menú principal de Gnome, o activando\n"
+"«Guardar configuración actual» al quitar la sesión.\n"
 
+#: capplets/wm-properties/wm-properties-capplet.c:757
+msgid "Add New Window Manager"
+msgstr "Añadir un nuevo gestor de ventanas"
+
+#: capplets/wm-properties/wm-properties-capplet.c:771
+msgid "Name:"
+msgstr "Nombre:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:784
+msgid "Command:"
+msgstr "Comando:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:797
+msgid "Configuration Command:"
+msgstr "Comando para la configuración:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:816
+msgid "Window manager is session managed"
+msgstr "El gestor de ventanas es manejado por el gestor de sesiones"
+
+#: capplets/wm-properties/wm-properties-capplet.c:866
+msgid "Name cannot be empty"
+msgstr "El nombre no puede quedar en blanco"
+
+#: capplets/wm-properties/wm-properties-capplet.c:873
+msgid "Command cannot be empty"
+msgstr "El comando no puede quedar en blanco"
+
+#: capplets/wm-properties/wm-properties-capplet.c:922
+#: capplets/wm-properties/wm-properties-capplet.c:964
+msgid "Edit Window Manager"
+msgstr "Editar Gestor de Ventanas"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1020
+msgid "You cannot delete the current Window Manager"
+msgstr "No puede borrar el gestor de ventanas en uso"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1093
+msgid "Edit..."
+msgstr "Editar..."
+
+#: capplets/wm-properties/wm-properties-capplet.c:1098
+msgid "Delete"
+msgstr "Borrar"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1134
 msgid ""
-"Add a new Mime Type\n"
-"For example:  image/tiff; text/x-scheme"
+"an initialization error occurred while starting 'wm-properties-capplet'.\n"
+"aborting...\n"
 msgstr ""
-"Añadir un nuevo tipo MIME\n"
-"Por ejemplo:  image/tiff; text/x-scheme"
+"ocurrió un error de inicialización al lanzar 'wm-properties-capplet'.\n"
+"abortando...\n"
 
-msgid "Mime Type:"
-msgstr "Tipo Mime:"
+#: capplets/wm-properties/wm-properties.desktop.in.h:1
+msgid "Choose a window manager"
+msgstr "Permite elegir un gestor de ventanas"
 
-msgid "Regular Expressions"
-msgstr "Expresiones regulares"
+#: capplets/wm-properties/wm-properties.desktop.in.h:2
+msgid "Window Manager"
+msgstr "Gestor de ventanas"
 
+#: control-center/callbacks.c:102 control-center/gnomecc.desktop.in.h:1
+msgid "GNOME Control Center"
+msgstr "Centro de Control de GNOME"
+
+#: control-center/callbacks.c:105
+msgid "Desktop Properties manager."
+msgstr "Gestor de propiedades del escritorio."
+
+#: control-center/capplet-manager.c:179
+msgid "Try"
+msgstr "Probar"
+
+#: control-center/capplet-manager.c:185
+msgid "Revert"
+msgstr "Revertir"
+
+#. set the help item
+#: control-center/capplet-manager.c:208
+#, c-format
+msgid "Help with '%s' settings"
+msgstr "Ayuda con la configuración de «%s»"
+
+#: control-center/capplet-widget-libs.c:46
+msgid "id of the capplet -- assigned by the control-center"
+msgstr "id del capplet - asignado por el centro de control"
+
+#: control-center/capplet-widget-libs.c:46
+msgid "ID"
+msgstr "ID"
+
+#: control-center/capplet-widget-libs.c:47
+msgid "Multi-capplet id."
+msgstr "Id de capplet múltiple"
+
+#: control-center/capplet-widget-libs.c:47
+msgid "CAPID"
+msgstr "CAPID"
+
+#: control-center/capplet-widget-libs.c:48
+msgid "X ID of the socket it's plugged into"
+msgstr "ID X del zócalo al cual está conectado"
+
+#: control-center/capplet-widget-libs.c:48
+msgid "XID"
+msgstr "XID"
+
+#: control-center/capplet-widget-libs.c:49
+msgid "IOR of the control-center"
+msgstr "IOR del centro de control (control-center)"
+
+#: control-center/capplet-widget-libs.c:49
+msgid "IOR"
+msgstr "IOR"
+
+#: control-center/capplet-widget-libs.c:50
+msgid "Initialize session settings"
+msgstr "Inicializar la configuración de la sesión"
+
+#: control-center/capplet-widget-libs.c:51
+msgid "Ignore default action.  Used for custom init-session cases"
+msgstr ""
+"Ignorar la acción predeterminada. Usado para casos de inicialización de "
+"sesión personalizados"
+
+#: control-center/capplet-widget.c:272
+msgid "Sorry, no help is available for these settings."
+msgstr "Disculpe, no existe ayuda sobre esas opciones."
+
+#: control-center/corba-glue.c:77
+msgid "capplet-command to be run."
+msgstr "comando capplet a lanzar."
+
+#: control-center/corba-glue.c:77
+msgid "CAPPLET"
+msgstr "CAPPLET"
+
+#: control-center/gnomecc.desktop.in.h:2
+msgid "The GNOME configuration tool"
+msgstr "Herramienta de configuración del entorno GNOME"
+
+#: control-center/main.c:36
+msgid "Help on control-center"
+msgstr "Ayuda con el centro de control"
+
+#: control-center/main.c:36
+msgid "Help with the GNOME control-center."
+msgstr "Ayuda con centro de control de GNOME."
+
+#: control-center/main.c:38
+msgid "Help with the current configuration page."
+msgstr "Ayuda con la página ce configuración actual."
+
+#: control-center/main.c:41
+msgid "About"
+msgstr "Acerca"
+
+#: control-center/main.c:41
+msgid "About the GNOME control-center."
+msgstr "Acerca del centro de control de GNOME."
+
+#. we create the widgets
+#: control-center/main.c:69
+msgid "Warning:"
+msgstr "Advertencia:"
+
+#: control-center/main.c:69
+msgid "Discard all changes"
+msgstr "Descartar todos los cambios"
+
+#. ...labels, etc
+#: control-center/main.c:78
 msgid ""
-"You can set up two regular expressions here to identify the Mime Type\n"
-"by.  These fields are optional."
+"The following modules have had changes made, but not committed.  If you "
+"would like to edit them, please double click on the appropriate entry."
 msgstr ""
-"Puede definir dos expresiones regulares para identificar el tipo "
-"MIME.\nEstos campos son opcionales."
+"Los módulos siguientes han hecho cambios, pero no fueron guardados. Si desea "
+"editarlos por favor haga un doble-clic en la entrada apropiada."
 
-msgid "Thickness of color bands (0 = Random)"
-msgstr ""
+#: control-center/splash.c:48
+msgid "Operating System:"
+msgstr "Sistema operativo:"
 
-msgid "Quickness of rotation at each step (0 = Random)"
-msgstr ""
+#: control-center/splash.c:49
+msgid "Distribution Version:"
+msgstr "Versión de la distribución:"
 
-msgid "Screensaver Properties"
-msgstr "Configuración del salvapantalla"
+#: control-center/splash.c:50
+msgid "Processor Type:"
+msgstr "Tipo de procesador:"
 
-msgid "Configure the settings of the screensaver."
-msgstr "Configurar las preferencias del salvapantalla."
+#: control-center/splash.c:51
+msgid "User Name:"
+msgstr "Nombre de usuario:"
 
+#: control-center/splash.c:52
+msgid "Host Name:"
+msgstr "Nombre del ordenador:"
+
+#. This is about the only case where we'll put Unknown instead
+#. of simply not showing the info.
+#: control-center/splash.c:178
+msgid "Unknown"
+msgstr "Desconocido"
+
+#~ msgid "Ïî-áëèçêî"
+#~ msgstr "Cercana"
+
+#~ msgid "Ïî-áúðçî"
+#~ msgstr "Rápido"
+
+#~ msgid "Ïðîìåíÿ áðîÿ íà ñåìåíàòà."
+#~ msgstr ""
+#~ "Cambiar la cantidad de focos de los cuales se inicia e lcrecimiento."
+
+#~ msgid "Ëåíòà"
+#~ msgstr "Epiciclo"
+
+#~ msgid "Mime Type: "
+#~ msgstr "Tipo Mime:"
+
+#~ msgid "Add"
+#~ msgstr "Añadir"
+
+#~ msgid "First Regular Expression: "
+#~ msgstr "Primera expresión regular: "
+
+#~ msgid "Second Regular Expression: "
+#~ msgstr "Segunda expresión regular: "
+
+#~ msgid "Mime Type Actions"
+#~ msgstr "Acciones de los tipos Mime"
+
+#~ msgid "Example: emacs %f"
+#~ msgstr "Ejemplo: emacs %f"
+
+#~ msgid "Open"
+#~ msgstr "Abrir"
+
+#~ msgid "Select a file..."
+#~ msgstr "Seleccionar un archivo..."
+
+#~ msgid "Set actions for %s"
+#~ msgstr "Definir las acciones para %s"
+
+#~ msgid ""
+#~ "You must add either a regular-expression or\n"
+#~ "a file-name extension"
+#~ msgstr ""
+#~ "Debe añadir un expresión regular\n"
+#~ "o una extensión de nombre de archivo"
+
+#~ msgid ""
+#~ "Please put your mime-type in the format:\n"
+#~ "CATEGORY/TYPE\n"
+#~ "\n"
+#~ "For Example:\n"
+#~ "image/png"
+#~ msgstr ""
+#~ "Ponga el tipo mime en el formato siguiente:\n"
+#~ "CATEGORÍA/TIPO\n"
+#~ "\n"
+#~ "Por ejemplo:\n"
+#~ "image/png"
+
+#~ msgid "This mime-type already exists"
+#~ msgstr "Este tipo mime ya existe"
+
+#~ msgid ""
+#~ "We are unable to create the directory\n"
+#~ "~/.gnome/mime-info\n"
+#~ "\n"
+#~ "We will not be able to save the state."
+#~ msgstr ""
+#~ "No puedo crear el directorio\n"
+#~ "~/.gnome/mime-info\n"
+#~ "\n"
+#~ "No será posible guardar el estado actual."
+
+#~ msgid ""
+#~ "We are unable to access the directory\n"
+#~ "~/.gnome/mime-info\n"
+#~ "\n"
+#~ "We will not be able to save the state."
+#~ msgstr ""
+#~ "No puedo acceder al directorio\n"
+#~ "~/.gnome/mime-info\n"
+#~ "\n"
+#~ "No será posible guardar el estado actual."
+
+#~ msgid ""
+#~ "Cannot create the file\n"
+#~ "~/.gnome/mime-info/user.mime\n"
+#~ "\n"
+#~ "We will not be able to save the state"
+#~ msgstr ""
+#~ "No puedo crear el archivo\n"
+#~ "~/.gnome/mime-info/user.mime\n"
+#~ "\n"
+#~ "No será posible guardar el estado actual"
+
+#~ msgid ""
+#~ "Cannot create the file\n"
+#~ "~/.gnome/mime-info/user.keys\n"
+#~ "\n"
+#~ "We will not be able to save the state"
+#~ msgstr ""
+#~ "No puedo crear el archivo\n"
+#~ "~/.gnome/mime-info/user.keys\n"
+#~ "\n"
+#~ "No será posible guardar el estado actual"
+
+#~ msgid ""
+#~ "No help is available/installed for these settings. Please make sure you\n"
+#~ "have the Control Center documentation installed on your system."
+#~ msgstr ""
+#~ "No hay ayuda disponible/instalada para esas opciones. Asegúrese que\n"
+#~ "tiene instalada en sus sistema la documentación del Centro de Control."
+
+#~ msgid ""
+#~ "Add a new Mime Type\n"
+#~ "For example:  image/tiff; text/x-scheme"
+#~ msgstr ""
+#~ "Añadir un nuevo tipo MIME\n"
+#~ "Por ejemplo:  image/tiff; text/x-scheme"
+
+#~ msgid "Mime Type:"
+#~ msgstr "Tipo Mime:"
+
+#~ msgid "Regular Expressions"
+#~ msgstr "Expresiones regulares"
+
+#~ msgid ""
+#~ "You can set up two regular expressions here to identify the Mime Type\n"
+#~ "by.  These fields are optional."
+#~ msgstr ""
+#~ "Puede definir dos expresiones regulares para identificar el tipo MIME.\n"
+#~ "Estos campos son opcionales."
+
+#~ msgid "Screensaver Properties"
+#~ msgstr "Configuración del salvapantalla"
+
+#~ msgid "Configure the settings of the screensaver."
+#~ msgstr "Configurar las preferencias del salvapantalla."

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-centre CVS\n"
-"POT-Creation-Date: 2001-03-11 13:07+0100\n"
+"POT-Creation-Date: 2001-03-15 14:08-0500\n"
 "PO-Revision-Date: 1999-10-01 02:59-0400\n"
 "Last-Translator: Bas Wagter <B.J.Wagter@bk.tudelft.nl>\n"
 "Language-Team: nl <nl@li.org>\n"
@@ -31,6 +31,14 @@ msgstr ""
 "Een initialiseringsfout is opgetreden bij het opstarten van "
 "'background-properties-capplet'.\n"
 "aan het afbreken...\n"
+
+#: capplets/background-properties/background-properties.desktop.in.h:1
+msgid "Background"
+msgstr ""
+
+#: capplets/background-properties/background-properties.desktop.in.h:2
+msgid "Configuration of the desktop's background"
+msgstr ""
 
 #: capplets/background-properties/property-background.c:116
 msgid "Disabled"
@@ -207,21 +215,64 @@ msgid "Display wallpaper: tiled, centered, scaled or ratio"
 msgstr ""
 "Toon achtergrond: naast elkaar, gecentreerd, geschaald of naar verhouding"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:238
-msgid "Gnome editor"
-msgstr "Gnome editor"
-
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:249
-msgid "Run In Terminal"
-msgstr "Uitvoeren in Terminal"
-
-#: capplets/file-types/file-types-capplet.desktop.in.h:1
-msgid "File Types and Programs"
+#: capplets/desktop-links/Desktop.directory.in.h:1
+#: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:1
+msgid "Desktop"
 msgstr ""
 
-#: capplets/file-types/file-types-capplet.desktop.in.h:2
-msgid "Specify which programs are used to open or view each file type"
+#: capplets/desktop-links/Documents.directory.in.h:1
+msgid "Configure how document types are handled"
 msgstr ""
+
+#: capplets/desktop-links/Documents.directory.in.h:2
+msgid "Document Handlers"
+msgstr ""
+
+#. create the app
+#: capplets/desktop-links/Gnome.directory.in.h:1 control-center/main.c:197
+#: control-center/splash.c:247
+msgid "Control Center"
+msgstr "Configuratie Centrum"
+
+#: capplets/desktop-links/Gnome.directory.in.h:2
+#, fuzzy
+msgid "Control Center Menu"
+msgstr "Configuratie Centrum"
+
+#: capplets/desktop-links/Multimedia.directory.in.h:1
+msgid "Configure the settings of your Multimedia devices"
+msgstr ""
+
+#: capplets/desktop-links/Multimedia.directory.in.h:2
+msgid "Multimedia"
+msgstr ""
+
+#: capplets/desktop-links/Peripherals.directory.in.h:1
+msgid "Configure your external devices"
+msgstr ""
+
+#: capplets/desktop-links/Peripherals.directory.in.h:2
+msgid "Peripherals"
+msgstr ""
+
+#: capplets/desktop-links/Session.directory.in.h:1
+#, fuzzy
+msgid "Session"
+msgstr "Extensie"
+
+#: capplets/desktop-links/Session.directory.in.h:2
+#, fuzzy
+msgid "Session Management Settings"
+msgstr "Scherm Beveiliging Instellingen"
+
+#: capplets/desktop-links/UIOptions.directory.in.h:1
+msgid "Configure the global settings of your GNOME applications"
+msgstr ""
+
+#: capplets/desktop-links/UIOptions.directory.in.h:2
+#, fuzzy
+msgid "User Interface"
+msgstr "Keuze Lettertype"
 
 #: capplets/file-types/file-types-capplet-dialogs.c:387
 msgid "Edit Applications List"
@@ -460,173 +511,35 @@ msgstr "Extensie"
 msgid "Default Action"
 msgstr "Standaard MDI Modus"
 
+#: capplets/file-types/file-types-capplet.desktop.in.h:1
+msgid "File Types and Programs"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet.desktop.in.h:2
+msgid "Specify which programs are used to open or view each file type"
+msgstr ""
+
 #: capplets/file-types/file-types-icon-entry.c:381
 #, fuzzy
 msgid "Select an icon"
 msgstr "Kies een pictogram..."
 
-#: capplets/mouse-properties/mouse-properties.c:267
-msgid "Mouse buttons"
-msgstr "Muis knoppen"
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:238
+msgid "Gnome editor"
+msgstr "Gnome editor"
 
-#: capplets/mouse-properties/mouse-properties.c:276
-msgid "Left handed"
-msgstr "Linkshandig"
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:249
+msgid "Run In Terminal"
+msgstr "Uitvoeren in Terminal"
 
-#: capplets/mouse-properties/mouse-properties.c:278
-msgid "Right handed"
-msgstr "Rechtshandig"
-
-#. Mouse motion
-#: capplets/mouse-properties/mouse-properties.c:304
-msgid "Mouse motion"
-msgstr "Muis beweging"
-
-#: capplets/mouse-properties/mouse-properties.c:314
-msgid "Acceleration"
-msgstr "Versnelling"
-
-#: capplets/mouse-properties/mouse-properties.c:314
-#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:4
-#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:8
-#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:11
-msgid "Fast"
-msgstr "Snel"
-
-#: capplets/mouse-properties/mouse-properties.c:314
-#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:13
-#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:21
-#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:19
-msgid "Slow"
-msgstr "Langzaam"
-
-#: capplets/mouse-properties/mouse-properties.c:325
-#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:30
-msgid "Threshold"
-msgstr "Drempelwaarde"
-
-#: capplets/mouse-properties/mouse-properties.c:325
-#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:6
-#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:9
-#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:10
-msgid "Large"
-msgstr "Groot"
-
-#: capplets/mouse-properties/mouse-properties.c:325
-#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:14
-#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:15
-#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:22
-msgid "Small"
-msgstr "Klein"
-
-#: capplets/mouse-properties/mouse-properties.c:350
-msgid ""
-"an initialization error occurred while starting 'mouse-properties-capplet'.\n"
-"aborting...\n"
+#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:1
+msgid "Choose the editor that is invoked by gnome-edit"
 msgstr ""
-"Een initialiseringsfout is opgetreden bij het opstarten van de "
-"'muis-instellingen-capplet'.\n"
-"aan het afbreken...\n"
 
-#: capplets/screensaver-properties/callbacks.c:102
-msgid "Require Password"
-msgstr "Wachtwoord vereist"
-
-#: capplets/screensaver-properties/callbacks.c:154
-msgid "Use power management."
-msgstr "Gebruik energie beheer"
-
-#: capplets/screensaver-properties/callbacks.c:309
-msgid "No Screensaver"
-msgstr "Geen Schermbeveiliging"
-
-#: capplets/screensaver-properties/callbacks.c:314
-msgid "Random Screensaver"
-msgstr "Willekeurige Schermbeveiliging"
-
-#: capplets/screensaver-properties/callbacks.c:483
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:56
-msgid "Settings..."
-msgstr "Instellingen..."
-
-#. we need to special case random
-#: capplets/screensaver-properties/callbacks.c:491
-msgid "Random Settings"
-msgstr "Willekeurige Instellingen"
-
-#: capplets/screensaver-properties/callbacks.c:501
-#, c-format
-msgid "%s Settings..."
-msgstr "%s Intellingen..."
-
-#: capplets/screensaver-properties/screensaver-dialog.c:46
-msgid "About:"
-msgstr "Info:"
-
-#: capplets/screensaver-properties/screensaver-dialog.c:51
-msgid "Author:"
-msgstr "Auteur:"
-
-#: capplets/screensaver-properties/screensaver-dialog.c:61
-msgid "Author: UNKNOWN"
-msgstr "Auteur: ONBEKEND"
-
-#: capplets/screensaver-properties/screensaver-dialog.c:78
-msgid "Settings"
-msgstr "Instellingen"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:38
-msgid "RANDOM SCREENSAVER"
-msgstr "WILLEKEURIGE SCHERMBEVEILIGING"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:49
-msgid "Screen Saver"
-msgstr "Scherm Beveiliging"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:61
-msgid ""
-"Pressing this button will popup a dialogbox that will help you setup the "
-"current screensaver."
-msgstr ""
-"Druk op deze knop en een dialoogvenster verschijnt dat u helpt bij het "
-"instellen van de huidige schermbeveiliging."
-
-#. set up the initial frame, and get a vbox in which to pack things.
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:88
-msgid "Screen Saver Settings"
-msgstr "Scherm Beveiliging Instellingen"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:96
-msgid "Start After "
-msgstr "Start Na "
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:102
-msgid " Minutes."
-msgstr " Minuten."
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:117
-msgid "Priority:"
-msgstr "Prioriteit:"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:124
-msgid "Low "
-msgstr "Laag "
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:126
-msgid " Normal"
-msgstr " Normaal"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:137
-msgid "Shutdown monitor "
-msgstr "Monitor uitschakelen "
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:139
-msgid " minutes after screen saver has started."
-msgstr " minuten na het starten van de schermbeveiliging."
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:152
-msgid "Screen Saver Demo"
-msgstr "Voorbeeld Scherm Beveiliging"
+#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:2
+#, fuzzy
+msgid "Default Editor"
+msgstr "Standaard MDI Modus"
 
 #: capplets/keyboard-properties/keyboard-properties.c:262
 #, fuzzy
@@ -692,829 +605,119 @@ msgstr ""
 "'keyboard-properties-capplet'.\n"
 "aan het afbreken...\n"
 
-#: capplets/sound-properties/sound-properties.c:97
-msgid ""
-"an initialization error occurred while starting 'sound-properties-capplet'."
-msgstr ""
-"Een initialiseringsfout is opgetreden bij het opstarten van de "
-"'sound-properties-capplet'."
-
-#: capplets/sound-properties/sound-properties.c:188
-msgid "Event"
-msgstr "Gebeurtenis"
-
-#: capplets/sound-properties/sound-properties.c:189
-msgid "File to Play"
-msgstr "Af te spelen bestand"
-
-#: capplets/sound-properties/sound-properties.c:243
-msgid "Enable"
-msgstr "Inschakelen"
-
-#: capplets/sound-properties/sound-properties.c:250
-msgid "Enable sound server startup"
-msgstr "Geluid server inschakelen"
-
-#: capplets/sound-properties/sound-properties.c:258
-msgid "Sounds for events"
-msgstr "Geluiden bij gebeurtenissen"
-
-#: capplets/sound-properties/sound-properties.c:279
-msgid "General"
-msgstr "Algemeen"
-
-#: capplets/sound-properties/sound-properties.c:286
-msgid "Select sound file"
-msgstr "Selecteer geluidsbestand"
-
-#: capplets/sound-properties/sound-properties.c:325
-msgid "Play"
-msgstr "Afspelen"
-
-#: capplets/sound-properties/sound-properties.c:336
-msgid "Sound Events"
-msgstr "Geluid Gebeurtenissen"
-
-#: capplets/sound-properties/sound-properties.c:355
-msgid ""
-"This copy of the GNOME control center was not compiled with sound support"
-msgstr ""
-"Deze versie van het GNOME configuratie centrum is niet gecompileerd met "
-"geluidsondersteuning"
-
-#: capplets/sound-properties/sound-properties.c:748
-msgid "The sound file for this event does not exist."
-msgstr "Het geluidsbestand voor deze gebeurtenis bestaat niet."
-
-#: capplets/sound-properties/sound-properties.c:750
-msgid ""
-"The sound file for this event does not exist.\n"
-"You may want to install the gnome-audio package\n"
-"for a set of default sounds."
-msgstr ""
-"Het geluidsbestand voor deze gebeurtenis bestaat niet.\n"
-"U kunt het gnome-audio pakket installeren\n"
-"voor een verzameling standaardgeluiden."
-
-#: capplets/theme-switcher/demo.c:50
-msgid "One"
-msgstr "Een"
-
-#: capplets/theme-switcher/demo.c:50
-msgid "Two"
-msgstr "Twee"
-
-#. just 8 short names that will serve as samples for titles in demo
-#: capplets/theme-switcher/demo.c:52
-msgid "Eenie"
-msgstr "Een"
-
-#: capplets/theme-switcher/demo.c:52
-msgid "Meenie"
-msgstr "Twee"
-
-#: capplets/theme-switcher/demo.c:53
-msgid "Mynie"
-msgstr "Drie"
-
-#: capplets/theme-switcher/demo.c:53
-msgid "Moe"
-msgstr "Vier"
-
-#: capplets/theme-switcher/demo.c:54
-msgid "Catcha"
-msgstr "Hoedje"
-
-#: capplets/theme-switcher/demo.c:54
-msgid "Tiger"
-msgstr "Van"
-
-#: capplets/theme-switcher/demo.c:55
-msgid "By Its"
-msgstr "Hergebruikt"
-
-#: capplets/theme-switcher/demo.c:55
-msgid "Toe"
-msgstr "Papier"
-
-#: capplets/theme-switcher/demo.c:114
-msgid "Selected themes from above will be tested by previewing here."
-msgstr "Hierboven geselecteerde thema's worden hier getest met een voorbeeld"
-
-#. column one
-#: capplets/theme-switcher/demo.c:119
-msgid "Sample Button"
-msgstr "Voorbeeld Knop"
-
-#: capplets/theme-switcher/demo.c:123
-msgid "Sample Check Button"
-msgstr "Voorbeeld Aanvink Knop"
-
-#: capplets/theme-switcher/demo.c:128
-msgid "Sample Text Entry Field"
-msgstr "Voorbeeld Tekstinvoer Veld"
-
-#: capplets/theme-switcher/demo.c:139
-msgid "Submenu"
-msgstr "Submenu"
-
-#: capplets/theme-switcher/demo.c:146
-msgid "Item 1"
-msgstr "Onderdeel 1"
-
-#: capplets/theme-switcher/demo.c:149
-msgid "Another item"
-msgstr "Nog een onderdeel"
-
-#: capplets/theme-switcher/demo.c:154
-msgid "Radio Button 1"
-msgstr "Radio Knop 1"
-
-#: capplets/theme-switcher/demo.c:160
-msgid "Radio Button 2"
-msgstr "Radio Knop 2"
-
-#: capplets/theme-switcher/gui.c:89
-#, c-format
-msgid ""
-"Error installing theme:\n"
-"'%s'\n"
-"%s"
-msgstr ""
-"Fout bij installeren van thema:\n"
-"'%s'\n"
-"%s"
-
-#: capplets/theme-switcher/gui.c:120
-msgid "Select a theme to install"
-msgstr "Selecteer een te installeren thema"
-
-#: capplets/theme-switcher/gui.c:197
-msgid "Available Themes"
-msgstr "Beschikbare Thema's"
-
-#: capplets/theme-switcher/gui.c:221
-msgid ""
-"Auto\n"
-"Preview"
-msgstr ""
-"Automatisch\n"
-"Voorbeeld"
-
-#: capplets/theme-switcher/gui.c:233
-msgid ""
-"Install new\n"
-"theme..."
-msgstr ""
-"Installeer nieuw\n"
-"thema..."
-
-#. Font selector.
-#.
-#: capplets/theme-switcher/gui.c:239
-msgid "User Font"
-msgstr "Keuze Lettertype"
-
-#. FIXME - should really get this from X somehow
-#. for now we just assume default gtk font
-#: capplets/theme-switcher/gui.c:257
-msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
-msgstr "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
-
-#: capplets/theme-switcher/gui.c:276
-msgid "Use custom font."
-msgstr "Gebruik eigen lettertype"
-
-#: capplets/theme-switcher/install.c:26
-msgid "Home directory doesn't exist!\n"
-msgstr "Thuis map bestaat niet!\n"
-
-#: capplets/theme-switcher/install.c:36
-msgid "Theme does not exist"
-msgstr "Thema bestaat niet"
-
-#: capplets/theme-switcher/install.c:68
-#, c-format
-msgid "Command '%s' failed"
-msgstr "Opdracht '%s' mislukt"
-
-#: capplets/theme-switcher/install.c:73
-msgid "Unknown file format"
-msgstr "Onbekend bestandsformaat"
-
-#: capplets/ui-properties/ui-properties.c:54
-msgid "Can detach and move toolbars"
-msgstr "Kan menubalken losmaken en verplaatsen"
-
-#: capplets/ui-properties/ui-properties.c:59
-msgid "Toolbars have relieved border"
-msgstr "Menubalken met reliлf"
-
-#: capplets/ui-properties/ui-properties.c:64
-msgid "Toolbar buttons have relieved border"
-msgstr "Menubalk knoppen met reliлf"
-
-#: capplets/ui-properties/ui-properties.c:69
-msgid "Toolbars have line separators"
-msgstr "Menubalken met scheidingslijnen"
-
-#: capplets/ui-properties/ui-properties.c:74
-msgid "Toolbars have text labels"
-msgstr "Menubalken met tekstlabel"
-
-#: capplets/ui-properties/ui-properties.c:103
-msgid "Can detach and move menus"
-msgstr "Kan menu's losmaken en verplaatsen"
-
-#: capplets/ui-properties/ui-properties.c:108
-msgid "Menus have relieved border"
-msgstr "Menu's met reliлf"
-
-#: capplets/ui-properties/ui-properties.c:112
-msgid "Submenus can be torn off"
-msgstr "Submenu's kunnen weggehaald worden"
-
-#: capplets/ui-properties/ui-properties.c:116
-msgid "Menu items have icons"
-msgstr "Menu onderdelen met pictogrammen"
-
-#: capplets/ui-properties/ui-properties.c:140
-msgid "Statusbar is interactive when possible"
-msgstr "Statusbalk is interactief wanneer mogelijk"
-
-#: capplets/ui-properties/ui-properties.c:145
-msgid "Statusbar progress meter is on the right"
-msgstr "Statusbalk voortgangsmeter zit rechts"
-
-#: capplets/ui-properties/ui-properties.c:162
-msgid "Menu Options"
-msgstr "Menu Opties"
-
-#: capplets/ui-properties/ui-properties.c:163
-msgid "Statusbar Options"
-msgstr "Statusbalk Opties"
-
-#: capplets/ui-properties/ui-properties.c:164
-msgid "Toolbar Options"
-msgstr "Menubalk Opties"
-
-#: capplets/ui-properties/ui-properties.c:170
-msgid "Dialog buttons"
-msgstr "Dialoog knoppen"
-
-#: capplets/ui-properties/ui-properties.c:171
-msgid "Default value"
-msgstr "Standaard waarde"
-
-#: capplets/ui-properties/ui-properties.c:172
-msgid "Spread buttons out"
-msgstr "Knoppen uitspreiden"
-
-#: capplets/ui-properties/ui-properties.c:173
-msgid "Put buttons on edges"
-msgstr "Knoppen op randen plaatsen"
-
-#: capplets/ui-properties/ui-properties.c:174
-msgid "Left-justify buttons"
-msgstr "Knoppen links uitlijnen"
-
-#: capplets/ui-properties/ui-properties.c:175
-msgid "Right-justify buttons"
-msgstr "Knoppen rechts uitlijnen"
-
-#: capplets/ui-properties/ui-properties.c:180
-msgid "Dialog buttons have icons"
-msgstr "Dialoog knoppen met pictogrammen"
-
-#: capplets/ui-properties/ui-properties.c:185
-msgid "Use statusbar instead of dialog when possible"
-msgstr "Gebruik statusbalk in plaats van dialoogvenster wanneer mogelijk"
-
-#: capplets/ui-properties/ui-properties.c:207
-msgid "Dialog position"
-msgstr "Positie dialoogvenster"
-
-#: capplets/ui-properties/ui-properties.c:208
-msgid "Let window manager decide"
-msgstr "Laat window manager besluiten"
-
-#: capplets/ui-properties/ui-properties.c:209
-msgid "Center of the screen"
-msgstr "Centrum van het beeldscherm"
-
-#: capplets/ui-properties/ui-properties.c:210
-msgid "At the mouse pointer"
-msgstr "Bij de muisaanwijzer"
-
-#: capplets/ui-properties/ui-properties.c:215
-msgid "Dialog hints"
-msgstr "Dialoog aanwijzingen"
-
-#: capplets/ui-properties/ui-properties.c:216
-msgid "Dialogs are like other windows"
-msgstr "Dialoogvensters zijn als andere vensters"
-
-#: capplets/ui-properties/ui-properties.c:217
-msgid "Dialogs are treated specially by window manager"
-msgstr "Dialoogvensters worden speciaal behandeld door window manager"
-
-#: capplets/ui-properties/ui-properties.c:222
-msgid "Place dialogs over application window when possible"
-msgstr "Plaats dialoogvensters voor programma vensters wanneer mogelijk"
-
-#: capplets/ui-properties/ui-properties.c:243
-msgid "Dialog Layout"
-msgstr "Dialoogvenster Opmaak"
-
-#: capplets/ui-properties/ui-properties.c:244
-msgid "Dialog Behavior"
-msgstr "Gedrag Dialoogvenster"
-
-#: capplets/ui-properties/ui-properties.c:250
-msgid "Default MDI Mode"
-msgstr "Standaard MDI Modus"
-
-#: capplets/ui-properties/ui-properties.c:251
-msgid "Notebook"
-msgstr "Schrijfblok"
-
-#: capplets/ui-properties/ui-properties.c:252
-msgid "Toplevel"
-msgstr "Topniveau"
-
-#: capplets/ui-properties/ui-properties.c:253
-msgid "Modal"
-msgstr "Modaal"
-
-#: capplets/ui-properties/ui-properties.c:258
-msgid "MDI notebook tab position"
-msgstr "MDI schrijfblok tab positie"
-
-#: capplets/ui-properties/ui-properties.c:259
-msgid "Left"
-msgstr "Links"
-
-#: capplets/ui-properties/ui-properties.c:260
-msgid "Right"
-msgstr "Rechts"
-
-#: capplets/ui-properties/ui-properties.c:261
-msgid "Top"
-msgstr "Top"
-
-#: capplets/ui-properties/ui-properties.c:262
-msgid "Bottom"
-msgstr "Bodem"
-
-#: capplets/ui-properties/ui-properties.c:277
-msgid "GNOME MDI Options"
-msgstr "GNOME MDI Opties"
-
-#: capplets/url-properties/url-properties.c:51
-msgid "Error initializing the `url-properties' capplet."
-msgstr "Fout bij initialiseren van 'url-properties' capplet'."
-
-#: capplets/url-properties/url-properties.c:76
-msgid "Protocol"
-msgstr "Protocol"
-
-#: capplets/url-properties/url-properties.c:76
-msgid "Command"
-msgstr "Opdracht"
-
-#: capplets/url-properties/url-properties.c:93
-msgid "handler:"
-msgstr "handler:"
-
-#. set some commonly used handlers
-#: capplets/url-properties/url-properties.c:103
-msgid "Netscape"
-msgstr "Netscape"
-
-#: capplets/url-properties/url-properties.c:108
-msgid "Netscape (new window)"
-msgstr "Netscape (nieuw venster)"
-
-#: capplets/url-properties/url-properties.c:121
-msgid "Help browser"
-msgstr "Help pagina's"
-
-#: capplets/url-properties/url-properties.c:127
-msgid "Help browser (new window)"
-msgstr "Help pagina's (nieuw venster)"
-
-#: capplets/url-properties/url-properties.c:140
-msgid "Set"
-msgstr "Instellen"
-
-#: capplets/url-properties/url-properties.c:148
-msgid "Remove"
-msgstr "Verwijderen"
-
-#: capplets/wm-properties/wm-properties-capplet.c:142
-#, c-format
-msgid ""
-"Starting %s\n"
-"(%d seconds left before operation times out)"
-msgstr ""
-"%s Aan het opstarten\n"
-"(%d seconden voordat bewerking tijdslimiet overschreidt)"
-
-#: capplets/wm-properties/wm-properties-capplet.c:303
-#, c-format
-msgid "%s (Current)"
-msgstr "%s (Huidige)"
-
-#: capplets/wm-properties/wm-properties-capplet.c:306
-#, c-format
-msgid "Run Configuration Tool for %s"
-msgstr "Start Configuratie van %s"
-
-#: capplets/wm-properties/wm-properties-capplet.c:317
-msgid " (Not found)"
-msgstr " (Niet gevonden)"
-
-#: capplets/wm-properties/wm-properties-capplet.c:356
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\tAnother window manager is already running and could not be killed\n"
-msgstr ""
-"wm-properties-capplet: Kan window manager niet initialiseren.\n"
-"\tWindow manager is al gestart en kon niet gestopt worden\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:360
-#, c-format
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\t'%s' didn't start\n"
-msgstr ""
-"wm-properties-capplet: Kan window manager niet initialiseren.\n"
-"\t'%s' is niet gestart\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:413
-msgid "Previous window manager did not die\n"
-msgstr "Vorige window manager is niet gestopt\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:446
-#, c-format
-msgid ""
-"Could not start '%s'.\n"
-"Falling back to previous window manager '%s'\n"
-msgstr ""
-"Kon '%s' niet opstarten.\n"
-"Terugvallen op vorige window manager '%s'\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:477
-msgid ""
-"Could not start fallback window manager.\n"
-"Please run a window manager manually. You can\n"
-"do this by selecting \"Run Program\" in the\n"
-"foot menu\n"
-msgstr ""
-"Kon niet terugvallen op window manager.\n"
-"Start a.u.b. handmatig een window manager op. U kunt dit\n"
-"doen door \"Uitvoeren\" te selecteren in het\n"
-"voet-menu\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:502
-#: capplets/wm-properties/wm-properties-capplet.c:868
-#: capplets/wm-properties/wm-properties-capplet.c:875
-#: capplets/wm-properties/wm-properties-capplet.c:1021
-msgid "OK"
-msgstr "OK"
-
-#: capplets/wm-properties/wm-properties-capplet.c:520
+#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:1
 #, fuzzy
-msgid ""
-"Your current window manager has been changed. In order for\n"
-"this change to be saved, you will need to save your current\n"
-"session. You can do so immediately by selecting the \"Save session\n"
-"now\" below, or you can save your session later.  This can be\n"
-"done either selecting \"Save Current Session\" under \"Settings\"\n"
-"in the main menu, or by turning on \"Save Current Setup\" when\n"
-"you log out.\n"
-msgstr ""
-"Uw huidige window manager is veranderd. Om deze\n"
-"wijziging te bewaren, moet u de huidige sessie\n"
-"opslaan. Dit kan door \"Bewaar Huidige Sessie\" te selecteren\n"
-"onder \"Instellingen\" in het hoofdmenu, of door bij het afmelden\n"
-"\"Bewaar Huidige Instellingen\" te activeren.\n"
+msgid "Keyboard"
+msgstr "Toetsenbord Bel"
 
-#: capplets/wm-properties/wm-properties-capplet.c:527
-msgid "Save Session Later"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties-capplet.c:527
-msgid "Save Session Now"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties-capplet.c:530
+#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:2
 #, fuzzy
+msgid "Keyboard Properties"
+msgstr "Herhaalsnelheid"
+
+#: capplets/mouse-properties/mouse-properties.c:267
+msgid "Mouse buttons"
+msgstr "Muis knoppen"
+
+#: capplets/mouse-properties/mouse-properties.c:276
+msgid "Left handed"
+msgstr "Linkshandig"
+
+#: capplets/mouse-properties/mouse-properties.c:278
+msgid "Right handed"
+msgstr "Rechtshandig"
+
+#. Mouse motion
+#: capplets/mouse-properties/mouse-properties.c:304
+msgid "Mouse motion"
+msgstr "Muis beweging"
+
+#: capplets/mouse-properties/mouse-properties.c:314
+msgid "Acceleration"
+msgstr "Versnelling"
+
+#: capplets/mouse-properties/mouse-properties.c:314
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:4
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:8
+#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:11
+msgid "Fast"
+msgstr "Snel"
+
+#: capplets/mouse-properties/mouse-properties.c:314
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:13
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:21
+#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:19
+msgid "Slow"
+msgstr "Langzaam"
+
+#: capplets/mouse-properties/mouse-properties.c:325
+#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:30
+msgid "Threshold"
+msgstr "Drempelwaarde"
+
+#: capplets/mouse-properties/mouse-properties.c:325
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:10
+msgid "Large"
+msgstr "Groot"
+
+#: capplets/mouse-properties/mouse-properties.c:325
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:14
+#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:15
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:22
+msgid "Small"
+msgstr "Klein"
+
+#: capplets/mouse-properties/mouse-properties.c:350
 msgid ""
-"Your current window manager has been changed. In order for\n"
-"this change to be saved, you will need to save your current\n"
-"session. This can be done by either selecting \"Save Current Session\"\n"
-"under \"Settings\" in the main menu, or by turning on\n"
-"\"Save Current Setup\" when you log out.\n"
-msgstr ""
-"Uw huidige window manager is veranderd. Om deze\n"
-"wijziging te bewaren, moet u de huidige sessie\n"
-"opslaan. Dit kan door \"Bewaar Huidige Sessie\" te selecteren\n"
-"onder \"Instellingen\" in het hoofdmenu, of door bij het afmelden\n"
-"\"Bewaar Huidige Instellingen\" te activeren.\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:757
-msgid "Add New Window Manager"
-msgstr "Nieuwe Window Manager toevoegen"
-
-#: capplets/wm-properties/wm-properties-capplet.c:771
-msgid "Name:"
-msgstr "Naam:"
-
-#: capplets/wm-properties/wm-properties-capplet.c:784
-msgid "Command:"
-msgstr "Opdracht:"
-
-#: capplets/wm-properties/wm-properties-capplet.c:797
-msgid "Configuration Command:"
-msgstr "Configuratie Opdracht:"
-
-#: capplets/wm-properties/wm-properties-capplet.c:816
-msgid "Window manager is session managed"
-msgstr "Window Manager is sessie gebonden"
-
-#: capplets/wm-properties/wm-properties-capplet.c:866
-msgid "Name cannot be empty"
-msgstr "Naam kan niet leeg zijn"
-
-#: capplets/wm-properties/wm-properties-capplet.c:873
-msgid "Command cannot be empty"
-msgstr "Commando kan niet leeg zijn"
-
-#: capplets/wm-properties/wm-properties-capplet.c:922
-#: capplets/wm-properties/wm-properties-capplet.c:964
-msgid "Edit Window Manager"
-msgstr "Bewerk Window Manager"
-
-#: capplets/wm-properties/wm-properties-capplet.c:1020
-msgid "You cannot delete the current Window Manager"
-msgstr "U kunt de huidige Window Manager niet verwijderen"
-
-#: capplets/wm-properties/wm-properties-capplet.c:1093
-msgid "Edit..."
-msgstr "Bewerken..."
-
-#: capplets/wm-properties/wm-properties-capplet.c:1098
-msgid "Delete"
-msgstr "Verwijderen"
-
-#: capplets/wm-properties/wm-properties-capplet.c:1134
-msgid ""
-"an initialization error occurred while starting 'wm-properties-capplet'.\n"
+"an initialization error occurred while starting 'mouse-properties-capplet'.\n"
 "aborting...\n"
 msgstr ""
-"Een initialiseringsfout is opgetreden bij het opstarten van "
-"'wm-properties-capplet'.\n"
+"Een initialiseringsfout is opgetreden bij het opstarten van de "
+"'muis-instellingen-capplet'.\n"
 "aan het afbreken...\n"
 
-#: control-center/callbacks.c:102 control-center/gnomecc.desktop.in.h:1
-msgid "GNOME Control Center"
-msgstr "GNOME Configuratie Centrum"
-
-#: control-center/callbacks.c:105
-msgid "Desktop Properties manager."
-msgstr "Bureaublad Instellingen beheer"
-
-#: control-center/capplet-manager.c:179
-msgid "Try"
-msgstr "Probeer"
-
-#: control-center/capplet-manager.c:185
-msgid "Revert"
-msgstr "Herstel"
-
-#. set the help item
-#: control-center/capplet-manager.c:208
-#, fuzzy, c-format
-msgid "Help with '%s' settings"
-msgstr "Instellingen testen"
-
-#: control-center/capplet-widget-libs.c:46
-msgid "id of the capplet -- assigned by the control-center"
-msgstr "id van de capplet -- toegewezen door het configuratie-centrum"
-
-#: control-center/capplet-widget-libs.c:46
-msgid "ID"
-msgstr "ID"
-
-#: control-center/capplet-widget-libs.c:47
-msgid "Multi-capplet id."
-msgstr "Multi-capplet id."
-
-#: control-center/capplet-widget-libs.c:47
-msgid "CAPID"
-msgstr "CAPID"
-
-#: control-center/capplet-widget-libs.c:48
-msgid "X ID of the socket it's plugged into"
-msgstr "X ID van de gebruikte socket"
-
-#: control-center/capplet-widget-libs.c:48
-msgid "XID"
-msgstr "XID"
-
-#: control-center/capplet-widget-libs.c:49
-msgid "IOR of the control-center"
-msgstr "IOR van het configuratie-centrum"
-
-#: control-center/capplet-widget-libs.c:49
-msgid "IOR"
-msgstr "IOR"
-
-#: control-center/capplet-widget-libs.c:50
-msgid "Initialize session settings"
-msgstr "Initialiseer sessie instellingen"
-
-#: control-center/capplet-widget-libs.c:51
-msgid "Ignore default action.  Used for custom init-session cases"
-msgstr "Negeer standaard handeling. Gebruikt voor eigen init-sessie"
-
-#: control-center/capplet-widget.c:272
-msgid "Sorry, no help is available for these settings."
-msgstr "Sorry, er is geen hulp beschikbaar voor deze instellingen."
-
-#: control-center/corba-glue.c:77
-msgid "capplet-command to be run."
-msgstr "capplet-opdracht die uitgevoerd moet worden."
-
-#: control-center/corba-glue.c:77
-msgid "CAPPLET"
-msgstr "CAPPLET"
-
-#: control-center/main.c:36
+#: capplets/mouse-properties/mouse-properties.desktop.in.h:1
 #, fuzzy
-msgid "Help on control-center"
-msgstr "IOR van het configuratie-centrum"
+msgid "Mouse"
+msgstr "Vier"
 
-#: control-center/main.c:36
-msgid "Help with the GNOME control-center."
-msgstr "Hulp bij het GNOME configuratie-centrum."
-
-#: control-center/main.c:38
+#: capplets/mouse-properties/mouse-properties.desktop.in.h:2
 #, fuzzy
-msgid "Help with the current configuration page."
-msgstr "Hulp bij het GNOME configuratie-centrum."
+msgid "Mouse Properties"
+msgstr "Muis beweging"
 
-#: control-center/main.c:41
-#, fuzzy
-msgid "About"
-msgstr "Info:"
+#: capplets/screensaver-properties/callbacks.c:102
+msgid "Require Password"
+msgstr "Wachtwoord vereist"
 
-#: control-center/main.c:41
-#, fuzzy
-msgid "About the GNOME control-center."
-msgstr "Hulp bij het GNOME configuratie-centrum."
+#: capplets/screensaver-properties/callbacks.c:154
+msgid "Use power management."
+msgstr "Gebruik energie beheer"
 
-#. we create the widgets
-#: control-center/main.c:69
-msgid "Warning:"
-msgstr "Waarschuwing:"
-
-#: control-center/main.c:69
-msgid "Discard all changes"
-msgstr "Maak alle wijzigingen ongedaan"
-
-#. ...labels, etc
-#: control-center/main.c:78
-msgid ""
-"The following modules have had changes made, but not committed.  If you "
-"would like to edit them, please double click on the appropriate entry."
-msgstr ""
-"In de volgende modules zijn wijzigingen gemaakt, maar niet toegepast.  Als u "
-"ze wilt bewerken, dubbelklik dan op het betreffende onderdeel."
-
-#. create the app
-#: capplets/desktop-links/Gnome.directory.in.h:1 control-center/main.c:197
-#: control-center/splash.c:247
-msgid "Control Center"
-msgstr "Configuratie Centrum"
-
-#: control-center/splash.c:48
-msgid "Operating System:"
-msgstr ""
-
-#: control-center/splash.c:49
-msgid "Distribution Version:"
-msgstr ""
-
-#: control-center/splash.c:50
-msgid "Processor Type:"
-msgstr ""
-
-#: control-center/splash.c:51
-#, fuzzy
-msgid "User Name:"
-msgstr "Naam:"
-
-#: control-center/splash.c:52
-#, fuzzy
-msgid "Host Name:"
-msgstr "Naam:"
-
-#. This is about the only case where we'll put Unknown instead
-#. of simply not showing the info.
-#: control-center/splash.c:178
-msgid "Unknown"
-msgstr "Onbekend"
-
-#: control-center/gnomecc.desktop.in.h:2
-msgid "The GNOME configuration tool"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties.desktop.in.h:1
-#, fuzzy
-msgid "Choose a window manager"
-msgstr "Laat window manager besluiten"
-
-#: capplets/wm-properties/wm-properties.desktop.in.h:2
-#, fuzzy
-msgid "Window Manager"
-msgstr "Bewerk Window Manager"
-
-#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.h:1
-msgid "Enlightenment"
-msgstr ""
-
-#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.h:1
-msgid "Ice WM"
-msgstr ""
-
-#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.h:1
-msgid "Scwm"
-msgstr ""
-
-#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.h:1
-#, fuzzy
-msgid "Window Maker"
-msgstr "Bewerk Window Manager"
-
-#: capplets/wm-properties/wm-desktops/twm.desktop.in.h:1
-msgid "twm"
-msgstr ""
-
-#: capplets/url-properties/url-properties.desktop.in.h:1
-msgid "Configure which programs are used to display URLs"
-msgstr ""
-
-#: capplets/url-properties/url-properties.desktop.in.h:2
-#, fuzzy
-msgid "URL Handlers"
-msgstr "handler:"
-
-#: capplets/ui-properties/application.desktop.in.h:1
-#, fuzzy
-msgid "Applications"
-msgstr "Opties"
-
-#: capplets/ui-properties/application.desktop.in.h:2
-msgid "Sets the default feel of GNOME applications"
-msgstr ""
-
-#: capplets/ui-properties/dialogs.desktop.in.h:1
-#, fuzzy
-msgid "Dialogs"
-msgstr "Dialoog aanwijzingen"
-
-#: capplets/ui-properties/mdi.desktop.in.h:1
-msgid "MDI"
-msgstr ""
-
-#: capplets/theme-switcher/theme-selector.desktop.in.h:1
-#, fuzzy
-msgid "Select which desktop theme to use"
-msgstr "Selecteer een te installeren thema"
-
-#: capplets/theme-switcher/theme-selector.desktop.in.h:2
-msgid "Theme Selector"
-msgstr ""
-
-#: capplets/sound-properties/sound-properties.desktop.in.h:1
-msgid "Configure GNOME's use of sound"
-msgstr ""
-
-#: capplets/sound-properties/sound-properties.desktop.in.h:2
-#, fuzzy
-msgid "Sound"
-msgstr "Eenkleurig"
-
-#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:1
-msgid "Configure the settings of the screensaver"
-msgstr ""
-
-#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:2
-#, fuzzy
-msgid "Screensaver"
+#: capplets/screensaver-properties/callbacks.c:309
+msgid "No Screensaver"
 msgstr "Geen Schermbeveiliging"
+
+#: capplets/screensaver-properties/callbacks.c:314
+msgid "Random Screensaver"
+msgstr "Willekeurige Schermbeveiliging"
+
+#: capplets/screensaver-properties/callbacks.c:483
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:56
+msgid "Settings..."
+msgstr "Instellingen..."
+
+#. we need to special case random
+#: capplets/screensaver-properties/callbacks.c:491
+msgid "Random Settings"
+msgstr "Willekeurige Instellingen"
+
+#: capplets/screensaver-properties/callbacks.c:501
+#, c-format
+msgid "%s Settings..."
+msgstr "%s Intellingen..."
 
 #: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:1
 msgid "3D Clock"
@@ -1686,7 +889,7 @@ msgid "Whales, dolphins and sharks swimming around, in 3D"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:1
-msgid " A show of objects interacting through attractive and repulsive forces."
+msgid "A show of objects interacting through attractive and repulsive forces."
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:2
@@ -1776,7 +979,7 @@ msgstr "Info:"
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:13
 #: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:6
 #: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:8
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:4
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:5
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:13
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:9
 #: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:5
@@ -1814,12 +1017,13 @@ msgstr ""
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:8
 #: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:12
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:8
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:11
 #: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:7
 #: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:13
 #: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:16
-#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:7
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:8
 #: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:17
 #: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:12
 #: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:12
@@ -1894,14 +1098,14 @@ msgstr ""
 #: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:13
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:20
 #: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:11
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:18
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:12
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:17
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:14
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:23
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:19
 #: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:10
 #: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:17
 #: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:24
-#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:12
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:13
 #: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:23
 #: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:20
 #: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:20
@@ -1936,14 +1140,14 @@ msgstr "Klein"
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:29
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:21
 #: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:12
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:19
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:13
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:18
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:24
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:20
 #: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:11
 #: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:18
 #: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:25
-#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:13
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:14
 #: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:18
 #: capplets/screensaver-properties/screensaver-desktops/Greynetic.desktop.in.h:12
 #: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:28
@@ -1958,10 +1162,6 @@ msgstr "Klein"
 #: capplets/screensaver-properties/screensaver-desktops/Munch.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:19
 msgid "Speed of Motion."
-msgstr ""
-
-#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:31
-msgid "По-близко"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:1
@@ -2072,13 +1272,13 @@ msgstr ""
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:17
 #: capplets/screensaver-properties/screensaver-desktops/Braid.desktop.in.h:8
 #: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:10
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:16
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:19
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:9
 #: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:14
 #: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:20
-#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:10
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:11
 #: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:18
 #: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:15
@@ -2331,16 +1531,10 @@ msgid "James Macnicol <J.Macnicol@student.anu.edu.au>"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:14
-msgid ""
-"James Macnicol <J.Macnicol@student.anu.edu.au>, Предов: Дилян Палаузов "
-"<didopalauzov@uk2.net>"
-msgstr ""
-
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:15
 msgid "Lots of random bubbles grow until they pop."
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:17
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:16
 msgid "Simple"
 msgstr ""
 
@@ -2380,50 +1574,47 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:3
 #, fuzzy
+msgid "Change the number of seeds."
+msgstr "Kan menu's losmaken en verplaatsen"
+
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:4
+#, fuzzy
 msgid "Coral"
 msgstr "Normaal"
 
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:5
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:6
 #, fuzzy
 msgid "Denser"
 msgstr "Algemeen"
 
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:7
 msgid "Density"
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:7
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:9
 msgid "Frederick Roeber"
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:8
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:10
 msgid "Number of seeds"
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:11
 msgid "Seeds"
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:10
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:12
 msgid "Simulates coral growth"
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:11
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:13
 msgid "Simulates coral growth."
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:14
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:16
 #, fuzzy
 msgid "Thinner"
 msgstr "Van"
-
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:15
-msgid "По-бързо"
-msgstr ""
-
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:16
-msgid "Променя броя на семената."
-msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Critical.desktop.in.h:1
 #, fuzzy
@@ -2525,12 +1716,6 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:21
 msgid "Stephen Linhart, Ozymandias Desiderata, Jamie Zawinski"
-msgstr ""
-
-#: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:22
-msgid ""
-"Stephen Linhart, Ozymandias Desiderata, Jamie Zawinski, Превод: Дилян "
-"Палаузов <didopalauzov@uk2.net>"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:3
@@ -2721,35 +1906,36 @@ msgid "Draws a point moving around a circle which moves around a circle."
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:6
+#, fuzzy
+msgid "Epicycle"
+msgstr "Sluiten"
+
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:7
 msgid ""
 "Epicycle draws the path traced out by a point on the edge of a circle that "
 "is rotating around the rim of another circle, and so on."
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:8
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:9
 msgid "Holdtime"
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:10
 msgid "James Youngman <jay@gnu.org>"
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:11
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:12
 #: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:17
 #: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:17
 msgid "Seconds"
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:14
+#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:15
 msgid "Time finished product is shown."
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:15
-msgid "When the figure is complete, epicycle pauses this number of seconds."
-msgstr ""
-
 #: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:16
-msgid "Лента"
+msgid "When the figure is complete, epicycle pauses this number of seconds."
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:1
@@ -3472,6 +2658,10 @@ msgstr ""
 msgid "If the solver can "
 msgstr ""
 
+#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:13
+msgid " the end of a corridor it will color it this color."
+msgstr ""
+
 #: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:14
 #, fuzzy
 msgid "Less Delay"
@@ -3856,11 +3046,6 @@ msgstr ""
 msgid "Rd-bomb"
 msgstr ""
 
-#: capplets/desktop-links/Desktop.directory.in.h:1
-#: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:1
-msgid "Desktop"
-msgstr ""
-
 #: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:2
 msgid "Display oily drops."
 msgstr ""
@@ -4226,90 +3411,497 @@ msgstr "Verticaal"
 msgid "Xteevee"
 msgstr ""
 
-#: capplets/mouse-properties/mouse-properties.desktop.in.h:1
-#, fuzzy
-msgid "Mouse"
-msgstr "Vier"
+#: capplets/screensaver-properties/screensaver-dialog.c:46
+msgid "About:"
+msgstr "Info:"
 
-#: capplets/mouse-properties/mouse-properties.desktop.in.h:2
-#, fuzzy
-msgid "Mouse Properties"
-msgstr "Muis beweging"
+#: capplets/screensaver-properties/screensaver-dialog.c:51
+msgid "Author:"
+msgstr "Auteur:"
 
-#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:1
-#, fuzzy
-msgid "Keyboard"
-msgstr "Toetsenbord Bel"
+#: capplets/screensaver-properties/screensaver-dialog.c:61
+msgid "Author: UNKNOWN"
+msgstr "Auteur: ONBEKEND"
 
-#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:2
-#, fuzzy
-msgid "Keyboard Properties"
-msgstr "Herhaalsnelheid"
+#: capplets/screensaver-properties/screensaver-dialog.c:78
+msgid "Settings"
+msgstr "Instellingen"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:1
-msgid "Choose the editor that is invoked by gnome-edit"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:38
+msgid "RANDOM SCREENSAVER"
+msgstr "WILLEKEURIGE SCHERMBEVEILIGING"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:49
+msgid "Screen Saver"
+msgstr "Scherm Beveiliging"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:61
+msgid ""
+"Pressing this button will popup a dialogbox that will help you setup the "
+"current screensaver."
 msgstr ""
+"Druk op deze knop en een dialoogvenster verschijnt dat u helpt bij het "
+"instellen van de huidige schermbeveiliging."
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:2
-#, fuzzy
-msgid "Default Editor"
-msgstr "Standaard MDI Modus"
-
-#: capplets/background-properties/background-properties.desktop.in.h:1
-msgid "Background"
-msgstr ""
-
-#: capplets/background-properties/background-properties.desktop.in.h:2
-msgid "Configuration of the desktop's background"
-msgstr ""
-
-#: capplets/desktop-links/Documents.directory.in.h:1
-msgid "Configure how document types are handled"
-msgstr ""
-
-#: capplets/desktop-links/Documents.directory.in.h:2
-msgid "Document Handlers"
-msgstr ""
-
-#: capplets/desktop-links/Gnome.directory.in.h:2
-#, fuzzy
-msgid "Control Center Menu"
-msgstr "Configuratie Centrum"
-
-#: capplets/desktop-links/Multimedia.directory.in.h:1
-msgid "Configure the settings of your Multimedia devices"
-msgstr ""
-
-#: capplets/desktop-links/Multimedia.directory.in.h:2
-msgid "Multimedia"
-msgstr ""
-
-#: capplets/desktop-links/Peripherals.directory.in.h:1
-msgid "Configure your external devices"
-msgstr ""
-
-#: capplets/desktop-links/Peripherals.directory.in.h:2
-msgid "Peripherals"
-msgstr ""
-
-#: capplets/desktop-links/Session.directory.in.h:1
-#, fuzzy
-msgid "Session"
-msgstr "Extensie"
-
-#: capplets/desktop-links/Session.directory.in.h:2
-#, fuzzy
-msgid "Session Management Settings"
+#. set up the initial frame, and get a vbox in which to pack things.
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:88
+msgid "Screen Saver Settings"
 msgstr "Scherm Beveiliging Instellingen"
 
-#: capplets/desktop-links/UIOptions.directory.in.h:1
-msgid "Configure the global settings of your GNOME applications"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:96
+msgid "Start After "
+msgstr "Start Na "
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:102
+msgid " Minutes."
+msgstr " Minuten."
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:117
+msgid "Priority:"
+msgstr "Prioriteit:"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:124
+msgid "Low "
+msgstr "Laag "
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:126
+msgid " Normal"
+msgstr " Normaal"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:137
+msgid "Shutdown monitor "
+msgstr "Monitor uitschakelen "
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:139
+msgid " minutes after screen saver has started."
+msgstr " minuten na het starten van de schermbeveiliging."
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:152
+msgid "Screen Saver Demo"
+msgstr "Voorbeeld Scherm Beveiliging"
+
+#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:1
+msgid "Configure the settings of the screensaver"
 msgstr ""
 
-#: capplets/desktop-links/UIOptions.directory.in.h:2
+#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:2
 #, fuzzy
-msgid "User Interface"
+msgid "Screensaver"
+msgstr "Geen Schermbeveiliging"
+
+#: capplets/sound-properties/sound-properties.c:97
+msgid ""
+"an initialization error occurred while starting 'sound-properties-capplet'."
+msgstr ""
+"Een initialiseringsfout is opgetreden bij het opstarten van de "
+"'sound-properties-capplet'."
+
+#: capplets/sound-properties/sound-properties.c:188
+msgid "Event"
+msgstr "Gebeurtenis"
+
+#: capplets/sound-properties/sound-properties.c:189
+msgid "File to Play"
+msgstr "Af te spelen bestand"
+
+#: capplets/sound-properties/sound-properties.c:243
+msgid "Enable"
+msgstr "Inschakelen"
+
+#: capplets/sound-properties/sound-properties.c:250
+msgid "Enable sound server startup"
+msgstr "Geluid server inschakelen"
+
+#: capplets/sound-properties/sound-properties.c:258
+msgid "Sounds for events"
+msgstr "Geluiden bij gebeurtenissen"
+
+#: capplets/sound-properties/sound-properties.c:279
+msgid "General"
+msgstr "Algemeen"
+
+#: capplets/sound-properties/sound-properties.c:286
+msgid "Select sound file"
+msgstr "Selecteer geluidsbestand"
+
+#: capplets/sound-properties/sound-properties.c:325
+msgid "Play"
+msgstr "Afspelen"
+
+#: capplets/sound-properties/sound-properties.c:336
+msgid "Sound Events"
+msgstr "Geluid Gebeurtenissen"
+
+#: capplets/sound-properties/sound-properties.c:355
+msgid ""
+"This copy of the GNOME control center was not compiled with sound support"
+msgstr ""
+"Deze versie van het GNOME configuratie centrum is niet gecompileerd met "
+"geluidsondersteuning"
+
+#: capplets/sound-properties/sound-properties.c:748
+msgid "The sound file for this event does not exist."
+msgstr "Het geluidsbestand voor deze gebeurtenis bestaat niet."
+
+#: capplets/sound-properties/sound-properties.c:750
+msgid ""
+"The sound file for this event does not exist.\n"
+"You may want to install the gnome-audio package\n"
+"for a set of default sounds."
+msgstr ""
+"Het geluidsbestand voor deze gebeurtenis bestaat niet.\n"
+"U kunt het gnome-audio pakket installeren\n"
+"voor een verzameling standaardgeluiden."
+
+#: capplets/sound-properties/sound-properties.desktop.in.h:1
+msgid "Configure GNOME's use of sound"
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.desktop.in.h:2
+#, fuzzy
+msgid "Sound"
+msgstr "Eenkleurig"
+
+#: capplets/theme-switcher/demo.c:50
+msgid "One"
+msgstr "Een"
+
+#: capplets/theme-switcher/demo.c:50
+msgid "Two"
+msgstr "Twee"
+
+#. just 8 short names that will serve as samples for titles in demo
+#: capplets/theme-switcher/demo.c:52
+msgid "Eenie"
+msgstr "Een"
+
+#: capplets/theme-switcher/demo.c:52
+msgid "Meenie"
+msgstr "Twee"
+
+#: capplets/theme-switcher/demo.c:53
+msgid "Mynie"
+msgstr "Drie"
+
+#: capplets/theme-switcher/demo.c:53
+msgid "Moe"
+msgstr "Vier"
+
+#: capplets/theme-switcher/demo.c:54
+msgid "Catcha"
+msgstr "Hoedje"
+
+#: capplets/theme-switcher/demo.c:54
+msgid "Tiger"
+msgstr "Van"
+
+#: capplets/theme-switcher/demo.c:55
+msgid "By Its"
+msgstr "Hergebruikt"
+
+#: capplets/theme-switcher/demo.c:55
+msgid "Toe"
+msgstr "Papier"
+
+#: capplets/theme-switcher/demo.c:114
+msgid "Selected themes from above will be tested by previewing here."
+msgstr "Hierboven geselecteerde thema's worden hier getest met een voorbeeld"
+
+#. column one
+#: capplets/theme-switcher/demo.c:119
+msgid "Sample Button"
+msgstr "Voorbeeld Knop"
+
+#: capplets/theme-switcher/demo.c:123
+msgid "Sample Check Button"
+msgstr "Voorbeeld Aanvink Knop"
+
+#: capplets/theme-switcher/demo.c:128
+msgid "Sample Text Entry Field"
+msgstr "Voorbeeld Tekstinvoer Veld"
+
+#: capplets/theme-switcher/demo.c:139
+msgid "Submenu"
+msgstr "Submenu"
+
+#: capplets/theme-switcher/demo.c:146
+msgid "Item 1"
+msgstr "Onderdeel 1"
+
+#: capplets/theme-switcher/demo.c:149
+msgid "Another item"
+msgstr "Nog een onderdeel"
+
+#: capplets/theme-switcher/demo.c:154
+msgid "Radio Button 1"
+msgstr "Radio Knop 1"
+
+#: capplets/theme-switcher/demo.c:160
+msgid "Radio Button 2"
+msgstr "Radio Knop 2"
+
+#: capplets/theme-switcher/gui.c:89
+#, c-format
+msgid ""
+"Error installing theme:\n"
+"'%s'\n"
+"%s"
+msgstr ""
+"Fout bij installeren van thema:\n"
+"'%s'\n"
+"%s"
+
+#: capplets/theme-switcher/gui.c:120
+msgid "Select a theme to install"
+msgstr "Selecteer een te installeren thema"
+
+#: capplets/theme-switcher/gui.c:197
+msgid "Available Themes"
+msgstr "Beschikbare Thema's"
+
+#: capplets/theme-switcher/gui.c:221
+msgid ""
+"Auto\n"
+"Preview"
+msgstr ""
+"Automatisch\n"
+"Voorbeeld"
+
+#: capplets/theme-switcher/gui.c:233
+msgid ""
+"Install new\n"
+"theme..."
+msgstr ""
+"Installeer nieuw\n"
+"thema..."
+
+#. Font selector.
+#.
+#: capplets/theme-switcher/gui.c:239
+msgid "User Font"
 msgstr "Keuze Lettertype"
+
+#. FIXME - should really get this from X somehow
+#. for now we just assume default gtk font
+#: capplets/theme-switcher/gui.c:257
+msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
+msgstr "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
+
+#: capplets/theme-switcher/gui.c:276
+msgid "Use custom font."
+msgstr "Gebruik eigen lettertype"
+
+#: capplets/theme-switcher/install.c:26
+msgid "Home directory doesn't exist!\n"
+msgstr "Thuis map bestaat niet!\n"
+
+#: capplets/theme-switcher/install.c:36
+msgid "Theme does not exist"
+msgstr "Thema bestaat niet"
+
+#: capplets/theme-switcher/install.c:68
+#, c-format
+msgid "Command '%s' failed"
+msgstr "Opdracht '%s' mislukt"
+
+#: capplets/theme-switcher/install.c:73
+msgid "Unknown file format"
+msgstr "Onbekend bestandsformaat"
+
+#: capplets/theme-switcher/theme-selector.desktop.in.h:1
+#, fuzzy
+msgid "Select which desktop theme to use"
+msgstr "Selecteer een te installeren thema"
+
+#: capplets/theme-switcher/theme-selector.desktop.in.h:2
+msgid "Theme Selector"
+msgstr ""
+
+#: capplets/ui-properties/application.desktop.in.h:1
+#, fuzzy
+msgid "Applications"
+msgstr "Opties"
+
+#: capplets/ui-properties/application.desktop.in.h:2
+msgid "Sets the default feel of GNOME applications"
+msgstr ""
+
+#: capplets/ui-properties/dialogs.desktop.in.h:1
+#, fuzzy
+msgid "Dialogs"
+msgstr "Dialoog aanwijzingen"
+
+#: capplets/ui-properties/mdi.desktop.in.h:1
+msgid "MDI"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:54
+msgid "Can detach and move toolbars"
+msgstr "Kan menubalken losmaken en verplaatsen"
+
+#: capplets/ui-properties/ui-properties.c:59
+msgid "Toolbars have relieved border"
+msgstr "Menubalken met reliлf"
+
+#: capplets/ui-properties/ui-properties.c:64
+msgid "Toolbar buttons have relieved border"
+msgstr "Menubalk knoppen met reliлf"
+
+#: capplets/ui-properties/ui-properties.c:69
+msgid "Toolbars have line separators"
+msgstr "Menubalken met scheidingslijnen"
+
+#: capplets/ui-properties/ui-properties.c:74
+msgid "Toolbars have text labels"
+msgstr "Menubalken met tekstlabel"
+
+#: capplets/ui-properties/ui-properties.c:103
+msgid "Can detach and move menus"
+msgstr "Kan menu's losmaken en verplaatsen"
+
+#: capplets/ui-properties/ui-properties.c:108
+msgid "Menus have relieved border"
+msgstr "Menu's met reliлf"
+
+#: capplets/ui-properties/ui-properties.c:112
+msgid "Submenus can be torn off"
+msgstr "Submenu's kunnen weggehaald worden"
+
+#: capplets/ui-properties/ui-properties.c:116
+msgid "Menu items have icons"
+msgstr "Menu onderdelen met pictogrammen"
+
+#: capplets/ui-properties/ui-properties.c:140
+msgid "Statusbar is interactive when possible"
+msgstr "Statusbalk is interactief wanneer mogelijk"
+
+#: capplets/ui-properties/ui-properties.c:145
+msgid "Statusbar progress meter is on the right"
+msgstr "Statusbalk voortgangsmeter zit rechts"
+
+#: capplets/ui-properties/ui-properties.c:162
+msgid "Menu Options"
+msgstr "Menu Opties"
+
+#: capplets/ui-properties/ui-properties.c:163
+msgid "Statusbar Options"
+msgstr "Statusbalk Opties"
+
+#: capplets/ui-properties/ui-properties.c:164
+msgid "Toolbar Options"
+msgstr "Menubalk Opties"
+
+#: capplets/ui-properties/ui-properties.c:170
+msgid "Dialog buttons"
+msgstr "Dialoog knoppen"
+
+#: capplets/ui-properties/ui-properties.c:171
+msgid "Default value"
+msgstr "Standaard waarde"
+
+#: capplets/ui-properties/ui-properties.c:172
+msgid "Spread buttons out"
+msgstr "Knoppen uitspreiden"
+
+#: capplets/ui-properties/ui-properties.c:173
+msgid "Put buttons on edges"
+msgstr "Knoppen op randen plaatsen"
+
+#: capplets/ui-properties/ui-properties.c:174
+msgid "Left-justify buttons"
+msgstr "Knoppen links uitlijnen"
+
+#: capplets/ui-properties/ui-properties.c:175
+msgid "Right-justify buttons"
+msgstr "Knoppen rechts uitlijnen"
+
+#: capplets/ui-properties/ui-properties.c:180
+msgid "Dialog buttons have icons"
+msgstr "Dialoog knoppen met pictogrammen"
+
+#: capplets/ui-properties/ui-properties.c:185
+msgid "Use statusbar instead of dialog when possible"
+msgstr "Gebruik statusbalk in plaats van dialoogvenster wanneer mogelijk"
+
+#: capplets/ui-properties/ui-properties.c:207
+msgid "Dialog position"
+msgstr "Positie dialoogvenster"
+
+#: capplets/ui-properties/ui-properties.c:208
+msgid "Let window manager decide"
+msgstr "Laat window manager besluiten"
+
+#: capplets/ui-properties/ui-properties.c:209
+msgid "Center of the screen"
+msgstr "Centrum van het beeldscherm"
+
+#: capplets/ui-properties/ui-properties.c:210
+msgid "At the mouse pointer"
+msgstr "Bij de muisaanwijzer"
+
+#: capplets/ui-properties/ui-properties.c:215
+msgid "Dialog hints"
+msgstr "Dialoog aanwijzingen"
+
+#: capplets/ui-properties/ui-properties.c:216
+msgid "Dialogs are like other windows"
+msgstr "Dialoogvensters zijn als andere vensters"
+
+#: capplets/ui-properties/ui-properties.c:217
+msgid "Dialogs are treated specially by window manager"
+msgstr "Dialoogvensters worden speciaal behandeld door window manager"
+
+#: capplets/ui-properties/ui-properties.c:222
+msgid "Place dialogs over application window when possible"
+msgstr "Plaats dialoogvensters voor programma vensters wanneer mogelijk"
+
+#: capplets/ui-properties/ui-properties.c:243
+msgid "Dialog Layout"
+msgstr "Dialoogvenster Opmaak"
+
+#: capplets/ui-properties/ui-properties.c:244
+msgid "Dialog Behavior"
+msgstr "Gedrag Dialoogvenster"
+
+#: capplets/ui-properties/ui-properties.c:250
+msgid "Default MDI Mode"
+msgstr "Standaard MDI Modus"
+
+#: capplets/ui-properties/ui-properties.c:251
+msgid "Notebook"
+msgstr "Schrijfblok"
+
+#: capplets/ui-properties/ui-properties.c:252
+msgid "Toplevel"
+msgstr "Topniveau"
+
+#: capplets/ui-properties/ui-properties.c:253
+msgid "Modal"
+msgstr "Modaal"
+
+#: capplets/ui-properties/ui-properties.c:258
+msgid "MDI notebook tab position"
+msgstr "MDI schrijfblok tab positie"
+
+#: capplets/ui-properties/ui-properties.c:259
+msgid "Left"
+msgstr "Links"
+
+#: capplets/ui-properties/ui-properties.c:260
+msgid "Right"
+msgstr "Rechts"
+
+#: capplets/ui-properties/ui-properties.c:261
+msgid "Top"
+msgstr "Top"
+
+#: capplets/ui-properties/ui-properties.c:262
+msgid "Bottom"
+msgstr "Bodem"
+
+#: capplets/ui-properties/ui-properties.c:277
+msgid "GNOME MDI Options"
+msgstr "GNOME MDI Opties"
 
 #: capplets/ui-properties/ui-properties.directory.in.h:1
 msgid "Look and Feel"
@@ -4318,6 +3910,401 @@ msgstr ""
 #: capplets/ui-properties/ui-properties.directory.in.h:2
 msgid "Look and Feel Properties"
 msgstr ""
+
+#: capplets/url-properties/url-properties.c:51
+msgid "Error initializing the `url-properties' capplet."
+msgstr "Fout bij initialiseren van 'url-properties' capplet'."
+
+#: capplets/url-properties/url-properties.c:76
+msgid "Protocol"
+msgstr "Protocol"
+
+#: capplets/url-properties/url-properties.c:76
+msgid "Command"
+msgstr "Opdracht"
+
+#: capplets/url-properties/url-properties.c:93
+msgid "handler:"
+msgstr "handler:"
+
+#. set some commonly used handlers
+#: capplets/url-properties/url-properties.c:103
+msgid "Netscape"
+msgstr "Netscape"
+
+#: capplets/url-properties/url-properties.c:108
+msgid "Netscape (new window)"
+msgstr "Netscape (nieuw venster)"
+
+#: capplets/url-properties/url-properties.c:121
+msgid "Help browser"
+msgstr "Help pagina's"
+
+#: capplets/url-properties/url-properties.c:127
+msgid "Help browser (new window)"
+msgstr "Help pagina's (nieuw venster)"
+
+#: capplets/url-properties/url-properties.c:140
+msgid "Set"
+msgstr "Instellen"
+
+#: capplets/url-properties/url-properties.c:148
+msgid "Remove"
+msgstr "Verwijderen"
+
+#: capplets/url-properties/url-properties.desktop.in.h:1
+msgid "Configure which programs are used to display URLs"
+msgstr ""
+
+#: capplets/url-properties/url-properties.desktop.in.h:2
+#, fuzzy
+msgid "URL Handlers"
+msgstr "handler:"
+
+#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.h:1
+msgid "Enlightenment"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.h:1
+msgid "Ice WM"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.h:1
+msgid "Scwm"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.h:1
+#, fuzzy
+msgid "Window Maker"
+msgstr "Bewerk Window Manager"
+
+#: capplets/wm-properties/wm-desktops/twm.desktop.in.h:1
+msgid "twm"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:142
+#, c-format
+msgid ""
+"Starting %s\n"
+"(%d seconds left before operation times out)"
+msgstr ""
+"%s Aan het opstarten\n"
+"(%d seconden voordat bewerking tijdslimiet overschreidt)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:303
+#, c-format
+msgid "%s (Current)"
+msgstr "%s (Huidige)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:306
+#, c-format
+msgid "Run Configuration Tool for %s"
+msgstr "Start Configuratie van %s"
+
+#: capplets/wm-properties/wm-properties-capplet.c:317
+msgid " (Not found)"
+msgstr " (Niet gevonden)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:356
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\tAnother window manager is already running and could not be killed\n"
+msgstr ""
+"wm-properties-capplet: Kan window manager niet initialiseren.\n"
+"\tWindow manager is al gestart en kon niet gestopt worden\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:360
+#, c-format
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\t'%s' didn't start\n"
+msgstr ""
+"wm-properties-capplet: Kan window manager niet initialiseren.\n"
+"\t'%s' is niet gestart\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:413
+msgid "Previous window manager did not die\n"
+msgstr "Vorige window manager is niet gestopt\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:446
+#, c-format
+msgid ""
+"Could not start '%s'.\n"
+"Falling back to previous window manager '%s'\n"
+msgstr ""
+"Kon '%s' niet opstarten.\n"
+"Terugvallen op vorige window manager '%s'\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:477
+msgid ""
+"Could not start fallback window manager.\n"
+"Please run a window manager manually. You can\n"
+"do this by selecting \"Run Program\" in the\n"
+"foot menu\n"
+msgstr ""
+"Kon niet terugvallen op window manager.\n"
+"Start a.u.b. handmatig een window manager op. U kunt dit\n"
+"doen door \"Uitvoeren\" te selecteren in het\n"
+"voet-menu\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:502
+#: capplets/wm-properties/wm-properties-capplet.c:868
+#: capplets/wm-properties/wm-properties-capplet.c:875
+#: capplets/wm-properties/wm-properties-capplet.c:1021
+msgid "OK"
+msgstr "OK"
+
+#: capplets/wm-properties/wm-properties-capplet.c:520
+#, fuzzy
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. You can do so immediately by selecting the \"Save session\n"
+"now\" below, or you can save your session later.  This can be\n"
+"done either selecting \"Save Current Session\" under \"Settings\"\n"
+"in the main menu, or by turning on \"Save Current Setup\" when\n"
+"you log out.\n"
+msgstr ""
+"Uw huidige window manager is veranderd. Om deze\n"
+"wijziging te bewaren, moet u de huidige sessie\n"
+"opslaan. Dit kan door \"Bewaar Huidige Sessie\" te selecteren\n"
+"onder \"Instellingen\" in het hoofdmenu, of door bij het afmelden\n"
+"\"Bewaar Huidige Instellingen\" te activeren.\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:527
+msgid "Save Session Later"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:527
+msgid "Save Session Now"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:530
+#, fuzzy
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. This can be done by either selecting \"Save Current Session\"\n"
+"under \"Settings\" in the main menu, or by turning on\n"
+"\"Save Current Setup\" when you log out.\n"
+msgstr ""
+"Uw huidige window manager is veranderd. Om deze\n"
+"wijziging te bewaren, moet u de huidige sessie\n"
+"opslaan. Dit kan door \"Bewaar Huidige Sessie\" te selecteren\n"
+"onder \"Instellingen\" in het hoofdmenu, of door bij het afmelden\n"
+"\"Bewaar Huidige Instellingen\" te activeren.\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:757
+msgid "Add New Window Manager"
+msgstr "Nieuwe Window Manager toevoegen"
+
+#: capplets/wm-properties/wm-properties-capplet.c:771
+msgid "Name:"
+msgstr "Naam:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:784
+msgid "Command:"
+msgstr "Opdracht:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:797
+msgid "Configuration Command:"
+msgstr "Configuratie Opdracht:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:816
+msgid "Window manager is session managed"
+msgstr "Window Manager is sessie gebonden"
+
+#: capplets/wm-properties/wm-properties-capplet.c:866
+msgid "Name cannot be empty"
+msgstr "Naam kan niet leeg zijn"
+
+#: capplets/wm-properties/wm-properties-capplet.c:873
+msgid "Command cannot be empty"
+msgstr "Commando kan niet leeg zijn"
+
+#: capplets/wm-properties/wm-properties-capplet.c:922
+#: capplets/wm-properties/wm-properties-capplet.c:964
+msgid "Edit Window Manager"
+msgstr "Bewerk Window Manager"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1020
+msgid "You cannot delete the current Window Manager"
+msgstr "U kunt de huidige Window Manager niet verwijderen"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1093
+msgid "Edit..."
+msgstr "Bewerken..."
+
+#: capplets/wm-properties/wm-properties-capplet.c:1098
+msgid "Delete"
+msgstr "Verwijderen"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1134
+msgid ""
+"an initialization error occurred while starting 'wm-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"Een initialiseringsfout is opgetreden bij het opstarten van "
+"'wm-properties-capplet'.\n"
+"aan het afbreken...\n"
+
+#: capplets/wm-properties/wm-properties.desktop.in.h:1
+#, fuzzy
+msgid "Choose a window manager"
+msgstr "Laat window manager besluiten"
+
+#: capplets/wm-properties/wm-properties.desktop.in.h:2
+#, fuzzy
+msgid "Window Manager"
+msgstr "Bewerk Window Manager"
+
+#: control-center/callbacks.c:102 control-center/gnomecc.desktop.in.h:1
+msgid "GNOME Control Center"
+msgstr "GNOME Configuratie Centrum"
+
+#: control-center/callbacks.c:105
+msgid "Desktop Properties manager."
+msgstr "Bureaublad Instellingen beheer"
+
+#: control-center/capplet-manager.c:179
+msgid "Try"
+msgstr "Probeer"
+
+#: control-center/capplet-manager.c:185
+msgid "Revert"
+msgstr "Herstel"
+
+#. set the help item
+#: control-center/capplet-manager.c:208
+#, fuzzy, c-format
+msgid "Help with '%s' settings"
+msgstr "Instellingen testen"
+
+#: control-center/capplet-widget-libs.c:46
+msgid "id of the capplet -- assigned by the control-center"
+msgstr "id van de capplet -- toegewezen door het configuratie-centrum"
+
+#: control-center/capplet-widget-libs.c:46
+msgid "ID"
+msgstr "ID"
+
+#: control-center/capplet-widget-libs.c:47
+msgid "Multi-capplet id."
+msgstr "Multi-capplet id."
+
+#: control-center/capplet-widget-libs.c:47
+msgid "CAPID"
+msgstr "CAPID"
+
+#: control-center/capplet-widget-libs.c:48
+msgid "X ID of the socket it's plugged into"
+msgstr "X ID van de gebruikte socket"
+
+#: control-center/capplet-widget-libs.c:48
+msgid "XID"
+msgstr "XID"
+
+#: control-center/capplet-widget-libs.c:49
+msgid "IOR of the control-center"
+msgstr "IOR van het configuratie-centrum"
+
+#: control-center/capplet-widget-libs.c:49
+msgid "IOR"
+msgstr "IOR"
+
+#: control-center/capplet-widget-libs.c:50
+msgid "Initialize session settings"
+msgstr "Initialiseer sessie instellingen"
+
+#: control-center/capplet-widget-libs.c:51
+msgid "Ignore default action.  Used for custom init-session cases"
+msgstr "Negeer standaard handeling. Gebruikt voor eigen init-sessie"
+
+#: control-center/capplet-widget.c:272
+msgid "Sorry, no help is available for these settings."
+msgstr "Sorry, er is geen hulp beschikbaar voor deze instellingen."
+
+#: control-center/corba-glue.c:77
+msgid "capplet-command to be run."
+msgstr "capplet-opdracht die uitgevoerd moet worden."
+
+#: control-center/corba-glue.c:77
+msgid "CAPPLET"
+msgstr "CAPPLET"
+
+#: control-center/gnomecc.desktop.in.h:2
+msgid "The GNOME configuration tool"
+msgstr ""
+
+#: control-center/main.c:36
+#, fuzzy
+msgid "Help on control-center"
+msgstr "IOR van het configuratie-centrum"
+
+#: control-center/main.c:36
+msgid "Help with the GNOME control-center."
+msgstr "Hulp bij het GNOME configuratie-centrum."
+
+#: control-center/main.c:38
+#, fuzzy
+msgid "Help with the current configuration page."
+msgstr "Hulp bij het GNOME configuratie-centrum."
+
+#: control-center/main.c:41
+#, fuzzy
+msgid "About"
+msgstr "Info:"
+
+#: control-center/main.c:41
+#, fuzzy
+msgid "About the GNOME control-center."
+msgstr "Hulp bij het GNOME configuratie-centrum."
+
+#. we create the widgets
+#: control-center/main.c:69
+msgid "Warning:"
+msgstr "Waarschuwing:"
+
+#: control-center/main.c:69
+msgid "Discard all changes"
+msgstr "Maak alle wijzigingen ongedaan"
+
+#. ...labels, etc
+#: control-center/main.c:78
+msgid ""
+"The following modules have had changes made, but not committed.  If you "
+"would like to edit them, please double click on the appropriate entry."
+msgstr ""
+"In de volgende modules zijn wijzigingen gemaakt, maar niet toegepast.  Als u "
+"ze wilt bewerken, dubbelklik dan op het betreffende onderdeel."
+
+#: control-center/splash.c:48
+msgid "Operating System:"
+msgstr ""
+
+#: control-center/splash.c:49
+msgid "Distribution Version:"
+msgstr ""
+
+#: control-center/splash.c:50
+msgid "Processor Type:"
+msgstr ""
+
+#: control-center/splash.c:51
+#, fuzzy
+msgid "User Name:"
+msgstr "Naam:"
+
+#: control-center/splash.c:52
+#, fuzzy
+msgid "Host Name:"
+msgstr "Naam:"
+
+#. This is about the only case where we'll put Unknown instead
+#. of simply not showing the info.
+#: control-center/splash.c:178
+msgid "Unknown"
+msgstr "Onbekend"
 
 #~ msgid "Mime Type: "
 #~ msgstr "Mime Type: "
