@@ -48,6 +48,8 @@ AC_SUBST(XF86MISC_LIBS)
 AM_PATH_ORBIT(0.5.1, , AC_MSG_ERROR([You must have ORBit installed.]))
 AM_PATH_OAF(0.1.0, , AC_MSG_ERROR([You must have OAF installed.]))
 AM_PATH_GCONF(0.1.0, , AC_MSG_ERROR([You must have GConf installed.]), gconf-gtk)
+AM_PATH_LIBGLADE(,AC_MSG_ERROR([You must have LibGlade installed.]), gnome)
+
 dnl esd-manager
 have_libesd=no
 AM_PATH_ESD(,have_libesd=yes,
