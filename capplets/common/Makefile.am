@@ -35,6 +35,7 @@ gnome_theme_test_SOURCES = \
 	gnome-theme-test.c
 
 gnome_theme_test_LDADD = 						\
+	libcommon.la							\
 	$(GNOMECC_CAPPLETS_LIBS)
 
 noinst_PROGRAMS = \
