@@ -695,10 +695,15 @@ render_wallpaper (BGApplier *bg_applier, const BGPreferences *prefs)
 
 		if (prefs->wallpaper_type == WPTYPE_TILED) {
 			if (dest_geom.width != pwidth || dest_geom.height != pheight) {
+				int hscale = pwidth * bg_applier->p->render_geom.width / virtual_geom.width;
+				int vscale = pheight * bg_applier->p->render_geom.height / virtual_geom.height;
+
+				if (hscale < 1) hscale = 1;
+				if (vscale < 1) vscale = 1;
+
+				pheight * bg_applier->p->render_geom.height / virtual_geom.height,
 				prescaled_pixbuf = gdk_pixbuf_scale_simple
-					(bg_applier->p->wallpaper_pixbuf,
-					 pwidth * bg_applier->p->render_geom.width / virtual_geom.width,
-					 pheight * bg_applier->p->render_geom.height / virtual_geom.height,
+					(bg_applier->p->wallpaper_pixbuf, hscale, vscale,
 					 GDK_INTERP_BILINEAR);
 			} else {
 				prescaled_pixbuf = bg_applier->p->wallpaper_pixbuf;

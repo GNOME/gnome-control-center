@@ -37,14 +37,12 @@ dialog_response (GtkWidget *widget,
 		 gint       response_id,
 		 GConfChangeSet *changeset)
 {
-	if (response_id == GTK_RESPONSE_HELP) {
+	if (response_id == GTK_RESPONSE_HELP)
 		capplet_help (GTK_WINDOW (widget),
 			      "wgoscustaccess.xml",
 			      "goscustaccess-2");
-	}
-	else {
+	else
 		gtk_main_quit ();
-	}
 }
 
 int
