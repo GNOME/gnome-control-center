@@ -33,8 +33,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: el\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-15 10:25+0200\n"
-"PO-Revision-Date: 2004-02-15 10:39+0200\n"
+"POT-Creation-Date: 2004-02-22 14:56+0200\n"
+"PO-Revision-Date: 2004-02-22 14:58+0200\n"
 "Last-Translator: Kostas Papadimas <pkst@gnome.org>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
 "MIME-Version: 1.0\n"
@@ -132,14 +132,18 @@ msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr "Σφάλμα εκκίνησης διαλόγου προτιμήσεων ποντικιού : %s"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:337
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:395
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:396
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Αδυναμία εισαγωγής ρυθμίσεων  AccessX από το αρχείο  '%s'"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:468
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:433
 msgid "Import Feature Settings File"
 msgstr "Εισαγωγή Αρχείου Ρυθμίσεων Χαρακτηριστικών"
+
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:437
+msgid "_Import"
+msgstr "Ε_ισαγωγή"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:18
@@ -363,50 +367,50 @@ msgid "seconds"
 msgstr "δευτερόλεπτα"
 
 #. solid
-#: capplets/background/background-properties-capplet.c:228
+#: capplets/background/background-properties-capplet.c:227
 msgid "Co_lor:"
 msgstr "Χ_ρώμα:"
 
 #. horiz
-#: capplets/background/background-properties-capplet.c:232
+#: capplets/background/background-properties-capplet.c:231
 msgid "_Left color:"
 msgstr "Χρώμα Αριστε_ρά:"
 
-#: capplets/background/background-properties-capplet.c:233
+#: capplets/background/background-properties-capplet.c:232
 msgid "_Right color:"
 msgstr "Χρώμα _Δεξιά:"
 
 #. vert
-#: capplets/background/background-properties-capplet.c:236
+#: capplets/background/background-properties-capplet.c:235
 msgid "Top co_lor:"
 msgstr "Χρώμα Ε_πάνω:"
 
-#: capplets/background/background-properties-capplet.c:237
+#: capplets/background/background-properties-capplet.c:236
 msgid "_Bottom color:"
 msgstr "Χρώμα _Κάτω:"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "_Tile"
 msgstr "_Πλακίδιο"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "C_enter"
 msgstr "Κ_εντραρισμένη"
 
 # For lack of a better term...?  Anaklimakwsh ???
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "Sc_ale"
 msgstr "_Σε κλίμακα"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "_Stretch"
 msgstr "Τεντ_ωμένη"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "_No Picture"
 msgstr "_Χωρίς Εικόνα"
 
-#: capplets/background/background-properties-capplet.c:559
+#: capplets/background/background-properties-capplet.c:558
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:723
 #: capplets/keyboard/gnome-keyboard-properties.c:224
@@ -415,7 +419,7 @@ msgstr "_Χωρίς Εικόνα"
 msgid "Retrieve and store legacy settings"
 msgstr "Ανάσυρση και αποθήκευση ρυθμίσεων legacy "
 
-#: capplets/background/background-properties-capplet.c:585
+#: capplets/background/background-properties-capplet.c:584
 #: capplets/background/background-properties.glade.h:2
 msgid "Background Preferences"
 msgstr "Προτιμήσεις Παρασκηνίου"
@@ -433,6 +437,7 @@ msgid "Horizontal gradient"
 msgstr "Οριζόντια διαβάθμιση"
 
 #: capplets/background/background-properties.glade.h:5
+#: capplets/background/gnome-background-properties.glade.h:4
 msgid "Pick a color"
 msgstr "Επιλογή χρώματος"
 
@@ -492,10 +497,6 @@ msgstr "<b>_Χρώματα Επιφάνειας Εργασίας</b>"
 msgid "Desktop Background Preferences"
 msgstr "Προτιμήσεις Παρασκηνίου Επιφάνειας Εργασίας"
 
-#: capplets/background/gnome-background-properties.glade.h:4
-msgid "Zgjidh një ngjyrë"
-msgstr "Επιλογή ενός χρώματος"
-
 #: capplets/background/gnome-background-properties.glade.h:5
 msgid "_Add Wallpaper"
 msgstr "Προσ_θήκη ταπετσαρίας"
@@ -506,6 +507,7 @@ msgstr "_Στυλ:"
 
 #: capplets/background/gnome-wp-capplet.c:72
 #: capplets/common/capplet-util.c:340
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:326
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Σφάλμα προβολής βοήθειας: %s "
@@ -640,83 +642,83 @@ msgstr "Γίνεται σύνδεση..."
 msgid "Downloading..."
 msgstr "Μεταφόρτωση..."
 
-#: capplets/common/gconf-property-editor.c:172
+#: capplets/common/gconf-property-editor.c:170
 msgid "Key"
 msgstr "Πλήκτρο"
 
-#: capplets/common/gconf-property-editor.c:173
+#: capplets/common/gconf-property-editor.c:171
 msgid "GConf key to which this property editor is attached"
 msgstr "Κλειδί GConf στο οποίο αυτός ο εξεργαστής ιδιότητων είναι συνδεδεμένος"
 
-#: capplets/common/gconf-property-editor.c:179
+#: capplets/common/gconf-property-editor.c:177
 msgid "Callback"
 msgstr "Επανάκληση"
 
-#: capplets/common/gconf-property-editor.c:180
+#: capplets/common/gconf-property-editor.c:178
 msgid "Issue this callback when the value associated with key gets changed"
 msgstr ""
 "'Εκδοση αυτής της ανάκλησης όταν η τιμή που σχετίζεται με αυτό το πλήκτρο "
 "αλλάζει"
 
-#: capplets/common/gconf-property-editor.c:185
+#: capplets/common/gconf-property-editor.c:183
 msgid "Change set"
 msgstr "Ορισμός αλλαγής"
 
-#: capplets/common/gconf-property-editor.c:186
+#: capplets/common/gconf-property-editor.c:184
 msgid "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
 "Ομάδα αλλαγών GConf που περιέχει δεδομένα και θα προωθηθεί στον πελάτη gconf "
 "κατα την εφαρμογή"
 
-#: capplets/common/gconf-property-editor.c:191
+#: capplets/common/gconf-property-editor.c:189
 msgid "Conversion to widget callback"
 msgstr "Μετατροπή σε επανάκληση γραφικού συστατικού"
 
-#: capplets/common/gconf-property-editor.c:192
+#: capplets/common/gconf-property-editor.c:190
 msgid "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr ""
 "Επανάκληση που θα εκδοθεί όταν μετατραπούν δεδομένα από το  GConf στο "
 "γραφικό συστατικό"
 
-#: capplets/common/gconf-property-editor.c:197
+#: capplets/common/gconf-property-editor.c:195
 msgid "Conversion from widget callback"
 msgstr "Μετατροπή από την επανάκληση γραφικού συστατικού"
 
-#: capplets/common/gconf-property-editor.c:198
+#: capplets/common/gconf-property-editor.c:196
 msgid "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr ""
 "Επανάκληση που θα εκδοθεί  όταν μετατραπούν δεδομένα από το γραφικό "
 "συστατικό στο  GConf"
 
-#: capplets/common/gconf-property-editor.c:203
+#: capplets/common/gconf-property-editor.c:201
 msgid "UI Control"
 msgstr "Έλεγχος UI"
 
-#: capplets/common/gconf-property-editor.c:204
+#: capplets/common/gconf-property-editor.c:202
 msgid "Object that controls the property (normally a widget)"
 msgstr "Αντικείμενο που ελέγχει την ιδιότητα (κανονικά ένα γραφικό συστατικό)"
 
-#: capplets/common/gconf-property-editor.c:219
+#: capplets/common/gconf-property-editor.c:217
 msgid "Property editor object data"
 msgstr "Δεδομένα αντικειμένου επεξεργαστή ιδιότητας"
 
-#: capplets/common/gconf-property-editor.c:220
+#: capplets/common/gconf-property-editor.c:218
 msgid "Custom data required by the specific property editor"
 msgstr ""
 "Προσαρμοσμένα δεδομένα που απαιτούνται από το συγκεκριμένο επεξεργαστή "
 "ιδιότητων"
 
-#: capplets/common/gconf-property-editor.c:226
+#: capplets/common/gconf-property-editor.c:224
 msgid "Property editor data freeing callback"
 msgstr "Δεδομένα επεξεργαστή ιδιότητας που ελευθερώνει επανάκληση"
 
-#: capplets/common/gconf-property-editor.c:227
+#: capplets/common/gconf-property-editor.c:225
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr ""
 "Επανάκληση που θα εκδοθεί όταν πρόκειται να ελευθερωθούν δεδομένα "
 "αντικειμένου επεξεργαστή ιδιότητας"
 
-#: capplets/common/gconf-property-editor.c:1541
+#: capplets/common/gconf-property-editor.c:1538
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -729,7 +731,7 @@ msgstr ""
 "Βεβαιωθείτε ότι υπάρχει και προσπαθείστε ξανά, ή επιλέξτε μια διαφορετική "
 "εικόνα παρασκηνίου."
 
-#: capplets/common/gconf-property-editor.c:1549
+#: capplets/common/gconf-property-editor.c:1546
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -742,9 +744,13 @@ msgstr ""
 "\n"
 "Επιλέξτε ένα διαφορετικό τύπο εικόνας."
 
-#: capplets/common/gconf-property-editor.c:1640
+#: capplets/common/gconf-property-editor.c:1665
 msgid "Please select an image."
 msgstr "Παρακαλώ επιλέξτε μια εικόνα."
+
+#: capplets/common/gconf-property-editor.c:1670
+msgid "_Select"
+msgstr "Επιλο_γή"
 
 #: capplets/default-applications/default-applications.desktop.in.h:1
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:18
@@ -1140,20 +1146,20 @@ msgstr "Προεπιλεγμένες Ρυθμίσεις"
 msgid "Screen %d Settings\n"
 msgstr "Ρυθμίσεις %d Οθόνης\n"
 
-#: capplets/display/main.c:444
+#: capplets/display/main.c:445
 msgid "Screen Resolution Preferences"
 msgstr "Προτιμήσεις Ανάλυσης Οθόνης"
 
-#: capplets/display/main.c:476
+#: capplets/display/main.c:482
 #, c-format
 msgid "_Make default for this computer (%s) only"
 msgstr "Να γίνει προεπιλεγμένο μόνο για αυτό τον υ_πολογιστή (%s)"
 
-#: capplets/display/main.c:494
+#: capplets/display/main.c:500
 msgid "Options"
 msgstr "Επιλογές"
 
-#: capplets/display/main.c:515
+#: capplets/display/main.c:521
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
@@ -1162,24 +1168,25 @@ msgid_plural ""
 "Testing the new settings. If you don't respond in %d seconds the previous "
 "settings will be restored."
 msgstr[0] ""
-"Δοκιμή των νέων ρυθμίσεων. Αν δεν κάνετε κάτι στo επόμενo %d δευτερόλεπτo, θα γίνει "
-"επαναφορά των προηγούμενων ρυθμίσεων."
-msgstr[1] "Δοκιμή των νέων ρυθμίσεων. Αν δεν κάνετε κάτι στα επόμενα %d δευτερόλεπτα, θα γίνει "
-"επαναφορά των προηγούμενων ρυθμίσεων."
+"Δοκιμή των νέων ρυθμίσεων. Αν δεν κάνετε κάτι στo επόμενo %d δευτερόλεπτo, "
+"θα γίνει επαναφορά των προηγούμενων ρυθμίσεων."
+msgstr[1] ""
+"Δοκιμή των νέων ρυθμίσεων. Αν δεν κάνετε κάτι στα επόμενα %d δευτερόλεπτα, "
+"θα γίνει επαναφορά των προηγούμενων ρυθμίσεων."
 
-#: capplets/display/main.c:564
+#: capplets/display/main.c:570
 msgid "Do you want to keep this resolution?"
 msgstr "Θέλετε να κρατήσετε αυτή την ανάλυση?"
 
-#: capplets/display/main.c:589
+#: capplets/display/main.c:595
 msgid "Use _previous resolution"
 msgstr "Χρήση _προηγούμενης ανάλυσης"
 
-#: capplets/display/main.c:589
+#: capplets/display/main.c:595
 msgid "_Keep resolution"
 msgstr "_Διατήρηση ανάλυσης"
 
-#: capplets/display/main.c:740
+#: capplets/display/main.c:746
 msgid ""
 "The XServer does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
@@ -1187,7 +1194,7 @@ msgstr ""
 "Ο εξυπηρετητής Χ δεν υποστηρίζει την επέκταση XRandR και έτσι οι αλλαγές "
 "ανάλυσης runtime δεν είναι δυνατές."
 
-#: capplets/display/main.c:748
+#: capplets/display/main.c:754
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
@@ -1195,12 +1202,16 @@ msgstr ""
 "Η έκδοση της επέκτασης XRandR δεν είναι συμβατή με αυτό το πρόγραμμα, και "
 "έτσι οι αλλαγές ανάλυσης runtime δεν είναι δυνατές."
 
-#: capplets/file-types/file-types-capplet.c:196
+#: capplets/file-types/file-types-capplet.c:158
+msgid "Are you sure you want to permanently delete this entry?"
+msgstr "Είστε σίγουροι ότι θέλετε να διαγράψετε αυτήν την καταχώρηση?"
+
+#: capplets/file-types/file-types-capplet.c:210
 #: vfs-methods/themus/themus-properties-view.c:163
 msgid "Description"
 msgstr "Περιγραφή"
 
-#: capplets/file-types/file-types-capplet.c:218
+#: capplets/file-types/file-types-capplet.c:232
 msgid "Extensions"
 msgstr "Επεκτάσεις"
 
@@ -1660,13 +1671,13 @@ msgid_plural ""
 "effectively use the computer.  It is recommended that you select a size "
 "smaller than %d."
 msgstr[0] ""
-"Η γραμματοσειρά που επιλέχθηκε είναι %d σημείo μεγάλη, και αυτό κάνει δύσκολη την "
-"αποτελεσματική χρήση του υπολογιστή. Είναι καλύτερο να επιλέξετε ένα μέγεθος μικρότερο "
-"από %d."
+"Η γραμματοσειρά που επιλέχθηκε είναι %d σημείo μεγάλη, και αυτό κάνει "
+"δύσκολη την αποτελεσματική χρήση του υπολογιστή. Είναι καλύτερο να επιλέξετε "
+"ένα μέγεθος μικρότερο από %d."
 msgstr[1] ""
-"Η γραμματοσειρά που επιλέχθηκε είναι %d σημεία μεγάλη, και αυτό κάνει δύσκολη την "
-"αποτελεσματική χρήση του υπολογιστή. Είναι καλύτερο να επιλέξετε ένα μέγεθος μικρότερο "
-"από %d."
+"Η γραμματοσειρά που επιλέχθηκε είναι %d σημεία μεγάλη, και αυτό κάνει "
+"δύσκολη την αποτελεσματική χρήση του υπολογιστή. Είναι καλύτερο να επιλέξετε "
+"ένα μέγεθος μικρότερο από %d."
 
 #: capplets/font/main.c:514
 #, c-format
@@ -1679,13 +1690,13 @@ msgid_plural ""
 "effectively use the computer.  It is recommended that you select a smaller "
 "sized font."
 msgstr[0] ""
-"Η γραμματοσειρά που επιλέχθηκε είναι %d σημείo μεγάλη, και αυτό κάνει δύσκολη την "
-"αποτελεσματική χρήση του υπολογιστή. Είναι καλύτερο να επιλέξετε ένα μικρότερο "
-"μέγεθος γραμματοσειρά. "
+"Η γραμματοσειρά που επιλέχθηκε είναι %d σημείo μεγάλη, και αυτό κάνει "
+"δύσκολη την αποτελεσματική χρήση του υπολογιστή. Είναι καλύτερο να επιλέξετε "
+"ένα μικρότερο μέγεθος γραμματοσειρά. "
 msgstr[1] ""
-"Η γραμματοσειρά που επιλέχθηκε είναι %d σημεία μεγάλη, και αυτό κάνει δύσκολη την "
-"αποτελεσματική χρήση του υπολογιστή. Είναι καλύτερο να επιλέξετε ένα μικρότερο "
-"μέγεθος γραμματοσειρά. "
+"Η γραμματοσειρά που επιλέχθηκε είναι %d σημεία μεγάλη, και αυτό κάνει "
+"δύσκολη την αποτελεσματική χρήση του υπολογιστή. Είναι καλύτερο να επιλέξετε "
+"ένα μικρότερο μέγεθος γραμματοσειρά. "
 
 #: capplets/keybindings/eggcellrendererkeys.c:161
 #: capplets/keybindings/eggcellrendererkeys.c:162
@@ -1712,7 +1723,7 @@ msgstr "Το είδος της συντόμευσης."
 
 #: capplets/keybindings/eggcellrendererkeys.c:240
 #: capplets/keybindings/gnome-keybinding-properties.c:235
-#: libbackground/applier.c:588 typing-break/drwright.c:464
+#: libbackground/applier.c:588 typing-break/drwright.c:473
 msgid "Disabled"
 msgstr "Ανενεργό"
 
@@ -1741,7 +1752,7 @@ msgstr "Επιφάνεια εργασίας"
 msgid "Window Management"
 msgstr "Διαχείριση παραθύρων"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:737
+#: capplets/keybindings/gnome-keybinding-properties.c:736
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1750,19 +1761,19 @@ msgstr ""
 "Η συντόμευση \"%s\" χρησιμοποιείται ήδη για:\n"
 " \"%s\"\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:768
+#: capplets/keybindings/gnome-keybinding-properties.c:766
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Σφάλμα κατά τη ρύθμιση νέας συντόμευσης στη βάση δεδομένων ρυθμίσεων : %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:818
+#: capplets/keybindings/gnome-keybinding-properties.c:812
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr ""
 "Σφάλμα κατά τη κατάργηση ρύθμισης συντόμευσης στη βάση δεδομένων ρυθμίσεων : "
 "%s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:967
+#: capplets/keybindings/gnome-keybinding-properties.c:960
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1770,11 +1781,11 @@ msgstr ""
 "Αδυναμία εύρεσης θεμάτων πληκτρολογίου. Αυτό σημαίνει ότι δεν έγινε "
 "ολοκληρωμένη εγκατάσταση του GTK+."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:989
+#: capplets/keybindings/gnome-keybinding-properties.c:982
 msgid "Action"
 msgstr "Ενέργεια"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:1013
+#: capplets/keybindings/gnome-keybinding-properties.c:1006
 msgid "Shortcut"
 msgstr "Συντόμευση"
 
@@ -2328,8 +2339,8 @@ msgid ""
 "The gnome-theme-manager does not know how to change the themes on the "
 "current window manager."
 msgstr ""
-"Η διαχείριση θεμάτων του gnome δεν γνωρίζει πως να αλλάξει τα θέματα στο τρέχων "
-"διαχειριστή παραθύρων."
+"Η διαχείριση θεμάτων του gnome δεν γνωρίζει πως να αλλάξει τα θέματα στο "
+"τρέχων διαχειριστή παραθύρων."
 
 #: capplets/theme-switcher/gnome-theme-manager.c:665
 #: capplets/theme-switcher/gnome-theme-manager.c:725
@@ -2708,15 +2719,11 @@ msgstr "Χρήση κέλυφους ακόμα και αν τρέχει ο nauti
 msgid "Could not initialize Bonobo"
 msgstr "Αδυναμία εκκίνησης  Bonobo"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:325
-msgid "There was an error displaying help:"
-msgstr "Σφάλμα προβολής βοήθειας:"
-
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
 msgid "Slow Keys Alert"
 msgstr "Ειδοποίηση Slow Keys"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
 msgid ""
 "You just held down the Shift key for 8 seconds.  This is the shortcut for "
 "the Slow Keys feature, which affects the way your keyboard works."
@@ -2725,20 +2732,19 @@ msgstr ""
 "την λειτουργία Slow Keys, που επηρεάζει τον τρόπο λειτουργίας του "
 "πληκτρολογίου σας."
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
 msgid "Do you want to activate Slow Keys?"
 msgstr "Θέλετε να ενεργοποίησετε τα Slow Keys?"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
-msgid "Do you want to deactivate Sticky Keys?"
-msgstr "Θέλετε να απενεργοποίησετε τα Sticky Keys?"
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:414
+msgid "Do you want to deactivate Slow Keys?"
+msgstr "Θέλετε να απενεργοποιήσετε τα Slow Keys?"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:424
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:425
 msgid "Sticky Keys Alert"
 msgstr "Ειδοποίηση Sticky Keys"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:425
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
 msgid ""
 "You just pressed the Shift key 5 times in a row.  This is the shortcut for "
 "the Sticky Keys feature, which affects the way your keyboard works."
@@ -2747,7 +2753,7 @@ msgstr ""
 "την λειτουργία Sticky Keys, που επηρεάζει τον τρόπο λειτουργίας του "
 "πληκτρολογίου σας."
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
 msgid ""
 "You just pressed two keys at once, or pressed the Shift key 5 times in a "
 "row.  This turns off the Sticky Keys feature, which affects the way your "
@@ -2757,9 +2763,13 @@ msgstr ""
 "Αυτό είναι μια συντόμευση για την λειτουργία Sticky Keys, που επηρεάζει τον "
 "τρόπο λειτουργίας του πληκτρολογίου σας."
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
 msgid "Do you want to activate Sticky Keys?"
 msgstr "Θέλετε να ενεργοποίησετε τα Sticky Keys?"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:429
+msgid "Do you want to deactivate Sticky Keys?"
+msgstr "Θέλετε να απενεργοποίησετε τα Sticky Keys?"
 
 #: gnome-settings-daemon/gnome-settings-font.c:102
 #, c-format
@@ -2921,14 +2931,6 @@ msgstr "Οθόνη"
 #: libbackground/applier.c:280
 msgid "Screen on which BGApplier is to draw"
 msgstr "Οθόνη στην οποία θα σχεδιάζεται το BGApplier"
-
-#: libbackground/preview-file-selection.c:207
-msgid "Can't find an hbox, using a normal file selection"
-msgstr "Δε βρέθηκε hbox, χρήση απλού επιλογέα αρχείων"
-
-#: libbackground/preview-file-selection.c:212
-msgid "Preview"
-msgstr "Προεπισκόπηση"
 
 #: libsounds/sound-view.c:121 libsounds/sound-view.c:146
 msgid "The sound file for this event does not exist."
@@ -3093,39 +3095,39 @@ msgstr ""
 "Οι ρυθμίσεις XKB στο gconf θα αντικατασταθούν από το σύστημα όσον το δυνατόν "
 "πιό γρήγορα."
 
-#: typing-break/drw-break-window.c:189
+#: typing-break/drw-break-window.c:191
 msgid "_Postpone break"
 msgstr "Ανα_βολή διαλείμματος"
 
-#: typing-break/drw-break-window.c:227
+#: typing-break/drw-break-window.c:239
 msgid "Take a break!"
 msgstr "Κάντε διάλειμμα!"
 
 #. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
-#: typing-break/drwright.c:135
+#: typing-break/drwright.c:136
 msgid "/_Preferences"
 msgstr "/_Προτιμήσεις"
 
-#: typing-break/drwright.c:136
+#: typing-break/drwright.c:137
 msgid "/_About"
 msgstr "/_Περί"
 
-#: typing-break/drwright.c:138
+#: typing-break/drwright.c:139
 msgid "/_Take a Break"
 msgstr "/_Κάντε διάλειμμα"
 
-#: typing-break/drwright.c:482
+#: typing-break/drwright.c:491
 #, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
 msgstr[0] "%d λεπτό μέχρι το επόμενο διάλειμμα"
 msgstr[1] "%d λεπτά μέχρι το επόμενο διάλειμμα"
 
-#: typing-break/drwright.c:486
+#: typing-break/drwright.c:495
 msgid "Less than one minute until the next break"
 msgstr "Λιγότερο από ένα λεπτό μέχρι το επόμενο διάλειμμα"
 
-#: typing-break/drwright.c:581
+#: typing-break/drwright.c:590
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
@@ -3134,31 +3136,31 @@ msgstr ""
 "Αδυναμία ανάσυρσης του διαλόγου ιδιοτήτων του διαλείμματος πληκτρολόγησης με "
 "το ακόλουθο σφάλμα: %s"
 
-#: typing-break/drwright.c:621
+#: typing-break/drwright.c:638
 msgid "About GNOME Typing Monitor"
 msgstr "Περί της παρακολούθησης πληκτρολόγησης του GNOME "
 
-#: typing-break/drwright.c:645
+#: typing-break/drwright.c:662
 msgid "A computer break reminder."
 msgstr "Μια υπενθύμιση για διάλειμμα από τον υπολογιστή."
 
-#: typing-break/drwright.c:646
+#: typing-break/drwright.c:663
 msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
 msgstr "Γράφτηκε από τον Richard Hult &lt;richard@imendio.com&gt;"
 
-#: typing-break/drwright.c:647
+#: typing-break/drwright.c:664
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Γραφικά προστέθηκαν από τον Anders Carlsson"
 
-#: typing-break/drwright.c:820
+#: typing-break/drwright.c:839
 msgid "Break reminder"
 msgstr "Υπενθύμιση διαλείμματος"
 
-#: typing-break/main.c:94
+#: typing-break/main.c:93
 msgid "The typing monitor is already running."
 msgstr "Η παρακολούθηση πληκτρολόγησης τρέχει ήδη."
 
-#: typing-break/main.c:107
+#: typing-break/main.c:106
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
@@ -3592,4 +3594,16 @@ msgstr "Αύξηση έντασης"
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
 msgid "Volume up's shortcut."
 msgstr "Συντόμευση αύξησης έντασης."
+
+#~ msgid "Zgjidh një ngjyrë"
+#~ msgstr "Επιλογή ενός χρώματος"
+
+#~ msgid "There was an error displaying help:"
+#~ msgstr "Σφάλμα προβολής βοήθειας:"
+
+#~ msgid "Can't find an hbox, using a normal file selection"
+#~ msgstr "Δε βρέθηκε hbox, χρήση απλού επιλογέα αρχείων"
+
+#~ msgid "Preview"
+#~ msgstr "Προεπισκόπηση"
 
