@@ -28,7 +28,7 @@ program that a particular argument must be present on the command
 line. It takes one attribute, "arg", that specifies the argument to be 
 passed.
 
-<boolean> creates a checkbox. It requires an attribute "label" that
+<boolean> creates a checkbox. It requires an attribute "_label" that
 specifies the text that goes with the checkbox. The optional attribute 
 "arg-set" specifies what should be written on the command line when
 the checkbox is active. The attribute "test" specifies a boolean
@@ -37,9 +37,9 @@ expression that tests whether the option is set on the command line.
 <number> creates either a spin button or a slider, depending on the
 value of the attribute "type" ("spinbutton" for the former, "slider"
 for the latter). In the former case, the three mandatory attributes
-"label", "low-label", and "high-label" specify the labels that appear
+"_label", "_low-label", and "_high-label" specify the labels that appear
 above the slider, to the left, and to the right, respectively. In the
-latter case, only "label" is meaningful, and it is not mandatory. In
+latter case, only "_label" is meaningful, and it is not mandatory. In
 both cases, the mandatory attributes "low" and "high" specify numeric
 values for the minimum and maximum acceptable values for the
 parameter, and the optional "default" (set to the average of high and
@@ -47,7 +47,7 @@ low if not present) specifies the default value. The attribute "arg"
 specifies the command line fragment to write out with the character
 '%' replaced by the value supplied by the user.
 
-<select> creates an option menu. The optional "label" attribute
+<select> creates an option menu. The optional "_label" attribute
 specifies a label to appear to the left of the option menu. It must
 contain one or more <option> elements as children. Each <option> element
 is similar to a <boolean> element described above, with a mandatory
@@ -60,19 +60,7 @@ children appear in left-to-right order. It does not require an id
 attribute. When <number>'s are placed in an <hgroup>, they always
 appear as spinbuttons, never as sliders.
 
-2. Internationalization
-
-To internationalize a screensaver description, use the program
-extract-labels present in this distribution. Run the command
-
-   ./extract-labels <filename>
-
-to produce a file <filename>.h containing a list of gettext
-macros. <filename>.h may then be placed in POTFILES.in, and a
-dependency introduced in Makefile.am, so that translators may use
-their current tools to perform translations.
-
-3. Enabling and disabling controls
+2. Enabling and disabling controls
 
 Some options presented to screensavers are mutually exclusive. For
 example, in the case of Qix, it makes no sense to specify solid trails
@@ -85,7 +73,7 @@ given option is selected, the ids listed for all other <option>'s will
 be disabled before the ids listed for the selected <option> are
 enabled.
 
-4. Boolean and arithmetic expressions
+3. Boolean and arithmetic expressions
 
 These are used in two places: the "test" attribute and two other
 attributes used to perform basic arithmetic manipulation on arguments
