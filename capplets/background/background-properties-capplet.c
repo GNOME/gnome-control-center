@@ -149,9 +149,14 @@ get_legacy_settings (Bonobo_ConfigDatabase db)
 	gchar *val_string, *val_filename;
 	int val_ulong = -1, val_long = -1;
 
+	static const int wallpaper_types[] = { 0, 1, 3, 2 };
+
 	COPY_FROM_LEGACY (boolean, "/main/enabled", bool, "/Background/Default/Enabled=true");
 	COPY_FROM_LEGACY (filename, "/main/wallpaper_filename", string, "/Background/Default/wallpaper=none");
-	COPY_FROM_LEGACY (ulong, "/main/wallpaper_type", int, "/Background/Default/wallpaperAlign=0");
+
+	val_ulong = gnome_config_get_int ("/Background/Default/wallpaperAlign=0");
+	bonobo_config_set_ulong (db, "/main/wallpaper_type", wallpaper_types[val_ulong], NULL);
+
 	copy_color_from_legacy (db, "/main/color1", "/Background/Default/color1");
 	copy_color_from_legacy (db, "/main/color2", "/Background/Default/color2");
 
