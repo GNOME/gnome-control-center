@@ -52,6 +52,7 @@ const KeyListEntry desktop_key_list[] =
   { "/apps/metacity/global_keybindings/panel_main_menu", ALWAYS_VISIBLE, 0 },
   { "/apps/metacity/global_keybindings/run_command_screenshot", ALWAYS_VISIBLE, 0 },
   { "/apps/metacity/global_keybindings/run_command_window_screenshot", ALWAYS_VISIBLE, 0 },
+  { "/apps/metacity/global_keybindings/run_command_terminal", ALWAYS_VISIBLE, 0 },
 #ifdef USE_FBLEVEL
   { "/apps/gnome_settings_daemon/keybindings/brightness_down", ALWAYS_VISIBLE, 0 },
   { "/apps/gnome_settings_daemon/keybindings/brightness_up", ALWAYS_VISIBLE, 0 },
