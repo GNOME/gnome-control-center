@@ -226,7 +226,7 @@ setup_capplet_widget (void)
 
 	prefs->frozen++;
 
-	prefs_widget = PREFS_WIDGET (prefs_widget_new (GTK_WINDOW (capplet)));
+	prefs_widget = PREFS_WIDGET (prefs_widget_new (GTK_WINDOW (capplet->dialog)));
 
 	gtk_container_add (GTK_CONTAINER (capplet), GTK_WIDGET (prefs_widget));
 
