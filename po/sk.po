@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.5.1\n"
-"POT-Creation-Date: 2001-10-26 07:33-0400\n"
-"PO-Revision-Date: 2001-10-26 16:07CET\n"
+"POT-Creation-Date: 2001-11-11 15:10+0100\n"
+"PO-Revision-Date: 2001-11-11 15:19CET\n"
 "Last-Translator: Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -178,12 +178,20 @@ msgstr "Mo¾nosti pre pridanie a premenovanie umiestnení"
 msgid "Options for adding and removing backends"
 msgstr "Mo¾nosti pre pridanie a odstránenie strojov"
 
-#: capplets/background/applier.c:379
+#: capplets/background/applier.c:223
+msgid "Type"
+msgstr "Typ"
+
+#: capplets/background/applier.c:224
+msgid "Type of applier: APPLIER_ROOT for root window or APPLIER_PREVIEW for preview"
+msgstr ""
+
+#: capplets/background/applier.c:385
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "Nie je mo¾né naèíta» obrázok \"%s\", zakazujem tapetu."
 
-#: capplets/background/applier.c:518
+#: capplets/background/applier.c:491
 msgid "Disabled"
 msgstr "Vypnuté"
 
@@ -251,29 +259,13 @@ msgstr "Pou¾i» obrázok ako pozadie"
 msgid "Vertical gradient"
 msgstr "Vertikálny prechod"
 
-#: capplets/background/background-properties-capplet.c:47
-msgid "Set background image."
-msgstr "Nastavi» obrázok pozadia."
-
-#: capplets/background/background-properties-capplet.c:47
-msgid "IMAGE-FILE"
-msgstr "SÚBOR-OBRÁZKU"
-
-#: capplets/common/capplet-util.c:477
+#: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "Iba pou¾i» nastavenie a skonèi»"
 
-#: capplets/common/capplet-util.c:479
-msgid "Initialize the session"
-msgstr "Inicializova» sedenie"
-
-#: capplets/common/capplet-util.c:481
+#: capplets/common/capplet-util.c:243
 msgid "Retrieve and store legacy settings"
 msgstr "Získa» a ulo¾i» predchádzajúce nastavenie"
-
-#: capplets/common/capplet-util.c:490
-msgid "Capplet options"
-msgstr "Mo¾nosti pre Capplet"
 
 #: capplets/default-applications/default-applications.desktop.in.in.h:1
 msgid "Choose the applications used by default"
@@ -530,7 +522,7 @@ msgid "Key repeat rate:"
 msgstr "Rýchlos» opakovania kláves:"
 
 #: capplets/keyboard/keyboard-properties.glade.h:10
-#: capplets/screensaver/screensavers/attraction.xml.h:15
+#: capplets/screensaver/screensavers/attraction.xml.h:11
 #: capplets/screensaver/screensavers/qix.xml.h:8
 #: capplets/screensaver/screensavers/rorschach.xml.h:3
 msgid "Long"
@@ -545,7 +537,7 @@ msgid "Pitch (Hz)"
 msgstr "Vý¹ka (Hz)"
 
 #: capplets/keyboard/keyboard-properties.glade.h:13
-#: capplets/screensaver/screensavers/attraction.xml.h:20
+#: capplets/screensaver/screensavers/attraction.xml.h:16
 #: capplets/screensaver/screensavers/qix.xml.h:16
 #: capplets/screensaver/screensavers/rorschach.xml.h:7
 msgid "Short"
@@ -555,7 +547,7 @@ msgstr "Krátke"
 #: capplets/mouse/mouse-properties.glade.h:10
 #: capplets/screensaver/screensavers/3d_clock.xml.h:7
 #: capplets/screensaver/screensavers/ant.xml.h:16
-#: capplets/screensaver/screensavers/attraction.xml.h:21
+#: capplets/screensaver/screensavers/attraction.xml.h:17
 #: capplets/screensaver/screensavers/bsod.xml.h:6
 #: capplets/screensaver/screensavers/compass.xml.h:6
 #: capplets/screensaver/screensavers/flag.xml.h:10
@@ -601,7 +593,7 @@ msgstr "Pre µavákov"
 
 #: capplets/mouse/mouse-properties.glade.h:4
 #: capplets/screensaver/screensavers/3d_clock.xml.h:5
-#: capplets/screensaver/screensavers/attraction.xml.h:16
+#: capplets/screensaver/screensavers/attraction.xml.h:12
 #: capplets/screensaver/screensavers/qix.xml.h:9
 msgid "Low"
 msgstr "Nízka"
@@ -827,7 +819,7 @@ msgstr "Veµkos»:"
 
 #: capplets/screensaver/screensavers/3d_clock.xml.h:8
 #: capplets/screensaver/screensavers/ant.xml.h:17
-#: capplets/screensaver/screensavers/attraction.xml.h:22
+#: capplets/screensaver/screensavers/attraction.xml.h:18
 #: capplets/screensaver/screensavers/flag.xml.h:11
 #: capplets/screensaver/screensavers/rorschach.xml.h:8
 msgid "Small"
@@ -849,8 +841,8 @@ msgstr "Rozpad:"
 msgid ""
 "A cellular automaton that is really a two-dimensional Turing machine: as the "
 "heads (``ants'') walk along the screen, they change pixel values in their "
-"path.  Then, as they pass over changed pixels, their behavior is "
-"influenced.  Written by David Bagley."
+"path. Then, as they pass over changed pixels, their behavior is influenced. "
+"Written by David Bagley."
 msgstr ""
 "Celulárny automat, ktorý je vlastne dvojrozmerný Turingov stroj: ako sa "
 "hlavy (\"mravce\") pohybujú po obrazovke, menia hodnoty bodov. Potom, ked sa "
@@ -879,7 +871,7 @@ msgid "Many"
 msgstr "Veµa"
 
 #: capplets/screensaver/screensavers/ant.xml.h:8
-#: capplets/screensaver/screensavers/attraction.xml.h:17
+#: capplets/screensaver/screensavers/attraction.xml.h:13
 #: capplets/screensaver/screensavers/bsod.xml.h:5
 #: capplets/screensaver/screensavers/compass.xml.h:5
 #: capplets/screensaver/screensavers/flag.xml.h:7
@@ -926,7 +918,7 @@ msgid "Specific size of"
 msgstr "Daná veµkos»"
 
 #: capplets/screensaver/screensavers/ant.xml.h:20
-#: capplets/screensaver/screensavers/attraction.xml.h:23
+#: capplets/screensaver/screensavers/attraction.xml.h:19
 #: capplets/screensaver/screensavers/bsod.xml.h:7
 #: capplets/screensaver/screensavers/compass.xml.h:7
 #: capplets/screensaver/screensavers/flag.xml.h:13
@@ -967,8 +959,8 @@ msgstr "Atlantis"
 #: capplets/screensaver/screensavers/atlantis.xml.h:2
 msgid ""
 "This is xfishtank writ large: a GL animation of a number of sharks, "
-"dolphins, and whales.  The swimming motions are great.  Originally written "
-"by Mark Kilgard."
+"dolphins, and whales. The swimming motions are great. Originally written by "
+"Mark Kilgard."
 msgstr ""
 "Toto je prepis xfishtank: animácia GL niekoµkých ¾ralokov, delfínov a "
 "veµrýb. Pohyby sú fantastické. Pôvodne napísal Mark Kilgard."
@@ -992,37 +984,32 @@ msgstr "Då¾ka stopy"
 #: capplets/screensaver/screensavers/attraction.xml.h:9
 msgid ""
 "Like qix, this uses a simple motion model to generate many different display "
-"modes.  The control points attract each other up to a certain distance, and "
-"then begin to repel each other.  The attraction/repulsion is proportional to "
+"modes. The control points attract each other up to a certain distance, and "
+"then begin to repel each other. The attraction/repulsion is proportional to "
 "the distance between any two particles, similar to the strong and weak "
-"nuclear forces.  \n"
-"\n"
-"One of the most interesting ways to watch this hack is simply as bouncing "
-"balls, because their motions and interactions with each other are so odd.  "
-"Sometimes two balls will get into a tight orbit around each other, to be "
-"interrupted later by a third, or by the edge of the screen.  It looks quite "
-"chaotic.  \n"
-"\n"
-"Written by Jamie Zawinski, based on Lisp code by John Pezaris."
+"nuclear forces. One of the most interesting ways to watch this hack is "
+"simply as bouncing balls, because their motions and interactions with each "
+"other are so odd. Sometimes two balls will get into a tight orbit around "
+"each other, to be interrupted later by a third, or by the edge of the "
+"screen. It looks quite chaotic. Written by Jamie Zawinski, based on Lisp "
+"code by John Pezaris."
 msgstr ""
-"Podobne ako qix pou¾íva jedndouchý model pohybu na generovanie rôznych "
-"zobrazení. Ovládacie body sa pri»ahujú k sebe a¾ na nejakú vzdialenos», "
-"potom sa zaèínajú odpudzova». Tieto vz»ahy závisia na vzdialenosti dvojíc, "
-"podobne ako silné a slabé jadrové sily.\n"
-"\n"
-"Jedným z najzaujímavej¹ích spôsobov, "
-"ako sa na to díva», je predstava lôpt, preto¾e ich pohyby a vzájomné vz»ahy "
-"sú veµmi podobné. Niekedy sa stane, ¾e dve lopty zaènú okolo seba obieha», "
-"a¾ kým ich nevyru¹í tretia alebo okraj obrazovky. Vyzerá to dos» chaoticky.\n"
-"\n"
+"Podobne ako qix pou¾íva jednoduchý model pohybu na generovanie "
+"rôznych zobrazení. Ovládacie body sa pri»ahujú k sebe a¾ na nejakú "
+"vzdialenos», potom sa zaèínajú odpudzova». Tieto vz»ahy závisia "
+"na vzdialenosti dvojíc, podobne ako silné a slabé jadrové sily. "
+"Jedným z najzaujímavej¹ích spôsobov, ako sa na to díva», je predstava "
+"lôpt, preto¾e ich pohyby a vzájomné vz»ahy sú veµmi podobné. "
+"Niekedy sa stane, ¾e dve lopty zaènú okolo seba obieha», a¾ kým ich "
+"nevyru¹í tretia alebo okraj obrazovky. Vyzerá to dos» chaoticky. "
 "Napísal Jamie Zawinski podµa Lisp kódu od Johna Pezarisa."
 
-#: capplets/screensaver/screensavers/attraction.xml.h:14
+#: capplets/screensaver/screensavers/attraction.xml.h:10
 #: capplets/screensaver/screensavers/qix.xml.h:7
 msgid "Lines"
 msgstr "Èiary"
 
-#: capplets/screensaver/screensavers/attraction.xml.h:18
+#: capplets/screensaver/screensavers/attraction.xml.h:14
 #: capplets/screensaver/screensavers/braid.xml.h:5
 #: capplets/screensaver/screensavers/fadeplot.xml.h:9
 #: capplets/screensaver/screensavers/sierpinski.xml.h:4
@@ -1032,20 +1019,20 @@ msgstr "Èiary"
 msgid "Number of Colors"
 msgstr "Poèet farieb"
 
-#: capplets/screensaver/screensavers/attraction.xml.h:19
+#: capplets/screensaver/screensavers/attraction.xml.h:15
 #: capplets/screensaver/screensavers/qix.xml.h:14
 msgid "Polygons"
 msgstr "Mnohouholníky"
 
-#: capplets/screensaver/screensavers/attraction.xml.h:24
+#: capplets/screensaver/screensavers/attraction.xml.h:20
 msgid "Splines"
 msgstr "Spliny"
 
-#: capplets/screensaver/screensavers/attraction.xml.h:25
+#: capplets/screensaver/screensavers/attraction.xml.h:21
 msgid "Tails"
 msgstr "Stopy"
 
-#: capplets/screensaver/screensavers/attraction.xml.h:26
+#: capplets/screensaver/screensavers/attraction.xml.h:22
 msgid "Threshold of repulsion"
 msgstr "Hranica pre odpudzovanie"
 
@@ -1056,7 +1043,7 @@ msgstr "Blaster"
 #: capplets/screensaver/screensavers/blaster.xml.h:2
 msgid ""
 "Draws a simulation of flying space-combat robots (cleverly disguised as "
-"colored circles) doing battle in front of a moving star field.  Written by "
+"colored circles) doing battle in front of a moving star field. Written by "
 "Jonathan Lin."
 msgstr ""
 "Kreslí simuláciu lietajúcich bojových robotov (¹ikovne vymyslených ako "
@@ -1094,7 +1081,7 @@ msgstr "BlitSpin"
 #: capplets/screensaver/screensavers/lisa.xml.h:3
 #: capplets/screensaver/screensavers/lmorph.xml.h:1
 #: capplets/screensaver/screensavers/moire.xml.h:2
-#: capplets/screensaver/screensavers/munch.xml.h:9
+#: capplets/screensaver/screensavers/munch.xml.h:2
 #: capplets/screensaver/screensavers/pedal.xml.h:1
 #: capplets/screensaver/screensavers/sierpinski.xml.h:2
 #: capplets/screensaver/screensavers/spiral.xml.h:3
@@ -1128,7 +1115,7 @@ msgstr "Zobrazi» ¹etriè èiernobielo."
 #: capplets/screensaver/screensavers/lisa.xml.h:4
 #: capplets/screensaver/screensavers/lmorph.xml.h:2
 #: capplets/screensaver/screensavers/moire.xml.h:3
-#: capplets/screensaver/screensavers/munch.xml.h:11
+#: capplets/screensaver/screensavers/munch.xml.h:4
 #: capplets/screensaver/screensavers/pyro.xml.h:2
 #: capplets/screensaver/screensavers/sierpinski.xml.h:3
 #: capplets/screensaver/screensavers/spiral.xml.h:4
@@ -1159,7 +1146,7 @@ msgstr "Rýchlej¹ie"
 #: capplets/screensaver/screensavers/lisa.xml.h:10
 #: capplets/screensaver/screensavers/lmorph.xml.h:10
 #: capplets/screensaver/screensavers/moire.xml.h:8
-#: capplets/screensaver/screensavers/munch.xml.h:13
+#: capplets/screensaver/screensavers/munch.xml.h:6
 #: capplets/screensaver/screensavers/pyro.xml.h:10
 #: capplets/screensaver/screensavers/sierpinski.xml.h:6
 #: capplets/screensaver/screensavers/spiral.xml.h:9
@@ -1178,24 +1165,21 @@ msgstr "Rýchlos» otáèania o 90 stupòov."
 msgid ""
 "The ``blitspin'' hack repeatedly rotates a bitmap by 90 degrees by using "
 "logical operations: the bitmap is divided into quadrants, and the quadrants "
-"are shifted clockwise.  Then the same thing is done again with progressively "
+"are shifted clockwise. Then the same thing is done again with progressively "
 "smaller quadrants, except that all sub-quadrants of a given size are rotated "
-"in parallel.  Written by Jamie Zawinski based on some cool SmallTalk code "
-"seen in in Byte Magazine in 1981.  \n"
-"\n"
-"As you watch it, the image appears to dissolve into static and then "
-"reconstitute itself, but rotated.  You can provide the image to use, as an "
-"XBM or XPM file, or tell it to grab a screen image and rotate that."
+"in parallel. Written by Jamie Zawinski based on some cool SmallTalk code "
+"seen in in Byte Magazine in 1981. As you watch it, the image appears to "
+"dissolve into static and then reconstitute itself, but rotated. You can "
+"provide the image to use, as an XBM or XPM file, or tell it to grab a screen "
+"image and rotate that."
 msgstr ""
 "\"Blitspin\" opakovane otáèa bitovú mapu o 90 stupòov pomocou logických "
-"operácií: mapa je rozdelená na kvadranty a tie sa otáèajú po smere "
-"hodinových ruèièiek. A to sa opakuje s men¹ími kvadratami a¾ na to, ¾e pod-"
-"kvadranty danej veµkosti sa otáèajú paralelne. Napísal Jamie Zawinski podµa "
-"SmallTalk kódu z magazínu Byte z roku 1981.\n"
-"\n"
-"Keï to sledujete, obraz sa "
-"rozpadne aby sa zlo¾il otoèený. Mô¾ete mu nastavi» vlastný obrázok XMB alebo "
-"XPM alebo necha» rotova» zachytený obsah obrazovky."
+"operácií: mapa je rozdelená na kvadranty a tie sa otáèajú po smere hodinových "
+"ruèièiek. A to sa opakuje s men¹ími kvadratami a¾ na to, ¾e pod-kvadranty "
+"danej veµkosti sa otáèajú paralelne. Napísal Jamie Zawinski podµa SmallTalk "
+"kódu z magazínu Byte z roku 1981. Keï to sledujete, obraz sa rozpadne "
+"aby sa zlo¾il otoèený. Mô¾ete mu nastavi» vlastný obrázok XMB alebo XPM "
+"alebo necha» rotova» zachytený obsah obrazovky."
 
 #: capplets/screensaver/screensavers/bouboule.xml.h:1
 msgid "Bouboule"
@@ -1283,7 +1267,7 @@ msgstr "Poèet bublín."
 #: capplets/screensaver/screensavers/lisa.xml.h:12
 #: capplets/screensaver/screensavers/lmorph.xml.h:11
 #: capplets/screensaver/screensavers/moire.xml.h:10
-#: capplets/screensaver/screensavers/munch.xml.h:14
+#: capplets/screensaver/screensavers/munch.xml.h:7
 #: capplets/screensaver/screensavers/spiral.xml.h:10
 msgid "Speed of Motion."
 msgstr "Rýchlos» pohybu:"
@@ -1291,10 +1275,10 @@ msgstr "Rýchlos» pohybu:"
 #: capplets/screensaver/screensavers/bouboule.xml.h:10
 msgid ""
 "This draws what looks like a spinning, deforming baloon with varying-sized "
-"spots painted on its invisible surface.  Written by Jeremie Petit."
+"spots painted on its invisible surface. Written by Jeremie Petit."
 msgstr ""
-"Toto kreslí nieèo ako rotujúci a deformujúci sa balón s rôzne veµkými "
-"bodkami na neviditeµnom povrchu. Napísal Jeremie Petit."
+"Toto kreslí nieèo ako rotujúci a deformujúci sa balón s rôzne veµkými bodkami "
+"na neviditeµnom povrchu. Napísal Jeremie Petit."
 
 #: capplets/screensaver/screensavers/bouboule.xml.h:11
 msgid "Use red/blue 3d seperation."
@@ -1306,8 +1290,8 @@ msgstr "Braid"
 
 #: capplets/screensaver/screensavers/braid.xml.h:4
 msgid ""
-"Draws random color-cycling inter-braided concentric circles.  Written by "
-"John Neil."
+"Draws random color-cycling inter-braided concentric circles. Written by John "
+"Neil."
 msgstr "Kreslí náhodné farebné sústredné kruhy. Napísal John Neil."
 
 #: capplets/screensaver/screensavers/bsod.xml.h:1
@@ -1316,12 +1300,13 @@ msgstr "BSOD"
 
 #: capplets/screensaver/screensavers/bsod.xml.h:2
 msgid ""
-"BSOD stands for ``Blue Screen of Death.''  The finest in personal computer "
+"BSOD stands for ``Blue Screen of Death.'' The finest in personal computer "
 "emulation, this hack simulates popular screen savers from a number of less "
-"robust operating systems.  Written by Jamie Zawinski."
+"robust operating systems. Written by Jamie Zawinski."
 msgstr ""
-"BSOD znamená ``Blue Screen of Death.'' Simuluje populárne ¹etrièe obrazovky "
-"z menej stabilných operaèných systémov. Napísal Jamie Zawinski."
+"BSOD znamená ``Blue Screen of Death.'' Simuluje populárne "
+"¹etrièe obrazovky z menej stabilných operaèných systémov. "
+"Napísal Jamie Zawinski."
 
 #: capplets/screensaver/screensavers/bubble3d.xml.h:1
 msgid "Bubble3D"
@@ -1330,7 +1315,7 @@ msgstr "Bubble3D"
 #: capplets/screensaver/screensavers/bubble3d.xml.h:2
 msgid ""
 "Draws a stream of rising, undulating 3D bubbles, rising toward the top of "
-"the screen, with nice specular reflections.  Written by Richard Jones."
+"the screen, with nice specular reflections. Written by Richard Jones."
 msgstr ""
 "Kreslí prúd stúpajúcich 3D bublín, ktoré smerujú k hornému okraju obrazovky. "
 "Na bublinách sú odrazy. Napísal Richard Jones."
@@ -1355,21 +1340,20 @@ msgstr "Kresli» kruhy namiesto bublín."
 msgid ""
 "This simulates the kind of bubble formation that happens when water boils:"
 "small bubbles appear, and as they get closer to each other, they combine to "
-"form larger bubbles, which eventually pop.  Written by James Macnicol."
+"form larger bubbles, which eventually pop. Written by James Macnicol."
 msgstr ""
-"Simuluje formáciu bublín, ktorá vzniká pri vare vody: objavujú sa malé "
-"bubliny, a ak sa priblí¾ia, vytvoria väè¹ie bubliny, ktoré nakoniec prasknú. "
-"Napísal James Macnicol."
+"Simuluje formáciu bublín, ako keï sa varí voda: objavujú sa malé bublinky, tie sa spájajú, "
+"a¾ nakoniec prasknú. Vytvoril James Macnicol."
 
 #: capplets/screensaver/screensavers/bumps.xml.h:1
 msgid ""
 "A bit like `Spotlight', except that instead of merely exposing part of your "
-"desktop, it creates a bump map from it.  Basically, it 3D-izes a roaming "
-"section of your desktop, based on color intensity.  Written by Shane Smit."
+"desktop, it creates a bump map from it. Basically, it 3D-izes a roaming "
+"section of your desktop, based on color intensity. Written by Shane Smit."
 msgstr ""
 "Podobné 'Spotlight', ale namiesto ukazovania èastí plochy vytvorí z nej "
-"mapu. V podstate vytvorí 3D obraz a presúva ho po obrazovke v závislosti na "
-"intenzite farieb. Napísal Shane Smit."
+"mapu. V podstate vytvorí 3D obraz a presúva ho po obrazovke v závislosti "
+"na intenzite farieb. Napísal Shane Smit."
 
 #: capplets/screensaver/screensavers/bumps.xml.h:2
 msgid "Bumps"
@@ -1382,10 +1366,10 @@ msgstr "Cage"
 #: capplets/screensaver/screensavers/cage.xml.h:2
 msgid ""
 "This draws Escher's ``Impossible Cage,'' a 3d analog of a moebius strip, and "
-"rotates it in three dimensions.  Written by Marcelo Vianna."
+"rotates it in three dimensions. Written by Marcelo Vianna."
 msgstr ""
-"Kreslí Escherov ``Impossible Cage'', 3D analógiu k moebiovmu pásu a rotuje "
-"ho v 3D. Napísal Marcelo Vianna."
+"Kreslí Escherov ``Impossible Cage'', 3D analógiu k moebiovmu pásu a rotuje ho "
+"v 3D. Napísal Marcelo Vianna."
 
 #: capplets/screensaver/screensavers/ccurve.xml.h:1
 msgid "C Curve"
@@ -1393,11 +1377,9 @@ msgstr "C Curve"
 
 #: capplets/screensaver/screensavers/ccurve.xml.h:2
 msgid ""
-"Generates self-similar linear fractals, including the classic ``C Curve.''  "
+"Generates self-similar linear fractals, including the classic ``C Curve.'' "
 "Written by Rick Campbell."
-msgstr ""
-"Generuje lineárne fraktály, vrátane klasickej ``C krivky.'' Napísal Rick "
-"Campbell."
+msgstr "Generuje lineárne fraktály, vrátane klasickej ``C krivky.'' Napísal Rick Campbell."
 
 #: capplets/screensaver/screensavers/compass.xml.h:1
 msgid "Compass"
@@ -1410,7 +1392,7 @@ msgstr "Nepou¾i» dvojitý buffer"
 #: capplets/screensaver/screensavers/compass.xml.h:8
 msgid ""
 "This draws a compass, with all elements spinning about randomly, for that "
-"``lost and nauseous'' feeling.  Written by Jamie Zawinski."
+"``lost and nauseous'' feeling. Written by Jamie Zawinski."
 msgstr ""
 "Kreslí kompas, kde sa v¹etky jeho èasti náhodne otáèajú, pre pocit "
 "``stratenosti a ¾alúdoènej nevoµnosti''. Napísal Jamie Zawinski."
@@ -1441,8 +1423,8 @@ msgstr "Semená"
 
 #: capplets/screensaver/screensavers/coral.xml.h:7
 msgid ""
-"Simulates coral growth, albeit somewhat slowly.  This image doesn't really "
-"do it justice.  Written by Frederick Roeber."
+"Simulates coral growth, albeit somewhat slowly. This image doesn't really do "
+"it justice. Written by Frederick Roeber."
 msgstr "Simuluje rast korálov, aj keï pomaly. Napísal Frederick Roeber."
 
 #: capplets/screensaver/screensavers/coral.xml.h:10
@@ -1455,11 +1437,11 @@ msgstr "Cosmos"
 
 #: capplets/screensaver/screensavers/cosmos.xml.h:2
 msgid ""
-"Draws fireworks and zooming, fading flares.  By Tom Campbell.  You can find "
-"it at <http://www.mindspring.com/~campbell/cosmos/>."
+"Draws fireworks and zooming, fading flares. By Tom Campbell. You can find it "
+"at <http://www.mindspring.com/~campbell/cosmos/>."
 msgstr ""
-"Kreslí ohòostroj a vybuchujúce rakety. Vytvoril Tom Campell. Nájdete ho na "
-"<http://www.mindspring.com/~campbell/cosmos/>."
+"Kreslí ohòostroj a vybuchujúce rakety. Vytvoril Tom Campell. "
+"Nájdete ho na <http://www.mindspring.com/~campbell/cosmos/>."
 
 #: capplets/screensaver/screensavers/critical.xml.h:1
 msgid "Critical"
@@ -1467,11 +1449,11 @@ msgstr "Critical"
 
 #: capplets/screensaver/screensavers/critical.xml.h:2
 msgid ""
-"Draws a system of self-organizing lines.  It starts out as random squiggles, "
-"but after a few iterations, order begins to appear.  Written by Martin Pool."
+"Draws a system of self-organizing lines. It starts out as random squiggles, "
+"but after a few iterations, order begins to appear. Written by Martin Pool."
 msgstr ""
-"Kreslí systém organizujúcich sa èiar. Zaèína náhodne a po niekoµkých "
-"iteráciách zaène vznika» poriadok. Napísal Martin Pool."
+"Kreslí systém orgranizujúcich sa èiar. Zaèína náhodne a po niekoµkých iteráciách "
+"zaène vznika» poriadok. Napísal Martin Pool."
 
 #: capplets/screensaver/screensavers/crystal.xml.h:1
 msgid "Cell"
@@ -1501,9 +1483,9 @@ msgstr "Poèet mnohouholníkov."
 
 #: capplets/screensaver/screensavers/cynosure.xml.h:1
 msgid ""
-"A hack similar to `greynetic', but less frenetic.  The first implementation "
-"was by Stephen Linhart; then Ozymandias G.  Desiderata wrote a Java applet "
-"clone.  That clone was discovered by Jamie Zawinski, and ported to C for "
+"A hack similar to `greynetic', but less frenetic. The first implementation "
+"was by Stephen Linhart; then Ozymandias G. Desiderata wrote a Java applet "
+"clone. That clone was discovered by Jamie Zawinski, and ported to C for "
 "inclusion here."
 msgstr ""
 "Podobné 'greynetic', ale menej ¹ialené. Prvú implementáciu vytvoril Stephen "
@@ -1545,8 +1527,8 @@ msgstr "DangerBall"
 
 #: capplets/screensaver/screensavers/dangerball.xml.h:2
 msgid ""
-"Draws a ball that periodically extrudes many random spikes.  Ouch! Written "
-"by Jamie Zawinski."
+"Draws a ball that periodically extrudes many random spikes. Ouch! Written by "
+"Jamie Zawinski."
 msgstr "Kreslí loptu, z ktorej sa opakovane vysúvajú kopie. Napísal Jamie Zawinski."
 
 #: capplets/screensaver/screensavers/decayscreen.xml.h:1
@@ -1555,17 +1537,15 @@ msgstr "DecayScreen"
 
 #: capplets/screensaver/screensavers/decayscreen.xml.h:6
 msgid ""
-"This grabs an image of whatever is on your screen, and makes it melt.  "
-"You've no doubt seen this effect before, but no screensaver would really be "
-"complete without it.  It works best if there's something colorful visible.  "
+"This grabs an image of whatever is on your screen, and makes it melt. You've "
+"no doubt seen this effect before, but no screensaver would really be "
+"complete without it. It works best if there's something colorful visible. "
 "Warning, if the effect continues after the screen saver is off, seek medical "
-"attention.  Written by David Wald and Vivek Khera.  \n"
-"\n"
-"A number of these screenhacks have the ability to take an image of your "
-"desktop and manipulate it in some way.  On SGI systems, these programs are "
-"able to (at random) pull their source image from the system's video input "
-"instead!  This works nicely if you leave some some random television station "
-"plugged in."
+"attention. Written by David Wald and Vivek Khera. A number of these "
+"screenhacks have the ability to take an image of your desktop and manipulate "
+"it in some way. On SGI systems, these programs are able to (at random) pull "
+"their source image from the system's video input instead! This works nicely "
+"if you leave some some random television station plugged in."
 msgstr ""
 
 #: capplets/screensaver/screensavers/deco.xml.h:1
@@ -1578,9 +1558,9 @@ msgstr "Deco"
 
 #: capplets/screensaver/screensavers/deco.xml.h:3
 msgid ""
-"This one subdivides and colors rectangles randomly.  It looks kind of like "
-"Brady-Bunch-era rec-room wall paneling.  (Raven says: ``this screensaver is "
-"ugly enough to peel paint.'')  Written by Jamie Zawinski, inspired by Java "
+"This one subdivides and colors rectangles randomly. It looks kind of like "
+"Brady-Bunch-era rec-room wall paneling. (Raven says: ``this screensaver is "
+"ugly enough to peel paint.'') Written by Jamie Zawinski, inspired by Java "
 "code by Michael Bayne."
 msgstr ""
 
@@ -1603,19 +1583,19 @@ msgstr "Deluxe"
 
 #: capplets/screensaver/screensavers/deluxe.xml.h:2
 msgid ""
-"This draws a pulsing sequence of stars, circles, and lines.  It would look "
+"This draws a pulsing sequence of stars, circles, and lines. It would look "
 "better if it was faster, but as far as I can tell, there is no way to make "
-"this be both: fast, and flicker-free.  Yet another reason X sucks.  Written "
-"by Jamie Zawinski."
+"this be both: fast, and flicker-free. Yet another reason X sucks. Written by "
+"Jamie Zawinski."
 msgstr ""
 
 #: capplets/screensaver/screensavers/demon.xml.h:1
 msgid ""
 "A cellular automaton that starts with a random field, and organizes it into "
-"stripes and spirals.  Written by David Bagley."
+"stripes and spirals. Written by David Bagley."
 msgstr ""
-"Celulárny automat, ktorý zaène s náhodným poµom a zorganizuje ho do pruhov a "
-"¹pirál. Napísal David Bagley."
+"Celulárny automat, ktorý zaène s náhodným poµom a zorganizuje ho do pruhov "
+"a ¹pirál. Napísal David Bagley."
 
 #: capplets/screensaver/screensavers/demon.xml.h:2
 msgid "Demon"
@@ -1628,7 +1608,7 @@ msgstr "Discrete"
 #: capplets/screensaver/screensavers/discrete.xml.h:6
 msgid ""
 "More ``discrete map'' systems, including new variants of Hopalong and Julia, "
-"and a few others.  Written by Tim Auckland."
+"and a few others. Written by Tim Auckland."
 msgstr ""
 
 #: capplets/screensaver/screensavers/discrete.xml.h:8
@@ -1645,7 +1625,7 @@ msgstr "Distort"
 #: capplets/screensaver/screensavers/distort.xml.h:2
 msgid ""
 "This hack grabs an image of the screen, and then lets a transparent lens "
-"wander around the screen, magnifying whatever is underneath.  Written by "
+"wander around the screen, magnifying whatever is underneath. Written by "
 "Jonas Munsin."
 msgstr ""
 
@@ -1660,7 +1640,7 @@ msgstr "Fraktály majú rás»."
 #: capplets/screensaver/screensavers/drift.xml.h:7
 msgid ""
 "How could one possibly describe this except as ``drifting recursive fractal "
-"cosmic flames?''  Another fine hack from the Scott Draves collection of fine "
+"cosmic flames?'' Another fine hack from the Scott Draves collection of fine "
 "hacks."
 msgstr ""
 
@@ -1679,15 +1659,12 @@ msgstr "ElectricSheep"
 #: capplets/screensaver/screensavers/electricsheep.xml.h:2
 msgid ""
 "ElectricSheep is an xscreensaver module that displays mpeg video of an "
-"animated fractal flame.  In the background, it contributes render cycles to "
-"the next animation.  Periodically it uploades completed frames to the "
-"server, where they are compressed for distribution to all clients.  \n"
-"\n"
-"This program is recommended only if you have a high bandwidth connection to "
-"the Internet.  \n"
-"\n"
-"By Scott Draves.  You can find it at <http://www.electricsheep.org/>.  See "
-"that web site for configuration information."
+"animated fractal flame. In the background, it contributes render cycles to "
+"the next animation. Periodically it uploades completed frames to the server, "
+"where they are compressed for distribution to all clients. This program is "
+"recommended only if you have a high bandwidth connection to the Internet. By "
+"Scott Draves. You can find it at <http://www.electricsheep.org/>. See that "
+"web site for configuration information."
 msgstr ""
 
 #: capplets/screensaver/screensavers/epicycle.xml.h:2
@@ -1702,10 +1679,10 @@ msgstr "Sekundy"
 
 #: capplets/screensaver/screensavers/epicycle.xml.h:7
 msgid ""
-"This program draws the path traced out by a point on the edge of a circle.  "
+"This program draws the path traced out by a point on the edge of a circle. "
 "That circle rotates around a point on the rim of another circle, and so on, "
-"several times.  These were the basis for the pre-heliocentric model of "
-"planetary motion.  Written by James Youngman."
+"several times. These were the basis for the pre-heliocentric model of "
+"planetary motion. Written by James Youngman."
 msgstr ""
 
 #: capplets/screensaver/screensavers/epicycle.xml.h:8
@@ -1716,7 +1693,7 @@ msgstr "Ako dlho bude zobrazený výsledok."
 #: capplets/screensaver/screensavers/extrusion.xml.h:1
 msgid ""
 "Draws various rotating extruded shapes that twist around, lengthen, and turn "
-"inside out.  Created by David Konerding from the samples that come with the "
+"inside out. Created by David Konerding from the samples that come with the "
 "GL Extrusion library by Linas Vepstas."
 msgstr ""
 
@@ -1726,11 +1703,11 @@ msgstr "Extrusion"
 
 #: capplets/screensaver/screensavers/fadeplot.xml.h:4
 msgid ""
-"Draws what looks like a waving ribbon following a sinusoidal path.  Written "
+"Draws what looks like a waving ribbon following a sinusoidal path. Written "
 "by Bas van Gaalen and Charles Vidal."
 msgstr ""
-"Kreslí nieèo ako vlniacu su pásku podµa sínusoidy. Napísal Bas van Gaalen a "
-"Charles Vidal."
+"Kreslí nieèo ako vlniacu su pásku podµa sínusoidy. Napísal Bas van Gaalen "
+"a Charles Vidal."
 
 #: capplets/screensaver/screensavers/fadeplot.xml.h:5
 msgid "FadePlot"
@@ -1767,15 +1744,15 @@ msgstr "Text na vlajke"
 
 #: capplets/screensaver/screensavers/flag.xml.h:15
 msgid ""
-"This draws a waving colored flag, that undulates its way around the screen.  "
-"The trick is the flag can contain arbitrary text and images.  By default, it "
+"This draws a waving colored flag, that undulates its way around the screen. "
+"The trick is the flag can contain arbitrary text and images. By default, it "
 "displays either the current system name and OS type, or a picture of "
 "``Bob,'' but you can replace the text or the image with a command-line "
-"option.  Written by Charles Vidal and Jamie Zawinski."
+"option. Written by Charles Vidal and Jamie Zawinski."
 msgstr ""
 
 #: capplets/screensaver/screensavers/flame.xml.h:1
-msgid "Another iterative fractal generator.  Written by Scott Draves."
+msgid "Another iterative fractal generator. Written by Scott Draves."
 msgstr "Ïal¹í iteratívny generátor fraktálov. Napísal Scott Draves."
 
 #: capplets/screensaver/screensavers/flame.xml.h:4
@@ -1797,7 +1774,7 @@ msgstr "Bodov na fraktál."
 #: capplets/screensaver/screensavers/flow.xml.h:1
 msgid ""
 "Another series of strange attractors: a flowing series of points, making "
-"strange rotational shapes.  Written by Jeff Butterworth."
+"strange rotational shapes. Written by Jeff Butterworth."
 msgstr ""
 "Ïal¹ia séria divných pri»ahujúcich sa objektov: prúd bodov, ktoré vytvárajú "
 "divné otáèajúce sa tvary. Napísal Jeff Butterworth."
@@ -1820,7 +1797,7 @@ msgstr "Poèet stromov."
 
 #: capplets/screensaver/screensavers/forest.xml.h:10
 msgid ""
-"This draws fractal trees.  Written by Peter Baumung.  Everybody loves "
+"This draws fractal trees. Written by Peter Baumung. Everybody loves "
 "fractals, right?"
 msgstr "Kreslí fraktálne stromy. Napísal Paterm Baumung. Ka¾dý má rád fraktály, v¹ak?"
 
@@ -1831,7 +1808,7 @@ msgstr "Galaxy"
 #: capplets/screensaver/screensavers/galaxy.xml.h:2
 msgid ""
 "This draws spinning galaxies, which then collide and scatter their stars to "
-"the, uh, four winds or something.  Originally an Amiga program by Uli "
+"the, uh, four winds or something. Originally an Amiga program by Uli "
 "Siegmund."
 msgstr ""
 
@@ -1842,13 +1819,13 @@ msgstr "Gears"
 #: capplets/screensaver/screensavers/gears.xml.h:2
 msgid ""
 "This draws sets of turning, interlocking gears, rotating in three "
-"dimensions.  Another GL hack, by Danny Sung, Brian Paul, Ed Mackey, and "
-"Jamie Zawinski."
+"dimensions. Another GL hack, by Danny Sung, Brian Paul, Ed Mackey, and Jamie "
+"Zawinski."
 msgstr ""
 
 #: capplets/screensaver/screensavers/gflux.xml.h:1
 msgid ""
-"Draws a rippling waves on a rotating wireframe grid, using GL.  Written by "
+"Draws a rippling waves on a rotating wireframe grid, using GL. Written by "
 "Josiah Pease."
 msgstr ""
 
@@ -1858,7 +1835,7 @@ msgstr "GFlux"
 
 #: capplets/screensaver/screensavers/glplanet.xml.h:1
 msgid ""
-"Draws a planet bouncing around in space.  Written by David Konerding.  The "
+"Draws a planet bouncing around in space. Written by David Konerding. The "
 "built-in image is a map of the earth (extracted from `xearth'), but you can "
 "wrap any texture around the sphere, e.g., the planetary textures that come "
 "with `ssystem'."
@@ -1870,7 +1847,7 @@ msgstr "GLPlanet"
 
 #: capplets/screensaver/screensavers/gltext.xml.h:1
 msgid ""
-"Displays a few lines of text spinning around in a solid 3D font.  Written by "
+"Displays a few lines of text spinning around in a solid 3D font. Written by "
 "Jamie Zawinski."
 msgstr "Zobrazí pár riadkov textu pomocou 3D písma. Napísal Jamie Zawinski."
 
@@ -1884,11 +1861,11 @@ msgstr "Goban"
 
 #: capplets/screensaver/screensavers/goban.xml.h:2
 msgid ""
-"Replays historical games of go (aka wei-chi and baduk) on the screen.  By "
-"Scott Draves.  You can find it at <http://www.draves.org/goban/>."
+"Replays historical games of go (aka wei-chi and baduk) on the screen. By "
+"Scott Draves. You can find it at <http://www.draves.org/goban/>."
 msgstr ""
-"Hrá historické partie hry go (èi¾e wei-chi a baduk). Vytvoril Scott Draves. "
-"Nájdete ho na adrese <http://www.draves.org/goban/>."
+"Hrá historické partie hry go (èi¾e wei-chi a baduk). Vytvoril "
+"Scott Draves. Nájdete ho na adrese <http://www.draves.org/goban/>."
 
 #: capplets/screensaver/screensavers/goop.xml.h:4
 msgid "Goop"
@@ -1900,13 +1877,13 @@ msgstr "Priehµadné bubliny."
 
 #: capplets/screensaver/screensavers/goop.xml.h:9
 msgid ""
-"This draws set of animating, transparent, amoeba-like blobs.  The blobs "
+"This draws set of animating, transparent, amoeba-like blobs. The blobs "
 "change shape as they wander around the screen, and they are translucent, so "
 "you can see the lower blobs through the higher ones, and when one passes "
-"over another, their colors merge.  Written by Jamie Zawinski.  I got the "
-"idea for this from a cool mouse pad I have, which achieves the same kind of "
+"over another, their colors merge. Written by Jamie Zawinski. I got the idea "
+"for this from a cool mouse pad I have, which achieves the same kind of "
 "effect in real life by having several layers plastic with colored oil "
-"between them.  Written by Jamie Zawinski."
+"between them. Written by Jamie Zawinski."
 msgstr ""
 
 #: capplets/screensaver/screensavers/goop.xml.h:10
@@ -1931,8 +1908,8 @@ msgstr "Dráhy majú slabnú»."
 
 #: capplets/screensaver/screensavers/grav.xml.h:9
 msgid ""
-"This program draws a simple orbital simulation.  If you turn on trails, it "
-"looks kind of like a cloud-chamber photograph.  Written by Greg Bowering."
+"This program draws a simple orbital simulation. If you turn on trails, it "
+"looks kind of like a cloud-chamber photograph. Written by Greg Bowering."
 msgstr ""
 
 #: capplets/screensaver/screensavers/greynetic.xml.h:3
@@ -1940,9 +1917,7 @@ msgid "Greynetic"
 msgstr "Greynetic"
 
 #: capplets/screensaver/screensavers/greynetic.xml.h:6
-msgid ""
-"This draws random colored and stippled rectangles.  Written by Jamie "
-"Zawinski."
+msgid "This draws random colored and stippled rectangles. Written by Jamie Zawinski."
 msgstr "Kreslí náhodne vyfarbené a vyplnené obdå¾niky. Napísal Jamie Zawinski."
 
 #: capplets/screensaver/screensavers/halo.xml.h:1
@@ -1963,9 +1938,9 @@ msgstr "Poèet kruhov."
 
 #: capplets/screensaver/screensavers/halo.xml.h:12
 msgid ""
-"This draws trippy psychedelic circular patterns that hurt to look at.  It "
-"can also animate the control-points, but that takes a lot of CPU and "
-"bandwidth.  Written by Jamie Zawinski."
+"This draws trippy psychedelic circular patterns that hurt to look at. It can "
+"also animate the control-points, but that takes a lot of CPU and bandwidth. "
+"Written by Jamie Zawinski."
 msgstr ""
 
 #: capplets/screensaver/screensavers/halo.xml.h:13
@@ -1978,8 +1953,8 @@ msgstr "Helix"
 
 #: capplets/screensaver/screensavers/helix.xml.h:5
 msgid ""
-"This repeatedly generates spirally string-art-ish patterns.  Written by "
-"Jamie Zawinski."
+"This repeatedly generates spirally string-art-ish patterns. Written by Jamie "
+"Zawinski."
 msgstr "Opakovane generuje ¹pirálovité vzorky. Napísal Jamie Zawinski."
 
 #: capplets/screensaver/screensavers/helix.xml.h:6
@@ -1997,7 +1972,7 @@ msgstr "Poèet bodov pred zmenou farby."
 #: capplets/screensaver/screensavers/hopalong.xml.h:11
 msgid ""
 "This draws lacy fractal patterns, based on iteration in the imaginary plane, "
-"from a 1986 Scientific American article.  Mostly written by Patrick Naughton."
+"from a 1986 Scientific American article. Mostly written by Patrick Naughton."
 msgstr ""
 
 #: capplets/screensaver/screensavers/hyperball.xml.h:1
@@ -2008,7 +1983,7 @@ msgstr "Hyperball"
 msgid ""
 "Hyperball is to hypercube as dodecahedron is to cube: this displays a 2D "
 "projection of the sequence of 3D objects which are the projections of the 4D "
-"analog to the dodecahedron.  Written by Joe Keane."
+"analog to the dodecahedron. Written by Joe Keane."
 msgstr ""
 
 #: capplets/screensaver/screensavers/hypercube.xml.h:1
@@ -2033,10 +2008,9 @@ msgid ""
 "projections of the 4D analog to the cube: as a square is composed of four "
 "lines, each touching two others; and a cube is composed of six squares, each "
 "touching four others; a hypercube is composed of eight cubes, each touching "
-"six others.  To make it easier to visualize the rotation, it uses a "
-"different color for the edges of each face.  Don't think about it too long, "
-"or your brain will melt.  Written by Joe Keane, Fritz Mueller, and Jamie "
-"Zawinski."
+"six others. To make it easier to visualize the rotation, it uses a different "
+"color for the edges of each face. Don't think about it too long, or your "
+"brain will melt. Written by Joe Keane, Fritz Mueller, and Jamie Zawinski."
 msgstr ""
 
 #: capplets/screensaver/screensavers/ifs.xml.h:3
@@ -2045,7 +2019,7 @@ msgstr "IFS"
 
 #: capplets/screensaver/screensavers/ifs.xml.h:5
 msgid ""
-"This one draws spinning, colliding iterated-function-system images.  Written "
+"This one draws spinning, colliding iterated-function-system images. Written "
 "by Massimino Pascal."
 msgstr ""
 "Toto kreslí otáèajúce sa obrázky z iterovaných funkcií. Napísal Massimino "
@@ -2057,25 +2031,23 @@ msgstr "IMSmap"
 
 #: capplets/screensaver/screensavers/imsmap.xml.h:2
 msgid ""
-"This generates random cloud-like patterns.  It looks quite different in "
-"monochrome and color.  The basic idea is to take four points on the edge of "
-"the image, and assign each a random ``elevation''.  Then find the point "
+"This generates random cloud-like patterns. It looks quite different in "
+"monochrome and color. The basic idea is to take four points on the edge of "
+"the image, and assign each a random ``elevation''. Then find the point "
 "between them, and give it a value which is the average of the other four, "
-"plus some small random offset.  Then coloration is done based on "
-"elevation.  \n"
-"\n"
+"plus some small random offset. Then coloration is done based on elevation. "
 "The color selection is done by binding the elevation to either hue, "
-"saturation, or brightness, and assigning random values to the others.  The "
+"saturation, or brightness, and assigning random values to the others. The "
 "``brightness'' mode tends to yield cloudlike patterns, and the others tend "
-"to generate images that look like heat-maps or CAT-scans.  Written by "
-"Juergen Nickelsen and Jamie Zawinski."
+"to generate images that look like heat-maps or CAT-scans. Written by Juergen "
+"Nickelsen and Jamie Zawinski."
 msgstr ""
 
 #: capplets/screensaver/screensavers/interference.xml.h:1
 msgid ""
 "Another color-field hack, this one works by computing decaying sinusoidal "
-"waves, and allowing them to interfere with each other as their origins "
-"move.  Written by Hannu Mallat."
+"waves, and allowing them to interfere with each other as their origins move. "
+"Written by Hannu Mallat."
 msgstr ""
 
 #: capplets/screensaver/screensavers/interference.xml.h:2
@@ -2089,11 +2061,11 @@ msgstr "Jigsaw"
 #: capplets/screensaver/screensavers/jigsaw.xml.h:3
 msgid ""
 "This grabs a screen image, carves it up into a jigsaw puzzle, shuffles it, "
-"and then solves the puzzle.  This works especially well when you feed it an "
+"and then solves the puzzle. This works especially well when you feed it an "
 "external video signal instead of letting it grab the screen image (actually, "
-"I guess this is generally true...)\tWhen it is grabbing a video image, it is "
+"I guess this is generally true...) When it is grabbing a video image, it is "
 "sometimes pretty hard to guess what the image is going to look like once the "
-"puzzle is solved.  Written by Jamie Zawinski."
+"puzzle is solved. Written by Jamie Zawinski."
 msgstr ""
 
 #: capplets/screensaver/screensavers/julia.xml.h:5
@@ -2102,20 +2074,20 @@ msgstr "Julia"
 
 #: capplets/screensaver/screensavers/julia.xml.h:10
 msgid ""
-"This one draws spinning, animating (are you detecting a pattern here yet?)  "
-"explorations of the Julia set.  You've probably seen static images of this "
-"fractal form before, but it's a lot of fun to watch in motion as well.  One "
+"This one draws spinning, animating (are you detecting a pattern here yet?) "
+"explorations of the Julia set. You've probably seen static images of this "
+"fractal form before, but it's a lot of fun to watch in motion as well. One "
 "interesting thing is that there is a small swinging dot passing in front of "
 "the image, which indicates the control point from which the rest of the "
-"image was generated.  Written by Sean McCullough."
+"image was generated. Written by Sean McCullough."
 msgstr ""
 
 #: capplets/screensaver/screensavers/kaleidescope.xml.h:1
 msgid ""
 "Another clone of an ancient meme, consisting largely of frenetic rotational "
-"motion of colored lines.  This one is by Ron Tapia.  The motion is nice, but "
-"I think it needs more solids, or perhaps just brighter colors.  More "
-"variations in the rotational speed might help, too."
+"motion of colored lines. This one is by Ron Tapia. The motion is nice, but I "
+"think it needs more solids, or perhaps just brighter colors. More variations "
+"in the rotational speed might help, too."
 msgstr ""
 
 #: capplets/screensaver/screensavers/kaleidescope.xml.h:4
@@ -2141,14 +2113,14 @@ msgstr "Kumppa"
 #: capplets/screensaver/screensavers/kumppa.xml.h:2
 msgid ""
 "Spiraling, spinning, and very, very fast splashes of color rush toward the "
-"screen.  Written by Teemu Suutari."
+"screen. Written by Teemu Suutari."
 msgstr ""
 
 #: capplets/screensaver/screensavers/lament.xml.h:1
 msgid ""
-"Animates a simulation of Lemarchand's Box, repeatedly solving itself.  "
-"Requires OpenGL, and a machine with fast hardware support for texture maps.  "
-"Warning: occasionally opens doors.  Written by Jamie Zawinski."
+"Animates a simulation of Lemarchand's Box, repeatedly solving itself. "
+"Requires OpenGL, and a machine with fast hardware support for texture maps. "
+"Warning: occasionally opens doors. Written by Jamie Zawinski."
 msgstr ""
 
 #: capplets/screensaver/screensavers/lament.xml.h:2
@@ -2170,8 +2142,8 @@ msgstr "Dlh¹ie"
 
 #: capplets/screensaver/screensavers/laser.xml.h:5
 msgid ""
-"Moving radiating lines, that look vaguely like scanning laser beams.  "
-"Written by Pascal Pensa.  (Frankie say: relax.)"
+"Moving radiating lines, that look vaguely like scanning laser beams. Written "
+"by Pascal Pensa. (Frankie say: relax.)"
 msgstr ""
 
 #: capplets/screensaver/screensavers/laser.xml.h:6
@@ -2193,8 +2165,8 @@ msgstr "Lightning"
 
 #: capplets/screensaver/screensavers/lightning.xml.h:5
 msgid ""
-"This one draws crackling fractal lightning bolts.  It's simple, direct, and "
-"to the point.  If only it had sound...  Written by Keith Romberg."
+"This one draws crackling fractal lightning bolts. It's simple, direct, and "
+"to the point. If only it had sound... Written by Keith Romberg."
 msgstr ""
 
 #: capplets/screensaver/screensavers/lisa.xml.h:5
@@ -2217,15 +2189,15 @@ msgstr "Men¹ie"
 
 #: capplets/screensaver/screensavers/lisa.xml.h:13
 msgid ""
-"This draws Lisajous loops, by Caleb Cullen.  Remember that device they had "
-"the Phantom Zone prisoners in during their trial in Superman?  I think that "
+"This draws Lisajous loops, by Caleb Cullen. Remember that device they had "
+"the Phantom Zone prisoners in during their trial in Superman? I think that "
 "was one of these."
 msgstr ""
 
 #: capplets/screensaver/screensavers/lissie.xml.h:1
 msgid ""
-"Another Lissajous figure.  This one draws the progress of circular shapes "
-"along a path.  Written by Alexander Jolk."
+"Another Lissajous figure. This one draws the progress of circular shapes "
+"along a path. Written by Alexander Jolk."
 msgstr ""
 "Ïal¹í obrázok Lissajous. Kreslí priebeh kruhových tvarov podµa danej cesty. "
 "Napísal Alexander Jolk."
@@ -2256,8 +2228,8 @@ msgstr "Body:"
 
 #: capplets/screensaver/screensavers/lmorph.xml.h:12
 msgid ""
-"This generates random spline-ish line drawings and morphs between them.  "
-"Written by Sverre H.  Huseby and Glenn T.  Lines."
+"This generates random spline-ish line drawings and morphs between them. "
+"Written by Sverre H. Huseby and Glenn T. Lines."
 msgstr ""
 
 #: capplets/screensaver/screensavers/loop.xml.h:1
@@ -2266,7 +2238,7 @@ msgstr "Loop"
 
 #: capplets/screensaver/screensavers/loop.xml.h:2
 msgid ""
-"This one produces loop-shaped colonies that spawn, age, and eventually die.  "
+"This one produces loop-shaped colonies that spawn, age, and eventually die. "
 "Written by David Bagley."
 msgstr ""
 
@@ -2300,15 +2272,15 @@ msgstr "Koridor cez logo?"
 
 #: capplets/screensaver/screensavers/maze.xml.h:8
 msgid ""
-"This is the ancient X maze demo, modified to work with xscreensaver.  It "
-"generates a random maze, then solves it with visual feedback.  Originally by "
+"This is the ancient X maze demo, modified to work with xscreensaver. It "
+"generates a random maze, then solves it with visual feedback. Originally by "
 "Jim Randell; modified by a cast of thousands."
 msgstr ""
 
 #: capplets/screensaver/screensavers/moebius.xml.h:1
 msgid ""
-"Another M.  C.  Escher hack by Marcelo Vianna, this one draws ``Moebius "
-"Strip II,'' a GL image of ants walking along the surface of a moebius strip."
+"Another M. C. Escher hack by Marcelo Vianna, this one draws ``Moebius Strip "
+"II,'' a GL image of ants walking along the surface of a moebius strip."
 msgstr ""
 
 #: capplets/screensaver/screensavers/moebius.xml.h:2
@@ -2319,8 +2291,8 @@ msgstr "Moebius"
 msgid ""
 "Another example of the fun you can have with moire interference patterns; "
 "this hack generates fields of concentric circles or ovals, and combines the "
-"planes with various operations.  The planes are moving independently of one "
-"another, causing the interference lines to ``spray.''  Written by Jamie "
+"planes with various operations. The planes are moving independently of one "
+"another, causing the interference lines to ``spray.'' Written by Jamie "
 "Zawinski."
 msgstr ""
 
@@ -2338,10 +2310,10 @@ msgstr "Moire"
 
 #: capplets/screensaver/screensavers/moire.xml.h:11
 msgid ""
-"This one draws cool circular interference patterns.  Most of the circles you "
+"This one draws cool circular interference patterns. Most of the circles you "
 "see aren't explicitly rendered, but show up as a result of interactions "
-"between the other pixels that were drawn.  Written by Jamie Zawinski, "
-"inspired by Java code by Michael Bayne.  As he pointed out, the beauty of "
+"between the other pixels that were drawn. Written by Jamie Zawinski, "
+"inspired by Java code by Michael Bayne. As he pointed out, the beauty of "
 "this one is that the heart of the display algorithm can be expressed with "
 "just a pair of loops and a handful of arithmetic, giving it a high ``display "
 "hack metric''."
@@ -2349,8 +2321,8 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/molecule.xml.h:1
 msgid ""
-"Draws several different representations of molecules.  Some common molecules "
-"are built in, and it can also read PDB (Protein Data Base) files as input.  "
+"Draws several different representations of molecules. Some common molecules "
+"are built in, and it can also read PDB (Protein Data Base) files as input. "
 "Written by Jamie Zawinski."
 msgstr ""
 
@@ -2360,7 +2332,7 @@ msgstr "Molecule"
 
 #: capplets/screensaver/screensavers/morph3d.xml.h:1
 msgid ""
-"Another 3d shape-changing GL hack, by Marcelo Vianna.  It has the same shiny-"
+"Another 3d shape-changing GL hack, by Marcelo Vianna. It has the same shiny-"
 "plastic feel as Superquadrics, as many computer-generated objects do..."
 msgstr ""
 
@@ -2370,7 +2342,7 @@ msgstr "Morph3D"
 
 #: capplets/screensaver/screensavers/mountain.xml.h:1
 msgid ""
-"Generates random 3d plots that look vaguely mountainous.  Written by Pascal "
+"Generates random 3d plots that look vaguely mountainous. Written by Pascal "
 "Pensa."
 msgstr "Generuje náhodný 3d obraz, ktorý pripomína hory. Napísal Pascal Pensa."
 
@@ -2380,46 +2352,32 @@ msgstr "Mountain"
 
 #: capplets/screensaver/screensavers/munch.xml.h:1
 msgid ""
-"\n"
-"        DATAI 2\t\t\t\t\t\t\t      \n"
-"        ADDB 1,2\t\t\t\t\t\t      \n"
-"        ROTC 2,-22\t\t\t\t\t\t      \n"
-"        XOR 1,2\t\t\t\t\t\t\t      \n"
-"        JRST .-4\t\t\t\t\t\t      \n"
-"\t\t\t\t\t\t\t\t      \n"
-"As reported by HAKMEM, in 1962, Jackson Wright wrote the above PDP-1 code.  "
-"That code still lives on in this screenhack, some 35 years later.  The "
-"number of lines of enclosing code has increased substantially, however.  "
-"This version is by Tim Showalter."
+"DATAI 2 ADDB 1,2 ROTC 2,-22 XOR 1,2 JRST .-4 As reported by HAKMEM, in 1962, "
+"Jackson Wright wrote the above PDP-1 code. That code still lives on in this "
+"screenhack, some 35 years later. The number of lines of enclosing code has "
+"increased substantially, however. This version is by Tim Showalter."
 msgstr ""
-"\n"
-"        DATAI 2\t\t\t\t\t\t\t      \n"
-"        ADDB 1,2\t\t\t\t\t\t      \n"
-"        ROTC 2,-22\t\t\t\t\t\t      \n"
-"        XOR 1,2\t\t\t\t\t\t\t      \n"
-"        JRST .-4\t\t\t\t\t\t      \n"
-"\t\t\t\t\t\t\t\t      \n"
-"Ako oznámil v roku 1962 HAKMEM, "
-"Jackson Wright napísal tento kód pre PDP-1. Kód stále ¾ije v tomto ¹etrièi, "
-"u¾ 35 rokov. Poèet èiar bol ale výrazne zvý¹ený. Túto verziu vytvoril Tim "
-"Showalter."
+"DATAI 2 ADDB 1,2 ROTC 2,-22 XOR 1,2 JRST .-4 "
+"Ako oznámil v roku 1962 HAKMEM, Jackson Wright napísal tento kód pre PDP-1. "
+"Kód stále ¾ije v tomto ¹etrièi, u¾ 35 rokov. Poèet èiar bol ale výrazne "
+"zvý¹ený. Túto verziu vytvoril Tim Showalter."
 
-#: capplets/screensaver/screensavers/munch.xml.h:10
+#: capplets/screensaver/screensavers/munch.xml.h:3
 msgid "Draw square at weird starting points."
 msgstr "Kresli» obdå¾niky na divných ¹tartovacích miestach."
 
-#: capplets/screensaver/screensavers/munch.xml.h:12
+#: capplets/screensaver/screensavers/munch.xml.h:5
 msgid "Munch"
 msgstr "Munch"
 
-#: capplets/screensaver/screensavers/munch.xml.h:15
+#: capplets/screensaver/screensavers/munch.xml.h:8
 msgid "Use XOR drawing function."
 msgstr "Pou¾i» pre kreslenie XOR."
 
 #: capplets/screensaver/screensavers/nerverot.xml.h:1
 msgid ""
 "Draws different shapes composed of nervously vibrating squiggles, as if seen "
-"through a camera operated by a monkey on crack.  By Dan Bornstein."
+"through a camera operated by a monkey on crack. By Dan Bornstein."
 msgstr ""
 "Kreslí rôzne tvary zlo¾ené z vibrujúcich èastí, ako keby ste sa dívali cez "
 "kameru v rukách ¹ialenej opice. Vytvoril Dan Bornstein."
@@ -2430,9 +2388,9 @@ msgstr "NerveRot"
 
 #: capplets/screensaver/screensavers/noseguy.xml.h:1
 msgid ""
-"A little man with a big nose wanders around your screen saying things.  The "
+"A little man with a big nose wanders around your screen saying things. The "
 "things which he says can come from a file, or from an external program like "
-"`zippy' or `fortune'.  This was extracted from `xnlock' by Dan Heller.  "
+"`zippy' or `fortune'. This was extracted from `xnlock' by Dan Heller. "
 "Colorized by Jamie Zawinski."
 msgstr ""
 
@@ -2450,9 +2408,9 @@ msgstr "Pedal"
 
 #: capplets/screensaver/screensavers/pedal.xml.h:8
 msgid ""
-"This is sort of a combination spirograph/string-art.  It generates a large, "
+"This is sort of a combination spirograph/string-art. It generates a large, "
 "complex polygon, and lets the X server do the bulk of the work by giving it "
-"an even/odd winding rule.  Written by Dale Moore, based on some ancient PDP-"
+"an even/odd winding rule. Written by Dale Moore, based on some ancient PDP-"
 "11 code."
 msgstr ""
 "Toto je nieèo ako kombinácia spirograph/string-art. Generuje veµké, zlo¾ité "
@@ -2473,41 +2431,33 @@ msgstr "Penetrate"
 
 #: capplets/screensaver/screensavers/penetrate.xml.h:2
 msgid ""
-"This hack simulates the classic arcade game Missile Command.  Written by "
-"Adam Miller."
+"This hack simulates the classic arcade game Missile Command. Written by Adam "
+"Miller."
 msgstr "Simuluje klasickú hru Missile Command. Vytvoril Adam Miller."
 
 #: capplets/screensaver/screensavers/penrose.xml.h:1
 msgid ""
 "Draws quasiperiodic tilings; think of the implications on modern formica "
-"technology.  Written by Timo Korvola.  \n"
-"\n"
-"In April 1997, Sir Roger Penrose, a British math professor who has worked "
-"with Stephen Hawking on such topics as relativity, black holes, and whether "
-"time has a beginning, filed a copyright-infringement lawsuit against the "
-"Kimberly-Clark Corporation, which Penrose said copied a pattern he created "
-"(a pattern demonstrating that ``a nonrepeating pattern could exist in "
-"nature'') for its Kleenex quilted toilet paper.  Penrose said he doesn't "
-"like litigation but, ``When it comes to the population of Great Britain "
-"being invited by a multinational to wipe their bottoms on what appears to be "
-"the work of a Knight of the Realm, then a last stand must be taken.'' \t\t\t"
-"\t\t\t\t\t    \n"
-"\n"
-"As reported by News of the Weird #491, 4-jul-1997."
+"technology. Written by Timo Korvola. In April 1997, Sir Roger Penrose, a "
+"British math professor who has worked with Stephen Hawking on such topics as "
+"relativity, black holes, and whether time has a beginning, filed a copyright-"
+"infringement lawsuit against the Kimberly-Clark Corporation, which Penrose "
+"said copied a pattern he created (a pattern demonstrating that ``a "
+"nonrepeating pattern could exist in nature'') for its Kleenex quilted toilet "
+"paper. Penrose said he doesn't like litigation but, ``When it comes to the "
+"population of Great Britain being invited by a multinational to wipe their "
+"bottoms on what appears to be the work of a Knight of the Realm, then a last "
+"stand must be taken.'' As reported by News of the Weird #491, 4-jul-1997."
 msgstr ""
-"Kreslí kváziperiodické dla¾dice. Vytvoril Timo Korvola.\n"
-"\n"
-"V aprili 1997, Sir "
-"Roger Penrose, anglický profesor matematiky, ktorý spolupracoval so "
-"Stephenom Hawkingom na témach ako relativita, èierne diery, poèiatok èasu, "
-"za¾aloval Kimberly-Clark Corporation, ktorá vraj okopírovala vzorku, ktorú "
-"vytvoril (vzorka, kde je vidie», ¾e \"neopakujúca sa vzorka v prírode mô¾e "
-"existova»\"), pre toaletný papier Kleenex. \t\t\t"
-"\t\t\t\t\t    \n"
-"\n"
-"Prebrané z \"News of the Weird\" è.491, 4-jul-1997."
+"Kreslí kváziperiodické dla¾dice. Vytvoril Timo Korvola. "
+"V aprili 1997, Sir Roger Penrose, anglický profesor matematiky, ktorý "
+"spolupracoval so Stephenom Hawkingom na témach ako relativita, èierne diery, "
+"poèiatok èasu, za¾aloval Kimberly-Clark Corporation, ktorá vraj okopírovala "
+"vzorku, ktorú vytvoril (vzorka, kde je vidie», ¾e \"neopakujúca sa vzorka v "
+"prírode mô¾e existova»\"), pre toaletný papier Kleenex. "
+"Prebrané z \"News of the Weird\" #491, 4-jul-1997."
 
-#: capplets/screensaver/screensavers/penrose.xml.h:6
+#: capplets/screensaver/screensavers/penrose.xml.h:2
 msgid "Penrose"
 msgstr "Penrose"
 
@@ -2517,8 +2467,8 @@ msgstr "Petri"
 
 #: capplets/screensaver/screensavers/petri.xml.h:2
 msgid ""
-"This simulates colonies of mold growing in a petri dish.  Growing colored "
-"circles overlap and leave spiral interference in their wake.  Written by Dan "
+"This simulates colonies of mold growing in a petri dish. Growing colored "
+"circles overlap and leave spiral interference in their wake. Written by Dan "
 "Bornstein."
 msgstr ""
 "Toto simuluje kolónie pliesne rastúce v petriho miske. Farebné rastúce kruhy "
@@ -2527,7 +2477,7 @@ msgstr ""
 #: capplets/screensaver/screensavers/phosphor.xml.h:1
 msgid ""
 "Draws a simulation of an old terminal, with large pixels and long-sustain "
-"phosphor.  It can run any program as a source of the text it displays.  "
+"phosphor. It can run any program as a source of the text it displays. "
 "Written by Jamie Zawinski."
 msgstr ""
 "Kreslí simuláciu starého terminálu s veµkými bodmi a dlhotrvajúcim "
@@ -2541,7 +2491,7 @@ msgstr "Phosphor"
 #: capplets/screensaver/screensavers/pipes.xml.h:1
 msgid ""
 "If you've ever been in the same room with a Windows NT machine, you've "
-"probably seen this GL hack.  This version is by Marcelo Vianna."
+"probably seen this GL hack. This version is by Marcelo Vianna."
 msgstr ""
 "Ak ste u¾ niekedy videli Windows NT, asi ste tento ¹etriè u¾ poznali. Táto "
 "verzia je od Marcela Vianna."
@@ -2554,7 +2504,7 @@ msgstr "Pipes"
 msgid ""
 "Draws some intersecting planes, making use of alpha blending, fog, textures, "
 "and mipmaps, plus a ``frames per second'' meter so that you can tell how "
-"fast your graphics card is...  Requires OpenGL.  Written by David Konerding."
+"fast your graphics card is... Requires OpenGL. Written by David Konerding."
 msgstr ""
 
 #: capplets/screensaver/screensavers/pulsar.xml.h:2
@@ -2578,7 +2528,7 @@ msgid "Pyro"
 msgstr "Pyro"
 
 #: capplets/screensaver/screensavers/pyro.xml.h:9
-msgid "Pyro draws exploding fireworks.  Blah blah blah.  Written by Jamie Zawinski."
+msgid "Pyro draws exploding fireworks. Blah blah blah. Written by Jamie Zawinski."
 msgstr ""
 
 #: capplets/screensaver/screensavers/qix.xml.h:1
@@ -2619,10 +2569,10 @@ msgstr "Vzdialenos» medzi èiarami"
 
 #: capplets/screensaver/screensavers/qix.xml.h:21
 msgid ""
-"This is the swiss army chainsaw of qix programs.  It bounces a series of "
-"line segments around the screen, and uses variations on this basic motion "
-"pattern to produce all sorts of different presentations: line segments, "
-"filled polygons, overlapping translucent areas...  Written by Jamie Zawinski."
+"This is the swiss army chainsaw of qix programs. It bounces a series of line "
+"segments around the screen, and uses variations on this basic motion pattern "
+"to produce all sorts of different presentations: line segments, filled "
+"polygons, overlapping translucent areas... Written by Jamie Zawinski."
 msgstr ""
 
 #: capplets/screensaver/screensavers/qix.xml.h:22
@@ -2647,9 +2597,9 @@ msgstr "XOR stopy"
 
 #: capplets/screensaver/screensavers/rd-bomb.xml.h:1
 msgid ""
-"Another variation of the `Bomb' program by Scott Draves.  This draws a grid "
+"Another variation of the `Bomb' program by Scott Draves. This draws a grid "
 "of growing square-like shapes that, once they overtake each other, react in "
-"unpredictable ways.  ``RD'' stands for reaction-diffusion."
+"unpredictable ways. ``RD'' stands for reaction-diffusion."
 msgstr ""
 
 #: capplets/screensaver/screensavers/rd-bomb.xml.h:2
@@ -2662,9 +2612,9 @@ msgstr "Ripples (oily)"
 
 #: capplets/screensaver/screensavers/ripples.xml.h:2
 msgid ""
-"This draws rippling interference patterns like splashing water.  With the -"
+"This draws rippling interference patterns like splashing water. With the -"
 "water option, it manipulates your desktop image to look like something is "
-"dripping into it.  Written by Tom Hammersley."
+"dripping into it. Written by Tom Hammersley."
 msgstr ""
 
 #: capplets/screensaver/screensavers/rocks.xml.h:1
@@ -2674,8 +2624,8 @@ msgstr "Rocks"
 #: capplets/screensaver/screensavers/rocks.xml.h:2
 msgid ""
 "This draws an animation of flight through an asteroid field, with changes in "
-"rotation and direction.  It can also display 3D separations for red/blue "
-"glasses!  Mostly written by Jamie Zawinski."
+"rotation and direction. It can also display 3D separations for red/blue "
+"glasses! Mostly written by Jamie Zawinski."
 msgstr ""
 
 #: capplets/screensaver/screensavers/rorschach.xml.h:1
@@ -2700,11 +2650,11 @@ msgstr "Rýchlos» mazania obrazovky"
 
 #: capplets/screensaver/screensavers/rorschach.xml.h:10
 msgid ""
-"This generates random inkblot patterns.  The algorithm is deceptively simple "
+"This generates random inkblot patterns. The algorithm is deceptively simple "
 "for how well it works; it merely walks a dot around the screen randomly, and "
-"then reflects the image horizontally, vertically, or both.  Any deep-seated "
-"neurotic tendencies which this program reveals are your own problem.  "
-"Written by Jamie Zawinski."
+"then reflects the image horizontally, vertically, or both. Any deep-seated "
+"neurotic tendencies which this program reveals are your own problem. Written "
+"by Jamie Zawinski."
 msgstr ""
 
 #: capplets/screensaver/screensavers/rorschach.xml.h:11
@@ -2717,8 +2667,8 @@ msgstr "Symetrické podµa Y"
 
 #: capplets/screensaver/screensavers/rotor.xml.h:1
 msgid ""
-"Another ancient xlock demo, this one by Tom Lawrence.  It draws a line "
-"segment moving along a complex spiraling curve.  I tweaked this to generate "
+"Another ancient xlock demo, this one by Tom Lawrence. It draws a line "
+"segment moving along a complex spiraling curve. I tweaked this to generate "
 "curvier lines, but still frames of it don't look like much."
 msgstr ""
 
@@ -2728,7 +2678,7 @@ msgstr "Rotor"
 
 #: capplets/screensaver/screensavers/rotzoomer.xml.h:1
 msgid ""
-"Creates a collage of rotated and scaled portions of the screen.  Written by "
+"Creates a collage of rotated and scaled portions of the screen. Written by "
 "Claudio Matsuoka."
 msgstr ""
 
@@ -2739,7 +2689,7 @@ msgstr "RotZoomer"
 #: capplets/screensaver/screensavers/rubik.xml.h:1
 msgid ""
 "Draws a Rubik's Cube that rotates in three dimensions and repeatedly "
-"shuffles and solves itself.  Another fine GL hack by Marcelo Vianna."
+"shuffles and solves itself. Another fine GL hack by Marcelo Vianna."
 msgstr ""
 
 #: capplets/screensaver/screensavers/rubik.xml.h:2
@@ -2753,7 +2703,7 @@ msgstr "ShadeBobs"
 #: capplets/screensaver/screensavers/shadebobs.xml.h:2
 msgid ""
 "This draws smoothly-shaded oscilating oval patterns, that look something "
-"like vapor trails or neon tubes.  Written by Shane Smit."
+"like vapor trails or neon tubes. Written by Shane Smit."
 msgstr ""
 
 #: capplets/screensaver/screensavers/sierpinski3d.xml.h:1
@@ -2763,7 +2713,7 @@ msgstr "Sierpinski3D"
 #: capplets/screensaver/screensavers/sierpinski3d.xml.h:2
 msgid ""
 "This draws the three-dimensional variant of the recursive Sierpinski "
-"triangle fractal, using GL.  Written by Tim Robinson and Jamie Zawinski."
+"triangle fractal, using GL. Written by Tim Robinson and Jamie Zawinski."
 msgstr ""
 
 #: capplets/screensaver/screensavers/sierpinski.xml.h:5
@@ -2773,7 +2723,7 @@ msgstr "Sierpinski"
 #: capplets/screensaver/screensavers/sierpinski.xml.h:8
 msgid ""
 "This draws the two-dimensional variant of the recursive Sierpinski triangle "
-"fractal.  Written by Desmond Daignault."
+"fractal. Written by Desmond Daignault."
 msgstr ""
 
 #: capplets/screensaver/screensavers/slidescreen.xml.h:1
@@ -2785,8 +2735,8 @@ msgid ""
 "This grabs an image of whatever is on your screen, divides it into a grid, "
 "and then randomly shuffles the squares around as if it was one of those "
 "annoying ``16-puzzle'' games, where there is a grid of squares, one of which "
-"is missing.  I hate trying to solve those puzzles, but watching one permute "
-"itself is more amusing.  Written by Jamie Zawinski."
+"is missing. I hate trying to solve those puzzles, but watching one permute "
+"itself is more amusing. Written by Jamie Zawinski."
 msgstr ""
 
 #: capplets/screensaver/screensavers/slip.xml.h:1
@@ -2796,11 +2746,11 @@ msgstr "Slip"
 #: capplets/screensaver/screensavers/slip.xml.h:2
 msgid ""
 "This program throws some random bits on the screen, then sucks them through "
-"a jet engine and spews them out the other side.  To avoid turning the image "
+"a jet engine and spews them out the other side. To avoid turning the image "
 "completely to mush, every now and then it will and then it interjects some "
 "splashes of color into the scene, or go into a spin cycle, or stretch the "
 "image like taffy, or (this is my addition) grab an image of your current "
-"desktop to chew on.  Originally written by Scott Draves; whacked on by Jamie "
+"desktop to chew on. Originally written by Scott Draves; whacked on by Jamie "
 "Zawinski."
 msgstr ""
 
@@ -2810,37 +2760,31 @@ msgstr "Sonar"
 
 #: capplets/screensaver/screensavers/sonar.xml.h:2
 msgid ""
-"This program draws a simulation of a sonar screen.  Written by default, it "
+"This program draws a simulation of a sonar screen. Written by default, it "
 "displays a random assortment of ``bogies'' on the screen, but if compiled "
 "properly, it can ping (pun intended) your local network, and actually plot "
-"the proximity of the other hosts on your network to you.  It would be easy "
-"to make it monitor other sources of data, too.  (Processes?\t Active network "
-"connections?  CPU usage per user?)\tWritten by Stephen Martin."
+"the proximity of the other hosts on your network to you. It would be easy to "
+"make it monitor other sources of data, too. (Processes? Active network "
+"connections? CPU usage per user?) Written by Stephen Martin."
 msgstr ""
 
 #: capplets/screensaver/screensavers/speedmine.xml.h:1
 msgid ""
-"Simulates speeding down a rocky mineshaft, or a funky dancing worm.  Written "
-"by Conrad Parker.\n"
-"\n"
-"\n"
-"!"
-"=============================================================================\n"
-"!\n"
-"! Documentation for some programs that are not bundled with XScreenSaver\n"
-"!\n"
-"!"
+"Simulates speeding down a rocky mineshaft, or a funky dancing worm. Written "
+"by Conrad Parker. !"
+"============================================================================= ! ! "
+"Documentation for some programs that are not bundled with XScreenSaver ! !"
 "============================================================================="
 msgstr ""
 
-#: capplets/screensaver/screensavers/speedmine.xml.h:9
+#: capplets/screensaver/screensavers/speedmine.xml.h:2
 msgid "SpeedMine"
 msgstr "SpeedMine"
 
 #: capplets/screensaver/screensavers/sphere.xml.h:1
 msgid ""
 "Another of the classic screenhacks of the distant past, this one draws "
-"shaded spheres in multiple colors.  This hack traces its lineage back to Tom "
+"shaded spheres in multiple colors. This hack traces its lineage back to Tom "
 "Duff in 1982."
 msgstr ""
 
@@ -2850,7 +2794,7 @@ msgstr "Sphere"
 
 #: capplets/screensaver/screensavers/spiral.xml.h:5
 msgid ""
-"Moving circular patterns, by Peter Schmitzberger.  Moving circular patterns "
+"Moving circular patterns, by Peter Schmitzberger. Moving circular patterns "
 "means moire; interference patterns, of course."
 msgstr ""
 
@@ -2861,7 +2805,7 @@ msgstr "Spiral"
 #: capplets/screensaver/screensavers/spotlight.xml.h:1
 msgid ""
 "Draws a spotlight scanning across a black screen, illumnating the underlying "
-"desktop when it passes.  Written by Rick Schultz."
+"desktop when it passes. Written by Rick Schultz."
 msgstr ""
 
 #: capplets/screensaver/screensavers/spotlight.xml.h:2
@@ -2869,7 +2813,7 @@ msgid "Spotlight"
 msgstr "Spotlight"
 
 #: capplets/screensaver/screensavers/sproingies.xml.h:1
-msgid "Q-Bert meets Marble Madness!  Written by Ed Mackey."
+msgid "Q-Bert meets Marble Madness! Written by Ed Mackey."
 msgstr ""
 
 #: capplets/screensaver/screensavers/sproingies.xml.h:2
@@ -2878,8 +2822,8 @@ msgstr "Sproingies"
 
 #: capplets/screensaver/screensavers/squiral.xml.h:1
 msgid ""
-"Draws a set of interacting, square-spiral-producing automata.  The spirals "
-"grow outward until they hit something, then they go around it.  Written by "
+"Draws a set of interacting, square-spiral-producing automata. The spirals "
+"grow outward until they hit something, then they go around it. Written by "
 "Jeff Epler."
 msgstr ""
 
@@ -2893,12 +2837,15 @@ msgstr "SSystem"
 
 #: capplets/screensaver/screensavers/ssystem.xml.h:2
 msgid ""
-"SSystem is a GL Solar System simulator.  It simulates flybys of Sun, the "
-"nine planets and a few major satellites, with four camera modes.  Written by "
-"Raul Alonso.  This is not included with the XScreenSaver package, but if you "
-"don't have it already, you can find it at <http://www1.las.es/~amil/ssystem/"
-">."
+"SSystem is a GL Solar System simulator. It simulates flybys of Sun, the nine "
+"planets and a few major satellites, with four camera modes. Written by Raul "
+"Alonso. This is not included with the XScreenSaver package, but if you don't "
+"have it already, you can find it at <http://www1.las.es/~amil/ssystem/>."
 msgstr ""
+"SSystem je GL simulátor slneènej sústavy. Simuluje let okolo Slnka, "
+"devä» planét a velké ich mesiace, a to v ¹tyroch re¾imoch pohladu. "
+"Napísal Raul Alonso. Toto nie je súèas»ou balíka "
+"XScreenSaver, ale ak ho nemáte, nájdete ho na adrese <http://www1.las.es/~amil/ssystem/>."
 
 #: capplets/screensaver/screensavers/stairs.xml.h:1
 msgid "Stairs"
@@ -2941,9 +2888,9 @@ msgstr "Hrúbka farebných pásov (0 = Náhodná)"
 #: capplets/screensaver/screensavers/starfish.xml.h:11
 msgid ""
 "This generates a sequence of undulating, throbbing, star-like patterns which "
-"pulsate, rotate, and turn inside out.  Another display mode uses these "
-"shapes to lay down a field of colors, which are then cycled.  The motion is "
-"very organic.  Written by Jamie Zawinski."
+"pulsate, rotate, and turn inside out. Another display mode uses these shapes "
+"to lay down a field of colors, which are then cycled. The motion is very "
+"organic. Written by Jamie Zawinski."
 msgstr ""
 
 #: capplets/screensaver/screensavers/starfish.xml.h:12
@@ -2953,7 +2900,7 @@ msgstr "Pou¾i» neupravené tvary "
 #: capplets/screensaver/screensavers/starwars.xml.h:1
 msgid ""
 "Draws a stream of text slowly scrolling into the distance at an angle, over "
-"a star field, like at the beginning of the movie of the same name.  Written "
+"a star field, like at the beginning of the movie of the same name. Written "
 "by Jamie Zawinski and Claudio Matauoka."
 msgstr ""
 
@@ -2964,7 +2911,7 @@ msgstr "StarWars"
 #: capplets/screensaver/screensavers/stonerview.xml.h:1
 msgid ""
 "Chains of colorful squares dance around each other in complex spiral "
-"patterns.  Written by Andrew Plotkin, based on SGI's `electropaint' "
+"patterns. Written by Andrew Plotkin, based on SGI's `electropaint' "
 "screensaver."
 msgstr ""
 
@@ -2979,15 +2926,15 @@ msgstr "Strange"
 #: capplets/screensaver/screensavers/strange.xml.h:2
 msgid ""
 "This draws strange attractors: it's a colorful, unpredictably-animating "
-"field of dots that swoops and twists around.  The motion is very nice.  "
+"field of dots that swoops and twists around. The motion is very nice. "
 "Written by Massimino Pascal."
 msgstr ""
 
 #: capplets/screensaver/screensavers/superquadrics.xml.h:1
 msgid ""
 "Ed Mackey reports that he wrote the first version of this program in BASIC "
-"on a Commodore 64 in 1987, as a 320x200 black and white wireframe.  Now it "
-"is GL and has specular reflections."
+"on a Commodore 64 in 1987, as a 320x200 black and white wireframe. Now it is "
+"GL and has specular reflections."
 msgstr ""
 
 #: capplets/screensaver/screensavers/superquadrics.xml.h:2
@@ -2996,8 +2943,8 @@ msgstr "Superquadrics"
 
 #: capplets/screensaver/screensavers/swirl.xml.h:1
 msgid ""
-"More flowing, swirly patterns.  This version is by M.  Dobie and R.  Taylor, "
-"but you might have seen a Mac program similar to this called FlowFazer.  "
+"More flowing, swirly patterns. This version is by M. Dobie and R. Taylor, "
+"but you might have seen a Mac program similar to this called FlowFazer. "
 "There is also a cool Java applet of a similar concept"
 msgstr ""
 
@@ -3011,17 +2958,17 @@ msgstr "T3D"
 
 #: capplets/screensaver/screensavers/t3d.xml.h:2
 msgid ""
-"This draws a working analog clock composed of floating, throbbing bubbles.  "
+"This draws a working analog clock composed of floating, throbbing bubbles. "
 "Written by Bernd Paysan."
 msgstr "Kreslí analógové hodiny zlo¾ené z plávajúcich bublín. Napísal Bernd Paysan."
 
 #: capplets/screensaver/screensavers/triangle.xml.h:3
 msgid ""
-"Generates random mountain ranges using iterative subdivision of triangles.  "
+"Generates random mountain ranges using iterative subdivision of triangles. "
 "Written by Tobias Gloth."
 msgstr ""
-"Generuje náhorné pohorie pomocou interovaného delenia trojuholníkov. "
-"Napísal Tobias Gloth."
+"Generuje náhorné pohorie pomocou interovaného delenia trojuholníkov. Napísal "
+"Tobias Gloth."
 
 #: capplets/screensaver/screensavers/triangle.xml.h:5
 msgid "Triangle"
@@ -3029,7 +2976,7 @@ msgstr "Triangle"
 
 #: capplets/screensaver/screensavers/truchet.xml.h:1
 msgid ""
-"This draws line- and arc-based Truchet patterns that tile the screen.  "
+"This draws line- and arc-based Truchet patterns that tile the screen. "
 "Written by Adrian Likins."
 msgstr "Kreslí Truchetove vzory zlo¾ené z èiar a oblúkov. Napísal Adrian Likins."
 
@@ -3042,36 +2989,34 @@ msgid ""
 "This is actually just a shell script that grabs a frame of video from the "
 "system's video input, and then uses some PBM filters (chosen at random) to "
 "manipulate and recombine the video frame in various ways (edge detection, "
-"subtracting the image from a rotated version of itself, etc.)  Then it "
-"displays that image for a few seconds, and does it again.  This works really "
-"well if you just feed broadcast television into it.  \n"
-"\n"
-"Currently, the three lines of the script that actually grab the source "
-"picture are SGI specific, but it should be trivial to adapt it to work on "
-"other systems that can grab video (please send me the changes if you do "
-"this...)"
+"subtracting the image from a rotated version of itself, etc.) Then it "
+"displays that image for a few seconds, and does it again. This works really "
+"well if you just feed broadcast television into it. Currently, the three "
+"lines of the script that actually grab the source picture are SGI specific, "
+"but it should be trivial to adapt it to work on other systems that can grab "
+"video (please send me the changes if you do this...)"
 msgstr ""
 
-#: capplets/screensaver/screensavers/vidwhacker.xml.h:4
+#: capplets/screensaver/screensavers/vidwhacker.xml.h:2
 msgid "VidWhacker"
 msgstr "VidWhacker"
 
 #: capplets/screensaver/screensavers/vines.xml.h:4
 msgid ""
-"This one generates a continuous sequence of small, curvy geometric "
-"patterns.  It scatters them around your screen until it fills up, then it "
-"clears the screen and starts over.  Written by Tracy Camp and David Hansen."
+"This one generates a continuous sequence of small, curvy geometric patterns. "
+"It scatters them around your screen until it fills up, then it clears the "
+"screen and starts over. Written by Tracy Camp and David Hansen."
 msgstr ""
-"Generuje spojitú postupnos» geometrických tvarov. Rozhadzuje ich "
-"po obrazovke, a¾ ju celú vyplní. Potom ju zma¾e a zaène od zaèiatku. "
-"Napísali Tracy Camp a David Hansen."
+"Generuje spojitú postupnos» geometrických tvarov. Rozhadzuje ich po "
+"obrazovke, a¾ ju celú vyplní. Potom ju zma¾e a zaène od zaèiatku. Napísali "
+"Tracy Camp a David Hansen."
 
 #: capplets/screensaver/screensavers/vines.xml.h:5
 msgid "Vines"
 msgstr "Vines"
 
 #: capplets/screensaver/screensavers/wander.xml.h:1
-msgid "Draws a colorful random-walk, in various forms.  Written by Rick Campbell."
+msgid "Draws a colorful random-walk, in various forms. Written by Rick Campbell."
 msgstr ""
 
 #: capplets/screensaver/screensavers/wander.xml.h:2
@@ -3081,25 +3026,23 @@ msgstr "Wander"
 #: capplets/screensaver/screensavers/webcollage.xml.h:1
 msgid ""
 "This program makes collages out of random images pulled off of the World "
-"Wide Web.  It finds these images by doing random web searches, and then "
-"extracting images from the returned pages.  It can also be set up to filter "
+"Wide Web. It finds these images by doing random web searches, and then "
+"extracting images from the returned pages. It can also be set up to filter "
 "the images through the `VidWhacker' program, above, which looks really "
-"great.  \n"
-"\n"
-"(Note that most of the images it finds are text, and not pictures.  This is "
-"because most of the web is pictures of text.  Which is pretty sad.)  Written "
-"by Jamie Zawinski."
+"great. (Note that most of the images it finds are text, and not pictures. "
+"This is because most of the web is pictures of text. Which is pretty sad.) "
+"Written by Jamie Zawinski."
 msgstr ""
 
-#: capplets/screensaver/screensavers/webcollage.xml.h:4
+#: capplets/screensaver/screensavers/webcollage.xml.h:2
 msgid "WebCollage"
 msgstr "WebCollage"
 
 #: capplets/screensaver/screensavers/whirlwindwarp.xml.h:1
 msgid ""
-"Floating stars are acted upon by a mixture of simple 2D forcefields.  The "
+"Floating stars are acted upon by a mixture of simple 2D forcefields. The "
 "strength of each forcefield changes continuously, and it is also switched on "
-"and off at random.  By Paul 'Joey' Clark."
+"and off at random. By Paul 'Joey' Clark."
 msgstr ""
 
 #: capplets/screensaver/screensavers/whirlwindwarp.xml.h:2
@@ -3107,7 +3050,7 @@ msgid "WhirlwindWarp"
 msgstr "WhirlwindWarp"
 
 #: capplets/screensaver/screensavers/whirlygig.xml.h:1
-msgid "Draws zooming chains of sinusoidal spots.  Written by Ashton Trey Belew."
+msgid "Draws zooming chains of sinusoidal spots. Written by Ashton Trey Belew."
 msgstr "Kreslí zväè¹ujúce sa re»azce sinusoidových bodov. Napísal Ashton Trey Belew."
 
 #: capplets/screensaver/screensavers/whirlygig.xml.h:2
@@ -3117,12 +3060,11 @@ msgstr "WhirlyGig"
 #: capplets/screensaver/screensavers/worm.xml.h:1
 msgid ""
 "An ancient xlock hack that draws multicolored worms that crawl around the "
-"screen.  Written by Brad Taylor, Dave Lemke, Boris Putanec, and Henrik "
+"screen. Written by Brad Taylor, Dave Lemke, Boris Putanec, and Henrik "
 "Theiling."
 msgstr ""
-"Starý program pre xlock, ktorý kreslí farebných èervov, ktoré sa pohybujú "
-"po obrazovke. Napísal Brad Taylor, Dave Lemke, Boris Putanec a Henrik "
-"Theiling."
+"Stará úprava xlock, ktorá kreslí farebných èervov, ktoré sa pohybujú po "
+"obrazovke. Napísal Brad Taylor, Dave Lemke, Boris Putanec a Henrik Theiling."
 
 #: capplets/screensaver/screensavers/worm.xml.h:2
 msgid "Worm"
@@ -3135,14 +3077,14 @@ msgstr "XaoS"
 #: capplets/screensaver/screensavers/xaos.xml.h:2
 msgid ""
 "XaoS generates fast fly-through animations of the Mandelbrot and other "
-"fractal sets.  Written by Thomas Marsh and Jan Hubicka.  This is not "
-"included with the XScreenSaver package, but if you don't have it already, "
-"you can find it at <http://limax.paru.cas.cz/~hubicka/XaoS/>."
+"fractal sets. Written by Thomas Marsh and Jan Hubicka. This is not included "
+"with the XScreenSaver package, but if you don't have it already, you can "
+"find it at <http://limax.paru.cas.cz/~hubicka/XaoS/>."
 msgstr ""
 "XaoS generuje rýchlo lietajúce animácie Mandelbrotovej mno¾iny alebo inej "
-"fraktálovej mno¾iny. Napísal Thomas Marsh a Jan Hubicka. Toto nie je súèas»ou balíka "
-"XScreenSaver, ale ak ho nemáte, nájdete ho na adrese "
-"<http://limax.paru.cas.cz/~hubicka/XaoS/>."
+"fraktálovej mno¾iny. Napísal Thomas Marsh a Jan Hubicka. Toto nie je "
+"súèas»ou balíka XScreenSaver, ale ak ho nemáte, nájdete ho na adrese <http://"
+"limax.paru.cas.cz/~hubicka/XaoS/>."
 
 #: capplets/screensaver/screensavers/xdaliclock.xml.h:1
 msgid "XDaliClock"
@@ -3151,27 +3093,26 @@ msgstr "XDaliClock"
 #: capplets/screensaver/screensavers/xdaliclock.xml.h:2
 msgid ""
 "XDaliClock draws a large digital clock, the numbers of which change by "
-"``melting'' into their new shapes.  Written by Jamie Zawinski.  This is not "
+"``melting'' into their new shapes. Written by Jamie Zawinski. This is not "
 "included with the XScreenSaver package, but if you don't have it already, "
 "you can find it at <http://www.jwz.org/xdaliclock/>."
 msgstr ""
-"XDaliClock kreslí veµké digitálne hodiny, kde èísla sa postupne menia "
-"na iné èísla. Napísal Jamie Zawinski. Toto nie je súèas»ou balíka XScreenSaver, ale ak ho nemáte, "
-"nájdete ho na adrese <http://www.jwz.org/xdaliclock/>."
+"XDaliClock kreslí veµké digitálne hodiny, kde èísla sa postupne menia na iné "
+"èísla. Napísal Jamie Zawinski. Toto nie je súèas»ou balíka XScreenSaver, ale "
+"ak ho nemáte, nájdete ho na adrese <http://www.jwz.org/xdaliclock/>."
 
 #: capplets/screensaver/screensavers/xearth.xml.h:1
 msgid ""
 "XEarth draws an image of the Earth, as seen from your favorite vantage point "
-"in space, correctly shaded for the current position of the Sun.  Written by "
-"Kirk Johnson.  This is not included with the XScreenSaver package, but if "
-"you don't have it already, you can find it at <http://www.cs.colorado.edu/"
-"~tuna/xearth/>."
+"in space, correctly shaded for the current position of the Sun. Written by "
+"Kirk Johnson. This is not included with the XScreenSaver package, but if you "
+"don't have it already, you can find it at <http://www.cs.colorado.edu/~tuna/"
+"xearth/>."
 msgstr ""
-"XEarth kreslí obraz Zeme z µubovoµného miesta vo vesmíre, správne "
-"tieòovaný podµa polohy Slnka. Napísal Kirk Johnson. "
-"Toto nie je súèas»ou balíka XScreenSaver, ale ak ho nemáte, "
-"nájdete ho na adrese <http://www.cs.colorado.edu/"
-"~tuna/xearth/>."
+"XEarth kreslí obraz Zeme z µubovoµného miesta vo vesmíre, správne tieòovaný "
+"podµa polohy Slnka. Napísal Kirk Johnson. Toto nie je súèas»ou balíka "
+"XScreenSaver, ale ak ho nemáte, nájdete ho na adrese <http://www.cs.colorado."
+"edu/~tuna/xearth/>."
 
 #: capplets/screensaver/screensavers/xearth.xml.h:2
 msgid "Xearth"
@@ -3179,13 +3120,12 @@ msgstr "Xearth"
 
 #: capplets/screensaver/screensavers/xfishtank.xml.h:1
 msgid ""
-"Fish!  This is not included with the XScreenSaver package, but if you don't "
+"Fish! This is not included with the XScreenSaver package, but if you don't "
 "have it already, you can find it at <http://metalab.unc.edu/pub/Linux/X11/"
 "demos/>."
 msgstr ""
-"Ryba! Toto nie je súèas»ou balíka XScreenSaver, ale ak ho nemáte, "
-"nájdete ho na adrese <http://metalab.unc.edu/pub/Linux/X11/"
-"demos/>."
+"Ryba! Toto nie je súèas»ou balíka XScreenSaver, ale ak ho nemáte, nájdete ho "
+"na adrese <http://metalab.unc.edu/pub/Linux/X11/demos/>."
 
 #: capplets/screensaver/screensavers/xfishtank.xml.h:2
 msgid "XFishTank"
@@ -3193,11 +3133,11 @@ msgstr "XFishTank"
 
 #: capplets/screensaver/screensavers/xflame.xml.h:1
 msgid ""
-"Draws a simulation of pulsing fire.  It can also take an arbitrary image and "
-"set it on fire too.  Written by Carsten Haitzler, hacked on by many others."
+"Draws a simulation of pulsing fire. It can also take an arbitrary image and "
+"set it on fire too. Written by Carsten Haitzler, hacked on by many others."
 msgstr ""
-"Kreslí simuláciu ohòa. Mô¾ete mu urèi», ktorý obrázok má zapáli». "
-"Napísal Carsten Heitzler, upravené ïal¹ími autormi."
+"Kreslí simuláciu ohòa. Mô¾ete mu urèi», ktorý obrázok má zapáli». Napísal "
+"Carsten Heitzler, upravené ïal¹ími autormi."
 
 #: capplets/screensaver/screensavers/xflame.xml.h:2
 msgid "Xflame"
@@ -3205,15 +3145,14 @@ msgstr "Xflame"
 
 #: capplets/screensaver/screensavers/xjack.xml.h:1
 msgid ""
-"This program behaves schizophrenically and makes a lot of typos.  Written by "
-"Jamie Zawinski.  If you haven't seen Stanley Kubrick's masterpiece, ``The "
-"Shining,'' you won't get it.  Those who have describe this hack as "
+"This program behaves schizophrenically and makes a lot of typos. Written by "
+"Jamie Zawinski. If you haven't seen Stanley Kubrick's masterpiece, ``The "
+"Shining,'' you won't get it. Those who have describe this hack as "
 "``inspired.''"
 msgstr ""
-"Tento program sa chová schizofrenicky a robí hromadu chýb. "
-"Napísal Jamie Zawinski. Ak ste nevideli film od Stanleyho Kubricka "
-"\"The Shining\", asi ho nepochopíte. Tí, èo ten film videli, popisujú "
-"tento program ako \"inspired\"."
+"Tento program sa chová schizofrenicky a robí hromadu chýb. Napísal Jamie "
+"Zawinski. Ak ste nevideli film od Stanleyho Kubricka \"The Shining\", asi ho "
+"nepochopíte. Tí, èo ten film videli, popisujú tento program ako \"inspired\"."
 
 #: capplets/screensaver/screensavers/xjack.xml.h:2
 msgid "Xjack"
@@ -3222,12 +3161,11 @@ msgstr "Xjack"
 #: capplets/screensaver/screensavers/xlyap.xml.h:1
 msgid ""
 "This generates pretty fractal pictures by doing funky math involving the "
-"``Lyapunov exponent.''  It has a cool interactive mode, too.  Written by Ron "
+"``Lyapunov exponent.'' It has a cool interactive mode, too. Written by Ron "
 "Record."
 msgstr ""
 "Generuje pekné fraktálové obrázky pomocou zlo¾itej matematiky pou¾itím "
-"Laypunovho exponentu. Má aj zaujímavý interèný re¾im. Napísal Ron "
-"Record."
+"Laypunovho exponentu. Má aj zaujímavý interèný re¾im. Napísal Ron Record."
 
 #: capplets/screensaver/screensavers/xlyap.xml.h:2
 msgid "Xlyap"
@@ -3246,31 +3184,27 @@ msgstr "Xmatrix"
 #: capplets/screensaver/screensavers/xmountains.xml.h:1
 msgid ""
 "XMountains generates realistic-looking fractal terrains of snow-capped "
-"mountains near water, with either a top view or a side view.  Written by "
-"Stephen Booth.  This is not included with the XScreenSaver package, but if "
+"mountains near water, with either a top view or a side view. Written by "
+"Stephen Booth. This is not included with the XScreenSaver package, but if "
 "you don't have it already, you can find it at <http://www.epcc.ed.ac.uk/~spb/"
-"xmountains/>.  \n"
-"\n"
-"Be sure to compile it with -DVROOT or it won't work right when launched by "
-"the xscreensaver daemon."
+"xmountains/>. Be sure to compile it with -DVROOT or it won't work right when "
+"launched by the xscreensaver daemon."
 msgstr ""
 "XMountains generuje realistické fraktálové krajiny so zasne¾enými vrcholmi "
 "hôr pri jazerách. Pohµad je buï zhora alebo zboku. Napísal Stephen Booth. "
-"Nie je súèas»ou balíka XScreenSaver, ale ak ho e¹te nemáte, mô¾ete "
-"ho získa» na adrese <http://www.epcc.ed.ac.uk/~spb/"
-"xmountains/>.  \n"
-"\n"
-"Urèite ho prelo¾te s prepínaèom -DVROOT, inak nebude správne fungova» "
-"pri spustení z démona xscreensaver."
+"Nie je súèas»ou balíka XScreenSaver, ale ak ho e¹te nemáte, mô¾ete ho získa» "
+"na adrese <http://www.epcc.ed.ac.uk/~spb/xmountains/>. "
+"Urèite ho prelo¾te s prepínaèom -DVROOT, inak nebude správne fungova» pri "
+"spustení z démona xscreensaver."
 
-#: capplets/screensaver/screensavers/xmountains.xml.h:4
+#: capplets/screensaver/screensavers/xmountains.xml.h:2
 msgid "Xmountains"
 msgstr "Xmountains"
 
 #: capplets/screensaver/screensavers/xrayswarm.xml.h:1
 msgid ""
 "Draws a few swarms of critters flying around the screen, with nicely faded "
-"color trails behind them.  Written by Chris Leger."
+"color trails behind them. Written by Chris Leger."
 msgstr ""
 "Kreslí malé kàdle lietajúce po obrazovke, ich stopa krásne mizne. Napísal "
 "Chris Leger."
@@ -3281,8 +3215,8 @@ msgstr "XRaySwarm"
 
 #: capplets/screensaver/screensavers/xroger.xml.h:2
 msgid ""
-"The XScreenSaver logo.  Don't you hate it?  So do I.  Would you like to "
-"design a new logo for XScreenSaver?\tIf so, send jwz your submissions."
+"The XScreenSaver logo. Don't you hate it? So do I. Would you like to design "
+"a new logo for XScreenSaver? If so, send jwz your submissions."
 msgstr ""
 "Logo XScreenSaver.  Tie¾ ho nenávidíte?  Aj ja. Ak chcete navrhnú» nové, "
 "posielajte svoje výtvory jwz."
@@ -3293,7 +3227,7 @@ msgstr "Xroger"
 
 #: capplets/screensaver/screensavers/xsnow.xml.h:1
 msgid ""
-"Draws falling snow and the occasional tiny Santa.  By Rick Jansen.  You can "
+"Draws falling snow and the occasional tiny Santa. By Rick Jansen. You can "
 "find it at <http://www.euronet.nl/~rja/Xsnow/>."
 msgstr ""
 "Kreslí padajúci sneh a niekedy malého Santa Klausa. Vytvoril Rick Jansen. "
@@ -3305,8 +3239,8 @@ msgstr "Xsnow"
 
 #: capplets/screensaver/screensavers/xspirograph.xml.h:1
 msgid ""
-"Simulates that pen-in-nested-plastic-gears toy from your childhood.  By "
-"Rohit Singh."
+"Simulates that pen-in-nested-plastic-gears toy from your childhood. By Rohit "
+"Singh."
 msgstr "Simuluje hraèku pero-vo-vnorených-guliach. Napísal Rohit Singh."
 
 #: capplets/screensaver/screensavers/xspirograph.xml.h:2
@@ -3320,7 +3254,7 @@ msgstr "XTeeVee"
 #: capplets/screensaver/screensavers/xteevee.xml.h:2
 msgid ""
 "XTeeVee simulates various television problems, including static, loss of "
-"vertical hold, and a test pattern.  By Greg Knauss."
+"vertical hold, and a test pattern. By Greg Knauss."
 msgstr ""
 "XTeeVee simuluje rôzne problémy s televízorom. Napríklad statické výboje, "
 "stratu vertikálnej synchronizácia a testovaciu vzorku. Vytvoril Greg Knauss."
@@ -3331,9 +3265,9 @@ msgstr "Lupa (Fatbits)"
 
 #: capplets/screensaver/screensavers/zoom.xml.h:2
 msgid ""
-"Zooms in on a part of the screen and then moves around.  With the -lenses "
+"Zooms in on a part of the screen and then moves around. With the -lenses "
 "option the result is like looking through many overlapping lenses rather "
-"than just a simple zoom.  Written by James Macnicol."
+"than just a simple zoom. Written by James Macnicol."
 msgstr ""
 "Zväè¹í èas» obrazovky a potom sa posúva. Pomocou voµby -lenses mô¾ete zmeni» "
 "vzhµad, napríklad na pohµad cez viacero ¹o¹oviek. Napísal James Macnicol."
@@ -3447,19 +3381,19 @@ msgstr "Hlavné"
 msgid "Main Settings"
 msgstr "Hlavné nastavenie"
 
-#: control-center/main.c:46
+#: control-center/main.c:40
 msgid "Configuration"
 msgstr "Nastavenie"
 
-#: control-center/main.c:72
+#: control-center/main.c:63
 msgid "Run the capplet CAPPLET"
 msgstr "Spusti» applet pre ovládacie centrum CAPPLET"
 
-#: control-center/main.c:72
+#: control-center/main.c:63
 msgid "CAPPLET"
 msgstr "CAPPLET"
 
-#: control-center/main.c:80
+#: control-center/main.c:70
 msgid "GNOME Control Center options"
 msgstr "Nastavenie GNOME Ovládacieho centra"
 
