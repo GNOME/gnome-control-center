@@ -280,6 +280,9 @@ set_server_from_gconf (GConfEntry *ignored)
 			XkbAccessXFeedbackMask	|
 			XkbControlsEnabledMask,
 			desc);
+
+	XkbFreeKeyboard (desc, XkbAllComponentsMask, True);
+
 	XSync (GDK_DISPLAY (), FALSE);
 	gdk_error_trap_pop ();
 }
@@ -524,6 +527,8 @@ set_gconf_from_server (GConfEntry *ignored)
 				ax_stickykeys_warning_dialog_post (desc->ctrls->enabled_ctrls & XkbStickyKeysMask);
 		}
 	}
+
+	XkbFreeKeyboard (desc, XkbAllComponentsMask, True);
 
 	changed |= (stickykeys_changed | slowkeys_changed);
 
