@@ -31,6 +31,8 @@
 #include <gst/mixer/mixer.h>
 #include <gst/propertyprobe/propertyprobe.h>
 
+#include <string.h>
+
 struct AcmeVolumeGStreamerPrivate
 {
 	GstMixer      *mixer;
@@ -38,6 +40,8 @@ struct AcmeVolumeGStreamerPrivate
 };
 
 static GObjectClass *parent_class = NULL;
+
+G_DEFINE_TYPE (AcmeVolumeGStreamer, acme_volume_gstreamer, ACME_TYPE_VOLUME)
 
 static int acme_volume_gstreamer_get_volume (AcmeVolume *self);
 static void acme_volume_gstreamer_set_volume (AcmeVolume *self, int val);
@@ -141,11 +145,10 @@ acme_volume_gstreamer_set_volume (AcmeVolume *vol, int val)
 
 /* This is a modified version of code from gnome-media's gst-mixer */
 static void
-acme_volume_gstreamer_init (AcmeVolume *vol)
+acme_volume_gstreamer_init (AcmeVolumeGStreamer *self)
 {
-	AcmeVolumeGStreamer *self = (AcmeVolumeGStreamer *) vol;
 	const GList *elements;
-	gint num = 0, channel_count = 0;
+	gint num = 0;
 
 	self->_priv = g_new0 (AcmeVolumeGStreamerPrivate, 1);
 
@@ -254,28 +257,3 @@ acme_volume_gstreamer_class_init (AcmeVolumeGStreamerClass *klass)
 	volume_class->get_mute = acme_volume_gstreamer_get_mute;
 }
 
-GType acme_volume_gstreamer_get_type (void)
-{
-	static GType object_type = 0;
-
-	if (!object_type)
-	{
-		static const GTypeInfo object_info =
-		{
-			sizeof (AcmeVolumeGStreamerClass),
-			NULL,         /* base_init */
-			NULL,         /* base_finalize */
-			(GClassInitFunc) acme_volume_gstreamer_class_init,
-			NULL,         /* class_finalize */
-			NULL,         /* class_data */
-			sizeof (AcmeVolumeGStreamer),
-			0,            /* n_preallocs */
-			(GInstanceInitFunc) acme_volume_gstreamer_init
-		};
-
-		object_type = g_type_register_static (ACME_TYPE_VOLUME,
-				"AcmeVolumeGStreamer", &object_info, 0);
-	}
-
-	return object_type;
-}

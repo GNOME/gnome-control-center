@@ -40,6 +40,8 @@
 #define PMU_IOC_GRAB_BACKLIGHT  _IOR('B', 6, 0)
 #endif
 
+G_DEFINE_TYPE (AcmeFblevel, acme_fblevel, ACME_TYPE_FBLEVEL)
+
 struct AcmeFblevelPrivate {
 	int pmu_fd;
 	int saved_level;
@@ -80,28 +82,6 @@ acme_fblevel_init (AcmeFblevel *fblevel)
 	fblevel->_priv->saved_level = 0;
 
 	return;
-}
-
-GType acme_fblevel_get_type (void)
-{
-	static GType type = 0;
-	if (type == 0) {
-		static const GTypeInfo info = {
-			sizeof (AcmeFblevelClass),
-			(GBaseInitFunc) NULL,
-			(GBaseFinalizeFunc) NULL,
-			(GClassInitFunc) acme_fblevel_class_init,
-			(GClassFinalizeFunc) NULL,
-			NULL /* class_data */,
-			sizeof (AcmeFblevel),
-			0 /* n_preallocs */,
-			(GInstanceInitFunc) acme_fblevel_init,
-		};
-
-		type = g_type_register_static (G_TYPE_OBJECT, "AcmeFblevel",
-				&info, (GTypeFlags)0);
-	}
-	return type;
 }
 
 int

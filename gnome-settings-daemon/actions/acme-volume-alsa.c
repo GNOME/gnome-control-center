@@ -40,7 +40,6 @@
 
 struct AcmeVolumeAlsaPrivate
 {
-	gboolean use_pcm;
 	long pmin, pmax;
 	snd_mixer_t *handle;
 	snd_mixer_elem_t *elem;
@@ -52,6 +51,8 @@ static GObjectClass *parent_class = NULL;
 
 static int acme_volume_alsa_get_volume (AcmeVolume *self);
 static void acme_volume_alsa_set_volume (AcmeVolume *self, int val);
+
+G_DEFINE_TYPE (AcmeVolumeAlsa, acme_volume_alsa, ACME_TYPE_VOLUME)
 
 static void
 acme_volume_alsa_finalize (GObject *object)
@@ -67,30 +68,6 @@ acme_volume_alsa_finalize (GObject *object)
 		g_free (self->_priv);
 
 	G_OBJECT_CLASS (parent_class)->finalize (object);
-}
-
-static void
-acme_volume_alsa_set_use_pcm (AcmeVolume *vol, gboolean val)
-{
-   snd_mixer_selem_id_t *sid = NULL;
-   snd_mixer_elem_t *elem;
-                                                                    
-   AcmeVolumeAlsa *self = (AcmeVolumeAlsa *) vol;
-   self->_priv->use_pcm = val;
-                                                                    
-   snd_mixer_selem_id_alloca(&sid);
-   snd_mixer_selem_id_set_name (sid, (val?"PCM":"Master"));
-                                                                    
-   elem = snd_mixer_find_selem(self->_priv->handle, sid);
-                                                                    
-   if (!elem)
-   {
-      D("snd_mixer_find_selem");
-   }
-   else
-   {
-      self->_priv->elem = elem;
-   }
 }
 
 static void
@@ -161,9 +138,8 @@ acme_volume_alsa_set_volume (AcmeVolume *vol, int val)
 }
 
 static void
-acme_volume_alsa_init (AcmeVolume *vol)
+acme_volume_alsa_init (AcmeVolumeAlsa *self)
 {
-	AcmeVolumeAlsa *self = (AcmeVolumeAlsa *) vol;
 	snd_mixer_selem_id_t *sid;
 	snd_mixer_t *handle;
 	snd_mixer_elem_t *elem;
@@ -234,31 +210,5 @@ acme_volume_alsa_class_init (AcmeVolumeAlsaClass *klass)
 	volume_class->get_volume = acme_volume_alsa_get_volume;
 	volume_class->set_mute = acme_volume_alsa_set_mute;
 	volume_class->get_mute = acme_volume_alsa_get_mute;
-}
-
-GType acme_volume_alsa_get_type (void)
-{
-	static GType object_type = 0;
-
-	if (!object_type)
-	{
-		static const GTypeInfo object_info =
-		{
-			sizeof (AcmeVolumeAlsaClass),
-			NULL,         /* base_init */
-			NULL,         /* base_finalize */
-			(GClassInitFunc) acme_volume_alsa_class_init,
-			NULL,         /* class_finalize */
-			NULL,         /* class_data */
-			sizeof (AcmeVolumeAlsa),
-			0,            /* n_preallocs */
-			(GInstanceInitFunc) acme_volume_alsa_init
-		};
-
-		object_type = g_type_register_static (ACME_TYPE_VOLUME,
-				"AcmeVolumeAlsa", &object_info, 0);
-	}
-
-	return object_type;
 }
 

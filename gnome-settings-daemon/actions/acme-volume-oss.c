@@ -49,6 +49,8 @@ static int acme_volume_oss_get_volume (AcmeVolume *self);
 static void acme_volume_oss_set_volume (AcmeVolume *self, int val);
 static gboolean acme_volume_oss_mixer_check (AcmeVolumeOss *self, int fd);
 
+G_DEFINE_TYPE (AcmeVolumeOss, acme_volume_oss, ACME_TYPE_VOLUME)
+
 static void
 acme_volume_oss_finalize (GObject *object)
 {
@@ -152,9 +154,8 @@ acme_volume_oss_set_volume (AcmeVolume *vol, int val)
 }
 
 static void
-acme_volume_oss_init (AcmeVolume *vol)
+acme_volume_oss_init (AcmeVolumeOss *self)
 {
-	AcmeVolumeOss *self = (AcmeVolumeOss *) vol;
 	int fd;
 
 	self->_priv = g_new0 (AcmeVolumeOssPrivate, 1);
@@ -190,32 +191,6 @@ acme_volume_oss_class_init (AcmeVolumeOssClass *klass)
 	volume_class->get_volume = acme_volume_oss_get_volume;
 	volume_class->set_mute = acme_volume_oss_set_mute;
 	volume_class->get_mute = acme_volume_oss_get_mute;
-}
-
-GType acme_volume_oss_get_type (void)
-{
-	static GType object_type = 0;
-
-	if (!object_type)
-	{
-		static const GTypeInfo object_info =
-		{
-			sizeof (AcmeVolumeOssClass),
-			NULL,         /* base_init */
-			NULL,         /* base_finalize */
-			(GClassInitFunc) acme_volume_oss_class_init,
-			NULL,         /* class_finalize */
-			NULL,         /* class_data */
-			sizeof (AcmeVolumeOss),
-			0,            /* n_preallocs */
-			(GInstanceInitFunc) acme_volume_oss_init
-		};
-
-		object_type = g_type_register_static (ACME_TYPE_VOLUME,
-				"AcmeVolumeOss", &object_info, 0);
-	}
-
-	return object_type;
 }
 
 static gboolean

@@ -35,39 +35,17 @@
 
 static GObjectClass *parent_class = NULL;
 
+G_DEFINE_TYPE (AcmeVolume, acme_volume, ACME_TYPE_VOLUME)
+
 static void
 acme_volume_class_init (AcmeVolumeClass *klass)
 {
-	GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
 	parent_class = g_type_class_peek_parent (klass);
 };
 
 static void
 acme_volume_init (AcmeVolume *vol)
 {
-}
-
-GType acme_volume_get_type (void)
-{
-	static GType type = 0;
-	if (type == 0) {
-		static const GTypeInfo info = {
-			sizeof (AcmeVolumeClass),
-			(GBaseInitFunc) NULL,
-			(GBaseFinalizeFunc) NULL,
-			(GClassInitFunc) acme_volume_class_init,
-			(GClassFinalizeFunc) NULL,
-			NULL /* class_data */,
-			sizeof (AcmeVolume),
-			0 /* n_preallocs */,
-			(GInstanceInitFunc) acme_volume_init
-		};
-
-		type = g_type_register_static (G_TYPE_OBJECT, "AcmeVolume",
-				&info, (GTypeFlags)0);
-	}
-	return type;
 }
 
 int
