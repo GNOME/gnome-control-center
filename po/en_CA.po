@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-12-23 10:37-0500\n"
-"PO-Revision-Date: 2004-12-23 19:59-0400\n"
+"POT-Creation-Date: 2004-12-26 03:32-0500\n"
+"PO-Revision-Date: 2004-12-26 19:59-0400\n"
 "Last-Translator: Adam Weinberger <adamw@gnome.org>\n"
 "Language-Team: English/Canada <adamw@FreeBSD.org>\n"
 "MIME-Version: 1.0\n"
@@ -143,8 +143,8 @@ msgid "P_O Box:"
 msgstr "P_O Box:"
 
 #: capplets/about-me/gnome-about-me.glade.h:22
-msgid "Retype New Passsword:"
-msgstr "Retype New Passsword:"
+msgid "Retype New Password:"
+msgstr "Retype New Password:"
 
 #: capplets/about-me/gnome-about-me.glade.h:23
 msgid "User Name:"
@@ -2284,7 +2284,7 @@ msgstr "_Sounds for events"
 msgid "_Visual feedback:"
 msgstr "_Visual feedback:"
 
-#: capplets/theme-switcher/gnome-theme-details.c:372
+#: capplets/theme-switcher/gnome-theme-details.c:370
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -2294,19 +2294,19 @@ msgstr ""
 "\"Theme Preferences\" dialogue was improperly installed, or you have not "
 "installed the \"gnome-themes\" package."
 
-#: capplets/theme-switcher/gnome-theme-installer.c:104
+#: capplets/theme-switcher/gnome-theme-installer.c:103
 msgid "This theme is not in a supported format."
 msgstr "This theme is not in a supported format."
 
-#: capplets/theme-switcher/gnome-theme-installer.c:140
+#: capplets/theme-switcher/gnome-theme-installer.c:139
 msgid "No theme file location specified to install"
 msgstr "No theme file location specified to install"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:157
+#: capplets/theme-switcher/gnome-theme-installer.c:156
 msgid "The theme file location specified to install is invalid"
 msgstr "The theme file location specified to install is invalid"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:177
+#: capplets/theme-switcher/gnome-theme-installer.c:176
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -2315,7 +2315,7 @@ msgstr ""
 "Insufficient permissions to install the theme in:\n"
 "%s"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:196
+#: capplets/theme-switcher/gnome-theme-installer.c:195
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
@@ -2324,15 +2324,15 @@ msgstr ""
 "%s is the path where the theme files will be installed. This can not be "
 "selected as the source location"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:677
+#: capplets/theme-switcher/gnome-theme-manager.c:676
 msgid "Custom theme"
 msgstr "Custom theme"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:677
+#: capplets/theme-switcher/gnome-theme-manager.c:676
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "You can save this theme by pressing the Save Theme button."
 
-#: capplets/theme-switcher/gnome-theme-manager.c:1455
+#: capplets/theme-switcher/gnome-theme-manager.c:1454
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -2804,11 +2804,14 @@ msgstr ""
 "Error while trying to run (%s)\n"
 "which is linked to the key (%s)"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:91
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:93
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
-"Probably internal X server problem.\n"
+"It can have under various circumstances:\n"
+"- a bug in libxklavier library\n"
+"- a bug in X server (xkbcomp, xmodmap utilities)\n"
+"- X server with incompatible libxkbfile implemenation\n"
 "\n"
 "X server version data:\n"
 "%s\n"
@@ -2816,10 +2819,13 @@ msgid ""
 "%s\n"
 "If you report this situation as a bug, please include:\n"
 "- The result of <b>xprop -root | grep XKB</b>\n"
-"- The result of <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b>"
+"- The result of <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/kbd</b>"
 msgstr ""
 "Error activating XKB configuration.\n"
-"Probably internal X server problem.\n"
+"This can happen under various circumstances:\n"
+"- a bug in the libxklavier library\n"
+"- a bug in the X server (xkbcomp, xmodmap utilities)\n"
+"- X server with incompatible libxkbfile implemenation\n"
 "\n"
 "X server version data:\n"
 "%s\n"
@@ -2827,9 +2833,9 @@ msgstr ""
 "%s\n"
 "If you report this situation as a bug, please include:\n"
 "- The result of <b>xprop -root | grep XKB</b>\n"
-"- The result of <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b>"
+"- The result of <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/kbd</b>"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:101
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:107
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2841,7 +2847,7 @@ msgstr ""
 "Try using simpler configuration or taking more fresh version of XFree "
 "software."
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:190
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:215
 msgid ""
 "The X system keyboard settings differ from your current GNOME keyboard "
 "settings.  Which set would you like to use?"
@@ -2849,15 +2855,15 @@ msgstr ""
 "The X system keyboard settings differ from your current GNOME keyboard "
 "settings.  Which set would you like to use?"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:193
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:218
 msgid "Use X settings"
 msgstr "Use X settings"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:195
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:220
 msgid "Use GNOME settings"
 msgstr "Use GNOME settings"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:249
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:274
 #, c-format
 msgid ""
 "You have a keyboard remapping file (%s) in your home directory whose "
