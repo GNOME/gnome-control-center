@@ -1,20 +1,26 @@
+2000-10-14  Bradford Hovinen  <hovinen@helixcode.com>
+
+	* capplets/background-properties/render-background.c 
+	(set_root_pixmap): Set ESETROOT_PMAP_ID and _XROOTPMAP_ID to
+	integer 0 if the pixmap passed was NULL
+
 2000-10-06  Bradford Hovinen  <hovinen@helixcode.com>
 
 	* capplets/background-properties/property-background.c
 	(fill_monitor): Set the root pixmap to NULL when optimizing for
  	the no wallpaper case
-	(background_try):
-	(background_cancel):
-	(background_revert):
-	(background_ok): Write settings before applying
-
-	From Mike Engber <engber@eazel.com>:
-	(fill_monitor): Set last argument on make_background to FALSE if
-	there is no image
 
 	* capplets/mime-type/mime-type-capplet.c (help_callback): Remove
  	reference to GNOME User's Guide, replace with Control Center
  	Documentation
+
+	From Mike Engber <engber@eazel.com>:
+	(background_try):
+	(background_cancel):
+	(background_revert):
+	(background_ok): Write settings before applying
+	(fill_monitor): Set last argument on make_background to FALSE if
+	there is no image
 
 2000-09-11  Bradford Hovinen  <hovinen@helixcode.com>
 
