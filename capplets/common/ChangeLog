@@ -1,3 +1,14 @@
+2002-04-10  Rachel Hestilow  <hestilow@ximian.com>
+	
+	* gconf-proprerty-editor.h: Add FontType enum, and a font_type
+	parameter to gconf_peditor_new_font.
+
+	* gconf-property-editor.c:
+	(peditor_font_value_changed): Call peditor_font_merge_setting
+	instead of setting the properties explicitly.
+	(peditor_font_widget_changed): Switch on font_type to determine
+	what to set for a GConfValue.
+
 2002-03-28  Richard Hestilow  <hestilow@ximian.com>
 
 	* gconf-property-editor.c (peditor_image_clicked_cb): Set
