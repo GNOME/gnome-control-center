@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2002-08-06 09:32-0400\n"
-"PO-Revision-Date: 2002-07-18 15:50+0200\n"
+"POT-Creation-Date: 2002-08-16 11:50+0200\n"
+"PO-Revision-Date: 2002-08-16 11:53+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:225
-#: capplets/keyboard/gnome-keyboard-properties.c:143
+#: capplets/keyboard/gnome-keyboard-properties.c:159
 #, c-format
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr ""
@@ -34,7 +34,7 @@ msgid "Select CDE AccessX file"
 msgstr "Välj CDE AccessX-fil"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Tangentbord"
@@ -250,7 +250,7 @@ msgstr "Välj _bild:"
 #: capplets/background/background-properties-capplet.c:561
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
-#: capplets/keyboard/gnome-keyboard-properties.c:277
+#: capplets/keyboard/gnome-keyboard-properties.c:293
 #: capplets/mouse/gnome-mouse-properties.c:752
 #: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
@@ -791,7 +791,7 @@ msgid "Associate sounds with window manager events"
 msgstr "Associera ljud med fönsterhanterarhändelser"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
 #: capplets/sound/sound.desktop.in.h:2
 msgid "Sound"
 msgstr "Ljud"
@@ -811,98 +811,6 @@ msgstr "Gamla program"
 #: capplets/desktop-links/legacy-applications.desktop.in.in.h:2
 msgid "Legacy applications settings (grdb)"
 msgstr "Inställningar för gamla program (grdb)"
-
-#.
-#. * Translatable strings file
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/file-types/category-names.h:7
-msgid "Documents"
-msgstr "Dokument"
-
-#: capplets/file-types/category-names.h:8
-msgid "Word Processor"
-msgstr "Ordbehandlare"
-
-#: capplets/file-types/category-names.h:9
-msgid "Published Materials"
-msgstr "Publicerade material"
-
-#: capplets/file-types/category-names.h:10
-msgid "Spreadsheet"
-msgstr "Kalkylblad"
-
-#: capplets/file-types/category-names.h:11
-msgid "Presentation"
-msgstr "Presentation"
-
-#: capplets/file-types/category-names.h:12
-msgid "Diagram"
-msgstr "Diagram"
-
-#: capplets/file-types/category-names.h:13
-msgid "TeX"
-msgstr "TeX"
-
-#: capplets/file-types/category-names.h:14
-msgid "Vector Graphics"
-msgstr "Vektorgrafik"
-
-#: capplets/file-types/category-names.h:15
-msgid "World Wide Web"
-msgstr "World Wide Web (WWW)"
-
-#: capplets/file-types/category-names.h:16
-msgid "Plain Text"
-msgstr "Vanlig text"
-
-#: capplets/file-types/category-names.h:17
-msgid "Extended Markup Language (XML)"
-msgstr "Extended Markup Language (XML)"
-
-#: capplets/file-types/category-names.h:18
-msgid "Information"
-msgstr "Information"
-
-#: capplets/file-types/category-names.h:19
-msgid "Financial"
-msgstr "Ekonomi"
-
-#: capplets/file-types/category-names.h:20
-msgid "Calendar"
-msgstr "Kalender"
-
-#: capplets/file-types/category-names.h:21
-msgid "Contacts"
-msgstr "Kontakter"
-
-#: capplets/file-types/category-names.h:22
-msgid "Packages"
-msgstr "Paket"
-
-#: capplets/file-types/category-names.h:23
-msgid "Software Development"
-msgstr "Programvaruutveckling"
-
-#: capplets/file-types/category-names.h:24
-msgid "Source Code"
-msgstr "Källkod"
-
-#: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:671
-msgid "Audio"
-msgstr "Ljud"
-
-#: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:667
-msgid "Images"
-msgstr "Bilder"
-
-#: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:669
-msgid "Video"
-msgstr "Grafik"
 
 #: capplets/file-types/file-types-capplet.c:214
 msgid "Description"
@@ -927,11 +835,11 @@ msgid "Actions"
 msgstr "Åtgärder"
 
 #: capplets/file-types/file-types-properties.glade.h:3
-msgid "Add _file type..."
+msgid "Add _File Type..."
 msgstr "Lägg till _filtyp..."
 
 #: capplets/file-types/file-types-properties.glade.h:4
-msgid "Add _service..."
+msgid "Add _Service..."
 msgstr "Lägg till _tjänst..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
@@ -1113,6 +1021,18 @@ msgstr "Kategori"
 msgid "Choose a file category"
 msgstr "Välj en filkategori"
 
+#: capplets/file-types/mime-type-info.c:667
+msgid "Images"
+msgstr "Bilder"
+
+#: capplets/file-types/mime-type-info.c:669
+msgid "Video"
+msgstr "Grafik"
+
+#: capplets/file-types/mime-type-info.c:671
+msgid "Audio"
+msgstr "Ljud"
+
 #: capplets/file-types/mime-types-model.c:167
 #: capplets/file-types/mime-types-model.c:168
 msgid "Model for categories only"
@@ -1229,7 +1149,7 @@ msgid "Accelerator key"
 msgstr "Snabbtangent"
 
 #: capplets/keybindings/eggcellrendererkeys.c:206
-#: capplets/keybindings/gnome-keybinding-properties.c:173
+#: capplets/keybindings/gnome-keybinding-properties.c:191
 #: libbackground/applier.c:521
 msgid "Disabled"
 msgstr "Avslagen"
@@ -1240,24 +1160,24 @@ msgstr "Avslagen"
 msgid "Type a new shortcut"
 msgstr "Tryck en ny snabbtangent"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:440
+#: capplets/keybindings/gnome-keybinding-properties.c:458
 msgid "<Unknown Action>"
 msgstr "<Okänd åtgärd>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:459
+#: capplets/keybindings/gnome-keybinding-properties.c:477
 msgid "Desktop"
 msgstr "Skrivbord"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:463
+#: capplets/keybindings/gnome-keybinding-properties.c:481
 msgid "Window Management"
 msgstr "Fönsterhantering"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:560
+#: capplets/keybindings/gnome-keybinding-properties.c:578
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Fel vid inställning av ny snabbtangent i konfigurationsdatabasen: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:711
+#: capplets/keybindings/gnome-keybinding-properties.c:729
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1265,11 +1185,11 @@ msgstr ""
 "Kan inte hitta några tangentbordsteman. Detta betyder att din GTK+-"
 "installation inte har installerats korrekt."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:733
+#: capplets/keybindings/gnome-keybinding-properties.c:751
 msgid "Action"
 msgstr "Åtgärd"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:749
+#: capplets/keybindings/gnome-keybinding-properties.c:767
 msgid "Shortcut"
 msgstr "Genväg"
 
@@ -1294,12 +1214,12 @@ msgstr "_Textredigeringsgenvägar:"
 msgid "Assign shortcut keys to commands"
 msgstr "Associera snabbtangenter med kommandon"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:256
+#: capplets/keyboard/gnome-keyboard-properties.c:272
 msgid "_Accessibility"
 msgstr "_Åtkomlighet"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:273
-#: capplets/keyboard/gnome-keyboard-properties.c:275
+#: capplets/keyboard/gnome-keyboard-properties.c:289
+#: capplets/keyboard/gnome-keyboard-properties.c:291
 #: capplets/sound/sound-properties-capplet.c:145
 #: capplets/sound/sound-properties-capplet.c:147
 msgid ""
@@ -1309,78 +1229,90 @@ msgstr ""
 "av demon)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:2
+msgid "<small><i>Fast</i></small>"
+msgstr "<small><i>Snabb</i></small>"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+msgid "<small><i>Long</i></small>"
+msgstr "<small><i>Lång</i></small>"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+msgid "<small><i>Short</i></small>"
+msgstr "<small><i>Kort</i></small>"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+msgid "<small><i>Slow</i></small>"
+msgstr "<small><i>Långsam</i></small>"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "Bee_p"
 msgstr "_Pip"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "C_ustom:"
 msgstr "A_npassad:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "Clic_k on keypress"
 msgstr "_Klicka vid tangenttryckning"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "Cursor Blinks"
 msgstr "Markörblink"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "Keyboard Bell"
 msgstr "Tangentbordssignal"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Keyboard Preferences"
 msgstr "Tangentbordsinställningar"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Keyboard _repeats when key is held down"
 msgstr "Tangentbordet _upprepar då tangent hålls ned"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Keypress Click"
 msgstr "Tangentklick"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
 msgid "Repeat Keys"
 msgstr "Repeteringstangenter"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "S_peed:"
 msgstr "Hasti_ghet:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid "_Accessibility..."
 msgstr "_Åtkomlighet..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "_Blinks in text boxes and fields"
 msgstr "_Blinkar i textrutor och textfält"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
 msgid "_Delay:"
 msgstr "_Fördröjning:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
 msgid "_Off"
 msgstr "_Av"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid "_Speed:"
 msgstr "_Hastighet:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "_Volume:"
 msgstr "_Volym:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
-msgid "faster"
-msgstr "snabbare"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid "loud"
 msgstr "ljudlig"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "quiet"
 msgstr "tyst"
 
@@ -2056,7 +1988,7 @@ msgstr ""
 msgid "_Do not show this message again"
 msgstr "_Visa inte detta meddelande igen"
 
-#: gnome-settings-daemon/gnome-settings-sound.c:125
+#: gnome-settings-daemon/gnome-settings-sound.c:128
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Kunde inte läsa in ljudfilen %s som prov %s"
@@ -2202,6 +2134,63 @@ msgstr ""
 #: libwindow-settings/gnome-wm-manager.c:464
 msgid "OK"
 msgstr "OK"
+
+#~ msgid "Documents"
+#~ msgstr "Dokument"
+
+#~ msgid "Word Processor"
+#~ msgstr "Ordbehandlare"
+
+#~ msgid "Published Materials"
+#~ msgstr "Publicerade material"
+
+#~ msgid "Spreadsheet"
+#~ msgstr "Kalkylblad"
+
+#~ msgid "Presentation"
+#~ msgstr "Presentation"
+
+#~ msgid "Diagram"
+#~ msgstr "Diagram"
+
+#~ msgid "TeX"
+#~ msgstr "TeX"
+
+#~ msgid "Vector Graphics"
+#~ msgstr "Vektorgrafik"
+
+#~ msgid "World Wide Web"
+#~ msgstr "World Wide Web (WWW)"
+
+#~ msgid "Plain Text"
+#~ msgstr "Vanlig text"
+
+#~ msgid "Extended Markup Language (XML)"
+#~ msgstr "Extended Markup Language (XML)"
+
+#~ msgid "Information"
+#~ msgstr "Information"
+
+#~ msgid "Financial"
+#~ msgstr "Ekonomi"
+
+#~ msgid "Calendar"
+#~ msgstr "Kalender"
+
+#~ msgid "Contacts"
+#~ msgstr "Kontakter"
+
+#~ msgid "Packages"
+#~ msgstr "Paket"
+
+#~ msgid "Software Development"
+#~ msgstr "Programvaruutveckling"
+
+#~ msgid "Source Code"
+#~ msgstr "Källkod"
+
+#~ msgid "faster"
+#~ msgstr "snabbare"
 
 #~ msgid "Item 2"
 #~ msgstr "Objekt 2"
