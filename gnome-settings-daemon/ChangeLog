@@ -1,5 +1,13 @@
 2004-09-29  Bastien Nocera  <hadess@hadess.net>
 
+	* gnome-settings-multimedia-keys.c: (dialog_show): rework the
+	dialog_show so that the dialog is moved before it's shown, and
+	use gdk_display_sync() instead of a event looping to avoid
+	"reentrancy" problems when showing/hiding the dialog in fast
+	successions (Closes: #144490)
+
+2004-09-29  Bastien Nocera  <hadess@hadess.net>
+
 	* actions/acme-volume-gstreamer.c: (acme_volume_gstreamer_init):
 	better way to look for the volume track (patch by Michal Bukovjan
 	<bukovjan@mbox.dkm.cz>) (Closes: #153866)

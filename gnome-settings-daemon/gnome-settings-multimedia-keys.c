@@ -539,13 +539,11 @@ dialog_show (Acme *acme)
 	x = ((screen_w - orig_w) / 2) + geometry.x;
 	y = geometry.y + (screen_h / 2) + (screen_h / 2 - orig_h) / 2;
 
+	gtk_window_move (GTK_WINDOW (acme->dialog), x, y);
+
 	gtk_widget_show (acme->dialog);
 
-	gdk_window_move (GTK_WIDGET (acme->dialog)->window, x, y);
-
-	/* this makes sure the dialog is actually shown */
-	while (gtk_events_pending())
-		gtk_main_iteration();
+	gdk_display_sync (gdk_screen_get_display (acme->current_screen));
 
 	acme->dialog_timeout = gtk_timeout_add (DIALOG_TIMEOUT,
 			(GtkFunction) dialog_hide, acme);
