@@ -5,21 +5,12 @@
 
 #include "gnome-window-manager.h"
 
-void gnome_wm_manager_init (GtkWidget *some_window);
+void gnome_wm_manager_init (void);
 
-/* returns a GList of available window managers */
-GList *             gnome_wm_manager_get_list     (void);
+/* gets the currently active window manager */
+GnomeWindowManager *gnome_wm_manager_get_current (GdkScreen *screen);
 
-/* sets the currently active window manager in GConf */
-void                gnome_wm_manager_set_current  (GnomeWindowManager *wm);
-
-/* gets the currently active window manager from GConf */
-GnomeWindowManager *gnome_wm_manager_get_current  (void);
-
-/* change to the wm specified in GConf */
-void                gnome_wm_manager_change_wm_to_settings (void);
-
-/* return TRUE if wm1 and wm2 refer to the same window manager */
-gboolean            gnome_wm_manager_same_wm (GnomeWindowManager *wm1, GnomeWindowManager *wm2);
+gboolean gnome_wm_manager_spawn_config_tool_for_current (GdkScreen  *screen,
+                                                         GError    **error);
 
 #endif

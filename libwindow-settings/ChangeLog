@@ -1,3 +1,22 @@
+2002-10-26  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-window-manager.c: handle NULL fields in the class struct;
+	and replace the individual setters with get/set for a big 
+	struct with flags indicating which fields we care about, 
+	a la a graphics context. Add settings_changed signal.
+	(gnome_window_manager_get_type): change object name to
+	GnomeWindowManager not GWindowManager
+
+	* gnome-window-manager.h (struct _GnomeWindowManagerClass): add
+	padding to the class struct
+
+	* Makefile.am: move metacity module here from capplets/windows/
+	(libgnome_window_settings_la_SOURCES): don't build the code to
+	switch window managers, it was bitrotted and broken anyway, and
+	isn't in the UI right now. Keep the code in EXTRA_DIST in case
+	someone wants to recover it. Move some relevant bits to 
+	gnome-wm-manager.c
+
 2002-10-21  Jody Goldberg <jody@gnome.org>
 
 	* Release 2.1.1

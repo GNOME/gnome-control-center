@@ -1,3 +1,12 @@
+2002-10-26  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-window-properties.c: rewrite
+
+	* Makefile.am (bin_PROGRAMS): remove metacity module, move to 
+	libwindow-settings
+	(gnome_window_properties_LDADD): properly link to .la file for 
+	libgnome-window-settings, not the installed copy
+
 2002-10-21  Seth Nickell  <snickell@stanford.edu>
 
 	* gnome-window-properties.c: (setup_appearance_option_menu):

@@ -271,10 +271,13 @@ window_read_themes (GladeXML *dialog)
   gboolean current_theme_found = FALSE;
   GtkTreeRowReference *row_ref = NULL;
   GnomeWindowManager *wm;
+  GdkScreen *screen;
 
   client = gconf_client_get_default ();
 
-  wm = gnome_wm_manager_get_current ();  
+  screen = gdk_display_get_default_screen (gdk_display_get_default ());
+  
+  wm = gnome_wm_manager_get_current (screen);  
   if (wm != NULL) {
     window_theme_list = gnome_window_manager_get_theme_list (wm);
     g_object_unref (G_OBJECT (wm));
@@ -479,7 +482,7 @@ window_show_manage_themes (GtkWidget *button, gpointer data)
 	GnomeVFSURI *uri;
 	GnomeWindowManager *wm;
 	
-	wm = gnome_wm_manager_get_current ();
+	wm = gnome_wm_manager_get_current (gtk_widget_get_screen (button));
 	
 	path = gnome_window_manager_get_user_theme_folder (wm);
 	g_object_unref (G_OBJECT (wm));
@@ -824,7 +827,7 @@ main (int argc, char *argv[])
   activate_settings_daemon ();
 
   dialog = create_dialog ();
-  gnome_wm_manager_init (WID ("theme_dialog"));
+  gnome_wm_manager_init ();
 
   setup_dialog (dialog);
   gtk_main ();
