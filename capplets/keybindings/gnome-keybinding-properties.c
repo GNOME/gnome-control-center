@@ -771,6 +771,21 @@ real_start_editing_cb (IdleData *idle_data)
 }
 
 static gboolean
+start_editing_kb_cb (GtkTreeView *treeview, 
+			  GtkTreePath *path, 
+			  GtkTreeViewColumn *column,
+			  gpointer user_data)
+{
+  gtk_widget_grab_focus (GTK_WIDGET (treeview));
+  gtk_tree_view_set_cursor (treeview,
+			    path,
+			    gtk_tree_view_get_column (treeview, 1),
+			    TRUE);
+
+  return FALSE;
+}
+
+static gboolean
 start_editing_cb (GtkTreeView    *tree_view,
 		  GdkEventButton *event,
 		  GladeXML       *dialog)
@@ -827,6 +842,9 @@ setup_dialog (GladeXML *dialog)
   g_signal_connect (GTK_TREE_VIEW (WID ("shortcut_treeview")),
 		    "button_press_event",
 		    G_CALLBACK (start_editing_cb), dialog),
+	g_signal_connect (GTK_TREE_VIEW (WID ("shortcut_treeview")),
+	      "row-activated",
+		    G_CALLBACK (start_editing_kb_cb), dialog),
 		    
   column = gtk_tree_view_column_new_with_attributes (_("Action"),
 						     gtk_cell_renderer_text_new (),
