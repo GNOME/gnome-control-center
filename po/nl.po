@@ -5,12 +5,13 @@
 # Dennis Smit <synap@area101.penguin.nl>, 2000
 # Almer S. Tigelaar <almer@gnome.org>, 2001
 # Jan-Willem Harmanny <jwharmanny@hotmail.com>, 2002
+# Huib Kleinhout <huib@stack.nl>, 2002
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center CVS\n"
-"POT-Creation-Date: 2002-02-12 00:27-0600\n"
-"PO-Revision-Date: 2000-02-19 20:35+0100\n"
-"Last-Translator: Jan-Willem Harmanny <jwharmanny@hotmail.com>\n"
+"POT-Creation-Date: 2002-03-03 11:32-0500\n"
+"PO-Revision-Date: 2002-03-07 10:29+0100\n"
+"Last-Translator: Huib Kleinhout <huib@stack.nl>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
@@ -24,79 +25,123 @@ msgstr "Achtergrond"
 msgid "Configuration of the desktop's background"
 msgstr "Configuratie van de bureaublad achtergrond"
 
-#: capplets/background/background-properties-capplet.c:291
+#: capplets/background/background-properties-capplet.c:289
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:575
 #: capplets/keyboard/gnome-keyboard-properties.c:319
-#: capplets/mouse/gnome-mouse-properties.c:493
+#: capplets/mouse/gnome-mouse-properties.c:678
 #: capplets/sound/sound-properties-capplet.c:139
 msgid "Retrieve and store legacy settings"
 msgstr "Ga terug naar de standaard instellingen"
 
 #
-#: capplets/background/background-properties-capplet.c:315
-#, fuzzy
+#: capplets/background/background-properties-capplet.c:312
 msgid "Background properties"
-msgstr "Achtergrond Instellingen"
+msgstr "Achtergrond instellingen"
 
-#: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
+#: capplets/background/background-properties.glade.h:1
+msgid "Background colors"
+msgstr "Achtergrond kleuren"
+
+#
+#: capplets/background/background-properties.glade.h:2
+msgid "Background picture"
+msgstr "Achtergrond plaatje"
+
+#: capplets/background/background-properties.glade.h:3
+msgid "Centered"
+msgstr "Gecentreerd"
+
+#: capplets/background/background-properties.glade.h:4
+msgid "Horizontal gradient"
+msgstr "Horizontaal verlopend"
+
+#: capplets/background/background-properties.glade.h:5
+msgid "Image:"
+msgstr "Afbeelding:"
+
+#: capplets/background/background-properties.glade.h:6
+msgid "Pick a color"
+msgstr "Kies een kleur"
+
+#: capplets/background/background-properties.glade.h:7
+msgid "Scaled (keep aspect ratio)"
+msgstr "Geschaald (bewaar verhouding)"
+
+#: capplets/background/background-properties.glade.h:8
+msgid "Solid color"
+msgstr "Enkele kleur"
+
+#: capplets/background/background-properties.glade.h:9
+msgid "Stretched"
+msgstr "Uitgerekt"
+
+#: capplets/background/background-properties.glade.h:10
+msgid "Style:"
+msgstr "Stijl: "
+
+#: capplets/background/background-properties.glade.h:11
+msgid "Tiled"
+msgstr "Naast elkaar"
+
+#: capplets/background/background-properties.glade.h:12
+msgid "Use a picture for the background"
+msgstr "Gebruik een plaatje als achtergrond"
+
+#: capplets/background/background-properties.glade.h:13
+msgid "Vertical gradient"
+msgstr "Verticaal verlopend"
+
+#: capplets/common/capplet-util.c:239
+#: capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "Instellingen toepassen en afsluiten"
 
-#: capplets/common/gconf-property-editor.c:144
+#: capplets/common/gconf-property-editor.c:145
 msgid "Key"
 msgstr "Sleutel"
 
-#: capplets/common/gconf-property-editor.c:145
+#: capplets/common/gconf-property-editor.c:146
 msgid "GConf key to which this property editor is attached"
 msgstr "GConf sleutel waaraan deze eigenschappen bewerker is verbonden"
 
-#: capplets/common/gconf-property-editor.c:151
+#: capplets/common/gconf-property-editor.c:152
 msgid "Callback"
 msgstr "Terugzetten"
 
-#: capplets/common/gconf-property-editor.c:152
+#: capplets/common/gconf-property-editor.c:153
 msgid "Issue this callback when the value associated with key gets changed"
 msgstr "Deze sleutel terugzetten wanneer de eraan verbonden waarde verandert"
 
-#: capplets/common/gconf-property-editor.c:157
+#: capplets/common/gconf-property-editor.c:158
 msgid "Change set"
 msgstr "Change set"
 
-#: capplets/common/gconf-property-editor.c:158
-msgid ""
-"GConf change set containing data to be forwarded to the gconf client on apply"
-msgstr ""
-"GConf change set met gegevens die naar de gconf client worden gestuurd bij "
-"toepassen"
+#: capplets/common/gconf-property-editor.c:159
+msgid "GConf change set containing data to be forwarded to the gconf client on apply"
+msgstr "GConf change set met gegevens die naar de gconf client worden gestuurd bij toepassen"
 
-#: capplets/common/gconf-property-editor.c:163
+#: capplets/common/gconf-property-editor.c:164
 msgid "Conversion to widget callback"
 msgstr "Conversie naar widget callback"
 
-#: capplets/common/gconf-property-editor.c:164
-msgid ""
-"Callback to be issued when data are to be converted from GConf to the widget"
-msgstr ""
-"Callback die wordt gestuurd wanneer gegevens moeten worden omgezet van GConf "
-"naar de widget"
+#: capplets/common/gconf-property-editor.c:165
+msgid "Callback to be issued when data are to be converted from GConf to the widget"
+msgstr "Callback die wordt gestuurd wanneer gegevens moeten worden omgezet van GConf naar de widget"
 
-#: capplets/common/gconf-property-editor.c:169
+#: capplets/common/gconf-property-editor.c:170
 msgid "Conversion from widget callback"
 msgstr "Conversie vanuit widget callback"
 
-#: capplets/common/gconf-property-editor.c:170
-msgid ""
-"Callback to be issued when data are to be converted to GConf from the widget"
-msgstr ""
-"Callback die wordt gestuurd wanneer gegevens moeten worden omgezet naar "
-"GConf vanuit de widget"
+#: capplets/common/gconf-property-editor.c:171
+msgid "Callback to be issued when data are to be converted to GConf from the widget"
+msgstr "Callback die wordt gestuurd wanneer gegevens moeten worden omgezet naar GConf vanuit de widget"
 
-#: capplets/common/gconf-property-editor.c:175
+#: capplets/common/gconf-property-editor.c:176
 msgid "UI Control"
 msgstr "UI Regelaar"
 
-#: capplets/common/gconf-property-editor.c:176
+#: capplets/common/gconf-property-editor.c:177
 msgid "Object that controls the property (normally a widget)"
 msgstr "Object dat de eigenschap beheert (meestal een widget)"
 
@@ -105,8 +150,124 @@ msgid "Choose the applications used by default"
 msgstr "Kies de applicaties die standaard worden gebruikt"
 
 #: capplets/default-applications/default-applications.desktop.in.h:2
+msgid "Preferred Applications"
+msgstr "Standaard Toepassingen"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:1
+msgid "Acce_pts URLs"
+msgstr "Acce_pteer URL's"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:2
+msgid "Accepts Line _Number"
+msgstr "Accepteer Regel _Nummers"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:3
+msgid "C_ustom Editor:"
+msgstr "_Aangepaste editor"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:4
+msgid "C_ustom Help Browser:"
+msgstr "Andere Help Browser:"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:5
+msgid "C_ustom Terminal:"
+msgstr "_Aangepaste Terminal"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:6
+msgid "C_ustom Web Browser:"
+msgstr "_Aangepaste Web Browser"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:7
+msgid "Co_mmand:"
+msgstr "O_pdracht:"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:8
 msgid "Default Applications"
 msgstr "Standaard Applicaties"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:9
+msgid "Default Help Browser"
+msgstr "Standaard Help Browser"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:10
+msgid "Default Terminal"
+msgstr "Standaard Terminal"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:11
+msgid "Default Text Editor"
+msgstr "Standaard Tekst editor"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:12
+msgid "Default Web Browser"
+msgstr "Standaard Web Browser"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:13
+msgid "Default Window Manager"
+msgstr "Standaard Window Manager"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:14
+msgid "E_xec Flag:"
+msgstr "E_xec Markering:"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:15
+msgid "He_lp Browser"
+msgstr "He_lp Browser"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:16
+msgid "Select the window manager you want.  You will need to hit apply, wave the magic wand, and do a magic dance for it to work."
+msgstr "Selecteer de window manager die u wilt gebruiken. U zult de 'Toepassen' knop moeten indrukken, een koprol moeten maken en een magisch dansje moeten doen om het te laten werken."
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:17
+msgid "Start in T_erminal"
+msgstr "Activeren in Terminal"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:18
+msgid "Te_rminal"
+msgstr "Te_rminal"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:19
+msgid "Understands _Netscape Remote Control"
+msgstr "Begrijpt '_Netscape Remote Control'"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:20
+msgid "Web _Browser"
+msgstr "Web _Browser"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:21
+msgid "_Add..."
+msgstr "_Toevoegen..."
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:22
+msgid "_Delete"
+msgstr "_Verwijderen"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:23
+msgid "_Edit..."
+msgstr "_Bewerken..."
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:24
+msgid "_Select a Help Browser:"
+msgstr "_Kies een Help Browser:"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:25
+msgid "_Select a Terminal:"
+msgstr "_Kies een Terminal:"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:26
+msgid "_Select a Web Browser:"
+msgstr "_Kies een Web Browser"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:27
+msgid "_Select an Editor:"
+msgstr "_Kies een editor..."
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:28
+msgid "_Text Editor"
+msgstr "_Tekst editor"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:29
+msgid "_Window Manager"
+msgstr "_Window Manager"
 
 #: capplets/desktop-links/Advanced.directory.in.in.h:1
 msgid "Advanced"
@@ -133,6 +294,7 @@ msgid "Legacy applications settings (grdb)"
 msgstr "Instellingen van algemene applicaties"
 
 #: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
+#: control-center/gnomecc.glade.h:1
 msgid "Appearance"
 msgstr "Uiterlijk"
 
@@ -229,14 +391,6 @@ msgstr "Configureer werkruimten"
 msgid "Workspaces"
 msgstr "Werkruimten"
 
-#: capplets/desktop-links/session.desktop.in.in.h:1
-msgid "Configure which non-session aware programs are started up"
-msgstr "Configureer welke sessie-onafhankelijke programma's worden opgestart"
-
-#: capplets/desktop-links/session.desktop.in.in.h:2
-msgid "Startup Programs"
-msgstr "Opstartprogramma toevoegen"
-
 #.
 #. * Translatable strings file
 #. * Add this file to your project's POTFILES.in.
@@ -315,24 +469,28 @@ msgid "Source Code"
 msgstr "Broncode"
 
 #: capplets/file-types/category-names.h:25
+#: capplets/file-types/mime-type-info.c:745
 msgid "Audio"
 msgstr "Audio"
 
 #: capplets/file-types/category-names.h:26
+#: capplets/file-types/mime-type-info.c:741
 msgid "Images"
 msgstr "Afbeeldingen"
 
 #: capplets/file-types/category-names.h:27
+#: capplets/file-types/mime-type-info.c:743
 msgid "Video"
 msgstr "Video"
 
 #: capplets/file-types/file-types-capplet.c:212
+#: capplets/file-types/file-types-properties.glade.h:8
 msgid "Description"
 msgstr "Beschrijving"
 
 #: capplets/file-types/file-types-capplet.c:219
 msgid "Extensions"
-msgstr "Extensies"
+msgstr "Achtervoegsels"
 
 #: capplets/file-types/file-types.desktop.in.h:1
 msgid "File Types and Programs"
@@ -340,8 +498,105 @@ msgstr "Bestandstypen en programma's"
 
 #: capplets/file-types/file-types.desktop.in.h:2
 msgid "Specify which programs are used to open or view each file type"
-msgstr ""
-"Instellen welke programma's worden gebruikt om elk bestandstype te openen"
+msgstr "Instellen welke programma's worden gebruikt om elk bestandstype te openen"
+
+#: capplets/file-types/file-types-properties.glade.h:1
+msgid "Actions"
+msgstr "Acties"
+
+#: capplets/file-types/file-types-properties.glade.h:2
+msgid "Add"
+msgstr "Toevoegen"
+
+#: capplets/file-types/file-types-properties.glade.h:3
+msgid "Add file type..."
+msgstr "Voeg bestandstype toe..."
+
+#: capplets/file-types/file-types-properties.glade.h:4
+msgid "Add service..."
+msgstr "Voeg service toe..."
+
+#: capplets/file-types/file-types-properties.glade.h:5
+#: capplets/file-types/mime-edit-dialog.c:748
+msgid "Category"
+msgstr "Categorie"
+
+#: capplets/file-types/file-types-properties.glade.h:6
+msgid "Choose..."
+msgstr "Bladeren..."
+
+#: capplets/file-types/file-types-properties.glade.h:7
+msgid "Default action"
+msgstr "Standaard actie"
+
+#: capplets/file-types/file-types-properties.glade.h:9
+#: capplets/file-types/mime-edit-dialog.c:167
+msgid "Edit file type"
+msgstr "Bewerk bestandstype"
+
+#: capplets/file-types/file-types-properties.glade.h:10
+msgid "Edit..."
+msgstr "Bewerken..."
+
+#: capplets/file-types/file-types-properties.glade.h:11
+msgid "File types and Internet Services"
+msgstr "Bestandstypen en Internet Diensten"
+
+#: capplets/file-types/file-types-properties.glade.h:12
+msgid "Filename extensions"
+msgstr "Bestandsnaam achtervoegsels"
+
+#: capplets/file-types/file-types-properties.glade.h:13
+msgid "Look at content"
+msgstr "Bekijk inhoud"
+
+#: capplets/file-types/file-types-properties.glade.h:14
+msgid "MIME Type"
+msgstr "MIME Type"
+
+#: capplets/file-types/file-types-properties.glade.h:15
+msgid "Name"
+msgstr "Naam"
+
+#: capplets/file-types/file-types-properties.glade.h:16
+msgid "Needs terminal"
+msgstr "Vereist terminal"
+
+#: capplets/file-types/file-types-properties.glade.h:17
+msgid "Program"
+msgstr "Programma"
+
+#: capplets/file-types/file-types-properties.glade.h:18
+msgid "Program to execute"
+msgstr "Uit te voeren programma"
+
+#: capplets/file-types/file-types-properties.glade.h:19
+msgid "Program to run"
+msgstr "Uit te voeren programma"
+
+#: capplets/file-types/file-types-properties.glade.h:20
+msgid "Protocol name"
+msgstr "Protocol naam"
+
+#: capplets/file-types/file-types-properties.glade.h:21
+msgid "Remove"
+msgstr "Verwijderen"
+
+#: capplets/file-types/file-types-properties.glade.h:22
+msgid "Run a program"
+msgstr "Start een programma"
+
+#: capplets/file-types/file-types-properties.glade.h:23
+msgid "Use category defaults"
+msgstr "Gebruik categorie standaarden"
+
+#: capplets/file-types/file-types-properties.glade.h:24
+msgid "Use parent category defaults"
+msgstr "Gebruik bron categorie standaarden"
+
+#: capplets/file-types/file-types-properties.glade.h:25
+msgid "Viewing component"
+msgstr "Bezichtigings onderdeel"
 
 #: capplets/file-types/mime-category-edit-dialog.c:137
 msgid "Edit file category"
@@ -378,10 +633,6 @@ msgstr "Aangepast"
 msgid "Extension"
 msgstr "Extensie"
 
-#: capplets/file-types/mime-edit-dialog.c:167
-msgid "Edit file type"
-msgstr "Bewerk bestandstype"
-
 #: capplets/file-types/mime-edit-dialog.c:205
 msgid "Underlying model to notify when Ok is clicked"
 msgstr "Onderliggend model om aan te geven wanneer op OK wordt geklikt"
@@ -408,20 +659,12 @@ msgid "None"
 msgstr "Geen"
 
 #: capplets/file-types/mime-edit-dialog.c:673
-msgid ""
-"Invalid MIME type. Please enter a valid MIME type, or leave the field blank "
-"to have one generated for you."
-msgstr ""
-"Ongeldig MIME tyoe. Geef een geldig MIME type, of laat het veld leeg om een "
-"geldig type te laten genereren."
+msgid "Invalid MIME type. Please enter a valid MIME type, or leave the field blank to have one generated for you."
+msgstr "Ongeldig MIME tyoe. Geef een geldig MIME type, of laat het veld leeg om een geldig type te laten genereren."
 
 #: capplets/file-types/mime-edit-dialog.c:684
 msgid "There already exists a MIME type of that name."
 msgstr "Er bestaat al een MIME type met die naam."
-
-#: capplets/file-types/mime-edit-dialog.c:748
-msgid "Category"
-msgstr "Categorie"
 
 #: capplets/file-types/mime-edit-dialog.c:753
 msgid "Choose a file category"
@@ -432,7 +675,7 @@ msgstr "Kies een bestands categorie"
 msgid "Model for categories only"
 msgstr "Model enkel voor categorieen"
 
-#: capplets/file-types/mime-types-model.c:420
+#: capplets/file-types/mime-types-model.c:421
 msgid "Internet Services"
 msgstr "Internet Diensten"
 
@@ -461,11 +704,8 @@ msgid "Please enter a protocol name."
 msgstr "Vul alstublieft een protocol naam hieronder in."
 
 #: capplets/file-types/service-edit-dialog.c:502
-msgid ""
-"Invalid protocol name. Please enter a protocol name without any spaces or "
-"punctuation."
-msgstr ""
-"Ongeldige protocol naam. Geef een protocol naam zonder spaties of leestekens."
+msgid "Invalid protocol name. Please enter a protocol name without any spaces or punctuation."
+msgstr "Ongeldige protocol naam. Geef een protocol naam zonder spaties of leestekens."
 
 #: capplets/file-types/service-edit-dialog.c:515
 msgid "There is already a protocol by that name."
@@ -495,38 +735,348 @@ msgstr "Handleiding pagina's"
 msgid "Electronic mail transmission"
 msgstr "Electronische post overbrenging"
 
+#: capplets/font/font-properties.glade.h:1
+msgid "Font properties"
+msgstr "Lettertype eigenschappen"
+
+#: capplets/font/font-properties.glade.h:2
+msgid "Use a custom font."
+msgstr "Gebruik een aangepast lettertype"
+
 #: capplets/font/font-properties.desktop.in.h:1
-#, fuzzy
 msgid "Font"
-msgstr "Keuze Lettertype"
+msgstr "Lettertype"
 
 #: capplets/font/font-properties.desktop.in.h:2
-#, fuzzy
 msgid "Select which font to use"
-msgstr "Kies welk gtk+ thema wordt gebruikt"
+msgstr "Kies het lettertype dat gebruikt dient te worden"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:315
 #: capplets/keyboard/gnome-keyboard-properties.c:317
 #: capplets/sound/sound-properties-capplet.c:135
 #: capplets/sound/sound-properties-capplet.c:137
-msgid ""
-"Just apply settings and quit (compatibility only; now handled by daemon)"
-msgstr ""
-"Instellingen toepassen en sluiten (enkel voor compatibiliteit, wordt nu door "
-"een daemon gedaan)"
+msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
+msgstr "Instellingen toepassen en sluiten (enkel voor compatibiliteit, wordt nu door een daemon gedaan)"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
+msgid "&lt;i&gt;fast&lt;/i&gt;"
+msgstr "&lt;i&gt;snel&lt;/i&gt;"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:2
+msgid "&lt;i&gt;loud&lt;/i&gt;"
+msgstr "&lt;i&gt;luid&lt;/i&gt;"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+msgid "&lt;i&gt;quiet&lt;/i&gt;"
+msgstr "&lt;i&gt;stil&lt;/i&gt;"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+msgid "&lt;i&gt;slow&lt;/i&gt;"
+msgstr "&lt;i&gt;langzaam&lt;/i&gt;"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+msgid "Cursor"
+msgstr "Cursor"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+msgid "Fast"
+msgstr "Snel"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
+msgid "Key_press makes sound"
+msgstr "Toetsaan_slag maakt geluid"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
+msgid "Keyboard Bell"
+msgstr "Toetsenbord Piep"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: capplets/keyboard/keyboard.desktop.in.h:2
+msgid "Keyboard Properties"
+msgstr "Toetsenbord Instellingen"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+msgid "Keyboard _repeats when key is held down"
+msgstr "Toetsenbord _herhaald wanneer de toets ingedrukt blijft"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+msgid "Keyboard bell _enabled"
+msgstr "Toetsenbord piep _ingeschakeld"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+msgid "Keyboard bell _off"
+msgstr "Toetsenbord piep _uit"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+msgid "Keyclick Volume"
+msgstr "Toetsklik volume"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+msgid "Long"
+msgstr "Lang"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+msgid "Medium"
+msgstr "Gemiddeld"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+msgid "Repeat Rate"
+msgstr "Herhaalsnelheid"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
+msgid "Repeat s_peed:"
+msgstr "Herhaal s_nelheid:"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
+msgid "Set the speed the cursor blinks in text fields."
+msgstr "Stel de snelheid van het knipperen van de cursor in tekst velden in. "
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
+msgid "Set the volume of the clicking sound made when pressing a key"
+msgstr "Stel het volume van het klikgeluid bij toetsaanslagen in."
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
+msgid "Short"
+msgstr "Kort"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+msgid "Slow"
+msgstr "Langzaam"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+msgid "The keyboard bell is the &lt;i&gt;beep&lt;/i&gt; sound heard when the system wants to get your attention.  You can select a custom sound file to play instead of the traditional beeping noise."
+msgstr "De toetsenbord piep is het &lt;i&gt;piep&lt;/i&gt; geluid dat u hoort wanneer het systeem uw aandacht nodig heeft. U kunt een geluidsbestand kiezen dat afgespeeld dient te worden in plaats van het standaard piep-geluid."
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
+msgid "Very fast"
+msgstr "Zeer snel"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
+msgid "Very long"
+msgstr "Zeer lang"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
+msgid "_Blink speed:"
+msgstr "_Knipper snelheid:"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
+msgid "_Cursor blinks in text fields"
+msgstr "_Cursor knipper in tekst velden"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
+msgid "_Custom keyboard bell:"
+msgstr "_Aangepaste toetsenbord piep:"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
+msgid "_Delay before repeating:"
+msgstr "Ver_traging voor herhaling:"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
+msgid "_Keyboard"
+msgstr "_Toetsenbord"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:30
+msgid "_Sound"
+msgstr "_Geluid"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
+msgid "_Volume:"
+msgstr "_Volume"
 
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Toetsenbord"
 
-#: capplets/keyboard/keyboard.desktop.in.h:2
-msgid "Keyboard Properties"
-msgstr "Toetsenbord Instellingen"
+#: capplets/mouse/gnome-mouse-properties.c:407
+#, c-format
+msgid ""
+"<b>Unknown Cursor</b>\n"
+"%s"
+msgstr ""
+"<b>Onbekende Cursor</b>\n"
+"%s"
 
-#: capplets/mouse/gnome-mouse-properties.c:518
+#: capplets/mouse/gnome-mouse-properties.c:505
+msgid ""
+"<b>Default Cursor - Current</b>\n"
+"The default cursor that ships with X"
+msgstr ""
+"<b>Standaard cursor - Huidig</b>\n"
+"De standaard cursor die meegeleverd wordt met X "
+
+#: capplets/mouse/gnome-mouse-properties.c:508
+msgid ""
+"<b>Default Cursor</b>\n"
+"The default cursor that ships with X"
+msgstr ""
+"<b>Standaard cursor</b>\n"
+"De standaard cursor die meegeleverd wordt met X "
+
+#: capplets/mouse/gnome-mouse-properties.c:526
+msgid ""
+"<b>White Cursor - Current</b>\n"
+"The default cursor inverted"
+msgstr ""
+"<b>Witte Cursor - Huidig</b>\n"
+"De standaard cursor omgekeerd"
+
+#: capplets/mouse/gnome-mouse-properties.c:529
+msgid ""
+"<b>White Cursor</b>\n"
+"The default cursor inverted"
+msgstr ""
+"<b>Witte Cursor</b>\n"
+"De standaard cursor omgekeerd"
+
+#: capplets/mouse/gnome-mouse-properties.c:547
+msgid ""
+"<b>Large Cursor - Current</b>\n"
+"Large version of normal cursor"
+msgstr ""
+"<b>Grote Cursor - Huidig</b>\n"
+"Grote versie van de standaard cursor"
+
+#: capplets/mouse/gnome-mouse-properties.c:550
+msgid ""
+"<b>Large Cursor</b>\n"
+"Large version of normal cursor"
+msgstr ""
+"<b>Grote Cursor</b>\n"
+"Grote versie van de standaard cursor"
+
+#: capplets/mouse/gnome-mouse-properties.c:568
+msgid ""
+"<b>Large White Cursor - Current</b>\n"
+"Large version of white cursor"
+msgstr ""
+"<b>Grote Witte Cursor - Huidig</b>\n"
+"Grote versie van de witte cursor"
+
+#: capplets/mouse/gnome-mouse-properties.c:571
+msgid ""
+"<b>Large White Cursor</b>\n"
+"Large version of white cursor"
+msgstr ""
+"<b>Grote Witte Cursor</b>\n"
+"Grote versie van de witte cursor"
+
+#: capplets/mouse/gnome-mouse-properties.c:703
+#: capplets/mouse/gnome-mouse-properties.glade.h:18
 #: capplets/mouse/mouse.desktop.in.h:2
 msgid "Mouse Properties"
 msgstr "Muis Instellingen"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:1
+msgid ""
+"&lt;b&gt;Note:&lt;/b&gt;\n"
+"\t\t\t    You will need to logout and log back in for this setting to take effect."
+msgstr ""
+"&lt;b&gt;Opmerking:&lt;/b&gt;\n"
+"\t\t\t    U zult opnieuw moeten inloggen om deze instelling in werking te laten treden."
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:3
+msgid "&lt;i&gt;Fast&lt;/i&gt;"
+msgstr "&lt;i&gt;Snel&lt;/i&gt;"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:4
+msgid "&lt;i&gt;High&lt;/i&gt;"
+msgstr "&lt;i&gt;Hoog&lt;/i&gt;"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:5
+msgid "&lt;i&gt;Large&lt;/i&gt;"
+msgstr "&lt;i&gt;Groot&lt;/i&gt;"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:6
+msgid "&lt;i&gt;Low&lt;/i&gt;"
+msgstr "&lt;i&gt;Laag&lt;/i&gt;"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:7
+msgid "&lt;i&gt;Slow&lt;/i&gt;"
+msgstr "&lt;i&gt;Langzaam&lt;/i&gt;"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:8
+msgid "&lt;i&gt;Small&lt;/i&gt;"
+msgstr "&lt;i&gt;Klein&lt;/i&gt;"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:9
+msgid "Animates a quick marker around the cursor when the Control key has been pressed and released."
+msgstr "Brengt gedurende korte tijd een markering aan rond de cursor wanneer de Control-toets ingedrukt is en wordt losgelaten."
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:10
+msgid "C_ursors"
+msgstr "C_ursors"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:11
+msgid "Cursor Theme"
+msgstr "Cursor Thema"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:12
+msgid "Double-click Delay"
+msgstr "Dubbel-klik Vertraging"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:13
+msgid "Drag and Drop"
+msgstr "Slepen en Neerzetten"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:14
+msgid "Left-handed mouse mode switches the left and right buttons on the mouse."
+msgstr "In de linkshandige muis-stand worden de linker- en rechtermuisknop omgewisseld."
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:15
+msgid "Locate Pointer"
+msgstr "Lokatie Aanwijzer"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:16
+msgid "Maximum time allowed between clicks when double-clicking.   Use the box on the right to test."
+msgstr "Maximale tijd die toegestaan is tussen twee klikken bij het dubbel-klikken. Gebruik het hokje aan de rechterkant om te testen."
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:17
+msgid "Mouse Orientation"
+msgstr "Muis Orientatie"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:19
+msgid "Set the distance you need to move your cursor before dragging an item."
+msgstr "Stel de afstand in die met de cursor afgelegd dient te worden voordat een item wordt verplaatst."
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:20
+msgid "Set the speed of your pointing device."
+msgstr "Stel de snelheid van uw aanwijs-apparaat in."
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:21
+msgid "Speed"
+msgstr "Snelheid"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:22
+msgid "_Acceleration:"
+msgstr "Ver_snelling:"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:23
+msgid "_Buttons"
+msgstr "_Knoppen"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:24
+msgid "_Delay (sec):"
+msgstr "Ver_traging (sec):"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:25
+msgid "_Left-handed mouse"
+msgstr "_Linkshandige muis"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:26
+msgid "_Motion"
+msgstr "_Beweging"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:27
+msgid "_Sensitivity:"
+msgstr "_Gevoeligheid:"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:28
+msgid "_Show position of cursor when the Control key is pressed"
+msgstr "_Toon positie van cursor wanneer de Control toets is ingedrukt."
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:29
+msgid "_Threshold:"
+msgstr "_Drempelwaarde:"
 
 #: capplets/mouse/mouse.desktop.in.h:1
 msgid "Mouse"
@@ -547,6 +1097,22 @@ msgstr "Configureer het gebruik van geluid in GNOME"
 #: capplets/sound/sound-properties-capplet.c:167
 msgid "Sound properties"
 msgstr "Geluid Instellingen"
+
+#: capplets/sound/sound-properties.glade.h:1
+msgid "Enable sound server startup"
+msgstr "Geluid server inschakelen"
+
+#: capplets/sound/sound-properties.glade.h:2
+msgid "General"
+msgstr "Algemeen"
+
+#: capplets/sound/sound-properties.glade.h:3
+msgid "Sound Events"
+msgstr "Geluid Gebeurtenissen"
+
+#: capplets/sound/sound-properties.glade.h:4
+msgid "Sounds for events"
+msgstr "Geluiden bij gebeurtenissen"
 
 #. just 8 short names that will serve as samples for titles in demo
 #: capplets/theme-switcher/control/control.c:19
@@ -603,8 +1169,9 @@ msgid "Submenu"
 msgstr "Submenu"
 
 #: capplets/theme-switcher/control/control.c:69
+#: capplets/ui-properties/gnome2-ui-properties.glade.h:2
 msgid "Item 1"
-msgstr "Onderdeel 1"
+msgstr "Item 1"
 
 #: capplets/theme-switcher/control/control.c:71
 msgid "Another item"
@@ -634,7 +1201,27 @@ msgstr "Gtk+ Thema Selectie"
 msgid "Select which gtk+ theme to use"
 msgstr "Kies welk gtk+ thema wordt gebruikt"
 
-#: capplets/theme-switcher/main.c:217
+#: capplets/theme-switcher/gtk-theme-selector.glade.h:1
+msgid "Auto Preview"
+msgstr "Automatisch Voorbeeld"
+
+#: capplets/theme-switcher/gtk-theme-selector.glade.h:2
+msgid "Available Themes"
+msgstr "Beschikbare Thema's"
+
+#: capplets/theme-switcher/gtk-theme-selector.glade.h:3
+msgid "Gtk+ Theme"
+msgstr "Gtk+ Thema"
+
+#: capplets/theme-switcher/gtk-theme-selector.glade.h:4
+msgid "Install new theme..."
+msgstr "Installeer nieuw thema..."
+
+#: capplets/theme-switcher/gtk-theme-selector.glade.h:5
+msgid "Preview"
+msgstr "Voorbeeld"
+
+#: capplets/theme-switcher/main.c:218
 msgid "Select a theme to install"
 msgstr "Selecteer een te installeren thema"
 
@@ -644,38 +1231,127 @@ msgstr "Stelt het standaard gedrag van GNOME applicaties in"
 
 #: capplets/ui-properties/behavior.desktop.in.h:2
 msgid "Toolbars & Menus"
-msgstr "Knoppenbalken & Menu's"
+msgstr "Werkbalken & Menu's"
 
-#: control-center/capplet-dir-view.c:146
+#: capplets/ui-properties/gnome2-ui-properties.glade.h:1
+msgid "Icons and Text"
+msgstr "Pictogrammen en Tekst"
+
+#: capplets/ui-properties/gnome2-ui-properties.glade.h:3
+msgid "Item 2"
+msgstr "Item 2"
+
+#: capplets/ui-properties/gnome2-ui-properties.glade.h:4
+msgid "Item 3"
+msgstr "Item 3"
+
+#: capplets/ui-properties/gnome2-ui-properties.glade.h:5
+msgid "Menu Item 1"
+msgstr "Menu Item 1"
+
+#: capplets/ui-properties/gnome2-ui-properties.glade.h:6
+msgid "Menu Item 2"
+msgstr "Menu Item 2"
+
+#: capplets/ui-properties/gnome2-ui-properties.glade.h:7
+msgid "Menu Item 3"
+msgstr "Menu Item 3"
+
+#: capplets/ui-properties/gnome2-ui-properties.glade.h:8
+msgid "Menu Item 4"
+msgstr "Menu Item 4"
+
+#: capplets/ui-properties/gnome2-ui-properties.glade.h:9
+msgid "Menu Item 5"
+msgstr "Menu Item 5"
+
+#: capplets/ui-properties/gnome2-ui-properties.glade.h:10
+msgid "Menu items have _icons"
+msgstr "Menu onderdelen hebben _pictogrammen"
+
+#: capplets/ui-properties/gnome2-ui-properties.glade.h:11
+msgid "Menus"
+msgstr "Menu's"
+
+#: capplets/ui-properties/gnome2-ui-properties.glade.h:12
+msgid "New File"
+msgstr "Nieuw bestand"
+
+#: capplets/ui-properties/gnome2-ui-properties.glade.h:13
+msgid "Only Icons"
+msgstr "Alleen pictogrammen"
+
+#: capplets/ui-properties/gnome2-ui-properties.glade.h:14
+msgid "Only Text"
+msgstr "Alleen Tekst"
+
+#: capplets/ui-properties/gnome2-ui-properties.glade.h:15
+msgid "Open File"
+msgstr "Bestand Openen"
+
+#: capplets/ui-properties/gnome2-ui-properties.glade.h:16
+msgid "Sample Menubar"
+msgstr "Voorbeeld Menubalk"
+
+#: capplets/ui-properties/gnome2-ui-properties.glade.h:17
+msgid "Sample Toolbar"
+msgstr "Voorbeeld Werkbalk"
+
+#: capplets/ui-properties/gnome2-ui-properties.glade.h:18
+msgid "Save File"
+msgstr "Bewaar Bestand"
+
+#: capplets/ui-properties/gnome2-ui-properties.glade.h:19
+msgid "Toolbar"
+msgstr "Werkbalk"
+
+#: capplets/ui-properties/gnome2-ui-properties.glade.h:20
+msgid "Toolbar and Menu Properties"
+msgstr "Werkbalk en Menu Eigenschappen"
+
+#: capplets/ui-properties/gnome2-ui-properties.glade.h:21
+msgid "Toolbars can be _detached and moved around"
+msgstr "Werkbalken zijn _ontkoppelbaar en verplaatsbaar"
+
+#: capplets/ui-properties/gnome2-ui-properties.glade.h:22
+msgid "_Menu"
+msgstr "_Menu"
+
+#: capplets/ui-properties/gnome2-ui-properties.glade.h:23
+msgid "_Toolbars have: "
+msgstr "_Werkbalken bevatten:"
+
+#: control-center/capplet-dir-view.c:148
 msgid "Layout"
 msgstr "Opmaak"
 
-#: control-center/capplet-dir-view.c:147
+#: control-center/capplet-dir-view.c:149
 msgid "Layout to use for this view of the capplets"
 msgstr "Opmaak die voor deze manier om de capplets te bekijken wordt gebruikt"
 
-#: control-center/capplet-dir-view.c:153
+#: control-center/capplet-dir-view.c:155
 msgid "Capplet directory object"
 msgstr "Capplet map object"
 
-#: control-center/capplet-dir-view.c:154
+#: control-center/capplet-dir-view.c:156
 msgid "Capplet directory that this view is viewing"
 msgstr "Capplet map die hierdoor wordt bekeken"
 
-#: control-center/capplet-dir-view.c:308 control-center/gnomecc.desktop.in.h:1
+#: control-center/capplet-dir-view.c:313
+#: control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
 msgstr "GNOME Configuratie Centrum"
 
-#: control-center/capplet-dir-view.c:311
+#: control-center/capplet-dir-view.c:316
 msgid "Desktop properties manager."
 msgstr "Bureaublad Instellingen beheer."
 
-#: control-center/capplet-dir-view.c:445
+#: control-center/capplet-dir-view.c:450
 #, c-format
 msgid "Gnome Control Center : %s"
 msgstr "Configuratie Centrum : %s"
 
-#: control-center/capplet-dir-view.c:488
+#: control-center/capplet-dir-view.c:503
 msgid ""
 "No help is available/installed. Please make sure you\n"
 "have the GNOME User's Guide installed on your system."
@@ -683,7 +1359,7 @@ msgstr ""
 "Er is geen hulp beschikbaar/geïnstalleerd. Zorg er a.u.b. voor dat\n"
 "de GNOME Gebruikers Handleiding op dit systeem geïnstalleerd is."
 
-#: control-center/capplet-dir-view.c:491
+#: control-center/capplet-dir-view.c:506
 msgid "Close"
 msgstr "Sluiten"
 
@@ -696,36 +1372,64 @@ msgstr "GNOME Configuratie Centrum: %s"
 msgid "The GNOME configuration tool"
 msgstr "Het GNOME configuratie gereedschap"
 
-#: control-center/main.c:44
-msgid "Use shell even if nautilus is running."
-msgstr ""
+#: control-center/gnomecc.glade.h:2
+msgid "Browse with multiple windows"
+msgstr "Blader met meerdere vensters"
 
-#: libbackground/applier.c:239
+#: control-center/gnomecc.glade.h:3
+msgid "Browse with single window"
+msgstr "Blader met enkel venster"
+
+#: control-center/gnomecc.glade.h:4
+msgid "Display control panels as HTML"
+msgstr "Geef controle panelen weer als HTML"
+
+#: control-center/gnomecc.glade.h:5
+msgid "Display control panels as a set of icons"
+msgstr "Geef controle panelen weer als set iconen"
+
+#: control-center/gnomecc.glade.h:6
+msgid "Display control panels as a tree"
+msgstr "Geef controle panelen weer als boom"
+
+#: control-center/gnomecc.glade.h:7
+msgid "Launch control panels in separate windows"
+msgstr "Gebruik lanceer controle panelen in verschillende vensters"
+
+#: control-center/gnomecc.glade.h:8
+msgid "New-control-center"
+msgstr "Nieuw-controle-centrum"
+
+#: control-center/gnomecc.glade.h:9
+msgid "Put control panels in the control center's window"
+msgstr "Zet controle panelen in het controle centrum's venster"
+
+#: control-center/main.c:43
+msgid "Use shell even if nautilus is running."
+msgstr "Gebruik 'shell' zelfs wanneer nautilus werkt."
+
+#: libbackground/applier.c:235
 msgid "Type"
 msgstr "Type"
 
-#: libbackground/applier.c:240
-msgid ""
-"Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
-"for preview"
-msgstr ""
-"Type bg_applier: BG_APPLIER_ROOT voor root venster of BG_APPLIER_PREVIEW "
-"voor een voorbeeld"
+#: libbackground/applier.c:236
+msgid "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW for preview"
+msgstr "Type bg_applier: BG_APPLIER_ROOT voor root venster of BG_APPLIER_PREVIEW voor een voorbeeld"
 
-#: libbackground/applier.c:399
+#: libbackground/applier.c:395
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "Kon pixbuf \"%s\" niet laden; achtergrond uitgeschakeld."
 
-#: libbackground/applier.c:522
+#: libbackground/applier.c:515
 msgid "Disabled"
 msgstr "Uitgeschakeld"
 
-#: libsounds/sound-view.c:99
+#: libsounds/sound-view.c:104
 msgid "The sound file for this event does not exist."
 msgstr "Het geluidsbestand voor deze gebeurtenis bestaat niet."
 
-#: libsounds/sound-view.c:101
+#: libsounds/sound-view.c:106
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -735,2161 +1439,19 @@ msgstr ""
 "U kunt het gnome-audio pakket installeren\n"
 "voor een verzameling standaardgeluiden."
 
-#: libsounds/sound-view.c:154
+#: libsounds/sound-view.c:160
 msgid "Event"
 msgstr "Gebeurtenis"
 
-#: libsounds/sound-view.c:154
+#: libsounds/sound-view.c:160
 msgid "File to Play"
 msgstr "Af te spelen bestand"
 
-#: libsounds/sound-view.c:187
+#: libsounds/sound-view.c:193
 msgid "Play"
 msgstr "Afspelen"
 
-#: libsounds/sound-view.c:193
+#: libsounds/sound-view.c:199
 msgid "Select sound file"
 msgstr "Selecteer geluidsbestand"
 
-#~ msgid ""
-#~ "Couldn't find the file '%s'.\n"
-#~ "\n"
-#~ "Please make sure it exists and try again, or choose a different "
-#~ "background picture."
-#~ msgstr ""
-#~ "Kan bestand '%s' niet vinden.\n"
-#~ "\n"
-#~ "Controleer of het bestaat en probeer opnieuw, of kies een andere "
-#~ "achtergrond figuur."
-
-#~ msgid ""
-#~ "I don't know how to open the file '%s'.\n"
-#~ "Perhaps its a kind of picture that is not yet supported.\n"
-#~ "\n"
-#~ "Please select a different picture instead."
-#~ msgstr ""
-#~ "Ik weet niet hoe ik het bestand '%s' moet openen.\n"
-#~ "Misschien is het bestandsformaat nog niet ondersteund.\n"
-#~ "\n"
-#~ "Selecteer een andere figuur."
-
-#~ msgid "Default location"
-#~ msgstr "Standaard locatie"
-
-#~ msgid "PARENT"
-#~ msgstr "Niveau hoger"
-
-#~ msgid "Partial containment"
-#~ msgstr "Voor een deel vastgezet"
-
-#~ msgid "Wallpaper Selection"
-#~ msgstr "Achtergrond Selectie"
-
-#~ msgid "Can't find an hbox, using a normal file selection"
-#~ msgstr "Kan hbox niet vinden, een normale selectie wordt gebruikt"
-
-#~ msgid "Preview"
-#~ msgstr "Voorbeeld"
-
-#~ msgid "Gnome Default Editor"
-#~ msgstr "Standaard Gnome editor"
-
-#~ msgid "Select an Editor"
-#~ msgstr "Kies een editor..."
-
-#~ msgid "Custom Editor"
-#~ msgstr "Andere editor"
-
-#~ msgid "Start in Terminal"
-#~ msgstr "Uitvoeren in Terminal"
-
-#~ msgid "Command:"
-#~ msgstr "Opdracht:"
-
-#~ msgid "Please enter the command line used to start this editor"
-#~ msgstr "Vul alstublieft een commando lijn hieronder in."
-
-#~ msgid "Text Editor"
-#~ msgstr "Tekst editor"
-
-#~ msgid "Select a Web Browser"
-#~ msgstr "Selecteer een Web Browser"
-
-#~ msgid "Please enter the command line used to start this web browser"
-#~ msgstr ""
-#~ "Geef hieronder een commando lijn waarmee deze web browser wordt gestart"
-
-#~ msgid "Web Browser"
-#~ msgstr "Web Browser"
-
-#~ msgid "Select a Viewer"
-#~ msgstr "Selecteer een Viewer"
-
-#~ msgid "Please enter the command line used to start this help viewer"
-#~ msgstr ""
-#~ "Geef hieronder een commando lijn waarmee deze help viewer wordt gestart"
-
-#~ msgid "Help Viewer"
-#~ msgstr "Help Viewer"
-
-#~ msgid "Default Terminal"
-#~ msgstr "Standaard Terminal"
-
-#~ msgid "Custom Terminal"
-#~ msgstr "Aangepaste Terminal"
-
-#~ msgid "Please enter the command line used to start this terminal"
-#~ msgstr ""
-#~ "Geef hieronder een commando lijn waarmee deze terminal wordt gestart"
-
-#~ msgid "Terminal"
-#~ msgstr "Terminal"
-
-#~ msgid "30 minutes ago"
-#~ msgstr "30 minuten geleden"
-
-#~ msgid "10 minutes ago"
-#~ msgstr "10 minuten geleden"
-
-#~ msgid "5 minutes ago"
-#~ msgstr "5 minuten geleden"
-
-#~ msgid "1 minute ago"
-#~ msgstr "1 minuut geleden"
-
-#~ msgid "Current time"
-#~ msgstr "Huidige tijd"
-
-#~ msgid "Custom screensaver. No description available"
-#~ msgstr "Aangepaste schermbeveiling. Geen beschrijving aanwezig"
-
-#~ msgid "About %s\n"
-#~ msgstr "Over %s\n"
-
-#~ msgid "Name:"
-#~ msgstr "Naam:"
-
-#~ msgid "Settings"
-#~ msgstr "Instellingen"
-
-#~ msgid "label1"
-#~ msgstr "label1"
-
-#~ msgid "Demo"
-#~ msgstr "Demonstratie"
-
-#~ msgid ""
-#~ "Cannot find the data to configure this screensaver. Please edit the "
-#~ "command line below."
-#~ msgstr ""
-#~ "Kan data om schermbeveiliging te configureren niet vinden. Verander de "
-#~ "commando lijn hieronder."
-
-#~ msgid "Visual:"
-#~ msgstr "Beeld:"
-
-#~ msgid "Any"
-#~ msgstr "Elke"
-
-#~ msgid "Fast"
-#~ msgstr "Snel"
-
-#~ msgid "High"
-#~ msgstr "Hoog"
-
-#~ msgid "Large"
-#~ msgstr "Groot"
-
-#~ msgid "Low"
-#~ msgstr "Laag"
-
-#~ msgid "Size:"
-#~ msgstr "Grootte:"
-
-#~ msgid "Slow"
-#~ msgstr "Langzaam"
-
-#~ msgid "Small"
-#~ msgstr "Klein"
-
-#~ msgid "Twist speed:"
-#~ msgstr "Draai snelheid:"
-
-#~ msgid "Twist:"
-#~ msgstr "Draai:"
-
-#~ msgid "Wobble:"
-#~ msgstr "Wiebelen:"
-
-#~ msgid "Ant"
-#~ msgstr "Mier"
-
-#~ msgid "Four Sided cells"
-#~ msgstr "Vier Zijdige cellen"
-
-#~ msgid "Full Color"
-#~ msgstr "Volledige Kleur"
-
-#~ msgid "Many"
-#~ msgstr "Veel"
-
-#~ msgid "Monochrome"
-#~ msgstr "Monochroom"
-
-#~ msgid "Nine Sided cells"
-#~ msgstr "Negen Zijdige cellen"
-
-#~ msgid "Number of colours"
-#~ msgstr "Aantal kleuren"
-
-#~ msgid "Random"
-#~ msgstr "Willekeurig"
-
-#~ msgid "Random size upto"
-#~ msgstr "Willekeurige grootte tot"
-
-#~ msgid "Randomize"
-#~ msgstr "Willekeurig"
-
-#~ msgid "Sharp turns"
-#~ msgstr "Scherpe bochten"
-
-#~ msgid "Six Sided cells"
-#~ msgstr "Zes Zijdige cellen"
-
-#~ msgid "Specific"
-#~ msgstr "Specifiek"
-
-#~ msgid "Specific size of"
-#~ msgstr "Specifieke grootte"
-
-#~ msgid "Speed"
-#~ msgstr "Snelheid"
-
-#~ msgid "Three Sided cells"
-#~ msgstr "Drie Zijdige cellen"
-
-#~ msgid "Timeout"
-#~ msgstr "Timeout"
-
-#~ msgid "Twelve Sided cells"
-#~ msgstr "Twaalf Zijdige cellen"
-
-#~ msgid "number of Ants"
-#~ msgstr "aantal Mieren"
-
-#~ msgid "Attraction (balls)"
-#~ msgstr "Aantrekkingskracht (ballen)"
-
-#~ msgid "Balls"
-#~ msgstr "Ballen"
-
-#~ msgid "Color Contrast"
-#~ msgstr "Kleur Contrast"
-
-#~ msgid "Length of Trail"
-#~ msgstr "Spoorlengte"
-
-#~ msgid "Lines"
-#~ msgstr "Lijnen"
-
-#~ msgid "Long"
-#~ msgstr "Lang"
-
-#~ msgid "Number of Colors"
-#~ msgstr "Aantal Kleuren"
-
-#~ msgid "Polygons"
-#~ msgstr "Polygonen"
-
-#~ msgid "Tails"
-#~ msgstr "Sporen"
-
-#~ msgid "Threshold of repulsion"
-#~ msgstr "Afstotings grootte"
-
-#~ msgid "Blaster"
-#~ msgstr "Blaster"
-
-#~ msgid "Display screensaver in monochrome."
-#~ msgstr "Geef schermbeveiliging monochroom weer."
-
-#~ msgid "Faster"
-#~ msgstr "Sneller"
-
-#~ msgid "Slower"
-#~ msgstr "Langzamer"
-
-#~ msgid "Speed of rotation."
-#~ msgstr "Rotatiesnelheid."
-
-#~ msgid "Speed of the 90 degree rotation."
-#~ msgstr "90 graden rotatiesnelheid."
-
-#~ msgid "Colors:"
-#~ msgstr "Kleuren:"
-
-#~ msgid "Count:"
-#~ msgstr "Aantal:"
-
-#~ msgid "Number of Colors."
-#~ msgstr "Aantal Kleuren."
-
-#~ msgid "Number of bubbles to use."
-#~ msgstr "Aantal te gebruiken bellen."
-
-#~ msgid "Speed of Motion."
-#~ msgstr "Bewegingssnelheid."
-
-#~ msgid "Use red/blue 3d seperation."
-#~ msgstr "Gebruik rood/blauw 3d scheiding."
-
-#~ msgid "Braid"
-#~ msgstr "Vlecht"
-
-#~ msgid "Bubbles exist in three dimensions."
-#~ msgstr "Bellen bestaan in drie dimensies."
-
-#~ msgid "Don't hide bubbles when they pop."
-#~ msgstr "Houd bellen niet verborgen bij uiteenspatting."
-
-#~ msgid "Draw circles instead of pixmap bubbles."
-#~ msgstr "Teken cirkels in plaats van pixmap bellen."
-
-#~ msgid "Don't use double bufferinge"
-#~ msgstr "Gebruik geen dubbel buffering"
-
-#~ msgid "Use double buffering"
-#~ msgstr "Gebruik dubbel buffering"
-
-#~ msgid "Coral"
-#~ msgstr "Koraal"
-
-#~ msgid "Denser"
-#~ msgstr "Hogere Dichtheid"
-
-#~ msgid "Density"
-#~ msgstr "Dichtheid"
-
-#~ msgid "Number of seeds"
-#~ msgstr "Aantal zaden"
-
-#~ msgid "Seeds"
-#~ msgstr "Zaden"
-
-#~ msgid "Thinner"
-#~ msgstr "Lagere Dichtheid"
-
-#~ msgid "Cosmos"
-#~ msgstr "Kosmos"
-
-#~ msgid "Critical"
-#~ msgstr "Kritiek"
-
-#~ msgid "Cell"
-#~ msgstr "Cel"
-
-#~ msgid "Center image."
-#~ msgstr "Centreer afbeelding."
-
-#~ msgid "Have at maximum size"
-#~ msgstr "Ten hoogste grootte"
-
-#~ msgid "Number of polygons to use."
-#~ msgstr "Aantal te gebruiken polygonen."
-
-#~ msgid "Cynosure"
-#~ msgstr "Sterrebeeld"
-
-#~ msgid "Less"
-#~ msgstr "Minder"
-
-#~ msgid "Number of iterations."
-#~ msgstr "Aantal iteraties."
-
-#~ msgid "Cycle through colors."
-#~ msgstr "Rouleer door kleuren."
-
-#~ msgid "Deco"
-#~ msgstr "Deco"
-
-#~ msgid "Time between redraws:"
-#~ msgstr "Tijd tussen verversingen:"
-
-#~ msgid "Use color when drawing."
-#~ msgstr "Gebruik kleur tijdens tekenen."
-
-#~ msgid "seconds"
-#~ msgstr "seconden"
-
-#~ msgid "Deluxe"
-#~ msgstr "Deluxe"
-
-#~ msgid "Demon"
-#~ msgstr "Demon"
-
-#~ msgid "Discrete"
-#~ msgstr "Discreet"
-
-#~ msgid "Number to use."
-#~ msgstr "Te gebruiken nummer."
-
-#~ msgid "Fractals should grow."
-#~ msgstr "Fractals moeten groeien."
-
-#~ msgid "Number of pixels to use."
-#~ msgstr "Te gebruiken aantal pixels."
-
-#~ msgid "Use lissajous figures to get points."
-#~ msgstr "Gebruik lissajous figuren om punten te vergaren."
-
-#~ msgid "Time finished product is shown."
-#~ msgstr "Tijd dat afgemaakt product wordt weer gegeven."
-
-#~ msgid "Extrusion"
-#~ msgstr "Uitstoting"
-
-#~ msgid "Number"
-#~ msgstr "Aantal"
-
-#~ msgid "Number of cycles"
-#~ msgstr "Aantal cycli"
-
-#~ msgid "Speed of Motion"
-#~ msgstr "Bewegingssnelheid"
-
-#~ msgid "Bitmap for flag"
-#~ msgstr "Bitmap voor vlag"
-
-#~ msgid "Random size up to"
-#~ msgstr "Willekeurige grootte tot"
-
-#~ msgid "Text for flag"
-#~ msgstr "Tekst voor vlag"
-
-#~ msgid "Flame"
-#~ msgstr "Vlam"
-
-#~ msgid "Iterations:"
-#~ msgstr "Iteraties:"
-
-#~ msgid "Number of fractals to generate."
-#~ msgstr "Aantal te generen fractals."
-
-#~ msgid "Pixels per fractal."
-#~ msgstr "Pixels per fractal."
-
-#~ msgid "Flow"
-#~ msgstr "Vloei"
-
-#~ msgid "Delay between redraws."
-#~ msgstr "Vertraging tussen verversingen."
-
-#~ msgid "Forest"
-#~ msgstr "Woud"
-
-#~ msgid "Number of trees to use."
-#~ msgstr "Aantal te gebruiken bomen."
-
-#~ msgid "Galaxy"
-#~ msgstr "Melkwegstelsel"
-
-#~ msgid "GLText"
-#~ msgstr "GLText"
-
-#~ msgid "Have transparent bubbles."
-#~ msgstr "Gebruik transparante bellen."
-
-#~ msgid "Use additive color model."
-#~ msgstr "Gebruik optel-kleur-model"
-
-#~ msgid "Number of planets to use."
-#~ msgstr "Aantal te gebruiken planeten."
-
-#~ msgid "Objects should leave trails behind them."
-#~ msgstr "Objecten moeten spoor achterlaten."
-
-#~ msgid "Orbit should decay."
-#~ msgstr "Hemellichaam moet vervallen."
-
-#~ msgid "Animate circles."
-#~ msgstr "Animeer cirkels."
-
-#~ msgid "Cycle through colormap."
-#~ msgstr "Cycleer door kleurenmap."
-
-#~ msgid "Number of circles to use."
-#~ msgstr "Aantal te gebruiken cirkels."
-
-#~ msgid "Use a gradient of colors between circles."
-#~ msgstr "Gebruik een verlopende kleur tussen cirkels."
-
-#~ msgid "Helix"
-#~ msgstr "Helix"
-
-#~ msgid "Time between redraws."
-#~ msgstr "Tijd tussen verversingen."
-
-#~ msgid "Number of pixels before a color change."
-#~ msgstr "Aantal pixels voor een kleur verandering."
-
-#~ msgid "Closer"
-#~ msgstr "Dichterbij"
-
-#~ msgid "Distance from center of cube"
-#~ msgstr "Afstand van centrum van kubus"
-
-#~ msgid "Farther"
-#~ msgstr "Verderweg"
-
-#~ msgid "Number of segments."
-#~ msgstr "Aantal segmenten."
-
-#~ msgid "Number of trails."
-#~ msgstr "Aantal sporen."
-
-#~ msgid "Segments"
-#~ msgstr "Segmenten"
-
-#~ msgid "Duration of laser burst."
-#~ msgstr "Duur van laserstraal."
-
-#~ msgid "Laser"
-#~ msgstr "Laser"
-
-#~ msgid "Longer"
-#~ msgstr "Langer"
-
-#~ msgid "Segments:"
-#~ msgstr "Segmenten:"
-
-#~ msgid "Shorter"
-#~ msgstr "Korter"
-
-#~ msgid "Size of burst."
-#~ msgstr "Grootte van straal."
-
-#~ msgid "Larger"
-#~ msgstr "Groter"
-
-#~ msgid "Lisa"
-#~ msgstr "Lisa"
-
-#~ msgid "Size of object."
-#~ msgstr "Omvang van object."
-
-#~ msgid "Smaller"
-#~ msgstr "Kleiner"
-
-#~ msgid "Lissie"
-#~ msgstr "Lissie"
-
-#~ msgid "LMorph"
-#~ msgstr "LMorph"
-
-#~ msgid "Number of interpolation steps."
-#~ msgstr "Aantal interpolatie stappen."
-
-#~ msgid "Number of points."
-#~ msgstr "Aantal punten."
-
-#~ msgid "Open figures."
-#~ msgstr "Open figuren."
-
-#~ msgid "Points:"
-#~ msgstr "Punten:"
-
-#~ msgid "Delay between drawing the maze and starting the solution."
-#~ msgstr "Vertraging tussen tekenen doolhof en starten van oplossing."
-
-#~ msgid "Delay between each step in the maze."
-#~ msgstr "Vertraging tussen elke stap in het doolhof."
-
-#~ msgid "Delay between finishing the maze and starting a new one."
-#~ msgstr "Vertraging tussen afmaken doolhof en een nieuwe beginnen."
-
-#~ msgid "Less Delay"
-#~ msgstr "Minder Vertraging"
-
-#~ msgid "More Delay"
-#~ msgstr "Meer Vertraging"
-
-#~ msgid "Put a bridge over the logo?"
-#~ msgstr "Maak een brug over het logo?"
-
-#~ msgid "Moebius"
-#~ msgstr "Moebius"
-
-#~ msgid "Maximum radius increment"
-#~ msgstr "Maximum incrementele radiaalwaarde"
-
-#~ msgid "Moire"
-#~ msgstr "Moire"
-
-#~ msgid "Moire2"
-#~ msgstr "Moire2"
-
-#~ msgid "Draw square at weird starting points."
-#~ msgstr "Teken vierkant op vreemde startpunten."
-
-#~ msgid "Use XOR drawing function."
-#~ msgstr "Gebruik XOR tekenfunctie."
-
-#~ msgid "Maximum number of lines."
-#~ msgstr "Maximum aantal regels."
-
-#~ msgid "Pedal"
-#~ msgstr "Pedaal"
-
-#~ msgid "Time to fade away."
-#~ msgstr "Tijd tot wegfaden."
-
-#~ msgid "Time to show each picture."
-#~ msgstr "Tijd om elk plaatje weer te geven."
-
-#~ msgid "Penetrate"
-#~ msgstr "Doordringen"
-
-#~ msgid "Penrose"
-#~ msgstr "Penrose"
-
-#~ msgid "Pipes"
-#~ msgstr "Pijpen"
-
-#~ msgid "Pulsar"
-#~ msgstr "Pulsar"
-
-#~ msgid "Frequency of missile launch"
-#~ msgstr "Raketlanceer Frequentie"
-
-#~ msgid "Number of particles"
-#~ msgstr "Aantal deeltjes"
-
-#~ msgid "Particles on screen"
-#~ msgstr "Deeltjes op scherm"
-
-#~ msgid "Color contrast"
-#~ msgstr "Kleurcontrast"
-
-#~ msgid "Discrete Lines"
-#~ msgstr "Discrete Regels"
-
-#~ msgid "Length"
-#~ msgstr "Lengte"
-
-#~ msgid "Narrow"
-#~ msgstr "Smal"
-
-#~ msgid "Number of points:"
-#~ msgstr "Aantal punten:"
-
-#~ msgid "Number of trails:"
-#~ msgstr "Aantal sporen:"
-
-#~ msgid "Solid Trails"
-#~ msgstr "Solide Banen"
-
-#~ msgid "Spread between lines"
-#~ msgstr "Verspreiding tussen lijnen"
-
-#~ msgid "Trails attract each other"
-#~ msgstr "Banen die elkaar aantrekken"
-
-#~ msgid "Transparent Trails"
-#~ msgstr "Transparante Banen"
-
-#~ msgid "Wide"
-#~ msgstr "Breed"
-
-#~ msgid "Width"
-#~ msgstr "Breedte"
-
-#~ msgid "XOR Trails"
-#~ msgstr "XOR Banen"
-
-#~ msgid "Delay before next redraw"
-#~ msgstr "Vertraging voor volgende verversing"
-
-#~ msgid "Number of Iterations"
-#~ msgstr "Aantal Iteraties"
-
-#~ msgid "Offset"
-#~ msgstr "Offset"
-
-#~ msgid "Speed to clear the screen"
-#~ msgstr "Snelheid voor scherm schoonmaken"
-
-#~ msgid "With X-axis Symmetry"
-#~ msgstr "Met X-axis Symmetrie"
-
-#~ msgid "With Y-axis Symmetry"
-#~ msgstr "Met Y-axis Symmetrie"
-
-#~ msgid "Slip"
-#~ msgstr "Slippen"
-
-#~ msgid "Sonar"
-#~ msgstr "Sonar"
-
-#~ msgid "SpeedMine"
-#~ msgstr "SnelheidMijn"
-
-#~ msgid "Sphere"
-#~ msgstr "Bol"
-
-#~ msgid "Change to display in monochrome."
-#~ msgstr "Geef weer in monochroom"
-
-#~ msgid "Duration of current shape."
-#~ msgstr "Duur van huidige vorm."
-
-#~ msgid "Quickness of rotation at each step (0 = Random)"
-#~ msgstr "Snelheid van rotatie bij elke step (0 = Willekeurig)"
-
-#~ msgid "Slim"
-#~ msgstr "Slank"
-
-#~ msgid "Speed of animation."
-#~ msgstr "Animatiesnelheid."
-
-#~ msgid "Starfish"
-#~ msgstr "Starfish"
-
-#~ msgid "Thickness of color bands (0 = Random)"
-#~ msgstr "Dikheid van kleur banden (0 = Willekeurig)"
-
-#~ msgid "Use raw shapes "
-#~ msgstr "Gebruik gewone vormen "
-
-#~ msgid "Strange"
-#~ msgstr "Vreemd"
-
-#~ msgid "Triangle"
-#~ msgstr "Triangel"
-
-#~ msgid "Vines"
-#~ msgstr "Ranken"
-
-#~ msgid "Wander"
-#~ msgstr "Zwerven"
-
-#~ msgid "Worm"
-#~ msgstr "Word"
-
-#~ msgid "Xearth"
-#~ msgstr "Xearth"
-
-#~ msgid "Xroger"
-#~ msgstr "Xroger"
-
-#~ msgid "Add a new screensaver"
-#~ msgstr "Voeg een schermbeveiliging toe"
-
-#~ msgid "Select the screensaver to run from the list below:"
-#~ msgstr "Selecteer schermbeveiling om te starten uit de lijst hieronder:"
-
-#~ msgid "New screensaver"
-#~ msgstr "Nieuwe schermbeveiliging"
-
-#~ msgid "Main"
-#~ msgstr "Voornaamste"
-
-#~ msgid "GNOME Control Center:"
-#~ msgstr "GNOME Configuratie Centrum:"
-
-#~ msgid "Pipe error.\n"
-#~ msgstr "Pijp fout.\n"
-
-#~ msgid "Cannot fork().\n"
-#~ msgstr "Kan niet fork()-en.\n"
-
-#~ msgid "dup2() error.\n"
-#~ msgstr "dup2() fout.\n"
-
-#~ msgid "execl() error, errno=%d\n"
-#~ msgstr "execl() fout, errno=%d\n"
-
-#~ msgid ""
-#~ "The password you typed is invalid.\n"
-#~ "Please try again."
-#~ msgstr ""
-#~ "Het ingetypte wachtwoord is ongeldig.\n"
-#~ "Probeer opnieuw."
-
-#~ msgid ""
-#~ "One or more of the changed fields is invalid.\n"
-#~ "This is probably due to either colons or commas in one of the fields.\n"
-#~ "Please remove those and try again."
-#~ msgstr ""
-#~ "Een of meer van de veranderde velden is ongeldig.\n"
-#~ "Dit is waarschijnlijk het gevolg van een puntkomma of komma in een van de "
-#~ "velden.\n"
-#~ "Verwijder die en probeer het opnieuw."
-
-#~ msgid "Password resetting error."
-#~ msgstr "Wachtwoord reset fout."
-
-#~ msgid ""
-#~ "Some systems files are locked.\n"
-#~ "Please try again in a few moments."
-#~ msgstr ""
-#~ "Sommige systeembestanden zijn gelocked.\n"
-#~ "Probeer het opnieuw na korte tijd."
-
-#~ msgid "Insufficient rights."
-#~ msgstr "Niet genoeg rechten."
-
-#~ msgid "Invalid call to sub process."
-#~ msgstr "Ongeldige aanroep naar subproces."
-
-#~ msgid ""
-#~ "Your current shell is not listed in /etc/shells.\n"
-#~ "You are not allowed to change your shell.\n"
-#~ "Consult your system administrator."
-#~ msgstr ""
-#~ "Je huidige shell staat niet in /etc/shells.\n"
-#~ "Je kunt je shell niet veranderen.\n"
-#~ "Raadpleeg je systeembeheerder."
-
-#~ msgid "Out of memory."
-#~ msgstr "Niet genoeg geheugen."
-
-#~ msgid "The exec() call failed."
-#~ msgstr "De exec() aanroep is mislukt."
-
-#~ msgid "Failed to find selected program."
-#~ msgstr "Kon geselecteerd programma niet vinden."
-
-#~ msgid "Unknown error."
-#~ msgstr "Onbekend fout."
-
-#~ msgid "Unknown exit code."
-#~ msgstr "Onbekende foutcode."
-
-#~ msgid "Input"
-#~ msgstr "Invoer"
-
-#~ msgid "Need %d responses.\n"
-#~ msgstr "Heb %d antwoorden nodig.\n"
-
-#~ msgid ""
-#~ "In order to make changes to your system, you\n"
-#~ "must enter the administrator (root) password."
-#~ msgstr ""
-#~ "Om de veranderingen aan je systeem te maken moet\n"
-#~ "je het administrator (root) wachtwoord invoeren."
-
-#~ msgid "Error"
-#~ msgstr "Fout"
-
-#~ msgid "You want %d response(s) from %d entry fields!?!?!\n"
-#~ msgstr "Je wilt %d antwoord(en) van %d invoervelden!?!?!\n"
-
-#~ msgid "Run Unprivileged"
-#~ msgstr "Draai zonder rechten"
-
-#~ msgid "Got error %d.\n"
-#~ msgstr "Kreeg error %d.\n"
-
-#~ msgid "Password for %s"
-#~ msgstr "Wachtwoord voor %s"
-
-#~ msgid "Consistency checking is not turned on."
-#~ msgstr "Consistentie controle is niet aangezet."
-
-#~ msgid "Block is fine."
-#~ msgstr "Blok is prima."
-
-#~ msgid "Block freed twice."
-#~ msgstr "Blok is tweemaal bevrijd."
-
-#~ msgid "Memory before the block was clobbered."
-#~ msgstr "Geheugen voor het blok was een zooitje."
-
-#~ msgid "Memory after the block was clobbered."
-#~ msgstr "Geheugen na het blok was een zooitje."
-
-#~ msgid "userhelper must be setuid root\n"
-#~ msgstr "gebruikershelper moet setuid root zijn\n"
-
-#~ msgid "Usage: root-helper fd\n"
-#~ msgstr "Gebruik: root-helper fd\n"
-
-#~ msgid "PAM returned = %d\n"
-#~ msgstr "PAM gaf terug = %d\n"
-
-#~ msgid "about to authenticate \"%s\"\n"
-#~ msgstr "ga authenticeren \"%s\"\n"
-
-#~ msgid "about to exec \"%s\"\n"
-#~ msgstr "ga uitvoeren \"%s\"\n"
-
-#~ msgid "window2"
-#~ msgstr "venster2"
-
-#~ msgid "Use GNOME for setting background"
-#~ msgstr "Gebruik GNOME voor het instellen van de achtergrond"
-
-#~ msgid "Effect"
-#~ msgstr "Effect"
-
-#~ msgid "Primary color"
-#~ msgstr "Primaire kleur"
-
-#~ msgid "Pick a color"
-#~ msgstr "Kies een kleur"
-
-#~ msgid "Solid Color"
-#~ msgstr "Enkele Kleur"
-
-#~ msgid "Vertical Gradient"
-#~ msgstr "Verticaal Verlopend"
-
-#~ msgid "Horizontal Gradient"
-#~ msgstr "Horizontaal Verlopend"
-
-#~ msgid "Apply changes automatically"
-#~ msgstr "Veranderingen automatisch toepassen"
-
-#~ msgid "Wallpaper"
-#~ msgstr "Achtergrond"
-
-#~ msgid "Centered"
-#~ msgstr "Gecentreerd"
-
-#~ msgid "Scaled (keep aspect ratio)"
-#~ msgstr "Geschaald (bewaar verhouding)"
-
-#~ msgid "Browse..."
-#~ msgstr "Bladeren..."
-
-#~ msgid "Adjust wallpaper's transparency"
-#~ msgstr "Pas achtergrond doorzichtheid aan"
-
-#~ msgid "More Transparent"
-#~ msgstr "Meer Transparant"
-
-#~ msgid "More Solid"
-#~ msgstr "Meer Solide"
-
-#~ msgid "window1"
-#~ msgstr "venster1"
-
-#~ msgid "Enable Keyboard Repeat"
-#~ msgstr "Automatisch Toetsenbord Herhalen inschakelen"
-
-#~ msgid "Delay Until Repeat"
-#~ msgstr "Vertraging Tot Herhaling"
-
-#~ msgid "....a"
-#~ msgstr "....a"
-
-#~ msgid "...a"
-#~ msgstr "...a"
-
-#~ msgid "..a"
-#~ msgstr "..a"
-
-#~ msgid ".a"
-#~ msgstr ".a"
-
-#~ msgid "Key Repeat Rate"
-#~ msgstr "Toets Herhaalsnelheid"
-
-#~ msgid "a....a"
-#~ msgstr "a....a"
-
-#~ msgid "a...a"
-#~ msgstr "a...a"
-
-#~ msgid "a..a"
-#~ msgstr "a..a"
-
-#~ msgid "a.a"
-#~ msgstr "a.a"
-
-#~ msgid "Enable Keyboard Click"
-#~ msgstr "Toetsenbord klik inschakelen"
-
-#~ msgid "Keyboard click"
-#~ msgstr "Toetsenbord klik"
-
-#~ msgid "Click volume"
-#~ msgstr "Klik volume"
-
-#~ msgid "Type here to test setting"
-#~ msgstr "Type hier om de instellingen te testen"
-
-#~ msgid "Mouse Configuration"
-#~ msgstr "Muis Configuratie"
-
-#~ msgid "Left handed"
-#~ msgstr "Linkshandig"
-
-#~ msgid "Right handed"
-#~ msgstr "Rechtshandig"
-
-#~ msgid "Mouse speed:"
-#~ msgstr "Muis snelheid:"
-
-#~ msgid "Sensitivity:"
-#~ msgstr "Gevoeligheid"
-
-#~ msgid "Enable"
-#~ msgstr "Inschakelen"
-
-#~ msgid "Enable sound server startup"
-#~ msgstr "Geluid server inschakelen"
-
-#~ msgid "Sounds for events"
-#~ msgstr "Geluiden bij gebeurtenissen"
-
-#~ msgid "Sound Events"
-#~ msgstr "Geluid Gebeurtenissen"
-
-#~ msgid "Launch control panels in separate windows"
-#~ msgstr "Gebruik lanceer controle panelen in verschillende vensters"
-
-#~ msgid "Put control panels in the control center's window"
-#~ msgstr "Zet controle panelen in het controle centrum's venster"
-
-#~ msgid "Display control panels as HTML"
-#~ msgstr "Geef controle panelen weer als HTML"
-
-#~ msgid "Display control panels as a set of icons"
-#~ msgstr "Geef controle panelen weer als set iconen"
-
-#~ msgid "Display control panels as a tree"
-#~ msgstr "Geef controle panelen weer als boom"
-
-#~ msgid "Browse with single window"
-#~ msgstr "Blader met enkel venster"
-
-#~ msgid "Browse with multiple windows"
-#~ msgstr "Blader met meerdere vensters"
-
-#~ msgid "New-control-center"
-#~ msgstr "Nieuw-controle-centrum"
-
-#~ msgid "HTML"
-#~ msgstr "HTML"
-
-#~ msgid "Icon List"
-#~ msgstr "Iconen Lijst"
-
-#~ msgid "Tree"
-#~ msgstr "Boom"
-
-#~ msgid "About \"<Screensaver name>\""
-#~ msgstr "Over \"<Screensaver name>\""
-
-#~ msgid "Shut down monitor after"
-#~ msgstr "Zet monitor uit na"
-
-#~ msgid "Go to suspend mode after"
-#~ msgstr "Ga naar suspend mode na"
-
-#~ msgid "Go to standby mode after"
-#~ msgstr "Ga naar standby mode na"
-
-#~ msgid "Settings for \"<Screensaver name>\""
-#~ msgstr "Instellingen voor \"Screensaver name>\""
-
-#~ msgid "_Add"
-#~ msgstr "_Toevoegen"
-
-#~ msgid "_Settings"
-#~ msgstr "_Instellingen"
-
-#~ msgid "_Remove"
-#~ msgstr "_Verwijderen"
-
-#~ msgid "_About this screensaver..."
-#~ msgstr "_Over deze schermbeveiliging"
-
-#~ msgid "S_tart screensaver after "
-#~ msgstr "_Start schermbeveiliging na"
-
-#~ msgid "S_witch screensavers after "
-#~ msgstr "V_erander schermbeveiling elke"
-
-#~ msgid "R_equire password to unlock screen"
-#~ msgstr "_Wachtwoord vereist om van slot te zetten"
-
-#~ msgid "Enable _power management"
-#~ msgstr "_Zet energie beheer aan"
-
-#~ msgid " Configure..."
-#~ msgstr " Configureren..."
-
-#~ msgid "Disable screensaver"
-#~ msgstr "Zet schermbeveiliging uit"
-
-#~ msgid "Black screen only"
-#~ msgstr "Alleen zwart scherm"
-
-#~ msgid "One screensaver all the time"
-#~ msgstr "Altijd een screensaver"
-
-#~ msgid "Random (checked screensavers)"
-#~ msgstr "Willekeurig (aangekruiste schermbeveiligingen)"
-
-#~ msgid "Random (all screensavers)"
-#~ msgstr "Willekeurig (alle schermbeveiligingen)"
-
-#~ msgid ""
-#~ "No help is available/installed for these settings. Please make sure you\n"
-#~ "have the GNOME User's Guide installed on your system."
-#~ msgstr ""
-#~ "Er is geen hulp beschikbaar/geïnstalleerd voor deze instelling. "
-#~ "Controleer a.u.b. of\n"
-#~ "de GNOME Gebruikers Handleiding is geïnstalleerd op dit systeem."
-
-#~ msgid "Mime Type: "
-#~ msgstr "Mime Type: "
-
-#~ msgid "First Regular Expression: "
-#~ msgstr "Eerste Reguliere Expressie"
-
-#~ msgid "Second Regular Expression: "
-#~ msgstr "Tweede Reguliere Expressie"
-
-#~ msgid "Mime Type Actions"
-#~ msgstr "Mime Type Taken"
-
-#~ msgid "Example: emacs %f"
-#~ msgstr "Voorbeeld: emacs %f"
-
-#~ msgid "Open"
-#~ msgstr "Open"
-
-#~ msgid "Edit"
-#~ msgstr "Bewerken"
-
-#~ msgid "Set actions for %s"
-#~ msgstr "Stel taken voor %s in"
-
-#~ msgid "You must enter a mime-type"
-#~ msgstr "U moet een mime-type invullen"
-
-#~ msgid ""
-#~ "You must add either a regular-expression or\n"
-#~ "a file-name extension"
-#~ msgstr ""
-#~ "U moet een reguliere-expressie of\n"
-#~ "een bestandsnaam extensie toevoegen"
-
-#~ msgid ""
-#~ "Please put your mime-type in the format:\n"
-#~ "CATEGORY/TYPE\n"
-#~ "\n"
-#~ "For Example:\n"
-#~ "image/png"
-#~ msgstr ""
-#~ "Zet a.u.b. uw mime-type in het formaat:\n"
-#~ "CATEGORY/TYPE\n"
-#~ "\n"
-#~ "Bijvoorbeeld:\n"
-#~ "image/png"
-
-#~ msgid "This mime-type already exists"
-#~ msgstr "Dit mime-type bestaat al"
-
-#~ msgid ""
-#~ "We are unable to create the directory\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "We kunnen de map niet aanmaken\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "We zullen de toestand niet kunnen opslaan."
-
-#~ msgid ""
-#~ "We are unable to access the directory\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "We hebben geen toegang tot de map\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "We zullen de toestand niet kunnen opslaan."
-
-#~ msgid ""
-#~ "Cannot create the file\n"
-#~ "~/.gnome/mime-info/user.mime\n"
-#~ "\n"
-#~ "We will not be able to save the state"
-#~ msgstr ""
-#~ "Kan het bestand niet aanmaken\n"
-#~ "~/.gnome/mime-info/user.mime\n"
-#~ "\n"
-#~ "We zullen de toestand niet kunnen opslaan."
-
-#~ msgid ""
-#~ "We are unable to create the directory\n"
-#~ "~/.gnome/mime-info.\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "We kunnen map \n"
-#~ "~/.gnome/mime-info niet aanmaken.\n"
-#~ "\n"
-#~ "We zullen de instellingen niet kunnen opslaan."
-
-#~ msgid ""
-#~ "We are unable to access the directory\n"
-#~ "~/.gnome/mime-info.\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "We hebben geen toegang tot de map\n"
-#~ "~/.gnome/mime-info.\n"
-#~ "\n"
-#~ "We zullen de instellingen niet kunnen opslaan."
-
-#~ msgid ""
-#~ "Cannot create the file\n"
-#~ "~/.gnome/mime-info/user.keys.\n"
-#~ "\n"
-#~ "We will not be able to save the state"
-#~ msgstr ""
-#~ "Kan het bestand niet aanmaken\n"
-#~ "~/.gnome/mime-info/user.keys.\n"
-#~ "\n"
-#~ "We zullen de instellingen niet kunnen opslaan."
-
-#~ msgid "Add..."
-#~ msgstr "Toevoegen..."
-
-#~ msgid "Edit..."
-#~ msgstr "Bewerken..."
-
-#~ msgid "Add Mime Type"
-#~ msgstr "Mime Type toevoegen"
-
-#~ msgid ""
-#~ "Add a new Mime Type\n"
-#~ "For example:  image/tiff; text/x-scheme"
-#~ msgstr ""
-#~ "Voeg een nieuw Mime Type toe\n"
-#~ "Bijvoorbeeld:  image/tiff; text/x-scheme"
-
-#~ msgid "Mime Type:"
-#~ msgstr "Mime Type:"
-
-#~ msgid ""
-#~ "Type in the extensions for this mime-type.\n"
-#~ "For example:  .html, .htm"
-#~ msgstr ""
-#~ "Geef de extensies voor dit mime-type.\n"
-#~ "Bijvoorbeeld:  .html, .htm"
-
-#~ msgid "Regular Expressions"
-#~ msgstr "Reguliere Expressie"
-
-#~ msgid ""
-#~ "You can set up two regular expressions here to identify the Mime Type\n"
-#~ "by.  These fields are optional."
-#~ msgstr ""
-#~ "U kunt hier twee reguliere expressies invullen om het Mime Type\n"
-#~ "mee te herkennen.  Deze velden zijn optioneel."
-
-#~ msgid "Volume"
-#~ msgstr "Volume"
-
-#~ msgid "Pitch (Hz)"
-#~ msgstr "Toonhoogte (Hz)"
-
-#~ msgid "Mouse buttons"
-#~ msgstr "Muis knoppen"
-
-#~ msgid "Acceleration"
-#~ msgstr "Versnelling"
-
-#~ msgid "Threshold"
-#~ msgstr "Drempelwaarde"
-
-#~ msgid "Selection"
-#~ msgstr "Selectatie"
-
-#~ msgid "Choose randomly from those checked off"
-#~ msgstr "Kies willekeurige uit de gemarkeerde"
-
-#~ msgid "Choose randomly among all screensavers"
-#~ msgstr "Kies een willekeurige uit alle screensavers "
-
-#~ msgid "Settings..."
-#~ msgstr "Instellingen..."
-
-#~ msgid "Demo Next"
-#~ msgstr "Volgende Demo"
-
-#~ msgid "Demo Previous"
-#~ msgstr "Vorige Demo"
-
-#~ msgid "Screensaver Selection"
-#~ msgstr "Selecteerde Schermbeveiligingen"
-
-#~ msgid "Security"
-#~ msgstr "Beveiliging"
-
-#~ msgid "Only after the screensaver has run for"
-#~ msgstr "Alleen als de schermbeveiliging heeft gedraaid voor"
-
-#~ msgid "Priority"
-#~ msgstr "Prioriteit"
-
-#~ msgid "Be verbose"
-#~ msgstr "Verbose zijn"
-
-#~ msgid "Effects"
-#~ msgstr "Effecten"
-
-#~ msgid "Install colormap"
-#~ msgstr "Installeer kleurenpalet"
-
-#~ msgid "Fade to black when activating screensaver"
-#~ msgstr "Loop over naar zwart als schermbeveiliging wordt geactiveerd"
-
-#~ msgid "Fade desktop back when deactivating screensaver"
-#~ msgstr "Loop over naar desktop als schermbeveiliging wordt gedactiveerd"
-
-#~ msgid "Fade Duration"
-#~ msgstr "Overloop tijd"
-
-#~ msgid "Fade Smoothness"
-#~ msgstr "Overloop Vloeiendheid"
-
-#~ msgid "Smooth"
-#~ msgstr "Vloeiend"
-
-#~ msgid "Jerky"
-#~ msgstr "Klote"
-
-#~ msgid "window4"
-#~ msgstr "window4"
-
-#~ msgid "Menu bars are detachable"
-#~ msgstr "Menubalken zijn loskoppelbaar"
-
-#~ msgid "Menu bars have a border"
-#~ msgstr "Menubalken hebben een rand"
-
-#~ msgid "Menus can be torn off"
-#~ msgstr "Menu's kunnen weggehaald worden"
-
-#~ msgid "Menu items have icons"
-#~ msgstr "Menu onderdelen met pictogrammen"
-
-#~ msgid "Status Bar"
-#~ msgstr "Statusbalk"
-
-#~ msgid "Use status bar instead of dialog when possible"
-#~ msgstr "Gebruik statusbalk in plaats van dialoogvenster wanneer mogelijk"
-
-#~ msgid "Status bar is interactive when possible"
-#~ msgstr "Statusbalk is interactief wanneer mogelijk"
-
-#~ msgid "Progress bar is on the left"
-#~ msgstr "Voortgangsmeter zit links"
-
-#~ msgid "Progress bar is on the right"
-#~ msgstr "Voortgangsmeter zit rechts"
-
-#~ msgid "Tool Bars"
-#~ msgstr "Tool Balken"
-
-#~ msgid "Tool bars have a border"
-#~ msgstr "Tool balken hebben een rand"
-
-#~ msgid "Tool bar buttons pop up on mouse over"
-#~ msgstr "Tool balk knoppen verschijnen wanneer de muis erover beweegt"
-
-#~ msgid "Tool bars have line separators"
-#~ msgstr "Tool balken hebben scheidingslijnen"
-
-#~ msgid "Tool bars are detachable"
-#~ msgstr "Tool balken zijn ontkoppelbaar"
-
-#~ msgid "Tool bar buttons are icons only"
-#~ msgstr "Tool balk knoppen hebben alleen iconen"
-
-#~ msgid "Tool bar buttons are text below icons"
-#~ msgstr "Tool balk knoppen hebben tekst onder iconen"
-
-#~ msgid "Dialogs"
-#~ msgstr "Dialoogvensters"
-
-#~ msgid "Dialog buttons have icons"
-#~ msgstr "Dialoog knoppen met pictogrammen"
-
-#~ msgid "Place dialogs over application window when possible"
-#~ msgstr "Plaats dialoogvensters voor programma vensters wanneer mogelijk"
-
-#~ msgid "Dialogs open"
-#~ msgstr "Dialoog open"
-
-#~ msgid "Wherever the Window Manager places them"
-#~ msgstr "Waar de Window Manager ze plaatst"
-
-#~ msgid "At the mouse pointer"
-#~ msgstr "Bij de muisaanwijzer"
-
-#~ msgid "Dialogs are treated"
-#~ msgstr "Dialoogvensters worden behandeld"
-
-#~ msgid "Like any other window"
-#~ msgstr "Als andere vensters"
-
-#~ msgid "Specially by the window manager"
-#~ msgstr "Speciaal door window manager"
-
-#~ msgid "Dialog Buttons"
-#~ msgstr "Dialoog Knoppen"
-
-#~ msgid "Default  (Spread out - big)"
-#~ msgstr "Standaardwaarde  (Verspreiding - groot)"
-
-#~ msgid "Spread out (big)"
-#~ msgstr "Verspreiding (groot)"
-
-#~ msgid "Left aligned"
-#~ msgstr "Links uitgelijnd"
-
-#~ msgid "Right aligned"
-#~ msgstr "Rechts uitgelijnd"
-
-#~ msgid "Notebook tabs"
-#~ msgstr "Schrijfblok tabbladen"
-
-#~ msgid "The same window"
-#~ msgstr "Het zelfde venster"
-
-#~ msgid "Right"
-#~ msgstr "Rechts"
-
-#~ msgid "Top"
-#~ msgstr "Top"
-
-#~ msgid "Bottom"
-#~ msgstr "Bodem"
-
-#~ msgid "When opening Multiple documents, use"
-#~ msgstr "Wanneer Meerdere documenten worden geopend, gebruik"
-
-#~ msgid "When using Notebook tabs, place the tabs on the"
-#~ msgstr "Wanneer Kladblok tabs worden gebruik, plaats tabs op de"
-
-#~ msgid "Settings will not take effect until applications restart"
-#~ msgstr ""
-#~ "Instellingen zullen niet effectief zijn totdat applicaties herstarten"
-
-#~ msgid "Session"
-#~ msgstr "Sessie"
-
-#~ msgid "Session Chooser"
-#~ msgstr "Sessie kiezer"
-
-#~ msgid "Start Session"
-#~ msgstr "Sessie aan het starten"
-
-#~ msgid "Cancel Login"
-#~ msgstr "Login Annuleren"
-
-#~ msgid "Order: "
-#~ msgstr "Volgorde: "
-
-#~ msgid "Style: "
-#~ msgstr "Stijl: "
-
-#~ msgid "This button sets the start order of the selected programs.\n"
-#~ msgstr ""
-#~ "Deze knop bepaalt de opstartvolgorde van de geselecteerde programma's\n"
-
-#~ msgid ""
-#~ "This button sets the restart style of the selected programs:\n"
-#~ "Normal programs are unaffected by logouts but can die;\n"
-#~ "Respawn programs are never allowed to die;\n"
-#~ "Trash programs are discarded on logout and can die;\n"
-#~ "Settings programs are always started on every login."
-#~ msgstr ""
-#~ "Deze knop bepaalt de herstart stijl van de geselecteerde programma's:\n"
-#~ "Normale programma's zijn niet beïnvloed door afmelden maar kunnen "
-#~ "afsterven;\n"
-#~ "Herstartende programma's mogen nooit afsterven;\n"
-#~ "Achtergrond programma's worden afgesloten bij afmelden en kunnen "
-#~ "afsterven;\n"
-#~ "Instellings programma's worden altijd gestart bij elke aanmelding."
-
-#~ msgid ""
-#~ "This button produces a key to the program states below:\n"
-#~ "Inactive programs are waiting to start or have finished;\n"
-#~ "Starting programs are being given time to get running;\n"
-#~ "Running programs are normal members of the session;\n"
-#~ "Saving programs are saving their session details;\n"
-#~ "Programs which make no contact have Unknown states.\n"
-#~ msgstr ""
-#~ "Deze knop geeft toegang tot de programmastatus hieronder:\n"
-#~ "Inactieve programma's wachten op opstarten of zijn afgesloten;\n"
-#~ "Opstartende programma's krijgen de tijd om op gang te komen;\n"
-#~ "Lopende programma's zijn normale deelnemers van de sessie;\n"
-#~ "Opslaande programma's slaan hun sessie details op;\n"
-#~ "Programma's die geen contact maken hebben een Onbekende status.\n"
-
-#~ msgid "This column gives the command used to start a program."
-#~ msgstr "Deze kolom vermeldt het commando om een programma op te starten."
-
-#~ msgid "Order"
-#~ msgstr "Volgorde"
-
-#~ msgid "Style"
-#~ msgstr "Stijl"
-
-#~ msgid "State"
-#~ msgstr "Status"
-
-#~ msgid "Program"
-#~ msgstr "Programma"
-
-#~ msgid "Inactive"
-#~ msgstr "Inactief"
-
-#~ msgid "Waiting to start or already finished."
-#~ msgstr "Wachtend op opstarten of al afgesloten."
-
-#~ msgid "Started but has not yet reported state."
-#~ msgstr "Opgestart, maar heeft status nog niet doorgegeven."
-
-#~ msgid "Running"
-#~ msgstr "Opgestart"
-
-#~ msgid "A normal member of the session."
-#~ msgstr "Een normale deelnemer van de sessie."
-
-#~ msgid "Saving"
-#~ msgstr "Aan het opslaan"
-
-#~ msgid "Saving session details."
-#~ msgstr "Sessie details aan het opslaan."
-
-#~ msgid "Unknown"
-#~ msgstr "Onbekend"
-
-#~ msgid "State not reported within timeout."
-#~ msgstr "Status niet op tijd doorgegeven."
-
-#~ msgid "Unaffected by logouts but can die."
-#~ msgstr "Niet beïnvloed door afmelden maar kan afsterven."
-
-#~ msgid "Respawn"
-#~ msgstr "Herstart"
-
-#~ msgid "Never allowed to die."
-#~ msgstr "Nooit toegestaan af te sterven."
-
-#~ msgid "Trash"
-#~ msgstr "Achtergrond"
-
-#~ msgid "Discarded on logout and can die."
-#~ msgstr "Afgesloten bij afmelden en kan afsterven"
-
-#~ msgid "Always started on every login."
-#~ msgstr "Wordt bij iedere aanmelding opgestart"
-
-#~ msgid "Remove Program"
-#~ msgstr "Verwijder programma"
-
-#~ msgid "Options"
-#~ msgstr "Opties"
-
-#~ msgid "Prompt on logout"
-#~ msgstr "Bevestiging bij afmelden"
-
-#~ msgid "Automatically save changes to session"
-#~ msgstr "Automatisch opslaan van wijzigingen in sessie"
-
-#~ msgid "Non-session-managed Startup Programs"
-#~ msgstr "Niet-sessie-gebonden Opstart Programma's"
-
-#~ msgid "Command"
-#~ msgstr "Opdracht"
-
-#~ msgid "Browse Currently Running Programs..."
-#~ msgstr "Blader door Lopende Programma's..."
-
-#~ msgid "Only display warnings."
-#~ msgstr "Alleen waarschuwingen tonen."
-
-#~ msgid "Startup Command"
-#~ msgstr "Opstart Commando"
-
-#~ msgid ""
-#~ "Programs with smaller values are started before programs with higher "
-#~ "values. The default value should be OK"
-#~ msgstr ""
-#~ "Programma's met lagere waarden worden gestart voor programma's met hogere "
-#~ "waarden. De standaardwaarde is meestal goed"
-
-#~ msgid "The startup command cannot be empty"
-#~ msgstr "Het opstart commando kan niet leeg zijn"
-
-#~ msgid "Edit Startup Program"
-#~ msgstr "Opstartprogramma bewerken"
-
-#~ msgid ""
-#~ "Error installing theme:\n"
-#~ "'%s'\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Fout bij installeren van thema:\n"
-#~ "'%s'\n"
-#~ "%s"
-
-#~ msgid "Available Themes"
-#~ msgstr "Beschikbare Thema's"
-
-#~ msgid ""
-#~ "Auto\n"
-#~ "Preview"
-#~ msgstr ""
-#~ "Automatisch\n"
-#~ "Voorbeeld"
-
-#~ msgid ""
-#~ "Install new\n"
-#~ "theme..."
-#~ msgstr ""
-#~ "Installeer nieuw\n"
-#~ "thema..."
-
-#~ msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
-#~ msgstr "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
-
-#~ msgid "Use custom font."
-#~ msgstr "Gebruik eigen lettertype"
-
-#~ msgid "Home directory doesn't exist!\n"
-#~ msgstr "Thuis map bestaat niet!\n"
-
-#~ msgid "Theme does not exist"
-#~ msgstr "Thema bestaat niet"
-
-#~ msgid "Command '%s' failed"
-#~ msgstr "Opdracht '%s' mislukt"
-
-#~ msgid "Unknown file format"
-#~ msgstr "Onbekend bestandsformaat"
-
-#~ msgid "Error initializing the `url-properties' capplet."
-#~ msgstr "Fout bij initialiseren van 'url-properties' capplet'."
-
-#~ msgid "Protocol"
-#~ msgstr "Protocol"
-
-#~ msgid "Netscape"
-#~ msgstr "Netscape"
-
-#~ msgid "Netscape (new window)"
-#~ msgstr "Netscape (nieuw venster)"
-
-#~ msgid "Help browser (new window)"
-#~ msgstr "Help pagina's (nieuw venster)"
-
-#~ msgid "Set"
-#~ msgstr "Instellen"
-
-#~ msgid ""
-#~ "Starting %s\n"
-#~ "(%d seconds left before operation times out)"
-#~ msgstr ""
-#~ "%s Aan het opstarten\n"
-#~ "(%d seconden voordat bewerking tijdslimiet overschreidt)"
-
-#~ msgid "%s (Current)"
-#~ msgstr "%s (Huidige)"
-
-#~ msgid "Run Configuration Tool for %s"
-#~ msgstr "Start Configuratie van %s"
-
-#~ msgid " (Not found)"
-#~ msgstr " (Niet gevonden)"
-
-#~ msgid ""
-#~ "wm-properties-capplet: Unable to initialize window manager.\n"
-#~ "\tAnother window manager is already running and could not be killed\n"
-#~ msgstr ""
-#~ "wm-properties-capplet: Kan window manager niet initialiseren.\n"
-#~ "\tWindow manager is al gestart en kon niet gestopt worden\n"
-
-#~ msgid ""
-#~ "wm-properties-capplet: Unable to initialize window manager.\n"
-#~ "\t'%s' didn't start\n"
-#~ msgstr ""
-#~ "wm-properties-capplet: Kan window manager niet initialiseren.\n"
-#~ "\t'%s' is niet gestart\n"
-
-#~ msgid "Previous window manager did not die\n"
-#~ msgstr "Vorige window manager is niet gestopt\n"
-
-#~ msgid ""
-#~ "Could not start '%s'.\n"
-#~ "Falling back to previous window manager '%s'\n"
-#~ msgstr ""
-#~ "Kon '%s' niet opstarten.\n"
-#~ "Terugvallen op vorige window manager '%s'\n"
-
-#~ msgid ""
-#~ "Could not start fallback window manager.\n"
-#~ "Please run a window manager manually. You can\n"
-#~ "do this by selecting \"Run Program\" in the\n"
-#~ "foot menu\n"
-#~ msgstr ""
-#~ "Kon niet terugvallen op window manager.\n"
-#~ "Start a.u.b. handmatig een window manager op. U kunt dit\n"
-#~ "doen door \"Uitvoeren\" te selecteren in het\n"
-#~ "voet-menu\n"
-
-#~ msgid "OK"
-#~ msgstr "OK"
-
-#~ msgid ""
-#~ "Your current window manager has been changed. In order for\n"
-#~ "this change to be saved, you will need to save your current\n"
-#~ "session. You can do so immediately by selecting the \"Save session\n"
-#~ "now\" below, or you can save your session later.  This can be\n"
-#~ "done either selecting \"Save Current Session\" under \"Settings\"\n"
-#~ "in the main menu, or by turning on \"Save Current Setup\" when\n"
-#~ "you log out.\n"
-#~ msgstr ""
-#~ "Uw huidige window manager is veranderd. Om deze\n"
-#~ "wijziging te bewaren, moet u de huidige sessie\n"
-#~ "opslaan. Dit kan door \"Bewaar Huidige Sessie\" te selecteren\n"
-#~ "onder \"Instellingen\" in het hoofdmenu, of door bij het afmelden\n"
-#~ "\"Bewaar Huidige Instellingen\" te activeren.\n"
-
-#~ msgid "Save Session Later"
-#~ msgstr "Bewaar Sessie Later"
-
-#~ msgid "Save Session Now"
-#~ msgstr "Bewaar Sessie Nu"
-
-#~ msgid ""
-#~ "Your current window manager has been changed. In order for\n"
-#~ "this change to be saved, you will need to save your current\n"
-#~ "session. This can be done by either selecting \"Save Current Session\"\n"
-#~ "under \"Settings\" in the main menu, or by turning on\n"
-#~ "\"Save Current Setup\" when you log out.\n"
-#~ msgstr ""
-#~ "Uw huidige window manager is veranderd. Om deze\n"
-#~ "wijziging te bewaren, moet u de huidige sessie\n"
-#~ "opslaan. Dit kan door \"Bewaar Huidige Sessie\" te selecteren\n"
-#~ "onder \"Instellingen\" in het hoofdmenu, of door bij het afmelden\n"
-#~ "\"Bewaar Huidige Instellingen\" te activeren.\n"
-
-#~ msgid "Add New Window Manager"
-#~ msgstr "Nieuwe Window Manager toevoegen"
-
-#~ msgid "Cancel"
-#~ msgstr "Afbreken"
-
-#~ msgid "Configuration Command:"
-#~ msgstr "Configuratie Opdracht:"
-
-#~ msgid "Window manager is session managed"
-#~ msgstr "Window Manager is sessie gebonden"
-
-#~ msgid "Name cannot be empty"
-#~ msgstr "Naam kan niet leeg zijn"
-
-#~ msgid "Command cannot be empty"
-#~ msgstr "Commando kan niet leeg zijn"
-
-#~ msgid "You cannot delete the current Window Manager"
-#~ msgstr "U kunt de huidige Window Manager niet verwijderen"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'wm-properties-capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "Een initialiseringsfout is opgetreden bij het opstarten van 'wm-"
-#~ "properties-capplet'.\n"
-#~ "aan het afbreken...\n"
-
-#~ msgid "Color 1"
-#~ msgstr "Kleur 1"
-
-#~ msgid "Color 2"
-#~ msgstr "Kleur 2"
-
-#~ msgid ""
-#~ "Solid Color\n"
-#~ "Vertical Gradient\n"
-#~ "Horizontal Gradient\n"
-#~ msgstr ""
-#~ "Solide Kleur\n"
-#~ "Verticale Gradiënt\n"
-#~ "Horizontale Gradiënt\n"
-
-#~ msgid ""
-#~ "Tiled\n"
-#~ "Centered\n"
-#~ "Scaled (keep aspect ratio)\n"
-#~ "Stretched (change aspect ratio)\n"
-#~ "Embossed\n"
-#~ msgstr ""
-#~ "Naast Elkaar\n"
-#~ "Gecentreerd\n"
-#~ "Geschaald (behoud verhouding)\n"
-#~ "Uitrekken (verander verhouding)\n"
-#~ "Reliëf\n"
-
-#~ msgid "(None)\n"
-#~ msgstr "(Geen)\n"
-
-#~ msgid "Scaled"
-#~ msgstr "Geschaald"
-
-#~ msgid "Disable background selection"
-#~ msgstr "Achtergrondselectie uitschakelen"
-
-#~ msgid "Auto-repeat"
-#~ msgstr "Automatisch herhalen"
-
-#~ msgid "Repeat delay"
-#~ msgstr "Herhaal vertraging"
-
-#~ msgid "Click on keypress"
-#~ msgstr "Klik bij indrukken van een toets"
-
-#~ msgid "Menu Options"
-#~ msgstr "Menu Opties"
-
-#~ msgid "Can detach and move menus"
-#~ msgstr "Kan menu's losmaken en verplaatsen"
-
-#~ msgid "Statusbar Options"
-#~ msgstr "Statusbalk Opties"
-
-#~ msgid "Can detach and move toolbars"
-#~ msgstr "Kan menubalken losmaken en verplaatsen"
-
-#~ msgid ""
-#~ "Default value\n"
-#~ "Spread buttons out\n"
-#~ "Put buttons on edges\n"
-#~ "Left-justify buttons\n"
-#~ "Right-justify buttons\n"
-#~ msgstr ""
-#~ "Standaard waarde\n"
-#~ "Verspreid knoppen\n"
-#~ "Zet knoppen tegen de randen\n"
-#~ "Knoppen links-uitlijnen\n"
-#~ "Knoppen rechts-uitlijnen\n"
-
-#~ msgid "Dialog position:"
-#~ msgstr "Positie dialoogvenster:"
-
-#~ msgid "Dialog hints:"
-#~ msgstr "Dialoog aanwijzingen:"
-
-#~ msgid ""
-#~ "Let window manager decide\n"
-#~ "Center of the screen\n"
-#~ "At the mouse pointer\n"
-#~ msgstr ""
-#~ "Laat de window manager beslissen\n"
-#~ "In het midden van het scherm\n"
-#~ "Bij de muis aanwijzer\n"
-
-#~ msgid ""
-#~ "Dialogs are like other windows\n"
-#~ "Dialogs are treated specially by the window manager\n"
-#~ msgstr ""
-#~ "Dialoogvensters zijn het zelfde als andere windows\n"
-#~ "Dialoogvensters worden speciaal behandeld door window manager\n"
-
-#~ msgid "window3"
-#~ msgstr "window3"
-
-#~ msgid "GNOME MDI Options"
-#~ msgstr "GNOME MDI Opties"
-
-#~ msgid "Default MDI Mode:"
-#~ msgstr "Standaard MDI Modus:"
-
-#~ msgid "MDI notebook tab position:"
-#~ msgstr "MDI schrijfblok tab positie:"
-
-#~ msgid ""
-#~ "Notebook\n"
-#~ "Toplevel\n"
-#~ "Modal\n"
-#~ msgstr ""
-#~ "Notebook\n"
-#~ "Bovenlevel\n"
-#~ "Modal\n"
-
-#~ msgid ""
-#~ "Left\n"
-#~ "Right\n"
-#~ "Top\n"
-#~ "Bottom\n"
-#~ msgstr ""
-#~ "Links\n"
-#~ "Rechts\n"
-#~ "Boven\n"
-#~ "Onder\n"
-
-#~ msgid "id of the capplet -- assigned by the control-center"
-#~ msgstr "id van de capplet -- toegewezen door het configuratie-centrum"
-
-#~ msgid "ID"
-#~ msgstr "ID"
-
-#~ msgid "Multi-capplet id."
-#~ msgstr "Multi-capplet id."
-
-#~ msgid "CAPID"
-#~ msgstr "CAPID"
-
-#~ msgid "X ID of the socket it's plugged into"
-#~ msgstr "X ID van de gebruikte socket"
-
-#~ msgid "XID"
-#~ msgstr "XID"
-
-#~ msgid "IOR of the control-center"
-#~ msgstr "IOR van het configuratie-centrum"
-
-#~ msgid "IOR"
-#~ msgstr "IOR"
-
-#~ msgid "Initialize session settings"
-#~ msgstr "Initialiseer sessie instellingen"
-
-#~ msgid "Ignore default action.  Used for custom init-session cases"
-#~ msgstr "Negeer standaard handeling. Gebruikt voor eigen init-sessie"
-
-#~ msgid "Get an XML description of the capplet's state"
-#~ msgstr "Verkrijg een XML beschrijving van de capplet's status"
-
-#~ msgid "DO_GET"
-#~ msgstr "DO_GET"
-
-#~ msgid "Read an XML description of the capplet's state and apply it"
-#~ msgstr "Lees een XML beschrijving van de capplet's status en activeer het"
-
-#~ msgid "DO_SET"
-#~ msgstr "DO_SET"
-
-#~ msgid "Help with the GNOME control-center."
-#~ msgstr "Help bij het GNOME control-center."
-
-#~ msgid "About the GNOME control-center."
-#~ msgstr "Over het GNOME control-center programma."
-
-#~ msgid "Up"
-#~ msgstr "Omhoog"
-
-#~ msgid "Parent Group"
-#~ msgstr "Parent Group"
-
-#~ msgid "Preferences"
-#~ msgstr "Instellingen"
-
-#~ msgid "Set background image."
-#~ msgstr "Achtergrondfiguur instellen"
-
-#~ msgid "IMAGE-FILE"
-#~ msgstr "AFBEELDINGBESTAND"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'background-properties-"
-#~ "capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "Een initialiseringsfout is opgetreden bij het opstarten van 'background-"
-#~ "properties-capplet'.\n"
-#~ "aan het afbreken...\n"
-
-#~ msgid "Set parameters from saved state and exit"
-#~ msgstr "Stel variabelen in van opgeslagen toestand en sluit af"
-
-#~ msgid "IMAGE"
-#~ msgstr "AFBEELDING"
-
-#~ msgid "Sets the wallpaper to the value specified"
-#~ msgstr "Stelt de achtergrond in op de gegeven waarde"
-
-#~ msgid "COLOR"
-#~ msgstr "KLEUR"
-
-#~ msgid "Specifies the background color"
-#~ msgstr "Bepaalt de achtergrondkleur"
-
-#~ msgid "Specifies end background color for gradient"
-#~ msgstr "Bepaalt de eindkleur van het kleurverloop"
-
-#~ msgid "Gradient orientation: vertical or horizontal"
-#~ msgstr "Oriëntatie van verloop: vertikaal of horizontaal"
-
-#~ msgid "MODE"
-#~ msgstr "MODUS"
-
-#~ msgid "Display wallpaper: tiled, centered, scaled or ratio"
-#~ msgstr ""
-#~ "Toon achtergrond: naast elkaar, gecentreerd, geschaald of naar verhouding"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'bell-properties-"
-#~ "capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "Een initialiseringsfout is opgetreden bij het opstarten van de 'bell-"
-#~ "properties-capplet'.\n"
-#~ "aan het afbreken...\n"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'keyboard-properties-"
-#~ "capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "Een initialiseringsfout is opgetreden bij het opstarten van de 'keyboard-"
-#~ "properties-capplet'.\n"
-#~ "aan het afbreken...\n"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'mouse-properties-"
-#~ "capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "Een initialiseringsfout is opgetreden bij het opstarten van de 'muis-"
-#~ "instellingen-capplet'.\n"
-#~ "aan het afbreken...\n"
-
-#~ msgid "Require Password"
-#~ msgstr "Wachtwoord Vereist"
-
-#~ msgid "Use power management."
-#~ msgstr "Gebruik energie beheer."
-
-#~ msgid "%s Settings..."
-#~ msgstr "%s Intellingen..."
-
-#~ msgid "Author:"
-#~ msgstr "Auteur:"
-
-#~ msgid "Author: UNKNOWN"
-#~ msgstr "Auteur: ONBEKEND"
-
-#~ msgid "RANDOM SCREENSAVER"
-#~ msgstr "WILLEKEURIGE SCHERMBEVEILIGING"
-
-#~ msgid "Screen Saver"
-#~ msgstr "Scherm Beveiliging"
-
-#~ msgid ""
-#~ "Pressing this button will popup a dialogbox that will help you setup the "
-#~ "current screensaver."
-#~ msgstr ""
-#~ "Druk op deze knop en een dialoogvenster verschijnt dat u helpt bij het "
-#~ "instellen van de huidige schermbeveiliging."
-
-#~ msgid "Screen Saver Settings"
-#~ msgstr "Scherm Beveiliging Instellingen"
-
-#~ msgid "Start After "
-#~ msgstr "Start Na "
-
-#~ msgid " Minutes."
-#~ msgstr " Minuten."
-
-#~ msgid "Low "
-#~ msgstr "Laag "
-
-#~ msgid " Normal"
-#~ msgstr " Normaal"
-
-#~ msgid "Shutdown monitor "
-#~ msgstr "Monitor uitschakelen "
-
-#~ msgid " minutes after screen saver has started."
-#~ msgstr " minuten na het starten van de schermbeveiliging."
-
-#~ msgid "Screen Saver Demo"
-#~ msgstr "Voorbeeld Scherm Beveiliging"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'sound-properties-"
-#~ "capplet'."
-#~ msgstr ""
-#~ "Een initialiseringsfout is opgetreden bij het opstarten van de 'sound-"
-#~ "properties-capplet'."
-
-#~ msgid ""
-#~ "This copy of the GNOME control center was not compiled with sound support"
-#~ msgstr ""
-#~ "Deze versie van het GNOME configuratie centrum is niet gecompileerd met "
-#~ "geluidsondersteuning"
-
-#~ msgid "Put buttons on edges"
-#~ msgstr "Knoppen op randen plaatsen"
-
-#~ msgid "Left-justify buttons"
-#~ msgstr "Knoppen links uitlijnen"
-
-#~ msgid "Right-justify buttons"
-#~ msgstr "Knoppen rechts uitlijnen"
-
-#~ msgid "Dialog position"
-#~ msgstr "Positie dialoogvenster"
-
-#~ msgid "Default MDI Mode"
-#~ msgstr "Standaard MDI Modus"
-
-#~ msgid "Toplevel"
-#~ msgstr "Topniveau"
-
-#~ msgid "MDI notebook tab position"
-#~ msgstr "MDI schrijfblok tab positie"
-
-#~ msgid "cannot find widget for %s\n"
-#~ msgstr "kan niet de widget voor %s vinden\n"
-
-#~ msgid ""
-#~ "Unknown type.\n"
-#~ "\tWidget %s is not supported\n"
-#~ msgstr ""
-#~ "Niet bekend type.\n"
-#~ "\tWidget %s wordt niet ondersteund\n"
-
-#~ msgid "Try"
-#~ msgstr "Probeer"
-
-#~ msgid "Revert"
-#~ msgstr "Herstel"
-
-#~ msgid "Sorry, no help is available for these settings."
-#~ msgstr "Sorry, er is geen hulp beschikbaar voor deze instellingen."
-
-#~ msgid "capplet-command to be run."
-#~ msgstr "capplet-opdracht die uitgevoerd moet worden."
-
-#~ msgid "CAPPLET"
-#~ msgstr "CAPPLET"
-
-#~ msgid "Warning:"
-#~ msgstr "Waarschuwing:"
-
-#~ msgid "Discard all changes"
-#~ msgstr "Maak alle wijzigingen ongedaan"
-
-#~ msgid ""
-#~ "The following modules have had changes made, but not committed.  If you "
-#~ "would like to edit them, please double click on the appropriate entry."
-#~ msgstr ""
-#~ "In de volgende modules zijn wijzigingen gemaakt, maar niet toegepast.  "
-#~ "Als u ze wilt bewerken, dubbelklik dan op het betreffende onderdeel."
