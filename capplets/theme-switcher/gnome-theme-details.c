@@ -40,10 +40,21 @@ static void update_gconf_key_from_selection (GtkTreeSelection *selection,
 static void load_theme_names                (GtkTreeView        *tree_view,
 					     GList              *theme_list,
 					     gchar              *default_theme);
+static char *path_to_theme_id               (const char *path);
 
 
+static char *
+path_to_theme_id (const char *path)
+{
+  char *dirname;
+  char *result;
 
+  dirname = g_path_get_dirname(path);
+  result = g_path_get_basename(dirname);
+  g_free(dirname);
 
+  return result;
+}
 
 
 
@@ -151,9 +162,10 @@ load_theme_names (GtkTreeView *tree_view,
 				  GTK_POLICY_NEVER, GTK_POLICY_NEVER);
   gtk_widget_set_usize (swindow, -1, -1);
 
-  for (list = theme_list; list; list = list->next)
+  for (list = theme_list; list; list = list->next->next)
     {
       const char *name = list->data;
+      const char *id = list->next->data;
       GtkTreeIter iter;
       gboolean is_default;
 
@@ -166,7 +178,7 @@ load_theme_names (GtkTreeView *tree_view,
 
       gtk_list_store_set (GTK_LIST_STORE (model), &iter,
 			  THEME_NAME_COLUMN, name,
-			  THEME_ID_COLUMN, name,
+			  THEME_ID_COLUMN, id,
 			  THEME_FLAG_COLUMN, is_default,
 			  -1);
 
@@ -347,6 +359,8 @@ gnome_theme_details_reread_themes_from_disk (void)
   for (list = theme_list; list; list = list->next)
     {
       GnomeThemeInfo *info = list->data;
+      /* Use same string for ID as for name with GTK themes */
+      string_list = g_list_prepend (string_list, info->name);
       string_list = g_list_prepend (string_list, info->name);
     }
 
@@ -365,7 +379,14 @@ gnome_theme_details_reread_themes_from_disk (void)
   g_list_free (theme_list);
 
   /* Next, we do the window managers */
-  string_list = gnome_window_manager_get_theme_list (window_manager);
+  theme_list = gnome_window_manager_get_theme_list (window_manager);
+  string_list = NULL;
+  for (list = theme_list; list; list = list->next)
+    {
+      /* Use same string for ID as for name with Window themes */
+      string_list = g_list_prepend (string_list, list->data);
+      string_list = g_list_prepend (string_list, list->data);
+    }  
   if (string_list == NULL)
     {
       have_window_theme = FALSE;
@@ -378,6 +399,7 @@ gnome_theme_details_reread_themes_from_disk (void)
       load_theme_names (GTK_TREE_VIEW (WID ("window_theme_treeview")), string_list, WINDOW_THEME_DEFAULT_NAME);
       g_list_free (string_list);
     }
+  g_list_free (theme_list);
 
   /* Third, we do the icon theme */
   theme_list = gnome_theme_icon_info_find_all ();
@@ -386,6 +408,7 @@ gnome_theme_details_reread_themes_from_disk (void)
   for (list = theme_list; list; list = list->next)
     {
       GnomeThemeIconInfo *info = list->data;
+      string_list = g_list_prepend (string_list, path_to_theme_id(info->path));
       string_list = g_list_prepend (string_list, info->name);
     }
 

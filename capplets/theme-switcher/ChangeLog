@@ -1,5 +1,14 @@
 2002-12-28  Seth Nickell  <snickell@stanford.edu>
 
+	* gnome-theme-details.c: (path_to_theme_id), (load_theme_names),
+	(gnome_theme_details_reread_themes_from_disk):
+
+	Use the theme directory name rather than the "printable" name
+	for icon themes. Does this need to be done for WM themes and
+	GTK themes as well?
+	
+2002-12-28  Seth Nickell  <snickell@stanford.edu>
+
 	* gnome-theme-manager.c: (update_themes_from_disk):
 
 	Fix crash when current WM isn't detected.
