@@ -2,7 +2,7 @@ always_built_SUBDIRS =					\
 	common accessibility				\
 	default-applications desktop-links font		\
 	background keyboard mouse sound			\
-	file-types theme-switcher ui-properties		\
+	theme-switcher ui-properties			\
 	keybindings network windows
 
 if HAVE_RANDR
