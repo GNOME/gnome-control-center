@@ -256,7 +256,6 @@ preferences_new_from_bonobo_db (Bonobo_ConfigDatabase db, CORBA_Environment *ev)
        
 	prefs = PREFERENCES (preferences_new ());
 
-	prefs->enabled = bonobo_config_get_boolean (db, "/main/enabled", NULL);
 	prefs->orientation = bonobo_config_get_ulong (db, "/main/orientation", NULL);
 
 	if (prefs->orientation != ORIENTATION_SOLID)
