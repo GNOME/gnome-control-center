@@ -40,6 +40,7 @@
 #include <X11/Xatom.h>
 
 #include "preview.h"
+#include "rc-parse.h"      /* For get_screensaver_dir_list () */
 
 static GtkWidget *preview_window;
 static pid_t preview_pid;
@@ -89,11 +90,22 @@ strip_arg (char **args, char *arg)
 static void
 setup_path (void) 
 {
-	char *path, *newpath;
+	GString *newpath;
+	char *path;
+	GList *node;
 
-	path = getenv ("PATH");
-	newpath = g_strconcat (path, ":/usr/X11R6/lib/xscreensaver", NULL);
-	setenv ("PATH", newpath, TRUE);
+	node = get_screensaver_dir_list ();
+
+	path = g_getenv ("PATH");
+	newpath = g_string_new (path);
+
+	for (; node; node = node->next) {
+		g_string_append (newpath, ":");
+		g_string_append (newpath, (gchar *) node->data);
+	}
+
+	setenv ("PATH", newpath->str, TRUE);
+	g_string_free (newpath, TRUE);
 }
 
 /* Warning: memory leaks, please do not use except in a separate

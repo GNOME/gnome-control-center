@@ -1,10 +1,15 @@
 2000-08-09  Bradford Hovinen  <hovinen@helixcode.com>
 
+	* preview.c (setup_path): Use get_screensaver_dir_list; iterate
+	through all the directories listed in list; use g_getenv
+
 	* rc-parse.c (get_screensaver_dir_list): Implement. Get a list of
 	possible directories where screensavers may be found by scanning
 	the XScreensaver binary.
 	(command_exists): Search through list of screensaver directories
 	from get_screensaver_dir_list rather than using the hardcoded one
+	(get_screensaver_dir_list): Make public, cache return value
+	(command_exists): Don't cache screensaver_dir_list
 
 2000-08-07  Bradford Hovinen  <hovinen@helixcode.com>
 

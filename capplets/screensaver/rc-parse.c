@@ -200,13 +200,17 @@ strip_whitespace (const gchar *line)
 
 /* Get a list of directories where screensavers could be found */
 
-static GList *
+GList *
 get_screensaver_dir_list (void) 
 {
+	static GList *screensaver_dir_list = NULL;
 	char buffer[1024];
 	char *xss_name, *strings_name, *grep_name, *command;
 	FILE *in;
-	GList *list_head = NULL, *list_tail = NULL;
+	GList *list_tail = NULL;
+
+	if (screensaver_dir_list != NULL)
+		return screensaver_dir_list;
 
 	xss_name = gnome_is_program_in_path ("xscreensaver");
 	strings_name = gnome_is_program_in_path ("strings");
@@ -214,9 +218,9 @@ get_screensaver_dir_list (void)
 
 	if (!xss_name || !strings_name || !grep_name) {
 		/* No grep or strings, so it's hopeless... */
-		list_head = g_list_append (NULL,
-					   "/usr/X11R6/lib/xscreensaver");
-		return list_head;
+		screensaver_dir_list = 
+			g_list_append (NULL, "/usr/X11R6/lib/xscreensaver");
+		return screensaver_dir_list;
 	}
 
 	command = g_strconcat (strings_name, " ", xss_name, " | ",
@@ -228,14 +232,14 @@ get_screensaver_dir_list (void)
 
 		if (g_file_test (buffer, G_FILE_TEST_ISDIR)) {
 			list_tail = g_list_append (NULL, g_strdup (buffer));
-			if (!list_head)
-				list_head = list_tail;
+			if (screensaver_dir_list == NULL)
+				screensaver_dir_list = list_tail;
 			else
 				list_tail = list_tail->next;
 		}
 	}
 
-	return list_head;
+	return screensaver_dir_list;
 }
 
 /* command_exists
@@ -246,7 +250,7 @@ get_screensaver_dir_list (void)
 static gboolean
 command_exists (char *command) 
 {
-	static GList *screensaver_dir_list = NULL;
+	GList *screensaver_dir_list;
 	GList *node;
 	char *program, *fullpath;
 	static char **path_dirs;
@@ -272,8 +276,7 @@ command_exists (char *command)
 	}
 
 	/* Check the directories where screensavers are installed... */
-	if (screensaver_dir_list == NULL)
-		screensaver_dir_list = get_screensaver_dir_list ();
+	screensaver_dir_list = get_screensaver_dir_list ();
 
 	for (node = screensaver_dir_list; node; node = node->next) {
 		fullpath = g_concat_dir_and_file ((gchar *) node->data,
