@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-center 2.0.1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-13 13:06+0200\n"
+"POT-Creation-Date: 2004-03-23 18:54-0500\n"
 "PO-Revision-Date: 2004-03-13 14:06+0200\n"
 "Last-Translator: Maxim Dziumanenko <mvd@mylinux.com.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -961,6 +961,7 @@ msgid "Associate sounds with window manager events"
 msgstr "Пов'язати озвучення з подіями менеджера вікон"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
+#: capplets/keybindings/gnome-keybinding-properties.c:601
 #: capplets/sound/gnome-settings-sound.desktop.in.h:2
 msgid "Sound"
 msgstr "Звук"
@@ -1596,7 +1597,7 @@ msgid "The type of accelerator."
 msgstr "Тип прискорювача."
 
 #: capplets/keybindings/eggcellrendererkeys.c:240
-#: capplets/keybindings/gnome-keybinding-properties.c:235
+#: capplets/keybindings/gnome-keybinding-properties.c:239
 #: libbackground/applier.c:588 typing-break/drwright.c:473
 msgid "Disabled"
 msgstr "Немає"
@@ -1610,23 +1611,23 @@ msgstr "Введіть новий прискорювач чи натисніть
 msgid "Type a new accelerator"
 msgstr "Введіть новий прискорювач"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:202
+#: capplets/keybindings/gnome-keybinding-properties.c:206
 msgid "GNOME Default"
 msgstr "Типовий"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:577
+#: capplets/keybindings/gnome-keybinding-properties.c:581
 msgid "<Unknown Action>"
 msgstr "<Невідома дія>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:596
+#: capplets/keybindings/gnome-keybinding-properties.c:600
 msgid "Desktop"
 msgstr "Стільниця"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:600
+#: capplets/keybindings/gnome-keybinding-properties.c:605
 msgid "Window Management"
 msgstr "Керування вікнами"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:736
+#: capplets/keybindings/gnome-keybinding-properties.c:741
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1635,17 +1636,17 @@ msgstr ""
 "Комбінація клавіш \"%s\" вже використовується для\n"
 " \"%s\"\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:766
+#: capplets/keybindings/gnome-keybinding-properties.c:771
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Помилка встановлення нового прискорювача у базі даних параметрів: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:812
+#: capplets/keybindings/gnome-keybinding-properties.c:817
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "Помилка звільнення прискорювача у базі даних параметрів: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:960
+#: capplets/keybindings/gnome-keybinding-properties.c:965
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1653,11 +1654,11 @@ msgstr ""
 "Не вдається знайти жодної теми клавіатури.  Це означає, що GTK+ було "
 "встановлено не до кінця."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:982
+#: capplets/keybindings/gnome-keybinding-properties.c:987
 msgid "Action"
 msgstr "Дія"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:1006
+#: capplets/keybindings/gnome-keybinding-properties.c:1011
 msgid "Shortcut"
 msgstr "Комбінація клавіш"
 
@@ -2714,8 +2715,9 @@ msgid ""
 "contents will now be ignored. You can use the keyboard preferences to "
 "restore them."
 msgstr ""
-"У вашому домашньому каталозі є файл розкладок клавіатури (%s), вміст якого буде ігноруватись. "
-"Ви можете використовувати настройку клавіатури для його відновлення."
+"У вашому домашньому каталозі є файл розкладок клавіатури (%s), вміст якого "
+"буде ігноруватись. Ви можете використовувати настройку клавіатури для його "
+"відновлення."
 
 #: gnome-settings-daemon/gnome-settings-screensaver.c:92
 #, c-format
@@ -2746,7 +2748,7 @@ msgstr "Не вдається завантажити звуковий файл %
 msgid "Cannot determine user's home directory"
 msgstr "Не вдається визначити домашній каталог користувача"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:204
+#: gnome-settings-daemon/gnome-settings-xsettings.c:206
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "Ключ GConf %s встановлено в тип %s, а очікувався тип %s\n"
@@ -3265,7 +3267,7 @@ msgstr "Чи створювати мініатюри тем"
 msgid "Volume"
 msgstr "Гучність"
 
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:113
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:114
 #, c-format
 msgid ""
 "Couldn't execute command: %s\n"
@@ -3274,7 +3276,7 @@ msgstr ""
 "Не вдається виконати команду: %s\n"
 "Перевірте чи команда існує."
 
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:129
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:130
 msgid ""
 "Couldn't put the machine to sleep.\n"
 "Verify that the machine is correctly configured."
@@ -3282,12 +3284,12 @@ msgstr ""
 "Не вдається перевести комп'ютер у стан призупинення.\n"
 "Перевірте чи правильно налаштований комп'ютер."
 
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:139
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:140
 #, c-format
 msgid "Permissions on the file %s are broken\n"
 msgstr "Неправильні права файлу %s\n"
 
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:900
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:185
 msgid ""
 "Couldn't load the Glade file.\n"
 "Make sure that this daemon is properly installed."

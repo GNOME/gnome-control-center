@@ -19,7 +19,7 @@
 
 #define LABEL_DATA "gnome-keybinding-properties-label"
 #define KEY_THEME_KEY "/desktop/gnome/interface/gtk_key_theme"
-#define MAX_ELEMENTS_BEFORE_SCROLLING 8
+#define MAX_ELEMENTS_BEFORE_SCROLLING 10
 
 #if defined(__powerpc__) && defined (__linux__)
 #define USE_FBLEVEL
@@ -41,32 +41,36 @@ typedef struct
 
 const KeyListEntry desktop_key_list[] =
 {
+  { "/apps/gnome_settings_daemon/keybindings/help", ALWAYS_VISIBLE, 0 },
+  { "/apps/gnome_settings_daemon/keybindings/power", ALWAYS_VISIBLE, 0 },
+  { "/apps/gnome_settings_daemon/keybindings/sleep", ALWAYS_VISIBLE, 0 },
+  { "/apps/gnome_settings_daemon/keybindings/screensaver", ALWAYS_VISIBLE, 0 },
+  { "/apps/gnome_settings_daemon/keybindings/home", ALWAYS_VISIBLE, 0 },
+  { "/apps/gnome_settings_daemon/keybindings/search", ALWAYS_VISIBLE, 0 },
+  { "/apps/gnome_settings_daemon/keybindings/email", ALWAYS_VISIBLE, 0 },
+  { "/apps/gnome_settings_daemon/keybindings/www", ALWAYS_VISIBLE, 0 },
   { "/apps/metacity/global_keybindings/panel_run_dialog", ALWAYS_VISIBLE, 0 },
   { "/apps/metacity/global_keybindings/panel_main_menu", ALWAYS_VISIBLE, 0 },
   { "/apps/metacity/global_keybindings/run_command_screenshot", ALWAYS_VISIBLE, 0 },
   { "/apps/metacity/global_keybindings/run_command_window_screenshot", ALWAYS_VISIBLE, 0 },
-  { "/apps/gnome_settings_daemon/keybindings/volume_mute", ALWAYS_VISIBLE, 0 },
-  { "/apps/gnome_settings_daemon/keybindings/volume_down", ALWAYS_VISIBLE, 0 },
-  { "/apps/gnome_settings_daemon/keybindings/volume_up", ALWAYS_VISIBLE, 0 },
-  { "/apps/gnome_settings_daemon/keybindings/power", ALWAYS_VISIBLE, 0 },
-  { "/apps/gnome_settings_daemon/keybindings/eject", ALWAYS_VISIBLE, 0 },
-  { "/apps/gnome_settings_daemon/keybindings/home", ALWAYS_VISIBLE, 0 },
-  { "/apps/gnome_settings_daemon/keybindings/search", ALWAYS_VISIBLE, 0 },
-  { "/apps/gnome_settings_daemon/keybindings/email", ALWAYS_VISIBLE, 0 },
-  { "/apps/gnome_settings_daemon/keybindings/sleep", ALWAYS_VISIBLE, 0 },
-  { "/apps/gnome_settings_daemon/keybindings/screensaver", ALWAYS_VISIBLE, 0 },
-  { "/apps/gnome_settings_daemon/keybindings/help", ALWAYS_VISIBLE, 0 },
-  { "/apps/gnome_settings_daemon/keybindings/www", ALWAYS_VISIBLE, 0 },
 #ifdef USE_FBLEVEL
   { "/apps/gnome_settings_daemon/keybindings/brightness_down", ALWAYS_VISIBLE, 0 },
   { "/apps/gnome_settings_daemon/keybindings/brightness_up", ALWAYS_VISIBLE, 0 },
 #endif
+  { NULL }
+};
+const KeyListEntry sounds_key_list[] =
+{
+  { "/apps/gnome_settings_daemon/keybindings/volume_mute", ALWAYS_VISIBLE, 0 },
+  { "/apps/gnome_settings_daemon/keybindings/volume_down", ALWAYS_VISIBLE, 0 },
+  { "/apps/gnome_settings_daemon/keybindings/volume_up", ALWAYS_VISIBLE, 0 },
   /* Other ones that need keysyms bindings */
   { "/apps/gnome_settings_daemon/keybindings/play", ALWAYS_VISIBLE, 0 },
   { "/apps/gnome_settings_daemon/keybindings/pause", ALWAYS_VISIBLE, 0 },
   { "/apps/gnome_settings_daemon/keybindings/stop", ALWAYS_VISIBLE, 0 },
   { "/apps/gnome_settings_daemon/keybindings/previous", ALWAYS_VISIBLE, 0 },
   { "/apps/gnome_settings_daemon/keybindings/next", ALWAYS_VISIBLE, 0 },
+  { "/apps/gnome_settings_daemon/keybindings/eject", ALWAYS_VISIBLE, 0 },
   { NULL }
 };
 
@@ -594,6 +598,7 @@ reload_key_entries (gpointer wm_name, GladeXML *dialog)
   clear_old_model (dialog, WID ("shortcut_treeview"));
   
   append_keys_to_tree (dialog, _("Desktop"), desktop_key_list);
+  append_keys_to_tree (dialog, _("Sound"), sounds_key_list);
   
   if (strcmp((char *) wm_name, WM_COMMON_METACITY) == 0)
     {

@@ -47,7 +47,7 @@ enum {
 	STOP_KEY,
 	PREVIOUS_KEY,
 	NEXT_KEY,
-	HANDLED_KEYS,
+	HANDLED_KEYS
 };
 
 typedef struct {

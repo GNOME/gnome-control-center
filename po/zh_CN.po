@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-10 17:20-0500\n"
+"POT-Creation-Date: 2004-03-23 18:54-0500\n"
 "PO-Revision-Date: 2004-03-04 21:06+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -942,6 +942,7 @@ msgid "Associate sounds with window manager events"
 msgstr "窗口管理器事件产生音效"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
+#: capplets/keybindings/gnome-keybinding-properties.c:601
 #: capplets/sound/gnome-settings-sound.desktop.in.h:2
 msgid "Sound"
 msgstr "音效"
@@ -1541,7 +1542,7 @@ msgid "The type of accelerator."
 msgstr "加速键类型。"
 
 #: capplets/keybindings/eggcellrendererkeys.c:240
-#: capplets/keybindings/gnome-keybinding-properties.c:235
+#: capplets/keybindings/gnome-keybinding-properties.c:239
 #: libbackground/applier.c:588 typing-break/drwright.c:473
 msgid "Disabled"
 msgstr "禁用"
@@ -1555,23 +1556,23 @@ msgstr "键入新的加速键，或按退格键清除"
 msgid "Type a new accelerator"
 msgstr "键入新的加速键"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:202
+#: capplets/keybindings/gnome-keybinding-properties.c:206
 msgid "GNOME Default"
 msgstr "GNOME 默认"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:577
+#: capplets/keybindings/gnome-keybinding-properties.c:581
 msgid "<Unknown Action>"
 msgstr "<未知操作>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:596
+#: capplets/keybindings/gnome-keybinding-properties.c:600
 msgid "Desktop"
 msgstr "桌面"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:600
+#: capplets/keybindings/gnome-keybinding-properties.c:605
 msgid "Window Management"
 msgstr "窗口管理器"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:736
+#: capplets/keybindings/gnome-keybinding-properties.c:741
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1580,27 +1581,27 @@ msgstr ""
 "快捷键“%s”已经用于：\n"
 "“%s”\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:766
+#: capplets/keybindings/gnome-keybinding-properties.c:771
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "在配置数据库中设置新加速键时出错：%s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:812
+#: capplets/keybindings/gnome-keybinding-properties.c:817
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "在配置数据库中取消设置新加速键时出错：%s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:960
+#: capplets/keybindings/gnome-keybinding-properties.c:965
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
 msgstr "无法找到任何键盘主题。这意味着您的 GTK+ 未能完全安装。"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:982
+#: capplets/keybindings/gnome-keybinding-properties.c:987
 msgid "Action"
 msgstr "动作"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:1006
+#: capplets/keybindings/gnome-keybinding-properties.c:1011
 msgid "Shortcut"
 msgstr "快捷键"
 
@@ -2678,7 +2679,7 @@ msgstr "无法载入声音文件 %s 作为示例 %s"
 msgid "Cannot determine user's home directory"
 msgstr "无法确定用户的主目录"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:204
+#: gnome-settings-daemon/gnome-settings-xsettings.c:206
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "GConf 键 %s 被设为 %s 类型，但是期望的类型是 %s\n"
@@ -3160,7 +3161,7 @@ msgstr "是否将主题显示为缩略图"
 msgid "Volume"
 msgstr "音量"
 
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:113
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:114
 #, c-format
 msgid ""
 "Couldn't execute command: %s\n"
@@ -3169,7 +3170,7 @@ msgstr ""
 "无法执行命令：%s\n"
 "请检查此命令是否存在。"
 
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:129
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:130
 msgid ""
 "Couldn't put the machine to sleep.\n"
 "Verify that the machine is correctly configured."
@@ -3177,12 +3178,12 @@ msgstr ""
 "无法将机器转入休眠。\n"
 "请检查机器是否已正确配置。"
 
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:139
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:140
 #, c-format
 msgid "Permissions on the file %s are broken\n"
 msgstr "文件 %s 的权限有误\n"
 
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:900
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:185
 msgid ""
 "Couldn't load the Glade file.\n"
 "Make sure that this daemon is properly installed."

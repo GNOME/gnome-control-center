@@ -65,7 +65,16 @@ find_icon (GnomeDesktopItem *dentry)
 
 	if (icon == NULL || icon[0] == 0)
 		icon = "gnome-settings";
-	res = gtk_icon_theme_load_icon (icon_theme, icon, 48, 0, NULL);
+	else if (g_path_is_absolute (icon))
+		res = gdk_pixbuf_new_from_file (icon, NULL);
+	else  {
+		res = gtk_icon_theme_load_icon (icon_theme, icon, 48, 0, NULL);
+		if (res == NULL) {
+			char *path = g_build_filename (GNOMECC_ICONS_DIR, icon, NULL);
+			res = gdk_pixbuf_new_from_file (path, NULL);
+			g_free (path);
+		}
+	}
 	if (res == NULL)
 		res = gtk_icon_theme_load_icon (icon_theme, "gnome-unknown", 48, 0, NULL);
 	if (res == NULL)

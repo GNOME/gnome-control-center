@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.5.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-10 17:20-0500\n"
+"POT-Creation-Date: 2004-03-23 18:54-0500\n"
 "PO-Revision-Date: 2004-02-29 04:39+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GNOME Korea <gnome-kr-hackers@lists.kldp.net>\n"
@@ -944,6 +944,7 @@ msgid "Associate sounds with window manager events"
 msgstr "창 관리자 이벤트에 사운드를 연결합니다"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
+#: capplets/keybindings/gnome-keybinding-properties.c:601
 #: capplets/sound/gnome-settings-sound.desktop.in.h:2
 msgid "Sound"
 msgstr "소리"
@@ -1555,7 +1556,7 @@ msgid "The type of accelerator."
 msgstr "바로가기 키의 형식."
 
 #: capplets/keybindings/eggcellrendererkeys.c:240
-#: capplets/keybindings/gnome-keybinding-properties.c:235
+#: capplets/keybindings/gnome-keybinding-properties.c:239
 #: libbackground/applier.c:588 typing-break/drwright.c:473
 msgid "Disabled"
 msgstr "사용 않음"
@@ -1569,23 +1570,23 @@ msgstr "바로가기 키를 누르십시오. 지우려면 백스페이스를 누
 msgid "Type a new accelerator"
 msgstr "새 바로가기 키를 누르십시오"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:202
+#: capplets/keybindings/gnome-keybinding-properties.c:206
 msgid "GNOME Default"
 msgstr "그놈 기본값"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:577
+#: capplets/keybindings/gnome-keybinding-properties.c:581
 msgid "<Unknown Action>"
 msgstr "<알 수 없는 동작>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:596
+#: capplets/keybindings/gnome-keybinding-properties.c:600
 msgid "Desktop"
 msgstr "바탕 화면"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:600
+#: capplets/keybindings/gnome-keybinding-properties.c:605
 msgid "Window Management"
 msgstr "창 관리"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:736
+#: capplets/keybindings/gnome-keybinding-properties.c:741
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1594,27 +1595,27 @@ msgstr ""
 "바로가기 키 \"%s\"(은)는 \"%s\"에서\n"
 "쓰고 있습니다\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:766
+#: capplets/keybindings/gnome-keybinding-properties.c:771
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "설정 데이터 베이스에서 새로운 단축키 설정 오류: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:812
+#: capplets/keybindings/gnome-keybinding-properties.c:817
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "설정 데이터 베이스에서 단축키 설정 해제하는 데 오류: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:960
+#: capplets/keybindings/gnome-keybinding-properties.c:965
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
 msgstr "키보드 테마를 찾을 수 없습니다.  GTK+ 설치가 불완전하기 때문입니다."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:982
+#: capplets/keybindings/gnome-keybinding-properties.c:987
 msgid "Action"
 msgstr "동작"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:1006
+#: capplets/keybindings/gnome-keybinding-properties.c:1011
 msgid "Shortcut"
 msgstr "바로 가기"
 
@@ -2697,7 +2698,7 @@ msgstr "사운드 파일 %s을(를) 샘플 %s(으)로 읽어들일 수 없습니
 msgid "Cannot determine user's home directory"
 msgstr "사용자의 홈 디렉토리를 알 수가 없습니다"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:204
+#: gnome-settings-daemon/gnome-settings-xsettings.c:206
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "GConf 키 %s이(가) %s 타입으로 지정되었지만 예상되는 타입은 %s입니다\n"
@@ -3187,7 +3188,7 @@ msgstr "테마를 미리보기"
 msgid "Volume"
 msgstr "볼륨"
 
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:113
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:114
 #, c-format
 msgid ""
 "Couldn't execute command: %s\n"
@@ -3196,7 +3197,7 @@ msgstr ""
 "명령을 실행할 수 없습니다: %s\n"
 "명령이 있는지 확인해보십시오."
 
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:129
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:130
 msgid ""
 "Couldn't put the machine to sleep.\n"
 "Verify that the machine is correctly configured."
@@ -3204,12 +3205,12 @@ msgstr ""
 "컴퓨터를 절전 모드로 바꿀 수 없습니다.\n"
 "컴퓨터가 올바르게 설정되어 있는 지 확인하십시오."
 
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:139
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:140
 #, c-format
 msgid "Permissions on the file %s are broken\n"
 msgstr "파일 %s의 허가권이 없습니다\n"
 
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:900
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:185
 msgid ""
 "Couldn't load the Glade file.\n"
 "Make sure that this daemon is properly installed."

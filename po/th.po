@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-10 17:20-0500\n"
+"POT-Creation-Date: 2004-03-23 18:54-0500\n"
 "PO-Revision-Date: 2004-03-07 22:43-0600\n"
 "Last-Translator: Paisa Seeluangsawat <paisa@users.sf.net>\n"
 "Language-Team: Thai <L10n@opentle.org>\n"
@@ -940,6 +940,7 @@ msgid "Associate sounds with window manager events"
 msgstr "ตั้งเสียงสำหรับเหตุการณ์ที่เกิดขึ้นกับหน้าต่าง"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
+#: capplets/keybindings/gnome-keybinding-properties.c:601
 #: capplets/sound/gnome-settings-sound.desktop.in.h:2
 msgid "Sound"
 msgstr "เสียง"
@@ -1549,7 +1550,7 @@ msgid "The type of accelerator."
 msgstr "แบบของตัวเร่ง"
 
 #: capplets/keybindings/eggcellrendererkeys.c:240
-#: capplets/keybindings/gnome-keybinding-properties.c:235
+#: capplets/keybindings/gnome-keybinding-properties.c:239
 #: libbackground/applier.c:588 typing-break/drwright.c:473
 msgid "Disabled"
 msgstr "ไม่ใช้"
@@ -1563,25 +1564,25 @@ msgstr "กดปุ่มลัดอันใหม่ หรือปุ่�
 msgid "Type a new accelerator"
 msgstr "กดปุ่มลัดใหม่"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:202
+#: capplets/keybindings/gnome-keybinding-properties.c:206
 msgid "GNOME Default"
 msgstr "ค่าปริยายของ GNOME"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:577
+#: capplets/keybindings/gnome-keybinding-properties.c:581
 msgid "<Unknown Action>"
 msgstr "<ปฏิบัติการที่ไม่รู้จัก>"
 
 # This contains shortcuts for "volume up/down", e-mail, move windows, etc.,.
 # "misclenous" is more suitable than "desktop"
-#: capplets/keybindings/gnome-keybinding-properties.c:596
+#: capplets/keybindings/gnome-keybinding-properties.c:600
 msgid "Desktop"
 msgstr "เบ็ดเตล็ด"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:600
+#: capplets/keybindings/gnome-keybinding-properties.c:605
 msgid "Window Management"
 msgstr "จัดการหน้าต่าง"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:736
+#: capplets/keybindings/gnome-keybinding-properties.c:741
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1590,27 +1591,27 @@ msgstr ""
 "ปุ่มลัด \"%s\" ถูกใช้อยู่แล้วสำหรับ:\n"
 " \"%s\"\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:766
+#: capplets/keybindings/gnome-keybinding-properties.c:771
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "เกิดข้อผิดพลาดขณะจัดเก็บปุ่มลัดใหม่ลงในฐานข้อมูลค่าปรับแต่ง: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:812
+#: capplets/keybindings/gnome-keybinding-properties.c:817
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "เกิดข้อผิดพลาด ขณะลบปุ่มลัดออกจาก ฐานข้อมูลค่าปรับแต่ง: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:960
+#: capplets/keybindings/gnome-keybinding-properties.c:965
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
 msgstr "หาชุดรูปแบบแป้นพิมพ์ไม่เจอ  คุณคงจะไม่ได้ติดตั้ง GTK+ อย่างสมบูรณ์"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:982
+#: capplets/keybindings/gnome-keybinding-properties.c:987
 msgid "Action"
 msgstr "ปฏิบัติการ"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:1006
+#: capplets/keybindings/gnome-keybinding-properties.c:1011
 msgid "Shortcut"
 msgstr "ปุ่มลัด"
 
@@ -2679,7 +2680,7 @@ msgstr "ไม่สามารถเรียกแฟ้มเสียง %s
 msgid "Cannot determine user's home directory"
 msgstr "ไม่รู้ว่าโฟลเดอร์บ้านของผู้ใช้อยู่ตรงไหน"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:204
+#: gnome-settings-daemon/gnome-settings-xsettings.c:206
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "คีย์ GConf %s ถูกกำหนดเป็น %s แต่ควรจะเป็น %s\n"
@@ -3168,7 +3169,7 @@ msgstr "ว่าจะสร้างรูปย่อสำหรับชุ
 msgid "Volume"
 msgstr "ระดับเสียง"
 
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:113
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:114
 #, c-format
 msgid ""
 "Couldn't execute command: %s\n"
@@ -3177,7 +3178,7 @@ msgstr ""
 "ไม่สามารถเรียกใช้คำสั่ง: %s\n"
 "โปรดตรวจดูว่าคำสั่งถูกติดตั้งอยู่จริง"
 
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:129
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:130
 msgid ""
 "Couldn't put the machine to sleep.\n"
 "Verify that the machine is correctly configured."
@@ -3185,12 +3186,12 @@ msgstr ""
 "สั่งให้เครืองหลับไม่สำเร็จ\n"
 "โปรดตรวจดูว่าติดตั้งและปรับแต่งเครื่องไว้ถูกต้อง"
 
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:139
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:140
 #, c-format
 msgid "Permissions on the file %s are broken\n"
 msgstr "สิทธิ์บนแฟ้ม %s เสียหาย\n"
 
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:900
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:185
 msgid ""
 "Couldn't load the Glade file.\n"
 "Make sure that this daemon is properly installed."

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-10 17:20-0500\n"
+"POT-Creation-Date: 2004-03-23 18:54-0500\n"
 "PO-Revision-Date: 2004-02-28 05:19+0100\n"
 "Last-Translator: Veljko M. Stanojevic <veljko@vms.homelinux.net>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
@@ -963,6 +963,7 @@ msgid "Associate sounds with window manager events"
 msgstr "Povežite zvukove sa aktivnostima upravnika prozora"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
+#: capplets/keybindings/gnome-keybinding-properties.c:601
 #: capplets/sound/gnome-settings-sound.desktop.in.h:2
 msgid "Sound"
 msgstr "Zvuk"
@@ -1596,7 +1597,7 @@ msgid "The type of accelerator."
 msgstr "Vrsta prečice."
 
 #: capplets/keybindings/eggcellrendererkeys.c:240
-#: capplets/keybindings/gnome-keybinding-properties.c:235
+#: capplets/keybindings/gnome-keybinding-properties.c:239
 #: libbackground/applier.c:588 typing-break/drwright.c:473
 msgid "Disabled"
 msgstr "Onemogućeno"
@@ -1611,23 +1612,23 @@ msgstr ""
 msgid "Type a new accelerator"
 msgstr "Ukucajte novu prečicu"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:202
+#: capplets/keybindings/gnome-keybinding-properties.c:206
 msgid "GNOME Default"
 msgstr "Podrazumevano u Gnomu"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:577
+#: capplets/keybindings/gnome-keybinding-properties.c:581
 msgid "<Unknown Action>"
 msgstr "<Nepoznata radnja>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:596
+#: capplets/keybindings/gnome-keybinding-properties.c:600
 msgid "Desktop"
 msgstr "Radna površina"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:600
+#: capplets/keybindings/gnome-keybinding-properties.c:605
 msgid "Window Management"
 msgstr "Upravljanje prozorima"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:736
+#: capplets/keybindings/gnome-keybinding-properties.c:741
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1636,17 +1637,17 @@ msgstr ""
 "Prečica „%s“ se već koristi za:\n"
 " „%s“\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:766
+#: capplets/keybindings/gnome-keybinding-properties.c:771
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Greška pri smeštanju nove prečice u bazu podešavanja: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:812
+#: capplets/keybindings/gnome-keybinding-properties.c:817
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "Greška pri isključivanju nove prečice iz baze podešavanja: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:960
+#: capplets/keybindings/gnome-keybinding-properties.c:965
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1654,11 +1655,11 @@ msgstr ""
 "Ne mogu da pronađem teme za tastaturu. Ovo ukazuje na nepotpunu GTK+ "
 "instalaciju."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:982
+#: capplets/keybindings/gnome-keybinding-properties.c:987
 msgid "Action"
 msgstr "Akcija"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:1006
+#: capplets/keybindings/gnome-keybinding-properties.c:1011
 msgid "Shortcut"
 msgstr "Prečica"
 
@@ -2747,7 +2748,7 @@ msgstr "Ne mogu da učitam datoteku %s kao probni %s"
 msgid "Cannot determine user's home directory"
 msgstr "Ne mogu da odredim korisnikov lični direktorijum"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:204
+#: gnome-settings-daemon/gnome-settings-xsettings.c:206
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "Gkonf ključ %s je postavljen na tip %s a očekivani tip je %s\n"
@@ -3263,7 +3264,7 @@ msgstr "Da li da koristim umanjeni prikaz tema"
 msgid "Volume"
 msgstr "Jačina"
 
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:113
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:114
 #, c-format
 msgid ""
 "Couldn't execute command: %s\n"
@@ -3272,7 +3273,7 @@ msgstr ""
 "Ne mogu da izvršim naredbu: %s\n"
 "Proverite da li ona postoji."
 
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:129
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:130
 msgid ""
 "Couldn't put the machine to sleep.\n"
 "Verify that the machine is correctly configured."
@@ -3280,12 +3281,12 @@ msgstr ""
 "Ne mogu da uspavam računar.\n"
 "Proverite da li je računar ispravno podešen."
 
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:139
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:140
 #, c-format
 msgid "Permissions on the file %s are broken\n"
 msgstr "Ovlašćenja datoteke %s su neispravna\n"
 
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:900
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:185
 msgid ""
 "Couldn't load the Glade file.\n"
 "Make sure that this daemon is properly installed."

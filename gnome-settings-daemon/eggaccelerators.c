@@ -326,7 +326,7 @@ egg_accelerator_parse_virtual (const gchar            *accelerator,
 	{
           keyval = gdk_keyval_from_name (accelerator);
 
-          if (keyval == 0)
+          if (keyval == GDK_VoidSymbol)
 	    {
 	      /* If keyval is 0, than maybe it's a keycode.  Check for 0x## */
 	      if (len >= 4 && is_keycode (accelerator))
@@ -344,7 +344,7 @@ egg_accelerator_parse_virtual (const gchar            *accelerator,
 		    {
 		      bad_keyval = TRUE;
 		    }
-		  else
+		  else if (keycode != NULL)
 		    {
 		      *keycode = tmp_keycode;
 		      /* 0x00 is an invalid keycode too. */
@@ -352,7 +352,8 @@ egg_accelerator_parse_virtual (const gchar            *accelerator,
 			bad_keyval = TRUE;
 		    }
 		}
-	    }
+	    } else if (keycode != NULL)
+		*keycode = XKeysymToKeycode (GDK_DISPLAY(), keyval);
 
           accelerator += len;
           len -= len;

@@ -90,8 +90,9 @@ acme_error (char * msg)
 	gtk_dialog_set_default_response (GTK_DIALOG (error_dialog),
 			GTK_RESPONSE_OK);
 	gtk_widget_show (error_dialog);
-	gtk_dialog_run (GTK_DIALOG (error_dialog));
-	gtk_widget_destroy (error_dialog);
+	g_signal_connect (G_OBJECT (error_dialog),
+		"response",
+		G_CALLBACK (gtk_widget_destroy), NULL);
 }
 
 static void
@@ -171,6 +172,23 @@ acme_image_set (Acme *acme, int icon)
 		g_assert_not_reached ();
 
 	gtk_image_set_from_file (GTK_IMAGE(image), images[icon]);
+}
+
+static void
+dialog_init (Acme *acme)
+{
+	if (acme->xml == NULL) {
+		glade_gnome_init ();
+		acme->xml = glade_xml_new (DATADIR "/control-center-2.0/interfaces/acme.glade", NULL, NULL);
+
+		if (acme->xml == NULL) {
+			acme_error (_("Couldn't load the Glade file.\n"
+				      "Make sure that this daemon is properly installed."));
+			return;
+		}
+		acme->dialog = glade_xml_get_widget (acme->xml, "dialog");
+		acme_image_set (acme, ICON_LOUD);
+	}
 }
 
 static gboolean
@@ -508,9 +526,8 @@ dialog_show (Acme *acme)
 		 */
 		monitor = 0;
 	} else {
-		monitor =
-			gdk_screen_get_monitor_at_point (acme->current_screen,
-							 pointer_x, pointer_y);
+		monitor = gdk_screen_get_monitor_at_point (acme->current_screen,
+							   pointer_x, pointer_y);
 	}
 		
 	gdk_screen_get_monitor_geometry (acme->current_screen, monitor,
@@ -653,6 +670,7 @@ do_eject_action (Acme *acme)
 		acme->dialog_timeout = 0;
 	}
 
+	dialog_init (acme);
 	progress = glade_xml_get_widget (acme->xml, "progressbar");
 	gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (progress),
 			(double) 0);
@@ -688,6 +706,8 @@ do_brightness_action (Acme *acme, int type)
 	}
 
 	level = acme_fblevel_get_level (acme->levobj);
+
+	dialog_init (acme);
 	acme_image_set (acme, ICON_BRIGHT);
 
 	switch (type) {
@@ -700,6 +720,7 @@ do_brightness_action (Acme *acme, int type)
 	}
 
 	level = acme_fblevel_get_level (acme->levobj);
+
 	progress = glade_xml_get_widget (acme->xml, "progressbar");
 	gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (progress),
 			(double) level / 15);
@@ -757,9 +778,11 @@ do_sound_action (Acme *acme, int type)
 	}
 
 	muted = acme_volume_get_mute(acme->volobj);
+	dialog_init (acme);
 	acme_image_set (acme, muted ? ICON_MUTED : ICON_LOUD);
 
 	vol = acme_volume_get_volume (acme->volobj);
+
 	progress = glade_xml_get_widget (acme->xml, "progressbar");
 	gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (progress),
 			(double) vol / 100);
@@ -768,7 +791,7 @@ do_sound_action (Acme *acme, int type)
 }
 
 static void
-do_action (int type, Acme *acme)
+do_action (Acme *acme, int type)
 {
 	switch (type) {
 	case MUTE_KEY:
@@ -875,7 +898,7 @@ acme_filter_events (GdkXEvent *xevent, GdkEvent *event, gpointer data)
 			acme->current_screen = acme_get_screen_from_event
 				(acme, xanyev);
 
-			do_action (keys[i].key_type, acme);
+			do_action (acme, keys[i].key_type);
 			return GDK_FILTER_REMOVE;
 		}
 	}
@@ -883,51 +906,27 @@ acme_filter_events (GdkXEvent *xevent, GdkEvent *event, gpointer data)
 	return GDK_FILTER_CONTINUE;
 }
 
-static Acme *global_acme = NULL;
-
 void
 gnome_settings_multimedia_keys_init (GConfClient *client)
 {
-	Acme *acme;
-
-	acme = g_new0 (Acme, 1);
-	acme->conf_client = client;
-
-	glade_gnome_init ();
-	acme->xml = glade_xml_new (DATADIR "/control-center-2.0/interfaces/acme.glade", NULL, NULL);
-
-	if (acme->xml == NULL) {
-		acme_error (_("Couldn't load the Glade file.\n"
-					"Make sure that this daemon is properly"
-					" installed."));
-		g_free (acme);
-		return;
-	}
-
-	acme->dialog = glade_xml_get_widget (acme->xml, "dialog");
-	acme_image_set (acme, ICON_LOUD);
-
-	global_acme = acme;
 }
-
 void
 gnome_settings_multimedia_keys_load (GConfClient *client)
 {
-	Acme *acme = global_acme;
 	GSList *l;
+	Acme   *acme;
 
-	if (global_acme == NULL)
-		return;
+	acme = g_new0 (Acme, 1);
+	acme->xml = NULL;
 
-	acme->conf_client = gconf_client_get_default ();
+	acme->conf_client = client;
 	gconf_client_add_dir (acme->conf_client,
-			GCONF_BINDING_DIR,
-			GCONF_CLIENT_PRELOAD_ONELEVEL,
-			NULL);
+		GCONF_BINDING_DIR,
+		GCONF_CLIENT_PRELOAD_ONELEVEL,
+		NULL);
 
 	init_screens (acme);
 	init_kbd (acme);
-	gtk_widget_realize (acme->dialog);
 	acme->dialog_timeout = 0;
 
 	/* initialise Volume handler */
@@ -945,14 +944,7 @@ gnome_settings_multimedia_keys_load (GConfClient *client)
 
 	/* Start filtering the events */
 	for (l = acme->screens; l != NULL; l = l->next)
-	{
-		GdkScreen *screen;
-		GdkWindow *window;
-
-		screen = (GdkScreen *) l->data;
-		window = gdk_screen_get_root_window (screen);
-		gdk_window_add_filter (window, acme_filter_events,
-				(gpointer) acme);
-	}
+		gdk_window_add_filter (gdk_screen_get_root_window (l->data),
+			acme_filter_events, (gpointer) acme);
 }
 
