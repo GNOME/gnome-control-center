@@ -32,17 +32,168 @@
 #include "service-info.h"
 #include "mime-types-model.h"
 
-/* Hash table of service info structures */
-
-static GHashTable *service_info_table = NULL;
-
 /* This is a hash table of GLists indexed by protocol name; each entry in each
  * list is a GnomeVFSMimeApplication that can handle that protocol */
 
 static GHashTable *service_apps = NULL;
 
+static ModelEntry  *get_services_category_entry (void);
+
+const gchar *url_descriptions[][2] = {
+	{ "unknown", N_("Unknown service types") },
+	{ "http",    N_("World wide web") },
+	{ "ftp",     N_("File transfer protocol") },
+	{ "info",    N_("Detailed documentation") },
+	{ "man",     N_("Manual pages") },
+	{ "mailto",  N_("Electronic mail transmission") },
+	{ NULL,      NULL }
+};
+
+static gchar       *get_key_name                (const ServiceInfo *info,
+						 const gchar       *end);
+static void         fill_service_apps           (void);
+static void         set_string                  (const ServiceInfo *info,
+						 gchar             *end,
+						 gchar             *value);
+static void         set_bool                    (const ServiceInfo *info,
+						 gchar             *end,
+						 gboolean           value);
+static gchar       *get_string                  (ServiceInfo       *info,
+						 const gchar       *end);
+static gboolean     get_bool                    (const ServiceInfo *info,
+						 gchar             *end);
+static ModelEntry  *get_services_category_entry (void);
+static const gchar *get_protocol_name           (const gchar       *key);
+
+
+
+void
+load_all_services (void) 
+{
+	GSList       *url_list;
+	GSList       *tmp;
+	const gchar  *protocol_name;
+
+	tmp = url_list = gconf_client_all_dirs
+		(gconf_client_get_default (), "/desktop/gnome/url-handlers", NULL);
+
+	for (; tmp != NULL; tmp = tmp->next) {
+		protocol_name = get_protocol_name (tmp->data);
+
+		if (protocol_name == NULL)
+			continue;
+
+		service_info_new (protocol_name, NULL);
+
+		g_free (tmp->data);
+	}
+
+	g_slist_free (url_list);
+}
+
+ServiceInfo *
+service_info_new (const gchar *protocol, GConfChangeSet *changeset)
+{
+	ServiceInfo *info;
+
+	info = g_new0 (ServiceInfo, 1);
+	info->protocol = g_strdup (protocol);
+	info->changeset = changeset;
+
+	info->entry.type = MODEL_ENTRY_SERVICE;
+	info->entry.parent = MODEL_ENTRY (get_services_category_entry ());
+	model_entry_insert_child (get_services_category_entry (), MODEL_ENTRY (info));
+
+	return info;
+}
+
+void
+service_info_load_all (ServiceInfo *info)
+{
+	gchar *id;
+
+	service_info_get_description (info);
+
+	info->run_program = get_bool (info, "type");
+
+	if (info->custom_line == NULL)
+		info->custom_line = get_string (info, "command");
+
+	info->need_terminal = get_bool (info, "need-terminal");
+
+	if (info->app == NULL) {
+		id = get_string (info, "command-id");
+		if (id != NULL)
+			info->app = gnome_vfs_mime_application_new_from_id (id);
+		g_free (id);
+	}
+}
+
+const gchar *
+service_info_get_description (ServiceInfo *info) 
+{
+	int i;
+
+	if (info->description == NULL) {
+		info->description = get_string (info, "description");
+
+		if (info->description != NULL)
+			return info->description;
+
+		for (i = 0; url_descriptions[i][0] != NULL; i++)
+			if (!strcmp (url_descriptions[i][0], info->protocol))
+				return g_strdup (url_descriptions[i][1]);
+	}
+
+	return info->description;
+}
+
+void
+service_info_set_changeset (ServiceInfo *info, GConfChangeSet *changeset) 
+{
+	info->changeset = changeset;
+}
+
+void
+service_info_save (const ServiceInfo *info)
+{
+	set_string (info, "description", info->description);
+
+	if (info->app == NULL) {
+		set_string (info, "command", info->custom_line);
+		set_string (info, "command-id", "");
+	} else {
+		set_string (info, "command", info->app->command);
+		set_string (info, "command-id", info->app->id);
+	}
+
+	set_bool (info, "type", info->run_program);
+	set_bool (info, "need-terminal", info->need_terminal);
+}
+
+void
+service_info_free (ServiceInfo *info)
+{
+	g_free (info->protocol);
+	g_free (info->description);
+	gnome_vfs_mime_application_free (info->app);
+	g_free (info->custom_line);
+	g_free (info);
+}
+
+const GList *
+get_apps_for_service_type (gchar *protocol) 
+{
+	if (service_apps == NULL)
+		fill_service_apps ();
+
+	return g_hash_table_lookup (service_apps, protocol);
+}
+
+
+
 static gchar *
-get_key_name (const ServiceInfo *info, gchar *end) 
+get_key_name (const ServiceInfo *info, const gchar *end) 
 {
 	return g_strconcat ("/desktop/gnome/url-handlers/", info->protocol, "/", end, NULL);
 }
@@ -81,7 +232,7 @@ fill_service_apps (void)
 }
 
 static void
-set_string (const ServiceInfo *info, gchar *end, gchar *value, GConfChangeSet *changeset) 
+set_string (const ServiceInfo *info, gchar *end, gchar *value) 
 {
 	gchar *key;
 
@@ -90,8 +241,8 @@ set_string (const ServiceInfo *info, gchar *end, gchar *value, GConfChangeSet *c
 
 	key = get_key_name (info, end);
 
-	if (changeset != NULL)
-		gconf_change_set_set_string (changeset, key, value);
+	if (info->changeset != NULL)
+		gconf_change_set_set_string (info->changeset, key, value);
 	else
 		gconf_client_set_string (gconf_client_get_default (), key, value, NULL);
 
@@ -99,14 +250,14 @@ set_string (const ServiceInfo *info, gchar *end, gchar *value, GConfChangeSet *c
 }
 
 static void
-set_bool (const ServiceInfo *info, gchar *end, gboolean value, GConfChangeSet *changeset) 
+set_bool (const ServiceInfo *info, gchar *end, gboolean value) 
 {
 	gchar *key;
 
 	key = get_key_name (info, end);
 
-	if (changeset != NULL)
-		gconf_change_set_set_bool (changeset, key, value);
+	if (info->changeset != NULL)
+		gconf_change_set_set_bool (info->changeset, key, value);
 	else
 		gconf_client_set_bool (gconf_client_get_default (), key, value, NULL);
 
@@ -114,22 +265,19 @@ set_bool (const ServiceInfo *info, gchar *end, gboolean value, GConfChangeSet *c
 }
 
 static gchar *
-get_string (const ServiceInfo *info, gchar *end, GConfChangeSet *changeset) 
+get_string (ServiceInfo *info, const gchar *end) 
 {
 	gchar      *key, *ret;
 	GConfValue *value;
-	gboolean    found;
+	gboolean    found = FALSE;
 
 	key = get_key_name (info, end);
 
-	if (changeset != NULL)
-		found = gconf_change_set_check_value (changeset, key, &value);
+	if (info->changeset != NULL)
+		found = gconf_change_set_check_value (info->changeset, key, &value);
 
-	if (!found || changeset == NULL) {
-		if (!strcmp (end, "description"))
-			ret = get_description_for_protocol (info->protocol);
-		else
-			ret = gconf_client_get_string (gconf_client_get_default (), key, NULL);
+	if (!found || info->changeset == NULL) {
+		ret = gconf_client_get_string (gconf_client_get_default (), key, NULL);
 	} else {
 		ret = g_strdup (gconf_value_get_string (value));
 		gconf_value_free (value);
@@ -141,19 +289,19 @@ get_string (const ServiceInfo *info, gchar *end, GConfChangeSet *changeset)
 }
 
 static gboolean
-get_bool (const ServiceInfo *info, gchar *end, GConfChangeSet *changeset) 
+get_bool (const ServiceInfo *info, gchar *end) 
 {
 	gchar      *key;
 	gboolean    ret;
 	GConfValue *value;
-	gboolean    found;
+	gboolean    found = FALSE;
 
 	key = get_key_name (info, end);
 
-	if (changeset != NULL)
-		found = gconf_change_set_check_value (changeset, key, &value);
+	if (info->changeset != NULL)
+		found = gconf_change_set_check_value (info->changeset, key, &value);
 
-	if (!found || changeset == NULL) {
+	if (!found || info->changeset == NULL) {
 		ret = gconf_client_get_bool (gconf_client_get_default (), key, NULL);
 	} else {
 		ret = gconf_value_get_bool (value);
@@ -165,89 +313,30 @@ get_bool (const ServiceInfo *info, gchar *end, GConfChangeSet *changeset)
 	return ret;
 }
 
-ServiceInfo *
-service_info_load (GtkTreeModel *model, GtkTreeIter *iter, GConfChangeSet *changeset)
+static ModelEntry *
+get_services_category_entry (void) 
 {
-	ServiceInfo *info;
-	gchar       *id;
-	GValue       protocol;
+	static ModelEntry *entry = NULL;
 
-	if (service_info_table == NULL)
-		service_info_table = g_hash_table_new (g_str_hash, g_str_equal);
+	if (entry == NULL) {
+		entry = g_new0 (ModelEntry, 1);
+		entry->type = MODEL_ENTRY_SERVICES_CATEGORY;
 
-	protocol.g_type = G_TYPE_INVALID;
-	gtk_tree_model_get_value (model, iter, MIME_TYPE_COLUMN, &protocol);
-
-	info = g_hash_table_lookup (service_info_table, g_value_get_string (&protocol));
-
-	if (info != NULL) {
-		g_value_unset (&protocol);
-		return info;
+		model_entry_insert_child (get_model_entries (), entry);
 	}
 
-	info = g_new0 (ServiceInfo, 1);
-	info->model = model;
-	info->iter = gtk_tree_iter_copy (iter);
-	info->changeset = changeset;
-	info->protocol = g_value_dup_string (&protocol);
-	info->description = get_string (info, "description", changeset);
-	info->run_program = get_bool (info, "type", changeset);
-	info->custom_line = get_string (info, "command", changeset);
-	info->need_terminal = get_bool (info, "need-terminal", changeset);
-
-	id = get_string (info, "command-id", changeset);
-	if (id != NULL)
-		info->app = gnome_vfs_mime_application_new_from_id (id);
-	g_free (id);
-
-	g_hash_table_insert (service_info_table, info->protocol, info);
-	g_value_unset (&protocol);
-
-	return info;
+	return entry;
 }
 
-void
-service_info_save (const ServiceInfo *info)
+static const gchar *
+get_protocol_name (const gchar *key) 
 {
-	set_string (info, "description", info->description, info->changeset);
+	gchar *protocol_name;
 
-	if (info->app == NULL) {
-		set_string (info, "command", info->custom_line, info->changeset);
-		set_string (info, "command-id", "", info->changeset);
-	} else {
-		set_string (info, "command", info->app->command, info->changeset);
-		set_string (info, "command-id", info->app->id, info->changeset);
-	}
+	protocol_name = strrchr (key, '/');
 
-	set_bool (info, "type", info->run_program, info->changeset);
-	set_bool (info, "need-terminal", info->need_terminal, info->changeset);
-}
-
-void
-service_info_update (ServiceInfo *info) 
-{
-	gtk_tree_store_set (GTK_TREE_STORE (info->model), info->iter,
-			    DESCRIPTION_COLUMN, info->description,
-			    -1);
-}
-
-void
-service_info_free (ServiceInfo *info)
-{
-	g_hash_table_remove (service_info_table, info->protocol);
-
-	g_free (info->protocol);
-	g_free (info->description);
-	gnome_vfs_mime_application_free (info->app);
-	g_free (info->custom_line);
-	g_free (info);
-}
-
-const GList *
-get_apps_for_service_type (gchar *protocol) 
-{
-	if (service_apps == NULL)
-		fill_service_apps ();
-
-	return g_hash_table_lookup (service_apps, protocol);
+	if (protocol_name != NULL)
+		return protocol_name + 1;
+	else
+		return NULL;
 }

@@ -7,6 +7,7 @@ gnome2_file_types_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(VFS_CAPPLET_LIBS
 gnome2_file_types_properties_SOURCES =					\
 	file-types-capplet.c						\
 	mime-types-model.c		mime-types-model.h		\
+	model-entry.c			model-entry.h			\
 	mime-type-info.c		mime-type-info.h		\
 	mime-edit-dialog.c		mime-edit-dialog.h		\
 	mime-category-edit-dialog.c	mime-category-edit-dialog.h	\

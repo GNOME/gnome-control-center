@@ -51,9 +51,36 @@ static GConfChangeSet *changeset = NULL;
 static void
 add_mime_cb (GtkButton *button, GladeXML *dialog) 
 {
+	GtkTreeView     *treeview;
+	GtkTreeModel    *model;
 	GObject         *add_dialog;
 
-	add_dialog = mime_add_dialog_new ();
+	treeview = GTK_TREE_VIEW (WID ("mime_types_tree"));
+	model = gtk_tree_view_get_model (treeview);
+
+	add_dialog = mime_add_dialog_new (model);
+}
+
+static GObject *
+launch_edit_dialog (GtkTreeModel *model, GtkTreeIter *iter) 
+{
+	ModelEntry *entry;
+
+	entry = MODEL_ENTRY_FROM_ITER (iter);
+
+	switch (entry->type) {
+	case MODEL_ENTRY_MIME_TYPE:
+		return mime_edit_dialog_new (model, iter);
+
+	case MODEL_ENTRY_SERVICE:
+		return service_edit_dialog_new (model, iter);
+
+	case MODEL_ENTRY_CATEGORY:
+		return mime_category_edit_dialog_new (model, iter);
+
+	default:
+		return NULL;
+	}
 }
 
 static void
@@ -64,45 +91,28 @@ edit_cb (GtkButton *button, GladeXML *dialog)
 	GtkTreeSelection  *selection;
 	GtkTreeIter        iter;
 
-	GObject           *edit_dialog;
-
 	treeview = GTK_TREE_VIEW (WID ("mime_types_tree"));
 	selection = gtk_tree_view_get_selection (treeview);
 	gtk_tree_selection_get_selected (selection, &model, &iter);
 
-	if (model_entry_is_protocol (model, &iter))
-		edit_dialog = service_edit_dialog_new (service_info_load (model, &iter, changeset));
-	else if (model_entry_is_category (model, &iter)) {
-		if (!model_entry_is_internet_services_category (model, &iter))
-			edit_dialog = mime_category_edit_dialog_new (model, &iter);
-	} else
-		edit_dialog = mime_edit_dialog_new (mime_type_info_load (model, &iter));
+	launch_edit_dialog (model, &iter);
 }
 
 static void
 row_activated_cb (GtkTreeView *view, GtkTreePath *path, GtkTreeViewColumn *column, GladeXML *dialog) 
 {
 	GtkTreeModel *model;
-	GtkTreeIter iter;
-
-	GObject           *edit_dialog;
+	GtkTreeIter   iter;
 
 	model = gtk_tree_view_get_model (view);
 	gtk_tree_model_get_iter (model, &iter, path);
-
-	if (model_entry_is_protocol (model, &iter))
-		edit_dialog = service_edit_dialog_new (service_info_load (model, &iter, changeset));
-	else if (model_entry_is_category (model, &iter)) {
-		if (!model_entry_is_internet_services_category (model, &iter))
-			edit_dialog = mime_category_edit_dialog_new (model, &iter);
-	} else
-		edit_dialog = mime_edit_dialog_new (mime_type_info_load (model, &iter));
+	launch_edit_dialog (model, &iter);
 }
 
 static void
 count_cb (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gint *count) 
 {
-	if (!model_entry_is_internet_services_category (model, iter))
+	if (MODEL_ENTRY_FROM_ITER (iter)->type != MODEL_ENTRY_SERVICES_CATEGORY)
 		(*count)++;
 }
 
@@ -133,11 +143,12 @@ remove_cb (GtkButton *button, GladeXML *dialog)
 	gtk_tree_selection_get_selected (selection, &model, &iter);
 
 	mime_type.g_type = G_TYPE_INVALID;
-	gtk_tree_model_get_value (model, &iter, MIME_TYPE_COLUMN, &mime_type);
+	gtk_tree_model_get_value (model, &iter, MODEL_COLUMN_MIME_TYPE, &mime_type);
 	remove_list = g_list_prepend (remove_list, g_value_dup_string (&mime_type));
 	mime_type_remove_from_dirty_list (g_value_get_string (&mime_type));
-	gtk_tree_store_remove (GTK_TREE_STORE (model), &iter);
 	g_value_unset (&mime_type);
+
+	/* FIXME: Make sure the tree gets notified */
 
 	selection_changed_cb (selection, dialog);
 }
@@ -158,7 +169,7 @@ create_dialog (void)
 
 	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/file-types-properties.glade", "main_dialog", NULL);
 
-	model = mime_types_model_new (FALSE);
+	model = GTK_TREE_MODEL (mime_types_model_new (FALSE));
 	treeview = WID ("mime_types_tree");
 
 	gtk_tree_view_set_model (GTK_TREE_VIEW (treeview), model);
@@ -167,21 +178,21 @@ create_dialog (void)
 	renderer = gtk_cell_renderer_pixbuf_new ();
 	gtk_tree_view_insert_column_with_attributes
 		(GTK_TREE_VIEW (treeview), -1, NULL, renderer,
-		 "pixbuf", ICON_COLUMN,
+		 "pixbuf", MODEL_COLUMN_ICON,
 		 NULL);
 
 	/* Description column */
 	renderer = gtk_cell_renderer_text_new ();
 	col_offset = gtk_tree_view_insert_column_with_attributes
 		(GTK_TREE_VIEW (treeview), -1, _("Description"), renderer,
-		 "text", DESCRIPTION_COLUMN,
+		 "text", MODEL_COLUMN_DESCRIPTION,
 		 NULL);
 
 	/* Extensions column */
 	renderer = gtk_cell_renderer_text_new ();
 	gtk_tree_view_insert_column_with_attributes
 		(GTK_TREE_VIEW (treeview), -1, _("Extensions"), renderer,
-		 "text", EXTENSIONS_COLUMN,
+		 "text", MODEL_COLUMN_FILE_EXT,
 		 NULL);
 
 	column = gtk_tree_view_get_column (GTK_TREE_VIEW (treeview), col_offset - 1);

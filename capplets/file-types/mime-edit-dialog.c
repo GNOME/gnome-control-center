@@ -35,7 +35,8 @@
 
 enum {
 	PROP_0,
-	PROP_MIME_TYPE_INFO
+	PROP_MODEL,
+	PROP_ITER
 };
 
 struct _MimeEditDialogPrivate 
@@ -44,6 +45,9 @@ struct _MimeEditDialogPrivate
 	GladeXML     *dialog_xml;
 	GtkWidget    *dialog_win;
 	GtkTreeStore *ext_store;
+
+	GtkTreeModel *model;
+	GtkTreeIter  *iter;
 };
 
 static GObjectClass *parent_class;
@@ -169,10 +173,18 @@ mime_edit_dialog_class_init (MimeEditDialogClass *class)
 	object_class->get_property = mime_edit_dialog_get_prop;
 
 	g_object_class_install_property
-		(object_class, PROP_MIME_TYPE_INFO,
-		 g_param_spec_pointer ("mime-type-info",
-				       _("MIME type info"),
-				       _("Information on MIME type to edit"),
+		(object_class, PROP_MODEL,
+		 g_param_spec_object ("model",
+				      _("Model"),
+				      _("Underlying model to notify when Ok is clicked"),
+				      gtk_tree_model_get_type (),
+				      G_PARAM_READWRITE));
+
+	g_object_class_install_property
+		(object_class, PROP_ITER,
+		 g_param_spec_pointer ("iterator",
+				       _("Iterator"),
+				       _("Iterator on the model referring to object to edit"),
 				       G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
 	parent_class = G_OBJECT_CLASS
@@ -190,8 +202,13 @@ mime_edit_dialog_set_prop (GObject *object, guint prop_id, const GValue *value, 
 	mime_edit_dialog = MIME_EDIT_DIALOG (object);
 
 	switch (prop_id) {
-	case PROP_MIME_TYPE_INFO:
-		mime_edit_dialog->p->info = g_value_get_pointer (value);
+	case PROP_MODEL:
+		mime_edit_dialog->p->model = GTK_TREE_MODEL (g_value_get_object (value));
+		break;
+
+	case PROP_ITER:
+		mime_edit_dialog->p->iter = gtk_tree_iter_copy (g_value_get_pointer (value));
+		mime_edit_dialog->p->info = MIME_TYPE_INFO (MODEL_ENTRY_FROM_ITER (mime_edit_dialog->p->iter));
 		fill_dialog (mime_edit_dialog);
 		break;
 
@@ -212,8 +229,12 @@ mime_edit_dialog_get_prop (GObject *object, guint prop_id, GValue *value, GParam
 	mime_edit_dialog = MIME_EDIT_DIALOG (object);
 
 	switch (prop_id) {
-	case PROP_MIME_TYPE_INFO:
-		g_value_set_pointer (value, mime_edit_dialog->p->info);
+	case PROP_MODEL:
+		g_value_set_object (value, G_OBJECT (mime_edit_dialog->p->model));
+		break;
+
+	case PROP_ITER:
+		g_value_set_pointer (value, mime_edit_dialog->p->iter);
 		break;
 
 	default:
@@ -255,33 +276,37 @@ mime_edit_dialog_finalize (GObject *object)
 
 	mime_edit_dialog = MIME_EDIT_DIALOG (object);
 
+	gtk_tree_iter_free (mime_edit_dialog->p->iter);
 	g_free (mime_edit_dialog->p);
 
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 GObject *
-mime_edit_dialog_new (MimeTypeInfo *info) 
+mime_edit_dialog_new (GtkTreeModel *model, GtkTreeIter *iter) 
 {
 	return g_object_new (mime_edit_dialog_get_type (),
-			     "mime-type-info", info,
+			     "model", model,
+			     "iterator", iter,
 			     NULL);
 }
 
 GObject *
-mime_add_dialog_new (void) 
+mime_add_dialog_new (GtkTreeModel *model) 
 {
 	return g_object_new (mime_edit_dialog_get_type (),
-			     "mime-type-info", g_new0 (MimeTypeInfo, 1),
+			     "model", model,
 			     NULL);
 }
 
 static void
 fill_dialog (MimeEditDialog *dialog)
 {
+	mime_type_info_load_all (dialog->p->info);
+
 	gtk_entry_set_text (GTK_ENTRY (WID ("description_entry")), dialog->p->info->description);
 	gtk_entry_set_text (GTK_ENTRY (WID ("mime_type_entry")), dialog->p->info->mime_type);
-	gtk_entry_set_text (GTK_ENTRY (WID ("category_entry")), dialog->p->info->category);
+	gtk_entry_set_text (GTK_ENTRY (WID ("category_entry")), mime_type_info_get_category_name (dialog->p->info));
 
 	if (dialog->p->info->custom_line != NULL)
 		gnome_file_entry_set_filename (GNOME_FILE_ENTRY (WID ("program_entry")), dialog->p->info->custom_line);
@@ -318,10 +343,13 @@ populate_component_list (MimeEditDialog *dialog)
 
 	component_list = gnome_vfs_mime_get_short_list_components (dialog->p->info->mime_type);
 
+	/* FIXME: We are leaking the whole list here, but this will be the case until I know of an easy way to duplicate
+	 * Bonobo_ServerInfo structures */
+
 	for (tmp = component_list, i = 0; tmp != NULL; tmp = tmp->next, i++) {
 		info = tmp->data;
 
-		if (!strcmp (info->iid, dialog->p->info->default_component_id))
+		if (!strcmp (info->iid, dialog->p->info->default_component->iid))
 			found_idx = i;
 
 		component_name = mime_type_get_pretty_name_for_server (info);
@@ -329,10 +357,8 @@ populate_component_list (MimeEditDialog *dialog)
 		g_free (component_name);
 
 		/* Store copy of component name in item; free when item destroyed. */
-		g_object_set_data_full (G_OBJECT (menu_item),
-					"iid",
-					g_strdup (info->iid),
-					(GDestroyNotify) g_free);
+		g_object_set_data (G_OBJECT (menu_item),
+				   "component", info);
 
 		gtk_menu_append (menu, menu_item);
 		gtk_widget_show (menu_item);
@@ -348,8 +374,6 @@ populate_component_list (MimeEditDialog *dialog)
 	component_select = GTK_OPTION_MENU (WID ("component_select"));
 	gtk_option_menu_set_menu (component_select, GTK_WIDGET (menu));
 	gtk_option_menu_set_history (component_select, found_idx);
-
-	gnome_vfs_mime_component_list_free (component_list);
 }
 
 static void
@@ -431,22 +455,9 @@ collect_filename_extensions (MimeEditDialog *dialog)
 		g_value_unset (&value);
 	} while (gtk_tree_model_iter_next (GTK_TREE_MODEL (dialog->p->ext_store), &iter));
 
+	ret = g_list_reverse (ret);
+
 	return ret;
-}
-
-static GList *
-merge_ext_lists (GList *list1, GList *list2) 
-{
-	GList *tmp, *tmp1;
-
-	for (tmp = list2; tmp != NULL; tmp = tmp->next) {
-		for (tmp1 = list1; tmp1 != NULL && strcmp (tmp->data, tmp1->data); tmp1 = tmp1->next);
-
-		if (tmp1 == NULL)
-			list1 = g_list_prepend (list1, g_strdup (tmp->data));
-	}
-
-	return list1;
 }
 
 static void
@@ -456,10 +467,16 @@ store_data (MimeEditDialog *dialog)
 	GtkMenuShell  *menu_shell;
 	GObject       *menu_item;
 	gint           idx;
+	gchar         *tmp;
+	const gchar   *tmp1;
+	gboolean       cat_changed = FALSE;
 
 	GList         *ext_list;
 
 	GnomeVFSMimeApplication *app;
+
+	GtkTreePath   *path;
+	GtkTreePath   *old_path = NULL;
 
 	g_free (dialog->p->info->description);
 	dialog->p->info->description = g_strdup (gtk_entry_get_text (GTK_ENTRY (WID ("description_entry"))));
@@ -470,16 +487,22 @@ store_data (MimeEditDialog *dialog)
 	g_free (dialog->p->info->icon_name);
 	dialog->p->info->icon_name = g_strdup (gnome_icon_entry_get_filename (GNOME_ICON_ENTRY (WID ("icon_entry"))));
 
-	g_free (dialog->p->info->category);
-	dialog->p->info->category = g_strdup (gtk_entry_get_text (GTK_ENTRY (WID ("category_entry"))));
+	tmp = mime_type_info_get_category_name (dialog->p->info);
+	tmp1 = gtk_entry_get_text (GTK_ENTRY (WID ("category_entry")));
+	if (strcmp (tmp, tmp1)) {
+		cat_changed = TRUE;
+		old_path = gtk_tree_model_get_path (dialog->p->model, dialog->p->iter);
+		mime_type_info_set_category_name (dialog->p->info, tmp1);
+	}
+	g_free (tmp);
 
 	option_menu = GTK_OPTION_MENU (WID ("component_select"));
 	menu_shell = GTK_MENU_SHELL (gtk_option_menu_get_menu (option_menu));
 	idx = gtk_option_menu_get_history (option_menu);
 	menu_item = (g_list_nth (menu_shell->children, idx))->data;
 
-	g_free (dialog->p->info->default_component_id);
-	dialog->p->info->default_component_id = g_strdup (g_object_get_data (menu_item, "iid"));
+	CORBA_free (dialog->p->info->default_component);
+	dialog->p->info->default_component = g_object_get_data (menu_item, "component");
 
 	option_menu = GTK_OPTION_MENU (WID ("default_action_select"));
 	menu_shell = GTK_MENU_SHELL (gtk_option_menu_get_menu (option_menu));
@@ -499,12 +522,22 @@ store_data (MimeEditDialog *dialog)
 	dialog->p->info->needs_terminal = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (WID ("needs_terminal_toggle")));
 
 	ext_list = collect_filename_extensions (dialog);
-	dialog->p->info->file_extensions = merge_ext_lists (dialog->p->info->file_extensions, ext_list);
-	g_list_foreach (ext_list, (GFunc) g_free, NULL);
-	g_list_free (ext_list);
+	mime_type_info_set_file_extensions (dialog->p->info, ext_list);
 
-	mime_type_info_update (dialog->p->info);
 	mime_type_append_to_dirty_list (dialog->p->info);
+
+	if (cat_changed) {
+		gtk_tree_model_row_deleted (dialog->p->model, old_path);
+		gtk_tree_path_free (old_path);
+
+		path = gtk_tree_model_get_path (dialog->p->model, dialog->p->iter);
+		gtk_tree_model_row_inserted (dialog->p->model, path, dialog->p->iter);
+		gtk_tree_path_free (path);
+	} else {
+		path = gtk_tree_model_get_path (dialog->p->model, dialog->p->iter);
+		gtk_tree_model_row_changed (dialog->p->model, path, dialog->p->iter);
+		gtk_tree_path_free (path);
+	}
 }
 
 static void
@@ -545,18 +578,18 @@ choose_cat_cb (MimeEditDialog *dialog)
 	GtkWidget        *dialog_win;
 	GtkCellRenderer  *renderer;
 
-	model = mime_types_model_new (TRUE);
+	model = GTK_TREE_MODEL (mime_types_model_new (TRUE));
 	treeview = gtk_tree_view_new_with_model (model);
 
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
 	gtk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE);
-	get_insertion_point (GTK_TREE_STORE (model), dialog->p->info->category, &iter);
+	mime_types_model_construct_iter (MIME_TYPES_MODEL (model), dialog->p->info->entry.parent, &iter);
 	gtk_tree_selection_select_iter (selection, &iter);
 
 	renderer = gtk_cell_renderer_text_new ();
 	gtk_tree_view_insert_column_with_attributes
 		(GTK_TREE_VIEW (treeview), -1, _("Category"), renderer,
-		 "text", DESCRIPTION_COLUMN,
+		 "text", MODEL_COLUMN_DESCRIPTION,
 		 NULL);
 
 	dialog_win = gtk_dialog_new_with_buttons
@@ -570,7 +603,8 @@ choose_cat_cb (MimeEditDialog *dialog)
 
 	if (gtk_dialog_run (GTK_DIALOG (dialog_win)) == GTK_RESPONSE_OK) {
 		gtk_tree_selection_get_selected (selection, &model, &iter);
-		gtk_entry_set_text (GTK_ENTRY (WID ("category_entry")), get_category_name (model, &iter, TRUE));
+		gtk_entry_set_text (GTK_ENTRY (WID ("category_entry")),
+				    mime_type_info_get_category_name (MIME_TYPE_INFO (MODEL_ENTRY_FROM_ITER (&iter))));
 	}
 
 	gtk_widget_destroy (dialog_win);

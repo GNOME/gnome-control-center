@@ -30,13 +30,16 @@
 #include <libgnomevfs/gnome-vfs-mime-handlers.h>
 #include <gconf/gconf-changeset.h>
 
+#include "model-entry.h"
+
 G_BEGIN_DECLS
+
+#define SERVICE_INFO(obj) ((ServiceInfo *) obj)
 
 typedef struct _ServiceInfo ServiceInfo;
 
 struct _ServiceInfo {
-	GtkTreeModel            *model;
-	GtkTreeIter             *iter;
+	ModelEntry               entry;
 
 	gchar                   *protocol;
 	gchar                   *description;
@@ -49,14 +52,16 @@ struct _ServiceInfo {
 	GConfChangeSet          *changeset;
 };
 
-ServiceInfo *service_info_load   (GtkTreeModel      *model,
-				  GtkTreeIter       *iter,
-				  GConfChangeSet    *changeset);
-void         service_info_save   (const ServiceInfo *info);
-void         service_info_update (ServiceInfo       *info);
-void         service_info_free   (ServiceInfo       *info);
+void         load_all_services            (void);
 
-const GList *get_apps_for_service_type (gchar *protocol);
+ServiceInfo *service_info_new             (const gchar       *protocol,
+					   GConfChangeSet    *changeset);
+void         service_info_load_all        (ServiceInfo       *info);
+const gchar *service_info_get_description (ServiceInfo       *info);
+void         service_info_save            (const ServiceInfo *info);
+void         service_info_free            (ServiceInfo       *info);
+
+const GList *get_apps_for_service_type    (gchar *protocol);
 
 G_END_DECLS
 

@@ -52,8 +52,9 @@ struct _MimeEditDialogClass
 
 GType mime_edit_dialog_get_type         (void);
 
-GObject *mime_edit_dialog_new           (MimeTypeInfo *info);
-GObject *mime_add_dialog_new            (void);
+GObject *mime_edit_dialog_new           (GtkTreeModel *model,
+					 GtkTreeIter  *iter);
+GObject *mime_add_dialog_new            (GtkTreeModel *model);
 
 G_END_DECLS
 

@@ -37,114 +37,199 @@
 #include "mime-type-info.h"
 #include "mime-types-model.h"
 
-/* Hash table of mime type info structures */
-
-static GHashTable *mime_type_table = NULL;
+/* List of MimeTypeInfo structures that have data to be committed */
 
 static GList *dirty_list = NULL;
 
-static GSList *
-get_lang_list (void)
+static const gchar *get_category_name (const gchar        *mime_type);
+static GSList *get_lang_list          (void);
+static gchar  *form_extensions_string (const MimeTypeInfo *info,
+				       gchar              *sep,
+				       gchar              *prepend);
+static void    get_icon_pixbuf        (MimeTypeInfo       *info,
+				       const gchar        *short_icon_name,
+				       gboolean            want_large);
+
+static MimeTypeInfo *get_category     (const gchar        *category_name);
+
+
+
+void
+load_all_mime_types (void) 
 {
-        GSList *retval;
-        const char *lang;
-        char *equal_char;
+	GList *list, *tmp;
 
-        retval = NULL;
+	list = gnome_vfs_get_registered_mime_types ();
 
-        lang = g_getenv ("LANGUAGE");
+	for (tmp = list; tmp != NULL; tmp = tmp->next)
+		mime_type_info_new (tmp->data);
 
-        if (lang == NULL)
-                lang = g_getenv ("LANG");
-
-
-        if (lang != NULL) {
-                equal_char = strchr (lang, '=');
-                if (equal_char != NULL)
-                        lang = equal_char + 1;
-
-                retval = g_slist_prepend (retval, g_strdup (lang));
-        }
-        
-        return retval;
-}
-
-static gchar *
-form_extensions_string (const MimeTypeInfo *info, gchar *sep, gchar *prepend) 
-{
-	gchar *tmp;
-	gchar **array;
-	GList *l;
-	gint i = 0;
-
-	if (prepend == NULL)
-		prepend = "";
-
-	array = g_new0 (gchar *, g_list_length (info->file_extensions) + 1);
-	for (l = info->file_extensions; l != NULL; l = l->next)
-		array[i++] = g_strconcat (prepend, l->data, NULL);
-	tmp = g_strjoinv (sep, array);
-	g_strfreev (array);
-
-	return tmp;
+	g_list_free (list);
 }
 
 MimeTypeInfo *
-mime_type_info_load (GtkTreeModel *model, GtkTreeIter *iter)
+mime_type_info_new (const gchar *mime_type)
 {
 	MimeTypeInfo      *info;
-	Bonobo_ServerInfo *component_info;
-	GValue             mime_type;
-	gchar             *tmp;
-
-	if (mime_type_table == NULL)
-		mime_type_table = g_hash_table_new (g_str_hash, g_str_equal);
-
-	mime_type.g_type = G_TYPE_INVALID;
-	gtk_tree_model_get_value (model, iter, MIME_TYPE_COLUMN, &mime_type);
-
-	info = g_hash_table_lookup (mime_type_table, g_value_get_string (&mime_type));
-
-	if (info != NULL) {
-		g_value_unset (&mime_type);
-		return info;
-	}
 
 	info = g_new0 (MimeTypeInfo, 1);
-	info->model           = model;
-	info->iter            = gtk_tree_iter_copy (iter);
-	info->mime_type       = g_value_dup_string (&mime_type);
-	info->description     = g_strdup (gnome_vfs_mime_get_description (info->mime_type));
-	info->icon_name       = g_strdup (gnome_vfs_mime_get_icon (info->mime_type));
-	info->file_extensions = gnome_vfs_mime_get_extensions_list (info->mime_type);
-	info->edit_line       = g_strdup (gnome_vfs_mime_get_value (info->mime_type, "edit-line"));
-	info->print_line      = g_strdup (gnome_vfs_mime_get_value (info->mime_type, "print-line"));
-	info->default_action  = gnome_vfs_mime_get_default_application (info->mime_type);
-	info->category        = get_category_name (model, iter, FALSE);
+	MODEL_ENTRY (info)->type = MODEL_ENTRY_MIME_TYPE;
 
-	tmp = g_strdup_printf ("Custom %s", info->mime_type);
+	if (mime_type != NULL) {
+		info->mime_type = g_strdup (mime_type);
 
-	if (info->default_action != NULL && !strcmp (info->default_action->name, tmp)) {
-		info->custom_line = g_strdup (info->default_action->command);
-		info->needs_terminal = gnome_vfs_application_registry_get_bool_value
-			(info->default_action->id, "requires_terminal", NULL);
-		gnome_vfs_mime_application_free (info->default_action);
-		info->default_action = NULL;
+		mime_type_info_set_category_name (info, get_category_name (mime_type));
 	}
-
-	g_free (tmp);
-
-	component_info = gnome_vfs_mime_get_default_component (info->mime_type);
-
-	if (component_info != NULL) {
-		info->default_component_id = component_info->iid;
-		CORBA_free (component_info);
-	}
-
-	g_hash_table_insert (mime_type_table, g_strdup (info->mime_type), info);
-	g_value_unset (&mime_type);
 
 	return info;
+}
+
+MimeTypeInfo *
+mime_type_info_new_category (MimeTypeInfo *parent, const gchar *category) 
+{
+	MimeTypeInfo      *info;
+
+	info = g_new0 (MimeTypeInfo, 1);
+	MODEL_ENTRY (info)->type = MODEL_ENTRY_CATEGORY;
+
+	info->description = g_strdup (category);
+	MODEL_ENTRY (info)->parent = MODEL_ENTRY (parent);
+
+	if (parent != NULL)
+		model_entry_insert_child (MODEL_ENTRY (parent), MODEL_ENTRY (info));
+
+	return info;
+}
+
+/* Fill in the remaining fields in a MimeTypeInfo structure; suitable for
+ * subsequent use in an edit dialog */
+
+void
+mime_type_info_load_all (MimeTypeInfo *info)
+{
+	gchar *tmp;
+
+	mime_type_info_get_description (info);
+	mime_type_info_get_file_extensions (info);
+
+	if (info->default_action == NULL)
+		info->default_action = gnome_vfs_mime_get_default_application (info->mime_type);
+
+	if (info->icon_name == NULL)
+		info->icon_name = g_strdup (gnome_vfs_mime_get_icon (info->mime_type));
+
+	if (info->icon_pixbuf == NULL)
+		get_icon_pixbuf (info, info->icon_name, TRUE);
+
+	if (info->custom_line == NULL) {
+		tmp = g_strdup_printf ("Custom %s", info->mime_type);
+
+		if (info->default_action != NULL && !strcmp (info->default_action->name, tmp)) {
+			info->custom_line = g_strdup (info->default_action->command);
+			info->needs_terminal = gnome_vfs_application_registry_get_bool_value
+				(info->default_action->id, "requires_terminal", NULL);
+			gnome_vfs_mime_application_free (info->default_action);
+			info->default_action = NULL;
+		}
+
+		g_free (tmp);
+	}
+
+	if (info->default_component == NULL)
+		info->default_component = gnome_vfs_mime_get_default_component (info->mime_type);
+}
+
+const gchar *
+mime_type_info_get_description (MimeTypeInfo *info)
+{
+	if (info->description == NULL)
+		info->description = g_strdup (gnome_vfs_mime_get_description (info->mime_type));
+
+	return info->description;
+}
+
+GdkPixbuf *
+mime_type_info_get_icon (MimeTypeInfo *info)
+{
+	if (info->icon_name == NULL)
+		info->icon_name = g_strdup (gnome_vfs_mime_get_icon (info->mime_type));
+
+	if (info->small_icon_pixbuf == NULL)
+		get_icon_pixbuf (info, info->icon_name, FALSE);
+
+	g_object_ref (G_OBJECT (info->small_icon_pixbuf));
+
+	return info->small_icon_pixbuf;
+}
+
+const GList *
+mime_type_info_get_file_extensions (MimeTypeInfo *info)
+{
+	if (info->file_extensions == NULL)
+		info->file_extensions = gnome_vfs_mime_get_extensions_list (info->mime_type);
+
+	return info->file_extensions;
+}
+
+gchar *
+mime_type_info_get_file_extensions_pretty_string (MimeTypeInfo *info)
+{
+	mime_type_info_get_file_extensions (info);
+
+	return form_extensions_string (info, ", ", ".");
+}
+
+gchar *
+mime_type_info_get_category_name (const MimeTypeInfo *info)
+{
+	GString *string;
+	ModelEntry *tmp;
+	gchar *ret;
+
+	string = g_string_new ("");
+
+	if (info->entry.type == MODEL_ENTRY_CATEGORY)
+		tmp = MODEL_ENTRY (info);
+	else
+		tmp = info->entry.parent;
+
+	for (; tmp->type != MODEL_ENTRY_NONE; tmp = tmp->parent) {
+		g_string_prepend (string, MIME_TYPE_INFO (tmp)->description);
+		g_string_prepend (string, "/");
+	}
+
+	ret = g_strdup ((*string->str == '\0') ? string->str : string->str + 1);
+	g_string_free (string, TRUE);
+	return ret;
+}
+
+GList *
+mime_type_info_category_find_supported_apps (MimeTypeInfo *info)
+{
+	return NULL;
+}
+
+void
+mime_type_info_set_category_name (const MimeTypeInfo *info, const gchar *category_name) 
+{
+	if (MODEL_ENTRY (info)->parent != NULL)
+		model_entry_remove_child (MODEL_ENTRY (info)->parent, MODEL_ENTRY (info));
+
+	if (category_name != NULL) {
+		MODEL_ENTRY (info)->parent = MODEL_ENTRY (get_category (category_name));
+
+		if (MODEL_ENTRY (info)->parent != NULL)
+			model_entry_insert_child (MODEL_ENTRY (info)->parent, MODEL_ENTRY (info));
+	} else {
+		MODEL_ENTRY (info)->parent = NULL;
+	}
+}
+
+void
+mime_type_info_set_file_extensions (MimeTypeInfo *info, GList *list)
+{
+	/* FIXME: Free the old list */
+	info->file_extensions = list;
 }
 
 void
@@ -157,8 +242,6 @@ mime_type_info_save (const MimeTypeInfo *info)
 
 	gnome_vfs_mime_set_description (info->mime_type, info->description);
 	gnome_vfs_mime_set_icon (info->mime_type, info->icon_name);
-	gnome_vfs_mime_set_value (info->mime_type, "print-line", info->print_line);
-	gnome_vfs_mime_set_value (info->mime_type, "edit-line", info->edit_line);
 
 	if (info->default_action != NULL) {
 		gnome_vfs_mime_set_default_application (info->mime_type, info->default_action->id);
@@ -185,52 +268,35 @@ mime_type_info_save (const MimeTypeInfo *info)
 	tmp = form_extensions_string (info, " ", NULL);
 	gnome_vfs_mime_set_extensions_list (info->mime_type, tmp);
 	g_free (tmp);
-}
 
-void
-mime_type_info_update (MimeTypeInfo *info) 
-{
-	GdkPixbuf *pixbuf;
-	gchar *tmp;
-	GtkTreeIter parent;
+	if (info->default_component != NULL)
+		gnome_vfs_mime_set_default_component (info->mime_type, info->default_component->iid);
+	else
+		gnome_vfs_mime_set_default_component (info->mime_type, NULL);
 
-	tmp = get_category_name (info->model, info->iter, FALSE);
-
-	if (strcmp (info->category, tmp)) {
-		gtk_tree_store_remove (GTK_TREE_STORE (info->model), info->iter);
-		get_insertion_point (GTK_TREE_STORE (info->model), info->category, &parent);
-		gtk_tree_store_append (GTK_TREE_STORE (info->model), info->iter, &parent);
-	}
-
-	g_free (tmp);
-
-	pixbuf = get_icon_pixbuf (info->icon_name);
-
-	tmp = form_extensions_string (info, ", ", ".");
-	gtk_tree_store_set (GTK_TREE_STORE (info->model), info->iter,
-			    DESCRIPTION_COLUMN, info->description,
-			    ICON_COLUMN, pixbuf,
-			    EXTENSIONS_COLUMN, tmp,
-			    -1);
+	tmp = mime_type_info_get_category_name (info);
+	gnome_vfs_mime_set_value (info->mime_type, "category", tmp);
 	g_free (tmp);
 }
 
 void
 mime_type_info_free (MimeTypeInfo *info)
 {
-	g_hash_table_remove (mime_type_table, info->mime_type);
 	dirty_list = g_list_remove (dirty_list, info);
 
 	g_free (info->mime_type);
 	g_free (info->description);
 	g_free (info->icon_name);
 	gnome_vfs_mime_extensions_list_free (info->file_extensions);
-	g_free (info->default_component_id);
+	CORBA_free (info->default_component);
 	gnome_vfs_mime_application_free (info->default_action);
 	g_free (info->custom_line);
-	g_free (info->edit_line);
-	g_free (info->print_line);
-	g_free (info->category);
+
+	if (info->icon_pixbuf != NULL)
+		g_object_unref (G_OBJECT (info->icon_pixbuf));
+	if (info->small_icon_pixbuf != NULL)
+		g_object_unref (G_OBJECT (info->small_icon_pixbuf));
+
 	g_free (info);
 }
 
@@ -298,3 +364,153 @@ mime_type_commit_dirty_list (void)
 	gnome_vfs_mime_thaw ();
 }
 
+
+
+static const gchar *
+get_category_name (const gchar *mime_type) 
+{
+	const gchar *path;
+
+	path = gnome_vfs_mime_get_value (mime_type, "category");
+
+	if (path != NULL)
+		return g_strdup (path);
+	else if (!strncmp (mime_type, "image/", strlen ("image/")))
+		return "Images";
+	else if (!strncmp (mime_type, "video/", strlen ("video/")))
+		return "Video";
+	else if (!strncmp (mime_type, "audio/", strlen ("audio/")))
+		return "Audio";
+	else
+		return NULL;
+}
+
+static GSList *
+get_lang_list (void)
+{
+        GSList *retval;
+        const char *lang;
+        char *equal_char;
+
+        retval = NULL;
+
+        lang = g_getenv ("LANGUAGE");
+
+        if (lang == NULL)
+                lang = g_getenv ("LANG");
+
+
+        if (lang != NULL) {
+                equal_char = strchr (lang, '=');
+                if (equal_char != NULL)
+                        lang = equal_char + 1;
+
+                retval = g_slist_prepend (retval, g_strdup (lang));
+        }
+        
+        return retval;
+}
+
+static gchar *
+form_extensions_string (const MimeTypeInfo *info, gchar *sep, gchar *prepend) 
+{
+	gchar *tmp;
+	gchar **array;
+	GList *l;
+	gint i = 0;
+
+	if (prepend == NULL)
+		prepend = "";
+
+	array = g_new0 (gchar *, g_list_length (info->file_extensions) + 1);
+	for (l = info->file_extensions; l != NULL; l = l->next)
+		array[i++] = g_strconcat (prepend, l->data, NULL);
+	tmp = g_strjoinv (sep, array);
+	g_strfreev (array);
+
+	return tmp;
+}
+
+/* Loads a pixbuf for the icon, falling back on the default icon if
+ * necessary
+ */
+
+void
+get_icon_pixbuf (MimeTypeInfo *info, const gchar *short_icon_name, gboolean want_large) 
+{
+	gchar *icon_name;
+
+	static GHashTable *icon_table = NULL;
+
+	if ((want_large && info->icon_pixbuf != NULL) || info->small_icon_pixbuf != NULL)
+		return;
+
+	if (icon_table == NULL)
+		icon_table = g_hash_table_new (g_str_hash, g_str_equal);
+
+	if (short_icon_name == NULL)
+		short_icon_name = "nautilus/i-regular-24.png";
+
+	icon_name = gnome_program_locate_file
+		(gnome_program_get (), GNOME_FILE_DOMAIN_PIXMAP,
+		 short_icon_name, TRUE, NULL);
+
+	if (icon_name != NULL) {
+		if (!want_large)
+			info->small_icon_pixbuf = g_hash_table_lookup (icon_table, icon_name);
+
+		if (info->small_icon_pixbuf != NULL) {
+			g_object_ref (G_OBJECT (info->small_icon_pixbuf));
+		} else {
+			info->icon_pixbuf = gdk_pixbuf_new_from_file (icon_name, NULL);
+
+			if (info->icon_pixbuf == NULL)
+				get_icon_pixbuf (info, NULL, want_large);
+
+			if (!want_large) {
+				info->small_icon_pixbuf =
+					gdk_pixbuf_scale_simple (info->icon_pixbuf, 16, 16, GDK_INTERP_HYPER);
+
+				g_hash_table_insert (icon_table, icon_name, info->small_icon_pixbuf);
+			}
+		}
+
+		g_free (icon_name);
+	} else {
+		get_icon_pixbuf (info, NULL, want_large);
+	}
+}
+
+static MimeTypeInfo *
+get_category (const gchar *category_name)
+{
+	ModelEntry *current, *child;
+	gchar **categories;
+	int i;
+
+	if (category_name == NULL)
+		return NULL;
+
+	categories = g_strsplit (category_name, "/", -1);
+
+	current = get_model_entries ();
+
+	for (i = 0; categories[i] != NULL; i++) {
+		for (child = current->first_child; child != NULL; child = child->next) {
+			if (child->type != MODEL_ENTRY_CATEGORY)
+				continue;
+
+			if (!strcmp (MIME_TYPE_INFO (child)->description, categories[i]))
+				break;
+		}
+
+		if (child == NULL)
+			child = MODEL_ENTRY (mime_type_info_new_category (MIME_TYPE_INFO (current), categories[i]));
+
+		current = child;
+	}
+
+	g_strfreev (categories);
+
+	return MIME_TYPE_INFO (current);
+}

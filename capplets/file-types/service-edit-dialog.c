@@ -28,12 +28,14 @@
 #include <glade/glade.h>
 
 #include "service-edit-dialog.h"
+#include "mime-types-model.h"
 
 #define WID(x) (glade_xml_get_widget (dialog->p->dialog_xml, x))
 
 enum {
 	PROP_0,
-	PROP_SERVICE_INFO
+	PROP_MODEL,
+	PROP_ITER
 };
 
 struct _ServiceEditDialogPrivate 
@@ -41,6 +43,9 @@ struct _ServiceEditDialogPrivate
 	ServiceInfo  *info;
 	GladeXML     *dialog_xml;
 	GtkWidget    *dialog_win;
+
+	GtkTreeModel *model;
+	GtkTreeIter  *iter;
 };
 
 static GObjectClass *parent_class;
@@ -148,10 +153,18 @@ service_edit_dialog_class_init (ServiceEditDialogClass *class)
 	object_class->get_property = service_edit_dialog_get_prop;
 
 	g_object_class_install_property
-		(object_class, PROP_SERVICE_INFO,
-		 g_param_spec_pointer ("service-info",
-				       _("Servie information"),
-				       _("Data structure containing service information"),
+		(object_class, PROP_MODEL,
+		 g_param_spec_object ("model",
+				      _("Model"),
+				      _("Model"),
+				      gtk_tree_model_get_type (),
+				      G_PARAM_READWRITE));
+
+	g_object_class_install_property
+		(object_class, PROP_ITER,
+		 g_param_spec_pointer ("iterator",
+				       _("Iterator"),
+				       _("Iterator"),
 				       G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
 	parent_class = G_OBJECT_CLASS
@@ -169,8 +182,13 @@ service_edit_dialog_set_prop (GObject *object, guint prop_id, const GValue *valu
 	dialog = SERVICE_EDIT_DIALOG (object);
 
 	switch (prop_id) {
-	case PROP_SERVICE_INFO:
-		dialog->p->info = g_value_get_pointer (value);
+	case PROP_MODEL:
+		dialog->p->model = GTK_TREE_MODEL (g_value_get_object (value));
+		break;
+
+	case PROP_ITER:
+		dialog->p->iter = gtk_tree_iter_copy (g_value_get_pointer (value));
+		dialog->p->info = SERVICE_INFO (MODEL_ENTRY_FROM_ITER (dialog->p->iter));
 		fill_dialog (dialog);
 		break;
 
@@ -191,8 +209,12 @@ service_edit_dialog_get_prop (GObject *object, guint prop_id, GValue *value, GPa
 	dialog = SERVICE_EDIT_DIALOG (object);
 
 	switch (prop_id) {
-	case PROP_SERVICE_INFO:
-		g_value_set_pointer (value, dialog->p->info);
+	case PROP_MODEL:
+		g_value_set_object (value, G_OBJECT (dialog->p->model));
+		break;
+
+	case PROP_ITER:
+		g_value_set_pointer (value, dialog->p->iter);
 		break;
 
 	default:
@@ -234,22 +256,26 @@ service_edit_dialog_finalize (GObject *object)
 
 	service_edit_dialog = SERVICE_EDIT_DIALOG (object);
 
+	gtk_tree_iter_free (service_edit_dialog->p->iter);
 	g_free (service_edit_dialog->p);
 
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 GObject *
-service_edit_dialog_new (ServiceInfo *info) 
+service_edit_dialog_new (GtkTreeModel *model, GtkTreeIter *iter) 
 {
 	return g_object_new (service_edit_dialog_get_type (),
-			     "service-info", info,
+			     "model", model,
+			     "iterator", iter,
 			     NULL);
 }
 
 static void
 fill_dialog (ServiceEditDialog *dialog) 
 {
+	service_info_load_all (dialog->p->info);
+
 	if (dialog->p->info->description != NULL)
 		gtk_entry_set_text (GTK_ENTRY (WID ("description_entry")), dialog->p->info->description);
 
@@ -312,6 +338,8 @@ store_data (ServiceEditDialog *dialog)
 	GObject       *menu_item;
 	gint           idx;
 
+	GtkTreePath   *path;
+
 	g_free (dialog->p->info->description);
 	dialog->p->info->description = g_strdup (gtk_entry_get_text (GTK_ENTRY (WID ("description_entry"))));
 
@@ -331,8 +359,11 @@ store_data (ServiceEditDialog *dialog)
 	dialog->p->info->app =
 		gnome_vfs_mime_application_copy (g_object_get_data (menu_item, "app"));
 
-	service_info_update (dialog->p->info);
 	service_info_save (dialog->p->info);
+
+	path = gtk_tree_model_get_path (dialog->p->model, dialog->p->iter);
+	gtk_tree_model_row_changed (dialog->p->model, path, dialog->p->iter);
+	gtk_tree_path_free (path);
 }
 
 static void

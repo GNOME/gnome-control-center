@@ -1,495 +1,612 @@
 /* -*- mode: c; style: linux -*- */
 
 /* mime-types-model.c
- *
- * Copyright (C) 2002 Ximian, Inc.
+ * Copyright (C) 2000 Red Hat, Inc.,
+ *           (C) 2002 Ximian, Inc.
  *
  * Written by Bradford Hovinen <hovinen@ximian.com>
+ * Based on code by Jonathan Blandford <jrb@redhat.com>
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of the
- * License, or (at your option) any later version.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2, or (at your option)
+ * any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * General Public License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public
- * License along with this program; if not, write to the
- * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
- * Boston, MA 02111-1307, USA.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+ * 02111-1307, USA.
+ *
+ * The model-related bootstrapping is lifted from gtk+/gtk/gtktreestore.c
  */
 
 #ifdef HAVE_CONFIG_H
-#  include "config.h"
+# include "config.h"
 #endif
 
-#include <libgnomevfs/gnome-vfs.h>
-#include <libgnomevfs/gnome-vfs-application-registry.h>
-#include <libgnomevfs/gnome-vfs-mime-handlers.h>
-#include <libgnomevfs/gnome-vfs-mime-utils.h>
-#include <libgnomevfs/gnome-vfs-mime-info.h>
-
-#include <gconf/gconf.h>
-#include <gconf/gconf-client.h>
-
 #include "mime-types-model.h"
+#include "mime-type-info.h"
+#include "service-info.h"
 
-const gchar *categories[] = {
-	N_("Documents"), N_("Images"), N_("Audio"), N_("Video"), N_("Internet Services"), NULL
+#define IS_CATEGORY(entry) (entry->type == MODEL_ENTRY_CATEGORY)
+
+enum {
+	PROP_0,
+	PROP_CATEGORY_ONLY
 };
 
-#define INTERNET_SERVICES_IDX 4
-
-const gchar *url_descriptions[][2] = {
-	{ "unknown", N_("Unknown service types") },
-	{ "http",    N_("World wide web") },
-	{ "ftp",     N_("File transfer protocol") },
-	{ "info",    N_("Detailed documentation") },
-	{ "man",     N_("Manual pages") },
-	{ "mailto",  N_("Electronic mail transmission") },
-	{ NULL,      NULL }
-};
-
-static gchar *
-get_category_path_for_mime_type (const gchar *mime_type) 
+struct _MimeTypesModelPrivate 
 {
-	const gchar *path;
+	gint     stamp;
+	gboolean category_only;
+};
 
-	path = gnome_vfs_mime_get_value (mime_type, "category");
+static GObjectClass *parent_class;
 
-	if (path != NULL)
-		return g_strdup (path);
-	else if (!strncmp (mime_type, "image", strlen ("image")))
-		return "Images";
-	else if (!strncmp (mime_type, "video", strlen ("video")))
-		return "Video";
-	else if (!strncmp (mime_type, "audio", strlen ("audio")))
-		return "Audio";
-	else
-		return NULL;
+
+
+static void mime_types_model_init            (MimeTypesModel *mime_types_model,
+					      MimeTypesModelClass *class);
+static void mime_types_model_class_init      (MimeTypesModelClass *class);
+static void mime_types_model_base_init       (MimeTypesModelClass *class);
+
+static void mime_types_model_tree_model_init (GtkTreeModelIface *iface);
+
+static void mime_types_model_set_prop        (GObject      *object, 
+					      guint         prop_id,
+					      const GValue *value, 
+					      GParamSpec   *pspec);
+static void mime_types_model_get_prop        (GObject      *object,
+					      guint         prop_id,
+					      GValue       *value,
+					      GParamSpec   *pspec);
+
+static void mime_types_model_finalize        (GObject *object);
+
+static guint        mime_types_model_get_flags       (GtkTreeModel      *tree_model);
+static gint         mime_types_model_get_n_columns   (GtkTreeModel      *tree_model);
+static GType        mime_types_model_get_column_type (GtkTreeModel      *tree_model,
+						      gint               index);
+static gboolean     mime_types_model_get_iter        (GtkTreeModel      *tree_model,
+						      GtkTreeIter       *iter,
+						      GtkTreePath       *path);
+static GtkTreePath *mime_types_model_get_path        (GtkTreeModel      *tree_model,
+						      GtkTreeIter       *iter);
+static void         mime_types_model_get_value       (GtkTreeModel      *tree_model,
+						      GtkTreeIter       *iter,
+						      gint               column,
+						      GValue            *value);
+static gboolean     mime_types_model_iter_next       (GtkTreeModel      *tree_model,
+						      GtkTreeIter       *iter);
+static gboolean     mime_types_model_iter_children   (GtkTreeModel      *tree_model,
+						      GtkTreeIter       *iter,
+						      GtkTreeIter       *parent);
+static gboolean     mime_types_model_iter_has_child  (GtkTreeModel      *tree_model,
+						      GtkTreeIter       *iter);
+static gint         mime_types_model_iter_n_children (GtkTreeModel      *tree_model,
+						      GtkTreeIter       *iter);
+static gboolean     mime_types_model_iter_nth_child  (GtkTreeModel      *tree_model,
+						      GtkTreeIter       *iter,
+						      GtkTreeIter       *parent,
+						      gint               n);
+static gboolean     mime_types_model_iter_parent     (GtkTreeModel      *tree_model,
+						      GtkTreeIter       *iter,
+						      GtkTreeIter       *child);
+
+
+
+GType
+mime_types_model_get_type (void)
+{
+	static GType mime_types_model_type = 0;
+
+	if (!mime_types_model_type) {
+		static const GTypeInfo mime_types_model_info = {
+			sizeof (MimeTypesModelClass),
+			(GBaseInitFunc) mime_types_model_base_init,
+			NULL, /* GBaseFinalizeFunc */
+			(GClassInitFunc) mime_types_model_class_init,
+			NULL, /* GClassFinalizeFunc */
+			NULL, /* user-supplied data */
+			sizeof (MimeTypesModel),
+			0, /* n_preallocs */
+			(GInstanceInitFunc) mime_types_model_init,
+			NULL
+		};
+
+		static const GInterfaceInfo tree_model_info = {
+			(GInterfaceInitFunc) mime_types_model_tree_model_init,
+			NULL,
+			NULL
+		};
+
+		mime_types_model_type = 
+			g_type_register_static (G_TYPE_OBJECT, 
+						"MimeTypesModel",
+						&mime_types_model_info, 0);
+
+		g_type_add_interface_static (mime_types_model_type,
+					     GTK_TYPE_TREE_MODEL,
+					     &tree_model_info);
+	}
+
+	return mime_types_model_type;
 }
 
 static void
-get_path_num_from_str (GtkTreeStore *model, GtkTreeIter *iter, const gchar *path_str, GString *path_num) 
+mime_types_model_init (MimeTypesModel *mime_types_model, MimeTypesModelClass *class)
 {
-	gchar       *first_component;
-	gchar       *rest_components;
-	GValue       value;
-	GtkTreeIter  child_iter;
-	int          i, n;
-
-	if (path_str == NULL || *path_str == '\0')
-		return;
-
-	rest_components = strchr (path_str, '/');
-
-	if (rest_components != NULL) {
-		first_component = g_strndup (path_str, rest_components - path_str);
-		rest_components++;
-	} else {
-		first_component = g_strdup (path_str);
-	}
-
-	gtk_tree_model_iter_children (GTK_TREE_MODEL (model), &child_iter, iter);
-	n = gtk_tree_model_iter_n_children (GTK_TREE_MODEL (model), iter);
-
-	value.g_type = G_TYPE_INVALID;
-
-	for (i = 0; i < n; i++) {
-		gtk_tree_model_get_value (GTK_TREE_MODEL (model), &child_iter, DESCRIPTION_COLUMN, &value);
-
-		if (!strcmp (first_component, g_value_get_string (&value))) {
-			g_string_append_printf (path_num, ":%d", i);
-			get_path_num_from_str (model, &child_iter, rest_components, path_num);
-			g_free (first_component);
-			return;
-		}
-
-		gtk_tree_model_iter_next (GTK_TREE_MODEL (model), &child_iter);
-		g_value_unset (&value);
-	}
-
-	gtk_tree_store_append (model, &child_iter, iter);
-	gtk_tree_store_set (model, &child_iter, DESCRIPTION_COLUMN, first_component, -1);
-	g_string_append_printf (path_num, ":%d", n);
-	g_free (first_component);
-}
-
-static const gchar *
-get_protocol_name (const gchar *key) 
-{
-	gchar *protocol_name;
-
-	protocol_name = strrchr (key, '/');
-
-	if (protocol_name != NULL)
-		return protocol_name + 1;
-	else
-		return NULL;
+	mime_types_model->p = g_new0 (MimeTypesModelPrivate, 1);
+	mime_types_model->p->stamp = g_random_int ();
 }
 
 static void
-insert_mime_type (GtkTreeStore *model, const gchar *mime_type) 
+mime_types_model_base_init (MimeTypesModelClass *class) 
 {
-	gchar        *path_str;
-	const gchar  *description;
-	const gchar  *extensions;
-	GdkPixbuf    *pixbuf;
+}
 
-	GtkTreeIter   iter;
-	GtkTreeIter   child_iter;
+static void
+mime_types_model_class_init (MimeTypesModelClass *class) 
+{
+	GObjectClass *object_class;
 
-	path_str = get_category_path_for_mime_type (mime_type);
+	object_class = G_OBJECT_CLASS (class);
 
-	if (path_str != NULL) {
-		description = gnome_vfs_mime_get_description (mime_type);
-		extensions = gnome_vfs_mime_get_extensions_pretty_string (mime_type);
+	object_class->finalize = mime_types_model_finalize;
+	object_class->set_property = mime_types_model_set_prop;
+	object_class->get_property = mime_types_model_get_prop;
 
-		if (extensions == NULL || *extensions == '\0')
-			return;
+	g_object_class_install_property
+		(object_class, PROP_CATEGORY_ONLY,
+		 g_param_spec_boolean ("category-only",
+				       _("Model for categories only"),
+				       _("Model for categories only"),
+				       FALSE,
+				       G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
-		pixbuf = get_icon_pixbuf (gnome_vfs_mime_get_icon (mime_type));
+	parent_class = G_OBJECT_CLASS
+		(g_type_class_ref (G_TYPE_OBJECT));
+}
 
-		get_insertion_point (model, path_str, &iter);
+static void
+mime_types_model_tree_model_init (GtkTreeModelIface *iface)
+{
+	iface->get_flags       = mime_types_model_get_flags;
+	iface->get_n_columns   = mime_types_model_get_n_columns;
+	iface->get_column_type = mime_types_model_get_column_type;
+	iface->get_iter        = mime_types_model_get_iter;
+	iface->get_path        = mime_types_model_get_path;
+	iface->get_value       = mime_types_model_get_value;
+	iface->iter_next       = mime_types_model_iter_next;
+	iface->iter_children   = mime_types_model_iter_children;
+	iface->iter_has_child  = mime_types_model_iter_has_child;
+	iface->iter_n_children = mime_types_model_iter_n_children;
+	iface->iter_nth_child  = mime_types_model_iter_nth_child;
+	iface->iter_parent     = mime_types_model_iter_parent;
+}
 
-		gtk_tree_store_append (model, &child_iter, &iter);
-		gtk_tree_store_set (model, &child_iter,
-				    ICON_COLUMN,        pixbuf,
-				    DESCRIPTION_COLUMN, description,
-				    MIME_TYPE_COLUMN,   mime_type,
-				    EXTENSIONS_COLUMN,  extensions,
-				    -1);
+static void
+mime_types_model_set_prop (GObject *object, guint prop_id, const GValue *value, GParamSpec *pspec) 
+{
+	MimeTypesModel *mime_types_model;
+
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (IS_MIME_TYPES_MODEL (object));
+
+	mime_types_model = MIME_TYPES_MODEL (object);
+
+	switch (prop_id) {
+	case PROP_CATEGORY_ONLY:
+		mime_types_model->p->category_only = g_value_get_boolean (value);
+		break;
+
+	default:
+		g_warning ("Bad property set");
+		break;
 	}
 }
 
-GtkTreeModel *
-mime_types_model_new (gboolean is_category_select)
+static void
+mime_types_model_get_prop (GObject *object, guint prop_id, GValue *value, GParamSpec *pspec) 
 {
-	GtkTreeStore *model;
-	GList        *type_list;
-	GList        *tmp;
-	GtkTreeIter   iter;
-	GtkTreeIter   child_iter;
+	MimeTypesModel *mime_types_model;
 
-	GSList       *url_list;
-	GSList       *tmps;
-	const gchar  *protocol_name;
-	gchar        *protocol_desc;
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (IS_MIME_TYPES_MODEL (object));
 
-	gint          i;
+	mime_types_model = MIME_TYPES_MODEL (object);
 
-	model = gtk_tree_store_new (4, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
+	switch (prop_id) {
+	case PROP_CATEGORY_ONLY:
+		g_value_set_boolean (value, mime_types_model->p->category_only);
+		break;
 
-	tmp = type_list = gnome_vfs_get_registered_mime_types ();
-
-	for (i = 0; categories[i] != NULL; i++) {
-		gtk_tree_store_append (model, &iter, NULL);
-		gtk_tree_store_set (model, &iter, DESCRIPTION_COLUMN, categories[i], -1);
+	default:
+		g_warning ("Bad property get");
+		break;
 	}
-
-	for (; tmp != NULL; tmp = tmp->next)
-		if (!is_category_select)
-			insert_mime_type (model, tmp->data);
-		else
-			get_category_path_for_mime_type (tmp->data);
-
-	g_list_free (type_list);
-
-	if (is_category_select)
-		return GTK_TREE_MODEL (model);
-
-	tmps = url_list = gconf_client_all_dirs
-		(gconf_client_get_default (), "/desktop/gnome/url-handlers", NULL);
-
-	get_insertion_point (model, "Internet Services", &iter);
-
-	for (; tmps != NULL; tmps = tmps->next) {
-		protocol_name = get_protocol_name (tmps->data);
-
-		if (protocol_name == NULL)
-			continue;
-
-		protocol_desc = get_description_for_protocol (protocol_name);
-
-		gtk_tree_store_append (model, &child_iter, &iter);
-		gtk_tree_store_set (model, &child_iter,
-				    DESCRIPTION_COLUMN, protocol_desc,
-				    MIME_TYPE_COLUMN,   protocol_name,
-				    -1);
-
-		if (strcmp (protocol_name, "unknown"))
-			gtk_tree_store_set (model, &child_iter, EXTENSIONS_COLUMN,  protocol_name, -1);
-
-		g_free (protocol_desc);
-		g_free (tmps->data);
-	}
-
-	g_slist_free (url_list);
-
-	return GTK_TREE_MODEL (model);
 }
 
-GdkPixbuf *
-get_icon_pixbuf (const gchar *short_icon_name) 
+static void
+mime_types_model_finalize (GObject *object) 
 {
-	gchar *icon_name;
-	GdkPixbuf *pixbuf, *pixbuf1;
+	MimeTypesModel *mime_types_model;
 
-	static GHashTable *pixbuf_table;
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (IS_MIME_TYPES_MODEL (object));
 
-	if (pixbuf_table == NULL)
-		pixbuf_table = g_hash_table_new (g_str_hash, g_str_equal);
+	mime_types_model = MIME_TYPES_MODEL (object);
 
-	if (short_icon_name == NULL)
-		short_icon_name = "nautilus/i-regular-24.png";
+	g_free (mime_types_model->p);
 
-	icon_name = gnome_program_locate_file
-		(gnome_program_get (), GNOME_FILE_DOMAIN_PIXMAP,
-		 short_icon_name, TRUE, NULL);
-
-	if (icon_name != NULL) {
-		pixbuf1 = g_hash_table_lookup (pixbuf_table, icon_name);
-
-		if (pixbuf1 != NULL) {
-			g_object_ref (G_OBJECT (pixbuf1));
-		} else {
-			pixbuf = gdk_pixbuf_new_from_file (icon_name, NULL);
-
-			if (pixbuf == NULL)
-				pixbuf = get_icon_pixbuf (NULL);
-
-			pixbuf1 = gdk_pixbuf_scale_simple (pixbuf, 16, 16, GDK_INTERP_BILINEAR);
-			g_object_unref (G_OBJECT (pixbuf));
-		}
-
-		g_free (icon_name);
-	} else {
-		pixbuf1 = get_icon_pixbuf (NULL);
-	}
-
-	return pixbuf1;
+	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
-gchar *
-get_description_for_protocol (const gchar *protocol_name) 
+
+
+GObject *
+mime_types_model_new (gboolean category_only) 
 {
-	gchar *description;
-	gchar *key;
-	int    i;
-
-	key = g_strconcat ("/desktop/gnome/url-handlers/", protocol_name, "/description", NULL);
-	description = gconf_client_get_string (gconf_client_get_default (), key, NULL);
-	g_free (key);
-
-	if (description != NULL)
-		return description;
-
-	for (i = 0; url_descriptions[i][0] != NULL; i++)
-		if (!strcmp (url_descriptions[i][0], protocol_name))
-			return g_strdup (url_descriptions[i][1]);
-
-	return NULL;
-}
-
-gchar *
-get_category_name (GtkTreeModel *model, GtkTreeIter *iter, gboolean incl_iter)
-{
-	GString *string;
-	gchar *ret;
-	GValue value;
-	GtkTreeIter tmp[2];
-	gint flip = 0;
-
-	value.g_type = G_TYPE_INVALID;
-	string = g_string_new ("");
-
-	if (incl_iter)
-		/* FIXME: Ugh */ memcpy (&(tmp[0]), iter, sizeof (GtkTreeIter));
-	else if (!gtk_tree_model_iter_parent (model, &(tmp[0]), iter))
-		return g_strdup ("");
-
-	while (1) {
-		gtk_tree_model_get_value (model, &(tmp[flip]), DESCRIPTION_COLUMN, &value);
-		g_string_prepend (string, g_value_get_string (&value));
-		g_value_unset (&value);
-
-		if (gtk_tree_model_iter_parent (model, &(tmp[1-flip]), &(tmp[flip])))
-			g_string_prepend (string, "/");
-		else
-			break;
-
-		flip = 1 - flip;
-	}
-
-	ret = string->str;
-	g_string_free (string, FALSE);
-	return ret;
+	return g_object_new (mime_types_model_get_type (),
+			     "category-only", category_only,
+			     NULL);
 }
 
 void
-get_insertion_point (GtkTreeStore *model, const gchar *path_str, GtkTreeIter *iter) 
+mime_types_model_construct_iter (MimeTypesModel *model, ModelEntry *entry, GtkTreeIter *iter)
 {
-	GString *path_num;
+	g_return_if_fail (model != NULL);
+	g_return_if_fail (IS_MIME_TYPES_MODEL (model));
+	g_return_if_fail (iter != NULL);
 
-	path_num = g_string_new ("");
-	get_path_num_from_str (model, NULL, path_str, path_num);
-	gtk_tree_model_get_iter_from_string (GTK_TREE_MODEL (model), iter, path_num->str + 1);
-	g_string_free (path_num, TRUE);
+	iter->stamp = model->p->stamp;
+	iter->user_data = entry;
 }
 
-gboolean
-model_entry_is_protocol (GtkTreeModel *model, GtkTreeIter *iter)
+
+
+static guint
+mime_types_model_get_flags (GtkTreeModel *tree_model)
 {
-	GtkTreeIter parent_iter;
-	GtkTreePath *parent_path, *child_path;
-	gboolean ret;
+	g_return_val_if_fail (tree_model != NULL, 0);
+	g_return_val_if_fail (IS_MIME_TYPES_MODEL (tree_model), 0);
 
-	get_insertion_point (GTK_TREE_STORE (model), categories[INTERNET_SERVICES_IDX], &parent_iter);
-
-	parent_path = gtk_tree_model_get_path (model, &parent_iter);
-	child_path = gtk_tree_model_get_path (model, iter);
-	ret = gtk_tree_path_is_ancestor (parent_path, child_path);
-	gtk_tree_path_free (parent_path);
-	gtk_tree_path_free (child_path);
-
-	return ret;
+	return GTK_TREE_MODEL_ITERS_PERSIST;
 }
 
-gboolean
-model_entry_is_category (GtkTreeModel *model, GtkTreeIter *iter)
+static gint
+mime_types_model_get_n_columns (GtkTreeModel *tree_model)
 {
-	GValue value;
-	const gchar *str;
-	gboolean ret;
+	g_return_val_if_fail (tree_model != NULL, 0);
+	g_return_val_if_fail (IS_MIME_TYPES_MODEL (tree_model), 0);
 
-	value.g_type = G_TYPE_INVALID;
-
-	gtk_tree_model_get_value (GTK_TREE_MODEL (model), iter, MIME_TYPE_COLUMN, &value);
-
-	str = g_value_get_string (&value);
-
-	if (str == NULL || *str == '\0')
-		ret = TRUE;
-	else
-		ret = FALSE;
-
-	g_value_unset (&value);
-
-	return ret;
+	return MODEL_LAST_COLUMN;
 }
 
-gboolean
-model_entry_is_internet_services_category (GtkTreeModel *model, GtkTreeIter *iter) 
+static GType
+mime_types_model_get_column_type (GtkTreeModel *tree_model, gint index)
 {
-	GValue value;
-	const gchar *str;
-	gboolean ret;
+	g_return_val_if_fail (tree_model != NULL, G_TYPE_INVALID);
+	g_return_val_if_fail (IS_MIME_TYPES_MODEL (tree_model), G_TYPE_INVALID);
 
-	value.g_type = G_TYPE_INVALID;
+	switch (index) {
+	case MODEL_COLUMN_MIME_TYPE:
+	case MODEL_COLUMN_DESCRIPTION:
+	case MODEL_COLUMN_FILE_EXT:
+		return G_TYPE_STRING;
+		break;
 
-	gtk_tree_model_get_value (GTK_TREE_MODEL (model), iter, DESCRIPTION_COLUMN, &value);
+	case MODEL_COLUMN_ICON:
+		return GDK_TYPE_PIXBUF;
+		break;
 
-	str = g_value_get_string (&value);
-
-	if (str != NULL && !strcmp (str, categories[INTERNET_SERVICES_IDX]))
-		ret = TRUE;
-	else
-		ret = FALSE;
-
-	g_value_unset (&value);
-
-	return ret;
+	default:
+		return G_TYPE_INVALID;
+		break;
+	}
 }
 
-static GList *
-find_possible_supported_apps (GtkTreeModel *model, GtkTreeIter *iter) 
+/* Adapted from gtk+/gtk/gtktreestore.c, gtk_tree_store_get_iter */
+
+static gboolean
+mime_types_model_get_iter (GtkTreeModel *tree_model, GtkTreeIter *iter, GtkTreePath *path)
 {
-	GValue value;
-	GtkTreeIter child;
-	GList *ret;
+	MimeTypesModel *model;
+	gint *indices, depth, i;
+	GtkTreeIter parent;
 
-	value.g_type = G_TYPE_INVALID;
-	gtk_tree_model_get_value (model, iter, MIME_TYPE_COLUMN, &value);
+	g_return_val_if_fail (tree_model != NULL, FALSE);
+	g_return_val_if_fail (IS_MIME_TYPES_MODEL (tree_model), FALSE);
 
-	if (g_value_get_string (&value) == NULL) {
-		if (gtk_tree_model_iter_has_child (model, iter)) {
-			gtk_tree_model_iter_nth_child (model, &child, iter, 0);
-			ret = find_possible_supported_apps (model, &child);
-		}
-		else if (gtk_tree_model_iter_next (model, iter)) {
-			ret = find_possible_supported_apps (model, iter);
-		} else {
-			ret = NULL;
-		}
-	} else {
-		ret = gnome_vfs_application_registry_get_applications (g_value_get_string (&value));
+	model = MIME_TYPES_MODEL (tree_model);
+
+	indices = gtk_tree_path_get_indices (path);
+	depth = gtk_tree_path_get_depth (path);
+
+	g_return_val_if_fail (depth > 0, FALSE);
+
+	parent.stamp = model->p->stamp;
+	parent.user_data = get_model_entries ();
+
+	if (!gtk_tree_model_iter_nth_child (tree_model, iter, &parent, indices[0]))
+		return FALSE;
+
+	for (i = 1; i < depth; i++) {
+		parent = *iter;
+		if (!gtk_tree_model_iter_nth_child (tree_model, iter, &parent, indices[i]))
+			return FALSE;
 	}
 
-	g_value_unset (&value);
-
-	return ret;
+	return TRUE;
 }
 
-static GList *
-intersect_lists (GList *list, GList *list1) 
+static GtkTreePath *
+mime_types_model_get_path (GtkTreeModel *tree_model, GtkTreeIter *iter)
 {
-	GList *tmp, *tmp1, *tmpnext;
+	MimeTypesModel *model;
+	ModelEntry *entry;
+	GtkTreePath *path;
 
-	tmp = list;
+	g_return_val_if_fail (tree_model != NULL, NULL);
+	g_return_val_if_fail (IS_MIME_TYPES_MODEL (tree_model), NULL);
 
-	while (tmp != NULL) {
-		tmpnext = tmp->next;
+	model = MIME_TYPES_MODEL (tree_model);
 
-		for (tmp1 = list1; tmp1 != NULL; tmp1 = tmp1->next)
-			if (!strcmp (tmp->data, tmp1->data))
-				break;
+	path = gtk_tree_path_new ();
+	entry = iter->user_data;
 
-		if (tmp1 == NULL)
-			list = g_list_remove_link (list, tmp);
-
-		tmp = tmpnext;
+	while (entry->parent != NULL) {
+		gtk_tree_path_prepend_index (path, model_entry_get_index (entry->parent, entry));
+		entry = entry->parent;
 	}
 
-	return list;
+	return path;
 }
 
 static void
-reduce_supported_app_list (GtkTreeModel *model, GtkTreeIter *iter, GList *list) 
+mime_types_model_get_value (GtkTreeModel *tree_model, GtkTreeIter *iter, gint column, GValue *value)
 {
-	GtkTreeIter child;
-	GList *type_list;
-	GValue value;
+	MimeTypesModel *model;
+	ModelEntry *entry;
 
-	value.g_type = G_TYPE_INVALID;
+	g_return_if_fail (tree_model != NULL);
+	g_return_if_fail (IS_MIME_TYPES_MODEL (tree_model));
 
-	if (gtk_tree_model_iter_has_child (model, iter)) {
-		gtk_tree_model_iter_nth_child (model, &child, iter, 0);
-		reduce_supported_app_list (model, &child, list);
-	} else {
-		do {
-			gtk_tree_model_get_value (model, iter, MIME_TYPE_COLUMN, &value);
+	model = MIME_TYPES_MODEL (tree_model);
+	entry = iter->user_data;
 
-			if (g_value_get_string (&value) != NULL) {
-				type_list = gnome_vfs_application_registry_get_applications (g_value_get_string (&value));
-				list = intersect_lists (list, type_list);
-				g_list_free (type_list);
-			}
+	switch (column) {
+	case MODEL_COLUMN_MIME_TYPE:
+		g_value_init (value, G_TYPE_STRING);
 
-			g_value_unset (&value);
-		} while (gtk_tree_model_iter_next (model, iter));
+		switch (entry->type) {
+		case MODEL_ENTRY_MIME_TYPE:
+			g_value_set_static_string (value, MIME_TYPE_INFO (entry)->mime_type);
+			break;
+
+		case MODEL_ENTRY_SERVICE:
+			g_value_set_static_string (value, SERVICE_INFO (entry)->protocol);
+			break;
+
+		default:
+			g_value_set_string (value, NULL);
+			break;
+		}
+
+		break;
+
+	case MODEL_COLUMN_DESCRIPTION:
+		g_value_init (value, G_TYPE_STRING);
+
+		switch (entry->type) {
+		case MODEL_ENTRY_MIME_TYPE:
+		case MODEL_ENTRY_CATEGORY:
+			g_value_set_static_string (value, mime_type_info_get_description (MIME_TYPE_INFO (entry)));
+			break;
+
+		case MODEL_ENTRY_SERVICE:
+			g_value_set_static_string (value, service_info_get_description (SERVICE_INFO (entry)));
+			break;
+
+		case MODEL_ENTRY_SERVICES_CATEGORY:
+			g_value_set_static_string (value, _("Internet Services"));
+			break;
+
+		default:
+			g_value_set_string (value, NULL);
+			break;
+		}
+
+		break;
+
+	case MODEL_COLUMN_ICON:
+		g_value_init (value, GDK_TYPE_PIXBUF);
+
+		switch (entry->type) {
+		case MODEL_ENTRY_MIME_TYPE:
+			g_value_set_object (value, G_OBJECT (mime_type_info_get_icon (MIME_TYPE_INFO (entry))));
+			break;
+
+		default:
+			g_value_set_object (value, NULL);
+			break;
+		}
+
+		break;
+
+	case MODEL_COLUMN_FILE_EXT:
+		g_value_init (value, G_TYPE_STRING);
+
+		switch (entry->type) {
+		case MODEL_ENTRY_MIME_TYPE:
+			g_value_set_string (value, mime_type_info_get_file_extensions_pretty_string (MIME_TYPE_INFO (entry)));
+			break;
+
+		case MODEL_ENTRY_SERVICE:
+			g_value_set_static_string (value, SERVICE_INFO (entry)->protocol);
+			break;
+
+		default:
+			g_value_set_string (value, NULL);
+			break;
+		}
+
+		break;
 	}
 }
 
-GList *
-find_supported_apps_for_category (GtkTreeModel *model, GtkTreeIter *iter)
+static gboolean
+mime_types_model_iter_next (GtkTreeModel *tree_model, GtkTreeIter *iter)
 {
-	GList *ret;
+	MimeTypesModel *model;
+	ModelEntry *entry;
 
-	ret = find_possible_supported_apps (model, iter);
-	reduce_supported_app_list (model, iter, ret);
-	return ret;
+	g_return_val_if_fail (tree_model != NULL, FALSE);
+	g_return_val_if_fail (IS_MIME_TYPES_MODEL (tree_model), FALSE);
+
+	model = MIME_TYPES_MODEL (tree_model);
+	entry = iter->user_data;
+
+	if (entry != NULL)
+		iter->user_data = entry->next;
+
+	if (model->p->category_only)
+		while (iter->user_data != NULL && !IS_CATEGORY (MODEL_ENTRY (iter->user_data)))
+			iter->user_data = MODEL_ENTRY (iter->user_data)->next;
+
+	return iter->user_data != NULL;
+}
+
+static gboolean
+mime_types_model_iter_children (GtkTreeModel *tree_model, GtkTreeIter *iter, GtkTreeIter *parent)
+{
+	MimeTypesModel *model;
+	ModelEntry *entry;
+
+	g_return_val_if_fail (tree_model != NULL, FALSE);
+	g_return_val_if_fail (IS_MIME_TYPES_MODEL (tree_model), FALSE);
+
+	model = MIME_TYPES_MODEL (tree_model);
+
+	if (parent != NULL)
+		entry = parent->user_data;
+	else
+		entry = NULL;
+
+	if (entry == NULL)
+		iter->user_data = get_model_entries ();
+	else
+		iter->user_data = entry->first_child;
+
+	if (model->p->category_only)
+		while (iter->user_data != NULL && !IS_CATEGORY (MODEL_ENTRY (iter->user_data)))
+			iter->user_data = MODEL_ENTRY (iter->user_data)->next;
+
+	return iter->user_data != NULL;
+}
+
+static gboolean
+mime_types_model_iter_has_child (GtkTreeModel *tree_model, GtkTreeIter *iter)
+{
+	MimeTypesModel *model;
+	ModelEntry *entry;
+
+	g_return_val_if_fail (tree_model != NULL, FALSE);
+	g_return_val_if_fail (IS_MIME_TYPES_MODEL (tree_model), FALSE);
+
+	model = MIME_TYPES_MODEL (tree_model);
+	entry = iter->user_data;
+
+	if (entry == NULL)
+		return get_model_entries ()->first_child != NULL;
+	else if (!model->p->category_only || IS_CATEGORY (entry->first_child))
+		return entry->first_child != NULL;
+	else {
+		for (entry = entry->first_child; entry != NULL; entry = entry->next)
+			if (IS_CATEGORY (entry))
+				return TRUE;
+
+		return FALSE;
+	}
+}
+
+static gint
+mime_types_model_iter_n_children (GtkTreeModel *tree_model, GtkTreeIter *iter)
+{
+	MimeTypesModel *model;
+	ModelEntry *entry, *tmp;
+	gint count = 0;
+
+	g_return_val_if_fail (tree_model != NULL, 0);
+	g_return_val_if_fail (IS_MIME_TYPES_MODEL (tree_model), 0);
+
+	model = MIME_TYPES_MODEL (tree_model);
+
+	if (iter != NULL)
+		entry = iter->user_data;
+	else
+		entry = NULL;
+
+	if (entry == NULL)
+		entry = get_model_entries ();
+
+	if (model->p->category_only) {
+		for (tmp = entry->first_child; tmp != NULL; tmp = tmp->next) {
+			if (tmp->type == MODEL_ENTRY_CATEGORY)
+				count++;
+		}
+	} else {
+		for (tmp = entry->first_child; tmp != NULL; tmp = tmp->next)
+			count++;
+	}
+
+	return count;
+}
+
+static gboolean
+mime_types_model_iter_nth_child (GtkTreeModel *tree_model, GtkTreeIter *iter, GtkTreeIter *parent, gint n)
+{
+	MimeTypesModel *model;
+	ModelEntry *entry;
+
+	g_return_val_if_fail (tree_model != NULL, FALSE);
+	g_return_val_if_fail (IS_MIME_TYPES_MODEL (tree_model), FALSE);
+
+	model = MIME_TYPES_MODEL (tree_model);
+
+	if (parent != NULL)
+		entry = parent->user_data;
+	else
+		entry = NULL;
+
+	if (entry == NULL)
+		iter->user_data = model_entry_get_nth_child (get_model_entries (), n, model->p->category_only);
+	else
+		iter->user_data = model_entry_get_nth_child (entry, n, model->p->category_only);
+
+	return iter->user_data != NULL;
+}
+
+static gboolean
+mime_types_model_iter_parent (GtkTreeModel *tree_model, GtkTreeIter *iter, GtkTreeIter *child)
+{
+	MimeTypesModel *model;
+	ModelEntry *entry;
+
+	g_return_val_if_fail (tree_model != NULL, FALSE);
+	g_return_val_if_fail (IS_MIME_TYPES_MODEL (tree_model), FALSE);
+
+	model = MIME_TYPES_MODEL (tree_model);
+	entry = iter->user_data;
+
+	if (entry != NULL)
+		iter->user_data = entry->parent;
+
+	return iter->user_data != NULL;
 }
 
