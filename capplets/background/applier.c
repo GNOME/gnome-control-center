@@ -47,7 +47,6 @@
 
 #define PDEBUG(pix) (g_print ("file %s: line %d (%s): Setting pixbuf to %i %i\n", __FILE__, __LINE__, __PRETTY_FUNCTION__, gdk_pixbuf_get_width (pix), gdk_pixbuf_get_height (pix)))
 
-static GtkWidget *preview_widget = NULL;
 static gboolean gdk_pixbuf_xlib_inited = FALSE;
 
 typedef struct _Renderer Renderer;
@@ -59,6 +58,8 @@ enum {
 
 struct _ApplierPrivate 
 {
+	GtkWidget          *preview_widget;
+
 	ApplierPreferences *root_prefs;
 	ApplierPreferences *preview_prefs;
 
@@ -76,6 +77,7 @@ struct _Renderer
 	gboolean            is_root;
 	gboolean            is_set;
 
+	Applier            *applier;
 	ApplierPreferences *prefs;
 
 	gint                x;         /* Geometry relative to pixmap */
@@ -150,7 +152,7 @@ static void run_render_pipeline      (Renderer *renderer,
 				      GdkPixbuf *wallpaper_pixbuf);
 static void draw_disabled_message    (GtkWidget *widget);
 
-static Renderer *renderer_new        (gboolean is_root);
+static Renderer *renderer_new        (Applier *applier, gboolean is_root);
 static void renderer_destroy         (Renderer *renderer);
 
 static void renderer_set_prefs       (Renderer *renderer,
@@ -395,7 +397,7 @@ applier_apply_prefs (Applier *applier, Bonobo_PropertyBag pb, Bonobo_ConfigDatab
 	if (do_preview) {
 		if (applier->private->preview_renderer == NULL)
 			applier->private->preview_renderer = 
-				renderer_new (FALSE);
+				renderer_new (applier, FALSE);
 
 		run_render_pipeline (applier->private->preview_renderer,
 				     applier->private->preview_prefs, 
@@ -408,15 +410,15 @@ applier_apply_prefs (Applier *applier, Bonobo_PropertyBag pb, Bonobo_ConfigDatab
 		applier->private->preview_prefs = prefs;
 		applier_preferences_ref (prefs);
 
-		if (preview_widget != NULL)
-			gtk_widget_queue_draw (preview_widget);
+		if (applier->private->preview_widget != NULL)
+			gtk_widget_queue_draw (applier->private->preview_widget);
 	}
 
 	if (do_root) {
 		nice (20);
 
 		if (applier->private->root_renderer == NULL)
-			applier->private->root_renderer = renderer_new (TRUE);
+			applier->private->root_renderer = renderer_new (applier, TRUE);
 
 		if (!applier->private->nautilus_running)
 			run_render_pipeline (applier->private->root_renderer,
@@ -436,7 +438,7 @@ applier_apply_prefs (Applier *applier, Bonobo_PropertyBag pb, Bonobo_ConfigDatab
 }
 
 GtkWidget *
-applier_class_get_preview_widget (void) 
+applier_get_preview_widget (Applier *applier) 
 {
 	GdkPixbuf *pixbuf;
 	GdkPixmap *pixmap;
@@ -447,7 +449,7 @@ applier_class_get_preview_widget (void)
 	gchar *filename;
 	GdkGC *gc;
 
-	if (preview_widget != NULL) return preview_widget;
+	if (applier->private->preview_widget != NULL) return applier->private->preview_widget;
 
 	filename = gnome_pixmap_file ("monitor.png");
 	visual = gdk_window_get_visual (GDK_ROOT_PARENT ());
@@ -506,25 +508,27 @@ applier_class_get_preview_widget (void)
 		mask = NULL;
 	}
 
-	preview_widget = gtk_pixmap_new (pixmap, mask);
-	gtk_widget_show (preview_widget);
+	applier->private->preview_widget = gtk_pixmap_new (pixmap, mask);
+	gtk_widget_show (applier->private->preview_widget);
 	gdk_pixbuf_unref (pixbuf);
 	g_free (filename);
 
 	gtk_widget_pop_visual ();
 	gtk_widget_pop_colormap ();
 
-	return preview_widget;
+	return applier->private->preview_widget;
 }
 
 void
-applier_class_destroy_preview_widget (void)
+applier_destroy_preview_widget (Applier *applier)
 {
-	if (!preview_widget)
+	if (applier->private->preview_widget == NULL)
 		return;
-	if (GTK_IS_WIDGET (preview_widget))
-		gtk_widget_destroy (preview_widget);
-	preview_widget = NULL;
+
+	if (GTK_IS_WIDGET (applier->private->preview_widget))
+		gtk_widget_destroy (applier->private->preview_widget);
+
+	applier->private->preview_widget = NULL;
 }
 
 static void
@@ -634,7 +638,7 @@ run_render_pipeline (Renderer *renderer,
 }
 
 static Renderer *
-renderer_new (gboolean is_root) 
+renderer_new (Applier *applier, gboolean is_root) 
 {
 	Renderer *renderer;
 
@@ -649,16 +653,17 @@ renderer_new (gboolean is_root)
 		renderer->pixmap = 0;
 		renderer->is_set = FALSE;
 	} else {
-		if (!GTK_WIDGET_REALIZED (preview_widget))
-			gtk_widget_realize (preview_widget);
+		if (!GTK_WIDGET_REALIZED (applier->private->preview_widget))
+			gtk_widget_realize (applier->private->preview_widget);
 
+		renderer->applier = applier;
 		renderer->x = MONITOR_CONTENTS_X;
 		renderer->y = MONITOR_CONTENTS_Y;
 		renderer->width = MONITOR_CONTENTS_WIDTH;
 		renderer->height = MONITOR_CONTENTS_HEIGHT;
 		renderer->pixmap = 
 			GDK_WINDOW_XWINDOW (GTK_PIXMAP 
-					    (preview_widget)->pixmap);
+					    (applier->private->preview_widget)->pixmap);
 		renderer->is_set = TRUE;
 	}
 
@@ -1017,7 +1022,7 @@ renderer_render_to_screen (Renderer *renderer)
 			gdk_window_clear (GDK_ROOT_PARENT ());
 		} else {
 			gdk_color_alloc (gdk_window_get_colormap
-					 (preview_widget->window), 
+					 (renderer->applier->private->preview_widget->window), 
 					 renderer->prefs->color1);
 			gdk_gc_set_foreground (gc, renderer->prefs->color1);
 			XFillRectangle (GDK_DISPLAY (), renderer->pixmap, xgc, 

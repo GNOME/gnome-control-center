@@ -63,7 +63,7 @@ void         applier_apply_prefs (Applier *applier,
 				  gboolean do_root,
 				  gboolean do_preview);
 
-GtkWidget   *applier_class_get_preview_widget (void);
-void 	    applier_class_destroy_preview_widget (void);
+GtkWidget   *applier_get_preview_widget (Applier *applier);
+void         applier_destroy_preview_widget (Applier *applier);
 
 #endif /* __APPLIER_H */

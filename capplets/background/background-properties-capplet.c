@@ -184,17 +184,22 @@ property_change_cb (BonoboListener *listener,
 		    char *event_name,
 		    CORBA_any *any,
 		    CORBA_Environment *ev,
-		    Bonobo_PropertyBag pb)
+		    Applier *applier)
 {
+	Bonobo_PropertyBag pb;
+
+	pb = gtk_object_get_data (GTK_OBJECT (applier), "property-bag");
 	applier_apply_prefs (applier, pb, CORBA_OBJECT_NIL, ev, FALSE, TRUE);
 }
 
 static void
-realize_cb (GtkWidget *widget, Bonobo_PropertyBag bag)
+realize_cb (GtkWidget *widget, Applier *applier)
 {
 	CORBA_Environment ev;
+	Bonobo_PropertyBag bag;
 
 	CORBA_exception_init (&ev);
+	bag = gtk_object_get_data (GTK_OBJECT (applier), "property-bag");
 	applier_apply_prefs (applier, bag, CORBA_OBJECT_NIL, &ev, FALSE, TRUE);
 	CORBA_exception_free (&ev);
 }
@@ -212,6 +217,7 @@ setup_dialog (GtkWidget *widget, Bonobo_PropertyBag bag)
 {
 	BonoboPEditor *ed;
 	GladeXML *dialog;
+	Applier *applier;
 
 	dialog = gtk_object_get_data (GTK_OBJECT (widget), "glade-data");
 	ed = BONOBO_PEDITOR (bonobo_peditor_option_menu_construct (WID ("color_option")));
@@ -228,10 +234,12 @@ setup_dialog (GtkWidget *widget, Bonobo_PropertyBag bag)
 	gtk_widget_hide (WID ("opacity_spin"));
 	gtk_widget_hide (WID ("opacity_label"));
 
+	applier = gtk_object_get_data (GTK_OBJECT (widget), "applier");
+	gtk_object_set_data (GTK_OBJECT (applier), "property-bag", bag);
 	bonobo_event_source_client_add_listener (bag, (BonoboListenerCallbackFn) property_change_cb,
-						 NULL, NULL, bag);
+						 NULL, NULL, applier);
 
-	gtk_signal_connect_after (GTK_OBJECT (applier_class_get_preview_widget ()), "realize", realize_cb, bag);
+	gtk_signal_connect_after (GTK_OBJECT (applier_get_preview_widget (applier)), "realize", realize_cb, applier);
 }
 
 static GtkWidget*
@@ -246,11 +254,12 @@ create_dialog (void)
 	gtk_object_set_data (GTK_OBJECT (widget), "glade-data", dialog);
 
 	applier = APPLIER (applier_new ());
+	gtk_object_set_data (GTK_OBJECT (widget), "applier", applier);
 
 	/* Minor GUI addition */
 	holder = WID ("preview_holder");
 	gtk_box_pack_start (GTK_BOX (holder),
-			    applier_class_get_preview_widget (),
+			    applier_get_preview_widget (applier),
 			    TRUE, TRUE, 0);
 	gtk_widget_show_all (holder);
 

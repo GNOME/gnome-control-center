@@ -1,3 +1,20 @@
+2001-07-26  Bradford Hovinen  <hovinen@ximian.com>
+
+	* background-properties-capplet.c (property_change_cb): Accept
+	applier as argument; retrieve property bag from applier
+	(realize_cb): Retrieve applier from widget
+	(setup_dialog): Store property bag in applier
+
+	* applier.c (renderer_new): Store applier inside renderer; accept
+	applier as function parameter
+
+	* background-properties-capplet.c (create_dialog): Store the
+	applier inside the widget
+
+	* applier.c (struct _ApplierPrivate ): Define preview_widget here
+	rather than globally
+	(applier_get_preview_widget): Make this a method of the applier class
+
 2001-07-25  Chema Celorio  <chema@celorio.com>
 
 	* Makefile.am ($(oaffile)): remove the oaffile_IN_RULE macro and copy
