@@ -695,9 +695,7 @@ cb_dialog_response (GtkDialog *dialog, gint response_id, struct DisplayInfo *inf
       gtk_main_quit ();
       break;
     case GTK_RESPONSE_HELP:
-      /* FIXME: This needs to be changed to the right section
-       * when the docs have been written. */
-		capplet_help (GTK_WINDOW (dialog), "user-guide.xml", "goscustdesk-38");
+      capplet_help (GTK_WINDOW (dialog), "user-guide.xml", "goscustdesk-70");
       break;
     case GTK_RESPONSE_APPLY:
       save_computer = info->per_computer_check != NULL && gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (info->per_computer_check));
