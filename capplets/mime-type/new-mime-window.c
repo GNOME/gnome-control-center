@@ -28,7 +28,7 @@ launch_new_mime_window (void)
 	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
 	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
         gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (add_dialog)->vbox), hbox, FALSE, FALSE, 0);
-	label = gtk_label_new (_("Mime Type:"));
+	label = gtk_label_new (_("Mime Type: "));
 	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
 	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
 	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
