@@ -280,6 +280,7 @@ gnome_settings_chk_file_list (void)
 			file_list = g_slist_append (file_list, g_strdup (fname));
 		}
 	}
+	g_dir_close (homeDir);
 
 	last_login_file_list = gconf_client_get_list (confClient, KNOWN_FILES_KEY, GCONF_VALUE_STRING, NULL);
 
