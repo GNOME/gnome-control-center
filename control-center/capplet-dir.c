@@ -58,6 +58,7 @@ capplet_new (CappletDir *dir, gchar *desktop_path)
 	Capplet *capplet;
 	CappletDirEntry *entry;
 	GnomeDesktopEntry *dentry;
+	gchar *path;
 
 	g_return_val_if_fail (desktop_path != NULL, NULL);
 
@@ -69,6 +70,13 @@ capplet_new (CappletDir *dir, gchar *desktop_path)
 	dentry = gnome_desktop_entry_load (desktop_path);
 	if (dentry == NULL)
 		return NULL;
+
+	if ((dentry->exec_length == 0) || !(path = gnome_is_program_in_path (dentry->exec[0])))
+	{
+		gnome_desktop_entry_free (dentry);
+		return NULL;
+	}
+	g_free (path);
 
 	capplet = g_new0 (Capplet, 1);
 	entry = CAPPLET_DIR_ENTRY (capplet);

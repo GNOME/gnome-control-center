@@ -154,6 +154,28 @@ header_populate (CappletDirView *view)
 	gtk_html_end (data->top, stream, GTK_HTML_STREAM_OK);
 }
 
+static int
+total_num_items (GSList *items)
+{
+	GSList *l;
+	CappletDirEntry *entry;
+	int num = 0;
+
+	for (l = items; l != NULL; l = l->next)
+	{
+		entry = CAPPLET_DIR_ENTRY (l->data);
+		if (entry->type == TYPE_CAPPLET_DIR)
+		{
+			num += total_num_items (CAPPLET_DIR (entry)->entries);
+			continue;
+		}	
+		else
+			num++;
+	}
+
+	return num;
+}
+
 static void
 sidebar_populate (CappletDirView *view)
 {
@@ -164,6 +186,7 @@ sidebar_populate (CappletDirView *view)
 	char *s;
 
 	data = view->view_data;
+	
 	stream = gtk_html_begin (data->sidebar);
 
 	s = g_strdup_printf (
@@ -182,6 +205,9 @@ sidebar_populate (CappletDirView *view)
 		entry = CAPPLET_DIR_ENTRY (item->data);
 		if (entry->type != TYPE_CAPPLET_DIR)
 			continue;
+		if (total_num_items (CAPPLET_DIR (entry)->entries) < 1)
+			continue;
+
 		s = g_strdup_printf ("<tr valign=\"center\"><td width=\"48\"><a href=\"%s\"><img src=\"%s\" alt=\"\" border=\"0\" align=\"center\"/></a></td><td><a href=\"%s\"><b>%s</b></a></td><td width=\"8\"><img src=\"%s\" alt=\"\" border=\"0\" align=\"center\"></tr>", entry->path, entry->icon, entry->path, entry->label, (CAPPLET_DIR (entry) == view->capplet_dir) ? ART_DIR "/active.png" : ART_DIR "/blank.png");
 		gtk_html_write (data->sidebar, stream, s, strlen (s));
 		g_free (s);
