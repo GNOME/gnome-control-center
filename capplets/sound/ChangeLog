@@ -1,3 +1,14 @@
+2001-11-18  Richard Hestilow  <hestilow@ximian.com>
+
+	* Makefile.am (sound_properties_control_LDADD): Add libsounds.a.
+
+	* prefs-widget.c (apply_settings): Export our settings to
+	gnome-config (needed by gnome-libs). Also save and reload event
+	sounds.
+	(create_dialog): Add a SoundView on the sound events.
+
+	* sound-properties.glade: Add a tab for the sound events.
+
 2001-10-12  Bradford Hovinen  <hovinen@ximian.com>
 
 	* Makefile.am: Make OAF file creation generic

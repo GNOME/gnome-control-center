@@ -26,6 +26,7 @@
 #endif
 
 #include "capplet-util.h"
+#include "libsounds/sound-view.h"
 
 #include <glade/glade.h>
 
@@ -37,7 +38,10 @@
 
 /* Capplet-specific prototypes */
 
+static SoundProperties *props = NULL;
+
 static void start_esd (void);
+static void reload_foreach_cb (SoundEvent *event, gpointer data);
 
 /* apply_settings
  *
@@ -49,8 +53,10 @@ static void
 apply_settings (Bonobo_ConfigDatabase db) 
 {
 	gboolean enable_esd;
+	gboolean event_sounds;
 
 	enable_esd = bonobo_config_get_boolean (db, "/main/enable_esd", NULL);
+	event_sounds = bonobo_config_get_boolean (db, "/main/event_sounds", NULL);
 
         if (enable_esd && gnome_sound_connection < 0)
                 start_esd ();
@@ -58,8 +64,23 @@ apply_settings (Bonobo_ConfigDatabase db)
 	if (!enable_esd)
 		system ("killall esd");
 
-	/* I'm not going to deal with reloading samples until later. It's
-	 * entirely too painful */
+	/* gnome-libs checks this */
+	gnome_config_set_bool ("/sound/system/settings/event_sounds", event_sounds);
+	gnome_config_set_bool ("/sound/system/settings/enable_esd", enable_esd);
+	gnome_config_sync ();
+
+	/* Were we created from a dialog? */
+	if (props)
+	{
+		sound_properties_user_save (props);
+	}
+	else
+	{
+		props = sound_properties_new ();
+		sound_properties_add_defaults (props, NULL);
+	}
+	
+	sound_properties_foreach (props, reload_foreach_cb, NULL);
 }
 
 /* start_esd
@@ -96,6 +117,51 @@ start_esd (void)
         }
 #endif
 }
+ 
+/* reload_foreach_cb
+ *
+ * For a given SoundEvent, reload the sound file associate with the event. 
+ */
+static void
+reload_foreach_cb (SoundEvent *event, gpointer data)
+{
+	gchar *file, *tmp, *key;
+	int sid;
+	
+	key = sound_event_compose_key (event);
+	/* We need to free up the old sample, because
+	 * esd allows multiple samples with the same name,
+	 * putting memory to waste. */
+	sid = esd_sample_getid(gnome_sound_connection, key);
+	if (sid >= 0)
+		esd_sample_free(gnome_sound_connection, sid);
+
+	if (!event->file || !strcmp (event->file, ""))
+		return;
+	
+	file = g_strdup (event->file);
+	if (file[0] != '/')
+	{
+		tmp = gnome_sound_file (file);
+		g_free (file);
+		file = tmp;
+	}
+	
+	if (!file)
+	{
+		g_free (key);
+		return;
+	}
+
+	sid = gnome_sound_sample_load (key, file);
+	
+	if (sid < 0)
+		g_warning ("Couldn't load sound file %s as sample %s",
+			   file, key);
+
+	g_free (key);
+}
+
 
 /* create_dialog
  *
@@ -106,7 +172,7 @@ static GtkWidget *
 create_dialog (void) 
 {
 	GladeXML *data;
-	GtkWidget *widget;
+	GtkWidget *widget, *box;
 
 	data = glade_xml_new (GNOMECC_GLADE_DIR "/sound-properties.glade", "prefs_widget");
 	widget = glade_xml_get_widget (data, "prefs_widget");
@@ -115,6 +181,18 @@ create_dialog (void)
 	gtk_signal_connect_object (GTK_OBJECT (widget), "destroy",
 				   GTK_SIGNAL_FUNC (gtk_object_destroy),
 				   GTK_OBJECT (data));
+
+	props = sound_properties_new ();
+	sound_properties_add_defaults (props, NULL);
+	box = glade_xml_get_widget (data, "events_vbox");
+	gtk_box_pack_start (GTK_BOX (box), sound_view_new (props),
+			    TRUE, TRUE, 0);
+
+	gtk_signal_connect_object (GTK_OBJECT (widget), "destroy",
+				   GTK_SIGNAL_FUNC (gtk_object_destroy),
+				   GTK_OBJECT (props));
+
+	gtk_widget_set_usize (widget, -1, 250);
 
 	return widget;
 }
@@ -135,6 +213,7 @@ setup_dialog (GtkWidget *widget, Bonobo_PropertyBag bag)
 	CREATE_PEDITOR (boolean, "event_sounds", "events_toggle");
 
 	bonobo_peditor_set_guard (WID ("events_toggle"), bag, "enable_esd");
+	bonobo_peditor_set_guard (WID ("events_vbox"), bag, "enable_esd");
 }
 
 /* get_legacy_settings
