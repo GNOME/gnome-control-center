@@ -32,7 +32,7 @@ INCLUDES = 						\
 	-DPIXMAPS_DIR=\""$(appicondir)"\"		\
 	-DART_DIR=\""$(splashdir)"\"			\
 	-DGNOME_SBINDIR=\""$(sbindir)"\"		\
-	$(GNOMECC_CFLAGS)
+	@GNOMECC_CFLAGS@
 
 bin_PROGRAMS = gnomecc
 
@@ -46,7 +46,7 @@ gnomecc_SOURCES = \
 	capplet-dir-view-list.c
 
 gnomecc_LDADD = \
-	$(GNOMECC_LIBS)					\
+	@GNOMECC_LIBS@					\
 	$(INTLLIBS)
 
 EXTRA_DIST = gnomecc.desktop $(appicon_DATA) $(splash_DATA) $(glade_DATA)

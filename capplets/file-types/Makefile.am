@@ -7,13 +7,10 @@ INCLUDES = -I. 						\
 	-I$(srcdir) 					\
 	-I$(top_srcdir)/intl -I$(top_builddir)/intl	\
 	-I$(top_srcdir)/libgnomevfs			\
-	$(CAPPLET_INCLUDEDIR)				\
-	$(OAF_CFLAGS)					\
-	$(GNOME_INCLUDEDIR)				\
-	$(GTK_CFLAGS)					\
+	@VFS_CAPPLET_CFLAGS@				\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
 	-I$(includedir)					\
-	$(VFS_CFLAGS) $(WERROR)				\
+	$(WERROR)					\
 	$(NULL)
 
 
@@ -30,10 +27,7 @@ file_types_capplet_SOURCES =			\
 
 
 file_types_capplet_LDADD =						\
-			$(CAPPLET_LIBDIR) 				\
-			$(CAPPLET_LIBS) 				\
-			$(ORBIT_LIBS) 					\
-			$(OAF_LIBS)					\
+			@VFS_CAPPLET_LIBS@				\
 			$(INTLLIBS) 					\
 			$(top_builddir)/libgnomevfs/libgnomevfs.la 	\
 			-lgdk_pixbuf					\

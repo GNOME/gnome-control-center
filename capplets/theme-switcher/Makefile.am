@@ -2,7 +2,7 @@ INCLUDES = -I. -I$(srcdir) 				\
 	-I$(top_srcdir)/intl -I$(top_builddir)/intl	\
 	-I$(srcdir)/../../libcapplet		\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
-	$(CAPPLET_CFLAGS)
+	@CAPPLET_CFLAGS@
 
 bin_PROGRAMS = theme-selector-capplet
 
@@ -17,7 +17,7 @@ theme_selector_capplet_SOURCES = \
 	gui.c           \
 	install.c
 
-theme_selector_capplet_LDADD = $(CAPPLET_LIBS)
+theme_selector_capplet_LDADD = @CAPPLET_LIBS@
 
 EXTRA_DIST = \
 	theme-selector.desktop

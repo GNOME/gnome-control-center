@@ -20,7 +20,7 @@ INCLUDES = \
 	-DGNOME_ICONDIR=\""${prefix}/share/pixmaps"\"	\
 	-DG_LOG_DOMAIN=\"keyboard-properties\"		\
 	-DGLADE_DATADIR=\""$(Gladedir)"\"		\
-	$(CAPPLET_CFLAGS)				\
+	@CAPPLET_CFLAGS@				\
 	-I$(top_srcdir)/				\
 	-I$(top_srcdir)/intl				
 
@@ -31,4 +31,4 @@ keyboard_properties_SOURCES = \
 	preferences.c preferences.h \
 	main.c
 
-keyboard_properties_LDADD = $(CAPPLET_LIBS) $(XF86MISC_LIBS)
+keyboard_properties_LDADD = @CAPPLET_LIBS@ $(XF86MISC_LIBS)

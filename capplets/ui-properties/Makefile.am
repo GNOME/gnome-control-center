@@ -19,7 +19,7 @@ INCLUDES = \
 	-DGNOME_ICONDIR=\""${prefix}/share/pixmaps"\"	\
 	-DG_LOG_DOMAIN=\"ui-properties\"		\
 	-DGLADE_DATADIR=\""$(Gladedir)"\"		\
-	$(CAPPLET_CFLAGS)				\
+	@CAPPLET_CFLAGS@				\
 	-I$(top_srcdir)/				\
 	-I$(top_srcdir)/intl				
 
@@ -30,4 +30,4 @@ ui_properties_capplet_SOURCES = \
 	preferences.c preferences.h \
 	main.c
 
-ui_properties_capplet_LDADD = $(CAPPLET_LIBS)
+ui_properties_capplet_LDADD = @CAPPLET_LIBS@

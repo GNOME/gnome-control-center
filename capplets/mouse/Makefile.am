@@ -20,8 +20,7 @@ INCLUDES = \
 	-DGNOME_ICONDIR=\""${prefix}/share/pixmaps"\"	\
 	-DG_LOG_DOMAIN=\"mouse-properties\"		\
 	-DGLADE_DATADIR=\""$(Gladedir)"\"		\
-	$(GNOME_INCLUDEDIR)				\
-	$(CAPPLET_CFLAGS)				\
+	@CAPPLET_CFLAGS@				\
 	-I$(top_srcdir)/				\
 	-I$(top_srcdir)/intl
 
@@ -33,5 +32,4 @@ mouse_properties_capplet_SOURCES = \
 	main.c
 
 mouse_properties_capplet_LDADD = \
-	$(GNOME_LIBDIR)	\
-	$(CAPPLET_LIBS)
+	@CAPPLET_LIBS@

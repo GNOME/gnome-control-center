@@ -20,8 +20,7 @@ INCLUDES = \
 	-DGNOME_ICONDIR=\""${prefix}/share/pixmaps"\"	\
 	-DG_LOG_DOMAIN=\"background-properties\"	\
 	-DGLADE_DATADIR=\""$(Gladedir)"\"		\
-	$(GNOME_INCLUDEDIR)				\
-	$(BG_CAPPLET_CFLAGS)				\
+	@BG_CAPPLET_CFLAGS@				\
 	-I$(top_srcdir)/				\
 	-I$(top_srcdir)/intl
 
@@ -34,4 +33,4 @@ background_properties_capplet_SOURCES = \
 	main.c
 
 background_properties_capplet_LDADD = \
-	$(GNOME_LIBDIR)	$(BG_CAPPLET_LIBS)
+	@BG_CAPPLET_LIBS@

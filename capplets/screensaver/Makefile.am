@@ -20,7 +20,7 @@ INCLUDES = \
 	-DGNOME_ICONDIR=\""${prefix}/share/pixmaps"\" \
 	-DSSPROP_DATADIR=\""${prefix}/share"\" \
 	-DG_LOG_DOMAIN=\"screensaver-properties\" \
-	$(CAPPLET_CFLAGS) \
+	@CAPPLET_CFLAGS@ \
 	-I$(top_srcdir)/ \
 	-I$(top_srcdir)/intl
 
@@ -40,4 +40,4 @@ screensaver_properties_capplet_SOURCES = \
 	XScreenSaver_ad.h \
 	main.c
 
-screensaver_properties_capplet_LDADD = $(CAPPLET_LIBS) -lXt
+screensaver_properties_capplet_LDADD = @CAPPLET_LIBS@ -lXt
