@@ -16,6 +16,7 @@ libcommon_la_SOURCES = \
 	capplet-util.c			capplet-util.h			\
 	gconf-property-editor.c		gconf-property-editor.h		\
 	gconf-property-editor-marshal.c	gconf-property-editor-marshal.h \
+	file-transfer-dialog.c		file-transfer-dialog.h		\
 	theme-common.c			theme-common.h
 
 libcommon_la_LIBADD = $(top_builddir)/libbackground/libbackground.la
