@@ -301,14 +301,13 @@ service_edit_dialog_finalize (GObject *object)
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
-GtkWidget *
+GObject *
 service_edit_dialog_new (GtkTreeModel *model, ServiceInfo *info) 
 {
-	GObject *res = g_object_new (service_edit_dialog_get_type (),
+	return g_object_new (service_edit_dialog_get_type (),
 			     "model", model,
 			     "service-info", info,
 			     NULL);
-	return GTK_WIDGET (res);
 }
 
 GtkWidget *

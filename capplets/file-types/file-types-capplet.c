@@ -48,7 +48,7 @@ add_mime_cb (GtkButton *button, GladeXML *dialog)
 {
 	GtkTreeView     *treeview;
 	GtkTreeModel    *model;
-	GtkWidget	*add_dialog;
+	GObject		*add_dialog;
 
 	treeview = GTK_TREE_VIEW (WID ("mime_types_tree"));
 	model = gtk_tree_view_get_model (treeview);
@@ -71,7 +71,7 @@ add_service_cb (GtkButton *button, GladeXML *dialog)
 	add_dialog = service_add_dialog_new (model);
 }
 
-static GtkWidget *
+static GObject *
 launch_edit_dialog (GtkTreeModel *model, GtkTreeIter *iter) 
 {
 	ModelEntry *entry;
@@ -277,7 +277,6 @@ main (int argc, char **argv)
 	char const   *mime_type = NULL;
 	char const   *file_name = NULL;
 	GtkTreeModel *model;
-	GtkWidget    *mime_dialog;
 	GnomeProgram *program;
 	poptContext   popt_ctxt = 0;
 
@@ -303,11 +302,15 @@ main (int argc, char **argv)
 	}
 
 	if (mime_type == NULL) {
-		GladeXML *dialog = create_dialog ();
-		gtk_dialog_set_default_response (GTK_DIALOG (WID ("main_dialog")), GTK_RESPONSE_CLOSE);
-		mime_dialog = WID ("main_dialog");
+		GladeXML  *dialog = create_dialog ();
+		GtkWidget *mime_dialog = WID ("main_dialog");
+		gtk_dialog_set_default_response (GTK_DIALOG (mime_dialog),
+			GTK_RESPONSE_CLOSE);
+		capplet_set_icon (mime_dialog, "gnome-ccmime.png");
+		gtk_widget_show_all (mime_dialog);
 	} else {
 		MimeTypeInfo *info = NULL;
+		GObject *mime_dialog;
 
 		model = GTK_TREE_MODEL (mime_types_model_new (FALSE));
 		if (strcmp (GNOME_VFS_MIME_TYPE_UNKNOWN, mime_type)) {
@@ -315,12 +318,10 @@ main (int argc, char **argv)
 			mime_dialog = mime_edit_dialog_new (model, info);
 		} else
 			mime_dialog = mime_add_dialog_new (model, NULL, file_name);
-		g_signal_connect (G_OBJECT (mime_dialog),
+		g_signal_connect (mime_dialog,
 			"done", (GCallback) dialog_done_cb, info);
 	}
 
-        capplet_set_icon (mime_dialog, "gnome-ccmime.png");
-	gtk_widget_show_all (mime_dialog);
 	gtk_main ();
 
 	return 0;

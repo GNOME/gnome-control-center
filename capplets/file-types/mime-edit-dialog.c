@@ -31,11 +31,13 @@
 #include <libgnomevfs/gnome-vfs-application-registry.h>
 #include <libgnomevfs/gnome-vfs-utils.h>
 
+#include "capplet-util.h"
 #include "mime-edit-dialog.h"
 #include "mime-types-model.h"
 
 #include "libuuid/uuid.h"
 
+#undef WID(x)
 #define WID(x) (glade_xml_get_widget (dialog->p->dialog_xml, x))
 
 enum {
@@ -191,6 +193,7 @@ mime_edit_dialog_init (MimeEditDialog *dialog, MimeEditDialogClass *class)
 		 GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 		 GTK_STOCK_OK,     GTK_RESPONSE_OK,
 		 NULL);
+	capplet_set_icon (dialog->p->dialog_win, "gnome-ccmime.png");
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog->p->dialog_win),
 		 GTK_RESPONSE_OK);
 
@@ -363,17 +366,16 @@ mime_edit_dialog_finalize (GObject *object)
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
-GtkWidget *
+GObject *
 mime_edit_dialog_new (GtkTreeModel *model, MimeTypeInfo *info) 
 {
-	GObject *res = g_object_new (mime_edit_dialog_get_type (),
+	return g_object_new (mime_edit_dialog_get_type (),
 			     "model", model,
 			     "mime-type-info", info,
 			     NULL);
-	return GTK_WIDGET (res);
 }
 
-GtkWidget *
+GObject *
 mime_add_dialog_new (GtkTreeModel *model, GtkWindow *parent,
 		     char const *file_name) 
 {
@@ -409,7 +411,7 @@ mime_add_dialog_new (GtkTreeModel *model, GtkWindow *parent,
 		}
 	}
 
-	return GTK_WIDGET (dialog);
+	return dialog;
 }
 
 static void
