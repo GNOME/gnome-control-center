@@ -1,3 +1,14 @@
+2005-01-09  Rodney Dawes  <dobey@novell.com>
+
+	* gnome-wp-capplet.[ch] (gnome_wp_update_preview): Add new callback
+	routine for when the preview widget in the file chooser needs an update
+	(wallpaper_properties_init): Set the preview widget in the file chooser
+	to a GtkImage object and connect to the update-preview signal for when
+	the selected file changes
+	- Based on patch from Sebastien Bacher <seb128@debian.org>
+
+	Fixes #139714
+
 2005-01-08  Rodney Dawes  <dobey@novell.com>
 
 	* gnome-wp-capplet.c (wallpaper_properties_init): Preload the directory

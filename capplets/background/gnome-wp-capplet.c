@@ -896,6 +896,34 @@ static void set_accessible_name (GtkWidget *widget, const gchar *name) {
   if (name)
     atk_object_set_name (obj, name);
 } 
+
+static void gnome_wp_update_preview (GtkFileChooser *chooser,
+				     GnomeWPCapplet *capplet) {
+  gchar *uri;
+
+  uri = gtk_file_chooser_get_preview_uri (chooser);
+
+  if (uri) {
+    GdkPixbuf *pixbuf;
+    gchar *mime_type;
+
+    mime_type = gnome_vfs_get_mime_type (uri);
+    pixbuf = gnome_thumbnail_factory_generate_thumbnail (capplet->thumbs,
+							 uri,
+							 mime_type);
+
+    if(pixbuf != NULL) {
+      gtk_image_set_from_pixbuf (GTK_IMAGE (capplet->image), pixbuf);
+      g_object_unref (pixbuf);
+    } else {
+      gtk_image_set_from_stock (GTK_IMAGE (capplet->image),
+				"gtk-dialog-question",
+				GTK_ICON_SIZE_DIALOG);
+    }
+    g_free (mime_type);
+  }
+  gtk_file_chooser_set_preview_widget_active (chooser, TRUE);
+}
   
 static void wallpaper_properties_init (poptContext ctx) {
   GnomeWPCapplet * capplet;
@@ -1242,6 +1270,19 @@ static void wallpaper_properties_init (poptContext ctx) {
 						  NULL);
   gtk_file_chooser_set_select_multiple (GTK_FILE_CHOOSER (capplet->filesel),
 					TRUE);
+
+  gtk_file_chooser_set_use_preview_label (GTK_FILE_CHOOSER (capplet->filesel),
+					  FALSE);
+
+  capplet->image = gtk_image_new ();
+  gtk_file_chooser_set_preview_widget (GTK_FILE_CHOOSER (capplet->filesel),
+				       capplet->image);
+  gtk_widget_set_size_request (capplet->image, 128, -1);
+  
+  gtk_widget_show (capplet->image);
+
+  g_signal_connect (capplet->filesel, "update-preview",
+		    G_CALLBACK (gnome_wp_update_preview), capplet);
 }
 
 gint main (gint argc, gchar *argv[]) {

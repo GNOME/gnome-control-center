@@ -87,6 +87,7 @@ struct _GnomeWPCapplet {
 
   /* File Chooser Dialog */
   GtkWidget * filesel;
+  GtkWidget * image;
 };
 
 typedef enum {
