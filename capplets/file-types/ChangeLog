@@ -1,3 +1,9 @@
+2002-04-30  Jody Goldberg <jody@gnome.org>
+
+	http://bugzilla.gnome.org/show_bug.cgi?id=80327
+	* service-edit-dialog.c (program_changed_cb) : Doh! If the current
+	tree selection is not a service then the app can be null.
+
 2002-04-26  Jody Goldberg <jody@gnome.org>
 
 	* service-edit-dialog.c (populate_app_list) : always populate the

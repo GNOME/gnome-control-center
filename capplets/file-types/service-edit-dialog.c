@@ -553,6 +553,7 @@ program_changed_cb (ServiceEditDialog *dialog, GtkOptionMenu *option_menu)
 	GtkMenuShell *menu;
 	GnomeVFSMimeApplication *app;
 	GList *child;
+	gboolean requires_terminal = FALSE;
 
 	menu = GTK_MENU_SHELL (gtk_option_menu_get_menu (option_menu));
 	id = gtk_option_menu_get_history (option_menu);
@@ -571,12 +572,17 @@ program_changed_cb (ServiceEditDialog *dialog, GtkOptionMenu *option_menu)
 	app = g_object_get_data (G_OBJECT (child->data), "app");
 	if (app == NULL) 
 		app = dialog->p->info->app;
-	if (app->command != NULL)
-		gnome_file_entry_set_filename (GNOME_FILE_ENTRY (WID ("custom_program_entry")),
-			app->command);
+
+	if (app != NULL) {
+		requires_terminal = app->requires_terminal;
+		if (app->command != NULL)
+			gnome_file_entry_set_filename (
+				GNOME_FILE_ENTRY (WID ("custom_program_entry")),
+				app->command);
+	}
 
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("needs_terminal_toggle")),
-		app->requires_terminal);
+		requires_terminal);
 }
 
 static void
