@@ -85,6 +85,8 @@ mime_type_info_new (const gchar *mime_type, GtkTreeModel *model)
 		info->mime_type = g_strdup (mime_type);
 
 		mime_type_info_set_category_name (info, get_category_name (mime_type), get_category_description (mime_type), model);
+
+		mime_type_info_get_icon (info);
 	} else {
 		info->entry.parent = get_model_entries (model);
 	}
