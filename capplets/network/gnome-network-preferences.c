@@ -83,9 +83,6 @@ setup_dialog (GladeXML *dialog)
 	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_string (
 			NULL, AUTH_PASSWD_KEY, WID ("passwd_entry"), NULL));
 
-	/* FIXME: remove when I fix libglade */
-	gtk_entry_set_invisible_char (GTK_ENTRY (WID ("passwd_entry")), '*');
-
 	g_signal_connect (WID ("network_dialog"), "response",
 			  G_CALLBACK (cb_dialog_response), NULL);
 }
