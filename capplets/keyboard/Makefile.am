@@ -1,4 +1,4 @@
-Applicationsdir = $(datadir)/control-center/Desktop
+Applicationsdir = $(datadir)/control-center/capplets
 Applications_DATA = \
 	keyboard-properties.desktop
 

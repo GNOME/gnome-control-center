@@ -1,4 +1,4 @@
-Applicationsdir = $(datadir)/control-center/capplets/Desktop
+Applicationsdir = $(datadir)/control-center/capplets
 Applications_DATA = \
 	sound-properties.desktop
 

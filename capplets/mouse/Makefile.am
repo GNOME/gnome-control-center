@@ -4,7 +4,7 @@ pixmap_DATA = \
 	mouse-left.png	\
 	mouse-right.png
 
-Applicationsdir = $(datadir)/control-center/Desktop
+Applicationsdir = $(datadir)/control-center/capplets
 Applications_DATA = \
 	mouse-properties.desktop
 
