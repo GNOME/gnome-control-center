@@ -35,8 +35,17 @@
 
 static GtkWidget * previewWindow = NULL;
 
+static gboolean click_on_X (GtkWidget *widget,
+                            GdkEvent *event,
+                            GladeXML *dialog)
+{
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("enable_preview")), FALSE);
+  /* stop processing! */
+  return TRUE;
+}
+
 static void
-init_preview ( void )
+init_preview (GladeXML * dialog)
 {
   GtkWidget *kbdraw = keyboard_drawing_new ();
 
@@ -53,6 +62,8 @@ init_preview ( void )
   keyboard_drawing_set_track_config (KEYBOARD_DRAWING (kbdraw), TRUE);
   gtk_container_add (GTK_CONTAINER (previewWindow), kbdraw);
 
+  g_signal_connect (G_OBJECT (previewWindow), "delete-event",
+                    G_CALLBACK (click_on_X), dialog);
 }
 
 void
@@ -61,7 +72,7 @@ preview_toggled (GladeXML * dialog, GtkWidget * button)
   gboolean doShow = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
   
   if (doShow && previewWindow == NULL)
-    init_preview();
+    init_preview (dialog);
 
   if (doShow)
     gtk_widget_show_all (previewWindow);
