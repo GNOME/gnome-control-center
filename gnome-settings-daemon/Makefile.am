@@ -1,7 +1,9 @@
 INCLUDES=$(GNOME_SETTINGS_DAEMON_CFLAGS) -I$(top_srcdir)/libbackground -I$(top_srcdir)
 
-gnome_settings_daemon_SOURCES =		\
-		gnome-settings-daemon.h		\
+bin_PROGRAMS=gnome2-settings-daemon
+
+gnome2_settings_daemon_SOURCES =	\
+	gnome-settings-daemon.h		\
 	gnome-settings-daemon.c		\
 	gnome-settings-mouse.h		\
 	gnome-settings-mouse.c		\
@@ -20,9 +22,7 @@ gnome_settings_daemon_SOURCES =		\
 	xsettings-common.h		\
 	xsettings-manager.h
 
-bin_PROGRAMS=gnome-settings-daemon
-
-gnome_settings_daemon_LDADD = \
+gnome2_settings_daemon_LDADD = \
 	$(GNOME_SETTINGS_DAEMON_LIBS)			\
 	$(top_builddir)/libbackground/libbackground.a	\
 	$(top_builddir)/libsounds/libsounds.a		\

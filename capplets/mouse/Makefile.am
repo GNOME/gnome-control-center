@@ -1,7 +1,7 @@
-bin_PROGRAMS = gnome-mouse-properties
+bin_PROGRAMS = gnome2-mouse-properties
 
-gnome_mouse_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
-gnome_mouse_properties_SOURCES = gnome-mouse-properties.c
+gnome2_mouse_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
+gnome2_mouse_properties_SOURCES = gnome-mouse-properties.c
 
 @INTLTOOL_DESKTOP_RULE@
 

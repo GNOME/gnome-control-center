@@ -33,9 +33,9 @@ INCLUDES = 							\
 	-I/gnome/head/INSTALL/include/gnome-desktop-2.0	\
 	@GNOMECC_CFLAGS@	
 
-bin_PROGRAMS = gnomecc
+bin_PROGRAMS = gnome2-control-center
 
-gnomecc_SOURCES = \
+gnome2_control_center_SOURCES = \
 	main.c						\
 	capplet-dir.c 		capplet-dir.h 		\
 	capplet-dir-view.c	capplet-dir-view.h	\
@@ -43,7 +43,7 @@ gnomecc_SOURCES = \
 	capplet-dir-view-tree.c				\
 	capplet-dir-view-list.c
 
-gnomecc_LDADD = \
+gnome2_control_center_LDADD = \
 	@GNOMECC_LIBS@ \
 	-lgnome-desktop-2
 

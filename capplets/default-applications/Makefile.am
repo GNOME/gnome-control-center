@@ -1,7 +1,7 @@
-bin_PROGRAMS = gnome-default-applications-properties
+bin_PROGRAMS = gnome2-default-applications-properties
 
-gnome_default_applications_properties_LDADD = @OLD_CAPPLET_LIBS@
-gnome_default_applications_properties_SOURCES = \
+gnome2_default_applications_properties_LDADD = @OLD_CAPPLET_LIBS@
+gnome2_default_applications_properties_SOURCES = \
 	default-application-properties.c 	\
 	interface.c		interface.h 	\
 	callbacks.c		callbacks.h 	\

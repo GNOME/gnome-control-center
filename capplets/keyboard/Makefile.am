@@ -1,7 +1,7 @@
-bin_PROGRAMS = gnome-keyboard-properties
+bin_PROGRAMS = gnome2-keyboard-properties
 
-gnome_keyboard_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
-gnome_keyboard_properties_SOURCES = gnome-keyboard-properties.c
+gnome2_keyboard_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
+gnome2_keyboard_properties_SOURCES = gnome-keyboard-properties.c
 
 @INTLTOOL_DESKTOP_RULE@
 
