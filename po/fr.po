@@ -11,15 +11,16 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: control-center 2.3.5\n"
+"Project-Id-Version: control-center 2.5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-11-12 15:42-0500\n"
-"PO-Revision-Date: 2003-08-17 12:47+0200\n"
+"POT-Creation-Date: 2003-11-21 00:33+0100\n"
+"PO-Revision-Date: 2003-11-21 00:12+0100\n"
 "Last-Translator: Christophe Merlet (RedFox) <redfox@redfoxcenter.org>\n"
 "Language-Team: Gnome French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n>1;\n"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
 msgid "<b>Applications</b>"
@@ -122,7 +123,7 @@ msgid "Import Feature Settings File"
 msgstr "Importer le fichier de réglages des fonctionnalités"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Clavier"
@@ -274,7 +275,7 @@ msgstr ""
 "modificateur de touche en séquence."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "S_peed:"
 msgstr "_Vitesse :"
 
@@ -303,7 +304,7 @@ msgid "_Only accept keys held for:"
 msgstr "_N'accepter que les touches enfoncées pendant au moins :"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "_Type to test settings:"
 msgstr "_Saisissez pour tester les réglages :"
 
@@ -331,8 +332,10 @@ msgstr "millisecondes"
 msgid "pixels/second"
 msgstr "pixels/seconde"
 
+#. set the timeout value  label with correct value of timeout
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
 #: capplets/mouse/gnome-mouse-properties.c:133
+#: capplets/mouse/gnome-mouse-properties.c:578
 #: capplets/mouse/gnome-mouse-properties.glade.h:27
 #: capplets/windows/gnome-window-properties.glade.h:7
 msgid "seconds"
@@ -384,8 +387,8 @@ msgstr "_Aucune image"
 #: capplets/background/background-properties-capplet.c:559
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:730
-#: capplets/keyboard/gnome-keyboard-properties.c:218
-#: capplets/mouse/gnome-mouse-properties.c:806
+#: capplets/keyboard/gnome-keyboard-properties.c:222
+#: capplets/mouse/gnome-mouse-properties.c:812
 #: capplets/sound/sound-properties-capplet.c:212
 msgid "Retrieve and store legacy settings"
 msgstr "Récupérer et enregistrer une configuration antérieure"
@@ -1146,9 +1149,8 @@ msgid "Add _Service..."
 msgstr "Ajouter un _service..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
-#, fuzzy
 msgid "Browse icons"
-msgstr "secondes"
+msgstr "Parcourir les icônes"
 
 #: capplets/file-types/file-types-properties.glade.h:6
 msgid "C_hoose..."
@@ -1438,19 +1440,16 @@ msgid "<b>Font Rendering</b>"
 msgstr "<b>Rendu des polices</b>"
 
 #: capplets/font/font-properties.glade.h:3
-#, fuzzy
 msgid "<b>Hinting</b>:"
-msgstr "Hinting :"
+msgstr "<b>Hinting :</b>"
 
 #: capplets/font/font-properties.glade.h:4
-#, fuzzy
 msgid "<b>Smoothing</b>:"
-msgstr "Lissage :"
+msgstr "<b>Lissage :</b>"
 
 #: capplets/font/font-properties.glade.h:5
-#, fuzzy
 msgid "<b>Subpixel order</b>:"
-msgstr "Ordre souspixel :"
+msgstr "<b>Ordre souspixel :</b>"
 
 #: capplets/font/font-properties.glade.h:6
 msgid "Best _shapes"
@@ -1477,16 +1476,14 @@ msgid "G_rayscale"
 msgstr "_Niveaux de gris"
 
 #: capplets/font/font-properties.glade.h:12
-#, fuzzy
 msgid "Go _to font folder"
-msgstr "Va au dossier de polices"
+msgstr "A_ller au dossier des polices"
 
 #: capplets/font/font-properties.glade.h:13
 msgid "N_one"
 msgstr "_Aucun"
 
 #: capplets/font/font-properties.glade.h:14
-#, fuzzy
 msgid "R_esolution :"
 msgstr "_Résolution :"
 
@@ -1570,13 +1567,12 @@ msgid "_Window title font:"
 msgstr "Police du titre des _fenêtres :"
 
 #: capplets/font/font-properties.glade.h:34
-#, fuzzy
 msgid "dots per inch"
-msgstr "Résolution (_points par pouce) :"
+msgstr "points par pouce"
 
 #: capplets/font/main.c:506 capplets/font/main.c:511
 msgid "Font may be too large"
-msgstr ""
+msgstr "La police peut être trop grande"
 
 #: capplets/font/main.c:507
 #, c-format
@@ -1585,6 +1581,9 @@ msgid ""
 "effectively use the computer.  It is recommended that you select a size "
 "smaller than %d."
 msgstr ""
+"La police sélectionnée fait %d points de large et il peut être difficile de "
+"l'utiliser efficacement sur l'ordinateur.  Il est recommandé de sélectionner "
+"une taille inférieure à %d."
 
 #: capplets/font/main.c:512
 #, c-format
@@ -1593,59 +1592,67 @@ msgid ""
 "effectively use the computer.  It is recommended that you select a smaller "
 "sized font."
 msgstr ""
+"La police sélectionnée fait %d points de large et il peut être difficile de "
+"l'utiliser efficacement sur l'ordinateur.  Il est recommandé de sélectionner "
+"une taille plus petite."
 
-#: capplets/keybindings/eggcellrendererkeys.c:160
 #: capplets/keybindings/eggcellrendererkeys.c:161
+#: capplets/keybindings/eggcellrendererkeys.c:162
 msgid "Accelerator key"
 msgstr "Touche d'accélération"
 
-#: capplets/keybindings/eggcellrendererkeys.c:170
 #: capplets/keybindings/eggcellrendererkeys.c:171
+#: capplets/keybindings/eggcellrendererkeys.c:172
 msgid "Accelerator modifiers"
 msgstr "Modificateurs d'accélération"
 
 #: capplets/keybindings/eggcellrendererkeys.c:180
+#: capplets/keybindings/eggcellrendererkeys.c:181
+msgid "Accelerator keycode"
+msgstr "Code de la touche d'accélération"
+
+#: capplets/keybindings/eggcellrendererkeys.c:191
 msgid "Accel Mode"
 msgstr "Mode d'accélération"
 
-#: capplets/keybindings/eggcellrendererkeys.c:181
+#: capplets/keybindings/eggcellrendererkeys.c:192
 msgid "The type of accelerator."
 msgstr "Le type de l'accélération."
 
-#: capplets/keybindings/eggcellrendererkeys.c:219
-#: capplets/keybindings/gnome-keybinding-properties.c:204
+#: capplets/keybindings/eggcellrendererkeys.c:240
+#: capplets/keybindings/gnome-keybinding-properties.c:207
 #: libbackground/applier.c:588 typing-break/drwright.c:448
 msgid "Disabled"
 msgstr "Désactivé"
 
-#: capplets/keybindings/eggcellrendererkeys.c:330
-#: capplets/keybindings/eggcellrendererkeys.c:563
+#: capplets/keybindings/eggcellrendererkeys.c:359
+#: capplets/keybindings/eggcellrendererkeys.c:599
 msgid "Type a new accelerator, or press Backspace to clear"
 msgstr ""
 "Saisissez un nouvel accélérateur, ou appuyez sur le bouton d'effacement pour "
 "libérer le champ"
 
-#: capplets/keybindings/eggcellrendererkeys.c:566
+#: capplets/keybindings/eggcellrendererkeys.c:602
 msgid "Type a new accelerator"
 msgstr "Saisissez un nouvel accélérateur"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:172
+#: capplets/keybindings/gnome-keybinding-properties.c:174
 msgid "GNOME Default"
 msgstr "Valeurs par défaut de GNOME"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:540
+#: capplets/keybindings/gnome-keybinding-properties.c:549
 msgid "<Unknown Action>"
 msgstr "<Action inconnue>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:559
+#: capplets/keybindings/gnome-keybinding-properties.c:568
 msgid "Desktop"
 msgstr "Bureau"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:563
+#: capplets/keybindings/gnome-keybinding-properties.c:572
 msgid "Window Management"
 msgstr "Gestion des fenêtres"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:698
+#: capplets/keybindings/gnome-keybinding-properties.c:709
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1654,14 +1661,21 @@ msgstr ""
 "Le raccourci « %s » est déjà utilisé pour :\n"
 " « %s »\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:729
+#: capplets/keybindings/gnome-keybinding-properties.c:740
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 "Erreur lors de la définition du nouvel accélérateur dans la base de données "
 "de configuration : %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:880
+#: capplets/keybindings/gnome-keybinding-properties.c:790
+#, c-format
+msgid "Error unsetting accelerator in configuration database: %s\n"
+msgstr ""
+"Erreur lors de la suppression de l'accélérateur dans la base de données de "
+"configuration : %s\n"
+
+#: capplets/keybindings/gnome-keybinding-properties.c:939
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1669,11 +1683,11 @@ msgstr ""
 "Impossible de trouver un seul thème de clavier.  Cela veut dire que votre "
 "installation de GTK+ est vraisemblablement incomplète."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:902
+#: capplets/keybindings/gnome-keybinding-properties.c:961
 msgid "Action"
 msgstr "Action"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:921
+#: capplets/keybindings/gnome-keybinding-properties.c:985
 msgid "Shortcut"
 msgstr "Raccourci"
 
@@ -1698,17 +1712,17 @@ msgstr "Raccourcis d'édition de _texte :"
 msgid "Assign shortcut keys to commands"
 msgstr "Affecte des raccourcis claviers aux commandes"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:104
+#: capplets/keyboard/gnome-keyboard-properties.c:106
 #, c-format
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Il y a eu une erreur lors du lancement de la capplet clavier : %s"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:195
+#: capplets/keyboard/gnome-keyboard-properties.c:199
 msgid "_Accessibility"
 msgstr "A_ccessibilité"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:214
-#: capplets/keyboard/gnome-keyboard-properties.c:216
+#: capplets/keyboard/gnome-keyboard-properties.c:218
+#: capplets/keyboard/gnome-keyboard-properties.c:220
 #: capplets/sound/sound-properties-capplet.c:208
 #: capplets/sound/sound-properties-capplet.c:210
 msgid ""
@@ -1717,7 +1731,7 @@ msgstr ""
 "Appliquer les paramètres et quitter (pour compatibilité uniquement; "
 "maintenant géré par un daemon)"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:220
+#: capplets/keyboard/gnome-keyboard-properties.c:224
 msgid "Start the page with the typing break settings showing"
 msgstr "Démarrer la page en affichant les réglages de pause de saisie"
 
@@ -1750,66 +1764,90 @@ msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Lent</i></small>"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+msgid "Advanced Layout Options"
+msgstr "Options avancées d'agencement"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "All_ow postponing of breaks"
 msgstr "_Autoriser le report des pauses"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Check if breaks are allowed to be postponed"
 msgstr "Vérifier si il est autorisé de reporter les pauses"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+msgid "Core Layout Configuration"
+msgstr "Configuration principal de l'agencement"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Cursor _blinks in text boxes and fields"
 msgstr "_Le curseur clignote dans les champs et boîtes de texte"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
 msgid "Duration of the break when typing is disallowed"
 msgstr "Durée de la pause lorsque la saisie est désactivée"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "Duration of work before forcing a break"
 msgstr "Durée de travail avant de forcer une pause"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
 msgid "Key presses _repeat when key is held down"
 msgstr "_Répétition lorsqu'une touche est maintenue enfoncée"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "Keyboard Preferences"
 msgstr "Propriétés du clavier"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
+msgid "Keyboard _model:"
+msgstr "_Modèle du clavier :"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+msgid "Layout _options:"
+msgstr "_Options de l'agencement :"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
 msgstr ""
-"Verrouiller l'écran aprés une certaine durée pour aider à prévenir des maux "
+"Verrouiller l'écran après une certaine durée pour aider à prévenir des maux "
 "causer par une utilisation répétitive du clavier"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid "Typing Break"
 msgstr "Pause de saisie"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "_Accessibility..."
 msgstr "_Accessibilité..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
 msgid "_Break interval lasts:"
 msgstr "Intervalle de _pause se termine :"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "_Delay:"
 msgstr "_Délai :"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
+msgid "_Ignore system configuration"
+msgstr "_Ignorer la configuration du système"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
+msgid "_Layouts:"
+msgstr "_Agencements :"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:30
 msgid "_Speed:"
 msgstr "_Vitesse :"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:32
 msgid "_Work interval lasts:"
 msgstr "Intervalle de _travail se termine :"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:33
 msgid "minutes"
 msgstr "minutes"
 
@@ -1821,63 +1859,63 @@ msgstr "Règle les paramètres de votre clavier"
 msgid "Unknown Cursor"
 msgstr "Curseur inconnu"
 
-#: capplets/mouse/gnome-mouse-properties.c:602
+#: capplets/mouse/gnome-mouse-properties.c:613
 msgid "Default Cursor - Current"
 msgstr "Curseur par défaut - Courant"
 
-#: capplets/mouse/gnome-mouse-properties.c:602
-#: capplets/mouse/gnome-mouse-properties.c:605
+#: capplets/mouse/gnome-mouse-properties.c:613
+#: capplets/mouse/gnome-mouse-properties.c:616
 msgid "The default cursor that ships with X"
 msgstr "Le curseur par défaut livré avec X"
 
-#: capplets/mouse/gnome-mouse-properties.c:605
+#: capplets/mouse/gnome-mouse-properties.c:616
 msgid "Default Cursor"
 msgstr "Curseur par défaut"
 
-#: capplets/mouse/gnome-mouse-properties.c:623
+#: capplets/mouse/gnome-mouse-properties.c:634
 msgid "White Cursor - Current"
 msgstr "Curseur blanc - Courant"
 
-#: capplets/mouse/gnome-mouse-properties.c:623
-#: capplets/mouse/gnome-mouse-properties.c:626
+#: capplets/mouse/gnome-mouse-properties.c:634
+#: capplets/mouse/gnome-mouse-properties.c:637
 msgid "The default cursor inverted"
 msgstr "Le curseur par défaut inversé"
 
-#: capplets/mouse/gnome-mouse-properties.c:626
+#: capplets/mouse/gnome-mouse-properties.c:637
 msgid "White Cursor"
 msgstr "Curseur blanc"
 
-#: capplets/mouse/gnome-mouse-properties.c:645
+#: capplets/mouse/gnome-mouse-properties.c:656
 msgid "Large Cursor - Current"
 msgstr "Grand curseur - Courant"
 
-#: capplets/mouse/gnome-mouse-properties.c:645
-#: capplets/mouse/gnome-mouse-properties.c:648
+#: capplets/mouse/gnome-mouse-properties.c:656
+#: capplets/mouse/gnome-mouse-properties.c:659
 msgid "Large version of normal cursor"
 msgstr "Version agrandie du curseur normal"
 
-#: capplets/mouse/gnome-mouse-properties.c:648
+#: capplets/mouse/gnome-mouse-properties.c:659
 msgid "Large Cursor"
 msgstr "Grand curseur"
 
-#: capplets/mouse/gnome-mouse-properties.c:667
+#: capplets/mouse/gnome-mouse-properties.c:678
 msgid "Large White Cursor - Current"
 msgstr "Grand curseur blanc - Courant"
 
-#: capplets/mouse/gnome-mouse-properties.c:667
-#: capplets/mouse/gnome-mouse-properties.c:670
+#: capplets/mouse/gnome-mouse-properties.c:678
+#: capplets/mouse/gnome-mouse-properties.c:681
 msgid "Large version of white cursor"
 msgstr "Version agrandie du curseur blanc"
 
-#: capplets/mouse/gnome-mouse-properties.c:670
+#: capplets/mouse/gnome-mouse-properties.c:681
 msgid "Large White Cursor"
 msgstr "Grand curseur blanc"
 
-#: capplets/mouse/gnome-mouse-properties.c:747
+#: capplets/mouse/gnome-mouse-properties.c:753
 msgid "Cursor Size"
 msgstr "Taille du curseur"
 
-#: capplets/mouse/gnome-mouse-properties.c:756
+#: capplets/mouse/gnome-mouse-properties.c:762
 msgid "Cursor Theme"
 msgstr "Thème du curseur"
 
@@ -2462,7 +2500,7 @@ msgstr "_Intervalle avant mise en avant :"
 
 #: capplets/windows/gnome-window-properties.glade.h:5
 msgid "_Raise selected windows after an interval"
-msgstr "_Mettre en avant la fenêtre sélectionnée aprés un intervalle"
+msgstr "_Mettre en avant la fenêtre sélectionnée après un intervalle"
 
 #: capplets/windows/gnome-window-properties.glade.h:6
 msgid "_Select windows when the mouse moves over them"
@@ -2631,7 +2669,7 @@ msgstr "Impossible de charger le fichier %s comme échantillon %s"
 msgid "Cannot determine user's home directory"
 msgstr "Impossible de déterminer le dossier personnel de l'utilisateur"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:202
+#: gnome-settings-daemon/gnome-settings-xsettings.c:204
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "La clé GConf %s est définie au type %s mais le type attendu est %s\n"
@@ -2850,10 +2888,10 @@ msgid "/_Take a Break"
 msgstr "/_Faites une pause"
 
 #: typing-break/drwright.c:466
-#, fuzzy, c-format
+#, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
-msgstr[0] "%d minutes avant la prochaine pause"
+msgstr[0] "%d minute avant la prochaine pause"
 msgstr[1] "%d minutes avant la prochaine pause"
 
 #: typing-break/drwright.c:470
@@ -3248,9 +3286,6 @@ msgstr "Doit-on faire des vignettes pour les thèmes ?"
 
 #~ msgid "Clic_k on keypress"
 #~ msgstr "_Clic au pressage de touche"
-
-#~ msgid "Keyboard Bell"
-#~ msgstr "Clic du clavier"
 
 #~ msgid "Keypress Click"
 #~ msgstr "Clic au pressage de touche"
