@@ -435,7 +435,7 @@ setup_dialog (GladeXML *dialog)
   GObject *peditor;
 
   client = gconf_client_get_default ();
-
+	  
   gconf_client_add_dir (client, "/desktop/gnome/interface", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
   gconf_client_add_dir (client, "/apps/nautilus/preferences", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
   gconf_client_add_dir (client, METACITY_DIR, GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
@@ -670,7 +670,10 @@ cb_details_response (GtkDialog *dialog, gint response_id)
 		capplet_help (GTK_WINDOW (dialog),
 			      "wgoscustdesk.xml",
 			      "goscustdesk-38");
-	else
+	else if (response_id == 1) {
+		/* "Go to font folder" was clicked */
+		g_spawn_command_line_async ("nautilus --no-desktop fonts:///", NULL);
+	} else
 		gtk_widget_hide (GTK_WIDGET (dialog));
 }
 
@@ -684,8 +687,16 @@ cb_show_details (GtkWidget *button,
 		GConfClient *client = gconf_client_get_default ();
 		GladeXML *dialog = glade_xml_new (GLADEDIR "/font-properties.glade", "render_details", NULL);
 		GtkWidget *dpi_spinner;
+		GnomeVFSURI *uri;
 
 		details_dialog = WID ("render_details");
+		uri = gnome_vfs_uri_new ("fonts:///");
+		if (uri == NULL) {
+			gtk_widget_hide (WID ("go_to_font_button"));
+		} else {
+			gnome_vfs_uri_unref (uri);
+			gtk_widget_show (WID ("go_to_font_button"));
+		}
 
 		gtk_window_set_transient_for (GTK_WINDOW (details_dialog), parent);
 
