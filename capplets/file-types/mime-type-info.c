@@ -125,7 +125,7 @@ mime_type_info_load_all (MimeTypeInfo *info)
 		info->default_component = gnome_vfs_mime_get_default_component (info->mime_type);
 
 	if (!info->use_cat_loaded) {
-		tmp1 = gnome_vfs_mime_get_value (info->mime_type, "use-category");
+		tmp1 = gnome_vfs_mime_get_value (info->mime_type, "use_category_default");
 
 		if (tmp1 != NULL && !strcmp (tmp1, "yes"))
 			info->use_category = TRUE;
@@ -287,7 +287,7 @@ mime_type_info_save (const MimeTypeInfo *info)
 	gnome_vfs_mime_set_value (info->mime_type, "category", tmp);
 	g_free (tmp);
 
-	gnome_vfs_mime_set_value (info->mime_type, "use-category", info->use_category ? "yes" : "no");
+	gnome_vfs_mime_set_value (info->mime_type, "use_category_default", info->use_category ? "yes" : "no");
 }
 
 void

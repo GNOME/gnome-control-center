@@ -1,5 +1,18 @@
 2002-01-27  Bradford Hovinen  <hovinen@ximian.com>
 
+	* file-types-capplet.c (dialog_done_cb): Implement
+	(main): Connect to dialog_done_cb
+
+	* mime-edit-dialog.c (mime_edit_dialog_class_init): Add done
+	signal
+	(response_cb): Emite done signal
+
+	* mime-type-info.c (mime_type_info_save, mime_type_info_load_all):
+	Change use-category to use_category_default
+
+	* file-types-capplet.c (main): Accept command line argument with
+	the MIME type
+
 	* service-info.c (service_info_load_all): Always set run_program
 	to TRUE
 

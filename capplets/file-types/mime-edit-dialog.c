@@ -37,6 +37,11 @@
 #define WID(x) (glade_xml_get_widget (dialog->p->dialog_xml, x))
 
 enum {
+	DONE,
+	LAST_SIGNAL
+};
+
+enum {
 	PROP_0,
 	PROP_MODEL,
 	PROP_INFO,
@@ -59,6 +64,8 @@ struct _MimeEditDialogPrivate
 	gboolean      custom_action            : 1;
 	gboolean      use_cat_dfl              : 1;
 };
+
+static guint dialog_signals[LAST_SIGNAL];
 
 static GObjectClass *parent_class;
 
@@ -211,6 +218,14 @@ mime_edit_dialog_class_init (MimeEditDialogClass *class)
 				       _("True if this dialog is for adding a MIME type"),
 				       FALSE,
 				       G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+
+	dialog_signals[DONE] =
+		g_signal_new ("done",
+			      G_TYPE_FROM_CLASS (object_class), 0,
+			      G_STRUCT_OFFSET (MimeEditDialogClass, done),
+			      NULL, NULL,
+			      (GSignalCMarshaller) g_cclosure_marshal_VOID__BOOLEAN,
+			      G_TYPE_NONE, 1, G_TYPE_BOOLEAN);
 
 	parent_class = G_OBJECT_CLASS
 		(g_type_class_ref (G_TYPE_OBJECT));
@@ -777,11 +792,14 @@ response_cb (MimeEditDialog *dialog, gint response_id)
 	if (response_id == GTK_RESPONSE_OK) {
 		if (validate_data (dialog)) {
 			store_data (dialog);
+			g_signal_emit (G_OBJECT (dialog), dialog_signals[DONE], 0, TRUE);
 			g_object_unref (G_OBJECT (dialog));
 		}
 	} else {
 		if (dialog->p->is_add)
 			mime_type_info_free (dialog->p->info);
+
+		g_signal_emit (G_OBJECT (dialog), dialog_signals[DONE], 0, FALSE);
 
 		g_object_unref (G_OBJECT (dialog));
 	}

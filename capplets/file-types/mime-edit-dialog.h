@@ -48,6 +48,8 @@ struct _MimeEditDialog
 struct _MimeEditDialogClass 
 {
 	GObjectClass g_object_class;
+
+	void (*done) (MimeEditDialog *dialog, gboolean ok);
 };
 
 GType mime_edit_dialog_get_type         (void);

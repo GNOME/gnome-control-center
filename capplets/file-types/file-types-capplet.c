@@ -245,22 +245,48 @@ apply_cb (void)
 	model_entry_commit_delete_list ();
 }
 
+static void
+dialog_done_cb (MimeEditDialog *dialog, gboolean done, MimeTypeInfo *info) 
+{
+	if (done)
+		mime_type_info_save (info);
+
+	gtk_main_quit ();
+}
+
 int
 main (int argc, char **argv) 
 {
-	GladeXML       *dialog;
+	GladeXML     *dialog;
+	gchar        *mime_type;
+	GtkTreeModel *model;
+	MimeTypeInfo *info = NULL;
+	GObject      *mime_dialog;
 
 	bindtextdomain (PACKAGE, GNOMELOCALEDIR);
 	bind_textdomain_codeset (PACKAGE, "UTF-8");
 	textdomain (PACKAGE);
 
+	if (argc >= 1)
+		mime_type = g_strdup (argv[1]);
+	else
+		mime_type = NULL;
+
 	gnome_program_init ("gnome-file-types-properties", VERSION, LIBGNOMEUI_MODULE, argc, argv, NULL);
 
-	dialog = create_dialog ();
+	if (mime_type == NULL) {
+		dialog = create_dialog ();
 
-	g_signal_connect (G_OBJECT (WID ("main_apply_button")), "clicked", (GCallback) apply_cb, NULL);
-	g_signal_connect (G_OBJECT (WID ("main_close_button")), "clicked", (GCallback) gtk_main_quit, NULL);
-	gtk_widget_show_all (WID ("main_dialog"));
+		g_signal_connect (G_OBJECT (WID ("main_apply_button")), "clicked", (GCallback) apply_cb, NULL);
+		g_signal_connect (G_OBJECT (WID ("main_close_button")), "clicked", (GCallback) gtk_main_quit, NULL);
+		gtk_widget_show_all (WID ("main_dialog"));
+	} else {
+		model = GTK_TREE_MODEL (mime_types_model_new (FALSE));
+		info = mime_type_info_new (mime_type, model);
+		mime_dialog = mime_edit_dialog_new (model, info);
+
+		g_signal_connect (mime_dialog, "done", (GCallback) dialog_done_cb, info);
+	}
 
 	gtk_main ();
 
