@@ -26,7 +26,8 @@
 
 /* edit-window.c: Mime capplet editor window */
 
-/*#include <libgnomevfs/gnome-vfs-mime-handlers.h>*/
+#include <gtk/gtk.h>
+#include <libgnomevfs/gnome-vfs-mime-handlers.h>
 
 #include "edit-window.h"
 #include "capplet-widget.h"
@@ -37,18 +38,14 @@ typedef struct {
 	GtkWidget *window;
 	GtkWidget *icon_entry;
 	GtkWidget *mime_type;
-	GtkWidget *regexp1_tag_label;
-	GtkWidget *regexp2_tag_label;
-	GtkWidget *regexp1_label;
-	GtkWidget *regexp2_label;
-        GtkWidget *ext_scroll;
+	GtkWidget *ext_scroll;
         GtkWidget *ext_clist;
         GtkWidget *ext_entry;
         GtkWidget *ext_add_button;
         GtkWidget *ext_remove_button;
         GtkWidget *application_menu;
         GtkWidget *component_menu;
-	char 	  *mime_string;
+	char 	  mime_string[256]; /* FIXME: Find out max length of mime string */
         GList 	  *tmp_ext[2];
 } edit_window;
 
@@ -56,9 +53,10 @@ static edit_window *main_win = NULL;
 static gboolean changing = TRUE;
 
 /* Local prototypes */
-static void populate_application_menu 	(GtkWidget *application_menu, const char *mime_string);
-static void populate_component_menu 	(GtkWidget *application_menu, const char *mime_string);
-
+static void 	 populate_application_menu (GtkWidget 	*application_menu,   	const char *mime_string);
+static void 	 populate_component_menu   (GtkWidget 	*application_menu,   	const char *mime_string);
+static void 	 application_menu_activate (GtkMenuItem *item, 		 	gpointer   user_data);
+static GtkWidget *show_file_selector 	   (const char  *title, 		gpointer   user_data);
 
 static void
 destruction_handler (GtkWidget *widget, gpointer data)
@@ -98,8 +96,9 @@ ext_entry_changed (GtkWidget *entry, gpointer data)
 	text = gtk_entry_get_text (GTK_ENTRY (entry));
 	gtk_widget_set_sensitive (main_win->ext_add_button, (strlen (text) >0));
 }
+
 static void
-ext_add (GtkWidget *widget, gpointer data)
+add_extension (GtkWidget *widget, gpointer data)
 {
         gchar *row[1];
 	gint rownumber;
@@ -115,8 +114,9 @@ ext_add (GtkWidget *widget, gpointer data)
 	        capplet_widget_state_changed (CAPPLET_WIDGET (capplet),
 					      TRUE);
 }
+
 static void
-ext_remove (GtkWidget *widget, gpointer data)
+remove_extension (GtkWidget *widget, gpointer data)
 {
         gint row;
 	gchar *text;
@@ -223,7 +223,7 @@ initialize_main_win ()
 	main_win->ext_add_button = gtk_button_new_with_label (_("Add"));
 	gtk_signal_connect (GTK_OBJECT (main_win->ext_add_button),
 			    "clicked",
-			    GTK_SIGNAL_FUNC (ext_add),
+			    GTK_SIGNAL_FUNC (add_extension),
 			    NULL);
 	gtk_box_pack_start (GTK_BOX (vbox3), main_win->ext_add_button, FALSE, FALSE, 0);
 	gtk_widget_set_sensitive (main_win->ext_add_button, FALSE);
@@ -231,7 +231,7 @@ initialize_main_win ()
 	main_win->ext_remove_button = gtk_button_new_with_label (_("Remove"));
 	gtk_signal_connect (GTK_OBJECT (main_win->ext_remove_button),
 			    "clicked",
-			    GTK_SIGNAL_FUNC (ext_remove),
+			    GTK_SIGNAL_FUNC (remove_extension),
 			    NULL);
 	gtk_widget_set_sensitive (main_win->ext_remove_button, FALSE);
 	gtk_box_pack_start (GTK_BOX (vbox3), main_win->ext_remove_button,
@@ -249,28 +249,12 @@ initialize_main_win ()
 			    NULL);
 	gtk_signal_connect (GTK_OBJECT (main_win->ext_entry),
 			    "activate",
-			    ext_add,
+			    add_extension,
 			    NULL);
 	gtk_box_pack_start (GTK_BOX (vbox2), main_win->ext_entry, TRUE, TRUE, 0);
 
-	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
-	main_win->regexp1_label = gtk_label_new ("");
-	main_win->regexp1_tag_label = gtk_label_new (_("First Regular Expression: "));
-	gtk_box_pack_start (GTK_BOX (vbox2), hbox, FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (hbox), main_win->regexp1_tag_label,
-			    FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (hbox), main_win->regexp1_label, FALSE, FALSE, 0);
-
-	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
-	main_win->regexp2_label = gtk_label_new ("");
-	main_win->regexp2_tag_label = gtk_label_new (_("Second Regular Expression: "));
-	gtk_box_pack_start (GTK_BOX (vbox2), hbox, FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (hbox), main_win->regexp2_tag_label,
-			    FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (hbox), main_win->regexp2_label, FALSE, FALSE, 0);
-
 	/* Defaults box */
-	frame = gtk_frame_new (_("Launch Options"));
+	frame = gtk_frame_new (_("Display Options"));
 	vbox2 = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
 	gtk_box_pack_start (GTK_BOX (vbox), frame, TRUE, TRUE, 0);
 	table = gtk_table_new (3, 2, FALSE);
@@ -280,25 +264,16 @@ initialize_main_win ()
 
 	/* Default application label and menu */	
 	label = gtk_label_new (_("Default Application:"));
-	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
-	gtk_misc_set_padding (GTK_MISC (label), 2, 0);
 	gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 0, 1);
 
 	main_win->application_menu = gtk_option_menu_new();
-	gtk_misc_set_alignment (GTK_MISC (main_win->application_menu), 0.0, 0.5);
-	gtk_misc_set_padding (GTK_MISC (main_win->application_menu), 2, 0);
-	gtk_box_pack_start (GTK_BOX (vbox2), table, FALSE, FALSE, 0);
 	gtk_table_attach_defaults (GTK_TABLE (table), main_win->application_menu, 1, 2, 0, 1);
 	
 	/* Default component label and menu */	
 	label = gtk_label_new (_("Default Component:"));
-	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
-	gtk_misc_set_padding (GTK_MISC (label), 2, 0);
 	gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 1, 2);
 
 	main_win->component_menu = gtk_option_menu_new();
-	gtk_misc_set_alignment (GTK_MISC (main_win->component_menu), 0.0, 0.5);
-	gtk_misc_set_padding (GTK_MISC (main_win->component_menu), 2, 0);
 	gtk_box_pack_start (GTK_BOX (vbox2), table, FALSE, FALSE, 0);
 	gtk_table_attach_defaults (GTK_TABLE (table), main_win->component_menu, 1, 2, 1, 2);	
 }
@@ -324,14 +299,11 @@ initialize_main_win_vals (void)
 	
 	gtk_label_set_text (GTK_LABEL (main_win->mime_type), mi);
 
-	/*
-	FIXME
 	gnome_icon_entry_set_icon (GNOME_ICON_ENTRY (main_win->icon_entry),
-				   gnome_mime_get_value (mi->mime_type,
-							 "icon-filename"));
-	*/
+				   gnome_mime_get_value (mi, "icon-filename"));
 	
 	gtk_widget_show_all (GNOME_DIALOG (main_win->window)->vbox);
+	
 	/* we initialize everything */
 	title = g_strdup_printf (_("Set actions for %s"), mi);
 	gtk_window_set_title (GTK_WINDOW (main_win->window), title);
@@ -401,20 +373,6 @@ initialize_main_win_vals (void)
 		gtk_widget_hide (main_win->ext_remove_button);
 		gtk_widget_hide (main_win->ext_scroll);
 	}
-	if (mi->regex_readable[0])
-		gtk_label_set_text (GTK_LABEL (main_win->regexp1_label),
-				    mi->regex_readable[0]);
-	else {
-		gtk_widget_hide (main_win->regexp1_label);
-		gtk_widget_hide (main_win->regexp1_tag_label);
-	}
-	if (mi->regex_readable[1])
-		gtk_label_set_text (GTK_LABEL (main_win->regexp2_label),
-				    mi->regex_readable[1]);
-	else {
-		gtk_widget_hide (main_win->regexp2_label);
-		gtk_widget_hide (main_win->regexp2_tag_label);
-	}
 	*/
 	
 	changing = FALSE;
@@ -458,33 +416,44 @@ show_edit_window (void)
 }
 
 
-
-
-
 static void
 populate_application_menu (GtkWidget *application_menu, const char *mime_string)
 {
 	GtkWidget *new_menu;
 	GtkWidget *menu_item;
-
-	/*
 	GList *mime_list;
-	mime_list = gnome_vfs_mime_get_short_list_applications (mime_string);
-	*/
+	GnomeVFSMimeApplication *application;
+	gboolean add_seperator;
+
+	add_seperator = FALSE;
 	
 	new_menu = gtk_menu_new ();
 
-	menu_item = gtk_menu_item_new_with_label ("Test Menu One");
+	mime_list = gnome_vfs_mime_get_short_list_applications (mime_string);
+	while (mime_list != NULL) {
+		add_seperator = TRUE;
+
+		application = mime_list->data;
+		menu_item = gtk_menu_item_new_with_label (application->name);
+		gtk_menu_append (GTK_MENU (new_menu), menu_item);
+		gtk_widget_show (menu_item);
+		mime_list = g_list_next (mime_list);
+	}
+	
+	/* Add default seperator and add menu item */
+	if (add_seperator) {
+		menu_item = gtk_menu_item_new ();
+		gtk_widget_set_sensitive (menu_item, FALSE);
+		gtk_menu_append (GTK_MENU (new_menu), menu_item);
+		gtk_widget_show (menu_item);
+	}
+	
+	menu_item = gtk_menu_item_new_with_label (_("Add an application..."));
 	gtk_menu_append (GTK_MENU (new_menu), menu_item);
 	gtk_widget_show (menu_item);
 
-	menu_item = gtk_menu_item_new_with_label ("Test Menu Two");
-	gtk_menu_append (GTK_MENU (new_menu), menu_item);
-	gtk_widget_show (menu_item);
-
-	menu_item = gtk_menu_item_new_with_label ("This is a reallt long test menu item.");
-	gtk_menu_append (GTK_MENU (new_menu), menu_item);
-	gtk_widget_show (menu_item);
+	gtk_signal_connect_object (GTK_OBJECT (menu_item), "activate", 
+				   GTK_SIGNAL_FUNC (application_menu_activate), (gpointer) mime_string);
 
 	gtk_option_menu_set_menu (GTK_OPTION_MENU (application_menu), new_menu);
 }
@@ -495,20 +464,95 @@ populate_component_menu (GtkWidget *component_menu, const char *mime_string)
 {
 	GtkWidget *new_menu;
 	GtkWidget *menu_item;
-		
+	GList *mime_list;	
+	gboolean add_seperator;
+
+	add_seperator = FALSE;
+	
 	new_menu = gtk_menu_new ();
 
-	menu_item = gtk_menu_item_new_with_label ("Test Menu One");
-	gtk_menu_append (GTK_MENU (new_menu), menu_item);
-	gtk_widget_show (menu_item);
-
-	menu_item = gtk_menu_item_new_with_label ("Test Menu Two");
-	gtk_menu_append (GTK_MENU (new_menu), menu_item);
-	gtk_widget_show (menu_item);
-
-	menu_item = gtk_menu_item_new_with_label ("This is a reallt long test menu item.");
+	mime_list = gnome_vfs_mime_get_short_list_applications (mime_string);
+	while (mime_list != NULL) {
+		add_seperator = TRUE;
+		menu_item = gtk_menu_item_new_with_label ("Test Menu Item");
+		gtk_menu_append (GTK_MENU (new_menu), menu_item);
+		gtk_widget_show (menu_item);
+		mime_list = g_list_next (mime_list);
+	}
+	
+	/* Add default seperator and add menu item */
+	if (add_seperator) {
+		menu_item = gtk_menu_item_new ();
+		gtk_widget_set_sensitive (menu_item, FALSE);
+		gtk_menu_append (GTK_MENU (new_menu), menu_item);
+		gtk_widget_show (menu_item);
+	}
+	
+	menu_item = gtk_menu_item_new_with_label (_("Add a component..."));
 	gtk_menu_append (GTK_MENU (new_menu), menu_item);
 	gtk_widget_show (menu_item);
 
 	gtk_option_menu_set_menu (GTK_OPTION_MENU (component_menu), new_menu);
+}
+
+/*
+ * Display the GtkFileSelection dialog.  The mime string is stored in the user data.
+ */
+static void
+application_menu_activate (GtkMenuItem *item, gpointer user_data) 
+{
+	show_file_selector (_("Select an Application"), user_data);
+}
+
+/*
+ * Add selected application to mime list.
+ */
+
+static void 
+add_application (GtkFileSelection *selector, gpointer user_data) 
+{
+	char *selected_application;
+	GnomeVFSMimeApplication *application;
+
+	selected_application = gtk_file_selection_get_filename (GTK_FILE_SELECTION (selector));
+
+	if (selected_application != NULL) {
+		application = g_new0 (GnomeVFSMimeApplication, 1);
+
+		application->name = g_malloc (strlen (selected_application));
+		strcpy (application->name, selected_application);
+
+		application->command = g_malloc (strlen (selected_application));
+		strcpy (application->command, selected_application);
+
+		/* FIXME: How do I find this out? */
+		application->can_open_multiple_files = FALSE;
+		application->can_open_uris = FALSE;
+		
+		gnome_vfs_mime_set_default_application ((const char *)user_data, application);	
+	}
+}
+
+static GtkWidget *
+show_file_selector (const char *title, gpointer mime_string)
+{
+	GtkWidget *selector;
+
+	selector = gtk_file_selection_new (title);
+
+	gtk_signal_connect (GTK_OBJECT (GTK_FILE_SELECTION (selector)->ok_button),
+			    "clicked", GTK_SIGNAL_FUNC (add_application), mime_string);
+                             
+	/* Ensure that the dialog box is destroyed when the user clicks a button. */     
+	gtk_signal_connect_object (GTK_OBJECT (GTK_FILE_SELECTION (selector)->ok_button),
+				   "clicked", GTK_SIGNAL_FUNC (gtk_widget_destroy),
+				   (gpointer) selector);
+
+     	gtk_signal_connect_object (GTK_OBJECT (GTK_FILE_SELECTION (selector)->cancel_button),
+			           "clicked", GTK_SIGNAL_FUNC (gtk_widget_destroy),
+			           (gpointer) selector);
+
+	gtk_widget_show (selector);
+
+	return selector;
 }

@@ -474,8 +474,9 @@ init_mime_type (void)
         finalize_user_mime ();
         init_mime_info ();
 }
+
 void
-add_new_mime_type (gchar *mime_type, gchar *raw_ext, gchar *regexp1, gchar *regexp2)
+add_new_mime_type (gchar *mime_type, gchar *raw_ext)
 {
         gchar *temp;
         MimeInfo *mi = NULL;
@@ -487,10 +488,8 @@ add_new_mime_type (gchar *mime_type, gchar *raw_ext, gchar *regexp1, gchar *rege
         if (mime_type == NULL || *mime_type == '\000') {
                 run_error (_("You must enter a mime-type"));
                 return;
-        } else if ((raw_ext == NULL || *raw_ext == '\000') &&
-                   (regexp1 == NULL || *regexp1 == '\000') &&
-                   (regexp2 == NULL || *regexp2 == '\000')){
-                run_error (_("You must add either a regular-expression or\na file-name extension"));
+        } else if (raw_ext == NULL || *raw_ext == '\000') {
+                run_error (_("You must add a file-name extension"));
                 return;
         }
         if (strchr (mime_type, '/') == NULL) {
@@ -519,16 +518,7 @@ add_new_mime_type (gchar *mime_type, gchar *raw_ext, gchar *regexp1, gchar *rege
                 mi = (MimeInfo *) g_hash_table_lookup (user_mime_types, mime_type);
                 g_free (temp);
         }
-        if (regexp1) {
-                temp = g_strconcat ("regex: ", regexp1, NULL);
-                add_to_key (mime_type, temp, user_mime_types, TRUE);
-                g_free (temp);
-        }
-        if (regexp2) {
-                temp = g_strconcat ("regex,2: ", regexp2, NULL);
-                add_to_key (mime_type, temp, user_mime_types, TRUE);
-                g_free (temp);
-        }
+
         /* Finally add it to the clist */
         if (mi) {
                 row = add_mime_vals_to_clist (mime_type, mi, clist);

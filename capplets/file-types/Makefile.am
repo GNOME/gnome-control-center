@@ -20,9 +20,11 @@ nautilus_mime_type_capplet_SOURCES =\
 
 nautilus_mime_type_capplet_LDADD =\
 			$(CAPPLET_LIBDIR) \
-			$(CAPPLET_LIBS)
+			$(CAPPLET_LIBS) \
 			$(ORBIT_LIBS) \
-			$(INTLLIBS)
+			$(INTLLIBS) \
+			$(VFS_LIBS) \
+			-lgnomevfs
 
 EXTRA_DIST = \
 	nautilus-mime-type.desktop

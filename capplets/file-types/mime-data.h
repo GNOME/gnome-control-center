@@ -26,7 +26,7 @@ void init_mime_type (void);
 void delete_clicked (GtkWidget *widget, gpointer data);
 void add_clicked (GtkWidget *widget, gpointer data);
 void edit_clicked (GtkWidget *widget, gpointer data);
-void add_new_mime_type (gchar *mime_type, gchar *ext, gchar *regexp1, gchar *regexp2);
+void add_new_mime_type (gchar *mime_type, gchar *ext);
 void write_user_mime (void);
 void write_initial_mime (void);
 void reread_list (void);

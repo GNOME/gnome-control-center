@@ -2,6 +2,7 @@
 /* Copyright (C) 1998 Redhat Software Inc. 
  * Authors: Jonathan Blandford <jrb@redhat.com>
  */
+
 #include <config.h>
 #include "capplet-widget.h"
 #include "gnome.h"
