@@ -1,3 +1,4 @@
+#include <config.h>
 #include "da.h"
 #include "capplet-widget.h"
 #include <signal.h>
@@ -34,7 +35,7 @@ make_main(void)
 
   box = gtk_vbox_new(FALSE, GNOME_PAD);
   hbox = gtk_hbox_new(TRUE, GNOME_PAD);
-  frame = gtk_frame_new ("Available Themes");
+  frame = gtk_frame_new (_("Available Themes"));
   vbox = gtk_hbox_new(FALSE, 0);
   gtk_container_border_width (GTK_CONTAINER (vbox), GNOME_PAD_SMALL);
   gtk_box_pack_start(GTK_BOX(hbox), frame, TRUE, TRUE, 0);
@@ -44,7 +45,7 @@ make_main(void)
   gtk_list_set_selection_mode(GTK_LIST(l2), GTK_SELECTION_SINGLE);
   hbxo = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
   gtk_container_border_width (GTK_CONTAINER (hbxo), GNOME_PAD_SMALL);
-  label = gtk_label_new ("Auto\nPreview");
+  label = gtk_label_new (_("Auto\nPreview"));
   gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
   auto_preview = gtk_check_button_new ();
   
@@ -52,10 +53,10 @@ make_main(void)
   gtk_signal_connect (GTK_OBJECT (auto_preview), "toggled", GTK_SIGNAL_FUNC (auto_callback), NULL);
   gtk_container_add (GTK_CONTAINER (auto_preview), label);
   gtk_box_pack_start (GTK_BOX (hbxo), auto_preview, FALSE, FALSE, 0);
-  button = gtk_button_new_with_label ("Preview");
+  button = gtk_button_new_with_label (_("Preview"));
   gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (click_preview), NULL);
   gtk_box_pack_start (GTK_BOX (hbxo), button, FALSE, FALSE, 0);
-  button = gtk_button_new_with_label ("Install");
+  button = gtk_button_new_with_label (_("Install"));
   
   /* FIXME: this needs ot actually do something. */
   gtk_box_pack_start (GTK_BOX (hbxo), button, FALSE, FALSE, 0);
@@ -69,7 +70,7 @@ make_main(void)
   gtk_box_pack_start(GTK_BOX(vbox), sw, TRUE, TRUE, 0);
   gtk_box_pack_start(GTK_BOX(vbox), hbxo, FALSE, FALSE, 0);
 
-  frame = gtk_frame_new ("Theme Information");
+  frame = gtk_frame_new (_("Theme Information"));
   evbox = gtk_viewport_new(NULL, NULL);
   gtk_container_add (GTK_CONTAINER (frame), evbox);
   gtk_container_border_width (GTK_CONTAINER (evbox), GNOME_PAD_SMALL);
@@ -81,7 +82,7 @@ make_main(void)
 
   hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
   gtk_container_border_width (GTK_CONTAINER (hbox), GNOME_PAD_SMALL);
-  frame = gtk_frame_new ("Preview");
+  frame = gtk_frame_new (_("Preview"));
   gtk_box_pack_start(GTK_BOX(box), frame, TRUE, TRUE, 0);
   gtk_container_add (GTK_CONTAINER (frame), hbox);
   /* in a gratuituous reuse of variable names... */
