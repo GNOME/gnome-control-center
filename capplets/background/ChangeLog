@@ -3,6 +3,9 @@
 	* background-properties-capplet.c (property_change_cb): Use
 	applier_render_color_p
 	(real_realize_cb): Ditto
+	(get_legacy_settings): Set the wallpaper_enabled flag based on the
+	value of wallpaper_filename; use (none) as the default for
+	wallpaper_filename
 
 	* applier.c (applier_render_color_p): Renamed from
 	applier_render_gradient_p; check both solid color and gradient
