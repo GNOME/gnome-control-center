@@ -70,7 +70,7 @@ capplet_new (CappletDir *dir, gchar *desktop_path)
 	}
 
 	dentry = gnome_desktop_entry_load (desktop_path);
-	if (!dentry || !strcmp ("gnomecc", dentry->exec[0]))
+	if (dentry == NULL)
 		return NULL;
 
 	capplet = g_new0 (Capplet, 1);
@@ -199,7 +199,7 @@ capplet_activate (Capplet *capplet)
 
 #warning FIXME: this should probably be root-manager-helper
 	if (!strncmp (entry->exec[0], "gnomecc", strlen ("gnomecc")))
-		capplet_control_launch (entry->exec[1]);
+		capplet_control_launch (entry->exec[2]);
 	else if (!strncmp (entry->exec[0], "root-manager", strlen ("root-manager")))
 		start_capplet_through_root_manager (entry);
 	else
