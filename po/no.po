@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.5.8\n"
-"POT-Creation-Date: 2002-03-14 22:16+0100\n"
-"PO-Revision-Date: 2002-03-14 22:18+0100\n"
+"POT-Creation-Date: 2002-03-14 23:03+0100\n"
+"PO-Revision-Date: 2002-03-14 23:07+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -47,6 +47,7 @@ msgid "Background picture"
 msgstr "Bakgrunnsbilde"
 
 #: capplets/background/background-properties.glade.h:3
+#: libbackground/preferences.c:49
 msgid "Centered"
 msgstr "Sentrert"
 
@@ -71,6 +72,7 @@ msgid "Solid color"
 msgstr "Helfylt farge"
 
 #: capplets/background/background-properties.glade.h:9
+#: libbackground/preferences.c:51
 msgid "Stretched"
 msgstr "Strukket"
 
@@ -79,6 +81,7 @@ msgid "Style:"
 msgstr "Stil:"
 
 #: capplets/background/background-properties.glade.h:11
+#: libbackground/preferences.c:48
 msgid "Tiled"
 msgstr "Flislagt"
 
@@ -166,7 +169,9 @@ msgstr "Tilbakekall som frigir data for redigering av egenskaper"
 
 #: capplets/common/gconf-property-editor.c:224
 msgid "Callback to be issued when property editor object data is to be freed"
-msgstr "Tilbakekall som skal utstedes når objektdata for redigering av egenskaper skal frigis"
+msgstr ""
+"Tilbakekall som skal utstedes når objektdata for redigering av egenskaper "
+"skal frigis"
 
 #: capplets/default-applications/default-applications.desktop.in.h:1
 msgid "Choose the applications used by default"
@@ -681,7 +686,7 @@ msgid "True if this dialog is for adding a MIME type"
 msgstr "Sann hvis denne dialogen er ment for å legge til en MIME-type"
 
 #: capplets/file-types/mime-edit-dialog.c:387
-#: capplets/file-types/mime-edit-dialog.c:442
+#: capplets/file-types/mime-edit-dialog.c:442 libbackground/preferences.c:53
 msgid "None"
 msgstr "Ingen"
 
@@ -770,14 +775,6 @@ msgstr "Manualsider"
 msgid "Electronic mail transmission"
 msgstr "Overføring av elektronisk post"
 
-#: capplets/font/font-properties.glade.h:1
-msgid "Font properties"
-msgstr "Egenskaper for skrifter"
-
-#: capplets/font/font-properties.glade.h:2
-msgid "Use a custom font."
-msgstr "Bruk en egendefinert skrift."
-
 #: capplets/font/font-properties.desktop.in.h:1
 msgid "Font"
 msgstr "Skrift"
@@ -785,6 +782,84 @@ msgstr "Skrift"
 #: capplets/font/font-properties.desktop.in.h:2
 msgid "Select which font to use"
 msgstr "Velg skrift som skal brukes"
+
+#: capplets/font/font-properties.glade.h:1
+msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZzÆæØøÅå"
+
+#: capplets/font/font-properties.glade.h:2
+msgid "Desktop Font"
+msgstr "Skrift for skrivebord"
+
+#: capplets/font/font-properties.glade.h:3
+msgid "File Manager Font"
+msgstr "Skrift for filhåndterer"
+
+#: capplets/font/font-properties.glade.h:4
+msgid "Font Preferences"
+msgstr "Egenskaper for skrifter"
+
+#: capplets/font/font-properties.glade.h:5
+msgid "Pick a Font"
+msgstr "Velg en skrift"
+
+#: capplets/font/font-properties.glade.h:6
+msgid "Select the desktop font"
+msgstr "Velg skrift for skrivebordet"
+
+#: capplets/font/font-properties.glade.h:7
+msgid "Set to Default"
+msgstr "Sett til forvalg"
+
+#: capplets/keybindings/eggcellrendererkeys.c:142
+#: capplets/keybindings/eggcellrendererkeys.c:143
+msgid "Accelerator modifiers"
+msgstr ""
+
+#: capplets/keybindings/eggcellrendererkeys.c:151
+#: capplets/keybindings/eggcellrendererkeys.c:152
+msgid "Accelerator key"
+msgstr "Hurtigtast"
+
+#: capplets/keybindings/eggcellrendererkeys.c:189
+#: capplets/keybindings/gnome-keybinding-properties.c:54
+#: libbackground/applier.c:515
+msgid "Disabled"
+msgstr "Slått av"
+
+#: capplets/keybindings/eggcellrendererkeys.c:454
+msgid "Type a new accelerator, or press Backspace to clear"
+msgstr "Skriv inn en ny aksellerator, eller trykk slett for å tømme"
+
+#: capplets/keybindings/eggcellrendererkeys.c:457
+msgid "Type a new accelerator"
+msgstr "Skriv inn en ny aksellerator"
+
+#: capplets/keybindings/gnome-keybinding-properties.c:250
+msgid "<Unknown Action>"
+msgstr "<Ukjent handling>"
+
+#: capplets/keybindings/gnome-keybinding-properties.c:411
+msgid ""
+"Unable to find any keyboard themes.  This means your GTK+ installation has "
+"been incompletely installed."
+msgstr "Kan ikke finne tastaturtema. Dette betyr at din GTK+-installasjon ikke er komplett."
+
+#: capplets/keybindings/gnome-keybinding-properties.c:465
+msgid "_Action"
+msgstr "_Handling"
+
+#: capplets/keybindings/gnome-keybinding-properties.c:477
+msgid "_Shortcut"
+msgstr "_Snarvei"
+
+#: capplets/keybindings/keybinding.desktop.in.h:1
+msgid "Keybinding"
+msgstr "Tastaturbinding"
+
+#: capplets/keybindings/keybinding.desktop.in.h:2
+msgid "Keybinding Properties"
+msgstr "Egenskaper for tastaturbinding"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:316
 #: capplets/keyboard/gnome-keyboard-properties.c:318
@@ -1422,6 +1497,10 @@ msgstr "_Hjelp"
 msgid "Use shell even if nautilus is running."
 msgstr "Bruk skall selv om nautilus kjører."
 
+#: gnome-settings-daemon/factory.c:30
+msgid "Could not initialize Bonobo"
+msgstr "Kunne ikke initiere Bonobo"
+
 #: libbackground/applier.c:235
 msgid "Type"
 msgstr "Type"
@@ -1439,9 +1518,25 @@ msgstr ""
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "Kunne ikke laste pixbuf \"%s\"; slår av bakgrunn."
 
-#: libbackground/applier.c:515
-msgid "Disabled"
-msgstr "Slått av"
+#: libbackground/preferences.c:50
+msgid "Scaled"
+msgstr "Skalert"
+
+#: libbackground/preferences.c:52
+msgid "Embossed"
+msgstr "Innfelt"
+
+#: libbackground/preferences.c:58
+msgid "Solid"
+msgstr "Helfylt"
+
+#: libbackground/preferences.c:59
+msgid "Horizontal Gradient"
+msgstr "Horisontal gradient"
+
+#: libbackground/preferences.c:60
+msgid "Vertical Gradient"
+msgstr "Vertikal gradient"
 
 #: libbackground/preview-file-selection.c:186
 msgid "Can't find an hbox, using a normal file selection"
@@ -1480,6 +1575,9 @@ msgstr "Spill"
 #: libsounds/sound-view.c:244
 msgid "Select sound file"
 msgstr "Velg lydfil"
+
+#~ msgid "Use a custom font."
+#~ msgstr "Bruk en egendefinert skrift."
 
 #~ msgid "Auto Preview"
 #~ msgstr "Automatisk forhåndsvisning"
@@ -2356,9 +2454,6 @@ msgstr "Velg lydfil"
 #~ msgid "Size of object."
 #~ msgstr "Størrelse på objekt."
 
-#~ msgid "Smaller"
-#~ msgstr "Mindre"
-
 #~ msgid "Lissie"
 #~ msgstr "Lissie"
 
@@ -2610,9 +2705,6 @@ msgstr "Velg lydfil"
 #~ msgid "Quickness of rotation at each step (0 = Random)"
 #~ msgstr "Rotasjonshastighet for hvert steg (0 = tilfeldig)"
 
-#~ msgid "Slim"
-#~ msgstr "Slank"
-
 #~ msgid "Speed of animation."
 #~ msgstr "Animasjonshastighet."
 
@@ -2810,9 +2902,6 @@ msgstr "Velg lydfil"
 
 #~ msgid "Failed to find selected program."
 #~ msgstr "Kunne ikke finne valgt program."
-
-#~ msgid "Unknown error."
-#~ msgstr "Ukjent feil."
 
 #~ msgid "Unknown exit code."
 #~ msgstr "Ukjent avsluttingskode."
