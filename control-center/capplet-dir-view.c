@@ -303,11 +303,24 @@ help_menu_cb (BonoboUIComponent *uic, gpointer data, const char *cname)
 	GError *error = NULL;
 
 	gnome_help_display_desktop (NULL,
-		"control-center-manual",
-		"control-center.xml",
-		"intro", &error);
+				    "user-guide",
+				    "wgoscustdesk.xml",
+				    NULL, &error);
 	if (error) {
-		g_warning ("help error: %s\n", error->message);
+		GtkWidget *dialog;
+		dialog = gtk_message_dialog_new (NULL,
+						 GTK_DIALOG_MODAL,
+						 GTK_MESSAGE_ERROR,
+						 GTK_BUTTONS_CLOSE,
+						 ("There was an error displaying help: \n%s"),
+						 error->message);
+
+		g_signal_connect (G_OBJECT (dialog), "response",
+				  G_CALLBACK (gtk_widget_destroy),
+				  NULL);
+
+		gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+		gtk_widget_show (dialog);
 		g_error_free (error);
 	}
 }
