@@ -25,7 +25,11 @@
 #  include <config.h>
 #endif
 
+#include <gnome.h>
+#include <gconf/gconf-client.h>
+
 #include "capplet-util.h"
+#include "gconf-property-editor.h"
 #include "libsounds/sound-view.h"
 
 #include <glade/glade.h>
@@ -40,147 +44,20 @@
 
 static SoundProperties *props = NULL;
 
-static void start_esd (void);
-static void reload_foreach_cb (SoundEvent *event, gpointer data);
-
-/* apply_settings
- *
- * Apply the settings of the property bag. This function is per-capplet, though
- * there are some cases where it does not do anything.
- */
-
-static void
-apply_settings (Bonobo_ConfigDatabase db) 
-{
-	gboolean enable_esd;
-	gboolean event_sounds;
-
-	enable_esd = bonobo_config_get_boolean (db, "/main/enable_esd", NULL);
-	event_sounds = bonobo_config_get_boolean (db, "/main/event_sounds", NULL);
-
-        if (enable_esd && gnome_sound_connection < 0)
-                start_esd ();
-
-	if (!enable_esd)
-		system ("killall esd");
-
-	/* gnome-libs checks this */
-	gnome_config_set_bool ("/sound/system/settings/event_sounds", event_sounds);
-	gnome_config_set_bool ("/sound/system/settings/enable_esd", enable_esd);
-	gnome_config_sync ();
-
-	/* Were we created from a dialog? */
-	if (props)
-	{
-		sound_properties_user_save (props);
-	}
-	else
-	{
-		props = sound_properties_new ();
-		sound_properties_add_defaults (props, NULL);
-	}
-	
-	sound_properties_foreach (props, reload_foreach_cb, NULL);
-}
-
-/* start_esd
- *
- * Start the Enlightenment Sound Daemon. This function is specific to the sound
- * properties capplet.
- */
-
-static void
-start_esd (void) 
-{
-#ifdef HAVE_ESD
-        int esdpid;
-        static const char *esd_cmdline[] = {"esd", "-nobeeps", NULL};
-        char *tmpargv[3];
-        char argbuf[32];
-        time_t starttime;
-        GnomeClient *client = gnome_master_client ();
-
-        esdpid = gnome_execute_async (NULL, 2, (char **)esd_cmdline);
-        g_snprintf (argbuf, sizeof (argbuf), "%d", esdpid);
-        tmpargv[0] = "kill"; tmpargv[1] = argbuf; tmpargv[2] = NULL;
-        gnome_client_set_shutdown_command (client, 2, tmpargv);
-        starttime = time (NULL);
-        gnome_sound_init (NULL);
-
-        while (gnome_sound_connection < 0
-	       && ((time(NULL) - starttime) < 4)) 
-        {
-#ifdef HAVE_USLEEP
-                usleep(1000);
-#endif
-                gnome_sound_init(NULL);
-        }
-#endif
-}
- 
-/* reload_foreach_cb
- *
- * For a given SoundEvent, reload the sound file associate with the event. 
- */
-static void
-reload_foreach_cb (SoundEvent *event, gpointer data)
-{
-	gchar *file, *tmp, *key;
-	int sid;
-	
-	key = sound_event_compose_key (event);
-	/* We need to free up the old sample, because
-	 * esd allows multiple samples with the same name,
-	 * putting memory to waste. */
-	sid = esd_sample_getid(gnome_sound_connection, key);
-	if (sid >= 0)
-		esd_sample_free(gnome_sound_connection, sid);
-
-	if (!event->file || !strcmp (event->file, ""))
-		return;
-	
-	file = g_strdup (event->file);
-	if (file[0] != '/')
-	{
-		tmp = gnome_sound_file (file);
-		g_free (file);
-		file = tmp;
-	}
-	
-	if (!file)
-	{
-		g_free (key);
-		return;
-	}
-
-	sid = gnome_sound_sample_load (key, file);
-	
-	if (sid < 0)
-		g_warning ("Couldn't load sound file %s as sample %s",
-			   file, key);
-
-	g_free (key);
-}
-
-
 /* create_dialog
  *
  * Create the dialog box and return it as a GtkWidget
  */
 
-static GtkWidget *
+static GladeXML *
 create_dialog (void) 
 {
 	GladeXML *data;
 	GtkWidget *widget, *box;
 
-	data = glade_xml_new (GNOMECC_GLADE_DIR "/sound-properties.glade", "prefs_widget");
+	data = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/sound-properties.glade", "prefs_widget", NULL);
 	widget = glade_xml_get_widget (data, "prefs_widget");
 	gtk_object_set_data (GTK_OBJECT (widget), "glade-data", data);
-
-	gtk_signal_connect_object (GTK_OBJECT (widget), "destroy",
-				   GTK_SIGNAL_FUNC (gtk_object_destroy),
-				   GTK_OBJECT (data));
 
 	props = sound_properties_new ();
 	sound_properties_add_defaults (props, NULL);
@@ -194,7 +71,7 @@ create_dialog (void)
 
 	gtk_widget_set_usize (widget, -1, 250);
 
-	return widget;
+	return data;
 }
 
 /* setup_dialog
@@ -203,17 +80,14 @@ create_dialog (void)
  */
 
 static void
-setup_dialog (GtkWidget *widget, Bonobo_PropertyBag bag) 
+setup_dialog (GladeXML *dialog, GConfChangeSet *changeset) 
 {
-	GladeXML *dialog;
+	GObject *peditor;
 
-	dialog = gtk_object_get_data (GTK_OBJECT (widget), "glade-data");
-
-	CREATE_PEDITOR (boolean, "enable_esd", "enable_toggle");
-	CREATE_PEDITOR (boolean, "event_sounds", "events_toggle");
-
-	bonobo_peditor_set_guard (WID ("events_toggle"), bag, "enable_esd");
-	bonobo_peditor_set_guard (WID ("events_vbox"), bag, "enable_esd");
+	peditor = gconf_peditor_new_boolean (changeset, "/desktop/gnome/sound/enable_esd", WID ("enable_toggle"), NULL);
+	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("events_toggle"));
+	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("events_vbox"));
+	peditor = gconf_peditor_new_boolean (changeset, "/desktop/gnome/sound/event_sounds", WID ("events_toggle"), NULL);
 }
 
 /* get_legacy_settings
@@ -226,22 +100,87 @@ setup_dialog (GtkWidget *widget, Bonobo_PropertyBag bag)
  */
 
 static void
-get_legacy_settings (Bonobo_ConfigDatabase db) 
+get_legacy_settings (void) 
 {
-	gboolean val_boolean, def;
+	GConfClient *client;
+	gboolean val_bool, def;
 
-	COPY_FROM_LEGACY (boolean, "/main/enable_esd", bool, "/sound/system/settings/start_esd=false");
-	COPY_FROM_LEGACY (boolean, "/main/event_sounds", bool, "/sound/system/settings/event_sounds=false");
+	client = gconf_client_get_default ();
+	COPY_FROM_LEGACY (bool, "/desktop/gnome/sound/enable_esd", "/sound/system/settings/start_esd=false");
+	COPY_FROM_LEGACY (bool, "/desktop/gnome/sound/event_sounds", "/sound/system/settings/event_sounds=false");
+	g_object_unref (G_OBJECT (client));
+}
+
+static void
+dialog_button_clicked_cb (GnomeDialog *dialog, gint response_id, GConfChangeSet *changeset) 
+{
+	switch (response_id) {
+	case GTK_RESPONSE_APPLY:
+		gconf_client_commit_change_set (gconf_client_get_default (), changeset, TRUE, NULL);
+		break;
+
+	case GTK_RESPONSE_CLOSE:
+		gtk_main_quit ();
+		break;
+	}
 }
 
 int
 main (int argc, char **argv) 
 {
-	const gchar* legacy_files[] = { "sound/system", "sound/events", NULL };
-	
-	glade_gnome_init ();
-	
-	capplet_init (argc, argv, legacy_files, apply_settings, create_dialog, setup_dialog, get_legacy_settings);
+	GConfClient    *client;
+	GConfChangeSet *changeset;
+	GladeXML       *dialog;
+	GtkWidget      *dialog_win;
+
+	static gboolean apply_only;
+	static gboolean get_legacy;
+	static struct poptOption cap_options[] = {
+		{ "apply", '\0', POPT_ARG_NONE, &apply_only, 0,
+		  N_("Just apply settings and quit (compatibility only; now handled by daemon)"), NULL },
+		{ "init-session-settings", '\0', POPT_ARG_NONE, &apply_only, 0,
+		  N_("Just apply settings and quit (compatibility only; now handled by daemon)"), NULL },
+		{ "get-legacy", '\0', POPT_ARG_NONE, &get_legacy, 0,
+		  N_("Retrieve and store legacy settings"), NULL },
+		{ NULL, '\0', 0, NULL, 0, NULL, NULL }
+	};
+
+	bindtextdomain (PACKAGE, GNOMELOCALEDIR);
+	bind_textdomain_codeset (PACKAGE, "UTF-8");
+	textdomain (PACKAGE);
+
+	gnome_program_init (argv[0], VERSION, LIBGNOMEUI_MODULE, argc, argv,
+			    GNOME_PARAM_POPT_TABLE, cap_options,
+			    NULL);
+
+	client = gconf_client_get_default ();
+	gconf_client_add_dir (client, "/desktop/gnome/sound", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+
+	if (get_legacy) {
+		get_legacy_settings ();
+	} else {
+		changeset = gconf_change_set_new ();
+		dialog = create_dialog ();
+		setup_dialog (dialog, changeset);
+
+#if 0
+		gnome_window_icon_set_default_from_file
+			(GNOMECC_ICONS_DIR "keyboard-capplet.png");
+#endif
+
+		dialog_win = gtk_dialog_new_with_buttons
+			(_("Sound properties"), NULL, -1,
+			 GTK_STOCK_APPLY, GTK_RESPONSE_APPLY,
+			 GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+			 NULL);
+
+		g_signal_connect (G_OBJECT (dialog_win), "response", (GCallback) dialog_button_clicked_cb, changeset);
+		gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog_win)->vbox), WID ("prefs_widget"), TRUE, TRUE, GNOME_PAD_SMALL);
+		gtk_widget_show_all (dialog_win);
+
+		gtk_main ();
+		gconf_change_set_unref (changeset);
+	}
 
 	return 0;
 }

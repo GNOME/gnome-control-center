@@ -1,122 +1,110 @@
-<?xml version="1.0"?>
-<GTK-Interface>
+<?xml version="1.0" standalone="no"?> <!--*- mode: xml -*-->
+<!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd" >
 
-<project>
-  <name>New-sound-properties</name>
-  <program_name>new-sound-properties</program_name>
-  <directory></directory>
-  <source_directory>src</source_directory>
-  <pixmaps_directory>pixmaps</pixmaps_directory>
-  <language>C</language>
-  <gnome_support>True</gnome_support>
-  <gettext_support>True</gettext_support>
-</project>
+<glade-interface>
+  <widget class="GtkWindow" id="window1">
+    <property name="title" translatable="yes">window2</property>
+    <property name="type">GTK_WINDOW_TOPLEVEL</property>
+    <property name="modal">no</property>
+    <property name="allow_shrink">no</property>
+    <property name="allow_grow">yes</property>
+    <property name="visible">no</property>
+    <property name="window-position">GTK_WIN_POS_NONE</property>
 
-<widget>
-  <class>GtkWindow</class>
-  <name>window1</name>
-  <title>window2</title>
-  <type>GTK_WINDOW_TOPLEVEL</type>
-  <position>GTK_WIN_POS_NONE</position>
-  <modal>False</modal>
-  <allow_shrink>False</allow_shrink>
-  <allow_grow>True</allow_grow>
-  <auto_shrink>False</auto_shrink>
+    <child>
+      <widget class="GtkNotebook" id="prefs_widget">
+        <property name="can_focus">yes</property>
+        <property name="show_tabs">yes</property>
+        <property name="show_border">yes</property>
+        <property name="tab_pos">GTK_POS_TOP</property>
+        <property name="scrollable">no</property>
+        <property name="tab_hborder">2</property>
+        <property name="tab_vborder">2</property>
+        <property name="enable-popup">no</property>
+        <property name="visible">yes</property>
 
-  <widget>
-    <class>GtkNotebook</class>
-    <name>prefs_widget</name>
-    <can_focus>True</can_focus>
-    <show_tabs>True</show_tabs>
-    <show_border>True</show_border>
-    <tab_pos>GTK_POS_TOP</tab_pos>
-    <scrollable>False</scrollable>
-    <tab_hborder>2</tab_hborder>
-    <tab_vborder>2</tab_vborder>
-    <popup_enable>False</popup_enable>
+        <child>
+          <widget class="GtkVBox" id="vbox1">
+            <property name="homogeneous">no</property>
+            <property name="spacing">5</property>
+            <property name="visible">yes</property>
 
-    <widget>
-      <class>GtkVBox</class>
-      <name>vbox1</name>
-      <homogeneous>False</homogeneous>
-      <spacing>5</spacing>
+            <child>
+              <widget class="GtkCheckButton" id="enable_toggle">
+                <property name="can_focus">yes</property>
+                <property name="label" translatable="yes">Enable sound server startup</property>
+                <property name="active">no</property>
+                <property name="draw_indicator">yes</property>
+                <property name="visible">yes</property>
 
-      <widget>
-	<class>GtkCheckButton</class>
-	<name>enable_toggle</name>
-	<can_focus>True</can_focus>
-	<signal>
-	  <name>toggled</name>
-	  <handler>enable_toggled_cb</handler>
-	  <last_modification_time>Sun, 08 Oct 2000 01:49:56 GMT</last_modification_time>
-	</signal>
-	<label>Enable sound server startup</label>
-	<active>False</active>
-	<draw_indicator>True</draw_indicator>
-	<child>
-	  <padding>0</padding>
-	  <expand>False</expand>
-	  <fill>False</fill>
-	</child>
+                <signal name="toggled" handler="enable_toggled_cb" />
+              </widget>
+              <packing>
+                <property name="padding">0</property>
+                <property name="expand">no</property>
+                <property name="fill">no</property>
+              </packing>
+            </child>
+
+            <child>
+              <widget class="GtkCheckButton" id="events_toggle">
+                <property name="can_focus">yes</property>
+                <property name="label" translatable="yes">Sounds for events</property>
+                <property name="active">no</property>
+                <property name="draw_indicator">yes</property>
+                <property name="visible">yes</property>
+
+                <signal name="toggled" handler="events_toggled_cb" />
+              </widget>
+              <packing>
+                <property name="padding">0</property>
+                <property name="expand">no</property>
+                <property name="fill">no</property>
+              </packing>
+            </child>
+          </widget>
+        </child>
+
+        <child>
+          <widget class="GtkLabel" id="label1">
+            <property name="label" translatable="yes">General</property>
+            <property name="justify">GTK_JUSTIFY_CENTER</property>
+            <property name="wrap">no</property>
+            <property name="xalign">0.5</property>
+            <property name="yalign">0.5</property>
+            <property name="xpad">0</property>
+            <property name="ypad">0</property>
+            <property name="visible">yes</property>
+          </widget>
+          <packing>
+            <property name="type">tab</property>
+          </packing>
+        </child>
+
+        <child>
+          <widget class="GtkVBox" id="events_vbox">
+            <property name="homogeneous">no</property>
+            <property name="spacing">0</property>
+            <property name="visible">yes</property>
+          </widget>
+        </child>
+
+        <child>
+          <widget class="GtkLabel" id="label2">
+            <property name="label" translatable="yes">Sound Events</property>
+            <property name="justify">GTK_JUSTIFY_CENTER</property>
+            <property name="wrap">no</property>
+            <property name="xalign">0.5</property>
+            <property name="yalign">0.5</property>
+            <property name="xpad">0</property>
+            <property name="ypad">0</property>
+            <property name="visible">yes</property>
+          </widget>
+          <packing>
+            <property name="type">tab</property>
+          </packing>
+        </child>
       </widget>
-
-      <widget>
-	<class>GtkCheckButton</class>
-	<name>events_toggle</name>
-	<can_focus>True</can_focus>
-	<signal>
-	  <name>toggled</name>
-	  <handler>events_toggled_cb</handler>
-	  <last_modification_time>Sun, 08 Oct 2000 01:50:13 GMT</last_modification_time>
-	</signal>
-	<label>Sounds for events</label>
-	<active>False</active>
-	<draw_indicator>True</draw_indicator>
-	<child>
-	  <padding>0</padding>
-	  <expand>False</expand>
-	  <fill>False</fill>
-	</child>
-      </widget>
-    </widget>
-
-    <widget>
-      <class>GtkLabel</class>
-      <child_name>Notebook:tab</child_name>
-      <name>label1</name>
-      <label>General</label>
-      <justify>GTK_JUSTIFY_CENTER</justify>
-      <wrap>False</wrap>
-      <xalign>0.5</xalign>
-      <yalign>0.5</yalign>
-      <xpad>0</xpad>
-      <ypad>0</ypad>
-    </widget>
-
-    <widget>
-      <class>GtkVBox</class>
-      <name>events_vbox</name>
-      <homogeneous>False</homogeneous>
-      <spacing>0</spacing>
-
-      <widget>
-	<class>Placeholder</class>
-      </widget>
-    </widget>
-
-    <widget>
-      <class>GtkLabel</class>
-      <child_name>Notebook:tab</child_name>
-      <name>label2</name>
-      <label>Sound Events</label>
-      <justify>GTK_JUSTIFY_CENTER</justify>
-      <wrap>False</wrap>
-      <xalign>0.5</xalign>
-      <yalign>0.5</yalign>
-      <xpad>0</xpad>
-      <ypad>0</ypad>
-    </widget>
+    </child>
   </widget>
-</widget>
-
-</GTK-Interface>
+</glade-interface>
