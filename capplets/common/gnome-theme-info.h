@@ -57,17 +57,19 @@ typedef struct _GnomeThemeMetaInfo GnomeThemeMetaInfo;
 struct _GnomeThemeMetaInfo
 {
   gchar *path;
+  gchar *readable_name;
   gchar *name;
-  gchar *font;
   gchar *comment;
   gchar *icon_file;
-  gchar *background;
+
   gchar *gtk_theme_name;
-  gchar *icon_theme_name;
   gchar *metacity_theme_name;
-  GnomeThemeInfo *gtk_theme;
-  GnomeThemeInfo *icon_theme;
-  GnomeThemeInfo *metacity_theme;
+  gchar *icon_theme_name;
+  gchar *sawfish_theme_name;
+  gchar *sound_theme_name;
+  
+  gchar *application_font;
+  gchar *background_image;
 };
 
 

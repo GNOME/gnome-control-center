@@ -12,6 +12,15 @@
 #include <libgnome/gnome-desktop-item.h>
 #include "gnome-theme-info.h"
 
+#define GTK_THEME_KEY "X-GNOME-Metatheme/GtkTheme"
+#define METACITY_THEME_KEY "X-GNOME-Metatheme/MetacityTheme"
+#define SAWFISH_THEME_KEY "X-GNOME-Metatheme/SawfishTheme"
+#define ICON_THEME_KEY "X-GNOME-Metatheme/IconTheme"
+#define SOUND_THEME_KEY "X-GNOME-Metatheme/SoundTheme"
+#define APPLICATION_FONT_KEY "X-GNOME-Metatheme/ApplicationFont"
+#define BACKGROUND_IMAGE_KEY "X-GNOME-Metatheme/BackgroundImage"
+
+
 typedef struct _ThemeCallbackData
 {
   GFunc func;
@@ -29,10 +38,11 @@ const gchar *gtk2_suffix = "gtk-2.0";
 const gchar *key_suffix = "gtk-2.0-key";
 const gchar *metacity_suffix = "metacity-1";
 const gchar *icon_theme_file = "index.theme";
-const gchar *meta_theme_file = "theme.desktop";
+const gchar *meta_theme_file = "index.theme";
 
 static GnomeThemeMetaInfo *
-read_meta_theme (const gchar *meta_theme_file)
+read_meta_theme (const gchar *theme_name,
+		 const gchar *meta_theme_file)
 {
   GnomeThemeMetaInfo *meta_theme_info;
   GnomeDesktopItem *meta_theme_ditem;
@@ -45,23 +55,23 @@ read_meta_theme (const gchar *meta_theme_file)
   meta_theme_info = gnome_theme_meta_info_new ();
   meta_theme_info->path = g_strdup (meta_theme_file);
 
-  str = gnome_desktop_item_get_string (meta_theme_ditem, "Name");
+  str = gnome_desktop_item_get_string (meta_theme_ditem, GNOME_DESKTOP_ITEM_NAME);
   if (str == NULL)
     {
       gnome_theme_meta_info_free (meta_theme_info);
       return NULL;
     }
-  meta_theme_info->name = g_strdup (str);
+  meta_theme_info->readable_name = g_strdup (str);
 
-  str = gnome_desktop_item_get_string (meta_theme_ditem, "Comment");
+  str = gnome_desktop_item_get_string (meta_theme_ditem, GNOME_DESKTOP_ITEM_COMMENT);
   if (str != NULL)
     meta_theme_info->comment = g_strdup (str);
 
-  str = gnome_desktop_item_get_string (meta_theme_ditem, "Icon");
+  str = gnome_desktop_item_get_string (meta_theme_ditem, GNOME_DESKTOP_ITEM_ICON);
   if (str != NULL)
     meta_theme_info->icon_file = g_strdup (str);
 
-  str = gnome_desktop_item_get_string (meta_theme_ditem, "X-GNOME-Metatheme/gtk-2.0");
+  str = gnome_desktop_item_get_string (meta_theme_ditem, GTK_THEME_KEY);
   if (str == NULL)
     {
       gnome_theme_meta_info_free (meta_theme_info);
@@ -69,7 +79,7 @@ read_meta_theme (const gchar *meta_theme_file)
     }
   meta_theme_info->gtk_theme_name = g_strdup (str);
 
-  str = gnome_desktop_item_get_string (meta_theme_ditem, "X-GNOME-Metatheme/metacity");
+  str = gnome_desktop_item_get_string (meta_theme_ditem, METACITY_THEME_KEY);
   if (str == NULL)
     {
       gnome_theme_meta_info_free (meta_theme_info);
@@ -77,7 +87,7 @@ read_meta_theme (const gchar *meta_theme_file)
     }
   meta_theme_info->metacity_theme_name = g_strdup (str);
 
-  str = gnome_desktop_item_get_string (meta_theme_ditem, "X-GNOME-Metatheme/icon");
+  str = gnome_desktop_item_get_string (meta_theme_ditem, ICON_THEME_KEY);
   if (str == NULL)
     {
       gnome_theme_meta_info_free (meta_theme_info);
@@ -85,13 +95,13 @@ read_meta_theme (const gchar *meta_theme_file)
     }
   meta_theme_info->icon_theme_name = g_strdup (str);
 
-  str = gnome_desktop_item_get_string (meta_theme_ditem, "X-GNOME-Metatheme/font");
+  str = gnome_desktop_item_get_string (meta_theme_ditem, APPLICATION_FONT_KEY);
   if (str != NULL)
-    meta_theme_info->font = g_strdup (str);
+    meta_theme_info->application_font = g_strdup (str);
     
-  str = gnome_desktop_item_get_string (meta_theme_ditem, "X-GNOME-Metatheme/background");
+  str = gnome_desktop_item_get_string (meta_theme_ditem, BACKGROUND_IMAGE_KEY);
   if (str != NULL)
-    meta_theme_info->background = g_strdup (str);
+    meta_theme_info->background_image = g_strdup (str);
 
   return meta_theme_info;
 }
@@ -133,7 +143,7 @@ update_theme_dir (const gchar *theme_dir)
     {
       GnomeThemeMetaInfo *meta_theme_info;
 
-      meta_theme_info = read_meta_theme (tmp);
+      meta_theme_info = read_meta_theme (tmp, strrchr (theme_dir, '/'));
       if (meta_theme_info != NULL)
 	g_hash_table_insert (meta_theme_hash, meta_theme_info->name, meta_theme_info);
     }
@@ -579,8 +589,8 @@ gnome_theme_meta_info_free (GnomeThemeMetaInfo *meta_theme_info)
   g_free (meta_theme_info->path);
   g_free (meta_theme_info->name);
   g_free (meta_theme_info->comment);
-  g_free (meta_theme_info->font);
-  g_free (meta_theme_info->background);
+  g_free (meta_theme_info->application_font);
+  g_free (meta_theme_info->background_image);
   g_free (meta_theme_info->gtk_theme_name);
   g_free (meta_theme_info->icon_theme_name);
   g_free (meta_theme_info->metacity_theme_name);

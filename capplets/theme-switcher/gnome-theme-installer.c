@@ -167,7 +167,7 @@ gnome_theme_installer_run (GtkWidget *parent, gchar *filename)
 	
 	g_signal_connect (G_OBJECT (widget), "response",
 		G_CALLBACK (install_dialog_response), dialog);
-	gtk_window_set_transient_for (GTK_WINDOW (widget), parent);
+	gtk_window_set_transient_for (GTK_WINDOW (widget), GTK_WINDOW (parent));
 	gtk_window_set_position (GTK_WINDOW (widget), GTK_WIN_POS_CENTER_ON_PARENT);
 	if (filename)
 		gnome_file_entry_set_filename (GNOME_FILE_ENTRY (WID ("install_theme_picker")), filename);

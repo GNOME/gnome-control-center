@@ -254,31 +254,31 @@ meta_theme_setup_info (GnomeThemeMetaInfo *meta_theme_info,
 	  gtk_widget_hide (WID ("meta_theme_description_label"));
 	}
 
-      if (meta_theme_info->font != NULL)
+      if (meta_theme_info->application_font != NULL)
 	{
 	  gtk_widget_show (WID ("meta_theme_extras_vbox"));
-	  if (meta_theme_info->background != NULL)
+	  if (meta_theme_info->background_image != NULL)
 	    {
 	      gtk_label_set_text (GTK_LABEL (WID ("meta_theme_info_label")),
-				  _("This theme suggests the use of a font and a background:"));
+				  _("This theme suggests a matching font and a background:"));
 	      gtk_widget_show (WID ("meta_theme_background_button"));
 	      gtk_widget_show (WID ("meta_theme_font_button"));
 	    }
 	  else
 	    {
 	      gtk_label_set_text (GTK_LABEL (WID ("meta_theme_info_label")),
-				  _("This theme suggests the use of a font:"));
+				  _("This theme suggests a matching font:"));
 	      gtk_widget_hide (WID ("meta_theme_background_button"));
 	      gtk_widget_show (WID ("meta_theme_font_button"));
 	    }
 	}
       else
 	{
-	  if (meta_theme_info->background != NULL)
+	  if (meta_theme_info->background_image != NULL)
 	    {
 	      gtk_widget_show (WID ("meta_theme_extras_vbox"));
 	      gtk_label_set_text (GTK_LABEL (WID ("meta_theme_info_label")),
-				  _("This theme suggests the use of a background:"));
+				  _("This theme suggests a matching background:"));
 	      gtk_widget_show (WID ("meta_theme_background_button"));
 	      gtk_widget_hide (WID ("meta_theme_font_button"));
 	    }
@@ -419,6 +419,12 @@ read_themes (GladeXML *dialog)
   gchar *current_icon_theme;
   GnomeWindowManager *window_manager;
   GnomeWMSettings wm_settings;
+  GtkWidget *notebook;
+
+  gboolean have_meta_theme;
+  gboolean have_gtk_theme;
+  gboolean have_window_theme;
+  gboolean have_icon_theme;
 
   client = gconf_client_get_default ();
 
@@ -435,6 +441,8 @@ read_themes (GladeXML *dialog)
   if (current_gtk_theme == NULL)
     current_gtk_theme = g_strdup ("Default");
 
+  notebook = WID ("theme_notebook");
+  
   /* First, we update the GTK+ themes page */
   theme_list = gnome_theme_info_find_by_type (GNOME_THEME_GTK_2);
   string_list = NULL;
@@ -444,14 +452,34 @@ read_themes (GladeXML *dialog)
       string_list = g_list_prepend (string_list, info->name);
     }
 
-  load_theme_names (GTK_TREE_VIEW (WID ("control_theme_treeview")), string_list, current_gtk_theme, GTK_THEME_DEFAULT_NAME);
-  g_list_free (string_list);
+  if (string_list == NULL)
+    {
+      gtk_widget_hide (WID ("control_theme_vbox"));
+      have_gtk_theme = FALSE;
+    }
+  else
+    {
+      gtk_widget_show (WID ("control_theme_vbox"));
+      have_gtk_theme = TRUE;
+      load_theme_names (GTK_TREE_VIEW (WID ("control_theme_treeview")), string_list, current_gtk_theme, GTK_THEME_DEFAULT_NAME);
+      g_list_free (string_list);
+    }
   g_list_free (theme_list);
 
   /* Next, we do the window managers */
   string_list = gnome_window_manager_get_theme_list (window_manager);
-  load_theme_names (GTK_TREE_VIEW (WID ("window_theme_treeview")), string_list, current_window_theme, WINDOW_THEME_DEFAULT_NAME);
-  g_list_free (string_list);
+  if (string_list == NULL)
+    {
+      gtk_widget_hide (WID ("window_theme_vbox"));
+      have_window_theme = FALSE;
+    }
+  else
+    {
+      gtk_widget_show (WID ("window_theme_vbox"));
+      have_window_theme = TRUE;
+      load_theme_names (GTK_TREE_VIEW (WID ("window_theme_treeview")), string_list, current_window_theme, WINDOW_THEME_DEFAULT_NAME);
+      g_list_free (string_list);
+    }
 
   /* Third, we do the icon theme */
   theme_list = gnome_theme_icon_info_find_all ();
@@ -463,8 +491,18 @@ read_themes (GladeXML *dialog)
       string_list = g_list_prepend (string_list, info->name);
     }
 
-  load_theme_names (GTK_TREE_VIEW (WID ("icon_theme_treeview")), string_list, current_icon_theme, ICON_THEME_DEFAULT_NAME);
-  g_list_free (string_list);
+  if (string_list == NULL)
+    {
+      gtk_widget_hide (WID ("icon_theme_vbox"));
+      have_icon_theme = FALSE;
+    }
+  else
+    {
+      gtk_widget_show (WID ("icon_theme_vbox"));
+      have_icon_theme = TRUE;
+      load_theme_names (GTK_TREE_VIEW (WID ("icon_theme_treeview")), string_list, current_icon_theme, ICON_THEME_DEFAULT_NAME);
+      g_list_free (string_list);
+    }
   g_list_free (theme_list);
 
   /* Finally, we do the Meta themes */
@@ -483,18 +521,42 @@ read_themes (GladeXML *dialog)
       string_list = g_list_prepend (string_list, info->name);
     }
 
-  if (current_meta_theme == NULL)
-    current_meta_theme = g_strdup (_("Current modified"));
-
-  load_theme_names (GTK_TREE_VIEW (WID ("meta_theme_treeview")), string_list, current_meta_theme, META_THEME_DEFAULT_NAME);
-  g_list_free (string_list);
+  if (string_list == NULL)
+    {
+      have_meta_theme = FALSE;
+      gtk_widget_hide (WID ("meta_theme_hbox"));
+    }
+  else
+    {
+      have_meta_theme = TRUE;
+      gtk_widget_show (WID ("meta_theme_hbox"));
+      if (current_meta_theme == NULL)
+	current_meta_theme = g_strdup (_("Current modified"));
+      load_theme_names (GTK_TREE_VIEW (WID ("meta_theme_treeview")), string_list, current_meta_theme, META_THEME_DEFAULT_NAME);
+      g_list_free (string_list);
+    }
   g_list_free (theme_list);
   
   
   g_free (current_gtk_theme);
   g_free (current_icon_theme);
   g_free (current_meta_theme);
+  
+  if (! have_meta_theme && ! have_icon_theme && !have_window_theme && ! have_gtk_theme)
+    {
+      GtkWidget *dialog;
+
+      dialog = gtk_message_dialog_new (NULL,
+				       GTK_DIALOG_MODAL,
+				       GTK_MESSAGE_ERROR,
+				       GTK_BUTTONS_OK,
+				       _("No themes could be found on your system.  This probably means that your \"Theme Preferences\" dialog was improperly installed."));
+      gtk_dialog_run (GTK_DIALOG (dialog));
+      gtk_widget_destroy (dialog);
+      exit (0);
+    }
 }
+
 
 
 static void
@@ -700,7 +762,7 @@ setup_tree_view (GtkTreeView *tree_view,
  					       gtk_cell_renderer_text_new (),
  					       "text", THEME_NAME_COLUMN,
  					       NULL);
-  
+
   model = (GtkTreeModel *) gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_BOOLEAN);
   gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (model), 0, sort_func, NULL, NULL);
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (model), 0, GTK_SORT_ASCENDING);
@@ -709,6 +771,7 @@ setup_tree_view (GtkTreeView *tree_view,
   gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
   g_signal_connect (G_OBJECT (selection), "changed", changed_callback, dialog);
 }
+
 
 static void
 setup_dialog (GladeXML *dialog)
