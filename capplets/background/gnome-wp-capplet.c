@@ -379,6 +379,7 @@ static void wallpaper_properties_clicked (GtkWidget * dialog,
     wp_properties_help (GTK_WINDOW (dialog),
 			"user-guide.xml", "goscustdesk-7");
     break;
+  case GTK_RESPONSE_DELETE_EVENT:
   case GTK_RESPONSE_CLOSE: {
     gtk_widget_destroy (dialog);
     gnome_wp_main_quit (capplet);
