@@ -1,11 +1,18 @@
 2002-03-29  Jody Goldberg <jody@gnome.org>
 
+	* gnome-settings-keyboard.c (apply_settings) : click volume is an
+	  integer from 0..100, schema is an int too.  Remove float and double
+	  and add some bounds checking.
+
 	* gnome-settings-accessibility-keyboard.c : make the debug spew optional
 	(set_server_from_gconf) : typo that only applied settings when we
 	  shouldn't.
 	(set_server_from_gconf) : set the mouse key accel flag when mk is
 	  enabled so that we can actually set the accel parms.  How did this
 	  work in X11R6 ?
+	(set_server_from_gconf) : scale mk_time_to_max by mk_interval so that
+	  it is actually in msec.
+	(set_gconf_from_server) : do the inverse here.
 
 2002-03-28  jacob berkman  <jacob@ximian.com>
 

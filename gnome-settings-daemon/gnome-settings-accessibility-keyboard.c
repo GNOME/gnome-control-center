@@ -129,7 +129,7 @@ set_server_from_gconf (GConfEntry *ignored)
 	desc->ctrls->mk_max_speed    = get_int (client, /* pixels / event */
 		CONFIG_ROOT "/mousekeys_max_speed");
 	desc->ctrls->mk_time_to_max  = get_int (client,	/* events before max */
-		CONFIG_ROOT "/mousekeys_accel_time");
+		CONFIG_ROOT "/mousekeys_accel_time") / desc->ctrls->mk_interval;
 	desc->ctrls->mk_delay	     = get_int (client,	/* ms before 1st event */
 		CONFIG_ROOT "/mousekeys_init_delay");
 
@@ -212,8 +212,9 @@ set_gconf_from_server (GConfEntry *ignored)
 		desc->ctrls->enabled_ctrls & XkbMouseKeysMask);
 	set_int (client, CONFIG_ROOT "/mousekeys_max_speed",
 		desc->ctrls->mk_max_speed);
+	/* NOTE : mk_time_to_max is measured in events not time */
 	set_int (client, CONFIG_ROOT "/mousekeys_accel_time",
-		desc->ctrls->mk_time_to_max);
+		desc->ctrls->mk_time_to_max * desc->ctrls->mk_interval);
 	set_int (client, CONFIG_ROOT "/mousekeys_init_delay",
 		desc->ctrls->mk_delay);
 
