@@ -1146,7 +1146,7 @@ is_nautilus_running (void)
 	gint error;
 
 	window_id_atom = XInternAtom (GDK_DISPLAY (), 
-				      "NAUTILUS_DESKTOP_WINDOW_ID", False);
+				      "NAUTILUS_DESKTOP_WINDOW_ID", True);
 
 	if (window_id_atom == None) return FALSE;
 
@@ -1163,12 +1163,12 @@ is_nautilus_running (void)
 	if (actual_type != XA_WINDOW) return FALSE;
 	if (actual_format != 32) return FALSE;
 
-	wmclass_atom = XInternAtom (GDK_DISPLAY (), "WM_CLASS");
+	wmclass_atom = XInternAtom (GDK_DISPLAY (), "WM_CLASS", False);
 
 	gdk_error_trap_push ();
 
 	retval = XGetWindowProperty (GDK_DISPLAY (), nautilus_xid,
-				     wmclass_atom, 0, 23, False, XA_STRING,
+				     wmclass_atom, 0, 24, False, XA_STRING,
 				     &actual_type, &actual_format, &nitems,
 				     &bytes_after, &data);
 
