@@ -115,11 +115,18 @@ cb_add_url (GtkButton *button, gpointer data)
 {
 	GladeXML *dialog = (GladeXML *) data;
 	gchar *new_url = NULL;
+	GConfClient *client;
 
 	new_url = g_strdup(gtk_entry_get_text(GTK_ENTRY(WID("entry_url"))));
+	if (strlen (new_url) == 0)
+		return;
 	g_slist_append(ignore_hosts, new_url);
 	populate_listmodel(GTK_LIST_STORE(model), ignore_hosts);
 	gtk_entry_set_text(GTK_ENTRY(WID("entry_url")), "");
+		
+	client = gconf_client_get_default ();
+	gconf_client_set_list (client, IGNORE_HOSTS_KEY, GCONF_VALUE_STRING, ignore_hosts, NULL);
+
 }
 
 static void
@@ -128,6 +135,7 @@ cb_remove_url (GtkButton *button, gpointer data)
 	GladeXML *dialog = (GladeXML *) data;
 	GtkTreeSelection *selection;
 	GtkTreeIter       iter;
+	GConfClient *client;
 
 	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(WID("treeview_ignore_host")));
 	if (gtk_tree_selection_get_selected(selection, &model, &iter))
@@ -150,6 +158,9 @@ cb_remove_url (GtkButton *button, gpointer data)
 
 		g_free(url);
 		populate_listmodel(GTK_LIST_STORE(model), ignore_hosts);
+		
+		client = gconf_client_get_default ();
+		gconf_client_set_list(client, IGNORE_HOSTS_KEY, GCONF_VALUE_STRING, ignore_hosts, NULL);
 	}
 }
 
@@ -162,11 +173,6 @@ cb_dialog_response (GtkDialog *dialog, gint response_id)
 			"goscustdesk-50");
 	else
 	{
-		GConfClient *client;
-		
-		client = gconf_client_get_default ();
-		gconf_client_set_list(client, IGNORE_HOSTS_KEY, GCONF_VALUE_STRING, ignore_hosts, NULL);
-
 		if(ignore_hosts)
 			g_slist_free(ignore_hosts);
 
