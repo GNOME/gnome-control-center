@@ -64,6 +64,8 @@ struct _Preferences
 	gchar            *wallpaper_filename;
 	gchar            *wallpaper_sel_path;
 
+	GSList *wallpapers;
+
 	gboolean          adjust_opacity;
 	gint              opacity;
 };

@@ -4,53 +4,50 @@
  * DO NOT compile it as part of your application.
  */
 
-gchar *s = N_("window1");
-gchar *s = N_("Menu Options");
-gchar *s = N_("Can detach and move menus");
-gchar *s = N_("Menus have relieved border");
-gchar *s = N_("Submenus can be torn off");
+gchar *s = N_("window4");
+gchar *s = N_("Menus");
+gchar *s = N_("Menu bars are detachable");
+gchar *s = N_("Menu bars have a border");
+gchar *s = N_("Menus can be torn off");
 gchar *s = N_("Menu items have icons");
-gchar *s = N_("Statusbar Options");
-gchar *s = N_("Statusbar is interactive when possible");
-gchar *s = N_("Statusbar progress meter is on the right");
-gchar *s = N_("Toolbar Options");
-gchar *s = N_("Can detach and move toolbars");
-gchar *s = N_("Toolbars have relieved border");
-gchar *s = N_("Toolbar buttons have relieved border");
-gchar *s = N_("Toolbars have line separators");
-gchar *s = N_("Toolbars have text labels");
-gchar *s = N_("window2");
-gchar *s = N_("Dialog Layout");
-gchar *s = N_("Dialog Buttons:");
-gchar *s = N_("Default value\n"
-              "Spread buttons out\n"
-              "Put buttons on edges\n"
-              "Left-justify buttons\n"
-              "Right-justify buttons\n"
-              "");
+gchar *s = N_("Status Bar");
+gchar *s = N_("Use status bar instead of dialog when possible");
+gchar *s = N_("Status bar is interactive when possible");
+gchar *s = N_("Progress bar is on the left");
+gchar *s = N_("Progress bar is on the right");
+gchar *s = N_("Tool Bars");
+gchar *s = N_("Tool bars have a border");
+gchar *s = N_("Tool bar buttons pop up on mouse over");
+gchar *s = N_("Tool bars have line separators");
+gchar *s = N_("Tool bars are detachable");
+gchar *s = N_("Tool bar buttons are icons only");
+gchar *s = N_("Tool bar buttons are text below icons");
+gchar *s = N_("Interface");
+gchar *s = N_("Dialogs");
 gchar *s = N_("Dialog buttons have icons");
-gchar *s = N_("Use statusbar instead of dialog when possible");
-gchar *s = N_("Dialog Behavior");
-gchar *s = N_("Dialog position:");
-gchar *s = N_("Dialog hints:");
-gchar *s = N_("Let window manager decide\n"
-              "Center of the screen\n"
-              "At the mouse pointer\n"
-              "");
-gchar *s = N_("Dialogs are like other windows\n"
-              "Dialogs are treated specially by the window manager\n"
-              "");
 gchar *s = N_("Place dialogs over application window when possible");
-gchar *s = N_("window3");
-gchar *s = N_("GNOME MDI Options");
-gchar *s = N_("Default MDI Mode:");
-gchar *s = N_("MDI notebook tab position:");
-gchar *s = N_("Notebook\n"
-              "Toplevel\n"
-              "Modal\n"
-              "");
-gchar *s = N_("Left\n"
-              "Right\n"
-              "Top\n"
-              "Bottom\n"
-              "");
+gchar *s = N_("Dialogs open");
+gchar *s = N_("Wherever the Window Manager places them");
+gchar *s = N_("At the center of the screen");
+gchar *s = N_("At the mouse pointer");
+gchar *s = N_("Dialogs are treated");
+gchar *s = N_("Like any other window");
+gchar *s = N_("Specially by the window manager");
+gchar *s = N_("Dialog Buttons");
+gchar *s = N_("Default  (Spread out - big)");
+gchar *s = N_("Spread out");
+gchar *s = N_("Spread out (big)");
+gchar *s = N_("Left aligned");
+gchar *s = N_("Right aligned");
+gchar *s = N_("Multiple Documents");
+gchar *s = N_("Notebook tabs");
+gchar *s = N_("Seperate windows");
+gchar *s = N_("The same window");
+gchar *s = N_("Left");
+gchar *s = N_("Right");
+gchar *s = N_("Top");
+gchar *s = N_("Bottom");
+gchar *s = N_("When opening Multiple documents, use");
+gchar *s = N_("When using Notebook tabs, place the tabs on the");
+gchar *s = N_("Miscellaneous");
+gchar *s = N_("Settings will not take effect until applications restart");

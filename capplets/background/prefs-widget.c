@@ -39,265 +39,14 @@ enum {
 
 static CappletWidgetClass *parent_class;
 
-static void prefs_widget_init               (PrefsWidget *prefs_widget);
-static void prefs_widget_class_init         (PrefsWidgetClass *class);
-
-static void prefs_widget_set_arg            (GtkObject *object, 
-					     GtkArg *arg, 
-					     guint arg_id);
-static void prefs_widget_get_arg            (GtkObject *object, 
-					     GtkArg *arg, 
-					     guint arg_id);
-static void prefs_widget_destroy            (GtkObject *object);
-
-static void read_preferences                (PrefsWidget *prefs_widget,
-					     Preferences *prefs);
-
-static void color1_select_color_set_cb      (GnomeColorPicker *cp, 
-					     guint r, 
-					     guint g, 
-					     guint b, 
-					     guint a, 
-					     PrefsWidget *prefs_widget);
-static void color2_select_color_set_cb      (GnomeColorPicker *cp, 
-					     guint r, 
-					     guint g, 
-					     guint b, 
-					     guint a, 
-					     PrefsWidget *prefs_widget);
-static void solid_select_toggled_cb         (GtkToggleButton *tb, 
-					     PrefsWidget *prefs_widget);
-static void gradient_select_toggled_cb      (GtkToggleButton *tb, 
-					     PrefsWidget *prefs_widget);
-static void vertical_select_toggled_cb      (GtkToggleButton *tb, 
-					     PrefsWidget *prefs_widget);
-static void horizontal_select_toggled_cb    (GtkToggleButton *tb, 
-					     PrefsWidget *prefs_widget);
-static void wallpaper_entry_changed_cb      (GtkEntry *e, 
-					     PrefsWidget *prefs_widget);
-static void tiled_select_toggled_cb         (GtkToggleButton *tb, 
-					     PrefsWidget *prefs_widget);
-static void centered_select_toggled_cb      (GtkToggleButton *tb, 
-					     PrefsWidget *prefs_widget);
-static void scaled_aspect_select_toggled_cb (GtkToggleButton *tb, 
-					     PrefsWidget *prefs_widget);
-
-static void scaled_select_toggled_cb        (GtkToggleButton *tb, 
-					     PrefsWidget *prefs_widget);
-static void disable_toggled_cb              (GtkToggleButton *tb, 
-					     PrefsWidget *prefs_widget);
-static void auto_apply_toggled_cb           (GtkToggleButton *tb, 
-					     PrefsWidget *prefs_widget);
-static void adjust_opacity_toggled_cb       (GtkToggleButton *tb,
-					     PrefsWidget *prefs_widget);
-static void opacity_adjust_changed_cb       (GtkAdjustment *adjustment,
-					     PrefsWidget *prefs_widget);
-
-static void set_gradient_controls_sensitive   (PrefsWidget *prefs_widget,
-					       gboolean s);
-static void set_wallpaper_controls_sensitive  (PrefsWidget *prefs_widget,
-					       gboolean s);
-static void set_background_controls_sensitive (PrefsWidget *prefs_widget,
-					       gboolean s);
-static void set_opacity_controls_sensitive    (PrefsWidget *prefs_widget,
-					       gboolean s);
-
-guint
-prefs_widget_get_type (void)
-{
-	static guint prefs_widget_type = 0;
-
-	if (!prefs_widget_type) {
-		GtkTypeInfo prefs_widget_info = {
-			"PrefsWidget",
-			sizeof (PrefsWidget),
-			sizeof (PrefsWidgetClass),
-			(GtkClassInitFunc) prefs_widget_class_init,
-			(GtkObjectInitFunc) prefs_widget_init,
-			(GtkArgSetFunc) NULL,
-			(GtkArgGetFunc) NULL
-		};
-
-		prefs_widget_type = 
-			gtk_type_unique (capplet_widget_get_type (), 
-					 &prefs_widget_info);
-	}
-
-	return prefs_widget_type;
-}
-
 static void
-prefs_widget_init (PrefsWidget *prefs_widget)
+set_background_controls_sensitive (PrefsWidget *prefs_widget, gboolean s) 
 {
-	GtkWidget *widget;
-	GtkAdjustment *adjustment;
-
-	prefs_widget->dialog_data = 
-		glade_xml_new (GLADE_DATADIR "/background-properties.glade",
-			       "prefs_widget");
-
-	widget = glade_xml_get_widget (prefs_widget->dialog_data, 
-				       "prefs_widget");
-	gtk_container_add (GTK_CONTAINER (prefs_widget), widget);
-
-	widget = glade_xml_get_widget (prefs_widget->dialog_data,
-				       "monitor_frame");
-	prefs_widget->preview = applier_class_get_preview_widget ();
-	gtk_container_add (GTK_CONTAINER (widget), prefs_widget->preview);
-
-	glade_xml_signal_connect_data (prefs_widget->dialog_data, 
-				       "color1_select_color_set_cb",
-				       color1_select_color_set_cb,
-				       prefs_widget);
-	glade_xml_signal_connect_data (prefs_widget->dialog_data, 
-				       "color2_select_color_set_cb",
-				       color2_select_color_set_cb,
-				       prefs_widget);
-	glade_xml_signal_connect_data (prefs_widget->dialog_data,
-				       "solid_select_toggled_cb",
-				       solid_select_toggled_cb,
-				       prefs_widget);
-	glade_xml_signal_connect_data (prefs_widget->dialog_data,
-				       "gradient_select_toggled_cb",
-				       gradient_select_toggled_cb,
-				       prefs_widget);
-	glade_xml_signal_connect_data (prefs_widget->dialog_data,
-				       "vertical_select_toggled_cb",
-				       vertical_select_toggled_cb,
-				       prefs_widget);
-	glade_xml_signal_connect_data (prefs_widget->dialog_data,
-				       "horizontal_select_toggled_cb",
-				       horizontal_select_toggled_cb,
-				       prefs_widget);
-	glade_xml_signal_connect_data (prefs_widget->dialog_data,
-				       "wallpaper_entry_changed_cb",
-				       wallpaper_entry_changed_cb,
-				       prefs_widget);
-	glade_xml_signal_connect_data (prefs_widget->dialog_data,
-				       "tiled_select_toggled_cb",
-				       tiled_select_toggled_cb,
-				       prefs_widget);
-	glade_xml_signal_connect_data (prefs_widget->dialog_data,
-				       "centered_select_toggled_cb",
-				       centered_select_toggled_cb,
-				       prefs_widget);
-	glade_xml_signal_connect_data (prefs_widget->dialog_data,
-				       "scaled_aspect_select_toggled_cb",
-				       scaled_aspect_select_toggled_cb,
-				       prefs_widget);
-	glade_xml_signal_connect_data (prefs_widget->dialog_data,
-				       "scaled_select_toggled_cb",
-				       scaled_select_toggled_cb,
-				       prefs_widget);
-	glade_xml_signal_connect_data (prefs_widget->dialog_data,
-				       "disable_toggled_cb",
-				       disable_toggled_cb,
-				       prefs_widget);
-	glade_xml_signal_connect_data (prefs_widget->dialog_data,
-				       "auto_apply_toggled_cb",
-				       auto_apply_toggled_cb,
-				       prefs_widget);
-	glade_xml_signal_connect_data (prefs_widget->dialog_data,
-				       "adjust_opacity_toggled_cb",
-				       adjust_opacity_toggled_cb,
-				       prefs_widget);
-
-	adjustment = gtk_range_get_adjustment
-		(GTK_RANGE (WID ("opacity_adjust")));
-	gtk_signal_connect (GTK_OBJECT (adjustment), "value-changed",
-			    GTK_SIGNAL_FUNC (opacity_adjust_changed_cb),
-			    prefs_widget);
-
-	gnome_entry_load_history
-		(GNOME_ENTRY (gnome_file_entry_gnome_entry 
-			      (GNOME_FILE_ENTRY (WID ("wallpaper_entry")))));
-}
-
-static void
-prefs_widget_class_init (PrefsWidgetClass *class) 
-{
-	GtkObjectClass *object_class;
-
-	gtk_object_add_arg_type ("PrefsWidget::preferences",
-				 GTK_TYPE_POINTER,
-				 GTK_ARG_READWRITE,
-				 ARG_PREFERENCES);
-
-	object_class = GTK_OBJECT_CLASS (class);
-	object_class->destroy = prefs_widget_destroy;
-	object_class->set_arg = prefs_widget_set_arg;
-	object_class->get_arg = prefs_widget_get_arg;
-
-	parent_class = CAPPLET_WIDGET_CLASS
-		(gtk_type_class (capplet_widget_get_type ()));
-}
-
-static void
-prefs_widget_set_arg (GtkObject *object, GtkArg *arg, guint arg_id) 
-{
-	PrefsWidget *prefs_widget;
-
-	g_return_if_fail (object != NULL);
-	g_return_if_fail (IS_PREFS_WIDGET (object));
-
-	prefs_widget = PREFS_WIDGET (object);
-
-	switch (arg_id) {
-	case ARG_PREFERENCES:
-		if (prefs_widget->prefs)
-			gtk_object_unref (GTK_OBJECT (prefs_widget->prefs));
-
-		prefs_widget->prefs = GTK_VALUE_POINTER (*arg);
-
-		if (prefs_widget->prefs) {
-			gtk_object_ref (GTK_OBJECT (prefs_widget->prefs));
-			read_preferences (prefs_widget, prefs_widget->prefs);
-		}
-
-		break;
-
-	default:
-		g_warning ("Bad argument set");
-		break;
-	}
-}
-
-static void
-prefs_widget_get_arg (GtkObject *object, GtkArg *arg, guint arg_id) 
-{
-	PrefsWidget *prefs_widget;
-
-	g_return_if_fail (object != NULL);
-	g_return_if_fail (IS_PREFS_WIDGET (object));
-
-	prefs_widget = PREFS_WIDGET (object);
-
-	switch (arg_id) {
-	case ARG_PREFERENCES:
-		GTK_VALUE_POINTER (*arg) = prefs_widget->prefs;
-		break;
-
-	default:
-		g_warning ("Bad argument get");
-		break;
-	}
-}
-
-static void
-prefs_widget_destroy (GtkObject *object) 
-{
-	PrefsWidget *prefs_widget;
-
-	g_return_if_fail (object != NULL);
-	g_return_if_fail (IS_PREFS_WIDGET (object));
-
-	prefs_widget = PREFS_WIDGET (object);
-
-	gnome_entry_save_history
-		(GNOME_ENTRY (gnome_file_entry_gnome_entry 
-			      (GNOME_FILE_ENTRY (WID ("wallpaper_entry")))));
-
-	GTK_OBJECT_CLASS (parent_class)->destroy (object);
+	gtk_widget_set_sensitive (WID ("color_frame"), s);
+	gtk_widget_set_sensitive (WID ("wallpaper_frame"), s);
+	gtk_widget_set_sensitive (WID ("adjust_opacity_toggle"), s);
+	gtk_widget_set_sensitive (WID ("opacity_box"), s && prefs_widget->prefs->adjust_opacity);
+	gtk_widget_set_sensitive (WID ("auto_apply"), s);
 }
 
 GtkWidget *
@@ -322,10 +71,54 @@ prefs_widget_set_preferences (PrefsWidget *prefs_widget, Preferences *prefs)
 }
 
 static void
+wallpaper_entry_changed_cb (GtkWidget *e, PrefsWidget *prefs_widget) 
+{
+	char *filename;
+
+	g_return_if_fail (prefs_widget != NULL);
+	g_return_if_fail (IS_PREFS_WIDGET (prefs_widget));
+	g_return_if_fail (prefs_widget->prefs != NULL);
+	g_return_if_fail (IS_PREFERENCES (prefs_widget->prefs));
+
+	g_free (prefs_widget->prefs->wallpaper_filename);
+
+	prefs_widget->prefs->wallpaper_filename =
+		g_strdup (gtk_object_get_data (GTK_OBJECT (e), "wallpaper_filename"));
+
+	prefs_widget->prefs->wallpaper_enabled = 
+		prefs_widget->prefs->wallpaper_filename &&
+		g_file_exists (prefs_widget->prefs->wallpaper_filename);
+			
+	preferences_changed (prefs_widget->prefs);
+	capplet_widget_state_changed (CAPPLET_WIDGET (prefs_widget), TRUE);
+}
+
+
+
+static void
+append_wallpaper (GtkMenu *menu, char *label, char *path, PrefsWidget *prefs_widget)
+{
+	GtkWidget *item;
+
+	item = gtk_menu_item_new_with_label (label);
+	if (path)
+		gtk_object_set_data (GTK_OBJECT (item), "wallpaper_filename", path);
+	gtk_signal_connect (GTK_OBJECT (item), "activate",
+			    GTK_SIGNAL_FUNC (wallpaper_entry_changed_cb),
+			    prefs_widget);
+			    
+	gtk_menu_append (menu, item);
+}
+
+static void
 read_preferences (PrefsWidget *prefs_widget, Preferences *prefs) 
 {
-	GtkWidget *widget, *entry;
+	GtkWidget *widget;
 	GtkAdjustment *adjustment;
+	GtkWidget *menu;
+	gint i;
+	gint thing;
+	GSList *item;
 
 	g_return_if_fail (prefs_widget != NULL);
 	g_return_if_fail (IS_PREFS_WIDGET (prefs_widget));
@@ -341,120 +134,69 @@ read_preferences (PrefsWidget *prefs_widget, Preferences *prefs)
 		 prefs->color2->red, prefs->color2->green,
 		 prefs->color2->blue, 0xffff);
 
-	if (prefs->gradient_enabled) {
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
-					      (WID ("gradient_select")),
-					      TRUE);
-		set_gradient_controls_sensitive (prefs_widget, TRUE);
-	} else {
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
-					      (WID ("solid_select")),
-					      TRUE);
-		set_gradient_controls_sensitive (prefs_widget, FALSE);
-	}
+	gtk_widget_set_sensitive (
+		glade_xml_get_widget (prefs_widget->dialog_data,
+				      "color2_select"), 
+		prefs_widget->prefs->gradient_enabled);
 
-	if (prefs->orientation == ORIENTATION_VERT)
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
-					      (WID ("vertical_select")),
-					      TRUE);
-	else if (prefs->orientation == ORIENTATION_HORIZ)
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
-					      (WID ("horizontal_select")),
-					      TRUE);
+	thing = prefs->gradient_enabled 
+		? (prefs->orientation == ORIENTATION_VERT
+		   ? 1 : 2) : 0;
+
+	gtk_option_menu_set_history (GTK_OPTION_MENU (WID ("color_option")), thing);
 
 	widget = WID ("wallpaper_entry");
 
+#if 0
 	if (prefs->wallpaper_sel_path)
 		gnome_file_entry_set_default_path 
 			(GNOME_FILE_ENTRY (widget),
 			 prefs->wallpaper_sel_path);
+#endif
 
-	if (prefs->wallpaper_filename) {
-		entry = gnome_file_entry_gtk_entry 
-			(GNOME_FILE_ENTRY (widget));
-		gtk_entry_set_text (GTK_ENTRY (entry),
-				    prefs->wallpaper_filename);
-		set_wallpaper_controls_sensitive (prefs_widget, TRUE);
-	} else {
-		set_wallpaper_controls_sensitive (prefs_widget, FALSE);
+	menu = gtk_menu_new ();
+	append_wallpaper (GTK_MENU (menu), _("(None)"), NULL, prefs_widget);
+
+#warning FIXME: add a small snapshot of the image?  that would rule.
+	for (thing = 0, i = 1, item = prefs->wallpapers; item; i++, item = item->next) {
+		append_wallpaper (GTK_MENU (menu), g_basename (item->data), 
+				  item->data, prefs_widget);
+		if (prefs->wallpaper_filename && 
+		    !strcmp (prefs->wallpaper_filename, item->data))
+			thing = i;
 	}
 
-	switch (prefs->wallpaper_type) {
-	case WPTYPE_TILED:
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
-					      (WID ("tiled_select")),
-					      TRUE);
-		break;
-
-	case WPTYPE_CENTERED:
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
-					      (WID ("centered_select")),
-					      TRUE);
-		break;
-
-	case WPTYPE_SCALED_ASPECT:
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
-					      (WID ("scaled_aspect_select")),
-					      TRUE);
-		break;
-
-	case WPTYPE_SCALED:
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
-					      (WID ("scaled_select")),
-					      TRUE);
-		break;
-
-	default:
-		g_error ("Bad wallpaper type");
-		break;
+	if (!thing && prefs->wallpaper_filename) {
+		thing = 1;
+		append_wallpaper (GTK_MENU (menu),
+				  g_basename (prefs->wallpaper_filename),
+				  prefs->wallpaper_filename, prefs_widget);
 	}
+	
+	gtk_option_menu_set_history (GTK_OPTION_MENU (WID ("wp_effect_option")),
+				     prefs->wallpaper_type);
 
-	if (prefs->enabled) {
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
-					      (WID ("disable_toggle")),
-					      FALSE);
-		set_background_controls_sensitive (prefs_widget, TRUE);
-	} else {
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
-					      (WID ("disable_toggle")),
-					      TRUE);
-		set_background_controls_sensitive (prefs_widget, FALSE);
-	}
+	gtk_option_menu_set_menu (GTK_OPTION_MENU (WID ("wp_file_option")), menu);
+	gtk_option_menu_set_history (GTK_OPTION_MENU (WID ("wp_file_option")), thing);
 
-	if (prefs->auto_apply)
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
-					      (WID ("auto_apply")),
-					      TRUE);
-	else
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
-					      (WID ("auto_apply")),
-					      FALSE);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("disable_toggle")),
+				      prefs->enabled);
 
-	if (prefs->adjust_opacity)
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
-					      (WID ("auto_apply")),
-					      TRUE);
-	else
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
-					      (WID ("auto_apply")),
-					      FALSE);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
+				      (WID ("auto_apply")),
+				      prefs->auto_apply);
 
-	if (prefs->adjust_opacity) {
-		gtk_toggle_button_set_active
-			(GTK_TOGGLE_BUTTON (WID ("adjust_opacity_toggle")),
-			 TRUE);
-		set_opacity_controls_sensitive (prefs_widget, TRUE);
-	} else {
-		gtk_toggle_button_set_active
-			(GTK_TOGGLE_BUTTON (WID ("adjust_opacity_toggle")),
-			 FALSE);
-		set_opacity_controls_sensitive (prefs_widget, FALSE);
-	}
+	
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
+				      (WID ("adjust_opacity_toggle")),
+				      prefs->adjust_opacity);
+	gtk_widget_set_sensitive (GTK_WIDGET (WID ("opacity_box")),
+				  prefs->adjust_opacity && prefs->enabled);
 
 	adjustment = gtk_range_get_adjustment
 		(GTK_RANGE (WID ("opacity_adjust")));
 	gtk_adjustment_set_value (adjustment, prefs->opacity);
-
+	
 	preferences_apply_preview (prefs);
 }
 
@@ -510,8 +252,6 @@ solid_select_toggled_cb (GtkToggleButton *tb, PrefsWidget *prefs_widget)
 
 	if (gtk_toggle_button_get_active (tb)) {
 		prefs_widget->prefs->gradient_enabled = FALSE;
-		set_gradient_controls_sensitive (prefs_widget, FALSE);
-
 		preferences_changed (prefs_widget->prefs);
 	}
 
@@ -528,8 +268,6 @@ gradient_select_toggled_cb (GtkToggleButton *tb, PrefsWidget *prefs_widget)
 
 	if (gtk_toggle_button_get_active (tb)) {
 		prefs_widget->prefs->gradient_enabled = TRUE;
-		set_gradient_controls_sensitive (prefs_widget, TRUE);
-
 		preferences_changed (prefs_widget->prefs);
 	}
 
@@ -565,44 +303,6 @@ horizontal_select_toggled_cb (GtkToggleButton *tb, PrefsWidget *prefs_widget)
 		preferences_changed (prefs_widget->prefs);
 	}
 
-	capplet_widget_state_changed (CAPPLET_WIDGET (prefs_widget), TRUE);
-}
-
-static void
-wallpaper_entry_changed_cb (GtkEntry *e, PrefsWidget *prefs_widget) 
-{
-	g_return_if_fail (prefs_widget != NULL);
-	g_return_if_fail (IS_PREFS_WIDGET (prefs_widget));
-	g_return_if_fail (prefs_widget->prefs == NULL ||
-			  IS_PREFERENCES (prefs_widget->prefs));
-
-	if (prefs_widget->prefs == NULL) return;
-
-	if (prefs_widget->prefs->wallpaper_filename)
-		g_free (prefs_widget->prefs->wallpaper_filename);
-
-	prefs_widget->prefs->wallpaper_filename =
-		gnome_file_entry_get_full_path 
-		(GNOME_FILE_ENTRY (WID ("wallpaper_entry")), TRUE);
-
-	if (!g_file_test (prefs_widget->prefs->wallpaper_filename,
-			  G_FILE_TEST_ISFILE)) {
-		g_free (prefs_widget->prefs->wallpaper_filename);
-		prefs_widget->prefs->wallpaper_filename = NULL;
-	}
-
-	if (prefs_widget->prefs->wallpaper_filename &&
-	    strlen (prefs_widget->prefs->wallpaper_filename) &&
-	    g_strcasecmp (prefs_widget->prefs->wallpaper_filename, "none")) 
-	{
-		set_wallpaper_controls_sensitive (prefs_widget, TRUE);
-		prefs_widget->prefs->wallpaper_enabled = TRUE;
-	} else {
-		set_wallpaper_controls_sensitive (prefs_widget, FALSE);
-		prefs_widget->prefs->wallpaper_enabled = FALSE;
-	}
-
-	preferences_changed (prefs_widget->prefs);
 	capplet_widget_state_changed (CAPPLET_WIDGET (prefs_widget), TRUE);
 }
 
@@ -679,10 +379,7 @@ disable_toggled_cb (GtkToggleButton *tb, PrefsWidget *prefs_widget)
 	g_return_if_fail (prefs_widget->prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs_widget->prefs));
 
-	if (gtk_toggle_button_get_active (tb))
-		prefs_widget->prefs->enabled = FALSE;
-	else
-		prefs_widget->prefs->enabled = TRUE;
+	prefs_widget->prefs->enabled = gtk_toggle_button_get_active (tb);
 
 	set_background_controls_sensitive (prefs_widget, 
 					   prefs_widget->prefs->enabled);
@@ -692,18 +389,170 @@ disable_toggled_cb (GtkToggleButton *tb, PrefsWidget *prefs_widget)
 }
 
 static void
+color_effect_cb (GtkWidget *w, PrefsWidget *prefs_widget)
+{
+	switch (GPOINTER_TO_INT (gtk_object_get_data (GTK_OBJECT (w), "index"))) {
+	case 0:
+		prefs_widget->prefs->gradient_enabled = FALSE;
+		break;
+	case 1:
+		prefs_widget->prefs->gradient_enabled = TRUE;
+		prefs_widget->prefs->orientation = ORIENTATION_VERT;
+		break;
+	case 2:
+		prefs_widget->prefs->gradient_enabled = TRUE;
+		prefs_widget->prefs->orientation = ORIENTATION_HORIZ;
+		break;
+	default:
+		break;
+	}
+
+	gtk_widget_set_sensitive (
+		glade_xml_get_widget (prefs_widget->dialog_data,
+				      "color2_select"), 
+		prefs_widget->prefs->gradient_enabled);
+
+	preferences_changed (prefs_widget->prefs);
+	capplet_widget_state_changed (CAPPLET_WIDGET (prefs_widget), TRUE);
+}
+
+static void
+wallpaper_effect_cb (GtkWidget *w, PrefsWidget *prefs_widget)
+{
+	gint i;
+
+	i = GPOINTER_TO_INT (gtk_object_get_data (GTK_OBJECT (w), "index"));
+
+	prefs_widget->prefs->wallpaper_type = i;
+
+	preferences_changed (prefs_widget->prefs);
+	capplet_widget_state_changed (CAPPLET_WIDGET (prefs_widget), TRUE);
+}
+
+static void
+setup_preview(GtkWidget *widget, PrefsWidget *prefs)
+{
+	char *p;
+	GList *l;
+	GtkWidget *pp = NULL;
+	GdkImlibImage *im;
+	int w,h;
+	GtkWidget *frame;
+	GtkFileSelection *fs;
+
+	g_return_if_fail (widget != NULL);
+	g_return_if_fail (GTK_IS_WIDGET (widget));
+
+	frame = gtk_object_get_data(GTK_OBJECT(widget),"frame");
+	fs = gtk_object_get_data(GTK_OBJECT(frame),"fs");
+
+	if((l = gtk_container_children(GTK_CONTAINER(frame))) != NULL) {
+		pp = l->data;
+		g_list_free(l);
+	}
+
+	if(pp)
+		gtk_widget_destroy(pp);
+	
+	p = gtk_file_selection_get_filename(fs);
+	if(!p || !g_file_test (p,G_FILE_TEST_ISLINK|G_FILE_TEST_ISFILE) ||
+	   !(im = gdk_imlib_load_image (p)))
+		return;
+
+	w = im->rgb_width;
+	h = im->rgb_height;
+	if(w>h) {
+		if(w>100) {
+			h = h*(100.0/w);
+			w = 100;
+		}
+	} else {
+		if(h>100) {
+			w = w*(100.0/h);
+			h = 100;
+		}
+	}
+	pp = gnome_pixmap_new_from_imlib_at_size (im, w, h);
+	gtk_widget_show(pp);
+	gtk_container_add(GTK_CONTAINER(frame),pp);
+
+	gdk_imlib_destroy_image(im);
+}
+
+static void
+browse_button_cb (GtkWidget *w, PrefsWidget *prefs_widget)
+{
+	GtkWidget *hbox, *widg;
+	GtkFileSelection *filesel;
+	
+	if (prefs_widget->filesel) {
+		gdk_window_show (prefs_widget->filesel->window);
+		gdk_window_raise (prefs_widget->filesel->window);
+		return;
+	}
+	
+	prefs_widget->filesel = gtk_file_selection_new (_("Wallpaper Selection"));
+	filesel = GTK_FILE_SELECTION (prefs_widget->filesel);
+	hbox = filesel->file_list;
+
+	do {
+		hbox = hbox->parent;
+		if(!hbox) {
+			g_warning(_("Can't find an hbox, using a normal file "
+				    "selection"));
+			goto signal_setup;
+		}
+	} while (!GTK_IS_HBOX (hbox));
+
+	widg = gtk_frame_new (_("Preview"));
+	gtk_widget_show (widg);
+	gtk_box_pack_end (GTK_BOX (hbox), widg, FALSE, FALSE, 0);
+	gtk_widget_set_usize (widg, 110, 110);
+
+	gtk_object_set_data (GTK_OBJECT (widg), "fs", filesel);
+	gtk_object_set_data (GTK_OBJECT (filesel->file_list), "frame", widg);
+	gtk_object_set_data (GTK_OBJECT (filesel->selection_entry), "frame", widg);
+			     
+	gtk_signal_connect (GTK_OBJECT (filesel->file_list),"select_row",
+			    GTK_SIGNAL_FUNC (setup_preview), prefs_widget);
+
+	gtk_signal_connect (GTK_OBJECT (filesel->selection_entry), "changed",
+			    GTK_SIGNAL_FUNC (setup_preview), prefs_widget);
+			    
+
+ signal_setup:
+#if 0
+	if (wpFileSelName)
+		gtk_file_selection_set_filename (filesel, wpFileSelName);
+	else if (origState.wpFileName)
+		gtk_file_selection_set_filename (filesel, origState.wpFileName);
+#endif					 
+	gtk_signal_connect (GTK_OBJECT (filesel), "destroy",
+			    GTK_SIGNAL_FUNC (gtk_widget_destroyed),
+			    &prefs_widget->filesel);
+#if 0	
+	gtk_signal_connect (GTK_OBJECT (filesel->ok_button), "clicked",
+			    GTK_SIGNAL_FUNC (wp_selection_ok), prefs_widget);
+	
+	gtk_signal_connect (GTK_OBJECT (filesel->cancel_button), "clicked",
+			    GTK_SIGNAL_FUNC (wp_selection_cancel), prefs_widget);
+#endif
+	gtk_widget_show (filesel);
+}
+
+static void
 auto_apply_toggled_cb (GtkToggleButton *tb, PrefsWidget *prefs_widget)
 {
 	g_return_if_fail (prefs_widget != NULL);
 	g_return_if_fail (IS_PREFS_WIDGET (prefs_widget));
 	g_return_if_fail (prefs_widget->prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs_widget->prefs));
-
+	
 	if (gtk_toggle_button_get_active (tb))
 		prefs_widget->prefs->auto_apply = TRUE;
 	else
 		prefs_widget->prefs->auto_apply = FALSE;
-
+	
 	preferences_changed (prefs_widget->prefs);
 	capplet_widget_state_changed (CAPPLET_WIDGET (prefs_widget), TRUE);
 }
@@ -715,64 +564,198 @@ adjust_opacity_toggled_cb (GtkToggleButton *tb, PrefsWidget *prefs_widget)
 	g_return_if_fail (IS_PREFS_WIDGET (prefs_widget));
 	g_return_if_fail (prefs_widget->prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs_widget->prefs));
-
-	if (gtk_toggle_button_get_active (tb)) {
-		prefs_widget->prefs->adjust_opacity = TRUE;
-		set_opacity_controls_sensitive (prefs_widget, TRUE);
-	} else {
-		prefs_widget->prefs->adjust_opacity = FALSE;
-		set_opacity_controls_sensitive (prefs_widget, FALSE);
-	}
-
+	
+	prefs_widget->prefs->adjust_opacity = gtk_toggle_button_get_active (tb);
+	gtk_widget_set_sensitive (WID ("opacity_box"), prefs_widget->prefs->enabled && prefs_widget->prefs->adjust_opacity);
+	
 	preferences_changed (prefs_widget->prefs);
 	capplet_widget_state_changed (CAPPLET_WIDGET (prefs_widget), TRUE);
 }
 
 static void
 opacity_adjust_changed_cb (GtkAdjustment *adjustment,
-			      PrefsWidget *prefs_widget) 
+			   PrefsWidget *prefs_widget) 
 {
 	g_return_if_fail (prefs_widget != NULL);
 	g_return_if_fail (IS_PREFS_WIDGET (prefs_widget));
 	g_return_if_fail (prefs_widget->prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs_widget->prefs));
-
-	prefs_widget->prefs->opacity = adjustment->value;
-
+	
 	preferences_changed (prefs_widget->prefs);
 	capplet_widget_state_changed (CAPPLET_WIDGET (prefs_widget), TRUE);
 }
-
+	
 static void
-set_gradient_controls_sensitive (PrefsWidget *prefs_widget, gboolean s) 
+prefs_widget_init (PrefsWidget *prefs_widget)
 {
-	gtk_widget_set_sensitive (WID ("vertical_select"), s);
-	gtk_widget_set_sensitive (WID ("horizontal_select"), s);
-	gtk_widget_set_sensitive (WID ("color2_label"), s);
-	gtk_widget_set_sensitive (WID ("color2_select"), s);
+	GtkWidget *widget;
+	GtkAdjustment *adjustment;
+	GList *node;
+	int i;
+
+	prefs_widget->dialog_data = 
+		glade_xml_new (GLADE_DATADIR "/background-properties.glade",
+			       "prefs_widget");
+
+	widget = glade_xml_get_widget (prefs_widget->dialog_data, 
+				       "prefs_widget");
+	gtk_container_add (GTK_CONTAINER (prefs_widget), widget);
+
+	widget = glade_xml_get_widget (prefs_widget->dialog_data,
+				       "monitor_frame");
+
+	prefs_widget->preview = applier_class_get_preview_widget ();
+	gtk_container_add (GTK_CONTAINER (widget), prefs_widget->preview);
+
+	glade_xml_signal_connect_data (prefs_widget->dialog_data, 
+				       "color1_select_color_set_cb",
+				       color1_select_color_set_cb,
+				       prefs_widget);
+	glade_xml_signal_connect_data (prefs_widget->dialog_data, 
+				       "color2_select_color_set_cb",
+				       color2_select_color_set_cb,
+				       prefs_widget);
+	glade_xml_signal_connect_data (prefs_widget->dialog_data,
+				       "disable_toggled_cb",
+				       disable_toggled_cb,
+				       prefs_widget);
+	glade_xml_signal_connect_data (prefs_widget->dialog_data,
+				       "browse_button_cb",
+				       browse_button_cb,
+				       prefs_widget);
+	glade_xml_signal_connect_data (prefs_widget->dialog_data,
+				       "auto_apply_toggled_cb",
+				       auto_apply_toggled_cb,
+				       prefs_widget);
+	glade_xml_signal_connect_data (prefs_widget->dialog_data,
+				       "adjust_opacity_toggled_cb",
+				       adjust_opacity_toggled_cb,
+				       prefs_widget);
+	
+	/*adjustment = gtk_range_get_adjustment (GTK_RANGE (WID ("opacity_adjust")));*/
+	adjustment = gtk_adjustment_new (100.0, 0.0, 100.0, 1.0, 10.0, 10.0); 
+	gtk_range_set_adjustment (GTK_RANGE (WID ("opacity_adjust")), adjustment); 
+	gtk_signal_connect (GTK_OBJECT (adjustment), "value-changed",
+			    GTK_SIGNAL_FUNC (opacity_adjust_changed_cb),
+			    prefs_widget);
+	
+	
+	widget = WID ("color_option");
+	node = GTK_MENU_SHELL (gtk_option_menu_get_menu (GTK_OPTION_MENU (widget)))->children;
+
+	for (i=0; node; i++, node = node->next) {
+		gtk_signal_connect (GTK_OBJECT (node->data), "activate",
+				    GTK_SIGNAL_FUNC (color_effect_cb),
+				    prefs_widget);
+
+		gtk_object_set_data (GTK_OBJECT (node->data), "index",
+				     GINT_TO_POINTER (i));
+	}
+
+
+	widget = WID ("wp_effect_option");
+	node = GTK_MENU_SHELL (gtk_option_menu_get_menu (GTK_OPTION_MENU (widget)))->children;
+
+	for (i=0; node; i++, node = node->next) {
+		gtk_signal_connect (GTK_OBJECT (node->data), "activate",
+				    GTK_SIGNAL_FUNC (wallpaper_effect_cb),
+				    prefs_widget);
+
+		gtk_object_set_data (GTK_OBJECT (node->data), "index",
+				     GINT_TO_POINTER (i));
+	}	
 }
 
 static void
-set_wallpaper_controls_sensitive (PrefsWidget *prefs_widget, gboolean s) 
+prefs_widget_set_arg (GtkObject *object, GtkArg *arg, guint arg_id) 
 {
-	gtk_widget_set_sensitive (WID ("tiled_select"), s);
-	gtk_widget_set_sensitive (WID ("centered_select"), s);
-	gtk_widget_set_sensitive (WID ("scaled_aspect_select"), s);
-	gtk_widget_set_sensitive (WID ("scaled_select"), s);
+	PrefsWidget *prefs_widget;
+
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (IS_PREFS_WIDGET (object));
+
+	prefs_widget = PREFS_WIDGET (object);
+
+	switch (arg_id) {
+	case ARG_PREFERENCES:
+		if (prefs_widget->prefs)
+			gtk_object_unref (GTK_OBJECT (prefs_widget->prefs));
+
+		prefs_widget->prefs = GTK_VALUE_POINTER (*arg);
+
+		if (prefs_widget->prefs) {
+			gtk_object_ref (GTK_OBJECT (prefs_widget->prefs));
+			read_preferences (prefs_widget, prefs_widget->prefs);
+		}
+
+		break;
+
+	default:
+		g_warning ("Bad argument set");
+		break;
+	}
 }
 
 static void
-set_background_controls_sensitive (PrefsWidget *prefs_widget, gboolean s) 
+prefs_widget_get_arg (GtkObject *object, GtkArg *arg, guint arg_id) 
 {
-	gtk_widget_set_sensitive (WID ("color_frame"), s);
-	gtk_widget_set_sensitive (WID ("wallpaper_frame"), s);
+	PrefsWidget *prefs_widget;
+
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (IS_PREFS_WIDGET (object));
+
+	prefs_widget = PREFS_WIDGET (object);
+
+	switch (arg_id) {
+	case ARG_PREFERENCES:
+		GTK_VALUE_POINTER (*arg) = prefs_widget->prefs;
+		break;
+
+	default:
+		g_warning ("Bad argument get");
+		break;
+	}
 }
 
 static void
-set_opacity_controls_sensitive (PrefsWidget *prefs_widget, gboolean s)
+prefs_widget_class_init (PrefsWidgetClass *class) 
 {
-	gtk_widget_set_sensitive (WID ("opacity_low_label"), s);
-	gtk_widget_set_sensitive (WID ("opacity_adjust"), s);
-	gtk_widget_set_sensitive (WID ("opacity_high_label"), s);
+	GtkObjectClass *object_class;
+
+	gtk_object_add_arg_type ("PrefsWidget::preferences",
+				 GTK_TYPE_POINTER,
+				 GTK_ARG_READWRITE,
+				 ARG_PREFERENCES);
+
+	object_class = GTK_OBJECT_CLASS (class);
+	object_class->set_arg = prefs_widget_set_arg;
+	object_class->get_arg = prefs_widget_get_arg;
+
+	parent_class = CAPPLET_WIDGET_CLASS
+		(gtk_type_class (capplet_widget_get_type ()));
 }
 
+
+guint
+prefs_widget_get_type (void)
+{
+	static guint prefs_widget_type = 0;
+
+	if (!prefs_widget_type) {
+		GtkTypeInfo prefs_widget_info = {
+			"PrefsWidget",
+			sizeof (PrefsWidget),
+			sizeof (PrefsWidgetClass),
+			(GtkClassInitFunc) prefs_widget_class_init,
+			(GtkObjectInitFunc) prefs_widget_init,
+			(GtkArgSetFunc) NULL,
+			(GtkArgGetFunc) NULL
+		};
+
+		prefs_widget_type = 
+			gtk_type_unique (capplet_widget_get_type (), 
+					 &prefs_widget_info);
+	}
+
+	return prefs_widget_type;
+}

@@ -26,26 +26,46 @@
 
 #include <gnome.h>
 
+#include <gtkhtml/gtkhtml.h>
 #include "capplet-dir.h"
 #include "preferences.h"
 
-#define CAPPLET_DIR_VIEW(obj)          GTK_CHECK_CAST (obj, capplet_dir_view_get_type (), CappletDirView)
-#define CAPPLET_DIR_VIEW_CLASS(klass)  GTK_CHECK_CLASS_CAST (klass, capplet_dir_view_get_type (), CappletDirViewClass)
-#define IS_CAPPLET_DIR_VIEW(obj)       GTK_CHECK_TYPE (obj, capplet_dir_view_get_type ())
+#define CAPPLET_DIR_VIEW_TYPE          (capplet_dir_view_get_type ())
+#define CAPPLET_DIR_VIEW(obj)          (GTK_CHECK_CAST (obj, CAPPLET_DIR_VIEW_TYPE, CappletDirView))
+#define CAPPLET_DIR_VIEW_CLASS(klass)  (GTK_CHECK_CLASS_CAST (klass, CAPPLET_DIR_VIEW_TYPE, CappletDirViewClass))
+#define IS_CAPPLET_DIR_VIEW(obj)       (GTK_CHECK_TYPE (obj, CAPPLET_DIR_VIEW_TYPE))
+#define CAPPLET_DIR_VIEW_W(obj)        (CAPPLET_DIR_VIEW (obj)->app)
 
 typedef struct _CappletDirViewClass CappletDirViewClass;
+typedef struct _CappletDirViewImpl  CappletDirViewImpl;
+
+typedef void (*CDVFunc) (CappletDirView *);
+
+struct _CappletDirViewImpl
+{
+	/* remove entries from view */
+	CDVFunc clear;
+
+	/* clean up (destroy widgets */
+	CDVFunc clean;
+
+	CDVFunc populate;
+
+	GtkWidget *(*create) (CappletDirView *);
+};
+	
 
 struct _CappletDirView 
 {
-	GnomeApp app;
+	GtkObject object;
+	GnomeApp *app;
 
 	CappletDir *capplet_dir;
 	CappletDirEntry *selected;
 
-	union {
-		GnomeIconList *icon_list;
-		GtkCTree *tree;
-	} u;
+	CappletDirViewImpl *impl;
+
+	GtkWidget *view;
 
 	gboolean destroyed;
 	CappletDirViewLayout layout;
@@ -53,19 +73,33 @@ struct _CappletDirView
 	GtkScrolledWindow *scrolled_win;
 
 	GtkWidget *up_button;
+	GtkWidget *parents_option;
+
+	GtkWidget *html_toggle;
+	GtkWidget *list_toggle;
+	GtkWidget *tree_toggle;
+
+	GtkWidget *html_menu;
+	GtkWidget *list_menu;
+	GtkWidget *tree_menu;
+
+	GtkWidget *rootm_button;
+	GtkWidget *rootm_locked;
+	GtkWidget *rootm_unlocked;
 };
 
 struct _CappletDirViewClass 
 {
-	GnomeAppClass parent;
+	GtkObjectClass parent;
 };
 
 guint capplet_dir_view_get_type (void);
 
-GtkWidget *capplet_dir_view_new (void);
+CappletDirView *capplet_dir_view_new (void);
 void capplet_dir_view_destroy   (CappletDirView *view);
 
 void capplet_dir_view_load_dir  (CappletDirView *view, CappletDir *dir);
+void capplet_dir_view_show      (CappletDirView *view);
 
 void gnomecc_init (void);
 

@@ -2,6 +2,10 @@ Applicationsdir = $(datadir)/control-center/Desktop
 Applications_DATA = \
 	background-properties.desktop
 
+pApplicationsdir = $(datadir)/gnome/apps/Settings/Desktop
+pApplications_DATA = \
+	background-properties.desktop
+
 Gladedir = $(datadir)/control-center-data
 Glade_DATA = \
 	background-properties.glade
@@ -16,10 +20,8 @@ INCLUDES = \
 	-DGNOME_ICONDIR=\""${prefix}/share/pixmaps"\"	\
 	-DG_LOG_DOMAIN=\"background-properties\"	\
 	-DGLADE_DATADIR=\""$(Gladedir)"\"		\
-	-I$(top_srcdir)/libcapplet                      \
 	$(GNOME_INCLUDEDIR)				\
-	$(LIBGLADE_CFLAGS)				\
-	$(XML_CFLAGS)					\
+	$(BG_CAPPLET_CFLAGS)				\
 	-I$(top_srcdir)/				\
 	-I$(top_srcdir)/intl
 
@@ -32,11 +34,4 @@ background_properties_capplet_SOURCES = \
 	main.c
 
 background_properties_capplet_LDADD = \
-	$(GNOME_LIBDIR)					\
-	$(GNOMEUI_LIBS)					\
-	$(ORBIT_LIBS)					\
-	$(GNOME_XML_LIB)				\
-	$(LIBGLADE_LIBS)				\
-	-lgdk_pixbuf					\
-	-lgdk_pixbuf_xlib				\
-	../../libcapplet/libcapplet.la
+	$(GNOME_LIBDIR)	$(BG_CAPPLET_LIBS)

@@ -62,24 +62,14 @@ setup_capplet_widget (void)
 {
 	preferences_freeze (prefs);
 
-	switch (capplet_widget_class_get_capid ()) {
-	case 0:
-		prefs_widget = PREFS_WIDGET (prefs_widget_dialogs_new (prefs));
-		break;
-	case 1:
-		prefs_widget = PREFS_WIDGET (prefs_widget_app_new (prefs));
-		break;
-	case 2:
-		prefs_widget = PREFS_WIDGET (prefs_widget_mdi_new (prefs));
-		break;
-	}
+	prefs_widget = prefs_widget_new (prefs);
 
 	gtk_signal_connect (GTK_OBJECT (prefs_widget), "ok", 
 			    GTK_SIGNAL_FUNC (ok_cb), NULL);
 	gtk_signal_connect (GTK_OBJECT (prefs_widget), "cancel", 
 			    GTK_SIGNAL_FUNC (cancel_cb), NULL);		
 
-	gtk_widget_show_all (GTK_WIDGET (prefs_widget));
+	gtk_widget_show (GTK_WIDGET (prefs_widget));
 
 	preferences_thaw (prefs);
 }
@@ -146,7 +136,7 @@ main (int argc, char **argv)
 		return 0;
 	}
 	else if (res == 4) {
-		do_set_xml ();
+	do_set_xml ();
 		return 0;
 	}
 
@@ -175,20 +165,7 @@ main (int argc, char **argv)
 		token = 1;
 	}
 
-	switch (capplet_widget_class_get_capid ()) {
-	case 0:
-		gnome_window_icon_set_default_from_file
-			(GNOME_ICONDIR"/gnome-ccdialog.png");
-		break;
-	case 1:
-		gnome_window_icon_set_default_from_file
-			(GNOME_ICONDIR"/gnome-applications.png");
-		break;
-	case 2:
-		gnome_window_icon_set_default_from_file
-			(GNOME_ICONDIR"/gnome-mdi.png");
-		break;
-	}
+	gnome_window_icon_set_default_from_file (GNOME_ICONDIR"/gnome-applications.png");
 
 	prefs = PREFERENCES (preferences_new ());
 	preferences_load (prefs);

@@ -25,6 +25,7 @@
 #define __CAPPLET_DIR_H
 
 #include <gnome.h>
+#include <gdk-pixbuf/gdk-pixbuf.h>
 
 #define CAPPLET_DIR_ENTRY(obj) ((CappletDirEntry *) obj)
 #define CAPPLET_DIR(obj) ((CappletDir *) obj)
@@ -40,7 +41,8 @@ typedef struct _Capplet Capplet;
 typedef struct _CappletDirView CappletDirView;
 
 typedef enum {
-	TYPE_CAPPLET, TYPE_CAPPLET_DIR
+	TYPE_CAPPLET,
+	TYPE_CAPPLET_DIR
 } CappletEntryType;
 
 struct _CappletDirEntry 
@@ -49,14 +51,15 @@ struct _CappletDirEntry
 	GnomeDesktopEntry *entry;
 	gchar *label;
 	gchar *icon;
-	CappletDir *dir;
+	gchar *path;
+	GdkPixbuf *pb;
+	CappletDir *dir;	
 };
 
 struct _CappletDir
 {
 	CappletDirEntry entry;
-	gchar *path;
-	CappletDirEntry **entries;
+	GSList *entries;
 	CappletDirView *view;
 };
 
@@ -68,6 +71,10 @@ struct _Capplet
 CappletDirEntry *capplet_new                (CappletDir *dir,
 					     gchar *desktop_path);
 CappletDirEntry *capplet_dir_new            (CappletDir *dir, gchar *dir_path);
+
+CappletDirEntry *capplet_lookup             (const char *path);
+
+char            *capplet_dir_entry_get_html (CappletDirEntry *entry);
 
 void             capplet_dir_entry_destroy  (CappletDirEntry *entry);
 

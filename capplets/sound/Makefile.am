@@ -2,6 +2,10 @@ Applicationsdir = $(datadir)/control-center/Desktop
 Applications_DATA = \
 	sound-properties.desktop
 
+pApplicationsdir = $(datadir)/gnome/apps/Settings/Desktop
+pApplications_DATA = \
+	sound-properties.desktop
+
 Gladedir = $(datadir)/control-center-data
 Glade_DATA = \
 	sound-properties.glade
@@ -16,10 +20,7 @@ INCLUDES = \
 	-DGNOME_ICONDIR=\""${prefix}/share/pixmaps"\"	\
 	-DG_LOG_DOMAIN=\"sound-properties\"		\
 	-DGLADE_DATADIR=\""$(Gladedir)"\"		\
-	-I$(top_srcdir)/libcapplet                      \
-	$(GNOME_INCLUDEDIR)				\
-	$(XML_CFLAGS)					\
-	$(LIBGLADE_CFLAGS)				\
+	$(CAPPLET_CFLAGS)				\
 	-I$(top_srcdir)/				\
 	-I$(top_srcdir)/intl
 
@@ -30,11 +31,4 @@ sound_properties_capplet_SOURCES = \
 	preferences.c preferences.h \
 	main.c
 
-sound_properties_capplet_LDADD = \
-	$(GNOME_LIBDIR)					\
-	$(GNOMEUI_LIBS)					\
-	$(ORBIT_LIBS)					\
-	$(GNOME_XML_LIB)				\
-	$(LIBGLADE_LIBS)				\
-	-lgdk_pixbuf					\
-	../../libcapplet/libcapplet.la
+sound_properties_capplet_LDADD = $(CAPPLET_LIBS)

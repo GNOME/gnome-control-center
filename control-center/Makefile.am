@@ -8,7 +8,7 @@ sysdir = $(datadir)/gnome/apps/Settings
 sys_DATA = gnomecc.desktop
 
 gladedir = $(datadir)/control-center-data
-glade_DATA = gnomecc-preferences.glade
+glade_DATA = gnomecc.glade
 
 INCLUDES = 			\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\
@@ -20,26 +20,24 @@ INCLUDES = 			\
 	$(LIBGLADE_CFLAGS)				\
 	-DPIXMAPS_DIR=\""$(appicondir)"\"
 
-bin_PROGRAMS = gnomecc root-manager
+bin_PROGRAMS = gnomecc
 
 gnomecc_SOURCES = \
 	main.c						\
 	capplet-dir.c 		capplet-dir.h 		\
 	capplet-dir-view.c	capplet-dir-view.h	\
-	preferences.c		preferences.h
+	preferences.c		preferences.h		\
+	capplet-dir-view-html.c				\
+	capplet-dir-view-tree.c				\
+	capplet-dir-view-list.c
 
 gnomecc_LDADD = \
 	$(GNOME_LIBDIR)					\
-	$(GNOMEUI_LIBS)					\
+	$(GNOME_CAPPLET_LIBS)				\
 	$(INTLLIBS)					\
 	$(LIBGLADE_LIBS)				\
-	-lgdk_pixbuf
-
-root_manager_SOURCES = \
-	root-manager.c
-
-root_manager_LDADD = \
-	$(GNOME_LIBDIR)					\
-	$(GNOME_LIBS)
+	-lgdk_pixbuf -lgnomecanvaspixbuf		\
+	-lgtkhtml -lgnomeprint				\
+	-lpspell -lstdc++
 
 EXTRA_DIST = gnomecc.desktop $(appicon_DATA) $(splash_DATA) $(glade_DATA)

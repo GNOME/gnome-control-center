@@ -31,6 +31,37 @@
 
 #define WID(str) (glade_xml_get_widget (prefs_widget->dialog_data, str))
 
+static widget_desc_t widget_desc[] = {
+	WD_CHECK (menubar_detachable,       "menubar_detachable"),
+	WD_CHECK (menubar_relief,           "menubar_relief"),
+	WD_CHECK (menus_have_tearoff,       "menus_have_tearoff"),
+	WD_CHECK (menus_have_icons,         "menus_have_icons"),
+
+	WD_CHECK (statusbar_not_dialog,     "statusbar_not_dialog"),
+	WD_CHECK (statusbar_is_interactive, "statusbar_is_interactive"),
+	WD_CHECK (statusbar_meter_on_left , "statusbar_meter_on_left"),
+	WD_CHECK (statusbar_meter_on_right, "statusbar_meter_on_right"),
+
+	WD_CHECK (toolbar_detachable,       "toolbar_detachable"),
+	WD_CHECK (toolbar_relief,           "toolbar_relief"),
+	WD_CHECK (toolbar_relief_btn,       "toolbar_relief_btn"),
+	WD_CHECK (toolbar_lines,            "toolbar_lines"),
+	WD_CHECK (toolbar_icons_only,       "toolbar_icons_only"),
+	WD_CHECK (toolbar_text_below,       "toolbar_text_below"),
+
+	WD_CHECK (dialog_icons,             "dialog_icons"),
+	WD_CHECK (dialog_centered,          "dialog_centered"),
+
+	WD_OPTION (dialog_position,         "dialog_position"),
+	WD_OPTION (dialog_type,             "dialog_type"),
+	WD_OPTION (dialog_buttons_style,    "dialog_buttons_style"),
+
+	WD_OPTION (mdi_mode,                "mdi_mode"),
+	WD_OPTION (mdi_tab_pos,             "mdi_tab_pos"),
+
+	WD_END
+};
+
 enum {
 	ARG_0,
 	ARG_PREFERENCES,
@@ -134,6 +165,8 @@ prefs_widget_class_init (PrefsWidgetClass *class)
 
 	parent_class = CAPPLET_WIDGET_CLASS
 		(gtk_type_class (capplet_widget_get_type ()));
+
+	class->widget_desc = widget_desc;
 }
 
 static void
@@ -221,11 +254,22 @@ prefs_widget_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 GtkWidget *
 prefs_widget_new (Preferences *prefs) 
 {
+	GtkWidget *widget, *dlg_widget;
+	GladeXML *dialog_data;
+
 	g_return_val_if_fail (prefs == NULL || IS_PREFERENCES (prefs), NULL);
 
-	return gtk_widget_new (prefs_widget_get_type (),
-			       "preferences", prefs,
-			       NULL);
+	dialog_data = glade_xml_new (GLADE_DATADIR"/ui-properties.glade", "prefs_widget");
+
+	widget = gtk_widget_new (prefs_widget_get_type (),
+				 "preferences", prefs,
+				 "dialog_data", dialog_data,
+				 NULL);
+
+	dlg_widget = glade_xml_get_widget (dialog_data, "prefs_widget");
+	gtk_container_add (GTK_CONTAINER (widget), dlg_widget);
+
+	return widget;
 }
 
 void
@@ -310,33 +354,31 @@ register_callbacks (PrefsWidget *prefs_widget, GladeXML *dialog_data)
 		g_return_if_fail (widget_desc[i].get_func != NULL);
 		g_return_if_fail (widget_desc[i].set_func != NULL);
 
-		if (widget_desc[i].type == WDTYPE_OPTION) {
-			menu = glade_xml_get_widget (dialog_data,
-						     widget_desc[i].name);
+		if (widget_desc[i].type != WDTYPE_OPTION)
+			continue;
 
-			g_return_if_fail (menu != NULL);
-			g_return_if_fail (GTK_IS_OPTION_MENU (menu));
-
-			node = GTK_MENU_SHELL (gtk_option_menu_get_menu
-					       (GTK_OPTION_MENU
-						(menu)))->children;
-
-			j = 0;
-
-			while (node != NULL) {
-				gtk_signal_connect (GTK_OBJECT (node->data),
-						    "activate",
-						    GTK_SIGNAL_FUNC
-						    (selected_cb),
-						    prefs_widget);
-				gtk_object_set_data (GTK_OBJECT (node->data),
-						     "index", (gpointer) j);
-				gtk_object_set_data (GTK_OBJECT (node->data),
-						     "name", 
-						     widget_desc[i].name);
-				j++;
-				node = node->next;
-			}
+		menu = glade_xml_get_widget (dialog_data,
+					     widget_desc[i].name);
+		
+		g_return_if_fail (menu != NULL);
+		g_return_if_fail (GTK_IS_OPTION_MENU (menu));
+		
+		node = GTK_MENU_SHELL (gtk_option_menu_get_menu
+				       (GTK_OPTION_MENU
+					(menu)))->children;
+		
+		for (j = 0; node; j++, node = node->next) {
+			gtk_signal_connect (GTK_OBJECT (node->data),
+					    "activate",
+					    GTK_SIGNAL_FUNC
+					    (selected_cb),
+					    prefs_widget);
+			gtk_object_set_data (GTK_OBJECT (node->data),
+					     "index",
+					     GINT_TO_POINTER (j));
+			gtk_object_set_data (GTK_OBJECT (node->data),
+					     "name", 
+					     widget_desc[i].name);
 		}
 	}
 }
@@ -400,7 +442,7 @@ selected_cb (GtkMenuItem *mi, PrefsWidget *prefs_widget)
 	g_return_if_fail (prefs_widget != NULL);
 	g_return_if_fail (IS_PREFS_WIDGET (prefs_widget));
 
-	index = (gint) gtk_object_get_data (GTK_OBJECT (mi), "index");
+	index = GPOINTER_TO_INT (gtk_object_get_data (GTK_OBJECT (mi), "index"));
 	widget_name = gtk_object_get_data (GTK_OBJECT (mi), "name");
 	g_return_if_fail (widget_name != NULL);
 	widget_desc = find_widget_desc_with_name (prefs_widget, widget_name);

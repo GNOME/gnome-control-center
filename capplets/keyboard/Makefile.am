@@ -2,6 +2,10 @@ Applicationsdir = $(datadir)/control-center/Desktop
 Applications_DATA = \
 	keyboard-properties.desktop
 
+pApplicationsdir = $(datadir)/gnome/apps/Settings/Desktop
+pApplications_DATA = \
+	keyboard-properties.desktop
+
 Gladedir = $(datadir)/control-center-data
 Glade_DATA = \
 	keyboard-properties.glade
@@ -16,26 +20,15 @@ INCLUDES = \
 	-DGNOME_ICONDIR=\""${prefix}/share/pixmaps"\"	\
 	-DG_LOG_DOMAIN=\"keyboard-properties\"		\
 	-DGLADE_DATADIR=\""$(Gladedir)"\"		\
-	-I$(top_srcdir)/libcapplet			\
-	$(GNOME_INCLUDEDIR)				\
-	$(XML_CFLAGS)					\
-	$(LIBGLADE_CFLAGS)				\
+	$(CAPPLET_CFLAGS)				\
 	-I$(top_srcdir)/				\
 	-I$(top_srcdir)/intl				
 
-bin_PROGRAMS = keyboard-properties-capplet
+bin_PROGRAMS = keyboard-properties
 
-keyboard_properties_capplet_SOURCES = \
+keyboard_properties_SOURCES = \
 	prefs-widget.c prefs-widget.h \
 	preferences.c preferences.h \
 	main.c
 
-keyboard_properties_capplet_LDADD = \
-	$(GNOME_LIBDIR)					\
-	$(GNOMEUI_LIBS)					\
-	$(ORBIT_LIBS)					\
-	$(GNOME_XML_LIB)				\
-	$(LIBGLADE_LIBS)				\
-	$(XF86MISC_LIBS)				\
-	-lgdk_pixbuf					\
-	../../libcapplet/libcapplet.la
+keyboard_properties_LDADD = $(CAPPLET_LIBS) $(XF86MISC_LIBS)

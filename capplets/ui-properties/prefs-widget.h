@@ -33,7 +33,9 @@
 /* Generic widget descriptors to make maintenance easier */
 
 typedef enum _widget_desc_type_t {
-	WDTYPE_NONE, WDTYPE_CHECK, WDTYPE_OPTION
+	WDTYPE_NONE,
+	WDTYPE_CHECK,
+	WDTYPE_OPTION
 } widget_desc_type_t;
 
 struct _widget_desc_t 

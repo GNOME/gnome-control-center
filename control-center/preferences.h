@@ -25,7 +25,10 @@
 #define __PREFERENCES_H
 
 typedef enum _CappletDirViewLayout {
-	LAYOUT_NONE, LAYOUT_ICON_LIST, LAYOUT_TREE
+	LAYOUT_NONE,
+	LAYOUT_ICON_LIST,
+	LAYOUT_TREE,
+	LAYOUT_HTML
 } CappletDirViewLayout;
 
 #define GNOMECC_PREFERENCES(obj)          GTK_CHECK_CAST (obj, gnomecc_preferences_get_type (), GnomeCCPreferences)

@@ -12,7 +12,7 @@ gnome_cv_use_gnome=yes
 
 
 AM_ACLOCAL_INCLUDE(macros)
-GNOME_INIT
+GNOME_INIT(capplet)
 GNOME_COMPILE_WARNINGS
 
 AC_ISC_POSIX
@@ -77,18 +77,54 @@ AC_MSG_ERROR([Fatal Error: no Imlib detected.])])
 
 CFLAGS="-O2 -g -Wall $CFLAGS"
 
+dnl
+dnl CApplet, Note that the libs and all that is set up in gnome_init,
+dnl but gnome_init is truly dumb and doesn't require it, so we need to
+dnl do a separate check
+dnl
+AC_MSG_CHECKING(for capplet library)
+vers=`$GNOME_CONFIG --modversion capplet`
+case "x$vers" in
+  xcapplet-*)
+    AC_MSG_RESULT(found)
+    ;;
+  *)
+    AC_MSG_ERROR(Did not find capplet library, you probably need to install libcapplet first)
+    ;;
+esac
+
+CAPPLET_CFLAGS=`gnome-config --cflags libglade capplet gdk_pixbuf`
+CAPPLET_LIBS=`gnome-config --libs libglade capplet gdk_pixbuf`
+
+BG_CAPPLET_CFLAGS=`gnome-config --cflags libglade capplet gdk_pixbuf gdk_pixbuf_xlib`
+BG_CAPPLET_LIBS=`gnome-config --libs libglade capplet gdk_pixbuf gdk_pixbuf_xlib`
+
+GNOMECC_CFLAGS=`gnome-config --cflags gnomeui libglade xml gdk_pixbuf capplet gnomecanvaspixbuf gtkhtml`
+GNOMECC_LIBS=`gnome-config --libs gnomeui libglade xml gdk_pixbuf capplet gnomecanvaspixbuf gtkhtml`
+
+AC_SUBST(CAPPLET_CFLAGS)
+AC_SUBST(CAPPLET_LIBS)
+
+AC_SUBST(BG_CAPPLET_CFLAGS)
+AC_SUBST(BG_CAPPLET_LIBS)
+
+AC_SUBST(GNOMECC_CFLAGS)
+AC_SUBST(GNOMECC_LIBS)
+
 AC_SUBST(CFLAGS)
 AC_SUBST(LDFLAGS)
 
 AC_OUTPUT([
+
 control-center.spec
 Makefile
 po/Makefile.in
 new-control-center/Makefile
-libcapplet/Makefile
+root-manager/Makefile
 capplets/Makefile
 capplets/mime-type/Makefile
 capplets/desktop-links/Makefile
+capplets/orbit-settings/Makefile
 capplets/new-background-properties/Makefile
 capplets/new-bell-properties/Makefile
 capplets/new-keyboard-properties/Makefile
@@ -103,6 +139,4 @@ capplets/url-properties/Makefile
 capplets/gnome-edit-properties/Makefile
 capplets/wm-properties/Makefile
 capplets/wm-properties/wm-desktops/Makefile
-idl/Makefile
 intl/Makefile])
-

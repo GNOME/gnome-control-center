@@ -133,8 +133,8 @@ gnomecc_preferences_load (GnomeCCPreferences *prefs)
 
 	gnome_config_push_prefix ("/control-center/appearance");
 	prefs->embed = gnome_config_get_bool ("embed=false");
-	prefs->single_window = gnome_config_get_bool ("single_window=false");
-	prefs->layout = gnome_config_get_int ("layout=2");
+	prefs->single_window = gnome_config_get_bool ("single_window=true");
+	prefs->layout = gnome_config_get_int ("layout=3");
 	gnome_config_pop_prefix ();
 }
 
@@ -156,40 +156,27 @@ static void
 place_preferences (GladeXML *prefs_data, GnomeCCPreferences *prefs) 
 {
 	GtkWidget *widget;
+	char *w;
 
-	if (prefs->embed) {
-		widget = glade_xml_get_widget (prefs_data, "embed_widget");
-		gtk_toggle_button_set_active
-			(GTK_TOGGLE_BUTTON (widget), TRUE);
-	} else {
-		widget = glade_xml_get_widget (prefs_data, "no_embed_widget");
-		gtk_toggle_button_set_active
-			(GTK_TOGGLE_BUTTON (widget), TRUE);
+	widget = glade_xml_get_widget (prefs_data, prefs->embed 
+				       ? "embed_widget" : "no_embed_widget");
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
+
+	widget = glade_xml_get_widget (prefs_data, prefs->single_window
+				       ? "single_widget" : "multiple_widget");
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
+
+	switch (prefs->layout) {
+	case LAYOUT_HTML: w = "html_widget"; break;
+	case LAYOUT_TREE: w = "tree_widget"; break;
+	case LAYOUT_ICON_LIST: w = "icon_list_widget"; break;
+	default: w = NULL; break;
 	}
 
-	if (prefs->single_window) {
-		widget = glade_xml_get_widget (prefs_data, "single_widget");
-		gtk_toggle_button_set_active
-			(GTK_TOGGLE_BUTTON (widget), TRUE);
-	} else {
-		widget = glade_xml_get_widget (prefs_data, "multiple_widget");
-		gtk_toggle_button_set_active
-			(GTK_TOGGLE_BUTTON (widget), TRUE);
-	}
+	if (!w) return;
 
-	if (prefs->layout == LAYOUT_TREE) {
-		widget = glade_xml_get_widget (prefs_data, "tree_widget");
-		gtk_toggle_button_set_active
-			(GTK_TOGGLE_BUTTON (widget), TRUE);
-		set_single_window_controls_sensitive
-			(prefs_dialog_data, FALSE);
-	} else if (prefs->layout == LAYOUT_ICON_LIST) {
-		widget = glade_xml_get_widget (prefs_data, "icon_list_widget");
-		gtk_toggle_button_set_active
-			(GTK_TOGGLE_BUTTON (widget), TRUE);
-		set_single_window_controls_sensitive
-			(prefs_dialog_data, TRUE);
-	}
+	widget = glade_xml_get_widget (prefs_data, w);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
 }
 
 static void
@@ -208,8 +195,13 @@ read_preferences (GladeXML *prefs_data, GnomeCCPreferences *prefs)
 	widget = glade_xml_get_widget (prefs_data, "tree_widget");
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)))
 		prefs->layout = LAYOUT_TREE;
-	else
-		prefs->layout = LAYOUT_ICON_LIST;
+	else {
+		widget = glade_xml_get_widget (prefs_data, "html_widget");
+		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)))
+			prefs->layout = LAYOUT_HTML;
+		else
+			prefs->layout = LAYOUT_ICON_LIST;
+	}
 
 	gnomecc_preferences_save (prefs);
 
@@ -257,11 +249,12 @@ static void
 set_single_window_controls_sensitive (GladeXML *data, gboolean s) 
 {
 	GtkWidget *widget;
-
+#if 0
 	widget = glade_xml_get_widget (prefs_dialog_data, "single_widget");
 	gtk_widget_set_sensitive (widget, s);
 	widget = glade_xml_get_widget (prefs_dialog_data, "multiple_widget");
 	gtk_widget_set_sensitive (widget, s);
+#endif
 }
 
 void
@@ -282,7 +275,7 @@ gnomecc_preferences_get_config_dialog (GnomeCCPreferences *prefs)
 	old_prefs = gnomecc_preferences_clone (prefs);
 
 	prefs_dialog_data = 
-		glade_xml_new (GLADEDIR "/gnomecc-preferences.glade", NULL);
+		glade_xml_new (GLADEDIR "/gnomecc.glade", "preferences_dialog");
 
 	if (!prefs_dialog_data) {
 		g_warning ("Could not find data for preferences dialog");

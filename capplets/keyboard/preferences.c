@@ -126,8 +126,8 @@ preferences_clone (Preferences *prefs)
 	new_prefs->rate = prefs->rate;
 	new_prefs->delay = prefs->delay;
 	new_prefs->repeat = prefs->repeat;
-	new_prefs->click_volume = prefs->click_volume;
-	new_prefs->click_on_keypress = prefs->click_on_keypress;
+	new_prefs->volume = prefs->volume;
+	new_prefs->click = prefs->click;
 
 	return object;
 }
@@ -159,9 +159,9 @@ preferences_load (Preferences *prefs)
 	prefs->delay = gnome_config_get_int ("/Desktop/Keyboard/delay=-1");
 	prefs->repeat = gnome_config_get_bool_with_default
 		("/Desktop/Keyboard/repeat=true", &repeat_default);
-        prefs->click_volume = gnome_config_get_int
+        prefs->volume = gnome_config_get_int
 		("/Desktop/Keyboard/clickvolume=-1");
-        prefs->click_on_keypress = gnome_config_get_bool_with_default
+        prefs->click = gnome_config_get_bool_with_default
 		("/Desktop/Keyboard/click=false", &click_default);
 
 	XGetKeyboardControl (GDK_DISPLAY (), &kbdstate);
@@ -190,10 +190,10 @@ preferences_load (Preferences *prefs)
 	}
 
 	if (click_default)
-		prefs->click_on_keypress = (kbdstate.key_click_percent == 0);
+		prefs->click = (kbdstate.key_click_percent == 0);
 
-	if (prefs->click_volume == -1)
-		prefs->click_volume = kbdstate.key_click_percent;
+	if (prefs->volume == -1)
+		prefs->volume = kbdstate.key_click_percent;
 }
 
 void 
@@ -205,10 +205,8 @@ preferences_save (Preferences *prefs)
 	gnome_config_set_bool ("/Desktop/Keyboard/repeat", prefs->repeat);
 	gnome_config_set_int ("/Desktop/Keyboard/delay", prefs->delay);
 	gnome_config_set_int ("/Desktop/Keyboard/rate", prefs->rate);
-	gnome_config_set_bool ("/Desktop/Keyboard/click", 
-			       prefs->click_on_keypress);
-	gnome_config_set_int ("/Desktop/Keyboard/clickvolume", 
-			      prefs->click_volume);
+	gnome_config_set_bool ("/Desktop/Keyboard/click", prefs->click);
+	gnome_config_set_int ("/Desktop/Keyboard/clickvolume", prefs->volume);
 
 	gnome_config_sync ();
 }
@@ -257,7 +255,7 @@ preferences_apply_now (Preferences *prefs)
 	}
 
 	kbdcontrol.key_click_percent = 
-		prefs->click_on_keypress ? prefs->click_volume : 0;
+		prefs->click ? prefs->volume : 0;
 	XChangeKeyboardControl (GDK_DISPLAY (), KBKeyClickPercent, 
 				&kbdcontrol);
 }
@@ -292,10 +290,10 @@ preferences_read_xml (xmlDocPtr xml_doc)
                         prefs->delay = xml_read_int (node, NULL);
                 else if (!strcmp (node->name, "repeat"))
                         prefs->repeat = TRUE;
-                else if (!strcmp (node->name, "click-volume"))
-                        prefs->click_volume = xml_read_int (node, NULL);
-                else if (!strcmp (node->name, "click-on-keypress"))
-                        prefs->click_on_keypress = TRUE;
+                else if (!strcmp (node->name, "volume"))
+                        prefs->volume = xml_read_int (node, NULL);
+                else if (!strcmp (node->name, "click"))
+                        prefs->click = TRUE;
 	}
 
 	return prefs;
@@ -318,11 +316,11 @@ preferences_write_xml (Preferences *prefs)
         if (prefs->repeat)
                 xmlNewChild (node, NULL, "repeat", NULL);
 
-        xmlAddChild (node, xml_write_int ("click-volume", NULL,
-					  prefs->click_volume));
+        xmlAddChild (node, xml_write_int ("volume", NULL,
+					  prefs->volume));
 
-        if (prefs->click_on_keypress)
-                xmlNewChild (node, NULL, "click-on-keypress", NULL);
+        if (prefs->click)
+                xmlNewChild (node, NULL, "click", NULL);
 
 	xmlDocSetRootElement (doc, node);
 

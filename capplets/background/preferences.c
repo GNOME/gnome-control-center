@@ -133,12 +133,8 @@ preferences_clone (Preferences *prefs)
 	if (prefs->color2)
 		new_prefs->color2 = gdk_color_copy (prefs->color2);
 
-	if (prefs->wallpaper_filename)
-		new_prefs->wallpaper_filename = 
-			g_strdup (prefs->wallpaper_filename);
-	if (prefs->wallpaper_sel_path)
-		new_prefs->wallpaper_sel_path = 
-			g_strdup (prefs->wallpaper_sel_path);;
+	new_prefs->wallpaper_filename = g_strdup (prefs->wallpaper_filename);
+	new_prefs->wallpaper_sel_path = g_strdup (prefs->wallpaper_sel_path);;
 
 	new_prefs->auto_apply        = prefs->auto_apply;
 	new_prefs->adjust_opacity = prefs->adjust_opacity;
@@ -157,10 +153,8 @@ preferences_destroy (GtkObject *object)
 
 	prefs = PREFERENCES (object);
 
-	if (prefs->wallpaper_filename)
-		g_free (prefs->wallpaper_filename);
-	if (prefs->wallpaper_sel_path)
-		g_free (prefs->wallpaper_sel_path);
+	g_free (prefs->wallpaper_filename);
+	g_free (prefs->wallpaper_sel_path);
 
 	parent_class->destroy (object);
 }
@@ -168,20 +162,21 @@ preferences_destroy (GtkObject *object)
 void
 preferences_load (Preferences *prefs) 
 {
-	gchar *string;
+	gchar *string, *wp, *wp1;
+	int i, wps;
 
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));
 
 	if (prefs->color1) g_free (prefs->color1);
 	string = gnome_config_get_string
-		("/Background/Default/color1=#005060");
+		("/Background/Default/color1=#39374b");
 	prefs->color1 = read_color_from_string (string);
 	g_free (string);
 
 	if (prefs->color2) g_free (prefs->color2);
 	string = gnome_config_get_string
-		("/Background/Default/color2=#0000ff");
+		("/Background/Default/color2=#42528f");
 	prefs->color2 = read_color_from_string (string);
 	g_free (string);
 
@@ -196,7 +191,7 @@ preferences_load (Preferences *prefs)
 		prefs->wallpaper_enabled = FALSE;
 	g_free (string);
 
-	string = gnome_config_get_string ("/Background/Default/simple=solid");
+	string = gnome_config_get_string ("/Background/Default/simple=gradent");
 	if (!g_strcasecmp (string, "gradient"))
 		prefs->gradient_enabled = TRUE;
 	else if (g_strcasecmp (string, "solid"))
@@ -215,43 +210,46 @@ preferences_load (Preferences *prefs)
 		gnome_config_get_int ("/Background/Default/wallpaperAlign=0");
 
 	prefs->wallpaper_filename = 
-		gnome_config_get_string ("/Background/Default/wallpaper=none");
+		gnome_config_get_string ("/Background/Default/wallpaper=(None)");
 	prefs->wallpaper_sel_path = 
 		gnome_config_get_string 
 		("/Background/Default/wallpapers_dir=./");
 
-	string = gnome_config_get_string
-		("/Background/Default/autoApply=true");
-	if (!g_strcasecmp (string, "true"))
-		prefs->auto_apply = TRUE;
-	else if (g_strcasecmp (string, "false"))
-		prefs->auto_apply = FALSE;
-	g_free (string);
+	prefs->auto_apply = gnome_config_get_bool ("/Background/Default/autoApply=true");
 
-	if (!g_strcasecmp (prefs->wallpaper_filename, "none")) {
+	if (!g_strcasecmp (prefs->wallpaper_filename, "(None)")) {
 		g_free(prefs->wallpaper_filename);
 		prefs->wallpaper_filename = NULL;
 		prefs->wallpaper_enabled = FALSE;
 	} else {
 		prefs->wallpaper_enabled = TRUE;
 	}
+	
+	wps = gnome_config_get_int ("/Background/Default/wallpapers=0");
+	
+	for (i = 0; i < wps; i++) {
+		wp = g_strdup_printf ("/Background/Default/wallpaper%d", i+1);
+		wp1 = gnome_config_get_string (wp);
+		g_free (wp);
 
-	string = gnome_config_get_string
-		("/Background/Default/adjustOpacity=true");
-	if (!g_strcasecmp (string, "true"))
-		prefs->adjust_opacity = TRUE;
-	else if (g_strcasecmp (string, "false"))
-		prefs->adjust_opacity = FALSE;
-	g_free (string);
+		if (!wp1) continue;			
 
-	prefs->opacity = 
-		gnome_config_get_int ("/Background/Default/opacity=255");
+		prefs->wallpapers = g_slist_prepend (prefs->wallpapers, wp1);
+	}
+	prefs->wallpapers = g_slist_reverse (prefs->wallpapers);
+
+	prefs->adjust_opacity = gnome_config_get_bool ("/Background/Default/adjustOpacity=true");
+
+	prefs->opacity = gnome_config_get_int ("/Background/Default/opacity=255");
 }
 
 void 
 preferences_save (Preferences *prefs) 
 {
 	char buffer[16];
+	char *wp;
+	GSList *item;
+	int i;
 
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));
@@ -283,11 +281,17 @@ preferences_save (Preferences *prefs)
 	gnome_config_set_int ("/Background/Default/wallpaperAlign", 
 			      prefs->wallpaper_type);
 
-	gnome_config_set_string ("/Background/Default/autoApply", 
-				 prefs->auto_apply ? "True" : "False");
+	gnome_config_set_int ("/Background/Default/wallpapers",
+			      g_slist_length (prefs->wallpapers));
 
-	gnome_config_set_string ("/Background/Default/adjustOpacity", 
-				 prefs->adjust_opacity ? "True" : "False");
+	for (i = 1, item = prefs->wallpapers; item; i++, item = item->next) {
+		wp = g_strdup_printf ("/Background/Default/wallpaper%d", i);
+		gnome_config_set_string (wp, (char *)item->data);
+		g_free (wp);
+	}
+
+	gnome_config_set_bool ("/Background/Default/autoApply", prefs->auto_apply);
+	gnome_config_set_bool ("/Background/Default/adjustOpacity", prefs->adjust_opacity);
 	gnome_config_set_int ("/Background/Default/opacity", 
 			      prefs->opacity);
 

@@ -44,9 +44,10 @@ struct _Preferences
 
 	gint              rate;
 	gint              delay;
-	gint              repeat;
-	gint              click_volume;
-	gint              click_on_keypress;
+	gint              volume;
+
+	gboolean          repeat;
+	gboolean          click;
 };
 
 struct _PreferencesClass

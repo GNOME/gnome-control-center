@@ -2,23 +2,20 @@ INCLUDES = -I. -I$(srcdir) 				\
 	-I$(top_srcdir)/intl -I$(top_builddir)/intl	\
 	-I$(srcdir)/../../libcapplet		\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
-	-I$(includedir) $(GNOME_INCLUDEDIR)		\
+	$(CAPPLET_CFLAGS)				\
 	-DGNOMESYSCONFDIR=\""$(sysconfdir)"\"
 
 bin_PROGRAMS = url-properties
 
 url_properties_SOURCES = url-properties.c
 
-url_properties_LDADD = ../../libcapplet/libcapplet.la \
-		     $(GNOME_LIBS) $(ORBIT_LIBS) \
-		     $(GNOMEUI_LIBS) $(GNOME_LIBDIR) $(INTLLIBS)
-
+url_properties_LDADD = $(CAPPLET_LIBS)
 
 EXTRA_DIST = \
 	url-properties.desktop
 
-sysdir = $(datadir)/control-center
+sysdir = $(datadir)/control-center/Documents/
 sys_DATA = url-properties.desktop
 
-install-data-local:
-	$(INSTALL_DATA) $(srcdir)/url-properties.desktop $(DESTDIR)$(datadir)/gnome/apps/Settings/url-properties.desktop
+psysdir = $(datadir)/gnome/apps/Settings/Documents/
+psys_DATA = url-properties.desktop

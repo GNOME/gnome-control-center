@@ -51,9 +51,9 @@ static void read_preferences              (PrefsWidget *prefs_widget,
 
 static void repeat_toggled_cb             (GtkToggleButton *button,
 					   PrefsWidget *prefs_widget);
-static void rate_changed_cb               (GtkAdjustment *adjustment,
+static void rate_changed_cb               (GtkToggleButton *toggle,
 					   PrefsWidget *prefs_widget);
-static void delay_changed_cb              (GtkAdjustment *adjustment,
+static void delay_changed_cb              (GtkToggleButton *toggle,
 					   PrefsWidget *prefs_widget);
 static void click_toggled_cb              (GtkToggleButton *button,
 					   PrefsWidget *prefs_widget);
@@ -87,6 +87,10 @@ prefs_widget_get_type (void)
 static void
 prefs_widget_init (PrefsWidget *prefs_widget)
 {
+	char delays[] = "delay0";
+	char rates[] = "repeat0";
+	int i;
+
 	GtkWidget *widget;
 	GtkAdjustment *adjustment;
 
@@ -102,16 +106,6 @@ prefs_widget_init (PrefsWidget *prefs_widget)
 				       "prefs_widget");
 	gtk_container_add (GTK_CONTAINER (prefs_widget), widget);
 
-	adjustment = gtk_range_get_adjustment 
-		(GTK_RANGE (WID ("rate_entry")));
-	gtk_signal_connect (GTK_OBJECT (adjustment), "value_changed",
-			    rate_changed_cb, prefs_widget);
-
-	adjustment = gtk_range_get_adjustment 
-		(GTK_RANGE (WID ("delay_entry")));
-	gtk_signal_connect (GTK_OBJECT (adjustment), "value_changed",
-			    delay_changed_cb, prefs_widget);
-
 	glade_xml_signal_connect_data
 		(prefs_widget->dialog_data, "click_toggled_cb",
 		 click_toggled_cb, prefs_widget);
@@ -120,6 +114,19 @@ prefs_widget_init (PrefsWidget *prefs_widget)
 		(GTK_RANGE (WID ("click_volume_entry")));
 	gtk_signal_connect (GTK_OBJECT (adjustment), "value_changed",
 			    click_volume_changed_cb, prefs_widget);
+
+
+	for (i = 0; i < 4; i++) {
+		rates[6] = delays[5] = '0' + i;
+		prefs_widget->delay[i] = WID (delays);
+		prefs_widget->rate[i]  = WID (rates);
+
+		gtk_signal_connect (GTK_OBJECT (prefs_widget->delay[i]), "toggled",
+				    GTK_SIGNAL_FUNC (delay_changed_cb), prefs_widget);
+
+		gtk_signal_connect (GTK_OBJECT (prefs_widget->rate[i]), "toggled",
+				    GTK_SIGNAL_FUNC (rate_changed_cb), prefs_widget);
+	}
 }
 
 static void
@@ -216,6 +223,7 @@ static void
 read_preferences (PrefsWidget *prefs_widget, Preferences *prefs)
 {
 	GtkAdjustment *adjustment;
+	int i;
 
 	g_return_if_fail (prefs_widget != NULL);
 	g_return_if_fail (IS_PREFS_WIDGET (prefs_widget));
@@ -225,21 +233,24 @@ read_preferences (PrefsWidget *prefs_widget, Preferences *prefs)
 	gtk_toggle_button_set_active
 		(GTK_TOGGLE_BUTTON (WID ("repeat_toggle")), prefs->repeat);
 
-	adjustment = gtk_range_get_adjustment 
-		(GTK_RANGE (WID ("rate_entry")));
-	gtk_adjustment_set_value (adjustment, prefs->rate);
+	i = CLAMP (prefs->rate * 3 / 255, 0, 3);
+	gtk_toggle_button_set_active
+		(GTK_TOGGLE_BUTTON (prefs_widget->rate[i]), TRUE);
 
-	adjustment = gtk_range_get_adjustment 
-		(GTK_RANGE (WID ("delay_entry")));
-	gtk_adjustment_set_value (adjustment, prefs->delay);
+	i = CLAMP ((10000 - prefs->delay) * 3 / 10000, 0, 3);
+	gtk_toggle_button_set_active
+		(GTK_TOGGLE_BUTTON (prefs_widget->delay[i]), TRUE);
 
 	gtk_toggle_button_set_active
-		(GTK_TOGGLE_BUTTON (WID ("click_toggle")), 
-		 prefs->click_on_keypress);
-
+		(GTK_TOGGLE_BUTTON (WID ("click_toggle")), prefs->click);
+		 
 	adjustment = gtk_range_get_adjustment 
 		(GTK_RANGE (WID ("click_volume_entry")));
-	gtk_adjustment_set_value (adjustment, prefs->click_volume);
+	gtk_adjustment_set_value (adjustment, prefs->volume);
+
+	gtk_widget_set_sensitive (WID ("click_frame"), prefs_widget->prefs->click);
+	gtk_widget_set_sensitive (WID ("delay_frame"), prefs_widget->prefs->repeat);
+	gtk_widget_set_sensitive (WID ("repeat_frame"), prefs_widget->prefs->repeat);
 }
 
 static void
@@ -255,37 +266,65 @@ repeat_toggled_cb (GtkToggleButton *button, PrefsWidget *prefs_widget)
 	prefs_widget->prefs->repeat = 
 		gtk_toggle_button_get_active (button);
 
+	gtk_widget_set_sensitive (WID ("delay_frame"), prefs_widget->prefs->repeat);
+	gtk_widget_set_sensitive (WID ("repeat_frame"), prefs_widget->prefs->repeat);
+
 	preferences_changed (prefs_widget->prefs);
 	capplet_widget_state_changed (CAPPLET_WIDGET (prefs_widget), TRUE);
 }
 
-static void 
-rate_changed_cb (GtkAdjustment *adjustment, PrefsWidget *prefs_widget) 
+static int
+set_scale (GtkToggleButton *toggle, GtkWidget **arr)
 {
+	int i, retval = 0;
+
+	for (i = 0; i < 4; i++) {
+		if (arr[i] == toggle) retval = i;
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (arr[i]), arr[i] == toggle);
+	}
+	
+	return retval;
+}
+
+static void 
+rate_changed_cb (GtkToggleButton *toggle, PrefsWidget *prefs_widget) 
+{
+	int i;
+
 	g_return_if_fail (prefs_widget != NULL);
 	g_return_if_fail (IS_PREFS_WIDGET (prefs_widget));
 	g_return_if_fail (prefs_widget->prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs_widget->prefs));
-	g_return_if_fail (adjustment != NULL);
-	g_return_if_fail (GTK_IS_ADJUSTMENT (adjustment));
+	g_return_if_fail (toggle != NULL);
+	g_return_if_fail (GTK_IS_TOGGLE_BUTTON (toggle));
 
-	prefs_widget->prefs->rate = adjustment->value;
+	if (!toggle->active)
+		return;
+
+	i = set_scale (toggle, prefs_widget->rate);
+	prefs_widget->prefs->rate = i * 255 / 3;
 
 	preferences_changed (prefs_widget->prefs);
 	capplet_widget_state_changed (CAPPLET_WIDGET (prefs_widget), TRUE);
 }
 
 static void
-delay_changed_cb (GtkAdjustment *adjustment, PrefsWidget *prefs_widget) 
+delay_changed_cb (GtkToggleButton *toggle, PrefsWidget *prefs_widget) 
 {
+	int i;
+
 	g_return_if_fail (prefs_widget != NULL);
 	g_return_if_fail (IS_PREFS_WIDGET (prefs_widget));
 	g_return_if_fail (prefs_widget->prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs_widget->prefs));
-	g_return_if_fail (adjustment != NULL);
-	g_return_if_fail (GTK_IS_ADJUSTMENT (adjustment));
+	g_return_if_fail (toggle != NULL);
+	g_return_if_fail (GTK_IS_TOGGLE_BUTTON (toggle));
 
-	prefs_widget->prefs->delay = adjustment->value;
+	if (!toggle->active)
+		return;
+
+	i = set_scale (toggle, prefs_widget->delay);
+	prefs_widget->prefs->delay = (3 - i) * 10000 / 3;
 
 	preferences_changed (prefs_widget->prefs);
 	capplet_widget_state_changed (CAPPLET_WIDGET (prefs_widget), TRUE);
@@ -301,8 +340,10 @@ click_toggled_cb (GtkToggleButton *button, PrefsWidget *prefs_widget)
 	g_return_if_fail (button != NULL);
 	g_return_if_fail (GTK_IS_TOGGLE_BUTTON (button));
 
-	prefs_widget->prefs->click_on_keypress = 
+	prefs_widget->prefs->click = 
 		gtk_toggle_button_get_active (button);
+
+	gtk_widget_set_sensitive (WID ("click_frame"), prefs_widget->prefs->click);
 
 	preferences_changed (prefs_widget->prefs);
 	capplet_widget_state_changed (CAPPLET_WIDGET (prefs_widget), TRUE);
@@ -318,7 +359,7 @@ click_volume_changed_cb (GtkAdjustment *adjustment, PrefsWidget *prefs_widget)
 	g_return_if_fail (adjustment != NULL);
 	g_return_if_fail (GTK_IS_ADJUSTMENT (adjustment));
 
-	prefs_widget->prefs->click_volume = adjustment->value;
+	prefs_widget->prefs->volume = adjustment->value;
 
 	preferences_changed (prefs_widget->prefs);
 	capplet_widget_state_changed (CAPPLET_WIDGET (prefs_widget), TRUE);

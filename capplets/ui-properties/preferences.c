@@ -475,6 +475,16 @@ preferences_get_statusbar_meter_on_right (Preferences *prefs)
 }
 
 int
+preferences_get_statusbar_meter_on_left (Preferences *prefs)
+{
+	g_return_val_if_fail (prefs != NULL, 0);
+	g_return_val_if_fail (IS_PREFERENCES (prefs), 0);
+	g_return_val_if_fail (prefs->gnome_prefs != NULL, 0);
+
+	return !prefs->gnome_prefs->statusbar_meter_on_right;
+}
+
+int
 preferences_get_menubar_detachable (Preferences *prefs)
 {
 	g_return_val_if_fail (prefs != NULL, 0);
@@ -535,7 +545,17 @@ preferences_get_toolbar_lines (Preferences *prefs)
 }
 
 int
-preferences_get_toolbar_labels (Preferences *prefs)
+preferences_get_toolbar_icons_only (Preferences *prefs)
+{
+	g_return_val_if_fail (prefs != NULL, 0);
+	g_return_val_if_fail (IS_PREFERENCES (prefs), 0);
+	g_return_val_if_fail (prefs->gnome_prefs != NULL, 0);
+
+	return !prefs->gnome_prefs->toolbar_labels;
+}
+
+int
+preferences_get_toolbar_text_below (Preferences *prefs)
 {
 	g_return_val_if_fail (prefs != NULL, 0);
 	g_return_val_if_fail (IS_PREFERENCES (prefs), 0);
@@ -635,8 +655,7 @@ preferences_get_dialog_icons (Preferences *prefs)
 }
 
 void
-preferences_set_dialog_buttons_style (Preferences *prefs,
-				      GtkButtonBoxStyle style) 
+preferences_set_dialog_buttons_style (Preferences *prefs, int style)
 {
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));
@@ -716,6 +735,16 @@ preferences_set_statusbar_meter_on_right (Preferences *prefs, int s)
 }
 
 void
+preferences_set_statusbar_meter_on_left (Preferences *prefs, int s)
+{
+	g_return_if_fail (prefs != NULL);
+	g_return_if_fail (IS_PREFERENCES (prefs));
+	g_return_if_fail (prefs->gnome_prefs != NULL);
+
+	prefs->gnome_prefs->statusbar_meter_on_right = !s;
+}
+
+void
 preferences_set_menubar_detachable (Preferences *prefs, int s)
 {
 	g_return_if_fail (prefs != NULL);
@@ -776,7 +805,17 @@ preferences_set_toolbar_lines (Preferences *prefs, int s)
 }
 
 void
-preferences_set_toolbar_labels (Preferences *prefs, int s)
+preferences_set_toolbar_icons_only (Preferences *prefs, int s)
+{
+	g_return_if_fail (prefs != NULL);
+	g_return_if_fail (IS_PREFERENCES (prefs));
+	g_return_if_fail (prefs->gnome_prefs != NULL);
+
+	prefs->gnome_prefs->toolbar_labels = !s;
+}
+
+void
+preferences_set_toolbar_text_below (Preferences *prefs, int s)
 {
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));
@@ -826,7 +865,7 @@ preferences_set_disable_imlib_cache (Preferences *prefs, int s)
 }
 
 void
-preferences_set_dialog_type (Preferences *prefs, GtkWindowType type)
+preferences_set_dialog_type (Preferences *prefs, int type)
 {
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));
@@ -836,7 +875,7 @@ preferences_set_dialog_type (Preferences *prefs, GtkWindowType type)
 }
 
 void
-preferences_set_dialog_position (Preferences *prefs, GtkWindowPosition pos)
+preferences_set_dialog_position (Preferences *prefs, int pos)
 {
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));
@@ -846,7 +885,7 @@ preferences_set_dialog_position (Preferences *prefs, GtkWindowPosition pos)
 }
 
 void
-preferences_set_mdi_mode (Preferences *prefs, GnomeMDIMode mode)
+preferences_set_mdi_mode (Preferences *prefs, int mode)
 {
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));
@@ -856,7 +895,7 @@ preferences_set_mdi_mode (Preferences *prefs, GnomeMDIMode mode)
 }
 
 void
-preferences_set_mdi_tab_pos (Preferences *prefs, GtkPositionType type)
+preferences_set_mdi_tab_pos (Preferences *prefs, int type)
 {
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));

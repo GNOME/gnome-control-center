@@ -43,6 +43,9 @@ struct _PrefsWidget
 
 	Preferences *prefs;
 	GladeXML *dialog_data;
+
+	GtkWidget *delay[4];
+	GtkWidget *rate[4];
 };
 
 struct _PrefsWidgetClass 

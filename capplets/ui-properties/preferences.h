@@ -72,59 +72,79 @@ xmlDocPtr    preferences_write_xml  (Preferences *prefs);
 
 /* get/set functions. It's really stupid that we need these */
 
-GtkButtonBoxStyle preferences_get_dialog_buttons_style (Preferences *prefs);
-int preferences_get_property_box_buttons_ok            (Preferences *prefs);
-int preferences_get_property_box_buttons_apply         (Preferences *prefs);
-int preferences_get_property_box_buttons_close         (Preferences *prefs);
-int preferences_get_property_box_buttons_help          (Preferences *prefs);
-int preferences_get_statusbar_not_dialog               (Preferences *prefs);
-int preferences_get_statusbar_is_interactive           (Preferences *prefs);
-int preferences_get_statusbar_meter_on_right           (Preferences *prefs);
 int preferences_get_menubar_detachable                 (Preferences *prefs);
 int preferences_get_menubar_relief                     (Preferences *prefs);
+int preferences_get_menus_have_tearoff                 (Preferences *prefs);
+int preferences_get_menus_have_icons                   (Preferences *prefs);
+
+int preferences_get_statusbar_not_dialog               (Preferences *prefs);
+int preferences_get_statusbar_is_interactive           (Preferences *prefs);
+int preferences_get_statusbar_meter_on_left            (Preferences *prefs);
+int preferences_get_statusbar_meter_on_right           (Preferences *prefs);
+
 int preferences_get_toolbar_detachable                 (Preferences *prefs);
 int preferences_get_toolbar_relief                     (Preferences *prefs);
 int preferences_get_toolbar_relief_btn                 (Preferences *prefs);
 int preferences_get_toolbar_lines                      (Preferences *prefs);
-int preferences_get_toolbar_labels                     (Preferences *prefs);
+int preferences_get_toolbar_icons_only                 (Preferences *prefs);
+int preferences_get_toolbar_text_below                 (Preferences *prefs);
+
+int preferences_get_dialog_icons                       (Preferences *prefs);
 int preferences_get_dialog_centered                    (Preferences *prefs);
-int preferences_get_menus_have_tearoff                 (Preferences *prefs);
-int preferences_get_menus_have_icons                   (Preferences *prefs);
-int preferences_get_disable_imlib_cache                (Preferences *prefs);
-GtkWindowType preferences_get_dialog_type              (Preferences *prefs);
+
 GtkWindowPosition preferences_get_dialog_position      (Preferences *prefs);
+GtkWindowType preferences_get_dialog_type              (Preferences *prefs);
+GtkButtonBoxStyle preferences_get_dialog_buttons_style (Preferences *prefs);
+
 GnomeMDIMode preferences_get_mdi_mode                  (Preferences *prefs);
 GtkPositionType preferences_get_mdi_tab_pos            (Preferences *prefs);
-int preferences_get_dialog_icons                       (Preferences *prefs);
 
-void preferences_set_dialog_buttons_style          (Preferences *prefs,
-						    GtkButtonBoxStyle);
-void preferences_set_property_box_buttons_ok       (Preferences *prefs, int);
-void preferences_set_property_box_buttons_apply    (Preferences *prefs, int);
-void preferences_set_property_box_buttons_close    (Preferences *prefs, int);
-void preferences_set_property_box_buttons_help     (Preferences *prefs, int);
-void preferences_set_statusbar_not_dialog          (Preferences *prefs, int);
-void preferences_set_statusbar_is_interactive      (Preferences *prefs, int);
-void preferences_set_statusbar_meter_on_right      (Preferences *prefs, int);
-void preferences_set_menubar_detachable            (Preferences *prefs, int);
-void preferences_set_menubar_relief                (Preferences *prefs, int);
-void preferences_set_toolbar_detachable            (Preferences *prefs, int);
-void preferences_set_toolbar_relief                (Preferences *prefs, int);
-void preferences_set_toolbar_relief_btn            (Preferences *prefs, int);
-void preferences_set_toolbar_lines                 (Preferences *prefs, int);
-void preferences_set_toolbar_labels                (Preferences *prefs, int);
-void preferences_set_dialog_centered               (Preferences *prefs, int);
-void preferences_set_menus_have_tearoff            (Preferences *prefs, int);
-void preferences_set_menus_have_icons              (Preferences *prefs, int);
-void preferences_set_disable_imlib_cache           (Preferences *prefs, int);
-void preferences_set_dialog_type                   (Preferences *prefs,
-						    GtkWindowType);
-void preferences_set_dialog_position               (Preferences *prefs,
-						    GtkWindowPosition);
-void preferences_set_mdi_mode                      (Preferences *prefs,
-						    GnomeMDIMode);
-void preferences_set_mdi_tab_pos                   (Preferences *prefs,
-						    GtkPositionType);
-void preferences_set_dialog_icons                  (Preferences *prefs, int);
+#if 0
+int preferences_get_property_box_buttons_ok            (Preferences *prefs);
+int preferences_get_property_box_buttons_apply         (Preferences *prefs);
+int preferences_get_property_box_buttons_close         (Preferences *prefs);
+int preferences_get_property_box_buttons_help          (Preferences *prefs);
+int preferences_get_disable_imlib_cache                (Preferences *prefs);
+#endif
+
+
+
+
+
+
+void preferences_set_menubar_detachable                 (Preferences *prefs, int i);
+void preferences_set_menubar_relief                     (Preferences *prefs, int i);
+void preferences_set_menus_have_tearoff                 (Preferences *prefs, int i);
+void preferences_set_menus_have_icons                   (Preferences *prefs, int i);
+
+void preferences_set_statusbar_not_dialog               (Preferences *prefs, int i);
+void preferences_set_statusbar_is_interactive           (Preferences *prefs, int i);
+void preferences_set_statusbar_meter_on_left            (Preferences *prefs, int i);
+void preferences_set_statusbar_meter_on_right           (Preferences *prefs, int i);
+
+void preferences_set_toolbar_detachable                 (Preferences *prefs, int i);
+void preferences_set_toolbar_relief                     (Preferences *prefs, int i);
+void preferences_set_toolbar_relief_btn                 (Preferences *prefs, int i);
+void preferences_set_toolbar_lines                      (Preferences *prefs, int i);
+void preferences_set_toolbar_icons_only                 (Preferences *prefs, int i);
+void preferences_set_toolbar_text_below                 (Preferences *prefs, int i);
+
+void preferences_set_dialog_icons                       (Preferences *prefs, int i);
+void preferences_set_dialog_centered                    (Preferences *prefs, int i);
+
+void preferences_set_dialog_position                    (Preferences *prefs, int i);
+void preferences_set_dialog_type                        (Preferences *prefs, int i);
+void preferences_set_dialog_buttons_style               (Preferences *prefs, int i);
+
+void preferences_set_mdi_mode                           (Preferences *prefs, int i);
+void preferences_set_mdi_tab_pos                        (Preferences *prefs, int i);
+
+#if 0
+void preferences_set_property_box_buttons_ok            (Preferences *prefs, int i);
+void preferences_set_property_box_buttons_apply         (Preferences *prefs, int i);
+void preferences_set_property_box_buttons_close         (Preferences *prefs, int i);
+void preferences_set_property_box_buttons_help          (Preferences *prefs, int i);
+void preferences_set_disable_imlib_cache                (Preferences *prefs, int i);
+#endif
 
 #endif /* __PREFERENCES_H */

@@ -44,6 +44,9 @@ struct _PrefsWidget
 	Preferences *prefs;
 	GladeXML *dialog_data;
 	GtkWidget *preview;
+
+	GtkWidget *menu;
+	GtkWidget *filesel;
 };
 
 struct _PrefsWidgetClass 

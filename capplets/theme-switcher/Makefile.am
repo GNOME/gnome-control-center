@@ -2,7 +2,7 @@ INCLUDES = -I. -I$(srcdir) 				\
 	-I$(top_srcdir)/intl -I$(top_builddir)/intl	\
 	-I$(srcdir)/../../libcapplet		\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
-	-I$(includedir) $(GNOME_INCLUDEDIR)
+	$(CAPPLET_CFLAGS)
 
 bin_PROGRAMS = theme-selector-capplet
 
@@ -17,12 +17,7 @@ theme_selector_capplet_SOURCES = \
 	gui.c           \
 	install.c
 
-theme_selector_capplet_LDFLAGS = ../../libcapplet/libcapplet.la `imlib-config --libs`
-
-theme_selector_capplet_LDADD = ../../libcapplet/libcapplet.la \
-	$(GNOME_LIBS) $(ORBIT_LIBS) \
-	$(GNOMEUI_LIBS) $(INTLLIBS) \
-	-lImlib $(GNOME_LIBDIR)
+theme_selector_capplet_LDADD = $(CAPPLET_LIBS)
 
 EXTRA_DIST = \
 	theme-selector.desktop
@@ -30,5 +25,5 @@ EXTRA_DIST = \
 sysdir = $(datadir)/control-center/Desktop
 sys_DATA = theme-selector.desktop
 
-install-data-local:
-	$(INSTALL_DATA) $(srcdir)/theme-selector.desktop $(DESTDIR)$(datadir)/gnome/apps/Settings/Desktop/theme-selector.desktop
+psysdir = $(datadir)/gnome/apps/Settings/Desktop
+psys_DATA = theme-selector.desktop

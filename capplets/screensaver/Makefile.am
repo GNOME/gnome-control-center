@@ -6,6 +6,10 @@ Applicationsdir = $(datadir)/control-center/Desktop
 Applications_DATA = \
 	screensaver-properties.desktop
 
+pApplicationsdir = $(datadir)/gnome/apps/Settings/Desktop
+pApplications_DATA = \
+	screensaver-properties.desktop
+
 SUBDIRS = screensavers
 
 EXTRA_DIST = ChangeLog $(Applications_DATA) $(pixmap_DATA) \
@@ -16,12 +20,9 @@ INCLUDES = \
 	-DGNOME_ICONDIR=\""${prefix}/share/pixmaps"\" \
 	-DSSPROP_DATADIR=\""${prefix}/share"\" \
 	-DG_LOG_DOMAIN=\"screensaver-properties\" \
-	$(GNOME_INCLUDEDIR) \
-	$(XML_CFLAGS) \
+	$(CAPPLET_CFLAGS) \
 	-I$(top_srcdir)/ \
-	-I../intl \
-	-I$(top_srcdir)/intl \
-	-I$(top_srcdir)/libcapplet
+	-I$(top_srcdir)/intl
 
 bin_PROGRAMS = screensaver-properties-capplet
 
@@ -39,14 +40,4 @@ screensaver_properties_capplet_SOURCES = \
 	XScreenSaver_ad.h \
 	main.c
 
-screensaver_properties_capplet_LDADD = \
-	$(GNOME_LIBDIR) \
-	$(GNOMEUI_LIBS) \
-	$(ORBIT_LIBS) \
-	$(GNOME_XML_LIB) \
-	-lXt \
-	-lgdk_pixbuf \
-	../../libcapplet/libcapplet.la
-
-install-data-local:
-	$(INSTALL_DATA) $(srcdir)/screensaver-properties.desktop $(DESTDIR)$(datadir)/gnome/apps/Settings/Desktop/screensaver-properties.desktop
+screensaver_properties_capplet_LDADD = $(CAPPLET_LIBS) -lXt

@@ -23,12 +23,12 @@
  * 02111-1307, USA.
  */
 
-#ifdef HAVE_CONFIG_H
-#  include <config.h>
-#endif
+#include <config.h>
 
-#include <sys/types.h>
+#include <glib.h>
+
 #include <sys/stat.h>
+#include <sys/types.h>
 #include <dirent.h>
 #include <errno.h>
 
@@ -42,37 +42,55 @@ static void capplet_dir_activate (CappletDir *capplet_dir,
 static void capplet_shutdown     (Capplet *capplet);
 static void capplet_dir_shutdown (CappletDir *capplet_dir);
 
-static CappletDirEntry **read_entries (CappletDir *dir);
+static GSList *read_entries (CappletDir *dir);
 
 static void start_capplet_through_root_manager (GnomeDesktopEntry *gde);
 
 CappletDirView *(*get_view_cb) (CappletDir *dir, CappletDirView *launcher);
+
+/* nice global table for capplet lookup */
+GHashTable *capplet_hash = NULL;
 
 CappletDirEntry *
 capplet_new (CappletDir *dir, gchar *desktop_path) 
 {
 	Capplet *capplet;
 	CappletDirEntry *entry;
-	
+	GdkPixbuf *pb;
+	GnomeDesktopEntry *dentry;
+
 	g_return_val_if_fail (desktop_path != NULL, NULL);
+
+	g_print ("reading %s\n", desktop_path);
+
+	entry = g_hash_table_lookup (capplet_hash, desktop_path);
+	if (entry) {
+		g_print ("hash hit!!\n");
+		return entry;
+	}
+
+	dentry = gnome_desktop_entry_load (desktop_path);
+	if (!dentry || !strcmp ("gnomecc", dentry->exec[0]))
+		return NULL;
 
 	capplet = g_new0 (Capplet, 1);
 	entry = CAPPLET_DIR_ENTRY (capplet);
 
 	entry->type = TYPE_CAPPLET;
-	entry->entry = gnome_desktop_entry_load (desktop_path);
+	entry->entry = dentry;
+
 	entry->label = entry->entry->name;
 	entry->icon = entry->entry->icon;
-	entry->dir = dir;
+	entry->path = entry->entry->location;
 
-	/* Don't continue if this is just the control center again */
-	if (!strcmp (entry->entry->exec[0], "gnomecc")) {
-		capplet_dir_entry_destroy (entry);
-		return NULL;
-	}
+	entry->dir = dir;
 
 	if (!entry->icon)
 		entry->icon = PIXMAPS_DIR "/control-center.png";
+
+	entry->pb = gdk_pixbuf_new_from_file (entry->icon);
+
+	g_hash_table_insert (capplet_hash, g_strdup (desktop_path), entry);
 
 	return entry;
 }
@@ -86,6 +104,12 @@ capplet_dir_new (CappletDir *dir, gchar *dir_path)
 
 	g_return_val_if_fail (dir_path != NULL, NULL);
 
+	entry = g_hash_table_lookup (capplet_hash, dir_path);
+	if (entry) {
+		g_print ("hash hit!\n");
+		return entry;
+	}
+
 	desktop_path = g_concat_dir_and_file (dir_path, ".directory");
 
 	capplet_dir = g_new0 (CappletDir, 1);
@@ -94,6 +118,7 @@ capplet_dir_new (CappletDir *dir, gchar *dir_path)
 	entry->type = TYPE_CAPPLET_DIR;
 	entry->entry = gnome_desktop_entry_load (desktop_path);
 	entry->dir = dir;
+	entry->path = g_strdup (dir_path);
 
 	g_free (desktop_path);
 
@@ -103,15 +128,27 @@ capplet_dir_new (CappletDir *dir, gchar *dir_path)
 
 		if (!entry->icon)
 			entry->icon = PIXMAPS_DIR "/control-center.png";
+
+		entry->pb = gdk_pixbuf_new_from_file (entry->icon);
 	} else {
 		/* If the .directory file could not be found or read, abort */
 		g_free (capplet_dir);
 		return NULL;
 	}
 
-	capplet_dir->path = g_strdup (dir_path);
+	entry->dir = dir;
+
+	g_hash_table_insert (capplet_hash, entry->path, entry);
+
+	capplet_dir_load (entry);
 
 	return entry;
+}
+
+CappletDirEntry *
+capplet_lookup (const char *path)
+{
+	return g_hash_table_lookup (capplet_hash, path);
 }
 
 void 
@@ -121,7 +158,7 @@ capplet_dir_entry_destroy (CappletDirEntry *entry)
 		capplet_shutdown (CAPPLET (entry));
 	} else {
 		capplet_dir_shutdown (CAPPLET_DIR (entry));
-		g_free (CAPPLET_DIR (entry)->path);
+		g_free (entry->path);
 	}
 
 	gnome_desktop_entry_free (entry->entry);
@@ -160,7 +197,7 @@ capplet_activate (Capplet *capplet)
 
 	entry = CAPPLET_DIR_ENTRY (capplet)->entry;
 
-	if (!strcmp (entry->exec[0], "root-manager"))
+	if (!strcmp (entry->exec[0], "root-manager-helper"))
 		start_capplet_through_root_manager (entry);
 	else
 		gnome_desktop_entry_launch (entry);
@@ -180,7 +217,7 @@ capplet_dir_activate (CappletDir *capplet_dir, CappletDirView *launcher)
 	capplet_dir->view = get_view_cb (capplet_dir, launcher);
 
 	capplet_dir_view_load_dir (capplet_dir->view, capplet_dir);
-	gtk_widget_show_all (GTK_WIDGET (capplet_dir->view));
+	capplet_dir_view_show (capplet_dir->view);
 }
 
 static void
@@ -190,19 +227,20 @@ capplet_shutdown (Capplet *capplet)
 }
 
 static void
+cde_destroy (CappletDirEntry *e, gpointer null)
+{
+	capplet_dir_entry_destroy (e);
+}
+
+static void
 capplet_dir_shutdown (CappletDir *capplet_dir) 
 {
-	int i;
-
 	if (capplet_dir->view)
 		gtk_object_unref (GTK_OBJECT (capplet_dir->view));
 
-	if (capplet_dir->entries) {
-		for (i = 0; capplet_dir->entries[i]; i++)
-			capplet_dir_entry_destroy
-				(capplet_dir->entries[i]);
-		g_free (capplet_dir->entries);
-	}
+	g_slist_foreach (capplet_dir->entries, cde_destroy, NULL);
+
+	g_slist_free (capplet_dir->entries);
 }
 
 static gint 
@@ -214,80 +252,60 @@ node_compare (gconstpointer a, gconstpointer b)
 
 /* Adapted from the original control center... */
 
-static CappletDirEntry **
+static GSList *
 read_entries (CappletDir *dir) 
 {
         DIR *parent_dir;
         struct dirent *child_dir;
         struct stat filedata;
-        GList *list_head, *list_tail;
+	GSList *list = NULL;
 	CappletDirEntry *entry;
-	gchar *fullpath;
+	gchar *fullpath, *test;
 	CappletDirEntry **entry_array;
 	int i;
 
-        parent_dir = opendir (dir->path);
+        parent_dir = opendir (CAPPLET_DIR_ENTRY (dir)->path);
         if (parent_dir == NULL)
                 return NULL;
 
-	list_head = list_tail = NULL;
+        while ( (child_dir = readdir (parent_dir)) ) {
+                if (child_dir->d_name[0] == '.')
+			continue;
 
-        while ((child_dir = readdir (parent_dir)) != NULL) {
-                if (child_dir->d_name[0] != '.') {
-                        /* we check to see if it is interesting. */
-			fullpath = g_concat_dir_and_file (dir->path,
-							  child_dir->d_name);
-
-                        if (stat (fullpath, &filedata) != -1) {
-                                gchar* test;
-
-				entry = NULL;
-
-                                if (S_ISDIR (filedata.st_mode)) {
-					entry = capplet_dir_new 
-						(dir, fullpath);
-				} else {
-					test = rindex(child_dir->d_name, '.');
-
-					if (test && 
-					    !strcmp (".desktop", test)) 
-                                        /* it's a .desktop file --
-					 * it's interesting for sure! */
-						entry = capplet_new
-							(dir, fullpath);
-                                }
-
-				if (entry) {
-					list_tail = g_list_append
-						(list_tail, entry);
-					if (!list_head)
-						list_head = list_tail;
-					else
-						list_tail = list_tail->next;
-				}
-                        }
-
+		/* we check to see if it is interesting. */
+		fullpath = g_concat_dir_and_file (CAPPLET_DIR_ENTRY (dir)->path, child_dir->d_name);
+		
+		if (stat (fullpath, &filedata) == -1) {
 			g_free (fullpath);
-                }
+			continue;
+		}
+
+		entry = NULL;
+		
+		if (S_ISDIR (filedata.st_mode)) {
+			entry = capplet_dir_new (dir, fullpath);
+		} else {
+			test = rindex(child_dir->d_name, '.');
+
+			/* if it's a .desktop file, it's interesting for sure! */
+			if (test && !strcmp (".desktop", test))
+				entry = capplet_new (dir, fullpath);
+		}
+		
+		if (entry)
+			list = g_slist_prepend (list, entry);
+		
+		g_free (fullpath);
         }
         
         closedir (parent_dir);
 
-	list_head = g_list_sort (list_head, node_compare);
+	list = g_slist_sort (list, node_compare);
 
-	/* Allocate the array and copy the list contents over */
-	entry_array = g_new0 (CappletDirEntry *, 
-			      g_list_length (list_head) + 1);
-
-	i = 0;
-	while (list_head) {
-		entry_array[i++] = list_head->data;
-		list_head = g_list_remove_link (list_head, list_head);
-	}
-
-	entry_array[i] = NULL;
-
-        return entry_array;
+	/* remove FALSE for parent entry */
+	return FALSE && CAPPLET_DIR_ENTRY (dir)->dir 
+		? g_slist_prepend (list, CAPPLET_DIR_ENTRY (dir)->dir) 
+		: list;
 }
 
 static void
@@ -296,6 +314,7 @@ start_capplet_through_root_manager (GnomeDesktopEntry *gde)
 	static FILE *output = NULL;
 	pid_t pid;
 	char *cmdline;
+	char *oldexec;
 
 	if (!output) {
 		gint pipe_fd[2];
@@ -310,11 +329,11 @@ start_capplet_through_root_manager (GnomeDesktopEntry *gde)
 			char *arg[2];
 			int i;
 
-			dup2 (pipe_fd[0], 0);
+			dup2 (pipe_fd[0], STDIN_FILENO);
       
 			for (i = 3; i < FOPEN_MAX; i++) close(i);
 
-			arg[0] = gnome_is_program_in_path ("root-manager");
+			arg[0] = gnome_is_program_in_path ("root-manager-helper");
 			arg[1] = NULL;
 			execv (arg[0], arg);
 		}
@@ -324,7 +343,17 @@ start_capplet_through_root_manager (GnomeDesktopEntry *gde)
 		}
 	}
 
+
+	oldexec = gde->exec[1];
+	gde->exec[1] = gnome_is_program_in_path (oldexec);
+
 	cmdline = g_strjoinv (" ", gde->exec + 1);
+
+	g_free (gde->exec[1]);
+	gde->exec[1] = oldexec;
+
+	g_print ("trying: %s\n", cmdline);
+
 	fprintf (output, "%s\n", cmdline);
 	fflush (output);
 	g_free (cmdline);
@@ -334,6 +363,7 @@ void
 capplet_dir_init (CappletDirView *(*cb) (CappletDir *, CappletDirView *)) 
 {
 	get_view_cb = cb;
+	capplet_hash = g_hash_table_new (g_str_hash, g_str_equal);
 }
 
 CappletDir *
