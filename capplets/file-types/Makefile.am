@@ -52,7 +52,7 @@ desktop_file = $(desktop_in_file:.desktop.in=.desktop)
 @XML_I18N_MERGE_DESKTOP_RULE@
 
 EXTRA_DIST = \
-	$(sys_DATA)
+	$(sys_DATA) $(desktop_in_file)
 
 
 
