@@ -2,7 +2,7 @@ pixmapdir = $(datadir)/pixmaps
 pixmap_DATA = \
 	no-hack.png 
 
-Applicationsdir = $(datadir)/control-center/Desktop
+Applicationsdir = $(datadir)/control-center/capplets
 Applications_DATA = \
 	screensaver-properties.desktop
 
