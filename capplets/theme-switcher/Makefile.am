@@ -27,5 +27,5 @@ theme_selector_capplet_LDADD = ../../control-center/libcapplet.la \
 EXTRA_DIST = \
 	theme-selector.desktop
 
-sysdir = $(datadir)/control-center/Appearances
+sysdir = $(datadir)/control-center/Desktop
 sys_DATA = theme-selector.desktop
