@@ -1,11 +1,11 @@
 # Swedish translation for the gnome-core module.
-# Copyright (C) 1998 Free Software Foundation, Inc.
-# Martin Wahlen <mva@sbbs.se>, 1998.
+# Copyright (C) 1998-1999 Free Software Foundation, Inc.
+# Martin Wahlen <mva@sbbs.se>, 1998-1999.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.5\n"
-"POT-Creation-Date: 1999-09-26 19:44+0200\n"
+"POT-Creation-Date: 1999-09-30 21:39+0200\n"
 "PO-Revision-Date: 1999-09-27 19:00+0100\n"
 "Last-Translator: Richard Hult <rhult@hem2.passagen.se>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -117,7 +117,7 @@ msgstr "Sida-vid-sida"
 #: capplets/sound-properties/sound-properties.c:690
 #: capplets/theme-switcher/gui.c:362
 #: capplets/ui-properties/ui-properties.c:513
-#: capplets/wm-properties/wm-properties-capplet.c:623
+#: capplets/wm-properties/wm-properties-capplet.c:640
 msgid ""
 "No help is available/installed for these settings. Please make sure you\n"
 "have the GNOME User's Guide installed on your system."
@@ -137,7 +137,7 @@ msgstr ""
 #: capplets/sound-properties/sound-properties.c:753
 #: capplets/theme-switcher/gui.c:364
 #: capplets/ui-properties/ui-properties.c:515
-#: capplets/wm-properties/wm-properties-capplet.c:625
+#: capplets/wm-properties/wm-properties-capplet.c:642
 #: control-center/callbacks.c:74 control-center/capplet-widget.c:263
 msgid "Close"
 msgstr "Stäng"
@@ -211,11 +211,11 @@ msgstr "Tonläge (Hz)"
 msgid "Duration (ms)"
 msgstr "Längd (ms)"
 
-#: capplets/bell-properties/bell-properties.c:225
+#: capplets/bell-properties/bell-properties.c:219
 msgid "Test"
 msgstr "Test"
 
-#: capplets/bell-properties/bell-properties.c:247
+#: capplets/bell-properties/bell-properties.c:241
 msgid ""
 "an initialization error occurred while starting 'bell-properties-capplet'.\n"
 "aborting...\n"
@@ -420,19 +420,19 @@ msgstr ""
 
 #: capplets/mime-type/mime-type-capplet.c:79
 #: capplets/session-properties/session-properties.c:198
-#: capplets/wm-properties/wm-properties-capplet.c:1067
+#: capplets/wm-properties/wm-properties-capplet.c:1085
 msgid "Delete"
 msgstr "Radera"
 
 #: capplets/mime-type/mime-type-capplet.c:89
 #: capplets/session-properties/session-properties.c:188
-#: capplets/wm-properties/wm-properties-capplet.c:1057
+#: capplets/wm-properties/wm-properties-capplet.c:1075
 msgid "Add..."
 msgstr "Lägg till..."
 
 #: capplets/mime-type/mime-type-capplet.c:93
 #: capplets/session-properties/session-properties.c:193
-#: capplets/wm-properties/wm-properties-capplet.c:1062
+#: capplets/wm-properties/wm-properties-capplet.c:1080
 msgid "Edit..."
 msgstr "Redigera..."
 
@@ -725,6 +725,8 @@ msgid "Saving session details."
 msgstr "Håller på att spara sessionsdata."
 
 #: capplets/session-properties/gsm-client-row.c:43
+#: capplets/wm-properties/wm-properties-capplet.c:442
+#: capplets/wm-properties/wm-properties-capplet.c:443
 msgid "Unknown"
 msgstr "Okänd"
 
@@ -1297,71 +1299,98 @@ msgstr ""
 "göra det genom att välja \"Kör program\" i\n"
 "fot-menyn\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:509
+#: capplets/wm-properties/wm-properties-capplet.c:496
+#: capplets/wm-properties/wm-properties-capplet.c:747
+#: capplets/wm-properties/wm-properties-capplet.c:855
+#: capplets/wm-properties/wm-properties-capplet.c:862
+#: capplets/wm-properties/wm-properties-capplet.c:1008
+#: control-center/capplet-manager.c:180
+msgid "OK"
+msgstr "OK"
+
+#: capplets/wm-properties/wm-properties-capplet.c:514
 msgid ""
 "Your current window manager has been changed. In order for\n"
 "this change to be saved, you will need to save your current\n"
-"session. This can be done either selecting \"Save Current Session\"\n"
+"session. You can do so immediately by selecting the \"Save session\n"
+"now\" below, or you can save your session later.  This can be\n"
+"done either selecting \"Save Current Session\" under \"Settings\"\n"
+"in the main menu, or by turning on \"Save Current Setup\" when\n"
+"you log out.\n"
+msgstr ""
+"Aktuell fönsterhanterare har ändrats. För att ändringen\n"
+"ska vara permanent måste du spara aktuell session.\n"
+"Du kan göra det genom att välja \"Spara session nu\" eller \n"
+"så kan du spara din session senare. Detta kan göras genom att välja\n"
+"\"Spara aktuell session\" under \"Inställningar\" i huvudmenyn,\n"
+"eller genom att slå på \"Spara nuvarande inställningar\" när du\n"
+"loggar ut.\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:521
+msgid "Save Session Later"
+msgstr "Spara session senare"
+
+#: capplets/wm-properties/wm-properties-capplet.c:522
+msgid "Save Session Now"
+msgstr "Spara session nu"
+
+#: capplets/wm-properties/wm-properties-capplet.c:525
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. This can be done by either selecting \"Save Current Session\"\n"
 "under \"Settings\" in the main menu, or by turning on\n"
 "\"Save Current Setup\" when you log out.\n"
 msgstr ""
 "Aktuell fönsterhanterare har ändrats. För att ändringen\n"
 "ska vara permanent måste du spara aktuell session\n"
 "Du kan göra det genom att välja \"Spara aktuell session\"\n"
-"under \"Inställningar\" i huvudmenyn, eller gneom att slå på\n"
+"under \"Inställningar\" i huvudmenyn, eller genom att slå på\n"
 "\"Spara nuvarande inställningar\" när du loggar ut.\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:729
+#: capplets/wm-properties/wm-properties-capplet.c:746
 msgid "Add New Window Manager"
 msgstr "Lägg till ny fönsterhanterare"
 
-#: capplets/wm-properties/wm-properties-capplet.c:730
-#: capplets/wm-properties/wm-properties-capplet.c:838
-#: capplets/wm-properties/wm-properties-capplet.c:845
-#: capplets/wm-properties/wm-properties-capplet.c:990
-#: control-center/capplet-manager.c:180
-msgid "OK"
-msgstr "OK"
-
-#: capplets/wm-properties/wm-properties-capplet.c:730
+#: capplets/wm-properties/wm-properties-capplet.c:747
 #: control-center/capplet-manager.c:185
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: capplets/wm-properties/wm-properties-capplet.c:741
+#: capplets/wm-properties/wm-properties-capplet.c:758
 msgid "Name:"
 msgstr "Namn:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:754
+#: capplets/wm-properties/wm-properties-capplet.c:771
 msgid "Command:"
 msgstr "Kommando:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:767
+#: capplets/wm-properties/wm-properties-capplet.c:784
 msgid "Configuration Command:"
 msgstr "Kommando för konfiguration:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:786
+#: capplets/wm-properties/wm-properties-capplet.c:803
 msgid "Window manager is session managed"
 msgstr "Fönsterhanterare använder sessionshantering"
 
-#: capplets/wm-properties/wm-properties-capplet.c:836
+#: capplets/wm-properties/wm-properties-capplet.c:853
 msgid "Name cannot be empty"
 msgstr "Du måste skriva in ett namn"
 
-#: capplets/wm-properties/wm-properties-capplet.c:843
+#: capplets/wm-properties/wm-properties-capplet.c:860
 msgid "Command cannot be empty"
 msgstr "Du måste skriva in ett kommando"
 
-#: capplets/wm-properties/wm-properties-capplet.c:892
-#: capplets/wm-properties/wm-properties-capplet.c:934
+#: capplets/wm-properties/wm-properties-capplet.c:909
+#: capplets/wm-properties/wm-properties-capplet.c:951
 msgid "Edit Window Manager"
 msgstr "Redigera fönsterhanterare"
 
-#: capplets/wm-properties/wm-properties-capplet.c:989
+#: capplets/wm-properties/wm-properties-capplet.c:1007
 msgid "You cannot delete the current Window Manager"
 msgstr "Du kan inte ta bort den aktuella fönsterhanteraren"
 
-#: capplets/wm-properties/wm-properties-capplet.c:1102
+#: capplets/wm-properties/wm-properties-capplet.c:1120
 msgid ""
 "an initialization error occurred while starting 'wm-properties-capplet'.\n"
 "aborting...\n"
@@ -1475,4 +1504,3 @@ msgstr ""
 #: control-center/main.c:187
 msgid "Control Center"
 msgstr "Kontrollpanelen"
-
