@@ -69,6 +69,10 @@ have_libesd=no
 AM_PATH_ESD(,have_libesd=yes,
 [AC_MSG_WARN([*** \`esd-manager' will not be built ***])])
 AM_CONDITIONAL(HAVE_LIBESD, test yes = $have_libesd)
+if test "$have_libesd" = yes; then
+	AC_DEFINE(HAVE_ESD)
+	AC_DEFINE(HAVE_LIBESD)
+fi
 
 AM_PATH_IMLIB(1.8.2, , [
 echo "ERROR: Needs a system with Imlib 1.8.2 or higher"
