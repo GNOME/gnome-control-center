@@ -67,8 +67,10 @@ apply_settings (Bonobo_ConfigDatabase db)
 					    &event_base_return,
 					    &error_base_return) == True)
 		{
+			kbdsettings.type = 0;
                         kbdsettings.rate = rate;
                         kbdsettings.delay = delay;
+			kbdsettings.servnumlock = False;
                         XF86MiscSetKbdSettings (GDK_DISPLAY (), &kbdsettings);
                 } else {
                         XAutoRepeatOff (GDK_DISPLAY ());
