@@ -318,13 +318,13 @@ gnome_theme_details_init (void)
 
   /* window manager themes */
   widget = WID ("window_install_button");
-  g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_icon_theme_installer_run_cb), parent);
+  g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_installer_run_cb), parent);
   widget = WID ("window_manage_button");
   g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_manager_window_show_manage_themes), dialog);
 
   /* icon themes */
   widget = WID ("icon_install_button");
-  g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_installer_run_cb), parent);
+  g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_icon_theme_installer_run_cb), parent);
   widget = WID ("icon_manage_button");
   g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_manager_icon_show_manage_themes), dialog);
 

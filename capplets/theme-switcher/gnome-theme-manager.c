@@ -374,8 +374,20 @@ load_meta_themes (GtkTreeView *tree_view,
 	  else
 	    model_meta_theme_info = gnome_theme_meta_info_find (name);
 	  g_free (name);
+
+	  /* The theme was removed, and we haven't removed it from the list yet. */
+	  if (model_meta_theme_info == NULL)
+	    {
+	      GtkTreeIter iter_to_remove;
+
+	      iter_to_remove = iter;
+	      valid = gtk_tree_model_iter_next (model, &iter);
+	      gtk_list_store_remove (GTK_LIST_STORE (model), &iter_to_remove);
+	  
+	      goto end_of_loop;
+	    }
 	}
-      
+
       /* start comparing values */
       if (list && valid)
 	{
