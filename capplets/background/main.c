@@ -33,7 +33,22 @@
 #include "capplet-util.h"
 #include "applier.h"
 
+static void
+bonobo_config_set_filename (Bonobo_ConfigDatabase db,
+			    const char *key,
+			    const char *value,
+			    CORBA_Environment *opt_ev);
+
 static Applier *applier = NULL;
+
+/* Popt option for compat reasons */
+static gchar *background_image = NULL;
+
+const struct poptOption options [] = {
+	{ "background-image", 'b', POPT_ARG_STRING, &background_image, 0,
+	  N_("Set background image."), N_("IMAGE-FILE") },
+	{NULL, '\0', 0, NULL, 0}
+};
 
 static void
 apply_settings (Bonobo_ConfigDatabase db)
@@ -43,6 +58,13 @@ apply_settings (Bonobo_ConfigDatabase db)
 	CORBA_exception_init (&ev);
 	if (!applier)
 		applier = APPLIER (applier_new ());
+
+	/* HAckity hackty */
+	if (background_image)
+	{
+		bonobo_config_set_filename (db, "/main/wallpaper_filename", background_image, NULL);
+		Bonobo_ConfigDatabase_sync (db, &ev);
+	}
 
 	applier_apply_prefs (applier, CORBA_OBJECT_NIL, db, &ev, TRUE, FALSE);
 	CORBA_exception_free (&ev);
@@ -241,6 +263,8 @@ int
 main (int argc, char **argv) 
 {
 	glade_gnome_init ();
+	gnomelib_register_popt_table (options, "background options");
+
 	capplet_init (argc, argv, apply_settings, create_dialog, setup_dialog, get_legacy_settings);
 
 	gnome_window_icon_set_default_from_file
