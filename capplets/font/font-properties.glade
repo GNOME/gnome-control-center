@@ -1,62 +1,177 @@
 <?xml version="1.0" standalone="no"?> <!--*- mode: xml -*-->
-<!DOCTYPE glade-interface SYSTEM "../glade-2.0.dtd" >
+<!DOCTYPE glade-interface SYSTEM "http://glade.gnome.org/glade-2.0.dtd" >
 
 <glade-interface>
-  <requires lib="gnome"/>
-  
+  <requires lib="gnome" />
+
   <widget class="GtkDialog" id="window1">
-    <property name="title" translatable="yes">Font properties</property>
+    <property name="title" translatable="yes">Font Preferences</property>
+    <property name="type">GTK_WINDOW_TOPLEVEL</property>
+    <property name="modal">no</property>
+    <property name="allow_shrink">no</property>
+    <property name="allow_grow">no</property>
     <property name="visible">yes</property>
+    <property name="window-position">GTK_WIN_POS_NONE</property>
 
-    <signal name="destroy" handler="gtk_main_quit" />
-    <signal name="response" handler="response_cb" />
-    
     <child internal-child="vbox">
-      <widget class="GtkVBox" id="vbox1">
-        <property name="spacing">4</property>
-        <child>
-	  <widget class="GtkCheckButton" id="custom_check">
-	    <property name="label" translatable="yes">Use a custom font.</property>
-	    <property name="visible">yes</property>
-	  </widget>
-	  <packing>
-	    <property name="expand">no</property>
-	  </packing>
-	 </child>
-        <child>
-	  <widget class="GnomeFontPicker" id="font_picker">
-	    <property name="mode">font-info</property>
-	    <property name="use-font-in-label">yes</property>
-	    <property name="visible">yes</property>
-	  </widget>
-	  <packing>
-	    <property name="expand">no</property>
-	  </packing>
-	 </child>
-      </widget>
-    </child> 
+      <widget class="GtkVBox" id="dialog-vbox1">
+        <property name="homogeneous">no</property>
+        <property name="spacing">0</property>
+        <property name="visible">yes</property>
 
-    <child internal-child="action_area">
-      <widget class="GtkHButtonBox" id="buttonbox1">
-        <child>	   
-          <widget class="GtkButton" id="button1">
-            <property name="label">gtk-apply</property>
-            <property name="use_stock">yes</property>
-            <property name="use_underline">yes</property>
-            <property name="response_id">1</property>
+        <child internal-child="action_area">
+          <widget class="GtkHButtonBox" id="dialog-action_area1">
+            <property name="layout_style">GTK_BUTTONBOX_END</property>
+            <property name="spacing">8</property>
             <property name="visible">yes</property>
+
+            <child>
+              <widget class="GtkButton" id="button2">
+                <property name="can_default">yes</property>
+                <property name="can_focus">yes</property>
+                <property name="visible">yes</property>
+                <property name="label">gtk-close</property>
+                <property name="use_stock">yes</property>
+                <property name="use_underline">yes</property>
+              </widget>
+            </child>
           </widget>
+          <packing>
+            <property name="padding">0</property>
+            <property name="expand">no</property>
+            <property name="fill">yes</property>
+            <property name="pack_type">GTK_PACK_END</property>
+          </packing>
         </child>
-	<child>
-          <widget class="GtkButton" id="button2">
-            <property name="label">gtk-close</property>
-            <property name="use_stock">yes</property>
-            <property name="use_underline">yes</property>
-            <property name="response_id">2</property>
+
+        <child>
+          <widget class="GtkVBox" id="vbox5">
+            <property name="border_width">10</property>
+            <property name="homogeneous">no</property>
+            <property name="spacing">10</property>
             <property name="visible">yes</property>
+
+            <child>
+              <widget class="GtkFrame" id="frame1">
+                <property name="label" translatable="yes">Desktop Font</property>
+                <property name="label_xalign">0</property>
+                <property name="width-request">250</property>
+                <property name="shadow">GTK_SHADOW_NONE</property>
+                <property name="visible">yes</property>
+
+                <child>
+                  <widget class="GtkHBox" id="hbox1">
+                    <property name="homogeneous">no</property>
+                    <property name="spacing">10</property>
+                    <property name="visible">yes</property>
+
+                    <child>
+                      <widget class="GnomeFontPicker" id="font_picker">
+                        <property name="can_focus">yes</property>
+                        <property name="title" translatable="yes">Select the desktop font</property>
+                        <property name="preview_text" translatable="yes">AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz</property>
+                        <property name="mode">GNOME_FONT_PICKER_MODE_FONT_INFO</property>
+                        <property name="show_size">yes</property>
+                        <property name="label-font-size">14</property>
+                        <property name="use-font-in-label">yes</property>
+                        <property name="visible">yes</property>
+                      </widget>
+                      <packing>
+                        <property name="padding">0</property>
+                        <property name="expand">yes</property>
+                        <property name="fill">yes</property>
+                      </packing>
+                    </child>
+
+                    <child>
+                      <widget class="GtkButton" id="button3">
+                        <property name="can_focus">yes</property>
+                        <property name="label" translatable="yes">Set to Default</property>
+                        <property name="relief">GTK_RELIEF_NORMAL</property>
+                        <property name="visible">yes</property>
+                      </widget>
+                      <packing>
+                        <property name="padding">0</property>
+                        <property name="expand">no</property>
+                        <property name="fill">no</property>
+                      </packing>
+                    </child>
+                  </widget>
+                </child>
+              </widget>
+              <packing>
+                <property name="padding">0</property>
+                <property name="expand">yes</property>
+                <property name="fill">yes</property>
+              </packing>
+            </child>
+
+            <child>
+              <widget class="GtkFrame" id="frame2">
+                <property name="label" translatable="yes">File Manager Font</property>
+                <property name="label_xalign">0</property>
+                <property name="shadow">GTK_SHADOW_NONE</property>
+                <property name="visible">yes</property>
+
+                <child>
+                  <widget class="GtkHBox" id="hbox2">
+                    <property name="homogeneous">no</property>
+                    <property name="spacing">10</property>
+                    <property name="visible">yes</property>
+
+                    <child>
+                      <widget class="GnomeFontPicker" id="fontpicker2">
+                        <property name="can_focus">yes</property>
+                        <property name="title" translatable="yes">Pick a Font</property>
+                        <property name="preview_text" translatable="yes">AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz</property>
+                        <property name="mode">GNOME_FONT_PICKER_MODE_FONT_INFO</property>
+                        <property name="show_size">yes</property>
+                        <property name="label-font-size">14</property>
+                        <property name="use-font-in-label">yes</property>
+                        <property name="visible">yes</property>
+                      </widget>
+                      <packing>
+                        <property name="padding">0</property>
+                        <property name="expand">yes</property>
+                        <property name="fill">yes</property>
+                      </packing>
+                    </child>
+
+                    <child>
+                      <widget class="GtkButton" id="button4">
+                        <property name="can_focus">yes</property>
+                        <property name="label" translatable="yes">Set to Default</property>
+                        <property name="relief">GTK_RELIEF_NORMAL</property>
+                        <property name="visible">yes</property>
+                      </widget>
+                      <packing>
+                        <property name="padding">0</property>
+                        <property name="expand">no</property>
+                        <property name="fill">no</property>
+                      </packing>
+                    </child>
+                  </widget>
+                </child>
+              </widget>
+              <packing>
+                <property name="padding">0</property>
+                <property name="expand">yes</property>
+                <property name="fill">yes</property>
+              </packing>
+            </child>
           </widget>
+          <packing>
+            <property name="padding">0</property>
+            <property name="expand">yes</property>
+            <property name="fill">yes</property>
+          </packing>
         </child>
       </widget>
-    </child> 
+      <packing>
+        <property name="padding">4</property>
+        <property name="expand">yes</property>
+        <property name="fill">yes</property>
+      </packing>
+    </child>
   </widget>
 </glade-interface>

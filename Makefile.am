@@ -1,4 +1,4 @@
-SUBDIRS = po libsounds libbackground gnome-settings-daemon capplets control-center idl
+SUBDIRS = po libsounds libbackground gnome-settings-daemon capplets control-center idl schemas
 
 #I removed the root-manager for now
 #

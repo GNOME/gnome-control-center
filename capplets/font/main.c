@@ -43,9 +43,9 @@ setup_dialog (void)
 {
 	GObject *peditor;
 
-	peditor = gconf_peditor_new_boolean (changeset, "/desktop/gnome/interface/use_custom_font", WID ("custom_check"), NULL);
+	peditor = gconf_peditor_new_boolean (NULL, /*changeset,*/ "/desktop/gnome/interface/use_custom_font", WID ("custom_check"), NULL);
 	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("font_picker"));
-	peditor = gconf_peditor_new_font (changeset, "/desktop/gnome/interface/font_name", WID ("font_picker"), NULL);
+	peditor = gconf_peditor_new_font (NULL, /*changeset,*/ "/desktop/gnome/interface/font_name", WID ("font_picker"), NULL);
 }
 	
 int

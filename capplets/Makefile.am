@@ -2,6 +2,6 @@ always_built_SUBDIRS =					\
 	common default-applications desktop-links	\
 	background keyboard mouse sound			\
 	file-types theme-switcher ui-properties		\
-	screensaver font
- 
+	screensaver font keybindings
+
 SUBDIRS =  $(always_built_SUBDIRS)
