@@ -13,8 +13,10 @@ struct _ThemeInfo
   gboolean has_keybinding;
 };
 
-GList *theme_common_get_list  (void);
-void   theme_common_list_free (GList *list);
+GList *theme_common_get_list              (void);
+void   theme_common_list_free             (GList    *list);
+void   theme_common_register_theme_change (GCallback func,
+					   gpointer  data);
 
 
 #endif /* THEME_COMMON_H */

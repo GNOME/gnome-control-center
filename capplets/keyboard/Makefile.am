@@ -1,7 +1,7 @@
-bin_PROGRAMS = gnome2-keyboard-properties
+bin_PROGRAMS = gnome-keyboard-properties
 
-gnome2_keyboard_properties_SOURCES = gnome-keyboard-properties.c
-gnome2_keyboard_properties_LDADD =				\
+gnome_keyboard_properties_SOURCES = gnome-keyboard-properties.c
+gnome_keyboard_properties_LDADD =				\
 	../accessibility/keyboard/libaccessibility-keyboard.a 	\
 	$(GNOMECC_CAPPLETS_LIBS)
 

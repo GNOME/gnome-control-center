@@ -236,9 +236,10 @@ setup_images (GladeXML *dialog, gboolean as_dialog)
 	int i = G_N_ELEMENTS (features);
 	while (i-- > 0)
 		if (features [i].image != NULL &&
-		    (as_dialog || !features [i].only_for_dialog))
+		    (as_dialog || !features [i].only_for_dialog)) {
 			gtk_image_set_from_file (GTK_IMAGE (WID (features [i].image)),
 				features [i].image_file);
+		}
 }
 
 static void
@@ -247,6 +248,7 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset, gboolean as_dialog)
 	GtkWidget *content = WID ("keyboard_table");
 	GtkWidget *page = WID ("accessX_page");
 	GObject *label;
+
 
 	g_return_if_fail (content != NULL);
 	g_return_if_fail (page != NULL);
@@ -466,12 +468,18 @@ GtkWidget *
 setup_accessX_dialog (GConfChangeSet *changeset, gboolean as_dialog)
 {
 	GConfClient *client;
+#if 1
 	char const  *toplevel_name = as_dialog ? "accessX_dialog" : "accessX_page";
 	GladeXML    *dialog = glade_xml_new (GNOMECC_DATA_DIR
 		"/interfaces/gnome-accessibility-keyboard-properties.glade2",
 		toplevel_name, NULL);
 	GtkWidget   *toplevel = WID (toplevel_name);
-
+#else
+	char const  *toplevel_name = "key_access_dialog";
+	GladeXML    *dialog = glade_xml_new ("access-foo.glade",
+					     toplevel_name, NULL);
+	GtkWidget   *toplevel = WID (toplevel_name);
+#endif
 	client = gconf_client_get_default ();
 	gconf_client_add_dir (client, CONFIG_ROOT, GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 

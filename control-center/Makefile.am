@@ -25,9 +25,9 @@ INCLUDES = 							\
 	-DGNOME_SBINDIR=\""$(sbindir)"\"			\
 	$(GNOMECC_CFLAGS)
 
-bin_PROGRAMS = gnome2-control-center
+bin_PROGRAMS = gnome-control-center
 
-gnome2_control_center_SOURCES = \
+gnome_control_center_SOURCES = \
 	main.c						\
 	capplet-dir.c 		capplet-dir.h 		\
 	capplet-dir-view.c	capplet-dir-view.h	\
@@ -35,7 +35,7 @@ gnome2_control_center_SOURCES = \
 
 #	capplet-dir-view-tree.c
 
-gnome2_control_center_LDADD = $(GNOMECC_LIBS)
+gnome_control_center_LDADD = $(GNOMECC_LIBS)
 
 EXTRA_DIST = gnomecc.desktop.in $(appicon_DATA) $(splash_DATA) $(ui_DATA)
 

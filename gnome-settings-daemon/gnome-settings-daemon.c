@@ -34,6 +34,7 @@
 #include "xsettings-manager.h"
 #include "gnome-settings-daemon.h"
 
+/*#include "gnome-settings-disk.h"*/
 #include "gnome-settings-font.h"
 #include "gnome-settings-xsettings.h"
 #include "gnome-settings-mouse.h"
@@ -224,6 +225,7 @@ gnome_settings_daemon_new (void)
    */
   client = gconf_client_get_default ();
 
+/*  gnome_settings_disk_init (client);*/
   gnome_settings_font_init (client);
   gnome_settings_xsettings_init (client);
   gnome_settings_mouse_init (client);
@@ -261,6 +263,7 @@ gnome_settings_daemon_new (void)
   
   gdk_window_add_filter (NULL, manager_event_filter, NULL);
 
+/*  gnome_settings_disk_load (client);*/
   gnome_settings_font_load (client);
   gnome_settings_xsettings_load (client);
   gnome_settings_mouse_load (client);

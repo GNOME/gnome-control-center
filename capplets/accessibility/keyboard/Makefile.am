@@ -4,10 +4,10 @@ libaccessibility_keyboard_a_SOURCES =		\
     accessibility-keyboard.c			\
     accessibility-keyboard.h
 
-bin_PROGRAMS = gnome2-accessibility-keyboard-properties
+bin_PROGRAMS = gnome-accessibility-keyboard-properties
 
-gnome2_accessibility_keyboard_properties_SOURCES = gnome-accessibility-keyboard-properties.c
-gnome2_accessibility_keyboard_properties_LDADD = \
+gnome_accessibility_keyboard_properties_SOURCES = gnome-accessibility-keyboard-properties.c
+gnome_accessibility_keyboard_properties_LDADD = \
 	libaccessibility-keyboard.a $(GNOMECC_CAPPLETS_LIBS)
 
 @INTLTOOL_DESKTOP_RULE@

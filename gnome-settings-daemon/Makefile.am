@@ -1,8 +1,8 @@
 INCLUDES=$(GNOME_SETTINGS_DAEMON_CFLAGS) -I$(top_srcdir)/libbackground -I$(top_srcdir)
 
-bin_PROGRAMS=gnome2-settings-daemon
+bin_PROGRAMS=gnome-settings-daemon
 
-gnome2_settings_daemon_SOURCES =	\
+gnome_settings_daemon_SOURCES =	\
 	factory.c			\
 	gnome-settings-daemon.h		\
 	gnome-settings-daemon.c		\
@@ -32,7 +32,7 @@ gnome2_settings_daemon_SOURCES =	\
 	xsettings-manager.h		\
 	$(CORBA_GENERATED)
 
-gnome2_settings_daemon_LDADD = \
+gnome_settings_daemon_LDADD = \
 	$(GNOME_SETTINGS_DAEMON_LIBS)			\
 	$(top_builddir)/libbackground/libbackground.la	\
 	$(top_builddir)/libsounds/libsounds.a		\

@@ -1,9 +1,9 @@
-bin_PROGRAMS = gnome2-font-properties
+bin_PROGRAMS = gnome-font-properties
 
-gnome2_font_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
-gnome2_font_properties_SOURCES = \
+gnome_font_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
+gnome_font_properties_SOURCES = \
 	main.c		
-gnome2_font_properties_LDFLAGS = -export-dynamic
+gnome_font_properties_LDFLAGS = -export-dynamic
 
 @INTLTOOL_DESKTOP_RULE@
 

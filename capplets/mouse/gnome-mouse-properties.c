@@ -715,7 +715,7 @@ main (int argc, char **argv)
 		setup_dialog (dialog, changeset);
 
 		dialog_win = gtk_dialog_new_with_buttons
-			(_("Mouse Properties"), NULL, -1,
+			(_("Mouse Properties"), NULL, 0,
 			 GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
 			 NULL);
 

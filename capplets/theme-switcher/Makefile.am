@@ -1,11 +1,9 @@
-SUBDIRS = control
+bin_PROGRAMS = gnome-font-and-theme-properties
 
-bin_PROGRAMS = gtk2-theme-selector-capplet
-
-gtk2_theme_selector_capplet_LDADD = $(GNOMECC_CAPPLETS_LIBS)
-gtk2_theme_selector_capplet_SOURCES = \
-	main.c		
-gtk2_theme_selector_capplet_LDFLAGS = -export-dynamic
+gnome_font_and_theme_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
+gnome_font_and_theme_properties_SOURCES = \
+	gnome-font-and-theme-properties.c
+gnome_font_and_theme_properties_LDFLAGS = -export-dynamic
 
 @INTLTOOL_DESKTOP_RULE@
 

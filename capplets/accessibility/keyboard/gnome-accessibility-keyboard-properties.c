@@ -45,7 +45,6 @@ main (int argc, char **argv)
 {
 	GtkWidget *dialog;
 	GConfChangeSet *changeset;
-
 	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
@@ -54,7 +53,7 @@ main (int argc, char **argv)
 			    GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
 			    NULL);
 	activate_settings_daemon ();
-
+	
 	changeset = NULL;
 	dialog = setup_accessX_dialog (changeset, TRUE);
 	g_signal_connect (G_OBJECT (dialog),

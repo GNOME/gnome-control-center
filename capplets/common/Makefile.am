@@ -6,8 +6,8 @@ INCLUDES = \
 	-DG_LOG_DOMAIN=\"capplet-common\"				\
 	-I$(top_srcdir)/						\
 	-I$(top_srcdir)/libbackground					\
-	@CAPPLET_CFLAGS@
-	
+	@VFS_CAPPLET_CFLAGS@
+
 
 noinst_LTLIBRARIES = libcommon.la
 

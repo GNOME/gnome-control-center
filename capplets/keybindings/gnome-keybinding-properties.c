@@ -1,3 +1,7 @@
+/* This program was written with lots of love under the GPL by Jonathan
+ * Blandford <jrb@gnome.org>
+ */
+
 #include <config.h>
 
 #include <string.h>
@@ -11,6 +15,10 @@
 #include "activate-settings-daemon.h"
 
 #define LABEL_DATA "gnome-keybinding-properties-label"
+#define KEY_THEME_KEY "/desktop/gnome/interface/gtk_key_theme"
+#define KEY_LIST_KEY "/apps/gnome_keybinding_properties/keybinding_key_list"
+#define METACITY_KEY_LIST_KEY "/apps/metacity/general/configurable_keybinding_key_list"
+#define MAX_ELEMENTS_BEFORE_SCROLLING 8
 
 enum
 {
@@ -31,6 +39,13 @@ typedef struct
 
 GList *signals = NULL;
 
+
+static gboolean
+is_metacity_running (void)
+{
+  return FALSE;
+}
+
 static void
 menu_item_activate (GtkWidget *menu_item,
 		    gpointer   unused)
@@ -45,10 +60,10 @@ menu_item_activate (GtkWidget *menu_item,
   key_theme = g_object_get_data (G_OBJECT (menu_item), LABEL_DATA);
   g_return_if_fail (key_theme != NULL);
 
-  current_key_theme = gconf_client_get_string (client, "/desktop/gnome/interface/gtk_key_theme", &error);
+  current_key_theme = gconf_client_get_string (client, KEY_THEME_KEY, &error);
   if (current_key_theme && strcmp (current_key_theme, key_theme))
     {
-      gconf_client_set_string (client, "/desktop/gnome/interface/gtk_key_theme", key_theme, NULL);
+      gconf_client_set_string (client, KEY_THEME_KEY, key_theme, NULL);
     }
 }
 
@@ -145,6 +160,7 @@ keybinding_key_changed (GConfClient *client,
       key_entry->keyval = 0;
       key_entry->mask = 0;
     }
+  key_entry->editable = gconf_entry_get_is_writable (entry);
 
   path = gtk_tree_path_new_first ();
   for (valid = gtk_tree_model_get_iter_first (key_entry->model, &iter);
@@ -167,7 +183,8 @@ keybinding_key_changed (GConfClient *client,
 
 
 static void
-clear_old_model (GtkWidget *tree_view)
+clear_old_model (GladeXML  *dialog,
+		 GtkWidget *tree_view)
 {
   GtkTreeModel *model;
   GtkTreeIter iter;
@@ -177,39 +194,46 @@ clear_old_model (GtkWidget *tree_view)
 
   client = gconf_client_get_default ();
   model = gtk_tree_view_get_model (GTK_TREE_VIEW (tree_view));
-  if (model == NULL)
-    return;
 
-  g_object_ref (model);
-  gtk_tree_view_set_model (GTK_TREE_VIEW (tree_view), NULL);
-
-  for (valid = gtk_tree_model_get_iter_first (model, &iter);
-       valid;
-       valid = gtk_tree_model_iter_next (model, &iter))
+  if (model != NULL)
     {
-      gtk_tree_model_get (model, &iter,
-			  KEYENTRY_COLUMN, &key_entry,
-			  -1);
-      gconf_client_notify_remove (client, key_entry->gconf_cnxn);
-      g_free (key_entry->gconf_key);
-      g_free (key_entry);
+      g_object_ref (model);
+
+      for (valid = gtk_tree_model_get_iter_first (model, &iter);
+	   valid;
+	   valid = gtk_tree_model_iter_next (model, &iter))
+	{
+	  gtk_tree_model_get (model, &iter,
+			      KEYENTRY_COLUMN, &key_entry,
+			      -1);
+	  gconf_client_notify_remove (client, key_entry->gconf_cnxn);
+	  g_free (key_entry->gconf_key);
+	  g_free (key_entry);
+	}
+      g_object_unref (model);
     }
 
-  g_object_unref (model);
+  model = (GtkTreeModel *) gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER);
+  gtk_tree_view_set_model (GTK_TREE_VIEW (tree_view), model);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (WID ("actions_swindow")),
+				  GTK_POLICY_NEVER, GTK_POLICY_NEVER);
+  gtk_widget_set_usize (WID ("actions_swindow"), -1, -1);
 }
 
 static void
-setup_tree (GladeXML *dialog,
-	    GSList   *keys_list)
+append_keys_to_tree (GladeXML *dialog,
+		     GSList   *keys_list)
 {
   GConfClient *client;
   GtkTreeModel *model;
   GSList *list;
-  gint i = 0;
+  gint i;
 
-  clear_old_model (WID ("shortcut_treeview"));
   client = gconf_client_get_default ();
-  model = (GtkTreeModel *) gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER);
+  model = gtk_tree_view_get_model (GTK_TREE_VIEW (WID ("shortcut_treeview")));
+
+  i = gtk_tree_model_iter_n_children (model, NULL);
+
 
   for (list = keys_list; list; list = list->next)
     {
@@ -229,7 +253,7 @@ setup_tree (GladeXML *dialog,
 				      &error);
       if (error || entry == NULL)
 	{
-	  /* We don't actually want to popup a dialog */
+	  /* We don't actually want to popup a dialog - just skip this one */
 	  g_free (key_string);
 	  if (error)
 	    g_error_free (error);
@@ -241,7 +265,7 @@ setup_tree (GladeXML *dialog,
       
       if (error || schema == NULL)
 	{
-	  /* We don't actually want to popup a dialog */
+	  /* We don't actually want to popup a dialog - just skip this one */
 	  g_free (key_string);
 	  if (error)
 	    g_error_free (error);
@@ -252,7 +276,7 @@ setup_tree (GladeXML *dialog,
 
       key_entry = g_new0 (KeyEntry, 1);
       key_entry->gconf_key = key_string;
-      key_entry->editable = TRUE;
+      key_entry->editable = gconf_entry_get_is_writable (entry);
       key_entry->model = model;
       gconf_client_add_dir (client, key_string, GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
       key_entry->gconf_cnxn = gconf_client_notify_add (client,
@@ -270,6 +294,14 @@ setup_tree (GladeXML *dialog,
 	}
       g_free (key_value);
 
+      if (i == MAX_ELEMENTS_BEFORE_SCROLLING)
+	{
+	  GtkRequisition rectangle;
+	  gtk_widget_size_request (WID ("shortcut_treeview"), &rectangle);
+	  gtk_widget_set_usize (WID ("actions_swindow"), -1, rectangle.height);
+	  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (WID ("actions_swindow")),
+					  GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
+	}
       i++;
       gtk_list_store_append (GTK_LIST_STORE (model), &iter);
       if (schema->short_desc)
@@ -286,12 +318,6 @@ setup_tree (GladeXML *dialog,
       gconf_schema_free (schema);
     }
 
-  if (i > 8)
-    {
-      gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (WID ("actions_swindow")),
-				      GTK_POLICY_AUTOMATIC, GTK_POLICY_NEVER);
-    }
-
   if (i == 0)
     {
       gtk_widget_hide (WID ("shortcuts_frame"));
@@ -300,7 +326,6 @@ setup_tree (GladeXML *dialog,
     {
       gtk_widget_show (WID ("shortcuts_frame"));
     }
-  gtk_tree_view_set_model (GTK_TREE_VIEW (WID ("shortcut_treeview")), model);
 }
 
 static void
@@ -311,21 +336,68 @@ keybinding_key_list_changed (GConfClient *client,
 {
   GladeXML *dialog;
   GSList *value_list, *list;
-  GSList *string_list = NULL;
+  GSList *keys_list = NULL;
 
   dialog = user_data;
 
-  if (strcmp (entry->key, "/apps/gnome_keybinding_properties/keybinding_key_list"))
+  if (strcmp (entry->key, KEY_LIST_KEY))
     return;
 
   value_list = gconf_value_get_list (entry->value);
   for (list = value_list; list; list = list->next)
     {
       GConfValue *value = list->data;
-      string_list = g_slist_append (string_list, (char *)gconf_value_get_string (value));
+      keys_list = g_slist_append (keys_list, (char *) gconf_value_get_string (value));
     }
-  setup_tree (dialog, string_list);
-  g_slist_free (string_list);
+
+  clear_old_model (dialog, WID ("shortcut_treeview"));
+  append_keys_to_tree (dialog, keys_list);
+  g_slist_free (keys_list);
+  if (is_metacity_running ())
+    {
+      GSList *keys_list;
+
+      keys_list = gconf_client_get_list (client, METACITY_KEY_LIST_KEY, GCONF_VALUE_STRING,  NULL);
+      append_keys_to_tree (dialog, keys_list);
+    }
+}
+
+static void
+metacity_key_list_changed (GConfClient *client,
+			   guint        cnxn_id,
+			   GConfEntry  *entry,
+			   gpointer     user_data)
+{
+  GladeXML *dialog;
+  GSList *value_list, *list;
+  GSList *keys_list;
+
+  if (strcmp (entry->key, METACITY_KEY_LIST_KEY))
+    return;
+  if (! is_metacity_running ())
+    return;
+
+  dialog = user_data;
+  clear_old_model (dialog, WID ("shortcut_treeview"));
+
+  keys_list = gconf_client_get_list (client, KEY_LIST_KEY, GCONF_VALUE_STRING,  NULL);
+  append_keys_to_tree (dialog, keys_list);
+  g_slist_foreach (keys_list, (GFunc) g_free, NULL);
+  g_slist_free (keys_list);
+  keys_list = NULL;
+  
+  value_list = gconf_value_get_list (entry->value);
+  for (list = value_list; list; list = list->next)
+    {
+      GConfValue *value;
+
+      value = list->data;
+      keys_list = g_slist_append (keys_list, (char *)gconf_value_get_string (value));
+    }
+
+  append_keys_to_tree (dialog, keys_list);
+  g_slist_free (keys_list);
+
 }
 
 static void
@@ -431,12 +503,24 @@ setup_dialog (GladeXML *dialog)
   GtkCellRenderer *renderer;
   GSList *keys_list;
   GtkWidget *widget;
+  gboolean found_keys = FALSE;
+  GList *list;
 
   client = gconf_client_get_default ();
 
   key_theme_list = theme_common_get_list ();
 
-  if (key_theme_list == NULL)
+  for (list = key_theme_list; list; list = list->next)
+    {
+      ThemeInfo *info = list->data;
+      if (info->has_keybinding)
+	{
+	  found_keys = TRUE;
+	  break;
+	}
+
+    }
+  if (! found_keys)
     {
       GtkWidget *msg_dialog = gtk_message_dialog_new (NULL, 0,
 						      GTK_MESSAGE_ERROR,
@@ -454,7 +538,6 @@ setup_dialog (GladeXML *dialog)
       GtkWidget *menu;
       GtkWidget *menu_item;
       GConfEntry *entry;
-      GList *list;
 
       omenu = WID ("key_theme_omenu");
       menu = gtk_menu_new ();
@@ -465,37 +548,25 @@ setup_dialog (GladeXML *dialog)
 	  if (! info->has_keybinding)
 	    continue;
 
-	  /* Make sure we have a default */
-	  if (!strcasecmp (info->name, "default"))
-	    {
-	      menu_item = make_key_theme_menu_item (info->name);
-	      gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
-	    }
+	  menu_item = make_key_theme_menu_item (info->name);
+	  if (!strcmp (info->name, "Default"))
+	    /* Put default first, always */
+	    gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), menu_item);
+	  else
+	    gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
 	}
-      for (list = key_theme_list; list; list = list->next)
-	{
-	  ThemeInfo *info = list->data;
 
-	  if (! info->has_keybinding)
-	    continue;
-
-	  if (strcasecmp (info->name, "default"))
-	    {
-	      menu_item = make_key_theme_menu_item (info->name);
-	      gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
-	    }
-	}
       gtk_widget_show (menu);
       gtk_option_menu_set_menu (GTK_OPTION_MENU (omenu), menu);
 
       gconf_client_add_dir (client, "/desktop/gnome/interface", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
       gconf_client_notify_add (client,
-			       "/desktop/gnome/interface/gtk_key_theme",
+			       KEY_THEME_KEY,
 			       (GConfClientNotifyFunc) &key_theme_changed,
 			       omenu, NULL, NULL);
       /* Initialize the option menu */
       entry = gconf_client_get_entry (client,
-                                      "/desktop/gnome/interface/gtk_key_theme",
+                                      KEY_THEME_KEY,
 				      NULL, TRUE, NULL);
 
       key_theme_changed (client, 0, entry, omenu);
@@ -521,11 +592,29 @@ setup_dialog (GladeXML *dialog)
 					      accel_set_func, NULL, NULL);
   gconf_client_add_dir (client, "/apps/gnome_keybinding_properties", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
   gconf_client_notify_add (client,
-			   "/apps/gnome_keybinding_properties/keybinding_key_list",
+			   KEY_LIST_KEY,
 			   (GConfClientNotifyFunc) &keybinding_key_list_changed,
 			   dialog, NULL, NULL);
-  keys_list = gconf_client_get_list (client, "/apps/gnome_keybinding_properties/keybinding_key_list", GCONF_VALUE_STRING,  NULL);
-  setup_tree (dialog, keys_list);
+  gconf_client_add_dir (client, "/apps/metacity/general", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+  gconf_client_notify_add (client,
+			   METACITY_KEY_LIST_KEY,
+			   (GConfClientNotifyFunc) &metacity_key_list_changed,
+			   dialog, NULL, NULL);
+
+  /* set up the dialog */
+  clear_old_model (dialog, WID ("shortcut_treeview"));
+  keys_list = gconf_client_get_list (client, KEY_LIST_KEY, GCONF_VALUE_STRING,  NULL);
+  append_keys_to_tree (dialog, keys_list);
+  g_slist_foreach (keys_list, (GFunc) g_free, NULL);
+  g_slist_free (keys_list);
+
+  if (is_metacity_running ())
+    {
+      keys_list = gconf_client_get_list (client, METACITY_KEY_LIST_KEY, GCONF_VALUE_STRING,  NULL);
+      append_keys_to_tree (dialog, keys_list);
+      g_slist_foreach (keys_list, (GFunc) g_free, NULL);
+      g_slist_free (keys_list);
+    }
 
   widget = WID ("gnome-keybinding-dialog");
   gtk_widget_show (widget);

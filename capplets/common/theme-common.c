@@ -7,6 +7,8 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <dirent.h>
+#include <libgnomevfs/gnome-vfs-ops.h>
+
 #include "theme-common.h"
 
 static GList *
@@ -88,4 +90,46 @@ theme_common_list_free (GList *list)
 
   g_list_foreach (list, g_free, NULL);
   g_list_free (list);
+}
+
+
+static void
+theme_dir_changed_callback (GnomeVFSMonitorHandle    *handle,
+			    const gchar              *monitor_uri,
+			    const gchar              *info_uri,
+			    GnomeVFSMonitorEventType  event_type,
+			    gpointer                  user_data)
+{
+  g_print ("%s\n", monitor_uri);
+  g_closure_invoke ((GClosure *) user_data, NULL, 0, NULL, NULL);
+}
+
+void
+theme_common_register_theme_change (GCallback func,
+				    gpointer  data)
+{
+  GnomeVFSResult result;
+  GnomeVFSMonitorHandle *handle = NULL;
+  gchar *text_uri;
+  GClosure *closure;
+  /* We're unlikely to ever need to cancel this with the control center */
+
+  closure = g_cclosure_new (func, data, NULL);
+  text_uri = g_build_filename (g_get_home_dir (), ".themes", NULL);
+
+  gnome_vfs_monitor_add (&handle,
+			 text_uri,
+			 GNOME_VFS_MONITOR_DIRECTORY,
+			 theme_dir_changed_callback,
+			 closure);
+  g_free (text_uri);
+
+  text_uri = gtk_rc_get_theme_dir ();
+  gnome_vfs_monitor_add (&handle,
+			 text_uri,
+			 GNOME_VFS_MONITOR_DIRECTORY,
+			 theme_dir_changed_callback,
+			 closure);
+  g_free (text_uri);
+
 }
