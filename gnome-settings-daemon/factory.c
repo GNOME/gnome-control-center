@@ -22,8 +22,11 @@ int main (int argc, char *argv [])
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
 
-  gnome_program_init ("gnome-settings-daemon", VERSION, LIBGNOMEUI_MODULE,
-		      argc, argv, NULL);
+  gnome_program_init ("gnome-settings-daemon", VERSION,
+		      LIBGNOMEUI_MODULE,
+		      argc, argv,
+		      GNOME_CLIENT_PARAM_SM_CONNECT, FALSE,
+		      NULL);
   
   if (!bonobo_init (&argc, argv)) {
     g_error (_("Could not initialize Bonobo"));
