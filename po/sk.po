@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.5.1\n"
-"POT-Creation-Date: 2002-03-26 14:11+0100\n"
-"PO-Revision-Date: 2002-03-26 15:00+0100\n"
+"POT-Creation-Date: 2002-03-27 15:48+0100\n"
+"PO-Revision-Date: 2002-03-27 16:40+0100\n"
 "Last-Translator: Stanislav Višňovský <visnovsky@nenya.ms.mff.cuni.cz>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -16,39 +16,36 @@ msgstr ""
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:259
 msgid "_Enable keyboard accesibility"
-msgstr ""
+msgstr "_Povoliť sprístupnenie klávesnice"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:326
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
-msgstr ""
+msgstr "Nepodarilo sa importovať nastavenie AccessX zo súboru '%s'"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:438
-#, fuzzy
 msgid "Select CDE AccessX file"
-msgstr "Vyberte zvukový súbor"
+msgstr "Vyberte súbor CDE AccessX"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
 msgid "AccessX"
 msgstr "AccessX"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:2
-#, fuzzy
 msgid "Keyboard Accessibility Properties"
-msgstr "Vlastnosti klávesnice"
+msgstr "Vlastnosti sprístupnenia klávesnice"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:1
-#, fuzzy
 msgid "&lt;b&gt;Sample&lt;/b&gt;"
-msgstr "&lt;i&gt;Malá&lt;/i&gt;"
+msgstr "&lt;b&gt;Príklad&lt;/b&gt;"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:2
 msgid "B_eep when modifier is pressed"
-msgstr ""
+msgstr "_Pípnuť pri stlačení modifikátora"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:3
 msgid "Beep when:"
-msgstr ""
+msgstr "Pípnuť pri:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:4
 msgid ""
@@ -56,34 +53,37 @@ msgid ""
 "BounceKeys instructs the system to ignore all subsequent presses of the SAME "
 "key if they happen within a user selectable period of time."
 msgstr ""
+"BounceKeys sa hodí ľuďom, ktorým sa trasie ruka pri pustení klávesu. "
+"BounceKeys informuje systém, že má ignorovať všetky následné stlačenia "
+"ROVNAKÉHO klávesu ak sa opakuje v nastavenej dobe."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:5
 msgid "Enable Slo_w Keys"
-msgstr ""
+msgstr "Povoliť _pomalé klávesy"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:6
 msgid "Enable _Bounce Keys"
-msgstr ""
+msgstr "Povoliť _odrazové klávesy"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:7
 msgid "Enable _Mouse Keys"
-msgstr ""
+msgstr "Povoliť klávesy _myši"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:8
 msgid "Enable _Sticky Keys"
-msgstr ""
+msgstr "Povoliť _lepkavé klávesy"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:9
 msgid "Enable _Toggle Keys"
-msgstr ""
+msgstr "Povoliť _prepínacie klávesy"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:10
 msgid "Keyboard Accessibility Configuration"
-msgstr ""
+msgstr "Nastavenie sprístupnenia klávesnice"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:11
 msgid "Ma_ximum pointer speed :"
-msgstr ""
+msgstr "Ma_ximálna rýchlosť kurzoru:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:12
 msgid ""
@@ -91,6 +91,10 @@ msgid ""
 "device or in need of 'pixel by pixel' position control of the pointer.  When "
 "activated, MouseKeys turns the numeric keypad into a mouse control pad. "
 msgstr ""
+"MouseKeys sa hodí používateľom StickyKey a každému, kdo nedokáže "
+"ovládať myš alebo podobné zariadenie, ale kto ho potrebuje ovládať s "
+"presnosťou na bod. Numerická časť klávesnica sa ním zmení na "
+"ovládanie myši."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:13
 msgid ""
@@ -98,10 +102,13 @@ msgid ""
 "instructs the system not to accept keys as pressed, unless the key has been "
 "pressed and held for a user adjustable amount of time (i.e., the key delay)."
 msgstr ""
+"SlowKeys sa hodí používateľom, ktorý omylom stláčajú klávesy. SlowKeys "
+"znamenajú, že systém nebude akceptovať stlačenie kláves ak kláves "
+"nebol držaný danú dobu."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:14
 msgid "Start mo_ving this long after keypress :"
-msgstr ""
+msgstr "Začať _presun po takto dlhom držaní:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:15
 msgid ""
@@ -112,10 +119,15 @@ msgid ""
 "'Ctrl' and 'Tab' key, a StickyKeys user can press the 'Ctrl' key, release "
 "it, and then press the 'Tab' key and release it, achieving the same result."
 msgstr ""
+"StickyKeys sa hodí používateľom, ak píšu iba jedným prstom alebo používajú "
+"ústa alebo hlavu. StickyKeys umožňujú stlačiť viac kláves naraz ich "
+"postupným zadaním. Napríklad ak aplikácia vyžaduje súčasné stlačenie "
+"'Ctrl' a 'Tab', používateľ so StickyKey môže stlačiť najprv 'Ctrl', pustiť ho "
+"a potom stlačiť 'Tab' a pustiť ho a výsledok bude rovnaký."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:16
 msgid "Time to _accelerate to max speed :"
-msgstr ""
+msgstr "Čas pre _zrýchlenie na maximum:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:17
 msgid ""
@@ -123,14 +135,17 @@ msgid ""
 "the small LED keyboard indicators.  ToggleKeys provides one beep when an LED "
 "(e.g., the Caps Lock LED) is turned on and two beeps when it is turned off"
 msgstr ""
+"ToggleKeys sa hodí slabozrakým používateľom, ktorý majú problémy s "
+"videním LED indikátorov na klávesnici. ToggleKeys spôsobí jedno pípnutie "
+"pri zapnutí LED (napr. Caps Lock) a dve pípnutia pri jej vypnutí."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:18
 msgid "_Beep on state change"
-msgstr ""
+msgstr "_Pípnuť pri zmene stavu"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:19
 msgid "_Disable if unused for "
-msgstr ""
+msgstr "_Zakázať ak nepoužívané po:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:20
 msgid "_General"
@@ -138,11 +153,11 @@ msgstr "_Všeobecné"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:21
 msgid "_Ignore keypresses within  :"
-msgstr ""
+msgstr "_Ignorovať stlačenie kláves po dobu:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:22
 msgid "_Import CDE AccessX file"
-msgstr ""
+msgstr "_Importovať súbor CDE AccessX"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:23
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:29
@@ -151,41 +166,43 @@ msgstr "_Klávesnica"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:24
 msgid "_Only accept keypress after :"
-msgstr ""
+msgstr "_Akceptovať stlačenie klávesu po:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:25
 msgid ""
 "_Turn off Sticky Keys when\n"
 "two keys pressed simultaneously"
 msgstr ""
+"_Vypnúť lepivé klávesy ak sú\n"
+"naraz stlačené dva klávesy."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:27
 msgid "key is _accepted"
-msgstr ""
+msgstr "kláves je _akceptovaný"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:28
 msgid "key is _pressed"
-msgstr ""
+msgstr "kláves je _stlačený"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:29
 msgid "key is _rejected"
-msgstr ""
+msgstr "kláves je _odmietnutý"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:30
 msgid "key is re_jected"
-msgstr ""
+msgstr "kláves je _odmietnutý"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:31
 msgid "msecs"
-msgstr ""
+msgstr "msek"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:32
 msgid "pixels/sec"
-msgstr ""
+msgstr "bodov/sek"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:33
 msgid "seconds"
-msgstr ""
+msgstr "sekúnd"
 
 #: capplets/background/background.desktop.in.h:1
 msgid "Background"
@@ -198,29 +215,29 @@ msgstr "Nastavenie pozadia plochy"
 #. solid
 #: capplets/background/background-properties-capplet.c:222
 msgid "C_olor"
-msgstr ""
+msgstr "_Farba"
 
 #. horiz
 #: capplets/background/background-properties-capplet.c:226
 msgid "_Left Color"
-msgstr ""
+msgstr "Ľa_vá farba"
 
 #: capplets/background/background-properties-capplet.c:227
 msgid "_Right Color"
-msgstr ""
+msgstr "_Pravá farba"
 
 #. vert
 #: capplets/background/background-properties-capplet.c:230
 msgid "_Top Color"
-msgstr ""
+msgstr "_Horná farba"
 
 #: capplets/background/background-properties-capplet.c:231
 msgid "_Bottom Color"
-msgstr ""
+msgstr "_Dolná farba"
 
 #: capplets/background/background-properties-capplet.c:392
 msgid "_Wallpaper"
-msgstr ""
+msgstr "_Tapeta"
 
 #: capplets/background/background-properties-capplet.c:392
 msgid "C_entered"
@@ -228,7 +245,7 @@ msgstr "V _strede"
 
 #: capplets/background/background-properties-capplet.c:392
 msgid "_Scaled"
-msgstr ""
+msgstr "Š_kálované"
 
 #: capplets/background/background-properties-capplet.c:392
 msgid "S_tretched"
@@ -236,12 +253,12 @@ msgstr "_Roztiahnuté"
 
 #: capplets/background/background-properties-capplet.c:392
 msgid "_No Picture"
-msgstr ""
+msgstr "_Bez obrázku"
 
 #: capplets/background/background-properties-capplet.c:515
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:622
-#: capplets/keyboard/gnome-keyboard-properties.c:345
+#: capplets/keyboard/gnome-keyboard-properties.c:348
 #: capplets/mouse/gnome-mouse-properties.c:691
 #: capplets/sound/sound-properties-capplet.c:140
 msgid "Retrieve and store legacy settings"
@@ -257,11 +274,11 @@ msgstr "Vlastnosti pozadia"
 
 #: capplets/background/background-properties.glade.h:2
 msgid "Border the picture with a:"
-msgstr ""
+msgstr "Okraj okolo obrázku:"
 
 #: capplets/background/background-properties.glade.h:3
 msgid "E-Mail"
-msgstr ""
+msgstr "E-Mail"
 
 #: capplets/background/background-properties.glade.h:4
 msgid "Horizontal gradient"
@@ -273,11 +290,11 @@ msgstr "Vyberte farbu"
 
 #: capplets/background/background-properties.glade.h:6
 msgid "Picture Options:"
-msgstr ""
+msgstr "Možnosti obrázku:"
 
 #: capplets/background/background-properties.glade.h:7
 msgid "Picture:"
-msgstr ""
+msgstr "Obrázok:"
 
 #: capplets/background/background-properties.glade.h:8
 msgid "Primary Color"
@@ -301,6 +318,9 @@ msgid ""
 "into the window to set the \n"
 "background picture."
 msgstr ""
+"Pre nastavenie pozadia\n"
+"môžete obrázok pretiahnuť\n"
+"myšou sem."
 
 #: capplets/background/background-properties.glade.h:15
 msgid "radiobutton1"
@@ -375,22 +395,20 @@ msgid "Object that controls the property (normally a widget)"
 msgstr "Objekt, ktorý ovládava vlastnosť (normálne prvok)"
 
 #: capplets/common/gconf-property-editor.c:219
-#, fuzzy
 msgid "Property editor object data"
-msgstr "Objekt priečinku modulov"
+msgstr "Dáta objektu editora vlastností"
 
 #: capplets/common/gconf-property-editor.c:220
 msgid "Custom data required by the specific property editor"
-msgstr ""
+msgstr "Dáta požadované daným editorom vlastností"
 
 #: capplets/common/gconf-property-editor.c:226
 msgid "Property editor data freeing callback"
-msgstr ""
+msgstr "Callback pr uvoľnení dát objektu editora vlastností"
 
 #: capplets/common/gconf-property-editor.c:227
-#, fuzzy
 msgid "Callback to be issued when property editor object data is to be freed"
-msgstr "Callback volaný pre prevod dát do GConf z prvku"
+msgstr "Callback volaný pri uvoľnení dát objektu editora vlastností"
 
 #: capplets/common/gconf-property-editor.c:1312
 #, c-format
@@ -400,6 +418,9 @@ msgid ""
 "Please make sure it exists and try again, or choose a different background "
 "picture."
 msgstr ""
+"Nepodarilo sa nájsť súbor '%s'.\n"
+"\n"
+"Prosím, overte, že existuje a skúste to znovu. Alebo vyberte iný obrázok pozadia."
 
 #: capplets/common/gconf-property-editor.c:1320
 #, c-format
@@ -409,11 +430,14 @@ msgid ""
 "\n"
 "Please select a different picture instead."
 msgstr ""
+"Neviem, ako otvoriť súbor '%s'.\n"
+"Asi je to nepodporovaný formát obrázkov.\n"
+"\n"
+"Prosím, vyberte iný obrázok."
 
 #: capplets/common/gconf-property-editor.c:1404
-#, fuzzy
 msgid "Please select an image."
-msgstr "Prosím, vyberte obrázok pre pozadie"
+msgstr "Prosím, vyberte obrázok."
 
 #: capplets/common/activate-settings-daemon.c:18
 msgid ""
@@ -423,6 +447,10 @@ msgid ""
 "settings manager may already be active and conflicting with the GNOME "
 "settings manager."
 msgstr ""
+"Nepodarilo sa spustiť správcu nastavenia 'gnome2-settings-daemon'.\n"
+"Bez jeho behu sa niektoré nastavenia nemusia prejaviť. Asi je problém so "
+"systémom Bonobo alebo už je aktívny iný správca nastavenia nie pre GNOME, "
+"(napr. KDE) a je v konflikte so správcom z GNOME."
 
 #: capplets/default-applications/default-applications.desktop.in.h:1
 msgid "Choose the applications used by default"
@@ -554,12 +582,11 @@ msgstr "_Správca okien"
 
 #: capplets/desktop-links/Accessibility.directory.in.in.h:1
 msgid "Accessibility"
-msgstr ""
+msgstr "Prístupnosť"
 
 #: capplets/desktop-links/Accessibility.directory.in.in.h:2
-#, fuzzy
 msgid "Accessibility Settings"
-msgstr "Pokročilé nastavenia"
+msgstr "Nastavenie prístupnosti"
 
 #: capplets/desktop-links/Advanced.directory.in.in.h:1
 msgid "Advanced"
@@ -1045,121 +1072,93 @@ msgid "Select which font to use"
 msgstr "Vyberte, ktoré písmo sa má použiť"
 
 #: capplets/font/font-properties.glade.h:1
-msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr ""
-
-#: capplets/font/font-properties.glade.h:2
-msgid "Desktop Font"
-msgstr ""
-
-#: capplets/font/font-properties.glade.h:3
-#, fuzzy
-msgid "File Manager Font"
-msgstr "File transfer protocol"
-
-#: capplets/font/font-properties.glade.h:4
-#, fuzzy
-msgid "Font Preferences"
+msgid "Font properties"
 msgstr "Vlastnosti písma"
 
-#: capplets/font/font-properties.glade.h:5
-#, fuzzy
-msgid "Pick a Font"
-msgstr "Vyberte farbu"
+#: capplets/font/font-properties.glade.h:2
+msgid "Font settings only apply to new programs."
+msgstr "Nastavenia písma sa použijú iba pre nové programy."
 
-#: capplets/font/font-properties.glade.h:6
-#, fuzzy
-msgid "Select the desktop font"
-msgstr "Vyberte tému, ktorú nainštalovať"
-
-#: capplets/font/font-properties.glade.h:7
-#, fuzzy
-msgid "Set to Default"
-msgstr "Použiť štandardné nastavenie kategórie"
+#: capplets/font/font-properties.glade.h:3
+msgid "Use a custom font."
+msgstr "Použiť vlastné písmo."
 
 #: capplets/keybindings/eggcellrendererkeys.c:152
 #: capplets/keybindings/eggcellrendererkeys.c:153
-#, fuzzy
 msgid "Accelerator modifiers"
 msgstr "Modifikátory akcelerátorov"
 
 #: capplets/keybindings/eggcellrendererkeys.c:161
 #: capplets/keybindings/eggcellrendererkeys.c:162
-#, fuzzy
 msgid "Accelerator key"
-msgstr "Akcelerátor"
+msgstr "Kláves akcelerátora"
 
 #: capplets/keybindings/eggcellrendererkeys.c:199
-#: capplets/keybindings/gnome-keybinding-properties.c:54
-#: libbackground/applier.c:469
+#: capplets/keybindings/gnome-keybinding-properties.c:88
+#: libbackground/applier.c:466
 msgid "Disabled"
 msgstr "Zakázané"
 
 #: capplets/keybindings/eggcellrendererkeys.c:302
 #: capplets/keybindings/eggcellrendererkeys.c:489
-#, fuzzy
 msgid "Type a new accelerator, or press Backspace to clear"
 msgstr "Zadajte nový akcelerátor alebo ho vyčistite stlačením Backspace"
 
 #: capplets/keybindings/eggcellrendererkeys.c:492
-#, fuzzy
 msgid "Type a new accelerator"
 msgstr "Stlačte nový akcelerátor"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:250
+#: capplets/keybindings/gnome-keybinding-properties.c:284
 msgid "<Unknown Action>"
-msgstr ""
+msgstr "<Neznáma akcia>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:411
+#: capplets/keybindings/gnome-keybinding-properties.c:443
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
 msgstr ""
+"Nepodarilo sa nájsť žiadne klávesové témy. To znamená, že nemáte "
+"úplne nainštalované GTK+."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:465
-#, fuzzy
+#: capplets/keybindings/gnome-keybinding-properties.c:506
 msgid "_Action"
 msgstr "_Akcia"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:477
-#, fuzzy
+#: capplets/keybindings/gnome-keybinding-properties.c:518
 msgid "_Shortcut"
-msgstr "Klávesové skratky"
+msgstr "Klávesová _skratka"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:1
-#, fuzzy
 msgid "Desktop Shortcuts:"
-msgstr "Klávesové skratky"
+msgstr "Klávesové skratky plochy:"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:2
-#, fuzzy
+#: capplets/keybindings/keybinding.desktop.in.h:2
 msgid "Keyboard Shortcuts"
-msgstr "Vlastnosti klávesnice"
+msgstr "Klávesové skratky"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:3
 msgid "Keyboard _Navigation scheme for use in applications:"
-msgstr ""
+msgstr "Schéma klávesovej _navigácie pre aplikácie:"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:4
 msgid ""
 "To assign a shortcut to an action, click in the shortcut column and press "
 "the key combination you want to associate with it."
 msgstr ""
+"Klávesovú skratku priradíte kliknutím v stĺpci akcií a stlačením klávesovej "
+"kombinácie, ktorú chcete priradiť."
 
 #: capplets/keybindings/keybinding.desktop.in.h:1
-msgid "Keybinding"
-msgstr "Klávesové skratky"
+msgid "Associate keyboard shortcuts with panel actions"
+msgstr "Asociuje klávesové skratky s akciami panelu"
 
-#: capplets/keybindings/keybinding.desktop.in.h:2
-msgid "Keybinding Properties"
-msgstr "Vlastnosti klávesových skratiek"
-
-#: capplets/keyboard/gnome-keyboard-properties.c:325
+#: capplets/keyboard/gnome-keyboard-properties.c:328
 msgid "_Accessibility"
 msgstr "_Prístupnosť"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:341
-#: capplets/keyboard/gnome-keyboard-properties.c:343
+#: capplets/keyboard/gnome-keyboard-properties.c:344
+#: capplets/keyboard/gnome-keyboard-properties.c:346
 #: capplets/sound/sound-properties-capplet.c:136
 #: capplets/sound/sound-properties-capplet.c:138
 msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
@@ -1499,14 +1498,6 @@ msgstr "_Hranica:"
 msgid "Mouse"
 msgstr "Myš"
 
-#: capplets/screensaver/screensaver.desktop.in.h:1
-msgid "Configure the settings of the screensaver"
-msgstr "Nastaví šetrič"
-
-#: capplets/screensaver/screensaver.desktop.in.h:2
-msgid "Screensaver"
-msgstr "Šetrič obrazovky"
-
 #: capplets/sound/sound.desktop.in.h:1
 msgid "Configure GNOME's use of sound"
 msgstr "Nastavenie zvuku v GNOME"
@@ -1788,11 +1779,11 @@ msgstr "Použiť shell aj keď nautilus beží."
 msgid "Could not initialize Bonobo"
 msgstr "Nepodarilo sa inicializovať Bonobo"
 
-#: libbackground/applier.c:235
+#: libbackground/applier.c:230
 msgid "Type"
 msgstr "Typ"
 
-#: libbackground/applier.c:236
+#: libbackground/applier.c:231
 msgid ""
 "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
 "for preview"
@@ -1800,7 +1791,7 @@ msgstr ""
 "Typ bg_applier: BG_APPLIER_ROOT pre koreňové okno alebo BG_APPLIER_PREVIEW "
 "pre náhľad."
 
-#: libbackground/applier.c:401
+#: libbackground/applier.c:398
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "Nepodarilo sa načítať \"%s\", vypínam tapetu."
@@ -1843,6 +1834,38 @@ msgstr "Zahrať"
 msgid "Select sound file"
 msgstr "Vyberte zvukový súbor"
 
+#, fuzzy
+#~ msgid "File Manager Font"
+#~ msgstr "File transfer protocol"
+
+#, fuzzy
+#~ msgid "Font Preferences"
+#~ msgstr "Vlastnosti písma"
+
+#, fuzzy
+#~ msgid "Pick a Font"
+#~ msgstr "Vyberte farbu"
+
+#, fuzzy
+#~ msgid "Select the desktop font"
+#~ msgstr "Vyberte tému, ktorú nainštalovať"
+
+#, fuzzy
+#~ msgid "Set to Default"
+#~ msgstr "Použiť štandardné nastavenie kategórie"
+
+#~ msgid "Keybinding"
+#~ msgstr "Klávesové skratky"
+
+#~ msgid "Keybinding Properties"
+#~ msgstr "Vlastnosti klávesových skratiek"
+
+#~ msgid "Configure the settings of the screensaver"
+#~ msgstr "Nastaví šetrič"
+
+#~ msgid "Screensaver"
+#~ msgstr "Šetrič obrazovky"
+
 #~ msgid "Background colors"
 #~ msgstr "Farby pozadia"
 
@@ -1863,9 +1886,6 @@ msgstr "Vyberte zvukový súbor"
 
 #~ msgid "Use a picture for the background"
 #~ msgstr "Použiť obrázok pre pozadie"
-
-#~ msgid "Use a custom font."
-#~ msgstr "Použiť vlastné písmo."
 
 #~ msgid "Auto Preview"
 #~ msgstr "Automatický náhľad"
