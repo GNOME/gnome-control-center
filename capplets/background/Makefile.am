@@ -30,11 +30,15 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
 @INTLTOOL_DESKTOP_RULE@
 
+gladedir = $(GNOMECC_GLADE_DIR)
+glade_DATA = gnome-background-properties.glade
+
 install-data-local:
 	$(mkinstalldirs) $(DESTDIR)$(WALLPAPER_DATADIR)
 
 EXTRA_DIST = \
-	$(desktop_in_files)
+	$(desktop_in_files) \
+	$(glade_DATA)
 
 CLEANFILES = \
 	$(desktop_DATA)

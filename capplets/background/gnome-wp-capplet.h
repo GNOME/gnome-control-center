@@ -30,6 +30,7 @@
 #include <libgnomeui/gnome-thumbnail.h>
 #include <gconf/gconf-client.h>
 #include <libxml/parser.h>
+#include <glade/glade.h>
 
 typedef struct _GnomeWPCapplet GnomeWPCapplet;
 

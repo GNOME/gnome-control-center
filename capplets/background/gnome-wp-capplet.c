@@ -81,7 +81,6 @@ static void gnome_wp_file_open_cancel (GtkWidget * widget, gpointer data) {
 static void gnome_wp_file_open_get_files (GtkWidget * widget,
 					  GnomeWPCapplet * capplet) {
   GtkWidget * filesel;
-  GnomeWPItem * selected;
   GdkColor color1, color2;
   gchar ** files;
   GdkCursor * cursor;
@@ -1029,13 +1028,17 @@ static void gnome_wp_delay_changed (GConfClient * client, guint id,
 
 static void gnome_wp_icon_theme_changed (GnomeIconTheme * theme,
 					 GnomeWPCapplet * capplet) {
+  GdkPixbuf * pixbuf;
   gchar * icofile;
 
   icofile = gnome_icon_theme_lookup_icon (capplet->theme,
 					  "background-capplet",
 					  48, NULL, NULL);
   if (icofile != NULL) {
+    pixbuf = gdk_pixbuf_new_from_file (icofile, NULL);
+    gtk_window_set_icon (GTK_WINDOW (capplet->window), NULL);
     gtk_window_set_default_icon_from_file (icofile, NULL);
+    g_object_unref (pixbuf);
   }
   g_free (icofile);
 
@@ -1088,16 +1091,36 @@ static void gnome_wp_icon_theme_changed (GnomeIconTheme * theme,
   g_free (icofile);
 }
 
+static GladeXML * gnome_wp_create_dialog (void) {
+  GladeXML * new;
+  gchar * gladefile;
+
+  gladefile = g_build_filename (GNOMECC_DATA_DIR,
+				"interfaces",
+				"gnome-background-properties.glade",
+				NULL);
+
+  if (!g_file_test (gladefile, G_FILE_TEST_EXISTS)) {
+    gladefile = g_build_filename (g_get_current_dir (),
+				  "gnome-background-properties.glade",
+				  NULL);
+  }
+  new = glade_xml_new (gladefile, NULL, NULL);
+  g_free (gladefile);
+
+  return new;
+}
+
 static void wallpaper_properties_init (void) {
   GnomeWPCapplet * capplet;
-  GtkWidget * label, * button;
-  GtkWidget * vbox, * hbox, * bbox;
-  GtkWidget * swin, * clabel;
-  GtkWidget * menu;
+  GladeXML * dialog;
+  GtkWidget * menu, * label;
   GtkWidget * mbox, * mitem;
+  GtkWidget * add_button;
   GtkCellRenderer * renderer;
   GtkTreeViewColumn * column;
   GtkTreeSelection * selection;
+  GdkPixbuf * pixbuf;
   GdkCursor * cursor;
   gchar * icofile;
 
@@ -1163,23 +1186,23 @@ static void wallpaper_properties_init (void) {
   g_signal_connect (G_OBJECT (capplet->theme), "changed",
 		    G_CALLBACK (gnome_wp_icon_theme_changed), capplet);
 
-  capplet->window = gtk_dialog_new ();
-  gtk_window_set_title (GTK_WINDOW (capplet->window),
-			_("Desktop Background Preferences"));
-  gtk_dialog_set_has_separator (GTK_DIALOG (capplet->window), FALSE);
-  gtk_window_set_default_size (GTK_WINDOW (capplet->window), 360, 418);
+  dialog = gnome_wp_create_dialog ();
+  capplet->window = glade_xml_get_widget (dialog,"gnome_wp_properties");
 
   icofile = gnome_icon_theme_lookup_icon (capplet->theme,
 					  "background-capplet",
 					  48, NULL, NULL);
   if (icofile != NULL) {
+    pixbuf = gdk_pixbuf_new_from_file (icofile, NULL);
     gtk_window_set_default_icon_from_file (icofile, NULL);
+    gtk_window_set_icon (GTK_WINDOW (capplet->window), pixbuf);
+    g_object_unref (pixbuf);
   }
   g_free (icofile);
 
   gtk_widget_realize (capplet->window);
 
-
+  gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (capplet->window)->action_area), 12);
 
   /* Drag and Drop Support */
   gtk_drag_dest_unset (capplet->window);
@@ -1189,55 +1212,7 @@ static void wallpaper_properties_init (void) {
   g_signal_connect (G_OBJECT (capplet->window), "drag_data_received",
 		    G_CALLBACK (bg_properties_dragged_image), capplet);
 
-  /* Dialog Buttons */
-  label = gtk_button_new_from_stock (GTK_STOCK_HELP);
-  gtk_dialog_add_action_widget (GTK_DIALOG (capplet->window), label,
-				GTK_RESPONSE_HELP);
-  gtk_widget_show (label);
-
-  label = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
-  gtk_dialog_add_action_widget (GTK_DIALOG (capplet->window), label,
-				GTK_RESPONSE_CLOSE);
-  gtk_widget_show (label);
-
-  gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (capplet->window)->action_area), 12);
-
-  /* Main Contents */
-  vbox = gtk_vbox_new (FALSE, 6);
-  gtk_container_set_border_width (GTK_CONTAINER (vbox), 12);
-  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (capplet->window)->vbox), vbox,
-		      TRUE, TRUE, 0);
-  gtk_widget_show (vbox);
-
-  clabel = gtk_label_new_with_mnemonic (_("<b>Desktop _Wallpaper</b>"));
-  gtk_misc_set_alignment (GTK_MISC (clabel), 0.0, 0.5);
-  gtk_label_set_use_markup (GTK_LABEL (clabel), TRUE);
-  gtk_box_pack_start (GTK_BOX (vbox), clabel, FALSE, FALSE, 0);
-  gtk_widget_show (clabel);
-
-  /* Treeview stuff goes in here */
-  hbox = gtk_hbox_new (FALSE, 12);
-  gtk_box_pack_start (GTK_BOX (vbox), hbox, TRUE, TRUE, 0);
-  gtk_widget_show (hbox);
-
-  label = gtk_label_new ("");
-  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-  gtk_widget_show (label);
-
-  swin = gtk_scrolled_window_new (NULL, NULL);
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (swin),
-				  GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-  gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (swin),
-				       GTK_SHADOW_IN);
-  gtk_box_pack_start (GTK_BOX (hbox), swin, TRUE, TRUE, 0);
-
-  capplet->treeview = gtk_tree_view_new ();
-  gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (capplet->treeview), FALSE);
-  gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (capplet->treeview), FALSE);
-  gtk_container_add (GTK_CONTAINER (swin), capplet->treeview);
-  gtk_widget_show (capplet->treeview);
-
-  gtk_label_set_mnemonic_widget (GTK_LABEL (clabel), capplet->treeview);
+  capplet->treeview = glade_xml_get_widget (dialog,"wp_tree");
 
   capplet->model = GTK_TREE_MODEL (gtk_list_store_new (3, GDK_TYPE_PIXBUF,
 						       G_TYPE_STRING,
@@ -1268,31 +1243,7 @@ static void wallpaper_properties_init (void) {
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (capplet->model),
 					2, GTK_SORT_ASCENDING);
 
-  /* Need to add sorting stuff and whatnot */
-  gtk_widget_show (swin);
-
-  /* The Box for Fill Style and Add/Remove buttons */
-  hbox = gtk_hbox_new (FALSE, 6);
-  gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
-  gtk_widget_show (hbox);
-
-  label = gtk_label_new ("");
-  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-  gtk_widget_show (label);
-
-  label = gtk_label_new ("");
-  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-  gtk_widget_show (label);
-
-  label = gtk_label_new_with_mnemonic (_("_Style:"));
-  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-  gtk_widget_show (label);
-
-  capplet->wp_opts = gtk_option_menu_new ();
-  gtk_box_pack_start (GTK_BOX (hbox), capplet->wp_opts, FALSE, FALSE, 0);
-  gtk_widget_show (capplet->wp_opts);
-
-  gtk_label_set_mnemonic_widget (GTK_LABEL (label), capplet->wp_opts);
+  capplet->wp_opts = glade_xml_get_widget (dialog,"style_menu");
 
   menu = gtk_menu_new ();
   mitem = gtk_menu_item_new ();
@@ -1385,83 +1336,15 @@ static void wallpaper_properties_init (void) {
   g_signal_connect (G_OBJECT (menu), "deactivate",
 		    G_CALLBACK (gnome_wp_scale_type_changed), capplet);
 
-  label = gtk_label_new ("");
-  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-  gtk_widget_show (label);
+  add_button = glade_xml_get_widget (dialog,"add_button");
+  capplet->rm_button = glade_xml_get_widget (dialog,"rem_button");
 
-  label = gtk_label_new ("");
-  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-  gtk_widget_show (label);
-
-  /* Create the Remove button first, since it's ordered last */
-  capplet->rm_button = gtk_button_new_from_stock (GTK_STOCK_REMOVE);
-  gtk_box_pack_end (GTK_BOX (hbox), capplet->rm_button, FALSE, FALSE, 0);
-  gtk_widget_show (capplet->rm_button);
-
+  g_signal_connect (G_OBJECT (add_button), "clicked",
+		    G_CALLBACK (gnome_wp_file_open_dialog), capplet);
   g_signal_connect (G_OBJECT (capplet->rm_button), "clicked",
 		    G_CALLBACK (gnome_wp_remove_wallpaper), capplet);
 
-  /* Now do the Add Wallpaper button */
-  button = gtk_button_new ();
-  gtk_box_pack_end (GTK_BOX (hbox), button, FALSE, FALSE, 0);
-
-  bbox = gtk_hbox_new (FALSE, 6);
-  gtk_container_add (GTK_CONTAINER (button), bbox);
-  label = gtk_image_new_from_stock (GTK_STOCK_ADD, GTK_ICON_SIZE_BUTTON);
-  gtk_box_pack_start (GTK_BOX (bbox), label, FALSE, FALSE, 0);
-  gtk_widget_show (label);
-  label = gtk_label_new_with_mnemonic (_("_Add Wallpaper"));
-  gtk_box_pack_start (GTK_BOX (bbox), label, FALSE, FALSE, 0);
-  gtk_widget_show (label);
-  gtk_widget_show (bbox);
-
-  gtk_widget_show (button);
-
-  g_signal_connect (G_OBJECT (button), "clicked",
-		    G_CALLBACK (gnome_wp_file_open_dialog), capplet);
-
-  /* Silly Random Option */
-  /*
-  hbox = gtk_hbox_new (FALSE, 6);
-  gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
-  gtk_widget_show (hbox);
-
-  label = gtk_label_new ("");
-  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-  gtk_widget_show (label);
-
-  label = gtk_label_new ("");
-  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-  gtk_widget_show (label);
-  */
-
-  /* Stupid Useless Label as a Spacer Hack */
-  label = gtk_label_new ("");
-  gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
-  gtk_widget_show (label);
-
-  /* The Wallpaper Background Colors Section */
-  clabel = gtk_label_new_with_mnemonic (_("<b>_Desktop Colors</b> "));
-  gtk_misc_set_alignment (GTK_MISC (clabel), 0.0, 0.5);
-  gtk_label_set_use_markup (GTK_LABEL (clabel), TRUE);
-  gtk_box_pack_start (GTK_BOX (vbox), clabel, FALSE, FALSE, 0);
-  gtk_widget_show (clabel);
-
-  hbox = gtk_hbox_new (FALSE, 6);
-  gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
-  gtk_widget_show (hbox);
-
-  label = gtk_label_new ("");
-  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-  gtk_widget_show (label);
-
-  label = gtk_label_new ("");
-  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-  gtk_widget_show (label);
-
-  capplet->color_opt = gtk_option_menu_new ();
-  gtk_widget_show (capplet->color_opt);
-  gtk_box_pack_start(GTK_BOX (hbox), capplet->color_opt, FALSE, FALSE, 0);
+  capplet->color_opt = glade_xml_get_widget (dialog,"color_menu");
 
   menu = gtk_menu_new ();
   mitem = gtk_menu_item_new ();
@@ -1516,16 +1399,11 @@ static void wallpaper_properties_init (void) {
   g_signal_connect (G_OBJECT (menu), "deactivate",
 		    G_CALLBACK (gnome_wp_shade_type_changed), capplet);
 
-  gtk_label_set_mnemonic_widget (GTK_LABEL (clabel), capplet->color_opt);
-
-  capplet->pc_picker = gnome_color_picker_new ();
-  gtk_widget_show (capplet->pc_picker);
-  gtk_box_pack_start (GTK_BOX (hbox), capplet->pc_picker, FALSE, FALSE, 0);
+  capplet->pc_picker = glade_xml_get_widget (dialog,"pcpicker");
   g_signal_connect (G_OBJECT (capplet->pc_picker), "color_set",
 		    G_CALLBACK (gnome_wp_pcolor_changed), capplet);
 
-  capplet->sc_picker = gnome_color_picker_new ();
-  gtk_box_pack_start (GTK_BOX (hbox), capplet->sc_picker, FALSE, FALSE, 0);
+  capplet->sc_picker = glade_xml_get_widget (dialog,"scpicker");
   g_signal_connect (G_OBJECT (capplet->sc_picker), "color_set",
 		    G_CALLBACK (gnome_wp_scolor_changed), capplet);
   
