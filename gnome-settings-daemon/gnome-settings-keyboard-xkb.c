@@ -288,6 +288,15 @@ gnome_settings_keyboard_xkb_set_post_activation_callback
 	paCallbackUserData = userData;
 }
 
+static GdkFilterReturn
+gnome_settings_keyboard_xkb_evt_filter (GdkXEvent * xev,
+                           GdkEvent * event)
+{
+        XEvent *xevent = (XEvent *) xev;
+        XklFilterEvents (xevent);
+        return GDK_FILTER_CONTINUE;
+}
+
 void
 gnome_settings_keyboard_xkb_init (GConfClient * client)
 {
@@ -312,10 +321,10 @@ gnome_settings_keyboard_xkb_init (GConfClient * client)
 		     (KeyCallbackFunc) apply_xkb_settings);
 
 		gdk_window_add_filter (NULL,
-				       (GdkFilterFunc) XklFilterEvents,
+				       (GdkFilterFunc) gnome_settings_keyboard_xkb_evt_filter,
 				       NULL);
 		gdk_window_add_filter (gdk_get_default_root_window(),
-				       (GdkFilterFunc) XklFilterEvents,
+				       (GdkFilterFunc) gnome_settings_keyboard_xkb_evt_filter,
 				       NULL);
 		XklStartListen (XKLL_MANAGE_LAYOUTS | XKLL_MANAGE_WINDOW_STATES);
 	}
