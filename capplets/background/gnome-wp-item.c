@@ -272,13 +272,22 @@ GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
 }
 
 void gnome_wp_item_update_description (GnomeWPItem * item) {
+
   if (!strcmp (item->filename, "(none)")) {
     item->description = g_strdup_printf ("<b>%s</b>", item->name);
   } else {
+    gchar * info;
+
+    info = g_strdup_printf (_("%s, %d x %d pixels"),
+			    gnome_vfs_mime_get_description (item->fileinfo->mime_type),
+			    item->width,
+			    item->height);
+
     item->description = g_strdup_printf ("<b>%s</b>\n"
-					 "%s (%LuK)",
+					 "%s",
 					 item->name,
-					 gnome_vfs_mime_get_description (item->fileinfo->mime_type),
-					 item->fileinfo->size / 1024);
+					 info);
+
+    g_free (info);
   }
 }
