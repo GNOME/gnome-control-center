@@ -347,12 +347,13 @@ click_preview(GtkWidget *widget, gpointer data)
 
   send_reread();
 }
+
 static void
 click_help(GtkWidget *widget, gpointer data)
 {
   gchar *tmp;
 
-  tmp = gnome_help_file_find_file ("users-guide", "gccdesktop.html#GCCTHEME");
+  tmp = gnome_help_file_find_file ("control-center", "desktop-intro.html#GCCTHEME");
   if (tmp) {
     gnome_help_goto(0, tmp);
     g_free(tmp);
@@ -365,7 +366,6 @@ click_help(GtkWidget *widget, gpointer data)
     
     gtk_widget_show(mbox);
   }
-
 }
 static void
 click_try(GtkWidget *widget, gpointer data)

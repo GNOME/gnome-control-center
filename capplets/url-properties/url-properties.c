@@ -29,6 +29,7 @@ GtkWidget *capplet, *protocol, *combo, *clist;
 void url_capplet_revert(void);
 void url_capplet_commit(void);
 void url_capplet_cancel(void);
+static void url_capplet_help(GtkWidget *widget, gpointer data);
 
 void build_capplet(void);
 
@@ -57,6 +58,8 @@ main(int argc, char *argv[]) {
 		     GTK_SIGNAL_FUNC(url_capplet_commit), NULL);
   gtk_signal_connect(GTK_OBJECT(capplet), "cancel",
 		     GTK_SIGNAL_FUNC(url_capplet_cancel), NULL);
+  gtk_signal_connect(GTK_OBJECT(capplet), "help",
+		     GTK_SIGNAL_FUNC(url_capplet_help), NULL);
 
   capplet_gtk_main();
   return 0;
@@ -234,6 +237,26 @@ void url_capplet_commit(void) {
 
 void url_capplet_cancel(void) {
   gtk_main_quit();
+}
+
+static void
+url_capplet_help(GtkWidget *widget, gpointer data)
+{
+  gchar *tmp;
+
+  tmp = gnome_help_file_find_file ("control-center", "doc-handlers.html#GCCURL");
+  if (tmp) {
+    gnome_help_goto(0, tmp);
+    g_free(tmp);
+  } else {
+    GtkWidget *mbox;
+
+    mbox = gnome_message_box_new(_("No help is available/installed for these settings. Please make sure you\nhave the GNOME User's Guide installed on your system."),
+				 GNOME_MESSAGE_BOX_ERROR,
+				 _("Close"), NULL);
+    
+    gtk_widget_show(mbox);
+  }
 }
 
 void set_handler(GtkEntry *entry) {

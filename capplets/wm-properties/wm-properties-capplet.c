@@ -634,7 +634,7 @@ help_callback (void)
 {
   gchar *tmp;
 
-  tmp = gnome_help_file_find_file ("users-guide", "gccdesktop.html#GCCWM");
+  tmp = gnome_help_file_find_file ("control-center", "desktop-intro.html#GCCWM");
   if (tmp) {
     gnome_help_goto(0, tmp);
     g_free(tmp);

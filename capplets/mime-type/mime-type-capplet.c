@@ -66,7 +66,21 @@ cancel_callback ()
 static void
 help_callback ()
 {
-        /* Sigh... empty as always */
+  gchar *tmp;
+  
+  tmp = gnome_help_file_find_file ("control-center", "doc-handlers.html#GCCMIME");
+  if (tmp) {
+          gnome_help_goto(0, tmp);
+          g_free(tmp);
+  } else {
+          GtkWidget *mbox;
+          
+          mbox = gnome_message_box_new(_("No help is available/installed for these settings. Please make sure you\nhave the GNOME User's Guide installed on your system."),
+				 GNOME_MESSAGE_BOX_ERROR,
+				 _("Close"), NULL);
+    
+          gtk_widget_show(mbox);
+  }
 }
 
 static void
@@ -109,10 +123,8 @@ init_mime_capplet ()
                            GTK_SIGNAL_FUNC(hide_edit_window), NULL);
         gtk_signal_connect(GTK_OBJECT(capplet), "page_shown",
                            GTK_SIGNAL_FUNC(show_edit_window), NULL);
-#if 0
         gtk_signal_connect(GTK_OBJECT(capplet), "help",
                            GTK_SIGNAL_FUNC(help_callback), NULL);
-#endif
 }
 
 int
