@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2002-02-12 00:27-0600\n"
-"PO-Revision-Date: 2002-01-27 22:28+0100\n"
+"POT-Creation-Date: 2002-02-26 09:58+0100\n"
+"PO-Revision-Date: 2002-02-26 09:58+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -24,16 +24,16 @@ msgstr "Bakgrund"
 msgid "Configuration of the desktop's background"
 msgstr "Konfiguration av skrivbordsbakgrund"
 
-#: capplets/background/background-properties-capplet.c:291
+#: capplets/background/background-properties-capplet.c:289
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:575
 #: capplets/keyboard/gnome-keyboard-properties.c:319
-#: capplets/mouse/gnome-mouse-properties.c:493
+#: capplets/mouse/gnome-mouse-properties.c:678
 #: capplets/sound/sound-properties-capplet.c:139
 msgid "Retrieve and store legacy settings"
 msgstr "Hämta och lagra föråldrade inställningar"
 
-#: capplets/background/background-properties-capplet.c:315
+#: capplets/background/background-properties-capplet.c:312
 msgid "Background properties"
 msgstr "Bakgrundsegenskaper"
 
@@ -41,57 +41,57 @@ msgstr "Bakgrundsegenskaper"
 msgid "Just apply settings and quit"
 msgstr "Verkställ ändringarna och avsluta"
 
-#: capplets/common/gconf-property-editor.c:144
+#: capplets/common/gconf-property-editor.c:145
 msgid "Key"
 msgstr "Nyckel"
 
-#: capplets/common/gconf-property-editor.c:145
+#: capplets/common/gconf-property-editor.c:146
 msgid "GConf key to which this property editor is attached"
 msgstr "GConf-nyckel till vilken denna egenskapsredigerare är ansluten"
 
-#: capplets/common/gconf-property-editor.c:151
+#: capplets/common/gconf-property-editor.c:152
 msgid "Callback"
 msgstr "Återanrop"
 
-#: capplets/common/gconf-property-editor.c:152
+#: capplets/common/gconf-property-editor.c:153
 msgid "Issue this callback when the value associated with key gets changed"
 msgstr ""
 "Använd detta återanrop då värdet som är associerat med denna nyckel ändras"
 
-#: capplets/common/gconf-property-editor.c:157
+#: capplets/common/gconf-property-editor.c:158
 msgid "Change set"
 msgstr "Ändra grupp"
 
-#: capplets/common/gconf-property-editor.c:158
+#: capplets/common/gconf-property-editor.c:159
 msgid ""
 "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
 "GConf-ändringssamling innehållandes data att vidarebefordras till gconf-"
 "klienten vid verkställande"
 
-#: capplets/common/gconf-property-editor.c:163
+#: capplets/common/gconf-property-editor.c:164
 msgid "Conversion to widget callback"
 msgstr "Konvertering till widgetåteranrop"
 
-#: capplets/common/gconf-property-editor.c:164
+#: capplets/common/gconf-property-editor.c:165
 msgid ""
 "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr "Återanrop att utföras då data konverteras från GConf till widgeten"
 
-#: capplets/common/gconf-property-editor.c:169
+#: capplets/common/gconf-property-editor.c:170
 msgid "Conversion from widget callback"
 msgstr "Konvertering från widgetåteranrop"
 
-#: capplets/common/gconf-property-editor.c:170
+#: capplets/common/gconf-property-editor.c:171
 msgid ""
 "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr "Återanrop att utföras då data konverteras till GConf från widgeten"
 
-#: capplets/common/gconf-property-editor.c:175
+#: capplets/common/gconf-property-editor.c:176
 msgid "UI Control"
 msgstr "Användargränssnittsstyrning"
 
-#: capplets/common/gconf-property-editor.c:176
+#: capplets/common/gconf-property-editor.c:177
 msgid "Object that controls the property (normally a widget)"
 msgstr "Objekt som styr egenskapen (normalt en widget)"
 
@@ -100,8 +100,8 @@ msgid "Choose the applications used by default"
 msgstr "Välj de program som används som standard"
 
 #: capplets/default-applications/default-applications.desktop.in.h:2
-msgid "Default Applications"
-msgstr "Standardprogram"
+msgid "Preferred Applications"
+msgstr "Föredragna program"
 
 #: capplets/desktop-links/Advanced.directory.in.in.h:1
 msgid "Advanced"
@@ -224,14 +224,6 @@ msgstr "Konfigurera arbetsytor"
 msgid "Workspaces"
 msgstr "Arbetsytor"
 
-#: capplets/desktop-links/session.desktop.in.in.h:1
-msgid "Configure which non-session aware programs are started up"
-msgstr "Konfigurera vilka sessionsomedvetna program som startas upp"
-
-#: capplets/desktop-links/session.desktop.in.in.h:2
-msgid "Startup Programs"
-msgstr "Uppstartsprogram"
-
 #.
 #. * Translatable strings file
 #. * Add this file to your project's POTFILES.in.
@@ -247,7 +239,7 @@ msgstr "Ordbehandlare"
 
 #: capplets/file-types/category-names.h:9
 msgid "Published Materials"
-msgstr ""
+msgstr "Publicerade material"
 
 #: capplets/file-types/category-names.h:10
 msgid "Spreadsheet"
@@ -255,24 +247,23 @@ msgstr "Kalkylblad"
 
 #: capplets/file-types/category-names.h:11
 msgid "Presentation"
-msgstr ""
+msgstr "Presentation"
 
 #: capplets/file-types/category-names.h:12
 msgid "Diagram"
-msgstr ""
+msgstr "Diagram"
 
 #: capplets/file-types/category-names.h:13
 msgid "TeX"
-msgstr ""
+msgstr "TeX"
 
 #: capplets/file-types/category-names.h:14
 msgid "Vector Graphics"
-msgstr ""
+msgstr "Vektorgrafik"
 
 #: capplets/file-types/category-names.h:15
-#, fuzzy
 msgid "World Wide Web"
-msgstr "WWW"
+msgstr "World Wide Web (WWW)"
 
 #: capplets/file-types/category-names.h:16
 msgid "Plain Text"
@@ -283,43 +274,45 @@ msgid "Extended Markup Language (XML)"
 msgstr "Extended Markup Language (XML)"
 
 #: capplets/file-types/category-names.h:18
-#, fuzzy
 msgid "Information"
-msgstr "Information om MIME-typ"
+msgstr "Information"
 
 #: capplets/file-types/category-names.h:19
 msgid "Financial"
-msgstr ""
+msgstr "Ekonomi"
 
 #: capplets/file-types/category-names.h:20
 msgid "Calendar"
-msgstr ""
+msgstr "Kalender"
 
 #: capplets/file-types/category-names.h:21
 msgid "Contacts"
-msgstr ""
+msgstr "Kontakter"
 
 #: capplets/file-types/category-names.h:22
 msgid "Packages"
-msgstr ""
+msgstr "Paket"
 
 #: capplets/file-types/category-names.h:23
 msgid "Software Development"
-msgstr ""
+msgstr "Programvaruutveckling"
 
 #: capplets/file-types/category-names.h:24
 msgid "Source Code"
 msgstr "Källkod"
 
 #: capplets/file-types/category-names.h:25
+#: capplets/file-types/mime-type-info.c:745
 msgid "Audio"
 msgstr "Ljud"
 
 #: capplets/file-types/category-names.h:26
+#: capplets/file-types/mime-type-info.c:741
 msgid "Images"
 msgstr "Bilder"
 
 #: capplets/file-types/category-names.h:27
+#: capplets/file-types/mime-type-info.c:743
 msgid "Video"
 msgstr "Grafik"
 
@@ -328,7 +321,6 @@ msgid "Description"
 msgstr "Beskrivning"
 
 #: capplets/file-types/file-types-capplet.c:219
-#, fuzzy
 msgid "Extensions"
 msgstr "Tillägg"
 
@@ -429,7 +421,7 @@ msgstr "Välj en filkategori"
 msgid "Model for categories only"
 msgstr "Modellera endast för kategorier"
 
-#: capplets/file-types/mime-types-model.c:420
+#: capplets/file-types/mime-types-model.c:421
 msgid "Internet Services"
 msgstr "Internettjänster"
 
@@ -494,14 +486,12 @@ msgid "Electronic mail transmission"
 msgstr "Elektronisk e-postöverföring"
 
 #: capplets/font/font-properties.desktop.in.h:1
-#, fuzzy
 msgid "Font"
-msgstr "Skog"
+msgstr "Typsnitt"
 
 #: capplets/font/font-properties.desktop.in.h:2
-#, fuzzy
 msgid "Select which font to use"
-msgstr "Välj vilket gtk+-tema som ska användas"
+msgstr "Välj vilket typsnitt som ska användas"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:315
 #: capplets/keyboard/gnome-keyboard-properties.c:317
@@ -521,7 +511,80 @@ msgstr "Tangentbord"
 msgid "Keyboard Properties"
 msgstr "Tangentbordsinställningar"
 
-#: capplets/mouse/gnome-mouse-properties.c:518
+#: capplets/mouse/gnome-mouse-properties.c:407
+#, c-format
+msgid ""
+"<b>Unknown Cursor</b>\n"
+"%s"
+msgstr ""
+"<b>Okänd muspekare</b>\n"
+"%s"
+
+#: capplets/mouse/gnome-mouse-properties.c:505
+msgid ""
+"<b>Default Cursor - Current</b>\n"
+"The default cursor that ships with X"
+msgstr ""
+"<b>Standardmuspekare - Aktuell</b>\n"
+"Standardmuspekaren som kommer med X"
+
+#: capplets/mouse/gnome-mouse-properties.c:508
+msgid ""
+"<b>Default Cursor</b>\n"
+"The default cursor that ships with X"
+msgstr ""
+"<b>Standardmuspekare</b>\n"
+"Standardmuspekaren som kommer med X"
+
+#: capplets/mouse/gnome-mouse-properties.c:526
+msgid ""
+"<b>White Cursor - Current</b>\n"
+"The default cursor inverted"
+msgstr ""
+"<b>Vit muspekare - Aktuell</b>\n"
+"Inverterad standardmuspekare"
+
+#: capplets/mouse/gnome-mouse-properties.c:529
+msgid ""
+"<b>White Cursor</b>\n"
+"The default cursor inverted"
+msgstr ""
+"<b>Vit muspekare - Aktuell</b>\n"
+"Inverterad standardmuspekare"
+
+#: capplets/mouse/gnome-mouse-properties.c:547
+msgid ""
+"<b>Large Cursor - Current</b>\n"
+"Large version of normal cursor"
+msgstr ""
+"<b>Stor muspekare - Aktuell</b>\n"
+"Stor version av den vanliga muspekaren"
+
+#: capplets/mouse/gnome-mouse-properties.c:550
+msgid ""
+"<b>Large Cursor</b>\n"
+"Large version of normal cursor"
+msgstr ""
+"<b>Stor muspekare</b>\n"
+"Stor version av den vanliga muspekaren"
+
+#: capplets/mouse/gnome-mouse-properties.c:568
+msgid ""
+"<b>Large White Cursor - Current</b>\n"
+"Large version of white cursor"
+msgstr ""
+"<b>Stor vit muspekare - Aktuell</b>\n"
+"Stor version av den vita muspekaren"
+
+#: capplets/mouse/gnome-mouse-properties.c:571
+msgid ""
+"<b>Large White Cursor</b>\n"
+"Large version of white cursor"
+msgstr ""
+"<b>Stor vit muspekare</b>\n"
+"Stor version av den vita muspekaren"
+
+#: capplets/mouse/gnome-mouse-properties.c:703
 #: capplets/mouse/mouse.desktop.in.h:2
 msgid "Mouse Properties"
 msgstr "Egenskaper för mus"
@@ -548,82 +611,77 @@ msgstr "Ljudegenskaper"
 
 #. just 8 short names that will serve as samples for titles in demo
 #: capplets/theme-switcher/control/control.c:19
-#, fuzzy
 msgid "Eenie"
-msgstr "Händelse"
+msgstr "Ett"
 
 #: capplets/theme-switcher/control/control.c:19
-#, fuzzy
 msgid "Mynie"
-msgstr "Moiré"
+msgstr "Två"
 
 #: capplets/theme-switcher/control/control.c:19
 msgid "Catcha"
-msgstr ""
+msgstr "Tre"
 
 #: capplets/theme-switcher/control/control.c:19
 msgid "By Its"
-msgstr ""
+msgstr "Fyra"
 
 #: capplets/theme-switcher/control/control.c:20
 msgid "Meenie"
-msgstr ""
+msgstr "Alla"
 
 #: capplets/theme-switcher/control/control.c:20
-#, fuzzy
 msgid "Moe"
-msgstr "Fler"
+msgstr "Byxor"
 
 #: capplets/theme-switcher/control/control.c:20
-#, fuzzy
 msgid "Tiger"
-msgstr "Tunnare"
+msgstr "Äro"
 
 #: capplets/theme-switcher/control/control.c:20
-#, fuzzy
 msgid "Toe"
-msgstr "Två"
+msgstr "Dyra"
 
 #: capplets/theme-switcher/control/control.c:38
 msgid "Selected themes from above will be tested by previewing here."
-msgstr ""
+msgstr "Teman som är valda ovan kan testas med förhandsgranskning här."
 
 #. column one
 #: capplets/theme-switcher/control/control.c:43
 msgid "Sample Button"
-msgstr ""
+msgstr "Exempelknapp"
 
 #: capplets/theme-switcher/control/control.c:47
 msgid "Sample Check Button"
-msgstr ""
+msgstr "Exempelkryssknapp"
 
 #: capplets/theme-switcher/control/control.c:53
 msgid "Sample Text Entry Field"
-msgstr ""
+msgstr "Exempeltextinmatningsfält"
 
 #: capplets/theme-switcher/control/control.c:64
 msgid "Submenu"
-msgstr ""
+msgstr "Undermeny"
 
 #: capplets/theme-switcher/control/control.c:69
 msgid "Item 1"
-msgstr ""
+msgstr "Objekt 1"
 
 #: capplets/theme-switcher/control/control.c:71
 msgid "Another item"
-msgstr ""
+msgstr "Ett annat objekt"
 
 #: capplets/theme-switcher/control/control.c:75
 msgid "Radio Button 1"
-msgstr ""
+msgstr "Radioknapp 1"
 
 #: capplets/theme-switcher/control/control.c:81
 msgid "Radio Button 2"
-msgstr ""
+msgstr "Radioknapp 2"
 
 #: capplets/theme-switcher/control/control.c:102
 msgid "One"
-msgstr ""
+msgstr "Ett"
 
 #: capplets/theme-switcher/control/control.c:108
 msgid "Two"
@@ -637,7 +695,7 @@ msgstr "Gtk+-temaväljare"
 msgid "Select which gtk+ theme to use"
 msgstr "Välj vilket gtk+-tema som ska användas"
 
-#: capplets/theme-switcher/main.c:217
+#: capplets/theme-switcher/main.c:218
 msgid "Select a theme to install"
 msgstr "Välj ett tema att installera"
 
@@ -647,38 +705,38 @@ msgstr "Ställ in standardbeteende för GNOME-program"
 
 #: capplets/ui-properties/behavior.desktop.in.h:2
 msgid "Toolbars & Menus"
-msgstr ""
+msgstr "Verktygsrader och menyer"
 
-#: control-center/capplet-dir-view.c:146
+#: control-center/capplet-dir-view.c:148
 msgid "Layout"
 msgstr "Layout"
 
-#: control-center/capplet-dir-view.c:147
+#: control-center/capplet-dir-view.c:149
 msgid "Layout to use for this view of the capplets"
 msgstr "Layout att använda för denna vy av kontrollpanelprogrammen"
 
-#: control-center/capplet-dir-view.c:153
+#: control-center/capplet-dir-view.c:155
 msgid "Capplet directory object"
 msgstr "Objekt i kontrollpanelprogramkatalog"
 
-#: control-center/capplet-dir-view.c:154
+#: control-center/capplet-dir-view.c:156
 msgid "Capplet directory that this view is viewing"
 msgstr "Kontrolpanelprogramkatalog som denna vy visar"
 
-#: control-center/capplet-dir-view.c:308 control-center/gnomecc.desktop.in.h:1
+#: control-center/capplet-dir-view.c:313 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
 msgstr "GNOME-kontrollpanelen"
 
-#: control-center/capplet-dir-view.c:311
+#: control-center/capplet-dir-view.c:316
 msgid "Desktop properties manager."
 msgstr "Hanteraren av skrivbordsegenskaper."
 
-#: control-center/capplet-dir-view.c:445
+#: control-center/capplet-dir-view.c:450
 #, c-format
 msgid "Gnome Control Center : %s"
 msgstr "Gnome-kontrollpanelen: %s"
 
-#: control-center/capplet-dir-view.c:488
+#: control-center/capplet-dir-view.c:503
 msgid ""
 "No help is available/installed. Please make sure you\n"
 "have the GNOME User's Guide installed on your system."
@@ -687,7 +745,7 @@ msgstr ""
 "kontrollera att du har GNOME-användarmanualen installerad på\n"
 "ditt system."
 
-#: control-center/capplet-dir-view.c:491
+#: control-center/capplet-dir-view.c:506
 msgid "Close"
 msgstr "Stäng"
 
@@ -700,15 +758,15 @@ msgstr "GNOME-kontrollpanelen: %s"
 msgid "The GNOME configuration tool"
 msgstr "Konfigurationsverktyg för GNOME"
 
-#: control-center/main.c:44
+#: control-center/main.c:43
 msgid "Use shell even if nautilus is running."
-msgstr ""
+msgstr "Använd skal även om nautilus kör."
 
-#: libbackground/applier.c:239
+#: libbackground/applier.c:235
 msgid "Type"
 msgstr "Typ"
 
-#: libbackground/applier.c:240
+#: libbackground/applier.c:236
 msgid ""
 "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
 "for preview"
@@ -716,20 +774,20 @@ msgstr ""
 "Typ av bg_applier: BG_APPLIER_ROOT för rotfönstret eller BG_APPLIER_PREVIEW "
 "för förhandsgranskning"
 
-#: libbackground/applier.c:399
+#: libbackground/applier.c:395
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "Kunde inte läsa in bilden \"%s\"; slår av bakgrundsbild."
 
-#: libbackground/applier.c:522
+#: libbackground/applier.c:515
 msgid "Disabled"
 msgstr "Avslagen"
 
-#: libsounds/sound-view.c:99
+#: libsounds/sound-view.c:104
 msgid "The sound file for this event does not exist."
 msgstr "Ljudfilen för denna händelse finns inte."
 
-#: libsounds/sound-view.c:101
+#: libsounds/sound-view.c:106
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -739,21 +797,27 @@ msgstr ""
 "Du kanske vill installera paketet gnome-audio\n"
 "för att få en samling med standardljud."
 
-#: libsounds/sound-view.c:154
+#: libsounds/sound-view.c:160
 msgid "Event"
 msgstr "Händelse"
 
-#: libsounds/sound-view.c:154
+#: libsounds/sound-view.c:160
 msgid "File to Play"
 msgstr "Fil att spela"
 
-#: libsounds/sound-view.c:187
+#: libsounds/sound-view.c:193
 msgid "Play"
 msgstr "Spela"
 
-#: libsounds/sound-view.c:193
+#: libsounds/sound-view.c:199
 msgid "Select sound file"
 msgstr "Välj en ljudfil"
+
+#~ msgid "Configure which non-session aware programs are started up"
+#~ msgstr "Konfigurera vilka sessionsomedvetna program som startas upp"
+
+#~ msgid "Startup Programs"
+#~ msgstr "Uppstartsprogram"
 
 #~ msgid "Main"
 #~ msgstr "Huvud"
