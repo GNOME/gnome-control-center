@@ -521,7 +521,6 @@ write_select (xmlNodePtr argument_data, GTree *widget_db)
 	GList *menu_item;
 	char *id;
 
-	node = argument_data->childs;
 	if (!(id = xmlGetProp (argument_data, "id"))) return;
 	set = g_tree_lookup (widget_db, id);
 
@@ -530,14 +529,48 @@ write_select (xmlNodePtr argument_data, GTree *widget_db)
 	menu_item = GTK_MENU_SHELL (menu)->children;
 	active = gtk_menu_get_active (GTK_MENU (menu));
 
-	while (node && menu_item) {
+	for (node = argument_data->childs; node && menu_item;
+	     node = node->next) 
+	{
+		if (!xmlGetProp (node, "id")) continue;
+
 		if (active == menu_item->data)
 			return xmlGetProp (node, "arg-set");
 
-		node = node->next; menu_item = menu_item->next; i++;
+		menu_item = menu_item->next; i++;
 	}
 
 	return NULL;
+}
+
+static gchar *
+write_string (xmlNodePtr argument_data, GTree *widget_db) 
+{
+	PrefsDialogWidgetSet *set;
+	gchar *str;
+	char *id, *arg, *ret_str;
+	char *pos;
+
+	if (!(id = xmlGetProp (argument_data, "id"))) return;
+	set = g_tree_lookup (widget_db, id);
+
+	if (!set || !GTK_WIDGET_IS_SENSITIVE (set->value_widget)) return NULL;
+
+	str = gtk_entry_get_text (GTK_ENTRY (set->value_widget));
+	arg = xmlGetProp (argument_data, "arg");
+
+	if (!arg) return NULL;
+	arg = g_strdup (arg);
+
+	pos = strchr (arg, '%');
+
+	if (!pos) return arg;
+	*pos = '\0';
+
+	ret_str = g_strdup_printf ("%s\"%s\"%s", arg, (int) str, pos + 1);
+	g_free (arg);
+
+	return ret_str;
 }
 
 /* write_command_line
@@ -553,23 +586,39 @@ write_command_line (gchar *name, xmlNodePtr argument_data, GTree *widget_db)
 	xmlNodePtr node;
 	gchar *arg, *ret;
 	gboolean flag = FALSE;
+	gboolean free_v = FALSE;
 
 	line = g_string_new (name);
 	node = argument_data->childs;
 
 	for (node = argument_data->childs; node; node = node->next) {
-		if (!strcmp (node->name, "boolean"))
+		if (!strcmp (node->name, "boolean")) {
 			arg = write_boolean (node, widget_db);
-		else if (!strcmp (node->name, "number"))
+			free_v = FALSE;
+		}
+		else if (!strcmp (node->name, "number")) {
 			arg = write_number (node, widget_db);
-		else if (!strcmp (node->name, "select"))
+			free_v = TRUE;
+		}
+		else if (!strcmp (node->name, "select")) {
 			arg = write_select (node, widget_db);
-		else if (!strcmp (node->name, "command"))
+			free_v = FALSE;
+		}
+		else if (!strcmp (node->name, "string")) {
+			arg = write_string (node, widget_db);
+			free_v = TRUE;
+		}
+		else if (!strcmp (node->name, "command")) {
 			arg = xmlGetProp (node, "arg");
-		else if (!strcmp (node->name, "hgroup"))
+			free_v = FALSE;
+		}
+		else if (!strcmp (node->name, "hgroup")) {
 			arg = write_command_line (NULL, node, widget_db);
-		else
+			free_v = TRUE;
+		} else {
 			arg = NULL;
+			free_v = FALSE;
+		}
 
 		if (arg) {
 			if (*arg && (name || flag)) 
@@ -577,9 +626,7 @@ write_command_line (gchar *name, xmlNodePtr argument_data, GTree *widget_db)
 			g_string_append (line, arg);
 			flag = TRUE;
 
-			if (!strcmp (node->name, "number") ||
-			    !strcmp (node->name, "hgroup")) 
-				g_free (arg);
+			if (free_v) g_free (arg);
 		}
 	}
 
@@ -595,11 +642,10 @@ write_command_line (gchar *name, xmlNodePtr argument_data, GTree *widget_db)
 static GScanner *
 read_command_line (char *command_line) 
 {
-	char **args;
 	int i;
 	GScanner *cli_db;
 	static GScannerConfig config;
-	char *arg, *value;
+	char *arg, *value, *argpos, *valpos, *endpos;
 
 	config.cset_skip_characters = " \t\n";
 	config.cset_identifier_first = "abcdefghijklmnopqrstuvwxyz";
@@ -610,28 +656,71 @@ read_command_line (char *command_line)
 	cli_db = g_scanner_new (&config);
 	g_scanner_set_scope (cli_db, 0);
 
-	args = g_strsplit (command_line, " ", -1);
-
 	g_scanner_scope_add_symbol (cli_db, 0, "and", SYMBOL_AND);
 	g_scanner_scope_add_symbol (cli_db, 0, "or", SYMBOL_OR);
 	g_scanner_scope_add_symbol (cli_db, 0, "not", SYMBOL_NOT);
 
-	for (i = 0; args[i]; i++) {
-		if (args[i][0] == '-') {
-			arg = g_strdup (args[i] + 1);
+	command_line = g_strdup (command_line);
+	argpos = command_line;
 
-			if (args[i + 1] && args[i + 1][0] != '-') {
-				value = g_strdup (args[i + 1]);
-				i++;
+	while (argpos && *argpos) {
+		if (*argpos == '-') {
+			valpos = strchr (argpos, ' ');
+			if (valpos) *valpos = '\0';
+			arg = g_strdup (argpos + 1);
+
+			if (valpos) {
+				valpos++;
+				while (isspace (*valpos)) valpos++;
+
+				if (*valpos == '\"') {
+					endpos = strchr (valpos + 1, '\"');
+
+					if (endpos) {
+						*endpos = '\0';
+						endpos++;
+					}
+
+					value = g_strdup (valpos + 1);
+
+					if (endpos) {
+						endpos++;
+						while (isspace (*endpos)) 
+							endpos++;
+					}
+				} else if (*valpos != '-') {
+					endpos = strchr (valpos, ' ');
+					if (endpos) *endpos = '\0';
+					value = g_strdup (valpos);
+
+					if (endpos) {
+						endpos++;
+						while (isspace (*endpos)) 
+							endpos++;
+					}
+				} else {
+					value = (char *) 1;
+					endpos = valpos;
+				}
+
+				if (endpos)
+					argpos = endpos;
+				else
+					argpos = NULL;
 			} else {
 				value = (char *) 1;
+				argpos = NULL;
 			}
 
 			g_scanner_scope_add_symbol (cli_db, 0, arg, value);
+		} else {
+			argpos = strchr (argpos, ' ');
+			if (argpos)
+				while (isspace (*argpos)) argpos++;
 		}
 	}
 
-	g_strfreev (args);
+	g_free (command_line);
 
 	return cli_db;
 }
@@ -782,7 +871,6 @@ get_select_widget (ScreensaverPrefsDialog *dialog, xmlNodePtr select_data,
 	xmlNodePtr node;
 
 	g_return_val_if_fail (widget != NULL, NULL);
-	g_return_val_if_fail (node != NULL, NULL);
 
 	label_str = xmlGetProp (select_data, "label");
 
@@ -834,6 +922,51 @@ get_select_widget (ScreensaverPrefsDialog *dialog, xmlNodePtr select_data,
 	} else {
 		set->widgets = g_list_append (NULL, option_menu);
 		*widget = option_menu;
+	}
+
+	return set;
+}
+
+/* Form a GtkEntry from a string value */
+
+static PrefsDialogWidgetSet *
+get_entry (ScreensaverPrefsDialog *dialog, xmlNodePtr node, 
+	   GtkWidget **widget) 
+{
+	char *label_str, *default_str;
+	GtkWidget *hbox, *label, *entry;
+	PrefsDialogWidgetSet *set;
+
+	g_return_val_if_fail (widget != NULL, NULL);
+	g_return_val_if_fail (node != NULL, NULL);
+
+	label_str = xmlGetProp (node, "label");
+	default_str = xmlGetProp (node, "default");
+
+	entry = gtk_entry_new ();
+
+	if (default_str)
+		gtk_entry_set_text (GTK_ENTRY (entry), default_str);
+
+	set = g_new0 (PrefsDialogWidgetSet, 1);
+	set->value_widget = entry;
+
+	if (label_str) {
+		hbox = gtk_hbox_new (FALSE, 5);
+		label = gtk_label_new (label_str);
+		gtk_misc_set_alignment (GTK_MISC (label), 1.0, 0.5);
+		gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
+		gtk_box_pack_start (GTK_BOX (hbox), entry, 
+				    FALSE, TRUE, 0);
+
+		set->widgets = g_list_append (NULL, hbox);
+		g_list_append (set->widgets, label);
+		g_list_append (set->widgets, entry);
+
+		*widget = hbox;
+	} else {
+		set->widgets = g_list_append (NULL, entry);
+		*widget = entry;
 	}
 
 	return set;
@@ -1030,6 +1163,31 @@ place_select (ScreensaverPrefsDialog *dialog, GtkTable *table,
 	return set;
 }
 
+/* Place a GtkEntry in a table */
+
+static PrefsDialogWidgetSet *
+place_entry (ScreensaverPrefsDialog *dialog, GtkTable *table,
+	     xmlNodePtr node, gint *row) 
+{
+	PrefsDialogWidgetSet *set;
+	GtkWidget *widget;
+
+	g_return_val_if_fail (table != NULL, NULL);
+	g_return_val_if_fail (GTK_IS_TABLE (table), NULL);
+	g_return_val_if_fail (node != NULL, NULL);
+	g_return_val_if_fail (row != NULL, NULL);
+
+	set = get_entry (dialog, node, &widget);
+
+	if (set) {
+		gtk_table_attach (table, widget, 0, 3, *row, *row + 1,
+				  GTK_FILL, 0, 0, 0);
+		*row += 1;
+	}
+
+	return set;
+}
+
 /* Fill a GtkTable with widgets based on the XML description of the
  * screensaver 
  */
@@ -1064,6 +1222,8 @@ populate_table (ScreensaverPrefsDialog *dialog, GtkTable *table)
 				      node, &row);
 		else if (!strcmp (node->name, "select"))
 			set = place_select (dialog, table, node, &row);
+		else if (!strcmp (node->name, "string"))
+			set = place_entry (dialog, table, node, &row);
 		else continue;
 
 		if (set) g_tree_insert (dialog->widget_db, id, set);
@@ -1287,11 +1447,11 @@ read_select (GTree *widget_db, xmlNodePtr argument_data,
 	menu = gtk_option_menu_get_menu 
 		(GTK_OPTION_MENU (set->value_widget));
 
-	node = argument_data->childs;
-
 	/* Get the index of the selected option */
 
-	while (node) {
+	for (node = argument_data->childs; node; node = node->next) {
+		if (!xmlGetProp (node, "id")) continue;
+
 		found = arg_is_set (node, cli_db);
 
 		if (found > max_found) {
@@ -1299,7 +1459,7 @@ read_select (GTree *widget_db, xmlNodePtr argument_data,
 			max_found = found;
 		}
 
-		node = node->next; i++;
+		i++;
 	}
 
 	/* Enable widgets enabled by selected option and disable
@@ -1307,19 +1467,23 @@ read_select (GTree *widget_db, xmlNodePtr argument_data,
 	 * deselect signals to do the same when an option is selected 
 	 */
 
-	node = argument_data->childs; i = 0;
+	i = 0;
 
-	while (node) {
+	for (node = argument_data->childs; node; node = node->next) {
+		if (!xmlGetProp (node, "id")) continue;
+
 		if (i != set_idx)
 			set_widgets_sensitive (widget_db,
 					       xmlGetProp (node, "enable"),
 					       FALSE);
-		node = node->next; i++;
+		i++;
 	}
 
-	node = argument_data->childs; i = 0;
+	i = 0;
 
-	while (node) {
+	for (node = argument_data->childs; node; node = node->next) {
+		if (!xmlGetProp (node, "id")) continue;
+
 		if (i == set_idx) {
 			gtk_option_menu_set_history 
 				(GTK_OPTION_MENU (set->value_widget), i);
@@ -1329,8 +1493,36 @@ read_select (GTree *widget_db, xmlNodePtr argument_data,
 			break;
 		}
 
-		node = node->next; i++;
+		i++;
 	}
+}
+
+static void
+read_string (GTree *widget_db, xmlNodePtr argument_data, GScanner *cli_db) 
+{
+	PrefsDialogWidgetSet *set;
+	char *arg, *id;
+	char *arg_line;
+	char **args;
+
+	g_return_if_fail (widget_db != NULL);
+	g_return_if_fail (argument_data != NULL);
+	g_return_if_fail (cli_db != NULL);
+
+	arg_line = xmlGetProp (argument_data, "arg");
+	args = g_strsplit (arg_line, " ", -1);
+
+	arg = g_scanner_scope_lookup_symbol (cli_db, 0, args[0] + 1);
+	if (!arg || arg == (char *) 1) return;
+
+	if (!(id = xmlGetProp (argument_data, "id"))) return;
+	set = g_tree_lookup (widget_db, id);
+
+	if (!set || !set->value_widget) return;
+
+	gtk_entry_set_text (GTK_ENTRY (set->value_widget), arg);
+
+	g_strfreev (args);
 }
 
 static void
@@ -1348,6 +1540,9 @@ place_screensaver_properties (ScreensaverPrefsDialog *dialog,
 				     dialog->cli_args_db);
 		else if (!strcmp (node->name, "select"))
 			read_select (dialog->widget_db, node, 
+				     dialog->cli_args_db);
+		else if (!strcmp (node->name, "string"))
+			read_string (dialog->widget_db, node, 
 				     dialog->cli_args_db);
 		else if (!strcmp (node->name, "hgroup"))
 			place_screensaver_properties (dialog, node);

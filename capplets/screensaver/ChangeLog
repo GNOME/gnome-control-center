@@ -1,3 +1,23 @@
+2000-08-16  Bradford Hovinen  <hovinen@helixcode.com>
+
+	* screensaver-prefs-dialog.c (get_select_widget): Remove
+	extraneous precondition check 
+	(read_command_line): Rewrote to support quoted strings in the
+	command line
+
+2000-08-12  Bradford Hovinen  <hovinen@helixcode.com>
+
+	* screensaver-prefs-dialog.c (write_command_line): Use flag free_v
+	to determine whether to free data; add support for strings
+	(write_string): Implement. Analagous to write_*
+	(populate_table): Add support for strings
+	(place_entry): 
+	(get_entry): Implement
+	(place_screensaver_properties): Add support for strings
+	(read_string): Implement
+	(read_select):
+	(write_select): Skip over nodes that don't have id attributes
+
 2000-08-10  Bradford Hovinen  <hovinen@helixcode.com>
 
 	* resources.c (screensaver_get_desc_from_xrdb): Remove extraneous
