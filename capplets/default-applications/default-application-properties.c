@@ -160,20 +160,23 @@ edit_read(void)
         hcurrent_info.allows_urls = horiginal_info.allows_urls;
 	hcurrent_info.index = horiginal_info.index;
 
-	tmp = gconf_client_get_string (client, GNOME_DESKTOP_PREFIX "/terminal", NULL);
-	term_argv = g_strsplit (tmp, " ", 3);
-        toriginal_info.executable_name = term_argv[0];
-	toriginal_info.exec_app = term_argv[1];
+	tmp = gconf_client_get_string (client, GNOME_DESKTOP_PREFIX "/terminal/exec", NULL);
 
-	toriginal_info.index = term_find_index (&toriginal_info);
-	g_free (term_argv);
-	if (toriginal_info.index != -1)
-		toriginal_info.name = possible_terminals[toriginal_info.index].name;
+        if (tmp != NULL) {
+                term_argv = g_strsplit (tmp, " ", 3);
+                toriginal_info.executable_name = term_argv[0];
+                toriginal_info.exec_app = term_argv[1];
 
-	tcurrent_info.name = toriginal_info.name;
-        tcurrent_info.executable_name = g_strdup (toriginal_info.executable_name);
-        tcurrent_info.executable_name = g_strdup (toriginal_info.exec_app);
-	tcurrent_info.index = toriginal_info.index;
+                toriginal_info.index = term_find_index (&toriginal_info);
+                g_strfreev (term_argv);
+                if (toriginal_info.index != -1)
+                        toriginal_info.name = possible_terminals[toriginal_info.index].name;
+
+                tcurrent_info.name = toriginal_info.name;
+                tcurrent_info.executable_name = g_strdup (toriginal_info.executable_name);
+                tcurrent_info.executable_name = g_strdup (toriginal_info.exec_app);
+                tcurrent_info.index = toriginal_info.index;
+        }
 
         /* Set sensitivity. */
 
@@ -440,13 +443,13 @@ write_all (BrowserDescription *bd, EditorDescription *ed, HelpViewDescription *h
         if (td->exec_app && td->executable_name)
 	{
 		tmp = g_strconcat (td->executable_name, " ", td->exec_app, NULL);
-		gconf_client_set_string (client, GNOME_DESKTOP_PREFIX "/terminal", tmp, NULL);
+		gconf_client_set_string (client, GNOME_DESKTOP_PREFIX "/terminal/exec", tmp, NULL);
 		g_free (tmp);
 	}
         else if (td->executable_name)
-		gconf_client_set_string (client, GNOME_DESKTOP_PREFIX "/terminal", td->executable_name, NULL);
+		gconf_client_set_string (client, GNOME_DESKTOP_PREFIX "/terminal/exec", td->executable_name, NULL);
         else
-		gconf_client_unset (client, GNOME_DESKTOP_PREFIX "/terminal", NULL);
+		gconf_client_unset (client, GNOME_DESKTOP_PREFIX "/terminal/exec", NULL);
 	
 	g_object_unref (G_OBJECT (client));
 }
