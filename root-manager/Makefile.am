@@ -15,7 +15,9 @@ sbin_PROGRAMS = root-manager
 
 root_manager_SOURCES = \
 	root-manager.c	\
-	root-manager.h
+	root-manager.h \
+	shvar.c \
+	shvar.h
 
 root_manager_LDADD = -lpam -lpam_misc -ldl
 
@@ -27,3 +29,5 @@ root_manager_helper_SOURCES = \
 	root-manager-wrap.h
 
 root_manager_helper_LDFLAGS = @RMHELPER_LIBS@
+
+EXTRA_DIST = xst-keys.png

@@ -19,7 +19,7 @@ Glade_DATA = \
 glade_msgs = \
 	mouse-properties.glade.h
 
-EXTRA_DIST = $(Applications_DATA) $(Glade_DATA) $(glade_msgs)
+EXTRA_DIST = $(Applications_DATA) $(Glade_DATA) $(glade_msgs) $(pixmap_DATA)
 
 INCLUDES = \
         -DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\

@@ -3,4 +3,4 @@ always_built_SUBDIRS = \
 
 SUBDIRS = $(always_built_SUBDIRS)
 
-EXTRA_DIST = ChangeLog
+EXTRA_DIST = 
