@@ -76,6 +76,23 @@ edit_cb (GtkButton *button, GladeXML *dialog)
 }
 
 static void
+row_activated_cb (GtkTreeView *view, GtkTreePath *path, GtkTreeViewColumn *column, GladeXML *dialog) 
+{
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+
+	GObject           *edit_dialog;
+
+	model = gtk_tree_view_get_model (view);
+	gtk_tree_model_get_iter (model, &iter, path);
+
+	if (model_entry_is_protocol (model, &iter))
+		edit_dialog = service_edit_dialog_new (service_info_load (model, &iter, changeset));
+	else
+		edit_dialog = mime_edit_dialog_new (mime_type_info_load (model, &iter));
+}
+
+static void
 remove_cb (GtkButton *button, GladeXML *dialog) 
 {
 	GtkTreeView       *treeview;
@@ -143,6 +160,8 @@ create_dialog (void)
 	g_signal_connect (G_OBJECT (WID ("add_button")), "clicked", (GCallback) add_cb, dialog);
 	g_signal_connect (G_OBJECT (WID ("edit_button")), "clicked", (GCallback) edit_cb, dialog);
 	g_signal_connect (G_OBJECT (WID ("remove_button")), "clicked", (GCallback) remove_cb, dialog);
+
+	g_signal_connect (G_OBJECT (WID ("mime_types_tree")), "row-activated", (GCallback) row_activated_cb, dialog);
 
 	return dialog;
 }
