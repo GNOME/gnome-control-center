@@ -53,35 +53,25 @@ CappletDirView *(*get_view_cb) (CappletDir *dir, CappletDirView *launcher);
 
 /* nice global table for capplet lookup */
 GHashTable *capplet_hash = NULL;
-static GnomeIconTheme *icon_theme = NULL;
+static GtkIconTheme *icon_theme = NULL;
 
-static char * 
+static GdkPixbuf * 
 find_icon (GnomeDesktopItem *dentry) 
 {
-        char *icon_file = NULL;
+	GdkPixbuf *res;
 	char const *icon;
 
 	if (icon_theme == NULL)
-		icon_theme = gnome_icon_theme_new ();
+		icon_theme = gtk_icon_theme_new ();
 
 	icon = gnome_desktop_item_get_string (dentry, GNOME_DESKTOP_ITEM_ICON);
 
 	if (icon == NULL || icon[0] == 0)
-		icon_file = gnome_icon_theme_lookup_icon (icon_theme, "gnome-settings", 48, NULL, NULL);
-	else if (g_path_is_absolute (icon))
-		icon_file = g_strdup (icon);
-	else
-		icon_file = gnome_icon_theme_lookup_icon (icon_theme, icon, 48, NULL, NULL);
-
-	if (icon_file == NULL)
-		icon_file = gnome_icon_theme_lookup_icon (icon_theme, "gnome-unknown", 48, NULL, NULL);
-
-	g_return_val_if_fail (icon_file != NULL, NULL);
-
-	if (!g_file_test (icon_file, G_FILE_TEST_EXISTS) || g_file_test(icon_file, G_FILE_TEST_IS_DIR))
-		return NULL;
-
-	return icon_file;
+		icon = "gnome-settings";
+	res = gtk_icon_theme_load_icon (icon_theme, icon, 48, 0, NULL);
+	if (res == NULL)
+		res = gtk_icon_theme_load_icon (icon_theme, "gnome-unknown", 48, 0, NULL);
+	return res;
 }
 
 CappletDirEntry *
@@ -129,7 +119,6 @@ capplet_new (CappletDir *dir, gchar *desktop_path)
 	entry->label = g_strdup (gnome_desktop_item_get_localestring (dentry,
 			GNOME_DESKTOP_ITEM_NAME));
 	entry->icon = find_icon (dentry);
-	entry->pb = gdk_pixbuf_new_from_file (entry->icon, NULL);
 	entry->uri = gnome_vfs_uri_new (desktop_path);
 	entry->exec = vec;
 	entry->dir = dir;
@@ -178,13 +167,6 @@ capplet_dir_new (CappletDir *dir, gchar *dir_path)
 				entry->entry,
 				GNOME_DESKTOP_ITEM_NAME));
 		entry->icon = find_icon (entry->entry);
-
-		if (!entry->icon)
-			entry->icon = gnome_program_locate_file
-				(gnome_program_get (), GNOME_FILE_DOMAIN_APP_PIXMAP,
-				 "control-center2.png", TRUE, NULL);
-
-		entry->pb = gdk_pixbuf_new_from_file (entry->icon, NULL);
 	} else {
 		/* If the .directory file could not be found or read, abort */
 		g_free (capplet_dir);
@@ -216,7 +198,7 @@ capplet_dir_entry_destroy (CappletDirEntry *entry)
 	}
 
 	g_free (entry->label);
-	g_free (entry->icon);
+	g_object_unref (entry->icon);
 	gnome_vfs_uri_unref (entry->uri);
 	g_strfreev (entry->exec);
 	gnome_desktop_item_unref (entry->entry);

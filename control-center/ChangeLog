@@ -1,3 +1,13 @@
+2003-12-16  Jody Goldberg <jody@gnome.org>
+
+	* capplet-dir.c (find_icon) : Use GtkIconTheme rather than
+	  GnomeIconTheme, and return a Pixbuf directly.
+
+	* capplet-dir-view-list.c (sidebar_populate) : Just use the icon
+	  directly.
+	(list_populate) : ditto.
+	* capplet-dir-view.c (capplet_dir_view_load_dir) : ditto.
+
 2003-12-15  Jody Goldberg <jody@gnome.org>
 
 	* gnomecc.desktop.in : Use themed icon

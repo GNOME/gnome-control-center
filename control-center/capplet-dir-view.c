@@ -502,7 +502,7 @@ capplet_dir_view_load_dir (CappletDirView *view, CappletDir *dir)
 	menu = gtk_menu_new ();
 
 	for (entry = CAPPLET_DIR_ENTRY (dir); entry; entry = CAPPLET_DIR_ENTRY (entry->dir), parents++) {
-		GdkPixbuf *pb, *pbs;
+		GdkPixbuf *pbs;
 
 		menuitem = gtk_menu_item_new ();
 		hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
@@ -510,11 +510,9 @@ capplet_dir_view_load_dir (CappletDirView *view, CappletDir *dir)
 #if 0
 		w = gnome_pixmap_new_from_file_at_size (entry->icon, 16, 16);
 #else
-		pb = gdk_pixbuf_new_from_file (entry->icon, NULL);
-		pbs = gdk_pixbuf_scale_simple (pb, 16, 16, GDK_INTERP_HYPER);
-		w = gtk_image_new_from_pixbuf (pb);
+		pbs = gdk_pixbuf_scale_simple (entry->icon, 16, 16, GDK_INTERP_HYPER);
+		w = gtk_image_new_from_pixbuf (pbs);
 		g_object_unref (pbs);
-		g_object_unref (pb);
 #endif
 		gtk_box_pack_start (GTK_BOX (hbox), w,
 				    FALSE, FALSE, 0);

@@ -53,9 +53,8 @@ struct _CappletDirEntry
 	GnomeDesktopItem *entry;
 	gchar **exec;
 	gchar *label;
-	gchar *icon;
         GnomeVFSURI *uri;
-	GdkPixbuf *pb;
+	GdkPixbuf *icon;
 	CappletDir *dir;	
 };
 

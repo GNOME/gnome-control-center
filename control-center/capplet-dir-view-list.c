@@ -249,24 +249,19 @@ sidebar_populate (CappletDirView *view)
 
 	for (; list; list = list->next)
 	{
-		GdkPixbuf *buf;
 		GtkTreeIter iter;
 		CappletDirEntry *dir = CAPPLET_DIR_ENTRY (list->data);
 
 		if (dir->type != TYPE_CAPPLET_DIR)
 			continue;
 		
-		buf = gdk_pixbuf_new_from_file (dir->icon, NULL);
-		
 		gtk_list_store_append (data->sidebar_model, &iter);
 		gtk_list_store_set (data->sidebar_model, &iter,
-				    SIDEBAR_ICON, buf,
+				    SIDEBAR_ICON, dir->icon,
 				    SIDEBAR_LABEL, dir->label,
 				    SIDEBAR_DATA, dir,
 				    SIDEBAR_ACTIVE, NULL,
 				    -1);
-
-		g_object_unref (G_OBJECT (buf));
 	}
 
 	g_slist_free_1 (root); /* Just this first node */
@@ -313,9 +308,9 @@ list_populate (CappletDirView *view)
 		gnome_icon_list_insert_item (GNOME_ICON_LIST (view->view_data), i, item, 
 					     CAPPLET_DIR_ENTRY (list->data)->label);
 #else
-		gnome_icon_list_insert (data->gil, i++,
-					CAPPLET_DIR_ENTRY (list->data)->icon,
-					CAPPLET_DIR_ENTRY (list->data)->label);
+		gnome_icon_list_insert_pixbuf (data->gil, i++,
+			CAPPLET_DIR_ENTRY (list->data)->icon, NULL,
+			CAPPLET_DIR_ENTRY (list->data)->label);
 #endif
 	}
 	gnome_icon_list_thaw (data->gil);
