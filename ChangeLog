@@ -1,3 +1,11 @@
+2004-08-31  Jody Goldberg <jody@gnome.org>
+
+	* capplets/common/gconf-property-editor.c
+	(peditor_numeric_range_widget_changed) : tracked the long running
+	  irrtation about 'expecting int received float'.  Running without a
+	  schema would default the value to float.  12 of 13 callers had ints
+	  so I have changed the default and added a warning.
+
 Sun Aug 29 22:37:00 2004  Jonathan Blandford  <jrb@gnome.org>
 
 	* configure.in: post release bump.

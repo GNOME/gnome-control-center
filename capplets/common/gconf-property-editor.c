@@ -1116,8 +1116,13 @@ peditor_numeric_range_widget_changed (GConfPropertyEditor *peditor,
 							      NULL);
 	if (default_value)
 		value_wid = gconf_value_new (default_value->type);
-	else
-		value_wid = gconf_value_new (GCONF_VALUE_FLOAT);
+	else {
+		g_warning ("Unable to find a default value for key for %s.\n"
+			   "I'll assume it is an integer, but that may break things.\n"
+			   "Please be sure that the associated schema is installed",
+			   peditor->p->key);
+		value_wid = gconf_value_new (GCONF_VALUE_INT);
+	}
 
 	gconf_value_free (default_value);
 
