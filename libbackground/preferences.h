@@ -85,4 +85,6 @@ void     bg_preferences_load        (BGPreferences         *prefs);
 void     bg_preferences_merge_entry (BGPreferences         *prefs,
 				     const GConfEntry      *entry);
 
+void     bg_preferences_save        (BGPreferences *prefs);
+
 #endif /* __PREFERENCES_H */

@@ -277,3 +277,41 @@ read_color_from_string (const gchar *string)
 
 	return color;
 }
+
+#define DGB "/desktop/gnome/background/"
+
+void
+bg_preferences_save (BGPreferences *prefs)
+{
+	GConfChangeSet *cs;
+	gchar *tmp;
+	
+	g_return_if_fail (prefs != NULL);
+	g_return_if_fail (IS_BG_PREFERENCES (prefs));
+
+	cs = gconf_change_set_new ();
+	gconf_change_set_set_bool (cs, DGB "enabled", prefs->enabled);
+	gconf_change_set_set_int (cs, DGB "wallpaper-type", prefs->wallpaper_type);
+	gconf_change_set_set_string (cs, DGB "wallpaper-filename", prefs->wallpaper_filename);
+	
+	tmp = g_strdup_printf ("#%02x%02x%02x",
+		prefs->color1->red >> 8,
+		prefs->color1->green >> 8,
+		prefs->color1->blue >> 8);
+	gconf_change_set_set_string (cs, DGB "color1", tmp);
+	g_free (tmp);
+	
+	tmp = g_strdup_printf ("#%02x%02x%02x",
+		prefs->color2->red >> 8,
+		prefs->color2->green >> 8,
+		prefs->color2->blue >> 8);
+	gconf_change_set_set_string (cs, DGB "color2", tmp);
+	g_free (tmp);
+
+	gconf_change_set_set_int (cs, DGB "orientation", prefs->orientation);
+	gconf_client_commit_change_set (gconf_client_get_default (), cs, TRUE, NULL);
+	gconf_change_set_unref (cs);
+}
+
+#undef DGB
+
