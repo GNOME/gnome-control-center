@@ -54,7 +54,7 @@
 #define TOTAL_COLUMNS 4
 
 /* Local Prototypes */
-static void	 init_mime_capplet 	  		(void);
+static void	 init_mime_capplet 	  		(const char 	*scroll_to_mime_type);
 static void 	 populate_application_menu 		(GtkWidget 	*menu, 	 
 						 	 const char 	*mime_string);
 static void 	 populate_viewer_menu			(GtkWidget 	*menu, 	 
@@ -158,12 +158,20 @@ int
 main (int argc, char **argv)
 {
         int init_results;
-
+	char *mime_type;
+	
+	mime_type = NULL;
+	
+	/* */
+	if (argc >= 1) {
+		mime_type = g_strdup (argv[1]);
+	}
+		
         bindtextdomain (PACKAGE, GNOMELOCALEDIR);
         textdomain (PACKAGE);
-
-        init_results = gnome_capplet_init("mime-type-capplet", VERSION,
-                                          argc, argv, NULL, 0, NULL);
+	
+	
+        init_results = gnome_capplet_init ("mime-type-capplet", VERSION, argc, argv, NULL, 0, NULL);
 
 	if (init_results < 0) {
                 exit (0);
@@ -185,10 +193,10 @@ main (int argc, char **argv)
 							       "Nautilus-Tree",
 							       "ORBit",
 							       NULL);
-
+							       
 #endif /* MATHIEU_DEBUG */
 	if (init_results == 0) {
-		init_mime_capplet ();
+		init_mime_capplet (mime_type);
 	        capplet_gtk_main ();
 	}
         return 0;
@@ -473,10 +481,72 @@ change_file_extensions_clicked (GtkWidget *widget, gpointer user_data)
 	update_extensions_list (mime_type);
 }
 
+/* The following are copied from gtkclist.c and nautilusclist.c */ 
+#define CELL_SPACING 1
 
+/* gives the top pixel of the given row in context of
+ * the clist's voffset */
+#define ROW_TOP_YPIXEL(clist, row) (((clist)->row_height * (row)) + \
+				    (((row) + 1) * CELL_SPACING) + \
+				    (clist)->voffset)
+static void
+list_move_vertical (GtkCList *clist, gint row, gfloat align)
+{
+	gfloat value;
+
+	g_return_if_fail (clist != NULL);
+
+	if (!clist->vadjustment) {
+		return;
+	}
+
+	value = (ROW_TOP_YPIXEL (clist, row) - clist->voffset -
+		 align * (clist->clist_window_height - clist->row_height) +
+		 (2 * align - 1) * CELL_SPACING);
+
+	if (value + clist->vadjustment->page_size > clist->vadjustment->upper) {
+		value = clist->vadjustment->upper - clist->vadjustment->page_size;
+	}
+
+	gtk_adjustment_set_value (clist->vadjustment, value);
+}
 
 static void
-init_mime_capplet (void)
+list_moveto (GtkCList *clist, gint row, gint column, gfloat row_align, gfloat col_align)
+{
+	g_return_if_fail (clist != NULL);
+
+	if (row < -1 || row >= clist->rows) {
+		return;
+	}
+	
+	if (column < -1 || column >= clist->columns) {
+		return;
+	}
+
+	row_align = CLAMP (row_align, 0, 1);
+	col_align = CLAMP (col_align, 0, 1);
+
+	/* adjust vertical scrollbar */
+	if (clist->vadjustment && row >= 0) {
+		list_move_vertical (clist, row, row_align);
+	}
+}
+
+static void
+list_reveal_row (GtkCList *clist, int row_index)
+{
+	g_return_if_fail (row_index >= 0 && row_index < clist->rows);
+		
+	if (ROW_TOP_YPIXEL (clist, row_index) + clist->row_height > clist->clist_window_height) {
+		list_moveto (clist, row_index, -1, 1, 0);
+     	} else if (ROW_TOP_YPIXEL (clist, row_index) < 0) {
+		list_moveto (clist, row_index, -1, 0, 0);
+     	}
+}
+
+static void
+init_mime_capplet (const char *scroll_to_mime_type)
 {
 	GtkWidget *main_vbox;
         GtkWidget *vbox, *hbox, *left_vbox;
@@ -485,7 +555,9 @@ init_mime_capplet (void)
         GtkWidget *frame;
         GtkWidget *table;
 	int index, list_width, column_width;
-	
+	gboolean found_one;
+	const char *row_data;
+
 	capplet = capplet_widget_new ();
 
 	/* Main vertical box */                    
@@ -663,9 +735,28 @@ init_mime_capplet (void)
 	gtk_signal_connect (GTK_OBJECT (mime_list),"select_row",
        	                   GTK_SIGNAL_FUNC (mime_list_selected_row_callback), NULL);
 
-	/* Select first item in list and update menus */
-	gtk_clist_select_row (GTK_CLIST (mime_list), 0, 0);
-
+	/* Attempt to select specified mime type in list */
+	if (scroll_to_mime_type != NULL) {
+		found_one = FALSE;
+		
+		for (index = 0; index < GTK_CLIST (mime_list)->rows; index++) {
+			row_data = gtk_clist_get_row_data (GTK_CLIST (mime_list), index);
+			if (row_data != NULL && strcmp (row_data, scroll_to_mime_type) == 0) {
+				/* Select mime type and bail */
+				found_one = TRUE;
+				gtk_clist_select_row (GTK_CLIST (mime_list), index, 1);
+				list_reveal_row (GTK_CLIST (mime_list), index);
+				break;	
+			}		
+		}
+				
+		if (!found_one) {
+			gtk_clist_select_row (GTK_CLIST (mime_list), 0, 0);
+		}			
+	} else {
+		gtk_clist_select_row (GTK_CLIST (mime_list), 0, 0);
+	}
+				
 	capplet_widget_state_changed (CAPPLET_WIDGET (capplet), TRUE);
 }
 
@@ -888,7 +979,6 @@ populate_application_menu (GtkWidget *application_menu, const char *mime_type)
 	
 	gtk_option_menu_set_menu (GTK_OPTION_MENU (default_menu), new_menu);
 }
-
 
 static void 
 component_menu_activated (GtkWidget *menu_item, gpointer data)
@@ -1446,7 +1536,7 @@ populate_mime_list (GList *type_list, GtkCList *clist)
 		
 		/* Insert item into list */
 		row = gtk_clist_insert (GTK_CLIST (clist), 1, text);
-		gtk_clist_set_row_data (GTK_CLIST (clist), row, g_strdup(mime_string));
+		gtk_clist_set_row_data (GTK_CLIST (clist), row, g_strdup (mime_string));
 		
 		/* Set description column icon */
 		pixbuf = capplet_get_icon_pixbuf (mime_string, FALSE);
