@@ -237,10 +237,26 @@ make_main(void)
   gnome_font_picker_set_mode (GNOME_FONT_PICKER (font_sel),
 			      GNOME_FONT_PICKER_MODE_FONT_INFO);
   initial_font = gnome_config_get_string_with_default ("/theme-switcher-capplet/settings/font",&default_used);
+
+
   if (initial_font == NULL) {
-	  gnome_font_picker_set_font_name (GNOME_FONT_PICKER (font_sel),
-					   initial_font);
+
+    GtkStyle *style;
+    
+    gtk_widget_ensure_style (frame);
+    style = gtk_widget_get_style (frame);
+
+    if (style->rc_style == NULL) {
+      /* FIXME - should really get this from X somehow   */
+      /*         for now we just assume default gtk font */
+      initial_font = g_strdup("-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*");
+    } else {
+      initial_font = style->rc_style->font_name;
+    }
   }
+
+  gnome_font_picker_set_font_name (GNOME_FONT_PICKER (font_sel), initial_font);
+
   gnome_font_picker_fi_set_use_font_in_label (GNOME_FONT_PICKER (font_sel),
 					      TRUE,
 					      12);
@@ -425,10 +441,12 @@ click_revert(GtkWidget *widget, gpointer data)
   ignore_change = TRUE;
   gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (auto_preview),
 			       initial_preview);
+  
   gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (font_cbox),
 			       initial_font_cbox);
-  gnome_font_picker_set_font_name (GNOME_FONT_PICKER (font_sel),
-				   initial_font);
+  if (initial_font)
+    gnome_font_picker_set_font_name (GNOME_FONT_PICKER (font_sel),
+				     initial_font);
   gtk_list_select_child (GTK_LIST (theme_list), initial_theme);
   test_theme(rc, initial_font);
   send_reread();
