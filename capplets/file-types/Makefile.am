@@ -1,3 +1,7 @@
+NULL =
+
+SUBDIRS = libuuid
+
 INCLUDES = -I. 						\
 	-I$(top_srcdir) 				\
 	-I$(srcdir) 					\
@@ -9,7 +13,9 @@ INCLUDES = -I. 						\
 	$(GTK_CFLAGS)					\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
 	-I$(includedir)					\
-	$(VFS_CFLAGS) $(WERROR)
+	$(VFS_CFLAGS) $(WERROR)				\
+	$(NULL)
+
 
 bin_PROGRAMS = file-types-capplet
 
@@ -19,7 +25,9 @@ file_types_capplet_SOURCES =			\
 	nautilus-mime-type-icon-entry.h		\
 	nautilus-mime-type-capplet.c		\
 	nautilus-mime-type-capplet-dialogs.c 	\
-	nautilus-mime-type-icon-entry.c
+	nautilus-mime-type-icon-entry.c		\
+	$(NULL)
+
 
 file_types_capplet_LDADD =						\
 			$(CAPPLET_LIBDIR) 				\
@@ -28,7 +36,9 @@ file_types_capplet_LDADD =						\
 			$(OAF_LIBS)					\
 			$(INTLLIBS) 					\
 			$(top_builddir)/libgnomevfs/libgnomevfs.la 	\
-			-lgdk_pixbuf
+			-lgdk_pixbuf					\
+			$/libuuid/libuuid.a				\
+			$(NULL)
 
 
 sysdir = $(datadir)/control-center

@@ -37,6 +37,7 @@
 #include <libgnomevfs/gnome-vfs-mime-info.h>
 #include <libgnomevfs/gnome-vfs-utils.h>
 
+#include "libuuid/uuid.h"
 #include "nautilus-mime-type-capplet.h"
 #include "nautilus-mime-type-capplet-dialogs.h"
 
@@ -68,7 +69,7 @@ static edit_dialog_details *edit_component_details = NULL;
 static void 	show_new_application_window  (GtkWidget *button, GtkWidget *list);
 static void 	show_edit_application_window (GtkWidget *button, GtkWidget *list);
 static void 	delete_selected_application  (GtkWidget *button, GtkWidget *list);
-static void	add_item_to_application_list (GtkWidget *list, 	const char *name, const char *mime_type,
+static void	add_item_to_application_list (GtkWidget *list, const char *id, const char *name, const char *mime_type,
 					      gboolean user_owned, int position);
 static void	find_message_label_callback  (GtkWidget *widget, gpointer callback_data);
 static void	find_message_label 	     (GtkWidget *widget, const char *message);
@@ -811,6 +812,12 @@ nautilus_mime_type_capplet_show_new_mime_window (void)
 		
 		/* Add new mime type here */
 		if (strlen (mime_type) > 3) {
+			/* This call creates the key */
+			gnome_vfs_mime_set_registered_type_key (mime_type, 
+						  "description", 
+						  description);
+						  
+			/* Ths call sets the user information */
 			gnome_vfs_mime_set_value (mime_type, 
 						  "description", 
 						  description);
@@ -1071,17 +1078,19 @@ nautilus_mime_type_capplet_show_new_extension_window (void)
  * Create or update a GnomeVFSMimeApplication and register
  * it with the mime database.
  */
-static void
+static char *
 add_or_update_application (GtkWidget *list, const char *name, const char *command,
 		     	   gboolean multiple, gboolean expects_uris, 
 			   gboolean update)
 {
 	GnomeVFSMimeApplication app, *original;
 	const char *mime_type;
-
+	uuid_t app_uuid;
+	char app_uuid_string[100];
+	
 	/* Check for empty strings.  Command can be empty. */
 	if (name[0] == '\0') {
-		return;
+		return NULL;
 	}
 
 	mime_type = nautilus_mime_type_capplet_get_selected_item_mime_type ();
@@ -1090,7 +1099,11 @@ add_or_update_application (GtkWidget *list, const char *name, const char *comman
 	/* It's ok to cast, we don't modify the application
 	 * structure and thus the name/command, this should really
 	 * use the application registry explicitly */
-	app.id = (char *)name;
+	 	
+	/* Generate unique application id */
+	uuid_generate(app_uuid);
+	uuid_unparse(app_uuid, app_uuid_string);	
+	app.id = app_uuid_string;	
 	app.name = (char *)name;
 	app.command = (char *)command;
 	app.can_open_multiple_files = multiple;
@@ -1100,7 +1113,7 @@ add_or_update_application (GtkWidget *list, const char *name, const char *comman
 	app.requires_terminal = FALSE;
 
 	if (update) {
-		original = gnome_vfs_mime_application_new_from_id (name);
+		original = gnome_vfs_mime_application_new_from_id (app.id);
 		if (original == NULL) {
 			const char *original_id;
 			GList *selection;
@@ -1110,18 +1123,18 @@ add_or_update_application (GtkWidget *list, const char *name, const char *comman
 			/* If there isn't a selection we cannot allow an edit */
 			selection = GTK_LIST (list)->selection;
 			if (selection == NULL || g_list_length (selection) <= 0) {
-				return;
+				return NULL;
 			}
 
 			/* Get application id and info */
 			item = GTK_LIST_ITEM (selection->data);
 			if (item == NULL) {
-				return;
+				return NULL;
 			}
 
 			original_id = gtk_object_get_data (GTK_OBJECT (item), "application_id");
 			if (original_id == NULL) {
-				return;
+				return NULL;
 			}
 			
 			/* Remove original application data */
@@ -1134,31 +1147,30 @@ add_or_update_application (GtkWidget *list, const char *name, const char *comman
 			gtk_container_remove (GTK_CONTAINER (list), GTK_WIDGET (item));
 
 			/* Add new widget and restore position */
-			add_item_to_application_list (list, name, mime_type,
+			add_item_to_application_list (list, original_id, name, mime_type,
 						      gnome_vfs_application_is_user_owned_application (original),
 						      position);
 		}
 	}
 	
 	gnome_vfs_application_registry_save_mime_application (&app);
-	gnome_vfs_application_registry_add_mime_type (name, mime_type);
+	gnome_vfs_application_registry_add_mime_type (app.id, mime_type);
 	gnome_vfs_application_registry_sync ();
 
 	gnome_vfs_mime_add_application_to_short_list (mime_type, app.id);
+	
+	return g_strdup (app.id);
 }
 
 static void
-add_item_to_application_list (GtkWidget *list, const char *name, const char *mime_type,
+add_item_to_application_list (GtkWidget *list, const char *id, const char *name, const char *mime_type,
 			      gboolean user_owned, int position)
 {
 	GtkListItem *list_item;
 	GList *short_list;
 
 	short_list = gnome_vfs_mime_get_short_list_applications (mime_type);
-
-	/* FIXME: Is it safe to use the name as the ID? Won't this allow naming conflicts? */
-	list_item = create_application_list_item (name, name, mime_type, user_owned,  short_list);
-
+	list_item = create_application_list_item (id, name, mime_type, user_owned,  short_list);
 	gnome_vfs_mime_application_list_free (short_list);
 
 	insert_item (GTK_LIST (list), list_item, position);
@@ -1236,7 +1248,7 @@ run_edit_or_new_application_dialog (const char *mime_type, GtkWidget *list, Gnom
 	const char *command;
 	int dialog_result;
 	gboolean entry_validated;
-	char *invalid_entry_message;
+	char *invalid_entry_message, *app_id;
 
 	g_assert (mime_type != NULL || application != NULL);
 	g_assert (GTK_IS_WIDGET (list));
@@ -1317,15 +1329,16 @@ run_edit_or_new_application_dialog (const char *mime_type, GtkWidget *list, Gnom
 
 			if (!handle_invalid_application_input (GTK_WINDOW (dialog), name, command)) {
 				entry_validated = TRUE;
-				add_or_update_application (list,
-							   name,
-						     	   command,
-		        			     	   gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (multiple_check_box)),
-		        			     	   gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (uri_check_box)),
-		        			     	   application != NULL);
-		        	if (application == NULL) {
-					add_item_to_application_list (list, name, mime_type, TRUE, -1);
-		        	}				
+				app_id = add_or_update_application (list,
+							    	    name,
+						     	   	    command,
+		        			     	   	    gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (multiple_check_box)),
+		        			     	   	    gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (uri_check_box)),
+		        			     	   	    application != NULL);
+		        	if (application == NULL && app_id != NULL) {
+					add_item_to_application_list (list, app_id, name, mime_type, TRUE, -1);					
+		        	}
+		        	g_free (app_id);
 			}
 		}
 	} while (dialog_result == GNOME_OK && !entry_validated);
