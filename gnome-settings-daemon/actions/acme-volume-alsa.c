@@ -92,7 +92,7 @@ acme_volume_alsa_set_mute (AcmeVolume *vol, gboolean val)
 	/* If we have a hardware mute */
 	if (self->_priv->has_mute)
 	{
-		snd_mixer_selem_set_playback_volume_all
+		snd_mixer_selem_set_playback_switch_all
 			(self->_priv->elem, !val);
 		acme_volume_alsa_close (self);
 		return;
