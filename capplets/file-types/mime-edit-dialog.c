@@ -281,6 +281,8 @@ fill_dialog (MimeEditDialog *dialog)
 	if (dialog->p->info->custom_line != NULL)
 		gnome_file_entry_set_filename (GNOME_FILE_ENTRY (WID ("program_entry")), dialog->p->info->custom_line);
 
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("needs_terminal_toggle")), dialog->p->info->needs_terminal);
+
 	if (dialog->p->info->mime_type != NULL && *dialog->p->info->mime_type != '\0')
 		gtk_widget_set_sensitive (WID ("mime_type_entry"), FALSE);
 
@@ -486,6 +488,8 @@ store_data (MimeEditDialog *dialog)
 	g_free (dialog->p->info->custom_line);
 	dialog->p->info->custom_line = g_strdup (gnome_file_entry_get_full_path (GNOME_FILE_ENTRY (WID ("program_entry")), FALSE));
 
+	dialog->p->info->needs_terminal = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (WID ("needs_terminal_toggle")));
+
 	ext_list = collect_filename_extensions (dialog);
 	dialog->p->info->file_extensions = merge_ext_lists (dialog->p->info->file_extensions, ext_list);
 	g_list_foreach (ext_list, (GFunc) g_free, NULL);
@@ -534,10 +538,13 @@ default_action_changed_cb (MimeEditDialog *dialog)
 	menu = GTK_MENU_SHELL (gtk_option_menu_get_menu (option_menu));
 	id = gtk_option_menu_get_history (option_menu);
 
-	if (id == g_list_length (menu->children) - 1)
+	if (id == g_list_length (menu->children) - 1) {
 		gtk_widget_set_sensitive (WID ("program_entry_box"), TRUE);
-	else
+		gtk_widget_set_sensitive (WID ("needs_terminal_toggle"), TRUE);
+	} else {
 		gtk_widget_set_sensitive (WID ("program_entry_box"), FALSE);
+		gtk_widget_set_sensitive (WID ("needs_terminal_toggle"), FALSE);
+	}
 }
 
 static void

@@ -1,9 +1,16 @@
 2002-01-11  Bradford Hovinen  <hovinen@ximian.com>
 
+	* mime-edit-dialog.c (default_action_changed_cb): Set sensitivity
+	of needs_terminal_toggle
+	(store_data): Set needs_terminal
+	(fill_dialog): Set needs_terminal_toggle
+
 	* mime-type-info.c (mime_type_info_free): Remove from dirty list
 	(mime_type_info_save): Use libuuid to generate a unique ID for the
 	custom app
 	(mime_type_info_load): Check for custom line based on name
+	(mime_type_info_load): Fetch needs_terminal
+	(mime_type_info_save): Store info->needs_terminal in app
 
 	* mime-edit-dialog.c (populate_application_list): Don't check
 	default action id if default action is NULL

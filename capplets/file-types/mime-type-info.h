@@ -47,6 +47,7 @@ struct _MimeTypeInfo
 	gchar                   *default_component_id;
 	GnomeVFSMimeApplication *default_action;
 	gchar                   *custom_line;
+	gboolean                 needs_terminal;
 	gchar                   *edit_line;
 	gchar                   *print_line;
 

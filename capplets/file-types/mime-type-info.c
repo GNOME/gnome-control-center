@@ -125,6 +125,8 @@ mime_type_info_load (GtkTreeModel *model, GtkTreeIter *iter)
 
 	if (info->default_action != NULL && !strcmp (info->default_action->name, tmp)) {
 		info->custom_line = g_strdup (info->default_action->command);
+		info->needs_terminal = gnome_vfs_application_registry_get_bool_value
+			(info->default_action->id, "requires_terminal", NULL);
 		gnome_vfs_mime_application_free (info->default_action);
 		info->default_action = NULL;
 	}
@@ -171,7 +173,7 @@ mime_type_info_save (const MimeTypeInfo *info)
 		app.can_open_multiple_files = FALSE;
 		app.expects_uris = FALSE;
 		app.supported_uri_schemes = NULL;
-		app.requires_terminal = FALSE;
+		app.requires_terminal = info->needs_terminal;
 
 		gnome_vfs_application_registry_save_mime_application (&app);
 		gnome_vfs_application_registry_sync ();
