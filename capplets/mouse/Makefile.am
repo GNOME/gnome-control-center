@@ -1,8 +1,8 @@
 cappletname = mouse
-bin_PROGRAMS = mouse-properties
+bin_PROGRAMS = mouse-properties-capplet
 
-mouse_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
-mouse_properties_SOURCES = \
+mouse_properties_capplet_LDADD = $(GNOMECC_CAPPLETS_LIBS)
+mouse_properties_capplet_SOURCES = \
 	main.c\
 	prefs-widget.c		prefs-widget.h \
 	preferences.c		preferences.h
