@@ -117,7 +117,7 @@ prefs_widget_init (PrefsWidget *prefs_widget)
 				     500, 350);
 
 	prefs_widget->dialog_data = 
-		glade_xml_new (GLADE_DATADIR "/sound-properties.glade",
+		glade_xml_new (GNOMECC_GLADE_DIR "/sound-properties.glade",
 			       "prefs_widget");
 
 	widget = glade_xml_get_widget (prefs_widget->dialog_data, 

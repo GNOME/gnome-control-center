@@ -255,8 +255,7 @@ main (int argc, char **argv)
 		token = 1;
 	}
 
-	gnome_window_icon_set_default_from_file
-		(GNOME_ICONDIR"/~icon~");
+	gnome_window_icon_set_default_from_file (GNOMECC_ICONS_DIR"/~icon~");
 
 #ifdef HAVE_XIMIAN_ARCHIVER
 	archive = ARCHIVE (archive_load (FALSE));
