@@ -1,3 +1,16 @@
+2002-04-07  Jody Goldberg <jody@gnome.org>
+
+	* file-types-properties.glade : assign response ids to the buttons.
+
+	* file-types-capplet.c (apply_cb) : delete and merge into.
+	(cb_file_type_dialog_response) : here.
+	(create_dialog) : connect to reponse here.
+	(main) : rather than connecting to buttons directly here.
+
+	* mime-edit-dialog.c (validate_data) : actually display the dialog.
+	(fill_dialog) : Add some protection.
+	(safe_set_entry) : new safety utility.
+
 2002-04-07  Bradford Hovinen  <hovinen@ximian.com>
 
 	* model-entry.c (model_entry_remove_child): Don't signal row

@@ -357,13 +357,30 @@ mime_add_dialog_new (GtkTreeModel *model)
 }
 
 static void
+safe_set_entry (MimeEditDialog *dialog, char const *widget, char const *txt)
+{
+	GtkEntry *entry =  GTK_ENTRY (WID (widget));
+
+	g_return_if_fail (entry != NULL);
+
+	if (txt == NULL)
+		txt = "";
+	gtk_entry_set_text (entry, txt);
+}
+
+static void
 fill_dialog (MimeEditDialog *dialog)
 {
+	g_return_if_fail (dialog->p->info != NULL);
+
 	mime_type_info_load_all (dialog->p->info);
 
-	gtk_entry_set_text (GTK_ENTRY (WID ("description_entry")), dialog->p->info->description);
-	gtk_entry_set_text (GTK_ENTRY (WID ("mime_type_entry")), dialog->p->info->mime_type);
-	gtk_entry_set_text (GTK_ENTRY (WID ("category_entry")), mime_type_info_get_category_name (dialog->p->info));
+	safe_set_entry (dialog, "description_entry",
+		dialog->p->info->description);
+	safe_set_entry (dialog, "mime_type_entry",
+		dialog->p->info->mime_type);
+	safe_set_entry (dialog, "category_entry",
+		mime_type_info_get_category_name (dialog->p->info));
 
 	dialog->p->use_cat_dfl = dialog->p->info->use_category;
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("use_category_defaults_toggle")), dialog->p->use_cat_dfl);
@@ -668,7 +685,7 @@ static gboolean
 validate_data (MimeEditDialog *dialog) 
 {
 	const gchar *tmp;
-	GtkWidget *err_dialog;
+	GtkWidget *err_dialog = NULL;
 
 	tmp = gtk_entry_get_text (GTK_ENTRY (WID ("mime_type_entry")));
 
@@ -679,23 +696,20 @@ validate_data (MimeEditDialog *dialog)
 							     GTK_BUTTONS_OK,
 							     _("Invalid MIME type. Please enter a valid MIME type, or "
 							       "leave the field blank to have one generated for you."));
-
-			gtk_window_set_modal (GTK_WINDOW (err_dialog), TRUE);
-
-			return FALSE;
 		}
 		else if (dialog->p->is_add && (gnome_vfs_mime_type_is_known (tmp) || get_mime_type_info (tmp) != NULL)) {
 			err_dialog = gtk_message_dialog_new (GTK_WINDOW (dialog->p->dialog_win),
 							     0, GTK_MESSAGE_ERROR,
 							     GTK_BUTTONS_OK,
 							     _("There already exists a MIME type of that name."));
-
-			gtk_window_set_modal (GTK_WINDOW (err_dialog), TRUE);
-
-			return FALSE;
 		}
 	}
 
+	if (err_dialog != NULL) {
+			gtk_window_set_modal (GTK_WINDOW (err_dialog), TRUE);
+		gtk_dialog_run (GTK_DIALOG (err_dialog));
+			return FALSE;
+		}
 	return TRUE;
 }
 

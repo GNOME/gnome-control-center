@@ -176,6 +176,16 @@ remove_cb (GtkButton *button, GladeXML *dialog)
 	selection_changed_cb (selection, dialog);
 }
 
+static void
+cb_file_type_dialog_response (GtkDialog *dialog, gint response_id)
+{
+	if (response_id == GTK_RESPONSE_APPLY) {
+		model_entry_commit_dirty_list ();
+		model_entry_commit_delete_list ();
+	} else
+		gtk_main_quit ();
+}
+
 static GladeXML *
 create_dialog (void) 
 {
@@ -234,14 +244,11 @@ create_dialog (void)
 
 	g_signal_connect (G_OBJECT (WID ("mime_types_tree")), "row-activated", (GCallback) row_activated_cb, dialog);
 
-	return dialog;
-}
+	g_signal_connect (G_OBJECT (WID ("main_dialog")),
+		"response",
+		G_CALLBACK (cb_file_type_dialog_response), NULL);
 
-static void
-apply_cb (void) 
-{
-	model_entry_commit_dirty_list ();
-	model_entry_commit_delete_list ();
+	return dialog;
 }
 
 static void
@@ -253,10 +260,10 @@ dialog_done_cb (MimeEditDialog *dialog, gboolean done, MimeTypeInfo *info)
 	gtk_main_quit ();
 }
 
+
 int
 main (int argc, char **argv) 
 {
-	GladeXML     *dialog;
 	gchar        *mime_type;
 	GtkTreeModel *model;
 	MimeTypeInfo *info = NULL;
@@ -274,10 +281,7 @@ main (int argc, char **argv)
 	gnome_program_init ("gnome-file-types-properties", VERSION, LIBGNOMEUI_MODULE, argc, argv, NULL);
 
 	if (mime_type == NULL) {
-		dialog = create_dialog ();
-
-		g_signal_connect (G_OBJECT (WID ("main_apply_button")), "clicked", (GCallback) apply_cb, NULL);
-		g_signal_connect (G_OBJECT (WID ("main_close_button")), "clicked", (GCallback) gtk_main_quit, NULL);
+		GladeXML *dialog = create_dialog ();
 		gtk_widget_show_all (WID ("main_dialog"));
 	} else {
 		model = GTK_TREE_MODEL (mime_types_model_new (FALSE));
