@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2002-11-28 01:16+0100\n"
-"PO-Revision-Date: 2002-11-28 01:17+0100\n"
+"POT-Creation-Date: 2002-12-03 02:36+0100\n"
+"PO-Revision-Date: 2002-12-03 02:39+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -235,6 +235,7 @@ msgid "pixels/second"
 msgstr "bildpunkter/sekund"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:42
+#: capplets/windows/gnome-window-properties.glade.h:7
 msgid "seconds"
 msgstr "sekunder"
 
@@ -785,7 +786,7 @@ msgid "Minimizing and Maximizing"
 msgstr "Minimering och maximering"
 
 #: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
-#: capplets/windows/gnome-window-properties.c:600
+#: capplets/windows/gnome-window-properties.c:649
 msgid "Meta"
 msgstr "Meta"
 
@@ -2056,7 +2057,7 @@ msgstr "_Avsluta"
 msgid "_Save"
 msgstr "_Spara"
 
-#: capplets/windows/gnome-window-properties.c:352
+#: capplets/windows/gnome-window-properties.c:378
 #, c-format
 msgid ""
 "<b>Cannot start the preferences application for your window manager</b>\n"
@@ -2067,45 +2068,47 @@ msgstr ""
 "\n"
 "%s"
 
-#: capplets/windows/gnome-window-properties.c:575
+#: capplets/windows/gnome-window-properties.c:624
 msgid "Control"
 msgstr "Control"
 
-#: capplets/windows/gnome-window-properties.c:580
+#: capplets/windows/gnome-window-properties.c:629
 msgid "Alt"
 msgstr "Alt"
 
-#: capplets/windows/gnome-window-properties.c:586
+#: capplets/windows/gnome-window-properties.c:635
 msgid "Hyper"
 msgstr "Hyper"
 
-#: capplets/windows/gnome-window-properties.c:593
-msgid "Super"
-msgstr "Super"
+#: capplets/windows/gnome-window-properties.c:642
+msgid "Super (or \"Windows logo\")"
+msgstr "Super (eller \"Windows-logotypen\")"
 
 #: capplets/windows/gnome-window-properties.glade.h:1
-msgid "To _move windows, click while holding down:"
-msgstr "För att _flytta fönster, klicka och håll nere:"
+msgid "To _move a window, press-and-hold this key then grab the window:"
+msgstr ""
+"För att _flytta ett fönster trycker du på denna tangent och tar sedan tag i "
+"fönstret:"
 
 #: capplets/windows/gnome-window-properties.glade.h:2
 msgid "Window Preferences"
 msgstr "Fönsterinställningar"
 
 #: capplets/windows/gnome-window-properties.glade.h:3
-msgid "_Double-click window titles to:"
-msgstr "_Dubbelklicka fönstertitlar till:"
+msgid "_Double-click titlebar to perform this action:"
+msgstr "_Dubbelklicka på titelraden för att utföra denna åtgärd:"
 
 #: capplets/windows/gnome-window-properties.glade.h:4
-msgid "_Raise selected windows after a short time"
-msgstr "_Höj markerade fönster efter en kort tid"
+msgid "_Interval before raising:"
+msgstr "_Fördröjning innan upphöjning:"
 
 #: capplets/windows/gnome-window-properties.glade.h:5
-msgid "_Select windows when the mouse moves over them"
-msgstr "_Markera fönster när muspekaren rör sig över dem"
+msgid "_Raise selected windows after an interval"
+msgstr "_Höj markerade fönster efter en fördröjning"
 
 #: capplets/windows/gnome-window-properties.glade.h:6
-msgid "_Tenths of a second before raising the window:"
-msgstr "_Tiondelar av en sekund innan fönstret höjs:"
+msgid "_Select windows when the mouse moves over them"
+msgstr "_Markera fönster när muspekaren rör sig över dem"
 
 #: capplets/windows/window-properties.desktop.in.h:1
 msgid "Window Properties"
@@ -2348,6 +2351,88 @@ msgstr "Maximera"
 #: libwindow-settings/metacity-window-manager.c:374
 msgid "Roll up"
 msgstr "Rulla upp"
+
+#: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
+msgid ""
+"If true, the mime handlers for text/plain and text/* will be kept in sync"
+msgstr ""
+"Om sant kommer mime-hanterarna för text/plain och text/* att hållas "
+"synkroniserade"
+
+#: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:2
+msgid "Sync text/plain and text/* handlers"
+msgstr "Synkronisera text/plain- och /text/*-hanterare"
+
+#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:1
+msgid "Display a dialog when there are errors running XScreenSaver"
+msgstr ""
+"Visa ett dialogfönster när det uppstår fel vid körandet av XScreenSaver"
+
+#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:2
+msgid "Run XScreenSaver at login"
+msgstr "Kör XScreenSaver vid inloggning"
+
+#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:3
+msgid "Show Startup Errors"
+msgstr "Visa uppstartsfel"
+
+#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:4
+msgid "Start XScreenSaver"
+msgstr "Starta XScreenSaver"
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:1
+msgid "Antialising"
+msgstr "Antialiasing"
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:2
+msgid "DPI"
+msgstr "DPI"
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:3
+msgid "Hinting"
+msgstr "Tipsande"
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:4
+msgid "RGBA Order"
+msgstr "RGBA-ordning"
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:5
+msgid ""
+"Resolution used for converting font sizes to pixel sizes, in dots per inch"
+msgstr ""
+"Upplösning som används för att konvertera typsnittsstorlekar till "
+"bildpunktsstorlekar, i punkter per tum"
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:6
+msgid ""
+"The order of elements subpixel elements on an LCD screen; only used when "
+"antialising is set to \"rgba\". Possible values are: \"rgb\" - red on left, "
+"most common. \"bgr\" - blue on left. \"vrgb\" - red on top. \"vbgr\" - red "
+"on bottom."
+msgstr ""
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:7
+msgid ""
+"The type of antialiasing to use when rendering fonts. Possible values are: "
+"\"none\" - no antialiasing. \"grayscale\" - standard grayscale antialising. "
+"\"rgba\" - subpixel antialising. (LCD screens only)."
+msgstr ""
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:8
+msgid ""
+"The type of hinting to use when rendering fonts. Possible values are: \"none"
+"\" - no hinting, \"slight\", \"medium\", and \"full\" - as much hinting as "
+"possible; may cause distortion of letter forms."
+msgstr ""
+
+#~ msgid "Super"
+#~ msgstr "Super"
+
+#~ msgid "To _move windows, click while holding down:"
+#~ msgstr "För att _flytta fönster, klicka och håll nere:"
+
+#~ msgid "_Tenths of a second before raising the window:"
+#~ msgstr "_Tiondelar av en sekund innan fönstret höjs:"
 
 #~ msgid "Filename extensions"
 #~ msgstr "Filnamnstillägg"
@@ -2708,9 +2793,6 @@ msgstr "Rulla upp"
 #~ msgid "_Custom keyboard bell:"
 #~ msgstr "_Egen tangentbordssignal:"
 
-#~ msgid "_Delay before repeating:"
-#~ msgstr "_Fördröjning innan upprepning:"
-
 #~ msgid "Toolbars & Menus"
 #~ msgstr "Verktygsrader och menyer"
 
@@ -2855,9 +2937,6 @@ msgstr "Rulla upp"
 
 #~ msgid "Configure which non-session aware programs are started up"
 #~ msgstr "Konfigurera vilka sessionsomedvetna program som startas upp"
-
-#~ msgid "Startup Programs"
-#~ msgstr "Uppstartsprogram"
 
 #~ msgid "Select an icon..."
 #~ msgstr "Välj en ikon..."
@@ -4826,9 +4905,6 @@ msgstr "Rulla upp"
 #~ msgid "Go to suspend mode after"
 #~ msgstr "Gå i suspend-läge efter"
 
-#~ msgid "One screensaver all the time"
-#~ msgstr "En skärmsläckare hela tiden"
-
 #~ msgid "R_equire password to unlock screen"
 #~ msgstr "_Kräv lösenord för att låsa upp skärmen"
 
@@ -4837,9 +4913,6 @@ msgstr "Rulla upp"
 
 #~ msgid "Random (checked screensavers)"
 #~ msgstr "Slumpmässigt (markerade skärmsläckare)"
-
-#~ msgid "S_tart screensaver after "
-#~ msgstr "S_tarta skärmsläckaren efter "
 
 #~ msgid "S_witch screensavers after "
 #~ msgstr "_Byt skärmsläckare efter "
