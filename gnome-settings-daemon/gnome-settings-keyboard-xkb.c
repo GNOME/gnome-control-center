@@ -26,6 +26,7 @@
 # include "config.h"
 #endif
 
+#include <glib/gstrfuncs.h>
 #include <gdk/gdk.h>
 #include <gdk/gdkx.h>
 #include <gconf/gconf-client.h>
@@ -43,6 +44,9 @@
 
 static GSwitchItXkbConfig gswic;
 static gboolean initedOk;
+
+static const char DISABLE_XMM_WARNING_KEY[] =
+    "/desktop/gnome/peripherals/keyboard/disable_xmm_and_xkb_warning";
 
 static void
 activation_error (void)
@@ -106,12 +110,64 @@ apply_settings (void)
 	GSwitchItXkbConfigTerm (&gswic);
 }
 
+static void
+gnome_settings_keyboard_xkb_chk_lcl_xmm_response (GtkDialog * dlg,
+						  gint response)
+{
+	GConfClient *gcc = gconf_client_get_default ();
+	switch (response) {
+	case GTK_RESPONSE_OK:
+		gconf_client_set_bool (gcc, DISABLE_XMM_WARNING_KEY, TRUE,
+				       NULL);
+		break;
+	}
+	g_object_unref (G_OBJECT (gcc));
+	gtk_widget_destroy (GTK_WIDGET (dlg));
+}
+
+static void
+gnome_settings_keyboard_xkb_chk_lcl_xmm (void)
+{
+	GConfClient *gcc = gconf_client_get_default ();
+	gboolean disableWarning =
+	    gconf_client_get_bool (gcc, DISABLE_XMM_WARNING_KEY, NULL);
+	GDir *homeDir;
+	G_CONST_RETURN gchar *fname;
+	g_object_unref (G_OBJECT (gcc));
+	if (disableWarning)
+		return;
+
+	homeDir = g_dir_open (g_get_home_dir (), 0, NULL);
+	if (homeDir == NULL)
+		return;
+	while ((fname = g_dir_read_name (homeDir)) != NULL)
+		if (strlen (fname) >= 8
+		    && !g_ascii_strncasecmp (fname, ".xmodmap", 8)) {
+			GtkWidget *msg =
+			    gtk_message_dialog_new_with_markup (NULL, 0,
+								GTK_MESSAGE_WARNING,
+								GTK_BUTTONS_OK,
+								_
+								("You have a keyboard remapping file (%s) in your home directory whose contents will now be ignored."
+								 " You can use the keyboard preferences to restore them."),
+								fname);
+			g_signal_connect (msg, "response",
+					  G_CALLBACK
+					  (gnome_settings_keyboard_xkb_chk_lcl_xmm_response),
+					  NULL);
+			gtk_widget_show (msg);
+			break;
+		}
+	g_dir_close (homeDir);
+}
+
 void
 gnome_settings_keyboard_xkb_init (GConfClient * client)
 {
 	if (!XklInit (GDK_DISPLAY ())) {
 		XklBackupNamesProp ();
 		initedOk = TRUE;
+		gnome_settings_keyboard_xkb_chk_lcl_xmm ();
 		gnome_settings_daemon_register_callback
 		    ("/desktop/gnome/peripherals/keyboard/xkb",
 		     (KeyCallbackFunc) apply_settings);
