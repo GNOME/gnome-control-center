@@ -120,6 +120,9 @@ GNOMECC_CAPPLETS_CFLAGS="${CAPPLET_CFLAGS} -I\$(top_srcdir)/intl -I\$(top_srcdir
 AC_DEFINE_UNQUOTED(GNOMECC_ICONS_DIR, "${datadir}/${PACKAGE}/icons")
 GNOMECC_ICONS_DIR=""${datadir}/${PACKAGE}/icons""
 AC_SUBST(GNOMECC_ICONS_DIR)
+AC_DEFINE_UNQUOTED(GNOMECC_GLADE_DIR, "${datadir}/${PACKAGE}/interfaces")
+GNOMECC_GLADE_DIR=""${datadir}/${PACKAGE}/interfaces""
+AC_SUBST(GNOMECC_GLADE_DIR)
 
 AC_SUBST(GNOMECC_CAPPLETS_CFLAGS)
 
@@ -136,6 +139,10 @@ dnl Variables for config_archiverConf.sh.in
 dnl =======================================
 
 
+dnl consdir = $(GNOMECC_ICONS_DIR)\
+dnl icons_DATA = $(cappletname)-capplet.png\
+dnl Gladedir = $(datadir)/control-center-data\
+dnl Glade_DATA = $(cappletname)-properties.glade\
 
 
 dnl ==============================================
@@ -143,12 +150,7 @@ dnl End : Macro for the common code
 dnl ==============================================
 AC_DEFUN(AC_PROG_GNOMECC_CAPPLETS,
 [
-GNOMECC_CAPPLETS_DESKTOP_IN_RULE='iconsdir = $(GNOMECC_ICONS_DIR) \
-icons_DATA = $(cappletname)-capplet.png \
-Gladedir = $(datadir)/control-center-data \
-Glade_DATA = $(cappletname)-properties.glade \
-\
-$(desktop).in: \%.desktop.in: \%.desktop.in.in\
+GNOMECC_CAPPLETS_DESKTOP_IN_RULE='$(desktop).in: \%.desktop.in: \%.desktop.in.in\
 	sed s#Icon=.\*#Icon=$(GNOMECC_ICONS_DIR)/${cappletname}-capplet.png# < $< \> ${cappletname}.desktop.in\
 \
 install-data-local:\
