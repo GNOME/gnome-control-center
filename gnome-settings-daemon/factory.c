@@ -16,7 +16,7 @@ int main (int argc, char *argv [])
 {
   GnomeClient *session;
   Bonobo_RegistrationResult ret;
-  gchar *restart_argv[] = { "gnome-settings-daemon", NULL, 0 };
+  gchar *restart_argv[] = { "gnome-settings-daemon", NULL, NULL };
 
   restart_argv[1] = *argv;
 

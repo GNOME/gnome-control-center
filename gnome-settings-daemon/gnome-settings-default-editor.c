@@ -85,15 +85,8 @@ vfs_change_cb (GnomeVFSMIMEMonitor *monitor, GConfClient *client)
 
 	PRINT_STATE;
 
-	/* 
-	   QUESTION from svu: what is this? Checking the function?
-	   I constantly get warnings/errors on it. 
-	   Should it be 'sync_changes' instead?
-
-	if (!sync_changes_cb)
+	if (!sync_changes)
 		return;
-	*/
-
 	
 	star_app  = gnome_vfs_mime_get_default_application ("text/*");
 	plain_app = gnome_vfs_mime_get_default_application ("text/plain");

@@ -330,7 +330,7 @@ do_grab (gboolean grab,
 }
 
 void
-binding_register_keys ()
+binding_register_keys (void)
 {
   GSList *li;
   

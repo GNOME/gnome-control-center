@@ -1,3 +1,12 @@
+2004-12-25  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* factory.c: (main): NULL vs. 0.
+	* gnome-settings-default-editor.c: (vfs_change_cb): Fix a test to
+	use the boolean instead of the return value from a void function.
+	This has been sitting in bugzilla forever and now other people start
+	adding comments to the code about it so I'm just going to commit.
+	* gnome-settings-keybindings.c: (binding_register_keys): ANSIfication.
+
 2004-12-24  Sergey V. Udaltsov  <svu@gnome.org>
 
 	* gnome-settings-keyboard-xkb.c: from now on, the applet only works as
