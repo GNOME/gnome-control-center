@@ -326,8 +326,12 @@ fill_dialog (ServiceEditDialog *dialog)
 		gtk_widget_set_sensitive (WID ("protocol_entry"), FALSE);
 	}
 
+#if 0  /* Keep the look at content toggle disabled until we support that in libgnome */
 	if (gnome_vfs_method_get (dialog->p->info->protocol) == NULL)
 		gtk_widget_set_sensitive (WID ("look_at_content_toggle"), FALSE);
+#else
+		gtk_widget_set_sensitive (WID ("look_at_content_toggle"), FALSE);
+#endif
 
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("look_at_content_toggle")), !dialog->p->info->run_program);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("run_program_toggle")), dialog->p->info->run_program);

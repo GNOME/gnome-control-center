@@ -113,7 +113,11 @@ service_info_load_all (ServiceInfo *info)
 
 	service_info_get_description (info);
 
+#if 0
 	info->run_program = get_bool (info, "type");
+#else
+	info->run_program = TRUE;
+#endif
 
 	if (info->custom_line == NULL)
 		info->custom_line = get_string (info, "command");
