@@ -1,3 +1,10 @@
+2005-01-27  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* theme-thumbnailer.c: (main): Don't leak the theme name
+	if the theme is invalid.
+	* themus-properties-view.c: (themus_properties_view_init):
+	NULL vs. 0 in gnome_theme_init()
+
 2005-01-04  Shakti Sen <shprasad@novell.com>
 
 	* theme-thumbnailer.c (main): Added the full path of the theme

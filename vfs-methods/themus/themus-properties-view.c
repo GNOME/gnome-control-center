@@ -117,7 +117,7 @@ themus_properties_view_init (ThemusPropertiesView *self)
 						 THEMUS_TYPE_PROPERTIES_VIEW,
 						 ThemusPropertiesViewDetails);
 
-    gnome_theme_init (FALSE);
+    gnome_theme_init (NULL);
 
     gtk_table_resize (GTK_TABLE (self), 3, 2);
     gtk_table_set_homogeneous (GTK_TABLE (self), FALSE);

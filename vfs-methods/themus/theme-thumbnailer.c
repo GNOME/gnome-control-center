@@ -148,6 +148,7 @@ main(int argc, char **argv)
 
 	if (!g_file_test (theme_name, G_FILE_TEST_EXISTS)) {
 		g_printerr("%s is not a valid theme\n", argv[1]);
+		g_free (theme_name);
 		return 1;
 	}
 		
