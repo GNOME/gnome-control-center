@@ -94,11 +94,10 @@ dnl ==============================================
 dnl Check for --enable-bonobo-conf option
 dnl ==============================================
 
-CC_USE_BONOBO_CONF=yes
-
 AC_ARG_ENABLE(bonobo-conf,[     --disable-bonobo-conf    Disable bonobo-conf support in the capplets],[
-],[
 CC_USE_BONOBO_CONF=no
+],[
+CC_USE_BONOBO_CONF=yes
 ])
 
 if test "x$CC_USE_BONOBO_CONF" = "xyes"; then
