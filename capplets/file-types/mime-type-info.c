@@ -189,6 +189,7 @@ void
 mime_type_info_free (MimeTypeInfo *info)
 {
 	g_hash_table_remove (mime_type_table, info->mime_type);
+	dirty_list = g_list_remove (dirty_list, info);
 
 	g_free (info->mime_type);
 	g_free (info->description);
