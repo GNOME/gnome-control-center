@@ -9,15 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-12-20 23:11+0100\n"
-"PO-Revision-Date: 2004-12-03 18:41+0200\n"
+"POT-Creation-Date: 2004-12-22 22:03+0200\n"
+"PO-Revision-Date: 2004-12-22 22:12+0200\n"
 "Last-Translator: Žygimantas Beručka <uid0@akl.lt>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%"
-"100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
 msgid "<b>Applications</b>"
@@ -149,7 +148,6 @@ msgstr "    "
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:1
 #: capplets/file-types/file-types-properties.glade.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:2
 #: capplets/network/gnome-network-preferences.glade.h:2
 #: capplets/theme-switcher/theme-install.glade.h:1
 #: capplets/theme-switcher/theme-properties.glade.h:1
@@ -273,7 +271,7 @@ msgstr ""
 "pačių klavišų paspaudimų."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
 msgid "S_peed:"
 msgstr "G_reitis:"
 
@@ -302,7 +300,7 @@ msgid "_Only accept keys held for:"
 msgstr "_Reaguoti į klavišus jei jie nuspausti:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:38
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:39
 msgid "_Type to test settings:"
 msgstr "Paspausdink nustatymų _patikrinimui:"
 
@@ -426,8 +424,9 @@ msgstr "Nėra darbastalio paveikslėlio"
 #: capplets/background/gnome-wp-item.c:289
 msgid "pixel"
 msgid_plural "pixels"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "taškelis"
+msgstr[1] "taškeliai"
+msgstr[2] "taškelių"
 
 #: capplets/common/activate-settings-daemon.c:18
 msgid ""
@@ -454,7 +453,7 @@ msgstr "Tiesiog pritaikyti pakeitimus ir išeiti"
 
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:765
-#: capplets/keyboard/gnome-keyboard-properties.c:224
+#: capplets/keyboard/gnome-keyboard-properties.c:225
 #: capplets/mouse/gnome-mouse-properties.c:812
 #: capplets/sound/sound-properties-capplet.c:244
 msgid "Retrieve and store legacy settings"
@@ -1573,12 +1572,12 @@ msgstr "Priskirti komandas susiejimo klavišams"
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Įvyko klaida bandant parodyti klaviatūros įtaisą: %s"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:201
+#: capplets/keyboard/gnome-keyboard-properties.c:202
 msgid "_Accessibility"
 msgstr "_Prieinamumas"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:220
-#: capplets/keyboard/gnome-keyboard-properties.c:222
+#: capplets/keyboard/gnome-keyboard-properties.c:221
+#: capplets/keyboard/gnome-keyboard-properties.c:223
 #: capplets/sound/sound-properties-capplet.c:240
 #: capplets/sound/sound-properties-capplet.c:242
 msgid ""
@@ -1586,61 +1585,65 @@ msgid ""
 msgstr ""
 "Pritaikyk nustatymus ir išeik (tiktai suderinamumui; dabar tvarkoma demono)"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:226
+#: capplets/keyboard/gnome-keyboard-properties.c:227
 msgid "Start the page with the typing break settings showing"
 msgstr "Pradėti puslapį su rodomais spausdinimo pertraukėlės nustatymais"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:2
 msgid "..."
 msgstr "..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
 msgid "<b>Cursor Blinking</b>"
 msgstr "<b>Žymeklio mirksėjimas</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<b>Repeat Keys</b>"
 msgstr "<b>Kartojimo Klavišai</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr "<b>Už_rakinti ekraną priverčiant pailsėti po spausdinimo</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>Greitas</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>Ilgas</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>Trumpas</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Lėtas</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
 msgid "A_vailable layouts:"
 msgstr "Prieinami išdėstymai"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "A_vailable options:"
 msgstr "_Prieinami nustatymai:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "All_ow postponing of breaks"
 msgstr "Le_isti pertraukėlių atidėjimą"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Check if breaks are allowed to be postponed"
 msgstr "Pažymėk jeigu nori, kad pertraukėles būtų galima atidėti"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Choose a keyboard model"
 msgstr "Pasirinkite klaviatūros modelį"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+msgid "Choose a layout"
+msgstr "Pasirinkite išdėstymą"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "Cursor _blinks in text boxes and fields"
@@ -1687,55 +1690,59 @@ msgid "Microsoft Natural Keyboard"
 msgstr "Microsoft natūrali klaviatūra"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:27
+msgid "Preview:"
+msgstr "Peržiūra:"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
 msgid "Reset to de_faults"
 msgstr "Atstatyti į į_prastus"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:30
+msgid "Separate _group for each window"
+msgstr "Atskira _grupė kiekvienam langui"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "Typing Break"
 msgstr "Spausdinimo pertraukėlė"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:30
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:32
 msgid "_Accessibility..."
 msgstr "_Prieinamumas..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:33
 msgid "_Break interval lasts:"
-msgstr "_Pertraukėlės "
+msgstr "_Pertraukėlės tęsiasi:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:32
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:34
 msgid "_Delay:"
 msgstr "_Delsa:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:33
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:35
 msgid "_Models"
 msgstr "_Modeliai"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:34
-msgid "_Preview"
-msgstr "_Peržiūra"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:35
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:36
 msgid "_Selected layouts:"
 msgstr "_Pasirinkti išdėstymai:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:36
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:37
 msgid "_Selected options:"
 msgstr "_Pasirinkti  nustatymai:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:37
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:38
 msgid "_Speed:"
 msgstr "_Greitis:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:39
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:40
 msgid "_Work interval lasts:"
 msgstr "_Darbo periodas tęsiasi:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:40
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:41
 msgid "minutes"
 msgstr "min."
 
-#: capplets/keyboard/gnome-keyboard-properties-xkb.c:69
-#: capplets/keyboard/gnome-keyboard-properties-xkb.c:95
+#: capplets/keyboard/gnome-keyboard-properties-xkb.c:71
+#: capplets/keyboard/gnome-keyboard-properties-xkb.c:97
 msgid "Unknown"
 msgstr "Nežinomas"
 
@@ -1936,9 +1943,8 @@ msgid "Network Proxy"
 msgstr "Tarpinė tinklo stotis"
 
 #: capplets/network/gnome-network-preferences.desktop.in.in.h:2
-#, fuzzy
 msgid "Set your network proxy preferences"
-msgstr "Tarpinės tinklo stoties nustatymai"
+msgstr "Nustatyti Jūsų tarpinės tinklo stoties nustatymams"
 
 #: capplets/network/gnome-network-preferences.glade.h:1
 msgid "      "
@@ -2429,9 +2435,8 @@ msgid "_Select windows when the mouse moves over them"
 msgstr "_Pasirinkti langus pelei praeinant virš jų"
 
 #: capplets/windows/window-properties.desktop.in.in.h:1
-#, fuzzy
 msgid "Set your window properties"
-msgstr "Langų savybės"
+msgstr "Nustatykit Jūsų langų savybes"
 
 #: capplets/windows/window-properties.desktop.in.in.h:2
 msgid "Windows"
@@ -3049,8 +3054,8 @@ msgid ""
 "\" - no hinting, \"slight\", \"medium\", and \"full\" - as much hinting as "
 "possible; may cause distortion of letter forms."
 msgstr ""
-"Hinting'o tipas atvaizduojant šriftus. Galimos reikšmės yra: \"Jokio\" - "
-"jokio hinting'o, \"nežymus\", \"vidutinis\", ir \"pilnas\" - toks hinting'as "
+"Hinting'o tipas atvaizduojant šriftus. Galimos reikšmės yra: „none“ - "
+"jokio hinting'o, „slight“, „medium“, ir „full“ - toks hinting'as "
 "koks tik įmanomas; gali sukelti raidžių formų iškraipymą."
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:1
@@ -3058,73 +3063,70 @@ msgid ""
 "A collection of scripts to run whenever the keyboard state is reloaded. "
 "Useful for re-applying xmodmap based adjustments"
 msgstr ""
+"Scenarijų, paleidžiamų kai perkraunama klaviatūros būsena, sąrašas. "
+"Naudinga iš naujo pritaikant xmodmap paremtus reguliavimus"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
 msgid "Default group, assigned on window creation"
-msgstr ""
+msgstr "Įprasta grupė, priskiriama sukūrus langą"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
 msgid "Keep and manage separate group per window"
-msgstr ""
+msgstr "Palikti ir tvarkyti atskirą grupę kiekvienam langui"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
-#, fuzzy
 msgid "Keyboard Update Handlers"
-msgstr "Klaviatūros _modelis:"
+msgstr "Klaviatūros atnaujinimo valdikliai"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
-#, fuzzy
 msgid "Keyboard layout"
-msgstr "XKB klaviatūros išdėstymas"
+msgstr "Klaviatūros išdėstymas"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:6
-#, fuzzy
 msgid "Keyboard model"
-msgstr "Klaviatūros _modelis:"
+msgstr "Klaviatūros modelis"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:7
-#, fuzzy
 msgid "Keyboard options"
-msgstr "Klavišų susiejimai"
+msgstr "Klaviatūros parinktys"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:8
-#, fuzzy
 msgid "Keyboard settings in gconf will be overridden from the system ASAP"
 msgstr ""
-"XKB nustatymai esantys gconf bus perrašyti iš sistemos kiek įmanoma greičiau"
+"Klaviatūros nustatymai esantys gconf bus perrašyti iš sistemos kiek "
+"įmanoma greičiau"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
 msgid "Save/restore indicators together with layout groups"
-msgstr ""
+msgstr "Išsaugoti/atstatyti indikatorius kartu su išdėstymų grupėmis"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
 msgid "Show layout names instead of group names"
-msgstr ""
+msgstr "Rodyti išdėstymų vardus vietoje grupių vardų"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:11
 msgid ""
 "Show layout names instead of group names (only for versions of XFree "
 "supporting multiple layouts)"
 msgstr ""
+"Rodyti išdėstymų vardus vietoje grupių vardų (tik XFree versijoms "
+"palaikančioms keletą išdėstymų)"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:12
-#, fuzzy
 msgid ""
 "Very soon, keyboard settings in gconf will be overridden (from the system "
 "configuration)"
 msgstr ""
-"Labai greitai, XKB nustatymai esantys gconf bus perrašyti (iš sistemos "
-"konfigūracijos)"
+"Labai greitai, klaviatūros nustatymai esantys gconf bus perrašyti (iš "
+"sistemos konfigūracijos)"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:13
-#, fuzzy
 msgid "keyboard layout"
-msgstr "XKB klaviatūros išdėstymas"
+msgstr "klaviatūros išdėstymas"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
-#, fuzzy
 msgid "keyboard model"
-msgstr "XKB klaviatūros modelis"
+msgstr "klaviatūros modelis"
 
 #: typing-break/drw-break-window.c:209
 msgid "_Postpone break"
@@ -3145,7 +3147,7 @@ msgstr "/_Apie"
 
 #: typing-break/drwright.c:139
 msgid "/_Take a Break"
-msgstr "/_Pailsėk"
+msgstr "/_Pailsėti"
 
 #: typing-break/drwright.c:491
 #, c-format
