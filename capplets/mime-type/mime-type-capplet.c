@@ -4,7 +4,8 @@
  */
 #include <config.h>
 #include "capplet-widget.h"
-#include "gnome.h"
+#include <gnome.h>
+#include <libgnomeui/gnome-window-icon.h>
 #include <string.h>
 #include <sys/types.h>
 #include <dirent.h>
@@ -125,6 +126,7 @@ main (int argc, char **argv)
         init_results = gnome_capplet_init("mime-type-capplet", VERSION,
                                           argc, argv, NULL, 0, NULL);
 
+        gnome_window_icon_set_default_from_file (GNOME_ICONDIR"/gnome-ccmime.png");
 	if (init_results < 0) {
                 exit (0);
 	}

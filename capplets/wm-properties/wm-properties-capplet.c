@@ -8,7 +8,8 @@
 #include <config.h>
 #include "wm-properties.h"
 #include "capplet-widget.h"
-#include "gnome.h"
+#include <gnome.h>
+#include <libgnomeui/gnome-window-icon.h>
 
 /* prototypes */
 static void restart         (gboolean force);
@@ -749,7 +750,9 @@ create_dialog (gchar *title)
         dialog = g_new (WMDialog, 1);
         
         dialog->dialog = gnome_dialog_new (_("Add New Window Manager"),
-                                           _("OK"), _("Cancel"), NULL);
+                                           GNOME_STOCK_BUTTON_OK,
+                                           GNOME_STOCK_BUTTON_CANCEL,
+                                           NULL);
 
         gnome_dialog_set_default (GNOME_DIALOG (dialog->dialog), 0);
         gnome_dialog_close_hides (GNOME_DIALOG (dialog->dialog), TRUE);
@@ -1120,7 +1123,7 @@ main (int argc, char **argv)
         argv0 = g_strdup (argv[0]);
 	init_results = gnome_capplet_init("wm-properties", VERSION,
 					  argc, argv, NULL, 0, NULL);
-        
+        gnome_window_icon_set_default_from_file (GNOME_ICONDIR"/gnome-ccwindowmanager.png");
 	if (init_results < 0) {
                 g_warning (_("an initialization error occurred while "
                              "starting 'wm-properties-capplet'.\n"

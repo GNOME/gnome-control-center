@@ -20,3 +20,6 @@
 #undef HAVE_DEVGTK
 
 #undef WITH_SYMBOL_UNDERSCORE
+
+#undef GNOME_ICONDIR
+

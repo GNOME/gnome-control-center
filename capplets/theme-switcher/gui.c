@@ -1,6 +1,7 @@
 #include <config.h>
 #include "da.h"
 #include "capplet-widget.h"
+#include <libgnomeui/gnome-window-icon.h>
 #include <signal.h>
 
 static gboolean   ignore_change = FALSE;
@@ -113,6 +114,7 @@ install_theme_callback (GtkWidget *widget, gpointer data)
   gtk_widget_set_sensitive (widget, FALSE);
 
   install_theme_file_sel = gtk_file_selection_new (_("Select a theme to install"));
+  gnome_window_icon_set_from_default (GTK_WINDOW (install_theme_file_sel));
   gtk_file_selection_hide_fileop_buttons (GTK_FILE_SELECTION (install_theme_file_sel));
   /* BEGIN UGLINESS.  This code is stolen from gnome_dialog_set_parent.
    * We want its functionality, but it takes a GnomeDialog as its argument.
