@@ -1,9 +1,9 @@
 cappletname = behavior
 cappletgroup = "Advanced/"
-bin_PROGRAMS = behavior-properties
+bin_PROGRAMS = ui-properties
 
-behavior_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
-behavior_properties_SOURCES = \
+ui_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
+ui_properties_SOURCES = \
 	prefs-widget.c			prefs-widget.h\
 	prefs-widget-mdi.c		prefs-widget-mdi.h\
 	prefs-widget-dialogs.c	prefs-widget-dialogs.h\
