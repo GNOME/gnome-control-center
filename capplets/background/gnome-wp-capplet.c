@@ -1450,7 +1450,7 @@ static void wallpaper_properties_init (void) {
 
   /* Create the file chooser dialog stuff here */
 #if GTK_CHECK_VERSION (2, 3, 0)
-  capplet->filesel = gtk_file_chooser_dialog_new (_("Add Wallpaper"),
+  capplet->filesel = gtk_file_chooser_dialog_new (_("Add Wallpapers"),
 						  GTK_WINDOW (capplet->window),
 						  GTK_FILE_CHOOSER_ACTION_OPEN,
 						  GTK_STOCK_CANCEL,
@@ -1461,7 +1461,7 @@ static void wallpaper_properties_init (void) {
   gtk_file_chooser_set_select_multiple (GTK_FILE_CHOOSER (capplet->filesel),
 					TRUE);
 #else
-  capplet->filesel = gtk_file_selection_new (_("Add Wallpaper"));
+  capplet->filesel = gtk_file_selection_new (_("Add Wallpapers"));
   gtk_file_selection_set_select_multiple (GTK_FILE_SELECTION (capplet->filesel),
 					  TRUE);
 #endif
