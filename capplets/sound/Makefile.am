@@ -25,21 +25,17 @@ EXTRA_DIST = ChangeLog $(Applications_DATA) $(Glade_DATA) $(glade_msgs) $(oaf_DA
 
 INCLUDES = \
         -DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\
-	-DGNOME_ICONDIR=\""${prefix}/share/pixmaps"\"	\
 	-DG_LOG_DOMAIN=\"sound-properties\"		\
-	-DGLADE_DATADIR=\""$(Gladedir)"\"		\
-	@CAPPLET_CFLAGS@				\
 	-I$(top_srcdir)/				\
-	-I$(top_srcdir)/intl
+	-I$(top_srcdir)/intl				\
+	-I$(top_srcdir)/capplets/common			\
+	@CAPPLET_CFLAGS@
 
 bin_PROGRAMS = sound-properties-capplet
-
-#sound_properties_capplet_SOURCES = \
-#	prefs-widget.c prefs-widget.h \
-#	preferences.c preferences.h \
-#	main.c
 
 sound_properties_capplet_SOURCES = \
 	sound-properties-capplet.c
 
-sound_properties_capplet_LDADD = @CAPPLET_LIBS@
+sound_properties_capplet_LDADD = \
+	@CAPPLET_LIBS@					\
+	$(top_builddir)/capplets/common/libcommon.a
