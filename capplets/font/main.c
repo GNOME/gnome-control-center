@@ -15,8 +15,7 @@
 #include "gconf-property-editor.h"
 
 #define GTK_FONT_KEY "/desktop/gnome/interface/font_name"
-#define DESKTOP_FONT_NAME_KEY "/apps/nautilus/preferences/default_font"
-#define DESKTOP_FONT_SIZE_KEY "/apps/nautilus/preferences/default_font_size"
+#define DESKTOP_FONT_KEY "/apps/nautilus/preferences/desktop_font"
 
 static GladeXML *
 create_dialog (void)
@@ -62,13 +61,9 @@ setup_dialog (GladeXML *dialog)
 		  		    WID ("application_font"),
 				    PEDITOR_FONT_COMBINED, NULL);
 
-  peditor = gconf_peditor_new_font (NULL, DESKTOP_FONT_NAME_KEY,
+  peditor = gconf_peditor_new_font (NULL, DESKTOP_FONT_KEY,
 		  		    WID ("desktop_font"),
-				    PEDITOR_FONT_NAME, NULL);
-
-  peditor = gconf_peditor_new_font (NULL, DESKTOP_FONT_SIZE_KEY,
-		  		    WID ("desktop_font"),
-				    PEDITOR_FONT_SIZE, NULL);
+				    PEDITOR_FONT_COMBINED, NULL);
 
   widget = WID ("font_dialog");
   gtk_widget_show (widget);
