@@ -1,15 +1,17 @@
 # Lithuanian translation of gnome-control-center
-# Copyright (C) 2000-2002 Free Software Foundation, Inc.
+# Copyright (C) 2000-2003 Free Software Foundation, Inc.
 # Gediminas Paulauskas <menesis@delfi.lt>, 2000-2002.
 # Vaidotas Zemlys <mpiktas@delfi.lt>, 2003.
+# Žygimantas Beručka  <uid0@tuxfamily.org>, 2003.
 # 
 # 
 msgid ""
 msgstr ""
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-11-12 15:42-0500\n"
-"PO-Revision-Date: 2003-09-12 20:13+0300\n"
+"POT-Creation-Date: 2003-12-04 17:40+0200\n"
+"PO-Revision-Date: 2003-12-04 17:39+0200\n"
 "Last-Translator: Žygimantas Beručka <uid0@tuxfamily.org>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
 "MIME-Version: 1.0\n"
@@ -114,7 +116,7 @@ msgid "Import Feature Settings File"
 msgstr "Importuoti ypatybių nustatymus"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Klaviatūra"
@@ -266,7 +268,7 @@ msgstr ""
 "pačių klavišų paspaudimų."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "S_peed:"
 msgstr "G_reitis:"
 
@@ -295,7 +297,7 @@ msgid "_Only accept keys held for:"
 msgstr "_Reaguoti į klavišus jei jie nuspausti:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "_Type to test settings:"
 msgstr "Paspausdink nustatymų _patikrinimui:"
 
@@ -323,8 +325,10 @@ msgstr "milisekundžių"
 msgid "pixels/second"
 msgstr "taškų/sekundžių"
 
+#. set the timeout value  label with correct value of timeout
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
 #: capplets/mouse/gnome-mouse-properties.c:133
+#: capplets/mouse/gnome-mouse-properties.c:578
 #: capplets/mouse/gnome-mouse-properties.glade.h:27
 #: capplets/windows/gnome-window-properties.glade.h:7
 msgid "seconds"
@@ -376,8 +380,8 @@ msgstr "_Be paveiksliuko"
 #: capplets/background/background-properties-capplet.c:559
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:730
-#: capplets/keyboard/gnome-keyboard-properties.c:218
-#: capplets/mouse/gnome-mouse-properties.c:806
+#: capplets/keyboard/gnome-keyboard-properties.c:222
+#: capplets/mouse/gnome-mouse-properties.c:812
 #: capplets/sound/sound-properties-capplet.c:212
 msgid "Retrieve and store legacy settings"
 msgstr "Gauti ir įrašyti pasenusias nuostatas"
@@ -439,26 +443,6 @@ msgstr ""
 "Tu gali atitempti paveikslėlių bylas į šį langą, kad pakeistum fono "
 "paveikslėlį."
 
-#: capplets/background/background-properties.glade.h:14
-msgid "radiobutton1"
-msgstr "radiobutton1"
-
-#: capplets/background/background-properties.glade.h:15
-msgid "radiobutton2"
-msgstr "radiobutton2"
-
-#: capplets/background/background-properties.glade.h:16
-msgid "radiobutton3"
-msgstr "radiobutton3"
-
-#: capplets/background/background-properties.glade.h:17
-msgid "radiobutton4"
-msgstr "radiobutton4"
-
-#: capplets/background/background-properties.glade.h:18
-msgid "radiobutton5"
-msgstr "radiobutton5"
-
 #: capplets/background/background.desktop.in.h:1
 msgid "Background"
 msgstr "Fonas"
@@ -484,7 +468,7 @@ msgstr ""
 #: capplets/common/capplet-stock-icons.c:94
 #, c-format
 msgid "Unable to load capplet stock icon '%s'\n"
-msgstr ""
+msgstr "Negaliu įkelti standartinės capplet piktogramos '%s'\n"
 
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
@@ -1124,9 +1108,8 @@ msgid "Add _Service..."
 msgstr "Pridėti _tarnybą..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
-#, fuzzy
 msgid "Browse icons"
-msgstr "sekundžių"
+msgstr "Naršyti piktogramas"
 
 #: capplets/file-types/file-types-properties.glade.h:6
 msgid "C_hoose..."
@@ -1414,19 +1397,16 @@ msgid "<b>Font Rendering</b>"
 msgstr "<b>Šriftų vaizdavimas</b>"
 
 #: capplets/font/font-properties.glade.h:3
-#, fuzzy
 msgid "<b>Hinting</b>:"
-msgstr "<b>Šriftų vaizdavimas</b>"
+msgstr "<b>Patarinėjimas</b>:"
 
 #: capplets/font/font-properties.glade.h:4
-#, fuzzy
 msgid "<b>Smoothing</b>:"
-msgstr "Glodinimas:"
+msgstr "<b>Glotninimas</b>:"
 
 #: capplets/font/font-properties.glade.h:5
-#, fuzzy
 msgid "<b>Subpixel order</b>:"
-msgstr "<p>Palaikymas</b>"
+msgstr "<b>Subpikselių tvarka</b>:"
 
 #: capplets/font/font-properties.glade.h:6
 msgid "Best _shapes"
@@ -1453,18 +1433,16 @@ msgid "G_rayscale"
 msgstr "P_ilki pustoniai"
 
 #: capplets/font/font-properties.glade.h:12
-#, fuzzy
 msgid "Go _to font folder"
-msgstr "Eiti į temų katalogą"
+msgstr "Ei_ti į šriftų aplanką"
 
 #: capplets/font/font-properties.glade.h:13
 msgid "N_one"
 msgstr "J_okios"
 
 #: capplets/font/font-properties.glade.h:14
-#, fuzzy
 msgid "R_esolution :"
-msgstr "_Raiška:"
+msgstr "R_aiška:"
 
 #: capplets/font/font-properties.glade.h:15
 msgid "Set the font for applications"
@@ -1481,11 +1459,11 @@ msgstr ""
 
 #: capplets/font/font-properties.glade.h:18
 msgid "Sub_pixel (LCDs)"
-msgstr ""
+msgstr "Sub_pikselinis (LCD)"
 
 #: capplets/font/font-properties.glade.h:19
 msgid "Sub_pixel smoothing (LCDs)"
-msgstr ""
+msgstr "Sub_pikselinis glotninimas (LCD)"
 
 #: capplets/font/font-properties.glade.h:20
 msgid "VB_GR"
@@ -1545,13 +1523,12 @@ msgid "_Window title font:"
 msgstr "Š_riftas langų antraštėms"
 
 #: capplets/font/font-properties.glade.h:34
-#, fuzzy
 msgid "dots per inch"
-msgstr "Skyra (_taškų į colį):"
+msgstr "taškų į colį"
 
 #: capplets/font/main.c:506 capplets/font/main.c:511
 msgid "Font may be too large"
-msgstr ""
+msgstr "Šriftas gali būti per didelis"
 
 #: capplets/font/main.c:507
 #, c-format
@@ -1560,6 +1537,8 @@ msgid ""
 "effectively use the computer.  It is recommended that you select a size "
 "smaller than %d."
 msgstr ""
+"Pasirinktas šriftas yra %d taškų dydžio, ir gali apsunkinti efektyvų darbą "
+"kompiuteriu. Rekomenduojama, kad pasirinktumėt dydį mažesnį negu %d."
 
 #: capplets/font/main.c:512
 #, c-format
@@ -1568,57 +1547,64 @@ msgid ""
 "effectively use the computer.  It is recommended that you select a smaller "
 "sized font."
 msgstr ""
+"Pasirinktas šriftas yra %d taškų dydžio, ir gali apsunkinti efektyvų darbą "
+"kompiuteriu. Rekomenduojama, kad pasirinktumėt mažesnio dydžio šriftą."
 
-#: capplets/keybindings/eggcellrendererkeys.c:160
 #: capplets/keybindings/eggcellrendererkeys.c:161
+#: capplets/keybindings/eggcellrendererkeys.c:162
 msgid "Accelerator key"
 msgstr "Spartusis klavišas"
 
-#: capplets/keybindings/eggcellrendererkeys.c:170
 #: capplets/keybindings/eggcellrendererkeys.c:171
+#: capplets/keybindings/eggcellrendererkeys.c:172
 msgid "Accelerator modifiers"
 msgstr "Sparčiojo klavišo modifikatoriai"
 
 #: capplets/keybindings/eggcellrendererkeys.c:180
+#: capplets/keybindings/eggcellrendererkeys.c:181
+msgid "Accelerator keycode"
+msgstr "Akseleratoriaus klavišo kodas"
+
+#: capplets/keybindings/eggcellrendererkeys.c:191
 msgid "Accel Mode"
 msgstr "Sp. klavišo tipas"
 
-#: capplets/keybindings/eggcellrendererkeys.c:181
+#: capplets/keybindings/eggcellrendererkeys.c:192
 msgid "The type of accelerator."
 msgstr "Sparčiojo klavišo tipas"
 
-#: capplets/keybindings/eggcellrendererkeys.c:219
-#: capplets/keybindings/gnome-keybinding-properties.c:204
+#: capplets/keybindings/eggcellrendererkeys.c:240
+#: capplets/keybindings/gnome-keybinding-properties.c:207
 #: libbackground/applier.c:588 typing-break/drwright.c:448
 msgid "Disabled"
 msgstr "Išjungtas"
 
-#: capplets/keybindings/eggcellrendererkeys.c:330
-#: capplets/keybindings/eggcellrendererkeys.c:563
+#: capplets/keybindings/eggcellrendererkeys.c:359
+#: capplets/keybindings/eggcellrendererkeys.c:599
 msgid "Type a new accelerator, or press Backspace to clear"
 msgstr "Įvesk naują spartųjį klavišą arba paspausk Backspace ištrynimui"
 
-#: capplets/keybindings/eggcellrendererkeys.c:566
+#: capplets/keybindings/eggcellrendererkeys.c:602
 msgid "Type a new accelerator"
 msgstr "Įvesk naują spartųjį klavišą"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:172
+#: capplets/keybindings/gnome-keybinding-properties.c:174
 msgid "GNOME Default"
 msgstr "GNOME įprastas"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:540
+#: capplets/keybindings/gnome-keybinding-properties.c:549
 msgid "<Unknown Action>"
 msgstr "<Nežinomas veiksmas>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:559
+#: capplets/keybindings/gnome-keybinding-properties.c:568
 msgid "Desktop"
 msgstr "Darbalaukis"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:563
+#: capplets/keybindings/gnome-keybinding-properties.c:572
 msgid "Window Management"
 msgstr "Langų tvarkymas"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:698
+#: capplets/keybindings/gnome-keybinding-properties.c:709
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1627,12 +1613,17 @@ msgstr ""
 "Susiejimas \"%s\" jau yra panaudotas:\n"
 " \"%s\"\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:729
+#: capplets/keybindings/gnome-keybinding-properties.c:740
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Klaida nustatant naują spartųjį klavišą nustatymų duombazėje: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:880
+#: capplets/keybindings/gnome-keybinding-properties.c:790
+#, c-format
+msgid "Error unsetting accelerator in configuration database: %s\n"
+msgstr "Klaida nustatant akseleratorių nustatymų duombazėje: %s\n"
+
+#: capplets/keybindings/gnome-keybinding-properties.c:939
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1640,11 +1631,11 @@ msgstr ""
 "Nerasta nė viena klaviatūros tema. Tai reiškia, kad jūsų GTK+ yra nepilnai "
 "įdiegtas"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:902
+#: capplets/keybindings/gnome-keybinding-properties.c:961
 msgid "Action"
 msgstr "Veiksmas"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:921
+#: capplets/keybindings/gnome-keybinding-properties.c:985
 msgid "Shortcut"
 msgstr "Susiejimas"
 
@@ -1669,17 +1660,17 @@ msgstr "_Teksto redagavimo susiejimai:"
 msgid "Assign shortcut keys to commands"
 msgstr "Priskirti komandas susiejimo klavišams"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:104
+#: capplets/keyboard/gnome-keyboard-properties.c:106
 #, c-format
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Įvyko klaida bandant parodyti klaviatūros įtaisą: %s"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:195
+#: capplets/keyboard/gnome-keyboard-properties.c:199
 msgid "_Accessibility"
 msgstr "_Prieinamumas"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:214
-#: capplets/keyboard/gnome-keyboard-properties.c:216
+#: capplets/keyboard/gnome-keyboard-properties.c:218
+#: capplets/keyboard/gnome-keyboard-properties.c:220
 #: capplets/sound/sound-properties-capplet.c:208
 #: capplets/sound/sound-properties-capplet.c:210
 msgid ""
@@ -1687,7 +1678,7 @@ msgid ""
 msgstr ""
 "Pritaikyk nustatymus ir išeik (tiktai suderinamumui; dabar tvarkoma demono)"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:220
+#: capplets/keyboard/gnome-keyboard-properties.c:224
 msgid "Start the page with the typing break settings showing"
 msgstr "Pradėti puslapį su rodomais spausdinimo pertraukėlės nustatymais"
 
@@ -1720,34 +1711,50 @@ msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Lėtas</i></small>"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+msgid "Advanced Layout Options"
+msgstr "Papildomos išdėstymo nuostatos"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "All_ow postponing of breaks"
 msgstr "Le_isti pertraukėlių atidėjimą"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Check if breaks are allowed to be postponed"
 msgstr "Pažymėk jeigu nori, kad pertraukėles būtų galima atidėti"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+msgid "Core Layout Configuration"
+msgstr "Pagrindinio išdėstymo konfigūracija"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Cursor _blinks in text boxes and fields"
 msgstr "Žymeklis _mirksi teksto laukuose ir langeliuose"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
 msgid "Duration of the break when typing is disallowed"
 msgstr "Pertraukėlės trukmė kai spausdinimas neleidžiamas"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "Duration of work before forcing a break"
 msgstr "Darbo trukmė iki priverstinės pertraukos"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
 msgid "Key presses _repeat when key is held down"
 msgstr "Klaviatūra _kartoja laikant nuspaustą klavišą"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "Keyboard Preferences"
 msgstr "Klaviatūros parinktys"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
+msgid "Keyboard _model:"
+msgstr "Klaviatūros _modelis:"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+msgid "Layout _options:"
+msgstr "Išdėstymo _parinktys:"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
@@ -1755,31 +1762,39 @@ msgstr ""
 "Užrakinti ekraną po tam tikro laiko, kad padėti išvengti pasikartojančio "
 "klaviatūros naudojimo traumų"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid "Typing Break"
 msgstr "Spausdinimo pertraukėlė"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "_Accessibility..."
 msgstr "_Prieinamumas..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
 msgid "_Break interval lasts:"
 msgstr "_Pertraukėlės "
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "_Delay:"
 msgstr "_Delsa:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
+msgid "_Ignore system configuration"
+msgstr "_Ignoruoti sistemos konfigūraciją"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
+msgid "_Layouts:"
+msgstr "_Išdėstymai:"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:30
 msgid "_Speed:"
 msgstr "_Greitis:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:32
 msgid "_Work interval lasts:"
 msgstr "_Darbo periodas tęsiasi:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:33
 msgid "minutes"
 msgstr "min."
 
@@ -1791,63 +1806,63 @@ msgstr "Nustatyti klaviatūros parinktis"
 msgid "Unknown Cursor"
 msgstr "Nežinomas žymeklis"
 
-#: capplets/mouse/gnome-mouse-properties.c:602
+#: capplets/mouse/gnome-mouse-properties.c:613
 msgid "Default Cursor - Current"
 msgstr "Įprastas žymeklis - dabartinis"
 
-#: capplets/mouse/gnome-mouse-properties.c:602
-#: capplets/mouse/gnome-mouse-properties.c:605
+#: capplets/mouse/gnome-mouse-properties.c:613
+#: capplets/mouse/gnome-mouse-properties.c:616
 msgid "The default cursor that ships with X"
 msgstr "Įprastas žymeklis, ateinantis su X'ais"
 
-#: capplets/mouse/gnome-mouse-properties.c:605
+#: capplets/mouse/gnome-mouse-properties.c:616
 msgid "Default Cursor"
 msgstr "Įprastas žymeklis"
 
-#: capplets/mouse/gnome-mouse-properties.c:623
+#: capplets/mouse/gnome-mouse-properties.c:634
 msgid "White Cursor - Current"
 msgstr "Baltas žymeklis - dabartinis"
 
-#: capplets/mouse/gnome-mouse-properties.c:623
-#: capplets/mouse/gnome-mouse-properties.c:626
+#: capplets/mouse/gnome-mouse-properties.c:634
+#: capplets/mouse/gnome-mouse-properties.c:637
 msgid "The default cursor inverted"
 msgstr "Invertuotas įprastas žymeklis"
 
-#: capplets/mouse/gnome-mouse-properties.c:626
+#: capplets/mouse/gnome-mouse-properties.c:637
 msgid "White Cursor"
 msgstr "Baltas žymeklis"
 
-#: capplets/mouse/gnome-mouse-properties.c:645
+#: capplets/mouse/gnome-mouse-properties.c:656
 msgid "Large Cursor - Current"
 msgstr "Didelis žymeklis - dabartinis"
 
-#: capplets/mouse/gnome-mouse-properties.c:645
-#: capplets/mouse/gnome-mouse-properties.c:648
+#: capplets/mouse/gnome-mouse-properties.c:656
+#: capplets/mouse/gnome-mouse-properties.c:659
 msgid "Large version of normal cursor"
 msgstr "Įprasto žymeklio didelė versija"
 
-#: capplets/mouse/gnome-mouse-properties.c:648
+#: capplets/mouse/gnome-mouse-properties.c:659
 msgid "Large Cursor"
 msgstr "Didelis žymeklis"
 
-#: capplets/mouse/gnome-mouse-properties.c:667
+#: capplets/mouse/gnome-mouse-properties.c:678
 msgid "Large White Cursor - Current"
 msgstr "Didelis baltas žymeklis - dabartinis"
 
-#: capplets/mouse/gnome-mouse-properties.c:667
-#: capplets/mouse/gnome-mouse-properties.c:670
+#: capplets/mouse/gnome-mouse-properties.c:678
+#: capplets/mouse/gnome-mouse-properties.c:681
 msgid "Large version of white cursor"
 msgstr "Balto žymeklio didelė versija"
 
-#: capplets/mouse/gnome-mouse-properties.c:670
+#: capplets/mouse/gnome-mouse-properties.c:681
 msgid "Large White Cursor"
 msgstr "Didelis baltas žymeklis"
 
-#: capplets/mouse/gnome-mouse-properties.c:747
+#: capplets/mouse/gnome-mouse-properties.c:753
 msgid "Cursor Size"
 msgstr "Žymeklio dydis"
 
-#: capplets/mouse/gnome-mouse-properties.c:756
+#: capplets/mouse/gnome-mouse-properties.c:762
 msgid "Cursor Theme"
 msgstr "Žymeklio tema"
 
@@ -2557,6 +2572,37 @@ msgstr ""
 "Klaida bandant vykdyti (%s),\n"
 "kuris yra susietas su klavišu (%s)"
 
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:60
+#, c-format
+msgid ""
+"Error activating XKB configuration.\n"
+"Probably internal X server problem.\n"
+"\n"
+"X server version data:\n"
+"%s\n"
+"%d\n"
+"%s"
+msgstr ""
+"Klaida aktyvuojant XKB konfigūraciją.\n"
+"Greičiausiai tai vidinė X serverio problema.\n"
+"\n"
+"X serverio versijos duomenys:\n"
+"%s\n"
+"%d\n"
+"%s"
+
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:66
+msgid ""
+"You are using XFree 4.3.0.\n"
+"There are known problems with complex XKB configurations.\n"
+"Try using simpler configuration or taking more fresh version of XFree "
+"software."
+msgstr ""
+"Jūs naudojate XFree 4.3.0.\n"
+"Yra žinomos problemos su sudėtingomis XKB konfigūracijomis.\n"
+"Pabandykit naudoti paprastesnes konfigūracijas arba gaukit naujesnę XFree "
+"versiją."
+
 #: gnome-settings-daemon/gnome-settings-screensaver.c:92
 #, c-format
 msgid ""
@@ -2586,7 +2632,7 @@ msgstr "Nepavyko įkelti garso bylos %s kaip pavyzdžio %s"
 msgid "Cannot determine user's home directory"
 msgstr "Negaliu nustatyti vartotojo namų katalogo"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:202
+#: gnome-settings-daemon/gnome-settings-xsettings.c:204
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "GConf rakto %s tipas %s, bet jo tipas turėtų būti %s\n"
@@ -2775,6 +2821,22 @@ msgstr ""
 "jokio hinting'o, \"nežymus\", \"vidutinis\", ir \"pilnas\" - toks hinting'as "
 "koks tik įmanomas; gali sukelti raidžių formų iškraipymą."
 
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:1
+msgid "XKB keyboard layout"
+msgstr "XKB klaviatūros išdėstymas"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
+msgid "XKB keyboard model"
+msgstr "XKB klaviatūros modelis"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
+msgid "XKB options"
+msgstr "XKB parinktys"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
+msgid "XKB settings should be overridden"
+msgstr "XKB nuostatos turėtų būti nepaisomos"
+
 #: typing-break/drw-break-window.c:189
 msgid "Postpone break"
 msgstr "Atidėti pertraukėlę"
@@ -2797,11 +2859,12 @@ msgid "/_Take a Break"
 msgstr "/_Pailsėk"
 
 #: typing-break/drwright.c:466
-#, fuzzy, c-format
+#, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
-msgstr[0] "%d min. iki kitos pertraukėlės"
-msgstr[1] "%d min. iki kitos pertraukėlės"
+msgstr[0] "%d minutė iki kitos pertraukėlės"
+msgstr[1] "%d minutės iki kitos pertraukėlės"
+msgstr[2] "%d minučių iki kitos pertraukėlės"
 
 #: typing-break/drwright.c:470
 msgid "Less than one minute until the next break"
@@ -3082,6 +3145,21 @@ msgstr "Ar rodyti įdiegtų temų sumažintus paveiksliukus"
 msgid "Whether to thumbnail themes"
 msgstr "Ar rodyti mažus temų paveiksliukus"
 
+#~ msgid "radiobutton1"
+#~ msgstr "radiobutton1"
+
+#~ msgid "radiobutton2"
+#~ msgstr "radiobutton2"
+
+#~ msgid "radiobutton3"
+#~ msgstr "radiobutton3"
+
+#~ msgid "radiobutton4"
+#~ msgstr "radiobutton4"
+
+#~ msgid "radiobutton5"
+#~ msgstr "radiobutton5"
+
 #~ msgid "One minute until the next break"
 #~ msgstr "Viena minutė iki kitos pertraukėlės"
 
@@ -3180,9 +3258,6 @@ msgstr "Ar rodyti mažus temų paveiksliukus"
 
 #~ msgid "Clic_k on keypress"
 #~ msgstr "Spra_gtelti nuspaudus klavišą"
-
-#~ msgid "Keyboard Bell"
-#~ msgstr "Klaviatūros skambutis"
 
 #~ msgid "Keypress Click"
 #~ msgstr "Klavišo nuspaudimo spragtelėjimas"
