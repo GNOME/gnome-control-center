@@ -325,7 +325,7 @@ AC_HELP_STRING([--enable-gstreamer],[use gstreamer, if available]),
  no)  ENABLE_GSTREAMER=no ;;
  *) AC_MSG_ERROR(bad value ${enableval} for --enable-gstreamer) ;;
 esac],
-[ENABLE_GSTREAMER=no]) dnl Default value
+[ENABLE_GSTREAMER=yes]) dnl Default value
 
 if test "x$ENABLE_GSTREAMER" = "xyes"; then
    have_gstreamer=no
