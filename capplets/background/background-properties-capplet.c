@@ -225,16 +225,16 @@ update_color_widget_labels_and_visibility (ApplierSet *set, const gchar *value_s
 
 	switch (orientation) {
 	case ORIENTATION_SOLID: /* solid */ 
-		color1_string = _("C_olor:"); 
+		color1_string = _("Co_lor:"); 
 		two_colors = FALSE; 
 		break;
 	case ORIENTATION_HORIZ: /* horiz */ 
-		color1_string = _("_Left Color:"); 
-		color2_string = _("_Right Color:"); 
+		color1_string = _("_Left color:"); 
+		color2_string = _("_Right color:"); 
 		break;
 	case ORIENTATION_VERT: /* vert  */
-		color1_string = _("_Top Color:");
-		color2_string = _("_Bottom Color:"); 
+		color1_string = _("Top co_lor:");
+		color2_string = _("_Bottom color:"); 
 		break;
 	default:
 		break;
@@ -395,8 +395,7 @@ create_dialog (ApplierSet *set)
 	GladeXML  *dialog;
 	GSList *group;
 	int i;
-	const gchar *labels[] = { N_("_Wallpaper"), N_("C_entered"), N_("_Scaled"), N_("Stretc_hed"), N_("_No Picture") };
-	GtkWidget *label;
+	const gchar *labels[] = { N_("_Tile"), N_("C_enter"), N_("Sc_ale"), N_("_Stretch"), N_("_No Picture") };
 
 	/* FIXME: What the hell is domain? */
 	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/background-properties.glade", "prefs_widget", NULL);
@@ -429,13 +428,6 @@ create_dialog (ApplierSet *set)
 	}
 
 	g_slist_free (group);
-
-	label = gtk_label_new_with_mnemonic (_("Select _picture:"));
-	gtk_frame_set_label_widget (GTK_FRAME (WID ("picture_frame")),
-				    label);
-	gtk_label_set_mnemonic_widget (GTK_LABEL (label),
-			  	       WID ("background_image_button"));
-	gtk_widget_show (label);
 
 	gtk_label_set_mnemonic_widget (GTK_LABEL (WID ("border_shading_label")),
 				       WID ("border_shading"));
@@ -596,6 +588,9 @@ main (int argc, char **argv)
 			 NULL);
 		gtk_dialog_set_default_response (GTK_DIALOG (dialog_win),
 			GTK_RESPONSE_CLOSE);
+		gtk_dialog_set_has_separator (GTK_DIALOG (dialog_win), FALSE);
+		gtk_container_set_border_width (GTK_CONTAINER (dialog_win), 5);
+		gtk_window_set_resizable (GTK_WINDOW (dialog_win), FALSE);
 
 		g_signal_connect (G_OBJECT (dialog_win),
 				    "response",
