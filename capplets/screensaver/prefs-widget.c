@@ -222,13 +222,15 @@ prefs_widget_init (PrefsWidget *prefs_widget)
 	spec = g_strdup_printf (skel, titles[0], titles[1], table_compute_state (SM_CHOOSE_FROM_LIST));
 	prefs_widget->priv->etm =
 		e_table_simple_new (model_col_count, model_row_count,
-				    model_value_at, model_set_value_at,
-				    model_is_cell_editable,
-				    model_duplicate_value, model_free_value,
-				    model_initialize_value,
-				    model_value_is_empty,
-				    model_value_to_string,
-				    prefs_widget);
+						NULL,
+						model_value_at, model_set_value_at,
+						model_is_cell_editable,
+						NULL, NULL,
+						model_duplicate_value, model_free_value,
+						model_initialize_value,
+						model_value_is_empty,
+						model_value_to_string,
+						prefs_widget);
 		
 	table = e_table_new (prefs_widget->priv->etm, NULL, spec, NULL);
 	prefs_widget->priv->table = table;
