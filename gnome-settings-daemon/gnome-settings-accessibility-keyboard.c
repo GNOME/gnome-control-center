@@ -83,14 +83,16 @@ set_server_from_gconf (GConfEntry *ignored)
 
 	gdk_error_trap_push ();
 	desc = XkbGetMap (GDK_DISPLAY (), XkbAllMapComponentsMask, XkbUseCoreKbd);
-	desc->ctrls = NULL;
-	status = XkbGetControls (GDK_DISPLAY (), XkbAllControlsMask, desc);
-	XSync (GDK_DISPLAY (), FALSE);
+	if (desc != NULL) {
+		desc->ctrls = NULL;
+		status = XkbGetControls (GDK_DISPLAY (), XkbAllControlsMask, desc);
+		XSync (GDK_DISPLAY (), FALSE);
+	}
 	gdk_error_trap_pop ();
 
-	g_return_if_fail (status == Success);
 	g_return_if_fail (desc != NULL);
 	g_return_if_fail (desc->ctrls != NULL);
+	g_return_if_fail (status == Success);
 
 	if (we_are_changing_xkb_state) {
 		d ("We changed gconf accessibility state\n");
