@@ -1,3 +1,19 @@
+2001-12-19  Bradford Hovinen  <hovinen@ximian.com>
+
+	* mouse-properties-capplet.c (double_click_from_gconf): Divide by
+	1000.0, use floats
+	(double_click_to_gconf): Implement
+	(drawing_area_button_press_event): Don't call
+	double_click_from_gconf
+	(drawing_area_button_press_event): Use response of
+	gconf_change_set_check_value to determine if value is in changeset
+
+2001-12-18  Bradford Hovinen  <hovinen@ximian.com>
+
+	* mouse-properties-capplet.c (double_click_from_gconf): Single
+	closed-form formula here
+	Code reorganization; many changes
+
 2001-10-18  Bradford Hovinen  <hovinen@ximian.com>
 
 	* mouse-properties-capplet.c (apply_settings): Only swap buttons 1
