@@ -171,6 +171,11 @@ main (int argc, char **argv)
     {
       GError *error = NULL;
       DirElement *dir_element = list->data;
+
+      gconf_client_add_dir (client,
+			    dir_element->dir,
+			    GCONF_CLIENT_PRELOAD_ONELEVEL,
+			    NULL);
       
       gconf_client_notify_add (client,
                                dir_element->dir,
