@@ -14,7 +14,7 @@ splash_DATA = \
 sysdir = $(datadir)/gnome/apps/Settings
 sys_DATA = gnomecc.desktop
 
-gladedir = $(datadir)/control-center-data
+gladedir = $(datadir)/control-center/interfaces
 glade_DATA = \
 	gnomecc.glade	\
 	gnome-lockscreen.png	\
