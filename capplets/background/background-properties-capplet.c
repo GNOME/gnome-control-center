@@ -74,26 +74,26 @@ get_legacy_settings (void)
 
 	engine = gconf_engine_get_default ();
 
-	gconf_engine_set_bool (engine, "/background-properties/enabled",
+	gconf_engine_set_bool (engine, "/desktop/gnome/background/enabled",
 			       gnome_config_get_bool ("/Background/Default/Enabled=true"), NULL);
 
 	val_filename = gnome_config_get_string ("/Background/Default/wallpaper=(none)");
-	gconf_engine_set_string (engine, "/background-properties/wallpaper-filename",
+	gconf_engine_set_string (engine, "/desktop/gnome/background/wallpaper-filename",
 				 val_filename, NULL);
 
 	if (val_filename != NULL && strcmp (val_filename, "(none)"))
-		gconf_engine_set_bool (engine, "/background-properties/wallpaper-enabled", TRUE, NULL);
+		gconf_engine_set_bool (engine, "/desktop/gnome/background/wallpaper-enabled", TRUE, NULL);
 	else
-		gconf_engine_set_bool (engine, "/background-properties/wallpaper-enabled", FALSE, NULL);
+		gconf_engine_set_bool (engine, "/desktop/gnome/background/wallpaper-enabled", FALSE, NULL);
 
 	g_free (val_filename);
 
-	gconf_engine_set_int (engine, "/background-properties/wallpaper-type",
+	gconf_engine_set_int (engine, "/desktop/gnome/background/wallpaper-type",
 			      gnome_config_get_int ("/Background/Default/wallpaperAlign=0"), NULL);
 
-	gconf_engine_set_string (engine, "/background-properties/color1",
+	gconf_engine_set_string (engine, "/desktop/gnome/background/color1",
 				 gnome_config_get_string ("/Background/Default/color1"), NULL);
-	gconf_engine_set_string (engine, "/background-properties/color2",
+	gconf_engine_set_string (engine, "/desktop/gnome/background/color2",
 				 gnome_config_get_string ("/Background/Default/color2"), NULL);
 
 	/* Code to deal with new enum - messy */
@@ -113,12 +113,12 @@ get_legacy_settings (void)
 	g_free (val_string);
 
 	if (val_int != -1)
-		gconf_engine_set_int (engine, "/background-properties/orientation", val_int, NULL);
+		gconf_engine_set_int (engine, "/desktop/gnome/background/orientation", val_int, NULL);
 
 	val_boolean = gnome_config_get_bool_with_default ("/Background/Default/adjustOpacity=true", &def);
 
 	if (!def && val_boolean)
-		gconf_engine_set_int (engine, "/background-properties/opacity",
+		gconf_engine_set_int (engine, "/desktop/gnome/background/opacity",
 				      gnome_config_get_int ("/Background/Default/opacity=100"), NULL);
 }
 
@@ -189,9 +189,9 @@ peditor_value_changed (GConfPropertyEditor *peditor, const gchar *key, const GCo
 	if (GTK_WIDGET_REALIZED (applier_get_preview_widget (applier)))
 		applier_apply_prefs (applier, PREFERENCES (prefs));
 
-	if (!strcmp (key, "/background-properties/wallpaper-enabled") ||
-	    !strcmp (key, "/background-properties/wallpaper-filename") ||
-	    !strcmp (key, "/background-properties/wallpaper-type"))
+	if (!strcmp (key, "/desktop/gnome/background/wallpaper-enabled") ||
+	    !strcmp (key, "/desktop/gnome/background/wallpaper-filename") ||
+	    !strcmp (key, "/desktop/gnome/background/wallpaper-type"))
 	{
 		color_frame = g_object_get_data (G_OBJECT (prefs), "color-frame");
 		gtk_widget_set_sensitive (color_frame, applier_render_color_p (applier, prefs));
@@ -223,27 +223,27 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset, Applier *applier)
 	g_object_set_data (prefs, "applier", applier);
 
 	peditor = gconf_peditor_new_select_menu
-		(changeset, "/background-properties/orientation", WID ("color_option"));
+		(changeset, "/desktop/gnome/background/orientation", WID ("color_option"));
 	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
 
 	peditor = gconf_peditor_new_color
-		(changeset, "/background-properties/color1", WID ("colorpicker1"));
+		(changeset, "/desktop/gnome/background/color1", WID ("colorpicker1"));
 	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
 
 	peditor = gconf_peditor_new_color
-		(changeset, "/background-properties/color2", WID ("colorpicker2"));
+		(changeset, "/desktop/gnome/background/color2", WID ("colorpicker2"));
 	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
 
 	peditor = gconf_peditor_new_filename
-		(changeset, "/background-properties/wallpaper-filename", WID ("image_fileentry"));
+		(changeset, "/desktop/gnome/background/wallpaper-filename", WID ("image_fileentry"));
 	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
 
 	peditor = gconf_peditor_new_select_menu
-		(changeset, "/background-properties/wallpaper-type", WID ("image_option"));
+		(changeset, "/desktop/gnome/background/wallpaper-type", WID ("image_option"));
 	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
 
 	peditor = gconf_peditor_new_boolean
-		(changeset, "/background-properties/wallpaper-enabled", WID ("picture_enabled_check"));
+		(changeset, "/desktop/gnome/background/wallpaper-enabled", WID ("picture_enabled_check"));
 	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
 
 	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("picture_frame"));

@@ -1,5 +1,7 @@
 2001-12-18  Bradford Hovinen  <hovinen@ximian.com>
 
+	* background.schema: Update keys to use /desktop/gnome/background
+
 	* background-properties-capplet.c (property_change_cb): Remove
 	(create_dialog): Return GladeXML, not GtkWidget
 	(setup_dialog): Put GladeXML in the signature rather than
@@ -14,6 +16,7 @@
 	(setup_dialog, create_dialog): Put the applier in the signature
 	Use weak_ref rather than the destroy signal for all relevant
 	objects
+	Update GConf keys to use /desktop/gnome/background
 
 2001-12-17  Bradford Hovinen  <hovinen@ximian.com>
 
