@@ -32,9 +32,20 @@ mimeinfo_DATA = fontilus.keys fontilus.mime
 appregdir = $(datadir)/application-registry
 appreg_DATA = fontilus.applications
 
+schemasdir = $(sysconfdir)/gconf/schemas
+schemas_DATA = fontilus.schemas
+
+install-data-local:
+	if test -z "$(DESTDIR)"; then \
+	  GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule fontilus.schemas; \
+	fi
+
+@INTLTOOL_SCHEMAS_RULE@
+
 EXTRA_DIST = \
   font-method.conf \
   font-method.directory.in \
   fontilus.keys \
   fontilus.mime \
-  fontilus.applications
+  fontilus.applications \
+  fontilus.schemas.in
