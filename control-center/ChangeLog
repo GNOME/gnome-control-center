@@ -3,6 +3,8 @@
 	* capplet-dir.c (capplet_control_launch): Put up an error dialog
 	and abort the process if the capplet reports an error trying to
 	resolve its moniker
+	(capplet_control_launch): Don't connect the app's button signals
+	if the app has just been destroyed
 
 2001-07-20  Chema Celorio  <chema@celorio.com>
 

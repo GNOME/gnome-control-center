@@ -491,12 +491,11 @@ capplet_control_launch (const gchar *capplet_name, gchar *window_title)
 			g_free (moniker);
 			app = NULL;
 		} else {
+			gnome_dialog_button_connect (GNOME_DIALOG (app), 0, GTK_SIGNAL_FUNC (capplet_ok_cb), app);
+			gnome_dialog_button_connect (GNOME_DIALOG (app), 1, GTK_SIGNAL_FUNC (capplet_cancel_cb), app);
 			gtk_widget_show_all (app);
 		}
 	}
-
-	gnome_dialog_button_connect (GNOME_DIALOG (app), 0, GTK_SIGNAL_FUNC (capplet_ok_cb), app);
-	gnome_dialog_button_connect (GNOME_DIALOG (app), 1, GTK_SIGNAL_FUNC (capplet_cancel_cb), app);
 
 	CORBA_exception_free (&ev);
 	g_free (moniker);
