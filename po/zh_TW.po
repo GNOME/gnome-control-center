@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.99.0\n"
-"POT-Creation-Date: 2001-12-20 10:42-0500\n"
+"POT-Creation-Date: 2002-01-14 12:01-0500\n"
 "PO-Revision-Date: 2001-12-03 13:26+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: Chinese\n"
@@ -18,244 +18,264 @@ msgstr ""
 msgid "Default location"
 msgstr "預設位置"
 
+#: archiver/config-archiver.c:81 archiver/main.c:78
+msgid "Store XML data in the archive"
+msgstr "在保存檔裡儲存 XML 資料"
+
+#: archiver/config-archiver.c:83 archiver/main.c:80
+msgid "Roll back the configuration to a given point"
+msgstr "將設定組態復原到某一狀態"
+
+#: archiver/config-archiver.c:85 archiver/main.c:82
+msgid "Change the location profile to the given one"
+msgstr "改用指定的位置樣本"
+
+#: archiver/config-archiver.c:87 archiver/main.c:84
+msgid "Push configuration data out to client machines (UNIMPLEMENTED)"
+msgstr "將設定資料傳送到用戶端主機（未完成）"
+
+#: archiver/config-archiver.c:89 archiver/main.c:86
+msgid "Rename a location to a new name"
+msgstr "將位置重新命名"
+
+#: archiver/config-archiver.c:91 archiver/main.c:88
+msgid "Add a new location to the archive"
+msgstr "新增位置到保存檔裡"
+
+#: archiver/config-archiver.c:93 archiver/main.c:90
+msgid "Remove a location from the archive"
+msgstr "由保存檔裡移除位置"
+
+#: archiver/config-archiver.c:95 archiver/main.c:92
+msgid "Add a given backend to the given location"
+msgstr ""
+
+#: archiver/config-archiver.c:97 archiver/main.c:94
+msgid "Remove the given backend from the given location"
+msgstr ""
+
+#: archiver/config-archiver.c:99 archiver/main.c:96
+msgid "Perform garbage collection on the given location"
+msgstr ""
+
+#: archiver/config-archiver.c:105 archiver/main.c:102
+msgid "Use the global repository"
+msgstr ""
+
+#: archiver/config-archiver.c:107 archiver/main.c:104
+msgid "Identifier of location profile on which to operate"
+msgstr ""
+
+#: archiver/config-archiver.c:108 archiver/main.c:105
+msgid "LOCATION"
+msgstr "位置"
+
+#: archiver/config-archiver.c:110 archiver/main.c:107
+msgid "Backend being used for this operation"
+msgstr ""
+
+#: archiver/config-archiver.c:110 archiver/main.c:107
+msgid "BACKEND_ID"
+msgstr "BACKEND_ID"
+
+#: archiver/config-archiver.c:116 archiver/main.c:113
+#, fuzzy
+msgid "Store only the differences with the parent location's config"
+msgstr "只儲存上一個設定檔所指定的設定"
+
+#: archiver/config-archiver.c:118 archiver/main.c:115
+msgid "Store only those settings set in the previous config"
+msgstr "只儲存上一個設定檔所指定的設定"
+
+#: archiver/config-archiver.c:124 archiver/main.c:121
+msgid "Date to which to roll back"
+msgstr "要復原的設定組態日期"
+
+#: archiver/config-archiver.c:124 archiver/main.c:121
+msgid "DATE"
+msgstr "日期"
+
+#: archiver/config-archiver.c:126 archiver/main.c:123
+msgid "Roll back all configuration items"
+msgstr "復原所有設定組態項目"
+
+#: archiver/config-archiver.c:128 archiver/main.c:125
+msgid "Roll back to the revision REVISION_ID"
+msgstr "設定組態要復原到「版本識別碼」指定的版本"
+
+#: archiver/config-archiver.c:128 archiver/main.c:125
+msgid "REVISION_ID"
+msgstr "版本識別碼"
+
+#: archiver/config-archiver.c:130 archiver/main.c:127
+msgid "Roll back to the last known revision"
+msgstr "設定組態要復原到最後已知的版本"
+
+#: archiver/config-archiver.c:132 archiver/main.c:129
+msgid "Roll back by STEPS revisions"
+msgstr "設定組態要復原到 STEP 個版本前"
+
+#: archiver/config-archiver.c:132 archiver/main.c:129
+msgid "STEPS"
+msgstr "STEPS"
+
+#: archiver/config-archiver.c:134 archiver/main.c:131
+msgid "Don't run the backend, just dump the output"
+msgstr ""
+
+#: archiver/config-archiver.c:140 archiver/main.c:137
+#, fuzzy
+msgid "Parent location for the new location"
+msgstr "安排給該位置的新名稱"
+
+#: archiver/config-archiver.c:140 archiver/main.c:137
+msgid "PARENT"
+msgstr ""
+
+#: archiver/config-archiver.c:142 archiver/main.c:139
+msgid "New name to assign to the location"
+msgstr "安排給該位置的新名稱"
+
+#: archiver/config-archiver.c:142 archiver/main.c:139
+msgid "NEW_NAME"
+msgstr "新名稱"
+
+#: archiver/config-archiver.c:148 archiver/main.c:145
+msgid "Add/remove this backend to/from the master backend list"
+msgstr ""
+
+#: archiver/config-archiver.c:150 archiver/main.c:147
+msgid "Full containment"
+msgstr ""
+
+#: archiver/config-archiver.c:152 archiver/main.c:149
+#, fuzzy
+msgid "Partial containment"
+msgstr "垂直漸變色"
+
 #: archiver/config-archiver.c:307 archiver/location.c:460
 msgid "Default Location"
 msgstr "預設位置"
 
-#: archiver/config-archiver.c:81
-msgid "Store XML data in the archive"
-msgstr "在保存檔裡儲存 XML 資料"
-
-#: archiver/config-archiver.c:83
-msgid "Roll back the configuration to a given point"
-msgstr "將設定組態復原到某一狀態"
-
-#: archiver/config-archiver.c:85
-msgid "Change the location profile to the given one"
-msgstr "改用指定的位置樣本"
-
-#: archiver/config-archiver.c:87
-msgid "Push configuration data out to client machines (UNIMPLEMENTED)"
-msgstr "將設定資料傳送到用戶端主機（未完成）"
-
-#: archiver/config-archiver.c:89
-msgid "Rename a location to a new name"
-msgstr "將位置重新命名"
-
-#: archiver/config-archiver.c:91
-msgid "Add a new location to the archive"
-msgstr "新增位置到保存檔裡"
-
-#: archiver/config-archiver.c:93
-msgid "Remove a location from the archive"
-msgstr "由保存檔裡移除位置"
-
-#: archiver/config-archiver.c:95
-msgid "Add a given backend to the given location"
-msgstr ""
-
-#: archiver/config-archiver.c:97
-msgid "Remove the given backend from the given location"
-msgstr ""
-
-#: archiver/config-archiver.c:99
-msgid "Perform garbage collection on the given location"
-msgstr ""
-
-#: archiver/config-archiver.c:105
-msgid "Use the global repository"
-msgstr ""
-
-#: archiver/config-archiver.c:107
-msgid "Identifier of location profile on which to operate"
-msgstr ""
-
-#: archiver/config-archiver.c:108
-msgid "LOCATION"
-msgstr "位置"
-
-#: archiver/config-archiver.c:110
-msgid "Backend being used for this operation"
-msgstr ""
-
-#: archiver/config-archiver.c:110
-msgid "BACKEND_ID"
-msgstr "BACKEND_ID"
-
-#: archiver/config-archiver.c:116
-msgid "Store only the differences with the parent location's config"
-msgstr ""
-
-#: archiver/config-archiver.c:118
-msgid "Store only those settings set in the previous config"
-msgstr "只儲存上一個設定檔所指定的設定"
-
-#: archiver/config-archiver.c:124
-msgid "Date to which to roll back"
-msgstr "要復原的設定組態日期"
-
-#: archiver/config-archiver.c:124
-msgid "DATE"
-msgstr "日期"
-
-#: archiver/config-archiver.c:126
-msgid "Roll back all configuration items"
-msgstr "復原所有設定組態項目"
-
-#: archiver/config-archiver.c:128
-msgid "Roll back to the revision REVISION_ID"
-msgstr "設定組態要復原到「版本識別碼」指定的版本"
-
-#: archiver/config-archiver.c:128
-msgid "REVISION_ID"
-msgstr "版本識別碼"
-
-#: archiver/config-archiver.c:130
-msgid "Roll back to the last known revision"
-msgstr "設定組態要復原到最後已知的版本"
-
-#: archiver/config-archiver.c:132
-msgid "Roll back by STEPS revisions"
-msgstr "設定組態要復原到 STEP 個版本前"
-
-#: archiver/config-archiver.c:132
-msgid "STEPS"
-msgstr "STEPS"
-
-#: archiver/config-archiver.c:134
-msgid "Don't run the backend, just dump the output"
-msgstr ""
-
-#: archiver/config-archiver.c:140
-msgid "Parent location for the new location"
-msgstr ""
-
-#: archiver/config-archiver.c:140
-msgid "PARENT"
-msgstr ""
-
-#: archiver/config-archiver.c:142
-msgid "New name to assign to the location"
-msgstr "安排給該位置的新名稱"
-
-#: archiver/config-archiver.c:142
-msgid "NEW_NAME"
-msgstr "新名稱"
-
-#: archiver/config-archiver.c:148
-msgid "Add/remove this backend to/from the master backend list"
-msgstr ""
-
-#: archiver/config-archiver.c:150
-msgid "Full containment"
-msgstr ""
-
-#: archiver/config-archiver.c:152
-msgid "Partial containment"
-msgstr ""
-
-#: archiver/config-archiver.c:369
+#: archiver/config-archiver.c:369 archiver/main.c:323
 msgid "Global archiver options"
 msgstr "通用檔案保存程式選項"
 
-#: archiver/config-archiver.c:371
+#: archiver/config-archiver.c:371 archiver/main.c:325
 msgid "Archiver commands"
 msgstr "檔案保存程式指令"
 
-#: archiver/config-archiver.c:373
+#: archiver/config-archiver.c:373 archiver/main.c:327
 msgid "Options for storing data"
 msgstr "儲存資料所用的選項"
 
-#: archiver/config-archiver.c:375
+#: archiver/config-archiver.c:375 archiver/main.c:329
 msgid "Options for rolling back"
 msgstr "復原組態所用的選項"
 
-#: archiver/config-archiver.c:377
+#: archiver/config-archiver.c:377 archiver/main.c:331
 msgid "Options for adding or renaming locations"
 msgstr "新增位置或將位置改名所用的選項"
 
-#: archiver/config-archiver.c:380
+#: archiver/config-archiver.c:380 archiver/main.c:334
+#, fuzzy
 msgid "Options for adding and removing backends"
-msgstr ""
+msgstr "新增位置或將位置改名所用的選項"
 
-#: capplets/background/background.desktop.in.in.h:1
-msgid "Background"
-msgstr "背景"
-
-#: capplets/background/background.desktop.in.in.h:2
-msgid "Configuration of the desktop's background"
-msgstr "桌面背景的組態"
-
-#: capplets/background/background-properties-capplet.c:288
-#: capplets/common/capplet-util.c:249
+#: capplets/background/background-properties-capplet.c:291
+#: capplets/common/capplet-util.c:243
 msgid "Retrieve and store legacy settings"
 msgstr "復原以往的設定"
 
-#: capplets/background/background-properties-capplet.c:313
+#: capplets/background/background-properties-capplet.c:315
 #, fuzzy
 msgid "Background properties"
 msgstr "背景顏色"
 
-#: capplets/common/capplet-util.c:245 capplets/common/capplet-util.c:247
+#: capplets/background/background.desktop.in.h:1
+msgid "Background"
+msgstr "背景"
+
+#: capplets/background/background.desktop.in.h:2
+msgid "Configuration of the desktop's background"
+msgstr "桌面背景的組態"
+
+#: capplets/background/prefs-widget.c:362
+msgid "(None)"
+msgstr "(無)"
+
+#: capplets/background/prefs-widget.c:611
+msgid "Wallpaper Selection"
+msgstr "桌布選擇"
+
+#: capplets/background/prefs-widget.c:618
+msgid "Can't find an hbox, using a normal file selection"
+msgstr "找不到 hbox 元件，用一般的檔案選擇方式"
+
+#: capplets/background/prefs-widget.c:624
+msgid "Preview"
+msgstr "預覽"
+
+#: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "只套用設定並離開"
 
-#: capplets/common/gconf-property-editor.c:140
+#: capplets/common/gconf-property-editor.c:144
 msgid "Key"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:141
+#: capplets/common/gconf-property-editor.c:145
 msgid "GConf key to which this property editor is attached"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:147
+#: capplets/common/gconf-property-editor.c:151
 msgid "Callback"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:148
+#: capplets/common/gconf-property-editor.c:152
 msgid "Issue this callback when the value associated with key gets changed"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:153
+#: capplets/common/gconf-property-editor.c:157
 msgid "Change set"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:154
+#: capplets/common/gconf-property-editor.c:158
 msgid ""
 "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:159
+#: capplets/common/gconf-property-editor.c:163
 msgid "Conversion to widget callback"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:160
+#: capplets/common/gconf-property-editor.c:164
 msgid ""
 "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:165
+#: capplets/common/gconf-property-editor.c:169
 msgid "Conversion from widget callback"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:166
+#: capplets/common/gconf-property-editor.c:170
 msgid ""
 "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:171
+#: capplets/common/gconf-property-editor.c:175
 msgid "UI Control"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:172
+#: capplets/common/gconf-property-editor.c:176
 msgid "Object that controls the property (normally a widget)"
 msgstr ""
 
-#: capplets/default-applications/default-applications.desktop.in.in.h:1
+#: capplets/default-applications/default-applications.desktop.in.h:1
 msgid "Choose the applications used by default"
 msgstr "選擇預設使用的應用軟件"
 
-#: capplets/default-applications/default-applications.desktop.in.in.h:2
+#: capplets/default-applications/default-applications.desktop.in.h:2
 #: capplets/default-applications/interface.c:97
 #: capplets/screensaver/main.c:168
 msgid "Default Applications"
@@ -450,28 +470,100 @@ msgstr "找不到 pixmap 檔案：%s"
 msgid "Couldn't create pixmap from file: %s"
 msgstr "無法由檔案建立 pixmap：%s"
 
-#: capplets/keyboard/keyboard.desktop.in.in.h:1
+#: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "鍵盤"
 
-#: capplets/keyboard/keyboard.desktop.in.in.h:2
+#: capplets/keyboard/keyboard.desktop.in.h:2
 msgid "Keyboard Properties"
 msgstr "鍵盤設定"
 
-#: capplets/mouse/mouse.desktop.in.in.h:1
+#: capplets/mouse/mouse.desktop.in.h:1
 msgid "Mouse"
 msgstr "滑鼠"
 
-#: capplets/mouse/mouse.desktop.in.in.h:2
+#: capplets/mouse/mouse.desktop.in.h:2
 msgid "Mouse Properties"
 msgstr "滑鼠設定"
 
-#: capplets/screensaver/preferences.c:813
+#: capplets/rollback/main.c:39
+#, fuzzy
+msgid "Rollback the capplet given"
+msgstr "將設定組態復原到某一狀態"
+
+#: capplets/rollback/main.c:41
+msgid "Operate on global backends"
+msgstr ""
+
+#: capplets/rollback/main.c:56
+#, fuzzy
+msgid "Options for the rollback GUI"
+msgstr "復原組態所用的選項"
+
+#: capplets/rollback/rollback-capplet-dialog.c:46
+msgid "1 year ago"
+msgstr ""
+
+#: capplets/rollback/rollback-capplet-dialog.c:46
+msgid "6 months ago"
+msgstr ""
+
+#: capplets/rollback/rollback-capplet-dialog.c:46
+msgid "1 month ago"
+msgstr ""
+
+#: capplets/rollback/rollback-capplet-dialog.c:46
+msgid "1 week ago"
+msgstr ""
+
+#: capplets/rollback/rollback-capplet-dialog.c:47
+msgid "3 days ago"
+msgstr ""
+
+#: capplets/rollback/rollback-capplet-dialog.c:47
+msgid "1 day ago"
+msgstr ""
+
+#: capplets/rollback/rollback-capplet-dialog.c:47
+msgid "1 hour ago"
+msgstr ""
+
+#: capplets/rollback/rollback-capplet-dialog.c:47
+#, fuzzy
+msgid "30 minutes ago"
+msgstr "分鐘"
+
+#: capplets/rollback/rollback-capplet-dialog.c:48
+#, fuzzy
+msgid "10 minutes ago"
+msgstr "分鐘"
+
+#: capplets/rollback/rollback-capplet-dialog.c:48
+#, fuzzy
+msgid "5 minutes ago"
+msgstr "分鐘"
+
+#: capplets/rollback/rollback-capplet-dialog.c:48
+#, fuzzy
+msgid "1 minute ago"
+msgstr "分鐘"
+
+#: capplets/rollback/rollback-capplet-dialog.c:48
+#, fuzzy
+msgid "Current time"
+msgstr "中央顯示。"
+
+#: capplets/rollback/rollback-capplet-dialog.c:169
+#, fuzzy
+msgid "Rollback"
+msgstr "岩石"
+
+#: capplets/screensaver/preferences.c:815
 msgid "Custom screensaver. No description available"
 msgstr "自訂螢幕保護程式。沒有描述"
 
 #: capplets/screensaver/prefs-widget.c:192
-#: capplets/screensaver/screensaver.desktop.in.in.h:2
+#: capplets/screensaver/screensaver.desktop.in.h:2
 msgid "Screensaver"
 msgstr "螢幕保護程式"
 
@@ -479,10 +571,6 @@ msgstr "螢幕保護程式"
 #, c-format
 msgid "About %s\n"
 msgstr "關於 %s\n"
-
-#: capplets/screensaver/screensaver.desktop.in.in.h:1
-msgid "Configure the settings of the screensaver"
-msgstr "設定螢幕保護程式"
 
 #: capplets/screensaver/screensaver-prefs-dialog.c:185
 msgid "Name:"
@@ -531,6 +619,10 @@ msgstr ""
 #: capplets/screensaver/screensaver-prefs-dialog.c:1711
 msgid "Any"
 msgstr "任選"
+
+#: capplets/screensaver/screensaver.desktop.in.h:1
+msgid "Configure the settings of the screensaver"
+msgstr "設定螢幕保護程式"
 
 #: capplets/screensaver/screensavers/3d_clock.xml.h:1
 msgid "3d clock"
@@ -2045,19 +2137,6 @@ msgstr ""
 msgid "Moebius"
 msgstr "Moebius"
 
-#: capplets/screensaver/screensavers/moire2.xml.h:1
-msgid ""
-"Another example of the fun you can have with moire interference patterns; "
-"this hack generates fields of concentric circles or ovals, and combines the "
-"planes with various operations. The planes are moving independently of one "
-"another, causing the interference lines to ``spray.'' Written by Jamie "
-"Zawinski."
-msgstr ""
-
-#: capplets/screensaver/screensavers/moire2.xml.h:2
-msgid "Moire2"
-msgstr ""
-
 #: capplets/screensaver/screensavers/moire.xml.h:5
 msgid "Maximum radius increment"
 msgstr ""
@@ -2075,6 +2154,19 @@ msgid ""
 "this one is that the heart of the display algorithm can be expressed with "
 "just a pair of loops and a handful of arithmetic, giving it a high ``display "
 "hack metric''."
+msgstr ""
+
+#: capplets/screensaver/screensavers/moire2.xml.h:1
+msgid ""
+"Another example of the fun you can have with moire interference patterns; "
+"this hack generates fields of concentric circles or ovals, and combines the "
+"planes with various operations. The planes are moving independently of one "
+"another, causing the interference lines to ``spray.'' Written by Jamie "
+"Zawinski."
+msgstr ""
+
+#: capplets/screensaver/screensavers/moire2.xml.h:2
+msgid "Moire2"
 msgstr ""
 
 #: capplets/screensaver/screensavers/molecule.xml.h:1
@@ -2448,16 +2540,6 @@ msgid ""
 "like vapor trails or neon tubes. Written by Shane Smit."
 msgstr ""
 
-#: capplets/screensaver/screensavers/sierpinski3d.xml.h:1
-msgid "Sierpinski3D"
-msgstr "Sierpinski3D"
-
-#: capplets/screensaver/screensavers/sierpinski3d.xml.h:2
-msgid ""
-"This draws the three-dimensional variant of the recursive Sierpinski "
-"triangle fractal, using GL. Written by Tim Robinson and Jamie Zawinski."
-msgstr ""
-
 #: capplets/screensaver/screensavers/sierpinski.xml.h:5
 msgid "Sierpinski"
 msgstr "Sierpinski"
@@ -2466,6 +2548,16 @@ msgstr "Sierpinski"
 msgid ""
 "This draws the two-dimensional variant of the recursive Sierpinski triangle "
 "fractal. Written by Desmond Daignault."
+msgstr ""
+
+#: capplets/screensaver/screensavers/sierpinski3d.xml.h:1
+msgid "Sierpinski3D"
+msgstr "Sierpinski3D"
+
+#: capplets/screensaver/screensavers/sierpinski3d.xml.h:2
+msgid ""
+"This draws the three-dimensional variant of the recursive Sierpinski "
+"triangle fractal, using GL. Written by Tim Robinson and Jamie Zawinski."
 msgstr ""
 
 #: capplets/screensaver/screensavers/slidescreen.xml.h:1
@@ -2984,83 +3076,9 @@ msgstr "自訂"
 msgid "New screensaver"
 msgstr "新螢幕保護程式"
 
-#: capplets/sound/sound.desktop.in.in.h:1
-msgid "Configure GNOME's use of sound"
-msgstr "設定 GNOME 所用的音效"
-
-#: capplets/sound/sound.desktop.in.in.h:2
-msgid "Sound"
-msgstr "音效"
-
-#: capplets/sound/sound-properties.glade.h:1
-msgid "Enable sound server startup"
-msgstr "啟動時同時啟用音效伺服程式"
-
-#: capplets/sound/sound-properties.glade.h:2
-msgid "General"
-msgstr "一般"
-
-#: capplets/sound/sound-properties.glade.h:3
-msgid "Sound Events"
-msgstr "音效事件"
-
-#: capplets/sound/sound-properties.glade.h:4
-msgid "Sounds for events"
-msgstr "事件音效"
-
-#: control-center/capplet-dir-view.c:147
-msgid "Layout"
-msgstr ""
-
-#: control-center/capplet-dir-view.c:148
-msgid "Layout to use for this view of the capplets"
-msgstr ""
-
-#: control-center/capplet-dir-view.c:154
-msgid "Capplet directory object"
-msgstr ""
-
-#: control-center/capplet-dir-view.c:155
-msgid "Capplet directory that this view is viewing"
-msgstr ""
-
-#: control-center/capplet-dir-view.c:320 control-center/gnomecc.desktop.in.h:1
-msgid "GNOME Control Center"
-msgstr "GNOME 控制台"
-
-#: control-center/capplet-dir-view.c:323
-msgid "Desktop properties manager."
-msgstr "桌面設定總管。"
-
-#: control-center/capplet-dir-view.c:448
-#, c-format
-msgid "Gnome Control Center : %s"
-msgstr "Gnome 控制台：%s"
-
-#: control-center/capplet-dir-view.c:493
-msgid ""
-"No help is available/installed. Please make sure you\n"
-"have the GNOME User's Guide installed on your system."
-msgstr ""
-"輔助說明尚未安裝或不存在，請確定你已經安裝\n"
-"GNOME 的使用者指南到你的系統中。"
-
-#: control-center/capplet-dir-view.c:496
-msgid "Close"
-msgstr "關閉"
-
-#: control-center/capplet-dir-view-html.c:145
-msgid "GNOME Control Center:"
-msgstr "GNOME 控制台："
-
-#: control-center/capplet-dir-view-list.c:321
-#, fuzzy, c-format
-msgid "GNOME Control Center: %s"
-msgstr "GNOME 控制台："
-
-#: control-center/gnomecc.desktop.in.h:2
-msgid "The GNOME configuration tool"
-msgstr "GNOME 設定工具"
+#: capplets/sound/prefs-widget.c:138
+msgid "Play"
+msgstr "播放"
 
 #: control-center/Gnome.directory.in.in.h:1
 msgid "Main"
@@ -3070,56 +3088,304 @@ msgstr "主要"
 msgid "Main Settings"
 msgstr "主要設定"
 
-#: libbackground/applier.c:229
+#: control-center/capplet-dir-view-html.c:145
+msgid "GNOME Control Center:"
+msgstr "GNOME 控制台："
+
+#: control-center/capplet-dir-view-list.c:325
+#, fuzzy, c-format
+msgid "GNOME Control Center: %s"
+msgstr "GNOME 控制台："
+
+#: control-center/capplet-dir-view.c:146
+msgid "Layout"
+msgstr ""
+
+#: control-center/capplet-dir-view.c:147
+msgid "Layout to use for this view of the capplets"
+msgstr ""
+
+#: control-center/capplet-dir-view.c:153
+msgid "Capplet directory object"
+msgstr ""
+
+#: control-center/capplet-dir-view.c:154
+msgid "Capplet directory that this view is viewing"
+msgstr ""
+
+#: control-center/capplet-dir-view.c:308 control-center/gnomecc.desktop.in.h:1
+msgid "GNOME Control Center"
+msgstr "GNOME 控制台"
+
+#: control-center/capplet-dir-view.c:311
+msgid "Desktop properties manager."
+msgstr "桌面設定總管。"
+
+#: control-center/capplet-dir-view.c:445
+#, c-format
+msgid "Gnome Control Center : %s"
+msgstr "Gnome 控制台：%s"
+
+#: control-center/capplet-dir-view.c:488
+msgid ""
+"No help is available/installed. Please make sure you\n"
+"have the GNOME User's Guide installed on your system."
+msgstr ""
+"輔助說明尚未安裝或不存在，請確定你已經安裝\n"
+"GNOME 的使用者指南到你的系統中。"
+
+#: control-center/capplet-dir-view.c:491
+msgid "Close"
+msgstr "關閉"
+
+#: control-center/gnomecc.desktop.in.h:2
+msgid "The GNOME configuration tool"
+msgstr "GNOME 設定工具"
+
+#: libbackground/applier.c:228
 #, fuzzy
 msgid "Type"
 msgstr "Mime 類型"
 
-#: libbackground/applier.c:230
+#: libbackground/applier.c:229
 msgid ""
 "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
 "for preview"
 msgstr ""
 
-#: libbackground/applier.c:385
+#: libbackground/applier.c:388
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "無法載入 pixbuf \"%s\"；不使用桌布。"
 
-#: libbackground/applier.c:501
+#: libbackground/applier.c:505
 msgid "Disabled"
 msgstr "不使用"
 
-#: libsounds/sound-view.c:98
-msgid "The sound file for this event does not exist."
-msgstr "這個事件所用的音效檔不存在。"
-
-#: libsounds/sound-view.c:100
-msgid ""
-"The sound file for this event does not exist.\n"
-"You may want to install the gnome-audio package\n"
-"for a set of default sounds."
+#: root-manager/root-manager-helper.c:54
+msgid "Could not connect to X Display"
 msgstr ""
-"這個事件所用的音效檔不存在,\n"
-"你可以安裝 gnome-audio 套件\n"
-"來取得一些預設音效。"
 
-#: libsounds/sound-view.c:152
-msgid "Event"
-msgstr "事件"
+#: root-manager/root-manager-helper.c:60
+msgid "Could not duplicate file descriptor"
+msgstr ""
 
-#: libsounds/sound-view.c:152
-msgid "File to Play"
-msgstr "播放的音效檔"
+#: root-manager/root-manager-wrap.c:56
+msgid "Pipe error.\n"
+msgstr "管道錯誤。\n"
 
-#: libsounds/sound-view.c:185
-msgid "Play"
-msgstr "播放"
+#: root-manager/root-manager-wrap.c:62
+msgid "Cannot fork().\n"
+msgstr "無法 fork()。\n"
 
-#: libsounds/sound-view.c:190
+#: root-manager/root-manager-wrap.c:83 root-manager/root-manager-wrap.c:93
+msgid "dup2() error.\n"
+msgstr "dup2() 發生錯誤。\n"
+
+#: root-manager/root-manager-wrap.c:123
+#, c-format
+msgid "execl() error, errno=%d\n"
+msgstr "execl() 發生錯誤，錯誤編號=%d\n"
+
+#: root-manager/root-manager-wrap.c:152
+msgid "Information updated."
+msgstr "資料已更新。"
+
+#: root-manager/root-manager-wrap.c:155
+msgid ""
+"The password you typed is invalid.\n"
+"Please try again."
+msgstr ""
+"你輸入的密碼不正確。\n"
+"請再嘗試。"
+
+#: root-manager/root-manager-wrap.c:158
+msgid ""
+"One or more of the changed fields is invalid.\n"
+"This is probably due to either colons or commas in one of the fields.\n"
+"Please remove those and try again."
+msgstr ""
+"其中一些已修改的欄位不正確。\n"
+"這可能是因為這些欄位中有冒號或分號。\n"
+"請移除它們並再嘗試。"
+
+#: root-manager/root-manager-wrap.c:161
+msgid "Password resetting error."
+msgstr "密碼重設發生錯誤。"
+
+#: root-manager/root-manager-wrap.c:164
+msgid ""
+"Some systems files are locked.\n"
+"Please try again in a few moments."
+msgstr ""
+"其中一些系統檔案已被鎖定。\n"
+"請稍後一會並再嘗試。"
+
+#: root-manager/root-manager-wrap.c:167
+msgid "Unknown user."
+msgstr "不明的使用者。"
+
+#: root-manager/root-manager-wrap.c:170
+msgid "Insufficient rights."
+msgstr "權限不足。"
+
+#: root-manager/root-manager-wrap.c:173
+msgid "Invalid call to sub process."
+msgstr "不正確地呼叫副程序。"
+
+#: root-manager/root-manager-wrap.c:176
+msgid ""
+"Your current shell is not listed in /etc/shells.\n"
+"You are not allowed to change your shell.\n"
+"Consult your system administrator."
+msgstr ""
+"你的命令殼並未列於 /etc/shells 中。\n"
+"你不可以改變命令殼。\n"
+"請聯絡系統管理員。"
+
+#. well, this is unlikely to work either, but at least we tried...
+#: root-manager/root-manager-wrap.c:180
+msgid "Out of memory."
+msgstr "記憶體不足。"
+
+#: root-manager/root-manager-wrap.c:183
+msgid "The exec() call failed."
+msgstr "呼叫 exec() 失敗。"
+
+#: root-manager/root-manager-wrap.c:186
+msgid "Failed to find selected program."
+msgstr "無法找出所選的程式。"
+
+#: root-manager/root-manager-wrap.c:189
+msgid "Unknown error."
+msgstr "不明的錯誤。"
+
+#: root-manager/root-manager-wrap.c:192
+msgid "Unknown exit code."
+msgstr "不明的跳出值。"
+
+#: root-manager/root-manager-wrap.c:280
+msgid "Input"
+msgstr "輸入"
+
+#: root-manager/root-manager-wrap.c:386
+#, c-format
+msgid "Need %d responses.\n"
+msgstr "需要 %d 個回應。\n"
+
+#: root-manager/root-manager-wrap.c:411
+msgid ""
+"In order to make changes to your system, you\n"
+"must enter the administrator (root) password."
+msgstr ""
+"要修改系統設定，你必須\n"
+"輸入管理者（root）的密碼。"
+
+#: root-manager/root-manager-wrap.c:425
+msgid "Error"
+msgstr "錯誤"
+
+#: root-manager/root-manager-wrap.c:439
+#, c-format
+msgid "You want %d response(s) from %d entry fields!?!?!\n"
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:445
+msgid "Run Unprivileged"
+msgstr "不使用足夠權限執行"
+
+#: root-manager/root-manager.c:110
+#, c-format
+msgid "Got error %d.\n"
+msgstr "發生錯誤 %d。\n"
+
+#: root-manager/root-manager.c:206
+#, c-format
+msgid "Password for %s"
+msgstr "%s 的密碼"
+
+#: root-manager/root-manager.c:401
+msgid "Consistency checking is not turned on."
+msgstr "不會檢查記憶的一致性"
+
+#: root-manager/root-manager.c:403
+msgid "Block is fine."
+msgstr "記憶區塊正常。"
+
+#: root-manager/root-manager.c:405
+msgid "Block freed twice."
+msgstr "記憶區塊正常。"
+
+#: root-manager/root-manager.c:407
+msgid "Memory before the block was clobbered."
+msgstr "該區塊前的記憶已被覆寫。"
+
+#: root-manager/root-manager.c:409
+msgid "Memory after the block was clobbered."
+msgstr "該區塊後的記憶已被覆寫。"
+
+#: root-manager/root-manager.c:439
+msgid "userhelper must be setuid root\n"
+msgstr ""
+
+#: root-manager/root-manager.c:444 root-manager/root-manager.c:450
+msgid "Usage: root-helper fd\n"
+msgstr ""
+
+#: root-manager/root-manager.c:554
+#, c-format
+msgid "PAM returned = %d\n"
+msgstr "PAM 回傳值 = %d\n"
+
+#: root-manager/root-manager.c:555
+#, c-format
+msgid "about to authenticate \"%s\"\n"
+msgstr "將要認証 \"%s\"\n"
+
+#: root-manager/root-manager.c:632 root-manager/root-manager.c:700
+#, c-format
+msgid "about to exec \"%s\"\n"
+msgstr "將要執行 \"%s\"\n"
+
+#~ msgid "The sound file for this event does not exist."
+#~ msgstr "這個事件所用的音效檔不存在。"
+
+#~ msgid ""
+#~ "The sound file for this event does not exist.\n"
+#~ "You may want to install the gnome-audio package\n"
+#~ "for a set of default sounds."
+#~ msgstr ""
+#~ "這個事件所用的音效檔不存在,\n"
+#~ "你可以安裝 gnome-audio 套件\n"
+#~ "來取得一些預設音效。"
+
+#~ msgid "Event"
+#~ msgstr "事件"
+
+#~ msgid "File to Play"
+#~ msgstr "播放的音效檔"
+
 #, fuzzy
-msgid "Select sound file"
-msgstr "選擇檢視器"
+#~ msgid "Select sound file"
+#~ msgstr "選擇檢視器"
+
+#~ msgid "Configure GNOME's use of sound"
+#~ msgstr "設定 GNOME 所用的音效"
+
+#~ msgid "Sound"
+#~ msgstr "音效"
+
+#~ msgid "Enable sound server startup"
+#~ msgstr "啟動時同時啟用音效伺服程式"
+
+#~ msgid "General"
+#~ msgstr "一般"
+
+#~ msgid "Sound Events"
+#~ msgstr "音效事件"
+
+#~ msgid "Sounds for events"
+#~ msgstr "事件音效"
 
 #~ msgid "Options for the startup hint dialog"
 #~ msgstr "啟動提示對話視窗的選項"
@@ -3229,9 +3495,6 @@ msgstr "選擇檢視器"
 #~ msgid "Use a picture for the background"
 #~ msgstr "背景會使用圖像"
 
-#~ msgid "Vertical gradient"
-#~ msgstr "垂直漸變色"
-
 #~ msgid "Set background image."
 #~ msgstr "設定背景圖像。"
 
@@ -3270,9 +3533,6 @@ msgstr "選擇檢視器"
 
 #~ msgid "One screensaver all the time"
 #~ msgstr "只使用一個螢幕保護程式"
-
-#~ msgid "Preview"
-#~ msgstr "預覽"
 
 #~ msgid "R_equire password to unlock screen"
 #~ msgstr "需要密碼來將畫面解封(_e)"
@@ -3315,9 +3575,6 @@ msgstr "選擇檢視器"
 #~ msgid "_Settings"
 #~ msgstr "設定(_S)"
 
-#~ msgid "minutes"
-#~ msgstr "分鐘"
-
 #~ msgid "Appearance"
 #~ msgstr "外觀"
 
@@ -3347,15 +3604,6 @@ msgstr "選擇檢視器"
 
 #~ msgid "GNOME Control Center options"
 #~ msgstr "GNOME 控制台選項"
-
-#~ msgid "(None)"
-#~ msgstr "(無)"
-
-#~ msgid "Wallpaper Selection"
-#~ msgstr "桌布選擇"
-
-#~ msgid "Can't find an hbox, using a normal file selection"
-#~ msgstr "找不到 hbox 元件，用一般的檔案選擇方式"
 
 #~ msgid "Use"
 #~ msgstr "使用"
@@ -4013,129 +4261,6 @@ msgstr "選擇檢視器"
 
 #~ msgid "Tree"
 #~ msgstr "樹狀圖"
-
-#~ msgid "Got error %d.\n"
-#~ msgstr "發生錯誤 %d。\n"
-
-#~ msgid "Password for %s"
-#~ msgstr "%s 的密碼"
-
-#~ msgid "Consistency checking is not turned on."
-#~ msgstr "不會檢查記憶的一致性"
-
-#~ msgid "Block is fine."
-#~ msgstr "記憶區塊正常。"
-
-#~ msgid "Block freed twice."
-#~ msgstr "記憶區塊正常。"
-
-#~ msgid "Memory before the block was clobbered."
-#~ msgstr "該區塊前的記憶已被覆寫。"
-
-#~ msgid "Memory after the block was clobbered."
-#~ msgstr "該區塊後的記憶已被覆寫。"
-
-#~ msgid "PAM returned = %d\n"
-#~ msgstr "PAM 回傳值 = %d\n"
-
-#~ msgid "about to authenticate \"%s\"\n"
-#~ msgstr "將要認証 \"%s\"\n"
-
-#~ msgid "about to exec \"%s\"\n"
-#~ msgstr "將要執行 \"%s\"\n"
-
-#~ msgid "Pipe error.\n"
-#~ msgstr "管道錯誤。\n"
-
-#~ msgid "Cannot fork().\n"
-#~ msgstr "無法 fork()。\n"
-
-#~ msgid "dup2() error.\n"
-#~ msgstr "dup2() 發生錯誤。\n"
-
-#~ msgid "execl() error, errno=%d\n"
-#~ msgstr "execl() 發生錯誤，錯誤編號=%d\n"
-
-#~ msgid "Information updated."
-#~ msgstr "資料已更新。"
-
-#~ msgid ""
-#~ "The password you typed is invalid.\n"
-#~ "Please try again."
-#~ msgstr ""
-#~ "你輸入的密碼不正確。\n"
-#~ "請再嘗試。"
-
-#~ msgid ""
-#~ "One or more of the changed fields is invalid.\n"
-#~ "This is probably due to either colons or commas in one of the fields.\n"
-#~ "Please remove those and try again."
-#~ msgstr ""
-#~ "其中一些已修改的欄位不正確。\n"
-#~ "這可能是因為這些欄位中有冒號或分號。\n"
-#~ "請移除它們並再嘗試。"
-
-#~ msgid "Password resetting error."
-#~ msgstr "密碼重設發生錯誤。"
-
-#~ msgid ""
-#~ "Some systems files are locked.\n"
-#~ "Please try again in a few moments."
-#~ msgstr ""
-#~ "其中一些系統檔案已被鎖定。\n"
-#~ "請稍後一會並再嘗試。"
-
-#~ msgid "Unknown user."
-#~ msgstr "不明的使用者。"
-
-#~ msgid "Insufficient rights."
-#~ msgstr "權限不足。"
-
-#~ msgid "Invalid call to sub process."
-#~ msgstr "不正確地呼叫副程序。"
-
-#~ msgid ""
-#~ "Your current shell is not listed in /etc/shells.\n"
-#~ "You are not allowed to change your shell.\n"
-#~ "Consult your system administrator."
-#~ msgstr ""
-#~ "你的命令殼並未列於 /etc/shells 中。\n"
-#~ "你不可以改變命令殼。\n"
-#~ "請聯絡系統管理員。"
-
-#~ msgid "Out of memory."
-#~ msgstr "記憶體不足。"
-
-#~ msgid "The exec() call failed."
-#~ msgstr "呼叫 exec() 失敗。"
-
-#~ msgid "Failed to find selected program."
-#~ msgstr "無法找出所選的程式。"
-
-#~ msgid "Unknown error."
-#~ msgstr "不明的錯誤。"
-
-#~ msgid "Unknown exit code."
-#~ msgstr "不明的跳出值。"
-
-#~ msgid "Input"
-#~ msgstr "輸入"
-
-#~ msgid "Need %d responses.\n"
-#~ msgstr "需要 %d 個回應。\n"
-
-#~ msgid ""
-#~ "In order to make changes to your system, you\n"
-#~ "must enter the administrator (root) password."
-#~ msgstr ""
-#~ "要修改系統設定，你必須\n"
-#~ "輸入管理者（root）的密碼。"
-
-#~ msgid "Error"
-#~ msgstr "錯誤"
-
-#~ msgid "Run Unprivileged"
-#~ msgstr "不使用足夠權限執行"
 
 #~ msgid "Control Center Menu"
 #~ msgstr "控制台選單"

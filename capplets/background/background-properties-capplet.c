@@ -300,8 +300,6 @@ main (int argc, char **argv)
 			    GNOME_PARAM_POPT_TABLE, cap_options,
 			    NULL);
 
-	setup_session_mgmt (argv[0]);
-
 	client = gconf_client_get_default ();
 	gconf_client_add_dir (client, "/desktop/gnome/background", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 

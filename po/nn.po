@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center-1.4.x\n"
-"POT-Creation-Date: 2001-12-20 10:42-0500\n"
+"POT-Creation-Date: 2002-01-14 12:01-0500\n"
 "PO-Revision-Date: 2001-06-25 18:55+02:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian (Nynorsk)\n"
@@ -18,266 +18,288 @@ msgstr ""
 msgid "Default location"
 msgstr "Forvalgt plassering"
 
-#: archiver/config-archiver.c:307 archiver/location.c:460
-msgid "Default Location"
-msgstr "Forvalgt plassering"
-
-#: archiver/config-archiver.c:81
+#: archiver/config-archiver.c:81 archiver/main.c:78
 #, fuzzy
 msgid "Store XML data in the archive"
 msgstr "Det er ikkje band i stasjonen."
 
-#: archiver/config-archiver.c:83
+#: archiver/config-archiver.c:83 archiver/main.c:80
 #, fuzzy
 msgid "Roll back the configuration to a given point"
 msgstr "filene for systemoppsettet.\n"
 
-#: archiver/config-archiver.c:85
+#: archiver/config-archiver.c:85 archiver/main.c:82
 #, fuzzy
 msgid "Change the location profile to the given one"
 msgstr "Erstatt programmet for oppgitt 'sessionId'"
 
-#: archiver/config-archiver.c:87
+#: archiver/config-archiver.c:87 archiver/main.c:84
 msgid "Push configuration data out to client machines (UNIMPLEMENTED)"
 msgstr ""
 
-#: archiver/config-archiver.c:89
+#: archiver/config-archiver.c:89 archiver/main.c:86
+#, fuzzy
 msgid "Rename a location to a new name"
-msgstr ""
+msgstr "Fjern det valte programmet frå lista"
 
-#: archiver/config-archiver.c:91
+#: archiver/config-archiver.c:91 archiver/main.c:88
 #, fuzzy
 msgid "Add a new location to the archive"
 msgstr "Legg til eit nytt program for denne filtypen."
 
-#: archiver/config-archiver.c:93
+#: archiver/config-archiver.c:93 archiver/main.c:90
 #, fuzzy
 msgid "Remove a location from the archive"
 msgstr "Fjern det valte programmet frå lista"
 
-#: archiver/config-archiver.c:95
+#: archiver/config-archiver.c:95 archiver/main.c:92
+#, fuzzy
 msgid "Add a given backend to the given location"
-msgstr ""
+msgstr "Fjernar den valte bindinga frå lista over agentbindingar."
 
-#: archiver/config-archiver.c:97
+#: archiver/config-archiver.c:97 archiver/main.c:94
 #, fuzzy
 msgid "Remove the given backend from the given location"
 msgstr "Fjernar den valte bindinga frå lista over agentbindingar."
 
-#: archiver/config-archiver.c:99
+#: archiver/config-archiver.c:99 archiver/main.c:96
 #, fuzzy
 msgid "Perform garbage collection on the given location"
 msgstr "Oppgi namnet på den nye samlinga"
 
-#: archiver/config-archiver.c:105
+#: archiver/config-archiver.c:105 archiver/main.c:102
 #, fuzzy
 msgid "Use the global repository"
 msgstr "Legg til depotet"
 
-#: archiver/config-archiver.c:107
+#: archiver/config-archiver.c:107 archiver/main.c:104
 msgid "Identifier of location profile on which to operate"
 msgstr ""
 
-#: archiver/config-archiver.c:108
+#: archiver/config-archiver.c:108 archiver/main.c:105
 msgid "LOCATION"
 msgstr ""
 
-#: archiver/config-archiver.c:110
+#: archiver/config-archiver.c:110 archiver/main.c:107
 #, fuzzy
 msgid "Backend being used for this operation"
 msgstr "Feil ved lagring. Avbryt."
 
-#: archiver/config-archiver.c:110
+#: archiver/config-archiver.c:110 archiver/main.c:107
 msgid "BACKEND_ID"
 msgstr ""
 
-#: archiver/config-archiver.c:116
+#: archiver/config-archiver.c:116 archiver/main.c:113
 msgid "Store only the differences with the parent location's config"
 msgstr ""
 
-#: archiver/config-archiver.c:118
+#: archiver/config-archiver.c:118 archiver/main.c:115
 msgid "Store only those settings set in the previous config"
 msgstr ""
 
-#: archiver/config-archiver.c:124
+#: archiver/config-archiver.c:124 archiver/main.c:121
 msgid "Date to which to roll back"
 msgstr ""
 
-#: archiver/config-archiver.c:124
+#: archiver/config-archiver.c:124 archiver/main.c:121
 #, fuzzy
 msgid "DATE"
 msgstr "ISTEXT(x)"
 
-#: archiver/config-archiver.c:126
+#: archiver/config-archiver.c:126 archiver/main.c:123
 #, fuzzy
 msgid "Roll back all configuration items"
 msgstr "filene for systemoppsettet.\n"
 
-#: archiver/config-archiver.c:128
+#: archiver/config-archiver.c:128 archiver/main.c:125
 msgid "Roll back to the revision REVISION_ID"
 msgstr ""
 
-#: archiver/config-archiver.c:128
+#: archiver/config-archiver.c:128 archiver/main.c:125
 msgid "REVISION_ID"
 msgstr ""
 
-#: archiver/config-archiver.c:130
+#: archiver/config-archiver.c:130 archiver/main.c:127
 msgid "Roll back to the last known revision"
 msgstr ""
 
-#: archiver/config-archiver.c:132
+#: archiver/config-archiver.c:132 archiver/main.c:129
 msgid "Roll back by STEPS revisions"
 msgstr ""
 
-#: archiver/config-archiver.c:132
+#: archiver/config-archiver.c:132 archiver/main.c:129
 #, fuzzy
 msgid "STEPS"
 msgstr "STOP"
 
-#: archiver/config-archiver.c:134
+#: archiver/config-archiver.c:134 archiver/main.c:131
 msgid "Don't run the backend, just dump the output"
 msgstr ""
 
-#: archiver/config-archiver.c:140
+#: archiver/config-archiver.c:140 archiver/main.c:137
 #, fuzzy
 msgid "Parent location for the new location"
 msgstr "Oppgi namnet på den nye samlinga"
 
-#: archiver/config-archiver.c:140
+#: archiver/config-archiver.c:140 archiver/main.c:137
 msgid "PARENT"
 msgstr ""
 
-#: archiver/config-archiver.c:142
+#: archiver/config-archiver.c:142 archiver/main.c:139
+#, fuzzy
 msgid "New name to assign to the location"
-msgstr ""
+msgstr "Oppgi namnet på den nye samlinga"
 
-#: archiver/config-archiver.c:142
+#: archiver/config-archiver.c:142 archiver/main.c:139
 msgid "NEW_NAME"
 msgstr ""
 
-#: archiver/config-archiver.c:148
+#: archiver/config-archiver.c:148 archiver/main.c:145
+#, fuzzy
 msgid "Add/remove this backend to/from the master backend list"
-msgstr ""
+msgstr "Fjernar den valte bindinga frå lista over agentbindingar."
 
-#: archiver/config-archiver.c:150
+#: archiver/config-archiver.c:150 archiver/main.c:147
 #, fuzzy
 msgid "Full containment"
 msgstr "Fullt namn"
 
-#: archiver/config-archiver.c:152
+#: archiver/config-archiver.c:152 archiver/main.c:149
 #, fuzzy
 msgid "Partial containment"
 msgstr "Vertikal justering"
 
-#: archiver/config-archiver.c:369
+#: archiver/config-archiver.c:307 archiver/location.c:460
+msgid "Default Location"
+msgstr "Forvalgt plassering"
+
+#: archiver/config-archiver.c:369 archiver/main.c:323
 #, fuzzy
 msgid "Global archiver options"
 msgstr ": Globale val"
 
-#: archiver/config-archiver.c:371
+#: archiver/config-archiver.c:371 archiver/main.c:325
 #, fuzzy
 msgid "Archiver commands"
 msgstr "Arkivteljar:"
 
-#: archiver/config-archiver.c:373
+#: archiver/config-archiver.c:373 archiver/main.c:327
 #, fuzzy
 msgid "Options for storing data"
 msgstr "Val for redigering"
 
-#: archiver/config-archiver.c:375
+#: archiver/config-archiver.c:375 archiver/main.c:329
 #, fuzzy
 msgid "Options for rolling back"
 msgstr "Val for redigering"
 
-#: archiver/config-archiver.c:377
+#: archiver/config-archiver.c:377 archiver/main.c:331
 #, fuzzy
 msgid "Options for adding or renaming locations"
 msgstr "Val for søking i liknande omsetjingar"
 
-#: archiver/config-archiver.c:380
+#: archiver/config-archiver.c:380 archiver/main.c:334
 #, fuzzy
 msgid "Options for adding and removing backends"
 msgstr "Val for lagring av fil"
 
-#: capplets/background/background.desktop.in.in.h:1
-msgid "Background"
-msgstr ""
-
-#: capplets/background/background.desktop.in.in.h:2
-#, fuzzy
-msgid "Configuration of the desktop's background"
-msgstr "Oppsettmodulen som skal opnast."
-
-#: capplets/background/background-properties-capplet.c:288
-#: capplets/common/capplet-util.c:249
+#: capplets/background/background-properties-capplet.c:291
+#: capplets/common/capplet-util.c:243
 msgid "Retrieve and store legacy settings"
 msgstr ""
 
-#: capplets/background/background-properties-capplet.c:313
+#: capplets/background/background-properties-capplet.c:315
 #, fuzzy
 msgid "Background properties"
 msgstr "&Tastatur"
 
-#: capplets/common/capplet-util.c:245 capplets/common/capplet-util.c:247
+#: capplets/background/background.desktop.in.h:1
+msgid "Background"
+msgstr ""
+
+#: capplets/background/background.desktop.in.h:2
+#, fuzzy
+msgid "Configuration of the desktop's background"
+msgstr "Oppsettmodulen som skal opnast."
+
+#: capplets/background/prefs-widget.c:362
+#, fuzzy
+msgid "(None)"
+msgstr "(ingen)"
+
+#: capplets/background/prefs-widget.c:611
+#, fuzzy
+msgid "Wallpaper Selection"
+msgstr "&Utval"
+
+#: capplets/background/prefs-widget.c:618
+msgid "Can't find an hbox, using a normal file selection"
+msgstr ""
+
+#: capplets/background/prefs-widget.c:624
+msgid "Preview"
+msgstr "Førehandsvis"
+
+#: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:140
+#: capplets/common/gconf-property-editor.c:144
 msgid "Key"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:141
+#: capplets/common/gconf-property-editor.c:145
 msgid "GConf key to which this property editor is attached"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:147
+#: capplets/common/gconf-property-editor.c:151
 msgid "Callback"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:148
+#: capplets/common/gconf-property-editor.c:152
 msgid "Issue this callback when the value associated with key gets changed"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:153
+#: capplets/common/gconf-property-editor.c:157
 msgid "Change set"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:154
+#: capplets/common/gconf-property-editor.c:158
 msgid ""
 "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:159
+#: capplets/common/gconf-property-editor.c:163
 msgid "Conversion to widget callback"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:160
+#: capplets/common/gconf-property-editor.c:164
 msgid ""
 "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:165
+#: capplets/common/gconf-property-editor.c:169
 msgid "Conversion from widget callback"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:166
+#: capplets/common/gconf-property-editor.c:170
 msgid ""
 "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:171
+#: capplets/common/gconf-property-editor.c:175
 msgid "UI Control"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:172
+#: capplets/common/gconf-property-editor.c:176
 msgid "Object that controls the property (normally a widget)"
 msgstr ""
 
-#: capplets/default-applications/default-applications.desktop.in.in.h:1
+#: capplets/default-applications/default-applications.desktop.in.h:1
 msgid "Choose the applications used by default"
 msgstr ""
 
-#: capplets/default-applications/default-applications.desktop.in.in.h:2
+#: capplets/default-applications/default-applications.desktop.in.h:2
 #: capplets/default-applications/interface.c:97
 #: capplets/screensaver/main.c:168
 #, fuzzy
@@ -475,33 +497,112 @@ msgstr ""
 msgid "Couldn't create pixmap from file: %s"
 msgstr ""
 
-#: capplets/keyboard/keyboard.desktop.in.in.h:1
+#: capplets/keyboard/keyboard.desktop.in.h:1
 #, fuzzy
 msgid "Keyboard"
 msgstr "&Tastatur"
 
-#: capplets/keyboard/keyboard.desktop.in.in.h:2
+#: capplets/keyboard/keyboard.desktop.in.h:2
 #, fuzzy
 msgid "Keyboard Properties"
 msgstr "&Tastatur"
 
-#: capplets/mouse/mouse.desktop.in.in.h:1
+#: capplets/mouse/mouse.desktop.in.h:1
 #, fuzzy
 msgid "Mouse"
 msgstr "Lukk"
 
-#: capplets/mouse/mouse.desktop.in.in.h:2
+#: capplets/mouse/mouse.desktop.in.h:2
 #, fuzzy
 msgid "Mouse Properties"
 msgstr "Lesefart"
 
-#: capplets/screensaver/preferences.c:813
+#: capplets/rollback/main.c:39
+#, fuzzy
+msgid "Rollback the capplet given"
+msgstr "filene for systemoppsettet.\n"
+
+#: capplets/rollback/main.c:41
+#, fuzzy
+msgid "Operate on global backends"
+msgstr "Feil ved operasjon"
+
+#: capplets/rollback/main.c:56
+#, fuzzy
+msgid "Options for the rollback GUI"
+msgstr "Val for redigering"
+
+#: capplets/rollback/rollback-capplet-dialog.c:46
+#, fuzzy
+msgid "1 year ago"
+msgstr "dagar"
+
+#: capplets/rollback/rollback-capplet-dialog.c:46
+#, fuzzy
+msgid "6 months ago"
+msgstr "minutt"
+
+#: capplets/rollback/rollback-capplet-dialog.c:46
+#, fuzzy
+msgid "1 month ago"
+msgstr "minutt"
+
+#: capplets/rollback/rollback-capplet-dialog.c:46
+#, fuzzy
+msgid "1 week ago"
+msgstr "minutt"
+
+#: capplets/rollback/rollback-capplet-dialog.c:47
+#, fuzzy
+msgid "3 days ago"
+msgstr "dagar"
+
+#: capplets/rollback/rollback-capplet-dialog.c:47
+#, fuzzy
+msgid "1 day ago"
+msgstr "dagar"
+
+#: capplets/rollback/rollback-capplet-dialog.c:47
+#, fuzzy
+msgid "1 hour ago"
+msgstr "minutt"
+
+#: capplets/rollback/rollback-capplet-dialog.c:47
+#, fuzzy
+msgid "30 minutes ago"
+msgstr "minutt"
+
+#: capplets/rollback/rollback-capplet-dialog.c:48
+#, fuzzy
+msgid "10 minutes ago"
+msgstr "minutt"
+
+#: capplets/rollback/rollback-capplet-dialog.c:48
+#, fuzzy
+msgid "5 minutes ago"
+msgstr "minutt"
+
+#: capplets/rollback/rollback-capplet-dialog.c:48
+#, fuzzy
+msgid "1 minute ago"
+msgstr "minutt"
+
+#: capplets/rollback/rollback-capplet-dialog.c:48
+#, fuzzy
+msgid "Current time"
+msgstr "Sentrert"
+
+#: capplets/rollback/rollback-capplet-dialog.c:169
+msgid "Rollback"
+msgstr ""
+
+#: capplets/screensaver/preferences.c:815
 #, fuzzy
 msgid "Custom screensaver. No description available"
 msgstr "Inga skildring tilgjengeleg"
 
 #: capplets/screensaver/prefs-widget.c:192
-#: capplets/screensaver/screensaver.desktop.in.in.h:2
+#: capplets/screensaver/screensaver.desktop.in.h:2
 #, fuzzy
 msgid "Screensaver"
 msgstr "Skjermsparar"
@@ -510,11 +611,6 @@ msgstr "Skjermsparar"
 #, c-format
 msgid "About %s\n"
 msgstr ""
-
-#: capplets/screensaver/screensaver.desktop.in.in.h:1
-#, fuzzy
-msgid "Configure the settings of the screensaver"
-msgstr "Kan ikkje tilpassa den skrivaren."
 
 #: capplets/screensaver/screensaver-prefs-dialog.c:185
 msgid "Name:"
@@ -569,6 +665,11 @@ msgstr "&Visuelt"
 #, fuzzy
 msgid "Any"
 msgstr "og"
+
+#: capplets/screensaver/screensaver.desktop.in.h:1
+#, fuzzy
+msgid "Configure the settings of the screensaver"
+msgstr "Kan ikkje tilpassa den skrivaren."
 
 #: capplets/screensaver/screensavers/3d_clock.xml.h:1
 msgid "3d clock"
@@ -2079,19 +2180,6 @@ msgstr ""
 msgid "Moebius"
 msgstr "Lukk"
 
-#: capplets/screensaver/screensavers/moire2.xml.h:1
-msgid ""
-"Another example of the fun you can have with moire interference patterns; "
-"this hack generates fields of concentric circles or ovals, and combines the "
-"planes with various operations. The planes are moving independently of one "
-"another, causing the interference lines to ``spray.'' Written by Jamie "
-"Zawinski."
-msgstr ""
-
-#: capplets/screensaver/screensavers/moire2.xml.h:2
-msgid "Moire2"
-msgstr ""
-
 #: capplets/screensaver/screensavers/moire.xml.h:5
 msgid "Maximum radius increment"
 msgstr ""
@@ -2110,6 +2198,19 @@ msgid ""
 "this one is that the heart of the display algorithm can be expressed with "
 "just a pair of loops and a handful of arithmetic, giving it a high ``display "
 "hack metric''."
+msgstr ""
+
+#: capplets/screensaver/screensavers/moire2.xml.h:1
+msgid ""
+"Another example of the fun you can have with moire interference patterns; "
+"this hack generates fields of concentric circles or ovals, and combines the "
+"planes with various operations. The planes are moving independently of one "
+"another, causing the interference lines to ``spray.'' Written by Jamie "
+"Zawinski."
+msgstr ""
+
+#: capplets/screensaver/screensavers/moire2.xml.h:2
+msgid "Moire2"
 msgstr ""
 
 #: capplets/screensaver/screensavers/molecule.xml.h:1
@@ -2485,16 +2586,6 @@ msgid ""
 "like vapor trails or neon tubes. Written by Shane Smit."
 msgstr ""
 
-#: capplets/screensaver/screensavers/sierpinski3d.xml.h:1
-msgid "Sierpinski3D"
-msgstr ""
-
-#: capplets/screensaver/screensavers/sierpinski3d.xml.h:2
-msgid ""
-"This draws the three-dimensional variant of the recursive Sierpinski "
-"triangle fractal, using GL. Written by Tim Robinson and Jamie Zawinski."
-msgstr ""
-
 #: capplets/screensaver/screensavers/sierpinski.xml.h:5
 msgid "Sierpinski"
 msgstr ""
@@ -2503,6 +2594,16 @@ msgstr ""
 msgid ""
 "This draws the two-dimensional variant of the recursive Sierpinski triangle "
 "fractal. Written by Desmond Daignault."
+msgstr ""
+
+#: capplets/screensaver/screensavers/sierpinski3d.xml.h:1
+msgid "Sierpinski3D"
+msgstr ""
+
+#: capplets/screensaver/screensavers/sierpinski3d.xml.h:2
+msgid ""
+"This draws the three-dimensional variant of the recursive Sierpinski "
+"triangle fractal, using GL. Written by Tim Robinson and Jamie Zawinski."
 msgstr ""
 
 #: capplets/screensaver/screensavers/slidescreen.xml.h:1
@@ -3026,89 +3127,10 @@ msgstr "Tilpassa"
 msgid "New screensaver"
 msgstr "Name=Skjermsparar"
 
-#: capplets/sound/sound.desktop.in.in.h:1
-msgid "Configure GNOME's use of sound"
-msgstr ""
-
-#: capplets/sound/sound.desktop.in.in.h:2
-msgid "Sound"
-msgstr ""
-
-#: capplets/sound/sound-properties.glade.h:1
+#: capplets/sound/prefs-widget.c:138
 #, fuzzy
-msgid "Enable sound server startup"
-msgstr "&Start aRts lydtenar ved oppstart av KDE"
-
-#: capplets/sound/sound-properties.glade.h:2
-#, fuzzy
-msgid "General"
-msgstr "Generelt"
-
-#: capplets/sound/sound-properties.glade.h:3
-#, fuzzy
-msgid "Sound Events"
-msgstr "Finn hendingar"
-
-#: capplets/sound/sound-properties.glade.h:4
-#, fuzzy
-msgid "Sounds for events"
-msgstr "Lydeffektar"
-
-#: control-center/capplet-dir-view.c:147
-msgid "Layout"
-msgstr ""
-
-#: control-center/capplet-dir-view.c:148
-msgid "Layout to use for this view of the capplets"
-msgstr ""
-
-#: control-center/capplet-dir-view.c:154
-msgid "Capplet directory object"
-msgstr ""
-
-#: control-center/capplet-dir-view.c:155
-msgid "Capplet directory that this view is viewing"
-msgstr ""
-
-#: control-center/capplet-dir-view.c:320 control-center/gnomecc.desktop.in.h:1
-#, fuzzy
-msgid "GNOME Control Center"
-msgstr "KDE Kontrollsenter"
-
-#: control-center/capplet-dir-view.c:323
-#, fuzzy
-msgid "Desktop properties manager."
-msgstr "Skrivebord / Filbehandlar"
-
-#: control-center/capplet-dir-view.c:448
-#, fuzzy, c-format
-msgid "Gnome Control Center : %s"
-msgstr "KDE Kontrollsenter"
-
-#: control-center/capplet-dir-view.c:493
-msgid ""
-"No help is available/installed. Please make sure you\n"
-"have the GNOME User's Guide installed on your system."
-msgstr ""
-
-#: control-center/capplet-dir-view.c:496
-msgid "Close"
-msgstr "Lukk"
-
-#: control-center/capplet-dir-view-html.c:145
-#, fuzzy
-msgid "GNOME Control Center:"
-msgstr "KDE Kontrollsenter"
-
-#: control-center/capplet-dir-view-list.c:321
-#, fuzzy, c-format
-msgid "GNOME Control Center: %s"
-msgstr "KDE Kontrollsenter"
-
-#: control-center/gnomecc.desktop.in.h:2
-#, fuzzy
-msgid "The GNOME configuration tool"
-msgstr "Gjenopprett &ruteoppsett"
+msgid "Play"
+msgstr "Spel"
 
 #: control-center/Gnome.directory.in.in.h:1
 msgid "Main"
@@ -3119,53 +3141,296 @@ msgstr ""
 msgid "Main Settings"
 msgstr "Innstillingar"
 
-#: libbackground/applier.c:229
+#: control-center/capplet-dir-view-html.c:145
+#, fuzzy
+msgid "GNOME Control Center:"
+msgstr "KDE Kontrollsenter"
+
+#: control-center/capplet-dir-view-list.c:325
+#, fuzzy, c-format
+msgid "GNOME Control Center: %s"
+msgstr "KDE Kontrollsenter"
+
+#: control-center/capplet-dir-view.c:146
+msgid "Layout"
+msgstr ""
+
+#: control-center/capplet-dir-view.c:147
+msgid "Layout to use for this view of the capplets"
+msgstr ""
+
+#: control-center/capplet-dir-view.c:153
+msgid "Capplet directory object"
+msgstr ""
+
+#: control-center/capplet-dir-view.c:154
+msgid "Capplet directory that this view is viewing"
+msgstr ""
+
+#: control-center/capplet-dir-view.c:308 control-center/gnomecc.desktop.in.h:1
+#, fuzzy
+msgid "GNOME Control Center"
+msgstr "KDE Kontrollsenter"
+
+#: control-center/capplet-dir-view.c:311
+#, fuzzy
+msgid "Desktop properties manager."
+msgstr "Skrivebord / Filbehandlar"
+
+#: control-center/capplet-dir-view.c:445
+#, fuzzy, c-format
+msgid "Gnome Control Center : %s"
+msgstr "KDE Kontrollsenter"
+
+#: control-center/capplet-dir-view.c:488
+msgid ""
+"No help is available/installed. Please make sure you\n"
+"have the GNOME User's Guide installed on your system."
+msgstr ""
+
+#: control-center/capplet-dir-view.c:491
+msgid "Close"
+msgstr "Lukk"
+
+#: control-center/gnomecc.desktop.in.h:2
+#, fuzzy
+msgid "The GNOME configuration tool"
+msgstr "Gjenopprett &ruteoppsett"
+
+#: libbackground/applier.c:228
 msgid "Type"
 msgstr ""
 
-#: libbackground/applier.c:230
+#: libbackground/applier.c:229
 msgid ""
 "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
 "for preview"
 msgstr ""
 
-#: libbackground/applier.c:385
+#: libbackground/applier.c:388
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr ""
 
-#: libbackground/applier.c:501
+#: libbackground/applier.c:505
 msgid "Disabled"
 msgstr "Av"
 
-#: libsounds/sound-view.c:98
-msgid "The sound file for this event does not exist."
+#: root-manager/root-manager-helper.c:54
+#, fuzzy
+msgid "Could not connect to X Display"
+msgstr ""
+"Kunne ikkje kopla til vert\n"
+"%1"
+
+#: root-manager/root-manager-helper.c:60
+#, fuzzy
+msgid "Could not duplicate file descriptor"
+msgstr "Kunne ikkje sletta fila %1"
+
+#: root-manager/root-manager-wrap.c:56
+#, fuzzy
+msgid "Pipe error.\n"
+msgstr "Filfeil."
+
+#: root-manager/root-manager-wrap.c:62
+#, fuzzy
+msgid "Cannot fork().\n"
+msgstr "Kan ikkje utføra fork()"
+
+#: root-manager/root-manager-wrap.c:83 root-manager/root-manager-wrap.c:93
+#, fuzzy
+msgid "dup2() error.\n"
+msgstr "Lenkjefeil."
+
+#: root-manager/root-manager-wrap.c:123
+#, c-format
+msgid "execl() error, errno=%d\n"
 msgstr ""
 
-#: libsounds/sound-view.c:100
+#: root-manager/root-manager-wrap.c:152
+#, fuzzy
+msgid "Information updated."
+msgstr "Informasjon"
+
+#: root-manager/root-manager-wrap.c:155
+#, fuzzy
 msgid ""
-"The sound file for this event does not exist.\n"
-"You may want to install the gnome-audio package\n"
-"for a set of default sounds."
+"The password you typed is invalid.\n"
+"Please try again."
+msgstr "Passordteksten du oppgav er ugyldig."
+
+#: root-manager/root-manager-wrap.c:158
+msgid ""
+"One or more of the changed fields is invalid.\n"
+"This is probably due to either colons or commas in one of the fields.\n"
+"Please remove those and try again."
 msgstr ""
 
-#: libsounds/sound-view.c:152
-msgid "Event"
-msgstr "Hending"
-
-#: libsounds/sound-view.c:152
+#: root-manager/root-manager-wrap.c:161
 #, fuzzy
-msgid "File to Play"
-msgstr "Filer som skal opnast"
+msgid "Password resetting error."
+msgstr "Comment=Passordinnstillingar"
 
-#: libsounds/sound-view.c:185
-#, fuzzy
-msgid "Play"
-msgstr "Spel"
-
-#: libsounds/sound-view.c:190
-msgid "Select sound file"
+#: root-manager/root-manager-wrap.c:164
+msgid ""
+"Some systems files are locked.\n"
+"Please try again in a few moments."
 msgstr ""
+
+#: root-manager/root-manager-wrap.c:167
+#, fuzzy
+msgid "Unknown user."
+msgstr "Ukjend feil."
+
+#: root-manager/root-manager-wrap.c:170
+#, fuzzy
+msgid "Insufficient rights."
+msgstr "Ikkje nok minne"
+
+#: root-manager/root-manager-wrap.c:173
+#, fuzzy
+msgid "Invalid call to sub process."
+msgstr "Kunne ikkje starta underprosess."
+
+#: root-manager/root-manager-wrap.c:176
+msgid ""
+"Your current shell is not listed in /etc/shells.\n"
+"You are not allowed to change your shell.\n"
+"Consult your system administrator."
+msgstr ""
+
+#. well, this is unlikely to work either, but at least we tried...
+#: root-manager/root-manager-wrap.c:180
+msgid "Out of memory."
+msgstr "Ikkje nok minne."
+
+#: root-manager/root-manager-wrap.c:183
+#, fuzzy
+msgid "The exec() call failed."
+msgstr "DCOP-kall køyrd"
+
+#: root-manager/root-manager-wrap.c:186
+#, fuzzy
+msgid "Failed to find selected program."
+msgstr "Kunne ikkje køyra e-postprogram"
+
+#: root-manager/root-manager-wrap.c:189
+msgid "Unknown error."
+msgstr "Ukjend feil."
+
+#: root-manager/root-manager-wrap.c:192
+#, fuzzy
+msgid "Unknown exit code."
+msgstr "Ukjend eining"
+
+#: root-manager/root-manager-wrap.c:280
+#, fuzzy
+msgid "Input"
+msgstr "Heiltal"
+
+#: root-manager/root-manager-wrap.c:386
+#, c-format
+msgid "Need %d responses.\n"
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:411
+msgid ""
+"In order to make changes to your system, you\n"
+"must enter the administrator (root) password."
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:425
+msgid "Error"
+msgstr "Feil"
+
+#: root-manager/root-manager-wrap.c:439
+#, c-format
+msgid "You want %d response(s) from %d entry fields!?!?!\n"
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:445
+#, fuzzy
+msgid "Run Unprivileged"
+msgstr "Manglar privilegium"
+
+#: root-manager/root-manager.c:110
+#, fuzzy, c-format
+msgid "Got error %d.\n"
+msgstr "Ingen feil."
+
+#: root-manager/root-manager.c:206
+#, fuzzy, c-format
+msgid "Password for %s"
+msgstr "Passord %1"
+
+#: root-manager/root-manager.c:401
+msgid "Consistency checking is not turned on."
+msgstr ""
+
+#: root-manager/root-manager.c:403
+#, fuzzy
+msgid "Block is fine."
+msgstr "Blokkstorleik"
+
+#: root-manager/root-manager.c:405
+#, fuzzy
+msgid "Block freed twice."
+msgstr "Blokkstorleik"
+
+#: root-manager/root-manager.c:407
+msgid "Memory before the block was clobbered."
+msgstr ""
+
+#: root-manager/root-manager.c:409
+msgid "Memory after the block was clobbered."
+msgstr ""
+
+#: root-manager/root-manager.c:439
+msgid "userhelper must be setuid root\n"
+msgstr ""
+
+#: root-manager/root-manager.c:444 root-manager/root-manager.c:450
+msgid "Usage: root-helper fd\n"
+msgstr ""
+
+#: root-manager/root-manager.c:554
+#, c-format
+msgid "PAM returned = %d\n"
+msgstr ""
+
+#: root-manager/root-manager.c:555
+#, c-format
+msgid "about to authenticate \"%s\"\n"
+msgstr ""
+
+#: root-manager/root-manager.c:632 root-manager/root-manager.c:700
+#, c-format
+msgid "about to exec \"%s\"\n"
+msgstr ""
+
+#~ msgid "Event"
+#~ msgstr "Hending"
+
+#, fuzzy
+#~ msgid "File to Play"
+#~ msgstr "Filer som skal opnast"
+
+#, fuzzy
+#~ msgid "Enable sound server startup"
+#~ msgstr "&Start aRts lydtenar ved oppstart av KDE"
+
+#, fuzzy
+#~ msgid "General"
+#~ msgstr "Generelt"
+
+#, fuzzy
+#~ msgid "Sound Events"
+#~ msgstr "Finn hendingar"
+
+#, fuzzy
+#~ msgid "Sounds for events"
+#~ msgstr "Lydeffektar"
 
 #~ msgid "Centered"
 #~ msgstr "Sentrert"
@@ -3271,9 +3536,6 @@ msgstr ""
 #~ msgid "One screensaver all the time"
 #~ msgstr "Start skjermsparar i demomodus."
 
-#~ msgid "Preview"
-#~ msgstr "Førehandsvis"
-
 #, fuzzy
 #~ msgid "R_equire password to unlock screen"
 #~ msgstr "&Krev passord"
@@ -3368,54 +3630,6 @@ msgstr ""
 
 #~ msgid "Use"
 #~ msgstr "Bruk"
-
-#, fuzzy
-#~ msgid "(None)"
-#~ msgstr "(ingen)"
-
-#, fuzzy
-#~ msgid "Wallpaper Selection"
-#~ msgstr "&Utval"
-
-#, fuzzy
-#~ msgid "Rollback the capplet given"
-#~ msgstr "filene for systemoppsettet.\n"
-
-#, fuzzy
-#~ msgid "Operate on global backends"
-#~ msgstr "Feil ved operasjon"
-
-#, fuzzy
-#~ msgid "Options for the rollback GUI"
-#~ msgstr "Val for redigering"
-
-#, fuzzy
-#~ msgid "3 days ago"
-#~ msgstr "dagar"
-
-#, fuzzy
-#~ msgid "1 day ago"
-#~ msgstr "dagar"
-
-#, fuzzy
-#~ msgid "30 minutes ago"
-#~ msgstr "minutt"
-
-#, fuzzy
-#~ msgid "10 minutes ago"
-#~ msgstr "minutt"
-
-#, fuzzy
-#~ msgid "5 minutes ago"
-#~ msgstr "minutt"
-
-#, fuzzy
-#~ msgid "1 minute ago"
-#~ msgstr "minutt"
-
-#, fuzzy
-#~ msgid "Current time"
-#~ msgstr "Sentrert"
 
 #, fuzzy
 #~ msgid "Control Center Menu"
@@ -3536,92 +3750,3 @@ msgstr ""
 
 #~ msgid "Enable"
 #~ msgstr "på"
-
-#, fuzzy
-#~ msgid "Got error %d.\n"
-#~ msgstr "Ingen feil."
-
-#, fuzzy
-#~ msgid "Password for %s"
-#~ msgstr "Passord %1"
-
-#, fuzzy
-#~ msgid "Block is fine."
-#~ msgstr "Blokkstorleik"
-
-#, fuzzy
-#~ msgid "Could not connect to X Display"
-#~ msgstr ""
-#~ "Kunne ikkje kopla til vert\n"
-#~ "%1"
-
-#, fuzzy
-#~ msgid "Could not duplicate file descriptor"
-#~ msgstr "Kunne ikkje sletta fila %1"
-
-#, fuzzy
-#~ msgid "Pipe error.\n"
-#~ msgstr "Filfeil."
-
-#, fuzzy
-#~ msgid "Cannot fork().\n"
-#~ msgstr "Kan ikkje utføra fork()"
-
-#, fuzzy
-#~ msgid "dup2() error.\n"
-#~ msgstr "Lenkjefeil."
-
-#, fuzzy
-#~ msgid "Information updated."
-#~ msgstr "Informasjon"
-
-#, fuzzy
-#~ msgid ""
-#~ "The password you typed is invalid.\n"
-#~ "Please try again."
-#~ msgstr "Passordteksten du oppgav er ugyldig."
-
-#, fuzzy
-#~ msgid "Password resetting error."
-#~ msgstr "Comment=Passordinnstillingar"
-
-#, fuzzy
-#~ msgid "Unknown user."
-#~ msgstr "Ukjend feil."
-
-#, fuzzy
-#~ msgid "Insufficient rights."
-#~ msgstr "Ikkje nok minne"
-
-#, fuzzy
-#~ msgid "Invalid call to sub process."
-#~ msgstr "Kunne ikkje starta underprosess."
-
-#~ msgid "Out of memory."
-#~ msgstr "Ikkje nok minne."
-
-#, fuzzy
-#~ msgid "The exec() call failed."
-#~ msgstr "DCOP-kall køyrd"
-
-#, fuzzy
-#~ msgid "Failed to find selected program."
-#~ msgstr "Kunne ikkje køyra e-postprogram"
-
-#~ msgid "Unknown error."
-#~ msgstr "Ukjend feil."
-
-#, fuzzy
-#~ msgid "Unknown exit code."
-#~ msgstr "Ukjend eining"
-
-#, fuzzy
-#~ msgid "Input"
-#~ msgstr "Heiltal"
-
-#~ msgid "Error"
-#~ msgstr "Feil"
-
-#, fuzzy
-#~ msgid "Run Unprivileged"
-#~ msgstr "Manglar privilegium"

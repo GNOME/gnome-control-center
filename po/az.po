@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 1.5.7\n"
-"POT-Creation-Date: 2001-12-20 10:42-0500\n"
+"POT-Creation-Date: 2002-01-14 12:01-0500\n"
 "PO-Revision-Date: 2001-12-26 19:08GMT+0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkic <linuxaz@azerimail.net>\n"
@@ -20,240 +20,259 @@ msgstr ""
 msgid "Default location"
 msgstr "Əsas yer"
 
+#: archiver/config-archiver.c:81 archiver/main.c:78
+msgid "Store XML data in the archive"
+msgstr "XML veriləni arxivdə qeyd edilir"
+
+#: archiver/config-archiver.c:83 archiver/main.c:80
+msgid "Roll back the configuration to a given point"
+msgstr "Quğuları verilən nöqtəyə qaytar"
+
+#: archiver/config-archiver.c:85 archiver/main.c:82
+msgid "Change the location profile to the given one"
+msgstr "Verilənin yer profilini dəyişdir"
+
+#: archiver/config-archiver.c:87 archiver/main.c:84
+msgid "Push configuration data out to client machines (UNIMPLEMENTED)"
+msgstr "Quraşdırma verilənlərini alıcı kompüterlərdən at (DƏSTƏKLƏNMİR)"
+
+#: archiver/config-archiver.c:89 archiver/main.c:86
+msgid "Rename a location to a new name"
+msgstr "Yeri yenı adla adlandır"
+
+#: archiver/config-archiver.c:91 archiver/main.c:88
+msgid "Add a new location to the archive"
+msgstr "Arxivə yeni yer əlavə et"
+
+#: archiver/config-archiver.c:93 archiver/main.c:90
+msgid "Remove a location from the archive"
+msgstr "Yeri arxivdən çıxart"
+
+#: archiver/config-archiver.c:95 archiver/main.c:92
+msgid "Add a given backend to the given location"
+msgstr "Verilən yerə verilən bəkendi əlavə et"
+
+#: archiver/config-archiver.c:97 archiver/main.c:94
+msgid "Remove the given backend from the given location"
+msgstr "Verilən yerdən verilən bəkendi çıxart"
+
+#: archiver/config-archiver.c:99 archiver/main.c:96
+msgid "Perform garbage collection on the given location"
+msgstr "Verilən yerdən zıbıl topla"
+
+#: archiver/config-archiver.c:105 archiver/main.c:102
+msgid "Use the global repository"
+msgstr "Qlobal nüzxə işlət"
+
+#: archiver/config-archiver.c:107 archiver/main.c:104
+msgid "Identifier of location profile on which to operate"
+msgstr "Üstündə işlənəcək yer profilinin vəsfləndiricisi"
+
+#: archiver/config-archiver.c:108 archiver/main.c:105
+msgid "LOCATION"
+msgstr "YER"
+
+#: archiver/config-archiver.c:110 archiver/main.c:107
+msgid "Backend being used for this operation"
+msgstr "Bu əməliyyat üçün işlədiləcək bəkend"
+
+#: archiver/config-archiver.c:110 archiver/main.c:107
+msgid "BACKEND_ID"
+msgstr "BACKEND_ID"
+
+#: archiver/config-archiver.c:116 archiver/main.c:113
+msgid "Store only the differences with the parent location's config"
+msgstr "Təkcə qohum yerlər arasındakı fərqləri saxla"
+
+#: archiver/config-archiver.c:118 archiver/main.c:115
+msgid "Store only those settings set in the previous config"
+msgstr "Təkcə əvvəlki quraşdırmadaı seçənəkləri saxla"
+
+#: archiver/config-archiver.c:124 archiver/main.c:121
+msgid "Date to which to roll back"
+msgstr "Qaytarılacaq tarix"
+
+#: archiver/config-archiver.c:124 archiver/main.c:121
+msgid "DATE"
+msgstr "TARİX"
+
+#: archiver/config-archiver.c:126 archiver/main.c:123
+msgid "Roll back all configuration items"
+msgstr "Bütün quraşdırma üzvlərini qaytar"
+
+#: archiver/config-archiver.c:128 archiver/main.c:125
+msgid "Roll back to the revision REVISION_ID"
+msgstr "Əvvəlki REVISION_İDyə qaytar"
+
+#: archiver/config-archiver.c:128 archiver/main.c:125
+msgid "REVISION_ID"
+msgstr "REVISION_ID"
+
+#: archiver/config-archiver.c:130 archiver/main.c:127
+msgid "Roll back to the last known revision"
+msgstr "Ən axırıncı təftişə qaytar"
+
+#: archiver/config-archiver.c:132 archiver/main.c:129
+msgid "Roll back by STEPS revisions"
+msgstr "PİLLƏ təftişlərinı qaytar"
+
+#: archiver/config-archiver.c:132 archiver/main.c:129
+msgid "STEPS"
+msgstr "PİLLƏLƏR"
+
+#: archiver/config-archiver.c:134 archiver/main.c:131
+msgid "Don't run the backend, just dump the output"
+msgstr "Bəkendi icra etmə, təkcə yekunu ver"
+
+#: archiver/config-archiver.c:140 archiver/main.c:137
+msgid "Parent location for the new location"
+msgstr "Yeni yerə qohum olan yerlər"
+
+#: archiver/config-archiver.c:140 archiver/main.c:137
+msgid "PARENT"
+msgstr "QOHUM"
+
+#: archiver/config-archiver.c:142 archiver/main.c:139
+msgid "New name to assign to the location"
+msgstr "Yerə yeni ləqəb verilməyib"
+
+#: archiver/config-archiver.c:142 archiver/main.c:139
+msgid "NEW_NAME"
+msgstr "YENİ_AD"
+
+#: archiver/config-archiver.c:148 archiver/main.c:145
+msgid "Add/remove this backend to/from the master backend list"
+msgstr "Usta bəkend başlığına/dan bu bəkendi əlavə et/çıxart"
+
+#: archiver/config-archiver.c:150 archiver/main.c:147
+msgid "Full containment"
+msgstr "Tam məzmun"
+
+#: archiver/config-archiver.c:152 archiver/main.c:149
+msgid "Partial containment"
+msgstr "Qismi məzmun"
+
 #: archiver/config-archiver.c:307 archiver/location.c:460
 msgid "Default Location"
 msgstr "Əsas Yer"
 
-#: archiver/config-archiver.c:81
-msgid "Store XML data in the archive"
-msgstr "XML veriləni arxivdə qeyd edilir"
-
-#: archiver/config-archiver.c:83
-msgid "Roll back the configuration to a given point"
-msgstr "Quğuları verilən nöqtəyə qaytar"
-
-#: archiver/config-archiver.c:85
-msgid "Change the location profile to the given one"
-msgstr "Verilənin yer profilini dəyişdir"
-
-#: archiver/config-archiver.c:87
-msgid "Push configuration data out to client machines (UNIMPLEMENTED)"
-msgstr "Quraşdırma verilənlərini alıcı kompüterlərdən at (DƏSTƏKLƏNMİR)"
-
-#: archiver/config-archiver.c:89
-msgid "Rename a location to a new name"
-msgstr "Yeri yenı adla adlandır"
-
-#: archiver/config-archiver.c:91
-msgid "Add a new location to the archive"
-msgstr "Arxivə yeni yer əlavə et"
-
-#: archiver/config-archiver.c:93
-msgid "Remove a location from the archive"
-msgstr "Yeri arxivdən çıxart"
-
-#: archiver/config-archiver.c:95
-msgid "Add a given backend to the given location"
-msgstr "Verilən yerə verilən bəkendi əlavə et"
-
-#: archiver/config-archiver.c:97
-msgid "Remove the given backend from the given location"
-msgstr "Verilən yerdən verilən bəkendi çıxart"
-
-#: archiver/config-archiver.c:99
-msgid "Perform garbage collection on the given location"
-msgstr "Verilən yerdən zıbıl topla"
-
-#: archiver/config-archiver.c:105
-msgid "Use the global repository"
-msgstr "Qlobal nüzxə işlət"
-
-#: archiver/config-archiver.c:107
-msgid "Identifier of location profile on which to operate"
-msgstr "Üstündə işlənəcək yer profilinin vəsfləndiricisi"
-
-#: archiver/config-archiver.c:108
-msgid "LOCATION"
-msgstr "YER"
-
-#: archiver/config-archiver.c:110
-msgid "Backend being used for this operation"
-msgstr "Bu əməliyyat üçün işlədiləcək bəkend"
-
-#: archiver/config-archiver.c:110
-msgid "BACKEND_ID"
-msgstr "BACKEND_ID"
-
-#: archiver/config-archiver.c:116
-msgid "Store only the differences with the parent location's config"
-msgstr "Təkcə qohum yerlər arasındakı fərqləri saxla"
-
-#: archiver/config-archiver.c:118
-msgid "Store only those settings set in the previous config"
-msgstr "Təkcə əvvəlki quraşdırmadaı seçənəkləri saxla"
-
-#: archiver/config-archiver.c:124
-msgid "Date to which to roll back"
-msgstr "Qaytarılacaq tarix"
-
-#: archiver/config-archiver.c:124
-msgid "DATE"
-msgstr "TARİX"
-
-#: archiver/config-archiver.c:126
-msgid "Roll back all configuration items"
-msgstr "Bütün quraşdırma üzvlərini qaytar"
-
-#: archiver/config-archiver.c:128
-msgid "Roll back to the revision REVISION_ID"
-msgstr "Əvvəlki REVISION_İDyə qaytar"
-
-#: archiver/config-archiver.c:128
-msgid "REVISION_ID"
-msgstr "REVISION_ID"
-
-#: archiver/config-archiver.c:130
-msgid "Roll back to the last known revision"
-msgstr "Ən axırıncı təftişə qaytar"
-
-#: archiver/config-archiver.c:132
-msgid "Roll back by STEPS revisions"
-msgstr "PİLLƏ təftişlərinı qaytar"
-
-#: archiver/config-archiver.c:132
-msgid "STEPS"
-msgstr "PİLLƏLƏR"
-
-#: archiver/config-archiver.c:134
-msgid "Don't run the backend, just dump the output"
-msgstr "Bəkendi icra etmə, təkcə yekunu ver"
-
-#: archiver/config-archiver.c:140
-msgid "Parent location for the new location"
-msgstr "Yeni yerə qohum olan yerlər"
-
-#: archiver/config-archiver.c:140
-msgid "PARENT"
-msgstr "QOHUM"
-
-#: archiver/config-archiver.c:142
-msgid "New name to assign to the location"
-msgstr "Yerə yeni ləqəb verilməyib"
-
-#: archiver/config-archiver.c:142
-msgid "NEW_NAME"
-msgstr "YENİ_AD"
-
-#: archiver/config-archiver.c:148
-msgid "Add/remove this backend to/from the master backend list"
-msgstr "Usta bəkend başlığına/dan bu bəkendi əlavə et/çıxart"
-
-#: archiver/config-archiver.c:150
-msgid "Full containment"
-msgstr "Tam məzmun"
-
-#: archiver/config-archiver.c:152
-msgid "Partial containment"
-msgstr "Qismi məzmun"
-
-#: archiver/config-archiver.c:369
+#: archiver/config-archiver.c:369 archiver/main.c:323
 msgid "Global archiver options"
 msgstr "Qlobal arxivşi seçənəkləri"
 
-#: archiver/config-archiver.c:371
+#: archiver/config-archiver.c:371 archiver/main.c:325
 msgid "Archiver commands"
 msgstr "Arxivçi əmrləri"
 
-#: archiver/config-archiver.c:373
+#: archiver/config-archiver.c:373 archiver/main.c:327
 msgid "Options for storing data"
 msgstr "Verilən saxlama seçənəkləri"
 
-#: archiver/config-archiver.c:375
+#: archiver/config-archiver.c:375 archiver/main.c:329
 msgid "Options for rolling back"
 msgstr "Qaytarma seçənəkləri"
 
-#: archiver/config-archiver.c:377
+#: archiver/config-archiver.c:377 archiver/main.c:331
 msgid "Options for adding or renaming locations"
 msgstr "Yer adı əlavə etmə, adını dəyişdirmə seçənəkləri"
 
-#: archiver/config-archiver.c:380
+#: archiver/config-archiver.c:380 archiver/main.c:334
 msgid "Options for adding and removing backends"
 msgstr "Bəkend əlavə etmə, adını dəyişdirmə seçənəkləri"
 
-#: capplets/background/background.desktop.in.in.h:1
-msgid "Background"
-msgstr "Arxa Plan"
-
-#: capplets/background/background.desktop.in.in.h:2
-msgid "Configuration of the desktop's background"
-msgstr "Masa üstü arxa planı quraşdırılması"
-
-#: capplets/background/background-properties-capplet.c:288
-#: capplets/common/capplet-util.c:249
+#: capplets/background/background-properties-capplet.c:291
+#: capplets/common/capplet-util.c:243
 msgid "Retrieve and store legacy settings"
 msgstr "Miras qurğularını al və saxla"
 
-#: capplets/background/background-properties-capplet.c:313
+#: capplets/background/background-properties-capplet.c:315
 msgid "Background properties"
 msgstr "Arxa plan xassələri"
 
-#: capplets/common/capplet-util.c:245 capplets/common/capplet-util.c:247
+#: capplets/background/background.desktop.in.h:1
+msgid "Background"
+msgstr "Arxa Plan"
+
+#: capplets/background/background.desktop.in.h:2
+msgid "Configuration of the desktop's background"
+msgstr "Masa üstü arxa planı quraşdırılması"
+
+#: capplets/background/prefs-widget.c:362
+msgid "(None)"
+msgstr ""
+
+#: capplets/background/prefs-widget.c:611
+msgid "Wallpaper Selection"
+msgstr ""
+
+#: capplets/background/prefs-widget.c:618
+msgid "Can't find an hbox, using a normal file selection"
+msgstr ""
+
+#: capplets/background/prefs-widget.c:624
+msgid "Preview"
+msgstr ""
+
+#: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "Təkcə qurğuları əlavə et və çıx"
 
-#: capplets/common/gconf-property-editor.c:140
+#: capplets/common/gconf-property-editor.c:144
 msgid "Key"
 msgstr "Açar"
 
-#: capplets/common/gconf-property-editor.c:141
+#: capplets/common/gconf-property-editor.c:145
 msgid "GConf key to which this property editor is attached"
 msgstr "Bu üstünlük editorunun ilişdirildiyi GConf açarı"
 
-#: capplets/common/gconf-property-editor.c:147
+#: capplets/common/gconf-property-editor.c:151
 msgid "Callback"
 msgstr "Geri axtarma"
 
-#: capplets/common/gconf-property-editor.c:148
+#: capplets/common/gconf-property-editor.c:152
 msgid "Issue this callback when the value associated with key gets changed"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:153
+#: capplets/common/gconf-property-editor.c:157
 msgid "Change set"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:154
-msgid "GConf change set containing data to be forwarded to the gconf client on apply"
+#: capplets/common/gconf-property-editor.c:158
+msgid ""
+"GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:159
+#: capplets/common/gconf-property-editor.c:163
 msgid "Conversion to widget callback"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:160
-msgid "Callback to be issued when data are to be converted from GConf to the widget"
+#: capplets/common/gconf-property-editor.c:164
+msgid ""
+"Callback to be issued when data are to be converted from GConf to the widget"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:165
+#: capplets/common/gconf-property-editor.c:169
 msgid "Conversion from widget callback"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:166
-msgid "Callback to be issued when data are to be converted to GConf from the widget"
+#: capplets/common/gconf-property-editor.c:170
+msgid ""
+"Callback to be issued when data are to be converted to GConf from the widget"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:171
+#: capplets/common/gconf-property-editor.c:175
 msgid "UI Control"
 msgstr "UI İdarəsi"
 
-#: capplets/common/gconf-property-editor.c:172
+#: capplets/common/gconf-property-editor.c:176
 msgid "Object that controls the property (normally a widget)"
 msgstr "Üstünlüyü idarə edən cism (normal halda pəncərəcik)"
 
-#: capplets/default-applications/default-applications.desktop.in.in.h:1
+#: capplets/default-applications/default-applications.desktop.in.h:1
 msgid "Choose the applications used by default"
 msgstr "İşlədiləcək ana proqramıı seçin"
 
-#: capplets/default-applications/default-applications.desktop.in.in.h:2
+#: capplets/default-applications/default-applications.desktop.in.h:2
 #: capplets/default-applications/interface.c:97
 #: capplets/screensaver/main.c:168
 msgid "Default Applications"
@@ -321,7 +340,8 @@ msgid "Select a Web Browser"
 msgstr "Yardım Səyyahı Seçin"
 
 #: capplets/default-applications/interface.c:270
-msgid "With this option, you can select a predefined Web Browser as your default"
+msgid ""
+"With this option, you can select a predefined Web Browser as your default"
 msgstr "Bu seçənəklə əsas ön qurğulu Ven Səyyahınızı seçə bilərsiniz"
 
 #: capplets/default-applications/interface.c:290
@@ -350,7 +370,8 @@ msgstr ""
 
 #: capplets/default-applications/interface.c:357
 msgid "Please enter the command line used to start this web browser"
-msgstr "Xahiş edirik, veb səyyahını başlatmaq üçün aşaǧıdakı əmr sətirini girin."
+msgstr ""
+"Xahiş edirik, veb səyyahını başlatmaq üçün aşaǧıdakı əmr sətirini girin."
 
 #: capplets/default-applications/interface.c:368
 msgid "Web Browser"
@@ -448,28 +469,96 @@ msgstr "Rəsm faylını tapa bilmədim: %s"
 msgid "Couldn't create pixmap from file: %s"
 msgstr "Fayldan rəsmi yarada bilmədim : %s"
 
-#: capplets/keyboard/keyboard.desktop.in.in.h:1
+#: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Klaviatura"
 
-#: capplets/keyboard/keyboard.desktop.in.in.h:2
+#: capplets/keyboard/keyboard.desktop.in.h:2
 msgid "Keyboard Properties"
 msgstr "Klaviatura Seçənəkləri"
 
-#: capplets/mouse/mouse.desktop.in.in.h:1
+#: capplets/mouse/mouse.desktop.in.h:1
 msgid "Mouse"
 msgstr "Siçan"
 
-#: capplets/mouse/mouse.desktop.in.in.h:2
+#: capplets/mouse/mouse.desktop.in.h:2
 msgid "Mouse Properties"
 msgstr "Siçan Seçənəkləri"
 
-#: capplets/screensaver/preferences.c:813
+#: capplets/rollback/main.c:39
+#, fuzzy
+msgid "Rollback the capplet given"
+msgstr "Quğuları verilən nöqtəyə qaytar"
+
+#: capplets/rollback/main.c:41
+msgid "Operate on global backends"
+msgstr ""
+
+#: capplets/rollback/main.c:56
+#, fuzzy
+msgid "Options for the rollback GUI"
+msgstr "Qaytarma seçənəkləri"
+
+#: capplets/rollback/rollback-capplet-dialog.c:46
+msgid "1 year ago"
+msgstr ""
+
+#: capplets/rollback/rollback-capplet-dialog.c:46
+msgid "6 months ago"
+msgstr ""
+
+#: capplets/rollback/rollback-capplet-dialog.c:46
+msgid "1 month ago"
+msgstr ""
+
+#: capplets/rollback/rollback-capplet-dialog.c:46
+msgid "1 week ago"
+msgstr ""
+
+#: capplets/rollback/rollback-capplet-dialog.c:47
+msgid "3 days ago"
+msgstr ""
+
+#: capplets/rollback/rollback-capplet-dialog.c:47
+msgid "1 day ago"
+msgstr ""
+
+#: capplets/rollback/rollback-capplet-dialog.c:47
+msgid "1 hour ago"
+msgstr ""
+
+#: capplets/rollback/rollback-capplet-dialog.c:47
+msgid "30 minutes ago"
+msgstr ""
+
+#: capplets/rollback/rollback-capplet-dialog.c:48
+msgid "10 minutes ago"
+msgstr ""
+
+#: capplets/rollback/rollback-capplet-dialog.c:48
+msgid "5 minutes ago"
+msgstr ""
+
+#: capplets/rollback/rollback-capplet-dialog.c:48
+msgid "1 minute ago"
+msgstr ""
+
+#: capplets/rollback/rollback-capplet-dialog.c:48
+#, fuzzy
+msgid "Current time"
+msgstr "Mərkəzi rəsm."
+
+#: capplets/rollback/rollback-capplet-dialog.c:169
+#, fuzzy
+msgid "Rollback"
+msgstr "Geri axtarma"
+
+#: capplets/screensaver/preferences.c:815
 msgid "Custom screensaver. No description available"
 msgstr "Hazırkı ekran qoruyucu. Mə'lumat yoxdur"
 
 #: capplets/screensaver/prefs-widget.c:192
-#: capplets/screensaver/screensaver.desktop.in.in.h:2
+#: capplets/screensaver/screensaver.desktop.in.h:2
 msgid "Screensaver"
 msgstr "Ekran Qoruyucular"
 
@@ -477,10 +566,6 @@ msgstr "Ekran Qoruyucular"
 #, c-format
 msgid "About %s\n"
 msgstr "%s haqqında\n"
-
-#: capplets/screensaver/screensaver.desktop.in.in.h:1
-msgid "Configure the settings of the screensaver"
-msgstr "Ekran qoruyucu qurğularını aparın"
 
 #: capplets/screensaver/screensaver-prefs-dialog.c:185
 msgid "Name:"
@@ -531,6 +616,10 @@ msgstr "Görünən:"
 #: capplets/screensaver/screensaver-prefs-dialog.c:1711
 msgid "Any"
 msgstr "Hər hansı biri"
+
+#: capplets/screensaver/screensaver.desktop.in.h:1
+msgid "Configure the settings of the screensaver"
+msgstr "Ekran qoruyucu qurğularını aparın"
 
 #: capplets/screensaver/screensavers/3d_clock.xml.h:1
 msgid "3d clock"
@@ -1781,8 +1870,10 @@ msgid "Greynetic"
 msgstr "Greynetic"
 
 #: capplets/screensaver/screensavers/greynetic.xml.h:6
-msgid "This draws random colored and stippled rectangles. Written by Jamie Zawinski."
-msgstr "This draws random colored and stippled rectangles. Written by Jamie Zawinski."
+msgid ""
+"This draws random colored and stippled rectangles. Written by Jamie Zawinski."
+msgstr ""
+"This draws random colored and stippled rectangles. Written by Jamie Zawinski."
 
 #: capplets/screensaver/screensavers/halo.xml.h:1
 msgid "Animate circles."
@@ -2218,24 +2309,6 @@ msgstr ""
 msgid "Moebius"
 msgstr "Moebius"
 
-#: capplets/screensaver/screensavers/moire2.xml.h:1
-msgid ""
-"Another example of the fun you can have with moire interference patterns; "
-"this hack generates fields of concentric circles or ovals, and combines the "
-"planes with various operations. The planes are moving independently of one "
-"another, causing the interference lines to ``spray.'' Written by Jamie "
-"Zawinski."
-msgstr ""
-"Another example of the fun you can have with moire interference patterns; "
-"this hack generates fields of concentric circles or ovals, and combines the "
-"planes with various operations. The planes are moving independently of one "
-"another, causing the interference lines to ``spray.'' Written by Jamie "
-"Zawinski."
-
-#: capplets/screensaver/screensavers/moire2.xml.h:2
-msgid "Moire2"
-msgstr "Moire2"
-
 #: capplets/screensaver/screensavers/moire.xml.h:5
 msgid "Maximum radius increment"
 msgstr "Maksimum radius artışı"
@@ -2261,6 +2334,24 @@ msgstr ""
 "this one is that the heart of the display algorithm can be expressed with "
 "just a pair of loops and a handful of arithmetic, giving it a high ``display "
 "hack metric''."
+
+#: capplets/screensaver/screensavers/moire2.xml.h:1
+msgid ""
+"Another example of the fun you can have with moire interference patterns; "
+"this hack generates fields of concentric circles or ovals, and combines the "
+"planes with various operations. The planes are moving independently of one "
+"another, causing the interference lines to ``spray.'' Written by Jamie "
+"Zawinski."
+msgstr ""
+"Another example of the fun you can have with moire interference patterns; "
+"this hack generates fields of concentric circles or ovals, and combines the "
+"planes with various operations. The planes are moving independently of one "
+"another, causing the interference lines to ``spray.'' Written by Jamie "
+"Zawinski."
+
+#: capplets/screensaver/screensavers/moire2.xml.h:2
+msgid "Moire2"
+msgstr "Moire2"
 
 #: capplets/screensaver/screensavers/molecule.xml.h:1
 msgid ""
@@ -2493,8 +2584,10 @@ msgid "Pyro"
 msgstr "Pyro"
 
 #: capplets/screensaver/screensavers/pyro.xml.h:9
-msgid "Pyro draws exploding fireworks. Blah blah blah. Written by Jamie Zawinski."
-msgstr "Pyro draws exploding fireworks. Blah blah blah. Written by Jamie Zawinski."
+msgid ""
+"Pyro draws exploding fireworks. Blah blah blah. Written by Jamie Zawinski."
+msgstr ""
+"Pyro draws exploding fireworks. Blah blah blah. Written by Jamie Zawinski."
 
 #: capplets/screensaver/screensavers/qix.xml.h:1
 msgid "Color contrast"
@@ -2698,18 +2791,6 @@ msgstr ""
 "This draws smoothly-shaded oscilating oval patterns, that look something "
 "like vapor trails or neon tubes. Written by Shane Smit."
 
-#: capplets/screensaver/screensavers/sierpinski3d.xml.h:1
-msgid "Sierpinski3D"
-msgstr "Sierpinski3D"
-
-#: capplets/screensaver/screensavers/sierpinski3d.xml.h:2
-msgid ""
-"This draws the three-dimensional variant of the recursive Sierpinski "
-"triangle fractal, using GL. Written by Tim Robinson and Jamie Zawinski."
-msgstr ""
-"This draws the three-dimensional variant of the recursive Sierpinski "
-"triangle fractal, using GL. Written by Tim Robinson and Jamie Zawinski."
-
 #: capplets/screensaver/screensavers/sierpinski.xml.h:5
 msgid "Sierpinski"
 msgstr "Sierpinski"
@@ -2721,6 +2802,18 @@ msgid ""
 msgstr ""
 "This draws the two-dimensional variant of the recursive Sierpinski triangle "
 "fractal. Written by Desmond Daignault."
+
+#: capplets/screensaver/screensavers/sierpinski3d.xml.h:1
+msgid "Sierpinski3D"
+msgstr "Sierpinski3D"
+
+#: capplets/screensaver/screensavers/sierpinski3d.xml.h:2
+msgid ""
+"This draws the three-dimensional variant of the recursive Sierpinski "
+"triangle fractal, using GL. Written by Tim Robinson and Jamie Zawinski."
+msgstr ""
+"This draws the three-dimensional variant of the recursive Sierpinski "
+"triangle fractal, using GL. Written by Tim Robinson and Jamie Zawinski."
 
 #: capplets/screensaver/screensavers/slidescreen.xml.h:1
 msgid "SlideScreen"
@@ -3079,8 +3172,10 @@ msgid "Vines"
 msgstr "Vines"
 
 #: capplets/screensaver/screensavers/wander.xml.h:1
-msgid "Draws a colorful random-walk, in various forms. Written by Rick Campbell."
-msgstr "Draws a colorful random-walk, in various forms. Written by Rick Campbell."
+msgid ""
+"Draws a colorful random-walk, in various forms. Written by Rick Campbell."
+msgstr ""
+"Draws a colorful random-walk, in various forms. Written by Rick Campbell."
 
 #: capplets/screensaver/screensavers/wander.xml.h:2
 msgid "Wander"
@@ -3124,7 +3219,8 @@ msgstr "WhirlwindWarp"
 
 #: capplets/screensaver/screensavers/whirlygig.xml.h:1
 msgid "Draws zooming chains of sinusoidal spots. Written by Ashton Trey Belew."
-msgstr "Draws zooming chains of sinusoidal spots. Written by Ashton Trey Belew."
+msgstr ""
+"Draws zooming chains of sinusoidal spots. Written by Ashton Trey Belew."
 
 #: capplets/screensaver/screensavers/whirlygig.xml.h:2
 msgid "WhirlyGig"
@@ -3372,83 +3468,9 @@ msgstr "Hazırkı"
 msgid "New screensaver"
 msgstr "Yeni ekran qoruyucu"
 
-#: capplets/sound/sound.desktop.in.in.h:1
-msgid "Configure GNOME's use of sound"
-msgstr "GNOME səs istifadəsini qur"
-
-#: capplets/sound/sound.desktop.in.in.h:2
-msgid "Sound"
-msgstr "Səs"
-
-#: capplets/sound/sound-properties.glade.h:1
-msgid "Enable sound server startup"
-msgstr "Səsli başlanǧıcı fəallaşdır"
-
-#: capplets/sound/sound-properties.glade.h:2
-msgid "General"
-msgstr "Ümumi"
-
-#: capplets/sound/sound-properties.glade.h:3
-msgid "Sound Events"
-msgstr "Səsli Hadisələr"
-
-#: capplets/sound/sound-properties.glade.h:4
-msgid "Sounds for events"
-msgstr "Hadisələr üçün səslər"
-
-#: control-center/capplet-dir-view.c:147
-msgid "Layout"
-msgstr "Düzülüş"
-
-#: control-center/capplet-dir-view.c:148
-msgid "Layout to use for this view of the capplets"
-msgstr "Kappletin bi görünüşü üçün işlədiləcək düzülüş"
-
-#: control-center/capplet-dir-view.c:154
-msgid "Capplet directory object"
-msgstr "Kapplet cərgəsi cismi"
-
-#: control-center/capplet-dir-view.c:155
-msgid "Capplet directory that this view is viewing"
-msgstr "Nümayişin göstərdiyi kapplet cərgəsi"
-
-#: control-center/capplet-dir-view.c:320 control-center/gnomecc.desktop.in.h:1
-msgid "GNOME Control Center"
-msgstr "GNOME İdarə Mərkəzi"
-
-#: control-center/capplet-dir-view.c:323
-msgid "Desktop properties manager."
-msgstr "Masa üstü seçənəkləri idarəçisi."
-
-#: control-center/capplet-dir-view.c:448
-#, c-format
-msgid "Gnome Control Center : %s"
-msgstr "GNOME İdarə Mərkəzi: %s"
-
-#: control-center/capplet-dir-view.c:493
-msgid ""
-"No help is available/installed. Please make sure you\n"
-"have the GNOME User's Guide installed on your system."
-msgstr ""
-"Heç yardım yoxdur/qurulmayıb. Xahiş edirik GNOME İstifadəçisi Bələdçisini\n"
-"sisteminizə qurub qurmadıǧınızı yoxlayın."
-
-#: control-center/capplet-dir-view.c:496
-msgid "Close"
-msgstr "Qapat"
-
-#: control-center/capplet-dir-view-html.c:145
-msgid "GNOME Control Center:"
-msgstr "GNOME İdarə Mərkəzi:"
-
-#: control-center/capplet-dir-view-list.c:321
-#, c-format
-msgid "GNOME Control Center: %s"
-msgstr "GNOME İdarə Mərkəzi: %s"
-
-#: control-center/gnomecc.desktop.in.h:2
-msgid "The GNOME configuration tool"
-msgstr "GNOME quraşdırma avadanlığı"
+#: capplets/sound/prefs-widget.c:138
+msgid "Play"
+msgstr "Çal"
 
 #: control-center/Gnome.directory.in.in.h:1
 msgid "Main"
@@ -3458,11 +3480,65 @@ msgstr "Ana"
 msgid "Main Settings"
 msgstr "Ana Qurğular"
 
-#: libbackground/applier.c:229
+#: control-center/capplet-dir-view-html.c:145
+msgid "GNOME Control Center:"
+msgstr "GNOME İdarə Mərkəzi:"
+
+#: control-center/capplet-dir-view-list.c:325
+#, c-format
+msgid "GNOME Control Center: %s"
+msgstr "GNOME İdarə Mərkəzi: %s"
+
+#: control-center/capplet-dir-view.c:146
+msgid "Layout"
+msgstr "Düzülüş"
+
+#: control-center/capplet-dir-view.c:147
+msgid "Layout to use for this view of the capplets"
+msgstr "Kappletin bi görünüşü üçün işlədiləcək düzülüş"
+
+#: control-center/capplet-dir-view.c:153
+msgid "Capplet directory object"
+msgstr "Kapplet cərgəsi cismi"
+
+#: control-center/capplet-dir-view.c:154
+msgid "Capplet directory that this view is viewing"
+msgstr "Nümayişin göstərdiyi kapplet cərgəsi"
+
+#: control-center/capplet-dir-view.c:308 control-center/gnomecc.desktop.in.h:1
+msgid "GNOME Control Center"
+msgstr "GNOME İdarə Mərkəzi"
+
+#: control-center/capplet-dir-view.c:311
+msgid "Desktop properties manager."
+msgstr "Masa üstü seçənəkləri idarəçisi."
+
+#: control-center/capplet-dir-view.c:445
+#, c-format
+msgid "Gnome Control Center : %s"
+msgstr "GNOME İdarə Mərkəzi: %s"
+
+#: control-center/capplet-dir-view.c:488
+msgid ""
+"No help is available/installed. Please make sure you\n"
+"have the GNOME User's Guide installed on your system."
+msgstr ""
+"Heç yardım yoxdur/qurulmayıb. Xahiş edirik GNOME İstifadəçisi Bələdçisini\n"
+"sisteminizə qurub qurmadıǧınızı yoxlayın."
+
+#: control-center/capplet-dir-view.c:491
+msgid "Close"
+msgstr "Qapat"
+
+#: control-center/gnomecc.desktop.in.h:2
+msgid "The GNOME configuration tool"
+msgstr "GNOME quraşdırma avadanlığı"
+
+#: libbackground/applier.c:228
 msgid "Type"
 msgstr "Növ"
 
-#: libbackground/applier.c:230
+#: libbackground/applier.c:229
 msgid ""
 "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
 "for preview"
@@ -3470,42 +3546,224 @@ msgstr ""
 "bg_applier növü: Kök pəncərəsi üçün BG_APPLIER_ROOT və ya nümayiş üçün "
 "BG_APPLIER_PREVIEW"
 
-#: libbackground/applier.c:385
+#: libbackground/applier.c:388
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
-msgstr "Rəsm buferi '%s' yüklənə bilmədi; divar kağızı fəaliyyəti dayandırılır."
+msgstr ""
+"Rəsm buferi '%s' yüklənə bilmədi; divar kağızı fəaliyyəti dayandırılır."
 
-#: libbackground/applier.c:501
+#: libbackground/applier.c:505
 msgid "Disabled"
 msgstr "Bağlı"
 
-#: libsounds/sound-view.c:98
-msgid "The sound file for this event does not exist."
-msgstr "Bu səbəb üçün ayrılmış səs faylı yoxdur."
-
-#: libsounds/sound-view.c:100
-msgid ""
-"The sound file for this event does not exist.\n"
-"You may want to install the gnome-audio package\n"
-"for a set of default sounds."
+#: root-manager/root-manager-helper.c:54
+msgid "Could not connect to X Display"
 msgstr ""
-"Bu səbəb üçün seçilmiş səs faylı yoxdur.\n"
-"Bəlkə də əsas səslər üçün gnome-audio boxçasını\n"
-" qurmamısınız."
 
-#: libsounds/sound-view.c:152
-msgid "Event"
-msgstr "Hadisə"
+#: root-manager/root-manager-helper.c:60
+msgid "Could not duplicate file descriptor"
+msgstr ""
 
-#: libsounds/sound-view.c:152
-msgid "File to Play"
-msgstr "Çalınacaq Fayl"
+#: root-manager/root-manager-wrap.c:56
+msgid "Pipe error.\n"
+msgstr ""
 
-#: libsounds/sound-view.c:185
-msgid "Play"
-msgstr "Çal"
+#: root-manager/root-manager-wrap.c:62
+msgid "Cannot fork().\n"
+msgstr ""
 
-#: libsounds/sound-view.c:190
-msgid "Select sound file"
-msgstr "Səs faylı seç"
+#: root-manager/root-manager-wrap.c:83 root-manager/root-manager-wrap.c:93
+msgid "dup2() error.\n"
+msgstr ""
 
+#: root-manager/root-manager-wrap.c:123
+#, c-format
+msgid "execl() error, errno=%d\n"
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:152
+msgid "Information updated."
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:155
+msgid ""
+"The password you typed is invalid.\n"
+"Please try again."
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:158
+msgid ""
+"One or more of the changed fields is invalid.\n"
+"This is probably due to either colons or commas in one of the fields.\n"
+"Please remove those and try again."
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:161
+msgid "Password resetting error."
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:164
+msgid ""
+"Some systems files are locked.\n"
+"Please try again in a few moments."
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:167
+msgid "Unknown user."
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:170
+msgid "Insufficient rights."
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:173
+msgid "Invalid call to sub process."
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:176
+msgid ""
+"Your current shell is not listed in /etc/shells.\n"
+"You are not allowed to change your shell.\n"
+"Consult your system administrator."
+msgstr ""
+
+#. well, this is unlikely to work either, but at least we tried...
+#: root-manager/root-manager-wrap.c:180
+msgid "Out of memory."
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:183
+msgid "The exec() call failed."
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:186
+msgid "Failed to find selected program."
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:189
+msgid "Unknown error."
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:192
+msgid "Unknown exit code."
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:280
+msgid "Input"
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:386
+#, c-format
+msgid "Need %d responses.\n"
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:411
+msgid ""
+"In order to make changes to your system, you\n"
+"must enter the administrator (root) password."
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:425
+msgid "Error"
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:439
+#, c-format
+msgid "You want %d response(s) from %d entry fields!?!?!\n"
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:445
+msgid "Run Unprivileged"
+msgstr ""
+
+#: root-manager/root-manager.c:110
+#, c-format
+msgid "Got error %d.\n"
+msgstr ""
+
+#: root-manager/root-manager.c:206
+#, c-format
+msgid "Password for %s"
+msgstr ""
+
+#: root-manager/root-manager.c:401
+msgid "Consistency checking is not turned on."
+msgstr ""
+
+#: root-manager/root-manager.c:403
+msgid "Block is fine."
+msgstr ""
+
+#: root-manager/root-manager.c:405
+msgid "Block freed twice."
+msgstr ""
+
+#: root-manager/root-manager.c:407
+msgid "Memory before the block was clobbered."
+msgstr ""
+
+#: root-manager/root-manager.c:409
+msgid "Memory after the block was clobbered."
+msgstr ""
+
+#: root-manager/root-manager.c:439
+msgid "userhelper must be setuid root\n"
+msgstr ""
+
+#: root-manager/root-manager.c:444 root-manager/root-manager.c:450
+msgid "Usage: root-helper fd\n"
+msgstr ""
+
+#: root-manager/root-manager.c:554
+#, c-format
+msgid "PAM returned = %d\n"
+msgstr ""
+
+#: root-manager/root-manager.c:555
+#, c-format
+msgid "about to authenticate \"%s\"\n"
+msgstr ""
+
+#: root-manager/root-manager.c:632 root-manager/root-manager.c:700
+#, c-format
+msgid "about to exec \"%s\"\n"
+msgstr ""
+
+#~ msgid "Configure GNOME's use of sound"
+#~ msgstr "GNOME səs istifadəsini qur"
+
+#~ msgid "Sound"
+#~ msgstr "Səs"
+
+#~ msgid "Enable sound server startup"
+#~ msgstr "Səsli başlanǧıcı fəallaşdır"
+
+#~ msgid "General"
+#~ msgstr "Ümumi"
+
+#~ msgid "Sound Events"
+#~ msgstr "Səsli Hadisələr"
+
+#~ msgid "Sounds for events"
+#~ msgstr "Hadisələr üçün səslər"
+
+#~ msgid "The sound file for this event does not exist."
+#~ msgstr "Bu səbəb üçün ayrılmış səs faylı yoxdur."
+
+#~ msgid ""
+#~ "The sound file for this event does not exist.\n"
+#~ "You may want to install the gnome-audio package\n"
+#~ "for a set of default sounds."
+#~ msgstr ""
+#~ "Bu səbəb üçün seçilmiş səs faylı yoxdur.\n"
+#~ "Bəlkə də əsas səslər üçün gnome-audio boxçasını\n"
+#~ " qurmamısınız."
+
+#~ msgid "Event"
+#~ msgstr "Hadisə"
+
+#~ msgid "File to Play"
+#~ msgstr "Çalınacaq Fayl"
+
+#~ msgid "Select sound file"
+#~ msgstr "Səs faylı seç"

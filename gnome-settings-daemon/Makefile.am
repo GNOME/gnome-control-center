@@ -1,4 +1,4 @@
-INCLUDES=$(GNOME_SETTINGS_DAEMON_CFLAGS) -I$(top_srcdir)/libbackground
+INCLUDES=$(GNOME_SETTINGS_DAEMON_CFLAGS) -I$(top_srcdir)/libbackground -I$(top_srcdir)
 
 gnome_settings_daemon_SOURCES =		\
 		gnome-settings-daemon.h		\

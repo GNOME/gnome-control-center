@@ -17,7 +17,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 1.4.0\n"
-"POT-Creation-Date: 2001-12-20 10:42-0500\n"
+"POT-Creation-Date: 2002-01-14 12:01-0500\n"
 "PO-Revision-Date: 2001-07-25 15:02+0300\n"
 "Last-Translator: Pauli Virtanen <pauli.virtanen@saunalahti.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -30,245 +30,261 @@ msgstr ""
 msgid "Default location"
 msgstr "Oletussijainti"
 
-#: archiver/config-archiver.c:307 archiver/location.c:460
-msgid "Default Location"
-msgstr "Oletussijainti"
-
-#: archiver/config-archiver.c:81
+#: archiver/config-archiver.c:81 archiver/main.c:78
 msgid "Store XML data in the archive"
 msgstr "Tallenna XML-dataa arkistoon"
 
-#: archiver/config-archiver.c:83
+#: archiver/config-archiver.c:83 archiver/main.c:80
 msgid "Roll back the configuration to a given point"
 msgstr "Palauta annetun hetken asetukset"
 
-#: archiver/config-archiver.c:85
+#: archiver/config-archiver.c:85 archiver/main.c:82
 msgid "Change the location profile to the given one"
 msgstr "Vaihda sijaintiprofiili annetuksi"
 
-#: archiver/config-archiver.c:87
+#: archiver/config-archiver.c:87 archiver/main.c:84
 msgid "Push configuration data out to client machines (UNIMPLEMENTED)"
 msgstr "Siirrä asetustiedot asiakaskoneille (EI TOTEUTETTU)"
 
-#: archiver/config-archiver.c:89
+#: archiver/config-archiver.c:89 archiver/main.c:86
 msgid "Rename a location to a new name"
 msgstr "Nimeä sijainti uudelleen"
 
-#: archiver/config-archiver.c:91
+#: archiver/config-archiver.c:91 archiver/main.c:88
 msgid "Add a new location to the archive"
 msgstr "Lisää uusi sijainti arkistoon"
 
-#: archiver/config-archiver.c:93
+#: archiver/config-archiver.c:93 archiver/main.c:90
 msgid "Remove a location from the archive"
 msgstr "Poista sijainti arkistosta"
 
-#: archiver/config-archiver.c:95
+#: archiver/config-archiver.c:95 archiver/main.c:92
 msgid "Add a given backend to the given location"
 msgstr "Lisää annettu taustamoduuli annettuun sijaintiin"
 
-#: archiver/config-archiver.c:97
+#: archiver/config-archiver.c:97 archiver/main.c:94
 msgid "Remove the given backend from the given location"
 msgstr "Poista annettu taustamoduuli annetusta sijainnista"
 
-#: archiver/config-archiver.c:99
+#: archiver/config-archiver.c:99 archiver/main.c:96
 #, fuzzy
 msgid "Perform garbage collection on the given location"
 msgstr "Uuden sijainnin yläsijainti"
 
-#: archiver/config-archiver.c:105
+#: archiver/config-archiver.c:105 archiver/main.c:102
 msgid "Use the global repository"
 msgstr "Käytä pääarkistoa"
 
-#: archiver/config-archiver.c:107
+#: archiver/config-archiver.c:107 archiver/main.c:104
 msgid "Identifier of location profile on which to operate"
 msgstr "Käsiteltävän sijaintiprofiilin tunnus"
 
-#: archiver/config-archiver.c:108
+#: archiver/config-archiver.c:108 archiver/main.c:105
 msgid "LOCATION"
 msgstr "SIJAINTI"
 
-#: archiver/config-archiver.c:110
+#: archiver/config-archiver.c:110 archiver/main.c:107
 msgid "Backend being used for this operation"
 msgstr "Tähän toimintaan käytettävä taustamoduuli"
 
-#: archiver/config-archiver.c:110
+#: archiver/config-archiver.c:110 archiver/main.c:107
 msgid "BACKEND_ID"
 msgstr "TAUSTAMODUULI_ID"
 
-#: archiver/config-archiver.c:116
+#: archiver/config-archiver.c:116 archiver/main.c:113
 msgid "Store only the differences with the parent location's config"
 msgstr "Tallenna vain eroavaisuudet yläsijainnin asetuksiin verrattuna"
 
-#: archiver/config-archiver.c:118
+#: archiver/config-archiver.c:118 archiver/main.c:115
 msgid "Store only those settings set in the previous config"
 msgstr "Tallenna vain edellisissä asetuksissa olleet asetukset"
 
-#: archiver/config-archiver.c:124
+#: archiver/config-archiver.c:124 archiver/main.c:121
 msgid "Date to which to roll back"
 msgstr "Päiväys, johon palataan"
 
-#: archiver/config-archiver.c:124
+#: archiver/config-archiver.c:124 archiver/main.c:121
 msgid "DATE"
 msgstr "PÄIVÄYS"
 
-#: archiver/config-archiver.c:126
+#: archiver/config-archiver.c:126 archiver/main.c:123
 msgid "Roll back all configuration items"
 msgstr "Palauta kaikki asetukset"
 
-#: archiver/config-archiver.c:128
+#: archiver/config-archiver.c:128 archiver/main.c:125
 msgid "Roll back to the revision REVISION_ID"
 msgstr "Palauta versio VERSIO_ID"
 
-#: archiver/config-archiver.c:128
+#: archiver/config-archiver.c:128 archiver/main.c:125
 msgid "REVISION_ID"
 msgstr "VERSIO_ID"
 
-#: archiver/config-archiver.c:130
+#: archiver/config-archiver.c:130 archiver/main.c:127
 msgid "Roll back to the last known revision"
 msgstr "Palauta viimeisin tunnettu versio"
 
-#: archiver/config-archiver.c:132
+#: archiver/config-archiver.c:132 archiver/main.c:129
 msgid "Roll back by STEPS revisions"
 msgstr "Palaa versioissa takaisin ASKELIA askeleen verran."
 
-#: archiver/config-archiver.c:132
+#: archiver/config-archiver.c:132 archiver/main.c:129
 msgid "STEPS"
 msgstr "ASKELIA"
 
-#: archiver/config-archiver.c:134
+#: archiver/config-archiver.c:134 archiver/main.c:131
 msgid "Don't run the backend, just dump the output"
 msgstr "Älä käytä taustamoduulia, vaan näytä tulokset"
 
-#: archiver/config-archiver.c:140
+#: archiver/config-archiver.c:140 archiver/main.c:137
 msgid "Parent location for the new location"
 msgstr "Uuden sijainnin yläsijainti"
 
-#: archiver/config-archiver.c:140
+#: archiver/config-archiver.c:140 archiver/main.c:137
 msgid "PARENT"
 msgstr "YLÄ"
 
-#: archiver/config-archiver.c:142
+#: archiver/config-archiver.c:142 archiver/main.c:139
 msgid "New name to assign to the location"
 msgstr "Sijainnin uusi nimi"
 
-#: archiver/config-archiver.c:142
+#: archiver/config-archiver.c:142 archiver/main.c:139
 msgid "NEW_NAME"
 msgstr "UUSI_NIMI"
 
-#: archiver/config-archiver.c:148
+#: archiver/config-archiver.c:148 archiver/main.c:145
 msgid "Add/remove this backend to/from the master backend list"
 msgstr "Lisää tai poista tämä taustamoduuli päätaustamoduulilistasta"
 
-#: archiver/config-archiver.c:150
+#: archiver/config-archiver.c:150 archiver/main.c:147
 msgid "Full containment"
 msgstr "Kokonaan sisältäminen"
 
-#: archiver/config-archiver.c:152
+#: archiver/config-archiver.c:152 archiver/main.c:149
 msgid "Partial containment"
 msgstr "Osittainen sisältäminen"
 
-#: archiver/config-archiver.c:369
+#: archiver/config-archiver.c:307 archiver/location.c:460
+msgid "Default Location"
+msgstr "Oletussijainti"
+
+#: archiver/config-archiver.c:369 archiver/main.c:323
 msgid "Global archiver options"
 msgstr "Yleiset arkistointivalitsimet"
 
-#: archiver/config-archiver.c:371
+#: archiver/config-archiver.c:371 archiver/main.c:325
 msgid "Archiver commands"
 msgstr "Arkistointikomennot"
 
-#: archiver/config-archiver.c:373
+#: archiver/config-archiver.c:373 archiver/main.c:327
 msgid "Options for storing data"
 msgstr "Datan tallennusvalitsimet"
 
-#: archiver/config-archiver.c:375
+#: archiver/config-archiver.c:375 archiver/main.c:329
 msgid "Options for rolling back"
 msgstr "Datan palautusvalitsimet"
 
-#: archiver/config-archiver.c:377
+#: archiver/config-archiver.c:377 archiver/main.c:331
 msgid "Options for adding or renaming locations"
 msgstr "Sijaintien lisäämisen ja nimeämisen valitsimet"
 
-#: archiver/config-archiver.c:380
+#: archiver/config-archiver.c:380 archiver/main.c:334
 msgid "Options for adding and removing backends"
 msgstr "Taustamoduulien lisäys- ja poistovalitsimet"
 
-#: capplets/background/background.desktop.in.in.h:1
-msgid "Background"
-msgstr "Tausta"
-
-#: capplets/background/background.desktop.in.in.h:2
-msgid "Configuration of the desktop's background"
-msgstr "Työpöydän taustan asetukset"
-
-#: capplets/background/background-properties-capplet.c:288
-#: capplets/common/capplet-util.c:249
+#: capplets/background/background-properties-capplet.c:291
+#: capplets/common/capplet-util.c:243
 msgid "Retrieve and store legacy settings"
 msgstr ""
 
-#: capplets/background/background-properties-capplet.c:313
+#: capplets/background/background-properties-capplet.c:315
 #, fuzzy
 msgid "Background properties"
 msgstr "Taustavärit"
 
-#: capplets/common/capplet-util.c:245 capplets/common/capplet-util.c:247
+#: capplets/background/background.desktop.in.h:1
+msgid "Background"
+msgstr "Tausta"
+
+#: capplets/background/background.desktop.in.h:2
+msgid "Configuration of the desktop's background"
+msgstr "Työpöydän taustan asetukset"
+
+#: capplets/background/prefs-widget.c:362
+msgid "(None)"
+msgstr ""
+
+#: capplets/background/prefs-widget.c:611
+msgid "Wallpaper Selection"
+msgstr ""
+
+#: capplets/background/prefs-widget.c:618
+msgid "Can't find an hbox, using a normal file selection"
+msgstr ""
+
+#: capplets/background/prefs-widget.c:624
+msgid "Preview"
+msgstr "Esikatselu"
+
+#: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:140
+#: capplets/common/gconf-property-editor.c:144
 msgid "Key"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:141
+#: capplets/common/gconf-property-editor.c:145
 msgid "GConf key to which this property editor is attached"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:147
+#: capplets/common/gconf-property-editor.c:151
 msgid "Callback"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:148
+#: capplets/common/gconf-property-editor.c:152
 msgid "Issue this callback when the value associated with key gets changed"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:153
+#: capplets/common/gconf-property-editor.c:157
 msgid "Change set"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:154
+#: capplets/common/gconf-property-editor.c:158
 msgid ""
 "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:159
+#: capplets/common/gconf-property-editor.c:163
 msgid "Conversion to widget callback"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:160
+#: capplets/common/gconf-property-editor.c:164
 msgid ""
 "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:165
+#: capplets/common/gconf-property-editor.c:169
 msgid "Conversion from widget callback"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:166
+#: capplets/common/gconf-property-editor.c:170
 msgid ""
 "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:171
+#: capplets/common/gconf-property-editor.c:175
 msgid "UI Control"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:172
+#: capplets/common/gconf-property-editor.c:176
 msgid "Object that controls the property (normally a widget)"
 msgstr ""
 
-#: capplets/default-applications/default-applications.desktop.in.in.h:1
+#: capplets/default-applications/default-applications.desktop.in.h:1
 msgid "Choose the applications used by default"
 msgstr "Valitse oletuksena käytettävät sovellukset"
 
-#: capplets/default-applications/default-applications.desktop.in.in.h:2
+#: capplets/default-applications/default-applications.desktop.in.h:2
 #: capplets/default-applications/interface.c:97
 #: capplets/screensaver/main.c:168
 msgid "Default Applications"
@@ -464,28 +480,99 @@ msgstr ""
 msgid "Couldn't create pixmap from file: %s"
 msgstr ""
 
-#: capplets/keyboard/keyboard.desktop.in.in.h:1
+#: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Näppäimistö"
 
-#: capplets/keyboard/keyboard.desktop.in.in.h:2
+#: capplets/keyboard/keyboard.desktop.in.h:2
 msgid "Keyboard Properties"
 msgstr "Näppäimistöasetukset"
 
-#: capplets/mouse/mouse.desktop.in.in.h:1
+#: capplets/mouse/mouse.desktop.in.h:1
 msgid "Mouse"
 msgstr "Hiiri"
 
-#: capplets/mouse/mouse.desktop.in.in.h:2
+#: capplets/mouse/mouse.desktop.in.h:2
 msgid "Mouse Properties"
 msgstr "Hiiriasetukset"
 
-#: capplets/screensaver/preferences.c:813
+#: capplets/rollback/main.c:39
+#, fuzzy
+msgid "Rollback the capplet given"
+msgstr "Palauta annetun hetken asetukset"
+
+#: capplets/rollback/main.c:41
+msgid "Operate on global backends"
+msgstr ""
+
+#: capplets/rollback/main.c:56
+#, fuzzy
+msgid "Options for the rollback GUI"
+msgstr "Datan palautusvalitsimet"
+
+#: capplets/rollback/rollback-capplet-dialog.c:46
+msgid "1 year ago"
+msgstr ""
+
+#: capplets/rollback/rollback-capplet-dialog.c:46
+msgid "6 months ago"
+msgstr ""
+
+#: capplets/rollback/rollback-capplet-dialog.c:46
+msgid "1 month ago"
+msgstr ""
+
+#: capplets/rollback/rollback-capplet-dialog.c:46
+msgid "1 week ago"
+msgstr ""
+
+#: capplets/rollback/rollback-capplet-dialog.c:47
+msgid "3 days ago"
+msgstr ""
+
+#: capplets/rollback/rollback-capplet-dialog.c:47
+msgid "1 day ago"
+msgstr ""
+
+#: capplets/rollback/rollback-capplet-dialog.c:47
+msgid "1 hour ago"
+msgstr ""
+
+#: capplets/rollback/rollback-capplet-dialog.c:47
+#, fuzzy
+msgid "30 minutes ago"
+msgstr "minuutin kuluttua"
+
+#: capplets/rollback/rollback-capplet-dialog.c:48
+#, fuzzy
+msgid "10 minutes ago"
+msgstr "minuutin kuluttua"
+
+#: capplets/rollback/rollback-capplet-dialog.c:48
+#, fuzzy
+msgid "5 minutes ago"
+msgstr "minuutin kuluttua"
+
+#: capplets/rollback/rollback-capplet-dialog.c:48
+#, fuzzy
+msgid "1 minute ago"
+msgstr "minuutin kuluttua"
+
+#: capplets/rollback/rollback-capplet-dialog.c:48
+#, fuzzy
+msgid "Current time"
+msgstr "Keskitä kuva."
+
+#: capplets/rollback/rollback-capplet-dialog.c:169
+msgid "Rollback"
+msgstr ""
+
+#: capplets/screensaver/preferences.c:815
 msgid "Custom screensaver. No description available"
 msgstr "Muu näytönsäästäjä. Kuvausta ei ole."
 
 #: capplets/screensaver/prefs-widget.c:192
-#: capplets/screensaver/screensaver.desktop.in.in.h:2
+#: capplets/screensaver/screensaver.desktop.in.h:2
 msgid "Screensaver"
 msgstr "Näytönsäästäjä"
 
@@ -493,10 +580,6 @@ msgstr "Näytönsäästäjä"
 #, c-format
 msgid "About %s\n"
 msgstr ""
-
-#: capplets/screensaver/screensaver.desktop.in.in.h:1
-msgid "Configure the settings of the screensaver"
-msgstr "Muuta näytönsäästäjän asetuksia"
 
 #: capplets/screensaver/screensaver-prefs-dialog.c:185
 msgid "Name:"
@@ -547,6 +630,10 @@ msgstr "Visuaali:"
 #: capplets/screensaver/screensaver-prefs-dialog.c:1711
 msgid "Any"
 msgstr "Mikä vain"
+
+#: capplets/screensaver/screensaver.desktop.in.h:1
+msgid "Configure the settings of the screensaver"
+msgstr "Muuta näytönsäästäjän asetuksia"
 
 #: capplets/screensaver/screensavers/3d_clock.xml.h:1
 msgid "3d clock"
@@ -2054,19 +2141,6 @@ msgstr ""
 msgid "Moebius"
 msgstr "Hiiri"
 
-#: capplets/screensaver/screensavers/moire2.xml.h:1
-msgid ""
-"Another example of the fun you can have with moire interference patterns; "
-"this hack generates fields of concentric circles or ovals, and combines the "
-"planes with various operations. The planes are moving independently of one "
-"another, causing the interference lines to ``spray.'' Written by Jamie "
-"Zawinski."
-msgstr ""
-
-#: capplets/screensaver/screensavers/moire2.xml.h:2
-msgid "Moire2"
-msgstr ""
-
 #: capplets/screensaver/screensavers/moire.xml.h:5
 msgid "Maximum radius increment"
 msgstr "Ympyröiden suuruus"
@@ -2085,6 +2159,19 @@ msgid ""
 "this one is that the heart of the display algorithm can be expressed with "
 "just a pair of loops and a handful of arithmetic, giving it a high ``display "
 "hack metric''."
+msgstr ""
+
+#: capplets/screensaver/screensavers/moire2.xml.h:1
+msgid ""
+"Another example of the fun you can have with moire interference patterns; "
+"this hack generates fields of concentric circles or ovals, and combines the "
+"planes with various operations. The planes are moving independently of one "
+"another, causing the interference lines to ``spray.'' Written by Jamie "
+"Zawinski."
+msgstr ""
+
+#: capplets/screensaver/screensavers/moire2.xml.h:2
+msgid "Moire2"
 msgstr ""
 
 #: capplets/screensaver/screensavers/molecule.xml.h:1
@@ -2455,16 +2542,6 @@ msgid ""
 "like vapor trails or neon tubes. Written by Shane Smit."
 msgstr ""
 
-#: capplets/screensaver/screensavers/sierpinski3d.xml.h:1
-msgid "Sierpinski3D"
-msgstr ""
-
-#: capplets/screensaver/screensavers/sierpinski3d.xml.h:2
-msgid ""
-"This draws the three-dimensional variant of the recursive Sierpinski "
-"triangle fractal, using GL. Written by Tim Robinson and Jamie Zawinski."
-msgstr ""
-
 #: capplets/screensaver/screensavers/sierpinski.xml.h:5
 msgid "Sierpinski"
 msgstr ""
@@ -2473,6 +2550,16 @@ msgstr ""
 msgid ""
 "This draws the two-dimensional variant of the recursive Sierpinski triangle "
 "fractal. Written by Desmond Daignault."
+msgstr ""
+
+#: capplets/screensaver/screensavers/sierpinski3d.xml.h:1
+msgid "Sierpinski3D"
+msgstr ""
+
+#: capplets/screensaver/screensavers/sierpinski3d.xml.h:2
+msgid ""
+"This draws the three-dimensional variant of the recursive Sierpinski "
+"triangle fractal, using GL. Written by Tim Robinson and Jamie Zawinski."
 msgstr ""
 
 #: capplets/screensaver/screensavers/slidescreen.xml.h:1
@@ -2998,87 +3085,9 @@ msgstr "Muu"
 msgid "New screensaver"
 msgstr "Uusi näytönsäästäjä"
 
-#: capplets/sound/sound.desktop.in.in.h:1
-msgid "Configure GNOME's use of sound"
-msgstr "Muuta GNOMEn ääniasetuksia"
-
-#: capplets/sound/sound.desktop.in.in.h:2
-msgid "Sound"
-msgstr "Ääni"
-
-#: capplets/sound/sound-properties.glade.h:1
-msgid "Enable sound server startup"
-msgstr "Käytä äänipalvelinta"
-
-#: capplets/sound/sound-properties.glade.h:2
-msgid "General"
+#: capplets/sound/prefs-widget.c:138
+msgid "Play"
 msgstr ""
-
-#: capplets/sound/sound-properties.glade.h:3
-#, fuzzy
-msgid "Sound Events"
-msgstr "Äänitapahtumat"
-
-#: capplets/sound/sound-properties.glade.h:4
-msgid "Sounds for events"
-msgstr "Äänitapahtumat"
-
-#: control-center/capplet-dir-view.c:147
-msgid "Layout"
-msgstr ""
-
-#: control-center/capplet-dir-view.c:148
-msgid "Layout to use for this view of the capplets"
-msgstr ""
-
-#: control-center/capplet-dir-view.c:154
-msgid "Capplet directory object"
-msgstr ""
-
-#: control-center/capplet-dir-view.c:155
-msgid "Capplet directory that this view is viewing"
-msgstr ""
-
-#: control-center/capplet-dir-view.c:320 control-center/gnomecc.desktop.in.h:1
-msgid "GNOME Control Center"
-msgstr "GNOMEn hallintakeskus"
-
-#: control-center/capplet-dir-view.c:323
-msgid "Desktop properties manager."
-msgstr ""
-"Työpöydän asetusten hallinta.\n"
-"Suomennos: http://gnome-fi.sourceforge.net/"
-
-#: control-center/capplet-dir-view.c:448
-#, fuzzy, c-format
-msgid "Gnome Control Center : %s"
-msgstr "GNOMEn hallintakeskus"
-
-#: control-center/capplet-dir-view.c:493
-msgid ""
-"No help is available/installed. Please make sure you\n"
-"have the GNOME User's Guide installed on your system."
-msgstr ""
-"Ohjetta ei ole saatavilla. Ole hyvä ja varmista, että\n"
-"olet asentanut GNOME-käyttäjän oppaan."
-
-#: control-center/capplet-dir-view.c:496
-msgid "Close"
-msgstr "Sulje"
-
-#: control-center/capplet-dir-view-html.c:145
-#, fuzzy
-msgid "GNOME Control Center:"
-msgstr "GNOMEn hallintakeskus"
-
-#: control-center/capplet-dir-view-list.c:321
-#, fuzzy, c-format
-msgid "GNOME Control Center: %s"
-msgstr "GNOMEn hallintakeskus"
-
-#: control-center/gnomecc.desktop.in.h:2
-msgid "The GNOME configuration tool"
-msgstr "GNOMEn asetustyökalu"
 
 #: control-center/Gnome.directory.in.in.h:1
 msgid "Main"
@@ -3089,52 +3098,274 @@ msgstr ""
 msgid "Main Settings"
 msgstr "Asetukset"
 
-#: libbackground/applier.c:229
+#: control-center/capplet-dir-view-html.c:145
+#, fuzzy
+msgid "GNOME Control Center:"
+msgstr "GNOMEn hallintakeskus"
+
+#: control-center/capplet-dir-view-list.c:325
+#, fuzzy, c-format
+msgid "GNOME Control Center: %s"
+msgstr "GNOMEn hallintakeskus"
+
+#: control-center/capplet-dir-view.c:146
+msgid "Layout"
+msgstr ""
+
+#: control-center/capplet-dir-view.c:147
+msgid "Layout to use for this view of the capplets"
+msgstr ""
+
+#: control-center/capplet-dir-view.c:153
+msgid "Capplet directory object"
+msgstr ""
+
+#: control-center/capplet-dir-view.c:154
+msgid "Capplet directory that this view is viewing"
+msgstr ""
+
+#: control-center/capplet-dir-view.c:308 control-center/gnomecc.desktop.in.h:1
+msgid "GNOME Control Center"
+msgstr "GNOMEn hallintakeskus"
+
+#: control-center/capplet-dir-view.c:311
+msgid "Desktop properties manager."
+msgstr ""
+"Työpöydän asetusten hallinta.\n"
+"Suomennos: http://gnome-fi.sourceforge.net/"
+
+#: control-center/capplet-dir-view.c:445
+#, fuzzy, c-format
+msgid "Gnome Control Center : %s"
+msgstr "GNOMEn hallintakeskus"
+
+#: control-center/capplet-dir-view.c:488
+msgid ""
+"No help is available/installed. Please make sure you\n"
+"have the GNOME User's Guide installed on your system."
+msgstr ""
+"Ohjetta ei ole saatavilla. Ole hyvä ja varmista, että\n"
+"olet asentanut GNOME-käyttäjän oppaan."
+
+#: control-center/capplet-dir-view.c:491
+msgid "Close"
+msgstr "Sulje"
+
+#: control-center/gnomecc.desktop.in.h:2
+msgid "The GNOME configuration tool"
+msgstr "GNOMEn asetustyökalu"
+
+#: libbackground/applier.c:228
 msgid "Type"
 msgstr ""
 
-#: libbackground/applier.c:230
+#: libbackground/applier.c:229
 msgid ""
 "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
 "for preview"
 msgstr ""
 
-#: libbackground/applier.c:385
+#: libbackground/applier.c:388
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "Ei voinut ladata kuvaa \"%s\", joten taustakuvaa ei ole."
 
-#: libbackground/applier.c:501
+#: libbackground/applier.c:505
 msgid "Disabled"
 msgstr "Pois käytöstä"
 
-#: libsounds/sound-view.c:98
-msgid "The sound file for this event does not exist."
+#: root-manager/root-manager-helper.c:54
+msgid "Could not connect to X Display"
 msgstr ""
 
-#: libsounds/sound-view.c:100
+#: root-manager/root-manager-helper.c:60
+msgid "Could not duplicate file descriptor"
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:56
+msgid "Pipe error.\n"
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:62
+msgid "Cannot fork().\n"
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:83 root-manager/root-manager-wrap.c:93
+msgid "dup2() error.\n"
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:123
+#, c-format
+msgid "execl() error, errno=%d\n"
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:152
+msgid "Information updated."
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:155
 msgid ""
-"The sound file for this event does not exist.\n"
-"You may want to install the gnome-audio package\n"
-"for a set of default sounds."
+"The password you typed is invalid.\n"
+"Please try again."
 msgstr ""
 
-#: libsounds/sound-view.c:152
-msgid "Event"
+#: root-manager/root-manager-wrap.c:158
+msgid ""
+"One or more of the changed fields is invalid.\n"
+"This is probably due to either colons or commas in one of the fields.\n"
+"Please remove those and try again."
 msgstr ""
 
-#: libsounds/sound-view.c:152
-msgid "File to Play"
+#: root-manager/root-manager-wrap.c:161
+msgid "Password resetting error."
 msgstr ""
 
-#: libsounds/sound-view.c:185
-msgid "Play"
+#: root-manager/root-manager-wrap.c:164
+msgid ""
+"Some systems files are locked.\n"
+"Please try again in a few moments."
 msgstr ""
 
-#: libsounds/sound-view.c:190
+#: root-manager/root-manager-wrap.c:167
+msgid "Unknown user."
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:170
+msgid "Insufficient rights."
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:173
+msgid "Invalid call to sub process."
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:176
+msgid ""
+"Your current shell is not listed in /etc/shells.\n"
+"You are not allowed to change your shell.\n"
+"Consult your system administrator."
+msgstr ""
+
+#. well, this is unlikely to work either, but at least we tried...
+#: root-manager/root-manager-wrap.c:180
+msgid "Out of memory."
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:183
+msgid "The exec() call failed."
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:186
+msgid "Failed to find selected program."
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:189
+msgid "Unknown error."
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:192
+msgid "Unknown exit code."
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:280
+msgid "Input"
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:386
+#, c-format
+msgid "Need %d responses.\n"
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:411
+msgid ""
+"In order to make changes to your system, you\n"
+"must enter the administrator (root) password."
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:425
+msgid "Error"
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:439
+#, c-format
+msgid "You want %d response(s) from %d entry fields!?!?!\n"
+msgstr ""
+
+#: root-manager/root-manager-wrap.c:445
+msgid "Run Unprivileged"
+msgstr ""
+
+#: root-manager/root-manager.c:110
+#, c-format
+msgid "Got error %d.\n"
+msgstr ""
+
+#: root-manager/root-manager.c:206
+#, c-format
+msgid "Password for %s"
+msgstr ""
+
+#: root-manager/root-manager.c:401
+msgid "Consistency checking is not turned on."
+msgstr ""
+
+#: root-manager/root-manager.c:403
+msgid "Block is fine."
+msgstr ""
+
+#: root-manager/root-manager.c:405
+msgid "Block freed twice."
+msgstr ""
+
+#: root-manager/root-manager.c:407
+msgid "Memory before the block was clobbered."
+msgstr ""
+
+#: root-manager/root-manager.c:409
+msgid "Memory after the block was clobbered."
+msgstr ""
+
+#: root-manager/root-manager.c:439
+msgid "userhelper must be setuid root\n"
+msgstr ""
+
+#: root-manager/root-manager.c:444 root-manager/root-manager.c:450
+msgid "Usage: root-helper fd\n"
+msgstr ""
+
+#: root-manager/root-manager.c:554
+#, c-format
+msgid "PAM returned = %d\n"
+msgstr ""
+
+#: root-manager/root-manager.c:555
+#, c-format
+msgid "about to authenticate \"%s\"\n"
+msgstr ""
+
+#: root-manager/root-manager.c:632 root-manager/root-manager.c:700
+#, c-format
+msgid "about to exec \"%s\"\n"
+msgstr ""
+
 #, fuzzy
-msgid "Select sound file"
-msgstr "Valitse katselin"
+#~ msgid "Select sound file"
+#~ msgstr "Valitse katselin"
+
+#~ msgid "Configure GNOME's use of sound"
+#~ msgstr "Muuta GNOMEn ääniasetuksia"
+
+#~ msgid "Sound"
+#~ msgstr "Ääni"
+
+#~ msgid "Enable sound server startup"
+#~ msgstr "Käytä äänipalvelinta"
+
+#, fuzzy
+#~ msgid "Sound Events"
+#~ msgstr "Äänitapahtumat"
+
+#~ msgid "Sounds for events"
+#~ msgstr "Äänitapahtumat"
 
 #~ msgid "Background picture"
 #~ msgstr "Taustakuva"
@@ -3270,9 +3501,6 @@ msgstr "Valitse katselin"
 #~ msgid "One screensaver all the time"
 #~ msgstr "Sama näytönsäästäjä koko ajan."
 
-#~ msgid "Preview"
-#~ msgstr "Esikatselu"
-
 #~ msgid "R_equire password to unlock screen"
 #~ msgstr "Vaadi _salasana"
 
@@ -3313,9 +3541,6 @@ msgstr "Valitse katselin"
 
 #~ msgid "_Settings"
 #~ msgstr "_Asetukset"
-
-#~ msgid "minutes"
-#~ msgstr "minuutin kuluttua"
 
 #~ msgid "Appearance"
 #~ msgstr "Ulkonäkö"
