@@ -70,10 +70,12 @@ static void capplet_dir_view_get_prop    (GObject        *object,
 
 static void capplet_dir_view_finalize    (GObject        *object);
 
-static void close_cb                     (GtkWidget      *widget,
-					  CappletDirView *view);
-static void about_menu_cb                (GtkWidget      *widget,
-					  CappletDirView *view);
+static void close_cb                     (BonoboUIComponent *uic,
+					  gpointer data,
+					  const char *cname);
+static void about_menu_cb                (BonoboUIComponent *uic,
+					  gpointer data,
+					  const char *cname);
 
 GType
 capplet_dir_view_get_type (void) 
@@ -103,32 +105,35 @@ capplet_dir_view_get_type (void)
 	return capplet_dir_view_type;
 }
 
+static BonoboUIVerb capplet_dir_view_verbs[] = {
+	BONOBO_UI_VERB ("FileClose", close_cb),
+	BONOBO_UI_VERB ("HelpAbout", about_menu_cb),
+	BONOBO_UI_VERB_END
+};
+
 static void
 capplet_dir_view_init (CappletDirView *view, CappletDirViewClass *class) 
 {
-	GladeXML *xml;
-
-	xml = glade_xml_new (GLADEDIR"/gnomecc.glade", "main_window", NULL);
-
-	if (xml == NULL) {
-		g_critical ("Could not load XML file " GLADEDIR "/gnomecc.glade");
-		return;
-	}
+	BonoboUIContainer *ui_container;
+	BonoboUIComponent *ui_component;
 
 	window_list = g_list_prepend (window_list, view);
 
-	view->app = GNOME_APP (glade_xml_get_widget (xml, "main_window"));
+	view->app = BONOBO_WINDOW (bonobo_window_new ("gnomecc", ""));
+	ui_container = bonobo_window_get_ui_container (view->app);
 
+	gtk_window_set_default_size (GTK_WINDOW (view->app), 620, 430);
 	gnome_window_icon_set_from_file (GTK_WINDOW (view->app), 
 					 PIXMAPS_DIR "/control-center.png");
+
+	ui_component = bonobo_ui_component_new ("gnomecc");
+	bonobo_ui_component_set_container (ui_component, bonobo_object_corba_objref (BONOBO_OBJECT (ui_container)), NULL);
+	bonobo_ui_util_set_ui (ui_component, "", "gnomecc-ui.xml", "gnomecc", NULL);
 
 	g_signal_connect_swapped (G_OBJECT (view->app), "destroy",
 				  (GCallback) g_object_unref, view);
 
-	glade_xml_signal_connect_data (xml, "close_cb", (GCallback) close_cb, view);
-	glade_xml_signal_connect_data (xml, "about_menu_cb", (GCallback) about_menu_cb, view);
-
-	g_object_unref (G_OBJECT (xml));
+	bonobo_ui_component_add_verb_list_with_data (ui_component, capplet_dir_view_verbs, view);
 }
 
 static void
@@ -194,7 +199,7 @@ capplet_dir_view_set_prop (GObject *object, guint prop_id, const GValue *value, 
 		if (view->impl && view->impl->create) {
 			view->view = view->impl->create (view);
 
-			gnome_app_set_contents (view->app, view->view);
+			bonobo_window_set_contents (view->app, view->view);
 
 			if (view->capplet_dir && view->impl->populate)
 				view->impl->populate (view);
@@ -261,13 +266,10 @@ capplet_dir_view_update_authenticated (CappletDirView *view, gpointer null)
 CappletDirView *
 capplet_dir_view_new (void) 
 {
-	GnomeCCPreferences *prefs;
 	GObject *view;
 
-	prefs = gnomecc_preferences_get ();
-
 	view = g_object_new (capplet_dir_view_get_type (),
-			     "layout", prefs->layout,
+			     "layout", LAYOUT_ICON_LIST,
 			     NULL);
 
 	capplet_dir_view_update_authenticated
@@ -283,23 +285,26 @@ capplet_dir_views_set_authenticated (gboolean amiauthedornot)
 	g_list_foreach (window_list, (GFunc)capplet_dir_view_update_authenticated, NULL);
 }
 
-static void 
-close_cb (GtkWidget *widget, CappletDirView *view)
+static void
+close_cb (BonoboUIComponent *uic, gpointer data, const char *cname)
 {
+	CappletDirView *view = CAPPLET_DIR_VIEW (data);
 	gtk_widget_destroy (GTK_WIDGET (CAPPLET_DIR_VIEW_W (view)));
 }
 
 static void
-about_menu_cb (GtkWidget *widget, CappletDirView *view)
+about_menu_cb (BonoboUIComponent *uic, gpointer data, const char *cname)
 {
 	static GtkWidget *about = NULL;
 	static gchar *authors[] = {
-		"Bradford Hovinen <hovinen@ximian.com>",
 		"Jacob Berkman <jacob@ximian.com>",
 		"Jonathan Blandford <jrb@redhat.com>",
-		"Jakub Steiner <jimmac@ximian.com>",
-		"Richard Hestilow <hestilow@ximian.com>",
 		"Chema Celorio <chema@ximian.com>",
+		"Richard Hestilow <hestilow@ximian.com>",
+		"Bradford Hovinen <hovinen@ximian.com>",
+		"Lauris Kaplinski <lauris@ximian.com>",
+		"Seth Nickell <snickell@stanford.edu>",
+		"Jakub Steiner <jimmac@ximian.com>",
 		NULL
 	};
 
@@ -489,51 +494,6 @@ capplet_dir_view_load_dir (CappletDirView *view, CappletDir *dir)
 	gtk_widget_show_all (menu);
 }
 
-#if 0
-
-static void 
-help_cb (GtkWidget *widget, CappletDirView *view)
-{
-	if (!gnome_help_display ("users-guide", "gcc.html",
-				 NULL))
-	{
-		GtkWidget *mbox;
-
-		mbox = gnome_message_box_new
-			(_("No help is available/installed. Please " \
-			   "make sure you\nhave the GNOME User's " \
-			   "Guide installed on your system."),
-			 GNOME_MESSAGE_BOX_ERROR, _("Close"), NULL);
-
-		gtk_widget_show (mbox);
-	}
-}
-
-#endif
-
-#if 0
-static void 
-icons_cb (GtkWidget *widget, CappletDirView *view)
-{
-	switch_to_icon_list (view);
-}
-
-static void 
-tree_cb (GtkWidget *widget, CappletDirView *view)
-{
-	switch_to_tree (view);
-}
-#endif
-
-static void
-prefs_changed_cb (GnomeCCPreferences *prefs) 
-{
-	GList *node;
-
-	for (node = window_list; node; node = node->next)
-		g_object_set (G_OBJECT (node->data), "layout", prefs->layout, NULL);
-}
-
 void
 capplet_dir_view_show (CappletDirView *view)
 {
@@ -546,11 +506,7 @@ capplet_dir_view_show (CappletDirView *view)
 static CappletDirView *
 get_capplet_dir_view (CappletDir *dir, CappletDirView *launcher) 
 {
-	GnomeCCPreferences *prefs;
-
-	prefs = gnomecc_preferences_get ();
-
-	if (prefs->single_window && launcher)
+	if (launcher)
 		return launcher;
 	else
 		return CAPPLET_DIR_VIEW (capplet_dir_view_new ());
@@ -559,12 +515,5 @@ get_capplet_dir_view (CappletDir *dir, CappletDirView *launcher)
 void
 gnomecc_init (void) 
 {
-	GnomeCCPreferences *prefs;
-
-	prefs = gnomecc_preferences_get ();
-
-	g_signal_connect (G_OBJECT (prefs), "changed",
-			  (GCallback) prefs_changed_cb, NULL);
-
 	capplet_dir_init (get_capplet_dir_view);
 }

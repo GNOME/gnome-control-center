@@ -25,6 +25,7 @@
 #define __CAPPLET_DIR_VIEW
 
 #include <gnome.h>
+#include <libbonoboui.h>
 
 #include "capplet-dir.h"
 #include "preferences.h"
@@ -58,7 +59,7 @@ struct _CappletDirViewImpl
 struct _CappletDirView 
 {
 	GObject parent;
-	GnomeApp *app;
+	BonoboWindow *app;
 
 	CappletDir *capplet_dir;
 	CappletDirEntry *selected;

@@ -13,14 +13,8 @@ sys_in_files = gnomecc.desktop.in
 sys_DATA = $(sys_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
-gladedir = $(GNOMECC_GLADE_DIR)
-glade_DATA = \
-	gnomecc.glade	\
-	gnome-lockscreen.png	\
-	gnome-unlockscreen.png	\
-	html-view.xpm		\
-	icon-view.xpm		\
-	tree-view.xpm
+uidir = $(datadir)/gnome-2.0/ui
+ui_DATA = gnomecc-ui.xml
 
 INCLUDES = 							\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 		\
@@ -37,13 +31,12 @@ gnome2_control_center_SOURCES = \
 	main.c						\
 	capplet-dir.c 		capplet-dir.h 		\
 	capplet-dir-view.c	capplet-dir-view.h	\
-	preferences.c		preferences.h		\
 	capplet-dir-view-list.c
 
 #	capplet-dir-view-tree.c
 
 gnome2_control_center_LDADD = $(GNOMECC_LIBS)
 
-EXTRA_DIST = gnomecc.desktop.in $(appicon_DATA) $(splash_DATA) $(glade_DATA)
+EXTRA_DIST = gnomecc.desktop.in $(appicon_DATA) $(splash_DATA) $(ui_DATA)
 
 CLEANFILES=gnomecc.desktop

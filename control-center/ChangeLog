@@ -1,3 +1,16 @@
+2002-03-11  Richard Hestilow  <hestilow@ximian.com>
+	
+	* capplet-dir-view.c: Remove barely-used libglade stuff, replace
+	with BonoboWindow. Add a menu with "close" since this is needed
+	for accessibility.
+
+	* gnomecc-ui.xml: Added.
+
+	* Makefile.am: Remove preferences.[ch] from the build. Remove
+	libglade stuff. Install gnomecc-ui.xml. 
+
+	* capplet-dir-view-list.c: Remove any "//" comments.
+
 2002-03-05  jacob berkman  <jacob@ximian.com>
 
 	* Makefile.am: clean up; remove some duplicate / obsolete paths

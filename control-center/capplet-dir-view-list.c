@@ -163,7 +163,6 @@ sidebar_dummy_foreach (GtkTreeModel *model, GtkTreePath *path,
 	
 	g_return_if_fail (dir != NULL);
 
-	//g_value_init (&val, G_TYPE_POINTER);
 	gtk_tree_model_get_value (model, iter, SIDEBAR_DATA, &val);
 	*dir = g_value_get_pointer (&val);
 }
@@ -377,11 +376,8 @@ header_expose_cb (GtkWidget *darea, GdkEventExpose *event,
 	{
 		GdkColor c1, c2;
 
-		//gdk_color_parse ("#625784", &c1);
 		c1 = darea->style->bg[GTK_STATE_SELECTED];
 		lighten_color (&c1);
-		//gdk_color_parse ("#494066", &c2);
-		//c2 = darea->style->dark[GTK_STATE_SELECTED];
 		c2 = darea->style->black;
 		lighten_color (&c2);
 
@@ -428,7 +424,6 @@ header_expose_cb (GtkWidget *darea, GdkEventExpose *event,
 
 	pango_layout_set_text (data->layout, data->header_text, -1);
 	pango_layout_get_pixel_size (data->layout, &tw, &th);
-//	gdk_draw_layout (darea->window, darea->style->text[GTK_STATE_SELECTED],
 	gdk_draw_layout (darea->window, darea->style->white_gc,
 			 64, (darea->allocation.height - th) / 2,
 			 data->layout);
