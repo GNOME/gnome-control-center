@@ -41,7 +41,7 @@ static GConfEnumStringPair toolbar_style_enums[] = {
   { 1, "both_horiz" },
   { 2, "icons" },
   { 3, "text" },
-  { -1, NULL },
+  { -1, NULL }
 };
 
 static GConfValue *
@@ -65,9 +65,8 @@ toolbar_to_widget (GConfPropertyEditor *peditor, GConfValue *value)
 
   str = (value && (value->type == GCONF_VALUE_STRING)) ? gconf_value_get_string (value) : NULL;
   new_value = gconf_value_new (GCONF_VALUE_INT);
-  gconf_string_to_enum (toolbar_style_enums,
-			str,
-			&val);
+  if (!gconf_string_to_enum (toolbar_style_enums, str, &val))
+	  val = 0;
   gconf_value_set_int (new_value, val);
 
   return new_value;
@@ -143,7 +142,8 @@ set_toolbar_style (GladeXML *dialog, const char *value)
 
   int enum_val;
 
-  gconf_string_to_enum (toolbar_style_enums, value, &enum_val);
+  if (!gconf_string_to_enum (toolbar_style_enums, value, &enum_val))
+	  enum_val = 0;
 
   gtk_toolbar_set_style (GTK_TOOLBAR (WID("toolbar_toolbar")), 
 			 gtk_toolbar_styles[enum_val]);
