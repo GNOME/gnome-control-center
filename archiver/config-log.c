@@ -529,10 +529,12 @@ config_log_write_entry (ConfigLog *config_log, gchar *backend_id,
 	config_log->p->log_data =
 		g_list_prepend (config_log->p->log_data, entry);
 
-	if (config_log->p->socket_owner)
+	if (config_log->p->socket_owner) {
 		slave_broadcast_data (NULL, config_log);
-	else
+		dump_log (config_log);
+	} else {
 		write_log (config_log->p->socket_buffer, entry);
+	}
 
 	return entry->id;
 }
@@ -997,7 +999,7 @@ write_log (IOBuffer *output, ConfigLogEntry *entry)
 			       entry->date->tm_mon + 1, entry->date->tm_mday, 
 			       entry->date->tm_hour, entry->date->tm_min, 
 			       entry->date->tm_sec, entry->backend_id);
-	DEBUG_MSG ("Writing %s", str);
+	DEBUG_MSG ("Writing %s, from_socket = %d", str, output->from_socket);
 	io_buffer_write (output, str);
 	g_free (str);
 }
@@ -1306,8 +1308,6 @@ slave_new (ConfigLog *config_log, int fd)
 					   (GIOFunc) slave_data_cb,
 					   slave);
 
-	slave_apprise_data (slave);
-
 	return slave;
 }
 
@@ -1337,6 +1337,7 @@ slave_data_cb (GIOChannel *channel, GIOCondition condition,
 	DEBUG_MSG ("Condition is %d", condition);
 
 	if (condition & G_IO_HUP || slave->buffer->closed) {
+		DEBUG_MSG ("Removing slave");
 		slave_destroy (slave);
 		return FALSE;
 	}
@@ -1361,6 +1362,8 @@ slave_broadcast_data (Slave *slave, ConfigLog *config_log)
 	Slave *current;
 	ConfigLogEntry *first_entry;
 
+	DEBUG_MSG ("Enter");
+
 	first_entry = config_log->p->log_data->data;
 
 	for (node = config_log->p->slaves; node != NULL; node = node->next) {
@@ -1369,6 +1372,8 @@ slave_broadcast_data (Slave *slave, ConfigLog *config_log)
 		if (current == slave) continue;
 		write_log (current->buffer, first_entry);
 	}
+
+	DEBUG_MSG ("Exit");
 }
 
 /* Sends all the new log entries to the given slave */
