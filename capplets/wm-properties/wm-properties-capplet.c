@@ -493,7 +493,7 @@ restart_failure (WMResult reason)
         if (msg) {
                 msgbox = gnome_message_box_new (msg,
                                                 GNOME_MESSAGE_BOX_ERROR,
-                                                "OK", NULL);
+                                                _("OK"), NULL);
                 if (modal)
                         gnome_dialog_run (GNOME_DIALOG (msgbox));
                 else
