@@ -122,14 +122,14 @@ else
   real_prefix=${prefix}
 fi
 
-AC_DEFINE_UNQUOTED(GNOMECC_DATA_DIR, "${real_prefix}/share/${PACKAGE}")
-GNOMECC_ICONS_DIR=""${datadir}/${PACKAGE}/icons""
+AC_DEFINE_UNQUOTED(GNOMECC_DATA_DIR, "${real_prefix}/share/${PACKAGE}-2")
+GNOMECC_ICONS_DIR=""${datadir}/${PACKAGE}-2/icons""
 AC_SUBST(GNOMECC_ICONS_DIR)
-GNOMECC_DESKTOP_DIR=""${datadir}/${PACKAGE}/capplets""
+GNOMECC_DESKTOP_DIR=""${datadir}/${PACKAGE}-2/capplets""
 AC_SUBST(GNOMECC_DESKTOP_DIR)
-GNOMECC_GLADE_DIR=""${datadir}/${PACKAGE}/interfaces""
+GNOMECC_GLADE_DIR=""${datadir}/${PACKAGE}-2/interfaces""
 AC_SUBST(GNOMECC_GLADE_DIR)
-GNOMECC_PIXMAPS_DIR=""${datadir}/${PACKAGE}/pixmaps""
+GNOMECC_PIXMAPS_DIR=""${datadir}/${PACKAGE}-2/pixmaps""
 AC_SUBST(GNOMECC_PIXMAPS_DIR)
 dnl ==============================================
 dnl End: Define the directories 
