@@ -1331,6 +1331,8 @@ set_root_pixmap (GdkPixmap *pixmap)
 
 	if (pixmap != NULL && pixmap != (GdkPixmap *) -1)
 		pixmap_id = GDK_WINDOW_XWINDOW (pixmap);
+	else
+		pixmap_id = 0;
 
 	XGrabServer (GDK_DISPLAY ());
 
