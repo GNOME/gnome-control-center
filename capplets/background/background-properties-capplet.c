@@ -37,7 +37,6 @@
 #include "capplet-util.h"
 #include "gconf-property-editor.h"
 #include "applier.h"
-#include "preview-file-selection.h"
 #include "activate-settings-daemon.h"
 
 enum

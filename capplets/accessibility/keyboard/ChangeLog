@@ -1,3 +1,15 @@
+2004-02-16  Jody Goldberg <jody@gnome.org>
+
+	* accessibility-keyboard.c (cb_load_CDE_file) : Add a kludge to set
+	  the vertical size based on the monitor size until the filesel can do
+	  a better job of doing it itself.
+
+2003-12-07  Jan Arne Petersen  <jpetersen@uni-bonn.de>
+
+	* accessibility-keyboard.c: (load_CDE_file),
+	(fchooser_handle_response), (cb_load_CDE_file): replace
+	GtkFileSelection with GtkFileChooser.
+
 2004-02-13  Jody Goldberg <jody@gnome.org>
 
 	* Release 2.5.3

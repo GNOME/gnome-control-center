@@ -95,7 +95,7 @@ cb_dialog_response (GtkDialog *dialog, gint response_id)
 		capplet_help (GTK_WINDOW (dialog),
 			      "foo.xml",
 			      "bar");
-	else if (response_id == GTK_RESPONSE_CLOSE)
+	else if (response_id == GTK_RESPONSE_CLOSE || response_id == GTK_RESPONSE_DELETE_EVENT)
 		gtk_main_quit ();
 	else {
 	        g_message ("CLOSE AND LOGOUT!");

@@ -323,16 +323,16 @@ xrm_get_int (GConfClient *client, XrmDatabase *db, char const *gconf_key,
 
 /* This loads the current users XKB settings from their file */
 static gboolean
-load_CDE_file (GtkFileSelection *fsel)
+load_CDE_file (GtkFileChooser *fchooser)
 {
-	char const *file = gtk_file_selection_get_filename (fsel);
+	char *file = gtk_file_chooser_get_filename (fchooser);
 	GConfClient *client;
 	XrmDatabase  db;
 	gboolean found = FALSE;
 
 	if (!(db = XrmGetFileDatabase (file))) {
 		GtkWidget *warn = gtk_message_dialog_new (
-			gtk_window_get_transient_for (GTK_WINDOW (fsel)),
+			gtk_window_get_transient_for (GTK_WINDOW (fchooser)),
 			GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
 			_("Unable to import AccessX settings from file '%s'"),
 			file);
@@ -340,6 +340,7 @@ load_CDE_file (GtkFileSelection *fsel)
 			"response",
 			G_CALLBACK (gtk_widget_destroy), NULL);
 		gtk_widget_show (warn);
+		g_free (file);
 		return FALSE;
 	}
 
@@ -390,7 +391,7 @@ load_CDE_file (GtkFileSelection *fsel)
 		 * break string freeze
 		 */
 		GtkWidget *warn = gtk_message_dialog_new (
-			gtk_window_get_transient_for (GTK_WINDOW (fsel)),
+			gtk_window_get_transient_for (GTK_WINDOW (fchooser)),
 			GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
 			_("Unable to import AccessX settings from file '%s'"),
 			file);
@@ -398,95 +399,64 @@ load_CDE_file (GtkFileSelection *fsel)
 			"response",
 			G_CALLBACK (gtk_widget_destroy), NULL);
 		gtk_widget_show (warn);
+		g_free (file);
 		return FALSE;
 	}
+	g_free(file);
 	return TRUE;
 }
 
 static void
-fsel_dialog_finish (GtkWidget *fsel)
+fchooser_handle_response (GtkFileChooser *fchooser, gint response, gpointer data)
 {
-	gtk_widget_hide_all (fsel);
-}
+	char *file_name;
 
-static void
-fsel_handle_ok (GtkWidget *widget, GtkFileSelection *fsel)
-{
-	gchar const *file_name;
+	if (response == GTK_RESPONSE_OK) {
+		file_name = gtk_file_chooser_get_filename (fchooser);
 
-	file_name = gtk_file_selection_get_filename (fsel);
+		/* Change into directory if that's what user selected */
+		if (g_file_test (file_name, G_FILE_TEST_IS_DIR))
+			gtk_file_chooser_set_current_folder (fchooser, file_name);
+		else if (load_CDE_file (fchooser))
+			gtk_widget_destroy (GTK_WIDGET (fchooser));
 
-	/* Change into directory if that's what user selected */
-	if (g_file_test (file_name, G_FILE_TEST_IS_DIR)) {
-		gint name_len;
-		gchar *dir_name;
-
-		name_len = strlen (file_name);
-		if (name_len < 1 || file_name [name_len - 1] != '/') {
-			/* The file selector needs a '/' at the end of a directory name */
-			dir_name = g_strconcat (file_name, "/", NULL);
-		} else {
-			dir_name = g_strdup (file_name);
-		}
-		gtk_file_selection_set_filename (fsel, dir_name);
-		g_free (dir_name);
-	} else if (load_CDE_file (fsel))
-		fsel_dialog_finish (GTK_WIDGET (fsel));
-}
-
-static void
-fsel_handle_cancel (GtkWidget *widget, GtkFileSelection *fsel)
-{
-	fsel_dialog_finish (GTK_WIDGET (fsel));
-}
-
-static gint
-fsel_delete_event (GtkWidget *fsel, GdkEventAny *event)
-{
-	fsel_dialog_finish (fsel);
-	return TRUE;
-}
-
-static gint
-fsel_key_event (GtkWidget *fsel, GdkEventKey *event, gpointer user_data)
-{
-	if (event->keyval == GDK_Escape) {
-		gtk_signal_emit_stop_by_name (GTK_OBJECT (fsel), "key_press_event");
-		fsel_dialog_finish (fsel);
-		return TRUE;
+		g_free (file_name);
+	} else {
+		gtk_widget_destroy (GTK_WIDGET (fchooser));
 	}
-
-	return FALSE;
 }
 
-static GtkFileSelection *fsel = NULL;
 static void
 cb_load_CDE_file (GtkButton *button, GtkWidget *dialog)
 {
-	if (fsel == NULL) {
-		fsel = GTK_FILE_SELECTION (
-			gtk_file_selection_new (_("Import Feature Settings File")));
+	GtkFileChooser *fchooser;
+	GdkRectangle rect;
+	GtkWindow   *toplevel = GTK_WINDOW (gtk_widget_get_toplevel (dialog));
+	int kludge_height;
 
-		gtk_file_selection_hide_fileop_buttons (GTK_FILE_SELECTION (fsel));
-		gtk_file_selection_set_select_multiple (GTK_FILE_SELECTION (fsel), FALSE);
+	/* the new file selectors vertical height negotiation isn't wonderful,
+	 * kludge up a rough version that uses a fraction of the screen height for now */
+	gdk_screen_get_monitor_geometry (toplevel->screen, 0, &rect);
+	kludge_height = rect.height * .6;
+	if (kludge_height < 400)
+		kludge_height = rect.height * .9;
 
-		gtk_window_set_modal (GTK_WINDOW (fsel), TRUE);
-		gtk_window_set_transient_for (GTK_WINDOW (fsel),
-			GTK_WINDOW (gtk_widget_get_toplevel (dialog)));
-		g_signal_connect (G_OBJECT (fsel->ok_button),
-			"clicked",
-			G_CALLBACK (fsel_handle_ok), fsel);
-		g_signal_connect (G_OBJECT (fsel->cancel_button),
-			"clicked",
-			G_CALLBACK (fsel_handle_cancel), fsel);
-		g_signal_connect (G_OBJECT (fsel),
-			"key_press_event",
-			G_CALLBACK (fsel_key_event), NULL);
-		g_signal_connect (G_OBJECT (fsel),
-			"delete_event",
-			G_CALLBACK (fsel_delete_event), NULL);
-	}
-	gtk_widget_show_all (GTK_WIDGET (fsel));
+	fchooser = GTK_FILE_CHOOSER (
+		gtk_file_chooser_dialog_new (_("Import Feature Settings File"),
+					     GTK_WINDOW (gtk_widget_get_toplevel (dialog)),
+					     GTK_FILE_CHOOSER_ACTION_OPEN,
+					     GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					     _("_Import"), GTK_RESPONSE_OK,
+					     NULL));
+
+	gtk_window_set_default_size (GTK_WINDOW (fchooser), -1, kludge_height);
+	gtk_window_set_position (GTK_WINDOW (fchooser), GTK_WIN_POS_MOUSE);
+	gtk_window_set_modal (GTK_WINDOW (fchooser), TRUE);
+	g_signal_connect (G_OBJECT (fchooser),
+		"response",
+		G_CALLBACK (fchooser_handle_response), NULL);
+
+	gtk_widget_show (GTK_WIDGET (fchooser));
 }
 
 /*******************************************************************************/
