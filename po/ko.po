@@ -1,12 +1,12 @@
-# ko.po -- Korean messages for GNOME core
-# Copyright (C) 1998 Free Software Foundation, Inc.
+# ko.po -- Korean messages for control-center
+# Copyright (C) 1998, 1999 Free Software Foundation, Inc.
 # Changwoo Ryu <cwryu@adam.kaist.ac.kr>, 1998.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: control-center 0.99\n"
-"POT-Creation-Date: 1999-02-22 17:53-0500\n"
-"PO-Revision-Date: 1998-12-19 02:45+0900\n"
+"Project-Id-Version: control-center 1.0.0\n"
+"POT-Creation-Date: 1999-02-26 01:35+0900\n"
+"PO-Revision-Date: 1998-02-26 01:40+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@adam.kaist.ac.kr>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -15,22 +15,20 @@ msgstr ""
 
 #: capplets/background-properties/property-background.c:628
 msgid "Color"
-msgstr "색상"
+msgstr "색깔"
 
 #: capplets/background-properties/property-background.c:651
-#, fuzzy
 msgid "Color 1"
-msgstr "색상"
+msgstr "색깔 1"
 
 #. gtk_table_attach_defaults (GTK_TABLE(table), gtk_hseparator_new (), 0, 1, 2, 3);
 #: capplets/background-properties/property-background.c:655
-#, fuzzy
 msgid "Color 2"
-msgstr "색상"
+msgstr "색깔 2"
 
 #: capplets/background-properties/property-background.c:664
 msgid "Solid"
-msgstr ""
+msgstr "채워진 색깔"
 
 #: capplets/background-properties/property-background.c:666
 msgid "Gradient"
@@ -91,7 +89,7 @@ msgstr "벽지를 지정된 값으로 맞춘다"
 #: capplets/background-properties/property-background.c:1385
 #: capplets/background-properties/property-background.c:1386
 msgid "COLOR"
-msgstr "COLOR"
+msgstr "색깔"
 
 #: capplets/background-properties/property-background.c:1385
 msgid "Specifies the background color"
@@ -103,7 +101,7 @@ msgstr "단계적인 배경색의 마지막 색 지정"
 
 #: capplets/background-properties/property-background.c:1387
 msgid "ORIENT"
-msgstr "ORIENT"
+msgstr "방향"
 
 #: capplets/background-properties/property-background.c:1387
 msgid "Gradient orientation: vertical or horizontal"
@@ -119,7 +117,7 @@ msgstr "배경에 단계적인 색 사용"
 
 #: capplets/background-properties/property-background.c:1390
 msgid "MODE"
-msgstr "MODE"
+msgstr "모드"
 
 #: capplets/background-properties/property-background.c:1390
 msgid "Display wallpaper: tiled, centered, scaled or ratio"
@@ -137,11 +135,11 @@ msgstr "크기"
 
 #: capplets/bell-properties/bell-properties.c:173
 msgid "Pitch (Hz)"
-msgstr "진동수 (Hz)"
+msgstr "진동수 (헤르쯔)"
 
 #: capplets/bell-properties/bell-properties.c:176
 msgid "Duration (ms)"
-msgstr "길이 (ms)"
+msgstr "길이 (천분의 일초)"
 
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:142
 msgid "Gnome editor"
@@ -229,14 +227,12 @@ msgid "Use power management."
 msgstr "전원 관리 기능 사용"
 
 #: capplets/screensaver-properties/callbacks.c:296
-#, fuzzy
 msgid "No Screensaver"
-msgstr "화면 보호기"
+msgstr "화면 보호기 없음"
 
 #: capplets/screensaver-properties/callbacks.c:301
-#, fuzzy
 msgid "Random Screensaver"
-msgstr "화면 보호기"
+msgstr "화면 보호기 아무거나"
 
 #: capplets/screensaver-properties/callbacks.c:476
 #: capplets/screensaver-properties/screensaver-properties-capplet.c:54
@@ -245,9 +241,8 @@ msgstr "설정..."
 
 #. we need to special case random
 #: capplets/screensaver-properties/callbacks.c:484
-#, fuzzy
 msgid "Random Settings"
-msgstr " 설정"
+msgstr "아무거나 맞추기"
 
 #: capplets/screensaver-properties/callbacks.c:492
 msgid " Settings"
@@ -264,13 +259,13 @@ msgstr "이 프로그램은:"
 
 #: capplets/screensaver-properties/screensaver-dialog.c:51
 msgid "Author:"
-msgstr "저자:"
+msgstr "개발자:"
 
 #: capplets/screensaver-properties/screensaver-dialog.c:61
 msgid "Author: UNKNOWN"
-msgstr "저자: 알수 없음"
+msgstr "개발자: 알수 없음"
 
-#: capplets/screensaver-properties/screensaver-dialog.c:77
+#: capplets/screensaver-properties/screensaver-dialog.c:78
 msgid "Settings"
 msgstr "설정"
 
@@ -323,58 +318,57 @@ msgstr "화면 보호기 데모"
 
 #: capplets/session-properties/session-properties.c:102
 msgid "Program:"
-msgstr ""
+msgstr "프로그램:"
 
-#: capplets/sound-properties/sound-properties.c:166
+#: capplets/sound-properties/sound-properties.c:174
 msgid "Category"
 msgstr "범주"
 
-#: capplets/sound-properties/sound-properties.c:167
+#: capplets/sound-properties/sound-properties.c:175
 msgid "Event"
 msgstr "이벤트"
 
-#: capplets/sound-properties/sound-properties.c:168
+#: capplets/sound-properties/sound-properties.c:176
 msgid "File to Play"
 msgstr "소리낼 파일"
 
-#: capplets/sound-properties/sound-properties.c:221
-msgid "GNOME sound support"
-msgstr "GNOME 소리 기능"
-
 #: capplets/sound-properties/sound-properties.c:229
+msgid "GNOME sound support"
+msgstr "그놈 소리 기능"
+
+#: capplets/sound-properties/sound-properties.c:237
 msgid "Sounds for events"
 msgstr "효과음"
 
-#: capplets/sound-properties/sound-properties.c:250
+#: capplets/sound-properties/sound-properties.c:258
 msgid "General"
 msgstr "일반"
 
-#: capplets/sound-properties/sound-properties.c:294
+#: capplets/sound-properties/sound-properties.c:302
 msgid "Play"
 msgstr "소리 내기"
 
-#: capplets/sound-properties/sound-properties.c:302
+#: capplets/sound-properties/sound-properties.c:310
 msgid "Select sound file"
 msgstr "소리 파일 선택"
 
-#: capplets/sound-properties/sound-properties.c:315
+#: capplets/sound-properties/sound-properties.c:323
 msgid "Sound Events"
 msgstr "소리 이벤트"
 
-#: capplets/sound-properties/sound-properties.c:663
+#: capplets/sound-properties/sound-properties.c:671
 msgid "The sound file for this event does not exist."
-msgstr ""
+msgstr "이 이벤트에 대한 사운드 파일이 없습니다."
 
-#: capplets/sound-properties/sound-properties.c:665
+#: capplets/sound-properties/sound-properties.c:673
 msgid ""
 "The sound file for this event does not exist. You may want to install the "
 "gnome-audio package for a set of default sounds."
-msgstr ""
+msgstr "이 이벤트에 대한 사운드 파일이 없습니다. 기본적인 소리가 들어 있는 gnome-audio 패키지를 설치해야 할 것입니다."
 
-#: capplets/sound-properties/sound-properties.c:669
-#, fuzzy
+#: capplets/sound-properties/sound-properties.c:677
 msgid "Close"
-msgstr "색상"
+msgstr "닫기"
 
 #: capplets/theme-switcher/gui.c:38
 msgid "Available Themes"
@@ -528,15 +522,15 @@ msgstr "상태막대를 오른쪽에서부터 진행"
 msgid "Dialog buttons have icons"
 msgstr "대화창의 버튼에 아이콘 사용"
 
-#: capplets/ui-properties/ui-properties.c:342
+#: capplets/ui-properties/ui-properties.c:345
 msgid "Menu items have icons"
 msgstr "메뉴에 아이콘 사용"
 
-#: capplets/ui-properties/ui-properties.c:358
+#: capplets/ui-properties/ui-properties.c:364
 msgid "Default MDI mode"
 msgstr "기본 MDI 모드"
 
-#: capplets/ui-properties/ui-properties.c:363
+#: capplets/ui-properties/ui-properties.c:369
 msgid "MDI notebook tab position"
 msgstr "MDI 노트북의 탭 위치"
 
@@ -579,7 +573,7 @@ msgstr "삭제"
 
 #: control-center/callbacks.c:69
 msgid "GNOME Control Center"
-msgstr ""
+msgstr "그놈 조종판"
 
 #: control-center/callbacks.c:72
 msgid "Desktop Properties manager."
@@ -611,7 +605,7 @@ msgstr "캐플릿 id -- 콘트롤 센터에 의해 지정됨"
 
 #: control-center/capplet-widget-libs.c:49
 msgid "ID"
-msgstr "ID"
+msgstr "아이디"
 
 #: control-center/capplet-widget-libs.c:50
 msgid "Multi-capplet id."
@@ -619,15 +613,15 @@ msgstr "멀티-캐플릿 id."
 
 #: control-center/capplet-widget-libs.c:50
 msgid "CAPID"
-msgstr "CAPID"
+msgstr "캐플릿아이디"
 
 #: control-center/capplet-widget-libs.c:51
 msgid "X ID of the socket it's plugged into"
-msgstr "플러그인된 소켓의 X ID"
+msgstr "플러그인된 소켓의 X 아이디"
 
 #: control-center/capplet-widget-libs.c:51
 msgid "XID"
-msgstr "XID"
+msgstr "X아이디"
 
 #: control-center/capplet-widget-libs.c:52
 msgid "IOR of the control-center"
@@ -647,258 +641,13 @@ msgstr "기본 동작 무시.  세션을 초기화하는 특수한 경우 사용됨"
 
 #: control-center/corba-glue.c:75
 msgid "capplet-command to be run."
-msgstr "capplet-command 실행."
+msgstr "실행할 캐플릿 명령."
 
 #: control-center/corba-glue.c:75
 msgid "CAPPLET"
-msgstr "CAPPLET"
+msgstr "캐플릿"
 
 #. we create the widgets
 #: control-center/main.c:72
 msgid "Discard all changes"
 msgstr "변경 사항 모두 버리기"
-
-#~ msgid "Flat"
-#~ msgstr "한가지 색"
-
-#~ msgid "Move Methods"
-#~ msgstr "이동 방법"
-
-#~ msgid "Resize Methods"
-#~ msgstr "크기 조절 방법"
-
-#~ msgid "Keyboard focus follows"
-#~ msgstr "키보드 포커스 따라오기"
-
-#~ msgid "Window Sliding Methods"
-#~ msgstr "윈도우 슬라이드 방법"
-
-#~ msgid "Windows slide in when they appear"
-#~ msgstr "윈도우가 나타나는 순간 슬라이드"
-
-#~ msgid "-"
-#~ msgstr "-"
-
-#~ msgid "+"
-#~ msgstr "+"
-
-#~ msgid "Windows slide about when window cleanup in progress"
-#~ msgstr "윈도우 청소가 진행중일 때 윈도우 슬라이드"
-
-#~ msgid "Desktops slide in when changing desktops"
-#~ msgstr "데스크탑이 바뀔 때 데스크탑 슬라이드"
-
-#~ msgid "Animate menus"
-#~ msgstr "메뉴 애니메이션"
-
-#~ msgid "Reduce refresh by using more memory (use saveunders)"
-#~ msgstr "더 많은 기억장치를 이용해 화면 다시 그리기 줄임 (saveunder 사용)"
-
-#~ msgid "Enable Enlightenments background selection"
-#~ msgstr "Enlightenments 배경 선택 사용"
-
-#~ msgid ""
-#~ "This enables Enlightenments background selector. If backgrounds are selected "
-#~ "in this section any backgrounds selected in any other selector or set by any "
-#~ "other programs on desktop 0 will be overidden by Enlightenment"
-#~ msgstr ""
-#~ "Enlightenments 배경 선택기를 사용합니다. 이 부분에서 배경이 다른 부분에서 "
-#~ "선택된 어떤 배경이든 데스크탑 0에서 선택된 다른 프로그램이든 간에 "
-#~ "Enlightenment가 무시합니다."
-
-#~ msgid "Focus"
-#~ msgstr "포커스"
-
-#~ msgid "All new windows that appear get the keyboard focus"
-#~ msgstr "새로운 윈도우는 모두 자판 포커스를 받는다"
-
-#~ msgid "All new popup windows get the keyboard focus"
-#~ msgstr "새로운 팝업 윈도우는 자판 포커스를 받는다"
-
-#~ msgid "Only new popup windows whose owner is focused get the keyboard focus"
-#~ msgstr "소유자가 포커스된 팝업 윈도우만이 자판 포커스를 받는다"
-
-#~ msgid "Raise windows when switching focus with the keyboard"
-#~ msgstr "키보드로 포커스를 바꿀 때 윈도우 보이게 하기"
-
-#~ msgid "Send the pointer to windows when switching focus with the keyboard"
-#~ msgstr "키보드로 포커스를 바꿀때 마우스 포인터를 윈도우로 보내기"
-
-#~ msgid "Placement"
-#~ msgstr "윈도우 놓기"
-
-#~ msgid "Place windows manually"
-#~ msgstr "수동으로 윈도우 놓기"
-
-#~ msgid "Transient popup windows appear together with leader"
-#~ msgstr "투명 팝업 윈도우는 그 앞 윈도우와 같이 나타남"
-
-#~ msgid "Switch to where popup window appears"
-#~ msgstr "팝업 윈도우가 나타난 장소로 이동"
-
-#~ msgid "Virtual Desktop"
-#~ msgstr "가상 데스크탑"
-
-#~ msgid "Flip desktop area when mouse on edge & resistance factor for flip"
-#~ msgstr "마우스가 가장자리에 있거나 가장자리를 밀면 데스크탑 전환"
-
-#~ msgid "Misc"
-#~ msgstr "그 외"
-
-#~ msgid "Tooltips ON/OFF & timeout for tooltip popup (sec)"
-#~ msgstr "툴팁 있음/없음 및 툴팁이 나타나는 시간 (초)"
-
-#~ msgid "Window shading speed (pixels / sec)"
-#~ msgstr "윈도우 사라지는 속도 (픽셀 / 초)"
-
-#~ msgid "Automatic raising of windows after X seconds"
-#~ msgstr "몇 초 후에 자동으로 윈도우 위에 보이게 하기"
-
-#~ msgid "Display icons when windows are iconified"
-#~ msgstr "윈도우가 아이콘화되었을 때 아이콘 표시"
-
-#~ msgid "Size of Virtual Screen"
-#~ msgstr "가상 화면 크기"
-
-#~ msgid "Separate Desktops"
-#~ msgstr "여러개의 데스크탑"
-
-#~ msgid "Number of colours in gradient"
-#~ msgstr "서서히 변화할 때 색상의 수"
-
-#~ msgid "2"
-#~ msgstr "2"
-
-#~ msgid "3"
-#~ msgstr "3"
-
-#~ msgid "5"
-#~ msgstr "5"
-
-#~ msgid "Image file"
-#~ msgstr "그림 파일"
-
-#~ msgid "Browse"
-#~ msgstr "찾아보기"
-
-#~ msgid "None"
-#~ msgstr "없음"
-
-#~ msgid "Image display options"
-#~ msgstr "그림 표시 선택사항"
-
-#~ msgid "Repeat tiles across screen"
-#~ msgstr "여러 화면에 걸쳐서 타일 반복"
-
-#~ msgid "Retain image aspect ratio"
-#~ msgstr "이미지 가로 세로 비율 유지"
-
-#~ msgid "Maximise height to fit screen"
-#~ msgstr "높이를 화면에 맞도록 확대"
-
-#~ msgid "Maximise width to fit screen"
-#~ msgstr "폭을 화면에 맞도록 확대"
-
-#~ msgid "Solid Colour"
-#~ msgstr "색 채우기"
-
-#~ msgid "Background Image"
-#~ msgstr "배경 그림"
-
-#~ msgid "Overlayed Logo"
-#~ msgstr "로고 겹치기"
-
-#~ msgid ""
-#~ "Please select the attribute of this background\n"
-#~ "you wish to change below"
-#~ msgstr ""
-#~ "아래에서 바꾸고 싶은 배경색의 속성을\n"
-#~ "선택하세요"
-
-#~ msgid "Done"
-#~ msgstr "끝"
-
-#~ msgid "High quality rendering for background"
-#~ msgstr "배경에서 높은 질의 렌더링"
-
-#~ msgid "Minutes after which to expunge unviewed backgrounds from memory"
-#~ msgstr "메모리에서 보이지 않는 배경을 없애 버릴때까지 시간 (분)"
-
-#~ msgid "Select the desktop you wish to change the background of here"
-#~ msgstr "여기서 배경을 바꾸고 싶은 데스크탑을 선택하세요"
-
-#~ msgid "No background"
-#~ msgstr "배경 없음"
-
-#~ msgid ""
-#~ "Select no background for this desktop (Enlightenment will not attempt to set "
-#~ "any background for this desktop then)"
-#~ msgstr ""
-#~ "이 데스크탑에서 배경 없음 선택 (Enlightenment는 이 데스크탑에서 어떤 배경도 "
-#~ "사용하지 않을 것입니다)"
-
-#~ msgid "Add new..."
-#~ msgstr "새로 추가..."
-
-#~ msgid "Add a new background bookmark to your list"
-#~ msgstr "리스트에 새로운 배경 책갈피 추가"
-
-#~ msgid "Delete"
-#~ msgstr "지우기"
-
-#~ msgid "Remove this background bookmark from the list"
-#~ msgstr "리스트에서 배경 책갈피 삭제"
-
-#~ msgid "Edit..."
-#~ msgstr "편집..."
-
-#~ msgid "Edit the settings for this background bookmark"
-#~ msgstr "이 배경 책갈피의 설정 편집"
-
-#~ msgid "Enable sounds in Enlightenment"
-#~ msgstr "Enlightenment에서 소리 사용"
-
-#~ msgid "Select a file to save"
-#~ msgstr "저장할 파일 선택"
-
-#~ msgid "Select a file to load"
-#~ msgstr "읽어들일 파일 선택"
-
-#~ msgid "Set Printout settings"
-#~ msgstr "출력물 설정"
-
-#~ msgid "Saved Image Settings"
-#~ msgstr "저장된 그림 설정"
-
-#~ msgid "Print Command:"
-#~ msgstr "인쇄 명령어:"
-
-#~ msgid "Print"
-#~ msgstr "인쇄"
-
-#~ msgid "Image Format:"
-#~ msgstr "그림 형식:"
-
-#~ msgid "Quality Settings"
-#~ msgstr "화면 질 설정"
-
-#~ msgid "Page Settings"
-#~ msgstr "페이지 설정"
-
-#~ msgid "Scaling Factor:"
-#~ msgstr "축소/확대 비율:"
-
-#~ msgid "Select a file"
-#~ msgstr "파일 선택"
-
-#~ msgid "Load all files in directory"
-#~ msgstr "디렉토리의 모든 파일 읽어들이기"
-
-#~ msgid "Use Previews"
-#~ msgstr "미리보기 사용"
-
-#~ msgid "Image Information"
-#~ msgstr "테마 정보"
-
-#~ msgid "Desktop Manager"
-#~ msgstr "데스크탑 관리자"
