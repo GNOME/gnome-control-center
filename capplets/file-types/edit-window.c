@@ -28,6 +28,7 @@
 
 #include <gtk/gtk.h>
 #include <libgnomevfs/gnome-vfs-mime-handlers.h>
+#include <libgnomevfs/gnome-vfs-mime-info.h>
 
 #include "edit-window.h"
 #include "capplet-widget.h"
@@ -47,6 +48,7 @@ typedef struct {
         GtkWidget *component_menu;
 	char 	  mime_string[256]; /* FIXME: Find out max length of mime string */
         GList 	  *tmp_ext[2];
+        GtkFileSelection *file_selector;
 } edit_window;
 
 static edit_window *main_win = NULL;
@@ -56,7 +58,7 @@ static gboolean changing = TRUE;
 static void 	 populate_application_menu (GtkWidget 	*application_menu,   	const char *mime_string);
 static void 	 populate_component_menu   (GtkWidget 	*application_menu,   	const char *mime_string);
 static void 	 application_menu_activate (GtkMenuItem *item, 		 	gpointer   user_data);
-static GtkWidget *show_file_selector 	   (const char  *title, 		gpointer   user_data);
+static GtkFileSelection *show_file_selector 	   (const char  *title, 		gpointer   user_data);
 
 static void
 destruction_handler (GtkWidget *widget, gpointer data)
@@ -281,7 +283,7 @@ initialize_main_win ()
 void
 initialize_main_win_vals (void)
 {
-	char *mi;
+	const char *mi;
 	gchar *title;
 	/*gboolean showext = FALSE;*/
 	if (main_win == NULL)
@@ -300,7 +302,7 @@ initialize_main_win_vals (void)
 	gtk_label_set_text (GTK_LABEL (main_win->mime_type), mi);
 
 	gnome_icon_entry_set_icon (GNOME_ICON_ENTRY (main_win->icon_entry),
-				   gnome_mime_get_value (mi, "icon-filename"));
+				   gnome_vfs_mime_get_value (mi, "icon-filename"));
 	
 	gtk_widget_show_all (GNOME_DIALOG (main_win->window)->vbox);
 	
@@ -408,11 +410,13 @@ hide_edit_window (void)
 	if (main_win && main_win->mime_string && main_win->window)
 		gtk_widget_hide (main_win->window);
 }
+
 void
 show_edit_window (void)
 {
-	if (main_win && main_win->mime_string && main_win->window)
+	if (main_win && main_win->mime_string && main_win->window) {		
 		gtk_widget_show (main_win->window);
+	}
 }
 
 
@@ -423,15 +427,18 @@ populate_application_menu (GtkWidget *application_menu, const char *mime_string)
 	GtkWidget *menu_item;
 	GList *mime_list;
 	GnomeVFSMimeApplication *application;
-	gboolean add_seperator;
+	gboolean has_none;
+	gchar *mime_copy;
 
-	add_seperator = FALSE;
+	has_none = TRUE;
+
+	mime_copy = g_strdup (mime_string);
 	
 	new_menu = gtk_menu_new ();
 
 	mime_list = gnome_vfs_mime_get_short_list_applications (mime_string);
 	while (mime_list != NULL) {
-		add_seperator = TRUE;
+		has_none = FALSE;
 
 		application = mime_list->data;
 		menu_item = gtk_menu_item_new_with_label (application->name);
@@ -440,20 +447,25 @@ populate_application_menu (GtkWidget *application_menu, const char *mime_string)
 		mime_list = g_list_next (mime_list);
 	}
 	
-	/* Add default seperator and add menu item */
-	if (add_seperator) {
-		menu_item = gtk_menu_item_new ();
-		gtk_widget_set_sensitive (menu_item, FALSE);
+	/* Add None menu item */
+	if (has_none) {
+		menu_item = gtk_menu_item_new_with_label (_("None"));
 		gtk_menu_append (GTK_MENU (new_menu), menu_item);
 		gtk_widget_show (menu_item);
 	}
+
+	/* Add default seperator and Add application menu item */
+	menu_item = gtk_menu_item_new ();
+	gtk_widget_set_sensitive (menu_item, FALSE);
+	gtk_menu_append (GTK_MENU (new_menu), menu_item);
+	gtk_widget_show (menu_item);
 	
 	menu_item = gtk_menu_item_new_with_label (_("Add an application..."));
 	gtk_menu_append (GTK_MENU (new_menu), menu_item);
 	gtk_widget_show (menu_item);
 
-	gtk_signal_connect_object (GTK_OBJECT (menu_item), "activate", 
-				   GTK_SIGNAL_FUNC (application_menu_activate), (gpointer) mime_string);
+	gtk_signal_connect (GTK_OBJECT (menu_item), "activate", 
+			    GTK_SIGNAL_FUNC (application_menu_activate), (gpointer) mime_copy);
 
 	gtk_option_menu_set_menu (GTK_OPTION_MENU (application_menu), new_menu);
 }
@@ -465,28 +477,33 @@ populate_component_menu (GtkWidget *component_menu, const char *mime_string)
 	GtkWidget *new_menu;
 	GtkWidget *menu_item;
 	GList *mime_list;	
-	gboolean add_seperator;
+	gboolean has_none;
 
-	add_seperator = FALSE;
+	has_none = TRUE;
 	
 	new_menu = gtk_menu_new ();
 
-	mime_list = gnome_vfs_mime_get_short_list_applications (mime_string);
+	mime_list = gnome_vfs_mime_get_short_list_components (mime_string);
 	while (mime_list != NULL) {
-		add_seperator = TRUE;
+		has_none = FALSE;
 		menu_item = gtk_menu_item_new_with_label ("Test Menu Item");
 		gtk_menu_append (GTK_MENU (new_menu), menu_item);
 		gtk_widget_show (menu_item);
 		mime_list = g_list_next (mime_list);
 	}
-	
-	/* Add default seperator and add menu item */
-	if (add_seperator) {
-		menu_item = gtk_menu_item_new ();
-		gtk_widget_set_sensitive (menu_item, FALSE);
+
+	/* Add None menu item */
+	if (has_none) {
+		menu_item = gtk_menu_item_new_with_label (_("None"));
 		gtk_menu_append (GTK_MENU (new_menu), menu_item);
 		gtk_widget_show (menu_item);
 	}
+	
+	/* Add default seperator and Add component menu item */
+	menu_item = gtk_menu_item_new ();
+	gtk_widget_set_sensitive (menu_item, FALSE);
+	gtk_menu_append (GTK_MENU (new_menu), menu_item);
+	gtk_widget_show (menu_item);
 	
 	menu_item = gtk_menu_item_new_with_label (_("Add a component..."));
 	gtk_menu_append (GTK_MENU (new_menu), menu_item);
@@ -501,7 +518,7 @@ populate_component_menu (GtkWidget *component_menu, const char *mime_string)
 static void
 application_menu_activate (GtkMenuItem *item, gpointer user_data) 
 {
-	show_file_selector (_("Select an Application"), user_data);
+	main_win->file_selector = show_file_selector (_("Select an Application"), user_data);
 }
 
 /*
@@ -509,12 +526,14 @@ application_menu_activate (GtkMenuItem *item, gpointer user_data)
  */
 
 static void 
-add_application (GtkFileSelection *selector, gpointer user_data) 
+add_application (GtkWidget *widget, gpointer user_data) 
 {
 	char *selected_application;
 	GnomeVFSMimeApplication *application;
 
-	selected_application = gtk_file_selection_get_filename (GTK_FILE_SELECTION (selector));
+	g_assert (user_data != NULL);
+	
+	selected_application = gtk_file_selection_get_filename (main_win->file_selector);
 
 	if (selected_application != NULL) {
 		application = g_new0 (GnomeVFSMimeApplication, 1);
@@ -525,7 +544,6 @@ add_application (GtkFileSelection *selector, gpointer user_data)
 		application->command = g_malloc (strlen (selected_application));
 		strcpy (application->command, selected_application);
 
-		/* FIXME: How do I find this out? */
 		application->can_open_multiple_files = FALSE;
 		application->can_open_uris = FALSE;
 		
@@ -533,15 +551,20 @@ add_application (GtkFileSelection *selector, gpointer user_data)
 		   registered, then pass only the id to
 		   set_default_application */
 		/* gnome_vfs_mime_set_default_application ((const char *)user_data, application); */	
+
+		/* Reload menu and set index to default item */
+		populate_application_menu (main_win->application_menu, (const char *)user_data);
+
+		g_free (user_data);
 	}
 }
 
-static GtkWidget *
+static GtkFileSelection *
 show_file_selector (const char *title, gpointer mime_string)
 {
-	GtkWidget *selector;
+	GtkFileSelection *selector;
 
-	selector = gtk_file_selection_new (title);
+	selector = GTK_FILE_SELECTION (gtk_file_selection_new (title));
 
 	gtk_signal_connect (GTK_OBJECT (GTK_FILE_SELECTION (selector)->ok_button),
 			    "clicked", GTK_SIGNAL_FUNC (add_application), mime_string);
@@ -555,7 +578,12 @@ show_file_selector (const char *title, gpointer mime_string)
 			           "clicked", GTK_SIGNAL_FUNC (gtk_widget_destroy),
 			           (gpointer) selector);
 
-	gtk_widget_show (selector);
+
+	/* Set file selector parent to edit dialog */
+	gtk_window_set_transient_for (GTK_WINDOW (selector), GTK_WINDOW (main_win->window));
+	gtk_window_set_modal(GTK_WINDOW (selector), TRUE);
+
+	gtk_widget_show (GTK_WIDGET (selector));
 
 	return selector;
 }

@@ -14,6 +14,7 @@
 #include "mime-data.h"
 #include "mime-info.h"
 #include "edit-window.h"
+
 /* Prototypes */
 static void try_callback ();
 static void revert_callback ();
