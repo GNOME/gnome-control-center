@@ -45,28 +45,67 @@
 #include "nautilus-mime-type-capplet.h"
 
 
-/* Local Prototypes */
-static void 	populate_application_menu (GtkWidget 	*menu, 	 const char *mime_string);
-static void 	populate_component_menu	  (GtkWidget 	*menu, 	 const char *mime_string);
-static void	delete_mime_clicked       (GtkWidget 	*widget, gpointer   data);
-static void	add_mime_clicked 	  (GtkWidget 	*widget, gpointer   data);
-static void	edit_applications_clicked (GtkWidget 	*widget, gpointer   data);
-static void	edit_components_clicked   (GtkWidget 	*widget, gpointer   data);
+typedef struct {
+	GtkWidget *window;
+} edit_application_dialog_details;
 
-static void 	try_callback 		  ();
-static void 	revert_callback 	  ();
-static void 	ok_callback 		  ();
-static void 	cancel_callback 	  ();
+
+/* Local Prototypes */
+static void	init_mime_capplet 	  	(void);
+static void 	populate_application_menu 	(GtkWidget 	*menu, 	 const char *mime_string);
+static void 	populate_component_menu	  	(GtkWidget 	*menu, 	 const char *mime_string);
+static void	delete_mime_clicked       	(GtkWidget 	*widget, gpointer   data);
+static void	add_mime_clicked 	  	(GtkWidget 	*widget, gpointer   data);
+static void	edit_applications_clicked 	(GtkWidget 	*widget, gpointer   data);
+static void	edit_components_clicked   	(GtkWidget 	*widget, gpointer   data);
+
+static void 	try_callback 		  	(void);
+static void 	revert_callback 	  	(void);
+static void 	ok_callback 		  	(void);
+static void 	cancel_callback 	  	(void);
 #if 0
-static void 	help_callback 		  ();
+static void 	help_callback 		 	(void);
 #endif
+static void	show_edit_applications_dialog 	(void);
+static void	show_edit_components_dialog 	(void);
 
 /* Global variables */
+static edit_application_dialog_details *edit_application_details = NULL;
+
 GtkWidget *capplet = NULL;
 GtkWidget *delete_button = NULL;
 GtkWidget *icon_entry, *extension_list, *mime_list;
 GtkWidget *application_menu, *component_menu;
 
+
+/*
+ *  main
+ *
+ *  Display capplet
+ */
+
+int
+main (int argc, char **argv)
+{
+        int init_results;
+
+        bindtextdomain (PACKAGE, GNOMELOCALEDIR);
+        textdomain (PACKAGE);
+
+        init_results = gnome_capplet_init("mime-type-capplet", VERSION,
+                                          argc, argv, NULL, 0, NULL);
+
+	if (init_results < 0) {
+                exit (0);
+	}
+
+	if (init_results == 0) {
+		init_mime_type ();
+		init_mime_capplet ();
+	        capplet_gtk_main ();
+	}
+        return 0;
+}
 
 static GtkWidget *
 left_aligned_button (gchar *label)
@@ -117,7 +156,7 @@ help_callback ()
 #endif
 
 static void
-init_mime_capplet ()
+init_mime_capplet (void)
 {
 	GtkWidget *main_vbox;
         GtkWidget *vbox, *hbox;
@@ -437,39 +476,69 @@ add_mime_clicked (GtkWidget *widget, gpointer data)
 static void
 edit_applications_clicked (GtkWidget *widget, gpointer data)
 {
-	g_message ("edit_applications_clicked");
+	show_edit_applications_dialog ();
 }
 
 static void
 edit_components_clicked (GtkWidget *widget, gpointer data)
 {
-	g_message ("edit_components_clicked");
+	show_edit_components_dialog ();
+}
+
+
+static void
+edit_application_dialog_destroy (GtkWidget *widget, gpointer data)
+{
+	g_free (edit_application_details);
+	edit_application_details = NULL;
 }
 
 /*
- * main
- *
+ *  initialize_edit_application_dialog
+ *  
+ *  Set up dialog for default application list editing
+ */
+ 
+static void
+initialize_edit_application_dialog ()
+{
+	edit_application_details = g_new0 (edit_application_dialog_details, 1);
+	edit_application_details->window = gnome_dialog_new ("",
+					     GNOME_STOCK_BUTTON_OK,
+					     GNOME_STOCK_BUTTON_CANCEL,
+					     NULL);
+
+	gtk_signal_connect (GTK_OBJECT (edit_application_details->window),
+			    "destroy",
+			    edit_application_dialog_destroy,
+			    NULL);
+}
+
+/*
+ *  show_edit_applications_dialog
+ *  
+ *  Setup and display edit application list dialog
  */
 
-int
-main (int argc, char **argv)
+static void
+show_edit_applications_dialog ()
 {
-        int init_results;
-
-        bindtextdomain (PACKAGE, GNOMELOCALEDIR);
-        textdomain (PACKAGE);
-
-        init_results = gnome_capplet_init("mime-type-capplet", VERSION,
-                                          argc, argv, NULL, 0, NULL);
-
-	if (init_results < 0) {
-                exit (0);
+	if (edit_application_details == NULL) {
+		initialize_edit_application_dialog ();
 	}
 
-	if (init_results == 0) {
-		init_mime_type ();
-		init_mime_capplet ();
-	        capplet_gtk_main ();
+	switch(gnome_dialog_run (GNOME_DIALOG (edit_application_details->window))) {
+		case 0:
+			//apply_changes (mime_type);
+			/* Fall through */
+		case 1:
+			gtk_widget_hide (edit_application_details->window);
+			break;
 	}
-        return 0;
+}
+
+static void
+show_edit_components_dialog ()
+{
+
 }
