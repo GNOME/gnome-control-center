@@ -1,4 +1,6 @@
-AC_INIT(control-center)
+builtin(include, control-center.m4)dnl
+
+AC_INIT(capplets)
 
 AM_CONFIG_HEADER(config.h)
 AM_INIT_AUTOMAKE(control-center, 1.5.12)
@@ -13,6 +15,7 @@ gnome_cv_use_gnome=yes
 AM_ACLOCAL_INCLUDE(macros)
 
 AM_PROG_XML_I18N_TOOLS
+AC_PROG_GNOMECC_DESKTOP_RULE
 GNOME_INIT
 GNOME_COMPILE_WARNINGS
 
@@ -27,7 +30,7 @@ AC_PROG_YACC
 dnl utility conditional
 AM_CONDITIONAL(FALSE, test "x" = "y")
 
-ALL_LINGUAS="az ca cs da de el en_GB es et fi fr ga gl hr hu it ja ko lt lv nl nn no pl pt pt_BR ro ru sk sl sv tr uk wa zh_TW"
+ALL_LINGUAS="az ca cs da de el en_GB es et fi fr ga gl hr hu it ja ko lt lv nl nn no pl pt pt_BR ro ru sk sl sv ta tr uk wa zh_TW"
 AM_GNOME_GETTEXT
 
 GNOME_XML_CHECK
@@ -127,6 +130,11 @@ PKG_CHECK_MODULES(ARCHIVER, bonobo bonobo_conf >= 0.12 xml)
 PKG_CHECK_MODULES(CONFIG_ARCHIVER, bonobo gnome xml)
 PKG_CHECK_MODULES(MONIKER, bonobo bonobo_conf >= 0.12 xml)
 PKG_CHECK_MODULES(GNOME, gnome)
+PKG_CHECK_MODULES(VFS_CAPPLET, $capplet_modules vfs >= 1.0.0)
+PKG_CHECK_MODULES(GLIB, glib)
+
+AC_SUBST(VFS_CAPPLET_LIBS)
+AC_SUBST(VFS_CAPPLET_CFLAGS)
 
 AC_PATH_PROG(XSCREENSAVER, xscreensaver, no)
 if test "$XSCREENSAVER" = no ; then
@@ -209,46 +217,28 @@ dnl ==============================================
 dnl End: Define the directories 
 dnl ==============================================
 
-
-dnl ==============================================
-dnl Macro for the common code
-dnl ==============================================
-dnl AC_DEFUN(AC_PROG_GNOMECC_CAPLETS,
-dnl [
-dnl GNOMECC_CAPPLETS_DESKTOP_IN_RULE='$(desktop).in: \%.desktop.in: \%.desktop.in.in\
-dnl	sed -e \"s#@DESKTOP_EXEC_LINE@#$(DESKTOP_EXEC_LINE)#\" -e \"s#Icon=.\*#Icon=$(GNOMECC_ICONS_DIR)/${cappletname}-capplet.png#\" < $< \> ${cappletname}.desktop.in\
-dnl d\
-dnl install-data-local:\
-dnl	$(mkinstalldirs) $(datadir)/control-center/capplets/$(cappletgroup)\
-dnl	$(INSTALL_DATA) $(desktop) $(datadir)/control-center/capplets/$(cappletgroup)$(desktop)\
-dnl install-data-am: install-data-local'
-dnl AC_DIVERT_PUSH(AC_DIVERSION_SED)dnl
-dnl s%@GNOMECC_CAPPLETS_DESKTOP_IN_RULE@%[$]GNOMECC_CAPPLETS_DESKTOP_IN_RULE%g
-dnl AC_DIVERT_POP()dnl
-dnl
-dnl # Redirect the config.log output again, so that the ltconfig log is not
-dnl # clobbered by the next message.
-dnl exec 5>>./config.log
-dnl ])
-dnl AC_PROG_GNOMECC_CAPPLETS
-dnl ==============================================
-dnl End : Macro for the common code
-dnl ==============================================
-
-
 AC_OUTPUT([
 control-center.spec
 Makefile
 po/Makefile.in
 control-center/Makefile
 capplets/Makefile
-capplets/common/Makefile
 capplets/background/Makefile
+capplets/common/Makefile
 capplets/default-applications/Makefile
 capplets/desktop-links/Makefile
+capplets/desktop-links/Sawfish/Makefile
+capplets/file-types/Makefile
+capplets/file-types/libuuid/Makefile
 capplets/keyboard/Makefile
+capplets/mime-type/Makefile
 capplets/mouse/Makefile
 capplets/sound/Makefile
+capplets/theme-switcher/Makefile
+capplets/ui-properties/Makefile
+capplets/url-properties/Makefile
+capplets/wm-properties/Makefile
+capplets/wm-properties/wm-desktops/Makefile
 libsounds/Makefile
 schemas/Makefile
 idl/Makefile

@@ -335,6 +335,7 @@ msgstr ""
 #: capplets/default-applications/interface.c:334
 #: capplets/default-applications/interface.c:465
 #: capplets/default-applications/interface.c:576
+#: capplets/wm-properties/wm-properties-capplet.c:806
 msgid "Command:"
 msgstr "Polecenie:"
 
@@ -668,6 +669,7 @@ msgid "Configure the settings of the screensaver"
 msgstr "Konfiguruje ustawienia wygaszacza ekranu"
 
 #: capplets/screensaver/screensaver-prefs-dialog.c:185
+#: capplets/wm-properties/wm-properties-capplet.c:793
 msgid "Name:"
 msgstr "Nazwa:"
 
@@ -675,6 +677,7 @@ msgstr "Nazwa:"
 msgid "Settings"
 msgstr "Ustawienia"
 
+#: capplets/file-types/file-types-capplet.c:1882
 #: capplets/screensaver/screensaver-prefs-dialog.c:204
 msgid "Description"
 msgstr "Opis"
@@ -764,7 +767,9 @@ msgstr "Przej¶cie w tryb u¶pienia po"
 msgid "One screensaver all the time"
 msgstr "Przez ca³y czas jeden wygaszacz"
 
+#: capplets/file-types/file-types-icon-entry.c:264
 #: capplets/screensaver/screensaver-properties.glade.h:11
+#: capplets/theme-switcher/gui.c:230 capplets/theme-switcher/gui.c:302
 msgid "Preview"
 msgstr "Podgl±d"
 
@@ -967,6 +972,7 @@ msgstr "Komórki dwunastok±tne"
 
 #: capplets/screensaver/screensavers/ant.xml.h:25
 #: capplets/screensaver/screensavers/flag.xml.h:17
+#: capplets/theme-switcher/demo.c:54
 msgid "Two"
 msgstr "Dwa"
 
@@ -3232,6 +3238,7 @@ msgstr "Nowy wygaszacz ekranu"
 msgid "Configure GNOME's use of sound"
 msgstr "Konfiguruje wykorzystanie d¼wiêku przez GNOME"
 
+#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
 #: capplets/sound/sound.desktop.in.in.h:2
 msgid "Sound"
 msgstr "D¼wiêk"
@@ -3275,6 +3282,8 @@ msgstr ""
 "Pomoc nie jest dostêpna i prawdopodobnie nie zosta³a zainstalowana.\n"
 "Upewnij siê, ¿e w systemie zainstalowano Podrêcznik U¿ytkownika GNOME."
 
+#: capplets/theme-switcher/gui.c:368
+#: capplets/wm-properties/wm-properties-capplet.c:671
 #: control-center/capplet-dir-view.c:464
 msgid "Close"
 msgstr "Zamknij"
@@ -3287,6 +3296,7 @@ msgstr "Centrum Sterowania GNOME:"
 msgid "The GNOME configuration tool"
 msgstr "Narzêdzie konfiguracyjne GNOME"
 
+#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
 #: control-center/gnomecc.glade.h:1
 msgid "Appearance"
 msgstr "Wygl±d"
@@ -3346,3 +3356,1140 @@ msgstr "CAPLET"
 #: control-center/main.c:80
 msgid "GNOME Control Center options"
 msgstr "Opcje Centrum Sterowania GNOME"
+
+#: capplets/desktop-links/Advanced.directory.in.in.h:1
+msgid "Advanced"
+msgstr "Zaawansowane"
+
+#: capplets/desktop-links/Advanced.directory.in.in.h:2
+msgid "Advanced Settings"
+msgstr "Zaawansowane ustawienia"
+
+#: capplets/desktop-links/panel.desktop.in.in.h:1
+msgid "Global panel properties"
+msgstr "Globalne ustawienia panelu"
+
+#: capplets/desktop-links/panel.desktop.in.in.h:2
+msgid "Panel"
+msgstr "Panel"
+
+#: capplets/desktop-links/session.desktop.in.in.h:1
+msgid "Configure which non-session aware programs are started up"
+msgstr ""
+"Kofiguruje programy startowe, które nie wspó³pracuj± z mened¿erem sesji"
+
+#: capplets/desktop-links/session.desktop.in.in.h:2
+msgid "Startup Programs"
+msgstr "Programy startowe"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:387
+msgid "Edit Applications List"
+msgstr "Modyfikacja listy aplikacji"
+
+#. Add label
+#: capplets/file-types/file-types-capplet-dialogs.c:409
+#, c-format
+msgid "Select applications to appear in menu for MIME type \"%s\""
+msgstr "Wybierz aplikacje pojawiaj±ce siê w menu zwi±zanym z typem MIME \"%s\""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:433
+msgid "Add Application..."
+msgstr "Dodaj aplikacjê..."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:440
+msgid "Edit Application..."
+msgstr "Zmodyfikuj aplikacjê..."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:446
+msgid "Delete Application"
+msgstr "Usuñ aplikacjê"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:480
+msgid "Edit Components List"
+msgstr "Modyfikacja listy komponentów"
+
+#. Add label
+#: capplets/file-types/file-types-capplet-dialogs.c:500
+#, c-format
+msgid "Select views to appear in menu for MIME type \"%s\""
+msgstr "Wybierz widoki pojawiaj±ce siê w menu zwi±zanym z typem MIME \"%s\""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:720
+msgid ""
+"The MIME type entered contained upper case characters. Upper case characters "
+"were changed to lower case for you."
+msgstr ""
+"Podany typ MIME zawiera³ wielkie litery. Zosta³y one automatycznie zmienione "
+"na ma³e."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:723
+msgid "Add New MIME Type"
+msgstr "Dodanie nowego typu MIME"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:769
+msgid "Add MIME Type"
+msgstr "Dodanie typu MIME"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:773
+msgid "New MIME type (e.g. image/x-thumper):"
+msgstr "Nowy typ MIME (np. image/x-olbrzym):"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:780
+msgid "Description (e.g. Thumper image):"
+msgstr "Opis (np. Olbrzymi obraz):"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:947
+msgid "File Extensions "
+msgstr "Rozszerzenia plików "
+
+#: capplets/file-types/file-types-capplet-dialogs.c:967
+#: capplets/mime-type/mime-type-capplet.c:93
+#: capplets/wm-properties/wm-properties-capplet.c:1117
+msgid "Add..."
+msgstr "Dodaj..."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:972
+msgid "    Remove    "
+msgstr "    Usuñ    "
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1041
+msgid "Add New Extension"
+msgstr "Dodanie nowego rozszerzenia"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1045
+msgid ""
+"Type in the extensions for this mime-type (without dot).\n"
+"You can enter several extensions seperated by a space,\n"
+"for example: html htm"
+msgstr ""
+"Wprowad¼ rozszerzenia plików zwi±zane z tym typem MIME (bez kropki).\n"
+"Mo¿esz wprowadziæ wiele rozszerzeñ, rozdzielaj±c je spacj±, np.\n"
+"html htm"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1052
+#: capplets/mime-type/new-mime-window.c:50
+msgid "Extension:"
+msgstr "Rozszerzenie:"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1194
+msgid "You must enter a name."
+msgstr "Nale¿y podaæ nazwê."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1197
+msgid "You must enter a command."
+msgstr "Nale¿y podaæ polecenie."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1207
+#, c-format
+msgid ""
+"\"%s\" does not exist or is not executable.\n"
+"Check your spelling and make sure you have\n"
+"the right permissions to execute this file."
+msgstr ""
+"\"%s\" nie istnieje lub nie jest plikiem wykonywalnym.\n"
+"Sprawd¼ poprawno¶æ zapisu i upewnij siê, ¿e prawa\n"
+"do pliku zosta³y w³a¶ciwie ustawione."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1213
+#, c-format
+msgid ""
+"The command \"%s\" cannot be found.\n"
+"You must use a command that can work from any command line."
+msgstr ""
+"Nie mo¿na odnale¼æ polecenia \"%s\".\n"
+"Nale¿y u¿yæ polecenia, które funkcjonuje w ka¿dym wierszu poleceñ."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1225
+msgid "Bad Application Name"
+msgstr "Niepoprawna nazwa aplikacji"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1226
+msgid "Bad Application Command"
+msgstr "Niepoprawne polecenie uruchamiaj±ce aplikacjê"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1258
+msgid "Add Application"
+msgstr "Dodanie aplikacji"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1259
+msgid "Edit Application"
+msgstr "Modyfikacja aplikacji"
+
+#. Application Name label and entry
+#: capplets/file-types/file-types-capplet-dialogs.c:1271
+msgid "Application Name:"
+msgstr "Nazwa aplikacji:"
+
+#. Application Command label and entry
+#: capplets/file-types/file-types-capplet-dialogs.c:1282
+msgid "Application Command:"
+msgstr "Polecenie uruchamiaj±ce aplikacjê:"
+
+#. Open Behavior frame
+#: capplets/file-types/file-types-capplet-dialogs.c:1293
+msgid "Open Behavior"
+msgstr "Zachowanie przy otwieraniu"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1299
+msgid "Can open multiple files"
+msgstr "Mo¿e otworzyæ wiele plików"
+
+#. FIXME bugzilla.eazel.com 6066: This needs to be three options now: "yes", "no", and "use uris for non-file locations"
+#: capplets/file-types/file-types-capplet-dialogs.c:1307
+msgid "Can open from URI"
+msgstr "Mo¿e otworzyæ plik z URI"
+
+#: capplets/file-types/file-types-capplet.c:735
+#: capplets/file-types/file-types-capplet.c:1883
+msgid "MIME Type"
+msgstr "Typ MIME"
+
+#: capplets/file-types/file-types-capplet.c:742
+msgid "Change Icon"
+msgstr "Zmieñ ikonê"
+
+#: capplets/file-types/file-types-capplet.c:749
+msgid "Change File Extensions"
+msgstr "Zmieñ rozszerzenia plików"
+
+#: capplets/file-types/file-types-capplet.c:757
+msgid "Default Action:"
+msgstr "Domy¶lna czynno¶æ:"
+
+#: capplets/file-types/file-types-capplet.c:769
+msgid "Use Viewer"
+msgstr "U¿ycie przegl±darki"
+
+#: capplets/file-types/file-types-capplet.c:775
+msgid "Open With Application"
+msgstr "Otwarcie za pomoc± aplikacji"
+
+#: capplets/file-types/file-types-capplet.c:786
+msgid "Edit List"
+msgstr "Zmodyfikuj listê"
+
+#: capplets/file-types/file-types-capplet.c:811
+msgid "Add New MIME Type..."
+msgstr "Dodaj nowy typ MIME..."
+
+#: capplets/file-types/file-types-capplet.c:817
+msgid "Delete This MIME Type"
+msgstr "Usuñ zaznaczony typ MIME"
+
+#: capplets/file-types/file-types-capplet.c:828
+msgid "Revert to System Defaults"
+msgstr "Przywróæ ustawienia systemowe"
+
+#: capplets/file-types/file-types-capplet.c:1075
+#: capplets/file-types/file-types-capplet.c:1219
+msgid "None"
+msgstr "Brak"
+
+#: capplets/file-types/file-types-capplet.c:1324
+msgid ""
+"Reverting to system settings will lose any changes\n"
+"you have ever made to File Types and Programs.\n"
+"Revert anyway?"
+msgstr ""
+"Przywrócenie ustawieñ systemowych spowoduje utratê\n"
+"wszystkich zmian dokonanych w sekcji Typu plików i programy.\n"
+"Czy na pewno przywróciæ?"
+
+#. Add default action to fourth column
+#: capplets/file-types/file-types-capplet.c:1393
+#: capplets/file-types/file-types-capplet.c:1593
+#: capplets/file-types/file-types-capplet.c:1719
+msgid "none"
+msgstr "brak"
+
+#: capplets/file-types/file-types-capplet.c:1434
+#: capplets/file-types/file-types-capplet.c:1620
+#: capplets/file-types/file-types-capplet.c:1763
+#, c-format
+msgid "View as %s"
+msgstr "Wy¶wietlanie jako %s"
+
+#: capplets/file-types/file-types-capplet.c:1884
+#: capplets/mime-type/mime-data.c:385
+msgid "Extension"
+msgstr "Rozszerzenie"
+
+#: capplets/file-types/file-types-capplet.c:1885
+msgid "Default Action"
+msgstr "Domy¶lna czynno¶æ"
+
+#: capplets/file-types/file-types.desktop.in.in.h:1
+msgid "File Types and Programs"
+msgstr "Typy plików i programy"
+
+#: capplets/file-types/file-types.desktop.in.in.h:2
+msgid "Specify which programs are used to open or view each file type"
+msgstr ""
+"Okre¶la, jakie programy s± u¿ywane do otwierania i wy¶wietlania ró¿nych "
+"typów plików"
+
+#: capplets/file-types/file-types-icon-entry.c:258
+msgid "Can't find an hbox, using a normal file selection"
+msgstr "Nie mo¿na odnale¼æ widgetu hbox, wywo³anie zwyk³ego wyboru pliku"
+
+#: capplets/file-types/file-types-icon-entry.c:381
+msgid "Select an icon"
+msgstr "Wybór ikony"
+
+#. icon box
+#: capplets/mime-type/edit-window.c:266
+msgid "Select an icon..."
+msgstr "Wybór ikony..."
+
+#: capplets/mime-type/edit-window.c:276
+#: capplets/mime-type/new-mime-window.c:31
+msgid "Mime Type: "
+msgstr "Typ MIME: "
+
+#: capplets/mime-type/edit-window.c:306
+msgid "Add"
+msgstr "Dodaj"
+
+#: capplets/mime-type/edit-window.c:314
+#: capplets/url-properties/url-properties.c:135
+msgid "Remove"
+msgstr "Usuñ"
+
+#. gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
+#: capplets/mime-type/edit-window.c:341
+#: capplets/mime-type/new-mime-window.c:69
+msgid "First Regular Expression: "
+msgstr "Pierwsze wyra¿enie regularne: "
+
+#: capplets/mime-type/edit-window.c:349
+#: capplets/mime-type/new-mime-window.c:80
+msgid "Second Regular Expression: "
+msgstr "Drugie wyra¿enie regularne: "
+
+#. Actions box
+#: capplets/mime-type/edit-window.c:356
+msgid "Mime Type Actions"
+msgstr "Czynno¶ci zwi±zane z typem MIME"
+
+#: capplets/mime-type/edit-window.c:363
+#, c-format
+msgid "Example: emacs %f"
+msgstr "Przyk³ad: emacs %f"
+
+#: capplets/mime-type/edit-window.c:368
+msgid "Open"
+msgstr "Otwarcie"
+
+#: capplets/mime-type/edit-window.c:374 capplets/mime-type/edit-window.c:390
+#: capplets/mime-type/edit-window.c:405
+msgid "Select a file..."
+msgstr "Wybór pliku..."
+
+#: capplets/mime-type/edit-window.c:383
+msgid "View"
+msgstr "Podgl±d"
+
+#: capplets/mime-type/edit-window.c:399
+msgid "Edit"
+msgstr "Modyfikacja"
+
+#. we initialize everything
+#: capplets/mime-type/edit-window.c:448
+#, c-format
+msgid "Set actions for %s"
+msgstr "Ustawienie czynno¶ci zwi±zanych z %s"
+
+#: capplets/mime-type/mime-data.c:384
+msgid "Mime Type"
+msgstr "Typ MIME"
+
+#: capplets/mime-type/mime-data.c:493
+msgid "You must enter a mime-type"
+msgstr "Nale¿y wprowadziæ typ MIME"
+
+#: capplets/mime-type/mime-data.c:498
+msgid ""
+"You must add either a regular-expression or\n"
+"a file-name extension"
+msgstr ""
+"Nale¿y dodaæ wyra¿enie regularne lub\n"
+"rozszerzenie nazwy pliku"
+
+#: capplets/mime-type/mime-data.c:502
+msgid ""
+"Please put your mime-type in the format:\n"
+"CATEGORY/TYPE\n"
+"\n"
+"For Example:\n"
+"image/png"
+msgstr ""
+"Podaj typ MIME w formacie:\n"
+"KATEGORIA/TYP\n"
+"\n"
+"Na przyk³ad:\n"
+"image/png"
+
+#: capplets/mime-type/mime-data.c:507
+msgid "This mime-type already exists"
+msgstr "Ten typ MIME ju¿ istnieje"
+
+#: capplets/mime-type/mime-data.c:588 capplets/mime-type/mime-info.c:427
+msgid ""
+"We are unable to create the directory\n"
+"~/.gnome/mime-info\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+"Nie mo¿na stworzyæ katalogu\n"
+"~/.gnome/mime-info\n"
+"\n"
+"Zapisanie stanu nie bêdzie mo¿liwe."
+
+#: capplets/mime-type/mime-data.c:594 capplets/mime-type/mime-info.c:433
+msgid ""
+"We are unable to access the directory\n"
+"~/.gnome/mime-info\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+"Brak dostêpu do katalogu\n"
+"~/.gnome/mime-info\n"
+"\n"
+"Zapisanie stanu nie bêdzie mo¿liwe."
+
+#: capplets/mime-type/mime-data.c:605
+msgid ""
+"Cannot create the file\n"
+"~/.gnome/mime-info/user.mime\n"
+"\n"
+"We will not be able to save the state"
+msgstr ""
+"Nie mo¿na stworzyæ pliku\n"
+"~/.gnome/mime-info/user.mime\n"
+"\n"
+"Zapisanie stanu nie bêdzie mo¿liwe."
+
+#: capplets/mime-type/mime-info.c:444
+msgid ""
+"Cannot create the file\n"
+"~/.gnome/mime-info/user.keys.\n"
+"\n"
+"We will not be able to save the state"
+msgstr ""
+"Nie mo¿na stworzyæ pliku\n"
+"~/.gnome/mime-info/user.keys\n"
+"\n"
+"Zapisanie stanu nie bêdzie mo¿liwe."
+
+#: capplets/mime-type/mime-type-capplet.c:83
+#: capplets/wm-properties/wm-properties-capplet.c:1127
+msgid "Delete"
+msgstr "Usuñ"
+
+#: capplets/mime-type/mime-type-capplet.c:97
+#: capplets/wm-properties/wm-properties-capplet.c:1122
+msgid "Edit..."
+msgstr "Zmodyfikuj..."
+
+#: capplets/mime-type/mime-type.desktop.in.in.h:1
+msgid "Configure how files are associated and started"
+msgstr "Konfiguruje powi±zania plików i sposób ich otwierania"
+
+#: capplets/mime-type/mime-type.desktop.in.in.h:2
+msgid "Mime Types"
+msgstr "Typy MIME"
+
+#: capplets/mime-type/new-mime-window.c:25
+msgid "Add Mime Type"
+msgstr "Dodanie typu MIME"
+
+#: capplets/mime-type/new-mime-window.c:26
+msgid ""
+"Add a new Mime Type\n"
+"For example:  image/tiff; text/x-scheme"
+msgstr ""
+"Dodaj nowy typ MIME\n"
+"Na przyk³ad:  image/tiff; text/x-scheme"
+
+#: capplets/mime-type/new-mime-window.c:39
+msgid "Extensions"
+msgstr "Rozszerzenia"
+
+#: capplets/mime-type/new-mime-window.c:43
+msgid ""
+"Type in the extensions for this mime-type.\n"
+"For example:  .html, .htm"
+msgstr ""
+"Wprowad¼ rozszerzenia zwi±zane z tym typem MIME.\n"
+"Na przyk³ad:  .html, .htm"
+
+#: capplets/mime-type/new-mime-window.c:55
+msgid "Regular Expressions"
+msgstr "Wyra¿enia regularne"
+
+#: capplets/mime-type/new-mime-window.c:59
+msgid ""
+"You can set up two regular expressions here to identify the Mime Type\n"
+"by.  These fields are optional."
+msgstr ""
+"Mo¿na podaæ do dwóch wyra¿eñ regularnych, identyfikuj±cych typ MIME.\n"
+"Poni¿sze pola s± opcjonalne."
+
+#: capplets/theme-switcher/demo.c:54
+msgid "One"
+msgstr "Raz"
+
+#. just 8 short names that will serve as samples for titles in demo
+#: capplets/theme-switcher/demo.c:56
+msgid "Eenie"
+msgstr "Gdyby"
+
+#: capplets/theme-switcher/demo.c:56
+msgid "Meenie"
+msgstr "kózka"
+
+#: capplets/theme-switcher/demo.c:57
+msgid "Mynie"
+msgstr "nie"
+
+#: capplets/theme-switcher/demo.c:57
+msgid "Moe"
+msgstr "skaka³a"
+
+#: capplets/theme-switcher/demo.c:58
+msgid "Catcha"
+msgstr "to by"
+
+#: capplets/theme-switcher/demo.c:58
+msgid "Tiger"
+msgstr "nó¿ki"
+
+#: capplets/theme-switcher/demo.c:59
+msgid "By Its"
+msgstr "nie"
+
+#: capplets/theme-switcher/demo.c:59
+msgid "Toe"
+msgstr "z³ama³a"
+
+#: capplets/theme-switcher/demo.c:118
+msgid "Selected themes from above will be tested by previewing here."
+msgstr "Wybrane motywy demonstrowane bêd± w tym miejscu."
+
+#. column one
+#: capplets/theme-switcher/demo.c:123
+msgid "Sample Button"
+msgstr "Przyk³adowy przycisk"
+
+#: capplets/theme-switcher/demo.c:127
+msgid "Sample Check Button"
+msgstr "Przyk³adowy przycisk wyboru"
+
+#: capplets/theme-switcher/demo.c:132
+msgid "Sample Text Entry Field"
+msgstr "Przyk³adowe pole tekstowe"
+
+#: capplets/theme-switcher/demo.c:143
+msgid "Submenu"
+msgstr "Menu podrzêdne"
+
+#: capplets/theme-switcher/demo.c:150
+msgid "Item 1"
+msgstr "1. element"
+
+#: capplets/theme-switcher/demo.c:153
+msgid "Another item"
+msgstr "Kolejny element"
+
+#: capplets/theme-switcher/demo.c:158
+msgid "Radio Button 1"
+msgstr "Przycisk opcji 1"
+
+#: capplets/theme-switcher/demo.c:164
+msgid "Radio Button 2"
+msgstr "Przycisk opcji 2"
+
+#: capplets/theme-switcher/gui.c:88
+#, c-format
+msgid ""
+"Error installing theme:\n"
+"'%s'\n"
+"%s"
+msgstr ""
+"B³±d przy instalowaniu motywu:\n"
+"'%s'\n"
+"%s"
+
+#: capplets/theme-switcher/gui.c:119
+msgid "Select a theme to install"
+msgstr "Wybór motywu do zainstalowania"
+
+#: capplets/theme-switcher/gui.c:196
+msgid "Available Themes"
+msgstr "Dostêpne motywy"
+
+#: capplets/theme-switcher/gui.c:221
+msgid ""
+"Auto\n"
+"Preview"
+msgstr ""
+"Automatyczny\n"
+"podgl±d"
+
+#: capplets/theme-switcher/gui.c:233
+msgid ""
+"Install new\n"
+"theme..."
+msgstr ""
+"Zainstaluj nowy\n"
+"motyw..."
+
+#. Font selector.
+#.
+#: capplets/theme-switcher/gui.c:239
+msgid "User Font"
+msgstr "Czcionka u¿ytkownika"
+
+#. FIXME - should really get this from X somehow
+#. for now we just assume default gtk font
+#: capplets/theme-switcher/gui.c:257
+msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
+msgstr "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-2"
+
+#: capplets/theme-switcher/gui.c:276
+msgid "Use custom font."
+msgstr "Wykorzystanie wybranej czcionki."
+
+#: capplets/theme-switcher/gui.c:366
+#: capplets/wm-properties/wm-properties-capplet.c:669
+msgid ""
+"No help is available/installed for these settings. Please make sure you\n"
+"have the GNOME User's Guide installed on your system."
+msgstr ""
+"Pomoc na temat tych ustawieñ nie jest dostêpna/zainstalowana. Upewnij\n"
+"siê, ¿e zainstalowano w systemie Podrêcznik U¿ytkownika GNOME."
+
+#: capplets/theme-switcher/install.c:31
+msgid "Home directory doesn't exist!\n"
+msgstr "Katalog domowy nie istnieje!\n"
+
+#: capplets/theme-switcher/install.c:41
+msgid "Theme does not exist"
+msgstr "Motyw nie istnieje"
+
+#: capplets/theme-switcher/install.c:73
+#, c-format
+msgid "Command '%s' failed"
+msgstr "Polecenie '%s' nie powiod³o siê"
+
+#: capplets/theme-switcher/install.c:78
+msgid "Unknown file format"
+msgstr "Nieznany format pliku"
+
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
+msgid "Gtk+ Theme Selector"
+msgstr "Wybór motywu GTK+"
+
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
+msgid "Select which gtk+ theme to use"
+msgstr "Wybór motywu wykorzystywanego przez GTK+"
+
+#: capplets/url-properties/url.desktop.in.in.h:1
+msgid "Configure which programs are used to display URLs"
+msgstr "Kofiguruje programy u¿ywane do obs³ugi ró¿nych URL-i"
+
+#: capplets/url-properties/url.desktop.in.in.h:2
+msgid "URL Handlers"
+msgstr "Obs³uga URL-i"
+
+#: capplets/url-properties/url-properties.c:49
+msgid "Error initializing the `url-properties' capplet."
+msgstr "B³±d przy inicjowaniu apletu \"url-properties\"."
+
+#: capplets/url-properties/url-properties.c:72
+msgid "Protocol"
+msgstr "Protokó³"
+
+#: capplets/url-properties/url-properties.c:72
+msgid "Command"
+msgstr "Polecenie"
+
+#: capplets/url-properties/url-properties.c:89
+msgid "handler:"
+msgstr "aplikacja obs³uguj±ca:"
+
+#. set some commonly used handlers
+#: capplets/url-properties/url-properties.c:99
+msgid "Netscape"
+msgstr "Netscape"
+
+#: capplets/url-properties/url-properties.c:104
+msgid "Netscape (new window)"
+msgstr "Netscape (nowe okno)"
+
+#: capplets/url-properties/url-properties.c:110
+msgid "Help browser"
+msgstr "Przegl±darka pomocy"
+
+#: capplets/url-properties/url-properties.c:115
+msgid "Help browser (new window)"
+msgstr "Przegl±darka pomocy (nowe okno)"
+
+#: capplets/url-properties/url-properties.c:127
+msgid "Set"
+msgstr "Ustaw"
+
+#: capplets/ui-properties/behavior.desktop.in.in.h:1
+msgid "Behavior"
+msgstr "Zachowanie"
+
+#: capplets/ui-properties/behavior.desktop.in.in.h:2
+msgid "Sets the default behavior of GNOME applications"
+msgstr "Ustawia domy¶lne zachowanie aplikacji GNOME"
+
+#: capplets/ui-properties/behavior-properties.glade.h:1
+msgid "At the center of the screen"
+msgstr "Na ¶rodku ekranu"
+
+#: capplets/ui-properties/behavior-properties.glade.h:2
+msgid "At the mouse pointer"
+msgstr "Na pozycji wska¼nika myszy"
+
+#: capplets/ui-properties/behavior-properties.glade.h:3
+msgid "Bottom"
+msgstr "Dó³"
+
+#: capplets/ui-properties/behavior-properties.glade.h:4
+msgid "Default  (Spread out - big)"
+msgstr "Domy¶lnie (roz³o¿one - du¿e)"
+
+#: capplets/ui-properties/behavior-properties.glade.h:5
+msgid "Dialog Buttons"
+msgstr "Przyciski okien dialogowych"
+
+#: capplets/ui-properties/behavior-properties.glade.h:6
+msgid "Dialog buttons have icons"
+msgstr "Ikony na przyciskach okien dialogowych"
+
+#: capplets/ui-properties/behavior-properties.glade.h:7
+msgid "Dialogs"
+msgstr "Okna dialogowe"
+
+#: capplets/ui-properties/behavior-properties.glade.h:8
+msgid "Dialogs are treated"
+msgstr "Traktowanie okien dialogowych"
+
+#: capplets/ui-properties/behavior-properties.glade.h:9
+msgid "Dialogs open"
+msgstr "Otwieranie okien dialogowych"
+
+#: capplets/ui-properties/behavior-properties.glade.h:10
+msgid "Interface"
+msgstr "Interfejs"
+
+#: capplets/ui-properties/behavior-properties.glade.h:11
+msgid "Left"
+msgstr "Lewa"
+
+#: capplets/ui-properties/behavior-properties.glade.h:12
+msgid "Left aligned"
+msgstr "Wyrównane do lewej"
+
+#: capplets/ui-properties/behavior-properties.glade.h:13
+msgid "Like any other window"
+msgstr "Jak innych okien"
+
+#: capplets/ui-properties/behavior-properties.glade.h:14
+msgid "Menu bars are detachable"
+msgstr "Od³±czalne paski menu"
+
+#: capplets/ui-properties/behavior-properties.glade.h:15
+msgid "Menu bars have a border"
+msgstr "Krawêdzie wokó³ pasków menu"
+
+#: capplets/ui-properties/behavior-properties.glade.h:16
+msgid "Menu items have icons"
+msgstr "Ikony przy pozycjach menu"
+
+#: capplets/ui-properties/behavior-properties.glade.h:17
+msgid "Menus"
+msgstr "Menu"
+
+#: capplets/ui-properties/behavior-properties.glade.h:18
+msgid "Menus can be torn off"
+msgstr "Roz³±czalne menu"
+
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
+#: capplets/ui-properties/behavior-properties.glade.h:19
+msgid "Miscellaneous"
+msgstr "Ró¿ne"
+
+#: capplets/ui-properties/behavior-properties.glade.h:20
+msgid "Multiple Documents"
+msgstr "Wiele dokumentów"
+
+#: capplets/ui-properties/behavior-properties.glade.h:21
+msgid "Notebook tabs"
+msgstr "Zak³adeki notatnika"
+
+#: capplets/ui-properties/behavior-properties.glade.h:22
+msgid "Place dialogs over application window when possible"
+msgstr ""
+"W miarê mo¿liwo¶ci umieszczanie okien dialogowych ponad oknem aplikacji"
+
+#: capplets/ui-properties/behavior-properties.glade.h:23
+msgid "Progress bar is on the left"
+msgstr "Pasek postêpu po lewej stronie"
+
+#: capplets/ui-properties/behavior-properties.glade.h:24
+msgid "Progress bar is on the right"
+msgstr "Pasek postêpu po prawej stronie"
+
+#: capplets/ui-properties/behavior-properties.glade.h:25
+msgid "Right"
+msgstr "Prawa"
+
+#: capplets/ui-properties/behavior-properties.glade.h:26
+msgid "Right aligned"
+msgstr "Wyrównane do prawej"
+
+#: capplets/ui-properties/behavior-properties.glade.h:27
+msgid "Seperate windows"
+msgstr "Oddzielne okna"
+
+#: capplets/ui-properties/behavior-properties.glade.h:28
+msgid "Settings will not take effect until applications restart"
+msgstr "Ustawienia wejd± w ¿ycie po ponownym uruchomieniu aplikacji"
+
+#: capplets/ui-properties/behavior-properties.glade.h:29
+msgid "Specially by the window manager"
+msgstr "W specjalny sposób"
+
+#: capplets/ui-properties/behavior-properties.glade.h:30
+msgid "Spread out"
+msgstr "Roz³o¿one"
+
+#: capplets/ui-properties/behavior-properties.glade.h:31
+msgid "Spread out (big)"
+msgstr "Roz³o¿one (du¿e)"
+
+#: capplets/ui-properties/behavior-properties.glade.h:32
+msgid "Status Bar"
+msgstr "Pasek stanu"
+
+#: capplets/ui-properties/behavior-properties.glade.h:33
+msgid "Status bar is interactive when possible"
+msgstr "W miarê mo¿liwo¶ci u¿ywanie interaktywnego paska stanu"
+
+#: capplets/ui-properties/behavior-properties.glade.h:34
+msgid "The same window"
+msgstr "To samo okno"
+
+#: capplets/ui-properties/behavior-properties.glade.h:35
+msgid "Tool Bars"
+msgstr "Paski narzêdziowe"
+
+#: capplets/ui-properties/behavior-properties.glade.h:36
+msgid "Tool bar buttons are icons only"
+msgstr "Umieszczanie na paskach narzêdziowych tylko ikon"
+
+#: capplets/ui-properties/behavior-properties.glade.h:37
+msgid "Tool bar buttons are text below icons"
+msgstr "Umieszczanie na paskach narzêdziowych tekstu pod ikonami"
+
+#: capplets/ui-properties/behavior-properties.glade.h:38
+msgid "Tool bar buttons pop up on mouse over"
+msgstr ""
+"Wysuwanie przycisków na pasku narzêdziowym po przesuniêciu nad nie wska¼nika"
+
+#: capplets/ui-properties/behavior-properties.glade.h:39
+msgid "Tool bars are detachable"
+msgstr "Od³±czalne paski narzêdziowe"
+
+#: capplets/ui-properties/behavior-properties.glade.h:40
+msgid "Tool bars have a border"
+msgstr "Krawêdzie wokó³ pasków narzêdziowych"
+
+#: capplets/ui-properties/behavior-properties.glade.h:41
+msgid "Tool bars have line separators"
+msgstr "Separatory na paskach narzêdziowych"
+
+#: capplets/ui-properties/behavior-properties.glade.h:42
+msgid "Top"
+msgstr "Góra"
+
+#: capplets/ui-properties/behavior-properties.glade.h:43
+msgid "Use status bar instead of dialog when possible"
+msgstr "W miarê mo¿liwo¶ci u¿ywanie paska stanu zamiast okna dialogowego"
+
+#: capplets/ui-properties/behavior-properties.glade.h:44
+msgid "When opening Multiple documents, use"
+msgstr "Sposób otwierania wielu dokumentów"
+
+#: capplets/ui-properties/behavior-properties.glade.h:45
+msgid "When using Notebook tabs, place the tabs on the"
+msgstr "Po³o¿enie zak³adek notatnika przy jego u¿yciu"
+
+#: capplets/ui-properties/behavior-properties.glade.h:46
+msgid "Wherever the Window Manager places them"
+msgstr "W miejscu wybranym przez mened¿era okien"
+
+#: capplets/wm-properties/wm-properties-capplet.c:170
+#, c-format
+msgid ""
+"Starting %s\n"
+"(%d seconds left before operation times out)"
+msgstr ""
+"Uruchamianie %s\n"
+"(pozosta³o %d sekund do up³yniêcia czasu przenaczonego na wykonanie operacji)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:331
+#, c-format
+msgid "%s (Current)"
+msgstr "%s (Bie¿±cy)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:334
+#, c-format
+msgid "Run Configuration Tool for %s"
+msgstr "Uruchom narzêdzie konfiguracyjne dla %s"
+
+#: capplets/wm-properties/wm-properties-capplet.c:345
+msgid " (Not found)"
+msgstr " (nie znaleziony)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:384
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\tAnother window manager is already running and could not be killed\n"
+msgstr ""
+"wm-properties-capplet: Nie mo¿na zainicjowaæ mened¿era okien.\n"
+"\tMened¿er okien jest ju¿ uruchomiony i nie mo¿e zostaæ zamkniêty\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:388
+#, c-format
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\t'%s' didn't start\n"
+msgstr ""
+"wm-properties-capplet: Nie mo¿na zainicjowaæ mened¿era okien.\n"
+"\t'%s' nie zosta³ uruchomiony\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:437
+msgid "Previous window manager did not die\n"
+msgstr "Poprzedni mened¿er okien nie zosta³ zakoñczony\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:470
+#, c-format
+msgid ""
+"Could not start '%s'.\n"
+"Falling back to previous window manager '%s'\n"
+msgstr ""
+"Nie mo¿na uruchomiæ '%s'.\n"
+"Powrót do poprzedniego mened¿era okien '%s'.\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:501
+msgid ""
+"Could not start fallback window manager.\n"
+"Please run a window manager manually. You can\n"
+"do this by selecting \"Run Program\" in the\n"
+"foot menu\n"
+msgstr ""
+"Nie mo¿na uruchomiæ poprzedniego mened¿era okien.\n"
+"Nale¿y samodzielnie uruchomiæ mened¿era okien\n"
+"(na przyk³ad wybieraj±c \"Wykonaj polecenie\" z menu g³ównego).\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:526
+#: capplets/wm-properties/wm-properties-capplet.c:781
+#: capplets/wm-properties/wm-properties-capplet.c:890
+#: capplets/wm-properties/wm-properties-capplet.c:897
+#: capplets/wm-properties/wm-properties-capplet.c:1043
+msgid "OK"
+msgstr "OK"
+
+#: capplets/wm-properties/wm-properties-capplet.c:544
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. You can do so immediately by selecting the \"Save session\n"
+"now\" below, or you can save your session later.  This can be\n"
+"done either selecting \"Save Current Session\" under \"Settings\"\n"
+"in the main menu, or by turning on \"Save Current Setup\" when\n"
+"you log out.\n"
+msgstr ""
+"Zosta³ zmieniony mened¿er okien. Aby zapisaæ tê zmianê, nale¿y\n"
+"zapisaæ bie¿±c± sesjiê. Mo¿esz to zrobiæ, wciskaj±c poni¿ej przycisk\n"
+"\"Zapisz sesjê teraz\", lub te¿ zapisaæ sesjê pó¼niej. Jest to mo¿liwe\n"
+"poprzez wybranie opcji \"Zapisz bie¿±c± sesjê\" z podmenu \"Ustawienia\"\n"
+"menu g³ównego lub aktywowanie opcjiê\"Zapis aktualnych ustawieñ\"\n"
+"przy koñczeniu pracy.\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:551
+msgid "Save Session Later"
+msgstr "Zapisz sesjêpó¼niej"
+
+#: capplets/wm-properties/wm-properties-capplet.c:551
+msgid "Save Session Now"
+msgstr "Zapisz sesjê teraz"
+
+#: capplets/wm-properties/wm-properties-capplet.c:554
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. This can be done by either selecting \"Save Current Session\"\n"
+"under \"Settings\" in the main menu, or by turning on\n"
+"\"Save Current Setup\" when you log out.\n"
+msgstr ""
+"Zosta³ zmieniony mened¿er okien. Aby zapisaæ tê zmianê, nale¿y\n"
+"zapisaæ bie¿±c± sesjiê. Mo¿na to zrobiæ, wybieraj±c\n"
+"\"Zapisz bie¿±c± sesjê\" z podmenu \"Ustawienia\" menu g³ównego lub\n"
+"aktywuj±c opcjê \"Zapis aktualnych ustawieñ\" przy koñczeniu\n"
+"pracy.\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:780
+msgid "Add New Window Manager"
+msgstr "Dodaj mened¿era okien"
+
+#: capplets/wm-properties/wm-properties-capplet.c:781
+msgid "Cancel"
+msgstr "Anuluj"
+
+#: capplets/wm-properties/wm-properties-capplet.c:819
+msgid "Configuration Command:"
+msgstr "Polecenie konfiguracyjne:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:838
+msgid "Window manager is session managed"
+msgstr "Mened¿er okien wspó³pracuj±cy z mened¿erem sesji"
+
+#: capplets/wm-properties/wm-properties-capplet.c:888
+msgid "Name cannot be empty"
+msgstr "Nazwa nie mo¿e byæ pusta"
+
+#: capplets/wm-properties/wm-properties-capplet.c:895
+msgid "Command cannot be empty"
+msgstr "Polecenie nie mo¿e byæ puste"
+
+#: capplets/wm-properties/wm-properties-capplet.c:944
+#: capplets/wm-properties/wm-properties-capplet.c:986
+msgid "Edit Window Manager"
+msgstr "Zmodyfikuj w³a¶ciwo¶ci mened¿era okien"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1042
+msgid "You cannot delete the current Window Manager"
+msgstr "Nie mo¿na usun±æ bie¿±cego mened¿era okien"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1089
+msgid "Window Manager Selector"
+msgstr "Wybór mened¿era okien"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1191
+msgid ""
+"an initialization error occurred while starting 'wm-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"Przy uruchamianiu wm-properties-capplet wyst±pi³ b³±d inicjalizacji.\n"
+"Rezygnacja...\n"
+
+#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.in.h:1
+msgid "Enlightenment"
+msgstr "Enlightenment"
+
+#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.in.h:1
+msgid "Ice WM"
+msgstr "Ice WM"
+
+#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.in.h:1
+msgid "Scwm"
+msgstr "Scwm"
+
+#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.in.h:1
+msgid "Window Maker"
+msgstr "Window Maker"
+
+#: capplets/wm-properties/wm-desktops/twm.desktop.in.in.h:1
+msgid "twm"
+msgstr "twm"
+
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:1
+msgid "Control Center Menu"
+msgstr "Menu Centrum sterowania"
+
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:2
+msgid "Sawfish window manager"
+msgstr "Mened¿er okien Sawfish"
+
+#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:2
+msgid "Configure window appearance"
+msgstr "Konfiguruje wygl±d okien"
+
+#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:1
+msgid "Configure key shortcuts"
+msgstr "Konfiguruje skróty klawiszowe"
+
+#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:2
+msgid "Shortcuts"
+msgstr "Skróty klawiszowe"
+
+#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:1
+msgid "Configure window focusing"
+msgstr "Konfiguruje sposób przekazywania skupienia pomiêdzy oknami"
+
+#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:2
+msgid "Focus behavior"
+msgstr "Przekazywanie skupienia"
+
+#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
+msgid "Configure window properties"
+msgstr "Konfiguruje w³a¶ciwo¶ci okien"
+
+#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:2
+msgid "Matched Windows"
+msgstr "Dopasowywanie okien"
+
+#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:1
+msgid "Configure window minimization and maximization"
+msgstr "Konfiguruje minimalizacjê i maksymalizacjê okien"
+
+#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:2
+msgid "Minimizing and Maximizing"
+msgstr "Minimalizacja i maksymalizacja"
+
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
+msgid "Configure window manager configuration properties"
+msgstr "Konfiguruje ustawienia konfiguracji mened¿era okien"
+
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:2
+msgid "Meta"
+msgstr "Meta"
+
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
+msgid "Configure miscellaneous window features"
+msgstr "Konfiguruje ró¿ne ustawienia dotycz±ce okien"
+
+#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:1
+msgid "Configure window move/resize"
+msgstr "Konfiguruje sposób przenoszenia i zmiany rozmiaru okien"
+
+#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:2
+msgid "Moving and Resizing"
+msgstr "Przenoszenie i zmiana rozmiaru"
+
+#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:1
+msgid "Configure window placement"
+msgstr "Konfiguruje sposób umieszczania okien"
+
+#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:2
+msgid "Placement"
+msgstr "Umieszczanie"
+
+#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
+msgid "Enable window manager sound events"
+msgstr "Wykorzystanie d¼wiêku przez mened¿era okien"
+
+#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:1
+msgid "Configure workspaces"
+msgstr "Konfiguruje obszary robocze"
+
+#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:2
+msgid "Workspaces"
+msgstr "Obszary robocze"

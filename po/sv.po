@@ -330,6 +330,7 @@ msgstr "Godtar denna textredigerare radnummer från kommandoraden?"
 #: capplets/default-applications/interface.c:334
 #: capplets/default-applications/interface.c:465
 #: capplets/default-applications/interface.c:576
+#: capplets/wm-properties/wm-properties-capplet.c:806
 msgid "Command:"
 msgstr "Kommando:"
 
@@ -653,6 +654,7 @@ msgid "Configure the settings of the screensaver"
 msgstr "Ändra inställningar för skärmsläckare"
 
 #: capplets/screensaver/screensaver-prefs-dialog.c:185
+#: capplets/wm-properties/wm-properties-capplet.c:793
 msgid "Name:"
 msgstr "Namn:"
 
@@ -660,6 +662,7 @@ msgstr "Namn:"
 msgid "Settings"
 msgstr "Inställningar"
 
+#: capplets/file-types/file-types-capplet.c:1882
 #: capplets/screensaver/screensaver-prefs-dialog.c:204
 msgid "Description"
 msgstr "Beskrivning"
@@ -758,7 +761,9 @@ msgstr "Gå i suspend-läge efter"
 msgid "One screensaver all the time"
 msgstr "En skärmsläckare hela tiden"
 
+#: capplets/file-types/file-types-icon-entry.c:264
 #: capplets/screensaver/screensaver-properties.glade.h:11
+#: capplets/theme-switcher/gui.c:232 capplets/theme-switcher/gui.c:304
 msgid "Preview"
 msgstr "Förhandsgranska"
 
@@ -968,6 +973,7 @@ msgstr "Tolvsidiga celler"
 
 #: capplets/screensaver/screensavers/ant.xml.h:25
 #: capplets/screensaver/screensavers/flag.xml.h:17
+#: capplets/theme-switcher/demo.c:54
 msgid "Two"
 msgstr "Två"
 
@@ -3382,6 +3388,7 @@ msgstr "Ny skärmsläckare"
 msgid "Configure GNOME's use of sound"
 msgstr "Välj ljud för GNOME"
 
+#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
 #: capplets/sound/sound.desktop.in.in.h:2
 msgid "Sound"
 msgstr "Ljud"
@@ -3424,6 +3431,8 @@ msgstr ""
 "kontrollera att du har GNOME-användarmanualen installerad på\n"
 "ditt system."
 
+#: capplets/theme-switcher/gui.c:370
+#: capplets/wm-properties/wm-properties-capplet.c:671
 #: control-center/capplet-dir-view.c:464
 msgid "Close"
 msgstr "Stäng"
@@ -3436,6 +3445,7 @@ msgstr "GNOME-kontrollpanelen:"
 msgid "The GNOME configuration tool"
 msgstr "Konfigurationsverktyg för GNOME"
 
+#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
 #: control-center/gnomecc.glade.h:1
 msgid "Appearance"
 msgstr "Utseende"
@@ -3496,89 +3506,1138 @@ msgstr "KONTROLLPANELSPROGRAM"
 msgid "GNOME Control Center options"
 msgstr "Alternativ för GNOME-kontrollpanelen"
 
-#~ msgid "Background properties"
-#~ msgstr "Bakgrundsegenskaper"
+#: capplets/desktop-links/Advanced.directory.in.in.h:1
+msgid "Advanced"
+msgstr "Avancerat"
 
-#~ msgid "Use"
-#~ msgstr "Använd"
+#: capplets/desktop-links/Advanced.directory.in.in.h:2
+msgid "Advanced Settings"
+msgstr "Avancerade inställningar"
 
-#~ msgid "(None)"
-#~ msgstr "(Ingen)"
+#: capplets/desktop-links/panel.desktop.in.in.h:1
+msgid "Global panel properties"
+msgstr "Globala panelegenskaper"
 
-#~ msgid "Wallpaper Selection"
-#~ msgstr "Val av bakgrundsbild"
+#: capplets/desktop-links/panel.desktop.in.in.h:2
+msgid "Panel"
+msgstr "Panel"
 
-#~ msgid "Can't find an hbox, using a normal file selection"
-#~ msgstr "Kan inte hitta en hbox, använder normal filmarkering"
+#: capplets/desktop-links/session.desktop.in.in.h:1
+msgid "Configure which non-session aware programs are started up"
+msgstr "Konfigurera vilka icke-sessionsmedvetna program som startas"
 
-#~ msgid "Delay until repeat:"
-#~ msgstr "Fördröjning innan repetering:"
+#: capplets/desktop-links/session.desktop.in.in.h:2
+msgid "Startup Programs"
+msgstr "Autostart"
 
-#~ msgid "Operate on global backends"
-#~ msgstr "Verka på globala backender"
+#: capplets/file-types/file-types-capplet-dialogs.c:387
+msgid "Edit Applications List"
+msgstr "Redigera programlistan"
 
-#~ msgid "Options for the rollback GUI"
-#~ msgstr "Flaggor för återställnings-GUI:t"
+#. Add label
+#: capplets/file-types/file-types-capplet-dialogs.c:409
+#, c-format
+msgid "Select applications to appear in menu for MIME type \"%s\""
+msgstr "Välj program som ska visas i menyn för MIME-typen \"%s\""
 
-#~ msgid "Control Center Menu"
-#~ msgstr "Kontrollcentermeny"
+#: capplets/file-types/file-types-capplet-dialogs.c:433
+msgid "Add Application..."
+msgstr "Lägg till program..."
 
-#~ msgid "Sawfish window manager"
-#~ msgstr "Fönsterhanteraren Sawfish"
+#: capplets/file-types/file-types-capplet-dialogs.c:440
+msgid "Edit Application..."
+msgstr "Redigera program..."
 
-#~ msgid "Configure window appearance"
-#~ msgstr "Konfigurera fönsterutseende"
+#: capplets/file-types/file-types-capplet-dialogs.c:446
+msgid "Delete Application"
+msgstr "Ta bort program"
 
-#~ msgid "Configure key shortcuts"
-#~ msgstr "Konfigurera snabbtangenter"
+#: capplets/file-types/file-types-capplet-dialogs.c:480
+msgid "Edit Components List"
+msgstr "Redigera komponentlistan"
 
-#~ msgid "Shortcuts"
-#~ msgstr "Snabbtangenter"
+#. Add label
+#: capplets/file-types/file-types-capplet-dialogs.c:500
+#, c-format
+msgid "Select views to appear in menu for MIME type \"%s\""
+msgstr "Välj vyer som ska visas i menyn för MIME-typen \"%s\""
 
-#~ msgid "Configure window focusing"
-#~ msgstr "Konfigurera fönsterfokusering"
+#: capplets/file-types/file-types-capplet-dialogs.c:720
+msgid ""
+"The MIME type entered contained upper case characters. Upper case characters "
+"were changed to lower case for you."
+msgstr ""
+"MIME-typen som angavs innehåller stora bokstäver. Stora bokstäver har "
+"ändrats till små bokstäver åt dig."
 
-#~ msgid "Focus behavior"
-#~ msgstr "Fokusbeteende"
+#: capplets/file-types/file-types-capplet-dialogs.c:723
+msgid "Add New MIME Type"
+msgstr "Lägg till ny MIME-typ"
 
-#~ msgid "Configure window properties"
-#~ msgstr "Konfigurera fönsteregenskaper"
+#: capplets/file-types/file-types-capplet-dialogs.c:769
+msgid "Add MIME Type"
+msgstr "Lägg till MIME-typ"
 
-#~ msgid "Matched Windows"
-#~ msgstr "Matchade fönster"
+#: capplets/file-types/file-types-capplet-dialogs.c:773
+msgid "New MIME type (e.g. image/x-thumper):"
+msgstr "Ny MIME-typ (t.ex. image/x-thumper):"
 
-#~ msgid "Configure window minimization and maximization"
-#~ msgstr "Konfigurera minimering och maximering av fönster"
+#: capplets/file-types/file-types-capplet-dialogs.c:780
+msgid "Description (e.g. Thumper image):"
+msgstr "Beskrivning (t.ex. Thumper-bild):"
 
-#~ msgid "Minimizing and Maximizing"
-#~ msgstr "Minimering och maximering"
+#: capplets/file-types/file-types-capplet-dialogs.c:947
+msgid "File Extensions "
+msgstr "Filändelser "
 
-#~ msgid "Configure window manager configuration properties"
-#~ msgstr "Konfigurera fönsterhanterarens konfigurationsegenskaper"
+#: capplets/file-types/file-types-capplet-dialogs.c:967
+#: capplets/mime-type/mime-type-capplet.c:93
+#: capplets/wm-properties/wm-properties-capplet.c:1117
+msgid "Add..."
+msgstr "Lägg till..."
 
-#~ msgid "Meta"
-#~ msgstr "Meta"
+#: capplets/file-types/file-types-capplet-dialogs.c:972
+msgid "    Remove    "
+msgstr "    Ta bort   "
 
-#~ msgid "Configure miscellaneous window features"
-#~ msgstr "Konfigurera diverse fönsterfunktioner"
+#: capplets/file-types/file-types-capplet-dialogs.c:1041
+msgid "Add New Extension"
+msgstr "Lägg till ny filändelse"
 
-#~ msgid "Miscellaneous"
-#~ msgstr "Diverse"
+#: capplets/file-types/file-types-capplet-dialogs.c:1045
+msgid ""
+"Type in the extensions for this mime-type (without dot).\n"
+"You can enter several extensions seperated by a space,\n"
+"for example: html htm"
+msgstr ""
+"Skriv in filändelserna för denna mime-typ (utan punkt).\n"
+"Du kan ange flera filändelser åtskilda med blanksteg,\n"
+"till exempel: html htm"
 
-#~ msgid "Configure window move/resize"
-#~ msgstr "Konfigurera flyttning och storleksförändring av fönster"
+#: capplets/file-types/file-types-capplet-dialogs.c:1052
+#: capplets/mime-type/new-mime-window.c:50
+msgid "Extension:"
+msgstr "Filändelse:"
 
-#~ msgid "Moving and Resizing"
-#~ msgstr "Flyttning och storleksförändring"
+#: capplets/file-types/file-types-capplet-dialogs.c:1194
+msgid "You must enter a name."
+msgstr "Du måste ange ett namn."
 
-#~ msgid "Configure window placement"
-#~ msgstr "Konfigurera fönsterplacering"
+#: capplets/file-types/file-types-capplet-dialogs.c:1197
+msgid "You must enter a command."
+msgstr "Du måste ange ett kommando."
 
-#~ msgid "Enable window manager sound events"
-#~ msgstr "Använd fönsterhanterarens ljudhändelser"
+#: capplets/file-types/file-types-capplet-dialogs.c:1207
+#, c-format
+msgid ""
+"\"%s\" does not exist or is not executable.\n"
+"Check your spelling and make sure you have\n"
+"the right permissions to execute this file."
+msgstr ""
+"\"%s\" verkar inte finnas eller är inte körbar.\n"
+"Kontrollera din stavning och försökra dig om\n"
+"att du har nödvändiga rättigheter för att köra\n"
+"denna fil."
 
-#~ msgid "Configure workspaces"
-#~ msgstr "Konfigurera arbetsytor"
+#: capplets/file-types/file-types-capplet-dialogs.c:1213
+#, c-format
+msgid ""
+"The command \"%s\" cannot be found.\n"
+"You must use a command that can work from any command line."
+msgstr ""
+"Kommandot \"%s\" kan inte hittas.\n"
+"Du måste använda ett kommando som kan fungera från alla kommandorader."
 
-#~ msgid "Workspaces"
-#~ msgstr "Arbetsytor"
+#: capplets/file-types/file-types-capplet-dialogs.c:1225
+msgid "Bad Application Name"
+msgstr "Felaktigt programnamn"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1226
+msgid "Bad Application Command"
+msgstr "Felaktigt programkommando"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1258
+msgid "Add Application"
+msgstr "Lägg till program"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1259
+msgid "Edit Application"
+msgstr "Redigera program"
+
+#. Application Name label and entry
+#: capplets/file-types/file-types-capplet-dialogs.c:1271
+msgid "Application Name:"
+msgstr "Programnamn:"
+
+#. Application Command label and entry
+#: capplets/file-types/file-types-capplet-dialogs.c:1282
+msgid "Application Command:"
+msgstr "Programkommando:"
+
+#. Open Behavior frame
+#: capplets/file-types/file-types-capplet-dialogs.c:1293
+msgid "Open Behavior"
+msgstr "Öppningsbeteende"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1299
+msgid "Can open multiple files"
+msgstr "Kan öppna flera filer"
+
+#. FIXME bugzilla.eazel.com 6066: This needs to be three options now: "yes", "no", and "use uris for non-file locations"
+#: capplets/file-types/file-types-capplet-dialogs.c:1307
+msgid "Can open from URI"
+msgstr "Kan öppna från URI"
+
+#: capplets/file-types/file-types-capplet.c:735
+#: capplets/file-types/file-types-capplet.c:1883
+msgid "MIME Type"
+msgstr "MIME-typ"
+
+#: capplets/file-types/file-types-capplet.c:742
+msgid "Change Icon"
+msgstr "Byt ikon"
+
+#: capplets/file-types/file-types-capplet.c:749
+msgid "Change File Extensions"
+msgstr "Ändra filändelser"
+
+#: capplets/file-types/file-types-capplet.c:757
+msgid "Default Action:"
+msgstr "Standardåtgärd:"
+
+#: capplets/file-types/file-types-capplet.c:769
+msgid "Use Viewer"
+msgstr "Använd visare"
+
+#: capplets/file-types/file-types-capplet.c:775
+msgid "Open With Application"
+msgstr "Öppna med program"
+
+#: capplets/file-types/file-types-capplet.c:786
+msgid "Edit List"
+msgstr "Redigera lista"
+
+#: capplets/file-types/file-types-capplet.c:811
+msgid "Add New MIME Type..."
+msgstr "Lägg till ny MIME-typ..."
+
+#: capplets/file-types/file-types-capplet.c:817
+msgid "Delete This MIME Type"
+msgstr "Ta bort denna MIME-typ"
+
+#: capplets/file-types/file-types-capplet.c:828
+msgid "Revert to System Defaults"
+msgstr "Återgå till systemets standardinställningar"
+
+#: capplets/file-types/file-types-capplet.c:1075
+#: capplets/file-types/file-types-capplet.c:1219
+msgid "None"
+msgstr "Ingen"
+
+#: capplets/file-types/file-types-capplet.c:1324
+msgid ""
+"Reverting to system settings will lose any changes\n"
+"you have ever made to File Types and Programs.\n"
+"Revert anyway?"
+msgstr ""
+"Att återgå till systemets standardinställningar kommer\n"
+"att göra att alla ändringar du någonsin har gjort i\n"
+"Filtyper och program går förlorade.\n"
+"Återgå ändå?"
+
+#. Add default action to fourth column
+#: capplets/file-types/file-types-capplet.c:1393
+#: capplets/file-types/file-types-capplet.c:1593
+#: capplets/file-types/file-types-capplet.c:1719
+msgid "none"
+msgstr "ingen"
+
+#: capplets/file-types/file-types-capplet.c:1434
+#: capplets/file-types/file-types-capplet.c:1620
+#: capplets/file-types/file-types-capplet.c:1763
+#, c-format
+msgid "View as %s"
+msgstr "Visa som %s"
+
+#: capplets/file-types/file-types-capplet.c:1884
+#: capplets/mime-type/mime-data.c:385
+msgid "Extension"
+msgstr "Filändelse"
+
+#: capplets/file-types/file-types-capplet.c:1885
+msgid "Default Action"
+msgstr "Standardåtgärd"
+
+#: capplets/file-types/file-types.desktop.in.in.h:1
+msgid "File Types and Programs"
+msgstr "Filtyper och program"
+
+#: capplets/file-types/file-types.desktop.in.in.h:2
+msgid "Specify which programs are used to open or view each file type"
+msgstr "Ange vilka program som används för att öppna eller visa alla filtyper"
+
+#: capplets/file-types/file-types-icon-entry.c:258
+msgid "Can't find an hbox, using a normal file selection"
+msgstr "Kan inte hitta hbox, använder en vanlig filväljare"
+
+#: capplets/file-types/file-types-icon-entry.c:381
+msgid "Select an icon"
+msgstr "Välj en ikon"
+
+#. icon box
+#: capplets/mime-type/edit-window.c:266
+msgid "Select an icon..."
+msgstr "Välj ikon..."
+
+#: capplets/mime-type/edit-window.c:276
+#: capplets/mime-type/new-mime-window.c:31
+msgid "Mime Type: "
+msgstr "Mime-typ: "
+
+#: capplets/mime-type/edit-window.c:306
+msgid "Add"
+msgstr "Lägg till"
+
+#: capplets/mime-type/edit-window.c:314
+#: capplets/url-properties/url-properties.c:135
+msgid "Remove"
+msgstr "Ta bort"
+
+#. gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
+#: capplets/mime-type/edit-window.c:341
+#: capplets/mime-type/new-mime-window.c:69
+msgid "First Regular Expression: "
+msgstr "Första reguljära uttrycket: "
+
+#: capplets/mime-type/edit-window.c:349
+#: capplets/mime-type/new-mime-window.c:80
+msgid "Second Regular Expression: "
+msgstr "Andra reguljära uttrycket: "
+
+#. Actions box
+#: capplets/mime-type/edit-window.c:356
+msgid "Mime Type Actions"
+msgstr "Mime-typ-åtgärder"
+
+#: capplets/mime-type/edit-window.c:363
+#, c-format
+msgid "Example: emacs %f"
+msgstr "Exempel: emacs %f"
+
+#: capplets/mime-type/edit-window.c:368
+msgid "Open"
+msgstr "Öppna"
+
+#: capplets/mime-type/edit-window.c:374 capplets/mime-type/edit-window.c:390
+#: capplets/mime-type/edit-window.c:405
+msgid "Select a file..."
+msgstr "Välj fil..."
+
+#: capplets/mime-type/edit-window.c:383
+msgid "View"
+msgstr "Visa"
+
+#: capplets/mime-type/edit-window.c:399
+msgid "Edit"
+msgstr "Redigera"
+
+#. we initialize everything
+#: capplets/mime-type/edit-window.c:448
+#, c-format
+msgid "Set actions for %s"
+msgstr "Ställ in händelser för %s"
+
+#: capplets/mime-type/mime-data.c:384
+msgid "Mime Type"
+msgstr "Mime-typ"
+
+#: capplets/mime-type/mime-data.c:493
+msgid "You must enter a mime-type"
+msgstr "Du måste ange en mime-typ"
+
+#: capplets/mime-type/mime-data.c:498
+msgid ""
+"You must add either a regular-expression or\n"
+"a file-name extension"
+msgstr ""
+"Du måste ange antingen ett reguljärt uttryck\n"
+"eller en filändelse"
+
+#: capplets/mime-type/mime-data.c:502
+msgid ""
+"Please put your mime-type in the format:\n"
+"CATEGORY/TYPE\n"
+"\n"
+"For Example:\n"
+"image/png"
+msgstr ""
+"Ange mime-typen i formatet:\n"
+"KATEGORI/TYP\n"
+"\n"
+"Till exempel:\n"
+"image/png"
+
+#: capplets/mime-type/mime-data.c:507
+msgid "This mime-type already exists"
+msgstr "Denna mime-typ finns redan"
+
+#: capplets/mime-type/mime-data.c:588 capplets/mime-type/mime-info.c:427
+msgid ""
+"We are unable to create the directory\n"
+"~/.gnome/mime-info\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+"Kan inte skapa katalogen\n"
+"~/.gnome/mime-info\n"
+"\n"
+"Inställningarna kommer inte att kunna sparas."
+
+#: capplets/mime-type/mime-data.c:594 capplets/mime-type/mime-info.c:433
+msgid ""
+"We are unable to access the directory\n"
+"~/.gnome/mime-info\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+"Kan inte läsa katalogen\n"
+"~/.gnome/mime-info\n"
+"\n"
+"Inställningarna kommer inte att kunna sparas."
+
+#: capplets/mime-type/mime-data.c:605
+msgid ""
+"Cannot create the file\n"
+"~/.gnome/mime-info/user.mime\n"
+"\n"
+"We will not be able to save the state"
+msgstr ""
+"Kan inte skapa filen\n"
+"~/.gnome/mime-info/user.mime\n"
+"\n"
+"Inställningarna kommer inte att kunna sparas"
+
+#: capplets/mime-type/mime-info.c:444
+msgid ""
+"Cannot create the file\n"
+"~/.gnome/mime-info/user.keys.\n"
+"\n"
+"We will not be able to save the state"
+msgstr ""
+"Kan inte skapa filen\n"
+"~/.gnome/mime-info/user.keys.\n"
+"\n"
+"Inställningarna kommer inte att kunna sparas"
+
+#: capplets/mime-type/mime-type-capplet.c:83
+#: capplets/wm-properties/wm-properties-capplet.c:1127
+msgid "Delete"
+msgstr "Ta bort"
+
+#: capplets/mime-type/mime-type-capplet.c:97
+#: capplets/wm-properties/wm-properties-capplet.c:1122
+msgid "Edit..."
+msgstr "Redigera..."
+
+#: capplets/mime-type/mime-type.desktop.in.in.h:1
+msgid "Configure how files are associated and started"
+msgstr "Konfigurera hur filer är associerade och hur de startas"
+
+#: capplets/mime-type/mime-type.desktop.in.in.h:2
+msgid "Mime Types"
+msgstr "Mimetyper"
+
+#: capplets/mime-type/new-mime-window.c:25
+msgid "Add Mime Type"
+msgstr "Lägg till mime-typ"
+
+#: capplets/mime-type/new-mime-window.c:26
+msgid ""
+"Add a new Mime Type\n"
+"For example:  image/tiff; text/x-scheme"
+msgstr ""
+"Lägg till en ny Mime-typ\n"
+"Till exempel:  image/tiff; text/x-scheme"
+
+#: capplets/mime-type/new-mime-window.c:39
+msgid "Extensions"
+msgstr "Filändelser"
+
+#: capplets/mime-type/new-mime-window.c:43
+msgid ""
+"Type in the extensions for this mime-type.\n"
+"For example:  .html, .htm"
+msgstr ""
+"Skriv in filändelserna för den här mime-typen.\n"
+"Till exempel:  .html, .htm"
+
+#: capplets/mime-type/new-mime-window.c:55
+msgid "Regular Expressions"
+msgstr "Reguljära uttryck"
+
+#: capplets/mime-type/new-mime-window.c:59
+msgid ""
+"You can set up two regular expressions here to identify the Mime Type\n"
+"by.  These fields are optional."
+msgstr ""
+"Du kan använda två stycken reguljära uttryck för att identifiera\n"
+"Mime-typen. Dessa fält är valfria."
+
+#: capplets/theme-switcher/demo.c:54
+msgid "One"
+msgstr "Ett"
+
+#. just 8 short names that will serve as samples for titles in demo
+#: capplets/theme-switcher/demo.c:56
+msgid "Eenie"
+msgstr "Ett"
+
+#: capplets/theme-switcher/demo.c:56
+msgid "Meenie"
+msgstr "Två"
+
+#: capplets/theme-switcher/demo.c:57
+msgid "Mynie"
+msgstr "Tre"
+
+#: capplets/theme-switcher/demo.c:57
+msgid "Moe"
+msgstr "Fyra"
+
+#: capplets/theme-switcher/demo.c:58
+msgid "Catcha"
+msgstr "Alla"
+
+#: capplets/theme-switcher/demo.c:58
+msgid "Tiger"
+msgstr "Byxor"
+
+#: capplets/theme-switcher/demo.c:59
+msgid "By Its"
+msgstr "Äro"
+
+#: capplets/theme-switcher/demo.c:59
+msgid "Toe"
+msgstr "Dyra"
+
+#: capplets/theme-switcher/demo.c:118
+msgid "Selected themes from above will be tested by previewing here."
+msgstr "Valda teman kan testas med förhandsgranskning här."
+
+#. column one
+#: capplets/theme-switcher/demo.c:123
+msgid "Sample Button"
+msgstr "Testknapp"
+
+#: capplets/theme-switcher/demo.c:127
+msgid "Sample Check Button"
+msgstr "Testkryssruta"
+
+#: capplets/theme-switcher/demo.c:132
+msgid "Sample Text Entry Field"
+msgstr "Testtextfält"
+
+#: capplets/theme-switcher/demo.c:143
+msgid "Submenu"
+msgstr "Undermeny"
+
+#: capplets/theme-switcher/demo.c:150
+msgid "Item 1"
+msgstr "Val 1"
+
+#: capplets/theme-switcher/demo.c:153
+msgid "Another item"
+msgstr "Ett annat val"
+
+#: capplets/theme-switcher/demo.c:158
+msgid "Radio Button 1"
+msgstr "Radioknapp 1"
+
+#: capplets/theme-switcher/demo.c:164
+msgid "Radio Button 2"
+msgstr "Radioknapp 2"
+
+#: capplets/theme-switcher/gui.c:87
+#, c-format
+msgid ""
+"Error installing theme:\n"
+"'%s'\n"
+"%s"
+msgstr ""
+"Fel vid installation av tema:\n"
+"\"%s\"\n"
+"%s"
+
+#: capplets/theme-switcher/gui.c:118
+msgid "Select a theme to install"
+msgstr "Välj ett tema som ska installeras"
+
+#: capplets/theme-switcher/gui.c:195
+msgid "Available Themes"
+msgstr "Tillgängliga teman"
+
+#: capplets/theme-switcher/gui.c:223
+msgid ""
+"Auto\n"
+"Preview"
+msgstr ""
+"Auto\n"
+"Förhandsgranska"
+
+#: capplets/theme-switcher/gui.c:235
+msgid ""
+"Install new\n"
+"theme..."
+msgstr ""
+"Installera nytt\n"
+"tema..."
+
+#. Font selector.
+#.
+#: capplets/theme-switcher/gui.c:241
+msgid "User Font"
+msgstr "Användartypsnitt"
+
+#. FIXME - should really get this from X somehow
+#. for now we just assume default gtk font
+#: capplets/theme-switcher/gui.c:259
+msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
+msgstr "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
+
+#: capplets/theme-switcher/gui.c:278
+msgid "Use custom font."
+msgstr "Använd eget typsnitt."
+
+#: capplets/theme-switcher/gui.c:368
+#: capplets/wm-properties/wm-properties-capplet.c:669
+msgid ""
+"No help is available/installed for these settings. Please make sure you\n"
+"have the GNOME User's Guide installed on your system."
+msgstr ""
+"Ingen hjälp finns tillgänglig/installerad för dessa inställningar.\n"
+"Var vänlig och kontrollera att GNOME-användarmanualen finns installerad\n"
+"på ditt system."
+
+#: capplets/theme-switcher/install.c:31
+msgid "Home directory doesn't exist!\n"
+msgstr "Hemkatalogen finns inte!\n"
+
+#: capplets/theme-switcher/install.c:41
+msgid "Theme does not exist"
+msgstr "Temat finns inte"
+
+#: capplets/theme-switcher/install.c:73
+#, c-format
+msgid "Command '%s' failed"
+msgstr "Kommandot \"%s\" misslyckades"
+
+#: capplets/theme-switcher/install.c:78
+msgid "Unknown file format"
+msgstr "Okänt filformat"
+
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
+msgid "Gtk+ Theme Selector"
+msgstr "Temaväljare för Gtk+"
+
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
+msgid "Select which gtk+ theme to use"
+msgstr "Välj vilket gtk+-tema som ska användas"
+
+#: capplets/url-properties/url.desktop.in.in.h:1
+msgid "Configure which programs are used to display URLs"
+msgstr "Välj vilka program som används för att visa URL:er"
+
+#: capplets/url-properties/url.desktop.in.in.h:2
+msgid "URL Handlers"
+msgstr "URL-hanterare"
+
+#: capplets/url-properties/url-properties.c:49
+msgid "Error initializing the `url-properties' capplet."
+msgstr "Kunde inte köra \"url-properties\"-cappleten."
+
+#: capplets/url-properties/url-properties.c:72
+msgid "Protocol"
+msgstr "Protokoll"
+
+#: capplets/url-properties/url-properties.c:72
+msgid "Command"
+msgstr "Kommando"
+
+#: capplets/url-properties/url-properties.c:89
+msgid "handler:"
+msgstr "hanterare:"
+
+#. set some commonly used handlers
+#: capplets/url-properties/url-properties.c:99
+msgid "Netscape"
+msgstr "Netscape"
+
+#: capplets/url-properties/url-properties.c:104
+msgid "Netscape (new window)"
+msgstr "Netscape (nytt fönster)"
+
+#: capplets/url-properties/url-properties.c:110
+msgid "Help browser"
+msgstr "Hjälpläsare"
+
+#: capplets/url-properties/url-properties.c:115
+msgid "Help browser (new window)"
+msgstr "Hjälpläsare (nytt fönster)"
+
+#: capplets/url-properties/url-properties.c:127
+msgid "Set"
+msgstr "Ställ in"
+
+#: capplets/ui-properties/behavior.desktop.in.in.h:1
+msgid "Behavior"
+msgstr "Beteende"
+
+#: capplets/ui-properties/behavior.desktop.in.in.h:2
+msgid "Sets the default behavior of GNOME applications"
+msgstr "Konfigurera hur GNOME-program beter sig"
+
+#: capplets/ui-properties/behavior-properties.glade.h:1
+msgid "At the center of the screen"
+msgstr "vid skärmens mittpunkt"
+
+#: capplets/ui-properties/behavior-properties.glade.h:2
+msgid "At the mouse pointer"
+msgstr "vid muspekaren"
+
+#: capplets/ui-properties/behavior-properties.glade.h:3
+msgid "Bottom"
+msgstr "nederst"
+
+#: capplets/ui-properties/behavior-properties.glade.h:4
+msgid "Default  (Spread out - big)"
+msgstr "Standard (Sprid ut - stort)"
+
+#: capplets/ui-properties/behavior-properties.glade.h:5
+msgid "Dialog Buttons"
+msgstr "Dialogfönsterknappar"
+
+#: capplets/ui-properties/behavior-properties.glade.h:6
+msgid "Dialog buttons have icons"
+msgstr "Dialogfönsterknappar har ikoner"
+
+#: capplets/ui-properties/behavior-properties.glade.h:7
+msgid "Dialogs"
+msgstr "Dialogfönster"
+
+#: capplets/ui-properties/behavior-properties.glade.h:8
+msgid "Dialogs are treated"
+msgstr "Dialogfönster behandlas"
+
+#: capplets/ui-properties/behavior-properties.glade.h:9
+msgid "Dialogs open"
+msgstr "Dialogfönster visas"
+
+#: capplets/ui-properties/behavior-properties.glade.h:10
+msgid "Interface"
+msgstr "Gränssnitt"
+
+#: capplets/ui-properties/behavior-properties.glade.h:11
+msgid "Left"
+msgstr "till vänster"
+
+#: capplets/ui-properties/behavior-properties.glade.h:12
+msgid "Left aligned"
+msgstr "Vänsterjusterat"
+
+#: capplets/ui-properties/behavior-properties.glade.h:13
+msgid "Like any other window"
+msgstr "som alla andra fönster"
+
+#: capplets/ui-properties/behavior-properties.glade.h:14
+msgid "Menu bars are detachable"
+msgstr "Menyrader kan tas loss"
+
+#: capplets/ui-properties/behavior-properties.glade.h:15
+msgid "Menu bars have a border"
+msgstr "Menyrader har en ram"
+
+#: capplets/ui-properties/behavior-properties.glade.h:16
+msgid "Menu items have icons"
+msgstr "Menyval har ikoner"
+
+#: capplets/ui-properties/behavior-properties.glade.h:17
+msgid "Menus"
+msgstr "Menyer"
+
+#: capplets/ui-properties/behavior-properties.glade.h:18
+msgid "Menus can be torn off"
+msgstr "Menyer kan slitas bort"
+
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
+#: capplets/ui-properties/behavior-properties.glade.h:19
+msgid "Miscellaneous"
+msgstr "Diverse"
+
+#: capplets/ui-properties/behavior-properties.glade.h:20
+msgid "Multiple Documents"
+msgstr "Multipla dokument"
+
+#: capplets/ui-properties/behavior-properties.glade.h:21
+msgid "Notebook tabs"
+msgstr "Flikar"
+
+#: capplets/ui-properties/behavior-properties.glade.h:22
+msgid "Place dialogs over application window when possible"
+msgstr "Placera dialogfönster över programfönstret när det är möjligt"
+
+#: capplets/ui-properties/behavior-properties.glade.h:23
+msgid "Progress bar is on the left"
+msgstr "Förloppsmätaren är till vänster"
+
+#: capplets/ui-properties/behavior-properties.glade.h:24
+msgid "Progress bar is on the right"
+msgstr "Förloppsmätaren är till höger"
+
+#: capplets/ui-properties/behavior-properties.glade.h:25
+msgid "Right"
+msgstr "till höger"
+
+#: capplets/ui-properties/behavior-properties.glade.h:26
+msgid "Right aligned"
+msgstr "Högerjusterat"
+
+#: capplets/ui-properties/behavior-properties.glade.h:27
+msgid "Seperate windows"
+msgstr "Separata fönster"
+
+#: capplets/ui-properties/behavior-properties.glade.h:28
+msgid "Settings will not take effect until applications restart"
+msgstr "Ändringarna kommer inte att gälla förrän program startas om"
+
+#: capplets/ui-properties/behavior-properties.glade.h:29
+msgid "Specially by the window manager"
+msgstr "speciellt av fönsterhanteraren"
+
+#: capplets/ui-properties/behavior-properties.glade.h:30
+msgid "Spread out"
+msgstr "Sprid ut"
+
+#: capplets/ui-properties/behavior-properties.glade.h:31
+msgid "Spread out (big)"
+msgstr "Sprid ut (stort)"
+
+#: capplets/ui-properties/behavior-properties.glade.h:32
+msgid "Status Bar"
+msgstr "Statusrad"
+
+#: capplets/ui-properties/behavior-properties.glade.h:33
+msgid "Status bar is interactive when possible"
+msgstr "Statusraden är inaktiv när det är möjligt"
+
+#: capplets/ui-properties/behavior-properties.glade.h:34
+msgid "The same window"
+msgstr "Samma fönster"
+
+#: capplets/ui-properties/behavior-properties.glade.h:35
+msgid "Tool Bars"
+msgstr "Verktygsrader"
+
+#: capplets/ui-properties/behavior-properties.glade.h:36
+msgid "Tool bar buttons are icons only"
+msgstr "Knappar på verktygsrader är endast ikoner"
+
+#: capplets/ui-properties/behavior-properties.glade.h:37
+msgid "Tool bar buttons are text below icons"
+msgstr "Knappar på verktygrader är text nedanför ikoner"
+
+#: capplets/ui-properties/behavior-properties.glade.h:38
+msgid "Tool bar buttons pop up on mouse over"
+msgstr "Knappar på verktygsrader höjs då muspekaren är över"
+
+#: capplets/ui-properties/behavior-properties.glade.h:39
+msgid "Tool bars are detachable"
+msgstr "Verktygsrader är löstagbara"
+
+#: capplets/ui-properties/behavior-properties.glade.h:40
+msgid "Tool bars have a border"
+msgstr "Verktygsrader har en ram"
+
+#: capplets/ui-properties/behavior-properties.glade.h:41
+msgid "Tool bars have line separators"
+msgstr "Verktygsrad har avdelningslinjer"
+
+#: capplets/ui-properties/behavior-properties.glade.h:42
+msgid "Top"
+msgstr "överst"
+
+#: capplets/ui-properties/behavior-properties.glade.h:43
+msgid "Use status bar instead of dialog when possible"
+msgstr "Använd statusraden i stället för dialogfönster när det är möjligt"
+
+#: capplets/ui-properties/behavior-properties.glade.h:44
+msgid "When opening Multiple documents, use"
+msgstr "Använd när multipla dokument öppnas:"
+
+#: capplets/ui-properties/behavior-properties.glade.h:45
+msgid "When using Notebook tabs, place the tabs on the"
+msgstr "När flikar används ska flikarna placeras"
+
+#: capplets/ui-properties/behavior-properties.glade.h:46
+msgid "Wherever the Window Manager places them"
+msgstr "var som helst där fönsterhanteraren placerar dem"
+
+#: capplets/wm-properties/wm-properties-capplet.c:170
+#, c-format
+msgid ""
+"Starting %s\n"
+"(%d seconds left before operation times out)"
+msgstr ""
+"Startar %s\n"
+"(%d sekunder kvar innan kommandot överskrider tidsgränsen)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:331
+#, c-format
+msgid "%s (Current)"
+msgstr "%s (Aktuell)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:334
+#, c-format
+msgid "Run Configuration Tool for %s"
+msgstr "Kör konfigurationsverktyg för %s"
+
+#: capplets/wm-properties/wm-properties-capplet.c:345
+msgid " (Not found)"
+msgstr " (Hittades inte)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:384
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\tAnother window manager is already running and could not be killed\n"
+msgstr ""
+"wm-properties.capplet: Kan inte starta fönsterhanteraren.\n"
+"\tEn annan fönsterhanterare körs redan och kunde inte avslutas\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:388
+#, c-format
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\t'%s' didn't start\n"
+msgstr ""
+"wm-properties-capplet: Kan inte starta fönsterhanterare.\n"
+"\t\"%s\" startade inte\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:437
+msgid "Previous window manager did not die\n"
+msgstr "Föregående fönsterhanterare avslutades inte\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:470
+#, c-format
+msgid ""
+"Could not start '%s'.\n"
+"Falling back to previous window manager '%s'\n"
+msgstr ""
+"Kunde inte starta \"%s\".\n"
+"Använder den föregående fönsterhanteraren \"%s\"\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:501
+msgid ""
+"Could not start fallback window manager.\n"
+"Please run a window manager manually. You can\n"
+"do this by selecting \"Run Program\" in the\n"
+"foot menu\n"
+msgstr ""
+"Kunde inte inte starta den föregående fönsterhanteraren.\n"
+"Kör en fönsterhanterare manuellt. Du kan göra det genom\n"
+"att välja \"Kör program\" i fotmenyn\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:526
+#: capplets/wm-properties/wm-properties-capplet.c:781
+#: capplets/wm-properties/wm-properties-capplet.c:890
+#: capplets/wm-properties/wm-properties-capplet.c:897
+#: capplets/wm-properties/wm-properties-capplet.c:1043
+msgid "OK"
+msgstr "OK"
+
+#: capplets/wm-properties/wm-properties-capplet.c:544
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. You can do so immediately by selecting the \"Save session\n"
+"now\" below, or you can save your session later.  This can be\n"
+"done either selecting \"Save Current Session\" under \"Settings\"\n"
+"in the main menu, or by turning on \"Save Current Setup\" when\n"
+"you log out.\n"
+msgstr ""
+"Aktuell fönsterhanterare har ändrats. För att ändringen\n"
+"ska vara permanent måste du spara aktuell session.\n"
+"Du kan göra det nu direkt genom att välja \"Spara session nu\" eller \n"
+"så kan du spara din session senare. Detta kan göras genom att välja\n"
+"\"Spara aktuell session\" under \"Inställningar\" i huvudmenyn,\n"
+"eller genom att slå på \"Spara nuvarande inställningar\" när du\n"
+"loggar ut.\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:551
+msgid "Save Session Later"
+msgstr "Spara session senare"
+
+#: capplets/wm-properties/wm-properties-capplet.c:551
+msgid "Save Session Now"
+msgstr "Spara session nu"
+
+#: capplets/wm-properties/wm-properties-capplet.c:554
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. This can be done by either selecting \"Save Current Session\"\n"
+"under \"Settings\" in the main menu, or by turning on\n"
+"\"Save Current Setup\" when you log out.\n"
+msgstr ""
+"Aktuell fönsterhanterare har ändrats. För att ändringen\n"
+"ska vara permanent måste du spara aktuell session\n"
+"Du kan göra det genom att antingen välja \"Spara aktuell session\"\n"
+"under \"Inställningar\" i huvudmenyn, eller genom att slå på\n"
+"\"Spara nuvarande inställningar\" när du loggar ut.\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:780
+msgid "Add New Window Manager"
+msgstr "Lägg till ny fönsterhanterare"
+
+#: capplets/wm-properties/wm-properties-capplet.c:781
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: capplets/wm-properties/wm-properties-capplet.c:819
+msgid "Configuration Command:"
+msgstr "Konfigurationskommando:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:838
+msgid "Window manager is session managed"
+msgstr "Fönsterhanteraren använder sessionshantering"
+
+#: capplets/wm-properties/wm-properties-capplet.c:888
+msgid "Name cannot be empty"
+msgstr "Du måste skriva in ett namn"
+
+#: capplets/wm-properties/wm-properties-capplet.c:895
+msgid "Command cannot be empty"
+msgstr "Du måste skriva in ett kommando"
+
+#: capplets/wm-properties/wm-properties-capplet.c:944
+#: capplets/wm-properties/wm-properties-capplet.c:986
+msgid "Edit Window Manager"
+msgstr "Redigera fönsterhanterare"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1042
+msgid "You cannot delete the current Window Manager"
+msgstr "Du kan inte ta bort den aktuella fönsterhanteraren"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1089
+msgid "Window Manager Selector"
+msgstr "Fönsterhanterarväljare"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1191
+msgid ""
+"an initialization error occurred while starting 'wm-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"ett initieringsfel uppstod vid start av \"wm-properties-capplet\".\n"
+"avbryter...\n"
+
+#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.in.h:1
+msgid "Enlightenment"
+msgstr "Enlightenment"
+
+#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.in.h:1
+msgid "Ice WM"
+msgstr "Ice WM"
+
+#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.in.h:1
+msgid "Scwm"
+msgstr "Scvm"
+
+#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.in.h:1
+msgid "Window Maker"
+msgstr "Window Maker"
+
+#: capplets/wm-properties/wm-desktops/twm.desktop.in.in.h:1
+msgid "twm"
+msgstr "twm"
+
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:1
+msgid "Control Center Menu"
+msgstr "Kontrollpanelsmeny"
+
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:2
+msgid "Sawfish window manager"
+msgstr "Fönsterhanteraren Sawfish"
+
+#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:2
+msgid "Configure window appearance"
+msgstr "Konfigurera fönsterutseende"
+
+#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:1
+msgid "Configure key shortcuts"
+msgstr "Konfigurera snabbtangenter"
+
+#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:2
+msgid "Shortcuts"
+msgstr "Snabbtangenter"
+
+#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:1
+msgid "Configure window focusing"
+msgstr "Konfigurera fönsterfokusering"
+
+#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:2
+msgid "Focus behavior"
+msgstr "Fokusbeteende"
+
+#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
+msgid "Configure window properties"
+msgstr "Konfigurera fönsteregenskaper"
+
+#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:2
+msgid "Matched Windows"
+msgstr "Matchade fönster"
+
+#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:1
+msgid "Configure window minimization and maximization"
+msgstr "Konfigurera fönsterminimering och -maximering"
+
+#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:2
+msgid "Minimizing and Maximizing"
+msgstr "Minimering och maximering"
+
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
+msgid "Configure window manager configuration properties"
+msgstr "Konfigurera konfigurationsegenskaper för fönsterhanteraren"
+
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:2
+msgid "Meta"
+msgstr "Meta"
+
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
+msgid "Configure miscellaneous window features"
+msgstr "Konfigurera diverse fönsterfunktioner"
+
+#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:1
+msgid "Configure window move/resize"
+msgstr "Konfigurera fönsterförflyttning/-storleksändring"
+
+#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:2
+msgid "Moving and Resizing"
+msgstr "Förflyttning och storleksändring"
+
+#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:1
+msgid "Configure window placement"
+msgstr "Konfigurera fönsterplacering"
+
+#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:2
+msgid "Placement"
+msgstr "Placering"
+
+#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
+msgid "Enable window manager sound events"
+msgstr "Använd ljudhändelser i fönsterhanteraren"
+
+#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:1
+msgid "Configure workspaces"
+msgstr "Konfigurera arbetsytor"
+
+#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:2
+msgid "Workspaces"
+msgstr "Arbetsytor"

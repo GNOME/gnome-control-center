@@ -334,6 +334,7 @@ msgstr "Accepta aquest editor nombres de línies desde la línia d'ordres?"
 #: capplets/default-applications/interface.c:334
 #: capplets/default-applications/interface.c:465
 #: capplets/default-applications/interface.c:576
+#: capplets/wm-properties/wm-properties-capplet.c:806
 msgid "Command:"
 msgstr "Ordre:"
 
@@ -665,6 +666,7 @@ msgid "Configure the settings of the screensaver"
 msgstr "Configurar el protector de pantalla."
 
 #: capplets/screensaver/screensaver-prefs-dialog.c:185
+#: capplets/wm-properties/wm-properties-capplet.c:793
 msgid "Name:"
 msgstr "Nom:"
 
@@ -672,6 +674,7 @@ msgstr "Nom:"
 msgid "Settings"
 msgstr "Paràmetres"
 
+#: capplets/file-types/file-types-capplet.c:1882
 #: capplets/screensaver/screensaver-prefs-dialog.c:204
 msgid "Description"
 msgstr "Descripció"
@@ -770,7 +773,9 @@ msgstr "Passa al mode de suspensió després de"
 msgid "One screensaver all the time"
 msgstr "Sempre el mateix protector de patalla"
 
+#: capplets/file-types/file-types-icon-entry.c:264
 #: capplets/screensaver/screensaver-properties.glade.h:11
+#: capplets/theme-switcher/gui.c:230 capplets/theme-switcher/gui.c:302
 msgid "Preview"
 msgstr "Visualització prèvia"
 
@@ -981,6 +986,7 @@ msgstr "Cel·les de dotze cares"
 
 #: capplets/screensaver/screensavers/ant.xml.h:25
 #: capplets/screensaver/screensavers/flag.xml.h:17
+#: capplets/theme-switcher/demo.c:54
 msgid "Two"
 msgstr "Dos"
 
@@ -3737,7 +3743,9 @@ msgstr "Protector de pantalla nou"
 msgid "Configure GNOME's use of sound"
 msgstr "Configurar els sons de GNOME."
 
+#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
 #: capplets/sound/sound.desktop.in.in.h:2
+#, fuzzy
 msgid "Sound"
 msgstr "Propietats del so"
 
@@ -3779,6 +3787,8 @@ msgstr ""
 "No hi ha ajuda disponible/instal·lada. Si us plau, assegureu-vos que\n"
 "teniu la guia de l'usuari del GNOME instal·lada al sistema."
 
+#: capplets/theme-switcher/gui.c:368
+#: capplets/wm-properties/wm-properties-capplet.c:671
 #: control-center/capplet-dir-view.c:464
 msgid "Close"
 msgstr "Tanca"
@@ -3791,6 +3801,7 @@ msgstr "Centre de Control del GNOME:"
 msgid "The GNOME configuration tool"
 msgstr "La ferramenta de configuració de GNOME"
 
+#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
 #: control-center/gnomecc.glade.h:1
 msgid "Appearance"
 msgstr "Aparença"
@@ -3851,1255 +3862,1193 @@ msgstr "CAPPLET"
 msgid "GNOME Control Center options"
 msgstr "Opcions del centre de Control del GNOME"
 
-#~ msgid "Use"
-#~ msgstr "Usa"
-
-#~ msgid "(None)"
-#~ msgstr "(Cap)"
-
-#~ msgid "Wallpaper Selection"
-#~ msgstr "Selecció del paper de fons"
-
-#~ msgid "Can't find an hbox, using a normal file selection"
-#~ msgstr "No es pot trobar una hbox, s'usarà una selecció de fitxers normal"
-
-#~ msgid "Rollback the capplet given"
-#~ msgstr "'Rollback' la c-miniaplicació indicada"
-
-#~ msgid "Operate on global backends"
-#~ msgstr "Opera en segons plans globals"
-
-#~ msgid "Options for the rollback GUI"
-#~ msgstr "Opcions per treure GUI"
-
-#~ msgid "1 year ago"
-#~ msgstr "Fa 1 any"
-
-#~ msgid "6 months ago"
-#~ msgstr "Fa 6 mesos"
-
-#~ msgid "1 month ago"
-#~ msgstr "Fa 1 mes"
-
-#~ msgid "1 week ago"
-#~ msgstr "Fa 1 setmana"
-
-#~ msgid "3 days ago"
-#~ msgstr "Fa 3 dies"
-
-#~ msgid "1 day ago"
-#~ msgstr "Fa 1 dia"
-
-#~ msgid "1 hour ago"
-#~ msgstr "Fa 1 hora"
-
-#~ msgid "30 minutes ago"
-#~ msgstr "fa 30 minuts"
-
-#~ msgid "10 minutes ago"
-#~ msgstr "fa 10 minuts"
-
-#~ msgid "5 minutes ago"
-#~ msgstr "fa 5 minuts"
-
-#~ msgid "1 minute ago"
-#~ msgstr "fa 1 minut"
-
-#~ msgid "Current time"
-#~ msgstr "Hora actual."
-
-#~ msgid "Rollback"
-#~ msgstr "Rollback"
-
-#~ msgid "Play"
-#~ msgstr "Reprodueix"
-
-#~ msgid "window2"
-#~ msgstr "window2"
-
-#~ msgid "Use GNOME for setting background"
-#~ msgstr "Utilitza el GNOME per definir el fons"
-
-#~ msgid "Effect"
-#~ msgstr "Efecte"
-
-#~ msgid "Primary color"
-#~ msgstr "Color primari"
-
-#~ msgid "Right or bottom color"
-#~ msgstr "Color de la part inferior o dreta"
-
-#~ msgid "Apply changes automatically"
-#~ msgstr "Aplica els canvis automàticament"
-
-#~ msgid "Wallpaper"
-#~ msgstr "Paper de fons"
-
-#~ msgid "Display Style"
-#~ msgstr "Estil de visualització"
-
-#~ msgid "Stretched (change aspect ratio)"
-#~ msgstr "Ampliat (Canvia el ràtio de l'aspecte)"
-
-#~ msgid "Browse..."
-#~ msgstr "Navega..."
-
-#~ msgid "Adjust wallpaper's transparency"
-#~ msgstr "Ajusta la transparència del paper de fons"
-
-#~ msgid "More Transparent"
-#~ msgstr "Més transparent"
-
-#~ msgid "More Solid"
-#~ msgstr "Més sòlid"
-
-#~ msgid "window1"
-#~ msgstr "window1"
-
-#~ msgid "Delay Until Repeat"
-#~ msgstr "Retarda fins la repetició"
-
-#~ msgid "....a"
-#~ msgstr "....a"
-
-#~ msgid "...a"
-#~ msgstr "...a"
-
-#~ msgid "..a"
-#~ msgstr "..a"
-
-#~ msgid ".a"
-#~ msgstr ".a"
-
-#~ msgid "a....a"
-#~ msgstr "a....a"
-
-#~ msgid "a...a"
-#~ msgstr "a...a"
-
-#~ msgid "a..a"
-#~ msgstr "a..a"
-
-#~ msgid "a.a"
-#~ msgstr "a.a"
-
-#~ msgid "Keyboard click"
-#~ msgstr "Fer clic al teclat"
-
-#~ msgid "Type here to test setting"
-#~ msgstr "Escriviu aquí per verificar el paràmetre"
-
-#~ msgid "Enable"
-#~ msgstr "Habilita"
-
-#~ msgid "Event"
-#~ msgstr "Esdeveniments"
-
-#~ msgid "File to Play"
-#~ msgstr "Fitxer a reproduir"
-
-#~ msgid "HTML"
-#~ msgstr "HTML"
-
-#~ msgid "Icon List"
-#~ msgstr "Llista de la icona"
-
-#~ msgid "Tree"
-#~ msgstr "Arbre"
-
-#~ msgid "Got error %d.\n"
-#~ msgstr "Ha succeït un error %d.\n"
-
-#~ msgid "Password for %s"
-#~ msgstr "Contrasenya per %s"
-
-#~ msgid "Consistency checking is not turned on."
-#~ msgstr "S'està comprovant que la consistencia no estigui desactivada."
-
-#~ msgid "Block is fine."
-#~ msgstr "El bloc és correcte."
-
-#~ msgid "Block freed twice."
-#~ msgstr "Bloqueig alliberat altre cop."
-
-#~ msgid "Memory before the block was clobbered."
-#~ msgstr "Memoritza abans que el bloc hagi estat colpejat."
-
-#~ msgid "Memory after the block was clobbered."
-#~ msgstr "Memoritza després que el bloc hagi estat colpejat."
-
-#~ msgid "userhelper must be setuid root\n"
-#~ msgstr "L'ajuda de l'usuari s'ha de configurar a l'arrel\n"
-
-#~ msgid "Usage: root-helper fd\n"
-#~ msgstr "Sintaxi: root-helper fd\n"
-
-#~ msgid "PAM returned = %d\n"
-#~ msgstr "PAM returned = %d\n"
-
-#~ msgid "about to authenticate \"%s\"\n"
-#~ msgstr "Quan a l'autentificació \"%s\"\n"
-
-#~ msgid "about to exec \"%s\"\n"
-#~ msgstr "Quan a l'execució \"%s\"\n"
-
-#~ msgid "Pipe error.\n"
-#~ msgstr "Error de tub.\n"
-
-#~ msgid "Cannot fork().\n"
-#~ msgstr "No es pot bifurcar().\n"
-
-#~ msgid "dup2() error.\n"
-#~ msgstr "Error dup2().\n"
-
-#~ msgid "execl() error, errno=%d\n"
-#~ msgstr "Error execl(), errno=%d\n"
-
-#~ msgid "Information updated."
-#~ msgstr "Informació d'actualització."
-
-#~ msgid ""
-#~ "The password you typed is invalid.\n"
-#~ "Please try again."
-#~ msgstr ""
-#~ "La contrasenya que entrada no és vàlida.\n"
-#~ "Si us plau, torneu a provar-ho."
-
-#~ msgid ""
-#~ "One or more of the changed fields is invalid.\n"
-#~ "This is probably due to either colons or commas in one of the fields.\n"
-#~ "Please remove those and try again."
-#~ msgstr ""
-#~ "Un o més dels fitxers canviats no és vàlid.\n"
-#~ "Això és degut probablement o a les cometes o comes d'un dels camps.\n"
-#~ "Si us plau, suprimiu-los i torneu a provar-ho."
-
-#~ msgid "Password resetting error."
-#~ msgstr "Ha succeït un error en reiniciar la contrasenya."
-
-#~ msgid ""
-#~ "Some systems files are locked.\n"
-#~ "Please try again in a few moments."
-#~ msgstr ""
-#~ "Alguns fitxers del sistema estan bloquejats.\n"
-#~ "Si us plau, torneu a intentar-ho d'aquí una estona."
-
-#~ msgid "Unknown user."
-#~ msgstr "Usuari desconegut."
-
-#~ msgid "Insufficient rights."
-#~ msgstr "Drets insuficients."
-
-#~ msgid "Invalid call to sub process."
-#~ msgstr "Trucada al sub procés no vàlida."
-
-#~ msgid ""
-#~ "Your current shell is not listed in /etc/shells.\n"
-#~ "You are not allowed to change your shell.\n"
-#~ "Consult your system administrator."
-#~ msgstr ""
-#~ "El vostre actual intèrpret d'ordres no es troba llistat a /etc/shells.\n"
-#~ "No teniu permís per canviar el vostre intèrpret d'ordres.\n"
-#~ "Consulteu el vostre administrador del sistema."
-
-#~ msgid "Out of memory."
-#~ msgstr "Sense memòria."
-
-#~ msgid "The exec() call failed."
-#~ msgstr "Ha fallat la crida a exec()."
-
-#~ msgid "Failed to find selected program."
-#~ msgstr "Ha fallat la cerca del programa seleccionat."
-
-#~ msgid "Unknown error."
-#~ msgstr "Error desconegut."
-
-#~ msgid "Unknown exit code."
-#~ msgstr "Codi de sortida desconegut."
-
-#~ msgid "Input"
-#~ msgstr "Entrada"
-
-#~ msgid "Need %d responses.\n"
-#~ msgstr "Es necesita %d respostes.\n"
-
-#~ msgid ""
-#~ "In order to make changes to your system, you\n"
-#~ "must enter the administrator (root) password."
-#~ msgstr ""
-#~ "Pel que fa a fer canvis al vostre sistema, haureu\n"
-#~ "d'entrar la contrasenya (arrel) de l'administrador."
-
-#~ msgid "Error"
-#~ msgstr "Ha succeït un error"
-
-#~ msgid "You want %d response(s) from %d entry fields!?!?!\n"
-#~ msgstr "Voleu %d resposta(es) des de %d camps d'entrada!?!?!\n"
-
-#~ msgid "Run Unprivileged"
-#~ msgstr "Executa Unprivileged"
-
-#~ msgid "Capplet"
-#~ msgstr "Capplet"
-
-#~ msgid "Could not connect to X Display"
-#~ msgstr "No s'ha pogut connectar al visualitzador X"
-
-#~ msgid "Could not duplicate file descriptor"
-#~ msgstr "No s'ha pogut duplicar el fitxer descriptor"
-
-#~ msgid ""
-#~ "No help is available/installed for these settings. Please make sure you\n"
-#~ "have the GNOME User's Guide installed on your system."
-#~ msgstr ""
-#~ "No hi ha cap ajuda disponible o instal·lada per a aquests paràmetres.\n"
-#~ "Si us plau, assegureu-vos que teniu la Guia de l'usuari del GNOME\n"
-#~ "instal·lada al sistema."
-
-#~ msgid "Mime Type: "
-#~ msgstr "Tipus de MIME: "
-
-#~ msgid "First Regular Expression: "
-#~ msgstr "Primera expressió normal: "
-
-#~ msgid "Second Regular Expression: "
-#~ msgstr "Segona expressió normal: "
-
-#~ msgid "Mime Type Actions"
-#~ msgstr "Accions del tipus MIME"
-
-#~ msgid "Example: emacs %f"
-#~ msgstr "Exemple: emacs %f"
-
-#~ msgid "Open"
-#~ msgstr "Obre"
-
-#~ msgid "View"
-#~ msgstr "Visualitza"
-
-#~ msgid "Edit"
-#~ msgstr "Edita"
-
-#~ msgid "Set actions for %s"
-#~ msgstr "Defineix les accions per a %s"
-
-#~ msgid "Mime Type"
-#~ msgstr "Tipus de MIME"
-
-#~ msgid "You must enter a mime-type"
-#~ msgstr "Heu d'introduir un tipus de MIME"
-
-#~ msgid ""
-#~ "You must add either a regular-expression or\n"
-#~ "a file-name extension"
-#~ msgstr ""
-#~ "Heu d'afegir una expressió normal o bé\n"
-#~ "una extensió de nom de fitxer"
-
-#~ msgid ""
-#~ "Please put your mime-type in the format:\n"
-#~ "CATEGORY/TYPE\n"
-#~ "\n"
-#~ "For Example:\n"
-#~ "image/png"
-#~ msgstr ""
-#~ "Si us plau, indiqueu el vostre tipus de MIME amb el format:\n"
-#~ "CATEGORIA/TIPUS\n"
-#~ "\n"
-#~ "per exemple:\n"
-#~ "image/png"
-
-#~ msgid "This mime-type already exists"
-#~ msgstr "Aquest tipus de MIME ja existeix"
-
-#~ msgid ""
-#~ "We are unable to create the directory\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "No podem crear el directori\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "No podem desar l'estat."
-
-#~ msgid ""
-#~ "We are unable to access the directory\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "No podem accedir al directori\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "No podrem desar l'estat."
-
-#~ msgid ""
-#~ "Cannot create the file\n"
-#~ "~/.gnome/mime-info/user.mime\n"
-#~ "\n"
-#~ "We will not be able to save the state"
-#~ msgstr ""
-#~ "No podem crear el fitxer\n"
-#~ "~/.gnome/mime-info/user.mime\n"
-#~ "\n"
-#~ "No podrem desar l'estat"
-
-#~ msgid ""
-#~ "We are unable to create the directory\n"
-#~ "~/.gnome/mime-info.\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "No podem crear el directori\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "No podrem desar l'estat."
-
-#~ msgid ""
-#~ "We are unable to access the directory\n"
-#~ "~/.gnome/mime-info.\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "No podem accedir al directori\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "No podrem desar l'estat."
-
-#~ msgid ""
-#~ "Cannot create the file\n"
-#~ "~/.gnome/mime-info/user.keys.\n"
-#~ "\n"
-#~ "We will not be able to save the state"
-#~ msgstr ""
-#~ "No podem crear el fitxer\n"
-#~ "~/.gnome/mime-info/user.keys.\n"
-#~ "\n"
-#~ "No podrem desar l'estat"
-
-#~ msgid "Add..."
-#~ msgstr "Afegeix..."
-
-#~ msgid "Edit..."
-#~ msgstr "Edita..."
-
-#~ msgid "Add Mime Type"
-#~ msgstr "Afegeix un tipus de MIME"
-
-#~ msgid ""
-#~ "Add a new Mime Type\n"
-#~ "For example:  image/tiff; text/x-scheme"
-#~ msgstr ""
-#~ "Afegeix un nou tipus de MIME\n"
-#~ "Per exemple:  image/tiff; text/x-scheme"
-
-#~ msgid "Mime Type:"
-#~ msgstr "Tipus de MIME:"
-
-#~ msgid "Extensions"
-#~ msgstr "Extensions"
-
-#~ msgid ""
-#~ "Type in the extensions for this mime-type.\n"
-#~ "For example:  .html, .htm"
-#~ msgstr ""
-#~ "Indiqueu les extensions per aquest tipus de MIME.\n"
-#~ "Per exemple:  .html, .htm"
-
-#~ msgid "Extension:"
-#~ msgstr "Extensió:"
-
-#~ msgid "Regular Expressions"
-#~ msgstr "Expressions normals"
-
-#~ msgid ""
-#~ "You can set up two regular expressions here to identify the Mime Type\n"
-#~ "by.  These fields are optional."
-#~ msgstr ""
-#~ "Aquí podeu configurar dues expressions normals per identificar el tipus\n"
-#~ "de MIME. Aquests camps són opcionals."
-
-#~ msgid "Keyboard Bell"
-#~ msgstr "So del teclat"
-
-#~ msgid "Mouse buttons"
-#~ msgstr "Botons del ratolí"
-
-#~ msgid "Acceleration"
-#~ msgstr "Acceleració"
-
-#~ msgid "Threshold"
-#~ msgstr "Llindar"
-
-#~ msgid "Selection"
-#~ msgstr "Selecció"
-
-#~ msgid "Choose randomly from those checked off"
-#~ msgstr "Selecciona aleatòriament entre els desmarcats"
-
-#~ msgid "Settings..."
-#~ msgstr "Paràmetres..."
-
-#~ msgid "Demo Next"
-#~ msgstr "Demo següent"
-
-#~ msgid "Demo Previous"
-#~ msgstr "Demo anterior"
-
-#~ msgid "Screensaver Selection"
-#~ msgstr "Selecció del protector de pantalla"
-
-#~ msgid "Security"
-#~ msgstr "Seguretat"
-
-#~ msgid "Only after the screensaver has run for"
-#~ msgstr ""
-#~ "Només després que el protector de pantalla s'hagi estat executant durant"
-
-#~ msgid "General Properties"
-#~ msgstr "Propietats generals"
-
-#~ msgid "Priority"
-#~ msgstr "Prioritat"
-
-#~ msgid "Be verbose"
-#~ msgstr "Sigues detallat"
-
-#~ msgid "Effects"
-#~ msgstr "Efectes"
-
-#~ msgid "Install colormap"
-#~ msgstr "Instal·la el mapa de colors"
-
-#~ msgid "Fade to black when activating screensaver"
-#~ msgstr "Esvaeix fins a la desaparició en activar el protector de pantalla"
-
-#~ msgid "Fade desktop back when deactivating screensaver"
-#~ msgstr ""
-#~ "Torna a fer aparèixer l'escriptori gradualment en desactivar el protector "
-#~ "de pantalla"
-
-#~ msgid "Fade Duration"
-#~ msgstr "Durada de l'esvaïment"
-
-#~ msgid "Fade Smoothness"
-#~ msgstr "Suavitat de l'esvaïment"
-
-#~ msgid "Smooth"
-#~ msgstr "Suau"
-
-#~ msgid "Jerky"
-#~ msgstr "A salts"
-
-#~ msgid "Advanced Properties"
-#~ msgstr "Propietats avançades"
-
-#~ msgid "Menu items have icons"
-#~ msgstr "Usar icones als ítems dels menús"
-
-#~ msgid "Dialog buttons have icons"
-#~ msgstr "Usar icones als botons dels diàlegs"
-
-#~ msgid "Place dialogs over application window when possible"
-#~ msgstr "Posar diàlegs sobre la finestra d'aplicació quan es puga"
-
-#~ msgid "At the mouse pointer"
-#~ msgstr "Sota el punter del ratolí"
-
-#~ msgid "Right"
-#~ msgstr "Dreta"
-
-#~ msgid "Top"
-#~ msgstr "Dalt"
-
-#~ msgid "Bottom"
-#~ msgstr "Baix"
-
-#~ msgid "Session"
-#~ msgstr "Sessió"
-
-#~ msgid "Session Chooser"
-#~ msgstr "Seleccionador de sessió"
-
-#~ msgid "Start Session"
-#~ msgstr "Inicia la sessió"
-
-#~ msgid "Cancel Login"
-#~ msgstr "Cancel·lar l'entrada"
-
-#~ msgid "Order: "
-#~ msgstr "Ordre: "
-
-#~ msgid "This button sets the start order of the selected programs.\n"
-#~ msgstr "Aquest botó defineix l'ordre inicial dels programes seleccionats.\n"
-
-#~ msgid ""
-#~ "This button sets the restart style of the selected programs:\n"
-#~ "Normal programs are unaffected by logouts but can die;\n"
-#~ "Respawn programs are never allowed to die;\n"
-#~ "Trash programs are discarded on logout and can die;\n"
-#~ "Settings programs are always started on every login."
-#~ msgstr ""
-#~ "Aquest botó defineix l'estil d'inici dels programes seleccionats:\n"
-#~ "Els programes normals no queden afectats per les sortides però poden "
-#~ "morir;\n"
-#~ "Els programes \"respawn\" mai no estan autoritzats a morir;\n"
-#~ "Els programes de paperera queden descartats a la sortida i poden morir;\n"
-#~ "Els programes de paràmetres sempre s'inicien a cada entrada."
-
-#~ msgid ""
-#~ "This button produces a key to the program states below:\n"
-#~ "Inactive programs are waiting to start or have finished;\n"
-#~ "Starting programs are being given time to get running;\n"
-#~ "Running programs are normal members of the session;\n"
-#~ "Saving programs are saving their session details;\n"
-#~ "Programs which make no contact have Unknown states.\n"
-#~ msgstr ""
-#~ "Aquest botó produeix una clau als estats del programa, a sota:\n"
-#~ "Els programes inactius estan esperant iniciar-se o han acabat;\n"
-#~ "Als programes que s'inicien se'ls dóna temps per executar-se;\n"
-#~ "Els programes que s'executen són membres normals de la sessió;\n"
-#~ "Els programes que es desen desen els detalls de la seva sessió;\n"
-#~ "Els programes que no fan cap contacte tenen estats desconeguts.\n"
-
-#~ msgid "This column gives the command used to start a program."
-#~ msgstr "Aquesta columna indica l'ordre utilitzada per iniciar un programa."
-
-#~ msgid "Order"
-#~ msgstr "Ordre"
-
-#~ msgid "Style"
-#~ msgstr "Estil"
-
-#~ msgid "State"
-#~ msgstr "Estat"
-
-#~ msgid "Program"
-#~ msgstr "Programa:"
-
-#~ msgid "Inactive"
-#~ msgstr "Inactiu"
-
-#~ msgid "Waiting to start or already finished."
-#~ msgstr "S'està esperant per iniciar o ja finalitzat"
-
-#~ msgid "Started but has not yet reported state."
-#~ msgstr "S'ha iniciat però encara no ha informat de l'estat."
-
-#~ msgid "Running"
-#~ msgstr "S'està executant"
-
-#~ msgid "A normal member of the session."
-#~ msgstr "Un membre normal de la sessió"
-
-#~ msgid "Saving"
-#~ msgstr "S'està desant"
-
-#~ msgid "Saving session details."
-#~ msgstr "S'estan desant els detalls de la sessió"
-
-#~ msgid "Unknown"
-#~ msgstr "Desconegut"
-
-#~ msgid "State not reported within timeout."
-#~ msgstr "No s'ha informat de l'estat dins del temps disponible."
-
-#~ msgid "Unaffected by logouts but can die."
-#~ msgstr "No afectat per les sortides però pot morir."
-
-#~ msgid "Respawn"
-#~ msgstr "Respawn"
-
-#~ msgid "Never allowed to die."
-#~ msgstr "Mai autoritzat a morir."
-
-#~ msgid "Trash"
-#~ msgstr "Paperera"
-
-#~ msgid "Discarded on logout and can die."
-#~ msgstr "Descartat en la sortida i pot morir."
-
-#~ msgid "Always started on every login."
-#~ msgstr "Sempre s'ha iniciat en cada entrada."
-
-#~ msgid "Remove Program"
-#~ msgstr "Elimina el programa"
-
-#~ msgid "Options"
-#~ msgstr "Opcions"
-
-#~ msgid "Prompt on logout"
-#~ msgstr "Avisa en la sortida"
-
-#~ msgid "Automatically save changes to session"
-#~ msgstr "Desa automàticament els canvis a la sessió"
-
-#~ msgid "Non-session-managed Startup Programs"
-#~ msgstr "Non-session-managed Startup Programs"
-
-#~ msgid "Command"
-#~ msgstr "Comanda"
-
-#~ msgid "Browse Currently Running Programs..."
-#~ msgstr "Navega pels programes en execució..."
-
-#~ msgid "Only display warnings."
-#~ msgstr "Només mostrar els avisos."
-
-#~ msgid "Startup Command"
-#~ msgstr "Ordre d'inici"
-
-#~ msgid ""
-#~ "Programs with smaller values are started before programs with higher "
-#~ "values. The default value should be OK"
-#~ msgstr ""
-#~ "Els programes amb valors inferiors s'inicien abans dels programes amb "
-#~ "valors superiors.El valor per defecte ha de ser D'acord"
-
-#~ msgid "The startup command cannot be empty"
-#~ msgstr "L'ordre d'inici no pot estar buida"
-
-#~ msgid "Add Startup Program"
-#~ msgstr "Afegeix un programa d'inici"
-
-#~ msgid "Edit Startup Program"
-#~ msgstr "Edita un programa d'inici"
-
-#~ msgid "One"
-#~ msgstr "Un"
-
-#~ msgid "Eenie"
-#~ msgstr "Eenie"
-
-#~ msgid "Meenie"
-#~ msgstr "Meenie"
-
-#~ msgid "Mynie"
-#~ msgstr "Mynie"
-
-#~ msgid "Catcha"
-#~ msgstr "Catcha"
-
-#~ msgid "Tiger"
-#~ msgstr "Tiger"
-
-#~ msgid "By Its"
-#~ msgstr "By Its"
-
-#~ msgid "Toe"
-#~ msgstr "Toe"
-
-#~ msgid "Selected themes from above will be tested by previewing here."
-#~ msgstr ""
-#~ "Els temes seleccionats més amunt es comprovaran previsualitzant-los aquí."
-
-#~ msgid "Sample Button"
-#~ msgstr "Botó de mostra"
-
-#~ msgid "Sample Check Button"
-#~ msgstr "Botó de comprovació de mostra"
-
-#~ msgid "Sample Text Entry Field"
-#~ msgstr "Camp d'entrada del text de mostra"
-
-#~ msgid "Submenu"
-#~ msgstr "Submenú"
-
-#~ msgid "Item 1"
-#~ msgstr "Element 1"
-
-#~ msgid "Another item"
-#~ msgstr "Un altre element"
-
-#~ msgid "Radio Button 1"
-#~ msgstr "Botó de ràdio 1"
-
-#~ msgid "Radio Button 2"
-#~ msgstr "Botó de ràdio 2"
-
-#~ msgid ""
-#~ "Error installing theme:\n"
-#~ "'%s'\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Error en instal·lar el tema:\n"
-#~ "\"%s\"\n"
-#~ "%s"
-
-#~ msgid "Available Themes"
-#~ msgstr "Temes disponibles"
-
-#~ msgid ""
-#~ "Auto\n"
-#~ "Preview"
-#~ msgstr ""
-#~ "Vista prèvia\n"
-#~ "automàtica"
-
-#~ msgid ""
-#~ "Install new\n"
-#~ "theme..."
-#~ msgstr ""
-#~ "Instal·lar un\n"
-#~ "nou tema..."
-
-#~ msgid "User Font"
-#~ msgstr "Font d'usuari"
-
-#~ msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
-#~ msgstr "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-"
-
-#~ msgid "Use custom font."
-#~ msgstr "Usar una font personalitzada."
-
-#~ msgid "Home directory doesn't exist!\n"
-#~ msgstr "El directori inicial no existeix!\n"
-
-#~ msgid "Theme does not exist"
-#~ msgstr "El tema no existeix"
-
-#~ msgid "Command '%s' failed"
-#~ msgstr "L'ordre '%s' ha fallat"
-
-#~ msgid "Unknown file format"
-#~ msgstr "Format de fitxer desconegut"
-
-#~ msgid "Error initializing the `url-properties' capplet."
-#~ msgstr "Error en inicialitzar el capplet `url-properties'."
-
-#~ msgid "Protocol"
-#~ msgstr "Protocol"
-
-#~ msgid "Netscape"
-#~ msgstr "Netscape"
-
-#~ msgid "Netscape (new window)"
-#~ msgstr "Netscape (nova finestra)"
-
-#~ msgid "Help browser (new window)"
-#~ msgstr "Visor d'ajuda (nova finestra)"
-
-#~ msgid "Set"
-#~ msgstr "Establir"
-
-#~ msgid ""
-#~ "Starting %s\n"
-#~ "(%d seconds left before operation times out)"
-#~ msgstr ""
-#~ "S'està inciant %s\n"
-#~ "(queden %d segons abans que l'operació excedeixi el temps)"
-
-#~ msgid "%s (Current)"
-#~ msgstr "%s (Actual)"
-
-#~ msgid "Run Configuration Tool for %s"
-#~ msgstr "Executa l'eina de configuració per a %s"
-
-#~ msgid " (Not found)"
-#~ msgstr " (No s'ha trobat)"
-
-#~ msgid ""
-#~ "wm-properties-capplet: Unable to initialize window manager.\n"
-#~ "\tAnother window manager is already running and could not be killed\n"
-#~ msgstr ""
-#~ "wm-properties-capplet: No s'ha pogut inicialitzar el gestor de "
-#~ "finestres.\n"
-#~ "\tJa s'està executant un altre gestor de finestres que no s'ha pogut "
-#~ "liquidar \n"
-
-#~ msgid ""
-#~ "wm-properties-capplet: Unable to initialize window manager.\n"
-#~ "\t'%s' didn't start\n"
-#~ msgstr ""
-#~ "wm-properties-capplet: No s'ha pogut inicialitzar el gestor de "
-#~ "finestres.\n"
-#~ "\t'%s' no s'ha iniciat\n"
-
-#~ msgid "Previous window manager did not die\n"
-#~ msgstr "El gestor de finestres anterior no va morir\n"
-
-#~ msgid ""
-#~ "Could not start '%s'.\n"
-#~ "Falling back to previous window manager '%s'\n"
-#~ msgstr ""
-#~ "No s'ha pogut iniciar '%s'.\n"
-#~ "S'està tornant al gestor de finestres anterior '%s'\n"
-
-#~ msgid ""
-#~ "Could not start fallback window manager.\n"
-#~ "Please run a window manager manually. You can\n"
-#~ "do this by selecting \"Run Program\" in the\n"
-#~ "foot menu\n"
-#~ msgstr ""
-#~ "No s'ha pogut iniciar el gestor de finestres anterior.\n"
-#~ "Si us plau, executeu un gestor de finestres manualment. Podeu \n"
-#~ "fer-ho seleccionant \"Executa el programa\" al\n"
-#~ "menú al peu\n"
-
-#~ msgid "OK"
-#~ msgstr "D'acord"
-
-#~ msgid ""
-#~ "Your current window manager has been changed. In order for\n"
-#~ "this change to be saved, you will need to save your current\n"
-#~ "session. You can do so immediately by selecting the \"Save session\n"
-#~ "now\" below, or you can save your session later.  This can be\n"
-#~ "done either selecting \"Save Current Session\" under \"Settings\"\n"
-#~ "in the main menu, or by turning on \"Save Current Setup\" when\n"
-#~ "you log out.\n"
-#~ msgstr ""
-#~ "El vostre gestor de finestres actual ha canviat. Per tal de\n"
-#~ "desar aquest canvi, us caldrà desar la sessió\n"
-#~ "actual. Ho podeu fer ara mateix seleccionant \"Desa la sessió\n"
-#~ "ara\", més avall, o ho podeu fer més endavant,\n"
-#~ "seleccionant \"Desa la sessió actual\" sota \"Paràmetres\"\n"
-#~ "al menú principal, o bé activant \"Desa la configuració actual\" en\n"
-#~ "sortir.\n"
-
-#~ msgid "Save Session Later"
-#~ msgstr "Desa la sessió més tard"
-
-#~ msgid "Save Session Now"
-#~ msgstr "Desa la sessió ara"
-
-#~ msgid ""
-#~ "Your current window manager has been changed. In order for\n"
-#~ "this change to be saved, you will need to save your current\n"
-#~ "session. This can be done by either selecting \"Save Current Session\"\n"
-#~ "under \"Settings\" in the main menu, or by turning on\n"
-#~ "\"Save Current Setup\" when you log out.\n"
-#~ msgstr ""
-#~ "El vostre gestor de finestres actual ha canviat. Per tal de\n"
-#~ "desar aquest canvi, us caldrà desar la sessió\n"
-#~ "actual, seleccionant \"Desa la sessió actual\"\n"
-#~ "sota \"Paràmetres\", al menú principal, o bé activant\n"
-#~ "\"Desa la configuració actual\" en sortir.\n"
-
-#~ msgid "Add New Window Manager"
-#~ msgstr "Afegeix un nou gestor de finestres"
-
-#~ msgid "Cancel"
-#~ msgstr "Cancel·lar"
-
-#~ msgid "Configuration Command:"
-#~ msgstr "Ordre de configuració:"
-
-#~ msgid "Window manager is session managed"
-#~ msgstr "El gestor de finestres està gestionat per la sessió"
-
-#~ msgid "Name cannot be empty"
-#~ msgstr "El nom no pot estar buit"
-
-#~ msgid "Command cannot be empty"
-#~ msgstr "L'ordre no pot estar buida"
-
-#~ msgid "Edit Window Manager"
-#~ msgstr "Edita el gestor de finestres"
-
-#~ msgid "You cannot delete the current Window Manager"
-#~ msgstr "No podeu suprimir el gestor de finestres actual"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'wm-properties-capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "S'ha produït un error d'inicialització en iniciar 'wm-properties-"
-#~ "capplet'.\n"
-#~ "S'està avortant...\n"
-
-#~ msgid "Color 1"
-#~ msgstr "Color 1"
-
-#~ msgid "Color 2"
-#~ msgstr "Color 2"
-
-#~ msgid "Scaled"
-#~ msgstr "Escalat"
-
-#~ msgid "Disable background selection"
-#~ msgstr "Inhabilitar la selecció del paper de fons"
-
-#~ msgid "Auto-repeat"
-#~ msgstr "Auto-repetició"
-
-#~ msgid "Click on keypress"
-#~ msgstr "Fer clic en teclejar"
-
-#~ msgid "Menu Options"
-#~ msgstr "Opcions del menú"
-
-#~ msgid "Can detach and move menus"
-#~ msgstr "Es poden separar i moure els menús"
-
-#~ msgid "Statusbar Options"
-#~ msgstr "Opcions de la barra d'estat"
-
-#~ msgid "Toolbar Options"
-#~ msgstr "Opcions de la barra d'eines"
-
-#~ msgid "Can detach and move toolbars"
-#~ msgstr "Barres d'eines separables i mòbils"
-
-#~ msgid "Dialog Layout"
-#~ msgstr "Format del diàleg"
-
-#~ msgid "Dialog Behavior"
-#~ msgstr "Comportament del diàleg"
-
-#~ msgid "GNOME MDI Options"
-#~ msgstr "Opcions del GNOME MDI"
-
-#~ msgid "id of the capplet -- assigned by the control-center"
-#~ msgstr "id del capplet -- assignat pel centre de control"
-
-#~ msgid "ID"
-#~ msgstr "ID"
-
-#~ msgid "Multi-capplet id."
-#~ msgstr "id del multi-capplet."
-
-#~ msgid "CAPID"
-#~ msgstr "CAPID"
-
-#~ msgid "X ID of the socket it's plugged into"
-#~ msgstr "ID X del connector on és connectat"
-
-#~ msgid "XID"
-#~ msgstr "XID"
-
-#~ msgid "IOR of the control-center"
-#~ msgstr "IOR del centre de control"
-
-#~ msgid "IOR"
-#~ msgstr "IOR"
-
-#~ msgid "Ignore default action.  Used for custom init-session cases"
-#~ msgstr ""
-#~ "Descartar l'acció per defecte.  Usat a casos personalitzats "
-#~ "d'inicialització-sessió"
-
-#~ msgid "Get an XML description of the capplet's state"
-#~ msgstr "Recupera una descripció XML de l'estat del capplet"
-
-#~ msgid "DO_GET"
-#~ msgstr "DO_GET"
-
-#~ msgid "Read an XML description of the capplet's state and apply it"
-#~ msgstr "Llegeix una descripció XML de l'estat del capplet i aplica-la"
-
-#~ msgid "DO_SET"
-#~ msgstr "DO_SET"
-
-#~ msgid "Help with the GNOME control-center."
-#~ msgstr "Ajuda sobre el Centre de Control de GNOME."
-
-#~ msgid "About the GNOME control-center."
-#~ msgstr "Quant al control-center del GNOME."
-
-#~ msgid "Up"
-#~ msgstr "Amunt"
-
-#~ msgid "Parent Group"
-#~ msgstr "Grup pare"
-
-#~ msgid "Control Center Preferences"
-#~ msgstr "Preferències del Control Center"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'background-properties-"
-#~ "capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "S'ha produït un error d'inicialització en iniciar 'background-properties-"
-#~ "capplet'.\n"
-#~ "S'està avortant...\n"
-
-#~ msgid "Set parameters from saved state and exit"
-#~ msgstr "Posar els paràmetres que eren guardats i eixir"
-
-#~ msgid "IMAGE"
-#~ msgstr "IMATGE"
-
-#~ msgid "Sets the wallpaper to the value specified"
-#~ msgstr "Estableix la imatge com a paper de fons"
-
-#~ msgid "COLOR"
-#~ msgstr "COLOR"
-
-#~ msgid "Specifies the background color"
-#~ msgstr "Especifica el color del fons"
-
-#~ msgid "Specifies end background color for gradient"
-#~ msgstr "Especifica el color on acaba el gradient del fons"
-
-#~ msgid "Gradient orientation: vertical or horizontal"
-#~ msgstr "Orientació del gradient: vertical o horitzontal"
-
-#~ msgid "MODE"
-#~ msgstr "MODE"
-
-#~ msgid "Display wallpaper: tiled, centered, scaled or ratio"
-#~ msgstr "Mostrar imatge: mosaic, centrada, escalada o ratio"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'bell-properties-"
-#~ "capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "S'ha produït un error d'inicialització en iniciar 'bell-properties-"
-#~ "capplet'.\n"
-#~ "S'està avortant...\n"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'keyboard-properties-"
-#~ "capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "S'ha produït un error d'inicialització en iniciar 'keyboard-properties-"
-#~ "capplet'.\n"
-#~ "S'està avortant...\n"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'mouse-properties-"
-#~ "capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "S'ha produït un error d'inicialització en iniciar 'mouse-properties-"
-#~ "capplet'.\n"
-#~ "S'està avortant...\n"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'sound-properties-"
-#~ "capplet'."
-#~ msgstr ""
-#~ "S'ha produït un error d'inicialització en iniciar 'sound-properties-"
-#~ "capplet'."
-
-#~ msgid "Select sound file"
-#~ msgstr "Seleccioneu un fitxer de so"
-
-#~ msgid ""
-#~ "This copy of the GNOME control center was not compiled with sound support"
-#~ msgstr ""
-#~ "Aquesta còpia del Centre de Control de GNOME ha estat compilada sense "
-#~ "suport de so."
-
-#~ msgid "The sound file for this event does not exist."
-#~ msgstr "El fitxer de so per aquest event no existeix."
-
-#~ msgid ""
-#~ "The sound file for this event does not exist.\n"
-#~ "You may want to install the gnome-audio package\n"
-#~ "for a set of default sounds."
-#~ msgstr ""
-#~ "El fitxer de so per aquest event no existeix.\n"
-#~ "Potser vulgueu instal·lar el paquet gnome-audio\n"
-#~ "per obtenir un conjunt per defecte de sons."
-
-#~ msgid "Put buttons on edges"
-#~ msgstr "Posar els botons a les vores"
-
-#~ msgid "Left-justify buttons"
-#~ msgstr "Justificar botons a l'esquerra"
-
-#~ msgid "Right-justify buttons"
-#~ msgstr "Justificar botons a la dreta"
-
-#~ msgid "Toplevel"
-#~ msgstr "Primer pla"
-
-#~ msgid "Random Settings"
-#~ msgstr "Configuració aleatòria"
-
-#~ msgid "%s Settings..."
-#~ msgstr "%s Paràmetres..."
-
-#~ msgid "Author:"
-#~ msgstr "Autor:"
-
-#~ msgid "Author: UNKNOWN"
-#~ msgstr "Autor: DESCONEGUT"
-
-#~ msgid "RANDOM SCREENSAVER"
-#~ msgstr "PROTECTOR DE PANTALLA ALEATORI"
-
-#~ msgid ""
-#~ "Pressing this button will popup a dialogbox that will help you setup the "
-#~ "current screensaver."
-#~ msgstr ""
-#~ "Si premeu aquest botó s'obrirà un diàleg que vos ajudarà a configurar el "
-#~ "protector actual."
-
-#~ msgid "Start After "
-#~ msgstr "Començar després de "
-
-#~ msgid " Normal"
-#~ msgstr " Normal"
-
-#~ msgid "Screen Saver Demo"
-#~ msgstr "Demostració del protector"
-
-#~ msgid "Try"
-#~ msgstr "Provar"
-
-#~ msgid "Revert"
-#~ msgstr "Revertir"
-
-#~ msgid "Sorry, no help is available for these settings."
-#~ msgstr "No hi ha ajuda disponible per a aquests paràmetres."
-
-#~ msgid "capplet-command to be run."
-#~ msgstr "Comanda capplet a executar"
-
-#~ msgid "Warning:"
-#~ msgstr "Avís:"
-
-#~ msgid "Discard all changes"
-#~ msgstr "Descartar tots els canvis"
-
-#~ msgid ""
-#~ "The following modules have had changes made, but not committed.  If you "
-#~ "would like to edit them, please double click on the appropriate entry."
-#~ msgstr ""
-#~ "Els següents mòduls tenen canvis, però no s'han portat a terme.  Si voleu "
-#~ "editar-los, per favor feu doble clic a l'entrada apropiada."
-
-#~ msgid "Keyboard bell"
-#~ msgstr "So del teclat"
-
-#~ msgid "Keyboard repeat rate"
-#~ msgstr "Velocitat de repetició del teclat"
-
-#~ msgid "Show splash screen on login"
-#~ msgstr "Mostra una pantalla de presentació en entrar"
-
-#~ msgid "Help with '%s' settings"
-#~ msgstr "Ajuda amb els paràmetres '%s'"
-
-#~ msgid "Help with the current configuration page."
-#~ msgstr "Ajuda sobre la pàgina de configuració actual."
-
-#~ msgid "Operating System:"
-#~ msgstr "Sistema operatiu:"
-
-#~ msgid "Distribution Version:"
-#~ msgstr "Versió de la distribució:"
-
-#~ msgid "Processor Type:"
-#~ msgstr "Tipus de processador:"
-
-#~ msgid "User Name:"
-#~ msgstr "Nom d'usuari:"
-
-#~ msgid "Host Name:"
-#~ msgstr "Nom de l'ordinador central:"
-
-#~ msgid "GNOME sound support"
-#~ msgstr "Suport de so de GNOME"
-
-#~ msgid "Category"
-#~ msgstr "Categoria"
-
-#~ msgid "Control Center Menu"
-#~ msgstr "Menú del Centre de Control"
+#: capplets/desktop-links/Advanced.directory.in.in.h:1
+msgid "Advanced"
+msgstr ""
+
+#: capplets/desktop-links/Advanced.directory.in.in.h:2
+#, fuzzy
+msgid "Advanced Settings"
+msgstr "Configuració aleatòria"
+
+#: capplets/desktop-links/panel.desktop.in.in.h:1
+#, fuzzy
+msgid "Global panel properties"
+msgstr "Propietats generals"
+
+#: capplets/desktop-links/panel.desktop.in.in.h:2
+#, fuzzy
+msgid "Panel"
+msgstr "Cancel·lar"
+
+#: capplets/desktop-links/session.desktop.in.in.h:1
+#, fuzzy
+msgid "Configure which non-session aware programs are started up"
+msgstr ""
+"Indicar quins programes aliens a sessions executar a l'inici de sessió."
+
+#: capplets/desktop-links/session.desktop.in.in.h:2
+msgid "Startup Programs"
+msgstr "Programes d'inici"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:387
+msgid "Edit Applications List"
+msgstr ""
+
+#. Add label
+#: capplets/file-types/file-types-capplet-dialogs.c:409
+#, c-format
+msgid "Select applications to appear in menu for MIME type \"%s\""
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:433
+msgid "Add Application..."
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:440
+msgid "Edit Application..."
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:446
+msgid "Delete Application"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:480
+msgid "Edit Components List"
+msgstr ""
+
+#. Add label
+#: capplets/file-types/file-types-capplet-dialogs.c:500
+#, c-format
+msgid "Select views to appear in menu for MIME type \"%s\""
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:720
+msgid ""
+"The MIME type entered contained upper case characters. Upper case characters "
+"were changed to lower case for you."
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:723
+#, fuzzy
+msgid "Add New MIME Type"
+msgstr "Afegeix un tipus de MIME"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:769
+#, fuzzy
+msgid "Add MIME Type"
+msgstr "Afegeix un tipus de MIME"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:773
+msgid "New MIME type (e.g. image/x-thumper):"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:780
+msgid "Description (e.g. Thumper image):"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:947
+#, fuzzy
+msgid "File Extensions "
+msgstr "Extensions"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:967
+#: capplets/mime-type/mime-type-capplet.c:93
+#: capplets/wm-properties/wm-properties-capplet.c:1117
+msgid "Add..."
+msgstr "Afegeix..."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:972
+#, fuzzy
+msgid "    Remove    "
+msgstr "Eliminar"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1041
+#, fuzzy
+msgid "Add New Extension"
+msgstr "Extensió"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1045
+#, fuzzy
+msgid ""
+"Type in the extensions for this mime-type (without dot).\n"
+"You can enter several extensions seperated by a space,\n"
+"for example: html htm"
+msgstr ""
+"Indiqueu les extensions per aquest tipus de MIME.\n"
+"Per exemple:  .html, .htm"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1052
+#: capplets/mime-type/new-mime-window.c:50
+msgid "Extension:"
+msgstr "Extensió:"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1194
+#, fuzzy
+msgid "You must enter a name."
+msgstr "Heu d'introduir un tipus de MIME"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1197
+#, fuzzy
+msgid "You must enter a command."
+msgstr "Heu d'introduir un tipus de MIME"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1207
+#, c-format
+msgid ""
+"\"%s\" does not exist or is not executable.\n"
+"Check your spelling and make sure you have\n"
+"the right permissions to execute this file."
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1213
+#, c-format
+msgid ""
+"The command \"%s\" cannot be found.\n"
+"You must use a command that can work from any command line."
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1225
+msgid "Bad Application Name"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1226
+#, fuzzy
+msgid "Bad Application Command"
+msgstr "Ordre de configuració:"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1258
+msgid "Add Application"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1259
+msgid "Edit Application"
+msgstr ""
+
+#. Application Name label and entry
+#: capplets/file-types/file-types-capplet-dialogs.c:1271
+msgid "Application Name:"
+msgstr ""
+
+#. Application Command label and entry
+#: capplets/file-types/file-types-capplet-dialogs.c:1282
+#, fuzzy
+msgid "Application Command:"
+msgstr "Ordre de configuració:"
+
+#. Open Behavior frame
+#: capplets/file-types/file-types-capplet-dialogs.c:1293
+#, fuzzy
+msgid "Open Behavior"
+msgstr "Aplicacions"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1299
+msgid "Can open multiple files"
+msgstr ""
+
+#. FIXME bugzilla.eazel.com 6066: This needs to be three options now: "yes", "no", and "use uris for non-file locations"
+#: capplets/file-types/file-types-capplet-dialogs.c:1307
+msgid "Can open from URI"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet.c:735
+#: capplets/file-types/file-types-capplet.c:1883
+#, fuzzy
+msgid "MIME Type"
+msgstr "Tipus de MIME"
+
+#: capplets/file-types/file-types-capplet.c:742
+#, fuzzy
+msgid "Change Icon"
+msgstr "Cancel·lar l'entrada"
+
+#: capplets/file-types/file-types-capplet.c:749
+#, fuzzy
+msgid "Change File Extensions"
+msgstr "Extensions"
+
+#: capplets/file-types/file-types-capplet.c:757
+#, fuzzy
+msgid "Default Action:"
+msgstr "Configuració per defecte de GTK"
+
+#: capplets/file-types/file-types-capplet.c:769
+msgid "Use Viewer"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet.c:775
+msgid "Open With Application"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet.c:786
+#, fuzzy
+msgid "Edit List"
+msgstr "Edita"
+
+#: capplets/file-types/file-types-capplet.c:811
+#, fuzzy
+msgid "Add New MIME Type..."
+msgstr "Afegeix un tipus de MIME"
+
+#: capplets/file-types/file-types-capplet.c:817
+msgid "Delete This MIME Type"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet.c:828
+msgid "Revert to System Defaults"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet.c:1075
+#: capplets/file-types/file-types-capplet.c:1219
+#, fuzzy
+msgid "None"
+msgstr "cap"
+
+#: capplets/file-types/file-types-capplet.c:1324
+msgid ""
+"Reverting to system settings will lose any changes\n"
+"you have ever made to File Types and Programs.\n"
+"Revert anyway?"
+msgstr ""
+
+#. Add default action to fourth column
+#: capplets/file-types/file-types-capplet.c:1393
+#: capplets/file-types/file-types-capplet.c:1593
+#: capplets/file-types/file-types-capplet.c:1719
+#, fuzzy
+msgid "none"
+msgstr "cap"
+
+#: capplets/file-types/file-types-capplet.c:1434
+#: capplets/file-types/file-types-capplet.c:1620
+#: capplets/file-types/file-types-capplet.c:1763
+#, c-format
+msgid "View as %s"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet.c:1884
+#: capplets/mime-type/mime-data.c:385
+msgid "Extension"
+msgstr "Extensió"
+
+#: capplets/file-types/file-types-capplet.c:1885
+#, fuzzy
+msgid "Default Action"
+msgstr "Configuració per defecte de GTK"
+
+#: capplets/file-types/file-types.desktop.in.in.h:1
+msgid "File Types and Programs"
+msgstr ""
+
+#: capplets/file-types/file-types.desktop.in.in.h:2
+msgid "Specify which programs are used to open or view each file type"
+msgstr ""
+
+#: capplets/file-types/file-types-icon-entry.c:258
+msgid "Can't find an hbox, using a normal file selection"
+msgstr "No es troba una hbox, s'usarà una selecció de fitxers normal"
+
+#: capplets/file-types/file-types-icon-entry.c:381
+#, fuzzy
+msgid "Select an icon"
+msgstr "Seleccioneu una icona..."
+
+#. icon box
+#: capplets/mime-type/edit-window.c:266
+msgid "Select an icon..."
+msgstr "Seleccioneu una icona..."
+
+#: capplets/mime-type/edit-window.c:276
+#: capplets/mime-type/new-mime-window.c:31
+msgid "Mime Type: "
+msgstr "Tipus de MIME: "
+
+#: capplets/mime-type/edit-window.c:306
+msgid "Add"
+msgstr "Afegeix"
+
+#: capplets/mime-type/edit-window.c:314
+#: capplets/url-properties/url-properties.c:135
+msgid "Remove"
+msgstr "Eliminar"
+
+#. gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
+#: capplets/mime-type/edit-window.c:341
+#: capplets/mime-type/new-mime-window.c:69
+msgid "First Regular Expression: "
+msgstr "Primera expressió normal: "
+
+#: capplets/mime-type/edit-window.c:349
+#: capplets/mime-type/new-mime-window.c:80
+msgid "Second Regular Expression: "
+msgstr "Segona expressió normal: "
+
+#. Actions box
+#: capplets/mime-type/edit-window.c:356
+msgid "Mime Type Actions"
+msgstr "Accions del tipus MIME"
+
+#: capplets/mime-type/edit-window.c:363
+#, c-format
+msgid "Example: emacs %f"
+msgstr "Exemple: emacs %f"
+
+#: capplets/mime-type/edit-window.c:368
+msgid "Open"
+msgstr "Obre"
+
+#: capplets/mime-type/edit-window.c:374 capplets/mime-type/edit-window.c:390
+#: capplets/mime-type/edit-window.c:405
+msgid "Select a file..."
+msgstr "Seleccioneu un fitxer..."
+
+#: capplets/mime-type/edit-window.c:383
+msgid "View"
+msgstr "Visualitza"
+
+#: capplets/mime-type/edit-window.c:399
+msgid "Edit"
+msgstr "Edita"
+
+#. we initialize everything
+#: capplets/mime-type/edit-window.c:448
+#, c-format
+msgid "Set actions for %s"
+msgstr "Defineix les accions per a %s"
+
+#: capplets/mime-type/mime-data.c:384
+msgid "Mime Type"
+msgstr "Tipus de MIME"
+
+#: capplets/mime-type/mime-data.c:493
+msgid "You must enter a mime-type"
+msgstr "Heu d'introduir un tipus de MIME"
+
+#: capplets/mime-type/mime-data.c:498
+msgid ""
+"You must add either a regular-expression or\n"
+"a file-name extension"
+msgstr ""
+"Heu d'afegir una expressió normal o bé\n"
+"una extensió de nom de fitxer"
+
+#: capplets/mime-type/mime-data.c:502
+msgid ""
+"Please put your mime-type in the format:\n"
+"CATEGORY/TYPE\n"
+"\n"
+"For Example:\n"
+"image/png"
+msgstr ""
+"Si us plau, indiqueu el vostre tipus de MIME amb el format:\n"
+"CATEGORIA/TIPUS\n"
+"\n"
+"per exemple:\n"
+"image/png"
+
+#: capplets/mime-type/mime-data.c:507
+msgid "This mime-type already exists"
+msgstr "Aquest tipus de MIME ja existeix"
+
+#: capplets/mime-type/mime-data.c:588 capplets/mime-type/mime-info.c:427
+msgid ""
+"We are unable to create the directory\n"
+"~/.gnome/mime-info\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+"No podem crear el directori\n"
+"~/.gnome/mime-info\n"
+"\n"
+"No podem desar l'estat."
+
+#: capplets/mime-type/mime-data.c:594 capplets/mime-type/mime-info.c:433
+msgid ""
+"We are unable to access the directory\n"
+"~/.gnome/mime-info\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+"No podem accedir al directori\n"
+"~/.gnome/mime-info\n"
+"\n"
+"No podrem desar l'estat."
+
+#: capplets/mime-type/mime-data.c:605
+msgid ""
+"Cannot create the file\n"
+"~/.gnome/mime-info/user.mime\n"
+"\n"
+"We will not be able to save the state"
+msgstr ""
+"No podem crear el fitxer\n"
+"~/.gnome/mime-info/user.mime\n"
+"\n"
+"No podrem desar l'estat"
+
+#: capplets/mime-type/mime-info.c:444
+msgid ""
+"Cannot create the file\n"
+"~/.gnome/mime-info/user.keys.\n"
+"\n"
+"We will not be able to save the state"
+msgstr ""
+"No podem crear el fitxer\n"
+"~/.gnome/mime-info/user.keys.\n"
+"\n"
+"No podrem desar l'estat"
+
+#: capplets/mime-type/mime-type-capplet.c:83
+#: capplets/wm-properties/wm-properties-capplet.c:1127
+msgid "Delete"
+msgstr "Suprimeix"
+
+#: capplets/mime-type/mime-type-capplet.c:97
+#: capplets/wm-properties/wm-properties-capplet.c:1122
+msgid "Edit..."
+msgstr "Edita..."
+
+#: capplets/mime-type/mime-type.desktop.in.in.h:1
+msgid "Configure how files are associated and started"
+msgstr "Configurar com s'associen i obrin els fitxers"
+
+#: capplets/mime-type/mime-type.desktop.in.in.h:2
+msgid "Mime Types"
+msgstr "Tipus MIME"
+
+#: capplets/mime-type/new-mime-window.c:25
+msgid "Add Mime Type"
+msgstr "Afegeix un tipus de MIME"
+
+#: capplets/mime-type/new-mime-window.c:26
+msgid ""
+"Add a new Mime Type\n"
+"For example:  image/tiff; text/x-scheme"
+msgstr ""
+"Afegeix un nou tipus de MIME\n"
+"Per exemple:  image/tiff; text/x-scheme"
+
+#: capplets/mime-type/new-mime-window.c:39
+msgid "Extensions"
+msgstr "Extensions"
+
+#: capplets/mime-type/new-mime-window.c:43
+msgid ""
+"Type in the extensions for this mime-type.\n"
+"For example:  .html, .htm"
+msgstr ""
+"Indiqueu les extensions per aquest tipus de MIME.\n"
+"Per exemple:  .html, .htm"
+
+#: capplets/mime-type/new-mime-window.c:55
+msgid "Regular Expressions"
+msgstr "Expressions normals"
+
+#: capplets/mime-type/new-mime-window.c:59
+msgid ""
+"You can set up two regular expressions here to identify the Mime Type\n"
+"by.  These fields are optional."
+msgstr ""
+"Aquí podeu configurar dues expressions normals per identificar el tipus\n"
+"de MIME. Aquests camps són opcionals."
+
+#: capplets/theme-switcher/demo.c:54
+msgid "One"
+msgstr "Un"
+
+#. just 8 short names that will serve as samples for titles in demo
+#: capplets/theme-switcher/demo.c:56
+msgid "Eenie"
+msgstr "Eenie"
+
+#: capplets/theme-switcher/demo.c:56
+msgid "Meenie"
+msgstr "Meenie"
+
+#: capplets/theme-switcher/demo.c:57
+msgid "Mynie"
+msgstr "Mynie"
+
+#: capplets/theme-switcher/demo.c:57
+msgid "Moe"
+msgstr "Moe"
+
+#: capplets/theme-switcher/demo.c:58
+msgid "Catcha"
+msgstr "Catcha"
+
+#: capplets/theme-switcher/demo.c:58
+msgid "Tiger"
+msgstr "Tiger"
+
+#: capplets/theme-switcher/demo.c:59
+msgid "By Its"
+msgstr "By Its"
+
+#: capplets/theme-switcher/demo.c:59
+msgid "Toe"
+msgstr "Toe"
+
+#: capplets/theme-switcher/demo.c:118
+msgid "Selected themes from above will be tested by previewing here."
+msgstr ""
+"Els temes seleccionats més amunt es comprovaran previsualitzant-los aquí."
+
+#. column one
+#: capplets/theme-switcher/demo.c:123
+msgid "Sample Button"
+msgstr "Botó de mostra"
+
+#: capplets/theme-switcher/demo.c:127
+msgid "Sample Check Button"
+msgstr "Botó de comprovació de mostra"
+
+#: capplets/theme-switcher/demo.c:132
+msgid "Sample Text Entry Field"
+msgstr "Camp d'entrada del text de mostra"
+
+#: capplets/theme-switcher/demo.c:143
+msgid "Submenu"
+msgstr "Submenú"
+
+#: capplets/theme-switcher/demo.c:150
+msgid "Item 1"
+msgstr "Element 1"
+
+#: capplets/theme-switcher/demo.c:153
+msgid "Another item"
+msgstr "Un altre element"
+
+#: capplets/theme-switcher/demo.c:158
+msgid "Radio Button 1"
+msgstr "Botó de ràdio 1"
+
+#: capplets/theme-switcher/demo.c:164
+msgid "Radio Button 2"
+msgstr "Botó de ràdio 2"
+
+#: capplets/theme-switcher/gui.c:88
+#, c-format
+msgid ""
+"Error installing theme:\n"
+"'%s'\n"
+"%s"
+msgstr ""
+"Error en instal·lar el tema:\n"
+"«%s»\n"
+"%s"
+
+#: capplets/theme-switcher/gui.c:119
+msgid "Select a theme to install"
+msgstr "Seleccioneu un tema a instal·lar"
+
+#: capplets/theme-switcher/gui.c:196
+msgid "Available Themes"
+msgstr "Temes disponibles"
+
+#: capplets/theme-switcher/gui.c:221
+msgid ""
+"Auto\n"
+"Preview"
+msgstr ""
+"Vista prèvia\n"
+"automàtica"
+
+#: capplets/theme-switcher/gui.c:233
+msgid ""
+"Install new\n"
+"theme..."
+msgstr ""
+"Instal·lar un\n"
+"nou tema..."
+
+#. Font selector.
+#.
+#: capplets/theme-switcher/gui.c:239
+msgid "User Font"
+msgstr "Font d'usuari"
+
+#. FIXME - should really get this from X somehow
+#. for now we just assume default gtk font
+#: capplets/theme-switcher/gui.c:257
+msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
+msgstr "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-"
+
+#: capplets/theme-switcher/gui.c:276
+msgid "Use custom font."
+msgstr "Usar una font personalitzada."
+
+#: capplets/theme-switcher/gui.c:366
+#: capplets/wm-properties/wm-properties-capplet.c:669
+msgid ""
+"No help is available/installed for these settings. Please make sure you\n"
+"have the GNOME User's Guide installed on your system."
+msgstr ""
+"No hi ha cap ajuda disponible o instal·lada per a aquests paràmetres.\n"
+"Si us plau, assegureu-vos que teniu la Guia de l'usuari del GNOME\n"
+"instal·lada al sistema."
+
+#: capplets/theme-switcher/install.c:31
+msgid "Home directory doesn't exist!\n"
+msgstr "El directori inicial no existeix!\n"
+
+#: capplets/theme-switcher/install.c:41
+msgid "Theme does not exist"
+msgstr "El tema no existeix"
+
+#: capplets/theme-switcher/install.c:73
+#, c-format
+msgid "Command '%s' failed"
+msgstr "L'ordre '%s' ha fallat"
+
+#: capplets/theme-switcher/install.c:78
+msgid "Unknown file format"
+msgstr "Format de fitxer desconegut"
+
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
+msgid "Gtk+ Theme Selector"
+msgstr ""
+
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
+#, fuzzy
+msgid "Select which gtk+ theme to use"
+msgstr "Seleccioneu un tema a instal·lar"
+
+#: capplets/url-properties/url.desktop.in.in.h:1
+#, fuzzy
+msgid "Configure which programs are used to display URLs"
+msgstr ""
+"Indicar quins programes aliens a sessions executar a l'inici de sessió."
+
+#: capplets/url-properties/url.desktop.in.in.h:2
+#, fuzzy
+msgid "URL Handlers"
+msgstr "gestor:"
+
+#: capplets/url-properties/url-properties.c:49
+msgid "Error initializing the `url-properties' capplet."
+msgstr "Error en inicialitzar el capplet `url-properties'."
+
+#: capplets/url-properties/url-properties.c:72
+msgid "Protocol"
+msgstr "Protocol"
+
+#: capplets/url-properties/url-properties.c:72
+msgid "Command"
+msgstr "Comanda"
+
+#: capplets/url-properties/url-properties.c:89
+msgid "handler:"
+msgstr "gestor:"
+
+#. set some commonly used handlers
+#: capplets/url-properties/url-properties.c:99
+msgid "Netscape"
+msgstr "Netscape"
+
+#: capplets/url-properties/url-properties.c:104
+msgid "Netscape (new window)"
+msgstr "Netscape (nova finestra)"
+
+#: capplets/url-properties/url-properties.c:110
+msgid "Help browser"
+msgstr "Visor d'ajuda"
+
+#: capplets/url-properties/url-properties.c:115
+msgid "Help browser (new window)"
+msgstr "Visor d'ajuda (nova finestra)"
+
+#: capplets/url-properties/url-properties.c:127
+msgid "Set"
+msgstr "Establir"
+
+#: capplets/ui-properties/behavior.desktop.in.in.h:1
+msgid "Behavior"
+msgstr "Aplicacions"
+
+#: capplets/ui-properties/behavior.desktop.in.in.h:2
+msgid "Sets the default behavior of GNOME applications"
+msgstr "Establir el comportament de les aplicacions de GNOME."
+
+#: capplets/ui-properties/behavior-properties.glade.h:1
+#, fuzzy
+msgid "At the center of the screen"
+msgstr "Al centre de la pantalla"
+
+#: capplets/ui-properties/behavior-properties.glade.h:2
+msgid "At the mouse pointer"
+msgstr "Sota el punter del ratolí"
+
+#: capplets/ui-properties/behavior-properties.glade.h:3
+msgid "Bottom"
+msgstr "Baix"
+
+#: capplets/ui-properties/behavior-properties.glade.h:4
+msgid "Default  (Spread out - big)"
+msgstr ""
+
+#: capplets/ui-properties/behavior-properties.glade.h:5
+#, fuzzy
+msgid "Dialog Buttons"
+msgstr "Botons dels diàlegs"
+
+#: capplets/ui-properties/behavior-properties.glade.h:6
+msgid "Dialog buttons have icons"
+msgstr "Usar icones als botons dels diàlegs"
+
+#: capplets/ui-properties/behavior-properties.glade.h:7
+#, fuzzy
+msgid "Dialogs"
+msgstr "Comportament dels diàlegs"
+
+#: capplets/ui-properties/behavior-properties.glade.h:8
+#, fuzzy
+msgid "Dialogs are treated"
+msgstr "Els diàlegs són com les altres finestres"
+
+#: capplets/ui-properties/behavior-properties.glade.h:9
+#, fuzzy
+msgid "Dialogs open"
+msgstr "Botons dels diàlegs"
+
+#: capplets/ui-properties/behavior-properties.glade.h:10
+msgid "Interface"
+msgstr ""
+
+#: capplets/ui-properties/behavior-properties.glade.h:11
+msgid "Left"
+msgstr "Esquerra"
+
+#: capplets/ui-properties/behavior-properties.glade.h:12
+#, fuzzy
+msgid "Left aligned"
+msgstr "Esquerrà"
+
+#: capplets/ui-properties/behavior-properties.glade.h:13
+#, fuzzy
+msgid "Like any other window"
+msgstr "Els diàlegs són com les altres finestres"
+
+#: capplets/ui-properties/behavior-properties.glade.h:14
+#, fuzzy
+msgid "Menu bars are detachable"
+msgstr "Barres d'eines amb etiquetes de text"
+
+#: capplets/ui-properties/behavior-properties.glade.h:15
+#, fuzzy
+msgid "Menu bars have a border"
+msgstr "Els menús tenen contorns alleujats"
+
+#: capplets/ui-properties/behavior-properties.glade.h:16
+msgid "Menu items have icons"
+msgstr "Usar icones als ítems dels menús"
+
+#: capplets/ui-properties/behavior-properties.glade.h:17
+msgid "Menus"
+msgstr ""
+
+#: capplets/ui-properties/behavior-properties.glade.h:18
+#, fuzzy
+msgid "Menus can be torn off"
+msgstr "Els submenús es poden arrencar"
+
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
+#: capplets/ui-properties/behavior-properties.glade.h:19
+msgid "Miscellaneous"
+msgstr ""
+
+#: capplets/ui-properties/behavior-properties.glade.h:20
+msgid "Multiple Documents"
+msgstr ""
+
+#: capplets/ui-properties/behavior-properties.glade.h:21
+#, fuzzy
+msgid "Notebook tabs"
+msgstr "Bloc de notes"
+
+#: capplets/ui-properties/behavior-properties.glade.h:22
+msgid "Place dialogs over application window when possible"
+msgstr "Posar diàlegs sobre la finestra d'aplicació quan es puga"
+
+#: capplets/ui-properties/behavior-properties.glade.h:23
+#, fuzzy
+msgid "Progress bar is on the left"
+msgstr "El medidor del procés de la barra d'estat és a la dreta"
+
+#: capplets/ui-properties/behavior-properties.glade.h:24
+#, fuzzy
+msgid "Progress bar is on the right"
+msgstr "El medidor del procés de la barra d'estat és a la dreta"
+
+#: capplets/ui-properties/behavior-properties.glade.h:25
+msgid "Right"
+msgstr "Dreta"
+
+#: capplets/ui-properties/behavior-properties.glade.h:26
+#, fuzzy
+msgid "Right aligned"
+msgstr "Dretà"
+
+#: capplets/ui-properties/behavior-properties.glade.h:27
+#, fuzzy
+msgid "Seperate windows"
+msgstr "Netscape (nova finestra)"
+
+#: capplets/ui-properties/behavior-properties.glade.h:28
+msgid "Settings will not take effect until applications restart"
+msgstr ""
+
+#: capplets/ui-properties/behavior-properties.glade.h:29
+#, fuzzy
+msgid "Specially by the window manager"
+msgstr "On decidesca el gestor de finestres"
+
+#: capplets/ui-properties/behavior-properties.glade.h:30
+#, fuzzy
+msgid "Spread out"
+msgstr "Expandir els botons"
+
+#: capplets/ui-properties/behavior-properties.glade.h:31
+#, fuzzy
+msgid "Spread out (big)"
+msgstr "Expandir els botons"
+
+#: capplets/ui-properties/behavior-properties.glade.h:32
+msgid "Status Bar"
+msgstr ""
+
+#: capplets/ui-properties/behavior-properties.glade.h:33
+#, fuzzy
+msgid "Status bar is interactive when possible"
+msgstr "Barra d'estat interactiva (quan es puga)"
+
+#: capplets/ui-properties/behavior-properties.glade.h:34
+#, fuzzy
+msgid "The same window"
+msgstr "Netscape (nova finestra)"
+
+#: capplets/ui-properties/behavior-properties.glade.h:35
+msgid "Tool Bars"
+msgstr ""
+
+#: capplets/ui-properties/behavior-properties.glade.h:36
+#, fuzzy
+msgid "Tool bar buttons are icons only"
+msgstr "Botons de barres d'eines amb vora en relleu"
+
+#: capplets/ui-properties/behavior-properties.glade.h:37
+#, fuzzy
+msgid "Tool bar buttons are text below icons"
+msgstr "Barres d'eines amb etiquetes de text"
+
+#: capplets/ui-properties/behavior-properties.glade.h:38
+#, fuzzy
+msgid "Tool bar buttons pop up on mouse over"
+msgstr "Botons de barres d'eines amb vora en relleu"
+
+#: capplets/ui-properties/behavior-properties.glade.h:39
+#, fuzzy
+msgid "Tool bars are detachable"
+msgstr "Barres d'eines amb etiquetes de text"
+
+#: capplets/ui-properties/behavior-properties.glade.h:40
+#, fuzzy
+msgid "Tool bars have a border"
+msgstr "Barres d'eines amb vora en relleu"
+
+#: capplets/ui-properties/behavior-properties.glade.h:41
+#, fuzzy
+msgid "Tool bars have line separators"
+msgstr "Barres d'eines amb línies separadores"
+
+#: capplets/ui-properties/behavior-properties.glade.h:42
+msgid "Top"
+msgstr "Dalt"
+
+#: capplets/ui-properties/behavior-properties.glade.h:43
+#, fuzzy
+msgid "Use status bar instead of dialog when possible"
+msgstr "Usar la barra d'estat en comptes d'un diàleg quan es puga"
+
+#: capplets/ui-properties/behavior-properties.glade.h:44
+msgid "When opening Multiple documents, use"
+msgstr ""
+
+#: capplets/ui-properties/behavior-properties.glade.h:45
+msgid "When using Notebook tabs, place the tabs on the"
+msgstr ""
+
+#: capplets/ui-properties/behavior-properties.glade.h:46
+msgid "Wherever the Window Manager places them"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:170
+#, c-format
+msgid ""
+"Starting %s\n"
+"(%d seconds left before operation times out)"
+msgstr ""
+"S'està inciant %s\n"
+"(queden %d segons abans que l'operació excedeixi el temps)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:331
+#, c-format
+msgid "%s (Current)"
+msgstr "%s (Actual)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:334
+#, c-format
+msgid "Run Configuration Tool for %s"
+msgstr "Executa l'eina de configuració per a %s"
+
+#: capplets/wm-properties/wm-properties-capplet.c:345
+msgid " (Not found)"
+msgstr " (No s'ha trobat)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:384
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\tAnother window manager is already running and could not be killed\n"
+msgstr ""
+"wm-properties-capplet: No s'ha pogut inicialitzar el gestor de finestres.\n"
+"\tJa s'està executant un altre gestor de finestres que no s'ha pogut "
+"liquidar \n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:388
+#, c-format
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\t'%s' didn't start\n"
+msgstr ""
+"wm-properties-capplet: No s'ha pogut inicialitzar el gestor de finestres.\n"
+"\t'%s' no s'ha iniciat\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:437
+msgid "Previous window manager did not die\n"
+msgstr "El gestor de finestres anterior no va morir\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:470
+#, c-format
+msgid ""
+"Could not start '%s'.\n"
+"Falling back to previous window manager '%s'\n"
+msgstr ""
+"No s'ha pogut iniciar '%s'.\n"
+"S'està tornant al gestor de finestres anterior '%s'\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:501
+msgid ""
+"Could not start fallback window manager.\n"
+"Please run a window manager manually. You can\n"
+"do this by selecting \"Run Program\" in the\n"
+"foot menu\n"
+msgstr ""
+"No s'ha pogut iniciar el gestor de finestres anterior.\n"
+"Si us plau, executeu un gestor de finestres manualment. Podeu \n"
+"fer-ho seleccionant \"Executa el programa\" al\n"
+"menú al peu\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:526
+#: capplets/wm-properties/wm-properties-capplet.c:781
+#: capplets/wm-properties/wm-properties-capplet.c:890
+#: capplets/wm-properties/wm-properties-capplet.c:897
+#: capplets/wm-properties/wm-properties-capplet.c:1043
+msgid "OK"
+msgstr "D'acord"
+
+#: capplets/wm-properties/wm-properties-capplet.c:544
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. You can do so immediately by selecting the \"Save session\n"
+"now\" below, or you can save your session later.  This can be\n"
+"done either selecting \"Save Current Session\" under \"Settings\"\n"
+"in the main menu, or by turning on \"Save Current Setup\" when\n"
+"you log out.\n"
+msgstr ""
+"El vostre gestor de finestres actual ha canviat. Per tal de\n"
+"desar aquest canvi, us caldrà desar la sessió\n"
+"actual. Ho podeu fer ara mateix seleccionant \"Desa la sessió\n"
+"ara\", més avall, o ho podeu fer més endavant,\n"
+"seleccionant \"Desa la sessió actual\" sota \"Paràmetres\"\n"
+"al menú principal, o bé activant \"Desa la configuració actual\" en\n"
+"sortir.\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:551
+msgid "Save Session Later"
+msgstr "Desa la sessió més tard"
+
+#: capplets/wm-properties/wm-properties-capplet.c:551
+msgid "Save Session Now"
+msgstr "Desa la sessió ara"
+
+#: capplets/wm-properties/wm-properties-capplet.c:554
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. This can be done by either selecting \"Save Current Session\"\n"
+"under \"Settings\" in the main menu, or by turning on\n"
+"\"Save Current Setup\" when you log out.\n"
+msgstr ""
+"El vostre gestor de finestres actual ha canviat. Per tal de\n"
+"desar aquest canvi, us caldrà desar la sessió\n"
+"actual, seleccionant \"Desa la sessió actual\"\n"
+"sota \"Paràmetres\", al menú principal, o bé activant\n"
+"\"Desa la configuració actual\" en sortir.\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:780
+msgid "Add New Window Manager"
+msgstr "Afegeix un nou gestor de finestres"
+
+#: capplets/wm-properties/wm-properties-capplet.c:781
+msgid "Cancel"
+msgstr "Cancel·lar"
+
+#: capplets/wm-properties/wm-properties-capplet.c:819
+msgid "Configuration Command:"
+msgstr "Ordre de configuració:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:838
+msgid "Window manager is session managed"
+msgstr "El gestor de finestres està gestionat per la sessió"
+
+#: capplets/wm-properties/wm-properties-capplet.c:888
+msgid "Name cannot be empty"
+msgstr "El nom no pot estar buit"
+
+#: capplets/wm-properties/wm-properties-capplet.c:895
+msgid "Command cannot be empty"
+msgstr "L'ordre no pot estar buida"
+
+#: capplets/wm-properties/wm-properties-capplet.c:944
+#: capplets/wm-properties/wm-properties-capplet.c:986
+msgid "Edit Window Manager"
+msgstr "Edita el gestor de finestres"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1042
+msgid "You cannot delete the current Window Manager"
+msgstr "No podeu suprimir el gestor de finestres actual"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1089
+#, fuzzy
+msgid "Window Manager Selector"
+msgstr "Edita el gestor de finestres"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1191
+msgid ""
+"an initialization error occurred while starting 'wm-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"S'ha produït un error d'inicialització en iniciar 'wm-properties-capplet'.\n"
+"S'està avortant...\n"
+
+#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.in.h:1
+msgid "Enlightenment"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.in.h:1
+msgid "Ice WM"
+msgstr "Gestor Ice"
+
+#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.in.h:1
+msgid "Scwm"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.in.h:1
+#, fuzzy
+msgid "Window Maker"
+msgstr "Gestor de finestres"
+
+#: capplets/wm-properties/wm-desktops/twm.desktop.in.in.h:1
+msgid "twm"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:1
+#, fuzzy
+msgid "Control Center Menu"
+msgstr "Centre de Control"
+
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:2
+#, fuzzy
+msgid "Sawfish window manager"
+msgstr "Permet escollir el gestor de finestres."
+
+#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:2
+msgid "Configure window appearance"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:1
+msgid "Configure key shortcuts"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:2
+#, fuzzy
+msgid "Shortcuts"
+msgstr "Curt"
+
+#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:1
+msgid "Configure window focusing"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:2
+#, fuzzy
+msgid "Focus behavior"
+msgstr "Aplicacions"
+
+#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
+msgid "Configure window properties"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:2
+#, fuzzy
+msgid "Matched Windows"
+msgstr "Netscape (nova finestra)"
+
+#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:1
+msgid "Configure window minimization and maximization"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:2
+msgid "Minimizing and Maximizing"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
+msgid "Configure window manager configuration properties"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:2
+msgid "Meta"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
+msgid "Configure miscellaneous window features"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:1
+msgid "Configure window move/resize"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:2
+msgid "Moving and Resizing"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:1
+msgid "Configure window placement"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:2
+msgid "Placement"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
+#, fuzzy
+msgid "Enable window manager sound events"
+msgstr "Habilita la gestió d'energia"
+
+#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:1
+msgid "Configure workspaces"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:2
+msgid "Workspaces"
+msgstr ""

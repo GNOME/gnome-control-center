@@ -338,6 +338,7 @@ msgstr ""
 #: capplets/default-applications/interface.c:334
 #: capplets/default-applications/interface.c:465
 #: capplets/default-applications/interface.c:576
+#: capplets/wm-properties/wm-properties-capplet.c:806
 msgid "Command:"
 msgstr "Команда:"
 
@@ -676,6 +677,7 @@ msgid "Configure the settings of the screensaver"
 msgstr "Налагодження збер╕гача екрана"
 
 #: capplets/screensaver/screensaver-prefs-dialog.c:185
+#: capplets/wm-properties/wm-properties-capplet.c:793
 msgid "Name:"
 msgstr "Назва:"
 
@@ -683,6 +685,7 @@ msgstr "Назва:"
 msgid "Settings"
 msgstr "Установки"
 
+#: capplets/file-types/file-types-capplet.c:1882
 #: capplets/screensaver/screensaver-prefs-dialog.c:204
 msgid "Description"
 msgstr ""
@@ -775,7 +778,9 @@ msgstr ""
 msgid "One screensaver all the time"
 msgstr ""
 
+#: capplets/file-types/file-types-icon-entry.c:264
 #: capplets/screensaver/screensaver-properties.glade.h:11
+#: capplets/theme-switcher/gui.c:230 capplets/theme-switcher/gui.c:302
 msgid "Preview"
 msgstr "Перегляд"
 
@@ -995,6 +1000,7 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/ant.xml.h:25
 #: capplets/screensaver/screensavers/flag.xml.h:17
+#: capplets/theme-switcher/demo.c:54
 msgid "Two"
 msgstr "Два"
 
@@ -3329,7 +3335,9 @@ msgstr "Без збер╕гача екрана"
 msgid "Configure GNOME's use of sound"
 msgstr "Налаштування використання звуку в GNOME"
 
+#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
 #: capplets/sound/sound.desktop.in.in.h:2
+#, fuzzy
 msgid "Sound"
 msgstr "Звук"
 
@@ -3371,6 +3379,8 @@ msgstr ""
 "Дов╕дкова ╕нформац╕я недоступна. Перев╕рте будь-ласка, чи\n"
 "Кер╕вництво користувача GNOME встановлено у ваш╕й систем╕."
 
+#: capplets/theme-switcher/gui.c:368
+#: capplets/wm-properties/wm-properties-capplet.c:671
 #: control-center/capplet-dir-view.c:464
 msgid "Close"
 msgstr "Закрити"
@@ -3384,6 +3394,7 @@ msgstr "Центр керування GNOME"
 msgid "The GNOME configuration tool"
 msgstr "Зас╕б конф╕гурування GNOME"
 
+#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
 #: control-center/gnomecc.glade.h:1
 msgid "Appearance"
 msgstr "Вигляд"
@@ -3449,844 +3460,1182 @@ msgstr ""
 msgid "GNOME Control Center options"
 msgstr "Центр керування GNOME"
 
+#: capplets/desktop-links/Advanced.directory.in.in.h:1
+msgid "Advanced"
+msgstr ""
+
+#: capplets/desktop-links/Advanced.directory.in.in.h:2
 #, fuzzy
-#~ msgid "(None)"
-#~ msgstr "нема╓"
+msgid "Advanced Settings"
+msgstr "Додатков╕ властивост╕"
 
-#~ msgid "Wallpaper Selection"
-#~ msgstr "Виб╕р шпалер"
+#: capplets/desktop-links/panel.desktop.in.in.h:1
+msgid "Global panel properties"
+msgstr "Глобальн╕ властивост╕ панел╕"
 
-#~ msgid "Can't find an hbox, using a normal file selection"
-#~ msgstr "Не знайдено hbox, використову╓ться звичайний виб╕р файл╕в"
+#: capplets/desktop-links/panel.desktop.in.in.h:2
+msgid "Panel"
+msgstr "Панель"
 
-#~ msgid "Control Center Menu"
-#~ msgstr "Меню Центру керування"
-
+#: capplets/desktop-links/session.desktop.in.in.h:1
 #, fuzzy
-#~ msgid "Sawfish window manager"
-#~ msgstr "Редагувати властивост╕ в╕конного менеджера"
+msgid "Configure which non-session aware programs are started up"
+msgstr ""
+"Визначення списку програм, що не вм╕ють працювати з менеджером сеанс╕в, але "
+"запускають одночасно з ним"
 
+#: capplets/desktop-links/session.desktop.in.in.h:2
+msgid "Startup Programs"
+msgstr "Програми запуску"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:387
+msgid "Edit Applications List"
+msgstr ""
+
+#. Add label
+#: capplets/file-types/file-types-capplet-dialogs.c:409
+#, c-format
+msgid "Select applications to appear in menu for MIME type \"%s\""
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:433
+msgid "Add Application..."
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:440
+msgid "Edit Application..."
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:446
+msgid "Delete Application"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:480
+msgid "Edit Components List"
+msgstr ""
+
+#. Add label
+#: capplets/file-types/file-types-capplet-dialogs.c:500
+#, c-format
+msgid "Select views to appear in menu for MIME type \"%s\""
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:720
+msgid ""
+"The MIME type entered contained upper case characters. Upper case characters "
+"were changed to lower case for you."
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:723
 #, fuzzy
-#~ msgid "Configure window appearance"
-#~ msgstr "Використовувати енергозбереження."
+msgid "Add New MIME Type"
+msgstr "Додавання типу MIME"
 
+#: capplets/file-types/file-types-capplet-dialogs.c:769
 #, fuzzy
-#~ msgid "Configure window properties"
-#~ msgstr "Властивост╕ миш╕"
+msgid "Add MIME Type"
+msgstr "Додавання типу MIME"
 
+#: capplets/file-types/file-types-capplet-dialogs.c:773
+msgid "New MIME type (e.g. image/x-thumper):"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:780
+msgid "Description (e.g. Thumper image):"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:947
 #, fuzzy
-#~ msgid "Configure window placement"
-#~ msgstr "Використовувати енергозбереження."
+msgid "File Extensions "
+msgstr "Розширення"
 
+#: capplets/file-types/file-types-capplet-dialogs.c:967
+#: capplets/mime-type/mime-type-capplet.c:93
+#: capplets/wm-properties/wm-properties-capplet.c:1117
+msgid "Add..."
+msgstr "Додати..."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:972
 #, fuzzy
-#~ msgid "Enable window manager sound events"
-#~ msgstr "Використовувати енергозбереження."
+msgid "    Remove    "
+msgstr "Видалити"
 
+#: capplets/file-types/file-types-capplet-dialogs.c:1041
 #, fuzzy
-#~ msgid "Configure workspaces"
-#~ msgstr "Використовувати енергозбереження."
+msgid "Add New Extension"
+msgstr "Розширення"
 
+#: capplets/file-types/file-types-capplet-dialogs.c:1045
 #, fuzzy
-#~ msgid "Browse..."
-#~ msgstr " Передивитись... "
+msgid ""
+"Type in the extensions for this mime-type (without dot).\n"
+"You can enter several extensions seperated by a space,\n"
+"for example: html htm"
+msgstr ""
+"Введ╕ть розширення для цього MIME-типу.\n"
+"Наприклад:  .html, .htm"
 
-#~ msgid "Wallpaper"
-#~ msgstr "Шпалери"
+#: capplets/file-types/file-types-capplet-dialogs.c:1052
+#: capplets/mime-type/new-mime-window.c:50
+msgid "Extension:"
+msgstr "Розширення: "
 
+#: capplets/file-types/file-types-capplet-dialogs.c:1194
 #, fuzzy
-#~ msgid "...a"
-#~ msgstr "Додати..."
+msgid "You must enter a name."
+msgstr "Необх╕дно ввести MIME-тип"
 
-#~ msgid "Keyboard click"
-#~ msgstr "Клацання клав╕ш"
-
+#: capplets/file-types/file-types-capplet-dialogs.c:1197
 #, fuzzy
-#~ msgid "Type here to test setting"
-#~ msgstr "Перев╕рка установок"
+msgid "You must enter a command."
+msgstr "Необх╕дно ввести MIME-тип"
 
+#: capplets/file-types/file-types-capplet-dialogs.c:1207
+#, c-format
+msgid ""
+"\"%s\" does not exist or is not executable.\n"
+"Check your spelling and make sure you have\n"
+"the right permissions to execute this file."
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1213
+#, c-format
+msgid ""
+"The command \"%s\" cannot be found.\n"
+"You must use a command that can work from any command line."
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1225
+msgid "Bad Application Name"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1226
 #, fuzzy
-#~ msgid "Restore earlier configuration"
-#~ msgstr "Рух миш╕"
+msgid "Bad Application Command"
+msgstr "Команда настроювання:"
 
+#: capplets/file-types/file-types-capplet-dialogs.c:1258
+msgid "Add Application"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1259
+msgid "Edit Application"
+msgstr ""
+
+#. Application Name label and entry
+#: capplets/file-types/file-types-capplet-dialogs.c:1271
+msgid "Application Name:"
+msgstr ""
+
+#. Application Command label and entry
+#: capplets/file-types/file-types-capplet-dialogs.c:1282
 #, fuzzy
-#~ msgid "Advanced..."
-#~ msgstr "Додати..."
+msgid "Application Command:"
+msgstr "Команда настроювання:"
 
+#. Open Behavior frame
+#: capplets/file-types/file-types-capplet-dialogs.c:1293
 #, fuzzy
-#~ msgid "Configuration Restoration"
-#~ msgstr "Команда настроювання:"
+msgid "Open Behavior"
+msgstr "Програми"
 
+#: capplets/file-types/file-types-capplet-dialogs.c:1299
+msgid "Can open multiple files"
+msgstr ""
+
+#. FIXME bugzilla.eazel.com 6066: This needs to be three options now: "yes", "no", and "use uris for non-file locations"
+#: capplets/file-types/file-types-capplet-dialogs.c:1307
+msgid "Can open from URI"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet.c:735
+#: capplets/file-types/file-types-capplet.c:1883
 #, fuzzy
-#~ msgid "Location Management"
-#~ msgstr "Використовувати енергозбереження."
+msgid "MIME Type"
+msgstr "Тип MIME"
 
+#: capplets/file-types/file-types-capplet.c:742
 #, fuzzy
-#~ msgid "Restore configuration from"
-#~ msgstr "Рух миш╕"
+msgid "Change Icon"
+msgstr "В╕дм╕на"
 
+#: capplets/file-types/file-types-capplet.c:749
 #, fuzzy
-#~ msgid "Restore old configuration"
-#~ msgstr "Рух миш╕"
+msgid "Change File Extensions"
+msgstr "Розширення"
 
-#~ msgid "Enable"
-#~ msgstr "Дозволити"
+#: capplets/file-types/file-types-capplet.c:757
+msgid "Default Action:"
+msgstr ""
 
-#~ msgid "Event"
-#~ msgstr "Под╕я"
+#: capplets/file-types/file-types-capplet.c:769
+msgid "Use Viewer"
+msgstr ""
 
-#~ msgid "File to Play"
-#~ msgstr "Грати файл"
+#: capplets/file-types/file-types-capplet.c:775
+msgid "Open With Application"
+msgstr ""
 
-#~ msgid "HTML"
-#~ msgstr "HTML"
-
-#~ msgid "Icon List"
-#~ msgstr "Список п╕ктограм"
-
-#~ msgid "Tree"
-#~ msgstr "Дерево"
-
-#~ msgid "Got error %d.\n"
-#~ msgstr "Отримано помилку %d.\n"
-
-#~ msgid "Password for %s"
-#~ msgstr "Пароль до %s"
-
-#~ msgid "dup2() error.\n"
-#~ msgstr "Помилка dup2().\n"
-
-#~ msgid "Unknown user."
-#~ msgstr "Нев╕домий користувач."
-
-#~ msgid "Out of memory."
-#~ msgstr "Вих╕д за меж╕ пам'ят╕."
-
-#~ msgid "The exec() call failed."
-#~ msgstr "Зб╕й виклику exec()."
-
-#~ msgid "Failed to find selected program."
-#~ msgstr "Не вдалося знайти вибрану програму."
-
-#~ msgid "Unknown error."
-#~ msgstr "Нев╕дома помилка."
-
-#~ msgid "Unknown exit code."
-#~ msgstr "Нев╕домий код виходу."
-
-#~ msgid "Error"
-#~ msgstr "Помилка"
-
-#~ msgid ""
-#~ "No help is available/installed for these settings. Please make sure you\n"
-#~ "have the GNOME User's Guide installed on your system."
-#~ msgstr ""
-#~ "Дов╕дкова ╕нформац╕я для цих установок недоступна. Перев╕рте будь-ласка\n"
-#~ "що Кер╕вництво користувача GNOME встановлено у ваш╕й систем╕."
-
-#~ msgid "Mime Type: "
-#~ msgstr "Тип MIME: "
-
-#~ msgid "First Regular Expression: "
-#~ msgstr "Перший регулярний вираз: "
-
-#~ msgid "Second Regular Expression: "
-#~ msgstr "Другий регулярний вираз: "
-
-#~ msgid "Mime Type Actions"
-#~ msgstr "Д╕╖ пов'язан╕ з типом MIME"
-
-#~ msgid "Example: emacs %f"
-#~ msgstr "Приклад: emacs %f"
-
-#~ msgid "Open"
-#~ msgstr "В╕дкриття"
-
-#~ msgid "View"
-#~ msgstr "Показ"
-
-#~ msgid "Edit"
-#~ msgstr "Редагування"
-
-#~ msgid "Set actions for %s"
-#~ msgstr "Визначення д╕й для %s"
-
-#~ msgid "Mime Type"
-#~ msgstr "Тип MIME"
-
-#~ msgid "You must enter a mime-type"
-#~ msgstr "Необх╕дно ввести MIME-тип"
-
-#~ msgid ""
-#~ "You must add either a regular-expression or\n"
-#~ "a file-name extension"
-#~ msgstr ""
-#~ "Необх╕дно додати або регулярний вираз,\n"
-#~ "обо розширення назви файлу"
-
-#~ msgid ""
-#~ "Please put your mime-type in the format:\n"
-#~ "CATEGORY/TYPE\n"
-#~ "\n"
-#~ "For Example:\n"
-#~ "image/png"
-#~ msgstr ""
-#~ "Будьласка, подайте ваш MIME-тип у формат╕:\n"
-#~ "КАТЕГОР╤Я/ТИП\n"
-#~ "\n"
-#~ "Наприклад:\n"
-#~ "image/png"
-
-#~ msgid "This mime-type already exists"
-#~ msgstr "Цей mime-тип вже ╕сну╓"
-
-#~ msgid ""
-#~ "We are unable to create the directory\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "Неможливо створити каталог\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "Стан не буде збережено."
-
-#~ msgid ""
-#~ "We are unable to access the directory\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "Неможливо отримати доступ до каталога\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "Стан не буде збережено."
-
-#~ msgid ""
-#~ "Cannot create the file\n"
-#~ "~/.gnome/mime-info/user.mime\n"
-#~ "\n"
-#~ "We will not be able to save the state"
-#~ msgstr ""
-#~ "Неможливо створити файл\n"
-#~ "~/.gnome/mime-info/user.mime\n"
-#~ "\n"
-#~ "Стан не буде збережено."
-
-#~ msgid ""
-#~ "We are unable to create the directory\n"
-#~ "~/.gnome/mime-info.\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "Неможливо створити каталог\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "Стан не можливо зберегти."
-
+#: capplets/file-types/file-types-capplet.c:786
 #, fuzzy
-#~ msgid ""
-#~ "We are unable to access the directory\n"
-#~ "~/.gnome/mime-info.\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "Неможливо отримати доступ до каталога\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "Стан не буде збережено."
+msgid "Edit List"
+msgstr "Редагування"
 
+#: capplets/file-types/file-types-capplet.c:811
 #, fuzzy
-#~ msgid ""
-#~ "Cannot create the file\n"
-#~ "~/.gnome/mime-info/user.keys.\n"
-#~ "\n"
-#~ "We will not be able to save the state"
-#~ msgstr ""
-#~ "Неможливо створити файл\n"
-#~ "~/.gnome/mime-info/user.keys\n"
-#~ "\n"
-#~ "Стан не буде збережено."
+msgid "Add New MIME Type..."
+msgstr "Додавання типу MIME"
 
-#~ msgid "Edit..."
-#~ msgstr "Виправити..."
+#: capplets/file-types/file-types-capplet.c:817
+msgid "Delete This MIME Type"
+msgstr ""
 
-#~ msgid "Add Mime Type"
-#~ msgstr "Додавання типу MIME"
+#: capplets/file-types/file-types-capplet.c:828
+msgid "Revert to System Defaults"
+msgstr ""
 
-#~ msgid ""
-#~ "Add a new Mime Type\n"
-#~ "For example:  image/tiff; text/x-scheme"
-#~ msgstr ""
-#~ "Додати новий тип MIME\n"
-#~ "Наприклад: image/tiff; text/x-scheme"
-
-#~ msgid "Mime Type:"
-#~ msgstr "Тип MIME: "
-
-#~ msgid "Extensions"
-#~ msgstr "Розширення"
-
-#~ msgid ""
-#~ "Type in the extensions for this mime-type.\n"
-#~ "For example:  .html, .htm"
-#~ msgstr ""
-#~ "Введ╕ть розширення для цього MIME-типу.\n"
-#~ "Наприклад:  .html, .htm"
-
-#~ msgid "Extension:"
-#~ msgstr "Розширення: "
-
-#~ msgid "Regular Expressions"
-#~ msgstr "Регулярн╕ вирази"
-
-#~ msgid ""
-#~ "You can set up two regular expressions here to identify the Mime Type\n"
-#~ "by.  These fields are optional."
-#~ msgstr ""
-#~ "Можна встановити до двох регулярних вираз╕в, що ╕дентиф╕кують тип MIME.\n"
-#~ "Заповнення цих пол╕в не обов'язкове."
-
-#~ msgid "Keyboard Bell"
-#~ msgstr "Дзв╕нок клав╕атури"
-
-#~ msgid "Mouse buttons"
-#~ msgstr "Кнопки миш╕"
-
-#~ msgid "Acceleration"
-#~ msgstr "Прискорення"
-
-#~ msgid "Threshold"
-#~ msgstr "Пор╕г"
-
+#: capplets/file-types/file-types-capplet.c:1075
+#: capplets/file-types/file-types-capplet.c:1219
 #, fuzzy
-#~ msgid "Selection"
-#~ msgstr "Виб╕р п╕ктограми..."
+msgid "None"
+msgstr "нема╓"
 
-#~ msgid "Settings..."
-#~ msgstr "Установки..."
+#: capplets/file-types/file-types-capplet.c:1324
+msgid ""
+"Reverting to system settings will lose any changes\n"
+"you have ever made to File Types and Programs.\n"
+"Revert anyway?"
+msgstr ""
 
+#. Add default action to fourth column
+#: capplets/file-types/file-types-capplet.c:1393
+#: capplets/file-types/file-types-capplet.c:1593
+#: capplets/file-types/file-types-capplet.c:1719
 #, fuzzy
-#~ msgid "Screensaver Selection"
-#~ msgstr "Установки збер╕гача екрана"
+msgid "none"
+msgstr "нема╓"
 
+#: capplets/file-types/file-types-capplet.c:1434
+#: capplets/file-types/file-types-capplet.c:1620
+#: capplets/file-types/file-types-capplet.c:1763
+#, c-format
+msgid "View as %s"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet.c:1884
+#: capplets/mime-type/mime-data.c:385
+msgid "Extension"
+msgstr "Розширення"
+
+#: capplets/file-types/file-types-capplet.c:1885
 #, fuzzy
-#~ msgid "Only after the screensaver has run for"
-#~ msgstr " хвилин п╕сля початку роботи збер╕гача екрана."
+msgid "Default Action"
+msgstr "Виб╕р п╕ктограми..."
 
-#~ msgid "General Properties"
-#~ msgstr "Загальн╕ властивост╕"
+#: capplets/file-types/file-types.desktop.in.in.h:1
+msgid "File Types and Programs"
+msgstr ""
 
-#~ msgid "Priority"
-#~ msgstr "Пр╕оритет"
+#: capplets/file-types/file-types.desktop.in.in.h:2
+msgid "Specify which programs are used to open or view each file type"
+msgstr ""
 
-#~ msgid "Effects"
-#~ msgstr "Ефекти"
+#: capplets/file-types/file-types-icon-entry.c:258
+msgid "Can't find an hbox, using a normal file selection"
+msgstr "Не знайдено hbox, використову╓ться звичайний виб╕р файл╕в"
 
+#: capplets/file-types/file-types-icon-entry.c:381
 #, fuzzy
-#~ msgid "Fade Duration"
-#~ msgstr "Тривал╕сть (мс)"
+msgid "Select an icon"
+msgstr "Виб╕р п╕ктограми..."
 
-#~ msgid "Advanced Properties"
-#~ msgstr "Додатков╕ властивост╕"
+#. icon box
+#: capplets/mime-type/edit-window.c:266
+msgid "Select an icon..."
+msgstr "Виб╕р п╕ктограми..."
 
+#: capplets/mime-type/edit-window.c:276
+#: capplets/mime-type/new-mime-window.c:31
+msgid "Mime Type: "
+msgstr "Тип MIME: "
+
+#: capplets/mime-type/edit-window.c:306
+msgid "Add"
+msgstr "Додати"
+
+#: capplets/mime-type/edit-window.c:314
+#: capplets/url-properties/url-properties.c:135
+msgid "Remove"
+msgstr "Видалити"
+
+#. gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
+#: capplets/mime-type/edit-window.c:341
+#: capplets/mime-type/new-mime-window.c:69
+msgid "First Regular Expression: "
+msgstr "Перший регулярний вираз: "
+
+#: capplets/mime-type/edit-window.c:349
+#: capplets/mime-type/new-mime-window.c:80
+msgid "Second Regular Expression: "
+msgstr "Другий регулярний вираз: "
+
+#. Actions box
+#: capplets/mime-type/edit-window.c:356
+msgid "Mime Type Actions"
+msgstr "Д╕╖ пов'язан╕ з типом MIME"
+
+#: capplets/mime-type/edit-window.c:363
+#, c-format
+msgid "Example: emacs %f"
+msgstr "Приклад: emacs %f"
+
+#: capplets/mime-type/edit-window.c:368
+msgid "Open"
+msgstr "В╕дкриття"
+
+#: capplets/mime-type/edit-window.c:374 capplets/mime-type/edit-window.c:390
+#: capplets/mime-type/edit-window.c:405
+msgid "Select a file..."
+msgstr "Вибер╕ть файл..."
+
+#: capplets/mime-type/edit-window.c:383
+msgid "View"
+msgstr "Показ"
+
+#: capplets/mime-type/edit-window.c:399
+msgid "Edit"
+msgstr "Редагування"
+
+#. we initialize everything
+#: capplets/mime-type/edit-window.c:448
+#, c-format
+msgid "Set actions for %s"
+msgstr "Визначення д╕й для %s"
+
+#: capplets/mime-type/mime-data.c:384
+msgid "Mime Type"
+msgstr "Тип MIME"
+
+#: capplets/mime-type/mime-data.c:493
+msgid "You must enter a mime-type"
+msgstr "Необх╕дно ввести MIME-тип"
+
+#: capplets/mime-type/mime-data.c:498
+msgid ""
+"You must add either a regular-expression or\n"
+"a file-name extension"
+msgstr ""
+"Необх╕дно додати або регулярний вираз,\n"
+"обо розширення назви файлу"
+
+#: capplets/mime-type/mime-data.c:502
+msgid ""
+"Please put your mime-type in the format:\n"
+"CATEGORY/TYPE\n"
+"\n"
+"For Example:\n"
+"image/png"
+msgstr ""
+"Будьласка, подайте ваш MIME-тип у формат╕:\n"
+"КАТЕГОР╤Я/ТИП\n"
+"\n"
+"Наприклад:\n"
+"image/png"
+
+#: capplets/mime-type/mime-data.c:507
+msgid "This mime-type already exists"
+msgstr "Цей mime-тип вже ╕сну╓"
+
+#: capplets/mime-type/mime-data.c:588 capplets/mime-type/mime-info.c:427
+msgid ""
+"We are unable to create the directory\n"
+"~/.gnome/mime-info\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+"Неможливо створити каталог\n"
+"~/.gnome/mime-info\n"
+"\n"
+"Стан не буде збережено."
+
+#: capplets/mime-type/mime-data.c:594 capplets/mime-type/mime-info.c:433
+msgid ""
+"We are unable to access the directory\n"
+"~/.gnome/mime-info\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+"Неможливо отримати доступ до каталога\n"
+"~/.gnome/mime-info\n"
+"\n"
+"Стан не буде збережено."
+
+#: capplets/mime-type/mime-data.c:605
+msgid ""
+"Cannot create the file\n"
+"~/.gnome/mime-info/user.mime\n"
+"\n"
+"We will not be able to save the state"
+msgstr ""
+"Неможливо створити файл\n"
+"~/.gnome/mime-info/user.mime\n"
+"\n"
+"Стан не буде збережено."
+
+#: capplets/mime-type/mime-info.c:444
 #, fuzzy
-#~ msgid "Menu bars have a border"
-#~ msgstr "Скошен╕ поля"
+msgid ""
+"Cannot create the file\n"
+"~/.gnome/mime-info/user.keys.\n"
+"\n"
+"We will not be able to save the state"
+msgstr ""
+"Неможливо створити файл\n"
+"~/.gnome/mime-info/user.keys\n"
+"\n"
+"Стан не буде збережено."
 
+#: capplets/mime-type/mime-type-capplet.c:83
+#: capplets/wm-properties/wm-properties-capplet.c:1127
+msgid "Delete"
+msgstr "Видалити"
+
+#: capplets/mime-type/mime-type-capplet.c:97
+#: capplets/wm-properties/wm-properties-capplet.c:1122
+msgid "Edit..."
+msgstr "Виправити..."
+
+#: capplets/mime-type/mime-type.desktop.in.in.h:1
+msgid "Configure how files are associated and started"
+msgstr "Настроювання тип╕в MIME"
+
+#: capplets/mime-type/mime-type.desktop.in.in.h:2
+msgid "Mime Types"
+msgstr "Типи MIME"
+
+#: capplets/mime-type/new-mime-window.c:25
+msgid "Add Mime Type"
+msgstr "Додавання типу MIME"
+
+#: capplets/mime-type/new-mime-window.c:26
+msgid ""
+"Add a new Mime Type\n"
+"For example:  image/tiff; text/x-scheme"
+msgstr ""
+"Додати новий тип MIME\n"
+"Наприклад: image/tiff; text/x-scheme"
+
+#: capplets/mime-type/new-mime-window.c:39
+msgid "Extensions"
+msgstr "Розширення"
+
+#: capplets/mime-type/new-mime-window.c:43
+msgid ""
+"Type in the extensions for this mime-type.\n"
+"For example:  .html, .htm"
+msgstr ""
+"Введ╕ть розширення для цього MIME-типу.\n"
+"Наприклад:  .html, .htm"
+
+#: capplets/mime-type/new-mime-window.c:55
+msgid "Regular Expressions"
+msgstr "Регулярн╕ вирази"
+
+#: capplets/mime-type/new-mime-window.c:59
+msgid ""
+"You can set up two regular expressions here to identify the Mime Type\n"
+"by.  These fields are optional."
+msgstr ""
+"Можна встановити до двох регулярних вираз╕в, що ╕дентиф╕кують тип MIME.\n"
+"Заповнення цих пол╕в не обов'язкове."
+
+#: capplets/theme-switcher/demo.c:54
+msgid "One"
+msgstr "Один"
+
+#. just 8 short names that will serve as samples for titles in demo
+#: capplets/theme-switcher/demo.c:56
+msgid "Eenie"
+msgstr "Еники"
+
+#: capplets/theme-switcher/demo.c:56
+msgid "Meenie"
+msgstr "Беники"
+
+#: capplets/theme-switcher/demo.c:57
+msgid "Mynie"
+msgstr "╥ли"
+
+#: capplets/theme-switcher/demo.c:57
+msgid "Moe"
+msgstr "Вареники"
+
+#: capplets/theme-switcher/demo.c:58
+msgid "Catcha"
+msgstr "Еники"
+
+#: capplets/theme-switcher/demo.c:58
+msgid "Tiger"
+msgstr "Беники"
+
+#: capplets/theme-switcher/demo.c:59
+msgid "By Its"
+msgstr "З'╖ли"
+
+#: capplets/theme-switcher/demo.c:59
+msgid "Toe"
+msgstr "В╕дро"
+
+#: capplets/theme-switcher/demo.c:118
+msgid "Selected themes from above will be tested by previewing here."
+msgstr "Вибран╕ вище теми будуть продемонстрован╕ тут."
+
+#. column one
+#: capplets/theme-switcher/demo.c:123
+msgid "Sample Button"
+msgstr "Зразок кнопки"
+
+#: capplets/theme-switcher/demo.c:127
+msgid "Sample Check Button"
+msgstr "Зразок кнопки вибору"
+
+#: capplets/theme-switcher/demo.c:132
+msgid "Sample Text Entry Field"
+msgstr "Зразок поля вводу тексту"
+
+#: capplets/theme-switcher/demo.c:143
+msgid "Submenu"
+msgstr "П╕дменю"
+
+#: capplets/theme-switcher/demo.c:150
+msgid "Item 1"
+msgstr "Елемент 1"
+
+#: capplets/theme-switcher/demo.c:153
+msgid "Another item"
+msgstr "╤нший елемент"
+
+#: capplets/theme-switcher/demo.c:158
+msgid "Radio Button 1"
+msgstr "Кнопка перемикача 1"
+
+#: capplets/theme-switcher/demo.c:164
+msgid "Radio Button 2"
+msgstr "Кнопка перемикача 2"
+
+#: capplets/theme-switcher/gui.c:88
+#, c-format
+msgid ""
+"Error installing theme:\n"
+"'%s'\n"
+"%s"
+msgstr ""
+"Помилка встановлення теми:\n"
+"'%s'\n"
+"%s"
+
+#: capplets/theme-switcher/gui.c:119
+msgid "Select a theme to install"
+msgstr "Вибер╕ть тему для встановлення"
+
+#: capplets/theme-switcher/gui.c:196
+msgid "Available Themes"
+msgstr "Наявн╕ теми"
+
+#: capplets/theme-switcher/gui.c:221
+msgid ""
+"Auto\n"
+"Preview"
+msgstr ""
+"Автоматичний\n"
+"перегляд"
+
+#: capplets/theme-switcher/gui.c:233
+msgid ""
+"Install new\n"
+"theme..."
+msgstr ""
+"Встановити\n"
+"нову тему..."
+
+#. Font selector.
+#.
+#: capplets/theme-switcher/gui.c:239
+msgid "User Font"
+msgstr "Шрифт користувача"
+
+#. FIXME - should really get this from X somehow
+#. for now we just assume default gtk font
+#: capplets/theme-switcher/gui.c:257
+msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
+msgstr "-gemini-helvetica-medium-r-normal--*-80-*-*-*-*-koi8-u"
+
+#: capplets/theme-switcher/gui.c:276
+msgid "Use custom font."
+msgstr "Використовувати нетиповий шрифт."
+
+#: capplets/theme-switcher/gui.c:366
+#: capplets/wm-properties/wm-properties-capplet.c:669
+msgid ""
+"No help is available/installed for these settings. Please make sure you\n"
+"have the GNOME User's Guide installed on your system."
+msgstr ""
+"Дов╕дкова ╕нформац╕я для цих установок недоступна. Перев╕рте будь-ласка\n"
+"що Кер╕вництво користувача GNOME встановлено у ваш╕й систем╕."
+
+#: capplets/theme-switcher/install.c:31
+msgid "Home directory doesn't exist!\n"
+msgstr "Домашнього каталога нема╓!\n"
+
+#: capplets/theme-switcher/install.c:41
+msgid "Theme does not exist"
+msgstr "Тема в╕дсутня"
+
+#: capplets/theme-switcher/install.c:73
+#, c-format
+msgid "Command '%s' failed"
+msgstr "Команда '%s' не виконалася"
+
+#: capplets/theme-switcher/install.c:78
+msgid "Unknown file format"
+msgstr "Нев╕домий формат файлу"
+
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
+msgid "Gtk+ Theme Selector"
+msgstr ""
+
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
 #, fuzzy
-#~ msgid "Menus can be torn off"
-#~ msgstr "В╕дрив п╕дменю"
+msgid "Select which gtk+ theme to use"
+msgstr "Вибер╕ть тему для встановлення"
 
-#~ msgid "Menu items have icons"
-#~ msgstr "П╕ктограми"
-
-#~ msgid "Status Bar"
-#~ msgstr "Панель стану"
-
+#: capplets/url-properties/url.desktop.in.in.h:1
 #, fuzzy
-#~ msgid "Use status bar instead of dialog when possible"
-#~ msgstr "Використовувати панель стану зам╕сть д╕алог╕в коли це можливо"
+msgid "Configure which programs are used to display URLs"
+msgstr ""
+"Визначення списку програм, що не вм╕ють працювати з менеджером сеанс╕в, але "
+"запускають одночасно з ним"
 
+#: capplets/url-properties/url.desktop.in.in.h:2
 #, fuzzy
-#~ msgid "Status bar is interactive when possible"
-#~ msgstr "╤нтерактивна, коли це можливо"
+msgid "URL Handlers"
+msgstr "обробник:"
 
+#: capplets/url-properties/url-properties.c:49
+msgid "Error initializing the `url-properties' capplet."
+msgstr "Помилка ╕н╕ц╕ал╕зац╕╖ каплету 'url-properties'."
+
+#: capplets/url-properties/url-properties.c:72
+msgid "Protocol"
+msgstr "Протокол"
+
+#: capplets/url-properties/url-properties.c:72
+msgid "Command"
+msgstr "Команда"
+
+#: capplets/url-properties/url-properties.c:89
+msgid "handler:"
+msgstr "обробник:"
+
+#. set some commonly used handlers
+#: capplets/url-properties/url-properties.c:99
+msgid "Netscape"
+msgstr "Netscape"
+
+#: capplets/url-properties/url-properties.c:104
+msgid "Netscape (new window)"
+msgstr "Netscape (в новому в╕кн╕)"
+
+#: capplets/url-properties/url-properties.c:110
+msgid "Help browser"
+msgstr "Переглядач Дов╕док"
+
+#: capplets/url-properties/url-properties.c:115
+msgid "Help browser (new window)"
+msgstr "Переглядач Дов╕док (в новому в╕кн╕)"
+
+#: capplets/url-properties/url-properties.c:127
+msgid "Set"
+msgstr "Встановити"
+
+#: capplets/ui-properties/behavior.desktop.in.in.h:1
+msgid "Behavior"
+msgstr "Програми"
+
+#: capplets/ui-properties/behavior.desktop.in.in.h:2
+msgid "Sets the default behavior of GNOME applications"
+msgstr "Встановлення типового вигляду програм GNOME."
+
+#: capplets/ui-properties/behavior-properties.glade.h:1
+msgid "At the center of the screen"
+msgstr "В центр╕ екрана"
+
+#: capplets/ui-properties/behavior-properties.glade.h:2
+msgid "At the mouse pointer"
+msgstr "На вказ╕внику миш╕"
+
+#: capplets/ui-properties/behavior-properties.glade.h:3
+msgid "Bottom"
+msgstr "Знизу"
+
+#: capplets/ui-properties/behavior-properties.glade.h:4
+msgid "Default  (Spread out - big)"
+msgstr ""
+
+#: capplets/ui-properties/behavior-properties.glade.h:5
+msgid "Dialog Buttons"
+msgstr "Кнопки д╕алог╕в"
+
+#: capplets/ui-properties/behavior-properties.glade.h:6
+msgid "Dialog buttons have icons"
+msgstr "П╕ктограми на кнопках"
+
+#: capplets/ui-properties/behavior-properties.glade.h:7
+msgid "Dialogs"
+msgstr "Д╕алоги"
+
+#: capplets/ui-properties/behavior-properties.glade.h:8
 #, fuzzy
-#~ msgid "Progress bar is on the left"
-#~ msgstr "╤ндикатор поступу праворуч"
+msgid "Dialogs are treated"
+msgstr "Д╕алоги як вс╕ в╕кна"
 
+#: capplets/ui-properties/behavior-properties.glade.h:9
 #, fuzzy
-#~ msgid "Progress bar is on the right"
-#~ msgstr "╤ндикатор поступу праворуч"
+msgid "Dialogs open"
+msgstr "Кнопки д╕алог╕в"
 
-#~ msgid "Tool Bars"
-#~ msgstr "Панел╕ ╕нструмент╕в"
+#: capplets/ui-properties/behavior-properties.glade.h:10
+msgid "Interface"
+msgstr "╤нтерфейс"
 
+#: capplets/ui-properties/behavior-properties.glade.h:11
+msgid "Left"
+msgstr "Л╕воруч"
+
+#: capplets/ui-properties/behavior-properties.glade.h:12
 #, fuzzy
-#~ msgid "Tool bars have a border"
-#~ msgstr "Скошен╕ поля"
+msgid "Left aligned"
+msgstr "П╕д л╕ву руку"
 
+#: capplets/ui-properties/behavior-properties.glade.h:13
 #, fuzzy
-#~ msgid "Tool bar buttons pop up on mouse over"
-#~ msgstr "Скошен╕ поля в кнопок"
+msgid "Like any other window"
+msgstr "Д╕алоги як вс╕ в╕кна"
 
+#: capplets/ui-properties/behavior-properties.glade.h:14
 #, fuzzy
-#~ msgid "Tool bars have line separators"
-#~ msgstr "Розд╕лювач"
+msgid "Menu bars are detachable"
+msgstr "Текстов╕ позначки"
 
+#: capplets/ui-properties/behavior-properties.glade.h:15
 #, fuzzy
-#~ msgid "Tool bars are detachable"
-#~ msgstr "Текстов╕ позначки"
+msgid "Menu bars have a border"
+msgstr "Скошен╕ поля"
 
+#: capplets/ui-properties/behavior-properties.glade.h:16
+msgid "Menu items have icons"
+msgstr "П╕ктограми"
+
+#: capplets/ui-properties/behavior-properties.glade.h:17
+msgid "Menus"
+msgstr ""
+
+#: capplets/ui-properties/behavior-properties.glade.h:18
 #, fuzzy
-#~ msgid "Tool bar buttons are icons only"
-#~ msgstr "Скошен╕ поля в кнопок"
+msgid "Menus can be torn off"
+msgstr "В╕дрив п╕дменю"
 
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
+#: capplets/ui-properties/behavior-properties.glade.h:19
+msgid "Miscellaneous"
+msgstr ""
+
+#: capplets/ui-properties/behavior-properties.glade.h:20
+msgid "Multiple Documents"
+msgstr ""
+
+#: capplets/ui-properties/behavior-properties.glade.h:21
 #, fuzzy
-#~ msgid "Tool bar buttons are text below icons"
-#~ msgstr "Текстов╕ позначки"
+msgid "Notebook tabs"
+msgstr "Закладки"
 
-#~ msgid "Dialogs"
-#~ msgstr "Д╕алоги"
+#: capplets/ui-properties/behavior-properties.glade.h:22
+msgid "Place dialogs over application window when possible"
+msgstr "Розсташовувати д╕алоги над в╕кнами програми коли це можливо"
 
-#~ msgid "Dialog buttons have icons"
-#~ msgstr "П╕ктограми на кнопках"
-
-#~ msgid "Place dialogs over application window when possible"
-#~ msgstr "Розсташовувати д╕алоги над в╕кнами програми коли це можливо"
-
+#: capplets/ui-properties/behavior-properties.glade.h:23
 #, fuzzy
-#~ msgid "Dialogs open"
-#~ msgstr "Кнопки д╕алог╕в"
+msgid "Progress bar is on the left"
+msgstr "╤ндикатор поступу праворуч"
 
-#~ msgid "At the center of the screen"
-#~ msgstr "В центр╕ екрана"
-
-#~ msgid "At the mouse pointer"
-#~ msgstr "На вказ╕внику миш╕"
-
+#: capplets/ui-properties/behavior-properties.glade.h:24
 #, fuzzy
-#~ msgid "Dialogs are treated"
-#~ msgstr "Д╕алоги як вс╕ в╕кна"
+msgid "Progress bar is on the right"
+msgstr "╤ндикатор поступу праворуч"
 
+#: capplets/ui-properties/behavior-properties.glade.h:25
 #, fuzzy
-#~ msgid "Like any other window"
-#~ msgstr "Д╕алоги як вс╕ в╕кна"
+msgid "Right"
+msgstr "Праворуч"
 
+#: capplets/ui-properties/behavior-properties.glade.h:26
 #, fuzzy
-#~ msgid "Specially by the window manager"
-#~ msgstr "На розсуд в╕конного менеджера"
+msgid "Right aligned"
+msgstr "П╕д праву руку"
 
-#~ msgid "Dialog Buttons"
-#~ msgstr "Кнопки д╕алог╕в"
-
+#: capplets/ui-properties/behavior-properties.glade.h:27
 #, fuzzy
-#~ msgid "Spread out"
-#~ msgstr "Розташувати р╕вном╕рно"
+msgid "Seperate windows"
+msgstr "Netscape (в новому в╕кн╕)"
 
+#: capplets/ui-properties/behavior-properties.glade.h:28
+msgid "Settings will not take effect until applications restart"
+msgstr ""
+
+#: capplets/ui-properties/behavior-properties.glade.h:29
 #, fuzzy
-#~ msgid "Left aligned"
-#~ msgstr "П╕д л╕ву руку"
+msgid "Specially by the window manager"
+msgstr "На розсуд в╕конного менеджера"
 
+#: capplets/ui-properties/behavior-properties.glade.h:30
 #, fuzzy
-#~ msgid "Right aligned"
-#~ msgstr "П╕д праву руку"
+msgid "Spread out"
+msgstr "Розташувати р╕вном╕рно"
 
+#: capplets/ui-properties/behavior-properties.glade.h:31
 #, fuzzy
-#~ msgid "Notebook tabs"
-#~ msgstr "Закладки"
+msgid "Spread out (big)"
+msgstr "Розташувати р╕вном╕рно"
 
+#: capplets/ui-properties/behavior-properties.glade.h:32
+msgid "Status Bar"
+msgstr "Панель стану"
+
+#: capplets/ui-properties/behavior-properties.glade.h:33
 #, fuzzy
-#~ msgid "The same window"
-#~ msgstr "Netscape (в новому в╕кн╕)"
+msgid "Status bar is interactive when possible"
+msgstr "╤нтерактивна, коли це можливо"
 
+#: capplets/ui-properties/behavior-properties.glade.h:34
 #, fuzzy
-#~ msgid "Right"
-#~ msgstr "Праворуч"
+msgid "The same window"
+msgstr "Netscape (в новому в╕кн╕)"
 
-#~ msgid "Top"
-#~ msgstr "Зверху"
+#: capplets/ui-properties/behavior-properties.glade.h:35
+msgid "Tool Bars"
+msgstr "Панел╕ ╕нструмент╕в"
 
-#~ msgid "Bottom"
-#~ msgstr "Знизу"
-
+#: capplets/ui-properties/behavior-properties.glade.h:36
 #, fuzzy
-#~ msgid "Session"
-#~ msgstr "Розширення"
+msgid "Tool bar buttons are icons only"
+msgstr "Скошен╕ поля в кнопок"
 
+#: capplets/ui-properties/behavior-properties.glade.h:37
 #, fuzzy
-#~ msgid "Session Chooser"
-#~ msgstr "Зберегти сеанс п╕зн╕ше"
+msgid "Tool bar buttons are text below icons"
+msgstr "Текстов╕ позначки"
 
+#: capplets/ui-properties/behavior-properties.glade.h:38
 #, fuzzy
-#~ msgid "Start Session"
-#~ msgstr "Зберегти сеанс зараз"
+msgid "Tool bar buttons pop up on mouse over"
+msgstr "Скошен╕ поля в кнопок"
 
+#: capplets/ui-properties/behavior-properties.glade.h:39
 #, fuzzy
-#~ msgid "Cancel Login"
-#~ msgstr "В╕дм╕на"
+msgid "Tool bars are detachable"
+msgstr "Текстов╕ позначки"
 
-#~ msgid "Order: "
-#~ msgstr "Порядок: "
-
-#~ msgid "This button sets the start order of the selected programs.\n"
-#~ msgstr "Ця кнопка визнача╓ порядок запуску вибраних програм.\n"
-
-#~ msgid ""
-#~ "This button sets the restart style of the selected programs:\n"
-#~ "Normal programs are unaffected by logouts but can die;\n"
-#~ "Respawn programs are never allowed to die;\n"
-#~ "Trash programs are discarded on logout and can die;\n"
-#~ "Settings programs are always started on every login."
-#~ msgstr ""
-#~ "Ця кнопка зада╓ стиль повторного запуску вибраних програм:\n"
-#~ "Звичайн╕ програми збер╕гаються при завершен╕ роботи, але \"смертн╕\";\n"
-#~ "Пост╕йн╕ програми \"безсмертн╕\";\n"
-#~ "Використан╕ програми \"смертн╕\" та викидаються при завершен╕ роботи;\n"
-#~ "Настроювальн╕ програми запускаються на початку кожного сеанса роботи."
-
-#~ msgid ""
-#~ "This button produces a key to the program states below:\n"
-#~ "Inactive programs are waiting to start or have finished;\n"
-#~ "Starting programs are being given time to get running;\n"
-#~ "Running programs are normal members of the session;\n"
-#~ "Saving programs are saving their session details;\n"
-#~ "Programs which make no contact have Unknown states.\n"
-#~ msgstr ""
-#~ "Ця кнопка вида╓ так╕ типи стан╕в програм:\n"
-#~ "Простоювання - оч╕кування запуску чи вже завершено;\n"
-#~ "Запуск - в╕дведено час на запуск;\n"
-#~ "Виконання - звичайний учасник сеанса;\n"
-#~ "Збереження - збереження подробиць свого сеанса;\n"
-#~ "Нев╕домо - не пов╕домлено свого стану.\n"
-
-#~ msgid "Order"
-#~ msgstr "Порядок"
-
-#~ msgid "Style"
-#~ msgstr "Стиль"
-
-#~ msgid "State"
-#~ msgstr "Стан"
-
-#~ msgid "Program"
-#~ msgstr "Програма"
-
-#~ msgid "Inactive"
-#~ msgstr "Простоювання"
-
-#~ msgid "Waiting to start or already finished."
-#~ msgstr "Оч╕кування запуску чи вже завершено."
-
-#~ msgid "Started but has not yet reported state."
-#~ msgstr "Запущено, але ще не пов╕домлено стан"
-
-#~ msgid "Running"
-#~ msgstr "Виконання"
-
-#~ msgid "Saving session details."
-#~ msgstr "Збереження подробиць сеанса."
-
-#~ msgid "Unknown"
-#~ msgstr "Нев╕домо"
-
-#~ msgid "State not reported within timeout."
-#~ msgstr "За в╕дведений час стан не пов╕домлено."
-
-#~ msgid "Unaffected by logouts but can die."
-#~ msgstr "Збер╕га╓ться при завершен╕ роботи, але \"смертна\"."
-
-#~ msgid "Respawn"
-#~ msgstr "Пост╕йна"
-
-#~ msgid "Never allowed to die."
-#~ msgstr "\"Безсмертна\" програма"
-
-#~ msgid "Trash"
-#~ msgstr "Використана"
-
-#~ msgid "Discarded on logout and can die."
-#~ msgstr "Викида╓ться при завершен╕ роботи ╕ \"смертна\"."
-
-#~ msgid "Always started on every login."
-#~ msgstr "Запуска╓ться на початку кожного сеанса роботи."
-
-#~ msgid "Remove Program"
-#~ msgstr "Видалити програму"
-
-#~ msgid "Options"
-#~ msgstr "Параметри"
-
-#~ msgid "Prompt on logout"
-#~ msgstr "Перепитувати при завершен╕ роботи"
-
-#~ msgid "Automatically save changes to session"
-#~ msgstr "Автоматично збер╕гати зм╕ни сеанса"
-
-#~ msgid "Non-session-managed Startup Programs"
-#~ msgstr "Не керован╕ сес╕╓ю стартов╕ програми"
-
-#~ msgid "Command"
-#~ msgstr "Команда"
-
-#~ msgid "Browse Currently Running Programs..."
-#~ msgstr "Перегляд запущених програм..."
-
-#~ msgid "Only display warnings."
-#~ msgstr "Лише показувати попередження."
-
-#~ msgid "Startup Command"
-#~ msgstr "Стартова команда"
-
-#~ msgid ""
-#~ "Programs with smaller values are started before programs with higher "
-#~ "values. The default value should be OK"
-#~ msgstr ""
-#~ "Програми з меншим числом запускаються до програм з б╕льшим числом. Типове "
-#~ "значення ма╓ бути добрим"
-
-#~ msgid "The startup command cannot be empty"
-#~ msgstr "Стартова команда не може бути пустою"
-
-#~ msgid "Add Startup Program"
-#~ msgstr "Додати стартову програму"
-
-#~ msgid "Edit Startup Program"
-#~ msgstr "Зм╕на стартово╖ програми"
-
-#~ msgid "One"
-#~ msgstr "Один"
-
-#~ msgid "Eenie"
-#~ msgstr "Еники"
-
-#~ msgid "Meenie"
-#~ msgstr "Беники"
-
-#~ msgid "Mynie"
-#~ msgstr "╥ли"
-
-#~ msgid "Catcha"
-#~ msgstr "Еники"
-
-#~ msgid "Tiger"
-#~ msgstr "Беники"
-
-#~ msgid "By Its"
-#~ msgstr "З'╖ли"
-
-#~ msgid "Toe"
-#~ msgstr "В╕дро"
-
-#~ msgid "Selected themes from above will be tested by previewing here."
-#~ msgstr "Вибран╕ вище теми будуть продемонстрован╕ тут."
-
-#~ msgid "Sample Button"
-#~ msgstr "Зразок кнопки"
-
-#~ msgid "Sample Check Button"
-#~ msgstr "Зразок кнопки вибору"
-
-#~ msgid "Sample Text Entry Field"
-#~ msgstr "Зразок поля вводу тексту"
-
-#~ msgid "Submenu"
-#~ msgstr "П╕дменю"
-
-#~ msgid "Item 1"
-#~ msgstr "Елемент 1"
-
-#~ msgid "Another item"
-#~ msgstr "╤нший елемент"
-
-#~ msgid "Radio Button 1"
-#~ msgstr "Кнопка перемикача 1"
-
-#~ msgid "Radio Button 2"
-#~ msgstr "Кнопка перемикача 2"
-
-#~ msgid ""
-#~ "Error installing theme:\n"
-#~ "'%s'\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Помилка встановлення теми:\n"
-#~ "'%s'\n"
-#~ "%s"
-
-#~ msgid "Available Themes"
-#~ msgstr "Наявн╕ теми"
-
-#~ msgid ""
-#~ "Auto\n"
-#~ "Preview"
-#~ msgstr ""
-#~ "Автоматичний\n"
-#~ "перегляд"
-
-#~ msgid ""
-#~ "Install new\n"
-#~ "theme..."
-#~ msgstr ""
-#~ "Встановити\n"
-#~ "нову тему..."
-
-#~ msgid "User Font"
-#~ msgstr "Шрифт користувача"
-
-#~ msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
-#~ msgstr "-gemini-helvetica-medium-r-normal--*-80-*-*-*-*-koi8-u"
-
-#~ msgid "Use custom font."
-#~ msgstr "Використовувати нетиповий шрифт."
-
-#~ msgid "Home directory doesn't exist!\n"
-#~ msgstr "Домашнього каталога нема╓!\n"
-
-#~ msgid "Theme does not exist"
-#~ msgstr "Тема в╕дсутня"
-
-#~ msgid "Command '%s' failed"
-#~ msgstr "Команда '%s' не виконалася"
-
-#~ msgid "Unknown file format"
-#~ msgstr "Нев╕домий формат файлу"
-
-#~ msgid "Error initializing the `url-properties' capplet."
-#~ msgstr "Помилка ╕н╕ц╕ал╕зац╕╖ каплету 'url-properties'."
-
-#~ msgid "Protocol"
-#~ msgstr "Протокол"
-
-#~ msgid "Netscape"
-#~ msgstr "Netscape"
-
-#~ msgid "Netscape (new window)"
-#~ msgstr "Netscape (в новому в╕кн╕)"
-
-#~ msgid "Help browser (new window)"
-#~ msgstr "Переглядач Дов╕док (в новому в╕кн╕)"
-
-#~ msgid "Set"
-#~ msgstr "Встановити"
-
-#~ msgid ""
-#~ "Starting %s\n"
-#~ "(%d seconds left before operation times out)"
-#~ msgstr ""
-#~ "Запуск %s\n"
-#~ "(до зак╕нчення в╕дведеного часу лишилось %d секунд)"
-
-#~ msgid "%s (Current)"
-#~ msgstr "%s (Поточний)"
-
-#~ msgid "Run Configuration Tool for %s"
-#~ msgstr "Запустити настро╓ння %s"
-
-#~ msgid " (Not found)"
-#~ msgstr "  (Не знайдено)"
-
-#~ msgid ""
-#~ "wm-properties-capplet: Unable to initialize window manager.\n"
-#~ "\tAnother window manager is already running and could not be killed\n"
-#~ msgstr ""
-#~ "wm-properties-capplet: Неможливо ╕н╕ц╕ал╕зувати в╕конний менеджер.\n"
-#~ "\t╤нший менеджер в╕кон вже запущений ╕ не може бути зупинений.\n"
-
+#: capplets/ui-properties/behavior-properties.glade.h:40
 #, fuzzy
-#~ msgid ""
-#~ "wm-properties-capplet: Unable to initialize window manager.\n"
-#~ "\t'%s' didn't start\n"
-#~ msgstr ""
-#~ "wm-properties-capplet: Неможливо ╕н╕ц╕ал╕зувати в╕конний менеджер.\n"
+msgid "Tool bars have a border"
+msgstr "Скошен╕ поля"
 
-#~ msgid "Previous window manager did not die\n"
-#~ msgstr "Попередн╕й в╕конний менеджер не завершив роботу\n"
+#: capplets/ui-properties/behavior-properties.glade.h:41
+#, fuzzy
+msgid "Tool bars have line separators"
+msgstr "Розд╕лювач"
 
-#~ msgid ""
-#~ "Could not start '%s'.\n"
-#~ "Falling back to previous window manager '%s'\n"
-#~ msgstr ""
-#~ "Неможливо запустити '%s'.\n"
-#~ "Повернення до попереднього в╕конного менеджера '%s'\n"
+#: capplets/ui-properties/behavior-properties.glade.h:42
+msgid "Top"
+msgstr "Зверху"
 
-#~ msgid ""
-#~ "Could not start fallback window manager.\n"
-#~ "Please run a window manager manually. You can\n"
-#~ "do this by selecting \"Run Program\" in the\n"
-#~ "foot menu\n"
-#~ msgstr ""
-#~ "Неможливо запустити запасний в╕конний менеджер.\n"
-#~ "Запуст╕ть будь-ласка в╕конний менеджер вручну.\n"
-#~ "Це можна зробити вибравши \"Запустити програму\"\n"
-#~ "в головному меню\n"
+#: capplets/ui-properties/behavior-properties.glade.h:43
+#, fuzzy
+msgid "Use status bar instead of dialog when possible"
+msgstr "Використовувати панель стану зам╕сть д╕алог╕в коли це можливо"
 
-#~ msgid "OK"
-#~ msgstr "Гаразд"
+#: capplets/ui-properties/behavior-properties.glade.h:44
+msgid "When opening Multiple documents, use"
+msgstr ""
 
-#~ msgid ""
-#~ "Your current window manager has been changed. In order for\n"
-#~ "this change to be saved, you will need to save your current\n"
-#~ "session. You can do so immediately by selecting the \"Save session\n"
-#~ "now\" below, or you can save your session later.  This can be\n"
-#~ "done either selecting \"Save Current Session\" under \"Settings\"\n"
-#~ "in the main menu, or by turning on \"Save Current Setup\" when\n"
-#~ "you log out.\n"
-#~ msgstr ""
-#~ "В╕дбулася зам╕на в╕конного менеджера. Щоб зберегти цю зм╕ну\n"
-#~ "необх╕дно зберегти поточний сеанс роботи. Це можна зробити зараз\n"
-#~ "(вибравши \"Зберегти сеанс зараз\" нижче) або п╕зн╕ше (вибравши\n"
-#~ "\"Зберегти поточний сеанс\" в розд╕л╕ \"Установки\" головного меню \n"
-#~ "чи вв╕мкнувши \"Зберегти поточний стан\" при завершен╕ роботи).\n"
+#: capplets/ui-properties/behavior-properties.glade.h:45
+msgid "When using Notebook tabs, place the tabs on the"
+msgstr ""
 
-#~ msgid "Save Session Later"
-#~ msgstr "Зберегти сеанс п╕зн╕ше"
+#: capplets/ui-properties/behavior-properties.glade.h:46
+msgid "Wherever the Window Manager places them"
+msgstr ""
 
-#~ msgid "Save Session Now"
-#~ msgstr "Зберегти сеанс зараз"
+#: capplets/wm-properties/wm-properties-capplet.c:170
+#, c-format
+msgid ""
+"Starting %s\n"
+"(%d seconds left before operation times out)"
+msgstr ""
+"Запуск %s\n"
+"(до зак╕нчення в╕дведеного часу лишилось %d секунд)"
 
-#~ msgid ""
-#~ "Your current window manager has been changed. In order for\n"
-#~ "this change to be saved, you will need to save your current\n"
-#~ "session. This can be done by either selecting \"Save Current Session\"\n"
-#~ "under \"Settings\" in the main menu, or by turning on\n"
-#~ "\"Save Current Setup\" when you log out.\n"
-#~ msgstr ""
-#~ "В╕дбулася зам╕на в╕конного менеджера. Щоб зберегти цю зм╕ну необх╕дно\n"
-#~ "зберегти поточний сеанс роботи. Для цього неох╕дно вибрати\n"
-#~ "\"Зберегти поточний сеанс\" в розд╕л╕ \"Установки\" головного меню\n"
-#~ "чи вв╕мкнути \"Зберегти поточний стан\" при завершен╕ роботи.\n"
+#: capplets/wm-properties/wm-properties-capplet.c:331
+#, c-format
+msgid "%s (Current)"
+msgstr "%s (Поточний)"
 
-#~ msgid "Add New Window Manager"
-#~ msgstr "Додати новий в╕конний менеджер"
+#: capplets/wm-properties/wm-properties-capplet.c:334
+#, c-format
+msgid "Run Configuration Tool for %s"
+msgstr "Запустити настро╓ння %s"
 
-#~ msgid "Cancel"
-#~ msgstr "В╕дм╕нити"
+#: capplets/wm-properties/wm-properties-capplet.c:345
+msgid " (Not found)"
+msgstr "  (Не знайдено)"
 
-#~ msgid "Window manager is session managed"
-#~ msgstr "В╕конний менеджер керований сес╕╓ю"
+#: capplets/wm-properties/wm-properties-capplet.c:384
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\tAnother window manager is already running and could not be killed\n"
+msgstr ""
+"wm-properties-capplet: Неможливо ╕н╕ц╕ал╕зувати в╕конний менеджер.\n"
+"\t╤нший менеджер в╕кон вже запущений ╕ не може бути зупинений.\n"
 
-#~ msgid "Name cannot be empty"
-#~ msgstr "Назва не може бути пустою"
+#: capplets/wm-properties/wm-properties-capplet.c:388
+#, fuzzy, c-format
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\t'%s' didn't start\n"
+msgstr "wm-properties-capplet: Неможливо ╕н╕ц╕ал╕зувати в╕конний менеджер.\n"
 
-#~ msgid "Command cannot be empty"
-#~ msgstr "Команда не може бути пустою"
+#: capplets/wm-properties/wm-properties-capplet.c:437
+msgid "Previous window manager did not die\n"
+msgstr "Попередн╕й в╕конний менеджер не завершив роботу\n"
 
-#~ msgid "You cannot delete the current Window Manager"
-#~ msgstr "Ви не можете видалити поточний в╕конний менеджер"
+#: capplets/wm-properties/wm-properties-capplet.c:470
+#, c-format
+msgid ""
+"Could not start '%s'.\n"
+"Falling back to previous window manager '%s'\n"
+msgstr ""
+"Неможливо запустити '%s'.\n"
+"Повернення до попереднього в╕конного менеджера '%s'\n"
 
-#~ msgid ""
-#~ "an initialization error occurred while starting 'wm-properties-capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "помилка ╕н╕ц╕ал╕зац╕╖ п╕д час запуску 'wm-properties-capplet'.\n"
-#~ "виконання перервано...\n"
+#: capplets/wm-properties/wm-properties-capplet.c:501
+msgid ""
+"Could not start fallback window manager.\n"
+"Please run a window manager manually. You can\n"
+"do this by selecting \"Run Program\" in the\n"
+"foot menu\n"
+msgstr ""
+"Неможливо запустити запасний в╕конний менеджер.\n"
+"Запуст╕ть будь-ласка в╕конний менеджер вручну.\n"
+"Це можна зробити вибравши \"Запустити програму\"\n"
+"в головному меню\n"
 
-#~ msgid "Color 1"
-#~ msgstr "Кол╕р 1"
+#: capplets/wm-properties/wm-properties-capplet.c:526
+#: capplets/wm-properties/wm-properties-capplet.c:781
+#: capplets/wm-properties/wm-properties-capplet.c:890
+#: capplets/wm-properties/wm-properties-capplet.c:897
+#: capplets/wm-properties/wm-properties-capplet.c:1043
+msgid "OK"
+msgstr "Гаразд"
 
-#~ msgid "Color 2"
-#~ msgstr "Кол╕р 2"
+#: capplets/wm-properties/wm-properties-capplet.c:544
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. You can do so immediately by selecting the \"Save session\n"
+"now\" below, or you can save your session later.  This can be\n"
+"done either selecting \"Save Current Session\" under \"Settings\"\n"
+"in the main menu, or by turning on \"Save Current Setup\" when\n"
+"you log out.\n"
+msgstr ""
+"В╕дбулася зам╕на в╕конного менеджера. Щоб зберегти цю зм╕ну\n"
+"необх╕дно зберегти поточний сеанс роботи. Це можна зробити зараз\n"
+"(вибравши \"Зберегти сеанс зараз\" нижче) або п╕зн╕ше (вибравши\n"
+"\"Зберегти поточний сеанс\" в розд╕л╕ \"Установки\" головного меню \n"
+"чи вв╕мкнувши \"Зберегти поточний стан\" при завершен╕ роботи).\n"
 
-#~ msgid "Message"
-#~ msgstr "Пов╕домлення"
+#: capplets/wm-properties/wm-properties-capplet.c:551
+msgid "Save Session Later"
+msgstr "Зберегти сеанс п╕зн╕ше"
+
+#: capplets/wm-properties/wm-properties-capplet.c:551
+msgid "Save Session Now"
+msgstr "Зберегти сеанс зараз"
+
+#: capplets/wm-properties/wm-properties-capplet.c:554
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. This can be done by either selecting \"Save Current Session\"\n"
+"under \"Settings\" in the main menu, or by turning on\n"
+"\"Save Current Setup\" when you log out.\n"
+msgstr ""
+"В╕дбулася зам╕на в╕конного менеджера. Щоб зберегти цю зм╕ну необх╕дно\n"
+"зберегти поточний сеанс роботи. Для цього неох╕дно вибрати\n"
+"\"Зберегти поточний сеанс\" в розд╕л╕ \"Установки\" головного меню\n"
+"чи вв╕мкнути \"Зберегти поточний стан\" при завершен╕ роботи.\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:780
+msgid "Add New Window Manager"
+msgstr "Додати новий в╕конний менеджер"
+
+#: capplets/wm-properties/wm-properties-capplet.c:781
+msgid "Cancel"
+msgstr "В╕дм╕нити"
+
+#: capplets/wm-properties/wm-properties-capplet.c:819
+msgid "Configuration Command:"
+msgstr "Команда настроювання:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:838
+msgid "Window manager is session managed"
+msgstr "В╕конний менеджер керований сес╕╓ю"
+
+#: capplets/wm-properties/wm-properties-capplet.c:888
+msgid "Name cannot be empty"
+msgstr "Назва не може бути пустою"
+
+#: capplets/wm-properties/wm-properties-capplet.c:895
+msgid "Command cannot be empty"
+msgstr "Команда не може бути пустою"
+
+#: capplets/wm-properties/wm-properties-capplet.c:944
+#: capplets/wm-properties/wm-properties-capplet.c:986
+msgid "Edit Window Manager"
+msgstr "Редагувати властивост╕ в╕конного менеджера"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1042
+msgid "You cannot delete the current Window Manager"
+msgstr "Ви не можете видалити поточний в╕конний менеджер"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1089
+#, fuzzy
+msgid "Window Manager Selector"
+msgstr "Редагувати властивост╕ в╕конного менеджера"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1191
+msgid ""
+"an initialization error occurred while starting 'wm-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"помилка ╕н╕ц╕ал╕зац╕╖ п╕д час запуску 'wm-properties-capplet'.\n"
+"виконання перервано...\n"
+
+#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.in.h:1
+msgid "Enlightenment"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.in.h:1
+msgid "Ice WM"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.in.h:1
+msgid "Scwm"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.in.h:1
+#, fuzzy
+msgid "Window Maker"
+msgstr "В╕конний менеджер"
+
+#: capplets/wm-properties/wm-desktops/twm.desktop.in.in.h:1
+msgid "twm"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:1
+#, fuzzy
+msgid "Control Center Menu"
+msgstr "Центр керування GNOME"
+
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:2
+#, fuzzy
+msgid "Sawfish window manager"
+msgstr "Виб╕р в╕конного менеджера"
+
+#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:2
+msgid "Configure window appearance"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:1
+msgid "Configure key shortcuts"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:2
+msgid "Shortcuts"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:1
+msgid "Configure window focusing"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:2
+#, fuzzy
+msgid "Focus behavior"
+msgstr "Програми"
+
+#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
+msgid "Configure window properties"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:2
+#, fuzzy
+msgid "Matched Windows"
+msgstr "Netscape (в новому в╕кн╕)"
+
+#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:1
+msgid "Configure window minimization and maximization"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:2
+msgid "Minimizing and Maximizing"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
+msgid "Configure window manager configuration properties"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:2
+msgid "Meta"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
+msgid "Configure miscellaneous window features"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:1
+msgid "Configure window move/resize"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:2
+msgid "Moving and Resizing"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:1
+msgid "Configure window placement"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:2
+msgid "Placement"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
+#, fuzzy
+msgid "Enable window manager sound events"
+msgstr "Використовувати енергозбереження."
+
+#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:1
+msgid "Configure workspaces"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:2
+msgid "Workspaces"
+msgstr ""

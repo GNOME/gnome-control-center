@@ -1,7 +1,16 @@
-always_built_SUBDIRS =						\
-	common background keyboard mouse sound 	\
-	default-applications desktop-links
-
-#rollback
+always_built_SUBDIRS =		\
+	background 		\
+	common 			\
+	default-applications 	\
+	desktop-links		\
+	file-types 		\
+	keyboard 		\
+	mime-type		\
+	mouse 			\
+	sound 			\
+	theme-switcher		\
+	ui-properties		\
+	url-properties		\
+	wm-properties		
 
 SUBDIRS =  $(always_built_SUBDIRS)

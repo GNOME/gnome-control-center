@@ -194,6 +194,7 @@ msgid "Configure miscellaneous window features"
 msgstr "Çeþitli pencere özelliklerini yapýlandýr"
 
 #: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
+#: capplets/ui-properties/behavior-properties.glade.h:19
 msgid "Miscellaneous"
 msgstr "Çeþitli"
 
@@ -338,18 +339,22 @@ msgid "Video"
 msgstr "Video"
 
 #: capplets/file-types/file-types-capplet.c:212
+#: capplets/file-types/file-types-capplet.c:1882
 msgid "Description"
 msgstr "Açýklama"
 
 #: capplets/file-types/file-types-capplet.c:219
+#: capplets/mime-type/new-mime-window.c:39
 msgid "Extensions"
 msgstr "Uzantýlar"
 
 #: capplets/file-types/file-types.desktop.in.h:1
+#: capplets/file-types/file-types.desktop.in.in.h:1
 msgid "File Types and Programs"
 msgstr "Dosya Türleri ve Programlar"
 
 #: capplets/file-types/file-types.desktop.in.h:2
+#: capplets/file-types/file-types.desktop.in.in.h:2
 msgid "Specify which programs are used to open or view each file type"
 msgstr ""
 
@@ -384,7 +389,9 @@ msgstr ""
 msgid "Custom"
 msgstr "Özel"
 
+#: capplets/file-types/file-types-capplet.c:1884
 #: capplets/file-types/mime-edit-dialog.c:164
+#: capplets/mime-type/mime-data.c:385
 msgid "Extension"
 msgstr "Uzantý"
 
@@ -412,6 +419,8 @@ msgstr ""
 msgid "True if this dialog is for adding a MIME type"
 msgstr ""
 
+#: capplets/file-types/file-types-capplet.c:1075
+#: capplets/file-types/file-types-capplet.c:1219
 #: capplets/file-types/mime-edit-dialog.c:387
 #: capplets/file-types/mime-edit-dialog.c:442
 msgid "None"
@@ -548,95 +557,117 @@ msgstr "Ses özellikleri"
 
 #. just 8 short names that will serve as samples for titles in demo
 #: capplets/theme-switcher/control/control.c:19
+#: capplets/theme-switcher/demo.c:56
 msgid "Eenie"
 msgstr "Gubarcýk"
 
 #: capplets/theme-switcher/control/control.c:19
+#: capplets/theme-switcher/demo.c:57
 msgid "Mynie"
 msgstr "Helvacýk"
 
 #: capplets/theme-switcher/control/control.c:19
+#: capplets/theme-switcher/demo.c:58
 msgid "Catcha"
 msgstr "Atili"
 
 #: capplets/theme-switcher/control/control.c:19
+#: capplets/theme-switcher/demo.c:59
 msgid "By Its"
 msgstr "Batili"
 
 #: capplets/theme-switcher/control/control.c:20
+#: capplets/theme-switcher/demo.c:56
 msgid "Meenie"
 msgstr "Voltran"
 
 #: capplets/theme-switcher/control/control.c:20
+#: capplets/theme-switcher/demo.c:57
 msgid "Moe"
 msgstr "Minnoþ"
 
 #: capplets/theme-switcher/control/control.c:20
+#: capplets/theme-switcher/demo.c:58
 msgid "Tiger"
 msgstr "Tiger"
 
 #: capplets/theme-switcher/control/control.c:20
+#: capplets/theme-switcher/demo.c:59
 msgid "Toe"
 msgstr "Enik"
 
 #: capplets/theme-switcher/control/control.c:38
+#: capplets/theme-switcher/demo.c:118
 msgid "Selected themes from above will be tested by previewing here."
 msgstr ""
 
 #. column one
 #: capplets/theme-switcher/control/control.c:43
+#: capplets/theme-switcher/demo.c:123
 msgid "Sample Button"
 msgstr "Örnek Düðme"
 
 #: capplets/theme-switcher/control/control.c:47
+#: capplets/theme-switcher/demo.c:127
 msgid "Sample Check Button"
 msgstr "Örnek Kontrol Düðmesi"
 
 #: capplets/theme-switcher/control/control.c:53
+#: capplets/theme-switcher/demo.c:132
 msgid "Sample Text Entry Field"
 msgstr "Örnek Metin Yazma Bölgesi"
 
 #: capplets/theme-switcher/control/control.c:64
+#: capplets/theme-switcher/demo.c:143
 msgid "Submenu"
 msgstr "Alt menü"
 
 #: capplets/theme-switcher/control/control.c:69
+#: capplets/theme-switcher/demo.c:150
 msgid "Item 1"
 msgstr "1. Öðe"
 
 #: capplets/theme-switcher/control/control.c:71
+#: capplets/theme-switcher/demo.c:153
 msgid "Another item"
 msgstr "Diðer bir öðe"
 
 #: capplets/theme-switcher/control/control.c:75
+#: capplets/theme-switcher/demo.c:158
 msgid "Radio Button 1"
 msgstr "1. Radyo Düðmesi"
 
 #: capplets/theme-switcher/control/control.c:81
+#: capplets/theme-switcher/demo.c:164
 msgid "Radio Button 2"
 msgstr "2. Radyo Düðmesi"
 
 #: capplets/theme-switcher/control/control.c:102
+#: capplets/theme-switcher/demo.c:54
 msgid "One"
 msgstr "Bir"
 
 #: capplets/theme-switcher/control/control.c:108
+#: capplets/theme-switcher/demo.c:54
 msgid "Two"
 msgstr "Ýki"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
 msgid "Gtk+ Theme Selector"
 msgstr "Gtk+ Tema Seçici"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
 msgid "Select which gtk+ theme to use"
 msgstr ""
 
-#: capplets/theme-switcher/main.c:213
+#: capplets/theme-switcher/gui.c:118 capplets/theme-switcher/main.c:213
 msgid "Select a theme to install"
 msgstr "Kurulacak bir tema seçiniz"
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
+#: capplets/ui-properties/behavior.desktop.in.in.h:2
 msgid "Sets the default behavior of GNOME applications"
 msgstr ""
 
@@ -681,6 +712,8 @@ msgstr ""
 "Yardým yüklenmemiþ ya da yok. Lütfen GNOME Kullanýcý\n"
 "Kýlavuzunun yüklendiðine emin olun."
 
+#: capplets/theme-switcher/gui.c:370
+#: capplets/wm-properties/wm-properties-capplet.c:671
 #: control-center/capplet-dir-view.c:491
 msgid "Close"
 msgstr "Kapat"
@@ -738,3 +771,932 @@ msgstr "Çal"
 #: libsounds/sound-view.c:193
 msgid "Select sound file"
 msgstr "Ses dosyasýný seçin"
+
+#: capplets/desktop-links/panel.desktop.in.in.h:1
+msgid "Global panel properties"
+msgstr "Genel panel özellikleri"
+
+#: capplets/desktop-links/panel.desktop.in.in.h:2
+msgid "Panel"
+msgstr "Panel"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:387
+msgid "Edit Applications List"
+msgstr "Uygulama Listesini Düzenle"
+
+#. Add label
+#: capplets/file-types/file-types-capplet-dialogs.c:409
+#, c-format
+msgid "Select applications to appear in menu for MIME type \"%s\""
+msgstr "\"%s\" mime türü için menüde görünecek uygulamalarý seçin"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:433
+msgid "Add Application..."
+msgstr "Uygulama Ekle..."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:440
+msgid "Edit Application..."
+msgstr "Uygulamayý Düzenle..."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:446
+msgid "Delete Application"
+msgstr "Uygulamayý Sil"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:480
+msgid "Edit Components List"
+msgstr "Eleman Listesini Düzenle"
+
+#. Add label
+#: capplets/file-types/file-types-capplet-dialogs.c:500
+#, c-format
+msgid "Select views to appear in menu for MIME type \"%s\""
+msgstr "\"%s\" mime türü için menüde görünecek görünümleri seçin"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:720
+msgid ""
+"The MIME type entered contained upper case characters. Upper case characters "
+"were changed to lower case for you."
+msgstr ""
+"Girilen MIME türü büyük harfler içeriyor. Bunlar sizin yerinize küçük harfe "
+"dönüþtürüldü."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:723
+msgid "Add New MIME Type"
+msgstr "Yeni MIME Türü Ekle"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:769
+msgid "Add MIME Type"
+msgstr "MIME Türü Ekle"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:773
+msgid "New MIME type (e.g. image/x-thumper):"
+msgstr "Yeni MIME türü (örn. image/x-thumper):"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:780
+msgid "Description (e.g. Thumper image):"
+msgstr "Açýklama (örn. Thumper resmi):"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:947
+msgid "File Extensions "
+msgstr "Dosya Uzantýlarý "
+
+#: capplets/file-types/file-types-capplet-dialogs.c:967
+#: capplets/mime-type/mime-type-capplet.c:93
+#: capplets/wm-properties/wm-properties-capplet.c:1117
+msgid "Add..."
+msgstr "Ekle..."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:972
+msgid "    Remove    "
+msgstr "    Kaldýr    "
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1041
+msgid "Add New Extension"
+msgstr "Yeni Uzantý Ekle"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1045
+msgid ""
+"Type in the extensions for this mime-type (without dot).\n"
+"You can enter several extensions seperated by a space,\n"
+"for example: html htm"
+msgstr ""
+"Bu MIME türü için uzantýlarý yazýn (noktasýz).\n"
+"Bir boþluk ile ayýrarak çok sayýda uzantý girebilirsiniz.\n"
+"örneðin: htm html"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1052
+#: capplets/mime-type/new-mime-window.c:50
+msgid "Extension:"
+msgstr "Uzantý:"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1194
+msgid "You must enter a name."
+msgstr "Bir isim vermelisiniz."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1197
+msgid "You must enter a command."
+msgstr "Bir komut vermelisiniz."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1207
+#, c-format
+msgid ""
+"\"%s\" does not exist or is not executable.\n"
+"Check your spelling and make sure you have\n"
+"the right permissions to execute this file."
+msgstr ""
+"\"%s\" ya yok ya da çalýþtýrýlabilir deðil.\n"
+"Yazýlýþýný kontol edin ve bu dosyayý çalýþtýrma\n"
+"yetkiniz olup olmadýðýndan emin olun."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1213
+#, c-format
+msgid ""
+"The command \"%s\" cannot be found.\n"
+"You must use a command that can work from any command line."
+msgstr ""
+"\"%s\" komutu bulunamadý.\n"
+"Herhangi bir komut satýrýndan çalýþtýrlabilen bir komut kullanmalýsýnýz."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1225
+msgid "Bad Application Name"
+msgstr "Uygulama Ýsmi Hatalý"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1226
+msgid "Bad Application Command"
+msgstr "Uygulama Komutu Hatalý"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1258
+msgid "Add Application"
+msgstr "Uygulama Ekle"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1259
+msgid "Edit Application"
+msgstr "Uygulamayý Düzenle"
+
+#. Application Name label and entry
+#: capplets/file-types/file-types-capplet-dialogs.c:1271
+msgid "Application Name:"
+msgstr "Uygulama Ýsmi:"
+
+#. Application Command label and entry
+#: capplets/file-types/file-types-capplet-dialogs.c:1282
+msgid "Application Command:"
+msgstr "Uygulama Komutu:"
+
+#. Open Behavior frame
+#: capplets/file-types/file-types-capplet-dialogs.c:1293
+msgid "Open Behavior"
+msgstr "Açma Davranýþý"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1299
+msgid "Can open multiple files"
+msgstr "Birden çok dosya açabilir"
+
+#. FIXME bugzilla.eazel.com 6066: This needs to be three options now: "yes", "no", and "use uris for non-file locations"
+#: capplets/file-types/file-types-capplet-dialogs.c:1307
+msgid "Can open from URI"
+msgstr "URI'den açýlabilir"
+
+#: capplets/file-types/file-types-capplet.c:735
+#: capplets/file-types/file-types-capplet.c:1883
+msgid "MIME Type"
+msgstr "MIME Türü"
+
+#: capplets/file-types/file-types-capplet.c:742
+msgid "Change Icon"
+msgstr "Simgeyi Deðiþtir"
+
+#: capplets/file-types/file-types-capplet.c:749
+msgid "Change File Extensions"
+msgstr "Dosya Uzantýlarýný Deðiþtir"
+
+#: capplets/file-types/file-types-capplet.c:757
+msgid "Default Action:"
+msgstr "Öntanýmlý Eylem:"
+
+#: capplets/file-types/file-types-capplet.c:769
+msgid "Use Viewer"
+msgstr "Göstericiyi Kullan"
+
+#: capplets/file-types/file-types-capplet.c:775
+msgid "Open With Application"
+msgstr "Uygulama ile aç"
+
+#: capplets/file-types/file-types-capplet.c:786
+msgid "Edit List"
+msgstr "Listeyi Düzenle"
+
+#: capplets/file-types/file-types-capplet.c:811
+msgid "Add New MIME Type..."
+msgstr "Yeni MIME Türü Ekle..."
+
+#: capplets/file-types/file-types-capplet.c:817
+msgid "Delete This MIME Type"
+msgstr "Bu MIME Türünü Sil"
+
+#: capplets/file-types/file-types-capplet.c:828
+msgid "Revert to System Defaults"
+msgstr "Öntanýmlý Deðerlere Dön"
+
+#: capplets/file-types/file-types-capplet.c:1324
+msgid ""
+"Reverting to system settings will lose any changes\n"
+"you have ever made to File Types and Programs.\n"
+"Revert anyway?"
+msgstr ""
+"Öntanýmlý deðerlere dönerek Dosya Türleri ve Uygulamalarda\n"
+"yaptýðýnýz tüm deðiþiklikleri kaybedeceksiniz.\n"
+"Öntanýmlý deðerlere dönülsün mü?"
+
+#. Add default action to fourth column
+#: capplets/file-types/file-types-capplet.c:1393
+#: capplets/file-types/file-types-capplet.c:1593
+#: capplets/file-types/file-types-capplet.c:1719
+msgid "none"
+msgstr "yok"
+
+#: capplets/file-types/file-types-capplet.c:1434
+#: capplets/file-types/file-types-capplet.c:1620
+#: capplets/file-types/file-types-capplet.c:1763
+#, c-format
+msgid "View as %s"
+msgstr "%s olarak göster"
+
+#: capplets/file-types/file-types-capplet.c:1885
+msgid "Default Action"
+msgstr "Öntanýmlý Eylem"
+
+#: capplets/file-types/file-types-icon-entry.c:258
+msgid "Can't find an hbox, using a normal file selection"
+msgstr "Bir hbox bulunamadý, normal dosya seçimi kullanýlýyor"
+
+#: capplets/file-types/file-types-icon-entry.c:264
+#: capplets/theme-switcher/gui.c:232 capplets/theme-switcher/gui.c:304
+msgid "Preview"
+msgstr "Önizleme"
+
+#: capplets/file-types/file-types-icon-entry.c:381
+msgid "Select an icon"
+msgstr "Bir simge seç"
+
+#. icon box
+#: capplets/mime-type/edit-window.c:266
+msgid "Select an icon..."
+msgstr "Bir simge seçin..."
+
+#: capplets/mime-type/edit-window.c:276
+#: capplets/mime-type/new-mime-window.c:31
+msgid "Mime Type: "
+msgstr "Mime Türü: "
+
+#: capplets/mime-type/edit-window.c:306
+msgid "Add"
+msgstr "Ekle"
+
+#: capplets/mime-type/edit-window.c:314
+#: capplets/url-properties/url-properties.c:135
+msgid "Remove"
+msgstr "Kaldýr"
+
+#. gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
+#: capplets/mime-type/edit-window.c:341
+#: capplets/mime-type/new-mime-window.c:69
+msgid "First Regular Expression: "
+msgstr "Ýlk Düzgün Deyim: "
+
+#: capplets/mime-type/edit-window.c:349
+#: capplets/mime-type/new-mime-window.c:80
+msgid "Second Regular Expression: "
+msgstr "Ýkinci Düzgün Deyim: "
+
+#. Actions box
+#: capplets/mime-type/edit-window.c:356
+msgid "Mime Type Actions"
+msgstr "Mime Tipi Eylemleri"
+
+#: capplets/mime-type/edit-window.c:363
+#, c-format
+msgid "Example: emacs %f"
+msgstr "Örnek: emacs %f"
+
+#: capplets/mime-type/edit-window.c:368
+msgid "Open"
+msgstr "Aç"
+
+#: capplets/mime-type/edit-window.c:374 capplets/mime-type/edit-window.c:390
+#: capplets/mime-type/edit-window.c:405
+msgid "Select a file..."
+msgstr "Bir dosya seçin..."
+
+#: capplets/mime-type/edit-window.c:383
+msgid "View"
+msgstr "Görünüm"
+
+#: capplets/mime-type/edit-window.c:399
+msgid "Edit"
+msgstr "Düzenle"
+
+#. we initialize everything
+#: capplets/mime-type/edit-window.c:448
+#, c-format
+msgid "Set actions for %s"
+msgstr "%s için eylemleri belirle"
+
+#: capplets/mime-type/mime-data.c:384
+msgid "Mime Type"
+msgstr "Mime Türü"
+
+#: capplets/mime-type/mime-data.c:493
+msgid "You must enter a mime-type"
+msgstr "Bir mime türü girmek zorundasýnýz"
+
+#: capplets/mime-type/mime-data.c:498
+msgid ""
+"You must add either a regular-expression or\n"
+"a file-name extension"
+msgstr ""
+"Ya bir düzgün deyim, ya da bir dosya uzantýsý \n"
+"belirlemek zorundasýnýz."
+
+#: capplets/mime-type/mime-data.c:502
+msgid ""
+"Please put your mime-type in the format:\n"
+"CATEGORY/TYPE\n"
+"\n"
+"For Example:\n"
+"image/png"
+msgstr ""
+"Lütfen mime tipini belirli bir þekilde girin:\n"
+"SINIF/TÜR\n"
+"\n"
+"Örnek:\n"
+"image/png"
+
+#: capplets/mime-type/mime-data.c:507
+msgid "This mime-type already exists"
+msgstr "Bu mime-tipi zaten var"
+
+#: capplets/mime-type/mime-data.c:588 capplets/mime-type/mime-info.c:427
+msgid ""
+"We are unable to create the directory\n"
+"~/.gnome/mime-info\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+"~/.gnome/mime-info dizinini oluþturamadýk \n"
+"\n"
+"\n"
+"Bu durumu kaydedemeyeceðiz."
+
+#: capplets/mime-type/mime-data.c:594 capplets/mime-type/mime-info.c:433
+msgid ""
+"We are unable to access the directory\n"
+"~/.gnome/mime-info\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+"~/.gnome/mime-info dizinine ulaþamadýk \n"
+"\n"
+"\n"
+"Bu durumu kaydedemeyeceðiz."
+
+#: capplets/mime-type/mime-data.c:605
+msgid ""
+"Cannot create the file\n"
+"~/.gnome/mime-info/user.mime\n"
+"\n"
+"We will not be able to save the state"
+msgstr ""
+"~/.gnome/mime-info/user.mime dosyasýný\n"
+"oluþturamadým \n"
+"\n"
+"Bu durumu kaydedemiyeceðiz ."
+
+#: capplets/mime-type/mime-info.c:444
+msgid ""
+"Cannot create the file\n"
+"~/.gnome/mime-info/user.keys.\n"
+"\n"
+"We will not be able to save the state"
+msgstr ""
+"~/.gnome/mime-info/user.keys dosyasýný\n"
+"oluþturamadým \n"
+"\n"
+"Bu durumu kaydedemeyeceðiz."
+
+#: capplets/mime-type/mime-type-capplet.c:83
+#: capplets/wm-properties/wm-properties-capplet.c:1127
+msgid "Delete"
+msgstr "Sil"
+
+#: capplets/mime-type/mime-type-capplet.c:97
+#: capplets/wm-properties/wm-properties-capplet.c:1122
+msgid "Edit..."
+msgstr "Düzenle..."
+
+#: capplets/mime-type/mime-type.desktop.in.in.h:1
+msgid "Configure how files are associated and started"
+msgstr ""
+"Dosyalarýn nasýl iliþkilendirileceðinin ve baþlatýlacaðýnýn yapýlandýrýlmasý"
+
+#: capplets/mime-type/mime-type.desktop.in.in.h:2
+msgid "Mime Types"
+msgstr "Mime Türleri"
+
+#: capplets/mime-type/new-mime-window.c:25
+msgid "Add Mime Type"
+msgstr "Mime Türü Ekle"
+
+#: capplets/mime-type/new-mime-window.c:26
+msgid ""
+"Add a new Mime Type\n"
+"For example:  image/tiff; text/x-scheme"
+msgstr ""
+"Yeni bir Mime tipi ekle\n"
+"Örneðin: image/tiff; text/x-scheme"
+
+#: capplets/mime-type/new-mime-window.c:43
+msgid ""
+"Type in the extensions for this mime-type.\n"
+"For example:  .html, .htm"
+msgstr ""
+"Bu Mime tipi için geçerli olan uzantýlar .\n"
+"Mesela: .html .htm"
+
+#: capplets/mime-type/new-mime-window.c:55
+msgid "Regular Expressions"
+msgstr "Düzgün Deyimler"
+
+#: capplets/mime-type/new-mime-window.c:59
+msgid ""
+"You can set up two regular expressions here to identify the Mime Type\n"
+"by.  These fields are optional."
+msgstr ""
+"Buradan (isterseniz) bir ya da iki düzenli deyimi ayarlayabilirsiniz.\n"
+"\n"
+"Bunlar mime tipini belirlemeye yarayacaktýr."
+
+#: capplets/theme-switcher/gui.c:87
+#, c-format
+msgid ""
+"Error installing theme:\n"
+"'%s'\n"
+"%s"
+msgstr ""
+"Tema '%s' yüklenirken\n"
+"hata oldu:\n"
+"%s"
+
+#: capplets/theme-switcher/gui.c:195
+msgid "Available Themes"
+msgstr "Kullanýlabilir Temalar"
+
+#: capplets/theme-switcher/gui.c:223
+msgid ""
+"Auto\n"
+"Preview"
+msgstr ""
+"Otomatik\n"
+"Önizle"
+
+#: capplets/theme-switcher/gui.c:235
+msgid ""
+"Install new\n"
+"theme..."
+msgstr ""
+"Yeni bir\n"
+"tema yükle."
+
+#. Font selector.
+#.
+#: capplets/theme-switcher/gui.c:241
+msgid "User Font"
+msgstr "Kullanýcý Yazýtipi"
+
+#. FIXME - should really get this from X somehow
+#. for now we just assume default gtk font
+#: capplets/theme-switcher/gui.c:259
+msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
+msgstr "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-9"
+
+#: capplets/theme-switcher/gui.c:278
+msgid "Use custom font."
+msgstr "Özel yazýtipi kullan."
+
+#: capplets/theme-switcher/gui.c:368
+#: capplets/wm-properties/wm-properties-capplet.c:669
+msgid ""
+"No help is available/installed for these settings. Please make sure you\n"
+"have the GNOME User's Guide installed on your system."
+msgstr ""
+"Bu ayarlar için yardým bilgisi yok. Lütfen Gnome kullanýcý kýlavuzunun\n"
+"yüklendiðinden emin olun."
+
+#: capplets/theme-switcher/install.c:31
+msgid "Home directory doesn't exist!\n"
+msgstr "Ev dizininiz yok!\n"
+
+#: capplets/theme-switcher/install.c:41
+msgid "Theme does not exist"
+msgstr "Tema yok"
+
+#: capplets/theme-switcher/install.c:73
+#, c-format
+msgid "Command '%s' failed"
+msgstr "'%s' komutu baþarýsýz oldu"
+
+#: capplets/theme-switcher/install.c:78
+msgid "Unknown file format"
+msgstr "Tanýnamayan dosya türü"
+
+#: capplets/url-properties/url.desktop.in.in.h:1
+msgid "Configure which programs are used to display URLs"
+msgstr ""
+"URL'leri göstermek için hangi uygulamalarýn kullanýlacaðýnýn yapýlandýrýlmasý"
+
+#: capplets/url-properties/url.desktop.in.in.h:2
+msgid "URL Handlers"
+msgstr "URL Göstericileri"
+
+#: capplets/url-properties/url-properties.c:49
+msgid "Error initializing the `url-properties' capplet."
+msgstr "URL Göstericileri diyaloðu baþlatýlýrken hata oluþtu."
+
+#: capplets/url-properties/url-properties.c:72
+msgid "Protocol"
+msgstr "Protokol"
+
+#: capplets/url-properties/url-properties.c:72
+msgid "Command"
+msgstr "Komut"
+
+#: capplets/url-properties/url-properties.c:89
+msgid "handler:"
+msgstr "gösterici:"
+
+#. set some commonly used handlers
+#: capplets/url-properties/url-properties.c:99
+msgid "Netscape"
+msgstr "Netscape"
+
+#: capplets/url-properties/url-properties.c:104
+msgid "Netscape (new window)"
+msgstr "Netscape (yeni pencerede)"
+
+#: capplets/url-properties/url-properties.c:110
+msgid "Help browser"
+msgstr "Yardým Gösterici"
+
+#: capplets/url-properties/url-properties.c:115
+msgid "Help browser (new window)"
+msgstr "Yardým Gösterici (yeni pencerede)"
+
+#: capplets/url-properties/url-properties.c:127
+msgid "Set"
+msgstr "Uygula"
+
+#: capplets/ui-properties/behavior.desktop.in.in.h:1
+msgid "Behavior"
+msgstr "Davranýþ"
+
+#: capplets/ui-properties/behavior-properties.glade.h:1
+msgid "At the center of the screen"
+msgstr "Ekranýn ortasýnda"
+
+#: capplets/ui-properties/behavior-properties.glade.h:2
+msgid "At the mouse pointer"
+msgstr "Fare imlecinin altýnda"
+
+#: capplets/ui-properties/behavior-properties.glade.h:3
+msgid "Bottom"
+msgstr "Alt"
+
+#: capplets/ui-properties/behavior-properties.glade.h:4
+msgid "Default  (Spread out - big)"
+msgstr "Öntanýmlý"
+
+#: capplets/ui-properties/behavior-properties.glade.h:5
+msgid "Dialog Buttons"
+msgstr "Diyalog Düðmeleri"
+
+#: capplets/ui-properties/behavior-properties.glade.h:6
+msgid "Dialog buttons have icons"
+msgstr "Düðmelerde simge olsun"
+
+#: capplets/ui-properties/behavior-properties.glade.h:7
+msgid "Dialogs"
+msgstr "Diyaloglar"
+
+#: capplets/ui-properties/behavior-properties.glade.h:8
+msgid "Dialogs are treated"
+msgstr "Baþlýklý diyaloglar"
+
+#: capplets/ui-properties/behavior-properties.glade.h:9
+msgid "Dialogs open"
+msgstr "Açýk diyaloglar"
+
+#: capplets/ui-properties/behavior-properties.glade.h:10
+msgid "Interface"
+msgstr "Arayüz"
+
+#: capplets/ui-properties/behavior-properties.glade.h:11
+msgid "Left"
+msgstr "Sol"
+
+#: capplets/ui-properties/behavior-properties.glade.h:12
+msgid "Left aligned"
+msgstr "Sola yanaþýk"
+
+#: capplets/ui-properties/behavior-properties.glade.h:13
+msgid "Like any other window"
+msgstr "Diðer pencereler gibi"
+
+#: capplets/ui-properties/behavior-properties.glade.h:14
+msgid "Menu bars are detachable"
+msgstr "Ayrýlabilir menü çubuklarý"
+
+#: capplets/ui-properties/behavior-properties.glade.h:15
+msgid "Menu bars have a border"
+msgstr "Kenarlýklý menü çubuklarý"
+
+#: capplets/ui-properties/behavior-properties.glade.h:16
+msgid "Menu items have icons"
+msgstr "Menü öðelerinde simgeler gösterilsin"
+
+#: capplets/ui-properties/behavior-properties.glade.h:17
+msgid "Menus"
+msgstr "Menüler"
+
+#: capplets/ui-properties/behavior-properties.glade.h:18
+msgid "Menus can be torn off"
+msgstr "Koparýlabilir menüler"
+
+#: capplets/ui-properties/behavior-properties.glade.h:20
+msgid "Multiple Documents"
+msgstr "Çoklu Belgeler"
+
+#: capplets/ui-properties/behavior-properties.glade.h:21
+msgid "Notebook tabs"
+msgstr "Not Defteri etiketleri"
+
+#: capplets/ui-properties/behavior-properties.glade.h:22
+msgid "Place dialogs over application window when possible"
+msgstr "Diyaloglar uygulama penceresinin üzerine açýlsýn"
+
+#: capplets/ui-properties/behavior-properties.glade.h:23
+msgid "Progress bar is on the left"
+msgstr "Ýlerleme çubuðu solda"
+
+#: capplets/ui-properties/behavior-properties.glade.h:24
+msgid "Progress bar is on the right"
+msgstr "Ýlerleme çubuðu saðda"
+
+#: capplets/ui-properties/behavior-properties.glade.h:25
+msgid "Right"
+msgstr "Sað"
+
+#: capplets/ui-properties/behavior-properties.glade.h:26
+msgid "Right aligned"
+msgstr "Saða yanaþýk"
+
+#: capplets/ui-properties/behavior-properties.glade.h:27
+msgid "Seperate windows"
+msgstr "Ayrý pencereler"
+
+#: capplets/ui-properties/behavior-properties.glade.h:28
+msgid "Settings will not take effect until applications restart"
+msgstr "Ayarlar yeni baþlatýlan uygulamalarda etkin olacaktýr."
+
+#: capplets/ui-properties/behavior-properties.glade.h:29
+msgid "Specially by the window manager"
+msgstr "Özelliklie Pencere Yöneticisiyle"
+
+#: capplets/ui-properties/behavior-properties.glade.h:30
+msgid "Spread out"
+msgstr "Yay"
+
+#: capplets/ui-properties/behavior-properties.glade.h:31
+msgid "Spread out (big)"
+msgstr "Yay (büyük)"
+
+#: capplets/ui-properties/behavior-properties.glade.h:32
+msgid "Status Bar"
+msgstr "Durum Çubuðu"
+
+#: capplets/ui-properties/behavior-properties.glade.h:33
+msgid "Status bar is interactive when possible"
+msgstr "Mümkün olduðunca etkileþimli durum çubuðu"
+
+#: capplets/ui-properties/behavior-properties.glade.h:34
+msgid "The same window"
+msgstr "Ayný pencere"
+
+#: capplets/ui-properties/behavior-properties.glade.h:35
+msgid "Tool Bars"
+msgstr "Araç Çubuklarý"
+
+#: capplets/ui-properties/behavior-properties.glade.h:36
+msgid "Tool bar buttons are icons only"
+msgstr "Araç çubuklarýndaki düðmelerde sadece simge gösterilsin"
+
+#: capplets/ui-properties/behavior-properties.glade.h:37
+msgid "Tool bar buttons are text below icons"
+msgstr "Araç çubuklarýndaki düðmelerde komut ve simge gösterilsin"
+
+#: capplets/ui-properties/behavior-properties.glade.h:38
+msgid "Tool bar buttons pop up on mouse over"
+msgstr "Araç çubuðu düðmeleri fare üzerindeyken oluþsun"
+
+#: capplets/ui-properties/behavior-properties.glade.h:39
+msgid "Tool bars are detachable"
+msgstr "Ayrýlabilir araç çubuklarý"
+
+#: capplets/ui-properties/behavior-properties.glade.h:40
+msgid "Tool bars have a border"
+msgstr "Kenarlýklý araç çubuklarý"
+
+#: capplets/ui-properties/behavior-properties.glade.h:41
+msgid "Tool bars have line separators"
+msgstr "Araç çubuklarýnda grup ayýrýcý kullanýlsýn"
+
+#: capplets/ui-properties/behavior-properties.glade.h:42
+msgid "Top"
+msgstr "Üst"
+
+#: capplets/ui-properties/behavior-properties.glade.h:43
+msgid "Use status bar instead of dialog when possible"
+msgstr "Mümkünse dialog yerine durum çubuðu kullanýlsýn"
+
+#: capplets/ui-properties/behavior-properties.glade.h:44
+msgid "When opening Multiple documents, use"
+msgstr "Çok sayýda belge açýlýrken"
+
+#: capplets/ui-properties/behavior-properties.glade.h:45
+msgid "When using Notebook tabs, place the tabs on the"
+msgstr "Not defteri etiketlerinin yeri"
+
+#: capplets/ui-properties/behavior-properties.glade.h:46
+msgid "Wherever the Window Manager places them"
+msgstr "Pencere Yöneticisinin yerleþtirilirken"
+
+#: capplets/wm-properties/wm-properties-capplet.c:170
+#, c-format
+msgid ""
+"Starting %s\n"
+"(%d seconds left before operation times out)"
+msgstr ""
+"%s baþlatýlýyor ..\n"
+"(eylemin iptal edilmesine %d saniye kaldý)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:331
+#, c-format
+msgid "%s (Current)"
+msgstr "%s (Geçerli)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:334
+#, c-format
+msgid "Run Configuration Tool for %s"
+msgstr "%s Ýçin Yapýlandýrma Aracýný Çalýþtýr"
+
+#: capplets/wm-properties/wm-properties-capplet.c:345
+msgid " (Not found)"
+msgstr " (Bulunamadý)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:384
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\tAnother window manager is already running and could not be killed\n"
+msgstr ""
+"wm-properties-capplet: pencere yöneticisini baþlatamadým.\n"
+"\tBaþka bir pencere yöneticisi þu an zaten çalýþýyor ve o öldürülemedi\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:388
+#, c-format
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\t'%s' didn't start\n"
+msgstr ""
+"wm-properties-capplet: pencere yöneticisini baþlatamadým .\n"
+"\t'%s' baþlamadý .\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:437
+msgid "Previous window manager did not die\n"
+msgstr "Önceki pencere yöneticisi ölmedi\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:470
+#, c-format
+msgid ""
+"Could not start '%s'.\n"
+"Falling back to previous window manager '%s'\n"
+msgstr ""
+"'%s'´yi baþlatamadým.\n"
+"Önceki pencere yöneticisine (`%s') geri dönüyorum.\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:501
+msgid ""
+"Could not start fallback window manager.\n"
+"Please run a window manager manually. You can\n"
+"do this by selecting \"Run Program\" in the\n"
+"foot menu\n"
+msgstr ""
+"Geri dönüþüm pencere yöneticisini baþlatamadým.\n"
+"Lütfen elle bir pencere yöneticisini baþlatýn.\n"
+"Bunu ana GNOME menüsünden \"Çalýþtýr\" menüsünü \n"
+"seçip yapabilirsiniz.\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:526
+#: capplets/wm-properties/wm-properties-capplet.c:781
+#: capplets/wm-properties/wm-properties-capplet.c:890
+#: capplets/wm-properties/wm-properties-capplet.c:897
+#: capplets/wm-properties/wm-properties-capplet.c:1043
+msgid "OK"
+msgstr "Tamam"
+
+#: capplets/wm-properties/wm-properties-capplet.c:544
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. You can do so immediately by selecting the \"Save session\n"
+"now\" below, or you can save your session later.  This can be\n"
+"done either selecting \"Save Current Session\" under \"Settings\"\n"
+"in the main menu, or by turning on \"Save Current Setup\" when\n"
+"you log out.\n"
+msgstr ""
+"Geçerli pencere yöneticiniz deðiþtirilmiþ. Bu deðiþikliðin\n"
+"kaydedilmesi için, þu an geçerli olan oturumun kaydedilmesi gereklidir.\n"
+"Bunu hemen alttaki \"Oturumu kaydet\"i seçerek yapabilir, ya da \n"
+"\"Ayarlar\" menüsünden \"Oturumu kaydet\"i seçerek yapabilirsiniz.\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:551
+msgid "Save Session Later"
+msgstr "Oturumu Daha Sonra Kaydet"
+
+#: capplets/wm-properties/wm-properties-capplet.c:551
+msgid "Save Session Now"
+msgstr "Oturumu Þimdi Kaydet"
+
+#: capplets/wm-properties/wm-properties-capplet.c:554
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. This can be done by either selecting \"Save Current Session\"\n"
+"under \"Settings\" in the main menu, or by turning on\n"
+"\"Save Current Setup\" when you log out.\n"
+msgstr ""
+"Geçerli pencere yöneticin deðiþtirilmiþ. Bu deðiþikliðin\n"
+"kaydedilmesi için þu an geçerli olan oturumu kaydedilmesi gereklidir.\n"
+"Bunu \"Ayarlar\" menüsünden \"Oturumu kaydet\"i seçip yapabilirsiniz.\n"
+"Ya da çýkýþta \"Oturumu kaydet\"i seçebilirsiniz.\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:780
+msgid "Add New Window Manager"
+msgstr "Yeni bir Pencere Yöneticisi ekle"
+
+#: capplets/wm-properties/wm-properties-capplet.c:781
+msgid "Cancel"
+msgstr "Ýptal"
+
+#: capplets/wm-properties/wm-properties-capplet.c:793
+msgid "Name:"
+msgstr "Ýsim:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:806
+msgid "Command:"
+msgstr "Komut:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:819
+msgid "Configuration Command:"
+msgstr "Yapýlandýrma Komutu:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:838
+msgid "Window manager is session managed"
+msgstr "Pencere yöneticisi oturum yönetilebilir"
+
+#: capplets/wm-properties/wm-properties-capplet.c:888
+msgid "Name cannot be empty"
+msgstr "Ýsim boþ olamaz"
+
+#: capplets/wm-properties/wm-properties-capplet.c:895
+msgid "Command cannot be empty"
+msgstr "Komut boþ olamaz"
+
+#: capplets/wm-properties/wm-properties-capplet.c:944
+#: capplets/wm-properties/wm-properties-capplet.c:986
+msgid "Edit Window Manager"
+msgstr "Pencere Yöneticisini Düzenel"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1042
+msgid "You cannot delete the current Window Manager"
+msgstr "Geçerli Pencere Yöneticisini Silemezsiniz"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1089
+msgid "Window Manager Selector"
+msgstr "Pencere Yöneticisi Seçici"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1191
+msgid ""
+"an initialization error occurred while starting 'wm-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"wm-properties-capplet baþlarken bir hata oluþtu...\n"
+"Ýþlem durduruluyor...\n"
+
+#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.in.h:1
+msgid "Enlightenment"
+msgstr "Enlightenment"
+
+#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.in.h:1
+msgid "Ice WM"
+msgstr "Ice WM"
+
+#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.in.h:1
+msgid "Scwm"
+msgstr "Scwm"
+
+#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.in.h:1
+msgid "Window Maker"
+msgstr "Window Maker"
+
+#: capplets/wm-properties/wm-desktops/twm.desktop.in.in.h:1
+msgid "twm"
+msgstr "twm"

@@ -332,6 +332,7 @@ msgstr ""
 #: capplets/default-applications/interface.c:334
 #: capplets/default-applications/interface.c:465
 #: capplets/default-applications/interface.c:576
+#: capplets/wm-properties/wm-properties-capplet.c:806
 msgid "Command:"
 msgstr "Commande :"
 
@@ -623,6 +624,7 @@ msgstr "Sensibilité :"
 msgid "Configure GNOME's use of sound"
 msgstr "Configuration des effets sonores de GNOME"
 
+#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
 #: capplets/sound/sound.desktop.in.in.h:2
 msgid "Sound"
 msgstr "Son"
@@ -672,6 +674,8 @@ msgstr ""
 "Aucune aide n'est disponible. Assurez-vous que\n"
 "le Guide de l'utilisateur GNOME est installé."
 
+#: capplets/theme-switcher/gui.c:368
+#: capplets/wm-properties/wm-properties-capplet.c:671
 #: control-center/capplet-dir-view.c:464
 msgid "Close"
 msgstr "Fermer"
@@ -684,6 +688,7 @@ msgstr "Centre de contrôle GNOME :"
 msgid "The GNOME configuration tool"
 msgstr "Outil de configuration de GNOME."
 
+#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
 #: control-center/gnomecc.glade.h:1
 msgid "Appearance"
 msgstr "Apparence"
@@ -744,2134 +749,1151 @@ msgstr "CAPPLET"
 msgid "GNOME Control Center options"
 msgstr "Options du centre de contrôle GNOME"
 
-#~ msgid "Custom screensaver. No description available"
-#~ msgstr "Économiseur d'écran personnel. Aucune description disponible"
+#: capplets/desktop-links/Advanced.directory.in.in.h:1
+msgid "Advanced"
+msgstr "Avancé"
 
+#: capplets/desktop-links/Advanced.directory.in.in.h:2
+msgid "Advanced Settings"
+msgstr "Paramètres avancés"
+
+#: capplets/desktop-links/panel.desktop.in.in.h:1
+msgid "Global panel properties"
+msgstr "Propriétés globales du tableau de bord"
+
+#: capplets/desktop-links/panel.desktop.in.in.h:2
+msgid "Panel"
+msgstr "Tableau de bord"
+
+#: capplets/desktop-links/session.desktop.in.in.h:1
 #, fuzzy
-#~ msgid "About %s\n"
-#~ msgstr "À propos"
+msgid "Configure which non-session aware programs are started up"
+msgstr ""
+"Configuration des programmes (parmi ceux qui ne reconnaissent pas le "
+"gestionnaire de sessions) à lancer au démarrage"
 
-#~ msgid "Name:"
-#~ msgstr "Nom :"
+#: capplets/desktop-links/session.desktop.in.in.h:2
+msgid "Startup Programs"
+msgstr "Programmes au démarrage"
 
-#~ msgid "Settings"
-#~ msgstr "Paramètres"
+#: capplets/file-types/file-types-capplet-dialogs.c:387
+msgid "Edit Applications List"
+msgstr "Éditer la liste des applications"
 
-#~ msgid "Description"
-#~ msgstr "Description"
+#. Add label
+#: capplets/file-types/file-types-capplet-dialogs.c:409
+#, c-format
+msgid "Select applications to appear in menu for MIME type \"%s\""
+msgstr ""
 
-#~ msgid "label1"
-#~ msgstr "label1"
+#: capplets/file-types/file-types-capplet-dialogs.c:433
+msgid "Add Application..."
+msgstr "Ajouter une application..."
 
-#~ msgid "Demo"
-#~ msgstr "Démo"
+#: capplets/file-types/file-types-capplet-dialogs.c:440
+msgid "Edit Application..."
+msgstr "Éditer l'application..."
 
+#: capplets/file-types/file-types-capplet-dialogs.c:446
+msgid "Delete Application"
+msgstr "Supprimer l'application"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:480
+msgid "Edit Components List"
+msgstr "Éditer la liste des composants"
+
+#. Add label
+#: capplets/file-types/file-types-capplet-dialogs.c:500
+#, c-format
+msgid "Select views to appear in menu for MIME type \"%s\""
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:720
+msgid ""
+"The MIME type entered contained upper case characters. Upper case characters "
+"were changed to lower case for you."
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:723
+msgid "Add New MIME Type"
+msgstr "Ajouter un nouveau type MIME"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:769
+msgid "Add MIME Type"
+msgstr "Ajouter un type MIME"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:773
+msgid "New MIME type (e.g. image/x-thumper):"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:780
+msgid "Description (e.g. Thumper image):"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:947
+msgid "File Extensions "
+msgstr "Extensions de fichier "
+
+#: capplets/file-types/file-types-capplet-dialogs.c:967
+#: capplets/mime-type/mime-type-capplet.c:93
+#: capplets/wm-properties/wm-properties-capplet.c:1117
+msgid "Add..."
+msgstr "Ajouter..."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:972
+msgid "    Remove    "
+msgstr "    Enlever    "
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1041
+msgid "Add New Extension"
+msgstr "Ajouter une nouvelle extension"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1045
 #, fuzzy
-#~ msgid "%s properties"
-#~ msgstr "Configuration des propriétés de la souris"
+msgid ""
+"Type in the extensions for this mime-type (without dot).\n"
+"You can enter several extensions seperated by a space,\n"
+"for example: html htm"
+msgstr ""
+"Tapez les extensions de fichier pour ce type MIME.\n"
+"Par exemple :  .html, .htm"
 
-#~ msgid ""
-#~ "Cannot find the data to configure this screensaver. Please edit the "
-#~ "command line below."
-#~ msgstr ""
-#~ "Impossible de trouver les données pour configurer cet économiseur "
-#~ "d'écran. Éditez la ligne de commande ci-dessous, SVP."
+#: capplets/file-types/file-types-capplet-dialogs.c:1052
+#: capplets/mime-type/new-mime-window.c:50
+msgid "Extension:"
+msgstr "Extension :"
 
-#~ msgid "Please enter a command line below."
-#~ msgstr "Entrez une ligne de commande en-dessous."
+#: capplets/file-types/file-types-capplet-dialogs.c:1194
+msgid "You must enter a name."
+msgstr "Vous devez saisir un nom."
 
-#~ msgid "Visual:"
-#~ msgstr "Visuel :"
+#: capplets/file-types/file-types-capplet-dialogs.c:1197
+msgid "You must enter a command."
+msgstr "Vous devez saisir une commande."
 
-#~ msgid "Any"
-#~ msgstr "N'importe quel"
+#: capplets/file-types/file-types-capplet-dialogs.c:1207
+#, c-format
+msgid ""
+"\"%s\" does not exist or is not executable.\n"
+"Check your spelling and make sure you have\n"
+"the right permissions to execute this file."
+msgstr ""
 
-#~ msgid " Configure..."
-#~ msgstr "Configurer..."
+#: capplets/file-types/file-types-capplet-dialogs.c:1213
+#, c-format
+msgid ""
+"The command \"%s\" cannot be found.\n"
+"You must use a command that can work from any command line."
+msgstr ""
 
-#~ msgid "About \"<Screensaver name>\""
-#~ msgstr "À propos de \"<Screensaver name>\""
+#: capplets/file-types/file-types-capplet-dialogs.c:1225
+msgid "Bad Application Name"
+msgstr "Mauvais nom d'application"
 
-#~ msgid "Black screen only"
-#~ msgstr "Écran noir seulement"
+#: capplets/file-types/file-types-capplet-dialogs.c:1226
+msgid "Bad Application Command"
+msgstr "Mauvaise commande d'application"
 
-#~ msgid "Configure Power Management"
-#~ msgstr "Configurer la gestion de l'énergie"
+#: capplets/file-types/file-types-capplet-dialogs.c:1258
+msgid "Add Application"
+msgstr "Ajouter une application"
 
-#~ msgid "Disable screensaver"
-#~ msgstr "Désactiver l'économiseur d'écran"
+#: capplets/file-types/file-types-capplet-dialogs.c:1259
+msgid "Edit Application"
+msgstr "Éditer l'application"
 
-#~ msgid "Enable _power management"
-#~ msgstr "Activer la gestion de l'é_nergie"
+#. Application Name label and entry
+#: capplets/file-types/file-types-capplet-dialogs.c:1271
+msgid "Application Name:"
+msgstr "Nom de l'application :"
 
-#~ msgid "Go to standby mode after"
-#~ msgstr "Aller en mode « standby » aprés"
+#. Application Command label and entry
+#: capplets/file-types/file-types-capplet-dialogs.c:1282
+msgid "Application Command:"
+msgstr "Commande de l'application :"
 
-#~ msgid "Go to suspend mode after"
-#~ msgstr "Aller en mode « suspend » aprés"
+#. Open Behavior frame
+#: capplets/file-types/file-types-capplet-dialogs.c:1293
+msgid "Open Behavior"
+msgstr "Comportement de l'ouverture"
 
-#~ msgid "One screensaver all the time"
-#~ msgstr "Un économiseur d'écran tout le temps"
+#: capplets/file-types/file-types-capplet-dialogs.c:1299
+msgid "Can open multiple files"
+msgstr "Peut ouvrir plusieurs fichiers"
 
-#~ msgid "Preview"
-#~ msgstr "Prévisualisation"
+#. FIXME bugzilla.eazel.com 6066: This needs to be three options now: "yes", "no", and "use uris for non-file locations"
+#: capplets/file-types/file-types-capplet-dialogs.c:1307
+msgid "Can open from URI"
+msgstr "Peut ouvrir depuis une URI"
 
-#~ msgid "R_equire password to unlock screen"
-#~ msgstr "_Nécessite un mot de passe pour déverrouiller le bureau"
+#: capplets/file-types/file-types-capplet.c:735
+#: capplets/file-types/file-types-capplet.c:1883
+msgid "MIME Type"
+msgstr "Type MIME"
 
-#~ msgid "Random (all screensavers)"
-#~ msgstr "Aléatoire (tous les économiseurs d'écran)"
+#: capplets/file-types/file-types-capplet.c:742
+msgid "Change Icon"
+msgstr "Changer l'icône"
 
-#~ msgid "Random (checked screensavers)"
-#~ msgstr "Aléatoire (les économiseurs d'écran sélectionnés)"
+#: capplets/file-types/file-types-capplet.c:749
+msgid "Change File Extensions"
+msgstr "Changer les extensions de fichiers"
 
-#~ msgid "S_tart screensaver after "
-#~ msgstr "_Démarrer l'économiseur d'écran aprés "
+#: capplets/file-types/file-types-capplet.c:757
+msgid "Default Action:"
+msgstr "Action par défaut :"
 
-#~ msgid "S_witch screensavers after "
-#~ msgstr "_Changer d'économiseur d'écran toutes les "
+#: capplets/file-types/file-types-capplet.c:769
+msgid "Use Viewer"
+msgstr "Utiliser un visionneur"
 
-#~ msgid "Settings for \"<Screensaver name>\""
-#~ msgstr "Paramètres pour \"<Screensaver name>\""
+#: capplets/file-types/file-types-capplet.c:775
+msgid "Open With Application"
+msgstr "Ouvrir avec l'application"
 
-#~ msgid "Shut down monitor after"
-#~ msgstr "Éteindre le moniteur aprés"
+#: capplets/file-types/file-types-capplet.c:786
+msgid "Edit List"
+msgstr "Éditer la liste"
 
-#~ msgid "_About this screensaver..."
-#~ msgstr "À _propos de cet économiseur d'écran"
+#: capplets/file-types/file-types-capplet.c:811
+msgid "Add New MIME Type..."
+msgstr "Ajouter un nouveau type MIME..."
 
-#~ msgid "_Add"
-#~ msgstr "_Ajouter"
+#: capplets/file-types/file-types-capplet.c:817
+msgid "Delete This MIME Type"
+msgstr "Supprimer ce type MIME"
 
-#~ msgid "_Mode:"
-#~ msgstr "_mode :"
+#: capplets/file-types/file-types-capplet.c:828
+msgid "Revert to System Defaults"
+msgstr "Revenir aux valeurs par défaut"
 
-#~ msgid "_Remove"
-#~ msgstr "_Enlever"
+#: capplets/file-types/file-types-capplet.c:1075
+#: capplets/file-types/file-types-capplet.c:1219
+msgid "None"
+msgstr "Aucun"
 
-#~ msgid "_Settings"
-#~ msgstr "_Paramètres"
+#: capplets/file-types/file-types-capplet.c:1324
+msgid ""
+"Reverting to system settings will lose any changes\n"
+"you have ever made to File Types and Programs.\n"
+"Revert anyway?"
+msgstr ""
 
-#~ msgid "minutes"
-#~ msgstr "minutes"
+#. Add default action to fourth column
+#: capplets/file-types/file-types-capplet.c:1393
+#: capplets/file-types/file-types-capplet.c:1593
+#: capplets/file-types/file-types-capplet.c:1719
+msgid "none"
+msgstr "aucun"
 
+#: capplets/file-types/file-types-capplet.c:1434
+#: capplets/file-types/file-types-capplet.c:1620
+#: capplets/file-types/file-types-capplet.c:1763
+#, c-format
+msgid "View as %s"
+msgstr "Voir comme %s"
+
+#: capplets/file-types/file-types-capplet.c:1882
+msgid "Description"
+msgstr "Description"
+
+#: capplets/file-types/file-types-capplet.c:1884
+#: capplets/mime-type/mime-data.c:385
+msgid "Extension"
+msgstr "Extension"
+
+#: capplets/file-types/file-types-capplet.c:1885
+msgid "Default Action"
+msgstr "Action par défaut"
+
+#: capplets/file-types/file-types.desktop.in.in.h:1
+msgid "File Types and Programs"
+msgstr "Types de fichiers et programmes"
+
+#: capplets/file-types/file-types.desktop.in.in.h:2
+msgid "Specify which programs are used to open or view each file type"
+msgstr ""
+
+#: capplets/file-types/file-types-icon-entry.c:258
+msgid "Can't find an hbox, using a normal file selection"
+msgstr ""
+"Impossible de trouver une hbox, utilisation d'un sélecteur de fichier normal"
+
+#: capplets/file-types/file-types-icon-entry.c:264
+#: capplets/theme-switcher/gui.c:230 capplets/theme-switcher/gui.c:302
+msgid "Preview"
+msgstr "Prévisualisation"
+
+#: capplets/file-types/file-types-icon-entry.c:381
+msgid "Select an icon"
+msgstr "Sélectionnez une icône"
+
+#. icon box
+#: capplets/mime-type/edit-window.c:266
+msgid "Select an icon..."
+msgstr "Sélectionnez une icône..."
+
+#: capplets/mime-type/edit-window.c:276
+#: capplets/mime-type/new-mime-window.c:31
+msgid "Mime Type: "
+msgstr "Type MIME : "
+
+#: capplets/mime-type/edit-window.c:306
+msgid "Add"
+msgstr "Ajouter"
+
+#: capplets/mime-type/edit-window.c:314
+#: capplets/url-properties/url-properties.c:135
+msgid "Remove"
+msgstr "Enlever"
+
+#. gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
+#: capplets/mime-type/edit-window.c:341
+#: capplets/mime-type/new-mime-window.c:69
+msgid "First Regular Expression: "
+msgstr "Première expression régulière : "
+
+#: capplets/mime-type/edit-window.c:349
+#: capplets/mime-type/new-mime-window.c:80
+msgid "Second Regular Expression: "
+msgstr "Seconde expression régulière : "
+
+#. Actions box
+#: capplets/mime-type/edit-window.c:356
+msgid "Mime Type Actions"
+msgstr "Actions sur les types MIME"
+
+#: capplets/mime-type/edit-window.c:363
+#, c-format
+msgid "Example: emacs %f"
+msgstr "Exemple : emacs %f"
+
+#: capplets/mime-type/edit-window.c:368
+msgid "Open"
+msgstr "Ouvrir"
+
+#: capplets/mime-type/edit-window.c:374 capplets/mime-type/edit-window.c:390
+#: capplets/mime-type/edit-window.c:405
+msgid "Select a file..."
+msgstr "Sélectionnez un fichier..."
+
+#: capplets/mime-type/edit-window.c:383
+msgid "View"
+msgstr "Visualiser"
+
+#: capplets/mime-type/edit-window.c:399
+msgid "Edit"
+msgstr "Éditer"
+
+#. we initialize everything
+#: capplets/mime-type/edit-window.c:448
+#, c-format
+msgid "Set actions for %s"
+msgstr "Définir les actions pour %s"
+
+#: capplets/mime-type/mime-data.c:384
+msgid "Mime Type"
+msgstr "Type MIME"
+
+#: capplets/mime-type/mime-data.c:493
+msgid "You must enter a mime-type"
+msgstr "Vous devez saisir un type MIME"
+
+#: capplets/mime-type/mime-data.c:498
+msgid ""
+"You must add either a regular-expression or\n"
+"a file-name extension"
+msgstr ""
+"Vous devez ajouter soit une expression régulière\n"
+"soit une extension de nom de fichier"
+
+#: capplets/mime-type/mime-data.c:502
+msgid ""
+"Please put your mime-type in the format:\n"
+"CATEGORY/TYPE\n"
+"\n"
+"For Example:\n"
+"image/png"
+msgstr ""
+"Veuillez écrire votre type MIME sous la forme :\n"
+"CATEGORIE/TYPE\n"
+"\n"
+"Par exemple :\n"
+"image/png"
+
+#: capplets/mime-type/mime-data.c:507
+msgid "This mime-type already exists"
+msgstr "Ce type MIME existe déjà"
+
+#: capplets/mime-type/mime-data.c:588 capplets/mime-type/mime-info.c:427
+msgid ""
+"We are unable to create the directory\n"
+"~/.gnome/mime-info\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+"Impossible de créer le répertoire\n"
+"~/.gnome/mime-info/\n"
+"\n"
+"L'état ne pourra pas être sauvegardé."
+
+#: capplets/mime-type/mime-data.c:594 capplets/mime-type/mime-info.c:433
+msgid ""
+"We are unable to access the directory\n"
+"~/.gnome/mime-info\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+"Impossible d'accéder au répertoire\n"
+"~/.gnome/mime-info/\n"
+"\n"
+"L'état ne pourra pas être sauvegardé."
+
+#: capplets/mime-type/mime-data.c:605
+msgid ""
+"Cannot create the file\n"
+"~/.gnome/mime-info/user.mime\n"
+"\n"
+"We will not be able to save the state"
+msgstr ""
+"Impossible de créer le fichier\n"
+"~/.gnome/mime-info/user.mime\n"
+"\n"
+"L'état ne pourra pas être sauvegardé."
+
+#: capplets/mime-type/mime-info.c:444
+msgid ""
+"Cannot create the file\n"
+"~/.gnome/mime-info/user.keys.\n"
+"\n"
+"We will not be able to save the state"
+msgstr ""
+"Impossible de créer le fichier\n"
+"~/.gnome/mime-info/user.keys\n"
+"\n"
+"L'état ne pourra pas être sauvegardé."
+
+#: capplets/mime-type/mime-type-capplet.c:83
+#: capplets/wm-properties/wm-properties-capplet.c:1127
+msgid "Delete"
+msgstr "Supprimer"
+
+#: capplets/mime-type/mime-type-capplet.c:97
+#: capplets/wm-properties/wm-properties-capplet.c:1122
+msgid "Edit..."
+msgstr "Éditer..."
+
+#: capplets/mime-type/mime-type.desktop.in.in.h:1
+msgid "Configure how files are associated and started"
+msgstr ""
+"Configuration des types de fichier et des programmes qui y sont associés"
+
+#: capplets/mime-type/mime-type.desktop.in.in.h:2
+msgid "Mime Types"
+msgstr "Types MIME"
+
+#: capplets/mime-type/new-mime-window.c:25
+msgid "Add Mime Type"
+msgstr "Ajouter un type MIME"
+
+#: capplets/mime-type/new-mime-window.c:26
+msgid ""
+"Add a new Mime Type\n"
+"For example:  image/tiff; text/x-scheme"
+msgstr ""
+"Ajouter un nouveau type MIME\n"
+"Par exemple :  image/tiff; text/x-scheme"
+
+#: capplets/mime-type/new-mime-window.c:39
+msgid "Extensions"
+msgstr "Extensions"
+
+#: capplets/mime-type/new-mime-window.c:43
+msgid ""
+"Type in the extensions for this mime-type.\n"
+"For example:  .html, .htm"
+msgstr ""
+"Tapez les extensions de fichier pour ce type MIME.\n"
+"Par exemple :  .html, .htm"
+
+#: capplets/mime-type/new-mime-window.c:55
+msgid "Regular Expressions"
+msgstr "Expressions régulières"
+
+#: capplets/mime-type/new-mime-window.c:59
+msgid ""
+"You can set up two regular expressions here to identify the Mime Type\n"
+"by.  These fields are optional."
+msgstr ""
+"Vous pouvez donner deux expressions régulières pour\n"
+"identifier le type MIME. Ces champs sont optionnels."
+
+#: capplets/theme-switcher/demo.c:54
+msgid "One"
+msgstr "Un"
+
+#: capplets/theme-switcher/demo.c:54
+msgid "Two"
+msgstr "Deux"
+
+#. just 8 short names that will serve as samples for titles in demo
+#: capplets/theme-switcher/demo.c:56
+msgid "Eenie"
+msgstr "Toto"
+
+#: capplets/theme-switcher/demo.c:56
+msgid "Meenie"
+msgstr "Pipo"
+
+#: capplets/theme-switcher/demo.c:57
+msgid "Mynie"
+msgstr "Penguin"
+
+#: capplets/theme-switcher/demo.c:57
+msgid "Moe"
+msgstr "Phanny"
+
+#: capplets/theme-switcher/demo.c:58
+msgid "Catcha"
+msgstr "Vincent"
+
+#: capplets/theme-switcher/demo.c:58
+msgid "Tiger"
+msgstr "Tigre"
+
+#: capplets/theme-switcher/demo.c:59
+msgid "By Its"
+msgstr "Valeur"
+
+#: capplets/theme-switcher/demo.c:59
+msgid "Toe"
+msgstr "Gasp"
+
+#: capplets/theme-switcher/demo.c:118
+msgid "Selected themes from above will be tested by previewing here."
+msgstr "Les thèmes sélectionnés au dessus sont prévisualisés ici."
+
+#. column one
+#: capplets/theme-switcher/demo.c:123
+msgid "Sample Button"
+msgstr "Bouton simple"
+
+#: capplets/theme-switcher/demo.c:127
+msgid "Sample Check Button"
+msgstr "Bouton de Sélection"
+
+#: capplets/theme-switcher/demo.c:132
+msgid "Sample Text Entry Field"
+msgstr "Zone de texte"
+
+#: capplets/theme-switcher/demo.c:143
+msgid "Submenu"
+msgstr "Sous-menu"
+
+#: capplets/theme-switcher/demo.c:150
+msgid "Item 1"
+msgstr "Élément 1"
+
+#: capplets/theme-switcher/demo.c:153
+msgid "Another item"
+msgstr "Un autre élément"
+
+#: capplets/theme-switcher/demo.c:158
+msgid "Radio Button 1"
+msgstr "Bouton radio 1"
+
+#: capplets/theme-switcher/demo.c:164
+msgid "Radio Button 2"
+msgstr "Bouton radio 2"
+
+#: capplets/theme-switcher/gui.c:88
+#, c-format
+msgid ""
+"Error installing theme:\n"
+"'%s'\n"
+"%s"
+msgstr ""
+"Erreur lors de l'installation du thème :\n"
+"« %s »\n"
+"%s"
+
+#: capplets/theme-switcher/gui.c:119
+msgid "Select a theme to install"
+msgstr "Sélectionnez un thème à installer"
+
+#: capplets/theme-switcher/gui.c:196
+msgid "Available Themes"
+msgstr "Thèmes disponibles"
+
+#: capplets/theme-switcher/gui.c:221
+msgid ""
+"Auto\n"
+"Preview"
+msgstr ""
+"Auto\n"
+"Prévisualisation"
+
+#: capplets/theme-switcher/gui.c:233
+msgid ""
+"Install new\n"
+"theme..."
+msgstr ""
+"Installer un\n"
+"nouveau thème..."
+
+#. Font selector.
+#.
+#: capplets/theme-switcher/gui.c:239
+msgid "User Font"
+msgstr "Police utilisateur"
+
+#. FIXME - should really get this from X somehow
+#. for now we just assume default gtk font
+#: capplets/theme-switcher/gui.c:257
+msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
+msgstr "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
+
+#: capplets/theme-switcher/gui.c:276
+msgid "Use custom font."
+msgstr "Utiliser une police personnalisée"
+
+#: capplets/theme-switcher/gui.c:366
+#: capplets/wm-properties/wm-properties-capplet.c:669
+msgid ""
+"No help is available/installed for these settings. Please make sure you\n"
+"have the GNOME User's Guide installed on your system."
+msgstr ""
+"Aucune aide n'est disponible pour ces paramètres. Assurez-vous\n"
+"que le Guide de l'utilisateur GNOME est installé sur votre système."
+
+#: capplets/theme-switcher/install.c:31
+msgid "Home directory doesn't exist!\n"
+msgstr "Le répertoire personnel n'existe pas !\n"
+
+#: capplets/theme-switcher/install.c:41
+msgid "Theme does not exist"
+msgstr "Le thème n'existe pas"
+
+#: capplets/theme-switcher/install.c:73
+#, c-format
+msgid "Command '%s' failed"
+msgstr "Échec de la command « %s »"
+
+#: capplets/theme-switcher/install.c:78
+msgid "Unknown file format"
+msgstr "Format de fichier inconnu"
+
+#: capplets/url-properties/url.desktop.in.in.h:1
 #, fuzzy
-#~ msgid "Large"
-#~ msgstr "Importante"
+msgid "Configure which programs are used to display URLs"
+msgstr ""
+"Configuration des programmes (parmi ceux qui ne reconnaissent pas le "
+"gestionnaire de sessions) à lancer au démarrage"
 
-#~ msgid "Size:"
-#~ msgstr "Taille :"
+#: capplets/url-properties/url.desktop.in.in.h:2
+msgid "URL Handlers"
+msgstr "Gestionnaires d'URLs"
 
-#~ msgid "Small"
-#~ msgstr "Faible"
+#: capplets/url-properties/url-properties.c:49
+msgid "Error initializing the `url-properties' capplet."
+msgstr "Erreur lors de l'initialisation de la capplet « url-properties »"
 
-#~ msgid "Twist speed:"
-#~ msgstr "Vitesse de tourbillonement"
+#: capplets/url-properties/url-properties.c:72
+msgid "Protocol"
+msgstr "Protocole"
 
-#~ msgid "Twist:"
-#~ msgstr "Tourbillon :"
+#: capplets/url-properties/url-properties.c:72
+msgid "Command"
+msgstr "Commande"
 
+#: capplets/url-properties/url-properties.c:89
+msgid "handler:"
+msgstr "gestionnaire :"
+
+#. set some commonly used handlers
+#: capplets/url-properties/url-properties.c:99
+msgid "Netscape"
+msgstr "Netscape"
+
+#: capplets/url-properties/url-properties.c:104
+msgid "Netscape (new window)"
+msgstr "Netscape (nouvelle fenêtre)"
+
+#: capplets/url-properties/url-properties.c:110
+msgid "Help browser"
+msgstr "Navigateur d'aide"
+
+#: capplets/url-properties/url-properties.c:115
+msgid "Help browser (new window)"
+msgstr "Navigateur d'aide (nouvelle fenêtre)"
+
+#: capplets/url-properties/url-properties.c:127
+msgid "Set"
+msgstr "Définir"
+
+#: capplets/ui-properties/behavior.desktop.in.in.h:1
+msgid "Behavior"
+msgstr "Comportement"
+
+#: capplets/ui-properties/behavior.desktop.in.in.h:2
+msgid "Sets the default behavior of GNOME applications"
+msgstr "Configuration du comportement des applications GNOME"
+
+#: capplets/ui-properties/behavior-properties.glade.h:1
+msgid "At the center of the screen"
+msgstr "Au centre de l'écran"
+
+#: capplets/ui-properties/behavior-properties.glade.h:2
+msgid "At the mouse pointer"
+msgstr "Au pointeur de la souris"
+
+#: capplets/ui-properties/behavior-properties.glade.h:3
+msgid "Bottom"
+msgstr "Bas"
+
+#: capplets/ui-properties/behavior-properties.glade.h:4
+msgid "Default  (Spread out - big)"
+msgstr "Par défaut (grand espacement)"
+
+#: capplets/ui-properties/behavior-properties.glade.h:5
+msgid "Dialog Buttons"
+msgstr "Boutons des boîtes de dialogue"
+
+#: capplets/ui-properties/behavior-properties.glade.h:6
+msgid "Dialog buttons have icons"
+msgstr "Les boutons des boîtes de dialogue ont des icônes"
+
+#: capplets/ui-properties/behavior-properties.glade.h:7
+msgid "Dialogs"
+msgstr "Boîtes de dialogues"
+
+#: capplets/ui-properties/behavior-properties.glade.h:8
+msgid "Dialogs are treated"
+msgstr "Les boîtes de dialogue sont traitées"
+
+#: capplets/ui-properties/behavior-properties.glade.h:9
+msgid "Dialogs open"
+msgstr "Les boîtes de dialogue s'ouvrent"
+
+#: capplets/ui-properties/behavior-properties.glade.h:10
+msgid "Interface"
+msgstr "Interface"
+
+#: capplets/ui-properties/behavior-properties.glade.h:11
+msgid "Left"
+msgstr "Gauche"
+
+#: capplets/ui-properties/behavior-properties.glade.h:12
+msgid "Left aligned"
+msgstr "Aligné à gauche"
+
+#: capplets/ui-properties/behavior-properties.glade.h:13
+msgid "Like any other window"
+msgstr "Comme les autres fenêtres"
+
+#: capplets/ui-properties/behavior-properties.glade.h:14
+msgid "Menu bars are detachable"
+msgstr "Les barre de menus sont détachables"
+
+#: capplets/ui-properties/behavior-properties.glade.h:15
+msgid "Menu bars have a border"
+msgstr "Les barres de menus ont des bords en relief"
+
+#: capplets/ui-properties/behavior-properties.glade.h:16
+msgid "Menu items have icons"
+msgstr "Les entrées des menus ont des icônes"
+
+#: capplets/ui-properties/behavior-properties.glade.h:17
+msgid "Menus"
+msgstr "Menus"
+
+#: capplets/ui-properties/behavior-properties.glade.h:18
+msgid "Menus can be torn off"
+msgstr "Les menus peuvent être séparés"
+
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
+#: capplets/ui-properties/behavior-properties.glade.h:19
+msgid "Miscellaneous"
+msgstr "Divers"
+
+#: capplets/ui-properties/behavior-properties.glade.h:20
+msgid "Multiple Documents"
+msgstr "Documents multiples"
+
+#: capplets/ui-properties/behavior-properties.glade.h:21
+msgid "Notebook tabs"
+msgstr "Onglets de carnet"
+
+#: capplets/ui-properties/behavior-properties.glade.h:22
+msgid "Place dialogs over application window when possible"
+msgstr ""
+"Placer les boîtes de dialogue par dessus la fenêtre de l'application si "
+"possible"
+
+#: capplets/ui-properties/behavior-properties.glade.h:23
+msgid "Progress bar is on the left"
+msgstr "La barre de progression va vers la gauche"
+
+#: capplets/ui-properties/behavior-properties.glade.h:24
+msgid "Progress bar is on the right"
+msgstr "La barre de progression va vers la droite"
+
+#: capplets/ui-properties/behavior-properties.glade.h:25
+msgid "Right"
+msgstr "Droite"
+
+#: capplets/ui-properties/behavior-properties.glade.h:26
+msgid "Right aligned"
+msgstr "Aligné à droite"
+
+#: capplets/ui-properties/behavior-properties.glade.h:27
+msgid "Seperate windows"
+msgstr "Fenêtres séparées"
+
+#: capplets/ui-properties/behavior-properties.glade.h:28
+msgid "Settings will not take effect until applications restart"
+msgstr "Les réglages ne prendront effet que lorsque l'application redémarrera."
+
+#: capplets/ui-properties/behavior-properties.glade.h:29
+msgid "Specially by the window manager"
+msgstr "Spécialement par le gestionnaire de fenêtres"
+
+#: capplets/ui-properties/behavior-properties.glade.h:30
+msgid "Spread out"
+msgstr "Espacé"
+
+#: capplets/ui-properties/behavior-properties.glade.h:31
+msgid "Spread out (big)"
+msgstr "Grand espacement"
+
+#: capplets/ui-properties/behavior-properties.glade.h:32
+msgid "Status Bar"
+msgstr "Barre d'état"
+
+#: capplets/ui-properties/behavior-properties.glade.h:33
+msgid "Status bar is interactive when possible"
+msgstr "La barre d'état est interactive si possible"
+
+#: capplets/ui-properties/behavior-properties.glade.h:34
+msgid "The same window"
+msgstr "La même fenêtre"
+
+#: capplets/ui-properties/behavior-properties.glade.h:35
+msgid "Tool Bars"
+msgstr "Barre d'outils"
+
+#: capplets/ui-properties/behavior-properties.glade.h:36
+msgid "Tool bar buttons are icons only"
+msgstr "Les boutons des barres d'outils ont seulement des icônes"
+
+#: capplets/ui-properties/behavior-properties.glade.h:37
+msgid "Tool bar buttons are text below icons"
+msgstr "Les boutons des barres d'outils ont des étiquettes sous les icônes"
+
+#: capplets/ui-properties/behavior-properties.glade.h:38
+msgid "Tool bar buttons pop up on mouse over"
+msgstr "Les boutons des barres d'outils réagissent au passage de la souris"
+
+#: capplets/ui-properties/behavior-properties.glade.h:39
+msgid "Tool bars are detachable"
+msgstr "Les barres d'outils sont détachables"
+
+#: capplets/ui-properties/behavior-properties.glade.h:40
+msgid "Tool bars have a border"
+msgstr "Les barres d'outils ont des bords en relief"
+
+#: capplets/ui-properties/behavior-properties.glade.h:41
+msgid "Tool bars have line separators"
+msgstr "Les barres d'outils ont des lignes de séparation"
+
+#: capplets/ui-properties/behavior-properties.glade.h:42
+msgid "Top"
+msgstr "Haut"
+
+#: capplets/ui-properties/behavior-properties.glade.h:43
+msgid "Use status bar instead of dialog when possible"
+msgstr "Utiliser la barre d'état à la place des boîtes de dialogue si possible"
+
+#: capplets/ui-properties/behavior-properties.glade.h:44
+msgid "When opening Multiple documents, use"
+msgstr "Quand on ouvre plusieurs documents, utiliser"
+
+#: capplets/ui-properties/behavior-properties.glade.h:45
+msgid "When using Notebook tabs, place the tabs on the"
+msgstr "Quand on utilise des onglets de carnet, placer les onglets sur"
+
+#: capplets/ui-properties/behavior-properties.glade.h:46
+msgid "Wherever the Window Manager places them"
+msgstr "Là où les place le gestionnaire de fenêtre"
+
+#: capplets/wm-properties/wm-properties-capplet.c:170
+#, c-format
+msgid ""
+"Starting %s\n"
+"(%d seconds left before operation times out)"
+msgstr ""
+"Démarrage de %s\n"
+"(%d secondes avant expiration du temps imparti)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:331
+#, c-format
+msgid "%s (Current)"
+msgstr "%s (En cours)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:334
+#, c-format
+msgid "Run Configuration Tool for %s"
+msgstr "Lancer l'outil de configuration pour %s"
+
+#: capplets/wm-properties/wm-properties-capplet.c:345
+msgid " (Not found)"
+msgstr " (non trouvé)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:384
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\tAnother window manager is already running and could not be killed\n"
+msgstr ""
+"wm-properties-capplet : Impossible d'initialiser le\n"
+"gestionnaire de fenêtres.\n"
+"\tUn autre gestionnaire de fenêtres est déjà en cours d'exécution et ne peux "
+"pas être terminé\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:388
+#, c-format
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\t'%s' didn't start\n"
+msgstr ""
+"wm-properties-capplet : Impossible d'initialiser le gestionnaire de "
+"fenêtres.\n"
+"\t« %s » a pas démarré\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:437
+msgid "Previous window manager did not die\n"
+msgstr "Le gestionnaire de fenêtres précédent fonctionne toujours\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:470
+#, c-format
+msgid ""
+"Could not start '%s'.\n"
+"Falling back to previous window manager '%s'\n"
+msgstr ""
+"N'a pas pu démarrer « %s ».\n"
+"Retourne au gestionnaire de fenêtres prédédent « %s »\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:501
+msgid ""
+"Could not start fallback window manager.\n"
+"Please run a window manager manually. You can\n"
+"do this by selecting \"Run Program\" in the\n"
+"foot menu\n"
+msgstr ""
+"N'a pas pu démarrer le gestionnaire de fenêtres précédent.\n"
+"Démarrez un gestionnaire de fenêtres manuellement.\n"
+"Vous pouvez le faire en sélectionnant « Exécuter... »\n"
+"dans le menu GNOME\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:526
+#: capplets/wm-properties/wm-properties-capplet.c:781
+#: capplets/wm-properties/wm-properties-capplet.c:890
+#: capplets/wm-properties/wm-properties-capplet.c:897
+#: capplets/wm-properties/wm-properties-capplet.c:1043
+msgid "OK"
+msgstr "Valider"
+
+#: capplets/wm-properties/wm-properties-capplet.c:544
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. You can do so immediately by selecting the \"Save session\n"
+"now\" below, or you can save your session later.  This can be\n"
+"done either selecting \"Save Current Session\" under \"Settings\"\n"
+"in the main menu, or by turning on \"Save Current Setup\" when\n"
+"you log out.\n"
+msgstr ""
+"Votre gestionnaire de fenêtres courant a changé. Pour que le\n"
+"changement soit enregistré, vous devez enregistrer la session actuelle.\n"
+"Cela peut être fait immédiatement en sélectionnant « Enregistrer la\n"
+"session maintenant » ci-dessous; vous pouvez aussi enregistrer votre\n"
+"session plus tard. Ceci peut être fait en sélectionnant\n"
+"« Enregistrer la session actuelle » dans la rubrique du menu principal\n"
+"ou alors en activant « Enregistrer la session actuelle » en vous\n"
+"deconnectant.\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:551
+msgid "Save Session Later"
+msgstr "Enregistrer la session plus tard"
+
+#: capplets/wm-properties/wm-properties-capplet.c:551
+msgid "Save Session Now"
+msgstr "Enregistrer la session maintenant"
+
+#: capplets/wm-properties/wm-properties-capplet.c:554
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. This can be done by either selecting \"Save Current Session\"\n"
+"under \"Settings\" in the main menu, or by turning on\n"
+"\"Save Current Setup\" when you log out.\n"
+msgstr ""
+"Votre gestionnaire de fenêtres a été changé. Pour que le\n"
+"changement soit enregistré, vous devez enregistrer la session actuelle.\n"
+"Cela peut être fait en sélectionnant « Enregistrer la session courante »\n"
+"sous l'entrée « Paramétres » du menu principal ou en activant\n"
+"l'option « Enregistrer la configuration actuelle » à la fin de votre "
+"session.\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:780
+msgid "Add New Window Manager"
+msgstr "Ajoutez un nouveau gestionnaire de fenêtres"
+
+#: capplets/wm-properties/wm-properties-capplet.c:781
+msgid "Cancel"
+msgstr "Annuler"
+
+#: capplets/wm-properties/wm-properties-capplet.c:793
+msgid "Name:"
+msgstr "Nom :"
+
+#: capplets/wm-properties/wm-properties-capplet.c:819
+msgid "Configuration Command:"
+msgstr "Commande de configuration :"
+
+#: capplets/wm-properties/wm-properties-capplet.c:838
+msgid "Window manager is session managed"
+msgstr "Le gestionnaire de fenêtres est géré par la session"
+
+#: capplets/wm-properties/wm-properties-capplet.c:888
+msgid "Name cannot be empty"
+msgstr "Le champ du nom ne doit pas être vide"
+
+#: capplets/wm-properties/wm-properties-capplet.c:895
+msgid "Command cannot be empty"
+msgstr "La champ de la commande ne peut pas être vide"
+
+#: capplets/wm-properties/wm-properties-capplet.c:944
+#: capplets/wm-properties/wm-properties-capplet.c:986
+msgid "Edit Window Manager"
+msgstr "Éditer le gestionnaire de fenêtres"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1042
+msgid "You cannot delete the current Window Manager"
+msgstr "Vous ne pouvez pas supprimer le gestionnaire de fenêtres actuel"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1089
+msgid "Window Manager Selector"
+msgstr "Sélecteur de gestionnaire de fenêtres"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1191
+msgid ""
+"an initialization error occurred while starting 'wm-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"Une erreur d'initialisation a eu lieu lors du démarrage\n"
+"de « wm-properties-capplet ». Abandon...\n"
+
+#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.in.h:1
+msgid "Enlightenment"
+msgstr "Enlightenment"
+
+#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.in.h:1
+msgid "Ice WM"
+msgstr "Ice WM"
+
+#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.in.h:1
+msgid "Scwm"
+msgstr "Scwm"
+
+#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.in.h:1
+msgid "Window Maker"
+msgstr "Window Maker"
+
+#: capplets/wm-properties/wm-desktops/twm.desktop.in.in.h:1
+msgid "twm"
+msgstr "twm"
+
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:1
+msgid "Control Center Menu"
+msgstr "Menu du centre de contrôle"
+
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:2
+msgid "Sawfish window manager"
+msgstr "Gestionnaire de fenêtres Sawfish"
+
+#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:2
+msgid "Configure window appearance"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:1
+msgid "Configure key shortcuts"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:2
+msgid "Shortcuts"
+msgstr "Raccourcis"
+
+#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:1
+msgid "Configure window focusing"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:2
+msgid "Focus behavior"
+msgstr "Comportemant du focus"
+
+#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
+msgid "Configure window properties"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:2
 #, fuzzy
-#~ msgid "Ant"
-#~ msgstr "N'importe quel"
-
-#~ msgid "Four Sided cells"
-#~ msgstr "Cellules à quatre cotés"
-
-#~ msgid "Full Color"
-#~ msgstr "Vrai couleur"
-
-#, fuzzy
-#~ msgid "Many"
-#~ msgstr "Principal"
-
-#~ msgid "Monochrome"
-#~ msgstr "Monochrome"
-
-#~ msgid "Nine Sided cells"
-#~ msgstr "Cellules à neuf cotés"
-
-#~ msgid "Number of colours"
-#~ msgstr "Nombre de couleurs"
-
-#~ msgid "Random"
-#~ msgstr "Aléatoire"
-
-#~ msgid "Random size upto"
-#~ msgstr "Taille aléatoire jusqu'à"
-
-#~ msgid "Randomize"
-#~ msgstr "Aléatoire"
-
-#~ msgid "Six Sided cells"
-#~ msgstr "Cellules à six cotés"
-
-#~ msgid "Specific"
-#~ msgstr "Spécifique"
-
-#~ msgid "Specific size of"
-#~ msgstr "Taille spécifique de"
-
-#~ msgid "Speed"
-#~ msgstr "Vitesse"
-
-#~ msgid "Three Sided cells"
-#~ msgstr "Cellules à trois cotés"
-
-#~ msgid "Timeout"
-#~ msgstr "Expiration"
-
-#~ msgid "Twelve Sided cells"
-#~ msgstr "Cellules à douzes cotés"
-
-#~ msgid "Two"
-#~ msgstr "Deux"
-
-#~ msgid "number of Ants"
-#~ msgstr "Nombre de fourmis"
-
-#, fuzzy
-#~ msgid "Attraction (balls)"
-#~ msgstr "Durée (ms)"
-
-#~ msgid "Balls"
-#~ msgstr "Boules"
-
-#~ msgid "Color Contrast"
-#~ msgstr "Contraste de la couleur"
-
-#~ msgid "Length of Trail"
-#~ msgstr "Longueur de la trainée"
-
-#~ msgid "Lines"
-#~ msgstr "Lignes"
-
-#~ msgid "Number of Colors"
-#~ msgstr "Nombre de couleurs"
-
-#~ msgid "Polygons"
-#~ msgstr "Polygones"
-
-#~ msgid "Splines"
-#~ msgstr "Splines"
-
-#~ msgid "Threshold of repulsion"
-#~ msgstr "Seuil de répulsion"
-
-#, fuzzy
-#~ msgid "Blaster"
-#~ msgstr "Plus rapide"
-
-#~ msgid "Display screensaver in monochrome."
-#~ msgstr "Afficher l'économiseur d'écran en monochrome"
-
-#, fuzzy
-#~ msgid "Faster"
-#~ msgstr "Rapide"
-
-#~ msgid "Slower"
-#~ msgstr "Plus lent"
-
-#~ msgid "Speed of rotation."
-#~ msgstr "Vitesse de rotation"
-
-#~ msgid "Speed of the 90 degree rotation."
-#~ msgstr "Vitesse de la rotation sur 90°"
-
-#~ msgid "Colors:"
-#~ msgstr "Couleurs :"
-
-#~ msgid "Count:"
-#~ msgstr "Nombre :"
-
-#~ msgid "Number of Colors."
-#~ msgstr "Nombre de couleurs."
-
-#~ msgid "Number of bubbles to use."
-#~ msgstr "Nombre de bulles à utiliser."
-
-#~ msgid "Speed of Motion."
-#~ msgstr "Vitesse du mouvement."
-
-#~ msgid "Use red/blue 3d seperation."
-#~ msgstr "Utiliser une séparation rouge/bleu 3d."
-
-#, fuzzy
-#~ msgid "Braid"
-#~ msgstr "Base"
-
-#~ msgid "Bubbles exist in three dimensions."
-#~ msgstr "Les bulles existes dans les trois dimensions"
-
-#~ msgid "Don't hide bubbles when they pop."
-#~ msgstr "Ne pas cacher les bulles quand elles éclatent."
-
-#~ msgid "Draw circles instead of pixmap bubbles."
-#~ msgstr "Dessiner des cercles à la place de bulles pixmap."
-
-#, fuzzy
-#~ msgid "Cage"
-#~ msgstr "Importante"
-
-#~ msgid "Don't use double bufferinge"
-#~ msgstr "Ne pas utiliser le double tampon vidéo"
-
-#~ msgid "Use double buffering"
-#~ msgstr "Utiliser le double tampon vidéo"
-
-#, fuzzy
-#~ msgid "Coral"
-#~ msgstr "Normal"
-
-#, fuzzy
-#~ msgid "Denser"
-#~ msgstr "Densité"
-
-#~ msgid "Density"
-#~ msgstr "Densité"
-
-#~ msgid "Number of seeds"
-#~ msgstr "Nombre de graines"
-
-#~ msgid "Seeds"
-#~ msgstr "Graines"
-
-#~ msgid "Thinner"
-#~ msgstr "plus éparpillé"
-
-#, fuzzy
-#~ msgid "Cosmos"
-#~ msgstr "Couleurs"
-
-#, fuzzy
-#~ msgid "Critical"
-#~ msgstr "Vertical"
-
-#~ msgid "Cell"
-#~ msgstr "Cellule"
-
-#~ msgid "Center image."
-#~ msgstr "Centrer l'image."
-
-#~ msgid "Have at maximum size"
-#~ msgstr "A une taille maximum"
-
-#~ msgid "Number of polygons to use."
-#~ msgstr "Nombre de polygones à utiliser."
-
-#, fuzzy
-#~ msgid "Cynosure"
-#~ msgstr "Fermer"
-
-#, fuzzy
-#~ msgid "Less"
-#~ msgstr "Lignes"
-
-#, fuzzy
-#~ msgid "More"
-#~ msgstr "Plus"
-
-#~ msgid "Number of iterations."
-#~ msgstr "Nombre d'itérations."
-
-#, fuzzy
-#~ msgid "Deco"
-#~ msgstr "Démo"
-
-#~ msgid "Time between redraws:"
-#~ msgstr "Délai entre rafraîchissements :"
-
-#~ msgid "Use color when drawing."
-#~ msgstr "Utiliser la couleur lors du dessin."
-
-#~ msgid "seconds"
-#~ msgstr "secondes"
-
-#, fuzzy
-#~ msgid "Deluxe"
-#~ msgstr "Supprimer"
-
-#, fuzzy
-#~ msgid "Demon"
-#~ msgstr "Démo"
-
-#, fuzzy
-#~ msgid "Discrete"
-#~ msgstr "Lignes continues"
-
-#~ msgid "Number to use."
-#~ msgstr "Nombre à utiliser."
-
-#~ msgid "Number of pixels to use."
-#~ msgstr "Nombre de pixels à utiliser."
-
-#~ msgid "Use lissajous figures to get points."
-#~ msgstr "Utiliser des figures de lissajous pour obtenir les points."
-
-#~ msgid "Seconds"
-#~ msgstr "Secondes"
-
-#, fuzzy
-#~ msgid "Extrusion"
-#~ msgstr "Extension"
-
-#~ msgid "Number"
-#~ msgstr "Nombre"
-
-#~ msgid "Number of cycles"
-#~ msgstr "Nombre de cycle"
-
-#~ msgid "Speed of Motion"
-#~ msgstr "Vitesse du mouvement"
-
-#~ msgid "Bitmap for flag"
-#~ msgstr "Image pour le drapeau"
-
-#~ msgid "Random size up to"
-#~ msgstr "Taille aléatoire jusqu'à"
-
-#~ msgid "Text for flag"
-#~ msgstr "Texte pour le drapeau"
-
-#, fuzzy
-#~ msgid "Flame"
-#~ msgstr "Fichier"
-
-#~ msgid "Iterations:"
-#~ msgstr "Itérations :"
-
-#~ msgid "Number of fractals to generate."
-#~ msgstr "Nombre de fractales à générer."
-
-#~ msgid "Pixels per fractal."
-#~ msgstr "Pixels par fractales"
-
-#, fuzzy
-#~ msgid "Flow"
-#~ msgstr "Lente"
-
-#~ msgid "Delay between redraws."
-#~ msgstr "Délai entre rafraîchissements."
-
-#, fuzzy
-#~ msgid "Forest"
-#~ msgstr "Plus"
-
-#~ msgid "Number of trees to use."
-#~ msgstr "Nombre d'arbres à utiliser."
-
-#, fuzzy
-#~ msgid "Galaxy"
-#~ msgstr "Jouer"
-
-#, fuzzy
-#~ msgid "GLText"
-#~ msgstr "Gauche"
-
-#~ msgid "Have transparent bubbles."
-#~ msgstr "A une trainée de bulles."
-
-#~ msgid "Use additive color model."
-#~ msgstr "Utiliser un modèle de couleur additif."
-
-#~ msgid "Number of planets to use."
-#~ msgstr "Nombre de planete à utiliser."
-
-#~ msgid "Objects should leave trails behind them."
-#~ msgstr "Les objets doivent laisser une trainée deriière eux."
-
-#~ msgid "Orbit should decay."
-#~ msgstr "L'orbite doit décroitre."
-
-#~ msgid "Animate circles."
-#~ msgstr "Animer les cercles."
-
-#~ msgid "Number of circles to use."
-#~ msgstr "Nombre de cercles à utiliser."
-
-#~ msgid "Use a gradient of colors between circles."
-#~ msgstr "Utiliser un dégradé de couleur entre les cercles."
-
-#, fuzzy
-#~ msgid "Helix"
-#~ msgstr "Aide"
-
-#~ msgid "Time between redraws."
-#~ msgstr "Délai entre rafraîchissements."
-
-#~ msgid "Number of pixels before a color change."
-#~ msgstr "Nombre de pixels avant un changement de couleurs."
-
-#~ msgid "Closer"
-#~ msgstr "Fermer"
-
-#~ msgid "Distance from center of cube"
-#~ msgstr "Distance depuis le centre du cube"
-
-#, fuzzy
-#~ msgid "Farther"
-#~ msgstr "Plus loin"
-
-#, fuzzy
-#~ msgid "Interference"
-#~ msgstr "Interface"
-
-#~ msgid "Number of segments."
-#~ msgstr "Nombre de segments."
-
-#~ msgid "Number of trails."
-#~ msgstr "Nombre de trainées."
-
-#~ msgid "Segments"
-#~ msgstr "Segments"
-
-#, fuzzy
-#~ msgid "Lament"
-#~ msgstr "Placement"
-
-#, fuzzy
-#~ msgid "Laser"
-#~ msgstr "Plus rapide"
-
-#~ msgid "Longer"
-#~ msgstr "Plus long"
-
-#~ msgid "Segments:"
-#~ msgstr "Segments :"
-
-#~ msgid "Shorter"
-#~ msgstr "Plus court"
-
-#, fuzzy
-#~ msgid "Larger"
-#~ msgstr "Plus rapide"
-
-#, fuzzy
-#~ msgid "Lisa"
-#~ msgstr "Lignes"
-
-#~ msgid "Size of object."
-#~ msgstr "Taille de l'objet."
-
-#~ msgid "Smaller"
-#~ msgstr "Plus petit"
-
-#, fuzzy
-#~ msgid "Lissie"
-#~ msgstr "Moins"
-
-#, fuzzy
-#~ msgid "LMorph"
-#~ msgstr "Plus"
-
-#~ msgid "Number of interpolation steps."
-#~ msgstr "Nombre de pas d'interpolation."
-
-#~ msgid "Number of points."
-#~ msgstr "Nombre de points."
-
-#~ msgid "Open figures."
-#~ msgstr "Ouvrir des figures."
-
-#~ msgid "Points:"
-#~ msgstr "Points :"
-
-#~ msgid "Less Delay"
-#~ msgstr "Moins de délai"
-
-#~ msgid "More Delay"
-#~ msgstr "Plus de délai"
-
-#, fuzzy
-#~ msgid "Moebius"
-#~ msgstr "Menus"
-
-#, fuzzy
-#~ msgid "Moire2"
-#~ msgstr "Plus"
-
-#, fuzzy
-#~ msgid "Moire"
-#~ msgstr "Plus"
-
-#, fuzzy
-#~ msgid "Molecule"
-#~ msgstr "Souris"
-
-#, fuzzy
-#~ msgid "Mountain"
-#~ msgstr "Principal"
-
-#~ msgid "Use XOR drawing function."
-#~ msgstr "Utiliser la fonction de dessin XOR."
-
-#~ msgid "Maximum number of lines."
-#~ msgstr "Nombre maximum de lignes."
-
-#, fuzzy
-#~ msgid "Pedal"
-#~ msgstr "Modal"
-
-#~ msgid "Time to show each picture."
-#~ msgstr "Durée d'affichage de chaque image."
-
-#, fuzzy
-#~ msgid "Penetrate"
-#~ msgstr "Général"
-
-#, fuzzy
-#~ msgid "Penrose"
-#~ msgstr "Plus dense"
-
-#, fuzzy
-#~ msgid "Pipes"
-#~ msgstr "Lignes"
-
-#, fuzzy
-#~ msgid "Pulsar"
-#~ msgstr "Jouer"
-
-#~ msgid "Frequency of missile launch"
-#~ msgstr "Fréquence de lancement des missiles"
-
-#~ msgid "Number of particles"
-#~ msgstr "Nombre de particules"
-
-#~ msgid "Particles on screen"
-#~ msgstr "Particules sur l'écran"
-
-#~ msgid "Color contrast"
-#~ msgstr "Contraste de la couleur"
-
-#~ msgid "Discrete Lines"
-#~ msgstr "Lignes continues"
-
-#~ msgid "Length"
-#~ msgstr "Longueur"
-
-#~ msgid "Narrow"
-#~ msgstr "Étroite"
-
-#~ msgid "Number of points:"
-#~ msgstr "Nombre de points :"
-
-#~ msgid "Number of trails:"
-#~ msgstr "Nombre de trainées :"
-
-#~ msgid "Solid Trails"
-#~ msgstr "Trainées solides"
-
-#~ msgid "Transparent Trails"
-#~ msgstr "Trainées transparentes"
-
-#~ msgid "Wide"
-#~ msgstr "Large"
-
-#~ msgid "Width"
-#~ msgstr "Largeur"
-
-#~ msgid "XOR Trails"
-#~ msgstr "Trainées XOR"
-
-#~ msgid "Delay before next redraw"
-#~ msgstr "Délai avant le rafraîchissement suivant"
-
-#~ msgid "Number of Iterations"
-#~ msgstr "Nombre d'itérations"
-
-#~ msgid "Offset"
-#~ msgstr "Décalage"
-
-#~ msgid "Speed to clear the screen"
-#~ msgstr "Vitesse d'effacement de l'écran"
-
-#~ msgid "With X-axis Symmetry"
-#~ msgstr "Avec un axe de symétrie en X"
-
-#~ msgid "With Y-axis Symmetry"
-#~ msgstr "Avec un axe de symétrie en Y"
-
-#, fuzzy
-#~ msgid "Slip"
-#~ msgstr "Mince"
-
-#, fuzzy
-#~ msgid "Sonar"
-#~ msgstr "Son"
-
-#, fuzzy
-#~ msgid "SpeedMine"
-#~ msgstr "Vitesse"
-
-#, fuzzy
-#~ msgid "Sphere"
-#~ msgstr "Vitesse"
-
-#, fuzzy
-#~ msgid "Sproingies"
-#~ msgstr "Splines"
-
-#~ msgid "Change to display in monochrome."
-#~ msgstr "Changer l'affichage en monochrome."
-
-#, fuzzy
-#~ msgid "Slim"
-#~ msgstr "Mince"
-
-#~ msgid "Speed of animation."
-#~ msgstr "Vitesse de l'animation."
-
-#, fuzzy
-#~ msgid "Starfish"
-#~ msgstr "Démarre"
-
-#, fuzzy
-#~ msgid "Strange"
-#~ msgstr "Démarre"
-
-#, fuzzy
-#~ msgid "Triangle"
-#~ msgstr "Terminal"
-
-#, fuzzy
-#~ msgid "Vines"
-#~ msgstr "Lignes"
-
-#, fuzzy
-#~ msgid "Wander"
-#~ msgstr "gestionnaire :"
-
-#, fuzzy
-#~ msgid "Worm"
-#~ msgstr "Normal"
-
-#, fuzzy
-#~ msgid "Xearth"
-#~ msgstr "Plus loin"
-
-#, fuzzy
-#~ msgid "Xroger"
-#~ msgstr "Plus grand"
-
-#~ msgid "Add a new screensaver"
-#~ msgstr "Ajoutez un nouvel économiseur d'écran"
-
-#~ msgid "Select the screensaver to run from the list below:"
-#~ msgstr ""
-#~ "Sélectionnez l'économiseur d'écran à exécuter depuis la liste ci-dessous :"
-
-#~ msgid "Custom"
-#~ msgstr "Personnalisé"
-
-#~ msgid "New screensaver"
-#~ msgstr "Nouvel économiseur d'écran"
-
-#~ msgid "(None)"
-#~ msgstr "(Aucun)"
-
-#~ msgid "Wallpaper Selection"
-#~ msgstr "Sélectionnez le papier peint"
-
-#~ msgid "Can't find an hbox, using a normal file selection"
-#~ msgstr ""
-#~ "Impossible de trouver une hbox, utilisation d'un sélecteur de fichier "
-#~ "normal"
-
-#~ msgid "window2"
-#~ msgstr "window2"
-
-#~ msgid "Effect"
-#~ msgstr "Effet"
-
-#, fuzzy
-#~ msgid "Primary color"
-#~ msgstr "Choisissez une couleur"
-
-#~ msgid "Apply changes automatically"
-#~ msgstr "Appliquer les changements automatiquements"
-
-#~ msgid "Wallpaper"
-#~ msgstr "Papier peint"
-
-#~ msgid "Browse..."
-#~ msgstr "Parcourir..."
-
-#, fuzzy
-#~ msgid "Adjust wallpaper's transparency"
-#~ msgstr "Ajuster l'opacité du papier peint"
-
-#~ msgid "More Transparent"
-#~ msgstr "Plus transparent"
-
-#~ msgid "More Solid"
-#~ msgstr "Plus uni"
-
-#~ msgid "window1"
-#~ msgstr "window1"
-
-#~ msgid "Delay Until Repeat"
-#~ msgstr "Délai avant répétition"
-
-#~ msgid "....a"
-#~ msgstr "....a"
-
-#~ msgid "...a"
-#~ msgstr "...a"
-
-#~ msgid "..a"
-#~ msgstr "..a"
-
-#~ msgid ".a"
-#~ msgstr ".a"
-
-#~ msgid "a....a"
-#~ msgstr "a....a"
-
-#~ msgid "a...a"
-#~ msgstr "a...a"
-
-#~ msgid "a..a"
-#~ msgstr "a..a"
-
-#~ msgid "a.a"
-#~ msgstr "a.a"
-
-#~ msgid "Keyboard click"
-#~ msgstr "Clique du clavier"
-
-#~ msgid "Type here to test setting"
-#~ msgstr "Taper ici pour tester les paramètres"
-
-#~ msgid "Enable"
-#~ msgstr "Activer"
-
-#~ msgid "Event"
-#~ msgstr "Événement"
-
-#~ msgid "File to Play"
-#~ msgstr "Fichier à jouer"
-
-#~ msgid "HTML"
-#~ msgstr "HTML"
-
-#~ msgid "Icon List"
-#~ msgstr "Liste d'icônes"
-
-#~ msgid "Tree"
-#~ msgstr "Arborescense"
-
-#~ msgid "Got error %d.\n"
-#~ msgstr "A obtenu l'erreur %d.\n"
-
-#~ msgid "Password for %s"
-#~ msgstr "Mot de passe pour %s"
-
-#~ msgid "Consistency checking is not turned on."
-#~ msgstr "La vérification de consistence n'est pas activé."
-
-#~ msgid "Block is fine."
-#~ msgstr "Le bloc est en bon état."
-
-#~ msgid "Block freed twice."
-#~ msgstr "Le bloc a été libéré deux fois."
-
-#~ msgid "Memory before the block was clobbered."
-#~ msgstr "La mémoire avant le bloc a été détruite."
-
-#~ msgid "Memory after the block was clobbered."
-#~ msgstr "La mémoire aprés le bloc a été détruite."
-
-#~ msgid "userhelper must be setuid root\n"
-#~ msgstr "userhelper doit être setuid root\n"
-
-#~ msgid "Usage: root-helper fd\n"
-#~ msgstr "Usage : root-helper fd\n"
-
-#~ msgid "PAM returned = %d\n"
-#~ msgstr "PAM a retourné = %d\n"
-
-#~ msgid "about to authenticate \"%s\"\n"
-#~ msgstr "prêt à identifier « %s »\n"
-
-#~ msgid "about to exec \"%s\"\n"
-#~ msgstr "prêt à exécuter « %s »\n"
-
-#~ msgid "Pipe error.\n"
-#~ msgstr "Erreur de tube.\n"
-
-#~ msgid "Cannot fork().\n"
-#~ msgstr "Ne peut fork().\n"
-
-#~ msgid "dup2() error.\n"
-#~ msgstr "erreur dup2().\n"
-
-#~ msgid "execl() error, errno=%d\n"
-#~ msgstr "erreur execl(), errno=%d\n"
-
-#~ msgid "Information updated."
-#~ msgstr "Information mise à jour."
-
-#~ msgid ""
-#~ "The password you typed is invalid.\n"
-#~ "Please try again."
-#~ msgstr ""
-#~ "Le mot de passe que vous avez tapé est invalide.\n"
-#~ "Veuillez essayer de nouveau."
-
-#~ msgid ""
-#~ "One or more of the changed fields is invalid.\n"
-#~ "This is probably due to either colons or commas in one of the fields.\n"
-#~ "Please remove those and try again."
-#~ msgstr ""
-#~ "Au moins un champ est invalide.\n"
-#~ "cela est probablement du a un deux-point ou une virgule présente dans\n"
-#~ "un des champs.\n"
-#~ "Veuillez les enlever et essayer de nouveau."
-
-#~ msgid "Password resetting error."
-#~ msgstr "Erreur d'initialisation du mot de passe."
-
-#~ msgid ""
-#~ "Some systems files are locked.\n"
-#~ "Please try again in a few moments."
-#~ msgstr ""
-#~ "Quelques fichiers système sont verrouillés.\n"
-#~ "Veuillez essayer de nouveau dans un moment."
-
-#~ msgid "Unknown user."
-#~ msgstr "Utilisateur inconnu."
-
-#~ msgid "Insufficient rights."
-#~ msgstr "Droits insuffisants."
-
-#~ msgid "Invalid call to sub process."
-#~ msgstr "Appel invalide à un sous processus."
-
-#~ msgid ""
-#~ "Your current shell is not listed in /etc/shells.\n"
-#~ "You are not allowed to change your shell.\n"
-#~ "Consult your system administrator."
-#~ msgstr ""
-#~ "Votre shell en cours n'est pas listé dans /etc/shells.\n"
-#~ "Vous n'êtes pas autorisé à modifier votre shell.\n"
-#~ "Consulter votre administrateur système."
-
-#~ msgid "Out of memory."
-#~ msgstr "Plus de mémoire."
-
-#~ msgid "The exec() call failed."
-#~ msgstr "L'appel exec() a échoué."
-
-#~ msgid "Failed to find selected program."
-#~ msgstr "A échoué dans la recherche du programme sélectionné."
-
-#~ msgid "Unknown error."
-#~ msgstr "Erreur inconnue."
-
-#~ msgid "Unknown exit code."
-#~ msgstr "Code de sortie inconnu."
-
-#~ msgid "Input"
-#~ msgstr "Entrée"
-
-#~ msgid "Need %d responses.\n"
-#~ msgstr "A besoin de %d réponses.\n"
-
-#~ msgid ""
-#~ "In order to make changes to your system, you\n"
-#~ "must enter the administrator (root) password."
-#~ msgstr ""
-#~ "Afin de pourvoir effectuer des changements sur votre système,\n"
-#~ "vous devez entrer le mot de passe d'administration (root)."
-
-#~ msgid "Error"
-#~ msgstr "Erreur"
-
-#~ msgid "You want %d response(s) from %d entry fields!?!?!\n"
-#~ msgstr "Vous voulez %d réponse(s) depuis %d champs d'entrée !?!?!?\n"
-
-#~ msgid "Run Unprivileged"
-#~ msgstr "Lancer sans privilège"
-
-#~ msgid "Control Center Menu"
-#~ msgstr "Menu du centre de contrôle"
-
-#~ msgid "Sawfish window manager"
-#~ msgstr "Gestionnaire de fenêtres Sawfish"
-
-#~ msgid "Configure window appearance"
-#~ msgstr "Configure l'apparence des fenêtres"
-
-#~ msgid "Shortcuts"
-#~ msgstr "Raccourcis"
-
-#~ msgid "Configure key shortcuts"
-#~ msgstr "Configure les raccourcis-clavier"
-
-#~ msgid "Focus behavior"
-#~ msgstr "Comportement du focus"
-
-#~ msgid "Configure window focusing"
-#~ msgstr "Configure la politique de focus"
-
-#~ msgid "Matched Windows"
-#~ msgstr "Groupe de fenêtres"
-
-#~ msgid "Configure window properties"
-#~ msgstr "Configure les propriétés des fenêtres"
-
-#~ msgid "Minimizing and Maximizing"
-#~ msgstr "Maximisation des fenêtres"
-
-#~ msgid "Configure window minimization and maximization"
-#~ msgstr "Configure la maximisation des fenêtres"
-
-#~ msgid "Miscellaneous"
-#~ msgstr "Divers"
-
-#~ msgid "Configure miscellaneous window features"
-#~ msgstr "Configure diverses caractéristiques des fenêtres"
-
-#~ msgid "Moving and Resizing"
-#~ msgstr "Déplacer et redimensionner"
-
-#~ msgid "Configure window move/resize"
-#~ msgstr "Configure le déplacement et le redimensionnement des fenêtres"
-
-#~ msgid "Configure window placement"
-#~ msgstr "Configure le placement des fenêtres"
-
-#~ msgid "Workspaces"
-#~ msgstr "Bureaux"
-
-#~ msgid "Configure workspaces"
-#~ msgstr "Configure les bureaux"
-
-#~ msgid ""
-#~ "No help is available/installed for these settings. Please make sure you\n"
-#~ "have the GNOME User's Guide installed on your system."
-#~ msgstr ""
-#~ "Aucune aide n'est disponible pour ces paramètres. Assurez-vous\n"
-#~ "que le Guide de l'utilisateur GNOME est installé sur votre système."
-
-#~ msgid "Mime Type: "
-#~ msgstr "Type MIME : "
-
-#~ msgid "First Regular Expression: "
-#~ msgstr "Première expression régulière : "
-
-#~ msgid "Second Regular Expression: "
-#~ msgstr "Seconde expression régulière : "
-
-#~ msgid "Mime Type Actions"
-#~ msgstr "Actions sur les types MIME"
-
-#~ msgid "Example: emacs %f"
-#~ msgstr "Exemple : emacs %f"
-
-#~ msgid "Open"
-#~ msgstr "Ouvrir"
-
-#~ msgid "View"
-#~ msgstr "Visualiser"
-
-#~ msgid "Edit"
-#~ msgstr "Éditer"
-
-#~ msgid "Set actions for %s"
-#~ msgstr "Définir les actions pour %s"
-
-#~ msgid "Mime Type"
-#~ msgstr "Type MIME"
-
-#~ msgid "You must enter a mime-type"
-#~ msgstr "Vous devez saisir un type MIME"
-
-#~ msgid ""
-#~ "You must add either a regular-expression or\n"
-#~ "a file-name extension"
-#~ msgstr ""
-#~ "Vous devez ajouter soit une expression régulière\n"
-#~ "soit une extension de nom de fichier"
-
-#~ msgid ""
-#~ "Please put your mime-type in the format:\n"
-#~ "CATEGORY/TYPE\n"
-#~ "\n"
-#~ "For Example:\n"
-#~ "image/png"
-#~ msgstr ""
-#~ "Veuillez écrire votre type MIME sous la forme :\n"
-#~ "CATEGORIE/TYPE\n"
-#~ "\n"
-#~ "Par exemple :\n"
-#~ "image/png"
-
-#~ msgid "This mime-type already exists"
-#~ msgstr "Ce type MIME existe déjà"
-
-#~ msgid ""
-#~ "We are unable to create the directory\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "Impossible de créer le répertoire\n"
-#~ "~/.gnome/mime-info/\n"
-#~ "\n"
-#~ "L'état ne pourra pas être sauvegardé."
-
-#~ msgid ""
-#~ "We are unable to access the directory\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "Impossible d'accéder au répertoire\n"
-#~ "~/.gnome/mime-info/\n"
-#~ "\n"
-#~ "L'état ne pourra pas être sauvegardé."
-
-#~ msgid ""
-#~ "Cannot create the file\n"
-#~ "~/.gnome/mime-info/user.mime\n"
-#~ "\n"
-#~ "We will not be able to save the state"
-#~ msgstr ""
-#~ "Impossible de créer le fichier\n"
-#~ "~/.gnome/mime-info/user.mime\n"
-#~ "\n"
-#~ "L'état ne pourra pas être sauvegardé."
-
-#~ msgid ""
-#~ "We are unable to create the directory\n"
-#~ "~/.gnome/mime-info.\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "Impossible de créer le répertoire\n"
-#~ "~/.gnome/mime-info/\n"
-#~ "\n"
-#~ "L'état ne pourra pas être sauvegardé."
-
-#~ msgid ""
-#~ "We are unable to access the directory\n"
-#~ "~/.gnome/mime-info.\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "Impossible d'accéder au répertoire\n"
-#~ "~/.gnome/mime-info/\n"
-#~ "\n"
-#~ "L'état ne pourra pas être sauvegardé."
-
-#~ msgid ""
-#~ "Cannot create the file\n"
-#~ "~/.gnome/mime-info/user.keys.\n"
-#~ "\n"
-#~ "We will not be able to save the state"
-#~ msgstr ""
-#~ "Impossible de créer le fichier\n"
-#~ "~/.gnome/mime-info/user.keys\n"
-#~ "\n"
-#~ "L'état ne pourra pas être sauvegardé."
-
-#~ msgid "Add..."
-#~ msgstr "Ajouter..."
-
-#~ msgid "Edit..."
-#~ msgstr "Éditer..."
-
-#~ msgid "Add Mime Type"
-#~ msgstr "Ajouter un type MIME"
-
-#~ msgid ""
-#~ "Add a new Mime Type\n"
-#~ "For example:  image/tiff; text/x-scheme"
-#~ msgstr ""
-#~ "Ajouter un nouveau type MIME\n"
-#~ "Par exemple :  image/tiff; text/x-scheme"
-
-#~ msgid "Mime Type:"
-#~ msgstr "Type MIME : "
-
-#~ msgid "Extensions"
-#~ msgstr "Extensions"
-
-#~ msgid ""
-#~ "Type in the extensions for this mime-type.\n"
-#~ "For example:  .html, .htm"
-#~ msgstr ""
-#~ "Tapez les extensions de fichier pour ce type MIME.\n"
-#~ "Par exemple :  .html, .htm"
-
-#~ msgid "Extension:"
-#~ msgstr "Extension : "
-
-#~ msgid "Regular Expressions"
-#~ msgstr "Expressions régulières"
-
-#~ msgid ""
-#~ "You can set up two regular expressions here to identify the Mime Type\n"
-#~ "by.  These fields are optional."
-#~ msgstr ""
-#~ "Vous pouvez donner deux expressions régulières pour\n"
-#~ "identifier le type MIME. Ces champs sont optionnels."
-
-#~ msgid "Keyboard Bell"
-#~ msgstr "Clique du clavier"
-
-#~ msgid "Mouse buttons"
-#~ msgstr "Boutons de la souris"
-
-#~ msgid "Acceleration"
-#~ msgstr "Accélération"
-
-#~ msgid "Threshold"
-#~ msgstr "Réactivité"
-
-#~ msgid "Selection"
-#~ msgstr "Sélection"
-
-#~ msgid "Choose randomly from those checked off"
-#~ msgstr "Choisir aléatoirement parmi ceux qui sont sélectionnés"
-
-#~ msgid "Settings..."
-#~ msgstr "Paramètres..."
-
-#~ msgid "Demo Next"
-#~ msgstr "Démo suivante"
-
-#~ msgid "Demo Previous"
-#~ msgstr "Démo précédente"
-
-#~ msgid "Screensaver Selection"
-#~ msgstr "Sélection de l'économiseur d'écran"
-
-#~ msgid "Security"
-#~ msgstr "Sécurité"
-
-#~ msgid "Only after the screensaver has run for"
-#~ msgstr "Seulement aprés que l'économiseur d'écran ai fontionné"
-
-#~ msgid "General Properties"
-#~ msgstr "Propriétés générales"
-
-#~ msgid "Priority"
-#~ msgstr "Priorité"
-
-#~ msgid "Be verbose"
-#~ msgstr "Bavard"
-
-#~ msgid "Effects"
-#~ msgstr "Effets"
-
-#~ msgid "Install colormap"
-#~ msgstr "Utiliser une palette de couleur"
-
-#~ msgid "Fade to black when activating screensaver"
-#~ msgstr "Fondu au noir lors de l'activation de l'économiseur d'écran"
-
-#~ msgid "Fade desktop back when deactivating screensaver"
-#~ msgstr "Fondu au noir lors de la désactivation de l'économiseur d'écran"
-
-#~ msgid "Fade Duration"
-#~ msgstr "Durée du fondu"
-
-#~ msgid "Fade Smoothness"
-#~ msgstr "Qualité du fondu"
-
-#~ msgid "Smooth"
-#~ msgstr "Continu"
-
-#~ msgid "Jerky"
-#~ msgstr "Saccadé"
-
-#~ msgid "Advanced Properties"
-#~ msgstr "Propriétés avancées"
-
-#~ msgid "window4"
-#~ msgstr "window4"
-
-#~ msgid "Menu bars are detachable"
-#~ msgstr "Les barre de menus sont détachables"
-
-#~ msgid "Menu bars have a border"
-#~ msgstr "Les barres de menus ont des bords en relief"
-
-#~ msgid "Menus can be torn off"
-#~ msgstr "Les menus peuvent être séparés"
-
-#~ msgid "Menu items have icons"
-#~ msgstr "Les entrées des menus ont des icônes"
-
-#~ msgid "Status Bar"
-#~ msgstr "Barre d'état"
-
-#~ msgid "Use status bar instead of dialog when possible"
-#~ msgstr ""
-#~ "Utiliser la barre d'état à la place des boîtes de dialogue si possible"
-
-#~ msgid "Status bar is interactive when possible"
-#~ msgstr "La barre d'état est interactive si possible"
-
-#~ msgid "Progress bar is on the left"
-#~ msgstr "La barre de progression va vers la gauche"
-
-#~ msgid "Progress bar is on the right"
-#~ msgstr "La barre de progression va vers la droite"
-
-#~ msgid "Tool Bars"
-#~ msgstr "Barre d'outils"
-
-#~ msgid "Tool bars have a border"
-#~ msgstr "Les barres d'outils ont des bords en relief"
-
-#~ msgid "Tool bar buttons pop up on mouse over"
-#~ msgstr "Les boutons des barres d'outils réagissent au passage de la souris"
-
-#~ msgid "Tool bars have line separators"
-#~ msgstr "Les barres d'outils ont des lignes de séparation"
-
-#~ msgid "Tool bars are detachable"
-#~ msgstr "Les barres d'outils sont détachables"
-
-#~ msgid "Tool bar buttons are icons only"
-#~ msgstr "Les boutons des barres d'outils ont seulement des icônes"
-
-#~ msgid "Tool bar buttons are text below icons"
-#~ msgstr "Les boutons des barres d'outils ont des étiquettes sous les icônes"
-
-#~ msgid "Dialogs"
-#~ msgstr "Boîtes de dialogues"
-
-#~ msgid "Dialog buttons have icons"
-#~ msgstr "Les boutons des boîtes de dialogue ont des icônes"
-
-#~ msgid "Place dialogs over application window when possible"
-#~ msgstr ""
-#~ "Placer les boîtes de dialogue par dessus la fenêtre de l'application si "
-#~ "possible"
-
-#~ msgid "Dialogs open"
-#~ msgstr "Les boîtes de dialogue s'ouvrent"
-
-#~ msgid "Wherever the Window Manager places them"
-#~ msgstr "Là où les place le gestionnaire de fenêtre"
-
-#~ msgid "At the center of the screen"
-#~ msgstr "Au centre de l'écran"
-
-#~ msgid "At the mouse pointer"
-#~ msgstr "Au pointeur de la souris"
-
-#~ msgid "Dialogs are treated"
-#~ msgstr "Les boîtes de dialogue sont traitées"
-
-#~ msgid "Like any other window"
-#~ msgstr "Comme les autres fenêtres"
-
-#~ msgid "Specially by the window manager"
-#~ msgstr "Spécialement par le gestionnaire de fenêtres"
-
-#~ msgid "Dialog Buttons"
-#~ msgstr "Boutons des boîtes de dialogue"
-
-#~ msgid "Default  (Spread out - big)"
-#~ msgstr "Par défaut (grand espacement)"
-
-#~ msgid "Spread out"
-#~ msgstr "Espacé"
-
-#~ msgid "Spread out (big)"
-#~ msgstr "Grand espacement"
-
-#~ msgid "Left aligned"
-#~ msgstr "Aligné à gauche"
-
-#~ msgid "Right aligned"
-#~ msgstr "Aligné à droite"
-
-#~ msgid "Multiple Documents"
-#~ msgstr "Documents multiples"
-
-#~ msgid "Notebook tabs"
-#~ msgstr "Onglets de carnet"
-
-#~ msgid "Seperate windows"
-#~ msgstr "Fenêtres séparées"
-
-#~ msgid "The same window"
-#~ msgstr "La même fenêtre"
-
-#~ msgid "Right"
-#~ msgstr "Droite"
-
-#~ msgid "Top"
-#~ msgstr "Haut"
-
-#~ msgid "Bottom"
-#~ msgstr "Bas"
-
-#~ msgid "When opening Multiple documents, use"
-#~ msgstr "Quand on ouvre plusieurs documents, utiliser"
-
-#~ msgid "When using Notebook tabs, place the tabs on the"
-#~ msgstr "Quand on utilise des onglets de carnet, placer les onglets sur"
-
-#~ msgid "Settings will not take effect until applications restart"
-#~ msgstr ""
-#~ "Les réglages ne prendront effet que lorsque l'application redémarrera."
-
-#~ msgid "Session"
-#~ msgstr "Session"
-
-#~ msgid "Session Chooser"
-#~ msgstr "Sélecteur de session"
-
-#~ msgid "Start Session"
-#~ msgstr "Démarrer la session"
-
-#~ msgid "Cancel Login"
-#~ msgstr "Annuler le login"
-
-#~ msgid "Order: "
-#~ msgstr "Ordre : "
-
-#~ msgid "This button sets the start order of the selected programs.\n"
-#~ msgstr ""
-#~ "Ce bouton définit l'ordre de démarrage des programmes sélectionnés.\n"
-
-#~ msgid ""
-#~ "This button sets the restart style of the selected programs:\n"
-#~ "Normal programs are unaffected by logouts but can die;\n"
-#~ "Respawn programs are never allowed to die;\n"
-#~ "Trash programs are discarded on logout and can die;\n"
-#~ "Settings programs are always started on every login."
-#~ msgstr ""
-#~ "Ce bouton définit le style du redémarrage des programmes sélectionnés :\n"
-#~ "Les programmes normaux ne sont pas affectés par les fin de session \n"
-#~ "mais peuvent se terminer ;\n"
-#~ "Les programmes regénérés ne sont pas autorisé à se terminer ;\n"
-#~ "Les programmes « trash » sont ignorés en fin de session et peuvent\n"
-#~ "se terminer ;\n"
-#~ "Les programmes de paramètrage sont lancés à chaque début de session."
-
-#~ msgid ""
-#~ "This button produces a key to the program states below:\n"
-#~ "Inactive programs are waiting to start or have finished;\n"
-#~ "Starting programs are being given time to get running;\n"
-#~ "Running programs are normal members of the session;\n"
-#~ "Saving programs are saving their session details;\n"
-#~ "Programs which make no contact have Unknown states.\n"
-#~ msgstr ""
-#~ "Ce bouton produit une clé pour les états de programme suivants :\n"
-#~ "Les programmes inactifs attendant de démarrer ou ayant terminé ;\n"
-#~ "Les programmes en cours de démarrage ont du temps pour démarrer ;\n"
-#~ "Les programmes en cours d'exécution sont les membres normaux de la "
-#~ "session ;\n"
-#~ "Les programmes en cours de sauvegarde archivent les éléments de leur "
-#~ "session ;\n"
-#~ "Les programmes qui ne donnent pas signe de vie ont un état Inconnu.\n"
-
-#~ msgid "This column gives the command used to start a program."
-#~ msgstr ""
-#~ "Cette colonne donne la commande utilisée pour démarrer un programme."
-
-#~ msgid "Order"
-#~ msgstr "Ordre"
-
-#~ msgid "Style"
-#~ msgstr "Style"
-
-#~ msgid "State"
-#~ msgstr "État"
-
-#~ msgid "Program"
-#~ msgstr "Programme"
-
-#~ msgid "Inactive"
-#~ msgstr "Inactif"
-
-#~ msgid "Waiting to start or already finished."
-#~ msgstr "En attente de démarrage ou déjà terminé."
-
-#~ msgid "Started but has not yet reported state."
-#~ msgstr "A démarré mais n'a pas encore signalé son état."
-
-#~ msgid "Running"
-#~ msgstr "En cours d'exécution"
-
-#~ msgid "A normal member of the session."
-#~ msgstr "Membre normal de la session."
-
-#~ msgid "Saving"
-#~ msgstr "En train d'enregistrer"
-
-#~ msgid "Saving session details."
-#~ msgstr "Enregistre les paramètres de session."
-
-#~ msgid "Unknown"
-#~ msgstr "Inconnu"
-
-#~ msgid "State not reported within timeout."
-#~ msgstr "État non signalé dans le temps imparti."
-
-#~ msgid "Unaffected by logouts but can die."
-#~ msgstr "Insensible aux fins de sessions, mais peut se terminer."
-
-#~ msgid "Respawn"
-#~ msgstr "Perpétuel"
-
-#~ msgid "Never allowed to die."
-#~ msgstr "Jamais autorisé a terminer."
-
-#~ msgid "Trash"
-#~ msgstr "Temporaire"
-
-#~ msgid "Discarded on logout and can die."
-#~ msgstr "Tué à la fin de la session et peut mourir."
-
-#~ msgid "Always started on every login."
-#~ msgstr "Toujours démarré à chaque nouvelle session."
-
-#~ msgid "Remove Program"
-#~ msgstr "Enlever Programme"
-
-#~ msgid "Options"
-#~ msgstr "Options"
-
-#~ msgid "Prompt on logout"
-#~ msgstr "Confirmer la fin de session"
-
-#~ msgid "Automatically save changes to session"
-#~ msgstr "Enregistrer automatiquement les changements à la session"
-
-#~ msgid "Non-session-managed Startup Programs"
-#~ msgstr "Programmes de démarrage sans gestion de session"
-
-#~ msgid "Command"
-#~ msgstr "Commande"
-
-#~ msgid "Browse Currently Running Programs..."
-#~ msgstr "Voir les programmes en cours d'exécution..."
-
-#~ msgid "Only display warnings."
-#~ msgstr "Afficher seulement les avertissements."
-
-#~ msgid "Startup Command"
-#~ msgstr "Commande de démarrage"
-
-#~ msgid ""
-#~ "Programs with smaller values are started before programs with higher "
-#~ "values. The default value should be OK"
-#~ msgstr ""
-#~ "Les programmes avec les valeurs les plus petites sont démarrés avant ceux "
-#~ "ayant les valeurs les plus élevées. La valeur par défaut devrait convenir."
-
-#~ msgid "The startup command cannot be empty"
-#~ msgstr "La commande de démarrage ne peux être vide"
-
-#~ msgid "Add Startup Program"
-#~ msgstr "Ajouter un programme au démarrage"
-
-#~ msgid "Edit Startup Program"
-#~ msgstr "Éditer le programme de démarrage"
-
-#~ msgid "One"
-#~ msgstr "Un"
-
-#~ msgid "Eenie"
-#~ msgstr "Toto"
-
-#~ msgid "Meenie"
-#~ msgstr "Pipo"
-
-#~ msgid "Mynie"
-#~ msgstr "Penguin"
-
-#~ msgid "Catcha"
-#~ msgstr "Vincent"
-
-#~ msgid "Tiger"
-#~ msgstr "Tigre"
-
-#~ msgid "By Its"
-#~ msgstr "Valeur"
-
-#~ msgid "Toe"
-#~ msgstr "Gasp"
-
-#~ msgid "Selected themes from above will be tested by previewing here."
-#~ msgstr "Les thèmes sélectionnés au dessus sont prévisualisés ici."
-
-#~ msgid "Sample Button"
-#~ msgstr "Bouton simple"
-
-#~ msgid "Sample Check Button"
-#~ msgstr "Bouton de Sélection"
-
-#~ msgid "Sample Text Entry Field"
-#~ msgstr "Zone de texte"
-
-#~ msgid "Submenu"
-#~ msgstr "Sous-menu"
-
-#~ msgid "Item 1"
-#~ msgstr "Élément 1"
-
-#~ msgid "Another item"
-#~ msgstr "Un autre élément"
-
-#~ msgid "Radio Button 1"
-#~ msgstr "Bouton radio 1"
-
-#~ msgid "Radio Button 2"
-#~ msgstr "Bouton radio 2"
-
-#~ msgid ""
-#~ "Error installing theme:\n"
-#~ "'%s'\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Erreur lors de l'installation du thème :\n"
-#~ "« %s »\n"
-#~ "%s"
-
-#~ msgid "Available Themes"
-#~ msgstr "Thèmes disponibles"
-
-#~ msgid ""
-#~ "Auto\n"
-#~ "Preview"
-#~ msgstr ""
-#~ "Auto\n"
-#~ "Prévisualisation"
-
-#~ msgid ""
-#~ "Install new\n"
-#~ "theme..."
-#~ msgstr ""
-#~ "Installer un\n"
-#~ "nouveau thème..."
-
-#~ msgid "User Font"
-#~ msgstr "Police utilisateur"
-
-#~ msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
-#~ msgstr "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
-
-#~ msgid "Use custom font."
-#~ msgstr "Utiliser une police personnalisée"
-
-#~ msgid "Home directory doesn't exist!\n"
-#~ msgstr "Le répertoire personnel n'existe pas !\n"
-
-#~ msgid "Theme does not exist"
-#~ msgstr "Le thème n'existe pas"
-
-#~ msgid "Command '%s' failed"
-#~ msgstr "Échec de la command « %s »"
-
-#~ msgid "Unknown file format"
-#~ msgstr "Format de fichier inconnu"
-
-#~ msgid "Error initializing the `url-properties' capplet."
-#~ msgstr "Erreur lors de l'initialisation de la capplet « url-properties »"
-
-#~ msgid "Protocol"
-#~ msgstr "Protocole"
-
-#~ msgid "Netscape"
-#~ msgstr "Netscape"
-
-#~ msgid "Netscape (new window)"
-#~ msgstr "Netscape (nouvelle fenêtre)"
-
-#~ msgid "Help browser (new window)"
-#~ msgstr "Navigateur d'aide (nouvelle fenêtre)"
-
-#~ msgid "Set"
-#~ msgstr "Définir"
-
-#~ msgid ""
-#~ "Starting %s\n"
-#~ "(%d seconds left before operation times out)"
-#~ msgstr ""
-#~ "Démarrage de %s\n"
-#~ "(%d secondes avant expiration du temps imparti)"
-
-#~ msgid "%s (Current)"
-#~ msgstr "%s (En cours)"
-
-#~ msgid "Run Configuration Tool for %s"
-#~ msgstr "Lancer l'outil de configuration pour %s"
-
-#~ msgid " (Not found)"
-#~ msgstr " (non trouvé)"
-
-#~ msgid ""
-#~ "wm-properties-capplet: Unable to initialize window manager.\n"
-#~ "\tAnother window manager is already running and could not be killed\n"
-#~ msgstr ""
-#~ "wm-properties-capplet : Impossible d'initialiser le\n"
-#~ "gestionnaire de fenêtres.\n"
-#~ "\tUn autre gestionnaire de fenêtres est déjà en cours d'exécution et ne "
-#~ "peux pas être terminé\n"
-
-#~ msgid ""
-#~ "wm-properties-capplet: Unable to initialize window manager.\n"
-#~ "\t'%s' didn't start\n"
-#~ msgstr ""
-#~ "wm-properties-capplet : Impossible d'initialiser le gestionnaire de "
-#~ "fenêtres.\n"
-#~ "\t« %s » a pas démarré\n"
-
-#~ msgid "Previous window manager did not die\n"
-#~ msgstr "Le gestionnaire de fenêtres précédent fonctionne toujours\n"
-
-#~ msgid ""
-#~ "Could not start '%s'.\n"
-#~ "Falling back to previous window manager '%s'\n"
-#~ msgstr ""
-#~ "N'a pas pu démarrer « %s ».\n"
-#~ "Retourne au gestionnaire de fenêtres prédédent « %s »\n"
-
-#~ msgid ""
-#~ "Could not start fallback window manager.\n"
-#~ "Please run a window manager manually. You can\n"
-#~ "do this by selecting \"Run Program\" in the\n"
-#~ "foot menu\n"
-#~ msgstr ""
-#~ "N'a pas pu démarrer le gestionnaire de fenêtres précédent.\n"
-#~ "Démarrez un gestionnaire de fenêtres manuellement.\n"
-#~ "Vous pouvez le faire en sélectionnant « Exécuter... »\n"
-#~ "dans le menu GNOME\n"
-
-#~ msgid "OK"
-#~ msgstr "Valider"
-
-#~ msgid ""
-#~ "Your current window manager has been changed. In order for\n"
-#~ "this change to be saved, you will need to save your current\n"
-#~ "session. You can do so immediately by selecting the \"Save session\n"
-#~ "now\" below, or you can save your session later.  This can be\n"
-#~ "done either selecting \"Save Current Session\" under \"Settings\"\n"
-#~ "in the main menu, or by turning on \"Save Current Setup\" when\n"
-#~ "you log out.\n"
-#~ msgstr ""
-#~ "Votre gestionnaire de fenêtres courant a changé. Pour que le\n"
-#~ "changement soit enregistré, vous devez enregistrer la session actuelle.\n"
-#~ "Cela peut être fait immédiatement en sélectionnant « Enregistrer la\n"
-#~ "session maintenant » ci-dessous; vous pouvez aussi enregistrer votre\n"
-#~ "session plus tard. Ceci peut être fait en sélectionnant\n"
-#~ "« Enregistrer la session actuelle » dans la rubrique du menu principal\n"
-#~ "ou alors en activant « Enregistrer la session actuelle » en vous\n"
-#~ "deconnectant.\n"
-
-#~ msgid "Save Session Later"
-#~ msgstr "Enregistrer la session plus tard"
-
-#~ msgid "Save Session Now"
-#~ msgstr "Enregistrer la session maintenant"
-
-#~ msgid ""
-#~ "Your current window manager has been changed. In order for\n"
-#~ "this change to be saved, you will need to save your current\n"
-#~ "session. This can be done by either selecting \"Save Current Session\"\n"
-#~ "under \"Settings\" in the main menu, or by turning on\n"
-#~ "\"Save Current Setup\" when you log out.\n"
-#~ msgstr ""
-#~ "Votre gestionnaire de fenêtres a été changé. Pour que le\n"
-#~ "changement soit enregistré, vous devez enregistrer la session actuelle.\n"
-#~ "Cela peut être fait en sélectionnant « Enregistrer la session courante »\n"
-#~ "sous l'entrée « Paramétres » du menu principal ou en activant\n"
-#~ "l'option « Enregistrer la configuration actuelle » à la fin de votre "
-#~ "session.\n"
-
-#~ msgid "Add New Window Manager"
-#~ msgstr "Ajoutez un nouveau gestionnaire de fenêtres"
-
-#~ msgid "Cancel"
-#~ msgstr "Annuler"
-
-#~ msgid "Configuration Command:"
-#~ msgstr "Commande de configuration :"
-
-#~ msgid "Window manager is session managed"
-#~ msgstr "Le gestionnaire de fenêtres est géré par la session"
-
-#~ msgid "Name cannot be empty"
-#~ msgstr "Le champ du nom ne doit pas être vide"
-
-#~ msgid "Command cannot be empty"
-#~ msgstr "La champ de la commande ne peut pas être vide"
-
-#~ msgid "Edit Window Manager"
-#~ msgstr "Éditer le gestionnaire de fenêtres"
-
-#~ msgid "You cannot delete the current Window Manager"
-#~ msgstr "Vous ne pouvez pas supprimer le gestionnaire de fenêtres actuel"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'wm-properties-capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "Une erreur d'initialisation a eu lieu lors du démarrage\n"
-#~ "de « wm-properties-capplet ». Abandon...\n"
-
-#~ msgid "Color 1"
-#~ msgstr "Couleur 1"
-
-#~ msgid "Color 2"
-#~ msgstr "Couleur 2"
-
-#~ msgid ""
-#~ "Solid Color\n"
-#~ "Vertical Gradient\n"
-#~ "Horizontal Gradient\n"
-#~ msgstr ""
-#~ "Couleur uni\n"
-#~ "Dégradé vertical\n"
-#~ "Dégradé horizontal\n"
-
-#~ msgid ""
-#~ "Tiled\n"
-#~ "Centered\n"
-#~ "Scaled (keep aspect ratio)\n"
-#~ "Stretched (change aspect ratio)\n"
-#~ "Embossed\n"
-#~ msgstr ""
-#~ "Mosaique\n"
-#~ "Centré\n"
-#~ "Agrandi (garde les proportions)\n"
-#~ "Ajusté (modifie les proportions)\n"
-#~ "En relief\n"
-
-#~ msgid "(None)\n"
-#~ msgstr "(Aucun)\n"
-
-#~ msgid "Message"
-#~ msgstr "Message"
-
-#~ msgid "Scaled"
-#~ msgstr "Redimensionné"
-
-#~ msgid "Disable background selection"
-#~ msgstr "Désactiver le choix du fond d'écran"
-
-#~ msgid "Auto-repeat"
-#~ msgstr "Auto-répétition"
-
-#~ msgid "Repeat delay"
-#~ msgstr "Délai avant répétition"
-
-#~ msgid "Click on keypress"
-#~ msgstr "La frappe est accompagnée de cliques"
-
-#~ msgid "Menu Options"
-#~ msgstr "Options des menus"
-
-#~ msgid "Can detach and move menus"
-#~ msgstr "Barres de menu détachables et mobiles"
-
-#~ msgid "Statusbar Options"
-#~ msgstr "Options des barres d'état"
-
-#~ msgid "Toolbar Options"
-#~ msgstr "Options des barres d'outils"
-
-#~ msgid "Can detach and move toolbars"
-#~ msgstr "Barres d'outils détachables et mobiles"
-
-#~ msgid "Dialog Layout"
-#~ msgstr "Disposition de la boîte de dialogue"
-
-#~ msgid ""
-#~ "Default value\n"
-#~ "Spread buttons out\n"
-#~ "Put buttons on edges\n"
-#~ "Left-justify buttons\n"
-#~ "Right-justify buttons\n"
-#~ msgstr ""
-#~ "Valeur par défaut\n"
-#~ "Boutons écartés\n"
-#~ "Boutons justifiés\n"
-#~ "Boutons justifiés à gauche\n"
-#~ "Boutons justifiés à droite\n"
-
-#~ msgid "Dialog Behavior"
-#~ msgstr "Comportement des boîtes de dialogue"
-
-#~ msgid "Dialog position:"
-#~ msgstr "Position des boîtes de dialogue :"
-
-#~ msgid ""
-#~ "Let window manager decide\n"
-#~ "Center of the screen\n"
-#~ "At the mouse pointer\n"
-#~ msgstr ""
-#~ "Laisser le gestionnaire de fenêtres décider\n"
-#~ "Centre de l'écran\n"
-#~ "Au curseur de la souris\n"
-
-#~ msgid ""
-#~ "Dialogs are like other windows\n"
-#~ "Dialogs are treated specially by the window manager\n"
-#~ msgstr ""
-#~ "Les boîtes de dialogues sont comme les autres fenêtres\n"
-#~ "Les boîtes de dialogue sont traitées de manière spéciale par le "
-#~ "gestionnaire de fenêtres\n"
-
-#~ msgid "window3"
-#~ msgstr "window3"
-
-#~ msgid "GNOME MDI Options"
-#~ msgstr "Options GNOME MDI"
-
-#~ msgid "Default MDI Mode:"
-#~ msgstr "Mode MDI par défaut :"
-
-#~ msgid "MDI notebook tab position:"
-#~ msgstr "Position des onglets des carnets MDI :"
-
-#~ msgid ""
-#~ "Notebook\n"
-#~ "Toplevel\n"
-#~ "Modal\n"
-#~ msgstr ""
-#~ "Carnet\n"
-#~ "1er niveau\n"
-#~ "Modal\n"
-
-#~ msgid ""
-#~ "Left\n"
-#~ "Right\n"
-#~ "Top\n"
-#~ "Bottom\n"
-#~ msgstr ""
-#~ "Gauche\n"
-#~ "Droite\n"
-#~ "Haut\n"
-#~ "Bas\n"
-
-#~ msgid "id of the capplet -- assigned by the control-center"
-#~ msgstr "id de la capplet -- assignée par le centre de contrôle"
-
-#~ msgid "ID"
-#~ msgstr "ID"
-
-#~ msgid "Multi-capplet id."
-#~ msgstr "ID multi-capplet"
-
-#~ msgid "CAPID"
-#~ msgstr "CAPID"
-
-#~ msgid "X ID of the socket it's plugged into"
-#~ msgstr "X ID de la socket associée"
-
-#~ msgid "XID"
-#~ msgstr "XID"
-
-#~ msgid "IOR of the control-center"
-#~ msgstr "IOR du centre de contrôle"
-
-#~ msgid "IOR"
-#~ msgstr "IOR"
-
-#~ msgid "Ignore default action.  Used for custom init-session cases"
-#~ msgstr ""
-#~ "Ignore l'action par défaut. Utilisé dans le cas d'une\n"
-#~ "initialisation de session personnalisée"
-
-#~ msgid "Get an XML description of the capplet's state"
-#~ msgstr "Obtenir une description XML de l'état de la capplet"
-
-#~ msgid "DO_GET"
-#~ msgstr "DO_GET"
-
-#~ msgid "Read an XML description of the capplet's state and apply it"
-#~ msgstr "Lire une description XML de l'état de la capplet et l'appliquer"
-
-#~ msgid "DO_SET"
-#~ msgstr "DO_SET"
-
-#~ msgid "Help with the GNOME control-center."
-#~ msgstr "Aide du centre de contrôle GNOME."
-
-#~ msgid "About the GNOME control-center."
-#~ msgstr "À propos du centre de contrôle GNOME."
-
-#~ msgid "Up"
-#~ msgstr "Haut"
-
-#~ msgid "Parent Group"
-#~ msgstr "Groupe parent"
-
-#~ msgid "Preferences"
-#~ msgstr "Préférences"
-
-#~ msgid "Control Center Preferences"
-#~ msgstr "Préférences du Centre de contrôle"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'background-properties-"
-#~ "capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "Une erreur d'initialisation a eu lieu lors du démarrage de 'background-"
-#~ "properties-capplet'.\n"
-#~ "Abandon...\n"
-
-#~ msgid "none"
-#~ msgstr "aucun"
-
-#~ msgid "Set parameters from saved state and exit"
-#~ msgstr "Restaure les paramètres sauvegardés et quitte"
-
-#~ msgid "IMAGE"
-#~ msgstr "IMAGE"
-
-#~ msgid "Sets the wallpaper to the value specified"
-#~ msgstr "Utilise la couleur spécifiée pour le fond d'écran"
-
-#~ msgid "COLOR"
-#~ msgstr "COULEUR"
-
-#~ msgid "Specifies the background color"
-#~ msgstr "Spécifie une couleur de fond d'écran"
-
-#~ msgid "Specifies end background color for gradient"
-#~ msgstr "Spéficie la couleur de fin de gradient pour la couleur de fond"
-
-#~ msgid "Gradient orientation: vertical or horizontal"
-#~ msgstr "Orientation du dégradé : vertical ou horizontal"
-
-#~ msgid "MODE"
-#~ msgstr "MODE"
-
-#~ msgid "Display wallpaper: tiled, centered, scaled or ratio"
-#~ msgstr ""
-#~ "Affichage du papier peint: mosaique, centré, redimentionné ou aux "
-#~ "proportions"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'bell-properties-"
-#~ "capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "Une erreur d'initialisation a eu lieu lors du démarrage\n"
-#~ "de 'bell-properties-capplet'. Abandon...\n"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'keyboard-properties-"
-#~ "capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "Une erreur d'initialisation a eu lieu lors du démarrage\n"
-#~ "de 'keyboard-properties-capplet'. Abandon...\n"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'mouse-properties-"
-#~ "capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "Une erreur d'initialisation a eu lieu lors du démarrage\n"
-#~ "de 'mouse-properties-capplet'. Abandon...\n"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'sound-properties-"
-#~ "capplet'."
-#~ msgstr ""
-#~ "Une erreur d'initialisation a eu lieu lors du démarrage de 'sound-"
-#~ "properties-capplet'."
-
-#~ msgid "Select sound file"
-#~ msgstr "Sélectionnez le fichier son"
-
-#~ msgid ""
-#~ "This copy of the GNOME control center was not compiled with sound support"
-#~ msgstr ""
-#~ "Cette version du centre de contrôle GNOME a été compilée sans support "
-#~ "pour le son"
-
-#~ msgid "The sound file for this event does not exist."
-#~ msgstr "Le fichier son défini pour cet événement n'existe pas."
-
-#~ msgid ""
-#~ "The sound file for this event does not exist.\n"
-#~ "You may want to install the gnome-audio package\n"
-#~ "for a set of default sounds."
-#~ msgstr ""
-#~ "Le fichier son défini pour cet évènement n'existe pas.\n"
-#~ "Vous devriez installer le paquetage gnome-audio pour\n"
-#~ "pouvoir disposer d'un jeu de sons par défaut."
-
-#~ msgid "Put buttons on edges"
-#~ msgstr "Mettre les boutons sur les bords"
-
-#~ msgid "Left-justify buttons"
-#~ msgstr "Justification à gauche des boutons"
-
-#~ msgid "Right-justify buttons"
-#~ msgstr "Justification à droite des boutons"
-
-#~ msgid "Toplevel"
-#~ msgstr "1er niveau"
-
-#~ msgid "%s Settings..."
-#~ msgstr "Paramètres de %s..."
-
-#~ msgid "Author:"
-#~ msgstr "Auteur :"
-
-#~ msgid "Author: UNKNOWN"
-#~ msgstr "Auteur : INCONNU"
-
-#~ msgid "RANDOM SCREENSAVER"
-#~ msgstr "ÉCONOMISEUR D'ÉCRAN ALÉATOIRE"
-
-#~ msgid ""
-#~ "Pressing this button will popup a dialogbox that will help you setup the "
-#~ "current screensaver."
-#~ msgstr ""
-#~ "Ce bouton ouvre une boîte de dialogue qui vous aidera à configurer "
-#~ "l'économiseur d'écran actuel."
-
-#~ msgid "Start After "
-#~ msgstr "Démarrer après "
-
-#~ msgid " Normal"
-#~ msgstr " Normale"
-
-#~ msgid "Screen Saver Demo"
-#~ msgstr "Démo de l'économiseur d'écran"
-
-#~ msgid "Try"
-#~ msgstr "Essayer"
-
-#~ msgid "Revert"
-#~ msgstr "Revenir"
-
-#~ msgid "Sorry, no help is available for these settings."
-#~ msgstr "Désolé, aucune aide n'est disponible pour ces paramétres."
-
-#~ msgid "capplet-command to be run."
-#~ msgstr "capplet-command à lancer."
-
-#~ msgid "Warning:"
-#~ msgstr "Avertissement :"
-
-#~ msgid "Discard all changes"
-#~ msgstr "Annuler tous les changements"
-
-#~ msgid ""
-#~ "The following modules have had changes made, but not committed.  If you "
-#~ "would like to edit them, please double click on the appropriate entry."
-#~ msgstr ""
-#~ "Les modules suivants ont subi des modifications qui n'ont pas été\n"
-#~ "enterrinées. Si vous souhaitez les éditer, double-cliquez sur\n"
-#~ "l'entrée appropriée."
-
-#~ msgid "Category"
-#~ msgstr "Catégorie"
+msgid "Matched Windows"
+msgstr "Fenêtres séparées"
+
+#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:1
+msgid "Configure window minimization and maximization"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:2
+msgid "Minimizing and Maximizing"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
+msgid "Configure window manager configuration properties"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:2
+msgid "Meta"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
+msgid "Configure miscellaneous window features"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:1
+msgid "Configure window move/resize"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:2
+msgid "Moving and Resizing"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:1
+msgid "Configure window placement"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:2
+msgid "Placement"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
+msgid "Enable window manager sound events"
+msgstr "Activer les événements sonores du gestionnaire de fenêtres"
+
+#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:1
+msgid "Configure workspaces"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:2
+msgid "Workspaces"
+msgstr ""

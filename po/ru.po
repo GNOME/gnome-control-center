@@ -326,6 +326,7 @@ msgstr ""
 #: capplets/default-applications/interface.c:334
 #: capplets/default-applications/interface.c:465
 #: capplets/default-applications/interface.c:576
+#: capplets/wm-properties/wm-properties-capplet.c:806
 msgid "Command:"
 msgstr "Команда:"
 
@@ -652,6 +653,7 @@ msgid "Configure the settings of the screensaver"
 msgstr "Нет настроек для этого хранителя экрана."
 
 #: capplets/screensaver/screensaver-prefs-dialog.c:185
+#: capplets/wm-properties/wm-properties-capplet.c:793
 msgid "Name:"
 msgstr "Название:"
 
@@ -659,6 +661,7 @@ msgstr "Название:"
 msgid "Settings"
 msgstr "Свойства"
 
+#: capplets/file-types/file-types-capplet.c:1882
 #: capplets/screensaver/screensaver-prefs-dialog.c:204
 msgid "Description"
 msgstr "Описание"
@@ -748,7 +751,9 @@ msgstr "Переходит в режим ожидания через"
 msgid "One screensaver all the time"
 msgstr "Один и тот же хранитель экрана все время"
 
+#: capplets/file-types/file-types-icon-entry.c:264
 #: capplets/screensaver/screensaver-properties.glade.h:11
+#: capplets/theme-switcher/gui.c:232 capplets/theme-switcher/gui.c:304
 msgid "Preview"
 msgstr "Посмотреть"
 
@@ -955,6 +960,7 @@ msgstr "Двенадцатисторонние ячейки"
 
 #: capplets/screensaver/screensavers/ant.xml.h:25
 #: capplets/screensaver/screensavers/flag.xml.h:17
+#: capplets/theme-switcher/demo.c:54
 msgid "Two"
 msgstr ""
 
@@ -3237,6 +3243,7 @@ msgstr "Новый хранитель экрана"
 msgid "Configure GNOME's use of sound"
 msgstr ""
 
+#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
 #: capplets/sound/sound.desktop.in.in.h:2
 #, fuzzy
 msgid "Sound"
@@ -3281,6 +3288,8 @@ msgstr ""
 "Справочная информация не доступна. Проверьте пожалуйста что\n"
 "Руководство пользователя GNOME установлено на вашей системе."
 
+#: capplets/theme-switcher/gui.c:370
+#: capplets/wm-properties/wm-properties-capplet.c:671
 #: control-center/capplet-dir-view.c:464
 msgid "Close"
 msgstr "Закрыть"
@@ -3293,6 +3302,7 @@ msgstr "Центр управления GNOME:"
 msgid "The GNOME configuration tool"
 msgstr "Средство конфигурации GNOME"
 
+#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
 #: control-center/gnomecc.glade.h:1
 msgid "Appearance"
 msgstr "Внешний вид"
@@ -3354,3 +3364,1043 @@ msgstr ""
 #: control-center/main.c:80
 msgid "GNOME Control Center options"
 msgstr "Параметры центра управления GNOME"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:387
+msgid "Edit Applications List"
+msgstr "Правка списка приложений"
+
+#. Add label
+#: capplets/file-types/file-types-capplet-dialogs.c:409
+#, c-format
+msgid "Select applications to appear in menu for MIME type \"%s\""
+msgstr "Выбор приложений появляющихся в меню для MIME-типа \"%s\""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:433
+msgid "Add Application..."
+msgstr "Добавить приложение..."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:440
+msgid "Edit Application..."
+msgstr "Правка приложения..."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:446
+msgid "Delete Application"
+msgstr "Удалить приложение"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:480
+msgid "Edit Components List"
+msgstr "Правка списка компонентов"
+
+#. Add label
+#: capplets/file-types/file-types-capplet-dialogs.c:500
+#, c-format
+msgid "Select views to appear in menu for MIME type \"%s\""
+msgstr "Выбрать что будет отображаться в меню для типа MIME \"%s\""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:720
+msgid ""
+"The MIME type entered contained upper case characters. Upper case characters "
+"were changed to lower case for you."
+msgstr ""
+"Введённый тип MIME содержит символы в верхнем регистре. Они будут "
+"преобразованы в нижний регистр."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:723
+msgid "Add New MIME Type"
+msgstr "Добавить новый MIME-тип"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:769
+msgid "Add MIME Type"
+msgstr "Добавить MIME-тип"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:773
+msgid "New MIME type (e.g. image/x-thumper):"
+msgstr "Новый MIME-тип (например image/x-thumper):"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:780
+msgid "Description (e.g. Thumper image):"
+msgstr "Описание (например Thumper image):"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:947
+msgid "File Extensions "
+msgstr "Расширения файлов"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:967
+#: capplets/mime-type/mime-type-capplet.c:93
+#: capplets/wm-properties/wm-properties-capplet.c:1117
+msgid "Add..."
+msgstr "Добавить..."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:972
+msgid "    Remove    "
+msgstr " Удалить "
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1041
+msgid "Add New Extension"
+msgstr "Добавить новое расширение"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1045
+msgid ""
+"Type in the extensions for this mime-type (without dot).\n"
+"You can enter several extensions seperated by a space,\n"
+"for example: html htm"
+msgstr ""
+"Введите расширения для этого mime-типа (без точки).\n"
+"Вы можете ввести несколько расширений разделённых пробелом,\n"
+"например:  html htm"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1052
+#: capplets/mime-type/new-mime-window.c:50
+msgid "Extension:"
+msgstr "Расширение: "
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1194
+msgid "You must enter a name."
+msgstr "Необходимо ввести название."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1197
+msgid "You must enter a command."
+msgstr "Необходимо ввести команду."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1207
+#, c-format
+msgid ""
+"\"%s\" does not exist or is not executable.\n"
+"Check your spelling and make sure you have\n"
+"the right permissions to execute this file."
+msgstr ""
+"\"%s\" не существует или не является исполняемым.\n"
+"Проверьте правильность написания и убедитесь в том,\n"
+"что у вас есть права на исполнение этого файла."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1213
+#, c-format
+msgid ""
+"The command \"%s\" cannot be found.\n"
+"You must use a command that can work from any command line."
+msgstr ""
+"Команда \"%s\" не найдена.\n"
+"Используйте команду, которая сможет работать из любой командной строки."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1225
+msgid "Bad Application Name"
+msgstr "Неправильное название приложения"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1226
+msgid "Bad Application Command"
+msgstr "Неправильная команда приложения"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1258
+msgid "Add Application"
+msgstr "Добавить приложение"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1259
+msgid "Edit Application"
+msgstr "Правка приложения"
+
+#. Application Name label and entry
+#: capplets/file-types/file-types-capplet-dialogs.c:1271
+msgid "Application Name:"
+msgstr "Название приложения:"
+
+#. Application Command label and entry
+#: capplets/file-types/file-types-capplet-dialogs.c:1282
+msgid "Application Command:"
+msgstr "Команда вызова приложения:"
+
+#. Open Behavior frame
+#: capplets/file-types/file-types-capplet-dialogs.c:1293
+msgid "Open Behavior"
+msgstr "При открытии"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1299
+msgid "Can open multiple files"
+msgstr "Может открыть несколько файлов"
+
+#. FIXME bugzilla.eazel.com 6066: This needs to be three options now: "yes", "no", and "use uris for non-file locations"
+#: capplets/file-types/file-types-capplet-dialogs.c:1307
+msgid "Can open from URI"
+msgstr "Может открыть по URI"
+
+#: capplets/file-types/file-types-capplet.c:735
+#: capplets/file-types/file-types-capplet.c:1883
+msgid "MIME Type"
+msgstr "MIME-тип"
+
+#: capplets/file-types/file-types-capplet.c:742
+msgid "Change Icon"
+msgstr "Изменить пиктограмму"
+
+#: capplets/file-types/file-types-capplet.c:749
+msgid "Change File Extensions"
+msgstr "Изменить расширения файла"
+
+#: capplets/file-types/file-types-capplet.c:757
+msgid "Default Action:"
+msgstr "Действие по умолчанию:"
+
+#: capplets/file-types/file-types-capplet.c:769
+msgid "Use Viewer"
+msgstr "Использовать программу просмотра"
+
+#: capplets/file-types/file-types-capplet.c:775
+msgid "Open With Application"
+msgstr "Открыть с помощью"
+
+#: capplets/file-types/file-types-capplet.c:786
+msgid "Edit List"
+msgstr "Правка списка"
+
+#: capplets/file-types/file-types-capplet.c:811
+msgid "Add New MIME Type..."
+msgstr "Добавление нового MIME-типа..."
+
+#: capplets/file-types/file-types-capplet.c:817
+msgid "Delete This MIME Type"
+msgstr "Удалить этот MIME-тип"
+
+#: capplets/file-types/file-types-capplet.c:828
+msgid "Revert to System Defaults"
+msgstr "Вернуть к исходным значениям"
+
+#: capplets/file-types/file-types-capplet.c:1075
+#: capplets/file-types/file-types-capplet.c:1219
+msgid "None"
+msgstr "Нет"
+
+#: capplets/file-types/file-types-capplet.c:1324
+msgid ""
+"Reverting to system settings will lose any changes\n"
+"you have ever made to File Types and Programs.\n"
+"Revert anyway?"
+msgstr ""
+"Восстановление системных установок приведёт к потере любых изменений\n"
+"которые вы сделали с типами файлов и программами.\n"
+"Всё равно восстановить?"
+
+#. Add default action to fourth column
+#: capplets/file-types/file-types-capplet.c:1393
+#: capplets/file-types/file-types-capplet.c:1593
+#: capplets/file-types/file-types-capplet.c:1719
+msgid "none"
+msgstr "нет"
+
+#: capplets/file-types/file-types-capplet.c:1434
+#: capplets/file-types/file-types-capplet.c:1620
+#: capplets/file-types/file-types-capplet.c:1763
+#, c-format
+msgid "View as %s"
+msgstr "Просмотр как %s"
+
+#: capplets/file-types/file-types-capplet.c:1884
+#: capplets/mime-type/mime-data.c:385
+msgid "Extension"
+msgstr "Расширение"
+
+#: capplets/file-types/file-types-capplet.c:1885
+msgid "Default Action"
+msgstr "Действие по умолчанию"
+
+#: capplets/file-types/file-types-icon-entry.c:258
+msgid "Can't find an hbox, using a normal file selection"
+msgstr "Невозможно найти hbox, используется обычный выбор файла"
+
+#: capplets/file-types/file-types-icon-entry.c:381
+msgid "Select an icon"
+msgstr "Выбрать пиктограмму"
+
+#. icon box
+#: capplets/mime-type/edit-window.c:266
+msgid "Select an icon..."
+msgstr "Выбор пиктограммы..."
+
+#: capplets/mime-type/edit-window.c:276
+#: capplets/mime-type/new-mime-window.c:31
+msgid "Mime Type: "
+msgstr "Mime тип: "
+
+#: capplets/mime-type/edit-window.c:306
+msgid "Add"
+msgstr "Добавить"
+
+#: capplets/mime-type/edit-window.c:314
+#: capplets/url-properties/url-properties.c:135
+msgid "Remove"
+msgstr "Удалить"
+
+#. gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
+#: capplets/mime-type/edit-window.c:341
+#: capplets/mime-type/new-mime-window.c:69
+msgid "First Regular Expression: "
+msgstr "Первое регулярное выражение: "
+
+#: capplets/mime-type/edit-window.c:349
+#: capplets/mime-type/new-mime-window.c:80
+msgid "Second Regular Expression: "
+msgstr "Второе регулярное выражение: "
+
+#. Actions box
+#: capplets/mime-type/edit-window.c:356
+msgid "Mime Type Actions"
+msgstr "Действия связанные с типом"
+
+#: capplets/mime-type/edit-window.c:363
+#, c-format
+msgid "Example: emacs %f"
+msgstr "Пример: emacs %f"
+
+#: capplets/mime-type/edit-window.c:368
+msgid "Open"
+msgstr "Открытие"
+
+#: capplets/mime-type/edit-window.c:374 capplets/mime-type/edit-window.c:390
+#: capplets/mime-type/edit-window.c:405
+msgid "Select a file..."
+msgstr "Выберете файл..."
+
+#: capplets/mime-type/edit-window.c:383
+msgid "View"
+msgstr "Просмотр"
+
+#: capplets/mime-type/edit-window.c:399
+msgid "Edit"
+msgstr "Правка"
+
+#. we initialize everything
+#: capplets/mime-type/edit-window.c:448
+#, c-format
+msgid "Set actions for %s"
+msgstr "Определение %s"
+
+#: capplets/mime-type/mime-data.c:384
+msgid "Mime Type"
+msgstr "Mime тип"
+
+#: capplets/mime-type/mime-data.c:493
+msgid "You must enter a mime-type"
+msgstr "Необходимо ввести mime-тип"
+
+#: capplets/mime-type/mime-data.c:498
+msgid ""
+"You must add either a regular-expression or\n"
+"a file-name extension"
+msgstr ""
+"Необходимо добавить или регулярное выражение,\n"
+"или расширение имени файла"
+
+#: capplets/mime-type/mime-data.c:502
+msgid ""
+"Please put your mime-type in the format:\n"
+"CATEGORY/TYPE\n"
+"\n"
+"For Example:\n"
+"image/png"
+msgstr ""
+"Пожалуйста, задайте ваш mime-тип в формате:\n"
+"КАТЕГОРИЯ/ТИП\n"
+"\n"
+"Например:\n"
+"image/png"
+
+#: capplets/mime-type/mime-data.c:507
+msgid "This mime-type already exists"
+msgstr "Этот mime-тип уже существует"
+
+#: capplets/mime-type/mime-data.c:588 capplets/mime-type/mime-info.c:427
+msgid ""
+"We are unable to create the directory\n"
+"~/.gnome/mime-info\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+"Невозможно создать каталог\n"
+"~/.gnome/mime-info\n"
+"\n"
+"Состояние не будет сохранено."
+
+#: capplets/mime-type/mime-data.c:594 capplets/mime-type/mime-info.c:433
+msgid ""
+"We are unable to access the directory\n"
+"~/.gnome/mime-info\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+"Невозможно воспользоваться каталогом\n"
+"~/.gnome/mime-info\n"
+"\n"
+"Состояние не будет сохранено."
+
+#: capplets/mime-type/mime-data.c:605
+msgid ""
+"Cannot create the file\n"
+"~/.gnome/mime-info/user.mime\n"
+"\n"
+"We will not be able to save the state"
+msgstr ""
+"Не удалось создать файл\n"
+"~/.gnome/mime-info/user.mime\n"
+"\n"
+"Состояние не будет сохранено."
+
+#: capplets/mime-type/mime-info.c:444
+msgid ""
+"Cannot create the file\n"
+"~/.gnome/mime-info/user.keys.\n"
+"\n"
+"We will not be able to save the state"
+msgstr ""
+"Неу-далось создать файл\n"
+"~/.gnome/mime-info/user.keys\n"
+"\n"
+"Невозможно сохранить состояние."
+
+#: capplets/mime-type/mime-type-capplet.c:83
+#: capplets/wm-properties/wm-properties-capplet.c:1127
+msgid "Delete"
+msgstr "Удалить"
+
+#: capplets/mime-type/mime-type-capplet.c:97
+#: capplets/wm-properties/wm-properties-capplet.c:1122
+msgid "Edit..."
+msgstr "Исправить..."
+
+#: capplets/mime-type/new-mime-window.c:25
+msgid "Add Mime Type"
+msgstr "Добавление Mime типа"
+
+#: capplets/mime-type/new-mime-window.c:26
+msgid ""
+"Add a new Mime Type\n"
+"For example:  image/tiff; text/x-scheme"
+msgstr ""
+"Добавить новый Mime тип\n"
+"Например: image/tiff; text/x-scheme"
+
+#: capplets/mime-type/new-mime-window.c:39
+msgid "Extensions"
+msgstr "Расширения"
+
+#: capplets/mime-type/new-mime-window.c:43
+msgid ""
+"Type in the extensions for this mime-type.\n"
+"For example:  .html, .htm"
+msgstr ""
+"Введите расширения для этого mime-типа.\n"
+"Например:  .html, .htm"
+
+#: capplets/mime-type/new-mime-window.c:55
+msgid "Regular Expressions"
+msgstr "Регулярные выражения"
+
+#: capplets/mime-type/new-mime-window.c:59
+msgid ""
+"You can set up two regular expressions here to identify the Mime Type\n"
+"by.  These fields are optional."
+msgstr ""
+"Можно задать до двух регулярных выражений идентифицирующих mime-тип.\n"
+"Заполнение этих двух полей необязательно."
+
+#: capplets/theme-switcher/demo.c:54
+msgid "One"
+msgstr "Один"
+
+#. just 8 short names that will serve as samples for titles in demo
+#: capplets/theme-switcher/demo.c:56
+msgid "Eenie"
+msgstr "Эники"
+
+#: capplets/theme-switcher/demo.c:56
+msgid "Meenie"
+msgstr "Беники"
+
+#: capplets/theme-switcher/demo.c:57
+msgid "Mynie"
+msgstr "Ели"
+
+#: capplets/theme-switcher/demo.c:57
+msgid "Moe"
+msgstr "Вареники"
+
+#: capplets/theme-switcher/demo.c:58
+msgid "Catcha"
+msgstr "Эники"
+
+#: capplets/theme-switcher/demo.c:58
+msgid "Tiger"
+msgstr "Беники"
+
+#: capplets/theme-switcher/demo.c:59
+msgid "By Its"
+msgstr "Съели"
+
+#: capplets/theme-switcher/demo.c:59
+msgid "Toe"
+msgstr "Ведро"
+
+#: capplets/theme-switcher/demo.c:118
+msgid "Selected themes from above will be tested by previewing here."
+msgstr "Выбранные выше темы будут продемонстрированы здесь."
+
+#. column one
+#: capplets/theme-switcher/demo.c:123
+msgid "Sample Button"
+msgstr "Образец кнопки"
+
+#: capplets/theme-switcher/demo.c:127
+msgid "Sample Check Button"
+msgstr "Образец кнопки выбора"
+
+#: capplets/theme-switcher/demo.c:132
+msgid "Sample Text Entry Field"
+msgstr "Образец поля ввода текста"
+
+#: capplets/theme-switcher/demo.c:143
+msgid "Submenu"
+msgstr "Дочернее меню"
+
+#: capplets/theme-switcher/demo.c:150
+msgid "Item 1"
+msgstr "Элемент 1"
+
+#: capplets/theme-switcher/demo.c:153
+msgid "Another item"
+msgstr "Другой элемент"
+
+#: capplets/theme-switcher/demo.c:158
+msgid "Radio Button 1"
+msgstr "Кнопка переключателя 1"
+
+#: capplets/theme-switcher/demo.c:164
+msgid "Radio Button 2"
+msgstr "Кнопка переключателя 2"
+
+#: capplets/theme-switcher/gui.c:87
+#, c-format
+msgid ""
+"Error installing theme:\n"
+"'%s'\n"
+"%s"
+msgstr ""
+"Ошибка при установке темы:\n"
+"'%s'\n"
+"%s"
+
+#: capplets/theme-switcher/gui.c:118
+msgid "Select a theme to install"
+msgstr "Выберите тему для установки"
+
+#: capplets/theme-switcher/gui.c:195
+msgid "Available Themes"
+msgstr "Темы"
+
+#: capplets/theme-switcher/gui.c:223
+msgid ""
+"Auto\n"
+"Preview"
+msgstr ""
+"Авто\n"
+"Просмотр"
+
+#: capplets/theme-switcher/gui.c:235
+msgid ""
+"Install new\n"
+"theme..."
+msgstr ""
+"Установить новую\n"
+"тему..."
+
+#. Font selector.
+#.
+#: capplets/theme-switcher/gui.c:241
+msgid "User Font"
+msgstr "Шрифт пользователя"
+
+#. FIXME - should really get this from X somehow
+#. for now we just assume default gtk font
+#: capplets/theme-switcher/gui.c:259
+msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
+msgstr "-cronyx-helvetica-medium-r-normal--*-80-*-*-*-*-koi8-*"
+
+#: capplets/theme-switcher/gui.c:278
+msgid "Use custom font."
+msgstr "Шрифт на заказ."
+
+#: capplets/theme-switcher/gui.c:368
+#: capplets/wm-properties/wm-properties-capplet.c:669
+msgid ""
+"No help is available/installed for these settings. Please make sure you\n"
+"have the GNOME User's Guide installed on your system."
+msgstr ""
+"Справочная информация для этих настроек не доступна. Проверьте пожалуйста\n"
+"что Руководство пользователя GNOME установлено на вашей системе."
+
+#: capplets/theme-switcher/install.c:31
+msgid "Home directory doesn't exist!\n"
+msgstr "Домашнего каталога не существует!\n"
+
+#: capplets/theme-switcher/install.c:41
+msgid "Theme does not exist"
+msgstr "Эта тема отсутствует"
+
+#: capplets/theme-switcher/install.c:73
+#, c-format
+msgid "Command '%s' failed"
+msgstr "Команда '%s' не прошла"
+
+#: capplets/theme-switcher/install.c:78
+msgid "Unknown file format"
+msgstr "Неизвестный формат файла"
+
+#: capplets/url-properties/url-properties.c:49
+msgid "Error initializing the `url-properties' capplet."
+msgstr "Ошибка инициализации 'url-properties' capplet."
+
+#: capplets/url-properties/url-properties.c:72
+msgid "Protocol"
+msgstr "Протокол"
+
+#: capplets/url-properties/url-properties.c:72
+msgid "Command"
+msgstr "Команда"
+
+#: capplets/url-properties/url-properties.c:89
+msgid "handler:"
+msgstr "обработчик:"
+
+#. set some commonly used handlers
+#: capplets/url-properties/url-properties.c:99
+msgid "Netscape"
+msgstr "Netscape"
+
+#: capplets/url-properties/url-properties.c:104
+msgid "Netscape (new window)"
+msgstr "Netscape (в новом окне)"
+
+#: capplets/url-properties/url-properties.c:110
+msgid "Help browser"
+msgstr "Справочный навигатор"
+
+#: capplets/url-properties/url-properties.c:115
+msgid "Help browser (new window)"
+msgstr "Справочный навигатор (в новом окне)"
+
+#: capplets/url-properties/url-properties.c:127
+msgid "Set"
+msgstr "Установить"
+
+#: capplets/ui-properties/behavior-properties.glade.h:1
+msgid "At the center of the screen"
+msgstr "В центре экрана"
+
+#: capplets/ui-properties/behavior-properties.glade.h:2
+msgid "At the mouse pointer"
+msgstr "Под курсором мыши"
+
+#: capplets/ui-properties/behavior-properties.glade.h:3
+msgid "Bottom"
+msgstr "Снизу"
+
+#: capplets/ui-properties/behavior-properties.glade.h:4
+msgid "Default  (Spread out - big)"
+msgstr "По умолчанию (Рассеивание - большое)"
+
+#: capplets/ui-properties/behavior-properties.glade.h:5
+msgid "Dialog Buttons"
+msgstr "Кнопки диалогов"
+
+#: capplets/ui-properties/behavior-properties.glade.h:6
+msgid "Dialog buttons have icons"
+msgstr "Пиктограммы на кнопках диалогов"
+
+#: capplets/ui-properties/behavior-properties.glade.h:7
+msgid "Dialogs"
+msgstr "Диалоги"
+
+#: capplets/ui-properties/behavior-properties.glade.h:8
+msgid "Dialogs are treated"
+msgstr "Диалоги рассматриваются"
+
+#: capplets/ui-properties/behavior-properties.glade.h:9
+msgid "Dialogs open"
+msgstr "Открывать диалоги"
+
+#: capplets/ui-properties/behavior-properties.glade.h:10
+msgid "Interface"
+msgstr "Интерфейс"
+
+#: capplets/ui-properties/behavior-properties.glade.h:11
+msgid "Left"
+msgstr "Слева"
+
+#: capplets/ui-properties/behavior-properties.glade.h:12
+msgid "Left aligned"
+msgstr "Выравнивать влево"
+
+#: capplets/ui-properties/behavior-properties.glade.h:13
+msgid "Like any other window"
+msgstr "Как любые другие окна"
+
+#: capplets/ui-properties/behavior-properties.glade.h:14
+msgid "Menu bars are detachable"
+msgstr "Строки меню могут быть отцеплены"
+
+#: capplets/ui-properties/behavior-properties.glade.h:15
+msgid "Menu bars have a border"
+msgstr "Строки меню имеют границу"
+
+#: capplets/ui-properties/behavior-properties.glade.h:16
+msgid "Menu items have icons"
+msgstr "Пиктограммы в меню"
+
+#: capplets/ui-properties/behavior-properties.glade.h:17
+msgid "Menus"
+msgstr "Меню"
+
+#: capplets/ui-properties/behavior-properties.glade.h:18
+msgid "Menus can be torn off"
+msgstr "Меню могут быть свернуты"
+
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
+#: capplets/ui-properties/behavior-properties.glade.h:19
+msgid "Miscellaneous"
+msgstr "Разное"
+
+#: capplets/ui-properties/behavior-properties.glade.h:20
+msgid "Multiple Documents"
+msgstr "Множественные документы"
+
+#: capplets/ui-properties/behavior-properties.glade.h:21
+msgid "Notebook tabs"
+msgstr "Закладки блокнота"
+
+#: capplets/ui-properties/behavior-properties.glade.h:22
+msgid "Place dialogs over application window when possible"
+msgstr "Помещать диалоги поверх окон приложения когда это возможно"
+
+#: capplets/ui-properties/behavior-properties.glade.h:23
+msgid "Progress bar is on the left"
+msgstr "Индикатор прогресса справа"
+
+#: capplets/ui-properties/behavior-properties.glade.h:24
+msgid "Progress bar is on the right"
+msgstr "Индикатор прогресса справа"
+
+#: capplets/ui-properties/behavior-properties.glade.h:25
+msgid "Right"
+msgstr "Справа"
+
+#: capplets/ui-properties/behavior-properties.glade.h:26
+msgid "Right aligned"
+msgstr "Выравнивать вправо"
+
+#: capplets/ui-properties/behavior-properties.glade.h:27
+msgid "Seperate windows"
+msgstr "Отдельные окна"
+
+#: capplets/ui-properties/behavior-properties.glade.h:28
+msgid "Settings will not take effect until applications restart"
+msgstr "Установки не будут действовать до перезапуска приложений"
+
+#: capplets/ui-properties/behavior-properties.glade.h:29
+msgid "Specially by the window manager"
+msgstr "Специально диспетчером окон"
+
+#: capplets/ui-properties/behavior-properties.glade.h:30
+msgid "Spread out"
+msgstr "Рассеивание"
+
+#: capplets/ui-properties/behavior-properties.glade.h:31
+msgid "Spread out (big)"
+msgstr "Рассеивание (большое)"
+
+#: capplets/ui-properties/behavior-properties.glade.h:32
+msgid "Status Bar"
+msgstr "Строка состояния"
+
+#: capplets/ui-properties/behavior-properties.glade.h:33
+msgid "Status bar is interactive when possible"
+msgstr "Строка состояния интерактивная, когда это возможно"
+
+#: capplets/ui-properties/behavior-properties.glade.h:34
+msgid "The same window"
+msgstr "В том же окне"
+
+#: capplets/ui-properties/behavior-properties.glade.h:35
+msgid "Tool Bars"
+msgstr "Панели инструментов"
+
+#: capplets/ui-properties/behavior-properties.glade.h:36
+msgid "Tool bar buttons are icons only"
+msgstr "Кнопки панелей инструментов содержат только пиктограммы"
+
+#: capplets/ui-properties/behavior-properties.glade.h:37
+msgid "Tool bar buttons are text below icons"
+msgstr "Кнопки панелей инструментов содержат текст под пиктограммами"
+
+#: capplets/ui-properties/behavior-properties.glade.h:38
+msgid "Tool bar buttons pop up on mouse over"
+msgstr "Кнопки панелей инструментов всплывают под мышью"
+
+#: capplets/ui-properties/behavior-properties.glade.h:39
+msgid "Tool bars are detachable"
+msgstr "Панели инструментов могут быть отцеплены"
+
+#: capplets/ui-properties/behavior-properties.glade.h:40
+msgid "Tool bars have a border"
+msgstr "Панели инструментов имеют границу"
+
+#: capplets/ui-properties/behavior-properties.glade.h:41
+msgid "Tool bars have line separators"
+msgstr "Разделители в панелях инструментов"
+
+#: capplets/ui-properties/behavior-properties.glade.h:42
+msgid "Top"
+msgstr "Сверху"
+
+#: capplets/ui-properties/behavior-properties.glade.h:43
+msgid "Use status bar instead of dialog when possible"
+msgstr "Использовать строку статуса вместо диалогов когда это возможно"
+
+#: capplets/ui-properties/behavior-properties.glade.h:44
+msgid "When opening Multiple documents, use"
+msgstr "При открытии множественных документов использовать"
+
+#: capplets/ui-properties/behavior-properties.glade.h:45
+msgid "When using Notebook tabs, place the tabs on the"
+msgstr "При использовании закладок блокнота помещать закладки"
+
+#: capplets/ui-properties/behavior-properties.glade.h:46
+msgid "Wherever the Window Manager places them"
+msgstr "Там где их помещает диспетчер окон"
+
+#: capplets/wm-properties/wm-properties-capplet.c:170
+#, c-format
+msgid ""
+"Starting %s\n"
+"(%d seconds left before operation times out)"
+msgstr ""
+"Запускается %s\n"
+"(до истечения отведенного времени осталось %d секунд)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:331
+#, c-format
+msgid "%s (Current)"
+msgstr "%s (Текущий)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:334
+#, c-format
+msgid "Run Configuration Tool for %s"
+msgstr "Запустить настройку %s"
+
+#: capplets/wm-properties/wm-properties-capplet.c:345
+msgid " (Not found)"
+msgstr "  (Не найден)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:384
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\tAnother window manager is already running and could not be killed\n"
+msgstr ""
+"wm-properties-capplet: Невозможно инициализировать диспетчер окон.\n"
+"\tДругой диспетчер окон уже запущен и не не может быть остановлен\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:388
+#, c-format
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\t'%s' didn't start\n"
+msgstr ""
+"wm-properties-capplet: Невозможно инициализировать диспетчер окон.\n"
+"\t'%s' не запустился\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:437
+msgid "Previous window manager did not die\n"
+msgstr "Предыдущий диспетчер окон не закончил работы\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:470
+#, c-format
+msgid ""
+"Could not start '%s'.\n"
+"Falling back to previous window manager '%s'\n"
+msgstr ""
+"Невозможно запустить '%s'.\n"
+"Возвращаемся к предыдущему диспетчеру окон '%s'\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:501
+msgid ""
+"Could not start fallback window manager.\n"
+"Please run a window manager manually. You can\n"
+"do this by selecting \"Run Program\" in the\n"
+"foot menu\n"
+msgstr ""
+"Невозможно запустить запасной диспетчер окон.\n"
+"Запустите пожалуйста диспетчер окон вручную.\n"
+"Это можно сделать выбрав \"Запустить программу\"\n"
+"в главном меню\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:526
+#: capplets/wm-properties/wm-properties-capplet.c:781
+#: capplets/wm-properties/wm-properties-capplet.c:890
+#: capplets/wm-properties/wm-properties-capplet.c:897
+#: capplets/wm-properties/wm-properties-capplet.c:1043
+msgid "OK"
+msgstr "OK"
+
+#: capplets/wm-properties/wm-properties-capplet.c:544
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. You can do so immediately by selecting the \"Save session\n"
+"now\" below, or you can save your session later.  This can be\n"
+"done either selecting \"Save Current Session\" under \"Settings\"\n"
+"in the main menu, or by turning on \"Save Current Setup\" when\n"
+"you log out.\n"
+msgstr ""
+"Произошла замена диспетчера окон. Чтобы сохранить это изменение\n"
+"необходимо сохранить текущий сеанс работы. Это можно сделать\n"
+"сейчас выбрав \"Сохранить сеанс сейчас\" ниже или позже. Для\n"
+"последующего сохранения сеанса работы нужно выбрать \"Сохранить\n"
+"текущий сеанс\" в разделе \"Настройки\" главного меню или включить\n"
+"\"Сохранить текущее состояние\" при окончании работы.\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:551
+msgid "Save Session Later"
+msgstr "Сохранить сеанс позже"
+
+#: capplets/wm-properties/wm-properties-capplet.c:551
+msgid "Save Session Now"
+msgstr "Сохранить сеанс сейчас"
+
+#: capplets/wm-properties/wm-properties-capplet.c:554
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. This can be done by either selecting \"Save Current Session\"\n"
+"under \"Settings\" in the main menu, or by turning on\n"
+"\"Save Current Setup\" when you log out.\n"
+msgstr ""
+"Произошла замена диспетчера окон. Чтобы сохранить это изменение\n"
+"необходимо сохранить текущий сеанс работы. Для этого нужно выбрать\n"
+"\"Сохранить текущий сеанс\" в разделе \"Настройки\" главного меню\n"
+"или включить \"Сохранить текущее состояние\" при окончании работы.\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:780
+msgid "Add New Window Manager"
+msgstr "Добавить новый диспетчер окон"
+
+#: capplets/wm-properties/wm-properties-capplet.c:781
+msgid "Cancel"
+msgstr "Отменить"
+
+#: capplets/wm-properties/wm-properties-capplet.c:819
+msgid "Configuration Command:"
+msgstr "Команда настройки:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:838
+msgid "Window manager is session managed"
+msgstr "Диспетчер окон также и диспетчер сеансов"
+
+#: capplets/wm-properties/wm-properties-capplet.c:888
+msgid "Name cannot be empty"
+msgstr "Имя не может быть пустым"
+
+#: capplets/wm-properties/wm-properties-capplet.c:895
+msgid "Command cannot be empty"
+msgstr "Команда не может быть пустой"
+
+#: capplets/wm-properties/wm-properties-capplet.c:944
+#: capplets/wm-properties/wm-properties-capplet.c:986
+msgid "Edit Window Manager"
+msgstr "Изменение диспетчера окон"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1042
+msgid "You cannot delete the current Window Manager"
+msgstr "Используемый диспетчер окон удалить нельзя"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1089
+msgid "Window Manager Selector"
+msgstr "Выбор диспетчера окон"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1191
+msgid ""
+"an initialization error occurred while starting 'wm-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"ошибка инициализации при запуске 'wm-properties-capplet'.\n"
+"исполнение прервано ...\n"
+
+#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:2
+msgid "Configure window appearance"
+msgstr "Настройка внешнего вида окна"
+
+#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:1
+msgid "Configure key shortcuts"
+msgstr "Настройка комбинаций клавиш"
+
+#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:2
+msgid "Shortcuts"
+msgstr "Комбинации клавиш"
+
+#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:1
+msgid "Configure window focusing"
+msgstr "Настройка фокусировки окна"
+
+#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:2
+msgid "Focus behavior"
+msgstr "Поведение фокуса"
+
+#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
+msgid "Configure window properties"
+msgstr "Настройка свойств окна"
+
+#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:2
+msgid "Matched Windows"
+msgstr "Совпадающие окна"
+
+#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:1
+msgid "Configure window minimization and maximization"
+msgstr "Настройка минимизации и максимизации окна"
+
+#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:2
+msgid "Minimizing and Maximizing"
+msgstr "Минимизация и максимизация"
+
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
+msgid "Configure window manager configuration properties"
+msgstr "Настройка свойств настройки диспетчера окон"
+
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:2
+msgid "Meta"
+msgstr "Мета"
+
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
+msgid "Configure miscellaneous window features"
+msgstr "Настройка разных свойств окна"
+
+#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:1
+msgid "Configure window move/resize"
+msgstr "Настройка перемещения/изменения размера окна"
+
+#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:2
+msgid "Moving and Resizing"
+msgstr "Перемещение и изменение размера"
+
+#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:1
+msgid "Configure window placement"
+msgstr "Настройка размещения окна"
+
+#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:2
+msgid "Placement"
+msgstr "Размещение"
+
+#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
+msgid "Enable window manager sound events"
+msgstr "Включить звуковые эффекты диспетчера окон"
+
+#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:1
+msgid "Configure workspaces"
+msgstr "Настройка рабочих столов"
+
+#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:2
+msgid "Workspaces"
+msgstr "Рабочие столы"

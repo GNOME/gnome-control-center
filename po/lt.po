@@ -33,11 +33,14 @@ msgid "Wallpaper Selection"
 msgstr "Apmuðalø pasirinkimas"
 
 #: capplets/background/prefs-widget.c:622
+#: capplets/file-types/file-types-icon-entry.c:258
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Negaliu rasti hbox, naudojam paprastà bylø pasirinkimà"
 
 #: capplets/background/prefs-widget.c:628
+#: capplets/file-types/file-types-icon-entry.c:264
 #: capplets/screensaver/screensaver-properties.glade.h:31
+#: capplets/theme-switcher/gui.c:230 capplets/theme-switcher/gui.c:302
 msgid "Preview"
 msgstr "Perþiûra"
 
@@ -309,6 +312,7 @@ msgid "Screensaver"
 msgstr "Uþsklanda"
 
 #: capplets/screensaver/screensaver-prefs-dialog.c:185
+#: capplets/wm-properties/wm-properties-capplet.c:793
 msgid "Name:"
 msgstr "Pavadinimas:"
 
@@ -316,6 +320,7 @@ msgstr "Pavadinimas:"
 msgid "Settings"
 msgstr "Nuostatos"
 
+#: capplets/file-types/file-types-capplet.c:1882
 #: capplets/screensaver/screensaver-prefs-dialog.c:204
 msgid "Description"
 msgstr ""
@@ -452,6 +457,7 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/ant.xml.h:21
 #: capplets/screensaver/screensavers/flag.xml.h:18
+#: capplets/theme-switcher/demo.c:54
 msgid "Two"
 msgstr "Antras"
 
@@ -1436,6 +1442,8 @@ msgstr ""
 "Pagalba yra nepasiekiama/neádiegta. Praðau, patikrink,\n"
 "ar GNOME User's Guide yra ádiegtas á tavo sistemà."
 
+#: capplets/theme-switcher/gui.c:368
+#: capplets/wm-properties/wm-properties-capplet.c:671
 #: control-center/capplet-dir-view.c:522
 msgid "Close"
 msgstr "Uþdaryti"
@@ -1474,6 +1482,7 @@ msgstr "Pagalbos narðyklë (naujame lange)"
 msgid "Browse with multiple windows"
 msgstr ""
 
+#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
 #: control-center/gnomecc.glade.h:14
 msgid "Appearance"
 msgstr ""
@@ -1844,11 +1853,10 @@ msgid ""
 "Draws quasiperiodic tilings; think of the implications on modern formica "
 "technology. Written by Time Korlove. In April 1997, Sir Roger Penrose, a "
 "British math professor who has worked with Stephen Hawking on such topics as "
-"relatvity, black holes, and whether time has a beginning, files a "
-"copyright-infringement lawsuit against Kimberly-Clark Corporation, wchih "
-"Penrose said copied a pattern he created ( apattern demonstrating that \"a "
-"nonrepeating pattern could exist in nature\") for its Kleenex quilted toilet "
-"paper. "
+"relatvity, black holes, and whether time has a beginning, files a copyright-"
+"infringement lawsuit against Kimberly-Clark Corporation, wchih Penrose said "
+"copied a pattern he created ( apattern demonstrating that \"a nonrepeating "
+"pattern could exist in nature\") for its Kleenex quilted toilet paper. "
 msgstr ""
 
 #: capplets/screensaver/screensaver-properties.glade.h:9
@@ -1986,1083 +1994,14 @@ msgstr ""
 msgid "Could not duplicate file descriptor"
 msgstr ""
 
-#~ msgid ""
-#~ "No help is available/installed for these settings. Please make sure you\n"
-#~ "have the GNOME User's Guide installed on your system."
-#~ msgstr ""
-#~ "Pagalba ðioms nuostatoms yra nepasiekiama/neádiegta. Praðau, patikrink,\n"
-#~ "ar GNOME User's Guide yra ádiegtas á tavo sistemà."
-
-#~ msgid "Gnome editor"
-#~ msgstr "Gnome editorius"
-
-#~ msgid "Run In Terminal"
-#~ msgstr "Paleisti terminale"
-
-#~ msgid "Select an icon..."
-#~ msgstr "Pasirink ikonà..."
-
-#~ msgid "Mime Type: "
-#~ msgstr "Mime tipas: "
-
-#~ msgid "First Regular Expression: "
-#~ msgstr "Pirma Regular Expression: "
-
-#~ msgid "Second Regular Expression: "
-#~ msgstr "Antra Regular Expression: "
-
-#~ msgid "Mime Type Actions"
-#~ msgstr "Mime tipo veiksmai"
-
-#~ msgid "Example: emacs %f"
-#~ msgstr "Pavyzdys: emacs %f"
-
-#~ msgid "Open"
-#~ msgstr "Atidaryti"
-
-#~ msgid "Select a file..."
-#~ msgstr "Pasirink bylà..."
-
-#~ msgid "View"
-#~ msgstr "Þiûrëti"
-
-#~ msgid "Edit"
-#~ msgstr "Keisti"
-
-#~ msgid "Set actions for %s"
-#~ msgstr "Veiksmø su %s nustatymas"
-
-#~ msgid "Mime Type"
-#~ msgstr "Mime tipas"
-
-#~ msgid "Extension"
-#~ msgstr "Priesaga"
-
-#~ msgid "You must enter a mime-type"
-#~ msgstr "Tu privalai ávesti mime tipà"
-
-#~ msgid ""
-#~ "You must add either a regular-expression or\n"
-#~ "a file-name extension"
-#~ msgstr ""
-#~ "Tu turi arba ávesti regular-expression, arba\n"
-#~ "bylos vardo priesagà"
-
-#~ msgid ""
-#~ "Please put your mime-type in the format:\n"
-#~ "CATEGORY/TYPE\n"
-#~ "\n"
-#~ "For Example:\n"
-#~ "image/png"
-#~ msgstr ""
-#~ "Praðau pateikti mime tipà pavidalu:\n"
-#~ "KATEGORIJA/TIPAS\n"
-#~ "\n"
-#~ "Pavyzdþiui:\n"
-#~ "image/png"
-
-#~ msgid "This mime-type already exists"
-#~ msgstr "Ðis mime tipas jau apibrëþtas"
-
-#~ msgid ""
-#~ "We are unable to create the directory\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "Negaliu sukurti katalogo\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "Negalësime iðsaugoti bûsenos."
-
-#~ msgid ""
-#~ "We are unable to access the directory\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "Negaliu prieiti prie katalogo\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "Negalësime iðsaugoti bûsenos."
-
-#~ msgid ""
-#~ "Cannot create the file\n"
-#~ "~/.gnome/mime-info/user.mime\n"
-#~ "\n"
-#~ "We will not be able to save the state"
-#~ msgstr ""
-#~ "Negaliu sukurti bylos\n"
-#~ "~/.gnome/mime-info/user.mime\n"
-#~ "\n"
-#~ "Negalësime iðsaugoti bûsenos."
-
-#, fuzzy
-#~ msgid ""
-#~ "We are unable to create the directory\n"
-#~ "~/.gnome/mime-info.\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "Negaliu sukurti katalogo\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "Negalësime iðsaugoti bûsenos."
-
-#, fuzzy
-#~ msgid ""
-#~ "We are unable to access the directory\n"
-#~ "~/.gnome/mime-info.\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "Negaliu prieiti prie katalogo\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "Negalësime iðsaugoti bûsenos."
-
-#, fuzzy
-#~ msgid ""
-#~ "Cannot create the file\n"
-#~ "~/.gnome/mime-info/user.keys.\n"
-#~ "\n"
-#~ "We will not be able to save the state"
-#~ msgstr ""
-#~ "Negaliu sukurti bylos\n"
-#~ "~/.gnome/mime-info/user.keys\n"
-#~ "\n"
-#~ "Negalësime iðsaugoti bûsenos."
-
-#~ msgid "Delete"
-#~ msgstr "Paðalinti"
-
-#~ msgid "Add..."
-#~ msgstr "Pridëti..."
-
-#~ msgid "Edit..."
-#~ msgstr "Keisti..."
-
-#~ msgid "Add Mime Type"
-#~ msgstr "Pridëti mime tipà"
-
-#~ msgid ""
-#~ "Add a new Mime Type\n"
-#~ "For example:  image/tiff; text/x-scheme"
-#~ msgstr ""
-#~ "Pridëk naujà mime tipà\n"
-#~ "Pavyzdþiui:  image/tiff; text/x-scheme"
-
-#~ msgid "Mime Type:"
-#~ msgstr "Mime tipas:"
-
-#~ msgid "Extensions"
-#~ msgstr "Priesagos"
-
-#~ msgid ""
-#~ "Type in the extensions for this mime-type.\n"
-#~ "For example:  .html, .htm"
-#~ msgstr ""
-#~ "Áraðyk priesagas ðiam mime tipui.\n"
-#~ "Pavyzdþiui:  .html, .htm"
-
-#~ msgid "Extension:"
-#~ msgstr "Priesaga:"
-
-#~ msgid "Regular Expressions"
-#~ msgstr "Regular Expressions"
-
-#~ msgid ""
-#~ "You can set up two regular expressions here to identify the Mime Type\n"
-#~ "by.  These fields are optional."
-#~ msgstr ""
-#~ "Tu gali nurodyti dvi regular expressions èia, pagal kurias atpaþástamas\n"
-#~ "Mime tipas.  Ðie laukai yra nebûtini."
-
-#~ msgid "Keyboard Bell"
-#~ msgstr "Klaviatûros skambutis"
-
-#~ msgid "Volume"
-#~ msgstr "Garsumas"
-
-#~ msgid "Pitch (Hz)"
-#~ msgstr "Daþnis (Hz)"
-
-#~ msgid "Duration (ms)"
-#~ msgstr "Trukmë (ms)"
-
-#~ msgid "Test"
-#~ msgstr "Iðbandyti"
-
-#~ msgid "Mouse buttons"
-#~ msgstr "Pelës mygtukai"
-
-#~ msgid "Acceleration"
-#~ msgstr "Sparta"
-
-#~ msgid "Threshold"
-#~ msgstr "Slenkstis"
-
-#, fuzzy
-#~ msgid "Selection"
-#~ msgstr "Pasirink ikonà..."
-
-#~ msgid "Settings..."
-#~ msgstr "Nuostatos..."
-
-#, fuzzy
-#~ msgid "Screensaver Selection"
-#~ msgstr "Uþsklandos nuostatos"
-
-#, fuzzy
-#~ msgid "Only after the screensaver has run for"
-#~ msgstr " min. nuo uþsklandos paleidimo."
-
-#~ msgid "Priority"
-#~ msgstr "Prioritetas"
-
-#, fuzzy
-#~ msgid "Fade Duration"
-#~ msgstr "Trukmë (ms)"
-
-#, fuzzy
-#~ msgid "Menu bars have a border"
-#~ msgstr "Meniu turi rëmelius"
-
-#, fuzzy
-#~ msgid "Menus can be torn off"
-#~ msgstr "Meniu skiltys gali bûti atplëðtos"
-
-#~ msgid "Menu items have icons"
-#~ msgstr "Meniu punktai turi ikonas"
-
-#, fuzzy
-#~ msgid "Use status bar instead of dialog when possible"
-#~ msgstr "Naudoti bûsenos juostà vietoj dialogo, jei ámanoma"
-
-#, fuzzy
-#~ msgid "Status bar is interactive when possible"
-#~ msgstr "Bûsenos juosta yra interaktyvi kai ámanoma"
-
-#, fuzzy
-#~ msgid "Progress bar is on the left"
-#~ msgstr "Paþangos rodiklis bûsenos juostos deðinëje"
-
-#, fuzzy
-#~ msgid "Progress bar is on the right"
-#~ msgstr "Paþangos rodiklis bûsenos juostos deðinëje"
-
-#, fuzzy
-#~ msgid "Tool bars have a border"
-#~ msgstr "Árankiø juostos turi rëmelá"
-
-#, fuzzy
-#~ msgid "Tool bar buttons pop up on mouse over"
-#~ msgstr "Árankiø mygtukai turi rëmelá"
-
-#, fuzzy
-#~ msgid "Tool bars have line separators"
-#~ msgstr "Árankiø juostos turi skyrikliø linijas"
-
-#, fuzzy
-#~ msgid "Tool bars are detachable"
-#~ msgstr "Árankiø juosta turi uþraðus"
-
-#, fuzzy
-#~ msgid "Tool bar buttons are icons only"
-#~ msgstr "Árankiø mygtukai turi rëmelá"
-
-#, fuzzy
-#~ msgid "Tool bar buttons are text below icons"
-#~ msgstr "Árankiø juosta turi uþraðus"
-
-#, fuzzy
-#~ msgid "Dialogs"
-#~ msgstr "Dialogø patarimai"
-
-#~ msgid "Dialog buttons have icons"
-#~ msgstr "Dialogø mygtukai turi ikonas"
-
-#~ msgid "Place dialogs over application window when possible"
-#~ msgstr "Rodyti dialogus virð programos lango, jei ámanoma"
-
-#, fuzzy
-#~ msgid "Dialogs open"
-#~ msgstr "Dialogø mygtukai"
-
-#, fuzzy
-#~ msgid "At the center of the screen"
-#~ msgstr "Ekrano viduryje"
-
-#~ msgid "At the mouse pointer"
-#~ msgstr "Po pelës þymekliu"
-
-#, fuzzy
-#~ msgid "Dialogs are treated"
-#~ msgstr "Dialogai tokie pat kaip kiti langai"
-
-#, fuzzy
-#~ msgid "Like any other window"
-#~ msgstr "Dialogai tokie pat kaip kiti langai"
-
-#, fuzzy
-#~ msgid "Specially by the window manager"
-#~ msgstr "Leisti nuspræsti langø tvarkyklei"
-
-#, fuzzy
-#~ msgid "Dialog Buttons"
-#~ msgstr "Dialogø mygtukai"
-
-#, fuzzy
-#~ msgid "Spread out"
-#~ msgstr "Iðklaidyti mygtukus"
-
-#, fuzzy
-#~ msgid "Left aligned"
-#~ msgstr "Kairei rankai"
-
-#, fuzzy
-#~ msgid "Right aligned"
-#~ msgstr "Deðinei rankai"
-
-#, fuzzy
-#~ msgid "Notebook tabs"
-#~ msgstr "Uþraðø knygelë"
-
-#, fuzzy
-#~ msgid "The same window"
-#~ msgstr "Netscape (naujame lange)"
-
-#~ msgid "Left"
-#~ msgstr "Kairëje"
-
-#~ msgid "Right"
-#~ msgstr "Deðinëje"
-
-#~ msgid "Top"
-#~ msgstr "Virðuje"
-
-#~ msgid "Bottom"
-#~ msgstr "Apaèioje"
-
-#~ msgid "Session"
-#~ msgstr "Sesija"
-
-#~ msgid "Session Chooser"
-#~ msgstr "Sesijos parinkiklis"
-
-#~ msgid "Start Session"
-#~ msgstr "Paleisti sesijà"
-
-#~ msgid "Cancel Login"
-#~ msgstr "Nutraukti prisijungimà"
-
-#~ msgid "Order: "
-#~ msgstr "Tvarka: "
-
-#~ msgid "Style: "
-#~ msgstr "Stilius: "
-
-#~ msgid "This button sets the start order of the selected programs.\n"
-#~ msgstr "Ðis mygtukas nustato parinktø programø paleidimo tvarkà.\n"
-
-#~ msgid ""
-#~ "This button sets the restart style of the selected programs:\n"
-#~ "Normal programs are unaffected by logouts but can die;\n"
-#~ "Respawn programs are never allowed to die;\n"
-#~ "Trash programs are discarded on logout and can die;\n"
-#~ "Settings programs are always started on every login."
-#~ msgstr ""
-#~ "Ðis mygtukas nustato parinktø programø paleidimo ið naujo stiliø:\n"
-#~ "Normalios programos nepaveikiamos atsijungimø, bet gali mirti;\n"
-#~ "Prisikelianèioms programoms niekada neleidþiama mirti;\n"
-#~ "Ðiukðlës atmetamos atsijungus ir gali mirti;\n"
-#~ "Nuostatø programos paleidþiamos kaskart prisijungus."
-
-#~ msgid ""
-#~ "This button produces a key to the program states below:\n"
-#~ "Inactive programs are waiting to start or have finished;\n"
-#~ "Starting programs are being given time to get running;\n"
-#~ "Running programs are normal members of the session;\n"
-#~ "Saving programs are saving their session details;\n"
-#~ "Programs which make no contact have Unknown states.\n"
-#~ msgstr ""
-#~ "Ðis mygtukas pateikia raktà á programø bûsenas apaèioje:\n"
-#~ "Neveiklios laukia paleidimo arba jau baigësi;\n"
-#~ "Besileidþianèioms yra duota laiko pasileisti;\n"
-#~ "Bëganèios programos yra normalios sesijos narës;\n"
-#~ "Besisaugojanèios - saugo savo sesijos detales;\n"
-#~ "Programos, kurios nebendrauja, yra Neþinomoje bûsenoje;\n"
-
-#~ msgid "This column gives the command used to start a program."
-#~ msgstr "Ðis stulpelis rodo komandà, naudojamà programai paleisti."
-
-#~ msgid "Order"
-#~ msgstr "Tvarka"
-
-#~ msgid "Style"
-#~ msgstr "Stilius"
-
-#~ msgid "State"
-#~ msgstr "Bûsena"
-
-#~ msgid "Program"
-#~ msgstr "Programa"
-
-#~ msgid "Inactive"
-#~ msgstr "Neveikli"
-
-#~ msgid "Waiting to start or already finished."
-#~ msgstr "Laukianti paleidimo arba jau baigësi."
-
-#~ msgid "Starting"
-#~ msgstr "Besileidþianti"
-
-#~ msgid "Started but has not yet reported state."
-#~ msgstr "Paleista bet dar nepraneðë bûsenos."
-
-#~ msgid "Running"
-#~ msgstr "Bëganti"
-
-#~ msgid "A normal member of the session."
-#~ msgstr "Normali sesijos narë"
-
-#~ msgid "Saving"
-#~ msgstr "Besisaugojanti"
-
-#~ msgid "Saving session details."
-#~ msgstr "Saugo sesijos detales."
-
-#~ msgid "Unknown"
-#~ msgstr "Neþinoma"
-
-#~ msgid "State not reported within timeout."
-#~ msgstr "Bûsena nepraneðta laiko ribose."
-
-#~ msgid "Normal"
-#~ msgstr "Normali"
-
-#~ msgid "Unaffected by logouts but can die."
-#~ msgstr "Nepaveikiama atsijungimo, bet gali mirti."
-
-#~ msgid "Respawn"
-#~ msgstr "Prisikelianti"
-
-#~ msgid "Never allowed to die."
-#~ msgstr "Niekada neleidþiama mirti."
-
-#~ msgid "Trash"
-#~ msgstr "Ðiukðlë"
-
-#~ msgid "Discarded on logout and can die."
-#~ msgstr "Atmetama atsijungus ir gali mirti."
-
-#~ msgid "Always started on every login."
-#~ msgstr "Paleidþiama kaskart prisijungus."
-
-#~ msgid "Remove Program"
-#~ msgstr "Paðalinti programà"
-
-#~ msgid "Options"
-#~ msgstr "Pasirinktys"
-
-#~ msgid "Prompt on logout"
-#~ msgstr "Paklausti atsijungiant"
-
-#~ msgid "Automatically save changes to session"
-#~ msgstr "Automatiðkai iðsaugoti sesijos pakeitimus"
-
-#~ msgid "Non-session-managed Startup Programs"
-#~ msgstr "Sesijos nevaldomos, pradþioje paleidþiamos programos"
-
-#~ msgid "Command"
-#~ msgstr "Komanda"
-
-#~ msgid "Browse Currently Running Programs..."
-#~ msgstr "Narðyti dabar bëganèias programas..."
-
-#~ msgid "Only display warnings."
-#~ msgstr "Tik rodyti áspëjimus."
-
-#~ msgid "Startup Command"
-#~ msgstr "Paleidimo komanda"
-
-#~ msgid ""
-#~ "Programs with smaller values are started before programs with higher values. "
-#~ "The default value should be OK"
-#~ msgstr ""
-#~ "Programos su maþesnëmis reikðmëmis paleidþiamos prieð programas su "
-#~ "didesnëmis reikðmëmis. Áprasta reikðmë turëtø bûti gera."
-
-#~ msgid "The startup command cannot be empty"
-#~ msgstr "Paleidimo komanda negali bûti tuðèia"
-
-#~ msgid "Add Startup Program"
-#~ msgstr "Pridëti paleidþiamà programà"
-
-#~ msgid "Edit Startup Program"
-#~ msgstr "Keisti paleidþiamà programà"
-
-#~ msgid "One"
-#~ msgstr "Pirmas"
-
-#~ msgid "Eenie"
-#~ msgstr "Mano"
-
-#~ msgid "Meenie"
-#~ msgstr "Batai"
-
-#~ msgid "Mynie"
-#~ msgstr "Buvo"
-
-#~ msgid "Catcha"
-#~ msgstr "Vienas"
-
-#~ msgid "Tiger"
-#~ msgstr "Dingo"
-
-#~ msgid "By Its"
-#~ msgstr "Nerandu"
-
-#~ msgid "Toe"
-#~ msgstr ":((((("
-
-#~ msgid "Selected themes from above will be tested by previewing here."
-#~ msgstr "Virðuje pasirinktas temas galësi iðbandyti perþiûrëdamas èia."
-
-#~ msgid "Sample Button"
-#~ msgstr "Èia mygtukas"
-
-#~ msgid "Sample Check Button"
-#~ msgstr "Pavyzdinë varnelë"
-
-#~ msgid "Sample Text Entry Field"
-#~ msgstr "Teksto ávesties laukas"
-
-#~ msgid "Submenu"
-#~ msgstr "Meniu skiltis"
-
-#~ msgid "Item 1"
-#~ msgstr "Pirmas punktas"
-
-#~ msgid "Another item"
-#~ msgstr "Kitas punktas"
-
-#~ msgid "Radio Button 1"
-#~ msgstr "Perjungiklis 1"
-
-#~ msgid "Radio Button 2"
-#~ msgstr "Perjungiklis 2"
-
-#~ msgid ""
-#~ "Error installing theme:\n"
-#~ "'%s'\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Klaida ádiegiant temà:\n"
-#~ "'%s'\n"
-#~ "%s"
-
-#~ msgid "Select a theme to install"
-#~ msgstr "Pasirink, kurià temà ádiegti"
-
-#~ msgid "Available Themes"
-#~ msgstr "Turimos temos"
-
-#~ msgid ""
-#~ "Auto\n"
-#~ "Preview"
-#~ msgstr ""
-#~ "Greita\n"
-#~ "Perþiûra"
-
-#~ msgid ""
-#~ "Install new\n"
-#~ "theme..."
-#~ msgstr ""
-#~ "Ádiek naujà\n"
-#~ "temà..."
-
-#~ msgid "User Font"
-#~ msgstr "Vartotojo ðriftas"
-
-#~ msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
-#~ msgstr "-adobe-helvetica-medium-r-normal-*-*-120-*-*-*-*-iso8859-13"
-
-#~ msgid "Use custom font."
-#~ msgstr "Naudoti pasirinktà ðriftà."
-
-#~ msgid "Home directory doesn't exist!\n"
-#~ msgstr "Nëra namø katalogo!\n"
-
-#~ msgid "Theme does not exist"
-#~ msgstr "Nëra tokios temos"
-
-#~ msgid "Command '%s' failed"
-#~ msgstr "Komanda ¥%s´ suþlugo"
-
-#~ msgid "Unknown file format"
-#~ msgstr "Neþinomas bylos formatas"
-
-#~ msgid "Error initializing the `url-properties' capplet."
-#~ msgstr "Ávyko inicializacijos klaida, paleidþiant ¥url-properties-capplet´."
-
-#~ msgid "Protocol"
-#~ msgstr "Protokolas"
-
-#~ msgid "handler:"
-#~ msgstr "rodiklis:"
-
-#~ msgid "Netscape"
-#~ msgstr "Netscape"
-
-#~ msgid "Netscape (new window)"
-#~ msgstr "Netscape (naujame lange)"
-
-#~ msgid "Help browser"
-#~ msgstr "Pagalbos narðyklë"
-
-#~ msgid "Help browser (new window)"
-#~ msgstr "Pagalbos narðyklë (naujame lange)"
-
-#~ msgid "Set"
-#~ msgstr "Nustatyti"
-
-#~ msgid ""
-#~ "Starting %s\n"
-#~ "(%d seconds left before operation times out)"
-#~ msgstr ""
-#~ "Paleidþiu %s\n"
-#~ "(Liko %d sekundës, kol pasibaigs laiko riba)"
-
-#~ msgid "%s (Current)"
-#~ msgstr "%s (Esamas)"
-
-#~ msgid "Run Configuration Tool for %s"
-#~ msgstr "Paleisti %s nustatymo áranká"
-
-#~ msgid " (Not found)"
-#~ msgstr " (Nerasta)"
-
-#~ msgid ""
-#~ "wm-properties-capplet: Unable to initialize window manager.\n"
-#~ "\tAnother window manager is already running and could not be killed\n"
-#~ msgstr ""
-#~ "wm-properties-capplet: Negaliu inicializuoti langø tvarkyklës.\n"
-#~ "\tKita langø tvarkyklë jau paleista arba negali bûti nuþudyta\n"
-
-#~ msgid ""
-#~ "wm-properties-capplet: Unable to initialize window manager.\n"
-#~ "\t'%s' didn't start\n"
-#~ msgstr ""
-#~ "wm-properties-capplet: Negaliu inicializuoti langø tvarkyklës.\n"
-#~ "\t¥%s´ nepasileido\n"
-
-#~ msgid "Previous window manager did not die\n"
-#~ msgstr "Ankstesnë langø tvarkyklë negali numirti\n"
-
-#~ msgid ""
-#~ "Could not start '%s'.\n"
-#~ "Falling back to previous window manager '%s'\n"
-#~ msgstr ""
-#~ "Nepavyko paleisti ¥%s´\n"
-#~ "Gráþtu prie ankstesnës langø tvarkyklës ¥%s´\n"
-
-#~ msgid ""
-#~ "Could not start fallback window manager.\n"
-#~ "Please run a window manager manually. You can\n"
-#~ "do this by selecting \"Run Program\" in the\n"
-#~ "foot menu\n"
-#~ msgstr ""
-#~ "Negaliu paleisti ankstesnës langø tvarkyklës.\n"
-#~ "Praðau, paleisk langø tvarkyklæ rankomis. Tai\n"
-#~ "gali padaryti pasirinkæs ¥Paleisti programà´\n"
-#~ "pagrindiniame meniu\n"
-
-#~ msgid "OK"
-#~ msgstr "Gerai"
-
-#~ msgid ""
-#~ "Your current window manager has been changed. In order for\n"
-#~ "this change to be saved, you will need to save your current\n"
-#~ "session. You can do so immediately by selecting the \"Save session\n"
-#~ "now\" below, or you can save your session later.  This can be\n"
-#~ "done either selecting \"Save Current Session\" under \"Settings\"\n"
-#~ "in the main menu, or by turning on \"Save Current Setup\" when\n"
-#~ "you log out.\n"
-#~ msgstr ""
-#~ "Tavo esama langø tvarkyklë buvo pakeista. Kad ðis pakeitimas bûtø\n"
-#~ "iðsaugotas, tu turi iðsaugoti esamà sesijà. tai gali padaryti iðkart,\n"
-#~ "nuspaudæs ¥Iðsaugoti dabar´ mygtukà apaèioje; arba vëliau, pasirinkæs\n"
-#~ "¥Iðsaugoti esamà sesijà´ pagrindinio meniu skiltyje ¥Nuostatos´,\n"
-#~ "arba paþymëjæs varnele ¥Iðsaugoti esamà sesijà´ atsijungimo metu.\n"
-
-#~ msgid "Save Session Later"
-#~ msgstr "Iðsaugoti vëliau"
-
-#~ msgid "Save Session Now"
-#~ msgstr "Iðsaugoti dabar"
-
-#~ msgid ""
-#~ "Your current window manager has been changed. In order for\n"
-#~ "this change to be saved, you will need to save your current\n"
-#~ "session. This can be done by either selecting \"Save Current Session\"\n"
-#~ "under \"Settings\" in the main menu, or by turning on\n"
-#~ "\"Save Current Setup\" when you log out.\n"
-#~ msgstr ""
-#~ "Tavo esama langø tvarkyklë buvo pakeista. Kad ðis pakeitimas bûtø\n"
-#~ "iðsaugotas, tu turi iðsaugoti esamà sesijà. Tai gali padaryti,\n"
-#~ "pasirinkæs ¥Iðsaugoti esamà sesijà´ pagrindinio meniu skiltyje\n"
-#~ "¥nuostatos´, arba paþymëjæs varnele ¥Iðsaugoti esamà sesijà´\n"
-#~ "atsijungimo metu.\n"
-
-#~ msgid "Add New Window Manager"
-#~ msgstr "Pridëti naujà langø tvarkyklæ"
-
-#~ msgid "Cancel"
-#~ msgstr "Atðaukti"
-
-#~ msgid "Command:"
-#~ msgstr "Komanda:"
-
-#~ msgid "Configuration Command:"
-#~ msgstr "Nustatinëjimo komanda:"
-
-#~ msgid "Window manager is session managed"
-#~ msgstr "Langø tvarkyklë yra sesijos valdoma"
-
-#~ msgid "Name cannot be empty"
-#~ msgstr "Pavadinimas negali bûti tuðèias"
-
-#~ msgid "Command cannot be empty"
-#~ msgstr "Komanda negali bûti tuðèia"
-
-#~ msgid "Edit Window Manager"
-#~ msgstr "Keisti langø tvarkyklæ"
-
-#~ msgid "You cannot delete the current Window Manager"
-#~ msgstr "Tu negali paðalinti esamos langø tvarkyklës"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'wm-properties-capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "ávyko inicializacijos klaida, paleidþiant ¥wm-properties-capplet´.\n"
-#~ "nutraukta...\n"
-
-#, fuzzy
-#~ msgid "Color 1"
-#~ msgstr "Spalva"
-
-#, fuzzy
-#~ msgid "Color 2"
-#~ msgstr "Spalva"
-
-#, fuzzy
-#~ msgid "Vertical"
-#~ msgstr "Staèias perëjimas"
-
-#~ msgid "Scaled"
-#~ msgstr "Iðtempti"
-
-#, fuzzy
-#~ msgid "Auto-repeat"
-#~ msgstr "Leisti savaiminá kartojimà"
-
-#, fuzzy
-#~ msgid "Repeat delay"
-#~ msgstr "Kartojimo delsa"
-
-#~ msgid "Click on keypress"
-#~ msgstr "Pyptelti nuspaudus"
-
-#~ msgid "Menu Options"
-#~ msgstr "Meniu juostos pasirinktys"
-
-#~ msgid "Can detach and move menus"
-#~ msgstr "Galima atskirti ir perkelti meniu juostas"
-
-#~ msgid "Statusbar Options"
-#~ msgstr "Bûsenos juostos pasirinktys"
-
-#~ msgid "Toolbar Options"
-#~ msgstr "Árankiø juostos pasirinktys"
-
-#~ msgid "Can detach and move toolbars"
-#~ msgstr "Galima atskirti ir perkelti árankiø juostas"
-
-#~ msgid "Dialog Layout"
-#~ msgstr "Dialogø iðvaizda"
-
-#~ msgid "Dialog Behavior"
-#~ msgstr "Dialogø elgsena"
-
-#, fuzzy
-#~ msgid "Dialog position:"
-#~ msgstr "Dialogø vieta"
-
-#, fuzzy
-#~ msgid ""
-#~ "Dialogs are like other windows\n"
-#~ "Dialogs are treated specially by the window manager\n"
-#~ msgstr "Dialogai elgiasi priklausomai nuo langø tvarkyklës"
-
-#~ msgid "GNOME MDI Options"
-#~ msgstr "GNOME MDI (keliø dokumentø sàsajos) pasirinktys"
-
-#, fuzzy
-#~ msgid "Default MDI Mode:"
-#~ msgstr "Áprastinis MDI  bûdas"
-
-#, fuzzy
-#~ msgid "MDI notebook tab position:"
-#~ msgstr "MDI uþraðø knygutës skleistës"
-
-#~ msgid "id of the capplet -- assigned by the control-center"
-#~ msgstr "capplet'o ID -- paskiriamas valdymo centro"
-
-#~ msgid "ID"
-#~ msgstr "ID"
-
-#~ msgid "Multi-capplet id."
-#~ msgstr "Multi-capplet id."
-
-#~ msgid "CAPID"
-#~ msgstr "CAPID"
-
-#~ msgid "X ID of the socket it's plugged into"
-#~ msgstr "X ID lizdo, á kurá jis yra ájungtas"
-
-#~ msgid "XID"
-#~ msgstr "XID"
-
-#~ msgid "IOR of the control-center"
-#~ msgstr "valdymo centro IOR"
-
-#~ msgid "IOR"
-#~ msgstr "IOR"
-
-#~ msgid "Initialize session settings"
-#~ msgstr "Inicializuoti sesijos nuostatas"
-
-#~ msgid "Ignore default action.  Used for custom init-session cases"
-#~ msgstr ""
-#~ "Ignoruoti standartiná veiksmà. Naudojama savais init-session atvejais"
-
-#~ msgid "Help with the GNOME control-center."
-#~ msgstr "Pagalba apie GNOME Valdymo centrà."
-
-#~ msgid "About"
-#~ msgstr "Apie"
-
-#~ msgid "About the GNOME control-center."
-#~ msgstr "Apie GNOME Valdymo centrà."
-
-#, fuzzy
-#~ msgid "Control Center Preferences"
-#~ msgstr "Valdymo centras"
-
-#~ msgid "Control Center"
-#~ msgstr "Valdymo centras"
-
-#~ msgid "Set background image."
-#~ msgstr "Nustatyti fono paveikslëlá."
-
-#~ msgid "IMAGE-FILE"
-#~ msgstr "PAV_BYLA"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting "
-#~ "'background-properties-capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "ávyko inicializacijos klaida, paleidþiant ¥background-properties-capplet´.\n"
-#~ "nutraukta...\n"
-
-#~ msgid "Set parameters from saved state and exit"
-#~ msgstr "Atkurti nuostatas ið iðsaugotos bûsenos ir iðeiti"
-
-#~ msgid "IMAGE"
-#~ msgstr "PAVEIKSL"
-
-#~ msgid "Sets the wallpaper to the value specified"
-#~ msgstr "Pakeièia apmuðalà á nurodytà PAVEIKSL"
-
-#~ msgid "COLOR"
-#~ msgstr "SPALVA"
-
-#~ msgid "Specifies the background color"
-#~ msgstr "Nurodo fono spalvà"
-
-#~ msgid "Specifies end background color for gradient"
-#~ msgstr "Nurodo antrà fono spalvà perëjimui"
-
-#~ msgid "Gradient orientation: vertical or horizontal"
-#~ msgstr "Perëjimo kryptis: gulsèiai ar staèiai"
-
-#~ msgid "Use a solid fill for the background"
-#~ msgstr "Naudoti grynà fono uþpildymà"
-
-#~ msgid "MODE"
-#~ msgstr "BÛDAS"
-
-#~ msgid "Display wallpaper: tiled, centered, scaled or ratio"
-#~ msgstr "Apmuðalo rodymas: tiled, centered, scaled arba ratio"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'bell-properties-capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "ávyko inicializacijos klaida, paleidþiant ¥bell-properties-capplet´.\n"
-#~ "nutraukta...\n"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting "
-#~ "'keyboard-properties-capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "ávyko inicializacijos klaida, paleidþiant ¥keyboard-properties-capplet´.\n"
-#~ "nutraukta...\n"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'mouse-properties-capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "ávyko inicializacijos klaida, paleidþiant ¥mouse-properties-capplet´.\n"
-#~ "nutraukta...\n"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'sound-properties-capplet'."
-#~ msgstr ""
-#~ "ávyko inicializacijos klaida, paleidþiant ¥sound-properties-capplet´."
-
-#~ msgid "Select sound file"
-#~ msgstr "Pasirink garso bylà"
-
-#~ msgid ""
-#~ "This copy of the GNOME control center was not compiled with sound support"
-#~ msgstr "Ðis GNOME valdymo centras buvo sukompiliuotas be garso palaikymo"
-
-#~ msgid "The sound file for this event does not exist."
-#~ msgstr "Nëra garso bylos ðiam ávykiui."
-
-#~ msgid ""
-#~ "The sound file for this event does not exist.\n"
-#~ "You may want to install the gnome-audio package\n"
-#~ "for a set of default sounds."
-#~ msgstr ""
-#~ "Nëra garso bylos ðiam ávykiui.\n"
-#~ "Tu tikriausiai norëtum ádiegti gnome-audio paketà\n"
-#~ "su standartiniu garsø rinkiniu."
-
-#~ msgid "Put buttons on edges"
-#~ msgstr "Mygtukus dëti kraðtuose"
-
-#~ msgid "Left-justify buttons"
-#~ msgstr "Lygiuoti prie kairës"
-
-#~ msgid "Right-justify buttons"
-#~ msgstr "Lygiuoti prie deðinës"
-
-#~ msgid "Toplevel"
-#~ msgstr "Ant virðaus"
-
-#~ msgid "Modal"
-#~ msgstr "Modalinis"
-
-#~ msgid "Random Settings"
-#~ msgstr "Atsitiktinës nuostatos"
-
-#~ msgid "%s Settings..."
-#~ msgstr "%s nuostatos..."
-
-#~ msgid "Author:"
-#~ msgstr "Autorius:"
-
-#~ msgid "Author: UNKNOWN"
-#~ msgstr "Autorius: NEÞINOMAS"
-
-#~ msgid "RANDOM SCREENSAVER"
-#~ msgstr "ATSITIKTINË UÞSKLANDA"
-
-#~ msgid ""
-#~ "Pressing this button will popup a dialogbox that will help you setup the "
-#~ "current screensaver."
-#~ msgstr ""
-#~ "Paspaudus ðá mygtukà, atsiras dialogo langas, kuris tau padës sutvarkyti "
-#~ "esamà uþsklandà."
-
-#~ msgid "Start After "
-#~ msgstr "Paleisti po "
-
-#~ msgid " Normal"
-#~ msgstr " Normalus"
-
-#~ msgid "Screen Saver Demo"
-#~ msgstr "Uþsklandos perþiûra"
-
-#~ msgid "Try"
-#~ msgstr "Bandyti"
-
-#~ msgid "Revert"
-#~ msgstr "Sugráþti"
-
-#~ msgid "Sorry, no help is available for these settings."
-#~ msgstr "Gaila, bet nëra pagalbos ðiems nuostatoms."
-
-#~ msgid "capplet-command to be run."
-#~ msgstr "capplet-command, kurià paleisti."
-
-#~ msgid "CAPPLET"
-#~ msgstr "CAPPLET"
-
-#~ msgid "Warning:"
-#~ msgstr "Áspëjimas:"
-
-#~ msgid "Discard all changes"
-#~ msgstr "Atsisakyti visø pakeitimø"
-
-#~ msgid ""
-#~ "The following modules have had changes made, but not committed.  If you "
-#~ "would like to edit them, please double click on the appropriate entry."
-#~ msgstr ""
-#~ "Þemiau esanèiuose moduliuose buvo atlikti pakeitimai, bet nepatvirtinti. Jei "
-#~ "norëtum juos pakeisti, dukart spragtelk atitinkamà áraðà."
-
-#~ msgid "Keyboard bell"
-#~ msgstr "Klaviatûros skambutis"
-
-#~ msgid "Keyboard repeat rate"
-#~ msgstr "Klaviatûros kartojimo tempas"
-
-#~ msgid "Show splash screen on login"
-#~ msgstr "Rodyti pasveikinimà pradþioje"
-
-#~ msgid "Help with '%s' settings"
-#~ msgstr "Pagalba su ¥%s´ nuostatomis"
-
-#~ msgid "Help with the current configuration page."
-#~ msgstr "Pagalba apie esamà nuostatø lapà."
-
-#~ msgid "Operating System:"
-#~ msgstr "Operacinë sistema:"
-
-#~ msgid "Distribution Version:"
-#~ msgstr "Distribucijos versija:"
-
-#~ msgid "Processor Type:"
-#~ msgstr "Procesoriaus tipas:"
-
-#~ msgid "User Name:"
-#~ msgstr "Vartotojo vardas:"
-
-#~ msgid "Host Name:"
-#~ msgstr "Hosto vardas:"
-
 #: Gnome.directory.in:3
+#, fuzzy
 msgid "Control Center"
 msgstr "Valdymo centras"
 
 #: Gnome.directory.in:4
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:1
+#, fuzzy
 msgid "Control Center Menu"
 msgstr "Valdymo centro meniu"
 
@@ -3070,7 +2009,9 @@ msgstr "Valdymo centro meniu"
 msgid "The GNOME configuration tool"
 msgstr "GNOME aplinkos konfigûravimo árankis."
 
+#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
 #: capplets/sound/sound-properties.desktop.in:3
+#, fuzzy
 msgid "Sound"
 msgstr "Garsas"
 
@@ -3109,3 +2050,1181 @@ msgstr "Patarimø savybës"
 #: capplets/desktop-links/gnome-hint-properties.desktop.in:4
 msgid "Options for the startup hint dialog"
 msgstr "Pradþios patarimø pasirinktys"
+
+#: capplets/desktop-links/Advanced.directory.in.in.h:1
+msgid "Advanced"
+msgstr ""
+
+#: capplets/desktop-links/Advanced.directory.in.in.h:2
+#, fuzzy
+msgid "Advanced Settings"
+msgstr "Atsitiktinës nuostatos"
+
+#: capplets/desktop-links/panel.desktop.in.in.h:1
+msgid "Global panel properties"
+msgstr "Bendros skydeliø savybës"
+
+#: capplets/desktop-links/panel.desktop.in.in.h:2
+msgid "Panel"
+msgstr "Skydelis"
+
+#: capplets/desktop-links/session.desktop.in.in.h:1
+#, fuzzy
+msgid "Configure which non-session aware programs are started up"
+msgstr "Nustatyti, su kuo bylos susietos ir kaip paleidþiamos"
+
+#: capplets/desktop-links/session.desktop.in.in.h:2
+#, fuzzy
+msgid "Startup Programs"
+msgstr "Pridëti paleidþiamà programà"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:387
+msgid "Edit Applications List"
+msgstr ""
+
+#. Add label
+#: capplets/file-types/file-types-capplet-dialogs.c:409
+#, c-format
+msgid "Select applications to appear in menu for MIME type \"%s\""
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:433
+msgid "Add Application..."
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:440
+msgid "Edit Application..."
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:446
+msgid "Delete Application"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:480
+msgid "Edit Components List"
+msgstr ""
+
+#. Add label
+#: capplets/file-types/file-types-capplet-dialogs.c:500
+#, c-format
+msgid "Select views to appear in menu for MIME type \"%s\""
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:720
+msgid ""
+"The MIME type entered contained upper case characters. Upper case characters "
+"were changed to lower case for you."
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:723
+#, fuzzy
+msgid "Add New MIME Type"
+msgstr "Pridëti mime tipà"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:769
+#, fuzzy
+msgid "Add MIME Type"
+msgstr "Pridëti mime tipà"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:773
+msgid "New MIME type (e.g. image/x-thumper):"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:780
+msgid "Description (e.g. Thumper image):"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:947
+#, fuzzy
+msgid "File Extensions "
+msgstr "Priesagos"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:967
+#: capplets/mime-type/mime-type-capplet.c:93
+#: capplets/wm-properties/wm-properties-capplet.c:1117
+msgid "Add..."
+msgstr "Pridëti..."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:972
+#, fuzzy
+msgid "    Remove    "
+msgstr "Paðalinti"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1041
+#, fuzzy
+msgid "Add New Extension"
+msgstr "Priesaga"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1045
+#, fuzzy
+msgid ""
+"Type in the extensions for this mime-type (without dot).\n"
+"You can enter several extensions seperated by a space,\n"
+"for example: html htm"
+msgstr ""
+"Áraðyk priesagas ðiam mime tipui.\n"
+"Pavyzdþiui:  .html, .htm"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1052
+#: capplets/mime-type/new-mime-window.c:50
+msgid "Extension:"
+msgstr "Priesaga:"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1194
+#, fuzzy
+msgid "You must enter a name."
+msgstr "Tu privalai ávesti mime tipà"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1197
+#, fuzzy
+msgid "You must enter a command."
+msgstr "Tu privalai ávesti mime tipà"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1207
+#, c-format
+msgid ""
+"\"%s\" does not exist or is not executable.\n"
+"Check your spelling and make sure you have\n"
+"the right permissions to execute this file."
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1213
+#, c-format
+msgid ""
+"The command \"%s\" cannot be found.\n"
+"You must use a command that can work from any command line."
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1225
+msgid "Bad Application Name"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1226
+#, fuzzy
+msgid "Bad Application Command"
+msgstr "Nustatinëjimo komanda:"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1258
+msgid "Add Application"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1259
+msgid "Edit Application"
+msgstr ""
+
+#. Application Name label and entry
+#: capplets/file-types/file-types-capplet-dialogs.c:1271
+msgid "Application Name:"
+msgstr ""
+
+#. Application Command label and entry
+#: capplets/file-types/file-types-capplet-dialogs.c:1282
+#, fuzzy
+msgid "Application Command:"
+msgstr "Nustatinëjimo komanda:"
+
+#. Open Behavior frame
+#: capplets/file-types/file-types-capplet-dialogs.c:1293
+#, fuzzy
+msgid "Open Behavior"
+msgstr "Programos"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1299
+msgid "Can open multiple files"
+msgstr ""
+
+#. FIXME bugzilla.eazel.com 6066: This needs to be three options now: "yes", "no", and "use uris for non-file locations"
+#: capplets/file-types/file-types-capplet-dialogs.c:1307
+msgid "Can open from URI"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet.c:735
+#: capplets/file-types/file-types-capplet.c:1883
+#, fuzzy
+msgid "MIME Type"
+msgstr "Mime tipas"
+
+#: capplets/file-types/file-types-capplet.c:742
+#, fuzzy
+msgid "Change Icon"
+msgstr "Nutraukti prisijungimà"
+
+#: capplets/file-types/file-types-capplet.c:749
+#, fuzzy
+msgid "Change File Extensions"
+msgstr "Priesagos"
+
+#: capplets/file-types/file-types-capplet.c:757
+#, fuzzy
+msgid "Default Action:"
+msgstr "Áprastinis MDI  bûdas"
+
+#: capplets/file-types/file-types-capplet.c:769
+msgid "Use Viewer"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet.c:775
+msgid "Open With Application"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet.c:786
+#, fuzzy
+msgid "Edit List"
+msgstr "Keisti"
+
+#: capplets/file-types/file-types-capplet.c:811
+#, fuzzy
+msgid "Add New MIME Type..."
+msgstr "Pridëti mime tipà"
+
+#: capplets/file-types/file-types-capplet.c:817
+msgid "Delete This MIME Type"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet.c:828
+msgid "Revert to System Defaults"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet.c:1075
+#: capplets/file-types/file-types-capplet.c:1219
+#, fuzzy
+msgid "None"
+msgstr "jokio"
+
+#: capplets/file-types/file-types-capplet.c:1324
+msgid ""
+"Reverting to system settings will lose any changes\n"
+"you have ever made to File Types and Programs.\n"
+"Revert anyway?"
+msgstr ""
+
+#. Add default action to fourth column
+#: capplets/file-types/file-types-capplet.c:1393
+#: capplets/file-types/file-types-capplet.c:1593
+#: capplets/file-types/file-types-capplet.c:1719
+#, fuzzy
+msgid "none"
+msgstr "jokio"
+
+#: capplets/file-types/file-types-capplet.c:1434
+#: capplets/file-types/file-types-capplet.c:1620
+#: capplets/file-types/file-types-capplet.c:1763
+#, c-format
+msgid "View as %s"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet.c:1884
+#: capplets/mime-type/mime-data.c:385
+msgid "Extension"
+msgstr "Priesaga"
+
+#: capplets/file-types/file-types-capplet.c:1885
+#, fuzzy
+msgid "Default Action"
+msgstr "Pasirink ikonà..."
+
+#: capplets/file-types/file-types.desktop.in.in.h:1
+msgid "File Types and Programs"
+msgstr ""
+
+#: capplets/file-types/file-types.desktop.in.in.h:2
+msgid "Specify which programs are used to open or view each file type"
+msgstr ""
+
+#: capplets/file-types/file-types-icon-entry.c:381
+#, fuzzy
+msgid "Select an icon"
+msgstr "Pasirink ikonà..."
+
+#. icon box
+#: capplets/mime-type/edit-window.c:266
+msgid "Select an icon..."
+msgstr "Pasirink ikonà..."
+
+#: capplets/mime-type/edit-window.c:276
+#: capplets/mime-type/new-mime-window.c:31
+msgid "Mime Type: "
+msgstr "Mime tipas: "
+
+#: capplets/mime-type/edit-window.c:306
+msgid "Add"
+msgstr "Pridëti"
+
+#: capplets/mime-type/edit-window.c:314
+#: capplets/url-properties/url-properties.c:135
+msgid "Remove"
+msgstr "Paðalinti"
+
+#. gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
+#: capplets/mime-type/edit-window.c:341
+#: capplets/mime-type/new-mime-window.c:69
+msgid "First Regular Expression: "
+msgstr "Pirma Regular Expression: "
+
+#: capplets/mime-type/edit-window.c:349
+#: capplets/mime-type/new-mime-window.c:80
+msgid "Second Regular Expression: "
+msgstr "Antra Regular Expression: "
+
+#. Actions box
+#: capplets/mime-type/edit-window.c:356
+msgid "Mime Type Actions"
+msgstr "Mime tipo veiksmai"
+
+#: capplets/mime-type/edit-window.c:363
+#, c-format
+msgid "Example: emacs %f"
+msgstr "Pavyzdys: emacs %f"
+
+#: capplets/mime-type/edit-window.c:368
+msgid "Open"
+msgstr "Atidaryti"
+
+#: capplets/mime-type/edit-window.c:374 capplets/mime-type/edit-window.c:390
+#: capplets/mime-type/edit-window.c:405
+msgid "Select a file..."
+msgstr "Pasirink bylà..."
+
+#: capplets/mime-type/edit-window.c:383
+msgid "View"
+msgstr "Þiûrëti"
+
+#: capplets/mime-type/edit-window.c:399
+msgid "Edit"
+msgstr "Keisti"
+
+#. we initialize everything
+#: capplets/mime-type/edit-window.c:448
+#, c-format
+msgid "Set actions for %s"
+msgstr "Veiksmø su %s nustatymas"
+
+#: capplets/mime-type/mime-data.c:384
+msgid "Mime Type"
+msgstr "Mime tipas"
+
+#: capplets/mime-type/mime-data.c:493
+msgid "You must enter a mime-type"
+msgstr "Tu privalai ávesti mime tipà"
+
+#: capplets/mime-type/mime-data.c:498
+msgid ""
+"You must add either a regular-expression or\n"
+"a file-name extension"
+msgstr ""
+"Tu turi arba ávesti regular-expression, arba\n"
+"bylos vardo priesagà"
+
+#: capplets/mime-type/mime-data.c:502
+msgid ""
+"Please put your mime-type in the format:\n"
+"CATEGORY/TYPE\n"
+"\n"
+"For Example:\n"
+"image/png"
+msgstr ""
+"Praðau pateikti mime tipà pavidalu:\n"
+"KATEGORIJA/TIPAS\n"
+"\n"
+"Pavyzdþiui:\n"
+"image/png"
+
+#: capplets/mime-type/mime-data.c:507
+msgid "This mime-type already exists"
+msgstr "Ðis mime tipas jau apibrëþtas"
+
+#: capplets/mime-type/mime-data.c:588 capplets/mime-type/mime-info.c:427
+msgid ""
+"We are unable to create the directory\n"
+"~/.gnome/mime-info\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+"Negaliu sukurti katalogo\n"
+"~/.gnome/mime-info\n"
+"\n"
+"Negalësime iðsaugoti bûsenos."
+
+#: capplets/mime-type/mime-data.c:594 capplets/mime-type/mime-info.c:433
+msgid ""
+"We are unable to access the directory\n"
+"~/.gnome/mime-info\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+"Negaliu prieiti prie katalogo\n"
+"~/.gnome/mime-info\n"
+"\n"
+"Negalësime iðsaugoti bûsenos."
+
+#: capplets/mime-type/mime-data.c:605
+msgid ""
+"Cannot create the file\n"
+"~/.gnome/mime-info/user.mime\n"
+"\n"
+"We will not be able to save the state"
+msgstr ""
+"Negaliu sukurti bylos\n"
+"~/.gnome/mime-info/user.mime\n"
+"\n"
+"Negalësime iðsaugoti bûsenos."
+
+#: capplets/mime-type/mime-info.c:444
+#, fuzzy
+msgid ""
+"Cannot create the file\n"
+"~/.gnome/mime-info/user.keys.\n"
+"\n"
+"We will not be able to save the state"
+msgstr ""
+"Negaliu sukurti bylos\n"
+"~/.gnome/mime-info/user.keys\n"
+"\n"
+"Negalësime iðsaugoti bûsenos."
+
+#: capplets/mime-type/mime-type-capplet.c:83
+#: capplets/wm-properties/wm-properties-capplet.c:1127
+msgid "Delete"
+msgstr "Paðalinti"
+
+#: capplets/mime-type/mime-type-capplet.c:97
+#: capplets/wm-properties/wm-properties-capplet.c:1122
+msgid "Edit..."
+msgstr "Keisti..."
+
+#: capplets/mime-type/mime-type.desktop.in.in.h:1
+msgid "Configure how files are associated and started"
+msgstr "Nustatyti, su kuo bylos susietos ir kaip paleidþiamos"
+
+#: capplets/mime-type/mime-type.desktop.in.in.h:2
+msgid "Mime Types"
+msgstr "Mime tipai"
+
+#: capplets/mime-type/new-mime-window.c:25
+msgid "Add Mime Type"
+msgstr "Pridëti mime tipà"
+
+#: capplets/mime-type/new-mime-window.c:26
+msgid ""
+"Add a new Mime Type\n"
+"For example:  image/tiff; text/x-scheme"
+msgstr ""
+"Pridëk naujà mime tipà\n"
+"Pavyzdþiui:  image/tiff; text/x-scheme"
+
+#: capplets/mime-type/new-mime-window.c:39
+msgid "Extensions"
+msgstr "Priesagos"
+
+#: capplets/mime-type/new-mime-window.c:43
+msgid ""
+"Type in the extensions for this mime-type.\n"
+"For example:  .html, .htm"
+msgstr ""
+"Áraðyk priesagas ðiam mime tipui.\n"
+"Pavyzdþiui:  .html, .htm"
+
+#: capplets/mime-type/new-mime-window.c:55
+msgid "Regular Expressions"
+msgstr "Regular Expressions"
+
+#: capplets/mime-type/new-mime-window.c:59
+msgid ""
+"You can set up two regular expressions here to identify the Mime Type\n"
+"by.  These fields are optional."
+msgstr ""
+"Tu gali nurodyti dvi regular expressions èia, pagal kurias atpaþástamas\n"
+"Mime tipas.  Ðie laukai yra nebûtini."
+
+#: capplets/theme-switcher/demo.c:54
+msgid "One"
+msgstr "Pirmas"
+
+#. just 8 short names that will serve as samples for titles in demo
+#: capplets/theme-switcher/demo.c:56
+msgid "Eenie"
+msgstr "Mano"
+
+#: capplets/theme-switcher/demo.c:56
+msgid "Meenie"
+msgstr "Batai"
+
+#: capplets/theme-switcher/demo.c:57
+msgid "Mynie"
+msgstr "Buvo"
+
+#: capplets/theme-switcher/demo.c:57
+msgid "Moe"
+msgstr "Du"
+
+#: capplets/theme-switcher/demo.c:58
+msgid "Catcha"
+msgstr "Vienas"
+
+#: capplets/theme-switcher/demo.c:58
+msgid "Tiger"
+msgstr "Dingo"
+
+#: capplets/theme-switcher/demo.c:59
+msgid "By Its"
+msgstr "Nerandu"
+
+#: capplets/theme-switcher/demo.c:59
+msgid "Toe"
+msgstr ":((((("
+
+#: capplets/theme-switcher/demo.c:118
+msgid "Selected themes from above will be tested by previewing here."
+msgstr "Virðuje pasirinktas temas galësi iðbandyti perþiûrëdamas èia."
+
+#. column one
+#: capplets/theme-switcher/demo.c:123
+msgid "Sample Button"
+msgstr "Èia mygtukas"
+
+#: capplets/theme-switcher/demo.c:127
+msgid "Sample Check Button"
+msgstr "Pavyzdinë varnelë"
+
+#: capplets/theme-switcher/demo.c:132
+msgid "Sample Text Entry Field"
+msgstr "Teksto ávesties laukas"
+
+#: capplets/theme-switcher/demo.c:143
+msgid "Submenu"
+msgstr "Meniu skiltis"
+
+#: capplets/theme-switcher/demo.c:150
+msgid "Item 1"
+msgstr "Pirmas punktas"
+
+#: capplets/theme-switcher/demo.c:153
+msgid "Another item"
+msgstr "Kitas punktas"
+
+#: capplets/theme-switcher/demo.c:158
+msgid "Radio Button 1"
+msgstr "Perjungiklis 1"
+
+#: capplets/theme-switcher/demo.c:164
+msgid "Radio Button 2"
+msgstr "Perjungiklis 2"
+
+#: capplets/theme-switcher/gui.c:88
+#, c-format
+msgid ""
+"Error installing theme:\n"
+"'%s'\n"
+"%s"
+msgstr ""
+"Klaida ádiegiant temà:\n"
+"'%s'\n"
+"%s"
+
+#: capplets/theme-switcher/gui.c:119
+msgid "Select a theme to install"
+msgstr "Pasirink, kurià temà ádiegti"
+
+#: capplets/theme-switcher/gui.c:196
+msgid "Available Themes"
+msgstr "Turimos temos"
+
+#: capplets/theme-switcher/gui.c:221
+msgid ""
+"Auto\n"
+"Preview"
+msgstr ""
+"Greita\n"
+"Perþiûra"
+
+#: capplets/theme-switcher/gui.c:233
+msgid ""
+"Install new\n"
+"theme..."
+msgstr ""
+"Ádiek naujà\n"
+"temà..."
+
+#. Font selector.
+#.
+#: capplets/theme-switcher/gui.c:239
+msgid "User Font"
+msgstr "Vartotojo ðriftas"
+
+#. FIXME - should really get this from X somehow
+#. for now we just assume default gtk font
+#: capplets/theme-switcher/gui.c:257
+msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
+msgstr "-adobe-helvetica-medium-r-normal-*-*-120-*-*-*-*-iso8859-13"
+
+#: capplets/theme-switcher/gui.c:276
+msgid "Use custom font."
+msgstr "Naudoti pasirinktà ðriftà."
+
+#: capplets/theme-switcher/gui.c:366
+#: capplets/wm-properties/wm-properties-capplet.c:669
+msgid ""
+"No help is available/installed for these settings. Please make sure you\n"
+"have the GNOME User's Guide installed on your system."
+msgstr ""
+"Pagalba ðioms nuostatoms yra nepasiekiama/neádiegta. Praðau, patikrink,\n"
+"ar GNOME User's Guide yra ádiegtas á tavo sistemà."
+
+#: capplets/theme-switcher/install.c:31
+msgid "Home directory doesn't exist!\n"
+msgstr "Nëra namø katalogo!\n"
+
+#: capplets/theme-switcher/install.c:41
+msgid "Theme does not exist"
+msgstr "Nëra tokios temos"
+
+#: capplets/theme-switcher/install.c:73
+#, c-format
+msgid "Command '%s' failed"
+msgstr "Komanda ¥%s´ suþlugo"
+
+#: capplets/theme-switcher/install.c:78
+msgid "Unknown file format"
+msgstr "Neþinomas bylos formatas"
+
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
+msgid "Gtk+ Theme Selector"
+msgstr ""
+
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
+#, fuzzy
+msgid "Select which gtk+ theme to use"
+msgstr "Pasirink, kurià temà ádiegti"
+
+#: capplets/url-properties/url.desktop.in.in.h:1
+msgid "Configure which programs are used to display URLs"
+msgstr ""
+
+#: capplets/url-properties/url.desktop.in.in.h:2
+#, fuzzy
+msgid "URL Handlers"
+msgstr "rodiklis:"
+
+#: capplets/url-properties/url-properties.c:49
+msgid "Error initializing the `url-properties' capplet."
+msgstr "Ávyko inicializacijos klaida, paleidþiant ¥url-properties-capplet´."
+
+#: capplets/url-properties/url-properties.c:72
+msgid "Protocol"
+msgstr "Protokolas"
+
+#: capplets/url-properties/url-properties.c:72
+msgid "Command"
+msgstr "Komanda"
+
+#: capplets/url-properties/url-properties.c:89
+msgid "handler:"
+msgstr "rodiklis:"
+
+#. set some commonly used handlers
+#: capplets/url-properties/url-properties.c:99
+msgid "Netscape"
+msgstr "Netscape"
+
+#: capplets/url-properties/url-properties.c:104
+msgid "Netscape (new window)"
+msgstr "Netscape (naujame lange)"
+
+#: capplets/url-properties/url-properties.c:110
+msgid "Help browser"
+msgstr "Pagalbos narðyklë"
+
+#: capplets/url-properties/url-properties.c:115
+msgid "Help browser (new window)"
+msgstr "Pagalbos narðyklë (naujame lange)"
+
+#: capplets/url-properties/url-properties.c:127
+msgid "Set"
+msgstr "Nustatyti"
+
+#: capplets/ui-properties/behavior.desktop.in.in.h:1
+msgid "Behavior"
+msgstr "Programos"
+
+#: capplets/ui-properties/behavior.desktop.in.in.h:2
+msgid "Sets the default behavior of GNOME applications"
+msgstr "Nustato áprastà GNOME programø pojûtá"
+
+#: capplets/ui-properties/behavior-properties.glade.h:1
+#, fuzzy
+msgid "At the center of the screen"
+msgstr "Ekrano viduryje"
+
+#: capplets/ui-properties/behavior-properties.glade.h:2
+msgid "At the mouse pointer"
+msgstr "Po pelës þymekliu"
+
+#: capplets/ui-properties/behavior-properties.glade.h:3
+msgid "Bottom"
+msgstr "Apaèioje"
+
+#: capplets/ui-properties/behavior-properties.glade.h:4
+msgid "Default  (Spread out - big)"
+msgstr ""
+
+#: capplets/ui-properties/behavior-properties.glade.h:5
+#, fuzzy
+msgid "Dialog Buttons"
+msgstr "Dialogø mygtukai"
+
+#: capplets/ui-properties/behavior-properties.glade.h:6
+msgid "Dialog buttons have icons"
+msgstr "Dialogø mygtukai turi ikonas"
+
+#: capplets/ui-properties/behavior-properties.glade.h:7
+#, fuzzy
+msgid "Dialogs"
+msgstr "Dialogø patarimai"
+
+#: capplets/ui-properties/behavior-properties.glade.h:8
+#, fuzzy
+msgid "Dialogs are treated"
+msgstr "Dialogai tokie pat kaip kiti langai"
+
+#: capplets/ui-properties/behavior-properties.glade.h:9
+#, fuzzy
+msgid "Dialogs open"
+msgstr "Dialogø mygtukai"
+
+#: capplets/ui-properties/behavior-properties.glade.h:10
+msgid "Interface"
+msgstr ""
+
+#: capplets/ui-properties/behavior-properties.glade.h:11
+msgid "Left"
+msgstr "Kairëje"
+
+#: capplets/ui-properties/behavior-properties.glade.h:12
+#, fuzzy
+msgid "Left aligned"
+msgstr "Kairei rankai"
+
+#: capplets/ui-properties/behavior-properties.glade.h:13
+#, fuzzy
+msgid "Like any other window"
+msgstr "Dialogai tokie pat kaip kiti langai"
+
+#: capplets/ui-properties/behavior-properties.glade.h:14
+#, fuzzy
+msgid "Menu bars are detachable"
+msgstr "Árankiø juosta turi uþraðus"
+
+#: capplets/ui-properties/behavior-properties.glade.h:15
+#, fuzzy
+msgid "Menu bars have a border"
+msgstr "Meniu turi rëmelius"
+
+#: capplets/ui-properties/behavior-properties.glade.h:16
+msgid "Menu items have icons"
+msgstr "Meniu punktai turi ikonas"
+
+#: capplets/ui-properties/behavior-properties.glade.h:17
+msgid "Menus"
+msgstr ""
+
+#: capplets/ui-properties/behavior-properties.glade.h:18
+#, fuzzy
+msgid "Menus can be torn off"
+msgstr "Meniu skiltys gali bûti atplëðtos"
+
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
+#: capplets/ui-properties/behavior-properties.glade.h:19
+msgid "Miscellaneous"
+msgstr ""
+
+#: capplets/ui-properties/behavior-properties.glade.h:20
+msgid "Multiple Documents"
+msgstr ""
+
+#: capplets/ui-properties/behavior-properties.glade.h:21
+#, fuzzy
+msgid "Notebook tabs"
+msgstr "Uþraðø knygelë"
+
+#: capplets/ui-properties/behavior-properties.glade.h:22
+msgid "Place dialogs over application window when possible"
+msgstr "Rodyti dialogus virð programos lango, jei ámanoma"
+
+#: capplets/ui-properties/behavior-properties.glade.h:23
+#, fuzzy
+msgid "Progress bar is on the left"
+msgstr "Paþangos rodiklis bûsenos juostos deðinëje"
+
+#: capplets/ui-properties/behavior-properties.glade.h:24
+#, fuzzy
+msgid "Progress bar is on the right"
+msgstr "Paþangos rodiklis bûsenos juostos deðinëje"
+
+#: capplets/ui-properties/behavior-properties.glade.h:25
+msgid "Right"
+msgstr "Deðinëje"
+
+#: capplets/ui-properties/behavior-properties.glade.h:26
+#, fuzzy
+msgid "Right aligned"
+msgstr "Deðinei rankai"
+
+#: capplets/ui-properties/behavior-properties.glade.h:27
+#, fuzzy
+msgid "Seperate windows"
+msgstr "Netscape (naujame lange)"
+
+#: capplets/ui-properties/behavior-properties.glade.h:28
+msgid "Settings will not take effect until applications restart"
+msgstr ""
+
+#: capplets/ui-properties/behavior-properties.glade.h:29
+#, fuzzy
+msgid "Specially by the window manager"
+msgstr "Leisti nuspræsti langø tvarkyklei"
+
+#: capplets/ui-properties/behavior-properties.glade.h:30
+#, fuzzy
+msgid "Spread out"
+msgstr "Iðklaidyti mygtukus"
+
+#: capplets/ui-properties/behavior-properties.glade.h:31
+#, fuzzy
+msgid "Spread out (big)"
+msgstr "Iðklaidyti mygtukus"
+
+#: capplets/ui-properties/behavior-properties.glade.h:32
+msgid "Status Bar"
+msgstr ""
+
+#: capplets/ui-properties/behavior-properties.glade.h:33
+#, fuzzy
+msgid "Status bar is interactive when possible"
+msgstr "Bûsenos juosta yra interaktyvi kai ámanoma"
+
+#: capplets/ui-properties/behavior-properties.glade.h:34
+#, fuzzy
+msgid "The same window"
+msgstr "Netscape (naujame lange)"
+
+#: capplets/ui-properties/behavior-properties.glade.h:35
+msgid "Tool Bars"
+msgstr ""
+
+#: capplets/ui-properties/behavior-properties.glade.h:36
+#, fuzzy
+msgid "Tool bar buttons are icons only"
+msgstr "Árankiø mygtukai turi rëmelá"
+
+#: capplets/ui-properties/behavior-properties.glade.h:37
+#, fuzzy
+msgid "Tool bar buttons are text below icons"
+msgstr "Árankiø juosta turi uþraðus"
+
+#: capplets/ui-properties/behavior-properties.glade.h:38
+#, fuzzy
+msgid "Tool bar buttons pop up on mouse over"
+msgstr "Árankiø mygtukai turi rëmelá"
+
+#: capplets/ui-properties/behavior-properties.glade.h:39
+#, fuzzy
+msgid "Tool bars are detachable"
+msgstr "Árankiø juosta turi uþraðus"
+
+#: capplets/ui-properties/behavior-properties.glade.h:40
+#, fuzzy
+msgid "Tool bars have a border"
+msgstr "Árankiø juostos turi rëmelá"
+
+#: capplets/ui-properties/behavior-properties.glade.h:41
+#, fuzzy
+msgid "Tool bars have line separators"
+msgstr "Árankiø juostos turi skyrikliø linijas"
+
+#: capplets/ui-properties/behavior-properties.glade.h:42
+msgid "Top"
+msgstr "Virðuje"
+
+#: capplets/ui-properties/behavior-properties.glade.h:43
+#, fuzzy
+msgid "Use status bar instead of dialog when possible"
+msgstr "Naudoti bûsenos juostà vietoj dialogo, jei ámanoma"
+
+#: capplets/ui-properties/behavior-properties.glade.h:44
+msgid "When opening Multiple documents, use"
+msgstr ""
+
+#: capplets/ui-properties/behavior-properties.glade.h:45
+msgid "When using Notebook tabs, place the tabs on the"
+msgstr ""
+
+#: capplets/ui-properties/behavior-properties.glade.h:46
+msgid "Wherever the Window Manager places them"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:170
+#, c-format
+msgid ""
+"Starting %s\n"
+"(%d seconds left before operation times out)"
+msgstr ""
+"Paleidþiu %s\n"
+"(Liko %d sekundës, kol pasibaigs laiko riba)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:331
+#, c-format
+msgid "%s (Current)"
+msgstr "%s (Esamas)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:334
+#, c-format
+msgid "Run Configuration Tool for %s"
+msgstr "Paleisti %s nustatymo áranká"
+
+#: capplets/wm-properties/wm-properties-capplet.c:345
+msgid " (Not found)"
+msgstr " (Nerasta)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:384
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\tAnother window manager is already running and could not be killed\n"
+msgstr ""
+"wm-properties-capplet: Negaliu inicializuoti langø tvarkyklës.\n"
+"\tKita langø tvarkyklë jau paleista arba negali bûti nuþudyta\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:388
+#, c-format
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\t'%s' didn't start\n"
+msgstr ""
+"wm-properties-capplet: Negaliu inicializuoti langø tvarkyklës.\n"
+"\t¥%s´ nepasileido\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:437
+msgid "Previous window manager did not die\n"
+msgstr "Ankstesnë langø tvarkyklë negali numirti\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:470
+#, c-format
+msgid ""
+"Could not start '%s'.\n"
+"Falling back to previous window manager '%s'\n"
+msgstr ""
+"Nepavyko paleisti ¥%s´\n"
+"Gráþtu prie ankstesnës langø tvarkyklës ¥%s´\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:501
+msgid ""
+"Could not start fallback window manager.\n"
+"Please run a window manager manually. You can\n"
+"do this by selecting \"Run Program\" in the\n"
+"foot menu\n"
+msgstr ""
+"Negaliu paleisti ankstesnës langø tvarkyklës.\n"
+"Praðau, paleisk langø tvarkyklæ rankomis. Tai\n"
+"gali padaryti pasirinkæs ¥Paleisti programà´\n"
+"pagrindiniame meniu\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:526
+#: capplets/wm-properties/wm-properties-capplet.c:781
+#: capplets/wm-properties/wm-properties-capplet.c:890
+#: capplets/wm-properties/wm-properties-capplet.c:897
+#: capplets/wm-properties/wm-properties-capplet.c:1043
+msgid "OK"
+msgstr "Gerai"
+
+#: capplets/wm-properties/wm-properties-capplet.c:544
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. You can do so immediately by selecting the \"Save session\n"
+"now\" below, or you can save your session later.  This can be\n"
+"done either selecting \"Save Current Session\" under \"Settings\"\n"
+"in the main menu, or by turning on \"Save Current Setup\" when\n"
+"you log out.\n"
+msgstr ""
+"Tavo esama langø tvarkyklë buvo pakeista. Kad ðis pakeitimas bûtø\n"
+"iðsaugotas, tu turi iðsaugoti esamà sesijà. tai gali padaryti iðkart,\n"
+"nuspaudæs ¥Iðsaugoti dabar´ mygtukà apaèioje; arba vëliau, pasirinkæs\n"
+"¥Iðsaugoti esamà sesijà´ pagrindinio meniu skiltyje ¥Nuostatos´,\n"
+"arba paþymëjæs varnele ¥Iðsaugoti esamà sesijà´ atsijungimo metu.\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:551
+msgid "Save Session Later"
+msgstr "Iðsaugoti vëliau"
+
+#: capplets/wm-properties/wm-properties-capplet.c:551
+msgid "Save Session Now"
+msgstr "Iðsaugoti dabar"
+
+#: capplets/wm-properties/wm-properties-capplet.c:554
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. This can be done by either selecting \"Save Current Session\"\n"
+"under \"Settings\" in the main menu, or by turning on\n"
+"\"Save Current Setup\" when you log out.\n"
+msgstr ""
+"Tavo esama langø tvarkyklë buvo pakeista. Kad ðis pakeitimas bûtø\n"
+"iðsaugotas, tu turi iðsaugoti esamà sesijà. Tai gali padaryti,\n"
+"pasirinkæs ¥Iðsaugoti esamà sesijà´ pagrindinio meniu skiltyje\n"
+"¥nuostatos´, arba paþymëjæs varnele ¥Iðsaugoti esamà sesijà´\n"
+"atsijungimo metu.\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:780
+msgid "Add New Window Manager"
+msgstr "Pridëti naujà langø tvarkyklæ"
+
+#: capplets/wm-properties/wm-properties-capplet.c:781
+msgid "Cancel"
+msgstr "Atðaukti"
+
+#: capplets/wm-properties/wm-properties-capplet.c:806
+msgid "Command:"
+msgstr "Komanda:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:819
+msgid "Configuration Command:"
+msgstr "Nustatinëjimo komanda:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:838
+msgid "Window manager is session managed"
+msgstr "Langø tvarkyklë yra sesijos valdoma"
+
+#: capplets/wm-properties/wm-properties-capplet.c:888
+msgid "Name cannot be empty"
+msgstr "Pavadinimas negali bûti tuðèias"
+
+#: capplets/wm-properties/wm-properties-capplet.c:895
+msgid "Command cannot be empty"
+msgstr "Komanda negali bûti tuðèia"
+
+#: capplets/wm-properties/wm-properties-capplet.c:944
+#: capplets/wm-properties/wm-properties-capplet.c:986
+msgid "Edit Window Manager"
+msgstr "Keisti langø tvarkyklæ"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1042
+msgid "You cannot delete the current Window Manager"
+msgstr "Tu negali paðalinti esamos langø tvarkyklës"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1089
+#, fuzzy
+msgid "Window Manager Selector"
+msgstr "Keisti langø tvarkyklæ"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1191
+msgid ""
+"an initialization error occurred while starting 'wm-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"ávyko inicializacijos klaida, paleidþiant ¥wm-properties-capplet´.\n"
+"nutraukta...\n"
+
+#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.in.h:1
+msgid "Enlightenment"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.in.h:1
+msgid "Ice WM"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.in.h:1
+msgid "Scwm"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.in.h:1
+#, fuzzy
+msgid "Window Maker"
+msgstr "Langø tvarkyklë"
+
+#: capplets/wm-properties/wm-desktops/twm.desktop.in.in.h:1
+msgid "twm"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:2
+#, fuzzy
+msgid "Sawfish window manager"
+msgstr "Pasirinkti langø tvarkyklæ"
+
+#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:2
+msgid "Configure window appearance"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:1
+msgid "Configure key shortcuts"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:2
+msgid "Shortcuts"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:1
+msgid "Configure window focusing"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:2
+#, fuzzy
+msgid "Focus behavior"
+msgstr "Programos"
+
+#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
+#, fuzzy
+msgid "Configure window properties"
+msgstr "Pakeisti CD árenginiø valdymà"
+
+#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:2
+#, fuzzy
+msgid "Matched Windows"
+msgstr "Netscape (naujame lange)"
+
+#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:1
+msgid "Configure window minimization and maximization"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:2
+msgid "Minimizing and Maximizing"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
+msgid "Configure window manager configuration properties"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:2
+msgid "Meta"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
+msgid "Configure miscellaneous window features"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:1
+msgid "Configure window move/resize"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:2
+msgid "Moving and Resizing"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:1
+msgid "Configure window placement"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:2
+msgid "Placement"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
+#, fuzzy
+msgid "Enable window manager sound events"
+msgstr "Naudoti srovës valdymà (APM)."
+
+#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:1
+msgid "Configure workspaces"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:2
+msgid "Workspaces"
+msgstr ""

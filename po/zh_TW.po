@@ -340,6 +340,7 @@ msgstr "此文字編輯器是否支援由指令列指定編輯的行號？"
 #: capplets/default-applications/interface.c:334
 #: capplets/default-applications/interface.c:465
 #: capplets/default-applications/interface.c:576
+#: capplets/wm-properties/wm-properties-capplet.c:806
 msgid "Command:"
 msgstr "指令："
 
@@ -627,6 +628,7 @@ msgstr "敏感度："
 msgid "Configure GNOME's use of sound"
 msgstr "設定 GNOME 所用的音效"
 
+#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
 #: capplets/sound/sound.desktop.in.in.h:2
 msgid "Sound"
 msgstr "音效"
@@ -668,6 +670,8 @@ msgstr ""
 "輔助說明尚未安裝或不存在，請確定你已經安裝\n"
 "GNOME 的使用者指南到你的系統中。"
 
+#: capplets/theme-switcher/gui.c:370
+#: capplets/wm-properties/wm-properties-capplet.c:671
 #: control-center/capplet-dir-view.c:464
 msgid "Close"
 msgstr "關閉"
@@ -680,6 +684,7 @@ msgstr "GNOME 控制台："
 msgid "The GNOME configuration tool"
 msgstr "GNOME 設定工具"
 
+#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
 #: control-center/gnomecc.glade.h:1
 msgid "Appearance"
 msgstr "外觀"
@@ -740,1717 +745,1145 @@ msgstr "CAPPLET"
 msgid "GNOME Control Center options"
 msgstr "GNOME 控制台選項"
 
-#~ msgid "Custom screensaver. No description available"
-#~ msgstr "自訂螢幕保護程式。沒有描述"
-
-#~ msgid "About %s\n"
-#~ msgstr "關於 %s\n"
-
-#~ msgid "Name:"
-#~ msgstr "名稱:"
-
-#~ msgid "Settings"
-#~ msgstr "設定"
-
-#~ msgid "Description"
-#~ msgstr "描述"
-
-#~ msgid "label1"
-#~ msgstr "標籤 1"
-
-#~ msgid "Demo"
-#~ msgstr "示範"
-
-#~ msgid "%s properties"
-#~ msgstr "%s 的特性"
-
-#~ msgid "There are no configurable settings for this screensaver."
-#~ msgstr "此螢幕保護程式沒有任何可設定的選項。"
-
-#~ msgid ""
-#~ "Cannot find the data to configure this screensaver. Please edit the "
-#~ "command line below."
-#~ msgstr "找不到資料來設定此螢幕設定程式。請編輯以下的指令列。"
-
-#~ msgid "Please enter a command line below."
-#~ msgstr "請在以下欄位輸入指令。"
-
-#~ msgid "Any"
-#~ msgstr "任選"
-
-#~ msgid " Configure..."
-#~ msgstr "設定(_C)..."
-
-#~ msgid "About \"<Screensaver name>\""
-#~ msgstr "關於 \"<螢幕保護程式名稱>\""
-
-#~ msgid "Black screen only"
-#~ msgstr "畫面變黑"
-
-#~ msgid "Configure Power Management"
-#~ msgstr "電源管理設定"
-
-#~ msgid "Disable screensaver"
-#~ msgstr "不使用螢幕保護程式"
-
-#~ msgid "Enable _power management"
-#~ msgstr "啟用電源管理(_p)"
-
-#~ msgid "Go to standby mode after"
-#~ msgstr "進入待命模式所需時間："
-
-#~ msgid "Go to suspend mode after"
-#~ msgstr "進入暫停模式所需時間："
-
-#~ msgid "One screensaver all the time"
-#~ msgstr "只使用一個螢幕保護程式"
-
-#~ msgid "Preview"
-#~ msgstr "預覽"
-
-#~ msgid "R_equire password to unlock screen"
-#~ msgstr "需要密碼來將畫面解封(_e)"
-
-#~ msgid "Random (all screensavers)"
-#~ msgstr "隨機抽選（任何螢幕保護程式）"
-
-#~ msgid "Random (checked screensavers)"
-#~ msgstr "隨機抽選（已選擇的螢幕保護程式）"
-
-#~ msgid "S_tart screensaver after "
-#~ msgstr "啟動螢幕保護程式延遲時間(_t)："
-
-#~ msgid "S_witch screensavers after "
-#~ msgstr "轉換螢幕保護程式時間(_w)："
-
-#~ msgid "Settings for \"<Screensaver name>\""
-#~ msgstr "\"<螢幕保護程式名稱>\"的設定"
-
-#~ msgid "Shut down monitor after"
-#~ msgstr "螢幕關閉延遲時間："
-
-#~ msgid ""
-#~ "There are no configurable settings for this\n"
-#~ "screensaver. "
-#~ msgstr "此螢幕保護程式沒有任何可設定的選項。"
-
-#~ msgid "_About this screensaver..."
-#~ msgstr "關於此螢幕保護程式(_A)..."
-
-#~ msgid "_Add"
-#~ msgstr "加入(_A)"
-
-#~ msgid "_Mode:"
-#~ msgstr "模式(_M)："
-
-#~ msgid "_Remove"
-#~ msgstr "移除(_R)"
-
-#~ msgid "_Settings"
-#~ msgstr "設定(_S)"
-
-#~ msgid "minutes"
-#~ msgstr "分鐘"
-
-#~ msgid "3d clock"
-#~ msgstr "3D 時鐘"
-
-#~ msgid "Large"
-#~ msgstr "大"
-
-#~ msgid "Size:"
-#~ msgstr "大小："
-
-#~ msgid "Small"
-#~ msgstr "小"
-
-#~ msgid "Twist speed:"
-#~ msgstr "扭曲速度："
-
-#~ msgid "Twist:"
-#~ msgstr "扭曲："
-
-#~ msgid ""
-#~ "A cellular automaton that is really a two-dimensional Turing machine: as "
-#~ "the heads (``ants'') walk along the screen, they change pixel values in "
-#~ "their path.  Then, as they pass over changed pixels, their behavior is "
-#~ "influenced.  Written by David Bagley."
-#~ msgstr ""
-#~ "這個自動機實際上是一個兩維空間的圖林機器（Turing machine）：當每個端點"
-#~ "（「螞蟻」）在螢幕上游走時，它們會改變所經過的路線的像素顏色。然後當它們再"
-#~ "經過那些像素時，它們的行為就會受影響。由 David Bagley 編寫。"
-
-#~ msgid "Ant"
-#~ msgstr "螞蟻"
-
-#~ msgid "Four Sided cells"
-#~ msgstr "四邊格子"
-
-#~ msgid "Full Color"
-#~ msgstr "全彩"
-
-#~ msgid "Many"
-#~ msgstr "多"
-
-#~ msgid "Monochrome"
-#~ msgstr "黑白"
-
-#~ msgid "Nine Sided cells"
-#~ msgstr "九邊格子"
-
-#~ msgid "Number of colours"
-#~ msgstr "顏色的數目"
-
-#~ msgid "Random"
-#~ msgstr "隨機"
-
-#~ msgid "Random size upto"
-#~ msgstr "隨機大小，最多為"
-
-#~ msgid "Randomize"
-#~ msgstr "隨機"
-
-#~ msgid "Sharp turns"
-#~ msgstr "突然轉向"
-
-#~ msgid "Six Sided cells"
-#~ msgstr "六邊格子"
-
-#~ msgid "Specific"
-#~ msgstr "指定"
-
-#~ msgid "Specific size of"
-#~ msgstr "指定大小為"
-
-#~ msgid "Speed"
-#~ msgstr "速度"
-
-#~ msgid "Three Sided cells"
-#~ msgstr "三邊格子"
-
-#~ msgid "Timeout"
-#~ msgstr "時限"
-
-#~ msgid "Truchet lines"
-#~ msgstr "繪畫 Truchet 線條"
-
-#~ msgid "Twelve Sided cells"
-#~ msgstr "十二邊格子"
-
-#~ msgid "Two"
-#~ msgstr "二"
-
-#~ msgid "number of Ants"
-#~ msgstr "螞蟻的數目"
-
-#~ msgid "Atlantis"
-#~ msgstr "阿特蘭提斯"
-
-#~ msgid ""
-#~ "This is xfishtank writ large: a GL animation of a number of sharks, "
-#~ "dolphins, and whales.  The swimming motions are great.  Originally "
-#~ "written by Mark Kilgard."
-#~ msgstr ""
-#~ "這是個大型的 xfishtank：是一些鯊魚、海豚和鯨魚的 GL 動畫。它們的游動姿態都"
-#~ "很棒。本來由 Mark Kilgard 編寫。"
-
-#~ msgid "Attraction (balls)"
-#~ msgstr "吸引力（圓球）"
-
-#~ msgid "Balls"
-#~ msgstr "圓球"
-
-#~ msgid "Color Contrast"
-#~ msgstr "顏色反差"
-
-#~ msgid "Length of Trail"
-#~ msgstr "留下的軌跡長度"
-
-#~ msgid "Lines"
-#~ msgstr "線"
-
-#~ msgid "Number of Colors"
-#~ msgstr "顏色的數目"
-
-#~ msgid "Polygons"
-#~ msgstr "多邊形"
-
-#~ msgid "Threshold of repulsion"
-#~ msgstr "排斥的臨界距離"
-
-#~ msgid ""
-#~ "Draws a simulation of flying space-combat robots (cleverly disguised as "
-#~ "colored circles) doing battle in front of a moving star field.  Written "
-#~ "by Jonathan Lin."
-#~ msgstr ""
-#~ "模擬飛行中的太空戰爭機械人（以有顏色的圓點表示）在移動中的星球之間進行戰"
-#~ "爭。由 Jonathan Lin 編寫。"
-
-#~ msgid "Display screensaver in monochrome."
-#~ msgstr "以黑白色顯示螢幕保護程式。"
-
-#~ msgid "Faster"
-#~ msgstr "較快"
-
-#~ msgid "Slower"
-#~ msgstr "較慢"
-
-#~ msgid "Speed of rotation."
-#~ msgstr "旋轉速度。"
-
-#~ msgid "Speed of the 90 degree rotation."
-#~ msgstr "90 度旋轉時的速度。"
-
-#~ msgid "Colors:"
-#~ msgstr "顏色："
-
-#~ msgid "Count:"
-#~ msgstr "數目："
-
-#~ msgid "Number of Colors."
-#~ msgstr "顏色的數目。"
-
-#~ msgid "Number of bubbles to use."
-#~ msgstr "使用的泡沫數目。"
-
-#~ msgid "Speed of Motion."
-#~ msgstr "移動速度。"
-
-#~ msgid ""
-#~ "Draws random color-cycling inter-braided concentric circles.  Written by "
-#~ "John Neil."
-#~ msgstr "繪畫顏色不斷旋轉而且交織在一起的同心圓。由 John Neil 編寫。"
-
-#~ msgid "BSOD"
-#~ msgstr "BSOD"
-
-#~ msgid ""
-#~ "BSOD stands for ``Blue Screen of Death.''  The finest in personal "
-#~ "computer emulation, this hack simulates popular screen savers from a "
-#~ "number of less robust operating systems.  Written by Jamie Zawinski."
-#~ msgstr ""
-#~ "BSOD 表示 ``Blue Screen of Death''。此保護程式是做得最好的模擬程式之一，會"
-#~ "模擬一些較不穩定的作業系統的當機畫面。由 Jamie Zawinski 編寫。"
-
-#~ msgid "Bubble3D"
-#~ msgstr "3D 泡沫"
-
-#~ msgid ""
-#~ "Draws a stream of rising, undulating 3D bubbles, rising toward the top of "
-#~ "the screen, with nice specular reflections.  Written by Richard Jones."
-#~ msgstr ""
-#~ "繪畫一連串浮升、搖動的 3D 泡沫，還帶有漂亮的反射光澤。由 Richard Jone 編"
-#~ "寫。"
-
-#~ msgid "Bubbles"
-#~ msgstr "泡沫"
-
-#~ msgid "Bubbles exist in three dimensions."
-#~ msgstr "泡沫在三維空間中出現。"
-
-#~ msgid "Don't hide bubbles when they pop."
-#~ msgstr "泡沫爆破時不要隱藏。"
-
-#~ msgid "Draw circles instead of pixmap bubbles."
-#~ msgstr "使用圓形代替 pixmap 泡沫。"
-
-#~ msgid ""
-#~ "This simulates the kind of bubble formation that happens when water boils:"
-#~ "small bubbles appear, and as they get closer to each other, they combine "
-#~ "to form larger bubbles, which eventually pop.  Written by James Macnicol."
-#~ msgstr ""
-#~ "它模擬沸水中泡沫形成的情況：最初是小泡沫出現，當它們靠近時就會合併成大泡"
-#~ "沫，最後會爆破。由 James Macnicol 編寫。"
-
-#~ msgid "Cage"
-#~ msgstr "不可能的籠"
-
-#~ msgid "Compass"
-#~ msgstr "指南針"
-
-#~ msgid "Don't use double bufferinge"
-#~ msgstr "不使用雙重緩衝區"
-
-#~ msgid "Use double buffering"
-#~ msgstr "使用雙重緩衝區"
-
-#~ msgid "Coral"
-#~ msgstr "珊瑚"
-
-#~ msgid "Denser"
-#~ msgstr "較濃密"
-
-#~ msgid "Density"
-#~ msgstr "密度"
-
-#~ msgid "Number of seeds"
-#~ msgstr "起始點數目"
-
-#~ msgid "Seeds"
-#~ msgstr "起始點"
-
-#~ msgid "Thinner"
-#~ msgstr "較稀疏"
-
-#~ msgid "Center image."
-#~ msgstr "中央顯示。"
-
-#~ msgid "Crystal"
-#~ msgstr "晶體"
-
-#~ msgid "Number of polygons to use."
-#~ msgstr "使用的多邊形數目。"
-
-#~ msgid ""
-#~ "A hack similar to `greynetic', but less frenetic.  The first "
-#~ "implementation was by Stephen Linhart; then Ozymandias G.  Desiderata "
-#~ "wrote a Java applet clone.  That clone was discovered by Jamie Zawinski, "
-#~ "and ported to C for inclusion here."
-#~ msgstr ""
-#~ "它類似 `greynetic'，但沒那麼瘋狂。最初是由 Stephen Linhart 編寫這類程式"
-#~ "的；後來 Ozymandias G. Desiderata 編寫了類似的 Java applet。那個 Java "
-#~ "applet 被 Jamie Zawinski 發現了，並被移植到 C 語言，且包括到 xscreensaver "
-#~ "裡。"
-
-#~ msgid "Cynosure"
-#~ msgstr "Cynosure"
-
-#~ msgid "Less"
-#~ msgstr "較少"
-
-#~ msgid "More"
-#~ msgstr "較多"
-
-#~ msgid "Number of iterations."
-#~ msgstr "計算的周期數目。"
-
-#~ msgid "DecayScreen"
-#~ msgstr "溶化螢幕"
-
-#~ msgid "Cycle through colors."
-#~ msgstr "顏色會循環使用。"
-
-#~ msgid "Time between redraws:"
-#~ msgstr "重新繪畫前的時間："
-
-#~ msgid "Use color when drawing."
-#~ msgstr "繪畫時使用顏色。"
-
-#~ msgid "seconds"
-#~ msgstr "秒"
-
-#~ msgid "Number to use."
-#~ msgstr "使用的數目。"
-
-#~ msgid "Distort"
-#~ msgstr "扭曲"
-
-#~ msgid ""
-#~ "This hack grabs an image of the screen, and then lets a transparent lens "
-#~ "wander around the screen, magnifying whatever is underneath.  Written by "
-#~ "Jonas Munsin."
-#~ msgstr ""
-#~ "此程式會擷取螢幕圖像，然後讓一個放大鏡在螢幕周圍游走，放大任何在下面的部"
-#~ "份。由 Jonas Munsin 編寫。"
-
-#~ msgid "Fractals should grow."
-#~ msgstr "碎形應該逐漸增大。"
-
-#~ msgid "Number of pixels to use."
-#~ msgstr "使用的畫素數目。"
-
-#~ msgid "Use lissajous figures to get points."
-#~ msgstr "使用 lissajous 圖案來取得起始點。"
-
-#~ msgid "Seconds"
-#~ msgstr "秒"
-
-#~ msgid "Time finished product is shown."
-#~ msgstr "完成畫面的顯示時間。"
-
-#~ msgid "Number"
-#~ msgstr "數目"
-
-#~ msgid "Number of cycles"
-#~ msgstr "循環的數目"
-
-#~ msgid "Speed of Motion"
-#~ msgstr "移動速度"
-
-#~ msgid "Bitmap for flag"
-#~ msgstr "旗幟的點陣圖"
-
-#~ msgid "Flag"
-#~ msgstr "旗幟"
-
-#~ msgid "Random size up to"
-#~ msgstr "隨機大小，最大為"
-
-#~ msgid "Text for flag"
-#~ msgstr "旗幟的文字"
-
-#~ msgid "Flame"
-#~ msgstr "火焰"
-
-#~ msgid "Number of fractals to generate."
-#~ msgstr "要產生的碎形數目。"
-
-#~ msgid "Pixels per fractal."
-#~ msgstr "每個碎形的像素數目。"
-
-#~ msgid "Flow"
-#~ msgstr "流動"
-
-#~ msgid "Delay between redraws."
-#~ msgstr "重新繪畫的延遲時間。"
-
-#~ msgid "Forest"
-#~ msgstr "森林"
-
-#~ msgid "Number of trees to use."
-#~ msgstr "使用的樹狀圖數目。"
-
-#~ msgid ""
-#~ "This draws fractal trees.  Written by Peter Baumung.  Everybody loves "
-#~ "fractals, right?"
-#~ msgstr "它會繪畫樹狀碎形圖。由 Peter Baumung 編寫。大家都喜歡碎形，是嗎？"
-
-#~ msgid "Galaxy"
-#~ msgstr "宇宙"
-
-#~ msgid "Gears"
-#~ msgstr "齒輪"
-
-#~ msgid "GFlux"
-#~ msgstr "GFlux"
-
-#~ msgid "GLPlanet"
-#~ msgstr "GL 星球"
-
-#~ msgid "GLText"
-#~ msgstr "GL 文字"
-
-#~ msgid "Goban"
-#~ msgstr "圍棋"
-
-#~ msgid "Have transparent bubbles."
-#~ msgstr "使用透明泡沫。"
-
-#~ msgid "Grav"
-#~ msgstr "引力"
-
-#~ msgid "Number of planets to use."
-#~ msgstr "使用的行星數目。"
-
-#~ msgid "Objects should leave trails behind them."
-#~ msgstr "物體應留下軌跡。"
-
-#~ msgid "Orbit should decay."
-#~ msgstr "軌跡應逐漸褪色。"
-
-#~ msgid "Animate circles."
-#~ msgstr "動態圓形。"
-
-#~ msgid "Cycle through colormap."
-#~ msgstr "顏色會循環使用。"
-
-#~ msgid "Halo"
-#~ msgstr "暈輪"
-
-#~ msgid "Number of circles to use."
-#~ msgstr "使用的圓圈數目。"
-
-#~ msgid "Use a gradient of colors between circles."
-#~ msgstr "使用漸變色來繪畫圓形。"
-
-#~ msgid "Helix"
-#~ msgstr "螺旋"
-
-#~ msgid "Time between redraws."
-#~ msgstr "重繪延遲時間。"
-
-#~ msgid "Number of pixels before a color change."
-#~ msgstr "改變顏色前的像素數目。"
-
-#~ msgid "Closer"
-#~ msgstr "較近"
-
-#~ msgid "Distance from center of cube"
-#~ msgstr "至立體中心的距離"
-
-#~ msgid "Farther"
-#~ msgstr "較遠"
-
-#~ msgid "Interference"
-#~ msgstr "干擾"
-
-#~ msgid "Jigsaw"
-#~ msgstr "拼圖"
-
-#~ msgid "Julia"
-#~ msgstr "Julia"
-
-#~ msgid "Kaleidescope"
-#~ msgstr "萬花筒"
-
-#~ msgid "Number of segments."
-#~ msgstr "線條的數目。"
-
-#~ msgid "Number of trails."
-#~ msgstr "軌跡的數目。"
-
-#~ msgid "Segments"
-#~ msgstr "線條"
-
-#~ msgid "Laser"
-#~ msgstr "雷射"
-
-#~ msgid "Longer"
-#~ msgstr "較長"
-
-#~ msgid "Segments:"
-#~ msgstr "線條："
-
-#~ msgid "Shorter"
-#~ msgstr "較短"
-
-#~ msgid "Lightning"
-#~ msgstr "閃電"
-
-#~ msgid "Larger"
-#~ msgstr "較大"
-
-#~ msgid "Lisa"
-#~ msgstr "Lisa"
-
-#~ msgid "Size of object."
-#~ msgstr "物體的大小。"
-
-#~ msgid "Smaller"
-#~ msgstr "較小"
-
-#~ msgid "Lissie"
-#~ msgstr "Lissie"
-
-#~ msgid "Number of points."
-#~ msgstr "點的數目。"
-
-#~ msgid "Points:"
-#~ msgstr "點："
-
-#~ msgid "Loop"
-#~ msgstr "迴圈"
-
-#~ msgid "Delay between drawing the maze and starting the solution."
-#~ msgstr "迷宮繪畫完成和開始找出迷宮出口之間的延遲時間。"
-
-#~ msgid "Delay between each step in the maze."
-#~ msgstr "走每步迷宮的延遲時間"
-
-#~ msgid "Delay between finishing the maze and starting a new one."
-#~ msgstr "找到迷宮出口和開始繪畫新迷宮之間的延遲時間。"
-
-#~ msgid "Less Delay"
-#~ msgstr "延遲較短時間"
-
-#~ msgid "Maze"
-#~ msgstr "迷宮"
-
-#~ msgid "More Delay"
-#~ msgstr "延遲較長時間"
-
-#~ msgid "Moebius"
-#~ msgstr "Moebius"
-
-#~ msgid "Molecule"
-#~ msgstr "分子"
-
-#~ msgid "Mountain"
-#~ msgstr "山脈"
-
-#~ msgid "Draw square at weird starting points."
-#~ msgstr "在不尋常的起始點繪畫方格"
-
-#~ msgid "Munch"
-#~ msgstr "Munch"
-
-#~ msgid "Use XOR drawing function."
-#~ msgstr "使用 XOR 繪畫。"
-
-#~ msgid "Maximum number of lines."
-#~ msgstr "線條的最大數目。"
-
-#~ msgid "Time to fade away."
-#~ msgstr "褪色的時間。"
-
-#~ msgid "Time to show each picture."
-#~ msgstr "每幅圖顯示的時間。"
-
-#~ msgid ""
-#~ "Draws a simulation of an old terminal, with large pixels and long-sustain "
-#~ "phosphor.  It can run any program as a source of the text it displays.  "
-#~ "Written by Jamie Zawinski."
-#~ msgstr ""
-#~ "以大的像素和長期發光的燐點顯示模擬古老的終端機。它可以執行任何程式作為顯示"
-#~ "文字的來源。由 Jamie Zawinski 編寫。"
-
-#~ msgid "Phosphor"
-#~ msgstr "燐光"
-
-#~ msgid ""
-#~ "If you've ever been in the same room with a Windows NT machine, you've "
-#~ "probably seen this GL hack.  This version is by Marcelo Vianna."
-#~ msgstr ""
-#~ "如果你試過身處於有 Windows NT 電腦的房中，你應該見過此 GL 程式。這版本是"
-#~ "由 Marcelo Vianna 編寫。"
-
-#~ msgid "Pipes"
-#~ msgstr "管道"
-
-#~ msgid "Pulsar"
-#~ msgstr "脈沖"
-
-#~ msgid "Frequency of missile launch"
-#~ msgstr "改變發射飛彈的頻率"
-
-#~ msgid "Number of particles"
-#~ msgstr "碎片的數目"
-
-#~ msgid "Particles on screen"
-#~ msgstr "螢幕的碎片數目"
-
-#~ msgid "Pyro"
-#~ msgstr "煙花"
-
-#~ msgid "Color contrast"
-#~ msgstr "顏色反差"
-
-#~ msgid "Length"
-#~ msgstr "長度"
-
-#~ msgid "Narrow"
-#~ msgstr "窄"
-
-#~ msgid "Number of points:"
-#~ msgstr "點數："
-
-#~ msgid "Number of trails:"
-#~ msgstr "軌跡的數目："
-
-#~ msgid "Solid Trails"
-#~ msgstr "單色軌跡"
-
-#~ msgid "Trails attract each other"
-#~ msgstr "軌跡會互相吸引"
-
-#~ msgid "Transparent Trails"
-#~ msgstr "透明軌跡"
-
-#~ msgid "Wide"
-#~ msgstr "寬"
-
-#~ msgid "Width"
-#~ msgstr "寬度"
-
-#~ msgid "XOR Trails"
-#~ msgstr "XOR 軌跡"
-
-#~ msgid "RD-Bomb"
-#~ msgstr "RD-炸彈"
-
-#~ msgid "Rocks"
-#~ msgstr "岩石"
-
-#~ msgid "Delay before next redraw"
-#~ msgstr "重繪前的延遲時間"
-
-#~ msgid "Offset"
-#~ msgstr "位移"
-
-#~ msgid "Speed to clear the screen"
-#~ msgstr "清除螢幕的速度"
-
-#~ msgid "With X-axis Symmetry"
-#~ msgstr "X 軸對稱"
-
-#~ msgid "With Y-axis Symmetry"
-#~ msgstr "Y 軸對稱"
-
-#~ msgid "Rubik"
-#~ msgstr "扭計骰"
-
-#~ msgid "Sierpinski3D"
-#~ msgstr "Sierpinski3D"
-
-#~ msgid "Sierpinski"
-#~ msgstr "Sierpinski"
-
-#~ msgid "Sonar"
-#~ msgstr "聲納"
-
-#~ msgid "Sphere"
-#~ msgstr "球體"
-
-#~ msgid "Spiral"
-#~ msgstr "螺旋"
-
-#~ msgid "Spotlight"
-#~ msgstr "投射燈"
-
-#~ msgid "SSystem"
-#~ msgstr "太陽系"
-
-#~ msgid "Stairs"
-#~ msgstr "樓梯"
-
-#~ msgid "Change to display in monochrome."
-#~ msgstr "改變為單色顯示。"
-
-#~ msgid "Duration of current shape."
-#~ msgstr "現時形狀的維持時間。"
-
-#~ msgid "Quickness of rotation at each step (0 = Random)"
-#~ msgstr "每步的旋轉速度（0 = 隨機）"
-
-#~ msgid "Speed of animation."
-#~ msgstr "動畫的速度。"
-
-#~ msgid "Starfish"
-#~ msgstr "海星"
-
-#~ msgid "Thickness of color bands (0 = Random)"
-#~ msgstr "色帶的厚度（0 = 隨機）"
-
-#~ msgid "StarWars"
-#~ msgstr "星球大戰"
-
-#~ msgid "Strange"
-#~ msgstr "古怪"
-
-#~ msgid "Swirl"
-#~ msgstr "旋渦"
-
-#~ msgid "T3D"
-#~ msgstr "T3D"
-
-#~ msgid "Triangle"
-#~ msgstr "三角形"
-
-#~ msgid "Worm"
-#~ msgstr "蟲蟲"
-
-#~ msgid "XaoS"
-#~ msgstr "XaoS"
-
-#~ msgid "XDaliClock"
-#~ msgstr "XDaliClock"
-
-#~ msgid "Xearth"
-#~ msgstr "X 地球"
-
-#~ msgid "XFishTank"
-#~ msgstr "X 魚缸"
-
-#~ msgid "Xflame"
-#~ msgstr "X 火焰"
-
-#~ msgid "Xmountains"
-#~ msgstr "X 山脈"
-
-#~ msgid "Xroger"
-#~ msgstr "Xroger"
-
-#~ msgid "Xsnow"
-#~ msgstr "Xsnow"
-
-#~ msgid "Add a new screensaver"
-#~ msgstr "新增螢幕保護程式"
-
-#~ msgid "Select the screensaver to run from the list below:"
-#~ msgstr "由以下的列表選擇要執行的螢幕保護程式"
-
-#~ msgid "Custom"
-#~ msgstr "自訂"
-
-#~ msgid "New screensaver"
-#~ msgstr "新螢幕保護程式"
-
-#~ msgid "(None)"
-#~ msgstr "(無)"
-
-#~ msgid "Wallpaper Selection"
-#~ msgstr "桌布選擇"
-
-#~ msgid "Can't find an hbox, using a normal file selection"
-#~ msgstr "找不到 hbox 元件，用一般的檔案選擇方式"
-
-#~ msgid "Use"
-#~ msgstr "使用"
-
-#~ msgid ""
-#~ "No help is available/installed for these settings. Please make sure you\n"
-#~ "have the GNOME User's Guide installed on your system."
-#~ msgstr ""
-#~ "這些設定的說明不存在或未安裝，請確定你已經\n"
-#~ "將 GNOME 使用者指南安裝到你的系統。"
-
-#~ msgid "Mime Type: "
-#~ msgstr "Mime 類型："
-
-#~ msgid "First Regular Expression: "
-#~ msgstr "第一個正規表示式："
-
-#~ msgid "Second Regular Expression: "
-#~ msgstr "第二個正規表示式："
-
-#~ msgid "Mime Type Actions"
-#~ msgstr "Mime 類型的動作"
-
-#~ msgid "Example: emacs %f"
-#~ msgstr "例如：emacs %f"
-
-#~ msgid "Open"
-#~ msgstr "開啟"
-
-#~ msgid "View"
-#~ msgstr "檢視"
-
-#~ msgid "Edit"
-#~ msgstr "編輯"
-
-#~ msgid "Set actions for %s"
-#~ msgstr "設定 %s 的動作"
-
-#~ msgid "Mime Type"
-#~ msgstr "Mime 類型"
-
-#~ msgid "You must enter a mime-type"
-#~ msgstr "你必須輸入一個 MIME 類型"
-
-#~ msgid ""
-#~ "You must add either a regular-expression or\n"
-#~ "a file-name extension"
-#~ msgstr ""
-#~ "你必須增加一個正規表示式或\n"
-#~ "一個延伸檔名"
-
-#~ msgid ""
-#~ "Please put your mime-type in the format:\n"
-#~ "CATEGORY/TYPE\n"
-#~ "\n"
-#~ "For Example:\n"
-#~ "image/png"
-#~ msgstr ""
-#~ "請依下列格式輸入你的 MIME 類型：\n"
-#~ "類別/類型\n"
-#~ "\n"
-#~ "例如：\n"
-#~ "image/png"
-
-#~ msgid "This mime-type already exists"
-#~ msgstr "這個 MIME 類型已經存在"
-
-#~ msgid ""
-#~ "We are unable to create the directory\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "無法建立目錄\n"
-#~ "~/.gnome/mime-info/\n"
-#~ "\n"
-#~ "將無法儲存狀態。"
-
-#~ msgid "Delete"
-#~ msgstr "刪除"
-
-#~ msgid "Add..."
-#~ msgstr "新增..."
-
-#~ msgid "Edit..."
-#~ msgstr "編輯..."
-
-#~ msgid "Add Mime Type"
-#~ msgstr "新增 Mime 類型"
-
-#~ msgid ""
-#~ "Add a new Mime Type\n"
-#~ "For example:  image/tiff; text/x-scheme"
-#~ msgstr ""
-#~ "新增 Mime 類型\n"
-#~ "例如：image/tiff; text/x-scheme"
-
-#~ msgid "Mime Type:"
-#~ msgstr "Mime 類型："
-
-#~ msgid "Extensions"
-#~ msgstr "延伸檔名"
-
-#~ msgid ""
-#~ "Type in the extensions for this mime-type.\n"
-#~ "For example:  .html, .htm"
-#~ msgstr ""
-#~ "請輸入這個 mime 類別的延伸檔名。\n"
-#~ "例如：.html、.htm"
-
-#~ msgid "Extension:"
-#~ msgstr "延伸檔名："
-
-#~ msgid "Regular Expressions"
-#~ msgstr "正規表示式"
-
-#~ msgid ""
-#~ "You can set up two regular expressions here to identify the Mime Type\n"
-#~ "by.  These fields are optional."
-#~ msgstr ""
-#~ "你可以設定兩個正規表示式來識別這個 Mime 類型。\n"
-#~ "這些欄位可以不填。"
-
-#~ msgid "Effect"
-#~ msgstr "效果"
-
-#~ msgid "Primary color"
-#~ msgstr "主色"
-
-#~ msgid "Right or bottom color"
-#~ msgstr "右或下方顏色"
-
-#~ msgid "Apply changes automatically"
-#~ msgstr "自動套用設定"
-
-#~ msgid "Wallpaper"
-#~ msgstr "桌布"
-
-#~ msgid "File"
-#~ msgstr "檔案"
-
-#~ msgid "Display Style"
-#~ msgstr "顯示方式"
-
-#~ msgid "Browse..."
-#~ msgstr "瀏覽..."
-
-#~ msgid "Adjust wallpaper's transparency"
-#~ msgstr "調校桌布的透明度"
-
-#~ msgid "More Transparent"
-#~ msgstr "透明度較高"
-
-#~ msgid "More Solid"
-#~ msgstr "透明度較低"
-
-#~ msgid "Keyboard Bell"
-#~ msgstr "鍵盤聲響"
-
-#~ msgid "window1"
-#~ msgstr "視窗 1"
-
-#~ msgid "Delay Until Repeat"
-#~ msgstr "按鍵重複前的延遲時間"
-
-#~ msgid "Keyboard click"
-#~ msgstr "鍵盤敲擊聲"
-
-#~ msgid "Type here to test setting"
-#~ msgstr "在這裡按鍵測試設定值"
-
-#~ msgid "Mouse buttons"
-#~ msgstr "滑鼠按鍵"
-
-#~ msgid "Threshold"
-#~ msgstr "臨界值"
-
-#~ msgid "Selection"
-#~ msgstr "選擇"
-
-#~ msgid "Choose randomly from those checked off"
-#~ msgstr "在已選擇的螢幕保護程式中隨機抽選"
-
-#~ msgid "Settings..."
-#~ msgstr "設定..."
-
-#~ msgid "Demo Next"
-#~ msgstr "示範下一個"
-
-#~ msgid "Demo Previous"
-#~ msgstr "示範上一個"
-
-#~ msgid "Screensaver Selection"
-#~ msgstr "螢幕保護程式設定"
-
-#~ msgid "Basic"
-#~ msgstr "基本"
-
-#~ msgid "Security"
-#~ msgstr "保安"
-
-#~ msgid "Only after the screensaver has run for"
-#~ msgstr "只適用於：螢幕保護程式已執行"
-
-#~ msgid "General Properties"
-#~ msgstr "一般偏好設定"
-
-#~ msgid "Priority"
-#~ msgstr "優先值"
-
-#~ msgid "Be verbose"
-#~ msgstr "輸出較詳細"
-
-#~ msgid "Fade to black when activating screensaver"
-#~ msgstr "啟用螢幕保護程式時畫面逐漸變黑"
-
-#~ msgid "Fade desktop back when deactivating screensaver"
-#~ msgstr "不使用螢幕保護程式時畫面逐漸變回原狀"
-
-#~ msgid "Fade Duration"
-#~ msgstr "變化時間"
-
-#~ msgid "Fade Smoothness"
-#~ msgstr "畫面漸變程度"
-
-#~ msgid "Smooth"
-#~ msgstr "順滑"
-
-#~ msgid "Jerky"
-#~ msgstr "突變"
-
-#~ msgid "Advanced Properties"
-#~ msgstr "進階設定"
-
-#~ msgid "Play"
-#~ msgstr "播放"
-
-#~ msgid "Enable"
-#~ msgstr "啟用"
-
-#~ msgid "Event"
-#~ msgstr "事件"
-
-#~ msgid "File to Play"
-#~ msgstr "播放的音效檔"
-
-#~ msgid "Menus"
-#~ msgstr "選單"
-
-#~ msgid "Menu bars are detachable"
-#~ msgstr "選單列可以取出"
-
-#~ msgid "Menu bars have a border"
-#~ msgstr "選單列有邊緣"
-
-#~ msgid "Menus can be torn off"
-#~ msgstr "選單可被撕開"
-
-#~ msgid "Menu items have icons"
-#~ msgstr "選單項目含有圖示"
-
-#~ msgid "Status Bar"
-#~ msgstr "狀態列"
-
-#~ msgid "Use status bar instead of dialog when possible"
-#~ msgstr "若有可能，以狀態列代替對話窗"
-
-#~ msgid "Status bar is interactive when possible"
-#~ msgstr "若可能，狀態列可互動"
-
-#~ msgid "Progress bar is on the left"
-#~ msgstr "進度尺在左邊"
-
-#~ msgid "Progress bar is on the right"
-#~ msgstr "進度尺在右邊"
-
-#~ msgid "Tool Bars"
-#~ msgstr "工具列"
-
-#~ msgid "Tool bars have a border"
-#~ msgstr "工具列具有邊緣"
-
-#~ msgid "Tool bar buttons pop up on mouse over"
-#~ msgstr "鼠標移到工具按鈕上時按鈕會彈起"
-
-#~ msgid "Tool bars have line separators"
-#~ msgstr "工具列有分隔線"
-
-#~ msgid "Tool bars are detachable"
-#~ msgstr "工具列可以取出"
-
-#~ msgid "Tool bar buttons are icons only"
-#~ msgstr "工具列按鈕只有圖示"
-
-#~ msgid "Tool bar buttons are text below icons"
-#~ msgstr "工具列圖示下有文字"
-
-#~ msgid "Interface"
-#~ msgstr "介面"
-
-#~ msgid "Dialogs"
-#~ msgstr "對話窗"
-
-#~ msgid "Dialog buttons have icons"
-#~ msgstr "對話窗按鈕含有圖示"
-
-#~ msgid "Place dialogs over application window when possible"
-#~ msgstr "若可能，將對話窗置於應用程式視窗之上"
-
-#~ msgid "Dialogs open"
-#~ msgstr "對話窗開啟於"
-
-#~ msgid "Wherever the Window Manager places them"
-#~ msgstr "視窗管理程式指示的地方"
-
-#~ msgid "At the mouse pointer"
-#~ msgstr "鼠標指示處"
-
-#~ msgid "Dialogs are treated"
-#~ msgstr "對待對話窗"
-
-#~ msgid "Like any other window"
-#~ msgstr "與其它視窗相同"
-
-#~ msgid "Specially by the window manager"
-#~ msgstr "由視窗管理程式處理"
-
-#~ msgid "Dialog Buttons"
-#~ msgstr "對話窗按鈕"
-
-#~ msgid "Default  (Spread out - big)"
-#~ msgstr "預設（伸展 - 大）"
-
-#~ msgid "Spread out"
-#~ msgstr "伸展"
-
-#~ msgid "Spread out (big)"
-#~ msgstr "伸展（大）"
-
-#~ msgid "Left aligned"
-#~ msgstr "向左對齊"
-
-#~ msgid "Right aligned"
-#~ msgstr "向右對齊"
-
-#~ msgid "Multiple Documents"
-#~ msgstr "多文件"
-
-#~ msgid "Notebook tabs"
-#~ msgstr "筆記本標籤"
-
-#~ msgid "Seperate windows"
-#~ msgstr "分開的視窗"
-
-#~ msgid "The same window"
-#~ msgstr "同一個視窗"
-
-#~ msgid "Left"
-#~ msgstr "左邊"
-
-#~ msgid "Right"
-#~ msgstr "右邊"
-
-#~ msgid "Top"
-#~ msgstr "頂端"
-
-#~ msgid "Bottom"
-#~ msgstr "底端"
-
-#~ msgid "When opening Multiple documents, use"
-#~ msgstr "若開啟多份文件，使用"
-
-#~ msgid "When using Notebook tabs, place the tabs on the"
-#~ msgstr "若使用筆記本標籤，將標籤排列在"
-
-#~ msgid "Miscellaneous"
-#~ msgstr "雜項"
-
-#~ msgid "Settings will not take effect until applications restart"
-#~ msgstr "設定只會在程式重新啟動後生效"
-
-#~ msgid "Session"
-#~ msgstr "作業階段"
-
-#~ msgid "Session Chooser"
-#~ msgstr "作業階段選擇程式"
-
-#~ msgid "Start Session"
-#~ msgstr "開始作業階段"
-
-#~ msgid "Cancel Login"
-#~ msgstr "取消登入"
-
-#~ msgid "Order: "
-#~ msgstr "順序："
-
-#~ msgid "This button sets the start order of the selected programs.\n"
-#~ msgstr "這個按鈕設定所選擇程式的啟動順序。\n"
-
-#~ msgid "This column gives the command used to start a program."
-#~ msgstr "這一欄顯示啟動程式所要執行的指令。"
-
-#~ msgid "Order"
-#~ msgstr "順序"
-
-#~ msgid "Style"
-#~ msgstr "型態"
-
-#~ msgid "State"
-#~ msgstr "狀態"
-
-#~ msgid "Program"
-#~ msgstr "程式"
-
-#~ msgid "Inactive"
-#~ msgstr "無動作"
-
-#~ msgid "Waiting to start or already finished."
-#~ msgstr "正等待啟動或已經結束。"
-
-#~ msgid "Starting"
-#~ msgstr "啟動中"
-
-#~ msgid "Started but has not yet reported state."
-#~ msgstr "已經啟動但程式尚未回報其狀態。"
-
-#~ msgid "Running"
-#~ msgstr "執行中"
-
-#~ msgid "Saving"
-#~ msgstr "儲存中"
-
-#~ msgid "Saving session details."
-#~ msgstr "正儲存作業階段內容。"
-
-#~ msgid "Unknown"
-#~ msgstr "未知"
-
-#~ msgid "State not reported within timeout."
-#~ msgstr "程式逾時仍未回報其狀態。"
-
-#~ msgid "Normal"
-#~ msgstr "一般"
-
-#~ msgid "Unaffected by logouts but can die."
-#~ msgstr "不受登出的影響但可能會終止。"
-
-#~ msgid "Respawn"
-#~ msgstr "自動再生"
-
-#~ msgid "Never allowed to die."
-#~ msgstr "永遠不會終止。"
-
-#~ msgid "Trash"
-#~ msgstr "可遺棄"
-
-#~ msgid "Discarded on logout and can die."
-#~ msgstr "在登出時會被遺棄也可能會終止。"
-
-#~ msgid "Always started on every login."
-#~ msgstr "永遠在登入時啟動"
-
-#~ msgid "Remove Program"
-#~ msgstr "移除程式"
-
-#~ msgid "Options"
-#~ msgstr "選項"
-
-#~ msgid "Prompt on logout"
-#~ msgstr "登出時詢間"
-
-#~ msgid "Automatically save changes to session"
-#~ msgstr "自動儲存作業階段"
-
-#~ msgid "Non-session-managed Startup Programs"
-#~ msgstr "不受作業階段管理，在登入時啟動的程式"
-
-#~ msgid "Command"
-#~ msgstr "指令"
-
-#~ msgid "Browse Currently Running Programs..."
-#~ msgstr "瀏覽目前正在執行的程式..."
-
-#~ msgid "Only display warnings."
-#~ msgstr "只顯示警告訊息。"
-
-#~ msgid "Startup Command"
-#~ msgstr "登入時執行的指令"
-
-#~ msgid ""
-#~ "Programs with smaller values are started before programs with higher "
-#~ "values. The default value should be OK"
-#~ msgstr ""
-#~ "優先值較小的程式會比\n"
-#~ "優先值較大的程式較先\n"
-#~ "啟動。使用預設值即可。"
-
-#~ msgid "The startup command cannot be empty"
-#~ msgstr "啟動指令不能為空白"
-
-#~ msgid "Add Startup Program"
-#~ msgstr "新增起始程式"
-
-#~ msgid "Edit Startup Program"
-#~ msgstr "編輯起始程式"
-
-#~ msgid "One"
-#~ msgstr "一"
-
-#~ msgid "Selected themes from above will be tested by previewing here."
-#~ msgstr "所選擇的佈景主題可在這邊測試預覽。"
-
-#~ msgid "Sample Button"
-#~ msgstr "按鈕樣品"
-
-#~ msgid "Sample Check Button"
-#~ msgstr "核對按鈕樣品"
-
-#~ msgid "Sample Text Entry Field"
-#~ msgstr "文字欄位樣品"
-
-#~ msgid "Submenu"
-#~ msgstr "副選單"
-
-#~ msgid ""
-#~ "Error installing theme:\n"
-#~ "'%s'\n"
-#~ "%s"
-#~ msgstr ""
-#~ "安裝佈景主題時發生錯誤：\n"
-#~ "'%s'\n"
-#~ "%s"
-
-#~ msgid "Available Themes"
-#~ msgstr "可供選擇的佈景主題"
-
-#~ msgid ""
-#~ "Auto\n"
-#~ "Preview"
-#~ msgstr ""
-#~ "自動\n"
-#~ "預覽"
-
-#~ msgid ""
-#~ "Install new\n"
-#~ "theme..."
-#~ msgstr ""
-#~ "安裝新的\n"
-#~ "佈景主題..."
-
-#~ msgid "User Font"
-#~ msgstr "使用者字形"
-
-#~ msgid "Use custom font."
-#~ msgstr "使用自訂字形。"
-
-#~ msgid "Home directory doesn't exist!\n"
-#~ msgstr "使用者目錄不存在！\n"
-
-#~ msgid "Theme does not exist"
-#~ msgstr "佈景主題不存在"
-
-#~ msgid "Command '%s' failed"
-#~ msgstr "指令 '%s' 執行失敗"
-
-#~ msgid "Unknown file format"
-#~ msgstr "未知的檔案格式"
-
-#~ msgid "Error initializing the `url-properties' capplet."
-#~ msgstr "在初始化 'url-properties' 面板設定程式時發生錯誤。"
-
-#~ msgid "Protocol"
-#~ msgstr "協定"
-
-#~ msgid "Netscape (new window)"
-#~ msgstr "Netscape（新視窗）"
-
-#~ msgid "Help browser (new window)"
-#~ msgstr "輔助說明瀏覽器（新視窗）"
-
-#~ msgid "Set"
-#~ msgstr "設定"
-
-#~ msgid ""
-#~ "Starting %s\n"
-#~ "(%d seconds left before operation times out)"
-#~ msgstr ""
-#~ "啟動 %s 中\n"
-#~ "（剩下 %d 秒）"
-
-#~ msgid "%s (Current)"
-#~ msgstr "%s（使用中）"
-
-#~ msgid "Run Configuration Tool for %s"
-#~ msgstr "執行 %s 的設定工具"
-
-#~ msgid " (Not found)"
-#~ msgstr "（找不到）"
-
-#~ msgid ""
-#~ "wm-properties-capplet: Unable to initialize window manager.\n"
-#~ "\tAnother window manager is already running and could not be killed\n"
-#~ msgstr ""
-#~ "wm-properties-capplet：無法初始化視窗管理程式。\n"
-#~ "\t另一個視窗管理程式已經在執行並無法停止\n"
-
-#~ msgid ""
-#~ "wm-properties-capplet: Unable to initialize window manager.\n"
-#~ "\t'%s' didn't start\n"
-#~ msgstr ""
-#~ "wm-properties-capplet: 無法初始化視窗管理程式。\n"
-#~ "\t'%s' 無法啟動\n"
-
-#~ msgid "Previous window manager did not die\n"
-#~ msgstr "前一個視窗管理程式還尚未結束\n"
-
-#~ msgid ""
-#~ "Could not start '%s'.\n"
-#~ "Falling back to previous window manager '%s'\n"
-#~ msgstr ""
-#~ "無法啟動 '%s'。\n"
-#~ "回到前一個視窗管理程式 '%s'\n"
-
-#~ msgid "OK"
-#~ msgstr "確定"
-
-#~ msgid "Save Session Later"
-#~ msgstr "稍後再儲存作業階段"
-
-#~ msgid "Save Session Now"
-#~ msgstr "現在儲存作業階段"
-
-#~ msgid ""
-#~ "Your current window manager has been changed. In order for\n"
-#~ "this change to be saved, you will need to save your current\n"
-#~ "session. This can be done by either selecting \"Save Current Session\"\n"
-#~ "under \"Settings\" in the main menu, or by turning on\n"
-#~ "\"Save Current Setup\" when you log out.\n"
-#~ msgstr ""
-#~ "現在的視窗管理程式已經改變了。你必須儲存現在的作業階段來\n"
-#~ "儲存你所作的變更。可以在主選單的「設定」副選單中選「現在\n"
-#~ "儲存作業階段」，或是在登出時選取「儲存目前設定」的按鈕。\n"
-
-#~ msgid "Add New Window Manager"
-#~ msgstr "新增視窗管理程式"
-
-#~ msgid "Cancel"
-#~ msgstr "取消"
-
-#~ msgid "Window manager is session managed"
-#~ msgstr "視窗管理程式接受作業階段管理"
-
-#~ msgid "Name cannot be empty"
-#~ msgstr "名稱欄不能為空白"
-
-#~ msgid "Command cannot be empty"
-#~ msgstr "指令欄不能為空白"
-
-#~ msgid "Edit Window Manager"
-#~ msgstr "編輯視窗管理程式"
-
-#~ msgid "You cannot delete the current Window Manager"
-#~ msgstr "你不能刪除正在使用的視窗管理程式"
-
-#~ msgid "Icon List"
-#~ msgstr "圖示列表"
-
-#~ msgid "Tree"
-#~ msgstr "樹狀圖"
-
-#~ msgid "Got error %d.\n"
-#~ msgstr "發生錯誤 %d。\n"
-
-#~ msgid "Password for %s"
-#~ msgstr "%s 的密碼"
-
-#~ msgid "Consistency checking is not turned on."
-#~ msgstr "不會檢查記憶的一致性"
-
-#~ msgid "Block is fine."
-#~ msgstr "記憶區塊正常。"
-
-#~ msgid "Block freed twice."
-#~ msgstr "記憶區塊正常。"
-
-#~ msgid "Memory before the block was clobbered."
-#~ msgstr "該區塊前的記憶已被覆寫。"
-
-#~ msgid "Memory after the block was clobbered."
-#~ msgstr "該區塊後的記憶已被覆寫。"
-
-#~ msgid "PAM returned = %d\n"
-#~ msgstr "PAM 回傳值 = %d\n"
-
-#~ msgid "about to authenticate \"%s\"\n"
-#~ msgstr "將要認証 \"%s\"\n"
-
-#~ msgid "about to exec \"%s\"\n"
-#~ msgstr "將要執行 \"%s\"\n"
-
-#~ msgid "Pipe error.\n"
-#~ msgstr "管道錯誤。\n"
-
-#~ msgid "Cannot fork().\n"
-#~ msgstr "無法 fork()。\n"
-
-#~ msgid "dup2() error.\n"
-#~ msgstr "dup2() 發生錯誤。\n"
-
-#~ msgid "execl() error, errno=%d\n"
-#~ msgstr "execl() 發生錯誤，錯誤編號=%d\n"
-
-#~ msgid "Information updated."
-#~ msgstr "資料已更新。"
-
-#~ msgid ""
-#~ "The password you typed is invalid.\n"
-#~ "Please try again."
-#~ msgstr ""
-#~ "你輸入的密碼不正確。\n"
-#~ "請再嘗試。"
-
-#~ msgid ""
-#~ "One or more of the changed fields is invalid.\n"
-#~ "This is probably due to either colons or commas in one of the fields.\n"
-#~ "Please remove those and try again."
-#~ msgstr ""
-#~ "其中一些已修改的欄位不正確。\n"
-#~ "這可能是因為這些欄位中有冒號或分號。\n"
-#~ "請移除它們並再嘗試。"
-
-#~ msgid "Password resetting error."
-#~ msgstr "密碼重設發生錯誤。"
-
-#~ msgid ""
-#~ "Some systems files are locked.\n"
-#~ "Please try again in a few moments."
-#~ msgstr ""
-#~ "其中一些系統檔案已被鎖定。\n"
-#~ "請稍後一會並再嘗試。"
-
-#~ msgid "Unknown user."
-#~ msgstr "不明的使用者。"
-
-#~ msgid "Insufficient rights."
-#~ msgstr "權限不足。"
-
-#~ msgid "Invalid call to sub process."
-#~ msgstr "不正確地呼叫副程序。"
-
-#~ msgid ""
-#~ "Your current shell is not listed in /etc/shells.\n"
-#~ "You are not allowed to change your shell.\n"
-#~ "Consult your system administrator."
-#~ msgstr ""
-#~ "你的命令殼並未列於 /etc/shells 中。\n"
-#~ "你不可以改變命令殼。\n"
-#~ "請聯絡系統管理員。"
-
-#~ msgid "Out of memory."
-#~ msgstr "記憶體不足。"
-
-#~ msgid "The exec() call failed."
-#~ msgstr "呼叫 exec() 失敗。"
-
-#~ msgid "Failed to find selected program."
-#~ msgstr "無法找出所選的程式。"
-
-#~ msgid "Unknown error."
-#~ msgstr "不明的錯誤。"
-
-#~ msgid "Unknown exit code."
-#~ msgstr "不明的跳出值。"
-
-#~ msgid "Input"
-#~ msgstr "輸入"
-
-#~ msgid "Need %d responses.\n"
-#~ msgstr "需要 %d 個回應。\n"
-
-#~ msgid ""
-#~ "In order to make changes to your system, you\n"
-#~ "must enter the administrator (root) password."
-#~ msgstr ""
-#~ "要修改系統設定，你必須\n"
-#~ "輸入管理者（root）的密碼。"
-
-#~ msgid "Error"
-#~ msgstr "錯誤"
-
-#~ msgid "Run Unprivileged"
-#~ msgstr "不使用足夠權限執行"
-
-#~ msgid "Control Center Menu"
-#~ msgstr "控制台選單"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'background-properties-"
-#~ "capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "當啟動 'background-properties-capplet' 時發生初始化錯誤。\n"
-#~ "程式異常終止...\n"
-
-#~ msgid "Scaled"
-#~ msgstr "縮放成螢幕大小"
-
-#~ msgid "Disable background selection"
-#~ msgstr "關閉背景功能"
-
-#~ msgid "Set parameters from saved state and exit"
-#~ msgstr "將各參數設成之前儲存的狀態並離開"
-
-#~ msgid "Sets the wallpaper to the value specified"
-#~ msgstr "將桌布設成指定的值"
-
-#~ msgid "Specifies the background color"
-#~ msgstr "指定背景顏色"
-
-#~ msgid "Specifies end background color for gradient"
-#~ msgstr "指定漸層背景中的終止點顏色"
-
-#~ msgid "Gradient orientation: vertical or horizontal"
-#~ msgstr "漸層的方向: 垂直或水平"
-
-#~ msgid "Display wallpaper: tiled, centered, scaled or ratio"
-#~ msgstr "顯示桌布: 重疊, 中央, 縮方或原比例縮放"
-
-#~ msgid ""
-#~ "Pressing this button will popup a dialogbox that will help you setup the "
-#~ "current screensaver."
-#~ msgstr ""
-#~ "按下這個按鈕會彈出一對話窗幫住你設定\n"
-#~ "目前選擇的螢幕保護程式。"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'sound-properties-"
-#~ "capplet'."
-#~ msgstr "當啟動 'sound-properties-capplet' 時發生初始化錯誤。"
-
-#~ msgid ""
-#~ "This copy of the GNOME control center was not compiled with sound support"
-#~ msgstr "這份 GNOME 控制台的複製版本在編譯時沒有將音效支援加入"
-
-#~ msgid "The sound file for this event does not exist."
-#~ msgstr "這個事件所用的音效檔不存在。"
-
-#~ msgid ""
-#~ "The sound file for this event does not exist.\n"
-#~ "You may want to install the gnome-audio package\n"
-#~ "for a set of default sounds."
-#~ msgstr ""
-#~ "這個事件所用的音效檔不存在,\n"
-#~ "你可以安裝 gnome-audio 套件\n"
-#~ "來取得一些預設音效。"
-
-#~ msgid "Can detach and move toolbars"
-#~ msgstr "可以取出並移動工具列"
-
-#~ msgid "id of the capplet -- assigned by the control-center"
-#~ msgstr "這個面板設定程式的識別碼(id) -- 由控制台指定"
-
-#~ msgid "Ignore default action.  Used for custom init-session cases"
-#~ msgstr "忽略預設的動作，這將會在自訂初始作業階段的情況時使用"
-
-#~ msgid ""
-#~ "The following modules have had changes made, but not committed.  If you "
-#~ "would like to edit them, please double click on the appropriate entry."
-#~ msgstr ""
-#~ "以下的模組已經更改但尚未交付, 若你想要更改，\n"
-#~ "請在適當的項目上以滑鼠點兩下。"
+#: capplets/desktop-links/Advanced.directory.in.in.h:1
+msgid "Advanced"
+msgstr "進階"
+
+#: capplets/desktop-links/Advanced.directory.in.in.h:2
+msgid "Advanced Settings"
+msgstr "進階設定"
+
+#: capplets/desktop-links/panel.desktop.in.in.h:1
+msgid "Global panel properties"
+msgstr "一般面板設定內容"
+
+#: capplets/desktop-links/panel.desktop.in.in.h:2
+msgid "Panel"
+msgstr "面板"
+
+#: capplets/desktop-links/session.desktop.in.in.h:1
+msgid "Configure which non-session aware programs are started up"
+msgstr "設定哪些不受作業階段管理的程式會啟動"
+
+#: capplets/desktop-links/session.desktop.in.in.h:2
+msgid "Startup Programs"
+msgstr "起始程式"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:387
+msgid "Edit Applications List"
+msgstr "編輯程式列表"
+
+#. Add label
+#: capplets/file-types/file-types-capplet-dialogs.c:409
+#, c-format
+msgid "Select applications to appear in menu for MIME type \"%s\""
+msgstr "選擇要在選單中顯示並相關於 MIME 類型 \"%s\" 的應用程式"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:433
+msgid "Add Application..."
+msgstr "加入應用程式..."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:440
+msgid "Edit Application..."
+msgstr "編輯應用程式..."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:446
+msgid "Delete Application"
+msgstr "刪除應用程式"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:480
+msgid "Edit Components List"
+msgstr "編輯組成部份"
+
+#. Add label
+#: capplets/file-types/file-types-capplet-dialogs.c:500
+#, c-format
+msgid "Select views to appear in menu for MIME type \"%s\""
+msgstr "選擇 MIME 類型 \"%s\" 在選單中如何顯示"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:720
+msgid ""
+"The MIME type entered contained upper case characters. Upper case characters "
+"were changed to lower case for you."
+msgstr "輸入的 MIME 類型含有大寫字母。所有大寫字母都會轉換為小寫。"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:723
+msgid "Add New MIME Type"
+msgstr "新增 MIME 類型"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:769
+msgid "Add MIME Type"
+msgstr "新增 MIME 類型"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:773
+msgid "New MIME type (e.g. image/x-thumper):"
+msgstr "新增 MIME 類型（例如 image/x-thumper）："
+
+#: capplets/file-types/file-types-capplet-dialogs.c:780
+msgid "Description (e.g. Thumper image):"
+msgstr "描述（例如 Thumper image）："
+
+#: capplets/file-types/file-types-capplet-dialogs.c:947
+msgid "File Extensions "
+msgstr "延伸檔名"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:967
+#: capplets/mime-type/mime-type-capplet.c:93
+#: capplets/wm-properties/wm-properties-capplet.c:1117
+msgid "Add..."
+msgstr "新增..."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:972
+msgid "    Remove    "
+msgstr "    移除    "
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1041
+msgid "Add New Extension"
+msgstr "新增延伸檔名"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1045
+msgid ""
+"Type in the extensions for this mime-type (without dot).\n"
+"You can enter several extensions seperated by a space,\n"
+"for example: html htm"
+msgstr ""
+"請輸入這個 MIME 類型的延伸檔名（不包括一點 \".\"）。\n"
+"你可以以空格隔開多個延伸檔名，例如： html htm"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1052
+#: capplets/mime-type/new-mime-window.c:50
+msgid "Extension:"
+msgstr "延伸檔名："
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1194
+msgid "You must enter a name."
+msgstr "你必須輸入一個名稱。"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1197
+msgid "You must enter a command."
+msgstr "你必須輸入一個指令。"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1207
+#, c-format
+msgid ""
+"\"%s\" does not exist or is not executable.\n"
+"Check your spelling and make sure you have\n"
+"the right permissions to execute this file."
+msgstr ""
+"\"%s\" 不存在或不是可執行檔。請檢查\n"
+"有沒有錯字並確定你有足夠的權限執行此程式。"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1213
+#, c-format
+msgid ""
+"The command \"%s\" cannot be found.\n"
+"You must use a command that can work from any command line."
+msgstr ""
+"找不到指令 \"%s\"。你必須使用\n"
+"一個可在任何指令列上執行的指令。"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1225
+msgid "Bad Application Name"
+msgstr "錯誤的應用程式名稱"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1226
+msgid "Bad Application Command"
+msgstr "錯誤的應用程式指令"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1258
+msgid "Add Application"
+msgstr "增加應用程式"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1259
+msgid "Edit Application"
+msgstr "編輯應用程式"
+
+#. Application Name label and entry
+#: capplets/file-types/file-types-capplet-dialogs.c:1271
+msgid "Application Name:"
+msgstr "應用程式名稱："
+
+#. Application Command label and entry
+#: capplets/file-types/file-types-capplet-dialogs.c:1282
+msgid "Application Command:"
+msgstr "應用程式指令："
+
+#. Open Behavior frame
+#: capplets/file-types/file-types-capplet-dialogs.c:1293
+msgid "Open Behavior"
+msgstr "開啟方式"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1299
+msgid "Can open multiple files"
+msgstr "可開啟多個檔案"
+
+#. FIXME bugzilla.eazel.com 6066: This needs to be three options now: "yes", "no", and "use uris for non-file locations"
+#: capplets/file-types/file-types-capplet-dialogs.c:1307
+msgid "Can open from URI"
+msgstr "可以 URI 方式開啟"
+
+#: capplets/file-types/file-types-capplet.c:735
+#: capplets/file-types/file-types-capplet.c:1883
+msgid "MIME Type"
+msgstr "Mime 類型"
+
+#: capplets/file-types/file-types-capplet.c:742
+msgid "Change Icon"
+msgstr "變更圖示"
+
+#: capplets/file-types/file-types-capplet.c:749
+msgid "Change File Extensions"
+msgstr "改變延伸檔名"
+
+#: capplets/file-types/file-types-capplet.c:757
+msgid "Default Action:"
+msgstr "預設行動："
+
+#: capplets/file-types/file-types-capplet.c:769
+msgid "Use Viewer"
+msgstr "使用檢視器"
+
+#: capplets/file-types/file-types-capplet.c:775
+msgid "Open With Application"
+msgstr "使用程式開啟"
+
+#: capplets/file-types/file-types-capplet.c:786
+msgid "Edit List"
+msgstr "編輯列表"
+
+#: capplets/file-types/file-types-capplet.c:811
+msgid "Add New MIME Type..."
+msgstr "新增 MIME 類型..."
+
+#: capplets/file-types/file-types-capplet.c:817
+msgid "Delete This MIME Type"
+msgstr "刪除此 MIME 類型"
+
+#: capplets/file-types/file-types-capplet.c:828
+msgid "Revert to System Defaults"
+msgstr "還原成系統預設值"
+
+#: capplets/file-types/file-types-capplet.c:1075
+#: capplets/file-types/file-types-capplet.c:1219
+msgid "None"
+msgstr "無"
+
+#: capplets/file-types/file-types-capplet.c:1324
+msgid ""
+"Reverting to system settings will lose any changes\n"
+"you have ever made to File Types and Programs.\n"
+"Revert anyway?"
+msgstr ""
+"還原成系統設定會失去所有你對檔案\n"
+"類型與程式的修改。是否確定還原？"
+
+#. Add default action to fourth column
+#: capplets/file-types/file-types-capplet.c:1393
+#: capplets/file-types/file-types-capplet.c:1593
+#: capplets/file-types/file-types-capplet.c:1719
+msgid "none"
+msgstr "無"
+
+#: capplets/file-types/file-types-capplet.c:1434
+#: capplets/file-types/file-types-capplet.c:1620
+#: capplets/file-types/file-types-capplet.c:1763
+#, c-format
+msgid "View as %s"
+msgstr "以 %s 方式觀看"
+
+#: capplets/file-types/file-types-capplet.c:1882
+msgid "Description"
+msgstr "描述"
+
+#: capplets/file-types/file-types-capplet.c:1884
+#: capplets/mime-type/mime-data.c:385
+msgid "Extension"
+msgstr "延伸檔名"
+
+#: capplets/file-types/file-types-capplet.c:1885
+msgid "Default Action"
+msgstr "預設行動"
+
+#: capplets/file-types/file-types.desktop.in.in.h:1
+msgid "File Types and Programs"
+msgstr "檔案類型與程式"
+
+#: capplets/file-types/file-types.desktop.in.in.h:2
+msgid "Specify which programs are used to open or view each file type"
+msgstr "指定開啟或觀看每種檔案類型所用的程式"
+
+#: capplets/file-types/file-types-icon-entry.c:258
+msgid "Can't find an hbox, using a normal file selection"
+msgstr "找不到一個 hbox 元件，用一般的檔案選取方式"
+
+#: capplets/file-types/file-types-icon-entry.c:264
+#: capplets/theme-switcher/gui.c:232 capplets/theme-switcher/gui.c:304
+msgid "Preview"
+msgstr "預覽"
+
+#: capplets/file-types/file-types-icon-entry.c:381
+msgid "Select an icon"
+msgstr "選擇圖示"
+
+#. icon box
+#: capplets/mime-type/edit-window.c:266
+msgid "Select an icon..."
+msgstr "選擇圖示..."
+
+#: capplets/mime-type/edit-window.c:276
+#: capplets/mime-type/new-mime-window.c:31
+msgid "Mime Type: "
+msgstr "Mime 類型："
+
+#: capplets/mime-type/edit-window.c:306
+msgid "Add"
+msgstr "加入"
+
+#: capplets/mime-type/edit-window.c:314
+#: capplets/url-properties/url-properties.c:135
+msgid "Remove"
+msgstr "移除"
+
+#. gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
+#: capplets/mime-type/edit-window.c:341
+#: capplets/mime-type/new-mime-window.c:69
+msgid "First Regular Expression: "
+msgstr "第一個正規表示式："
+
+#: capplets/mime-type/edit-window.c:349
+#: capplets/mime-type/new-mime-window.c:80
+msgid "Second Regular Expression: "
+msgstr "第二個正規表示式："
+
+#. Actions box
+#: capplets/mime-type/edit-window.c:356
+msgid "Mime Type Actions"
+msgstr "Mime 類型的動作"
+
+#: capplets/mime-type/edit-window.c:363
+#, c-format
+msgid "Example: emacs %f"
+msgstr "例如：emacs %f"
+
+#: capplets/mime-type/edit-window.c:368
+msgid "Open"
+msgstr "開啟"
+
+#: capplets/mime-type/edit-window.c:374 capplets/mime-type/edit-window.c:390
+#: capplets/mime-type/edit-window.c:405
+msgid "Select a file..."
+msgstr "選擇檔案..."
+
+#: capplets/mime-type/edit-window.c:383
+msgid "View"
+msgstr "檢視"
+
+#: capplets/mime-type/edit-window.c:399
+msgid "Edit"
+msgstr "編輯"
+
+#. we initialize everything
+#: capplets/mime-type/edit-window.c:448
+#, c-format
+msgid "Set actions for %s"
+msgstr "設定 %s 的動作"
+
+#: capplets/mime-type/mime-data.c:384
+msgid "Mime Type"
+msgstr "Mime 類型"
+
+#: capplets/mime-type/mime-data.c:493
+msgid "You must enter a mime-type"
+msgstr "你必須輸入 mime 類型"
+
+#: capplets/mime-type/mime-data.c:498
+msgid ""
+"You must add either a regular-expression or\n"
+"a file-name extension"
+msgstr ""
+"你必須加入一個正規表示式或\n"
+"一個延伸檔名"
+
+#: capplets/mime-type/mime-data.c:502
+msgid ""
+"Please put your mime-type in the format:\n"
+"CATEGORY/TYPE\n"
+"\n"
+"For Example:\n"
+"image/png"
+msgstr ""
+"請依下列格式輸入 mime 類型：\n"
+"類別/類型\n"
+"\n"
+"例如：\n"
+"image/png"
+
+#: capplets/mime-type/mime-data.c:507
+msgid "This mime-type already exists"
+msgstr "這個 mime 類型已經存在"
+
+#: capplets/mime-type/mime-data.c:588 capplets/mime-type/mime-info.c:427
+msgid ""
+"We are unable to create the directory\n"
+"~/.gnome/mime-info\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+"無法建立目錄\n"
+"~/.gnome/mime-info\n"
+"\n"
+"將無法儲存狀態。"
+
+#: capplets/mime-type/mime-data.c:594 capplets/mime-type/mime-info.c:433
+msgid ""
+"We are unable to access the directory\n"
+"~/.gnome/mime-info\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+"無法存取目錄\n"
+"~/.gnome/mime-info\n"
+"\n"
+"將無法儲存狀態。"
+
+#: capplets/mime-type/mime-data.c:605
+msgid ""
+"Cannot create the file\n"
+"~/.gnome/mime-info/user.mime\n"
+"\n"
+"We will not be able to save the state"
+msgstr ""
+"無法建立檔案\n"
+"~/.gnome/mime-info/user.mime\n"
+"\n"
+"將無法儲存狀態"
+
+#: capplets/mime-type/mime-info.c:444
+msgid ""
+"Cannot create the file\n"
+"~/.gnome/mime-info/user.keys.\n"
+"\n"
+"We will not be able to save the state"
+msgstr ""
+"無法建立檔案\n"
+"~/.gnome/mime-info/user.keys。\n"
+"\n"
+"將無法儲存狀態"
+
+#: capplets/mime-type/mime-type-capplet.c:83
+#: capplets/wm-properties/wm-properties-capplet.c:1127
+msgid "Delete"
+msgstr "刪除"
+
+#: capplets/mime-type/mime-type-capplet.c:97
+#: capplets/wm-properties/wm-properties-capplet.c:1122
+msgid "Edit..."
+msgstr "編輯..."
+
+#: capplets/mime-type/mime-type.desktop.in.in.h:1
+msgid "Configure how files are associated and started"
+msgstr "設定檔案關聯屬性以及啟動方式"
+
+#: capplets/mime-type/mime-type.desktop.in.in.h:2
+msgid "Mime Types"
+msgstr "Mime 類型"
+
+#: capplets/mime-type/new-mime-window.c:25
+msgid "Add Mime Type"
+msgstr "新增 Mime 類型"
+
+#: capplets/mime-type/new-mime-window.c:26
+msgid ""
+"Add a new Mime Type\n"
+"For example:  image/tiff; text/x-scheme"
+msgstr ""
+"新增 Mime 類型\n"
+"例如：image/tiff; text/x-scheme"
+
+#: capplets/mime-type/new-mime-window.c:39
+msgid "Extensions"
+msgstr "延伸檔名"
+
+#: capplets/mime-type/new-mime-window.c:43
+msgid ""
+"Type in the extensions for this mime-type.\n"
+"For example:  .html, .htm"
+msgstr ""
+"請輸入這個 mime 類別的延伸檔名。\n"
+"例如： .html 、 .htm"
+
+#: capplets/mime-type/new-mime-window.c:55
+msgid "Regular Expressions"
+msgstr "正規表示式"
+
+#: capplets/mime-type/new-mime-window.c:59
+msgid ""
+"You can set up two regular expressions here to identify the Mime Type\n"
+"by.  These fields are optional."
+msgstr ""
+"您可以設定兩個正規表示式來識別這個 mime 類型，\n"
+"這些欄位可以不填。"
+
+#: capplets/theme-switcher/demo.c:54
+msgid "One"
+msgstr "一"
+
+#: capplets/theme-switcher/demo.c:54
+msgid "Two"
+msgstr "二"
+
+#. just 8 short names that will serve as samples for titles in demo
+#: capplets/theme-switcher/demo.c:56
+msgid "Eenie"
+msgstr "Eenie"
+
+#: capplets/theme-switcher/demo.c:56
+msgid "Meenie"
+msgstr "Meenie"
+
+#: capplets/theme-switcher/demo.c:57
+msgid "Mynie"
+msgstr "Mynie"
+
+#: capplets/theme-switcher/demo.c:57
+msgid "Moe"
+msgstr "Moe"
+
+#: capplets/theme-switcher/demo.c:58
+msgid "Catcha"
+msgstr "Catcha"
+
+#: capplets/theme-switcher/demo.c:58
+msgid "Tiger"
+msgstr "Tiger"
+
+#: capplets/theme-switcher/demo.c:59
+msgid "By Its"
+msgstr "By Its"
+
+#: capplets/theme-switcher/demo.c:59
+msgid "Toe"
+msgstr "Toe"
+
+#: capplets/theme-switcher/demo.c:118
+msgid "Selected themes from above will be tested by previewing here."
+msgstr "已選擇的佈景主題可在這裡測試。"
+
+#. column one
+#: capplets/theme-switcher/demo.c:123
+msgid "Sample Button"
+msgstr "按鈕樣本"
+
+#: capplets/theme-switcher/demo.c:127
+msgid "Sample Check Button"
+msgstr "核對按鈕樣本"
+
+#: capplets/theme-switcher/demo.c:132
+msgid "Sample Text Entry Field"
+msgstr "文字欄位樣本"
+
+#: capplets/theme-switcher/demo.c:143
+msgid "Submenu"
+msgstr "副選單"
+
+#: capplets/theme-switcher/demo.c:150
+msgid "Item 1"
+msgstr "項目 1"
+
+#: capplets/theme-switcher/demo.c:153
+msgid "Another item"
+msgstr "另一項目"
+
+#: capplets/theme-switcher/demo.c:158
+msgid "Radio Button 1"
+msgstr "圓形按鈕 1"
+
+#: capplets/theme-switcher/demo.c:164
+msgid "Radio Button 2"
+msgstr "圓形按鈕 2"
+
+#: capplets/theme-switcher/gui.c:87
+#, c-format
+msgid ""
+"Error installing theme:\n"
+"'%s'\n"
+"%s"
+msgstr ""
+"安裝佈景主題時發生錯誤：\n"
+"'%s'\n"
+"%s"
+
+#: capplets/theme-switcher/gui.c:118
+msgid "Select a theme to install"
+msgstr "選擇要安裝的佈景主題"
+
+#: capplets/theme-switcher/gui.c:195
+msgid "Available Themes"
+msgstr "可供選擇的佈景主題"
+
+#: capplets/theme-switcher/gui.c:223
+msgid ""
+"Auto\n"
+"Preview"
+msgstr ""
+"自動\n"
+"預覽"
+
+#: capplets/theme-switcher/gui.c:235
+msgid ""
+"Install new\n"
+"theme..."
+msgstr ""
+"安裝新的\n"
+"佈景主題..."
+
+#. Font selector.
+#.
+#: capplets/theme-switcher/gui.c:241
+msgid "User Font"
+msgstr "使用者字形"
+
+#. FIXME - should really get this from X somehow
+#. for now we just assume default gtk font
+#: capplets/theme-switcher/gui.c:259
+msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
+msgstr ""
+"-*-*-medium-r-normal--*-120-*-*-*-*-big5-0,-adobe-helvetica-medium-r-normal--"
+"*-120-*-*-*-*-*-*,-*-r-*"
+
+#: capplets/theme-switcher/gui.c:278
+msgid "Use custom font."
+msgstr "使用自訂字形。"
+
+#: capplets/theme-switcher/gui.c:368
+#: capplets/wm-properties/wm-properties-capplet.c:669
+msgid ""
+"No help is available/installed for these settings. Please make sure you\n"
+"have the GNOME User's Guide installed on your system."
+msgstr ""
+"這些設定的說明不存在或未安裝，請確定你已經\n"
+"將 GNOME 使用者指南安裝到你的系統。"
+
+#: capplets/theme-switcher/install.c:31
+msgid "Home directory doesn't exist!\n"
+msgstr "使用者目錄不存在！\n"
+
+#: capplets/theme-switcher/install.c:41
+msgid "Theme does not exist"
+msgstr "佈景主題不存在"
+
+#: capplets/theme-switcher/install.c:73
+#, c-format
+msgid "Command '%s' failed"
+msgstr "無法執行命令 '%s'"
+
+#: capplets/theme-switcher/install.c:78
+msgid "Unknown file format"
+msgstr "不明的檔案格式"
+
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
+msgid "Gtk+ Theme Selector"
+msgstr "Gtk+ 佈景主題選擇程式"
+
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
+msgid "Select which gtk+ theme to use"
+msgstr "選擇要使用的 gtk+ 佈景主題"
+
+#: capplets/url-properties/url.desktop.in.in.h:1
+msgid "Configure which programs are used to display URLs"
+msgstr "設定顯示 URL 所用的程式"
+
+#: capplets/url-properties/url.desktop.in.in.h:2
+msgid "URL Handlers"
+msgstr "URL 處理程式"
+
+#: capplets/url-properties/url-properties.c:49
+msgid "Error initializing the `url-properties' capplet."
+msgstr "初始化 'url-properties' 面板設定程式時發生錯誤。"
+
+#: capplets/url-properties/url-properties.c:72
+msgid "Protocol"
+msgstr "協定"
+
+#: capplets/url-properties/url-properties.c:72
+msgid "Command"
+msgstr "指令"
+
+#: capplets/url-properties/url-properties.c:89
+msgid "handler:"
+msgstr "處理器:"
+
+#. set some commonly used handlers
+#: capplets/url-properties/url-properties.c:99
+msgid "Netscape"
+msgstr "Netscape"
+
+#: capplets/url-properties/url-properties.c:104
+msgid "Netscape (new window)"
+msgstr "Netscape (新視窗)"
+
+#: capplets/url-properties/url-properties.c:110
+msgid "Help browser"
+msgstr "輔助說明瀏覽器"
+
+#: capplets/url-properties/url-properties.c:115
+msgid "Help browser (new window)"
+msgstr "輔助說明瀏覽器 (新視窗)"
+
+#: capplets/url-properties/url-properties.c:127
+msgid "Set"
+msgstr "設定"
+
+#: capplets/ui-properties/behavior.desktop.in.in.h:1
+msgid "Behavior"
+msgstr "表現"
+
+#: capplets/ui-properties/behavior.desktop.in.in.h:2
+msgid "Sets the default behavior of GNOME applications"
+msgstr "設定 GNOME 應用程式的預設表現"
+
+#: capplets/ui-properties/behavior-properties.glade.h:1
+msgid "At the center of the screen"
+msgstr "螢幕中央"
+
+#: capplets/ui-properties/behavior-properties.glade.h:2
+msgid "At the mouse pointer"
+msgstr "鼠標位置"
+
+#: capplets/ui-properties/behavior-properties.glade.h:3
+msgid "Bottom"
+msgstr "底端"
+
+#: capplets/ui-properties/behavior-properties.glade.h:4
+msgid "Default  (Spread out - big)"
+msgstr "預設（會擴展 ─ 大）"
+
+#: capplets/ui-properties/behavior-properties.glade.h:5
+msgid "Dialog Buttons"
+msgstr "對話窗按鈕"
+
+#: capplets/ui-properties/behavior-properties.glade.h:6
+msgid "Dialog buttons have icons"
+msgstr "對話窗按鈕配有圖示"
+
+#: capplets/ui-properties/behavior-properties.glade.h:7
+msgid "Dialogs"
+msgstr "對話窗"
+
+#: capplets/ui-properties/behavior-properties.glade.h:8
+msgid "Dialogs are treated"
+msgstr "處理對話窗方式"
+
+#: capplets/ui-properties/behavior-properties.glade.h:9
+msgid "Dialogs open"
+msgstr "對話窗開啟於"
+
+#: capplets/ui-properties/behavior-properties.glade.h:10
+msgid "Interface"
+msgstr "介面"
+
+#: capplets/ui-properties/behavior-properties.glade.h:11
+msgid "Left"
+msgstr "左邊"
+
+#: capplets/ui-properties/behavior-properties.glade.h:12
+msgid "Left aligned"
+msgstr "左手操作"
+
+#: capplets/ui-properties/behavior-properties.glade.h:13
+msgid "Like any other window"
+msgstr "與其它視窗相同"
+
+#: capplets/ui-properties/behavior-properties.glade.h:14
+msgid "Menu bars are detachable"
+msgstr "可以取出選單列"
+
+#: capplets/ui-properties/behavior-properties.glade.h:15
+msgid "Menu bars have a border"
+msgstr "選單列有邊框"
+
+#: capplets/ui-properties/behavior-properties.glade.h:16
+msgid "Menu items have icons"
+msgstr "選單項目具有圖示"
+
+#: capplets/ui-properties/behavior-properties.glade.h:17
+msgid "Menus"
+msgstr "選單"
+
+#: capplets/ui-properties/behavior-properties.glade.h:18
+msgid "Menus can be torn off"
+msgstr "選單可被撕開"
+
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
+#: capplets/ui-properties/behavior-properties.glade.h:19
+msgid "Miscellaneous"
+msgstr "雜項"
+
+#: capplets/ui-properties/behavior-properties.glade.h:20
+msgid "Multiple Documents"
+msgstr "多文件"
+
+#: capplets/ui-properties/behavior-properties.glade.h:21
+msgid "Notebook tabs"
+msgstr "筆記本標籤"
+
+#: capplets/ui-properties/behavior-properties.glade.h:22
+msgid "Place dialogs over application window when possible"
+msgstr "若可能，將對話窗置於應用程式視窗之上"
+
+#: capplets/ui-properties/behavior-properties.glade.h:23
+msgid "Progress bar is on the left"
+msgstr "進度列在左邊"
+
+#: capplets/ui-properties/behavior-properties.glade.h:24
+msgid "Progress bar is on the right"
+msgstr "進度列在右邊"
+
+#: capplets/ui-properties/behavior-properties.glade.h:25
+msgid "Right"
+msgstr "右邊"
+
+#: capplets/ui-properties/behavior-properties.glade.h:26
+msgid "Right aligned"
+msgstr "右手操作"
+
+#: capplets/ui-properties/behavior-properties.glade.h:27
+msgid "Seperate windows"
+msgstr "分離的視窗"
+
+#: capplets/ui-properties/behavior-properties.glade.h:28
+msgid "Settings will not take effect until applications restart"
+msgstr "設定在應用程式重新啟動前不會生效"
+
+#: capplets/ui-properties/behavior-properties.glade.h:29
+msgid "Specially by the window manager"
+msgstr "由視窗管理程式特別處理"
+
+#: capplets/ui-properties/behavior-properties.glade.h:30
+msgid "Spread out"
+msgstr "伸展"
+
+#: capplets/ui-properties/behavior-properties.glade.h:31
+msgid "Spread out (big)"
+msgstr "會擴展（大）"
+
+#: capplets/ui-properties/behavior-properties.glade.h:32
+msgid "Status Bar"
+msgstr "狀態列"
+
+#: capplets/ui-properties/behavior-properties.glade.h:33
+msgid "Status bar is interactive when possible"
+msgstr "若可能，狀態列可互動"
+
+#: capplets/ui-properties/behavior-properties.glade.h:34
+msgid "The same window"
+msgstr "同一個視窗"
+
+#: capplets/ui-properties/behavior-properties.glade.h:35
+msgid "Tool Bars"
+msgstr "工具列"
+
+#: capplets/ui-properties/behavior-properties.glade.h:36
+msgid "Tool bar buttons are icons only"
+msgstr "工具列按鈕只有圖示"
+
+#: capplets/ui-properties/behavior-properties.glade.h:37
+msgid "Tool bar buttons are text below icons"
+msgstr "工具列按鈕圖示下有文字"
+
+#: capplets/ui-properties/behavior-properties.glade.h:38
+msgid "Tool bar buttons pop up on mouse over"
+msgstr "工具列按鈕遇到鼠標時會凸出來"
+
+#: capplets/ui-properties/behavior-properties.glade.h:39
+msgid "Tool bars are detachable"
+msgstr "工具列可以取出來"
+
+#: capplets/ui-properties/behavior-properties.glade.h:40
+msgid "Tool bars have a border"
+msgstr "工具列有邊框"
+
+#: capplets/ui-properties/behavior-properties.glade.h:41
+msgid "Tool bars have line separators"
+msgstr "工具列有分隔線"
+
+#: capplets/ui-properties/behavior-properties.glade.h:42
+msgid "Top"
+msgstr "頂端"
+
+#: capplets/ui-properties/behavior-properties.glade.h:43
+msgid "Use status bar instead of dialog when possible"
+msgstr "若有可能，以狀態列代替對話窗"
+
+#: capplets/ui-properties/behavior-properties.glade.h:44
+msgid "When opening Multiple documents, use"
+msgstr "當開啟多個文件時，使用："
+
+#: capplets/ui-properties/behavior-properties.glade.h:45
+msgid "When using Notebook tabs, place the tabs on the"
+msgstr "當使用筆記本標籤時，將標籤置於："
+
+#: capplets/ui-properties/behavior-properties.glade.h:46
+msgid "Wherever the Window Manager places them"
+msgstr "由視窗管理程式指定"
+
+#: capplets/wm-properties/wm-properties-capplet.c:170
+#, c-format
+msgid ""
+"Starting %s\n"
+"(%d seconds left before operation times out)"
+msgstr ""
+"正在啟動 %s\n"
+"(剩下 %d 秒)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:331
+#, c-format
+msgid "%s (Current)"
+msgstr "%s (正在使用)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:334
+#, c-format
+msgid "Run Configuration Tool for %s"
+msgstr "執行 %s 的設定工具"
+
+#: capplets/wm-properties/wm-properties-capplet.c:345
+msgid " (Not found)"
+msgstr " (找不到)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:384
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\tAnother window manager is already running and could not be killed\n"
+msgstr ""
+"wm-properties-capplet: 無法初始化視窗管理程式。\n"
+"\t另一個視窗管理程式已經在執行並且無法停止\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:388
+#, c-format
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\t'%s' didn't start\n"
+msgstr ""
+"wm-properties-capplet: 無法初始化視窗管理程式。\n"
+"\t'%s' 無法啟動\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:437
+msgid "Previous window manager did not die\n"
+msgstr "前一個視窗管理程式尚未結束\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:470
+#, c-format
+msgid ""
+"Could not start '%s'.\n"
+"Falling back to previous window manager '%s'\n"
+msgstr ""
+"無法啟動 '%s'。\n"
+"回到前一個視窗管理程式 '%s'\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:501
+msgid ""
+"Could not start fallback window manager.\n"
+"Please run a window manager manually. You can\n"
+"do this by selecting \"Run Program\" in the\n"
+"foot menu\n"
+msgstr ""
+"無法啟動先前的視窗管理程式,\n"
+"請自行手動執行視窗管理程式, 您可以\n"
+"在腳印選單中選擇 \"執行程式\"\n"
+"來完成\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:526
+#: capplets/wm-properties/wm-properties-capplet.c:781
+#: capplets/wm-properties/wm-properties-capplet.c:890
+#: capplets/wm-properties/wm-properties-capplet.c:897
+#: capplets/wm-properties/wm-properties-capplet.c:1043
+msgid "OK"
+msgstr "確定"
+
+#: capplets/wm-properties/wm-properties-capplet.c:544
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. You can do so immediately by selecting the \"Save session\n"
+"now\" below, or you can save your session later.  This can be\n"
+"done either selecting \"Save Current Session\" under \"Settings\"\n"
+"in the main menu, or by turning on \"Save Current Setup\" when\n"
+"you log out.\n"
+msgstr ""
+"現在的視窗管理程式已經改變了。你必須儲存現在的作業階段來\n"
+"儲存你所作的變更。你可以選擇下方的「儲存作業階段」按鈕或\n"
+"之後自行儲存。要自行儲存，可以在主選單的「設定」副選單中\n"
+"選「現在儲存作業階段」，或是在登出時選取「儲存目前設定」。\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:551
+msgid "Save Session Later"
+msgstr "稍後再儲存作業階段"
+
+#: capplets/wm-properties/wm-properties-capplet.c:551
+msgid "Save Session Now"
+msgstr "現在儲存作業階段"
+
+#: capplets/wm-properties/wm-properties-capplet.c:554
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. This can be done by either selecting \"Save Current Session\"\n"
+"under \"Settings\" in the main menu, or by turning on\n"
+"\"Save Current Setup\" when you log out.\n"
+msgstr ""
+"現在的視窗管理程式已經改變了。你必須儲存現在的作業階段來\n"
+"儲存你所作的變更。可以在主選單的「設定」副選單中選「現在\n"
+"儲存作業階段」，或是在登出時選取「儲存目前設定」的按鈕。\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:780
+msgid "Add New Window Manager"
+msgstr "新增視窗管理程式"
+
+#: capplets/wm-properties/wm-properties-capplet.c:781
+msgid "Cancel"
+msgstr "取消"
+
+#: capplets/wm-properties/wm-properties-capplet.c:793
+msgid "Name:"
+msgstr "名稱："
+
+#: capplets/wm-properties/wm-properties-capplet.c:819
+msgid "Configuration Command:"
+msgstr "設定時執行："
+
+#: capplets/wm-properties/wm-properties-capplet.c:838
+msgid "Window manager is session managed"
+msgstr "視窗管理程式接受作業階段管理"
+
+#: capplets/wm-properties/wm-properties-capplet.c:888
+msgid "Name cannot be empty"
+msgstr "名稱欄不能為空白"
+
+#: capplets/wm-properties/wm-properties-capplet.c:895
+msgid "Command cannot be empty"
+msgstr "指令欄不能為空白"
+
+#: capplets/wm-properties/wm-properties-capplet.c:944
+#: capplets/wm-properties/wm-properties-capplet.c:986
+msgid "Edit Window Manager"
+msgstr "編輯視窗管理程式"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1042
+msgid "You cannot delete the current Window Manager"
+msgstr "你不能刪除正在使用的視窗管理程式"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1089
+msgid "Window Manager Selector"
+msgstr "視窗管理程式選擇器"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1191
+msgid ""
+"an initialization error occurred while starting 'wm-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"啟動 'wm-properties-capplet' 時發生初始化錯誤。\n"
+"程式異常終止...\n"
+
+#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.in.h:1
+msgid "Enlightenment"
+msgstr "Enlightenment"
+
+#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.in.h:1
+msgid "Ice WM"
+msgstr "Ice WM"
+
+#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.in.h:1
+msgid "Scwm"
+msgstr "Scwm"
+
+#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.in.h:1
+msgid "Window Maker"
+msgstr "Window Maker"
+
+#: capplets/wm-properties/wm-desktops/twm.desktop.in.in.h:1
+msgid "twm"
+msgstr "twm"
+
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:1
+msgid "Control Center Menu"
+msgstr "控制台選單"
+
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:2
+msgid "Sawfish window manager"
+msgstr "Sawfish 視窗管理程式"
+
+#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:2
+msgid "Configure window appearance"
+msgstr "設定視窗外觀"
+
+#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:1
+msgid "Configure key shortcuts"
+msgstr "設定捷徑鍵"
+
+#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:2
+msgid "Shortcuts"
+msgstr "捷徑"
+
+#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:1
+msgid "Configure window focusing"
+msgstr "設定視窗焦點模式"
+
+#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:2
+msgid "Focus behavior"
+msgstr "焦點處理"
+
+#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
+msgid "Configure window properties"
+msgstr "設定視窗特性"
+
+#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:2
+msgid "Matched Windows"
+msgstr "視窗吻合條件"
+
+#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:1
+msgid "Configure window minimization and maximization"
+msgstr "設定視窗最小化及最大化"
+
+#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:2
+msgid "Minimizing and Maximizing"
+msgstr "最小化及最大化"
+
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
+msgid "Configure window manager configuration properties"
+msgstr "設定視窗管理程式特性"
+
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:2
+msgid "Meta"
+msgstr "總體"
+
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
+msgid "Configure miscellaneous window features"
+msgstr "設定其它視窗特性"
+
+#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:1
+msgid "Configure window move/resize"
+msgstr "設定視窗移動及改變大小"
+
+#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:2
+msgid "Moving and Resizing"
+msgstr "移動及改變大小"
+
+#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:1
+msgid "Configure window placement"
+msgstr "設定視窗放置模式"
+
+#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:2
+msgid "Placement"
+msgstr "放置模式"
+
+#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
+msgid "Enable window manager sound events"
+msgstr "啟用視窗管理程式事件音效"
+
+#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:1
+msgid "Configure workspaces"
+msgstr "設定工作區"
+
+#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:2
+msgid "Workspaces"
+msgstr "工作區"
