@@ -54,6 +54,7 @@ struct _MimeTypeInfo
 	GdkPixbuf               *small_icon_pixbuf;
 
 	gboolean                 use_category;
+	gboolean                 use_cat_loaded;
 
 	Bonobo_ServerInfo       *default_component;
 	GnomeVFSMimeApplication *default_action;
@@ -71,6 +72,7 @@ struct _MimeCategoryInfo
 	gboolean                 needs_terminal;
 
 	gboolean                 use_parent_category;
+	gboolean                 use_parent_cat_loaded;
 };
 
 void          load_all_mime_types                  (GtkTreeModel       *model);

@@ -1115,17 +1115,6 @@
             <property name="visible">yes</property>
 
             <child>
-              <widget class="GtkButton" id="button13">
-                <property name="can_default">yes</property>
-                <property name="can_focus">yes</property>
-                <property name="visible">yes</property>
-                <property name="label" translatable="yes">gtk-ok</property>
-                <property name="use_stock">yes</property>
-                <property name="use_underline">yes</property>
-              </widget>
-            </child>
-
-            <child>
               <widget class="GtkButton" id="button14">
                 <property name="can_default">yes</property>
                 <property name="can_focus">yes</property>
@@ -1141,7 +1130,7 @@
                 <property name="can_default">yes</property>
                 <property name="can_focus">yes</property>
                 <property name="visible">yes</property>
-                <property name="label" translatable="yes">gtk-cancel</property>
+                <property name="label" translatable="yes">gtk-close</property>
                 <property name="use_stock">yes</property>
                 <property name="use_underline">yes</property>
               </widget>
@@ -1222,6 +1211,21 @@
                     <property name="homogeneous">no</property>
                     <property name="spacing">4</property>
                     <property name="visible">yes</property>
+
+                    <child>
+                      <widget class="GtkCheckButton" id="use_category_toggle">
+                        <property name="can_focus">yes</property>
+                        <property name="label" translatable="yes">Use parent category defaults</property>
+                        <property name="active">no</property>
+                        <property name="draw_indicator">yes</property>
+                        <property name="visible">yes</property>
+                      </widget>
+                      <packing>
+                        <property name="padding">0</property>
+                        <property name="expand">no</property>
+                        <property name="fill">no</property>
+                      </packing>
+                    </child>
 
                     <child>
                       <widget class="GtkHBox" id="default_action_box">

@@ -48,6 +48,10 @@ struct _MimeCategoryEditDialogPrivate
 	MimeCategoryInfo *info;
 
 	GtkTreeModel     *model;
+
+	gboolean      default_action_active    : 1;
+	gboolean      custom_action            : 1;
+	gboolean      use_cat_dfl              : 1;
 };
 
 static GObjectClass *parent_class;
@@ -75,8 +79,12 @@ static void fill_dialog                           (MimeCategoryEditDialog *dialo
 static void store_data                            (MimeCategoryEditDialog *dialog);
 
 static void default_action_changed_cb             (MimeCategoryEditDialog *dialog);
+static void use_category_toggled_cb               (MimeCategoryEditDialog *dialog,
+						   GtkToggleButton        *tb);
 static void response_cb                           (MimeCategoryEditDialog *dialog,
 						   gint                    response_id);
+
+static void update_sensitivity                    (MimeCategoryEditDialog *dialog);
 
 GType
 mime_category_edit_dialog_get_type (void)
@@ -133,6 +141,8 @@ mime_category_edit_dialog_init (MimeCategoryEditDialog *dialog, MimeCategoryEdit
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog->p->dialog_win)->vbox), WID ("mime_category_edit_widget"), TRUE, TRUE, 0);
 
 	g_signal_connect_swapped (G_OBJECT (WID ("default_action_select")), "changed", (GCallback) default_action_changed_cb, dialog);
+	g_signal_connect_swapped (G_OBJECT (WID ("use_category_toggle")), "toggled",
+				  (GCallback) use_category_toggled_cb, dialog);
 
 	g_signal_connect_swapped (G_OBJECT (dialog->p->dialog_win), "response", (GCallback) response_cb, dialog);
 }
@@ -282,6 +292,10 @@ fill_dialog (MimeCategoryEditDialog *dialog)
 	mime_category_info_load_all (dialog->p->info);
 
 	gtk_entry_set_text (GTK_ENTRY (WID ("name_entry")), dialog->p->info->name);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("use_category_toggle")), dialog->p->info->use_parent_category);
+
+	if (dialog->p->info->entry.parent->type == MODEL_ENTRY_NONE)
+		gtk_widget_set_sensitive (WID ("use_category_toggle"), FALSE);
 
 	populate_application_list (dialog);
 
@@ -321,8 +335,8 @@ populate_application_list (MimeCategoryEditDialog *dialog)
 		gtk_widget_show (menu_item);
 	}
 
-	if (i == 0)
-		gtk_widget_set_sensitive (WID ("default_action_box"), FALSE);
+	dialog->p->default_action_active = !(i == 0);
+	dialog->p->custom_action = (found_idx < 0);
 
 	gtk_menu_append (menu, gtk_menu_item_new_with_label (_("Custom")));
 
@@ -340,6 +354,8 @@ populate_application_list (MimeCategoryEditDialog *dialog)
 	gtk_option_menu_set_history (app_select, found_idx);
 
 	g_list_free (app_list);
+
+	update_sensitivity (dialog);
 }
 
 static void
@@ -354,6 +370,9 @@ store_data (MimeCategoryEditDialog *dialog)
 	path = gtk_tree_model_get_path (dialog->p->model, &iter);
 	gtk_tree_model_row_changed (dialog->p->model, path, &iter);
 	gtk_tree_path_free (path);
+
+	dialog->p->info->use_parent_category =
+		gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (WID ("use_category_toggle")));
 }
 
 static void
@@ -367,13 +386,15 @@ default_action_changed_cb (MimeCategoryEditDialog *dialog)
 	menu = GTK_MENU_SHELL (gtk_option_menu_get_menu (option_menu));
 	id = gtk_option_menu_get_history (option_menu);
 
-	if (id == g_list_length (menu->children) - 1) {
-		gtk_widget_set_sensitive (WID ("program_entry_box"), TRUE);
-		gtk_widget_set_sensitive (WID ("needs_terminal_toggle"), TRUE);
-	} else {
-		gtk_widget_set_sensitive (WID ("program_entry_box"), FALSE);
-		gtk_widget_set_sensitive (WID ("needs_terminal_toggle"), FALSE);
-	}
+	dialog->p->custom_action = (id == g_list_length (menu->children) - 1);
+	update_sensitivity (dialog);
+}
+
+static void
+use_category_toggled_cb (MimeCategoryEditDialog *dialog, GtkToggleButton *tb)
+{
+	dialog->p->use_cat_dfl = gtk_toggle_button_get_active (tb);
+	update_sensitivity (dialog);
 }
 
 static void
@@ -383,4 +404,12 @@ response_cb (MimeCategoryEditDialog *dialog, gint response_id)
 		store_data (dialog);
 
 	g_object_unref (G_OBJECT (dialog));
+}
+
+static void
+update_sensitivity (MimeCategoryEditDialog *dialog) 
+{
+	gtk_widget_set_sensitive (WID ("default_action_box"), dialog->p->default_action_active && !dialog->p->use_cat_dfl);
+	gtk_widget_set_sensitive (WID ("program_entry_box"), dialog->p->custom_action && !dialog->p->use_cat_dfl);
+	gtk_widget_set_sensitive (WID ("needs_terminal_toggle"), dialog->p->custom_action && !dialog->p->use_cat_dfl);
 }

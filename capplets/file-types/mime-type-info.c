@@ -33,6 +33,7 @@
 #include <libgnomevfs/gnome-vfs-application-registry.h>
 #include <libgnomevfs/gnome-vfs-utils.h>
 #include <gconf/gconf-client.h>
+#include <ctype.h>
 
 #include "libuuid/uuid.h"
 
@@ -123,12 +124,16 @@ mime_type_info_load_all (MimeTypeInfo *info)
 	if (info->default_component == NULL)
 		info->default_component = gnome_vfs_mime_get_default_component (info->mime_type);
 
-	tmp1 = gnome_vfs_mime_get_value (info->mime_type, "use-category");
+	if (!info->use_cat_loaded) {
+		tmp1 = gnome_vfs_mime_get_value (info->mime_type, "use-category");
 
-	if (tmp1 != NULL && !strcmp (tmp1, "yes"))
-		info->use_category = TRUE;
-	else
-		info->use_category = FALSE;
+		if (tmp1 != NULL && !strcmp (tmp1, "yes"))
+			info->use_category = TRUE;
+		else
+			info->use_category = FALSE;
+
+		info->use_cat_loaded = TRUE;
+	}
 }
 
 const gchar *
@@ -323,6 +328,23 @@ mime_category_info_new (MimeCategoryInfo *parent, const gchar *name, GtkTreeMode
 	return info;
 }
 
+static gchar *
+get_gconf_base_name (MimeCategoryInfo *category) 
+{
+	gchar *tmp, *tmp1;
+
+	tmp1 = mime_category_info_get_full_name (category);
+
+	for (tmp = tmp1; *tmp != '\0'; tmp++)
+		if (isspace (tmp)) *tmp = '-';
+
+	tmp = g_strconcat ("/desktop/gnome/file-types-categories/",
+			   tmp1, "/default-action-id", NULL);
+
+	g_free (tmp1);
+	return tmp;
+}
+
 void
 mime_category_info_load_all (MimeCategoryInfo *category)
 {
@@ -330,9 +352,8 @@ mime_category_info_load_all (MimeCategoryInfo *category)
 	gchar *appid;
 	GnomeVFSMimeApplication *app;
 
-	tmp1 = mime_category_info_get_full_name (category);
-	tmp = g_strconcat ("/desktop/gnome/file-types-categories/",
-			   tmp1, "/default-action-id", NULL);
+	tmp1 = get_gconf_base_name (category);
+	tmp = g_strconcat (tmp1, "/default-action-id", NULL);
 	appid = gconf_client_get_string (gconf_client_get_default (), tmp, NULL);
 	g_free (tmp);
 
@@ -353,10 +374,17 @@ mime_category_info_load_all (MimeCategoryInfo *category)
 		category->custom_line = NULL;
 	}
 
-	tmp = g_strconcat ("/desktop/gnome/file-types-categories/",
-			   tmp1, "/use-parent-category", NULL);
-	category->use_parent_category = gconf_client_get_bool (gconf_client_get_default (), tmp, NULL);
-	g_free (tmp);
+	if (!category->use_parent_cat_loaded) {
+		if (category->entry.parent->type == MODEL_ENTRY_CATEGORY) {
+			tmp = g_strconcat (tmp1, "/use-parent-category", NULL);
+			category->use_parent_category = gconf_client_get_bool (gconf_client_get_default (), tmp, NULL);
+			g_free (tmp);
+		} else {
+			category->use_parent_category = FALSE;
+		}
+
+		category->use_parent_cat_loaded = TRUE;
+	}
 
 	g_free (tmp1);
 }
@@ -409,9 +437,8 @@ mime_category_info_save (MimeCategoryInfo *category)
 	gchar                    app_uuid_str[100];
 	GnomeVFSMimeApplication  app;
 
-	tmp1 = mime_category_info_get_full_name (category);
-	tmp = g_strconcat ("/desktop/gnome/file-types-categories/",
-			   tmp1, "/default-action-id", NULL);
+	tmp1 = get_gconf_base_name (category);
+	tmp = g_strconcat (tmp1, "/default-action-id", NULL);
 
 	if (category->default_action != NULL) {
 		gconf_client_set_string (gconf_client_get_default (),
@@ -444,8 +471,7 @@ mime_category_info_save (MimeCategoryInfo *category)
 	g_free (tmp);
 
 	tmp1 = mime_category_info_get_full_name (category);
-	tmp = g_strconcat ("/desktop/gnome/file-types-categories/",
-			   tmp1, "/use-parent-category", NULL);
+	tmp = g_strconcat (tmp1, "/use-parent-category", NULL);
 	gconf_client_set_bool (gconf_client_get_default (), tmp, category->use_parent_category, NULL);
 	g_free (tmp1);
 

@@ -1,5 +1,21 @@
 2002-01-27  Bradford Hovinen  <hovinen@ximian.com>
 
+	* mime-type-info.c (get_gconf_base_name): Implement
+
+	* mime-category-edit-dialog.c (fill_dialog): Disable
+	use_category_toggle if this is a toplevel category
+	(populate_application_list, default_action_changed_cb)
+	(use_category_toggled_cb, update_sensitivity): Set widget
+	sensitivity based on various values
+
+	* mime-type-info.c (mime_type_info_load_all)
+	(mime_category_info_load_all): Check use_[parent_]cat_loaded
+	(mime_category_info_load_all): Override use_parent_category with
+	FALSE if this is a toplevel category
+
+	* mime-category-edit-dialog.c (store_data, fill_dialog): Get/set
+	use_parent_category
+
 	* mime-type-info.c (set_subcategory_ids): Don't set subcategory
 	ids unless use_parent_category is set
 	(mime_category_info_save, mime_category_info_load_all): Get/set
