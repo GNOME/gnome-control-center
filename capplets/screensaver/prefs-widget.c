@@ -193,7 +193,7 @@ prefs_widget_init (PrefsWidget *prefs_widget)
 
 	prefs_widget->priv = g_new0 (PrefsWidgetPrivate, 1);
 	prefs_widget->priv->xml =
-		glade_xml_new (GNOMECC_GLADE_DIR "/screensaver-properties.glade",
+		glade_xml_new (GNOMECC_DATA_DIR "/interfaces/screensaver-properties.glade",
 			       NULL, NULL); 
 	if (!prefs_widget->priv->xml)
 		return;

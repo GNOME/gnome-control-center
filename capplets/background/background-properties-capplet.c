@@ -249,7 +249,7 @@ create_dialog (BGApplier *bg_applier)
 	GladeXML  *dialog;
 
 	/* FIXME: What the hell is domain? */
-	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/background-properties.glade", "prefs_widget", NULL);
+	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/background-properties.glade", "prefs_widget", NULL);
 	widget = glade_xml_get_widget (dialog, "prefs_widget");
 
 	/* Minor GUI addition */

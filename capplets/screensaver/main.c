@@ -215,6 +215,7 @@ main (int argc, char **argv)
 
 	gnome_program_init ("screensaver-properties", VERSION,
 			    LIBGNOMEUI_MODULE, argc, argv,
+			    GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
 			    NULL);
 
 	client = gnome_master_client ();
@@ -243,7 +244,7 @@ main (int argc, char **argv)
 	}
 
 	gnome_window_icon_set_default_from_file
-		(GNOMECC_ICONS_DIR"/gnome-ccscreensaver.png");
+		(GNOMECC_DATA_DIR"/icons/gnome-ccscreensaver.png");
 
 	init_resource_database (argc, argv);
 	prefs = preferences_new ();

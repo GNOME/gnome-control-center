@@ -278,21 +278,37 @@ static void
 load_pixbufs (void) 
 {
 	static gboolean called = FALSE;
+	gchar *filename;
+	GnomeProgram *program;
 
 	if (called) return;
 
-	left_handed_pixbuf        = gdk_pixbuf_new_from_file ("mouse-left.png",         NULL);
-	right_handed_pixbuf       = gdk_pixbuf_new_from_file ("mouse-right.png",        NULL);
-	double_click_on_pixbuf    = gdk_pixbuf_new_from_file ("double-click-on.png",    NULL);
-	double_click_maybe_pixbuf = gdk_pixbuf_new_from_file ("double-click-maybe.png", NULL);
-	double_click_off_pixbuf   = gdk_pixbuf_new_from_file ("double-click-off.png",   NULL);
+	program = gnome_program_get ();
 
-	/* Let's be paranoid here. I like this feature :-) */
-	g_object_add_weak_pointer (G_OBJECT (left_handed_pixbuf),        (gpointer *) &left_handed_pixbuf);
-	g_object_add_weak_pointer (G_OBJECT (right_handed_pixbuf),       (gpointer *) &right_handed_pixbuf);
-	g_object_add_weak_pointer (G_OBJECT (double_click_on_pixbuf),    (gpointer *) &double_click_on_pixbuf);
+	filename = gnome_program_locate_file (program, GNOME_FILE_DOMAIN_APP_PIXMAP, "mouse-left.png", TRUE, NULL);
+	left_handed_pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
+	g_object_add_weak_pointer (G_OBJECT (left_handed_pixbuf), (gpointer *) &left_handed_pixbuf);
+	g_free (filename);
+
+	filename = gnome_program_locate_file (program, GNOME_FILE_DOMAIN_APP_PIXMAP, "mouse-right.png", TRUE, NULL);
+	right_handed_pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
+	g_object_add_weak_pointer (G_OBJECT (right_handed_pixbuf), (gpointer *) &right_handed_pixbuf);
+	g_free (filename);
+
+	filename = gnome_program_locate_file (program, GNOME_FILE_DOMAIN_APP_PIXMAP, "double-click-on.png", TRUE, NULL);
+	double_click_on_pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
+	g_object_add_weak_pointer (G_OBJECT (double_click_on_pixbuf), (gpointer *) &double_click_on_pixbuf);
+	g_free (filename);
+
+	filename = gnome_program_locate_file (program, GNOME_FILE_DOMAIN_APP_PIXMAP, "double-click-maybe.png", TRUE, NULL);
+	double_click_maybe_pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
 	g_object_add_weak_pointer (G_OBJECT (double_click_maybe_pixbuf), (gpointer *) &double_click_maybe_pixbuf);
-	g_object_add_weak_pointer (G_OBJECT (double_click_off_pixbuf),   (gpointer *) &double_click_off_pixbuf);
+	g_free (filename);
+
+	filename = gnome_program_locate_file (program, GNOME_FILE_DOMAIN_APP_PIXMAP, "double-click-off.png", TRUE, NULL);
+	double_click_off_pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
+	g_object_add_weak_pointer (G_OBJECT (double_click_off_pixbuf), (gpointer *) &double_click_off_pixbuf);
+	g_free (filename);
 
 	called = TRUE;
 }
@@ -360,7 +376,7 @@ create_dialog (void)
 	GladeXML     *dialog;
 	GtkSizeGroup *size_group;
 
-	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/mouse-properties.glade", "prefs_widget", NULL);
+	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/mouse-properties.glade", "prefs_widget", NULL);
 	widget = glade_xml_get_widget (dialog, "prefs_widget");
 
 	size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
@@ -425,6 +441,7 @@ main (int argc, char **argv)
 
 	gnome_program_init (argv[0], VERSION, LIBGNOMEUI_MODULE, argc, argv,
 			    GNOME_PARAM_POPT_TABLE, cap_options,
+			    GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
 			    NULL);
 
 	client = gconf_client_get_default ();

@@ -252,6 +252,7 @@ static gint
 show_screensaver_timeout (void) 
 {
 	int ret;
+	gchar *filename;
 
 	ret = waitpid (preview_pid, NULL, WNOHANG);
 
@@ -262,8 +263,12 @@ show_screensaver_timeout (void)
 		if (pixbuf)
 			gdk_pixbuf_unref (pixbuf);
 
-		pixbuf = gdk_pixbuf_new_from_file 
-			(GNOMECC_PIXMAPS_DIR "/no-hack.png", NULL);
+		filename = gnome_program_locate_file
+			(gnome_program_get (), GNOME_FILE_DOMAIN_APP_PIXMAP,
+			 "no-hack.png", TRUE, NULL);
+		pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
+		g_free (filename);
+
 		gdk_pixbuf_render_to_drawable
 			(pixbuf, (GdkDrawable *) preview_window->window,
 			 preview_window->style->fg_gc[0], 0, 0, 0, 0,
@@ -326,13 +331,20 @@ close_preview (void)
 void
 show_blank_preview (void)
 {
+	gchar *filename;
+
 	close_preview ();
 	gtk_widget_map (preview_window);
 
 	if (pixbuf)
 		gdk_pixbuf_unref (pixbuf);
 
-	pixbuf = gdk_pixbuf_new_from_file (GNOMECC_PIXMAPS_DIR "/blank-screen.png", NULL);
+	filename = gnome_program_locate_file
+		(gnome_program_get (), GNOME_FILE_DOMAIN_APP_PIXMAP,
+		 "blank-screen.png", TRUE, NULL);
+	pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
+	g_free (filename);
+
 	gdk_pixbuf_render_to_drawable
 		(pixbuf, (GdkDrawable *) preview_window->window,
 		 preview_window->style->fg_gc[0], 0, 0, 0, 0,

@@ -119,8 +119,10 @@ capplet_new (CappletDir *dir, gchar *desktop_path)
 	entry->exec = vec;
 	entry->dir = dir;
 
-	if (!entry->icon)
-		entry->icon = GNOMECC_PIXMAPS_DIR "/control-center.png";
+	if (entry->icon == NULL)
+		entry->icon = gnome_program_locate_file
+			(gnome_program_get (), GNOME_FILE_DOMAIN_APP_PIXMAP,
+			 "control-center.png", TRUE, NULL);
 
 	entry->pb = gdk_pixbuf_new_from_file (entry->icon, NULL);
 
@@ -166,7 +168,9 @@ capplet_dir_new (CappletDir *dir, gchar *dir_path)
 				GNOME_DESKTOP_ITEM_ICON));
 
 		if (!entry->icon)
-			entry->icon = g_strdup (GNOMECC_PIXMAPS_DIR "/control-center.png");
+			entry->icon = gnome_program_locate_file
+				(gnome_program_get (), GNOME_FILE_DOMAIN_APP_PIXMAP,
+				 "control-center.png", TRUE, NULL);
 
 		entry->pb = gdk_pixbuf_new_from_file (entry->icon, NULL);
 	} else {

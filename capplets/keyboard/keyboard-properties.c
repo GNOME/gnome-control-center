@@ -212,7 +212,7 @@ create_dialog (void)
 {
 	GladeXML *dialog;
 
-	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/keyboard-properties.glade", "prefs_widget", NULL);
+	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/keyboard-properties.glade", "prefs_widget", NULL);
 
 	/* Minor GUI addition */
 	/* FIXME: There should be a way to do this using glade alone */

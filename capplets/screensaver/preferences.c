@@ -212,7 +212,7 @@ screensaver_list_load (GHashTable *savers_hash)
 	gchar *userdir;
 
 	l = screensaver_list_prepend_dir (savers_hash,
-					  l, GNOMECC_SCREENSAVERS_DIR);
+					  l, GNOMECC_DATA_DIR "/screensavers");
        	
 	userdir = g_concat_dir_and_file (g_get_home_dir (), ".screensavers");
 	l = screensaver_list_prepend_dir (savers_hash,
@@ -732,7 +732,9 @@ screensaver_read_xml (xmlNodePtr saver_node)
 		}
 		else if (!strcmp (node->name, "fakepreview"))
 		{
-			saver->fakepreview = g_concat_dir_and_file (GNOMECC_PIXMAPS_DIR "/screensavers", xmlNodeGetContent (node));
+			saver->fakepreview = gnome_program_locate_file
+				(gnome_program_get (), GNOME_FILE_DOMAIN_APP_PIXMAP,
+				 xmlNodeGetContent (node), TRUE, NULL);
 		}
 		else if (!strcmp (node->name, "fake"))
 		{
