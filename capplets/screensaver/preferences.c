@@ -4,6 +4,7 @@
  * Copyright (C) 2000 Helix Code, Inc.
  *
  * Written by Bradford Hovinen <hovinen@helixcode.com>
+ * Parts written by Jamie Zawinski <jwz@jwz.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -285,4 +286,28 @@ screensaver_get_desc (Screensaver *saver)
 		saver->description = g_strdup (_("Custom screensaver. No description available"));
 
 	return saver->description;
+}
+
+/* Adapted from xscreensaver 3.24 driver/demo-Gtk.c line 944 ... */
+
+char *
+screensaver_get_label (gchar *name) 
+{
+	char *s, *label;
+
+	label = screensaver_get_label_from_xrdb (name);
+	if (label) return label;
+
+	label = g_strdup (name);
+
+	for (s = label; *s; s++)    /* if it has any capitals, return it */
+		if (*s >= 'A' && *s <= 'Z')
+			return s;
+
+	if (label[0] >= 'a' && label[0] <= 'z')             /* else cap it */
+		label[0] -= 'a'-'A';
+	if (label[0] == 'X' && label[1] >= 'a' && label[1] <= 'z')
+		label[1] -= 'a'-'A';
+
+	return label;
 }

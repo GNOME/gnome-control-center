@@ -171,7 +171,7 @@ static void
 prefs_widget_init (PrefsWidget *prefs)
 {
 	GtkWidget *table, *frame, *vbox, *vbox1, *hbox, *label;
-	GtkWidget *hbuttonbox, *scrolled_window, *button;
+	GtkWidget *hbuttonbox, *scrolled_window, *button, *table1;
 	GtkObject *adjustment;
 	GSList *no_screensavers_group = NULL;
 	GtkWidget *viewport;
@@ -184,8 +184,8 @@ prefs_widget_init (PrefsWidget *prefs)
 
 	frame = gtk_frame_new (_("Selection"));
 	gtk_table_attach (GTK_TABLE (table), frame, 0, 1, 0, 2,
-			  (GtkAttachOptions) (GTK_FILL),
-			  (GtkAttachOptions) (GTK_EXPAND | GTK_FILL), 0, 0);
+			  GTK_EXPAND | GTK_FILL,
+			  GTK_EXPAND | GTK_FILL, 0, 0);
 
 	vbox = gtk_vbox_new (FALSE, 5);
 	gtk_container_add (GTK_CONTAINER (frame), vbox);
@@ -258,45 +258,49 @@ prefs_widget_init (PrefsWidget *prefs)
 	gtk_container_add (GTK_CONTAINER (scrolled_window), 
 			   prefs->screensaver_list);
 
-	hbuttonbox = gtk_hbutton_box_new ();
-	gtk_box_pack_start (GTK_BOX (vbox), hbuttonbox, FALSE, FALSE, 0);
+	table1 = gtk_table_new (2, 3, TRUE);
+	gtk_table_set_row_spacings (GTK_TABLE (table1), GNOME_PAD_SMALL);
+	gtk_table_set_col_spacings (GTK_TABLE (table1), GNOME_PAD_SMALL);
+	gtk_box_pack_start (GTK_BOX (vbox), table1, FALSE, FALSE, 0);
 
 	button = gtk_button_new_with_label (_("Add..."));
-	gtk_container_add (GTK_CONTAINER (hbuttonbox), button);
+	gtk_table_attach (GTK_TABLE (table1), button, 0, 1, 0, 1,
+			  GTK_FILL, GTK_FILL, 0, 0);
 	gtk_signal_connect (GTK_OBJECT (button), "clicked",
 			    screensaver_add_cb, prefs);
 
 	prefs->remove_button = gtk_button_new_with_label (_("Remove"));
-	gtk_container_add (GTK_CONTAINER (hbuttonbox), prefs->remove_button);
+	gtk_table_attach (GTK_TABLE (table1), prefs->remove_button, 1, 2, 0, 1,
+			  GTK_FILL, GTK_FILL, 0, 0);
 	gtk_signal_connect (GTK_OBJECT (prefs->remove_button), "clicked",
 			    screensaver_remove_cb, prefs);
 	gtk_widget_set_sensitive (prefs->remove_button, FALSE);
 
-	prefs->settings_button = gtk_button_new_with_label (_("Edit..."));
-	gtk_container_add (GTK_CONTAINER (hbuttonbox), prefs->settings_button);
+	prefs->settings_button = gtk_button_new_with_label (_("Settings..."));
+	gtk_table_attach (GTK_TABLE (table1), prefs->settings_button, 
+			  2, 3, 0, 1, GTK_FILL, GTK_FILL, 0, 0);
 	gtk_widget_set_sensitive (prefs->settings_button, FALSE);
 
-	hbuttonbox = gtk_hbutton_box_new ();
-	gtk_box_pack_start (GTK_BOX (vbox), hbuttonbox, FALSE, FALSE, 0);
-
 	prefs->demo_button = gtk_button_new_with_label (_("Demo"));
-	gtk_container_add (GTK_CONTAINER (hbuttonbox), prefs->demo_button);
+	gtk_table_attach (GTK_TABLE (table1), prefs->demo_button, 0, 1, 1, 2,
+			  GTK_FILL, GTK_FILL, 0, 0);
 	gtk_widget_set_sensitive (prefs->demo_button, FALSE);
 
 	button = gtk_button_new_with_label (_("Demo Next"));
-	gtk_container_add (GTK_CONTAINER (hbuttonbox), button);
+	gtk_table_attach (GTK_TABLE (table1), button, 1, 2, 1, 2,
+			  GTK_FILL, GTK_FILL, 0, 0);
 	gtk_signal_connect (GTK_OBJECT (button), "clicked",
 			    demo_next_cb, prefs);
 
 	button = gtk_button_new_with_label (_("Demo Previous"));
-	gtk_container_add (GTK_CONTAINER (hbuttonbox), button);
+	gtk_table_attach (GTK_TABLE (table1), button, 2, 3, 1, 2,
+			  GTK_FILL, GTK_FILL, 0, 0);
 	gtk_signal_connect (GTK_OBJECT (button), "clicked",
 			    demo_prev_cb, prefs);
 
 	frame = gtk_frame_new (_("Preview"));
 	gtk_table_attach (GTK_TABLE (table), frame, 1, 2, 0, 1,
-			  (GtkAttachOptions) (GTK_EXPAND),
-			  (GtkAttachOptions) (GTK_FILL), 0, 0);
+			  GTK_FILL, GTK_FILL, 0, 0);
 
 	scrolled_window = gtk_scrolled_window_new (NULL, NULL);
 	gtk_container_add (GTK_CONTAINER (frame), scrolled_window);
@@ -309,13 +313,12 @@ prefs_widget_init (PrefsWidget *prefs)
 
 	prefs->preview_window = gtk_drawing_area_new ();
 	gtk_container_add (GTK_CONTAINER (viewport), prefs->preview_window);
-	gtk_widget_set_usize (prefs->preview_window, 300, 250);
+	gtk_widget_set_usize (prefs->preview_window, 300, 200);
 
 	frame = gtk_frame_new (_("Description"));
 
 	gtk_table_attach (GTK_TABLE (table), frame, 1, 2, 1, 2,
-			  (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-			  (GtkAttachOptions) (GTK_EXPAND | GTK_FILL), 0, 0);
+			  GTK_FILL, GTK_EXPAND | GTK_FILL, 0, 0);
 
 	scrolled_window = gtk_scrolled_window_new (NULL, NULL);
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
@@ -1340,9 +1343,12 @@ deselect_saver_cb (GtkCList *list, gint row, gint column,
 	Screensaver *saver;
 	int r, c;
 
-	if (column == 0 && widget->selection_mode == SM_CHOOSE_FROM_LIST) {
+	if (event && column == 0 && 
+	    widget->selection_mode == SM_CHOOSE_FROM_LIST) 
+	{
 		gtk_clist_get_selection_info (list, event->x, event->y, 
 					      &r, &c);
+
 		if (r == row) {
 			saver = gtk_clist_get_row_data (list, row);
 			toggle_saver (widget, row, saver);

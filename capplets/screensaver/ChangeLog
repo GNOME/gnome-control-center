@@ -1,3 +1,108 @@
+2000-08-07  Bradford Hovinen  <hovinen@helixcode.com>
+
+	* screensaver-prefs-dialog.c (screensaver_prefs_dialog_destroy):
+	Free structures only if they were ever allocated
+
+	* selection-dialog.c (get_known_savers): Implement. Read the
+	screensaver directory for a list of valid screensavers
+	(place_screensaver_list): Use known_savers rather than XML data
+
+	* preferences.c (screensaver_get_label): Implement. Copy from
+	get_label in resources.c
+
+	* prefs-widget.c (deselect_saver_cb): Toggle only if event was a
+	mouse button press, not a keyboard press
+	(prefs_widget_init): Change vertical size of preview window to 200
+	(prefs_widget_init): Use a table for the buttons below the
+	screensaver list 
+	(prefs_widget_init): Change label of edit button to Settings...
+	(prefs_widget_init): Don't have description and preview frames
+	expand, have selection frame expand
+
+	* Makefile.am (screensaver_properties_capplet_LDADD): Don't link
+	against glade
+	(INCLUDES): Don't set glade compilation flags
+
+	* screensaver-prefs-dialog.c (get_select_widget): Show menu item
+	(populate_table): Don't skip hgroups that lack ids
+	(place_number): 
+	(place_boolean): Attach items with GTK_FILL
+	(get_check_button): 
+	(get_select_widget): Set object data to point back to dialog
+	(populate_table): Pass dialog, remove extraneous arguments
+	(get_check_button): Connect toggled signal from here
+	(get_select_widget): Set data and connect activate signals from
+	here
+	(place_number): Set default from default attribute
+	(get_spinbutton): Set step_increment, page_increment, and
+	page_size on adjustment
+	(get_spinbutton): 
+	(place_number): Set default to average of high and low if not
+	supplied
+	(get_argument_data): Add i18n support
+	(read_boolean): 
+	(read_number): 
+	(read_select):
+	(write_boolean): 
+	(write_number): 
+	(write_select): Check if id is NULL before trying to look up a node
+	(screensaver_prefs_dialog_new): Make sure CLI arguments and XML
+	data were read successfully before trying to build the widget
+	(get_argument_data): Return pointer to document rather than root node
+	(screensaver_prefs_dialog_new): Set argument_data from argument_doc
+	(screensaver_prefs_dialog_class_init): Set parent_class
+	(screensaver_prefs_dialog_destroy): Implement; free all structures
+	(free_set_cb): Implement
+	(write_number): Don't assume correct format on the output string;
+	just replace the '%' with the appropriate argument
+	(write_command_line): Free arg iff generated from number
+
+2000-08-06  Bradford Hovinen  <hovinen@helixcode.com>
+
+	* screensaver-prefs-dialog.c (get_screensaver_widget): Accept
+	ScreensaverPrefsDialog as option
+	(get_argument_data): Assume one file per screensaver
+	(get_spinbutton): 
+	(get_check_button): 
+	(get_select_widget): 
+	(place_number): 
+	(place_boolean): 
+	(place_hgroup): 
+	(place_select): 
+	(populate_table): Implement
+	(get_screensaver_widget): Rewrite to build screensaver config
+	dialogs manually from the XML data
+	(activate_option_cb): 
+	(toggle_check_cb): Pass dialog to set_widgets_sensitive
+	(set_widgets_sensitive): Rewrite to use dialog->widget_db
+	(write_boolean): 
+	(write_number): 
+	(write_select): Use widget_db
+	(write_select):
+	(write_command_line): Don't check no-output
+	(write_command_line): Pass widget_db
+	(read_boolean): 
+	(read_number): 
+	(read_select): Use widget_db
+	(place_screensaver_properties): Pass dialog->widget_db to above
+	functions
+	(arg_mapping_exists): Use XML file rather than Glade definition
+	(screensaver_prefs_dialog_new): Initialize settings_widget with
+	the widget to be placed in the settings frame
+	(place_screensaver_properties): Take xml node; process hgroups
+	recursively
+	(write_command_line): Process hgroups recursively
+	(read_boolean): 
+	(read_number): 
+	(read_select): Check if set and set->value_widget are set before
+	proceeding
+
+	* screensaver-prefs-dialog.h (struct _PrefsDialogConfigOption):
+	New structure
+	(struct _ScreensaverPrefsDialog ): New member widget_db --
+	key-value database of PrefsDialogConfigOptions indexed by id
+	attribute from XML
+
 2000-07-31  Bradford Hovinen  <hovinen@helixcode.com>
 
 	* all: Removed ENABLE_{LIBGLADE|CAPPLET|PREVIEW} ifdefs

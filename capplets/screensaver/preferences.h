@@ -107,4 +107,6 @@ GList *screensaver_remove (Screensaver *saver, GList *screensavers);
 
 char *screensaver_get_desc (Screensaver *saver);
 
+char *screensaver_get_label (gchar *name);
+
 #endif /* __PREFERENCES_H */

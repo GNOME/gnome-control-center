@@ -35,8 +35,16 @@
 #define SCREENSAVER_PREFS_DIALOG_CLASS(klass)  GTK_CHECK_CLASS_CAST (klass, screensaver_prefs_dialog_get_type (), ScreensaverPrefsDialogClass)
 #define IS_SCREENSAVER_PREFS_DIALOG(obj)       GTK_CHECK_TYPE (obj, screensaver_prefs_dialog_get_type ())
 
+typedef struct _PrefsDialogWidgetSet PrefsDialogWidgetSet;
+
 typedef struct _ScreensaverPrefsDialog ScreensaverPrefsDialog;
 typedef struct _ScreensaverPrefsDialogClass ScreensaverPrefsDialogClass;
+
+struct _PrefsDialogWidgetSet
+{
+	GList       *widgets;
+	GtkWidget   *value_widget;
+};
 
 struct _ScreensaverPrefsDialog 
 {
@@ -44,8 +52,9 @@ struct _ScreensaverPrefsDialog
 
 	Screensaver *saver;
 	PrefsWidget *global_prefs_widget;
-	GladeXML    *prefs_widget_data;
+	xmlDocPtr    argument_doc;
 	xmlNodePtr   argument_data;
+	GTree       *widget_db;
 	GScanner    *cli_args_db;
 
 	GtkWidget   *settings_dialog_frame;
@@ -68,5 +77,6 @@ struct _ScreensaverPrefsDialogClass
 guint screensaver_prefs_dialog_get_type (void);
 
 GtkWidget *screensaver_prefs_dialog_new (Screensaver *saver);
+void screensaver_prefs_dialog_destroy   (ScreensaverPrefsDialog *dialog);
 
 #endif /* __SCREENSAVER_PREFS_DIALOG_H */

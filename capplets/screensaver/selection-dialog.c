@@ -26,6 +26,9 @@
 # include "config.h"
 #endif
 
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <dirent.h>
 #include <ctype.h>
 
 #include <gnome.h>
@@ -39,9 +42,15 @@ enum {
 	LAST_SIGNAL
 };
 
-static xmlDocPtr screensaver_doc;
-
 static gint selection_dialog_signals[LAST_SIGNAL] = { 0 };
+
+typedef struct _saver_entry_t 
+{
+	gchar *name;
+	gchar *label;
+} saver_entry_t;
+
+GList *known_savers;
 
 static void selection_dialog_init (SelectionDialog *dialog);
 static void selection_dialog_class_init (SelectionDialogClass *dialog);
@@ -54,6 +63,8 @@ static void selection_dialog_ok_cb       (GtkWidget *widget,
 					  SelectionDialog *dialog);
 static void selection_dialog_cancel_cb   (GtkWidget *widget,
 					  SelectionDialog *dialog);
+
+static GList *get_known_savers           (void);
 
 guint
 selection_dialog_get_type (void)
@@ -94,7 +105,8 @@ selection_dialog_init (SelectionDialog *dialog)
 
 	vbox = GTK_BOX (GNOME_DIALOG (dialog)->vbox);
 
-	label = gtk_label_new (_("Select the screensaver to run from the list below:"));
+	label = gtk_label_new (_("Select the screensaver to run from " \
+				 "the list below:"));
 	gtk_box_pack_start (vbox, label, FALSE, TRUE, 0);
 
 	scrolled_window = gtk_scrolled_window_new (NULL, NULL);
@@ -141,6 +153,8 @@ selection_dialog_class_init (SelectionDialogClass *class)
 				      selection_dialog_signals,
 				      LAST_SIGNAL);
 
+	known_savers = get_known_savers ();
+
 	class->ok_clicked = NULL;
 }
 
@@ -150,12 +164,7 @@ selection_dialog_new (PrefsWidget *prefs_widget)
 	GtkWidget *widget;
 
 	widget = gtk_type_new (selection_dialog_get_type ());
-
-	if (!screensaver_doc)
-		screensaver_doc = xmlParseFile (SSPROP_DATADIR "/hacks.xml");
-
 	place_screensaver_list (SELECTION_DIALOG (widget));
-
 	gtk_widget_show (widget);
 
 	return widget;
@@ -165,34 +174,25 @@ static void
 place_screensaver_list (SelectionDialog *dialog) 
 {
 	GtkWidget *item;
-	GList *item_list_head = NULL, *item_list_tail = NULL;
-	xmlNodePtr node;
+	GList *item_list_head = NULL, *item_list_tail = NULL, *node;
 	gchar *label;
+	saver_entry_t *entry;
 
-	node = xmlDocGetRootElement (screensaver_doc);
+	for (node = known_savers; node; node = node->next) {
+		entry = (saver_entry_t *) node->data;
+		item = gtk_list_item_new_with_label (entry->label);
+		gtk_widget_show (item);
+		gtk_object_set_data (GTK_OBJECT (item), "name", entry->name);
+		gtk_signal_connect (GTK_OBJECT (item), "select",
+				    GTK_SIGNAL_FUNC (select_program_cb), 
+				    dialog);
 
-	if (node) {
-		node = node->childs;
-
-		while (node) {
-			label = xmlGetProp (node, "name");
-			label[0] = toupper (label[0]);
-			item = gtk_list_item_new_with_label (label);
-			gtk_widget_show (item);
-			gtk_object_set_data (GTK_OBJECT (item), "node", node);
-			gtk_signal_connect (GTK_OBJECT (item), "select",
-					    GTK_SIGNAL_FUNC 
-					    (select_program_cb), 
-					    dialog);
-
-			item_list_tail = g_list_append (item_list_tail, item);
-			if (!item_list_head) item_list_head = item_list_tail;
-			item_list_tail = g_list_last (item_list_tail);
-			node = node->next;
-		}
+		item_list_tail = g_list_append (item_list_tail, item);
+		if (!item_list_head) item_list_head = item_list_tail;
+		item_list_tail = g_list_last (item_list_tail);
 	}
 
-	item = gtk_list_item_new_with_label ("Custom");
+	item = gtk_list_item_new_with_label (_("Custom"));
 	gtk_widget_show (item);
 	gtk_signal_connect (GTK_OBJECT (item), "select",
 			    GTK_SIGNAL_FUNC (select_program_cb), dialog);
@@ -208,8 +208,8 @@ static void
 select_program_cb (GtkListItem *item, SelectionDialog *dialog) 
 {
 	dialog->selected_program_item = item;
-	dialog->selected_program_node =
-		gtk_object_get_data (GTK_OBJECT (item), "node");
+	dialog->selected_name =
+		gtk_object_get_data (GTK_OBJECT (item), "name");
 }
 
 static void 
@@ -220,11 +220,11 @@ selection_dialog_ok_cb (GtkWidget *widget, SelectionDialog *dialog)
 	saver = screensaver_new ();
 	saver->label = g_strdup (_("New screensaver"));
 
-	if (dialog->selected_program_node) {
+	if (dialog->selected_name) {
 		saver->name = 
-			g_strdup (xmlGetProp (dialog->selected_program_node, 
-				   "name"));
-		saver->command_line = g_strconcat (saver->name, " -root", NULL);
+			g_strdup (dialog->selected_name);
+		saver->command_line = 
+			g_strconcat (saver->name, " -root", NULL);
 	}
 
 	gtk_signal_emit (GTK_OBJECT (dialog),
@@ -236,4 +236,75 @@ static void
 selection_dialog_cancel_cb (GtkWidget *widget, SelectionDialog *dialog) 
 {
 	gnome_dialog_close (GNOME_DIALOG (dialog));
+}
+
+static gint 
+node_compare (gconstpointer a, gconstpointer b) 
+{
+	return strcmp (((saver_entry_t *) a)->label, 
+		       ((saver_entry_t *) b)->label);
+}
+
+static GList *
+get_known_savers (void)
+{
+	GList *list_head, *list_tail;
+        DIR *parent_dir;
+        struct dirent *child_dir;
+        struct stat filedata;
+	gchar *fullpath;
+	saver_entry_t *entry;
+	char *tmp, *name;
+
+	if (known_savers) return known_savers;
+
+        parent_dir = opendir (SSPROP_DATADIR "/screensavers");
+        if (parent_dir == NULL)
+                return NULL;
+
+	list_head = list_tail = NULL;
+
+        while ((child_dir = readdir (parent_dir)) != NULL) {
+                if (child_dir->d_name[0] != '.') {
+			fullpath = g_concat_dir_and_file
+				(SSPROP_DATADIR "/screensavers",
+				 child_dir->d_name);
+
+                        if (stat (fullpath, &filedata) != -1) {
+                                if (!S_ISDIR (filedata.st_mode)) {
+					name = g_strdup (child_dir->d_name);
+					tmp = strstr (name, ".xml");
+					if (tmp) {
+						*tmp = '\0';
+
+						entry = g_new0 
+							(saver_entry_t, 1);
+						entry->name = name;
+						entry->label =
+							screensaver_get_label 
+							(name);
+					} else {
+						g_free (name);
+					}
+                                } else {
+					entry = NULL;
+				}
+
+				if (entry) {
+					list_tail = g_list_append
+						(list_tail, entry);
+					if (!list_head)
+						list_head = list_tail;
+					else
+						list_tail = list_tail->next;
+				}
+                        }
+
+			g_free (fullpath);
+                }
+        }
+        
+        closedir (parent_dir);
+
+	list_head = g_list_sort (list_head, node_compare);
 }

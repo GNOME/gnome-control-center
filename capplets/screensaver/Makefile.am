@@ -8,15 +8,15 @@ Applications_DATA = \
 
 SUBDIRS = screensavers
 
-EXTRA_DIST = ChangeLog TODO $(Applications_DATA) $(pixmap_DATA) \
+EXTRA_DIST = ChangeLog $(Applications_DATA) $(pixmap_DATA) \
 	checked.xpm unchecked.xpm checked-disabled.xpm unchecked-disabled.xpm
 
 INCLUDES = \
         -DGNOMELOCALEDIR=\""$(datadir)/locale"\" \
-	-DSSPROP_DATADIR=\""${prefix}/share/screensaver-properties"\" \
+	-DGNOME_ICONDIR=\""${prefix}/share/pixmaps"\" \
+	-DSSPROP_DATADIR=\""${prefix}/share"\" \
 	-DG_LOG_DOMAIN=\"screensaver-properties\" \
 	$(GNOME_INCLUDEDIR) \
-	$(LIBGLADE_CFLAGS) \
 	$(XML_CFLAGS) \
 	-I$(top_srcdir)/
 	-I../intl
@@ -43,8 +43,7 @@ screensaver_properties_capplet_LDADD = \
 	$(GNOME_LIBDIR) \
 	$(GNOMEUI_LIBS) \
 	$(ORBIT_LIBS) \
-	$(LIBGLADE_LIBS) \
 	$(GNOME_XML_LIB) \
 	-lXt \
 	-lgdk_pixbuf \
-	../../control-center/libcapplet.la
+	../../libcapplet/libcapplet.la

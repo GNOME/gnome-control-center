@@ -1,4 +1,8 @@
+SUBDIRS = fr
+
 Screensaversdir = $(datadir)/screensavers
 Screensavers_DATA = \
-	hacks.xml \
-	qix-settings.glade
+	qix.xml \
+	attraction.xml
+
+EXTRA_DIST = $(Screensavers_DATA)

@@ -28,8 +28,10 @@
 #include <gnome.h>
 #include <parser.h>
 #include <sys/stat.h>
+#include <ctype.h>
+#include <string.h>
 
-#include <glade/glade.h>
+#include <tree.h>
 
 #include "screensaver-prefs-dialog.h"
 #include "preferences.h"
@@ -52,10 +54,16 @@ enum {
 
 static gint screensaver_prefs_dialog_signals[LAST_SIGNAL] = { 0 };
 
+static GnomeDialogClass *parent_class;
+
 static void screensaver_prefs_dialog_init (ScreensaverPrefsDialog *dialog);
 static void screensaver_prefs_dialog_class_init (ScreensaverPrefsDialogClass *dialog);
 
-static void set_widgets_sensitive        (GladeXML *prop_data, 
+static void free_set_cb                  (gchar *key, 
+					  PrefsDialogWidgetSet *set, 
+					  gpointer data);
+
+static void set_widgets_sensitive        (GTree *widget_db,
 					  gchar *widgets_str, 
 					  gboolean s);
 
@@ -64,39 +72,69 @@ static void toggle_check_cb              (GtkWidget *widget,
 					  xmlNodePtr node);
 
 static gchar *write_boolean              (xmlNodePtr arg_def, 
-					  GladeXML *prop_data);
+					  GTree *widget_db);
 static gchar *write_number               (xmlNodePtr arg_def, 
-					  GladeXML *prop_data);
+					  GTree *widget_db);
 static gchar *write_select               (xmlNodePtr arg_def, 
-					  GladeXML *prop_data);
+					  GTree *widget_db);
 static gchar *write_command_line         (gchar *name, 
 					  xmlNodePtr arg_def, 
-					  GladeXML *prop_data);
+					  GTree *widget_db);
 
-static GScanner *read_command_line     (char *command_line);
-static xmlNodePtr get_argument_data      (Screensaver *saver);
-static GladeXML *get_screensaver_widget  (Screensaver *saver,
-					  xmlNodePtr argument_data);
+static GScanner *read_command_line       (char *command_line);
+static xmlDocPtr get_argument_data       (Screensaver *saver);
+
+static PrefsDialogWidgetSet *get_spinbutton (xmlNodePtr node,
+					     GtkWidget **widget);
+static PrefsDialogWidgetSet *get_check_button (ScreensaverPrefsDialog *dialog,
+					       xmlNodePtr node, 
+					       GtkWidget **widget);
+static PrefsDialogWidgetSet *get_select_widget (ScreensaverPrefsDialog *dialog,
+						xmlNodePtr select_data, 
+						GtkWidget **widget);
+
+static PrefsDialogWidgetSet *place_number (GtkTable *table, 
+					   xmlNodePtr node, 
+					   gint *row);
+static PrefsDialogWidgetSet *place_boolean (ScreensaverPrefsDialog *dialog,
+					    GtkTable *table, 
+					    xmlNodePtr node, 
+					    gint *row);
+static void place_hgroup                 (ScreensaverPrefsDialog *dialog,
+					  GtkTable *table, 
+					  GTree *widget_db, 
+					  xmlNodePtr hgroup_data, 
+					  gint *row);
+static PrefsDialogWidgetSet *place_select (ScreensaverPrefsDialog *dialog,
+					   GtkTable *table, 
+					   xmlNodePtr node, 
+					   gint *row);
+
+static void populate_table               (ScreensaverPrefsDialog *dialog,
+					  GtkTable *table);
+
+static GtkWidget *get_screensaver_widget (ScreensaverPrefsDialog *dialog);
+
+static GtkWidget *get_basic_screensaver_widget 
+                                         (ScreensaverPrefsDialog *dialog);
 
 static gint arg_is_set                   (xmlNodePtr argument_data, 
 					  GScanner *cli_db);
-static void read_boolean                 (GladeXML *widget_data, 
+static void read_boolean                 (GTree *widget_db, 
 					  xmlNodePtr argument_data,
 					  GScanner *cli_db);
-static void read_number                  (GladeXML *widget_data, 
+static void read_number                  (GTree *widget_db, 
 					  xmlNodePtr argument_data,
 					  GScanner *cli_db);
-static void read_select                  (GladeXML *widget_data, 
+static void read_select                  (GTree *widget_db, 
 					  xmlNodePtr argument_data, 
 					  GScanner *cli_db);
-static void place_screensaver_properties (ScreensaverPrefsDialog *dialog);
+static void place_screensaver_properties (ScreensaverPrefsDialog *dialog,
+					  xmlNodePtr argument_data);
 
 static gboolean arg_mapping_exists       (Screensaver *saver);
 
 static void store_cli                    (ScreensaverPrefsDialog *dialog);
-
-static GtkWidget *get_basic_screensaver_widget (ScreensaverPrefsDialog *dialog,
-						Screensaver *saver);
 
 static void demo_cb                      (GtkWidget *widget,
 					  ScreensaverPrefsDialog *dialog);
@@ -136,7 +174,7 @@ screensaver_prefs_dialog_init (ScreensaverPrefsDialog *dialog)
 {
 	GtkWidget *global_vbox, *vbox, *hbox, *frame, *label;
 
-	gtk_window_set_policy (GTK_WINDOW (dialog), FALSE, FALSE, FALSE);
+	gtk_window_set_policy (GTK_WINDOW (dialog), FALSE, TRUE, TRUE);
 
 	global_vbox = GNOME_DIALOG (dialog)->vbox;
 
@@ -213,13 +251,18 @@ screensaver_prefs_dialog_class_init (ScreensaverPrefsDialogClass *class)
 				      screensaver_prefs_dialog_signals,
 				      LAST_SIGNAL);
 
+	object_class->destroy = 
+		(void (*) (GtkObject *)) screensaver_prefs_dialog_destroy;
+
 	class->ok_clicked = NULL;
+
+	parent_class = gtk_type_class (gnome_dialog_get_type ());
 }
 
 GtkWidget *
 screensaver_prefs_dialog_new (Screensaver *saver) 
 {
-	GtkWidget *widget;
+	GtkWidget *widget, *settings_widget;
 	ScreensaverPrefsDialog *dialog;
 	char *title;
 
@@ -235,13 +278,19 @@ screensaver_prefs_dialog_new (Screensaver *saver)
 	if (arg_mapping_exists (saver)) {
 		dialog->cli_args_db = 
 			read_command_line (saver->command_line);
-		dialog->argument_data = get_argument_data (saver);
-		dialog->prefs_widget_data = 
-			get_screensaver_widget (saver, 
-						dialog->argument_data);
+		dialog->argument_doc = get_argument_data (saver);
+
+		if (dialog->argument_doc)
+			dialog->argument_data = 
+				xmlDocGetRootElement (dialog->argument_doc);
+	}
+
+	if (dialog->cli_args_db && dialog->argument_data) {
+		settings_widget = 
+			get_screensaver_widget (dialog);
 	} else {
-		dialog->basic_widget = 
-			get_basic_screensaver_widget (dialog, saver);
+		dialog->basic_widget = settings_widget =
+			get_basic_screensaver_widget (dialog);
 	}
 
 	gtk_window_set_title (GTK_WINDOW (dialog), title);
@@ -255,24 +304,45 @@ screensaver_prefs_dialog_new (Screensaver *saver)
 	gnome_dialog_button_connect (GNOME_DIALOG (dialog), 3, 
 				     screensaver_prop_cancel_cb, dialog);
 
-	if (dialog->basic_widget)
-		gtk_container_add (GTK_CONTAINER
-				   (dialog->settings_dialog_frame),
-				   dialog->basic_widget);
-	else if (dialog->prefs_widget_data)
-		gtk_container_add (GTK_CONTAINER 
-				   (dialog->settings_dialog_frame), 
-				   glade_xml_get_widget 
-				   (dialog->prefs_widget_data,
-				    "widget"));
+	gtk_container_add (GTK_CONTAINER (dialog->settings_dialog_frame),
+			   settings_widget);
 
 	gtk_label_set_text (GTK_LABEL (dialog->description), 
 			    screensaver_get_desc (saver));
 
 	if (dialog->argument_data)
-		place_screensaver_properties (dialog);
+		place_screensaver_properties (dialog, dialog->argument_data);
 
 	return widget;
+}
+
+void
+screensaver_prefs_dialog_destroy (ScreensaverPrefsDialog *dialog) 
+{
+	g_return_if_fail (dialog != NULL);
+	g_return_if_fail (IS_SCREENSAVER_PREFS_DIALOG (dialog));
+
+	if (dialog->argument_doc)
+		xmlFreeDoc (dialog->argument_doc);
+
+	if (dialog->widget_db) {
+		g_tree_traverse (dialog->widget_db, 
+			 (GTraverseFunc) free_set_cb,
+			 G_IN_ORDER, NULL);
+		g_tree_destroy (dialog->widget_db);
+	}
+
+	if (dialog->cli_args_db)
+		g_scanner_destroy (dialog->cli_args_db);
+
+	GTK_OBJECT_CLASS (parent_class)->destroy (GTK_OBJECT (dialog));
+}
+
+static void
+free_set_cb (gchar *key, PrefsDialogWidgetSet *set, gpointer data) 
+{
+	g_list_free (set->widgets);
+	g_free (set);
 }
 
 /*****************************************************************************/
@@ -287,19 +357,29 @@ screensaver_prefs_dialog_new (Screensaver *saver)
  */
 
 static void
-set_widgets_sensitive (GladeXML *prop_data, gchar *widgets_str, gboolean s) 
+set_widgets_sensitive (GTree *widget_db,
+		       gchar *widgets_str, gboolean s) 
 {
-	char **widgets;
+	char **widgets, *str;
 	int i;
-	GtkWidget *widget;
+	PrefsDialogWidgetSet *set;
+	GList *node;
+
+	g_return_if_fail (widget_db != NULL);
 
 	if (!widgets_str) return;
 
 	widgets = g_strsplit (widgets_str, ",", -1);
 
 	for (i = 0; widgets[i]; i++) {
-		widget = glade_xml_get_widget (prop_data, widgets[i]);
-		if (widget) gtk_widget_set_sensitive (widget, s);
+		str = widgets[i];
+
+		while (isspace (*str)) str++;
+		set = g_tree_lookup (widget_db, str);
+		if (!set) continue;
+
+		for (node = set->widgets; node; node = node->next)
+			gtk_widget_set_sensitive (GTK_WIDGET (node->data), s);
 	}
 
 	g_strfreev (widgets);
@@ -317,27 +397,24 @@ set_widgets_sensitive (GladeXML *prop_data, gchar *widgets_str, gboolean s)
 static void
 activate_option_cb (GtkWidget *widget) 
 {
-	GladeXML *prop_data;
-	xmlNodePtr argument_data, option_def, node;
+	ScreensaverPrefsDialog *dialog;
+	xmlNodePtr select_data, option_def, node;
 
-	prop_data = gtk_object_get_data (GTK_OBJECT (widget),
-					 "prop_data");
-	argument_data = gtk_object_get_data (GTK_OBJECT (widget),
-					     "argument_data");
-	option_def = gtk_object_get_data (GTK_OBJECT (widget),
-					  "option_def");
+	dialog = gtk_object_get_data (GTK_OBJECT (widget), "dialog");
+	option_def = gtk_object_get_data (GTK_OBJECT (widget), "option_def");
+	select_data = gtk_object_get_data (GTK_OBJECT (widget), "select_data");
 
-	node = argument_data->childs;
+	node = select_data->childs;
 
 	while (node) {
 		if (node != option_def)
-			set_widgets_sensitive (prop_data, 
+			set_widgets_sensitive (dialog->widget_db, 
 					       xmlGetProp (node, "enable"), 
 					       FALSE);
 		node = node->next;
 	}
 
-	set_widgets_sensitive (prop_data, 
+	set_widgets_sensitive (dialog->widget_db, 
 			       xmlGetProp (option_def, "enable"), TRUE);
 }
 
@@ -350,16 +427,14 @@ activate_option_cb (GtkWidget *widget)
 static void
 toggle_check_cb (GtkWidget *widget, xmlNodePtr node) 
 {
-	GladeXML *prop_data;
+	ScreensaverPrefsDialog *dialog;
 	gboolean set;
 
-	prop_data = gtk_object_get_data (GTK_OBJECT (widget),
-					 "prop_data");
+	dialog = gtk_object_get_data (GTK_OBJECT (widget), "dialog");
 	set = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
 
-	set_widgets_sensitive (prop_data, 
-			       xmlGetProp (node, "enable"),
-			       set);
+	set_widgets_sensitive (dialog->widget_db, 
+			       xmlGetProp (node, "enable"), set);
 }
 
 /*****************************************************************************/
@@ -367,45 +442,44 @@ toggle_check_cb (GtkWidget *widget, xmlNodePtr node)
 /*****************************************************************************/
 
 static gchar *
-write_boolean (xmlNodePtr argument_data, GladeXML *prop_data) 
+write_boolean (xmlNodePtr argument_data, GTree *widget_db) 
 {
-	char *widget_name;
-	GtkWidget *widget;
+	PrefsDialogWidgetSet *set;
+	char *id;
 
-	widget_name = g_strconcat (xmlGetProp (argument_data, "id"),
-				   "_widget", NULL);
-	widget = glade_xml_get_widget (prop_data, widget_name);
-	g_free (widget_name);
+	if (!(id = xmlGetProp (argument_data, "id"))) return;
+	set = g_tree_lookup (widget_db, id);
 
-	if (!widget || !GTK_WIDGET_IS_SENSITIVE (widget)) return NULL;
+	if (!set || !GTK_WIDGET_IS_SENSITIVE (set->value_widget)) return NULL;
 
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)))
+	if (gtk_toggle_button_get_active 
+	    (GTK_TOGGLE_BUTTON (set->value_widget)))
 		return xmlGetProp (argument_data, "arg-set");
 	else 
 		return NULL;
 }
 
 static gchar *
-write_number (xmlNodePtr argument_data, GladeXML *prop_data)
+write_number (xmlNodePtr argument_data, GTree *widget_db)
 {
-	char *widget_name;
-	GtkWidget *widget;
+	PrefsDialogWidgetSet *set;
 	GtkAdjustment *adjustment = NULL;
 	gfloat value = 0.0;
 	gchar *to_cli_expr;
+	char *id, *arg, *arg_str, *ret_str;
+	char *pos;
 
-	widget_name = g_strconcat (xmlGetProp (argument_data, "id"),
-				   "_widget", NULL);
-	widget = glade_xml_get_widget (prop_data, widget_name);
-	g_free (widget_name);
+	if (!(id = xmlGetProp (argument_data, "id"))) return;
+	set = g_tree_lookup (widget_db, id);
 
-	if (!widget || !GTK_WIDGET_IS_SENSITIVE (widget)) return NULL;
+	if (!set || !GTK_WIDGET_IS_SENSITIVE (set->value_widget)) return NULL;
 
-	if (GTK_IS_RANGE (widget))
-		adjustment = gtk_range_get_adjustment (GTK_RANGE (widget));
-	else if (GTK_IS_SPIN_BUTTON (widget))
+	if (GTK_IS_RANGE (set->value_widget))
+		adjustment = gtk_range_get_adjustment 
+			(GTK_RANGE (set->value_widget));
+	else if (GTK_IS_SPIN_BUTTON (set->value_widget))
 		adjustment = gtk_spin_button_get_adjustment 
-			(GTK_SPIN_BUTTON (widget));
+			(GTK_SPIN_BUTTON (set->value_widget));
 	if (adjustment)
 		value = adjustment->value;
 
@@ -413,7 +487,20 @@ write_number (xmlNodePtr argument_data, GladeXML *prop_data)
 	if (to_cli_expr)
 		value = parse_expr (to_cli_expr, value);
 
-	return g_strdup_printf (xmlGetProp (argument_data, "arg"), (int) value);
+	arg = xmlGetProp (argument_data, "arg");
+
+	if (!arg) return NULL;
+	arg = g_strdup (arg);
+
+	pos = strchr (arg, '%');
+
+	if (!pos) return arg;
+	*pos = '\0';
+
+	ret_str = g_strdup_printf ("%s%d%s", arg, (int) value, pos + 1);
+	g_free (arg);
+
+	return ret_str;
 }
 
 /* Note to readers: *please* ignore the following function, for the
@@ -425,26 +512,26 @@ write_number (xmlNodePtr argument_data, GladeXML *prop_data)
  */
 
 static gchar *
-write_select (xmlNodePtr argument_data, GladeXML *prop_data) 
+write_select (xmlNodePtr argument_data, GTree *widget_db) 
 {
+	PrefsDialogWidgetSet *set;
 	xmlNodePtr node;
 	int i = 0;
-	GtkWidget *widget, *menu, *active;
-	char *widget_name;
+	GtkWidget *menu, *active;
 	GList *menu_item;
+	char *id;
 
 	node = argument_data->childs;
-	widget_name = g_strconcat (xmlGetProp (argument_data, "id"),
-				   "_widget", NULL);
-	widget = glade_xml_get_widget (prop_data, widget_name);
-	if (!widget || !GTK_WIDGET_IS_SENSITIVE (widget)) return NULL;
-	menu = gtk_option_menu_get_menu (GTK_OPTION_MENU (widget));
+	if (!(id = xmlGetProp (argument_data, "id"))) return;
+	set = g_tree_lookup (widget_db, id);
+
+	if (!set || !GTK_WIDGET_IS_SENSITIVE (set->value_widget)) return NULL;
+	menu = gtk_option_menu_get_menu (GTK_OPTION_MENU (set->value_widget));
 	menu_item = GTK_MENU_SHELL (menu)->children;
 	active = gtk_menu_get_active (GTK_MENU (menu));
 
 	while (node && menu_item) {
-		if (active == menu_item->data &&
-		    !xmlGetProp (node, "no-output"))
+		if (active == menu_item->data)
 			return xmlGetProp (node, "arg-set");
 
 		node = node->next; menu_item = menu_item->next; i++;
@@ -460,33 +547,36 @@ write_select (xmlNodePtr argument_data, GladeXML *prop_data)
  */
 
 static gchar *
-write_command_line (gchar *name, xmlNodePtr argument_data, GladeXML *prop_data) 
+write_command_line (gchar *name, xmlNodePtr argument_data, GTree *widget_db) 
 {
 	GString *line;
 	xmlNodePtr node;
 	gchar *arg, *ret;
+	gboolean flag = FALSE;
 
 	line = g_string_new (name);
 	node = argument_data->childs;
 
 	for (node = argument_data->childs; node; node = node->next) {
-		if (xmlGetProp (node, "no-output"))
-			continue;
-
 		if (!strcmp (node->name, "boolean"))
-			arg = write_boolean (node, prop_data);
+			arg = write_boolean (node, widget_db);
 		else if (!strcmp (node->name, "number"))
-			arg = write_number (node, prop_data);
+			arg = write_number (node, widget_db);
 		else if (!strcmp (node->name, "select"))
-			arg = write_select (node, prop_data);
+			arg = write_select (node, widget_db);
 		else if (!strcmp (node->name, "command"))
 			arg = xmlGetProp (node, "arg");
+		else if (!strcmp (node->name, "hgroup"))
+			arg = write_command_line (NULL, node, widget_db);
 		else
 			arg = NULL;
 
 		if (arg) {
-			g_string_append (line, " ");
+			if (name || flag) g_string_append (line, " ");
 			g_string_append (line, arg);
+			flag = TRUE;
+
+			if (!strcmp (node->name, "number")) g_free (arg);
 		}
 	}
 
@@ -547,293 +637,457 @@ read_command_line (char *command_line)
 /*                    Getting the argument definition data                   */
 /*****************************************************************************/
 
-static xmlNodePtr
+static xmlDocPtr
 get_argument_data (Screensaver *saver) 
 {
 	xmlDocPtr doc;
-	xmlNodePtr root_node, node;
-	gchar *name;
+	xmlNodePtr root_node;
+	gchar *file_name;
+	gchar *lang;
 
-	doc = xmlParseFile (SSPROP_DATADIR "/hacks.xml");
-	root_node = xmlDocGetRootElement (doc);
-	g_assert (root_node != NULL);
-	node = root_node->childs;
+	g_return_val_if_fail (saver != NULL, NULL);
+	g_return_val_if_fail (saver->name != NULL, NULL);
 
-	while (node) {
-		name = xmlGetProp (node, "name");
-		if (!strcmp (name, saver->name)) break;
-		node = node->next;
+	lang = g_getenv ("LANG");
+	if (lang) 
+		lang = g_strconcat (lang, "/", NULL);
+	else
+		lang = g_strdup ("");
+
+	file_name = g_strconcat (SSPROP_DATADIR "/screensavers/",
+				 lang, saver->name, ".xml", NULL);
+	doc = xmlParseFile (file_name);
+	g_free (file_name);
+
+	/* Fall back on default language if given language is not found */
+	if (!doc && *lang != '\0') {
+		file_name = g_strconcat (SSPROP_DATADIR "/screensavers/",
+					 saver->name, ".xml", NULL);
+		doc = xmlParseFile (file_name);
+		g_free (file_name);
 	}
 
-	return node;
+	g_free (lang);
+
+	return doc;
 }
 
 /*****************************************************************************/
 /*                       Creating the dialog proper                          */
 /*****************************************************************************/
 
-static GladeXML *
-get_screensaver_widget (Screensaver *saver, 
-			xmlNodePtr argument_data) 
+/* Form a spinbutton widget and return the widget set */
+
+static PrefsDialogWidgetSet *
+get_spinbutton (xmlNodePtr node, GtkWidget **widget) 
 {
-	GladeXML *screensaver_prop_data;
-	gchar *file_name;
-	
-	file_name = g_strconcat (SSPROP_DATADIR "/",
-				 saver->name, "-settings.glade", NULL);
-	screensaver_prop_data = glade_xml_new (file_name, "widget");
-	g_free (file_name);
-
-	return screensaver_prop_data;
-}
-
-/*****************************************************************************/
-/*                  Setting dialog properties from the CLI                   */
-/*****************************************************************************/
-
-/* arg_is_set
- *
- * Determines if an argument or set of arguments specified by the
- * argument definition entry is set on a command line. Returns -1 if
- * the argument is definitely not set, 0 if it may be, and 1 if it
- * definitely is.
- */
-
-static gint
-arg_is_set (xmlNodePtr argument_data, GScanner *cli_db) 
-{
-	char *test;
-
-	test = xmlGetProp (argument_data, "test");
-
-	if (test) {
-		return parse_sentence (test, cli_db) ? 1 : -1;
-	} else {
-		return 0;
-	}
-}
-
-static void
-read_boolean (GladeXML *widget_data, xmlNodePtr argument_data,
-	      GScanner *cli_db) 
-{
-	char *widget_name;
-	GtkWidget *widget;
-	gint found;
-
-	found = arg_is_set (argument_data, cli_db);
-
-	widget_name = g_strconcat (xmlGetProp (argument_data, "id"),
-				   "_widget", NULL);
-	widget = glade_xml_get_widget (widget_data, widget_name);
-
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), 
-				      found >= 0);
-
-	gtk_object_set_data (GTK_OBJECT (widget), "prop_data",
-			     widget_data);
-	gtk_signal_connect (GTK_OBJECT (widget), "toggled",
-			    GTK_SIGNAL_FUNC (toggle_check_cb),
-			    argument_data);
-
-	if (found >= 0) {
-		set_widgets_sensitive (widget_data,
-				       xmlGetProp (argument_data, "enable"),
-				       TRUE);
-	} else {
-		set_widgets_sensitive (widget_data,
-				       xmlGetProp (argument_data, "enable"),
-				       FALSE);
-	}
-}
-
-static void
-read_number (GladeXML *widget_data, xmlNodePtr argument_data,
-	     GScanner *cli_db) 
-{
-	char *arg;
-	char *arg_line;
-	char **args;
-	char *widget_name;
-	char *from_cli_conv;
-	GtkWidget *widget;
+	char *label_str, *low_val, *high_val, *default_val;
+	gdouble low, high, defaultv;
+	GtkWidget *hbox, *label, *spinbutton;
 	GtkAdjustment *adjustment;
-	gfloat value;
+	PrefsDialogWidgetSet *set;
 
-	arg_line = xmlGetProp (argument_data, "arg");
-	args = g_strsplit (arg_line, " ", -1);
+	g_return_val_if_fail (widget != NULL, NULL);
+	g_return_val_if_fail (node != NULL, NULL);
 
-	arg = g_scanner_scope_lookup_symbol (cli_db, 0, args[0] + 1);
-	if (!arg) return;
+	label_str = xmlGetProp (node, "label");
+	low_val = xmlGetProp (node, "low");
+	high_val = xmlGetProp (node, "high");
+	default_val = xmlGetProp (node, "default");
 
-	widget_name = g_strconcat (xmlGetProp (argument_data, "id"),
-				   "_widget", NULL);
-	widget = glade_xml_get_widget (widget_data, widget_name);
+	if (!low_val || !high_val) return NULL;
 
-	from_cli_conv = xmlGetProp (argument_data, "from-cli-conv");
+	low = atof (low_val);
+	high = atof (high_val);
 
-	if (from_cli_conv)
-		value = parse_expr (from_cli_conv, atof (arg));
+	if (default_val)
+		defaultv = atof (default_val);
 	else
-		value = atof (arg);
+		defaultv = (high - low) / 2;
 
-	if (GTK_IS_RANGE (widget)) {
-		adjustment = gtk_range_get_adjustment (GTK_RANGE (widget));
-		gtk_adjustment_set_value (adjustment, value);
-	}
-	else if (GTK_IS_SPIN_BUTTON (widget)) {
-		gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), value);
+	adjustment = GTK_ADJUSTMENT
+		(gtk_adjustment_new (defaultv, low, high, 1.0, 10.0, 10.0));
+	spinbutton = gtk_spin_button_new (adjustment, 1.0, 0);
+	
+	set = g_new0 (PrefsDialogWidgetSet, 1);
+	set->value_widget = spinbutton;
+
+	if (label_str) {
+		hbox = gtk_hbox_new (FALSE, 5);
+		label = gtk_label_new (label_str);
+		gtk_misc_set_alignment (GTK_MISC (label), 1.0, 0.5);
+		gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
+		gtk_box_pack_start (GTK_BOX (hbox), spinbutton, 
+				    FALSE, TRUE, 0);
+
+		set->widgets = g_list_append (NULL, hbox);
+		g_list_append (set->widgets, label);
+		g_list_append (set->widgets, spinbutton);
+
+		*widget = hbox;
+	} else {
+		set->widgets = g_list_append (NULL, spinbutton);
+		*widget = spinbutton;
 	}
 
-	g_strfreev (args);
+	return set;
 }
 
-static void
-read_select (GladeXML *widget_data, xmlNodePtr argument_data, 
-	     GScanner *cli_db)
+/* Form a check button widget for a boolean value */
+
+static PrefsDialogWidgetSet *
+get_check_button (ScreensaverPrefsDialog *dialog, xmlNodePtr node, 
+		  GtkWidget **widget) 
 {
+	char *label;
+	GtkWidget *checkbutton;
+	PrefsDialogWidgetSet *set;
+
+	g_return_val_if_fail (widget != NULL, NULL);
+	g_return_val_if_fail (node != NULL, NULL);
+
+	label = xmlGetProp (node, "label");
+
+	if (!label) return NULL;
+
+	checkbutton = gtk_check_button_new_with_label (label);
+
+	set = g_new0 (PrefsDialogWidgetSet, 1);
+	set->widgets = g_list_append (NULL, checkbutton);
+	set->value_widget = checkbutton;
+
+	gtk_object_set_data (GTK_OBJECT (checkbutton), "dialog", dialog);
+	gtk_object_set_data (GTK_OBJECT (checkbutton), "option_def", node);
+
+	gtk_signal_connect (GTK_OBJECT (checkbutton), "toggled",
+			    GTK_SIGNAL_FUNC (toggle_check_cb), node);
+
+	*widget = checkbutton;
+
+	return set;
+}
+
+/* Form a selection widget for an option menu */
+
+static PrefsDialogWidgetSet *
+get_select_widget (ScreensaverPrefsDialog *dialog, xmlNodePtr select_data, 
+		   GtkWidget **widget) 
+{
+	char *label_str, *option_str;
+	GtkWidget *hbox, *label, *menu, *menu_item, *option_menu;
+	PrefsDialogWidgetSet *set;
 	xmlNodePtr node;
-	gchar *widget_name;
-	GtkWidget *widget, *menu;
-	GList *menu_item_node;
-	gint found, max_found = -1;
-	int set_idx = 0, i = 0;
 
-	widget_name = g_strconcat (xmlGetProp (argument_data, "id"),
-				   "_widget", NULL);
-	widget = glade_xml_get_widget (widget_data, widget_name);
-	menu = gtk_option_menu_get_menu (GTK_OPTION_MENU (widget));
+	g_return_val_if_fail (widget != NULL, NULL);
+	g_return_val_if_fail (node != NULL, NULL);
 
-	node = argument_data->childs;
+	label_str = xmlGetProp (select_data, "label");
 
-	/* Get the index of the selected option */
+	option_menu = gtk_option_menu_new ();
+	menu = gtk_menu_new ();
+	
+	set = g_new0 (PrefsDialogWidgetSet, 1);
+	set->value_widget = option_menu;
 
-	while (node) {
-		found = arg_is_set (node, cli_db);
+	gtk_object_set_data (GTK_OBJECT (option_menu), "dialog", dialog);
+	gtk_object_set_data (GTK_OBJECT (option_menu), "option_def", 
+			     select_data);
 
-		if (found > max_found) {
-			set_idx = i;
-			max_found = found;
-		}
+	for (node = select_data->childs; node; node = node->next) {
+		option_str = xmlGetProp (node, "label");
+		if (!option_str) continue;
 
-		node = node->next; i++;
-	}
-
-	/* Enable widgets enabled by selected option and disable
-	 * widgets enabled by other options; connect select and
-	 * deselect signals to do the same when an option is selected 
-	 */
-
-	menu_item_node = GTK_MENU_SHELL (menu)->children;
-	node = argument_data->childs; i = 0;
-
-	while (node) {
-		if (i == set_idx) {
-			gtk_option_menu_set_history 
-				(GTK_OPTION_MENU (widget), i);
-			set_widgets_sensitive (widget_data,
-					       xmlGetProp (node, "enable"),
-					       TRUE);
-		} else {
-			set_widgets_sensitive (widget_data,
-					       xmlGetProp (node, "enable"),
-					       FALSE);
-		}
-
-		gtk_object_set_data (GTK_OBJECT (menu_item_node->data),
-				     "prop_data", widget_data);
-		gtk_object_set_data (GTK_OBJECT (menu_item_node->data),
+		menu_item = gtk_menu_item_new_with_label (option_str);
+		gtk_widget_show (menu_item);
+		gtk_object_set_data (GTK_OBJECT (menu_item), "dialog", dialog);
+		gtk_object_set_data (GTK_OBJECT (menu_item),
 				     "option_def", node);
-		gtk_object_set_data (GTK_OBJECT (menu_item_node->data),
-				     "argument_data", argument_data);
+		gtk_object_set_data (GTK_OBJECT (menu_item),
+				     "select_data", select_data);
 
-		gtk_signal_connect (GTK_OBJECT (menu_item_node->data),
+		gtk_signal_connect (GTK_OBJECT (menu_item),
 				    "activate", 
 				    GTK_SIGNAL_FUNC (activate_option_cb),
 				    NULL);
 
-		node = node->next; menu_item_node = menu_item_node->next; i++;
+		gtk_menu_append (GTK_MENU (menu), menu_item);
 	}
-}
 
-static void
-place_screensaver_properties (ScreensaverPrefsDialog *dialog)
-{
-	xmlNodePtr node;
+	gtk_option_menu_set_menu (GTK_OPTION_MENU (option_menu), menu);
 
-	node = dialog->argument_data->childs;
+	if (label_str) {
+		hbox = gtk_hbox_new (FALSE, 5);
+		label = gtk_label_new (label_str);
+		gtk_misc_set_alignment (GTK_MISC (label), 1.0, 0.5);
+		gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
+		gtk_box_pack_start (GTK_BOX (hbox), option_menu, 
+				    FALSE, TRUE, 0);
 
-	while (node) {
-		if (!strcmp (node->name, "boolean"))
-			read_boolean (dialog->prefs_widget_data, node, 
-				      dialog->cli_args_db);
-		else if (!strcmp (node->name, "number"))
-			read_number (dialog->prefs_widget_data, node, 
-				     dialog->cli_args_db);
-		else if (!strcmp (node->name, "select"))
-			read_select (dialog->prefs_widget_data, node, 
-				     dialog->cli_args_db);
+		set->widgets = g_list_append (NULL, hbox);
+		g_list_append (set->widgets, label);
+		g_list_append (set->widgets, option_menu);
 
-		node = node->next;
-	}
-}
-
-static gboolean
-arg_mapping_exists (Screensaver *saver) 
-{
-	struct stat buf;
-	char *filename;
-	gboolean ret;
-
-	if (!saver->name) return FALSE;
-
-	filename = g_strconcat (SSPROP_DATADIR "/",
-				saver->name, "-settings.glade", NULL);
-
-	if (stat (filename, &buf))
-		ret = FALSE;
-	else
-		ret = TRUE;
-
-	g_free (filename);
-	return ret;
-}
-
-static void
-store_cli (ScreensaverPrefsDialog *dialog) 
-{
-	char *str;
-
-	g_free (dialog->saver->command_line);
-
-	if (dialog->prefs_widget_data) {
-		dialog->saver->command_line = 
-			write_command_line (dialog->saver->name, 
-					    dialog->argument_data,
-					    dialog->prefs_widget_data);
+		*widget = hbox;
 	} else {
-		dialog->saver->command_line = 
-			g_strdup (gtk_entry_get_text 
-				  (GTK_ENTRY (dialog->cli_entry)));
-		str = gtk_entry_get_text 
-			(GTK_ENTRY (GTK_COMBO
-				    (dialog->visual_combo)->entry));
-		if (!strcmp (str, "Any")) {
-			dialog->saver->visual = NULL;
-		} else {
-			dialog->saver->visual = g_strdup (str);
-			g_strdown (dialog->saver->visual);
+		set->widgets = g_list_append (NULL, option_menu);
+		*widget = option_menu;
+	}
+
+	return set;
+}
+
+/* Place a set of widgets that configures a numerical value in the
+ * next row of the table and update the row value
+ */
+
+static PrefsDialogWidgetSet *
+place_number (GtkTable *table, xmlNodePtr node, gint *row) 
+{
+	char *type, *label_str, *high_str, *low_str;
+	char *default_val, *high_val, *low_val;
+	gdouble defaultv, high, low;
+	GtkWidget *label, *hscale, *hbox;
+	GtkAdjustment *adjustment;
+	PrefsDialogWidgetSet *set;
+	GList *list_tail;
+
+	g_return_val_if_fail (table != NULL, NULL);
+	g_return_val_if_fail (GTK_IS_TABLE (table), NULL);
+	g_return_val_if_fail (node != NULL, NULL);
+	g_return_val_if_fail (row != NULL, NULL);
+
+	type = xmlGetProp (node, "type");
+
+	if (!type) return NULL;
+
+	if (!strcmp (type, "slider")) {
+		label_str = xmlGetProp (node, "label");
+		low_str = xmlGetProp (node, "low-label");
+		high_str = xmlGetProp (node, "high-label");
+		default_val = xmlGetProp (node, "default");
+		low_val = xmlGetProp (node, "low");
+		high_val = xmlGetProp (node, "high");
+
+		if (!label_str || !low_str || !high_str ||
+		    !low_val || !high_val) 
+			return NULL;
+
+		set = g_new0 (PrefsDialogWidgetSet, 1);
+		label = gtk_label_new (label_str);
+		gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+		gtk_table_attach (table, label, 0, 3, *row, *row + 1,
+				  GTK_FILL, 0, 0, 0);
+		set->widgets = list_tail = g_list_append (NULL, label);
+
+		low = atof (low_val);
+		high = atof (high_val);
+
+		if (default_val)
+			defaultv = atof (default_val);
+		else
+			defaultv = (high - low) / 2;
+
+		adjustment = GTK_ADJUSTMENT
+			(gtk_adjustment_new (defaultv, low, high,
+					     (high - low) / 100,
+					     (high - low) / 10,
+					     (high - low) / 10));
+
+		hscale = gtk_hscale_new (adjustment);
+		gtk_table_attach (table, hscale, 1, 2, *row + 1, *row + 2,
+				  GTK_EXPAND | GTK_FILL, 0, 0, 0);
+		gtk_scale_set_draw_value (GTK_SCALE (hscale), FALSE);
+		set->value_widget = hscale;
+		list_tail = g_list_append (list_tail, hscale);
+		list_tail = list_tail->next;
+
+		label = gtk_label_new (low_str);
+		gtk_misc_set_alignment (GTK_MISC (label), 1.0, 0.5);
+		gtk_table_attach (table, label, 0, 1, *row + 1, *row + 2,
+				  GTK_FILL, 0, 0, 0);
+		list_tail = g_list_append (list_tail, label);
+		list_tail = list_tail->next;
+
+		label = gtk_label_new (high_str);
+		gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+		gtk_table_attach (table, label, 2, 3, *row + 1, *row + 2,
+				  GTK_FILL, 0, 0, 0);
+		list_tail = g_list_append (list_tail, label);
+		list_tail = list_tail->next;
+
+		*row += 2;
+	} 
+	else if (!strcmp (type, "spinbutton")) {
+		set = get_spinbutton (node, &hbox);
+
+		if (set) {
+			gtk_table_attach (table, hbox, 
+					  0, 3, *row, *row + 1,
+					  GTK_FILL, 0, 0, 0);
+			*row += 1;
+		}
+	} else {
+		set = NULL;
+	}
+
+	return set;
+}
+
+/* Place a widget for a boolean value in a table */
+
+static PrefsDialogWidgetSet *
+place_boolean (ScreensaverPrefsDialog *dialog, GtkTable *table,
+	       xmlNodePtr node, gint *row)
+{
+	PrefsDialogWidgetSet *set;
+	GtkWidget *widget;
+
+	g_return_val_if_fail (table != NULL, NULL);
+	g_return_val_if_fail (GTK_IS_TABLE (table), NULL);
+	g_return_val_if_fail (node != NULL, NULL);
+	g_return_val_if_fail (row != NULL, NULL);
+
+	set = get_check_button (dialog, node, &widget);
+
+	if (set) {
+		gtk_table_attach (table, widget, 0, 3, *row, *row + 1,
+				  GTK_FILL, 0, 0, 0);
+		*row += 1;
+	}
+
+	return set;
+}
+
+/* Place a horizontal group in a table */
+
+static void
+place_hgroup (ScreensaverPrefsDialog *dialog, 
+	      GtkTable *table, GTree *widget_db, 
+	      xmlNodePtr hgroup_data, gint *row) 
+{
+	PrefsDialogWidgetSet *set;
+	GtkWidget *hbox, *widget;
+	xmlNodePtr node;
+	gchar *id;
+
+	g_return_if_fail (table != NULL);
+	g_return_if_fail (GTK_IS_TABLE (table));
+	g_return_if_fail (widget_db != NULL);
+	g_return_if_fail (hgroup_data != NULL);
+	g_return_if_fail (row != NULL);
+
+	hbox = gtk_hbox_new (FALSE, 5);
+
+	for (node = hgroup_data->childs; node; node = node->next) {
+		id = xmlGetProp (node, "id");
+		if (!id) continue;
+
+		if (!strcmp (node->name, "number"))
+			set = get_spinbutton (node, &widget);
+		else if (!strcmp (node->name, "boolean"))
+			set = get_check_button (dialog, node, &widget);
+		else if (!strcmp (node->name, "select"))
+			set = get_select_widget (dialog, node, &widget);
+		else continue;
+
+		if (set != NULL && widget != NULL) {
+			g_tree_insert (widget_db, id, set);
+			gtk_box_pack_start (GTK_BOX (hbox), widget,
+					    FALSE, TRUE, 0);
 		}
 	}
+
+	gtk_table_attach (table, hbox, 0, 3, *row, *row + 1, 
+			  0, 0, 0, 0);
+	*row += 1;
 }
 
-/*****************************************************************************/
-/*                   Fallback when Glade definition not found                */
-/*****************************************************************************/
+/* Place a selection list (option menu) in a table */
+
+static PrefsDialogWidgetSet *
+place_select (ScreensaverPrefsDialog *dialog, GtkTable *table,
+	      xmlNodePtr node, gint *row)
+{
+	PrefsDialogWidgetSet *set;
+	GtkWidget *widget;
+
+	g_return_val_if_fail (table != NULL, NULL);
+	g_return_val_if_fail (GTK_IS_TABLE (table), NULL);
+	g_return_val_if_fail (node != NULL, NULL);
+	g_return_val_if_fail (row != NULL, NULL);
+
+	set = get_select_widget (dialog, node, &widget);
+
+	if (set) {
+		gtk_table_attach (table, widget, 0, 3, *row, *row + 1,
+				  GTK_FILL, 0, 0, GNOME_PAD_SMALL);
+		*row += 1;
+	}
+
+	return set;
+}
+
+/* Fill a GtkTable with widgets based on the XML description of the
+ * screensaver 
+ */
+
+static void
+populate_table (ScreensaverPrefsDialog *dialog, GtkTable *table) 
+{
+	char *id, *type;
+	PrefsDialogWidgetSet *set;
+	xmlNodePtr node;
+	gint row = 0;
+
+	g_return_if_fail (dialog != NULL);
+	g_return_if_fail (IS_SCREENSAVER_PREFS_DIALOG (dialog));
+	g_return_if_fail (dialog->widget_db != NULL);
+	g_return_if_fail (dialog->argument_data != NULL);
+	g_return_if_fail (table != NULL);
+	g_return_if_fail (GTK_IS_TABLE (table));
+
+	for (node = dialog->argument_data->childs; node; node = node->next) {
+		id = xmlGetProp (node, "id");
+		if (!id && strcmp (node->name, "hgroup")) continue;
+
+		set = NULL;
+
+		if (!strcmp (node->name, "number"))
+			set = place_number (table, node, &row);
+		else if (!strcmp (node->name, "boolean"))
+			set = place_boolean (dialog, table, node, &row);
+		else if (!strcmp (node->name, "hgroup"))
+			place_hgroup (dialog, table, dialog->widget_db, 
+				      node, &row);
+		else if (!strcmp (node->name, "select"))
+			set = place_select (dialog, table, node, &row);
+		else continue;
+
+		if (set) g_tree_insert (dialog->widget_db, id, set);
+	}
+}
 
 static GtkWidget *
-get_basic_screensaver_widget (ScreensaverPrefsDialog *dialog,
-			      Screensaver *saver) 
+get_screensaver_widget (ScreensaverPrefsDialog *dialog) 
+{
+	GtkWidget *table;
+
+	dialog->widget_db = g_tree_new ((GCompareFunc) strcmp);
+
+	table = gtk_table_new (1, 3, FALSE);
+	gtk_table_set_row_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
+	gtk_table_set_col_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
+	gtk_container_set_border_width (GTK_CONTAINER (table), 
+					GNOME_PAD_SMALL);
+	populate_table (dialog, GTK_TABLE (table));
+
+	return table;
+}
+
+/* Fallback when Glade definition not found */
+
+static GtkWidget *
+get_basic_screensaver_widget (ScreensaverPrefsDialog *dialog) 
 {
 	GtkWidget *vbox, *label;
 	GList *node;
@@ -841,19 +1095,23 @@ get_basic_screensaver_widget (ScreensaverPrefsDialog *dialog,
 	vbox = gtk_vbox_new (FALSE, 10);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), 5);
 
-	if (saver->name) {
-		label = gtk_label_new (_("Cannot find the data to configure this screensaver. Please edit the command line below."));
+	if (dialog->saver->name) {
+		label = gtk_label_new 
+			(_("Cannot find the data to configure this " \
+			   "screensaver. Please edit the command line " \
+			   "below."));
 	} else {
-		label = gtk_label_new (_("Please enter a command line below."));
+		label = gtk_label_new 
+			(_("Please enter a command line below."));
 	}
 
 	gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
 	gtk_box_pack_start (GTK_BOX (vbox), label, TRUE, TRUE, 5);
 	dialog->cli_entry = gtk_entry_new ();
 
-	if (saver->command_line) {
+	if (dialog->saver->command_line) {
 		gtk_entry_set_text (GTK_ENTRY (dialog->cli_entry), 
-				    saver->command_line);
+				    dialog->saver->command_line);
 	}
 
 	gtk_box_pack_start (GTK_BOX (vbox), dialog->cli_entry,
@@ -881,18 +1139,259 @@ get_basic_screensaver_widget (ScreensaverPrefsDialog *dialog,
 	g_list_append (node, "Mono");
 
 	gtk_combo_set_popdown_strings (GTK_COMBO (dialog->visual_combo), node);
-	if (saver->visual)
+	if (dialog->saver->visual)
 		gtk_entry_set_text (GTK_ENTRY (GTK_COMBO 
 					       (dialog->visual_combo)->entry),
-				    saver->visual);
+				    dialog->saver->visual);
 	else
 		gtk_entry_set_text (GTK_ENTRY (GTK_COMBO 
 					       (dialog->visual_combo)->entry),
-				    "Any");	
+				    _("Any"));
 
 	gtk_box_pack_start (GTK_BOX (vbox), dialog->visual_combo,
 			    TRUE, FALSE, 5);
 	return vbox;
+}
+
+/*****************************************************************************/
+/*                  Setting dialog properties from the CLI                   */
+/*****************************************************************************/
+
+/* arg_is_set
+ *
+ * Determines if an argument or set of arguments specified by the
+ * argument definition entry is set on a command line. Returns -1 if
+ * the argument is definitely not set, 0 if it may be, and 1 if it
+ * definitely is.
+ */
+
+static gint
+arg_is_set (xmlNodePtr argument_data, GScanner *cli_db) 
+{
+	char *test;
+
+	g_return_if_fail (argument_data != NULL);
+	g_return_if_fail (cli_db != NULL);
+
+	test = xmlGetProp (argument_data, "test");
+
+	if (test) {
+		return parse_sentence (test, cli_db) ? 1 : -1;
+	} else {
+		return 0;
+	}
+}
+
+static void
+read_boolean (GTree *widget_db, xmlNodePtr argument_data, GScanner *cli_db) 
+{
+	char *id;
+	PrefsDialogWidgetSet *set;
+	gint found;
+
+	g_return_if_fail (widget_db != NULL);
+	g_return_if_fail (argument_data != NULL);
+	g_return_if_fail (cli_db != NULL);
+
+	found = arg_is_set (argument_data, cli_db);
+
+	if (!(id = xmlGetProp (argument_data, "id"))) return;
+	set = g_tree_lookup (widget_db, id);
+
+	if (!set || !set->value_widget) return;
+
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (set->value_widget), 
+				      found >= 0);
+
+	if (found >= 0) {
+		set_widgets_sensitive (widget_db,
+				       xmlGetProp (argument_data, "enable"),
+				       TRUE);
+	} else {
+		set_widgets_sensitive (widget_db,
+				       xmlGetProp (argument_data, "enable"),
+				       FALSE);
+	}
+}
+
+static void
+read_number (GTree *widget_db, xmlNodePtr argument_data, GScanner *cli_db) 
+{
+	PrefsDialogWidgetSet *set;
+	char *arg, *id;
+	char *arg_line;
+	char **args;
+	char *from_cli_conv;
+	GtkAdjustment *adjustment;
+	gfloat value;
+
+	g_return_if_fail (widget_db != NULL);
+	g_return_if_fail (argument_data != NULL);
+	g_return_if_fail (cli_db != NULL);
+
+	arg_line = xmlGetProp (argument_data, "arg");
+	args = g_strsplit (arg_line, " ", -1);
+
+	arg = g_scanner_scope_lookup_symbol (cli_db, 0, args[0] + 1);
+	if (!arg) return;
+
+	if (!(id = xmlGetProp (argument_data, "id"))) return;
+	set = g_tree_lookup (widget_db, id);
+
+	if (!set || !set->value_widget) return;
+
+	from_cli_conv = xmlGetProp (argument_data, "from-cli-conv");
+
+	if (from_cli_conv)
+		value = parse_expr (from_cli_conv, atof (arg));
+	else
+		value = atof (arg);
+
+	if (GTK_IS_RANGE (set->value_widget)) {
+		adjustment = gtk_range_get_adjustment 
+			(GTK_RANGE (set->value_widget));
+		gtk_adjustment_set_value (adjustment, value);
+	}
+	else if (GTK_IS_SPIN_BUTTON (set->value_widget)) {
+		gtk_spin_button_set_value 
+			(GTK_SPIN_BUTTON (set->value_widget), value);
+	}
+
+	g_strfreev (args);
+}
+
+static void
+read_select (GTree *widget_db, xmlNodePtr argument_data, 
+	     GScanner *cli_db)
+{
+	PrefsDialogWidgetSet *set;
+	xmlNodePtr node;
+	GtkWidget *menu;
+	GList *menu_item_node;
+	gint found, max_found = -1;
+	int set_idx = 0, i = 0;
+	char *id;
+
+	g_return_if_fail (widget_db != NULL);
+	g_return_if_fail (argument_data != NULL);
+	g_return_if_fail (cli_db != NULL);
+
+	if (!(id = xmlGetProp (argument_data, "id"))) return;
+	set = g_tree_lookup (widget_db, id);
+
+	if (!set || !set->value_widget) return;
+
+	menu = gtk_option_menu_get_menu 
+		(GTK_OPTION_MENU (set->value_widget));
+
+	node = argument_data->childs;
+
+	/* Get the index of the selected option */
+
+	while (node) {
+		found = arg_is_set (node, cli_db);
+
+		if (found > max_found) {
+			set_idx = i;
+			max_found = found;
+		}
+
+		node = node->next; i++;
+	}
+
+	/* Enable widgets enabled by selected option and disable
+	 * widgets enabled by other options; connect select and
+	 * deselect signals to do the same when an option is selected 
+	 */
+
+	menu_item_node = GTK_MENU_SHELL (menu)->children;
+	node = argument_data->childs; i = 0;
+
+	while (node) {
+		if (i == set_idx) {
+			gtk_option_menu_set_history 
+				(GTK_OPTION_MENU (set->value_widget), i);
+			set_widgets_sensitive (widget_db,
+					       xmlGetProp (node, "enable"),
+					       TRUE);
+		} else {
+			set_widgets_sensitive (widget_db,
+					       xmlGetProp (node, "enable"),
+					       FALSE);
+		}
+
+		node = node->next; menu_item_node = menu_item_node->next; i++;
+	}
+}
+
+static void
+place_screensaver_properties (ScreensaverPrefsDialog *dialog,
+			      xmlNodePtr argument_data)
+{
+	xmlNodePtr node;
+
+	for (node = argument_data->childs; node; node = node->next) {
+		if (!strcmp (node->name, "boolean"))
+			read_boolean (dialog->widget_db, node, 
+				      dialog->cli_args_db);
+		else if (!strcmp (node->name, "number"))
+			read_number (dialog->widget_db, node, 
+				     dialog->cli_args_db);
+		else if (!strcmp (node->name, "select"))
+			read_select (dialog->widget_db, node, 
+				     dialog->cli_args_db);
+		else if (!strcmp (node->name, "hgroup"))
+			place_screensaver_properties (dialog, node);
+	}
+}
+
+static gboolean
+arg_mapping_exists (Screensaver *saver) 
+{
+	struct stat buf;
+	char *filename;
+	gboolean ret;
+
+	if (!saver->name) return FALSE;
+
+	filename = g_strconcat (SSPROP_DATADIR "/screensavers/",
+				saver->name, ".xml", NULL);
+
+	if (stat (filename, &buf))
+		ret = FALSE;
+	else
+		ret = TRUE;
+
+	g_free (filename);
+	return ret;
+}
+
+static void
+store_cli (ScreensaverPrefsDialog *dialog) 
+{
+	char *str;
+
+	g_free (dialog->saver->command_line);
+
+	if (dialog->widget_db) {
+		dialog->saver->command_line = 
+			write_command_line (dialog->saver->name, 
+					    dialog->argument_data,
+					    dialog->widget_db);
+	} else {
+		dialog->saver->command_line = 
+			g_strdup (gtk_entry_get_text 
+				  (GTK_ENTRY (dialog->cli_entry)));
+		str = gtk_entry_get_text 
+			(GTK_ENTRY (GTK_COMBO
+				    (dialog->visual_combo)->entry));
+		if (!strcmp (str, _("Any"))) {
+			dialog->saver->visual = NULL;
+		} else {
+			dialog->saver->visual = g_strdup (str);
+			g_strdown (dialog->saver->visual);
+		}
+	}
 }
 
 /*****************************************************************************/
@@ -916,9 +1415,9 @@ help_cb (GtkWidget *widget, ScreensaverPrefsDialog *dialog)
 
 	if (!dialog->saver->name) return;
 
-	if (dialog->prefs_widget_data) {
+	if (dialog->widget_db) {
 		entry.name = "screensaver-properties-capplet";
-		entry.path = g_strconcat (dialog->saver->name, ".html", NULL);
+		entry.path = g_strconcat (dialog->saver->name, ".xml", NULL);
 
 		if (entry.path) {
 			gnome_help_display (NULL, &entry);

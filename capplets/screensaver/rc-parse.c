@@ -179,28 +179,6 @@ get_settings_name (const char *command_line)
 	return s2;
 }
 
-static char *
-get_label (char *name)
-{
-	char *s, *label;
-
-	label = screensaver_get_label_from_xrdb (name);
-	if (label) return label;
-
-	label = g_strdup (name);
-
-	for (s = label; *s; s++)    /* if it has any capitals, return it */
-		if (*s >= 'A' && *s <= 'Z')
-			return s;
-
-	if (label[0] >= 'a' && label[0] <= 'z')             /* else cap it */
-		label[0] -= 'a'-'A';
-	if (label[0] == 'X' && label[1] >= 'a' && label[1] <= 'z')
-		label[1] -= 'a'-'A';
-
-	return label;
-}
-
 /* WARNING: Looking at the following code is likely to cause seizures ... */
 
 static gchar *
@@ -321,7 +299,7 @@ parse_screensaver (const char *line)
 	}
 
 	h->name = get_settings_name (h->command_line);
-	if (!h->label) h->label = get_label (h->name);
+	if (!h->label) h->label = screensaver_get_label (h->name);
 
 	return h;
 }

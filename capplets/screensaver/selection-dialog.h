@@ -44,7 +44,7 @@ struct _SelectionDialog
 	GtkList *program_list;
 
 	GtkListItem *selected_program_item;
-	xmlNodePtr selected_program_node;
+	char *selected_name;
 };
 
 struct _SelectionDialogClass 
