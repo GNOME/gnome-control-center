@@ -417,7 +417,7 @@ populate_component_list (MimeEditDialog *dialog)
 
 	menu = GTK_MENU (gtk_menu_new ());
 
-	component_list = gnome_vfs_mime_get_short_list_components (dialog->p->info->mime_type);
+	component_list = gnome_vfs_mime_get_all_components (dialog->p->info->mime_type);
 
 	/* FIXME: We are leaking the whole list here, but this will be the case until I know of an easy way to duplicate
 	 * Bonobo_ServerInfo structures */
@@ -468,7 +468,7 @@ populate_application_list (MimeEditDialog *dialog)
 
 	menu = GTK_MENU (gtk_menu_new ());
 
-	app_list = gnome_vfs_mime_get_short_list_applications (dialog->p->info->mime_type);
+	app_list = gnome_vfs_mime_get_all_applications (dialog->p->info->mime_type);
 
 	for (tmp = app_list, i = 0; tmp != NULL; tmp = tmp->next, i++) {
 		app = tmp->data;

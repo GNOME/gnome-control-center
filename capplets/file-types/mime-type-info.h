@@ -85,6 +85,7 @@ const gchar  *mime_type_info_get_description       (MimeTypeInfo       *info);
 GdkPixbuf    *mime_type_info_get_icon              (MimeTypeInfo       *info);
 const GList  *mime_type_info_get_file_extensions   (MimeTypeInfo       *info);
 const gchar  *mime_type_info_get_icon_path         (MimeTypeInfo       *info);
+gboolean      mime_type_info_get_use_category      (MimeTypeInfo       *info);
 
 void          mime_type_info_save                  (const MimeTypeInfo *info);
 void          mime_type_info_free                  (MimeTypeInfo       *info);
@@ -104,6 +105,8 @@ MimeCategoryInfo *mime_category_info_new           (MimeCategoryInfo   *parent,
 						    GtkTreeModel       *model);
 void          mime_category_info_load_all          (MimeCategoryInfo   *category);
 void          mime_category_info_save              (MimeCategoryInfo   *category);
+void          mime_category_info_update            (MimeCategoryInfo   *info);
+
 GList        *mime_category_info_find_apps         (MimeCategoryInfo   *info);
 gchar        *mime_category_info_get_full_name     (MimeCategoryInfo   *info);
 

@@ -1,3 +1,34 @@
+2002-01-28  Bradford Hovinen  <hovinen@ximian.com>
+
+	* mime-type-info.c (update_subcategories): Fix logic
+	(mime_type_info_load_all): Don't load default_action if
+	custom_line is set
+
+	* mime-category-edit-dialog.c (store_data): Call
+	mime_category_info_update
+	(store_data): Don't notify the model -- nothing there could have
+	changed
+
+	* mime-type-info.c (mime_category_info_update): Implement
+	(update_subcategories): Update; split from set_subcategory_ids
+
+	* mime-category-edit-dialog.c (populate_application_list): Notify
+	destruction with gnome_vfs_mime_application_free
+	(store_data): Store default action
+	(store_data): Store custom line, needs terminal
+	(populate_application_list): Set needs_terminal_toggle
+
+	* mime-type-info.c (mime_type_info_get_use_category):
+	Implement. Factor from mime_type_info_load_all
+	(find_possible_supported_apps, reduce_supported_app_list): Use
+	mime_type_info_get_use_category
+	(get_gconf_base_name): Replace parentheses with '-'
+	(mime_category_info_load_all): Only load default action, custom
+	line if not already loaded
+
+	* mime-edit-dialog.c (populate_component_list): Use get_all_components
+	(populate_application_list): Use get_all_applications
+
 2002-01-27  Seth Nickell  <snickell@stanford.edu>
 
 	* file-types.desktop.in:

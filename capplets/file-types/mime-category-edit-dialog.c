@@ -329,7 +329,7 @@ populate_application_list (MimeCategoryEditDialog *dialog)
 		/* Store copy of application in item; free when item destroyed. */
 		g_object_set_data_full (G_OBJECT (menu_item),
 					"app", app,
-					(GDestroyNotify) g_free);
+					(GDestroyNotify) gnome_vfs_mime_application_free);
 
 		gtk_menu_append (menu, menu_item);
 		gtk_widget_show (menu_item);
@@ -342,9 +342,13 @@ populate_application_list (MimeCategoryEditDialog *dialog)
 
 	if (found_idx < 0) {
 		found_idx = i;
-		if (dialog->p->info->custom_line != NULL)
+		if (dialog->p->info->custom_line != NULL) {
 			gnome_file_entry_set_filename (GNOME_FILE_ENTRY (WID ("program_entry")),
 						       dialog->p->info->custom_line);
+
+			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("needs_terminal_toggle")),
+						      dialog->p->info->needs_terminal);
+		}
 	} else {
 		gtk_widget_set_sensitive (WID ("program_entry_box"), FALSE);
 	}
@@ -361,18 +365,36 @@ populate_application_list (MimeCategoryEditDialog *dialog)
 static void
 store_data (MimeCategoryEditDialog *dialog)
 {
-	GtkTreePath *path;
-	GtkTreeIter  iter;
+	GtkOptionMenu *option_menu;
+	GtkMenuShell  *menu_shell;
+	GObject       *menu_item;
+	gint           idx;
 
-	model_entry_append_to_dirty_list (MODEL_ENTRY (dialog->p->info));
+	GnomeVFSMimeApplication *app;
 
-	mime_types_model_construct_iter (MIME_TYPES_MODEL (dialog->p->model), MODEL_ENTRY (dialog->p->info), &iter);
-	path = gtk_tree_model_get_path (dialog->p->model, &iter);
-	gtk_tree_model_row_changed (dialog->p->model, path, &iter);
-	gtk_tree_path_free (path);
+	option_menu = GTK_OPTION_MENU (WID ("default_action_select"));
+	menu_shell = GTK_MENU_SHELL (gtk_option_menu_get_menu (option_menu));
+	idx = gtk_option_menu_get_history (option_menu);
+	menu_item = (g_list_nth (menu_shell->children, idx))->data;
+
+	gnome_vfs_mime_application_free (dialog->p->info->default_action);
+	app = g_object_get_data (menu_item, "app");
+	if (app != NULL)
+		dialog->p->info->default_action = gnome_vfs_mime_application_copy (app);
+	else
+		dialog->p->info->default_action = NULL;
+
+	dialog->p->info->custom_line = g_strdup (gtk_entry_get_text (GTK_ENTRY
+								     (gnome_file_entry_gtk_entry
+								      (GNOME_FILE_ENTRY (WID ("program_entry"))))));
+	dialog->p->info->needs_terminal = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (WID ("needs_terminal_toggle")));
 
 	dialog->p->info->use_parent_category =
 		gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (WID ("use_category_toggle")));
+
+	model_entry_append_to_dirty_list (MODEL_ENTRY (dialog->p->info));
+
+	mime_category_info_update (dialog->p->info);
 }
 
 static void
