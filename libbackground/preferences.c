@@ -165,7 +165,7 @@ void
 preferences_load (Preferences *prefs)
 {
 	GConfEngine *engine;
-	GError      *error;
+	GError      *error = NULL;
 
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));
