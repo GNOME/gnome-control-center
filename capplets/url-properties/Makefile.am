@@ -17,8 +17,8 @@ url_properties_LDADD = ../../control-center/libcapplet.la \
 EXTRA_DIST = \
 	url-properties.desktop
 
-sysdir = $(datadir)/control-center
+sysdir = $(datadir)/Documents/control-center
 sys_DATA = url-properties.desktop
 
 install-data-local:
-	$(INSTALL_DATA) $(srcdir)/url-properties.desktop $(DESTDIR)$(datadir)/gnome/apps/Settings/url-properties.desktop
+	$(INSTALL_DATA) $(srcdir)/url-properties.desktop $(DESTDIR)$(datadir)/gnome/apps/Settings/Documents/url-properties.desktop

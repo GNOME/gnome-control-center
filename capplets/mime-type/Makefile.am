@@ -19,8 +19,8 @@ EXTRA_DIST = \
 	mime-type.desktop
 
 
-sysdir = $(datadir)/control-center
+sysdir = $(datadir)/control-center/Documents
 sys_DATA = mime-type.desktop 
 
 install-data-local:
-	$(INSTALL_DATA) $(srcdir)/mime-type.desktop $(DESTDIR)$(datadir)/gnome/apps/Settings/mime-type.desktop
+	$(INSTALL_DATA) $(srcdir)/mime-type.desktop $(DESTDIR)$(datadir)/gnome/apps/Settings/Documents/mime-type.desktop
