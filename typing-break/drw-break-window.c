@@ -141,10 +141,18 @@ drw_break_window_init (DrwBreakWindow *window)
 	GtkWidget          *hbox;
 	GtkWidget          *frame;
 	GtkWidget          *align;
+	GtkWidget          *monitor_box;
 	gchar              *str;
 	GtkWidget          *outer_vbox;
 	GtkWidget          *button_box;
 	gboolean            allow_postpone;
+
+	gint                root_monitor = 0;
+	GdkScreen          *screen = NULL;
+	GdkRectangle        monitor;
+	gint                right_padding;
+	gint                bottom_padding;
+
 
         priv = g_new0 (DrwBreakWindowPriv, 1);
         window->priv = priv;
@@ -159,9 +167,12 @@ drw_break_window_init (DrwBreakWindow *window)
 
 	GTK_WINDOW (window)->type = GTK_WINDOW_POPUP;
 
+	screen = gdk_screen_get_default ();
+	gdk_screen_get_monitor_geometry (screen, root_monitor, &monitor);
+
 	gtk_window_set_default_size (GTK_WINDOW (window),
-				     gdk_screen_width (),
-				     gdk_screen_height ());
+				     gdk_screen_get_width (screen),
+				     gdk_screen_get_height (screen));
 	
 	gtk_widget_set_app_paintable (GTK_WIDGET (window), TRUE);
 	gtk_widget_realize (GTK_WIDGET (window));
@@ -178,7 +189,19 @@ drw_break_window_init (DrwBreakWindow *window)
 	outer_vbox = gtk_vbox_new (FALSE, 0);
 	gtk_widget_show (outer_vbox);
 	
-	gtk_container_add (GTK_CONTAINER (window), outer_vbox);
+	right_padding = gdk_screen_get_width (screen) - monitor.width - monitor.x;
+	bottom_padding = gdk_screen_get_height (screen) - monitor.height - monitor.y;
+
+	monitor_box = gtk_alignment_new (0.5, 0.5, 1, 1);
+	gtk_alignment_set_padding (GTK_ALIGNMENT (monitor_box), 
+				   monitor.y,
+				   bottom_padding, 
+				   monitor.x,
+				   right_padding);
+	gtk_widget_show (monitor_box);
+
+	gtk_container_add (GTK_CONTAINER (window), monitor_box);
+	gtk_container_add (GTK_CONTAINER (monitor_box), outer_vbox);
 
 	gtk_box_pack_start (GTK_BOX (outer_vbox), align, TRUE, TRUE, 0);
 

@@ -529,13 +529,6 @@ gconf_notify_cb (GConfClient *client,
 			dr->state = STATE_START;
 		}
 	}
-/*	else if (!strcmp (entry->key, GCONF_PATH "/warn_time")) {
-		if (entry->value->type == GCONF_VALUE_INT) {
-			dr->warn_time = 60 * gconf_value_get_int (entry->value);
-			dr->state = STATE_START;
-		}
-	}
-*/
 	else if (!strcmp (entry->key, GCONF_PATH "/break_time")) {
 		if (entry->value->type == GCONF_VALUE_INT) {
 			dr->break_time = 60 * gconf_value_get_int (entry->value);
@@ -936,10 +929,7 @@ drwright_new (void)
 	dr->type_time = 60 * gconf_client_get_int (
 		client, GCONF_PATH "/type_time", NULL);
 	
-/*	dr->warn_time = 60 * gconf_client_get_int (
-		client, GCONF_PATH /warn_time", NULL);
-*/
-	dr->warn_time = MIN (dr->type_time / 10, 60*5);
+	dr->warn_time = MIN (dr->type_time / 12, 60*3);
 	
 	dr->break_time = 60 * gconf_client_get_int (
 		client, GCONF_PATH "/break_time", NULL);
