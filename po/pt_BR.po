@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-center\n"
 "POT-Creation-Date: 1999-09-24 14:43-0300\n"
-"PO-Revision-Date: 1999-09-30 18:15-03:00\n"
+"PO-Revision-Date: 1999-09-30 19:12-03:00\n"
 "Last-Translator: Rodrigo Stulzer Lopes <rodrigo@conectiva.com.br>\n"
 "Language-Team: Brazilian Portuguese <ldp-br@bazar.conectiva.com.br>\n"
 "MIME-Version: 1.0\n"
@@ -733,6 +733,11 @@ msgid ""
 "Trash programs are discarded on logout and can die;\n"
 "Settings programs are always started on every login."
 msgstr ""
+"Este botão configura o estilo de reinicialização dos programas selecionados:\n"
+"Programas normails não são afetados por logouts mas podem morrer;\n"
+"Programas reinicializáveis (respawn) nunca podem morrer;\n"
+"Programas `Trash' são descartados no logout e podem morrer;\n"
+"Programas de configuração são sempre inicializados em cada login."
 
 #: capplets/session-properties/gsm-client-list.c:36
 msgid ""
@@ -743,6 +748,12 @@ msgid ""
 "Saving programs are saving their session details;\n"
 "Programs which make no contact have Unknown states.\n"
 msgstr ""
+"Este botão produz uma chave para o estado dos programas abaixo:\n"
+"Programas inativos estão aguardando para iniciar ou terminaram;\n"
+"Programas inicializados tem um tempo para iniciar a executar;\n"
+"Programas em execução são membros normais da sessão;\n"
+"Programas `saving' estão salvando detalhes de sua sessão;\n"
+"Programas que não fazem contato tem estado Desconhecido.\n"
 
 #: capplets/session-properties/gsm-client-list.c:42
 msgid "This column gives the command used to start a program."
@@ -830,7 +841,7 @@ msgstr "Lixo"
 
 #: capplets/session-properties/gsm-client-row.c:57
 msgid "Discarded on logout and can die."
-msgstr ""
+msgstr "Descartado no logout e pode morrer."
 
 #: capplets/session-properties/gsm-client-row.c:60
 msgid "Always started on every login."
@@ -857,7 +868,7 @@ msgstr "Automaticamente salva mudanças para sessões"
 #. frame for manually started programs
 #: capplets/session-properties/session-properties.c:161
 msgid "Non-session-managed Startup Programs"
-msgstr ""
+msgstr "Programas Inicializados fora do gerenciador de sessões"
 
 # capplets/screensaver-properties/screensaver-properties-capplet.c:114
 #: capplets/session-properties/session-properties.c:178
@@ -1009,16 +1020,16 @@ msgstr "V"
 # capplets/background-properties/property-background.c:938
 #: capplets/theme-switcher/demo.c:54
 msgid "Tiger"
-msgstr "Tigre"
+msgstr "VI"
 
 #: capplets/theme-switcher/demo.c:55
 msgid "By Its"
-msgstr ""
+msgstr "VII"
 
 # capplets/ui-properties/ui-properties.c:89
 #: capplets/theme-switcher/demo.c:55
 msgid "Toe"
-msgstr ""
+msgstr "VIII"
 
 #: capplets/theme-switcher/demo.c:114
 msgid "Selected themes from above will be tested by previewing here."
@@ -1404,6 +1415,9 @@ msgid ""
 "wm-properties-capplet: Unable to initialize window manager.\n"
 "\tAnother window manager is already running and could not be killed\n"
 msgstr ""
+"wm-properties-capplet: Não é possível inicializar o gerenciador de janelas\n"
+"\tOutro gerente de janelas já está sendo executado e não pode ser morto\n"
+"\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:358
 #, c-format
@@ -1411,6 +1425,8 @@ msgid ""
 "wm-properties-capplet: Unable to initialize window manager.\n"
 "\t'%s' didn't start\n"
 msgstr ""
+"wm-properties-capplet: Não é possível inicializar o gerente de janelas\n"
+"\t'%s' não inicializou\n"
 
 # capplets/ui-properties/ui-properties.c:63
 #: capplets/wm-properties/wm-properties-capplet.c:407
@@ -1433,6 +1449,10 @@ msgid ""
 "do this by selecting \"Run Program\" in the\n"
 "foot menu\n"
 msgstr ""
+"Não é possível voltar ao gerente de janelas\n"
+"Por favor, execute um gerente de janelas manualmente. \n"
+"Para isso selecione \\\"Executar Programa\\\" no menu\n"
+"de inicialização\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:509
 msgid ""
@@ -1442,6 +1462,10 @@ msgid ""
 "under \"Settings\" in the main menu, or by turning on\n"
 "\"Save Current Setup\" when you log out.\n"
 msgstr ""
+"Seu gerenciador de janelas foi trocado. Para tornar esta alteração\n"
+"efetiva, você necessita salvar sua sessão corrente. Isto pode ser\n"
+"feito selecionando \\\"Salvar Sessão Corrente\\\" ou \\\"Salvar \n"
+"Configuração Corrente\\\" quando sair do sistema.\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:729
 msgid "Add New Window Manager"
@@ -1510,6 +1534,8 @@ msgid ""
 "No help is available/installed. Please make sure you\n"
 "have the GNOME User's Guide installed on your system."
 msgstr ""
+"A ajuda não está disponível/instalada. Por favor verifique se você\n"
+"tem o Guia do Usuário GNOME instado em seu sistema."
 
 # control-center/callbacks.c:79
 #: control-center/callbacks.c:94
