@@ -134,15 +134,20 @@ add_face_info(GtkWidget *table, gint *row_p, const gchar *uri, FT_Face face)
 	add_row(table, row_p, _("Style:"), face->style_name);
 
     filename = gnome_vfs_get_local_path_from_uri(uri);
-    add_row(table, row_p, _("Location:"), filename ? filename : uri);
+    add_row(table, row_p, _("File name:"), filename ? filename : uri);
     g_free(filename);
 
     file_info = gnome_vfs_file_info_new();
     if (gnome_vfs_get_file_info
 	(uri, file_info, GNOME_VFS_FILE_INFO_GET_MIME_TYPE) == GNOME_VFS_OK) {
 
-	if ((file_info->valid_fields&GNOME_VFS_FILE_INFO_FIELDS_MIME_TYPE) !=0)
-	    add_row(table, row_p, _("Type:"), file_info->mime_type);
+	if ((file_info->valid_fields&GNOME_VFS_FILE_INFO_FIELDS_MIME_TYPE)!=0){
+	    gchar *type = gnome_vfs_mime_get_description(file_info->mime_type);
+
+	    add_row(table, row_p, _("Type:"),
+		    type ? type : file_info->mime_type);
+	    g_free(type);
+	}
 
 	if ((file_info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_SIZE) != 0) {
 	    gchar *size;
@@ -174,7 +179,7 @@ main(int argc, char **argv)
     FT_Face face;
     gchar *title;
     gint row;
-    GtkWidget *window, *vbox, *table, *drawing_area;
+    GtkWidget *window, *vbox, *table, *frame, *drawing_area;
     GdkPixmap *pixmap;
     GdkColor white = { 0, 0xffff, 0xffff, 0xffff };
 
@@ -225,12 +230,16 @@ main(int argc, char **argv)
     row = 0;
     add_face_info(table, &row, argv[1], face);
 
-    gtk_table_set_col_spacings(GTK_TABLE(table), 4);
+    gtk_table_set_col_spacings(GTK_TABLE(table), 8);
     gtk_table_set_row_spacings(GTK_TABLE(table), 2);
+
+    frame = gtk_frame_new(NULL);
+    gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
+    gtk_box_pack_start(GTK_BOX(vbox), frame, FALSE, FALSE, 0);
 
     drawing_area = gtk_drawing_area_new();
     gtk_widget_modify_bg(drawing_area, GTK_STATE_NORMAL, &white);
-    gtk_box_pack_start(GTK_BOX(vbox), drawing_area, FALSE, FALSE, 0);
+    gtk_container_add(GTK_CONTAINER(frame), drawing_area);
 
     pixmap = create_text_pixmap(drawing_area, face);
 
