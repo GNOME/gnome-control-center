@@ -3,18 +3,14 @@
 
 #include "control-center-categories.h"
 
-#include <bonobo/bonobo-context.h>
-#include <bonobo/bonobo-control.h>
-#include <bonobo/bonobo-generic-factory.h>
-#include <bonobo/bonobo-main.h>
-#include <libnautilus/nautilus-view.h>
-#include <gnome.h>
-
-#include <X11/Xlib.h>
-#include <X11/Xatom.h>
-#include <gdk/gdkx.h>
-
+#include <gdk/gdkkeysyms.h>
+#include <gtk/gtk.h>
 #include <gconf/gconf-client.h>
+#include <libgnome/libgnome.h>
+#include <libgnomeui/libgnomeui.h>
+#include <libgnomecanvas/libgnomecanvas.h>
+#include <libgnome/gnome-desktop-item.h>
+
 #include "gnomecc-event-box.h"
 #include "gnomecc-rounded-rect.h"
 
@@ -71,13 +67,6 @@ typedef struct {
 } CategoryInfo;
 
 #define PAD 5 /*when scrolling keep a few pixels above or below if possible */
-
-static gboolean use_nautilus = FALSE;
-static struct poptOption cap_options[] = {
-	{"use-nautilus", '\0', POPT_ARG_NONE, &use_nautilus, 0,
-	 N_("Use nautilus if it is running."), NULL},
-	{NULL, '\0', 0, NULL, 0}
-};
 
 static gboolean
 single_click_activates (void)
@@ -206,7 +195,7 @@ relayout_canvas (ControlCenter *cc)
 	/* Do this in several iterations to keep things straight
 	 * 0) walk down each column to decide when to wrap */
 start_again :
-	count = cc->info->count;
+	count = cc->info->n_categories;
 	cc->line_count = 0;
 	keep_going = TRUE;
 	for (i = 0 ; keep_going; i++) {
@@ -224,7 +213,7 @@ start_again :
 			for (j = 0; j < count; j++) {
 				ControlCenterCategory *cat = cc->info->categories[j];
 				PangoLayout *layout;
-				if (line_i >= cat->count)
+				if (line_i >= cat->n_entries)
 					continue;
 				ei = cat->entries[line_i]->user_data;
 				if (ei == NULL)
@@ -262,7 +251,7 @@ start_again :
 
 			for (j = 0; j < count; j++) {
 				ControlCenterCategory *cat = cc->info->categories[j];
-				if (line_i >= cat->count)
+				if (line_i >= cat->n_entries)
 					continue;
 				ei = cat->entries[line_i]->user_data;
 				if (ei != NULL) {
@@ -286,7 +275,7 @@ start_again :
 
 		/* 1.1) find the bounds */
 		max_text_height = max_icon_height = 0.;
-		for (j = 0; j < cat->count; j++) {
+		for (j = 0; j < cat->n_entries; j++) {
 			ei = cat->entries[j]->user_data;
 			if (ei == NULL)
 				continue;
@@ -332,7 +321,7 @@ start_again :
 		cc->line_count ++;
 
 		height = max_text_height + max_icon_height;
-		for (j = 0; j < cat->count; j++) {
+		for (j = 0; j < cat->n_entries; j++) {
 			ei = cat->entries[j]->user_data;
 			ei->line_start = (j == 0);
 
@@ -476,7 +465,7 @@ get_x (ControlCenter *cc, ControlCenterEntry *entry)
 	int x;
 	if (entry != NULL) {
 		ControlCenterCategory *category = entry->category;
-		for (i = 0, x = 0; i < category->count; i++, x++) {
+		for (i = 0, x = 0; i < category->n_entries; i++, x++) {
 			EntryInfo *ei = category->entries[i]->user_data;
 			if (ei->line_start)
 				x = 0;
@@ -494,11 +483,11 @@ get_y (ControlCenter *cc, ControlCenterEntry *entry)
 	int line_count = 0;
 	if (entry != NULL) {
 		ControlCenterCategory *category = entry->category;
-		for (i = 0; i < cc->info->count; i++) {
+		for (i = 0; i < cc->info->n_categories; i++) {
 			CategoryInfo *catinfo = cc->info->categories[i]->user_data;
 
 			if (cc->info->categories[i] == category) {
-				for (i = 0; i < category->count; i++) {
+				for (i = 0; i < category->n_entries; i++) {
 					EntryInfo *ei = category->entries[i]->user_data;
 					if (i > 0 && ei->line_start)
 						line_count ++;
@@ -518,15 +507,15 @@ static ControlCenterEntry *
 get_entry (ControlCenter *cc, int x, int y)
 {
 	int i;
-	for (i = 0; i < cc->info->count; i++) {
+	for (i = 0; i < cc->info->n_categories; i++) {
 		CategoryInfo *catinfo = cc->info->categories[i]->user_data;
 		if (y < catinfo->line_count) {
 			int j;
-			for (j = 0; j < cc->info->categories[i]->count; j++) {
+			for (j = 0; j < cc->info->categories[i]->n_entries; j++) {
 				EntryInfo *ei = cc->info->categories[i]->entries[j]->user_data;
 				if (ei->line_start) {
 					if (y == 0) {
-						g_assert (j + x < cc->info->categories[i]->count);
+						g_assert (j + x < cc->info->categories[i]->n_entries);
 						return cc->info->categories[i]->entries[j + x];
 					} else {
 						y --;
@@ -544,13 +533,13 @@ static int
 get_line_length (ControlCenter *cc, int y)
 {
 	int i;
-	for (i = 0; i < cc->info->count; i++) {
+	for (i = 0; i < cc->info->n_categories; i++) {
 		CategoryInfo *catinfo = cc->info->categories[i]->user_data;
 		if (y < catinfo->line_count) {
 			int j;
 			int last_start = 0;
 
-			for (j = 1; j < cc->info->categories[i]->count; j++) {
+			for (j = 1; j < cc->info->categories[i]->n_entries; j++) {
 				EntryInfo *ei = cc->info->categories[i]->entries[j]->user_data;
 				if (ei->line_start) {
 					if (y == 0) {
@@ -612,9 +601,18 @@ activate_entry (ControlCenterEntry *entry)
 {
 	EntryInfo *ei = entry->user_data;
 	if (!ei->launching) {
+		GnomeDesktopItem *desktop_item;
+
 		ei->launching = TRUE;
 		gtk_timeout_add (1000, cb_entry_info_reset, ei);
-		gnome_desktop_item_launch (entry->desktop_entry, NULL, 0, NULL);
+
+		desktop_item = gnome_desktop_item_new_from_file (entry->desktop_entry,
+								 GNOME_DESKTOP_ITEM_LOAD_ONLY_IF_EXISTS,
+								 NULL);
+		if (desktop_item != NULL) {
+			gnome_desktop_item_launch (desktop_item, NULL, 0, NULL);
+			gnome_desktop_item_unref (desktop_item);
+		}
 	}
 }
 
@@ -792,7 +790,7 @@ set_style (ControlCenter *cc, gboolean font_changed)
 	if (!GTK_WIDGET_REALIZED (widget))
 		return;
 
-	for (i = 0; i < cc->info->count; i++) {
+	for (i = 0; i < cc->info->n_categories; i++) {
 		CategoryInfo *catinfo = cc->info->categories[i]->user_data;
 
 		if (LINE_WITHIN || catinfo->line) {
@@ -811,7 +809,7 @@ set_style (ControlCenter *cc, gboolean font_changed)
 					      NULL);
 		}
 
-		for (j = 0; j < cc->info->categories[i]->count; j++) {
+		for (j = 0; j < cc->info->categories[i]->n_entries; j++) {
 			ControlCenterEntry *entry = cc->info->categories[i]->entries[j];
 			EntryInfo *entryinfo = entry->user_data;
 			if (font_changed && entryinfo->text)
@@ -843,7 +841,6 @@ canvas_style_set (GtkWidget *canvas, GtkStyle *previous_style, ControlCenter *cc
 static void
 rebuild_canvas (ControlCenter *cc, ControlCenterInformation *info)
 {
-	int count;
 	int i;
 	int j;
 	int vert_pos = BORDERS;
@@ -863,10 +860,8 @@ rebuild_canvas (ControlCenter *cc, ControlCenterInformation *info)
 		"event",
 		G_CALLBACK (cb_canvas_event), cc);
 
-	count = cc->info->count;
-
 	cc->line_count = 0;
-	for (i = 0; i < count; i++) {
+	for (i = 0; i < cc->info->n_categories; i++) {
 		CategoryInfo *catinfo;
 
 		if (cc->info->categories[i]->user_data == NULL)
@@ -890,7 +885,7 @@ rebuild_canvas (ControlCenter *cc, ControlCenterInformation *info)
 				NULL);
 
 		catinfo->title = NULL;
-		if (cc->info->categories[i] && (cc->info->count != 1 || cc->info->categories[0]->real_category)) {
+		if (cc->info->categories[i] && (cc->info->n_categories != 1 || cc->info->categories[0]->real_category)) {
 			char *label = g_strdup_printf ("<span weight=\"bold\">%s</span>", cc->info->categories[i]->title);
 			catinfo->title = gnome_canvas_item_new (catinfo->group,
 				gnome_canvas_text_get_type (),
@@ -903,7 +898,7 @@ rebuild_canvas (ControlCenter *cc, ControlCenterInformation *info)
 
 		catinfo->line_count = 1;
 		cc->line_count ++;
-		for (j = 0; j < cc->info->categories[i]->count; j++) {
+		for (j = 0; j < cc->info->categories[i]->n_entries; j++) {
 			EntryInfo *ei;
 
 			if (cc->info->categories[i]->entries[j]->user_data == NULL)
@@ -989,87 +984,6 @@ size_allocate(GtkWidget *widget, GtkAllocation *allocation, ControlCenter *cc)
 		      "x2", cc->width,
 		      "y2", cc->height,
 		      NULL);
-}
-
-static gboolean
-is_nautilus_running (void)
-{
-	Atom window_id_atom;
-	Window nautilus_xid;
-	Atom actual_type;
-	int actual_format;
-	unsigned long nitems, bytes_after;
-	unsigned char *data;
-	int retval;
-	Atom wmclass_atom;
-	gboolean running;
-	gint error;
-
-	window_id_atom = XInternAtom (GDK_DISPLAY (),
-				      "NAUTILUS_DESKTOP_WINDOW_ID", True);
-
-	if (window_id_atom == None) return FALSE;
-
-	retval = XGetWindowProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (),
-				     window_id_atom, 0, 1, False, XA_WINDOW,
-				     &actual_type, &actual_format, &nitems,
-				     &bytes_after, &data);
-
-	if (data != NULL) {
-		nautilus_xid = *(Window *) data;
-		XFree (data);
-	} else {
-		return FALSE;
-	}
-
-	if (actual_type != XA_WINDOW) return FALSE;
-	if (actual_format != 32) return FALSE;
-
-	wmclass_atom = XInternAtom (GDK_DISPLAY (), "WM_CLASS", False);
-
-	gdk_error_trap_push ();
-
-	retval = XGetWindowProperty (GDK_DISPLAY (), nautilus_xid,
-				     wmclass_atom, 0, 24, False, XA_STRING,
-				     &actual_type, &actual_format, &nitems,
-				     &bytes_after, &data);
-
-	error = gdk_error_trap_pop ();
-
-	if (error == BadWindow) return FALSE;
-
-	if (actual_type == XA_STRING &&
-	    nitems == 24 &&
-	    bytes_after == 0 &&
-	    actual_format == 8 &&
-	    data != NULL &&
-	    !strcmp (data, "desktop_window") &&
-	    !strcmp (data + strlen (data) + 1, "Nautilus"))
-		running = TRUE;
-	else
-		running = FALSE;
-
-	if (data != NULL)
-		XFree (data);
-
-	return running;
-}
-
-static gboolean
-gnome_cc_save_yourself (GnomeClient *client, gint phase, GnomeSaveStyle save_style,
-			gboolean shutdown, GnomeInteractStyle interact_style,
-			gboolean fast, gchar *argv0)
-{
-	gchar *argv[3];
-	gint argc;
-
-	argv[0] = argv0;
-	argv[1] = "--use-shell";
-	argc = 2;
-	gnome_client_set_clone_command (client, argc, argv);
-	gnome_client_set_restart_command (client, argc, argv);
-
-	return TRUE;
 }
 
 static void
@@ -1190,8 +1104,7 @@ cb_focus_changed (ControlCenter *cc)
 }
 
 static GtkWindow *
-create_window (const gchar *appname,
-	       const gchar *uri)
+create_window (void)
 {
 	GtkWidget *window;
 	GnomeClient *client;
@@ -1201,16 +1114,12 @@ create_window (const gchar *appname,
 
 	client = gnome_master_client ();
 	g_signal_connect (G_OBJECT (client),
-		"save_yourself",
-		G_CALLBACK (gnome_cc_save_yourself), (void *) appname);
-	g_signal_connect (G_OBJECT (client),
 		"die",
 		G_CALLBACK (gnome_cc_die), NULL);
 
-	info = control_center_get_categories (uri);
-	window = gnome_app_new ("gnomecc", info->title);
-	gnome_window_icon_set_from_file (GTK_WINDOW (window),
-					 PIXMAP_DIR "/control-center.png");
+	info = control_center_get_information ();
+	window = gnome_app_new ("gnomecc", _("Desktop Preferences"));
+	gtk_window_set_icon_name (GTK_WINDOW (window), "gnome-control-center");
 	gtk_window_set_default_size (GTK_WINDOW (window), 760, 530);
 
 	appbar = gnome_appbar_new (FALSE, TRUE, GNOME_PREFERENCES_USER);
@@ -1232,61 +1141,6 @@ create_window (const gchar *appname,
 	return GTK_WINDOW (window);
 }
 
-static void
-change_status_view (ControlCenter *cc, const gchar *status, void *data)
-{
-	NautilusView *view = data;
-
-	if (!status)
-		status = "";
-
-	nautilus_view_report_status (view, status);
-}
-
-static void
-cb_load_location (NautilusView  *view,
-		  char const    *location,
-		  ControlCenter *cc)
-{
-	ControlCenterInformation *info;
-
-	nautilus_view_report_load_underway (view);
-
-	info = control_center_get_categories (location);
-	control_center_set_info (cc, info);
-	control_center_set_status_cb (cc, change_status_view, view);
-
-	gtk_widget_show_all (cc->widget);
-
-	nautilus_view_report_load_complete (view);
-}
-
-#define GNOMECC_VIEW_OAFIID "OAFIID:GNOME_ControlCenter_View"
-#define GNOMECC_FACTORY_OAFIID "OAFIID:GNOME_ControlCenter_Factory"
-
-static BonoboObject *
-factory_create_cb (BonoboGenericFactory *factory,
-		   gchar const          *iid,
-		   gpointer              closure)
-{
-	ControlCenter *cc;
-	NautilusView *view;
-
-	if (strcmp (iid, GNOMECC_VIEW_OAFIID) != 0) {
-		return NULL;
-	}
-
-	cc = create_control_center ();
-	view = nautilus_view_new (cc->widget);
-
-	g_signal_connect (view,
-			  "load_location",
-			  G_CALLBACK (cb_load_location),
-			  cc);
-
-	return BONOBO_OBJECT (view);
-}
-
 int
 main (int argc, char *argv[])
 {
@@ -1300,57 +1154,11 @@ main (int argc, char *argv[])
 			    VERSION, LIBGNOMEUI_MODULE,
 			    argc, argv,
 			    GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
-			    GNOME_PARAM_POPT_TABLE, cap_options,
 			    NULL);
 
-	if (use_nautilus && is_nautilus_running ())
-		execlp ("nautilus", "nautilus", "preferences:///", NULL);
+	create_window ();
 
-	if (bonobo_activation_iid_get ()) {
-		/* Look for an existing factory */
-		CORBA_Object existing_factory = bonobo_activation_activate_from_id (
-			GNOMECC_FACTORY_OAFIID, Bonobo_ACTIVATION_FLAG_EXISTING_ONLY,
-			NULL, NULL);
-
-		if (existing_factory == CORBA_OBJECT_NIL) {
-			/* Not started, start now */
-			gchar *registration_id = bonobo_activation_make_registration_id (
-				GNOMECC_FACTORY_OAFIID, DisplayString (gdk_display));
-			BonoboGenericFactory *factory = bonobo_generic_factory_new (
-				registration_id, factory_create_cb, NULL);
-			g_free (registration_id);
-
-			bonobo_running_context_auto_exit_unref (
-				BONOBO_OBJECT (factory));
-
-			bonobo_main ();
-		}
-	} else {
-		const gchar **args;
-		poptContext ctx;
-		GValue context = { 0 };
-
-		g_object_get_property (G_OBJECT (ccprogram),
-				       GNOME_PARAM_POPT_CONTEXT,
-				       g_value_init (&context, G_TYPE_POINTER));
-		ctx = g_value_get_pointer (&context);
-
-		/* Create a standalone window */
-		args = poptGetArgs (ctx);
-		if (args != NULL) {
-			create_window (argv[0], args[0]);
-		} else {
-			create_window (argv[0], "preferences:///");
-		}
-		poptFreeContext (ctx);
-
-		gtk_main ();
-	}
-
-#if 0
-	if (gnome_unique_window_create ("gnome-control-center", create_unique_window, argv[0]))
-		gtk_main ();
-#endif
+	gtk_main ();
 
 	return 0;
 }

@@ -1,3 +1,31 @@
+2004-11-10  Mark McLoughlin  <mark@skynet.ie>
+
+	* control-center-categories.[ch]: re-write to use libgnome-menu
+	to load the contents of the preferences menu.
+
+	* control-center.c:
+	(relayout_canvas), (get_x), (get_y), (get_entry),
+	(get_line_length): update for control-center-categories.[ch] changes.
+	(activate_entry): load the .desktop file and launch.
+	(create_window), (main): remove all nautilus and bonobo stuff.
+	
+	* gnome-control-center.png: rename from control-center2.png.
+	
+	* gnomecc.desktop.in: update for new icon name.
+	
+	* GNOME_ControlCenter.server.in: remove, we're not a Nautilus view
+	anymore.
+	
+	* active.png, bcg_top.png, bg.png, bgtop.png,
+	  blank.png, ccsplash.png, empty.png, foot.png,
+	  gnome-lockscreen.png, gnome-unlockscreen.png,
+	  gnomecc-ui.xml, html-view.xpm, kill-gnomecc.sh,
+	  left.png, left_top.png, title.png, tree-view.xpm:
+	Remove what seems to be a big bunch of cruft.
+	
+	* Makefile.am: remove cruft, install new icon, don't link
+	aganst libnautilus.
+
 2004-11-09  Mark McLoughlin  <mark@skynet.ie>
 
 	* Makefile.am: don't define $(SETTINGS_DIR) - its not
