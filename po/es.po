@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.5\n"
-"POT-Creation-Date: 1999-07-30 15:55-0400\n"
+"POT-Creation-Date: 1999-08-02 12:18-0400\n"
 "PO-Revision-Date: 1998-11-21 00:05+0100\n"
 "Last-Translator: Pablo Saratxaga <srtxg@chanae.alphanet.ch>\n"
 "Language-Team: \n"
@@ -350,16 +350,19 @@ msgstr ""
 "No será posible guardar el estado actual"
 
 #: capplets/mime-type/mime-type-capplet.c:77
+#: capplets/session-properties/session-properties.c:203
 #: capplets/wm-properties/wm-properties-capplet.c:1016
 msgid "Delete"
 msgstr "Borrar"
 
 #: capplets/mime-type/mime-type-capplet.c:87
+#: capplets/session-properties/session-properties.c:193
 #: capplets/wm-properties/wm-properties-capplet.c:1006
 msgid "Add..."
 msgstr "Añadir..."
 
 #: capplets/mime-type/mime-type-capplet.c:91
+#: capplets/session-properties/session-properties.c:198
 #: capplets/wm-properties/wm-properties-capplet.c:1011
 msgid "Edit..."
 msgstr "Editar..."
@@ -688,30 +691,50 @@ msgstr "Siempre iniciado en cada sesión."
 msgid "Remove Program"
 msgstr "Programa"
 
-#: capplets/session-properties/session-properties.c:147
-msgid "Program:"
-msgstr "Programa:"
+#: capplets/session-properties/session-properties.c:149
+msgid "Prompt on logout"
+msgstr ""
 
-#: capplets/session-properties/session-properties.c:171
-msgid "Session"
-msgstr "Sesión"
+#: capplets/session-properties/session-properties.c:156
+msgid "Automatically save changes to session"
+msgstr ""
 
-#. dialog
-#: capplets/session-properties/session-properties.c:207
-msgid "Session Chooser"
-msgstr "Seleccionador de Sesiones"
+#: capplets/session-properties/session-properties.c:183
+#, fuzzy
+msgid "Priority"
+msgstr "Prioridad:"
 
-#: capplets/session-properties/session-properties.c:210
-msgid "Start Session"
-msgstr "Iniciar Sesión"
+#: capplets/session-properties/session-properties.c:184
+#: capplets/url-properties/url-properties.c:71
+msgid "Command"
+msgstr "Comando"
 
 #: capplets/session-properties/session-properties.c:213
-msgid "Cancel Login"
-msgstr "Cancelar Login"
+msgid "Browse Currently Running Programs..."
+msgstr ""
 
-#: capplets/session-properties/session-properties.c:236
+#: capplets/session-properties/session-properties.c:379
 msgid "Only display warnings."
 msgstr "Solo mostrar las advertencias."
+
+#: capplets/session-properties/startup-programs.c:319
+msgid ""
+"Programs with smaller values are started before programs with higher values. "
+"The default value should be OK"
+msgstr ""
+
+#: capplets/session-properties/startup-programs.c:338
+#, fuzzy
+msgid "The startup command cannot be empty"
+msgstr "El comando no puede quedar en blanco"
+
+#: capplets/session-properties/startup-programs.c:378
+msgid "Add Startup Program"
+msgstr ""
+
+#: capplets/session-properties/startup-programs.c:396
+msgid "Edit Startup Program"
+msgstr ""
 
 #: capplets/sound-properties/sound-properties.c:191
 msgid "Category"
@@ -1065,10 +1088,6 @@ msgstr ""
 msgid "Protocol"
 msgstr "Protocolo"
 
-#: capplets/url-properties/url-properties.c:71
-msgid "Command"
-msgstr "Comando"
-
 #: capplets/url-properties/url-properties.c:87
 msgid "handler:"
 msgstr "selector:"
@@ -1298,6 +1317,21 @@ msgstr ""
 #: control-center/main.c:184
 msgid "Control Center"
 msgstr "Centro de Control"
+
+#~ msgid "Program:"
+#~ msgstr "Programa:"
+
+#~ msgid "Session"
+#~ msgstr "Sesión"
+
+#~ msgid "Session Chooser"
+#~ msgstr "Seleccionador de Sesiones"
+
+#~ msgid "Start Session"
+#~ msgstr "Iniciar Sesión"
+
+#~ msgid "Cancel Login"
+#~ msgstr "Cancelar Login"
 
 #~ msgid "First Regular Expresion: "
 #~ msgstr "Primera expresión regular: "

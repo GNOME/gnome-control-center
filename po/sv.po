@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core-0.20\n"
-"POT-Creation-Date: 1999-07-30 15:55-0400\n"
+"POT-Creation-Date: 1999-08-02 12:18-0400\n"
 "PO-Revision-Date: 1998-06-16 00:00+0100\n"
 "Last-Translator: Martin Wahlen <mva@sslug.dk>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -335,17 +335,20 @@ msgid ""
 msgstr ""
 
 #: capplets/mime-type/mime-type-capplet.c:77
+#: capplets/session-properties/session-properties.c:203
 #: capplets/wm-properties/wm-properties-capplet.c:1016
 msgid "Delete"
 msgstr "Radera"
 
 #: capplets/mime-type/mime-type-capplet.c:87
+#: capplets/session-properties/session-properties.c:193
 #: capplets/wm-properties/wm-properties-capplet.c:1006
 #, fuzzy
 msgid "Add..."
 msgstr "Lägg till ny panel"
 
 #: capplets/mime-type/mime-type-capplet.c:91
+#: capplets/session-properties/session-properties.c:198
 #: capplets/wm-properties/wm-properties-capplet.c:1011
 #, fuzzy
 msgid "Edit..."
@@ -666,32 +669,50 @@ msgstr ""
 msgid "Remove Program"
 msgstr "Tag bort från panelen"
 
-#: capplets/session-properties/session-properties.c:147
-msgid "Program:"
+#: capplets/session-properties/session-properties.c:149
+#, fuzzy
+msgid "Prompt on logout"
+msgstr "Fråga innan utloggning"
+
+#: capplets/session-properties/session-properties.c:156
+msgid "Automatically save changes to session"
 msgstr ""
 
-#: capplets/session-properties/session-properties.c:171
+#: capplets/session-properties/session-properties.c:183
 #, fuzzy
-msgid "Session"
-msgstr "Avbryt session"
+msgid "Priority"
+msgstr "Skrivare"
 
-#. dialog
-#: capplets/session-properties/session-properties.c:207
-msgid "Session Chooser"
-msgstr ""
-
-#: capplets/session-properties/session-properties.c:210
+#: capplets/session-properties/session-properties.c:184
+#: capplets/url-properties/url-properties.c:71
 #, fuzzy
-msgid "Start Session"
-msgstr "Avbryt sessionen"
+msgid "Command"
+msgstr "Användarkommandon"
 
 #: capplets/session-properties/session-properties.c:213
-#, fuzzy
-msgid "Cancel Login"
-msgstr "Panel"
+msgid "Browse Currently Running Programs..."
+msgstr ""
 
-#: capplets/session-properties/session-properties.c:236
+#: capplets/session-properties/session-properties.c:379
 msgid "Only display warnings."
+msgstr ""
+
+#: capplets/session-properties/startup-programs.c:319
+msgid ""
+"Programs with smaller values are started before programs with higher values. "
+"The default value should be OK"
+msgstr ""
+
+#: capplets/session-properties/startup-programs.c:338
+msgid "The startup command cannot be empty"
+msgstr ""
+
+#: capplets/session-properties/startup-programs.c:378
+msgid "Add Startup Program"
+msgstr ""
+
+#: capplets/session-properties/startup-programs.c:396
+msgid "Edit Startup Program"
 msgstr ""
 
 #: capplets/sound-properties/sound-properties.c:191
@@ -1042,11 +1063,6 @@ msgstr ""
 msgid "Protocol"
 msgstr ""
 
-#: capplets/url-properties/url-properties.c:71
-#, fuzzy
-msgid "Command"
-msgstr "Användarkommandon"
-
 #: capplets/url-properties/url-properties.c:87
 msgid "handler:"
 msgstr ""
@@ -1277,6 +1293,18 @@ msgid "Control Center"
 msgstr "Webkontrollegenskaper"
 
 #, fuzzy
+#~ msgid "Session"
+#~ msgstr "Avbryt session"
+
+#, fuzzy
+#~ msgid "Start Session"
+#~ msgstr "Avbryt sessionen"
+
+#, fuzzy
+#~ msgid "Cancel Login"
+#~ msgstr "Panel"
+
+#, fuzzy
 #~ msgid "Run command"
 #~ msgstr "Användarkommandon"
 
@@ -1467,10 +1495,6 @@ msgstr "Webkontrollegenskaper"
 #, fuzzy
 #~ msgid "Print Command:"
 #~ msgstr "Skrivarkommando:"
-
-#, fuzzy
-#~ msgid "Print"
-#~ msgstr "Skrivare"
 
 #, fuzzy
 #~ msgid "Image Format:"
@@ -2411,9 +2435,6 @@ msgstr "Webkontrollegenskaper"
 
 #~ msgid "Log Out"
 #~ msgstr "Logga ut"
-
-#~ msgid "Prompt before logout"
-#~ msgstr "Fråga innan utloggning"
 
 #~ msgid "Global Panel Configuration"
 #~ msgstr "Global panelkonfigurering"

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.04\n"
-"POT-Creation-Date: 1999-07-30 15:55-0400\n"
+"POT-Creation-Date: 1999-08-02 12:18-0400\n"
 "PO-Revision-Date: 1999-06-20 17:20+09:00\n"
 "Last-Translator: Eiichiro ITANI <emu@ceres.dti.ne.jp>\n"
 "Language-Team: <gnome@lists.hypercore.co.jp>\n"
@@ -334,16 +334,19 @@ msgstr ""
 "状態を保存することが出来ません"
 
 #: capplets/mime-type/mime-type-capplet.c:77
+#: capplets/session-properties/session-properties.c:203
 #: capplets/wm-properties/wm-properties-capplet.c:1016
 msgid "Delete"
 msgstr "削除"
 
 #: capplets/mime-type/mime-type-capplet.c:87
+#: capplets/session-properties/session-properties.c:193
 #: capplets/wm-properties/wm-properties-capplet.c:1006
 msgid "Add..."
 msgstr "追加..."
 
 #: capplets/mime-type/mime-type-capplet.c:91
+#: capplets/session-properties/session-properties.c:198
 #: capplets/wm-properties/wm-properties-capplet.c:1011
 msgid "Edit..."
 msgstr "編集..."
@@ -670,30 +673,50 @@ msgstr "ログインの度に起動されます。"
 msgid "Remove Program"
 msgstr "プログラム"
 
-#: capplets/session-properties/session-properties.c:147
-msgid "Program:"
-msgstr "プログラム:"
+#: capplets/session-properties/session-properties.c:149
+msgid "Prompt on logout"
+msgstr ""
 
-#: capplets/session-properties/session-properties.c:171
-msgid "Session"
-msgstr "セッション"
+#: capplets/session-properties/session-properties.c:156
+msgid "Automatically save changes to session"
+msgstr ""
 
-#. dialog
-#: capplets/session-properties/session-properties.c:207
-msgid "Session Chooser"
-msgstr "セッションチューザー"
+#: capplets/session-properties/session-properties.c:183
+#, fuzzy
+msgid "Priority"
+msgstr "優先度:"
 
-#: capplets/session-properties/session-properties.c:210
-msgid "Start Session"
-msgstr "セッション起動"
+#: capplets/session-properties/session-properties.c:184
+#: capplets/url-properties/url-properties.c:71
+msgid "Command"
+msgstr "コマンド"
 
 #: capplets/session-properties/session-properties.c:213
-msgid "Cancel Login"
-msgstr "ログインのキャンセル"
+msgid "Browse Currently Running Programs..."
+msgstr ""
 
-#: capplets/session-properties/session-properties.c:236
+#: capplets/session-properties/session-properties.c:379
 msgid "Only display warnings."
 msgstr "警告のみ表示する。"
+
+#: capplets/session-properties/startup-programs.c:319
+msgid ""
+"Programs with smaller values are started before programs with higher values. "
+"The default value should be OK"
+msgstr ""
+
+#: capplets/session-properties/startup-programs.c:338
+#, fuzzy
+msgid "The startup command cannot be empty"
+msgstr "コマンドを指定して下さい"
+
+#: capplets/session-properties/startup-programs.c:378
+msgid "Add Startup Program"
+msgstr ""
+
+#: capplets/session-properties/startup-programs.c:396
+msgid "Edit Startup Program"
+msgstr ""
 
 #: capplets/sound-properties/sound-properties.c:191
 msgid "Category"
@@ -1042,10 +1065,6 @@ msgstr "URLハンドラキャプレットの初期化エラー"
 msgid "Protocol"
 msgstr "プロトコル"
 
-#: capplets/url-properties/url-properties.c:71
-msgid "Command"
-msgstr "コマンド"
-
 #: capplets/url-properties/url-properties.c:87
 msgid "handler:"
 msgstr "ハンドラ:"
@@ -1274,6 +1293,21 @@ msgstr ""
 #: control-center/main.c:184
 msgid "Control Center"
 msgstr "GNOMEコントロールセンター"
+
+#~ msgid "Program:"
+#~ msgstr "プログラム:"
+
+#~ msgid "Session"
+#~ msgstr "セッション"
+
+#~ msgid "Session Chooser"
+#~ msgstr "セッションチューザー"
+
+#~ msgid "Start Session"
+#~ msgstr "セッション起動"
+
+#~ msgid "Cancel Login"
+#~ msgstr "ログインのキャンセル"
 
 #~ msgid "First Regular Expresion: "
 #~ msgstr "第一の正規表現: "

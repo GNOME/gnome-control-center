@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.5\n"
-"POT-Creation-Date: 1999-07-30 15:55-0400\n"
+"POT-Creation-Date: 1999-08-02 12:18-0400\n"
 "PO-Revision-Date: 1999-07-30 02:19+02:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -329,16 +329,19 @@ msgstr ""
 "Ute av stand til å lagre status"
 
 #: capplets/mime-type/mime-type-capplet.c:77
+#: capplets/session-properties/session-properties.c:203
 #: capplets/wm-properties/wm-properties-capplet.c:1016
 msgid "Delete"
 msgstr "Slett"
 
 #: capplets/mime-type/mime-type-capplet.c:87
+#: capplets/session-properties/session-properties.c:193
 #: capplets/wm-properties/wm-properties-capplet.c:1006
 msgid "Add..."
 msgstr "Legg til..."
 
 #: capplets/mime-type/mime-type-capplet.c:91
+#: capplets/session-properties/session-properties.c:198
 #: capplets/wm-properties/wm-properties-capplet.c:1011
 msgid "Edit..."
 msgstr "Rediger..."
@@ -663,30 +666,50 @@ msgstr "Alltid startet ved innlogging."
 msgid "Remove Program"
 msgstr "Fjern program"
 
-#: capplets/session-properties/session-properties.c:147
-msgid "Program:"
-msgstr "Program:"
+#: capplets/session-properties/session-properties.c:149
+msgid "Prompt on logout"
+msgstr ""
 
-#: capplets/session-properties/session-properties.c:171
-msgid "Session"
-msgstr "Sesjon"
+#: capplets/session-properties/session-properties.c:156
+msgid "Automatically save changes to session"
+msgstr ""
 
-#. dialog
-#: capplets/session-properties/session-properties.c:207
-msgid "Session Chooser"
-msgstr "Sesjonsvelger"
+#: capplets/session-properties/session-properties.c:183
+#, fuzzy
+msgid "Priority"
+msgstr "Prioritet:"
 
-#: capplets/session-properties/session-properties.c:210
-msgid "Start Session"
-msgstr "Start sesjon"
+#: capplets/session-properties/session-properties.c:184
+#: capplets/url-properties/url-properties.c:71
+msgid "Command"
+msgstr "Kommando"
 
 #: capplets/session-properties/session-properties.c:213
-msgid "Cancel Login"
-msgstr "Avbryt innlogging"
+msgid "Browse Currently Running Programs..."
+msgstr ""
 
-#: capplets/session-properties/session-properties.c:236
+#: capplets/session-properties/session-properties.c:379
 msgid "Only display warnings."
 msgstr "Bare vis advarsler."
+
+#: capplets/session-properties/startup-programs.c:319
+msgid ""
+"Programs with smaller values are started before programs with higher values. "
+"The default value should be OK"
+msgstr ""
+
+#: capplets/session-properties/startup-programs.c:338
+#, fuzzy
+msgid "The startup command cannot be empty"
+msgstr "Kommandofeltet kan ikke være tomt"
+
+#: capplets/session-properties/startup-programs.c:378
+msgid "Add Startup Program"
+msgstr ""
+
+#: capplets/session-properties/startup-programs.c:396
+msgid "Edit Startup Program"
+msgstr ""
 
 #: capplets/sound-properties/sound-properties.c:191
 msgid "Category"
@@ -1035,10 +1058,6 @@ msgstr "Feil under initialisering av `url-properties' cappleten."
 msgid "Protocol"
 msgstr "Protokoll"
 
-#: capplets/url-properties/url-properties.c:71
-msgid "Command"
-msgstr "Kommando"
-
 #: capplets/url-properties/url-properties.c:87
 msgid "handler:"
 msgstr "håndterer:"
@@ -1267,3 +1286,18 @@ msgstr ""
 #: control-center/main.c:184
 msgid "Control Center"
 msgstr "Kontrollsenter"
+
+#~ msgid "Program:"
+#~ msgstr "Program:"
+
+#~ msgid "Session"
+#~ msgstr "Sesjon"
+
+#~ msgid "Session Chooser"
+#~ msgstr "Sesjonsvelger"
+
+#~ msgid "Start Session"
+#~ msgstr "Start sesjon"
+
+#~ msgid "Cancel Login"
+#~ msgstr "Avbryt innlogging"

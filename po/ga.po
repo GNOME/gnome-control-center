@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core VERSION\n"
-"POT-Creation-Date: 1999-07-30 15:55-0400\n"
+"POT-Creation-Date: 1999-08-02 12:18-0400\n"
 "PO-Revision-Date: 1998-05-07 11:00+0100\n"
 "Last-Translator:Alastair McKinstry <alastair@ilo.dec.com>\n"
 "Language-Team: Alastair McKinstry <alastair@ilo.dec.com>\n"
@@ -323,17 +323,20 @@ msgid ""
 msgstr ""
 
 #: capplets/mime-type/mime-type-capplet.c:77
+#: capplets/session-properties/session-properties.c:203
 #: capplets/wm-properties/wm-properties-capplet.c:1016
 msgid "Delete"
 msgstr ""
 
 #: capplets/mime-type/mime-type-capplet.c:87
+#: capplets/session-properties/session-properties.c:193
 #: capplets/wm-properties/wm-properties-capplet.c:1006
 #, fuzzy
 msgid "Add..."
 msgstr "Cuir le Painial"
 
 #: capplets/mime-type/mime-type-capplet.c:91
+#: capplets/session-properties/session-properties.c:198
 #: capplets/wm-properties/wm-properties-capplet.c:1011
 msgid "Edit..."
 msgstr ""
@@ -644,30 +647,48 @@ msgstr ""
 msgid "Remove Program"
 msgstr "Cuir as Painial"
 
-#: capplets/session-properties/session-properties.c:147
-msgid "Program:"
+#: capplets/session-properties/session-properties.c:149
+msgid "Prompt on logout"
 msgstr ""
 
-#: capplets/session-properties/session-properties.c:171
-msgid "Session"
+#: capplets/session-properties/session-properties.c:156
+msgid "Automatically save changes to session"
 msgstr ""
 
-#. dialog
-#: capplets/session-properties/session-properties.c:207
-msgid "Session Chooser"
-msgstr ""
+#: capplets/session-properties/session-properties.c:183
+#, fuzzy
+msgid "Priority"
+msgstr "Gradan"
 
-#: capplets/session-properties/session-properties.c:210
-msgid "Start Session"
+#: capplets/session-properties/session-properties.c:184
+#: capplets/url-properties/url-properties.c:71
+msgid "Command"
 msgstr ""
 
 #: capplets/session-properties/session-properties.c:213
-#, fuzzy
-msgid "Cancel Login"
-msgstr "Painial"
+msgid "Browse Currently Running Programs..."
+msgstr ""
 
-#: capplets/session-properties/session-properties.c:236
+#: capplets/session-properties/session-properties.c:379
 msgid "Only display warnings."
+msgstr ""
+
+#: capplets/session-properties/startup-programs.c:319
+msgid ""
+"Programs with smaller values are started before programs with higher values. "
+"The default value should be OK"
+msgstr ""
+
+#: capplets/session-properties/startup-programs.c:338
+msgid "The startup command cannot be empty"
+msgstr ""
+
+#: capplets/session-properties/startup-programs.c:378
+msgid "Add Startup Program"
+msgstr ""
+
+#: capplets/session-properties/startup-programs.c:396
+msgid "Edit Startup Program"
 msgstr ""
 
 #: capplets/sound-properties/sound-properties.c:191
@@ -1017,10 +1038,6 @@ msgstr ""
 msgid "Protocol"
 msgstr ""
 
-#: capplets/url-properties/url-properties.c:71
-msgid "Command"
-msgstr ""
-
 #: capplets/url-properties/url-properties.c:87
 msgid "handler:"
 msgstr ""
@@ -1241,6 +1258,10 @@ msgid "Control Center"
 msgstr "Albaltachtam Miarchlar"
 
 #, fuzzy
+#~ msgid "Cancel Login"
+#~ msgstr "Painial"
+
+#, fuzzy
 #~ msgid "Close Window"
 #~ msgstr "Triall ina bhfuinneog fiin"
 
@@ -1337,10 +1358,6 @@ msgstr "Albaltachtam Miarchlar"
 #, fuzzy
 #~ msgid "Saved Image Settings"
 #~ msgstr "Cur Szil"
-
-#, fuzzy
-#~ msgid "Print"
-#~ msgstr "Gradan"
 
 #, fuzzy
 #~ msgid "Image Format:"

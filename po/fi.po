@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center\n"
-"POT-Creation-Date: 1999-07-30 15:55-0400\n"
+"POT-Creation-Date: 1999-08-02 12:18-0400\n"
 "PO-Revision-Date: 1999-06-26 02:00+0200\n"
 "Last-Translator: Mikko Rauhala <mjr@iki.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -329,16 +329,19 @@ msgstr ""
 "En voi tallentaa tilaa."
 
 #: capplets/mime-type/mime-type-capplet.c:77
+#: capplets/session-properties/session-properties.c:203
 #: capplets/wm-properties/wm-properties-capplet.c:1016
 msgid "Delete"
 msgstr "Poista"
 
 #: capplets/mime-type/mime-type-capplet.c:87
+#: capplets/session-properties/session-properties.c:193
 #: capplets/wm-properties/wm-properties-capplet.c:1006
 msgid "Add..."
 msgstr "Lis‰‰..."
 
 #: capplets/mime-type/mime-type-capplet.c:91
+#: capplets/session-properties/session-properties.c:198
 #: capplets/wm-properties/wm-properties-capplet.c:1011
 msgid "Edit..."
 msgstr "Muokkaa..."
@@ -666,30 +669,50 @@ msgstr "K‰ynnistet‰‰n jokaisella sis‰‰nkirjoittautumiskerralla."
 msgid "Remove Program"
 msgstr "Ohjelma"
 
-#: capplets/session-properties/session-properties.c:147
-msgid "Program:"
-msgstr "Ohjelma:"
+#: capplets/session-properties/session-properties.c:149
+msgid "Prompt on logout"
+msgstr ""
 
-#: capplets/session-properties/session-properties.c:171
-msgid "Session"
-msgstr "Istunto"
+#: capplets/session-properties/session-properties.c:156
+msgid "Automatically save changes to session"
+msgstr ""
 
-#. dialog
-#: capplets/session-properties/session-properties.c:207
-msgid "Session Chooser"
-msgstr "Istunnonvalitsin"
+#: capplets/session-properties/session-properties.c:183
+#, fuzzy
+msgid "Priority"
+msgstr "Prioriteetti:"
 
-#: capplets/session-properties/session-properties.c:210
-msgid "Start Session"
-msgstr "Avaa istunto"
+#: capplets/session-properties/session-properties.c:184
+#: capplets/url-properties/url-properties.c:71
+msgid "Command"
+msgstr "Komento"
 
 #: capplets/session-properties/session-properties.c:213
-msgid "Cancel Login"
-msgstr "Peruuta sis‰‰nkirjoittautuminen"
+msgid "Browse Currently Running Programs..."
+msgstr ""
 
-#: capplets/session-properties/session-properties.c:236
+#: capplets/session-properties/session-properties.c:379
 msgid "Only display warnings."
 msgstr "N‰yt‰ vain varoitukset."
+
+#: capplets/session-properties/startup-programs.c:319
+msgid ""
+"Programs with smaller values are started before programs with higher values. "
+"The default value should be OK"
+msgstr ""
+
+#: capplets/session-properties/startup-programs.c:338
+#, fuzzy
+msgid "The startup command cannot be empty"
+msgstr "Komento ei voi olla tyhj‰"
+
+#: capplets/session-properties/startup-programs.c:378
+msgid "Add Startup Program"
+msgstr ""
+
+#: capplets/session-properties/startup-programs.c:396
+msgid "Edit Startup Program"
+msgstr ""
 
 #: capplets/sound-properties/sound-properties.c:191
 msgid "Category"
@@ -1038,10 +1061,6 @@ msgstr ""
 msgid "Protocol"
 msgstr "Protokolla"
 
-#: capplets/url-properties/url-properties.c:71
-msgid "Command"
-msgstr "Komento"
-
 #: capplets/url-properties/url-properties.c:87
 msgid "handler:"
 msgstr "k‰sittelij‰:"
@@ -1269,6 +1288,21 @@ msgstr ""
 #: control-center/main.c:184
 msgid "Control Center"
 msgstr "Hallintakeskus"
+
+#~ msgid "Program:"
+#~ msgstr "Ohjelma:"
+
+#~ msgid "Session"
+#~ msgstr "Istunto"
+
+#~ msgid "Session Chooser"
+#~ msgstr "Istunnonvalitsin"
+
+#~ msgid "Start Session"
+#~ msgstr "Avaa istunto"
+
+#~ msgid "Cancel Login"
+#~ msgstr "Peruuta sis‰‰nkirjoittautuminen"
 
 #~ msgid "First Regular Expresion: "
 #~ msgstr "Ensimm‰inen s‰‰nnˆllinen lauseke: "

@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 1999-07-30 15:55-0400\n"
+"POT-Creation-Date: 1999-08-02 12:18-0400\n"
 "PO-Revision-Date: 1998-12-05 14:10+0100\n"
 "Last-Translator: Zbigniew Chyla <chyla@alice.ci.pwr.wroc.pl>\n"
 "MIME-Version: 1.0\n"
@@ -322,17 +322,20 @@ msgid ""
 msgstr ""
 
 #: capplets/mime-type/mime-type-capplet.c:77
+#: capplets/session-properties/session-properties.c:203
 #: capplets/wm-properties/wm-properties-capplet.c:1016
 msgid "Delete"
 msgstr "Usuñ"
 
 #: capplets/mime-type/mime-type-capplet.c:87
+#: capplets/session-properties/session-properties.c:193
 #: capplets/wm-properties/wm-properties-capplet.c:1006
 #, fuzzy
 msgid "Add..."
 msgstr "Dodaj nowy panel"
 
 #: capplets/mime-type/mime-type-capplet.c:91
+#: capplets/session-properties/session-properties.c:198
 #: capplets/wm-properties/wm-properties-capplet.c:1011
 #, fuzzy
 msgid "Edit..."
@@ -648,30 +651,49 @@ msgstr ""
 msgid "Remove Program"
 msgstr "Usuñ z panela"
 
-#: capplets/session-properties/session-properties.c:147
-msgid "Program:"
+#: capplets/session-properties/session-properties.c:149
+#, fuzzy
+msgid "Prompt on logout"
+msgstr "Zapytaj przed zamkniêciem sesji"
+
+#: capplets/session-properties/session-properties.c:156
+msgid "Automatically save changes to session"
 msgstr ""
 
-#: capplets/session-properties/session-properties.c:171
-msgid "Session"
-msgstr ""
+#: capplets/session-properties/session-properties.c:183
+msgid "Priority"
+msgstr "Priorytet"
 
-#. dialog
-#: capplets/session-properties/session-properties.c:207
-msgid "Session Chooser"
-msgstr ""
-
-#: capplets/session-properties/session-properties.c:210
-msgid "Start Session"
-msgstr ""
+#: capplets/session-properties/session-properties.c:184
+#: capplets/url-properties/url-properties.c:71
+#, fuzzy
+msgid "Command"
+msgstr "Polecenie nawi±zania po³±czenia:"
 
 #: capplets/session-properties/session-properties.c:213
-#, fuzzy
-msgid "Cancel Login"
-msgstr " Anuluj "
+msgid "Browse Currently Running Programs..."
+msgstr ""
 
-#: capplets/session-properties/session-properties.c:236
+#: capplets/session-properties/session-properties.c:379
 msgid "Only display warnings."
+msgstr ""
+
+#: capplets/session-properties/startup-programs.c:319
+msgid ""
+"Programs with smaller values are started before programs with higher values. "
+"The default value should be OK"
+msgstr ""
+
+#: capplets/session-properties/startup-programs.c:338
+msgid "The startup command cannot be empty"
+msgstr ""
+
+#: capplets/session-properties/startup-programs.c:378
+msgid "Add Startup Program"
+msgstr ""
+
+#: capplets/session-properties/startup-programs.c:396
+msgid "Edit Startup Program"
 msgstr ""
 
 #: capplets/sound-properties/sound-properties.c:191
@@ -1024,11 +1046,6 @@ msgstr ""
 msgid "Protocol"
 msgstr ""
 
-#: capplets/url-properties/url-properties.c:71
-#, fuzzy
-msgid "Command"
-msgstr "Polecenie nawi±zania po³±czenia:"
-
 #: capplets/url-properties/url-properties.c:87
 msgid "handler:"
 msgstr ""
@@ -1253,6 +1270,10 @@ msgstr ""
 #, fuzzy
 msgid "Control Center"
 msgstr "W³a¶ciwo¶ci paska adresu URL"
+
+#, fuzzy
+#~ msgid "Cancel Login"
+#~ msgstr " Anuluj "
 
 #, fuzzy
 #~ msgid "Run command"
@@ -1965,9 +1986,6 @@ msgstr "W³a¶ciwo¶ci paska adresu URL"
 #~ msgid "Requires Password"
 #~ msgstr "Wymaga has³a"
 
-#~ msgid "Priority"
-#~ msgstr "Priorytet"
-
 #~ msgid "Low"
 #~ msgstr "Niski"
 
@@ -2502,9 +2520,6 @@ msgstr "W³a¶ciwo¶ci paska adresu URL"
 
 #~ msgid "Log Out"
 #~ msgstr "Koniec pracy"
-
-#~ msgid "Prompt before logout"
-#~ msgstr "Zapytaj przed zamkniêciem sesji"
 
 #~ msgid "Applet Padding"
 #~ msgstr "Wyrównanie apletów"

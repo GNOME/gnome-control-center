@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.0\n"
-"POT-Creation-Date: 1999-07-30 15:55-0400\n"
+"POT-Creation-Date: 1999-08-02 12:18-0400\n"
 "PO-Revision-Date: 1998-02-26 01:40+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@adam.kaist.ac.kr>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -321,16 +321,19 @@ msgid ""
 msgstr ""
 
 #: capplets/mime-type/mime-type-capplet.c:77
+#: capplets/session-properties/session-properties.c:203
 #: capplets/wm-properties/wm-properties-capplet.c:1016
 msgid "Delete"
 msgstr "지우기"
 
 #: capplets/mime-type/mime-type-capplet.c:87
+#: capplets/session-properties/session-properties.c:193
 #: capplets/wm-properties/wm-properties-capplet.c:1006
 msgid "Add..."
 msgstr "추가..."
 
 #: capplets/mime-type/mime-type-capplet.c:91
+#: capplets/session-properties/session-properties.c:198
 #: capplets/wm-properties/wm-properties-capplet.c:1011
 msgid "Edit..."
 msgstr "편집..."
@@ -653,30 +656,50 @@ msgstr "매 로긴 시에 항상 시작하기."
 msgid "Remove Program"
 msgstr "프로그램"
 
-#: capplets/session-properties/session-properties.c:147
-msgid "Program:"
-msgstr "프로그램:"
+#: capplets/session-properties/session-properties.c:149
+msgid "Prompt on logout"
+msgstr ""
 
-#: capplets/session-properties/session-properties.c:171
-msgid "Session"
-msgstr "세션"
+#: capplets/session-properties/session-properties.c:156
+msgid "Automatically save changes to session"
+msgstr ""
 
-#. dialog
-#: capplets/session-properties/session-properties.c:207
-msgid "Session Chooser"
-msgstr "세션 선택기"
+#: capplets/session-properties/session-properties.c:183
+#, fuzzy
+msgid "Priority"
+msgstr "우선순위:"
 
-#: capplets/session-properties/session-properties.c:210
-msgid "Start Session"
-msgstr "세션 시작"
+#: capplets/session-properties/session-properties.c:184
+#: capplets/url-properties/url-properties.c:71
+msgid "Command"
+msgstr "명령어"
 
 #: capplets/session-properties/session-properties.c:213
-msgid "Cancel Login"
-msgstr "로그인 취소"
+msgid "Browse Currently Running Programs..."
+msgstr ""
 
-#: capplets/session-properties/session-properties.c:236
+#: capplets/session-properties/session-properties.c:379
 msgid "Only display warnings."
 msgstr "경고만 표시."
+
+#: capplets/session-properties/startup-programs.c:319
+msgid ""
+"Programs with smaller values are started before programs with higher values. "
+"The default value should be OK"
+msgstr ""
+
+#: capplets/session-properties/startup-programs.c:338
+#, fuzzy
+msgid "The startup command cannot be empty"
+msgstr "명령어는 비어있으면 안 됩니다"
+
+#: capplets/session-properties/startup-programs.c:378
+msgid "Add Startup Program"
+msgstr ""
+
+#: capplets/session-properties/startup-programs.c:396
+msgid "Edit Startup Program"
+msgstr ""
 
 #: capplets/sound-properties/sound-properties.c:191
 msgid "Category"
@@ -1026,10 +1049,6 @@ msgstr ""
 msgid "Protocol"
 msgstr "프로토콜"
 
-#: capplets/url-properties/url-properties.c:71
-msgid "Command"
-msgstr "명령어"
-
 #: capplets/url-properties/url-properties.c:87
 msgid "handler:"
 msgstr "핸들러:"
@@ -1257,6 +1276,21 @@ msgstr ""
 #: control-center/main.c:184
 msgid "Control Center"
 msgstr "조종판"
+
+#~ msgid "Program:"
+#~ msgstr "프로그램:"
+
+#~ msgid "Session"
+#~ msgstr "세션"
+
+#~ msgid "Session Chooser"
+#~ msgstr "세션 선택기"
+
+#~ msgid "Start Session"
+#~ msgstr "세션 시작"
+
+#~ msgid "Cancel Login"
+#~ msgstr "로그인 취소"
 
 #~ msgid "First Regular Expresion: "
 #~ msgstr "1번째 정규식: "
