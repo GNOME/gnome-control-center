@@ -249,7 +249,7 @@ make_main(void)
     if (style->rc_style == NULL) {
       /* FIXME - should really get this from X somehow   */
       /*         for now we just assume default gtk font */
-      initial_font = g_strdup(_("-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"));
+      initial_font = g_strdup("-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*");
     } else {
       initial_font = style->rc_style->font_name;
     }
