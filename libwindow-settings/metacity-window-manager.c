@@ -114,6 +114,7 @@ add_themes_from_dir (GList *current_list, const char *path)
                         }
                 }
 
+                found = FALSE;
                 /*g_free (entry);*/
                 g_free (theme_file_path);
         }
