@@ -1,5 +1,6 @@
 # Czech translation of gnome-control-center.
 # Copyright (C) 1999,2003 Free Software Foundation, Inc.
+# Copyright (C) 2003 Miloslav Trmac <mitr@volny.cz>
 # David Šauer <davids@penguin.cz>, 1999.
 # Jiří Lebl <jirka@5z.cz>, 2002.
 # Michal Bukovjan <bukm@centrum.cz>, 2002,2003
@@ -9,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-12 14:45+0100\n"
-"PO-Revision-Date: 2003-12-12 17:56+0100\n"
+"POT-Creation-Date: 2003-12-23 15:25+0100\n"
+"PO-Revision-Date: 2003-12-23 21:07+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -880,19 +881,19 @@ msgstr "_Vyberte prohlížeč WWW:"
 msgid "_Select an Editor:"
 msgstr "_Vyberte editor:"
 
-#: capplets/desktop-links/Accessibility.directory.in.in.h:1
+#: capplets/desktop-links/Accessibility.directory.in.h:1
 msgid "Accessibility"
 msgstr "Zpřístupnění"
 
-#: capplets/desktop-links/Accessibility.directory.in.in.h:2
+#: capplets/desktop-links/Accessibility.directory.in.h:2
 msgid "Accessibility Settings"
 msgstr "Nastavení zpřístupnění"
 
-#: capplets/desktop-links/Advanced.directory.in.in.h:1
+#: capplets/desktop-links/Advanced.directory.in.h:1
 msgid "Advanced"
 msgstr "Pokročilé"
 
-#: capplets/desktop-links/Advanced.directory.in.in.h:2
+#: capplets/desktop-links/Advanced.directory.in.h:2
 msgid "Advanced Settings"
 msgstr "Pokročilé nastavení"
 
@@ -982,7 +983,7 @@ msgid "Associate sounds with window manager events"
 msgstr "Přiřazení zvuků k událostem správce oken"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
-#: capplets/sound/sound.desktop.in.h:2
+#: capplets/sound/gnome-settings-sound.desktop.in.h:2
 msgid "Sound"
 msgstr "Zvuk"
 
@@ -1973,11 +1974,11 @@ msgstr "_Práh:"
 msgid "_Timeout:"
 msgstr "_Vypršení:"
 
-#: capplets/mouse/mouse.desktop.in.h:1
+#: capplets/mouse/gnome-settings-mouse.desktop.in.h:1
 msgid "Mouse"
 msgstr "Myš"
 
-#: capplets/mouse/mouse.desktop.in.h:2
+#: capplets/mouse/gnome-settings-mouse.desktop.in.h:2
 msgid "Set your mouse preferences"
 msgstr "Nastavte vlastnosti vaší myši"
 
@@ -2053,6 +2054,10 @@ msgstr "Proxy _bezpečného HTTP:"
 msgid "_Username:"
 msgstr "_Uživatel:"
 
+#: capplets/sound/gnome-settings-sound.desktop.in.h:1
+msgid "Enable sound and associate sounds with events"
+msgstr "Zapnutí zvuku a přiřazení zvuků událostem"
+
 #: capplets/sound/sound-properties-capplet.c:239
 msgid "Sound preferences"
 msgstr "Nastavení zvuku"
@@ -2096,10 +2101,6 @@ msgstr "Ozvučení _událostí"
 #: capplets/sound/sound-properties.glade.h:10
 msgid "_Visual feedback:"
 msgstr "_Vizuální zpětná vazba:"
-
-#: capplets/sound/sound.desktop.in.h:1
-msgid "Enable sound and associate sounds with events"
-msgstr "Zapnutí zvuku a přiřazení zvuků událostem"
 
 #: capplets/theme-switcher/control/control.c:18
 msgid "Eenie Meenie Mynie Moe Catcha Tiger By Its Toe"
@@ -2160,6 +2161,21 @@ msgstr ""
 "Na vašem systému nebyla nalezena žádná témata. To pravděpodobně znamená, že "
 "váš dialog \"Nastavení témat\" byl nesprávně nainstalován nebo jste "
 "nenainstalovali balíček \"gnome-themes\"."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:127
+msgid "No theme file location specified to install"
+msgstr "Neurčeno umístění souboru tématu, které instalovat"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:146
+msgid "The theme file location specified to install is invalid"
+msgstr "Určení umístění pro instalaci souboru tématu není platné"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:173
+#, c-format
+msgid ""
+"%s is the path where the theme files will be installed. This can not be "
+"selected as the source location"
+msgstr "%s je cesta, kam budou nainstalovány soubory tématu. Nemůže být zvolena jako zdrojové umístění"
 
 #: capplets/theme-switcher/gnome-theme-manager.c:645
 #: capplets/theme-switcher/gnome-theme-manager.c:705
@@ -2290,21 +2306,13 @@ msgstr "_Uložit téma..."
 msgid "_Theme name:"
 msgstr "_Jméno tématu:"
 
-#: capplets/ui-properties/behavior.desktop.in.h:1
+#: capplets/ui-properties/gnome-ui-properties.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
 msgstr "Upravte si vzhled nástrojové lišty a lišt s menu v aplikacích"
 
-#: capplets/ui-properties/behavior.desktop.in.h:2
+#: capplets/ui-properties/gnome-ui-properties.desktop.in.h:2
 msgid "Menus & Toolbars"
 msgstr "Nástrojové lišty a menu"
-
-#: capplets/ui-properties/behavior.desktop.in.in.h:1
-msgid "Behavior"
-msgstr "Chování"
-
-#: capplets/ui-properties/behavior.desktop.in.in.h:2
-msgid "Sets the default behavior of GNOME applications"
-msgstr "Nastavuje výchozí chování aplikací prostředí GNOME"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:2
 msgid "<b>Behavior and Appearance</b>"
@@ -2458,7 +2466,7 @@ msgstr "Vlastnosti okna"
 msgid "Windows"
 msgstr "Okna"
 
-#: control-center/capplet-dir-view-list.c:324
+#: control-center/capplet-dir-view-list.c:319
 #, c-format
 msgid "GNOME Control Center: %s"
 msgstr "Ovládací centrum GNOME: %s"
@@ -3144,6 +3152,12 @@ msgstr "Jestli zobrazovat náhledy nainstalovaných témat"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Jestli zobrazovat náhledy témat"
+
+#~ msgid "Behavior"
+#~ msgstr "Chování"
+
+#~ msgid "Sets the default behavior of GNOME applications"
+#~ msgstr "Nastavuje výchozí chování aplikací prostředí GNOME"
 
 #~ msgid "One minute until the next break"
 #~ msgstr "Jedna minuta do další přestávky"
