@@ -268,6 +268,10 @@ text_apply_editor (GtkWidget *entry,
 
 	editor = gtk_entry_get_text (GTK_ENTRY (WID ("text_select_combo_entry")));
 
+	/* don't do anything if it was cleared. */
+	if (!*editor)
+		return;
+
 	for (li = text_editors; li; li = li->next) {
 		mime_app = li->data;
 		if (! strcmp (mime_app->name, editor)) {
