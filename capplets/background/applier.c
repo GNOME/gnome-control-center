@@ -763,7 +763,7 @@ renderer_render_wallpaper (Renderer *renderer)
 			guint alpha_value;
 			guint32 colorv;
 
-			alpha_value = renderer->prefs->opacity;
+			alpha_value = 2.56 * renderer->prefs->opacity;
 			alpha_value = alpha_value * alpha_value / 256;
 			alpha_value = CLAMP (alpha_value, 0, 255);
 

@@ -232,7 +232,7 @@ preferences_new_from_bonobo_pbag (Bonobo_PropertyBag pb, CORBA_Environment *ev)
 	prefs->color2 = bonobo_color_to_gdk ((Bonobo_Config_Color *)(PB_GET_VALUE ("color2"))->_value);
 
 	prefs->opacity = BONOBO_ARG_GET_LONG (PB_GET_VALUE ("opacity"));
-	if (prefs->opacity != 100)
+	if (prefs->opacity >= 100)
 		prefs->adjust_opacity = FALSE;
 
 	prefs->orientation = bonobo_property_bag_client_get_value_gulong (pb, "orientation", ev);
@@ -278,7 +278,7 @@ preferences_new_from_bonobo_db (Bonobo_ConfigDatabase db, CORBA_Environment *ev)
 	prefs->color2 = bonobo_color_to_gdk ((Bonobo_Config_Color *)(DB_GET_VALUE ("/main/color2"))->_value);
 
 	prefs->opacity = BONOBO_ARG_GET_LONG (DB_GET_VALUE ("/main/opacity"));
-	if (prefs->opacity != 100)
+	if (prefs->opacity >= 100)
 		prefs->adjust_opacity = FALSE;
 
 	return GTK_OBJECT (prefs);
