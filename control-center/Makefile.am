@@ -29,7 +29,7 @@ INCLUDES = 							\
 	-DPIXMAPS_DIR=\""$(appicondir)"\"			\
 	-DART_DIR=\""$(splashdir)"\"				\
 	-DGNOME_SBINDIR=\""$(sbindir)"\"			\
-	@GNOMECC_CFLAGS@	
+	$(GNOMECC_CFLAGS)
 
 bin_PROGRAMS = gnome2-control-center
 
