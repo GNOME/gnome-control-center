@@ -1,12 +1,19 @@
-schemadir   = @GCONF_SCHEMA_FILE_DIR@
-schema_DATA = \
-	apps_gnome_settings_daemon_screensaver.schemas		\
-	apps_gnome_settings_daemon_default_editor.schemas	\
+schemadir   = $(GCONF_SCHEMA_FILE_DIR)
+schema_in_files= \
+	apps_gnome_settings_daemon_screensaver.schemas.in	\
+	apps_gnome_settings_daemon_default_editor.schemas.in	\
 	desktop_gnome_font_rendering.schemas
 
-schema_source_data = $(foreach file, $(schema_DATA), $(srcdir)/$(file))
+schema_DATA = $(schema_in_files:.schemas.in=.schemas)
 
-install-data-local: $(schema_installed_data)
-	GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(schema_source_data)
+@INTLTOOL_SCHEMAS_RULE@
+
+# don't do this if we are building in eg. rpm
+install-data-local:
+	if test -z "$(DESTDIR)" ; then \
+		for p in $(schema_DATA) ; do \
+			GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(srcdir)/$$p; \
+		done \
+	fi
 
 EXTRA_DIST=$(schema_DATA)
