@@ -703,8 +703,10 @@ get_category_name (const gchar *mime_type)
 		return "Video";
 	else if (!strncmp (mime_type, "audio/", strlen ("audio/")))
 		return "Audio";
-	else
-		return NULL;
+	else {
+	    g_warning (mime_type);
+		return "Misc";
+	}
 }
 
 static const gchar *
@@ -723,7 +725,7 @@ get_category_description (const gchar *mime_type)
 	else if (!strncmp (mime_type, "audio/", strlen ("audio/")))
 		return _("Audio");
 	else
-		return NULL;
+		return _("Misc");
 }
 
 static GSList *
