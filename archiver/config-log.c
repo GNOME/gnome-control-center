@@ -1030,8 +1030,8 @@ dump_log (ConfigLog *config_log)
 	out_fd = open (filename_out, O_CREAT | O_WRONLY | O_TRUNC, 0600);
 
 	if (out_fd == -1) {
-		g_warning ("Could not open output file: %s",
-			   g_strerror (errno));
+		g_critical ("Could not open output file: %s",
+			    g_strerror (errno));
 		return;
 	}
 
@@ -1050,13 +1050,17 @@ dump_log (ConfigLog *config_log)
 	}
 
 	io_buffer_destroy (output);
-	close (out_fd);
 
 	if (config_log->p->filename)
 		rename (filename_out, config_log->p->filename);
 
 	DEBUG_MSG ("Exit");
 }
+
+/* Return TRUE if the config log has entries made by actual configuration
+ * changes, as opposed to default values placed there when the location was
+ * initialized
+ */
 
 static gboolean
 has_nondefaults (ConfigLog *config_log)

@@ -1,3 +1,8 @@
+2001-06-21  Bradford Hovinen  <hovinen@ximian.com>
+
+	* config-log.c (dump_log): Don't call close on fd
+	(dump_log): Use g_critical on error conditions rather than g_warning
+
 2001-06-20  Bradford Hovinen  <hovinen@ximian.com>
 
 	* config-log.c (slave_data_cb): Dump the log after loading it from
