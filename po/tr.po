@@ -1,13 +1,13 @@
 # -------------------------------------------------------
 # Copyright (C) 2000 Free Software Foundation, Inc.
 # Fatih Demir <kabalak@gmx.net>, 2000.
-#
+# 
 msgid ""
 msgstr ""
-"Project-Id-Version: control-center HEAD 1.3.1\n"
-"POT-Creation-Date: 2000-11-23 15:11+0100\n"
-"PO-Revision-Date: 2001-01-14 14:02+0100\n"
-"Last-Translator: Ýrfan MACÝT <imacit@mail.cu.edu.tr>\n"
+"Project-Id-Version: control-center 1.3.1\n"
+"POT-Creation-Date: 2001-02-20 12:01+0100\n"
+"PO-Revision-Date: 2001-03-14 18:56+0100\n"
+"Last-Translator: Vedat FETAH <vedat@ciheam.ege.edu.tr>\n"
 "Language-Team: GNOME Turk <gnome-turk@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-9\n"
@@ -21,15 +21,14 @@ msgid ""
 "No help is available/installed for these settings. Please make sure you\n"
 "have the GNOME User's Guide installed on your system."
 msgstr ""
-"Bu ayarlar için hiç bir yardým yok . Lütfen Gnome kullanýcý kýlavuzunun\n"
+"Bu ayarlar için yardým bilgisi yok . Lütfen Gnome kullanýcý kýlavuzunun\n"
 "yüklendiðinden emin olun ."
 
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:205
 #: capplets/session-properties/session-properties.c:345
 #: capplets/theme-switcher/gui.c:368
 #: capplets/wm-properties/wm-properties-capplet.c:646
-#: new-control-center/capplet-dir-view.c:130
-#: new-control-center/capplet-dir-view.c:580
+#: new-control-center/capplet-dir-view.c:522
 msgid "Close"
 msgstr "Kapat"
 
@@ -39,12 +38,12 @@ msgstr "Gnome editörü"
 
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:318
 msgid "Run In Terminal"
-msgstr "Komuta'da çalýþtýr"
+msgstr "Komut Düzeyinde çalýþtýr"
 
 #. icon box
 #: capplets/mime-type/edit-window.c:266
 msgid "Select an icon..."
-msgstr "Bir ikona seç ..."
+msgstr "Bir ikon seç ..."
 
 #: capplets/mime-type/edit-window.c:276
 msgid "Mime Type: "
@@ -58,7 +57,7 @@ msgstr "Ekle"
 #: capplets/new-screensaver-properties/prefs-widget.c:272
 #: capplets/url-properties/url-properties.c:134
 msgid "Remove"
-msgstr "Sil"
+msgstr "Kaldýr"
 
 #. gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
 #: capplets/mime-type/edit-window.c:341
@@ -92,11 +91,11 @@ msgstr "Bir dosya seç ..."
 
 #: capplets/mime-type/edit-window.c:383
 msgid "View"
-msgstr "Göster"
+msgstr "Görünüm"
 
 #: capplets/mime-type/edit-window.c:399
 msgid "Edit"
-msgstr "Deðiþtir"
+msgstr "Düzen"
 
 #. we initialize everything
 #: capplets/mime-type/edit-window.c:448
@@ -121,8 +120,8 @@ msgid ""
 "You must add either a regular-expression or\n"
 "a file-name extension"
 msgstr ""
-"Ya bir \"düzenli ifade\" yada bir sonek \n"
-"belirlemek zorundasýn"
+"Ya bir \"düzenli ifade\" yada bir dosya uzantýsý \n"
+"belirlemek zorundasýnýz"
 
 #: capplets/mime-type/mime-data.c:501
 msgid ""
@@ -228,13 +227,13 @@ msgstr "Sil"
 #: capplets/session-properties/session-properties.c:189
 #: capplets/wm-properties/wm-properties-capplet.c:1079
 msgid "Add..."
-msgstr "Ekle ..."
+msgstr "Ekle..."
 
 #: capplets/mime-type/mime-type-capplet.c:97
 #: capplets/session-properties/session-properties.c:194
 #: capplets/wm-properties/wm-properties-capplet.c:1084
 msgid "Edit..."
-msgstr "Deðiþtir ..."
+msgstr "Düzenle..."
 
 #: capplets/mime-type/new-mime-window.c:25
 msgid "Add Mime Type"
@@ -245,8 +244,8 @@ msgid ""
 "Add a new Mime Type\n"
 "For example:  image/tiff; text/x-scheme"
 msgstr ""
-"Yeni bir Mime tipini ekle\n"
-"Mesela : image/tiff; text/x-scheme"
+"Yeni bir Mime tipi ekle\n"
+"Örneðin: image/tiff; text/x-scheme"
 
 #: capplets/mime-type/new-mime-window.c:31
 msgid "Mime Type:"
@@ -254,19 +253,19 @@ msgstr "Mime tipi:"
 
 #: capplets/mime-type/new-mime-window.c:39
 msgid "Extensions"
-msgstr "Sonekler"
+msgstr "Uzantýlar"
 
 #: capplets/mime-type/new-mime-window.c:43
 msgid ""
 "Type in the extensions for this mime-type.\n"
 "For example:  .html, .htm"
 msgstr ""
-"Bu Mime tipi için geçerli olan sonkeler .\n"
+"Bu Mime tipi için geçerli olan uzantýlar .\n"
 "Mesela: .html .htm"
 
 #: capplets/mime-type/new-mime-window.c:50
 msgid "Extension:"
-msgstr "Sonek:"
+msgstr "Uzantý:"
 
 #: capplets/mime-type/new-mime-window.c:55
 msgid "Regular Expressions"
@@ -277,83 +276,137 @@ msgid ""
 "You can set up two regular expressions here to identify the Mime Type\n"
 "by.  These fields are optional."
 msgstr ""
-"Buradan ( istediðin halde ) bir yada iki düzenli ifadeyi tanýtabilirsin\n"
+"Buradan (isterseniz) bir yada iki düzenli ifadeyi tanýtabilirsin\n"
 "\n"
 "ve bunlar mime tipini belirlemeye yarayacaktýr ."
 
-#: capplets/new-background-properties/applier.c:475
-msgid "Disabled"
-msgstr "Kapalý"
+#: capplets/new-background-properties/applier.c:353
+#, c-format
+msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
+msgstr "\"%s\" için pixbuf yüklenemedi;eriþilemez duvar kaðýdý. "
 
+#: capplets/new-background-properties/applier.c:493
+msgid "Disabled"
+msgstr "Eriþilemez"
+
+#. n * Fil med oversettbare strenger generert av Glade.
+#. * Legg till denne filen i ditt prosjekts POTFILES.in.
+#. * IKKE kompiler den som en del av applikasjonen din.
 #.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/new-background-properties/background-properties.glade.h:7
+#: capplets/new-background-properties/background-properties.glade.h:6
 #: capplets/new-keyboard-properties/keyboard-properties.glade.h:7
 #: capplets/new-mouse-properties/mouse-properties.glade.h:7
 #: capplets/new-sound-properties/sound-properties.glade.h:7
-#: capplets/new-ui-properties/ui-properties.glade.h:7
 msgid "window1"
 msgstr "pencere1"
 
+#: capplets/new-background-properties/background-properties.glade.h:7
+#, fuzzy
+msgid "Use GNOME for setting background"
+msgstr "Artalan ayarlarý için GNOME'u kullan"
+
 #: capplets/new-background-properties/background-properties.glade.h:8
-msgid "Color"
-msgstr "Renk"
+#, fuzzy
+msgid "Colors"
+msgstr "Renkler"
 
 #: capplets/new-background-properties/background-properties.glade.h:9
+#: capplets/new-background-properties/background-properties.glade.h:20
+#, fuzzy
+msgid "Effect"
+msgstr "Etki"
+
+#: capplets/new-background-properties/background-properties.glade.h:10
 msgid "Color 1"
 msgstr "1.nci Renk"
 
-#: capplets/new-background-properties/background-properties.glade.h:10
+#: capplets/new-background-properties/background-properties.glade.h:11
 msgid "Color 2"
 msgstr "2.nci Renk"
 
-#: capplets/new-background-properties/background-properties.glade.h:11
 #: capplets/new-background-properties/background-properties.glade.h:12
-msgid "Pick a color"
-msgstr "Rengi Seç"
-
 #: capplets/new-background-properties/background-properties.glade.h:13
-msgid "Solid"
-msgstr "Dolgun"
+msgid "Pick a color"
+msgstr "Bir Renk Seç"
 
 #: capplets/new-background-properties/background-properties.glade.h:14
-msgid "Gradient"
-msgstr "Geçiþli"
-
-#: capplets/new-background-properties/background-properties.glade.h:15
-msgid "Vertical"
-msgstr "Dikey"
-
-#: capplets/new-background-properties/background-properties.glade.h:16
-msgid "Horizontal"
-msgstr "Yatay"
-
-#: capplets/new-background-properties/background-properties.glade.h:17
-msgid "Wallpaper"
-msgstr "Ardalan"
+msgid ""
+"Solid Color\n"
+"Vertical Gradient\n"
+"Horizontal Gradient\n"
+msgstr ""
+"Dolgu Rengi\n"
+"Düþey Eðim\n"
+"Yatay Eðim\n"
 
 #: capplets/new-background-properties/background-properties.glade.h:18
-msgid "Tiled"
-msgstr "Döþe"
+msgid "Wallpaper"
+msgstr "Duvar Kaðýdý"
 
 #: capplets/new-background-properties/background-properties.glade.h:19
-msgid "Centered"
-msgstr "Ortala"
-
-#: capplets/new-background-properties/background-properties.glade.h:20
-msgid "Scaled (keep aspect)"
-msgstr "Büyült ( oranlarý koru )"
+#, fuzzy
+msgid "File"
+msgstr "Dosya"
 
 #: capplets/new-background-properties/background-properties.glade.h:21
-msgid "Scaled"
-msgstr "Büyült"
+msgid ""
+"Tiled\n"
+"Centered\n"
+"Scaled (keep aspect ratio)\n"
+"Stretched (change aspect ratio)\n"
+"Embossed\n"
+msgstr ""
+"Döþe\n"
+"Ortala\n"
+"Dengele (görünen oraný koru)\n"
+"Gerginlik (görünen oraný deðiþtir)\n"
+"Kabartma\n"
 
-#: capplets/new-background-properties/background-properties.glade.h:22
-msgid "Disable background selection"
-msgstr "Ardalan seçimini kapat"
+#: capplets/new-background-properties/background-properties.glade.h:27
+#, fuzzy
+msgid "Browse..."
+msgstr " Gözat ... "
+
+#: capplets/new-background-properties/background-properties.glade.h:28
+msgid "(None)\n"
+msgstr "(Yok)\n"
+
+#: capplets/new-background-properties/background-properties.glade.h:30
+msgid "Adjust wallpaper's opacity"
+msgstr "Duvar kaðýdýnýn donukluk ayarý"
+
+#: capplets/new-background-properties/background-properties.glade.h:31
+#, fuzzy
+msgid "More Transparent"
+msgstr "Daha Þeffaf"
+
+#: capplets/new-background-properties/background-properties.glade.h:32
+#, fuzzy
+msgid "More Solid"
+msgstr "Daha Dolgun"
+
+#: capplets/new-background-properties/background-properties.glade.h:33
+msgid "Apply changes automatically"
+msgstr "Deðiþiklikleri otomatik olarak uygula"
+
+#: capplets/new-background-properties/prefs-widget.c:158
+#, fuzzy
+msgid "(None)"
+msgstr "(Yok)"
+
+#: capplets/new-background-properties/prefs-widget.c:494
+msgid "Wallpaper Selection"
+msgstr "Duvar Kaðýdý Seçimi"
+
+#: capplets/new-background-properties/prefs-widget.c:501
+msgid "Can't find an hbox, using a normal file selection"
+msgstr "Bir hbox bulamadým, normal bir dosya seçmenini kullanýyorum"
+
+#: capplets/new-background-properties/prefs-widget.c:507
+#: capplets/new-screensaver-properties/prefs-widget.c:301
+#: capplets/theme-switcher/gui.c:230 capplets/theme-switcher/gui.c:302
+msgid "Preview"
+msgstr "Önizleme"
 
 #.
 #. * Translatable strings file generated by Glade.
@@ -361,7 +414,6 @@ msgstr "Ardalan seçimini kapat"
 #. * DO NOT compile it as part of your application.
 #.
 #: capplets/new-bell-properties/bell-properties.glade.h:7
-#: capplets/new-ui-properties/ui-properties.glade.h:22
 msgid "window2"
 msgstr "pencere2"
 
@@ -371,58 +423,82 @@ msgstr "Klavye zili"
 
 #: capplets/new-bell-properties/bell-properties.glade.h:9
 msgid "Volume"
-msgstr "Ses Seviyesi"
+msgstr "Ses"
 
 #: capplets/new-bell-properties/bell-properties.glade.h:10
 msgid "Pitch (Hz)"
-msgstr "Örnekleme ( hz )"
+msgstr "Seviye (Hz)"
 
 #: capplets/new-bell-properties/bell-properties.glade.h:11
 msgid "Duration (ms)"
-msgstr "Süre (mili-san. )"
+msgstr "Süre (mili-san.)"
 
 #: capplets/new-bell-properties/bell-properties.glade.h:12
 msgid "Test"
 msgstr "Dene"
 
 #: capplets/new-keyboard-properties/keyboard-properties.glade.h:8
-msgid "Auto-repeat"
-msgstr "Otomatik tekrarlama"
-
-#: capplets/new-keyboard-properties/keyboard-properties.glade.h:9
-msgid "Enable auto-repeat"
+#, fuzzy
+msgid "Enable Keyboard Repeat"
 msgstr "Otomatik tekrarlamayý aç"
 
+#: capplets/new-keyboard-properties/keyboard-properties.glade.h:9
+msgid "Delay Until Repeat"
+msgstr "Tekrara Kadar Ertele"
+
 #: capplets/new-keyboard-properties/keyboard-properties.glade.h:10
-msgid "Repeat rate"
-msgstr "Tekrarlama oraný"
+msgid "....a"
+msgstr "....a"
 
 #: capplets/new-keyboard-properties/keyboard-properties.glade.h:11
-#, fuzzy
-msgid "Repeat delay"
-msgstr "Tekrarlama arasý"
+msgid "...a"
+msgstr "...a"
 
 #: capplets/new-keyboard-properties/keyboard-properties.glade.h:12
+msgid "..a"
+msgstr "..a"
+
+#: capplets/new-keyboard-properties/keyboard-properties.glade.h:13
+msgid ".a"
+msgstr ".a"
+
+#: capplets/new-keyboard-properties/keyboard-properties.glade.h:14
+#, fuzzy
+msgid "Key Repeat Rate"
+msgstr "Kelime Tekrar oraný"
+
+#: capplets/new-keyboard-properties/keyboard-properties.glade.h:15
+msgid "a....a"
+msgstr "a....a"
+
+#: capplets/new-keyboard-properties/keyboard-properties.glade.h:16
+msgid "a...a"
+msgstr "a...a"
+
+#: capplets/new-keyboard-properties/keyboard-properties.glade.h:17
+msgid "a..a"
+msgstr "a..a"
+
+#: capplets/new-keyboard-properties/keyboard-properties.glade.h:18
+msgid "a.a"
+msgstr "a.a"
+
+#: capplets/new-keyboard-properties/keyboard-properties.glade.h:19
+#, fuzzy
+msgid "Enable Keyboard Click"
+msgstr "Klavye Týklamasýný Aç"
+
+#: capplets/new-keyboard-properties/keyboard-properties.glade.h:20
 msgid "Keyboard click"
 msgstr "Klavye týklamasý"
 
-#: capplets/new-keyboard-properties/keyboard-properties.glade.h:13
-msgid "Click on keypress"
-msgstr "Tuþ basýmýnda 'týkla'"
-
-#: capplets/new-keyboard-properties/keyboard-properties.glade.h:14
+#: capplets/new-keyboard-properties/keyboard-properties.glade.h:21
 msgid "Click volume"
 msgstr "Týklama sesi"
 
-#: capplets/new-keyboard-properties/keyboard-properties.glade.h:15
-#: capplets/new-screensaver-properties/prefs-widget.c:301
-#: capplets/theme-switcher/gui.c:230 capplets/theme-switcher/gui.c:302
-msgid "Preview"
-msgstr "Önizleme"
-
-#: capplets/new-keyboard-properties/keyboard-properties.glade.h:16
-msgid "Test settings"
-msgstr "Ayarlarý dene"
+#: capplets/new-keyboard-properties/keyboard-properties.glade.h:22
+msgid "Type here to test setting"
+msgstr "Ayarlarý bu alanda dene"
 
 #: capplets/new-mouse-properties/mouse-properties.glade.h:8
 msgid "Mouse buttons"
@@ -449,26 +525,32 @@ msgid "Threshold"
 msgstr "Eþik"
 
 #: capplets/new-mouse-properties/mouse-properties.glade.h:14
+#: capplets/new-screensaver-properties/screensavers/3d_clock.xml.h:11
 #: capplets/new-screensaver-properties/screensavers/ant.xml.h:10
 #: capplets/new-screensaver-properties/screensavers/attraction.xml.h:19
 #: capplets/new-screensaver-properties/screensavers/bsod.xml.h:8
 #: capplets/new-screensaver-properties/screensavers/compass.xml.h:10
 #: capplets/new-screensaver-properties/screensavers/flag.xml.h:10
 #: capplets/new-screensaver-properties/screensavers/qix.xml.h:16
+#: capplets/new-screensaver-properties/screensavers/starfish.xml.h:9
+#: capplets/new-screensaver-properties/screensavers/starfish.xml.h:13
 msgid "Slow"
 msgstr "Yavaþ"
 
 #: capplets/new-mouse-properties/mouse-properties.glade.h:15
+#: capplets/new-screensaver-properties/screensavers/3d_clock.xml.h:12
 #: capplets/new-screensaver-properties/screensavers/ant.xml.h:11
 #: capplets/new-screensaver-properties/screensavers/attraction.xml.h:20
 #: capplets/new-screensaver-properties/screensavers/bsod.xml.h:9
 #: capplets/new-screensaver-properties/screensavers/compass.xml.h:11
 #: capplets/new-screensaver-properties/screensavers/flag.xml.h:11
 #: capplets/new-screensaver-properties/screensavers/qix.xml.h:17
+#: capplets/new-screensaver-properties/screensavers/starfish.xml.h:8
 msgid "Fast"
 msgstr "Hýzlý"
 
 #: capplets/new-mouse-properties/mouse-properties.glade.h:16
+#: capplets/new-screensaver-properties/screensavers/3d_clock.xml.h:18
 #: capplets/new-screensaver-properties/screensavers/ant.xml.h:14
 #: capplets/new-screensaver-properties/screensavers/attraction.xml.h:14
 #: capplets/new-screensaver-properties/screensavers/flag.xml.h:14
@@ -478,25 +560,24 @@ msgid "Large"
 msgstr "Büyük"
 
 #: capplets/new-mouse-properties/mouse-properties.glade.h:17
+#: capplets/new-screensaver-properties/screensavers/3d_clock.xml.h:17
 #: capplets/new-screensaver-properties/screensavers/ant.xml.h:13
 #: capplets/new-screensaver-properties/screensavers/attraction.xml.h:13
 #: capplets/new-screensaver-properties/screensavers/flag.xml.h:13
 #: capplets/new-screensaver-properties/screensavers/rorschach.xml.h:8
 #: capplets/new-screensaver-properties/screensavers/rorschach.xml.h:11
 msgid "Small"
-msgstr "Ufak"
+msgstr "Küçük"
 
 #: capplets/new-screensaver-properties/preferences.c:502
 msgid "Custom screensaver. No description available"
-msgstr ""
+msgstr "Özel ekran koruyucu. Mevcut tanýmlama yok"
 
 #: capplets/new-screensaver-properties/prefs-widget.c:185
-#, fuzzy
 msgid "Selection"
-msgstr "Bir ikona seç ..."
+msgstr "Seçim"
 
 #: capplets/new-screensaver-properties/prefs-widget.c:199
-#, fuzzy
 msgid "Disable screensaver"
 msgstr "Ekran koruyucusuz"
 
@@ -510,19 +591,18 @@ msgstr "Daima bir ekran koruyucu"
 
 #: capplets/new-screensaver-properties/prefs-widget.c:228
 msgid "Choose randomly from those checked off"
-msgstr "Seçilenlenden rasgele al"
+msgstr "Ýþaretlenenlerden rasgele seç"
 
 #: capplets/new-screensaver-properties/prefs-widget.c:238
 msgid "Choose randomly among all screensavers"
-msgstr "Tüm ekran koruyucularýný rasgele al"
+msgstr "Tüm ekran koruyucularý arasýndan rasgele seç"
 
 #: capplets/new-screensaver-properties/prefs-widget.c:279
 msgid "Settings..."
-msgstr "Ayarlar ..."
+msgstr "Ayarlar..."
 
 #: capplets/new-screensaver-properties/prefs-widget.c:284
 #: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:216
-#, fuzzy
 msgid "Demo"
 msgstr "Göster"
 
@@ -540,16 +620,14 @@ msgid "Description"
 msgstr "Tanýmlama"
 
 #: capplets/new-screensaver-properties/prefs-widget.c:335
-#, fuzzy
 msgid "Screensaver Selection"
-msgstr "Ekran koruyucu ayarlarý"
+msgstr "Ekran koruyucu seçimi"
 
 #: capplets/new-screensaver-properties/prefs-widget.c:344
 msgid "Basic"
-msgstr "Basit"
+msgstr "Temel"
 
 #: capplets/new-screensaver-properties/prefs-widget.c:356
-#, fuzzy
 msgid "Start screensaver after"
 msgstr " dakika boyunca ekran koruyucusu etken olmuþ olsun ."
 
@@ -559,22 +637,20 @@ msgstr " dakika boyunca ekran koruyucusu etken olmuþ olsun ."
 #: capplets/new-screensaver-properties/prefs-widget.c:452
 #: capplets/new-screensaver-properties/prefs-widget.c:469
 #: capplets/new-screensaver-properties/prefs-widget.c:486
-#, fuzzy
 msgid "minutes"
-msgstr " dakika'dan sonra baþla ."
+msgstr " dakika'dan sonra baþla"
 
 #: capplets/new-screensaver-properties/prefs-widget.c:371
 msgid "Switch screensavers every"
-msgstr "Tüm ekran koruyucularýný göster"
+msgstr "Tüm ekran koruyucularýný deðiþ tokuþ et"
 
 #: capplets/new-screensaver-properties/prefs-widget.c:386
 msgid "Security"
 msgstr "Güvenlik"
 
 #: capplets/new-screensaver-properties/prefs-widget.c:395
-#, fuzzy
 msgid "Require password to unlock"
-msgstr "Açmak için parolayý iste"
+msgstr "Açmak için parolayý gerekli"
 
 #: capplets/new-screensaver-properties/prefs-widget.c:404
 #, fuzzy
@@ -582,22 +658,20 @@ msgid "Only after the screensaver has run for"
 msgstr " dakika boyunca ekran koruyucusu etkin durumda."
 
 #: capplets/new-screensaver-properties/prefs-widget.c:422
-#, fuzzy
 msgid "Power Management"
 msgstr "Güç Yönetimi"
 
 #: capplets/new-screensaver-properties/prefs-widget.c:430
-#, fuzzy
 msgid "Enable power management"
-msgstr "Güç yönetimini kullan ."
+msgstr "Güç yönetimini aktif yap"
 
 #: capplets/new-screensaver-properties/prefs-widget.c:441
 msgid "Go to standby mode after"
-msgstr " Sonra bekleme durumuna git"
+msgstr " Sonra bekleme durumuna geç"
 
 #: capplets/new-screensaver-properties/prefs-widget.c:458
 msgid "Go to suspend mode after"
-msgstr " Sonra geçici durma moduna git"
+msgstr " Sonra geçici olarak askýya al"
 
 #: capplets/new-screensaver-properties/prefs-widget.c:475
 #, fuzzy
@@ -606,7 +680,7 @@ msgstr " Sonra ekraný kapat..   "
 
 #: capplets/new-screensaver-properties/prefs-widget.c:492
 msgid "General Properties"
-msgstr " Genel Özellikler"
+msgstr "Genel Özellikler"
 
 #: capplets/new-screensaver-properties/prefs-widget.c:507
 #: capplets/session-properties/session-properties.c:179
@@ -615,47 +689,48 @@ msgid "Priority"
 msgstr "Öncelik"
 
 #: capplets/new-screensaver-properties/prefs-widget.c:514
+#: capplets/new-screensaver-properties/screensavers/3d_clock.xml.h:8
+#: capplets/new-screensaver-properties/screensavers/3d_clock.xml.h:14
 #: capplets/new-screensaver-properties/screensavers/attraction.xml.h:25
 #: capplets/new-screensaver-properties/screensavers/qix.xml.h:31
-#, fuzzy
 msgid "Low"
 msgstr "Düþük"
 
 #: capplets/new-screensaver-properties/prefs-widget.c:521
+#: capplets/new-screensaver-properties/screensavers/3d_clock.xml.h:9
+#: capplets/new-screensaver-properties/screensavers/3d_clock.xml.h:15
 #: capplets/new-screensaver-properties/screensavers/attraction.xml.h:26
 #: capplets/new-screensaver-properties/screensavers/qix.xml.h:32
-#, fuzzy
 msgid "High"
 msgstr "Yüksek"
 
 #: capplets/new-screensaver-properties/prefs-widget.c:539
 msgid "Be verbose"
-msgstr "Olumlu olun"
+msgstr "Gereksiz"
 
 #: capplets/new-screensaver-properties/prefs-widget.c:543
 msgid "Effects"
-msgstr " Etkiler"
+msgstr "Etkiler"
 
 #: capplets/new-screensaver-properties/prefs-widget.c:555
 msgid "Install colormap"
-msgstr " Renk haritasýný yerleþtir"
+msgstr "Renk haritasýný yerleþtir"
 
 #: capplets/new-screensaver-properties/prefs-widget.c:561
 msgid "Fade to black when activating screensaver"
-msgstr " Ekran koruyucusu etkinleþtiðinde rengi siyahlaþtýr"
+msgstr "Ekran koruyucusu etkinleþtiðinde rengi siyahlaþtýr"
 
 #: capplets/new-screensaver-properties/prefs-widget.c:567
 msgid "Fade desktop back when deactivating screensaver"
-msgstr " Ekran koruyucusu kapandýðýnda masaüstünün rengine git"
+msgstr "Ekran koruyucusu kapandýðýnda masaüstüne dön"
 
 #: capplets/new-screensaver-properties/prefs-widget.c:576
-#, fuzzy
 msgid "Fade Duration"
-msgstr "Süre (mili-san. )"
+msgstr "Geçiþ Süresi"
 
 #: capplets/new-screensaver-properties/prefs-widget.c:596
 msgid "Fade Smoothness"
-msgstr "Renk düzgünleþtirme"
+msgstr "Düzgünleþtirme"
 
 #: capplets/new-screensaver-properties/prefs-widget.c:617
 #: capplets/new-screensaver-properties/screensavers/attraction.xml.h:17
@@ -683,12 +758,12 @@ msgstr "Titreþim"
 
 #: capplets/new-screensaver-properties/prefs-widget.c:658
 msgid "Advanced Properties"
-msgstr "Geliþkin Özellikler"
+msgstr "Geliþmiþ Özellikler"
 
 #: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:185
 #: capplets/wm-properties/wm-properties-capplet.c:762
 msgid "Name:"
-msgstr "Ismi:"
+msgstr "Ýsmi:"
 
 #: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:197
 #: capplets/session-properties/gsm-client-row.c:62
@@ -699,22 +774,24 @@ msgstr "Ayarlar"
 msgid "label1"
 msgstr "Etiket1"
 
-#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1363
+#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1361
 msgid ""
 "Cannot find the data to configure this screensaver. Please edit the command "
 "line below."
-msgstr "Bu ekran koruyucusunu oluþturmak için veri bulunamadý. Lütfen aþaðýdaki"
-" satýrda komutu kontrol edin."
-#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1368
-msgid "Please enter a command line below."
-msgstr "Lütfen komutu aþaðýdaki satýrdan girin"
+msgstr ""
+"Bu ekran koruyucusunu oluþturmak için veri bulunamadý. Lütfen aþaðýdaki "
+"satýrda komutu kontrol edin."
 
-#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1383
+#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1366
+msgid "Please enter a command line below."
+msgstr "Lütfen aþaðýdaki satýra bir komut girin"
+
+#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1381
 msgid "Visual:"
 msgstr "Görsel:"
 
-#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1412
-#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1708
+#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1410
+#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1705
 msgid "Any"
 msgstr "Hiç"
 
@@ -723,13 +800,34 @@ msgstr "Hiç"
 #. * Add this file to your project's POTFILES.in.
 #. * DO NOT compile it as part of your application.
 #.
+#: capplets/new-screensaver-properties/screensavers/3d_clock.xml.h:7
+msgid "Twist:"
+msgstr "Kývrým:"
+
+#: capplets/new-screensaver-properties/screensavers/3d_clock.xml.h:10
+msgid "Twist speed:"
+msgstr "Kývrým hýzý:"
+
+#: capplets/new-screensaver-properties/screensavers/3d_clock.xml.h:13
+msgid "Wobble:"
+msgstr "Salýným:"
+
+#: capplets/new-screensaver-properties/screensavers/3d_clock.xml.h:16
+msgid "Size:"
+msgstr "Boyut:"
+
+#.
+#. * Translatable strings file generated by extract-labels
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
 #: capplets/new-screensaver-properties/screensavers/ant.xml.h:7
 msgid "Sharp turns"
-msgstr "Keskin Dönüþ"
+msgstr "Keskin Dönüþler"
 
 #: capplets/new-screensaver-properties/screensavers/ant.xml.h:8
 msgid "Truchet lines"
-msgstr "Vagon hattý"
+msgstr "Vagon hatlarý"
 
 #.
 #. * Translatable strings file generated by extract-labels
@@ -756,7 +854,7 @@ msgstr "Rasgele"
 
 #: capplets/new-screensaver-properties/screensavers/ant.xml.h:16
 msgid "Specific"
-msgstr "Özellikli"
+msgstr "Özgün"
 
 #: capplets/new-screensaver-properties/screensavers/ant.xml.h:17
 msgid "number of Ants"
@@ -764,7 +862,7 @@ msgstr "Arka sayýsý"
 
 #: capplets/new-screensaver-properties/screensavers/ant.xml.h:18
 msgid "Random size upto"
-msgstr "En büyük rasgele büyüklük"
+msgstr "Rasgele üst boyut"
 
 #: capplets/new-screensaver-properties/screensavers/ant.xml.h:19
 #: capplets/new-screensaver-properties/screensavers/flag.xml.h:16
@@ -789,7 +887,7 @@ msgstr "Birkaç"
 
 #: capplets/new-screensaver-properties/screensavers/ant.xml.h:23
 msgid "Randomize"
-msgstr "Rassal"
+msgstr "Rastgele"
 
 #: capplets/new-screensaver-properties/screensavers/ant.xml.h:24
 msgid "Three Sided cells"
@@ -826,9 +924,8 @@ msgstr "Tek renk"
 #: capplets/new-screensaver-properties/screensavers/compass.xml.h:12
 #: capplets/new-screensaver-properties/screensavers/flag.xml.h:20
 #: capplets/new-screensaver-properties/screensavers/qix.xml.h:28
-#, fuzzy
 msgid "Full Color"
-msgstr "Tüm Renkler"
+msgstr "Renkli"
 
 #.
 #. * Translatable strings file generated by extract-labels
@@ -836,7 +933,6 @@ msgstr "Tüm Renkler"
 #. * DO NOT compile it as part of your application.
 #.
 #: capplets/new-screensaver-properties/screensavers/attraction.xml.h:7
-#, fuzzy
 msgid "Balls"
 msgstr "Toplar"
 
@@ -847,14 +943,12 @@ msgstr "Toplar"
 #.
 #: capplets/new-screensaver-properties/screensavers/attraction.xml.h:8
 #: capplets/new-screensaver-properties/screensavers/qix.xml.h:7
-#, fuzzy
 msgid "Lines"
-msgstr " Çizgiler "
+msgstr "Çizgiler"
 
 #: capplets/new-screensaver-properties/screensavers/attraction.xml.h:9
-#, fuzzy
 msgid "Tails"
-msgstr "Döþe"
+msgstr "Uzantýlar"
 
 #: capplets/new-screensaver-properties/screensavers/attraction.xml.h:10
 #: capplets/new-screensaver-properties/screensavers/qix.xml.h:8
@@ -873,13 +967,270 @@ msgstr "Geritepkime eþiði"
 msgid "Length of Trail"
 msgstr "Ýz uzunluðu"
 
+#.
+#. * Translatable strings file generated by extract-labels
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
 #: capplets/new-screensaver-properties/screensavers/attraction.xml.h:23
+#: capplets/new-screensaver-properties/screensavers/braid.xml.h:7
+#: capplets/new-screensaver-properties/screensavers/fadeplot.xml.h:7
+#: capplets/new-screensaver-properties/screensavers/sierpinski.xml.h:7
+#: capplets/new-screensaver-properties/screensavers/spiral.xml.h:12
+#: capplets/new-screensaver-properties/screensavers/triangle.xml.h:7
+#: capplets/new-screensaver-properties/screensavers/vines.xml.h:7
 msgid "Number of Colors"
 msgstr "Renk sayýsý"
 
 #: capplets/new-screensaver-properties/screensavers/attraction.xml.h:24
 msgid "Color Contrast"
 msgstr "Renk Zýtlýðý"
+
+#.
+#. * Translatable strings file generated by extract-labels
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: capplets/new-screensaver-properties/screensavers/blitspin.xml.h:7
+msgid "Speed of rotation."
+msgstr "Dönüþ hýzý."
+
+#: capplets/new-screensaver-properties/screensavers/blitspin.xml.h:8
+#: capplets/new-screensaver-properties/screensavers/blitspin.xml.h:11
+#: capplets/new-screensaver-properties/screensavers/bouboule.xml.h:10
+#: capplets/new-screensaver-properties/screensavers/bubbles.xml.h:8
+#: capplets/new-screensaver-properties/screensavers/coral.xml.h:13
+#: capplets/new-screensaver-properties/screensavers/crystal.xml.h:10
+#: capplets/new-screensaver-properties/screensavers/cynosure.xml.h:13
+#: capplets/new-screensaver-properties/screensavers/decayscreen.xml.h:8
+#: capplets/new-screensaver-properties/screensavers/discrete.xml.h:10
+#: capplets/new-screensaver-properties/screensavers/drift.xml.h:10
+#: capplets/new-screensaver-properties/screensavers/epicycle.xml.h:8
+#: capplets/new-screensaver-properties/screensavers/fadeplot.xml.h:12
+#: capplets/new-screensaver-properties/screensavers/flame.xml.h:13
+#: capplets/new-screensaver-properties/screensavers/flame.xml.h:16
+#: capplets/new-screensaver-properties/screensavers/forest.xml.h:10
+#: capplets/new-screensaver-properties/screensavers/goop.xml.h:10
+#: capplets/new-screensaver-properties/screensavers/greynetic.xml.h:8
+#: capplets/new-screensaver-properties/screensavers/halo.xml.h:12
+#: capplets/new-screensaver-properties/screensavers/helix.xml.h:8
+#: capplets/new-screensaver-properties/screensavers/hopalong.xml.h:10
+#: capplets/new-screensaver-properties/screensavers/hypercube.xml.h:11
+#: capplets/new-screensaver-properties/screensavers/jigsaw.xml.h:8
+#: capplets/new-screensaver-properties/screensavers/julia.xml.h:10
+#: capplets/new-screensaver-properties/screensavers/kaleidescope.xml.h:13
+#: capplets/new-screensaver-properties/screensavers/lisa.xml.h:10
+#: capplets/new-screensaver-properties/screensavers/lmorph.xml.h:13
+#: capplets/new-screensaver-properties/screensavers/moire.xml.h:8
+#: capplets/new-screensaver-properties/screensavers/munch.xml.h:8
+#: capplets/new-screensaver-properties/screensavers/pyro.xml.h:11
+#: capplets/new-screensaver-properties/screensavers/sierpinski.xml.h:10
+#: capplets/new-screensaver-properties/screensavers/spiral.xml.h:10
+msgid "Faster"
+msgstr "Daha Hýzlý"
+
+#: capplets/new-screensaver-properties/screensavers/blitspin.xml.h:9
+#: capplets/new-screensaver-properties/screensavers/blitspin.xml.h:12
+#: capplets/new-screensaver-properties/screensavers/bouboule.xml.h:11
+#: capplets/new-screensaver-properties/screensavers/bubbles.xml.h:9
+#: capplets/new-screensaver-properties/screensavers/coral.xml.h:14
+#: capplets/new-screensaver-properties/screensavers/crystal.xml.h:11
+#: capplets/new-screensaver-properties/screensavers/cynosure.xml.h:14
+#: capplets/new-screensaver-properties/screensavers/decayscreen.xml.h:9
+#: capplets/new-screensaver-properties/screensavers/discrete.xml.h:11
+#: capplets/new-screensaver-properties/screensavers/drift.xml.h:11
+#: capplets/new-screensaver-properties/screensavers/epicycle.xml.h:9
+#: capplets/new-screensaver-properties/screensavers/fadeplot.xml.h:13
+#: capplets/new-screensaver-properties/screensavers/fadeplot.xml.h:16
+#: capplets/new-screensaver-properties/screensavers/flame.xml.h:14
+#: capplets/new-screensaver-properties/screensavers/flame.xml.h:17
+#: capplets/new-screensaver-properties/screensavers/forest.xml.h:11
+#: capplets/new-screensaver-properties/screensavers/goop.xml.h:11
+#: capplets/new-screensaver-properties/screensavers/greynetic.xml.h:9
+#: capplets/new-screensaver-properties/screensavers/halo.xml.h:13
+#: capplets/new-screensaver-properties/screensavers/helix.xml.h:9
+#: capplets/new-screensaver-properties/screensavers/hopalong.xml.h:11
+#: capplets/new-screensaver-properties/screensavers/hypercube.xml.h:12
+#: capplets/new-screensaver-properties/screensavers/jigsaw.xml.h:9
+#: capplets/new-screensaver-properties/screensavers/julia.xml.h:11
+#: capplets/new-screensaver-properties/screensavers/kaleidescope.xml.h:14
+#: capplets/new-screensaver-properties/screensavers/lisa.xml.h:11
+#: capplets/new-screensaver-properties/screensavers/lmorph.xml.h:14
+#: capplets/new-screensaver-properties/screensavers/moire.xml.h:9
+#: capplets/new-screensaver-properties/screensavers/munch.xml.h:9
+#: capplets/new-screensaver-properties/screensavers/pyro.xml.h:10
+#: capplets/new-screensaver-properties/screensavers/sierpinski.xml.h:11
+#: capplets/new-screensaver-properties/screensavers/spiral.xml.h:11
+msgid "Slower"
+msgstr "Daha Yavaþ"
+
+#: capplets/new-screensaver-properties/screensavers/blitspin.xml.h:10
+msgid "Speed of the 90 degree rotation."
+msgstr "90 derece dönüþ hýzý."
+
+#.
+#. * Translatable strings file generated by extract-labels
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: capplets/new-screensaver-properties/screensavers/blitspin.xml.h:13
+#: capplets/new-screensaver-properties/screensavers/bouboule.xml.h:15
+#: capplets/new-screensaver-properties/screensavers/braid.xml.h:9
+#: capplets/new-screensaver-properties/screensavers/bubbles.xml.h:13
+#: capplets/new-screensaver-properties/screensavers/crystal.xml.h:15
+#: capplets/new-screensaver-properties/screensavers/cynosure.xml.h:15
+#: capplets/new-screensaver-properties/screensavers/decayscreen.xml.h:10
+#: capplets/new-screensaver-properties/screensavers/discrete.xml.h:14
+#: capplets/new-screensaver-properties/screensavers/drift.xml.h:15
+#: capplets/new-screensaver-properties/screensavers/epicycle.xml.h:12
+#: capplets/new-screensaver-properties/screensavers/fadeplot.xml.h:17
+#: capplets/new-screensaver-properties/screensavers/flame.xml.h:18
+#: capplets/new-screensaver-properties/screensavers/forest.xml.h:14
+#: capplets/new-screensaver-properties/screensavers/goop.xml.h:12
+#: capplets/new-screensaver-properties/screensavers/grav.xml.h:11
+#: capplets/new-screensaver-properties/screensavers/greynetic.xml.h:10
+#: capplets/new-screensaver-properties/screensavers/halo.xml.h:14
+#: capplets/new-screensaver-properties/screensavers/helix.xml.h:10
+#: capplets/new-screensaver-properties/screensavers/hopalong.xml.h:15
+#: capplets/new-screensaver-properties/screensavers/hypercube.xml.h:13
+#: capplets/new-screensaver-properties/screensavers/ifs.xml.h:9
+#: capplets/new-screensaver-properties/screensavers/julia.xml.h:14
+#: capplets/new-screensaver-properties/screensavers/kaleidescope.xml.h:15
+#: capplets/new-screensaver-properties/screensavers/laser.xml.h:12
+#: capplets/new-screensaver-properties/screensavers/lightning.xml.h:9
+#: capplets/new-screensaver-properties/screensavers/lisa.xml.h:17
+#: capplets/new-screensaver-properties/screensavers/lmorph.xml.h:16
+#: capplets/new-screensaver-properties/screensavers/moire.xml.h:15
+#: capplets/new-screensaver-properties/screensavers/munch.xml.h:12
+#: capplets/new-screensaver-properties/screensavers/pedal.xml.h:16
+#: capplets/new-screensaver-properties/screensavers/sierpinski.xml.h:12
+#: capplets/new-screensaver-properties/screensavers/spiral.xml.h:16
+#: capplets/new-screensaver-properties/screensavers/triangle.xml.h:9
+#: capplets/new-screensaver-properties/screensavers/vines.xml.h:9
+#: capplets/new-screensaver-properties/screensavers/xroger.xml.h:7
+msgid "Display screensaver in monochrome."
+msgstr "Tek renkte ekran koruyucusuz"
+
+#.
+#. * Translatable strings file generated by extract-labels
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: capplets/new-screensaver-properties/screensavers/bouboule.xml.h:7
+#: capplets/new-screensaver-properties/screensavers/crystal.xml.h:7
+#: capplets/new-screensaver-properties/screensavers/cynosure.xml.h:7
+#: capplets/new-screensaver-properties/screensavers/discrete.xml.h:7
+#: capplets/new-screensaver-properties/screensavers/drift.xml.h:7
+#: capplets/new-screensaver-properties/screensavers/forest.xml.h:7
+#: capplets/new-screensaver-properties/screensavers/grav.xml.h:7
+#: capplets/new-screensaver-properties/screensavers/halo.xml.h:7
+#: capplets/new-screensaver-properties/screensavers/hopalong.xml.h:7
+#: capplets/new-screensaver-properties/screensavers/ifs.xml.h:7
+#: capplets/new-screensaver-properties/screensavers/julia.xml.h:7
+#: capplets/new-screensaver-properties/screensavers/lightning.xml.h:7
+#: capplets/new-screensaver-properties/screensavers/lisa.xml.h:7
+#: capplets/new-screensaver-properties/screensavers/moire.xml.h:10
+#, fuzzy
+msgid "Number of Colors."
+msgstr "Renk sayýsý"
+
+#: capplets/new-screensaver-properties/screensavers/bouboule.xml.h:8
+#: capplets/new-screensaver-properties/screensavers/braid.xml.h:8
+#: capplets/new-screensaver-properties/screensavers/crystal.xml.h:8
+#: capplets/new-screensaver-properties/screensavers/cynosure.xml.h:8
+#: capplets/new-screensaver-properties/screensavers/discrete.xml.h:8
+#: capplets/new-screensaver-properties/screensavers/drift.xml.h:8
+#: capplets/new-screensaver-properties/screensavers/fadeplot.xml.h:8
+#: capplets/new-screensaver-properties/screensavers/forest.xml.h:8
+#: capplets/new-screensaver-properties/screensavers/grav.xml.h:8
+#: capplets/new-screensaver-properties/screensavers/halo.xml.h:8
+#: capplets/new-screensaver-properties/screensavers/hopalong.xml.h:8
+#: capplets/new-screensaver-properties/screensavers/ifs.xml.h:8
+#: capplets/new-screensaver-properties/screensavers/julia.xml.h:8
+#: capplets/new-screensaver-properties/screensavers/lightning.xml.h:8
+#: capplets/new-screensaver-properties/screensavers/lisa.xml.h:8
+#: capplets/new-screensaver-properties/screensavers/moire.xml.h:11
+#: capplets/new-screensaver-properties/screensavers/sierpinski.xml.h:8
+#: capplets/new-screensaver-properties/screensavers/spiral.xml.h:13
+#: capplets/new-screensaver-properties/screensavers/triangle.xml.h:8
+#: capplets/new-screensaver-properties/screensavers/vines.xml.h:8
+#, fuzzy
+msgid "Colors:"
+msgstr "Renkler:"
+
+#.
+#. * Translatable strings file generated by extract-labels
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: capplets/new-screensaver-properties/screensavers/bouboule.xml.h:9
+#: capplets/new-screensaver-properties/screensavers/bubbles.xml.h:7
+#: capplets/new-screensaver-properties/screensavers/coral.xml.h:12
+#: capplets/new-screensaver-properties/screensavers/crystal.xml.h:9
+#: capplets/new-screensaver-properties/screensavers/cynosure.xml.h:12
+#: capplets/new-screensaver-properties/screensavers/decayscreen.xml.h:7
+#: capplets/new-screensaver-properties/screensavers/discrete.xml.h:9
+#: capplets/new-screensaver-properties/screensavers/drift.xml.h:9
+#: capplets/new-screensaver-properties/screensavers/epicycle.xml.h:7
+#: capplets/new-screensaver-properties/screensavers/flame.xml.h:12
+#: capplets/new-screensaver-properties/screensavers/goop.xml.h:9
+#: capplets/new-screensaver-properties/screensavers/greynetic.xml.h:7
+#: capplets/new-screensaver-properties/screensavers/halo.xml.h:11
+#: capplets/new-screensaver-properties/screensavers/hopalong.xml.h:9
+#: capplets/new-screensaver-properties/screensavers/hypercube.xml.h:10
+#: capplets/new-screensaver-properties/screensavers/jigsaw.xml.h:7
+#: capplets/new-screensaver-properties/screensavers/julia.xml.h:9
+#: capplets/new-screensaver-properties/screensavers/kaleidescope.xml.h:12
+#: capplets/new-screensaver-properties/screensavers/lisa.xml.h:9
+#: capplets/new-screensaver-properties/screensavers/lmorph.xml.h:12
+#: capplets/new-screensaver-properties/screensavers/moire.xml.h:7
+#: capplets/new-screensaver-properties/screensavers/munch.xml.h:7
+#: capplets/new-screensaver-properties/screensavers/spiral.xml.h:9
+msgid "Speed of Motion."
+msgstr "Hareket hýzý."
+
+#.
+#. * Translatable strings file generated by extract-labels
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: capplets/new-screensaver-properties/screensavers/bouboule.xml.h:12
+#: capplets/new-screensaver-properties/screensavers/goop.xml.h:7
+#, fuzzy
+msgid "Number of bubbles to use."
+msgstr "Kullanýlan kabarcýklarýn sayýsý"
+
+#: capplets/new-screensaver-properties/screensavers/bouboule.xml.h:13
+#: capplets/new-screensaver-properties/screensavers/crystal.xml.h:13
+#: capplets/new-screensaver-properties/screensavers/discrete.xml.h:13
+#: capplets/new-screensaver-properties/screensavers/drift.xml.h:13
+#: capplets/new-screensaver-properties/screensavers/fadeplot.xml.h:10
+#: capplets/new-screensaver-properties/screensavers/forest.xml.h:13
+#: capplets/new-screensaver-properties/screensavers/goop.xml.h:8
+#: capplets/new-screensaver-properties/screensavers/grav.xml.h:10
+#: capplets/new-screensaver-properties/screensavers/halo.xml.h:10
+#: capplets/new-screensaver-properties/screensavers/julia.xml.h:13
+#: capplets/new-screensaver-properties/screensavers/lisa.xml.h:13
+#: capplets/new-screensaver-properties/screensavers/pyro.xml.h:8
+#: capplets/new-screensaver-properties/screensavers/spiral.xml.h:15
+msgid "Count:"
+msgstr "Say:"
+
+#: capplets/new-screensaver-properties/screensavers/bouboule.xml.h:14
+msgid "Use red/blue 3d seperation."
+msgstr "3 boyut ayýrmada kýrmýzý/mavi renk kullan"
+
+#: capplets/new-screensaver-properties/screensavers/bubbles.xml.h:10
+msgid "Draw circles instead of pixmap bubbles."
+msgstr "Kabarcýklara raðmen daireleri çiz."
+
+#: capplets/new-screensaver-properties/screensavers/bubbles.xml.h:11
+msgid "Don't hide bubbles when they pop."
+msgstr "Kabarcýklarý sýçradýðýnda gizleme."
+
+#: capplets/new-screensaver-properties/screensavers/bubbles.xml.h:12
+msgid "Bubbles exist in three dimensions."
+msgstr "Üç boyutta kabarcýklarý bulundur."
 
 #.
 #. * Translatable strings file generated by extract-labels
@@ -899,6 +1250,151 @@ msgstr "Çift tamponlama kullanma"
 #. * Add this file to your project's POTFILES.in.
 #. * DO NOT compile it as part of your application.
 #.
+#: capplets/new-screensaver-properties/screensavers/coral.xml.h:7
+msgid "Density"
+msgstr "Yoðunluk"
+
+#: capplets/new-screensaver-properties/screensavers/coral.xml.h:8
+#, fuzzy
+msgid "Denser"
+msgstr "Daha Yoðun"
+
+#: capplets/new-screensaver-properties/screensavers/coral.xml.h:9
+#, fuzzy
+msgid "Thinner"
+msgstr "Daha Ýnce"
+
+#: capplets/new-screensaver-properties/screensavers/coral.xml.h:10
+#, fuzzy
+msgid "Number of seeds"
+msgstr "Kaynak Sayýsý"
+
+#: capplets/new-screensaver-properties/screensavers/coral.xml.h:11
+#, fuzzy
+msgid "Seeds"
+msgstr "Kaynaklar"
+
+#: capplets/new-screensaver-properties/screensavers/crystal.xml.h:12
+#, fuzzy
+msgid "Number of polygons to use."
+msgstr "Çokgen sayýsý kullan."
+
+#: capplets/new-screensaver-properties/screensavers/crystal.xml.h:14
+#, fuzzy
+msgid "Center image."
+msgstr "Nesneyi ortala."
+
+#: capplets/new-screensaver-properties/screensavers/crystal.xml.h:16
+msgid "Have at maximum size"
+msgstr "En üst boyut"
+
+#: capplets/new-screensaver-properties/screensavers/crystal.xml.h:17
+#, fuzzy
+msgid "Cell"
+msgstr "Hücre"
+
+#: capplets/new-screensaver-properties/screensavers/cynosure.xml.h:9
+#, fuzzy
+msgid "Number of iterations."
+msgstr "Aþama sayýsý"
+
+#: capplets/new-screensaver-properties/screensavers/cynosure.xml.h:10
+#: capplets/new-screensaver-properties/screensavers/flame.xml.h:10
+#: capplets/new-screensaver-properties/screensavers/hopalong.xml.h:13
+#: capplets/new-screensaver-properties/screensavers/kaleidescope.xml.h:10
+#: capplets/new-screensaver-properties/screensavers/lmorph.xml.h:10
+#: capplets/new-screensaver-properties/screensavers/pedal.xml.h:11
+#: capplets/new-screensaver-properties/screensavers/pyro.xml.h:13
+#, fuzzy
+msgid "Less"
+msgstr "Daha az"
+
+#: capplets/new-screensaver-properties/screensavers/cynosure.xml.h:11
+#: capplets/new-screensaver-properties/screensavers/fadeplot.xml.h:15
+#: capplets/new-screensaver-properties/screensavers/flame.xml.h:11
+#: capplets/new-screensaver-properties/screensavers/hopalong.xml.h:14
+#: capplets/new-screensaver-properties/screensavers/kaleidescope.xml.h:11
+#: capplets/new-screensaver-properties/screensavers/lmorph.xml.h:11
+#: capplets/new-screensaver-properties/screensavers/pedal.xml.h:12
+#: capplets/new-screensaver-properties/screensavers/pyro.xml.h:14
+#, fuzzy
+msgid "More"
+msgstr "Daha çok"
+
+#.
+#. * Translatable strings file generated by extract-labels
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: capplets/new-screensaver-properties/screensavers/deco.xml.h:7
+#: capplets/new-screensaver-properties/screensavers/spiral.xml.h:7
+msgid "Time between redraws:"
+msgstr "Yeniden çizim arasýndaki zaman:"
+
+#: capplets/new-screensaver-properties/screensavers/deco.xml.h:8
+msgid "seconds"
+msgstr "saniye"
+
+#: capplets/new-screensaver-properties/screensavers/deco.xml.h:9
+msgid "Use color when drawing."
+msgstr "Çizimde renk kullan."
+
+#: capplets/new-screensaver-properties/screensavers/deco.xml.h:10
+msgid "Cycle through colors."
+msgstr "Renklerin yardýmýyla döndür."
+
+#: capplets/new-screensaver-properties/screensavers/discrete.xml.h:12
+#: capplets/new-screensaver-properties/screensavers/julia.xml.h:12
+#: capplets/new-screensaver-properties/screensavers/lisa.xml.h:12
+#: capplets/new-screensaver-properties/screensavers/spiral.xml.h:14
+#, fuzzy
+msgid "Number to use."
+msgstr "Kullaným sayýsý."
+
+#: capplets/new-screensaver-properties/screensavers/drift.xml.h:12
+#, fuzzy
+msgid "Number of pixels to use."
+msgstr "Kullanýlan Piksel sayýsý"
+
+#: capplets/new-screensaver-properties/screensavers/drift.xml.h:14
+msgid "Fractals should grow."
+msgstr "Fraktallar artmalýdýr."
+
+#: capplets/new-screensaver-properties/screensavers/drift.xml.h:16
+msgid "Use lissajous figures to get points."
+msgstr "Noktalara varmak için büklüm figürleri kullan."
+
+#: capplets/new-screensaver-properties/screensavers/epicycle.xml.h:10
+#: capplets/new-screensaver-properties/screensavers/flame.xml.h:15
+msgid "Time finished product is shown."
+msgstr "Zaman bittiðinde sonuç gösterilir."
+
+#: capplets/new-screensaver-properties/screensavers/epicycle.xml.h:11
+#: capplets/new-screensaver-properties/screensavers/spiral.xml.h:8
+#: capplets/new-screensaver-properties/screensavers/starfish.xml.h:15
+#, fuzzy
+msgid "Seconds"
+msgstr "Saniye"
+
+#: capplets/new-screensaver-properties/screensavers/fadeplot.xml.h:9
+msgid "Number"
+msgstr "Sayý"
+
+#: capplets/new-screensaver-properties/screensavers/fadeplot.xml.h:11
+#: capplets/new-screensaver-properties/screensavers/sierpinski.xml.h:9
+msgid "Speed of Motion"
+msgstr "Hareket Hýzý"
+
+#: capplets/new-screensaver-properties/screensavers/fadeplot.xml.h:14
+#, fuzzy
+msgid "Number of cycles"
+msgstr "Döngü sayýsý"
+
+#.
+#. * Translatable strings file generated by extract-labels
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
 #: capplets/new-screensaver-properties/screensavers/flag.xml.h:7
 msgid "Text for flag"
 msgstr "Bayrak için yazý"
@@ -909,7 +1405,277 @@ msgstr "Bayrak için resim"
 
 #: capplets/new-screensaver-properties/screensavers/flag.xml.h:15
 msgid "Random size up to"
-msgstr "En büyük rasgele büyüklük"
+msgstr "Üst rastgele boyut"
+
+#.
+#. * Translatable strings file generated by extract-labels
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: capplets/new-screensaver-properties/screensavers/flame.xml.h:7
+msgid "Number of fractals to generate."
+msgstr "Oluþturulmuþ fraktal sayýsý."
+
+#: capplets/new-screensaver-properties/screensavers/flame.xml.h:8
+#, fuzzy
+msgid "Iterations:"
+msgstr "Aþamalar:"
+
+#: capplets/new-screensaver-properties/screensavers/flame.xml.h:9
+msgid "Pixels per fractal."
+msgstr "Fraktal baþýna piksel."
+
+#: capplets/new-screensaver-properties/screensavers/forest.xml.h:9
+#, fuzzy
+msgid "Delay between redraws."
+msgstr "Yeni çizimler arasýndaki gecikme."
+
+#: capplets/new-screensaver-properties/screensavers/forest.xml.h:12
+#, fuzzy
+msgid "Number of trees to use."
+msgstr "Kullanýlan aðaçlarýn sayýsý."
+
+#: capplets/new-screensaver-properties/screensavers/goop.xml.h:13
+#, fuzzy
+msgid "Have transparent bubbles."
+msgstr "Þeffaf Kabarcýklar."
+
+#: capplets/new-screensaver-properties/screensavers/goop.xml.h:14
+msgid "Use additive color model."
+msgstr "Renk katkýlý model kullan."
+
+#: capplets/new-screensaver-properties/screensavers/grav.xml.h:9
+#, fuzzy
+msgid "Number of planets to use."
+msgstr "Kullanýlan gezegen sayýsý."
+
+#: capplets/new-screensaver-properties/screensavers/grav.xml.h:12
+msgid "Orbit should decay."
+msgstr "Yörünge bozulmalýdýr."
+
+#: capplets/new-screensaver-properties/screensavers/grav.xml.h:13
+msgid "Objects should leave trails behind them."
+msgstr "Neseneler arasýndaki izler ayrýlmalýdýr."
+
+#: capplets/new-screensaver-properties/screensavers/halo.xml.h:9
+#, fuzzy
+msgid "Number of circles to use."
+msgstr "Kullanýlan halka sayýsý"
+
+#: capplets/new-screensaver-properties/screensavers/halo.xml.h:15
+#, fuzzy
+msgid "Use a gradient of colors between circles."
+msgstr "Halka renkleri arasýnda eðiklik kullan."
+
+#: capplets/new-screensaver-properties/screensavers/halo.xml.h:16
+msgid "Animate circles."
+msgstr "Halkalarý canlandýr."
+
+#: capplets/new-screensaver-properties/screensavers/halo.xml.h:17
+msgid "Cycle through colormap."
+msgstr "Renk haritasý içinde geçerek döndür."
+
+#.
+#. * Translatable strings file generated by extract-labels
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: capplets/new-screensaver-properties/screensavers/helix.xml.h:7
+msgid "Time between redraws."
+msgstr "Yeniden çizilenler arasýndaki zaman."
+
+#: capplets/new-screensaver-properties/screensavers/hopalong.xml.h:12
+msgid "Number of pixels before a color change."
+msgstr "Bir renk deðiþiminden önce piksellerin sayýsý."
+
+#.
+#. * Translatable strings file generated by extract-labels
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: capplets/new-screensaver-properties/screensavers/hypercube.xml.h:7
+msgid "Distance from center of cube"
+msgstr "Kübün merkezinden olan uzaklýk"
+
+#: capplets/new-screensaver-properties/screensavers/hypercube.xml.h:8
+#, fuzzy
+msgid "Closer"
+msgstr "Kapatýcý"
+
+#: capplets/new-screensaver-properties/screensavers/hypercube.xml.h:9
+msgid "Farther"
+msgstr "Daha uzak"
+
+#.
+#. * Translatable strings file generated by extract-labels
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: capplets/new-screensaver-properties/screensavers/kaleidescope.xml.h:7
+#, fuzzy
+msgid "Number of segments."
+msgstr "Parça sayýsý."
+
+#: capplets/new-screensaver-properties/screensavers/kaleidescope.xml.h:8
+msgid "Segments"
+msgstr "Parçalar"
+
+#: capplets/new-screensaver-properties/screensavers/kaleidescope.xml.h:9
+#, fuzzy
+msgid "Number of trails."
+msgstr "Hatlarýn sayýsý"
+
+#.
+#. * Translatable strings file generated by extract-labels
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: capplets/new-screensaver-properties/screensavers/laser.xml.h:7
+msgid "Duration of laser burst."
+msgstr "Lazer patlama süresi."
+
+#: capplets/new-screensaver-properties/screensavers/laser.xml.h:8
+#: capplets/new-screensaver-properties/screensavers/pedal.xml.h:8
+#: capplets/new-screensaver-properties/screensavers/pedal.xml.h:14
+#, fuzzy
+msgid "Shorter"
+msgstr "Daha Kýsa"
+
+#: capplets/new-screensaver-properties/screensavers/laser.xml.h:9
+#: capplets/new-screensaver-properties/screensavers/pedal.xml.h:9
+#: capplets/new-screensaver-properties/screensavers/pedal.xml.h:15
+#, fuzzy
+msgid "Longer"
+msgstr "Daha Uzun"
+
+#: capplets/new-screensaver-properties/screensavers/laser.xml.h:10
+msgid "Size of burst."
+msgstr "Patlama boyu."
+
+#: capplets/new-screensaver-properties/screensavers/laser.xml.h:11
+msgid "Segments:"
+msgstr "Parçalar:"
+
+#: capplets/new-screensaver-properties/screensavers/lisa.xml.h:14
+msgid "Size of object."
+msgstr "Nesene boyu."
+
+#: capplets/new-screensaver-properties/screensavers/lisa.xml.h:15
+#: capplets/new-screensaver-properties/screensavers/moire.xml.h:13
+#, fuzzy
+msgid "Smaller"
+msgstr "Daha Küçük"
+
+#: capplets/new-screensaver-properties/screensavers/lisa.xml.h:16
+#: capplets/new-screensaver-properties/screensavers/moire.xml.h:14
+#, fuzzy
+msgid "Larger"
+msgstr "Daha Büyük"
+
+#.
+#. * Translatable strings file generated by extract-labels
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: capplets/new-screensaver-properties/screensavers/lmorph.xml.h:7
+#, fuzzy
+msgid "Number of points."
+msgstr "Nokta sayýsý."
+
+#: capplets/new-screensaver-properties/screensavers/lmorph.xml.h:8
+#, fuzzy
+msgid "Points:"
+msgstr "Noktalar:"
+
+#: capplets/new-screensaver-properties/screensavers/lmorph.xml.h:9
+#, fuzzy
+msgid "Number of interpolation steps."
+msgstr "Ýç Deðerlendirme adýmlarýnýn sayýsý."
+
+#: capplets/new-screensaver-properties/screensavers/lmorph.xml.h:15
+msgid "Open figures."
+msgstr "Açýk figür"
+
+#.
+#. * Translatable strings file generated by extract-labels
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: capplets/new-screensaver-properties/screensavers/maze.xml.h:7
+msgid "Delay between each step in the maze."
+msgstr "Labirentin her adýmý arasýndaki gecikme."
+
+#: capplets/new-screensaver-properties/screensavers/maze.xml.h:8
+#: capplets/new-screensaver-properties/screensavers/maze.xml.h:11
+#: capplets/new-screensaver-properties/screensavers/maze.xml.h:14
+msgid "Less Delay"
+msgstr "Daha Az Gecikme."
+
+#: capplets/new-screensaver-properties/screensavers/maze.xml.h:9
+#: capplets/new-screensaver-properties/screensavers/maze.xml.h:12
+#: capplets/new-screensaver-properties/screensavers/maze.xml.h:15
+msgid "More Delay"
+msgstr "Daha Çok Gecikme"
+
+#: capplets/new-screensaver-properties/screensavers/maze.xml.h:10
+msgid "Delay between drawing the maze and starting the solution."
+msgstr "Labirentin erime baþlangýcý ve çizim arasýndaki gecikme."
+
+#: capplets/new-screensaver-properties/screensavers/maze.xml.h:13
+msgid "Delay between finishing the maze and starting a new one."
+msgstr "Labirentin bitiþ ve yeni bir tanesinin baþlangýcý arasýndaki gecikme."
+
+#: capplets/new-screensaver-properties/screensavers/maze.xml.h:16
+msgid "Put a bridge over the logo?"
+msgstr "Logo üzerine bir köprü koyayým mý?"
+
+#: capplets/new-screensaver-properties/screensavers/moire.xml.h:12
+msgid "Maximum radius increment"
+msgstr "Maksimum yuvarlaklýk artýþý"
+
+#: capplets/new-screensaver-properties/screensavers/munch.xml.h:10
+msgid "Use XOR drawing function."
+msgstr "XOR çizme fonksiyonunu kullan."
+
+#: capplets/new-screensaver-properties/screensavers/munch.xml.h:11
+msgid "Draw square at weird starting points."
+msgstr "Garip baþlama noktalarýnda kare çiz."
+
+#.
+#. * Translatable strings file generated by extract-labels
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: capplets/new-screensaver-properties/screensavers/pedal.xml.h:7
+msgid "Time to show each picture."
+msgstr "Her bir resmi çizme zamaný."
+
+#: capplets/new-screensaver-properties/screensavers/pedal.xml.h:10
+#, fuzzy
+msgid "Maximum number of lines."
+msgstr "Maksimum çizgi sayýsý."
+
+#: capplets/new-screensaver-properties/screensavers/pedal.xml.h:13
+msgid "Time to fade away."
+msgstr "Kaybolma süresi."
+
+#.
+#. * Translatable strings file generated by extract-labels
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: capplets/new-screensaver-properties/screensavers/pyro.xml.h:7
+msgid "Particles on screen"
+msgstr "Ekrandaki zerreler"
+
+#: capplets/new-screensaver-properties/screensavers/pyro.xml.h:9
+msgid "Frequency of missile launch"
+msgstr "Füze fýrlatma frekansý"
+
+#: capplets/new-screensaver-properties/screensavers/pyro.xml.h:12
+#, fuzzy
+msgid "Number of particles"
+msgstr "Zerre sayýsý"
 
 #: capplets/new-screensaver-properties/screensavers/qix.xml.h:9
 msgid "Number of points:"
@@ -925,20 +1691,20 @@ msgstr "Dolgun Hatlar"
 
 #: capplets/new-screensaver-properties/screensavers/qix.xml.h:12
 msgid "Transparent Trails"
-msgstr "Þeffaf Hatlar"
+msgstr "Þeffaf Ýzler"
 
 #: capplets/new-screensaver-properties/screensavers/qix.xml.h:13
 msgid "XOR Trails"
-msgstr "Deðil yada hatlar"
+msgstr "XOR Ýzleri"
 
 #: capplets/new-screensaver-properties/screensavers/qix.xml.h:14
 msgid "Trails attract each other"
-msgstr "Hatlarýn diðerini cezbetmek"
+msgstr "Hatlarýn diðerini çekmesi"
 
 #: capplets/new-screensaver-properties/screensavers/qix.xml.h:18
 #, fuzzy
 msgid "Length"
-msgstr "Sol"
+msgstr "Uzunluk"
 
 #: capplets/new-screensaver-properties/screensavers/qix.xml.h:21
 msgid "Width"
@@ -954,11 +1720,11 @@ msgstr "Geniþ"
 
 #: capplets/new-screensaver-properties/screensavers/qix.xml.h:24
 msgid "Spread between lines"
-msgstr "Cizgiler arasýna yayýlmak"
+msgstr "Çizgiler arasýnda yayýlmak"
 
 #: capplets/new-screensaver-properties/screensavers/qix.xml.h:27
 msgid "Number of trails:"
-msgstr "Hatlarýn sayýsý"
+msgstr "Ýzlerin sayýsý"
 
 #: capplets/new-screensaver-properties/screensavers/qix.xml.h:30
 msgid "Color contrast"
@@ -979,11 +1745,11 @@ msgstr "Karþýlamak"
 
 #: capplets/new-screensaver-properties/screensavers/rorschach.xml.h:13
 msgid "With X-axis Symmetry"
-msgstr "x-ekseni simetri geniþliði"
+msgstr "x-ekseni simetriði"
 
 #: capplets/new-screensaver-properties/screensavers/rorschach.xml.h:14
 msgid "With Y-axis Symmetry"
-msgstr "y-ekseni simetri geniþliði"
+msgstr "y-ekseni simetriði"
 
 #: capplets/new-screensaver-properties/screensavers/rorschach.xml.h:15
 msgid "Delay before next redraw"
@@ -994,23 +1760,61 @@ msgstr "Bir sonraki yeni çizim öncesi gecikme"
 msgid "Speed to clear the screen"
 msgstr "Ekraný temizleme hýzý"
 
+#.
+#. * Translatable strings file generated by extract-labels
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: capplets/new-screensaver-properties/screensavers/starfish.xml.h:7
+msgid "Speed of animation."
+msgstr "Canlandýrma hýzý."
+
+#: capplets/new-screensaver-properties/screensavers/starfish.xml.h:10
+msgid "Thickness of color bands (0 = Random)"
+msgstr "Renk bandýnýn kalýnlýðý (0 = Rastgele)"
+
+#: capplets/new-screensaver-properties/screensavers/starfish.xml.h:11
+#, fuzzy
+msgid "Slim"
+msgstr "Ýnce"
+
+#: capplets/new-screensaver-properties/screensavers/starfish.xml.h:12
+msgid "Quickness of rotation at each step (0 = Random)"
+msgstr "Her adýmda döndürme sürati (0 = Rastgele)"
+
+#: capplets/new-screensaver-properties/screensavers/starfish.xml.h:14
+msgid "Duration of current shape."
+msgstr "Geçerli biçimin devam süresi."
+
+#: capplets/new-screensaver-properties/screensavers/starfish.xml.h:16
+msgid "Use raw shapes "
+msgstr "Ýþlenmemiþ biçim kullanýmý"
+
+#: capplets/new-screensaver-properties/screensavers/starfish.xml.h:17
+msgid "Change to display in monochrome."
+msgstr "Tek renk görünümünü deðiþtir."
+
 #: capplets/new-screensaver-properties/selection-dialog.c:99
 #, fuzzy
 msgid "Add a new screensaver"
-msgstr "Yeni ekran koruyucu ekleme"
+msgstr "Yeni bir ekran koruyucu ekle"
 
 #: capplets/new-screensaver-properties/selection-dialog.c:108
 msgid "Select the screensaver to run from the list below:"
-msgstr "Ekran koruyucusunu çalýþtýrmak için aþaðýdaki listeden seçin"
+msgstr "Çalýþtýrmak için aþaðýdaki listeden ekran koruyucu seçin:"
 
-#: capplets/new-screensaver-properties/selection-dialog.c:195
+#: capplets/new-screensaver-properties/selection-dialog.c:194
 msgid "Custom"
-msgstr "Geleneksel"
+msgstr "Özel"
 
-#: capplets/new-screensaver-properties/selection-dialog.c:221
+#: capplets/new-screensaver-properties/selection-dialog.c:220
 #, fuzzy
 msgid "New screensaver"
-msgstr "Yeni Ekran Korucusu"
+msgstr "Yeni Ekran Koruyucusu"
+
+#: capplets/new-sound-properties/prefs-widget.c:137
+msgid "Play"
+msgstr "Çal"
 
 #: capplets/new-sound-properties/sound-properties.glade.h:8
 msgid "Enable"
@@ -1018,7 +1822,7 @@ msgstr "Etkin"
 
 #: capplets/new-sound-properties/sound-properties.glade.h:9
 msgid "Enable sound server startup"
-msgstr "Ses sunucusunun baþlamasýný saðla"
+msgstr "Baþlangýçta ses sunucusunu etkin kýl"
 
 #: capplets/new-sound-properties/sound-properties.glade.h:10
 msgid "Sounds for events"
@@ -1040,173 +1844,225 @@ msgstr "Çalýnacak dosya"
 msgid "Sound Events"
 msgstr "Ses eylemi"
 
-#: capplets/new-sound-properties/prefs-widget.c:137
-msgid "Play"
-msgstr "Çal"
+#.
+#. * Translatable strings file generated by Glade.
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: capplets/new-ui-properties/ui-properties.glade.h:7
+#, fuzzy
+msgid "window4"
+msgstr "pencere4"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:8
-msgid "Menu Options"
-msgstr "Mönü seçenekleri"
+msgid "Menus"
+msgstr "Menuler"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:9
-msgid "Can detach and move menus"
-msgstr "Mönüler taþýma ve ayrýlabilmesi"
+msgid "Menu bars are detachable"
+msgstr "Menu çubuklarý ayrýlabilmelidir"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:10
-msgid "Menus have relieved border"
-msgstr "Mönülerin görünebilinir kenarlarý var"
+#, fuzzy
+msgid "Menu bars have a border"
+msgstr "Menü çubuklarý bir kenara sahip"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:11
-msgid "Submenus can be torn off"
-msgstr "Altmönüler koparabilinir"
+#, fuzzy
+msgid "Menus can be torn off"
+msgstr "Menüler koparýlabilinir"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:12
 msgid "Menu items have icons"
-msgstr "Mönü birimlerini ikonalarý olsun"
+msgstr "Menü parçalarý ikonalara sahip"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:13
-msgid "Statusbar Options"
-msgstr "Durum çubuðu ayarlarý"
+msgid "Status Bar"
+msgstr "Durum Çubuðu"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:14
-msgid "Statusbar is interactive when possible"
-msgstr "Durum çubuðu mümkün olduðu kadariyle interaktif olsun"
+#, fuzzy
+msgid "Use status bar instead of dialog when possible"
+msgstr "Mümkün olduðu kadarý ile diyaloglarýn yerine durum çubuðunu kullan"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:15
-msgid "Statusbar progress meter is on the right"
-msgstr "Durum çubuðu'nun ilerleme göstergesi saðda olsun"
+#, fuzzy
+msgid "Status bar is interactive when possible"
+msgstr "Durum çubuðu mümkün olduðu kadarýyla interaktif olsun"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:16
-msgid "Toolbar Options"
-msgstr "Araç çubuðu ayarlarý"
+#, fuzzy
+msgid "Progress bar is on the left"
+msgstr "Durum çubuðu'nun ilerleme göstergesi solda olsun"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:17
-msgid "Can detach and move toolbars"
-msgstr "Araç cubuðu taþýnýr ve silinebilinir"
+#, fuzzy
+msgid "Progress bar is on the right"
+msgstr "Durum çubuðu'nun ilerleme göstergesi saðda olsun"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:18
-msgid "Toolbars have relieved border"
-msgstr "Araç çubuklarýnýn görünebilinir kenarlý olsun"
+msgid "Tool Bars"
+msgstr "Araç Çubuklarý"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:19
-msgid "Toolbar buttons have relieved border"
-msgstr "Araç çubuklarýndaki basmalarda görünebilinir kenarlar olsun"
+#, fuzzy
+msgid "Tool bars have a border"
+msgstr "Araç çubuklarýnýn görünebilinir kenarlý olsun"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:20
-msgid "Toolbars have line separators"
-msgstr "Araç çubuklarýn ayýrma çubuklarý olsun"
+#, fuzzy
+msgid "Tool bar buttons pop up on mouse over"
+msgstr "Fare üzerine geldiðinde araç çubuklarý açýlsýn"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:21
-msgid "Toolbars have text labels"
-msgstr "Araç çubuklarýn metin yaftalarý olsun"
+#, fuzzy
+msgid "Tool bars have line separators"
+msgstr "Araç çubuklarýnýn ayýrma çubuklarý olsun"
+
+#: capplets/new-ui-properties/ui-properties.glade.h:22
+#, fuzzy
+msgid "Tool bars are detachable"
+msgstr "Araç çubuklarý ayrýlabilir olsun"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:23
-msgid "Dialog Layout"
-msgstr "Diyalok tasarýsý"
+#, fuzzy
+msgid "Tool bar buttons are icons only"
+msgstr "Araç çubuklarýnda sadece simgeler olsun"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:24
 #, fuzzy
-msgid "Dialog Buttons:"
-msgstr "Diyalok basmalarý"
+msgid "Tool bar buttons are text below icons"
+msgstr "Araç çubuklarýn metin simgeleri olsun"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:25
-msgid ""
-"Default value\n"
-"Spread buttons out\n"
-"Put buttons on edges\n"
-"Left-justify buttons\n"
-"Right-justify buttons\n"
-msgstr ""
-"Geçerli Deðerler\n"
-"Buton isimlerini çýkarmak\n"
-"Butonlarý Köþelere Yerleþtir\n"
-"Sola Ayarlý Botunlar\n"
-"Saða Ayarlý Butonlar\n"
+msgid "Interface"
+msgstr "Arayüz"
+
+#: capplets/new-ui-properties/ui-properties.glade.h:26
+#, fuzzy
+msgid "Dialogs"
+msgstr "Diyaloglar"
+
+#: capplets/new-ui-properties/ui-properties.glade.h:27
+msgid "Dialog buttons have icons"
+msgstr "Diyalok basmalarýnýn simgeleri olsun"
+
+#: capplets/new-ui-properties/ui-properties.glade.h:28
+msgid "Place dialogs over application window when possible"
+msgstr "Mümkün olduðu kadariyle diyaloglarý uygulama penceresinin üstüne koy"
+
+#: capplets/new-ui-properties/ui-properties.glade.h:29
+#, fuzzy
+msgid "Dialogs open"
+msgstr "Açýk diyalog"
+
+#: capplets/new-ui-properties/ui-properties.glade.h:30
+msgid "Wherever the Window Manager places them"
+msgstr "Pencere yöneticisi her yerde yerlerini alsýn"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:31
-msgid "Dialog buttons have icons"
-msgstr "Diyalok basmalarýnýn ikonalarý var olsun"
+#, fuzzy
+msgid "At the center of the screen"
+msgstr "Ekranýn ortasýnda"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:32
-msgid "Use statusbar instead of dialog when possible"
-msgstr "Mümkün olduðu kadari ile diyaloklarýn yerine durum çubuðunu kullan"
+msgid "At the mouse pointer"
+msgstr "Fare göstergesinin yerinde"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:33
-msgid "Dialog Behavior"
-msgstr "Diyalok heybeti"
+#, fuzzy
+msgid "Dialogs are treated"
+msgstr "Diyaloklar öbür pencereler gibi davransýn"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:34
 #, fuzzy
-msgid "Dialog position:"
-msgstr "Diyalok mekaný"
+msgid "Like any other window"
+msgstr "Diyaloglar öbür pencereler gibi olsun"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:35
 #, fuzzy
-msgid "Dialog hints:"
-msgstr "Diyalok ipuçlarý"
+msgid "Specially by the window manager"
+msgstr "Pencere yöneticisi karar versin"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:36
-msgid ""
-"Let window manager decide\n"
-"Center of the screen\n"
-"At the mouse pointer\n"
-msgstr ""
-"Pencere idarecisi karar versin\n"
-"Ekranýn merkezi\n"
-"Fare iþaretçisi\n"
+#, fuzzy
+msgid "Dialog Buttons"
+msgstr "Diyalok basmalarý"
+
+#: capplets/new-ui-properties/ui-properties.glade.h:37
+msgid "Default  (Spread out - big)"
+msgstr "Varsayýlan"
+
+#: capplets/new-ui-properties/ui-properties.glade.h:38
+#, fuzzy
+msgid "Spread out"
+msgstr "Basmalarý daðýt"
+
+#: capplets/new-ui-properties/ui-properties.glade.h:39
+msgid "Spread out (big)"
+msgstr "Basmalarý daðýt (büyük)"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:40
 #, fuzzy
-msgid ""
-"Dialogs are like other windows\n"
-"Dialogs are treated specially by the window manager\n"
-msgstr ""
-"Diyaloklar diðer pencerelere benzesin\n"
-"Diyaloklara pencere yöneticileri tarafýndan özel davranýlsýn\n"
+msgid "Left aligned"
+msgstr "Solaklar için"
+
+#: capplets/new-ui-properties/ui-properties.glade.h:41
+#, fuzzy
+msgid "Right aligned"
+msgstr "Saðel kullananlar için"
+
+#: capplets/new-ui-properties/ui-properties.glade.h:42
+msgid "Multiple Documents"
+msgstr "Çoklu Dokümanlar"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:43
-msgid "Place dialogs over application window when possible"
-msgstr "Mümkün olduðu kadariyle diyaloklarý uygulama penceresinin üstüne koy"
+#, fuzzy
+msgid "Notebook tabs"
+msgstr "Defterlik"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:44
-msgid "window3"
-msgstr "pencere3"
+msgid "Seperate windows"
+msgstr "Pencereleri ayýrma"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:45
-msgid "GNOME MDI Options"
-msgstr "Gnome ÇDY Seçekleri"
+#, fuzzy
+msgid "The same window"
+msgstr "Ayný pencerede aç"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:46
 #, fuzzy
-msgid "Default MDI Mode:"
-msgstr "Önayarlý ÇDY çeþidi"
+msgid "Left"
+msgstr "Sol"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:47
 #, fuzzy
-msgid "MDI notebook tab position:"
-msgstr "ÇDY defterlik tab'in mekaný"
+msgid "Right"
+msgstr "Sað"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:48
-msgid ""
-"Notebook\n"
-"Toplevel\n"
-"Modal\n"
-msgstr ""
-"Notluk\n"
-"Enüst seviye\n"
-"Usül\n"
+msgid "Top"
+msgstr "Üst"
+
+#: capplets/new-ui-properties/ui-properties.glade.h:49
+msgid "Bottom"
+msgstr "Alt"
+
+#: capplets/new-ui-properties/ui-properties.glade.h:50
+msgid "When opening Multiple documents, use"
+msgstr "Çoklu dökümanlar açýldýðýnda kullan"
+
+#: capplets/new-ui-properties/ui-properties.glade.h:51
+msgid "When using Notebook tabs, place the tabs on the"
+msgstr "Notedefteri kullanýldýðýnda etiket yerleþtir"
 
 #: capplets/new-ui-properties/ui-properties.glade.h:52
-msgid ""
-"Left\n"
-"Right\n"
-"Top\n"
-"Bottom\n"
-msgstr ""
-"Sol\n"
-"Sað\n"
-"Üst\n"
-"Alt\n"
+msgid "Miscellaneous"
+msgstr "Çeþitli"
+
+#: capplets/new-ui-properties/ui-properties.glade.h:53
+msgid "Settings will not take effect until applications restart"
+msgstr "Ayarlar uygulamalar yeniden baþlatýlmadan etkili olamaz"
 
 #: capplets/session-properties/chooser.c:61
 #, fuzzy
@@ -1222,7 +2078,7 @@ msgstr "Oturum Seçici"
 #: capplets/session-properties/chooser.c:100
 #, fuzzy
 msgid "Start Session"
-msgstr "Oturuma Baþlat"
+msgstr "Oturum Baþlat"
 
 #: capplets/session-properties/chooser.c:103
 #, fuzzy
@@ -1250,10 +2106,10 @@ msgid ""
 "Settings programs are always started on every login."
 msgstr ""
 "Bu basma seçilmiþ olan uygulamalarýnýn baþlama tipini belirler :\n"
-"Normal uygulamlar çýkýþlardan etkilenmezler ama ölebilirler ;\n"
-"Yeniden baþlayacak uygulamlarýn ölmesine izin verilemeyecektir ;\n"
-"Çöplük uygulamalarý çýkýþta önemsiz kalýp , ölebilirler ;\n"
-"Ayarlama uygulamalarý her giriþte baþlatýlýlacaklardýr ."
+"Normal uygulamlar çýkýþlardan etkilenmezler ama ölebilirler;\n"
+"Yeniden baþlayacak uygulamlarýn ölmesine izin verilemeyecektir;\n"
+"Çöplük uygulamalarý çýkýþta önemsiz kalýp , ölebilirler;\n"
+"Ayarlama uygulamalarý her giriþte baþlatýlýlacaklardýr."
 
 #: capplets/session-properties/gsm-client-list.c:39
 msgid ""
@@ -1265,11 +2121,11 @@ msgid ""
 "Programs which make no contact have Unknown states.\n"
 msgstr ""
 "Bu basma alttaki durumlarýn seçimlerini oluþturacaktýr:\n"
-"Pasif uygulamalarýn baþlamasý yada bitirilmeleri beklenecektir ;\n"
-"Baþlayan uygulamalara baþlamalarý için zaman býrakýlacaktýr ;\n"
-"Çalýþan uygulamalar oturumun normal üyeleridirler ;\n"
-"Kaydedebilen uygulamalar oturum bilgilerini kaydedebilirler ;\n"
-"Ve baðlanýlamayan uygulamalarýn durum bilinmiyor .\n"
+"Pasif uygulamalarýn baþlamasý yada bitirilmeleri beklenecektir;\n"
+"Baþlayan uygulamalara baþlamalarý için zaman býrakýlacaktýr;\n"
+"Çalýþan uygulamalar oturumun normal üyeleridirler;\n"
+"Kaydedebilen uygulamalar oturum bilgilerini kaydedebilirler;\n"
+"Ve baðlanýlamayan uygulamalarýn durumu bilinmiyor.\n"
 
 #: capplets/session-properties/gsm-client-list.c:45
 msgid "This column gives the command used to start a program."
@@ -1289,7 +2145,7 @@ msgstr "Durum"
 
 #: capplets/session-properties/gsm-client-list.c:141
 msgid "Program"
-msgstr "Uygulama"
+msgstr "Program"
 
 #: capplets/session-properties/gsm-client-row.c:34
 msgid "Inactive"
@@ -1305,7 +2161,7 @@ msgstr "Baþlýyor"
 
 #: capplets/session-properties/gsm-client-row.c:38
 msgid "Started but has not yet reported state."
-msgstr "Baþladý , ama þu ana kadar durumundan haber yok ."
+msgstr "Baþlatýldý , ama þu ana kadar durumundan haber yok ."
 
 #: capplets/session-properties/gsm-client-row.c:40
 msgid "Running"
@@ -1317,11 +2173,11 @@ msgstr "Oturumun normal bir üyesi ."
 
 #: capplets/session-properties/gsm-client-row.c:43
 msgid "Saving"
-msgstr "Kaydediyorum"
+msgstr "Kaydediliyor"
 
 #: capplets/session-properties/gsm-client-row.c:44
 msgid "Saving session details."
-msgstr "Oturum özelliklerini kaydediyorum ."
+msgstr "Oturum detaylarýný kaydediyorum ."
 
 #: capplets/session-properties/gsm-client-row.c:46
 msgid "Unknown"
@@ -1357,11 +2213,11 @@ msgstr "Çýkýþta unut ve ölmesine izin ver ."
 
 #: capplets/session-properties/gsm-client-row.c:63
 msgid "Always started on every login."
-msgstr "Her giriþte baþlat ."
+msgstr "Her giriþte baþlat."
 
 #: capplets/session-properties/gsm-protocol.c:502
 msgid "Remove Program"
-msgstr "Uygulamayý sil"
+msgstr "Program Kaldýr"
 
 #. frame for options
 #: capplets/session-properties/session-properties.c:139
@@ -1370,54 +2226,54 @@ msgstr "Ayarlar"
 
 #: capplets/session-properties/session-properties.c:150
 msgid "Prompt on logout"
-msgstr "Oturumu kapatýrken sor"
+msgstr "Oturum kapama penceresi"
 
 #: capplets/session-properties/session-properties.c:157
 msgid "Automatically save changes to session"
-msgstr "Oturum için otomatik olarak kaydet"
+msgstr "Oturum için deðiþiklikleri otomatik olarak kaydet"
 
 #. frame for manually started programs
 #: capplets/session-properties/session-properties.c:162
 msgid "Non-session-managed Startup Programs"
-msgstr "Oturumlarýný kaydedemeyen baþlangýç uygulamalarý"
+msgstr "Oturum Yönetimi Olmayan Baþlangýç Uygulamalarý"
 
 #: capplets/session-properties/session-properties.c:180
 #: capplets/url-properties/url-properties.c:72
 msgid "Command"
-msgstr "Komuta"
+msgstr "Komut"
 
 #: capplets/session-properties/session-properties.c:209
 msgid "Browse Currently Running Programs..."
-msgstr "Þu an çalýþan uygulamalarý gez .."
+msgstr "Þu An Çalýþan Uygulamalara Gözat..."
 
 #: capplets/session-properties/session-properties.c:475
 msgid "Only display warnings."
-msgstr "Sadece önemli uyarýlarý göster ."
+msgstr "Sadece önemli uyarýlarý göster."
 
 #: capplets/session-properties/startup-programs.c:292
 #: capplets/session-properties/startup-programs.c:299
 msgid "Startup Command"
-msgstr "Baþlama komutasý"
+msgstr "Baþlangýç Komutu"
 
 #: capplets/session-properties/startup-programs.c:323
 msgid ""
 "Programs with smaller values are started before programs with higher values. "
 "The default value should be OK"
 msgstr ""
-"Ufak deðerli uygulamalar yüksek deðerli uygulamalardan önce baþlatýlýr . "
-"Önayarlý deðer normal þartlar altýnda iyidir"
+"Küçük deðerli programlar yüksek deðerli programlardan önce baþlatýlýr. "
+"Varsayýlan deðer normal þartlar altýnda iyidir"
 
 #: capplets/session-properties/startup-programs.c:342
 msgid "The startup command cannot be empty"
-msgstr "Baþlangýc komutasý boþ kalamaz"
+msgstr "Baþlangýç komutu boþ kalamaz"
 
 #: capplets/session-properties/startup-programs.c:382
 msgid "Add Startup Program"
-msgstr "Baþlangýç uygulamasýný ekle"
+msgstr "Baþlangýç programlarýna ekle"
 
 #: capplets/session-properties/startup-programs.c:400
 msgid "Edit Startup Program"
-msgstr "Baþlangýç Uygulamasýný Deðiþtir"
+msgstr "Baþlangýç Programýný Düzenle"
 
 #: capplets/theme-switcher/demo.c:54
 msgid "One"
@@ -1426,39 +2282,40 @@ msgstr "Bir"
 #. just 8 short names that will serve as samples for titles in demo
 #: capplets/theme-switcher/demo.c:56
 msgid "Eenie"
-msgstr "Trabzonspor"
+msgstr "Eenie"
 
 #: capplets/theme-switcher/demo.c:56
 msgid "Meenie"
-msgstr "Beþiktaþ"
+msgstr "Meenie"
 
 #: capplets/theme-switcher/demo.c:57
 msgid "Mynie"
-msgstr "Galatasaray"
+msgstr "Mynie"
 
 #: capplets/theme-switcher/demo.c:57
 msgid "Moe"
-msgstr "Fenerbahçe"
+msgstr "Moe"
 
 #: capplets/theme-switcher/demo.c:58
 msgid "Catcha"
-msgstr "Adanaspor"
+msgstr "Catcha"
 
 #: capplets/theme-switcher/demo.c:58
 msgid "Tiger"
-msgstr "Vefaspor"
+msgstr "Kaplan"
 
 #: capplets/theme-switcher/demo.c:59
 msgid "By Its"
-msgstr "Beþiktaþ"
+msgstr "Tarafýndan"
 
 #: capplets/theme-switcher/demo.c:59
 msgid "Toe"
-msgstr "Trabzonspor"
+msgstr "Toe"
 
 #: capplets/theme-switcher/demo.c:118
 msgid "Selected themes from above will be tested by previewing here."
-msgstr "Üstte seçilmiþ konu görünümler burada önceden izlenerek test edilebilir ."
+msgstr ""
+"Üstte seçilmiþ tema görünümler burada önceden izlenerek test edilebilir ."
 
 #. column one
 #: capplets/theme-switcher/demo.c:123
@@ -1467,31 +2324,31 @@ msgstr "Örnek basmasý"
 
 #: capplets/theme-switcher/demo.c:127
 msgid "Sample Check Button"
-msgstr "Seçim Basmasý"
+msgstr "Örnek Kontrol Basmasý"
 
 #: capplets/theme-switcher/demo.c:132
 msgid "Sample Text Entry Field"
-msgstr "Örnek metin verim bölgesi"
+msgstr "Örnek Metin Giriþ Alaný"
 
 #: capplets/theme-switcher/demo.c:143
 msgid "Submenu"
-msgstr "Altmönü"
+msgstr "Altmenü"
 
 #: capplets/theme-switcher/demo.c:150
 msgid "Item 1"
-msgstr "Birinci birim"
+msgstr "Birinci parça"
 
 #: capplets/theme-switcher/demo.c:153
 msgid "Another item"
-msgstr "Baþka bir birim"
+msgstr "Baþka bir parça"
 
 #: capplets/theme-switcher/demo.c:158
 msgid "Radio Button 1"
-msgstr "Birinci basit"
+msgstr "Birinci Dairesel Basma"
 
 #: capplets/theme-switcher/demo.c:164
 msgid "Radio Button 2"
-msgstr "Ýkinci basit"
+msgstr "Ýkinci Dairesel Basma"
 
 #: capplets/theme-switcher/gui.c:88
 #, c-format
@@ -1500,17 +2357,17 @@ msgid ""
 "'%s'\n"
 "%s"
 msgstr ""
-"Görünüm '%s' yüklenirken\n"
+"Tema '%s' yüklenirken\n"
 "hata oldu:\n"
 "%s"
 
 #: capplets/theme-switcher/gui.c:119
 msgid "Select a theme to install"
-msgstr "Yüklenilcek görünümü seç"
+msgstr "Yüklenilecek temayý seç"
 
 #: capplets/theme-switcher/gui.c:196
 msgid "Available Themes"
-msgstr "Hazýr Görünümler"
+msgstr "Hazýr Temalar"
 
 #: capplets/theme-switcher/gui.c:221
 msgid ""
@@ -1518,14 +2375,14 @@ msgid ""
 "Preview"
 msgstr ""
 "Otomatik olarak\n"
-"önizle"
+"Önizle"
 
 #: capplets/theme-switcher/gui.c:233
 msgid ""
 "Install new\n"
 "theme..."
 msgstr ""
-"Yeni bir konu görünümü\n"
+"Yeni bir tema\n"
 "yükle..."
 
 #. Font selector.
@@ -1550,12 +2407,12 @@ msgstr "Yuva dizinin yok !\n"
 
 #: capplets/theme-switcher/install.c:41
 msgid "Theme does not exist"
-msgstr "Görünümün yok"
+msgstr "Tema yok"
 
 #: capplets/theme-switcher/install.c:73
 #, c-format
 msgid "Command '%s' failed"
-msgstr "'%s' komutasý baþarýsýz oldu"
+msgstr "'%s' komutu baþarýsýz oldu"
 
 #: capplets/theme-switcher/install.c:78
 msgid "Unknown file format"
@@ -1563,7 +2420,7 @@ msgstr "Tanýnamayan dosya türü"
 
 #: capplets/url-properties/url-properties.c:49
 msgid "Error initializing the `url-properties' capplet."
-msgstr "`url-properties' cappletini baþlatýrken mühim bir hata oluþtu ."
+msgstr "`url-properties' kapletini baþlatýrken önemli bir hata oluþtu ."
 
 #: capplets/url-properties/url-properties.c:72
 msgid "Protocol"
@@ -1571,7 +2428,7 @@ msgstr "Protokol"
 
 #: capplets/url-properties/url-properties.c:88
 msgid "handler:"
-msgstr "eylemdar :"
+msgstr "eylemdar:"
 
 #. set some commonly used handlers
 #: capplets/url-properties/url-properties.c:98
@@ -1592,7 +2449,7 @@ msgstr "Yardým Kaþifi ( yeni pencerede )"
 
 #: capplets/url-properties/url-properties.c:126
 msgid "Set"
-msgstr "Oturt"
+msgstr "Ayarla"
 
 #: capplets/wm-properties/wm-properties-capplet.c:145
 #, c-format
@@ -1611,7 +2468,7 @@ msgstr "%s ( Geçerli )"
 #: capplets/wm-properties/wm-properties-capplet.c:309
 #, c-format
 msgid "Run Configuration Tool for %s"
-msgstr "%s için ayarlama aletlerini çalýþtýr"
+msgstr "%s Ýçin Ayarlama Aletlerini Çalýþtýr"
 
 #: capplets/wm-properties/wm-properties-capplet.c:320
 msgid " (Not found)"
@@ -1623,7 +2480,7 @@ msgid ""
 "\tAnother window manager is already running and could not be killed\n"
 msgstr ""
 "wm-properties-capplet : pencere yöneticisini baþlatamadým .\n"
-"\tBaþka bir pencere yöneticisi þu an zaten çalýþýyor ve o öldürülenemedi\n"
+"\tBaþka bir pencere yöneticisi þu an zaten çalýþýyor ve o öldürülemedi\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:363
 #, c-format
@@ -1636,7 +2493,7 @@ msgstr ""
 
 #: capplets/wm-properties/wm-properties-capplet.c:412
 msgid "Previous window manager did not die\n"
-msgstr "Önceki pencere yöneticisi hala ölmedi\n"
+msgstr "Önceki pencere yöneticisi ölmedi\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:445
 #, c-format
@@ -1656,7 +2513,7 @@ msgid ""
 msgstr ""
 "Geri dönüþüm pencere yöneticisini baþlatamadým .\n"
 "Lütfen kendiliðinden bir pencere yöneticisini baþlat .\n"
-"Bunu ana mönüsünden ( ayak mönüsünden ) \"Çalýþtýr\"\n"
+"Bunu ana menüsünden ( ayak menüsünden ) \"Çalýþtýr\"\n"
 "birimini seçip yapabilirsin\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:501
@@ -1665,7 +2522,7 @@ msgstr ""
 #: capplets/wm-properties/wm-properties-capplet.c:866
 #: capplets/wm-properties/wm-properties-capplet.c:1012
 msgid "OK"
-msgstr "Oldu"
+msgstr "Tamam"
 
 #: capplets/wm-properties/wm-properties-capplet.c:519
 msgid ""
@@ -1677,12 +2534,12 @@ msgid ""
 "in the main menu, or by turning on \"Save Current Setup\" when\n"
 "you log out.\n"
 msgstr ""
-"Geçerli pencere yöneticini deðiþtirdin. Bu deðiþikliðin\n"
+"Geçerli pencere yöneticin deðiþtirilmiþ. Bu deðiþikliðin\n"
 "kaydedilmesi için, þu an geçerli olan oturumun kaydedilmesi lazým .\n"
 "Bunu hemen altta \"Oturumu kaydet\"´i seçip yapabilirisin. \n"
-"Yada \"Ayarlar\" mönüsünden \"Oturumu kaydet\"´i  seçip \n"
+"Yada \"Ayarlar\" menüsünden \"Oturumu kaydet\"´i  seçip \n"
 "yapabilirsin \n"
-" , veya çýkýþta \"Oturumu kaydet\" seçerek aynýsýný yapabilrisin .\n"
+", veya çýkýþta \"Oturumu kaydet\" seçerek aynýsýný yapabilirsin.\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:526
 msgid "Save Session Later"
@@ -1700,30 +2557,30 @@ msgid ""
 "under \"Settings\" in the main menu, or by turning on\n"
 "\"Save Current Setup\" when you log out.\n"
 msgstr ""
-"Geçerli pencere yöneticini deðiþtirdin. Bu deðiþikliðin\n"
+"Geçerli pencere yöneticin deðiþtirilmiþ. Bu deðiþikliðin\n"
 "kaydedilmesi için , þu an geçerli olan oturumu kaydedilmesi lazým .\n"
-"Bunun \"Ayarlar\" mönüsünden \"Oturumu kaydet\"'i seçip yapabilirsin \n"
+"Bunu \"Ayarlar\" mönüsünden \"Oturumu kaydet\"'i seçip yapabilirsin \n"
 "veya çýkýþta \"Oturumu kaydet\" seçerek aynýsýný yapabilrisin .\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:750
 msgid "Add New Window Manager"
-msgstr "Yeni bir Pencere Ýdarecisi ekle"
+msgstr "Yeni bir Pencere Yöneticisi ekle"
 
 #: capplets/wm-properties/wm-properties-capplet.c:751
 msgid "Cancel"
-msgstr "Iptal"
+msgstr "Ýptal"
 
 #: capplets/wm-properties/wm-properties-capplet.c:775
 msgid "Command:"
-msgstr "Komuta:"
+msgstr "Komut:"
 
 #: capplets/wm-properties/wm-properties-capplet.c:788
 msgid "Configuration Command:"
-msgstr "Ayarlama komutasý:"
+msgstr "Ayarlama Komutu:"
 
 #: capplets/wm-properties/wm-properties-capplet.c:807
 msgid "Window manager is session managed"
-msgstr "Pencere Ýdarecisi  oturum-yönetilebilinir"
+msgstr "Pencere yöneticisi oturum yönetilebilir"
 
 #: capplets/wm-properties/wm-properties-capplet.c:857
 msgid "Name cannot be empty"
@@ -1731,7 +2588,7 @@ msgstr "Ýsmi boþ olamaz"
 
 #: capplets/wm-properties/wm-properties-capplet.c:864
 msgid "Command cannot be empty"
-msgstr "Komutasý boþ olamaz"
+msgstr "Komut boþ olamaz"
 
 #: capplets/wm-properties/wm-properties-capplet.c:913
 #: capplets/wm-properties/wm-properties-capplet.c:955
@@ -1750,337 +2607,253 @@ msgstr ""
 "wm-properties-capplet' baþlarken aðýr bir hata oluþtu ..\n"
 "bitiriliyorum ...\n"
 
-#: libcapplet/capplet-widget.c:72
-msgid "id of the capplet -- assigned by the control-center"
-msgstr "capplet'in Tanýmlanmasý -- ayarlar merkezi tarafýndan verilmiþtir"
+#: new-control-center/capplet-dir-view.c:321
+msgid "GNOME Control Center"
+msgstr "Gnome Kontrol Merkezi"
 
-#: libcapplet/capplet-widget.c:72
-msgid "ID"
-msgstr "Tanýmlanma"
-
-#: libcapplet/capplet-widget.c:74
-msgid "Multi-capplet id."
-msgstr "Çoklu capplet Tanýmlanmasý ."
-
-#: libcapplet/capplet-widget.c:74
-msgid "CAPID"
-msgstr "CAPID"
-
-#: libcapplet/capplet-widget.c:76
-msgid "X ID of the socket it's plugged into"
-msgstr "Baðlý olduðu \"socket\"'in X Tanýmlanmasý"
-
-#: libcapplet/capplet-widget.c:76
-msgid "XID"
-msgstr "XID"
-
-#: libcapplet/capplet-widget.c:78
-msgid "IOR of the control-center"
-msgstr "Ayarlar merkezinin IOR'i"
-
-#: libcapplet/capplet-widget.c:78
-msgid "IOR"
-msgstr "IOR"
-
-#: libcapplet/capplet-widget.c:80
-msgid "Initialize session settings"
-msgstr "Oturum ayarlarý tara"
-
-#: libcapplet/capplet-widget.c:82
-msgid "Ignore default action.  Used for custom init-session cases"
-msgstr ""
-"Önayarlý deðerleri unut. Bunu þahsi oturum baþlama sýnýflarý için "
-"kullanabilirsin."
-
-#: libcapplet/capplet-widget.c:85
-msgid "Get an XML description of the capplet's state"
-msgstr "Bir capplet durumun XML tarifine izin ver "
-
-#: libcapplet/capplet-widget.c:85
-msgid "DO_GET"
-msgstr "DO_GET"
-
-#: libcapplet/capplet-widget.c:87
-msgid "Read an XML description of the capplet's state and apply it"
-msgstr "Bir capplet durumun XML tarifini oku ve onu uygula "
-
-#: libcapplet/capplet-widget.c:88
-msgid "DO_SET"
-msgstr "DO_SET"
-
-#: new-control-center/capplet-dir-view.c:107
+#: new-control-center/capplet-dir-view.c:322
 #, fuzzy
-msgid "Help on control-center"
-msgstr "Ayarlar merkezinin IOR'i"
+msgid "Desktop properties manager."
+msgstr "Masaüstü Ayarlar Yöneticisi "
 
-#: new-control-center/capplet-dir-view.c:108
-msgid "Help with the GNOME control-center."
-msgstr "Gnome ayarlar merkeziyle yardým et."
-
-#: new-control-center/capplet-dir-view.c:111
-#, fuzzy
-msgid "About"
-msgstr "Bilgi:"
-
-#: new-control-center/capplet-dir-view.c:112
-#, fuzzy
-msgid "About the GNOME control-center."
-msgstr "Gnome ayarlar merkeziyle yardým et."
-
-#: new-control-center/capplet-dir-view.c:124
-msgid "Up"
-msgstr "Yukarý"
-
-#: new-control-center/capplet-dir-view.c:124
-msgid "Parent Group"
-msgstr "Ana Grup"
-
-#: new-control-center/capplet-dir-view.c:126
-msgid "Preferences"
-msgstr "Seçimlikler"
-
-#: new-control-center/capplet-dir-view.c:127
-#, fuzzy
-msgid "Control Center Preferences"
-msgstr "Ayarlar Merkezi Seçimlikleri"
-
-#: new-control-center/capplet-dir-view.c:130
-msgid "Close this Window"
-msgstr "Bu Pencereden Çýk"
-
-#: new-control-center/capplet-dir-view.c:166
-msgid "Control Center"
-msgstr "Ayarlar Merkezi"
-
-#: new-control-center/capplet-dir-view.c:577
+#: new-control-center/capplet-dir-view.c:519
 msgid ""
 "No help is available/installed. Please make sure you\n"
 "have the GNOME User's Guide installed on your system."
 msgstr ""
 "Yardým yüklenmemiþtir/yoktur . Lütfen Gnome kullanýcý\n"
-"kýlavuzunu yüklediðinden emin ol/yükle ."
+"kýlavuzunun yüklendiðinden emin olun ."
 
-#: new-control-center/capplet-dir-view.c:596
-msgid "GNOME Control Center"
-msgstr "Gnome Ayarlar Merkezi"
+#.
+#. * Translatable strings file generated by Glade.
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: new-control-center/gnomecc.glade.h:7
+msgid "Launch control panels in separate windows"
+msgstr "Pencerelerdeki ayrýlmýþ kontrol panellerini baþlat "
 
-#: new-control-center/capplet-dir-view.c:599
-msgid "Desktop Properties manager."
-msgstr "Masaüstü Ayarlar Ýdarecisi "
+#: new-control-center/gnomecc.glade.h:8
+msgid "Put control panels in the control center's window"
+msgstr "Kontrol merkezinin penceresine kontrol panelleri koy "
 
-#~ msgid "Set background image."
-#~ msgstr "Ardalaný belirle ."
+#: new-control-center/gnomecc.glade.h:9
+msgid "Display control panels as HTML"
+msgstr "HTML olarak kontrol panellerini göster "
 
-#~ msgid "IMAGE-FILE"
-#~ msgstr "RESIM"
+#: new-control-center/gnomecc.glade.h:10
+msgid "Display control panels as a set of icons"
+msgstr "Ýcon olarak ayarlanmýþ kontrol panellerini göster "
 
-#~ msgid ""
-#~ "an initialization error occurred while starting "
-#~ "'background-properties-capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "´background-properties-capplet´'i baþlatýrken bir aðýr hata oluþtu .\n"
-#~ "bitiriyorum ....\n"
+#: new-control-center/gnomecc.glade.h:11
+msgid "Display control panels as a tree"
+msgstr "Aðaç dallanmasý þeklinde kontrol panellerini göster "
 
-#~ msgid "Wallpaper Selection"
-#~ msgstr "Ardalan seçimi"
+#: new-control-center/gnomecc.glade.h:12
+#, fuzzy
+msgid "Browse with single window"
+msgstr "Tek pencere ile gözat "
 
-#~ msgid "Can't find an hbox, using a normal file selection"
-#~ msgstr "hbox'u bulamadým, normal dosya seçmenini kullanýyorum"
+#: new-control-center/gnomecc.glade.h:13
+msgid "Browse with multiple windows"
+msgstr "Çoklu pencere ile gözat "
 
-#~ msgid " Browse... "
-#~ msgstr " Gez ... "
+#: new-control-center/gnomecc.glade.h:14
+msgid "Appearance"
+msgstr "Görünüm "
 
-#~ msgid "none"
-#~ msgstr "yok"
+#: new-control-center/gnomecc.glade.h:15
+#, fuzzy
+msgid "New-control-center"
+msgstr "Yeni kontrol merkezi "
 
-#~ msgid "Set parameters from saved state and exit"
-#~ msgstr "Kaydedilmiþ duruma gerit ve çýk "
+#: new-control-center/gnomecc.glade.h:16
+msgid "HTML"
+msgstr "HTML "
 
-#~ msgid "IMAGE"
-#~ msgstr "RESIM"
+#: new-control-center/gnomecc.glade.h:17
+msgid "Icon List"
+msgstr "Ýkon Listesi "
 
-#~ msgid "Sets the wallpaper to the value specified"
-#~ msgstr "Belirtilen deðeri ardalan yapar"
+#: new-control-center/gnomecc.glade.h:18
+msgid "Tree"
+msgstr "Aðaç Dallanmasý "
 
-#~ msgid "COLOR"
-#~ msgstr "RENK"
+#: root-manager/root-manager.c:110
+#, c-format
+msgid "Got error %d.\n"
+msgstr "%d'de hata var.\n"
 
-#~ msgid "Specifies the background color"
-#~ msgstr "Ardalan rengini belirler"
+#: root-manager/root-manager.c:206
+#, c-format
+msgid "Password for %s"
+msgstr "%s için þifre "
 
-#~ msgid "Specifies end background color for gradient"
-#~ msgstr "Geçiþ için bitiþ rengini belirler"
+#: root-manager/root-manager.c:401
+msgid "Consistency checking is not turned on."
+msgstr "Yoðunluk kontrolü kapalý. "
 
-#~ msgid "ORIENT"
-#~ msgstr "DOÐU"
+#: root-manager/root-manager.c:403
+msgid "Block is fine."
+msgstr "Blok incedir. "
 
-#~ msgid "Gradient orientation: vertical or horizontal"
-#~ msgstr "Geçiþ taraflamasý : dikey veya ufuki"
+#: root-manager/root-manager.c:405
+msgid "Block freed twice."
+msgstr "Blok iki kere serbest býrakýlmýþ. "
 
-#~ msgid "Use a solid fill for the background"
-#~ msgstr "Ardalan tek renk olsun"
+#: root-manager/root-manager.c:407
+msgid "Memory before the block was clobbered."
+msgstr "Blokdan önceki hafýza kýrýldý. "
 
-#~ msgid "Use a gradient fill for the background"
-#~ msgstr "Ardalan geçiþli olsun"
+#: root-manager/root-manager.c:409
+msgid "Memory after the block was clobbered."
+msgstr "Blokdan sonraki hafýza kýrýldý. "
 
-#~ msgid "Display wallpaper: tiled, centered, scaled or ratio"
-#~ msgstr "Ardalan resmi : merkezlenmiþ, büyültülmüþ yada oranlý böyültme"
+#: root-manager/root-manager.c:440
+msgid "userhelper must be setuid root\n"
+msgstr "Kullanýcý yardýmcýsý root olarak ayarlanmalýdýr\n"
 
-#~ msgid ""
-#~ "an initialization error occurred while starting 'bell-properties-capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "'bell-properties-capplet''i baþlatamadým ; bir baþlama hatasý oldu .\n"
-#~ "bitiriliyorum ...\n"
+#: root-manager/root-manager.c:445 root-manager/root-manager.c:451
+msgid "Usage: root-helper fd\n"
+msgstr "Kullaným: root-yardýmcýsý fd\n"
 
-#~ msgid ""
-#~ "an initialization error occurred while starting 'mouse-properties-capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "'mouse-properties-capplet'i baþlatýrken bir hata oldu .\n"
-#~ "bitiriliyorum ...\n"
+#: root-manager/root-manager.c:555
+#, c-format
+msgid "PAM returned = %d\n"
+msgstr "PAM dönüþtürüldü = %d\n"
 
-#~ msgid ""
-#~ "an initialization error occurred while starting 'sound-properties-capplet'."
-#~ msgstr "'sound-properties-capplet'i baþlatýrken bir hata oldu ."
+#: root-manager/root-manager.c:556
+#, c-format
+msgid "about to authenticate \"%s\"\n"
+msgstr "\"%s\" onaylama hakkýnda\n"
 
-#~ msgid "Select sound file"
-#~ msgstr "Ses dosyasý seç"
+#: root-manager/root-manager.c:633 root-manager/root-manager.c:701
+#, c-format
+msgid "about to exec \"%s\"\n"
+msgstr "\"%s\" çalýþmasý hakkýnda\n"
 
-#~ msgid ""
-#~ "This copy of the GNOME control center was not compiled with sound support"
-#~ msgstr ""
-#~ "Bu Gnome Ayarlar Merkezi ses desteðinden mahrum kalýcý bir þekilde "
-#~ "denetlenmiþ"
+#: root-manager/root-manager-wrap.c:56
+msgid "Pipe error.\n"
+msgstr "Pipe hatasý.\n"
 
-#~ msgid "The sound file for this event does not exist."
-#~ msgstr "Bu eylemin ses dosyasý yok ."
+#: root-manager/root-manager-wrap.c:62
+msgid "Cannot fork().\n"
+msgstr "() ikiye bölünemez.\n"
 
-#~ msgid ""
-#~ "The sound file for this event does not exist.\n"
-#~ "You may want to install the gnome-audio package\n"
-#~ "for a set of default sounds."
-#~ msgstr ""
-#~ "Bu eylemin ses dosyasý yok .\n"
-#~ "Seslerin belirli bir miktarýna sahip olmak\n"
-#~ "için gnome-audio paketini yüklemek gerekiyor ."
+#: root-manager/root-manager-wrap.c:83 root-manager/root-manager-wrap.c:93
+msgid "dup2() error.\n"
+msgstr "()dup2 hatasý.\n"
 
-#~ msgid "Default value"
-#~ msgstr "Önayarlý deðer"
+#: root-manager/root-manager-wrap.c:123
+#, c-format
+msgid "execl() error, errno=%d\n"
+msgstr "()execl hatasý, hatano=%d\n"
 
-#~ msgid "Spread buttons out"
-#~ msgstr "Basmalarý daðýt"
+#: root-manager/root-manager-wrap.c:152
+msgid "Information updated."
+msgstr "Bilgi güncellendi. "
 
-#~ msgid "Put buttons on edges"
-#~ msgstr "Basmalarý kenara yakýn koy"
+#: root-manager/root-manager-wrap.c:155
+msgid ""
+"The password you typed is invalid.\n"
+"Please try again."
+msgstr ""
+"Yazmýþ olduðunuz þifre geçersiz.\n"
+"Lütfen tekrar deneyiniz. "
 
-#~ msgid "Left-justify buttons"
-#~ msgstr "Basmalarý sola tarafla"
+#: root-manager/root-manager-wrap.c:158
+msgid ""
+"One or more of the changed fields is invalid.\n"
+"This is probably due to either colons or commas in one of the fields.\n"
+"Please remove those and try again."
+msgstr ""
+"Deðiþtirilmiþ alanlarýn bir veya daha fazlasý geçersizdir.\n"
+"Buna alanlardan birindeki virgül yada iki nokta üstüste neden olmuþ "
+"olabilir.\nLütfen bunlarý kaldýrýp yeniden deneyiniz."
 
-#~ msgid "Right-justify buttons"
-#~ msgstr "Basmalarý saða tarafla"
+#: root-manager/root-manager-wrap.c:161
+msgid "Password resetting error."
+msgstr "Þifre deðiþtirme hatasý.  "
 
-#~ msgid "Let window manager decide"
-#~ msgstr "Pencere yöneticisi karar versin"
+#: root-manager/root-manager-wrap.c:164
+msgid ""
+"Some systems files are locked.\n"
+"Please try again in a few moments."
+msgstr ""
+"Bazý sistem dosyalarý kilitlenmiþ.\n"
+"Lütfen bir kaç saniye içerisinde yeniden deneyiniz. "
 
-#~ msgid "At the mouse pointer"
-#~ msgstr "Fare göstergesinin yerinde"
+#: root-manager/root-manager-wrap.c:167
+#, fuzzy
+msgid "Unknown user."
+msgstr "Tanýnmayan kullanýcý. "
 
-#~ msgid "Dialogs are like other windows"
-#~ msgstr "Diyaloklar öbür pencereler gibi olsun"
+#: root-manager/root-manager-wrap.c:170
+msgid "Insufficient rights."
+msgstr "Eriþim haklarý yetersiz. "
 
-#~ msgid "Notebook"
-#~ msgstr "Defterlik"
+#: root-manager/root-manager-wrap.c:173
+msgid "Invalid call to sub process."
+msgstr "Alt iþlemleri geçersiz çaðrý. "
 
-#~ msgid "Toplevel"
-#~ msgstr "Normal pencere"
+#: root-manager/root-manager-wrap.c:176
+msgid ""
+"Your current shell is not listed in /etc/shells.\n"
+"You are not allowed to change your shell.\n"
+"Consult your system administrator."
+msgstr ""
+"Geçerli shell-iniz /etc/shell içinde listelenmemiþ.\n"
+"Sistem yöneticinize danýþýn. "
 
-#~ msgid "Modal"
-#~ msgstr "Baðdaþlý"
+#. well, this is unlikely to work either, but at least we tried...
+#: root-manager/root-manager-wrap.c:180
+msgid "Out of memory."
+msgstr "Yetersiz bellek. "
 
-#~ msgid "Top"
-#~ msgstr "Üst"
+#: root-manager/root-manager-wrap.c:183
+msgid "The exec() call failed."
+msgstr "()çalýþmasý geçersiz. "
 
-#~ msgid "Bottom"
-#~ msgstr "Alt"
+#: root-manager/root-manager-wrap.c:186
+msgid "Failed to find selected program."
+msgstr "Seçili programý bulma iþlemi baþarýsýz. "
 
-#~ msgid ""
-#~ "an initialization error occurred while starting "
-#~ "'keyboard-properties-capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "´keyboard-properties-capplet´'i baþlatýrken bir aðýr hata oluþtu .\n"
-#~ "bitiriyorum ....\n"
+#: root-manager/root-manager-wrap.c:189
+#, fuzzy
+msgid "Unknown error."
+msgstr "Bilinmeyen hata. "
 
-#~ msgid "Random Settings"
-#~ msgstr "Tesadüfi ayarlar"
+#: root-manager/root-manager-wrap.c:192
+msgid "Unknown exit code."
+msgstr "Bilinmeyen çýkýþ kodu. "
 
-#~ msgid "%s Settings..."
-#~ msgstr "%s ayarlarý ..."
+#: root-manager/root-manager-wrap.c:280
+msgid "Input"
+msgstr "Giriþ "
 
-#~ msgid "Author:"
-#~ msgstr "Yazar:"
+#: root-manager/root-manager-wrap.c:386
+#, c-format
+msgid "Need %d responses.\n"
+msgstr "%d'nin sorumluluðuna gerek duyuluyor.\n"
 
-#~ msgid "Author: UNKNOWN"
-#~ msgstr "Yazar: BÝLÝNMÝYOR"
+#: root-manager/root-manager-wrap.c:411
+msgid ""
+"In order to make changes to your system, you\n"
+"must enter the administrator (root) password."
+msgstr ""
+"Sisteminizde deðiþiklik yapabilmeniz için\n"
+"Yönetici (root) þifresini girmek zorundasýnýz. "
 
-#~ msgid "RANDOM SCREENSAVER"
-#~ msgstr "RASGELE EKRAN KORUYUCU"
+#: root-manager/root-manager-wrap.c:425
+msgid "Error"
+msgstr "Hata "
 
-#~ msgid "Screen Saver"
-#~ msgstr "Ekran koruyucu"
+#: root-manager/root-manager-wrap.c:439
+#, c-format
+msgid "You want %d response(s) from %d entry fields!?!?!\n"
+msgstr "%d olarak girilen alanlardan %d sorumluluklarý isteyin!?!?!\n"
 
-#~ msgid ""
-#~ "Pressing this button will popup a dialogbox that will help you setup the "
-#~ "current screensaver."
-#~ msgstr ""
-#~ "Geçerli olan ekran koruyucusunun ayarlarýný deðiþtirebildiðin bir diyalok bu "
-#~ "basmaya basýnca karþýna çýkacaktýr ."
+#: root-manager/root-manager-wrap.c:445
+msgid "Run Unprivileged"
+msgstr "Ayrýcalýksýz Çalýþtýrma "
 
-#~ msgid "Start After "
-#~ msgstr "Bundan sonra baþla "
-
-#~ msgid "Priority:"
-#~ msgstr "Öncelik:"
-
-#~ msgid " Normal"
-#~ msgstr " Sýradan"
-
-#~ msgid "Screen Saver Demo"
-#~ msgstr "Ekran koruyucu denemesi"
-
-#~ msgid "Try"
-#~ msgstr "Dene"
-
-#~ msgid "Revert"
-#~ msgstr "Geriye al"
-
-#~ msgid "Help"
-#~ msgstr "Yardým"
-
-#~ msgid "Sorry, no help is available for these settings."
-#~ msgstr "Bu ayarlar için maalessef yardým yoktur ."
-
-#~ msgid "capplet-command to be run."
-#~ msgstr "çalýþtýrýlacak capplet-komutasý."
-
-#~ msgid "CAPPLET"
-#~ msgstr "CAPPLET"
-
-#~ msgid "Warning:"
-#~ msgstr "Ýkaz:"
-
-#~ msgid "Discard all changes"
-#~ msgstr "Yekün deðiþiklikleri gözardý et"
-
-#~ msgid ""
-#~ "The following modules have had changes made, but not committed.  If you "
-#~ "would like to edit them, please double click on the appropriate entry."
-#~ msgstr ""
-#~ "Þu modüllerde deðiþiklikler yapýlmýþtýr ama onaylanmamýþtýr. Onlarý "
-#~ "deðiþtirmek ve onaylamak istiyorsan, lütfen istediðin birimin üstüne "
-#~ "çift-týkla ."
-
-#~ msgid "HIDE"
-#~ msgstr "GÝZLÝ"
