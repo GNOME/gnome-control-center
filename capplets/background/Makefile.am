@@ -29,7 +29,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
 install-data-local:
-	$(mkinstalldirs) $(WALLPAPER_DATADIR)
+	$(mkinstalldirs) $(DESTDIR)$(WALLPAPER_DATADIR)
 
 EXTRA_DIST = \
 	$(desktop_in_files)

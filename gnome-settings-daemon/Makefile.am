@@ -95,8 +95,8 @@ $(CORBA_GENERATED): $(idl_dir)/GNOME_SettingsDaemon.idl $(ORBIT_IDL)
 serverfile = GNOME_SettingsDaemon.server.in
 serverdir = $(libdir)/bonobo/servers
 install-data-hook :
-	$(mkinstalldirs) $(serverdir)
-	sed -e "s|\@LIBEXECDIR\@|$(libexecdir)|" $(srcdir)/$(serverfile) > $(serverdir)/$(serverfile:.in=)
+	$(mkinstalldirs) $(DESTDIR)$(serverdir)
+	sed -e "s|\@LIBEXECDIR\@|$(libexecdir)|" $(srcdir)/$(serverfile) > $(DESTDIR)$(serverdir)/$(serverfile:.in=)
 
 EXTRA_DIST = $(serverfile)
 CLEANFILES = $(BUILT_SOURCES)
