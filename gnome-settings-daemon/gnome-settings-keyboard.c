@@ -86,7 +86,7 @@ apply_settings (void)
 	gboolean repeat, click;
 	int rate, delay;
 	int click_volume, bell_volume, bell_pitch, bell_duration;
-	const char *volume_string;
+	char *volume_string;
 
 	XKeyboardControl kbdcontrol;
 
@@ -105,6 +105,7 @@ apply_settings (void)
 
 	volume_string = gconf_client_get_string (client, "/desktop/gnome/peripherals/keyboard/bell_mode", NULL);
 	bell_volume   = (volume_string && !strcmp (volume_string, "on")) ? 50 : 0;
+	g_free (volume_string);
 
 	gdk_error_trap_push ();
         if (repeat) {

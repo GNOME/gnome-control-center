@@ -92,10 +92,20 @@ vfs_change_cb (GnomeVFSMIMEMonitor *monitor, GConfClient *client)
 	star_app  = gnome_vfs_mime_get_default_application ("text/*");
 	plain_app = gnome_vfs_mime_get_default_application ("text/plain");
 
-	if (star_app == NULL || plain_app == NULL)
+	if (star_app == NULL || plain_app == NULL) {
+	        if (star_app != NULL) {
+	            gnome_vfs_mime_application_free (star_app);
+	        }
+	        if (plain_app != NULL) {
+	            gnome_vfs_mime_application_free (plain_app);
+	        }
 		return;
-	if (!strcmp (star_app->id, plain_app->id))
+	}
+	if (!strcmp (star_app->id, plain_app->id)) {
+	        gnome_vfs_mime_application_free (star_app);
+	        gnome_vfs_mime_application_free (plain_app);
 		return;
+	}
 
 #if DE_DEBUG
 	g_message ("Synching text/plain to text/*...");
@@ -104,6 +114,8 @@ vfs_change_cb (GnomeVFSMIMEMonitor *monitor, GConfClient *client)
 	action = gnome_vfs_mime_get_default_action_type ("text/plain");
 
 	gnome_vfs_mime_set_default_application ("text/*", plain_app->id);
+	gnome_vfs_mime_application_free (plain_app);
+
 	gnome_vfs_mime_set_default_action_type ("text/*", action);
 
 	PRINT_STATE;

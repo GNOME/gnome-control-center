@@ -1,3 +1,14 @@
+2004-10-21  Sebastien Bacher  <seb128@debian.org>
+
+	* gnome-settings-default-editor.c: (vfs_change_cb):
+	* gnome-settings-font.c: (load_cursor):
+	* gnome-settings-gtk1theme.c: (apply_settings):
+	* gnome-settings-keyboard.c: (apply_settings):
+	* gnome-settings-multimedia-keys.c: (init_kbd):
+	* gnome-settings-xsettings.c: (gnome_settings_xsettings_load):
+	patch by Thomas Cataldo <thomas.cataldo@aliacom.fr> to fix a bunch of 
+	memory leaks (Closes: #150145).
+
 2004-10-14  Jody Goldberg <jody@gnome.org>
 
 	* Release 2.8.1

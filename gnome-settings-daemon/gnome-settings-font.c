@@ -121,8 +121,9 @@ load_cursor (GConfClient *client)
 	{
 	  g_free (link_name);
 	  continue;
-	}
-	  
+	} 
+      g_free (link_name);
+      	  
       if (S_ISLNK (st.st_mode))
 	unlink (link_name);
     }

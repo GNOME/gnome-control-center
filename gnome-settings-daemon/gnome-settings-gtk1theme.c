@@ -176,6 +176,7 @@ apply_settings (void)
 		theme_filename = check_filename (g_build_filename (DATADIR, "themes", NULL),
 						 current_theme);
 	}
+	g_free (current_theme);
 
 	/* If we don't find a match, use Raleigh
 	 */
@@ -193,6 +194,7 @@ apply_settings (void)
 	}
 	
 	new_contents = make_contents (theme_filename);
+	g_free (theme_filename);
 	
 	if (!current_contents ||
 	    current_length != strlen (new_contents) ||

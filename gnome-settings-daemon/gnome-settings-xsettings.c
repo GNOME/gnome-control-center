@@ -437,6 +437,8 @@ gnome_settings_xsettings_load (GConfClient *client)
       else
         {
           process_value (&translations[i], val);
+	  if (val != NULL)
+                  gconf_value_free (val);
         }
       
       ++i;

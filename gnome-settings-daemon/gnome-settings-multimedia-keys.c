@@ -416,7 +416,7 @@ init_kbd (Acme *acme)
 
 	for (i = 0; i < PLAY_KEY; i++)
 	{
-		const char *tmp;
+		char *tmp;
 		Key *key;
 
 		gconf_client_notify_add (acme->conf_client,
@@ -425,15 +425,19 @@ init_kbd (Acme *acme)
 
 		tmp = gconf_client_get_string (acme->conf_client,
 				keys[i].gconf_key, NULL);
-		if (is_valid_shortcut (tmp) == FALSE)
+		if (!is_valid_shortcut (tmp)) {
+		        g_free (tmp);
 			continue;
+		}
 
 		key = g_new0 (Key, 1);
-		if (egg_accelerator_parse_virtual (tmp, &key->keysym, &key->keycode, &key->state) == FALSE)
+		if (!egg_accelerator_parse_virtual (tmp, &key->keysym, &key->keycode, &key->state))
 		{
+		        g_free (tmp);
 			g_free (key);
 			continue;
 		}
+		g_free (tmp);
 
 		keys[i].key = key;
 
@@ -442,7 +446,7 @@ init_kbd (Acme *acme)
 
 	for (i = PLAY_KEY; i < HANDLED_KEYS; i++)
 	{
-		const char *tmp;
+		char *tmp;
 		Key *key;
 
 		gconf_client_notify_add (acme->conf_client,
@@ -451,15 +455,19 @@ init_kbd (Acme *acme)
 
 		tmp = gconf_client_get_string (acme->conf_client,
 				keys[i].gconf_key, NULL);
-		if (is_valid_shortcut (tmp) == FALSE)
+		if (!is_valid_shortcut (tmp)) {
+		        g_free (tmp);
 			continue;
+		}
 
 		key = g_new0 (Key, 1);
 		if (egg_accelerator_parse_virtual (tmp, &key->keysym, &key->keycode, &key->state) == FALSE)
 		{
+		        g_free (tmp);
 			g_free (key);
 			continue;
 		}
+		g_free (tmp);
 
 		keys[i].key = key;
 
