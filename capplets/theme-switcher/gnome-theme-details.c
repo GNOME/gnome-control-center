@@ -124,10 +124,11 @@ window_theme_selection_changed (GtkTreeSelection *selection,
     }
 
   window_manager = gnome_wm_manager_get_current (gdk_display_get_default_screen (gdk_display_get_default ()));
-
-  wm_settings.flags = GNOME_WM_SETTING_THEME;
-  wm_settings.theme = window_theme_name;
-  gnome_window_manager_change_settings (window_manager, &wm_settings);
+  if (window_manager != NULL) {
+    wm_settings.flags = GNOME_WM_SETTING_THEME;
+    wm_settings.theme = window_theme_name;
+    gnome_window_manager_change_settings (window_manager, &wm_settings);
+  }
 
 }
 
@@ -376,7 +377,7 @@ gnome_theme_details_reread_themes_from_disk (void)
   g_list_free (theme_list);
 
   /* Next, we do the window managers */
-  theme_list = gnome_window_manager_get_theme_list (window_manager);
+  theme_list = window_manager ? gnome_window_manager_get_theme_list (window_manager) : NULL;
   string_list = NULL;
   for (list = theme_list; list; list = list->next)
     {
@@ -519,9 +520,10 @@ gnome_theme_details_update_from_gconf (void)
 
   tree_view = WID ("window_theme_treeview");
   wm_settings.flags = GNOME_WM_SETTING_THEME;
-  if (window_manager)
+  if (window_manager) {
     gnome_window_manager_get_settings (window_manager, &wm_settings);
-  update_list_something (tree_view, wm_settings.theme);
+    update_list_something (tree_view, wm_settings.theme);
+  }
 
   tree_view = WID ("icon_theme_treeview");
   theme = gconf_client_get_string (client, ICON_THEME_KEY, NULL);
