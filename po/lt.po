@@ -9,15 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-12 15:51+0100\n"
-"PO-Revision-Date: 2005-01-06 23:46+0200\n"
+"POT-Creation-Date: 2005-01-21 09:17+0200\n"
+"PO-Revision-Date: 2005-01-21 09:24+0200\n"
 "Last-Translator: Žygimantas Beručka <uid0@akl.lt>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%"
-"100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: capplets/about-me/e-image-chooser.c:172
 msgid "Choose Image"
@@ -366,6 +365,7 @@ msgstr "    "
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:1
 #: capplets/file-types/file-types-properties.glade.h:1
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:2
 #: capplets/network/gnome-network-preferences.glade.h:2
 #: capplets/theme-switcher/theme-install.glade.h:1
 #: capplets/theme-switcher/theme-properties.glade.h:1
@@ -1762,11 +1762,11 @@ msgstr "Klaida nustatant naują spartųjį klavišą nustatymų duombazėje: %s\
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "Klaida nustatant akseleratorių nustatymų duombazėje: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:831
+#: capplets/keybindings/gnome-keybinding-properties.c:849
 msgid "Action"
 msgstr "Veiksmas"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:855
+#: capplets/keybindings/gnome-keybinding-properties.c:873
 msgid "Shortcut"
 msgstr "Susiejimas"
 
@@ -1800,7 +1800,7 @@ msgstr "Išdėstymas"
 msgid "Default"
 msgstr "Įprastas"
 
-#: capplets/keyboard/gnome-keyboard-properties-xkbmc.c:78
+#: capplets/keyboard/gnome-keyboard-properties-xkbmc.c:75
 msgid "Models"
 msgstr "Modeliai"
 
@@ -1826,45 +1826,41 @@ msgstr ""
 msgid "Start the page with the typing break settings showing"
 msgstr "Pradėti puslapį su rodomais spausdinimo pertraukėlės nustatymais"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:2
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
 msgid "..."
 msgstr "..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<b>Cursor Blinking</b>"
 msgstr "<b>Žymeklio mirksėjimas</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "<b>Repeat Keys</b>"
 msgstr "<b>Kartojimo Klavišai</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr "<b>Už_rakinti ekraną priverčiant pailsėti po spausdinimo</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>Greitas</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>Ilgas</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>Trumpas</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Lėtas</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "A_vailable layouts:"
 msgstr "Prieinami išdėstymai"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
-msgid "A_vailable options:"
-msgstr "_Prieinami nustatymai:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "All_ow postponing of breaks"
@@ -1947,24 +1943,24 @@ msgid "_Accessibility..."
 msgstr "_Prieinamumas..."
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:33
+msgid "_Add..."
+msgstr "_Pridėti..."
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:34
 msgid "_Break interval lasts:"
 msgstr "_Pertraukėlės tęsiasi:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:34
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:35
 msgid "_Delay:"
 msgstr "_Delsa:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:35
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:36
 msgid "_Models:"
 msgstr "_Modelis:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:36
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:37
 msgid "_Selected layouts:"
 msgstr "_Pasirinkti išdėstymai:"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:37
-msgid "_Selected options:"
-msgstr "_Pasirinkti  nustatymai:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:38
 msgid "_Speed:"
@@ -2176,7 +2172,7 @@ msgstr "      "
 
 #: capplets/network/gnome-network-preferences.glade.h:3
 msgid "<b>Ignore host list</b>"
-msgstr ""
+msgstr "<b>Ignoruoti kompiuterių sąrašą</b>"
 
 #: capplets/network/gnome-network-preferences.glade.h:4
 msgid "<b>_Automatic proxy configuration</b>"
@@ -2195,9 +2191,8 @@ msgid "<b>_Use authentication</b>"
 msgstr "<b>_Naudoti autentifikaciją</b>"
 
 #: capplets/network/gnome-network-preferences.glade.h:8
-#, fuzzy
 msgid "Advanced Configuration"
-msgstr "Autokonfigūravimo _URL:"
+msgstr "Išsamesnė konfigūracija"
 
 #: capplets/network/gnome-network-preferences.glade.h:9
 msgid "Autoconfiguration _URL:"
@@ -2220,7 +2215,6 @@ msgid "Port:"
 msgstr "Prievadas:"
 
 #: capplets/network/gnome-network-preferences.glade.h:14
-#, fuzzy
 msgid "Proxy Configuration"
 msgstr "Tarpinės tinklo stoties konfigūravimas"
 
@@ -2520,15 +2514,15 @@ msgstr "Išsaugoti bylą"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:10
 msgid "Show _icons in menus"
-msgstr "Rodyti meniu _ikonose"
+msgstr "Šalia m_eniu punktų rodyti ikonas"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:11
 msgid "Text below icons"
-msgstr "Tekstas po piktogramomis"
+msgstr "Tekstas po ikonomis"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:12
 msgid "Text beside icons"
-msgstr "Tekstas šalia piktogramų"
+msgstr "Tekstas šalia ikonų"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:13
 msgid "Text only"
@@ -2544,37 +2538,41 @@ msgstr "_Kopijuoti"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:16
 msgid "_Detachable toolbars"
-msgstr "At_kabinamos įrankių juostos"
+msgstr "_Atkabinamos įrankių juostos"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:17
 msgid "_Edit"
 msgstr "_Keisti"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:18
+msgid "_Editable menu accelerators"
+msgstr "_Keičiami karštieji meniu klavišai"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:19
 msgid "_File"
 msgstr "_Byla"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:19
+#: capplets/ui-properties/gnome-ui-properties.glade.h:20
 msgid "_New"
 msgstr "_Naujas"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:20
+#: capplets/ui-properties/gnome-ui-properties.glade.h:21
 msgid "_Open"
 msgstr "_Atidaryti"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:21
+#: capplets/ui-properties/gnome-ui-properties.glade.h:22
 msgid "_Paste"
 msgstr "Į_dėti"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:22
+#: capplets/ui-properties/gnome-ui-properties.glade.h:23
 msgid "_Print"
 msgstr "_Spausdinti"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:23
+#: capplets/ui-properties/gnome-ui-properties.glade.h:24
 msgid "_Quit"
 msgstr "_Išeiti"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:24
+#: capplets/ui-properties/gnome-ui-properties.glade.h:25
 msgid "_Save"
 msgstr "_Išsaugoti"
 
@@ -3659,6 +3657,12 @@ msgstr "Ar rodyti įdiegtų temų sumažintus paveiksliukus"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Ar rodyti mažus temų paveiksliukus"
+
+#~ msgid "A_vailable options:"
+#~ msgstr "_Prieinami nustatymai:"
+
+#~ msgid "_Selected options:"
+#~ msgstr "_Pasirinkti  nustatymai:"
 
 #~ msgid "FTP proxy port"
 #~ msgstr "FTP tarpinė stotis"
