@@ -265,7 +265,7 @@ create_control_cb (BonoboGenericFactory *factory, Bonobo_ConfigDatabase db)
 
 	id = bonobo_event_source_client_add_listener
 		(db, (BonoboListenerCallbackFn) changed_cb,
-		 "Bonobo/ConfigDatabase:change", &ev, db);
+		 "Bonobo/ConfigDatabase:sync", &ev, db);
 	gtk_object_set_data (GTK_OBJECT (property_control), "listener-id", (gpointer) id);
 
 	gtk_signal_connect (GTK_OBJECT (property_control), "destroy",
