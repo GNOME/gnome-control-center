@@ -712,6 +712,8 @@ cancel_callback (void)
         case STATE_TRY_CANCEL:
                 wm_list_revert();
                 selected_wm = wm_list_get_revert();
+		/* If we don't know which window manager should be running (are there none in my list?) bail out */
+		if (selected_wm == NULL) return;
                 state = STATE_CANCEL;
 
                 restart (old_state == STATE_TRY_CANCEL);
