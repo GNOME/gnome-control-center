@@ -43,25 +43,26 @@ static struct {
 	char const * const image;
 	char const * const image_file;
 	char const * const gconf_key;
+	gboolean only_for_dialog;
 	char const * const content [5];
 } const features [] = {
 	{ "bouncekeys_enable", "bouncekeys_image", IDIR "accessibility-keyboard-bouncekey.png",
-		CONFIG_ROOT "/bouncekeys_enable",
+		CONFIG_ROOT "/bouncekeys_enable", FALSE,
 		{ "bouncekeys_delay_slide", "bouncekeys_delay_spin", "bouncekeys_label1", "bouncekeys_label2", "bouncekeys_box" } },
 	{ "slowkeys_enable", "slowkeys_image", IDIR "accessibility-keyboard-slowkey.png",
-		CONFIG_ROOT "/slowkeys_enable",
+		CONFIG_ROOT "/slowkeys_enable", FALSE,
 		{ "slowkeys_delay_slide", "slowkeys_delay_spin", "slowkeys_table", "slowkeys_label", NULL } },
 	{ "mousekeys_enable", "mousekeys_image", IDIR "accessibility-keyboard-mousekey.png",
-		CONFIG_ROOT "/mousekeys_enable",
+		CONFIG_ROOT "/mousekeys_enable", FALSE,
 		{ "mousekeys_table", NULL, NULL, NULL, NULL } },
 	{ "stickykeys_enable", "stickykeys_image", IDIR "accessibility-keyboard-stickykey.png",
-		CONFIG_ROOT "/stickykeys_enable",
+		CONFIG_ROOT "/stickykeys_enable", FALSE,
 		{ "stickykeys_two_key_off", "stickykeys_modifier_beep", NULL, NULL, NULL } },
 	{ "togglekeys_enable", "togglekeys_image", IDIR "accessibility-keyboard-togglekey.png",
-		CONFIG_ROOT "/togglekeys_enable",
+		CONFIG_ROOT "/togglekeys_enable", FALSE,
 		{ NULL, NULL, NULL, NULL, NULL } },
 	{ "timeout_enable", NULL, NULL,
-		CONFIG_ROOT "/timeout_enable",
+		CONFIG_ROOT "/timeout_enable", TRUE,
 		{ "timeout_slide", "timeout_spin", NULL, NULL, NULL } }
 };
 
@@ -73,19 +74,20 @@ static struct {
 	int max_val;
 	int step_size;
 	char const * const gconf_key;
+	gboolean only_for_dialog;
 } const ranges [] = {
 	{ "bouncekeys_delay_slide",	"bouncekeys_delay_spin",	    300,  10, 900,  10,
-	  CONFIG_ROOT "/bouncekeys_delay" },
+	  CONFIG_ROOT "/bouncekeys_delay", FALSE },
 	{ "slowkeys_delay_slide",	"slowkeys_delay_spin",	    300,  10, 900,  10,
-	  CONFIG_ROOT "/slowkeys_delay" },
+	  CONFIG_ROOT "/slowkeys_delay", FALSE },
 	{ "mousekeys_max_speed_slide",	"mousekeys_max_speed_spin",   70,  10, 500,  10,
-	  CONFIG_ROOT "/mousekeys_max_speed" },
+	  CONFIG_ROOT "/mousekeys_max_speed", FALSE },
 	{ "mousekeys_accel_time_slide",	"mousekeys_accel_time_spin", 300,  10, 900,  10,
-	  CONFIG_ROOT "/mousekeys_accel_time" },
+	  CONFIG_ROOT "/mousekeys_accel_time", FALSE },
 	{ "mousekeys_init_delay_slide",	"mousekeys_init_delay_spin", 200,  10, 500,  10,
-	  CONFIG_ROOT "/mousekeys_init_delay" },
+	  CONFIG_ROOT "/mousekeys_init_delay", FALSE },
 	{ "timeout_slide",	"timeout_spin", 200,  10, 500,  10,
-	  CONFIG_ROOT "/timeout" },
+	  CONFIG_ROOT "/timeout", TRUE },
 };
 
 static void
@@ -125,45 +127,56 @@ cb_feature_toggled (GtkToggleButton *btn, gpointer feature_index)
 }
 
 static void
-setup_toggles (GladeXML *dialog, GConfChangeSet *changeset)
+setup_toggles (GladeXML *dialog, GConfChangeSet *changeset, gboolean as_dialog)
 {
 	GObject *peditor;
 	GtkWidget *checkbox;
 	int i = G_N_ELEMENTS (features);
 
-	while (i-- > 0) {
-		checkbox = WID (features [i].checkbox);
-		g_object_set_data (G_OBJECT (checkbox), "dialog", dialog);
-		g_signal_connect (G_OBJECT (checkbox),
-			"toggled",
-			G_CALLBACK (cb_feature_toggled), GINT_TO_POINTER (i));
-		peditor = gconf_peditor_new_boolean (changeset,
-			(gchar *)features [i].gconf_key, checkbox, NULL);
-	}
+	while (i-- > 0)
+		if (as_dialog || !features [i].only_for_dialog) {
+			checkbox = WID (features [i].checkbox);
+
+			g_return_if_fail (checkbox != NULL);
+
+			g_object_set_data (G_OBJECT (checkbox), "dialog", dialog);
+			g_signal_connect (G_OBJECT (checkbox),
+				"toggled",
+				G_CALLBACK (cb_feature_toggled), GINT_TO_POINTER (i));
+			peditor = gconf_peditor_new_boolean (changeset,
+				(gchar *)features [i].gconf_key, checkbox, NULL);
+		}
 }
 
 static void
-setup_simple_toggles (GladeXML *dialog, GConfChangeSet *changeset)
+setup_simple_toggles (GladeXML *dialog, GConfChangeSet *changeset, gboolean as_dialog)
 {
 	static struct {
-		char const * const gconf_key;
-		char const * const checkbox;
+		char const *gconf_key;
+		char const *checkbox;
+		gboolean only_for_dialog;
 	} const simple_toggles [] = {
-		{ CONFIG_ROOT "/feature_state_change_beep","feature_state_change_beep" },
-		{ CONFIG_ROOT "/bouncekeys_beep_reject",  "bouncekeys_beep_reject" },
+		{ CONFIG_ROOT "/feature_state_change_beep","feature_state_change_beep", TRUE },
+		{ CONFIG_ROOT "/bouncekeys_beep_reject",  "bouncekeys_beep_reject",	FALSE },
 
-		{ CONFIG_ROOT "/slowkeys_beep_press",      "slowkeys_beep_press" },
-		{ CONFIG_ROOT "/slowkeys_beep_accept",     "slowkeys_beep_accept" },
-		{ CONFIG_ROOT "/slowkeys_beep_reject",     "slowkeys_beep_reject"},
+		{ CONFIG_ROOT "/slowkeys_beep_press",      "slowkeys_beep_press",	FALSE },
+		{ CONFIG_ROOT "/slowkeys_beep_accept",     "slowkeys_beep_accept",	FALSE },
+		{ CONFIG_ROOT "/slowkeys_beep_reject",     "slowkeys_beep_reject",	FALSE},
 
-		{ CONFIG_ROOT "/stickykeys_two_key_off",   "stickykeys_two_key_off" },
-		{ CONFIG_ROOT "/stickykeys_modifier_beep", "stickykeys_modifier_beep" },
+		{ CONFIG_ROOT "/stickykeys_two_key_off",   "stickykeys_two_key_off",	FALSE },
+		{ CONFIG_ROOT "/stickykeys_modifier_beep", "stickykeys_modifier_beep",	FALSE},
 	};
 	int i = G_N_ELEMENTS (simple_toggles);
 	while (i-- > 0)
-		gconf_peditor_new_boolean (changeset,
-			(gchar *) simple_toggles [i].gconf_key,
-			WID (simple_toggles [i].checkbox), NULL);
+		if (as_dialog || !simple_toggles [i].only_for_dialog) {
+			GtkWidget *w = WID (simple_toggles [i].checkbox);
+
+			g_return_if_fail (w != NULL);
+
+			gconf_peditor_new_boolean (changeset,
+				(gchar *) simple_toggles [i].gconf_key,
+				w, NULL);
+		}
 }
 
 static GConfValue*
@@ -178,7 +191,7 @@ cb_from_widget (GConfPropertyEditor *peditor, const GConfValue *value)
 }
 
 static void
-setup_ranges (GladeXML *dialog, GConfChangeSet *changeset)
+setup_ranges (GladeXML *dialog, GConfChangeSet *changeset, gboolean as_dialog)
 {
 	GObject *peditor;
 	GtkWidget *slide, *spin;
@@ -186,8 +199,14 @@ setup_ranges (GladeXML *dialog, GConfChangeSet *changeset)
 	int i = G_N_ELEMENTS (ranges);
 
 	while (i-- > 0) {
+		if (!as_dialog && ranges [i].only_for_dialog)
+			continue;
+
 		slide = WID (ranges [i].slide);
 		spin  = WID (ranges [i].spin);
+		g_return_if_fail (slide != NULL);
+		g_return_if_fail (spin != NULL);
+
 		adjustment = gtk_range_get_adjustment (GTK_RANGE (slide));
 
 		g_return_if_fail (adjustment != NULL);
@@ -211,32 +230,37 @@ setup_ranges (GladeXML *dialog, GConfChangeSet *changeset)
 }
 
 static void
-setup_images (GladeXML *dialog)
+setup_images (GladeXML *dialog, gboolean as_dialog)
 {
 	int i = G_N_ELEMENTS (features);
 	while (i-- > 0)
-		if (features [i].image != NULL)
+		if (features [i].image != NULL &&
+		    (as_dialog || !features [i].only_for_dialog))
 			gtk_image_set_from_file (GTK_IMAGE (WID (features [i].image)),
 				features [i].image_file);
 }
 
 static void
-setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
+setup_dialog (GladeXML *dialog, GConfChangeSet *changeset, gboolean as_dialog)
 {
 	GtkWidget *content = WID ("keyboard_table");
 	GtkWidget *page = WID ("accessX_page");
-	GObject *label = g_object_new (GTK_TYPE_CHECK_BUTTON,
+	GObject *label;
+
+	g_return_if_fail (content != NULL);
+	g_return_if_fail (page != NULL);
+
+	setup_images (dialog, as_dialog);
+	setup_ranges (dialog, changeset, as_dialog);
+	setup_toggles (dialog, changeset, as_dialog);
+	setup_simple_toggles (dialog, changeset, as_dialog);
+
+	label = g_object_new (GTK_TYPE_CHECK_BUTTON,
 		"label",	 _("_Enable keyboard accesibility"),
 		"use_underline", TRUE,
 		/* init true so that if gconf is false toggle will fire */
 		"active",	 TRUE,
 		NULL);
-
-	setup_images (dialog);
-	setup_ranges (dialog, changeset);
-	setup_toggles (dialog, changeset);
-	setup_simple_toggles (dialog, changeset);
-
 	gtk_frame_set_label_widget (GTK_FRAME (page), GTK_WIDGET (label));
 	g_signal_connect (label,
 		"toggled",
@@ -441,23 +465,22 @@ GtkWidget *
 setup_accessX_dialog (GConfChangeSet *changeset, gboolean as_dialog)
 {
 	GConfClient *client;
+	char const  *toplevel_name = as_dialog ? "accessX_dialog" : "accessX_page";
 	GladeXML    *dialog = glade_xml_new (GNOMECC_DATA_DIR
 		"/interfaces/gnome-accessibility-keyboard-properties.glade2",
-		"accessX_dialog", NULL);
+		toplevel_name, NULL);
+	GtkWidget   *toplevel = WID (toplevel_name);
 
 	client = gconf_client_get_default ();
 	gconf_client_add_dir (client, CONFIG_ROOT, GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 
-	setup_dialog (dialog, changeset);
+	setup_dialog (dialog, changeset, as_dialog);
 
 	if (as_dialog) {
-		GtkWidget *accessX = WID ("accessX_dialog");
 		GtkWidget *load_cde = WID ("load_CDE_file");
 		g_signal_connect (G_OBJECT (load_cde),
 			"activate",
-			G_CALLBACK (cb_load_CDE_file), accessX);
-
-		return accessX;
-	} else
-		return WID ("accessX_page");
+			G_CALLBACK (cb_load_CDE_file), toplevel);
+	}
+	return toplevel;
 }

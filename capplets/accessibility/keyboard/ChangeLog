@@ -1,0 +1,9 @@
+2002-03-25  Jody Goldberg <jody@gnome.org>
+
+	* accessibility-keyboard.c (setup_accessX_dialog) : Only load the
+	  necessary toplevel widget in the non-dialog case.
+	(setup_dialog) : pass as_dialog to the sub-init routines.
+	(setup_images) : only load widgets appropriate for the current state.
+	(setup_ranges) : ditto, and be more vocal about invalid glade.
+	(setup_simple_toggles) : ditto.
+	(setup_toggles) : ditto.
