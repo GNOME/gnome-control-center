@@ -354,7 +354,9 @@ response_cb (GtkWidget *dialog_win,
 {
 
         if (response_id == GTK_RESPONSE_HELP) {
-
+		capplet_help (GTK_WINDOW (dialog_win),
+			      "user-guide.xml",
+			      "goscustdesk-58");
         } else {
                 gtk_widget_destroy (dialog_win);
         }
