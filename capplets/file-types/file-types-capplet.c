@@ -616,7 +616,7 @@ init_mime_capplet (const char *scroll_to_mime_type)
 		hbox = gtk_hbox_new (FALSE, 0);
 		gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET (hbox), FALSE, FALSE, 0);
 
-		mime_label = GTK_LABEL (gtk_label_new (_("Mime Type")));	
+		mime_label = GTK_LABEL (gtk_label_new (_("MIME Type")));	
 		gtk_label_set_justify (GTK_LABEL (mime_label), GTK_JUSTIFY_LEFT);
 		gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET (mime_label), FALSE, FALSE, 0);
 
@@ -693,13 +693,13 @@ init_mime_capplet (const char *scroll_to_mime_type)
 				  (GtkAttachOptions) (0), 0, 0);
 		gtk_widget_set_usize (hbox, 1, 11);
 				
-		button = gtk_button_new_with_label (_("Add new Mime type..."));
+		button = gtk_button_new_with_label (_("Add new MIME type..."));
 		gtk_signal_connect (GTK_OBJECT (button), "clicked", add_mime_clicked, NULL);
 		gtk_table_attach (GTK_TABLE (small_table), button, 0, 1, 1, 2,
 				  (GtkAttachOptions) (GTK_FILL),
 				  (GtkAttachOptions) (0), 0, 0);
 
-		button = gtk_button_new_with_label (_("Delete this Mime type..."));
+		button = gtk_button_new_with_label (_("Delete this MIME type..."));
 		gtk_signal_connect (GTK_OBJECT (button), "clicked", delete_mime_clicked, NULL);
 		gtk_table_attach (GTK_TABLE (small_table), button, 0, 1, 2, 3,
 				  (GtkAttachOptions) (GTK_FILL),
@@ -1163,8 +1163,8 @@ revert_mime_clicked (GtkWidget *widget, gpointer data)
 	
 	dialog = gnome_question_dialog_modal (_("Reverting to system settings\n"
 						"will lose all your personal \n"
-						"Mime configuration.\n"
-						"Revert to System Settings ?\n"), 
+						"MIME configuration.\n"
+						"Revert anyway?"), 
 					      revert_real_cb, NULL);
 
 }
@@ -1677,7 +1677,7 @@ create_mime_list_and_scroller (void)
 	int index;
 	        
         titles[0] = _("Description");
-        titles[1] = _("Mime Type");
+        titles[1] = _("MIME Type");
         titles[2] = _("Extension");
         titles[3] = _("Default Action");
         

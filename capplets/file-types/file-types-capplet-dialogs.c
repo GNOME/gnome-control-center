@@ -357,7 +357,7 @@ initialize_edit_applications_dialog (const char *mime_type)
 	main_vbox = GNOME_DIALOG (edit_application_details->window)->vbox;			    
 
 	/* Add label */
-	label_text = g_strdup_printf (_("Select applications to appear in menu for mime type \"%s\""), mime_type);
+	label_text = g_strdup_printf (_("Select applications to appear in menu for MIME type \"%s\""), mime_type);
 	label = gtk_label_new (label_text);
 	g_free (label_text);
 	gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
@@ -447,7 +447,7 @@ initialize_edit_components_dialog (const char *mime_type)
 	main_vbox = GNOME_DIALOG (edit_component_details->window)->vbox;			    
 
 	/* Add label */
-	label_text = g_strdup_printf (_("Select views to appear in menu for mime type \"%s\""), mime_type);
+	label_text = g_strdup_printf (_("Select views to appear in menu for MIME type \"%s\""), mime_type);
 	label = gtk_label_new (label_text);
 	g_free (label_text);
 	gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
@@ -705,16 +705,16 @@ nautilus_mime_type_capplet_show_new_mime_window (void)
 	mime_type = NULL;
 	upper_case_alert = FALSE;
 	
-        dialog = gnome_dialog_new (_("Add Mime Type"), GNOME_STOCK_BUTTON_OK, 
+        dialog = gnome_dialog_new (_("Add MIME Type"), GNOME_STOCK_BUTTON_OK, 
 				   GNOME_STOCK_BUTTON_CANCEL, NULL);
 	gnome_dialog_set_default (GNOME_DIALOG (dialog), 1);
-	label = gtk_label_new (_("Add a new Mime Type\n"
+	label = gtk_label_new (_("Add a new MIME Type\n"
 				 "For example:  image/tiff; text/x-scheme"));
 	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
 	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
 	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
         gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), hbox, FALSE, FALSE, 0);
-	label = gtk_label_new (_("Mime Type:"));
+	label = gtk_label_new (_("MIME Type:"));
 	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
 	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
 	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
