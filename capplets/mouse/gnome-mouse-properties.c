@@ -57,7 +57,7 @@ apply_settings (Bonobo_ConfigDatabase db)
 	ulong accel, threshold;
         gboolean rtol;
 
-        rtol = bonobo_config_get_boolean (db, "/main/right-to-left", NULL);
+        rtol = bonobo_config_get_ulong (db, "/main/right-to-left", NULL);
 
         nbuttons = XGetPointerMapping (GDK_DISPLAY (), buttons, MAX_BUTTONS);
         max = MIN (nbuttons, 3);
