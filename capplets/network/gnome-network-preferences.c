@@ -316,7 +316,7 @@ main (int argc, char **argv)
 
 	setup_dialog (dialog);
 	widget = WID ("network_dialog");
-	capplet_set_icon (widget, "gnome-network-capplet.png");
+	capplet_set_icon (widget, "gnome-globe.png");
 	gtk_widget_show_all (widget);
 	gtk_main ();
 
