@@ -26,6 +26,7 @@
 #endif
 
 #include <gnome.h>
+#include <bonobo.h>
 #include <glade/glade.h>
 
 #include "rollback-capplet-dialog.h"
@@ -44,7 +45,8 @@ static struct poptOption rollback_options[] = {
 int
 main (int argc, char **argv) 
 {
-	GtkWidget *dialog;
+	CORBA_ORB orb;
+	GtkObject *dialog;
 
         bindtextdomain (PACKAGE, GNOMELOCALEDIR);
         textdomain (PACKAGE);
@@ -62,8 +64,13 @@ main (int argc, char **argv)
 	if (capplet_name != NULL) {
 		dialog = rollback_capplet_dialog_new (capplet_name);
 
-		gtk_signal_connect (GTK_OBJECT (dialog), "destroy",
-				    gtk_main_quit, NULL);
+		if (dialog == NULL) {
+			g_critical ("Could not create rollback dialog");
+			return -1;
+		} else {
+			gtk_widget_show (GTK_WIDGET (dialog));
+			gtk_signal_connect (dialog, "destroy", gtk_main_quit, NULL);
+		}
 	}
 
 	bonobo_main ();
