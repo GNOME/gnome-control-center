@@ -1,5 +1,13 @@
 2001-06-21  Bradford Hovinen  <hovinen@ximian.com>
 
+	* archive.c (archive_set_current_location): Use
+	location_get_changed_backends
+
+	* location.c (location_get_changed_backends): 
+	(location_does_backend_change): Implement
+	(create_backends_list): 
+	(merge_backend_lists): Moved from archive.c
+
 	* config-log.c (dump_log): Don't call close on fd
 	(dump_log): Use g_critical on error conditions rather than g_warning
 

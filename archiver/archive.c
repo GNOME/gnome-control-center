@@ -419,99 +419,6 @@ archive_get_current_location (Archive *archive)
 				     (archive));
 }
 
-static int
-add_location_cb (Location *location, gchar *backend_id, GList *backends)
-{
-	g_list_insert (backends, backend_id, 1);
-	return 0;
-}
-
-/* Create a list of backends that differ between location1 and the common
- * parent of location1 and location2 */
-
-static GList *
-create_backends_list (Location *location1, Location *location2) 
-{
-	GList *location_path, *backends, *tmp;
-
-	location_path = location_find_path_from_common_parent
-		(location1, location2);
-
-	/* Skip the first entry -- it is the common parent */
-	tmp = location_path;
-	location_path = location_path->next;
-	g_list_free_1 (tmp);
-
-	backends = g_list_append (NULL, NULL);
-
-	while (location_path != NULL) {
-		if (location_path->data != NULL) {
-			location_foreach_backend
-				(LOCATION (location_path->data), 
-				 (LocationBackendCB) add_location_cb,
-				 backends);
-		}
-
-		tmp = location_path;
-		location_path = location_path->next;
-		g_list_free_1 (tmp);
-	}
-
-	tmp = backends;
-	backends = backends->next;
-	g_list_free_1 (tmp);
-
-	return backends;
-}
-
-/* Merge two backend lists, eliminating duplicates */
-
-GList *
-merge_backend_lists (GList *backends1, GList *backends2) 
-{
-	GList *head = NULL, *tail = NULL, *tmp;
-	int res;
-
-	backends1 = g_list_sort (backends1, (GCompareFunc) strcmp);
-	backends2 = g_list_sort (backends2, (GCompareFunc) strcmp);
-
-	while (backends1 && backends2) {
-		res = strcmp (backends1->data, backends2->data);
-
-		if (res < 0) {
-			if (tail != NULL) tail->next = backends1;
-			else head = backends1;
-			tail = backends1;
-			backends1 = backends1->next;
-		}
-		else if (res > 0) {
-			if (tail != NULL) tail->next = backends2;
-			else head = backends2;
-			tail = backends2;
-			backends2 = backends2->next;
-		} else {
-			if (tail != NULL) tail->next = backends1;
-			else head = backends1;
-			tail = backends1;
-			backends1 = backends1->next;
-			tmp = backends2;
-			backends2 = backends2->next;
-			g_list_free_1 (tmp);
-		}
-	}
-
-	if (backends1 != NULL) {
-		if (tail != NULL) tail->next = backends1;
-		else head = backends1;
-	}
-	else {
-		if (tail != NULL) tail->next = backends2;
-		else head = backends2;
-	}
-
-	return head;
-}
-
 /**
  * archive_set_current_location:
  * @archive: object
@@ -534,12 +441,8 @@ archive_set_current_location (Archive *archive, Location *location)
 
 	archive_set_current_location_id (archive, location_get_id (location));
 
-	backends1 = create_backends_list (location, old_location);
-	backends2 = create_backends_list (old_location, location);
-	backends = merge_backend_lists (backends1, backends2);
-
+	backends = location_get_changed_backends (location, old_location);
 	location_rollback_backends_to (location, NULL, backends, TRUE);
-
 	g_list_free (backends);
 }
 

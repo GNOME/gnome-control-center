@@ -141,4 +141,10 @@ void location_set_id               (Location *location, const gchar *locid);
 
 void location_store_full_snapshot  (Location *location);
 
+GList *location_get_changed_backends (Location *location,
+				      Location *location1);
+gboolean location_does_backend_change (Location *location,
+				       Location *location1,
+				       gchar *backend_id);
+
 #endif /* __LOCATION */

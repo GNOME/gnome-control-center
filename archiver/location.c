@@ -116,6 +116,11 @@ static BackendNote *backend_note_new (gchar *backend_id,
 static void backend_note_destroy     (BackendNote *note);
 static const BackendNote *find_note  (Location *location, gchar *backend_id);
 
+static GList *create_backends_list   (Location *location1,
+				      Location *location2);
+static GList *merge_backend_lists    (GList *backends1,
+				      GList *backends2);
+
 static void merge_xml_docs           (xmlDocPtr child_doc,
 				      xmlDocPtr parent_doc);
 static void subtract_xml_doc         (xmlDocPtr child_doc,
@@ -1168,7 +1173,7 @@ location_set_id (Location *location, const gchar *locid)
  *
  * Gets XML snapshot data from all the backends contained in this location and
  * archives those data
- */
+ **/
 
 void
 location_store_full_snapshot (Location *location)
@@ -1179,6 +1184,61 @@ location_store_full_snapshot (Location *location)
 	location_foreach_backend (location,
 				  (LocationBackendCB) store_snapshot_cb,
 				  NULL);
+}
+
+/**
+ * location_get_changed_backends:
+ * @location:
+ * @location1:
+ *
+ * Get a list of backends that change from location to location1
+ **/
+
+GList *
+location_get_changed_backends (Location *location, Location *location1) 
+{
+	GList *backends1, *backends2;
+
+	g_return_val_if_fail (location != NULL, NULL);
+	g_return_val_if_fail (IS_LOCATION (location), NULL);
+	g_return_val_if_fail (location1 != NULL, NULL);
+	g_return_val_if_fail (IS_LOCATION (location1), NULL);
+
+	backends1 = create_backends_list (location, location1);
+	backends2 = create_backends_list (location1, location);
+
+	return merge_backend_lists (backends1, backends2);
+}
+
+/**
+ * location_does_backend_change:
+ * @location:
+ * @location1:
+ * @backend_id:
+ *
+ * Return TRUE if a backend changes when changing from location to location1;
+ * FALSE otherwise
+ **/
+
+gboolean
+location_does_backend_change (Location *location, Location *location1,
+			      gchar *backend_id) 
+{
+	GList *backends;
+	gboolean ret;
+
+	g_return_val_if_fail (location != NULL, FALSE);
+	g_return_val_if_fail (IS_LOCATION (location), FALSE);
+	g_return_val_if_fail (location1 != NULL, FALSE);
+	g_return_val_if_fail (IS_LOCATION (location1), FALSE);	
+	g_return_val_if_fail (backend_id != NULL, FALSE);
+
+	backends = location_get_changed_backends (location, location1);
+	ret = !(g_list_find_custom (backends, backend_id,
+				    (GCompareFunc) strcmp) == NULL);
+	g_list_free (backends);
+
+	return ret;
 }
 
 static gint
@@ -1490,7 +1550,6 @@ run_backend_proc (gchar *backend_id, gboolean do_get)
 	}
 	else if (pid == 0) {
 		int i;
-		gchar *path, *path1;
 
 		dup2 (fd[c_fd], c_fd);
 		close (fd[p_fd]);
@@ -1654,6 +1713,87 @@ merge_xml_nodes (xmlNodePtr node1, xmlNodePtr node2)
 	}
 
 	g_list_free (node1_children);
+}
+
+/* Create a list of backends that differ between location1 and the common
+ * parent of location1 and location2 */
+
+static GList *
+create_backends_list (Location *location1, Location *location2) 
+{
+	Location *loc;
+	GList *location_path, *tail = NULL, *c, *tmp;
+
+	location_path = location_find_path_from_common_parent
+		(location1, location2);
+
+	/* Skip the first entry -- it is the common parent */
+	tmp = location_path;
+	location_path = location_path->next;
+	g_list_free_1 (tmp);
+
+	while (location_path != NULL) {
+		if (location_path->data != NULL) {
+			loc = LOCATION (location_path->data);
+			for (c = loc->p->contains_list; c; c = c->next)
+				tail = g_list_prepend
+					(tail, ((BackendNote *)c->data)->backend_id);
+		}
+
+		tmp = location_path;
+		location_path = location_path->next;
+		g_list_free_1 (tmp);
+	}
+
+	return g_list_reverse (tail);
+}
+
+/* Merge two backend lists, eliminating duplicates */
+
+static GList *
+merge_backend_lists (GList *backends1, GList *backends2) 
+{
+	GList *head = NULL, *tail = NULL, *tmp;
+	int res;
+
+	backends1 = g_list_sort (backends1, (GCompareFunc) strcmp);
+	backends2 = g_list_sort (backends2, (GCompareFunc) strcmp);
+
+	while (backends1 && backends2) {
+		res = strcmp (backends1->data, backends2->data);
+
+		if (res < 0) {
+			if (tail != NULL) tail->next = backends1;
+			else head = backends1;
+			tail = backends1;
+			backends1 = backends1->next;
+		}
+		else if (res > 0) {
+			if (tail != NULL) tail->next = backends2;
+			else head = backends2;
+			tail = backends2;
+			backends2 = backends2->next;
+		} else {
+			if (tail != NULL) tail->next = backends1;
+			else head = backends1;
+			tail = backends1;
+			backends1 = backends1->next;
+			tmp = backends2;
+			backends2 = backends2->next;
+			g_list_free_1 (tmp);
+		}
+	}
+
+	if (backends1 != NULL) {
+		if (tail != NULL) tail->next = backends1;
+		else head = backends1;
+	}
+	else {
+		if (tail != NULL) tail->next = backends2;
+		else head = backends2;
+	}
+
+	return head;
 }
 
 /* Modifies node1 so that it only contains the parts different from node2;

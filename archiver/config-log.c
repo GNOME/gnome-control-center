@@ -1082,6 +1082,11 @@ has_nondefaults (ConfigLog *config_log)
 		return TRUE;
 }
 
+/* Try to connect to the synchronization socket for this configuration log. If
+ * no socket exists, take ownership of the config log and listen for slave
+ * connections.
+ */
+
 static gboolean
 connect_socket (ConfigLog *config_log)
 {
