@@ -514,6 +514,10 @@ populate_component_list (MimeEditDialog *dialog)
 	menu = GTK_MENU (gtk_menu_new ());
 
 	component_list = gnome_vfs_mime_get_all_components (dialog->p->info->mime_type);
+	dialog->p->component_active = (component_list != NULL);
+	component_select = GTK_OPTION_MENU (WID ("component_select"));
+	gtk_option_menu_set_menu (component_select, GTK_WIDGET (menu));
+	update_sensitivity (dialog); /* do not add items to an insensitive menu */
 
 	/* FIXME: We are leaking the whole list here, but this will be the case until I know of an easy way to duplicate
 	 * Bonobo_ServerInfo structures */
@@ -540,8 +544,6 @@ populate_component_list (MimeEditDialog *dialog)
 		gtk_widget_show (menu_item);
 	}
 
-	dialog->p->component_active = !(i == 0);
-
 	menu_item = gtk_menu_item_new_with_label (_("None"));
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
 	gtk_widget_show (menu_item);
@@ -549,11 +551,7 @@ populate_component_list (MimeEditDialog *dialog)
 	if (found_idx < 0)
 		found_idx = i;
 
-	component_select = GTK_OPTION_MENU (WID ("component_select"));
-	gtk_option_menu_set_menu (component_select, GTK_WIDGET (menu));
 	gtk_option_menu_set_history (component_select, found_idx);
-
-	update_sensitivity (dialog);
 }
 
 static void
@@ -569,6 +567,10 @@ populate_application_list (MimeEditDialog *dialog)
 	menu = GTK_MENU (gtk_menu_new ());
 
 	app_list  = gnome_vfs_mime_get_short_list_applications (dialog->p->info->mime_type);
+	dialog->p->default_action_active = (app_list != NULL);
+	app_select = GTK_OPTION_MENU (WID ("default_action_select"));
+	gtk_option_menu_set_menu (app_select, GTK_WIDGET (menu));
+	update_sensitivity (dialog); /* do not add items to an insensitive menu */
 
 	for (tmp = app_list, i = 0; tmp != NULL; tmp = tmp->next, i++) {
 		app = tmp->data;
@@ -589,7 +591,6 @@ populate_application_list (MimeEditDialog *dialog)
 		gtk_widget_show (menu_item);
 	}
 
-	dialog->p->default_action_active = !(i == 0);
 	dialog->p->custom_action = (found_idx < 0);
 
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), gtk_menu_item_new_with_label (_("Custom")));
@@ -607,13 +608,9 @@ populate_application_list (MimeEditDialog *dialog)
 		gtk_widget_set_sensitive (WID ("program_entry_box"), FALSE);
 	}
 
-	app_select = GTK_OPTION_MENU (WID ("default_action_select"));
-	gtk_option_menu_set_menu (app_select, GTK_WIDGET (menu));
 	gtk_option_menu_set_history (app_select, found_idx);
 
 	g_list_free (app_list);
-
-	update_sensitivity (dialog);
 }
 
 static void

@@ -1,3 +1,12 @@
+2003-06-06  Jody Goldberg <jody@gnome.org>
+
+	* mime-edit-dialog.c (populate_component_list) : be careful about menu
+	  sensitivity, the order is important.  Setting the menu of an option
+	  menu makes it sensitive even if the menu is empty).  However, if the
+	  option menu is initially insensitive then the first item in the menu
+	  gets marked insensitive when the menu is reparented.  Once one item
+	  is in the option menu becomes sensitive and the rest are ok.
+
 2003-06-02  Balamurali Viswanathan <balamurali.viswanathan@wipro.com>
 
 	* mime-edit-dialog.c: (validate_data): Give an error dialog if the 
