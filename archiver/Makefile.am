@@ -61,7 +61,8 @@ EXTRA_DIST = \
 # Create the ximian_archiverConf.sh file from the sh.in file
 #
 ximian_archiverConf.sh: ximian_archiverConf.sh.in Makefile
-	sed -e 's?\@GNOME_LIBDIR\@?$(GNOME_LIBDIR) -L$(prefix)/lib?' \
+	sed -e 's?\@VERSION\@?$(VERSION)?' \
+	    -e 's?\@GNOME_LIBDIR\@?$(GNOME_LIBDIR) -L$(prefix)/lib?' \
 	    -e 's?\@GNOMEUI_LIBS\@?$(GNOMEUI_LIBS)?g' \
 	    -e 's?\@GNOME_INCLUDEDIR\@?$(GNOME_INCLUDEDIR) -I$(prefix)/include?g' \
 	    -e 's?\@ORB_LIBS\@?$(ORB_LIBS)?g' \
