@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center\n"
-"POT-Creation-Date: 2002-03-12 16:14+0100\n"
-"PO-Revision-Date: 2002-03-12 16:16+0100\n"
+"POT-Creation-Date: 2002-03-20 23:20+0100\n"
+"PO-Revision-Date: 2002-03-20 23:34+0100\n"
 "Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -26,8 +26,24 @@ msgid "Configuration of the desktop's background"
 msgstr "Konfiguracja tła biurka"
 
 #: capplets/background/background-properties-capplet.c:1
-msgid "Please select a background image"
-msgstr "Wybór obrazu tła"
+msgid "Wallpaper"
+msgstr "Tapeta"
+
+#: capplets/background/background-properties-capplet.c:1
+msgid "Centered"
+msgstr "Wyśrodkowany"
+
+#: capplets/background/background-properties-capplet.c:1
+msgid "Scaled"
+msgstr "Skalowana"
+
+#: capplets/background/background-properties-capplet.c:1
+msgid "Stretched"
+msgstr "Rozciągnięty"
+
+#: capplets/background/background-properties-capplet.c:1
+msgid "No Picture"
+msgstr "Bez obrazu"
 
 #: capplets/background/background-properties-capplet.c:1
 #: capplets/common/capplet-util.c:1
@@ -43,56 +59,78 @@ msgid "Background properties"
 msgstr "Ustawienia tła"
 
 #: capplets/background/background-properties.glade.h:1
-msgid "Background colors"
-msgstr "Kolory tła"
+msgid "Background Properties"
+msgstr "Ustawienia tła"
 
 #: capplets/background/background-properties.glade.h:1
-msgid "Background picture"
-msgstr "Obraz w tle"
+msgid "Border the picture with a:"
+msgstr "Ramka obrazu:"
 
 #: capplets/background/background-properties.glade.h:1
-msgid "Centered"
-msgstr "Wyśrodkowany"
+msgid "E-Mail"
+msgstr "E-mail"
 
 #: capplets/background/background-properties.glade.h:1
 msgid "Horizontal gradient"
 msgstr "Poziomy gradient"
 
 #: capplets/background/background-properties.glade.h:1
-msgid "Image:"
-msgstr "Obraz:"
-
-#: capplets/background/background-properties.glade.h:1
 msgid "Pick a color"
 msgstr "Wybór koloru"
 
 #: capplets/background/background-properties.glade.h:1
-msgid "Scaled (keep aspect ratio)"
-msgstr "Skalowany (z zachowaniem proporcji)"
+msgid "Picture Options:"
+msgstr "Opcje obrazu:"
+
+#: capplets/background/background-properties.glade.h:1
+msgid "Picture:"
+msgstr "Obraz:"
+
+#: capplets/background/background-properties.glade.h:1
+msgid "Primary Color"
+msgstr "Główny kolor"
+
+#: capplets/background/background-properties.glade.h:1
+msgid "Secondary Color"
+msgstr "Drugi kolor"
 
 #: capplets/background/background-properties.glade.h:1
 msgid "Solid color"
 msgstr "Jednolity kolor"
 
 #: capplets/background/background-properties.glade.h:1
-msgid "Stretched"
-msgstr "Rozciągnięty"
-
-#: capplets/background/background-properties.glade.h:1
-msgid "Style:"
-msgstr "Styl:"
-
-#: capplets/background/background-properties.glade.h:1
-msgid "Tiled"
-msgstr "Kafelka"
-
-#: capplets/background/background-properties.glade.h:1
-msgid "Use a picture for the background"
-msgstr "Wyświetlanie obrazu na tle"
-
-#: capplets/background/background-properties.glade.h:1
 msgid "Vertical gradient"
 msgstr "Pionowy gradient"
+
+#: capplets/background/background-properties.glade.h:1
+msgid ""
+"You can drag image files\n"
+"into the window to set the \n"
+"background picture."
+msgstr ""
+"Aby ustawić obraz w tle,\n"
+"możesz przeciągnąć do okna\n"
+"plik z wybranym obrazem."
+
+#: capplets/background/background-properties.glade.h:1
+msgid "radiobutton1"
+msgstr "przycisk_radiowy_1"
+
+#: capplets/background/background-properties.glade.h:1
+msgid "radiobutton2"
+msgstr "przycisk_radiowy_2"
+
+#: capplets/background/background-properties.glade.h:1
+msgid "radiobutton3"
+msgstr "przycisk_radiowy_3"
+
+#: capplets/background/background-properties.glade.h:1
+msgid "radiobutton4"
+msgstr "przycisk_radiowy_4"
+
+#: capplets/background/background-properties.glade.h:1
+msgid "radiobutton5"
+msgstr "przycisk_radiowy_5"
 
 #: capplets/common/capplet-util.c:1 capplets/common/capplet-util.c:1
 msgid "Just apply settings and quit"
@@ -150,6 +188,64 @@ msgstr "Kontrolujący obiekt"
 #: capplets/common/gconf-property-editor.c:1
 msgid "Object that controls the property (normally a widget)"
 msgstr "Obiekt kontrolujący własność (zwykle widget)"
+
+#: capplets/common/gconf-property-editor.c:1
+msgid "Property editor object data"
+msgstr "Dane obiektu edytora własności"
+
+#: capplets/common/gconf-property-editor.c:1
+msgid "Custom data required by the specific property editor"
+msgstr "Dowolne dane, wymagane przez określony edytor własności"
+
+#: capplets/common/gconf-property-editor.c:1
+msgid "Property editor data freeing callback"
+msgstr "Funkcja zwalniająca dane obiektu edytora własności"
+
+#: capplets/common/gconf-property-editor.c:1
+msgid "Callback to be issued when property editor object data is to be freed"
+msgstr "Funkcja wywoływana przed usunięciem obiektu edytora własności"
+
+#: capplets/common/gconf-property-editor.c:1
+#, c-format
+msgid ""
+"Couldn't find the file '%s'.\n"
+"\n"
+"Please make sure it exists and try again, or choose a different background "
+"picture."
+msgstr ""
+"Nie można odnaleźć pliku \"%s\".\n"
+"\n"
+"Upewnij się, że plik istnieje i spróbuj ponownie lub wybierz inny obraz."
+
+#: capplets/common/gconf-property-editor.c:1
+#, c-format
+msgid ""
+"I don't know how to open the file '%s'.\n"
+"Perhaps it's a kind of picture that is not yet supported.\n"
+"\n"
+"Please select a different picture instead."
+msgstr ""
+"Nie można otworzyć pliku \"%s\".\n"
+"Być może jest to obraz nieobsługiwanego typu.\n"
+"\n"
+"Wybierz inny plik z obrazem."
+
+#: capplets/common/gconf-property-editor.c:1
+msgid "Please select an image."
+msgstr "Wybór obrazu tła"
+
+#: capplets/common/activate-settings-daemon.c:1
+msgid ""
+"Unable to start the settings manager 'gnome2-settings-daemon'.\n"
+"Without the GNOME settings manager running, some preferences may not take "
+"effect. This couldindicate a problem with Bonobo, or a non-GNOME (e.g. KDE) "
+"settings manager may alreadybe active and conflicting with the GNOME "
+"settings manager."
+msgstr ""
+"Nie można uruchomić menedżera ustawień - \"gnome2-settings-daemon\".\n"
+"Bez działającego menedżera ustawień GNOME pewne ustawienia mogą nie wehść w "
+"życie. Może to być związane z problemem z Bonobo lub z działającym innym "
+"menedżerem ustawień, kolidującym z menedżerem GNOME."
 
 #: capplets/default-applications/default-applications.desktop.in.h:1
 msgid "Choose the applications used by default"
@@ -755,14 +851,6 @@ msgstr "Strony podręcznikowe"
 msgid "Electronic mail transmission"
 msgstr "Przesyłanie poczty elektronicznej"
 
-#: capplets/font/font-properties.glade.h:1
-msgid "Font properties"
-msgstr "Ustawienia czcionek"
-
-#: capplets/font/font-properties.glade.h:1
-msgid "Use a custom font."
-msgstr "Użycie własnej czcionki"
-
 #: capplets/font/font-properties.desktop.in.h:1
 msgid "Font"
 msgstr "Czcionka"
@@ -770,6 +858,87 @@ msgstr "Czcionka"
 #: capplets/font/font-properties.desktop.in.h:1
 msgid "Select which font to use"
 msgstr "Wybór używanej czcionki"
+
+#: capplets/font/font-properties.glade.h:1
+msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+msgstr "AaĄąBbCcĆćDdEeĘęFfGgHhIiJjKkLlŁłMmNnŃńOoÓóPpQqRrSsŚśTtUuVvWwXxYyZzŹźŻż"
+
+#: capplets/font/font-properties.glade.h:1
+msgid "Desktop Font"
+msgstr "Czcionka biurka"
+
+#: capplets/font/font-properties.glade.h:1
+msgid "File Manager Font"
+msgstr "Czcionka menedżera plików"
+
+#: capplets/font/font-properties.glade.h:1
+msgid "Font Preferences"
+msgstr "Ustawienia czcionki"
+
+#: capplets/font/font-properties.glade.h:1
+msgid "Pick a Font"
+msgstr "Wybór czcionki"
+
+#: capplets/font/font-properties.glade.h:1
+msgid "Select the desktop font"
+msgstr "Wybór czcionki biurka"
+
+#: capplets/font/font-properties.glade.h:1
+msgid "Set to Default"
+msgstr "Ustaw domyślną"
+
+#: capplets/keybindings/eggcellrendererkeys.c:1
+#: capplets/keybindings/eggcellrendererkeys.c:1
+msgid "Accelerator modifiers"
+msgstr "Modyfikatory akceleratora"
+
+#: capplets/keybindings/eggcellrendererkeys.c:1
+#: capplets/keybindings/eggcellrendererkeys.c:1
+msgid "Accelerator key"
+msgstr "Klawisz akceleratora"
+
+#: capplets/keybindings/eggcellrendererkeys.c:1
+#: capplets/keybindings/gnome-keybinding-properties.c:1
+#: libbackground/applier.c:1
+msgid "Disabled"
+msgstr "Nieaktywny"
+
+#: capplets/keybindings/eggcellrendererkeys.c:1
+#: capplets/keybindings/eggcellrendererkeys.c:1
+msgid "Type a new accelerator, or press Backspace to clear"
+msgstr "Podaj nowy akcelerator lub przyciśnij Backspace, aby go wyczyścić"
+
+#: capplets/keybindings/eggcellrendererkeys.c:1
+msgid "Type a new accelerator"
+msgstr "Podaj nowy akcelerator"
+
+#: capplets/keybindings/gnome-keybinding-properties.c:1
+msgid "<Unknown Action>"
+msgstr "<Nieznana czynność>"
+
+#: capplets/keybindings/gnome-keybinding-properties.c:1
+msgid ""
+"Unable to find any keyboard themes.  This means your GTK+ installation has "
+"been incompletely installed."
+msgstr ""
+"Nie można odnaleźć żadnych motywów klawiszowych. Oznacza to, że instalacja "
+"GTK+ jest niekompletna."
+
+#: capplets/keybindings/gnome-keybinding-properties.c:1
+msgid "_Action"
+msgstr "_Czynność"
+
+#: capplets/keybindings/gnome-keybinding-properties.c:1
+msgid "_Shortcut"
+msgstr "_Skrót"
+
+#: capplets/keybindings/keybinding.desktop.in.h:1
+msgid "Keybinding"
+msgstr "Powiązania klawiszy"
+
+#: capplets/keybindings/keybinding.desktop.in.h:1
+msgid "Keybinding Properties"
+msgstr "Ustawienia powiązań klawiszy"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:1
 #: capplets/keyboard/gnome-keyboard-properties.c:1
@@ -1410,6 +1579,10 @@ msgstr "Pomo_c"
 msgid "Use shell even if nautilus is running."
 msgstr "Wykorzystuje powłokę, nawet jeśli uruchomiony jest Nautilus."
 
+#: gnome-settings-daemon/factory.c:1
+msgid "Could not initialize Bonobo"
+msgstr "Nie można zainicjować Bonobo"
+
 #: libbackground/applier.c:1
 msgid "Type"
 msgstr "Typ"
@@ -1426,10 +1599,6 @@ msgstr ""
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "Nie można odczytać obrazu \"%s\"; rezygnacja z tapety."
-
-#: libbackground/applier.c:1
-msgid "Disabled"
-msgstr "Nieaktywny"
 
 #: libbackground/preview-file-selection.c:1
 msgid "Can't find an hbox, using a normal file selection"
