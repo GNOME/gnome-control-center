@@ -127,6 +127,35 @@ preview_file_selection_new (const gchar *title, gboolean do_preview)
 			      NULL));
 }
 
+GdkPixbuf*
+preview_file_selection_intelligent_scale (GdkPixbuf *buf, guint scale)
+{
+	GdkPixbuf *scaled;
+	int w, h;
+	int ow = gdk_pixbuf_get_width (buf);
+	int oh = gdk_pixbuf_get_height (buf);
+
+	if (ow <= scale && oh <= scale)
+		scaled = gdk_pixbuf_ref (buf);
+	else
+	{
+		if (ow > oh)
+		{
+			w = scale;
+			h = scale * (((double)oh)/(double)ow);
+		}
+		else
+		{
+			h = scale;
+			w = scale * (((double)ow)/(double)ow);
+		}
+			
+		scaled = gdk_pixbuf_scale_simple (buf, w, h, GDK_INTERP_BILINEAR);
+	}
+	
+	return scaled;
+}
+
 static void
 preview_file_selection_update (PreviewFileSelection *fsel, gpointer data)
 {
@@ -138,29 +167,7 @@ preview_file_selection_update (PreviewFileSelection *fsel, gpointer data)
 	filename = gtk_file_selection_get_filename (GTK_FILE_SELECTION (fsel));
 	if (filename && (buf = gdk_pixbuf_new_from_file (filename, NULL)))
 	{
-		GdkPixbuf *scaled;
-		int w, h;
-		int ow = gdk_pixbuf_get_width (buf);
-		int oh = gdk_pixbuf_get_height (buf);
-
-		if (ow <= SCALE && oh <= SCALE)
-			scaled = gdk_pixbuf_ref (buf);
-		else
-		{
-			if (ow > oh)
-			{
-				w = SCALE;
-				h = SCALE * (((double)oh)/(double)ow);
-			}
-			else
-			{
-				h = SCALE;
-				w = SCALE * (((double)ow)/(double)ow);
-			}
-			
-			scaled = gdk_pixbuf_scale_simple (buf, w, h, GDK_INTERP_BILINEAR);
-		}
-
+		GdkPixbuf *scaled = preview_file_selection_intelligent_scale (buf, SCALE); 
 		gtk_image_set_from_pixbuf (GTK_IMAGE (fsel->priv->preview),
 					   scaled);
 		g_object_unref (scaled);

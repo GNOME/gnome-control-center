@@ -31,12 +31,82 @@
 #include <gnome.h>
 #include <gconf/gconf-client.h>
 #include <glade/glade.h>
+#include <libgnomevfs/gnome-vfs.h>
 
 #include "capplet-util.h"
 #include "gconf-property-editor.h"
 #include "applier.h"
 #include "preview-file-selection.h"
 #include "activate-settings-daemon.h"
+
+enum
+{
+	TARGET_URI_LIST
+};
+
+static GtkTargetEntry drop_types[] =
+{
+	{"text/uri-list", 0, TARGET_URI_LIST}
+};
+
+static gint n_drop_types = sizeof (drop_types) / sizeof (GtkTargetEntry);
+
+static const int n_enum_vals = WPTYPE_NONE + 1;
+
+typedef struct
+{
+	BGApplier** appliers;
+	BGPreferences *prefs;
+} ApplierSet;
+
+/* Create a new set of appliers, and load the default preferences */
+
+static ApplierSet*
+applier_set_new (void)
+{
+	int i;
+	ApplierSet *set = g_new0 (ApplierSet, 1);
+
+	set->appliers = g_new0 (BGApplier*, n_enum_vals);
+	for (i = 0; i < n_enum_vals; i++)
+		set->appliers[i] = BG_APPLIER (bg_applier_new (BG_APPLIER_PREVIEW));
+	set->prefs = BG_PREFERENCES (bg_preferences_new ());
+	bg_preferences_load (set->prefs);
+
+	return set;
+}
+
+/* Destroy all prefs/appliers in set, and free structure */
+
+static void
+applier_set_free (ApplierSet *set)
+{
+	int i;
+
+	g_return_if_fail (set != NULL);
+
+	for (i = 0; i < n_enum_vals; i++)
+		g_object_unref (G_OBJECT (set->appliers[i]));
+	g_free (set->appliers);
+	g_object_unref (G_OBJECT (set->prefs));
+}
+
+/* Trigger a redraw in each applier in the set */
+
+static void
+applier_set_redraw (ApplierSet *set)
+{
+	int i;
+
+	g_return_if_fail (set != NULL);
+	
+	for (i = 0; i < n_enum_vals; i++)
+	{
+		set->prefs->wallpaper_enabled = TRUE;
+		set->prefs->wallpaper_type = i;
+		bg_applier_apply_prefs (set->appliers[i], set->prefs);
+	}
+}
 
 /* Retrieve legacy gnome_config settings and store them in the GConf
  * database. This involves some translation of the settings' meanings.
@@ -117,6 +187,26 @@ get_legacy_settings (void)
 	gnome_config_pop_prefix ();
 }
 
+/* Show/hide the secondary color options if needed */
+
+static void
+update_secondary_color_visibility (ApplierSet *set, const gchar *value_str)
+{
+	gboolean enable; 
+	GtkWidget *color_frame;
+
+	g_return_if_fail (set != NULL);
+	g_return_if_fail (value_str != NULL);
+
+	enable = strcmp (value_str, "solid");
+	color_frame = g_object_get_data (G_OBJECT (set->prefs), "color2-box");
+	if (enable)
+		gtk_widget_show (color_frame);
+	else
+		gtk_widget_hide (color_frame);
+}
+
+
 /* Initial apply to the preview, and setting of the color frame's sensitivity.
  *
  * We use a double-delay mechanism: first waiting 100 ms, then working in an
@@ -126,38 +216,35 @@ get_legacy_settings (void)
  */
 
 static gboolean
-real_realize_cb (BGPreferences *prefs) 
+real_realize_cb (ApplierSet *set)
 {
 	GtkWidget *color_frame;
-	BGApplier *bg_applier;
 
-	g_return_val_if_fail (prefs != NULL, TRUE);
-	g_return_val_if_fail (IS_BG_PREFERENCES (prefs), TRUE);
+	g_return_val_if_fail (set != NULL, TRUE);
 
-	if (G_OBJECT (prefs)->ref_count == 0)
+	if (G_OBJECT (set->prefs)->ref_count == 0)
 		return FALSE;
 
-	bg_applier = g_object_get_data (G_OBJECT (prefs), "applier");
-	color_frame = g_object_get_data (G_OBJECT (prefs), "color-frame");
+	color_frame = g_object_get_data (G_OBJECT (set->prefs), "color-frame");
 
-	bg_applier_apply_prefs (bg_applier, prefs);
-
-	gtk_widget_set_sensitive (color_frame, bg_applier_render_color_p (bg_applier, prefs));
-
+	applier_set_redraw (set);
+	gtk_widget_set_sensitive (color_frame, bg_applier_render_color_p (set->appliers[0], set->prefs));
+	
 	return FALSE;
 }
 
 static gboolean
-realize_2_cb (BGPreferences *prefs) 
+realize_2_cb (ApplierSet *set) 
 {
-	gtk_idle_add ((GtkFunction) real_realize_cb, prefs);
+	gtk_idle_add ((GtkFunction) real_realize_cb, set);
 	return FALSE;
 }
 
 static void
-realize_cb (GtkWidget *widget, BGPreferences *prefs)
+realize_cb (GtkWidget *widget, ApplierSet *set)
 {
-	gtk_timeout_add (100, (GtkFunction) realize_2_cb, prefs);
+	gtk_idle_add ((GtkFunction) real_realize_cb, set);
+	gtk_timeout_add (100, (GtkFunction) realize_2_cb, set);
 }
 
 /* Callback issued when some value changes in a property editor. This merges the
@@ -169,35 +256,28 @@ realize_cb (GtkWidget *widget, BGPreferences *prefs)
  */
 
 static void
-peditor_value_changed (GConfPropertyEditor *peditor, const gchar *key, const GConfValue *value, BGPreferences *prefs) 
+peditor_value_changed (GConfPropertyEditor *peditor, const gchar *key, const GConfValue *value, ApplierSet *set) 
 {
 	GConfEntry *entry;
-	BGApplier *bg_applier;
 	GtkWidget *color_frame;
 
 	entry = gconf_entry_new (key, value);
-	bg_preferences_merge_entry (prefs, entry);
+	bg_preferences_merge_entry (set->prefs, entry);
 	gconf_entry_free (entry);
 
-	bg_applier = g_object_get_data (G_OBJECT (prefs), "applier");
-
-	if (GTK_WIDGET_REALIZED (bg_applier_get_preview_widget (bg_applier)))
-		bg_applier_apply_prefs (bg_applier, BG_PREFERENCES (prefs));
+	if (GTK_WIDGET_REALIZED (bg_applier_get_preview_widget (set->appliers[n_enum_vals - 1])))
+		applier_set_redraw (set);
 
 	if (!strcmp (key, BG_PREFERENCES_PICTURE_FILENAME) ||
 	    !strcmp (key, BG_PREFERENCES_PICTURE_OPTIONS))
 	{
-		color_frame = g_object_get_data (G_OBJECT (prefs), "color-frame");
-		gtk_widget_set_sensitive (color_frame, bg_applier_render_color_p (bg_applier, prefs));
+		color_frame = g_object_get_data (G_OBJECT (set->prefs), "color-frame");
+		gtk_widget_set_sensitive (color_frame, bg_applier_render_color_p (set->appliers[0], set->prefs));
 	}
-}
-
-/* Returns the wallpaper enum set before we disabled it */
-static int 
-get_val_true_cb (GConfPropertyEditor *peditor, gpointer data)
-{
-	BGPreferences *prefs = (BGPreferences*) data;
-	return prefs->wallpaper_type;
+	else if (!strcmp (key, BG_PREFERENCES_COLOR_SHADING_TYPE))
+	{
+		update_secondary_color_visibility (set, gconf_value_get_string (value));
+	}
 }
 
 /* Set up the property editors in the dialog. This also loads the preferences
@@ -205,84 +285,96 @@ get_val_true_cb (GConfPropertyEditor *peditor, gpointer data)
  */
 
 static void
-setup_dialog (GladeXML *dialog, GConfChangeSet *changeset, BGApplier *bg_applier)
+setup_dialog (GladeXML *dialog, GConfChangeSet *changeset, ApplierSet *set)
 {
-	GObject     *prefs;
 	GObject     *peditor;
 	GConfClient *client;
+	gchar *color_option;
 
 	/* Override the enabled setting to make sure background is enabled */
 	client = gconf_client_get_default ();
 	gconf_client_set_bool (client, BG_PREFERENCES_DRAW_BACKGROUND, TRUE, NULL);
 
-	/* Load preferences */
-	prefs = bg_preferences_new ();
-	bg_preferences_load (BG_PREFERENCES (prefs));
-
-	/* We need to be able to retrieve the applier and the color frame in
+	/* We need to be able to retrieve the color frame in
 	   callbacks */
-	g_object_set_data (prefs, "color-frame", WID ("color_frame"));
-	g_object_set_data (prefs, "applier", bg_applier);
+	g_object_set_data (G_OBJECT (set->prefs), "color-frame", WID ("color_vbox"));
+	g_object_set_data (G_OBJECT (set->prefs), "color2-box", WID ("color2_box"));
 
 	peditor = gconf_peditor_new_select_menu_with_enum
-		(changeset, BG_PREFERENCES_COLOR_SHADING_TYPE, WID ("color_option"), bg_preferences_orientation_get_type (), NULL);
-	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
+		(changeset, BG_PREFERENCES_COLOR_SHADING_TYPE, WID ("border_shading"), bg_preferences_orientation_get_type (), NULL);
+	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, set);
 
 	peditor = gconf_peditor_new_color
-		(changeset, BG_PREFERENCES_PRIMARY_COLOR, WID ("colorpicker1"), NULL);
-	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
+		(changeset, BG_PREFERENCES_PRIMARY_COLOR, WID ("color1"), NULL);
+	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, set);
 
 	peditor = gconf_peditor_new_color
-		(changeset, BG_PREFERENCES_SECONDARY_COLOR, WID ("colorpicker2"), NULL);
-	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
-
-	peditor = gconf_peditor_new_filename
-		(changeset, BG_PREFERENCES_PICTURE_FILENAME, WID ("image_fileentry"), NULL);
-	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
-
-	peditor = gconf_peditor_new_select_menu_with_enum
-		(changeset, BG_PREFERENCES_PICTURE_OPTIONS, WID ("image_option"), bg_preferences_wptype_get_type (), NULL);
-	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
-
-	peditor = gconf_peditor_new_enum_toggle
-		(changeset, BG_PREFERENCES_PICTURE_OPTIONS, WID ("picture_enabled_check"), bg_preferences_wptype_get_type (), get_val_true_cb, WPTYPE_NONE, prefs, NULL);
-	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
-
-	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("picture_frame"));
+		(changeset, BG_PREFERENCES_SECONDARY_COLOR, WID ("color2"), NULL);
+	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, set);
+	peditor = gconf_peditor_new_image
+		(changeset, BG_PREFERENCES_PICTURE_FILENAME, WID ("background_image_button"), NULL);
+	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, set);
+	
+	peditor = gconf_peditor_new_select_radio_with_enum
+		(changeset, BG_PREFERENCES_PICTURE_OPTIONS, gtk_radio_button_get_group (GTK_RADIO_BUTTON (WID ("radiobutton1"))), bg_preferences_wptype_get_type (), NULL);
+	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, set);
 
 	/* Make sure preferences get applied to the preview */
-	if (GTK_WIDGET_REALIZED (bg_applier_get_preview_widget (bg_applier)))
-		bg_applier_apply_prefs (bg_applier, BG_PREFERENCES (prefs));
+	if (GTK_WIDGET_REALIZED (bg_applier_get_preview_widget (set->appliers[n_enum_vals - 1])))
+		applier_set_redraw (set);
 	else
-		g_signal_connect_after (G_OBJECT (bg_applier_get_preview_widget (bg_applier)), "realize",
-					(GCallback) realize_cb, prefs);
-
-	preview_file_selection_hookup_file_entry (GNOME_FILE_ENTRY (WID ("image_fileentry")), _("Please select a background image"));
-
-	/* Make sure the preferences object gets destroyed when the dialog is
-	   closed */
-	g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify) g_object_unref, prefs);
+		g_signal_connect_after (G_OBJECT (bg_applier_get_preview_widget (set->appliers[n_enum_vals - 1])),
+					"realize", (GCallback) realize_cb, set);
+	
+	color_option = gconf_client_get_string (gconf_client_get_default (),
+						BG_PREFERENCES_COLOR_SHADING_TYPE,
+						NULL);
+	update_secondary_color_visibility (set, color_option);
+	g_free (color_option);
 }
 
 /* Construct the dialog */
 
 static GladeXML *
-create_dialog (BGApplier *bg_applier) 
+create_dialog (ApplierSet *set) 
 {
-	GtkWidget *holder;
 	GtkWidget *widget;
 	GladeXML  *dialog;
+	GSList *group;
+	int i;
+	const gchar *labels[] = { N_("Wallpaper"), N_("Centered"), N_("Scaled"), N_("Stretched"), N_("No Picture") };
 
 	/* FIXME: What the hell is domain? */
 	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/background-properties.glade", "prefs_widget", NULL);
 	widget = glade_xml_get_widget (dialog, "prefs_widget");
 
-	/* Minor GUI addition */
-	holder = WID ("prefs_widget");
-	gtk_box_pack_start (GTK_BOX (holder), bg_applier_get_preview_widget (bg_applier), TRUE, TRUE, 0);
-	gtk_widget_show_all (holder);
-
 	g_object_weak_ref (G_OBJECT (widget), (GWeakNotify) g_object_unref, dialog);
+
+	/* Set up the applier buttons */
+	group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (WID ("radiobutton1")));
+	group = g_slist_copy (group);
+	group = g_slist_reverse (group);
+	
+	for (i = 0; group && i < n_enum_vals; i++, group = group->next)
+	{
+		GtkWidget *w = GTK_WIDGET (group->data);
+		GtkWidget *vbox = gtk_vbox_new (FALSE, 4);
+		
+		gtk_container_set_border_width (GTK_CONTAINER (vbox), 4);
+		
+		gtk_widget_destroy (GTK_BIN (w)->child);
+		gtk_container_add (GTK_CONTAINER (w), vbox);
+		
+		gtk_box_pack_start (GTK_BOX (vbox),
+				    bg_applier_get_preview_widget (set->appliers[i]),
+				    TRUE, TRUE, 0);
+		gtk_box_pack_start (GTK_BOX (vbox),
+				    gtk_label_new (gettext (labels[i])),
+				    FALSE, FALSE, 0);
+		gtk_widget_show_all (vbox);
+	}
+
+	g_slist_free (group);
 
 	return dialog;
 }
@@ -299,14 +391,75 @@ dialog_button_clicked_cb (GtkDialog *dialog, gint response_id, GConfChangeSet *c
 	}
 }
 
+/* Callback issued during drag movements */
+
+static gboolean
+drag_motion_cb (GtkWidget *widget, GdkDragContext *context,
+		gint x, gint y, guint time, gpointer data)
+{
+	return FALSE;
+}
+
+/* Callback issued during drag leaves */
+
+static void
+drag_leave_cb (GtkWidget *widget, GdkDragContext *context,
+	       guint time, gpointer data)
+{
+	gtk_widget_queue_draw (widget);
+}
+
+/* Callback issued on actual drops. Attempts to load the file dropped. */
+
+static void
+drag_data_received_cb (GtkWidget *widget, GdkDragContext *context,
+		       gint x, gint y,
+		       GtkSelectionData *selection_data,
+		       guint info, guint time, gpointer data)
+{
+	GList *list;
+	GList *uris;
+	ApplierSet *set = (ApplierSet*) data; 
+
+	if (info != TARGET_URI_LIST)
+		return;
+	
+	uris = gnome_vfs_uri_list_parse ((gchar *) selection_data->
+					 data);
+	for (list = uris; list; list = list->next)
+	{
+		GnomeVFSURI *uri = (GnomeVFSURI *) list->data;
+		GConfEntry *entry;
+		GConfValue *value = gconf_value_new (GCONF_VALUE_STRING);
+		GConfClient *client = gconf_client_get_default ();
+		
+		gconf_value_set_string (value, gnome_vfs_uri_get_path (uri));
+
+		/* Hmm, should we bother with changeset here? */
+		gconf_client_set (client, BG_PREFERENCES_PICTURE_FILENAME, value, NULL);
+		gconf_client_suggest_sync (client, NULL);
+
+		/* this isn't emitted by the peditors,
+		 * so we have to manually update */
+		entry = gconf_entry_new (BG_PREFERENCES_PICTURE_FILENAME, value);
+		bg_preferences_merge_entry (set->prefs, entry);
+		gconf_entry_free (entry);
+		gconf_value_free (value);
+	}
+
+	if (GTK_WIDGET_REALIZED (bg_applier_get_preview_widget (set->appliers[n_enum_vals - 1])))
+		applier_set_redraw (set);
+
+	gnome_vfs_uri_list_free (uris);
+}
+
 int
 main (int argc, char **argv) 
 {
 	GConfClient    *client;
-	GConfChangeSet *changeset;
 	GladeXML       *dialog;
 	GtkWidget      *dialog_win;
-	GObject        *bg_applier;
+	ApplierSet     *set;
 
 	static gboolean get_legacy;
 	static struct poptOption cap_options[] = {
@@ -331,9 +484,9 @@ main (int argc, char **argv)
 	if (get_legacy) {
 		get_legacy_settings ();
 	} else {
-		bg_applier = bg_applier_new (BG_APPLIER_PREVIEW);
-		dialog = create_dialog (BG_APPLIER (bg_applier));
-		setup_dialog (dialog, NULL, BG_APPLIER (bg_applier));
+		set = applier_set_new ();
+		dialog = create_dialog (set);
+		setup_dialog (dialog, NULL, set);
 
 		dialog_win = gtk_dialog_new_with_buttons
 			(_("Background properties"), NULL, -1,
@@ -342,12 +495,22 @@ main (int argc, char **argv)
 
 		g_signal_connect (G_OBJECT (dialog_win), "response", (GCallback) dialog_button_clicked_cb, NULL);
 
-		g_object_weak_ref (G_OBJECT (dialog_win), (GWeakNotify) g_object_unref, bg_applier);
+		gtk_drag_dest_set (dialog_win, GTK_DEST_DEFAULT_ALL,
+				   drop_types, n_drop_types,
+				   GDK_ACTION_COPY | GDK_ACTION_LINK | GDK_ACTION_MOVE);
+		g_signal_connect (G_OBJECT (dialog_win), "drag-motion",
+				  G_CALLBACK (drag_motion_cb), NULL);
+		g_signal_connect (G_OBJECT (dialog_win), "drag-leave",
+				  G_CALLBACK (drag_leave_cb), NULL);
+		g_signal_connect (G_OBJECT (dialog_win), "drag-data-received",
+				  G_CALLBACK (drag_data_received_cb),
+				  set);
+
+		g_object_weak_ref (G_OBJECT (dialog_win), (GWeakNotify) applier_set_free, set);
 		gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog_win)->vbox), WID ("prefs_widget"), TRUE, TRUE, GNOME_PAD_SMALL);
-		gtk_widget_show_all (dialog_win);
+		gtk_widget_show (dialog_win);
 
 		gtk_main ();
-		gconf_change_set_unref (changeset);
 	}
 
 	return 0;

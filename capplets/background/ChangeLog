@@ -1,3 +1,19 @@
+2002-03-19  Richard Hestilow  <hestilow@ximian.com>
+
+	* background-properties-capplet.c:
+	(everywhere): Use an ApplierSet instead of passing around
+	BGPreferences.
+	(real_realize_cb): Call applier_set_redraw.
+	(peditor_value_changed): Merge entry in set->prefs,
+	and call applier_set_redraw if realized. Also, hide the second
+	color option if shading type is solid.
+	(setup_dialog): Set data for the second color selector.
+	Also, update peditors for new UI.
+	(create_dialog): Add previews and labels to radio buttons.
+	(main): Create applier set. Also, connect to DnD signals.
+
+	* background-properties.glade: Implement seth's new UI.
+	
 2002-03-17  Jonathan Blandford  <set EMAIL_ADDRESS environment variable>
 
 	reviewed by: <delete if not using a buddy>

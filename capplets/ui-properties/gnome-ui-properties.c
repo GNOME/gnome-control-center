@@ -43,7 +43,7 @@ static GConfEnumStringPair toolbar_style_enums[] = {
 };
 
 static GConfValue *
-toolbar_from_widget (GConfValue *value) 
+toolbar_from_widget (GConfPropertyEditor *peditor, GConfValue *value) 
 {
   GConfValue *new_value;
 
@@ -55,7 +55,7 @@ toolbar_from_widget (GConfValue *value)
 }
 
 static GConfValue *
-toolbar_to_widget (GConfValue *value) 
+toolbar_to_widget (GConfPropertyEditor *peditor, GConfValue *value) 
 {
   GConfValue *new_value;
   gint val = 2;

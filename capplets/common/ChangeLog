@@ -1,3 +1,17 @@
+2002-03-19  Richard Hestilow  <hestilow@ximian.com>
+
+	* Makefile.am: Include libbackground (used for preview-file-selector).
+	Change into a libtool library so we can link against libbackground.
+	
+	* gconf-property-editor.c:
+	(peditor_enum_int_from_string): Added argument use_nick; set to true
+	if the string was a nick.
+	(peditor_enum_string_from_int): Use nick only if use_nick is true.
+	(gconf_peditor_new_image): Added.
+	(gconf_peditor_new_select_radio_with_enum): Added.
+	(peditor_select_radio_value_changed): Reverse radio group.
+	(peditor_select_radio_widget_changed): Reverse radio group.
+
 2002-03-17  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* activate-settings-daemon.c: Mark a string. #include <config.h>

@@ -1,3 +1,23 @@
+2002-03-19  Richard Hestilow  <hestilow@ximian.com>
+
+	* preferences.h (wallpaper_type_t): Remove EMBOSSED since we
+	don't support it.
+	
+	* preferences.c:
+	(_bg_wptype_values, _bg_orientation_values): Move name values
+	to nick, change name to "correct" form.
+	(read_wptype_from_string, bg_preferences_get_wptype_as_string):
+	Remove EMBOSSSED option.
+	
+	* preview-file-selection.[ch]: Add function
+	preview_file_selection_intelligent_scale.
+
+	* applier.c: Change MONITOR_CONTENTS_WIDTH/HEIGHT to 64/48
+	(correct monitor ratio).
+	(bg_applier_apply_prefs): Disable wallpaper if WPTYPE_NONE.
+	(bg_applier_get_preview_widget): Create to WIDTH/HEIGHT.
+	(get_geometry): Remove reference to EMBOSSED.
+
 2002-03-17  Darin Adler  <darin@bentspoon.com>
 
 	* preferences.c: (bg_preferences_merge_entry):

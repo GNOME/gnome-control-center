@@ -31,6 +31,8 @@
 #include "gconf-property-editor.h"
 #include "gconf-property-editor-marshal.h"
 
+#include "preview-file-selection.h"
+
 enum {
 	VALUE_CHANGED,
 	LAST_SIGNAL
@@ -71,6 +73,7 @@ typedef struct
 	GConfPEditorGetValueFn   enum_val_true_fn;
 	gpointer		 enum_val_true_fn_data;
 	guint			 enum_val_false;
+	gboolean		 use_nick;
 } GConfPropertyEditorEnumData;
 
 static guint peditor_signals[LAST_SIGNAL];
@@ -660,16 +663,23 @@ gconf_peditor_new_color (GConfChangeSet *changeset,
 }
 
 static int
-peditor_enum_int_from_string (GType type, const gchar *str)
+peditor_enum_int_from_string (GType type, const gchar *str, gboolean *use_nick)
 {
 	GEnumClass *klass;
 	GEnumValue *val;
 	int ret = -1;
 
+	if (use_nick)
+		*use_nick = FALSE;
+	
 	klass = g_type_class_ref (type);
 	val = g_enum_get_value_by_name (klass, str);
 	if (!val)
+	{
 		val = g_enum_get_value_by_nick (klass, str);
+		if (use_nick)
+			*use_nick = TRUE;
+	}
 	if (val)
 		ret = val->value;
 
@@ -679,7 +689,7 @@ peditor_enum_int_from_string (GType type, const gchar *str)
 }
 
 static gchar*
-peditor_enum_string_from_int (GType type, const int index)
+peditor_enum_string_from_int (GType type, const int index, gboolean use_nick)
 {
 	GEnumClass *klass;
 	GEnumValue *val;
@@ -689,10 +699,10 @@ peditor_enum_string_from_int (GType type, const int index)
 	val = g_enum_get_value (klass, index);
 	if (val)
 	{
-		if (val->value_name)
-			ret = g_strdup (val->value_name);
-		else
+		if (val->value_nick && use_nick)
 			ret = g_strdup (val->value_nick);
+		else
+			ret = g_strdup (val->value_name);
 	}
 	
 	g_type_class_unref (klass);
@@ -714,7 +724,8 @@ peditor_enum_conv_to_widget (GConfPropertyEditor *peditor,
 	ret = gconf_value_new (GCONF_VALUE_INT);
 	
 	index = peditor_enum_int_from_string (data->enum_type,
-		    		    	      gconf_value_get_string (value));
+		    		    	      gconf_value_get_string (value),
+					      &data->use_nick);
 	
 	gconf_value_set_int (ret, index);
 
@@ -734,7 +745,8 @@ peditor_enum_conv_from_widget (GConfPropertyEditor *peditor,
 
 	ret = gconf_value_new (GCONF_VALUE_STRING);
 	str = peditor_enum_string_from_int (data->enum_type,
-					    gconf_value_get_int (value));
+					    gconf_value_get_int (value),
+					    data->use_nick);
 	gconf_value_set_string (ret, str);
 	g_free (str);
 
@@ -864,7 +876,7 @@ peditor_select_radio_value_changed (GConfClient         *client,
 				    GConfEntry          *entry,
 				    GConfPropertyEditor *peditor) 
 {
-	GSList *group;
+	GSList *group, *link;
 	GConfValue *value, *value_wid;
 
 	if (peditor->p->changeset != NULL)
@@ -874,11 +886,13 @@ peditor_select_radio_value_changed (GConfClient         *client,
 
 	if (value != NULL) {
 		value_wid = peditor->p->conv_to_widget_cb (peditor, value);
-		group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (peditor->p->ui_control));
-		group = g_slist_nth (group, gconf_value_get_int (value_wid));
-		if (group && group->data)
-			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (group->data), TRUE);
+		group = g_slist_copy (gtk_radio_button_get_group (GTK_RADIO_BUTTON (peditor->p->ui_control)));
+		group = g_slist_reverse (group);
+		link = g_slist_nth (group, gconf_value_get_int (value_wid));
+		if (link && link->data)
+			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (link->data), TRUE);
 		gconf_value_free (value_wid);
+		g_slist_free (group);
 	}
 }
 
@@ -893,7 +907,9 @@ peditor_select_radio_widget_changed (GConfPropertyEditor *peditor,
 	if (!tb->active) return;
 
 	value_wid = gconf_value_new (GCONF_VALUE_INT);
-	group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (peditor->p->ui_control));
+	group = g_slist_copy (gtk_radio_button_get_group (GTK_RADIO_BUTTON (peditor->p->ui_control)));
+	group = g_slist_reverse (group);
+	
 	gconf_value_set_int (value_wid, g_slist_index (group, tb));
 	value = peditor->p->conv_from_widget_cb (peditor, value_wid);
 
@@ -902,6 +918,7 @@ peditor_select_radio_widget_changed (GConfPropertyEditor *peditor,
 
 	gconf_value_free (value_wid);
 	gconf_value_free (value);
+	g_slist_free (group);
 }
 
 GObject *
@@ -1021,7 +1038,7 @@ guard_get_bool (GConfPropertyEditor *peditor, const GConfValue *value)
 	else
 	{
 		GConfPropertyEditorEnumData *data = peditor->p->data;
-		int index = peditor_enum_int_from_string (data->enum_type, gconf_value_get_string (value));
+		int index = peditor_enum_int_from_string (data->enum_type, gconf_value_get_string (value), &data->use_nick);
 		return (index != data->enum_val_false);
 	}
 }
@@ -1187,7 +1204,8 @@ peditor_enum_toggle_conv_to_widget (GConfPropertyEditor *peditor,
 	ret = gconf_value_new (GCONF_VALUE_BOOL);
 	
 	index = peditor_enum_int_from_string (data->enum_type,
-		    		    	      gconf_value_get_string (value));
+		    		    	      gconf_value_get_string (value),
+					      &data->use_nick);
 	gconf_value_set_bool (ret, (index != data->enum_val_false));
 
 	return ret;
@@ -1211,7 +1229,7 @@ peditor_enum_toggle_conv_from_widget (GConfPropertyEditor *peditor,
 	else
 		index = data->enum_val_false;
 
-	str = peditor_enum_string_from_int (data->enum_type, index);
+	str = peditor_enum_string_from_int (data->enum_type, index, data->use_nick);
 	gconf_value_set_string (ret, str);
 	g_free (str);
 
@@ -1267,6 +1285,262 @@ gconf_peditor_new_enum_toggle  (GConfChangeSet 	 *changeset,
 
 	g_signal_connect_swapped (G_OBJECT (checkbox), "toggled",
 				  (GCallback) peditor_boolean_widget_changed, peditor);
+
+	return G_OBJECT (peditor);
+}
+
+gboolean
+peditor_image_set_filename (GConfPropertyEditor *peditor, const gchar *filename)
+{
+	GdkPixbuf *pixbuf = NULL;
+	GdkPixbuf *scaled;
+	GtkImage *image = NULL;
+	const int scale = 100;
+	gchar *message = NULL;
+	GList *l;
+	
+	if (!g_file_test (filename, G_FILE_TEST_EXISTS))
+	{
+		message = g_strdup_printf (_("Couldn't find the file '%s'.\n\nPlease make "
+					      "sure it exists and try again, " 
+					      "or choose a different background picture."),
+					   filename);
+
+	}
+	else if (!(pixbuf = gdk_pixbuf_new_from_file (filename, NULL)))
+	{
+		message = g_strdup_printf (_("I don't know how to open the file '%s'.\n"
+					     "Perhaps it's "
+					     "a kind of picture that is not yet supported.\n\n"
+					     "Please select a different picture instead."),
+					   filename);
+	}
+
+	if (message)
+	{
+		GtkWidget *box;
+
+		box = gtk_message_dialog_new (NULL,
+					      GTK_DIALOG_MODAL,
+					      GTK_MESSAGE_ERROR,
+					      GTK_BUTTONS_OK,
+					      message);
+		gtk_dialog_run (GTK_DIALOG (box));
+		gtk_widget_destroy (box);
+		g_free (message);
+
+		return FALSE;
+	}
+
+	scaled = preview_file_selection_intelligent_scale (pixbuf,
+							   scale);
+
+	if (GTK_IS_IMAGE (GTK_BIN (peditor->p->ui_control)->child))
+		image = GTK_IMAGE (GTK_BIN (peditor->p->ui_control)->child);
+	else
+	{
+		for (l = gtk_container_get_children (GTK_CONTAINER (GTK_BIN (peditor->p->ui_control)->child)); l != NULL; l = l->next)
+		{	
+			if (GTK_IS_IMAGE (l->data))
+				image = GTK_IMAGE (l->data);
+			else if (GTK_IS_LABEL (l->data))
+			{
+				gchar *base = g_path_get_basename (filename);
+				gtk_label_set_text (GTK_LABEL (l->data), base);
+				g_free (base);
+			}
+		}
+	}
+	gtk_image_set_from_pixbuf (image, scaled);
+	g_object_unref (G_OBJECT (pixbuf));
+	g_object_unref (G_OBJECT (scaled));
+
+	return TRUE;
+}
+
+void
+peditor_image_fsel_ok_cb (GtkFileSelection *fsel, gpointer data)
+{
+	GConfValue *value, *value_wid;
+	GConfPropertyEditor *peditor;
+	const gchar *filename;
+
+	peditor = g_object_get_data (G_OBJECT (fsel), "peditor");
+
+	if (!peditor->p->inited)
+		return;
+
+	filename = gtk_file_selection_get_filename (fsel);
+	if (!(filename && peditor_image_set_filename (peditor, filename)))
+		return;
+
+	value_wid = gconf_value_new (GCONF_VALUE_STRING);
+	gconf_value_set_string (value_wid, gtk_file_selection_get_filename (fsel));
+	value = peditor->p->conv_from_widget_cb (peditor, value_wid);
+
+	peditor_set_gconf_value (peditor, peditor->p->key, value);
+	g_signal_emit (peditor, peditor_signals[VALUE_CHANGED], 0, peditor->p->key, value);
+
+	gconf_value_free (value_wid);
+	gconf_value_free (value);
+	gtk_widget_destroy (GTK_WIDGET (fsel));
+}
+
+void
+peditor_image_clicked_cb (GConfPropertyEditor *peditor, GtkButton *button)
+{
+	GConfValue *value = NULL, *value_wid;
+	const gchar *filename;
+	GtkWidget *fsel;
+
+	fsel = preview_file_selection_new (_("Please select an image."), TRUE);
+	
+	/* need the current filename */
+	if (peditor->p->changeset)
+		gconf_change_set_check_value (peditor->p->changeset, peditor->p->key, &value);
+
+	if (value)
+	{
+		/* the one we got is not a copy */
+		value = gconf_value_copy (value);
+	}
+	else
+	{
+		GConfClient *client = gconf_client_get_default ();
+		value = gconf_client_get (client, peditor->p->key, NULL);
+	}
+	
+	value_wid = peditor->p->conv_to_widget_cb (peditor, value);
+	filename = gconf_value_get_string (value_wid);
+
+	if (filename && strcmp (filename, ""))
+		gtk_file_selection_set_filename (GTK_FILE_SELECTION (fsel), filename);
+
+	g_object_set_data (G_OBJECT (fsel), "peditor", peditor);
+
+	g_signal_connect_swapped  (G_OBJECT (GTK_FILE_SELECTION (fsel)->ok_button),
+				   "clicked",
+				   (GCallback) peditor_image_fsel_ok_cb,
+				   fsel);
+	
+	g_signal_connect_swapped  (G_OBJECT (GTK_FILE_SELECTION (fsel)->cancel_button),
+				   "clicked",
+				   (GCallback) gtk_widget_destroy,
+				   fsel);
+
+	if (gtk_grab_get_current ())
+		gtk_grab_add (fsel);
+	
+	gtk_widget_show (fsel);
+
+	gconf_value_free (value);
+	gconf_value_free (value_wid);
+}
+
+static void
+peditor_image_value_changed (GConfClient         *client,
+			     guint                cnxn_id,
+			     GConfEntry          *entry,
+			     GConfPropertyEditor *peditor) 
+{
+	GConfValue *value, *value_wid;
+
+	if (peditor->p->changeset != NULL)
+		gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
+
+	value = gconf_entry_get_value (entry);
+
+	if (value != NULL) {
+		const gchar *filename;
+
+		value_wid = peditor->p->conv_to_widget_cb (peditor, value);
+		filename = gconf_value_get_string (value_wid);
+		peditor_image_set_filename (peditor, filename);
+		gconf_value_free (value_wid);
+	}
+}
+
+GObject *
+gconf_peditor_new_image (GConfChangeSet	  *changeset,
+			 gchar	          *key,
+			 GtkWidget	  *button,
+			 gchar		  *first_property_name,
+			 ...)
+{
+	GObject *peditor;
+	va_list var_args;
+
+	g_return_val_if_fail (key != NULL, NULL);
+	g_return_val_if_fail (button != NULL, NULL);
+	g_return_val_if_fail (GTK_IS_BUTTON (button), NULL);
+
+	va_start (var_args, first_property_name);
+	
+	peditor = gconf_peditor_new
+		(key,
+		 (GConfClientNotifyFunc) peditor_image_value_changed,
+		 changeset,
+		 G_OBJECT (button),
+		 first_property_name,
+		 var_args, NULL);
+
+	va_end (var_args);
+
+	g_signal_connect_swapped (G_OBJECT (button), "clicked",
+				  (GCallback) peditor_image_clicked_cb, peditor);
+
+	return peditor;
+}
+
+GObject *
+gconf_peditor_new_select_radio_with_enum (GConfChangeSet *changeset,
+					  gchar		 *key,
+					  GSList 	 *radio_group,
+					  GType 	 enum_type,
+					  gchar          *first_property_name,
+					  ...)
+{
+	GConfPropertyEditor *peditor;
+	GConfPropertyEditorEnumData *enum_data;
+	GtkRadioButton *first_button;
+	GSList *item;
+	va_list var_args;
+
+	g_return_val_if_fail (key != NULL, NULL);
+	g_return_val_if_fail (radio_group != NULL, NULL);
+	g_return_val_if_fail (radio_group->data != NULL, NULL);
+	g_return_val_if_fail (GTK_IS_RADIO_BUTTON (radio_group->data), NULL);
+
+	enum_data = g_new0 (GConfPropertyEditorEnumData, 1);
+	enum_data->enum_type = enum_type;
+
+	first_button = GTK_RADIO_BUTTON (radio_group->data);
+
+	va_start (var_args, first_property_name);
+
+	peditor = GCONF_PROPERTY_EDITOR (
+		gconf_peditor_new
+		(key,
+		 (GConfClientNotifyFunc) peditor_select_radio_value_changed,
+		 changeset,
+		 G_OBJECT (first_button),
+		 first_property_name,
+		 var_args,
+		 "conv-to-widget-cb",
+		 peditor_enum_conv_to_widget,
+		 "conv-from-widget-cb",
+		 peditor_enum_conv_from_widget,
+		 "data",
+		 enum_data,
+		 "data-free-cb",
+		 g_free,
+		 NULL));
+
+	va_end (var_args);
+
+	for (item = radio_group; item != NULL; item = item->next)
+		g_signal_connect_swapped (G_OBJECT (item->data), "toggled",
+					  (GCallback) peditor_select_radio_widget_changed, peditor);
 
 	return G_OBJECT (peditor);
 }

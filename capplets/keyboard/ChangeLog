@@ -1,3 +1,12 @@
+2002-03-19  Richard Hestilow  <hestilow@ximian.com>
+
+	* gnome-keyboard-properties.c (bell_enums): Swap around. This
+	was initially reversed because of a bug in gconf-peditor.
+	Ideally this code should use the new enum functions, but
+	the existing stuff works so I so no immediate need to rewrite
+	it.
+	(*_to/from_widget): Convert to new signature.
+	
 2002-03-19  Lauris Kaplinski  <lauris@ximian.com>
 
 	* gnome-keyboard-properties.c (bell_to_widget): Check that

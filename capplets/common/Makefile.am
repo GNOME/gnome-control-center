@@ -5,13 +5,17 @@ INCLUDES = \
 	-DGNOME_ICONDIR=\""${prefix}/share/pixmaps"\"			\
 	-DG_LOG_DOMAIN=\"capplet-common\"				\
 	-I$(top_srcdir)/						\
+	-I$(top_srcdir)/libbackground					\
 	@CAPPLET_CFLAGS@
+	
 
-noinst_LIBRARIES = libcommon.a
+noinst_LTLIBRARIES = libcommon.la
 
-libcommon_a_SOURCES = \
+libcommon_la_SOURCES = \
 	activate-settings-daemon.c	activate-settings-daemon.h	\
 	capplet-util.c			capplet-util.h			\
 	gconf-property-editor.c		gconf-property-editor.h		\
 	gconf-property-editor-marshal.c	gconf-property-editor-marshal.h \
 	theme-common.c			theme-common.h
+
+libcommon_la_LIBADD = $(top_builddir)/libbackground/libbackground.la

@@ -45,19 +45,18 @@ static orientation_t read_orientation_from_string  (gchar *string);
 static wallpaper_type_t read_wptype_from_string (gchar *string);
 
 static GEnumValue _bg_wptype_values[] = {
-	{ WPTYPE_TILED, "wallpaper", N_("Tiled") },
-	{ WPTYPE_CENTERED, "centered", N_("Centered") },
-	{ WPTYPE_SCALED, "scaled", N_("Scaled") },
-	{ WPTYPE_STRETCHED, "stretched", N_("Stretched") },
-	{ WPTYPE_EMBOSSED, "embossed", N_("Embossed") },
-	{ WPTYPE_NONE, "none", N_("None") },
+	{ WPTYPE_TILED, "WPTYPE_TILED", "wallpaper"},
+	{ WPTYPE_CENTERED, "WPTYPE_CENTERED", "centered"},
+	{ WPTYPE_SCALED, "WPTYPE_SCALED", "scaled"},
+	{ WPTYPE_STRETCHED, "WPTYPE_STRETCHED", "stretched"},
+	{ WPTYPE_NONE, "WPTYPE_NONE", "none"},
 	{ 0, NULL, NULL }
 };
 
 static GEnumValue _bg_orientation_values[] = {
-	{ ORIENTATION_SOLID, "solid", N_("Solid") },
-	{ ORIENTATION_HORIZ, "horizontal-gradient", N_("Horizontal Gradient") },
-	{ ORIENTATION_VERT, "vertical-gradient", N_("Vertical Gradient") },
+	{ ORIENTATION_SOLID, "ORIENTATION_SOLID", "solid"},
+	{ ORIENTATION_HORIZ, "ORIENTATION_HORIZ", "horizontal-gradient"},
+	{ ORIENTATION_VERT, "ORIENTATION_VERT", "vertical-gradient"},
 	{ 0, NULL, NULL }
 };
 
@@ -326,8 +325,6 @@ read_wptype_from_string (gchar *string)
 			type =  WPTYPE_SCALED;
 		} else if (!strncmp (string, "stretched", sizeof ("stretched"))) {
 			type =  WPTYPE_STRETCHED;
-		} else if (!strncmp (string, "embossed", sizeof ("embossed"))) {
-			type =  WPTYPE_EMBOSSED;
 		}
 		g_free (string);
 	}
@@ -384,8 +381,6 @@ bg_preferences_get_wptype_as_string (wallpaper_type_t wp)
 			return "scaled";
 		case WPTYPE_STRETCHED:
 			return "stretched";
-		case WPTYPE_EMBOSSED:
-			return "embossed";
 		case WPTYPE_NONE:
 			return "none";
 	        case WPTYPE_UNSET:

@@ -38,10 +38,10 @@
 
 #include "applier.h"
 
-#define MONITOR_CONTENTS_X 20
-#define MONITOR_CONTENTS_Y 10
-#define MONITOR_CONTENTS_WIDTH 157
-#define MONITOR_CONTENTS_HEIGHT 111
+#define MONITOR_CONTENTS_X 0 
+#define MONITOR_CONTENTS_Y 0
+#define MONITOR_CONTENTS_WIDTH 64
+#define MONITOR_CONTENTS_HEIGHT 48
 
 enum {
 	PROP_0,
@@ -370,6 +370,12 @@ bg_applier_apply_prefs (BGApplier           *bg_applier,
 
 	new_prefs = BG_PREFERENCES (bg_preferences_clone (prefs));
 
+	if (new_prefs->wallpaper_type == WPTYPE_NONE)
+	{
+		new_prefs->wallpaper_enabled = FALSE;
+		new_prefs->wallpaper_type = WPTYPE_CENTERED;
+	}
+
 	if (bg_applier->p->type == BG_APPLIER_ROOT && bg_applier->p->nautilus_running)
 		set_root_pixmap ((GdkPixmap *) -1);
 
@@ -432,65 +438,13 @@ bg_applier_render_color_p (const BGApplier *bg_applier, const BGPreferences *pre
 GtkWidget *
 bg_applier_get_preview_widget (BGApplier *bg_applier) 
 {
-	GdkPixbuf *pixbuf;
-	GdkPixmap *pixmap;
-	GdkBitmap *mask;
-	GdkVisual *visual;
-	GdkColormap *colormap;
-	gchar *filename;
-	GdkGC *gc;
+	if (bg_applier->p->preview_widget == NULL)
+	{
+		GdkPixmap *pixmap;
 
-	g_return_val_if_fail (bg_applier != NULL, NULL);
-	g_return_val_if_fail (IS_BG_APPLIER (bg_applier), NULL);
-
-	if (bg_applier->p->type != BG_APPLIER_PREVIEW)
-		return NULL;
-
-	if (bg_applier->p->preview_widget != NULL)
-		return bg_applier->p->preview_widget;
-
-	filename = gnome_program_locate_file (NULL, GNOME_FILE_DOMAIN_PIXMAP, "monitor.png", TRUE, NULL);
-	visual = gdk_drawable_get_visual (gdk_get_default_root_window ());
-	colormap = gdk_drawable_get_colormap (gdk_get_default_root_window ());
-
-	gtk_widget_push_colormap (colormap);
-
-	pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
-
-	if (pixbuf == NULL) return NULL;
-
-	pixmap = gdk_pixmap_new (gdk_get_default_root_window (),
-				 gdk_pixbuf_get_width (pixbuf),
-				 gdk_pixbuf_get_height (pixbuf),
-				 visual->depth);
-	mask = gdk_pixmap_new (gdk_get_default_root_window (),
-			       gdk_pixbuf_get_width (pixbuf),
-			       gdk_pixbuf_get_height (pixbuf),
-			       1);
-
-	gc = gdk_gc_new (gdk_get_default_root_window ());
-
-	gdk_pixbuf_render_threshold_alpha (pixbuf, mask,
-					   0, 0, 0, 0,
-					   gdk_pixbuf_get_width (pixbuf),
-					   gdk_pixbuf_get_height (pixbuf),
-					   1);
-
-	gdk_gc_set_clip_mask (gc, mask);
-
-	gdk_pixbuf_render_to_drawable (pixbuf, pixmap, gc,
-				       0, 0, 0, 0,
-				       gdk_pixbuf_get_width (pixbuf),
-				       gdk_pixbuf_get_height (pixbuf),
-				       GDK_RGB_DITHER_MAX, 0, 0);
-
-	bg_applier->p->preview_widget = gtk_image_new_from_pixmap (pixmap, mask);
-	gtk_widget_show (bg_applier->p->preview_widget);
-	g_object_unref (G_OBJECT (pixbuf));
-	g_free (filename);
-
-	gtk_widget_pop_colormap ();
-
+		pixmap = gdk_pixmap_new (gdk_get_default_root_window (), MONITOR_CONTENTS_WIDTH, MONITOR_CONTENTS_HEIGHT, -1);
+		bg_applier->p->preview_widget = gtk_image_new_from_pixmap (pixmap, NULL);
+	}
 	return bg_applier->p->preview_widget;
 }
 

@@ -56,6 +56,8 @@ GtkWidget *preview_file_selection_new (const gchar *title, gboolean do_preview);
 
 void preview_file_selection_hookup_file_entry (GnomeFileEntry *entry, const gchar *title);
 
+GdkPixbuf* preview_file_selection_intelligent_scale (GdkPixbuf *pixbuf, guint scale);
+
 G_END_DECLS
 
 #endif /* __PREVIEW_FILE_SELECTION_H__ */

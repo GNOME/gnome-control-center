@@ -53,7 +53,7 @@ create_dialog (void)
 }
 
 static GConfValue *
-rate_to_widget (GConfValue *value) 
+rate_to_widget (GConfPropertyEditor *peditor, GConfValue *value) 
 {
 	GConfValue *new_value;
 	int rate;
@@ -75,7 +75,7 @@ rate_to_widget (GConfValue *value)
 }
 
 static GConfValue *
-rate_from_widget (GConfValue *value) 
+rate_from_widget (GConfPropertyEditor *peditor, GConfValue *value) 
 {
 	static int rates[] = {
 		255, 192, 64, 1
@@ -90,7 +90,7 @@ rate_from_widget (GConfValue *value)
 }
 
 static GConfValue *
-delay_to_widget (GConfValue *value) 
+delay_to_widget (GConfPropertyEditor *peditor, GConfValue *value) 
 {
 	GConfValue *new_value;
 	int delay;
@@ -112,7 +112,7 @@ delay_to_widget (GConfValue *value)
 }
 
 static GConfValue *
-delay_from_widget (GConfValue *value) 
+delay_from_widget (GConfPropertyEditor *peditor, GConfValue *value) 
 {
 	static int delays[] = {
 		1000, 700, 300, 0
@@ -126,13 +126,13 @@ delay_from_widget (GConfValue *value)
 }
 
 static GConfEnumStringPair bell_enums[] = {
-	{ 0, "custom" },
+	{ 0, "off" },
 	{ 1, "on" },
-	{ 2, "off" }
+	{ 2, "custom" }
 };
 
 static GConfValue *
-bell_from_widget (GConfValue *value) 
+bell_from_widget (GConfPropertyEditor *peditor, GConfValue *value) 
 {
 	GConfValue *new_value;
 
@@ -144,7 +144,7 @@ bell_from_widget (GConfValue *value)
 }
 
 static GConfValue *
-bell_to_widget (GConfValue *value) 
+bell_to_widget (GConfPropertyEditor *peditor, GConfValue *value) 
 {
 	GConfValue *new_value;
 	gint val = 2;
@@ -162,7 +162,7 @@ bell_to_widget (GConfValue *value)
 
 
 static GConfValue *
-blink_from_widget (GConfValue *value) 
+blink_from_widget (GConfPropertyEditor *peditor, GConfValue *value) 
 {
 	GConfValue *new_value;
 
@@ -173,7 +173,7 @@ blink_from_widget (GConfValue *value)
 }
 
 static GConfValue *
-blink_to_widget (GConfValue *value) 
+blink_to_widget (GConfPropertyEditor *peditor, GConfValue *value) 
 {
 	GConfValue *new_value;
 	gint current_rate;

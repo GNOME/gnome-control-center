@@ -110,6 +110,14 @@ GObject *gconf_peditor_new_select_radio (GConfChangeSet          *changeset,
 					 GSList                  *radio_group,
 					 gchar                   *first_property_name,
 					 ...);
+
+GObject *gconf_peditor_new_select_radio_with_enum	 (GConfChangeSet *changeset,
+							  gchar		 *key,
+							  GSList 	 *radio_group,
+							  GType 	 enum_type,
+							  gchar          *first_property_name,
+							  ...);
+
 GObject *gconf_peditor_new_numeric_range (GConfChangeSet          *changeset,
 					  gchar                   *key,
 					  GtkWidget               *range,
@@ -119,6 +127,12 @@ GObject *gconf_peditor_new_font          (GConfChangeSet          *changeset,
 					  gchar                   *key,
 					  GtkWidget               *font_picker,
 					  gchar                   *first_property_name,
+					  ...);
+
+GObject *gconf_peditor_new_image	 (GConfChangeSet	  *changeset,
+					  gchar			  *key,
+					  GtkWidget		  *button,
+					  gchar			  *first_property,
 					  ...);
 
 void gconf_peditor_widget_set_guard     (GConfPropertyEditor     *peditor,
