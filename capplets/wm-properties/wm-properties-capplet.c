@@ -31,10 +31,11 @@ typedef struct {
 /* vars. */
 static GtkWidget *capplet;
 static GtkWidget *delete_button;
+static GtkWidget *edit_button;
 static GtkWidget *config_button;
 static GtkWidget *clist;
 
-static WindowManager *selected_wm;
+static WindowManager *selected_wm = NULL;
 
 static GtkWidget *restart_dialog = NULL;
 static GtkWidget *restart_label = NULL;
@@ -284,7 +285,7 @@ update_gui (void)
         WindowManager *current_wm = wm_list_get_current();
         gint new_row;
         gchar *tmpstr;
-        
+
         gtk_clist_clear (GTK_CLIST (clist));
 
         in_fill = TRUE;
@@ -330,7 +331,18 @@ update_gui (void)
         
         in_fill = FALSE;
 
-        gtk_widget_set_sensitive (delete_button, selected_wm->is_user);
+        if(selected_wm) {
+                gtk_widget_set_sensitive (edit_button, selected_wm->is_user);
+                gtk_widget_set_sensitive (delete_button, selected_wm->is_user);
+        } else {
+                gtk_widget_set_sensitive (edit_button, FALSE);
+                gtk_widget_set_sensitive (delete_button, FALSE);
+        }
+
+        if (current_wm)
+                gtk_widget_show(config_button);
+        else
+                gtk_widget_hide(config_button);
 }
 
 static void 
@@ -428,8 +440,8 @@ restart_failure (WMResult reason)
                 case STATE_CANCEL:
                         msg = g_strdup_printf (_("Could not start '%s'.\n"
                                                  "Falling back to previous window manager '%s'\n"),
-                                               selected_wm->dentry->name,
-                                               current_wm->dentry->name);
+                                               selected_wm?selected_wm->dentry->name:"Unknown",
+                                               current_wm?current_wm->dentry->name:"Unknown");
                         selected_wm = current_wm;
                         restart(TRUE);
                         break;
@@ -533,14 +545,32 @@ destroy_callback (GtkWidget *widget, void *data)
 static void
 restart (gboolean force)
 {
-        WindowManager *current_wm = wm_list_get_current();
+        WindowManager *current_wm = wm_list_get_current(), *mywm;
+        static gboolean last_try_was_twm = FALSE;
+        const char *twm_argv[] = {"twm", NULL};
+        const GnomeDesktopEntry twm_dentry = {"twm", "twm",
+                                              1, (char **)twm_argv, NULL,
+                                              NULL, NULL, 0, NULL,
+                                              NULL, NULL, 0, 0};
+        const WindowManager twm_fallback = {(GnomeDesktopEntry*)&twm_dentry, "twm", "twm", 0, 0, 1, 0};
 
-        if (force || current_wm != selected_wm) {
-                show_restart_dialog (selected_wm->dentry->name);
+        if(selected_wm) {
+                last_try_was_twm = FALSE;
+                mywm = selected_wm;
+        } else if(!last_try_was_twm) {
+                last_try_was_twm = TRUE;
+                mywm = (WindowManager*)&twm_fallback;
+        } else {
+                restart_finalize();
+                return;
+        }
+
+        if (force || current_wm != mywm) {
+                show_restart_dialog (mywm->dentry->name);
                 if (state != STATE_OK && state != STATE_CANCEL)
                         gtk_widget_set_sensitive (capplet, FALSE);
                 restart_pending = TRUE;
-                wm_restart (selected_wm, 
+                wm_restart (mywm, 
                             capplet->window, 
                             restart_callback, 
                             NULL);
@@ -598,16 +628,6 @@ ok_callback (void)
                 g_warning ("ok callback in state %d!!!\n", state);
                 return;
         }
-}
-
-static void
-do_revert (void)
-{
-        wm_list_revert();
-        selected_wm = wm_list_get_revert();
-        if (state != STATE_CANCEL)
-                update_gui();
-        restart(FALSE);
 }
 
 static void
@@ -837,9 +857,14 @@ get_dialog_contents (WMDialog *dialog, WindowManager *wm)
 static void
 edit_dialog (void)
 {
-        WMDialog *dialog = create_dialog (_("Add New Window Manager"));
+        WMDialog *dialog;
         gchar *tmp;
         gint result;
+
+        if(!selected_wm)
+                return;
+
+        dialog = create_dialog (_("Edit Window Manager"));
 
         if (selected_wm->dentry->name)
                 gtk_entry_set_text (GTK_ENTRY (dialog->name_entry), selected_wm->dentry->name);
@@ -951,11 +976,13 @@ delete (void)
 
 
 static void
-run_config (void)
+run_config (GtkWidget *w)
 {
         WindowManager *current_wm = wm_list_get_current();
-        if (current_wm->is_config_present &&
-            current_wm->config_exec != NULL) {
+
+        if (current_wm
+            && current_wm->is_config_present
+            && current_wm->config_exec != NULL) {
                 gchar *argv[4];
 
                 argv[0] = "/bin/sh";
@@ -973,7 +1000,6 @@ wm_setup (void)
         GtkWidget *hbox, *vbox, *bottom;
         GtkWidget *util_vbox;
         GtkWidget *add_button;
-        GtkWidget *edit_button;
         GtkWidget *scrolled_window;
 
         capplet = capplet_widget_new ();
@@ -1030,9 +1056,9 @@ wm_setup (void)
 
         gtk_container_add (GTK_CONTAINER (capplet), vbox);
 
-        update_gui();
-
         gtk_widget_show_all (capplet);
+
+        update_gui();
 }
 
 int

@@ -164,7 +164,7 @@ install_theme_callback (GtkWidget *widget, gpointer data)
 
 }
 
-gint
+static gint
 delete_capplet (GtkWidget *widget, GdkEvent *event, gpointer data)
 {
   /* We don't want the toplevel window destroyed until
@@ -179,7 +179,7 @@ make_main(void)
 {
   void *sw, *label;
   GtkWidget *box, *hbox, *hbox2, *vbox;
-  GtkWidget *text, *frame, *frame2, *button;
+  GtkWidget *frame, *button;
   GtkWidget *button_vbox;
   gboolean default_used;
   
@@ -362,7 +362,7 @@ static void
 click_try(GtkWidget *widget, gpointer data)
 {
   gchar *rc;
-  gchar *dir, cmd[10240];
+  gchar *dir;
 
 /*  if (current_theme == current_global_theme)
     return;*/
@@ -409,7 +409,7 @@ static void
 click_revert(GtkWidget *widget, gpointer data)
 {
   gchar *rc;
-  gchar *dir, cmd[10240];
+  gchar *dir;
 
   widget = initial_theme;
   if (!widget)
@@ -460,9 +460,7 @@ click_revert(GtkWidget *widget, gpointer data)
 static void
 click_entry(GtkWidget *widget, gpointer data)
 {
-  gchar *rc, *name, *new_readme, buf[1024];
-  FILE *f;
-  
+  gchar *rc, *name;
   
   name = (gchar *)gtk_object_get_data(GTK_OBJECT(widget), "name");
   rc = (gchar *)gtk_object_get_data(GTK_OBJECT(widget), "rc");

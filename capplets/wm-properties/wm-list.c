@@ -18,10 +18,10 @@ GList *window_managers = NULL;
 static GList *window_managers_save = NULL;
 
 /* Current window manager */
-static WindowManager *current_wm;
+static WindowManager *current_wm = NULL;
 
 /* Window manager on startup */
-static WindowManager *current_wm_save;
+static WindowManager *current_wm_save = NULL;
 
 gboolean
 is_blank (gchar *str)
@@ -270,10 +270,8 @@ wm_list_init (void)
         if (!current_wm && window_managers) 
                 current_wm = window_managers->data;
 
-        if (!current_wm)
-                g_error ("No window manager desktops found!");
-
-        current_wm_save = wm_list_find (window_managers_save, current_wm->dentry->name);
+        if(current_wm)
+                current_wm_save = wm_list_find (window_managers_save, current_wm->dentry->name);
 }
 
 void
@@ -282,7 +280,6 @@ wm_list_save (void)
         GList *old_files;
         GList *tmp_list;
         gchar *tempdir;
-        gchar *filename;
         gchar *prefix;
         WindowManager *wm;
 
@@ -332,9 +329,9 @@ wm_list_save (void)
 
         /* Save the current window manager
          */
-        
-        gnome_config_set_string ("wm-properties/Config/Config/Current",
-                                 current_wm->dentry->name);
+        if(current_wm)
+                gnome_config_set_string ("wm-properties/Config/Config/Current",
+                                         current_wm->dentry->name);
         gnome_config_sync ();
 }
 
@@ -342,7 +339,10 @@ void
 wm_list_revert (void)
 {
         GList *tmp_list;
-        gchar *old_name = g_strdup (current_wm->dentry->name);
+        gchar *old_name = NULL;
+
+        if(current_wm)
+                old_name = g_strdup (current_wm->dentry->name);
         
         g_list_foreach (window_managers, (GFunc)wm_free, NULL);
         g_list_free (window_managers);
@@ -399,6 +399,9 @@ wm_list_get_current (void)
 WindowManager *
 wm_list_get_revert (void)
 {
-        return wm_list_find (window_managers, current_wm_save->dentry->name);
+        if(current_wm_save)
+                return wm_list_find (window_managers, current_wm_save->dentry->name);
+        else
+                return NULL;
 }
 

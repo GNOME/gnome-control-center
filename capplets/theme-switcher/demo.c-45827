@@ -45,7 +45,7 @@ demo_main(int argc, char **argv, gint in_fd)
   gchar buf[256];
   Window window;
   GtkWidget *widget, *table, *hbox;
-  GtkWidget *scrolled_window;
+  GtkWidget *scrolled_window, *menubar, *menu;
   GSList *group;
   gchar *titles[2] = {N_("One"),N_("Two")};
   /* just 8 short names that will serve as samples for titles in demo */	
@@ -108,54 +108,71 @@ demo_main(int argc, char **argv, gint in_fd)
   
   plug = gtk_plug_new(window);
 
-  table = gtk_table_new (4, 3, FALSE);
+  table = gtk_table_new (5, 3, FALSE);
   gtk_container_add(GTK_CONTAINER(plug), table);
   
   widget = gtk_label_new (_("Selected themes from above will be tested by previewing here."));
   gtk_label_set_justify (GTK_LABEL (widget), GTK_JUSTIFY_LEFT);
+  gtk_table_attach (GTK_TABLE (table), widget, 0, 3, 0, 1, 0, 0, GNOME_PAD_SMALL, GNOME_PAD_SMALL);
+
+  menubar = gtk_menu_bar_new();
+  gtk_table_attach (GTK_TABLE (table), menubar, 0, 3, 1, 2, 0, 0, GNOME_PAD_SMALL, GNOME_PAD_SMALL);
+
+  widget = gtk_menu_item_new_with_label(_("Submenu"));
+  gtk_widget_show(widget);
+  gtk_menu_bar_append(GTK_MENU_BAR(menubar), widget);
+  gtk_widget_show(menubar);
+
+  menu = gtk_menu_new();
+  gtk_menu_item_set_submenu(GTK_MENU_ITEM(widget), menu);
+  widget = gtk_menu_item_new_with_label(_("Item 1"));
+  gtk_widget_show(widget);
+  gtk_menu_append(GTK_MENU(menu), widget);
+  widget = gtk_menu_item_new_with_label(_("Another item"));
+  gtk_widget_show(widget);
+  gtk_menu_append(GTK_MENU(menu), widget);
 
   /* column one */
-  gtk_table_attach (GTK_TABLE (table), widget, 0, 3, 0, 1, 0, 0, GNOME_PAD_SMALL, GNOME_PAD_SMALL);
   widget = gtk_button_new_with_label (_("Sample Button"));
   hbox = gtk_hbox_new (FALSE, 0);
   gtk_box_pack_start (GTK_BOX (hbox), widget, FALSE, FALSE, 0);
-  gtk_table_attach (GTK_TABLE (table), hbox, 0, 1, 1, 2, GTK_EXPAND | GTK_FILL, 0, GNOME_PAD_SMALL, GNOME_PAD_SMALL);
+  gtk_table_attach (GTK_TABLE (table), hbox, 0, 1, 2, 3, GTK_EXPAND | GTK_FILL, 0, GNOME_PAD_SMALL, GNOME_PAD_SMALL);
   widget = gtk_check_button_new_with_label (_("Sample Check Button"));
   hbox = gtk_hbox_new (FALSE, 0);
   gtk_box_pack_start (GTK_BOX (hbox), widget, FALSE, FALSE, 0);
-  gtk_table_attach (GTK_TABLE (table), hbox, 0, 1, 2, 3, GTK_EXPAND | GTK_FILL, 0, GNOME_PAD_SMALL, 0);
+  gtk_table_attach (GTK_TABLE (table), hbox, 0, 1, 3, 4, GTK_EXPAND | GTK_FILL, 0, GNOME_PAD_SMALL, 0);
   widget = gtk_entry_new_with_max_length (50);
   gtk_entry_set_text (GTK_ENTRY (widget), _("Sample Text Entry Field"));
   gtk_widget_set_usize (widget, 70, -1);
   hbox = gtk_hbox_new (FALSE, 0);
   gtk_box_pack_start (GTK_BOX (hbox), widget, TRUE, TRUE, 0);
-  gtk_table_attach (GTK_TABLE (table), hbox, 0, 1, 3, 4, GTK_EXPAND | GTK_FILL, 0, GNOME_PAD_SMALL, GNOME_PAD_SMALL);
+  gtk_table_attach (GTK_TABLE (table), hbox, 0, 1, 4, 5, GTK_EXPAND | GTK_FILL, 0, GNOME_PAD_SMALL, GNOME_PAD_SMALL);
 
   /* column two */
   widget = gtk_radio_button_new_with_label (NULL, _("Radio Button 1"));
   hbox = gtk_hbox_new (FALSE, 0);
   gtk_box_pack_start (GTK_BOX (hbox), widget, FALSE, FALSE, 0);
   group = gtk_radio_button_group (GTK_RADIO_BUTTON (widget));
-  gtk_table_attach (GTK_TABLE (table), hbox, 1, 2, 1, 2, GTK_EXPAND | GTK_FILL, 0, 0, GNOME_PAD_SMALL);
+  gtk_table_attach (GTK_TABLE (table), hbox, 1, 2, 2, 3, GTK_EXPAND | GTK_FILL, 0, 0, GNOME_PAD_SMALL);
 
   widget = gtk_radio_button_new_with_label (group, _("Radio Button 2"));
   hbox = gtk_hbox_new (FALSE, 0);
   gtk_box_pack_start (GTK_BOX (hbox), widget, FALSE, FALSE, 0);
   group = gtk_radio_button_group (GTK_RADIO_BUTTON (widget));
-  gtk_table_attach (GTK_TABLE (table), hbox, 1, 2, 2, 3, GTK_EXPAND | GTK_FILL, 0, 0, 0);
+  gtk_table_attach (GTK_TABLE (table), hbox, 1, 2, 3, 4, GTK_EXPAND | GTK_FILL, 0, 0, 0);
 
   widget = gtk_radio_button_new_with_label (group, _("Radio Button 3"));
   hbox = gtk_hbox_new (FALSE, 0);
   gtk_box_pack_start (GTK_BOX (hbox), widget, FALSE, FALSE, 0);
   group = gtk_radio_button_group (GTK_RADIO_BUTTON (widget));
-  gtk_table_attach (GTK_TABLE (table), hbox, 1, 2, 3, 4, GTK_EXPAND | GTK_FILL, 0, 0, 0);
+  gtk_table_attach (GTK_TABLE (table), hbox, 1, 2, 4, 5, GTK_EXPAND | GTK_FILL, 0, 0, 0);
 
   /* column three */
   scrolled_window = gtk_scrolled_window_new (NULL, NULL);
   gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW (scrolled_window), 
 				 GTK_POLICY_AUTOMATIC, GTK_POLICY_ALWAYS);
 
-  gtk_table_attach (GTK_TABLE (table), scrolled_window, 2, 3, 1, 4, GTK_EXPAND | GTK_FILL, 0, GNOME_PAD_SMALL, 0);
+  gtk_table_attach (GTK_TABLE (table), scrolled_window, 2, 3, 2, 5, GTK_EXPAND | GTK_FILL, 0, GNOME_PAD_SMALL, 0);
 
   widget = gtk_clist_new_with_titles (2, titles);
   gtk_clist_set_column_width (GTK_CLIST(widget), 0, 45);
