@@ -83,6 +83,11 @@ GObject *gconf_peditor_new_enum_toggle  (GConfChangeSet 	 *changeset,
 					 gchar 			 *first_property_name,
 					 ...);
 
+GObject *gconf_peditor_new_integer      (GConfChangeSet          *changeset,
+					 gchar                   *key,
+					 GtkWidget               *entry,
+					 gchar                   *first_property_name,
+					 ...);
 GObject *gconf_peditor_new_string       (GConfChangeSet          *changeset,
 					 gchar                   *key,
 					 GtkWidget               *entry,

@@ -464,6 +464,102 @@ gconf_peditor_new_boolean (GConfChangeSet *changeset,
 }
 
 static void
+peditor_integer_value_changed (GConfClient         *client,
+			       guint                cnxn_id,
+			       GConfEntry          *entry,
+			       GConfPropertyEditor *peditor) 
+{
+	GConfValue *value, *value_wid;
+	const char *entry_current_text;
+	int         entry_current_integer;
+
+	if (peditor->p->changeset != NULL)
+		gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
+
+	value = gconf_entry_get_value (entry);
+
+	if (value != NULL) {
+		value_wid = peditor->p->conv_to_widget_cb (peditor, value);
+		entry_current_text = gtk_entry_get_text (GTK_ENTRY (peditor->p->ui_control));
+		entry_current_integer = strtol (entry_current_text, NULL, 10);
+		if (entry_current_integer != gconf_value_get_int (value)) {
+			char *buf = g_strdup_printf ("%d", gconf_value_get_int (value_wid));
+			gtk_entry_set_text (GTK_ENTRY (peditor->p->ui_control), buf);
+			g_free (buf);
+		}
+		gconf_value_free (value_wid);
+	}
+}
+
+static void
+peditor_integer_widget_changed (GConfPropertyEditor *peditor,
+				GtkEntry            *entry)
+{
+	GConfValue *value, *value_wid;
+	  
+	if (!peditor->p->inited) return;
+
+	value_wid = gconf_value_new (GCONF_VALUE_INT);
+
+	gconf_value_set_int (value_wid, strtol (gtk_entry_get_text (entry), NULL, 10));
+	value = peditor->p->conv_from_widget_cb (peditor, value_wid);
+
+	peditor_set_gconf_value (peditor, peditor->p->key, value);
+
+	g_signal_emit (peditor, peditor_signals[VALUE_CHANGED], 0, peditor->p->key, value);
+	gconf_value_free (value_wid);
+	gconf_value_free (value);
+}
+
+static GObject *
+gconf_peditor_new_integer_valist (GConfChangeSet *changeset,
+				  gchar          *key,
+				  GtkWidget      *entry,
+				  gchar          *first_property_name,
+				  va_list         var_args)
+{
+	GObject *peditor;
+
+	peditor = gconf_peditor_new
+		(key,
+		 (GConfClientNotifyFunc) peditor_integer_value_changed,
+		 changeset,
+		 G_OBJECT (entry),
+		 first_property_name,
+		 var_args, NULL);
+
+	g_signal_connect_swapped (G_OBJECT (entry), "changed",
+				  (GCallback) peditor_integer_widget_changed, peditor);
+
+	return peditor;
+}
+
+GObject *
+gconf_peditor_new_integer (GConfChangeSet *changeset,
+			   gchar          *key,
+			   GtkWidget      *entry,
+			   gchar          *first_property_name,
+			   ...)
+{
+	GObject *peditor;
+	va_list var_args;
+
+	g_return_val_if_fail (key != NULL, NULL);
+	g_return_val_if_fail (entry != NULL, NULL);
+	g_return_val_if_fail (GTK_IS_ENTRY (entry), NULL);
+
+	va_start (var_args, first_property_name);
+
+	peditor = gconf_peditor_new_integer_valist
+		(changeset, key, entry,
+		 first_property_name, var_args);
+
+	va_end (var_args);
+
+	return peditor;
+}
+
+static void
 peditor_string_value_changed (GConfClient         *client,
 			      guint                cnxn_id,
 			      GConfEntry          *entry,
