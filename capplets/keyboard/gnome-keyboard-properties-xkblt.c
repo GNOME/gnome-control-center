@@ -168,7 +168,7 @@ prepare_selected_layouts_tree (GladeXML * dialog)
   g_signal_connect_swapped (G_OBJECT (selection), "changed",
 			    G_CALLBACK
 			    (enable_disable_layouts_buttons), dialog);
-  maxSelectedLayouts = XklMultipleLayoutsSupported ()? XkbNumKbdGroups : 1;
+  maxSelectedLayouts = ( XklGetBackendFeatures() & XKLF_MULTIPLE_LAYOUTS_SUPPORTED ) ? XkbNumKbdGroups : 1;
 }
 
 void
