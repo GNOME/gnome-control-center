@@ -104,11 +104,19 @@ static int get_node_id(unsigned char *node_id)
 #else
 #define ifreq_size(i) sizeof(struct ifreq)
 #endif /* HAVE_SA_LEN*/
+#ifdef AF_INET6
+	sd = socket(AF_INET6, SOCK_DGRAM, IPPROTO_IP);
 
-	sd = socket(AF_INET, SOCK_DGRAM, IPPROTO_IP);
-	if (sd < 0) {
-		return -1;
+	/* If IPv6 fails then try with IPv4 socket. */
+	if (sd < 0)
+#endif
+	{
+		sd = socket(AF_INET, SOCK_DGRAM, IPPROTO_IP);
+		if (sd < 0) {
+			return -1;
+		}
 	}
+
 	memset(buf, 0, sizeof(buf));
 	ifc.ifc_len = sizeof(buf);
 	ifc.ifc_buf = buf;

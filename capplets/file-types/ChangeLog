@@ -1,3 +1,9 @@
+2003-06-10  Shailesh Mittal  <shailesh.mittal@wipro.com>
+
+	* libuuid/gen_uuid.c (get_node_id): Creating an IPv6 socket if AF_INET6
+	is defined on the system. If IPv6 socket cannot be created, then we are
+	falling back to IPv4 socket creation, as was done previously.
+
 2004-04-15  Jody Goldberg <jody@gnome.org>
 
 	* Release 2.6.1
