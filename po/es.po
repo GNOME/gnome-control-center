@@ -1,4 +1,4 @@
-# translation of es.po to 
+# translation of es.po to
 # translation of es.po to
 # translation of es.po to
 # traducción de es.po al Spanish
@@ -18,14 +18,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-28 16:12+0100\n"
-"PO-Revision-Date: 2004-11-28 16:17+0100\n"
-"Last-Translator: \n"
-"Language-Team:  <es@li.org>\n"
+"POT-Creation-Date: 2004-12-18 13:54+0100\n"
+"PO-Revision-Date: 2004-12-18 14:01+0100\n"
+"Last-Translator: Francisco Javier F. Serrador <serrador@cvs.gnome.org>\n"
+"Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.3.1\n"
+"X-Generator: KBabel 1.9.1\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
@@ -433,6 +433,13 @@ msgstr "Añadir tapiz"
 msgid "No Wallpaper"
 msgstr "Sin tapiz"
 
+#: capplets/background/gnome-wp-item.c:287
+#: capplets/background/gnome-wp-item.c:289
+msgid "pixel"
+msgid_plural "pixels"
+msgstr[0] "píxel"
+msgstr[1] "píxeles"
+
 #: capplets/common/activate-settings-daemon.c:18
 msgid ""
 "Unable to start the settings manager 'gnome-settings-daemon'.\n"
@@ -794,8 +801,8 @@ msgid "Encompass"
 msgstr "Encompass"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:13
-msgid "Firebird/FireFox"
-msgstr "Firebird/FireFox"
+msgid "Firebird"
+msgstr "Firebird"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:14
 msgid "Firefox"
@@ -803,8 +810,8 @@ msgstr "Firefox"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:15
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:16
-msgid "Mozilla/Netscape 6"
-msgstr "Mozilla/Netscape 6"
+msgid "Mozilla"
+msgstr "Mozilla"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:17
 msgid "Netscape Communicator"
@@ -1934,8 +1941,8 @@ msgid "Network Proxy"
 msgstr "Proxy de la red"
 
 #: capplets/network/gnome-network-preferences.desktop.in.in.h:2
-msgid "Network proxy preferences"
-msgstr "Preferencias del proxy de la red"
+msgid "Set your network proxy preferences"
+msgstr "Establezca sus preferencias del proxy de la red"
 
 #: capplets/network/gnome-network-preferences.glade.h:1
 msgid "      "
@@ -1978,8 +1985,8 @@ msgid "H_TTP proxy:"
 msgstr "Proxy para H_TTP:"
 
 #: capplets/network/gnome-network-preferences.glade.h:12
-msgid "Network Proxy Configuration"
-msgstr "Configuración del proxy de la red"
+msgid "Network Proxy Preferences"
+msgstr "Preferencias del proxy de la red"
 
 #: capplets/network/gnome-network-preferences.glade.h:13
 msgid "Port:"
@@ -2429,8 +2436,8 @@ msgid "_Select windows when the mouse moves over them"
 msgstr "_Seleccionar las ventanas cuando el ratón se mueve sobre ellas"
 
 #: capplets/windows/window-properties.desktop.in.in.h:1
-msgid "Window Properties"
-msgstr "Propiedades de ventana"
+msgid "Set your window properties"
+msgstr "Establezca sus propiedades de ventana"
 
 #: capplets/windows/window-properties.desktop.in.in.h:2
 msgid "Windows"
@@ -3062,29 +3069,69 @@ msgstr ""
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:1
 msgid ""
-"Very soon, XKB settings in gconf will be overridden (from the system "
-"configuration)"
-msgstr ""
-"Pronto, la configuración XKB en gconf será ignorada (de la configuración del "
-"sistema)"
+"A collection of scripts to run whenever the keyboard state is reloaded. "
+"Useful for re-applying xmodmap based adjustments"
+msgstr "Una colección de scripts para ejecutar cuando el estado del teclado se recarga. Útil para re-aplicar ajustes basados en xmodmap"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
-msgid "XKB keyboard layout"
-msgstr "Distribución de teclado XKB"
+msgid "Default group, assigned on window creation"
+msgstr "Grupo predeterminado, asignado durante la creación de la ventana"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
-msgid "XKB keyboard model"
-msgstr "Modelo de teclado XKB"
+msgid "Keep and manage separate group per window"
+msgstr "Conservar y gestionar grupos separados por ventana"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
-msgid "XKB options"
-msgstr "Opciones de XKB"
+msgid "Keyboard Update Handlers"
+msgstr "Manipuladores de actualización del teclado"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
-msgid "XKB settings in gconf will be overridden from the system ASAP"
+msgid "Keyboard layout"
+msgstr "Distribución del teclado"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:6
+msgid "Keyboard model"
+msgstr "Modelo del teclado"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:7
+msgid "Keyboard options"
+msgstr "Opciones del teclado"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:8
+msgid "Keyboard settings in gconf will be overridden from the system ASAP"
 msgstr ""
-"La configuración XKB en gconf será ignorada del sistema tan pronto como sea "
+"Los ajustes del teclado en gconf será ignorados por sistema tan pronto como sea "
 "posible"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
+msgid "Save/restore indicators together with layout groups"
+msgstr "Guardar/restablecer indicadores junto con los grupos de distribución"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
+msgid "Show layout names instead of group names"
+msgstr "Mostrar los nombres de la distribución en vez de los nombres de grupo"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:11
+msgid ""
+"Show layout names instead of group names (only for versions of XFree "
+"supporting multiple layouts)"
+msgstr "Mostrar los nombres de la distribución en vez de los nombres de grupo (sólo para versiones de XFree que tengan soporta para distribuciones de teclado múltiples)"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:12
+msgid ""
+"Very soon, keyboard settings in gconf will be overridden (from the system "
+"configuration)"
+msgstr ""
+"Pronto, los ajustes de teclados en gconf serán ignorados (de la configuración del "
+"sistema)"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:13
+msgid "keyboard layout"
+msgstr "Distribución de teclado"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
+msgid "keyboard model"
+msgstr "Modelo de teclado"
 
 #: typing-break/drw-break-window.c:209
 msgid "_Postpone break"
@@ -3249,41 +3296,41 @@ msgstr "Indica si debe miniaturizar las tipografías TrueType"
 msgid "Whether to thumbnail Type1 fonts"
 msgstr "Indica si debe miniaturizar las tipografías Type1"
 
-#: vfs-methods/fontilus/font-view.c:126
+#: vfs-methods/fontilus/font-view.c:125
 msgid "The quick brown fox jumps over the lazy dog. 0123456789"
 msgstr ""
 "El veloz murciélago hindú comía feliz cardillo y kiwi. La cigüeña tocaba el "
 "saxofón detrás del palenque de paja. 0123456789"
 
-#: vfs-methods/fontilus/font-view.c:286
+#: vfs-methods/fontilus/font-view.c:285
 msgid "Name:"
 msgstr "Nombre:"
 
-#: vfs-methods/fontilus/font-view.c:289
+#: vfs-methods/fontilus/font-view.c:288
 msgid "Style:"
 msgstr "Estilo:"
 
-#: vfs-methods/fontilus/font-view.c:298
+#: vfs-methods/fontilus/font-view.c:297
 msgid "Type:"
 msgstr "Tipo:"
 
-#: vfs-methods/fontilus/font-view.c:305
+#: vfs-methods/fontilus/font-view.c:304
 msgid "Size:"
 msgstr "Tamaño:"
 
-#: vfs-methods/fontilus/font-view.c:349 vfs-methods/fontilus/font-view.c:362
+#: vfs-methods/fontilus/font-view.c:348 vfs-methods/fontilus/font-view.c:361
 msgid "Version:"
 msgstr "Versión:"
 
-#: vfs-methods/fontilus/font-view.c:353 vfs-methods/fontilus/font-view.c:364
+#: vfs-methods/fontilus/font-view.c:352 vfs-methods/fontilus/font-view.c:363
 msgid "Copyright:"
 msgstr "Copyright:"
 
-#: vfs-methods/fontilus/font-view.c:357
+#: vfs-methods/fontilus/font-view.c:356
 msgid "Description:"
 msgstr "Descripción:"
 
-#: vfs-methods/fontilus/font-view.c:418
+#: vfs-methods/fontilus/font-view.c:417
 #, c-format
 msgid "usage: %s fontfile\n"
 msgstr "uso: %s archivo de tipografías\n"
@@ -3353,8 +3400,8 @@ msgstr ""
 #: vfs-methods/themus/themus.schemas.in.h:4
 msgid "Set this key to the command used to create thumbnails for themes."
 msgstr ""
-"Establezca esta clave con el comando utilizado para crear las miniaturas de los "
-"temas."
+"Establezca esta clave con el comando utilizado para crear las miniaturas de "
+"los temas."
 
 #: vfs-methods/themus/themus.schemas.in.h:5
 msgid "Thumbnail command for installed themes"
@@ -3384,4 +3431,13 @@ msgstr "Aplicar tema"
 #: vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
 msgid "Sets the default theme"
 msgstr "Establece el tema predeterminado"
+
+#~ msgid "Mozilla/Netscape 6"
+#~ msgstr "Mozilla/Netscape 6"
+
+#~ msgid "Network Proxy Configuration"
+#~ msgstr "Configuración del proxy de la red"
+
+#~ msgid "XKB options"
+#~ msgstr "Opciones de XKB"
 
