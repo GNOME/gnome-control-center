@@ -30,6 +30,11 @@
 #include "capplet-util.h"
 #include "gconf-property-editor.h"
 
+enum
+{
+	RESPONSE_APPLY = 1,
+	RESPONSE_CLOSE
+};
 
 static GConfEnumStringPair toolbar_style_enums[] = {
   { 0, "both" },
@@ -70,12 +75,10 @@ dialog_button_clicked_cb (GtkDialog *dialog, gint response_id, GConfChangeSet *c
 {
   switch (response_id)
     {
-    case GTK_RESPONSE_APPLY:
+    case RESPONSE_APPLY:
       gconf_client_commit_change_set (gconf_client_get_default (), changeset, TRUE, NULL);
       break;
-    case GTK_RESPONSE_HELP:
-      break;
-    case GTK_RESPONSE_CLOSE:
+    case RESPONSE_CLOSE:
     case GTK_RESPONSE_DELETE_EVENT:
     default:
       gtk_main_quit ();
