@@ -272,6 +272,7 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
   g_free (toolbar_style);
 
   gtk_window_set_resizable (GTK_WINDOW (widget), FALSE);
+  capplet_set_icon (widget, "behavior-capplet.png");
   gtk_widget_show_all (widget);
 }
 
@@ -296,7 +297,6 @@ main (int argc, char **argv)
 
   dialog = create_dialog ();
   setup_dialog (dialog, changeset);
-
   gtk_main ();
 
   return 0;

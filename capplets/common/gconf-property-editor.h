@@ -155,8 +155,9 @@ GObject *gconf_peditor_new_image	 (GConfChangeSet	  *changeset,
 void gconf_peditor_widget_set_guard     (GConfPropertyEditor     *peditor,
 					 GtkWidget               *widget);
 
-GConfValue *gconf_value_int_to_float    (const GConfValue        *value);
-GConfValue *gconf_value_float_to_int    (const GConfValue        *value);
+/* some convenience callbacks to map int <-> float */
+GConfValue *gconf_value_int_to_float    (GConfPropertyEditor *ignored, GConfValue const *value);
+GConfValue *gconf_value_float_to_int    (GConfPropertyEditor *ignored, GConfValue const *value);
 
 G_END_DECLS
 

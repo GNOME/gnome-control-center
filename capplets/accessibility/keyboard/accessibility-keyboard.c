@@ -170,17 +170,6 @@ setup_simple_toggles (GladeXML *dialog, GConfChangeSet *changeset)
 	}
 }
 
-static GConfValue*
-cb_to_widget (GConfPropertyEditor *peditor, const GConfValue *value)
-{
-	return gconf_value_int_to_float (value);
-}
-static GConfValue*
-cb_from_widget (GConfPropertyEditor *peditor, const GConfValue *value)
-{
-	return gconf_value_float_to_int (value);
-}
-
 static void
 setup_ranges (GladeXML *dialog, GConfChangeSet *changeset)
 {
@@ -211,8 +200,8 @@ setup_ranges (GladeXML *dialog, GConfChangeSet *changeset)
 			ranges [i].step_size, 0);
 		peditor = gconf_peditor_new_numeric_range (changeset,
 			(gchar *)ranges [i].gconf_key, slide,
-			 "conv-to-widget-cb",	cb_to_widget,
-			 "conv-from-widget-cb", cb_from_widget,
+			 "conv-to-widget-cb",   gconf_value_int_to_float,
+			 "conv-from-widget-cb", gconf_value_float_to_int,
 			 NULL);
 	}
 }

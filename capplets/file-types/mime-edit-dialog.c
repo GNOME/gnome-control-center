@@ -199,7 +199,7 @@ mime_edit_dialog_init (MimeEditDialog *dialog, MimeEditDialogClass *class)
 
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog->p->dialog_win)->vbox), WID ("edit_widget"), TRUE, TRUE, 0);
 
-	g_signal_connect_swapped (G_OBJECT (WID ("add_ext_button")), "clicked", (GCallback) add_ext_cb, dialog);
+	g_signal_connect_swapped (G_OBJECT (WID ("new_ext_entry")), "activate", (GCallback) add_ext_cb, dialog);
 	g_signal_connect_swapped (G_OBJECT (WID ("remove_ext_button")), "clicked", (GCallback) remove_ext_cb, dialog);
 	g_signal_connect_swapped (G_OBJECT (WID ("choose_button")), "clicked", (GCallback) choose_cat_cb, dialog);
 	g_signal_connect_swapped (G_OBJECT (WID ("default_action_select")), "changed", (GCallback) default_action_changed_cb, dialog);

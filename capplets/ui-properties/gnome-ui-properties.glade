@@ -4,7 +4,7 @@
 <glade-interface>
 
 <widget class="GtkDialog" id="gnome_ui_properties_dialog">
-  <property name="title" translatable="yes">Toolbar and Menu Preferences</property>
+  <property name="title" translatable="yes">Menu and Toolbar Preferences</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_NONE</property>
   <property name="modal">False</property>
@@ -43,7 +43,9 @@
 	    <widget class="GtkButton" id="closebutton1">
 	      <property name="visible">True</property>
 	      <property name="can_default">True</property>
+	      <property name="has_default">True</property>
 	      <property name="can_focus">True</property>
+	      <property name="has_focus">True</property>
 	      <property name="label">gtk-close</property>
 	      <property name="use_stock">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
@@ -89,7 +91,7 @@
 		      <child>
 			<widget class="GtkLabel" id="label5">
 			  <property name="visible">True</property>
-			  <property name="label" translatable="yes">_Toolbars have: </property>
+			  <property name="label" translatable="yes">_Button Labels: </property>
 			  <property name="use_underline">True</property>
 			  <property name="use_markup">False</property>
 			  <property name="justify">GTK_JUSTIFY_CENTER</property>
@@ -250,7 +252,7 @@
 		      <child>
 			<widget class="GtkLabel" id="label6">
 			  <property name="visible">True</property>
-			  <property name="label" translatable="yes">Sample Toolbar</property>
+			  <property name="label" translatable="yes">Sample toolbar:</property>
 			  <property name="use_underline">False</property>
 			  <property name="use_markup">False</property>
 			  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -269,7 +271,7 @@
 		    <packing>
 		      <property name="padding">0</property>
 		      <property name="expand">False</property>
-		      <property name="fill">False</property>
+		      <property name="fill">True</property>
 		    </packing>
 		  </child>
 		</widget>
@@ -319,7 +321,7 @@
 		    <widget class="GtkCheckButton" id="menu_icons_toggle">
 		      <property name="visible">True</property>
 		      <property name="can_focus">True</property>
-		      <property name="label" translatable="yes">Menu items can have _icons</property>
+		      <property name="label" translatable="yes">_Show icons in menus</property>
 		      <property name="use_underline">True</property>
 		      <property name="relief">GTK_RELIEF_NORMAL</property>
 		      <property name="active">True</property>
@@ -492,7 +494,7 @@
 		      <child>
 			<widget class="GtkLabel" id="label8">
 			  <property name="visible">True</property>
-			  <property name="label" translatable="yes">Sample Menubar</property>
+			  <property name="label" translatable="yes">Sample menubar:</property>
 			  <property name="use_underline">False</property>
 			  <property name="use_markup">False</property>
 			  <property name="justify">GTK_JUSTIFY_LEFT</property>
