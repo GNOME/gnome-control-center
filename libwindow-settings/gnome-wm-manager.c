@@ -46,10 +46,10 @@ typedef struct {
         char *config_exec;
         char *config_tryexec;
         char *module;
-        gboolean session_managed : 1;
-        gboolean is_user : 1;
-        gboolean is_present : 1;
-        gboolean is_config_present : 1;
+        guint session_managed : 1;
+        guint is_user : 1;
+        guint is_present : 1;
+        guint is_config_present : 1;
         GnomeWindowManager *gnome_wm;
 } AvailableWindowManager;
 
