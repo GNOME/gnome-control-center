@@ -455,6 +455,8 @@ safe_set_entry (MimeEditDialog *dialog, char const *widget, char const *txt)
 static void
 fill_dialog (MimeEditDialog *dialog)
 {
+	gchar *category_name;
+	
 	g_return_if_fail (dialog->p->info != NULL);
 
 	mime_type_info_load_all (dialog->p->info);
@@ -463,9 +465,10 @@ fill_dialog (MimeEditDialog *dialog)
 		dialog->p->info->description);
 	safe_set_entry (dialog, "mime_type_entry",
 		dialog->p->info->mime_type);
-	safe_set_entry (dialog, "category_entry",
-		mime_type_info_get_category_name (dialog->p->info));
-
+	category_name = mime_type_info_get_category_name (dialog->p->info);
+	safe_set_entry (dialog, "category_entry", category_name);
+	g_free (category_name);
+	
 	update_sensitivity (dialog);
 
 	gnome_icon_entry_set_filename (GNOME_ICON_ENTRY (WID ("icon_entry")), mime_type_info_get_icon_path (dialog->p->info));

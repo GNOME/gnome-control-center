@@ -185,16 +185,25 @@ initialize_default_applications (void)
 	text_editors = gnome_vfs_mime_get_all_applications ("text/plain");
 
         for (i = 0; i < G_N_ELEMENTS (possible_browsers); i++ ) {
-                if (g_find_program_in_path (possible_browsers[i].executable_name))
+		gchar *browsers = g_find_program_in_path (possible_browsers[i].executable_name);
+                if (browsers) {
 			possible_browsers[i].in_path = TRUE;
+			g_free(browsers);
+		}
         }
         for (i = 0; i < G_N_ELEMENTS (possible_help_viewers); i++ ) {
-                if (g_find_program_in_path (possible_help_viewers[i].executable_name))
+                gchar *help_viewers = g_find_program_in_path (possible_help_viewers[i].executable_name);
+		if (help_viewers) {
 			possible_help_viewers[i].in_path = TRUE;
+			g_free (help_viewers);
+		}
         }
         for (i = 0; i < G_N_ELEMENTS (possible_terminals); i++ ) {
-                if (g_find_program_in_path (possible_terminals[i].exec))
+                gchar *terminals = g_find_program_in_path (possible_terminals[i].exec);
+		if (terminals) {
 			possible_terminals[i].in_path = TRUE;
+			g_free (terminals);
+		}
         }
 }
 
@@ -230,6 +239,7 @@ read_editor (GConfClient *client,
 			gtk_entry_set_text (GTK_ENTRY (WID ("text_select_combo_entry")), mime_app->name);
 			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("text_custom_radio")), TRUE);
 			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("text_select_radio")), TRUE);
+			gnome_vfs_mime_application_free (mime_app);
 			return;
 		}
         }
@@ -252,6 +262,8 @@ read_editor (GConfClient *client,
  read_editor_custom:
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("text_select_radio")), TRUE);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("text_custom_radio")), TRUE);
+	if (mime_app)
+		gnome_vfs_mime_application_free (mime_app);
 }
 
 static void
@@ -495,6 +507,8 @@ read_terminal (GConfClient *client,
 					    _(possible_terminals[i].name));
 			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("terminal_custom_radio")), TRUE);
 			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("terminal_select_radio")), TRUE);
+			g_free (exec);
+			g_free (exec_arg);
 			return;
 		}
         }

@@ -306,13 +306,17 @@ font_render_get_gconf (Antialiasing *antialiasing,
 	int val;
 
 	val = ANTIALIAS_GRAYSCALE;
-	if (antialias_str)
+	if (antialias_str) {
 		gconf_string_to_enum (antialias_enums, antialias_str, &val);
+		g_free (antialias_str);
+	}
 	*antialiasing = val;
 
 	val = HINT_FULL;
-	if (hint_str)
+	if (hint_str) {
 		gconf_string_to_enum (hint_enums, hint_str, &val);
+		g_free (hint_str);
+	}
 	*hinting = val;
 
 	g_object_unref (client);
@@ -531,6 +535,8 @@ enum_group_load (EnumGroup *group)
 	if (str)
 		gconf_string_to_enum (group->enums, str, &val);
 
+	g_free (str);
+	
 	in_change = TRUE;
 	
 	for (tmp_list = group->items; tmp_list; tmp_list = tmp_list->next) {

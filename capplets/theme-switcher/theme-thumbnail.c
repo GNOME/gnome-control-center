@@ -496,7 +496,8 @@ generate_theme_thumbnail (GnomeThemeMetaInfo *meta_theme_info,
     }
 
   retval = gdk_pixbuf_scale_simple (pixbuf, ICON_SIZE_WIDTH/2, ICON_SIZE_HEIGHT/2, GDK_INTERP_BILINEAR);
-
+  g_object_unref (pixbuf);
+  
   g_hash_table_insert (theme_hash, meta_theme_info->name, retval);
   return retval;
 }

@@ -69,6 +69,7 @@ load_all_mime_types (GtkTreeModel *model)
 	for (tmp = list; tmp != NULL; tmp = tmp->next)
 		mime_type_info_new (tmp->data, model);
 
+	g_list_free (tmp);
 	g_list_free (list);
 }
 

@@ -373,7 +373,8 @@ gconf_peditor_new (gchar                 *key,
 	gconf_entry = gconf_client_get_entry (client, GCONF_PROPERTY_EDITOR (obj)->p->key, NULL, TRUE, NULL);
 	GCONF_PROPERTY_EDITOR (obj)->p->callback (client, 0, gconf_entry, obj);
 	GCONF_PROPERTY_EDITOR (obj)->p->inited = TRUE;
-
+	gconf_entry_free (gconf_entry);
+	
 	return obj;
 }
 
