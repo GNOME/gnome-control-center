@@ -105,7 +105,7 @@ start_esd (void)
  */
 
 static GtkWidget *
-create_dialog (void) 
+create_dialog (Bonobo_PropertyBag bag) 
 {
 	GladeXML *data;
 	GtkWidget *widget;
