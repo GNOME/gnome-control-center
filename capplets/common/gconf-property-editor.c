@@ -326,9 +326,17 @@ gconf_property_editor_finalize (GObject *object)
 	g_return_if_fail (IS_GCONF_PROPERTY_EDITOR (object));
 
 	gconf_property_editor = GCONF_PROPERTY_EDITOR (object);
-
+	
 	if (gconf_property_editor->p->data_free_cb)
 		gconf_property_editor->p->data_free_cb (gconf_property_editor->p->data);
+
+	if (gconf_property_editor->p->handler_id != 0) {
+		GConfClient *client;
+
+		client = gconf_client_get_default ();		
+		gconf_client_notify_remove (client,
+					    gconf_property_editor->p->handler_id);
+	}
 	
 	g_free (gconf_property_editor->p);
 
