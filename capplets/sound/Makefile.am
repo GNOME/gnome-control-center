@@ -46,8 +46,8 @@ $(desktop).in: %.desktop.in: %.desktop.in.in
 	sed -e "s#@DESKTOP_EXEC_LINE@#$(DESKTOP_EXEC_LINE)#" -e "s#Icon=.*#Icon=$(GNOMECC_ICONS_DIR)/${cappletname}-capplet.png#" < $< > ${cappletname}.desktop.in
 
 install-data-local:
-	$(mkinstalldirs) $(datadir)/control-center/capplets/$(cappletgroup)
-	$(INSTALL_DATA) $(desktop) $(datadir)/control-center/capplets/$(cappletgroup)$(desktop)
+	$(mkinstalldirs) $(DESTDIR)$(datadir)/control-center/capplets/$(cappletgroup)
+	$(INSTALL_DATA) $(desktop) $(DESTDIR)$(datadir)/control-center/capplets/$(cappletgroup)$(desktop)
 
 install-data-am: install-data-local
 ####@###GNOMECC_CAPPLETS_DESKTOP_IN_RULE@
