@@ -3,6 +3,8 @@
 	* archive.c (archive_set_current_location_id): Use
 	capplet-archive/config/current/location for current location to
 	avoid conflicting with control-center
+	(archive_get_current_location_id): Always retrieve the location id
+	from gnome_config
 
 	* config-log.c (socket_data_cb): Close the socket if we couldn't
 	load the log entry

@@ -515,7 +515,9 @@ archive_get_current_location_id (Archive *archive)
 	g_return_val_if_fail (archive != NULL, NULL);
 	g_return_val_if_fail (IS_ARCHIVE (archive), NULL);
 
+#if 0
 	if (archive->current_location_id == NULL) {
+#endif
 		if (archive->is_global)
 			archive->current_location_id =
 				gnome_config_get_string_with_default
@@ -540,7 +542,9 @@ archive_get_current_location_id (Archive *archive)
 				return NULL;
 			}
 		}
+#if 0
 	}
+#endif
 
 	return archive->current_location_id;
 }
