@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: control-center 1.0.51\n"
-"POT-Creation-Date: 2001-03-15 14:08-0500\n"
-"PO-Revision-Date: 2001-02-21 12:37+0900\n"
-"Last-Translator: Young-Ho, Cha <ganadist@chollian.net>\n"
+"Project-Id-Version: control-center 1.4.0\n"
+"POT-Creation-Date: 2001-06-04 21:05+0900\n"
+"PO-Revision-Date: 2001-06-04 12:16+0900\n"
+"Last-Translator: Nam SungHyun <namsh@kldp.org>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=euc-kr\n"
@@ -36,7 +36,7 @@ msgstr "배경"
 
 #: capplets/background-properties/background-properties.desktop.in.h:2
 msgid "Configuration of the desktop's background"
-msgstr ""
+msgstr "데스크탑 배경 설정"
 
 #: capplets/background-properties/property-background.c:116
 msgid "Disabled"
@@ -76,11 +76,13 @@ msgstr "벽지 고르기"
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "정상적인 파일선택 대화상자에서, hbox를 찾을 수 없습니다."
 
+#. for ssaver settings, preview
 #: capplets/background-properties/property-background.c:578
-#: capplets/background-properties/property-background.c:1090
+#: capplets/background-properties/property-background.c:1078
 #: capplets/file-types/file-types-icon-entry.c:264
-#: capplets/keyboard-properties/keyboard-properties.c:354
+#: capplets/keyboard-properties/keyboard-properties.c:342
 #: capplets/screensaver-properties/screensaver-dialog.c:25
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:59
 #: capplets/theme-switcher/gui.c:230 capplets/theme-switcher/gui.c:302
 msgid "Preview"
 msgstr "미리보기"
@@ -95,9 +97,9 @@ msgstr " 찾아보기... "
 
 #. Add default action to fourth column
 #: capplets/background-properties/property-background.c:643
-#: capplets/file-types/file-types-capplet.c:1387
-#: capplets/file-types/file-types-capplet.c:1587
-#: capplets/file-types/file-types-capplet.c:1713
+#: capplets/file-types/file-types-capplet.c:1400
+#: capplets/file-types/file-types-capplet.c:1600
+#: capplets/file-types/file-types-capplet.c:1726
 msgid "none"
 msgstr "없음"
 
@@ -121,90 +123,56 @@ msgstr "중앙"
 msgid "Tiled"
 msgstr "타일"
 
-#: capplets/background-properties/property-background.c:831
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:180
-#: capplets/keyboard-properties/keyboard-properties.c:97
-#: capplets/keyboard-properties/keyboard-properties.c:422
-#: capplets/mouse-properties/mouse-properties.c:112
-#: capplets/screensaver-properties/callbacks.c:802
-#: capplets/sound-properties/sound-properties.c:693
-#: capplets/theme-switcher/gui.c:367
-#: capplets/ui-properties/ui-properties.c:516
-#: capplets/url-properties/url-properties.c:272
-#: capplets/wm-properties/wm-properties-capplet.c:649
-msgid ""
-"No help is available/installed for these settings. Please make sure you\n"
-"have the GNOME User's Guide installed on your system."
-msgstr ""
-"현재 상태에서 도움말을 이용할 수 없거나 도움말이 설치되지 않았습니다. 그놈 "
-"사용자 안내서를 시스템에 설치했는지 확인하세요."
-
-#: capplets/background-properties/property-background.c:833
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:182
-#: capplets/keyboard-properties/keyboard-properties.c:99
-#: capplets/keyboard-properties/keyboard-properties.c:424
-#: capplets/mouse-properties/mouse-properties.c:114
-#: capplets/screensaver-properties/callbacks.c:804
-#: capplets/sound-properties/sound-properties.c:695
-#: capplets/sound-properties/sound-properties.c:756
-#: capplets/theme-switcher/gui.c:369
-#: capplets/ui-properties/ui-properties.c:518
-#: capplets/url-properties/url-properties.c:274
-#: capplets/wm-properties/wm-properties-capplet.c:651
-#: control-center/capplet-widget.c:273
-msgid "Close"
-msgstr "닫기"
-
-#: capplets/background-properties/property-background.c:1102
+#: capplets/background-properties/property-background.c:1090
 msgid "Use GNOME to set background"
 msgstr "그놈이 배경설정을 함"
 
-#: capplets/background-properties/property-background.c:1152
+#: capplets/background-properties/property-background.c:1140
 msgid "Set parameters from saved state and exit"
 msgstr "저장된 상태에서 하고 종료"
 
-#: capplets/background-properties/property-background.c:1153
+#: capplets/background-properties/property-background.c:1141
 msgid "IMAGE"
 msgstr "그림"
 
-#: capplets/background-properties/property-background.c:1153
+#: capplets/background-properties/property-background.c:1141
 msgid "Sets the wallpaper to the value specified"
 msgstr "벽지를 지정된 값으로 맞춘다"
 
-#: capplets/background-properties/property-background.c:1154
-#: capplets/background-properties/property-background.c:1155
+#: capplets/background-properties/property-background.c:1142
+#: capplets/background-properties/property-background.c:1143
 msgid "COLOR"
 msgstr "<색깔>"
 
-#: capplets/background-properties/property-background.c:1154
+#: capplets/background-properties/property-background.c:1142
 msgid "Specifies the background color"
 msgstr "배경색 지정"
 
-#: capplets/background-properties/property-background.c:1155
+#: capplets/background-properties/property-background.c:1143
 msgid "Specifies end background color for gradient"
 msgstr "단계적인 배경색의 마지막 색 지정"
 
-#: capplets/background-properties/property-background.c:1156
+#: capplets/background-properties/property-background.c:1144
 msgid "ORIENT"
 msgstr "<방향>"
 
-#: capplets/background-properties/property-background.c:1156
+#: capplets/background-properties/property-background.c:1144
 msgid "Gradient orientation: vertical or horizontal"
 msgstr "단계적인 색을 사용할 방향: 수직 또는 수평"
 
-#: capplets/background-properties/property-background.c:1157
+#: capplets/background-properties/property-background.c:1145
 msgid "Use a solid fill for the background"
 msgstr "배경을 한가지 색으로 채우기"
 
-#: capplets/background-properties/property-background.c:1158
+#: capplets/background-properties/property-background.c:1146
 msgid "Use a gradient fill for the background"
 msgstr "배경에 단계적인 색 사용"
 
-#: capplets/background-properties/property-background.c:1159
+#: capplets/background-properties/property-background.c:1147
 msgid "MODE"
 msgstr "<모드>"
 
-#: capplets/background-properties/property-background.c:1159
+#: capplets/background-properties/property-background.c:1147
 msgid "Display wallpaper: tiled, centered, scaled or ratio"
 msgstr ""
 "배경그림 표시방법: tiled(바둑판), centered(중앙), scaled(그림크기조정), 혹은 "
@@ -217,12 +185,11 @@ msgstr "데스크탑"
 
 #: capplets/desktop-links/Documents.directory.in.h:1
 msgid "Configure how document types are handled"
-msgstr ""
+msgstr "문서가 처리될 방법 설정"
 
 #: capplets/desktop-links/Documents.directory.in.h:2
-#, fuzzy
 msgid "Document Handlers"
-msgstr "URL 처리"
+msgstr "문서 처리기"
 
 #. create the app
 #: capplets/desktop-links/Gnome.directory.in.h:1 control-center/main.c:197
@@ -251,14 +218,12 @@ msgid "Peripherals"
 msgstr "주변장치"
 
 #: capplets/desktop-links/Session.directory.in.h:1
-#, fuzzy
 msgid "Session"
-msgstr "확장자"
+msgstr "세션"
 
 #: capplets/desktop-links/Session.directory.in.h:2
-#, fuzzy
 msgid "Session Management Settings"
-msgstr "화면 보호기 설정"
+msgstr "세션 관리 설정"
 
 #: capplets/desktop-links/UIOptions.directory.in.h:1
 msgid "Configure the global settings of your GNOME applications"
@@ -269,108 +234,99 @@ msgid "User Interface"
 msgstr "사용자 인터페이스 선택사항"
 
 #: capplets/file-types/file-types-capplet-dialogs.c:387
-#, fuzzy
 msgid "Edit Applications List"
-msgstr "응용 프로그램 기본사항"
+msgstr "응용 프로그램 목록 편집"
 
 #. Add label
 #: capplets/file-types/file-types-capplet-dialogs.c:409
 #, c-format
 msgid "Select applications to appear in menu for MIME type \"%s\""
-msgstr ""
+msgstr "MIME 타입 \"%s\"에 대한 메뉴에 표시될 응용 프로그램 선택"
 
 #: capplets/file-types/file-types-capplet-dialogs.c:433
-#, fuzzy
 msgid "Add Application..."
-msgstr "응용 프로그램 기본사항"
+msgstr "응용 프로그램 추가..."
 
 #: capplets/file-types/file-types-capplet-dialogs.c:440
-#, fuzzy
 msgid "Edit Application..."
-msgstr "응용 프로그램 기본사항"
+msgstr "응용 프로그램 편집..."
 
 #: capplets/file-types/file-types-capplet-dialogs.c:446
-#, fuzzy
 msgid "Delete Application"
-msgstr "응용 프로그램 기본사항"
+msgstr "응용 프로그램 삭제"
 
 #: capplets/file-types/file-types-capplet-dialogs.c:480
 msgid "Edit Components List"
-msgstr ""
+msgstr "컴포넌트 목록 편집"
 
 #. Add label
 #: capplets/file-types/file-types-capplet-dialogs.c:500
 #, c-format
 msgid "Select views to appear in menu for MIME type \"%s\""
-msgstr ""
+msgstr "MIME 타입 \"%s\"에 대한 메뉴에 표시될 보기 프로그램 선택"
 
 #: capplets/file-types/file-types-capplet-dialogs.c:720
 msgid ""
 "The MIME type entered contained upper case characters. Upper case characters "
 "were changed to lower case for you."
 msgstr ""
+"입력된 MIME 타입이 대문자를 포함하고 있습니다. 대문자들은 자동으로 소문자를 "
+"바뀔 것입니다."
 
 #: capplets/file-types/file-types-capplet-dialogs.c:723
-#, fuzzy
 msgid "Add New MIME Type"
-msgstr "MIME 타입 추가"
+msgstr "새 MIME 타입 추가"
 
 #: capplets/file-types/file-types-capplet-dialogs.c:769
-#, fuzzy
 msgid "Add MIME Type"
 msgstr "MIME 타입 추가"
 
 #: capplets/file-types/file-types-capplet-dialogs.c:773
 msgid "New MIME type (e.g. image/x-thumper):"
-msgstr ""
+msgstr "새 MIME 타입 (가령 image/x-thumper):"
 
 #: capplets/file-types/file-types-capplet-dialogs.c:780
 msgid "Description (e.g. Thumper image):"
-msgstr ""
+msgstr "설명 (가령 Thumper 이미지):"
 
 #: capplets/file-types/file-types-capplet-dialogs.c:947
-#, fuzzy
 msgid "File Extensions "
-msgstr "확장자"
+msgstr "파일 확장자 "
 
 #: capplets/file-types/file-types-capplet-dialogs.c:967
-#: capplets/wm-properties/wm-properties-capplet.c:1088
+#: capplets/wm-properties/wm-properties-capplet.c:1076
 msgid "Add..."
 msgstr "추가..."
 
 #: capplets/file-types/file-types-capplet-dialogs.c:972
-#, fuzzy
 msgid "    Remove    "
-msgstr "삭제"
+msgstr "    삭제      "
 
 #: capplets/file-types/file-types-capplet-dialogs.c:1041
-#, fuzzy
 msgid "Add New Extension"
-msgstr "확장자"
+msgstr "새 확장자 추가"
 
 #: capplets/file-types/file-types-capplet-dialogs.c:1045
-#, fuzzy
 msgid ""
 "Type in the extensions for this mime-type (without dot).\n"
 "You can enter several extensions seperated by a space,\n"
 "for example: html htm"
 msgstr ""
-"이 MIME 타입에 대한 확장자를 타이프하세요.\n"
-"예를 들어:  .html, .htm"
+"이 MIME 타입에 대한 확장자를 (점 없이) 타이프하세요.\n"
+"여러 확장자를 공백으로 분리하여 입력할 수 있습니다.\n"
+"예를 들어: html htm"
 
 #: capplets/file-types/file-types-capplet-dialogs.c:1052
 msgid "Extension:"
 msgstr "확장자:"
 
 #: capplets/file-types/file-types-capplet-dialogs.c:1194
-#, fuzzy
 msgid "You must enter a name."
-msgstr "MIME 타입을 입력해야 합니다"
+msgstr "이름을 입력해야 합니다"
 
 #: capplets/file-types/file-types-capplet-dialogs.c:1197
-#, fuzzy
 msgid "You must enter a command."
-msgstr "MIME 타입을 입력해야 합니다"
+msgstr "명령을 입력해야 합니다"
 
 #: capplets/file-types/file-types-capplet-dialogs.c:1207
 #, c-format
@@ -379,6 +335,9 @@ msgid ""
 "Check your spelling and make sure you have\n"
 "the right permissions to execute this file."
 msgstr ""
+"\"%s\"는 없거나 실행파일이 아닙니다.\n"
+"철자를 확인하시고 이 파일을 실행할 권한을\n"
+"가지고 계신지도 확인하시기 바랍니다."
 
 #: capplets/file-types/file-types-capplet-dialogs.c:1213
 #, c-format
@@ -386,152 +345,141 @@ msgid ""
 "The command \"%s\" cannot be found.\n"
 "You must use a command that can work from any command line."
 msgstr ""
+"\"%s\" 명령을 찾을 수 없습니다.\n"
+"명령행에서 실행할 수 있는 명령을 사용하셔야 합니다."
 
 #: capplets/file-types/file-types-capplet-dialogs.c:1225
-#, fuzzy
 msgid "Bad Application Name"
-msgstr "응용 프로그램 기본사항"
+msgstr "잘못된 응용 프로그램 이름"
 
 #: capplets/file-types/file-types-capplet-dialogs.c:1226
-#, fuzzy
 msgid "Bad Application Command"
-msgstr "응용 프로그램 기본사항"
+msgstr "잘못된 응용 프로그램 명령"
 
 #: capplets/file-types/file-types-capplet-dialogs.c:1258
-#, fuzzy
 msgid "Add Application"
-msgstr "응용 프로그램 기본사항"
+msgstr "응용 프로그램 추가"
 
 #: capplets/file-types/file-types-capplet-dialogs.c:1259
-#, fuzzy
 msgid "Edit Application"
-msgstr "응용 프로그램 기본사항"
+msgstr "응용 프로그램 편집"
 
 #. Application Name label and entry
 #: capplets/file-types/file-types-capplet-dialogs.c:1271
-#, fuzzy
 msgid "Application Name:"
-msgstr "응용 프로그램 기본사항"
+msgstr "응용 프로그램 이름:"
 
 #. Application Command label and entry
 #: capplets/file-types/file-types-capplet-dialogs.c:1282
-#, fuzzy
 msgid "Application Command:"
-msgstr "설정 명령어:"
+msgstr "응용 프로그램 명령:"
 
 #. Open Behavior frame
 #: capplets/file-types/file-types-capplet-dialogs.c:1293
-#, fuzzy
 msgid "Open Behavior"
-msgstr "대화창 동작"
+msgstr "동작 열기"
 
 #: capplets/file-types/file-types-capplet-dialogs.c:1299
 msgid "Can open multiple files"
-msgstr ""
+msgstr "여러 파일을 열 수 있습니다"
 
 #. FIXME bugzilla.eazel.com 6066: This needs to be three options now: "yes", "no", and "use uris for non-file locations"
 #: capplets/file-types/file-types-capplet-dialogs.c:1307
 msgid "Can open from URI"
-msgstr ""
+msgstr "URI에서 열 수 있습니다"
 
-#: capplets/file-types/file-types-capplet.c:735
-#: capplets/file-types/file-types-capplet.c:1877
-#, fuzzy
+#: capplets/file-types/file-types-capplet.c:745
+#: capplets/file-types/file-types-capplet.c:1890
 msgid "MIME Type"
 msgstr "MIME 타입"
 
-#: capplets/file-types/file-types-capplet.c:742
+#: capplets/file-types/file-types-capplet.c:752
 msgid "Change Icon"
-msgstr ""
+msgstr "아이콘 바꾸기"
 
-#: capplets/file-types/file-types-capplet.c:749
-#, fuzzy
+#: capplets/file-types/file-types-capplet.c:759
 msgid "Change File Extensions"
-msgstr "확장자"
+msgstr "파일 확장자 바꾸기"
 
-#: capplets/file-types/file-types-capplet.c:757
-#, fuzzy
+#: capplets/file-types/file-types-capplet.c:767
 msgid "Default Action:"
-msgstr "그놈 편집기 선택"
+msgstr "기본 동작:"
 
-#: capplets/file-types/file-types-capplet.c:769
+#: capplets/file-types/file-types-capplet.c:779
 msgid "Use Viewer"
-msgstr ""
+msgstr "보기 프로그램 사용"
 
-#: capplets/file-types/file-types-capplet.c:775
-#, fuzzy
+#: capplets/file-types/file-types-capplet.c:785
 msgid "Open With Application"
-msgstr "응용 프로그램 기본사항"
+msgstr "응용 프로그램으로 열기"
 
-#: capplets/file-types/file-types-capplet.c:786
-#, fuzzy
+#: capplets/file-types/file-types-capplet.c:796
 msgid "Edit List"
-msgstr "편집"
+msgstr "목록 편집"
 
-#: capplets/file-types/file-types-capplet.c:811
-#, fuzzy
+#: capplets/file-types/file-types-capplet.c:821
 msgid "Add New MIME Type..."
-msgstr "MIME 타입 추가"
+msgstr "새 MIME 타입 추가..."
 
-#: capplets/file-types/file-types-capplet.c:817
+#: capplets/file-types/file-types-capplet.c:827
 msgid "Delete This MIME Type"
-msgstr ""
+msgstr "이 MIME 타입 삭제"
 
-#: capplets/file-types/file-types-capplet.c:828
+#: capplets/file-types/file-types-capplet.c:838
 msgid "Revert to System Defaults"
-msgstr ""
+msgstr "시스템 기본값 사용"
 
-#: capplets/file-types/file-types-capplet.c:1069
-#: capplets/file-types/file-types-capplet.c:1213
-#, fuzzy
+#: capplets/file-types/file-types-capplet.c:1082
+#: capplets/file-types/file-types-capplet.c:1226
 msgid "None"
 msgstr "없음"
 
-#: capplets/file-types/file-types-capplet.c:1318
+#: capplets/file-types/file-types-capplet.c:1331
 msgid ""
 "Reverting to system settings will lose any changes\n"
 "you have ever made to File Types and Programs.\n"
 "Revert anyway?"
 msgstr ""
+"시스템 설정을 복구하면 이전에 파일 타입 및 프로그램에\n"
+"적용하신 설정값들을 잃어버리게 됩니다.\n"
+"그래도 복구할까요?"
 
-#: capplets/file-types/file-types-capplet.c:1428
-#: capplets/file-types/file-types-capplet.c:1614
-#: capplets/file-types/file-types-capplet.c:1757
+#: capplets/file-types/file-types-capplet.c:1441
+#: capplets/file-types/file-types-capplet.c:1627
+#: capplets/file-types/file-types-capplet.c:1770
 #, c-format
 msgid "View as %s"
-msgstr ""
+msgstr "%s로서 보기"
 
-#: capplets/file-types/file-types-capplet.c:1876
+#: capplets/file-types/file-types-capplet.c:1889
 msgid "Description"
-msgstr ""
+msgstr "설명"
 
-#: capplets/file-types/file-types-capplet.c:1878
+#: capplets/file-types/file-types-capplet.c:1891
 msgid "Extension"
 msgstr "확장자"
 
-#: capplets/file-types/file-types-capplet.c:1879
-#, fuzzy
+#: capplets/file-types/file-types-capplet.c:1892
 msgid "Default Action"
-msgstr "그놈 편집기 선택"
+msgstr "기본 동작"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
 msgid "File Types and Programs"
-msgstr ""
+msgstr "파일 타입과 프로그램"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:2
 msgid "Specify which programs are used to open or view each file type"
-msgstr ""
+msgstr "각 파일 타입을 열거나 볼 때 사용될 프로그램 명시"
 
 #: capplets/file-types/file-types-icon-entry.c:381
-#, fuzzy
 msgid "Select an icon"
-msgstr "아이콘 선택..."
+msgstr "아이콘 선택"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:238
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:226
 msgid "Gnome editor"
 msgstr "그놈 편집기"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:249
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:237
 msgid "Run In Terminal"
 msgstr "터미널에서 실행"
 
@@ -543,59 +491,73 @@ msgstr "gnome-edit가 사용할 편집기 선택"
 msgid "Default Editor"
 msgstr "그놈 편집기 선택"
 
-#: capplets/keyboard-properties/keyboard-properties.c:262
+#: capplets/keyboard-properties/keyboard-properties.c:250
 msgid "Keyboard bell"
 msgstr "키보드 삑소리"
 
-#: capplets/keyboard-properties/keyboard-properties.c:270
+#: capplets/keyboard-properties/keyboard-properties.c:258
 msgid "Volume"
 msgstr "크기"
 
-#: capplets/keyboard-properties/keyboard-properties.c:273
+#: capplets/keyboard-properties/keyboard-properties.c:261
 msgid "Pitch (Hz)"
 msgstr "진동수 (헤르쯔)"
 
-#: capplets/keyboard-properties/keyboard-properties.c:276
+#: capplets/keyboard-properties/keyboard-properties.c:264
 msgid "Duration (ms)"
 msgstr "길이 (천분의 일초)"
 
-#: capplets/keyboard-properties/keyboard-properties.c:288
+#: capplets/keyboard-properties/keyboard-properties.c:276
 msgid "Test"
 msgstr "테스트"
 
-#: capplets/keyboard-properties/keyboard-properties.c:306
+#: capplets/keyboard-properties/keyboard-properties.c:294
 msgid "Keyboard repeat rate"
 msgstr "반복정도"
 
-#: capplets/keyboard-properties/keyboard-properties.c:316
+#: capplets/keyboard-properties/keyboard-properties.c:304
 msgid "Enable auto-repeat"
 msgstr "자동반복하기"
 
-#: capplets/keyboard-properties/keyboard-properties.c:325
+#: capplets/keyboard-properties/keyboard-properties.c:313
 msgid "Repeat rate"
 msgstr "반복정도"
 
-#: capplets/keyboard-properties/keyboard-properties.c:328
+#: capplets/keyboard-properties/keyboard-properties.c:316
 msgid "Repeat Delay"
 msgstr "반복 지연"
 
-#: capplets/keyboard-properties/keyboard-properties.c:330
+#: capplets/keyboard-properties/keyboard-properties.c:318
 msgid "Keyboard click"
 msgstr "키보드 누를때 소리"
 
-#: capplets/keyboard-properties/keyboard-properties.c:339
+#: capplets/keyboard-properties/keyboard-properties.c:327
 msgid "Click on keypress"
 msgstr "누를때 소리 내기"
 
-#: capplets/keyboard-properties/keyboard-properties.c:348
+#: capplets/keyboard-properties/keyboard-properties.c:336
 msgid "Click volume"
 msgstr "누를때 소리 크기"
 
-#: capplets/keyboard-properties/keyboard-properties.c:359
+#: capplets/keyboard-properties/keyboard-properties.c:347
 msgid "Test settings"
 msgstr "설정 테스트"
 
-#: capplets/keyboard-properties/keyboard-properties.c:466
+#: capplets/keyboard-properties/keyboard-properties.c:410
+msgid ""
+"No help is available/installed for these settings. Please make sure you\n"
+"have the GNOME User's Guide installed on your system."
+msgstr ""
+"현재 상태에서 도움말을 이용할 수 없거나 도움말이 설치되지 않았습니다. 그놈 "
+"사용자 안내서를 시스템에 설치했는지 확인하세요."
+
+#: capplets/keyboard-properties/keyboard-properties.c:412
+#: capplets/sound-properties/sound-properties.c:745
+#: control-center/capplet-widget.c:273
+msgid "Close"
+msgstr "닫기"
+
+#: capplets/keyboard-properties/keyboard-properties.c:454
 msgid ""
 "an initialization error occurred while starting "
 "'keyboard-properties-capplet'.\n"
@@ -612,61 +574,61 @@ msgstr "자판"
 msgid "Keyboard Properties"
 msgstr "자판 속성"
 
-#: capplets/mouse-properties/mouse-properties.c:267
+#: capplets/mouse-properties/mouse-properties.c:254
 msgid "Mouse buttons"
 msgstr "마우스 버튼"
 
-#: capplets/mouse-properties/mouse-properties.c:276
+#: capplets/mouse-properties/mouse-properties.c:263
 msgid "Left handed"
 msgstr "왼손잡이"
 
-#: capplets/mouse-properties/mouse-properties.c:278
+#: capplets/mouse-properties/mouse-properties.c:265
 msgid "Right handed"
 msgstr "오른손잡이"
 
 #. Mouse motion
-#: capplets/mouse-properties/mouse-properties.c:304
+#: capplets/mouse-properties/mouse-properties.c:291
 msgid "Mouse motion"
 msgstr "마우스 움직임"
 
-#: capplets/mouse-properties/mouse-properties.c:314
+#: capplets/mouse-properties/mouse-properties.c:301
 msgid "Acceleration"
 msgstr "마우스 속도"
 
-#: capplets/mouse-properties/mouse-properties.c:314
+#: capplets/mouse-properties/mouse-properties.c:301
 #: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:4
 #: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:8
 #: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:11
 msgid "Fast"
 msgstr "빠르게"
 
-#: capplets/mouse-properties/mouse-properties.c:314
+#: capplets/mouse-properties/mouse-properties.c:301
 #: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:13
 #: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:21
 #: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:19
 msgid "Slow"
 msgstr "느리게"
 
-#: capplets/mouse-properties/mouse-properties.c:325
+#: capplets/mouse-properties/mouse-properties.c:312
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:30
 msgid "Threshold"
 msgstr "처음 움직임"
 
-#: capplets/mouse-properties/mouse-properties.c:325
+#: capplets/mouse-properties/mouse-properties.c:312
 #: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:6
 #: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:9
 #: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:10
 msgid "Large"
 msgstr "크게"
 
-#: capplets/mouse-properties/mouse-properties.c:325
+#: capplets/mouse-properties/mouse-properties.c:312
 #: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:14
 #: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:22
 msgid "Small"
 msgstr "작게"
 
-#: capplets/mouse-properties/mouse-properties.c:350
+#: capplets/mouse-properties/mouse-properties.c:337
 msgid ""
 "an initialization error occurred while starting 'mouse-properties-capplet'.\n"
 "aborting...\n"
@@ -682,70 +644,68 @@ msgstr "마우스 설정"
 msgid "Mouse Properties"
 msgstr "마우스 설정"
 
-#: capplets/screensaver-properties/callbacks.c:102
+#: capplets/screensaver-properties/callbacks.c:105
 msgid "Require Password"
 msgstr "암호 필요"
 
-#: capplets/screensaver-properties/callbacks.c:154
+#: capplets/screensaver-properties/callbacks.c:157
 msgid "Use power management."
 msgstr "전원 관리 기능 사용"
 
-#: capplets/screensaver-properties/callbacks.c:309
+#: capplets/screensaver-properties/callbacks.c:312
 msgid "No Screensaver"
 msgstr "화면 보호기 없음"
 
-#: capplets/screensaver-properties/callbacks.c:314
+#: capplets/screensaver-properties/callbacks.c:317
 msgid "Random Screensaver"
 msgstr "화면 보호기 아무거나"
 
-#: capplets/screensaver-properties/callbacks.c:483
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:56
+#: capplets/screensaver-properties/callbacks.c:487
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:66
 msgid "Settings..."
 msgstr "설정..."
 
 #. we need to special case random
-#: capplets/screensaver-properties/callbacks.c:491
+#: capplets/screensaver-properties/callbacks.c:495
 msgid "Random Settings"
 msgstr "아무거나 맞추기"
 
-#: capplets/screensaver-properties/callbacks.c:501
+#: capplets/screensaver-properties/callbacks.c:505
 #, c-format
 msgid "%s Settings..."
 msgstr "%s 설정..."
 
 #: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:1
 msgid "3D Clock"
-msgstr ""
+msgstr "3차원 시계"
 
 #: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:2
 msgid "Bernd Paysan"
-msgstr ""
+msgstr "Bernd Paysan"
 
 #: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:3
 msgid "Changes the magnification of original picture."
-msgstr ""
+msgstr "원래 그림의 확대 배율 바꾸기."
 
 #: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:5
-#, fuzzy
 msgid "High"
-msgstr "오른쪽"
+msgstr "높음"
 
 #: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:7
-#, fuzzy
 msgid "Low"
 msgstr "낮음"
 
 #: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:8
 msgid "Modifies the direction move."
-msgstr ""
+msgstr "이동 방향 수정."
 
 #: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:9
 msgid "Modifies the wobbling."
-msgstr ""
+msgstr "떨림 수정."
 
 #: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:10
 msgid "Sets the moving cycle time."
-msgstr ""
+msgstr "이동 주기 시간 설정."
 
 #: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:11
 #: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:13
@@ -754,19 +714,19 @@ msgstr ""
 #: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:17
 #: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:21
 msgid "Size"
-msgstr ""
+msgstr "크기"
 
 #: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:12
 #: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:14
 #: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:19
 #: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:19
 msgid "Size:"
-msgstr ""
+msgstr "크기:"
 
 #: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:24
 msgid "Speed"
-msgstr ""
+msgstr "속도"
 
 #: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:16
 msgid ""
@@ -781,26 +741,24 @@ msgid ""
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:18
-#, fuzzy
 msgid "Twist"
-msgstr "테스트"
+msgstr "비틀기"
 
 #: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:19
 msgid "Twist speed:"
-msgstr ""
+msgstr "비틀기 속도:"
 
 #: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:20
-#, fuzzy
 msgid "Twist:"
-msgstr "테스트"
+msgstr "비틀기:"
 
 #: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:21
 msgid "Wobble"
-msgstr ""
+msgstr "떨림"
 
 #: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:22
 msgid "Wobble:"
-msgstr ""
+msgstr "떨림:"
 
 #: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:1
 msgid ""
@@ -811,20 +769,19 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:2
 msgid "Ant"
-msgstr ""
+msgstr "개미"
 
 #: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:3
 msgid "Ants:"
-msgstr ""
+msgstr "개미:"
 
 #: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:4
 msgid "Changes the number of ants marching across the screen."
-msgstr ""
+msgstr "화면을 걸어다닐 개미 갯수 바꾸기"
 
 #: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:5
-#, fuzzy
 msgid "Changes the size of the ants."
-msgstr "화면 보호기 설정"
+msgstr "개미의 크기 바꾸기"
 
 #: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:6
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:10
@@ -844,13 +801,12 @@ msgstr "화면 보호기 설정"
 #: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:2
 #: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:3
 #: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:8
-#, fuzzy
 msgid "Count"
-msgstr "이 프로그램은"
+msgstr "횟수"
 
 #: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:7
 msgid "David Bagely"
-msgstr ""
+msgstr "David Bagely"
 
 #: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:8
 msgid ""
@@ -864,7 +820,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:11
 msgid "Number of ants."
-msgstr ""
+msgstr "개미 갯수."
 
 #: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:12
 msgid "Print the path that the ant took in the trail."
@@ -876,22 +832,20 @@ msgid "Truchet"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Atlantis.desktop.in.h:1
-#, fuzzy
 msgid "Atlantis"
-msgstr "응용 프로그램 기본사항"
+msgstr "아틀란티스"
 
 #: capplets/screensaver-properties/screensaver-desktops/Atlantis.desktop.in.h:2
 msgid "Whales, dolphins and sharks swimming around, in 3D"
-msgstr ""
+msgstr "주변을 헤엄치는 고래, 돌고래와 상어, 3차원"
 
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:1
 msgid "A show of objects interacting through attractive and repulsive forces."
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:2
-#, fuzzy
 msgid "Attraction"
-msgstr "마우스 속도"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:3
 msgid ""
@@ -905,7 +859,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:5
 msgid "Change size of points."
-msgstr ""
+msgstr "점들의 크기 바꾸기."
 
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:6
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:5
@@ -947,9 +901,8 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:9
 #: capplets/screensaver-properties/screensaver-desktops/Hypercube.desktop.in.h:5
-#, fuzzy
 msgid "Closer"
-msgstr "닫기"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:11
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:12
@@ -966,9 +919,8 @@ msgstr "닫기"
 #: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:3
 #: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:4
 #: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:9
-#, fuzzy
 msgid "Count:"
-msgstr "이 프로그램은:"
+msgstr "횟수:"
 
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:12
 #: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:6
@@ -995,9 +947,8 @@ msgstr "이 프로그램은:"
 #: capplets/screensaver-properties/screensaver-desktops/Munch.desktop.in.h:5
 #: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:6
 #: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:8
-#, fuzzy
 msgid "Delay"
-msgstr "소리 내기"
+msgstr "지연"
 
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:13
 msgid "Distance of attraction."
@@ -1040,14 +991,12 @@ msgstr ""
 #: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:4
 #: capplets/screensaver-properties/screensaver-desktops/Sierpinski.desktop.in.h:9
 #: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:13
-#, fuzzy
 msgid "Faster"
 msgstr "빠르게"
 
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:16
-#, fuzzy
 msgid "Glow"
-msgstr "느리게"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:17
 msgid "Have initial forces on each point be tangential to original circle."
@@ -1065,18 +1014,17 @@ msgstr ""
 #: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:10
 #: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:9
 msgid "Jamie Zawinski <jwz@netscape.com>"
-msgstr ""
+msgstr "Jamie Zawinski <jwz@netscape.com>"
 
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:21
 #: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:11
-#, fuzzy
 msgid "Larger"
 msgstr "크게"
 
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:22
 msgid "Number of points to use."
-msgstr ""
+msgstr "사용할 점 갯수."
 
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:23
 msgid "Orbit"
@@ -1088,7 +1036,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:26
 msgid "Size of point."
-msgstr ""
+msgstr "점 크기."
 
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:27
 #: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:13
@@ -1122,14 +1070,12 @@ msgstr ""
 #: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:16
 #: capplets/screensaver-properties/screensaver-desktops/Sierpinski.desktop.in.h:13
 #: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:18
-#, fuzzy
 msgid "Slower"
 msgstr "느리게"
 
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:28
 #: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:24
 #: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:19
-#, fuzzy
 msgid "Smaller"
 msgstr "작게"
 
@@ -1158,7 +1104,7 @@ msgstr "작게"
 #: capplets/screensaver-properties/screensaver-desktops/Munch.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:19
 msgid "Speed of Motion."
-msgstr ""
+msgstr "동작 속도."
 
 #: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:1
 msgid "Blitspin"
@@ -1220,9 +1166,8 @@ msgid "Change to display in monochrome."
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:7
-#, fuzzy
 msgid "Delay2"
-msgstr "소리 내기"
+msgstr "지연2"
 
 #: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:8
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:14
@@ -1262,7 +1207,7 @@ msgstr "소리 내기"
 #: capplets/screensaver-properties/screensaver-desktops/Vines.desktop.in.h:5
 #: capplets/screensaver-properties/screensaver-desktops/Xroger.desktop.in.h:2
 msgid "Display screensaver in monochrome."
-msgstr ""
+msgstr "화면보호기를 흑백으로 표시."
 
 #: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:11
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:17
@@ -1302,24 +1247,24 @@ msgstr ""
 #: capplets/screensaver-properties/screensaver-desktops/Vines.desktop.in.h:6
 #: capplets/screensaver-properties/screensaver-desktops/Xroger.desktop.in.h:4
 msgid "Monochrome"
-msgstr ""
+msgstr "흑백"
 
 #: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:12
 msgid "Rotates a bitmap in an interesting way."
-msgstr ""
+msgstr "재미있게 비트맵 회전."
 
 #: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:14
 msgid "Speed of rotation"
-msgstr ""
+msgstr "회전 속도"
 
 #: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:15
 msgid "Speed of the 90 degree rotation."
-msgstr ""
+msgstr "90도 회전 속도."
 
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:1
 #: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:1
 msgid "3D"
-msgstr ""
+msgstr "3D"
 
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:2
 msgid "A blob of bubbles spinning/moving around the screen."
@@ -1327,7 +1272,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:3
 msgid "Bouboule"
-msgstr ""
+msgstr "Bouboule"
 
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:4
 msgid "Bouboule changes shape and size in a blob like form."
@@ -1337,7 +1282,7 @@ msgstr ""
 #: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:2
 #: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:4
 msgid "Change the number of bubbles to use."
-msgstr ""
+msgstr "사용할 거품 갯수 바꾸기."
 
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:7
 #: capplets/screensaver-properties/screensaver-desktops/Braid.desktop.in.h:2
@@ -1362,7 +1307,7 @@ msgstr ""
 #: capplets/screensaver-properties/screensaver-desktops/Triangle.desktop.in.h:1
 #: capplets/screensaver-properties/screensaver-desktops/Vines.desktop.in.h:1
 msgid "Change the number of colors to use."
-msgstr ""
+msgstr "사용할 색 갯수 바꾸기."
 
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:9
 #: capplets/screensaver-properties/screensaver-desktops/Braid.desktop.in.h:4
@@ -1386,7 +1331,6 @@ msgstr ""
 #: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:6
 #: capplets/screensaver-properties/screensaver-desktops/Triangle.desktop.in.h:3
 #: capplets/screensaver-properties/screensaver-desktops/Vines.desktop.in.h:3
-#, fuzzy
 msgid "Colors"
 msgstr "색깔"
 
@@ -1412,13 +1356,12 @@ msgstr "색깔"
 #: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:7
 #: capplets/screensaver-properties/screensaver-desktops/Triangle.desktop.in.h:4
 #: capplets/screensaver-properties/screensaver-desktops/Vines.desktop.in.h:4
-#, fuzzy
 msgid "Colors:"
-msgstr "색깔"
+msgstr "색깔:"
 
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:16
 msgid "Jeremie Petit <jpetit@essi.fr>"
-msgstr ""
+msgstr "Jeremie Petit <jpetit@essi.fr>"
 
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:18
 #: capplets/screensaver-properties/screensaver-desktops/Braid.desktop.in.h:10
@@ -1438,16 +1381,16 @@ msgstr ""
 #: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:19
 #: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:16
 msgid "Number of Colors."
-msgstr ""
+msgstr "색 갯수."
 
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:19
 #: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:16
 msgid "Number of bubbles to use."
-msgstr ""
+msgstr "사용할 거품 갯수."
 
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:22
 msgid "Use red/blue 3d seperation."
-msgstr ""
+msgstr "적/청 3차원 식별 사용."
 
 #: capplets/screensaver-properties/screensaver-desktops/Braid.desktop.in.h:1
 msgid "Braid"
@@ -1455,7 +1398,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Braid.desktop.in.h:7
 msgid "John Neil <neil@math.idbsu.edu>"
-msgstr ""
+msgstr "John Neil <neil@math.idbsu.edu>"
 
 #: capplets/screensaver-properties/screensaver-desktops/Braid.desktop.in.h:9
 #: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:21
@@ -1464,7 +1407,7 @@ msgstr ""
 #: capplets/screensaver-properties/screensaver-desktops/Triangle.desktop.in.h:8
 #: capplets/screensaver-properties/screensaver-desktops/Vines.desktop.in.h:7
 msgid "Number of Colors"
-msgstr ""
+msgstr "색 갯수"
 
 #: capplets/screensaver-properties/screensaver-desktops/Braid.desktop.in.h:11
 msgid "Random color-cycling braids in a circle."
@@ -1476,81 +1419,80 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:1
 msgid "Blue Screen of Death"
-msgstr ""
+msgstr "죽음의 푸른 화면"
 
 #: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:2
 msgid "Bsod"
-msgstr ""
+msgstr "Bsod"
 
 #: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:3
 msgid "Bsod simulates crash screens from other operating systems."
-msgstr ""
+msgstr "Bsod는 다를 운영 체계의 고장 화면을 흉내냅니다."
 
 #: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:4
 msgid "Change the delay."
-msgstr ""
+msgstr "지연값 바꾸기"
 
 #: capplets/screensaver-properties/screensaver-desktops/Bubble3d.desktop.in.h:1
 msgid "Bubble3d"
-msgstr ""
+msgstr "Bubble3d"
 
 #: capplets/screensaver-properties/screensaver-desktops/Bubble3d.desktop.in.h:2
 msgid "Lots of bubbles floating around, in 3d"
-msgstr ""
+msgstr "많은 거품이 3차원으로 떠다닙니다"
 
 #: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:2
 msgid "Broken"
-msgstr ""
+msgstr "부서짐"
 
 #: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:3
 msgid "Bubbles"
-msgstr ""
+msgstr "Bubbles"
 
 #: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:4
 msgid "Bubbles exist in three dimensions."
-msgstr ""
+msgstr "거품이 3차원입니다."
 
 #: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:5
 msgid "Bubbles sprays tiny bubbles which grow until they go pop."
-msgstr ""
+msgstr "거품이 부서질 때까지 커지다가 작은 거품들로 쪼개집니다."
 
 #: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:10
 msgid "Don't hide bubbles when they pop."
-msgstr ""
+msgstr "거품이 부서질 때 숨기지 않습니다."
 
 #: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:11
 msgid "Draw circles instead of pixmap bubbles."
-msgstr ""
+msgstr "픽스맵 거품 대신 원 그림."
 
 #: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:13
 msgid "James Macnicol <J.Macnicol@student.anu.edu.au>"
-msgstr ""
+msgstr "James Macnicol <J.Macnicol@student.anu.edu.au>"
 
 #: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:14
 msgid "Lots of random bubbles grow until they pop."
-msgstr ""
+msgstr "부서질 때까지 커지는 많은 거품들."
 
 #: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:16
 msgid "Simple"
-msgstr ""
+msgstr "단순"
 
 #: capplets/screensaver-properties/screensaver-desktops/Bumps.desktop.in.h:1
 msgid "Bumps"
-msgstr ""
+msgstr "Bumps"
 
 #: capplets/screensaver-properties/screensaver-desktops/Bumps.desktop.in.h:2
 #: capplets/screensaver-properties/screensaver-desktops/Shadebobs.desktop.in.h:3
 msgid "Shane Smit"
-msgstr ""
+msgstr "Shane Smit"
 
 #: capplets/screensaver-properties/screensaver-desktops/Bumps.desktop.in.h:3
 msgid "Spotlights a bump map of your desktop."
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Cage.desktop.in.h:1
-#, fuzzy
 msgid "Cage"
-msgstr "크게"
+msgstr "Cage"
 
 #: capplets/screensaver-properties/screensaver-desktops/Cage.desktop.in.h:2
 msgid "The famous, M.C. Escher, impossible cage"
@@ -1569,19 +1511,16 @@ msgid "Change the density."
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:3
-#, fuzzy
 msgid "Change the number of seeds."
-msgstr "화면 보호기 설정"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:4
-#, fuzzy
 msgid "Coral"
-msgstr "보통"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:6
-#, fuzzy
 msgid "Denser"
-msgstr "일반"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:7
 msgid "Density"
@@ -1589,7 +1528,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:9
 msgid "Frederick Roeber"
-msgstr ""
+msgstr "Frederick Roeber"
 
 #: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:10
 msgid "Number of seeds"
@@ -1608,9 +1547,8 @@ msgid "Simulates coral growth."
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:16
-#, fuzzy
 msgid "Thinner"
-msgstr "Tiger"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Critical.desktop.in.h:1
 msgid "Critical"
@@ -1622,15 +1560,13 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:1
 msgid "Cell"
-msgstr ""
+msgstr "셀"
 
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:2
-#, fuzzy
 msgid "Center image."
-msgstr "중앙"
+msgstr "중앙 이미지."
 
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:3
-#, fuzzy
 msgid "Centre"
 msgstr "중앙"
 
@@ -1648,7 +1584,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:17
 msgid "Jouk Jansen"
-msgstr ""
+msgstr "Jouk Jansen"
 
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:18
 msgid "Maxsize"
@@ -1667,9 +1603,8 @@ msgid "Change the number of iterations."
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:7
-#, fuzzy
 msgid "Cynosure"
-msgstr "닫기"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:8
 msgid "Cynosure franticly displays colored rectangles."
@@ -1680,9 +1615,8 @@ msgid "Franticly displays colored rectangles."
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:13
-#, fuzzy
 msgid "Iterations"
-msgstr "마우스 속도"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:14
 #: capplets/screensaver-properties/screensaver-desktops/Hopalong.desktop.in.h:14
@@ -1700,9 +1634,8 @@ msgstr ""
 #: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:14
 #: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:14
 #: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:11
-#, fuzzy
 msgid "More"
-msgstr "Moe"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:18
 msgid "Number of iterations."
@@ -1710,7 +1643,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:21
 msgid "Stephen Linhart, Ozymandias Desiderata, Jamie Zawinski"
-msgstr ""
+msgstr "Stephen Linhart, Ozymandias Desiderata, Jamie Zawinski"
 
 #: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:3
 msgid "Decayscreen"
@@ -1726,7 +1659,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:12
 msgid "Vivek Khera <khera@cs.duke.edu>"
-msgstr ""
+msgstr "Vivek Khera <khera@cs.duke.edu>"
 
 #: capplets/screensaver-properties/screensaver-desktops/Deco.desktop.in.h:1
 #: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:5
@@ -1758,6 +1691,8 @@ msgid ""
 "Jamie Zawinski <jwz@jwz.org>\n"
 "Michael D. Bayne <mdb@go2net.com>"
 msgstr ""
+"Jamie Zawinski <jwz@jwz.org>\n"
+"Michael D. Bayne <mdb@go2net.com>"
 
 #: capplets/screensaver-properties/screensaver-desktops/Deco.desktop.in.h:8
 msgid "This will cause the panes to flash."
@@ -1770,10 +1705,9 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Deco.desktop.in.h:10
 msgid "Use color when drawing."
-msgstr ""
+msgstr "그릴 때 색 사용"
 
 #: capplets/screensaver-properties/screensaver-desktops/Deco.desktop.in.h:11
-#, fuzzy
 msgid "color"
 msgstr "색깔"
 
@@ -1783,18 +1717,16 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Deco.desktop.in.h:13
 #: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:23
-#, fuzzy
 msgid "delay"
-msgstr "소리 내기"
+msgstr "지연"
 
 #: capplets/screensaver-properties/screensaver-desktops/Deco.desktop.in.h:14
 msgid "seconds"
-msgstr ""
+msgstr "초"
 
 #: capplets/screensaver-properties/screensaver-desktops/Deluxe.desktop.in.h:1
-#, fuzzy
 msgid "Deluxe"
-msgstr "지우기"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Deluxe.desktop.in.h:2
 msgid "Display nice stuff "
@@ -1834,16 +1766,15 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:19
 msgid "Tim Auckland"
-msgstr ""
+msgstr "Tim Auckland"
 
 #: capplets/screensaver-properties/screensaver-desktops/Distort.desktop.in.h:1
 msgid "Distort"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Distort.desktop.in.h:2
-#, fuzzy
 msgid "Distort the screen"
-msgstr "화면의 중앙"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Distort.desktop.in.h:3
 msgid ""
@@ -1885,11 +1816,11 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:22
 msgid "Number of pixels to use."
-msgstr ""
+msgstr "사용할 픽셀 갯수"
 
 #: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:23
 msgid "Scot Draves <spot@cs.cmu.edu>"
-msgstr ""
+msgstr "Scot Draves <spot@cs.cmu.edu>"
 
 #: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:26
 msgid "Use lissajous figures to get points."
@@ -1900,9 +1831,8 @@ msgid "Draws a point moving around a circle which moves around a circle."
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:6
-#, fuzzy
 msgid "Epicycle"
-msgstr "닫기"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:7
 msgid ""
@@ -1916,14 +1846,13 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:10
 msgid "James Youngman <jay@gnu.org>"
-msgstr ""
+msgstr "James Youngman <jay@gnu.org>"
 
 #: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:12
 #: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:17
 #: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:17
-#, fuzzy
 msgid "Seconds"
-msgstr "소리"
+msgstr "초"
 
 #: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:15
 msgid "Time finished product is shown."
@@ -1942,9 +1871,8 @@ msgid "Bas van Gaalen and Charles Vidal"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:3
-#, fuzzy
 msgid "Change the delay in movement."
-msgstr "메뉴를 떼어서 옮길 수 있도록"
+msgstr "이동 지연 바꾸기"
 
 #: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:5
 msgid "Change the number of cycles."
@@ -1964,7 +1892,7 @@ msgstr ""
 #: capplets/screensaver-properties/screensaver-desktops/Sierpinski.desktop.in.h:6
 #: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:10
 msgid "Cycles"
-msgstr ""
+msgstr "주기"
 
 #: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:15
 msgid "Draws what looks like a waving ribbon following a sinusoidal path."
@@ -1976,16 +1904,16 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:20
 msgid "Number"
-msgstr ""
+msgstr "갯수"
 
 #: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:22
 msgid "Number of cycles"
-msgstr ""
+msgstr "원의 갯수"
 
 #: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:24
 #: capplets/screensaver-properties/screensaver-desktops/Sierpinski.desktop.in.h:14
 msgid "Speed of Motion"
-msgstr ""
+msgstr "움직임 속도"
 
 #: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:1
 #: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:1
@@ -2000,7 +1928,7 @@ msgstr ""
 #: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:5
 #: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:5
 msgid "Charles Vidal <vidalc@univ-mlv.fr>"
-msgstr ""
+msgstr "Charles Vidal <vidalc@univ-mlv.fr>"
 
 #: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:9
 #: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:9
@@ -2015,7 +1943,7 @@ msgstr ""
 #: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:13
 #: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:13
 msgid "Flag"
-msgstr ""
+msgstr "깃발"
 
 #: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:14
 #: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:14
@@ -2025,16 +1953,15 @@ msgstr ""
 #: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:18
 #: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:18
 msgid "Size of pixels"
-msgstr ""
+msgstr "픽셀 크기"
 
 #: capplets/screensaver-properties/screensaver-desktops/Flow.desktop.in.h:1
 msgid "Draws a flow of colored points"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Flow.desktop.in.h:2
-#, fuzzy
 msgid "Flow"
-msgstr "느리게"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:3
 msgid "Change the number of trees to use."
@@ -2049,9 +1976,8 @@ msgid "Draws a fractal forest."
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:14
-#, fuzzy
 msgid "Forest"
-msgstr "빠르게"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:15
 msgid "Fractal draws a fractal forest."
@@ -2074,9 +2000,8 @@ msgid "GLPlanet"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Galaxy.desktop.in.h:1
-#, fuzzy
 msgid "Galaxy"
-msgstr "소리 내기"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Gears.desktop.in.h:1
 msgid "Gears"
@@ -2174,9 +2099,8 @@ msgid "Orbit should decay."
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:21
-#, fuzzy
 msgid "Trail"
-msgstr "타일"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Greynetic.desktop.in.h:5
 msgid "Draws random color rectangles."
@@ -2216,9 +2140,8 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:14
 #: capplets/screensaver-properties/screensaver-desktops/Xteevee.desktop.in.h:2
-#, fuzzy
 msgid "Cycle"
-msgstr "닫기"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:15
 msgid "Cycle through colormap."
@@ -2237,18 +2160,16 @@ msgid "Halo draws patterns based on circles."
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:23
-#, fuzzy
 msgid "Mode"
-msgstr "Moe"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:26
 msgid "Number of circles to use."
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:29
-#, fuzzy
 msgid "Use a gradient of colors between circles."
-msgstr "배경에 단계적인 색 사용"
+msgstr "원 사이에 단계적인 색 사용"
 
 #: capplets/screensaver-properties/screensaver-desktops/Helix.desktop.in.h:5
 msgid "Draws helical string-art patterns"
@@ -2303,9 +2224,8 @@ msgid "Change the distance from center of cube"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Hypercube.desktop.in.h:8
-#, fuzzy
 msgid "Distance"
-msgstr "사용 않음"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Hypercube.desktop.in.h:9
 msgid "Distance from center of cube"
@@ -2340,9 +2260,8 @@ msgid "Imsmap"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Interference.desktop.in.h:1
-#, fuzzy
 msgid "Interference"
-msgstr "사용자 인터페이스 선택사항"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Jigsaw.desktop.in.h:5
 msgid "Jigsaw"
@@ -2424,9 +2343,8 @@ msgid "A 3d cube floats around"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Lament.desktop.in.h:2
-#, fuzzy
 msgid "Lament"
-msgstr "왼쪽"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Laser.desktop.in.h:4
 msgid ""
@@ -2440,9 +2358,8 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Laser.desktop.in.h:6
 #: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:9
-#, fuzzy
 msgid "Duration"
-msgstr "길이 (천분의 일초)"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Laser.desktop.in.h:7
 msgid "Duration of laser burst."
@@ -2455,15 +2372,13 @@ msgid ""
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Laser.desktop.in.h:9
-#, fuzzy
 msgid "Laser"
-msgstr "크게"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Laser.desktop.in.h:10
 #: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:10
-#, fuzzy
 msgid "Longer"
-msgstr "없음"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Laser.desktop.in.h:11
 msgid "Mono"
@@ -2575,9 +2490,8 @@ msgid "Points"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:20
-#, fuzzy
 msgid "Points:"
-msgstr "우선순위:"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:23
 msgid "Steps"
@@ -2630,9 +2544,8 @@ msgid "Copyright (C) 1988 by Sun Microsystems, Inc."
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:9
-#, fuzzy
 msgid "Dead Color"
-msgstr "색깔"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:10
 msgid "Delay between drawing the maze and starting the solution."
@@ -2650,28 +2563,21 @@ msgstr ""
 msgid "If the solver can "
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:13
-msgid " the end of a corridor it will color it this color."
+#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:14
+msgid "Less Delay"
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:14
-#, fuzzy
-msgid "Less Delay"
-msgstr "반복 지연"
-
 #: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:15
-#, fuzzy
 msgid "Live Color"
-msgstr "색깔"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:16
 msgid "Maze"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:17
-#, fuzzy
 msgid "More Delay"
-msgstr "반복 지연"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:18
 msgid "Post-Solving Delay"
@@ -2690,19 +2596,16 @@ msgid "Repeatedly create and solve a maze"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:22
-#, fuzzy
 msgid "Skip Color"
-msgstr "색깔"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:23
-#, fuzzy
 msgid "Speed Delay"
-msgstr "반복 지연"
+msgstr "속도 지연"
 
 #: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:24
-#, fuzzy
 msgid "Surround Color"
-msgstr "2차 색상"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:26
 #, no-c-format
@@ -2740,9 +2643,8 @@ msgid "M.C. Escher inspired ants.. in 3d"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Moebius.desktop.in.h:2
-#, fuzzy
 msgid "Moebius"
-msgstr "마우스 설정"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:8
 msgid "Draw circular interference patterns"
@@ -2750,16 +2652,15 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:10
 msgid "Jamie  Zawinski <jwz@jwz.org>"
-msgstr ""
+msgstr "Jamie  Zawinski <jwz@jwz.org>"
 
 #: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:12
 msgid "Maximum radius increment"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:13
-#, fuzzy
 msgid "Moire"
-msgstr "Moe"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:14
 msgid "Moire draws circular interference patterns."
@@ -2770,9 +2671,8 @@ msgid "Offset"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Moire2.desktop.in.h:1
-#, fuzzy
 msgid "Moire2"
-msgstr "Moe"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Morph3d.desktop.in.h:1
 msgid "A 3d flower morphs into a sphear"
@@ -2783,9 +2683,8 @@ msgid "Morph3d"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Mountain.desktop.in.h:1
-#, fuzzy
 msgid "Mountain"
-msgstr "마우스 움직임"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Munch.desktop.in.h:3
 msgid "Change to draw square at weird starting points."
@@ -2824,9 +2723,8 @@ msgid "Use XOR drawing function."
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Munch.desktop.in.h:18
-#, fuzzy
 msgid "XOR"
-msgstr "IOR"
+msgstr "XOR"
 
 #: capplets/screensaver-properties/screensaver-desktops/Noseguy.desktop.in.h:1
 msgid "Noseguy"
@@ -2861,9 +2759,8 @@ msgid "Maxlines"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:15
-#, fuzzy
 msgid "Pedal"
-msgstr "모달"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:16
 msgid "Pedal Displays pretty geometric pictures."
@@ -2886,9 +2783,8 @@ msgid "Display an arcade game"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Penetrate.desktop.in.h:2
-#, fuzzy
 msgid "Penetrate"
-msgstr "반복정도"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Penrose.desktop.in.h:1
 msgid "Penrose"
@@ -2909,9 +2805,8 @@ msgid "3d pipes flow around the screen"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Pipes.desktop.in.h:2
-#, fuzzy
 msgid "Pipes"
-msgstr "주변장치"
+msgstr "파이프"
 
 #: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:1
 msgid "Changes frequency of missile launch."
@@ -2951,9 +2846,8 @@ msgid "Pyro"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:15
-#, fuzzy
 msgid "Scatter"
-msgstr "얼마 후에 시작:"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:17
 msgid "The pyro program simulates fireworks."
@@ -2986,9 +2880,8 @@ msgid "Draw solid Qix."
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:11
-#, fuzzy
 msgid "Length of the Trail:"
-msgstr "화면의 중앙"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:12
 msgid "Number of Qix:"
@@ -3085,9 +2978,8 @@ msgid "Rorschach"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Rotor.desktop.in.h:1
-#, fuzzy
 msgid "Rotor"
-msgstr "색깔"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Rubik.desktop.in.h:1
 msgid "A 3d Rubiks cube floats and twists around"
@@ -3123,18 +3015,16 @@ msgid "Slidescreen"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Slip.desktop.in.h:1
-#, fuzzy
 msgid "Slip"
-msgstr "채워진 색깔"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Sonar.desktop.in.h:1
 msgid "Display a Sonar scope."
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Sonar.desktop.in.h:2
-#, fuzzy
 msgid "Sonar"
-msgstr "소리"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Sphere.desktop.in.h:1
 msgid "Sphere"
@@ -3225,9 +3115,8 @@ msgid "Rotation"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:18
-#, fuzzy
 msgid "Slim"
-msgstr "채워진 색깔"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:20
 msgid "Speed of animation."
@@ -3273,18 +3162,16 @@ msgid ""
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Triangle.desktop.in.h:9
-#, fuzzy
 msgid "Random mountain ranges"
-msgstr "아무거나 맞추기"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Triangle.desktop.in.h:10
 msgid "Tobias Gloth"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Triangle.desktop.in.h:11
-#, fuzzy
 msgid "Triangle"
-msgstr "타일"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Vines.desktop.in.h:8
 msgid ""
@@ -3298,9 +3185,8 @@ msgid "Tracy Camp"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Vines.desktop.in.h:10
-#, fuzzy
 msgid "Vines"
-msgstr "보기"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Vines.desktop.in.h:11
 msgid "draws pseudo-fractal geometric patterns"
@@ -3391,9 +3277,8 @@ msgid "Static."
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Xteevee.desktop.in.h:12
-#, fuzzy
 msgid "Vertical roll."
-msgstr "수직으로 서서히 변화"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Xteevee.desktop.in.h:13
 msgid "Xteevee"
@@ -3415,54 +3300,58 @@ msgstr "개발자: 알수 없음"
 msgid "Settings"
 msgstr "설정"
 
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:38
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:39
 msgid "RANDOM SCREENSAVER"
 msgstr "화면보호기 아무거나"
 
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:49
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:50
 msgid "Screen Saver"
 msgstr "화면 보호기"
 
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:61
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:60
+msgid "Pressing this button will preview current screensaver."
+msgstr "이 버튼을 누르면 현재 화면보호기의 미리 볼 수 있습니다."
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:71
 msgid ""
 "Pressing this button will popup a dialogbox that will help you setup the "
 "current screensaver."
 msgstr "이 버튼을 누르면 현재 화면보호기의 셋업을 도와주는 대화창이 나옵니다."
 
 #. set up the initial frame, and get a vbox in which to pack things.
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:88
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:98
 msgid "Screen Saver Settings"
 msgstr "화면 보호기 설정"
 
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:96
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:106
 msgid "Start After "
 msgstr "얼마 후에 시작:"
 
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:102
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:112
 msgid " Minutes."
 msgstr " 분."
 
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:117
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:127
 msgid "Priority:"
 msgstr "우선순위:"
 
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:124
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:134
 msgid "Low "
 msgstr "낮음"
 
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:126
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:136
 msgid " Normal"
 msgstr "보통"
 
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:137
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:147
 msgid "Shutdown monitor "
 msgstr "모니터 셧다운"
 
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:139
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:149
 msgid " minutes after screen saver has started."
 msgstr " 분 (화면보호기가 시작한 후로부터)"
 
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:152
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:162
 msgid "Screen Saver Demo"
 msgstr "화면 보호기 데모"
 
@@ -3520,11 +3409,11 @@ msgid ""
 "This copy of the GNOME control center was not compiled with sound support"
 msgstr "이 그놈 조종센터는 소리 지원 기능이 컴파일 과정에서 빠졌습니다."
 
-#: capplets/sound-properties/sound-properties.c:748
+#: capplets/sound-properties/sound-properties.c:737
 msgid "The sound file for this event does not exist."
 msgstr "이 이벤트에 대한 사운드 파일이 없습니다."
 
-#: capplets/sound-properties/sound-properties.c:750
+#: capplets/sound-properties/sound-properties.c:739
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -4027,9 +3916,9 @@ msgstr ""
 "수동으로 실행할 수 있습니다.\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:502
-#: capplets/wm-properties/wm-properties-capplet.c:868
-#: capplets/wm-properties/wm-properties-capplet.c:875
-#: capplets/wm-properties/wm-properties-capplet.c:1021
+#: capplets/wm-properties/wm-properties-capplet.c:856
+#: capplets/wm-properties/wm-properties-capplet.c:863
+#: capplets/wm-properties/wm-properties-capplet.c:1009
 msgid "OK"
 msgstr "확인"
 
@@ -4073,52 +3962,52 @@ msgstr ""
 "아니면 로그아웃시에 \"현재 데스크탑 저장\"을 체크한 다음에\n"
 "로그아웃하면 저장됩니다.\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:757
+#: capplets/wm-properties/wm-properties-capplet.c:745
 msgid "Add New Window Manager"
 msgstr "새 창 관리자 시작"
 
-#: capplets/wm-properties/wm-properties-capplet.c:771
+#: capplets/wm-properties/wm-properties-capplet.c:759
 msgid "Name:"
 msgstr "이름:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:784
+#: capplets/wm-properties/wm-properties-capplet.c:772
 msgid "Command:"
 msgstr "명령어:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:797
+#: capplets/wm-properties/wm-properties-capplet.c:785
 msgid "Configuration Command:"
 msgstr "설정 명령어:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:816
+#: capplets/wm-properties/wm-properties-capplet.c:804
 msgid "Window manager is session managed"
 msgstr "창 관리자가 세션 관리됩니다."
 
-#: capplets/wm-properties/wm-properties-capplet.c:866
+#: capplets/wm-properties/wm-properties-capplet.c:854
 msgid "Name cannot be empty"
 msgstr "이름은 비어있으면 안 됩니다"
 
-#: capplets/wm-properties/wm-properties-capplet.c:873
+#: capplets/wm-properties/wm-properties-capplet.c:861
 msgid "Command cannot be empty"
 msgstr "명령어는 비어있으면 안 됩니다"
 
-#: capplets/wm-properties/wm-properties-capplet.c:922
-#: capplets/wm-properties/wm-properties-capplet.c:964
+#: capplets/wm-properties/wm-properties-capplet.c:910
+#: capplets/wm-properties/wm-properties-capplet.c:952
 msgid "Edit Window Manager"
 msgstr "창 관리자 편집"
 
-#: capplets/wm-properties/wm-properties-capplet.c:1020
+#: capplets/wm-properties/wm-properties-capplet.c:1008
 msgid "You cannot delete the current Window Manager"
 msgstr "현재 창관리자를 지울 수 없습니다"
 
-#: capplets/wm-properties/wm-properties-capplet.c:1093
+#: capplets/wm-properties/wm-properties-capplet.c:1081
 msgid "Edit..."
 msgstr "편집..."
 
-#: capplets/wm-properties/wm-properties-capplet.c:1098
+#: capplets/wm-properties/wm-properties-capplet.c:1086
 msgid "Delete"
 msgstr "지우기"
 
-#: capplets/wm-properties/wm-properties-capplet.c:1134
+#: capplets/wm-properties/wm-properties-capplet.c:1122
 msgid ""
 "an initialization error occurred while starting 'wm-properties-capplet'.\n"
 "aborting...\n"
@@ -4275,124 +4164,3 @@ msgstr "호스트 이름:"
 #: control-center/splash.c:178
 msgid "Unknown"
 msgstr "알수 없음"
-
-#~ msgid "Mime Type: "
-#~ msgstr "MIME 타입: "
-
-#~ msgid "Add"
-#~ msgstr "추가"
-
-#~ msgid "First Regular Expression: "
-#~ msgstr "첫번째 정규식: "
-
-#~ msgid "Second Regular Expression: "
-#~ msgstr "두번째 정규식: "
-
-#~ msgid "Mime Type Actions"
-#~ msgstr "MIME 타입 액션"
-
-#~ msgid "Example: emacs %f"
-#~ msgstr "예: emacs %f"
-
-#~ msgid "Open"
-#~ msgstr "열기"
-
-#~ msgid "Select a file..."
-#~ msgstr "파일 선택..."
-
-#~ msgid "Set actions for %s"
-#~ msgstr "%s에 대한 동작 결정"
-
-#~ msgid ""
-#~ "You must add either a regular-expression or\n"
-#~ "a file-name extension"
-#~ msgstr ""
-#~ "정규식이나 파일이름 확장자를\n"
-#~ "추가해야 합니다"
-
-#~ msgid ""
-#~ "Please put your mime-type in the format:\n"
-#~ "CATEGORY/TYPE\n"
-#~ "\n"
-#~ "For Example:\n"
-#~ "image/png"
-#~ msgstr ""
-#~ "MIME 타입을 다음과 같은 형식으로 입력하세요:\n"
-#~ "분류/타입\n"
-#~ "\n"
-#~ "예를 들어:\n"
-#~ "image/png"
-
-#~ msgid "This mime-type already exists"
-#~ msgstr "이 MIME 타입은 이미 존재합니다"
-
-#~ msgid ""
-#~ "We are unable to create the directory\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "다음 자료방을 만들 수 없습니다\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "현재 상태를 저장할 수 없을 것입니다"
-
-#~ msgid ""
-#~ "We are unable to access the directory\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "다음 자료방을 접근할 수 없습니다\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "현재 상태를 저장할 수 없을 것입니다"
-
-#~ msgid ""
-#~ "Cannot create the file\n"
-#~ "~/.gnome/mime-info/user.mime\n"
-#~ "\n"
-#~ "We will not be able to save the state"
-#~ msgstr ""
-#~ "다음 파일을 만들 수 없습니다\n"
-#~ "~/.gnome/mime-info/user.mime\n"
-#~ "\n"
-#~ "현재 상태를 저장할 수 없을 것입니다"
-
-#~ msgid ""
-#~ "Cannot create the file\n"
-#~ "~/.gnome/mime-info/user.keys\n"
-#~ "\n"
-#~ "We will not be able to save the state"
-#~ msgstr ""
-#~ "다음 파일을 만들 수 없습니다\n"
-#~ "~/.gnome/mime-info/user.keys\n"
-#~ "\n"
-#~ "현재 상태를 저장할 수 없을 것입니다"
-
-#~ msgid ""
-#~ "No help is available/installed for these settings. Please make sure you\n"
-#~ "have the Control Center documentation installed on your system."
-#~ msgstr ""
-#~ "현재 상태에서 도움말을 이용할 수 없거나 도움말이 설치되지 않았습니다.  \n"
-#~ "조정 센터 문서가 시스템에 설치되었는지 확인하세요."
-
-#~ msgid ""
-#~ "Add a new Mime Type\n"
-#~ "For example:  image/tiff; text/x-scheme"
-#~ msgstr ""
-#~ "MIME 타입을 추가하세요\n"
-#~ "예를 들어:  image/tiff; text/x-scheme"
-
-#~ msgid "Mime Type:"
-#~ msgstr "MIME 타입:"
-
-#~ msgid "Regular Expressions"
-#~ msgstr "정규식"
-
-#~ msgid ""
-#~ "You can set up two regular expressions here to identify the Mime Type\n"
-#~ "by.  These fields are optional."
-#~ msgstr ""
-#~ "MIME 타입을 판별하는 데 쓰이도록 두 개의 정규식을 쓸 수\n"
-#~ "있습니다.  사용하지 않을 수도 있습니다."
