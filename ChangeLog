@@ -1,5 +1,23 @@
 2000-09-10  Bradford Hovinen  <hovinen@helixcode.com>
 
+	* libcapplet/capplet-widget.h (struct _CappletWidget):
+	(struct _CappletWidgetClass): Add buffer to make sure class is
+ 	binary compatible with older library
+
+	* libcapplet/capplet-widget.c (capplet_widget_class_init): Attach
+ 	capplet_widget_realize (renamed capplet_widget_show) to "show"
+ 	method
+	(capplet_widget_destroy): Accept a GtkObject
+	(capplet_widget_show): Accept a GtkWidget
+	(capplet_widget_destroy): 
+	(capplet_widget_state_changed): 
+	(capplet_widget_show): 
+	(ok_cb): 
+	(cancel_cb): 
+	(set_controls_sensitive): Add assertion checks on preconditions
+	(capplet_widget_init): Removed unused variables
+	Removed undo_cb, about_cb, id_list
+
 	* capplets/new-background-properties/prefs-widget.c 
 	(read_preferences): Set gradient/wallpaper/background controls'
 	sensitivity depending on whether they are enabled
