@@ -56,11 +56,11 @@ extern char *xci_desc_to_utf8 (XklConfigItem * ci);
 
 extern void sort_tree_content (GtkWidget * treeView);
 
-extern void enable_disable_restoring(GladeXML * dialog);
+extern void enable_disable_restoring (GladeXML * dialog);
 
-extern void init_preview(GladeXML * dialog);
+extern void preview_toggled (GladeXML * dialog, GtkWidget * button);
 
-extern void choose_model(GladeXML * dialog);
+extern void choose_model (GladeXML * dialog);
 
 G_END_DECLS
 #endif				/* __GNOME_KEYBOARD_PROPERTY_XKB_H */

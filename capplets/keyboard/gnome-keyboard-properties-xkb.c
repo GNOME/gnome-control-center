@@ -172,7 +172,9 @@ setup_xkb_tabs (GladeXML * dialog, GConfChangeSet * changeset)
 
   enable_disable_restoring (dialog);
 
-  init_preview(dialog);
+  g_signal_connect_swapped (G_OBJECT (WID ("enable_preview")), "toggled",
+		            G_CALLBACK (preview_toggled), dialog);
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("enable_preview")), FALSE);
 }
 
 void

@@ -33,13 +33,39 @@
 #include "gnome-keyboard-properties-xkb.h"
 #include "libkbdraw/keyboard-drawing.h"
 
+static GtkWidget * previewWindow = NULL;
+
 void
-init_preview (GladeXML * dialog)
+init_preview ( void )
 {
-  GtkWidget *frame = WID ("preview_frame");
   GtkWidget *kbdraw = keyboard_drawing_new ();
+
+  previewWindow = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+  gtk_window_set_destroy_with_parent (GTK_WINDOW (previewWindow), TRUE);
+  gtk_window_set_keep_above(GTK_WINDOW (previewWindow), TRUE);
+  gtk_window_set_resizable(GTK_WINDOW (previewWindow), TRUE);
+  gtk_window_set_skip_pager_hint(GTK_WINDOW (previewWindow), TRUE);
+  gtk_window_set_skip_taskbar_hint(GTK_WINDOW (previewWindow), TRUE);
+  gtk_window_set_default_size(GTK_WINDOW (previewWindow), 500, 300);
+  gtk_window_set_title(GTK_WINDOW (previewWindow), _("Keyboard layout preview"));
+
   keyboard_drawing_set_track_group (KEYBOARD_DRAWING (kbdraw), TRUE);
   keyboard_drawing_set_track_config (KEYBOARD_DRAWING (kbdraw), TRUE);
-  gtk_container_add (GTK_CONTAINER (frame), kbdraw);
-  gtk_widget_show (kbdraw);
+  gtk_container_add (GTK_CONTAINER (previewWindow), kbdraw);
+
+}
+
+void
+preview_toggled (GladeXML * dialog, GtkWidget * button)
+{
+  gboolean doShow = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
+  
+  if (doShow && previewWindow == NULL)
+    init_preview();
+
+  if (doShow)
+    gtk_widget_show_all (previewWindow);
+  else
+    if (previewWindow != NULL)
+      gtk_widget_hide_all (previewWindow);
 }
