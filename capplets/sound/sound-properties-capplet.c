@@ -122,11 +122,19 @@ get_legacy_settings (void)
 static void
 dialog_button_clicked_cb (GtkDialog *dialog, gint response_id, GConfChangeSet *changeset) 
 {
-	switch (response_id) {
-	case GTK_RESPONSE_CLOSE:
+	if (response_id == GTK_RESPONSE_HELP) {
+		GError *error = NULL;
+
+		gnome_help_display_desktop (NULL,
+			"control-center-manual",
+			"config-sound.xml",
+			"CONFIGURATION", &error);
+		if (error) {
+			g_warning ("help error: %s\n", error->message);
+			g_error_free (error);
+		}
+	} else
 		gtk_main_quit ();
-		break;
-	}
 }
 
 int
@@ -171,11 +179,12 @@ main (int argc, char **argv)
 
 #if 0
 		gnome_window_icon_set_default_from_file
-			(GNOMECC_ICONS_DIR "keyboard-capplet.png");
+			(GNOMECC_ICONS_DIR "sound-capplet.png");
 #endif
 
 		dialog_win = gtk_dialog_new_with_buttons
 			(_("Sound preferences"), NULL, -1,
+			 GTK_STOCK_HELP, GTK_RESPONSE_HELP,
 			 GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
 			 NULL);
 
