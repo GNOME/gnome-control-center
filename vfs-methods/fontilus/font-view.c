@@ -391,7 +391,7 @@ main(int argc, char **argv)
     gtk_init(&argc, &argv);
 
     if (argc != 2) {
-	g_printerr("usage: foo fontfile\n");
+	g_printerr(_("usage: %s fontfile\n"), argv[0]);
 	return 1;
     }
 
