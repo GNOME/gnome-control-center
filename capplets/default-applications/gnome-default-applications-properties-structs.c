@@ -33,6 +33,8 @@ MailerDescription possible_mailers[] = {
 	 * there is only one (the first entry in this list) Evolution entry 
 	 * in the list shown to the user
 	 */
+	{ N_("Evolution Mail Reader"),		"evolution-2.2",	"evolution-2.2 %s",	FALSE, FALSE, },
+	{ N_("Evolution Mail Reader"),		"evolution-2.0",	"evolution-2.0 %s",	FALSE, FALSE, },
 	{ N_("Evolution Mail Reader"),		"evolution-1.6",	"evolution-1.6 %s",	FALSE, FALSE, },
 	{ N_("Evolution Mail Reader"),		"evolution-1.5",	"evolution-1.5 %s",	FALSE, FALSE, },
         { N_("Evolution Mail Reader"),		"evolution-1.4",	"evolution-1.4 %s",	FALSE, FALSE, },
