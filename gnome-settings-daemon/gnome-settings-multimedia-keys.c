@@ -651,17 +651,7 @@ do_www_action (Acme *acme, const char *url)
 static void
 do_exit_action (Acme *acme)
 {
-	GnomeClient *master;
-
-	master = gnome_master_client();
-	g_return_if_fail(master != NULL);
-
-	gnome_client_request_save(master,
-			GNOME_SAVE_BOTH,
-			TRUE,
-			GNOME_INTERACT_ANY,
-			FALSE,
-			TRUE);
+	execute ("gnome-session-save --kill", FALSE);
 }
 
 static void
