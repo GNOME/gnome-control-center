@@ -15,7 +15,10 @@ Screensavers_DATA = \
 
 EXTRA_DIST = $(Screensavers_DATA) README
 
-noinst_PROGRAMS = extract-labels
+BUILT_SOURCES = ant.xml.h bsod.xml.h compass.xml.h flag.xml.h \
+		qix.xml.h attraction.xml.h
+		
+noinst_PROGRAMS = extract-labels $(BUILD_SOURCES)
 
 extract_labels_SOURCES = extract-labels.c
 
@@ -23,9 +26,6 @@ extract_labels_LDADD = \
 	$(GNOME_LIBDIR) \
 	$(GNOME_LIBS) \
 	$(GNOME_XML_LIB)
-
-BUILT_SOURCES = ant.xml.h bsod.xml.h compass.xml.h flag.xml.h \
-		qix.xml.h attraction.xml.h
 
 ant.xml.h: $(srcdir)/ant.xml extract-labels
 	./extract-labels $(srcdir)/ant.xml

@@ -4,8 +4,12 @@
  * Authors: Jonathan Blandford <jrb@redhat.com>
  *          Owen Taylor <otaylor@redhat.com>
  */
+
+#ifdef HAVE_CONFIG_H
+#   include <config.h>
+#endif
+
 #include <ctype.h>
-#include <config.h>
 #include <parser.h>
 #include "wm-properties.h"
 #include "capplet-widget.h"

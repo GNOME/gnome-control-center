@@ -47,3 +47,6 @@ screensaver_properties_capplet_LDADD = \
 	-lXt \
 	-lgdk_pixbuf \
 	../../libcapplet/libcapplet.la
+
+install-data-local:
+	$(INSTALL_DATA) $(srcdir)/screensaver-properties.desktop $(DESTDIR)$(datadir)/gnome/apps/Settings/Desktop/screensaver-properties.desktop
