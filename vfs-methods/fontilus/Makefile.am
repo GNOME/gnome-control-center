@@ -8,7 +8,7 @@ vfsmodule_LTLIBRARIES = libfont-method.la
 noinst_PROGRAMS = thumbnailer
 
 libfont_method_la_LDFLAGS = -module -avoid-version
-libfont_method_la_LIBS = $(FONT_METHOD_LIBS)
+libfont_method_la_LIBADD = $(FONT_METHOD_LIBS)
 libfont_method_la_SOURCES = font-method.c
 
 vfsmoduleconfdir = $(sysconfdir)/gnome-vfs-2.0/modules

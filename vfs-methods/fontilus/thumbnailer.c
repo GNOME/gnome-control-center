@@ -50,7 +50,7 @@ main(int argc, char **argv)
     FT_GlyphSlot slot;
     GdkPixbuf *pixbuf, *pixbuf2;
     guchar *buffer;
-    gint width, height, i, pen_x, pen_y, max_width, max_height;
+    gint width, height, i, len, pen_x, pen_y, max_width, max_height;
 
     if (argc != 3) {
 	g_message("eek: bad args");
@@ -95,8 +95,8 @@ main(int argc, char **argv)
     pixbuf = gdk_pixbuf_new(GDK_COLORSPACE_RGB, FALSE, 8, width*3, height*1.5);
     buffer = gdk_pixbuf_get_pixels(pixbuf);
 
-    for (i = gdk_pixbuf_get_rowstride(pixbuf) *
-	     gdk_pixbuf_get_height(pixbuf); i >= 0; i--)
+    len = gdk_pixbuf_get_rowstride(pixbuf) * gdk_pixbuf_get_height(pixbuf);
+    for (i = 0; i < len; i++)
 	buffer[i] = 255;
 
     pen_x = 0;
@@ -129,7 +129,6 @@ main(int argc, char **argv)
     gdk_pixbuf_unref(pixbuf);
 
     /* freeing the face causes a crash I haven't tracked down yet */
-#if 0
     error = FT_Done_Face(face);
     if (error) {
 	g_message("eek: done face");
@@ -140,7 +139,6 @@ main(int argc, char **argv)
 	g_message("eek: done library");
 	return 1;
     }
-#endif
 
     return 0;
 }
