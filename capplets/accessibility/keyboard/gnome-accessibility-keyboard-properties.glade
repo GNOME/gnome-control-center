@@ -96,6 +96,8 @@
 	  <property name="show_border">True</property>
 	  <property name="tab_pos">GTK_POS_TOP</property>
 	  <property name="scrollable">False</property>
+	  <property name="tab_hborder">2</property>
+	  <property name="tab_vborder">2</property>
 	  <property name="enable_popup">False</property>
 
 	  <child>
@@ -119,7 +121,7 @@
 		      <property name="visible">True</property>
 		      <property name="label_xalign">0</property>
 		      <property name="label_yalign">0.5</property>
-		      <property name="shadow_type">GTK_SHADOW_ETCHED_IN</property>
+		      <property name="shadow_type">GTK_SHADOW_NONE</property>
 
 		      <child>
 			<widget class="GtkVBox" id="vbox6">
@@ -334,9 +336,9 @@
 		      <child>
 			<widget class="GtkLabel" id="label61">
 			  <property name="visible">True</property>
-			  <property name="label" translatable="yes">Features</property>
+			  <property name="label" translatable="yes">&lt;b&gt;Features&lt;/b&gt;</property>
 			  <property name="use_underline">False</property>
-			  <property name="use_markup">False</property>
+			  <property name="use_markup">True</property>
 			  <property name="justify">GTK_JUSTIFY_LEFT</property>
 			  <property name="wrap">False</property>
 			  <property name="selectable">False</property>
@@ -365,7 +367,7 @@
 		      <property name="visible">True</property>
 		      <property name="label_xalign">0</property>
 		      <property name="label_yalign">0.5</property>
-		      <property name="shadow_type">GTK_SHADOW_ETCHED_IN</property>
+		      <property name="shadow_type">GTK_SHADOW_NONE</property>
 
 		      <child>
 			<widget class="GtkTable" id="repeatkeys_table">
@@ -578,15 +580,52 @@
 		      </child>
 
 		      <child>
-			<widget class="GtkCheckButton" id="repeatkeys_enable">
+			<widget class="GtkHBox" id="hbox20">
 			  <property name="visible">True</property>
-			  <property name="can_focus">True</property>
-			  <property name="label" translatable="yes">_Repeat Keys</property>
-			  <property name="use_underline">True</property>
-			  <property name="relief">GTK_RELIEF_NORMAL</property>
-			  <property name="active">False</property>
-			  <property name="inconsistent">False</property>
-			  <property name="draw_indicator">True</property>
+			  <property name="homogeneous">False</property>
+			  <property name="spacing">0</property>
+
+			  <child>
+			    <widget class="GtkCheckButton" id="repeatkeys_enable">
+			      <property name="visible">True</property>
+			      <property name="can_focus">True</property>
+			      <property name="relief">GTK_RELIEF_NORMAL</property>
+			      <property name="active">False</property>
+			      <property name="inconsistent">False</property>
+			      <property name="draw_indicator">True</property>
+
+			      <child>
+				<placeholder/>
+			      </child>
+			    </widget>
+			    <packing>
+			      <property name="padding">0</property>
+			      <property name="expand">False</property>
+			      <property name="fill">False</property>
+			    </packing>
+			  </child>
+
+			  <child>
+			    <widget class="GtkLabel" id="label84">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">&lt;b&gt;Enable _Repeat Keys&lt;/b&gt;</property>
+			      <property name="use_underline">True</property>
+			      <property name="use_markup">True</property>
+			      <property name="justify">GTK_JUSTIFY_LEFT</property>
+			      <property name="wrap">False</property>
+			      <property name="selectable">False</property>
+			      <property name="xalign">0.5</property>
+			      <property name="yalign">0.5</property>
+			      <property name="xpad">0</property>
+			      <property name="ypad">0</property>
+			      <property name="mnemonic_widget">repeatkeys_enable</property>
+			    </widget>
+			    <packing>
+			      <property name="padding">0</property>
+			      <property name="expand">False</property>
+			      <property name="fill">False</property>
+			    </packing>
+			  </child>
 			</widget>
 			<packing>
 			  <property name="type">label_item</property>
@@ -609,7 +648,7 @@
 		      <property name="visible">True</property>
 		      <property name="label_xalign">0</property>
 		      <property name="label_yalign">0.5</property>
-		      <property name="shadow_type">GTK_SHADOW_ETCHED_IN</property>
+		      <property name="shadow_type">GTK_SHADOW_NONE</property>
 
 		      <child>
 			<widget class="GtkTable" id="stickeykeys_table">
@@ -682,16 +721,53 @@
 		      </child>
 
 		      <child>
-			<widget class="GtkCheckButton" id="stickykeys_enable">
+			<widget class="GtkHBox" id="hbox19">
 			  <property name="visible">True</property>
-			  <property name="tooltip" translatable="yes">Perform multiple simultaneous key press operations by pressing modifier keys in sequence.</property>
-			  <property name="can_focus">True</property>
-			  <property name="label" translatable="yes">Enable _Sticky Keys</property>
-			  <property name="use_underline">True</property>
-			  <property name="relief">GTK_RELIEF_NORMAL</property>
-			  <property name="active">True</property>
-			  <property name="inconsistent">False</property>
-			  <property name="draw_indicator">True</property>
+			  <property name="homogeneous">False</property>
+			  <property name="spacing">0</property>
+
+			  <child>
+			    <widget class="GtkCheckButton" id="stickykeys_enable">
+			      <property name="visible">True</property>
+			      <property name="tooltip" translatable="yes">Perform multiple simultaneous key press operations by pressing modifier keys in sequence.</property>
+			      <property name="can_focus">True</property>
+			      <property name="relief">GTK_RELIEF_NORMAL</property>
+			      <property name="active">True</property>
+			      <property name="inconsistent">False</property>
+			      <property name="draw_indicator">True</property>
+
+			      <child>
+				<placeholder/>
+			      </child>
+			    </widget>
+			    <packing>
+			      <property name="padding">0</property>
+			      <property name="expand">False</property>
+			      <property name="fill">False</property>
+			    </packing>
+			  </child>
+
+			  <child>
+			    <widget class="GtkLabel" id="label83">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">&lt;b&gt;Enable _Sticky Keys&lt;/b&gt;</property>
+			      <property name="use_underline">True</property>
+			      <property name="use_markup">True</property>
+			      <property name="justify">GTK_JUSTIFY_LEFT</property>
+			      <property name="wrap">False</property>
+			      <property name="selectable">False</property>
+			      <property name="xalign">0.5</property>
+			      <property name="yalign">0.5</property>
+			      <property name="xpad">0</property>
+			      <property name="ypad">0</property>
+			      <property name="mnemonic_widget">stickykeys_enable</property>
+			    </widget>
+			    <packing>
+			      <property name="padding">0</property>
+			      <property name="expand">False</property>
+			      <property name="fill">False</property>
+			    </packing>
+			  </child>
 			</widget>
 			<packing>
 			  <property name="type">label_item</property>
@@ -824,7 +900,7 @@
 		      <property name="visible">True</property>
 		      <property name="label_xalign">0</property>
 		      <property name="label_yalign">0.5</property>
-		      <property name="shadow_type">GTK_SHADOW_ETCHED_IN</property>
+		      <property name="shadow_type">GTK_SHADOW_NONE</property>
 
 		      <child>
 			<widget class="GtkTable" id="slowkeys_table">
@@ -1054,16 +1130,53 @@
 		      </child>
 
 		      <child>
-			<widget class="GtkCheckButton" id="slowkeys_enable">
+			<widget class="GtkHBox" id="hbox17">
 			  <property name="visible">True</property>
-			  <property name="tooltip" translatable="yes">Only accept keys after they have been pressed and held for a user adjustable amount of time.</property>
-			  <property name="can_focus">True</property>
-			  <property name="label" translatable="yes">Enable Slo_w Keys</property>
-			  <property name="use_underline">True</property>
-			  <property name="relief">GTK_RELIEF_NORMAL</property>
-			  <property name="active">True</property>
-			  <property name="inconsistent">False</property>
-			  <property name="draw_indicator">True</property>
+			  <property name="homogeneous">False</property>
+			  <property name="spacing">0</property>
+
+			  <child>
+			    <widget class="GtkCheckButton" id="slowkeys_enable">
+			      <property name="visible">True</property>
+			      <property name="tooltip" translatable="yes">Only accept keys after they have been pressed and held for a user adjustable amount of time.</property>
+			      <property name="can_focus">True</property>
+			      <property name="relief">GTK_RELIEF_NORMAL</property>
+			      <property name="active">True</property>
+			      <property name="inconsistent">False</property>
+			      <property name="draw_indicator">True</property>
+
+			      <child>
+				<placeholder/>
+			      </child>
+			    </widget>
+			    <packing>
+			      <property name="padding">0</property>
+			      <property name="expand">False</property>
+			      <property name="fill">False</property>
+			    </packing>
+			  </child>
+
+			  <child>
+			    <widget class="GtkLabel" id="label85">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">&lt;b&gt;Enable Slo_w Keys&lt;/b&gt;</property>
+			      <property name="use_underline">True</property>
+			      <property name="use_markup">True</property>
+			      <property name="justify">GTK_JUSTIFY_LEFT</property>
+			      <property name="wrap">False</property>
+			      <property name="selectable">False</property>
+			      <property name="xalign">0.5</property>
+			      <property name="yalign">0.5</property>
+			      <property name="xpad">0</property>
+			      <property name="ypad">0</property>
+			      <property name="mnemonic_widget">slowkeys_enable</property>
+			    </widget>
+			    <packing>
+			      <property name="padding">0</property>
+			      <property name="expand">False</property>
+			      <property name="fill">False</property>
+			    </packing>
+			  </child>
 			</widget>
 			<packing>
 			  <property name="type">label_item</property>
@@ -1086,7 +1199,7 @@
 		      <property name="visible">True</property>
 		      <property name="label_xalign">0</property>
 		      <property name="label_yalign">0.5</property>
-		      <property name="shadow_type">GTK_SHADOW_ETCHED_IN</property>
+		      <property name="shadow_type">GTK_SHADOW_NONE</property>
 
 		      <child>
 			<widget class="GtkTable" id="bouncekey_table">
@@ -1232,16 +1345,53 @@
 		      </child>
 
 		      <child>
-			<widget class="GtkCheckButton" id="bouncekeys_enable">
+			<widget class="GtkHBox" id="hbox18">
 			  <property name="visible">True</property>
-			  <property name="tooltip" translatable="yes">Ignore all subsequent presses of the SAME key if they happen within a user selectable period of time.</property>
-			  <property name="can_focus">True</property>
-			  <property name="label" translatable="yes">Enable Bo_unce Keys</property>
-			  <property name="use_underline">True</property>
-			  <property name="relief">GTK_RELIEF_NORMAL</property>
-			  <property name="active">True</property>
-			  <property name="inconsistent">False</property>
-			  <property name="draw_indicator">True</property>
+			  <property name="homogeneous">False</property>
+			  <property name="spacing">0</property>
+
+			  <child>
+			    <widget class="GtkCheckButton" id="bouncekeys_enable">
+			      <property name="visible">True</property>
+			      <property name="tooltip" translatable="yes">Ignore all subsequent presses of the SAME key if they happen within a user selectable period of time.</property>
+			      <property name="can_focus">True</property>
+			      <property name="relief">GTK_RELIEF_NORMAL</property>
+			      <property name="active">True</property>
+			      <property name="inconsistent">False</property>
+			      <property name="draw_indicator">True</property>
+
+			      <child>
+				<placeholder/>
+			      </child>
+			    </widget>
+			    <packing>
+			      <property name="padding">0</property>
+			      <property name="expand">False</property>
+			      <property name="fill">False</property>
+			    </packing>
+			  </child>
+
+			  <child>
+			    <widget class="GtkLabel" id="label86">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">&lt;b&gt;Enable Bo_unce Keys&lt;/b&gt;</property>
+			      <property name="use_underline">True</property>
+			      <property name="use_markup">True</property>
+			      <property name="justify">GTK_JUSTIFY_LEFT</property>
+			      <property name="wrap">False</property>
+			      <property name="selectable">False</property>
+			      <property name="xalign">0.5</property>
+			      <property name="yalign">0.5</property>
+			      <property name="xpad">0</property>
+			      <property name="ypad">0</property>
+			      <property name="mnemonic_widget">bouncekeys_enable</property>
+			    </widget>
+			    <packing>
+			      <property name="padding">0</property>
+			      <property name="expand">False</property>
+			      <property name="fill">False</property>
+			    </packing>
+			  </child>
 			</widget>
 			<packing>
 			  <property name="type">label_item</property>
@@ -1263,7 +1413,7 @@
 		      <property name="visible">True</property>
 		      <property name="label_xalign">0</property>
 		      <property name="label_yalign">0.5</property>
-		      <property name="shadow_type">GTK_SHADOW_ETCHED_IN</property>
+		      <property name="shadow_type">GTK_SHADOW_NONE</property>
 
 		      <child>
 			<widget class="GtkHBox" id="hbox8">
@@ -1311,9 +1461,9 @@
 		      <child>
 			<widget class="GtkLabel" id="label37">
 			  <property name="visible">True</property>
-			  <property name="label" translatable="yes">Toggle Keys</property>
+			  <property name="label" translatable="yes">&lt;b&gt;Toggle Keys&lt;/b&gt;</property>
 			  <property name="use_underline">False</property>
-			  <property name="use_markup">False</property>
+			  <property name="use_markup">True</property>
 			  <property name="justify">GTK_JUSTIFY_LEFT</property>
 			  <property name="wrap">False</property>
 			  <property name="selectable">False</property>
@@ -1443,7 +1593,7 @@
 		  <property name="visible">True</property>
 		  <property name="label_xalign">0</property>
 		  <property name="label_yalign">0.5</property>
-		  <property name="shadow_type">GTK_SHADOW_ETCHED_IN</property>
+		  <property name="shadow_type">GTK_SHADOW_NONE</property>
 
 		  <child>
 		    <widget class="GtkTable" id="mousekeys_table">
@@ -1750,16 +1900,53 @@
 		  </child>
 
 		  <child>
-		    <widget class="GtkCheckButton" id="mousekeys_enable">
+		    <widget class="GtkHBox" id="hbox21">
 		      <property name="visible">True</property>
-		      <property name="tooltip" translatable="yes">Turn the numeric keypad into a mouse control pad.</property>
-		      <property name="can_focus">True</property>
-		      <property name="label" translatable="yes">Enable _Mouse Keys</property>
-		      <property name="use_underline">True</property>
-		      <property name="relief">GTK_RELIEF_NORMAL</property>
-		      <property name="active">True</property>
-		      <property name="inconsistent">False</property>
-		      <property name="draw_indicator">True</property>
+		      <property name="homogeneous">False</property>
+		      <property name="spacing">0</property>
+
+		      <child>
+			<widget class="GtkCheckButton" id="mousekeys_enable">
+			  <property name="visible">True</property>
+			  <property name="tooltip" translatable="yes">Turn the numeric keypad into a mouse control pad.</property>
+			  <property name="can_focus">True</property>
+			  <property name="relief">GTK_RELIEF_NORMAL</property>
+			  <property name="active">True</property>
+			  <property name="inconsistent">False</property>
+			  <property name="draw_indicator">True</property>
+
+			  <child>
+			    <placeholder/>
+			  </child>
+			</widget>
+			<packing>
+			  <property name="padding">0</property>
+			  <property name="expand">False</property>
+			  <property name="fill">False</property>
+			</packing>
+		      </child>
+
+		      <child>
+			<widget class="GtkLabel" id="label87">
+			  <property name="visible">True</property>
+			  <property name="label" translatable="yes">&lt;b&gt;Enable _Mouse Keys&lt;/b&gt;</property>
+			  <property name="use_underline">True</property>
+			  <property name="use_markup">True</property>
+			  <property name="justify">GTK_JUSTIFY_LEFT</property>
+			  <property name="wrap">False</property>
+			  <property name="selectable">False</property>
+			  <property name="xalign">0.5</property>
+			  <property name="yalign">0.5</property>
+			  <property name="xpad">0</property>
+			  <property name="ypad">0</property>
+			  <property name="mnemonic_widget">mousekeys_enable</property>
+			</widget>
+			<packing>
+			  <property name="padding">0</property>
+			  <property name="expand">False</property>
+			  <property name="fill">False</property>
+			</packing>
+		      </child>
 		    </widget>
 		    <packing>
 		      <property name="type">label_item</property>
@@ -1779,7 +1966,7 @@
 		  <property name="visible">True</property>
 		  <property name="label_xalign">0</property>
 		  <property name="label_yalign">0.5</property>
-		  <property name="shadow_type">GTK_SHADOW_ETCHED_IN</property>
+		  <property name="shadow_type">GTK_SHADOW_NONE</property>
 
 		  <child>
 		    <widget class="GtkTable" id="table7">
@@ -1910,9 +2097,9 @@
 		  <child>
 		    <widget class="GtkLabel" id="label74">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Mouse</property>
+		      <property name="label" translatable="yes">&lt;b&gt;Mouse&lt;/b&gt;</property>
 		      <property name="use_underline">False</property>
-		      <property name="use_markup">False</property>
+		      <property name="use_markup">True</property>
 		      <property name="justify">GTK_JUSTIFY_LEFT</property>
 		      <property name="wrap">False</property>
 		      <property name="selectable">False</property>
