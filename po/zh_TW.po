@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 1.99.10\n"
-"POT-Creation-Date: 2002-05-14 14:29+0800\n"
+"POT-Creation-Date: 2002-05-19 23:37+0800\n"
 "PO-Revision-Date: 2002-05-14 16:52+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -109,7 +109,7 @@ msgstr "加速至最高速度所需時間(_A)："
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:17
 msgid "Turn the numeric keypad into a mouse control pad."
-msgstr ""
+msgstr "使用數字鍵盤控制滑鼠。"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:18
 msgid "_Beep when enabling/disabling keyboard accessibility features"
@@ -182,62 +182,62 @@ msgid "Change the desktop background"
 msgstr "更改桌面背景"
 
 #. solid
-#: capplets/background/background-properties-capplet.c:222
+#: capplets/background/background-properties-capplet.c:228
 msgid "C_olor"
 msgstr "顏色(_O)"
 
 #. horiz
-#: capplets/background/background-properties-capplet.c:226
+#: capplets/background/background-properties-capplet.c:232
 msgid "_Left Color"
 msgstr "左邊顏色(_L)"
 
-#: capplets/background/background-properties-capplet.c:227
+#: capplets/background/background-properties-capplet.c:233
 msgid "_Right Color"
 msgstr "右邊顏色(_R)"
 
 #. vert
-#: capplets/background/background-properties-capplet.c:230
+#: capplets/background/background-properties-capplet.c:236
 msgid "_Top Color"
 msgstr "頂端顏色(_T)"
 
-#: capplets/background/background-properties-capplet.c:231
+#: capplets/background/background-properties-capplet.c:237
 msgid "_Bottom Color"
 msgstr "底部顏色(_B)"
 
-#: capplets/background/background-properties-capplet.c:392
+#: capplets/background/background-properties-capplet.c:398
 msgid "_Wallpaper"
 msgstr "桌布方式鋪排(_W)"
 
-#: capplets/background/background-properties-capplet.c:392
+#: capplets/background/background-properties-capplet.c:398
 msgid "C_entered"
 msgstr "中央顯示(_E)"
 
-#: capplets/background/background-properties-capplet.c:392
+#: capplets/background/background-properties-capplet.c:398
 msgid "_Scaled"
 msgstr "依比例縮放(_S)"
 
-#: capplets/background/background-properties-capplet.c:392
+#: capplets/background/background-properties-capplet.c:398
 msgid "Stretc_hed"
 msgstr "不依比例伸展(_H)"
 
-#: capplets/background/background-properties-capplet.c:392
+#: capplets/background/background-properties-capplet.c:398
 msgid "_No Picture"
 msgstr "不使用圖案(_N)"
 
-#: capplets/background/background-properties-capplet.c:427
+#: capplets/background/background-properties-capplet.c:433
 msgid "_Picture"
 msgstr "圖案(_P)"
 
-#: capplets/background/background-properties-capplet.c:537
+#: capplets/background/background-properties-capplet.c:566
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:592
-#: capplets/keyboard/gnome-keyboard-properties.c:365
+#: capplets/default-applications/gnome-default-applications-properties.c:715
+#: capplets/keyboard/gnome-keyboard-properties.c:367
 #: capplets/mouse/gnome-mouse-properties.c:735
 #: capplets/sound/sound-properties-capplet.c:156
 msgid "Retrieve and store legacy settings"
 msgstr "讀入舊版本的設定"
 
-#: capplets/background/background-properties-capplet.c:562
+#: capplets/background/background-properties-capplet.c:591
 #: capplets/background/background-properties.glade.h:2
 msgid "Background Preferences"
 msgstr "背景圖案偏好設定"
@@ -407,9 +407,8 @@ msgstr ""
 
 #: capplets/common/file-transfer-dialog.c:372
 #: capplets/common/file-transfer-dialog.c:374
-#, fuzzy
 msgid "Connecting..."
-msgstr "設定..."
+msgstr ""
 
 #: capplets/common/file-transfer-dialog.c:379
 #: capplets/common/file-transfer-dialog.c:381
@@ -483,7 +482,7 @@ msgstr ""
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:1479
+#: capplets/common/gconf-property-editor.c:1484
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -495,7 +494,7 @@ msgstr ""
 "\n"
 "請確定檔案已經存在並再試一次，或是重新選擇另一個背景圖案。"
 
-#: capplets/common/gconf-property-editor.c:1487
+#: capplets/common/gconf-property-editor.c:1492
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -508,136 +507,177 @@ msgstr ""
 "\n"
 "請選擇另一個圖案。"
 
-#: capplets/common/gconf-property-editor.c:1571
+#: capplets/common/gconf-property-editor.c:1583
 msgid "Please select an image."
 msgstr "請選擇圖像。"
 
 #: capplets/default-applications/default-applications.desktop.in.h:1
 msgid "Choose the applications used by default"
-msgstr "選擇預設使用的應用軟件"
+msgstr "選擇預設使用的應用程式"
 
 #: capplets/default-applications/default-applications.desktop.in.h:2
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:15
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:19
 msgid "Preferred Applications"
-msgstr "首選應用軟件"
+msgstr "首選應用程式"
+
+#: capplets/default-applications/gnome-default-applications-properties.c:105
+msgid "Please specify a name and a command for this editor."
+msgstr "請指定此編輯器的名稱及執行時所用的指令。"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:1
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: capplets/theme-switcher/theme-properties.glade.h:1
+#: capplets/network/gnome-network-preferences.glade.h:1
+msgid "*"
+msgstr "*"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:2
 msgid "Acce_pts URLs"
 msgstr "可接受 URL(_P)"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:2
-msgid "Accepts Line _Number"
-msgstr "可接受行數(_N)"
-
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:3
-msgid "C_ustom Editor:"
-msgstr "自行指定編輯器(_U)："
+#: capplets/mime-type/mime-type-capplet.c:93
+#: capplets/wm-properties/wm-properties-capplet.c:1151
+msgid "Add..."
+msgstr "新增..."
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:4
+#, fuzzy
+msgid "C_ustom Editor"
+msgstr "自行指定編輯器(_U)："
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:5
 msgid "C_ustom Help Browser:"
 msgstr "自行指定說明文件瀏覽器(_U)："
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:5
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:6
 msgid "C_ustom Terminal:"
 msgstr "自行指定終端機(_U)："
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:6
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:7
 msgid "C_ustom Web Browser:"
 msgstr "自行指定網頁瀏覽器(_U)："
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:7
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:8
 msgid "Co_mmand:"
 msgstr "指令(_M)："
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:8
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:9
+msgid "Custom Editor Properties"
+msgstr "自訂編輯器屬性"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:10
 msgid "Default Help Browser"
 msgstr "預設的說明文件瀏覽器"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:9
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:11
 msgid "Default Terminal"
 msgstr "預設的終端機"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:10
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:12
 msgid "Default Text Editor"
 msgstr "預設的文字編輯器"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:11
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:13
 msgid "Default Web Browser"
 msgstr "預設的網頁瀏覽器"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:12
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:14
 msgid "Default Window Manager"
 msgstr "預設的視窗管理程式"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:13
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:15
+#: capplets/mime-type/mime-type-capplet.c:83
+#: capplets/wm-properties/wm-properties-capplet.c:1161
+msgid "Delete"
+msgstr "刪除"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:16
 msgid "E_xec Flag:"
 msgstr "執行時的參數(_X)："
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:14
-msgid "He_lp Browser"
-msgstr "說明文件瀏覽器(_L)"
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:17
+#: capplets/mime-type/mime-type-capplet.c:97
+#: capplets/wm-properties/wm-properties-capplet.c:1156
+msgid "Edit..."
+msgstr "編輯..."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:16
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:18
+msgid "Help Browser"
+msgstr "說明文件瀏覽器"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:20
 msgid ""
 "Select the window manager you want.  You will need to hit apply, wave the "
 "magic wand, and do a magic dance for it to work."
 msgstr ""
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:17
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:21
 msgid "Start in T_erminal"
 msgstr "在終端機中執行(_E)"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:18
-msgid "Te_rminal"
-msgstr "終端機(_R)"
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:22
+msgid "Terminal"
+msgstr "終端機"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:19
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:23
+msgid "Text Editor"
+msgstr "文字編輯器"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:24
+msgid "This application can open _URIs"
+msgstr "此應用程式可開啟 _URI"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:25
+msgid "This application can open _multiple files"
+msgstr "此應用程式可同時開啟多個檔案(_M)"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:26
+msgid "This application needs to be run in a _shell"
+msgstr ""
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:27
 msgid "Understands _Netscape Remote Control"
 msgstr "支援 _Netscape 的 Remote Control 協定"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:20
-msgid "Web _Browser"
-msgstr "網頁瀏覽器(_B)"
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:28
+msgid "Use this _editor to open text files in the file manager"
+msgstr ""
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:21
-msgid "_Add..."
-msgstr "新增(_A)..."
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:29
+msgid "Web Browser"
+msgstr "網頁瀏覽器"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:22
-msgid "_Delete"
-msgstr "刪除(_D)"
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:30
+msgid "Window Manager"
+msgstr "視窗管理程式"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:23
-#: capplets/file-types/file-types-properties.glade.h:19
-msgid "_Edit..."
-msgstr "編輯(_E)..."
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+msgid "_Name:"
+msgstr "名稱(_N)："
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:24
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:32
+msgid "_Properties..."
+msgstr "屬性(_P)..."
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:33
 msgid "_Select a Help Browser:"
 msgstr "請選擇說明文件瀏覽器(_S)："
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:25
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:34
 msgid "_Select a Terminal:"
 msgstr "請選擇終端機(_S)："
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:26
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:35
 msgid "_Select a Web Browser:"
 msgstr "請選擇網頁瀏覽器(_S)："
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:27
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:36
 msgid "_Select an Editor:"
 msgstr "請選擇編輯器(_S)："
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:28
-msgid "_Text Editor"
-msgstr "文字編輯器(_T)"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:29
-msgid "_Window Manager"
-msgstr "視窗管理程式(_W)"
-
 #: capplets/desktop-links/Accessibility.directory.in.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "Accessibility"
 msgstr "輔助功能"
 
@@ -731,7 +771,6 @@ msgid "Configure miscellaneous window features"
 msgstr "設定其它視窗屬性"
 
 #: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
-#: capplets/ui-properties/ui-properties.glade.h:19
 msgid "Miscellaneous"
 msgstr "其它"
 
@@ -863,17 +902,17 @@ msgid "Source Code"
 msgstr "源代碼"
 
 #: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:752
+#: capplets/file-types/mime-type-info.c:753
 msgid "Audio"
 msgstr "音效"
 
 #: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:748
+#: capplets/file-types/mime-type-info.c:749
 msgid "Images"
 msgstr "圖像"
 
 #: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:750
+#: capplets/file-types/mime-type-info.c:751
 msgid "Video"
 msgstr "視像"
 
@@ -968,6 +1007,10 @@ msgstr "選擇(_C)..."
 #: capplets/file-types/file-types-properties.glade.h:18
 msgid "_Description"
 msgstr "描述(_D)"
+
+#: capplets/file-types/file-types-properties.glade.h:19
+msgid "_Edit..."
+msgstr "編輯(_E)..."
 
 #: capplets/file-types/file-types-properties.glade.h:20
 msgid "_MIME Type"
@@ -1184,7 +1227,7 @@ msgstr "快速鍵"
 
 #: capplets/keybindings/eggcellrendererkeys.c:203
 #: capplets/keybindings/gnome-keybinding-properties.c:306
-#: libbackground/applier.c:533
+#: libbackground/applier.c:531
 msgid "Disabled"
 msgstr "無效"
 
@@ -1197,74 +1240,72 @@ msgstr "請輸入新的快速鍵，或是按 Backspace 清除原有按鍵"
 msgid "Type a new accelerator"
 msgstr "請輸入新的快速鍵"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:569
+#: capplets/keybindings/gnome-keybinding-properties.c:573
 msgid "<Unknown Action>"
 msgstr "<行動設定不詳>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:592
+#: capplets/keybindings/gnome-keybinding-properties.c:598
 msgid "Desktop"
 msgstr "桌面"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:596
+#: capplets/keybindings/gnome-keybinding-properties.c:602
 msgid "Window Management"
 msgstr "視窗管理"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:692
+#: capplets/keybindings/gnome-keybinding-properties.c:698
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "在組態資料庫中設定新的快速鍵時出現錯誤：%s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:783
+#: capplets/keybindings/gnome-keybinding-properties.c:839
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:807
-msgid "_Action"
-msgstr "行動(_A)"
+#: capplets/keybindings/gnome-keybinding-properties.c:864
+msgid "Action"
+msgstr "行動"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:819
-msgid "_Shortcut"
-msgstr "捷徑鍵(_S)"
+#: capplets/keybindings/gnome-keybinding-properties.c:876
+msgid "Shortcut"
+msgstr "捷徑鍵"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:1
 msgid "Click for a list of keyboard navigation schemes."
 msgstr ""
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:2
-msgid "Desktop Shortcuts:"
-msgstr "桌面捷徑鍵："
-
-#: capplets/keybindings/gnome-keybinding-properties.glade.h:3
 #: capplets/keybindings/keybinding.desktop.in.h:2
 msgid "Keyboard Shortcuts"
 msgstr "捷徑鍵"
 
-#: capplets/keybindings/gnome-keybinding-properties.glade.h:4
+#: capplets/keybindings/gnome-keybinding-properties.glade.h:3
 msgid "Keyboard _Navigation scheme for use in applications:"
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.glade.h:5
-msgid "The list of keybindings."
-msgstr "按鍵結合的列表。"
-
-#: capplets/keybindings/gnome-keybinding-properties.glade.h:6
+#: capplets/keybindings/gnome-keybinding-properties.glade.h:4
 msgid ""
 "To assign a shortcut to an action, click in the shortcut column and press "
 "the key combination you want to associate with it."
 msgstr ""
+"如果要分配和各行動有關的捷徑鍵，可在相應的捷徑鍵欄位按下滑鼠按鈕，然後按下準"
+"備使用的按鍵組合。"
+
+#: capplets/keybindings/gnome-keybinding-properties.glade.h:5
+msgid "_Desktop shortcuts:"
+msgstr "桌面捷徑鍵(_D)："
 
 #: capplets/keybindings/keybinding.desktop.in.h:1
 msgid "Associate keyboard shortcuts with panel actions"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.c:344
+#: capplets/keyboard/gnome-keyboard-properties.c:346
 msgid "_Accessibility"
 msgstr "輔助技術(_A)"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:361
 #: capplets/keyboard/gnome-keyboard-properties.c:363
+#: capplets/keyboard/gnome-keyboard-properties.c:365
 #: capplets/sound/sound-properties-capplet.c:152
 #: capplets/sound/sound-properties-capplet.c:154
 msgid ""
@@ -1272,39 +1313,28 @@ msgid ""
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:1
-msgid ""
-"&lt;b&gt;Tip:&lt;/b&gt; You can configure the keyboards accessibility "
-"features by bringing up the 'Accessibility Settings' property dialog, or "
-"pressing the button on the right."
-msgstr ""
-"&lt;b&gt;提示：&lt;/b&gt; 如果要設定鍵盤輔助功能，可以開啟「輔助功能設定」對"
-"話窗，或是按右面的按鈕。"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:2
 msgid "&lt;i&gt;fast&lt;/i&gt;"
 msgstr "&lt;i&gt;快&lt;/i&gt;"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:2
 msgid "&lt;i&gt;loud&lt;/i&gt;"
 msgstr "&lt;i&gt;響&lt;/i&gt;"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
 msgid "&lt;i&gt;quiet&lt;/i&gt;"
 msgstr "&lt;i&gt;靜&lt;/i&gt;"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "&lt;i&gt;slow&lt;/i&gt;"
 msgstr "&lt;i&gt;慢&lt;/i&gt;"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
-#: capplets/theme-switcher/theme-properties.glade.h:1
-#: capplets/network/gnome-network-preferences.glade.h:1
-msgid "*"
-msgstr "*"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "Cursor"
 msgstr "游標"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
+msgid "Cursor _blinks in text fields"
+msgstr "文字輸入欄中的游標會閃爍(_B)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "Fast"
@@ -1373,8 +1403,7 @@ msgstr "慢"
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid ""
 "The keyboard bell is the &lt;i&gt;beep&lt;/i&gt; sound heard when the system "
-"wants to get your attention.  You can select a custom sound file to play "
-"instead of the traditional beeping noise."
+"wants to get your attention."
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:28
@@ -1386,16 +1415,20 @@ msgid "Very Short"
 msgstr "很短"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:30
+msgid ""
+"You can configure the keyboards accessibility features by bringing up the "
+"'Accessibility Settings' property dialog, or pressing the button on the "
+"right."
+msgstr ""
+"如果要設定鍵盤輔助功能，可以開啟「輔助功能設定」對話窗，或是按右面的按鈕。"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "_Accessibility..."
 msgstr "輔助技術(_A)..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:32
 msgid "_Blink speed:"
 msgstr "閃爍速度(_B)："
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:32
-msgid "_Cursor blinks in text fields"
-msgstr "游標會在文字輸入欄中閃爍(_C)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:33
 msgid "_Custom keyboard bell:"
@@ -1555,21 +1588,6 @@ msgstr ""
 "~/.gnome/mime-info/user.keys.\n"
 "\n"
 "將無法儲存狀態"
-
-#: capplets/mime-type/mime-type-capplet.c:83
-#: capplets/wm-properties/wm-properties-capplet.c:1161
-msgid "Delete"
-msgstr "刪除"
-
-#: capplets/mime-type/mime-type-capplet.c:93
-#: capplets/wm-properties/wm-properties-capplet.c:1151
-msgid "Add..."
-msgstr "新增..."
-
-#: capplets/mime-type/mime-type-capplet.c:97
-#: capplets/wm-properties/wm-properties-capplet.c:1156
-msgid "Edit..."
-msgstr "編輯..."
 
 #: capplets/mime-type/mime-type.desktop.in.in.h:1
 msgid "Configure how files are associated and started"
@@ -1864,7 +1882,6 @@ msgid "Submenu"
 msgstr "副選單"
 
 #: capplets/theme-switcher/control/control.c:74
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:2
 msgid "Item 1"
 msgstr "項目 1"
 
@@ -1897,34 +1914,38 @@ msgid "Theme"
 msgstr "佈景主題"
 
 #: capplets/theme-switcher/theme-properties.glade.h:2
+msgid "Gtk+ Theme Preferences"
+msgstr "Gtk+ 佈景主題偏好設定"
+
+#: capplets/theme-switcher/theme-properties.glade.h:3
 msgid "Install new theme"
 msgstr "安裝新的佈景主題"
 
-#: capplets/theme-switcher/theme-properties.glade.h:3
+#: capplets/theme-switcher/theme-properties.glade.h:4
 msgid "Installed Themes"
 msgstr "已安裝的佈景主題"
 
-#: capplets/theme-switcher/theme-properties.glade.h:4
-msgid "New themes can also be installed by dragging them into the window."
-msgstr ""
-
 #: capplets/theme-switcher/theme-properties.glade.h:5
-msgid "Theme Properties"
-msgstr "佈景主題屬性"
+msgid "List of available GTK+ themes"
+msgstr "可供選擇的 GTK+ 佈景主題"
 
 #: capplets/theme-switcher/theme-properties.glade.h:6
+msgid "New themes can also be installed by dragging them into the window."
+msgstr "可以將佈景主題檔案拖曳至此視窗來安裝佈景主題。"
+
+#: capplets/theme-switcher/theme-properties.glade.h:7
 msgid "_Go to theme folder"
 msgstr "移至佈景主題資料夾(_G)"
 
-#: capplets/theme-switcher/theme-properties.glade.h:7
+#: capplets/theme-switcher/theme-properties.glade.h:8
 msgid "_Install"
 msgstr "安裝(_I)"
 
-#: capplets/theme-switcher/theme-properties.glade.h:8
+#: capplets/theme-switcher/theme-properties.glade.h:9
 msgid "_Install new theme..."
 msgstr "安裝新的佈景主題(_I)..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:9
+#: capplets/theme-switcher/theme-properties.glade.h:10
 msgid "_Location of new theme:"
 msgstr "新佈景主題的位置(_L)："
 
@@ -1943,271 +1964,6 @@ msgstr "顯示方式"
 #: capplets/ui-properties/behavior.desktop.in.in.h:2
 msgid "Sets the default behavior of GNOME applications"
 msgstr "設定 GNOME 應用程式的預設顯示方式"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:1
-msgid "Icons and Text"
-msgstr "圖示及文字"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:3
-msgid "Item 2"
-msgstr "項目 2"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:4
-msgid "Item 3"
-msgstr "項目 3"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:5
-msgid "Menu Item 1"
-msgstr "選單項目 1"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:6
-msgid "Menu Item 2"
-msgstr "選單項目 2"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:7
-msgid "Menu Item 3"
-msgstr "選單項目 3"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:8
-msgid "Menu Item 4"
-msgstr "選單項目 4"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:9
-msgid "Menu Item 5"
-msgstr "選單項目 5"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:10
-msgid "Menu items have _icons"
-msgstr "選單項目具有圖示(_I)"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:11
-#: capplets/ui-properties/ui-properties.glade.h:17
-msgid "Menus"
-msgstr "選單"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:12
-msgid "New File"
-msgstr "新增檔案"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:13
-msgid "Only Icons"
-msgstr "只有圖示"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:14
-msgid "Only Text"
-msgstr "只有文字"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:15
-msgid "Open File"
-msgstr "開啟檔案"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:16
-msgid "Sample Menubar"
-msgstr "選單列樣本"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:17
-msgid "Sample Toolbar"
-msgstr "工具列樣本"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:18
-msgid "Save File"
-msgstr "儲存檔案"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:19
-msgid "Toolbar"
-msgstr "工具列"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:20
-msgid "Toolbar and Menu Properties"
-msgstr "工具列及選單屬性"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:21
-msgid "Toolbars can be _detached and moved around"
-msgstr "可以取出及移動工具列(_D)"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:22
-msgid "_Menu"
-msgstr "選單(_M)"
-
-#: capplets/ui-properties/gnome2-ui-properties.glade.h:23
-msgid "_Toolbars have: "
-msgstr "工具列具有(_T)："
-
-#: capplets/ui-properties/ui-properties.glade.h:1
-msgid "At the center of the screen"
-msgstr "螢幕中央"
-
-#: capplets/ui-properties/ui-properties.glade.h:2
-msgid "At the mouse pointer"
-msgstr "鼠標位置"
-
-#: capplets/ui-properties/ui-properties.glade.h:3
-msgid "Bottom"
-msgstr "底部"
-
-#: capplets/ui-properties/ui-properties.glade.h:4
-msgid "Default  (Spread out - big)"
-msgstr "預設（會擴展 ─ 大）"
-
-#: capplets/ui-properties/ui-properties.glade.h:5
-msgid "Dialog Buttons"
-msgstr "對話窗按鈕"
-
-#: capplets/ui-properties/ui-properties.glade.h:6
-msgid "Dialog buttons have icons"
-msgstr "對話窗按鈕具有圖示"
-
-#: capplets/ui-properties/ui-properties.glade.h:7
-msgid "Dialogs"
-msgstr "對話窗"
-
-#: capplets/ui-properties/ui-properties.glade.h:8
-msgid "Dialogs are treated"
-msgstr "對待對話窗方式"
-
-#: capplets/ui-properties/ui-properties.glade.h:9
-msgid "Dialogs open"
-msgstr "對話窗開啟於"
-
-#: capplets/ui-properties/ui-properties.glade.h:10
-msgid "Interface"
-msgstr "介面"
-
-#: capplets/ui-properties/ui-properties.glade.h:11
-msgid "Left"
-msgstr "左邊"
-
-#: capplets/ui-properties/ui-properties.glade.h:12
-msgid "Left aligned"
-msgstr "左手操作"
-
-#: capplets/ui-properties/ui-properties.glade.h:13
-msgid "Like any other window"
-msgstr "和其它視窗相同"
-
-#: capplets/ui-properties/ui-properties.glade.h:14
-msgid "Menu bars are detachable"
-msgstr "可以取出選單列"
-
-#: capplets/ui-properties/ui-properties.glade.h:15
-msgid "Menu bars have a border"
-msgstr "選單列有邊框"
-
-#: capplets/ui-properties/ui-properties.glade.h:16
-msgid "Menu items have icons"
-msgstr "選單項目具有圖示"
-
-#: capplets/ui-properties/ui-properties.glade.h:18
-msgid "Menus can be torn off"
-msgstr "選單可被撕開"
-
-#: capplets/ui-properties/ui-properties.glade.h:20
-msgid "Multiple Documents"
-msgstr "多文件介面"
-
-#: capplets/ui-properties/ui-properties.glade.h:21
-msgid "Notebook tabs"
-msgstr "標簽頁方式"
-
-#: capplets/ui-properties/ui-properties.glade.h:22
-msgid "Place dialogs over application window when possible"
-msgstr "若可能，將對話窗置於應用程式視窗之上"
-
-#: capplets/ui-properties/ui-properties.glade.h:23
-msgid "Progress bar is on the left"
-msgstr "進度列在左邊"
-
-#: capplets/ui-properties/ui-properties.glade.h:24
-msgid "Progress bar is on the right"
-msgstr "進度列在右邊"
-
-#: capplets/ui-properties/ui-properties.glade.h:25
-msgid "Right"
-msgstr "右邊"
-
-#: capplets/ui-properties/ui-properties.glade.h:26
-msgid "Right aligned"
-msgstr "右手操作"
-
-#: capplets/ui-properties/ui-properties.glade.h:27
-msgid "Seperate windows"
-msgstr "分離視窗"
-
-#: capplets/ui-properties/ui-properties.glade.h:28
-msgid "Settings will not take effect until applications restart"
-msgstr "設定在應用程式重新啟動前不會生效"
-
-#: capplets/ui-properties/ui-properties.glade.h:29
-msgid "Specially by the window manager"
-msgstr "由視窗管理程式特別處理"
-
-#: capplets/ui-properties/ui-properties.glade.h:30
-msgid "Spread out"
-msgstr "伸展"
-
-#: capplets/ui-properties/ui-properties.glade.h:31
-msgid "Spread out (big)"
-msgstr "會擴展（大）"
-
-#: capplets/ui-properties/ui-properties.glade.h:32
-msgid "Status Bar"
-msgstr "狀態列"
-
-#: capplets/ui-properties/ui-properties.glade.h:33
-msgid "Status bar is interactive when possible"
-msgstr "若可能，狀態列可互動"
-
-#: capplets/ui-properties/ui-properties.glade.h:34
-msgid "The same window"
-msgstr "同一視窗"
-
-#: capplets/ui-properties/ui-properties.glade.h:35
-msgid "Tool Bars"
-msgstr "工具列"
-
-#: capplets/ui-properties/ui-properties.glade.h:36
-msgid "Tool bar buttons are icons only"
-msgstr "工具列按鈕只有圖示"
-
-#: capplets/ui-properties/ui-properties.glade.h:37
-msgid "Tool bar buttons are text below icons"
-msgstr "工具列按鈕圖示下有文字"
-
-#: capplets/ui-properties/ui-properties.glade.h:38
-msgid "Tool bar buttons pop up on mouse over"
-msgstr "工具列按鈕遇到鼠標時會凸出來"
-
-#: capplets/ui-properties/ui-properties.glade.h:39
-msgid "Tool bars are detachable"
-msgstr "可以取出工具列"
-
-#: capplets/ui-properties/ui-properties.glade.h:40
-msgid "Tool bars have a border"
-msgstr "工具列有邊框"
-
-#: capplets/ui-properties/ui-properties.glade.h:41
-msgid "Tool bars have line separators"
-msgstr "工具列有分隔線"
-
-#: capplets/ui-properties/ui-properties.glade.h:42
-msgid "Top"
-msgstr "頂端"
-
-#: capplets/ui-properties/ui-properties.glade.h:43
-msgid "Use status bar instead of dialog when possible"
-msgstr "若有可能，以狀態列代替對話窗"
-
-#: capplets/ui-properties/ui-properties.glade.h:44
-msgid "When opening Multiple documents, use"
-msgstr "當開啟多個文件時，使用："
-
-#: capplets/ui-properties/ui-properties.glade.h:45
-msgid "When using Notebook tabs, place the tabs on the"
-msgstr "當使用標簽頁方式時，將標簽置於："
-
-#: capplets/ui-properties/ui-properties.glade.h:46
-msgid "Wherever the Window Manager places them"
-msgstr "由視窗管理程式指定"
 
 #: capplets/url-properties/url.desktop.in.in.h:1
 #: capplets/url-properties/url-properties.desktop.in.h:1
@@ -2289,7 +2045,7 @@ msgid ""
 "wm-properties-capplet: Unable to initialize window manager.\n"
 "\t'%s' didn't start\n"
 msgstr ""
-"wm-properties-capplet: 無法初始化視窗管理程式。\n"
+"wm-properties-capplet：無法初始化視窗管理程式。\n"
 "\t‘%s’無法啟動\n"
 
 #: capplets/windows/gnome-window-properties.c:469
@@ -2491,11 +2247,11 @@ msgstr "密碼(_W)："
 
 #: capplets/network/gnome-network-preferences.glade.h:6
 msgid "Pro_xy requires a username and password"
-msgstr "使用代理伺服器需要帳戶名稱及密碼(_X)"
+msgstr "使用代理伺服器需要用戶名稱及密碼(_X)"
 
 #: capplets/network/gnome-network-preferences.glade.h:7
 msgid "User_name:"
-msgstr "帳戶名稱(_N)："
+msgstr "用戶名稱(_N)："
 
 #: capplets/network/gnome-network-preferences.glade.h:8
 msgid "_Location:"
@@ -2509,31 +2265,31 @@ msgstr "使用 HTTP 代理伺服器(_U)"
 msgid "Network"
 msgstr "網絡"
 
-#: control-center/capplet-dir-view.c:153
+#: control-center/capplet-dir-view.c:158
 msgid "Layout"
 msgstr "配置"
 
-#: control-center/capplet-dir-view.c:154
+#: control-center/capplet-dir-view.c:159
 msgid "Layout to use for this view of the capplets"
 msgstr ""
 
-#: control-center/capplet-dir-view.c:160
+#: control-center/capplet-dir-view.c:165
 msgid "Capplet directory object"
 msgstr ""
 
-#: control-center/capplet-dir-view.c:161
+#: control-center/capplet-dir-view.c:166
 msgid "Capplet directory that this view is viewing"
 msgstr ""
 
-#: control-center/capplet-dir-view.c:318 control-center/gnomecc.desktop.in.h:1
+#: control-center/capplet-dir-view.c:338 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
 msgstr "GNOME 控制中心"
 
-#: control-center/capplet-dir-view.c:321
+#: control-center/capplet-dir-view.c:341
 msgid "Desktop properties manager."
 msgstr "桌面屬性管理程式"
 
-#: control-center/capplet-dir-view.c:457
+#: control-center/capplet-dir-view.c:477
 #, c-format
 msgid "Gnome Control Center : %s"
 msgstr "Gnome 控制中心：%s"
@@ -2552,14 +2308,22 @@ msgid "About this application"
 msgstr "關於此應用程式"
 
 #: control-center/gnomecc-ui.xml.h:2
+msgid "Overview of the control center"
+msgstr ""
+
+#: control-center/gnomecc-ui.xml.h:3
 msgid "_About..."
 msgstr "關於(_A)..."
 
-#: control-center/gnomecc-ui.xml.h:3
+#: control-center/gnomecc-ui.xml.h:4
+msgid "_Contents..."
+msgstr "內容(_C)..."
+
+#: control-center/gnomecc-ui.xml.h:5
 msgid "_File"
 msgstr "檔案(_F)"
 
-#: control-center/gnomecc-ui.xml.h:4
+#: control-center/gnomecc-ui.xml.h:6
 msgid "_Help"
 msgstr "說明(_H)"
 
@@ -2596,11 +2360,6 @@ msgstr "預覽高度"
 #: libbackground/applier.c:256
 msgid "Height if applier is a preview: Defaults to 48."
 msgstr ""
-
-#: libbackground/applier.c:454
-#, c-format
-msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
-msgstr "無法載入 pixbuf“%s”；不使用桌布。"
 
 #: libbackground/preview-file-selection.c:193
 msgid "Can't find an hbox, using a normal file selection"
@@ -2668,27 +2427,240 @@ msgstr ""
 msgid "_Do not show this message again"
 msgstr "不再顯示此訊息(_D)"
 
-#: gnome-settings-daemon/gnome-settings-sound.c:59
-msgid "Starting esd\n"
-msgstr "正在啟動 esd\n"
-
-#: gnome-settings-daemon/gnome-settings-sound.c:84
-msgid "Stopping esd\n"
-msgstr "正在關閉 esd\n"
-
-#: gnome-settings-daemon/gnome-settings-sound.c:127
+#: gnome-settings-daemon/gnome-settings-sound.c:125
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-sound.c:159
-msgid "Reloading events\n"
-msgstr ""
-
-#: gnome-settings-daemon/gnome-settings-xsettings.c:159
+#: gnome-settings-daemon/gnome-settings-xsettings.c:150
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "GConf 設定鍵 %s 的類型目前是 %s，但應該是 %s\n"
+
+#~ msgid "Accepts Line _Number"
+#~ msgstr "可接受行數(_N)"
+
+#~ msgid "_Add..."
+#~ msgstr "新增(_A)..."
+
+#~ msgid "_Delete"
+#~ msgstr "刪除(_D)"
+
+#~ msgid "_Action"
+#~ msgstr "行動(_A)"
+
+#~ msgid "The list of keybindings."
+#~ msgstr "按鍵結合的列表。"
+
+#~ msgid "Theme Properties"
+#~ msgstr "佈景主題屬性"
+
+#~ msgid "Icons and Text"
+#~ msgstr "圖示及文字"
+
+#~ msgid "Item 2"
+#~ msgstr "項目 2"
+
+#~ msgid "Item 3"
+#~ msgstr "項目 3"
+
+#~ msgid "Menu Item 1"
+#~ msgstr "選單項目 1"
+
+#~ msgid "Menu Item 2"
+#~ msgstr "選單項目 2"
+
+#~ msgid "Menu Item 3"
+#~ msgstr "選單項目 3"
+
+#~ msgid "Menu Item 4"
+#~ msgstr "選單項目 4"
+
+#~ msgid "Menu Item 5"
+#~ msgstr "選單項目 5"
+
+#~ msgid "Menu items have _icons"
+#~ msgstr "選單項目具有圖示(_I)"
+
+#~ msgid "Menus"
+#~ msgstr "選單"
+
+#~ msgid "New File"
+#~ msgstr "新增檔案"
+
+#~ msgid "Only Icons"
+#~ msgstr "只有圖示"
+
+#~ msgid "Only Text"
+#~ msgstr "只有文字"
+
+#~ msgid "Open File"
+#~ msgstr "開啟檔案"
+
+#~ msgid "Sample Menubar"
+#~ msgstr "選單列樣本"
+
+#~ msgid "Sample Toolbar"
+#~ msgstr "工具列樣本"
+
+#~ msgid "Save File"
+#~ msgstr "儲存檔案"
+
+#~ msgid "Toolbar"
+#~ msgstr "工具列"
+
+#~ msgid "Toolbar and Menu Properties"
+#~ msgstr "工具列及選單屬性"
+
+#~ msgid "Toolbars can be _detached and moved around"
+#~ msgstr "可以取出及移動工具列(_D)"
+
+#~ msgid "_Menu"
+#~ msgstr "選單(_M)"
+
+#~ msgid "_Toolbars have: "
+#~ msgstr "工具列具有(_T)："
+
+#~ msgid "At the center of the screen"
+#~ msgstr "螢幕中央"
+
+#~ msgid "At the mouse pointer"
+#~ msgstr "鼠標位置"
+
+#~ msgid "Bottom"
+#~ msgstr "底部"
+
+#~ msgid "Default  (Spread out - big)"
+#~ msgstr "預設（會擴展 ─ 大）"
+
+#~ msgid "Dialog Buttons"
+#~ msgstr "對話窗按鈕"
+
+#~ msgid "Dialog buttons have icons"
+#~ msgstr "對話窗按鈕具有圖示"
+
+#~ msgid "Dialogs"
+#~ msgstr "對話窗"
+
+#~ msgid "Dialogs are treated"
+#~ msgstr "對待對話窗方式"
+
+#~ msgid "Dialogs open"
+#~ msgstr "對話窗開啟於"
+
+#~ msgid "Interface"
+#~ msgstr "介面"
+
+#~ msgid "Left"
+#~ msgstr "左邊"
+
+#~ msgid "Left aligned"
+#~ msgstr "左手操作"
+
+#~ msgid "Like any other window"
+#~ msgstr "和其它視窗相同"
+
+#~ msgid "Menu bars are detachable"
+#~ msgstr "可以取出選單列"
+
+#~ msgid "Menu bars have a border"
+#~ msgstr "選單列有邊框"
+
+#~ msgid "Menu items have icons"
+#~ msgstr "選單項目具有圖示"
+
+#~ msgid "Menus can be torn off"
+#~ msgstr "選單可被撕開"
+
+#~ msgid "Multiple Documents"
+#~ msgstr "多文件介面"
+
+#~ msgid "Notebook tabs"
+#~ msgstr "標簽頁方式"
+
+#~ msgid "Place dialogs over application window when possible"
+#~ msgstr "若可能，將對話窗置於應用程式視窗之上"
+
+#~ msgid "Progress bar is on the left"
+#~ msgstr "進度列在左邊"
+
+#~ msgid "Progress bar is on the right"
+#~ msgstr "進度列在右邊"
+
+#~ msgid "Right"
+#~ msgstr "右邊"
+
+#~ msgid "Right aligned"
+#~ msgstr "右手操作"
+
+#~ msgid "Seperate windows"
+#~ msgstr "分離視窗"
+
+#~ msgid "Settings will not take effect until applications restart"
+#~ msgstr "設定在應用程式重新啟動前不會生效"
+
+#~ msgid "Specially by the window manager"
+#~ msgstr "由視窗管理程式特別處理"
+
+#~ msgid "Spread out"
+#~ msgstr "伸展"
+
+#~ msgid "Spread out (big)"
+#~ msgstr "會擴展（大）"
+
+#~ msgid "Status Bar"
+#~ msgstr "狀態列"
+
+#~ msgid "Status bar is interactive when possible"
+#~ msgstr "若可能，狀態列可互動"
+
+#~ msgid "The same window"
+#~ msgstr "同一視窗"
+
+#~ msgid "Tool Bars"
+#~ msgstr "工具列"
+
+#~ msgid "Tool bar buttons are icons only"
+#~ msgstr "工具列按鈕只有圖示"
+
+#~ msgid "Tool bar buttons are text below icons"
+#~ msgstr "工具列按鈕圖示下有文字"
+
+#~ msgid "Tool bar buttons pop up on mouse over"
+#~ msgstr "工具列按鈕遇到鼠標時會凸出來"
+
+#~ msgid "Tool bars are detachable"
+#~ msgstr "可以取出工具列"
+
+#~ msgid "Tool bars have a border"
+#~ msgstr "工具列有邊框"
+
+#~ msgid "Tool bars have line separators"
+#~ msgstr "工具列有分隔線"
+
+#~ msgid "Top"
+#~ msgstr "頂端"
+
+#~ msgid "Use status bar instead of dialog when possible"
+#~ msgstr "若有可能，以狀態列代替對話窗"
+
+#~ msgid "When opening Multiple documents, use"
+#~ msgstr "當開啟多個文件時，使用："
+
+#~ msgid "When using Notebook tabs, place the tabs on the"
+#~ msgstr "當使用標簽頁方式時，將標簽置於："
+
+#~ msgid "Wherever the Window Manager places them"
+#~ msgstr "由視窗管理程式指定"
+
+#~ msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
+#~ msgstr "無法載入 pixbuf“%s”；不使用桌布。"
+
+#~ msgid "Starting esd\n"
+#~ msgstr "正在啟動 esd\n"
+
+#~ msgid "Stopping esd\n"
+#~ msgstr "正在關閉 esd\n"
 
 #~ msgid "Very long"
 #~ msgstr "很長"
@@ -2744,9 +2716,6 @@ msgstr "GConf 設定鍵 %s 的類型目前是 %s，但應該是 %s\n"
 
 #~ msgid "Information on MIME type to edit"
 #~ msgstr "要編輯的 MIME 類型的資料"
-
-#~ msgid "Available Themes"
-#~ msgstr "可供選擇的佈景主題"
 
 #~ msgid "Home directory doesn't exist!\n"
 #~ msgstr "使用者目錄不存在！\n"
@@ -2813,9 +2782,6 @@ msgstr "GConf 設定鍵 %s 的類型目前是 %s，但應該是 %s\n"
 
 #~ msgid "Open Behavior"
 #~ msgstr "開啟方式"
-
-#~ msgid "Can open multiple files"
-#~ msgstr "可開啟多個檔案"
 
 #~ msgid "Can open from URI"
 #~ msgstr "可由 URI 開啟"
