@@ -255,8 +255,6 @@ read_editor (GConfClient *client,
 	gnome_vfs_application_registry_save_mime_application (mime_app);
 
 	gnome_vfs_mime_set_default_application ("text/plain", mime_app->id);
-	gnome_vfs_mime_application_free (mime_app);
-
 	gnome_vfs_application_registry_sync ();	
 
  read_editor_custom:
