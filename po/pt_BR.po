@@ -7,10 +7,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.5.6\n"
-"POT-Creation-Date: 2003-01-16 19:25-0200\n"
-"PO-Revision-Date: 2003-01-17 00:46-0200\n"
+"POT-Creation-Date: 2003-01-25 01:24-0200\n"
+"PO-Revision-Date: 2003-01-25 01:26-0200\n"
 "Last-Translator: Gustavo Noronha Silva <kov@debian.org>\n"
-"Language-Team: GNOME-BR <gnome-l10n-br@listas.cipsga.org.br>, Debian-BR <debian-l10n-portuguese@lists.debian.org>, Brazilian Portuguese <ldp-br@bazar.conectiva.com.br>, Sun G11n <gnome_int_l10n@ireland.sun.com>\n"
+"Language-Team: GNOME-BR <gnome-l10n-br@listas.cipsga.org.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -45,7 +45,9 @@ msgstr "Defina suas preferências de acessibilidade ao teclado"
 msgid ""
 "This system does not seem to have the XKB extension.  The keyboard "
 "accessibility features will not operate without it."
-msgstr "O sistema não parece ter uma extensão XKB. As funções de acessibilidade do teclado não irão funcionar sem ela."
+msgstr ""
+"O sistema não parece ter uma extensão XKB. As funções de acessibilidade do "
+"teclado não irão funcionar sem ela."
 
 # SUN NEW TRANSLATION
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
@@ -440,6 +442,11 @@ msgstr "Aplicar as configurações e encerrar"
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Houve um erro ao mostrar a ajuda: %s"
+
+#: capplets/common/capplet-stock-icons.c:94
+#, c-format
+msgid "Unable to load capplet stock icon '%s'\n"
+msgstr "Não foi possível carregar o icon stock de capplet '%s'\n"
 
 #: capplets/common/file-transfer-dialog.c:95
 #, c-format
@@ -2142,13 +2149,20 @@ msgstr "_Instalar"
 msgid "_Location of new theme:"
 msgstr "_Localização do novo tema:"
 
-#: capplets/theme-switcher/gnome-theme-details.c:357
+#: capplets/theme-switcher/gnome-theme-details.c:372
 #: capplets/theme-switcher/gnome-theme-manager.c:609
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
 "installed the \"gnome-themes\" package."
-msgstr "Nenhum tema pôde ser encontrado no seu sistema. Isso pode significar que seu diálogo \"Preferência de Temas\" foi instalado de maneira imprópria, ou que você não instalou o pacote \"gnome-themes\"."
+msgstr ""
+"Nenhum tema pôde ser encontrado no seu sistema. Isso pode significar que seu "
+"diálogo \"Preferência de Temas\" foi instalado de maneira imprópria, ou que "
+"você não instalou o pacote \"gnome-themes\"."
+
+#: capplets/theme-switcher/gnome-theme-save.c:72
+msgid "Theme name must be present"
+msgstr "O nome do tema deve estar presente"
 
 # SUN NEW TRANSLATION
 #: capplets/theme-switcher/gnome-theme-manager.c:665
@@ -2314,7 +2328,8 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
-"<b>Não foi possível iniciar a aplicação de preferências do seu gerenciador de janelas</b>\n"
+"<b>Não foi possível iniciar a aplicação de preferências do seu gerenciador "
+"de janelas</b>\n"
 "\n"
 "%s"
 
@@ -2338,7 +2353,9 @@ msgstr "Super (ou \"logotipo do Windows\")"
 
 #: capplets/windows/gnome-window-properties.glade.h:1
 msgid "To _move a window, press-and-hold this key then grab the window:"
-msgstr "Para _mover uma janela, pressione e segure essa tecla enquanto arrasta a janela:"
+msgstr ""
+"Para _mover uma janela, pressione e segure essa tecla enquanto arrasta a "
+"janela:"
 
 #: capplets/windows/gnome-window-properties.glade.h:2
 msgid "Window Preferences"
@@ -2611,20 +2628,24 @@ msgstr "Selecionar arquivo de som"
 #: libwindow-settings/gnome-wm-manager.c:320
 #, c-format
 msgid "Window manager \"%s\" has not registered a configuration tool\n"
-msgstr "O gerenciador de janelas \"%s\" não registrou uma ferramenta de configurações\n"
+msgstr ""
+"O gerenciador de janelas \"%s\" não registrou uma ferramenta de "
+"configurações\n"
 
-#: libwindow-settings/metacity-window-manager.c:373
+#: libwindow-settings/metacity-window-manager.c:374
 msgid "Maximize"
 msgstr "Maximizar"
 
-#: libwindow-settings/metacity-window-manager.c:374
+#: libwindow-settings/metacity-window-manager.c:375
 msgid "Roll up"
 msgstr "Enrolar"
 
 #: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
 msgid ""
 "If true, the mime handlers for text/plain and text/* will be kept in sync"
-msgstr "Se verdadeiro, os aplicativos que cuidam de text/plain e text/* serão sempre sincronizados"
+msgstr ""
+"Se verdadeiro, os aplicativos que cuidam de text/plain e text/* serão sempre "
+"sincronizados"
 
 #: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:2
 msgid "Sync text/plain and text/* handlers"
@@ -2665,28 +2686,40 @@ msgstr "Ordem RGBA"
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:5
 msgid ""
 "Resolution used for converting font sizes to pixel sizes, in dots per inch"
-msgstr "Resolução usada para converter tamanhos de fontes para tamanhos de pixel, em pontos por polegada"
+msgstr ""
+"Resolução usada para converter tamanhos de fontes para tamanhos de pixel, em "
+"pontos por polegada"
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:6
 msgid ""
 "The order of subpixel elements on an LCD screen; only used when antialiasing "
 "is set to \"rgba\". Possible values are: \"rgb\" - red on left, most common. "
 "\"bgr\" - blue on left. \"vrgb\" - red on top. \"vbgr\" - red on bottom."
-msgstr "A ordem de elementos de subpixel em uma tela LCD; somente usado quando o antialiasing está definido para \"rgba\". Valores possíveis são: \"rgb\" - vermelho à esquerda, mais comum. \"bgr\" - azul à esquerda. \"vrgb\" - vermelho no topo. \"vbgr\" - vermelho no fundo."
+msgstr ""
+"A ordem de elementos de subpixel em uma tela LCD; somente usado quando o "
+"antialiasing está definido para \"rgba\". Valores possíveis são: \"rgb\" - "
+"vermelho à esquerda, mais comum. \"bgr\" - azul à esquerda. \"vrgb\" - "
+"vermelho no topo. \"vbgr\" - vermelho no fundo."
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:7
 msgid ""
 "The type of antialiasing to use when rendering fonts. Possible values are: "
 "\"none\" - no antialiasing. \"grayscale\" - standard grayscale antialiasing. "
 "\"rgba\" - subpixel antialiasing. (LCD screens only)."
-msgstr "O tipo de antialiasing a usar ao renderizar fontes. Valores possíveis são: \"none\" - sem antialiasing. \"grayscale\" - antialiasing padrão de escala de cinzas. \"rgba\" - antialiasing de subpixel. (telas de LCD apenas)."
+msgstr ""
+"O tipo de antialiasing a usar ao renderizar fontes. Valores possíveis são: "
+"\"none\" - sem antialiasing. \"grayscale\" - antialiasing padrão de escala "
+"de cinzas. \"rgba\" - antialiasing de subpixel. (telas de LCD apenas)."
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:8
 msgid ""
 "The type of hinting to use when rendering fonts. Possible values are: \"none"
 "\" - no hinting, \"slight\", \"medium\", and \"full\" - as much hinting as "
 "possible; may cause distortion of letter forms."
-msgstr "O tipo de dicas a usar ao renderizar fontes. Os valores possíveis são: \"none\" - sem dicas, \"slight\", \"medium\" e \"full\" - tantas dicas quanto possíveis; isso pode causar distorções nas formas das letras."
+msgstr ""
+"O tipo de dicas a usar ao renderizar fontes. Os valores possíveis são: \"none"
+"\" - sem dicas, \"slight\", \"medium\" e \"full\" - tantas dicas quanto "
+"possíveis; isso pode causar distorções nas formas das letras."
 
 # SUN NEW TRANSLATION
 #, fuzzy
