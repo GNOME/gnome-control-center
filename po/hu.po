@@ -1,19 +1,21 @@
 # Hungarian translation of gnome-control-center.
-# Copyright (C) 1999-2004 Free Software Foundation, Inc.
-# Szabolcs Ban <shooby@gnome.hu>, 1999.
+# Copyright (C) 1998, 1999, 2000, 2001, 2002, 2003, 2004 Free Software Foundation, Inc.
+# This file is distributed under the same license as the gnome-control-center package.
+# Szabolcs Ban <shooby@gnome.hu>, 1998, 1999, 2000.
+# Emese Kovacs <emese@gnome.hu>, 2001.
 # Peter Doma <zelin@pointernet.hu>, 2002.
-# Andras Timar <timar@gnome.hu>, 2002.
-# Gabor Sari <saga@externet.hu>, 2003.
-# Gabor Kelemen <kg0021@stud.unideb.hu>, 2004.
-# Laszlo Dvornik <dvornik@invitel.hu>, 2004.
+# Andras Timar <timar@gnome.hu>, 2001, 2002, 2003.
+# Gabor Sari <saga@gnome.hu>, 2003.
+# Gabor Kelemen <kelemeng@gnome.hu>, 2004.
+# Laszlo Dvornik <dvornik@gnome.hu>, 2004.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-30 20:28-0400\n"
-"PO-Revision-Date: 2004-06-30 16:08+0200\n"
-"Last-Translator: Laszlo Dvornik <dvornik@invitel.hu>\n"
+"POT-Creation-Date: 2004-08-16 11:37+0200\n"
+"PO-Revision-Date: 2004-08-16 15:40+0200\n"
+"Last-Translator: Laszlo Dvornik <dvornik@gnome.hu>\n"
 "Language-Team: Hungarian <gnome@gnome.hu>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -135,8 +137,8 @@ msgid ""
 "This system does not seem to have the XKB extension.  The keyboard "
 "accessibility features will not operate without it."
 msgstr ""
-"A rendszer nem rendelkezik az XKB-kiterjesztéssel. A billentyűzet kisegítő "
-"lehetőségeit nem lehet e nélkül használni. "
+"Úgy tűnik, hogy a rendszer nem rendelkezik XKB-kiterjesztéssel. A "
+"billentyűzet kisegítő lehetőségeit nem lehet e nélkül használni."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
 #: capplets/font/font-properties.glade.h:1
@@ -550,21 +552,23 @@ msgstr "GConf módosítások, aminek adatait a gconf kliensnek el kell küldeni"
 
 #: capplets/common/gconf-property-editor.c:189
 msgid "Conversion to widget callback"
-msgstr "Konvertálás widget callback-be"
+msgstr "Konvertálás elemvisszahívásba"
 
 #: capplets/common/gconf-property-editor.c:190
 msgid ""
 "Callback to be issued when data are to be converted from GConf to the widget"
-msgstr "Kiosztandó callback, amikor a GConf-ból adat konvertálódik a widgetbe"
+msgstr ""
+"Kiosztandó visszahívás, amikor a GConf-ból adat konvertálódik az elembe"
 
 #: capplets/common/gconf-property-editor.c:195
 msgid "Conversion from widget callback"
-msgstr "Widgetből konvertáló callback"
+msgstr "Konvertálás elemvisszahívásból"
 
 #: capplets/common/gconf-property-editor.c:196
 msgid ""
 "Callback to be issued when data are to be converted to GConf from the widget"
-msgstr "Kiosztandó callback, amikor a widgetből adat konvertálódik a GConf-ba"
+msgstr ""
+"Kiosztandó visszahívás, amikor az elemből adat konvertálódik a GConf-ba"
 
 #: capplets/common/gconf-property-editor.c:201
 msgid "UI Control"
@@ -572,7 +576,7 @@ msgstr "Felhasználói felület eleme"
 
 #: capplets/common/gconf-property-editor.c:202
 msgid "Object that controls the property (normally a widget)"
-msgstr "A tulajdonság kezelőobjektuma (normális esetben egy widget)"
+msgstr "A tulajdonság kezelőobjektuma (normális esetben egy elem)"
 
 #: capplets/common/gconf-property-editor.c:217
 msgid "Property editor object data"
@@ -584,12 +588,13 @@ msgstr "A tulajdonságszerkesztőnek a következő egyéni adatra van szüksége
 
 #: capplets/common/gconf-property-editor.c:224
 msgid "Property editor data freeing callback"
-msgstr "Tulajdonságszerkesztő adat törlése callback"
+msgstr "Tulajdonságszerkesztő adat törlése visszahívás"
 
 #: capplets/common/gconf-property-editor.c:225
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr ""
-"Kiosztandó callback, amikor a tulajdonságszerkesztő objektum adatai törlendők"
+"Kiosztandó visszahívás, amikor a tulajdonságszerkesztő objektum adatai "
+"törlendők"
 
 #: capplets/common/gconf-property-editor.c:1538
 #, c-format
@@ -731,7 +736,7 @@ msgstr "Hozzáadás..."
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:3
 msgid "C_ustom Editor"
-msgstr "_Egyéni szerkesztő:"
+msgstr "_Egyéni szerkesztő"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:4
 msgid "C_ustom Mail Reader:"
@@ -1562,6 +1567,19 @@ msgstr ""
 msgid "Assign shortcut keys to commands"
 msgstr "Gyorsbillentyűk parancsokhoz rendelése"
 
+#: capplets/keyboard/gnome-keyboard-properties-xkb.c:69
+#: capplets/keyboard/gnome-keyboard-properties-xkb.c:95
+msgid "Unknown"
+msgstr "Ismeretlen"
+
+#: capplets/keyboard/gnome-keyboard-properties-xkbmc.c:80
+msgid "Models"
+msgstr "Modellek"
+
+#: capplets/keyboard/gnome-keyboard-properties-xkbpv.c:59
+msgid "Keyboard layout preview"
+msgstr "Billentyűzetkiosztás előnézete"
+
 #: capplets/keyboard/gnome-keyboard-properties.c:106
 #, c-format
 msgid "There was an error launching the keyboard capplet : %s"
@@ -1586,9 +1604,8 @@ msgid "Start the page with the typing break settings showing"
 msgstr "Oldal indítása a gépelési szünet beállításaival"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:3
-#, fuzzy
 msgid "..."
-msgstr "Hozzáadás..."
+msgstr "..."
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<b>Cursor Blinking</b>"
@@ -1635,9 +1652,8 @@ msgid "Check if breaks are allowed to be postponed"
 msgstr "Jelölje be, ha a szünetek felfüggesztése engedélyezett"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:15
-#, fuzzy
 msgid "Choose a keyboard model"
-msgstr "XKB billentyűzetmodell"
+msgstr "Válasszon ki egy billentyűzetmodellt"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "Cursor _blinks in text boxes and fields"
@@ -1681,7 +1697,7 @@ msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:26
 msgid "Microsoft Natural Keyboard"
-msgstr ""
+msgstr "Microsoft Natural Keyboard"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "Reset to de_faults"
@@ -1705,14 +1721,12 @@ msgid "_Delay:"
 msgstr "_Késleltetés:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:33
-#, fuzzy
 msgid "_Models"
-msgstr "Modell"
+msgstr "_Modellek"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:34
-#, fuzzy
 msgid "_Preview"
-msgstr "Előnézet szélessége"
+msgstr "_Előnézet"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:35
 msgid "_Selected layouts:"
@@ -2097,8 +2111,8 @@ msgid "Theme name must be present"
 msgstr "A témanévnek jelen kell lennie"
 
 #: capplets/theme-switcher/gnome-theme-save.c:104
-msgid "The theme already exists. Would you like to replace it ?"
-msgstr ""
+msgid "The theme already exists. Would you like to replace it?"
+msgstr "A téma már létezik. Le szeretné cserélni?"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
 msgid "Select themes for various parts of the desktop"
@@ -2396,6 +2410,35 @@ msgstr "Az ablak tulajdonságai"
 msgid "Windows"
 msgstr "Ablakok"
 
+#: control-center/GNOME_ControlCenter.server.in.h:1
+msgid "Control Center"
+msgstr "Vezérlőpult"
+
+#: control-center/GNOME_ControlCenter.server.in.h:2
+msgid "Control Center Viewer"
+msgstr "Vezérlőpult-néző"
+
+#: control-center/GNOME_ControlCenter.server.in.h:3
+msgid "Control Center view"
+msgstr "Vezérlőpult-nézet"
+
+# FIXME
+#: control-center/GNOME_ControlCenter.server.in.h:4
+msgid "Control Center view component"
+msgstr "Vezérlőpult-nézetkomponens"
+
+#: control-center/GNOME_ControlCenter.server.in.h:5
+msgid "Control Center view component's factory"
+msgstr "Vezérlőpult-nézetkomponens factory-ja"
+
+#: control-center/GNOME_ControlCenter.server.in.h:6
+msgid "Control Center view factory"
+msgstr "Vezérlőpult-nézet factory"
+
+#: control-center/GNOME_ControlCenter.server.in.h:7
+msgid "View as Control Center"
+msgstr "Megtekintés vezérlőpultként"
+
 #: control-center/capplet-dir-view-list.c:319
 #, c-format
 msgid "GNOME Control Center: %s"
@@ -2407,7 +2450,7 @@ msgstr "Kiosztás"
 
 #: control-center/capplet-dir-view.c:159
 msgid "Layout to use for this view of the capplets"
-msgstr "A cappletek megtekintéséhez használt elrendezés"
+msgstr "A capplet-ek megtekintéséhez használt elrendezés"
 
 #: control-center/capplet-dir-view.c:165
 msgid "Capplet directory object"
@@ -2422,9 +2465,10 @@ msgid "translator_credits"
 msgstr ""
 "Bán Szabolcs <shooby@gnome.hu>\n"
 "Doma Péter <zelin@pointernet.hu>\n"
-"Dvornik László <dvornik@invitel.hu>\n"
-"Kelemen Gábor <kg0021@stud.unideb.hu>\n"
-"Sári Gábor <saga@externet.hu>\n"
+"Dvornik László <dvornik@gnome.hu>\n"
+"Kelemen Gábor <kelemeng@gnome.hu>\n"
+"Kovács Emese <emese@gnome.hu>\n"
+"Sári Gábor <saga@gnome.hu>\n"
 "Tímár András <timar@gnome.hu>"
 
 #: control-center/capplet-dir-view.c:357 control-center/gnomecc.desktop.in.h:1
@@ -2439,6 +2483,19 @@ msgstr "Munkaasztal tulajdonságkezelője."
 #, c-format
 msgid "Gnome Control Center : %s"
 msgstr "GNOME Vezérlőpult: %s"
+
+#: control-center/control-center-categories.c:333
+msgid "Others"
+msgstr "Egyéb"
+
+#: control-center/control-center-categories.c:424
+#: control-center/control-center.c:1091
+msgid "Gnome Control Center"
+msgstr "GNOME Vezérlőpult"
+
+#: control-center/control-center.c:78
+msgid "Use nautilus if it is running."
+msgstr "A Nautilus használata, ha az fut."
 
 #: control-center/gnomecc-ui.xml.h:1
 msgid "About this application"
@@ -2460,19 +2517,6 @@ msgstr "_Tartalom"
 msgid "_Help"
 msgstr "_Súgó"
 
-#: control-center/control-center-categories.c:333
-msgid "Others"
-msgstr "Egyéb"
-
-#: control-center/control-center-categories.c:424
-#: control-center/control-center.c:1091
-msgid "Gnome Control Center"
-msgstr "GNOME Vezérlőpult"
-
-#: control-center/control-center.c:78
-msgid "Use nautilus if it is running."
-msgstr "A Nautilus használata, ha az fut."
-
 #: control-center/gnomecc.desktop.in.h:2
 msgid "The GNOME configuration tool"
 msgstr "A GNOME beállítóeszköze"
@@ -2480,6 +2524,10 @@ msgstr "A GNOME beállítóeszköze"
 #: control-center/main.c:43
 msgid "Use shell even if nautilus is running."
 msgstr "Használja a héjat, még ha a Nautilus fut is."
+
+#: gnome-settings-daemon/actions/acme.glade.h:1
+msgid "Volume"
+msgstr "Hangerő"
 
 #: gnome-settings-daemon/factory.c:34
 msgid "Could not initialize Bonobo"
@@ -2649,6 +2697,36 @@ msgstr ""
 "tartalma most mellőzve lesz. Ezt a billentyűzet tulajdonságainál állíthatja "
 "vissza."
 
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:114
+#, c-format
+msgid ""
+"Couldn't execute command: %s\n"
+"Verify that this command exists."
+msgstr ""
+"Nem lehet végrehajtani a(z) %s parancsot!\n"
+"Ellenőrizze, hogy ez a parancs létezik-e."
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:130
+msgid ""
+"Couldn't put the machine to sleep.\n"
+"Verify that the machine is correctly configured."
+msgstr ""
+"Nem lehet a gépet elalvás állapotba vinni.\n"
+"Ellenőrizze, hogy gépe helyesen van-e konfigurálva."
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:140
+#, c-format
+msgid "Permissions on the file %s are broken\n"
+msgstr "%s fájl jogosultságai töröttek\n"
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:185
+msgid ""
+"Couldn't load the Glade file.\n"
+"Make sure that this daemon is properly installed."
+msgstr ""
+"Nem lehet betölteni a Glade fájlt.\n"
+"Ellenőrizze, hogy ez a démon megfelelően van-e telepítve."
+
 #: gnome-settings-daemon/gnome-settings-screensaver.c:92
 #, c-format
 msgid ""
@@ -2789,449 +2867,6 @@ msgstr ""
 #: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:2
 msgid "Sync text/plain and text/* handlers"
 msgstr "A text/plain és a text/* kezelőjének szinkronizálása"
-
-#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:1
-msgid "Display a dialog when there are errors running XScreenSaver"
-msgstr "Párbeszédablak megjelenítése a képernyővédő hibája esetén"
-
-#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:2
-msgid "Run XScreenSaver at login"
-msgstr "Képernyővédő futtatása a bejelentkezéskor"
-
-#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:3
-msgid "Show Startup Errors"
-msgstr "Indulás közben történő hibák megjelenítése"
-
-#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:4
-msgid "Start XScreenSaver"
-msgstr "Képernyővédő indítása"
-
-#: schemas/desktop_gnome_font_rendering.schemas.in.h:1
-msgid "Antialiasing"
-msgstr "Élsimítás"
-
-#: schemas/desktop_gnome_font_rendering.schemas.in.h:2
-msgid "DPI"
-msgstr "DPI"
-
-#: schemas/desktop_gnome_font_rendering.schemas.in.h:3
-msgid "Hinting"
-msgstr "Hinting"
-
-#: schemas/desktop_gnome_font_rendering.schemas.in.h:4
-msgid "RGBA Order"
-msgstr "RGBA-sorrend"
-
-#: schemas/desktop_gnome_font_rendering.schemas.in.h:5
-msgid ""
-"Resolution used for converting font sizes to pixel sizes, in dots per inch"
-msgstr ""
-"A betűméret és a képpontok közötti átváltáshoz használandó felbontás, pont/"
-"hüvelykben"
-
-#: schemas/desktop_gnome_font_rendering.schemas.in.h:6
-msgid ""
-"The order of subpixel elements on an LCD screen; only used when antialiasing "
-"is set to \"rgba\". Possible values are: \"rgb\" - red on left, most common. "
-"\"bgr\" - blue on left. \"vrgb\" - red on top. \"vbgr\" - red on bottom."
-msgstr ""
-"A szubpixelek sorrendje az LCD-képernyőn; csak akkor használatos, ha az "
-"élsimítás \"RGBA\"-ra van állítva. A lehetséges értékek: \"RGB\" - vörös a "
-"bal oldalon, ez a leggyakoribb. \"BGR\" - kék a bal oldalon. \"VRGB\" - "
-"vörös a tetején. \"VBGR\" - vörös az alján."
-
-#: schemas/desktop_gnome_font_rendering.schemas.in.h:7
-msgid ""
-"The type of antialiasing to use when rendering fonts. Possible values are: "
-"\"none\" - no antialiasing. \"grayscale\" - standard grayscale antialiasing. "
-"\"rgba\" - subpixel antialiasing. (LCD screens only)."
-msgstr ""
-"A betűk megjelenítésénél használt élsimítás típusa. A lehetséges értékek: "
-"\"Nincs\" - nincs élsimítás. \"Szürkeárnyalatos\" - szabványos "
-"szürkeárnyalatos élsimítás. \"RGBA\" - szubpixeles élsimítás (csak LCD-"
-"képernyőkön)."
-
-#: schemas/desktop_gnome_font_rendering.schemas.in.h:8
-msgid ""
-"The type of hinting to use when rendering fonts. Possible values are: \"none"
-"\" - no hinting, \"slight\", \"medium\", and \"full\" - as much hinting as "
-"possible; may cause distortion of letter forms."
-msgstr ""
-"A betűk megjelenítéséhez használt hinting típusa. A lehetséges értékek: "
-"\"Nincs\" - nincs hinting, \"Enyhe\", \"Közepes\" és \"Teljes\" - akkora "
-"hinting, amennyi csak lehetséges; eltorzíthatja a betűk alakját."
-
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:1
-msgid ""
-"Very soon, XKB settings in gconf will be overridden (from the system "
-"configuration)"
-msgstr ""
-"Hamarosan az XKB beállítások felül lesznek bírálva (a rendszer "
-"beállításaiból)"
-
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
-msgid "XKB keyboard layout"
-msgstr "XKB billentyűzet kiosztás"
-
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
-msgid "XKB keyboard model"
-msgstr "XKB billentyűzetmodell"
-
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
-msgid "XKB options"
-msgstr "XKB beállítások"
-
-# FIXME ASAP micsoda?
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
-msgid "XKB settings in gconf will be overridden from the system ASAP"
-msgstr ""
-"Amint lehetséges a gconf XKB beállításai felülíródnak a rendszer "
-"beállításaival"
-
-#: typing-break/drw-break-window.c:214
-msgid "_Postpone break"
-msgstr "_Szünet elhalasztása"
-
-#: typing-break/drw-break-window.c:262
-msgid "Take a break!"
-msgstr "Tartson szünetet!"
-
-#. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
-#: typing-break/drwright.c:136
-msgid "/_Preferences"
-msgstr "/_Beállítások"
-
-#: typing-break/drwright.c:137
-msgid "/_About"
-msgstr "/_Névjegy"
-
-#: typing-break/drwright.c:139
-msgid "/_Take a Break"
-msgstr "/_Szünet tartása"
-
-#: typing-break/drwright.c:491
-#, c-format
-msgid "%d minute until the next break"
-msgid_plural "%d minutes until the next break"
-msgstr[0] "%d perc van még a következő szünetig"
-msgstr[1] "%d perc van még a következő szünetig"
-
-#: typing-break/drwright.c:495
-msgid "Less than one minute until the next break"
-msgstr "Kevesebb mint egy perc van még a következő szünetig"
-
-#: typing-break/drwright.c:583
-#, c-format
-msgid ""
-"Unable to bring up the typing break properties dialog with the following "
-"error: %s"
-msgstr ""
-"Nem lehet felhozni a gépelési szünet tulajdonságai párbeszédablakot a "
-"következő hiba miatt: %s"
-
-#: typing-break/drwright.c:631
-msgid "About GNOME Typing Monitor"
-msgstr "GNOME gépelésfigyelő névjegye"
-
-# FIXME ezt szebben
-#: typing-break/drwright.c:655
-msgid "A computer break reminder."
-msgstr "Emlékeztető gépelési szünet tartására."
-
-#: typing-break/drwright.c:656
-msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
-msgstr "Írta: Richard Hult &lt;richard@imendio.com&gt;"
-
-#: typing-break/drwright.c:657
-msgid "Eye candy added by Anders Carlsson"
-msgstr "A csinosításokat Anders Carlsson végezte"
-
-#: typing-break/drwright.c:832
-msgid "Break reminder"
-msgstr "Szünetre emlékeztető"
-
-#: typing-break/main.c:93
-msgid "The typing monitor is already running."
-msgstr "A gépelésfigyelő már fut."
-
-#: typing-break/main.c:106
-msgid ""
-"The typing monitor uses the notification area to display information. You "
-"don't seem to have a notification area on your panel. You can add it by "
-"right-clicking on your panel and choose 'Add to panel -> Utilities -> "
-"Notification area'."
-msgstr ""
-"A gépelésfigyelő a figyelmeztető területet használja információk "
-"megjelenítésére. Úgy tűnik, az ön panelén nincs figyelmeztető terület. "
-"Hozzáadhatja a helyi menü 'Hozzáadás -> Eszközök -> Figyelmeztetési terület' "
-"pontjával."
-
-#: vfs-methods/fontilus/font-view.c:102
-msgid "The quick brown fox jumps over the lazy dog. 0123456789"
-msgstr "aábcdeéfghiíjklmnoóöőpqrstvuúüűvwxyz0123456789"
-
-#: vfs-methods/fontilus/font-view.c:253
-msgid "Name:"
-msgstr "Név:"
-
-#: vfs-methods/fontilus/font-view.c:256
-msgid "Style:"
-msgstr "Stílus:"
-
-#: vfs-methods/fontilus/font-view.c:265
-msgid "Type:"
-msgstr "Típus:"
-
-#: vfs-methods/fontilus/font-view.c:272
-msgid "Size:"
-msgstr "Méret:"
-
-#: vfs-methods/fontilus/font-view.c:316 vfs-methods/fontilus/font-view.c:329
-msgid "Version:"
-msgstr "Verzió:"
-
-#: vfs-methods/fontilus/font-view.c:320 vfs-methods/fontilus/font-view.c:331
-msgid "Copyright:"
-msgstr "Copyright:"
-
-#: vfs-methods/fontilus/font-view.c:324
-msgid "Description:"
-msgstr "Leírás:"
-
-#: vfs-methods/fontilus/font-view.c:394
-#, c-format
-msgid "usage: %s fontfile\n"
-msgstr "használat: %s betűkészletfájl\n"
-
-#: vfs-methods/fontilus/fontilus-context-menu.c:131
-msgid "Font context menu items"
-msgstr "Betűtípus helyi menü elemei"
-
-#: vfs-methods/fontilus/fontilus.schemas.in.h:1
-msgid "If set to true, then OpenType fonts will be thumbnailed."
-msgstr ""
-"Ha be van jelölve, az OpenType betűkészletek előnézete meg fog jelenni."
-
-#: vfs-methods/fontilus/fontilus.schemas.in.h:2
-msgid "If set to true, then PCF fonts will be thumbnailed."
-msgstr "Ha be van jelölve, a PCP betűkészletek előnézete meg fog jelenni."
-
-#: vfs-methods/fontilus/fontilus.schemas.in.h:3
-msgid "If set to true, then TrueType fonts will be thumbnailed."
-msgstr "Ha be van jelölve, a TrueType betűkészletek előnézete meg fog jelenni."
-
-#: vfs-methods/fontilus/fontilus.schemas.in.h:4
-msgid "If set to true, then Type1 fonts will be thumbnailed."
-msgstr "Ha be van jelölve, a Type1 betűkészletek előnézete meg fog jelenni."
-
-#: vfs-methods/fontilus/fontilus.schemas.in.h:5
-msgid ""
-"Set this key to the command used to create thumbnails for OpenType fonts."
-msgstr ""
-"Beállítja ezt a billentyűt az OpenType betűkészletek előnézetének "
-"létrehozására használt parancshoz."
-
-#: vfs-methods/fontilus/fontilus.schemas.in.h:6
-msgid "Set this key to the command used to create thumbnails for PCF fonts."
-msgstr ""
-"Beállítja ezt a billentyűt a PCP betűkészletek előnézetének létrehozására "
-"használt parancshoz."
-
-#: vfs-methods/fontilus/fontilus.schemas.in.h:7
-msgid ""
-"Set this key to the command used to create thumbnails for TrueType fonts."
-msgstr ""
-"Beállítja ezt a billentyűt a TrueType betűkészletek előnézetének "
-"létrehozására használt parancshoz."
-
-#: vfs-methods/fontilus/fontilus.schemas.in.h:8
-msgid "Set this key to the command used to create thumbnails for Type1 fonts."
-msgstr ""
-"Beállítja ezt a billentyűt a Type1 betűkészletek előnézetének létrehozására "
-"használt parancshoz."
-
-#: vfs-methods/fontilus/fontilus.schemas.in.h:9
-msgid "Thumbnail command for OpenType fonts"
-msgstr "Előnézet parancs OpenType betűkészletekhez"
-
-#: vfs-methods/fontilus/fontilus.schemas.in.h:10
-msgid "Thumbnail command for PCF fonts"
-msgstr "Előnézet parancs PCP betűkészletekhez"
-
-#: vfs-methods/fontilus/fontilus.schemas.in.h:11
-msgid "Thumbnail command for TrueType fonts"
-msgstr "Előnézet parancs TrueType betűkészletekhez"
-
-#: vfs-methods/fontilus/fontilus.schemas.in.h:12
-msgid "Thumbnail command for Type1 fonts"
-msgstr "Előnézet parancs Type1 betűkészletekhez"
-
-#: vfs-methods/fontilus/fontilus.schemas.in.h:13
-msgid "Whether to thumbnail OpenType fonts"
-msgstr "Előnézet bekapcsolása OpenType betűkészletekhez"
-
-#: vfs-methods/fontilus/fontilus.schemas.in.h:14
-msgid "Whether to thumbnail PCF fonts"
-msgstr "Előnézet bekapcsolása PCP betűkészletekhez"
-
-#: vfs-methods/fontilus/fontilus.schemas.in.h:15
-msgid "Whether to thumbnail TrueType fonts"
-msgstr "Előnézet bekapcsolása TrueType betűkészletekhez"
-
-#: vfs-methods/fontilus/fontilus.schemas.in.h:16
-msgid "Whether to thumbnail Type1 fonts"
-msgstr "Előnézet bekapcsolása Type1 betűkészletekhez"
-
-# FIXME factory
-#: vfs-methods/fontilus/fontilus.server.in.in.h:1
-msgid "Factory for the fontilus context menu"
-msgstr "Factory a fontilus helyi menüjéhez"
-
-#: vfs-methods/fontilus/fontilus.server.in.in.h:2
-msgid "Fontilus context menu"
-msgstr "Fontilus helyi menü"
-
-#: vfs-methods/fontilus/fontilus.server.in.in.h:3
-msgid "Fontilus context menu factory"
-msgstr "Fontilus helyi menü factory"
-
-#: vfs-methods/fontilus/fontilus.server.in.in.h:4
-msgid "Nautilus context menu entries for fonts"
-msgstr "Nautilus helyi menü bejegyzések betűkészletekhez"
-
-#: vfs-methods/fontilus/fontilus.server.in.in.h:5
-msgid "Set as Application Font"
-msgstr "Alkalmazás betűkészletének beállítása"
-
-# FIXME
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
-msgid "Theme Properties content view component"
-msgstr "Téma tulajdonságai tartalomnézet-komponens"
-
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
-msgid "Themus Theme Properties view"
-msgstr "Themus tématulajdonságok nézet"
-
-#: vfs-methods/themus/apply-font.glade.h:1
-msgid " "
-msgstr " "
-
-#: vfs-methods/themus/apply-font.glade.h:2
-msgid "<span weight=\"bold\" size=\"larger\">Apply new font?</span>"
-msgstr ""
-"<span weight=\"bold\" size=\"larger\">Új betűkészlet alkalmazása?</span>"
-
-#: vfs-methods/themus/apply-font.glade.h:3
-msgid "Do _not apply font"
-msgstr "_Ne alkalmazza a betűkészletet"
-
-#: vfs-methods/themus/apply-font.glade.h:4
-msgid ""
-"The theme you have selected suggests a new font. A preview of the font is "
-"shown below."
-msgstr ""
-"Az ön által kiválasztott téma új betűkészletet javasol. Ennek előnézete "
-"lejjebb látható."
-
-#: vfs-methods/themus/apply-font.glade.h:5
-msgid "_Apply font"
-msgstr "_Betűkészlet alkalmazása"
-
-#: vfs-methods/themus/theme-method.c:520
-msgid "Themes"
-msgstr "Témák"
-
-#: vfs-methods/themus/themus-properties-view.c:172
-msgid "Control theme"
-msgstr "Vezérlőelem-téma"
-
-#: vfs-methods/themus/themus-properties-view.c:176
-msgid "Window border theme"
-msgstr "Ablakkerettéma"
-
-#: vfs-methods/themus/themus-properties-view.c:180
-msgid "Icon theme"
-msgstr "Ikontéma"
-
-#: vfs-methods/themus/themus-properties-view.c:219
-msgid "URI currently displayed"
-msgstr "A jelenleg megjelenített URI"
-
-#. translators: you may want to include non-western chars here
-#: vfs-methods/themus/themus-theme-applier.c:83
-msgid "ABCDEFG"
-msgstr "ÁÉÍÓŐÚŰ"
-
-#: vfs-methods/themus/themus.schemas.in.h:1
-msgid "If set to true, then installed themes will be thumbnailed."
-msgstr "Ha be van állítva, a telepített témák előnézete megjelenik."
-
-#: vfs-methods/themus/themus.schemas.in.h:2
-msgid "If set to true, then themes will be thumbnailed."
-msgstr "Ha be van állítva, a témák előnézete megjelenik."
-
-#: vfs-methods/themus/themus.schemas.in.h:3
-msgid ""
-"Set this key to the command used to create thumbnails for installed themes."
-msgstr ""
-"Beállítja ezt a billentyűt a telepített témák előnézetének létrehozására "
-"használt parancshoz."
-
-#: vfs-methods/themus/themus.schemas.in.h:4
-msgid "Set this key to the command used to create thumbnails for themes."
-msgstr ""
-"Beállítja ezt a billentyűt a témák előnézetének létrehozására használt "
-"parancshoz."
-
-#: vfs-methods/themus/themus.schemas.in.h:5
-msgid "Thumbnail command for installed themes"
-msgstr "Előnézet parancs telepített témákhoz"
-
-#: vfs-methods/themus/themus.schemas.in.h:6
-msgid "Thumbnail command for themes"
-msgstr "Előnézet parancs témákhoz"
-
-#: vfs-methods/themus/themus.schemas.in.h:7
-msgid "Whether to thumbnail installed themes"
-msgstr "Telepített témák előnézetének bekapcsolása"
-
-#: vfs-methods/themus/themus.schemas.in.h:8
-msgid "Whether to thumbnail themes"
-msgstr "Témák előnézetének bekapcsolása"
-
-#: gnome-settings-daemon/actions/acme.glade.h:1
-msgid "Volume"
-msgstr "Hangerő"
-
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:114
-#, c-format
-msgid ""
-"Couldn't execute command: %s\n"
-"Verify that this command exists."
-msgstr ""
-"Nem lehet végrehajtani a(z) %s parancsot!\n"
-"Ellenőrizze, hogy ez a parancs létezik-e."
-
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:130
-msgid ""
-"Couldn't put the machine to sleep.\n"
-"Verify that the machine is correctly configured."
-msgstr ""
-"Nem lehet a gépet elalvás állapotba vinni.\n"
-"Ellenőrizze, hogy gépe helyesen van-e konfigurálva."
-
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:140
-#, c-format
-msgid "Permissions on the file %s are broken\n"
-msgstr "%s fájl jogosultságai töröttek\n"
-
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:185
-msgid ""
-"Couldn't load the Glade file.\n"
-"Make sure that this daemon is properly installed."
-msgstr ""
-"Nem lehet betölteni a Glade fájlt.\n"
-"Ellenőrizze, hogy ez a démon megfelelően van-e telepítve."
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:1
 msgid "Brightness down"
@@ -3392,3 +3027,412 @@ msgstr "Hangosítás"
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
 msgid "Volume up's shortcut."
 msgstr "Hangosítás parancsikonja."
+
+#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:1
+msgid "Display a dialog when there are errors running XScreenSaver"
+msgstr "Párbeszédablak megjelenítése a képernyővédő hibája esetén"
+
+#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:2
+msgid "Run XScreenSaver at login"
+msgstr "Képernyővédő futtatása a bejelentkezéskor"
+
+#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:3
+msgid "Show Startup Errors"
+msgstr "Indulás közben történő hibák megjelenítése"
+
+#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:4
+msgid "Start XScreenSaver"
+msgstr "Képernyővédő indítása"
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:1
+msgid "Antialiasing"
+msgstr "Élsimítás"
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:2
+msgid "DPI"
+msgstr "DPI"
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:3
+msgid "Hinting"
+msgstr "Hinting"
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:4
+msgid "RGBA Order"
+msgstr "RGBA-sorrend"
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:5
+msgid ""
+"Resolution used for converting font sizes to pixel sizes, in dots per inch"
+msgstr ""
+"A betűméret és a képpontok közötti átváltáshoz használandó felbontás, pont/"
+"hüvelykben"
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:6
+msgid ""
+"The order of subpixel elements on an LCD screen; only used when antialiasing "
+"is set to \"rgba\". Possible values are: \"rgb\" - red on left, most common. "
+"\"bgr\" - blue on left. \"vrgb\" - red on top. \"vbgr\" - red on bottom."
+msgstr ""
+"A szubpixelek sorrendje az LCD-képernyőn; csak akkor használatos, ha az "
+"élsimítás \"RGBA\"-ra van állítva. A lehetséges értékek: \"RGB\" - vörös a "
+"bal oldalon, ez a leggyakoribb. \"BGR\" - kék a bal oldalon. \"VRGB\" - "
+"vörös a tetején. \"VBGR\" - vörös az alján."
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:7
+msgid ""
+"The type of antialiasing to use when rendering fonts. Possible values are: "
+"\"none\" - no antialiasing. \"grayscale\" - standard grayscale antialiasing. "
+"\"rgba\" - subpixel antialiasing. (LCD screens only)."
+msgstr ""
+"A betűk megjelenítésénél használt élsimítás típusa. A lehetséges értékek: "
+"\"Nincs\" - nincs élsimítás. \"Szürkeárnyalatos\" - szabványos "
+"szürkeárnyalatos élsimítás. \"RGBA\" - szubpixeles élsimítás (csak LCD-"
+"képernyőkön)."
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:8
+msgid ""
+"The type of hinting to use when rendering fonts. Possible values are: \"none"
+"\" - no hinting, \"slight\", \"medium\", and \"full\" - as much hinting as "
+"possible; may cause distortion of letter forms."
+msgstr ""
+"A betűk megjelenítéséhez használt hinting típusa. A lehetséges értékek: "
+"\"Nincs\" - nincs hinting, \"Enyhe\", \"Közepes\" és \"Teljes\" - akkora "
+"hinting, amennyi csak lehetséges; eltorzíthatja a betűk alakját."
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:1
+msgid ""
+"Very soon, XKB settings in gconf will be overridden (from the system "
+"configuration)"
+msgstr ""
+"Hamarosan az XKB beállítások felül lesznek bírálva (a rendszer "
+"beállításaiból)"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
+msgid "XKB keyboard layout"
+msgstr "XKB billentyűzet kiosztás"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
+msgid "XKB keyboard model"
+msgstr "XKB billentyűzetmodell"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
+msgid "XKB options"
+msgstr "XKB beállítások"
+
+# FIXME ASAP micsoda?
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
+msgid "XKB settings in gconf will be overridden from the system ASAP"
+msgstr ""
+"Amint lehetséges a gconf XKB beállításai felülíródnak a rendszer "
+"beállításaival"
+
+#: typing-break/drw-break-window.c:214
+msgid "_Postpone break"
+msgstr "_Szünet elhalasztása"
+
+#: typing-break/drw-break-window.c:262
+msgid "Take a break!"
+msgstr "Tartson szünetet!"
+
+#. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
+#: typing-break/drwright.c:136
+msgid "/_Preferences"
+msgstr "/_Beállítások"
+
+#: typing-break/drwright.c:137
+msgid "/_About"
+msgstr "/_Névjegy"
+
+#: typing-break/drwright.c:139
+msgid "/_Take a Break"
+msgstr "/_Szünet tartása"
+
+#: typing-break/drwright.c:491
+#, c-format
+msgid "%d minute until the next break"
+msgid_plural "%d minutes until the next break"
+msgstr[0] "%d perc van hátra a következő szünetig"
+msgstr[1] "%d perc van hátra a következő szünetig"
+
+#: typing-break/drwright.c:495
+msgid "Less than one minute until the next break"
+msgstr "Kevesebb mint egy perc van hátra a következő szünetig"
+
+#: typing-break/drwright.c:583
+#, c-format
+msgid ""
+"Unable to bring up the typing break properties dialog with the following "
+"error: %s"
+msgstr ""
+"Nem lehet felhozni a gépelési szünet tulajdonságai párbeszédablakot a "
+"következő hiba miatt: %s"
+
+#: typing-break/drwright.c:631
+msgid "About GNOME Typing Monitor"
+msgstr "GNOME gépelésfigyelő névjegye"
+
+# FIXME ezt szebben
+#: typing-break/drwright.c:655
+msgid "A computer break reminder."
+msgstr "Emlékeztető gépelési szünet tartására."
+
+#: typing-break/drwright.c:656
+msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
+msgstr "Írta: Richard Hult &lt;richard@imendio.com&gt;"
+
+#: typing-break/drwright.c:657
+msgid "Eye candy added by Anders Carlsson"
+msgstr "A csinosításokat Anders Carlsson végezte"
+
+#: typing-break/drwright.c:832
+msgid "Break reminder"
+msgstr "Szünetre emlékeztető"
+
+#: typing-break/main.c:93
+msgid "The typing monitor is already running."
+msgstr "A gépelésfigyelő már fut."
+
+#: typing-break/main.c:106
+msgid ""
+"The typing monitor uses the notification area to display information. You "
+"don't seem to have a notification area on your panel. You can add it by "
+"right-clicking on your panel and choose 'Add to panel -> Utilities -> "
+"Notification area'."
+msgstr ""
+"A gépelésfigyelő a figyelmeztető területet használja információk "
+"megjelenítésére. Úgy tűnik, az ön panelén nincs figyelmeztető terület. "
+"Hozzáadhatja a helyi menü 'Hozzáadás -> Eszközök -> Figyelmeztetési terület' "
+"pontjával."
+
+#: vfs-methods/fontilus/font-view.c:102
+msgid "The quick brown fox jumps over the lazy dog. 0123456789"
+msgstr "Árvíztűrő tükörfúrógép. 0123456789"
+
+#: vfs-methods/fontilus/font-view.c:253
+msgid "Name:"
+msgstr "Név:"
+
+#: vfs-methods/fontilus/font-view.c:256
+msgid "Style:"
+msgstr "Stílus:"
+
+#: vfs-methods/fontilus/font-view.c:265
+msgid "Type:"
+msgstr "Típus:"
+
+#: vfs-methods/fontilus/font-view.c:272
+msgid "Size:"
+msgstr "Méret:"
+
+#: vfs-methods/fontilus/font-view.c:316 vfs-methods/fontilus/font-view.c:329
+msgid "Version:"
+msgstr "Verzió:"
+
+#: vfs-methods/fontilus/font-view.c:320 vfs-methods/fontilus/font-view.c:331
+msgid "Copyright:"
+msgstr "Copyright:"
+
+#: vfs-methods/fontilus/font-view.c:324
+msgid "Description:"
+msgstr "Leírás:"
+
+#: vfs-methods/fontilus/font-view.c:394
+#, c-format
+msgid "usage: %s fontfile\n"
+msgstr "használat: %s betűkészletfájl\n"
+
+#: vfs-methods/fontilus/fontilus-context-menu.c:131
+msgid "Font context menu items"
+msgstr "Betűtípus helyi menü elemei"
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:1
+msgid "If set to true, then OpenType fonts will be thumbnailed."
+msgstr ""
+"Ha be van jelölve, az OpenType betűkészletek előnézete meg fog jelenni."
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:2
+msgid "If set to true, then PCF fonts will be thumbnailed."
+msgstr "Ha be van jelölve, a PCP betűkészletek előnézete meg fog jelenni."
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:3
+msgid "If set to true, then TrueType fonts will be thumbnailed."
+msgstr "Ha be van jelölve, a TrueType betűkészletek előnézete meg fog jelenni."
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:4
+msgid "If set to true, then Type1 fonts will be thumbnailed."
+msgstr "Ha be van jelölve, a Type1 betűkészletek előnézete meg fog jelenni."
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:5
+msgid ""
+"Set this key to the command used to create thumbnails for OpenType fonts."
+msgstr ""
+"Beállítja ezt a billentyűt az OpenType betűkészletek előnézetének "
+"létrehozására használt parancshoz."
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:6
+msgid "Set this key to the command used to create thumbnails for PCF fonts."
+msgstr ""
+"Beállítja ezt a billentyűt a PCP betűkészletek előnézetének létrehozására "
+"használt parancshoz."
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:7
+msgid ""
+"Set this key to the command used to create thumbnails for TrueType fonts."
+msgstr ""
+"Beállítja ezt a billentyűt a TrueType betűkészletek előnézetének "
+"létrehozására használt parancshoz."
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:8
+msgid "Set this key to the command used to create thumbnails for Type1 fonts."
+msgstr ""
+"Beállítja ezt a billentyűt a Type1 betűkészletek előnézetének létrehozására "
+"használt parancshoz."
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:9
+msgid "Thumbnail command for OpenType fonts"
+msgstr "Előnézet parancs OpenType betűkészletekhez"
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:10
+msgid "Thumbnail command for PCF fonts"
+msgstr "Előnézet parancs PCP betűkészletekhez"
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:11
+msgid "Thumbnail command for TrueType fonts"
+msgstr "Előnézet parancs TrueType betűkészletekhez"
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:12
+msgid "Thumbnail command for Type1 fonts"
+msgstr "Előnézet parancs Type1 betűkészletekhez"
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:13
+msgid "Whether to thumbnail OpenType fonts"
+msgstr "Be legyen-e kapcsolva az OpenType betűkészletek előnézete"
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:14
+msgid "Whether to thumbnail PCF fonts"
+msgstr "Be legyen-e kapcsolva a PCP betűkészletek előnézete"
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:15
+msgid "Whether to thumbnail TrueType fonts"
+msgstr "Be legyen-e kapcsolva a TrueType betűkészletek előnézete"
+
+#: vfs-methods/fontilus/fontilus.schemas.in.h:16
+msgid "Whether to thumbnail Type1 fonts"
+msgstr "Be legyen-e kapcsolva a Type1 betűkészletek előnézete"
+
+# FIXME factory
+#: vfs-methods/fontilus/fontilus.server.in.in.h:1
+msgid "Factory for the fontilus context menu"
+msgstr "Factory a fontilus helyi menüjéhez"
+
+#: vfs-methods/fontilus/fontilus.server.in.in.h:2
+msgid "Fontilus context menu"
+msgstr "Fontilus helyi menü"
+
+#: vfs-methods/fontilus/fontilus.server.in.in.h:3
+msgid "Fontilus context menu factory"
+msgstr "Fontilus helyi menü factory"
+
+#: vfs-methods/fontilus/fontilus.server.in.in.h:4
+msgid "Nautilus context menu entries for fonts"
+msgstr "Nautilus helyi menü bejegyzések betűkészletekhez"
+
+#: vfs-methods/fontilus/fontilus.server.in.in.h:5
+msgid "Set as Application Font"
+msgstr "Alkalmazás betűkészletének beállítása"
+
+# FIXME
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
+msgid "Theme Properties content view component"
+msgstr "Téma tulajdonságai tartalomnézet-komponens"
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
+msgid "Themus Theme Properties view"
+msgstr "Themus tématulajdonságok nézet"
+
+#: vfs-methods/themus/apply-font.glade.h:1
+msgid " "
+msgstr " "
+
+#: vfs-methods/themus/apply-font.glade.h:2
+msgid "<span weight=\"bold\" size=\"larger\">Apply new font?</span>"
+msgstr ""
+"<span weight=\"bold\" size=\"larger\">Új betűkészlet alkalmazása?</span>"
+
+#: vfs-methods/themus/apply-font.glade.h:3
+msgid "Do _not apply font"
+msgstr "_Ne alkalmazza a betűkészletet"
+
+#: vfs-methods/themus/apply-font.glade.h:4
+msgid ""
+"The theme you have selected suggests a new font. A preview of the font is "
+"shown below."
+msgstr ""
+"Az ön által kiválasztott téma új betűkészletet javasol. Ennek előnézete "
+"lejjebb látható."
+
+#: vfs-methods/themus/apply-font.glade.h:5
+msgid "_Apply font"
+msgstr "_Betűkészlet alkalmazása"
+
+#: vfs-methods/themus/theme-method.c:520
+msgid "Themes"
+msgstr "Témák"
+
+#: vfs-methods/themus/themus-properties-view.c:172
+msgid "Control theme"
+msgstr "Vezérlőelem-téma"
+
+#: vfs-methods/themus/themus-properties-view.c:176
+msgid "Window border theme"
+msgstr "Ablakkerettéma"
+
+#: vfs-methods/themus/themus-properties-view.c:180
+msgid "Icon theme"
+msgstr "Ikontéma"
+
+#: vfs-methods/themus/themus-properties-view.c:219
+msgid "URI currently displayed"
+msgstr "A jelenleg megjelenített URI"
+
+#. translators: you may want to include non-western chars here
+#: vfs-methods/themus/themus-theme-applier.c:83
+msgid "ABCDEFG"
+msgstr "ÁÉÍÓŐÚŰ"
+
+#: vfs-methods/themus/themus.schemas.in.h:1
+msgid "If set to true, then installed themes will be thumbnailed."
+msgstr "Ha be van állítva, a telepített témák előnézete megjelenik."
+
+#: vfs-methods/themus/themus.schemas.in.h:2
+msgid "If set to true, then themes will be thumbnailed."
+msgstr "Ha be van állítva, a témák előnézete megjelenik."
+
+#: vfs-methods/themus/themus.schemas.in.h:3
+msgid ""
+"Set this key to the command used to create thumbnails for installed themes."
+msgstr ""
+"Beállítja ezt a billentyűt a telepített témák előnézetének létrehozására "
+"használt parancshoz."
+
+#: vfs-methods/themus/themus.schemas.in.h:4
+msgid "Set this key to the command used to create thumbnails for themes."
+msgstr ""
+"Beállítja ezt a billentyűt a témák előnézetének létrehozására használt "
+"parancshoz."
+
+#: vfs-methods/themus/themus.schemas.in.h:5
+msgid "Thumbnail command for installed themes"
+msgstr "Előnézet parancs telepített témákhoz"
+
+#: vfs-methods/themus/themus.schemas.in.h:6
+msgid "Thumbnail command for themes"
+msgstr "Előnézet parancs témákhoz"
+
+#: vfs-methods/themus/themus.schemas.in.h:7
+msgid "Whether to thumbnail installed themes"
+msgstr "Be legyen-e kapcsolva a telepített témák előnézete"
+
+#: vfs-methods/themus/themus.schemas.in.h:8
+msgid "Whether to thumbnail themes"
+msgstr "Be legyen-e kapcsolva a témák előnézete"
