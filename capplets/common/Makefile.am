@@ -23,3 +23,12 @@ libcommon_la_SOURCES = \
 	capplet-stock-icons.c		capplet-stock-icons.h
 
 libcommon_la_LIBADD = $(top_builddir)/libbackground/libbackground.la
+
+gnome_theme_test_SOURCES = \
+	gnome-theme-test.c
+
+gnome_theme_test_LDADD = 						\
+	$(GNOMECC_CAPPLETS_LIBS)
+
+noinst_PROGRAMS = \
+	gnome-theme-test
