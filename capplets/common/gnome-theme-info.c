@@ -364,7 +364,9 @@ read_meta_theme (GnomeVFSURI *meta_theme_uri)
   str = gnome_desktop_item_get_string (meta_theme_ditem, BACKGROUND_IMAGE_KEY);
   if (str != NULL)
     meta_theme_info->background_image = g_strdup (str);
-
+  
+  gnome_desktop_item_unref (meta_theme_ditem);
+  
   return meta_theme_info;
 }
 
@@ -476,7 +478,7 @@ update_theme_index (GnomeVFSURI       *index_uri,
 		    GnomeThemeElement  key_element,
 		    gint               priority)
 {
-  GnomeVFSFileInfo file_info = {0,};
+  GnomeVFSFileInfo *file_info;
   GnomeVFSResult result;
   gboolean theme_exists;
   GnomeThemeInfo *theme_info;
@@ -486,11 +488,13 @@ update_theme_index (GnomeVFSURI       *index_uri,
 
   /* First, we determine the new state of the file.  We do no more
    * sophisticated a test than "files exists and is a file" */
-  result = gnome_vfs_get_file_info_uri (index_uri, &file_info, GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
-  if (result == GNOME_VFS_OK && file_info.type == GNOME_VFS_FILE_TYPE_REGULAR)
+  file_info = gnome_vfs_file_info_new ();
+  result = gnome_vfs_get_file_info_uri (index_uri, file_info, GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
+  if (result == GNOME_VFS_OK && file_info->type == GNOME_VFS_FILE_TYPE_REGULAR)
     theme_exists = TRUE;
   else
     theme_exists = FALSE;
+  gnome_vfs_file_info_unref (file_info);
 
   /* Next, we see what currently exists */
   parent = gnome_vfs_uri_get_parent (index_uri);
@@ -595,7 +599,7 @@ update_common_theme_dir_index (GnomeVFSURI *theme_index_uri,
 			       gboolean     icon_theme,
 			       gint         priority)
 {
-  GnomeVFSFileInfo file_info = {0,};
+  GnomeVFSFileInfo *file_info;
   GnomeVFSResult result;
   gboolean theme_exists;
   gpointer theme_info;
@@ -617,8 +621,9 @@ update_common_theme_dir_index (GnomeVFSURI *theme_index_uri,
       hash_by_name = meta_theme_hash_by_name;
     }
   /* First, we determine the new state of the file. */
-  result = gnome_vfs_get_file_info_uri (theme_index_uri, &file_info, GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
-  if (result == GNOME_VFS_OK && file_info.type == GNOME_VFS_FILE_TYPE_REGULAR)
+  file_info = gnome_vfs_file_info_new ();
+  result = gnome_vfs_get_file_info_uri (theme_index_uri, file_info, GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
+  if (result == GNOME_VFS_OK && file_info->type == GNOME_VFS_FILE_TYPE_REGULAR)
     {
       /* It's an interesting file.  Lets try to load it. */
       if (icon_theme)
@@ -653,6 +658,7 @@ update_common_theme_dir_index (GnomeVFSURI *theme_index_uri,
       theme_info = NULL;
       theme_exists = FALSE;
     }
+  gnome_vfs_file_info_unref (file_info);
 
   /* Next, we see what currently exists */
   common_theme_dir_uri = gnome_vfs_uri_get_parent (theme_index_uri);
@@ -912,16 +918,18 @@ top_theme_dir_changed (GnomeVFSMonitorHandle *handle,
 
   if (event_type == GNOME_VFS_MONITOR_EVENT_CREATED)
     {
-      GnomeVFSFileInfo file_info = {0,};
+      GnomeVFSFileInfo *file_info;
 
       monitor_data = g_new0 (CommonThemeDirMonitorData, 1);
       monitor_data->priority = priority;
-      result = gnome_vfs_get_file_info_uri (common_theme_dir_uri, &file_info, GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
-      if (result == GNOME_VFS_OK && file_info.type == GNOME_VFS_FILE_TYPE_DIRECTORY)
+      file_info = gnome_vfs_file_info_new ();
+      result = gnome_vfs_get_file_info_uri (common_theme_dir_uri, file_info, GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
+      if (result == GNOME_VFS_OK && file_info->type == GNOME_VFS_FILE_TYPE_DIRECTORY)
 	{
 	  add_common_theme_dir_monitor (common_theme_dir_uri, NULL, monitor_data, NULL);
-	  g_hash_table_insert (handle_hash, file_info.name, monitor_data);
+	  g_hash_table_insert (handle_hash, file_info->name, monitor_data);
 	}
+      gnome_vfs_file_info_unref (file_info);
     }
   else if (event_type == GNOME_VFS_MONITOR_EVENT_DELETED)
     {
@@ -962,16 +970,18 @@ top_icon_theme_dir_changed (GnomeVFSMonitorHandle    *handle,
 
   if (event_type == GNOME_VFS_MONITOR_EVENT_CREATED)
     {
-      GnomeVFSFileInfo file_info = {0,};
+      GnomeVFSFileInfo *file_info;
 
       monitor_data = g_new0 (CommonIconThemeDirMonitorData, 1);
       monitor_data->priority = priority;
-      result = gnome_vfs_get_file_info_uri (common_icon_theme_dir_uri, &file_info, GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
-      if (result == GNOME_VFS_OK && file_info.type == GNOME_VFS_FILE_TYPE_DIRECTORY)
+      file_info = gnome_vfs_file_info_new ();
+      result = gnome_vfs_get_file_info_uri (common_icon_theme_dir_uri, file_info, GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
+      if (result == GNOME_VFS_OK && file_info->type == GNOME_VFS_FILE_TYPE_DIRECTORY)
 	{
 	  add_common_icon_theme_dir_monitor (common_icon_theme_dir_uri, NULL, monitor_data, NULL);
-	  g_hash_table_insert (handle_hash, file_info.name, monitor_data);
+	  g_hash_table_insert (handle_hash, file_info->name, monitor_data);
 	}
+      gnome_vfs_file_info_unref (file_info);
     }
   else if (event_type == GNOME_VFS_MONITOR_EVENT_DELETED)
     {
@@ -1004,7 +1014,7 @@ add_common_theme_dir_monitor (GnomeVFSURI                *theme_dir_uri,
   gboolean real_monitor_not_added = FALSE;
   GnomeVFSURI *subdir;
   GnomeVFSURI *index_uri;
-  GnomeVFSFileInfo file_info = {0,};
+  GnomeVFSFileInfo *file_info;
 
   index_uri = gnome_vfs_uri_append_file_name (theme_dir_uri, "index.theme");
   update_meta_theme_index (index_uri, monitor_data->priority);
@@ -1026,8 +1036,9 @@ add_common_theme_dir_monitor (GnomeVFSURI                *theme_dir_uri,
 
   /* gtk-2 theme subdir */
   subdir = gnome_vfs_uri_append_path (theme_dir_uri, "gtk-2.0");
-  result = gnome_vfs_get_file_info_uri (theme_dir_uri, &file_info, GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
-  if (result == GNOME_VFS_OK && file_info.type == GNOME_VFS_FILE_TYPE_DIRECTORY)
+  file_info = gnome_vfs_file_info_new ();
+  result = gnome_vfs_get_file_info_uri (theme_dir_uri, file_info, GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
+  if (result == GNOME_VFS_OK && file_info->type == GNOME_VFS_FILE_TYPE_DIRECTORY)
     {
       index_uri = gnome_vfs_uri_append_file_name (subdir, "gtkrc");
       update_gtk2_index (index_uri, monitor_data->priority);
@@ -1046,8 +1057,9 @@ add_common_theme_dir_monitor (GnomeVFSURI                *theme_dir_uri,
 
   /* keybinding theme subdir */
   subdir = gnome_vfs_uri_append_path (theme_dir_uri, "gtk-2.0-key");
-  result = gnome_vfs_get_file_info_uri (theme_dir_uri, &file_info, GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
-  if (result == GNOME_VFS_OK && file_info.type == GNOME_VFS_FILE_TYPE_DIRECTORY)
+  gnome_vfs_file_info_clear (file_info);
+  result = gnome_vfs_get_file_info_uri (theme_dir_uri, file_info, GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
+  if (result == GNOME_VFS_OK && file_info->type == GNOME_VFS_FILE_TYPE_DIRECTORY)
     {
       index_uri = gnome_vfs_uri_append_file_name (subdir, "gtkrc");
       update_keybinding_index (index_uri, monitor_data->priority);
@@ -1066,8 +1078,9 @@ add_common_theme_dir_monitor (GnomeVFSURI                *theme_dir_uri,
 
   /* metacity theme subdir */
   subdir = gnome_vfs_uri_append_path (theme_dir_uri, "metacity-1");
-  result = gnome_vfs_get_file_info_uri (theme_dir_uri, &file_info, GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
-  if (file_info.type == GNOME_VFS_FILE_TYPE_DIRECTORY)
+  gnome_vfs_file_info_clear (file_info);
+  result = gnome_vfs_get_file_info_uri (theme_dir_uri, file_info, GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
+  if (file_info->type == GNOME_VFS_FILE_TYPE_DIRECTORY)
     {
       index_uri = gnome_vfs_uri_append_file_name (subdir, "metacity-theme-1.xml");
       update_metacity_index (index_uri, monitor_data->priority);
@@ -1082,6 +1095,7 @@ add_common_theme_dir_monitor (GnomeVFSURI                *theme_dir_uri,
   g_free (uri_string);
   if (result == GNOME_VFS_ERROR_NOT_SUPPORTED)
     real_monitor_not_added = TRUE;
+  gnome_vfs_file_info_unref (file_info);
   gnome_vfs_uri_unref (subdir);
 
   if (monitor_not_added)
@@ -1156,7 +1170,7 @@ real_add_top_theme_dir_monitor (GnomeVFSURI  *uri,
   GnomeVFSMonitorHandle *monitor_handle = NULL;
   GnomeVFSDirectoryHandle *directory_handle = NULL;
   GnomeVFSResult result;
-  GnomeVFSFileInfo file_info = {0,};
+  GnomeVFSFileInfo *file_info;
   gchar *uri_string;
   CallbackTuple *tuple;
 
@@ -1168,9 +1182,13 @@ real_add_top_theme_dir_monitor (GnomeVFSURI  *uri,
   tuple->priority = priority;
 
   /* Check the URI */
-  gnome_vfs_get_file_info_uri (uri, &file_info, GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
-  if (file_info.type != GNOME_VFS_FILE_TYPE_DIRECTORY)
+  file_info = gnome_vfs_file_info_new ();
+  gnome_vfs_get_file_info_uri (uri, file_info, GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
+  if (file_info->type != GNOME_VFS_FILE_TYPE_DIRECTORY) {
+    gnome_vfs_file_info_unref (file_info);
     return GNOME_VFS_ERROR_NOT_A_DIRECTORY;
+  }
+  gnome_vfs_file_info_unref (file_info);
   /* Monitor the top directory */
   uri_string = gnome_vfs_uri_to_string (uri, GNOME_VFS_URI_HIDE_NONE);
 
@@ -1193,18 +1211,23 @@ real_add_top_theme_dir_monitor (GnomeVFSURI  *uri,
   if (result != GNOME_VFS_OK)
     return result;
 
-  while (gnome_vfs_directory_read_next (directory_handle, &file_info) == GNOME_VFS_OK)
+  file_info = gnome_vfs_file_info_new ();
+  while (gnome_vfs_directory_read_next (directory_handle, file_info) == GNOME_VFS_OK)
     {
       GnomeVFSURI *theme_dir_uri;
       gpointer monitor_data;
 
-      if (file_info.type != GNOME_VFS_FILE_TYPE_DIRECTORY)
+      if (file_info->type != GNOME_VFS_FILE_TYPE_DIRECTORY) {
+	gnome_vfs_file_info_clear (file_info);
 	continue;
-      if (file_info.name[0] == '.')
+      }
+      if (file_info->name[0] == '.') {
+	gnome_vfs_file_info_clear (file_info);
 	continue;
+      }
 
       /* Add the directory */
-      theme_dir_uri = gnome_vfs_uri_append_path (uri, file_info.name);
+      theme_dir_uri = gnome_vfs_uri_append_path (uri, file_info->name);
       if (icon_theme)
 	{
 	  monitor_data = g_new0 (CommonIconThemeDirMonitorData, 1);
@@ -1219,10 +1242,13 @@ real_add_top_theme_dir_monitor (GnomeVFSURI  *uri,
 	}
 
 
-      g_hash_table_insert (tuple->handle_hash, file_info.name, monitor_data);
+      g_hash_table_insert (tuple->handle_hash, file_info->name, monitor_data);
+      gnome_vfs_file_info_clear (file_info);
       gnome_vfs_uri_unref (theme_dir_uri);
     }
 
+  gnome_vfs_file_info_unref (file_info);
+  gnome_vfs_directory_close (directory_handle);
   if (result != GNOME_VFS_ERROR_EOF)
     return result;
 

@@ -1,3 +1,33 @@
+Thu Feb 13 18:51:37 2003  Jonathan Blandford  <jrb@redhat.com>
+
+	* capplets/common/gconf-property-editor.c: (gconf_peditor_new):
+	* capplets/common/gnome-theme-info.c: (read_meta_theme),
+	(update_theme_index), (update_common_theme_dir_index),
+	(top_theme_dir_changed), (top_icon_theme_dir_changed),
+	(add_common_theme_dir_monitor), (real_add_top_theme_dir_monitor):
+	* capplets/default-applications/gnome-default-applications-properti
+	es.c: (initialize_default_applications), (read_editor),
+	(read_terminal):
+	* capplets/file-types/mime-edit-dialog.c: (fill_dialog):
+	* capplets/file-types/mime-type-info.c: (load_all_mime_types):
+	* capplets/file-types/mime-types-model.c:
+	(mime_types_model_get_value):
+	* capplets/font/main.c: (font_render_get_gconf), (enum_group_load):
+	* capplets/mouse/gnome-mouse-properties.c: (read_cursor_font),
+	(cursor_changed):
+	* capplets/theme-switcher/gnome-theme-details.c:
+	(window_theme_selection_changed):
+	* capplets/theme-switcher/gnome-theme-manager.c:
+	(meta_theme_selection_changed):
+	* capplets/theme-switcher/theme-thumbnail.c:
+	(generate_theme_thumbnail):
+	* libsounds/sound-properties.c: (sound_properties_add_directory),
+	(sound_properties_add_file):
+	* libsounds/sound-view.c: (compare_func):
+	* libwindow-settings/gnome-window-manager.c:
+	(gnome_window_manager_new): Patch from Kjartan Maraas to fix a
+	bunch of leaks.
+
 Tue Feb  4 17:09:18 2003  Jonathan Blandford  <jrb@redhat.com>
 
 	* Release 2.2.0.1

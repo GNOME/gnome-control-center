@@ -391,7 +391,8 @@ read_cursor_font (void)
 		}
 		g_free (link_name);
 	}
-	
+	g_free (dir_name);
+	closedir (dir);
 	return NULL;
 }
 
@@ -459,10 +460,11 @@ cursor_changed (GtkTreeSelection *selection,
 	gtk_tree_model_get (model, &iter,
 			    COLUMN_FONT_PATH, &cursor_font,
 			    -1);
-	if (cursor_font != NULL)
+	if (cursor_font != NULL) {
 		gconf_client_set_string (gconf_client_get_default (),
 					 CURSOR_FONT_KEY, cursor_font, NULL);
-	else
+		g_free (cursor_font);
+	} else
 		gconf_client_unset (gconf_client_get_default (),
 				    CURSOR_FONT_KEY, NULL);
 }

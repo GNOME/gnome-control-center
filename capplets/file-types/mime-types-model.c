@@ -374,7 +374,8 @@ mime_types_model_get_value (GtkTreeModel *tree_model, GtkTreeIter *iter, gint co
 	MimeTypesModel *model;
 	ModelEntry *entry;
 	GdkPixbuf *icon;
-
+	gchar *pretty_string;
+	
 	g_return_if_fail (tree_model != NULL);
 	g_return_if_fail (IS_MIME_TYPES_MODEL (tree_model));
 
@@ -454,7 +455,9 @@ mime_types_model_get_value (GtkTreeModel *tree_model, GtkTreeIter *iter, gint co
 
 		switch (entry->type) {
 		case MODEL_ENTRY_MIME_TYPE:
-			g_value_set_string (value, mime_type_info_get_file_extensions_pretty_string (MIME_TYPE_INFO (entry)));
+			pretty_string = mime_type_info_get_file_extensions_pretty_string (MIME_TYPE_INFO (entry));
+			g_value_set_string (value, pretty_string);
+			g_free (pretty_string);
 			break;
 
 		case MODEL_ENTRY_SERVICE:

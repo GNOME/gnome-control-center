@@ -575,6 +575,7 @@ meta_theme_selection_changed (GtkTreeSelection *selection,
   if (meta_theme_name)
     {
       meta_theme_info = gnome_theme_meta_info_find (meta_theme_name);
+      g_free (meta_theme_name);
     }
   else
     {

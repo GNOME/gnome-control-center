@@ -158,7 +158,7 @@ window_theme_selection_changed (GtkTreeSelection *selection,
     wm_settings.theme = window_theme_name;
     gnome_window_manager_change_settings (window_manager, &wm_settings);
   }
-
+  g_free (window_theme_name);
 }
 
 static void

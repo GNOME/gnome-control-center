@@ -52,6 +52,7 @@ gnome_window_manager_new (GnomeDesktopItem *it)
         module = g_module_open (module_name, G_MODULE_BIND_LAZY);
         if (module == NULL) {
                 g_warning ("Couldn't load window manager settings module `%s' (%s)", module_name, g_module_error ());
+		g_free (module_name);
                 return NULL;
         }
 
@@ -60,8 +61,11 @@ gnome_window_manager_new (GnomeDesktopItem *it)
   
         if ((!success) || wm_new_func == NULL) {
                 g_warning ("Couldn't load window manager settings module `%s`, couldn't find symbol \'window_manager_new\'", module_name);
+		g_free (module_name);
                 return NULL;
         }
+
+	g_free (module_name);
 
         wm = (* wm_new_func) (GNOME_WINDOW_MANAGER_INTERFACE_VERSION);
 
