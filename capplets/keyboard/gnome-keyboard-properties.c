@@ -167,6 +167,18 @@ mnemonic_activate (GtkWidget *toggle,
 	return FALSE;
 }
 
+
+static void
+dialog_response (GtkWidget *widget,
+		 gint       response,
+		 GladeXML  *dialog)
+{
+	if (response == GTK_RESPONSE_HELP)
+		return;
+
+	gtk_main_quit ();
+}
+
 static void
 setup_dialog (GladeXML       *dialog,
 	      GConfChangeSet *changeset)
@@ -227,7 +239,7 @@ setup_dialog (GladeXML       *dialog,
 		 "conv-from-widget-cb", bell_from_widget,
 		 NULL);
 	g_signal_connect (G_OBJECT (WID ("bell_custom_radio")), "mnemonic_activate", (GCallback) mnemonic_activate, WID ("bell_custom_entry"));
-		 
+	g_signal_connect (G_OBJECT (WID ("keyboard_dialog")), "response", (GCallback) dialog_response, dialog);
 }
 
 static void
