@@ -101,11 +101,9 @@ static void      mod_date_by_str                    (struct tm                  
 
 static void      rollback_changed_cb                (RollbackCappletDialog      *dialog,
 						     GtkAdjustment              *adj);
-static void      ok_cb                              (GtkButton                  *button,
-						     RollbackCappletDialog      *dialog);
 static void      apply_cb                           (GtkButton                  *button,
 						     RollbackCappletDialog      *dialog);
-static void      cancel_cb                          (GtkButton                  *button,
+static void      close_cb                           (GtkButton                  *button,
 						     RollbackCappletDialog      *dialog);
 
 guint
@@ -140,9 +138,8 @@ rollback_capplet_dialog_init (RollbackCappletDialog *dialog)
 	GladeXML *data;
 
 	static const gchar *buttons[] = {
-		GNOME_STOCK_BUTTON_OK,
 		GNOME_STOCK_BUTTON_APPLY,
-		GNOME_STOCK_BUTTON_CANCEL,
+		GNOME_STOCK_BUTTON_CLOSE,
 		NULL
 	};
 
@@ -171,9 +168,8 @@ rollback_capplet_dialog_init (RollbackCappletDialog *dialog)
 
 	gnome_dialog_constructv (GNOME_DIALOG (dialog), _("Rollback"), buttons);
 
-	gnome_dialog_button_connect (GNOME_DIALOG (dialog), 0, GTK_SIGNAL_FUNC (ok_cb), dialog);
-	gnome_dialog_button_connect (GNOME_DIALOG (dialog), 1, GTK_SIGNAL_FUNC (apply_cb), dialog);
-	gnome_dialog_button_connect (GNOME_DIALOG (dialog), 2, GTK_SIGNAL_FUNC (cancel_cb), dialog);
+	gnome_dialog_button_connect (GNOME_DIALOG (dialog), 0, GTK_SIGNAL_FUNC (apply_cb), dialog);
+	gnome_dialog_button_connect (GNOME_DIALOG (dialog), 1, GTK_SIGNAL_FUNC (close_cb), dialog);
 }
 
 static void
@@ -584,21 +580,13 @@ rollback_changed_cb (RollbackCappletDialog *dialog,
 }
 
 static void
-ok_cb (GtkButton *button, RollbackCappletDialog *dialog)
-{
-	apply_settings (dialog);
-
-	gnome_dialog_close (GNOME_DIALOG (dialog));
-}
-
-static void
 apply_cb (GtkButton *button, RollbackCappletDialog *dialog)
 {
 	apply_settings (dialog);
 }
 
 static void
-cancel_cb (GtkButton *button, RollbackCappletDialog *dialog)
+close_cb (GtkButton *button, RollbackCappletDialog *dialog)
 {
 	gnome_dialog_close (GNOME_DIALOG (dialog));
 }
