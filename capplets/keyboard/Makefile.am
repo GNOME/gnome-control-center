@@ -15,6 +15,9 @@ icons_DATA = keyboard-capplet.png	\
 	keyboard-volume.png		\
 	keyboard-bell.png
 
+pixmapsdir = $(datadir)/pixmaps
+pixmaps_DATA = keyboard-capplet.png
+
 desktopdir = $(GNOMECC_DESKTOP_DIR)
 Desktop_in_files = keyboard.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
