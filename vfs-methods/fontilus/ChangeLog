@@ -1,4 +1,14 @@
+2002-12-09  James Henstridge  <james@daa.com.au>
+
+	* src/font-view.c (add_row): handle multiline text.
+	(add_face_info): add some extra information found in SFNT or Type1
+	fonts.
+	(create_text_pixmap): change the font output.
+
 2002-12-06  James Henstridge  <james@daa.com.au>
+
+	* src/ftstream-vfs.c (FT_New_Face_From_URI): if the URI looks
+	local, bypass gnome-vfs to open the face (small optimisation).
 
 	* src/font-view.c (create_text_pixmap): only display the font at
 	its fixed sizes if it is not scalable.  Before we were ignoring

@@ -1,10 +1,14 @@
 /* -*- mode: C; c-basic-offset: 4 -*- */
 #include <ft2build.h>
 #include FT_FREETYPE_H
+#include FT_TYPE1_TABLES_H
+#include FT_SFNT_NAMES_H
+#include FT_TRUETYPE_IDS_H
 #include <X11/Xft/Xft.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
 #include <libgnomevfs/gnome-vfs.h>
+#include <libgnomevfs/gnome-vfs-mime-handlers.h>
 
 #ifndef _
 #  define _(s) (s)
@@ -17,7 +21,7 @@ FT_Error FT_New_Face_From_URI(FT_Library library,
 
 /* height is a little more than needed to display all sizes */
 #define FONTAREA_WIDTH 500
-#define FONTAREA_HEIGHT 236
+#define FONTAREA_HEIGHT 262
 
 static void
 draw_text(Display *xdisplay, XftDraw *draw, FT_Face face, gint pixel_size,
@@ -36,6 +40,10 @@ draw_text(Display *xdisplay, XftDraw *draw, FT_Face face, gint pixel_size,
 	g_printerr("could not load Xft face\n");
 	goto end;
     }
+
+    // g_message("target size=%d, ascent=%d, descent=%d, height=%d",
+    //      pixel_size, font->ascent, font->descent, font->height);
+
     XftDrawString8(draw, colour, font, 5, *pos_y + font->ascent,
 		   (gchar *)text, textlen);
     XftFontClose(xdisplay, font);
@@ -46,7 +54,7 @@ draw_text(Display *xdisplay, XftDraw *draw, FT_Face face, gint pixel_size,
 static GdkPixmap *
 create_text_pixmap(GtkWidget *drawing_area, FT_Face face)
 {
-    gint i, pos_y, textlen;
+    gint i, pos_y, textlen, alpha_size;
     GdkPixmap *pixmap;
     gchar *text;
 
@@ -57,7 +65,7 @@ create_text_pixmap(GtkWidget *drawing_area, FT_Face face)
     XftDraw *draw;
     XftColor colour;
 
-    text = _("ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789");
+    text = _("The quick brown fox jumps over the lazy dog. 0123456789");
     textlen = strlen(text);
 
     /* create pixmap */
@@ -80,14 +88,35 @@ create_text_pixmap(GtkWidget *drawing_area, FT_Face face)
     XftColorAllocName(xdisplay, xvisual, xcolormap, "black", &colour);
 
     pos_y = 4;
+
+    if (FT_IS_SCALABLE(face)) {
+	alpha_size = 24;
+    } else {
+	alpha_size = face->available_sizes[0].height;
+	for (i = 0; i < face->num_fixed_sizes; i++) {
+	    if (face->available_sizes[i].height <= 24)
+		alpha_size = face->available_sizes[i].height;
+	    else
+		break;
+	}
+    }
+    draw_text(xdisplay, draw, face, alpha_size, &colour,
+	      "abcdefghijklmnopqrstuvwxyz", 26, &pos_y);
+    draw_text(xdisplay, draw, face, alpha_size, &colour,
+	      "ABCDEFGHIJKLMNOPQRSTUVWXYZ", 26, &pos_y);
+    draw_text(xdisplay, draw, face, alpha_size, &colour,
+	      "0123456789.:,;(*!?')", 20, &pos_y);
+
+    pos_y += 8;
+
     /* bitmap fonts */
     if (!FT_IS_SCALABLE(face)) {
 	for (i = 0; i < face->num_fixed_sizes; i++) {
-	    draw_text(xdisplay, draw, face, face->available_sizes[i].width,
+	    draw_text(xdisplay, draw, face, face->available_sizes[i].height,
 		      &colour, text, textlen, &pos_y);
 	}
     } else {
-	static const gint sizes[] = { 8, 10, 12, 18, 24, 36, 48, 72 };
+	static const gint sizes[] = { 8, 10, 12, 24, 48, 72 };
 
 	for (i = 0; i < G_N_ELEMENTS(sizes); i++) {
 	    draw_text(xdisplay, draw, face, sizes[i],
@@ -99,7 +128,8 @@ create_text_pixmap(GtkWidget *drawing_area, FT_Face face)
 }
 
 static void
-add_row(GtkWidget *table, gint *row_p, const gchar *name, const gchar *value)
+add_row(GtkWidget *table, gint *row_p,
+	const gchar *name, const gchar *value, gboolean multiline)
 {
     gchar *bold_name;
     GtkWidget *name_w, *value_w;
@@ -107,12 +137,32 @@ add_row(GtkWidget *table, gint *row_p, const gchar *name, const gchar *value)
     bold_name = g_strconcat("<b>", name, "</b>", NULL);
     name_w = gtk_label_new(bold_name);
     g_free(bold_name);
-    gtk_misc_set_alignment(GTK_MISC(name_w), 1.0, 0.5);
+    gtk_misc_set_alignment(GTK_MISC(name_w), 1.0, 0.0);
     gtk_label_set_use_markup(GTK_LABEL(name_w), TRUE);
 
-    value_w = gtk_label_new(value);
-    gtk_misc_set_alignment(GTK_MISC(value_w), 0.0, 0.5);
-    gtk_label_set_selectable(GTK_LABEL(value_w), TRUE);
+    if (multiline) {
+	GtkWidget *textview;
+	GtkTextBuffer *buffer;
+
+	textview = gtk_text_view_new();
+	gtk_text_view_set_editable(GTK_TEXT_VIEW(textview), FALSE);
+	gtk_text_view_set_cursor_visible(GTK_TEXT_VIEW(textview), FALSE);
+	gtk_text_view_set_wrap_mode(GTK_TEXT_VIEW(textview), GTK_WRAP_WORD);
+	buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(textview));
+	gtk_text_buffer_set_text(buffer, value, -1);
+
+	value_w = gtk_scrolled_window_new(NULL, NULL);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(value_w),
+			GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW(value_w),
+					    GTK_SHADOW_IN);
+	gtk_widget_set_size_request(value_w, -1, 50);
+	gtk_container_add(GTK_CONTAINER(value_w), textview);
+    } else {
+	value_w = gtk_label_new(value);
+	gtk_misc_set_alignment(GTK_MISC(value_w), 0.0, 0.5);
+	gtk_label_set_selectable(GTK_LABEL(value_w), TRUE);
+    }
 
     gtk_table_attach(GTK_TABLE(table), name_w, 0, 1, *row_p, *row_p + 1,
 		     GTK_FILL, GTK_FILL, 0, 0);
@@ -125,38 +175,90 @@ add_row(GtkWidget *table, gint *row_p, const gchar *name, const gchar *value)
 static void
 add_face_info(GtkWidget *table, gint *row_p, const gchar *uri, FT_Face face)
 {
-    gchar *filename;
     GnomeVFSFileInfo *file_info;
+    PS_FontInfoRec ps_info;
 
-    add_row(table, row_p, _("Name:"), face->family_name);
+    add_row(table, row_p, _("Name:"), face->family_name, FALSE);
 
     if (face->style_name)
-	add_row(table, row_p, _("Style:"), face->style_name);
-
-    filename = gnome_vfs_get_local_path_from_uri(uri);
-    add_row(table, row_p, _("File name:"), filename ? filename : uri);
-    g_free(filename);
+	add_row(table, row_p, _("Style:"), face->style_name, FALSE);
 
     file_info = gnome_vfs_file_info_new();
     if (gnome_vfs_get_file_info
 	(uri, file_info, GNOME_VFS_FILE_INFO_GET_MIME_TYPE) == GNOME_VFS_OK) {
 
 	if ((file_info->valid_fields&GNOME_VFS_FILE_INFO_FIELDS_MIME_TYPE)!=0){
-	    gchar *type = gnome_vfs_mime_get_description(file_info->mime_type);
+	    const gchar *type = gnome_vfs_mime_get_description(file_info->mime_type);
 
 	    add_row(table, row_p, _("Type:"),
-		    type ? type : file_info->mime_type);
-	    g_free(type);
+		    type ? type : file_info->mime_type, FALSE);
 	}
 
 	if ((file_info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_SIZE) != 0) {
 	    gchar *size;
 	    size = gnome_vfs_format_file_size_for_display(file_info->size);
-	    add_row(table, row_p, _("Size:"), size);
+	    add_row(table, row_p, _("Size:"), size, FALSE);
 	    g_free(size);
 	}
     }
     gnome_vfs_file_info_unref(file_info);
+
+    if (FT_IS_SFNT(face)) {
+	gint i, len;
+	gchar *version = NULL, *copyright = NULL, *description = NULL;
+
+	len = FT_Get_Sfnt_Name_Count(face);
+	for (i = 0; i < len; i++) {
+	    FT_SfntName sname;
+
+	    if (FT_Get_Sfnt_Name(face, i, &sname) != 0)
+		continue;
+
+	    /* only handle the unicode names for US langid */
+	    if (!(sname.platform_id == TT_PLATFORM_MICROSOFT &&
+		  sname.encoding_id == TT_MS_ID_UNICODE_CS &&
+		  sname.language_id == TT_MS_LANGID_ENGLISH_UNITED_STATES))
+		continue;
+
+	    switch (sname.name_id) {
+	    case TT_NAME_ID_COPYRIGHT:
+		g_free(copyright);
+		copyright = g_convert(sname.string, sname.string_len,
+				      "UTF-8", "UTF-16BE", NULL, NULL, NULL);
+		break;
+	    case TT_NAME_ID_VERSION_STRING:
+		g_free(version);
+		version = g_convert(sname.string, sname.string_len,
+				    "UTF-8", "UTF-16BE", NULL, NULL, NULL);
+		break;
+	    case TT_NAME_ID_DESCRIPTION:
+		g_free(description);
+		description = g_convert(sname.string, sname.string_len,
+					"UTF-8", "UTF-16BE", NULL, NULL, NULL);
+		break;
+	    default:
+		break;
+	    }
+	}
+	if (version) {
+	    add_row(table, row_p, _("Version:"), version, FALSE);
+	    g_free(version);
+	}
+	if (copyright) {
+	    add_row(table, row_p, _("Copyright:"), copyright, TRUE);
+	    g_free(copyright);
+	}
+	if (description) {
+	    add_row(table, row_p, _("Description:"), description, TRUE);
+	    g_free(description);
+	}
+    } else if (FT_Get_PS_Font_Info(face, &ps_info) == 0) {
+	/* XXXX need to handle encoding of this info ... */
+	if (ps_info.version)
+	    add_row(table, row_p, _("Version:"), ps_info.version, FALSE);
+	if (ps_info.notice)
+	    add_row(table, row_p, _("Copyright:"), ps_info.notice, TRUE);
+    }
 }
 
 static gboolean
