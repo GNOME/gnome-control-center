@@ -476,11 +476,10 @@ pb_get_fn (BonoboPropertyBag *bag, BonoboArg *arg,
 	time_t val;
 	extern int daylight;
 
-	log = CONFIG_LOG (config_log_open (archiver_db->location));
+	log = location_get_config_log (archiver_db->location);
 	id = config_log_get_rollback_id_by_steps (log, 0, archiver_db->real_name);
 	if (id < 0)
 	{
-		gtk_object_destroy (GTK_OBJECT (log));
 		BONOBO_ARG_SET_GENERAL (arg, 0,
 				TC_ulonglong, CORBA_unsigned_long_long, NULL);
 		return;
@@ -494,7 +493,6 @@ pb_get_fn (BonoboPropertyBag *bag, BonoboArg *arg,
 
 	BONOBO_ARG_SET_GENERAL (arg, val,
 				TC_ulonglong, CORBA_unsigned_long_long, NULL);
-	gtk_object_destroy (GTK_OBJECT (log));
 }
 
 static void
