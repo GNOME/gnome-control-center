@@ -36,6 +36,14 @@ static SetupPropertyEditorsFn  setup_cb = NULL;
 static BonoboControl          *control = NULL;
 static GtkWidget              *widget;
 
+typedef struct _pair_t pair_t;
+
+struct _pair_t 
+{
+	gpointer a;
+	gpointer b;
+};
+
 /* apply_cb
  *
  * Callback issued when the user clicks "Apply" or "Ok". This function is
@@ -200,26 +208,22 @@ get_control_cb (BonoboPropertyControl *property_control, gint page_number)
  */
 
 static gint 
-real_quit_cb (BonoboPropertyControl *pc) 
+real_quit_cb (pair_t *pair) 
 {
-#if 0
 	CORBA_Environment ev;
 	Bonobo_EventSource_ListenerId id;
 	Bonobo_ConfigDatabase db;
 
-/* Next bit won't work because object has been destroyed */
 	DEBUG_MSG ("Enter");
 	CORBA_exception_init (&ev);
-	id = (Bonobo_EventSource_ListenerId)
-		gtk_object_get_data (GTK_OBJECT (pc), "listener-id");
-	db = (Bonobo_ConfigDatabase)
-		gtk_object_get_data (GTK_OBJECT (pc), "db");
+	db = (Bonobo_ConfigDatabase) pair->a;
+	id = (Bonobo_EventSource_ListenerId) pair->b;
 
 	bonobo_event_source_client_remove_listener (db, id, &ev);
 	bonobo_object_release_unref (db, &ev);
 	CORBA_exception_free (&ev);
 	DEBUG_MSG ("Exit");
-#endif
+
 	gtk_main_quit ();
 
 	return FALSE;
@@ -228,8 +232,13 @@ real_quit_cb (BonoboPropertyControl *pc)
 static void
 quit_cb (BonoboPropertyControl *pc, Bonobo_ConfigDatabase db)
 {
-	gtk_object_set_data (GTK_OBJECT (pc), "db", db);
-	gtk_idle_add ((GtkFunction)real_quit_cb, pc);
+	pair_t *pair;
+
+	pair = g_new (pair_t, 1);
+	pair->a = (gpointer) db;
+	pair->b = gtk_object_get_data (GTK_OBJECT (pc), "listener-id");
+
+	gtk_idle_add ((GtkFunction)real_quit_cb, pair);
 }
 
 /* create_control_cb

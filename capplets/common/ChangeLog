@@ -1,3 +1,10 @@
+2001-07-24  Bradford Hovinen  <hovinen@ximian.com>
+
+	* capplet-util.c (real_quit_cb): Reenable disabled code
+	(quit_cb): Put the db an id objects in a pair structure and pass
+	that to the callback
+	(real_quit_cb): Extract the db and id objects from the pair
+
 2001-07-23  Bradford Hovinen  <hovinen@ximian.com>
 
 	* capplet-util.c (set_moniker_cb): Set InvalidValue exception if
