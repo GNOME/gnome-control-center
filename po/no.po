@@ -5,15 +5,19 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.3.0\n"
-"POT-Creation-Date: 2001-08-29 12:59-0400\n"
-"PO-Revision-Date: 2001-07-25 21:13+0200\n"
+"POT-Creation-Date: 2001-09-16 10:19+0200\n"
+"PO-Revision-Date: 2001-09-16 10:24+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-#: archiver/config-archiver.c:307 archiver/location.c:445
+#: archiver/archive.c:614
+msgid "Default location"
+msgstr "Standard lokasjon"
+
+#: archiver/config-archiver.c:307 archiver/location.c:460
 msgid "Default Location"
 msgstr "Standard lokasjon"
 
@@ -54,9 +58,8 @@ msgid "Remove the given backend from the given location"
 msgstr "Fjern oppgitt undersystem fra gitt lokasjon"
 
 #: archiver/config-archiver.c:99
-#, fuzzy
 msgid "Perform garbage collection on the given location"
-msgstr "Opphavslokasjon for den nye lokasjonen"
+msgstr "Utfør søppelhenting for den oppgitte lokasjonen"
 
 #: archiver/config-archiver.c:105
 msgid "Use the global repository"
@@ -176,12 +179,12 @@ msgstr "Alternativer for å legge til eller endre navn på lokasjoner"
 msgid "Options for adding and removing backends"
 msgstr "Alternativer for å legge til og fjerne undersystemer"
 
-#: capplets/background/applier.c:355
+#: capplets/background/applier.c:357
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "Kunne ikke laste pixbuf \"%s\"; slår av bakgrunn."
 
-#: capplets/background/applier.c:501
+#: capplets/background/applier.c:514
 msgid "Disabled"
 msgstr "Slått av"
 
@@ -242,8 +245,20 @@ msgid "Tiled"
 msgstr "Flislagt"
 
 #: capplets/background/background-properties.glade.h:13
+msgid "Use a picture for the background"
+msgstr "Bruk et bilde som bakgrunn"
+
+#: capplets/background/background-properties.glade.h:14
 msgid "Vertical gradient"
 msgstr "Vertikal gradient"
+
+#: capplets/background/background-properties-capplet.c:49
+msgid "Set background image."
+msgstr "Sett bakgrunnsbilde."
+
+#: capplets/background/background-properties-capplet.c:49
+msgid "IMAGE-FILE"
+msgstr "BILDE-FIL"
 
 #: capplets/background/prefs-widget.c:362
 msgid "(None)"
@@ -262,19 +277,19 @@ msgstr "Kan ikke finne en hbox, bruker vanlig filvalg"
 msgid "Preview"
 msgstr "Forhåndsvisning"
 
-#: capplets/common/capplet-util.c:490
+#: capplets/common/capplet-util.c:500
 msgid "Just apply settings and quit"
 msgstr "Bare aktiver innstillingene og avslutt"
 
-#: capplets/common/capplet-util.c:492
+#: capplets/common/capplet-util.c:502
 msgid "Initialize the session"
 msgstr "Initier sesjonen"
 
-#: capplets/common/capplet-util.c:494
+#: capplets/common/capplet-util.c:504
 msgid "Retrieve and store legacy settings"
 msgstr "Hent og lagre gamle innstillinger"
 
-#: capplets/common/capplet-util.c:503
+#: capplets/common/capplet-util.c:513
 msgid "Capplet options"
 msgstr "Alternativer for capplet"
 
@@ -431,9 +446,8 @@ msgid "Help Viewer"
 msgstr "Hjelp-leser"
 
 #: capplets/default-applications/interface.c:501
-#, fuzzy
 msgid "Default Terminal"
-msgstr "Velg en terminal"
+msgstr "Forvalgt terminal"
 
 #: capplets/default-applications/interface.c:518
 msgid "Select a Terminal"
@@ -510,9 +524,8 @@ msgid "Click volume"
 msgstr "Klikkvolum"
 
 #: capplets/keyboard/keyboard-properties.glade.h:3
-#, fuzzy
 msgid "Delay before repeat:"
-msgstr "Pause før neste opptegning"
+msgstr "Pause før repetering:"
 
 #: capplets/keyboard/keyboard-properties.glade.h:4
 msgid "Duration (ms)"
@@ -528,6 +541,14 @@ msgstr "Slå på auto-repetering"
 
 #: capplets/keyboard/keyboard-properties.glade.h:7
 #: capplets/mouse/mouse-properties.glade.h:1
+#: capplets/screensaver/screensavers/3d_clock.xml.h:2
+#: capplets/screensaver/screensavers/ant.xml.h:3
+#: capplets/screensaver/screensavers/attraction.xml.h:4
+#: capplets/screensaver/screensavers/bsod.xml.h:3
+#: capplets/screensaver/screensavers/compass.xml.h:3
+#: capplets/screensaver/screensavers/flag.xml.h:2
+#: capplets/screensaver/screensavers/qix.xml.h:3
+#: capplets/screensaver/screensavers/starfish.xml.h:3
 msgid "Fast"
 msgstr "Fort"
 
@@ -536,6 +557,9 @@ msgid "Key repeat rate:"
 msgstr "Repeteringsintervall:"
 
 #: capplets/keyboard/keyboard-properties.glade.h:10
+#: capplets/screensaver/screensavers/attraction.xml.h:15
+#: capplets/screensaver/screensavers/qix.xml.h:8
+#: capplets/screensaver/screensavers/rorschach.xml.h:3
 msgid "Long"
 msgstr "Langt"
 
@@ -548,11 +572,22 @@ msgid "Pitch (Hz)"
 msgstr "Tonehøyde (Hz)"
 
 #: capplets/keyboard/keyboard-properties.glade.h:13
+#: capplets/screensaver/screensavers/attraction.xml.h:20
+#: capplets/screensaver/screensavers/qix.xml.h:16
+#: capplets/screensaver/screensavers/rorschach.xml.h:7
 msgid "Short"
 msgstr "Kort"
 
 #: capplets/keyboard/keyboard-properties.glade.h:14
 #: capplets/mouse/mouse-properties.glade.h:10
+#: capplets/screensaver/screensavers/3d_clock.xml.h:7
+#: capplets/screensaver/screensavers/ant.xml.h:16
+#: capplets/screensaver/screensavers/attraction.xml.h:21
+#: capplets/screensaver/screensavers/bsod.xml.h:6
+#: capplets/screensaver/screensavers/compass.xml.h:6
+#: capplets/screensaver/screensavers/flag.xml.h:10
+#: capplets/screensaver/screensavers/qix.xml.h:17
+#: capplets/screensaver/screensavers/starfish.xml.h:7
 msgid "Slow"
 msgstr "Sakte"
 
@@ -581,6 +616,9 @@ msgid "Mouse Properties"
 msgstr "Egenskaper for mus"
 
 #: capplets/mouse/mouse-properties.glade.h:2
+#: capplets/screensaver/screensavers/3d_clock.xml.h:3
+#: capplets/screensaver/screensavers/attraction.xml.h:6
+#: capplets/screensaver/screensavers/qix.xml.h:5
 msgid "High"
 msgstr "Høy"
 
@@ -589,6 +627,9 @@ msgid "Left handed"
 msgstr "Venstrehendt"
 
 #: capplets/mouse/mouse-properties.glade.h:4
+#: capplets/screensaver/screensavers/3d_clock.xml.h:5
+#: capplets/screensaver/screensavers/attraction.xml.h:16
+#: capplets/screensaver/screensavers/qix.xml.h:9
 msgid "Low"
 msgstr "Lav "
 
@@ -612,6 +653,71 @@ msgstr "Høyrehendt"
 msgid "Sensitivity:"
 msgstr "Følsomhet:"
 
+#: capplets/rollback/main.c:39
+#, fuzzy
+msgid "Rollback the capplet given"
+msgstr "Gjenopprett konfigurasjonen fra et bestemt punkt"
+
+#: capplets/rollback/main.c:41
+msgid "Operate on global backends"
+msgstr "Arbeid på globale undersystemer"
+
+#: capplets/rollback/main.c:55
+msgid "Options for the rollback GUI"
+msgstr "Alternativer for GUI for gjenoppretting"
+
+#: capplets/rollback/rollback-capplet-dialog.c:46
+msgid "1 year ago"
+msgstr ""
+
+#: capplets/rollback/rollback-capplet-dialog.c:46
+msgid "6 months ago"
+msgstr ""
+
+#: capplets/rollback/rollback-capplet-dialog.c:46
+msgid "1 month ago"
+msgstr ""
+
+#: capplets/rollback/rollback-capplet-dialog.c:46
+msgid "1 week ago"
+msgstr ""
+
+#: capplets/rollback/rollback-capplet-dialog.c:47
+msgid "3 days ago"
+msgstr "3 dager siden"
+
+#: capplets/rollback/rollback-capplet-dialog.c:47
+msgid "1 day ago"
+msgstr "1 dag siden"
+
+#: capplets/rollback/rollback-capplet-dialog.c:47
+msgid "1 hour ago"
+msgstr "1 time siden"
+
+#: capplets/rollback/rollback-capplet-dialog.c:47
+msgid "30 minutes ago"
+msgstr "30 minutter siden"
+
+#: capplets/rollback/rollback-capplet-dialog.c:48
+msgid "10 minutes ago"
+msgstr "10 minutter siden"
+
+#: capplets/rollback/rollback-capplet-dialog.c:48
+msgid "5 minutes ago"
+msgstr "5 minutter siden"
+
+#: capplets/rollback/rollback-capplet-dialog.c:48
+msgid "1 minute ago"
+msgstr "1 minutt siden"
+
+#: capplets/rollback/rollback-capplet-dialog.c:48
+msgid "Current time"
+msgstr "Nå"
+
+#: capplets/rollback/rollback-capplet-dialog.c:172
+msgid "Rollback"
+msgstr "Gå tilbake"
+
 #: capplets/screensaver/preferences.c:786
 msgid "Custom screensaver. No description available"
 msgstr "Egendefinert skjermsparer. Ingen beskrivelse tilgjengelig"
@@ -628,7 +734,7 @@ msgstr "Skjermsparer"
 #: capplets/screensaver/prefs-widget.c:920
 #, c-format
 msgid "About %s\n"
-msgstr ""
+msgstr "Om %s\n"
 
 #: capplets/screensaver/screensaver.desktop.in.in.h:1
 msgid "Configure the settings of the screensaver"
@@ -655,9 +761,9 @@ msgid "Demo"
 msgstr "Vis"
 
 #: capplets/screensaver/screensaver-prefs-dialog.c:274
-#, fuzzy, c-format
+#, c-format
 msgid "%s properties"
-msgstr "Egenskaper for mus"
+msgstr "Egenskaper for %s"
 
 #: capplets/screensaver/screensaver-prefs-dialog.c:1366
 msgid "There are no configurable settings for this screensaver."
@@ -796,21 +902,37 @@ msgstr "minutter"
 
 #: capplets/screensaver/screensavers/3d_clock.xml.h:1
 msgid "3d clock"
-msgstr ""
+msgstr "3D-klokke"
 
-#: capplets/screensaver/screensavers/3d_clock.xml.h:2
+#: capplets/screensaver/screensavers/3d_clock.xml.h:4
+#: capplets/screensaver/screensavers/ant.xml.h:6
+#: capplets/screensaver/screensavers/attraction.xml.h:7
+#: capplets/screensaver/screensavers/flag.xml.h:5
+#: capplets/screensaver/screensavers/rorschach.xml.h:2
+msgid "Large"
+msgstr "Stor"
+
+#: capplets/screensaver/screensavers/3d_clock.xml.h:6
 msgid "Size:"
 msgstr "Størrelse:"
 
-#: capplets/screensaver/screensavers/3d_clock.xml.h:3
+#: capplets/screensaver/screensavers/3d_clock.xml.h:8
+#: capplets/screensaver/screensavers/ant.xml.h:17
+#: capplets/screensaver/screensavers/attraction.xml.h:22
+#: capplets/screensaver/screensavers/flag.xml.h:11
+#: capplets/screensaver/screensavers/rorschach.xml.h:8
+msgid "Small"
+msgstr "Liten"
+
+#: capplets/screensaver/screensavers/3d_clock.xml.h:9
 msgid "Twist speed:"
 msgstr "Hastighet for vridning:"
 
-#: capplets/screensaver/screensavers/3d_clock.xml.h:4
+#: capplets/screensaver/screensavers/3d_clock.xml.h:10
 msgid "Twist:"
 msgstr "Vridning:"
 
-#: capplets/screensaver/screensavers/3d_clock.xml.h:5
+#: capplets/screensaver/screensavers/3d_clock.xml.h:11
 msgid "Wobble:"
 msgstr "Skjelv:"
 
@@ -823,103 +945,112 @@ msgid ""
 msgstr ""
 
 #: capplets/screensaver/screensavers/ant.xml.h:2
-#, fuzzy
 msgid "Ant"
-msgstr "Enhver"
+msgstr "Maur"
 
-#: capplets/screensaver/screensavers/ant.xml.h:3
+#: capplets/screensaver/screensavers/ant.xml.h:4
 msgid "Four Sided cells"
 msgstr "Firesidede celler"
 
-#: capplets/screensaver/screensavers/ant.xml.h:4
-#: capplets/screensaver/screensavers/attraction.xml.h:4
-#: capplets/screensaver/screensavers/bsod.xml.h:3
-#: capplets/screensaver/screensavers/compass.xml.h:3
-#: capplets/screensaver/screensavers/flag.xml.h:3
-#: capplets/screensaver/screensavers/qix.xml.h:3
-msgid "Full Color"
-msgstr "Fulle farger"
-
 #: capplets/screensaver/screensavers/ant.xml.h:5
-#: capplets/screensaver/screensavers/attraction.xml.h:12
+#: capplets/screensaver/screensavers/attraction.xml.h:5
 #: capplets/screensaver/screensavers/bsod.xml.h:4
 #: capplets/screensaver/screensavers/compass.xml.h:4
 #: capplets/screensaver/screensavers/flag.xml.h:4
-#: capplets/screensaver/screensavers/qix.xml.h:6
+#: capplets/screensaver/screensavers/qix.xml.h:4
+msgid "Full Color"
+msgstr "Fulle farger"
+
+#: capplets/screensaver/screensavers/ant.xml.h:7
+#: capplets/screensaver/screensavers/flag.xml.h:6
+msgid "Many"
+msgstr "Mange"
+
+#: capplets/screensaver/screensavers/ant.xml.h:8
+#: capplets/screensaver/screensavers/attraction.xml.h:17
+#: capplets/screensaver/screensavers/bsod.xml.h:5
+#: capplets/screensaver/screensavers/compass.xml.h:5
+#: capplets/screensaver/screensavers/flag.xml.h:7
+#: capplets/screensaver/screensavers/qix.xml.h:10
 msgid "Monochrome"
 msgstr "Monokrom"
 
-#: capplets/screensaver/screensavers/ant.xml.h:6
+#: capplets/screensaver/screensavers/ant.xml.h:9
 msgid "Nine Sided cells"
 msgstr "Nisidede celler"
 
-#: capplets/screensaver/screensavers/ant.xml.h:7
-#: capplets/screensaver/screensavers/flag.xml.h:5
+#: capplets/screensaver/screensavers/ant.xml.h:10
+#: capplets/screensaver/screensavers/flag.xml.h:8
 msgid "Number of colours"
 msgstr "Antall farger"
 
-#: capplets/screensaver/screensavers/ant.xml.h:8
+#: capplets/screensaver/screensavers/ant.xml.h:11
 msgid "Random"
 msgstr "Tilfeldig"
 
-#: capplets/screensaver/screensavers/ant.xml.h:9
+#: capplets/screensaver/screensavers/ant.xml.h:12
 msgid "Random size upto"
 msgstr "Tilfeldig størrelse opp til"
 
-#: capplets/screensaver/screensavers/ant.xml.h:10
+#: capplets/screensaver/screensavers/ant.xml.h:13
 msgid "Randomize"
 msgstr "Gjør tilfeldig"
 
-#: capplets/screensaver/screensavers/ant.xml.h:11
+#: capplets/screensaver/screensavers/ant.xml.h:14
 msgid "Sharp turns"
 msgstr "Skarpe svinger"
 
-#: capplets/screensaver/screensavers/ant.xml.h:12
+#: capplets/screensaver/screensavers/ant.xml.h:15
 msgid "Six Sided cells"
 msgstr "Sekskantede celler"
 
-#: capplets/screensaver/screensavers/ant.xml.h:13
+#: capplets/screensaver/screensavers/ant.xml.h:18
 msgid "Specific"
 msgstr "Spesifikk"
 
-#: capplets/screensaver/screensavers/ant.xml.h:14
-#: capplets/screensaver/screensavers/flag.xml.h:7
+#: capplets/screensaver/screensavers/ant.xml.h:19
+#: capplets/screensaver/screensavers/flag.xml.h:12
 msgid "Specific size of"
 msgstr "Spesifikk størrelse på"
 
-#: capplets/screensaver/screensavers/ant.xml.h:15
-#: capplets/screensaver/screensavers/attraction.xml.h:15
-#: capplets/screensaver/screensavers/bsod.xml.h:5
-#: capplets/screensaver/screensavers/compass.xml.h:5
-#: capplets/screensaver/screensavers/flag.xml.h:8
-#: capplets/screensaver/screensavers/qix.xml.h:12
+#: capplets/screensaver/screensavers/ant.xml.h:20
+#: capplets/screensaver/screensavers/attraction.xml.h:23
+#: capplets/screensaver/screensavers/bsod.xml.h:7
+#: capplets/screensaver/screensavers/compass.xml.h:7
+#: capplets/screensaver/screensavers/flag.xml.h:13
+#: capplets/screensaver/screensavers/qix.xml.h:19
 msgid "Speed"
 msgstr "Hastighet"
 
-#: capplets/screensaver/screensavers/ant.xml.h:16
+#: capplets/screensaver/screensavers/ant.xml.h:21
 msgid "Three Sided cells"
 msgstr "Tresidede celler"
 
-#: capplets/screensaver/screensavers/ant.xml.h:17
-#: capplets/screensaver/screensavers/flag.xml.h:11
+#: capplets/screensaver/screensavers/ant.xml.h:22
+#: capplets/screensaver/screensavers/flag.xml.h:16
 msgid "Timeout"
 msgstr "Tidsavbrudd"
 
-#: capplets/screensaver/screensavers/ant.xml.h:18
+#: capplets/screensaver/screensavers/ant.xml.h:23
 msgid "Truchet lines"
 msgstr "Truchet linjer"
 
-#: capplets/screensaver/screensavers/ant.xml.h:19
+#: capplets/screensaver/screensavers/ant.xml.h:24
 msgid "Twelve Sided cells"
 msgstr "Tolvsidede celler"
 
-#: capplets/screensaver/screensavers/ant.xml.h:20
+#: capplets/screensaver/screensavers/ant.xml.h:25
+#: capplets/screensaver/screensavers/flag.xml.h:17
+msgid "Two"
+msgstr "To"
+
+#: capplets/screensaver/screensavers/ant.xml.h:26
 msgid "number of Ants"
 msgstr "antall maur"
 
 #: capplets/screensaver/screensavers/atlantis.xml.h:1
 msgid "Atlantis"
-msgstr ""
+msgstr "Atlantis"
 
 #: capplets/screensaver/screensavers/atlantis.xml.h:2
 msgid ""
@@ -929,9 +1060,8 @@ msgid ""
 msgstr ""
 
 #: capplets/screensaver/screensavers/attraction.xml.h:1
-#, fuzzy
 msgid "Attraction (balls)"
-msgstr "Varighet (ms)"
+msgstr "Tiltrekning (baller)"
 
 #: capplets/screensaver/screensavers/attraction.xml.h:2
 msgid "Balls"
@@ -941,11 +1071,11 @@ msgstr "Baller"
 msgid "Color Contrast"
 msgstr "Fargekontrast"
 
-#: capplets/screensaver/screensavers/attraction.xml.h:5
+#: capplets/screensaver/screensavers/attraction.xml.h:8
 msgid "Length of Trail"
 msgstr "Sporlengde"
 
-#: capplets/screensaver/screensavers/attraction.xml.h:6
+#: capplets/screensaver/screensavers/attraction.xml.h:9
 msgid ""
 "Like qix, this uses a simple motion model to generate many different display "
 "modes.  The control points attract each other up to a certain distance, and "
@@ -962,41 +1092,41 @@ msgid ""
 "Written by Jamie Zawinski, based on Lisp code by John Pezaris."
 msgstr ""
 
-#: capplets/screensaver/screensavers/attraction.xml.h:11
-#: capplets/screensaver/screensavers/qix.xml.h:5
+#: capplets/screensaver/screensavers/attraction.xml.h:14
+#: capplets/screensaver/screensavers/qix.xml.h:7
 msgid "Lines"
 msgstr "Linjer"
 
-#: capplets/screensaver/screensavers/attraction.xml.h:13
-#: capplets/screensaver/screensavers/braid.xml.h:4
-#: capplets/screensaver/screensavers/fadeplot.xml.h:5
-#: capplets/screensaver/screensavers/sierpinski.xml.h:2
-#: capplets/screensaver/screensavers/spiral.xml.h:3
-#: capplets/screensaver/screensavers/triangle.xml.h:3
-#: capplets/screensaver/screensavers/vines.xml.h:2
+#: capplets/screensaver/screensavers/attraction.xml.h:18
+#: capplets/screensaver/screensavers/braid.xml.h:5
+#: capplets/screensaver/screensavers/fadeplot.xml.h:9
+#: capplets/screensaver/screensavers/sierpinski.xml.h:4
+#: capplets/screensaver/screensavers/spiral.xml.h:6
+#: capplets/screensaver/screensavers/triangle.xml.h:4
+#: capplets/screensaver/screensavers/vines.xml.h:3
 msgid "Number of Colors"
 msgstr "Antall farger"
 
-#: capplets/screensaver/screensavers/attraction.xml.h:14
-#: capplets/screensaver/screensavers/qix.xml.h:9
+#: capplets/screensaver/screensavers/attraction.xml.h:19
+#: capplets/screensaver/screensavers/qix.xml.h:14
 msgid "Polygons"
 msgstr "Polygoner"
 
-#: capplets/screensaver/screensavers/attraction.xml.h:16
+#: capplets/screensaver/screensavers/attraction.xml.h:24
 msgid "Splines"
 msgstr "Splines"
 
-#: capplets/screensaver/screensavers/attraction.xml.h:17
+#: capplets/screensaver/screensavers/attraction.xml.h:25
 msgid "Tails"
 msgstr "Haler"
 
-#: capplets/screensaver/screensavers/attraction.xml.h:18
+#: capplets/screensaver/screensavers/attraction.xml.h:26
 msgid "Threshold of repulsion"
 msgstr "Terskel for frastøting"
 
 #: capplets/screensaver/screensavers/blaster.xml.h:1
 msgid "Blaster"
-msgstr ""
+msgstr "Blaster"
 
 #: capplets/screensaver/screensavers/blaster.xml.h:2
 msgid ""
@@ -1007,55 +1137,117 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/blitspin.xml.h:1
 msgid "BlitSpin"
-msgstr ""
+msgstr "BlitSpin"
 
 #: capplets/screensaver/screensavers/blitspin.xml.h:2
-#: capplets/screensaver/screensavers/bouboule.xml.h:2
-#: capplets/screensaver/screensavers/braid.xml.h:2
+#: capplets/screensaver/screensavers/bouboule.xml.h:4
+#: capplets/screensaver/screensavers/braid.xml.h:3
 #: capplets/screensaver/screensavers/bubbles.xml.h:3
-#: capplets/screensaver/screensavers/crystal.xml.h:4
-#: capplets/screensaver/screensavers/cynosure.xml.h:3
+#: capplets/screensaver/screensavers/crystal.xml.h:6
+#: capplets/screensaver/screensavers/cynosure.xml.h:4
 #: capplets/screensaver/screensavers/decayscreen.xml.h:2
-#: capplets/screensaver/screensavers/discrete.xml.h:2
-#: capplets/screensaver/screensavers/drift.xml.h:1
+#: capplets/screensaver/screensavers/discrete.xml.h:4
+#: capplets/screensaver/screensavers/drift.xml.h:3
 #: capplets/screensaver/screensavers/epicycle.xml.h:1
-#: capplets/screensaver/screensavers/fadeplot.xml.h:1
+#: capplets/screensaver/screensavers/fadeplot.xml.h:3
 #: capplets/screensaver/screensavers/flame.xml.h:2
-#: capplets/screensaver/screensavers/forest.xml.h:2
-#: capplets/screensaver/screensavers/goop.xml.h:1
-#: capplets/screensaver/screensavers/grav.xml.h:1
+#: capplets/screensaver/screensavers/forest.xml.h:4
+#: capplets/screensaver/screensavers/goop.xml.h:2
+#: capplets/screensaver/screensavers/grav.xml.h:3
 #: capplets/screensaver/screensavers/greynetic.xml.h:1
-#: capplets/screensaver/screensavers/halo.xml.h:3
+#: capplets/screensaver/screensavers/halo.xml.h:5
 #: capplets/screensaver/screensavers/helix.xml.h:1
-#: capplets/screensaver/screensavers/hopalong.xml.h:1
-#: capplets/screensaver/screensavers/hypercube.xml.h:1
-#: capplets/screensaver/screensavers/ifs.xml.h:1
-#: capplets/screensaver/screensavers/julia.xml.h:1
+#: capplets/screensaver/screensavers/hopalong.xml.h:2
+#: capplets/screensaver/screensavers/hypercube.xml.h:2
+#: capplets/screensaver/screensavers/ifs.xml.h:2
+#: capplets/screensaver/screensavers/julia.xml.h:3
 #: capplets/screensaver/screensavers/kaleidescope.xml.h:2
 #: capplets/screensaver/screensavers/laser.xml.h:1
-#: capplets/screensaver/screensavers/lightning.xml.h:1
-#: capplets/screensaver/screensavers/lisa.xml.h:1
+#: capplets/screensaver/screensavers/lightning.xml.h:2
+#: capplets/screensaver/screensavers/lisa.xml.h:3
 #: capplets/screensaver/screensavers/lmorph.xml.h:1
-#: capplets/screensaver/screensavers/moire.xml.h:1
+#: capplets/screensaver/screensavers/moire.xml.h:2
 #: capplets/screensaver/screensavers/munch.xml.h:9
 #: capplets/screensaver/screensavers/pedal.xml.h:1
-#: capplets/screensaver/screensavers/sierpinski.xml.h:1
-#: capplets/screensaver/screensavers/spiral.xml.h:1
-#: capplets/screensaver/screensavers/triangle.xml.h:1
-#: capplets/screensaver/screensavers/vines.xml.h:1
+#: capplets/screensaver/screensavers/sierpinski.xml.h:2
+#: capplets/screensaver/screensavers/spiral.xml.h:3
+#: capplets/screensaver/screensavers/triangle.xml.h:2
+#: capplets/screensaver/screensavers/vines.xml.h:2
 #: capplets/screensaver/screensavers/xroger.xml.h:1
 msgid "Display screensaver in monochrome."
 msgstr "Vis skjermsparer uten farger."
 
 #: capplets/screensaver/screensavers/blitspin.xml.h:3
+#: capplets/screensaver/screensavers/bouboule.xml.h:5
+#: capplets/screensaver/screensavers/bubbles.xml.h:6
+#: capplets/screensaver/screensavers/coral.xml.h:4
+#: capplets/screensaver/screensavers/crystal.xml.h:7
+#: capplets/screensaver/screensavers/cynosure.xml.h:5
+#: capplets/screensaver/screensavers/decayscreen.xml.h:3
+#: capplets/screensaver/screensavers/discrete.xml.h:5
+#: capplets/screensaver/screensavers/drift.xml.h:5
+#: capplets/screensaver/screensavers/epicycle.xml.h:3
+#: capplets/screensaver/screensavers/fadeplot.xml.h:6
+#: capplets/screensaver/screensavers/flame.xml.h:3
+#: capplets/screensaver/screensavers/forest.xml.h:5
+#: capplets/screensaver/screensavers/goop.xml.h:3
+#: capplets/screensaver/screensavers/greynetic.xml.h:2
+#: capplets/screensaver/screensavers/halo.xml.h:6
+#: capplets/screensaver/screensavers/helix.xml.h:2
+#: capplets/screensaver/screensavers/hopalong.xml.h:3
+#: capplets/screensaver/screensavers/hypercube.xml.h:5
+#: capplets/screensaver/screensavers/julia.xml.h:4
+#: capplets/screensaver/screensavers/kaleidescope.xml.h:3
+#: capplets/screensaver/screensavers/lisa.xml.h:4
+#: capplets/screensaver/screensavers/lmorph.xml.h:2
+#: capplets/screensaver/screensavers/moire.xml.h:3
+#: capplets/screensaver/screensavers/munch.xml.h:11
+#: capplets/screensaver/screensavers/pyro.xml.h:2
+#: capplets/screensaver/screensavers/sierpinski.xml.h:3
+#: capplets/screensaver/screensavers/spiral.xml.h:4
+msgid "Faster"
+msgstr "Raskere"
+
+#: capplets/screensaver/screensavers/blitspin.xml.h:4
+#: capplets/screensaver/screensavers/bouboule.xml.h:8
+#: capplets/screensaver/screensavers/bubbles.xml.h:7
+#: capplets/screensaver/screensavers/coral.xml.h:8
+#: capplets/screensaver/screensavers/crystal.xml.h:12
+#: capplets/screensaver/screensavers/cynosure.xml.h:10
+#: capplets/screensaver/screensavers/decayscreen.xml.h:4
+#: capplets/screensaver/screensavers/discrete.xml.h:9
+#: capplets/screensaver/screensavers/drift.xml.h:10
+#: capplets/screensaver/screensavers/epicycle.xml.h:5
+#: capplets/screensaver/screensavers/fadeplot.xml.h:11
+#: capplets/screensaver/screensavers/flame.xml.h:10
+#: capplets/screensaver/screensavers/forest.xml.h:9
+#: capplets/screensaver/screensavers/goop.xml.h:7
+#: capplets/screensaver/screensavers/greynetic.xml.h:4
+#: capplets/screensaver/screensavers/halo.xml.h:10
+#: capplets/screensaver/screensavers/helix.xml.h:4
+#: capplets/screensaver/screensavers/hopalong.xml.h:9
+#: capplets/screensaver/screensavers/hypercube.xml.h:7
+#: capplets/screensaver/screensavers/julia.xml.h:8
+#: capplets/screensaver/screensavers/kaleidescope.xml.h:10
+#: capplets/screensaver/screensavers/lisa.xml.h:10
+#: capplets/screensaver/screensavers/lmorph.xml.h:10
+#: capplets/screensaver/screensavers/moire.xml.h:8
+#: capplets/screensaver/screensavers/munch.xml.h:13
+#: capplets/screensaver/screensavers/pyro.xml.h:10
+#: capplets/screensaver/screensavers/sierpinski.xml.h:6
+#: capplets/screensaver/screensavers/spiral.xml.h:9
+msgid "Slower"
+msgstr "Saktere"
+
+#: capplets/screensaver/screensavers/blitspin.xml.h:5
 msgid "Speed of rotation."
 msgstr "Rotasjonshastighet."
 
-#: capplets/screensaver/screensavers/blitspin.xml.h:4
+#: capplets/screensaver/screensavers/blitspin.xml.h:6
 msgid "Speed of the 90 degree rotation."
 msgstr "Hastighet for 90 graders rotasjon."
 
-#: capplets/screensaver/screensavers/blitspin.xml.h:5
+#: capplets/screensaver/screensavers/blitspin.xml.h:7
 msgid ""
 "The ``blitspin'' hack repeatedly rotates a bitmap by 90 degrees by using "
 "logical operations: the bitmap is divided into quadrants, and the quadrants "
@@ -1071,71 +1263,110 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/bouboule.xml.h:1
 msgid "Bouboule"
-msgstr ""
+msgstr "Bouboule"
+
+#: capplets/screensaver/screensavers/bouboule.xml.h:2
+#: capplets/screensaver/screensavers/braid.xml.h:2
+#: capplets/screensaver/screensavers/crystal.xml.h:3
+#: capplets/screensaver/screensavers/cynosure.xml.h:2
+#: capplets/screensaver/screensavers/discrete.xml.h:1
+#: capplets/screensaver/screensavers/drift.xml.h:1
+#: capplets/screensaver/screensavers/fadeplot.xml.h:1
+#: capplets/screensaver/screensavers/forest.xml.h:1
+#: capplets/screensaver/screensavers/grav.xml.h:1
+#: capplets/screensaver/screensavers/halo.xml.h:2
+#: capplets/screensaver/screensavers/hopalong.xml.h:1
+#: capplets/screensaver/screensavers/ifs.xml.h:1
+#: capplets/screensaver/screensavers/julia.xml.h:1
+#: capplets/screensaver/screensavers/lightning.xml.h:1
+#: capplets/screensaver/screensavers/lisa.xml.h:1
+#: capplets/screensaver/screensavers/moire.xml.h:1
+#: capplets/screensaver/screensavers/sierpinski.xml.h:1
+#: capplets/screensaver/screensavers/spiral.xml.h:1
+#: capplets/screensaver/screensavers/triangle.xml.h:1
+#: capplets/screensaver/screensavers/vines.xml.h:1
+msgid "Colors:"
+msgstr "Farger:"
 
 #: capplets/screensaver/screensavers/bouboule.xml.h:3
-#: capplets/screensaver/screensavers/crystal.xml.h:7
-#: capplets/screensaver/screensavers/cynosure.xml.h:4
-#: capplets/screensaver/screensavers/discrete.xml.h:4
-#: capplets/screensaver/screensavers/drift.xml.h:5
-#: capplets/screensaver/screensavers/forest.xml.h:4
-#: capplets/screensaver/screensavers/grav.xml.h:3
-#: capplets/screensaver/screensavers/halo.xml.h:5
-#: capplets/screensaver/screensavers/hopalong.xml.h:3
-#: capplets/screensaver/screensavers/ifs.xml.h:3
-#: capplets/screensaver/screensavers/julia.xml.h:3
-#: capplets/screensaver/screensavers/lightning.xml.h:3
-#: capplets/screensaver/screensavers/lisa.xml.h:3
-#: capplets/screensaver/screensavers/moire.xml.h:4
+#: capplets/screensaver/screensavers/crystal.xml.h:4
+#: capplets/screensaver/screensavers/discrete.xml.h:2
+#: capplets/screensaver/screensavers/drift.xml.h:2
+#: capplets/screensaver/screensavers/fadeplot.xml.h:2
+#: capplets/screensaver/screensavers/forest.xml.h:2
+#: capplets/screensaver/screensavers/goop.xml.h:1
+#: capplets/screensaver/screensavers/grav.xml.h:2
+#: capplets/screensaver/screensavers/halo.xml.h:3
+#: capplets/screensaver/screensavers/julia.xml.h:2
+#: capplets/screensaver/screensavers/lisa.xml.h:2
+#: capplets/screensaver/screensavers/pyro.xml.h:1
+#: capplets/screensaver/screensavers/spiral.xml.h:2
+msgid "Count:"
+msgstr "Antall:"
+
+#: capplets/screensaver/screensavers/bouboule.xml.h:6
+#: capplets/screensaver/screensavers/crystal.xml.h:10
+#: capplets/screensaver/screensavers/cynosure.xml.h:8
+#: capplets/screensaver/screensavers/discrete.xml.h:7
+#: capplets/screensaver/screensavers/drift.xml.h:8
+#: capplets/screensaver/screensavers/forest.xml.h:7
+#: capplets/screensaver/screensavers/grav.xml.h:5
+#: capplets/screensaver/screensavers/halo.xml.h:8
+#: capplets/screensaver/screensavers/hopalong.xml.h:7
+#: capplets/screensaver/screensavers/ifs.xml.h:4
+#: capplets/screensaver/screensavers/julia.xml.h:6
+#: capplets/screensaver/screensavers/lightning.xml.h:4
+#: capplets/screensaver/screensavers/lisa.xml.h:7
+#: capplets/screensaver/screensavers/moire.xml.h:7
 msgid "Number of Colors."
 msgstr "Antall farger."
 
-#: capplets/screensaver/screensavers/bouboule.xml.h:4
-#: capplets/screensaver/screensavers/goop.xml.h:4
+#: capplets/screensaver/screensavers/bouboule.xml.h:7
+#: capplets/screensaver/screensavers/goop.xml.h:6
 msgid "Number of bubbles to use."
 msgstr "Antall bobler som skal brukes."
 
-#: capplets/screensaver/screensavers/bouboule.xml.h:5
-#: capplets/screensaver/screensavers/bubbles.xml.h:6
-#: capplets/screensaver/screensavers/coral.xml.h:5
-#: capplets/screensaver/screensavers/crystal.xml.h:9
-#: capplets/screensaver/screensavers/cynosure.xml.h:6
-#: capplets/screensaver/screensavers/decayscreen.xml.h:3
-#: capplets/screensaver/screensavers/discrete.xml.h:6
-#: capplets/screensaver/screensavers/drift.xml.h:7
-#: capplets/screensaver/screensavers/epicycle.xml.h:3
-#: capplets/screensaver/screensavers/flame.xml.h:6
-#: capplets/screensaver/screensavers/goop.xml.h:5
-#: capplets/screensaver/screensavers/greynetic.xml.h:3
-#: capplets/screensaver/screensavers/halo.xml.h:7
-#: capplets/screensaver/screensavers/hopalong.xml.h:5
-#: capplets/screensaver/screensavers/hypercube.xml.h:4
+#: capplets/screensaver/screensavers/bouboule.xml.h:9
+#: capplets/screensaver/screensavers/bubbles.xml.h:8
+#: capplets/screensaver/screensavers/coral.xml.h:9
+#: capplets/screensaver/screensavers/crystal.xml.h:13
+#: capplets/screensaver/screensavers/cynosure.xml.h:11
+#: capplets/screensaver/screensavers/decayscreen.xml.h:5
+#: capplets/screensaver/screensavers/discrete.xml.h:10
+#: capplets/screensaver/screensavers/drift.xml.h:11
+#: capplets/screensaver/screensavers/epicycle.xml.h:6
+#: capplets/screensaver/screensavers/flame.xml.h:11
+#: capplets/screensaver/screensavers/goop.xml.h:8
+#: capplets/screensaver/screensavers/greynetic.xml.h:5
+#: capplets/screensaver/screensavers/halo.xml.h:11
+#: capplets/screensaver/screensavers/hopalong.xml.h:10
+#: capplets/screensaver/screensavers/hypercube.xml.h:8
 #: capplets/screensaver/screensavers/jigsaw.xml.h:2
-#: capplets/screensaver/screensavers/julia.xml.h:5
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:6
-#: capplets/screensaver/screensavers/lisa.xml.h:6
-#: capplets/screensaver/screensavers/lmorph.xml.h:6
-#: capplets/screensaver/screensavers/moire.xml.h:5
-#: capplets/screensaver/screensavers/munch.xml.h:12
-#: capplets/screensaver/screensavers/spiral.xml.h:5
+#: capplets/screensaver/screensavers/julia.xml.h:9
+#: capplets/screensaver/screensavers/kaleidescope.xml.h:11
+#: capplets/screensaver/screensavers/lisa.xml.h:12
+#: capplets/screensaver/screensavers/lmorph.xml.h:11
+#: capplets/screensaver/screensavers/moire.xml.h:10
+#: capplets/screensaver/screensavers/munch.xml.h:14
+#: capplets/screensaver/screensavers/spiral.xml.h:10
 msgid "Speed of Motion."
 msgstr "Bevegelseshastighet."
 
-#: capplets/screensaver/screensavers/bouboule.xml.h:6
+#: capplets/screensaver/screensavers/bouboule.xml.h:10
 msgid ""
 "This draws what looks like a spinning, deforming baloon with varying-sized "
 "spots painted on its invisible surface.  Written by Jeremie Petit."
 msgstr ""
 
-#: capplets/screensaver/screensavers/bouboule.xml.h:7
+#: capplets/screensaver/screensavers/bouboule.xml.h:11
 msgid "Use red/blue 3d seperation."
 msgstr "Bruk rød/blå 3D-separasjon."
 
 #: capplets/screensaver/screensavers/braid.xml.h:1
 msgid "Braid"
-msgstr ""
+msgstr "Flette"
 
-#: capplets/screensaver/screensavers/braid.xml.h:3
+#: capplets/screensaver/screensavers/braid.xml.h:4
 msgid ""
 "Draws random color-cycling inter-braided concentric circles.  Written by "
 "John Neil."
@@ -1154,7 +1385,7 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/bubble3d.xml.h:1
 msgid "Bubble3D"
-msgstr ""
+msgstr "Boble3D"
 
 #: capplets/screensaver/screensavers/bubble3d.xml.h:2
 msgid ""
@@ -1164,7 +1395,7 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/bubbles.xml.h:1
 msgid "Bubbles"
-msgstr ""
+msgstr "Bobler"
 
 #: capplets/screensaver/screensavers/bubbles.xml.h:2
 msgid "Bubbles exist in three dimensions."
@@ -1178,7 +1409,7 @@ msgstr "Ikke skjul bobler når de sprekker."
 msgid "Draw circles instead of pixmap bubbles."
 msgstr "Tegn sirkler istedet for pixmap-bobler."
 
-#: capplets/screensaver/screensavers/bubbles.xml.h:7
+#: capplets/screensaver/screensavers/bubbles.xml.h:9
 msgid ""
 "This simulates the kind of bubble formation that happens when water boils:"
 "small bubbles appear, and as they get closer to each other, they combine to "
@@ -1194,12 +1425,11 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/bumps.xml.h:2
 msgid "Bumps"
-msgstr ""
+msgstr "Humper"
 
 #: capplets/screensaver/screensavers/cage.xml.h:1
-#, fuzzy
 msgid "Cage"
-msgstr "Bilde:"
+msgstr "Bur"
 
 #: capplets/screensaver/screensavers/cage.xml.h:2
 msgid ""
@@ -1225,13 +1455,13 @@ msgstr ""
 msgid "Don't use double bufferinge"
 msgstr "Ikke bruk \"double buffering\""
 
-#: capplets/screensaver/screensavers/compass.xml.h:6
+#: capplets/screensaver/screensavers/compass.xml.h:8
 msgid ""
 "This draws a compass, with all elements spinning about randomly, for that "
 "``lost and nauseous'' feeling.  Written by Jamie Zawinski."
 msgstr ""
 
-#: capplets/screensaver/screensavers/compass.xml.h:7
+#: capplets/screensaver/screensavers/compass.xml.h:9
 msgid "Use double buffering"
 msgstr "Bruk \"doubel buffering\""
 
@@ -1240,23 +1470,34 @@ msgid "Coral"
 msgstr ""
 
 #: capplets/screensaver/screensavers/coral.xml.h:2
+msgid "Denser"
+msgstr "Tettere"
+
+#: capplets/screensaver/screensavers/coral.xml.h:3
 msgid "Density"
 msgstr "Tetthet"
 
-#: capplets/screensaver/screensavers/coral.xml.h:3
+#: capplets/screensaver/screensavers/coral.xml.h:5
 msgid "Number of seeds"
 msgstr "Antall utgangsverdier"
 
-#: capplets/screensaver/screensavers/coral.xml.h:4
+#: capplets/screensaver/screensavers/coral.xml.h:6
+msgid "Seeds"
+msgstr "Utgangsverdier"
+
+#: capplets/screensaver/screensavers/coral.xml.h:7
 msgid ""
 "Simulates coral growth, albeit somewhat slowly.  This image doesn't really "
 "do it justice.  Written by Frederick Roeber."
 msgstr ""
 
+#: capplets/screensaver/screensavers/coral.xml.h:10
+msgid "Thinner"
+msgstr "Tynnere"
+
 #: capplets/screensaver/screensavers/cosmos.xml.h:1
-#, fuzzy
 msgid "Cosmos"
-msgstr "Farger"
+msgstr "Kosmos"
 
 #: capplets/screensaver/screensavers/cosmos.xml.h:2
 msgid ""
@@ -1266,7 +1507,7 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/critical.xml.h:1
 msgid "Critical"
-msgstr ""
+msgstr "Kritisk"
 
 #: capplets/screensaver/screensavers/critical.xml.h:2
 msgid ""
@@ -1282,21 +1523,21 @@ msgstr "Celle"
 msgid "Center image."
 msgstr "Sentrer bilde."
 
-#: capplets/screensaver/screensavers/crystal.xml.h:3
-msgid "Crystal"
-msgstr ""
-
 #: capplets/screensaver/screensavers/crystal.xml.h:5
+msgid "Crystal"
+msgstr "Krystall"
+
+#: capplets/screensaver/screensavers/crystal.xml.h:8
 msgid "Have at maximum size"
 msgstr "Sett til maksimal størrelse"
 
-#: capplets/screensaver/screensavers/crystal.xml.h:6
+#: capplets/screensaver/screensavers/crystal.xml.h:9
 msgid ""
 "Moving polygons, similar to a kaleidescope (more like a kaleidescope than "
 "the hack called `kaleid,' actually.) This one by Jouk Jansen."
 msgstr ""
 
-#: capplets/screensaver/screensavers/crystal.xml.h:8
+#: capplets/screensaver/screensavers/crystal.xml.h:11
 msgid "Number of polygons to use."
 msgstr "Antall polygoner som skal brukes."
 
@@ -1308,18 +1549,38 @@ msgid ""
 "inclusion here."
 msgstr ""
 
-#: capplets/screensaver/screensavers/cynosure.xml.h:2
-#, fuzzy
+#: capplets/screensaver/screensavers/cynosure.xml.h:3
 msgid "Cynosure"
-msgstr "Lukk"
+msgstr "Cynosure"
 
-#: capplets/screensaver/screensavers/cynosure.xml.h:5
+#: capplets/screensaver/screensavers/cynosure.xml.h:6
+#: capplets/screensaver/screensavers/flame.xml.h:6
+#: capplets/screensaver/screensavers/hopalong.xml.h:5
+#: capplets/screensaver/screensavers/kaleidescope.xml.h:5
+#: capplets/screensaver/screensavers/lmorph.xml.h:4
+#: capplets/screensaver/screensavers/pedal.xml.h:2
+#: capplets/screensaver/screensavers/pyro.xml.h:4
+msgid "Less"
+msgstr "Færre"
+
+#: capplets/screensaver/screensavers/cynosure.xml.h:7
+#: capplets/screensaver/screensavers/fadeplot.xml.h:7
+#: capplets/screensaver/screensavers/flame.xml.h:7
+#: capplets/screensaver/screensavers/hopalong.xml.h:6
+#: capplets/screensaver/screensavers/kaleidescope.xml.h:6
+#: capplets/screensaver/screensavers/lmorph.xml.h:5
+#: capplets/screensaver/screensavers/pedal.xml.h:5
+#: capplets/screensaver/screensavers/pyro.xml.h:5
+msgid "More"
+msgstr "Flere"
+
+#: capplets/screensaver/screensavers/cynosure.xml.h:9
 msgid "Number of iterations."
 msgstr "Antall repetisjoner."
 
 #: capplets/screensaver/screensavers/dangerball.xml.h:1
 msgid "DangerBall"
-msgstr ""
+msgstr "FareBall"
 
 #: capplets/screensaver/screensavers/dangerball.xml.h:2
 msgid ""
@@ -1331,7 +1592,7 @@ msgstr ""
 msgid "DecayScreen"
 msgstr ""
 
-#: capplets/screensaver/screensavers/decayscreen.xml.h:4
+#: capplets/screensaver/screensavers/decayscreen.xml.h:6
 msgid ""
 "This grabs an image of whatever is on your screen, and makes it melt.  "
 "You've no doubt seen this effect before, but no screensaver would really be "
@@ -1351,9 +1612,8 @@ msgid "Cycle through colors."
 msgstr "Veksle mellom farger."
 
 #: capplets/screensaver/screensavers/deco.xml.h:2
-#, fuzzy
 msgid "Deco"
-msgstr "Vis"
+msgstr "Deko"
 
 #: capplets/screensaver/screensavers/deco.xml.h:3
 msgid ""
@@ -1364,12 +1624,21 @@ msgid ""
 msgstr ""
 
 #: capplets/screensaver/screensavers/deco.xml.h:4
+#: capplets/screensaver/screensavers/spiral.xml.h:12
+msgid "Time between redraws:"
+msgstr "Tid før oppdatering:"
+
+#: capplets/screensaver/screensavers/deco.xml.h:5
 msgid "Use color when drawing."
 msgstr "Tegn opp med farge."
 
+#: capplets/screensaver/screensavers/deco.xml.h:6
+msgid "seconds"
+msgstr "sekunder"
+
 #: capplets/screensaver/screensavers/deluxe.xml.h:1
 msgid "Deluxe"
-msgstr ""
+msgstr "Deluxe"
 
 #: capplets/screensaver/screensavers/deluxe.xml.h:2
 msgid ""
@@ -1386,31 +1655,29 @@ msgid ""
 msgstr ""
 
 #: capplets/screensaver/screensavers/demon.xml.h:2
-#, fuzzy
 msgid "Demon"
-msgstr "Vis"
-
-#: capplets/screensaver/screensavers/discrete.xml.h:1
-#, fuzzy
-msgid "Discrete"
-msgstr "Diskrete linjer"
+msgstr "Demon"
 
 #: capplets/screensaver/screensavers/discrete.xml.h:3
+msgid "Discrete"
+msgstr "Diskre"
+
+#: capplets/screensaver/screensavers/discrete.xml.h:6
 msgid ""
 "More ``discrete map'' systems, including new variants of Hopalong and Julia, "
 "and a few others.  Written by Tim Auckland."
 msgstr ""
 
-#: capplets/screensaver/screensavers/discrete.xml.h:5
-#: capplets/screensaver/screensavers/julia.xml.h:4
-#: capplets/screensaver/screensavers/lisa.xml.h:4
-#: capplets/screensaver/screensavers/spiral.xml.h:4
+#: capplets/screensaver/screensavers/discrete.xml.h:8
+#: capplets/screensaver/screensavers/julia.xml.h:7
+#: capplets/screensaver/screensavers/lisa.xml.h:8
+#: capplets/screensaver/screensavers/spiral.xml.h:7
 msgid "Number to use."
 msgstr "Antall som skal brukes."
 
 #: capplets/screensaver/screensavers/distort.xml.h:1
 msgid "Distort"
-msgstr ""
+msgstr "Forvreng"
 
 #: capplets/screensaver/screensavers/distort.xml.h:2
 msgid ""
@@ -1419,32 +1686,32 @@ msgid ""
 "Jonas Munsin."
 msgstr ""
 
-#: capplets/screensaver/screensavers/drift.xml.h:2
+#: capplets/screensaver/screensavers/drift.xml.h:4
 msgid "Drift"
-msgstr ""
+msgstr "Driv"
 
-#: capplets/screensaver/screensavers/drift.xml.h:3
+#: capplets/screensaver/screensavers/drift.xml.h:6
 msgid "Fractals should grow."
 msgstr "Fraktaler vokser."
 
-#: capplets/screensaver/screensavers/drift.xml.h:4
+#: capplets/screensaver/screensavers/drift.xml.h:7
 msgid ""
 "How could one possibly describe this except as ``drifting recursive fractal "
 "cosmic flames?''  Another fine hack from the Scott Draves collection of fine "
 "hacks."
 msgstr ""
 
-#: capplets/screensaver/screensavers/drift.xml.h:6
+#: capplets/screensaver/screensavers/drift.xml.h:9
 msgid "Number of pixels to use."
 msgstr "Antall piksler som skal brukes."
 
-#: capplets/screensaver/screensavers/drift.xml.h:8
+#: capplets/screensaver/screensavers/drift.xml.h:12
 msgid "Use lissajous figures to get points."
 msgstr "Bruk lissajous-figurer for å hente punkter."
 
 #: capplets/screensaver/screensavers/electricsheep.xml.h:1
 msgid "ElectricSheep"
-msgstr ""
+msgstr "ElektriskSau"
 
 #: capplets/screensaver/screensavers/electricsheep.xml.h:2
 msgid ""
@@ -1462,9 +1729,15 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/epicycle.xml.h:2
 msgid "Epicycle"
-msgstr ""
+msgstr "Episyklus"
 
 #: capplets/screensaver/screensavers/epicycle.xml.h:4
+#: capplets/screensaver/screensavers/spiral.xml.h:8
+#: capplets/screensaver/screensavers/starfish.xml.h:5
+msgid "Seconds"
+msgstr "Sekunder"
+
+#: capplets/screensaver/screensavers/epicycle.xml.h:7
 msgid ""
 "This program draws the path traced out by a point on the edge of a circle.  "
 "That circle rotates around a point on the rim of another circle, and so on, "
@@ -1472,8 +1745,8 @@ msgid ""
 "planetary motion.  Written by James Youngman."
 msgstr ""
 
-#: capplets/screensaver/screensavers/epicycle.xml.h:5
-#: capplets/screensaver/screensavers/flame.xml.h:7
+#: capplets/screensaver/screensavers/epicycle.xml.h:8
+#: capplets/screensaver/screensavers/flame.xml.h:12
 msgid "Time finished product is shown."
 msgstr "Hvor lenge det ferdige produktet vises."
 
@@ -1488,26 +1761,26 @@ msgstr ""
 msgid "Extrusion"
 msgstr ""
 
-#: capplets/screensaver/screensavers/fadeplot.xml.h:2
+#: capplets/screensaver/screensavers/fadeplot.xml.h:4
 msgid ""
 "Draws what looks like a waving ribbon following a sinusoidal path.  Written "
 "by Bas van Gaalen and Charles Vidal."
 msgstr ""
 
-#: capplets/screensaver/screensavers/fadeplot.xml.h:3
+#: capplets/screensaver/screensavers/fadeplot.xml.h:5
 msgid "FadePlot"
 msgstr ""
 
-#: capplets/screensaver/screensavers/fadeplot.xml.h:4
+#: capplets/screensaver/screensavers/fadeplot.xml.h:8
 msgid "Number"
 msgstr "Antall"
 
-#: capplets/screensaver/screensavers/fadeplot.xml.h:6
+#: capplets/screensaver/screensavers/fadeplot.xml.h:10
 msgid "Number of cycles"
 msgstr "Antall runder"
 
-#: capplets/screensaver/screensavers/fadeplot.xml.h:7
-#: capplets/screensaver/screensavers/sierpinski.xml.h:4
+#: capplets/screensaver/screensavers/fadeplot.xml.h:12
+#: capplets/screensaver/screensavers/sierpinski.xml.h:7
 msgid "Speed of Motion"
 msgstr "Bevegelseshastighet"
 
@@ -1515,19 +1788,19 @@ msgstr "Bevegelseshastighet"
 msgid "Bitmap for flag"
 msgstr "Bilde for kart"
 
-#: capplets/screensaver/screensavers/flag.xml.h:2
+#: capplets/screensaver/screensavers/flag.xml.h:3
 msgid "Flag"
 msgstr ""
 
-#: capplets/screensaver/screensavers/flag.xml.h:6
+#: capplets/screensaver/screensavers/flag.xml.h:9
 msgid "Random size up to"
 msgstr "Tilfeldig størrelse opp til"
 
-#: capplets/screensaver/screensavers/flag.xml.h:9
+#: capplets/screensaver/screensavers/flag.xml.h:14
 msgid "Text for flag"
 msgstr "Tekst for flagg"
 
-#: capplets/screensaver/screensavers/flag.xml.h:10
+#: capplets/screensaver/screensavers/flag.xml.h:15
 msgid ""
 "This draws a waving colored flag, that undulates its way around the screen.  "
 "The trick is the flag can contain arbitrary text and images.  By default, it "
@@ -1540,16 +1813,19 @@ msgstr ""
 msgid "Another iterative fractal generator.  Written by Scott Draves."
 msgstr ""
 
-#: capplets/screensaver/screensavers/flame.xml.h:3
-#, fuzzy
-msgid "Flame"
-msgstr "Fil"
-
 #: capplets/screensaver/screensavers/flame.xml.h:4
+msgid "Flame"
+msgstr "Flamme"
+
+#: capplets/screensaver/screensavers/flame.xml.h:5
+msgid "Iterations:"
+msgstr "Gjennomganger:"
+
+#: capplets/screensaver/screensavers/flame.xml.h:8
 msgid "Number of fractals to generate."
 msgstr "Antall fraktaler som skal genereres."
 
-#: capplets/screensaver/screensavers/flame.xml.h:5
+#: capplets/screensaver/screensavers/flame.xml.h:9
 msgid "Pixels per fractal."
 msgstr "Piksler per fraktal."
 
@@ -1560,33 +1836,30 @@ msgid ""
 msgstr ""
 
 #: capplets/screensaver/screensavers/flow.xml.h:2
-#, fuzzy
 msgid "Flow"
-msgstr "Sakte"
+msgstr "Flyt"
 
-#: capplets/screensaver/screensavers/forest.xml.h:1
+#: capplets/screensaver/screensavers/forest.xml.h:3
 msgid "Delay between redraws."
 msgstr "Pause mellom gjenopptegninger."
 
-#: capplets/screensaver/screensavers/forest.xml.h:3
-#, fuzzy
+#: capplets/screensaver/screensavers/forest.xml.h:6
 msgid "Forest"
-msgstr "Test"
+msgstr "Skog"
 
-#: capplets/screensaver/screensavers/forest.xml.h:5
+#: capplets/screensaver/screensavers/forest.xml.h:8
 msgid "Number of trees to use."
 msgstr "Antall trær som skal brukes."
 
-#: capplets/screensaver/screensavers/forest.xml.h:6
+#: capplets/screensaver/screensavers/forest.xml.h:10
 msgid ""
 "This draws fractal trees.  Written by Peter Baumung.  Everybody loves "
 "fractals, right?"
 msgstr ""
 
 #: capplets/screensaver/screensavers/galaxy.xml.h:1
-#, fuzzy
 msgid "Galaxy"
-msgstr "Spill"
+msgstr "Galakse"
 
 #: capplets/screensaver/screensavers/galaxy.xml.h:2
 msgid ""
@@ -1597,7 +1870,7 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/gears.xml.h:1
 msgid "Gears"
-msgstr ""
+msgstr "Gears"
 
 #: capplets/screensaver/screensavers/gears.xml.h:2
 msgid ""
@@ -1614,7 +1887,7 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/gflux.xml.h:2
 msgid "GFlux"
-msgstr ""
+msgstr "GFlux"
 
 #: capplets/screensaver/screensavers/glplanet.xml.h:1
 msgid ""
@@ -1626,7 +1899,7 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/glplanet.xml.h:2
 msgid "GLPlanet"
-msgstr ""
+msgstr "GLPlanet"
 
 #: capplets/screensaver/screensavers/gltext.xml.h:1
 msgid ""
@@ -1635,13 +1908,12 @@ msgid ""
 msgstr ""
 
 #: capplets/screensaver/screensavers/gltext.xml.h:2
-#, fuzzy
 msgid "GLText"
-msgstr "Test"
+msgstr "GLTekst"
 
 #: capplets/screensaver/screensavers/goban.xml.h:1
 msgid "Goban"
-msgstr ""
+msgstr "Goban"
 
 #: capplets/screensaver/screensavers/goban.xml.h:2
 msgid ""
@@ -1649,15 +1921,15 @@ msgid ""
 "Scott Draves.  You can find it at <http://www.draves.org/goban/>."
 msgstr ""
 
-#: capplets/screensaver/screensavers/goop.xml.h:2
+#: capplets/screensaver/screensavers/goop.xml.h:4
 msgid "Goop"
-msgstr ""
+msgstr "Goop"
 
-#: capplets/screensaver/screensavers/goop.xml.h:3
+#: capplets/screensaver/screensavers/goop.xml.h:5
 msgid "Have transparent bubbles."
 msgstr "Gjennomsiktige bobler."
 
-#: capplets/screensaver/screensavers/goop.xml.h:6
+#: capplets/screensaver/screensavers/goop.xml.h:9
 msgid ""
 "This draws set of animating, transparent, amoeba-like blobs.  The blobs "
 "change shape as they wander around the screen, and they are translucent, so "
@@ -1668,37 +1940,37 @@ msgid ""
 "between them.  Written by Jamie Zawinski."
 msgstr ""
 
-#: capplets/screensaver/screensavers/goop.xml.h:7
+#: capplets/screensaver/screensavers/goop.xml.h:10
 msgid "Use additive color model."
 msgstr "Bruk additiv fargemodell."
 
-#: capplets/screensaver/screensavers/grav.xml.h:2
-msgid "Grav"
-msgstr ""
-
 #: capplets/screensaver/screensavers/grav.xml.h:4
+msgid "Grav"
+msgstr "Grav"
+
+#: capplets/screensaver/screensavers/grav.xml.h:6
 msgid "Number of planets to use."
 msgstr "Antall planeter som skal brukes."
 
-#: capplets/screensaver/screensavers/grav.xml.h:5
+#: capplets/screensaver/screensavers/grav.xml.h:7
 msgid "Objects should leave trails behind them."
 msgstr "Objekter etterlater seg spor."
 
-#: capplets/screensaver/screensavers/grav.xml.h:6
+#: capplets/screensaver/screensavers/grav.xml.h:8
 msgid "Orbit should decay."
 msgstr "La banen avta."
 
-#: capplets/screensaver/screensavers/grav.xml.h:7
+#: capplets/screensaver/screensavers/grav.xml.h:9
 msgid ""
 "This program draws a simple orbital simulation.  If you turn on trails, it "
 "looks kind of like a cloud-chamber photograph.  Written by Greg Bowering."
 msgstr ""
 
-#: capplets/screensaver/screensavers/greynetic.xml.h:2
+#: capplets/screensaver/screensavers/greynetic.xml.h:3
 msgid "Greynetic"
-msgstr ""
+msgstr "Greynetic"
 
-#: capplets/screensaver/screensavers/greynetic.xml.h:4
+#: capplets/screensaver/screensavers/greynetic.xml.h:6
 msgid ""
 "This draws random colored and stippled rectangles.  Written by Jamie "
 "Zawinski."
@@ -1708,52 +1980,52 @@ msgstr ""
 msgid "Animate circles."
 msgstr "Animer sirkler."
 
-#: capplets/screensaver/screensavers/halo.xml.h:2
+#: capplets/screensaver/screensavers/halo.xml.h:4
 msgid "Cycle through colormap."
 msgstr "Gå gjennom fargekartet."
 
-#: capplets/screensaver/screensavers/halo.xml.h:4
+#: capplets/screensaver/screensavers/halo.xml.h:7
 msgid "Halo"
-msgstr ""
+msgstr "Halo"
 
-#: capplets/screensaver/screensavers/halo.xml.h:6
+#: capplets/screensaver/screensavers/halo.xml.h:9
 msgid "Number of circles to use."
 msgstr "Antall sirkler som skal brukes."
 
-#: capplets/screensaver/screensavers/halo.xml.h:8
+#: capplets/screensaver/screensavers/halo.xml.h:12
 msgid ""
 "This draws trippy psychedelic circular patterns that hurt to look at.  It "
 "can also animate the control-points, but that takes a lot of CPU and "
 "bandwidth.  Written by Jamie Zawinski."
 msgstr ""
 
-#: capplets/screensaver/screensavers/halo.xml.h:9
+#: capplets/screensaver/screensavers/halo.xml.h:13
 msgid "Use a gradient of colors between circles."
 msgstr "Bruk en gradient av farger mellom sirkler."
 
-#: capplets/screensaver/screensavers/helix.xml.h:2
-msgid "Helix"
-msgstr ""
-
 #: capplets/screensaver/screensavers/helix.xml.h:3
+msgid "Helix"
+msgstr "Helix"
+
+#: capplets/screensaver/screensavers/helix.xml.h:5
 msgid ""
 "This repeatedly generates spirally string-art-ish patterns.  Written by "
 "Jamie Zawinski."
 msgstr ""
 
-#: capplets/screensaver/screensavers/helix.xml.h:4
+#: capplets/screensaver/screensavers/helix.xml.h:6
 msgid "Time between redraws."
 msgstr "Tid mellom hver gjenopptegning."
 
-#: capplets/screensaver/screensavers/hopalong.xml.h:2
-msgid "Hopalong"
-msgstr ""
-
 #: capplets/screensaver/screensavers/hopalong.xml.h:4
+msgid "Hopalong"
+msgstr "Hopalong"
+
+#: capplets/screensaver/screensavers/hopalong.xml.h:8
 msgid "Number of pixels before a color change."
 msgstr "Antall piksler før fargeendring."
 
-#: capplets/screensaver/screensavers/hopalong.xml.h:6
+#: capplets/screensaver/screensavers/hopalong.xml.h:11
 msgid ""
 "This draws lacy fractal patterns, based on iteration in the imaginary plane, "
 "from a 1986 Scientific American article.  Mostly written by Patrick Naughton."
@@ -1761,7 +2033,7 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/hyperball.xml.h:1
 msgid "Hyperball"
-msgstr ""
+msgstr "Hyperball"
 
 #: capplets/screensaver/screensavers/hyperball.xml.h:2
 msgid ""
@@ -1770,15 +2042,23 @@ msgid ""
 "analog to the dodecahedron.  Written by Joe Keane."
 msgstr ""
 
-#: capplets/screensaver/screensavers/hypercube.xml.h:2
+#: capplets/screensaver/screensavers/hypercube.xml.h:1
+msgid "Closer"
+msgstr "Nærmere"
+
+#: capplets/screensaver/screensavers/hypercube.xml.h:3
 msgid "Distance from center of cube"
 msgstr "Avstand fra senter av kuben"
 
-#: capplets/screensaver/screensavers/hypercube.xml.h:3
-msgid "Hypercube"
-msgstr ""
+#: capplets/screensaver/screensavers/hypercube.xml.h:4
+msgid "Farther"
+msgstr "Fjernere"
 
-#: capplets/screensaver/screensavers/hypercube.xml.h:5
+#: capplets/screensaver/screensavers/hypercube.xml.h:6
+msgid "Hypercube"
+msgstr "Hyperkube"
+
+#: capplets/screensaver/screensavers/hypercube.xml.h:9
 msgid ""
 "This displays 2D projections of the sequence of 3D objects which are the "
 "projections of the 4D analog to the cube: as a square is composed of four "
@@ -1790,11 +2070,11 @@ msgid ""
 "Zawinski."
 msgstr ""
 
-#: capplets/screensaver/screensavers/ifs.xml.h:2
+#: capplets/screensaver/screensavers/ifs.xml.h:3
 msgid "IFS"
-msgstr ""
+msgstr "IFS"
 
-#: capplets/screensaver/screensavers/ifs.xml.h:4
+#: capplets/screensaver/screensavers/ifs.xml.h:5
 msgid ""
 "This one draws spinning, colliding iterated-function-system images.  Written "
 "by Massimino Pascal."
@@ -1802,7 +2082,7 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/imsmap.xml.h:1
 msgid "IMSmap"
-msgstr ""
+msgstr "IMSkart"
 
 #: capplets/screensaver/screensavers/imsmap.xml.h:2
 msgid ""
@@ -1829,11 +2109,11 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/interference.xml.h:2
 msgid "Interference"
-msgstr ""
+msgstr "Forstyrrelse"
 
 #: capplets/screensaver/screensavers/jigsaw.xml.h:1
 msgid "Jigsaw"
-msgstr ""
+msgstr "Puslespill"
 
 #: capplets/screensaver/screensavers/jigsaw.xml.h:3
 msgid ""
@@ -1845,11 +2125,11 @@ msgid ""
 "puzzle is solved.  Written by Jamie Zawinski."
 msgstr ""
 
-#: capplets/screensaver/screensavers/julia.xml.h:2
+#: capplets/screensaver/screensavers/julia.xml.h:5
 msgid "Julia"
-msgstr ""
+msgstr "Julia"
 
-#: capplets/screensaver/screensavers/julia.xml.h:6
+#: capplets/screensaver/screensavers/julia.xml.h:10
 msgid ""
 "This one draws spinning, animating (are you detecting a pattern here yet?)  "
 "explorations of the Julia set.  You've probably seen static images of this "
@@ -1867,21 +2147,25 @@ msgid ""
 "variations in the rotational speed might help, too."
 msgstr ""
 
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:3
-msgid "Kaleidescope"
-msgstr ""
-
 #: capplets/screensaver/screensavers/kaleidescope.xml.h:4
+msgid "Kaleidescope"
+msgstr "Kaleidoskop"
+
+#: capplets/screensaver/screensavers/kaleidescope.xml.h:7
 msgid "Number of segments."
 msgstr "Antall segmenter."
 
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:5
+#: capplets/screensaver/screensavers/kaleidescope.xml.h:8
 msgid "Number of trails."
 msgstr "Antall spor."
 
+#: capplets/screensaver/screensavers/kaleidescope.xml.h:9
+msgid "Segments"
+msgstr "Segmenter"
+
 #: capplets/screensaver/screensavers/kumppa.xml.h:1
 msgid "Kumppa"
-msgstr ""
+msgstr "Kumppa"
 
 #: capplets/screensaver/screensavers/kumppa.xml.h:2
 msgid ""
@@ -1897,9 +2181,8 @@ msgid ""
 msgstr ""
 
 #: capplets/screensaver/screensavers/lament.xml.h:2
-#, fuzzy
 msgid "Lament"
-msgstr "Plassering"
+msgstr ""
 
 #: capplets/screensaver/screensavers/laser.xml.h:2
 msgid "Duration of laser burst."
@@ -1907,38 +2190,61 @@ msgstr "Laserstrålens varighet."
 
 #: capplets/screensaver/screensavers/laser.xml.h:3
 msgid "Laser"
-msgstr ""
+msgstr "Laser"
 
 #: capplets/screensaver/screensavers/laser.xml.h:4
+#: capplets/screensaver/screensavers/pedal.xml.h:3
+msgid "Longer"
+msgstr "Lengre"
+
+#: capplets/screensaver/screensavers/laser.xml.h:5
 msgid ""
 "Moving radiating lines, that look vaguely like scanning laser beams.  "
 "Written by Pascal Pensa.  (Frankie say: relax.)"
 msgstr ""
 
-#: capplets/screensaver/screensavers/laser.xml.h:5
+#: capplets/screensaver/screensavers/laser.xml.h:6
+msgid "Segments:"
+msgstr "Segmenter:"
+
+#: capplets/screensaver/screensavers/laser.xml.h:7
+#: capplets/screensaver/screensavers/pedal.xml.h:7
+msgid "Shorter"
+msgstr "Kortere"
+
+#: capplets/screensaver/screensavers/laser.xml.h:8
 msgid "Size of burst."
 msgstr "Størrelse på strålen."
 
-#: capplets/screensaver/screensavers/lightning.xml.h:2
+#: capplets/screensaver/screensavers/lightning.xml.h:3
 msgid "Lightning"
-msgstr ""
+msgstr "Lyn"
 
-#: capplets/screensaver/screensavers/lightning.xml.h:4
+#: capplets/screensaver/screensavers/lightning.xml.h:5
 msgid ""
 "This one draws crackling fractal lightning bolts.  It's simple, direct, and "
 "to the point.  If only it had sound...  Written by Keith Romberg."
 msgstr ""
 
-#: capplets/screensaver/screensavers/lisa.xml.h:2
-#, fuzzy
-msgid "Lisa"
-msgstr "Linjer"
-
 #: capplets/screensaver/screensavers/lisa.xml.h:5
+#: capplets/screensaver/screensavers/moire.xml.h:4
+msgid "Larger"
+msgstr "Større"
+
+#: capplets/screensaver/screensavers/lisa.xml.h:6
+msgid "Lisa"
+msgstr "Lisa"
+
+#: capplets/screensaver/screensavers/lisa.xml.h:9
 msgid "Size of object."
 msgstr "Størrelse på objekt."
 
-#: capplets/screensaver/screensavers/lisa.xml.h:7
+#: capplets/screensaver/screensavers/lisa.xml.h:11
+#: capplets/screensaver/screensavers/moire.xml.h:9
+msgid "Smaller"
+msgstr "Mindre"
+
+#: capplets/screensaver/screensavers/lisa.xml.h:13
 msgid ""
 "This draws Lisajous loops, by Caleb Cullen.  Remember that device they had "
 "the Phantom Zone prisoners in during their trial in Superman?  I think that "
@@ -1953,25 +2259,29 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/lissie.xml.h:2
 msgid "Lissie"
-msgstr ""
-
-#: capplets/screensaver/screensavers/lmorph.xml.h:2
-msgid "LMorph"
-msgstr ""
+msgstr "Lissie"
 
 #: capplets/screensaver/screensavers/lmorph.xml.h:3
+msgid "LMorph"
+msgstr "LMorph"
+
+#: capplets/screensaver/screensavers/lmorph.xml.h:6
 msgid "Number of interpolation steps."
 msgstr "Antall steg i interpolasjon."
 
-#: capplets/screensaver/screensavers/lmorph.xml.h:4
+#: capplets/screensaver/screensavers/lmorph.xml.h:7
 msgid "Number of points."
 msgstr "Antall punkter."
 
-#: capplets/screensaver/screensavers/lmorph.xml.h:5
+#: capplets/screensaver/screensavers/lmorph.xml.h:8
 msgid "Open figures."
 msgstr "Åpne figurer."
 
-#: capplets/screensaver/screensavers/lmorph.xml.h:7
+#: capplets/screensaver/screensavers/lmorph.xml.h:9
+msgid "Points:"
+msgstr "Punkter:"
+
+#: capplets/screensaver/screensavers/lmorph.xml.h:12
 msgid ""
 "This generates random spline-ish line drawings and morphs between them.  "
 "Written by Sverre H.  Huseby and Glenn T.  Lines."
@@ -1979,7 +2289,7 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/loop.xml.h:1
 msgid "Loop"
-msgstr ""
+msgstr "Løkke"
 
 #: capplets/screensaver/screensavers/loop.xml.h:2
 msgid ""
@@ -2000,14 +2310,22 @@ msgid "Delay between finishing the maze and starting a new one."
 msgstr "Pause før start av ny labyrint etter fullføring."
 
 #: capplets/screensaver/screensavers/maze.xml.h:4
-msgid "Maze"
-msgstr ""
+msgid "Less Delay"
+msgstr "Kortere pause"
 
 #: capplets/screensaver/screensavers/maze.xml.h:5
+msgid "Maze"
+msgstr "Labyrint"
+
+#: capplets/screensaver/screensavers/maze.xml.h:6
+msgid "More Delay"
+msgstr "Lengre pause"
+
+#: capplets/screensaver/screensavers/maze.xml.h:7
 msgid "Put a bridge over the logo?"
 msgstr "Bro over logoen?"
 
-#: capplets/screensaver/screensavers/maze.xml.h:6
+#: capplets/screensaver/screensavers/maze.xml.h:8
 msgid ""
 "This is the ancient X maze demo, modified to work with xscreensaver.  It "
 "generates a random maze, then solves it with visual feedback.  Originally by "
@@ -2021,9 +2339,8 @@ msgid ""
 msgstr ""
 
 #: capplets/screensaver/screensavers/moebius.xml.h:2
-#, fuzzy
 msgid "Moebius"
-msgstr "Mus"
+msgstr "Moebius"
 
 #: capplets/screensaver/screensavers/moire2.xml.h:1
 msgid ""
@@ -2036,18 +2353,17 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/moire2.xml.h:2
 msgid "Moire2"
-msgstr ""
+msgstr "Moire2"
 
-#: capplets/screensaver/screensavers/moire.xml.h:2
+#: capplets/screensaver/screensavers/moire.xml.h:5
 msgid "Maximum radius increment"
 msgstr "Maksimal økning av radius"
 
-#: capplets/screensaver/screensavers/moire.xml.h:3
-#, fuzzy
-msgid "Moire"
-msgstr "Mus"
-
 #: capplets/screensaver/screensavers/moire.xml.h:6
+msgid "Moire"
+msgstr "Moire"
+
+#: capplets/screensaver/screensavers/moire.xml.h:11
 msgid ""
 "This one draws cool circular interference patterns.  Most of the circles you "
 "see aren't explicitly rendered, but show up as a result of interactions "
@@ -2066,9 +2382,8 @@ msgid ""
 msgstr ""
 
 #: capplets/screensaver/screensavers/molecule.xml.h:2
-#, fuzzy
 msgid "Molecule"
-msgstr "Mus"
+msgstr "Molekyl"
 
 #: capplets/screensaver/screensavers/morph3d.xml.h:1
 msgid ""
@@ -2078,7 +2393,7 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/morph3d.xml.h:2
 msgid "Morph3D"
-msgstr ""
+msgstr "Morph3D"
 
 #: capplets/screensaver/screensavers/mountain.xml.h:1
 msgid ""
@@ -2088,7 +2403,7 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/mountain.xml.h:2
 msgid "Mountain"
-msgstr ""
+msgstr "Fjell"
 
 #: capplets/screensaver/screensavers/munch.xml.h:1
 msgid ""
@@ -2109,11 +2424,11 @@ msgstr ""
 msgid "Draw square at weird starting points."
 msgstr "Tegn firkant ved snåle startpunkter."
 
-#: capplets/screensaver/screensavers/munch.xml.h:11
+#: capplets/screensaver/screensavers/munch.xml.h:12
 msgid "Munch"
-msgstr ""
+msgstr "Munch"
 
-#: capplets/screensaver/screensavers/munch.xml.h:13
+#: capplets/screensaver/screensavers/munch.xml.h:15
 msgid "Use XOR drawing function."
 msgstr "Bruk XOR-tegnefunksjonen."
 
@@ -2139,15 +2454,15 @@ msgstr ""
 msgid "Noseguy"
 msgstr ""
 
-#: capplets/screensaver/screensavers/pedal.xml.h:2
+#: capplets/screensaver/screensavers/pedal.xml.h:4
 msgid "Maximum number of lines."
 msgstr "Maksimalt antall linjer."
 
-#: capplets/screensaver/screensavers/pedal.xml.h:3
+#: capplets/screensaver/screensavers/pedal.xml.h:6
 msgid "Pedal"
 msgstr ""
 
-#: capplets/screensaver/screensavers/pedal.xml.h:4
+#: capplets/screensaver/screensavers/pedal.xml.h:8
 msgid ""
 "This is sort of a combination spirograph/string-art.  It generates a large, "
 "complex polygon, and lets the X server do the bulk of the work by giving it "
@@ -2155,18 +2470,17 @@ msgid ""
 "11 code."
 msgstr ""
 
-#: capplets/screensaver/screensavers/pedal.xml.h:5
+#: capplets/screensaver/screensavers/pedal.xml.h:9
 msgid "Time to fade away."
 msgstr "Tid før utvisking."
 
-#: capplets/screensaver/screensavers/pedal.xml.h:6
+#: capplets/screensaver/screensavers/pedal.xml.h:10
 msgid "Time to show each picture."
 msgstr "Visningstid for hvert bilde."
 
 #: capplets/screensaver/screensavers/penetrate.xml.h:1
-#, fuzzy
 msgid "Penetrate"
-msgstr "Generelt"
+msgstr "Gjennomtreng"
 
 #: capplets/screensaver/screensavers/penetrate.xml.h:2
 msgid ""
@@ -2229,9 +2543,8 @@ msgid ""
 msgstr ""
 
 #: capplets/screensaver/screensavers/pipes.xml.h:2
-#, fuzzy
 msgid "Pipes"
-msgstr "Linjer"
+msgstr "Rør"
 
 #: capplets/screensaver/screensavers/pulsar.xml.h:1
 msgid ""
@@ -2241,27 +2554,26 @@ msgid ""
 msgstr ""
 
 #: capplets/screensaver/screensavers/pulsar.xml.h:2
-#, fuzzy
 msgid "Pulsar"
-msgstr "Spill"
+msgstr "Pulsar"
 
-#: capplets/screensaver/screensavers/pyro.xml.h:1
+#: capplets/screensaver/screensavers/pyro.xml.h:3
 msgid "Frequency of missile launch"
 msgstr "Frekvens for rakettutskyting"
 
-#: capplets/screensaver/screensavers/pyro.xml.h:2
+#: capplets/screensaver/screensavers/pyro.xml.h:6
 msgid "Number of particles"
 msgstr "Antall partikler"
 
-#: capplets/screensaver/screensavers/pyro.xml.h:3
+#: capplets/screensaver/screensavers/pyro.xml.h:7
 msgid "Particles on screen"
 msgstr "Partikler på skjermen"
 
-#: capplets/screensaver/screensavers/pyro.xml.h:4
+#: capplets/screensaver/screensavers/pyro.xml.h:8
 msgid "Pyro"
-msgstr ""
+msgstr "Pyro"
 
-#: capplets/screensaver/screensavers/pyro.xml.h:5
+#: capplets/screensaver/screensavers/pyro.xml.h:9
 msgid ""
 "Pyro draws exploding fireworks.  Blah blah blah.  Written by Jamie Zawinski."
 msgstr ""
@@ -2274,31 +2586,35 @@ msgstr "Fargekontrast"
 msgid "Discrete Lines"
 msgstr "Diskrete linjer"
 
-#: capplets/screensaver/screensavers/qix.xml.h:4
+#: capplets/screensaver/screensavers/qix.xml.h:6
 msgid "Length"
 msgstr "Lengde"
 
-#: capplets/screensaver/screensavers/qix.xml.h:7
+#: capplets/screensaver/screensavers/qix.xml.h:11
+msgid "Narrow"
+msgstr "Smal"
+
+#: capplets/screensaver/screensavers/qix.xml.h:12
 msgid "Number of points:"
 msgstr "Antall punkter:"
 
-#: capplets/screensaver/screensavers/qix.xml.h:8
+#: capplets/screensaver/screensavers/qix.xml.h:13
 msgid "Number of trails:"
 msgstr "Antall spor:"
 
-#: capplets/screensaver/screensavers/qix.xml.h:10
+#: capplets/screensaver/screensavers/qix.xml.h:15
 msgid "Qix (solid)"
-msgstr ""
+msgstr "Qix (solid)"
 
-#: capplets/screensaver/screensavers/qix.xml.h:11
+#: capplets/screensaver/screensavers/qix.xml.h:18
 msgid "Solid Trails"
 msgstr "Solide spor"
 
-#: capplets/screensaver/screensavers/qix.xml.h:13
+#: capplets/screensaver/screensavers/qix.xml.h:20
 msgid "Spread between lines"
 msgstr "Spredning mellom linjer"
 
-#: capplets/screensaver/screensavers/qix.xml.h:14
+#: capplets/screensaver/screensavers/qix.xml.h:21
 msgid ""
 "This is the swiss army chainsaw of qix programs.  It bounces a series of "
 "line segments around the screen, and uses variations on this basic motion "
@@ -2306,19 +2622,23 @@ msgid ""
 "filled polygons, overlapping translucent areas...  Written by Jamie Zawinski."
 msgstr ""
 
-#: capplets/screensaver/screensavers/qix.xml.h:15
+#: capplets/screensaver/screensavers/qix.xml.h:22
 msgid "Trails attract each other"
 msgstr "Spor tiltrekkes hverandre"
 
-#: capplets/screensaver/screensavers/qix.xml.h:16
+#: capplets/screensaver/screensavers/qix.xml.h:23
 msgid "Transparent Trails"
 msgstr "Gjennomsiktige spor"
 
-#: capplets/screensaver/screensavers/qix.xml.h:17
+#: capplets/screensaver/screensavers/qix.xml.h:24
+msgid "Wide"
+msgstr "Bred"
+
+#: capplets/screensaver/screensavers/qix.xml.h:25
 msgid "Width"
 msgstr "Bredde"
 
-#: capplets/screensaver/screensavers/qix.xml.h:18
+#: capplets/screensaver/screensavers/qix.xml.h:26
 msgid "XOR Trails"
 msgstr "XOR-spor"
 
@@ -2331,7 +2651,7 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/rd-bomb.xml.h:2
 msgid "RD-Bomb"
-msgstr ""
+msgstr "RD-bombe"
 
 #: capplets/screensaver/screensavers/ripples.xml.h:1
 msgid "Ripples (oily)"
@@ -2346,7 +2666,7 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/rocks.xml.h:1
 msgid "Rocks"
-msgstr ""
+msgstr "Steiner"
 
 #: capplets/screensaver/screensavers/rocks.xml.h:2
 msgid ""
@@ -2359,23 +2679,23 @@ msgstr ""
 msgid "Delay before next redraw"
 msgstr "Pause før neste opptegning"
 
-#: capplets/screensaver/screensavers/rorschach.xml.h:2
+#: capplets/screensaver/screensavers/rorschach.xml.h:4
 msgid "Number of Iterations"
 msgstr "Antall gjennomganger"
 
-#: capplets/screensaver/screensavers/rorschach.xml.h:3
+#: capplets/screensaver/screensavers/rorschach.xml.h:5
 msgid "Offset"
 msgstr "Avstand"
 
-#: capplets/screensaver/screensavers/rorschach.xml.h:4
+#: capplets/screensaver/screensavers/rorschach.xml.h:6
 msgid "Rorschach"
-msgstr ""
+msgstr "Rorschach"
 
-#: capplets/screensaver/screensavers/rorschach.xml.h:5
+#: capplets/screensaver/screensavers/rorschach.xml.h:9
 msgid "Speed to clear the screen"
 msgstr "Hastighet for tømming av skjermen"
 
-#: capplets/screensaver/screensavers/rorschach.xml.h:6
+#: capplets/screensaver/screensavers/rorschach.xml.h:10
 msgid ""
 "This generates random inkblot patterns.  The algorithm is deceptively simple "
 "for how well it works; it merely walks a dot around the screen randomly, and "
@@ -2384,11 +2704,11 @@ msgid ""
 "Written by Jamie Zawinski."
 msgstr ""
 
-#: capplets/screensaver/screensavers/rorschach.xml.h:7
+#: capplets/screensaver/screensavers/rorschach.xml.h:11
 msgid "With X-axis Symmetry"
 msgstr "Med symmetri om X-aksen"
 
-#: capplets/screensaver/screensavers/rorschach.xml.h:8
+#: capplets/screensaver/screensavers/rorschach.xml.h:12
 msgid "With Y-axis Symmetry"
 msgstr "Med symmetri om Y-aksen"
 
@@ -2401,7 +2721,7 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/rotor.xml.h:2
 msgid "Rotor"
-msgstr ""
+msgstr "Rotor"
 
 #: capplets/screensaver/screensavers/rotzoomer.xml.h:1
 msgid ""
@@ -2411,7 +2731,7 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/rotzoomer.xml.h:2
 msgid "RotZoomer"
-msgstr ""
+msgstr "RotZoomer"
 
 #: capplets/screensaver/screensavers/rubik.xml.h:1
 msgid ""
@@ -2421,7 +2741,7 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/rubik.xml.h:2
 msgid "Rubik"
-msgstr ""
+msgstr "Rubik"
 
 #: capplets/screensaver/screensavers/shadebobs.xml.h:1
 msgid "ShadeBobs"
@@ -2435,7 +2755,7 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/sierpinski3d.xml.h:1
 msgid "Sierpinski3D"
-msgstr ""
+msgstr "Sierpinski3D"
 
 #: capplets/screensaver/screensavers/sierpinski3d.xml.h:2
 msgid ""
@@ -2443,11 +2763,11 @@ msgid ""
 "triangle fractal, using GL.  Written by Tim Robinson and Jamie Zawinski."
 msgstr ""
 
-#: capplets/screensaver/screensavers/sierpinski.xml.h:3
-msgid "Sierpinski"
-msgstr ""
-
 #: capplets/screensaver/screensavers/sierpinski.xml.h:5
+msgid "Sierpinski"
+msgstr "Sierpinski"
+
+#: capplets/screensaver/screensavers/sierpinski.xml.h:8
 msgid ""
 "This draws the two-dimensional variant of the recursive Sierpinski triangle "
 "fractal.  Written by Desmond Daignault."
@@ -2482,9 +2802,8 @@ msgid ""
 msgstr ""
 
 #: capplets/screensaver/screensavers/sonar.xml.h:1
-#, fuzzy
 msgid "Sonar"
-msgstr "Lyd"
+msgstr "Sonar"
 
 #: capplets/screensaver/screensavers/sonar.xml.h:2
 msgid ""
@@ -2512,9 +2831,8 @@ msgid ""
 msgstr ""
 
 #: capplets/screensaver/screensavers/speedmine.xml.h:9
-#, fuzzy
 msgid "SpeedMine"
-msgstr "Hastighet"
+msgstr "HurtigMine"
 
 #: capplets/screensaver/screensavers/sphere.xml.h:1
 msgid ""
@@ -2524,19 +2842,18 @@ msgid ""
 msgstr ""
 
 #: capplets/screensaver/screensavers/sphere.xml.h:2
-#, fuzzy
 msgid "Sphere"
-msgstr "Hastighet"
+msgstr "Sfære"
 
-#: capplets/screensaver/screensavers/spiral.xml.h:2
+#: capplets/screensaver/screensavers/spiral.xml.h:5
 msgid ""
 "Moving circular patterns, by Peter Schmitzberger.  Moving circular patterns "
 "means moire; interference patterns, of course."
 msgstr ""
 
-#: capplets/screensaver/screensavers/spiral.xml.h:6
+#: capplets/screensaver/screensavers/spiral.xml.h:11
 msgid "Spiral"
-msgstr ""
+msgstr "Spiral"
 
 #: capplets/screensaver/screensavers/spotlight.xml.h:1
 msgid ""
@@ -2553,9 +2870,8 @@ msgid "Q-Bert meets Marble Madness!  Written by Ed Mackey."
 msgstr ""
 
 #: capplets/screensaver/screensavers/sproingies.xml.h:2
-#, fuzzy
 msgid "Sproingies"
-msgstr "Splines"
+msgstr "Sproingies"
 
 #: capplets/screensaver/screensavers/squiral.xml.h:1
 msgid ""
@@ -2599,23 +2915,27 @@ msgstr "Endre til monokrom visning."
 msgid "Duration of current shape."
 msgstr "Varighet av aktiv form."
 
-#: capplets/screensaver/screensavers/starfish.xml.h:3
+#: capplets/screensaver/screensavers/starfish.xml.h:4
 msgid "Quickness of rotation at each step (0 = Random)"
 msgstr "Rotasjonshastighet for hvert steg (0 = tilfeldig)"
 
-#: capplets/screensaver/screensavers/starfish.xml.h:4
+#: capplets/screensaver/screensavers/starfish.xml.h:6
+msgid "Slim"
+msgstr ""
+
+#: capplets/screensaver/screensavers/starfish.xml.h:8
 msgid "Speed of animation."
 msgstr "Animasjonshastighet."
 
-#: capplets/screensaver/screensavers/starfish.xml.h:5
+#: capplets/screensaver/screensavers/starfish.xml.h:9
 msgid "Starfish"
 msgstr ""
 
-#: capplets/screensaver/screensavers/starfish.xml.h:6
+#: capplets/screensaver/screensavers/starfish.xml.h:10
 msgid "Thickness of color bands (0 = Random)"
 msgstr "Tykkhet for fargebånd (0 = tilfeldig)"
 
-#: capplets/screensaver/screensavers/starfish.xml.h:7
+#: capplets/screensaver/screensavers/starfish.xml.h:11
 msgid ""
 "This generates a sequence of undulating, throbbing, star-like patterns which "
 "pulsate, rotate, and turn inside out.  Another display mode uses these "
@@ -2623,7 +2943,7 @@ msgid ""
 "very organic.  Written by Jamie Zawinski."
 msgstr ""
 
-#: capplets/screensaver/screensavers/starfish.xml.h:8
+#: capplets/screensaver/screensavers/starfish.xml.h:12
 msgid "Use raw shapes "
 msgstr "Bruk rå former "
 
@@ -2692,16 +3012,15 @@ msgid ""
 "Written by Bernd Paysan."
 msgstr ""
 
-#: capplets/screensaver/screensavers/triangle.xml.h:2
+#: capplets/screensaver/screensavers/triangle.xml.h:3
 msgid ""
 "Generates random mountain ranges using iterative subdivision of triangles.  "
 "Written by Tobias Gloth."
 msgstr ""
 
-#: capplets/screensaver/screensavers/triangle.xml.h:4
-#, fuzzy
+#: capplets/screensaver/screensavers/triangle.xml.h:5
 msgid "Triangle"
-msgstr "Terminal"
+msgstr "Triangel"
 
 #: capplets/screensaver/screensavers/truchet.xml.h:1
 msgid ""
@@ -2710,9 +3029,8 @@ msgid ""
 msgstr ""
 
 #: capplets/screensaver/screensavers/truchet.xml.h:2
-#, fuzzy
 msgid "Truchet"
-msgstr "Truchet linjer"
+msgstr "Truchet"
 
 #: capplets/screensaver/screensavers/vidwhacker.xml.h:1
 msgid ""
@@ -2733,17 +3051,16 @@ msgstr ""
 msgid "VidWhacker"
 msgstr ""
 
-#: capplets/screensaver/screensavers/vines.xml.h:3
+#: capplets/screensaver/screensavers/vines.xml.h:4
 msgid ""
 "This one generates a continuous sequence of small, curvy geometric "
 "patterns.  It scatters them around your screen until it fills up, then it "
 "clears the screen and starts over.  Written by Tracy Camp and David Hansen."
 msgstr ""
 
-#: capplets/screensaver/screensavers/vines.xml.h:4
-#, fuzzy
+#: capplets/screensaver/screensavers/vines.xml.h:5
 msgid "Vines"
-msgstr "Linjer"
+msgstr "Lianer"
 
 #: capplets/screensaver/screensavers/wander.xml.h:1
 msgid ""
@@ -2752,7 +3069,7 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/wander.xml.h:2
 msgid "Wander"
-msgstr ""
+msgstr "Vandre"
 
 #: capplets/screensaver/screensavers/webcollage.xml.h:1
 msgid ""
@@ -2789,7 +3106,7 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/whirlygig.xml.h:2
 msgid "WhirlyGig"
-msgstr ""
+msgstr "WhirlyGig"
 
 #: capplets/screensaver/screensavers/worm.xml.h:1
 msgid ""
@@ -2800,11 +3117,11 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/worm.xml.h:2
 msgid "Worm"
-msgstr ""
+msgstr "Orm"
 
 #: capplets/screensaver/screensavers/xaos.xml.h:1
 msgid "XaoS"
-msgstr ""
+msgstr "XaoS"
 
 #: capplets/screensaver/screensavers/xaos.xml.h:2
 msgid ""
@@ -2816,7 +3133,7 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/xdaliclock.xml.h:1
 msgid "XDaliClock"
-msgstr ""
+msgstr "XDaliKlokke"
 
 #: capplets/screensaver/screensavers/xdaliclock.xml.h:2
 msgid ""
@@ -2837,7 +3154,7 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/xearth.xml.h:2
 msgid "Xearth"
-msgstr ""
+msgstr "Xklode"
 
 #: capplets/screensaver/screensavers/xfishtank.xml.h:1
 msgid ""
@@ -2848,7 +3165,7 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/xfishtank.xml.h:2
 msgid "XFishTank"
-msgstr ""
+msgstr "Xakvarie"
 
 #: capplets/screensaver/screensavers/xflame.xml.h:1
 msgid ""
@@ -2858,7 +3175,7 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/xflame.xml.h:2
 msgid "Xflame"
-msgstr ""
+msgstr "Xflamme"
 
 #: capplets/screensaver/screensavers/xjack.xml.h:1
 msgid ""
@@ -2870,7 +3187,7 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/xjack.xml.h:2
 msgid "Xjack"
-msgstr ""
+msgstr "Xjack"
 
 #: capplets/screensaver/screensavers/xlyap.xml.h:1
 msgid ""
@@ -2881,7 +3198,7 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/xlyap.xml.h:2
 msgid "Xlyap"
-msgstr ""
+msgstr "Xlyap"
 
 #: capplets/screensaver/screensavers/xmatrix.xml.h:1
 msgid ""
@@ -2891,7 +3208,7 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/xmatrix.xml.h:2
 msgid "Xmatrix"
-msgstr ""
+msgstr "Xmatrise"
 
 #: capplets/screensaver/screensavers/xmountains.xml.h:1
 msgid ""
@@ -2907,7 +3224,7 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/xmountains.xml.h:4
 msgid "Xmountains"
-msgstr ""
+msgstr "Xfjell"
 
 #: capplets/screensaver/screensavers/xrayswarm.xml.h:1
 msgid ""
@@ -2917,7 +3234,7 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/xrayswarm.xml.h:2
 msgid "XRaySwarm"
-msgstr ""
+msgstr "XStråleSverm"
 
 #: capplets/screensaver/screensavers/xroger.xml.h:2
 msgid ""
@@ -2927,7 +3244,7 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/xroger.xml.h:3
 msgid "Xroger"
-msgstr ""
+msgstr "Xroger"
 
 #: capplets/screensaver/screensavers/xsnow.xml.h:1
 msgid ""
@@ -2937,7 +3254,7 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/xsnow.xml.h:2
 msgid "Xsnow"
-msgstr ""
+msgstr "Xsnø"
 
 #: capplets/screensaver/screensavers/xspirograph.xml.h:1
 msgid ""
@@ -2951,7 +3268,7 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/xteevee.xml.h:1
 msgid "XTeeVee"
-msgstr ""
+msgstr "XTeeVee"
 
 #: capplets/screensaver/screensavers/xteevee.xml.h:2
 msgid ""
@@ -2961,7 +3278,7 @@ msgstr ""
 
 #: capplets/screensaver/screensavers/zoom.xml.h:1
 msgid "Zoom (Fatbits)"
-msgstr ""
+msgstr "Zoom (fete biter)"
 
 #: capplets/screensaver/screensavers/zoom.xml.h:2
 msgid ""
@@ -2985,6 +3302,10 @@ msgstr "Egendefinert"
 #: capplets/screensaver/selection-dialog.c:220
 msgid "New screensaver"
 msgstr "Ny skjermsparer"
+
+#: capplets/sound/prefs-widget.c:137
+msgid "Play"
+msgstr "Spill"
 
 #: capplets/sound/sound.desktop.in.in.h:1
 msgid "Configure GNOME's use of sound"
@@ -3073,15 +3394,13 @@ msgstr "Plasser kontrollpaneler i kontrollsenterets vindu"
 
 #: control-center/Gnome.directory.in.in.h:1
 msgid "Main"
-msgstr ""
+msgstr "Hoved"
 
 #: control-center/Gnome.directory.in.in.h:2
-#, fuzzy
 msgid "Main Settings"
-msgstr "Innstillinger"
+msgstr "Hovedinnstillinger"
 
 #: control-center/main.c:46
-#, fuzzy
 msgid "Configuration"
 msgstr "Konfigurasjon"
 
@@ -3099,18 +3418,6 @@ msgstr "Val for GNOME kontrollsenter"
 
 #~ msgid "Delay until repeat:"
 #~ msgstr "Pause før gjentakelse:"
-
-#~ msgid "Operate on global backends"
-#~ msgstr "Arbeid på globale undersystemer"
-
-#~ msgid "Options for the rollback GUI"
-#~ msgstr "Alternativer for GUI for gjenoppretting"
-
-#~ msgid "Set background image."
-#~ msgstr "Sett bakgrunnsbilde."
-
-#~ msgid "IMAGE-FILE"
-#~ msgstr "BILDE-FIL"
 
 #~ msgid "Control Center Menu"
 #~ msgstr "Kontrollsenter-meny"
@@ -3190,9 +3497,6 @@ msgstr "Val for GNOME kontrollsenter"
 #~ msgid "Effect"
 #~ msgstr "Effekt"
 
-#~ msgid "More Solid"
-#~ msgstr "Mer solid"
-
 #~ msgid "More Transparent"
 #~ msgstr "Mer gjennomsiktig"
 
@@ -3204,12 +3508,6 @@ msgstr "Val for GNOME kontrollsenter"
 
 #~ msgid "Stretched (change aspect ratio)"
 #~ msgstr "Strukket (endre aspektrate)"
-
-#~ msgid "Use GNOME for setting background"
-#~ msgstr "La GNOME styre bakgrunnen"
-
-#~ msgid "Wallpaper"
-#~ msgstr "Bakgrunn"
 
 #~ msgid "HTML"
 #~ msgstr "HTML"
@@ -3282,9 +3580,6 @@ msgstr "Val for GNOME kontrollsenter"
 
 #~ msgid "View Logs..."
 #~ msgstr "Vis logger..."
-
-#~ msgid "days ago"
-#~ msgstr "dager siden"
 
 #~ msgid "Enable"
 #~ msgstr "Slå på"
