@@ -18,7 +18,7 @@
 #include <bonobo/bonobo-property-bag-xml.h>
 #include <bonobo/bonobo-moniker-util.h>
 #include <bonobo/bonobo-exception.h>
-#include <bonobo-config/bonobo-config-utils.h>
+#include <bonobo-conf/bonobo-config-utils.h>
 #include <gnome-xml/xmlmemory.h>
 #include <gtk/gtkmain.h>
 

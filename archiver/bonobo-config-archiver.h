@@ -12,7 +12,7 @@
 #define __BONOBO_CONFIG_ARCHIVER_H__
 
 #include <stdio.h>
-#include <bonobo-config/bonobo-config-database.h>
+#include <bonobo-conf/bonobo-config-database.h>
 #include <gnome-xml/tree.h>
 #include <gnome-xml/parser.h>
 #include <bonobo/bonobo-event-source.h>
