@@ -436,14 +436,14 @@ archive_set_current_location_id (Archive *archive, const gchar *locid)
 	archive->current_location_id = g_strdup (locid);
 
 	if (archive->is_global)
-		gnome_config_push_prefix ("=" LOCATION_DIR "=");
+		gnome_config_set_string
+			("/ximian-config/config/current/global-location",
+			 archive->current_location_id);
 	else
-		gnome_config_push_prefix ("ximian-config/");
+		gnome_config_set_string
+			("/ximian-config/config/current/location",
+			 archive->current_location_id);
 
-	gnome_config_set_string ("config/current/location",
-				 archive->current_location_id);
-
-	gnome_config_pop_prefix ();
 	gnome_config_sync ();
 }
 
@@ -466,15 +466,13 @@ archive_get_current_location_id (Archive *archive)
 
 	if (archive->current_location_id == NULL) {
 		if (archive->is_global)
-			gnome_config_push_prefix ("=" LOCATION_DIR "=");
+			archive->current_location_id =
+				gnome_config_get_string_with_default
+				("/ximian-config/config/current/global-location=default", &def);
 		else
-			gnome_config_push_prefix ("ximian-config/");
-
-		archive->current_location_id =
-			gnome_config_get_string_with_default
-			("config/current/location=default", &def);
-
-		gnome_config_pop_prefix ();
+			archive->current_location_id =
+				gnome_config_get_string_with_default
+				("/ximian-config/config/current/location=default", &def);
 
 		/* Create default location if it does not exist */
 		if (def && archive_get_location

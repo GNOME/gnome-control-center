@@ -1,5 +1,15 @@
 2001-04-11  Bradford Hovinen  <hovinen@ximian.com>
 
+	* location.c (run_backend_proc): Make sure to search location of
+	XST backends
+
+	* Makefile.am (INCLUDES): Added XST_BACKEND_LOCATION
+
+	* archive.c (archive_set_current_location_id): Don't use different
+	prefixes for per-user and global locations; we are assuming here
+	that the only person using this globally will be root anyway
+	(archive_get_current_location_id): Ditto
+
 	* Makefile.am (INCLUDES): Replace obsolete hcm directory names
 	with ximian-config
 

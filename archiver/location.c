@@ -1393,9 +1393,19 @@ run_backend_proc (gchar *backend_id)
 	}
 	else if (pid == 0) {
 		int i;
+		gchar *path, *path1;
 
 		dup2 (fd[0], 0);
 		for (i = 3; i < FOPEN_MAX; i++) close (i);
+
+		path = g_getenv ("PATH");
+
+		if (!strstr (path, XST_BACKEND_LOCATION)) {
+			path1 = g_strconcat (XST_BACKEND_LOCATION, ":", path,
+					     NULL);
+			setenv ("PATH", path1, TRUE);
+			g_free (path1);
+		}
 
 		args[0] = gnome_is_program_in_path (backend_id);
 		args[1] = "--set";

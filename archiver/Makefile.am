@@ -16,6 +16,7 @@ INCLUDES = 			\
 	-DCONFIGDIR=\""/etc"\"				\
 	-DLOCATION_DIR=\""$(datadir)/ximian-config/default"\"	\
 	-DGLADE_DIR=\""$(datadir)/ximian-config/glade"\"		\
+	-DXST_BACKEND_LOCATION=\""$(datadir)/ximian-setup-tools/scripts"\"	\
 	$(GNOME_XML_CFLAGS)				\
 	$(LIBGLADE_CFLAGS)
 
