@@ -7,15 +7,8 @@
 
 <!-- Specific options for XLOCKMORE program ... -->
 
-<!-- Neither of these can be done currently... 
-     ******************************************
-    <string id="text" label="Text for flag" 
-             arg-set="-text" test="text"/>
-    <picture id="bitmap" type="xbm" label="Bitmap for flag" 
-             arg-set="-bitmap" test="bitmap"/>
-     ******************************************
--->
-
+    <string id="text" label="Text for flag" arg="-text"/>
+    <file id="bitmap" label="Bitmap for flag" arg="-bitmap"/>
 
 <!-- Generic XLOCKMORE options... -->
 
@@ -29,17 +22,17 @@
     
     <hgroup>
         <select id="rand_size">
-            <option id="rand" label="Random size upto" enable="neg_size"/>
+            <option id="rand" label="Random size up to" enable="neg_size"/>
             <option id="specific" label="Specific size of" 
                     test="size > 0" enable="pos_size"/>
         </select>
-<!-- **** Need to be able to say "if rand: -size" -->
         <number id="pos_size"
                 type="spinbutton" low="0" high="18" arg="-size %"
                 default="8"/>
         <number id="neg_size"
-                type="spinbutton" low="0" high="18" arg="-size -%"
-                default="12"/>
+                type="spinbutton" low="0" high="18" arg="-size %"
+                default="-12" from-cli-conv="0 - var" to-cli-conv="0 - var"
+		same-as="pos_size"/>
     </hgroup>
 
     <number id="ncolours" label="Number of colours" 
