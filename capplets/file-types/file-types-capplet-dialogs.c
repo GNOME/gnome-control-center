@@ -798,7 +798,7 @@ nautilus_mime_type_capplet_show_new_mime_window (void)
 								
 		/* Handle illegal mime types as best we can */
 		for (tmp_str = mime_type; (c = *tmp_str) != '\0'; tmp_str++) {
-			if (isascii (c) && isupper (c)) {
+			if (isascii ((guchar) c) && isupper ((guchar) c)) {
 				*tmp_str = tolower (c);
 				upper_case_alert = TRUE;
 			}
