@@ -4,6 +4,7 @@
 <glade-interface>
 
 <widget class="GtkDialog" id="gnome-keybinding-dialog">
+  <property name="border_width">5</property>
   <property name="title" translatable="yes">Keyboard Shortcuts</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_NONE</property>
@@ -58,7 +59,7 @@
 
       <child>
 	<widget class="GtkVBox" id="vbox3">
-	  <property name="border_width">12</property>
+	  <property name="border_width">5</property>
 	  <property name="visible">True</property>
 	  <property name="homogeneous">False</property>
 	  <property name="spacing">12</property>
@@ -123,7 +124,7 @@
 	    <widget class="GtkVBox" id="shortcuts_vbox">
 	      <property name="visible">True</property>
 	      <property name="homogeneous">False</property>
-	      <property name="spacing">12</property>
+	      <property name="spacing">6</property>
 
 	      <child>
 		<widget class="GtkLabel" id="label11">
