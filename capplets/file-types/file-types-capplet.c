@@ -56,6 +56,8 @@ static void 	 populate_application_menu 		(GtkWidget 	*menu,
 						 	 const char 	*mime_string);
 static void 	 populate_viewer_menu			(GtkWidget 	*menu, 	 
 						 	 const char 	*mime_string);
+static void	 revert_mime_clicked       		(GtkWidget 	*widget, 
+						 	 gpointer   	data);
 static void	 delete_mime_clicked       		(GtkWidget 	*widget, 
 						 	 gpointer   	data);
 static void	 add_mime_clicked 	  		(GtkWidget 	*widget, 
@@ -312,7 +314,7 @@ static void
 init_mime_capplet (void)
 {
 	GtkWidget *main_vbox;
-        GtkWidget *vbox, *hbox;
+        GtkWidget *vbox, *hbox, *left_vbox;
         GtkWidget *button;
         GtkWidget *mime_list_container;
         GtkWidget *extension_scroller;
@@ -342,137 +344,133 @@ init_mime_capplet (void)
 	gtk_box_pack_start (GTK_BOX (main_vbox), table, FALSE, FALSE, 0);
 	gtk_table_set_row_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
 	gtk_table_set_col_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
-	
-	/* Set up top left area.  This contains the icon display, mime description,
-	   mime type label and change icon button */
-	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
-	gtk_table_attach_defaults ( GTK_TABLE (table), hbox, 0, 1, 0, 1);
-	vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
-	gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 0);
 
-	icon_entry = nautilus_mime_type_icon_entry_new ("mime_icon_entry", NULL);
-	gtk_box_pack_start (GTK_BOX (vbox), icon_entry, FALSE, FALSE, 0);
-	
-	button = gtk_button_new_with_label (_("Change Icon"));
-	gtk_signal_connect (GTK_OBJECT (button), "clicked", change_icon_clicked, icon_entry);
-	gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
-	vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);	
-	gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 0);
 
-	description_entry = gtk_entry_new ();
-	alignment = gtk_alignment_new (0, 0, 0, 0);
-	gtk_box_pack_start (GTK_BOX (vbox), alignment, FALSE, FALSE, 0);	
-	gtk_container_add (GTK_CONTAINER (alignment), description_entry);
-	gtk_widget_set_usize (description_entry, 200, 0);
-	gtk_widget_make_bold (GTK_WIDGET (description_entry));
-	mime_label = GTK_LABEL (gtk_label_new (_("Mime Type")));	
-	gtk_label_set_justify (GTK_LABEL (mime_label), GTK_JUSTIFY_RIGHT);
-	alignment = gtk_alignment_new (0, 0, 0, 0);
-	gtk_box_pack_start (GTK_BOX (vbox), alignment, FALSE, FALSE, 0);
-	gtk_container_add (GTK_CONTAINER (alignment), GTK_WIDGET(mime_label));
-
-	/* Set up bottom left area.  This contains two buttons to add
-	   and delete mime types */
-	vbox = gtk_vbox_new (FALSE, 7);
-	gtk_table_attach_defaults ( GTK_TABLE (table), vbox, 0, 1, 1, 2);
-	/* Put in a spacer to make buttons layout as we want them */
+	left_vbox = gtk_vbox_new (FALSE, 0);
+	/* Set up top left area. */
 	{
-		GtkWidget *spacer;
-		spacer = gtk_fixed_new ();
-		gtk_box_pack_start (GTK_BOX (vbox), spacer, FALSE, FALSE, 0);
-		gtk_widget_set_usize (spacer, 10, 30);
+		GtkWidget *small_table;
+
+		small_table =  gtk_table_new (1, 2, FALSE);
+		gtk_table_set_col_spacings (GTK_TABLE (small_table), 7);
+
+		gtk_table_attach ( GTK_TABLE (table), small_table, 0, 1, 0, 1,
+				   (GtkAttachOptions) (GTK_FILL),
+				   (GtkAttachOptions) (0), 0, 0);
+		
+		icon_entry = nautilus_mime_type_icon_entry_new ("mime_icon_entry", NULL);
+		gtk_table_attach (GTK_TABLE (small_table), icon_entry, 0, 1, 0, 1,
+				  (GtkAttachOptions) (GTK_FILL),
+				  (GtkAttachOptions) (0), 0, 0);
+	
+		vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
+		gtk_table_attach (GTK_TABLE (small_table), vbox, 1, 2, 0, 1,
+				  (GtkAttachOptions) (GTK_FILL),
+				  (GtkAttachOptions) (GTK_FILL), 0, 0);
+	
+		description_entry = gtk_entry_new ();
+		gtk_box_pack_start (GTK_BOX (vbox), description_entry, FALSE, FALSE, 0);
+		gtk_widget_make_bold (GTK_WIDGET (description_entry));
+		
+		hbox = gtk_hbox_new (FALSE, 0);
+		gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET (hbox), FALSE, FALSE, 0);
+
+		mime_label = GTK_LABEL (gtk_label_new (_("Mime Type")));	
+		gtk_label_set_justify (GTK_LABEL (mime_label), GTK_JUSTIFY_LEFT);
+		gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET (mime_label), FALSE, FALSE, 0);
+
+		hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
+		gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+
+		button = gtk_button_new_with_label (_("Change Icon"));
+		gtk_signal_connect (GTK_OBJECT (button), "clicked", change_icon_clicked, icon_entry);
+		gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+
+		/* spacer */
+		gtk_box_pack_start (GTK_BOX (hbox), gtk_vbox_new (FALSE, 0), FALSE, FALSE, 10);
+
+		button = gtk_button_new_with_label (_("Change File Extensions"));
+		gtk_signal_connect (GTK_OBJECT (button), "clicked", change_icon_clicked, icon_entry);
+		gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+
 	}
 
-	alignment = gtk_alignment_new (0, 0, 0, 0);
-	gtk_box_pack_start (GTK_BOX (vbox), alignment, FALSE, FALSE, 0);
-	
-	button = gtk_button_new_with_label (_("Add new Mime type..."));
-	gtk_signal_connect (GTK_OBJECT (button), "clicked", add_mime_clicked, NULL);
-	gtk_container_add (GTK_CONTAINER (alignment), button);
+	/* Set up bottom left area. */
+	{
+		frame = gtk_frame_new (_("Default Action:"));
+		gtk_table_attach ( GTK_TABLE (table), frame, 0, 1, 1, 2,
+				   (GtkAttachOptions) (GTK_FILL),
+				   (GtkAttachOptions) (0), 0, 0);
+		
+		vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
+		gtk_container_add (GTK_CONTAINER (frame), vbox);
+		gtk_container_set_border_width (GTK_CONTAINER (vbox), 5);
 
-	alignment = gtk_alignment_new (0, 0, 0, 0);
-	gtk_box_pack_start (GTK_BOX (vbox), alignment, FALSE, FALSE, 0);
+		hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
+		gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
-	delete_button = gtk_button_new_with_label (_("Delete this Mime type..."));
-	gtk_container_add (GTK_CONTAINER (alignment), delete_button);
-	gtk_signal_connect (GTK_OBJECT (delete_button), "clicked", delete_mime_clicked, NULL);
+		viewer_button = gtk_radio_button_new_with_label (NULL, _("Use Viewer"));
+		gtk_box_pack_start (GTK_BOX (hbox), viewer_button, FALSE, FALSE, 0);
+		gtk_signal_connect (GTK_OBJECT (viewer_button), "toggled",
+				    GTK_SIGNAL_FUNC (viewer_button_toggled), NULL);
 
-	/* Set up top right area. */
-	frame = gtk_frame_new (_("Default Action:"));
-	gtk_table_attach_defaults ( GTK_TABLE (table), frame, 1, 2, 0, 1);
+		application_button = gtk_radio_button_new_with_label_from_widget (GTK_RADIO_BUTTON (viewer_button), 
+										  _("Open With Application"));
+		gtk_box_pack_start (GTK_BOX (hbox), application_button, FALSE, FALSE, 0);
+		gtk_signal_connect (GTK_OBJECT (application_button), "toggled",
+				    GTK_SIGNAL_FUNC (application_button_toggled), NULL);
 
-	vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
-	gtk_container_add (GTK_CONTAINER (frame), vbox);
-	gtk_container_set_border_width (GTK_CONTAINER (vbox), 5);
+		hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
+		gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
-	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
-	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+		default_menu = gtk_option_menu_new();
+		gtk_widget_set_usize (GTK_WIDGET (default_menu), 170, 0);
+		gtk_box_pack_start (GTK_BOX (hbox), default_menu, TRUE, TRUE, 0);
 
-	viewer_button = gtk_radio_button_new_with_label (NULL, _("Use Viewer"));
-	gtk_box_pack_start (GTK_BOX (hbox), viewer_button, FALSE, FALSE, 0);
-	gtk_signal_connect (GTK_OBJECT (viewer_button), "toggled",
-			    GTK_SIGNAL_FUNC (viewer_button_toggled), NULL);
+		button = gtk_button_new_with_label (_("Edit List"));
+		gtk_widget_set_usize (GTK_WIDGET (button), 70, 0);
+		gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+		gtk_signal_connect (GTK_OBJECT (button), "clicked", edit_default_clicked, mime_list);
+	}
 
-	application_button = gtk_radio_button_new_with_label_from_widget ( 
-		           GTK_RADIO_BUTTON (viewer_button), _("Open With Application"));
-	gtk_box_pack_start (GTK_BOX (hbox), application_button, FALSE, FALSE, 0);
-	gtk_signal_connect (GTK_OBJECT (application_button), "toggled",
-			    GTK_SIGNAL_FUNC (application_button_toggled), NULL);
+	/* Set up top right area.*/
+	{
+		GtkWidget *separator;
+		GtkWidget *small_table;
 
-	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
-	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+		hbox = gtk_hbox_new (FALSE, 0);
+		gtk_table_attach_defaults ( GTK_TABLE (table), hbox, 1, 2, 0, 1);
 
-	default_menu = gtk_option_menu_new();
-	gtk_widget_set_usize (GTK_WIDGET (default_menu), 170, 0);
-	gtk_box_pack_start (GTK_BOX (hbox), default_menu, FALSE, FALSE, 0);
+		small_table =  gtk_table_new (4, 1, FALSE);
+		gtk_table_set_row_spacings (GTK_TABLE (small_table), 7);
+		gtk_box_pack_end (GTK_BOX (hbox), small_table, FALSE, FALSE, 0);
 
-        button = gtk_button_new_with_label (_("Edit List"));
-        gtk_widget_set_usize (GTK_WIDGET (button), 70, 0);
-        gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
-	gtk_signal_connect (GTK_OBJECT (button), "clicked", edit_default_clicked, mime_list);
 
-	/* Set up bottom right area. */
-	frame = gtk_frame_new (_("Extensions:"));
-	gtk_table_attach_defaults ( GTK_TABLE (table), frame, 1, 2, 1, 2);
+		button = gtk_button_new_with_label (_("Add new Mime type..."));
+		gtk_signal_connect (GTK_OBJECT (button), "clicked", add_mime_clicked, NULL);
+		gtk_table_attach (GTK_TABLE (small_table), button, 0, 1, 0, 1,
+				  (GtkAttachOptions) (GTK_FILL),
+				  (GtkAttachOptions) (0), 0, 0);
 
-	extensions_table = gtk_table_new (2, 2, FALSE);
-	gtk_container_add (GTK_CONTAINER (frame), extensions_table);	
-	gtk_table_set_row_spacings (GTK_TABLE (extensions_table), 10);
-	gtk_table_set_col_spacings (GTK_TABLE (extensions_table), 10);
-	gtk_container_set_border_width (GTK_CONTAINER (extensions_table), 5);
+		button = gtk_button_new_with_label (_("Delete this Mime type..."));
+		gtk_signal_connect (GTK_OBJECT (button), "clicked", delete_mime_clicked, NULL);
+		gtk_table_attach (GTK_TABLE (small_table), button, 0, 1, 1, 2,
+				  (GtkAttachOptions) (GTK_FILL),
+				  (GtkAttachOptions) (0), 0, 0);
 
-	extension_list = gtk_clist_new (1);
-	gtk_clist_column_titles_passive (GTK_CLIST (extension_list));
-	gtk_clist_set_auto_sort (GTK_CLIST (extension_list), TRUE);
-	gtk_clist_set_selection_mode (GTK_CLIST (extension_list), GTK_SELECTION_BROWSE);
-        gtk_clist_set_auto_sort (GTK_CLIST (extension_list), TRUE);
+		separator = gtk_hseparator_new ();
+		gtk_table_attach (GTK_TABLE (small_table), separator, 0, 1, 2, 3,
+				  (GtkAttachOptions) (GTK_FILL),
+				  (GtkAttachOptions) (GTK_FILL), 0, 0);
 
-	extension_scroller = gtk_scrolled_window_new (NULL, NULL);
-	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (extension_scroller),
-					GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-	gtk_container_add (GTK_CONTAINER (extension_scroller), extension_list);
+		button = gtk_button_new_with_label (_("Revert to System Defaults"));
+		gtk_signal_connect (GTK_OBJECT (button), "clicked", revert_mime_clicked, NULL);
+		gtk_table_attach (GTK_TABLE (small_table), button, 0, 1, 3, 4,
+				  (GtkAttachOptions) (GTK_FILL),
+				  (GtkAttachOptions) (0), 0, 0);
 
-	gtk_widget_set_usize (extension_scroller, 150, 60);
-	gtk_table_attach_defaults ( GTK_TABLE (extensions_table), extension_scroller, 0, 1, 0, 2);
+	}
 
-        add_button = gtk_button_new_with_label (_("Add"));	
-	gtk_table_attach_defaults ( GTK_TABLE (extensions_table), add_button, 1, 2, 0, 1);
-
-        remove_button = gtk_button_new_with_label (_("Remove"));	
-	gtk_table_attach_defaults ( GTK_TABLE (extensions_table), remove_button, 1, 2, 1, 2);
-
-	gtk_signal_connect (GTK_OBJECT (remove_button), "clicked",
-			    GTK_SIGNAL_FUNC (remove_extension_clicked), NULL);
-	gtk_signal_connect (GTK_OBJECT (add_button), "clicked",
-			    GTK_SIGNAL_FUNC (add_extension_clicked), NULL);
-	gtk_signal_connect (GTK_OBJECT (extension_list), "select-row",
-			    GTK_SIGNAL_FUNC (extension_list_selected), NULL);
-	gtk_signal_connect (GTK_OBJECT (extension_list), "unselect-row",
-			    GTK_SIGNAL_FUNC (extension_list_deselected), NULL);
-
-	/* Set up enabled/disabled states of capplet buttons */	
-	gtk_widget_set_sensitive (add_button, TRUE);
-	gtk_widget_set_sensitive (remove_button, FALSE);
 	
 	/* FIXME bugzilla.eazel.com 2765: this call generates a 
 	   Gtk-WARNING **: gtk_signal_disconnect_by_data(): could not find handler containing data (0x80FA6F8)
@@ -862,6 +860,11 @@ populate_viewer_menu (GtkWidget *component_menu, const char *mime_type)
 }
 
 
+static void
+revert_mime_clicked (GtkWidget *widget, gpointer data)
+{
+
+}
 /*
  *  delete_mime_clicked	
  *
