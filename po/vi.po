@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center for Gnome v-2.1.x\n"
-"POT-Creation-Date: 2003-01-19 04:55+0100\n"
+"POT-Creation-Date: 2003-02-04 16:51-0500\n"
 "PO-Revision-Date: 2003-01-19 20:24+0700\n"
 "Last-Translator: pclouds <pclouds@gmx.net>\n"
 "Language-Team: Gnome-Vi <gnomevi-list@lists.sourceforge.net>\n"
@@ -43,7 +43,9 @@ msgstr "Lập tùy thích cho hỗ trợ bàn phím của bạn"
 msgid ""
 "This system does not seem to have the XKB extension.  The keyboard "
 "accessibility features will not operate without it."
-msgstr "Có vẻ như hệ thống không có phần mở rộng XKB. Tính năng hỗ trợ bàn phím sẽ không hoạt động nếu thiếu nó."
+msgstr ""
+"Có vẻ như hệ thống không có phần mở rộng XKB. Tính năng hỗ trợ bàn phím sẽ "
+"không hoạt động nếu thiếu nó."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:1
@@ -387,6 +389,11 @@ msgstr "Chỉ áp dụng các thiết lập rồi thoát"
 msgid "There was an error displaying help: %s"
 msgstr "Lỗi hiển thị trợ giúp: %s"
 
+#: capplets/common/capplet-stock-icons.c:94
+#, c-format
+msgid "Unable to load capplet stock icon '%s'\n"
+msgstr ""
+
 #: capplets/common/file-transfer-dialog.c:95
 #, c-format
 msgid "%i of %i"
@@ -480,7 +487,8 @@ msgstr "Đặt thay đổi"
 #: capplets/common/gconf-property-editor.c:186
 msgid ""
 "GConf change set containing data to be forwarded to the gconf client on apply"
-msgstr "GConf change set chứa dữ liệu được chuyển cho GConf client khi được áp dụng"
+msgstr ""
+"GConf change set chứa dữ liệu được chuyển cho GConf client khi được áp dụng"
 
 #: capplets/common/gconf-property-editor.c:191
 msgid "Conversion to widget callback"
@@ -1917,7 +1925,13 @@ msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
 "installed the \"gnome-themes\" package."
-msgstr "Không tìm thấy theme nào trên hệ thống. Có lẽ hộp thoại \"Tùy chọn Theme\" không được cài đặt đúng, hoặc bạn chưa cài đặt gói \"gnome-themes\"."
+msgstr ""
+"Không tìm thấy theme nào trên hệ thống. Có lẽ hộp thoại \"Tùy chọn Theme\" "
+"không được cài đặt đúng, hoặc bạn chưa cài đặt gói \"gnome-themes\"."
+
+#: capplets/theme-switcher/gnome-theme-save.c:72
+msgid "Theme name must be present"
+msgstr ""
 
 #: capplets/theme-switcher/gnome-theme-manager.c:665
 #: capplets/theme-switcher/gnome-theme-manager.c:725
@@ -2339,18 +2353,19 @@ msgstr "Chọn tập tin âm thanh"
 msgid "Window manager \"%s\" has not registered a configuration tool\n"
 msgstr "Trình quản lý cửa sổ \"%s\" chưa đăng ký công cụ cấu hình\n"
 
-#: libwindow-settings/metacity-window-manager.c:373
+#: libwindow-settings/metacity-window-manager.c:374
 msgid "Maximize"
 msgstr "Tối đa"
 
-#: libwindow-settings/metacity-window-manager.c:374
+#: libwindow-settings/metacity-window-manager.c:375
 msgid "Roll up"
 msgstr "Cuộn lên"
 
 #: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
 msgid ""
 "If true, the mime handlers for text/plain and text/* will be kept in sync"
-msgstr "Nếu true, bộ xử lý MIME cho text/plain và text/* sẽ được giữ cho đồng bộ"
+msgstr ""
+"Nếu true, bộ xử lý MIME cho text/plain và text/* sẽ được giữ cho đồng bộ"
 
 #: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:2
 msgid "Sync text/plain and text/* handlers"
@@ -2400,7 +2415,11 @@ msgid ""
 "The order of subpixel elements on an LCD screen; only used when antialiasing "
 "is set to \"rgba\". Possible values are: \"rgb\" - red on left, most common. "
 "\"bgr\" - blue on left. \"vrgb\" - red on top. \"vbgr\" - red on bottom."
-msgstr "Thứ tự của phần tử subpixel trên màn hình LCD: chỉ được dùng khi Làm trơn được đặt là \"rgba\". Giá trị hợp lệ là: \"rgb\" - đỏ bên trái, trường hợp thông thường. \"bgr\" - xanh lục bên trái. \"vrgb\" - đỏ trên đỉnh. \"vbgr\" - đỏ bên dưới."
+msgstr ""
+"Thứ tự của phần tử subpixel trên màn hình LCD: chỉ được dùng khi Làm trơn "
+"được đặt là \"rgba\". Giá trị hợp lệ là: \"rgb\" - đỏ bên trái, trường hợp "
+"thông thường. \"bgr\" - xanh lục bên trái. \"vrgb\" - đỏ trên đỉnh. \"vbgr\" "
+"- đỏ bên dưới."
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:7
 msgid ""
@@ -2417,7 +2436,10 @@ msgid ""
 "The type of hinting to use when rendering fonts. Possible values are: \"none"
 "\" - no hinting, \"slight\", \"medium\", and \"full\" - as much hinting as "
 "possible; may cause distortion of letter forms."
-msgstr "Loại hint khi vẽ font. Giá trị hợp lệ là: \"none\" - không hint, \"slight\", \"medium\", và \"full\" - hint tối đa có thể; có thể gây ra sự méo mó trên các mẫu ký tự."
+msgstr ""
+"Loại hint khi vẽ font. Giá trị hợp lệ là: \"none\" - không hint, \"slight\", "
+"\"medium\", và \"full\" - hint tối đa có thể; có thể gây ra sự méo mó trên "
+"các mẫu ký tự."
 
 #, fuzzy
 #~ msgid "Use _Background"
