@@ -22,8 +22,11 @@
 #include "themus-component.h"
 #include <gnome-theme-info.h>
 #include <gnome-theme-apply.h>
+#include <gconf/gconf-client.h>
 
 #include <stdlib.h>
+
+#define FONT_KEY           "/desktop/gnome/interface/font_name"
 
 static void
 impl_Bonobo_Listener_event (PortableServer_Servant servant,
@@ -33,10 +36,10 @@ impl_Bonobo_Listener_event (PortableServer_Servant servant,
 {
 	ThemusComponent *component;
 	const CORBA_sequence_CORBA_string *list;
-	char    *cmd, *current_dir, *first_path;
-	char    *cmd_option;
-	GString *str;
-	int      i;
+	
+	GnomeVFSURI *uri;
+	GnomeThemeMetaInfo *theme;
+	GConfClient *client;
 
 	component = THEMUS_COMPONENT (bonobo_object_from_servant (servant));
 
@@ -50,9 +53,6 @@ impl_Bonobo_Listener_event (PortableServer_Servant servant,
 	g_return_if_fail (list != NULL);
 	
 	if (strcmp (event_name, "ApplyTheme") == 0) {
-		GnomeVFSURI *uri;
-		GnomeThemeMetaInfo *theme;
-		
 		uri = gnome_vfs_uri_new (list->_buffer[0]);
 		g_assert (uri != NULL);
 		
@@ -63,6 +63,11 @@ impl_Bonobo_Listener_event (PortableServer_Servant servant,
 		g_assert (theme != NULL);
 		
 		gnome_meta_theme_set (theme);
+		if (theme->application_font)
+		{
+			client = gconf_client_get_default ();
+			gconf_client_set_string (client, FONT_KEY, theme->application_font, NULL);
+		}
 	}
 }
 
