@@ -676,7 +676,7 @@ static void
 display_upper_case_dialog (void)
 {
 	char *message;
-	GtkWidget *dialog;
+	GnomeDialog *dialog;
 
 	message = _("The MIME type entered contained upper case characters. "
 		    "Upper case characters were changed to lower case for you.");
