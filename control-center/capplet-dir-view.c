@@ -553,6 +553,9 @@ prefs_changed_cb (GnomeCCPreferences *prefs)
 void
 capplet_dir_view_show (CappletDirView *view)
 {
+	g_return_if_fail (view != NULL);
+	g_return_if_fail (IS_CAPPLET_DIR_VIEW (view));
+
 	gtk_widget_show (GTK_WIDGET (CAPPLET_DIR_VIEW_W (view)));
 }
 
