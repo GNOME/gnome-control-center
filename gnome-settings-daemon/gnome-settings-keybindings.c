@@ -35,6 +35,30 @@ typedef struct {
 } Binding;
   
 static GSList *binding_list = NULL;
+static GSList *screens = NULL;
+
+static GSList *
+get_screens_list (void)
+{
+  GdkDisplay *display = gdk_display_get_default();
+  GSList *list = NULL;
+  int i;
+
+  if (gdk_display_get_n_screens (display) == 1) {
+    list = g_slist_append (list, gdk_screen_get_default ());
+  } else {
+    for (i = 0; i < gdk_display_get_n_screens (display); i++) {
+      GdkScreen *screen;
+
+      screen = gdk_display_get_screen (display, i);
+      if (screen != NULL) {
+        list = g_slist_append (list, screen);
+      }
+    }
+  }
+
+  return list;
+}
 
 char *
 screen_exec_display_string (XEvent *xevent)
@@ -44,8 +68,6 @@ screen_exec_display_string (XEvent *xevent)
   char       *retval;
   char       *p;
 
-#ifdef HAVE_GTK_MULTIHEAD
-  
   GdkScreen  *screen = NULL;
   
   GdkWindow *window = gdk_xid_table_lookup (xevent->xkey.root);
@@ -71,9 +93,6 @@ screen_exec_display_string (XEvent *xevent)
   g_string_free (str, FALSE);
 
   return retval;
-#else
-  return g_strdup ("DISPLAY=:0.0");
-#endif
 }
 
 static gint 
@@ -214,6 +233,23 @@ key_already_used (Binding *binding)
   return FALSE;
 }
 
+static void
+grab_key (GdkWindow *root, Key *key, int result, gboolean grab)
+{
+  gdk_error_trap_push ();
+  if (grab)
+    XGrabKey (GDK_DISPLAY(), key->keycode, (result | key->state),
+              GDK_WINDOW_XID (root), True, GrabModeAsync, GrabModeAsync);
+  else
+    XUngrabKey(GDK_DISPLAY(), key->keycode, (result | key->state),
+	       GDK_WINDOW_XID (root));
+  gdk_flush ();
+  if (gdk_error_trap_pop ()) {
+    g_warning (_("It seems that another application already has"
+                 " access to key '%d'."), key->keycode);
+  }
+}
+
 /* inspired from all_combinations from gnome-panel/gnome-panel/global-keys.c */
 #define N_BITS 32
 static void
@@ -235,19 +271,19 @@ do_grab (gboolean grab,
 
 	uppervalue = 1<<bits_set_cnt;
 	for (i = 0; i < uppervalue; i++) {
+		GSList *l;
 		int j, result = 0;
 
 		for (j = 0; j < bits_set_cnt; j++) {
 			if (i & (1<<j))
 				result |= (1<<indexes[j]);
 		}
-		/* FIXME need to grab for all root windows for the display */
-		if (grab) 
-		  XGrabKey (GDK_DISPLAY(), key->keycode, (result | key->state),
-			    GDK_ROOT_WINDOW(), True, GrabModeAsync, GrabModeAsync);
-		else 
-		  XUngrabKey(GDK_DISPLAY(), key->keycode, (result | key->state),
-			     GDK_ROOT_WINDOW());
+
+		for (l = screens; l ; l = l->next) {
+                  GdkScreen *screen = l->data;
+                  grab_key (gdk_screen_get_root_window (screen), key, result,
+			    grab);
+		}
 	}
 }
 
@@ -385,6 +421,7 @@ gnome_settings_keybindings_load (GConfClient *client)
   GSList *list, *li;
 
   list = gconf_client_all_dirs (client, GCONF_BINDING_DIR, NULL);
+  screens = get_screens_list ();
 
   for (li = list; li != NULL; li = li->next)
     {
