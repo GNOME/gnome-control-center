@@ -262,7 +262,7 @@ mime_edit_dialog_class_init (MimeEditDialogClass *class)
 		 g_param_spec_pointer ("mime-type-info",
 				       _("MIME type information"),
 				       _("Structure with data on the MIME type"),
-				       G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+				       G_PARAM_READWRITE));
 
 	g_object_class_install_property
 		(object_class, PROP_IS_ADD,
@@ -270,7 +270,7 @@ mime_edit_dialog_class_init (MimeEditDialogClass *class)
 				       _("Is add dialog"),
 				       _("True if this dialog is for adding a MIME type"),
 				       FALSE,
-				       G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+				       G_PARAM_READWRITE));
 
 	dialog_signals[DONE] =
 		g_signal_new ("done",

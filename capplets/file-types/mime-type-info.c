@@ -46,18 +46,109 @@ static GSList *get_lang_list          (void);
 static gchar  *form_extensions_string (const MimeTypeInfo *info,
 				       gchar              *sep,
 				       gchar              *prepend);
-static void    get_icon_pixbuf        (MimeTypeInfo       *info,
-				       const gchar        *icon_path,
-				       gboolean            want_large);
 
 static MimeCategoryInfo *get_category (const gchar        *category_name,
 				       const gchar        *category_desc,
 				       GtkTreeModel       *model);
 
-gchar *get_real_icon_path             (const MimeTypeInfo *info,
-				       const gchar        *icon_name);
-
 
+
+static gchar *
+get_real_icon_path (const MimeTypeInfo *info, const gchar *icon_name) 
+{
+	gchar *tmp, *tmp1, *ret, *real_icon_name;
+
+	if (icon_name == NULL || *icon_name == '\0') {
+		tmp = g_strdup (info->mime_type);
+		tmp1 = strchr (tmp, '/');
+		if (tmp1 != NULL) *tmp1 = '-';
+		real_icon_name = g_strconcat ("gnome-mime-", tmp, NULL);
+		g_free (tmp);
+	} else
+		real_icon_name = g_strdup (icon_name);
+
+	ret = gnome_vfs_icon_path_from_filename (real_icon_name);
+
+	if (ret == NULL) {
+		GtkIconInfo *info;
+		
+		info = gtk_icon_theme_lookup_icon (
+			gtk_icon_theme_get_default (), real_icon_name, 48, 0);
+		if (info != NULL)
+			ret = g_strdup (gtk_icon_info_get_filename (info));
+		else if (icon_name != NULL) {
+			info = gtk_icon_theme_lookup_icon (
+				gtk_icon_theme_get_default (), icon_name, 48, 0);
+			if (info != NULL)
+				ret = g_strdup (gtk_icon_info_get_filename (info));
+		}
+	}
+
+	if (ret == NULL && strstr (real_icon_name, ".png") == NULL) {
+		tmp = g_strconcat (real_icon_name, ".png", NULL);
+		ret = gnome_vfs_icon_path_from_filename (tmp);
+		g_free (tmp);
+	}
+
+	if (ret == NULL) {
+		tmp = g_strconcat ("nautilus/", real_icon_name, NULL);
+		ret = gnome_vfs_icon_path_from_filename (tmp);
+		g_free (tmp);
+	}
+
+	if (ret == NULL && strstr (real_icon_name, ".png") == NULL) {
+		tmp = g_strconcat ("nautilus/", real_icon_name, ".png", NULL);
+		ret = gnome_vfs_icon_path_from_filename (tmp);
+		g_free (tmp);
+	}
+	g_free (real_icon_name);
+
+	if (ret == NULL)
+		ret = gnome_vfs_icon_path_from_filename ("nautilus/i-regular-24.png");
+
+	return ret;
+}
+
+/* Loads a pixbuf for the icon, falling back on the default icon if
+ * necessary
+ */
+static void
+get_icon_pixbuf (MimeTypeInfo *info, const gchar *icon_path, gboolean want_large) 
+{
+	static GHashTable *icon_table = NULL;
+
+	if (icon_path == NULL)
+		icon_path = get_real_icon_path (info, NULL);
+
+	if (icon_path == NULL)
+		return;
+
+	if ((want_large && info->icon_pixbuf != NULL) || info->small_icon_pixbuf != NULL)
+		return;
+
+	if (icon_table == NULL)
+		icon_table = g_hash_table_new (g_str_hash, g_str_equal);
+
+	if (!want_large)
+		info->small_icon_pixbuf = g_hash_table_lookup (icon_table, icon_path);
+
+	if (info->small_icon_pixbuf != NULL) {
+		g_object_ref (G_OBJECT (info->small_icon_pixbuf));
+	} else {
+		info->icon_pixbuf = gdk_pixbuf_new_from_file (icon_path, NULL);
+
+		if (info->icon_pixbuf == NULL) {
+			get_icon_pixbuf (info, NULL, want_large);
+		}
+		else if (!want_large) {
+			info->small_icon_pixbuf =
+				gdk_pixbuf_scale_simple (info->icon_pixbuf, 16, 16, GDK_INTERP_HYPER);
+
+			g_hash_table_insert (icon_table, g_strdup (icon_path), info->small_icon_pixbuf);
+		}
+	}
+}
+
 
 void
 load_all_mime_types (GtkTreeModel *model) 
@@ -140,10 +231,8 @@ mime_type_info_get_icon (MimeTypeInfo *info)
 {
 	if (info->small_icon_pixbuf == NULL)
 		get_icon_pixbuf (info, mime_type_info_get_icon_path (info), FALSE);
-
 	if (info->small_icon_pixbuf != NULL)
 		g_object_ref (G_OBJECT (info->small_icon_pixbuf));
-
 	return info->small_icon_pixbuf;
 }
 
@@ -705,89 +794,6 @@ form_extensions_string (const MimeTypeInfo *info, gchar *sep, gchar *prepend)
 	g_strfreev (array);
 
 	return tmp;
-}
-
-gchar *get_real_icon_path (const MimeTypeInfo *info, const gchar *icon_name) 
-{
-	gchar *tmp, *tmp1, *ret, *real_icon_name;
-
-	if (icon_name == NULL || *icon_name == '\0') {
-		tmp = g_strdup (info->mime_type);
-		tmp1 = strchr (tmp, '/');
-		if (tmp1 != NULL) *tmp1 = '-';
-		real_icon_name = g_strconcat ("document-icons/gnome-", tmp, ".png", NULL);
-		g_free (tmp);
-	} else {
-		real_icon_name = g_strdup (icon_name);
-	}
-
-	ret = gnome_vfs_icon_path_from_filename (real_icon_name);
-
-	if (ret == NULL && strstr (real_icon_name, ".png") == NULL) {
-		tmp = g_strconcat (real_icon_name, ".png", NULL);
-		ret = gnome_vfs_icon_path_from_filename (tmp);
-		g_free (tmp);
-	}
-
-	if (ret == NULL) {
-		tmp = g_strconcat ("nautilus/", real_icon_name, NULL);
-		ret = gnome_vfs_icon_path_from_filename (tmp);
-		g_free (tmp);
-	}
-
-	if (ret == NULL && strstr (real_icon_name, ".png") == NULL) {
-		tmp = g_strconcat ("nautilus/", real_icon_name, ".png", NULL);
-		ret = gnome_vfs_icon_path_from_filename (tmp);
-		g_free (tmp);
-	}
-
-	if (ret == NULL)
-		ret = gnome_vfs_icon_path_from_filename ("nautilus/i-regular-24.png");
-
-	g_free (real_icon_name);
-
-	return ret;
-}
-
-/* Loads a pixbuf for the icon, falling back on the default icon if
- * necessary
- */
-
-void
-get_icon_pixbuf (MimeTypeInfo *info, const gchar *icon_path, gboolean want_large) 
-{
-	static GHashTable *icon_table = NULL;
-
-	if (icon_path == NULL)
-		icon_path = get_real_icon_path (info, NULL);
-
-	if (icon_path == NULL)
-		return;
-
-	if ((want_large && info->icon_pixbuf != NULL) || info->small_icon_pixbuf != NULL)
-		return;
-
-	if (icon_table == NULL)
-		icon_table = g_hash_table_new (g_str_hash, g_str_equal);
-
-	if (!want_large)
-		info->small_icon_pixbuf = g_hash_table_lookup (icon_table, icon_path);
-
-	if (info->small_icon_pixbuf != NULL) {
-		g_object_ref (G_OBJECT (info->small_icon_pixbuf));
-	} else {
-		info->icon_pixbuf = gdk_pixbuf_new_from_file (icon_path, NULL);
-
-		if (info->icon_pixbuf == NULL) {
-			get_icon_pixbuf (info, NULL, want_large);
-		}
-		else if (!want_large) {
-			info->small_icon_pixbuf =
-				gdk_pixbuf_scale_simple (info->icon_pixbuf, 16, 16, GDK_INTERP_HYPER);
-
-			g_hash_table_insert (icon_table, g_strdup (icon_path), info->small_icon_pixbuf);
-		}
-	}
 }
 
 static MimeCategoryInfo *
