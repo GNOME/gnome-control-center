@@ -67,26 +67,4 @@ install-data-local:
 	$(mkinstalldirs) $(DESTDIR)$(datadir)/control-center-2/capplets
 	$(INSTALL_DATA) Gnome.directory $(DESTDIR)$(datadir)/control-center-2/capplets/.directory
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#all-local: Gnome.directory
+CLEANFILES=Gnome.directory Gnome.directory.in gnomecc.desktop
