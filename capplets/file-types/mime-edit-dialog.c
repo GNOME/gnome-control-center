@@ -671,7 +671,7 @@ store_data (MimeEditDialog *dialog)
 	}
 	g_free (tmp);
 
-	model_entry_append_to_dirty_list (MODEL_ENTRY (dialog->p->info));
+	model_entry_save (MODEL_ENTRY (dialog->p->info));
 
 	if (!cat_changed) {
 		mime_types_model_construct_iter (MIME_TYPES_MODEL (dialog->p->model),

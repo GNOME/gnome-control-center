@@ -1,3 +1,21 @@
+2002-04-23  Jody Goldberg <jody@gnome.org>
+
+	* model-entry.c (model_entry_save) : wrap in vfs freeze/unfreeze.
+	(model_entry_append_to_dirty_list) : delete.
+	(model_entry_remove_from_dirty_list) : delete.
+	(model_entry_commit_dirty_list) : delete.
+	(model_entry_append_to_delete_list) : delete.
+	(model_entry_commit_delete_list) : delete.
+
+	* mime-category-edit-dialog.c (store_data) : make this instant apply.
+	* mime-edit-dialog.c (store_data) : ditto.
+	* service-edit-dialog.c (store_data) : ditto.
+
+	* file-types-capplet.c (cb_file_type_dialog_response) : add help and
+	  change the buttons to help & close to be HIG compliant.
+	(remove_cb) : make removal apply instantly.
+	* file-types-properties.glade : Make the buttons Help & Close
+
 2002-04-22  Jody Goldberg <jody@gnome.org>
 
 	* mime-edit-dialog.c (validate_data) : tidy up.

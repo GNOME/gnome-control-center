@@ -400,7 +400,7 @@ store_data (MimeCategoryEditDialog *dialog)
 	dialog->p->info->use_parent_category =
 		gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (WID ("use_category_toggle")));
 
-	model_entry_append_to_dirty_list (MODEL_ENTRY (dialog->p->info));
+	model_entry_save (MODEL_ENTRY (dialog->p->info));
 
 	mime_category_info_update (dialog->p->info);
 }

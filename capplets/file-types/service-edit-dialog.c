@@ -472,7 +472,7 @@ store_data (ServiceEditDialog *dialog)
 			= gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (WID ("needs_terminal_toggle")));
 	}
 
-	model_entry_append_to_dirty_list (MODEL_ENTRY (dialog->p->info));
+	model_entry_save (MODEL_ENTRY (dialog->p->info));
 
 	if (dialog->p->is_add) {
 		model_entry_insert_child (get_services_category_entry (dialog->p->model),

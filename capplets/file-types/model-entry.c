@@ -31,11 +31,6 @@
 #include "service-info.h"
 #include "mime-types-model.h"
 
-/* List of MimeTypeInfo structures that have data to be committed */
-
-static GList *dirty_list = NULL;
-static GList *delete_list = NULL;
-
 ModelEntry *
 get_model_entries (GtkTreeModel *model)
 {
@@ -164,6 +159,7 @@ model_entry_remove_child (ModelEntry *entry, ModelEntry *child, GtkTreeModel *mo
 void
 model_entry_save (ModelEntry *entry) 
 {
+	gnome_vfs_mime_freeze ();
 	switch (entry->type) {
 	case MODEL_ENTRY_MIME_TYPE:
 		mime_type_info_save (MIME_TYPE_INFO (entry));
@@ -180,6 +176,7 @@ model_entry_save (ModelEntry *entry)
 	default:
 		break;
 	}
+	gnome_vfs_mime_thaw ();
 }
 
 void
@@ -200,44 +197,3 @@ model_entry_delete (ModelEntry *entry)
 		break;
 	}
 }
-
-void
-model_entry_append_to_dirty_list (ModelEntry *entry)
-{
-	if (g_list_find (dirty_list, entry) == NULL)
-		dirty_list = g_list_prepend (dirty_list, entry);
-}
-
-void
-model_entry_remove_from_dirty_list (ModelEntry *entry)
-{
-	dirty_list = g_list_remove (dirty_list, entry);
-}
-
-void
-model_entry_commit_dirty_list (void)
-{
-	gnome_vfs_mime_freeze ();
-	g_list_foreach (dirty_list, (GFunc) model_entry_save, NULL);
-	gnome_vfs_mime_thaw ();
-
-	g_list_free (dirty_list);
-	dirty_list = NULL;
-}
-
-void
-model_entry_append_to_delete_list (ModelEntry *entry)
-{
-	model_entry_remove_from_dirty_list (entry);
-	delete_list = g_list_prepend (delete_list, entry);
-}
-
-void
-model_entry_commit_delete_list (void)
-{
-	g_list_foreach (delete_list, (GFunc) model_entry_delete, NULL);
-
-	g_list_free (delete_list);
-	delete_list = NULL;
-}
-

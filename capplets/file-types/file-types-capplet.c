@@ -171,7 +171,7 @@ remove_cb (GtkButton *button, GladeXML *dialog)
 	entry = MODEL_ENTRY_FROM_ITER (&iter);
 
 	model_entry_remove_child (entry->parent, entry, model);
-	model_entry_append_to_delete_list (entry);
+	model_entry_delete (entry);
 
 	selection_changed_cb (selection, dialog);
 }
@@ -179,9 +179,19 @@ remove_cb (GtkButton *button, GladeXML *dialog)
 static void
 cb_file_type_dialog_response (GtkDialog *dialog, gint response_id)
 {
-	if (response_id == GTK_RESPONSE_APPLY)
-		model_entry_commit_dirty_list ();
-	else
+	if (response_id == GTK_RESPONSE_HELP) {
+		GError *error = NULL;
+
+		/* TODO : get this written */
+		gnome_help_display_desktop (NULL,
+			"config-file-type",
+			"config-file-type.xml",
+			"CONFIGURATION", &error);
+		if (error) {
+			g_warning ("help error: %s\n", error->message);
+			g_error_free (error);
+		}
+	} else
 		gtk_main_quit ();
 }
 

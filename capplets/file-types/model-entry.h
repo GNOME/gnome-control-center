@@ -66,13 +66,6 @@ void        model_entry_remove_child  (ModelEntry *entry,
 void        model_entry_save          (ModelEntry *entry);
 void        model_entry_delete        (ModelEntry *entry);
 
-void        model_entry_append_to_dirty_list   (ModelEntry *entry);
-void        model_entry_remove_from_dirty_list (ModelEntry *entry);
-void        model_entry_commit_dirty_list      (void);
-
-void        model_entry_append_to_delete_list  (ModelEntry *entry);
-void        model_entry_commit_delete_list     (void);
-
 G_END_DECLS
 
 #endif /* __MODEL_ENTRY_H */
