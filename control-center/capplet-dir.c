@@ -205,7 +205,7 @@ capplet_dir_new (CappletDir *dir, gchar *dir_path)
 
 	entry->dir = dir;
 
-	g_hash_table_insert (capplet_hash, dir_path, entry);
+	g_hash_table_insert (capplet_hash, g_strdup (dir_path), entry);
 
 	capplet_dir_load (CAPPLET_DIR (entry));
 
