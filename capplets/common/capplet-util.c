@@ -188,27 +188,42 @@ get_control_cb (BonoboPropertyControl *property_control, gint page_number)
 	return BONOBO_OBJECT (control);
 }
 
-/* quit_cb
+/* real_quit_cb
  *
  * Release all objects and close down
  */
 
-static void
-quit_cb (BonoboPropertyControl *pc, Bonobo_ConfigDatabase db) 
+static gint 
+real_quit_cb (BonoboPropertyControl *pc) 
 {
+#if 0
 	CORBA_Environment ev;
 	Bonobo_EventSource_ListenerId id;
+	Bonobo_ConfigDatabase db;
 
+/* Next bit won't work because object has been destroyed */
 	DEBUG_MSG ("Enter");
 	CORBA_exception_init (&ev);
 	id = (Bonobo_EventSource_ListenerId)
 		gtk_object_get_data (GTK_OBJECT (pc), "listener-id");
+	db = (Bonobo_ConfigDatabase)
+		gtk_object_get_data (GTK_OBJECT (pc), "db");
+
 	bonobo_event_source_client_remove_listener (db, id, &ev);
 	bonobo_object_release_unref (db, &ev);
 	CORBA_exception_free (&ev);
 	DEBUG_MSG ("Exit");
-
+#endif
 	gtk_main_quit ();
+
+	return FALSE;
+}
+
+static void
+quit_cb (BonoboPropertyControl *pc, Bonobo_ConfigDatabase db)
+{
+	gtk_object_set_data (GTK_OBJECT (pc), "db", db);
+	gtk_idle_add ((GtkFunction)real_quit_cb, pc);
 }
 
 /* create_control_cb
