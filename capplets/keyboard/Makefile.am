@@ -28,15 +28,14 @@ defaults_DATA = keyboard-properties.xml
 oafdir = $(datadir)/oaf
 oaf_DATA = Bonobo_Control_Capplet_keyboard_properties.oaf
 
-###$(oaffile): %.oaf: %.oaf.in
-###	sed -e "s#REPLACEME_PLIZ#$(bindir)/$(bin_PROGRAMS)#" < $< > ${oaffile}
+$(oaffile): %.oaf: %.oaf.in
+	sed -e "s#REPLACEME_PLIZ#$(bindir)/$(bin_PROGRAMS)#" < $< > ${oaffile}
 
 ##
 ## You should not need to modify anything below this line
 ##
 @XML_I18N_MERGE_DESKTOP_RULE@
 @GNOMECC_CAPPLETS_DESKTOP_IN_RULE@
-@GNOMECC_CAPPLETS_OAF_FILE_IN_RULE@
 
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
