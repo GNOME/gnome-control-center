@@ -24,7 +24,7 @@ vfsdirectorydir = $(datadir)/gnome/vfolders
 vfsdirectory_DATA = font-method.directory
 
 mimeinfodir = $(datadir)/mime-info
-mimeinfo_DATA = fontilus.keys
+mimeinfo_DATA = fontilus.keys fontilus.mime
 
 appregdir = $(datadir)/application-registry
 appreg_DATA = fontilus.applications
@@ -33,4 +33,5 @@ EXTRA_DIST = \
   font-method.conf \
   font-method.directory \
   fontilus.keys \
+  fontilus.mime \
   fontilus.applications
