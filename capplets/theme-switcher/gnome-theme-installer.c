@@ -239,7 +239,6 @@ gnome_theme_installer_run (GtkWidget *parent, gchar *filename, gboolean icon_the
 
 	running_theme_install = TRUE;
 
-	g_print ("blah2\n");
 	dialog = glade_xml_new (GLADEDIR "/theme-install.glade", NULL, NULL);
 	widget = WID ("install_dialog");
 
