@@ -229,13 +229,6 @@ threshold_from_gconf (GConfPropertyEditor *peditor,
 }
 
 static GConfValue *
-threshold_to_gconf (GConfPropertyEditor *peditor, 
-		    const GConfValue *value)
-{
-	return gconf_value_float_to_int (value);
-}
-
-static GConfValue *
 drag_threshold_from_gconf (GConfPropertyEditor *peditor, 
 			   const GConfValue *value)
 {
@@ -246,13 +239,6 @@ drag_threshold_from_gconf (GConfPropertyEditor *peditor,
 	gconf_value_set_float (new_value, CLAMP (gconf_value_get_int (value), 1, 10));
 
 	return new_value;
-}
-
-static GConfValue *
-drag_threshold_to_gconf (GConfPropertyEditor *peditor, 
-		    const GConfValue *value)
-{
-	return gconf_value_float_to_int (value);
 }
 
 /* Retrieve legacy settings */
@@ -686,14 +672,14 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 	gconf_peditor_new_numeric_range
 		(changeset, "/desktop/gnome/peripherals/mouse/motion_threshold", WID ("sensitivity_scale"),
 		 "conv-to-widget-cb", threshold_from_gconf,
-		 "conv-from-widget-cb", threshold_to_gconf,
+		 "conv-from-widget-cb", gconf_value_float_to_int,
 		 NULL);
 
 	/* DnD threshold */
 	gconf_peditor_new_numeric_range
 		(changeset, "/desktop/gnome/peripherals/mouse/drag_threshold", WID ("drag_threshold_scale"),
 		 "conv-to-widget-cb", drag_threshold_from_gconf,
-		 "conv-from-widget-cb", drag_threshold_to_gconf,
+		 "conv-from-widget-cb", gconf_value_float_to_int,
 		 NULL);
 
 	/* listen to cursors changing */
