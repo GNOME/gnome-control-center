@@ -297,9 +297,8 @@ void gnome_wp_xml_load_list (GnomeWPCapplet * capplet) {
   g_strfreev (xdgdirs);
   g_free (xdgdirslist);
 
-  wpdbfile = g_build_filename (DATADIR, "gnome-wallpaper-properties", NULL);
-  if (g_file_test (wpdbfile, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR)) {
-    gnome_vfs_directory_list_load (&list, wpdbfile,
+  if (g_file_test (WALLPAPER_DATADIR, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR)) {
+    gnome_vfs_directory_list_load (&list, WALLPAPER_DATADIR,
 				   GNOME_VFS_FILE_INFO_DEFAULT |
 				   GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
 
@@ -309,18 +308,17 @@ void gnome_wp_xml_load_list (GnomeWPCapplet * capplet) {
       if (strcmp (".", info->name) != 0 && strcmp ("..", info->name) != 0) {
 	gchar * filename;
 
-	filename = g_build_filename (wpdbfile, info->name, NULL);
+	filename = g_build_filename (WALLPAPER_DATADIR, info->name, NULL);
 	gnome_wp_xml_load_xml (capplet, filename);
 	g_free (filename);
       }
     }
     g_list_free (list);
 
-    gnome_vfs_monitor_add (&handle, wpdbfile, GNOME_VFS_MONITOR_DIRECTORY,
+    gnome_vfs_monitor_add (&handle, WALLPAPER_DATADIR, GNOME_VFS_MONITOR_DIRECTORY,
 			   (GnomeVFSMonitorCallback) gnome_wp_file_changed,
 			   capplet);
   }
-  g_free (wpdbfile);
 
   gnome_wp_load_legacy (capplet);
 }

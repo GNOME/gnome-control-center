@@ -19,6 +19,7 @@
  */
 
 #include "gnome-wp-utils.h"
+#include <string.h>
 
 GdkPixbuf * gnome_wp_pixbuf_new_gradient (GtkOrientation orientation,
 					  GdkColor * c1,
@@ -106,7 +107,6 @@ GdkPixbuf * gnome_wp_pixbuf_new_solid (GdkColor * color,
 GdkPixbuf * gnome_wp_pixbuf_tile (GdkPixbuf * src_pixbuf,
 				  GdkPixbuf * dest_pixbuf) {
   gdouble cx, cy;
-  gdouble colorv;
   gint dwidth, dheight;
   gint swidth, sheight;
   guint alpha = 255;
@@ -136,7 +136,6 @@ GdkPixbuf * gnome_wp_pixbuf_tile (GdkPixbuf * src_pixbuf,
 GdkPixbuf * gnome_wp_pixbuf_center (GdkPixbuf * src_pixbuf,
 				    GdkPixbuf * dest_pixbuf) {
   gdouble cx, cy;
-  gdouble colorv;
   gint dwidth, dheight;
   gint swidth, sheight;
   guint alpha = 255;

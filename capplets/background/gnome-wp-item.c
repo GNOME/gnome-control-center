@@ -20,6 +20,7 @@
 
 #include "gnome-wp-item.h"
 #include "gnome-wp-utils.h"
+#include <string.h>
 
 void gnome_wp_item_free (GnomeWPItem * item) {
   if (item == NULL) {

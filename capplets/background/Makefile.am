@@ -1,14 +1,13 @@
-INCLUDES   = \
-  $(CAPPLET_CFLAGS) \
-  -DDATADIR=\""$(datadir)"\" \
-  -DGNOMELOCALEDIR=\""$(localedir)"\"
+WALLPAPER_DATADIR = $(datadir)/gnome-wallpaper-properties
+
+INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS) -DWALLPAPER_DATADIR=\""$(WALLPAPER_DATADIR)"\"
 
 bin_PROGRAMS = gnome-wallpaper-properties
 
 noinst_LTLIBRARIES = libgnomewp.la
 
 gnome_wallpaper_properties_LDADD = \
-	$(CAPPLET_LIBS) \
+	$(GNOMECC_CAPPLETS_LIBS) \
 	libgnomewp.la
 
 gnome_wallpaper_properties_SOURCES = \
@@ -21,7 +20,7 @@ libgnomewp_la_SOURCES = \
 	gnome-wp-xml.c gnome-wp-xml.h
 
 libgnomewp_la_LIBADD = \
-	$(CAPPLET_LIBS)
+	$(GNOMECC_CAPPLETS_LIBS)
 
 desktopdir = $(GNOMECC_DESKTOP_DIR)
 desktop_in_files = background.desktop.in
@@ -30,7 +29,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
 install-data-local:
-	$(mkinstalldirs) $(datadir)/gnome-wallpaper-properties
+	$(mkinstalldirs) $(WALLPAPER_DATADIR)
 
 EXTRA_DIST = \
 	$(desktop_in_files)

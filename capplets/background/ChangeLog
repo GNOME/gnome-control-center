@@ -1,3 +1,10 @@
+2004-01-12  Jody Goldberg <jody@gnome.org>
+
+	* Makefile.am : As long as we're hard coding the path hard code it in
+	  only one place.  Passing in datadir then adding the magic subdir in
+	  C then building in Makefile seems unnecessary.
+	  Use GNOMECC_CAPPLETS_*
+
 2004-01-12  Rodney Dawes  <dobey@ximian.com>
 
 	* Makefile.am: Add install hook to create data directory
