@@ -1,4 +1,29 @@
+2001-05-04  Bradford Hovinen  <hovinen@ximian.com>
+
+	* cluster-location.c (cluster_location_do_rollback): Implement
+
+	* location.c (location_do_rollback): Rename from do_rollback; make
+	into virtual method
+	(location_rollback_backend_to): 
+	(location_rollback_backend_by): 
+	(location_rollback_id): Update to call virtual method
+
+	* Makefile.am (libximian_archiver_la_SOURCES): 
+	(include_HEADERS): Add cluster.[ch], cluster-location.[ch]
+
 2001-05-03  Bradford Hovinen  <hovinen@ximian.com>
+
+	* cluster.[ch]: New class
+
+	* cluster.c (cluster_new): 
+	(cluster_load): Implement
+
+	* archive.c (archive_set_arg): Add argument ARG_IS_GLOBAL
+	(archive_class_init): Make ARG_PREFIX construct-only
+	(archive_construct): Implement
+	(do_load): Remove
+	(archive_load): Use archive_construct; pass is_global as an
+	argument to the object constructor
 
 	* location.c (location_store_xml): Support STORE_DEFAULT
 	(store_snapshot_cb): Use STORE_DEFAULT rather than STORE_MASK_PREVIOUS

@@ -52,6 +52,10 @@ struct _Location
 struct _LocationClass 
 {
 	GtkObjectClass parent;
+
+	gboolean (*do_rollback) (Location *location,
+				 gchar *backend_id,
+				 xmlDocPtr xml_doc);
 };
 
 enum _ContainmentType

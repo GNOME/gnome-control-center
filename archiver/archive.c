@@ -55,7 +55,8 @@ static Archive *global_archive;
 
 enum {
 	ARG_0,
-	ARG_PREFIX
+	ARG_PREFIX,
+	ARG_IS_GLOBAL
 };
 
 static void archive_init          (Archive *archive);
@@ -71,7 +72,6 @@ static void archive_get_arg       (GtkObject *object,
 				   GtkArg *arg,
 				   guint arg_id);
 
-static gboolean do_load           (Archive *archive);
 static void load_all_locations    (Archive *archive);
 
 guint
@@ -119,8 +119,12 @@ archive_class_init (ArchiveClass *klass)
 
 	gtk_object_add_arg_type ("Archive::prefix",
 				 GTK_TYPE_POINTER,
-				 GTK_ARG_READWRITE,
+				 GTK_ARG_READWRITE | GTK_ARG_CONSTRUCT_ONLY,
 				 ARG_PREFIX);
+	gtk_object_add_arg_type ("Archive::is-global",
+				 GTK_TYPE_INT,
+				 GTK_ARG_READWRITE | GTK_ARG_CONSTRUCT_ONLY,
+				 ARG_IS_GLOBAL);
 
 	parent_class = gtk_type_class (gtk_object_get_type ());
 }
@@ -141,6 +145,13 @@ archive_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		if (GTK_VALUE_POINTER (*arg) != NULL)
 			archive->prefix = g_strdup (GTK_VALUE_POINTER (*arg));
 		break;
+
+	case ARG_IS_GLOBAL:
+		archive->is_global = GTK_VALUE_INT (*arg);
+		archive->backend_list = 
+			BACKEND_LIST (backend_list_new (archive->is_global));
+		break;
+
 	default:
 		break;
 	}
@@ -161,10 +172,48 @@ archive_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	case ARG_PREFIX:
 		GTK_VALUE_POINTER (*arg) = archive->prefix;
 		break;
+
+	case ARG_IS_GLOBAL:
+		GTK_VALUE_INT (*arg) = archive->is_global;
+		break;
+
 	default:
 		arg->type = GTK_TYPE_INVALID;
 		break;
 	}
+}
+
+/**
+ * archive_construct:
+ * @archive:
+ * @is_new: TRUE iff this is a new archive
+ *
+ * Load the archive information from disk
+ *
+ * Returns: TRUE on success and FALSE on failure
+ */
+
+gboolean
+archive_construct (Archive *archive, gboolean is_new)
+{
+	gint ret = 0;
+
+	g_return_val_if_fail (archive != NULL, FALSE);
+	g_return_val_if_fail (IS_ARCHIVE (archive), FALSE);
+	g_return_val_if_fail (archive->prefix != NULL, FALSE);
+
+	if (is_new) {
+		if (g_file_exists (archive->prefix))
+			return FALSE;
+
+		ret = mkdir (archive->prefix, S_IREAD | S_IWRITE | S_IEXEC);
+		if (ret == -1) return FALSE;
+	} else {
+		if (!g_file_test (archive->prefix, G_FILE_TEST_ISDIR))
+			return FALSE;
+	}
+
+	return TRUE;
 }
 
 /**
@@ -195,19 +244,18 @@ archive_load (gboolean is_global)
 
 	object = gtk_object_new (archive_get_type (),
 				 "prefix", prefix,
+				 "is-global", is_global,
 				 NULL);
 
 	if (!is_global)
 		g_free (prefix);
 
-	if (do_load (ARCHIVE (object)) == FALSE) {
+	if (archive_construct (ARCHIVE (object), FALSE) == FALSE &&
+	    archive_construct (ARCHIVE (object), TRUE) == FALSE)
+	{
 		gtk_object_destroy (object);
 		return NULL;
 	}
-
-	ARCHIVE (object)->is_global = is_global;
-	ARCHIVE (object)->backend_list = 
-		BACKEND_LIST (backend_list_new (is_global));
 
 	if (is_global)
 		global_archive = ARCHIVE (object);
@@ -593,27 +641,6 @@ archive_foreach_child_location (Archive *archive, LocationCB callback,
 			 (GTraverseFunc) foreach_cb,
 			 G_IN_ORDER,
 			 &f_data);
-}
-
-/* Load the archive information from disk; return TRUE on success and FALSE on 
- * failure
- */
-
-static gboolean
-do_load (Archive *archive)
-{
-	gint ret = 0;
-
-	g_return_val_if_fail (archive != NULL, FALSE);
-	g_return_val_if_fail (IS_ARCHIVE (archive), FALSE);
-	g_return_val_if_fail (archive->prefix != NULL, FALSE);
-
-	if (g_file_test (archive->prefix, G_FILE_TEST_ISDIR) == FALSE)
-		ret = mkdir (archive->prefix, S_IREAD | S_IWRITE | S_IEXEC);
-
-	if (ret == -1) return FALSE;
-
-	return TRUE;
 }
 
 /* Load and register all the locations for this archive */

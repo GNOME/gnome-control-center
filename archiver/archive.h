@@ -56,6 +56,9 @@ struct _ArchiveClass
 
 guint        archive_get_type                (void);
 
+gboolean     archive_construct               (Archive *archive,
+					      gboolean is_new);
+
 GtkObject   *archive_load                    (gboolean is_global);
 
 void         archive_close                   (Archive *archive);

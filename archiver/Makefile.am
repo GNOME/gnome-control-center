@@ -25,14 +25,22 @@ bin_PROGRAMS = ximian-archiver
 lib_LTLIBRARIES = libximian_archiver.la
 
 libximian_archiver_la_SOURCES = \
-	archive.c	archive.h			\
-	location.c	location.h			\
-	config-log.c	config-log.h			\
-	backend-list.c	backend-list.h			\
-	util.c		util.h
+	archive.c		archive.h		\
+	location.c		location.h		\
+	config-log.c		config-log.h		\
+	backend-list.c		backend-list.h		\
+	cluster.c       	cluster.h		\
+	cluster-location.c	cluster-location.h	\
+	util.c			util.h
 
 include_HEADERS = \
-	archive.h location.h config-log.h backend-list.h util.h
+	archive.h 		\
+	location.h		\
+	config-log.h		\
+	backend-list.h		\
+	cluster.h		\
+	cluster-location.h	\
+	util.h
 
 ximian_archiver_SOURCES = \
 	main.c

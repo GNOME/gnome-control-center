@@ -73,56 +73,60 @@ struct _LocationPrivate
 	ConfigLog       *config_log;
 };
 
-static void location_init          (Location *location);
-static void location_class_init    (LocationClass *klass);
+static void location_init            (Location *location);
+static void location_class_init      (LocationClass *klass);
 
-static void location_set_arg       (GtkObject *object,
-				    GtkArg *arg,
-				    guint arg_id);
+static void location_set_arg         (GtkObject *object,
+				      GtkArg *arg,
+				      guint arg_id);
 
-static void location_get_arg       (GtkObject *object,
-				    GtkArg *arg,
-				    guint arg_id);
+static void location_get_arg         (GtkObject *object,
+				      GtkArg *arg,
+				      guint arg_id);
 
-static void location_destroy       (GtkObject *object);
-static void location_finalize      (GtkObject *object);
+static void location_destroy         (GtkObject *object);
+static void location_finalize        (GtkObject *object);
 
-static gint store_snapshot_cb      (Location *location,
-				    gchar *backend_id);
+static gboolean location_do_rollback (Location *location,
+				      gchar *backend_id, 
+				      xmlDocPtr xml_doc);
 
-static gint get_backends_cb        (BackendList *backend_list,
-				    gchar *backend_id,
-				    Location *location);
+static gint store_snapshot_cb        (Location *location,
+				      gchar *backend_id);
 
-static gboolean do_create          (Location *location);
-static gboolean do_load            (Location *location);
-static gboolean load_metadata_file (Location *location, 
-				    char *filename, 
-				    gboolean is_default);
-static void save_metadata          (Location *location);
-static void write_metadata_file    (Location *location, 
-				    gchar *filename);
+static gint get_backends_cb          (BackendList *backend_list,
+				      gchar *backend_id,
+				      Location *location);
 
-static gboolean do_rollback        (gchar *backend_id, 
-				    xmlDocPtr xml_doc);
-static xmlDocPtr load_xml_data     (gchar *fullpath, gint id);
-static gint run_backend_proc       (gchar *backend_id,
-				    gboolean do_get);
+static gboolean do_create            (Location *location);
+static gboolean do_load              (Location *location);
+static gboolean load_metadata_file   (Location *location, 
+				      char *filename, 
+				      gboolean is_default);
+static void save_metadata            (Location *location);
+static void write_metadata_file      (Location *location, 
+				      gchar *filename);
+
+static xmlDocPtr load_xml_data       (gchar *fullpath, gint id);
+static gint run_backend_proc         (gchar *backend_id,
+				      gboolean do_get);
 
 static BackendNote *backend_note_new (gchar *backend_id, 
 				      ContainmentType type);
 static void backend_note_destroy     (BackendNote *note);
 static const BackendNote *find_note  (Location *location, gchar *backend_id);
 
-static void merge_xml_docs         (xmlDocPtr child_doc,
-				    xmlDocPtr parent_doc);
-static void subtract_xml_doc       (xmlDocPtr child_doc,
-				    xmlDocPtr parent_doc,
-				    gboolean strict);
-static void merge_xml_nodes        (xmlNodePtr node1, xmlNodePtr node2);
-static xmlNodePtr subtract_xml_node (xmlNodePtr node1, xmlNodePtr node2,
-				     gboolean strict);
-static gboolean compare_xml_nodes  (xmlNodePtr node1, xmlNodePtr node2);
+static void merge_xml_docs           (xmlDocPtr child_doc,
+				      xmlDocPtr parent_doc);
+static void subtract_xml_doc         (xmlDocPtr child_doc,
+				      xmlDocPtr parent_doc,
+				      gboolean strict);
+static void merge_xml_nodes          (xmlNodePtr node1,
+				      xmlNodePtr node2);
+static xmlNodePtr subtract_xml_node  (xmlNodePtr node1,
+				      xmlNodePtr node2,
+				      gboolean strict);
+static gboolean compare_xml_nodes    (xmlNodePtr node1, xmlNodePtr node2);
 
 guint
 location_get_type (void) 
@@ -184,6 +188,8 @@ location_class_init (LocationClass *klass)
 				 GTK_TYPE_POINTER,
 				 GTK_ARG_READWRITE,
 				 ARG_INHERITS);
+
+	klass->do_rollback = location_do_rollback;
 
 	parent_class = gtk_type_class (gtk_object_get_type ());
 }
@@ -376,6 +382,38 @@ location_finalize (GtkObject *object)
 	location->p = (LocationPrivate *) 0xdeadbeef;
 
 	GTK_OBJECT_CLASS (parent_class)->finalize (object);
+}
+
+/* Perform rollback for a given backend and id number. Return TRUE on
+ * success and FALSE otherwise.
+ *
+ * FIXME: Better error reporting
+ */
+
+static gboolean
+location_do_rollback (Location *location, gchar *backend_id, xmlDocPtr doc) 
+{
+	int fd;
+	FILE *output;
+
+	g_return_val_if_fail (location != NULL, FALSE);
+	g_return_val_if_fail (IS_LOCATION (location), FALSE);
+	g_return_val_if_fail (backend_id != NULL, FALSE);
+	g_return_val_if_fail (doc != NULL, FALSE);
+
+	/* FIXME: Some mechanism for retrieving the factory defaults settings
+	 * would be useful here
+	 */
+	if (doc == NULL) return FALSE;
+
+	fd = run_backend_proc (backend_id, FALSE);
+	if (fd == -1) return FALSE;
+
+	output = fdopen (fd, "w");
+	xmlDocDump (output, doc);
+	fclose (output);
+
+	return TRUE;
 }
 
 /**
@@ -592,7 +630,8 @@ location_rollback_backend_to (Location *location, struct tm *date,
 
 	doc = location_load_rollback_data (location, date, 0,
 					   backend_id, parent_chain);
-	do_rollback (backend_id, doc);
+	LOCATION_CLASS (GTK_OBJECT (location)->klass)->do_rollback
+		(location, backend_id, doc);
 	xmlFreeDoc (doc);
 }
 
@@ -678,7 +717,8 @@ location_rollback_backend_by (Location *location, guint steps,
 
 	doc = location_load_rollback_data (location, NULL, steps,
 					   backend_id, parent_chain);
-	do_rollback (backend_id, doc);
+	LOCATION_CLASS (GTK_OBJECT (location)->klass)->do_rollback
+		(location, backend_id, doc);
 	xmlFreeDoc (doc);
 }
 
@@ -716,7 +756,8 @@ location_rollback_id (Location *location, gint id)
 	}
 
 	if (backend_id)
-		do_rollback (backend_id, xml_doc);
+		LOCATION_CLASS (GTK_OBJECT (location)->klass)->do_rollback
+			(location, backend_id, xml_doc);
 }
 
 /**
@@ -1390,33 +1431,6 @@ write_metadata_file (Location *location, gchar *filename)
 	/* FIXME: Report errors here */
 	xmlSaveFile (filename, doc);
 	xmlFreeDoc (doc);
-}
-
-/* Perform rollback for a given backend and id number. Return TRUE on
- * success and FALSE otherwise.
- *
- * FIXME: Better error reporting
- */
-
-static gboolean
-do_rollback (gchar *backend_id, xmlDocPtr doc) 
-{
-	int fd;
-	FILE *output;
-
-	/* FIXME: Some mechanism for retrieving the factory defaults settings
-	 * would be useful here
-	 */
-	if (doc == NULL) return FALSE;
-
-	fd = run_backend_proc (backend_id, FALSE);
-	if (fd == -1) return FALSE;
-
-	output = fdopen (fd, "w");
-	xmlDocDump (output, doc);
-	fclose (output);
-
-	return TRUE;
 }
 
 static xmlDocPtr
