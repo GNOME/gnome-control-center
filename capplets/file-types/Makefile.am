@@ -1,6 +1,6 @@
-INCLUDES = -I. \
-	-I$(top_srcdir) \
-	-I$(srcdir) 				\
+INCLUDES = -I. 						\
+	-I$(top_srcdir) 				\
+	-I$(srcdir) 					\
 	-I$(top_srcdir)/intl -I$(top_builddir)/intl	\
 	-I$(top_srcdir)/libgnomevfs			\
 	$(CAPPLET_INCLUDEDIR)				\
@@ -11,9 +11,9 @@ INCLUDES = -I. \
 	-I$(includedir)					\
 	$(VFS_CFLAGS) $(WERROR)
 
-bin_PROGRAMS = nautilus-mime-type-capplet
+bin_PROGRAMS = file-types-capplet
 
-nautilus_mime_type_capplet_SOURCES =		\
+file_types_capplet_SOURCES =			\
 	nautilus-mime-type-capplet.h 		\
 	nautilus-mime-type-capplet-dialogs.h 	\
 	nautilus-mime-type-icon-entry.h		\
@@ -21,7 +21,7 @@ nautilus_mime_type_capplet_SOURCES =		\
 	nautilus-mime-type-capplet-dialogs.c 	\
 	nautilus-mime-type-icon-entry.c
 
-nautilus_mime_type_capplet_LDADD =					\
+file_types_capplet_LDADD =						\
 			$(CAPPLET_LIBDIR) 				\
 			$(CAPPLET_LIBS) 				\
 			$(ORBIT_LIBS) 					\
@@ -32,10 +32,10 @@ nautilus_mime_type_capplet_LDADD =					\
 
 
 sysdir = $(datadir)/control-center
-sys_DATA = nautilus-mime-type.desktop 
+sys_DATA = files-types-capplet.desktop 
 
 settingsdir = $(datadir)/gnome/apps/Settings
-settings_DATA = nautilus-mime-type.desktop
+settings_DATA = files-types-capplet.desktop
 
 EXTRA_DIST = \
 	$(sys_DATA)
