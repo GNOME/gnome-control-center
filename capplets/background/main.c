@@ -215,7 +215,7 @@ main (int argc, char **argv)
 	prefs = PREFERENCES (preferences_new ());
 	preferences_load (prefs);
 
-	if (token) {
+	if (token || res == 1) {
 		preferences_apply_now (prefs);
 	}
 
