@@ -181,7 +181,7 @@ setup_peditors (GConfClient *client,
 	
 	gconf_peditor_new_boolean (changeset, "/desktop/gnome/applications/editor/needs_term", 
 				   WID ("text_custom_terminal_toggle"), NULL);
-	gconf_peditor_new_boolean (changeset, "/desktop/gnome/applications/accepts_lineo",
+	gconf_peditor_new_boolean (changeset, "/desktop/gnome/applications/editor/accepts_lineno",
 				   WID ("text_custom_line_toggle"), NULL);
 	gconf_peditor_new_string  (changeset, "/desktop/gnome/applications/editor/exec",
 				   WID ("text_custom_command_entry"), NULL);
@@ -195,7 +195,7 @@ setup_peditors (GConfClient *client,
 
 	gconf_peditor_new_boolean (changeset, "/desktop/gnome/applications/help_viewer/needs_term", 
 				   WID ("help_custom_terminal_toggle"), NULL);
-	gconf_peditor_new_boolean (changeset, "/desktop/gnome/applications/help_viewer/accepts_lineno", 
+	gconf_peditor_new_boolean (changeset, "/desktop/gnome/applications/help_viewer/accepts_urls",
 				   WID ("help_custom_url_toggle"), NULL);
 	gconf_peditor_new_string  (changeset, "/desktop/gnome/applications/help_viewer/exec",
 				   WID ("help_custom_command_entry"), NULL);
@@ -280,7 +280,7 @@ read_help_viewer (GConfClient *client,
 	GError *error = NULL;
 	gchar *help_viewer;
 	gboolean needs_term;
-	gboolean accepts_lineno;
+	gboolean accepts_urls;
 	gint i;
 
 	needs_term = gconf_client_get_bool (client, "/desktop/gnome/applications/help_viewer/needs_term", &error);
@@ -288,7 +288,7 @@ read_help_viewer (GConfClient *client,
 		/* hp will shoot me -- I'll do this later. */
 		return;
 	}
-	accepts_lineno = gconf_client_get_bool (client, "/desktop/gnome/applications/help_viewer/accepts_lineno", &error);
+	accepts_urls = gconf_client_get_bool (client, "/desktop/gnome/applications/help_viewer/accepts_urls", &error);
 	if (error) {
 		return;
 	}
@@ -298,7 +298,7 @@ read_help_viewer (GConfClient *client,
 	}
 
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("help_custom_terminal_toggle")), needs_term);
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("help_custom_url_toggle")), accepts_lineno);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("help_custom_url_toggle")), accepts_urls);
 	gtk_entry_set_text (GTK_ENTRY (WID ("help_custom_command_entry")), help_viewer);
 
 	for (i = 0; i < G_N_ELEMENTS (possible_help_viewers); i++ ) {
@@ -307,7 +307,7 @@ read_help_viewer (GConfClient *client,
 		
 		if (help_viewer && strcmp (help_viewer, possible_help_viewers[i].executable_name) == 0 &&
 		    needs_term == possible_help_viewers[i].needs_term &&
-		    accepts_lineno == possible_help_viewers[i].accepts_urls) {
+		    accepts_urls == possible_help_viewers[i].accepts_urls) {
 			gtk_entry_set_text (GTK_ENTRY (WID ("help_select_combo_entry")),
 					    _(possible_help_viewers[i].name));
 			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("help_custom_radio")), TRUE);
