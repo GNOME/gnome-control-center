@@ -231,22 +231,25 @@ real_sync (BonoboConfigDatabase *db,
 
 static void
 notify_listeners (BonoboConfigArchiver *archiver_db, 
-		  const char        *key, 
-		  const CORBA_any   *value)
+		  const char           *key, 
+		  const CORBA_any      *value)
 {
 	CORBA_Environment ev;
 	char *dir_name;
 	char *leaf_name;
 	char *ename;
 
+	if (GTK_OBJECT_DESTROYED (archiver_db))
+		return;
+
 	if (!key)
 		return;
 
-	CORBA_exception_init(&ev);
+	CORBA_exception_init (&ev);
 
 	ename = g_strconcat ("Bonobo/Property:change:", key, NULL);
 
-	bonobo_event_source_notify_listeners(archiver_db->es, ename, value, &ev);
+	bonobo_event_source_notify_listeners (archiver_db->es, ename, value, &ev);
 
 	g_free (ename);
 	
