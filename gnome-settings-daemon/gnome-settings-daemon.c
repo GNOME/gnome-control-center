@@ -30,6 +30,7 @@
 #include <gconf/gconf.h>
 #include <libgnome/gnome-init.h>
 #include <libgnomeui/gnome-ui-init.h>
+#include <libgnomeui/gnome-client.h>
 #include <config.h>
 #include "xsettings-manager.h"
 #include "gnome-settings-daemon.h"
@@ -134,6 +135,7 @@ main (int argc, char **argv)
 {
   gboolean terminated = FALSE;
   GConfClient *client;
+  GnomeClient *session;
   GSList *list;
   gnome_program_init ("control-center", VERSION, LIBGNOMEUI_MODULE,
 		      argc, argv, NULL);
@@ -154,6 +156,10 @@ main (int argc, char **argv)
 	  exit (1);
 	}
     }
+  session = gnome_master_client ();
+  gnome_client_set_restart_style (session, GNOME_RESTART_IMMEDIATELY);
+  gnome_client_set_priority      (session, 5);
+
 
   gconf_init (argc, argv, NULL); /* exits w/ message on failure */  
 
