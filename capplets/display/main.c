@@ -473,7 +473,7 @@ create_dialog (struct DisplayInfo *info)
       strcmp (hostname, "localhost.localdomain") != 0)
     {
       
-      str = g_strdup_printf (_("Make default for this _computer (%s) only"), hostname);
+      str = g_strdup_printf (_("_Make default for this computer (%s) only"), hostname);
       per_computer_check = gtk_check_button_new_with_mnemonic (str);
 
       /* If we previously set the resolution specifically for this hostname, default
