@@ -532,9 +532,6 @@ location_new (Archive *archive, const gchar *locid, const gchar *label, Location
 				 "inherits", inherits,
 				 NULL);
 
-	if (inherits != NULL)
-		bonobo_object_unref (BONOBO_OBJECT (inherits));
-
 	if (!do_create (LOCATION (object))) {
 		bonobo_object_unref (BONOBO_OBJECT (object));
 		return NULL;
