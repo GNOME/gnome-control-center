@@ -59,7 +59,7 @@ typedef enum {
 	RESPONSE_USE_GNOME
 } SysConfigChangedMsgResponse;
 
-#define noGSDKX
+#define GSDKX
 
 #ifdef GSDKX
 static FILE *logfile;
@@ -114,13 +114,16 @@ activation_error (void)
 }
 
 static void
-apply_settings (void)
+apply_settings (GConfEntry *entry)
 {
 	GConfClient *confClient;
 
 	if (!initedOk)
 		return;
 
+	if (entry != NULL)
+		XklDebug (150, "Modified configuration in gconf: [%s]\n",
+			gconf_entry_get_key (entry));
 	confClient = gconf_client_get_default ();
 	GSwitchItConfigInit (&gswic, confClient);
 	g_object_unref (confClient);
@@ -132,15 +135,20 @@ apply_settings (void)
 }
 
 static void
-apply_xkb_settings (void)
+apply_xkb_settings (GConfEntry *entry)
 {
 	GConfClient *confClient;
+	GSwitchItKbdConfig gswikcs;
 
 	if (!initedOk)
 		return;
 
+	if (entry != NULL)
+		XklDebug (150, "Modified KBD configuration in gconf: [%s]\n",
+			gconf_entry_get_key (entry));
 	confClient = gconf_client_get_default ();
 	GSwitchItKbdConfigInit (&gswikc, confClient);
+	GSwitchItKbdConfigInit (&gswikcs, confClient);
 	g_object_unref (confClient);
 
 	GSwitchItKbdConfigLoad (&gswikc);
@@ -151,17 +159,24 @@ apply_xkb_settings (void)
 		gswikc.overrideSettings = FALSE;
 		GSwitchItKbdConfigSave (&gswikc);
 	} else {
-		if (GSwitchItKbdConfigActivate (&gswikc)) {
-			if (paCallback != NULL) {
-				(*paCallback) (paCallbackUserData);
+		GSwitchItKbdConfigLoadCurrent (&gswikcs);
+		/* Activate - only if different! */
+		if (!GSwitchItKbdConfigEquals (&gswikc, &gswikcs))
+		{
+			if (GSwitchItKbdConfigActivate (&gswikc)) {
+				if (paCallback != NULL) {
+					(*paCallback) (paCallbackUserData);
+				}
+			} else {
+				g_warning
+				    ("Could not activate the XKB configuration");
+				activation_error ();
 			}
-		} else {
-			g_warning
-			    ("Could not activate the XKB configuration");
-			activation_error ();
-		}
+		} else
+			XklDebug (100, "Actual KBD configuration was not changed: redundant notification\n");
 	}
 
+	GSwitchItKbdConfigTerm (&gswikcs);
 	GSwitchItKbdConfigTerm (&gswikc);
 }
 
@@ -328,6 +343,6 @@ gnome_settings_keyboard_xkb_init (GConfClient * client)
 void
 gnome_settings_keyboard_xkb_load (GConfClient * client)
 {
-	apply_settings ();
-	apply_xkb_settings ();
+	apply_settings (NULL);
+	apply_xkb_settings (NULL);
 }
