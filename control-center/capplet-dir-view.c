@@ -26,6 +26,8 @@
 #endif
 
 #include <gdk-pixbuf/gdk-pixbuf.h>
+#include <libgnome/gnome-defs.h>
+#include <libgnomeui/gnome-window-icon.h>
 #include <glade/glade.h>
 
 #include "capplet-dir-view.h"
@@ -337,6 +339,9 @@ capplet_dir_view_new (void)
 	window_list = g_list_append (window_list, view);
 
 	view->app = GNOME_APP (glade_xml_get_widget (xml, "main_window"));
+
+	gnome_window_icon_set_from_file (GTK_WINDOW (view->app), 
+					 PIXMAPS_DIR "/control-center.png");
 
 	gtk_signal_connect (GTK_OBJECT (view->app), "destroy",
 			    GTK_SIGNAL_FUNC (destroy), view);
