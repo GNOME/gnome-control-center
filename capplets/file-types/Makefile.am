@@ -1,4 +1,4 @@
-INCLUDES = -I. -I$(srcdir) 				\
+INCLUDES = -I. -I$(srcdir) -I$(top_srcdir)		\
 	-I$(top_srcdir)/intl -I$(top_builddir)/intl	\
 	-I$(top_srcdir)/libgnomevfs			\
 	$(CAPPLET_INCLUDEDIR)				\
