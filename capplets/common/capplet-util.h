@@ -27,8 +27,6 @@
 #include <gnome.h>
 #include <bonobo.h>
 
-#include <glade/glade.h>
-
 /* FIXME: We should really have a single bonobo-conf.h header */
 
 #include <bonobo-conf/bonobo-config-database.h>
@@ -67,8 +65,11 @@
 /* Callback to apply the settings in the given database */
 typedef void (*ApplySettingsFn) (Bonobo_ConfigDatabase db);
 
+/* Callback to set up the dialog proper */
+typedef GtkWidget *(*CreateDialogFn) (void);
+
 /* Callback to set up property editors for the dialog */
-typedef void (*SetupPropertyEditorsFn) (GladeXML *dialog, Bonobo_PropertyBag bag);
+typedef void (*SetupPropertyEditorsFn) (GtkWidget *dialog, Bonobo_PropertyBag bag);
 
 /* Callback to retrieve legacy settings and store them in the new configuration
  * database */
@@ -82,9 +83,6 @@ typedef void (*GetLegacySettingsFn) (Bonobo_ConfigDatabase db);
  * particular convention. In particular, suppose the name of the capplet binary
  * is foo-properties-capplet. Then:
  *
- *   - The glade file is named foo-properties.glade. It is located in
- *     $(datadir)/control-center/interfaces. The widget containing the property
- *     information is called prefs_widget.
  *   - The factory IID is Bonobo_Control_Capplet_foo_properties_Factory
  *   - The default configuration moniker is archiver:foo-properties
  *
@@ -96,6 +94,7 @@ typedef void (*GetLegacySettingsFn) (Bonobo_ConfigDatabase db);
 void capplet_init (int                      argc,
 		   gchar                  **argv,
 		   ApplySettingsFn          apply_fn,
+		   CreateDialogFn           create_dialog_fn,
 		   SetupPropertyEditorsFn   setup_property_editors_fn,
 		   GetLegacySettingsFn      get_legacy_settings_fn);
 

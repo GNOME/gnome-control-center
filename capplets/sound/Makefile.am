@@ -20,12 +20,13 @@ oaf_DATA = \
 
 EXTRA_DIST = ChangeLog $(Applications_in_files) $(Glade_DATA) $(oaf_DATA) $(defaults_DATA)
 
-INCLUDES = \
-        -DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\
-	-DG_LOG_DOMAIN=\"sound-properties\"		\
-	-I$(top_srcdir)/				\
-	-I$(top_srcdir)/intl				\
-	-I$(top_srcdir)/capplets/common			\
+INCLUDES =								\
+        -DGNOMELOCALEDIR=\""$(datadir)/locale"\"			\
+	-DG_LOG_DOMAIN=\"sound-properties\"				\
+	-DGLADE_DATADIR=\""$(datadir)/control-center/interfaces"\"	\
+	-I$(top_srcdir)/						\
+	-I$(top_srcdir)/intl						\
+	-I$(top_srcdir)/capplets/common					\
 	@CAPPLET_CFLAGS@
 
 bin_PROGRAMS = sound-properties-capplet

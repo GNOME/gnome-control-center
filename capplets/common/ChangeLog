@@ -1,3 +1,14 @@
+2001-07-17  Bradford Hovinen  <hovinen@ximian.com>
+
+	* Makefile.am (INCLUDES): Removed -DGLADE_DATADIR
+
+	* capplet-util.c (create_dialog_cb): Use create_widget_cb rather
+	than loading from Glade
+	(capplet_init): Accept CreateDialogFn and initialize
+	create_dialog_cb
+	(close_cb): Don't call gtk_object_destroy (dialog)
+	(get_control_cb): Rename from create_dialog_cb
+
 2001-07-14  Carlos Perelló Marín <carlos@gnome-db.org>
 
 	* .cvsignore: ssshhhh

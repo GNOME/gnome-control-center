@@ -27,14 +27,12 @@
 
 #include "capplet-util.h"
 
+static CreateDialogFn          create_dialog_cb = NULL;
 static ApplySettingsFn         apply_settings_cb = NULL;
 static SetupPropertyEditorsFn  setup_cb = NULL;
 
 static BonoboControl          *control = NULL;
-static GladeXML               *dialog;
 static GtkWidget              *widget;
-
-static gchar                  *glade_filename;
 
 /* apply_cb
  *
@@ -102,7 +100,6 @@ set_moniker_cb (BonoboPropertyBag *bag, BonoboArg *arg, guint arg_id,
 	gchar *full_moniker;
 	BonoboPropertyFrame *pf;
 	Bonobo_PropertyBag proxy;
-	GladeXML *dialog;
 	Bonobo_ConfigDatabase db;
 
 	if (arg_id != 1) return;
@@ -113,7 +110,6 @@ set_moniker_cb (BonoboPropertyBag *bag, BonoboArg *arg, guint arg_id,
 	pf = BONOBO_PROPERTY_FRAME (bonobo_control_get_widget (control));
 	bonobo_property_frame_set_moniker (pf, full_moniker);
 	proxy = BONOBO_OBJREF (pf->proxy);
-	dialog = gtk_object_get_data (GTK_OBJECT (control), "dialog");
 
 	db = bonobo_get_object (moniker, "IDL:Bonobo/ConfigDatabase:1.0", ev);
 
@@ -123,7 +119,7 @@ set_moniker_cb (BonoboPropertyBag *bag, BonoboArg *arg, guint arg_id,
 	gtk_object_set_data (GTK_OBJECT (pf), "config-database", db);
 
 	if (setup_cb != NULL)
-		setup_cb (dialog, proxy);
+		setup_cb (bonobo_control_get_widget (control), proxy);
 }
 
 /* close_cb
@@ -136,11 +132,10 @@ set_moniker_cb (BonoboPropertyBag *bag, BonoboArg *arg, guint arg_id,
 static void
 close_cb (void)
 {
-	gtk_object_destroy (GTK_OBJECT (dialog));
 	control = NULL;
 }
 
-/* create_dialog_cb
+/* get_control_cb
  *
  * Callback to construct the main dialog box for this capplet; invoked by Bonobo
  * whenever capplet activation is requested. Returns a BonoboObject representing
@@ -148,25 +143,16 @@ close_cb (void)
  */
 
 static BonoboObject *
-create_dialog_cb (BonoboPropertyControl *property_control, gint page_number) 
+get_control_cb (BonoboPropertyControl *property_control, gint page_number) 
 {
 	BonoboPropertyBag    *pb;
 	GtkWidget            *pf;
 
 	if (control == NULL) {
-		dialog = glade_xml_new (glade_filename, "prefs_widget");
+		widget = create_dialog_cb ();
 
-		if (dialog == NULL) {
-			g_critical ("Could not load glade file %s", glade_filename);
+		if (widget == NULL)
 			return NULL;
-		}
-
-		widget = glade_xml_get_widget (dialog, "prefs_widget");
-
-		if (widget == NULL) {
-			g_critical ("Could not find preferences widget");
-			return NULL;
-		}
 
 		pf = bonobo_property_frame_new (NULL, NULL);
 		gtk_object_set_data (GTK_OBJECT (property_control),
@@ -175,7 +161,6 @@ create_dialog_cb (BonoboPropertyControl *property_control, gint page_number)
 		gtk_widget_show_all (pf);
 
 		control = bonobo_control_new (pf);
-		gtk_object_set_data (GTK_OBJECT (control), "dialog", dialog);
 
 		pb = bonobo_property_bag_new ((BonoboPropertyGetFn) get_moniker_cb, 
 					      (BonoboPropertySetFn) set_moniker_cb,
@@ -214,7 +199,7 @@ create_control_cb (BonoboGenericFactory *factory, Bonobo_ConfigDatabase db)
 	CORBA_exception_init (&ev);
 
 	property_control = bonobo_property_control_new
-		((BonoboPropertyControlGetControlFn) create_dialog_cb, 1, NULL);
+		((BonoboPropertyControlGetControlFn) get_control_cb, 1, NULL);
 	gtk_signal_connect (GTK_OBJECT (property_control), "action",
 			    GTK_SIGNAL_FUNC (apply_cb), NULL);
 
@@ -246,23 +231,6 @@ get_factory_name (const gchar *binary)
 	return res;
 }
 
-/* get_glade_filename
- *
- * Construct the filename of the Glade file from the binary name
- */
-
-static gchar *get_glade_filename (const gchar *binary) 
-{
-	gchar *tmp, *tmp1, *res;
-
-	tmp = g_strdup (binary);
-	if ((tmp1 = strstr (tmp, "-capplet")) != NULL) *tmp1 = '\0';
-
-	res = g_strconcat (GLADE_DATADIR, "/", tmp, ".glade", NULL);
-	g_free (tmp);
-	return res;
-}
-
 /* get_default_moniker
  *
  * Construct the default moniker for configuration from the binary name
@@ -288,6 +256,7 @@ void
 capplet_init (int                      argc,
 	      char                   **argv,
 	      ApplySettingsFn          apply_fn,
+	      CreateDialogFn           create_dialog_fn,
 	      SetupPropertyEditorsFn   setup_fn,
 	      GetLegacySettingsFn      get_legacy_fn) 
 {
@@ -313,7 +282,6 @@ capplet_init (int                      argc,
 
 	CORBA_exception_init (&ev);
 
-	glade_gnome_init ();
 	gnomelib_register_popt_table (cap_options, _("Capplet options"));
 	gnome_init_with_popt_table (argv[0], VERSION, argc, argv,
 				    oaf_popt_options, 0, NULL);
@@ -338,10 +306,10 @@ capplet_init (int                      argc,
 		get_legacy_fn (db);
 		Bonobo_ConfigDatabase_sync (db, &ev);
 	} else {
+		create_dialog_cb = create_dialog_fn;
 		apply_settings_cb = apply_fn;
 		setup_cb = setup_fn;
 		factory_iid = get_factory_name (argv[0]);
-		glade_filename = get_glade_filename (argv[0]);
 		factory = bonobo_generic_factory_new
 			(factory_iid, (BonoboGenericFactoryFn) create_control_cb, db);
 		g_free (factory_iid);

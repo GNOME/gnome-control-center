@@ -27,6 +27,8 @@
 
 #include "capplet-util.h"
 
+#include <glade/glade.h>
+
 /* Needed only for the sound capplet */
 
 #include <stdlib.h>
@@ -97,14 +99,40 @@ start_esd (void)
 #endif
 }
 
+/* create_dialog
+ *
+ * Create the dialog box and return it as a GtkWidget
+ */
+
+static GtkWidget *
+create_dialog (void) 
+{
+	GladeXML *data;
+	GtkWidget *widget;
+
+	data = glade_xml_new (GLADE_DATADIR "/sound-properties.glade", "prefs_widget");
+	widget = glade_xml_get_widget (data, "prefs_widget");
+	gtk_object_set_data (GTK_OBJECT (widget), "glade-data", data);
+
+	gtk_signal_connect_object (GTK_OBJECT (widget), "destroy",
+				   GTK_SIGNAL_FUNC (gtk_object_destroy),
+				   GTK_OBJECT (data));
+
+	return widget;
+}
+
 /* setup_dialog
  *
  * Set up the property editors for our dialog
  */
 
 static void
-setup_dialog (GladeXML *dialog, Bonobo_PropertyBag bag) 
+setup_dialog (GtkWidget *widget, Bonobo_PropertyBag bag) 
 {
+	GladeXML *dialog;
+
+	dialog = gtk_object_get_data (GTK_OBJECT (widget), "glade-data");
+
 	CREATE_PEDITOR (boolean, "enable_esd", "enable_toggle");
 	CREATE_PEDITOR (boolean, "event_sounds", "events_toggle");
 
@@ -132,7 +160,8 @@ get_legacy_settings (Bonobo_ConfigDatabase db)
 int
 main (int argc, char **argv) 
 {
-	capplet_init (argc, argv, apply_settings, setup_dialog, get_legacy_settings);
+	glade_gnome_init ();
+	capplet_init (argc, argv, apply_settings, create_dialog, setup_dialog, get_legacy_settings);
 
 	return 0;
 }

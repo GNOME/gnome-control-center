@@ -1,7 +1,14 @@
 2001-07-17  Bradford Hovinen  <hovinen@ximian.com>
 
+	* sound-properties-capplet.c (create_dialog): Implement
+	(main): Call glade_gnome_init; pass create_dialog to capplet_init
+	(setup_dialog): Retrieve the Glade data from the widget passed to
+	this function
+	(create_dialog): Make sure dialog is destroyed when widget is
+
 	* Makefile.am (EXTRA_DIST): Changed Applications_DATA to
 	Applications_in_files
+	(INCLUDES): Add -DGLADE_DATADIR
 
 	* sound-properties-capplet.c (setup_dialog): Sensitize events
 	check box only if ESD is already enabled
