@@ -41,7 +41,7 @@ file_types_capplet_LDADD =						\
 			$(NULL)
 
 
-sysdir = $(datadir)/control-center
+sysdir = $(datadir)/control-center/Documents
 sys_in_files = file-types-capplet.desktop.in 
 sys_DATA = $(sys_in_files:.desktop.in=.desktop)
 
