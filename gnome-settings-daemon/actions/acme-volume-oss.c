@@ -28,6 +28,8 @@
 #include <sys/ioctl.h>
 
 #ifdef __NetBSD__
+#include <sys/param.h>
+#include <sys/sysctl.h>
 #include <soundcard.h>
 #else
 #include <sys/soundcard.h>

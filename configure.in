@@ -314,6 +314,8 @@ dnl ==============================================
 have_oss=no
 AC_TRY_COMPILE([
 	#ifdef __NetBSD__
+	#include <sys/param.h>
+	#include <sys/sysctl.h>
 	#include <soundcard.h>
 	#else
 	#include <sys/soundcard.h>
