@@ -204,7 +204,9 @@ bg_preferences_finalize (GObject *object)
 
 	g_free (prefs->wallpaper_filename);
 	g_free (prefs->wallpaper_sel_path);
-
+	g_free (prefs->color1);
+	g_free (prefs->color2);
+	
 	parent_class->finalize (object);
 }
 
@@ -213,7 +215,7 @@ bg_preferences_load (BGPreferences *prefs)
 {
 	GConfClient *client;
 	GError      *error = NULL;
-
+	char *tmp;
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_BG_PREFERENCES (prefs));
 
@@ -222,9 +224,15 @@ bg_preferences_load (BGPreferences *prefs)
 	prefs->enabled = gconf_client_get_bool (client, BG_PREFERENCES_DRAW_BACKGROUND, &error);
 	prefs->wallpaper_filename = gconf_client_get_string (client, BG_PREFERENCES_PICTURE_FILENAME, &error);
 
-	prefs->color1 = read_color_from_string (gconf_client_get_string (client, BG_PREFERENCES_PRIMARY_COLOR, &error));
-	prefs->color2 = read_color_from_string (gconf_client_get_string (client, BG_PREFERENCES_SECONDARY_COLOR, &error));
-
+	tmp = gconf_client_get_string (client, BG_PREFERENCES_PRIMARY_COLOR, &error);
+	g_free (prefs->color1);
+	prefs->color1 = read_color_from_string (tmp);
+	g_free (tmp);
+	tmp = gconf_client_get_string (client, BG_PREFERENCES_SECONDARY_COLOR, &error);
+	g_free (prefs->color2);
+	prefs->color2 = read_color_from_string (tmp);
+	g_free (tmp);
+	
 	prefs->opacity = gconf_client_get_int (client, BG_PREFERENCES_PICTURE_OPACITY, &error);
 	if (prefs->opacity >= 100 || prefs->opacity < 0)
 		prefs->adjust_opacity = FALSE;
