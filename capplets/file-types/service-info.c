@@ -37,8 +37,6 @@
 
 static GHashTable *service_apps = NULL;
 
-static ModelEntry  *get_services_category_entry (void);
-
 const gchar *url_descriptions[][2] = {
 	{ "unknown", N_("Unknown service types") },
 	{ "http",    N_("World wide web") },
@@ -62,7 +60,6 @@ static gchar       *get_string                  (ServiceInfo       *info,
 						 const gchar       *end);
 static gboolean     get_bool                    (const ServiceInfo *info,
 						 gchar             *end);
-static ModelEntry  *get_services_category_entry (void);
 static const gchar *get_protocol_name           (const gchar       *key);
 
 
@@ -73,6 +70,7 @@ load_all_services (void)
 	GSList       *url_list;
 	GSList       *tmp;
 	const gchar  *protocol_name;
+	ServiceInfo  *info;
 
 	tmp = url_list = gconf_client_all_dirs
 		(gconf_client_get_default (), "/desktop/gnome/url-handlers", NULL);
@@ -83,7 +81,8 @@ load_all_services (void)
 		if (protocol_name == NULL)
 			continue;
 
-		service_info_new (protocol_name);
+		info = service_info_new (protocol_name);
+		model_entry_insert_child (get_services_category_entry (), MODEL_ENTRY (info));
 
 		g_free (tmp->data);
 	}
@@ -103,7 +102,6 @@ service_info_new (const gchar *protocol)
 
 	info->entry.type = MODEL_ENTRY_SERVICE;
 	info->entry.parent = MODEL_ENTRY (get_services_category_entry ());
-	model_entry_insert_child (get_services_category_entry (), MODEL_ENTRY (info));
 
 	return info;
 }
@@ -167,6 +165,32 @@ service_info_save (const ServiceInfo *info)
 }
 
 void
+service_info_delete (const ServiceInfo *info)
+{
+	gchar *tmp;
+
+	tmp = get_key_name (info, "type");
+	gconf_client_unset (gconf_client_get_default (), tmp, NULL);
+	g_free (tmp);
+
+	tmp = get_key_name (info, "description");
+	gconf_client_unset (gconf_client_get_default (), tmp, NULL);
+	g_free (tmp);
+
+	tmp = get_key_name (info, "command");
+	gconf_client_unset (gconf_client_get_default (), tmp, NULL);
+	g_free (tmp);
+
+	tmp = get_key_name (info, "command-id");
+	gconf_client_unset (gconf_client_get_default (), tmp, NULL);
+	g_free (tmp);
+
+	tmp = get_key_name (info, "need-terminal");
+	gconf_client_unset (gconf_client_get_default (), tmp, NULL);
+	g_free (tmp);
+}
+
+void
 service_info_free (ServiceInfo *info)
 {
 	g_free (info->protocol);
@@ -183,6 +207,21 @@ get_apps_for_service_type (gchar *protocol)
 		fill_service_apps ();
 
 	return g_hash_table_lookup (service_apps, protocol);
+}
+
+ModelEntry *
+get_services_category_entry (void) 
+{
+	static ModelEntry *entry = NULL;
+
+	if (entry == NULL) {
+		entry = g_new0 (ModelEntry, 1);
+		entry->type = MODEL_ENTRY_SERVICES_CATEGORY;
+
+		model_entry_insert_child (get_model_entries (), entry);
+	}
+
+	return entry;
 }
 
 
@@ -272,21 +311,6 @@ get_bool (const ServiceInfo *info, gchar *end)
 	g_free (key);
 
 	return ret;
-}
-
-static ModelEntry *
-get_services_category_entry (void) 
-{
-	static ModelEntry *entry = NULL;
-
-	if (entry == NULL) {
-		entry = g_new0 (ModelEntry, 1);
-		entry->type = MODEL_ENTRY_SERVICES_CATEGORY;
-
-		model_entry_insert_child (get_model_entries (), entry);
-	}
-
-	return entry;
 }
 
 static const gchar *

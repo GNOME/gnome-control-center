@@ -764,6 +764,9 @@ response_cb (MimeEditDialog *dialog, gint response_id)
 			g_object_unref (G_OBJECT (dialog));
 		}
 	} else {
+		if (dialog->p->is_add)
+			mime_type_info_free (dialog->p->info);
+
 		g_object_unref (G_OBJECT (dialog));
 	}
 }

@@ -33,6 +33,7 @@
 /* List of MimeTypeInfo structures that have data to be committed */
 
 static GList *dirty_list = NULL;
+static GList *delete_list = NULL;
 
 ModelEntry *
 get_model_entries (void)
@@ -151,6 +152,25 @@ model_entry_save (ModelEntry *entry)
 }
 
 void
+model_entry_delete (ModelEntry *entry) 
+{
+	switch (entry->type) {
+	case MODEL_ENTRY_MIME_TYPE:
+		gnome_vfs_mime_registered_mime_type_delete (MIME_TYPE_INFO (entry)->mime_type);
+		mime_type_info_free (MIME_TYPE_INFO (entry));
+		break;
+
+	case MODEL_ENTRY_SERVICE:
+		service_info_delete (SERVICE_INFO (entry));
+		service_info_free (SERVICE_INFO (entry));
+		break;
+
+	default:
+		break;
+	}
+}
+
+void
 model_entry_append_to_dirty_list (ModelEntry *entry)
 {
 	if (g_list_find (dirty_list, entry) == NULL)
@@ -169,4 +189,24 @@ model_entry_commit_dirty_list (void)
 	gnome_vfs_mime_freeze ();
 	g_list_foreach (dirty_list, (GFunc) model_entry_save, NULL);
 	gnome_vfs_mime_thaw ();
+
+	g_list_free (dirty_list);
+	dirty_list = NULL;
 }
+
+void
+model_entry_append_to_delete_list (ModelEntry *entry)
+{
+	model_entry_remove_from_dirty_list (entry);
+	delete_list = g_list_prepend (delete_list, entry);
+}
+
+void
+model_entry_commit_delete_list (void)
+{
+	g_list_foreach (delete_list, (GFunc) model_entry_delete, NULL);
+
+	g_list_free (delete_list);
+	delete_list = NULL;
+}
+

@@ -44,8 +44,6 @@
 
 #define WID(x) (glade_xml_get_widget (dialog, x))
 
-static GList          *remove_list = NULL;
-
 static void
 add_mime_cb (GtkButton *button, GladeXML *dialog) 
 {
@@ -156,14 +154,11 @@ remove_cb (GtkButton *button, GladeXML *dialog)
 
 	entry = MODEL_ENTRY_FROM_ITER (&iter);
 
-	if (entry->type == MODEL_ENTRY_MIME_TYPE) {
-		path = gtk_tree_model_get_path (model, &iter);
-		model_entry_remove_child (entry->parent, entry);
-		remove_list = g_list_prepend (remove_list, MIME_TYPE_INFO (entry)->mime_type);
-		model_entry_remove_from_dirty_list (entry);
-		gtk_tree_model_row_deleted (model, path);
-		gtk_tree_path_free (path);
-	}
+	path = gtk_tree_model_get_path (model, &iter);
+	model_entry_remove_child (entry->parent, entry);
+	model_entry_append_to_delete_list (entry);
+	gtk_tree_model_row_deleted (model, path);
+	gtk_tree_path_free (path);
 
 	selection_changed_cb (selection, dialog);
 }
@@ -233,10 +228,7 @@ static void
 apply_cb (void) 
 {
 	model_entry_commit_dirty_list ();
-
-	g_list_foreach (remove_list, (GFunc) gnome_vfs_mime_registered_mime_type_delete, NULL);
-	g_list_foreach (remove_list, (GFunc) g_free, NULL);
-	g_list_free (remove_list);
+	model_entry_commit_delete_list ();
 }
 
 int

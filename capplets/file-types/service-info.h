@@ -55,9 +55,11 @@ ServiceInfo *service_info_new             (const gchar       *protocol);
 void         service_info_load_all        (ServiceInfo       *info);
 const gchar *service_info_get_description (ServiceInfo       *info);
 void         service_info_save            (const ServiceInfo *info);
+void         service_info_delete          (const ServiceInfo *info);
 void         service_info_free            (ServiceInfo       *info);
 
 const GList *get_apps_for_service_type    (gchar *protocol);
+ModelEntry  *get_services_category_entry  (void);
 
 G_END_DECLS
 

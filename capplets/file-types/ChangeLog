@@ -1,5 +1,26 @@
 2002-01-26  Bradford Hovinen  <hovinen@ximian.com>
 
+	* service-edit-dialog.c (response_cb): Free the structure if the
+	user clicks cancel and this is an add dialog
+
+	* mime-edit-dialog.c (response_cb): Free the structure if the user
+	clicks cancel and this is an add dialog
+
+	* service-info.c (load_all_services): Call
+	model_entry_insert_child here
+	(service_info_new): Don't call model_entry_insert_child
+	(get_services_category_entry): Make this public
+
+	* service-edit-dialog.c (store_data): Call
+	model_entry_insert_child here
+
+	* file-types-capplet.c (apply_cb): Call
+	model_entry_commit_delete_list
+
+	* model-entry.c (model_entry_remove): Implement
+	(model_entry_append_to_delete_list) 
+	(model_entry_commit_delete_list): Implement
+
 	* mime-type-info.c (intersect_lists, reduce_supported_app_list) 
 	(mime_category_info_find_apps): Implement
 	(find_possible_supported_apps): Implement

@@ -425,6 +425,7 @@ store_data (ServiceEditDialog *dialog)
 					 MODEL_ENTRY (dialog->p->info), &iter);
 
 	if (dialog->p->is_add) {
+		model_entry_insert_child (get_services_category_entry (), MODEL_ENTRY (dialog->p->info));
 		path = gtk_tree_model_get_path (dialog->p->model, &iter);
 		gtk_tree_model_row_inserted (dialog->p->model, path, &iter);
 		gtk_tree_path_free (path);
@@ -520,6 +521,9 @@ response_cb (ServiceEditDialog *dialog, gint response_id)
 			g_object_unref (G_OBJECT (dialog));
 		}
 	} else {
+		if (dialog->p->is_add)
+			service_info_free (dialog->p->info);
+
 		g_object_unref (G_OBJECT (dialog));
 	}
 }
