@@ -821,6 +821,9 @@ populate_viewer_menu (GtkWidget *component_menu, const char *mime_type)
 				/* No match found.  We need to insert a menu item
 				 * and add the application to the default list */
 
+				/* FIXME: this is obviously not finished */
+				copy_list = NULL;
+				
 				component_name = name_from_oaf_server_info (copy_list->data);
 				menu_item = gtk_menu_item_new_with_label (component_name);
 
