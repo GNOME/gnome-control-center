@@ -99,7 +99,11 @@ add_themes_from_dir (GList *current_list, const char *path)
         }
 
         theme_dir = opendir (path);
-
+        /* If this is NULL, then we couldn't open ~/.themes.  The test above
+         * only checks existence, not wether we can really read it.*/
+        if (theme_dir == NULL)
+                return current_list;
+        
         for (entry = readdir (theme_dir); entry != NULL; entry = readdir (theme_dir)) {
                 theme_file_path = g_build_filename (path, entry->d_name, "metacity-1/metacity-theme-1.xml", NULL);
 
