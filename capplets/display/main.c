@@ -364,7 +364,7 @@ create_screen_widgets (struct ScreenInfo *screen_info, int nr, gboolean no_heade
   gtk_table_set_row_spacings ( GTK_TABLE (table), 6);
   gtk_table_set_col_spacings ( GTK_TABLE (table), 12);
   
-  label = gtk_label_new (_("Resolution:"));
+  label = gtk_label_new_with_mnemonic (_("_Resolution:"));
   gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
   gtk_widget_show (label);
   gtk_table_attach (GTK_TABLE (table),
@@ -375,6 +375,7 @@ create_screen_widgets (struct ScreenInfo *screen_info, int nr, gboolean no_heade
 		    0, 0);
 
   option_menu = create_resolution_menu (screen_info);
+  gtk_label_set_mnemonic_widget (GTK_LABEL (label), option_menu);
   gtk_table_attach (GTK_TABLE (table),
 		    option_menu,
 		    1, 2,
@@ -382,7 +383,7 @@ create_screen_widgets (struct ScreenInfo *screen_info, int nr, gboolean no_heade
 		    GTK_FILL | GTK_EXPAND, 0,
 		    0, 0);
   
-  label = gtk_label_new (_("Refresh rate:"));
+  label = gtk_label_new_with_mnemonic (_("Re_fresh rate:"));
   gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
   gtk_widget_show (label);
   gtk_table_attach (GTK_TABLE (table),
@@ -394,6 +395,7 @@ create_screen_widgets (struct ScreenInfo *screen_info, int nr, gboolean no_heade
   gtk_widget_show (table);
   
   option_menu = create_rate_menu (screen_info);
+  gtk_label_set_mnemonic_widget (GTK_LABEL (label), option_menu);
   gtk_table_attach (GTK_TABLE (table),
 		    option_menu,
 		    1, 2,
@@ -438,13 +440,15 @@ create_dialog (struct DisplayInfo *info)
 					GTK_RESPONSE_HELP,
 					NULL);
 					
-  gtk_container_set_border_width (GTK_CONTAINER (dialog), 12);
-  gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog)->vbox), 12);
+  gtk_window_set_resizable(GTK_WINDOW (dialog), FALSE);
+  gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
+  gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog)->vbox), 6);
   capplet_set_icon (dialog, "display-capplet.png");
   
   for (i = 0; i < info->n_screens; i++)
     {
       screen_widget = create_screen_widgets (&info->screens[i], i, info->n_screens == 1);
+      gtk_container_set_border_width (GTK_CONTAINER (screen_widget), 5);
       gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox),
 			  screen_widget, FALSE, FALSE, 0);
       gtk_widget_show (screen_widget);
