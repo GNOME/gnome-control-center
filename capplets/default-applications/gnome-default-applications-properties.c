@@ -218,7 +218,8 @@ read_editor (GConfClient *client,
 				      gnome_vfs_mime_get_default_action_type ("text/plain") == GNOME_VFS_MIME_ACTION_TYPE_APPLICATION);
 
 	mime_app = gnome_vfs_mime_get_default_application ("text/plain");
-	if (!strcmp (mime_app->id, MIME_APPLICATION_ID))
+
+	if (mime_app == NULL || !strcmp (mime_app->id, MIME_APPLICATION_ID))
 		goto read_editor_custom;
 
 	for (li = text_editors; li; li = li->next) {
