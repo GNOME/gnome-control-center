@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-06 14:36+0100\n"
-"PO-Revision-Date: 2005-02-02 17:40+0800\n"
+"POT-Creation-Date: 2005-02-07 22:42+0100\n"
+"PO-Revision-Date: 2005-02-08 08:12+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
@@ -582,43 +582,43 @@ msgstr "样式(_S)："
 msgid "There was an error displaying help: %s"
 msgstr "显示帮助时出错：%s"
 
-#: capplets/background/gnome-wp-capplet.c:1064
-#: capplets/background/gnome-wp-capplet.c:1080
+#: capplets/background/gnome-wp-capplet.c:1061
+#: capplets/background/gnome-wp-capplet.c:1077
 msgid "Centered"
 msgstr "居中"
 
-#: capplets/background/gnome-wp-capplet.c:1088
-#: capplets/background/gnome-wp-capplet.c:1103
+#: capplets/background/gnome-wp-capplet.c:1085
+#: capplets/background/gnome-wp-capplet.c:1100
 msgid "Fill Screen"
 msgstr "填充屏幕"
 
-#: capplets/background/gnome-wp-capplet.c:1111
-#: capplets/background/gnome-wp-capplet.c:1126
+#: capplets/background/gnome-wp-capplet.c:1108
+#: capplets/background/gnome-wp-capplet.c:1123
 msgid "Scaled"
 msgstr "缩放"
 
-#: capplets/background/gnome-wp-capplet.c:1134
-#: capplets/background/gnome-wp-capplet.c:1149
+#: capplets/background/gnome-wp-capplet.c:1131
+#: capplets/background/gnome-wp-capplet.c:1146
 msgid "Tiled"
 msgstr "平铺"
 
-#: capplets/background/gnome-wp-capplet.c:1173
-#: capplets/background/gnome-wp-capplet.c:1182
+#: capplets/background/gnome-wp-capplet.c:1170
+#: capplets/background/gnome-wp-capplet.c:1179
 msgid "Solid Color"
 msgstr "纯色"
 
-#: capplets/background/gnome-wp-capplet.c:1190
-#: capplets/background/gnome-wp-capplet.c:1199
+#: capplets/background/gnome-wp-capplet.c:1187
+#: capplets/background/gnome-wp-capplet.c:1196
 msgid "Horizontal Gradient"
 msgstr "水平渐变"
 
-#: capplets/background/gnome-wp-capplet.c:1207
-#: capplets/background/gnome-wp-capplet.c:1216
+#: capplets/background/gnome-wp-capplet.c:1204
+#: capplets/background/gnome-wp-capplet.c:1213
 msgid "Vertical Gradient"
 msgstr "垂直渐变"
 
 #. Create the file chooser dialog stuff here
-#: capplets/background/gnome-wp-capplet.c:1263
+#: capplets/background/gnome-wp-capplet.c:1260
 msgid "Add Wallpaper"
 msgstr "添加壁纸"
 
@@ -2246,16 +2246,16 @@ msgid "This theme is not in a supported format."
 msgstr "主题的格式不被支持。"
 
 #: capplets/theme-switcher/gnome-theme-installer.c:229
-msgid "Failed to create temporal directory"
+msgid "Failed to create temporary directory"
 msgstr "创建临时目录失败"
 
 #: capplets/theme-switcher/gnome-theme-installer.c:246
 msgid ""
 "Can not install theme. \n"
-"There are not bzip2 utility in the system."
+"The bzip2 utility is not installed."
 msgstr ""
 "无法安装主题。\n"
-"系统中没有 bzip2 工具。"
+"系统中没有安装 bzip2 工具。"
 
 #: capplets/theme-switcher/gnome-theme-installer.c:260
 #: capplets/theme-switcher/gnome-theme-installer.c:289
@@ -2266,10 +2266,10 @@ msgstr "主题失败"
 #: capplets/theme-switcher/gnome-theme-installer.c:276
 msgid ""
 "Can not install themes. \n"
-"There are not gzip utility in the system."
+"The gzip utility is not installed."
 msgstr ""
 "无法安装主题。\n"
-"系统中没有 gzip 工具。"
+"系统中没有安装 gzip 工具。"
 
 #: capplets/theme-switcher/gnome-theme-installer.c:306
 #, c-format
@@ -2304,7 +2304,7 @@ msgstr ""
 "您可以在主题细节中选择该主题。"
 
 #: capplets/theme-switcher/gnome-theme-installer.c:323
-msgid "The theme is a engine. You need to compile the theme."
+msgid "The theme is an engine. You need to compile the theme."
 msgstr "主题是一个引擎。您需要编译主题。"
 
 #: capplets/theme-switcher/gnome-theme-installer.c:335
@@ -2952,6 +2952,30 @@ msgstr "无法确定用户的主目录"
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "GConf 键 %s 被设为 %s 类型，但是期望的类型是 %s\n"
+
+#: gnome-settings-daemon/modmap-dialog.glade.h:1
+msgid "A_vailable files:"
+msgstr "可用文件(_V)："
+
+#: gnome-settings-daemon/modmap-dialog.glade.h:2
+msgid "Do _not show this warning again."
+msgstr "不再显示此警告(_N)。"
+
+#: gnome-settings-daemon/modmap-dialog.glade.h:3
+msgid "Do you like to load the modmap file(s)?"
+msgstr "您是否想要装入 modmap 文件？"
+
+#: gnome-settings-daemon/modmap-dialog.glade.h:4
+msgid "Load modmap files"
+msgstr "装入 modmap 文件"
+
+#: gnome-settings-daemon/modmap-dialog.glade.h:5
+msgid "_Load"
+msgstr "装入(_L)"
+
+#: gnome-settings-daemon/modmap-dialog.glade.h:6
+msgid "_Loaded files:"
+msgstr "装入的文件(_L)："
 
 #: gnome-settings-daemon/reaper.c:103
 msgid "Error creating signal pipe."
