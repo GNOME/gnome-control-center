@@ -506,12 +506,9 @@ mime_types_model_iter_children (GtkTreeModel *tree_model, GtkTreeIter *iter, Gtk
 	if (parent != NULL)
 		entry = parent->user_data;
 	else
-		entry = NULL;
+		entry = get_model_entries (tree_model);
 
-	if (entry == NULL)
-		iter->user_data = get_model_entries (tree_model);
-	else
-		iter->user_data = entry->first_child;
+	iter->user_data = entry->first_child;
 
 	if (model->p->category_only)
 		while (iter->user_data != NULL && !IS_CATEGORY (MODEL_ENTRY (iter->user_data)))
