@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.6\n"
-"POT-Creation-Date: 1999-09-30 23:03+0200\n"
-"PO-Revision-Date: 1999-09-30 23:08+02:00\n"
+"POT-Creation-Date: 1999-10-15 20:38-0400\n"
+"PO-Revision-Date: 1999-11-06 12:34+01:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -117,7 +117,7 @@ msgstr "Side-ved-side"
 #: capplets/session-properties/session-properties.c:300
 #: capplets/sound-properties/sound-properties.c:690
 #: capplets/theme-switcher/gui.c:362
-#: capplets/ui-properties/ui-properties.c:513
+#: capplets/ui-properties/ui-properties.c:514
 #: capplets/wm-properties/wm-properties-capplet.c:639
 msgid ""
 "No help is available/installed for these settings. Please make sure you\n"
@@ -136,9 +136,10 @@ msgstr ""
 #: capplets/sound-properties/sound-properties.c:692
 #: capplets/sound-properties/sound-properties.c:753
 #: capplets/theme-switcher/gui.c:364
-#: capplets/ui-properties/ui-properties.c:515
+#: capplets/ui-properties/ui-properties.c:516
 #: capplets/wm-properties/wm-properties-capplet.c:641
-#: control-center/callbacks.c:74 control-center/capplet-widget.c:263
+#: capplets/wm-properties/wm-properties-capplet.c:693
+#: control-center/callbacks.c:75 control-center/capplet-widget.c:263
 msgid "Close"
 msgstr "Lukk"
 
@@ -423,19 +424,19 @@ msgstr ""
 
 #: capplets/mime-type/mime-type-capplet.c:79
 #: capplets/session-properties/session-properties.c:198
-#: capplets/wm-properties/wm-properties-capplet.c:1084
+#: capplets/wm-properties/wm-properties-capplet.c:1091
 msgid "Delete"
 msgstr "Slett"
 
 #: capplets/mime-type/mime-type-capplet.c:89
 #: capplets/session-properties/session-properties.c:188
-#: capplets/wm-properties/wm-properties-capplet.c:1074
+#: capplets/wm-properties/wm-properties-capplet.c:1081
 msgid "Add..."
 msgstr "Legg til..."
 
 #: capplets/mime-type/mime-type-capplet.c:93
 #: capplets/session-properties/session-properties.c:193
-#: capplets/wm-properties/wm-properties-capplet.c:1079
+#: capplets/wm-properties/wm-properties-capplet.c:1086
 msgid "Edit..."
 msgstr "Rediger..."
 
@@ -1302,11 +1303,11 @@ msgstr ""
 "fot menyen\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:496
-#: capplets/wm-properties/wm-properties-capplet.c:746
-#: capplets/wm-properties/wm-properties-capplet.c:854
+#: capplets/wm-properties/wm-properties-capplet.c:753
 #: capplets/wm-properties/wm-properties-capplet.c:861
-#: capplets/wm-properties/wm-properties-capplet.c:1007
-#: control-center/capplet-manager.c:180
+#: capplets/wm-properties/wm-properties-capplet.c:868
+#: capplets/wm-properties/wm-properties-capplet.c:1014
+#: control-center/capplet-manager.c:181
 msgid "OK"
 msgstr "OK"
 
@@ -1348,49 +1349,57 @@ msgstr ""
 "å velge \"Lagre aktiv sesjon\" under \"Innstillinger\" i hovedmenyen,\n"
 "eller ved å slå på \"Lagre oppsett\" når du logger ut.\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:745
+#: capplets/wm-properties/wm-properties-capplet.c:691
+msgid ""
+"The current Window manager is no longer available.\n"
+"Please choose one of the other installed window managers."
+msgstr ""
+"Den valgte vindushåndtereren er ikke tilgjengelig.\n"
+"Vennligst velg en av de andre installerte vindushåndtererene."
+
+#: capplets/wm-properties/wm-properties-capplet.c:752
 msgid "Add New Window Manager"
 msgstr "Legg til ny vindusbehandler"
 
-#: capplets/wm-properties/wm-properties-capplet.c:746
-#: control-center/capplet-manager.c:185
+#: capplets/wm-properties/wm-properties-capplet.c:753
+#: control-center/capplet-manager.c:186
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: capplets/wm-properties/wm-properties-capplet.c:757
+#: capplets/wm-properties/wm-properties-capplet.c:764
 msgid "Name:"
 msgstr "Navn:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:770
+#: capplets/wm-properties/wm-properties-capplet.c:777
 msgid "Command:"
 msgstr "Kommando:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:783
+#: capplets/wm-properties/wm-properties-capplet.c:790
 msgid "Configuration Command:"
 msgstr "Konfigurasjonskommando:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:802
+#: capplets/wm-properties/wm-properties-capplet.c:809
 msgid "Window manager is session managed"
 msgstr "Vindusbehandleren er sesjonsstyrt"
 
-#: capplets/wm-properties/wm-properties-capplet.c:852
+#: capplets/wm-properties/wm-properties-capplet.c:859
 msgid "Name cannot be empty"
 msgstr "Navnet kan ikke være tomt"
 
-#: capplets/wm-properties/wm-properties-capplet.c:859
+#: capplets/wm-properties/wm-properties-capplet.c:866
 msgid "Command cannot be empty"
 msgstr "Kommandofeltet kan ikke være tomt"
 
-#: capplets/wm-properties/wm-properties-capplet.c:908
-#: capplets/wm-properties/wm-properties-capplet.c:950
+#: capplets/wm-properties/wm-properties-capplet.c:915
+#: capplets/wm-properties/wm-properties-capplet.c:957
 msgid "Edit Window Manager"
 msgstr "Rediger vindusbehandler"
 
-#: capplets/wm-properties/wm-properties-capplet.c:1006
+#: capplets/wm-properties/wm-properties-capplet.c:1013
 msgid "You cannot delete the current Window Manager"
 msgstr "Du kan ikke slette aktiv vindusbehandler"
 
-#: capplets/wm-properties/wm-properties-capplet.c:1119
+#: capplets/wm-properties/wm-properties-capplet.c:1126
 msgid ""
 "an initialization error occurred while starting 'wm-properties-capplet'.\n"
 "aborting...\n"
@@ -1398,7 +1407,7 @@ msgstr ""
 "en initialiseringsfeil oppstod under start av 'wm-properties-capplet'.\n"
 "avbryter...\n"
 
-#: control-center/callbacks.c:72
+#: control-center/callbacks.c:73
 msgid ""
 "No help is available/installed. Please make sure you\n"
 "have the GNOME User's Guide installed on your system."
@@ -1406,23 +1415,23 @@ msgstr ""
 "Ingen hjelp tilgjengelig/installert. Vennligst forsikre\n"
 "deg om at du har GNOME brukerhåndboken installert."
 
-#: control-center/callbacks.c:94
+#: control-center/callbacks.c:95
 msgid "GNOME Control Center"
 msgstr "GNOME Kontrollsenter"
 
-#: control-center/callbacks.c:97
+#: control-center/callbacks.c:98
 msgid "Desktop Properties manager."
 msgstr "Egenskaper for skrivebord."
 
-#: control-center/capplet-manager.c:170
+#: control-center/capplet-manager.c:171
 msgid "Try"
 msgstr "Prøv"
 
-#: control-center/capplet-manager.c:175
+#: control-center/capplet-manager.c:176
 msgid "Revert"
 msgstr "Forkast"
 
-#: control-center/capplet-manager.c:188 control-center/main.c:31
+#: control-center/capplet-manager.c:189 control-center/main.c:31
 msgid "Help"
 msgstr "Hjelp"
 
