@@ -46,6 +46,7 @@
 
 #include "pref-file.h"
 #include "rc-parse.h"
+#include "daemon.h"
 
 #define START_BUF_SIZE 1024
 #define MIN_FREE_BUF 128
@@ -519,6 +520,8 @@ preferences_save_to_file (Preferences *prefs)
 			 * actually land on the disk right away. 
 			 */
 			sync ();
+
+			restart_xscreensaver ();
 
 			status = 0;    /* wrote and renamed successfully! */
 		}

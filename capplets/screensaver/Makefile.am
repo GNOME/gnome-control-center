@@ -10,17 +10,25 @@ pApplicationsdir = $(datadir)/gnome/apps/Settings/Desktop
 pApplications_DATA = \
 	screensaver-properties.desktop
 
+Gladedir = $(datadir)/control-center-data
+Glade_DATA = \
+	screensaver-properties.glade
+
+glade_msgs = \
+	screensaver-properties.glade.h
+
 SUBDIRS = screensavers
 
 EXTRA_DIST = ChangeLog $(Applications_DATA) $(pixmap_DATA) \
-	checked.xpm unchecked.xpm checked-disabled.xpm unchecked-disabled.xpm
+	$(Glade_DATA) $(glade_msgs)
 
 INCLUDES = \
         -DGNOMELOCALEDIR=\""$(datadir)/locale"\" \
 	-DGNOME_ICONDIR=\""${prefix}/share/pixmaps"\" \
 	-DSSPROP_DATADIR=\""${prefix}/share"\" \
 	-DG_LOG_DOMAIN=\"screensaver-properties\" \
-	@CAPPLET_CFLAGS@ \
+	-DGLADE_DATADIR=\""$(Gladedir)"\"	\
+	@SCREENSAVER_CAPPLET_CFLAGS@ \
 	-I$(top_srcdir)/ \
 	-I$(top_srcdir)/intl
 
@@ -40,4 +48,4 @@ screensaver_properties_capplet_SOURCES = \
 	XScreenSaver_ad.h \
 	main.c
 
-screensaver_properties_capplet_LDADD = @CAPPLET_LIBS@ -lXt
+screensaver_properties_capplet_LDADD = @SCREENSAVER_CAPPLET_LIBS@ -lXt

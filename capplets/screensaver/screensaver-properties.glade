@@ -1,0 +1,1021 @@
+<?xml version="1.0"?>
+<GTK-Interface>
+
+<project>
+  <name>New-screensaver-properties</name>
+  <program_name>new-screensaver-properties</program_name>
+  <directory></directory>
+  <source_directory>src</source_directory>
+  <pixmaps_directory></pixmaps_directory>
+  <language>C</language>
+  <gnome_support>True</gnome_support>
+  <gettext_support>True</gettext_support>
+  <output_translatable_strings>True</output_translatable_strings>
+  <translatable_strings_file>screensaver-properties.glade.h</translatable_strings_file>
+</project>
+
+<widget>
+  <class>GnomeDialog</class>
+  <name>About &lt;screensaver name&gt;</name>
+  <visible>False</visible>
+  <title>About &quot;&lt;Screensaver name&gt;&quot;</title>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <default_width>308</default_width>
+  <default_height>285</default_height>
+  <allow_shrink>True</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>False</auto_shrink>
+  <auto_close>True</auto_close>
+  <hide_on_close>True</hide_on_close>
+
+  <widget>
+    <class>GtkVBox</class>
+    <child_name>GnomeDialog:vbox</child_name>
+    <name>dialog-vbox3</name>
+    <homogeneous>False</homogeneous>
+    <spacing>8</spacing>
+    <child>
+      <padding>4</padding>
+      <expand>True</expand>
+      <fill>True</fill>
+    </child>
+
+    <widget>
+      <class>GtkHButtonBox</class>
+      <child_name>GnomeDialog:action_area</child_name>
+      <name>dialog-action_area3</name>
+      <layout_style>GTK_BUTTONBOX_END</layout_style>
+      <spacing>8</spacing>
+      <child_min_width>85</child_min_width>
+      <child_min_height>27</child_min_height>
+      <child_ipad_x>7</child_ipad_x>
+      <child_ipad_y>0</child_ipad_y>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>True</fill>
+	<pack>GTK_PACK_END</pack>
+      </child>
+
+      <widget>
+	<class>GtkButton</class>
+	<name>button42</name>
+	<can_default>True</can_default>
+	<can_focus>True</can_focus>
+	<stock_button>GNOME_STOCK_BUTTON_OK</stock_button>
+      </widget>
+
+      <widget>
+	<class>GtkButton</class>
+	<name>button44</name>
+	<can_default>True</can_default>
+	<can_focus>True</can_focus>
+	<stock_button>GNOME_STOCK_BUTTON_CANCEL</stock_button>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>label64</name>
+      <label>Draws quasiperiodic tilings; think of the implications on modern formica technology. Written by Time Korlove. In April 1997, Sir Roger Penrose, a British math professor who has worked with Stephen Hawking on such topics as relatvity, black holes, and whether time has a beginning, files a copyright-infringement lawsuit against Kimberly-Clark Corporation, wchih Penrose said copied a pattern he created ( apattern demonstrating that &quot;a nonrepeating pattern could exist in nature&quot;) for its Kleenex quilted toilet paper. </label>
+      <justify>GTK_JUSTIFY_RIGHT</justify>
+      <wrap>True</wrap>
+      <xalign>7.45058e-09</xalign>
+      <yalign>0.5</yalign>
+      <xpad>4</xpad>
+      <ypad>4</ypad>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+      </child>
+    </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GnomeDialog</class>
+  <name>pwr_conf_dialog</name>
+  <visible>False</visible>
+  <title>Configure Power Management</title>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <default_width>291</default_width>
+  <default_height>188</default_height>
+  <allow_shrink>True</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>False</auto_shrink>
+  <auto_close>False</auto_close>
+  <hide_on_close>False</hide_on_close>
+
+  <widget>
+    <class>GtkVBox</class>
+    <child_name>GnomeDialog:vbox</child_name>
+    <name>dialog-vbox4</name>
+    <homogeneous>False</homogeneous>
+    <spacing>8</spacing>
+    <child>
+      <padding>4</padding>
+      <expand>True</expand>
+      <fill>True</fill>
+    </child>
+
+    <widget>
+      <class>GtkHButtonBox</class>
+      <child_name>GnomeDialog:action_area</child_name>
+      <name>dialog-action_area4</name>
+      <layout_style>GTK_BUTTONBOX_END</layout_style>
+      <spacing>8</spacing>
+      <child_min_width>85</child_min_width>
+      <child_min_height>27</child_min_height>
+      <child_ipad_x>7</child_ipad_x>
+      <child_ipad_y>0</child_ipad_y>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>True</fill>
+	<pack>GTK_PACK_END</pack>
+      </child>
+
+      <widget>
+	<class>GtkButton</class>
+	<name>button45</name>
+	<can_default>True</can_default>
+	<can_focus>True</can_focus>
+	<stock_button>GNOME_STOCK_BUTTON_OK</stock_button>
+      </widget>
+
+      <widget>
+	<class>GtkButton</class>
+	<name>button47</name>
+	<can_default>True</can_default>
+	<can_focus>True</can_focus>
+	<stock_button>GNOME_STOCK_BUTTON_CANCEL</stock_button>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GtkTable</class>
+      <name>table14</name>
+      <border_width>3</border_width>
+      <rows>5</rows>
+      <columns>3</columns>
+      <homogeneous>False</homogeneous>
+      <row_spacing>3</row_spacing>
+      <column_spacing>3</column_spacing>
+      <child>
+	<padding>0</padding>
+	<expand>True</expand>
+	<fill>True</fill>
+      </child>
+
+      <widget>
+	<class>GtkSpinButton</class>
+	<name>pwr_shutdown_entry</name>
+	<can_focus>True</can_focus>
+	<climb_rate>1</climb_rate>
+	<digits>0</digits>
+	<numeric>False</numeric>
+	<update_policy>GTK_UPDATE_ALWAYS</update_policy>
+	<snap>False</snap>
+	<wrap>False</wrap>
+	<value>1</value>
+	<lower>0</lower>
+	<upper>100</upper>
+	<step>1</step>
+	<page>10</page>
+	<page_size>10</page_size>
+	<child>
+	  <left_attach>1</left_attach>
+	  <right_attach>2</right_attach>
+	  <top_attach>4</top_attach>
+	  <bottom_attach>5</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>False</xexpand>
+	  <yexpand>False</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>False</xfill>
+	  <yfill>False</yfill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkCheckButton</class>
+	<name>pwr_shutdown_enable</name>
+	<can_focus>True</can_focus>
+	<label>Shut down monitor after</label>
+	<active>False</active>
+	<draw_indicator>True</draw_indicator>
+	<child>
+	  <left_attach>0</left_attach>
+	  <right_attach>1</right_attach>
+	  <top_attach>4</top_attach>
+	  <bottom_attach>5</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>False</xexpand>
+	  <yexpand>False</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>True</xfill>
+	  <yfill>False</yfill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkLabel</class>
+	<name>label65</name>
+	<label>minutes</label>
+	<justify>GTK_JUSTIFY_CENTER</justify>
+	<wrap>False</wrap>
+	<xalign>0</xalign>
+	<yalign>0.5</yalign>
+	<xpad>0</xpad>
+	<ypad>0</ypad>
+	<child>
+	  <left_attach>2</left_attach>
+	  <right_attach>3</right_attach>
+	  <top_attach>4</top_attach>
+	  <bottom_attach>5</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>False</xexpand>
+	  <yexpand>False</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>True</xfill>
+	  <yfill>False</yfill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkCheckButton</class>
+	<name>pwr_suspend_enable</name>
+	<can_focus>True</can_focus>
+	<label>Go to suspend mode after</label>
+	<active>False</active>
+	<draw_indicator>True</draw_indicator>
+	<child>
+	  <left_attach>0</left_attach>
+	  <right_attach>1</right_attach>
+	  <top_attach>3</top_attach>
+	  <bottom_attach>4</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>False</xexpand>
+	  <yexpand>False</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>True</xfill>
+	  <yfill>False</yfill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkSpinButton</class>
+	<name>pwr_suspend_entry</name>
+	<can_focus>True</can_focus>
+	<climb_rate>1</climb_rate>
+	<digits>0</digits>
+	<numeric>False</numeric>
+	<update_policy>GTK_UPDATE_ALWAYS</update_policy>
+	<snap>False</snap>
+	<wrap>False</wrap>
+	<value>1</value>
+	<lower>0</lower>
+	<upper>100</upper>
+	<step>1</step>
+	<page>10</page>
+	<page_size>10</page_size>
+	<child>
+	  <left_attach>1</left_attach>
+	  <right_attach>2</right_attach>
+	  <top_attach>3</top_attach>
+	  <bottom_attach>4</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>False</xexpand>
+	  <yexpand>False</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>False</xfill>
+	  <yfill>False</yfill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkLabel</class>
+	<name>label66</name>
+	<label>minutes</label>
+	<justify>GTK_JUSTIFY_CENTER</justify>
+	<wrap>False</wrap>
+	<xalign>0</xalign>
+	<yalign>0.5</yalign>
+	<xpad>0</xpad>
+	<ypad>0</ypad>
+	<child>
+	  <left_attach>2</left_attach>
+	  <right_attach>3</right_attach>
+	  <top_attach>3</top_attach>
+	  <bottom_attach>4</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>False</xexpand>
+	  <yexpand>False</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>True</xfill>
+	  <yfill>False</yfill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkCheckButton</class>
+	<name>pwr_standby_enable</name>
+	<can_focus>True</can_focus>
+	<label>Go to standby mode after</label>
+	<active>False</active>
+	<draw_indicator>True</draw_indicator>
+	<child>
+	  <left_attach>0</left_attach>
+	  <right_attach>1</right_attach>
+	  <top_attach>2</top_attach>
+	  <bottom_attach>3</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>False</xexpand>
+	  <yexpand>False</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>True</xfill>
+	  <yfill>False</yfill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkSpinButton</class>
+	<name>pwr_standby_entry</name>
+	<can_focus>True</can_focus>
+	<climb_rate>1</climb_rate>
+	<digits>0</digits>
+	<numeric>False</numeric>
+	<update_policy>GTK_UPDATE_ALWAYS</update_policy>
+	<snap>False</snap>
+	<wrap>False</wrap>
+	<value>1</value>
+	<lower>0</lower>
+	<upper>100</upper>
+	<step>1</step>
+	<page>10</page>
+	<page_size>10</page_size>
+	<child>
+	  <left_attach>1</left_attach>
+	  <right_attach>2</right_attach>
+	  <top_attach>2</top_attach>
+	  <bottom_attach>3</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>False</xexpand>
+	  <yexpand>False</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>False</xfill>
+	  <yfill>False</yfill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkLabel</class>
+	<name>label67</name>
+	<label>minutes</label>
+	<justify>GTK_JUSTIFY_CENTER</justify>
+	<wrap>False</wrap>
+	<xalign>0</xalign>
+	<yalign>0.5</yalign>
+	<xpad>0</xpad>
+	<ypad>0</ypad>
+	<child>
+	  <left_attach>2</left_attach>
+	  <right_attach>3</right_attach>
+	  <top_attach>2</top_attach>
+	  <bottom_attach>3</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>False</xexpand>
+	  <yexpand>False</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>True</xfill>
+	  <yfill>False</yfill>
+	</child>
+      </widget>
+    </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GnomeDialog</class>
+  <name>Setting-&gt;no options example</name>
+  <visible>False</visible>
+  <title>Settings for &quot;&lt;Screensaver name&gt;&quot;</title>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <default_width>302</default_width>
+  <default_height>257</default_height>
+  <allow_shrink>True</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>False</auto_shrink>
+  <auto_close>False</auto_close>
+  <hide_on_close>False</hide_on_close>
+
+  <widget>
+    <class>GtkVBox</class>
+    <child_name>GnomeDialog:vbox</child_name>
+    <name>dialog-vbox5</name>
+    <homogeneous>False</homogeneous>
+    <spacing>8</spacing>
+    <child>
+      <padding>4</padding>
+      <expand>True</expand>
+      <fill>True</fill>
+    </child>
+
+    <widget>
+      <class>GtkHButtonBox</class>
+      <child_name>GnomeDialog:action_area</child_name>
+      <name>dialog-action_area5</name>
+      <layout_style>GTK_BUTTONBOX_END</layout_style>
+      <spacing>8</spacing>
+      <child_min_width>85</child_min_width>
+      <child_min_height>27</child_min_height>
+      <child_ipad_x>7</child_ipad_x>
+      <child_ipad_y>0</child_ipad_y>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>True</fill>
+	<pack>GTK_PACK_END</pack>
+      </child>
+
+      <widget>
+	<class>GtkButton</class>
+	<name>button48</name>
+	<can_default>True</can_default>
+	<can_focus>True</can_focus>
+	<stock_button>GNOME_STOCK_BUTTON_OK</stock_button>
+      </widget>
+
+      <widget>
+	<class>GtkButton</class>
+	<name>button50</name>
+	<can_default>True</can_default>
+	<can_focus>True</can_focus>
+	<stock_button>GNOME_STOCK_BUTTON_CANCEL</stock_button>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>label68</name>
+      <label>There are no configurable settings for this
+screensaver. </label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>True</wrap>
+      <xalign>0.5</xalign>
+      <yalign>0</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+      <child>
+	<padding>0</padding>
+	<expand>True</expand>
+	<fill>False</fill>
+      </child>
+    </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GtkMenu</class>
+  <name>popup_menu</name>
+  <visible>False</visible>
+
+  <widget>
+    <class>GtkPixmapMenuItem</class>
+    <name>popup_add</name>
+    <signal>
+      <name>activate</name>
+      <handler>on_add1_activate</handler>
+      <last_modification_time>Thu, 28 Jun 2001 16:18:44 GMT</last_modification_time>
+    </signal>
+    <label>_Add</label>
+    <right_justify>False</right_justify>
+    <stock_icon>GNOME_STOCK_MENU_NEW</stock_icon>
+  </widget>
+
+  <widget>
+    <class>GtkPixmapMenuItem</class>
+    <name>popup_settings</name>
+    <signal>
+      <name>activate</name>
+      <handler>on_settings1_activate</handler>
+      <last_modification_time>Thu, 28 Jun 2001 16:18:44 GMT</last_modification_time>
+    </signal>
+    <label>_Settings</label>
+    <right_justify>False</right_justify>
+    <stock_icon>GNOME_STOCK_MENU_PREF</stock_icon>
+  </widget>
+
+  <widget>
+    <class>GtkMenuItem</class>
+    <name>popup_remove</name>
+    <signal>
+      <name>activate</name>
+      <handler>on_remove1_activate</handler>
+      <last_modification_time>Thu, 28 Jun 2001 16:18:44 GMT</last_modification_time>
+    </signal>
+    <label>_Remove</label>
+    <right_justify>False</right_justify>
+  </widget>
+
+  <widget>
+    <class>GtkMenuItem</class>
+    <name>separator1</name>
+    <right_justify>False</right_justify>
+  </widget>
+
+  <widget>
+    <class>GtkMenuItem</class>
+    <name>popup_demo</name>
+    <signal>
+      <name>activate</name>
+      <handler>on_demo1_activate</handler>
+      <last_modification_time>Thu, 28 Jun 2001 16:18:44 GMT</last_modification_time>
+    </signal>
+    <label>_Demo</label>
+    <right_justify>False</right_justify>
+  </widget>
+
+  <widget>
+    <class>GtkPixmapMenuItem</class>
+    <name>popup_about</name>
+    <signal>
+      <name>activate</name>
+      <handler>on_about_this_screensaver1_activate</handler>
+      <last_modification_time>Thu, 28 Jun 2001 16:46:14 GMT</last_modification_time>
+    </signal>
+    <label>_About this screensaver...</label>
+    <right_justify>False</right_justify>
+    <stock_icon>GNOME_STOCK_MENU_ABOUT</stock_icon>
+  </widget>
+</widget>
+
+<widget>
+  <class>GtkWindow</class>
+  <name>throwaway_window</name>
+  <visible>False</visible>
+  <title>window1</title>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <allow_shrink>False</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>False</auto_shrink>
+
+  <widget>
+    <class>GtkTable</class>
+    <name>prefs_widget</name>
+    <rows>3</rows>
+    <columns>2</columns>
+    <homogeneous>False</homogeneous>
+    <row_spacing>3</row_spacing>
+    <column_spacing>3</column_spacing>
+
+    <widget>
+      <class>GtkHBox</class>
+      <name>hbox25</name>
+      <homogeneous>False</homogeneous>
+      <spacing>0</spacing>
+      <child>
+	<left_attach>0</left_attach>
+	<right_attach>2</right_attach>
+	<top_attach>2</top_attach>
+	<bottom_attach>3</bottom_attach>
+	<xpad>0</xpad>
+	<ypad>0</ypad>
+	<xexpand>False</xexpand>
+	<yexpand>False</yexpand>
+	<xshrink>False</xshrink>
+	<yshrink>False</yshrink>
+	<xfill>True</xfill>
+	<yfill>True</yfill>
+      </child>
+
+      <widget>
+	<class>GtkVBox</class>
+	<name>vbox14</name>
+	<homogeneous>False</homogeneous>
+	<spacing>0</spacing>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+
+	<widget>
+	  <class>GtkTable</class>
+	  <name>table13</name>
+	  <border_width>3</border_width>
+	  <rows>2</rows>
+	  <columns>3</columns>
+	  <homogeneous>False</homogeneous>
+	  <row_spacing>3</row_spacing>
+	  <column_spacing>1</column_spacing>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+
+	  <widget>
+	    <class>GtkSpinButton</class>
+	    <name>timeout_widget</name>
+	    <can_focus>True</can_focus>
+	    <climb_rate>1</climb_rate>
+	    <digits>0</digits>
+	    <numeric>False</numeric>
+	    <update_policy>GTK_UPDATE_ALWAYS</update_policy>
+	    <snap>False</snap>
+	    <wrap>False</wrap>
+	    <value>10</value>
+	    <lower>0</lower>
+	    <upper>100</upper>
+	    <step>1</step>
+	    <page>10</page>
+	    <page_size>10</page_size>
+	    <child>
+	      <left_attach>1</left_attach>
+	      <right_attach>2</right_attach>
+	      <top_attach>0</top_attach>
+	      <bottom_attach>1</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>False</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label55</name>
+	    <label>minutes</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <left_attach>2</left_attach>
+	      <right_attach>3</right_attach>
+	      <top_attach>0</top_attach>
+	      <bottom_attach>1</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label56</name>
+	    <label>minutes</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <left_attach>2</left_attach>
+	      <right_attach>3</right_attach>
+	      <top_attach>1</top_attach>
+	      <bottom_attach>2</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkSpinButton</class>
+	    <name>cycle_length_widget</name>
+	    <can_focus>True</can_focus>
+	    <climb_rate>1</climb_rate>
+	    <digits>0</digits>
+	    <numeric>False</numeric>
+	    <update_policy>GTK_UPDATE_ALWAYS</update_policy>
+	    <snap>False</snap>
+	    <wrap>False</wrap>
+	    <value>10</value>
+	    <lower>0</lower>
+	    <upper>100</upper>
+	    <step>1</step>
+	    <page>10</page>
+	    <page_size>10</page_size>
+	    <child>
+	      <left_attach>1</left_attach>
+	      <right_attach>2</right_attach>
+	      <top_attach>1</top_attach>
+	      <bottom_attach>2</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>False</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label57</name>
+	    <label>S_tart screensaver after </label>
+	    <justify>GTK_JUSTIFY_LEFT</justify>
+	    <wrap>False</wrap>
+	    <xalign>0</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <default_focus_target>timeout_widget</default_focus_target>
+	    <child>
+	      <left_attach>0</left_attach>
+	      <right_attach>1</right_attach>
+	      <top_attach>0</top_attach>
+	      <bottom_attach>1</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label58</name>
+	    <label>S_witch screensavers after </label>
+	    <justify>GTK_JUSTIFY_LEFT</justify>
+	    <wrap>False</wrap>
+	    <xalign>0</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <default_focus_target>cycle_length_widget</default_focus_target>
+	    <child>
+	      <left_attach>0</left_attach>
+	      <right_attach>1</right_attach>
+	      <top_attach>1</top_attach>
+	      <bottom_attach>2</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+	</widget>
+      </widget>
+
+      <widget>
+	<class>GtkVSeparator</class>
+	<name>vseparator4</name>
+	<child>
+	  <padding>6</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkAlignment</class>
+	<name>alignment4</name>
+	<xalign>7.45058e-09</xalign>
+	<yalign>7.45058e-09</yalign>
+	<xscale>1</xscale>
+	<yscale>0</yscale>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+
+	<widget>
+	  <class>GtkVBox</class>
+	  <name>vbox15</name>
+	  <homogeneous>False</homogeneous>
+	  <spacing>0</spacing>
+
+	  <widget>
+	    <class>GtkCheckButton</class>
+	    <name>lock_widget</name>
+	    <can_focus>True</can_focus>
+	    <label>R_equire password to unlock screen</label>
+	    <active>False</active>
+	    <draw_indicator>True</draw_indicator>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkHBox</class>
+	    <name>hbox26</name>
+	    <homogeneous>False</homogeneous>
+	    <spacing>0</spacing>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
+
+	    <widget>
+	      <class>GtkCheckButton</class>
+	      <name>pwr_manage_enable</name>
+	      <can_focus>True</can_focus>
+	      <label>Enable _power management</label>
+	      <active>False</active>
+	      <draw_indicator>True</draw_indicator>
+	      <child>
+		<padding>0</padding>
+		<expand>False</expand>
+		<fill>False</fill>
+	      </child>
+	    </widget>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <name>pwr_conf_button</name>
+	      <can_focus>True</can_focus>
+	      <label> Configure...</label>
+	      <relief>GTK_RELIEF_NORMAL</relief>
+	      <child>
+		<padding>0</padding>
+		<expand>False</expand>
+		<fill>False</fill>
+	      </child>
+	    </widget>
+	  </widget>
+	</widget>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GtkFrame</class>
+      <name>frame5</name>
+      <label>Preview</label>
+      <label_xalign>0</label_xalign>
+      <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
+      <child>
+	<left_attach>1</left_attach>
+	<right_attach>2</right_attach>
+	<top_attach>0</top_attach>
+	<bottom_attach>2</bottom_attach>
+	<xpad>0</xpad>
+	<ypad>0</ypad>
+	<xexpand>False</xexpand>
+	<yexpand>False</yexpand>
+	<xshrink>False</xshrink>
+	<yshrink>False</yshrink>
+	<xfill>False</xfill>
+	<yfill>False</yfill>
+      </child>
+
+      <widget>
+	<class>GtkDrawingArea</class>
+	<name>preview_window</name>
+	<width>300</width>
+	<height>200</height>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GtkVBox</class>
+      <name>vbox16</name>
+      <border_width>4</border_width>
+      <homogeneous>False</homogeneous>
+      <spacing>4</spacing>
+      <child>
+	<left_attach>0</left_attach>
+	<right_attach>1</right_attach>
+	<top_attach>0</top_attach>
+	<bottom_attach>2</bottom_attach>
+	<xpad>0</xpad>
+	<ypad>0</ypad>
+	<xexpand>False</xexpand>
+	<yexpand>False</yexpand>
+	<xshrink>False</xshrink>
+	<yshrink>False</yshrink>
+	<xfill>True</xfill>
+	<yfill>True</yfill>
+      </child>
+
+      <widget>
+	<class>GtkHBox</class>
+	<name>hbox27</name>
+	<homogeneous>False</homogeneous>
+	<spacing>0</spacing>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+
+	<widget>
+	  <class>GtkLabel</class>
+	  <name>label54</name>
+	  <label>_Mode:</label>
+	  <justify>GTK_JUSTIFY_CENTER</justify>
+	  <wrap>False</wrap>
+	  <xalign>0.5</xalign>
+	  <yalign>0.5</yalign>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <default_focus_target>mode_option</default_focus_target>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+	</widget>
+
+	<widget>
+	  <class>GtkOptionMenu</class>
+	  <name>mode_option</name>
+	  <can_focus>True</can_focus>
+	  <items>Disable screensaver
+Black screen only
+One screensaver all the time
+Random (checked screensavers)
+Random (all screensavers)
+</items>
+	  <initial_choice>2</initial_choice>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+	</widget>
+      </widget>
+
+      <widget>
+	<class>GtkScrolledWindow</class>
+	<name>etable_scrolled</name>
+	<hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
+	<vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+	<hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+	<vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+
+	<widget>
+	  <class>Placeholder</class>
+	</widget>
+      </widget>
+    </widget>
+  </widget>
+</widget>
+
+</GTK-Interface>

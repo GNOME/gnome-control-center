@@ -1,3 +1,18 @@
+2001-07-03  Richard Hestilow  <hestilow@ximian.com>
+	
+	* screensaver-properties.glade[.h]: Added.
+	
+	* prefs-widget.[ch]: Complete rewrite.
+
+	* Makefile.am: Add glade stuff.
+
+	* main.c: Call glade_gnome_init.
+
+	* pref-file.c: Restart xscreensaver on save.
+
+	* screensaver-prefs-dialog.c (screensaver_prefs_dialog_new):
+	Change g_strconcat to g_strdup_printf for i18n purposes.
+
 2001-06-21  Bradford Hovinen  <hovinen@ximian.com>
 
 	* preferences.c (clone_cb): Remove debugging code

@@ -226,7 +226,7 @@ setup_capplet_widget (void)
 
 	prefs->frozen++;
 
-	prefs_widget = PREFS_WIDGET (prefs_widget_new ());
+	prefs_widget = PREFS_WIDGET (prefs_widget_new (GTK_WINDOW (capplet)));
 
 	gtk_container_add (GTK_CONTAINER (capplet), GTK_WIDGET (prefs_widget));
 
@@ -345,6 +345,8 @@ main (int argc, char **argv)
 		do_restore_from_defaults ();
 		return 0;
 	}
+
+	glade_gnome_init ();
 
 	client = gnome_master_client ();
 	flags = gnome_client_get_flags (client);

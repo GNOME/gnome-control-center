@@ -271,7 +271,7 @@ screensaver_prefs_dialog_new (Screensaver *saver)
 
 	dialog->saver = saver;
 
-	title = g_strconcat (saver->label, " properties", NULL);
+	title = g_strdup_printf ("%s properties", saver->label);
 	gtk_entry_set_text (GTK_ENTRY (dialog->name_entry), 
 			    saver->label);
 

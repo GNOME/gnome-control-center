@@ -1,46 +1,17 @@
-/* -*- mode: c; style: linux -*- */
-
-/* prefs-widget.c
- * Copyright (C) 2000 Helix Code, Inc.
- *
- * Written by Bradford Hovinen <hovinen@helixcode.com>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2, or (at your option)
- * any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
- * 02111-1307, USA.
- */
-
 #ifdef HAVE_CONFIG_H
 #   include "config.h"
 #endif
 
-#include <gtk/gtk.h>
-#include <gdk/gdkprivate.h>
-#include <capplet-widget.h>
-
-#include <gdk-pixbuf/gdk-pixbuf.h>
-
 #include "prefs-widget.h"
 #include "preview.h"
 #include "screensaver-prefs-dialog.h"
-#include "selection-dialog.h"
 #include "rc-parse.h"
+#include <gal/e-table/e-table.h>
+#include <gal/e-table/e-table-simple.h>
 
-#include "checked.xpm"
-#include "unchecked.xpm"
-#include "checked-disabled.xpm"
-#include "unchecked-disabled.xpm"
+#define WID(str) (glade_xml_get_widget (prefs_widget->priv->xml, str))
+
+static GtkVBoxClass *prefs_widget_parent_class;
 
 enum {
 	STATE_CHANGED_SIGNAL,
@@ -48,103 +19,95 @@ enum {
 	LAST_SIGNAL
 };
 
+struct _PrefsWidgetPrivate
+{
+	GladeXML *xml;
+	ETableModel *etm;
+	GtkWidget *table;
+	guint random_timeout;
+	GList *random_current;
+	GtkWindow *parent;
+
+	/* Copied from Preferences...for OK/Cancel support in dialog */
+	gboolean  power_management;
+	time_t    standby_time;
+	time_t    suspend_time;
+	time_t    power_down_time;
+};
+	
 static gint prefs_widget_signals[LAST_SIGNAL] = { 0 };
 
-static void prefs_widget_init             (PrefsWidget *prefs);
+static void prefs_widget_init             (PrefsWidget *prefs_widget);
 static void prefs_widget_class_init       (PrefsWidgetClass *class);
+static void prefs_widget_destroy          (PrefsWidget *prefs_widget);
 
-static void set_lock_controls_sensitive   (PrefsWidget *prefs, gboolean s);
-static void set_fade_scales_sensitive     (PrefsWidget *prefs, gboolean s);
-static void set_fade_controls_sensitive   (PrefsWidget *prefs, gboolean s);
-static void set_standby_time_sensitive    (PrefsWidget *prefs, gboolean s);
-static void set_suspend_time_sensitive    (PrefsWidget *prefs, gboolean s);
-static void set_power_down_time_sensitive (PrefsWidget *prefs, gboolean s);
-static void set_power_controls_sensitive  (PrefsWidget *prefs, gboolean s);
-
-static void set_all_pixmaps               (PrefsWidget *prefs,
-					   SelectionMode mode);
-
-static void disable_screensaver_cb        (GtkToggleButton *button,
-					   PrefsWidget *widget);
-static void blank_screen_selected_cb      (GtkToggleButton *button,
-					   PrefsWidget *widget);
-static void one_screensaver_cb            (GtkToggleButton *button,
-					   PrefsWidget *widget);
-static void choose_from_selected_cb       (GtkToggleButton *button,
-					   PrefsWidget *widget);
-static void random_cb                     (GtkToggleButton *button,
-					   PrefsWidget *widget);
-
-static void select_saver_cb               (GtkCList *list, 
-					   gint row, gint column, 
-					   GdkEventButton *event, 
-					   PrefsWidget *widget);
-static void deselect_saver_cb             (GtkCList *list, 
-					   gint row, gint column, 
-					   GdkEventButton *event, 
-					   PrefsWidget *widget);
-static void settings_cb                   (GtkWidget *button,
-					   PrefsWidget *widget);
-static void screensaver_add_cb            (GtkWidget *button,
-					   PrefsWidget *widget);
-static void screensaver_remove_cb         (GtkWidget *button,
-					   PrefsWidget *widget);
-static void demo_cb                       (GtkWidget *button,
-					   PrefsWidget *widget);
-static void demo_next_cb                  (GtkWidget *button,
-					   PrefsWidget *widget);
-static void demo_prev_cb                  (GtkWidget *button,
-					   PrefsWidget *widget);
-
-static void require_password_changed_cb   (GtkCheckButton *button,
-					   PrefsWidget *widget);
-static void lock_timeout_changed_cb       (GtkCheckButton *button,
-					   PrefsWidget *widget);
-static void power_management_toggled_cb   (GtkCheckButton *button,
-					   PrefsWidget *widget);
-static void standby_monitor_toggled_cb    (GtkCheckButton *button,
-					   PrefsWidget *widget);
-static void suspend_monitor_toggled_cb    (GtkCheckButton *button,
-					   PrefsWidget *widget);
-static void shut_down_monitor_toggled_cb  (GtkCheckButton *button,
-					   PrefsWidget *widget);
-
-static void install_cmap_changed_cb       (GtkCheckButton *button,
-					   PrefsWidget *widget);
-static void fade_unfade_changed_cb        (GtkCheckButton *button,
-					   PrefsWidget *widget);
-
+static void pwr_state_changed_cb          (GtkWidget *widget,
+					   PrefsWidget *prefs_widget);
 static void state_changed_cb              (GtkWidget *widget,
-					   PrefsWidget *prefs);
-
-static void screensaver_prefs_ok_cb       (ScreensaverPrefsDialog *dialog, 
-					   PrefsWidget *widget);
-
-static void prefs_demo_cb                 (GtkWidget *widget,
 					   PrefsWidget *prefs_widget);
 
-static void add_select_cb                 (GtkWidget *widget,
-					   Screensaver *saver,
+static void option_menu_connect           (GtkOptionMenu *menu,
+					   GtkSignalFunc func,
+					   gpointer data);
+
+static void mode_changed_cb               (GtkWidget *widget,
 					   PrefsWidget *prefs_widget);
 
-static gint create_list_item              (Screensaver *saver,
-					   SelectionMode mode,
+static void selection_changed_cb          (ETable *table,
+					   PrefsWidget *prefs_widget);
+static void selection_foreach_func        (int model_row, int *closure);
+
+static gint random_timeout_cb             (PrefsWidget *prefs_widget);
+static void set_random_timeout            (PrefsWidget *prefs_widget,
+					   gboolean do_random);
+
+static void popup_item_menu               (ETable *table,
+					   int row, int col, GdkEvent *event,
 					   PrefsWidget *prefs_widget);
 
-static void set_description_text          (PrefsWidget *widget,
-					   gchar *description);
+static void about_cb                       (GtkWidget *widget,
+					    PrefsWidget *prefs_widget);
+static void settings_cb                    (GtkWidget *button,
+					    PrefsWidget *widget);
+static void pwr_manage_toggled_cb          (GtkWidget *button,
+					    PrefsWidget *prefs_widget);
+static void pwr_conf_cb                    (GtkWidget *button,
+					    PrefsWidget *prefs_widget);
+static void pwr_conf_button_cb             (GnomeDialog *dlg,
+					    gint button,
+					    PrefsWidget *prefs_widget);
+static void pwr_save_prefs		   (PrefsWidget *prefs_widget);
+static void pwr_restore_prefs              (PrefsWidget *prefs_widget);
+static time_t pwr_get_toggled_entry        (PrefsWidget *prefs_widget,
+					    const gchar *enable_str,
+					    const gchar *entry_str);
+static void pwr_set_toggled_entry          (PrefsWidget *prefs_widget,
+					    const gchar *enable_str,
+					    const gchar *entry_str,
+					    time_t value);
 
-static void set_screensavers_enabled      (PrefsWidget *widget,
-					   gboolean s);
-static void set_pixmap                    (GtkCList *clist, 
-					   Screensaver *saver, gint row,
-					   SelectionMode mode);
-static void toggle_saver                  (PrefsWidget *widget, gint row,
-					   Screensaver *saver);
-static void select_row                    (GtkCList *clist, gint row);
+static const gchar *table_compute_state    (SelectionMode mode);
+/* Model declarations */
+static int model_col_count                (ETableModel *etm, void *data);
+static int model_row_count                (ETableModel *etm, void *data);
+static void* model_value_at               (ETableModel *etm, int col, int row,
+ 					   void *data);
+static void model_set_value_at            (ETableModel *etm, int col, int row,
+					   const void *val, void *data);
+static gboolean model_is_cell_editable    (ETableModel *etm, int col, int row,
+					   void *data);
+static void* model_duplicate_value        (ETableModel *etm, int col,
+					   const void *value, void *data);
+static void model_free_value              (ETableModel *etm, int col,
+					   void *value, void *data);
+static void* model_initialize_value       (ETableModel *etm, int col,
+					   void *data);
+static gboolean model_value_is_empty      (ETableModel *etm, int col,
+					   const void *value, void *data);
+static char* model_value_to_string        (ETableModel *etm, int col,
+					   const void *value, void *data);
 
-guint
-prefs_widget_get_type (void)
+guint prefs_widget_get_type (void)
 {
 	static guint prefs_widget_type = 0;
 
@@ -156,763 +119,279 @@ prefs_widget_get_type (void)
 			(GtkClassInitFunc) prefs_widget_class_init,
 			(GtkObjectInitFunc) prefs_widget_init,
 			(GtkArgSetFunc) NULL,
-			(GtkArgGetFunc) NULL
+			(GtkArgGetFunc) NULL,
 		};
 
-		prefs_widget_type = 
-			gtk_type_unique (gtk_notebook_get_type (), 
+		prefs_widget_type =
+			gtk_type_unique (gtk_vbox_get_type (),
 					 &prefs_widget_info);
 	}
-
+	
 	return prefs_widget_type;
 }
 
 static void
-prefs_widget_init (PrefsWidget *prefs)
+prefs_widget_destroy (PrefsWidget *prefs_widget)
 {
-	GtkWidget *table, *frame, *vbox, *vbox1, *hbox, *label;
-	GtkWidget *scrolled_window, *button, *table1;
-	GtkObject *adjustment;
-	GSList *no_screensavers_group = NULL;
-	GtkWidget *viewport;
-
-	table = gtk_table_new (2, 2, FALSE);
-	gtk_container_add (GTK_CONTAINER (prefs), table);
-	gtk_container_set_border_width (GTK_CONTAINER (table), 5);
-	gtk_table_set_row_spacings (GTK_TABLE (table), 10);
-	gtk_table_set_col_spacings (GTK_TABLE (table), 10);
-
-	frame = gtk_frame_new (_("Selection"));
-	gtk_table_attach (GTK_TABLE (table), frame, 0, 1, 0, 2,
-			  GTK_EXPAND | GTK_FILL,
-			  GTK_EXPAND | GTK_FILL, 0, 0);
-
-	vbox = gtk_vbox_new (FALSE, 5);
-	gtk_container_add (GTK_CONTAINER (frame), vbox);
-	gtk_container_set_border_width (GTK_CONTAINER (vbox), 5);
-
-	vbox1 = gtk_vbox_new (FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (vbox), vbox1, FALSE, FALSE, 0);
-
-	prefs->disable_screensaver_widget = 
-		gtk_radio_button_new_with_label
-		(no_screensavers_group, _("Disable screensaver"));
-	no_screensavers_group = 
-		gtk_radio_button_group 
-		(GTK_RADIO_BUTTON (prefs->disable_screensaver_widget));
-	gtk_box_pack_start (GTK_BOX (vbox1), 
-			    prefs->disable_screensaver_widget, 
-			    FALSE, FALSE, 0);
-
-	prefs->blank_screen_widget = 
-		gtk_radio_button_new_with_label
-		(no_screensavers_group, _("Black screen only"));
-	no_screensavers_group = 
-		gtk_radio_button_group 
-		(GTK_RADIO_BUTTON (prefs->blank_screen_widget));
-	gtk_box_pack_start (GTK_BOX (vbox1), prefs->blank_screen_widget, 
-			    FALSE, FALSE, 0);
-
-	prefs->one_screensaver_widget = 
-		gtk_radio_button_new_with_label
-		(no_screensavers_group, _("One screensaver all the time"));
-	no_screensavers_group = 
-		gtk_radio_button_group 
-		(GTK_RADIO_BUTTON (prefs->one_screensaver_widget));
-	gtk_box_pack_start (GTK_BOX (vbox1), prefs->one_screensaver_widget, 
-			    FALSE, FALSE, 0);
-
-	prefs->choose_from_list_widget = 
-		gtk_radio_button_new_with_label 
-		(no_screensavers_group, 
-		 _("Choose randomly from those checked off"));
-	no_screensavers_group = 
-		gtk_radio_button_group 
-		(GTK_RADIO_BUTTON (prefs->choose_from_list_widget));
-	gtk_box_pack_start (GTK_BOX (vbox1), prefs->choose_from_list_widget, 
-			    FALSE, FALSE, 0);
-
-	prefs->choose_randomly_widget = 
-		gtk_radio_button_new_with_label
-		(no_screensavers_group, 
-		 _("Choose randomly among all screensavers"));
-	no_screensavers_group = 
-		gtk_radio_button_group 
-		(GTK_RADIO_BUTTON (prefs->choose_randomly_widget));
-	gtk_box_pack_start (GTK_BOX (vbox1), prefs->choose_randomly_widget, 
-			    FALSE, FALSE, 0);
-
-	scrolled_window = gtk_scrolled_window_new (NULL, NULL);
-	gtk_box_pack_start (GTK_BOX (vbox), scrolled_window, TRUE, TRUE, 0);
-	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window), 
-					GTK_POLICY_NEVER, GTK_POLICY_ALWAYS);
-
-	prefs->screensaver_list = gtk_clist_new (2);
-	gtk_clist_column_titles_hide (GTK_CLIST (prefs->screensaver_list));
-	gtk_clist_set_column_width (GTK_CLIST (prefs->screensaver_list), 
-				    0, 16);
-	gtk_clist_set_sort_column (GTK_CLIST (prefs->screensaver_list), 1);
-	gtk_clist_set_auto_sort (GTK_CLIST (prefs->screensaver_list), TRUE);
-	gtk_clist_set_selection_mode (GTK_CLIST (prefs->screensaver_list),
-				      GTK_SELECTION_SINGLE);
-	gtk_container_add (GTK_CONTAINER (scrolled_window), 
-			   prefs->screensaver_list);
-
-	table1 = gtk_table_new (2, 3, TRUE);
-	gtk_table_set_row_spacings (GTK_TABLE (table1), GNOME_PAD_SMALL);
-	gtk_table_set_col_spacings (GTK_TABLE (table1), GNOME_PAD_SMALL);
-	gtk_box_pack_start (GTK_BOX (vbox), table1, FALSE, FALSE, 0);
-
-	button = gtk_button_new_with_label (_("Add..."));
-	gtk_table_attach (GTK_TABLE (table1), button, 0, 1, 0, 1,
-			  GTK_FILL, GTK_FILL, 0, 0);
-	gtk_signal_connect (GTK_OBJECT (button), "clicked",
-			    screensaver_add_cb, prefs);
-
-	prefs->remove_button = gtk_button_new_with_label (_("Remove"));
-	gtk_table_attach (GTK_TABLE (table1), prefs->remove_button, 1, 2, 0, 1,
-			  GTK_FILL, GTK_FILL, 0, 0);
-	gtk_signal_connect (GTK_OBJECT (prefs->remove_button), "clicked",
-			    screensaver_remove_cb, prefs);
-	gtk_widget_set_sensitive (prefs->remove_button, FALSE);
-
-	prefs->settings_button = gtk_button_new_with_label (_("Settings..."));
-	gtk_table_attach (GTK_TABLE (table1), prefs->settings_button, 
-			  2, 3, 0, 1, GTK_FILL, GTK_FILL, 0, 0);
-	gtk_widget_set_sensitive (prefs->settings_button, FALSE);
-
-	prefs->demo_button = gtk_button_new_with_label (_("Demo"));
-	gtk_table_attach (GTK_TABLE (table1), prefs->demo_button, 0, 1, 1, 2,
-			  GTK_FILL, GTK_FILL, 0, 0);
-	gtk_widget_set_sensitive (prefs->demo_button, FALSE);
-
-	button = gtk_button_new_with_label (_("Demo Next"));
-	gtk_table_attach (GTK_TABLE (table1), button, 1, 2, 1, 2,
-			  GTK_FILL, GTK_FILL, 0, 0);
-	gtk_signal_connect (GTK_OBJECT (button), "clicked",
-			    demo_next_cb, prefs);
-
-	button = gtk_button_new_with_label (_("Demo Previous"));
-	gtk_table_attach (GTK_TABLE (table1), button, 2, 3, 1, 2,
-			  GTK_FILL, GTK_FILL, 0, 0);
-	gtk_signal_connect (GTK_OBJECT (button), "clicked",
-			    demo_prev_cb, prefs);
-
-	frame = gtk_frame_new (_("Preview"));
-	gtk_table_attach (GTK_TABLE (table), frame, 1, 2, 0, 1,
-			  GTK_FILL, GTK_FILL, 0, 0);
-
-	scrolled_window = gtk_scrolled_window_new (NULL, NULL);
-	gtk_container_add (GTK_CONTAINER (frame), scrolled_window);
-	gtk_container_set_border_width (GTK_CONTAINER (scrolled_window), 5);
-	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window), 
-					GTK_POLICY_NEVER, GTK_POLICY_NEVER);
-
-	viewport = gtk_viewport_new (NULL, NULL);
-	gtk_container_add (GTK_CONTAINER (scrolled_window), viewport);
-
-	prefs->preview_window = gtk_drawing_area_new ();
-	gtk_container_add (GTK_CONTAINER (viewport), prefs->preview_window);
-	gtk_widget_set_usize (prefs->preview_window, 300, 200);
-
-	frame = gtk_frame_new (_("Description"));
-
-	gtk_table_attach (GTK_TABLE (table), frame, 1, 2, 1, 2,
-			  GTK_FILL, GTK_EXPAND | GTK_FILL, 0, 0);
-
-	scrolled_window = gtk_scrolled_window_new (NULL, NULL);
-	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
-					GTK_POLICY_NEVER, GTK_POLICY_ALWAYS);
-	gtk_container_add (GTK_CONTAINER (frame), scrolled_window);
-	gtk_container_set_border_width (GTK_CONTAINER (scrolled_window), 5);
-
-	prefs->description = gtk_text_new (NULL, NULL);
-	gtk_text_set_word_wrap (GTK_TEXT (prefs->description), TRUE);
-	gtk_container_add (GTK_CONTAINER (scrolled_window), 
-			   prefs->description);
-
-	gtk_widget_show_all (table);
-	label = gtk_label_new (_("Screensaver Selection"));
-	gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs), 
-				    gtk_notebook_get_nth_page 
-				    (GTK_NOTEBOOK (prefs), 0), label);
-
-	vbox = gtk_vbox_new (FALSE, 5);
-	gtk_container_add (GTK_CONTAINER (prefs), vbox);
-	gtk_container_set_border_width (GTK_CONTAINER (vbox), 5);
-
-	frame = gtk_frame_new (_("Basic"));
-	gtk_box_pack_start (GTK_BOX (vbox), frame, FALSE, TRUE, 0);
-
-	vbox1 = gtk_vbox_new (FALSE, 5);
-	gtk_container_add (GTK_CONTAINER (frame), vbox1);
-	gtk_container_set_border_width (GTK_CONTAINER (vbox1), 5);
-
-	table = gtk_table_new (2, 3, FALSE);
-	gtk_table_set_row_spacings (GTK_TABLE (table), 5);
-	gtk_table_set_col_spacings (GTK_TABLE (table), 5);
-	gtk_box_pack_start (GTK_BOX (vbox1), table, FALSE, FALSE, 0);
-
-	label = gtk_label_new (_("Start screensaver after"));
-	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
-	gtk_table_attach (GTK_TABLE (table), label,
-			  0, 1, 0, 1, GTK_FILL, 0, 0, 0);
-
-	adjustment = gtk_adjustment_new (1, 0, 1000, 1, 10, 10);
-	prefs->timeout_widget = 
-		gtk_spin_button_new (GTK_ADJUSTMENT (adjustment), 1, 0);
-	gtk_table_attach (GTK_TABLE (table), prefs->timeout_widget,
-			  1, 2, 0, 1, 0, 0, 0, 0);
-
-	label = gtk_label_new (_("minutes"));
-	gtk_table_attach (GTK_TABLE (table), label,
-			  2, 3, 0, 1, 0, 0, 0, 0);
-
-	label = gtk_label_new (_("Switch screensavers every"));
-	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
-	gtk_table_attach (GTK_TABLE (table), label,
-			  0, 1, 1, 2, GTK_FILL, 0, 0, 0);
-
-	adjustment = gtk_adjustment_new (1, 0, 6000, 1, 10, 10);
-	prefs->cycle_length_widget = 
-		gtk_spin_button_new (GTK_ADJUSTMENT (adjustment), 1, 0);
-	gtk_table_attach (GTK_TABLE (table), prefs->cycle_length_widget,
-			  1, 2, 1, 2, 0, 0, 0, 0);
-
-	label = gtk_label_new (_("minutes"));
-	gtk_table_attach (GTK_TABLE (table), label,
-			  2, 3, 1, 2, 0, 0, 0, 0);
-
-	frame = gtk_frame_new (_("Security"));
-	gtk_box_pack_start (GTK_BOX (vbox), frame, FALSE, TRUE, 0);
-
-	vbox1 = gtk_vbox_new (FALSE, 5);
-	gtk_container_add (GTK_CONTAINER (frame), vbox1);
-	gtk_container_set_border_width (GTK_CONTAINER (vbox1), 5);
-
-	prefs->lock_widget = 
-		gtk_check_button_new_with_label 
-		(_("Require password to unlock"));
-	gtk_box_pack_start (GTK_BOX (vbox1), prefs->lock_widget, 
-			    TRUE, TRUE, 0);
-
-	hbox = gtk_hbox_new (FALSE, 5);
-	gtk_box_pack_start (GTK_BOX (vbox1), hbox, TRUE, TRUE, 0);
-
-	prefs->enable_timeout_widget = 
-		gtk_check_button_new_with_label 
-		(_("Only after the screensaver has run for"));
-	gtk_box_pack_start (GTK_BOX (hbox), prefs->enable_timeout_widget, 
-			    FALSE, FALSE, 0);
-
-	adjustment = gtk_adjustment_new (1, 0, 1000, 1, 10, 10);
-	prefs->time_to_lock_widget = 
-		gtk_spin_button_new (GTK_ADJUSTMENT (adjustment), 1, 0);
-	gtk_box_pack_start (GTK_BOX (hbox), prefs->time_to_lock_widget, 
-			    FALSE, TRUE, 0);
-
-	prefs->lock_timeout_seconds_label = gtk_label_new (_("minutes"));
-	gtk_box_pack_start (GTK_BOX (hbox), prefs->lock_timeout_seconds_label, 
-			    FALSE, FALSE, 0);
-	gtk_label_set_justify (GTK_LABEL (prefs->lock_timeout_seconds_label), 
-			       GTK_JUSTIFY_LEFT);
-	gtk_misc_set_alignment (GTK_MISC (prefs->lock_timeout_seconds_label), 
-				0, 0.5);
-
-	frame = gtk_frame_new (_("Power Management"));
-	gtk_box_pack_start (GTK_BOX (vbox), frame, FALSE, TRUE, 0);
-
-	vbox1 = gtk_vbox_new (FALSE, 5);
-	gtk_container_add (GTK_CONTAINER (frame), vbox1);
-	gtk_container_set_border_width (GTK_CONTAINER (vbox1), 5);
-
-	prefs->pwr_manage_enable = 
-		gtk_check_button_new_with_label (_("Enable power management"));
-	gtk_box_pack_start (GTK_BOX (vbox1), prefs->pwr_manage_enable, 
-			    FALSE, FALSE, 0);
-
-	table = gtk_table_new (3, 3, FALSE);
-	gtk_table_set_row_spacings (GTK_TABLE (table), 5);
-	gtk_table_set_col_spacings (GTK_TABLE (table), 5);
-	gtk_box_pack_start (GTK_BOX (vbox1), table, TRUE, TRUE, 0);
-
-	prefs->standby_monitor_toggle = 
-		gtk_check_button_new_with_label 
-		(_("Go to standby mode after"));
-	gtk_table_attach (GTK_TABLE (table), prefs->standby_monitor_toggle, 
-			  0, 1, 0, 1, GTK_FILL, 0, 0, 0);
-
-	adjustment = gtk_adjustment_new (1, 0, 10000, 1, 10, 10);
-	prefs->standby_time_widget = 
-		gtk_spin_button_new (GTK_ADJUSTMENT (adjustment), 1, 0);
-	gtk_table_attach (GTK_TABLE (table), prefs->standby_time_widget, 
-			  1, 2, 0, 1, 0, 0, 0, 0);
-
-	prefs->standby_monitor_label2 = 
-		gtk_label_new (_("minutes"));
-	gtk_table_attach (GTK_TABLE (table), prefs->standby_monitor_label2, 
-			  2, 3, 0, 1, 0, 0, 0, 0);
-
-	prefs->suspend_monitor_toggle = 
-		gtk_check_button_new_with_label 
-		(_("Go to suspend mode after"));
-	gtk_table_attach (GTK_TABLE (table), prefs->suspend_monitor_toggle, 
-			  0, 1, 1, 2, GTK_FILL, 0, 0, 0);
-
-	adjustment = gtk_adjustment_new (1, 0, 10000, 1, 10, 10);
-	prefs->suspend_time_widget = 
-		gtk_spin_button_new (GTK_ADJUSTMENT (adjustment), 1, 0);
-	gtk_table_attach (GTK_TABLE (table), prefs->suspend_time_widget, 
-			  1, 2, 1, 2, 0, 0, 0, 0);
-
-	prefs->suspend_monitor_label2 = 
-		gtk_label_new (_("minutes"));
-	gtk_table_attach (GTK_TABLE (table), prefs->suspend_monitor_label2, 
-			  2, 3, 1, 2, 0, 0, 0, 0);
-
-	prefs->shut_down_monitor_toggle = 
-		gtk_check_button_new_with_label
-		(_("Shut down monitor after"));
-	gtk_table_attach (GTK_TABLE (table), prefs->shut_down_monitor_toggle, 
-			  0, 1, 2, 3, GTK_FILL, 0, 0, 0);
-
-	adjustment = gtk_adjustment_new (1, 0, 10000, 1, 10, 10);
-	prefs->shut_down_time_widget = 
-		gtk_spin_button_new (GTK_ADJUSTMENT (adjustment), 1, 0);
-	gtk_table_attach (GTK_TABLE (table), prefs->shut_down_time_widget, 
-			  1, 2, 2, 3, 0, 0, 0, 0);
-
-	prefs->shut_down_monitor_label2 = 
-		gtk_label_new (_("minutes"));
-	gtk_table_attach (GTK_TABLE (table), prefs->shut_down_monitor_label2, 
-			  2, 3, 2, 3, 0, 0, 0, 0);
-
-	gtk_widget_show_all (vbox);
-
-	label = gtk_label_new (_("General Properties"));
-	gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs), 
-				    gtk_notebook_get_nth_page 
-				    (GTK_NOTEBOOK (prefs), 1), label);
-
-	vbox = gtk_vbox_new (FALSE, 5);
-	gtk_container_add (GTK_CONTAINER (prefs), vbox);
-	gtk_container_set_border_width (GTK_CONTAINER (vbox), 5);
-
-	table = gtk_table_new (3, 3, FALSE);
-	gtk_box_pack_start (GTK_BOX (vbox), table, FALSE, FALSE, 0);
-	gtk_container_set_border_width (GTK_CONTAINER (table), 5);
-	gtk_table_set_row_spacings (GTK_TABLE (table), 5);
-	gtk_table_set_col_spacings (GTK_TABLE (table), 5);
-
-	label = gtk_label_new (_("Priority"));
-	gtk_table_attach (GTK_TABLE (table), label, 0, 3, 0, 1,
-			  (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-			  (GtkAttachOptions) (0), 0, 0);
-	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-
-	label = gtk_label_new (_("Low"));
-	gtk_table_attach (GTK_TABLE (table), label, 0, 1, 1, 2,
-			  (GtkAttachOptions) (GTK_FILL),
-			  (GtkAttachOptions) (0), 0, 0);
-	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_RIGHT);
-	gtk_misc_set_alignment (GTK_MISC (label), 1, 0.5);
-
-	label = gtk_label_new (_("High"));
-	gtk_table_attach (GTK_TABLE (table), label, 2, 3, 1, 2,
-			  (GtkAttachOptions) (GTK_FILL),
-			  (GtkAttachOptions) (0), 0, 0);
-	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-
-	adjustment = gtk_adjustment_new (0, -20, 0, 0, 0, 0);
-	gtk_signal_connect (adjustment, "value-changed", state_changed_cb,
-			    prefs);
-	prefs->nice_widget = 
-		gtk_hscale_new (GTK_ADJUSTMENT (adjustment));
-	gtk_table_attach (GTK_TABLE (table), prefs->nice_widget, 1, 2, 1, 2,
-			  (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-			  (GtkAttachOptions) (GTK_FILL), 0, 0);
-	gtk_scale_set_draw_value (GTK_SCALE (prefs->nice_widget), FALSE);
-
-	prefs->verbose_widget = 
-		gtk_check_button_new_with_label (_("Be verbose"));
-	gtk_box_pack_start (GTK_BOX (vbox), prefs->verbose_widget, 
-			    FALSE, FALSE, 0);
-
-	prefs->effects_frame = gtk_frame_new (_("Effects"));
-	gtk_box_pack_start (GTK_BOX (vbox), prefs->effects_frame, 
-			    FALSE, TRUE, 0);
-
-	vbox = gtk_vbox_new (FALSE, 5);
-	gtk_container_add (GTK_CONTAINER (prefs->effects_frame), vbox);
-	gtk_container_set_border_width (GTK_CONTAINER (vbox), 5);
-
-	vbox1 = gtk_vbox_new (FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (vbox), vbox1, FALSE, TRUE, 0);
-
-	prefs->install_cmap_widget = 
-		gtk_check_button_new_with_label (_("Install colormap"));
-	gtk_box_pack_start (GTK_BOX (vbox1), prefs->install_cmap_widget, 
-			    FALSE, FALSE, 0);
-
-	prefs->fade_widget = 
-		gtk_check_button_new_with_label 
-		(_("Fade to black when activating screensaver"));
-	gtk_box_pack_start (GTK_BOX (vbox1), prefs->fade_widget, 
-			    FALSE, FALSE, 0);
-
-	prefs->unfade_widget = 
-		gtk_check_button_new_with_label 
-		(_("Fade desktop back when deactivating screensaver"));
-	gtk_box_pack_start (GTK_BOX (vbox1), prefs->unfade_widget, 
-			    FALSE, FALSE, 0);
-
-	table = gtk_table_new (4, 3, FALSE);
-	gtk_box_pack_start (GTK_BOX (vbox), table, FALSE, TRUE, 0);
-	gtk_table_set_row_spacings (GTK_TABLE (table), 5);
-	gtk_table_set_col_spacings (GTK_TABLE (table), 5);
-
-	prefs->fade_duration_label = gtk_label_new (_("Fade Duration"));
-	gtk_table_attach (GTK_TABLE (table),
-			  prefs->fade_duration_label, 0, 3, 0, 1,
-			  (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-			  (GtkAttachOptions) (0), 0, 0);
-	gtk_label_set_justify (GTK_LABEL (prefs->fade_duration_label),
-			       GTK_JUSTIFY_LEFT);
-	gtk_misc_set_alignment (GTK_MISC (prefs->fade_duration_label), 0, 0.5);
-
-	adjustment = gtk_adjustment_new (100, 0, 256, 0, 0, 0);
-	gtk_signal_connect (adjustment, "value-changed", state_changed_cb,
-			    prefs);
-	prefs->fade_ticks_widget = 
-		gtk_hscale_new (GTK_ADJUSTMENT (adjustment));
-	gtk_table_attach (GTK_TABLE (table), 
-			  prefs->fade_ticks_widget, 1, 2, 3, 4,
-			  (GtkAttachOptions) (GTK_FILL),
-			  (GtkAttachOptions) (GTK_FILL), 0, 0);
-	gtk_scale_set_draw_value (GTK_SCALE (prefs->fade_ticks_widget), FALSE);
-
-	prefs->fade_ticks_label = gtk_label_new (_("Fade Smoothness"));
-	gtk_table_attach (GTK_TABLE (table), 
-			  prefs->fade_ticks_label, 0, 3, 2, 3,
-			  (GtkAttachOptions) (GTK_FILL),
-			  (GtkAttachOptions) (0), 0, 0);
-	gtk_label_set_justify (GTK_LABEL (prefs->fade_ticks_label), 
-			       GTK_JUSTIFY_LEFT);
-	gtk_misc_set_alignment (GTK_MISC (prefs->fade_ticks_label), 0, 0);
-
-	adjustment = gtk_adjustment_new (3, 0, 10, 0, 0, 0);
-	prefs->fade_duration_widget = 
-		gtk_hscale_new (GTK_ADJUSTMENT (adjustment));
-	gtk_signal_connect (adjustment, "value-changed", state_changed_cb,
-			    prefs);
-	gtk_table_attach (GTK_TABLE (table), 
-			  prefs->fade_duration_widget, 1, 2, 1, 2,
-			  (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-			  (GtkAttachOptions) (GTK_FILL), 0, 0);
-	gtk_scale_set_draw_value (GTK_SCALE (prefs->fade_duration_widget), 
-				  FALSE);
-
-	prefs->fade_duration_high_label = gtk_label_new (_("Long"));
-	gtk_table_attach (GTK_TABLE (table), 
-			  prefs->fade_duration_high_label, 2, 3, 1, 2,
-			  (GtkAttachOptions) (GTK_FILL),
-			  (GtkAttachOptions) (0), 0, 0);
-	gtk_label_set_justify (GTK_LABEL (prefs->fade_duration_high_label), 
-			       GTK_JUSTIFY_LEFT);
-	gtk_misc_set_alignment (GTK_MISC (prefs->fade_duration_high_label), 
-				0, 0.5);
-
-	prefs->fade_ticks_high_label = gtk_label_new (_("Smooth"));
-	gtk_table_attach (GTK_TABLE (table), 
-			  prefs->fade_ticks_high_label, 2, 3, 3, 4,
-			  (GtkAttachOptions) (GTK_FILL),
-			  (GtkAttachOptions) (0), 0, 0);
-	gtk_label_set_justify (GTK_LABEL (prefs->fade_ticks_high_label), 
-			       GTK_JUSTIFY_LEFT);
-	gtk_misc_set_alignment (GTK_MISC (prefs->fade_ticks_high_label), 
-				0, 0.5);
-
-	prefs->fade_duration_low_label = gtk_label_new (_("Short"));
-	gtk_table_attach (GTK_TABLE (table), 
-			  prefs->fade_duration_low_label, 0, 1, 1, 2,
-			  (GtkAttachOptions) (GTK_FILL),
-			  (GtkAttachOptions) (0), 0, 0);
-	gtk_label_set_justify (GTK_LABEL (prefs->fade_duration_low_label), 
-			       GTK_JUSTIFY_RIGHT);
-	gtk_misc_set_alignment (GTK_MISC (prefs->fade_duration_low_label), 
-				1, 0.5);
-
-	prefs->fade_ticks_low_label = gtk_label_new (_("Jerky"));
-	gtk_table_attach (GTK_TABLE (table), 
-			  prefs->fade_ticks_low_label, 0, 1, 3, 4,
-			  (GtkAttachOptions) (GTK_FILL),
-			  (GtkAttachOptions) (0), 0, 0);
-	gtk_label_set_justify (GTK_LABEL (prefs->fade_ticks_low_label), 
-			       GTK_JUSTIFY_RIGHT);
-	gtk_misc_set_alignment (GTK_MISC (prefs->fade_ticks_low_label), 
-				1, 0.5);
-
-	gtk_widget_show_all (vbox);
-	label = gtk_label_new (_("Advanced Properties"));
-	gtk_notebook_set_tab_label (GTK_NOTEBOOK (prefs), 
-				    gtk_notebook_get_nth_page 
-				    (GTK_NOTEBOOK (prefs), 2), label);
-
-	gtk_signal_connect (GTK_OBJECT (prefs->disable_screensaver_widget), 
-			    "toggled",
-			    GTK_SIGNAL_FUNC (disable_screensaver_cb),
-			    prefs);
-	gtk_signal_connect (GTK_OBJECT (prefs->blank_screen_widget), 
-			    "toggled",
-			    GTK_SIGNAL_FUNC (blank_screen_selected_cb),
-			    prefs);
-	gtk_signal_connect (GTK_OBJECT (prefs->one_screensaver_widget), 
-			    "toggled",
-			    GTK_SIGNAL_FUNC (one_screensaver_cb),
-			    prefs);
-	gtk_signal_connect (GTK_OBJECT (prefs->choose_from_list_widget), 
-			    "toggled",
-			    GTK_SIGNAL_FUNC (choose_from_selected_cb),
-			    prefs);
-	gtk_signal_connect (GTK_OBJECT (prefs->choose_randomly_widget), 
-			    "toggled",
-			    GTK_SIGNAL_FUNC (random_cb),
-			    prefs);
-	gtk_signal_connect (GTK_OBJECT (prefs->screensaver_list),
-			    "select-row", GTK_SIGNAL_FUNC (select_saver_cb),
-			    prefs);
-	gtk_signal_connect (GTK_OBJECT (prefs->screensaver_list),
-			    "unselect-row", 
-			    GTK_SIGNAL_FUNC (deselect_saver_cb), prefs);
-	gtk_signal_connect (GTK_OBJECT (prefs->demo_button), "clicked",
-			    GTK_SIGNAL_FUNC (demo_cb),
-			    prefs);
-	gtk_signal_connect (GTK_OBJECT (prefs->settings_button), "clicked",
-			    GTK_SIGNAL_FUNC (settings_cb),
-			    prefs);
-	gtk_signal_connect (GTK_OBJECT (prefs->timeout_widget), "changed",
-			    GTK_SIGNAL_FUNC (state_changed_cb),
-			    prefs);
-	gtk_signal_connect (GTK_OBJECT (prefs->cycle_length_widget), "changed",
-			    GTK_SIGNAL_FUNC (state_changed_cb),
-			    prefs);
-	gtk_signal_connect (GTK_OBJECT (prefs->lock_widget), "toggled",
-			    GTK_SIGNAL_FUNC (require_password_changed_cb),
-			    prefs);
-	gtk_signal_connect (GTK_OBJECT (prefs->enable_timeout_widget),
-			    "toggled",
-			    GTK_SIGNAL_FUNC (lock_timeout_changed_cb),
-			    prefs);
-	gtk_signal_connect (GTK_OBJECT (prefs->time_to_lock_widget), "changed",
-			    GTK_SIGNAL_FUNC (state_changed_cb),
-			    prefs);
-	gtk_signal_connect (GTK_OBJECT (prefs->pwr_manage_enable), "toggled",
-			    GTK_SIGNAL_FUNC (power_management_toggled_cb),
-			    prefs);
-	gtk_signal_connect (GTK_OBJECT (prefs->standby_monitor_toggle), 
-			    "toggled", 
-			    GTK_SIGNAL_FUNC (standby_monitor_toggled_cb), 
-			    prefs);
-	gtk_signal_connect (GTK_OBJECT (prefs->suspend_monitor_toggle), 
-			    "toggled", 
-			    GTK_SIGNAL_FUNC (suspend_monitor_toggled_cb), 
-			    prefs);
-	gtk_signal_connect (GTK_OBJECT (prefs->shut_down_monitor_toggle), 
-			    "toggled", 
-			    GTK_SIGNAL_FUNC (shut_down_monitor_toggled_cb), 
-			    prefs);
-	gtk_signal_connect (GTK_OBJECT (prefs->standby_time_widget), 
-			    "changed",
-			    GTK_SIGNAL_FUNC (state_changed_cb),
-			    prefs);
-	gtk_signal_connect (GTK_OBJECT (prefs->suspend_time_widget), 
-			    "changed",
-			    GTK_SIGNAL_FUNC (state_changed_cb),
-			    prefs);
-	gtk_signal_connect (GTK_OBJECT (prefs->shut_down_time_widget), 
-			    "changed",
-			    GTK_SIGNAL_FUNC (state_changed_cb),
-			    prefs);
-	gtk_signal_connect (GTK_OBJECT (prefs->verbose_widget), "toggled",
-			    GTK_SIGNAL_FUNC (state_changed_cb),
-			    prefs);
-	gtk_signal_connect (GTK_OBJECT (prefs->install_cmap_widget), "toggled",
-			    GTK_SIGNAL_FUNC (install_cmap_changed_cb),
-			    prefs);
-	gtk_signal_connect (GTK_OBJECT (prefs->fade_widget), "toggled",
-			    GTK_SIGNAL_FUNC (fade_unfade_changed_cb),
-			    prefs);
-	gtk_signal_connect (GTK_OBJECT (prefs->unfade_widget), "toggled",
-			    GTK_SIGNAL_FUNC (fade_unfade_changed_cb),
-			    prefs);
+	if (prefs_widget->priv->xml)
+		gtk_object_destroy (GTK_OBJECT (prefs_widget->priv->xml));
+	g_free (prefs_widget->priv);
+
+	if (GTK_OBJECT_CLASS (prefs_widget_parent_class)->destroy)
+		(*GTK_OBJECT_CLASS (prefs_widget_parent_class)->destroy) (GTK_OBJECT (prefs_widget));
 }
 
 static void
-prefs_widget_class_init (PrefsWidgetClass *class) 
+prefs_widget_init (PrefsWidget *prefs_widget)
+{
+	GtkWidget *widget;
+	GtkWidget *table;
+	gchar *skel, *spec;
+	gchar *titles[] = { N_("Use"), N_("Screensaver"), NULL };
+	int i;
+
+	prefs_widget->priv = g_new0 (PrefsWidgetPrivate, 1);
+	prefs_widget->priv->xml =
+		glade_xml_new (GLADE_DATADIR "/screensaver-properties.glade",
+			       NULL); 
+	if (!prefs_widget->priv->xml)
+		return;
+	
+	for (i = 0; titles[i] != NULL; i++)
+		titles[i] = gettext (titles[i]);
+	
+	skel =
+"<ETableSpecification cursor-mode=\"line\" selection-mode=\"single\" draw-focus=\"true\">
+  <ETableColumn model_col=\"0\" draw_grid=\"true\" _title=\"%s\" expansion=\"0.0\" minimum_width=\"20\" resizable=\"false\" cell=\"checkbox\" compare=\"integer\"/>
+  <ETableColumn model_col=\"1\" draw_grid=\"true\" _title=\"%s\" expansion=\"1.0\" resizable=\"true\" cell=\"string\" compare=\"string\"/>
+  %s
+  </ETableSpecification>";
+
+	spec = g_strdup_printf (skel, titles[0], titles[1], table_compute_state (SM_CHOOSE_FROM_LIST));
+	prefs_widget->priv->etm =
+		e_table_simple_new (model_col_count, model_row_count,
+				    model_value_at, model_set_value_at,
+				    model_is_cell_editable,
+				    model_duplicate_value, model_free_value,
+				    model_initialize_value,
+				    model_value_is_empty,
+				    model_value_to_string,
+				    prefs_widget);
+		
+	table = e_table_new (prefs_widget->priv->etm, NULL, spec, NULL);
+	prefs_widget->priv->table = table;
+
+	gtk_widget_show (table);
+	g_free (spec);
+
+	widget = WID ("etable_scrolled");
+	gtk_container_add (GTK_CONTAINER (widget), table);
+	
+	widget = WID ("prefs_widget");
+	gtk_object_ref (GTK_OBJECT (widget));
+	gtk_container_remove (GTK_CONTAINER (WID ("throwaway_window")), widget);
+	gtk_widget_show_all (widget);
+	gtk_box_pack_start (GTK_BOX (prefs_widget), widget, TRUE, TRUE, 0);
+	gtk_object_ref (GTK_OBJECT (widget));
+	
+	prefs_widget->preview_window = WID ("preview_window");
+
+	prefs_widget->priv->random_timeout = 0;
+
+	/* Signals */
+	gtk_signal_connect (GTK_OBJECT (table), "selection_change",
+			    GTK_SIGNAL_FUNC (selection_changed_cb),
+			    prefs_widget);
+	gtk_signal_connect (GTK_OBJECT (table), "right_click",
+			    GTK_SIGNAL_FUNC (popup_item_menu),
+			    prefs_widget);
+	
+	widget = WID ("mode_option");
+	option_menu_connect (GTK_OPTION_MENU (widget),
+			     GTK_SIGNAL_FUNC (mode_changed_cb),
+			     prefs_widget);
+
+	widget = WID ("timeout_widget");
+	gtk_signal_connect (GTK_OBJECT (widget), "changed",
+			    GTK_SIGNAL_FUNC (state_changed_cb),
+			    prefs_widget);
+
+	widget = WID ("cycle_length_widget");
+	gtk_signal_connect (GTK_OBJECT (widget), "changed",
+			    GTK_SIGNAL_FUNC (state_changed_cb),
+			    prefs_widget);
+
+	widget = WID ("lock_widget");
+	gtk_signal_connect (GTK_OBJECT (widget), "toggled",
+			    GTK_SIGNAL_FUNC (state_changed_cb),
+			    prefs_widget);
+
+	widget = WID ("pwr_manage_enable");
+	gtk_signal_connect (GTK_OBJECT (widget), "toggled",
+			    GTK_SIGNAL_FUNC (pwr_manage_toggled_cb),
+			    prefs_widget);
+
+	widget = WID ("pwr_conf_button");
+	gtk_signal_connect (GTK_OBJECT (widget), "clicked",
+			    GTK_SIGNAL_FUNC (pwr_conf_cb),
+			    prefs_widget);
+
+	widget = WID ("pwr_conf_dialog");
+	gtk_signal_connect (GTK_OBJECT (widget), "clicked",
+			    GTK_SIGNAL_FUNC (pwr_conf_button_cb),
+			    prefs_widget);
+	gnome_dialog_close_hides (GNOME_DIALOG (widget), TRUE);
+	gnome_dialog_set_sensitive (GNOME_DIALOG (widget), GNOME_OK, FALSE);
+
+	widget = WID ("pwr_standby_enable");
+	gtk_signal_connect (GTK_OBJECT (widget), "toggled",
+			    GTK_SIGNAL_FUNC (pwr_state_changed_cb),
+			    prefs_widget);
+
+	widget = WID ("pwr_standby_entry");
+	gtk_signal_connect (GTK_OBJECT (widget), "changed",
+			    GTK_SIGNAL_FUNC (pwr_state_changed_cb),
+			    prefs_widget);
+
+	widget = WID ("pwr_suspend_enable");
+	gtk_signal_connect (GTK_OBJECT (widget), "toggled",
+			    GTK_SIGNAL_FUNC (pwr_state_changed_cb),
+			    prefs_widget);
+
+	widget = WID ("pwr_suspend_entry");
+	gtk_signal_connect (GTK_OBJECT (widget), "changed",
+			    GTK_SIGNAL_FUNC (pwr_state_changed_cb),
+			    prefs_widget);
+
+	widget = WID ("pwr_shutdown_enable");
+	gtk_signal_connect (GTK_OBJECT (widget), "toggled",
+			    GTK_SIGNAL_FUNC (pwr_state_changed_cb),
+			    prefs_widget);
+
+	widget = WID ("pwr_shutdown_entry");
+	gtk_signal_connect (GTK_OBJECT (widget), "changed",
+			    GTK_SIGNAL_FUNC (pwr_state_changed_cb),
+			    prefs_widget);
+
+	widget = WID ("popup_about");
+	gtk_signal_connect (GTK_OBJECT (widget), "activate",
+			    GTK_SIGNAL_FUNC (about_cb),
+			    prefs_widget);
+
+	widget = WID ("popup_settings");
+	gtk_signal_connect (GTK_OBJECT (widget), "activate",
+			    GTK_SIGNAL_FUNC (settings_cb),
+			    prefs_widget);
+}
+
+static void
+prefs_widget_class_init (PrefsWidgetClass *class)
 {
 	GtkObjectClass *object_class;
 
-	object_class = (GtkObjectClass *) class;
-    
+	object_class = GTK_OBJECT_CLASS (class);
+
 	prefs_widget_signals[STATE_CHANGED_SIGNAL] =
-		gtk_signal_new ("pref-changed", GTK_RUN_FIRST, 
+		gtk_signal_new ("pref-changed", GTK_RUN_FIRST,
 				object_class->type,
-				GTK_SIGNAL_OFFSET (PrefsWidgetClass, 
+				GTK_SIGNAL_OFFSET (PrefsWidgetClass,
 						   state_changed),
-				gtk_signal_default_marshaller, 
+				gtk_signal_default_marshaller,
 				GTK_TYPE_NONE, 0);
-    
+
 	prefs_widget_signals[ACTIVATE_DEMO_SIGNAL] =
-		gtk_signal_new ("activate-demo", GTK_RUN_FIRST, 
+		gtk_signal_new ("activate_demo", GTK_RUN_FIRST,
 				object_class->type,
-				GTK_SIGNAL_OFFSET (PrefsWidgetClass, 
+				GTK_SIGNAL_OFFSET (PrefsWidgetClass,
 						   activate_demo),
-				gtk_signal_default_marshaller, 
+				gtk_signal_default_marshaller,
 				GTK_TYPE_NONE, 0);
 
 	gtk_object_class_add_signals (object_class, prefs_widget_signals,
 				      LAST_SIGNAL);
 
 	class->state_changed = NULL;
+	object_class->destroy = prefs_widget_destroy;
 }
 
 GtkWidget *
-prefs_widget_new (void) 
+prefs_widget_new (GtkWindow *parent)
 {
-	return gtk_type_new (prefs_widget_get_type ());
+	PrefsWidget *prefs_widget = gtk_type_new (prefs_widget_get_type ());
+	prefs_widget->priv->parent = parent;
+	return GTK_WIDGET (prefs_widget);
 }
 
 void
 prefs_widget_store_prefs (PrefsWidget *prefs_widget, Preferences *prefs)
 {
-	GtkAdjustment *adjustment;
-	
-	prefs->timeout = gtk_spin_button_get_value_as_float 
-		(GTK_SPIN_BUTTON (prefs_widget->timeout_widget));
+	GtkWidget *widget;
 
-	prefs->cycle = gtk_spin_button_get_value_as_float
-		(GTK_SPIN_BUTTON (prefs_widget->cycle_length_widget));
-
-	prefs->lock = gtk_toggle_button_get_active 
-		(GTK_TOGGLE_BUTTON (prefs_widget->lock_widget));
-
-	prefs->lock_timeout = gtk_spin_button_get_value_as_float
-		(GTK_SPIN_BUTTON (prefs_widget->time_to_lock_widget));
-
-	prefs->lock_timeout = gtk_toggle_button_get_active 
-		(GTK_TOGGLE_BUTTON (prefs_widget->enable_timeout_widget));
-
-	prefs->power_management = gtk_toggle_button_get_active 
-		(GTK_TOGGLE_BUTTON (prefs_widget->pwr_manage_enable));
-
-	prefs->standby_time = gtk_spin_button_get_value_as_int
-		(GTK_SPIN_BUTTON (prefs_widget->standby_time_widget));
-
-	prefs->suspend_time = gtk_spin_button_get_value_as_int
-		(GTK_SPIN_BUTTON (prefs_widget->suspend_time_widget));
-
-	prefs->power_down_time = gtk_spin_button_get_value_as_int
-		(GTK_SPIN_BUTTON (prefs_widget->shut_down_time_widget));
-
-	prefs->lock = gtk_toggle_button_get_active 
-		(GTK_TOGGLE_BUTTON (prefs_widget->lock_widget));
-	
-	adjustment = gtk_range_get_adjustment 
-		(GTK_RANGE (prefs_widget->nice_widget));
-	prefs->nice = -adjustment->value;
-
-	prefs->verbose = gtk_toggle_button_get_active 
-		(GTK_TOGGLE_BUTTON (prefs_widget->verbose_widget));
-
-	prefs->install_colormap = gtk_toggle_button_get_active 
-		(GTK_TOGGLE_BUTTON (prefs_widget->install_cmap_widget));
-
-	prefs->fade = gtk_toggle_button_get_active 
-		(GTK_TOGGLE_BUTTON (prefs_widget->fade_widget));
-
-	prefs->unfade = gtk_toggle_button_get_active 
-		(GTK_TOGGLE_BUTTON (prefs_widget->unfade_widget));
-
-	adjustment = gtk_range_get_adjustment 
-		(GTK_RANGE (prefs_widget->fade_duration_widget));
-	prefs->fade_seconds = adjustment->value;
-
-	adjustment = gtk_range_get_adjustment 
-		(GTK_RANGE (prefs_widget->fade_ticks_widget));
-	prefs->fade_ticks = adjustment->value;
-
-	prefs->screensavers = prefs_widget->screensavers;
 	prefs->selection_mode = prefs_widget->selection_mode;
+
+	widget = WID ("timeout_widget");
+	prefs->timeout = gtk_spin_button_get_value_as_float
+		(GTK_SPIN_BUTTON (widget));
+
+	widget = WID ("cycle_length_widget");
+	prefs->cycle = gtk_spin_button_get_value_as_float
+		(GTK_SPIN_BUTTON (widget));
+
+	widget = WID ("lock_widget");
+	prefs->lock = gtk_toggle_button_get_active
+		(GTK_TOGGLE_BUTTON (widget));
+
+	widget = WID ("pwr_manage_enable");	
+	prefs->power_management = gtk_toggle_button_get_active
+		(GTK_TOGGLE_BUTTON (widget));
+
+	pwr_save_prefs (prefs_widget);
+
+	prefs->power_management = prefs_widget->priv->power_management;
+	prefs->standby_time = prefs_widget->priv->standby_time;
+	prefs->suspend_time = prefs_widget->priv->suspend_time;
+	prefs->power_down_time = prefs_widget->priv->power_down_time;
 }
 
 void
-prefs_widget_get_prefs (PrefsWidget *prefs_widget, Preferences *prefs) 
+prefs_widget_get_prefs (PrefsWidget *prefs_widget, Preferences *prefs)
 {
-	GtkWidget *widget = NULL;
-	GtkAdjustment *adjustment;
-	GdkVisual *visual;
-
-	/* Selection mode */
-
+	GtkWidget *widget;
+	
 	prefs_widget->selection_mode = prefs->selection_mode;
 
-	switch (prefs->selection_mode) {
-	case SM_DISABLE_SCREENSAVER:
-		widget = prefs_widget->disable_screensaver_widget;
-		break;
-	case SM_BLANK_SCREEN:
-		widget = prefs_widget->blank_screen_widget;
-		break;
-	case SM_ONE_SCREENSAVER_ONLY:
-		widget = prefs_widget->one_screensaver_widget;
-		break;
-	case SM_CHOOSE_FROM_LIST:
-		widget = prefs_widget->choose_from_list_widget;
-		break;
-	case SM_CHOOSE_RANDOMLY:
-		widget = prefs_widget->choose_randomly_widget;
-		break;
-	}
-
 	/* Basic options */
+	widget = WID ("mode_option");
+	gtk_option_menu_set_history (GTK_OPTION_MENU (widget),
+				     prefs_widget->selection_mode);
 
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
-	
-	gtk_spin_button_set_value 
-		(GTK_SPIN_BUTTON (prefs_widget->timeout_widget),
-		 prefs->timeout);
+	widget = WID ("timeout_widget");
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), prefs->timeout);
 
-	gtk_spin_button_set_value 
-		(GTK_SPIN_BUTTON (prefs_widget->cycle_length_widget),
-		 prefs->cycle);
+	widget = WID ("cycle_length_widget");
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), prefs->cycle);
 
 	/* Locking controls */
 
-	gtk_toggle_button_set_active 
-		(GTK_TOGGLE_BUTTON (prefs_widget->lock_widget), prefs->lock);
-
-	gtk_widget_set_sensitive (prefs_widget->time_to_lock_widget, TRUE);
-	gtk_spin_button_set_value 
-		(GTK_SPIN_BUTTON (prefs_widget->time_to_lock_widget),
-		 prefs->lock_timeout);
-
-	gtk_widget_set_sensitive (prefs_widget->time_to_lock_widget, 
-				  (gboolean) prefs->lock_timeout);
-			
-	gtk_toggle_button_set_active 
-		(GTK_TOGGLE_BUTTON (prefs_widget->enable_timeout_widget),
-		 (gboolean) prefs->lock_timeout);
-
-	set_lock_controls_sensitive (prefs_widget, prefs->lock);
+	widget = WID ("lock_widget");
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), prefs->lock);
 
 	/* Power management controls */
-	
-	gtk_toggle_button_set_active 
-		(GTK_TOGGLE_BUTTON (prefs_widget->pwr_manage_enable), 
-		 prefs->power_management);
 
+	widget = WID ("pwr_manage_enable");
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget),
+				      prefs->power_management);
+	/* I guess the above doesn't reliably trigger a signal, so... */
+	pwr_manage_toggled_cb (widget, prefs_widget);
+
+	/* Local copy */
+	prefs_widget->priv->power_management = prefs->power_management;
+	prefs_widget->priv->standby_time = prefs->standby_time;
+	prefs_widget->priv->suspend_time = prefs->suspend_time;
+	prefs_widget->priv->power_down_time = prefs->power_down_time;
+	
+	pwr_restore_prefs (prefs_widget);
+#if 0
 	gtk_spin_button_set_value 
 		(GTK_SPIN_BUTTON (prefs_widget->standby_time_widget),
 		 prefs->standby_time);
@@ -924,328 +403,389 @@ prefs_widget_get_prefs (PrefsWidget *prefs_widget, Preferences *prefs)
 	gtk_spin_button_set_value 
 		(GTK_SPIN_BUTTON (prefs_widget->suspend_time_widget),
 		 prefs->suspend_time);
-
-	gtk_toggle_button_set_active
-		(GTK_TOGGLE_BUTTON (prefs_widget->suspend_monitor_toggle),
-		 (gboolean) prefs->suspend_time);
-
-	gtk_spin_button_set_value 
-		(GTK_SPIN_BUTTON (prefs_widget->shut_down_time_widget),
-		 prefs->power_down_time);
-
-	gtk_toggle_button_set_active
-		(GTK_TOGGLE_BUTTON (prefs_widget->shut_down_monitor_toggle),
-		 (gboolean) prefs->power_down_time);
-
-	if (prefs->power_management) {
-		set_power_controls_sensitive (prefs_widget, TRUE);
-
-		set_standby_time_sensitive (prefs_widget, 
-					    (gboolean) prefs->standby_time);
-		set_suspend_time_sensitive (prefs_widget, 
-					    (gboolean) prefs->suspend_time);
-		set_power_down_time_sensitive 
-			(prefs_widget, (gboolean) prefs->power_down_time);
-
-	} else {
-		set_power_controls_sensitive (prefs_widget, FALSE);
-	}
-
-	/* Advanced options */
-
-	adjustment = gtk_range_get_adjustment 
-		(GTK_RANGE (prefs_widget->nice_widget));
-	gtk_adjustment_set_value (adjustment, -prefs->nice);
-
-	gtk_toggle_button_set_active 
-		(GTK_TOGGLE_BUTTON (prefs_widget->verbose_widget),
-		 prefs->verbose);
-
-	/* Colormap and fade controls */
-
-	visual = gdk_visual_get_system ();
-
-	if (visual->type == GDK_VISUAL_GRAYSCALE ||
-	    visual->type == GDK_VISUAL_PSEUDO_COLOR) 
-	{
-		gtk_toggle_button_set_active 
-			(GTK_TOGGLE_BUTTON (prefs_widget->install_cmap_widget),
-			 prefs->install_colormap);
-
-		if (prefs->install_colormap) {
-			set_fade_controls_sensitive (prefs_widget, TRUE);
-
-			gtk_toggle_button_set_active 
-				(GTK_TOGGLE_BUTTON (prefs_widget->fade_widget),
-				 prefs->fade);
-
-			gtk_toggle_button_set_active 
-				(GTK_TOGGLE_BUTTON 
-				 (prefs_widget->unfade_widget),
-				 prefs->unfade);
-
-			if (prefs->fade || prefs->unfade) {
-				set_fade_scales_sensitive (prefs_widget, TRUE);
-
-				adjustment = 
-					gtk_range_get_adjustment 
-					(GTK_RANGE (prefs_widget->
-						    fade_duration_widget));
-				gtk_adjustment_set_value 
-					(adjustment, prefs->fade_seconds);
-
-				adjustment = 
-					gtk_range_get_adjustment 
-					(GTK_RANGE (prefs_widget->
-						    fade_ticks_widget));
-				gtk_adjustment_set_value 
-					(adjustment,
-					 prefs->fade_ticks);
-			} else {
-				set_fade_scales_sensitive
-					(prefs_widget, FALSE);
-			}
-		} else {
-			set_fade_controls_sensitive (prefs_widget, FALSE);
-		}
-	} else {
-		gtk_widget_set_sensitive
-			(prefs_widget->install_cmap_widget, FALSE);
-
-		set_fade_controls_sensitive (prefs_widget, FALSE);
-	}
+#endif
 
 	/* Screensavers list */
-
-	prefs_widget_set_screensavers (prefs_widget,
-				       prefs->screensavers,
-				       prefs->selection_mode);
+	prefs_widget_set_screensavers (prefs_widget, prefs->screensavers);
+	prefs_widget_set_mode (prefs_widget, prefs->selection_mode);
 }
 
-void 
-prefs_widget_set_screensavers (PrefsWidget *prefs,
-			       GList *screensavers,
-			       SelectionMode mode) 
+void
+prefs_widget_set_mode (PrefsWidget *prefs_widget, SelectionMode mode)
 {
-	GList *node;
-	gint row;
-	GtkCList *clist;
+	GList *l;
 	Screensaver *saver;
+	int count;
 
-	prefs->screensavers = screensavers;
+	prefs_widget->selection_mode = mode;
+	e_table_set_state (E_TABLE (prefs_widget->priv->table),
+			   table_compute_state (mode));
 
-	clist = GTK_CLIST (prefs->screensaver_list);
+	count = e_table_selected_count (E_TABLE (prefs_widget->priv->table));
 
-	gtk_clist_freeze (clist);
+	/* Das blinkenpreviews -- if nothing else selected */	
+	if (count || (mode != SM_CHOOSE_FROM_LIST && mode != SM_CHOOSE_RANDOMLY))
+		set_random_timeout (prefs_widget, FALSE);
+	else
+		set_random_timeout (prefs_widget, TRUE);
 
-	gtk_clist_clear (clist);
-	for (node = screensavers; node; node = node->next)
-		create_list_item (SCREENSAVER (node->data), mode, prefs);
 
-	gtk_clist_thaw (clist);
+	/* This could annoy the end-user, I dunno.
+	 * This code's logic is a bit convoluted. Basically if we are
+	 * in single-mode, then we need to clear the enabled flag on all but
+	 * one saver (either the selected saver or the first enabled one, or 
+	 * the first one by default), and we need the row index of that saver.
+	 * This code does all that in a single loop. */	
 
-	if (mode == SM_ONE_SCREENSAVER_ONLY) {
-		for (row = 0; row < clist->rows; row++) {
-			saver = gtk_clist_get_row_data (clist, row);
-			if (saver->enabled) break;
+	if (mode == SM_ONE_SCREENSAVER_ONLY)
+	{
+		int row = -1, i = 0;
+
+		for (l = prefs_widget->screensavers; l != NULL; l = l->next)
+		{
+			saver = l->data;
+			if (prefs_widget->selected_saver)
+			{
+				if (saver == prefs_widget->selected_saver)
+				{
+					saver->enabled = TRUE;
+					row = i;
+				}
+				else
+					saver->enabled = FALSE;
+			}
+			else
+			{
+				if (row == -1)
+				{
+					if (saver->enabled)
+						row = i;
+				}
+				else
+				{
+					saver->enabled = FALSE;
+				}
+			}
+			i++;
 		}
-
-		select_row (clist, row);
+			
+		e_selection_model_select_single_row (
+			E_SELECTION_MODEL (E_TABLE (prefs_widget->priv->table)->selection), row);
 	}
 }
 
-static void
-set_fade_scales_sensitive (PrefsWidget *prefs_widget, gboolean s) 
+void
+prefs_widget_set_screensavers (PrefsWidget *prefs_widget, GList *screensavers)
 {
-	gtk_widget_set_sensitive (prefs_widget->fade_duration_label, s);
-	gtk_widget_set_sensitive (prefs_widget->fade_duration_low_label, s);
-	gtk_widget_set_sensitive (prefs_widget->fade_duration_high_label, s);
-	gtk_widget_set_sensitive (prefs_widget->fade_duration_widget, s);
-	gtk_widget_set_sensitive (prefs_widget->fade_ticks_label, s);
-	gtk_widget_set_sensitive (prefs_widget->fade_ticks_low_label, s);
-	gtk_widget_set_sensitive (prefs_widget->fade_ticks_high_label, s);
-	gtk_widget_set_sensitive (prefs_widget->fade_ticks_widget, s);
+	prefs_widget->screensavers = screensavers;
+	e_table_model_changed (prefs_widget->priv->etm);
 }
 
 static void
-set_fade_controls_sensitive (PrefsWidget *prefs_widget, gboolean s) 
+set_random_timeout (PrefsWidget *prefs_widget, gboolean do_random)
 {
-	gtk_widget_set_sensitive (prefs_widget->fade_widget, s);
-	gtk_widget_set_sensitive (prefs_widget->unfade_widget, s);
+	if (do_random && !prefs_widget->priv->random_timeout)
+	{
+		prefs_widget->priv->random_timeout = 
+			gtk_timeout_add (5000,
+					 (GtkFunction) random_timeout_cb,
+					 prefs_widget);
+		random_timeout_cb (prefs_widget);
+	}
+	else if (!do_random && prefs_widget->priv->random_timeout)
+	{
+		gtk_timeout_remove (prefs_widget->priv->random_timeout);
+		prefs_widget->priv->random_timeout = 0;
+	}
+}
 
-	set_fade_scales_sensitive (prefs_widget, s);
+static const gchar *
+table_compute_state (SelectionMode mode)
+{
+	if (mode == SM_ONE_SCREENSAVER_ONLY)
+		return "<ETableState><column source=\"1\"/><grouping></grouping></ETableState>";
+	else return "<ETableState><column source=\"0\"/><column source=\"1\"/><grouping></grouping></ETableState>";
+}
+
+static int
+model_col_count (ETableModel *etm, void *data)
+{
+	return 2;
+}
+
+static int
+model_row_count (ETableModel *etm, void *data)
+{
+	PrefsWidget *prefs_widget = PREFS_WIDGET (data);
+
+	return g_list_length (prefs_widget->screensavers);
+}
+
+static void *
+model_value_at (ETableModel *etm, int col, int row, void *data)
+{
+	PrefsWidget *prefs_widget = PREFS_WIDGET (data);
+	Screensaver *saver = g_list_nth_data (prefs_widget->screensavers, row);
+
+	if (!saver)
+		return NULL;
+	
+	if (col == 0)
+		return GINT_TO_POINTER (saver->enabled);
+	else
+		return saver->label;
 }
 
 static void
-set_lock_controls_sensitive (PrefsWidget *prefs, gboolean s) 
+model_set_value_at (ETableModel *etm,
+		    int col, int row,
+		    const void *val, void *data)
 {
-	gtk_widget_set_sensitive (prefs->enable_timeout_widget, s);
+	PrefsWidget *prefs_widget = PREFS_WIDGET (data);
+	Screensaver *saver = g_list_nth_data (prefs_widget->screensavers, row);
+	
+	g_assert (col == 0);
+	
+	if (!saver)
+		return;
 
-	if (gtk_toggle_button_get_active 
-	    (GTK_TOGGLE_BUTTON (prefs->enable_timeout_widget)))
-		gtk_widget_set_sensitive (prefs->time_to_lock_widget, s);
+	saver->enabled = GPOINTER_TO_INT (val);
+	state_changed_cb (GTK_WIDGET (prefs_widget), prefs_widget);
+}
 
-	gtk_widget_set_sensitive (prefs->lock_timeout_seconds_label, s);
+static gboolean
+model_is_cell_editable (ETableModel *etm, int col, int row, void *data)
+{
+	return (col == 0);
+}
+
+static void *
+model_duplicate_value (ETableModel *etm, int col, const void *value, void *data)
+{
+	if (col == 0)
+	{
+		int tmp = GPOINTER_TO_INT (value);
+		return GINT_TO_POINTER (tmp);
+	}
+	else
+		return g_strdup (value);
 }
 
 static void
-set_standby_time_sensitive (PrefsWidget *prefs_widget, gboolean s) 
+model_free_value (ETableModel *etm, int col, void *value, void *data)
 {
-	gtk_widget_set_sensitive (prefs_widget->standby_time_widget, s);
+	if (col != 0)
+		g_free (value);
+}
+
+static void *
+model_initialize_value (ETableModel *etm, int col, void *data)
+{
+	if (col == 0)
+		return GINT_TO_POINTER (0);
+	else
+		return g_strdup ("");
+}
+
+static gboolean
+model_value_is_empty (ETableModel *etm, int col, const void *value, void *data)
+{
+	if (col == 0)
+		return (!GPOINTER_TO_INT (value));
+	else
+		return (!(value && strcmp (value, "") != 0));
+}
+
+static char*
+model_value_to_string (ETableModel *etm, int col, const void *value, void *data)
+{
+	if (col == 0)
+		return g_strdup ("");
+	else
+		return g_strdup (value);
 }
 
 static void
-set_suspend_time_sensitive (PrefsWidget *prefs_widget, gboolean s) 
+selection_changed_cb (ETable *table, PrefsWidget *prefs_widget)
 {
-	gtk_widget_set_sensitive (prefs_widget->suspend_time_widget, s);
-}
-
-static void
-set_power_down_time_sensitive (PrefsWidget *prefs_widget, gboolean s) 
-{
-	gtk_widget_set_sensitive (prefs_widget->shut_down_time_widget, s);
-}
-
-static void
-set_power_controls_sensitive (PrefsWidget *prefs_widget, gboolean s) 
-{
-	gboolean value;
-
-	value = gtk_toggle_button_get_active
-		(GTK_TOGGLE_BUTTON (prefs_widget->standby_monitor_toggle));
-	set_standby_time_sensitive (prefs_widget, s & value);
-	value = gtk_toggle_button_get_active
-		(GTK_TOGGLE_BUTTON (prefs_widget->suspend_monitor_toggle));
-	set_suspend_time_sensitive (prefs_widget, s & value);
-	value = gtk_toggle_button_get_active
-		(GTK_TOGGLE_BUTTON (prefs_widget->shut_down_monitor_toggle));
-	set_power_down_time_sensitive (prefs_widget, s & value);
-
-	gtk_widget_set_sensitive (prefs_widget->standby_monitor_toggle, s);
-	gtk_widget_set_sensitive (prefs_widget->standby_monitor_label2, s);
-	gtk_widget_set_sensitive (prefs_widget->suspend_monitor_toggle, s);
-	gtk_widget_set_sensitive (prefs_widget->suspend_monitor_label2, s);
-	gtk_widget_set_sensitive (prefs_widget->shut_down_monitor_toggle, s);
-	gtk_widget_set_sensitive (prefs_widget->shut_down_monitor_label2, s);
-}
-
-static void
-set_all_pixmaps (PrefsWidget *prefs, SelectionMode mode) 
-{
-	GtkCList *list;
 	Screensaver *saver;
-	gint i;
+	int row = -1;
 
-	list = GTK_CLIST (prefs->screensaver_list);
+	e_table_selected_row_foreach (table, selection_foreach_func, &row);
+	
+	if (row == -1
+	    && (prefs_widget->selection_mode == SM_CHOOSE_RANDOMLY
+		|| prefs_widget->selection_mode == SM_CHOOSE_FROM_LIST))
+	{
+		set_random_timeout (prefs_widget, TRUE);
+		return;
+	}
+	else
+		set_random_timeout (prefs_widget, FALSE);
 
-	for (i = 0; i < list->rows; i++) {
-		saver = gtk_clist_get_row_data (list, i);
-		set_pixmap (list, saver, i, mode);
+	saver = g_list_nth_data (prefs_widget->screensavers, row);
+	if (!saver)
+		return;
+
+	if (prefs_widget->selection_mode == SM_ONE_SCREENSAVER_ONLY)
+	{
+		if (prefs_widget->selected_saver)
+			prefs_widget->selected_saver->enabled = FALSE;
+		saver->enabled = TRUE;
+	}
+
+	prefs_widget->selected_saver = saver;	
+	if (prefs_widget->selection_mode == SM_ONE_SCREENSAVER_ONLY)
+		state_changed_cb (GTK_WIDGET (table), prefs_widget);
+	show_preview (saver);
+}
+
+static void
+selection_foreach_func (int model_row, int *closure)
+{
+	g_return_if_fail (closure != NULL);
+	
+	/* Selection mode is "single */
+	*closure = model_row;
+}
+
+static gint
+random_timeout_cb (PrefsWidget *prefs_widget)
+{
+	GList *l;
+ 
+  	g_return_val_if_fail (prefs_widget != NULL, FALSE);
+	
+	l = prefs_widget->priv->random_current;
+	
+	/* Choose the next one in the list */
+	if (prefs_widget->selection_mode == SM_CHOOSE_RANDOMLY)
+	{
+		if (l)
+			l = l->next;
+		/* Handles both "l initially NULL" and "end of list" */
+		if (!l)
+			l = prefs_widget->screensavers;
+	}
+	else
+	/* Skip the non-enabled ones */
+	{
+		if (!l)
+			l = prefs_widget->screensavers;
+		else
+		{
+			l = l->next;
+			
+			if (!l)
+				l = prefs_widget->screensavers;
+		}
+		
+		while (l)
+		{
+			/* Are we back to where we started? */
+			if (((Screensaver*) l->data)->enabled
+			    || l == prefs_widget->priv->random_current)
+				break;
+			
+			l = l->next;
+			
+			if (!l)
+				l = prefs_widget->screensavers;
+		}
+	}
+
+	/* Huh? */
+	if (!l)
+		return FALSE;
+
+	prefs_widget->priv->random_current = l;
+
+	show_preview (l->data);
+}
+
+static void
+state_changed_cb (GtkWidget *widget, PrefsWidget *prefs_widget)
+{
+	gtk_signal_emit (GTK_OBJECT (prefs_widget),
+			 prefs_widget_signals[STATE_CHANGED_SIGNAL]);
+}
+
+static void
+option_menu_connect (GtkOptionMenu *menu, GtkSignalFunc func, gpointer data)
+{
+	GtkWidget *menushell;
+	GList *l;
+	guint i;
+	
+	g_return_if_fail (GTK_IS_OPTION_MENU (menu));
+	g_return_if_fail (func != NULL);
+
+	menushell = gtk_option_menu_get_menu (menu);
+	i = 1;
+	
+	for (l = GTK_MENU_SHELL (menushell)->children; l != NULL; l = l->next)
+	{
+		gtk_object_set_data (GTK_OBJECT (l->data),
+				     "index", GUINT_TO_POINTER (i));
+		gtk_signal_connect (GTK_OBJECT (l->data), "activate",
+				    func, data);
+		i++;
 	}
 }
 
 static void
-demo_cb (GtkWidget *button, PrefsWidget *widget) 
+mode_changed_cb (GtkWidget *widget, PrefsWidget *prefs_widget)
 {
-	if (!widget->selected_saver) return;
+	guint data = GPOINTER_TO_UINT (
+			gtk_object_get_data (GTK_OBJECT (widget), "index"));
 
-	gtk_signal_emit (GTK_OBJECT (widget),
-			 prefs_widget_signals[ACTIVATE_DEMO_SIGNAL]);
-	show_demo (widget->selected_saver);
+	prefs_widget_set_mode (prefs_widget, data - 1);
+	
+	state_changed_cb (widget, prefs_widget);
 }
 
 static void
-demo_next_cb (GtkWidget *button, PrefsWidget *widget) 
+popup_item_menu (ETable *table,
+		 int row, int col, GdkEvent *event,
+		 PrefsWidget *prefs_widget)
 {
-	gint row;
-
-	if (GTK_CLIST (widget->screensaver_list)->rows == 0) return;
-
-	if (widget->selected_saver) {
-		row = gtk_clist_find_row_from_data
-			(GTK_CLIST (widget->screensaver_list),
-			 widget->selected_saver) + 1;
-		if (row >= GTK_CLIST (widget->screensaver_list)->rows)
-			row = 0;
-	} else {
-		row = 0;
-	}
-
-	select_row (GTK_CLIST (widget->screensaver_list), row);
-
-	gtk_signal_emit (GTK_OBJECT (widget),
-			 prefs_widget_signals[ACTIVATE_DEMO_SIGNAL]);
-	show_demo (widget->selected_saver);
+	GtkWidget *menu = WID ("popup_menu");   
+	gtk_widget_show (menu);
+	gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL,
+			prefs_widget,
+			event->button.button, event->button.time);
 }
 
 static void
-demo_prev_cb (GtkWidget *button, PrefsWidget *widget) 
+about_cb (GtkWidget *widget, PrefsWidget *prefs_widget)
 {
-	gint row;
+	gchar *title;
+	GtkWidget *dlg, *label;
+	gchar *desc, *name;
 
-	if (GTK_CLIST (widget->screensaver_list)->rows == 0) return;
+	desc = screensaver_get_desc (prefs_widget->selected_saver);
+	label = gtk_label_new (desc);
+	gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+	g_free (desc);
+	
+	name = screensaver_get_label (prefs_widget->selected_saver->name);
+	title = g_strdup_printf ("About %s\n", name);
+	g_free (name);
+	
+	dlg = gnome_dialog_new (title, GNOME_STOCK_BUTTON_CLOSE, NULL);
+	g_free (title);
 
-	if (widget->selected_saver) {
-		row = gtk_clist_find_row_from_data
-			(GTK_CLIST (widget->screensaver_list),
-			 widget->selected_saver) - 1;
-		if (row < 0)
-			row = GTK_CLIST (widget->screensaver_list)->rows - 1;
-	} else {
-		row = GTK_CLIST (widget->screensaver_list)->rows - 1;
-	}
+	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dlg)->vbox), label,
+			    FALSE, FALSE, 0);
 
-	select_row (GTK_CLIST (widget->screensaver_list), row);
+	gtk_signal_connect (GTK_OBJECT (dlg), "clicked",
+			    gtk_object_destroy, NULL);
+	
+	gnome_dialog_set_default (GNOME_DIALOG (dlg), 0);
+	gnome_dialog_set_parent (GNOME_DIALOG (dlg),
+				 prefs_widget->priv->parent);
 
-	gtk_signal_emit (GTK_OBJECT (widget),
-			 prefs_widget_signals[ACTIVATE_DEMO_SIGNAL]);
-	show_demo (widget->selected_saver);
-}
-
-static void 
-screensaver_add_cb (GtkWidget *button, PrefsWidget *widget) 
-{
-	GtkWidget *dialog;
-
-	dialog = selection_dialog_new (widget);
-
-	gtk_signal_connect (GTK_OBJECT (dialog), "ok-clicked",
-			    GTK_SIGNAL_FUNC (add_select_cb), widget);
-}
-
-static void 
-screensaver_remove_cb (GtkWidget *button, PrefsWidget *widget)
-{
-	GtkCList *clist;
-	Screensaver *rm;
-	gint row;
-
-	if (!widget->selected_saver) return;
-
-	rm = widget->selected_saver;
-	clist = GTK_CLIST (widget->screensaver_list);
-
-	row = gtk_clist_find_row_from_data (clist, widget->selected_saver);
-	gtk_clist_remove (GTK_CLIST (widget->screensaver_list), row);
-
-	/* Find another screensaver to select */
-	if (clist->rows == 0) {
-		widget->selected_saver = NULL;
-		gtk_widget_set_sensitive (widget->demo_button, FALSE);
-		gtk_widget_set_sensitive (widget->remove_button, FALSE);
-		gtk_widget_set_sensitive (widget->settings_button, FALSE);
-	} else {
-		if (row >= clist->rows)
-			row = clist->rows - 1;
-		widget->selected_saver =
-			gtk_clist_get_row_data (clist, row);
-		select_row (clist, row);
-	}
-
-	widget->screensavers = screensaver_remove (rm, widget->screensavers);
-	screensaver_destroy (rm);
-
-	state_changed_cb (button, widget);
+	gtk_widget_show_all (dlg);
 }
 
 static void
@@ -1256,410 +796,152 @@ settings_cb (GtkWidget *button, PrefsWidget *widget)
 	if (!widget->selected_saver) return;
 
 	dialog = screensaver_prefs_dialog_new (widget->selected_saver);
+#if 0
 	gtk_signal_connect (GTK_OBJECT (dialog), "ok-clicked",
 			    GTK_SIGNAL_FUNC (screensaver_prefs_ok_cb), 
 			    widget);
 	gtk_signal_connect (GTK_OBJECT (dialog), "demo",
 			    GTK_SIGNAL_FUNC (prefs_demo_cb), 
 			    widget);
+#endif
 	gtk_widget_show_all (dialog);
 }
 
-static void 
-disable_screensaver_cb (GtkToggleButton *button, PrefsWidget *widget) 
+static void
+pwr_manage_toggled_cb (GtkWidget *button, PrefsWidget *prefs_widget)
 {
-	if (gtk_toggle_button_get_active (button)) {
-		widget->selection_mode = SM_DISABLE_SCREENSAVER;
-		set_screensavers_enabled (widget, FALSE);
-	}
-
-	state_changed_cb (GTK_WIDGET (widget), widget);
-}
-
-static void 
-blank_screen_selected_cb (GtkToggleButton *button, PrefsWidget *widget) 
-{
-	if (gtk_toggle_button_get_active (button)) {
-		widget->selection_mode = SM_BLANK_SCREEN;
-		set_screensavers_enabled (widget, FALSE);
-	}
-
-	state_changed_cb (GTK_WIDGET (widget), widget);
+	GtkWidget *conf_button = WID ("pwr_conf_button");
+	gtk_widget_set_sensitive (conf_button,
+			          gtk_toggle_button_get_active
+				  	(GTK_TOGGLE_BUTTON (button)));
+	state_changed_cb (button, prefs_widget);
 }
 
 static void
-one_screensaver_cb (GtkToggleButton *button, PrefsWidget *widget) 
+pwr_conf_cb (GtkWidget *button, PrefsWidget *prefs_widget)
 {
-	if (gtk_toggle_button_get_active (button)) {
-		widget->selection_mode = SM_ONE_SCREENSAVER_ONLY;
-		set_screensavers_enabled (widget, FALSE);
+	GtkWidget *dlg = WID ("pwr_conf_dialog");
 
-		if (!widget->selected_saver && widget->screensavers) {
-			widget->selected_saver = 
-				SCREENSAVER
-				(widget->screensavers->data);
-			select_row (GTK_CLIST (widget->screensaver_list), 0);
-		} else if (widget->screensavers) {
-			widget->selected_saver->enabled = TRUE;
-		}
-	}
-
-	state_changed_cb (GTK_WIDGET (widget), widget);
+	gtk_widget_show (dlg);
 }
 
 static void
-choose_from_selected_cb (GtkToggleButton *button, PrefsWidget *widget)
+pwr_conf_button_cb (GnomeDialog *dlg, gint button, PrefsWidget *prefs_widget)
 {
-	if (gtk_toggle_button_get_active (button)) {
-		widget->selection_mode = SM_CHOOSE_FROM_LIST;
-		set_all_pixmaps (widget, SM_CHOOSE_FROM_LIST);
-	}
+	if (button == GNOME_OK)
+		pwr_save_prefs (prefs_widget);
+	else
+		pwr_restore_prefs (prefs_widget);
 
-	state_changed_cb (GTK_WIDGET (widget), widget);
+	gnome_dialog_close (dlg);
 }
 
-static void
-random_cb (GtkToggleButton *button, PrefsWidget *widget) 
+static time_t
+pwr_get_toggled_entry (PrefsWidget *prefs_widget,
+		       const gchar *enable_str, const gchar *entry_str)
 {
-	if (gtk_toggle_button_get_active (button)) {
-		widget->selection_mode = SM_CHOOSE_RANDOMLY;
-		set_screensavers_enabled (widget, TRUE);
-	}
-
-	state_changed_cb (GTK_WIDGET (widget), widget);
-}
-
-static void
-select_saver_cb (GtkCList *list, gint row, gint column, 
-		 GdkEventButton *event, PrefsWidget *widget) 
-{
-	Screensaver *saver;
-
-	saver = gtk_clist_get_row_data (list, row);
-
-	if (widget->selection_mode == SM_ONE_SCREENSAVER_ONLY) {
-		if (widget->selected_saver)
-			widget->selected_saver->enabled = FALSE;
-		saver->enabled = TRUE;
-		state_changed_cb (GTK_WIDGET (widget), widget);
-	}
-
-	widget->selected_saver = saver;
-
-	set_description_text (widget, screensaver_get_desc (saver));
-
-	show_preview (saver);
-
-	gtk_widget_set_sensitive (widget->demo_button, TRUE);
-	gtk_widget_set_sensitive (widget->remove_button, TRUE);
-	gtk_widget_set_sensitive (widget->settings_button, TRUE);
-
-	if (column == 0 && widget->selection_mode == SM_CHOOSE_FROM_LIST)
-		toggle_saver (widget, row, saver);
-}
-
-static void
-deselect_saver_cb (GtkCList *list, gint row, gint column, 
-		   GdkEventButton *event, PrefsWidget *widget) 
-{
-	Screensaver *saver;
-	int r, c;
-
-	if (event && column == 0 && 
-	    widget->selection_mode == SM_CHOOSE_FROM_LIST) 
-	{
-		gtk_clist_get_selection_info (list, event->x, event->y, 
-					      &r, &c);
-
-		if (r == row) {
-			saver = gtk_clist_get_row_data (list, row);
-			toggle_saver (widget, row, saver);
-		}
-	}
-}
-
-static void
-require_password_changed_cb (GtkCheckButton *button, PrefsWidget *widget) 
-{
-	gboolean state;
-
-	state = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
-	set_lock_controls_sensitive (widget, state);
-
-	state_changed_cb (GTK_WIDGET (button), widget);
-}
-
-static void
-lock_timeout_changed_cb (GtkCheckButton *button, PrefsWidget *widget) 
-{
-	gboolean lock_timeout_enabled;
-
-	lock_timeout_enabled = 
-		gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
-	gtk_widget_set_sensitive (widget->time_to_lock_widget, 
-				  lock_timeout_enabled);
-
-	state_changed_cb (GTK_WIDGET (button), widget);
-}
-
-static void
-install_cmap_changed_cb (GtkCheckButton *button, PrefsWidget *widget) 
-{
-	gboolean state;
-
-	state = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
-	set_fade_controls_sensitive (widget, state);
-
-	state_changed_cb (GTK_WIDGET (button), widget);
-}
-
-static void
-fade_unfade_changed_cb (GtkCheckButton *button, PrefsWidget *widget) 
-{
-	gboolean fade, unfade;
-
-	fade = gtk_toggle_button_get_active 
-		(GTK_TOGGLE_BUTTON (widget->fade_widget));
-	unfade = gtk_toggle_button_get_active 
-		(GTK_TOGGLE_BUTTON (widget->unfade_widget));
+	GtkWidget *widget;
+       
+	g_return_val_if_fail (enable_str != NULL, 0);
+	g_return_val_if_fail (entry_str != NULL, 0);
 	
-	set_fade_scales_sensitive (widget, fade || unfade);
-
-	state_changed_cb (GTK_WIDGET (button), widget);
-}
-
-static void
-power_management_toggled_cb (GtkCheckButton *button, PrefsWidget *widget) 
-{
-	gboolean s;
-
-	s = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
-	set_power_controls_sensitive (widget, s);
-
-	state_changed_cb (GTK_WIDGET (button), widget);
-}
-
-static void
-standby_monitor_toggled_cb (GtkCheckButton *button, PrefsWidget *widget) 
-{
-	gboolean s;
-
-	s = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
-	set_standby_time_sensitive (widget, s);
-
-	state_changed_cb (GTK_WIDGET (button), widget);
-}
-
-static void
-suspend_monitor_toggled_cb (GtkCheckButton *button, PrefsWidget *widget) 
-{
-	gboolean s;
-
-	s = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
-	set_suspend_time_sensitive (widget, s);
-
-	state_changed_cb (GTK_WIDGET (button), widget);
-}
-
-static void
-shut_down_monitor_toggled_cb (GtkCheckButton *button, PrefsWidget *widget) 
-{
-	gboolean s;
-
-	s = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
-	set_power_down_time_sensitive (widget, s);
-
-	state_changed_cb (GTK_WIDGET (button), widget);
-}
-
-static void 
-state_changed_cb (GtkWidget *widget, PrefsWidget *prefs) 
-{
-	gtk_signal_emit (GTK_OBJECT (prefs), 
-			 prefs_widget_signals[STATE_CHANGED_SIGNAL]);
-}
-
-static void 
-prefs_demo_cb (GtkWidget *widget, PrefsWidget *prefs_widget) 
-{
-	gtk_signal_emit (GTK_OBJECT (prefs_widget),
-			 prefs_widget_signals[ACTIVATE_DEMO_SIGNAL]);
-}
-
-static void
-add_select_cb (GtkWidget *widget, Screensaver *saver, 
-	       PrefsWidget *prefs_widget) 
-{
-	gint row;
-
-	prefs_widget->screensavers = 
-		screensaver_add (saver, prefs_widget->screensavers);
-
-	row = create_list_item (saver, prefs_widget->selection_mode,
-				prefs_widget);
-	select_row (GTK_CLIST (prefs_widget->screensaver_list), row);
-
-	prefs_widget->selected_saver = saver;
-
-	settings_cb (widget, prefs_widget);
-}
-
-static void
-screensaver_prefs_ok_cb (ScreensaverPrefsDialog *dialog, 
-			 PrefsWidget *widget) 
-{
-	gint row;
-
-	if (dialog->saver == widget->selected_saver) {
-		show_preview (dialog->saver);
+	widget = WID (enable_str);
+	if (!widget)
+		return 0;
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)))
+	{
+		widget = WID (entry_str);
+		if (!widget)
+			return 0;
+		return gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (widget));
 	}
-
-	row = gtk_clist_find_row_from_data 
-		(GTK_CLIST (widget->screensaver_list), dialog->saver);
-	gtk_clist_set_text (GTK_CLIST (widget->screensaver_list), 
-			    row, 1, dialog->saver->label);
-	gtk_clist_sort (GTK_CLIST (widget->screensaver_list));
-
-	row = gtk_clist_find_row_from_data 
-		(GTK_CLIST (widget->screensaver_list), dialog->saver);
-	gtk_clist_moveto (GTK_CLIST (widget->screensaver_list), 
-			  row, 0, 0.5, 0);
-	state_changed_cb (GTK_WIDGET (widget), widget);
-}
-
-static void 
-set_description_text (PrefsWidget *widget, gchar *description) 
-{
-	guint length;
-
-	length = strlen (description);
-
-	gtk_text_freeze (GTK_TEXT (widget->description));
-	gtk_text_set_point (GTK_TEXT (widget->description), 0);
-	length = gtk_text_get_length (GTK_TEXT (widget->description));
-	gtk_text_forward_delete (GTK_TEXT (widget->description), length);
-	gtk_text_insert (GTK_TEXT (widget->description),
-			 NULL, NULL, NULL, description, strlen (description));
-	gtk_text_set_point (GTK_TEXT (widget->description), 0);
-	gtk_text_thaw (GTK_TEXT (widget->description));
-}
-
-static gint
-create_list_item (Screensaver *saver, SelectionMode mode, 
-		  PrefsWidget *prefs_widget) 
-{
-	char *text[2];
-	gint row;
-
-	text[0] = NULL; text[1] = saver->label;
-	row = gtk_clist_prepend (GTK_CLIST (prefs_widget->screensaver_list), 
-				 text);
-	gtk_clist_set_row_data (GTK_CLIST (prefs_widget->screensaver_list),
-				row, saver);
-	set_pixmap (GTK_CLIST (prefs_widget->screensaver_list), saver,
-		    row, mode);
-
-	return row;
-}
-
-static void 
-set_screensavers_enabled (PrefsWidget *widget, gboolean s) 
-{
-	GList *node;
-
-	for (node = widget->screensavers; node; node = node->next)
-		SCREENSAVER (node->data)->enabled = s;
-
-	set_all_pixmaps (widget, widget->selection_mode);
+	else
+	{
+		return prefs_widget->priv->standby_time = 0;
+	}
 }
 
 static void
-set_pixmap (GtkCList *clist, Screensaver *saver, gint row, SelectionMode mode) 
+pwr_save_prefs (PrefsWidget *prefs_widget)
 {
-	GdkPixbuf *pixbuf;
-	GdkPixmap *pixmap;
-	GdkBitmap *bitmap;
-	static GdkPixmap *checked_pixmap = NULL, *unchecked_pixmap = NULL;
-	static GdkPixmap *checked_disabled_pixmap = NULL;
-	static GdkPixmap *unchecked_disabled_pixmap = NULL;
-	static GdkBitmap *checked_bitmap = NULL, *unchecked_bitmap = NULL;
-	static GdkBitmap *checked_disabled_bitmap = NULL;
-	static GdkBitmap *unchecked_disabled_bitmap = NULL;
+	GtkWidget *widget;
 
-	if (mode == SM_CHOOSE_FROM_LIST && saver->enabled) {
-		if (!checked_pixmap) {
-			pixbuf = gdk_pixbuf_new_from_xpm_data 
-				((const char **) checked_xpm);
-			gdk_pixbuf_render_pixmap_and_mask
-				(pixbuf, &checked_pixmap,
-				 &checked_bitmap, 1);
-			gdk_pixbuf_unref (pixbuf);
-			gdk_pixmap_ref (checked_pixmap);
-			gdk_bitmap_ref (checked_bitmap);
-		}
- 		pixmap = checked_pixmap;
- 		bitmap = checked_bitmap;
-	}
-	else if (mode == SM_CHOOSE_FROM_LIST && !saver->enabled) {
-		if (!unchecked_pixmap) {
-			pixbuf = gdk_pixbuf_new_from_xpm_data
-				((const char **) unchecked_xpm);
-			gdk_pixbuf_render_pixmap_and_mask
-				(pixbuf, &unchecked_pixmap,
-				 &unchecked_bitmap, 1);
-			gdk_pixbuf_unref (pixbuf);
-			gdk_pixmap_ref (unchecked_pixmap);
-			gdk_bitmap_ref (unchecked_bitmap);
-		}
- 		pixmap = unchecked_pixmap;
- 		bitmap = unchecked_bitmap;
-	}
-	else if (mode == SM_CHOOSE_RANDOMLY) {
-		if (!checked_disabled_pixmap) {
-			pixbuf = gdk_pixbuf_new_from_xpm_data
-				((const char **) checked_disabled_xpm);
-			gdk_pixbuf_render_pixmap_and_mask
-				(pixbuf, &checked_disabled_pixmap,
-				 &checked_disabled_bitmap, 1);
-			gdk_pixbuf_unref (pixbuf);
-			gdk_pixmap_ref (checked_disabled_pixmap);
-			gdk_bitmap_ref (checked_disabled_bitmap);
-		}
- 		pixmap = checked_disabled_pixmap;
- 		bitmap = checked_disabled_bitmap;
-	} else {
-		if (!unchecked_disabled_pixmap) {
-			pixbuf = gdk_pixbuf_new_from_xpm_data
-				((const char **) unchecked_disabled_xpm);
-			gdk_pixbuf_render_pixmap_and_mask
-				(pixbuf, &unchecked_disabled_pixmap,
-				 &unchecked_disabled_bitmap, 1);
-			gdk_pixbuf_unref (pixbuf);
-			gdk_pixmap_ref (unchecked_disabled_pixmap);
-			gdk_bitmap_ref (unchecked_disabled_bitmap);
-		}
- 		pixmap = unchecked_disabled_pixmap;
- 		bitmap = unchecked_disabled_bitmap;
-	}
-
-	gtk_clist_set_pixmap (clist, row, 0, pixmap, bitmap);
+	widget = WID ("pwr_manage_enable");
+	prefs_widget->priv->power_management =
+		gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
+	
+	prefs_widget->priv->standby_time =
+		pwr_get_toggled_entry (prefs_widget,
+				       "pwr_standby_enable",
+				       "pwr_standby_entry");
+	prefs_widget->priv->suspend_time =
+		pwr_get_toggled_entry (prefs_widget,
+				       "pwr_suspend_enable",
+				       "pwr_suspend_entry");
+	prefs_widget->priv->power_down_time =
+		pwr_get_toggled_entry (prefs_widget,
+				       "pwr_shutdown_enable",
+				       "pwr_shutdown_entry");
 }
 
 static void
-toggle_saver (PrefsWidget *widget, gint row, Screensaver *saver)
+pwr_set_toggled_entry (PrefsWidget *prefs_widget,
+		       const gchar *enable_str, const gchar *entry_str,
+		       time_t value)
 {
-	saver->enabled = !saver->enabled;
+	GtkWidget *enable, *entry;
 
-	set_pixmap (GTK_CLIST (widget->screensaver_list),
-		    saver, row, SM_CHOOSE_FROM_LIST);
+	g_return_if_fail (enable_str != NULL);
+	g_return_if_fail (entry_str != NULL);
 
-	state_changed_cb (GTK_WIDGET (widget), widget);
+	enable = WID (enable_str);
+	entry = WID (entry_str);
+	
+	if (!(enable && entry))
+		return;
+
+	if (value)
+	{
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (enable),
+					      TRUE);
+		gtk_spin_button_set_value (GTK_SPIN_BUTTON (entry), value);
+	}
+	else
+	{
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (enable),
+					      FALSE);
+		gtk_spin_button_set_value (GTK_SPIN_BUTTON (entry), 10);
+	}
 }
 
 static void
-select_row (GtkCList *clist, gint row) 
+pwr_restore_prefs (PrefsWidget *prefs_widget)
 {
-	gtk_clist_select_row (clist, row, 1);
-	if (gtk_clist_row_is_visible (clist, row) != GTK_VISIBILITY_FULL)
-		gtk_clist_moveto (clist, row, 0, 0.5, 0);
+	GtkWidget *widget;
+	
+	widget = WID ("pwr_manage_enable");
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget),
+				      prefs_widget->priv->power_management);
+	
+	pwr_set_toggled_entry (prefs_widget,
+			       "pwr_standby_enable",
+			       "pwr_standby_entry",
+			       prefs_widget->priv->standby_time);
+	pwr_set_toggled_entry (prefs_widget,
+			       "pwr_suspend_enable",
+			       "pwr_suspend_entry",
+			       prefs_widget->priv->suspend_time);
+	pwr_set_toggled_entry (prefs_widget,
+			       "pwr_shutdown_enable",
+			       "pwr_shutdown_entry",
+			       prefs_widget->priv->power_down_time);
+}
+
+static void
+pwr_state_changed_cb (GtkWidget *widget, PrefsWidget *prefs_widget)
+{
+	GtkWidget *dlg = WID ("pwr_conf_dialog");
+	
+	gnome_dialog_set_sensitive (GNOME_DIALOG (dlg), GNOME_OK, TRUE);
+	state_changed_cb (widget, prefs_widget);
 }
