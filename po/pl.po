@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center\n"
-"POT-Creation-Date: 2002-03-09 23:32+0100\n"
-"PO-Revision-Date: 2002-03-09 23:33+0100\n"
+"POT-Creation-Date: 2002-03-12 16:14+0100\n"
+"PO-Revision-Date: 2002-03-12 16:16+0100\n"
 "Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -24,6 +24,10 @@ msgstr "Tło"
 #: capplets/background/background.desktop.in.h:1
 msgid "Configuration of the desktop's background"
 msgstr "Konfiguracja tła biurka"
+
+#: capplets/background/background-properties-capplet.c:1
+msgid "Please select a background image"
+msgstr "Wybór obrazu tła"
 
 #: capplets/background/background-properties-capplet.c:1
 #: capplets/common/capplet-util.c:1
@@ -300,7 +304,6 @@ msgid "Legacy applications settings (grdb)"
 msgstr "Ustawienie tradycyjnych aplikacji (grdb)"
 
 #: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
-#: control-center/gnomecc.glade.h:1
 msgid "Appearance"
 msgstr "Wygląd"
 
@@ -1378,18 +1381,6 @@ msgstr "Menedżer właściwości środowiska."
 msgid "Gnome Control Center : %s"
 msgstr "Centrum Sterowania GNOME : %s"
 
-#: control-center/capplet-dir-view.c:1
-msgid ""
-"No help is available/installed. Please make sure you\n"
-"have the GNOME User's Guide installed on your system."
-msgstr ""
-"Pomoc nie jest dostępna/zainstalowana. Upewnij się,\n"
-"że zainstalowany został Podręcznik Użytkownika GNOME."
-
-#: control-center/capplet-dir-view.c:1
-msgid "Close"
-msgstr "Zamknij"
-
 #: control-center/capplet-dir-view-list.c:1
 #, c-format
 msgid "GNOME Control Center: %s"
@@ -1399,37 +1390,21 @@ msgstr "Centrum Sterowania GNOME: %s"
 msgid "The GNOME configuration tool"
 msgstr "Narzędzie konfiguracyjne GNOME"
 
-#: control-center/gnomecc.glade.h:1
-msgid "Browse with multiple windows"
-msgstr "Przeglądanie w wielu oknach"
+#: control-center/gnomecc-ui.xml.h:1
+msgid "About this application"
+msgstr "Informacje o aplikacji"
 
-#: control-center/gnomecc.glade.h:1
-msgid "Browse with single window"
-msgstr "Przeglądanie w jednym oknie"
+#: control-center/gnomecc-ui.xml.h:1
+msgid "_About..."
+msgstr "_Informacje o..."
 
-#: control-center/gnomecc.glade.h:1
-msgid "Display control panels as HTML"
-msgstr "Wyświetlanie paneli w postaci HTML-a"
+#: control-center/gnomecc-ui.xml.h:1
+msgid "_File"
+msgstr "_Plik"
 
-#: control-center/gnomecc.glade.h:1
-msgid "Display control panels as a set of icons"
-msgstr "Wyświetlanie paneli w postaci zbioru ikon"
-
-#: control-center/gnomecc.glade.h:1
-msgid "Display control panels as a tree"
-msgstr "Wyświetlanie paneli w postaci drzewa"
-
-#: control-center/gnomecc.glade.h:1
-msgid "Launch control panels in separate windows"
-msgstr "Uruchamianie paneli sterowania w osobnych oknach"
-
-#: control-center/gnomecc.glade.h:1
-msgid "New-control-center"
-msgstr "Centrum Sterowania"
-
-#: control-center/gnomecc.glade.h:1
-msgid "Put control panels in the control center's window"
-msgstr "Umieszczanie paneli sterowania w oknie Centrum Sterowania"
+#: control-center/gnomecc-ui.xml.h:1
+msgid "_Help"
+msgstr "Pomo_c"
 
 #: control-center/main.c:1
 msgid "Use shell even if nautilus is running."
@@ -1455,6 +1430,14 @@ msgstr "Nie można odczytać obrazu \"%s\"; rezygnacja z tapety."
 #: libbackground/applier.c:1
 msgid "Disabled"
 msgstr "Nieaktywny"
+
+#: libbackground/preview-file-selection.c:1
+msgid "Can't find an hbox, using a normal file selection"
+msgstr "Nie można odnaleźć widgetu hbox, użyto zwykłego widgetu wyboru pliku."
+
+#: libbackground/preview-file-selection.c:1
+msgid "Preview"
+msgstr "Podgląd"
 
 #: libsounds/sound-view.c:1
 msgid "The sound file for this event does not exist."
