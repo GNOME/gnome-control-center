@@ -1,5 +1,13 @@
 2000-08-10  Bradford Hovinen  <hovinen@helixcode.com>
 
+	* expr.c (int_parse_atom): Have string -> boolean conversion
+	always convert to FALSE
+	(int_parse_factor): Set result to boolean TRUE when symbol of
+	value 1 encountered.
+
+	* screensaver-prefs-dialog.c (read_select): Don't crash if there
+	are fewer menu_item_nodes than nodes
+
 	* preview.c (show_preview): Map window before showing screensaver
 	(close_preview): Unmap window after killing screensaver
 

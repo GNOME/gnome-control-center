@@ -205,7 +205,9 @@ int_parse_atom (GScanner *scanner)
 		if (left.type == TYPE_DOUBLE)
 			left.u.v_bool = (left.u.v_double != 0.0);
 		else if (left.type == TYPE_STRING)
-			left.u.v_bool = (left.u.v_string != NULL);
+			/* Assume this is a command line identifier
+			 * that could not be found */
+			left.u.v_bool = FALSE;
 	}
 
 	left.type = TYPE_BOOLEAN;
@@ -336,8 +338,8 @@ int_parse_factor (GScanner *scanner, gboolean expr)
 	}
 	else if (token_type == G_TOKEN_SYMBOL) {
 		if (value.v_symbol == (gpointer) 1) {
-			ret.type = TYPE_DOUBLE;
-			ret.u.v_double = 1.0;
+			ret.type = TYPE_BOOLEAN;
+			ret.u.v_bool = TRUE;
 		} else {
 			ret.type = TYPE_DOUBLE;
 			ret.u.v_double = g_strtod (value.v_symbol, NULL);
