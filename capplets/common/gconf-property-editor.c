@@ -862,3 +862,100 @@ gconf_value_float_to_int (const GConfValue *value)
 	return new_value;
 }
 
+static gint
+peditor_font_get_size (const gchar *font_name)
+{
+	PangoFontDescription *desc;
+	int size;
+	
+	g_return_val_if_fail (font_name != NULL, -1);
+	
+	desc = pango_font_description_from_string (font_name);
+	size = pango_font_description_get_size (desc);
+	pango_font_description_free (desc);
+
+	return size / PANGO_SCALE;
+}
+
+static void
+peditor_font_value_changed (GConfClient         *client,
+			     guint                cnxn_id,
+			     GConfEntry          *entry,
+			     GConfPropertyEditor *peditor) 
+{
+	GConfValue *value, *value_wid;
+
+	if (peditor->p->changeset != NULL)
+		gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
+
+	value = gconf_entry_get_value (entry);
+
+	if (value != NULL) {
+		gchar *font_name;
+
+		value_wid = peditor->p->conv_to_widget_cb (value);
+		font_name = gconf_value_get_string (value_wid);
+		g_object_set (G_OBJECT (peditor->p->ui_control),
+			      "font_name", font_name,
+			      "label-font-size", peditor_font_get_size (font_name),
+			      NULL);
+		gconf_value_free (value_wid);
+	}
+}
+
+static void
+peditor_font_widget_changed (GConfPropertyEditor *peditor,
+			      gchar              *font_name,
+			      GnomeFontPicker    *font_picker)
+{
+	GConfValue *value, *value_wid;
+
+	if (!peditor->p->inited) return;
+
+	g_object_set (G_OBJECT (peditor->p->ui_control),
+		      "label-font-size", peditor_font_get_size (font_name),
+		      NULL);
+	
+	value_wid = gconf_value_new (GCONF_VALUE_STRING);
+	gconf_value_set_string (value_wid, font_name);
+	value = peditor->p->conv_from_widget_cb (value_wid);
+
+	peditor_set_gconf_value (peditor, peditor->p->key, value);
+	g_signal_emit (peditor, peditor_signals[VALUE_CHANGED], 0, peditor->p->key, value);
+
+	gconf_value_free (value_wid);
+	gconf_value_free (value);
+}
+
+GObject *
+gconf_peditor_new_font (GConfChangeSet *changeset,
+			gchar *key,
+			GtkWidget *font_picker,
+			gchar *first_property_name,
+			...)
+{
+	GObject *peditor;
+	va_list var_args;
+
+	g_return_val_if_fail (key != NULL, NULL);
+	g_return_val_if_fail (font_picker != NULL, NULL);
+	g_return_val_if_fail (GNOME_IS_FONT_PICKER (font_picker), NULL);
+
+	va_start (var_args, first_property_name);
+	
+	peditor = gconf_peditor_new
+		(key,
+		 (GConfClientNotifyFunc) peditor_font_value_changed,
+		 changeset,
+		 G_OBJECT (font_picker),
+		 first_property_name,
+		 var_args);
+
+	va_end (var_args);
+
+	g_signal_connect_swapped (G_OBJECT (font_picker), "font_set",
+				  (GCallback) peditor_font_widget_changed, peditor);
+
+	return peditor;
+}
+

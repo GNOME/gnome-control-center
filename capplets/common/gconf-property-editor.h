@@ -93,6 +93,11 @@ GObject *gconf_peditor_new_numeric_range (GConfChangeSet          *changeset,
 					  GtkWidget               *range,
 					  gchar                   *first_property_name,
 					  ...);
+GObject *gconf_peditor_new_font          (GConfChangeSet          *changeset,
+					  gchar                   *key,
+					  GtkWidget               *font_picker,
+					  gchar                   *first_property_name,
+					  ...);
 
 void gconf_peditor_widget_set_guard     (GConfPropertyEditor     *peditor,
 					 GtkWidget               *widget);
