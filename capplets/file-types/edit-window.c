@@ -517,7 +517,9 @@ populate_application_menu (GtkWidget *application_menu, const char *mime_type)
 				/* Have menu appear with default application selected */
 				gtk_menu_set_active (GTK_MENU (new_menu), index);
 			} else {
-				/* FIXME: What should we do in this case? */
+				/* FIXME bugzilla.eazel.com 1221: 
+				 * What should we do in this case? 
+				 * */
 			}
 		}
 	}

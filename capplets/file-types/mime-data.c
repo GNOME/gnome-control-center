@@ -131,7 +131,9 @@ add_to_key (char *mime_type, char *def, GHashTable *table, gboolean init_user)
 		used = 0;
 		
 		while ((ext = strtok_r (s, " \t\n\r,", &tokp)) != NULL){
-                        /* FIXME: We really need to check for duplicates before entering this. */
+                        /* FIXME bugzilla.eazel.com 1222: 
+                         * We really need to check for duplicates before entering this. 
+                         */
                         if (!init_user) {
                                 info->ext[priority] = g_list_prepend (info->ext[priority], ext);
                         } else {
