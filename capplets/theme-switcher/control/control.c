@@ -15,22 +15,27 @@ create_form (void)
   GtkListStore *store;
   GtkTreeIter iter;
   GSList *group;
-  /* just 8 short names that will serve as samples for titles in demo */
-  char *column1[4] = { N_("Eenie"),  N_("Mynie"), N_("Catcha"), N_("By Its") };
-  char *column2[4] = { N_("Meenie"), N_("Moe"),   N_("Tiger"),  N_("Toe") };
+  const gchar *text = _("Eenie Meenie Mynie Moe Catcha Tiger By Its Toe");
+  gchar **textarr;
   gint i;
+  gint col = 0, newcol;
 
   store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_STRING);
+  textarr = g_strsplit (text, " ", -1);
 
-  for (i = 0; i < 4; i++) {
-	  gtk_list_store_append (store, &iter);
+  for (i = 0; textarr && textarr[i]; i++) {
+	  if (!col) {
+		  gtk_list_store_append (store, &iter);
+		  newcol = 1;
+	  }
+	  else
+		  newcol = 0;
 
 	  gtk_list_store_set (store,
 			      &iter, 
-			      0, _(column1[i]),
-			      1, _(column2[i]),
+			      col, textarr[i],
 			      -1);
-
+	  col = newcol;
   }
   
   table = gtk_table_new (5, 3, FALSE);
