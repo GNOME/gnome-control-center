@@ -4,9 +4,11 @@ bin_PROGRAMS = behavior-properties
 
 behavior_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
 behavior_properties_SOURCES = \
-	prefs-widget.c		prefs-widget.h\
-	prefs-widget-app.c	prefs-widget-app.h\
-	preferences.c		preferences.h\
+	prefs-widget.c			prefs-widget.h\
+	prefs-widget-mdi.c		prefs-widget-mdi.h\
+	prefs-widget-dialogs.c	prefs-widget-dialogs.h\
+	prefs-widget-app.c		prefs-widget-app.h\
+	preferences.c			preferences.h\
 	main.c
 
 pixmap_DATA = 
