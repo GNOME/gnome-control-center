@@ -11,8 +11,8 @@ Glade_DATA = sound-properties.glade
 iconsdir   = $(GNOMECC_ICONS_DIR)
 icons_DATA = sound-capplet.png
 
-desktop_iconsdir = $(datadir)/pixmaps
-desktop_icons_DATA = sound-capplet.png
+desktop_iconsdir = $(GNOMECC_PIXMAPS_DIR)
+desktop_icons_DATA = sound-capplet.png visual-bell.png
 
 desktopdir = $(GNOMECC_DESKTOP_DIR)
 Desktop_in_files = sound.desktop.in
@@ -20,5 +20,5 @@ desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS) $(SOUND_CAPPLET_CFLAGS)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
-EXTRA_DIST = $(Glade_DATA) $(icons_DATA) $(Desktop_in_files)
+EXTRA_DIST = $(Glade_DATA) $(desktop_icons_DATA) $(Desktop_in_files)
 

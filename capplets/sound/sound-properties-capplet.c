@@ -41,6 +41,12 @@
 
 #include "activate-settings-daemon.h"
 
+#define ENABLE_ESD_KEY             "/desktop/gnome/sound/enable_esd"
+#define EVENT_SOUNDS_KEY           "/desktop/gnome/sound/event_sounds"
+#define VISUAL_BELL_KEY            "/apps/metacity/general/visual_bell"
+#define AUDIO_BELL_KEY             "/apps/metacity/general/audible_bell"
+#define VISUAL_BELL_TYPE_KEY       "/apps/metacity/general/visual_bell_type"
+
 /* Capplet-specific prototypes */
 
 static SoundProperties *props = NULL;
@@ -51,6 +57,46 @@ props_changed_cb (SoundProperties *p, SoundEvent *event, gpointer data)
 	sound_properties_user_save (p);
 }
 
+
+
+static GConfEnumStringPair bell_flash_enums[] = {
+	{ 0, "frame_flash" },
+	{ 1, "fullscreen_flash" },
+	{ -1, NULL }
+};
+
+static GConfValue *
+bell_flash_from_widget (GConfPropertyEditor *peditor, const GConfValue *value)
+{
+	GConfValue *new_value;
+
+	new_value = gconf_value_new (GCONF_VALUE_STRING);
+	gconf_value_set_string (new_value,
+				gconf_enum_to_string (bell_flash_enums, gconf_value_get_int (value)));
+
+	return new_value;
+}
+
+static GConfValue *
+bell_flash_to_widget (GConfPropertyEditor *peditor, const GConfValue *value)
+{
+	GConfValue *new_value;
+	const gchar *str;
+	gint val = 2;
+
+	str = (value && (value->type == GCONF_VALUE_STRING)) ? gconf_value_get_string (value) : NULL;
+
+	new_value = gconf_value_new (GCONF_VALUE_INT);
+	if (value->type == GCONF_VALUE_STRING) {
+		gconf_string_to_enum (bell_flash_enums,
+				      str,
+				      &val);
+	}
+	gconf_value_set_int (new_value, val);
+
+	return new_value;
+}
+
 /* create_dialog
  *
  * Create the dialog box and return it as a GtkWidget
@@ -59,27 +105,30 @@ props_changed_cb (SoundProperties *p, SoundEvent *event, gpointer data)
 static GladeXML *
 create_dialog (void) 
 {
-	GladeXML *data;
+	GladeXML *dialog;
 	GtkWidget *widget, *box;
 
-	data = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/sound-properties.glade", "prefs_widget", NULL);
-	widget = glade_xml_get_widget (data, "prefs_widget");
-	g_object_set_data (G_OBJECT (widget), "glade-data", data);
+	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/sound-properties.glade", "prefs_widget", NULL);
+	widget = glade_xml_get_widget (dialog, "prefs_widget");
+	g_object_set_data (G_OBJECT (widget), "glade-data", dialog);
 
 	props = sound_properties_new ();
 	sound_properties_add_defaults (props, NULL);
 	g_signal_connect (G_OBJECT (props), "event_changed",
 			  (GCallback) props_changed_cb, NULL);  
-	box = glade_xml_get_widget (data, "events_vbox");
+	box = glade_xml_get_widget (dialog, "events_vbox");
 	gtk_box_pack_start (GTK_BOX (box), sound_view_new (props),
 			    TRUE, TRUE, 0);
 
 	g_signal_connect_swapped (G_OBJECT (widget), "destroy",
 				  (GCallback) gtk_object_destroy, props);
 
-	gtk_widget_set_size_request (widget, -1, 250);
+	gtk_image_set_from_file (GTK_IMAGE (WID ("bell_image")),
+				 GNOMECC_DATA_DIR "/pixmaps/visual-bell.png");
 
-	return data;
+	gtk_widget_set_size_request (widget, -1, 250); /* Can this be right?  Seems broken for large fonts. */
+
+	return dialog;
 }
 
 /* setup_dialog
@@ -91,11 +140,27 @@ static void
 setup_dialog (GladeXML *dialog, GConfChangeSet *changeset) 
 {
 	GObject *peditor;
+	gchar *visual_type;
+	GtkWidget *flash_titlebar_widget, *flash_screen_widget;
 
-	peditor = gconf_peditor_new_boolean (NULL, "/desktop/gnome/sound/enable_esd", WID ("enable_toggle"), NULL);
+	peditor = gconf_peditor_new_boolean (NULL, ENABLE_ESD_KEY, WID ("enable_toggle"), NULL);
 	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("events_toggle"));
 	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("events_vbox"));
-	peditor = gconf_peditor_new_boolean (NULL, "/desktop/gnome/sound/event_sounds", WID ("events_toggle"), NULL);
+
+	gconf_peditor_new_boolean (NULL, EVENT_SOUNDS_KEY, WID ("events_toggle"), NULL);
+
+	gconf_peditor_new_boolean (NULL, AUDIO_BELL_KEY, WID ("bell_audible_toggle"), NULL);
+
+	peditor = gconf_peditor_new_boolean (NULL, VISUAL_BELL_KEY, WID ("bell_visual_toggle"), NULL);
+	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("bell_flash_vbox"));
+
+	/* peditor not so convenient for the radiobuttons */
+	gconf_peditor_new_select_radio (NULL,
+					VISUAL_BELL_TYPE_KEY,
+					gtk_radio_button_get_group (GTK_RADIO_BUTTON (WID ("bell_flash_window_radio"))),
+					"conv-to-widget-cb", bell_flash_to_widget,
+					"conv-from-widget-cb", bell_flash_from_widget,
+					NULL);
 }
 
 /* get_legacy_settings
@@ -163,6 +228,7 @@ main (int argc, char **argv)
 	
 	client = gconf_client_get_default ();
 	gconf_client_add_dir (client, "/desktop/gnome/sound", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+	gconf_client_add_dir (client, "/apps/metacity/general", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 
 	if (get_legacy) {
 		get_legacy_settings ();

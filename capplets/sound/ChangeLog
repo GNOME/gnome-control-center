@@ -1,3 +1,31 @@
+Fri Jun  6 19:16:43 2003  Jonathan Blandford  <jrb@gnome.org>
+
+	* sound-properties-capplet.c (bell_flash_to_widget),
+	(bell_flash_from_widget): Use a peditor for the visual bell
+	instead.
+
+2003-06-06  Bill Haneman <bill.haneman@sun.com>
+
+	* sound-properties.glade:
+	Added page tab and UI from "visual bell" capplet
+	(UI originally from Calum, except for ugly icon)
+
+	* visual-bell.png:
+	Ugly new icon which needs TLC from Calum.
+
+	* sound-properties-capplet.c:
+	Added gconf keys for visual bell feature and control of
+	audio bell.
+	(visual_bell_type_changed): New, called when visual bell radiobuttons
+	are toggled.
+	(create_dialog): 
+	Set the image on the "System Bell" notebook tab. 
+	(setup_dialog):
+	Added peditors for visual-bell and audio-bell checkboxes/gconf keys.
+	Added guards for the visual-bell type buttons, controlled by
+	the visual-bell-enabling checkbox.
+	Connected visual_bell_type_changed to "toggled" signal on radiobuttons.
+
 2003-05-07  Jody Goldberg <jody@gnome.org>
 
 	* Release 2.3.1
