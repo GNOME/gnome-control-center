@@ -42,12 +42,18 @@
 
 enum
 {
-	TARGET_URI_LIST
+	TARGET_URI_LIST,
+	TARGET_COLOR,
+	TARGET_BGIMAGE,
+/*	TARGET_BACKGROUND_RESET*/  
 };
 
 static GtkTargetEntry drop_types[] =
 {
-	{"text/uri-list", 0, TARGET_URI_LIST}
+	{"text/uri-list", 0, TARGET_URI_LIST},
+	{ "application/x-color", 0, TARGET_COLOR },
+	{ "property/bgimage", 0, TARGET_BGIMAGE },
+/*	{ "x-special/gnome-reset-background", 0, TARGET_BACKGROUND_RESET }*/
 };
 
 static gint n_drop_types = sizeof (drop_types) / sizeof (GtkTargetEntry);
@@ -486,40 +492,63 @@ drag_data_received_cb (GtkWidget *widget, GdkDragContext *context,
 		       GtkSelectionData *selection_data,
 		       guint info, guint time, gpointer data)
 {
-	GList *list;
-	GList *uris;
+	GConfClient *client = gconf_client_get_default ();
 	ApplierSet *set = (ApplierSet*) data; 
 
-	if (info != TARGET_URI_LIST)
-		return;
-	
-	uris = gnome_vfs_uri_list_parse ((gchar *) selection_data->
-					 data);
-	for (list = uris; list; list = list->next)
+	if (info == TARGET_URI_LIST ||
+	    info == TARGET_BGIMAGE)
 	{
-		GnomeVFSURI *uri = (GnomeVFSURI *) list->data;
-		GConfEntry *entry;
-		GConfValue *value = gconf_value_new (GCONF_VALUE_STRING);
-		GConfClient *client = gconf_client_get_default ();
+		GList *uris;
+
+		g_print ("got %s\n", selection_data->data);
+		uris = gnome_vfs_uri_list_parse ((gchar *) selection_data->data);
+		/* Arbitrarily pick the first item */
+		if (uris != NULL && uris->data != NULL)
+		{
+			GnomeVFSURI *uri = (GnomeVFSURI *) uris->data;
+			GConfEntry *entry;
+			GConfValue *value = gconf_value_new (GCONF_VALUE_STRING);
+			
+			gconf_value_set_string (value, gnome_vfs_uri_get_path (uri));
+
+			/* Hmm, should we bother with changeset here? */
+			gconf_client_set (client, BG_PREFERENCES_PICTURE_FILENAME, value, NULL);
+			gconf_client_suggest_sync (client, NULL);
+
+			/* this isn't emitted by the peditors,
+			 * so we have to manually update */
+			/* FIXME: this can't be right!!!! -jrb */
+			entry = gconf_entry_new (BG_PREFERENCES_PICTURE_FILENAME, value);
+			bg_preferences_merge_entry (set->prefs, entry);
+			gconf_entry_free (entry);
+			gconf_value_free (value);
+
+			gconf_client_set_string (client, BG_PREFERENCES_PICTURE_OPTIONS, "wallpaper", NULL);
+		}
+		gnome_vfs_uri_list_free (uris);
+	} else if (info == TARGET_COLOR) {
+		guint16 *channels;
+		char *color_spec;
 		
-		gconf_value_set_string (value, gnome_vfs_uri_get_path (uri));
+		if (selection_data->length != 8 || selection_data->format != 16) {
+			return;
+		}
+        
+		channels = (guint16 *) selection_data->data;
+		color_spec = g_strdup_printf ("#%02X%02X%02X", channels[0] >> 8, channels[1] >> 8, channels[2] >> 8);
+		gconf_client_set_string (client, BG_PREFERENCES_PICTURE_OPTIONS, "none", NULL);
+		gconf_client_set_string (client, BG_PREFERENCES_COLOR_SHADING_TYPE, "solid", NULL);
+		gconf_client_set_string (client, BG_PREFERENCES_PRIMARY_COLOR, color_spec, NULL);
+		g_free (color_spec);
+	} else if (info == TARGET_BGIMAGE) {
 
-		/* Hmm, should we bother with changeset here? */
-		gconf_client_set (client, BG_PREFERENCES_PICTURE_FILENAME, value, NULL);
-		gconf_client_suggest_sync (client, NULL);
+	} else if (info == TARGET_URI_LIST) {
 
-		/* this isn't emitted by the peditors,
-		 * so we have to manually update */
-		entry = gconf_entry_new (BG_PREFERENCES_PICTURE_FILENAME, value);
-		bg_preferences_merge_entry (set->prefs, entry);
-		gconf_entry_free (entry);
-		gconf_value_free (value);
 	}
-
+	
 	if (GTK_WIDGET_REALIZED (bg_applier_get_preview_widget (set->appliers[n_enum_vals - 1])))
 		applier_set_redraw (set);
 
-	gnome_vfs_uri_list_free (uris);
 }
 
 int
