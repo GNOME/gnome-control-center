@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
-"POT-Creation-Date: 2002-07-31 01:45+0800\n"
+"POT-Creation-Date: 2002-08-20 22:52-0400\n"
 "PO-Revision-Date: 2002-03-18 00:54+0800\n"
 "Last-Translator: Khairulanuar Abd Majid <khairul@ikhlas.com>\n"
 "Language-Team: Projek Gabai <gabai-penyumbang@lists.sourceforge.org>\n"
@@ -13,22 +13,22 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:225
-#: capplets/keyboard/gnome-keyboard-properties.c:144
+#: capplets/keyboard/gnome-keyboard-properties.c:160
 #, c-format
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Terdapat ralat melancarkan caplet papan kekunci: %s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:291
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:309
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Tak dapat mengimport tetapan AccessX dari fail '%s'"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:403
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:421
 msgid "Select CDE AccessX file"
 msgstr "Pilih fail AccessX CDE"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Papan Kekunci"
@@ -138,18 +138,23 @@ msgid "_Disable if unused for "
 msgstr "_Dimatikan jika tidak digunakan selama"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
+#, fuzzy
+msgid "_Enable keyboard accessibility"
+msgstr "Hidupkan kebolehaksesan Papan Kekunci"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
 msgid "_Ignore keypresses within  :"
 msgstr "_Abaikan tekanan kekunci dalam tempoh :"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
 msgid "_Import CDE AccessX file"
 msgstr "_Import fail AccessX CDE"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
 msgid "_Only accept keypress after :"
 msgstr "_Hanya terima tekanan kekunci selepas :"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:28
 msgid ""
 "_Turn off Sticky Keys when\n"
 "two keys pressed simultaneously"
@@ -157,27 +162,27 @@ msgstr ""
 "Ma_tikan Kekunci Lekat bila \n"
 "dua kekunci ditekan serentak"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
 msgid "key is _accepted"
 msgstr "Kekunci dite_rima"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
 msgid "key is _pressed"
 msgstr "kekunci dite_kan"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
 msgid "key is _rejected"
 msgstr "kekunci di_lepaskan"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
 msgid "msecs"
 msgstr "msaat"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
 msgid "pixels/sec"
 msgstr "piksel/saat"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:35
 msgid "seconds"
 msgstr "saat"
 
@@ -231,7 +236,7 @@ msgstr "_Pilih gambar:"
 #: capplets/background/background-properties-capplet.c:561
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
-#: capplets/keyboard/gnome-keyboard-properties.c:278
+#: capplets/keyboard/gnome-keyboard-properties.c:294
 #: capplets/mouse/gnome-mouse-properties.c:752
 #: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
@@ -776,7 +781,7 @@ msgid "Associate sounds with window manager events"
 msgstr "Kaitkan bunyi dengan acara pengurus tetingkap"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
 #: capplets/sound/sound.desktop.in.h:2
 msgid "Sound"
 msgstr "Bunyi"
@@ -797,109 +802,16 @@ msgstr "Aplikasi Warisan"
 msgid "Legacy applications settings (grdb)"
 msgstr "Tetapan aplikasi warisan (grdb)"
 
-#.
-#. * Translatable strings file
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/file-types/category-names.h:7
-msgid "Documents"
-msgstr "Dokumen"
-
-#: capplets/file-types/category-names.h:8
-msgid "Word Processor"
-msgstr "Pemproses Perkataan"
-
-#: capplets/file-types/category-names.h:9
-msgid "Published Materials"
-msgstr "Bahan Penerbitan"
-
-#: capplets/file-types/category-names.h:10
-msgid "Spreadsheet"
-msgstr "Hamparan helaian"
-
-#: capplets/file-types/category-names.h:11
-msgid "Presentation"
-msgstr "Persembahan"
-
-#: capplets/file-types/category-names.h:12
-msgid "Diagram"
-msgstr "Gambarajah"
-
-#: capplets/file-types/category-names.h:13
-msgid "TeX"
-msgstr "TeX"
-
-#: capplets/file-types/category-names.h:14
-msgid "Vector Graphics"
-msgstr "Grafik Vektor"
-
-#: capplets/file-types/category-names.h:15
-msgid "World Wide Web"
-msgstr "World Wide Web"
-
-#: capplets/file-types/category-names.h:16
-msgid "Plain Text"
-msgstr "Teks jernih"
-
-#: capplets/file-types/category-names.h:17
-msgid "Extended Markup Language (XML)"
-msgstr "Extended Markup Language (XML)"
-
-#: capplets/file-types/category-names.h:18
-msgid "Information"
-msgstr "Maklumat"
-
-#: capplets/file-types/category-names.h:19
-msgid "Financial"
-msgstr "Kewangan"
-
-#: capplets/file-types/category-names.h:20
-msgid "Calendar"
-msgstr "Kalendar"
-
-#: capplets/file-types/category-names.h:21
-msgid "Contacts"
-msgstr "Kenalan"
-
-#: capplets/file-types/category-names.h:22
-msgid "Packages"
-msgstr "Pakej"
-
-#: capplets/file-types/category-names.h:23
-msgid "Software Development"
-msgstr "Pembangunan Perisian"
-
-#: capplets/file-types/category-names.h:24
-msgid "Source Code"
-msgstr "Kod Sumber"
-
-#: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:668
-msgid "Audio"
-msgstr "Audio"
-
-#: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:664
-msgid "Images"
-msgstr "Imej"
-
-#: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:666
-msgid "Video"
-msgstr "Video"
-
-#: capplets/file-types/file-types-capplet.c:215
+#: capplets/file-types/file-types-capplet.c:214
 msgid "Description"
 msgstr "Huraian"
 
-#: capplets/file-types/file-types-capplet.c:237
+#: capplets/file-types/file-types-capplet.c:236
 msgid "Extensions"
 msgstr "Penghujungan"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
 #: capplets/file-types/file-types-properties.glade.h:8
-#: capplets/file-types/file-types.desktop.in.h:2
 msgid "File Types and Programs"
 msgstr "Jenis Fail dan Program"
 
@@ -912,11 +824,13 @@ msgid "Actions"
 msgstr "Aksi"
 
 #: capplets/file-types/file-types-properties.glade.h:3
-msgid "Add _file type..."
+#, fuzzy
+msgid "Add _File Type..."
 msgstr "Tambah jenis _fail..."
 
 #: capplets/file-types/file-types-properties.glade.h:4
-msgid "Add _service..."
+#, fuzzy
+msgid "Add _Service..."
 msgstr "Tambah _servis..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
@@ -1001,8 +915,14 @@ msgid "_Protocol"
 msgstr "_Protokol"
 
 #: capplets/file-types/file-types.desktop.in.h:1
-msgid "Associate applications with file types"
-msgstr "Aplikasi dikaitkan dengan jenis fail"
+#, fuzzy
+msgid "File types and programs"
+msgstr "Jenis Fail dan Program"
+
+#: capplets/file-types/file-types.desktop.in.h:2
+#, fuzzy
+msgid "Specify which programs are used to open or view each type of file"
+msgstr "Nyatakan program manadigunakan untuk membuka/melihat setiap jenis fail"
 
 #: capplets/file-types/mime-category-edit-dialog.c:138
 msgid "Edit file category"
@@ -1030,8 +950,8 @@ msgstr "Struktur mengandungi maklumat pada kategori MIME"
 #: capplets/file-types/mime-category-edit-dialog.c:344
 #: capplets/file-types/mime-edit-dialog.c:490
 #: capplets/file-types/mime-edit-dialog.c:594
-#: capplets/file-types/service-edit-dialog.c:359
-#: capplets/file-types/service-edit-dialog.c:408
+#: capplets/file-types/service-edit-dialog.c:358
+#: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
 msgstr "Tersendiri"
 
@@ -1064,7 +984,7 @@ msgid "Add File Type"
 msgstr "Tambah jenis fail"
 
 #: capplets/file-types/mime-edit-dialog.c:435
-#: capplets/file-types/mime-type-info.c:670
+#: capplets/file-types/mime-type-info.c:673
 msgid "Misc"
 msgstr "Lain-lain"
 
@@ -1073,7 +993,7 @@ msgstr "Lain-lain"
 msgid "None"
 msgstr "Tiada"
 
-#: capplets/file-types/mime-edit-dialog.c:847
+#: capplets/file-types/mime-edit-dialog.c:854
 msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
@@ -1081,17 +1001,29 @@ msgstr ""
 "Sila masukkkan jenis MIME yang sah. Ia patut dalam bentuk kelas/jenis dan "
 "tak boleh mengandungi ruang."
 
-#: capplets/file-types/mime-edit-dialog.c:854
+#: capplets/file-types/mime-edit-dialog.c:861
 msgid "A MIME type with that name already exists, overwrite ?."
 msgstr "Jenis MIME dengan nama itu sudah ada, Tindih?."
 
-#: capplets/file-types/mime-edit-dialog.c:919
+#: capplets/file-types/mime-edit-dialog.c:926
 msgid "Category"
 msgstr "Kategori"
 
-#: capplets/file-types/mime-edit-dialog.c:924
+#: capplets/file-types/mime-edit-dialog.c:931
 msgid "Choose a file category"
 msgstr "Pilih kategori fail"
+
+#: capplets/file-types/mime-type-info.c:667
+msgid "Images"
+msgstr "Imej"
+
+#: capplets/file-types/mime-type-info.c:669
+msgid "Video"
+msgstr "Video"
+
+#: capplets/file-types/mime-type-info.c:671
+msgid "Audio"
+msgstr "Audio"
 
 #: capplets/file-types/mime-types-model.c:167
 #: capplets/file-types/mime-types-model.c:168
@@ -1126,18 +1058,18 @@ msgstr "BENAR jika ianya dialog penambahan servis"
 msgid "Add Service"
 msgstr "Tambah Servis"
 
-#: capplets/file-types/service-edit-dialog.c:498
+#: capplets/file-types/service-edit-dialog.c:497
 msgid "Please enter a protocol name."
 msgstr "Sila masukkan nama protokol."
 
-#: capplets/file-types/service-edit-dialog.c:510
+#: capplets/file-types/service-edit-dialog.c:509
 msgid ""
 "Invalid protocol name. Please enter a protocol name without any spaces or "
 "punctuation."
 msgstr ""
 "Nama protokol tidak sah. Sila masukkan nama protokol tanpa ruang atau koma"
 
-#: capplets/file-types/service-edit-dialog.c:524
+#: capplets/file-types/service-edit-dialog.c:523
 msgid "There is already a protocol by that name."
 msgstr "Sudah wujud protokol dengan nama itu."
 
@@ -1227,105 +1159,123 @@ msgid "Set the font for the icons on the desktop"
 msgstr "Tetapkan font bagi ikon pada dekstop"
 
 #: capplets/font/font-properties.glade.h:13
+#, fuzzy
+msgid "Set the monospace font for terminals and similar applications"
+msgstr "Tetapkan font bagi aplikasi"
+
+#: capplets/font/font-properties.glade.h:14
 msgid "Smoothing:"
 msgstr ""
 
-#: capplets/font/font-properties.glade.h:14
+#: capplets/font/font-properties.glade.h:15
 msgid "Sub_pixel (LCDs)"
 msgstr ""
 
-#: capplets/font/font-properties.glade.h:15
+#: capplets/font/font-properties.glade.h:16
 msgid "Sub_pixel smoothing (LCDs)"
 msgstr ""
 
-#: capplets/font/font-properties.glade.h:16
+#: capplets/font/font-properties.glade.h:17
 msgid "Subpixel order:"
 msgstr ""
 
-#: capplets/font/font-properties.glade.h:17
+#: capplets/font/font-properties.glade.h:18
 msgid "VB_GR"
 msgstr ""
 
-#: capplets/font/font-properties.glade.h:18
+#: capplets/font/font-properties.glade.h:19
 msgid "_Application font:"
 msgstr "Font _Aplikasi:"
 
-#: capplets/font/font-properties.glade.h:19
+#: capplets/font/font-properties.glade.h:20
 msgid "_BGR"
 msgstr ""
 
-#: capplets/font/font-properties.glade.h:20
+#: capplets/font/font-properties.glade.h:21
 msgid "_Desktop font:"
 msgstr "Font _desktop:"
 
-#: capplets/font/font-properties.glade.h:21
+#: capplets/font/font-properties.glade.h:22
 msgid "_Full"
 msgstr "_Penuh"
 
-#: capplets/font/font-properties.glade.h:22
+#: capplets/font/font-properties.glade.h:23
 msgid "_Medium"
 msgstr "_Sederhana"
 
-#: capplets/font/font-properties.glade.h:23
+#: capplets/font/font-properties.glade.h:24
 msgid "_Monochrome"
 msgstr "_Monokrom"
 
-#: capplets/font/font-properties.glade.h:24
+#: capplets/font/font-properties.glade.h:25
 msgid "_None"
 msgstr "_Tiada"
 
-#: capplets/font/font-properties.glade.h:25
+#: capplets/font/font-properties.glade.h:26
 msgid "_RGB"
 msgstr "_RGB"
 
-#: capplets/font/font-properties.glade.h:26
+#: capplets/font/font-properties.glade.h:27
 msgid "_Slight"
 msgstr ""
 
-#: capplets/font/font-properties.glade.h:27
+#: capplets/font/font-properties.glade.h:28
+#, fuzzy
+msgid "_Terminal font:"
+msgstr "Terminal"
+
+#: capplets/font/font-properties.glade.h:29
 msgid "_VRGB"
 msgstr "_VRGB"
 
-#: capplets/keybindings/eggcellrendererkeys.c:158
+#: capplets/font/font-properties.glade.h:30
+msgid "_Window title font:"
+msgstr ""
+
 #: capplets/keybindings/eggcellrendererkeys.c:159
+#: capplets/keybindings/eggcellrendererkeys.c:160
 msgid "Accelerator modifiers"
 msgstr "Modifier pemecut"
 
-#: capplets/keybindings/eggcellrendererkeys.c:167
 #: capplets/keybindings/eggcellrendererkeys.c:168
+#: capplets/keybindings/eggcellrendererkeys.c:169
 msgid "Accelerator key"
 msgstr "Kekunci pemecut"
 
-#: capplets/keybindings/eggcellrendererkeys.c:206
-#: capplets/keybindings/gnome-keybinding-properties.c:173
+#: capplets/keybindings/eggcellrendererkeys.c:207
+#: capplets/keybindings/gnome-keybinding-properties.c:179
 #: libbackground/applier.c:588
 msgid "Disabled"
 msgstr "Dimatikan"
 
-#: capplets/keybindings/eggcellrendererkeys.c:309
-#: capplets/keybindings/eggcellrendererkeys.c:506
-#: capplets/keybindings/eggcellrendererkeys.c:509
-msgid "Type a new shortcut"
+#: capplets/keybindings/eggcellrendererkeys.c:318
+#: capplets/keybindings/eggcellrendererkeys.c:534
+msgid "Type a new accelerator, or press Backspace to clear"
+msgstr "Taip pemecut baru, atau tekan Backspace untuk terangkan"
+
+#: capplets/keybindings/eggcellrendererkeys.c:537
+#, fuzzy
+msgid "Type a new accelerator"
 msgstr "Taip pemecut baru"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:440
+#: capplets/keybindings/gnome-keybinding-properties.c:446
 msgid "<Unknown Action>"
 msgstr "<Aksi Tidak diketahui>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:459
+#: capplets/keybindings/gnome-keybinding-properties.c:465
 msgid "Desktop"
 msgstr "Desktop"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:463
+#: capplets/keybindings/gnome-keybinding-properties.c:469
 msgid "Window Management"
 msgstr "Pengurusan Tetingkap"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:560
+#: capplets/keybindings/gnome-keybinding-properties.c:566
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Ralat menetapkan pemecut baru pada pangkalandata konfigurasi: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:711
+#: capplets/keybindings/gnome-keybinding-properties.c:717
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1333,11 +1283,11 @@ msgstr ""
 "Tak dapat menjumpai tema papankekunci. Ini bermaksud pemasangan GTK+ tidak "
 "dipasang dengan sempurna."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:733
+#: capplets/keybindings/gnome-keybinding-properties.c:739
 msgid "Action"
 msgstr "Aksi"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:749
+#: capplets/keybindings/gnome-keybinding-properties.c:755
 msgid "Shortcut"
 msgstr "Pintasan"
 
@@ -1363,12 +1313,12 @@ msgstr "Pintasan _Desktop:"
 msgid "Assign shortcut keys to commands"
 msgstr "Umpuk kekunci pintasan pada arahan"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:257
+#: capplets/keyboard/gnome-keyboard-properties.c:273
 msgid "_Accessibility"
 msgstr "Keboleh_capaikan"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:274
-#: capplets/keyboard/gnome-keyboard-properties.c:276
+#: capplets/keyboard/gnome-keyboard-properties.c:290
+#: capplets/keyboard/gnome-keyboard-properties.c:292
 #: capplets/sound/sound-properties-capplet.c:145
 #: capplets/sound/sound-properties-capplet.c:147
 msgid ""
@@ -1378,79 +1328,91 @@ msgstr ""
 "deamon)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:2
-msgid "Bee_p"
+msgid "<small><i>Fast</i></small>"
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+msgid "<small><i>Long</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+msgid "<small><i>Short</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+msgid "<small><i>Slow</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+msgid "Bee_p"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "C_ustom:"
 msgstr "Ter_sendiri:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "Clic_k on keypress"
 msgstr "Kli_k pada tekanan kekunci"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "Cursor Blinks"
 msgstr "Kerdipan Kursor"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "Keyboard Bell"
 msgstr "Bunyi Papan Kekunci"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Keyboard Preferences"
 msgstr "Keutamaan Papan Kekunci"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Keyboard _repeats when key is held down"
 msgstr "_Ulangan apabila kekunci ditekan"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Keypress Click"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
 msgid "Repeat Keys"
 msgstr "Kekunci Ulangan"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "S_peed:"
 msgstr "Ke_lajuan:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid "_Accessibility..."
 msgstr "Keboleh_capaian..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "_Blinks in text boxes and fields"
 msgstr "_Kerdipan  pada kekotak dan medan teks"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
 msgid "_Delay:"
 msgstr "_Sela:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
 msgid "_Off"
 msgstr "_Off"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid "_Speed:"
 msgstr "Ke_lajuan:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "_Volume:"
 msgstr "_Volum:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
-msgid "faster"
-msgstr "lebih pantas"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
 #, fuzzy
 msgid "loud"
 msgstr "Bunyi"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "quiet"
 msgstr "senyap"
 
@@ -1789,20 +1751,21 @@ msgid "Theme"
 msgstr "Tema"
 
 #: capplets/theme-switcher/theme-properties.glade.h:1
-msgid "Installed Themes"
-msgstr "Tema Terpasang"
-
-#: capplets/theme-switcher/theme-properties.glade.h:2
-msgid "List of available GTK+ themes"
-msgstr "Senarai tema GTK+ yang ada"
-
-#: capplets/theme-switcher/theme-properties.glade.h:3
 msgid "New themes can also be installed by dragging them into the window."
 msgstr "Tema baru boleh juga dipasang dengan mengheret tema ke tetingkap."
 
-#: capplets/theme-switcher/theme-properties.glade.h:4
+#: capplets/theme-switcher/theme-properties.glade.h:2
 msgid "Theme Preferences"
 msgstr "Keutamaan Tema"
+
+#: capplets/theme-switcher/theme-properties.glade.h:3
+msgid "Widget Theme"
+msgstr ""
+
+#: capplets/theme-switcher/theme-properties.glade.h:4
+#, fuzzy
+msgid "Window Border Theme"
+msgstr "Penampilan Sempadan Tetingkap"
 
 #: capplets/theme-switcher/theme-properties.glade.h:5
 msgid "_Go to theme folder"
@@ -2116,7 +2079,7 @@ msgstr ""
 msgid "_Do not show this message again"
 msgstr "_Jangan papar mesej ini lagi"
 
-#: gnome-settings-daemon/gnome-settings-sound.c:125
+#: gnome-settings-daemon/gnome-settings-sound.c:128
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Tak dapat memuatkan fail bunyi %s sebagai contoh %s"
@@ -2251,6 +2214,72 @@ msgstr ""
 #: libwindow-settings/gnome-wm-manager.c:464
 msgid "OK"
 msgstr "OK"
+
+#~ msgid "Documents"
+#~ msgstr "Dokumen"
+
+#~ msgid "Word Processor"
+#~ msgstr "Pemproses Perkataan"
+
+#~ msgid "Published Materials"
+#~ msgstr "Bahan Penerbitan"
+
+#~ msgid "Spreadsheet"
+#~ msgstr "Hamparan helaian"
+
+#~ msgid "Presentation"
+#~ msgstr "Persembahan"
+
+#~ msgid "Diagram"
+#~ msgstr "Gambarajah"
+
+#~ msgid "TeX"
+#~ msgstr "TeX"
+
+#~ msgid "Vector Graphics"
+#~ msgstr "Grafik Vektor"
+
+#~ msgid "World Wide Web"
+#~ msgstr "World Wide Web"
+
+#~ msgid "Plain Text"
+#~ msgstr "Teks jernih"
+
+#~ msgid "Extended Markup Language (XML)"
+#~ msgstr "Extended Markup Language (XML)"
+
+#~ msgid "Information"
+#~ msgstr "Maklumat"
+
+#~ msgid "Financial"
+#~ msgstr "Kewangan"
+
+#~ msgid "Calendar"
+#~ msgstr "Kalendar"
+
+#~ msgid "Contacts"
+#~ msgstr "Kenalan"
+
+#~ msgid "Packages"
+#~ msgstr "Pakej"
+
+#~ msgid "Software Development"
+#~ msgstr "Pembangunan Perisian"
+
+#~ msgid "Source Code"
+#~ msgstr "Kod Sumber"
+
+#~ msgid "Associate applications with file types"
+#~ msgstr "Aplikasi dikaitkan dengan jenis fail"
+
+#~ msgid "faster"
+#~ msgstr "lebih pantas"
+
+#~ msgid "Installed Themes"
+#~ msgstr "Tema Terpasang"
+
+#~ msgid "List of available GTK+ themes"
+#~ msgstr "Senarai tema GTK+ yang ada"
 
 #~ msgid "Item 2"
 #~ msgstr "Item 2"
@@ -2397,9 +2426,6 @@ msgstr "OK"
 #~ msgid "Change the default fonts used by the desktop and applications"
 #~ msgstr "Tukar font default digunakan oleh desktop dan aplikasi"
 
-#~ msgid "Type a new accelerator, or press Backspace to clear"
-#~ msgstr "Taip pemecut baru, atau tekan Backspace untuk terangkan"
-
 #~ msgid "Keyboard _Navigation scheme for use in applications:"
 #~ msgstr "Skema _Navigasi untuk digunakan pada aplikasi:"
 
@@ -2427,10 +2453,6 @@ msgstr "OK"
 
 #~ msgid "Change how toolbars and menus are displayed"
 #~ msgstr "Tukar bagaimana toolbar dan menu dipaparkan"
-
-#, fuzzy
-#~ msgid "_Enable keyboard accessibility"
-#~ msgstr "Hidupkan kebolehaksesan Papan Kekunci"
 
 #~ msgid "<b>Test</b>"
 #~ msgstr "<i>Ujian</i>"

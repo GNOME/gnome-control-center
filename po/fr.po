@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 2.0.0\n"
-"POT-Creation-Date: 2002-07-21 15:23+0200\n"
+"POT-Creation-Date: 2002-08-20 22:52-0400\n"
 "PO-Revision-Date: 2002-07-21 15:15+0200\n"
 "Last-Translator: Christophe Merlet (RedFox) <christophe@merlet.net>\n"
 "Language-Team: Gnome French Team <gnomefr@traduc.org>\n"
@@ -19,22 +19,22 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:225
-#: capplets/keyboard/gnome-keyboard-properties.c:143
+#: capplets/keyboard/gnome-keyboard-properties.c:160
 #, c-format
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Il y a eu une erreur lors du lancement de la capplet clavier : %s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:291
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:309
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Incapable d'importer les paramètres AccessX à partir du fichier « %s »"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:403
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:421
 msgid "Select CDE AccessX file"
 msgstr "Sélectionnez le fichier CDE AccessX"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Clavier"
@@ -151,45 +151,49 @@ msgid "_Disable if unused for "
 msgstr "_Désactiver si non-utilisé pour"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
+msgid "_Enable keyboard accessibility"
+msgstr "_Activer l'accessibilité au clavier"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
 msgid "_Ignore keypresses within  :"
 msgstr "_Ignorer l'enfoncement des touches survenues entre : "
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
 msgid "_Import CDE AccessX file"
 msgstr "_Importer le fichier CDE AccessX"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
 msgid "_Only accept keypress after :"
 msgstr "N'accepter les touches enfoncés qu'après : "
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:28
 msgid ""
 "_Turn off Sticky Keys when\n"
 "two keys pressed simultaneously"
 msgstr ""
 "_Désactiver Sticky Keys lorsque deux touches sont enfoncées simultanément"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
 msgid "key is _accepted"
 msgstr "la touche est _acceptée"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
 msgid "key is _pressed"
 msgstr "la touche est _enfoncée"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
 msgid "key is _rejected"
 msgstr "la touche est _rejetée"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
 msgid "msecs"
 msgstr "millisecondes"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
 msgid "pixels/sec"
 msgstr "pixels/sec"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:35
 msgid "seconds"
 msgstr "secondes"
 
@@ -243,7 +247,7 @@ msgstr "_Sélectionnez une image :"
 #: capplets/background/background-properties-capplet.c:561
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
-#: capplets/keyboard/gnome-keyboard-properties.c:277
+#: capplets/keyboard/gnome-keyboard-properties.c:294
 #: capplets/mouse/gnome-mouse-properties.c:752
 #: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
@@ -795,7 +799,7 @@ msgid "Associate sounds with window manager events"
 msgstr "Associe des sons avec les événements du gestionnaire de fenêtres"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
 #: capplets/sound/sound.desktop.in.h:2
 msgid "Sound"
 msgstr "Son"
@@ -816,109 +820,16 @@ msgstr "Applications antérieures ou non-conforme à GNOME"
 msgid "Legacy applications settings (grdb)"
 msgstr "Paramètres des applications antérieures à GNOME"
 
-#.
-#. * Translatable strings file
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/file-types/category-names.h:7
-msgid "Documents"
-msgstr "Documents"
-
-#: capplets/file-types/category-names.h:8
-msgid "Word Processor"
-msgstr "Traitement de texte"
-
-#: capplets/file-types/category-names.h:9
-msgid "Published Materials"
-msgstr "Support de publication"
-
-#: capplets/file-types/category-names.h:10
-msgid "Spreadsheet"
-msgstr "Tableur"
-
-#: capplets/file-types/category-names.h:11
-msgid "Presentation"
-msgstr "Présentation"
-
-#: capplets/file-types/category-names.h:12
-msgid "Diagram"
-msgstr "Diagramme"
-
-#: capplets/file-types/category-names.h:13
-msgid "TeX"
-msgstr "TeX"
-
-#: capplets/file-types/category-names.h:14
-msgid "Vector Graphics"
-msgstr "Graphiques vectoriels"
-
-#: capplets/file-types/category-names.h:15
-msgid "World Wide Web"
-msgstr "World Wide Web"
-
-#: capplets/file-types/category-names.h:16
-msgid "Plain Text"
-msgstr "Texte brut"
-
-#: capplets/file-types/category-names.h:17
-msgid "Extended Markup Language (XML)"
-msgstr "Langage de marquage étendu (XML)"
-
-#: capplets/file-types/category-names.h:18
-msgid "Information"
-msgstr "Information"
-
-#: capplets/file-types/category-names.h:19
-msgid "Financial"
-msgstr "Finance"
-
-#: capplets/file-types/category-names.h:20
-msgid "Calendar"
-msgstr "Calendrier"
-
-#: capplets/file-types/category-names.h:21
-msgid "Contacts"
-msgstr "Contacts"
-
-#: capplets/file-types/category-names.h:22
-msgid "Packages"
-msgstr "Archives"
-
-#: capplets/file-types/category-names.h:23
-msgid "Software Development"
-msgstr "Développement logiciel"
-
-#: capplets/file-types/category-names.h:24
-msgid "Source Code"
-msgstr "Code source"
-
-#: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:668
-msgid "Audio"
-msgstr "Audio"
-
-#: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:664
-msgid "Images"
-msgstr "Images"
-
-#: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:666
-msgid "Video"
-msgstr "Vidéo"
-
-#: capplets/file-types/file-types-capplet.c:215
+#: capplets/file-types/file-types-capplet.c:214
 msgid "Description"
 msgstr "Description"
 
-#: capplets/file-types/file-types-capplet.c:237
+#: capplets/file-types/file-types-capplet.c:236
 msgid "Extensions"
 msgstr "Extensions"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
 #: capplets/file-types/file-types-properties.glade.h:8
-#: capplets/file-types/file-types.desktop.in.h:2
 msgid "File Types and Programs"
 msgstr "Types de fichiers et programmes"
 
@@ -933,11 +844,13 @@ msgid "Actions"
 msgstr "Actions"
 
 #: capplets/file-types/file-types-properties.glade.h:3
-msgid "Add _file type..."
+#, fuzzy
+msgid "Add _File Type..."
 msgstr "Ajouter un type de _fichier..."
 
 #: capplets/file-types/file-types-properties.glade.h:4
-msgid "Add _service..."
+#, fuzzy
+msgid "Add _Service..."
 msgstr "Ajouter un _service..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
@@ -1022,8 +935,16 @@ msgid "_Protocol"
 msgstr "_Protocole"
 
 #: capplets/file-types/file-types.desktop.in.h:1
-msgid "Associate applications with file types"
-msgstr "Applications associées avec les types de fichier"
+#, fuzzy
+msgid "File types and programs"
+msgstr "Types de fichiers et programmes"
+
+#: capplets/file-types/file-types.desktop.in.h:2
+#, fuzzy
+msgid "Specify which programs are used to open or view each type of file"
+msgstr ""
+"Spécifie quels programmes sont utilisés pour ouvrir ou visionner chaque type "
+"de fichier"
 
 #: capplets/file-types/mime-category-edit-dialog.c:138
 msgid "Edit file category"
@@ -1051,8 +972,8 @@ msgstr "Structure comprenant l'information de la catégorie MIME"
 #: capplets/file-types/mime-category-edit-dialog.c:344
 #: capplets/file-types/mime-edit-dialog.c:490
 #: capplets/file-types/mime-edit-dialog.c:594
-#: capplets/file-types/service-edit-dialog.c:359
-#: capplets/file-types/service-edit-dialog.c:408
+#: capplets/file-types/service-edit-dialog.c:358
+#: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
 msgstr "Personnalisé"
 
@@ -1085,7 +1006,7 @@ msgid "Add File Type"
 msgstr "Ajouter un type de fichier"
 
 #: capplets/file-types/mime-edit-dialog.c:435
-#: capplets/file-types/mime-type-info.c:670
+#: capplets/file-types/mime-type-info.c:673
 msgid "Misc"
 msgstr "Divers"
 
@@ -1094,7 +1015,7 @@ msgstr "Divers"
 msgid "None"
 msgstr "Aucun"
 
-#: capplets/file-types/mime-edit-dialog.c:847
+#: capplets/file-types/mime-edit-dialog.c:854
 msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
@@ -1102,17 +1023,29 @@ msgstr ""
 "Veuillez saisir un type mIME valide. Il doit être de la forme class/type et "
 "ne doit pas contenir d'espace."
 
-#: capplets/file-types/mime-edit-dialog.c:854
+#: capplets/file-types/mime-edit-dialog.c:861
 msgid "A MIME type with that name already exists, overwrite ?."
 msgstr "Un type MIME avec ce nom existe déjà, l'écraser ?."
 
-#: capplets/file-types/mime-edit-dialog.c:919
+#: capplets/file-types/mime-edit-dialog.c:926
 msgid "Category"
 msgstr "Catégorie"
 
-#: capplets/file-types/mime-edit-dialog.c:924
+#: capplets/file-types/mime-edit-dialog.c:931
 msgid "Choose a file category"
 msgstr "Choisisser une catégorie de fichier"
+
+#: capplets/file-types/mime-type-info.c:667
+msgid "Images"
+msgstr "Images"
+
+#: capplets/file-types/mime-type-info.c:669
+msgid "Video"
+msgstr "Vidéo"
+
+#: capplets/file-types/mime-type-info.c:671
+msgid "Audio"
+msgstr "Audio"
 
 #: capplets/file-types/mime-types-model.c:167
 #: capplets/file-types/mime-types-model.c:168
@@ -1147,11 +1080,11 @@ msgstr "VRAI si cela est un dialogue d'ajout de service"
 msgid "Add Service"
 msgstr "Ajouter un service"
 
-#: capplets/file-types/service-edit-dialog.c:498
+#: capplets/file-types/service-edit-dialog.c:497
 msgid "Please enter a protocol name."
 msgstr "Veullez entrer un nom de protocole."
 
-#: capplets/file-types/service-edit-dialog.c:510
+#: capplets/file-types/service-edit-dialog.c:509
 msgid ""
 "Invalid protocol name. Please enter a protocol name without any spaces or "
 "punctuation."
@@ -1159,7 +1092,7 @@ msgstr ""
 "Nom de protocole invalide.  Veuillez entrer un nom de protocole sans espace "
 "ni ponctuation."
 
-#: capplets/file-types/service-edit-dialog.c:524
+#: capplets/file-types/service-edit-dialog.c:523
 msgid "There is already a protocol by that name."
 msgstr "Il y a déjà un protocole du même nom."
 
@@ -1200,67 +1133,182 @@ msgid "Select fonts for the desktop"
 msgstr "Sélectionne les polices pour le bureau"
 
 #: capplets/font/font-properties.glade.h:1
+#, fuzzy
+msgid "Best _shapes"
+msgstr "Netscape"
+
+#: capplets/font/font-properties.glade.h:2
+msgid "Best co_ntrast"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:3
+msgid "De_tails..."
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:4
 msgid "Font Preferences"
 msgstr "Propriétés des polices"
 
-#: capplets/font/font-properties.glade.h:2
+#: capplets/font/font-properties.glade.h:5
+#, fuzzy
+msgid "Font Rendering"
+msgstr "Propriétés des polices"
+
+#: capplets/font/font-properties.glade.h:6
+msgid "Font Rendering Details"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:7
+msgid "G_rayscale"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:8
+msgid "Hinting:"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:9
+#, fuzzy
+msgid "N_one"
+msgstr "Aucun"
+
+#: capplets/font/font-properties.glade.h:10
+msgid "Resolution (_dots per inch):"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:11
 msgid "Set the font for applications"
 msgstr "Choix de la police pour les applications"
 
-#: capplets/font/font-properties.glade.h:3
+#: capplets/font/font-properties.glade.h:12
 msgid "Set the font for the icons on the desktop"
 msgstr "Modifie la police des icônes du bureau"
 
-#: capplets/font/font-properties.glade.h:4
+#: capplets/font/font-properties.glade.h:13
+#, fuzzy
+msgid "Set the monospace font for terminals and similar applications"
+msgstr "Choix de la police pour les applications"
+
+#: capplets/font/font-properties.glade.h:14
+msgid "Smoothing:"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:15
+msgid "Sub_pixel (LCDs)"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:16
+msgid "Sub_pixel smoothing (LCDs)"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:17
+msgid "Subpixel order:"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:18
+msgid "VB_GR"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:19
 msgid "_Application font:"
 msgstr "Police d'_application :"
 
-#: capplets/font/font-properties.glade.h:5
+#: capplets/font/font-properties.glade.h:20
+msgid "_BGR"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:21
 msgid "_Desktop font:"
 msgstr "Police du _bureau :"
 
-#: capplets/keybindings/eggcellrendererkeys.c:158
+#: capplets/font/font-properties.glade.h:22
+#, fuzzy
+msgid "_Full"
+msgstr "_Fichier"
+
+#: capplets/font/font-properties.glade.h:23
+#, fuzzy
+msgid "_Medium"
+msgstr "Moyen"
+
+#: capplets/font/font-properties.glade.h:24
+msgid "_Monochrome"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:25
+#, fuzzy
+msgid "_None"
+msgstr "Aucun"
+
+#: capplets/font/font-properties.glade.h:26
+msgid "_RGB"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:27
+#, fuzzy
+msgid "_Slight"
+msgstr "Droite"
+
+#: capplets/font/font-properties.glade.h:28
+#, fuzzy
+msgid "_Terminal font:"
+msgstr "Terminal"
+
+#: capplets/font/font-properties.glade.h:29
+msgid "_VRGB"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:30
+msgid "_Window title font:"
+msgstr ""
+
 #: capplets/keybindings/eggcellrendererkeys.c:159
+#: capplets/keybindings/eggcellrendererkeys.c:160
 msgid "Accelerator modifiers"
 msgstr "Accélération"
 
-#: capplets/keybindings/eggcellrendererkeys.c:167
 #: capplets/keybindings/eggcellrendererkeys.c:168
+#: capplets/keybindings/eggcellrendererkeys.c:169
 msgid "Accelerator key"
 msgstr "Touche d'accélération"
 
-#: capplets/keybindings/eggcellrendererkeys.c:206
-#: capplets/keybindings/gnome-keybinding-properties.c:173
-#: libbackground/applier.c:521
+#: capplets/keybindings/eggcellrendererkeys.c:207
+#: capplets/keybindings/gnome-keybinding-properties.c:179
+#: libbackground/applier.c:588
 msgid "Disabled"
 msgstr "Désactivé"
 
-#: capplets/keybindings/eggcellrendererkeys.c:309
-#: capplets/keybindings/eggcellrendererkeys.c:506
-#: capplets/keybindings/eggcellrendererkeys.c:509
-msgid "Type a new shortcut"
+#: capplets/keybindings/eggcellrendererkeys.c:318
+#: capplets/keybindings/eggcellrendererkeys.c:534
+msgid "Type a new accelerator, or press Backspace to clear"
+msgstr ""
+"Entrer un nouvel accélérateur, ou appuyer sur la barre d'espacement pour "
+"libérer le champ"
+
+#: capplets/keybindings/eggcellrendererkeys.c:537
+#, fuzzy
+msgid "Type a new accelerator"
 msgstr "Saisissez un nouveau raccourci"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:440
+#: capplets/keybindings/gnome-keybinding-properties.c:446
 msgid "<Unknown Action>"
 msgstr "<Action Inconnu>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:459
+#: capplets/keybindings/gnome-keybinding-properties.c:465
 msgid "Desktop"
 msgstr "Bureau"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:463
+#: capplets/keybindings/gnome-keybinding-properties.c:469
 msgid "Window Management"
 msgstr "Gestion des fenêtres"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:560
+#: capplets/keybindings/gnome-keybinding-properties.c:566
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 "Erreur lors de la définition du nouvel accélérateur dans la base de données "
 "de configuration : %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:711
+#: capplets/keybindings/gnome-keybinding-properties.c:717
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1268,11 +1316,11 @@ msgstr ""
 "Impossible de trouver un seul thème de clavier.  Cela veut dire que votre "
 "installation de GT+ est vraisemblablement incomplète."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:733
+#: capplets/keybindings/gnome-keybinding-properties.c:739
 msgid "Action"
 msgstr "Action"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:749
+#: capplets/keybindings/gnome-keybinding-properties.c:755
 msgid "Shortcut"
 msgstr "Raccourci"
 
@@ -1297,12 +1345,12 @@ msgstr "Raccourcis d'édition de _texte :"
 msgid "Assign shortcut keys to commands"
 msgstr "Assigner les touches de raccourcis aux commandes"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:256
+#: capplets/keyboard/gnome-keyboard-properties.c:273
 msgid "_Accessibility"
 msgstr "_Accessibilité"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:273
-#: capplets/keyboard/gnome-keyboard-properties.c:275
+#: capplets/keyboard/gnome-keyboard-properties.c:290
+#: capplets/keyboard/gnome-keyboard-properties.c:292
 #: capplets/sound/sound-properties-capplet.c:145
 #: capplets/sound/sound-properties-capplet.c:147
 msgid ""
@@ -1312,78 +1360,90 @@ msgstr ""
 "maintenant géré par un daemon)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:2
+msgid "<small><i>Fast</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+msgid "<small><i>Long</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+msgid "<small><i>Short</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+msgid "<small><i>Slow</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "Bee_p"
 msgstr "_Bip"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "C_ustom:"
 msgstr "_Personnalisé :"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "Clic_k on keypress"
 msgstr "_Clique au pressage de touche"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "Cursor Blinks"
 msgstr "Curseurs clignotants"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "Keyboard Bell"
 msgstr "Clique du clavier"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Keyboard Preferences"
 msgstr "Propriétés du clavier"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Keyboard _repeats when key is held down"
 msgstr "Répétition lorsque une touche est maintenu enfoncée"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Keypress Click"
 msgstr "Clique au pressage de touche"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
 msgid "Repeat Keys"
 msgstr "Touches de répétition"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "S_peed:"
 msgstr "_Vitesse :"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid "_Accessibility..."
 msgstr "_Accessibilité..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "_Blinks in text boxes and fields"
 msgstr "Le _curseur clignote dans les champs et boîte de texte"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
 msgid "_Delay:"
 msgstr "_Délai :"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
 msgid "_Off"
 msgstr "_Off"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid "_Speed:"
 msgstr "_Vitesse :"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "_Volume:"
 msgstr "_Volume :"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
-msgid "faster"
-msgstr "plus rapide"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid "loud"
 msgstr "faible"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "quiet"
 msgstr "silence"
 
@@ -1723,22 +1783,23 @@ msgid "Theme"
 msgstr "Thème"
 
 #: capplets/theme-switcher/theme-properties.glade.h:1
-msgid "Installed Themes"
-msgstr "Thèmes installés"
-
-#: capplets/theme-switcher/theme-properties.glade.h:2
-msgid "List of available GTK+ themes"
-msgstr "Liste des thèmes GTK+ disponibles"
-
-#: capplets/theme-switcher/theme-properties.glade.h:3
 msgid "New themes can also be installed by dragging them into the window."
 msgstr ""
 "Vous pouvez aussi installer des nouveaux thèmes en les faisant glisser dans "
 "cette fenêtre"
 
-#: capplets/theme-switcher/theme-properties.glade.h:4
+#: capplets/theme-switcher/theme-properties.glade.h:2
 msgid "Theme Preferences"
 msgstr "Préférences du thème"
+
+#: capplets/theme-switcher/theme-properties.glade.h:3
+msgid "Widget Theme"
+msgstr ""
+
+#: capplets/theme-switcher/theme-properties.glade.h:4
+#, fuzzy
+msgid "Window Border Theme"
+msgstr "Apparence des bordures de fenêtres"
 
 #: capplets/theme-switcher/theme-properties.glade.h:5
 msgid "_Go to theme folder"
@@ -2059,21 +2120,21 @@ msgstr ""
 msgid "_Do not show this message again"
 msgstr "_Ne plus jamais afficher ce message"
 
-#: gnome-settings-daemon/gnome-settings-sound.c:125
+#: gnome-settings-daemon/gnome-settings-sound.c:128
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Impossible de charger le fichier %s comme échantillon %s"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:150
+#: gnome-settings-daemon/gnome-settings-xsettings.c:166
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "La clé GConf %s est défini au type %s mais le type attendu est %s\n"
 
-#: libbackground/applier.c:239
+#: libbackground/applier.c:254
 msgid "Type"
 msgstr "Type"
 
-#: libbackground/applier.c:240
+#: libbackground/applier.c:255
 msgid ""
 "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
 "for preview"
@@ -2081,21 +2142,29 @@ msgstr ""
 "Type de bg_applier : BG_APPLIER_ROOT pour la fenêtre racine ou "
 "BG_APPLIER_PREVIEW pour l'aperçu"
 
-#: libbackground/applier.c:247
+#: libbackground/applier.c:262
 msgid "Preview Width"
 msgstr "Largeur de la prévisualisation"
 
-#: libbackground/applier.c:248
+#: libbackground/applier.c:263
 msgid "Width if applier is a preview: Defaults to 64."
 msgstr "Largeur si l'applicant est un aperçu : 64 par défaut."
 
-#: libbackground/applier.c:255
+#: libbackground/applier.c:270
 msgid "Preview Height"
 msgstr "Hauteur de la prévisualisation"
 
-#: libbackground/applier.c:256
+#: libbackground/applier.c:271
 msgid "Height if applier is a preview: Defaults to 48."
 msgstr "Hauteur si l'applicateur est un aperçu: Valeur de 48 par défaut."
+
+#: libbackground/applier.c:279
+msgid "Screen"
+msgstr ""
+
+#: libbackground/applier.c:280
+msgid "Screen on which BGApplier is to draw"
+msgstr ""
 
 #: libbackground/preview-file-selection.c:193
 msgid "Can't find an hbox, using a normal file selection"
@@ -2194,8 +2263,71 @@ msgstr ""
 msgid "OK"
 msgstr "Valider"
 
-#~ msgid "_Enable keyboard accessibility"
-#~ msgstr "_Activer l'accessibilité au clavier"
+#~ msgid "Documents"
+#~ msgstr "Documents"
+
+#~ msgid "Word Processor"
+#~ msgstr "Traitement de texte"
+
+#~ msgid "Published Materials"
+#~ msgstr "Support de publication"
+
+#~ msgid "Spreadsheet"
+#~ msgstr "Tableur"
+
+#~ msgid "Presentation"
+#~ msgstr "Présentation"
+
+#~ msgid "Diagram"
+#~ msgstr "Diagramme"
+
+#~ msgid "TeX"
+#~ msgstr "TeX"
+
+#~ msgid "Vector Graphics"
+#~ msgstr "Graphiques vectoriels"
+
+#~ msgid "World Wide Web"
+#~ msgstr "World Wide Web"
+
+#~ msgid "Plain Text"
+#~ msgstr "Texte brut"
+
+#~ msgid "Extended Markup Language (XML)"
+#~ msgstr "Langage de marquage étendu (XML)"
+
+#~ msgid "Information"
+#~ msgstr "Information"
+
+#~ msgid "Financial"
+#~ msgstr "Finance"
+
+#~ msgid "Calendar"
+#~ msgstr "Calendrier"
+
+#~ msgid "Contacts"
+#~ msgstr "Contacts"
+
+#~ msgid "Packages"
+#~ msgstr "Archives"
+
+#~ msgid "Software Development"
+#~ msgstr "Développement logiciel"
+
+#~ msgid "Source Code"
+#~ msgstr "Code source"
+
+#~ msgid "Associate applications with file types"
+#~ msgstr "Applications associées avec les types de fichier"
+
+#~ msgid "faster"
+#~ msgstr "plus rapide"
+
+#~ msgid "Installed Themes"
+#~ msgstr "Thèmes installés"
+
+#~ msgid "List of available GTK+ themes"
+#~ msgstr "Liste des thèmes GTK+ disponibles"
 
 #~ msgid "<b>Test</b>"
 #~ msgstr "<b>Test</b>"
@@ -2261,11 +2393,6 @@ msgstr "Valider"
 #~ msgid "Change the default fonts used by the desktop and applications"
 #~ msgstr "Change les polices utilisées par le bureau et les applications"
 
-#~ msgid "Type a new accelerator, or press Backspace to clear"
-#~ msgstr ""
-#~ "Entrer un nouvel accélérateur, ou appuyer sur la barre d'espacement pour "
-#~ "libérer le champ"
-
 #~ msgid "Keyboard _Navigation scheme for use in applications:"
 #~ msgstr "Méthode de navigation du clavier à utiliser dans les applications:"
 
@@ -2312,9 +2439,6 @@ msgstr "Valider"
 
 #~ msgid "Long"
 #~ msgstr "Longue"
-
-#~ msgid "Medium"
-#~ msgstr "Moyen"
 
 #~ msgid "Repeat s_peed:"
 #~ msgstr "Vitesse de _répétition :"
@@ -2583,9 +2707,6 @@ msgstr "Valider"
 #~ msgid "handler:"
 #~ msgstr "gestionnaire :"
 
-#~ msgid "Netscape"
-#~ msgstr "Netscape"
-
 #~ msgid "Netscape (new window)"
 #~ msgstr "Netscape (nouvelle fenêtre)"
 
@@ -2820,9 +2941,6 @@ msgstr "Valider"
 
 #~ msgid "Progress bar is on the right"
 #~ msgstr "La barre de progression va vers la droite"
-
-#~ msgid "Right"
-#~ msgstr "Droite"
 
 #~ msgid "Seperate windows"
 #~ msgstr "Fenêtres séparées"

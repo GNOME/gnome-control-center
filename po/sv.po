@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2002-07-17 10:54+0200\n"
+"POT-Creation-Date: 2002-08-20 22:52-0400\n"
 "PO-Revision-Date: 2002-07-17 10:54+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -17,24 +17,24 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:225
-#: capplets/keyboard/gnome-keyboard-properties.c:143
+#: capplets/keyboard/gnome-keyboard-properties.c:160
 #, c-format
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr ""
 "Ett fel inträffade vid visande av kontrollpanelsprogrammet för tangentbord: %"
 "s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:291
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:309
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Kan inte importera AccessX-inställningar från filen \"%s\""
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:403
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:421
 msgid "Select CDE AccessX file"
 msgstr "Välj CDE AccessX-fil"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Tangentbord"
@@ -153,18 +153,22 @@ msgid "_Disable if unused for "
 msgstr "I_naktivera om oanvänd i "
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
+msgid "_Enable keyboard accessibility"
+msgstr "_Använd tangentbordshjälpmedel"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
 msgid "_Ignore keypresses within  :"
 msgstr "_Ignorera tangenttryckningar inom:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
 msgid "_Import CDE AccessX file"
 msgstr "_Importera CDE AccessX-fil"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
 msgid "_Only accept keypress after :"
 msgstr "_Godtag endast tangenttryckningar efter:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:28
 msgid ""
 "_Turn off Sticky Keys when\n"
 "two keys pressed simultaneously"
@@ -172,27 +176,27 @@ msgstr ""
 "_Slå av klistriga tangenter då\n"
 "två tangenter trycks ned samtidigt"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
 msgid "key is _accepted"
 msgstr "tangenten är _godtagen"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
 msgid "key is _pressed"
 msgstr "tangenten är _nedtryckt"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
 msgid "key is _rejected"
 msgstr "tangenten är _förkastad"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
 msgid "msecs"
 msgstr "millisekunder"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
 msgid "pixels/sec"
 msgstr "bildpunkter/sekund"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:35
 msgid "seconds"
 msgstr "sekunder"
 
@@ -246,7 +250,7 @@ msgstr "Välj _bild:"
 #: capplets/background/background-properties-capplet.c:561
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
-#: capplets/keyboard/gnome-keyboard-properties.c:277
+#: capplets/keyboard/gnome-keyboard-properties.c:294
 #: capplets/mouse/gnome-mouse-properties.c:752
 #: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
@@ -787,7 +791,7 @@ msgid "Associate sounds with window manager events"
 msgstr "Associera ljud med fönsterhanterarhändelser"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
 #: capplets/sound/sound.desktop.in.h:2
 msgid "Sound"
 msgstr "Ljud"
@@ -808,109 +812,16 @@ msgstr "Gamla program"
 msgid "Legacy applications settings (grdb)"
 msgstr "Inställningar för gamla program (grdb)"
 
-#.
-#. * Translatable strings file
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/file-types/category-names.h:7
-msgid "Documents"
-msgstr "Dokument"
-
-#: capplets/file-types/category-names.h:8
-msgid "Word Processor"
-msgstr "Ordbehandlare"
-
-#: capplets/file-types/category-names.h:9
-msgid "Published Materials"
-msgstr "Publicerade material"
-
-#: capplets/file-types/category-names.h:10
-msgid "Spreadsheet"
-msgstr "Kalkylblad"
-
-#: capplets/file-types/category-names.h:11
-msgid "Presentation"
-msgstr "Presentation"
-
-#: capplets/file-types/category-names.h:12
-msgid "Diagram"
-msgstr "Diagram"
-
-#: capplets/file-types/category-names.h:13
-msgid "TeX"
-msgstr "TeX"
-
-#: capplets/file-types/category-names.h:14
-msgid "Vector Graphics"
-msgstr "Vektorgrafik"
-
-#: capplets/file-types/category-names.h:15
-msgid "World Wide Web"
-msgstr "World Wide Web (WWW)"
-
-#: capplets/file-types/category-names.h:16
-msgid "Plain Text"
-msgstr "Vanlig text"
-
-#: capplets/file-types/category-names.h:17
-msgid "Extended Markup Language (XML)"
-msgstr "Extended Markup Language (XML)"
-
-#: capplets/file-types/category-names.h:18
-msgid "Information"
-msgstr "Information"
-
-#: capplets/file-types/category-names.h:19
-msgid "Financial"
-msgstr "Ekonomi"
-
-#: capplets/file-types/category-names.h:20
-msgid "Calendar"
-msgstr "Kalender"
-
-#: capplets/file-types/category-names.h:21
-msgid "Contacts"
-msgstr "Kontakter"
-
-#: capplets/file-types/category-names.h:22
-msgid "Packages"
-msgstr "Paket"
-
-#: capplets/file-types/category-names.h:23
-msgid "Software Development"
-msgstr "Programvaruutveckling"
-
-#: capplets/file-types/category-names.h:24
-msgid "Source Code"
-msgstr "Källkod"
-
-#: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:673
-msgid "Audio"
-msgstr "Ljud"
-
-#: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:669
-msgid "Images"
-msgstr "Bilder"
-
-#: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:671
-msgid "Video"
-msgstr "Grafik"
-
-#: capplets/file-types/file-types-capplet.c:215
+#: capplets/file-types/file-types-capplet.c:214
 msgid "Description"
 msgstr "Beskrivning"
 
-#: capplets/file-types/file-types-capplet.c:237
+#: capplets/file-types/file-types-capplet.c:236
 msgid "Extensions"
 msgstr "Tillägg"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
 #: capplets/file-types/file-types-properties.glade.h:8
-#: capplets/file-types/file-types.desktop.in.h:2
 msgid "File Types and Programs"
 msgstr "Filtyper och program"
 
@@ -923,11 +834,13 @@ msgid "Actions"
 msgstr "Åtgärder"
 
 #: capplets/file-types/file-types-properties.glade.h:3
-msgid "Add _file type..."
+#, fuzzy
+msgid "Add _File Type..."
 msgstr "Lägg till _filtyp..."
 
 #: capplets/file-types/file-types-properties.glade.h:4
-msgid "Add _service..."
+#, fuzzy
+msgid "Add _Service..."
 msgstr "Lägg till _tjänst..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
@@ -1012,8 +925,14 @@ msgid "_Protocol"
 msgstr "_Protokoll"
 
 #: capplets/file-types/file-types.desktop.in.h:1
-msgid "Associate applications with file types"
-msgstr "Associera program med filtyper"
+#, fuzzy
+msgid "File types and programs"
+msgstr "Filtyper och program"
+
+#: capplets/file-types/file-types.desktop.in.h:2
+#, fuzzy
+msgid "Specify which programs are used to open or view each type of file"
+msgstr "Ange vilka program som används för att öppna eller visa varje filtyp"
 
 #: capplets/file-types/mime-category-edit-dialog.c:138
 msgid "Edit file category"
@@ -1041,8 +960,8 @@ msgstr "Struktur som innehåller information om MIME-kategorin"
 #: capplets/file-types/mime-category-edit-dialog.c:344
 #: capplets/file-types/mime-edit-dialog.c:490
 #: capplets/file-types/mime-edit-dialog.c:594
-#: capplets/file-types/service-edit-dialog.c:359
-#: capplets/file-types/service-edit-dialog.c:408
+#: capplets/file-types/service-edit-dialog.c:358
+#: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
 msgstr "Anpassad"
 
@@ -1080,7 +999,7 @@ msgstr "Lägg till filtyp"
 # Jag vill ha "Diverse"
 #
 #: capplets/file-types/mime-edit-dialog.c:435
-#: capplets/file-types/mime-type-info.c:675
+#: capplets/file-types/mime-type-info.c:673
 msgid "Misc"
 msgstr "Diverse"
 
@@ -1089,7 +1008,7 @@ msgstr "Diverse"
 msgid "None"
 msgstr "Ingen"
 
-#: capplets/file-types/mime-edit-dialog.c:847
+#: capplets/file-types/mime-edit-dialog.c:854
 msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
@@ -1097,17 +1016,29 @@ msgstr ""
 "Ange en giltig MIME-typ. Den bör vara på formen klass/typ och får inte "
 "innehålla några blanksteg."
 
-#: capplets/file-types/mime-edit-dialog.c:854
+#: capplets/file-types/mime-edit-dialog.c:861
 msgid "A MIME type with that name already exists, overwrite ?."
 msgstr "En MIME-typ med det namnet finns redan, skriva över?"
 
-#: capplets/file-types/mime-edit-dialog.c:919
+#: capplets/file-types/mime-edit-dialog.c:926
 msgid "Category"
 msgstr "Kategori"
 
-#: capplets/file-types/mime-edit-dialog.c:924
+#: capplets/file-types/mime-edit-dialog.c:931
 msgid "Choose a file category"
 msgstr "Välj en filkategori"
+
+#: capplets/file-types/mime-type-info.c:667
+msgid "Images"
+msgstr "Bilder"
+
+#: capplets/file-types/mime-type-info.c:669
+msgid "Video"
+msgstr "Grafik"
+
+#: capplets/file-types/mime-type-info.c:671
+msgid "Audio"
+msgstr "Ljud"
 
 #: capplets/file-types/mime-types-model.c:167
 #: capplets/file-types/mime-types-model.c:168
@@ -1142,11 +1073,11 @@ msgstr "SANT om detta är en tilläggsdialog"
 msgid "Add Service"
 msgstr "Lägg till tjänst"
 
-#: capplets/file-types/service-edit-dialog.c:498
+#: capplets/file-types/service-edit-dialog.c:497
 msgid "Please enter a protocol name."
 msgstr "Ange ett protokollnamn."
 
-#: capplets/file-types/service-edit-dialog.c:510
+#: capplets/file-types/service-edit-dialog.c:509
 msgid ""
 "Invalid protocol name. Please enter a protocol name without any spaces or "
 "punctuation."
@@ -1154,7 +1085,7 @@ msgstr ""
 "Ogiltigt protokollnamn. Ange ett protokollnamn utan några blanksteg eller "
 "kommatering."
 
-#: capplets/file-types/service-edit-dialog.c:524
+#: capplets/file-types/service-edit-dialog.c:523
 msgid "There is already a protocol by that name."
 msgstr "Det finns redan ett protokoll med det namnet."
 
@@ -1194,66 +1125,182 @@ msgstr "Typsnitt"
 msgid "Select fonts for the desktop"
 msgstr "Välj typsnitt för skrivbordet"
 
+# SUN NEW TRANSLATION
 #: capplets/font/font-properties.glade.h:1
+#, fuzzy
+msgid "Best _shapes"
+msgstr "Netscape"
+
+#: capplets/font/font-properties.glade.h:2
+#, fuzzy
+msgid "Best co_ntrast"
+msgstr "Färgkontrast"
+
+#: capplets/font/font-properties.glade.h:3
+msgid "De_tails..."
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:4
 msgid "Font Preferences"
 msgstr "Typsnittsinställningar"
 
-#: capplets/font/font-properties.glade.h:2
+#: capplets/font/font-properties.glade.h:5
+#, fuzzy
+msgid "Font Rendering"
+msgstr "Typsnittsinställningar"
+
+#: capplets/font/font-properties.glade.h:6
+msgid "Font Rendering Details"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:7
+msgid "G_rayscale"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:8
+msgid "Hinting:"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:9
+#, fuzzy
+msgid "N_one"
+msgstr "Ingen"
+
+#: capplets/font/font-properties.glade.h:10
+msgid "Resolution (_dots per inch):"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:11
 msgid "Set the font for applications"
 msgstr "Ställ in typsnitt för program"
 
-#: capplets/font/font-properties.glade.h:3
+#: capplets/font/font-properties.glade.h:12
 msgid "Set the font for the icons on the desktop"
 msgstr "Ställ in typsnitt för ikonerna på skrivbordet"
 
-#: capplets/font/font-properties.glade.h:4
+#: capplets/font/font-properties.glade.h:13
+#, fuzzy
+msgid "Set the monospace font for terminals and similar applications"
+msgstr "Ställ in typsnitt för program"
+
+#: capplets/font/font-properties.glade.h:14
+msgid "Smoothing:"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:15
+msgid "Sub_pixel (LCDs)"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:16
+msgid "Sub_pixel smoothing (LCDs)"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:17
+msgid "Subpixel order:"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:18
+msgid "VB_GR"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:19
 msgid "_Application font:"
 msgstr "_Programtypsnitt:"
 
-#: capplets/font/font-properties.glade.h:5
+#: capplets/font/font-properties.glade.h:20
+msgid "_BGR"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:21
 msgid "_Desktop font:"
 msgstr "_Skrivbordstypsnitt:"
 
-#: capplets/keybindings/eggcellrendererkeys.c:158
+#: capplets/font/font-properties.glade.h:22
+#, fuzzy
+msgid "_Full"
+msgstr "_Arkiv"
+
+#: capplets/font/font-properties.glade.h:23
+#, fuzzy
+msgid "_Medium"
+msgstr "Mellan"
+
+#: capplets/font/font-properties.glade.h:24
+#, fuzzy
+msgid "_Monochrome"
+msgstr "Enfärgad"
+
+#: capplets/font/font-properties.glade.h:25
+#, fuzzy
+msgid "_None"
+msgstr "Ingen"
+
+#: capplets/font/font-properties.glade.h:26
+msgid "_RGB"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:27
+#, fuzzy
+msgid "_Slight"
+msgstr "Höger"
+
+#: capplets/font/font-properties.glade.h:28
+#, fuzzy
+msgid "_Terminal font:"
+msgstr "Terminal"
+
+#: capplets/font/font-properties.glade.h:29
+msgid "_VRGB"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:30
+msgid "_Window title font:"
+msgstr ""
+
 #: capplets/keybindings/eggcellrendererkeys.c:159
+#: capplets/keybindings/eggcellrendererkeys.c:160
 msgid "Accelerator modifiers"
 msgstr "Snabbtangentsmodifierare"
 
-#: capplets/keybindings/eggcellrendererkeys.c:167
 #: capplets/keybindings/eggcellrendererkeys.c:168
+#: capplets/keybindings/eggcellrendererkeys.c:169
 msgid "Accelerator key"
 msgstr "Snabbtangent"
 
-#: capplets/keybindings/eggcellrendererkeys.c:206
-#: capplets/keybindings/gnome-keybinding-properties.c:173
-#: libbackground/applier.c:521
+#: capplets/keybindings/eggcellrendererkeys.c:207
+#: capplets/keybindings/gnome-keybinding-properties.c:179
+#: libbackground/applier.c:588
 msgid "Disabled"
 msgstr "Avslagen"
 
-#: capplets/keybindings/eggcellrendererkeys.c:309
-#: capplets/keybindings/eggcellrendererkeys.c:506
-#: capplets/keybindings/eggcellrendererkeys.c:509
-msgid "Type a new shortcut"
+#: capplets/keybindings/eggcellrendererkeys.c:318
+#: capplets/keybindings/eggcellrendererkeys.c:534
+msgid "Type a new accelerator, or press Backspace to clear"
+msgstr "Tryck en ny snabbtangent, eller tryck backsteg för att tömma"
+
+#: capplets/keybindings/eggcellrendererkeys.c:537
+#, fuzzy
+msgid "Type a new accelerator"
 msgstr "Tryck en ny snabbtangent"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:440
+#: capplets/keybindings/gnome-keybinding-properties.c:446
 msgid "<Unknown Action>"
 msgstr "<Okänd åtgärd>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:459
+#: capplets/keybindings/gnome-keybinding-properties.c:465
 msgid "Desktop"
 msgstr "Skrivbord"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:463
+#: capplets/keybindings/gnome-keybinding-properties.c:469
 msgid "Window Management"
 msgstr "Fönsterhantering"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:560
+#: capplets/keybindings/gnome-keybinding-properties.c:566
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Fel vid inställning av ny snabbtangent i konfigurationsdatabasen: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:711
+#: capplets/keybindings/gnome-keybinding-properties.c:717
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1261,11 +1308,11 @@ msgstr ""
 "Kan inte hitta några tangentbordsteman. Detta betyder att din GTK+-"
 "installation inte har installerats korrekt."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:733
+#: capplets/keybindings/gnome-keybinding-properties.c:739
 msgid "Action"
 msgstr "Åtgärd"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:749
+#: capplets/keybindings/gnome-keybinding-properties.c:755
 msgid "Shortcut"
 msgstr "Genväg"
 
@@ -1290,12 +1337,12 @@ msgstr "_Textredigeringsgenvägar:"
 msgid "Assign shortcut keys to commands"
 msgstr "Associera snabbtangenter med kommandon"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:256
+#: capplets/keyboard/gnome-keyboard-properties.c:273
 msgid "_Accessibility"
 msgstr "_Åtkomlighet"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:273
-#: capplets/keyboard/gnome-keyboard-properties.c:275
+#: capplets/keyboard/gnome-keyboard-properties.c:290
+#: capplets/keyboard/gnome-keyboard-properties.c:292
 #: capplets/sound/sound-properties-capplet.c:145
 #: capplets/sound/sound-properties-capplet.c:147
 msgid ""
@@ -1305,78 +1352,90 @@ msgstr ""
 "av demon)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:2
+msgid "<small><i>Fast</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+msgid "<small><i>Long</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+msgid "<small><i>Short</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+msgid "<small><i>Slow</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "Bee_p"
 msgstr "_Pip"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "C_ustom:"
 msgstr "A_npassad:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "Clic_k on keypress"
 msgstr "_Klicka vid tangenttryckning"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "Cursor Blinks"
 msgstr "Markörblink"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "Keyboard Bell"
 msgstr "Tangentbordssignal"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Keyboard Preferences"
 msgstr "Tangentbordsinställningar"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Keyboard _repeats when key is held down"
 msgstr "Tangentbordet _upprepar då tangent hålls ned"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Keypress Click"
 msgstr "Tangentklick"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
 msgid "Repeat Keys"
 msgstr "Repeteringstangenter"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "S_peed:"
 msgstr "Hasti_ghet:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid "_Accessibility..."
 msgstr "_Åtkomlighet..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "_Blinks in text boxes and fields"
 msgstr "_Blinkar i textrutor och textfält"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
 msgid "_Delay:"
 msgstr "_Fördröjning:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
 msgid "_Off"
 msgstr "_Av"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid "_Speed:"
 msgstr "_Hastighet:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "_Volume:"
 msgstr "_Volym:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
-msgid "faster"
-msgstr "snabbare"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid "loud"
 msgstr "ljudlig"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "quiet"
 msgstr "tyst"
 
@@ -1684,7 +1743,6 @@ msgid "Submenu"
 msgstr "Undermeny"
 
 #: capplets/theme-switcher/control/control.c:74
-#: capplets/ui-properties/gnome-ui-properties.glade.h:4
 msgid "Item 1"
 msgstr "Objekt 1"
 
@@ -1717,20 +1775,21 @@ msgid "Theme"
 msgstr "Tema"
 
 #: capplets/theme-switcher/theme-properties.glade.h:1
-msgid "Installed Themes"
-msgstr "Installerade teman"
-
-#: capplets/theme-switcher/theme-properties.glade.h:2
-msgid "List of available GTK+ themes"
-msgstr "Lista med tillgängliga GTK+-teman"
-
-#: capplets/theme-switcher/theme-properties.glade.h:3
 msgid "New themes can also be installed by dragging them into the window."
 msgstr "Nya teman kan också installeras genom att de dras till fönstret."
 
-#: capplets/theme-switcher/theme-properties.glade.h:4
+#: capplets/theme-switcher/theme-properties.glade.h:2
 msgid "Theme Preferences"
 msgstr "Temainställningar"
+
+#: capplets/theme-switcher/theme-properties.glade.h:3
+msgid "Widget Theme"
+msgstr ""
+
+#: capplets/theme-switcher/theme-properties.glade.h:4
+#, fuzzy
+msgid "Window Border Theme"
+msgstr "Fönsterramsutseende"
 
 #: capplets/theme-switcher/theme-properties.glade.h:5
 msgid "_Go to theme folder"
@@ -1778,98 +1837,113 @@ msgstr ""
 "En förhandsvisning av hur en verktygsrad ser ut med dessa inställningar."
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:3
+#, fuzzy
+msgid "C_ut"
+msgstr "A_npassad:"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:4
+#, fuzzy
+msgid "Edit Menu"
+msgstr "Redigera"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:5
 msgid "Icons Only"
 msgstr "Endast ikoner"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:5
-msgid "Item 2"
-msgstr "Objekt 2"
-
 #: capplets/ui-properties/gnome-ui-properties.glade.h:6
-msgid "Item 3"
-msgstr "Objekt 3"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:7
-msgid "Menu Item 1"
-msgstr "Menyobjekt 1"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:8
-msgid "Menu Item 2"
-msgstr "Menyobjekt 2"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:9
-msgid "Menu Item 3"
-msgstr "Menyobjekt 3"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:10
-msgid "Menu Item 4"
-msgstr "Menyobjekt 4"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:11
-msgid "Menu Item 5"
-msgstr "Menyobjekt 5"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:12
 msgid "Menu and Toolbar Preferences"
 msgstr "Meny- och verktygsradsinställningar"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:13
+#: capplets/ui-properties/gnome-ui-properties.glade.h:7
 msgid "Menus"
 msgstr "Menyer"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:14
+#: capplets/ui-properties/gnome-ui-properties.glade.h:8
 msgid "New File"
 msgstr "Ny fil"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:15
+#: capplets/ui-properties/gnome-ui-properties.glade.h:9
 msgid "Open File"
 msgstr "Öppna fil"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:16
+#: capplets/ui-properties/gnome-ui-properties.glade.h:10
 msgid "Priority Text Beside Icons"
 msgstr "Prioritetstext bredvid ikoner"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:17
+#: capplets/ui-properties/gnome-ui-properties.glade.h:11
 msgid "Sample menubar:"
 msgstr "Exempelmenyrad:"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:18
+#: capplets/ui-properties/gnome-ui-properties.glade.h:12
 msgid "Sample toolbar:"
 msgstr "Exempelverktygsrad:"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:19
+#: capplets/ui-properties/gnome-ui-properties.glade.h:13
 msgid "Save File"
 msgstr "Spara fil"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:20
+#: capplets/ui-properties/gnome-ui-properties.glade.h:14
 msgid "Select the toolbar style."
 msgstr "Välj stilen på verktygsrader."
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:21
+#: capplets/ui-properties/gnome-ui-properties.glade.h:15
 msgid "Text Below Icons"
 msgstr "Text under ikoner"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:22
+#: capplets/ui-properties/gnome-ui-properties.glade.h:16
 msgid "Text Only"
 msgstr "Endast text"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:23
+#: capplets/ui-properties/gnome-ui-properties.glade.h:17
 msgid "Toolbar"
 msgstr "Verktygsrad"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:24
+#: capplets/ui-properties/gnome-ui-properties.glade.h:18
 msgid "Toolbars can be _detached and moved around"
 msgstr "Verktygsrader kan _tas loss och flyttas runt"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:25
+#: capplets/ui-properties/gnome-ui-properties.glade.h:19
 msgid "_Button Labels: "
 msgstr "_Knappetiketter: "
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:26
+#: capplets/ui-properties/gnome-ui-properties.glade.h:20
+msgid "_Copy"
+msgstr ""
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:21
 msgid "_Menu"
 msgstr "_Meny"
 
+#: capplets/ui-properties/gnome-ui-properties.glade.h:22
+#, fuzzy
+msgid "_New"
+msgstr "_Namn"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:23
+#, fuzzy
+msgid "_Open"
+msgstr "Öppna"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:24
+#, fuzzy
+msgid "_Paste"
+msgstr "snabbare"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:25
+msgid "_Print"
+msgstr ""
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:26
+#, fuzzy
+msgid "_Quit"
+msgstr "tyst"
+
 #: capplets/ui-properties/gnome-ui-properties.glade.h:27
+#, fuzzy
+msgid "_Save"
+msgstr "_Skalad"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:28
 msgid "_Show icons in menus"
 msgstr "_Visa ikoner i menyer"
 
@@ -2045,22 +2119,22 @@ msgstr ""
 msgid "_Do not show this message again"
 msgstr "_Visa inte detta meddelande igen"
 
-#: gnome-settings-daemon/gnome-settings-sound.c:125
+#: gnome-settings-daemon/gnome-settings-sound.c:128
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Kunde inte läsa in ljudfilen %s som prov %s"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:150
+#: gnome-settings-daemon/gnome-settings-xsettings.c:166
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr ""
 "GConf-nyckeln %s är satt till typen %s men dess förväntade typ var %s\n"
 
-#: libbackground/applier.c:239
+#: libbackground/applier.c:254
 msgid "Type"
 msgstr "Typ"
 
-#: libbackground/applier.c:240
+#: libbackground/applier.c:255
 msgid ""
 "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
 "for preview"
@@ -2068,21 +2142,30 @@ msgstr ""
 "Typ av bg_applier: BG_APPLIER_ROOT för rotfönstret eller BG_APPLIER_PREVIEW "
 "för förhandsgranskning"
 
-#: libbackground/applier.c:247
+#: libbackground/applier.c:262
 msgid "Preview Width"
 msgstr "Förhandsvisningsbredd"
 
-#: libbackground/applier.c:248
+#: libbackground/applier.c:263
 msgid "Width if applier is a preview: Defaults to 64."
 msgstr "Bredd om verkställaren är en förhandsgranskning: Som standard 64."
 
-#: libbackground/applier.c:255
+#: libbackground/applier.c:270
 msgid "Preview Height"
 msgstr "Förhandsvisningshöjd"
 
-#: libbackground/applier.c:256
+#: libbackground/applier.c:271
 msgid "Height if applier is a preview: Defaults to 48."
 msgstr "Höjd om verkställaren är en förhandsvisning: Som standard 48."
+
+#: libbackground/applier.c:279
+#, fuzzy
+msgid "Screen"
+msgstr "Skärmsläckare"
+
+#: libbackground/applier.c:280
+msgid "Screen on which BGApplier is to draw"
+msgstr ""
 
 #: libbackground/preview-file-selection.c:193
 msgid "Can't find an hbox, using a normal file selection"
@@ -2197,6 +2280,90 @@ msgstr ""
 msgid "OK"
 msgstr "OK"
 
+#~ msgid "Documents"
+#~ msgstr "Dokument"
+
+#~ msgid "Word Processor"
+#~ msgstr "Ordbehandlare"
+
+#~ msgid "Published Materials"
+#~ msgstr "Publicerade material"
+
+#~ msgid "Spreadsheet"
+#~ msgstr "Kalkylblad"
+
+#~ msgid "Presentation"
+#~ msgstr "Presentation"
+
+#~ msgid "Diagram"
+#~ msgstr "Diagram"
+
+#~ msgid "TeX"
+#~ msgstr "TeX"
+
+#~ msgid "Vector Graphics"
+#~ msgstr "Vektorgrafik"
+
+#~ msgid "World Wide Web"
+#~ msgstr "World Wide Web (WWW)"
+
+#~ msgid "Plain Text"
+#~ msgstr "Vanlig text"
+
+#~ msgid "Extended Markup Language (XML)"
+#~ msgstr "Extended Markup Language (XML)"
+
+#~ msgid "Information"
+#~ msgstr "Information"
+
+#~ msgid "Financial"
+#~ msgstr "Ekonomi"
+
+#~ msgid "Calendar"
+#~ msgstr "Kalender"
+
+#~ msgid "Contacts"
+#~ msgstr "Kontakter"
+
+#~ msgid "Packages"
+#~ msgstr "Paket"
+
+#~ msgid "Software Development"
+#~ msgstr "Programvaruutveckling"
+
+#~ msgid "Source Code"
+#~ msgstr "Källkod"
+
+#~ msgid "Associate applications with file types"
+#~ msgstr "Associera program med filtyper"
+
+#~ msgid "Installed Themes"
+#~ msgstr "Installerade teman"
+
+#~ msgid "List of available GTK+ themes"
+#~ msgstr "Lista med tillgängliga GTK+-teman"
+
+#~ msgid "Item 2"
+#~ msgstr "Objekt 2"
+
+#~ msgid "Item 3"
+#~ msgstr "Objekt 3"
+
+#~ msgid "Menu Item 1"
+#~ msgstr "Menyobjekt 1"
+
+#~ msgid "Menu Item 2"
+#~ msgstr "Menyobjekt 2"
+
+#~ msgid "Menu Item 3"
+#~ msgstr "Menyobjekt 3"
+
+#~ msgid "Menu Item 4"
+#~ msgstr "Menyobjekt 4"
+
+#~ msgid "Menu Item 5"
+#~ msgstr "Menyobjekt 5"
+
 #~ msgid "Add"
 #~ msgstr "Lägg till"
 
@@ -2244,9 +2411,6 @@ msgstr "OK"
 
 #~ msgid "Long"
 #~ msgstr "Lång"
-
-#~ msgid "Medium"
-#~ msgstr "Mellan"
 
 #~ msgid "Repeat s_peed:"
 #~ msgstr "Repeterings_hastighet:"
@@ -2363,9 +2527,6 @@ msgstr "OK"
 #~ msgid "Change the default fonts used by the desktop and applications"
 #~ msgstr "Ställ in de standardtypsnitt som används av skrivbordet och program"
 
-#~ msgid "Type a new accelerator, or press Backspace to clear"
-#~ msgstr "Tryck en ny snabbtangent, eller tryck backsteg för att tömma"
-
 #~ msgid "Keyboard _Navigation scheme for use in applications:"
 #~ msgstr "Tangentbords_navigeringsschema att använda i program:"
 
@@ -2399,9 +2560,6 @@ msgstr "OK"
 
 #~ msgid "A MIME type with that name already exists, overwrite?"
 #~ msgstr "En MIME-typ med det namnet finns redan, skriva över?"
-
-#~ msgid "_Enable keyboard accessibility"
-#~ msgstr "_Använd tangentbordshjälpmedel"
 
 #~ msgid "<b>Test</b>"
 #~ msgstr "<b>Test</b>"
@@ -2498,17 +2656,11 @@ msgstr "OK"
 #~ msgid "Example: emacs %f"
 #~ msgstr "Exempel: emacs %f"
 
-#~ msgid "Open"
-#~ msgstr "Öppna"
-
 #~ msgid "Select a file..."
 #~ msgstr "Välj en fil..."
 
 #~ msgid "View"
 #~ msgstr "Visa"
-
-#~ msgid "Edit"
-#~ msgstr "Redigera"
 
 # SUN NEW TRANSLATION
 #~ msgid "Set actions for %s"
@@ -2646,10 +2798,6 @@ msgstr "OK"
 # SUN NEW TRANSLATION
 #~ msgid "handler:"
 #~ msgstr "hanterare:"
-
-# SUN NEW TRANSLATION
-#~ msgid "Netscape"
-#~ msgstr "Netscape"
 
 # SUN NEW TRANSLATION
 #~ msgid "Netscape (new window)"
@@ -2975,9 +3123,6 @@ msgstr "OK"
 #~ msgid "Progress bar is on the right"
 #~ msgstr "Förloppsindikatorn finns till höger"
 
-#~ msgid "Right"
-#~ msgstr "Höger"
-
 #~ msgid "Right aligned"
 #~ msgstr "Högerjusterad"
 
@@ -3148,9 +3293,6 @@ msgstr "OK"
 
 #~ msgid "Configure the settings of the screensaver"
 #~ msgstr "Ändra inställningar för skärmsläckare"
-
-#~ msgid "Screensaver"
-#~ msgstr "Skärmsläckare"
 
 #~ msgid "Background colors"
 #~ msgstr "Bakgrundsfärger"
@@ -3531,9 +3673,6 @@ msgstr "OK"
 
 #~ msgid "Many"
 #~ msgstr "Många"
-
-#~ msgid "Monochrome"
-#~ msgstr "Enfärgad"
 
 #~ msgid "Nine Sided cells"
 #~ msgstr "Niosidiga celler"
@@ -4361,9 +4500,6 @@ msgstr "OK"
 
 #~ msgid "Particles on screen"
 #~ msgstr "Partiklar på skärmen"
-
-#~ msgid "Color contrast"
-#~ msgstr "Färgkontrast"
 
 #~ msgid "Discrete Lines"
 #~ msgstr "Diskreta linjer"

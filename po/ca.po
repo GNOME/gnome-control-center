@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.0.0\n"
-"POT-Creation-Date: 2002-07-22 12:38+0200\n"
+"POT-Creation-Date: 2002-08-20 22:52-0400\n"
 "PO-Revision-Date: 2002-07-22 12:46+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <gnome@softcatala.net>\n"
@@ -16,22 +16,22 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:225
-#: capplets/keyboard/gnome-keyboard-properties.c:143
+#: capplets/keyboard/gnome-keyboard-properties.c:160
 #, c-format
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "S'ha produït un error a l'executar la capplet del teclat: %s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:291
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:309
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Impossible d'importar els ajustaments d'AccessX des del fitxer «%s»"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:403
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:421
 msgid "Select CDE AccessX file"
 msgstr "Seleccioneu el fitxer AccesX CDE"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Teclat"
@@ -152,18 +152,22 @@ msgid "_Disable if unused for "
 msgstr "_Deshabilita si no s'utilitza durant "
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
+msgid "_Enable keyboard accessibility"
+msgstr "_Habilita l'accesibilitat del teclat"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
 msgid "_Ignore keypresses within  :"
 msgstr "_Ignora les pressions de tecla entre:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
 msgid "_Import CDE AccessX file"
 msgstr "_Importa un fitxer AccessX de CDE"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
 msgid "_Only accept keypress after :"
 msgstr "N_omés accepta pressions de tecla després de:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:28
 msgid ""
 "_Turn off Sticky Keys when\n"
 "two keys pressed simultaneously"
@@ -171,27 +175,27 @@ msgstr ""
 "_Desactiva les tecles enganxoses quan\n"
 "dues tecles siguin pressionades simultàniament"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
 msgid "key is _accepted"
 msgstr "la tecla és _acceptada"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
 msgid "key is _pressed"
 msgstr "la tecla és _pressionada"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
 msgid "key is _rejected"
 msgstr "la tecla és _denegada"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
 msgid "msecs"
 msgstr "miliseg."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
 msgid "pixels/sec"
 msgstr "pixels/seg."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:35
 msgid "seconds"
 msgstr "segons"
 
@@ -249,7 +253,7 @@ msgstr "Seleccioneu una ima_tge:"
 #: capplets/background/background-properties-capplet.c:561
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
-#: capplets/keyboard/gnome-keyboard-properties.c:277
+#: capplets/keyboard/gnome-keyboard-properties.c:294
 #: capplets/mouse/gnome-mouse-properties.c:752
 #: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
@@ -839,7 +843,7 @@ msgid "Associate sounds with window manager events"
 msgstr "Associa sons  amb events del gestor de finestres"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
 #: capplets/sound/sound.desktop.in.h:2
 msgid "Sound"
 msgstr "So"
@@ -860,114 +864,16 @@ msgstr "Aplicacions originals"
 msgid "Legacy applications settings (grdb)"
 msgstr "Configuracions d'aplicacions originals (grdb)"
 
-#.
-#. * Translatable strings file
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/file-types/category-names.h:7
-msgid "Documents"
-msgstr "Documents"
-
-#
-#: capplets/file-types/category-names.h:8
-msgid "Word Processor"
-msgstr "Processador de paraules"
-
-#: capplets/file-types/category-names.h:9
-msgid "Published Materials"
-msgstr "Materials Publicats"
-
-#: capplets/file-types/category-names.h:10
-msgid "Spreadsheet"
-msgstr "Full de càlcul"
-
-#: capplets/file-types/category-names.h:11
-msgid "Presentation"
-msgstr "Presentació"
-
-#: capplets/file-types/category-names.h:12
-msgid "Diagram"
-msgstr "Diagrama"
-
-#
-#: capplets/file-types/category-names.h:13
-msgid "TeX"
-msgstr "TeX"
-
-#: capplets/file-types/category-names.h:14
-msgid "Vector Graphics"
-msgstr "Gràfics vectorials"
-
-#: capplets/file-types/category-names.h:15
-msgid "World Wide Web"
-msgstr "World Wide Web"
-
-#
-#: capplets/file-types/category-names.h:16
-msgid "Plain Text"
-msgstr "Text Planer"
-
-#: capplets/file-types/category-names.h:17
-msgid "Extended Markup Language (XML)"
-msgstr "Llenguatge de Marques Estès (XML)"
-
-#
-#: capplets/file-types/category-names.h:18
-msgid "Information"
-msgstr "Informació"
-
-#: capplets/file-types/category-names.h:19
-msgid "Financial"
-msgstr "Financer"
-
-#: capplets/file-types/category-names.h:20
-msgid "Calendar"
-msgstr "Calendari"
-
-#: capplets/file-types/category-names.h:21
-msgid "Contacts"
-msgstr "Contactes"
-
-#: capplets/file-types/category-names.h:22
-msgid "Packages"
-msgstr "Paquets"
-
-#: capplets/file-types/category-names.h:23
-msgid "Software Development"
-msgstr "Desenvolupament de programari"
-
-#: capplets/file-types/category-names.h:24
-msgid "Source Code"
-msgstr "Codi Font"
-
-#: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:668
-msgid "Audio"
-msgstr "Audio"
-
-#: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:664
-msgid "Images"
-msgstr "Imatges"
-
-#
-#: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:666
-msgid "Video"
-msgstr "Video"
-
-#: capplets/file-types/file-types-capplet.c:215
+#: capplets/file-types/file-types-capplet.c:214
 msgid "Description"
 msgstr "Descripció"
 
-#: capplets/file-types/file-types-capplet.c:237
+#: capplets/file-types/file-types-capplet.c:236
 msgid "Extensions"
 msgstr "Extensions"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
 #: capplets/file-types/file-types-properties.glade.h:8
-#: capplets/file-types/file-types.desktop.in.h:2
 msgid "File Types and Programs"
 msgstr "Tipus de fitxers i programes"
 
@@ -982,11 +888,13 @@ msgid "Actions"
 msgstr "Accions"
 
 #: capplets/file-types/file-types-properties.glade.h:3
-msgid "Add _file type..."
+#, fuzzy
+msgid "Add _File Type..."
 msgstr "Afegeix un tipus de _fitxer..."
 
 #: capplets/file-types/file-types-properties.glade.h:4
-msgid "Add _service..."
+#, fuzzy
+msgid "Add _Service..."
 msgstr "Afegeix un _servei..."
 
 #
@@ -1085,8 +993,16 @@ msgid "_Protocol"
 msgstr "_Protocol"
 
 #: capplets/file-types/file-types.desktop.in.h:1
-msgid "Associate applications with file types"
-msgstr "Associa aplicacions amb tipus de fitxers"
+#, fuzzy
+msgid "File types and programs"
+msgstr "Tipus de fitxers i programes"
+
+#: capplets/file-types/file-types.desktop.in.h:2
+#, fuzzy
+msgid "Specify which programs are used to open or view each type of file"
+msgstr ""
+"Especifica quins programes s'han d'utilitzar per a visualitzar aquest tipus "
+"de fitxer"
 
 #: capplets/file-types/mime-category-edit-dialog.c:138
 msgid "Edit file category"
@@ -1115,8 +1031,8 @@ msgstr "Estructura que conte la informació sobre la categoria MIME"
 #: capplets/file-types/mime-category-edit-dialog.c:344
 #: capplets/file-types/mime-edit-dialog.c:490
 #: capplets/file-types/mime-edit-dialog.c:594
-#: capplets/file-types/service-edit-dialog.c:359
-#: capplets/file-types/service-edit-dialog.c:408
+#: capplets/file-types/service-edit-dialog.c:358
+#: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
 msgstr "Personalitzat"
 
@@ -1151,7 +1067,7 @@ msgid "Add File Type"
 msgstr "Afegeix un tipus de fitxer"
 
 #: capplets/file-types/mime-edit-dialog.c:435
-#: capplets/file-types/mime-type-info.c:670
+#: capplets/file-types/mime-type-info.c:673
 msgid "Misc"
 msgstr "Miscel·lània"
 
@@ -1160,7 +1076,7 @@ msgstr "Miscel·lània"
 msgid "None"
 msgstr "Cap"
 
-#: capplets/file-types/mime-edit-dialog.c:847
+#: capplets/file-types/mime-edit-dialog.c:854
 msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
@@ -1168,17 +1084,30 @@ msgstr ""
 "Introduïu un tipus de MIME vàlid. Hauria d'estar en el format classe/tipus i "
 "no pot contindre cap espai."
 
-#: capplets/file-types/mime-edit-dialog.c:854
+#: capplets/file-types/mime-edit-dialog.c:861
 msgid "A MIME type with that name already exists, overwrite ?."
 msgstr "Ja existeix un tipus de MIME amb aquest nom, voleu sobreescriure-ho?"
 
-#: capplets/file-types/mime-edit-dialog.c:919
+#: capplets/file-types/mime-edit-dialog.c:926
 msgid "Category"
 msgstr "Categoria"
 
-#: capplets/file-types/mime-edit-dialog.c:924
+#: capplets/file-types/mime-edit-dialog.c:931
 msgid "Choose a file category"
 msgstr "Escull una categoria de fitxer"
+
+#: capplets/file-types/mime-type-info.c:667
+msgid "Images"
+msgstr "Imatges"
+
+#
+#: capplets/file-types/mime-type-info.c:669
+msgid "Video"
+msgstr "Video"
+
+#: capplets/file-types/mime-type-info.c:671
+msgid "Audio"
+msgstr "Audio"
 
 #: capplets/file-types/mime-types-model.c:167
 #: capplets/file-types/mime-types-model.c:168
@@ -1214,11 +1143,11 @@ msgstr "És VERITAT si aquest és un diàleg d'addició de serveis"
 msgid "Add Service"
 msgstr "Afegeix un servei"
 
-#: capplets/file-types/service-edit-dialog.c:498
+#: capplets/file-types/service-edit-dialog.c:497
 msgid "Please enter a protocol name."
 msgstr "Si us plau, introduïu un nom de protocol."
 
-#: capplets/file-types/service-edit-dialog.c:510
+#: capplets/file-types/service-edit-dialog.c:509
 msgid ""
 "Invalid protocol name. Please enter a protocol name without any spaces or "
 "punctuation."
@@ -1226,7 +1155,7 @@ msgstr ""
 "Nom de protocol no vàlid. Si us plau introduïu un nom sense cap espai o "
 "puntuació."
 
-#: capplets/file-types/service-edit-dialog.c:524
+#: capplets/file-types/service-edit-dialog.c:523
 msgid "There is already a protocol by that name."
 msgstr "Ja existeix un protocol amb aquest nom."
 
@@ -1269,74 +1198,190 @@ msgstr "Tipus de lletra"
 msgid "Select fonts for the desktop"
 msgstr "Selecciona el tipus de lletra de l'escriptori"
 
-#
 #: capplets/font/font-properties.glade.h:1
+#, fuzzy
+msgid "Best _shapes"
+msgstr "Netscape"
+
+#: capplets/font/font-properties.glade.h:2
+msgid "Best co_ntrast"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:3
+msgid "De_tails..."
+msgstr ""
+
+#
+#: capplets/font/font-properties.glade.h:4
 msgid "Font Preferences"
 msgstr "Preferències dels tipus de lletra"
 
-#: capplets/font/font-properties.glade.h:2
+#
+#: capplets/font/font-properties.glade.h:5
+#, fuzzy
+msgid "Font Rendering"
+msgstr "Preferències dels tipus de lletra"
+
+#: capplets/font/font-properties.glade.h:6
+msgid "Font Rendering Details"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:7
+msgid "G_rayscale"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:8
+msgid "Hinting:"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:9
+#, fuzzy
+msgid "N_one"
+msgstr "Cap"
+
+#: capplets/font/font-properties.glade.h:10
+msgid "Resolution (_dots per inch):"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:11
 msgid "Set the font for applications"
 msgstr "Configura el tipus de lletra de les aplicacions"
 
-#: capplets/font/font-properties.glade.h:3
+#: capplets/font/font-properties.glade.h:12
 msgid "Set the font for the icons on the desktop"
 msgstr "Configura el tipus de lletra de les icones en l'escriptori"
 
-#: capplets/font/font-properties.glade.h:4
+#: capplets/font/font-properties.glade.h:13
+#, fuzzy
+msgid "Set the monospace font for terminals and similar applications"
+msgstr "Configura el tipus de lletra de les aplicacions"
+
+#: capplets/font/font-properties.glade.h:14
+msgid "Smoothing:"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:15
+msgid "Sub_pixel (LCDs)"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:16
+msgid "Sub_pixel smoothing (LCDs)"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:17
+msgid "Subpixel order:"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:18
+msgid "VB_GR"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:19
 msgid "_Application font:"
 msgstr "Tipus de lletra de les _aplicacions:"
 
+#: capplets/font/font-properties.glade.h:20
+msgid "_BGR"
+msgstr ""
+
 #
-#: capplets/font/font-properties.glade.h:5
+#: capplets/font/font-properties.glade.h:21
 msgid "_Desktop font:"
 msgstr "Tipus de lletra de l'escrip_tori"
 
 #
-#: capplets/keybindings/eggcellrendererkeys.c:158
+#: capplets/font/font-properties.glade.h:22
+#, fuzzy
+msgid "_Full"
+msgstr "_Fitxer"
+
+#: capplets/font/font-properties.glade.h:23
+#, fuzzy
+msgid "_Medium"
+msgstr "Mitjà"
+
+#: capplets/font/font-properties.glade.h:24
+msgid "_Monochrome"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:25
+#, fuzzy
+msgid "_None"
+msgstr "Cap"
+
+#: capplets/font/font-properties.glade.h:26
+msgid "_RGB"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:27
+msgid "_Slight"
+msgstr ""
+
+#
+#: capplets/font/font-properties.glade.h:28
+#, fuzzy
+msgid "_Terminal font:"
+msgstr "Terminal"
+
+#: capplets/font/font-properties.glade.h:29
+msgid "_VRGB"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:30
+msgid "_Window title font:"
+msgstr ""
+
+#
 #: capplets/keybindings/eggcellrendererkeys.c:159
+#: capplets/keybindings/eggcellrendererkeys.c:160
 msgid "Accelerator modifiers"
 msgstr "Modificadors d'accelerador"
 
 #
-#: capplets/keybindings/eggcellrendererkeys.c:167
 #: capplets/keybindings/eggcellrendererkeys.c:168
+#: capplets/keybindings/eggcellrendererkeys.c:169
 msgid "Accelerator key"
 msgstr "Tecla acceleradora"
 
-#: capplets/keybindings/eggcellrendererkeys.c:206
-#: capplets/keybindings/gnome-keybinding-properties.c:173
-#: libbackground/applier.c:521
+#: capplets/keybindings/eggcellrendererkeys.c:207
+#: capplets/keybindings/gnome-keybinding-properties.c:179
+#: libbackground/applier.c:588
 msgid "Disabled"
 msgstr "Inhabilitat"
 
-#: capplets/keybindings/eggcellrendererkeys.c:309
-#: capplets/keybindings/eggcellrendererkeys.c:506
-#: capplets/keybindings/eggcellrendererkeys.c:509
-msgid "Type a new shortcut"
+#: capplets/keybindings/eggcellrendererkeys.c:318
+#: capplets/keybindings/eggcellrendererkeys.c:534
+msgid "Type a new accelerator, or press Backspace to clear"
+msgstr ""
+"Teclejeu un accelerador nou, o pressiona la barra espaiadora per esborrar"
+
+#: capplets/keybindings/eggcellrendererkeys.c:537
+#, fuzzy
+msgid "Type a new accelerator"
 msgstr "Teclejeu una nova drecera"
 
 #
-#: capplets/keybindings/gnome-keybinding-properties.c:440
+#: capplets/keybindings/gnome-keybinding-properties.c:446
 msgid "<Unknown Action>"
 msgstr "<Acció Desconeguda>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:459
+#: capplets/keybindings/gnome-keybinding-properties.c:465
 msgid "Desktop"
 msgstr "Escriptori"
 
 #
-#: capplets/keybindings/gnome-keybinding-properties.c:463
+#: capplets/keybindings/gnome-keybinding-properties.c:469
 msgid "Window Management"
 msgstr "Gestió de finestres"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:560
+#: capplets/keybindings/gnome-keybinding-properties.c:566
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 "Error al establir un nou accelerador en la base de dades de la configuració: "
 "%s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:711
+#: capplets/keybindings/gnome-keybinding-properties.c:717
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1345,12 +1390,12 @@ msgstr ""
 "+ és incompleta."
 
 #
-#: capplets/keybindings/gnome-keybinding-properties.c:733
+#: capplets/keybindings/gnome-keybinding-properties.c:739
 msgid "Action"
 msgstr "Acció"
 
 #
-#: capplets/keybindings/gnome-keybinding-properties.c:749
+#: capplets/keybindings/gnome-keybinding-properties.c:755
 msgid "Shortcut"
 msgstr "Drecera"
 
@@ -1376,12 +1421,12 @@ msgid "Assign shortcut keys to commands"
 msgstr "Assigna dreceres a ordres"
 
 #
-#: capplets/keyboard/gnome-keyboard-properties.c:256
+#: capplets/keyboard/gnome-keyboard-properties.c:273
 msgid "_Accessibility"
 msgstr "_Accesibilitat"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:273
-#: capplets/keyboard/gnome-keyboard-properties.c:275
+#: capplets/keyboard/gnome-keyboard-properties.c:290
+#: capplets/keyboard/gnome-keyboard-properties.c:292
 #: capplets/sound/sound-properties-capplet.c:145
 #: capplets/sound/sound-properties-capplet.c:147
 msgid ""
@@ -1391,81 +1436,93 @@ msgstr ""
 "un dimoni)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:2
+msgid "<small><i>Fast</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+msgid "<small><i>Long</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+msgid "<small><i>Short</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+msgid "<small><i>Slow</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "Bee_p"
 msgstr "Bee_p"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "C_ustom:"
 msgstr "Pe_rsonalitzat:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "Clic_k on keypress"
 msgstr "Fa «clic_k» en polsar tecles"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "Cursor Blinks"
 msgstr "Parpadeig del cursor"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "Keyboard Bell"
 msgstr "Timbre de teclat"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Keyboard Preferences"
 msgstr "Preferències del teclat"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Keyboard _repeats when key is held down"
 msgstr "El teclat _repeteix quan es manté pressionada la tecla"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Keypress Click"
 msgstr "«Click» en polsar tecles"
 
 #
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
 msgid "Repeat Keys"
 msgstr "Repetició de tecles"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "S_peed:"
 msgstr "_Velocitat:"
 
 #
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid "_Accessibility..."
 msgstr "_Accesibilitat..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "_Blinks in text boxes and fields"
 msgstr "_Parpadeja en les caixes i camps de text"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
 msgid "_Delay:"
 msgstr "_Retard:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
 msgid "_Off"
 msgstr "_Apagat"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid "_Speed:"
 msgstr "_Velocitat:"
 
 #
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "_Volume:"
 msgstr "_Volum:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
-msgid "faster"
-msgstr "més ràpid"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid "loud"
 msgstr "alt"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "quiet"
 msgstr "baix"
 
@@ -1813,22 +1870,22 @@ msgstr "Selecciona els temes per a varies parts de l'escriptori"
 msgid "Theme"
 msgstr "Tema"
 
-#
 #: capplets/theme-switcher/theme-properties.glade.h:1
-msgid "Installed Themes"
-msgstr "Temes instal·lats"
-
-#: capplets/theme-switcher/theme-properties.glade.h:2
-msgid "List of available GTK+ themes"
-msgstr "Llista de temes de Gtk+ disponibles"
-
-#: capplets/theme-switcher/theme-properties.glade.h:3
 msgid "New themes can also be installed by dragging them into the window."
 msgstr "Es poden instal·lar nou temes arrossegant-los a la finestra."
 
-#: capplets/theme-switcher/theme-properties.glade.h:4
+#: capplets/theme-switcher/theme-properties.glade.h:2
 msgid "Theme Preferences"
 msgstr "Preferències dels temes"
+
+#: capplets/theme-switcher/theme-properties.glade.h:3
+msgid "Widget Theme"
+msgstr ""
+
+#: capplets/theme-switcher/theme-properties.glade.h:4
+#, fuzzy
+msgid "Window Border Theme"
+msgstr "Aparença del cantó de les finestres"
 
 #: capplets/theme-switcher/theme-properties.glade.h:5
 msgid "_Go to theme folder"
@@ -2171,23 +2228,23 @@ msgstr ""
 msgid "_Do not show this message again"
 msgstr "_No mostrar aquest missatge de nou"
 
-#: gnome-settings-daemon/gnome-settings-sound.c:125
+#: gnome-settings-daemon/gnome-settings-sound.c:128
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "No s'ha pogut carregar el fitxer de so %s com a event %s"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:150
+#: gnome-settings-daemon/gnome-settings-xsettings.c:166
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr ""
 "La clau GConf %s s'ha establert com tipus %s però el seu tipus esperat era %"
 "s\n"
 
-#: libbackground/applier.c:239
+#: libbackground/applier.c:254
 msgid "Type"
 msgstr "Tipus"
 
-#: libbackground/applier.c:240
+#: libbackground/applier.c:255
 msgid ""
 "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
 "for preview"
@@ -2196,22 +2253,30 @@ msgstr ""
 "APPLIER_PREVIEW per a previsualització"
 
 #
-#: libbackground/applier.c:247
+#: libbackground/applier.c:262
 msgid "Preview Width"
 msgstr "Amplada de la previsualització"
 
-#: libbackground/applier.c:248
+#: libbackground/applier.c:263
 msgid "Width if applier is a preview: Defaults to 64."
 msgstr "Amplada si l'aplicador és una previsualització: Per defecte a 64."
 
 #
-#: libbackground/applier.c:255
+#: libbackground/applier.c:270
 msgid "Preview Height"
 msgstr "Alçada de la previsualització"
 
-#: libbackground/applier.c:256
+#: libbackground/applier.c:271
 msgid "Height if applier is a preview: Defaults to 48."
 msgstr "Alçada si l'aplicador és una previsualització: Per defecte a 48."
+
+#: libbackground/applier.c:279
+msgid "Screen"
+msgstr ""
+
+#: libbackground/applier.c:280
+msgid "Screen on which BGApplier is to draw"
+msgstr ""
 
 #: libbackground/preview-file-selection.c:193
 msgid "Can't find an hbox, using a normal file selection"
@@ -2306,6 +2371,77 @@ msgstr ""
 msgid "OK"
 msgstr "D'acord"
 
+#~ msgid "Documents"
+#~ msgstr "Documents"
+
+#
+#~ msgid "Word Processor"
+#~ msgstr "Processador de paraules"
+
+#~ msgid "Published Materials"
+#~ msgstr "Materials Publicats"
+
+#~ msgid "Spreadsheet"
+#~ msgstr "Full de càlcul"
+
+#~ msgid "Presentation"
+#~ msgstr "Presentació"
+
+#~ msgid "Diagram"
+#~ msgstr "Diagrama"
+
+#
+#~ msgid "TeX"
+#~ msgstr "TeX"
+
+#~ msgid "Vector Graphics"
+#~ msgstr "Gràfics vectorials"
+
+#~ msgid "World Wide Web"
+#~ msgstr "World Wide Web"
+
+#
+#~ msgid "Plain Text"
+#~ msgstr "Text Planer"
+
+#~ msgid "Extended Markup Language (XML)"
+#~ msgstr "Llenguatge de Marques Estès (XML)"
+
+#
+#~ msgid "Information"
+#~ msgstr "Informació"
+
+#~ msgid "Financial"
+#~ msgstr "Financer"
+
+#~ msgid "Calendar"
+#~ msgstr "Calendari"
+
+#~ msgid "Contacts"
+#~ msgstr "Contactes"
+
+#~ msgid "Packages"
+#~ msgstr "Paquets"
+
+#~ msgid "Software Development"
+#~ msgstr "Desenvolupament de programari"
+
+#~ msgid "Source Code"
+#~ msgstr "Codi Font"
+
+#~ msgid "Associate applications with file types"
+#~ msgstr "Associa aplicacions amb tipus de fitxers"
+
+#~ msgid "faster"
+#~ msgstr "més ràpid"
+
+#
+#~ msgid "Installed Themes"
+#~ msgstr "Temes instal·lats"
+
+#~ msgid "List of available GTK+ themes"
+#~ msgstr "Llista de temes de Gtk+ disponibles"
+
 #
 #~ msgid "_Add..."
 #~ msgstr "_Afegeix..."
@@ -2343,9 +2479,6 @@ msgstr "D'acord"
 
 #~ msgid "Long"
 #~ msgstr "Llarg"
-
-#~ msgid "Medium"
-#~ msgstr "Mitjà"
 
 #
 #~ msgid "Repeat s_peed:"
@@ -2484,10 +2617,6 @@ msgstr "D'acord"
 #~ "Canvia els tipus de lletra utilitzades per defecte per l'escriptori i les "
 #~ "aplicacions"
 
-#~ msgid "Type a new accelerator, or press Backspace to clear"
-#~ msgstr ""
-#~ "Teclejeu un accelerador nou, o pressiona la barra espaiadora per esborrar"
-
 #~ msgid "Keyboard _Navigation scheme for use in applications:"
 #~ msgstr "Esquema de _navegació de teclat per a utilitzar a les aplicacions:"
 
@@ -2521,9 +2650,6 @@ msgstr "D'acord"
 
 #~ msgid "Use category _defaults"
 #~ msgstr "Utilitza les categories per _defecte"
-
-#~ msgid "_Enable keyboard accessibility"
-#~ msgstr "_Habilita l'accesibilitat del teclat"
 
 #~ msgid "<b>Test</b>"
 #~ msgstr "<b>Prova</b>"
@@ -2752,9 +2878,6 @@ msgstr "D'acord"
 #
 #~ msgid "handler:"
 #~ msgstr "gestor:"
-
-#~ msgid "Netscape"
-#~ msgstr "Netscape"
 
 #~ msgid "Netscape (new window)"
 #~ msgstr "Netscape (nova finestra)"

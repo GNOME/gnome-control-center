@@ -5,38 +5,40 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center for Gnome 2.x\n"
-"POT-Creation-Date: 2002-06-30 05:02+0200\n"
+"POT-Creation-Date: 2002-08-20 22:52-0400\n"
 "PO-Revision-Date: 2002-07-03 17:09+0700\n"
-"Last-Translator: Trinh Minh Thanh <19thanh@vol.vnn.vn ; tmthanh@linuxmail.org>\n"
+"Last-Translator: Trinh Minh Thanh <19thanh@vol.vnn.vn ; tmthanh@linuxmail."
+"org>\n"
 "Language-Team: Gnome-Vi Team <Gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.9.6\n"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:236
-#: capplets/keyboard/gnome-keyboard-properties.c:241
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:225
+#: capplets/keyboard/gnome-keyboard-properties.c:160
 #, c-format
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Lỗi khi chạy keyboard capplet: %s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:302
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:309
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Không thể nhập các thiết lập AccessX từ tập tin '%s'"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:414
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:421
 msgid "Select CDE AccessX file"
 msgstr "Chọn tập tin CDE AccessX"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Bàn phím"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:2
-msgid "Keyboard Accessibility Properties"
+#, fuzzy
+msgid "Set your keyboard accessibility preferences"
 msgstr "Thuộc Tính Hỗ Trợ Bàn Phím"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
@@ -84,8 +86,8 @@ msgid ""
 "Ignore all subsequent presses of the SAME key if they happen within a user "
 "selectable period of time."
 msgstr ""
-"Bỏ qua toàn bộ các lần nhấn phím tiếp theo của phím SAME nếu chúng xảy "
-"ra trong một khoảng thời gian do người dùng ấn định."
+"Bỏ qua toàn bộ các lần nhấn phím tiếp theo của phím SAME nếu chúng xảy ra "
+"trong một khoảng thời gian do người dùng ấn định."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
 msgid "Keyboard Accessibility Configuration (AccessX)"
@@ -100,16 +102,16 @@ msgid ""
 "Only accept keys after they have been pressed and held for a user adjustable "
 "amount of time."
 msgstr ""
-"Chỉ chấp nhận phím khi chúng được nhấn và giữ trong một khoảng thời gian "
-"do người dùng ấn định."
+"Chỉ chấp nhận phím khi chúng được nhấn và giữ trong một khoảng thời gian do "
+"người dùng ấn định."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
 msgid ""
 "Perform multiple simultaneous key press operations by pressing modifier keys "
 "in sequence."
 msgstr ""
-"Thực hiện các hoạt động nhấn nhiều phím đồng thời bằng việc nhấn các phím "
-"bổ trợ liên tiếp."
+"Thực hiện các hoạt động nhấn nhiều phím đồng thời bằng việc nhấn các phím bổ "
+"trợ liên tiếp."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
 msgid "Repeat Key Preferences"
@@ -144,18 +146,23 @@ msgid "_Disable if unused for "
 msgstr "_Tắt nếu không được dùng cho "
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
+#, fuzzy
+msgid "_Enable keyboard accessibility"
+msgstr "_Enable keyboard accessibility"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
 msgid "_Ignore keypresses within  :"
 msgstr "_Bỏ qua phím nhấn trong :"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
 msgid "_Import CDE AccessX file"
 msgstr "_Nhập tập tin CDE AccessX"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
 msgid "_Only accept keypress after :"
 msgstr "_Chỉ chấp nhận phím nhấn sau :"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:28
 msgid ""
 "_Turn off Sticky Keys when\n"
 "two keys pressed simultaneously"
@@ -163,27 +170,27 @@ msgstr ""
 "_Tắt các phím bám dính\n"
 "khi nhấn đồng thời 2 phím"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
 msgid "key is _accepted"
 msgstr "phím được _chấp nhận"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
 msgid "key is _pressed"
 msgstr "phím được _nhấn"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
 msgid "key is _rejected"
 msgstr "phím bị _từ chối"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
 msgid "msecs"
 msgstr "mili giây"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
 msgid "pixels/sec"
 msgstr "pixel/giây"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:35
 msgid "seconds"
 msgstr "giây"
 
@@ -234,16 +241,16 @@ msgstr "Không dùng ảnh"
 msgid "Select _picture:"
 msgstr "Chọn hình ảnh:"
 
-#: capplets/background/background-properties-capplet.c:558
+#: capplets/background/background-properties-capplet.c:561
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
-#: capplets/keyboard/gnome-keyboard-properties.c:363
-#: capplets/mouse/gnome-mouse-properties.c:727
+#: capplets/keyboard/gnome-keyboard-properties.c:294
+#: capplets/mouse/gnome-mouse-properties.c:752
 #: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
 msgstr "Lấy lại và lưu trữ các thiết lập thừa hưởng"
 
-#: capplets/background/background-properties-capplet.c:584
+#: capplets/background/background-properties-capplet.c:587
 #: capplets/background/background-properties.glade.h:2
 msgid "Background Preferences"
 msgstr "Thông số nền"
@@ -257,20 +264,21 @@ msgid "Background Preview"
 msgstr "Xem thử nền"
 
 #: capplets/background/background-properties.glade.h:4
+#, fuzzy
+msgid "Background _Style:"
+msgstr "Nền"
+
+#: capplets/background/background-properties.glade.h:5
 msgid "Horizontal gradient"
 msgstr "Gradient ngang"
 
-#: capplets/background/background-properties.glade.h:5
+#: capplets/background/background-properties.glade.h:6
 msgid "Pick a color"
 msgstr "Chọn màu"
 
-#: capplets/background/background-properties.glade.h:6
+#: capplets/background/background-properties.glade.h:7
 msgid "Picture Options:"
 msgstr "Tùy chọn ảnh:"
-
-#: capplets/background/background-properties.glade.h:7
-msgid "Picture bor_der:"
-msgstr "Khung _viền ảnh:"
 
 #: capplets/background/background-properties.glade.h:8
 #: libbackground/preview-file-selection.c:198
@@ -316,7 +324,8 @@ msgid "Background"
 msgstr "Nền"
 
 #: capplets/background/background.desktop.in.h:2
-msgid "Change the desktop background"
+#, fuzzy
+msgid "Customize your desktop background"
 msgstr "Đổi nền màn hình"
 
 #: capplets/common/activate-settings-daemon.c:18
@@ -432,17 +441,19 @@ msgid "Change set"
 msgstr "Đặt thay đổi"
 
 #: capplets/common/gconf-property-editor.c:186
-msgid "GConf change set containing data to be forwarded to the gconf client on apply"
+msgid ""
+"GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
-"Thiết lập thay đổi của Gconf chứa dữ liệu được chuyển tiếp tới Gconf máy khách "
-"khi áp dụng"
+"Thiết lập thay đổi của Gconf chứa dữ liệu được chuyển tiếp tới Gconf máy "
+"khách khi áp dụng"
 
 #: capplets/common/gconf-property-editor.c:191
 msgid "Conversion to widget callback"
 msgstr "Chuyển đổi thành widget callback"
 
 #: capplets/common/gconf-property-editor.c:192
-msgid "Callback to be issued when data are to be converted from GConf to the widget"
+msgid ""
+"Callback to be issued when data are to be converted from GConf to the widget"
 msgstr "Đưa ra Callback khi dữ liệu được chuyển đổi từ GConf tới widget"
 
 #: capplets/common/gconf-property-editor.c:197
@@ -450,7 +461,8 @@ msgid "Conversion from widget callback"
 msgstr "Chuyển đổi từ widget callback"
 
 #: capplets/common/gconf-property-editor.c:198
-msgid "Callback to be issued when data are to be converted to GConf from the widget"
+msgid ""
+"Callback to be issued when data are to be converted to GConf from the widget"
 msgstr "Đưa ra Callback khi dữ liệu được chuyển đổi từ widget tới GConf "
 
 #: capplets/common/gconf-property-editor.c:203
@@ -475,7 +487,8 @@ msgstr "Callback dữ liệu tự do của trình biên soạn đặc tính"
 
 #: capplets/common/gconf-property-editor.c:227
 msgid "Callback to be issued when property editor object data is to be freed"
-msgstr "Đưa ra Callback khi dữ liệu đối tượng của trình biên soạn đặc tính được tự do"
+msgstr ""
+"Đưa ra Callback khi dữ liệu đối tượng của trình biên soạn đặc tính được tự do"
 
 #: capplets/common/gconf-property-editor.c:1484
 #, c-format
@@ -508,22 +521,24 @@ msgid "Please select an image."
 msgstr "Vui lòng chọn ảnh."
 
 #: capplets/default-applications/default-applications.desktop.in.h:1
-msgid "Choose the applications used by default"
-msgstr "Chọn ứng dụng được dùng mặc định"
-
-#: capplets/default-applications/default-applications.desktop.in.h:2
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:19
 msgid "Preferred Applications"
 msgstr "Ứng dụng ưa thích"
+
+#: capplets/default-applications/default-applications.desktop.in.h:2
+#, fuzzy
+msgid "Select your default applications"
+msgstr "Đặt font cho ứng dụng"
 
 #: capplets/default-applications/gnome-default-applications-properties.c:105
 msgid "Please specify a name and a command for this editor."
 msgstr "Vui lòng đặt tên và ghi lệnh cho bộ soạn thảo văn bản này."
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:1
+#: capplets/file-types/file-types-properties.glade.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: capplets/network/gnome-network-preferences.glade.h:1
-#: capplets/theme-switcher/theme-properties.glade.h:1
+#: capplets/theme-switcher/theme-install.glade.h:1
 msgid "*"
 msgstr "*"
 
@@ -668,7 +683,6 @@ msgid "_Select an Editor:"
 msgstr "_Chọn trình xử lý văn bản:"
 
 #: capplets/desktop-links/Accessibility.directory.in.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "Accessibility"
 msgstr "Hỗ Trợ"
 
@@ -697,19 +711,20 @@ msgid "Appearance"
 msgstr "Diện mạo"
 
 #: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:2
-msgid "Configure window appearance"
-msgstr "Cấu hình diện mạo cửa sổ"
+msgid "Select themes and fonts for your windows"
+msgstr ""
 
 #: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:1
-msgid "Configure key shortcuts"
-msgstr "Cấu hình phím tắt"
+msgid "Customize shortcut keys for your windows"
+msgstr ""
 
 #: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:2
 msgid "Shortcuts"
 msgstr "Phím tắt"
 
 #: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:1
-msgid "Configure window focusing"
+#, fuzzy
+msgid "Configure how to give focus to windows"
 msgstr "Cấu hình focus"
 
 #: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:2
@@ -717,15 +732,16 @@ msgid "Focus behavior"
 msgstr "Hành vi focus"
 
 #: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
-msgid "Configure window properties"
-msgstr "Cấu hình thuộc tính cửa sổ"
+msgid "Configure matched windows to have particular characteristics"
+msgstr ""
 
 #: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:2
 msgid "Matched Windows"
 msgstr "Cửa sổ khớp"
 
 #: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:1
-msgid "Configure window minimization and maximization"
+#, fuzzy
+msgid "Configure how to minimize, maximize, and restore windows"
 msgstr "Cấu hình thu nhỏ và phóng to cửa sổ"
 
 #: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:2
@@ -733,23 +749,25 @@ msgid "Minimizing and Maximizing"
 msgstr "Thu nhỏ và phóng to"
 
 #: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
-msgid "Configure window manager configuration properties"
-msgstr "Cấu hình thuộc tính trình cấu hình quản lý cửa sổ"
-
-#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:2
 msgid "Meta"
 msgstr "Meta"
 
-#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
-msgid "Configure miscellaneous window features"
-msgstr "Cấu hình các đặc điểm linh tinh của cửa sổ"
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:2
+msgid "Select your Sawfish user level"
+msgstr ""
 
-#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
 msgid "Miscellaneous"
 msgstr "Linh tinh"
 
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
+#, fuzzy
+msgid "Select miscellaneous window options"
+msgstr "Cấu hình các đặc điểm linh tinh của cửa sổ"
+
 #: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:1
-msgid "Configure window move/resize"
+#, fuzzy
+msgid "Configure how windows move and resize"
 msgstr "Cấu hình di chuyển/đổi cỡ cửa sổ"
 
 #: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:2
@@ -757,25 +775,27 @@ msgid "Moving and Resizing"
 msgstr "Di chuyển và đổi cỡ"
 
 #: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:1
-msgid "Configure window placement"
-msgstr "Cấu hình vị trí cửa sổ"
+msgid "Configure positioning of windows on the desktop"
+msgstr ""
 
 #: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:2
 msgid "Placement"
 msgstr "Vị trí"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
-msgid "Enable window manager sound events"
+#, fuzzy
+msgid "Associate sounds with window manager events"
 msgstr "Bật các sự kiện âm thanh của trình quản lý cửa sổ"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
 #: capplets/sound/sound.desktop.in.h:2
 msgid "Sound"
 msgstr "Âm thanh"
 
 #: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:1
-msgid "Configure workspaces"
+#, fuzzy
+msgid "Configure your workspaces and viewports"
 msgstr "Cấu hình workspace"
 
 #: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:2
@@ -790,176 +810,82 @@ msgstr "Các ứng dụng kế thừa"
 msgid "Legacy applications settings (grdb)"
 msgstr "Thiết lập của các ứng dụng kế thừa (grdb)"
 
-#.
-#. * Translatable strings file
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/file-types/category-names.h:7
-msgid "Documents"
-msgstr "Tài liệu"
-
-#: capplets/file-types/category-names.h:8
-msgid "Word Processor"
-msgstr "Trình xử lý văn bản"
-
-#: capplets/file-types/category-names.h:9
-msgid "Published Materials"
-msgstr "Tài liệu xuất bản"
-
-#: capplets/file-types/category-names.h:10
-msgid "Spreadsheet"
-msgstr "Bảng tính"
-
-#: capplets/file-types/category-names.h:11
-msgid "Presentation"
-msgstr "Trình diễn"
-
-#: capplets/file-types/category-names.h:12
-msgid "Diagram"
-msgstr "Lược đồ"
-
-#: capplets/file-types/category-names.h:13
-msgid "TeX"
-msgstr "TeX"
-
-#: capplets/file-types/category-names.h:14
-msgid "Vector Graphics"
-msgstr "Ảnh vector"
-
-#: capplets/file-types/category-names.h:15
-msgid "World Wide Web"
-msgstr "WWW"
-
-#: capplets/file-types/category-names.h:16
-msgid "Plain Text"
-msgstr "Văn bản thô"
-
-#: capplets/file-types/category-names.h:17
-msgid "Extended Markup Language (XML)"
-msgstr "XML"
-
-#: capplets/file-types/category-names.h:18
-msgid "Information"
-msgstr "Thông tin"
-
-#: capplets/file-types/category-names.h:19
-msgid "Financial"
-msgstr "Tài chính"
-
-#: capplets/file-types/category-names.h:20
-msgid "Calendar"
-msgstr "Lịch"
-
-#: capplets/file-types/category-names.h:21
-msgid "Contacts"
-msgstr "Liên hệ"
-
-#: capplets/file-types/category-names.h:22
-msgid "Packages"
-msgstr "Gói phần mềm"
-
-#: capplets/file-types/category-names.h:23
-msgid "Software Development"
-msgstr "Phát triển phần mềm"
-
-#: capplets/file-types/category-names.h:24
-msgid "Source Code"
-msgstr "Mã nguồn"
-
-#: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:673
-msgid "Audio"
-msgstr "Âm nhạc"
-
-#: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:669
-msgid "Images"
-msgstr "Ảnh"
-
-#: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:671
-msgid "Video"
-msgstr "Video"
-
-#: capplets/file-types/file-types-capplet.c:227
+#: capplets/file-types/file-types-capplet.c:214
 msgid "Description"
 msgstr "Mô tả"
 
-#: capplets/file-types/file-types-capplet.c:234
+#: capplets/file-types/file-types-capplet.c:236
 msgid "Extensions"
 msgstr "Phần mở rộng"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
-#: capplets/file-types/file-types.desktop.in.h:1
+#: capplets/file-types/file-types-properties.glade.h:8
 msgid "File Types and Programs"
 msgstr "Loại tập tin và chương trình"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:2
-#: capplets/file-types/file-types.desktop.in.h:2
 msgid "Specify which programs are used to open or view each file type"
 msgstr "Xác định chương trình được dùng để mở hoặc xem loại tập tin này"
 
-#: capplets/file-types/file-types-properties.glade.h:1
+#: capplets/file-types/file-types-properties.glade.h:2
 msgid "Actions"
 msgstr "Hành động"
 
-#: capplets/file-types/file-types-properties.glade.h:2
-msgid "Add _file type..."
+#: capplets/file-types/file-types-properties.glade.h:3
+#, fuzzy
+msgid "Add _File Type..."
 msgstr "Thêm loại tập tin..."
 
-#: capplets/file-types/file-types-properties.glade.h:3
-msgid "Add _service..."
+#: capplets/file-types/file-types-properties.glade.h:4
+#, fuzzy
+msgid "Add _Service..."
 msgstr "_Thêm dịch vụ..."
 
-#: capplets/file-types/file-types-properties.glade.h:4
+#: capplets/file-types/file-types-properties.glade.h:5
+#, fuzzy
+msgid "Add:"
+msgstr "Thêm"
+
+#: capplets/file-types/file-types-properties.glade.h:6
 msgid "Default action"
 msgstr "Hành động mặc định"
 
-#: capplets/file-types/file-types-properties.glade.h:5
-#: capplets/file-types/mime-edit-dialog.c:192
+#: capplets/file-types/file-types-properties.glade.h:7
+#: capplets/file-types/mime-edit-dialog.c:209
 msgid "Edit file type"
 msgstr "Sửa loại tập tin"
 
-#: capplets/file-types/file-types-properties.glade.h:6
-msgid "File types and Internet Services"
-msgstr "Loại tập tin và dịch vụ Internet"
-
-#: capplets/file-types/file-types-properties.glade.h:7
-msgid "Filename extensions"
+#: capplets/file-types/file-types-properties.glade.h:9
+#, fuzzy
+msgid "Filename Extensions"
 msgstr "Phần mở rộng tên tập tin"
 
-#: capplets/file-types/file-types-properties.glade.h:8
+#: capplets/file-types/file-types-properties.glade.h:10
 msgid "Look at content"
 msgstr "Xem nội dung"
 
-#: capplets/file-types/file-types-properties.glade.h:9
-msgid "Needs _terminal"
-msgstr "Cần _terminal"
-
-#: capplets/file-types/file-types-properties.glade.h:10
-msgid "Program to run"
+#: capplets/file-types/file-types-properties.glade.h:11
+#, fuzzy
+msgid "Program to Run"
 msgstr "Chương trình cần chạy"
 
-#: capplets/file-types/file-types-properties.glade.h:11
+#: capplets/file-types/file-types-properties.glade.h:12
 msgid "Run a program"
 msgstr "Chạy chương trình"
 
-#: capplets/file-types/file-types-properties.glade.h:12
-msgid "Use category _defaults"
-msgstr "Dùng phân loại _mặc định"
-
 #: capplets/file-types/file-types-properties.glade.h:13
+#, fuzzy
+msgid "Run in _Terminal"
+msgstr "Chạy trong t_erminal"
+
+#: capplets/file-types/file-types-properties.glade.h:14
 msgid "Use parent category _defaults"
 msgstr "Dùng phân loại _cha mặc định"
 
-#: capplets/file-types/file-types-properties.glade.h:14
-msgid "Viewing component"
-msgstr "Thành phần xem"
-
 #: capplets/file-types/file-types-properties.glade.h:15
-msgid "_Add"
-msgstr "_Thêm"
+#, fuzzy
+msgid "Viewer Component"
+msgstr "Thành phần xem"
 
 #: capplets/file-types/file-types-properties.glade.h:16
 msgid "_Category"
@@ -970,43 +896,56 @@ msgid "_Choose..."
 msgstr "_Chọn..."
 
 #: capplets/file-types/file-types-properties.glade.h:18
+#, fuzzy
+msgid "_Delete"
+msgstr "Xóa"
+
+#: capplets/file-types/file-types-properties.glade.h:19
 msgid "_Description"
 msgstr "_Mô tả"
 
-#: capplets/file-types/file-types-properties.glade.h:19
+#: capplets/file-types/file-types-properties.glade.h:20
 msgid "_Edit..."
 msgstr "_Sửa..."
 
-#: capplets/file-types/file-types-properties.glade.h:20
+#: capplets/file-types/file-types-properties.glade.h:21
 msgid "_MIME Type"
 msgstr "Loại _MIME"
 
-#: capplets/file-types/file-types-properties.glade.h:21
+#: capplets/file-types/file-types-properties.glade.h:22
 msgid "_Name"
 msgstr "_Tên"
 
-#: capplets/file-types/file-types-properties.glade.h:22
+#: capplets/file-types/file-types-properties.glade.h:23
 msgid "_Program"
 msgstr "_Chương trình"
 
-#: capplets/file-types/file-types-properties.glade.h:23
-msgid "_Program to run"
+#: capplets/file-types/file-types-properties.glade.h:24
+#, fuzzy
+msgid "_Program to Run"
 msgstr "_Chương trình cần chạy"
 
-#: capplets/file-types/file-types-properties.glade.h:24
-msgid "_Protocol name"
-msgstr "Tên _giao thức"
-
 #: capplets/file-types/file-types-properties.glade.h:25
-msgid "_Remove"
-msgstr "_Loại bỏ"
+#, fuzzy
+msgid "_Protocol"
+msgstr "Giao thức"
+
+#: capplets/file-types/file-types.desktop.in.h:1
+#, fuzzy
+msgid "File types and programs"
+msgstr "Loại tập tin và chương trình"
+
+#: capplets/file-types/file-types.desktop.in.h:2
+#, fuzzy
+msgid "Specify which programs are used to open or view each type of file"
+msgstr "Xác định chương trình được dùng để mở hoặc xem loại tập tin này"
 
 #: capplets/file-types/mime-category-edit-dialog.c:138
 msgid "Edit file category"
 msgstr "Sửa phân loại tập tin"
 
 #: capplets/file-types/mime-category-edit-dialog.c:172
-#: capplets/file-types/mime-edit-dialog.c:230
+#: capplets/file-types/mime-edit-dialog.c:256
 #: capplets/file-types/service-edit-dialog.c:170
 #: capplets/file-types/service-edit-dialog.c:171
 msgid "Model"
@@ -1025,52 +964,53 @@ msgid "Structure containing information on the MIME category"
 msgstr "Cấu trúc chứa thông tin về phân loại MIME"
 
 #: capplets/file-types/mime-category-edit-dialog.c:344
-#: capplets/file-types/mime-edit-dialog.c:465
-#: capplets/file-types/mime-edit-dialog.c:569
+#: capplets/file-types/mime-edit-dialog.c:490
+#: capplets/file-types/mime-edit-dialog.c:594
 #: capplets/file-types/service-edit-dialog.c:358
 #: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
 msgstr "Tự chọn"
 
-#: capplets/file-types/mime-edit-dialog.c:189
+#: capplets/file-types/mime-edit-dialog.c:206
 msgid "Extension"
 msgstr "Mở rộng"
 
-#: capplets/file-types/mime-edit-dialog.c:231
+#: capplets/file-types/mime-edit-dialog.c:257
 msgid "Underlying model to notify when Ok is clicked"
 msgstr "Gạch chân kiểu mẫu để thông báo khi nhấn OK"
 
-#: capplets/file-types/mime-edit-dialog.c:238
+#: capplets/file-types/mime-edit-dialog.c:264
 msgid "MIME type information"
 msgstr "Thông tin loại MIME"
 
-#: capplets/file-types/mime-edit-dialog.c:239
+#: capplets/file-types/mime-edit-dialog.c:265
 msgid "Structure with data on the MIME type"
 msgstr "Cấu trúc với dữ liệu về loại MIME"
 
-#: capplets/file-types/mime-edit-dialog.c:245
+#: capplets/file-types/mime-edit-dialog.c:271
 msgid "Is add dialog"
 msgstr "Là thoại bổ sung"
 
-#: capplets/file-types/mime-edit-dialog.c:246
+#: capplets/file-types/mime-edit-dialog.c:272
 msgid "True if this dialog is for adding a MIME type"
 msgstr "Đúng nếu thoại này là để thêm loại MIME"
 
-#: capplets/file-types/mime-edit-dialog.c:295
-msgid "Add file type"
-msgstr "Thêm loại tập tin"
+#: capplets/file-types/mime-edit-dialog.c:321
+#, fuzzy
+msgid "Add File Type"
+msgstr "Thêm loại MIME..."
 
-#: capplets/file-types/mime-edit-dialog.c:409
-#: capplets/file-types/mime-type-info.c:675
+#: capplets/file-types/mime-edit-dialog.c:435
+#: capplets/file-types/mime-type-info.c:673
 msgid "Misc"
 msgstr "Linh tinh"
 
-#: capplets/file-types/mime-edit-dialog.c:460
-#: capplets/file-types/mime-edit-dialog.c:519
+#: capplets/file-types/mime-edit-dialog.c:485
+#: capplets/file-types/mime-edit-dialog.c:544
 msgid "None"
 msgstr "Không"
 
-#: capplets/file-types/mime-edit-dialog.c:825
+#: capplets/file-types/mime-edit-dialog.c:854
 msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
@@ -1078,17 +1018,29 @@ msgstr ""
 "Hãy nhập kiểu MIME hợp lệ. Nó nên là loại/kiểu và không có bất kỳ dấu cách "
 "nào."
 
-#: capplets/file-types/mime-edit-dialog.c:832
+#: capplets/file-types/mime-edit-dialog.c:861
 msgid "A MIME type with that name already exists, overwrite ?."
 msgstr "Loại MIME với tên đó đã tồn tại, ghi đè lên ?."
 
-#: capplets/file-types/mime-edit-dialog.c:897
+#: capplets/file-types/mime-edit-dialog.c:926
 msgid "Category"
 msgstr "Phân loại"
 
-#: capplets/file-types/mime-edit-dialog.c:902
+#: capplets/file-types/mime-edit-dialog.c:931
 msgid "Choose a file category"
 msgstr "Chọn phân loại tập tin"
+
+#: capplets/file-types/mime-type-info.c:667
+msgid "Images"
+msgstr "Ảnh"
+
+#: capplets/file-types/mime-type-info.c:669
+msgid "Video"
+msgstr "Video"
+
+#: capplets/file-types/mime-type-info.c:671
+msgid "Audio"
+msgstr "Âm nhạc"
 
 #: capplets/file-types/mime-types-model.c:167
 #: capplets/file-types/mime-types-model.c:168
@@ -1120,7 +1072,8 @@ msgid "TRUE if this is an add service dialog"
 msgstr "TRUE nếu đây là hộp thoại giao thức bổ sung"
 
 #: capplets/file-types/service-edit-dialog.c:225
-msgid "Add service"
+#, fuzzy
+msgid "Add Service"
 msgstr "Thêm dịch vụ"
 
 #: capplets/file-types/service-edit-dialog.c:497
@@ -1168,76 +1121,186 @@ msgid "Gnome documentation"
 msgstr "Tài liệu GNOME"
 
 #: capplets/font/font-properties.desktop.in.h:1
-msgid "Change the default fonts used by the desktop and applications"
-msgstr "Đổi font mặc định được dùng bởi desktop và ứng dụng"
-
-#: capplets/font/font-properties.desktop.in.h:2
 msgid "Font"
 msgstr "Font"
 
+#: capplets/font/font-properties.desktop.in.h:2
+#, fuzzy
+msgid "Select fonts for the desktop"
+msgstr "Đặt font cho biểu tượng và desktop"
+
 #: capplets/font/font-properties.glade.h:1
+#, fuzzy
+msgid "Best _shapes"
+msgstr "Netscape"
+
+#: capplets/font/font-properties.glade.h:2
+msgid "Best co_ntrast"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:3
+msgid "De_tails..."
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:4
 msgid "Font Preferences"
 msgstr "Thông số font"
 
-#: capplets/font/font-properties.glade.h:2
+#: capplets/font/font-properties.glade.h:5
+#, fuzzy
+msgid "Font Rendering"
+msgstr "Thông số font"
+
+#: capplets/font/font-properties.glade.h:6
+msgid "Font Rendering Details"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:7
+msgid "G_rayscale"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:8
+msgid "Hinting:"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:9
+#, fuzzy
+msgid "N_one"
+msgstr "Không"
+
+#: capplets/font/font-properties.glade.h:10
+msgid "Resolution (_dots per inch):"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:11
 msgid "Set the font for applications"
 msgstr "Đặt font cho ứng dụng"
 
-#: capplets/font/font-properties.glade.h:3
+#: capplets/font/font-properties.glade.h:12
 msgid "Set the font for the icons on the desktop"
 msgstr "Đặt font cho biểu tượng và desktop"
 
-#: capplets/font/font-properties.glade.h:4
-msgid "Standard _application font:"
+#: capplets/font/font-properties.glade.h:13
+#, fuzzy
+msgid "Set the monospace font for terminals and similar applications"
+msgstr "Đặt font cho ứng dụng"
+
+#: capplets/font/font-properties.glade.h:14
+msgid "Smoothing:"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:15
+msgid "Sub_pixel (LCDs)"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:16
+msgid "Sub_pixel smoothing (LCDs)"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:17
+msgid "Subpixel order:"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:18
+msgid "VB_GR"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:19
+#, fuzzy
+msgid "_Application font:"
 msgstr "Font ứng _dụng chuẩn:"
 
-#: capplets/font/font-properties.glade.h:5
+#: capplets/font/font-properties.glade.h:20
+msgid "_BGR"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:21
 msgid "_Desktop font:"
 msgstr "Font _desktop:"
 
-#: capplets/keybindings/eggcellrendererkeys.c:158
+#: capplets/font/font-properties.glade.h:22
+#, fuzzy
+msgid "_Full"
+msgstr "_Tập tin"
+
+#: capplets/font/font-properties.glade.h:23
+#, fuzzy
+msgid "_Medium"
+msgstr "Trung bình"
+
+#: capplets/font/font-properties.glade.h:24
+msgid "_Monochrome"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:25
+#, fuzzy
+msgid "_None"
+msgstr "Không"
+
+#: capplets/font/font-properties.glade.h:26
+msgid "_RGB"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:27
+msgid "_Slight"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:28
+#, fuzzy
+msgid "_Terminal font:"
+msgstr "Terminal"
+
+#: capplets/font/font-properties.glade.h:29
+msgid "_VRGB"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:30
+msgid "_Window title font:"
+msgstr ""
+
 #: capplets/keybindings/eggcellrendererkeys.c:159
+#: capplets/keybindings/eggcellrendererkeys.c:160
 msgid "Accelerator modifiers"
 msgstr "Phím bổ trợ"
 
-#: capplets/keybindings/eggcellrendererkeys.c:167
 #: capplets/keybindings/eggcellrendererkeys.c:168
+#: capplets/keybindings/eggcellrendererkeys.c:169
 msgid "Accelerator key"
 msgstr "Phím tắt"
 
-#: capplets/keybindings/eggcellrendererkeys.c:206
-#: capplets/keybindings/gnome-keybinding-properties.c:165
-#: libbackground/applier.c:521
+#: capplets/keybindings/eggcellrendererkeys.c:207
+#: capplets/keybindings/gnome-keybinding-properties.c:179
+#: libbackground/applier.c:588
 msgid "Disabled"
 msgstr "Tắt"
 
-#: capplets/keybindings/eggcellrendererkeys.c:309
-#: capplets/keybindings/eggcellrendererkeys.c:506
+#: capplets/keybindings/eggcellrendererkeys.c:318
+#: capplets/keybindings/eggcellrendererkeys.c:534
 msgid "Type a new accelerator, or press Backspace to clear"
 msgstr "Gõ phím tắt mới, hoặc nhấn Backspace để xóa"
 
-#: capplets/keybindings/eggcellrendererkeys.c:509
+#: capplets/keybindings/eggcellrendererkeys.c:537
 msgid "Type a new accelerator"
 msgstr "Gõ phím tắt"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:432
+#: capplets/keybindings/gnome-keybinding-properties.c:446
 msgid "<Unknown Action>"
 msgstr "<Hành động lạ>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:457
+#: capplets/keybindings/gnome-keybinding-properties.c:465
 msgid "Desktop"
 msgstr "Desktop"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:461
+#: capplets/keybindings/gnome-keybinding-properties.c:469
 msgid "Window Management"
 msgstr "Bộ quản lý cửa sổ"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:558
+#: capplets/keybindings/gnome-keybinding-properties.c:566
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Lỗi thiết lập phím tắt mới trong cơ sở dữ liệu cấu hình: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:708
+#: capplets/keybindings/gnome-keybinding-properties.c:717
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1245,11 +1308,11 @@ msgstr ""
 "Không thể tìm thấy bất cứ theme bàn phím nào. Có nghĩa là bản cài đặt Gtk+ "
 "của bạn chưa hoàn chỉnh."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:733
+#: capplets/keybindings/gnome-keybinding-properties.c:739
 msgid "Action"
 msgstr "Hành động"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:745
+#: capplets/keybindings/gnome-keybinding-properties.c:755
 msgid "Shortcut"
 msgstr "Phím tắt"
 
@@ -1263,174 +1326,134 @@ msgid "Keyboard Shortcuts"
 msgstr "Phím tắt"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:3
-msgid "Keyboard _Navigation scheme for use in applications:"
-msgstr "Xắp xếp duyệt bàn phím dùng trong các ứng dụng:"
-
-#: capplets/keybindings/gnome-keybinding-properties.glade.h:4
-msgid ""
-"To assign a shortcut to an action, click in the shortcut column and press "
-"the key combination you want to associate with it."
-msgstr ""
-"Để gán một phím tắt cho một hành động nào đó, nhấn cột phím tắt và nhấn tổ "
-"hợp phím bạn muốn liên kết với nó."
-
-#: capplets/keybindings/gnome-keybinding-properties.glade.h:5
 msgid "_Desktop shortcuts:"
 msgstr "_Phím tắt desktop:"
 
-#: capplets/keybindings/keybinding.desktop.in.h:1
-msgid "Associate keyboard shortcuts with panel actions"
-msgstr "Gắc phím tắt với hành động trên panel"
+#: capplets/keybindings/gnome-keybinding-properties.glade.h:4
+#, fuzzy
+msgid "_Text editing shortcuts:"
+msgstr "_Phím tắt desktop:"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:342
+#: capplets/keybindings/keybinding.desktop.in.h:1
+msgid "Assign shortcut keys to commands"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.c:273
 msgid "_Accessibility"
 msgstr "_Hỗ Trợ"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:359
-#: capplets/keyboard/gnome-keyboard-properties.c:361
+#: capplets/keyboard/gnome-keyboard-properties.c:290
+#: capplets/keyboard/gnome-keyboard-properties.c:292
 #: capplets/sound/sound-properties-capplet.c:145
 #: capplets/sound/sound-properties-capplet.c:147
-msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
+msgid ""
+"Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
 "Chỉ áp dụng các thiết lập và thoát (chỉ để tương thích; bây giờ được xử lý "
 "bởi daemon)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:2
-msgid "<i>fast</i>"
-msgstr "<i>nhanh</i>"
+msgid "<small><i>Fast</i></small>"
+msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:3
-msgid "<i>loud</i>"
-msgstr "<i>ồn</i>"
+msgid "<small><i>Long</i></small>"
+msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:4
-msgid "<i>quiet</i>"
-msgstr "<i>im lặng</i>"
+msgid "<small><i>Short</i></small>"
+msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:5
-msgid "<i>slow</i>"
-msgstr "<i>chậm</i>"
+msgid "<small><i>Slow</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+msgid "Bee_p"
+msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:7
-msgid "Cursor"
-msgstr "Con trỏ"
+#, fuzzy
+msgid "C_ustom:"
+msgstr "Tự chọn"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:8
-msgid "Cursor _blinks in text fields"
-msgstr "Nháy con trỏ trong trường văn bản"
+msgid "Clic_k on keypress"
+msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:9
-msgid "Fast"
-msgstr "Nhanh"
+#, fuzzy
+msgid "Cursor Blinks"
+msgstr "Con trỏ"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
-msgid "Key_press makes sound"
-msgstr "Phát âm thanh khi nhấn phím"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "Keyboard Bell"
 msgstr "Chuông bàn phím"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Keyboard Preferences"
 msgstr "Thông số bàn phím"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Keyboard _repeats when key is held down"
 msgstr "Lặp lại phím gõ khi phím được giữ lâu"
 
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+msgid "Keypress Click"
+msgstr ""
+
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:15
-msgid "Keyboard bell _enabled"
-msgstr "Bật chuông bàn phím"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
-msgid "Keyboard bell _off"
-msgstr "Tắt chuông bàn phím"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
-msgid "Keyclick Volume"
-msgstr "Âm lương phím"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
-msgid "Long"
-msgstr "Lâu"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
-msgid "Medium"
-msgstr "Trung bình"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
-msgid "Repeat Rate"
+#, fuzzy
+msgid "Repeat Keys"
 msgstr "Tốc độ lặp"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
-msgid "Repeat s_peed:"
-msgstr "Tốc độ _lặp:"
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#, fuzzy
+msgid "S_peed:"
+msgstr "Tốc độ"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
-msgid "Set the speed the cursor blinks in text fields."
-msgstr "Chỉnh tốc độ nháy của con trỏ"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
-msgid "Set the volume of the clicking sound made when pressing a key"
-msgstr "Chỉnh âm lượng của âm thanh phát ra khi nhấn phím"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
-msgid "Short"
-msgstr "Ngắn"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
-msgid "Slow"
-msgstr "Chậm"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
-msgid ""
-"The keyboard bell is the <i>beep</i> sound heard when the system wants to "
-"get your attention."
-msgstr "Chuông bàn phím là tiếng <i>bíp</i> nghe được khi hệ thống muốn gây sự chú ý."
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
-msgid "Very Fast"
-msgstr "Rất nhanh"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
-msgid "Very Short"
-msgstr "Cực ngắn"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:30
-msgid ""
-"You can configure the keyboards accessibility features by bringing up the "
-"'Accessibility Settings' property dialog, or pressing the button on the "
-"right."
-msgstr ""
-"Bạn có thể cấu hình các đặc tính hỗ trợ bàn phím bằng việc đưa ra hộp "
-"thoại đặc trưng 'Thiết Lập Hỗ Trợ', hay nhấn phím bên phải."
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid "_Accessibility..."
 msgstr "_Accessibility..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:32
-msgid "_Blink speed:"
-msgstr "Tốc độ _chớp:"
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#, fuzzy
+msgid "_Blinks in text boxes and fields"
+msgstr "Nháy con trỏ trong trường văn bản"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:33
-msgid "_Custom keyboard bell:"
-msgstr "Chuông bàn phím _riêng:"
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
+#, fuzzy
+msgid "_Delay:"
+msgstr "_Khoảng chờ (giây):"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:34
-msgid "_Delay before repeating:"
-msgstr "_Khoảng chờ trước khi lặp lại:"
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+msgid "_Off"
+msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:35
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#, fuzzy
+msgid "_Speed:"
+msgstr "Tốc độ"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "_Volume:"
 msgstr "Â_m lượng:"
 
-#: capplets/keyboard/keyboard.desktop.in.h:2
-msgid "Keyboard Properties"
-msgstr "Thuộc tính bàn phím"
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
+#, fuzzy
+msgid "loud"
+msgstr "Âm thanh"
 
-#: capplets/mouse/gnome-mouse-properties.c:455
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
+msgid "quiet"
+msgstr ""
+
+#: capplets/keyboard/keyboard.desktop.in.h:2
+#, fuzzy
+msgid "Set your keyboard preferences"
+msgstr "Thông số bàn phím"
+
+#: capplets/mouse/gnome-mouse-properties.c:477
 #, c-format
 msgid ""
 "<b>Unknown Cursor</b>\n"
@@ -1439,7 +1462,7 @@ msgstr ""
 "<b>Con trỏ lạ</b>\n"
 "%s"
 
-#: capplets/mouse/gnome-mouse-properties.c:556
+#: capplets/mouse/gnome-mouse-properties.c:578
 msgid ""
 "<b>Default Cursor - Current</b>\n"
 "The default cursor that ships with X"
@@ -1447,7 +1470,7 @@ msgstr ""
 "<b>Con trỏ mặc định - Hiện thời</B>\n"
 "Con trỏ mặc định của X Window"
 
-#: capplets/mouse/gnome-mouse-properties.c:559
+#: capplets/mouse/gnome-mouse-properties.c:581
 msgid ""
 "<b>Default Cursor</b>\n"
 "The default cursor that ships with X"
@@ -1455,7 +1478,7 @@ msgstr ""
 "<b>Con trỏ mặc định</B>\n"
 "Con trỏ mặc định của X Window"
 
-#: capplets/mouse/gnome-mouse-properties.c:577
+#: capplets/mouse/gnome-mouse-properties.c:599
 msgid ""
 "<b>White Cursor - Current</b>\n"
 "The default cursor inverted"
@@ -1463,7 +1486,7 @@ msgstr ""
 "<b>Con trỏ trắng - Hiện thời</B>\n"
 "Con trỏ mặc định bị đảo màu"
 
-#: capplets/mouse/gnome-mouse-properties.c:580
+#: capplets/mouse/gnome-mouse-properties.c:602
 msgid ""
 "<b>White Cursor</b>\n"
 "The default cursor inverted"
@@ -1471,7 +1494,7 @@ msgstr ""
 "<b>Con trỏ trắng</B>\n"
 "Con trỏ mặc định bị đảo màu"
 
-#: capplets/mouse/gnome-mouse-properties.c:598
+#: capplets/mouse/gnome-mouse-properties.c:620
 msgid ""
 "<b>Large Cursor - Current</b>\n"
 "Large version of normal cursor"
@@ -1479,7 +1502,7 @@ msgstr ""
 "<b>Con trỏ lớn - Hiện thời </b>\n"
 "Phiên bản lớn của con trỏ bình thường"
 
-#: capplets/mouse/gnome-mouse-properties.c:601
+#: capplets/mouse/gnome-mouse-properties.c:623
 msgid ""
 "<b>Large Cursor</b>\n"
 "Large version of normal cursor"
@@ -1487,7 +1510,7 @@ msgstr ""
 "<b>Con trỏ lớn</B>\n"
 "Phiên bản lớn của con trỏ bình thường"
 
-#: capplets/mouse/gnome-mouse-properties.c:619
+#: capplets/mouse/gnome-mouse-properties.c:641
 msgid ""
 "<b>Large White Cursor - Current</b>\n"
 "Large version of white cursor"
@@ -1495,7 +1518,7 @@ msgstr ""
 "<b>Con trỏ trắng lớn - Hiện thời</B>\n"
 "Phiên bản lớn của con trỏ trắng"
 
-#: capplets/mouse/gnome-mouse-properties.c:622
+#: capplets/mouse/gnome-mouse-properties.c:644
 msgid ""
 "<b>Large White Cursor</b>\n"
 "Large version of white cursor"
@@ -1540,8 +1563,8 @@ msgid ""
 "Animates a quick marker around the cursor when the Control key has been "
 "pressed and released."
 msgstr ""
-"Hoạt cảnh một đánh dấu nhanh quanh con trỏ khi phím Điều Khiển được nhấn "
-"và thả."
+"Hoạt cảnh một đánh dấu nhanh quanh con trỏ khi phím Điều Khiển được nhấn và "
+"thả."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:9
 msgid "Buttons"
@@ -1564,7 +1587,8 @@ msgid "Drag and Drop"
 msgstr "Kéo và thả"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:14
-msgid "Left-handed mouse mode switches the left and right buttons on the mouse."
+msgid ""
+"Left-handed mouse mode switches the left and right buttons on the mouse."
 msgstr "Chế độ chuột tay trái hoán đổi hai phím trái & phải của con chuột."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:15
@@ -1593,7 +1617,8 @@ msgstr "Thông số chuột"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:20
 msgid "Set the distance you need to move your cursor before dragging an item."
-msgstr "Chỉnh khoảng cách cần di chuyển con chuột trước khi tiến hành thao tác kéo."
+msgstr ""
+"Chỉnh khoảng cách cần di chuyển con chuột trước khi tiến hành thao tác kéo."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:21
 msgid "Set the speed of your pointing device."
@@ -1632,21 +1657,24 @@ msgid "Mouse"
 msgstr "Chuột"
 
 #: capplets/mouse/mouse.desktop.in.h:2
-msgid "Mouse Properties"
-msgstr "Thuộc tính con chuột"
+#, fuzzy
+msgid "Set your mouse preferences"
+msgstr "Thông số chuột"
 
 #: capplets/network/gnome-network-preferences.desktop.in.h:1
-msgid "Network"
+#, fuzzy
+msgid "Network Proxy"
 msgstr "Mạng"
 
 #: capplets/network/gnome-network-preferences.desktop.in.h:2
 #: capplets/network/gnome-network-preferences.glade.h:3
-msgid "Network Preferences"
+#, fuzzy
+msgid "Network Proxy Preferences"
 msgstr "Thông số mạng"
 
 #: capplets/network/gnome-network-preferences.glade.h:2
-msgid "HTTP Proxy Settings"
-msgstr "Thiết lập HTTP Proxy"
+msgid "Network Preferences"
+msgstr "Thông số mạng"
 
 #: capplets/network/gnome-network-preferences.glade.h:4
 msgid "P_ort:"
@@ -1657,7 +1685,8 @@ msgid "Pass_word:"
 msgstr "_Mật khẩu:"
 
 #: capplets/network/gnome-network-preferences.glade.h:6
-msgid "Pro_xy requires a username and password"
+#, fuzzy
+msgid "Pro_xy requires username and password"
 msgstr "_Proxy yêu cầu tên người dùng và mật khẩu"
 
 #: capplets/network/gnome-network-preferences.glade.h:7
@@ -1681,20 +1710,26 @@ msgid "E_nable sound server startup"
 msgstr "_Bật server âm thanh lúc khởi động"
 
 #: capplets/sound/sound-properties.glade.h:2
+#, fuzzy
+msgid "Sound Preferences"
+msgstr "Thông số âm thanh"
+
+#: capplets/sound/sound-properties.glade.h:3
 msgid "Sound _Events"
 msgstr "_Sự kiện âm thanh"
 
-#: capplets/sound/sound-properties.glade.h:3
+#: capplets/sound/sound-properties.glade.h:4
 msgid "_General"
 msgstr "_Chung"
 
-#: capplets/sound/sound-properties.glade.h:4
+#: capplets/sound/sound-properties.glade.h:5
 msgid "_Sounds for events"
 msgstr "Â_m thanh cho sự kiện"
 
 #: capplets/sound/sound.desktop.in.h:1
-msgid "Configure GNOME's use of sound"
-msgstr "Cấu hình cách dùng âm thanh của GNOME"
+#, fuzzy
+msgid "Enable sound and associate sounds with events"
+msgstr "Bật các sự kiện âm thanh của trình quản lý cửa sổ"
 
 #: capplets/theme-switcher/control/control.c:18
 msgid "Eenie Meenie Mynie Moe Catcha Tiger By Its Toe"
@@ -1722,7 +1757,6 @@ msgid "Submenu"
 msgstr "Menu con"
 
 #: capplets/theme-switcher/control/control.c:74
-#: capplets/ui-properties/gnome-ui-properties.glade.h:4
 msgid "Item 1"
 msgstr "Mục 1"
 
@@ -1747,56 +1781,61 @@ msgid "Two"
 msgstr "Hai"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
-msgid "Change the appearance of buttons, scrollbars, etc"
-msgstr "Đổi diện mạo nút, thanh cuộn..."
+#, fuzzy
+msgid "Select themes for various parts of the desktop"
+msgstr "Đặt font cho biểu tượng và desktop"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
 msgid "Theme"
 msgstr "Theme"
 
-#: capplets/theme-switcher/theme-properties.glade.h:2
-msgid "Gtk+ Theme Preferences"
-msgstr "Thông số Theme Gtk+"
-
-#: capplets/theme-switcher/theme-properties.glade.h:3
-msgid "Install new theme"
-msgstr "Cài theme mới"
-
-#: capplets/theme-switcher/theme-properties.glade.h:4
-msgid "Installed Themes"
-msgstr "Theme đã cài"
-
-#: capplets/theme-switcher/theme-properties.glade.h:5
-msgid "List of available GTK+ themes"
-msgstr "Danh sách các theme Gtk+ hiện có"
-
-#: capplets/theme-switcher/theme-properties.glade.h:6
+#: capplets/theme-switcher/theme-properties.glade.h:1
 msgid "New themes can also be installed by dragging them into the window."
 msgstr "Theme mới có thể được cài đặt bằng cách kéo nó vào cửa sổ."
 
-#: capplets/theme-switcher/theme-properties.glade.h:7
+#: capplets/theme-switcher/theme-properties.glade.h:2
+#, fuzzy
+msgid "Theme Preferences"
+msgstr "Thông số Theme Gtk+"
+
+#: capplets/theme-switcher/theme-properties.glade.h:3
+msgid "Widget Theme"
+msgstr ""
+
+#: capplets/theme-switcher/theme-properties.glade.h:4
+#, fuzzy
+msgid "Window Border Theme"
+msgstr "Diện mạo biên cửa sổ"
+
+#: capplets/theme-switcher/theme-properties.glade.h:5
 msgid "_Go to theme folder"
 msgstr "Đ_i tới thư mục theme"
 
-#: capplets/theme-switcher/theme-properties.glade.h:8
+#: capplets/theme-switcher/theme-properties.glade.h:6
+#, fuzzy
+msgid "_Install New Theme..."
+msgstr "_Cài theme mới..."
+
+#: capplets/theme-switcher/theme-install.glade.h:2
+msgid "Install new theme"
+msgstr "Cài theme mới"
+
+#: capplets/theme-switcher/theme-install.glade.h:3
 msgid "_Install"
 msgstr "_Cài đặt"
 
-#: capplets/theme-switcher/theme-properties.glade.h:9
-msgid "_Install new theme..."
-msgstr "_Cài theme mới..."
-
-#: capplets/theme-switcher/theme-properties.glade.h:10
+#: capplets/theme-switcher/theme-install.glade.h:4
 msgid "_Location of new theme:"
 msgstr "_Vị trí theme mới:"
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
-msgid "Change how toolbars and menus are displayed"
-msgstr "Đổi hiển thị thanh công cụ và thanh menu ra sao"
+msgid "Customize the appearance of toolbars and menubars in applications"
+msgstr ""
 
 #: capplets/ui-properties/behavior.desktop.in.h:2
-msgid "Toolbars & Menus"
-msgstr "Thanh công cụ & Menu"
+#, fuzzy
+msgid "Menus & Toolbars"
+msgstr "Thanh công cụ"
 
 #: capplets/ui-properties/behavior.desktop.in.in.h:1
 msgid "Behavior"
@@ -1815,102 +1854,121 @@ msgid "A preview of what a toolbar looks like with these settings."
 msgstr "Xem thử thanh công cụ sẽ trong ra sao với những thiết lập này."
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:3
+#, fuzzy
+msgid "C_ut"
+msgstr "Tự chọn"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:4
+#, fuzzy
+msgid "Edit Menu"
+msgstr "Sửa"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:5
 msgid "Icons Only"
 msgstr "Chỉ biểu tượng"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:5
-msgid "Item 2"
-msgstr "Mục 2"
-
 #: capplets/ui-properties/gnome-ui-properties.glade.h:6
-msgid "Item 3"
-msgstr "Mục 3"
+#, fuzzy
+msgid "Menu and Toolbar Preferences"
+msgstr "Thuộc tính thanh công cụ và thanh menu"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:7
-msgid "Menu Item 1"
-msgstr "Mục menu 1"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:8
-msgid "Menu Item 2"
-msgstr "Mục menu 2"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:9
-msgid "Menu Item 3"
-msgstr "Mục menu 3"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:10
-msgid "Menu Item 4"
-msgstr "Mục menu 4"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:11
-msgid "Menu Item 5"
-msgstr "Mục menu 5"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:12
-msgid "Menu items can have _icons"
-msgstr "Các mục menu có _biểu tượng"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:13
 msgid "Menus"
 msgstr "Menu"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:14
+#: capplets/ui-properties/gnome-ui-properties.glade.h:8
 msgid "New File"
 msgstr "Tập tin mới"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:15
+#: capplets/ui-properties/gnome-ui-properties.glade.h:9
 msgid "Open File"
 msgstr "Mở tập tin"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:16
+#: capplets/ui-properties/gnome-ui-properties.glade.h:10
 msgid "Priority Text Beside Icons"
 msgstr "Ưu tiên chữ bên cạnh biểu tượng"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:17
-msgid "Sample Menubar"
+#: capplets/ui-properties/gnome-ui-properties.glade.h:11
+#, fuzzy
+msgid "Sample menubar:"
 msgstr "Thanh menu mẫu"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:18
-msgid "Sample Toolbar"
+#: capplets/ui-properties/gnome-ui-properties.glade.h:12
+#, fuzzy
+msgid "Sample toolbar:"
 msgstr "Thanh công cụ mẫu"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:19
+#: capplets/ui-properties/gnome-ui-properties.glade.h:13
 msgid "Save File"
 msgstr "Lưu tập tin"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:20
+#: capplets/ui-properties/gnome-ui-properties.glade.h:14
 msgid "Select the toolbar style."
 msgstr "Chọn kiểu thanh công cụ."
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:21
+#: capplets/ui-properties/gnome-ui-properties.glade.h:15
 msgid "Text Below Icons"
 msgstr "Chữ dưới biểu tượng"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:22
+#: capplets/ui-properties/gnome-ui-properties.glade.h:16
 msgid "Text Only"
 msgstr "Chỉ có chữ"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:23
+#: capplets/ui-properties/gnome-ui-properties.glade.h:17
 msgid "Toolbar"
 msgstr "Thanh công cụ"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:24
-msgid "Toolbar and Menu Preferences"
-msgstr "Thuộc tính thanh công cụ và thanh menu"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:25
+#: capplets/ui-properties/gnome-ui-properties.glade.h:18
 msgid "Toolbars can be _detached and moved around"
 msgstr "Thanh công cụ có thể được tháo rời và di chuyển chung quanh"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:26
+#: capplets/ui-properties/gnome-ui-properties.glade.h:19
+#, fuzzy
+msgid "_Button Labels: "
+msgstr "Các nút"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:20
+msgid "_Copy"
+msgstr ""
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:21
 msgid "_Menu"
 msgstr "_Menu"
 
+#: capplets/ui-properties/gnome-ui-properties.glade.h:22
+#, fuzzy
+msgid "_New"
+msgstr "_Tên"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:23
+#, fuzzy
+msgid "_Open"
+msgstr "Mở"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:24
+#, fuzzy
+msgid "_Paste"
+msgstr "Nhanh"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:25
+msgid "_Print"
+msgstr ""
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:26
+msgid "_Quit"
+msgstr ""
+
 #: capplets/ui-properties/gnome-ui-properties.glade.h:27
-msgid "_Toolbars have: "
-msgstr "Thanh _công cụ có: "
+#, fuzzy
+msgid "_Save"
+msgstr "_Co dãn"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:28
+msgid "_Show icons in menus"
+msgstr ""
 
 #: capplets/windows/gnome-window-properties.c:282
+#: capplets/windows/gnome-window-properties.glade.h:6
 msgid "Window Preferences"
 msgstr "Thông số cửa sổ"
 
@@ -1934,7 +1992,6 @@ msgstr "Diện mạo biên cửa sổ"
 msgid "Window Manager:"
 msgstr "Bộ quản lý cửa sổ:"
 
-#: capplets/windows/gnome-window-properties.glade.h:6
 #: capplets/windows/window-properties.desktop.in.h:1
 msgid "Window Properties"
 msgstr "Thuộc tính cửa sổ"
@@ -2079,21 +2136,21 @@ msgstr ""
 msgid "_Do not show this message again"
 msgstr "Đừn_g hiện thông điệp này lần nữa"
 
-#: gnome-settings-daemon/gnome-settings-sound.c:125
+#: gnome-settings-daemon/gnome-settings-sound.c:128
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Không thể nạp tập tin âm thanh %s làm mẫu %s"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:150
+#: gnome-settings-daemon/gnome-settings-xsettings.c:166
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "Khoá GConf %s dùng kiểu %s nhưng lẽ ra phải dùng kiểu %s\n"
 
-#: libbackground/applier.c:239
+#: libbackground/applier.c:254
 msgid "Type"
 msgstr "Loại"
 
-#: libbackground/applier.c:240
+#: libbackground/applier.c:255
 msgid ""
 "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
 "for preview"
@@ -2101,21 +2158,29 @@ msgstr ""
 "Loại bg_applier: BG_APPLIER_ROOT cho cửa sổ gốc hoặc BG_APPLIER_PREVIEW cho "
 "vùng xem thử"
 
-#: libbackground/applier.c:247
+#: libbackground/applier.c:262
 msgid "Preview Width"
 msgstr "Vùng xem thử rộng"
 
-#: libbackground/applier.c:248
+#: libbackground/applier.c:263
 msgid "Width if applier is a preview: Defaults to 64."
 msgstr "Chiều rộng của vùng xem thử. Mặc định là 64."
 
-#: libbackground/applier.c:255
+#: libbackground/applier.c:270
 msgid "Preview Height"
 msgstr "Vùng xem thử cao"
 
-#: libbackground/applier.c:256
+#: libbackground/applier.c:271
 msgid "Height if applier is a preview: Defaults to 48."
 msgstr "Chiều cao của vùng xem thử. Mặc định là 48."
+
+#: libbackground/applier.c:279
+msgid "Screen"
+msgstr ""
+
+#: libbackground/applier.c:280
+msgid "Screen on which BGApplier is to draw"
+msgstr ""
 
 #: libbackground/preview-file-selection.c:193
 msgid "Can't find an hbox, using a normal file selection"
@@ -2210,9 +2275,246 @@ msgstr ""
 msgid "OK"
 msgstr "Đồng ý"
 
-#, fuzzy
-#~ msgid "_Enable keyboard accessibility"
-#~ msgstr "_Enable keyboard accessibility"
+#~ msgid "Picture bor_der:"
+#~ msgstr "Khung _viền ảnh:"
+
+#~ msgid "Choose the applications used by default"
+#~ msgstr "Chọn ứng dụng được dùng mặc định"
+
+#~ msgid "Configure window appearance"
+#~ msgstr "Cấu hình diện mạo cửa sổ"
+
+#~ msgid "Configure key shortcuts"
+#~ msgstr "Cấu hình phím tắt"
+
+#~ msgid "Configure window properties"
+#~ msgstr "Cấu hình thuộc tính cửa sổ"
+
+#~ msgid "Configure window manager configuration properties"
+#~ msgstr "Cấu hình thuộc tính trình cấu hình quản lý cửa sổ"
+
+#~ msgid "Configure window placement"
+#~ msgstr "Cấu hình vị trí cửa sổ"
+
+#~ msgid "Documents"
+#~ msgstr "Tài liệu"
+
+#~ msgid "Word Processor"
+#~ msgstr "Trình xử lý văn bản"
+
+#~ msgid "Published Materials"
+#~ msgstr "Tài liệu xuất bản"
+
+#~ msgid "Spreadsheet"
+#~ msgstr "Bảng tính"
+
+#~ msgid "Presentation"
+#~ msgstr "Trình diễn"
+
+#~ msgid "Diagram"
+#~ msgstr "Lược đồ"
+
+#~ msgid "TeX"
+#~ msgstr "TeX"
+
+#~ msgid "Vector Graphics"
+#~ msgstr "Ảnh vector"
+
+#~ msgid "World Wide Web"
+#~ msgstr "WWW"
+
+#~ msgid "Plain Text"
+#~ msgstr "Văn bản thô"
+
+#~ msgid "Extended Markup Language (XML)"
+#~ msgstr "XML"
+
+#~ msgid "Information"
+#~ msgstr "Thông tin"
+
+#~ msgid "Financial"
+#~ msgstr "Tài chính"
+
+#~ msgid "Calendar"
+#~ msgstr "Lịch"
+
+#~ msgid "Contacts"
+#~ msgstr "Liên hệ"
+
+#~ msgid "Packages"
+#~ msgstr "Gói phần mềm"
+
+#~ msgid "Software Development"
+#~ msgstr "Phát triển phần mềm"
+
+#~ msgid "Source Code"
+#~ msgstr "Mã nguồn"
+
+#~ msgid "File types and Internet Services"
+#~ msgstr "Loại tập tin và dịch vụ Internet"
+
+#~ msgid "Needs _terminal"
+#~ msgstr "Cần _terminal"
+
+#~ msgid "Use category _defaults"
+#~ msgstr "Dùng phân loại _mặc định"
+
+#~ msgid "_Add"
+#~ msgstr "_Thêm"
+
+#~ msgid "_Protocol name"
+#~ msgstr "Tên _giao thức"
+
+#~ msgid "_Remove"
+#~ msgstr "_Loại bỏ"
+
+#~ msgid "Add file type"
+#~ msgstr "Thêm loại tập tin"
+
+#~ msgid "Change the default fonts used by the desktop and applications"
+#~ msgstr "Đổi font mặc định được dùng bởi desktop và ứng dụng"
+
+#~ msgid "Keyboard _Navigation scheme for use in applications:"
+#~ msgstr "Xắp xếp duyệt bàn phím dùng trong các ứng dụng:"
+
+#~ msgid ""
+#~ "To assign a shortcut to an action, click in the shortcut column and press "
+#~ "the key combination you want to associate with it."
+#~ msgstr ""
+#~ "Để gán một phím tắt cho một hành động nào đó, nhấn cột phím tắt và nhấn "
+#~ "tổ hợp phím bạn muốn liên kết với nó."
+
+#~ msgid "Associate keyboard shortcuts with panel actions"
+#~ msgstr "Gắc phím tắt với hành động trên panel"
+
+#~ msgid "<i>fast</i>"
+#~ msgstr "<i>nhanh</i>"
+
+#~ msgid "<i>loud</i>"
+#~ msgstr "<i>ồn</i>"
+
+#~ msgid "<i>quiet</i>"
+#~ msgstr "<i>im lặng</i>"
+
+#~ msgid "<i>slow</i>"
+#~ msgstr "<i>chậm</i>"
+
+#~ msgid "Cursor"
+#~ msgstr "Con trỏ"
+
+#~ msgid "Key_press makes sound"
+#~ msgstr "Phát âm thanh khi nhấn phím"
+
+#~ msgid "Keyboard bell _enabled"
+#~ msgstr "Bật chuông bàn phím"
+
+#~ msgid "Keyboard bell _off"
+#~ msgstr "Tắt chuông bàn phím"
+
+#~ msgid "Keyclick Volume"
+#~ msgstr "Âm lương phím"
+
+#~ msgid "Long"
+#~ msgstr "Lâu"
+
+#~ msgid "Repeat s_peed:"
+#~ msgstr "Tốc độ _lặp:"
+
+#~ msgid "Set the speed the cursor blinks in text fields."
+#~ msgstr "Chỉnh tốc độ nháy của con trỏ"
+
+#~ msgid "Set the volume of the clicking sound made when pressing a key"
+#~ msgstr "Chỉnh âm lượng của âm thanh phát ra khi nhấn phím"
+
+#~ msgid "Short"
+#~ msgstr "Ngắn"
+
+#~ msgid "Slow"
+#~ msgstr "Chậm"
+
+#~ msgid ""
+#~ "The keyboard bell is the <i>beep</i> sound heard when the system wants to "
+#~ "get your attention."
+#~ msgstr ""
+#~ "Chuông bàn phím là tiếng <i>bíp</i> nghe được khi hệ thống muốn gây sự "
+#~ "chú ý."
+
+#~ msgid "Very Fast"
+#~ msgstr "Rất nhanh"
+
+#~ msgid "Very Short"
+#~ msgstr "Cực ngắn"
+
+#~ msgid ""
+#~ "You can configure the keyboards accessibility features by bringing up the "
+#~ "'Accessibility Settings' property dialog, or pressing the button on the "
+#~ "right."
+#~ msgstr ""
+#~ "Bạn có thể cấu hình các đặc tính hỗ trợ bàn phím bằng việc đưa ra hộp "
+#~ "thoại đặc trưng 'Thiết Lập Hỗ Trợ', hay nhấn phím bên phải."
+
+#~ msgid "_Blink speed:"
+#~ msgstr "Tốc độ _chớp:"
+
+#~ msgid "_Custom keyboard bell:"
+#~ msgstr "Chuông bàn phím _riêng:"
+
+#~ msgid "_Delay before repeating:"
+#~ msgstr "_Khoảng chờ trước khi lặp lại:"
+
+#~ msgid "Keyboard Properties"
+#~ msgstr "Thuộc tính bàn phím"
+
+#~ msgid "Mouse Properties"
+#~ msgstr "Thuộc tính con chuột"
+
+#~ msgid "HTTP Proxy Settings"
+#~ msgstr "Thiết lập HTTP Proxy"
+
+#~ msgid "Configure GNOME's use of sound"
+#~ msgstr "Cấu hình cách dùng âm thanh của GNOME"
+
+#~ msgid "Change the appearance of buttons, scrollbars, etc"
+#~ msgstr "Đổi diện mạo nút, thanh cuộn..."
+
+#~ msgid "Installed Themes"
+#~ msgstr "Theme đã cài"
+
+#~ msgid "List of available GTK+ themes"
+#~ msgstr "Danh sách các theme Gtk+ hiện có"
+
+#~ msgid "Change how toolbars and menus are displayed"
+#~ msgstr "Đổi hiển thị thanh công cụ và thanh menu ra sao"
+
+#~ msgid "Toolbars & Menus"
+#~ msgstr "Thanh công cụ & Menu"
+
+#~ msgid "Item 2"
+#~ msgstr "Mục 2"
+
+#~ msgid "Item 3"
+#~ msgstr "Mục 3"
+
+#~ msgid "Menu Item 1"
+#~ msgstr "Mục menu 1"
+
+#~ msgid "Menu Item 2"
+#~ msgstr "Mục menu 2"
+
+#~ msgid "Menu Item 3"
+#~ msgstr "Mục menu 3"
+
+#~ msgid "Menu Item 4"
+#~ msgstr "Mục menu 4"
+
+#~ msgid "Menu Item 5"
+#~ msgstr "Mục menu 5"
+
+#~ msgid "Menu items can have _icons"
+#~ msgstr "Các mục menu có _biểu tượng"
+
+#~ msgid "_Toolbars have: "
+#~ msgstr "Thanh _công cụ có: "
 
 #~ msgid "<b>Test</b>"
 #~ msgstr "<b>Kiểm tra</b>"
@@ -2281,9 +2583,6 @@ msgstr "Đồng ý"
 #~ msgid "Mime Type: "
 #~ msgstr "Loại MIME: "
 
-#~ msgid "Add"
-#~ msgstr "Thêm"
-
 #~ msgid "Remove"
 #~ msgstr "Loại bỏ"
 
@@ -2299,17 +2598,11 @@ msgstr "Đồng ý"
 #~ msgid "Example: emacs %f"
 #~ msgstr "Ví dụ: emacs %f"
 
-#~ msgid "Open"
-#~ msgstr "Mở"
-
 #~ msgid "Select a file..."
 #~ msgstr "Chọn tập tin..."
 
 #~ msgid "View"
 #~ msgstr "Xem"
-
-#~ msgid "Edit"
-#~ msgstr "Sửa"
 
 #~ msgid "Set actions for %s"
 #~ msgstr "Đặt hành động cho %s"
@@ -2393,9 +2686,6 @@ msgstr "Đồng ý"
 #~ msgid "Mime Types"
 #~ msgstr "Loại MIME"
 
-#~ msgid "Add Mime Type"
-#~ msgstr "Thêm loại MIME..."
-
 #~ msgid ""
 #~ "Add a new Mime Type\n"
 #~ "For example:  image/tiff; text/x-scheme"
@@ -2423,9 +2713,6 @@ msgstr "Đồng ý"
 #~ "Bạn có thể thể thiết lập hai biểu thức chính quy ở đây để xác định loại "
 #~ "MIME. Những trường này là tùy chọn."
 
-#~ msgid "Protocol"
-#~ msgstr "Giao thức"
-
 #~ msgid "Command"
 #~ msgstr "Lệnh"
 
@@ -2434,9 +2721,6 @@ msgstr "Đồng ý"
 
 #~ msgid "handler:"
 #~ msgstr "Bộ xử lý:"
-
-#~ msgid "Netscape"
-#~ msgstr "Netscape"
 
 #~ msgid "Netscape (new window)"
 #~ msgstr "Netscape (cửa sổ mới)"
@@ -2657,4 +2941,3 @@ msgstr "Đồng ý"
 
 #~ msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 #~ msgstr "Không thể nạp \"%s\", tắt hình nền"
-
