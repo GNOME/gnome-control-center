@@ -1,3 +1,19 @@
+2005-02-06  Rodney Dawes  <dobey@novell.com>
+
+	* gnome-wp-capplet.c (gnome_wp_color_changed): Change the API to use
+	the boolean argument to specify if we want to update gconf or not
+	Always get the colors for both primary and secondary and update the
+	thumbnail
+	Only set the keys in gconf if we have the update boolean argument
+	(gnome_wp_pcolor_changed): Removed this method, since we don't need
+	to differentiate between primary/secondary for updating the thumbnail
+	(gnome_wp_scolor_changed): When we change the color in the UI, we want
+	to update gconf, we use this method for both color picker buttons now
+	(gnome_wallpaper_properties_init): Use gnome_wp_scolor_changed for the
+	callback on both color picker button widgets now
+
+	Fixes #166486
+
 2005-01-10  Rodney Dawes  <dobey@novell.com>
 
 	* gnome-wp-xml.c (gnome_wp_xml_load_xml):

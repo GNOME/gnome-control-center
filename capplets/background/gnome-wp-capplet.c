@@ -484,7 +484,7 @@ static void gnome_wp_shade_type_changed (GtkMenuShell * shell,
 }
 
 static void gnome_wp_color_changed (GnomeWPCapplet * capplet,
-				    gboolean primary) {
+				    gboolean update) {
   GnomeWPItem * item = NULL;
   GtkTreeIter iter;
   GtkTreeModel * model;
@@ -505,26 +505,29 @@ static void gnome_wp_color_changed (GnomeWPCapplet * capplet,
     return;
   }
 
-  if (primary) {
-    gnome_color_picker_get_i16 (GNOME_COLOR_PICKER (capplet->pc_picker),
-				&item->pcolor->red,
-				&item->pcolor->green,
-				&item->pcolor->blue, NULL);
-    item->pri_color = g_strdup_printf ("#%02X%02X%02X",
-				       item->pcolor->red >> 8,
-				       item->pcolor->green >> 8,
-				       item->pcolor->blue >> 8);
+  g_free (item->pri_color);
+  gnome_color_picker_get_i16 (GNOME_COLOR_PICKER (capplet->pc_picker),
+			      &item->pcolor->red,
+			      &item->pcolor->green,
+			      &item->pcolor->blue, NULL);
+  item->pri_color = g_strdup_printf ("#%02X%02X%02X",
+				     item->pcolor->red >> 8,
+				     item->pcolor->green >> 8,
+				     item->pcolor->blue >> 8);
+
+  g_free (item->sec_color);
+  gnome_color_picker_get_i16 (GNOME_COLOR_PICKER (capplet->sc_picker),
+			      &item->scolor->red,
+			      &item->scolor->green,
+			      &item->scolor->blue, NULL);
+  item->sec_color = g_strdup_printf ("#%02X%02X%02X",
+				     item->scolor->red >> 8,
+				     item->scolor->green >> 8,
+				     item->scolor->blue >> 8);
+
+  if (update) {
     gconf_client_set_string (capplet->client, WP_PCOLOR_KEY,
 			     item->pri_color, NULL);
-  } else {
-    gnome_color_picker_get_i16 (GNOME_COLOR_PICKER (capplet->sc_picker),
-				&item->scolor->red,
-				&item->scolor->green,
-				&item->scolor->blue, NULL);
-    item->sec_color = g_strdup_printf ("#%02X%02X%02X",
-				       item->scolor->red >> 8,
-				       item->scolor->green >> 8,
-				       item->scolor->blue >> 8);
     gconf_client_set_string (capplet->client, WP_SCOLOR_KEY,
 			     item->sec_color, NULL);
   }
@@ -546,16 +549,10 @@ static void gnome_wp_color_changed (GnomeWPCapplet * capplet,
   g_object_unref (pixbuf);
 }
 
-static void gnome_wp_pcolor_changed (GtkWidget * widget,
-				     guint r, guint g, guint b, guint a,
-				     GnomeWPCapplet * capplet) {
-  gnome_wp_color_changed (capplet, TRUE);
-}
-
 static void gnome_wp_scolor_changed (GtkWidget * widget,
 				     guint r, guint g, guint b, guint a,
 				     GnomeWPCapplet * capplet) {
-  gnome_wp_color_changed (capplet, FALSE);
+  gnome_wp_color_changed (capplet, TRUE);
 }
 
 static void gnome_wp_remove_wallpaper (GtkWidget * widget,
@@ -775,7 +772,7 @@ static void gnome_wp_color1_changed (GConfClient * client, guint id,
 			      color.green,
 			      color.blue, 65535);
 
-  gnome_wp_color_changed (capplet, TRUE);
+  gnome_wp_color_changed (capplet, FALSE);
 }
 
 static void gnome_wp_color2_changed (GConfClient * client, guint id,
@@ -1226,7 +1223,7 @@ static void wallpaper_properties_init (poptContext ctx) {
 
   capplet->pc_picker = glade_xml_get_widget (dialog,"pcpicker");
   g_signal_connect (G_OBJECT (capplet->pc_picker), "color_set",
-		    G_CALLBACK (gnome_wp_pcolor_changed), capplet);
+		    G_CALLBACK (gnome_wp_scolor_changed), capplet);
 
   capplet->sc_picker = glade_xml_get_widget (dialog,"scpicker");
   g_signal_connect (G_OBJECT (capplet->sc_picker), "color_set",
