@@ -380,6 +380,10 @@ restart_finalize ()
                 break;
                 
         case STATE_OK:
+                wm_list_save ();
+                update_session ();
+                
+                /* Fall through */
         case STATE_CANCEL:
                 if (quit_pending)
                         gtk_main_quit();
@@ -544,8 +548,8 @@ restart_finish (void)
         case STATE_OK:
         case STATE_CANCEL:
                 hide_restart_dialog();
-                show_restart_info();
                 restart_finalize();
+                show_restart_info();
                 break;
 
         case STATE_TRY_REVERT:
@@ -1160,11 +1164,6 @@ main (int argc, char **argv)
                         gtk_main();
                 }
 
-                if (state == STATE_OK) {
-                        wm_list_save ();
-                        update_session ();
-                }
-                
         } else {
                 if (selected_wm && 
                     !selected_wm->session_managed && 

@@ -27,26 +27,7 @@ void                freestrlist(char **l, int num);
 void                rm(char *s);
 void                mv(char *s, char *ss);
 void                cp(char *s, char *ss);
-unsigned long       moddate(char *s);
 int                 filesize(char *s);
-void                cd(char *s);
-char               *cwd(void);
-int                 permissions(char *s);
-int                 owner(char *s);
-int                 group(char *s);
-char               *username(int uid);
-char               *homedir(int uid);
-char               *usershell(int uid);
-char               *atword(char *s, int num);
-char               *atchar(char *s, char c);
-void                word(char *s, int num, char *wd);
-int                 canread(char *s);
-int                 canwrite(char *s);
-int                 canexec(char *s);
-char               *fileof(char *s);
-char               *fullfileof(char *s);
-char               *noext(char *s);
-void                mkdirs(char *s);
 
 void
 free_theme_list(ThemeEntry *list, gint number);
@@ -62,11 +43,11 @@ void
 update_theme_entries(GtkWidget *disp_list);
 void
 signal_apply_theme(GtkWidget *widget);
-void
+gboolean
 edit_file_to_use(gchar *file, gchar *theme, gchar *font);
-void 
+char *
 set_tmp_rc(void);
-void
+gboolean
 use_theme(gchar *theme, gchar *font);
 void
 test_theme(gchar *theme, gchar *font);
@@ -78,8 +59,9 @@ void
 send_socket(void);
 void
 send_reread(void);
-
+void
+show_error (const char *string, gboolean fatal);
 
 extern GtkWidget *preview_socket;
 extern gint       prog_fd;
-extern gchar      gtkrc_tmp[1024];
+extern gchar     *gtkrc_tmp;
