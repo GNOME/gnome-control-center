@@ -7,6 +7,9 @@ SUBDIRS = archiver capplets control-center po intl
 # in the configure.in file. Since we are not using it now, i will
 # remove it from the default build. Chema
 
+pixmapdir = $(datadir)/pixmaps
+pixmap_DATA = control-center.png
+ 
 dist-hook: control-center.spec
 	cp control-center.spec $(distdir)
 
@@ -14,5 +17,6 @@ EXTRA_DIST = \
 	control-center.spec.in	\
 	xml-i18n-extract.in \
 	xml-i18n-merge.in \
-	xml-i18n-update.in
+	xml-i18n-update.in \
+	control-center.png
 
