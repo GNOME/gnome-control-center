@@ -434,6 +434,7 @@ location_store (Location *location, gchar *backend_id, FILE *input)
 	filename = g_strdup_printf ("%s/%08x.xml",
 				    location->p->fullpath, id);
 	output = fopen (filename, "w");
+	g_free (filename);
 
 	if (output == NULL) return;
 
@@ -443,6 +444,45 @@ location_store (Location *location, gchar *backend_id, FILE *input)
 	}
 
 	fclose (output);
+}
+
+/**
+ * location_store_xml:
+ * @location: 
+ * @backend_id: 
+ * @input: 
+ * 
+ * Store configuration data from the given XML document object in the location
+ * under the given backend id
+ **/
+
+void 
+location_store_xml (Location *location, gchar *backend_id, xmlDocPtr xml_doc) 
+{
+	gint id;
+	char *filename;
+
+	g_return_if_fail (location != NULL);
+	g_return_if_fail (IS_LOCATION (location));
+	g_return_if_fail (location->p->config_log != NULL);
+	g_return_if_fail (IS_CONFIG_LOG (location->p->config_log));
+
+	if (!location_contains (location, backend_id)) {
+		if (!location->p->inherits_location)
+			g_warning ("Could not find a location in the " \
+				   "tree ancestry that stores this " \
+				   "backend.");
+		else
+			location_store_xml (location->p->inherits_location,
+					    backend_id, xml_doc);
+	}
+
+	id = config_log_write_entry (location->p->config_log, backend_id);
+
+	filename = g_strdup_printf ("%s/%08x.xml",
+				    location->p->fullpath, id);
+	xmlSaveFile (filename, xml_doc);
+	g_free (filename);
 }
 
 /**

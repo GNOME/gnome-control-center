@@ -25,6 +25,7 @@
 #define __LOCATION_H
 
 #include <gnome.h>
+#include <tree.h>
 
 #include "config-log.h"
 
@@ -64,6 +65,9 @@ void location_delete               (Location *location);
 void location_store                (Location *location, 
 				    gchar *backend_id, 
 				    FILE *input);
+void location_store_xml            (Location *location, 
+				    gchar *backend_id, 
+				    xmlDocPtr xml_doc);
 
 void location_rollback_backend_to  (Location *location,
 				    struct tm *date, 

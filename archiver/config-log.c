@@ -851,7 +851,7 @@ get_current_date (void)
 	struct tm *time_1, *ret;
 
 	current_time = time (NULL);
-	time_1 = gmtime (&current_time);
+	time_1 = localtime (&current_time);
 	ret = g_new (struct tm, 1);
 	memcpy (ret, time_1, sizeof (struct tm));
 	return ret;

@@ -196,7 +196,7 @@ archive_load (gboolean is_global)
 				 "prefix", prefix,
 				 NULL);
 
-	if (is_global)
+	if (!is_global)
 		g_free (prefix);
 
 	if (do_load (ARCHIVE (object)) == FALSE) {

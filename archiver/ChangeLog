@@ -1,6 +1,15 @@
 2001-01-25  Bradford Hovinen  <hovinen@ximian.com>
 
-	* location.c (location_rollback_all_to): Increment array index
+	* config-log.c (get_current_date): Use local time rather than
+	Greenwich Mean Time
+
+	* location.c (location_store_xml): Implement; copy from
+	location_store
+	(location_store): Free filename after use
+
+	* archive.c (archive_load): Free prefix only if not global
+
+	* location.c (location_rollback_all_to): Increment array
 
 	* util.c (parse_date): Normalize values
 
