@@ -393,7 +393,7 @@ applier_apply_prefs (Applier           *applier,
 	run_render_pipeline (applier, prefs);
 
 	if (applier->p->last_prefs != NULL)
-		gtk_object_destroy (GTK_OBJECT (applier->p->last_prefs));
+		g_object_unref (G_OBJECT (applier->p->last_prefs));
 
 	applier->p->last_prefs = PREFERENCES (preferences_clone (prefs));
 
