@@ -1,6 +1,6 @@
 /* -*- mode: C; c-basic-offset: 4 -*-
  * fontilus - a collection of font utilities for GNOME
- * Copyright (C) 2002  James Henstridge <james@daa.com.au>
+ * Copyright (C) 2002-2003  James Henstridge <james@daa.com.au>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

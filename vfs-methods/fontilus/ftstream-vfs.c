@@ -1,6 +1,6 @@
 /* -*- mode: C; c-basic-offset: 4 -*-
  * fontilus - a collection of font utilities for GNOME
- * Copyright (C) 2002  James Henstridge <james@daa.com.au>
+ * Copyright (C) 2002-2003  James Henstridge <james@daa.com.au>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -121,10 +121,11 @@ FT_New_Face_From_URI(FT_Library           library,
 	return error;
     }
 
-#ifndef FT_OPEN_STREAM
-#  define FT_OPEN_STREAM ft_open_stream
+    /* freetype-2.1.3 accidentally broke compatibility. */
+#if defined(FT_OPEN_STREAM) && !defined(ft_open_stream)
+#  define ft_open_stream FT_OPEN_STREAM
 #endif
-    args.flags  = FT_OPEN_STREAM;
+    args.flags  = ft_open_stream;
     args.stream = stream;
 
     error = FT_Open_Face(library, &args, face_index, aface);
