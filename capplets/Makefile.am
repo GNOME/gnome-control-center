@@ -14,4 +14,4 @@ endif
 SUBDIRS =  $(always_built_SUBDIRS) $(randr_SUBDIRS)
 
 DIST_SUBDIRS = \
-	$(always_built_SUBDIRS) display about-me
+	$(always_built_SUBDIRS) display
