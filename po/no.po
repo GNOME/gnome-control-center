@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.6\n"
-"POT-Creation-Date: 2000-03-07 22:17+0100\n"
-"PO-Revision-Date: 1999-09-30 23:08+02:00\n"
+"POT-Creation-Date: 2000-03-29 00:21+0200\n"
+"PO-Revision-Date: 2000-03-29 00:23+02:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -114,7 +114,7 @@ msgstr "Side-ved-side"
 #: capplets/keyboard-properties/keyboard-properties.c:81
 #: capplets/mouse-properties/mouse-properties.c:111
 #: capplets/screensaver-properties/callbacks.c:802
-#: capplets/session-properties/session-properties.c:300
+#: capplets/session-properties/session-properties.c:318
 #: capplets/sound-properties/sound-properties.c:690
 #: capplets/theme-switcher/gui.c:362
 #: capplets/ui-properties/ui-properties.c:515
@@ -132,7 +132,7 @@ msgstr ""
 #: capplets/keyboard-properties/keyboard-properties.c:83
 #: capplets/mouse-properties/mouse-properties.c:113
 #: capplets/screensaver-properties/callbacks.c:804
-#: capplets/session-properties/session-properties.c:302
+#: capplets/session-properties/session-properties.c:320
 #: capplets/sound-properties/sound-properties.c:692
 #: capplets/sound-properties/sound-properties.c:753
 #: capplets/theme-switcher/gui.c:364
@@ -422,20 +422,20 @@ msgstr ""
 "Ute av stand til å lagre status"
 
 #: capplets/mime-type/mime-type-capplet.c:79
-#: capplets/session-properties/session-properties.c:198
-#: capplets/wm-properties/wm-properties-capplet.c:1088
+#: capplets/session-properties/session-properties.c:212
+#: capplets/wm-properties/wm-properties-capplet.c:1090
 msgid "Delete"
 msgstr "Slett"
 
 #: capplets/mime-type/mime-type-capplet.c:89
-#: capplets/session-properties/session-properties.c:188
-#: capplets/wm-properties/wm-properties-capplet.c:1078
+#: capplets/session-properties/session-properties.c:202
+#: capplets/wm-properties/wm-properties-capplet.c:1080
 msgid "Add..."
 msgstr "Legg til..."
 
 #: capplets/mime-type/mime-type-capplet.c:93
-#: capplets/session-properties/session-properties.c:193
-#: capplets/wm-properties/wm-properties-capplet.c:1083
+#: capplets/session-properties/session-properties.c:207
+#: capplets/wm-properties/wm-properties-capplet.c:1085
 msgid "Edit..."
 msgstr "Rediger..."
 
@@ -768,38 +768,42 @@ msgid "Remove Program"
 msgstr "Fjern program"
 
 #. frame for options
-#: capplets/session-properties/session-properties.c:138
+#: capplets/session-properties/session-properties.c:145
 msgid "Options"
 msgstr "Alternativer"
 
-#: capplets/session-properties/session-properties.c:149
+#: capplets/session-properties/session-properties.c:156
+msgid "Show splash screen on login"
+msgstr "Vis splash-screen ved innlogging"
+
+#: capplets/session-properties/session-properties.c:163
 msgid "Prompt on logout"
 msgstr "Spør ved avslutting"
 
-#: capplets/session-properties/session-properties.c:156
+#: capplets/session-properties/session-properties.c:170
 msgid "Automatically save changes to session"
 msgstr "Lagre endringer til sesjonen automatisk"
 
 #. frame for manually started programs
-#: capplets/session-properties/session-properties.c:161
+#: capplets/session-properties/session-properties.c:175
 msgid "Non-session-managed Startup Programs"
 msgstr "Ikke-sesjonshåndtert program i oppstart"
 
-#: capplets/session-properties/session-properties.c:178
+#: capplets/session-properties/session-properties.c:192
 #: capplets/session-properties/startup-programs.c:304
 msgid "Priority"
 msgstr "Prioritet"
 
-#: capplets/session-properties/session-properties.c:179
+#: capplets/session-properties/session-properties.c:193
 #: capplets/url-properties/url-properties.c:71
 msgid "Command"
 msgstr "Kommando"
 
-#: capplets/session-properties/session-properties.c:208
+#: capplets/session-properties/session-properties.c:222
 msgid "Browse Currently Running Programs..."
 msgstr "Se på aktive programmer..."
 
-#: capplets/session-properties/session-properties.c:393
+#: capplets/session-properties/session-properties.c:412
 msgid "Only display warnings."
 msgstr "Bare vis advarsler."
 
@@ -1302,10 +1306,10 @@ msgstr ""
 "fot menyen\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:496
-#: capplets/wm-properties/wm-properties-capplet.c:750
-#: capplets/wm-properties/wm-properties-capplet.c:858
-#: capplets/wm-properties/wm-properties-capplet.c:865
-#: capplets/wm-properties/wm-properties-capplet.c:1011
+#: capplets/wm-properties/wm-properties-capplet.c:752
+#: capplets/wm-properties/wm-properties-capplet.c:860
+#: capplets/wm-properties/wm-properties-capplet.c:867
+#: capplets/wm-properties/wm-properties-capplet.c:1013
 #: control-center/capplet-manager.c:181
 msgid "OK"
 msgstr "OK"
@@ -1348,49 +1352,49 @@ msgstr ""
 "å velge \"Lagre aktiv sesjon\" under \"Innstillinger\" i hovedmenyen,\n"
 "eller ved å slå på \"Lagre oppsett\" når du logger ut.\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:749
+#: capplets/wm-properties/wm-properties-capplet.c:751
 msgid "Add New Window Manager"
 msgstr "Legg til ny vindusbehandler"
 
-#: capplets/wm-properties/wm-properties-capplet.c:750
+#: capplets/wm-properties/wm-properties-capplet.c:752
 #: control-center/capplet-manager.c:186
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: capplets/wm-properties/wm-properties-capplet.c:761
+#: capplets/wm-properties/wm-properties-capplet.c:763
 msgid "Name:"
 msgstr "Navn:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:774
+#: capplets/wm-properties/wm-properties-capplet.c:776
 msgid "Command:"
 msgstr "Kommando:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:787
+#: capplets/wm-properties/wm-properties-capplet.c:789
 msgid "Configuration Command:"
 msgstr "Konfigurasjonskommando:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:806
+#: capplets/wm-properties/wm-properties-capplet.c:808
 msgid "Window manager is session managed"
 msgstr "Vindusbehandleren er sesjonsstyrt"
 
-#: capplets/wm-properties/wm-properties-capplet.c:856
+#: capplets/wm-properties/wm-properties-capplet.c:858
 msgid "Name cannot be empty"
 msgstr "Navnet kan ikke være tomt"
 
-#: capplets/wm-properties/wm-properties-capplet.c:863
+#: capplets/wm-properties/wm-properties-capplet.c:865
 msgid "Command cannot be empty"
 msgstr "Kommandofeltet kan ikke være tomt"
 
-#: capplets/wm-properties/wm-properties-capplet.c:912
-#: capplets/wm-properties/wm-properties-capplet.c:954
+#: capplets/wm-properties/wm-properties-capplet.c:914
+#: capplets/wm-properties/wm-properties-capplet.c:956
 msgid "Edit Window Manager"
 msgstr "Rediger vindusbehandler"
 
-#: capplets/wm-properties/wm-properties-capplet.c:1010
+#: capplets/wm-properties/wm-properties-capplet.c:1012
 msgid "You cannot delete the current Window Manager"
 msgstr "Du kan ikke slette aktiv vindusbehandler"
 
-#: capplets/wm-properties/wm-properties-capplet.c:1123
+#: capplets/wm-properties/wm-properties-capplet.c:1125
 msgid ""
 "an initialization error occurred while starting 'wm-properties-capplet'.\n"
 "aborting...\n"
