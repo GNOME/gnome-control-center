@@ -287,6 +287,10 @@ main (int argc, char **argv)
 	client = gconf_client_get_default ();
 	gconf_client_add_dir (client, "/system/gnome-vfs",
 			      GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+	gconf_client_add_dir (client, "/system/http_proxy",
+			      GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+	gconf_client_add_dir (client, "/system/proxy",
+			      GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 
 	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gnome-network-preferences.glade",
 				"network_dialog", NULL);
