@@ -14,12 +14,9 @@
  * Authors:  Jonathan Blandford
  */
 
-#ifndef MOUSE_SETTINGS_H
-#define MOUSE_SETTINGS_H
+#ifndef LOCATE_POINTER_H
+#define LOCATE_POINTER_H
 
-#include <gconf/gconf.h>
-
-void gnome_settings_mouse_init (GConfClient *client);
-void gnome_settings_mouse_load (GConfClient *client);
+void gnome_settings_locate_pointer (void);
 
 #endif

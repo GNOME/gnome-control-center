@@ -42,6 +42,13 @@ enum
 	DOUBLE_CLICK_TEST_ON,
 };
 
+enum
+{
+	COLUMN_PIXBUF,
+	COLUMN_TEXT,
+	N_COLUMNS
+};
+
 /* We use this in at least half a dozen places, so it makes sense just to
  * define the macro */
 
@@ -54,11 +61,10 @@ GdkPixbuf *right_handed_pixbuf;
 GdkPixbuf *double_click_on_pixbuf;
 GdkPixbuf *double_click_maybe_pixbuf;
 GdkPixbuf *double_click_off_pixbuf;
-
+GConfClient *client;
 /* State in testing the double-click speed. Global for a great deal of
  * convenience
  */
-
 gint double_click_state = DOUBLE_CLICK_TEST_OFF;
 
 /* normalilzation routines */
@@ -318,11 +324,15 @@ load_pixbufs (void)
 static void
 setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 {
-	GObject     *peditor;
-	GConfValue  *value;
+	GObject           *peditor;
+	GtkWidget         *tree_view;
+	GtkTreeModel      *model;
+	GtkCellRenderer   *renderer;
+	GtkTreeViewColumn *column;
+	GtkTreeIter        iter;
+	GConfValue        *value;
 
-	/* Buttons page
-	 */
+	/* Buttons page */
 	/* Left-handed toggle */
 	peditor = gconf_peditor_new_boolean
 		(changeset, "/desktop/gnome/peripherals/mouse/left_handed", WID ("left_handed_toggle"), NULL);
@@ -336,6 +346,48 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 	/* Double-click time */
 	g_signal_connect (WID ("double_click_darea"), "expose_event", (GCallback) drawing_area_expose_event, changeset);
 
+	/* Cursors page */
+	tree_view = WID ("cursor_tree");
+	model = (GtkTreeModel *) gtk_list_store_new (N_COLUMNS, GDK_TYPE_PIXBUF, GTK_TYPE_STRING);
+	gtk_tree_view_set_model (GTK_TREE_VIEW (tree_view), model);
+	column = gtk_tree_view_column_new ();
+	renderer = gtk_cell_renderer_pixbuf_new ();
+	gtk_tree_view_column_pack_start (column, renderer, FALSE);
+	gtk_tree_view_column_set_attributes (column, renderer,
+					     "pixbuf", COLUMN_PIXBUF,
+					     NULL);
+	renderer = gtk_cell_renderer_text_new ();
+	gtk_tree_view_column_pack_start (column, renderer, TRUE);
+	gtk_tree_view_column_set_attributes (column, renderer,
+					     "markup", COLUMN_TEXT,
+					     NULL);
+	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+			    COLUMN_PIXBUF, gdk_pixbuf_new_from_file ("mouse-cursor-normal.png", NULL),
+			    COLUMN_TEXT, "<b>Default Cursor</b>\nThe default cursor that ships with X",
+			    -1);
+	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+			    COLUMN_PIXBUF, gdk_pixbuf_new_from_file ("mouse-cursor-white.png", NULL),
+			    COLUMN_TEXT, "<b>White Cursor</b>\nThe default cursor inverted",
+			    -1);
+	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+			    COLUMN_PIXBUF, gdk_pixbuf_new_from_file ("mouse-cursor-normal-large.png", NULL),
+			    COLUMN_TEXT, "<b>Large Cursor</b>\nLarge version of normal cursor",
+			    -1);
+	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+			    COLUMN_PIXBUF, gdk_pixbuf_new_from_file ("mouse-cursor-white-large.png", NULL),
+			    COLUMN_TEXT, "<b>Large White Cursor</b>\nLarge version of white cursor",
+			    -1);
+	gtk_tree_view_append_column (GTK_TREE_VIEW (tree_view), column);
+	
+	
+	gconf_peditor_new_boolean
+		(changeset, "/desktop/gnome/peripherals/mouse/locate_pointer_id", WID ("locate_pointer_toggle"), NULL);
+	/* Motion page */
+	/* speed */
 	gconf_peditor_new_numeric_range
 		(changeset, DOUBLE_CLICK_KEY, WID ("delay_scale"),
 		 "conv-to-widget-cb", double_click_from_gconf,
@@ -352,6 +404,7 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 		(changeset, "/desktop/gnome/peripherals/mouse/motion_threshold",
 		 WID ("sensitivity_scale"), NULL);
 
+	/* DnD threshold */
 	gconf_peditor_new_numeric_range
 		(changeset, "/desktop/gnome/peripherals/mouse/drag_threshold", WID ("drag_threshold_scale"),
 		 "conv-to-widget-cb", threshold_from_gconf,
@@ -385,10 +438,6 @@ create_dialog (void)
 	gtk_size_group_add_widget (size_group, WID ("low_label"));
 	gtk_size_group_add_widget (size_group, WID ("slow_label"));
 	gtk_size_group_add_widget (size_group, WID ("small_label"));
-
-	/* Remove cursors page */
-	widget = glade_xml_get_widget (dialog, "main_notebook");
-	gtk_notebook_remove_page (GTK_NOTEBOOK (widget), 1);
 
 	g_object_weak_ref (G_OBJECT (widget), (GWeakNotify) g_object_unref, dialog);
 
@@ -447,7 +496,7 @@ main (int argc, char **argv)
 		setup_dialog (dialog, changeset);
 
 		dialog_win = gtk_dialog_new_with_buttons
-			(_("Keyboard properties"), NULL, -1,
+			(_("Mouse Properties"), NULL, -1,
 			 GTK_STOCK_APPLY, GTK_RESPONSE_APPLY,
 			 GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
 			 NULL);

@@ -7,52 +7,6 @@
 
 #define MAX_BUTTONS 10
 
-#if 0
-GdkWindow *window = NULL;
-
-static gint
-locate_pointer_expose (GtkWidget *widget,
-		       GdkExposeEvent *event,
-		       gpointer data)
-{
-}
-
-
-static void
-create_window (void)
-{
-	  GdkWindowAttr attributes;
-	  attributes.window_type = GDK_WINDOW_CHILD;
-	  attributes.wclass = GDK_INPUT_OUTPUT;
-	  attributes.visual = gtk_widget_get_visual (GTK_WIDGET (tree_view));
-	  attributes.colormap = gtk_widget_get_colormap (GTK_WIDGET (tree_view));
-	  attributes.event_mask = GDK_VISIBILITY_NOTIFY_MASK | GDK_EXPOSURE_MASK | GDK_POINTER_MOTION_MASK;
-	  window = gdk_window_new (gdk_get_default_root_window (),
-				   &attributes,
-				   GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP);
-	  gdk_window_set_user_data (tree_view->priv->drag_highlight_window, gnome_settings_daemon_get_invisible ());
-	  g_signal_connect (G_OBJECT (gnome_settings_daemon_get_invisible ()),
-			    "expose_event",
-			    locate_pointer_expose,
-			    NULL);
-}
-
-static void
-locate_pointer (void)
-{
-	GtkWidget *window;
-	gint cursor_x, cursor_y;
-
-	window = gtk_window_new (GTK_WINDOW_POPUP);
-	gdk_window_get_pointer (NULL, &cursor_x, &cursor_y, NULL);
-	
-	if (window == NULL)
-		create_window ();
-
-}
-#endif
-
-
 
 
 static void
@@ -136,6 +90,11 @@ set_motion_threshold (gint motion_threshold)
 			 0, 0, motion_threshold);
 }
 
+static void
+set_drag_threshold (gint drag_threshold)
+{
+
+}
 
 
 static void
@@ -171,4 +130,5 @@ gnome_settings_mouse_init (GConfClient *client)
 void
 gnome_settings_mouse_load (GConfClient *client)
 {
+
 }

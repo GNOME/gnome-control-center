@@ -1,15 +1,19 @@
 bin_PROGRAMS = gnome-keyboard-properties
 
 gnome_keyboard_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
-gnome_keyboard_properties_SOURCES = keyboard-properties.c
+gnome_keyboard_properties_SOURCES = gnome-keyboard-properties.c
 
 @INTLTOOL_DESKTOP_RULE@
 
 Gladedir   = $(GNOMECC_GLADE_DIR)
-Glade_DATA = keyboard-properties.glade
+Glade_DATA = gnome-keyboard-properties.glade
 
-iconsdir   = $(GNOMECC_ICONS_DIR)
-icons_DATA = keyboard-capplet.png
+iconsdir   = $(GNOMECC_PIXMAPS_DIR)
+icons_DATA = keyboard-capplet.png	\
+	keyboard-repeat.png		\
+	keyboard-cursor.png		\
+	keyboard-volume.png		\
+	keyboard-bell.png
 
 desktopdir = $(GNOMECC_DESKTOP_DIR)
 desktop_DATA = keyboard.desktop

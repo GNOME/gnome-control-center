@@ -12,7 +12,7 @@
     <property name="window-position">GTK_WIN_POS_NONE</property>
 
     <child internal-child="vbox">
-      <widget class="GtkVBox" id="prefs_widget">
+      <widget class="GtkVBox" id="dialog-vbox1">
         <property name="homogeneous">no</property>
         <property name="spacing">8</property>
         <property name="visible">yes</property>
@@ -54,7 +54,7 @@
         </child>
 
         <child>
-          <widget class="GtkNotebook" id="main_notebook">
+          <widget class="GtkNotebook" id="prefs_widget">
             <property name="can_focus">yes</property>
             <property name="show_tabs">yes</property>
             <property name="show_border">yes</property>
@@ -312,51 +312,129 @@
             </child>
 
             <child>
-              <widget class="GtkFrame" id="frame6">
+              <widget class="GtkVBox" id="cursors_vbox">
                 <property name="border_width">4</property>
-                <property name="label" translatable="yes">Mouse Cursor</property>
-                <property name="label_xalign">0</property>
-                <property name="shadow">GTK_SHADOW_ETCHED_IN</property>
+                <property name="homogeneous">no</property>
+                <property name="spacing">4</property>
                 <property name="visible">yes</property>
+		<child>
+		  <widget class="GtkFrame" id="frame6">
+		    <property name="label" translatable="yes">Cursor Theme</property>
+		    <property name="label_xalign">0</property>
+		    <property name="shadow">GTK_SHADOW_ETCHED_IN</property>
+		    <property name="visible">yes</property>
+		    
+		    <child>
+		      <widget class="GtkVBox" id="cursor_vbox">
+			<property name="border_width">8</property>
+			<property name="homogeneous">no</property>
+			<property name="spacing">8</property>
+			<property name="visible">yes</property>
 
-                <child>
-                  <widget class="GtkVBox" id="vbox6">
-                    <property name="border_width">4</property>
-                    <property name="homogeneous">no</property>
-                    <property name="spacing">4</property>
-                    <property name="visible">yes</property>
+			<child>
+			  <widget class="GtkFrame" id="frame7">
+			    <property name="visible">yes</property>
+			    <property
+			    name="shadow">GTK_SHADOW_IN</property>
+			    <child>
+			      <widget class="GtkTreeView" id="cursor_tree">
+				<property name="rules_hint">yes</property>
+				<property name="visible">yes</property>
+				<property name="headers-visible">no</property>
+			      </widget>
+			    </child>
+			  </widget>
+			  <packing>
+			    <property name="padding">0</property>
+			    <property name="expand">yes</property>
+			    <property name="fill">yes</property>
+			  </packing>
+			</child>
+			<child>
+			  <widget class="GtkLabel" id="label19">
+			    <property name="label" translatable="yes">&lt;b&gt;Note:&lt;/b&gt; You will need to logout for this setting to take effect.</property>
+			    <property name="justify">GTK_JUSTIFY_LEFT</property>
+			    <property name="wrap">yes</property>
+			    <property name="use_markup">yes</property>
+			    <property name="xalign">0</property>
+			    <property name="yalign">0.5</property>
+			    <property name="xpad">0</property>
+			    <property name="ypad">0</property>
+			    <property name="visible">yes</property>
+			  </widget>
+			  <packing>
+			    <property name="padding">0</property>
+			    <property name="expand">no</property>
+			    <property name="fill">no</property>
+			  </packing>
+			</child>
+		      </widget>
+		    </child>
+		  </widget>
+		  <packing>
+		    <property name="padding">0</property>
+		    <property name="expand">yes</property>
+		    <property name="fill">yes</property>
+		  </packing>
+		</child>
+		<child>
+		  <widget class="GtkFrame" id="locate_pointer_frame">
+		    <property name="label" translatable="yes">Locate Pointer</property>
+		    <property name="label_xalign">0</property>
+		    <property name="shadow">GTK_SHADOW_ETCHED_IN</property>
+		    <property name="visible">yes</property>
+		    
+		    <child>
+		      <widget class="GtkVBox" id="vbox6">
+			<property name="border_width">8</property>
+			<property name="homogeneous">no</property>
+			<property name="spacing">8</property>
+			<property name="visible">yes</property>
+			
+			<child>
+			  <widget class="GtkCheckButton" id="locate_pointer_toggle">
+			    <property name="can_focus">yes</property>
+			    <property name="label"
+			    translatable="yes">_Show position of cursor when the Control key is pressed</property>
+			    <property name="active">no</property>
+			    <property name="draw_indicator">yes</property>
+			    <property name="visible">yes</property>
+			    <property name="use_underline">yes</property>
+			  </widget>
+			</child>
 
-                    <child>
-                      <widget class="GtkLabel" id="placeholderlabel">
-                        <property name="visible">yes</property>
-                      </widget>
-                    </child>
-
-                    <child>
-                      <widget class="GtkLabel" id="label19">
-                        <property name="label" translatable="yes">You will need to restart your login session for this setting to take effect.</property>
-                        <property name="justify">GTK_JUSTIFY_LEFT</property>
-                        <property name="wrap">yes</property>
-                        <property name="xalign">0</property>
-                        <property name="yalign">0.5</property>
-                        <property name="xpad">0</property>
-                        <property name="ypad">0</property>
-                        <property name="visible">yes</property>
-                      </widget>
-                      <packing>
-                        <property name="padding">0</property>
-                        <property name="expand">no</property>
-                        <property name="fill">no</property>
-                      </packing>
-                    </child>
-                  </widget>
-                </child>
-              </widget>
-            </child>
-
+			<child>
+			  <widget class="GtkLabel" id="label20">
+			    <property name="label"
+			    translatable="yes">Animates a quick marker around the cursor when the Control key has been pressed and released.</property>
+			    <property name="justify">GTK_JUSTIFY_LEFT</property>
+			    <property name="wrap">yes</property>
+			    <property name="xalign">0</property>
+			    <property name="yalign">0.5</property>
+			    <property name="xpad">0</property> <property
+			    name="ypad">0</property> <property
+			    name="visible">yes</property>
+			  </widget>
+			  <packing>
+			    <property name="padding">0</property>
+			    <property name="expand">no</property>
+			    <property name="fill">no</property>
+			  </packing>
+			</child>
+		      </widget>
+		    </child>
+		  </widget>
+		  <packing>
+		    <property name="padding">0</property>
+		    <property name="expand">no</property>
+		    <property name="fill">no</property>
+		  </packing>
+		</child>
+	      </widget>
+	    </child>
             <child>
               <widget class="GtkLabel" id="label2">
-                <property name="label" translatable="yes">_Cursors</property>
+                <property name="label" translatable="yes">C_ursors</property>
                 <property name="use_underline">yes</property>
                 <property name="justify">GTK_JUSTIFY_CENTER</property>
                 <property name="wrap">no</property>
