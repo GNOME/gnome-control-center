@@ -2,6 +2,8 @@
 
 	* location.c: changed g_critical to g_error. If a newer
 	version of glib is to be required, change configure.in then.
+	* util.h: Set a flag to disable the DEBUG_MSG macro, which
+	messes with the frontend<->backend talking.
 	
 2001-04-24  Bradford Hovinen  <hovinen@ximian.com>
 

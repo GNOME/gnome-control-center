@@ -27,13 +27,23 @@
 #include <time.h>
 #include <glib.h>
 
-#ifdef __GNUC__
-#  define DEBUG_MSG(str, args...) \
+/* Uncomment this if you want debugs: */
+/* #define DEBUG_ME_MORE */
+
+#ifdef DEBUG_ME_MORE
+#  ifdef __GNUC__
+#    define DEBUG_MSG(str, args...) \
               g_log (G_LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "(%d:%s) " str, \
 		     getpid (), __FUNCTION__ , ## args)
+#  else
+#    define DEBUG_MSG(str, args...)
+#  endif
 #else
+/* This was redefined here because it was messing with the frontend->backend 
+ * talk. Arturo */
 #  define DEBUG_MSG(str, args...)
 #endif
+
 
 gboolean extract_number (char **str, int *number, int digits);
 struct tm *parse_date (char *str);
