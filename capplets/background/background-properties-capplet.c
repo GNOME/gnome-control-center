@@ -268,10 +268,6 @@ static void
 dialog_button_clicked_cb (GtkDialog *dialog, gint response_id, GConfChangeSet *changeset) 
 {
 	switch (response_id) {
-	case GTK_RESPONSE_APPLY:
-		gconf_client_commit_change_set (gconf_client_get_default (), changeset, TRUE, NULL);
-		break;
-
 	case GTK_RESPONSE_CLOSE:
 		gtk_main_quit ();
 		break;
@@ -308,18 +304,16 @@ main (int argc, char **argv)
 	if (get_legacy) {
 		get_legacy_settings ();
 	} else {
-		changeset = gconf_change_set_new ();
 		bg_applier = bg_applier_new (BG_APPLIER_PREVIEW);
 		dialog = create_dialog (BG_APPLIER (bg_applier));
-		setup_dialog (dialog, changeset, BG_APPLIER (bg_applier));
+		setup_dialog (dialog, NULL, BG_APPLIER (bg_applier));
 
 		dialog_win = gtk_dialog_new_with_buttons
 			(_("Background properties"), NULL, -1,
-			 GTK_STOCK_APPLY, GTK_RESPONSE_APPLY,
 			 GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
 			 NULL);
 
-		g_signal_connect (G_OBJECT (dialog_win), "response", (GCallback) dialog_button_clicked_cb, changeset);
+		g_signal_connect (G_OBJECT (dialog_win), "response", (GCallback) dialog_button_clicked_cb, NULL);
 
 		g_object_weak_ref (G_OBJECT (dialog_win), (GWeakNotify) g_object_unref, bg_applier);
 		gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog_win)->vbox), WID ("prefs_widget"), TRUE, TRUE, GNOME_PAD_SMALL);
