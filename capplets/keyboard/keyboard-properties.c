@@ -1,10 +1,11 @@
 /* -*- mode: c; style: linux -*- */
 
-/* main.c
+/* keyboard-properties.c
  * Copyright (C) 2000-2001 Ximian, Inc.
  *
  * Written by: Bradford Hovinen <hovinen@ximian.com>
  *             Richard Hestilow <hestilow@ximian.com>
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2, or (at your option)
@@ -25,11 +26,17 @@
 #  include <config.h>
 #endif
 
-#include "capplet-util.h"
-#include "bonobo-property-editor-range.h"
-
+#include <gnome.h>
+#include <gconf/gconf-client.h>
 #include <glade/glade.h>
-#include <libgnomeui/gnome-window-icon.h>
+#include <math.h>
+
+#include "capplet-util.h"
+#include "gconf-property-editor.h"
+
+#if 0
+#  include <libgnomeui/gnome-window-icon.h>
+#endif
 
 #include <gdk/gdkx.h>
 #include <X11/X.h>
@@ -39,8 +46,10 @@
 #endif
 
 static void
-apply_settings (Bonobo_ConfigDatabase db)
+apply_settings (void)
 {
+	GConfClient *client;
+
 	gboolean repeat, click;
 	int rate, delay, volume;
 	int bell_volume, bell_pitch, bell_duration;
@@ -58,14 +67,16 @@ apply_settings (Bonobo_ConfigDatabase db)
 	XKeyboardControl kbdcontrol;
         int event_base_return, error_base_return;
 
-	repeat = bonobo_config_get_boolean (db, "/main/repeat", NULL);
-	click = bonobo_config_get_boolean (db, "/main/click", NULL);
-	rate = bonobo_config_get_ulong (db, "/main/rate", NULL);
-	delay = bonobo_config_get_ulong (db, "/main/delay", NULL);
-	volume = bonobo_config_get_ulong (db, "/main/volume", NULL);
-	bell_volume = bonobo_config_get_ulong (db, "/main/bell_volume", NULL);
-	bell_pitch = bonobo_config_get_ulong (db, "/main/bell_pitch", NULL);
-	bell_duration = bonobo_config_get_ulong (db, "/main/bell_duration", NULL);
+	client = gconf_client_get_default ();
+
+	repeat        = gconf_client_get_bool (client, "/gnome/desktop/peripherals/keyboard/repeat",        NULL);
+	click         = gconf_client_get_bool (client, "/gnome/desktop/peripherals/keyboard/click",         NULL);
+	rate          = gconf_client_get_int  (client, "/gnome/desktop/peripherals/keyboard/rate",          NULL);
+	delay         = gconf_client_get_int  (client, "/gnome/desktop/peripherals/keyboard/delay",         NULL);
+	volume        = gconf_client_get_int  (client, "/gnome/desktop/peripherals/keyboard/volume",        NULL);
+	bell_volume   = gconf_client_get_int  (client, "/gnome/desktop/peripherals/keyboard/bell_volume",   NULL);
+	bell_pitch    = gconf_client_get_int  (client, "/gnome/desktop/peripherals/keyboard/bell_pitch",    NULL);
+	bell_duration = gconf_client_get_int  (client, "/gnome/desktop/peripherals/keyboard/bell_duration", NULL);
 
         if (repeat) {
 		XAutoRepeatOn (GDK_DISPLAY ());
@@ -97,29 +108,49 @@ apply_settings (Bonobo_ConfigDatabase db)
 				&kbdcontrol);
 }
 
-static gulong
-get_value_ulong (Bonobo_PropertyBag bag, const gchar *prop)
+static void
+get_legacy_settings (void)
 {
-	BonoboArg *arg;
-	gulong val;
-	
-	arg = bonobo_property_bag_client_get_value_any (bag, prop, NULL);
-	val = BONOBO_ARG_GET_GENERAL (arg, TC_ulong, CORBA_unsigned_long, NULL);
-	bonobo_arg_release (arg);
-	return val;
+	gboolean val_boolean, def;
+	gulong val_ulong;
+
+#if 0
+	COPY_FROM_LEGACY (bool, "/gnome/desktop/peripherals/keyboard/repeat",        "/Desktop/Keyboard/repeat=true");
+	COPY_FROM_LEGACY (bool, "/gnome/desktop/peripherals/keyboard/click",         "/Desktop/Keyboard/click=true");
+	COPY_FROM_LEGACY (int,  "/gnome/desktop/peripherals/keyboard/rate",          "/Desktop/Keyboard/rate=30");
+	COPY_FROM_LEGACY (int,  "/gnome/desktop/peripherals/keyboard/delay",         "/Desktop/Keyboard/delay=500");
+	COPY_FROM_LEGACY (int,  "/gnome/desktop/peripherals/keyboard/volume",        "/Desktop/Keyboard/clickvolume=0");
+	COPY_FROM_LEGACY (int,  "/gnome/desktop/peripherals/keyboard/bell_volume",   "/Desktop/Bell/percent=50");
+	COPY_FROM_LEGACY (int,  "/gnome/desktop/peripherals/keyboard/bell_pitch",    "/Desktop/Bell/pitch=50");
+	COPY_FROM_LEGACY (int,  "/gnome/desktop/peripherals/keyboard/bell_duration", "/Desktop/Bell/duration=100");
+#endif
+}
+
+static int
+get_int_from_changeset (GConfChangeSet *changeset, gchar *key) 
+{
+	GConfValue *value;
+
+	gconf_change_set_check_value (changeset, key, &value);
+
+	if (value == NULL)
+		return gconf_client_get_int (gconf_client_get_default (), key, NULL);
+	else
+		return gconf_value_get_int (value);	
 }
 
 static void
-bell_cb (GtkWidget *widget, Bonobo_PropertyBag bag)
+bell_cb (GtkWidget *widget, GConfChangeSet *changeset)
 {
 	XKeyboardState backup;
 	XKeyboardControl kbdcontrol;
 
 	XGetKeyboardControl (GDK_DISPLAY (), &backup);
 
-	kbdcontrol.bell_percent = get_value_ulong (bag, "bell_volume");
-	kbdcontrol.bell_pitch = get_value_ulong (bag, "bell_pitch");
-	kbdcontrol.bell_duration = get_value_ulong (bag, "bell_duration");
+	kbdcontrol.bell_percent  = get_int_from_changeset (changeset, "/gnome/desktop/peripherals/keyboard/bell_volume");
+	kbdcontrol.bell_pitch    = get_int_from_changeset (changeset, "/gnome/desktop/peripherals/keyboard/bell_pitch");
+	kbdcontrol.bell_duration = get_int_from_changeset (changeset, "/gnome/desktop/peripherals/keyboard/bell_duration");
+
 	XChangeKeyboardControl (GDK_DISPLAY (),
 				KBBellPercent | KBBellPitch | KBBellDuration, 
 				&kbdcontrol);
@@ -134,94 +165,112 @@ bell_cb (GtkWidget *widget, Bonobo_PropertyBag bag)
 				&kbdcontrol);
 }
 
-static GtkWidget*
+static void
+setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
+{
+	GObject *peditor;
+
+	peditor = gconf_peditor_new_boolean (changeset, "/gnome/desktop/peripherals/keyboard/repeat", WID ("repeat_toggle"));
+	gconf_peditor_new_select_menu (changeset, "/gnome/desktop/peripherals/keyboard/delay", WID ("delay_menu"));
+	gconf_peditor_new_select_menu (changeset, "/gnome/desktop/peripherals/keyboard/rate", WID ("repate_menu"));
+
+	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("repeat_table"));
+
+	peditor = gconf_peditor_new_boolean (changeset, "/gnome/desktop/peripherals/keyboard/click", WID ("click_toggle"));
+	gconf_peditor_new_int_range (changeset, "/gnome/desktop/peripherals/keyboard/volume", WID ("click_volume_entry"));
+
+	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("click_hbox"));
+
+	/* Bell properties */
+	gconf_peditor_new_int_range (changeset, "/gnome/desktop/peripherals/keyboard/bell_volume", WID ("bell_volume_range"));
+	gconf_peditor_new_int_range (changeset, "/gnome/desktop/peripherals/keyboard/bell_pitch", WID ("bell_pitch_range"));
+	gconf_peditor_new_int_range (changeset, "/gnome/desktop/peripherals/keyboard/bell_duration", WID ("bell_duration_range"));
+
+	g_signal_connect (G_OBJECT (WID ("bell_test_button")), "clicked", (GCallback) bell_cb, changeset);
+}
+
+static GladeXML *
 create_dialog (void)
 {
 	GladeXML *dialog;
 	GtkWidget *widget, *pixmap;
 
-	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/keyboard-properties.glade", "prefs_widget");
+	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/keyboard-properties.glade", "prefs_widget", NULL);
 	widget = glade_xml_get_widget (dialog, "prefs_widget");
-	gtk_object_set_data (GTK_OBJECT (widget), "glade-data", dialog);
 
+#if 0
 	/* Minor GUI addition */
 	pixmap = gnome_stock_pixmap_widget (WID ("bell_test_button"),
 					    GNOME_STOCK_PIXMAP_VOLUME);
 	gtk_box_pack_start (GTK_BOX (WID ("bell_test_holder")), pixmap,
 			    TRUE, TRUE, 0);
 	gtk_widget_show_all (WID ("bell_test_button"));
+#endif
 
-	gtk_signal_connect_object (GTK_OBJECT (widget), "destroy",
-				   GTK_SIGNAL_FUNC (gtk_object_destroy),
-				   GTK_OBJECT (dialog));
-
-	return widget;
+	return dialog;
 }
 
 static void
-setup_dialog (GtkWidget *widget, Bonobo_PropertyBag bag)
+dialog_button_clicked_cb (GnomeDialog *dialog, gint button_number, GConfChangeSet *changeset) 
 {
-	GladeXML *dialog;
-	BonoboPEditor *ed;
-	
-	dialog = gtk_object_get_data (GTK_OBJECT (widget), "glade-data");
-	
-	CREATE_PEDITOR (boolean, "repeat", "repeat_toggle");
-	
-	ed = BONOBO_PEDITOR (bonobo_peditor_option_menu_construct (WID ("delay_menu")));
-	bonobo_peditor_set_property (ed, bag, "delay", TC_ulong, NULL);
-	
-	ed = BONOBO_PEDITOR (bonobo_peditor_option_menu_construct (WID ("repeat_menu")));
-	bonobo_peditor_set_property (ed, bag, "rate", TC_ulong, NULL);
-	bonobo_peditor_set_guard (WID ("repeat_table"), bag, "repeat");
-
-	CREATE_PEDITOR (boolean, "click", "click_toggle");
-	
-	ed = BONOBO_PEDITOR (bonobo_peditor_range_construct (WID ("click_volume_entry")));
-	bonobo_peditor_set_property (ed, bag, "volume", TC_ulong, NULL);
-	bonobo_peditor_set_guard (WID ("click_hbox"), bag, "click");
-
-	/* Bell properties */
-	ed = BONOBO_PEDITOR (bonobo_peditor_range_construct (WID ("bell_volume_range")));
-	bonobo_peditor_set_property (ed, bag, "bell_volume", TC_ulong, NULL);
-
-	ed = BONOBO_PEDITOR (bonobo_peditor_range_construct (WID ("bell_pitch_range")));
-	bonobo_peditor_set_property (ed, bag, "bell_pitch", TC_ulong, NULL);
-
-	ed = BONOBO_PEDITOR (bonobo_peditor_range_construct (WID ("bell_duration_range")));
-	bonobo_peditor_set_property (ed, bag, "bell_duration", TC_ulong, NULL);
-
-	gtk_signal_connect (GTK_OBJECT (WID ("bell_test_button")),
-		    "clicked", bell_cb, bag);
-}
-
-static void
-get_legacy_settings (Bonobo_ConfigDatabase db)
-{
-	gboolean val_boolean, def;
-	gulong val_ulong;
-
-	COPY_FROM_LEGACY (boolean, "/main/repeat", bool, "/Desktop/Keyboard/repeat=true");
-	COPY_FROM_LEGACY (boolean, "/main/click", bool, "/Desktop/Keyboard/click=true");
-	COPY_FROM_LEGACY (ulong, "/main/rate", int, "/Desktop/Keyboard/rate=30");
-	COPY_FROM_LEGACY (ulong, "/main/delay", int, "/Desktop/Keyboard/delay=500");
-	COPY_FROM_LEGACY (ulong, "/main/volume", int, "/Desktop/Keyboard/clickvolume=0");
-	COPY_FROM_LEGACY (ulong, "/main/bell_volume", int, "/Desktop/Bell/percent=50");
-	COPY_FROM_LEGACY (ulong, "/main/bell_pitch", int, "/Desktop/Bell/pitch=50");
-	COPY_FROM_LEGACY (ulong, "/main/bell_duration", int, "/Desktop/Bell/duration=100");
+	if (button_number == 0)
+		gconf_client_commit_change_set (gconf_client_get_default (), changeset, TRUE, NULL);
+	else if (button_number == 1)
+		gnome_dialog_close (dialog);
 }
 
 int
 main (int argc, char **argv) 
 {
-	const gchar* legacy_files[] = { "Desktop", NULL };
-	
-	glade_gnome_init ();
-	
-	capplet_init (argc, argv, legacy_files, apply_settings, create_dialog, setup_dialog, get_legacy_settings);
+	GConfClient    *client;
+	GConfChangeSet *changeset;
+	GladeXML       *dialog;
+	GtkWidget      *dialog_win;
 
-	gnome_window_icon_set_default_from_file
-		(GNOMECC_ICONS_DIR"keyboard-capplet.png.png");
-	
+	static gboolean apply_only;
+	static gboolean get_legacy;
+	static struct poptOption cap_options[] = {
+		{ "apply", '\0', POPT_ARG_NONE, &apply_only, 0,
+		  N_("Just apply settings and quit (compatibility only; now handled by daemon)"), NULL },
+		{ "init-session-settings", '\0', POPT_ARG_NONE, &apply_only, 0,
+		  N_("Just apply settings and quit (compatibility only; now handled by daemon)"), NULL },
+		{ "get-legacy", '\0', POPT_ARG_NONE, &get_legacy, 0,
+		  N_("Retrieve and store legacy settings"), NULL },
+		{ NULL, '\0', 0, NULL, 0, NULL, NULL }
+	};
+
+	bindtextdomain (PACKAGE, GNOMELOCALEDIR);
+	bind_textdomain_codeset (PACKAGE, "UTF-8");
+	textdomain (PACKAGE);
+
+	gnome_program_init (argv[0], VERSION, LIBGNOMEUI_MODULE, argc, argv,
+			    GNOME_PARAM_POPT_TABLE, cap_options,
+			    NULL);
+
+	client = gconf_client_get_default ();
+	gconf_client_add_dir (client, "/desktop/gnome/peripherals/keyboard", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+
+	if (get_legacy) {
+		get_legacy_settings ();
+	} else {
+		changeset = gconf_change_set_new ();
+		dialog = create_dialog ();
+		setup_dialog (dialog, changeset);
+
+#if 0
+		gnome_window_icon_set_default_from_file
+			(GNOMECC_ICONS_DIR "keyboard-capplet.png");
+#endif
+
+		dialog_win = gnome_dialog_new (_("Keyboard properties"), GTK_STOCK_APPLY, GTK_STOCK_CLOSE, NULL);
+		g_signal_connect (G_OBJECT (dialog_win), "clicked", (GCallback) dialog_button_clicked_cb, changeset);
+		g_object_weak_ref (G_OBJECT (dialog_win), (GWeakNotify) gtk_main_quit, NULL);
+		gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog_win)->vbox), WID ("prefs_widget"), TRUE, TRUE, GNOME_PAD_SMALL);
+		gtk_widget_show_all (dialog_win);
+
+		gtk_main ();
+		gconf_change_set_unref (changeset);
+	}
+
 	return 0;
 }
