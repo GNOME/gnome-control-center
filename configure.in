@@ -70,6 +70,14 @@ AM_PATH_ESD(,have_libesd=yes,
 [AC_MSG_WARN([*** \`esd-manager' will not be built ***])])
 AM_CONDITIONAL(HAVE_LIBESD, test yes = $have_libesd)
 
+AM_PATH_IMLIB(1.8.2, , [
+echo "ERROR: Needs a system with Imlib 1.8.2 or higher"
+echo "You can obtain it from:"
+echo "ftp://ftp.enlightenment.org/pub/enlightenment/"
+echo "ftp://www.rasterman.com/pub/enlightenment/"
+echo "ftp://ftp.labs.redhat.com/pub/imlib/"
+AC_MSG_ERROR([Fatal Error: no Imlib detected.])])
+
 AC_OUTPUT([
 Makefile
 po/Makefile.in
