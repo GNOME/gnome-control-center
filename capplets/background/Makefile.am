@@ -1,11 +1,11 @@
 cappletname = background
 cappletgroup = 
-bin_PROGRAMS = background-properties-capplet
+bin_PROGRAMS = background-properties
 
-background_properties_capplet_LDADD = $(GNOMECC_CAPPLETS_LIBS)
-background_properties_capplet_SOURCES = \
-	main.c\
-	applier.c applier.h
+background_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
+background_properties_SOURCES =			\
+	main.c					\
+	applier.c	applier.h
 
 pixmap_DATA = 
 
