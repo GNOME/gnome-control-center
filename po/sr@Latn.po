@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-10 01:22+0100\n"
-"PO-Revision-Date: 2004-01-10 01:36+0100\n"
+"POT-Creation-Date: 2004-01-13 10:09+0100\n"
+"PO-Revision-Date: 2004-01-13 10:14+0100\n"
 "Last-Translator: Veljko M. Stanojevic <veljko@vms.homelinux.net>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -380,7 +380,7 @@ msgstr "_Bez slike"
 #: capplets/background/background-properties-capplet.c:559
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:730
-#: capplets/keyboard/gnome-keyboard-properties.c:222
+#: capplets/keyboard/gnome-keyboard-properties.c:224
 #: capplets/mouse/gnome-mouse-properties.c:812
 #: capplets/sound/sound-properties-capplet.c:212
 msgid "Retrieve and store legacy settings"
@@ -443,12 +443,72 @@ msgstr ""
 "Možete dovući datoteke sa slikama u prozor i tako postaviti sliku za pozadinu"
 
 #: capplets/background/background.desktop.in.h:1
-msgid "Background"
-msgstr "Pozadina"
+msgid "Desktop Wallpaper"
+msgstr "Pozadina radne površi"
 
 #: capplets/background/background.desktop.in.h:2
-msgid "Customize your desktop background"
-msgstr "Podesite izgled pozadine"
+#: capplets/background/gnome-wp-capplet.c:1146
+msgid "Desktop Wallpaper Preferences"
+msgstr "Postavke pozadine radne površi"
+
+#: capplets/background/gnome-wp-capplet.c:72
+#: capplets/common/capplet-util.c:340
+#, c-format
+msgid "There was an error displaying help: %s"
+msgstr "Došlo je do greške prilikom prikazivanja pomoći: %s"
+
+#: capplets/background/gnome-wp-capplet.c:169
+msgid "Add Wallpapers"
+msgstr "Dodaj pozadinu radne površi"
+
+#: capplets/background/gnome-wp-capplet.c:1191
+msgid "<b>Desktop _Wallpaper</b>"
+msgstr "<b>_Pozadina radne površi</b>"
+
+#: capplets/background/gnome-wp-capplet.c:1276
+msgid "_Style:"
+msgstr "_Stil:"
+
+#: capplets/background/gnome-wp-capplet.c:1303
+msgid "Centered"
+msgstr "Centrirano"
+
+#: capplets/background/gnome-wp-capplet.c:1325
+msgid "Fill Screen"
+msgstr "Ispuni ekran"
+
+#: capplets/background/gnome-wp-capplet.c:1345
+msgid "Scaled"
+msgstr "Srazmerno"
+
+#: capplets/background/gnome-wp-capplet.c:1365
+msgid "Tiled"
+msgstr "Popločano"
+
+#: capplets/background/gnome-wp-capplet.c:1402
+msgid "_Add Wallpaper"
+msgstr "_Dodaj pozadinu"
+
+#. The Wallpaper Background Colors Section
+#: capplets/background/gnome-wp-capplet.c:1433
+msgid "<b>_Desktop Colors</b> "
+msgstr "<b>_Boje radne površi</b> "
+
+#: capplets/background/gnome-wp-capplet.c:1465
+msgid "Solid Color"
+msgstr "Puna boja"
+
+#: capplets/background/gnome-wp-capplet.c:1481
+msgid "Horizontal Gradient"
+msgstr "Vodoravno nijansirano"
+
+#: capplets/background/gnome-wp-capplet.c:1497
+msgid "Vertical Gradient"
+msgstr "Uspravno nijansirano"
+
+#: capplets/background/gnome-wp-info.c:46
+msgid "No Wallpaper"
+msgstr "Bez pozadine"
 
 #: capplets/common/activate-settings-daemon.c:18
 msgid ""
@@ -459,10 +519,7 @@ msgid ""
 "settings manager."
 msgstr ""
 "Ne mogu da pokrenem upravnik postavki „gnome-settings-daemon“.\n"
-"Bez GNOMOVOG rukovodioca postavki neka od podešenja neće raditi. Ovo može "
-"značiti da postoji preblem sa Bonobo-om ili je možda već u upotrebi neki "
-"drugi rukovodilac postavki (npr. KDE) koji onemogućuje rad GNOMOVOG "
-"rukovodioca postavki."
+"Bez Gnomovog rukovodioca postavki neka od podešenja neće raditi. Ovo može značiti da postoji preblem sa Bonobo-om ili je možda već u upotrebi neki drugi rukovodilac postavki (npr. KDE) koji onemogućuje rad Gnomovog rukovodioca postavki."
 
 #: capplets/common/capplet-stock-icons.c:94
 #, c-format
@@ -472,11 +529,6 @@ msgstr "Ne mogu da učitam ikonu '%s'\n"
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "Samo primeni postavke i izađi"
-
-#: capplets/common/capplet-util.c:340
-#, c-format
-msgid "There was an error displaying help: %s"
-msgstr "Došlo je do greške prilikom prikazivanja pomoći: %s"
 
 #: capplets/common/file-transfer-dialog.c:95
 #, c-format
@@ -1703,19 +1755,19 @@ msgstr "Dodelite preke tastere naredbama"
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Greška pri pokretanju programčeta za tastaturu : %s"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:199
+#: capplets/keyboard/gnome-keyboard-properties.c:201
 msgid "_Accessibility"
 msgstr "_Pristupačnost"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:218
 #: capplets/keyboard/gnome-keyboard-properties.c:220
+#: capplets/keyboard/gnome-keyboard-properties.c:222
 #: capplets/sound/sound-properties-capplet.c:208
 #: capplets/sound/sound-properties-capplet.c:210
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "Samo primeni podešenja i izađi "
 
-#: capplets/keyboard/gnome-keyboard-properties.c:224
+#: capplets/keyboard/gnome-keyboard-properties.c:226
 msgid "Start the page with the typing break settings showing"
 msgstr "Prikaži list sa podešavanjima za odmore pri kucanju"
 
@@ -1962,7 +2014,9 @@ msgid ""
 "selected date, time, and number\n"
 "formats. You can change your\n"
 "formats in the Formats tab."
-msgstr "Vaš željeni jezik se razlikuje od vašeg trenutno izabranog oblika datuma, vremena i brojeva. Možete izmeniti vaše oblike u listu Oblici. "
+msgstr ""
+"Vaš željeni jezik se razlikuje od vašeg trenutno izabranog oblika datuma, "
+"vremena i brojeva. Možete izmeniti vaše oblike u listu Oblici. "
 
 #: capplets/localization/gnome-localization-properties.glade.h:36
 msgid "_Region:"
@@ -2714,6 +2768,50 @@ msgstr "Koristi ljusku čak i kada je nautilus pokrenut."
 msgid "Could not initialize Bonobo"
 msgstr "Nisam mogao da pokrenem bonobo"
 
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:325
+msgid "There was an error displaying help:"
+msgstr "Došlo je do greške pri prikazivanju pomoći:"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
+msgid "Slow Keys Alert"
+msgstr "Upozorenje o sporim tasterima"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+msgid ""
+"You just held down the Shift key for 8 seconds.  This is the shortcut for "
+"the Slow Keys feature, which affects the way your keyboard works."
+msgstr "Upravo ste držali taster Shift pritisnut 8 sekundi.  Ovo je prečica za mogućnost sporih tastera, koja utiče na to kako radi vaša tastatura."
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
+msgid "Do you want to activate Slow Keys?"
+msgstr "Želite li da pokrenete spore tastere?"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
+msgid "Do you want to deactivate Sticky Keys ?"
+msgstr "Želite li da isključite spore lepljive tastere?"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:424
+msgid "Sticky Keys Alert"
+msgstr "Upozorenje o lepljivim tasterima"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:425
+msgid ""
+"You just pressed the Shift key 5 times in a row.  This is the shortcut for "
+"the Sticky Keys feature, which affects the way your keyboard works."
+msgstr "Upravo ste pritisnuli taster Shift pet puta zaredom.  Ovo je prečica za mogućnost lepljivih tastera, koja utiče na način rada vaše tastature."
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
+msgid ""
+"You just pressed two keys at once, or pressed the Shift key 5 times in a "
+"row.  This turns off the Sticky Keys feature, which affects the way your "
+"keyboard works."
+msgstr "Upravo ste pritisnuli dva tastera istovremeno, ili ste pristisnuli Shift 5 puta zaredom.  Ovo isključuje mogućnost lepljivih tastera, što utiče na to kako vaša tastatura radi."
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
+msgid "Do you want to activate Sticky Keys?"
+msgstr "Želite li da uključite lepljive tastere?"
+
 #: gnome-settings-daemon/gnome-settings-font.c:102
 #, c-format
 msgid ""
@@ -3017,7 +3115,9 @@ msgstr ""
 msgid ""
 "Very soon, XKB settings in gconf will be overridden (from the system "
 "configuration)"
-msgstr "Veoma uskoro, podešavanja XKB-a u GKonfu će biti prevaziđena (iz podešavanja sistema)"
+msgstr ""
+"Veoma uskoro, podešavanja XKB-a u GKonfu će biti prevaziđena (iz podešavanja "
+"sistema)"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
 msgid "XKB keyboard layout"
@@ -3340,6 +3440,12 @@ msgstr "Da li da koristim umanjeni prikaz instaliranih tema"
 msgid "Whether to thumbnail themes"
 msgstr "Da li da koristim umanjeni prikaz tema"
 
+#~ msgid "Background"
+#~ msgstr "Pozadina"
+
+#~ msgid "Customize your desktop background"
+#~ msgstr "Podesite izgled pozadine"
+
 #~ msgid "_Ignore system configuration"
 #~ msgstr "_Zanemari podešavanja sistema"
 
@@ -3369,9 +3475,6 @@ msgstr "Da li da koristim umanjeni prikaz tema"
 
 #~ msgid "Select CDE AccessX file"
 #~ msgstr "Odaberite CDE AccessX datoteku"
-
-#~ msgid "_Wallpaper"
-#~ msgstr "Poster"
 
 #~ msgid "A preview of the background picture."
 #~ msgstr "Pregled slike za pozadinu."
@@ -3489,9 +3592,6 @@ msgstr "Da li da koristim umanjeni prikaz tema"
 
 #~ msgid "Enable Slo_w Keys"
 #~ msgstr "Omogući spore tastere"
-
-#~ msgid "Enable _Sticky Keys"
-#~ msgstr "Omogući „lepljive“ tastere"
 
 #~ msgid "Features"
 #~ msgstr "Osobine"
