@@ -250,10 +250,13 @@ create_dialog (void)
 static void
 dialog_button_clicked_cb (GnomeDialog *dialog, gint button_number, GConfChangeSet *changeset) 
 {
-	if (button_number == 0)
+	if (button_number == 0) {
 		gconf_engine_commit_change_set (gconf_engine_get_default (), changeset, TRUE, NULL);
-	else if (button_number == 1)
+		apply_settings ();
+	}
+	else if (button_number == 1) {
 		gnome_dialog_close (dialog);
+	}
 }
 
 int
