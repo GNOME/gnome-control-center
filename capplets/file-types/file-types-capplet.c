@@ -1245,9 +1245,18 @@ revert_real_cb (gint reply, gpointer data)
 		gnome_vfs_mime_info_reload ();
 
 		mime_types_list = gnome_vfs_get_registered_mime_types ();
-
+		
+		gtk_clist_freeze (GTK_CLIST (mime_list));
 		gtk_clist_clear (GTK_CLIST (mime_list));
 		populate_mime_list (mime_types_list, GTK_CLIST (mime_list));
+				
+		/* Sort list using current sort type and select the first item. */
+		gtk_clist_sort (GTK_CLIST (mime_list));
+		gtk_clist_select_row (GTK_CLIST (mime_list), 0, 0);
+		list_reveal_row (GTK_CLIST (mime_list), 0);
+		
+		gtk_clist_thaw (GTK_CLIST (mime_list));
+
 	} else {
 		/* NO */
 	}
