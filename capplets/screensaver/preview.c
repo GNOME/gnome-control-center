@@ -199,6 +199,7 @@ show_preview (Screensaver *saver)
 	/* Note: kill this next line for a very interesting effect ... */
 	close_preview ();
 	if (!saver->command_line) return;
+	gtk_widget_map (preview_window);
 	show_screensaver (preview_window->window, saver, &preview_pid);
 	timeout_id =
 		gtk_timeout_add (500, (GtkFunction)
@@ -216,6 +217,7 @@ close_preview (void)
 	if (preview_pid) {
 		kill (preview_pid, SIGTERM);
 		preview_pid = 0;
+		gtk_widget_unmap (preview_window);
 	}
 }
 
