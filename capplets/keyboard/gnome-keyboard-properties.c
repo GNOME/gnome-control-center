@@ -150,9 +150,11 @@ bell_to_widget (GConfValue *value)
 	gint val = 2;
 
 	new_value = gconf_value_new (GCONF_VALUE_INT);
-	gconf_string_to_enum (bell_enums,
-			      gconf_value_get_string (value),
-			      &val);
+	if (value->type == GCONF_VALUE_STRING) {
+		gconf_string_to_enum (bell_enums,
+				      gconf_value_get_string (value),
+				      &val);
+	}
 	gconf_value_set_int (new_value, val);
 
 	return new_value;

@@ -57,11 +57,10 @@ GHashTable *capplet_hash = NULL;
 static char * 
 find_icon (const char *icon, GnomeDesktopItem *dentry) 
 {
-        char *icon_file = strdup (icon);
+        char *icon_file = NULL;
 
-	if (icon_file[0] == 0) {
-		g_free(icon_file);
-		icon_file = NULL;
+	if (icon && icon[0]) {
+		icon_file = g_strdup (icon);
 	}
 	
 	if (icon_file) {
