@@ -256,11 +256,10 @@ preferences_apply_now (Preferences *prefs)
         /* Ignore buttons above 3 -- these are assumed to be a wheel. If we
 	 * have a non-wheeled mouse, this may do weird things */
 
+        XGetPointerMapping(GDK_DISPLAY (), buttons, MAX_BUTTONS);
         max = MIN (prefs->nbuttons, 3);
         for (i = 0; i < max; ++i)
                 buttons[i] = prefs->rtol ? (max - i) : (i + 1);
-        for (; i < prefs->nbuttons; ++i)
-                buttons[i] = i + 1;
 
         XSetPointerMapping (GDK_DISPLAY (), buttons, prefs->nbuttons);
 
