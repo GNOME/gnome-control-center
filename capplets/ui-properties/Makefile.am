@@ -2,12 +2,7 @@ bin_PROGRAMS = gnome2-ui-properties
 
 gnome2_ui_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
 gnome2_ui_properties_SOURCES = \
-	prefs-widget.c			prefs-widget.h\
-	prefs-widget-mdi.c		prefs-widget-mdi.h\
-	prefs-widget-dialogs.c	prefs-widget-dialogs.h\
-	prefs-widget-app.c		prefs-widget-app.h\
-	preferences.c			preferences.h\
-	main.c
+	gnome-ui-properties.c
 
 @INTLTOOL_DESKTOP_RULE@
 
