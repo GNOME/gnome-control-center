@@ -208,7 +208,7 @@ sidebar_populate (CappletDirView *view)
 "<body bgcolor=\"#d9d9d9\" marginheight=\"0\" marginwidth=\"0\">"
 "<table border=\"0\" width=\"100%%\" cellspacing=\"1\" cellpadding=\"4\">"
 "<tr><td colspan=\"3\">&nbsp;</td></tr>"
-"<tr valign=\"center\"><td width=\"48\"><a href=\"%s\"><img src=\"%s\" alt=\"\" border=\"0\" align=\"center\"/></a></td><td><a href=\"%s\"><b>%s</b></a></td><td width=\"8\"><img src=\"%s\" alt=\"\" border=\"0\" align=\"right\"></tr>", CAPPLET_DIR_ENTRY (data->root_dir)->path, CAPPLET_DIR_ENTRY (data->root_dir)->icon, CAPPLET_DIR_ENTRY (data->root_dir)->path, utfs, (data->root_dir == view->capplet_dir) ? ART_DIR "/active.png" : ART_DIR "/blank.png");
+"<tr valign=\"center\"><td width=\"48\"><a href=\"%s\"><img src=\"%s\" alt=\"\" border=\"0\" align=\"center\"/></a></td><td><a href=\"%s\"><b>%s</b></a></td><td width=\"8\"><img src=\"%s\" alt=\"\" border=\"0\" align=\"center\"></tr>", CAPPLET_DIR_ENTRY (data->root_dir)->path, CAPPLET_DIR_ENTRY (data->root_dir)->icon, CAPPLET_DIR_ENTRY (data->root_dir)->path, utfs, (data->root_dir == view->capplet_dir) ? ART_DIR "/active.png" : ART_DIR "/blank.png");
 	g_free (utfs);
 	gtk_html_write (data->sidebar, stream, s, strlen (s));
 	g_free (s);
