@@ -450,20 +450,19 @@ capplet_control_launch (const gchar *capplet_name, gchar *window_title)
 	g_free (oaf_iid);
 
 	if (BONOBO_EX (&ev) || property_control == CORBA_OBJECT_NIL) {
-		g_critical ("Could not resolve PropertyControl");
+		/* Capplet is already running in this case */
+		g_free (moniker);
 		return NULL;
 	}
 
 	control_ref = Bonobo_PropertyControl_getControl (property_control, 0, &ev);
 
 	if (BONOBO_EX (&ev) || control_ref == CORBA_OBJECT_NIL) {
-		/* Capplet is already running in this case */
 		bonobo_object_release_unref (property_control, &ev);
 		g_free (moniker);
 		return NULL;
 	}
 
-	/* FIXME: Use a human-readable capplet name here */
 	app = gnome_dialog_new (window_title, GNOME_STOCK_BUTTON_OK,
 				GNOME_STOCK_BUTTON_CANCEL, NULL);
 	gtk_object_set_data (GTK_OBJECT (app), "property-control", property_control);
