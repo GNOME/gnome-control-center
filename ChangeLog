@@ -1,3 +1,15 @@
+1999-02-01  Felix Bellaby <felix@pooh.u-net.com>
+
+	* capplets/mouse-properties/mouse-properties.c (main):
+	Only restart one instance of the program to apply the settings.
+	* capplets/bell-properties/bell-properties.c (main): ditto
+	* capplets/keyboard-properties/keyboard-properties.c (main): ditto
+	* capplets/background-properties/app-background.c (main): ditto
+	* capplets/screensaver-properties/screensaver-properties-capplet.c (main): ditto
+	(get_saver_frame): create setup_button before referencing it.
+	* capplets/sound-properties/sound-properties.c (main): ditto,
+	let gnome-session start up the new session aware esd.
+
 1999-01-12  The Rasterman  <raster@redhat.com>
 
 	modify makefiles and configure to detect X11 imlbi separately and 
