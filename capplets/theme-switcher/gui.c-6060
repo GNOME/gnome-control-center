@@ -49,7 +49,7 @@ make_main(void)
   gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
   auto_preview = gtk_check_button_new ();
   
-  gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (auto_preview), gnome_config_get_bool ("/theme-switcher-capplet/settings/auto=FALSE"));
+  gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (auto_preview), gnome_config_get_bool ("/theme-switcher-capplet/settings/auto=TRUE"));
   gtk_signal_connect (GTK_OBJECT (auto_preview), "toggled", GTK_SIGNAL_FUNC (auto_callback), NULL);
   gtk_container_add (GTK_CONTAINER (auto_preview), label);
   gtk_box_pack_start (GTK_BOX (hbxo), auto_preview, FALSE, FALSE, 0);
