@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.5.8\n"
-"POT-Creation-Date: 2003-01-20 19:35+0100\n"
-"PO-Revision-Date: 2003-01-20 19:42+0100\n"
+"POT-Creation-Date: 2003-01-21 12:53+0100\n"
+"PO-Revision-Date: 2003-01-21 12:54+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -390,6 +390,11 @@ msgstr "Bare aktiver innstillingene og avslutt"
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Det oppsto en feil under visning av hjelp: %s"
+
+#: capplets/common/capplet-stock-icons.c:94
+#, c-format
+msgid "Unable to load capplet stock icon '%s'\n"
+msgstr "Kan ikke laste standard ikon, «%s», for capplet\n"
 
 #: capplets/common/file-transfer-dialog.c:95
 #, c-format
@@ -1943,6 +1948,10 @@ msgstr ""
 "«Brukervalg for tema» ikke er korrekt installert, eller at du ikke har "
 "installert pakken «gnome-themes»."
 
+#: capplets/theme-switcher/gnome-theme-save.c:72
+msgid "Theme name must be present"
+msgstr "Navn på tema må være oppgitt"
+
 #: capplets/theme-switcher/gnome-theme-manager.c:665
 #: capplets/theme-switcher/gnome-theme-manager.c:725
 msgid "Custom theme"
@@ -2426,21 +2435,31 @@ msgid ""
 "The order of subpixel elements on an LCD screen; only used when antialiasing "
 "is set to \"rgba\". Possible values are: \"rgb\" - red on left, most common. "
 "\"bgr\" - blue on left. \"vrgb\" - red on top. \"vbgr\" - red on bottom."
-msgstr "Rekkefølgen på elementer under pikselnivå på en LCD-skjerm; brukes kun når antialiasing er satt til «rgba». Mulige verdier er: «rgb» - rød til venstre, mest vanlig. «bgr» - blå til venstre. «vrgb» - rød øverst. «vbgr» - rød nederst."
+msgstr ""
+"Rekkefølgen på elementer under pikselnivå på en LCD-skjerm; brukes kun når "
+"antialiasing er satt til «rgba». Mulige verdier er: «rgb» - rød til venstre, "
+"mest vanlig. «bgr» - blå til venstre. «vrgb» - rød øverst. «vbgr» - rød "
+"nederst."
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:7
 msgid ""
 "The type of antialiasing to use when rendering fonts. Possible values are: "
 "\"none\" - no antialiasing. \"grayscale\" - standard grayscale antialiasing. "
 "\"rgba\" - subpixel antialiasing. (LCD screens only)."
-msgstr "Type antialiasing som skal brukes ved rendring av skrifter. Mulige verdier er: «none» - ingen antialiasing. «greyscale» - standard antialiasing med gråtoner. «rgba» - antialiasing under pikselnivå (Kun LCD-skjermer)"
+msgstr ""
+"Type antialiasing som skal brukes ved rendring av skrifter. Mulige verdier "
+"er: «none» - ingen antialiasing. «greyscale» - standard antialiasing med "
+"gråtoner. «rgba» - antialiasing under pikselnivå (Kun LCD-skjermer)"
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:8
 msgid ""
 "The type of hinting to use when rendering fonts. Possible values are: \"none"
 "\" - no hinting, \"slight\", \"medium\", and \"full\" - as much hinting as "
 "possible; may cause distortion of letter forms."
-msgstr "Type hinting som skal brukes ved rendring av skrifter. Mulige verdier er «none» - ingen hinting, «slight», «medium» og «full» - så mye hinting som mulig; kan forårsake forvrengning av bokstavenes form."
+msgstr ""
+"Type hinting som skal brukes ved rendring av skrifter. Mulige verdier er "
+"«none» - ingen hinting, «slight», «medium» og «full» - så mye hinting som "
+"mulig; kan forårsake forvrengning av bokstavenes form."
 
 #~ msgid "That accelerator key is already in use by: %s\n"
 #~ msgstr "Denne akselleratortasten er allerede i bruk av: %s\n"
