@@ -388,6 +388,7 @@ get_mime_clist (void)
                                         GTK_POLICY_AUTOMATIC,
                                         GTK_POLICY_AUTOMATIC);
 	clist = gtk_clist_new_with_titles (2, titles);
+	gtk_widget_set_usize (clist, 400, 300); 
         gtk_signal_connect (GTK_OBJECT (clist),
                             "select_row",
                             GTK_SIGNAL_FUNC (selected_row_callback),
