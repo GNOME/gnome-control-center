@@ -94,10 +94,7 @@ create_dialog (void)
 }
 
 static void
-toolbar_detachable_cb (GConfPropertyEditor *peditor,
-		       gchar               *key,
-		       GConfValue          *value,
-		       GladeXML            *dialog)
+show_handlebar (GladeXML *dialog, gboolean show)
 {
   GtkWidget *handlebox;
   GtkWidget *toolbar;
@@ -114,8 +111,7 @@ toolbar_detachable_cb (GConfPropertyEditor *peditor,
     gtk_container_remove (GTK_CONTAINER (frame), GTK_BIN (frame)->child);
   if (GTK_BIN (handlebox)->child)
     gtk_container_remove (GTK_CONTAINER (handlebox), GTK_BIN (handlebox)->child);
-
-  if (gconf_value_get_bool (value))
+  if (show)
     {
       gtk_container_add (GTK_CONTAINER (frame), handlebox);
       gtk_container_add (GTK_CONTAINER (handlebox), toolbar);
@@ -126,8 +122,80 @@ toolbar_detachable_cb (GConfPropertyEditor *peditor,
       gtk_container_add (GTK_CONTAINER (frame), toolbar);
     }
   g_object_unref (toolbar);
+
+  
 }
 
+static void
+set_toolbar_style (GladeXML *dialog, const char *value)
+{
+  static const GtkToolbarStyle gtk_toolbar_styles[] = 
+    { GTK_TOOLBAR_BOTH, GTK_TOOLBAR_ICONS, GTK_TOOLBAR_TEXT };
+
+  int enum_val;
+
+  gconf_string_to_enum (toolbar_style_enums, value, &enum_val);
+
+  gtk_toolbar_set_style (GTK_TOOLBAR (WID("toolbar_toolbar")), 
+			 gtk_toolbar_styles[enum_val]);
+}
+
+static void
+toolbar_detachable_cb (GConfPropertyEditor *peditor,
+		       gchar               *key,
+		       GConfValue          *value,
+		       GladeXML            *dialog)
+{
+  show_handlebar (dialog, gconf_value_get_bool (value));
+}
+
+static void
+toolbar_style_cb (GConfPropertyEditor *peditor,
+		  gchar               *key,
+		  GConfValue          *value,
+		  GladeXML            *dialog)
+{
+  set_toolbar_style (dialog, gconf_value_get_string (value));
+}
+
+static void
+set_have_icons (GladeXML *dialog, gboolean value)
+{
+  static char *menu_item_names[] = 
+    {
+      "menu1",
+      "menu_item_1",
+      "menu_item_2",
+      "menu_item_3",
+      "menu_item_4",
+      "menu_item_5",
+      NULL
+    };
+  
+  char **name;
+  
+  for (name = menu_item_names; *name != NULL; name++)
+    {
+      GtkImageMenuItem *item = GTK_IMAGE_MENU_ITEM (WID (*name));
+      GtkWidget *image;
+      if (value) 
+	{
+	  image = g_object_get_data (G_OBJECT (item), "image");
+	  if (image)
+	    {
+	      gtk_image_menu_item_set_image (item, image);
+	      g_object_unref (image);
+	    }
+	}
+      else
+	{
+	  image = gtk_image_menu_item_get_image (item);
+	  g_object_set_data (G_OBJECT (item), "image", image);
+	  g_object_ref (image);
+	  gtk_image_menu_item_set_image (item, NULL);
+	}
+    }
+}
 
 static void
 menus_have_icons_cb (GConfPropertyEditor *peditor,
@@ -135,7 +203,7 @@ menus_have_icons_cb (GConfPropertyEditor *peditor,
 		     GConfValue          *value,
 		     GladeXML            *dialog)
 {
-  g_print ("menus_have_icons_cb: %d\n", gconf_value_get_bool (value));
+  set_have_icons (dialog, gconf_value_get_bool (value));
 }
 
 static gint
@@ -151,6 +219,7 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 {
   GtkWidget *widget;
   GConfPropertyEditor *peditor;
+  char *toolbar_style;
 
   peditor = gconf_peditor_new_boolean
     (changeset, "/desktop/gnome/interface/toolbar_detachable", WID ("detachable_toolbars_toggle"), NULL);
@@ -159,12 +228,19 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
   peditor = gconf_peditor_new_boolean
     (changeset, "/desktop/gnome/interface/menus_have_icons", WID ("menu_icons_toggle"), NULL);
   g_signal_connect (peditor, "value_changed", menus_have_icons_cb, dialog);
+  
+  set_have_icons (dialog, 
+		  gconf_client_get_bool (gconf_client_get_default (),
+					 "/desktop/gnome/interface/menus_have_icons",
+					 NULL));
 
-  gconf_peditor_new_select_menu
+  peditor = gconf_peditor_new_select_menu
     (changeset, "/desktop/gnome/interface/toolbar_style", WID ("toolbar_style_omenu"),
      "conv-to-widget-cb", toolbar_to_widget,
      "conv-from-widget-cb", toolbar_from_widget,
      NULL);
+  g_signal_connect (peditor, "value_changed", 
+		    G_CALLBACK (toolbar_style_cb), dialog);
 
   widget = WID ("toolbar_handlebox");
   g_signal_connect (G_OBJECT (widget), "button_press_event", button_press_blocker, NULL);
@@ -172,6 +248,20 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
   widget = WID ("gnome_ui_properties_dialog");
   g_signal_connect (G_OBJECT (widget), "response",
 		    (GCallback) dialog_button_clicked_cb, changeset);
+
+  show_handlebar (dialog, 
+		  gconf_client_get_bool (gconf_client_get_default (),
+					 "/desktop/gnome/interface/toolbar_detachable",
+					 NULL));
+
+  toolbar_style = gconf_client_get_string (gconf_client_get_default (),
+					   "/desktop/gnome/interface/toolbar_style", 
+					   NULL);
+  
+  set_toolbar_style (dialog, toolbar_style);
+
+  g_free (toolbar_style);
+
   gtk_widget_show_all (widget);
 }
 

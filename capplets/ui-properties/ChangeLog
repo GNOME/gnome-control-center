@@ -1,3 +1,12 @@
+2002-03-21  Dave Camp  <dave@ximian.com>
+
+	* gnome-ui-properties.c: (show_handlebar), (set_toolbar_style),
+	(toolbar_style_cb), (set_have_icons): New functions.
+	(toolbar_detachable_cb): Call show_handlebar.
+	(menus_have_icons_cb): Call set_have_icons.
+	(setup_dialog): Connect to the style peditor's value_changed signal,
+	and set the initial states of the example widgets.
+
 2002-03-19  Richard Hestilow  <hestilow@ximian.com>
 
 	* gnome-ui-properties.c (*_to/from_widget): Convert to new signature.
