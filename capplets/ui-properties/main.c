@@ -48,15 +48,21 @@ static Preferences *prefs;
 static Preferences *old_prefs;
 static PrefsWidget *prefs_widget;
 
+static Archive *archive;
+static gboolean outside_location;
+
 static void
 store_archive_data (void) 
 {
-	Archive *archive;
 	Location *location;
 	xmlDocPtr xml_doc;
 
-	archive = ARCHIVE (archive_load (FALSE));
-	location = archive_get_current_location (archive);
+	if (capplet_get_location () == NULL)
+		location = archive_get_current_location (archive);
+	else
+		location = archive_get_location (archive,
+						 capplet_get_location ());
+
 	xml_doc = preferences_write_xml (prefs);
 	location_store_xml (location, "ui-properties-capplet",
 			    xml_doc, STORE_MASK_PREVIOUS);
@@ -67,14 +73,17 @@ store_archive_data (void)
 static void
 ok_cb (GtkWidget *widget) 
 {
-	preferences_save (prefs);
+	if (!outside_location)
+		preferences_save (prefs);
+
 	store_archive_data ();
 }
 
 static void
 cancel_cb (GtkWidget *widget) 
 {
-	preferences_save (old_prefs);
+	if (!outside_location)
+		preferences_save (old_prefs);
 }
 
 static void 
@@ -108,9 +117,8 @@ do_get_xml (void)
 }
 
 static void
-do_set_xml (void) 
+do_set_xml (gboolean apply_settings) 
 {
-	Preferences *prefs;
 	xmlDocPtr doc;
 	char *buffer = NULL;
 	int len = 0;
@@ -126,9 +134,9 @@ do_set_xml (void)
 
 	prefs = preferences_read_xml (doc);
 
-	if (prefs)
+	if (prefs && apply_settings)
 		preferences_save (prefs);
-	else
+	else if (prefs == NULL)
 		g_warning ("Error while reading the screensaver config file");
 }
 
@@ -156,7 +164,7 @@ main (int argc, char **argv)
 		return 0;
 	}
 	else if (res == 4) {
-	do_set_xml ();
+		do_set_xml (TRUE);
 		return 0;
 	}
 
@@ -187,10 +195,22 @@ main (int argc, char **argv)
 
 	gnome_window_icon_set_default_from_file (GNOME_ICONDIR"/gnome-applications.png");
 
-	prefs = PREFERENCES (preferences_new ());
-	preferences_load (prefs);
+	archive = ARCHIVE (archive_load (FALSE));
 
-	if (token) {
+	if (capplet_get_location () != NULL &&
+	    strcmp (capplet_get_location (),
+		    archive_get_current_location_id (archive)))
+	{
+		outside_location = TRUE;
+		do_set_xml (FALSE);
+		preferences_freeze (prefs);
+	} else {
+		outside_location = FALSE;
+		prefs = PREFERENCES (preferences_new ());
+		preferences_load (prefs);
+	}
+
+	if (!outside_location && token) {
 		preferences_apply_now (prefs);
 	}
 

@@ -80,7 +80,7 @@ struct _Preferences
 
 	GList    *screensavers;
 
-	gboolean  frozen;     /* TRUE if we shouldn't reflect
+	gint  frozen;         /* TRUE if we shouldn't reflect
 			       * preference changes in capplet */
 	GTree *config_db;     /* key-value database of config options */
 

@@ -48,15 +48,21 @@ static PrefsWidget *prefs_widget;
 static guint ok_handler_id;
 static guint cancel_handler_id;
 
+static Archive *archive;
+static gboolean outside_location;
+
 static void
 store_archive_data (void) 
 {
-	Archive *archive;
 	Location *location;
 	xmlDocPtr xml_doc;
 
-	archive = ARCHIVE (archive_load (FALSE));
-	location = archive_get_current_location (archive);
+	if (capplet_get_location () == NULL)
+		location = archive_get_current_location (archive);
+	else
+		location = archive_get_location (archive,
+						 capplet_get_location ());
+
 	xml_doc = preferences_write_xml (prefs);
 	location_store_xml (location, "background-properties-capplet",
 			    xml_doc, STORE_MASK_PREVIOUS);
@@ -67,8 +73,11 @@ store_archive_data (void)
 static void
 ok_cb (GtkWidget *widget) 
 {
-	preferences_save (prefs);
-	preferences_apply_now (prefs);
+	if (!outside_location) {
+		preferences_save (prefs);
+		preferences_apply_now (prefs);
+	}
+
 	gtk_signal_disconnect (GTK_OBJECT (prefs_widget), ok_handler_id);
 	gtk_signal_disconnect (GTK_OBJECT (prefs_widget), cancel_handler_id);
 	gtk_object_destroy (GTK_OBJECT (prefs_widget));
@@ -78,8 +87,11 @@ ok_cb (GtkWidget *widget)
 static void
 cancel_cb (GtkWidget *widget) 
 {
-	preferences_save (old_prefs);
-	preferences_apply_now (old_prefs);
+	if (!outside_location) {
+		preferences_save (old_prefs);
+		preferences_apply_now (old_prefs);
+	}
+
 	gtk_signal_disconnect (GTK_OBJECT (prefs_widget), ok_handler_id);
 	gtk_signal_disconnect (GTK_OBJECT (prefs_widget), cancel_handler_id);
 	gtk_object_destroy (GTK_OBJECT (prefs_widget));
@@ -118,17 +130,18 @@ do_get_xml (void)
 }
 
 static void
-do_set_xml (void) 
+do_set_xml (gboolean apply_settings) 
 {
-	Preferences *prefs;
 	xmlDocPtr doc;
 	char *buffer = NULL;
 	int len = 0;
+	int bytes_read;
 
 	while (!feof (stdin)) {
 		if (!len) buffer = g_new (char, 16384);
 		else buffer = g_renew (char, buffer, len + 16384);
-		fread (buffer + len, 1, 16384, stdin);
+		bytes_read = fread (buffer + len, 1, 16384, stdin);
+		buffer[len + bytes_read] = '\0';
 		len += 16384;
 	}
 
@@ -138,7 +151,9 @@ do_set_xml (void)
 
 	if (prefs) {
 		preferences_save (prefs);
-		preferences_apply_now (prefs);
+
+		if (apply_settings) 
+			preferences_apply_now (prefs);
 	} else {
 		g_warning ("Error while reading the screensaver config file");
 	}
@@ -176,7 +191,7 @@ main (int argc, char **argv)
 		return 0;
 	}
 	else if (res == 4) {
-		do_set_xml ();
+		do_set_xml (TRUE);
 		return 0;
 	}
 	else if (res == 5) {
@@ -212,10 +227,22 @@ main (int argc, char **argv)
 	gnome_window_icon_set_default_from_file
 		(GNOME_ICONDIR"/gnome-ccbackground.png");
 
-	prefs = PREFERENCES (preferences_new ());
-	preferences_load (prefs);
+	archive = ARCHIVE (archive_load (FALSE));
 
-	if (token || res == 1) {
+	if (capplet_get_location () != NULL &&
+	    strcmp (capplet_get_location (),
+		    archive_get_current_location_id (archive)))
+	{
+		outside_location = TRUE;
+		do_set_xml (FALSE);
+		preferences_freeze (prefs);
+	} else {
+		outside_location = FALSE;
+		prefs = PREFERENCES (preferences_new ());
+		preferences_load (prefs);
+	}
+
+	if (!outside_location && (token || res == 1)) {
 		preferences_apply_now (prefs);
 	}
 

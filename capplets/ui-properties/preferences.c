@@ -188,7 +188,7 @@ preferences_freeze (Preferences *prefs)
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));
 
-	prefs->frozen = TRUE;
+	prefs->frozen++;
 }
 
 void
@@ -197,7 +197,7 @@ preferences_thaw (Preferences *prefs)
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));
 
-	prefs->frozen = FALSE;
+	if (prefs->frozen > 0) prefs->frozen--;
 }
 
 Preferences *

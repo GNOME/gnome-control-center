@@ -29,6 +29,7 @@
 
 #include <gnome.h>
 #include <gdk-pixbuf/gdk-pixbuf-xlibrgb.h>
+#include <capplet-widget.h>
 
 #include "preferences.h"
 #include "applier.h"
@@ -307,15 +308,18 @@ preferences_save (Preferences *prefs)
 void
 preferences_changed (Preferences *prefs) 
 {
-	if (prefs->frozen) return;
+	/* FIXME: This is a really horrible kludge... */
+	if (prefs->frozen > 1) return;
 
-	if (prefs->timeout_id)
-		gtk_timeout_remove (prefs->timeout_id);
+	if (prefs->frozen == 0) {
+		if (prefs->timeout_id)
+			gtk_timeout_remove (prefs->timeout_id);
 
-	if (prefs->auto_apply)
-		prefs->timeout_id = 
-			gtk_timeout_add (2000, (GtkFunction) apply_timeout_cb,
-					 prefs);
+		if (prefs->auto_apply)
+			prefs->timeout_id = 
+				gtk_timeout_add
+				(2000, (GtkFunction) apply_timeout_cb, prefs);
+	}
 
 	applier_apply_prefs (applier, prefs, FALSE, TRUE);
 }
@@ -346,13 +350,13 @@ preferences_apply_preview (Preferences *prefs)
 void 
 preferences_freeze (Preferences *prefs) 
 {
-	prefs->frozen = TRUE;
+	prefs->frozen++;
 }
 
 void 
 preferences_thaw (Preferences *prefs) 
 {
-	prefs->frozen = FALSE;
+	if (prefs->frozen > 0) prefs->frozen--;
 }
 
 Preferences *

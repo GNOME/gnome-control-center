@@ -48,7 +48,7 @@ struct _Preferences
 {
 	GtkObject         object;
 
-	gboolean          frozen;
+	gint              frozen;
 	gboolean          auto_apply;
 	guint             timeout_id;
 

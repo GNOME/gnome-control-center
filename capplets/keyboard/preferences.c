@@ -262,12 +262,12 @@ preferences_apply_now (Preferences *prefs)
 
 void preferences_freeze (Preferences *prefs) 
 {
-	prefs->frozen = TRUE;
+	prefs->frozen++;
 }
 
 void preferences_thaw (Preferences *prefs) 
 {
-	prefs->frozen = FALSE;
+	if (prefs->frozen > 0) prefs->frozen--;
 }
 
 Preferences *

@@ -65,7 +65,7 @@ struct _Preferences
 {
 	GtkObject         object;
 
-	gboolean          frozen;
+	gint              frozen;
 	guint             timeout_id;
 
 	gboolean          enable_esd;

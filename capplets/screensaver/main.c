@@ -31,6 +31,7 @@
 #include <tree.h>
 #include <parser.h>
 #include <xmlIO.h>
+#include <errno.h>
 
 #include <glade/glade.h>
 
@@ -51,15 +52,21 @@ static PrefsWidget *prefs_widget;
 
 static CappletWidget *capplet;
 
+static Archive *archive;
+static gboolean outside_location;
+
 static void
 store_archive_data (void) 
 {
-	Archive *archive;
 	Location *location;
 	xmlDocPtr xml_doc;
 
-	archive = ARCHIVE (archive_load (FALSE));
-	location = archive_get_current_location (archive);
+	if (capplet_get_location () == NULL)
+		location = archive_get_current_location (archive);
+	else
+		location = archive_get_location (archive,
+						 capplet_get_location ());
+
 	xml_doc = preferences_write_xml (prefs);
 	location_store_xml (location, "screensaver-properties-capplet",
 			    xml_doc, STORE_MASK_PREVIOUS);
@@ -81,9 +88,11 @@ try_cb (GtkWidget *widget)
 
 	old_sm = prefs->selection_mode;
 
-	prefs_widget_store_prefs (prefs_widget, prefs);
-	preferences_save (prefs);
-	setup_dpms (prefs);
+	if (!outside_location) {
+		prefs_widget_store_prefs (prefs_widget, prefs);
+		preferences_save (prefs);
+		setup_dpms (prefs);
+	}
 
 	if (old_sm == SM_DISABLE_SCREENSAVER && 
 	    prefs->selection_mode != SM_DISABLE_SCREENSAVER)
@@ -100,14 +109,17 @@ revert_cb (GtkWidget *widget)
 
 	old_sm = old_prefs->selection_mode;
 
-	preferences_save (old_prefs);
-	preferences_destroy (prefs);
+	if (!outside_location) {
+		preferences_save (old_prefs);
+		preferences_destroy (prefs);
+	}
+
 	prefs = preferences_new ();
 	preferences_load (prefs);
 
-	prefs->frozen = TRUE;
+	prefs->frozen++;
 	prefs_widget_get_prefs (prefs_widget, prefs);
-	prefs->frozen = FALSE;
+	prefs->frozen--;
 
 	setup_dpms (old_prefs);
 
@@ -128,16 +140,17 @@ ok_cb (GtkWidget *widget)
 
 	close_preview ();
 
-	prefs_widget_store_prefs (prefs_widget, prefs);
-	preferences_save (prefs);
-	setup_dpms (prefs);
-
-	if (old_sm == SM_DISABLE_SCREENSAVER && 
-	    prefs->selection_mode != SM_DISABLE_SCREENSAVER)
-		start_xscreensaver ();
-	else if (old_sm != SM_DISABLE_SCREENSAVER && 
-	    prefs->selection_mode == SM_DISABLE_SCREENSAVER)
-		stop_xscreensaver ();
+	if (!outside_location) {
+		prefs_widget_store_prefs (prefs_widget, prefs);
+		preferences_save (prefs);
+		setup_dpms (prefs);
+		if (old_sm == SM_DISABLE_SCREENSAVER && 
+		    prefs->selection_mode != SM_DISABLE_SCREENSAVER)
+			start_xscreensaver ();
+		else if (old_sm != SM_DISABLE_SCREENSAVER && 
+			 prefs->selection_mode == SM_DISABLE_SCREENSAVER)
+			stop_xscreensaver ();
+	}
 
 	store_archive_data ();
 }
@@ -151,15 +164,17 @@ cancel_cb (GtkWidget *widget)
 
 	close_preview ();
 
-	preferences_save (old_prefs);
-	setup_dpms (old_prefs);
+	if (!outside_location) {
+		preferences_save (old_prefs);
+		setup_dpms (old_prefs);
 
-	if (old_sm == SM_DISABLE_SCREENSAVER && 
-	    prefs->selection_mode != SM_DISABLE_SCREENSAVER)
-		start_xscreensaver ();
-	else if (old_sm != SM_DISABLE_SCREENSAVER && 
-	    prefs->selection_mode == SM_DISABLE_SCREENSAVER)
-		stop_xscreensaver ();
+		if (old_sm == SM_DISABLE_SCREENSAVER && 
+		    prefs->selection_mode != SM_DISABLE_SCREENSAVER)
+			start_xscreensaver ();
+		else if (old_sm != SM_DISABLE_SCREENSAVER && 
+			 prefs->selection_mode == SM_DISABLE_SCREENSAVER)
+			stop_xscreensaver ();
+	}
 }
 
 static void
@@ -183,7 +198,7 @@ setup_capplet_widget (void)
 	gtk_signal_connect (GTK_OBJECT (capplet), "cancel", 
 			    GTK_SIGNAL_FUNC (cancel_cb), NULL);		
 
-	prefs->frozen = TRUE;
+	prefs->frozen++;
 
 	prefs_widget = PREFS_WIDGET (prefs_widget_new ());
 
@@ -200,7 +215,7 @@ setup_capplet_widget (void)
 
 	gtk_widget_show_all (GTK_WIDGET (capplet));
 
-	prefs->frozen = FALSE;
+	prefs->frozen--;
 }
 
 static void
@@ -217,7 +232,7 @@ do_get_xml (void)
 }
 
 static void
-do_set_xml (void) 
+do_set_xml (gboolean apply_settings) 
 {
 	xmlDocPtr doc;
 	Preferences *old_prefs, *new_prefs;
@@ -240,7 +255,11 @@ do_set_xml (void)
 
 	if (new_prefs) {
 		new_prefs->config_db = old_prefs->config_db;
-		preferences_save (new_prefs);
+
+		if (apply_settings)
+			preferences_save (new_prefs);
+		else
+			prefs = new_prefs;
 	} else {
 		g_warning ("Error while reading the screensaver config file");
 	}
@@ -269,7 +288,7 @@ main (int argc, char **argv)
 		return 0;
 	}
 	else if (res == 4) {
-		do_set_xml ();
+		do_set_xml (TRUE);
 		return 0;
 	}
 
@@ -302,16 +321,30 @@ main (int argc, char **argv)
 		(GNOME_ICONDIR"/gnome-ccscreensaver.png");
 
 	init_resource_database (argc, argv);
-	prefs = preferences_new (); preferences_load (prefs);
+	archive = ARCHIVE (archive_load (FALSE));
 
-	if (token) {
+	if (capplet_get_location () != NULL &&
+	    strcmp (capplet_get_location (),
+		    archive_get_current_location_id (archive)))
+	{
+		outside_location = TRUE;
+		do_set_xml (FALSE);
+		prefs->frozen++;
+	} else {
+		outside_location = FALSE;
+		prefs = preferences_new ();
+		preferences_load (prefs);
+	}
+
+	if (!outside_location && token) {
 		if (prefs->selection_mode != SM_DISABLE_SCREENSAVER)
 			start_xscreensaver ();
 		setup_dpms (prefs);
 	}
 
 	if (!res) {
-		old_prefs = preferences_new (); preferences_load (old_prefs);
+		old_prefs = preferences_new ();
+		preferences_load (old_prefs);
 		setup_capplet_widget ();
 
 		capplet_gtk_main ();

@@ -40,7 +40,7 @@ struct _Preferences
 {
 	GtkObject         object;
 
-	gboolean          frozen;
+	gint              frozen;
 	guint             timeout_id;
 
 	GnomePreferences *gnome_prefs;
