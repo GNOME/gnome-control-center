@@ -1168,13 +1168,10 @@ static void wallpaper_properties_init (void) {
 		    G_CALLBACK (bg_properties_dragged_image), capplet);
 
   /* Dialog Buttons */
-  /* We are hiding the help button for now, since we have no docs */
-  /*
   label = gtk_button_new_from_stock (GTK_STOCK_HELP);
   gtk_dialog_add_action_widget (GTK_DIALOG (capplet->window), label,
 				GTK_RESPONSE_HELP);
   gtk_widget_show (label);
-  */
 
   label = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
   gtk_dialog_add_action_widget (GTK_DIALOG (capplet->window), label,
