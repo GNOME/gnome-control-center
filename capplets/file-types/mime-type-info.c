@@ -703,10 +703,8 @@ get_category_name (const gchar *mime_type)
 		return "Video";
 	else if (!strncmp (mime_type, "audio/", strlen ("audio/")))
 		return "Audio";
-	else {
-	    g_warning (mime_type);
+	else
 		return "Misc";
-	}
 }
 
 static const gchar *

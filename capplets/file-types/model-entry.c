@@ -88,27 +88,32 @@ model_entry_get_index (ModelEntry *parent, ModelEntry *child)
 }
 
 void
-model_entry_insert_child (ModelEntry *entry, ModelEntry *child, GtkTreeModel *model)
+model_entry_insert_child (ModelEntry *parent, ModelEntry *child, GtkTreeModel *model)
 {
-	ModelEntry *tmp;
+	ModelEntry **tmp;
 	GtkTreePath *path;
 	GtkTreeIter iter;
 
-	g_return_if_fail (entry != NULL);
-	g_return_if_fail (entry->type == MODEL_ENTRY_CATEGORY || entry->type == MODEL_ENTRY_SERVICES_CATEGORY ||
-			  entry->type == MODEL_ENTRY_NONE);
+	g_return_if_fail (parent != NULL);
+	g_return_if_fail (parent->type == MODEL_ENTRY_CATEGORY || parent->type == MODEL_ENTRY_SERVICES_CATEGORY ||
+			  parent->type == MODEL_ENTRY_NONE);
 	g_return_if_fail (child != NULL);
 	g_return_if_fail (model != NULL);
 	g_return_if_fail (IS_MIME_TYPES_MODEL (model));
 
-	if (entry->first_child == NULL) {
-		entry->first_child = child;
-	} else {
-		for (tmp = entry->first_child; tmp->next != NULL; tmp = tmp->next);
-		tmp->next = child;
+	for (tmp = &parent->first_child; *tmp != NULL; tmp = &((*tmp)->next)) {
+		if ((*tmp)->type < child->type)
+			continue;
+		if ((*tmp)->type > child->type ||
+		    (child->type == MODEL_ENTRY_CATEGORY &&
+		     strcmp (MIME_CATEGORY_INFO (child)->name,
+			     MIME_CATEGORY_INFO (*tmp)->name) < 0))
+				break;
 	}
 
-	child->parent = entry;
+	child->parent = parent;
+	child->next = *tmp;
+	*tmp = child;
 
 	mime_types_model_construct_iter (MIME_TYPES_MODEL (model), child, &iter);
 	path = gtk_tree_model_get_path (model, &iter);
