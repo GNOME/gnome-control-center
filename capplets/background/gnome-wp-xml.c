@@ -94,8 +94,13 @@ static void gnome_wp_xml_load_xml (GnomeWPCapplet * capplet,
 				   const gchar * filename) {
   xmlDoc * wplist;
   xmlNode * root, * list, * wpa;
+  gchar * nodelang;
+  const gchar ** syslangs;
   GdkColor color1, color2;
   GnomeWPItem * item;
+  gint i;
+
+  syslangs = g_get_language_names ();
 
   wplist = xmlParseFile (filename);
 
@@ -118,7 +123,19 @@ static void gnome_wp_xml_load_xml (GnomeWPCapplet * capplet,
 	  }
 	} else if (!strcmp (wpa->name, "name")) {
 	  if (wpa->last != NULL) {
-	    wp->name = g_strdup (g_strstrip (wpa->last->content));
+	    nodelang = xmlNodeGetLang (wpa->last);
+
+	    if (wp->name == NULL && nodelang == NULL) {
+	       wp->name = g_strdup (g_strstrip (wpa->last->content));
+            } else {
+	       for (i = 0; syslangs[i] != NULL; i++) {
+	         if (!strcmp (syslangs[i], nodelang)) {
+	           wp->name = g_strdup (g_strstrip (wpa->last->content));
+	         }
+	       }
+	    }
+
+	    xmlFree (nodelang);
 	  }
 	} else if (!strcmp (wpa->name, "imguri")) {
 	  if (wpa->last != NULL) {
