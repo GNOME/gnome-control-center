@@ -48,7 +48,7 @@ gnomecc_LDADD = \
 	@GNOMECC_LIBS@					\
 	$(INTLLIBS)
 
-EXTRA_DIST = gnomecc.desktop.in $(appicon_DATA) $(splash_DATA) $(glade_DATA) $(groups_in_files)
+EXTRA_DIST = gnomecc.desktop.in Gnome.directory.in.in $(appicon_DATA) $(splash_DATA) $(glade_DATA) $(groups_in_files)
 
 paneldir        = $(datadir)/gnome/apps/Settings
 ccenterdir      = $(datadir)/control-center/capplets

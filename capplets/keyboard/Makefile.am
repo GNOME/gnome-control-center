@@ -17,9 +17,6 @@ defaults_DATA = keyboard-properties.xml
 oafdir = $(datadir)/oaf
 oaf_DATA = Bonobo_Control_Capplet_keyboard_properties.oaf
 
-EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST) $(oaf_DATA) $(defaults_DATA)
-
-
 ##
 ## You should not need to modify anything below this line
 ##
@@ -28,7 +25,7 @@ EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST) $(oaf_DATA) $(defaults_DATA)
 
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
-EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST)
+EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST) $(defaults_DATA) $(oaf_DATA)
 iconsdir   = $(GNOMECC_ICONS_DIR)
 Gladedir   = $(GNOMECC_GLADE_DIR)
 pixmapdir  = $(GNOMECC_PIXMAPS_DIR)

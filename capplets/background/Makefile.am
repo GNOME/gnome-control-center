@@ -7,7 +7,7 @@ background_properties_SOURCES = \
 	main.c\
 	prefs-widget.c		prefs-widget.h \
 	preferences.c		preferences.h \
-	applier.c
+	applier.c		applier.h
 
 pixmap_DATA = 
 

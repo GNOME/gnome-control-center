@@ -17,7 +17,7 @@ pixmap_DATA = mouse-left.png mouse-right.png
 
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
-EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST)
+EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST) mouse-left.png mouse-right.png
 iconsdir   = $(GNOMECC_ICONS_DIR)
 Gladedir   = $(GNOMECC_GLADE_DIR)
 pixmapdir  = $(GNOMECC_PIXMAPS_DIR)

@@ -12,7 +12,6 @@ pixmap_DATA =
 ##
 ## this is not generic
 ##
-EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST) $(oaf_DATA) $(defaults_DATA)
 
 defaultsdir= $(datadir)/control-center/defaults
 defaults_DATA = sound-properties.xml
@@ -28,6 +27,7 @@ oaf_DATA = Bonobo_Control_Capplet_sound_properties.oaf
 
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
+EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST) $(defaults_DATA) $(oaf_DATA)
 iconsdir   = $(GNOMECC_ICONS_DIR)
 Gladedir   = $(GNOMECC_GLADE_DIR)
 pixmapdir  = $(GNOMECC_PIXMAPS_DIR)
