@@ -99,6 +99,7 @@ GtkWidget *default_menu;
 GtkWidget *application_button, *viewer_button;
 GtkLabel  *mime_label;
 GtkWidget *description_entry;
+gboolean sort_column_clicked [TOTAL_COLUMNS];
 
 /*
  *  main
@@ -775,6 +776,15 @@ init_mime_capplet (const char *scroll_to_mime_type)
 	/* Sort by description. The description is the first column in the list. */
 	gtk_clist_set_sort_column (GTK_CLIST (mime_list), COLUMN_DESCRIPTION);
 	gtk_clist_sort (GTK_CLIST (mime_list));
+	GTK_CLIST (mime_list)->sort_type = GTK_SORT_ASCENDING;
+
+	/* Set up initial column click tracking state. We do this so the initial clicks on
+	 * columns will allow us to set the proper sort state for the user.
+	 */
+	sort_column_clicked[0] = TRUE; /* First sort column has been click by us in setup code */
+	for (index = 1; index < TOTAL_COLUMNS; index++) {
+		sort_column_clicked[index] = FALSE;
+	}
 	
 	/* Attempt to select specified mime type in list */
 	if (scroll_to_mime_type != NULL) {		
@@ -836,7 +846,6 @@ nautilus_mime_type_capplet_update_info (const char *mime_type) {
 	icon_name = gnome_vfs_mime_get_icon (mime_type);
 	if (icon_name != NULL) {
 		path = gnome_vfs_icon_path_from_filename (icon_name);
-		g_message ("Looking for icon %s", path);
 		if (path != NULL) {
 			nautilus_mime_type_icon_entry_set_icon (NAUTILUS_MIME_ICON_ENTRY (icon_entry), path);
 			g_free (path);
@@ -1684,23 +1693,29 @@ sort_case_insensitive (GtkCList *clist, gpointer ptr1, gpointer ptr2)
 	return strcasecmp (text1, text2);
 }
 
-
 static void
 column_clicked (GtkCList *clist, gint column, gpointer user_data)
 {
 	gtk_clist_set_sort_column (clist, column);
 
+	/* If the user has not clicked the column yet, make sure
+	 * that the sort type is descending the first time.
+	 */
+	 if (!sort_column_clicked [column]) {
+	 	 g_message ("Setting flag");
+		clist->sort_type = GTK_SORT_DESCENDING;
+		sort_column_clicked [column] = TRUE;
+	}
+		
 	/* Toggle sort type */
 	if (clist->sort_type == GTK_SORT_ASCENDING) {
 		gtk_clist_set_sort_type (clist, GTK_SORT_DESCENDING);
-
 	} else {
 		gtk_clist_set_sort_type (clist, GTK_SORT_ASCENDING);
 	}
 	
 	gtk_clist_sort (clist);
 }
-
 
 static GtkWidget *
 create_mime_list_and_scroller (void)
