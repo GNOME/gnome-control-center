@@ -599,7 +599,7 @@ mime_type_get_pretty_name_for_server (Bonobo_ServerInfo *server)
 		return display_name;					
 	}
 			
-        return g_strdup_printf ("View as %s", view_as_name);
+        return g_strdup_printf (_("View as %s"), view_as_name);
 }
 
 static MimeTypeInfo *
@@ -678,24 +678,11 @@ static GSList *
 get_lang_list (void)
 {
         GSList *retval;
-        const char *lang;
-        char *equal_char;
+        const GList *l;
 
         retval = NULL;
-
-        lang = g_getenv ("LANGUAGE");
-
-        if (lang == NULL)
-                lang = g_getenv ("LANG");
-
-
-        if (lang != NULL) {
-                equal_char = strchr (lang, '=');
-                if (equal_char != NULL)
-                        lang = equal_char + 1;
-
-                retval = g_slist_prepend (retval, g_strdup (lang));
-        }
+        for (l = gnome_i18n_get_language_list ("LANG") ; l; l = l->next) 
+                retval = g_slist_append (retval, g_strdup ((gchar *)l->data));
         
         return retval;
 }
