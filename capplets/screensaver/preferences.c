@@ -283,6 +283,16 @@ preferences_read_xml (xmlDocPtr xml_doc)
 			prefs->cycle = xml_get_number (node);
 		else if (!strcmp (node->name, "programs"))
 			prefs->screensavers = xml_get_programs_list (node);
+		else if (!strcmp (node->name, "selection-mode"))
+			prefs->selection_mode = xml_get_number (node);
+		else if (!strcmp (node->name, "use-dpms"))
+			prefs->power_management = TRUE;
+		else if (!strcmp (node->name, "standby-time"))
+			prefs->standby_time = xml_get_number (node);
+		else if (!strcmp (node->name, "suspend-time"))
+			prefs->suspend_time = xml_get_number (node);
+		else if (!strcmp (node->name, "shutdown-time"))
+			prefs->power_down_time = xml_get_number (node);
 	}
 
 	return prefs;
@@ -337,19 +347,38 @@ preferences_write_xml (Preferences *prefs)
 	xmlNewChild (node, NULL, "nice", tmp);
 	g_free (tmp);
 
-	tmp = g_strdup_printf ("%d", prefs->timeout);
+	tmp = g_strdup_printf ("%d", (int) prefs->timeout);
 	xmlNewChild (node, NULL, "timeout", tmp);
 	g_free (tmp);
 
-	tmp = g_strdup_printf ("%d", prefs->lock_timeout);
+	tmp = g_strdup_printf ("%d", (int) prefs->lock_timeout);
 	xmlNewChild (node, NULL, "lock-timeout", tmp);
 	g_free (tmp);
 
-	tmp = g_strdup_printf ("%d", prefs->cycle);
+	tmp = g_strdup_printf ("%d", (int) prefs->cycle);
 	xmlNewChild (node, NULL, "cycle", tmp);
 	g_free (tmp);
 
 	xmlAddChild (node, xml_write_programs_list (prefs->screensavers));
+
+	tmp = g_strdup_printf ("%d", prefs->selection_mode);
+	xmlNewChild (node, NULL, "selection-mode", tmp);
+	g_free (tmp);
+
+	if (prefs->power_management)
+		xmlNewChild (node, NULL, "use-dpms", NULL);
+
+	tmp = g_strdup_printf ("%d", prefs->standby_time);
+	xmlNewChild (node, NULL, "standby-time", tmp);
+	g_free (tmp);
+
+	tmp = g_strdup_printf ("%d", prefs->suspend_time);
+	xmlNewChild (node, NULL, "suspend-time", tmp);
+	g_free (tmp);
+
+	tmp = g_strdup_printf ("%d", prefs->power_down_time);
+	xmlNewChild (node, NULL, "shutdown-time", tmp);
+	g_free (tmp);
 
 	xmlDocSetRootElement (doc, node);
 
@@ -423,6 +452,7 @@ screensaver_read_xml (xmlNodePtr saver_node)
 		return NULL;
 
 	saver = screensaver_new ();
+	saver->enabled = FALSE;
 
 	for (node = saver_node->childs; node; node = node->next) {
 		if (!strcmp (node->name, "name"))
@@ -468,7 +498,8 @@ screensaver_get_desc (Screensaver *saver)
 		screensaver_get_desc_from_xrdb (saver);
 
 	if (!saver->description)
-		saver->description = g_strdup (_("Custom screensaver. No description available"));
+		saver->description = g_strdup 
+			(_("Custom screensaver. No description available"));
 
 	return saver->description;
 }

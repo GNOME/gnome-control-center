@@ -1,5 +1,12 @@
 2000-08-16  Bradford Hovinen  <hovinen@helixcode.com>
 
+	* preferences.c (preferences_write_xml): 
+	(preferences_read_xml): Added missing entries stored in
+	gnome-config rather than .xscreensaver
+	(screensaver_read_xml): Disable screensaver by default
+	(preferences_write_xml): Cast values to ints before passing to
+	g_strdup_printf
+
 	* rc-parse.c (write_screensaver_list): Don't try to write string
 	if the screensaver has no command line
 
