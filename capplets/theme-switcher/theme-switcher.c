@@ -248,81 +248,6 @@ sort_func (GtkTreeModel *model,
  return g_utf8_collate (a_str, b_str);
 }
 
-/* Callback issued during drag movements */
-
-static gboolean
-drag_motion_cb (GtkWidget *widget, GdkDragContext *context,
-		gint x, gint y, guint time, gpointer data)
-{
-	return FALSE;
-}
-
-/* Callback issued during drag leaves */
-
-static void
-drag_leave_cb (GtkWidget *widget, GdkDragContext *context,
-	       guint time, gpointer data)
-{
-	gtk_widget_queue_draw (widget);
-}
-
-/* Callback issued on actual drops. Attempts to load the file dropped. */
-static void
-drag_data_received_cb (GtkWidget *widget, GdkDragContext *context,
-		       gint x, gint y,
-		       GtkSelectionData *selection_data,
-		       guint info, guint time, gpointer data)
-{
-	GList *uris;
-	GladeXML *dialog = data;
-	gchar *filename;
-
-	if (!(info == TARGET_URI_LIST || info == TARGET_NS_URL))
-		return;
-
-	uris = gnome_vfs_uri_list_parse ((gchar *) selection_data->data);
-
-	filename = gnome_vfs_uri_to_string (uris->data, GNOME_VFS_URI_HIDE_NONE);
-	if (strncmp (filename, "http://", 7) && strncmp (filename, "ftp://", 6))
-	{
-		g_free (filename);
-		filename = gnome_vfs_uri_to_string (uris->data, GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD);
-	}
-	gnome_file_entry_set_filename (GNOME_FILE_ENTRY (WID ("install_theme_picker")), filename);
-	g_free (filename);
-	gnome_vfs_uri_list_unref (uris);
-	gtk_widget_show (WID ("install_dialog"));
-}
-
-static void
-show_install_dialog (GtkWidget *button, gpointer data)
-{
-	GladeXML *dialog = data;
-	gtk_widget_show (WID ("install_dialog"));
-}
-
-static void
-show_manage_themes (GtkWidget *button, gpointer data)
-{
-	gchar *path, *command;
-	GnomeVFSURI *uri;
-
-	path = g_strdup_printf ("%s/.themes", g_get_home_dir ());
-	uri = gnome_vfs_uri_new (path);
-
-	if (!gnome_vfs_uri_exists (uri)) {
-		/* Create the directory */
-		gnome_vfs_make_directory_for_uri (uri, 0775);
-	}
-	gnome_vfs_uri_unref (uri);
-
-	command = g_strdup_printf ("nautilus --no-desktop %s", path);
-	g_free (path);
-
-	g_spawn_command_line_async (command, NULL);
-	g_free (command);
-}
-
 static void
 transfer_cancel_cb (GtkWidget *dlg, gchar *path)
 {
@@ -397,8 +322,6 @@ install_dialog_response (GtkWidget *widget, int response_id, gpointer data)
 		if (filename == NULL)
 			return;
 
-		gtk_widget_hide (widget);
-
 		src_uri = gnome_vfs_uri_new (filename);
 		base = gnome_vfs_uri_extract_short_name (src_uri);
 		src = g_list_append (NULL, src_uri);
@@ -422,8 +345,94 @@ install_dialog_response (GtkWidget *widget, int response_id, gpointer data)
 		g_signal_connect (G_OBJECT (dlg), "done",
 				  G_CALLBACK (transfer_done_cb), path);
 		gtk_widget_show (dlg);
-	} else
-		gtk_widget_hide (widget);
+	}
+}
+
+static void
+show_install_dialog (GtkWidget *button, gpointer parent)
+{
+	GladeXML *dialog = glade_xml_new (GLADEDIR "/theme-install.glade", NULL, NULL);
+	GtkWidget *widget = WID ("install_dialog");
+
+	g_signal_connect (G_OBJECT (widget), "response",
+		G_CALLBACK (install_dialog_response), dialog);
+	gtk_window_set_transient_for (GTK_WINDOW (widget), parent);
+	gtk_window_set_position (GTK_WINDOW (widget), GTK_WIN_POS_CENTER_ON_PARENT);
+
+	while (gtk_dialog_run (GTK_DIALOG (widget)) == GTK_RESPONSE_HELP)
+		;
+
+	gtk_widget_destroy (widget);
+	g_object_unref (G_OBJECT (dialog));
+}
+
+/* Callback issued during drag movements */
+
+static gboolean
+drag_motion_cb (GtkWidget *widget, GdkDragContext *context,
+		gint x, gint y, guint time, gpointer data)
+{
+	return FALSE;
+}
+
+/* Callback issued during drag leaves */
+
+static void
+drag_leave_cb (GtkWidget *widget, GdkDragContext *context,
+	       guint time, gpointer data)
+{
+	gtk_widget_queue_draw (widget);
+}
+
+/* Callback issued on actual drops. Attempts to load the file dropped. */
+static void
+drag_data_received_cb (GtkWidget *widget, GdkDragContext *context,
+		       gint x, gint y,
+		       GtkSelectionData *selection_data,
+		       guint info, guint time, gpointer data)
+{
+	GList *uris;
+	GladeXML *dialog = data;
+	gchar *filename;
+
+	if (!(info == TARGET_URI_LIST || info == TARGET_NS_URL))
+		return;
+
+	uris = gnome_vfs_uri_list_parse ((gchar *) selection_data->data);
+
+	filename = gnome_vfs_uri_to_string (uris->data, GNOME_VFS_URI_HIDE_NONE);
+	if (strncmp (filename, "http://", 7) && strncmp (filename, "ftp://", 6))
+	{
+		g_free (filename);
+		filename = gnome_vfs_uri_to_string (uris->data, GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD);
+	}
+	gnome_file_entry_set_filename (GNOME_FILE_ENTRY (WID ("install_theme_picker")), filename);
+	g_free (filename);
+	gnome_vfs_uri_list_unref (uris);
+
+	show_install_dialog (NULL, widget);
+}
+
+static void
+show_manage_themes (GtkWidget *button, gpointer data)
+{
+	gchar *path, *command;
+	GnomeVFSURI *uri;
+
+	path = g_strdup_printf ("%s/.themes", g_get_home_dir ());
+	uri = gnome_vfs_uri_new (path);
+
+	if (!gnome_vfs_uri_exists (uri)) {
+		/* Create the directory */
+		gnome_vfs_make_directory_for_uri (uri, 0775);
+	}
+	gnome_vfs_uri_unref (uri);
+
+	command = g_strdup_printf ("nautilus --no-desktop %s", path);
+	g_free (path);
+
+	g_spawn_command_line_async (command, NULL);
+	g_free (command);
 }
 
 static void
@@ -441,11 +450,12 @@ static void
 setup_dialog (GladeXML *dialog)
 {
   GConfClient *client;
-  GtkWidget *widget;
+  GtkWidget *widget, *parent;
   GtkTreeModel *model;
   GtkTreeSelection *selection;
 
   client = gconf_client_get_default ();
+  parent = WID ("theme_dialog");
 
   gtk_tree_view_insert_column_with_attributes (GTK_TREE_VIEW (WID ("theme_treeview")),
 					       -1, NULL,
@@ -471,35 +481,29 @@ setup_dialog (GladeXML *dialog)
 
   widget = WID ("install_button");
   g_signal_connect (G_OBJECT (widget), "clicked",
-		    G_CALLBACK (show_install_dialog), dialog);
+		    G_CALLBACK (show_install_dialog), parent);
   widget = WID ("manage_button");
   g_signal_connect (G_OBJECT (widget), "clicked",
 		    G_CALLBACK (show_manage_themes), dialog);
 
-  widget = WID ("install_dialog");
-  g_signal_connect (G_OBJECT (widget), "response",
-		    G_CALLBACK (install_dialog_response), dialog);
-  
-  widget = WID ("theme_dialog");
-
-  g_signal_connect (G_OBJECT (widget),
+  g_signal_connect (G_OBJECT (parent),
     "response",
     G_CALLBACK (cb_dialog_response), NULL);
 
-  gtk_drag_dest_set (widget, GTK_DEST_DEFAULT_ALL,
+  gtk_drag_dest_set (parent, GTK_DEST_DEFAULT_ALL,
 		     drop_types, n_drop_types,
 		     GDK_ACTION_COPY | GDK_ACTION_LINK | GDK_ACTION_MOVE);
 
-  g_signal_connect (G_OBJECT (widget), "drag-motion",
+  g_signal_connect (G_OBJECT (parent), "drag-motion",
 		    G_CALLBACK (drag_motion_cb), NULL);
-  g_signal_connect (G_OBJECT (widget), "drag-leave",
+  g_signal_connect (G_OBJECT (parent), "drag-leave",
 		    G_CALLBACK (drag_leave_cb), NULL);
-  g_signal_connect (G_OBJECT (widget), "drag-data-received",
+  g_signal_connect (G_OBJECT (parent), "drag-data-received",
 		    G_CALLBACK (drag_data_received_cb),
 		    dialog);
 
-  capplet_set_icon (widget, "gnome-ccthemes.png");
-  gtk_widget_show (widget);
+  capplet_set_icon (parent, "gnome-ccthemes.png");
+  gtk_widget_show (parent);
 }
 
 int
