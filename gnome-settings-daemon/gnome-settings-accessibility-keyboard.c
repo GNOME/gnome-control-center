@@ -35,6 +35,12 @@
 
 #define CONFIG_ROOT "/desktop/gnome/accesibility/keyboard"
 
+#ifdef DEBUG_ACCESSIBILITY
+#define d(str)		fprintf (stderr, str)
+#else
+#define d(str)		do { } while (0)
+#endif
+
 static gboolean we_are_changing_xkb_state = FALSE;
 
 static int
@@ -74,11 +80,11 @@ set_server_from_gconf (GConfEntry *ignored)
 	XkbDescRec	*desc;
 	GConfClient	*client = gconf_client_get_default ();
 
-	if (!we_are_changing_xkb_state) {
-		fprintf (stderr, "We changed gconf accessibility state\n");
+	if (we_are_changing_xkb_state) {
+		d ("We changed gconf accessibility state\n");
 		return;
 	} else
-		fprintf (stderr, "Someone changed gconf accessibility state\n");
+		d ("Someone changed gconf accessibility state\n");
 
 	enable_mask =   XkbAccessXKeysMask	|
 			XkbSlowKeysMask		|
@@ -117,14 +123,14 @@ set_server_from_gconf (GConfEntry *ignored)
 
 	/* mouse keys */
 	if (gconf_client_get_bool (client, CONFIG_ROOT "/mousekeys_enable", NULL))
-		enabled |= XkbMouseKeysMask;
-	desc->ctrls->mk_interval     = 10;
+		enabled |= XkbMouseKeysMask | XkbMouseKeysAccelMask;
+	desc->ctrls->mk_interval     = 10;	/* msec between mousekey events */
 	desc->ctrls->mk_curve	     = 50;
-	desc->ctrls->mk_max_speed    = get_int (client,
+	desc->ctrls->mk_max_speed    = get_int (client, /* pixels / event */
 		CONFIG_ROOT "/mousekeys_max_speed");
-	desc->ctrls->mk_time_to_max  = get_int (client,
+	desc->ctrls->mk_time_to_max  = get_int (client,	/* events before max */
 		CONFIG_ROOT "/mousekeys_accel_time");
-	desc->ctrls->mk_delay	     = get_int (client,
+	desc->ctrls->mk_delay	     = get_int (client,	/* ms before 1st event */
 		CONFIG_ROOT "/mousekeys_init_delay");
 
 	/* slow keys */
@@ -242,13 +248,13 @@ cb_xkb_event_filter (GdkXEvent *xevent, GdkEvent *event, gpointer user)
 	XEvent *xev = (XEvent *)xevent;
 	if (xev->xany.type == (xkbEventBase + XkbEventCode)) {
 		XkbEvent *xkbEv = (XkbEvent *) event;
-		fprintf (stderr, "xkb event\n");
+		d ("xkb event\n");
 		if(xkbEv->any.xkb_type == XkbControlsNotify) {
 			if (!we_are_changing_xkb_state) {
-				fprintf (stderr, "Someone changed XKB state\n");
+				d ("Someone changed XKB state\n");
 				set_gconf_from_server (NULL);
 			} else
-				fprintf (stderr, "We changed XKB state\n");
+				d ("We changed XKB state\n");
 		}
 		return GDK_FILTER_REMOVE;
 	}
