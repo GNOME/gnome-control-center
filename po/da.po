@@ -24,8 +24,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-09 10:25+0200\n"
-"PO-Revision-Date: 2004-07-29 21:50+0200\n"
+"POT-Creation-Date: 2004-08-14 14:08+0200\n"
+"PO-Revision-Date: 2004-08-14 14:06+0200\n"
 "Last-Translator: Martin Willemoes Hansen <mwh@sysrq.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -1574,12 +1574,25 @@ msgid ""
 "To edit a shortcut key, click on the corresponding row and type a new "
 "accelerator, or press backspace to clear."
 msgstr ""
-"En genvejstast ændres ved at klikke på den tilsvarende række og indtaste "
-"en ny genvej, eller rydde ved at trykke på tilbagetasten"
+"En genvejstast ændres ved at klikke på den tilsvarende række og indtaste en "
+"ny genvej, eller rydde ved at trykke på tilbagetasten"
 
 #: capplets/keybindings/keybinding.desktop.in.h:1
 msgid "Assign shortcut keys to commands"
 msgstr "Tildel genvejstaster til kommandoer"
+
+#: capplets/keyboard/gnome-keyboard-properties-xkb.c:69
+#: capplets/keyboard/gnome-keyboard-properties-xkb.c:95
+msgid "Unknown"
+msgstr "Ukendt"
+
+#: capplets/keyboard/gnome-keyboard-properties-xkbmc.c:80
+msgid "Models"
+msgstr "Modeller"
+
+#: capplets/keyboard/gnome-keyboard-properties-xkbpv.c:59
+msgid "Keyboard layout preview"
+msgstr "Tastaturlayouteksempel"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:106
 #, c-format
@@ -2110,7 +2123,7 @@ msgid "Theme name must be present"
 msgstr "Temanavn skal være til stede"
 
 #: capplets/theme-switcher/gnome-theme-save.c:104
-msgid "The theme already exists. Would you like to replace it ?"
+msgid "The theme already exists. Would you like to replace it?"
 msgstr "Temaet eksisterer allerede. Vil du overskrive det?"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
@@ -2406,6 +2419,34 @@ msgstr "Vinduesindstillinger"
 msgid "Windows"
 msgstr "Vinduer"
 
+#: control-center/GNOME_ControlCenter.server.in.h:1
+msgid "Control Center"
+msgstr "Kontrolcenter"
+
+#: control-center/GNOME_ControlCenter.server.in.h:2
+msgid "Control Center Viewer"
+msgstr "Kontrolcenter-viser"
+
+#: control-center/GNOME_ControlCenter.server.in.h:3
+msgid "Control Center view"
+msgstr "Kontrolcenter-visning"
+
+#: control-center/GNOME_ControlCenter.server.in.h:4
+msgid "Control Center view component"
+msgstr "Kontrolcenter-visningskomponent"
+
+#: control-center/GNOME_ControlCenter.server.in.h:5
+msgid "Control Center view component's factory"
+msgstr "Kontrolcenter-visningskomponent's fabrik"
+
+#: control-center/GNOME_ControlCenter.server.in.h:6
+msgid "Control Center view factory"
+msgstr "Kontrolcenter-visningsfabrik"
+
+#: control-center/GNOME_ControlCenter.server.in.h:7
+msgid "View as Control Center"
+msgstr "Vis som kontrolcenter"
+
 #: control-center/capplet-dir-view-list.c:319
 #, c-format
 msgid "GNOME Control Center: %s"
@@ -2417,15 +2458,15 @@ msgstr "Layout"
 
 #: control-center/capplet-dir-view.c:159
 msgid "Layout to use for this view of the capplets"
-msgstr "Layout der skal bruges for denne visning af kontrolcenterprogrammerne"
+msgstr "Layout der skal bruges for denne visning af kontrolcenter-programmerne"
 
 #: control-center/capplet-dir-view.c:165
 msgid "Capplet directory object"
-msgstr "Mappeobjekt for kontrolcenterprogram"
+msgstr "Mappeobjekt for kontrolcenter-program"
 
 #: control-center/capplet-dir-view.c:166
 msgid "Capplet directory that this view is viewing"
-msgstr "Mappe for kontrolcenterprogram som denne visning viser"
+msgstr "Mappe for kontrolcenter-program som denne visning viser"
 
 #: control-center/capplet-dir-view.c:348
 msgid "translator_credits"
@@ -2449,6 +2490,19 @@ msgstr "Håndtering af skrivebordsindstillinger"
 msgid "Gnome Control Center : %s"
 msgstr "Gnome-kontrolcenter: %s"
 
+#: control-center/control-center-categories.c:333
+msgid "Others"
+msgstr "Andre"
+
+#: control-center/control-center-categories.c:424
+#: control-center/control-center.c:1091
+msgid "Gnome Control Center"
+msgstr "Gnome-kontrolcenter"
+
+#: control-center/control-center.c:78
+msgid "Use nautilus if it is running."
+msgstr "Benyt nautilus hvis den kører"
+
 #: control-center/gnomecc-ui.xml.h:1
 msgid "About this application"
 msgstr "Om dette program"
@@ -2469,19 +2523,6 @@ msgstr "_Indhold"
 msgid "_Help"
 msgstr "_Hjælp"
 
-#: control-center/control-center-categories.c:333
-msgid "Others"
-msgstr "Andre"
-
-#: control-center/control-center-categories.c:424
-#: control-center/control-center.c:1091
-msgid "Gnome Control Center"
-msgstr "Gnome-kontrolcenter"
-
-#: control-center/control-center.c:78
-msgid "Use nautilus if it is running."
-msgstr "Benyt nautilus hvis den kører"
-
 #: control-center/gnomecc.desktop.in.h:2
 msgid "The GNOME configuration tool"
 msgstr "Et centralt opsætningsværktøj til Gnome"
@@ -2489,6 +2530,10 @@ msgstr "Et centralt opsætningsværktøj til Gnome"
 #: control-center/main.c:43
 msgid "Use shell even if nautilus is running."
 msgstr "Benyt skal også selvom Nautilus kører"
+
+#: gnome-settings-daemon/actions/acme.glade.h:1
+msgid "Volume"
+msgstr "Lydstyrke"
 
 #: gnome-settings-daemon/factory.c:34
 msgid "Could not initialize Bonobo"
@@ -2655,6 +2700,36 @@ msgstr ""
 "Du har en tasteomdøbningsfil (%s) i din hjemmemappe hvis indhold nu bliver "
 "ignoreret. Du kan gendanne ændringerne under tastaturindstilingerne."
 
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:114
+#, c-format
+msgid ""
+"Couldn't execute command: %s\n"
+"Verify that this command exists."
+msgstr ""
+"Kunne ikke køre kommandoen: %s\n"
+"Kontrollér at kommandoen eksisterer."
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:130
+msgid ""
+"Couldn't put the machine to sleep.\n"
+"Verify that the machine is correctly configured."
+msgstr ""
+"Kunne ikke sætte maskinen i dvale.\n"
+"Kontrollér at maskinen er konfiguret korrekt."
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:140
+#, c-format
+msgid "Permissions on the file %s are broken\n"
+msgstr "Rettighederne på filen %s er ødelagte\n"
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:185
+msgid ""
+"Couldn't load the Glade file.\n"
+"Make sure that this daemon is properly installed."
+msgstr ""
+"Kunne ikke indlæse Glade-filen.\n"
+"Kontrollér at dæmonen er installeret korrekt."
+
 #: gnome-settings-daemon/gnome-settings-screensaver.c:92
 #, c-format
 msgid ""
@@ -2796,6 +2871,166 @@ msgstr ""
 #: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:2
 msgid "Sync text/plain and text/* handlers"
 msgstr "Synkronisér håndteringer til text/plain og text/*"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:1
+msgid "Brightness down"
+msgstr "Dæmpning af lysstyrken"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:2
+msgid "Brightness down's shortcut."
+msgstr "Genvej til dæmpning af lysstyrken."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:3
+msgid "Brightness up"
+msgstr "Forøgelse af lysstyrken"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
+msgid "Brightness up's shortcut."
+msgstr "Genvej til forøgelse af lysstyrken."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
+msgid "E-mail"
+msgstr "E-post"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:6
+msgid "E-mail's shortcut."
+msgstr "Genvej til e-post."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
+msgid "Eject"
+msgstr "Skub ud"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
+msgid "Eject's shortcut."
+msgstr "Genvej til udskubning."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
+msgid "Home folder"
+msgstr "Hjemmemappe"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
+msgid "Home folder's shortcut."
+msgstr "Genvej til hjemmemappen."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
+msgid "Launch help browser"
+msgstr "Start hjælpefremviser"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
+msgid "Launch help browser's shortcut."
+msgstr "Genvej til hjælpefremviser."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
+msgid "Launch web browser"
+msgstr "Start webbrowser"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
+msgid "Launch web browser's shortcut."
+msgstr "Genvej til start af webbrowser."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
+msgid "Lock screen"
+msgstr "Lås skærm"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
+msgid "Lock screen's shortcut."
+msgstr "Genvej til låsning af skærm."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
+msgid "Log out"
+msgstr "Logud"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
+msgid "Log out's shortcut."
+msgstr "Genvej til logud."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
+msgid "Next track key's shortcut."
+msgstr "Genvej til næste spor."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
+msgid "Pause"
+msgstr "Pause"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
+msgid "Pause key's shortcut."
+msgstr "Genvej til pause."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
+msgid "Play (or play/pause)"
+msgstr "Afspil (eller afspil/pause)"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
+msgid "Play (or play/pause) key's shortcut."
+msgstr "Genvej til afspil (eller afspil/pause)."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
+msgid "Previous track key's shortcut."
+msgstr "Genvej til forrige spor."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
+msgid "Search"
+msgstr "Søg"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
+msgid "Search's shortcut."
+msgstr "Genvej til søg."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
+msgid "Skip to next track"
+msgstr "Spring til næste spor"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
+msgid "Skip to previous track"
+msgstr "Spring til forrige spor"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
+msgid "Sleep"
+msgstr "Dvale"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
+msgid "Sleep's shortcut."
+msgstr "Genvej til dvale."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
+msgid "Stop playback key"
+msgstr "Stop afspilning"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
+msgid "Stop playback key's shortcut."
+msgstr "Genvej til stop afspilning."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
+msgid "Volume down"
+msgstr "Dæmpning af lydstyrken"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
+msgid "Volume down's shortcut."
+msgstr "Genvej til dæmpning af lydstyrken."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
+msgid "Volume mute"
+msgstr "Slå lyden fra"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
+msgid "Volume mute's shortcut"
+msgstr "Genvej til at slå lyden fra."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
+msgid "Volume step"
+msgstr "Lydstyrkeskridt"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:38
+msgid "Volume step as percentage of volume."
+msgstr "Lydstyrkeskridt som procent af lydstyrke."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:39
+msgid "Volume up"
+msgstr "Forøg lydstyrken"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
+msgid "Volume up's shortcut."
+msgstr "Genvej til forøgelse af lydstyrken."
 
 #: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:1
 msgid "Display a dialog when there are errors running XScreenSaver"
@@ -3206,200 +3441,6 @@ msgstr "Generér miniaturer for installerede temaer"
 msgid "Whether to thumbnail themes"
 msgstr "Generér miniaturer for temaer"
 
-#: gnome-settings-daemon/actions/acme.glade.h:1
-msgid "Volume"
-msgstr "Lydstyrke"
-
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:114
-#, c-format
-msgid ""
-"Couldn't execute command: %s\n"
-"Verify that this command exists."
-msgstr ""
-"Kunne ikke køre kommandoen: %s\n"
-"Kontrollér at kommandoen eksisterer."
-
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:130
-msgid ""
-"Couldn't put the machine to sleep.\n"
-"Verify that the machine is correctly configured."
-msgstr ""
-"Kunne ikke sætte maskinen i dvale.\n"
-"Kontrollér at maskinen er konfiguret korrekt."
-
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:140
-#, c-format
-msgid "Permissions on the file %s are broken\n"
-msgstr "Rettighederne på filen %s er ødelagte\n"
-
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:185
-msgid ""
-"Couldn't load the Glade file.\n"
-"Make sure that this daemon is properly installed."
-msgstr ""
-"Kunne ikke indlæse Glade-filen.\n"
-"Kontrollér at dæmonen er installeret korrekt."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:1
-msgid "Brightness down"
-msgstr "Dæmpning af lysstyrken"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:2
-msgid "Brightness down's shortcut."
-msgstr "Genvej til dæmpning af lysstyrken."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:3
-msgid "Brightness up"
-msgstr "Forøgelse af lysstyrken"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
-msgid "Brightness up's shortcut."
-msgstr "Genvej til forøgelse af lysstyrken."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
-msgid "E-mail"
-msgstr "E-post"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:6
-msgid "E-mail's shortcut."
-msgstr "Genvej til e-post."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
-msgid "Eject"
-msgstr "Skub ud"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
-msgid "Eject's shortcut."
-msgstr "Genvej til udskubning."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
-msgid "Home folder"
-msgstr "Hjemmemappe"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
-msgid "Home folder's shortcut."
-msgstr "Genvej til hjemmemappen."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
-msgid "Launch help browser"
-msgstr "Start hjælpefremviser"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
-msgid "Launch help browser's shortcut."
-msgstr "Genvej til hjælpefremviser."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
-msgid "Launch web browser"
-msgstr "Start webbrowser"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
-msgid "Launch web browser's shortcut."
-msgstr "Genvej til start af webbrowser."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
-msgid "Lock screen"
-msgstr "Lås skærm"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
-msgid "Lock screen's shortcut."
-msgstr "Genvej til låsning af skærm."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
-msgid "Log out"
-msgstr "Logud"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
-msgid "Log out's shortcut."
-msgstr "Genvej til logud."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
-msgid "Next track key's shortcut."
-msgstr "Genvej til næste spor."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
-msgid "Pause"
-msgstr "Pause"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
-msgid "Pause key's shortcut."
-msgstr "Genvej til pause."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
-msgid "Play (or play/pause)"
-msgstr "Afspil (eller afspil/pause)"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
-msgid "Play (or play/pause) key's shortcut."
-msgstr "Genvej til afspil (eller afspil/pause)."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
-msgid "Previous track key's shortcut."
-msgstr "Genvej til forrige spor."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
-msgid "Search"
-msgstr "Søg"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
-msgid "Search's shortcut."
-msgstr "Genvej til søg."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
-msgid "Skip to next track"
-msgstr "Spring til næste spor"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
-msgid "Skip to previous track"
-msgstr "Spring til forrige spor"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
-msgid "Sleep"
-msgstr "Dvale"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
-msgid "Sleep's shortcut."
-msgstr "Genvej til dvale."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
-msgid "Stop playback key"
-msgstr "Stop afspilning"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
-msgid "Stop playback key's shortcut."
-msgstr "Genvej til stop afspilning."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
-msgid "Volume down"
-msgstr "Dæmpning af lydstyrken"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
-msgid "Volume down's shortcut."
-msgstr "Genvej til dæmpning af lydstyrken."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
-msgid "Volume mute"
-msgstr "Slå lyden fra"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
-msgid "Volume mute's shortcut"
-msgstr "Genvej til at slå lyden fra."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
-msgid "Volume step"
-msgstr "Lydstyrkeskridt"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:38
-msgid "Volume step as percentage of volume."
-msgstr "Lydstyrkeskridt som procent af lydstyrke."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:39
-msgid "Volume up"
-msgstr "Forøg lydstyrken"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
-msgid "Volume up's shortcut."
-msgstr "Genvej til forøgelse af lydstyrken."
-
 #~ msgid "De_tails..."
 #~ msgstr "_Detaljer..."
 
@@ -3421,9 +3462,6 @@ msgstr "Genvej til forøgelse af lydstyrken."
 
 #~ msgid "_Text editing shortcuts:"
 #~ msgstr "_Tekstredigeringsgenveje:"
-
-#~ msgid "Control Center Menu"
-#~ msgstr "Kontrolcentermenu"
 
 #~ msgid "Sawfish window manager"
 #~ msgstr "Vindueshåndtering (Sawfish)"
@@ -5223,12 +5261,10 @@ msgstr "Genvej til forøgelse af lydstyrken."
 #~ msgid ""
 #~ "With this option, you can select a predefined Web Browser as your default"
 #~ msgstr ""
-#~ "ed denne indstilling kan du vælge et prædefineret webbrowser som "
-#~ "forvalg"
+#~ "ed denne indstilling kan du vælge et prædefineret webbrowser som forvalg"
 
 #~ msgid "With this option you can create your own default web browser"
-#~ msgstr ""
-#~ "Med denne indstilling kan du angive dit eget forvalgte webbrowser"
+#~ msgstr "Med denne indstilling kan du angive dit eget forvalgte webbrowser"
 
 #~ msgid "Does this web browser need to display in an xterm?"
 #~ msgstr "Starter webbrowser i et terminalvindue"
@@ -5244,8 +5280,7 @@ msgstr "Genvej til forøgelse af lydstyrken."
 
 #~ msgid "Please enter the command line used to start this web browser"
 #~ msgstr ""
-#~ "Indtast en kommandolinje som skal bruges til at starte dette "
-#~ "webbrowser"
+#~ "Indtast en kommandolinje som skal bruges til at starte dette webbrowser"
 
 #~ msgid "With this option you can select a predefined help viewer."
 #~ msgstr "Med denne indstilling kan du vælge en prædefineret hjælpefremviser."
