@@ -67,7 +67,7 @@ find_icon (const char *icon, GnomeDesktopItem *dentry)
 		if (icon_file[0] != '/')
 		{
 			gchar *old = icon_file;
-			icon_file = g_build_filename (PIXMAPS_DIR, old, NULL);
+			icon_file = g_build_filename (GNOMECC_ICONS_DIR, old, NULL);
 			g_free (old);
 		}
 		if (!g_file_test (icon_file, G_FILE_TEST_EXISTS) || g_file_test(icon_file, G_FILE_TEST_IS_DIR))

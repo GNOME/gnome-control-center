@@ -1,6 +1,3 @@
-appicondir = $(GNOMECC_ICONS_DIR)
-appicon_DATA = control-center.png
-
 splashdir = $(datadir)/pixmaps/gnomecc-2
 splash_DATA = \
 	bcg_top.png \
@@ -19,7 +16,8 @@ ui_DATA = gnomecc-ui.xml
 INCLUDES = 							\
 	-DGNOMELOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\" 	\
 	-DSETTINGS_DIR=\""$(GNOMECC_DESKTOP_DIR)"\"		\
-	-DPIXMAPS_DIR=\""$(appicondir)"\"			\
+	-DGNOMECC_ICONS_DIR=\""$(GNOMECC_ICONS_DIR)"\"		\
+	-DPIXMAP_DIR=\""$(datadir)/pixmaps"\"			\
 	-DART_DIR=\""$(splashdir)"\"				\
 	-DGNOME_SBINDIR=\""$(sbindir)"\"			\
 	$(GNOMECC_CFLAGS)
