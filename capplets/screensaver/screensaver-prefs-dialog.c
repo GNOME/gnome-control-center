@@ -753,14 +753,14 @@ get_argument_data (Screensaver *saver)
 	else
 		lang = g_strdup ("");
 
-	file_name = g_strconcat (SSPROP_DATADIR "/screensavers/",
+	file_name = g_strconcat (GNOMECC_SCREENSAVERS_DIR "/screensavers/",
 				 lang, saver->name, ".xml", NULL);
 	doc = xmlParseFile (file_name);
 	g_free (file_name);
 
 	/* Fall back on default language if given language is not found */
 	if (!doc && *lang != '\0') {
-		file_name = g_strconcat (SSPROP_DATADIR "/screensavers/",
+		file_name = g_strconcat (GNOMECC_SCREENSAVERS_DIR "/screensavers/",
 					 saver->name, ".xml", NULL);
 		doc = xmlParseFile (file_name);
 		g_free (file_name);
@@ -1680,7 +1680,7 @@ arg_mapping_exists (Screensaver *saver)
 
 	if (!saver->name) return FALSE;
 
-	filename = g_strconcat (SSPROP_DATADIR "/screensavers/",
+	filename = g_strconcat (GNOMECC_SCREENSAVERS_DIR "/screensavers/",
 				saver->name, ".xml", NULL);
 
 	if (stat (filename, &buf))

@@ -162,7 +162,7 @@ prefs_widget_init (PrefsWidget *prefs_widget)
 
 	prefs_widget->priv = g_new0 (PrefsWidgetPrivate, 1);
 	prefs_widget->priv->xml =
-		glade_xml_new (GLADE_DATADIR "/screensaver-properties.glade",
+		glade_xml_new (GNOMECC_GLADE_DIR "/screensaver-properties.glade",
 			       NULL); 
 	if (!prefs_widget->priv->xml)
 		return;
@@ -171,11 +171,11 @@ prefs_widget_init (PrefsWidget *prefs_widget)
 		titles[i] = gettext (titles[i]);
 	
 	skel =
-"<ETableSpecification cursor-mode=\"line\" selection-mode=\"single\" draw-focus=\"true\">
-  <ETableColumn model_col=\"0\" draw_grid=\"true\" _title=\"%s\" expansion=\"0.0\" minimum_width=\"20\" resizable=\"false\" cell=\"checkbox\" compare=\"integer\"/>
-  <ETableColumn model_col=\"1\" draw_grid=\"true\" _title=\"%s\" expansion=\"1.0\" resizable=\"true\" cell=\"string\" compare=\"string\"/>
-  %s
-  </ETableSpecification>";
+"<ETableSpecification cursor-mode=\"line\" selection-mode=\"single\" draw-focus=\"true\">"
+" <ETableColumn model_col=\"0\" draw_grid=\"true\" _title=\"%s\" expansion=\"0.0\" minimum_width=\"20\" resizable=\"false\" cell=\"checkbox\" compare=\"integer\"/>"
+" <ETableColumn model_col=\"1\" draw_grid=\"true\" _title=\"%s\" expansion=\"1.0\" resizable=\"true\" cell=\"string\" compare=\"string\"/>"
+"  %s"
+"  </ETableSpecification>";
 
 	spec = g_strdup_printf (skel, titles[0], titles[1], table_compute_state (SM_CHOOSE_FROM_LIST));
 	prefs_widget->priv->etm =

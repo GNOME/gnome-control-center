@@ -66,9 +66,17 @@ main (int argc, char **argv)
 #endif
 
 	if (capplet == NULL) {
+		CappletDirEntry *entry;
+		CappletDir *dir;
+
 		gnomecc_init ();
-		capplet_dir_entry_activate 
-			(CAPPLET_DIR_ENTRY (get_root_capplet_dir ()), NULL);
+		dir = get_root_capplet_dir ();
+		if (!dir)
+			return -1;
+		entry  = CAPPLET_DIR_ENTRY (dir);
+		if (!entry)
+			return -1;
+		capplet_dir_entry_activate (entry, NULL);
 	} else {
 		if ((app = capplet_control_launch (capplet, _("Configuraiton"))) == NULL)
 			return -1;

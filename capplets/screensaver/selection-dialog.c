@@ -257,7 +257,7 @@ get_known_savers (void)
 
 	if (known_savers) return known_savers;
 
-        parent_dir = opendir (SSPROP_DATADIR "/screensavers");
+        parent_dir = opendir (GNOMECC_SCREENSAVERS_DIR "/screensavers");
         if (parent_dir == NULL)
                 return NULL;
 
@@ -266,7 +266,7 @@ get_known_savers (void)
         while ((child_dir = readdir (parent_dir)) != NULL) {
                 if (child_dir->d_name[0] != '.') {
 			fullpath = g_concat_dir_and_file
-				(SSPROP_DATADIR "/screensavers",
+				(GNOMECC_SCREENSAVERS_DIR "/screensavers",
 				 child_dir->d_name);
 
                         if (stat (fullpath, &filedata) != -1) {

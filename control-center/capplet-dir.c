@@ -86,7 +86,7 @@ capplet_new (CappletDir *dir, gchar *desktop_path)
 	entry->dir = dir;
 
 	if (!entry->icon)
-		entry->icon = PIXMAPS_DIR "/control-center.png";
+		entry->icon = GNOMECC_PIXMAPS_DIR "/control-center.png";
 
 	entry->pb = gdk_pixbuf_new_from_file (entry->icon);
 
@@ -127,7 +127,7 @@ capplet_dir_new (CappletDir *dir, gchar *dir_path)
 		entry->icon = entry->entry->icon;
 
 		if (!entry->icon)
-			entry->icon = PIXMAPS_DIR "/control-center.png";
+			entry->icon = GNOMECC_PIXMAPS_DIR "/control-center.png";
 
 		entry->pb = gdk_pixbuf_new_from_file (entry->icon);
 	} else {
@@ -372,10 +372,14 @@ get_root_capplet_dir (void)
 	static CappletDir *root_dir = NULL;
 
 	if (root_dir == NULL) {
-		root_dir = CAPPLET_DIR (capplet_dir_new (NULL, SETTINGS_DIR));
+		CappletDirEntry *entry;
 
+		entry = capplet_dir_new (NULL, SETTINGS_DIR);
+
+		if (entry)
+			root_dir = CAPPLET_DIR (entry);
 		if (!root_dir)
-			g_error ("Could not find directory of control panels");
+			g_warning ("Could not find directory of control panels [%s]", SETTINGS_DIR);
 	}
 
 	return root_dir;

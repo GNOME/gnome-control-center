@@ -104,8 +104,8 @@ prefs_widget_init (PrefsWidget *prefs_widget)
 				       "prefs_widget");
 	gtk_container_add (GTK_CONTAINER (prefs_widget), widget);
 
-	set_pixmap_file (prefs_widget, "mouse_left_pixmap", "mouse-left.png");
-	set_pixmap_file (prefs_widget, "mouse_right_pixmap", "mouse-right.png");
+	set_pixmap_file (prefs_widget, "mouse_left_pixmap", GNOMECC_PIXMAPS_DIR "/mouse-left.png");
+	set_pixmap_file (prefs_widget, "mouse_right_pixmap", GNOMECC_PIXMAPS_DIR "/mouse-right.png");
 
 	glade_xml_signal_connect_data
 		(prefs_widget->dialog_data, "left_handed_selected_cb",
@@ -317,7 +317,6 @@ set_pixmap_file (PrefsWidget *prefs_widget, const gchar *widget_name, const gcha
 	GdkPixbuf *pixbuf;
 	GdkPixmap *pixmap;
 	GdkBitmap *mask;
-	gchar *path;
 
 	g_return_if_fail (IS_PREFS_WIDGET (prefs_widget));
 	g_return_if_fail (widget_name != NULL);
@@ -326,9 +325,7 @@ set_pixmap_file (PrefsWidget *prefs_widget, const gchar *widget_name, const gcha
 	widget = WID (widget_name);
 	g_return_if_fail (widget != NULL);
 	
-	path = gnome_pixmap_file (filename);
-	pixbuf = gdk_pixbuf_new_from_file (path);
-	g_free (path);
+	pixbuf = gdk_pixbuf_new_from_file (filename);
 
 	if (pixbuf) {
 		gdk_pixbuf_render_pixmap_and_mask (pixbuf, &pixmap, &mask, 

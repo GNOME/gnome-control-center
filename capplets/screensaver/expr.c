@@ -25,6 +25,7 @@
 #  include <config.h>
 #endif
 
+#include <string.h>
 #include "expr.h"
 
 typedef enum {
