@@ -173,7 +173,7 @@ wm_widget_new ()
 {
         option_menu = gtk_option_menu_new ();
         g_signal_connect (G_OBJECT (option_menu), "changed",
-                          wm_selection_changed, NULL);
+                          (GCallback)wm_selection_changed, NULL);
 
         wm_widget_clear ();
 
@@ -737,7 +737,7 @@ create_dialog (void)
 	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gnome-window-properties.glade", "prefs_widget", NULL);
         
         apply_now_button = WID ("apply_now_button");
-        g_signal_connect (G_OBJECT (apply_now_button), "clicked", apply_wm, NULL);        
+        g_signal_connect (G_OBJECT (apply_now_button), "clicked", (GCallback)apply_wm, NULL);        
 
         properties_box = WID ("properties_box");
 
@@ -772,8 +772,9 @@ main (int argc, char **argv)
         GladeXML *dialog;
         GtkWidget *dialog_win;
 
-        bindtextdomain (PACKAGE, GNOMELOCALEDIR);
-        textdomain (PACKAGE);
+        bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
+	bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
+        textdomain (GETTEXT_PACKAGE);
 
         argv0 = g_strdup (argv[0]);
   	gnome_program_init ("wm-properties", VERSION,
@@ -797,7 +798,7 @@ main (int argc, char **argv)
                         (_("Window Preferences"), NULL, -1,
                          GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
                          NULL);
-		g_signal_connect (G_OBJECT (dialog_win), "response", response_cb, NULL);
+		g_signal_connect (G_OBJECT (dialog_win), "response", (GCallback)response_cb, NULL);
 
                 capplet = dialog_win;
 		gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog_win)->vbox), WID ("prefs_widget"), TRUE, TRUE, GNOME_PAD_SMALL);
