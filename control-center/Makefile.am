@@ -31,7 +31,8 @@ INCLUDES = 							\
 	-DPIXMAPS_DIR=\""$(appicondir)"\"			\
 	-DART_DIR=\""$(splashdir)"\"				\
 	-DGNOME_SBINDIR=\""$(sbindir)"\"			\
-	@GNOMECC_CFLAGS@
+	-I/gnome/head/INSTALL/include/gnome-desktop-2.0	\
+	@GNOMECC_CFLAGS@	
 
 bin_PROGRAMS = gnomecc
 
@@ -40,13 +41,13 @@ gnomecc_SOURCES = \
 	capplet-dir.c 		capplet-dir.h 		\
 	capplet-dir-view.c	capplet-dir-view.h	\
 	preferences.c		preferences.h		\
-	capplet-dir-view-html.c				\
 	capplet-dir-view-tree.c				\
 	capplet-dir-view-list.c
 
 gnomecc_LDADD = \
-	@GNOMECC_LIBS@					\
-	$(INTLLIBS)
+	@GNOMECC_LIBS@ \
+	-lgnome-desktop-2
+#	$(INTLLIBS)
 
 EXTRA_DIST = gnomecc.desktop.in $(appicon_DATA) $(splash_DATA) $(glade_DATA) Gnome.directory.in.in
 
@@ -62,7 +63,7 @@ $(groups_in_files): %.directory.in: %.directory.in.in
 	    sed s#Icon=#Icon=$(GNOMECC_ICONS_DIR)/control-center.png# < $< > $@
 
 $(groups_files): %.directory: %.directory.in
-	$(top_builddir)/xml-i18n-merge -d $(top_srcdir)/po $< $@
+	$(top_builddir)/intltool-merge -d $(top_srcdir)/po $< $@
 
 install-data-local:
 	$(mkinstalldirs) $(DESTDIR)$(datadir)/control-center/capplets

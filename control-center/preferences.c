@@ -55,19 +55,23 @@ gnomecc_preferences_get_type (void)
 	static guint gnomecc_preferences_type;
 
 	if (!gnomecc_preferences_type) {
-		GtkTypeInfo gnomecc_preferences_info = {
-			"GnomeCCPreferences",
-			sizeof (GnomeCCPreferences),
+		static const GTypeInfo gnomecc_preferences_info = {
 			sizeof (GnomeCCPreferencesClass),
-			(GtkClassInitFunc) gnomecc_preferences_class_init,
-			(GtkObjectInitFunc) gnomecc_preferences_init,
-			(GtkArgSetFunc) NULL,
-			(GtkArgGetFunc) NULL
+			NULL, /* base_init */
+			NULL, /* base_finalize */
+			(GClassInitFunc) gnomecc_preferences_class_init,
+			NULL, /* class_finalize */
+			NULL, /* class_data */
+			sizeof (GnomeCCPreferences),
+			0 /* n_preallocs */,
+			(GInstanceInitFunc) gnomecc_preferences_init
 		};
 
-		gnomecc_preferences_type = 
-			gtk_type_unique (gtk_object_get_type (),
-					 &gnomecc_preferences_info);
+		gnomecc_preferences_type =
+			g_type_register_static (gtk_object_get_type (),
+					"GnomeCCPreferences",
+					&gnomecc_preferences_info,
+					0);
 	}
 
 	return gnomecc_preferences_type;
@@ -90,15 +94,16 @@ gnomecc_preferences_class_init (GnomeCCPreferencesClass *klass)
 
 	gnomecc_preferences_signals[CHANGED_SIGNAL] =
 		gtk_signal_new ("changed", GTK_RUN_FIRST, 
-				object_class->type,
+				GTK_CLASS_TYPE (object_class),
 				GTK_SIGNAL_OFFSET (GnomeCCPreferencesClass, 
 						   changed),
 				gtk_marshal_NONE__NONE, 
 				GTK_TYPE_NONE, 0);
-
+#if 0
 	gtk_object_class_add_signals (object_class, 
 				      gnomecc_preferences_signals,
 				      LAST_SIGNAL);
+#endif
 }
 
 GnomeCCPreferences *
@@ -134,7 +139,7 @@ gnomecc_preferences_load (GnomeCCPreferences *prefs)
 	gnome_config_push_prefix ("/control-center/appearance");
 	prefs->embed = gnome_config_get_bool ("embed=false");
 	prefs->single_window = gnome_config_get_bool ("single_window=true");
-	prefs->layout = gnome_config_get_int ("layout=3");
+	prefs->layout = gnome_config_get_int ("layout=1");
 	gnome_config_pop_prefix ();
 }
 
@@ -167,7 +172,9 @@ place_preferences (GladeXML *prefs_data, GnomeCCPreferences *prefs)
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
 
 	switch (prefs->layout) {
+#ifdef USE_HTML
 	case LAYOUT_HTML: w = "html_widget"; break;
+#endif
 	case LAYOUT_TREE: w = "tree_widget"; break;
 	case LAYOUT_ICON_LIST: w = "icon_list_widget"; break;
 	default: w = NULL; break;
@@ -196,10 +203,12 @@ read_preferences (GladeXML *prefs_data, GnomeCCPreferences *prefs)
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)))
 		prefs->layout = LAYOUT_TREE;
 	else {
+#ifdef USE_HTML
 		widget = glade_xml_get_widget (prefs_data, "html_widget");
 		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)))
 			prefs->layout = LAYOUT_HTML;
 		else
+#endif
 			prefs->layout = LAYOUT_ICON_LIST;
 	}
 
@@ -275,7 +284,8 @@ gnomecc_preferences_get_config_dialog (GnomeCCPreferences *prefs)
 	old_prefs = gnomecc_preferences_clone (prefs);
 
 	prefs_dialog_data = 
-		glade_xml_new (GLADEDIR "/gnomecc.glade", "preferences_dialog");
+		glade_xml_new (GLADEDIR "/gnomecc.glade", "preferences_dialog",
+			       NULL);
 
 	if (!prefs_dialog_data) {
 		g_warning ("Could not find data for preferences dialog");

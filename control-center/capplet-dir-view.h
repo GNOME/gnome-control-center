@@ -26,7 +26,6 @@
 
 #include <gnome.h>
 
-#include <gtkhtml/gtkhtml.h>
 #include "capplet-dir.h"
 #include "preferences.h"
 

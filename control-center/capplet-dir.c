@@ -45,7 +45,9 @@ static void capplet_dir_shutdown (CappletDir *capplet_dir);
 
 static GSList *read_entries (CappletDir *dir);
 
-static void start_capplet_through_root_manager (GnomeDesktopEntry *gde);
+#ifdef USE_ROOT_MANAGER
+static void start_capplet_through_root_manager (GnomeDesktopItem *gde);
+#endif
 
 CappletDirView *(*get_view_cb) (CappletDir *dir, CappletDirView *launcher);
 
@@ -57,8 +59,9 @@ capplet_new (CappletDir *dir, gchar *desktop_path)
 {
 	Capplet *capplet;
 	CappletDirEntry *entry;
-	GnomeDesktopEntry *dentry;
-	gchar *path;
+	GnomeDesktopItem *dentry;
+	gchar *path, **vec;
+	const gchar *execstr;
 
 	g_return_val_if_fail (desktop_path != NULL, NULL);
 
@@ -67,13 +70,20 @@ capplet_new (CappletDir *dir, gchar *desktop_path)
 		return entry;
 	}
 
-	dentry = gnome_desktop_entry_load (desktop_path);
+	dentry = gnome_desktop_item_new_from_file (desktop_path,
+						   GNOME_DESKTOP_ITEM_TYPE_NULL,
+						   NULL);
 	if (dentry == NULL)
 		return NULL;
 
-	if ((dentry->exec_length == 0) || !(path = gnome_is_program_in_path (dentry->exec[0])))
+	execstr = gnome_desktop_item_get_string (dentry,
+			GNOME_DESKTOP_ITEM_EXEC);
+	/* Perhaps use poptParseArgvString here */
+	vec = g_strsplit (execstr, " ", 0);
+	if (!(execstr && execstr[0]) || !(vec && (path = gnome_is_program_in_path (vec[0]))))
 	{
-		gnome_desktop_entry_free (dentry);
+		g_strfreev (vec);
+		gnome_desktop_item_unref (dentry);
 		return NULL;
 	}
 	g_free (path);
@@ -86,16 +96,33 @@ capplet_new (CappletDir *dir, gchar *desktop_path)
 	entry->type = TYPE_CAPPLET;
 	entry->entry = dentry;
 
-	entry->label = entry->entry->name;
-	entry->icon = entry->entry->icon;
-	entry->path = entry->entry->location;
+	entry->label = g_strdup (gnome_desktop_item_get_string (dentry,
+			GNOME_DESKTOP_ITEM_NAME));
+	entry->icon = g_strdup (gnome_desktop_item_get_string (dentry, GNOME_DESKTOP_ITEM_ICON));
+	if (entry->icon && entry->icon[0] != '/')
+	{
+		gchar *old = entry->icon;
+		entry->icon = g_concat_dir_and_file (PIXMAPS_DIR, old);
+		g_free (old);
+	}
+	if (!g_file_exists (entry->icon))
+	{
+		g_free (entry->icon);
+		entry->icon = gnome_pixmap_file (
+				gnome_desktop_item_get_string (dentry,
+					GNOME_DESKTOP_ITEM_ICON));
+		if (!entry->icon)
+			entry->icon = gnome_pixmap_file ("gnome-unknown.png");
+	}
+	entry->path = g_strdup (gnome_desktop_item_get_location (dentry));
 
+	entry->exec = vec;
 	entry->dir = dir;
 
 	if (!entry->icon)
 		entry->icon = GNOMECC_PIXMAPS_DIR "/control-center.png";
 
-	entry->pb = gdk_pixbuf_new_from_file (entry->icon);
+	entry->pb = gdk_pixbuf_new_from_file (entry->icon, NULL);
 
 	g_hash_table_insert (capplet_hash, g_strdup (desktop_path), entry);
 
@@ -122,20 +149,26 @@ capplet_dir_new (CappletDir *dir, gchar *dir_path)
 	entry = CAPPLET_DIR_ENTRY (capplet_dir);
 
 	entry->type = TYPE_CAPPLET_DIR;
-	entry->entry = gnome_desktop_entry_load (desktop_path);
+	entry->entry = gnome_desktop_item_new_from_file (desktop_path,
+			GNOME_DESKTOP_ITEM_TYPE_NULL,
+			NULL);
 	entry->dir = dir;
 	entry->path = g_strdup (dir_path);
 
 	g_free (desktop_path);
 
 	if (entry->entry) {
-		entry->label = entry->entry->name;
-		entry->icon = entry->entry->icon;
+		entry->label = g_strdup (gnome_desktop_item_get_string (
+				entry->entry,
+				GNOME_DESKTOP_ITEM_NAME));
+		entry->icon = g_strdup (gnome_desktop_item_get_string (
+				entry->entry,
+				GNOME_DESKTOP_ITEM_ICON));
 
 		if (!entry->icon)
-			entry->icon = GNOMECC_PIXMAPS_DIR "/control-center.png";
+			entry->icon = g_strdup (GNOMECC_PIXMAPS_DIR "/control-center.png");
 
-		entry->pb = gdk_pixbuf_new_from_file (entry->icon);
+		entry->pb = gdk_pixbuf_new_from_file (entry->icon, NULL);
 	} else {
 		/* If the .directory file could not be found or read, abort */
 		g_free (capplet_dir);
@@ -164,10 +197,13 @@ capplet_dir_entry_destroy (CappletDirEntry *entry)
 		capplet_shutdown (CAPPLET (entry));
 	} else {
 		capplet_dir_shutdown (CAPPLET_DIR (entry));
-		g_free (entry->path);
 	}
 
-	gnome_desktop_entry_free (entry->entry);
+	g_free (entry->label);
+	g_free (entry->icon);
+	g_free (entry->path);
+	g_strfreev (entry->exec);
+	gnome_desktop_item_unref (entry->entry);
 	g_free (entry);
 }
 
@@ -206,9 +242,9 @@ capplet_reset_cb (Capplet *capplet)
 static void
 capplet_activate (Capplet *capplet) 
 {
-	GnomeDesktopEntry *entry;
+	CappletDirEntry *entry;
 
-	entry = CAPPLET_DIR_ENTRY (capplet)->entry;
+	entry = CAPPLET_DIR_ENTRY (capplet);
 
 #warning FIXME: this should probably be root-manager-helper
 	if (!strncmp (entry->exec[0], "gnomecc", strlen ("gnomecc"))) {
@@ -217,17 +253,19 @@ capplet_activate (Capplet *capplet)
 		} else {
 			capplet->launching = TRUE;
 			gtk_idle_add ((GtkFunction) capplet_reset_cb, capplet);
-			capplet_control_launch (entry->exec[2], entry->name);
+			capplet_control_launch (entry->exec[2], entry->label);
 		}
+#ifdef USE_ROOT_MANAGER 
 	} else if (!strncmp (entry->exec[0], "root-manager", strlen ("root-manager"))) {
-		start_capplet_through_root_manager (entry);
+		start_capplet_through_root_manager (entry->entry);
+#endif
 	} else {
 		if (capplet->launching) {
 			return;
 		} else {
 			capplet->launching = TRUE;
 			gtk_timeout_add (1000, (GtkFunction) capplet_reset_cb, capplet);
-			gnome_desktop_entry_launch (entry);
+			gnome_desktop_item_launch (entry->entry, 0, NULL, NULL);
 		}
 	}
 }
@@ -275,8 +313,8 @@ capplet_dir_shutdown (CappletDir *capplet_dir)
 static gint 
 node_compare (gconstpointer a, gconstpointer b) 
 {
-	return strcmp (CAPPLET_DIR_ENTRY (a)->entry->name, 
-		       CAPPLET_DIR_ENTRY (b)->entry->name);
+	return strcmp (CAPPLET_DIR_ENTRY (a)->label, 
+		       CAPPLET_DIR_ENTRY (b)->label);
 }
 
 /* Adapted from the original control center... */
@@ -335,8 +373,9 @@ read_entries (CappletDir *dir)
 		: list;
 }
 
+#ifdef USE_ROOT_MANAGER
 static void
-start_capplet_through_root_manager (GnomeDesktopEntry *gde) 
+start_capplet_through_root_manager (GnomeDesktopItem *gde) 
 {
 	static FILE *output = NULL;
 	pid_t pid;
@@ -382,6 +421,7 @@ start_capplet_through_root_manager (GnomeDesktopEntry *gde)
 	fflush (output);
 	g_free (cmdline);
 }
+#endif
 
 void 
 capplet_dir_init (CappletDirView *(*cb) (CappletDir *, CappletDirView *)) 

@@ -1,364 +1,370 @@
-<?xml version="1.0"?>
-<GTK-Interface>
+<?xml version="1.0" standalone="no"?> <!--*- mode: xml -*-->
+<!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd" >
 
-<project>
-  <name>New-control-center</name>
-  <program_name>new-control-center</program_name>
-  <directory></directory>
-  <source_directory>src</source_directory>
-  <pixmaps_directory>pixmaps</pixmaps_directory>
-  <language>C</language>
-  <gnome_support>True</gnome_support>
-  <gettext_support>True</gettext_support>
-</project>
+<glade-interface>
+  <requires lib="gnome" />
 
-<widget>
-  <class>GnomeDialog</class>
-  <name>preferences_dialog</name>
-  <type>GTK_WINDOW_TOPLEVEL</type>
-  <position>GTK_WIN_POS_NONE</position>
-  <modal>False</modal>
-  <allow_shrink>False</allow_shrink>
-  <allow_grow>False</allow_grow>
-  <auto_shrink>False</auto_shrink>
-  <auto_close>False</auto_close>
-  <hide_on_close>False</hide_on_close>
+  <widget class="GtkDialog" id="preferences_dialog">
+    <property name="type">GTK_WINDOW_TOPLEVEL</property>
+    <property name="modal">no</property>
+    <property name="allow_shrink">no</property>
+    <property name="allow_grow">no</property>
+    <property name="auto_close">no</property>
+    <property name="hide_on_close">no</property>
+    <property name="visible">no</property>
+    <property name="window-position">GTK_WIN_POS_NONE</property>
 
-  <widget>
-    <class>GtkVBox</class>
-    <child_name>GnomeDialog:vbox</child_name>
-    <name>dialog-vbox1</name>
-    <homogeneous>False</homogeneous>
-    <spacing>8</spacing>
-    <child>
-      <padding>4</padding>
-      <expand>True</expand>
-      <fill>True</fill>
-    </child>
+    <child internal-child="vbox">
+      <widget class="GtkVBox" id="dialog-vbox1">
+        <property name="homogeneous">no</property>
+        <property name="spacing">8</property>
+        <property name="visible">yes</property>
 
-    <widget>
-      <class>GtkHButtonBox</class>
-      <child_name>GnomeDialog:action_area</child_name>
-      <name>dialog-action_area1</name>
-      <layout_style>GTK_BUTTONBOX_END</layout_style>
-      <spacing>8</spacing>
-      <child_min_width>85</child_min_width>
-      <child_min_height>27</child_min_height>
-      <child_ipad_x>7</child_ipad_x>
-      <child_ipad_y>0</child_ipad_y>
-      <child>
-	<padding>0</padding>
-	<expand>False</expand>
-	<fill>True</fill>
-	<pack>GTK_PACK_END</pack>
-      </child>
+        <child internal-child="action_area">
+          <widget class="GtkHButtonBox" id="dialog-action_area1">
+            <property name="layout_style">GTK_BUTTONBOX_END</property>
+            <property name="spacing">8</property>
+            <property name="child_min_width">85</property>
+            <property name="child_min_height">27</property>
+            <property name="child_ipad_x">7</property>
+            <property name="child_ipad_y">0</property>
+            <property name="visible">yes</property>
 
-      <widget>
-	<class>GtkButton</class>
-	<name>button1</name>
-	<can_default>True</can_default>
-	<can_focus>True</can_focus>
-	<stock_button>GNOME_STOCK_BUTTON_OK</stock_button>
+            <child>
+              <widget class="GtkButton" id="button1">
+                <property name="can_default">yes</property>
+                <property name="can_focus">yes</property>
+                <property name="visible">yes</property>
+                <property name="label" translatable="yes">gtk-ok</property>
+                <property name="use_stock">yes</property>
+                <property name="use_underline">yes</property>
+              </widget>
+            </child>
+
+            <child>
+              <widget class="GtkButton" id="button2">
+                <property name="can_default">yes</property>
+                <property name="can_focus">yes</property>
+                <property name="visible">yes</property>
+                <property name="label" translatable="yes">gtk-apply</property>
+                <property name="use_stock">yes</property>
+                <property name="use_underline">yes</property>
+              </widget>
+            </child>
+
+            <child>
+              <widget class="GtkButton" id="button3">
+                <property name="can_default">yes</property>
+                <property name="can_focus">yes</property>
+                <property name="visible">yes</property>
+                <property name="label" translatable="yes">gtk-cancel</property>
+                <property name="use_stock">yes</property>
+                <property name="use_underline">yes</property>
+              </widget>
+            </child>
+          </widget>
+          <packing>
+            <property name="padding">0</property>
+            <property name="expand">no</property>
+            <property name="fill">yes</property>
+            <property name="pack">GTK_PACK_END</property>
+          </packing>
+        </child>
+
+        <child>
+          <widget class="GtkNotebook" id="notebook1">
+            <property name="can_focus">yes</property>
+            <property name="show_tabs">yes</property>
+            <property name="show_border">yes</property>
+            <property name="tab_pos">GTK_POS_TOP</property>
+            <property name="scrollable">no</property>
+            <property name="tab_hborder">2</property>
+            <property name="tab_vborder">2</property>
+            <property name="enable-popup">no</property>
+            <property name="visible">yes</property>
+
+            <child>
+              <widget class="GtkVBox" id="vbox1">
+                <property name="border_width">5</property>
+                <property name="homogeneous">no</property>
+                <property name="spacing">5</property>
+                <property name="visible">yes</property>
+
+                <child>
+                  <widget class="GtkRadioButton" id="no_embed_widget">
+                    <property name="can_focus">yes</property>
+                    <property name="label" translatable="yes">Launch control panels in separate windows</property>
+                    <property name="active">no</property>
+                    <property name="draw_indicator">yes</property>
+                    <property name="visible">yes</property>
+                  </widget>
+                  <packing>
+                    <property name="padding">0</property>
+                    <property name="expand">no</property>
+                    <property name="fill">no</property>
+                  </packing>
+                </child>
+
+                <child>
+                  <widget class="GtkRadioButton" id="embed_widget">
+                    <property name="can_focus">yes</property>
+                    <property name="label" translatable="yes">Put control panels in the control center's window</property>
+                    <property name="active">no</property>
+                    <property name="draw_indicator">yes</property>
+                    <property name="visible">yes</property>
+                    <property name="group">no_embed_widget</property>
+                  </widget>
+                  <packing>
+                    <property name="padding">0</property>
+                    <property name="expand">no</property>
+                    <property name="fill">no</property>
+                  </packing>
+                </child>
+
+                <child>
+                  <widget class="GtkHSeparator" id="hseparator1">
+                    <property name="visible">yes</property>
+                  </widget>
+                  <packing>
+                    <property name="padding">0</property>
+                    <property name="expand">yes</property>
+                    <property name="fill">yes</property>
+                  </packing>
+                </child>
+
+                <child>
+                  <widget class="GtkRadioButton" id="html_widget">
+                    <property name="can_focus">yes</property>
+                    <property name="label" translatable="yes">Display control panels as HTML</property>
+                    <property name="active">yes</property>
+                    <property name="draw_indicator">yes</property>
+                    <property name="visible">yes</property>
+                  </widget>
+                  <packing>
+                    <property name="padding">0</property>
+                    <property name="expand">no</property>
+                    <property name="fill">no</property>
+                  </packing>
+                </child>
+
+                <child>
+                  <widget class="GtkRadioButton" id="icon_list_widget">
+                    <property name="can_focus">yes</property>
+                    <property name="label" translatable="yes">Display control panels as a set of icons</property>
+                    <property name="active">no</property>
+                    <property name="draw_indicator">yes</property>
+                    <property name="visible">yes</property>
+                    <property name="group">html_widget</property>
+                  </widget>
+                  <packing>
+                    <property name="padding">0</property>
+                    <property name="expand">no</property>
+                    <property name="fill">no</property>
+                  </packing>
+                </child>
+
+                <child>
+                  <widget class="GtkRadioButton" id="tree_widget">
+                    <property name="can_focus">yes</property>
+                    <property name="label" translatable="yes">Display control panels as a tree</property>
+                    <property name="active">no</property>
+                    <property name="draw_indicator">yes</property>
+                    <property name="visible">yes</property>
+                    <property name="group">html_widget</property>
+
+                    <signal name="toggled" handler="tree_widget_toggled_cb" />
+                  </widget>
+                  <packing>
+                    <property name="padding">0</property>
+                    <property name="expand">no</property>
+                    <property name="fill">no</property>
+                  </packing>
+                </child>
+
+                <child>
+                  <widget class="GtkHSeparator" id="hseparator2">
+                    <property name="visible">yes</property>
+                  </widget>
+                  <packing>
+                    <property name="padding">0</property>
+                    <property name="expand">yes</property>
+                    <property name="fill">yes</property>
+                  </packing>
+                </child>
+
+                <child>
+                  <widget class="GtkRadioButton" id="single_widget">
+                    <property name="can_focus">yes</property>
+                    <property name="label" translatable="yes">Browse with single window</property>
+                    <property name="active">no</property>
+                    <property name="draw_indicator">yes</property>
+                    <property name="visible">yes</property>
+                  </widget>
+                  <packing>
+                    <property name="padding">0</property>
+                    <property name="expand">no</property>
+                    <property name="fill">no</property>
+                  </packing>
+                </child>
+
+                <child>
+                  <widget class="GtkRadioButton" id="multiple_widget">
+                    <property name="can_focus">yes</property>
+                    <property name="label" translatable="yes">Browse with multiple windows</property>
+                    <property name="active">no</property>
+                    <property name="draw_indicator">yes</property>
+                    <property name="visible">yes</property>
+                    <property name="group">single_widget</property>
+                  </widget>
+                  <packing>
+                    <property name="padding">0</property>
+                    <property name="expand">no</property>
+                    <property name="fill">no</property>
+                  </packing>
+                </child>
+              </widget>
+            </child>
+
+            <child>
+              <widget class="GtkLabel" id="label1">
+                <property name="label" translatable="yes">Appearance</property>
+                <property name="justify">GTK_JUSTIFY_CENTER</property>
+                <property name="wrap">no</property>
+                <property name="xalign">0.5</property>
+                <property name="yalign">0.5</property>
+                <property name="xpad">0</property>
+                <property name="ypad">0</property>
+                <property name="visible">yes</property>
+              </widget>
+              <packing>
+                <property name="type">tab</property>
+              </packing>
+            </child>
+          </widget>
+          <packing>
+            <property name="padding">0</property>
+            <property name="expand">yes</property>
+            <property name="fill">yes</property>
+          </packing>
+        </child>
       </widget>
-
-      <widget>
-	<class>GtkButton</class>
-	<name>button2</name>
-	<can_default>True</can_default>
-	<can_focus>True</can_focus>
-	<stock_button>GNOME_STOCK_BUTTON_APPLY</stock_button>
-      </widget>
-
-      <widget>
-	<class>GtkButton</class>
-	<name>button3</name>
-	<can_default>True</can_default>
-	<can_focus>True</can_focus>
-	<stock_button>GNOME_STOCK_BUTTON_CANCEL</stock_button>
-      </widget>
-    </widget>
-
-    <widget>
-      <class>GtkNotebook</class>
-      <name>notebook1</name>
-      <can_focus>True</can_focus>
-      <show_tabs>True</show_tabs>
-      <show_border>True</show_border>
-      <tab_pos>GTK_POS_TOP</tab_pos>
-      <scrollable>False</scrollable>
-      <tab_hborder>2</tab_hborder>
-      <tab_vborder>2</tab_vborder>
-      <popup_enable>False</popup_enable>
-      <child>
-	<padding>0</padding>
-	<expand>True</expand>
-	<fill>True</fill>
-      </child>
-
-      <widget>
-	<class>GtkVBox</class>
-	<name>vbox1</name>
-	<border_width>5</border_width>
-	<homogeneous>False</homogeneous>
-	<spacing>5</spacing>
-
-	<widget>
-	  <class>GtkRadioButton</class>
-	  <name>no_embed_widget</name>
-	  <can_focus>True</can_focus>
-	  <label>Launch control panels in separate windows</label>
-	  <active>False</active>
-	  <draw_indicator>True</draw_indicator>
-	  <group>embed_group</group>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
-	</widget>
-
-	<widget>
-	  <class>GtkRadioButton</class>
-	  <name>embed_widget</name>
-	  <can_focus>True</can_focus>
-	  <label>Put control panels in the control center's window</label>
-	  <active>False</active>
-	  <draw_indicator>True</draw_indicator>
-	  <group>embed_group</group>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
-	</widget>
-
-	<widget>
-	  <class>GtkHSeparator</class>
-	  <name>hseparator1</name>
-	  <child>
-	    <padding>0</padding>
-	    <expand>True</expand>
-	    <fill>True</fill>
-	  </child>
-	</widget>
-
-	<widget>
-	  <class>GtkRadioButton</class>
-	  <name>html_widget</name>
-	  <can_focus>True</can_focus>
-	  <label>Display control panels as HTML</label>
-	  <active>True</active>
-	  <draw_indicator>True</draw_indicator>
-	  <group>display_type_group</group>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
-	</widget>
-
-	<widget>
-	  <class>GtkRadioButton</class>
-	  <name>icon_list_widget</name>
-	  <can_focus>True</can_focus>
-	  <label>Display control panels as a set of icons</label>
-	  <active>False</active>
-	  <draw_indicator>True</draw_indicator>
-	  <group>display_type_group</group>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
-	</widget>
-
-	<widget>
-	  <class>GtkRadioButton</class>
-	  <name>tree_widget</name>
-	  <can_focus>True</can_focus>
-	  <signal>
-	    <name>toggled</name>
-	    <handler>tree_widget_toggled_cb</handler>
-	    <last_modification_time>Fri, 11 Aug 2000 17:13:59 GMT</last_modification_time>
-	  </signal>
-	  <label>Display control panels as a tree</label>
-	  <active>False</active>
-	  <draw_indicator>True</draw_indicator>
-	  <group>display_type_group</group>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
-	</widget>
-
-	<widget>
-	  <class>GtkHSeparator</class>
-	  <name>hseparator2</name>
-	  <child>
-	    <padding>0</padding>
-	    <expand>True</expand>
-	    <fill>True</fill>
-	  </child>
-	</widget>
-
-	<widget>
-	  <class>GtkRadioButton</class>
-	  <name>single_widget</name>
-	  <can_focus>True</can_focus>
-	  <label>Browse with single window</label>
-	  <active>False</active>
-	  <draw_indicator>True</draw_indicator>
-	  <group>browse_type</group>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
-	</widget>
-
-	<widget>
-	  <class>GtkRadioButton</class>
-	  <name>multiple_widget</name>
-	  <can_focus>True</can_focus>
-	  <label>Browse with multiple windows</label>
-	  <active>False</active>
-	  <draw_indicator>True</draw_indicator>
-	  <group>browse_type</group>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
-	</widget>
-      </widget>
-
-      <widget>
-	<class>GtkLabel</class>
-	<child_name>Notebook:tab</child_name>
-	<name>label1</name>
-	<label>Appearance</label>
-	<justify>GTK_JUSTIFY_CENTER</justify>
-	<wrap>False</wrap>
-	<xalign>0.5</xalign>
-	<yalign>0.5</yalign>
-	<xpad>0</xpad>
-	<ypad>0</ypad>
-      </widget>
-    </widget>
-  </widget>
-</widget>
-
-<widget>
-  <class>GnomeApp</class>
-  <name>main_window</name>
-  <visible>False</visible>
-  <title>New-control-center</title>
-  <type>GTK_WINDOW_TOPLEVEL</type>
-  <position>GTK_WIN_POS_NONE</position>
-  <modal>False</modal>
-  <default_width>620</default_width>
-  <default_height>430</default_height>
-  <allow_shrink>True</allow_shrink>
-  <allow_grow>True</allow_grow>
-  <auto_shrink>False</auto_shrink>
-  <enable_layout_config>True</enable_layout_config>
-
-  <widget>
-    <class>GnomeDock</class>
-    <child_name>GnomeApp:dock</child_name>
-    <name>dock1</name>
-    <allow_floating>True</allow_floating>
-    <child>
-      <padding>0</padding>
-      <expand>True</expand>
-      <fill>True</fill>
-    </child>
-
-    <widget>
-      <class>GnomeDockItem</class>
-      <name>dockitem1</name>
-      <border_width>2</border_width>
-      <placement>GNOME_DOCK_TOP</placement>
-      <band>0</band>
-      <position>0</position>
-      <offset>0</offset>
-      <locked>False</locked>
-      <exclusive>True</exclusive>
-      <never_floating>False</never_floating>
-      <never_vertical>True</never_vertical>
-      <never_horizontal>False</never_horizontal>
-      <shadow_type>GTK_SHADOW_OUT</shadow_type>
-
-      <widget>
-	<class>GtkMenuBar</class>
-	<name>menubar1</name>
-	<shadow_type>GTK_SHADOW_NONE</shadow_type>
-
-	<widget>
-	  <class>GtkMenuItem</class>
-	  <name>file1</name>
-	  <stock_item>GNOMEUIINFO_MENU_FILE_TREE</stock_item>
-
-	  <widget>
-	    <class>GtkMenu</class>
-	    <name>file1_menu</name>
-
-	    <widget>
-	      <class>GtkPixmapMenuItem</class>
-	      <name>exit1</name>
-	      <signal>
-		<name>activate</name>
-		<handler>close_cb</handler>
-		<last_modification_time>Tue, 05 Dec 2000 02:53:49 GMT</last_modification_time>
-	      </signal>
-	      <stock_item>GNOMEUIINFO_MENU_CLOSE_ITEM</stock_item>
-	    </widget>
-	  </widget>
-	</widget>
-
-	<widget>
-	  <class>GtkMenuItem</class>
-	  <name>help1</name>
-	  <stock_item>GNOMEUIINFO_MENU_HELP_TREE</stock_item>
-
-	  <widget>
-	    <class>GtkMenu</class>
-	    <name>help1_menu</name>
-
-	    <widget>
-	      <class>GtkPixmapMenuItem</class>
-	      <name>about1</name>
-	      <signal>
-		<name>activate</name>
-		<handler>about_menu_cb</handler>
-		<last_modification_time>Tue, 05 Dec 2000 02:53:49 GMT</last_modification_time>
-	      </signal>
-	      <stock_item>GNOMEUIINFO_MENU_ABOUT_ITEM</stock_item>
-	    </widget>
-	  </widget>
-	</widget>
-      </widget>
-    </widget>
-
-    <widget>
-      <class>Placeholder</class>
-      <child_name>GnomeDock:contents</child_name>
-    </widget>
-  </widget>
-
-  <widget>
-    <class>GnomeAppBar</class>
-    <child_name>GnomeApp:appbar</child_name>
-    <name>appbar1</name>
-    <has_progress>False</has_progress>
-    <has_status>True</has_status>
-    <child>
-      <padding>0</padding>
-      <expand>True</expand>
-      <fill>True</fill>
+      <packing>
+        <property name="padding">4</property>
+        <property name="expand">yes</property>
+        <property name="fill">yes</property>
+      </packing>
     </child>
   </widget>
-</widget>
+  <widget class="GnomeApp" id="main_window">
+    <property name="visible">no</property>
+    <property name="title" translatable="yes">New-control-center</property>
+    <property name="type">GTK_WINDOW_TOPLEVEL</property>
+    <property name="modal">no</property>
+    <property name="default_width">620</property>
+    <property name="default_height">430</property>
+    <property name="allow_shrink">yes</property>
+    <property name="allow_grow">yes</property>
+    <property name="enable_layout_config">yes</property>
+    <property name="window-position">GTK_WIN_POS_NONE</property>
 
-</GTK-Interface>
+    <child internal-child="vbox">
+      <widget class="GnomeDock" id="dock1">
+        <property name="allow_floating">yes</property>
+        <property name="visible">yes</property>
+
+        <child>
+          <widget class="GnomeDockItem" id="dockitem1">
+            <property name="border_width">2</property>
+            <property name="placement">GNOME_DOCK_TOP</property>
+            <property name="band">0</property>
+            <property name="position">0</property>
+            <property name="offset">0</property>
+            <property name="locked">no</property>
+            <property name="exclusive">yes</property>
+            <property name="never_floating">no</property>
+            <property name="never_vertical">yes</property>
+            <property name="never_horizontal">no</property>
+            <property name="shadow_type">GTK_SHADOW_OUT</property>
+            <property name="visible">yes</property>
+
+            <child>
+              <widget class="GtkMenuBar" id="menubar1">
+                <property name="shadow_type">GTK_SHADOW_NONE</property>
+                <property name="visible">yes</property>
+
+                <child>
+                  <widget class="GtkMenuItem" id="file1">
+                    <property name="stock_item">GNOMEUIINFO_MENU_FILE_TREE</property>
+                    <property name="visible">yes</property>
+
+                    <child>
+                      <widget class="GtkMenu" id="file1_menu">
+                        <property name="visible">yes</property>
+
+                        <child>
+                          <widget class="GtkImageMenuItem" id="exit1">
+                            <property name="stock_item">GNOMEUIINFO_MENU_CLOSE_ITEM</property>
+                            <property name="visible">yes</property>
+
+                            <signal name="activate" handler="close_cb" />
+                          </widget>
+                        </child>
+                      </widget>
+                    </child>
+                  </widget>
+                </child>
+
+                <child>
+                  <widget class="GtkMenuItem" id="help1">
+                    <property name="stock_item">GNOMEUIINFO_MENU_HELP_TREE</property>
+                    <property name="visible">yes</property>
+
+                    <child>
+                      <widget class="GtkMenu" id="help1_menu">
+                        <property name="visible">yes</property>
+
+                        <child>
+                          <widget class="GtkImageMenuItem" id="about1">
+                            <property name="stock_item">GNOMEUIINFO_MENU_ABOUT_ITEM</property>
+                            <property name="visible">yes</property>
+
+                            <signal name="activate" handler="about_menu_cb" />
+                          </widget>
+                        </child>
+                      </widget>
+                    </child>
+                  </widget>
+                </child>
+              </widget>
+            </child>
+          </widget>
+        </child>
+
+        <child internal-child="action_area">
+          <widget class="GtkHButtonBox" id="None">
+            <property name="visible">yes</property>
+          </widget>
+        </child>
+      </widget>
+      <packing>
+        <property name="padding">0</property>
+        <property name="expand">yes</property>
+        <property name="fill">yes</property>
+      </packing>
+    </child>
+
+    <child>
+      <widget class="GnomeAppBar" id="appbar1">
+        <property name="child_name">GnomeApp:appbar</property>
+        <property name="has_progress">no</property>
+        <property name="has_status">yes</property>
+        <property name="visible">yes</property>
+      </widget>
+      <packing>
+        <property name="padding">0</property>
+        <property name="expand">yes</property>
+        <property name="fill">yes</property>
+      </packing>
+    </child>
+  </widget>
+</glade-interface>

@@ -67,13 +67,9 @@ main (int argc, char **argv)
         bindtextdomain (PACKAGE, GNOMELOCALEDIR);
         textdomain (PACKAGE);
 
-	gnomelib_register_popt_table (gnomecc_options, _("GNOME Control Center options"));
-	gnome_init ("control-center", VERSION, argc, argv);
-	glade_gnome_init ();
-
-	orb = oaf_init (argc, argv);
-	if (bonobo_init (orb, CORBA_OBJECT_NIL, CORBA_OBJECT_NIL) == FALSE)
-		g_error ("Cannot initialize bonobo");
+	gnome_program_init ("control-center", VERSION, LIBGNOMEUI_MODULE,
+			    argc, argv,
+			    GNOME_PARAM_POPT_TABLE, gnomecc_options);
 
 	gconf_init (argc, argv, NULL);
 

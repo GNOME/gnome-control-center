@@ -32,7 +32,9 @@
 
 #include "capplet-dir-view.h"
 
+#ifdef USE_HTML
 extern CappletDirViewImpl capplet_dir_view_html;
+#endif
 extern CappletDirViewImpl capplet_dir_view_list;
 extern CappletDirViewImpl capplet_dir_view_tree;
 
@@ -40,7 +42,9 @@ CappletDirViewImpl *capplet_dir_view_impl[] = {
 	NULL,
 	&capplet_dir_view_list,
 	&capplet_dir_view_tree,
+#ifdef USE_HTML
 	&capplet_dir_view_html
+#endif
 };
 
 static GtkObjectClass *parent_class;
@@ -87,7 +91,12 @@ capplet_dir_view_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		capplet_dir_view_load_dir (view, GTK_VALUE_POINTER (*arg));
 		break;
 	case ARG_LAYOUT:
+#ifdef USE_HTML
 		layout = CLAMP (GTK_VALUE_UINT (*arg), 0, LAYOUT_HTML);
+#else
+		layout = CLAMP (GTK_VALUE_UINT (*arg), 0, LAYOUT_TREE);
+#endif
+
 		if (layout == view->layout)
 			break;
 
@@ -169,22 +178,26 @@ capplet_dir_view_class_init (CappletDirViewClass *klass)
 guint
 capplet_dir_view_get_type (void) 
 {
-	static guint capplet_dir_view_type = 0;
+	static GtkType capplet_dir_view_type = 0;
 
 	if (!capplet_dir_view_type) {
-		GtkTypeInfo capplet_dir_view_info = {
-			"CappletDirView",
-			sizeof (CappletDirView),
+		static const GTypeInfo capplet_dir_view_info = {
 			sizeof (CappletDirViewClass),
-			(GtkClassInitFunc) capplet_dir_view_class_init,
-			(GtkObjectInitFunc) capplet_dir_view_init,
-			(GtkArgSetFunc) NULL,
-			(GtkArgGetFunc) NULL
+			NULL, /* base_init */
+			NULL, /* base_finalize */
+			(GClassInitFunc) capplet_dir_view_class_init,
+			NULL, /* class_finalize */
+			NULL, /* class_data */
+			sizeof (CappletDirView),
+			0 /* n_preallocs */,
+			(GInstanceInitFunc) capplet_dir_view_init
 		};
 
 		capplet_dir_view_type = 
-			gtk_type_unique (gtk_object_get_type (),
-					 &capplet_dir_view_info);
+			g_type_register_static (gtk_object_get_type (),
+					 "CappletDirView",
+					 &capplet_dir_view_info,
+					 0);
 	}
 
 	return capplet_dir_view_type;
@@ -223,11 +236,13 @@ menu_cb (GtkWidget *w, CappletDirView *view, CappletDirViewLayout layout)
 	gtk_object_set (GTK_OBJECT (view), "layout", layout, NULL);
 }
 
+#ifdef USE_HTML
 static void
 html_menu_cb (GtkWidget *w, CappletDirView *view)
 {
 	menu_cb (w, view, LAYOUT_HTML);
 }
+#endif
 
 static void
 icon_menu_cb (GtkWidget *w, CappletDirView *view)
@@ -250,11 +265,13 @@ button_cb (GtkWidget *w, CappletDirView *view, CappletDirViewLayout layout)
 	gtk_object_set (GTK_OBJECT (view), "layout", layout, NULL);
 }
 
+#ifdef USE_HTML
 static void
 html_toggle_cb (GtkWidget *w, CappletDirView *view)
 {
 	button_cb (w, view, LAYOUT_HTML);
 }
+#endif
 
 static void
 list_toggle_cb (GtkWidget *w, CappletDirView *view)
@@ -296,11 +313,11 @@ about_menu_cb (GtkWidget *widget, CappletDirView *view)
 
 	about = gnome_about_new
 		(_("GNOME Control Center"), VERSION,
-		 _("Desktop properties manager."),
-		 (const gchar **) authors,
 		 "Copyright (C) 2000, 2001 Ximian, Inc.\n"
 		 "Copyright (C) 1999 Red Hat Software, Inc.",
-		 NULL);
+		 _("Desktop properties manager."),
+		 (const gchar **) authors,
+		 NULL, NULL, NULL);
 
 	gtk_signal_connect (GTK_OBJECT (about), "destroy",
 			    GTK_SIGNAL_FUNC (gtk_widget_destroyed), 
@@ -329,7 +346,7 @@ capplet_dir_view_new (void)
 	GladeXML *xml;
 	CappletDirView *view;
 
-	xml = glade_xml_new (GLADEDIR"/gnomecc.glade", "main_window");
+	xml = glade_xml_new (GLADEDIR"/gnomecc.glade", "main_window", NULL);
 	if (!xml)
 		return NULL;
 
@@ -346,9 +363,9 @@ capplet_dir_view_new (void)
 	gtk_signal_connect (GTK_OBJECT (view->app), "destroy",
 			    GTK_SIGNAL_FUNC (destroy), view);
 
-	glade_xml_signal_connect_data (xml, "close_cb", close_cb, view);
+	glade_xml_signal_connect_data (xml, "close_cb", GTK_SIGNAL_FUNC (close_cb), view);
 
-	glade_xml_signal_connect_data (xml, "about_menu_cb", about_menu_cb, view);
+	glade_xml_signal_connect_data (xml, "about_menu_cb", GTK_SIGNAL_FUNC (about_menu_cb), view);
 	gtk_object_unref (GTK_OBJECT (xml));
 	
 	gtk_object_set (GTK_OBJECT (view), "layout", prefs->layout, NULL);
@@ -410,7 +427,7 @@ capplet_dir_view_load_dir (CappletDirView *view, CappletDir *dir)
 	if (view->impl && view->impl->populate)
 		view->impl->populate (view);
 
-	title = g_strdup_printf (_("Gnome Control Center : %s"), dir->entry.entry->name);
+	title = g_strdup_printf (_("Gnome Control Center : %s"), dir->entry.label);
 	gtk_window_set_title (GTK_WINDOW (view->app), title);
 	g_free (title);
 
@@ -449,12 +466,10 @@ help_cb (GtkWidget *widget, CappletDirView *view)
 {
 	gchar *tmp;
 
-	tmp = gnome_help_file_find_file ("users-guide", "gcc.html");
-
-	if (tmp) {
-		gnome_help_goto (0, tmp);
-		g_free (tmp);
-	} else {
+	if (!gnome_help_display (gnome_program_get (),
+				 "users-guide", "gcc.html",
+				 NULL))
+	{
 		GtkWidget *mbox;
 
 		mbox = gnome_message_box_new

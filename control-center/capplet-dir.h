@@ -25,6 +25,7 @@
 #define __CAPPLET_DIR_H
 
 #include <gnome.h>
+#include <libgnome/gnome-desktop-item.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
 #define CAPPLET_DIR_ENTRY(obj) ((CappletDirEntry *) obj)
@@ -48,7 +49,8 @@ typedef enum {
 struct _CappletDirEntry 
 {
 	CappletEntryType type;
-	GnomeDesktopEntry *entry;
+	GnomeDesktopItem *entry;
+	gchar **exec;
 	gchar *label;
 	gchar *icon;
 	gchar *path;

@@ -57,7 +57,7 @@ populate_tree_branch (CappletDir *dir, GtkCTree *ctree, GtkCTreeNode *parent)
 	for (list = dir->entries; list; list = list->next) {
 		entry = CAPPLET_DIR_ENTRY (list->data);
 
-		pixbuf = gdk_pixbuf_new_from_file (entry->icon);
+		pixbuf = gdk_pixbuf_new_from_file (entry->icon, NULL);
 		scaled = gdk_pixbuf_scale_simple (pixbuf, 16, 16, 
 						  GDK_INTERP_BILINEAR);
 		gdk_pixbuf_render_pixmap_and_mask (scaled, &pixmap, &mask, 128);
