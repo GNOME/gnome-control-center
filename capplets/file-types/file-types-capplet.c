@@ -93,6 +93,25 @@ row_activated_cb (GtkTreeView *view, GtkTreePath *path, GtkTreeViewColumn *colum
 }
 
 static void
+count_cb (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gint *count) 
+{
+	(*count)++;
+}
+
+static void
+selection_changed_cb (GtkTreeSelection *selection, GladeXML *dialog) 
+{
+	gint count;
+
+	gtk_tree_selection_selected_foreach (selection, (GtkTreeSelectionForeachFunc) count_cb, &count);
+
+	if (count == 0)
+		gtk_widget_set_sensitive (WID ("edit_button"), FALSE);
+	else
+		gtk_widget_set_sensitive (WID ("edit_button"), TRUE);
+}
+
+static void
 remove_cb (GtkButton *button, GladeXML *dialog) 
 {
 	GtkTreeView       *treeview;
@@ -111,6 +130,8 @@ remove_cb (GtkButton *button, GladeXML *dialog)
 	mime_type_remove_from_dirty_list (g_value_get_string (&mime_type));
 	gtk_tree_store_remove (GTK_TREE_STORE (model), &iter);
 	g_value_unset (&mime_type);
+
+	selection_changed_cb (selection, dialog);
 }
 
 static GladeXML *
@@ -123,6 +144,7 @@ create_dialog (void)
 	GtkWidget         *treeview;
 	GtkCellRenderer   *renderer;
 	GtkTreeViewColumn *column;
+	GtkTreeSelection  *selection;
 
 	gint               col_offset;
 
@@ -157,9 +179,15 @@ create_dialog (void)
 	column = gtk_tree_view_get_column (GTK_TREE_VIEW (treeview), col_offset - 1);
 	gtk_tree_view_set_expander_column (GTK_TREE_VIEW (treeview), column);
 
+	gtk_widget_set_sensitive (WID ("edit_button"), FALSE);
+
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
+	gtk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE);
+
 	g_signal_connect (G_OBJECT (WID ("add_button")), "clicked", (GCallback) add_cb, dialog);
 	g_signal_connect (G_OBJECT (WID ("edit_button")), "clicked", (GCallback) edit_cb, dialog);
 	g_signal_connect (G_OBJECT (WID ("remove_button")), "clicked", (GCallback) remove_cb, dialog);
+	g_signal_connect (G_OBJECT (selection), "changed", (GCallback) selection_changed_cb, dialog);
 
 	g_signal_connect (G_OBJECT (WID ("mime_types_tree")), "row-activated", (GCallback) row_activated_cb, dialog);
 

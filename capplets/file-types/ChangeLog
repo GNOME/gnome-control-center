@@ -1,5 +1,12 @@
 2002-01-11  Bradford Hovinen  <hovinen@ximian.com>
 
+	* file-types-capplet.c (selection_changed_cb): Implement
+	(count_cb): Implement
+	(create_dialog): Connect changed signal on treeview selection to
+	selection_changed_cb
+	(create_dialog): Desensitize edit button
+	(remove_cb): Call selection_changed_cb
+
 	* mime-edit-dialog.c (default_action_changed_cb): Set sensitivity
 	of needs_terminal_toggle
 	(store_data): Set needs_terminal
