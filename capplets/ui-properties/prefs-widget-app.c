@@ -42,7 +42,7 @@ static widget_desc_t widget_desc[] = {
 	WD_CHECK (toolbar_relief, "toolbar_relief"),
 	WD_CHECK (toolbar_relief_btn, "toolbar_relief_btn"),
 	WD_CHECK (toolbar_lines, "toolbar_lines"),
-	WD_CHECK (toolbar_labels, "toolbar_labels"),
+/*  	WD_CHECK (toolbar_labels, "toolbar_labels"), */
 	WD_END
 };
 

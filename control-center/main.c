@@ -61,10 +61,10 @@ main (int argc, char **argv)
 		capplet_dir_entry_activate 
 			(CAPPLET_DIR_ENTRY (get_root_capplet_dir ()), NULL);
 	} else {
-		
+		capplet_control_launch (capplet);
 	}
 
-	gtk_main ();
+	bonobo_main ();
 
 	return 0;
 }

@@ -198,7 +198,9 @@ capplet_activate (Capplet *capplet)
 	entry = CAPPLET_DIR_ENTRY (capplet)->entry;
 
 #warning FIXME: this should probably be root-manager-helper
-	if (!strncmp (entry->exec[0], "root-manager", 12))
+	if (!strncmp (entry->exec[0], "gnomecc", strlen ("gnomecc")))
+		capplet_control_launch (entry->exec[1]);
+	else if (!strncmp (entry->exec[0], "root-manager", strlen ("root-manager")))
 		start_capplet_through_root_manager (entry);
 	else
 		gnome_desktop_entry_launch (entry);
@@ -389,8 +391,13 @@ capplet_cancel_cb (GtkWidget *widget, GtkWidget *app)
 {
 }
 
+/* capplet_control_launch
+ *
+ * Launch a capplet as a Bonobo control
+ */
+
 void
-capplet_launch (const gchar *capplet_name)
+capplet_control_launch (const gchar *capplet_name)
 {
 	gchar *oaf_iid, *moniker;
 	gchar *tmp, *tmp1;
@@ -399,8 +406,9 @@ capplet_launch (const gchar *capplet_name)
 	BonoboUIContainer *uic;
 	BonoboControlFrame *frame;
 	Bonobo_PropertyBag bag;
+	Bonobo_Property property;
 	CORBA_Environment ev;
-	CORBA_any value;
+	BonoboArg *value;
 
 	g_return_if_fail (capplet_name != NULL);
 
@@ -408,6 +416,7 @@ capplet_launch (const gchar *capplet_name)
 
 	tmp = g_strdup (capplet_name);
 	if ((tmp1 = strstr (tmp, "-capplet")) != NULL) *tmp1 = '\0';
+	while ((tmp1 = strchr (tmp, '-'))) *tmp1 = '_';
 
 	oaf_iid = g_strconcat ("OAFIID:Bonobo_Control_Capplet_", tmp, NULL);
 	moniker = g_strconcat ("archiver:", tmp, NULL);
@@ -421,6 +430,16 @@ capplet_launch (const gchar *capplet_name)
 	bonobo_window_set_contents (BONOBO_WINDOW (app), box);
 
 	control = bonobo_widget_new_control (oaf_iid, BONOBO_OBJREF (uic));
+
+	if (control == NULL) {
+		g_critical ("Could not create capplet control");
+		gtk_widget_destroy (app);
+		g_free (oaf_iid);
+		g_free (moniker);
+		g_free (tmp);
+		return;
+	}
+
 	gtk_box_pack_start (GTK_BOX (box), control, TRUE, TRUE, 0);
 
 	buttons = gtk_hbutton_box_new ();
@@ -437,9 +456,26 @@ capplet_launch (const gchar *capplet_name)
 	frame = bonobo_widget_get_control_frame (BONOBO_WIDGET (control));
 	bag = bonobo_control_frame_get_control_property_bag (frame, &ev);
 
-/*  	BONOBO_ARG_SET_STRING (&value, moniker); */
-/*  	Bonobo_PropertyBag_setValue (bag, "moniker", &value, &ev); */
+	property = Bonobo_PropertyBag_getPropertyByName (bag, "moniker", &ev);
+
+	if (BONOBO_EX (&ev)) {
+		g_critical ("Could not get moniker property");
+	} else {
+		value = bonobo_arg_new (BONOBO_ARG_STRING);
+		BONOBO_ARG_SET_STRING (value, moniker);
+
+		Bonobo_Property_setValue (property, value, &ev);
+
+		if (BONOBO_EX (&ev))
+			g_critical ("Could not set moniker property");
+
+		bonobo_arg_release (value);
+	}
+
+	gtk_widget_show_all (app);
 
 	CORBA_exception_free (&ev);
+	g_free (oaf_iid);
+	g_free (moniker);
 	g_free (tmp);
 }

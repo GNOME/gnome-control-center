@@ -1,8 +1,19 @@
+2001-07-02  Bradford Hovinen  <hovinen@ximian.com>
+
+	* capplet-dir.c (capplet_control_launch): Use bonobo_arg_... functions
+
+	* main.c (main): Call capplet_control_launch if capplet was specified on CLI
+	Use bonobo_main rather than gtk_main
+
+	* capplet-dir.c (capplet_control_launch): Fix to use Bonobo_Property_setValue
+	(capplet_activate): Support capplet_control_launch; use strlen(...) rather than hardcoding length
+	(capplet_control_launch): Replace '-' characters with underscores
+
 2001-06-29  Bradford Hovinen  <hovinen@ximian.com>
 
 	* main.c (main): Support --run-capplet argument on the command line
 
-	* capplet-dir.c (capplet_launch): Implement. Currently not called,
+	* capplet-dir.c (capplet_control_launch): Implement. Currently not called,
 	but will be used to launch capplets
 
 	* main.c (main): Added OAF and bonobo intialization
