@@ -14,6 +14,7 @@ nautilus_mime_type_capplet_SOURCES =		\
 	nautilus-mime-type-capplet-dialogs.h 	\
 	nautilus-mime-type-capplet.c		\
 	nautilus-mime-type-capplet-dialogs.c 	\
+	nautilus-mime-type-icon-entry.h		\
 	nautilus-mime-type-icon-entry.c
 
 nautilus_mime_type_capplet_LDADD =					\
