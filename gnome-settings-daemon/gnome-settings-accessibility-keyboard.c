@@ -78,7 +78,7 @@ set_server_from_gconf (GConfEntry *ignored)
 		fprintf (stderr, "We changed gconf accessibility state\n");
 		return;
 	} else
-		fprintf (stderr, "Someone changed gcond accessibility state\n");
+		fprintf (stderr, "Someone changed gconf accessibility state\n");
 
 	enable_mask =   XkbAccessXKeysMask	|
 			XkbSlowKeysMask		|
