@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sk\n"
-"POT-Creation-Date: 2002-05-24 15:01+0200\n"
-"PO-Revision-Date: 2002-05-24 15:08+0200\n"
+"POT-Creation-Date: 2002-05-31 09:00+0200\n"
+"PO-Revision-Date: 2002-05-31 09:03+0200\n"
 "Last-Translator: Stanislav Višňovský <visnovsky@nenya.ms.mff.cuni.cz>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -229,16 +229,16 @@ msgstr "_Bez obrázku"
 msgid "_Picture"
 msgstr "_Obrázok:"
 
-#: capplets/background/background-properties-capplet.c:566
+#: capplets/background/background-properties-capplet.c:558
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:719
-#: capplets/keyboard/gnome-keyboard-properties.c:367
-#: capplets/mouse/gnome-mouse-properties.c:735
-#: capplets/sound/sound-properties-capplet.c:156
+#: capplets/default-applications/gnome-default-applications-properties.c:712
+#: capplets/keyboard/gnome-keyboard-properties.c:359
+#: capplets/mouse/gnome-mouse-properties.c:727
+#: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
 msgstr "Získať a uložiť predchádzajúce nastavenie"
 
-#: capplets/background/background-properties-capplet.c:591
+#: capplets/background/background-properties-capplet.c:584
 #: capplets/background/background-properties.glade.h:2
 msgid "Background Preferences"
 msgstr "Nastavenie pozadia"
@@ -354,6 +354,11 @@ msgstr ""
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "Iba použiť nastavenie a skončiť"
+
+#: capplets/common/capplet-util.c:315
+#, c-format
+msgid "There was an error displaying help: %s"
+msgstr "Pri pokuse o zobrazenie Pomocníka nastala chyba: %s"
 
 #: capplets/common/file-transfer-dialog.c:95
 #, c-format
@@ -910,25 +915,25 @@ msgid "Source Code"
 msgstr "Zdrojový kód"
 
 #: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:753
+#: capplets/file-types/mime-type-info.c:726
 msgid "Audio"
 msgstr "Audio"
 
 #: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:749
+#: capplets/file-types/mime-type-info.c:722
 msgid "Images"
 msgstr "Obrázky"
 
 #: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:751
+#: capplets/file-types/mime-type-info.c:724
 msgid "Video"
 msgstr "Video"
 
-#: capplets/file-types/file-types-capplet.c:231
+#: capplets/file-types/file-types-capplet.c:222
 msgid "Description"
 msgstr "Popis"
 
-#: capplets/file-types/file-types-capplet.c:238
+#: capplets/file-types/file-types-capplet.c:229
 #: capplets/mime-type/new-mime-window.c:39
 msgid "Extensions"
 msgstr "Rozšírenia"
@@ -1131,6 +1136,10 @@ msgstr "Kategória"
 msgid "Choose a file category"
 msgstr "Vyberte kategóriu súboru"
 
+#: capplets/file-types/mime-type-info.c:728
+msgid "Misc"
+msgstr "Rôzne"
+
 #: capplets/file-types/mime-types-model.c:167
 #: capplets/file-types/mime-types-model.c:168
 msgid "Model for categories only"
@@ -1217,16 +1226,24 @@ msgid "Font"
 msgstr "Písmo"
 
 #: capplets/font/font-properties.glade.h:1
-msgid "File Manager Font"
-msgstr "Písmo správcu súborov"
+msgid "Font Preferences"
+msgstr "Nastavenie písma"
 
 #: capplets/font/font-properties.glade.h:2
-msgid "Font Properties"
-msgstr "Vlastnosti písma"
+msgid "Set the font for applications"
+msgstr "Nastavuje štandardné písmo pre aplikácie"
 
 #: capplets/font/font-properties.glade.h:3
-msgid "Standard Desktop Font"
-msgstr "Štandardné písma prostredia"
+msgid "Set the font for the icons on the desktop"
+msgstr "Nastavuje písmo pre ikony na ploche"
+
+#: capplets/font/font-properties.glade.h:4
+msgid "Standard _application font:"
+msgstr "Štandardné písmo _aplikácie:"
+
+#: capplets/font/font-properties.glade.h:5
+msgid "_Desktop font:"
+msgstr "Písmo _plochy:"
 
 #: capplets/keybindings/eggcellrendererkeys.c:158
 #: capplets/keybindings/eggcellrendererkeys.c:159
@@ -1270,7 +1287,7 @@ msgstr "Správa okien"
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Chyba pri nastavovaní nového akcelerátoru v konfiguračnej databázi: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:840
+#: capplets/keybindings/gnome-keybinding-properties.c:851
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1278,11 +1295,11 @@ msgstr ""
 "Nepodarilo sa nájsť žiadne klávesové témy. To znamená, že nemáte úplne "
 "nainštalované GTK+."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:865
+#: capplets/keybindings/gnome-keybinding-properties.c:876
 msgid "Action"
 msgstr "Akcie"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:877
+#: capplets/keybindings/gnome-keybinding-properties.c:888
 msgid "Shortcut"
 msgstr "Klávesová skratka"
 
@@ -1315,14 +1332,14 @@ msgstr "Klávesové skratky _prostredia:"
 msgid "Associate keyboard shortcuts with panel actions"
 msgstr "Asociuje klávesové skratky s akciami panelu"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:346
+#: capplets/keyboard/gnome-keyboard-properties.c:338
 msgid "_Accessibility"
 msgstr "_Prístupnosť"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:363
-#: capplets/keyboard/gnome-keyboard-properties.c:365
-#: capplets/sound/sound-properties-capplet.c:152
-#: capplets/sound/sound-properties-capplet.c:154
+#: capplets/keyboard/gnome-keyboard-properties.c:355
+#: capplets/keyboard/gnome-keyboard-properties.c:357
+#: capplets/sound/sound-properties-capplet.c:145
+#: capplets/sound/sound-properties-capplet.c:147
 msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "Použiť nastavenia a skončiť (iba pre kompatibilitu, teraz spracováva démon)"
 
@@ -1419,9 +1436,9 @@ msgid ""
 "The keyboard bell is the <i>beep</i> sound heard when the system wants to "
 "get your attention."
 msgstr ""
-"Zvonček klávesnice je <i>pípnutie</i> v prípade, že systém "
-"požaduje vašu pozornosť. Môžete si vybrať vlastný zvukový súbor namiesto "
-"klasického pípnutia."
+"Zvonček klávesnice je <i>pípnutie</i> v prípade, že systém požaduje vašu "
+"pozornosť. Môžete si vybrať vlastný zvukový súbor namiesto klasického "
+"pípnutia."
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:28
 msgid "Very Fast"
@@ -1437,8 +1454,8 @@ msgid ""
 "'Accessibility Settings' property dialog, or pressing the button on the "
 "right."
 msgstr ""
-"Funkcie sprístupnenia klávesnice môžete nastaviť v "
-"dialógu 'Nastavenie prístupnosti' alebo stlačením tlačidla vpravo."
+"Funkcie sprístupnenia klávesnice môžete nastaviť v dialógu 'Nastavenie "
+"prístupnosti' alebo stlačením tlačidla vpravo."
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "_Accessibility..."
@@ -1731,8 +1748,8 @@ msgid ""
 "<b>Note:</b> You will need to logout and log back in for this setting to "
 "take effect."
 msgstr ""
-"<b>Poznámka:</b> Aby sa toto nastavenie prejavilo, musíte sa "
-"odhlásiť a znovu prihlásiť."
+"<b>Poznámka:</b> Aby sa toto nastavenie prejavilo, musíte sa odhlásiť a "
+"znovu prihlásiť."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:2
 msgid "<i>Fast</i>"
@@ -1893,7 +1910,7 @@ msgstr "U_miestnenie:"
 msgid "_Use HTTP proxy"
 msgstr "_Použiť HTTP proxy"
 
-#: capplets/sound/sound-properties-capplet.c:186
+#: capplets/sound/sound-properties-capplet.c:180
 msgid "Sound preferences"
 msgstr "Nastavenie zvuku"
 
@@ -2246,7 +2263,7 @@ msgstr ""
 msgid "OK"
 msgstr "OK"
 
-#: capplets/windows/gnome-window-properties.c:797
+#: capplets/windows/gnome-window-properties.c:798
 msgid "Window Preferences"
 msgstr "Nastavenie okien"
 
@@ -2569,6 +2586,12 @@ msgstr "_Zahrať"
 #: libsounds/sound-view.c:257
 msgid "Select sound file"
 msgstr "Vyberte zvukový súbor"
+
+#~ msgid "File Manager Font"
+#~ msgstr "Písmo správcu súborov"
+
+#~ msgid "Font Properties"
+#~ msgstr "Vlastnosti písma"
 
 #~ msgid "&lt;b&gt;Test&lt;/b&gt;"
 #~ msgstr "&lt;b&gt;Test&lt;/b&gt;"
