@@ -32,9 +32,6 @@
 
 #include "capplet-dir-view.h"
 
-#ifdef USE_HTML
-extern CappletDirViewImpl capplet_dir_view_html;
-#endif
 extern CappletDirViewImpl capplet_dir_view_list;
 extern CappletDirViewImpl capplet_dir_view_tree;
 
@@ -42,9 +39,6 @@ CappletDirViewImpl *capplet_dir_view_impl[] = {
 	NULL,
 	&capplet_dir_view_list,
 	&capplet_dir_view_tree,
-#ifdef USE_HTML
-	&capplet_dir_view_html
-#endif
 };
 
 static GtkObjectClass *parent_class;

@@ -254,6 +254,7 @@ create_dialog (void)
 int
 main (int argc, char **argv) 
 {
+	g_type_init ();
 	glade_init ();
 
 	capplet_init (argc, argv, apply_settings, create_dialog, setup_dialog, get_legacy_settings);	
