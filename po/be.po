@@ -1,19 +1,21 @@
-# translation of gnome-control-center.gnome-2-2.be.po to belarusian
-# Vital Khilko <dojlid@mova.org>, 2003
-# Ales Nyakhaychyk <nab@mail.by>, 2003
+# Беларускі пераклад gnome-control-center.HEAD.
+# Vital Khilko <dojlid@mova.org>, 2003.
+# Ales Nyakhaychyk <nab@mail.by>, 2003, 2004.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-control-center HEAD\n"
+"Project-Id-Version: gnome-control-center.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-13 09:32-0500\n"
-"PO-Revision-Date: 2003-08-14 10:09+0300\n"
+"POT-Creation-Date: 2004-02-18 14:54+0100\n"
+"PO-Revision-Date: 2004-02-18 20:23+0200\n"
 "Last-Translator: Ales Nyakhaychyk <nab@mail.by>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 0.9.6\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: KBabel 1.0.2\n"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
 msgid "<b>Applications</b>"
@@ -103,14 +105,18 @@ msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr "Памылка пад час загрузкі дыялёга перавагаў мышы: %s"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:337
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:395
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:396
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Немагчыма імпартаваць усталёўкі AccessX з файла \"%s\""
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:468
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:445
 msgid "Import Feature Settings File"
 msgstr "Імпартаваць файл усталёвак магчымасьці"
+
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:449
+msgid "_Import"
+msgstr "_Імпартаваць"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:18
@@ -336,49 +342,49 @@ msgid "seconds"
 msgstr "сэкундаў"
 
 #. solid
-#: capplets/background/background-properties-capplet.c:228
+#: capplets/background/background-properties-capplet.c:227
 msgid "Co_lor:"
 msgstr "К_олер:"
 
 #. horiz
-#: capplets/background/background-properties-capplet.c:232
+#: capplets/background/background-properties-capplet.c:231
 msgid "_Left color:"
 msgstr "_Левы колер:"
 
-#: capplets/background/background-properties-capplet.c:233
+#: capplets/background/background-properties-capplet.c:232
 msgid "_Right color:"
 msgstr "_Правы колер:"
 
 #. vert
-#: capplets/background/background-properties-capplet.c:236
+#: capplets/background/background-properties-capplet.c:235
 msgid "Top co_lor:"
 msgstr "_Верхні колер:"
 
-#: capplets/background/background-properties-capplet.c:237
+#: capplets/background/background-properties-capplet.c:236
 msgid "_Bottom color:"
 msgstr "_Ніжні колер:"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "_Tile"
 msgstr "_Загаловак"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "C_enter"
 msgstr "С_ярэдзіна"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "Sc_ale"
 msgstr "Ма_штабаванае"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "_Stretch"
 msgstr "Рась_цягваньне"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "_No Picture"
 msgstr "Бя_з відарысу"
 
-#: capplets/background/background-properties-capplet.c:559
+#: capplets/background/background-properties-capplet.c:558
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:723
 #: capplets/keyboard/gnome-keyboard-properties.c:224
@@ -387,7 +393,7 @@ msgstr "Бя_з відарысу"
 msgid "Retrieve and store legacy settings"
 msgstr "Запыт і захаваньне старых наладак"
 
-#: capplets/background/background-properties-capplet.c:585
+#: capplets/background/background-properties-capplet.c:584
 #: capplets/background/background-properties.glade.h:2
 msgid "Background Preferences"
 msgstr "Уласьцівасьці тла"
@@ -405,6 +411,7 @@ msgid "Horizontal gradient"
 msgstr "Гарызантальны градыент"
 
 #: capplets/background/background-properties.glade.h:5
+#: capplets/background/gnome-background-properties.glade.h:4
 msgid "Pick a color"
 msgstr "Схапіць колер"
 
@@ -440,98 +447,78 @@ msgstr "Вэртыкальны градыент"
 
 #: capplets/background/background-properties.glade.h:13
 msgid "You can drag image files into the window to set the background picture."
-msgstr ""
-"Вы можаце перацягваць файлы ў акно, каб усталяваць відарыс у яксьці тла."
+msgstr "Вы можаце перацягваць файлы ў акно, каб усталяваць відарыс у яксьці тла."
 
 #: capplets/background/background.desktop.in.h:1
-#, fuzzy
 msgid "Change your Desktop Background settings"
-msgstr "Наладка тла вашага стальца"
+msgstr "Зьмена ўсталёвак тла стальца"
 
 #: capplets/background/background.desktop.in.h:2
-#, fuzzy
 msgid "Desktop Background"
-msgstr "Тло"
+msgstr "Тло стальца"
 
 #: capplets/background/gnome-background-properties.glade.h:1
-#, fuzzy
 msgid "<b>Desktop _Wallpaper</b>"
-msgstr "_Шпалеры"
+msgstr "<b>_Шпалеры стальца</b>"
 
 #: capplets/background/gnome-background-properties.glade.h:2
-#, fuzzy
 msgid "<b>_Desktop Colors</b>"
-msgstr "_Шпалеры"
+msgstr "<b>_Колеры стальца</b>"
 
 #: capplets/background/gnome-background-properties.glade.h:3
-#, fuzzy
 msgid "Desktop Background Preferences"
-msgstr "Уласьцівасьці тла"
-
-#: capplets/background/gnome-background-properties.glade.h:4
-msgid "Zgjidh një ngjyrë"
-msgstr ""
+msgstr "Перавагі тла стальца"
 
 #: capplets/background/gnome-background-properties.glade.h:5
-#, fuzzy
 msgid "_Add Wallpaper"
-msgstr "_Шпалеры"
+msgstr "Д_адаць шпалеры"
 
 #: capplets/background/gnome-background-properties.glade.h:6
-#, fuzzy
 msgid "_Style:"
-msgstr "Стыль:"
+msgstr "_Стыль:"
 
 #: capplets/background/gnome-wp-capplet.c:72
 #: capplets/common/capplet-util.c:340
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:326
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Памылка пад час адлюстраваньня дапамогі: %s"
 
 #: capplets/background/gnome-wp-capplet.c:171
-#, fuzzy
 msgid "Add Wallpapers"
-msgstr "_Шпалеры"
+msgstr "Даданьне шпалер"
 
 #: capplets/background/gnome-wp-capplet.c:1265
-#, fuzzy
 msgid "Centered"
-msgstr "С_ярэдзіна"
+msgstr "Пасярэдзіне"
 
 #: capplets/background/gnome-wp-capplet.c:1287
-#, fuzzy
 msgid "Fill Screen"
-msgstr "Экран"
+msgstr "Запаўняюць экран"
 
 #: capplets/background/gnome-wp-capplet.c:1307
-#, fuzzy
 msgid "Scaled"
-msgstr "Ма_штабаванае"
+msgstr "Расьцягнутыя"
 
 #: capplets/background/gnome-wp-capplet.c:1327
-#, fuzzy
 msgid "Tiled"
-msgstr "_Загаловак"
+msgstr "Размножаныя"
 
 #: capplets/background/gnome-wp-capplet.c:1359
-#, fuzzy
 msgid "Solid Color"
 msgstr "Суцэльны колер"
 
 #: capplets/background/gnome-wp-capplet.c:1375
-#, fuzzy
 msgid "Horizontal Gradient"
 msgstr "Гарызантальны градыент"
 
 #: capplets/background/gnome-wp-capplet.c:1391
-#, fuzzy
 msgid "Vertical Gradient"
 msgstr "Вэртыкальны градыент"
 
 #: capplets/background/gnome-wp-info.c:46
-#, fuzzy
 msgid "No Wallpaper"
-msgstr "_Шпалеры"
+msgstr "Без шпалер"
 
 #: capplets/common/activate-settings-daemon.c:18
 msgid ""
@@ -625,81 +612,75 @@ msgstr "Далучэньне..."
 msgid "Downloading..."
 msgstr "Пампаваньне..."
 
-#: capplets/common/gconf-property-editor.c:172
+#: capplets/common/gconf-property-editor.c:170
 msgid "Key"
 msgstr "Ключ"
 
-#: capplets/common/gconf-property-editor.c:173
+#: capplets/common/gconf-property-editor.c:171
 msgid "GConf key to which this property editor is attached"
 msgstr "Ключ GConf, да якога падключаны гэты рэдактар уласьцівасьцяў"
 
-#: capplets/common/gconf-property-editor.c:179
+#: capplets/common/gconf-property-editor.c:177
 msgid "Callback"
 msgstr "Зваротны выклік"
 
-#: capplets/common/gconf-property-editor.c:180
+#: capplets/common/gconf-property-editor.c:178
 msgid "Issue this callback when the value associated with key gets changed"
 msgstr "Зваротны выклік, калі значэньне, зьвязанае з гэтым ключом, зьмяняецца"
 
-#: capplets/common/gconf-property-editor.c:185
+#: capplets/common/gconf-property-editor.c:183
 msgid "Change set"
 msgstr "Зьмяніць набор"
 
-#: capplets/common/gconf-property-editor.c:186
-msgid ""
-"GConf change set containing data to be forwarded to the gconf client on apply"
+#: capplets/common/gconf-property-editor.c:184
+msgid "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
 "Набор зьменаў GConf утрымлівае даньні, якія будуць накіраваныя па ужываньні "
 "да кліента"
 
-#: capplets/common/gconf-property-editor.c:191
+#: capplets/common/gconf-property-editor.c:189
 msgid "Conversion to widget callback"
 msgstr "Зваротны выклік перадачы да віджэта"
 
-#: capplets/common/gconf-property-editor.c:192
-msgid ""
-"Callback to be issued when data are to be converted from GConf to the widget"
-msgstr ""
-"Зваротны выклік, які адбудзецца, калі даньні перадаюцца ад GConf да кліента"
+#: capplets/common/gconf-property-editor.c:190
+msgid "Callback to be issued when data are to be converted from GConf to the widget"
+msgstr "Зваротны выклік, які адбудзецца, калі даньні перадаюцца ад GConf да кліента"
 
-#: capplets/common/gconf-property-editor.c:197
+#: capplets/common/gconf-property-editor.c:195
 msgid "Conversion from widget callback"
 msgstr "Зваротны выклік перадачы ад віджэта"
 
-#: capplets/common/gconf-property-editor.c:198
-msgid ""
-"Callback to be issued when data are to be converted to GConf from the widget"
-msgstr ""
-"Зваротны выклік, які адбудзецца, калі даньні перададзеныя ад кліента да GConf"
+#: capplets/common/gconf-property-editor.c:196
+msgid "Callback to be issued when data are to be converted to GConf from the widget"
+msgstr "Зваротны выклік, які адбудзецца, калі даньні перададзеныя ад кліента да GConf"
 
-#: capplets/common/gconf-property-editor.c:203
+#: capplets/common/gconf-property-editor.c:201
 msgid "UI Control"
 msgstr "Кіраваньне інтэрфэйсам карыстальніка"
 
-#: capplets/common/gconf-property-editor.c:204
+#: capplets/common/gconf-property-editor.c:202
 msgid "Object that controls the property (normally a widget)"
 msgstr "Аб'ект, які кіруе ўласьцівасьцю (звычайна віджэт)"
 
-#: capplets/common/gconf-property-editor.c:219
+#: capplets/common/gconf-property-editor.c:217
 msgid "Property editor object data"
 msgstr "Даньні аб'екта рэдактара ўласьцівасьцяў"
 
-#: capplets/common/gconf-property-editor.c:220
+#: capplets/common/gconf-property-editor.c:218
 msgid "Custom data required by the specific property editor"
-msgstr ""
-"Даньні карыстальніка, якія запатрабаваны вызначаным рэдактарам уласьцівасьцяў"
+msgstr "Даньні карыстальніка, якія запатрабаваны вызначаным рэдактарам уласьцівасьцяў"
 
-#: capplets/common/gconf-property-editor.c:226
+#: capplets/common/gconf-property-editor.c:224
 msgid "Property editor data freeing callback"
 msgstr "Зваротны выклік вызваленьня даньняў рэдактара ўласьцівасьцяў"
 
-#: capplets/common/gconf-property-editor.c:227
+#: capplets/common/gconf-property-editor.c:225
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr ""
 "Зваротны выклік, які выкліваецца, калі аб'ектныя даньні рэдактару "
 "уласьцівасьцяў вызваляюцца"
 
-#: capplets/common/gconf-property-editor.c:1541
+#: capplets/common/gconf-property-editor.c:1538
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -712,7 +693,7 @@ msgstr ""
 "Упэўніцеся, што ён існуе й паспрабуйце нанова, ці выбярыце іншы відарыс для "
 "тла."
 
-#: capplets/common/gconf-property-editor.c:1549
+#: capplets/common/gconf-property-editor.c:1546
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -725,9 +706,13 @@ msgstr ""
 "\n"
 "Выбярыце іншы відарыс, калі ласка."
 
-#: capplets/common/gconf-property-editor.c:1640
+#: capplets/common/gconf-property-editor.c:1667
 msgid "Please select an image."
 msgstr "Калі ласка, выбярыце відарыс."
+
+#: capplets/common/gconf-property-editor.c:1672
+msgid "_Select"
+msgstr "Вы_лучыць"
 
 #: capplets/default-applications/default-applications.desktop.in.h:1
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:18
@@ -752,7 +737,7 @@ msgstr "Энкампас"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:12
 msgid "Firebird/FireFox"
-msgstr ""
+msgstr "Firebird/FireFox"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:13
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:14
@@ -768,9 +753,8 @@ msgid "Konqueror"
 msgstr "Konqueror"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:17
-#, fuzzy
 msgid "W3M Text Browser"
-msgstr "Тэкставы вандроўнік Lynx"
+msgstr "Тэкставы вандроўнік W3M"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:18
 msgid "Lynx Text Browser"
@@ -1125,16 +1109,16 @@ msgid "Screen Resolution Preferences"
 msgstr "Перавагі разрозьненя экрана"
 
 #: capplets/display/main.c:476
-#, fuzzy, c-format
+#, c-format
 msgid "_Make default for this computer (%s) only"
-msgstr "Зрабіць дапомным толькі для гэтака _кампутара (%s)"
+msgstr "Зра_біць дапомным толькі для гэтага кампутара (%s)"
 
 #: capplets/display/main.c:494
 msgid "Options"
 msgstr "Выбары"
 
 #: capplets/display/main.c:515
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
 "settings will be restored."
@@ -1142,9 +1126,12 @@ msgid_plural ""
 "Testing the new settings. If you don't respond in %d seconds the previous "
 "settings will be restored."
 msgstr[0] ""
-"Праверка новых усталёвак. Калі вы не адкажаце на працягу %d сэкундаў, тады "
+"Праверка новых усталёвак. Калі вы не адкажаце на працягу %d сэкунды, тады "
 "будуць адноўленыя папярэднія ўсталёўкі."
 msgstr[1] ""
+"Праверка новых усталёвак. Калі вы не адкажаце на працягу %d сэкундаў, тады "
+"будуць адноўленыя папярэднія ўсталёўкі."
+msgstr[2] ""
 "Праверка новых усталёвак. Калі вы не адкажаце на працягу %d сэкундаў, тады "
 "будуць адноўленыя папярэднія ўсталёўкі."
 
@@ -1209,13 +1196,12 @@ msgid "Add _Service..."
 msgstr "Дадаць _паслугу..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
-#, fuzzy
 msgid "Browse icons"
-msgstr "сэкундаў"
+msgstr "Вандроўка па значкі"
 
 #: capplets/file-types/file-types-properties.glade.h:6
 msgid "C_hoose..."
-msgstr "_Выбраць..."
+msgstr "А_браць..."
 
 #: capplets/file-types/file-types-properties.glade.h:7
 msgid "Cate_gory:"
@@ -1385,9 +1371,8 @@ msgstr ""
 "ня мусіць утрымліваць прагалаў."
 
 #: capplets/file-types/mime-edit-dialog.c:857
-#, fuzzy
 msgid "A MIME type with that name already exists, overwrite?"
-msgstr "Тып MIME з гэткім назовам ужо існуе, перазапісаць?"
+msgstr "MIME від з гэткім назовам ужо йснуе, перазапісаць?"
 
 #: capplets/file-types/mime-edit-dialog.c:929
 msgid "Category"
@@ -1504,19 +1489,16 @@ msgid "<b>Font Rendering</b>"
 msgstr "<b>Прарысоўка шрыфтоў</b>"
 
 #: capplets/font/font-properties.glade.h:3
-#, fuzzy
 msgid "<b>Hinting</b>:"
-msgstr "Удакладненьне:"
+msgstr "<b>Удакладненьне</b>:"
 
 #: capplets/font/font-properties.glade.h:4
-#, fuzzy
 msgid "<b>Smoothing</b>:"
-msgstr "Згладжаньне:"
+msgstr "<b>Згладжаньне</b>:"
 
 #: capplets/font/font-properties.glade.h:5
-#, fuzzy
 msgid "<b>Subpixel order</b>:"
-msgstr "Правіла падпіксэлю:"
+msgstr "<b>Правіла падпіксэлю</b>:"
 
 #: capplets/font/font-properties.glade.h:6
 msgid "Best _shapes"
@@ -1543,18 +1525,16 @@ msgid "G_rayscale"
 msgstr "Ступені _шэрага"
 
 #: capplets/font/font-properties.glade.h:12
-#, fuzzy
 msgid "Go _to font folder"
-msgstr "Перайсьці у тэчку шрыфтоў"
+msgstr "Перайсьці у тэчку _шрыфтоў"
 
 #: capplets/font/font-properties.glade.h:13
 msgid "N_one"
 msgstr "Ня_ма"
 
 #: capplets/font/font-properties.glade.h:14
-#, fuzzy
 msgid "R_esolution:"
-msgstr "_Разрозьнене:"
+msgstr "Разр_озьнене:"
 
 #: capplets/font/font-properties.glade.h:15
 msgid "Set the font for applications"
@@ -1566,8 +1546,7 @@ msgstr "Усталяваць шрыфт для значак на стальце"
 
 #: capplets/font/font-properties.glade.h:17
 msgid "Set the monospace font for terminals and similar applications"
-msgstr ""
-"Усталяваць монашырынёвы шрыфт для тэрміналаў і падобных да іх дастасаваньняў"
+msgstr "Усталяваць монашырынёвы шрыфт для тэрміналаў і падобных да іх дастасаваньняў"
 
 #: capplets/font/font-properties.glade.h:18
 msgid "Sub_pixel (LCDs)"
@@ -1635,13 +1614,12 @@ msgid "_Window title font:"
 msgstr "Шрыфт загалоўка _акна:"
 
 #: capplets/font/font-properties.glade.h:34
-#, fuzzy
 msgid "dots per inch"
-msgstr "Разрозьненьне (_кропак на цалю):"
+msgstr "кропак на цалю"
 
 #: capplets/font/main.c:506 capplets/font/main.c:513
 msgid "Font may be too large"
-msgstr ""
+msgstr "Шрыфт можа быць занадта вялікім"
 
 #: capplets/font/main.c:507
 #, c-format
@@ -1654,7 +1632,17 @@ msgid_plural ""
 "effectively use the computer.  It is recommended that you select a size "
 "smaller than %d."
 msgstr[0] ""
+"Вылучаны шрыфт мае велічыню ў %d пункт і можа выклікаць складанасьці "
+"ў выкарыстаньні кампутара. Пажадана каб вы вылучылі шрыфт, "
+"памерам меншым за %d."
 msgstr[1] ""
+"Вылучаны шрыфт мае велічыню ў %d пункты і можа выклікаць складанасьці "
+"ў выкарыстаньні кампутара. Пажадана каб вы вылучылі шрыфт, "
+"памерам меншым за %d."
+msgstr[2] ""
+"Вылучаны шрыфт мае велічыню ў %d пунктаў і можа выклікаць складанасьці "
+"ў выкарыстаньні кампутара. Пажадана каб вы вылучылі шрыфт, "
+"памерам меншым за %d."
 
 #: capplets/font/main.c:514
 #, c-format
@@ -1667,7 +1655,14 @@ msgid_plural ""
 "effectively use the computer.  It is recommended that you select a smaller "
 "sized font."
 msgstr[0] ""
+"Вылучаны шрыфт мае велічыню ў %d пункт і можа выклікаць складанасьці "
+"ў выкарыстаньні кампутара. Пажадана каб вы вылучылі меншы шрыфт."
 msgstr[1] ""
+"Вылучаны шрыфт мае велічыню ў %d пункты і можа выклікаць складанасьці "
+"ў выкарыстаньні кампутара. Пажадана каб вы вылучылі меншы шрыфт."
+msgstr[2] ""
+"Вылучаны шрыфт мае велічыню ў %d пунктаў і можа выклікаць складанасьці "
+"ў выкарыстаньні кампутара. Пажадана каб вы вылучылі меншы шрыфт."
 
 #: capplets/keybindings/eggcellrendererkeys.c:161
 #: capplets/keybindings/eggcellrendererkeys.c:162
@@ -1681,9 +1676,8 @@ msgstr "Зьмяняльнікі паскаральніка"
 
 #: capplets/keybindings/eggcellrendererkeys.c:180
 #: capplets/keybindings/eggcellrendererkeys.c:181
-#, fuzzy
 msgid "Accelerator keycode"
-msgstr "Клявіша-паскаральнік"
+msgstr "Код паскаральніка"
 
 #: capplets/keybindings/eggcellrendererkeys.c:191
 msgid "Accel Mode"
@@ -1695,7 +1689,7 @@ msgstr "Увядзіце новы паскаральнік."
 
 #: capplets/keybindings/eggcellrendererkeys.c:240
 #: capplets/keybindings/gnome-keybinding-properties.c:235
-#: libbackground/applier.c:588 typing-break/drwright.c:464
+#: libbackground/applier.c:588 typing-break/drwright.c:473
 msgid "Disabled"
 msgstr "Выключана"
 
@@ -1739,9 +1733,9 @@ msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Памылка ўсталяваньня новага паскаральніка ў базе даньняў наладкі: %s\n"
 
 #: capplets/keybindings/gnome-keybinding-properties.c:818
-#, fuzzy, c-format
+#, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
-msgstr "Памылка ўсталяваньня новага паскаральніка ў базе даньняў наладкі: %s\n"
+msgstr "Памылка скасоўваньня ўсталяваньня паскаральніка ў базе даньняў наладкі: %s\n"
 
 #: capplets/keybindings/gnome-keybinding-properties.c:967
 msgid ""
@@ -1793,8 +1787,7 @@ msgstr "_Зручнасьці"
 #: capplets/keyboard/gnome-keyboard-properties.c:222
 #: capplets/sound/sound-properties-capplet.c:208
 #: capplets/sound/sound-properties-capplet.c:210
-msgid ""
-"Just apply settings and quit (compatibility only; now handled by daemon)"
+msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
 "Проста ўжыць усталёўкі й выйсьці (толькі для сумяшчальнасьці; зараз "
 "апрацоўваецца дэманам)"
@@ -1833,12 +1826,11 @@ msgstr "<small><i>Павольна</i></small>"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:10
 msgid "A_vailable layouts:"
-msgstr ""
+msgstr "Ная_ўныя раскладкі:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:11
-#, fuzzy
 msgid "A_vailable options:"
-msgstr "В_ыбары відарыса:"
+msgstr "Ная_ўныя выбары:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "All_ow postponing of breaks"
@@ -1869,19 +1861,16 @@ msgid "Keyboard Preferences"
 msgstr "Перавагі клявіятуры"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:20
-#, fuzzy
 msgid "Keyboard _model:"
-msgstr "Сыгнал клявіятуры"
+msgstr "Мад_эль клявіятуры:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:21
-#, fuzzy
 msgid "Layout Options"
-msgstr "В_ыбары відарыса:"
+msgstr "Выбары раскладак"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:22
-#, fuzzy
 msgid "Layouts"
-msgstr "Вонкавы выгляд"
+msgstr "Раскладкі"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid ""
@@ -1892,9 +1881,8 @@ msgstr ""
 "выкарыстаньня клявіятуры"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:24
-#, fuzzy
 msgid "Reset to de_faults"
-msgstr "Выкарыстоўваць _дапомнасьці для катэгорыі"
+msgstr "Скінуць да дап_омнага значэньня"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:26
 msgid "Typing Break"
@@ -1913,14 +1901,12 @@ msgid "_Delay:"
 msgstr "Зат_рымка:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:30
-#, fuzzy
 msgid "_Selected layouts:"
-msgstr "_Выбраць рэдактар:"
+msgstr "Вы_лучаныя раскладкі:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:31
-#, fuzzy
 msgid "_Selected options:"
-msgstr "В_ыбары відарыса:"
+msgstr "В_лучаныя выбары:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:32
 msgid "_Speed:"
@@ -2292,11 +2278,11 @@ msgstr ""
 
 #: capplets/theme-switcher/gnome-theme-installer.c:127
 msgid "No theme file location specified to install"
-msgstr ""
+msgstr "Не задана знаходжаньне файла тэмы для ўсталяваньня"
 
 #: capplets/theme-switcher/gnome-theme-installer.c:146
 msgid "The theme file location specified to install is invalid"
-msgstr ""
+msgstr "Знаходжаньне файла тэмы для ўсталяваньне нерэчаіснае"
 
 #: capplets/theme-switcher/gnome-theme-installer.c:173
 #, c-format
@@ -2304,12 +2290,14 @@ msgid ""
 "%s is the path where the theme files will be installed. This can not be "
 "selected as the source location"
 msgstr ""
+"%s - гэта шлях, дзе будуць усталяваныя файлы тэмы. Ён ня можа "
+"быць вылучаны як знаходжаньне крыніцы"
 
 #: capplets/theme-switcher/gnome-theme-manager.c:301
 msgid ""
 "The gnome-theme-manager does not know how to change the themes on the "
 "current window manager."
-msgstr ""
+msgstr "Кіраўнік тэм ня ведае як зьмяніць тэмы для бягучага кіраўніка вокнаў."
 
 #: capplets/theme-switcher/gnome-theme-manager.c:665
 #: capplets/theme-switcher/gnome-theme-manager.c:725
@@ -2319,8 +2307,7 @@ msgstr "Тэма карыстальніка"
 #: capplets/theme-switcher/gnome-theme-manager.c:665
 #: capplets/theme-switcher/gnome-theme-manager.c:725
 msgid "You can save this theme by pressing the Save Theme button."
-msgstr ""
-"Вы можаце захаваць гэтую тэму, калі націсьніце кнопку \"Захаваць тэму\"."
+msgstr "Вы можаце захаваць гэтую тэму, калі націсьніце кнопку \"Захаваць тэму\"."
 
 #: capplets/theme-switcher/gnome-theme-manager.c:1418
 msgid ""
@@ -2390,9 +2377,8 @@ msgid "Save Theme"
 msgstr "Захаваць тэму"
 
 #: capplets/theme-switcher/theme-properties.glade.h:9
-#, fuzzy
 msgid "Select theme for the desktop"
-msgstr "Усталяваць шрыфт для стальца"
+msgstr "Вылучыце тэму стальца"
 
 #: capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Short _description:"
@@ -2448,12 +2434,11 @@ msgstr "Назва _тэмы:"
 
 #: capplets/theme-switcher/theme-properties.glade.h:23
 msgid "theme selection tree"
-msgstr ""
+msgstr "дрэва вылучэньня тэмы"
 
 #: capplets/ui-properties/gnome-ui-properties.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
-msgstr ""
-"Наладка вонкавага выгляду панэляў інструмэнта і панэляў мэню ў дастасаваньнях"
+msgstr "Наладка вонкавага выгляду панэляў інструмэнта і панэляў мэню ў дастасаваньнях"
 
 #: capplets/ui-properties/gnome-ui-properties.desktop.in.h:2
 msgid "Menus & Toolbars"
@@ -2582,8 +2567,7 @@ msgstr "Супэр (ці \"Лягатып Windows\")"
 
 #: capplets/windows/gnome-window-properties.glade.h:1
 msgid "To _move a window, press-and-hold this key then grab the window:"
-msgstr ""
-"Каб _перанесьці акно, націсьніце й утрымлівайце клявішу каб схапіць акно:"
+msgstr "Каб _перанесьці акно, націсьніце й утрымлівайце клявішу каб схапіць акно:"
 
 #: capplets/windows/gnome-window-properties.glade.h:2
 msgid "Window Preferences"
@@ -2620,7 +2604,7 @@ msgstr "Цэнтар кіраваньня GNOME: %s"
 
 #: control-center/capplet-dir-view.c:158
 msgid "Layout"
-msgstr "Вонкавы выгляд"
+msgstr "Раскладка"
 
 #: control-center/capplet-dir-view.c:159
 msgid "Layout to use for this view of the capplets"
@@ -2686,53 +2670,57 @@ msgstr "Выкарыстоўваць абалёнку, нават калі за�
 msgid "Could not initialize Bonobo"
 msgstr "Ня атрымалася ініцыялізаваць Bonobo"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:325
-#, fuzzy
-msgid "There was an error displaying help:"
-msgstr "Памылка пад час адлюстраваньня дапамогі: %s"
-
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
-msgid "Slow Keys Alert"
-msgstr ""
-
 #: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+msgid "Slow Keys Alert"
+msgstr "Паведамленьне запаволеных клявішаў"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
 msgid ""
 "You just held down the Shift key for 8 seconds.  This is the shortcut for "
 "the Slow Keys feature, which affects the way your keyboard works."
 msgstr ""
-
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
-#, fuzzy
-msgid "Do you want to activate Slow Keys?"
-msgstr "Вы жадаеце захаваць гэтае разрозьнене?"
+"Вы ўтрымлівалі клявішу Shift 8 сэкундаў. Гэта зьяўляецца хуткім выклікам "
+"магчымасьці \"Запаволеныя клявішы\", што ў сваю чаргу "
+"адаб'ецца на працы вашае клявіятуры."
 
 #: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
-#, fuzzy
-msgid "Do you want to deactivate Sticky Keys?"
-msgstr "Вы жадаеце захаваць гэтае разрозьнене?"
+msgid "Do you want to activate Slow Keys?"
+msgstr "Мо жадаеце задзейнічаць запаволеныя клявішы?"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:424
-msgid "Sticky Keys Alert"
-msgstr ""
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:414
+msgid "Do you want to deactivate Slow Keys?"
+msgstr "Мо жадаеце скасаваць задзейнічаньне запаволеных клявіш?"
 
 #: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:425
+msgid "Sticky Keys Alert"
+msgstr "Паведамленьне \"Ліпучых клявішаў\""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
 msgid ""
 "You just pressed the Shift key 5 times in a row.  This is the shortcut for "
 "the Sticky Keys feature, which affects the way your keyboard works."
 msgstr ""
+"Вы націснулі клявішу Shift 5 разоў запар. Гэта зьяўляецца хуткім выклікам "
+"магчымасьці \"Ліпучыя клявішы\", што ў сваю чаргу "
+"адаб'ецца на працы вашае клявіятуры."
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
 msgid ""
 "You just pressed two keys at once, or pressed the Shift key 5 times in a "
 "row.  This turns off the Sticky Keys feature, which affects the way your "
 "keyboard works."
 msgstr ""
+"Вы націснулі адначасова дзьве клявішы альбо 5 раз запар клявішу Shift. "
+"Гэтак вы выключылі магчымасьць \"Ліпучыя клявішы\", што ў сваю чаргу "
+"адаб'ецца на працы вашае клявіятуры."
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
-#, fuzzy
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
 msgid "Do you want to activate Sticky Keys?"
-msgstr "Вы жадаеце захаваць гэтае разрозьнене?"
+msgstr "Мо жадаеце задзейнічаць ліпучыя клявішы?"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:429
+msgid "Do you want to deactivate Sticky Keys?"
+msgstr "Мо жадаеце скасаваць задзейнічаньне ліпучых клявіш?"
 
 #: gnome-settings-daemon/gnome-settings-font.c:102
 #, c-format
@@ -2766,8 +2754,7 @@ msgstr "Камбінацыя клавяшаў (%s) не рэчаісная\n"
 #: gnome-settings-daemon/gnome-settings-keybindings.c:245
 #, c-format
 msgid "It seems that another application already has access to key '%d'."
-msgstr ""
-"Выглядае так, нібыта іншае дастасваньне ўжо мае доступ да ключа \"%d\"."
+msgstr "Выглядае так, нібыта іншае дастасваньне ўжо мае доступ да ключа \"%d\"."
 
 #: gnome-settings-daemon/gnome-settings-keybindings.c:314
 #, c-format
@@ -2797,6 +2784,16 @@ msgid ""
 "- The result of <b>xprop -root | grep XKB</b>\n"
 "- The result of <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b>"
 msgstr ""
+"Памылка задзейнічаньня наладкі XKB.\n"
+"Магчыма гэта нутраная памылка паслужніка X.\n"
+"\n"
+"Даньні аб вэрсыі паслужніка X:\n"
+"%s\n"
+"%d\n"
+"%s\n"
+"Калі вы паведамеце пра гэта як пра памылку, калі ласка ўключыце:\n"
+"- Вынік выкананьня <b>xprop -root | grep XKB</b>\n"
+"- Вынік выкананьня <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b>"
 
 #: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:71
 msgid ""
@@ -2805,6 +2802,9 @@ msgid ""
 "Try using simpler configuration or taking more fresh version of XFree "
 "software."
 msgstr ""
+"Вы выкарыстоўваеце XFree 4.3.0.\n"
+"Існуе шэраг вядомых праблем ў наладцы XKB.\n"
+"Паспрабуйце скарыстаць больш простую наладку ці больш новую вэрсыю XFree."
 
 #: gnome-settings-daemon/gnome-settings-screensaver.c:92
 #, c-format
@@ -2880,14 +2880,6 @@ msgstr "Экран"
 msgid "Screen on which BGApplier is to draw"
 msgstr "Экран дзе выводзіцца BGApplier"
 
-#: libbackground/preview-file-selection.c:207
-msgid "Can't find an hbox, using a normal file selection"
-msgstr "hbox не адшуканы, будзе выкарыстаны звычайны выбар файлаў"
-
-#: libbackground/preview-file-selection.c:212
-msgid "Preview"
-msgstr "Перадпрагляд"
-
 #: libsounds/sound-view.c:121 libsounds/sound-view.c:146
 msgid "The sound file for this event does not exist."
 msgstr "Ня існуе файла гука для гэтае падзеі."
@@ -2945,8 +2937,7 @@ msgid "Roll up"
 msgstr "_Згарнуць"
 
 #: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
-msgid ""
-"If true, the mime handlers for text/plain and text/* will be kept in sync"
+msgid "If true, the mime handlers for text/plain and text/* will be kept in sync"
 msgstr ""
 "Калі ІСЬЦІНА, апрацоўшчыкі для text/plain і text/* мусяць быць "
 "сынхранізаваныя"
@@ -2988,8 +2979,7 @@ msgid "RGBA Order"
 msgstr "Правіла RGBA"
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:5
-msgid ""
-"Resolution used for converting font sizes to pixel sizes, in dots per inch"
+msgid "Resolution used for converting font sizes to pixel sizes, in dots per inch"
 msgstr ""
 "Разрозьненьне для канвэртацыі памераў шрыфта да памераў піксэляў, у кропкі "
 "на цалю "
@@ -3029,61 +3019,58 @@ msgstr ""
 msgid ""
 "Very soon, XKB settings in gconf will be overridden (from the system "
 "configuration)"
-msgstr ""
+msgstr "Вельмі хутка ўсталёўкі XKB будуць перазапісаныя з сыстэмнае наладкі"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
-#, fuzzy
 msgid "XKB keyboard layout"
-msgstr "Гарачыя клявішы клявіятуры"
+msgstr "XKB раскладка клявіятуры"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
-#, fuzzy
 msgid "XKB keyboard model"
-msgstr "Сыгнал клявіятуры"
+msgstr "XKB мадэль клявіятуры"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
-#, fuzzy
 msgid "XKB options"
-msgstr "Выбары"
+msgstr "XKB выбары"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
 msgid "XKB settings in gconf will be overridden from the system ASAP"
-msgstr ""
+msgstr "Усталёўкі XKB у gconf будуць перапісаны з сыстэмы ASAP"
 
-#: typing-break/drw-break-window.c:189
-#, fuzzy
+#: typing-break/drw-break-window.c:191
 msgid "_Postpone break"
-msgstr "Адкласьці перапынак"
+msgstr "Ад_класьці перапынак"
 
-#: typing-break/drw-break-window.c:227
+#: typing-break/drw-break-window.c:239
 msgid "Take a break!"
 msgstr "Узяць перапынак!"
 
 #. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
-#: typing-break/drwright.c:135
+#: typing-break/drwright.c:136
 msgid "/_Preferences"
 msgstr "/_Перавагі"
 
-#: typing-break/drwright.c:136
+#: typing-break/drwright.c:137
 msgid "/_About"
 msgstr "/_Пра праграму"
 
-#: typing-break/drwright.c:138
+#: typing-break/drwright.c:139
 msgid "/_Take a Break"
 msgstr "/_Узяць перапынак"
 
-#: typing-break/drwright.c:482
-#, fuzzy, c-format
+#: typing-break/drwright.c:491
+#, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
-msgstr[0] "%d хвілін да наступнага перапынку"
-msgstr[1] "%d хвілін да наступнага перапынку"
+msgstr[0] "%d хвіліна да наступнага перапынку"
+msgstr[1] "%d хвіліны да наступнага перапынку"
+msgstr[2] "%d хвілін да наступнага перапынку"
 
-#: typing-break/drwright.c:486
+#: typing-break/drwright.c:495
 msgid "Less than one minute until the next break"
 msgstr "Менш за адну хвіліну да наступнага перапынку"
 
-#: typing-break/drwright.c:581
+#: typing-break/drwright.c:590
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
@@ -3092,31 +3079,31 @@ msgstr ""
 "Немагчыма ўзьняць дыялёг уласьцівасьцяў перапынкаў набору з-за наступнае "
 "прычыны: %s"
 
-#: typing-break/drwright.c:621
+#: typing-break/drwright.c:638
 msgid "About GNOME Typing Monitor"
 msgstr "Пра назіральнік набору GNOME"
 
-#: typing-break/drwright.c:645
+#: typing-break/drwright.c:662
 msgid "A computer break reminder."
 msgstr "Нагадвальнік кампутарных перапынкаў."
 
-#: typing-break/drwright.c:646
+#: typing-break/drwright.c:663
 msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
 msgstr "Напісаны Richard Hult &lt;richard@imendio.com&gt;"
 
-#: typing-break/drwright.c:647
+#: typing-break/drwright.c:664
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Цукерка-вокад дадана Anders Carlsson"
 
-#: typing-break/drwright.c:820
+#: typing-break/drwright.c:839
 msgid "Break reminder"
 msgstr "Нагадвальнік перапынкаў"
 
-#: typing-break/main.c:94
+#: typing-break/main.c:93
 msgid "The typing monitor is already running."
 msgstr "Назіральнік набору ўжо выконваецца."
 
-#: typing-break/main.c:107
+#: typing-break/main.c:106
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
@@ -3166,8 +3153,7 @@ msgstr "Элемэнты кантэкстнага мэню шрыфта"
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:1
 msgid "If set to true, then OpenType fonts will be thumbnailed."
-msgstr ""
-"Калі усталявана ІСЬЦІНА, мусяць стварацца мініяцюры для шрыфтоў OpenType."
+msgstr "Калі усталявана ІСЬЦІНА, мусяць стварацца мініяцюры для шрыфтоў OpenType."
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:2
 msgid "If set to true, then PCF fonts will be thumbnailed."
@@ -3175,16 +3161,14 @@ msgstr "Калі усталявана ІСЬЦІНА, мусяць ствара�
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:3
 msgid "If set to true, then TrueType fonts will be thumbnailed."
-msgstr ""
-"Калі усталявана ІСЬЦІНА, мусяць стварацца мініяцюры для шрыфтоў TrueType."
+msgstr "Калі усталявана ІСЬЦІНА, мусяць стварацца мініяцюры для шрыфтоў TrueType."
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:4
 msgid "If set to true, then Type1 fonts will be thumbnailed."
 msgstr "Калі усталявана ІСЬЦІНА, мусяць стварацца мініяцюры для шрыфтоў Type1."
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:5
-msgid ""
-"Set this key to the command used to create thumbnails for OpenType fonts."
+msgid "Set this key to the command used to create thumbnails for OpenType fonts."
 msgstr ""
 "Пазначце ў гэтым ключы каманду, якая будзе выкарыстоўвацца для стварэньня "
 "мініяцюраў для шрыфтоў OpenType."
@@ -3196,8 +3180,7 @@ msgstr ""
 "мініяцюраў для шрыфтоў PCF."
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:7
-msgid ""
-"Set this key to the command used to create thumbnails for TrueType fonts."
+msgid "Set this key to the command used to create thumbnails for TrueType fonts."
 msgstr ""
 "Пазначце ў гэтым ключы каманду, якая будзе выкарыстоўвацца для стварэньня "
 "мініяцюраў для шрыфтоў TrueType."
@@ -3326,10 +3309,8 @@ msgid "If set to true, then themes will be thumbnailed."
 msgstr "Калі ісьціна, тады для тэмаў будуць створаны мініятуры."
 
 #: vfs-methods/themus/themus.schemas.in.h:3
-msgid ""
-"Set this key to the command used to create thumbnails for installed themes."
-msgstr ""
-"Задайце ў гэты ключ загад для стварэньня мініятураў для ўсталяваных тэмаў."
+msgid "Set this key to the command used to create thumbnails for installed themes."
+msgstr "Задайце ў гэты ключ загад для стварэньня мініятураў для ўсталяваных тэмаў."
 
 #: vfs-methods/themus/themus.schemas.in.h:4
 msgid "Set this key to the command used to create thumbnails for themes."
@@ -3352,9 +3333,8 @@ msgid "Whether to thumbnail themes"
 msgstr "Ці ствараць мініятуры тэмаў"
 
 #: gnome-settings-daemon/actions/acme.glade.h:1
-#, fuzzy
 msgid "Volume"
-msgstr "_Гучнасьць:"
+msgstr "Гучнасьць"
 
 #: gnome-settings-daemon/gnome-settings-multimedia-keys.c:113
 #, c-format
@@ -3362,202 +3342,199 @@ msgid ""
 "Couldn't execute command: %s\n"
 "Verify that this command exists."
 msgstr ""
+"Немагчыма выканаць загад: %s\n"
+"Праверце існаваньне праграмы."
 
 #: gnome-settings-daemon/gnome-settings-multimedia-keys.c:129
 msgid ""
 "Couldn't put the machine to sleep.\n"
 "Verify that the machine is correctly configured."
 msgstr ""
+"Немагчыма ўсыпіць машыну.\n"
+"Праверце правільнасьць наладкі машыны."
 
 #: gnome-settings-daemon/gnome-settings-multimedia-keys.c:139
 #, c-format
 msgid "Permissions on the file %s are broken\n"
-msgstr ""
+msgstr "Парушаныя правы на файл %s\n"
 
 #: gnome-settings-daemon/gnome-settings-multimedia-keys.c:900
 msgid ""
 "Couldn't load the Glade file.\n"
 "Make sure that this daemon is properly installed."
 msgstr ""
+"Немагчыма загрузіць файл UI.\n"
+"Праверце правільнасьць усталёўкі дэмана."
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:1
 msgid "Brightness down"
-msgstr ""
+msgstr "Паменшыць зыркасьць"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:2
 msgid "Brightness down's shortcut."
-msgstr ""
+msgstr "Гарачая клявіша памяншэньня зыркасьці."
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:3
 msgid "Brightness up"
-msgstr ""
+msgstr "Павялічыць зыркасьць"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
 msgid "Brightness up's shortcut."
-msgstr ""
+msgstr "Гарачая клявіша павелічэньня зыркасьці."
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
-#, fuzzy
 msgid "E-mail"
-msgstr "Э-я пошта"
+msgstr "Пошта"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:6
 msgid "E-mail's shortcut."
-msgstr ""
+msgstr "Гарачая клявіша для пошты."
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
-#, fuzzy
 msgid "Eject"
-msgstr "Падзея"
+msgstr "Вызваліць"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
-#, fuzzy
 msgid "Eject's shortcut."
-msgstr "_Хуткія клявішы для стальца:"
+msgstr "Гарачая клявіша вызваленьня дыска."
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
-#, fuzzy
 msgid "Home Folder"
-msgstr "Перайсьці у _тэчку з тэмамі"
+msgstr "Свойская тэчка"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
-#, fuzzy
 msgid "Launch Help Browser"
-msgstr "Праглядальнік даведкі"
+msgstr "Запуск вандроўніка даведкі"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
 msgid "Launch Help Browser's shortcut."
-msgstr ""
+msgstr "Гарачая клявіша запуска вандроўніка даведкі."
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
-#, fuzzy
 msgid "Launch Web Browser"
-msgstr "Аглядальнік вэбу"
+msgstr "Запуск вандроўніка павуціньня"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
 msgid "Launch Web Browser's shortcut."
-msgstr ""
+msgstr "Гарачая клявіша запуску вандроўніка павуціньня."
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
-#, fuzzy
 msgid "Lock Screen"
-msgstr "Экран"
+msgstr "Замкнуць экран"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
 msgid "Lock Screen's shortcut."
-msgstr ""
+msgstr "Гарачая клявіша замка экрана."
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
-#, fuzzy
 msgid "Log Out"
-msgstr "Вонкавы выгляд"
+msgstr "Выхад"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
 msgid "Log Out's shortcut."
-msgstr ""
+msgstr "Гарачая клявіша завяршэньня сэанса."
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
 msgid "My Home Folder's shortcut."
-msgstr ""
+msgstr "Гарачая клявіша пераходу ў свойскую тэчку."
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
 msgid "Next track key's shortcut."
-msgstr ""
+msgstr "Гарачая клявіша наступнага музычнага запіса."
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
-#, fuzzy
 msgid "Pause"
-msgstr "_Уставіць"
+msgstr "Прыпыніць"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
-#, fuzzy
 msgid "Pause key's shortcut."
-msgstr "Канфігураваньне гарачых клявішаў"
+msgstr "Гарачая клявіша прыпыненьня прайграваньня"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
 msgid "Play (or Play/Pause)"
-msgstr ""
+msgstr "Граць (ці Граць/Прыпыніць)"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
 msgid "Play (or Play/Pause) key's shortcut."
-msgstr ""
+msgstr "Гарачая клявіша Граць (ці Граць/Прыпыніць)."
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
-#, fuzzy
 msgid "Previous track key's shortcut."
-msgstr "Канфігураваньне гарачых клявішаў"
+msgstr "Гарачая клявіша папярэдняга музычнага запіса."
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
 msgid "Search"
-msgstr ""
+msgstr "Пошук"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
-#, fuzzy
 msgid "Search's shortcut."
-msgstr "Хуткія клявішы"
+msgstr "Хуткая клявіша Пошук."
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
 msgid "Skip to Next track"
-msgstr ""
+msgstr "Наступны запіс"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
 msgid "Skip to Previous track"
-msgstr ""
+msgstr "Папярэдні запіс"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
-#, fuzzy
 msgid "Sleep"
-msgstr "Хуткасьць"
+msgstr "Заснуць"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
-#, fuzzy
 msgid "Sleep's shortcut."
-msgstr "Хуткія клявішы"
+msgstr "Хуткія клявіша Заснуць"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
 msgid "Stop playback key"
-msgstr ""
+msgstr "Спыніць прайграваньне"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
 msgid "Stop playback key's shortcut."
-msgstr ""
+msgstr "Хуткая клявіша \"Спыніць прайграваньне\"."
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
-#, fuzzy
 msgid "Volume down"
-msgstr "_Гучнасьць:"
+msgstr "Паменшыць гучнасьць"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
 msgid "Volume down's shortcut."
-msgstr ""
+msgstr "Хуткая клявіша памяншэньня гучансьці."
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
-#, fuzzy
 msgid "Volume mute"
-msgstr "_Гучнасьць:"
+msgstr "Абязгучыць"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
-#, fuzzy
 msgid "Volume mute's shortcut"
-msgstr "Канфігураваньне гарачых клявішаў"
+msgstr "Хуткая клявіша абязгучваньня"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
-#, fuzzy
 msgid "Volume step"
-msgstr "_Гучнасьць:"
+msgstr "Крок гучнасьці"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:38
 msgid "Volume step as percentage of volume."
-msgstr ""
+msgstr "Крокі павелічэньня гучнасьці ў адсотках."
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:39
-#, fuzzy
 msgid "Volume up"
-msgstr "_Гучнасьць:"
+msgstr "Павелічэньне гучнасьці"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
 msgid "Volume up's shortcut."
-msgstr ""
+msgstr "Паскаральнік на павелічэньня гучнасьці"
+
+#, fuzzy
+#~ msgid "There was an error displaying help:"
+#~ msgstr "Памылка пад час адлюстраваньня дапамогі: %s"
+
+#~ msgid "Can't find an hbox, using a normal file selection"
+#~ msgstr "hbox не адшуканы, будзе выкарыстаны звычайны выбар файлаў"
+
+#~ msgid "Preview"
+#~ msgstr "Перадпрагляд"
 
 #, fuzzy
 #~ msgid "Desktop Wallpaper"
@@ -3841,9 +3818,6 @@ msgstr ""
 
 #~ msgid "_Category"
 #~ msgstr "_Катэгорыя"
-
-#~ msgid "_Delete"
-#~ msgstr "_Выдаліць"
 
 #~ msgid "_Name"
 #~ msgstr "На_йменьне"
@@ -4138,3 +4112,4 @@ msgstr ""
 
 #~ msgid "_Toolbars have: "
 #~ msgstr "Панэлі інструмэнту м_аюць: "
+
