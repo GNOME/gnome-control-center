@@ -127,7 +127,8 @@ enable_disable_layouts_buttons (GladeXML * dialog)
 
   gtk_widget_set_sensitive (addLayoutBtn,
 			    (nSelectedAvailableLayouts > 0)
-			    && (nSelectedLayouts < maxSelectedLayouts));
+			    && (nSelectedLayouts < maxSelectedLayouts ||
+				maxSelectedLayouts == 0));
   gtk_widget_set_sensitive (delLayoutBtn, nSelectedSelectedLayouts > 0);
 
   if (gtk_tree_selection_get_selected (sSelection, NULL, &iter))
@@ -168,7 +169,7 @@ prepare_selected_layouts_tree (GladeXML * dialog)
   g_signal_connect_swapped (G_OBJECT (selection), "changed",
 			    G_CALLBACK
 			    (enable_disable_layouts_buttons), dialog);
-  maxSelectedLayouts = ( XklGetBackendFeatures() & XKLF_MULTIPLE_LAYOUTS_SUPPORTED ) ? XkbNumKbdGroups : 1;
+  maxSelectedLayouts = XklGetMaxNumGroups();
 }
 
 void
