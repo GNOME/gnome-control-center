@@ -459,6 +459,7 @@ else
 fi
 
 AC_DEFINE_UNQUOTED(GNOMECC_DATA_DIR, "${real_prefix}/share/${GETTEXT_PACKAGE}",[Path to gnomecc data files])
+AC_DEFINE_UNQUOTED(PREFIX, "$prefix", [install prefix])
 GNOMECC_ICONS_DIR='$(datadir)/'${GETTEXT_PACKAGE}'/icons'
 AC_SUBST(GNOMECC_ICONS_DIR)
 GNOMECC_GLADE_DIR='$(datadir)/'${GETTEXT_PACKAGE}'/interfaces'

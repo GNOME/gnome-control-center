@@ -18,6 +18,7 @@
 */
 
 #include <gdk/gdk.h>
+#include "config.h"
 #include <gnome-theme-info.h>
 #include <theme-thumbnail.h>
 
@@ -123,6 +124,7 @@ main(int argc, char **argv)
 	GdkPixbuf *pixbuf;
 	GnomeThemeMetaInfo *theme;
 	GnomeVFSURI *uri;
+	gchar *theme_name;
 
 	theme_thumbnail_factory_init (argc, argv);
 
@@ -137,14 +139,29 @@ main(int argc, char **argv)
 	}
 	
 	gnome_theme_init (NULL);
-	uri = gnome_vfs_uri_new (argv[1]);
+	if (g_path_is_absolute (argv[1])) {
+		theme_name = g_build_filename (argv[1], "index.theme", NULL);
+	}
+	else {
+		theme_name = g_build_filename (PREFIX, "/share/themes/", argv[1], "index.theme", NULL);
+	}
+
+	if (!g_file_test (theme_name, G_FILE_TEST_EXISTS)) {
+		g_printerr("%s is not a valid theme\n", argv[1]);
+		return 1;
+	}
+		
+	uri = gnome_vfs_uri_new (theme_name);
+	g_free (theme_name);
 	theme = gnome_theme_read_meta_theme (uri);
 	gnome_vfs_uri_unref (uri);
 
-	pixbuf = generate_theme_thumbnail (theme, TRUE);
+	if (theme) {
+		pixbuf = generate_theme_thumbnail (theme, TRUE);
 
-	save_pixbuf(pixbuf, argv[2]);
-	gdk_pixbuf_unref(pixbuf);
+		save_pixbuf(pixbuf, argv[2]);
+		gdk_pixbuf_unref(pixbuf);
+	}
 
 	return 0;
 }
