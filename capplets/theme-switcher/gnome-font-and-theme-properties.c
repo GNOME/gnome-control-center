@@ -12,8 +12,13 @@
 #include "theme-common.h"
 #include "capplet-util.h"
 #include "activate-settings-daemon.h"
+#include "gconf-property-editor.h"
 
 #define GTK_THEME_KEY "/desktop/gnome/interface/gtk_theme"
+#define GTK_FONT_KEY "/desktop/gnome/interface/font_name"
+#define DESKTOP_FONT_NAME_KEY "/apps/nautilus/preferences/default_font"
+#define DESKTOP_FONT_SIZE_KEY "/apps/nautilus/preferences/default_font_size"
+
 #define MAX_ELEMENTS_BEFORE_SCROLLING 8
 
 enum
@@ -171,6 +176,7 @@ setup_dialog (GladeXML *dialog)
   GtkWidget *widget;
   GtkTreeModel *model;
   GtkTreeSelection *selection;
+  GObject *peditor;
 
   client = gconf_client_get_default ();
 
@@ -192,6 +198,18 @@ setup_dialog (GladeXML *dialog)
   g_signal_connect (G_OBJECT (selection), "changed", (GCallback) theme_selection_changed, NULL);
 
   read_themes (dialog);
+
+  peditor = gconf_peditor_new_font (NULL, GTK_FONT_KEY,
+		  		    WID ("application_font"),
+				    PEDITOR_FONT_COMBINED, NULL);
+
+  peditor = gconf_peditor_new_font (NULL, DESKTOP_FONT_NAME_KEY,
+		  		    WID ("desktop_font"),
+				    PEDITOR_FONT_NAME, NULL);
+
+  peditor = gconf_peditor_new_font (NULL, DESKTOP_FONT_SIZE_KEY,
+		  		    WID ("desktop_font"),
+				    PEDITOR_FONT_SIZE, NULL);
 
   widget = WID ("font_and_theme_dialog");
   gtk_widget_show (widget);
