@@ -42,12 +42,9 @@
 #include "edit-window.h"
 #include "new-mime-window.h"
 
+#include "nautilus-mime-type-capplet-dialogs.h"
+
 #include "nautilus-mime-type-capplet.h"
-
-
-typedef struct {
-	GtkWidget *window;
-} edit_application_dialog_details;
 
 
 /* Local Prototypes */
@@ -66,11 +63,7 @@ static void 	cancel_callback 	  	(void);
 #if 0
 static void 	help_callback 		 	(void);
 #endif
-static void	show_edit_applications_dialog 	(void);
-static void	show_edit_components_dialog 	(void);
 
-/* Global variables */
-static edit_application_dialog_details *edit_application_details = NULL;
 
 GtkWidget *capplet = NULL;
 GtkWidget *delete_button = NULL;
@@ -176,13 +169,17 @@ init_mime_capplet (void)
 	main_vbox = gtk_vbox_new (FALSE, GNOME_PAD);
 	gtk_container_set_border_width (GTK_CONTAINER (main_vbox), GNOME_PAD_SMALL);
         gtk_container_add (GTK_CONTAINER (capplet), main_vbox);
-       
-	
+
         /* Main horizontal box and mime list*/                    
         hbox = gtk_hbox_new (FALSE, GNOME_PAD);
         gtk_box_pack_start (GTK_BOX (main_vbox), hbox, TRUE, TRUE, 0);
         mime_list_container = create_mime_clist ();
         gtk_box_pack_start (GTK_BOX (hbox), mime_list_container, TRUE, TRUE, 0);         
+
+	/* Get pointer to mime list */
+	children = gtk_container_children (GTK_CONTAINER (mime_list_container));
+	child = g_list_first (children);
+	mime_list = child->data;
 
 	vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
       
@@ -206,7 +203,7 @@ init_mime_capplet (void)
 
         button = left_aligned_button (_("Edit List"));
         gtk_fixed_put (GTK_FIXED (fixed), button, 285, 1);
-	gtk_signal_connect (GTK_OBJECT (button), "clicked", edit_applications_clicked, NULL);
+	gtk_signal_connect (GTK_OBJECT (button), "clicked", edit_applications_clicked, mime_list);
 	
 	/* Create label, menu and edit button for default components */
 	label = gtk_label_new (_("Default Component:"));
@@ -218,7 +215,7 @@ init_mime_capplet (void)
 
         button = left_aligned_button (_("Edit List"));
         gtk_fixed_put (GTK_FIXED (fixed), button, 285, 31);
-	gtk_signal_connect (GTK_OBJECT (button), "clicked", edit_components_clicked, NULL);
+	gtk_signal_connect (GTK_OBJECT (button), "clicked", edit_components_clicked, mime_list);
 
 	/* Add icon box */
 	icon_entry = gnome_icon_entry_new ("mime_icon_entry", _("Select an icon..."));
@@ -279,9 +276,6 @@ init_mime_capplet (void)
 #endif
 
 	/* Force list to update menus */
-	children = gtk_container_children (GTK_CONTAINER (mime_list_container));
-	child = g_list_first (children);
-	mime_list = child->data;
 	gtk_clist_select_row (GTK_CLIST (mime_list), 0, 0);
 
 }
@@ -323,25 +317,24 @@ populate_application_menu (GtkWidget *application_menu, const char *mime_type)
 
 	/* Get the application short list */
 	app_list = gnome_vfs_mime_get_short_list_applications (mime_type);
-	for (copy_list = app_list; copy_list != NULL; copy_list = copy_list->next) {
-		has_none = FALSE;
-
-		application = copy_list->data;
-		menu_item = gtk_menu_item_new_with_label (application->name);
-
-		/* Store copy of application name in item; free when item destroyed. */
-		gtk_object_set_data_full (GTK_OBJECT (menu_item),
-					  "application",
-					  g_strdup (application->name),
-					  g_free);
-
-		gtk_menu_append (GTK_MENU (new_menu), menu_item);
-		gtk_widget_show (menu_item);
-	}
-
 	if (app_list != NULL) {
+		for (copy_list = app_list; copy_list != NULL; copy_list = copy_list->next) {
+			has_none = FALSE;
+
+			application = copy_list->data;
+			menu_item = gtk_menu_item_new_with_label (application->name);
+
+			/* Store copy of application name in item; free when item destroyed. */
+			gtk_object_set_data_full (GTK_OBJECT (menu_item),
+						  "application",
+						  g_strdup (application->name),
+						  g_free);
+
+			gtk_menu_append (GTK_MENU (new_menu), menu_item);
+			gtk_widget_show (menu_item);
+		}
+	
 		gnome_vfs_mime_application_list_free (app_list);
-		app_list = NULL;
 	}
 
 	/* Find all appliactions or add a "None" item */
@@ -410,22 +403,31 @@ populate_component_menu (GtkWidget *component_menu, const char *mime_string)
 {
 	GtkWidget *new_menu;
 	GtkWidget *menu_item;
-	GList *mime_list;	
+	GList *component_list;
+	GList *list_element;
 	gboolean has_none;
+	char *component_name;
 
 	has_none = TRUE;
 	
 	new_menu = gtk_menu_new ();
 
-	mime_list = gnome_vfs_mime_get_short_list_components (mime_string);
-	while (mime_list != NULL) {
+	/* Traverse the list looking for a match */
+	component_list = gnome_vfs_mime_get_short_list_components (mime_string);
+	for (list_element = component_list; list_element != NULL; list_element = list_element->next) {
 		has_none = FALSE;
-		menu_item = gtk_menu_item_new_with_label ("Test Menu Item");
+
+		component_name = name_from_oaf_server_info (list_element->data);
+		menu_item = gtk_menu_item_new_with_label (component_name);
 		gtk_menu_append (GTK_MENU (new_menu), menu_item);
 		gtk_widget_show (menu_item);
-		mime_list = g_list_next (mime_list);
+		g_free (component_name);
 	}
 
+	if (mime_list != NULL) {
+		gnome_vfs_mime_component_list_free (component_list);
+	}
+	
 	/* Add None menu item */
 	if (has_none) {
 		menu_item = gtk_menu_item_new_with_label (_("None"));
@@ -475,70 +477,61 @@ add_mime_clicked (GtkWidget *widget, gpointer data)
 
 static void
 edit_applications_clicked (GtkWidget *widget, gpointer data)
-{
-	show_edit_applications_dialog ();
+{	
+	GtkWidget *list;
+	MimeInfo *mi;
+	GList *p;
+	GtkCListRow *row;
+
+	g_return_if_fail (GTK_IS_CLIST (data));
+
+	list = data;
+	row = NULL;
+
+	/* Get first selected row.  This will be the only selection for this list */
+	for (p = GTK_CLIST (list)->row_list; p != NULL; p = p->next) {
+		row = p->data;
+		if (row->state == GTK_STATE_SELECTED) {
+			break;
+		}
+	}
+
+	if (row == NULL) {
+		return;
+	}
+	
+	/* Show dialog */
+	mi = (MimeInfo *) row->data;
+	show_edit_applications_dialog (mi->mime_type);
 }
 
 static void
 edit_components_clicked (GtkWidget *widget, gpointer data)
 {
-	show_edit_components_dialog ();
-}
+	GtkWidget *list;
+	MimeInfo *mi;
+	GList *p;
+	GtkCListRow *row;
 
+	g_return_if_fail (GTK_IS_CLIST (data));
 
-static void
-edit_application_dialog_destroy (GtkWidget *widget, gpointer data)
-{
-	g_free (edit_application_details);
-	edit_application_details = NULL;
-}
+	list = data;
+	row = NULL;
 
-/*
- *  initialize_edit_application_dialog
- *  
- *  Set up dialog for default application list editing
- */
- 
-static void
-initialize_edit_application_dialog ()
-{
-	edit_application_details = g_new0 (edit_application_dialog_details, 1);
-	edit_application_details->window = gnome_dialog_new ("",
-					     GNOME_STOCK_BUTTON_OK,
-					     GNOME_STOCK_BUTTON_CANCEL,
-					     NULL);
-
-	gtk_signal_connect (GTK_OBJECT (edit_application_details->window),
-			    "destroy",
-			    edit_application_dialog_destroy,
-			    NULL);
-}
-
-/*
- *  show_edit_applications_dialog
- *  
- *  Setup and display edit application list dialog
- */
-
-static void
-show_edit_applications_dialog ()
-{
-	if (edit_application_details == NULL) {
-		initialize_edit_application_dialog ();
-	}
-
-	switch(gnome_dialog_run (GNOME_DIALOG (edit_application_details->window))) {
-		case 0:
-			//apply_changes (mime_type);
-			/* Fall through */
-		case 1:
-			gtk_widget_hide (edit_application_details->window);
+	/* Get first selected row.  This will be the only selection for this list */
+	for (p = GTK_CLIST (list)->row_list; p != NULL; p = p->next) {
+		row = p->data;
+		if (row->state == GTK_STATE_SELECTED) {
 			break;
+		}
 	}
+
+	if (row == NULL) {
+		return;
+	}
+	
+	/* Show dialog */
+	mi = (MimeInfo *) row->data;
+	show_edit_components_dialog (mi->mime_type);
 }
 
-static void
-show_edit_components_dialog ()
-{
-
-}
