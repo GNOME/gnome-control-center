@@ -784,6 +784,7 @@ create_dialog (gchar *title)
         gnome_dialog_close_hides (GNOME_DIALOG (dialog->dialog), TRUE);
 
         table = gtk_table_new (4, 2, FALSE);
+
         gtk_table_set_row_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
         gtk_table_set_col_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
         gtk_container_add (GTK_CONTAINER (GNOME_DIALOG (dialog->dialog)->vbox),
@@ -1078,9 +1079,16 @@ wm_setup (void)
         GtkWidget *util_vbox;
         GtkWidget *add_button;
         GtkWidget *scrolled_window;
+        GtkWidget *label;
 
         capplet = capplet_widget_new ();
+        gtk_widget_set_usize (capplet, 360, 200);
+
         vbox = gtk_vbox_new (FALSE, 0);
+
+        label = gtk_label_new (_("Window Manager Selector"));
+        gtk_box_pack_start (GTK_BOX (vbox), label, TRUE, FALSE, 10);
+
 	hbox = gtk_hbox_new (FALSE, GNOME_PAD);
 
 	gtk_container_set_border_width (GTK_CONTAINER (hbox), GNOME_PAD_SMALL);
