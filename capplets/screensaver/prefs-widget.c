@@ -811,7 +811,6 @@ about_cb (GtkWidget *widget, PrefsWidget *prefs_widget)
 	desc = screensaver_get_desc (prefs_widget->selected_saver);
 	label = gtk_label_new (desc);
 	gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
-	g_free (desc);
 	
 	name = screensaver_get_label (prefs_widget->selected_saver->name);
 	title = g_strdup_printf ("About %s\n", name);
