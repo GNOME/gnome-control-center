@@ -486,6 +486,7 @@ drag_data_received_cb (GtkWidget *widget, GdkDragContext *context,
 {
 	GConfClient *client = gconf_client_get_default ();
 	ApplierSet *set = (ApplierSet*) data; 
+	gchar *picture_option;    
 
 	if (info == TARGET_URI_LIST ||
 	    info == TARGET_BGIMAGE)
@@ -519,7 +520,12 @@ drag_data_received_cb (GtkWidget *widget, GdkDragContext *context,
 			gconf_entry_free (entry);
 			gconf_value_free (value);
 
-			gconf_client_set_string (client, BG_PREFERENCES_PICTURE_OPTIONS, "wallpaper", NULL);
+			picture_option = gconf_client_get_string (client, BG_PREFERENCES_PICTURE_OPTIONS, NULL);
+			if ((picture_option != NULL) && !strcmp (picture_option, "none"))
+				gconf_client_set_string (client, BG_PREFERENCES_PICTURE_OPTIONS, "wallpaper", NULL);
+
+			g_free (picture_option);
+
 		}
 		gnome_vfs_uri_list_free (uris);
 	} else if (info == TARGET_COLOR) {
