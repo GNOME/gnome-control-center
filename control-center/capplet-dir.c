@@ -211,7 +211,6 @@ capplet_activate (Capplet *capplet)
 	entry = CAPPLET_DIR_ENTRY (capplet)->entry;
 
 #warning FIXME: this should probably be root-manager-helper
-#ifdef HAVE_BONOBO
 	if (!strncmp (entry->exec[0], "gnomecc", strlen ("gnomecc"))) {
 		if (capplet->launching) {
 			return;
@@ -220,9 +219,7 @@ capplet_activate (Capplet *capplet)
 			gtk_idle_add ((GtkFunction) capplet_reset_cb, capplet);
 			capplet_control_launch (entry->exec[2], entry->name);
 		}
-	} else
-#endif
-	if (!strncmp (entry->exec[0], "root-manager", strlen ("root-manager"))) {
+	} else if (!strncmp (entry->exec[0], "root-manager", strlen ("root-manager"))) {
 		start_capplet_through_root_manager (entry);
 	} else {
 		if (capplet->launching) {
@@ -442,8 +439,6 @@ capplet_close_cb (GtkWidget *widget, GtkWidget *app)
 	CORBA_exception_free (&ev);
 }
 
-#ifdef HAVE_BONOBO
-
 /* capplet_control_launch
  *
  * Launch a capplet as a Bonobo control; returns the relevant BonoboWindow or
@@ -535,5 +530,3 @@ capplet_control_launch (const gchar *capplet_name, gchar *window_title)
 
 	return app;
 }
-
-#endif /* HAVE_BONOBO */
