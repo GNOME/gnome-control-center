@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-16 01:14+0100\n"
-"PO-Revision-Date: 2004-02-16 08:55+0100\n"
+"POT-Creation-Date: 2004-02-17 14:53+0100\n"
+"PO-Revision-Date: 2004-02-17 16:49+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -108,14 +108,18 @@ msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr "Došlo k chybě při spouštění dialogu s nastavením myši: %s"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:337
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:395
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:396
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
-msgstr "Nelze importovat nastavení AccessX ze souboru '%s'"
+msgstr "Nemohu importovat nastavení AccessX ze souboru '%s'"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:468
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:445
 msgid "Import Feature Settings File"
 msgstr "Importovat soubor nastavení vlastností"
+
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:449
+msgid "_Import"
+msgstr "_Importovat"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:18
@@ -337,49 +341,49 @@ msgid "seconds"
 msgstr "sekund"
 
 #. solid
-#: capplets/background/background-properties-capplet.c:228
+#: capplets/background/background-properties-capplet.c:227
 msgid "Co_lor:"
 msgstr "_Barva:"
 
 #. horiz
-#: capplets/background/background-properties-capplet.c:232
+#: capplets/background/background-properties-capplet.c:231
 msgid "_Left color:"
 msgstr "_Levá barva:"
 
-#: capplets/background/background-properties-capplet.c:233
+#: capplets/background/background-properties-capplet.c:232
 msgid "_Right color:"
 msgstr "_Pravá barva:"
 
 #. vert
-#: capplets/background/background-properties-capplet.c:236
+#: capplets/background/background-properties-capplet.c:235
 msgid "Top co_lor:"
 msgstr "_Horní barva:"
 
-#: capplets/background/background-properties-capplet.c:237
+#: capplets/background/background-properties-capplet.c:236
 msgid "_Bottom color:"
 msgstr "_Dolní barva:"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "_Tile"
 msgstr "_Tapeta"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "C_enter"
 msgstr "Na stř_ed"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "Sc_ale"
 msgstr "_Přizpůsobená"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "_Stretch"
 msgstr "_Roztažená"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "_No Picture"
 msgstr "Žád_ný obrázek"
 
-#: capplets/background/background-properties-capplet.c:559
+#: capplets/background/background-properties-capplet.c:558
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:723
 #: capplets/keyboard/gnome-keyboard-properties.c:224
@@ -388,7 +392,7 @@ msgstr "Žád_ný obrázek"
 msgid "Retrieve and store legacy settings"
 msgstr "Načíst a uložit zděděná nastavení"
 
-#: capplets/background/background-properties-capplet.c:585
+#: capplets/background/background-properties-capplet.c:584
 #: capplets/background/background-properties.glade.h:2
 msgid "Background Preferences"
 msgstr "Vlastnosti pozadí"
@@ -478,6 +482,7 @@ msgstr "_Styl:"
 
 #: capplets/background/gnome-wp-capplet.c:72
 #: capplets/common/capplet-util.c:340
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:326
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Při zobrazování nápovědy došlo k chybě: %s"
@@ -526,16 +531,13 @@ msgid ""
 "settings manager may already be active and conflicting with the GNOME "
 "settings manager."
 msgstr ""
-"Nelze spustit správce nastavení 'gnome-settings-daemon'.\n"
-"Bez spuštěného správce nastavení prostředí GNOME se nemusejí některé změny "
-"nastavení projevit. Tato chyba může naznačovat problém se systémem Bonobo, "
-"nebo je již možná aktivní správce nastavení jiného prostředí (např. KDE) a "
-"ten je v konfliktu se správcem nastavení prostředí GNOME."
+"Nemohu spustit správce nastavení 'gnome-settings-daemon'.\n"
+"Bez spuštěného správce nastavení prostředí GNOME se nemusejí některé změny nastavení projevit. Tato chyba může naznačovat problém se systémem Bonobo, nebo je již možná aktivní správce nastavení jiného prostředí (např. KDE) a ten je v konfliktu se správcem nastavení prostředí GNOME."
 
 #: capplets/common/capplet-stock-icons.c:94
 #, c-format
 msgid "Unable to load capplet stock icon '%s'\n"
-msgstr "Nelze načíst ikonu capletu '%s'\n"
+msgstr "Nemohu načíst ikonu capletu '%s'\n"
 
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
@@ -611,82 +613,80 @@ msgstr "Připojuji se..."
 msgid "Downloading..."
 msgstr "Stahuji..."
 
-#: capplets/common/gconf-property-editor.c:172
+#: capplets/common/gconf-property-editor.c:170
 msgid "Key"
 msgstr "Klíč"
 
-#: capplets/common/gconf-property-editor.c:173
+#: capplets/common/gconf-property-editor.c:171
 msgid "GConf key to which this property editor is attached"
 msgstr "Klíč systému GConf, ke kterému je připojen tento editor vlastnosti"
 
-#: capplets/common/gconf-property-editor.c:179
+#: capplets/common/gconf-property-editor.c:177
 msgid "Callback"
 msgstr "Zpětné volání"
 
-#: capplets/common/gconf-property-editor.c:180
+#: capplets/common/gconf-property-editor.c:178
 msgid "Issue this callback when the value associated with key gets changed"
 msgstr "Proveď toto zpětné volání, pokud se změní hodnota přiřazená klíči"
 
-#: capplets/common/gconf-property-editor.c:185
+#: capplets/common/gconf-property-editor.c:183
 msgid "Change set"
 msgstr "Sada změn"
 
-#: capplets/common/gconf-property-editor.c:186
+#: capplets/common/gconf-property-editor.c:184
 msgid ""
 "GConf change set containing data to be forwarded to the gconf client on apply"
-msgstr ""
-"Sada změn systému GConf obsahující data, která budou předána klientu systému "
-"GConf při jejich aplikaci"
+msgstr "Sada změn GConf obsahující data, která budou předána klientu GConf při použití"
 
-#: capplets/common/gconf-property-editor.c:191
+#: capplets/common/gconf-property-editor.c:189
 msgid "Conversion to widget callback"
 msgstr "Zpětné volání konverze na prvek"
 
-#: capplets/common/gconf-property-editor.c:192
+#: capplets/common/gconf-property-editor.c:190
 msgid ""
 "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr ""
 "Zpětné volání, které se provede, když má dojít ke konverzi dat systému GConf "
 "na prvek"
 
-#: capplets/common/gconf-property-editor.c:197
+#: capplets/common/gconf-property-editor.c:195
 msgid "Conversion from widget callback"
 msgstr "Zpětné volání konverze z prvku"
 
-#: capplets/common/gconf-property-editor.c:198
+#: capplets/common/gconf-property-editor.c:196
 msgid ""
 "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr ""
 "Zpětné volání, které se provede, když má dojít ke konverzi z prvku na data "
 "systému GConf"
 
-#: capplets/common/gconf-property-editor.c:203
+#: capplets/common/gconf-property-editor.c:201
 msgid "UI Control"
 msgstr "Ovládací prvek UI"
 
-#: capplets/common/gconf-property-editor.c:204
+#: capplets/common/gconf-property-editor.c:202
 msgid "Object that controls the property (normally a widget)"
 msgstr "Objekt, který ovládá tuto vlastnost (obvykle prvek)"
 
-#: capplets/common/gconf-property-editor.c:219
+#: capplets/common/gconf-property-editor.c:217
 msgid "Property editor object data"
 msgstr "Data objektu editoru vlastnosti"
 
-#: capplets/common/gconf-property-editor.c:220
+#: capplets/common/gconf-property-editor.c:218
 msgid "Custom data required by the specific property editor"
 msgstr "Uživatelská data vyžadovaná specifickým editorem vlastnosti"
 
-#: capplets/common/gconf-property-editor.c:226
+#: capplets/common/gconf-property-editor.c:224
 msgid "Property editor data freeing callback"
 msgstr "Zpětné volání uvolnění dat editoru vlastnosti"
 
-#: capplets/common/gconf-property-editor.c:227
+#: capplets/common/gconf-property-editor.c:225
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr ""
 "Zpětné volání, které se provede, když mají být uvolněna data objektu editoru "
 "vlastnosti"
 
-#: capplets/common/gconf-property-editor.c:1541
+#: capplets/common/gconf-property-editor.c:1538
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -694,12 +694,11 @@ msgid ""
 "Please make sure it exists and try again, or choose a different background "
 "picture."
 msgstr ""
-"Nelze nalézt soubor '%s'.\n"
+"Nemohu najít soubor '%s'.\n"
 "\n"
-"Ujistěte se, že existuje, a zkuste to znovu, nebo vyberte jiný obrázek "
-"pozadí."
+"Ujistěte se, že existuje, a zkuste to znovu, nebo vyberte jiný obrázek pozadí."
 
-#: capplets/common/gconf-property-editor.c:1549
+#: capplets/common/gconf-property-editor.c:1546
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -712,9 +711,13 @@ msgstr ""
 "\n"
 "Vyberte prosím místo něj jiný obrázek."
 
-#: capplets/common/gconf-property-editor.c:1640
+#: capplets/common/gconf-property-editor.c:1667
 msgid "Please select an image."
 msgstr "Vyberte prosím obrázek."
+
+#: capplets/common/gconf-property-editor.c:1672
+msgid "_Select"
+msgstr "_Vybrat"
 
 #: capplets/default-applications/default-applications.desktop.in.h:1
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:18
@@ -1734,9 +1737,7 @@ msgstr "Chyba při rušení zkratky v databázi s nastavením: %s\n"
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
-msgstr ""
-"Nelze nalézt žádné téma pro klávesnici. To znamená, že vaše instalace GTK+ "
-"není úplná."
+msgstr "Nemohu najít žádné téma pro klávesnici. To znamená, že vaše instalace GTK+ není úplná."
 
 #: capplets/keybindings/gnome-keybinding-properties.c:989
 msgid "Action"
@@ -2538,7 +2539,7 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
-"<b>Nelze spustit aplikaci pro nastavení vašeho správce oken</b>\n"
+"<b>Nemohu spustit aplikaci pro nastavení vašeho správce oken</b>\n"
 "\n"
 "%s"
 
@@ -2658,21 +2659,17 @@ msgstr "Nástroj pro nastavení prostředí GNOME"
 
 #: control-center/main.c:43
 msgid "Use shell even if nautilus is running."
-msgstr "Použít shell i pokud běží aplikace Nautilus."
+msgstr "Použít shell, i pokud běží nautilus."
 
 #: gnome-settings-daemon/factory.c:32
 msgid "Could not initialize Bonobo"
 msgstr "Selhala inicializace systému Bonobo"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:325
-msgid "There was an error displaying help:"
-msgstr "Při zobrazování nápovědy došlo k chybě:"
-
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
 msgid "Slow Keys Alert"
 msgstr "Upozornění na Pomalé klávesy"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
 msgid ""
 "You just held down the Shift key for 8 seconds.  This is the shortcut for "
 "the Slow Keys feature, which affects the way your keyboard works."
@@ -2680,20 +2677,19 @@ msgstr ""
 "Právě jste podrželi klávesu Shift na 8 sekund. To je zkratka pro funkci "
 "Pomalé klávesy, která má vliv na to, jak funguje vaše klávesnice."
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
 msgid "Do you want to activate Slow Keys?"
 msgstr "Chcete aktivovat Pomalé klávesy?"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
-msgid "Do you want to deactivate Sticky Keys?"
-msgstr "Chcete deaktivovat Lepicí klávesy?"
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:414
+msgid "Do you want to deactivate Slow Keys?"
+msgstr "Chcete deaktivovat Pomalé klávesy?"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:424
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:425
 msgid "Sticky Keys Alert"
 msgstr "Lepicí klávesy"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:425
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
 msgid ""
 "You just pressed the Shift key 5 times in a row.  This is the shortcut for "
 "the Sticky Keys feature, which affects the way your keyboard works."
@@ -2701,7 +2697,7 @@ msgstr ""
 "Právě jste pětkrát za sebou stiskli klávesu Shift. To je zkratka pro funkci "
 "Lepicí klávesy, která má vliv na to, jak funguje vaše klávesnice."
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
 msgid ""
 "You just pressed two keys at once, or pressed the Shift key 5 times in a "
 "row.  This turns off the Sticky Keys feature, which affects the way your "
@@ -2711,9 +2707,13 @@ msgstr ""
 "klávesu Shift. To vypíná funkci Lepicí klávesy, která má vliv na to, jak "
 "funguje vaše klávesnice."
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
 msgid "Do you want to activate Sticky Keys?"
 msgstr "Chcete aktivovat Lepicí klávesy?"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:429
+msgid "Do you want to deactivate Sticky Keys?"
+msgstr "Chcete deaktivovat Lepicí klávesy?"
 
 #: gnome-settings-daemon/gnome-settings-font.c:102
 #, c-format
@@ -2721,7 +2721,7 @@ msgid ""
 "Cannot create the directory \"%s\".\n"
 "This is needed to allow changing cursors."
 msgstr ""
-"Nelze vytvořit adresář \"%s\".\n"
+"Nemohu vytvořit adresář \"%s\".\n"
 "To je nutné, má-li být možné změnit kurzory."
 
 #: gnome-settings-daemon/gnome-settings-keybindings.c:162
@@ -2821,7 +2821,7 @@ msgstr "Příště už tuto zprávu _neukazovat"
 #: gnome-settings-daemon/gnome-settings-sound.c:128
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
-msgstr "Nelze načíst soubor se zvukem %s jako vzorek %s"
+msgstr "Nemohu načíst soubor se zvukem %s jako vzorek %s"
 
 #: gnome-settings-daemon/gnome-settings-xrdb.c:212
 #: gnome-settings-daemon/gnome-settings-xrdb.c:260
@@ -2872,14 +2872,6 @@ msgstr "Obrazovka"
 #: libbackground/applier.c:280
 msgid "Screen on which BGApplier is to draw"
 msgstr "Obrazovka, na kterou má kreslit BGApplier"
-
-#: libbackground/preview-file-selection.c:207
-msgid "Can't find an hbox, using a normal file selection"
-msgstr "Nelze najít hbox, bude použit normální výběr souboru"
-
-#: libbackground/preview-file-selection.c:212
-msgid "Preview"
-msgstr "Náhled"
 
 #: libsounds/sound-view.c:121 libsounds/sound-view.c:146
 msgid "The sound file for this event does not exist."
@@ -3105,11 +3097,11 @@ msgstr "Pastvu pro oči přidal Anders Carlsson"
 msgid "Break reminder"
 msgstr "Připomenutí přestávky"
 
-#: typing-break/main.c:94
+#: typing-break/main.c:93
 msgid "The typing monitor is already running."
 msgstr "Sledování psaní již běží."
 
-#: typing-break/main.c:107
+#: typing-break/main.c:106
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
@@ -3536,6 +3528,12 @@ msgstr "Zvýšit hlasitost"
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
 msgid "Volume up's shortcut."
 msgstr "Zkratka zvýšení hlasitosti."
+
+#~ msgid "There was an error displaying help:"
+#~ msgstr "Při zobrazování nápovědy došlo k chybě:"
+
+#~ msgid "Preview"
+#~ msgstr "Náhled"
 
 #~ msgid "Show"
 #~ msgstr "Zobrazit"
