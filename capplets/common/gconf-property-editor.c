@@ -275,7 +275,9 @@ gconf_peditor_new_boolean (GConfChangeSet *changeset, gchar *key, GtkWidget *che
 				"key", key,
 				"callback", peditor_boolean_value_changed,
 				"changeset", changeset,
-				"object", checkbox);
+				"object", checkbox,
+				NULL);
+
 	g_signal_connect_swapped (G_OBJECT (checkbox), "toggled",
 				  (GCallback) peditor_boolean_widget_changed, peditor);
 	g_object_set_data (peditor, "toggle-button", checkbox);
@@ -324,7 +326,9 @@ gconf_peditor_new_string (GConfChangeSet *changeset, gchar *key, GtkWidget *entr
 				"key", key,
 				"callback", peditor_string_value_changed,
 				"changeset", changeset,
-				"object", entry);
+				"object", entry,
+				NULL);
+
 	g_signal_connect_swapped (G_OBJECT (entry), "insert_at_cursor",
 				  (GCallback) peditor_string_widget_changed, peditor);
 	g_signal_connect_swapped (G_OBJECT (entry), "delete_from_cursor",
@@ -392,7 +396,9 @@ gconf_peditor_new_color (GConfChangeSet *changeset, gchar *key, GtkWidget *cp)
 				"key", key,
 				"callback", peditor_color_value_changed,
 				"changeset", changeset,
-				"object", cp);
+				"object", cp,
+				NULL);
+
 	g_signal_connect_swapped (G_OBJECT (cp), "color_set",
 				  (GCallback) peditor_color_widget_changed, peditor);
 	g_object_set_data (peditor, "cp", cp);
@@ -453,7 +459,8 @@ gconf_peditor_new_select_menu (GConfChangeSet *changeset, gchar *key, GtkWidget 
 				"key", key,
 				"callback", peditor_select_menu_value_changed,
 				"changeset", changeset,
-				"object", option_menu);
+				"object", option_menu,
+				NULL);
 
 	menu = GTK_MENU (gtk_option_menu_get_menu (GTK_OPTION_MENU (option_menu)));
 
@@ -513,7 +520,8 @@ gconf_peditor_new_select_radio (GConfChangeSet *changeset, gchar *key, GSList *r
 				"key", key,
 				"callback", peditor_select_radio_value_changed,
 				"changeset", changeset,
-				"object", radio_group);
+				"object", radio_group,
+				NULL);
 
 	for (item = radio_group; item != NULL; item = item->next)
 		g_signal_connect_swapped (G_OBJECT (item->data), "toggled",
