@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center\n"
-"POT-Creation-Date: 2001-07-30 14:52-0400\n"
-"PO-Revision-Date: 2001-07-26 01:13+0400\n"
+"POT-Creation-Date: 2001-07-25 23:21+0400\n"
+"PO-Revision-Date: 2001-08-10 20:25+0400\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -167,49 +167,38 @@ msgstr ""
 msgid "Options for adding and removing backends"
 msgstr ""
 
-#: capplets/background/applier.c:354
+#: capplets/background/applier.c:386
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "Не удалось загрузить картинку \"%s\"; отключение обоев."
 
-#: capplets/background/applier.c:500
+#: capplets/background/applier.c:539
 msgid "Disabled"
 msgstr "Выкл."
 
-#: capplets/background/background.desktop.in.in.h:1
-msgid "Background"
-msgstr "Фон"
-
-#: capplets/background/background.desktop.in.in.h:2
-msgid "Configuration of the desktop's background"
-msgstr "Настройка фона рабочего стола"
-
 #: capplets/background/background-properties.glade.h:1
-#, fuzzy
 msgid "Background colors"
-msgstr "Фон"
+msgstr "Цвет фона"
 
 #: capplets/background/background-properties.glade.h:2
-#, fuzzy
 msgid "Background picture"
-msgstr "Фон"
+msgstr "Фоновое изображение"
 
 #: capplets/background/background-properties.glade.h:3
 msgid "Centered"
 msgstr "Центрировать"
 
 #: capplets/background/background-properties.glade.h:4
-#, fuzzy
 msgid "Horizontal gradient"
 msgstr "Горизонтальный переход"
 
 #: capplets/background/background-properties.glade.h:5
 msgid "Image:"
-msgstr ""
+msgstr "Изображение:"
 
 #: capplets/background/background-properties.glade.h:6
 msgid "Opacity (percent):"
-msgstr ""
+msgstr "Непрозрачность (%):"
 
 #: capplets/background/background-properties.glade.h:7
 msgid "Pick a color"
@@ -220,7 +209,6 @@ msgid "Scaled (keep aspect ratio)"
 msgstr "Масштабировать (сохранять пропорции)"
 
 #: capplets/background/background-properties.glade.h:9
-#, fuzzy
 msgid "Solid color"
 msgstr "Сплошной цвет"
 
@@ -230,75 +218,31 @@ msgstr ""
 
 #: capplets/background/background-properties.glade.h:11
 msgid "Style:"
-msgstr ""
+msgstr "Стиль:"
 
 #: capplets/background/background-properties.glade.h:12
 msgid "Tiled"
 msgstr "Заполнить"
 
 #: capplets/background/background-properties.glade.h:13
-#, fuzzy
 msgid "Vertical gradient"
 msgstr "Вертикальный переход"
 
-#: capplets/background/prefs-widget.c:362
-msgid "(None)"
-msgstr "(Нет)"
-
-#: capplets/background/prefs-widget.c:611
-msgid "Wallpaper Selection"
-msgstr "Выбор обоев"
-
-#: capplets/background/prefs-widget.c:618
-msgid "Can't find an hbox, using a normal file selection"
-msgstr "Невозможно найти hbox, используется обычный выбор файла"
-
-#: capplets/background/prefs-widget.c:624
-#: capplets/screensaver/screensaver-properties.glade.h:11
-msgid "Preview"
-msgstr "Посмотреть"
-
-#: capplets/common/capplet-util.c:490
-msgid "Just apply settings and quit"
-msgstr ""
-
-#: capplets/common/capplet-util.c:492
-msgid "Initialize the session"
-msgstr ""
-
-#: capplets/common/capplet-util.c:494
-msgid "Retrieve and store legacy settings"
-msgstr ""
-
-#: capplets/common/capplet-util.c:503
-msgid "Capplet options"
-msgstr ""
-
-#: capplets/default-applications/default-applications.desktop.in.in.h:1
-msgid "Choose the applications used by default"
-msgstr ""
-
-#: capplets/default-applications/default-applications.desktop.in.in.h:2
-#, fuzzy
-msgid "Default Applications"
-msgstr "Исходное положение"
-
 #: capplets/default-applications/interface.c:108
 msgid "Gnome Default Editor"
-msgstr ""
+msgstr "Редактор GNOME по умолчанию"
 
 #: capplets/default-applications/interface.c:125
 msgid "Select an Editor"
-msgstr ""
+msgstr "Выбрать редактор"
 
 #: capplets/default-applications/interface.c:134
 msgid "With this option, you can select a predefined Editor as your default"
 msgstr ""
 
 #: capplets/default-applications/interface.c:154
-#, fuzzy
 msgid "Custom Editor"
-msgstr "Другой"
+msgstr "Другой редактор"
 
 #: capplets/default-applications/interface.c:163
 msgid "With this option you can create your own default editor"
@@ -308,11 +252,11 @@ msgstr ""
 #: capplets/default-applications/interface.c:305
 #: capplets/default-applications/interface.c:436
 msgid "Start in Terminal"
-msgstr ""
+msgstr "Запустить в терминале"
 
 #: capplets/default-applications/interface.c:182
 msgid "Does this editor need to start in an xterm?"
-msgstr ""
+msgstr "Должен ли этот редактор запускаться в xterm?"
 
 #: capplets/default-applications/interface.c:184
 msgid "Accepts Line Number"
@@ -327,24 +271,23 @@ msgstr ""
 #: capplets/default-applications/interface.c:465
 #: capplets/default-applications/interface.c:576
 msgid "Command:"
-msgstr ""
+msgstr "Команда:"
 
 #: capplets/default-applications/interface.c:221
-#, fuzzy
 msgid "Please enter the command line used to start this editor"
-msgstr "Пожалуйста, введите командную строку."
+msgstr "Пожалуйста, введите командную строку используемую для запуска этого редактора"
 
 #: capplets/default-applications/interface.c:232
 msgid "Text Editor"
-msgstr ""
+msgstr "Текстовый редактор"
 
 #: capplets/default-applications/interface.c:239
 msgid "Gnome Default Web Browser"
-msgstr ""
+msgstr "Браузер GNOME по умолчанию"
 
 #: capplets/default-applications/interface.c:256
 msgid "Select a Web Browser"
-msgstr ""
+msgstr "Выбрать браузер"
 
 #: capplets/default-applications/interface.c:265
 msgid ""
@@ -353,7 +296,7 @@ msgstr ""
 
 #: capplets/default-applications/interface.c:285
 msgid "Custom Web Browser"
-msgstr ""
+msgstr "Другой браузер"
 
 #: capplets/default-applications/interface.c:294
 msgid "With this option you can create your own default web browser"
@@ -374,14 +317,12 @@ msgid ""
 msgstr ""
 
 #: capplets/default-applications/interface.c:352
-#, fuzzy
 msgid "Please enter the command line used to start this web browser"
-msgstr "Пожалуйста, введите командную строку."
+msgstr "Пожалуйста, введите командную строку используемую для запуска этого браузера"
 
 #: capplets/default-applications/interface.c:363
-#, fuzzy
 msgid "Web Browser"
-msgstr "Просмотр..."
+msgstr "Браузер"
 
 #: capplets/default-applications/interface.c:370
 #: capplets/default-applications/interface.c:501
@@ -427,7 +368,7 @@ msgstr ""
 
 #: capplets/default-applications/interface.c:518
 msgid "Select a Terminal"
-msgstr ""
+msgstr "Выбор терминала"
 
 #: capplets/default-applications/interface.c:527
 msgid "With this option you can select a predefined terminal."
@@ -435,7 +376,7 @@ msgstr ""
 
 #: capplets/default-applications/interface.c:547
 msgid "Custom Terminal"
-msgstr ""
+msgstr "Другой терминал"
 
 #: capplets/default-applications/interface.c:556
 msgid "With this option you can create your own terminal"
@@ -452,51 +393,28 @@ msgid ""
 msgstr ""
 
 #: capplets/default-applications/interface.c:614
-#, fuzzy
 msgid "Please enter the command line used to start this terminal"
-msgstr "Пожалуйста, введите командную строку."
+msgstr "Пожалуйста, введите командную строку используемую для запуска этого терминала"
 
 #: capplets/default-applications/interface.c:625
 msgid "Terminal"
-msgstr ""
-
-#: capplets/default-applications/support.c:100
-#: capplets/default-applications/support.c:138
-#, c-format
-msgid "Couldn't find pixmap file: %s"
-msgstr ""
-
-#: capplets/default-applications/support.c:116
-#, c-format
-msgid "Couldn't create pixmap from file: %s"
-msgstr ""
-
-#: capplets/keyboard/keyboard-properties.glade.h:9
-#: capplets/keyboard/keyboard.desktop.in.in.h:1
-msgid "Keyboard"
-msgstr "Клавиатура"
-
-#: capplets/keyboard/keyboard.desktop.in.in.h:2
-msgid "Keyboard Properties"
-msgstr "Свойства клавиатуры"
+msgstr "Терминала"
 
 #: capplets/keyboard/keyboard-properties.glade.h:1
-#, fuzzy
 msgid "Bell"
-msgstr "Ячейка"
+msgstr "Колокольчик"
 
 #: capplets/keyboard/keyboard-properties.glade.h:2
 msgid "Click volume"
 msgstr "Громкость щелчка"
 
 #: capplets/keyboard/keyboard-properties.glade.h:3
-#, fuzzy
-msgid "Delay before repeat:"
-msgstr "Задержка до следующей перерисовки"
+msgid "Delay until repeat:"
+msgstr "Задержка перед повтором:"
 
 #: capplets/keyboard/keyboard-properties.glade.h:4
 msgid "Duration (ms)"
-msgstr ""
+msgstr "Длительность (мс)"
 
 #: capplets/keyboard/keyboard-properties.glade.h:5
 msgid "Enable Keyboard Click"
@@ -512,27 +430,28 @@ msgid "Fast"
 msgstr "Быстро"
 
 #: capplets/keyboard/keyboard-properties.glade.h:8
-#, fuzzy
 msgid "Key repeat rate:"
-msgstr "Скорость повтора клавиши"
+msgstr "Скорость повтора клавиши:"
+
+#: capplets/keyboard/keyboard-properties.glade.h:9
+msgid "Keyboard"
+msgstr "Клавиатура"
 
 #: capplets/keyboard/keyboard-properties.glade.h:10
-#, fuzzy
 msgid "Long"
-msgstr "Длина"
+msgstr "Длинный"
 
 #: capplets/keyboard/keyboard-properties.glade.h:11
 msgid "Medium"
-msgstr ""
+msgstr "Средний"
 
 #: capplets/keyboard/keyboard-properties.glade.h:12
 msgid "Pitch (Hz)"
-msgstr ""
+msgstr "Щелчок (Гц)"
 
 #: capplets/keyboard/keyboard-properties.glade.h:13
-#, fuzzy
 msgid "Short"
-msgstr "Клавиатурные комбинации"
+msgstr "Короткий"
 
 #: capplets/keyboard/keyboard-properties.glade.h:14
 #: capplets/mouse/mouse-properties.glade.h:10
@@ -540,29 +459,20 @@ msgid "Slow"
 msgstr "Медлено"
 
 #: capplets/keyboard/keyboard-properties.glade.h:15
-#, fuzzy
 msgid "Test"
-msgstr "Скручивание:"
+msgstr "Проверка"
 
 #: capplets/keyboard/keyboard-properties.glade.h:16
 msgid "Very fast"
-msgstr ""
+msgstr "Очень быстро"
 
 #: capplets/keyboard/keyboard-properties.glade.h:17
 msgid "Very long"
-msgstr ""
+msgstr "Очень длинный"
 
 #: capplets/keyboard/keyboard-properties.glade.h:18
 msgid "Volume"
-msgstr ""
-
-#: capplets/mouse/mouse.desktop.in.in.h:1
-msgid "Mouse"
-msgstr "Мышь"
-
-#: capplets/mouse/mouse.desktop.in.in.h:2
-msgid "Mouse Properties"
-msgstr "Свойства мыши"
+msgstr "Громкость"
 
 #: capplets/mouse/mouse-properties.glade.h:2
 msgid "High"
@@ -605,7 +515,6 @@ msgid "Use"
 msgstr "Использовать"
 
 #: capplets/screensaver/prefs-widget.c:185
-#: capplets/screensaver/screensaver.desktop.in.in.h:2
 msgid "Screensaver"
 msgstr "Хранитель экрана"
 
@@ -654,18 +563,13 @@ msgstr "Видимый:"
 msgid "Any"
 msgstr "Любой"
 
-#: capplets/screensaver/screensaver.desktop.in.in.h:1
-msgid "Configure the settings of the screensaver"
-msgstr "Настройка хранителя экрана."
-
 #: capplets/screensaver/screensaver-properties.glade.h:1
 msgid " Configure..."
 msgstr "Настроить..."
 
 #: capplets/screensaver/screensaver-properties.glade.h:2
-#, fuzzy
 msgid "About \"<Screensaver name>\""
-msgstr "Запуск хранителя экрана через"
+msgstr "О программе \"<Screensaver name>\""
 
 #: capplets/screensaver/screensaver-properties.glade.h:3
 msgid "Black screen only"
@@ -684,11 +588,10 @@ msgid ""
 "Draws quasiperiodic tilings; think of the implications on modern formica "
 "technology. Written by Time Korlove. In April 1997, Sir Roger Penrose, a "
 "British math professor who has worked with Stephen Hawking on such topics as "
-"relatvity, black holes, and whether time has a beginning, files a "
-"copyright-infringement lawsuit against Kimberly-Clark Corporation, wchih "
-"Penrose said copied a pattern he created ( apattern demonstrating that \"a "
-"nonrepeating pattern could exist in nature\") for its Kleenex quilted toilet "
-"paper. "
+"relatvity, black holes, and whether time has a beginning, files a copyright-"
+"infringement lawsuit against Kimberly-Clark Corporation, wchih Penrose said "
+"copied a pattern he created ( apattern demonstrating that \"a nonrepeating "
+"pattern could exist in nature\") for its Kleenex quilted toilet paper. "
 msgstr ""
 
 #: capplets/screensaver/screensaver-properties.glade.h:7
@@ -706,6 +609,10 @@ msgstr "Переходит в режим ожидания через"
 #: capplets/screensaver/screensaver-properties.glade.h:10
 msgid "One screensaver all the time"
 msgstr "Один и тот же хранитель экрана все время"
+
+#: capplets/screensaver/screensaver-properties.glade.h:11
+msgid "Preview"
+msgstr "Посмотреть"
 
 #: capplets/screensaver/screensaver-properties.glade.h:12
 msgid "R_equire password to unlock screen"
@@ -729,9 +636,8 @@ msgid "S_witch screensavers after "
 msgstr "Переключать хранитель экрана каждые"
 
 #: capplets/screensaver/screensaver-properties.glade.h:17
-#, fuzzy
 msgid "Settings for \"<Screensaver name>\""
-msgstr "Запуск хранителя экрана через"
+msgstr "Установки для \"<Screensaver name>\""
 
 #: capplets/screensaver/screensaver-properties.glade.h:18
 msgid "Shut down monitor after"
@@ -1376,14 +1282,6 @@ msgstr "Другой"
 msgid "New screensaver"
 msgstr "Новый хранитель экрана"
 
-#: capplets/sound/sound.desktop.in.in.h:1
-msgid "Configure GNOME's use of sound"
-msgstr "Определить как GNOME использует звук"
-
-#: capplets/sound/sound.desktop.in.in.h:2
-msgid "Sound"
-msgstr "Звук"
-
 #: capplets/sound/sound-properties.glade.h:1
 msgid "Enable sound server startup"
 msgstr "Разрешить запуск сервера звука"
@@ -1391,15 +1289,6 @@ msgstr "Разрешить запуск сервера звука"
 #: capplets/sound/sound-properties.glade.h:2
 msgid "Sounds for events"
 msgstr "Звуки событий"
-
-#: control-center/Gnome.directory.in.in.h:1
-msgid "Main"
-msgstr ""
-
-#: control-center/Gnome.directory.in.in.h:2
-#, fuzzy
-msgid "Main Settings"
-msgstr "Свойства"
 
 #: control-center/capplet-dir-view.c:296 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
@@ -1425,11 +1314,6 @@ msgstr ""
 #: control-center/capplet-dir-view.c:459
 msgid "Close"
 msgstr "Закрыть"
-
-#: control-center/capplet-dir-view-html.c:150
-#, fuzzy
-msgid "GNOME Control Center:"
-msgstr "Центр управления GNOME"
 
 #: control-center/gnomecc.desktop.in.h:2
 msgid "The GNOME configuration tool"
@@ -1471,357 +1355,10 @@ msgstr "Новый Центр Управления"
 msgid "Put control panels in the control center's window"
 msgstr "Поместить управляющие панели в окне управляющего центра"
 
-#: control-center/main.c:46
-#, fuzzy
-msgid "Configuration"
-msgstr "Настройка мыши"
-
-#: control-center/main.c:72
-msgid "Run the capplet CAPPLET"
-msgstr ""
-
-#: control-center/main.c:72
-msgid "CAPPLET"
-msgstr ""
-
-#: control-center/main.c:80
-#, fuzzy
-msgid "GNOME Control Center options"
-msgstr "Центр управления GNOME"
-
 #: capplets/desktop-links/gnome-hint-properties.desktop.in.h:1
 msgid "Options for the startup hint dialog"
 msgstr ""
 
 #: capplets/desktop-links/gnome-hint-properties.desktop.in.h:2
 msgid "Startup Hint"
-msgstr ""
-
-#~ msgid "Control Center Menu"
-#~ msgstr "Меню центра управления"
-
-#~ msgid "Adjust wallpaper's transparency"
-#~ msgstr "Подобрать прозрачность обоев"
-
-#~ msgid "Apply changes automatically"
-#~ msgstr "Применять изменения автоматически"
-
-#~ msgid "Colors"
-#~ msgstr "Цвета"
-
-#~ msgid "Display Style"
-#~ msgstr "Стиль отображения"
-
-#~ msgid "Effect"
-#~ msgstr "Эффекты"
-
-#~ msgid "File"
-#~ msgstr "Файл"
-
-#~ msgid "More Solid"
-#~ msgstr "Более сплошное"
-
-#~ msgid "More Transparent"
-#~ msgstr "Более прозрачное"
-
-#~ msgid "Primary color"
-#~ msgstr "Основной цвет"
-
-#~ msgid "Right or bottom color"
-#~ msgstr "Правый или нижний цвет"
-
-#~ msgid "Stretched (change aspect ratio)"
-#~ msgstr "Растянуть (искажает пропорции)"
-
-#~ msgid "Use GNOME for setting background"
-#~ msgstr "Использовать GNOME для установки фона"
-
-#~ msgid "Wallpaper"
-#~ msgstr "Обои"
-
-#~ msgid "....a"
-#~ msgstr "....a"
-
-#~ msgid "...a"
-#~ msgstr "...a"
-
-#~ msgid "..a"
-#~ msgstr "..a"
-
-#~ msgid ".a"
-#~ msgstr ".a"
-
-#~ msgid "Delay Until Repeat"
-#~ msgstr "Задержка перед повтором"
-
-#~ msgid "Keyboard click"
-#~ msgstr "Щелчки клавиш"
-
-#~ msgid "Type here to test setting"
-#~ msgstr "Напечатайте здесь что-нибудь для проверки настроек"
-
-#~ msgid "a....a"
-#~ msgstr "a....a"
-
-#~ msgid "a...a"
-#~ msgstr "a...a"
-
-#~ msgid "a..a"
-#~ msgstr "a..a"
-
-#~ msgid "a.a"
-#~ msgstr "a.a"
-
-#~ msgid "Restore earlier configuration"
-#~ msgstr "Восстановить предыдущие настройки"
-
-#~ msgid "Advanced..."
-#~ msgstr "Дополнительно..."
-
-#, fuzzy
-#~ msgid "Configuration Restoration"
-#~ msgstr "Команда настройки:"
-
-#~ msgid "Create..."
-#~ msgstr "Создать..."
-
-#~ msgid "Destroy..."
-#~ msgstr "Уничтожить..."
-
-#, fuzzy
-#~ msgid "Location Management"
-#~ msgstr "Энергосбережение"
-
-#~ msgid "Rename..."
-#~ msgstr "Переименовать..."
-
-#~ msgid "Restore configuration from"
-#~ msgstr "Восстановить настройки из"
-
-#~ msgid "Restore old configuration"
-#~ msgstr "Восстановить старые настройки"
-
-#~ msgid "Restore only"
-#~ msgstr "Восстановить только"
-
-#~ msgid "View Logs..."
-#~ msgstr "Просмотр журналов..."
-
-#~ msgid "days ago"
-#~ msgstr "дней назад"
-
-#~ msgid "Play"
-#~ msgstr "Играть"
-
-#~ msgid "Enable"
-#~ msgstr "Разрешить"
-
-#~ msgid "Event"
-#~ msgstr "Событие"
-
-#~ msgid "File to Play"
-#~ msgstr "Играть файл"
-
-#~ msgid "General"
-#~ msgstr "Общие"
-
-#~ msgid "Sound Events"
-#~ msgstr "Звуки Событий"
-
-#~ msgid "HTML"
-#~ msgstr "HTML"
-
-#~ msgid "Icon List"
-#~ msgstr "Список пиктограмм"
-
-#~ msgid "Tree"
-#~ msgstr "Дерево"
-
-#~ msgid "Got error %d.\n"
-#~ msgstr "Получена ошибка %d.\n"
-
-#~ msgid "Password for %s"
-#~ msgstr "Пароль для %s"
-
-#~ msgid "Consistency checking is not turned on."
-#~ msgstr "Проверка непротиворечивости не включена"
-
-#~ msgid "Block is fine."
-#~ msgstr "Блок чист."
-
-#~ msgid "Block freed twice."
-#~ msgstr "Блок освобожден дважды."
-
-#~ msgid "Memory before the block was clobbered."
-#~ msgstr "Память перед блоком была затерта."
-
-#~ msgid "Memory after the block was clobbered."
-#~ msgstr "Память после блока была затерта."
-
-#~ msgid "userhelper must be setuid root\n"
-#~ msgstr "userhelper должен быть setuid root\n"
-
-#~ msgid "Usage: root-helper fd\n"
-#~ msgstr "Используйте: root-helper fd\n"
-
-#~ msgid "PAM returned = %d\n"
-#~ msgstr "PAM вернул = %d\n"
-
-#~ msgid "about to authenticate \"%s\"\n"
-#~ msgstr "об идентификации \"%s\"\n"
-
-#~ msgid "about to exec \"%s\"\n"
-#~ msgstr "о выполнении \"%s\"\n"
-
-#~ msgid "Pipe error.\n"
-#~ msgstr "Ошибка канала.\n"
-
-#~ msgid "Cannot fork().\n"
-#~ msgstr "Не удалось выполнить fork().\n"
-
-#~ msgid "dup2() error.\n"
-#~ msgstr "ошибка dup2().\n"
-
-#~ msgid "execl() error, errno=%d\n"
-#~ msgstr "ошибка execl(), errno=%d\n"
-
-#~ msgid "Information updated."
-#~ msgstr "Информация обновлена."
-
-#~ msgid ""
-#~ "The password you typed is invalid.\n"
-#~ "Please try again."
-#~ msgstr ""
-#~ "Вы ввели неправильный пароль.\n"
-#~ "Попробуйте еще раз."
-
-#~ msgid ""
-#~ "One or more of the changed fields is invalid.\n"
-#~ "This is probably due to either colons or commas in one of the fields.\n"
-#~ "Please remove those and try again."
-#~ msgstr ""
-#~ "Одно или несколько измененных полей неправильны.\n"
-#~ "Возможно из-за наличия двоеточий или запятых в одном из полей.\n"
-#~ "Пожалуйста удалите их и попробуйте еще раз."
-
-#~ msgid "Password resetting error."
-#~ msgstr "Ошибка переустановки пароля."
-
-#~ msgid ""
-#~ "Some systems files are locked.\n"
-#~ "Please try again in a few moments."
-#~ msgstr ""
-#~ "Некоторые системные файлы заблокированны.\n"
-#~ "Пожалуйста попробуйте еще раз чуть позже."
-
-#~ msgid "Unknown user."
-#~ msgstr "Неизвестный пользователь."
-
-#~ msgid "Insufficient rights."
-#~ msgstr "Недостаточные права."
-
-#~ msgid "Invalid call to sub process."
-#~ msgstr "Недопустимый вызов к подпроцессу."
-
-#~ msgid ""
-#~ "Your current shell is not listed in /etc/shells.\n"
-#~ "You are not allowed to change your shell.\n"
-#~ "Consult your system administrator."
-#~ msgstr ""
-#~ "Ваша текущая оболочка не указана в /etc/shells.\n"
-#~ "Вы не можете изменить вашу оболочку.\n"
-#~ "Обратитесь к вашему системному администратору."
-
-#~ msgid "Out of memory."
-#~ msgstr "Недостаточно памяти."
-
-#~ msgid "The exec() call failed."
-#~ msgstr "Сбой вызова exec()."
-
-#~ msgid "Failed to find selected program."
-#~ msgstr "Сбой при поиске выбранной программы."
-
-#~ msgid "Unknown error."
-#~ msgstr "Неизвестная ошибка."
-
-#~ msgid "Unknown exit code."
-#~ msgstr "Неизвестный код завершения."
-
-#~ msgid "Input"
-#~ msgstr "Ввод"
-
-#~ msgid "Need %d responses.\n"
-#~ msgstr "Требуется %d ответов.\n"
-
-#~ msgid ""
-#~ "In order to make changes to your system, you\n"
-#~ "must enter the administrator (root) password."
-#~ msgstr ""
-#~ "Чтобы сделать изменения в вашей системе,\n"
-#~ "вы должны ввести пароль администратора (root)."
-
-#~ msgid "Error"
-#~ msgstr "Ошибка"
-
-#~ msgid "You want %d response(s) from %d entry fields!?!?!\n"
-#~ msgstr "Вы хотите %d ответов из %d полей записи?!?!\n"
-
-#~ msgid "Run Unprivileged"
-#~ msgstr "Запустить без привелегий"
-
-#~ msgid "Configure window appearance"
-#~ msgstr "Настройка оформления окон"
-
-#~ msgid "Configure key shortcuts"
-#~ msgstr "Настройка клавиатурных комбинаций"
-
-#~ msgid "Focus behavior"
-#~ msgstr "Передача фокуса"
-
-#~ msgid "Configure window focusing"
-#~ msgstr "Выбор метода фокусирования окна"
-
-#~ msgid "Matched Windows"
-#~ msgstr "Совпавшие окна"
-
-#~ msgid "Configure window properties"
-#~ msgstr "Настройка параметров определенных окон"
-
-#~ msgid "Minimizing and Maximizing"
-#~ msgstr "Максимизация и минимизация"
-
-#~ msgid "Configure window minimization and maximization"
-#~ msgstr "Настройка параметров максимизации и минимизации окна"
-
-#~ msgid "Meta"
-#~ msgstr "Настройка конфигуратора"
-
-#~ msgid "Configure window manager configuration properties"
-#~ msgstr "Настройка параметров программы конфигурации"
-
-#~ msgid "Miscellaneous"
-#~ msgstr "Разное"
-
-#~ msgid "Configure miscellaneous window features"
-#~ msgstr "Настройка различных параметров окна"
-
-#~ msgid "Moving and Resizing"
-#~ msgstr "Перемещение и изменение размеров"
-
-#~ msgid "Configure window move/resize"
-#~ msgstr "Настройка параметров перемещения и изменения размеров окон"
-
-#~ msgid "Placement"
-#~ msgstr "Размещение окон"
-
-#~ msgid "Configure window placement"
-#~ msgstr "Настройка размещения окон при их открытии"
-
-#~ msgid "Enable window manager sound events"
-#~ msgstr "Настройка звуковых эффектов"
-
-#~ msgid "Workspaces"
-#~ msgstr "Рабочие области"
-
-#~ msgid "Configure workspaces"
-#~ msgstr "Настройка рабочих областей"
+msgstr "Подсказка при запуске"
