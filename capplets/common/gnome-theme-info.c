@@ -210,12 +210,17 @@ update_theme_dir (const gchar *theme_dir)
     {
       GList *list;
 
+      g_print ("changed!\n");
       for (list = callbacks; list; list = list->next)
 	{
 	  ThemeCallbackData *callback_data = list->data;
 
 	  (* callback_data->func) ((gpointer)theme_dir, callback_data->data);
 	}
+    }
+  else
+    {
+      g_print ("no change!\n");
     }
 
 }
@@ -262,7 +267,11 @@ top_theme_dir_changed_callback (GnomeVFSMonitorHandle    *handle,
 				GnomeVFSMonitorEventType  event_type,
 				gpointer                  user_data)
 {
-  GFreeFunc *func = user_data;
+  typedef void (*ThemeChangedFunc) (const gchar *uri);
+  ThemeChangedFunc func;
+  
+
+  func = user_data;
 
   switch (event_type)
     {
@@ -270,9 +279,13 @@ top_theme_dir_changed_callback (GnomeVFSMonitorHandle    *handle,
     case GNOME_VFS_MONITOR_EVENT_CREATED:
     case GNOME_VFS_MONITOR_EVENT_DELETED:
       if (!strncmp (info_uri, "file://", strlen ("file://")))
-	(*func) ((char *)info_uri + strlen ("file://"));
+	{
+	  func (info_uri + strlen ("file://"));
+	}
       else
-	(*func) ((char *)info_uri);
+	{
+	  func (info_uri);
+	}
       break;
     default:
       break;

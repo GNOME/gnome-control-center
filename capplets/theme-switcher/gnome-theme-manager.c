@@ -288,12 +288,8 @@ meta_theme_setup_info (GnomeThemeMetaInfo *meta_theme_info,
 		       GladeXML           *dialog)
 {
   GtkWidget *notebook;
-  GtkWidget *toggle;
 
   notebook = WID ("meta_theme_notebook");
-
-  /* Undo all signals */
-  toggle = WID ("meta_theme_font1_toggle");
 
   if (meta_theme_info == NULL)
     {
@@ -703,6 +699,7 @@ theme_changed_func (gpointer uri,
 
   dialog = gnome_theme_manager_get_theme_dialog ();
 
+  g_print ("theme_changed_func:\n");
   update_themes_from_disk ((GladeXML *)user_data);
   gnome_theme_details_reread_themes_from_disk ();
   gtk_widget_grab_focus (WID ("meta_theme_treeview"));

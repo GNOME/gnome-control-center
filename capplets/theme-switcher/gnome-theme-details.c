@@ -502,7 +502,7 @@ gnome_theme_details_update_from_gconf (void)
   gnome_window_manager_get_settings (window_manager, &wm_settings);
   update_list_something (tree_view, wm_settings.theme);
 
-  tree_view = WID ("window_theme_treeview");
+  tree_view = WID ("icon_theme_treeview");
   theme = gconf_client_get_string (client, ICON_THEME_KEY, NULL);
   update_list_something (tree_view, theme);
   g_free (theme);

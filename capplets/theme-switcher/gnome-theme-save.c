@@ -2,7 +2,9 @@
 #include "gnome-theme-save.h"
 #include "gnome-theme-manager.h"
 #include "capplet-util.h"
+#include <libgnomevfs/gnome-vfs-ops.h>
 
+#include "gnome-theme-save-data.c"
 
 static GQuark error_quark;
 enum
@@ -12,17 +14,106 @@ enum
 
 
 static gboolean
-save_theme_to_disk (GnomeThemeMetaInfo  *meta_theme_info,
-		    const gchar         *theme_name,
-		    GError             **error)
+check_theme_name (const gchar  *theme_name,
+		  GError      **error)
 {
   if (theme_name == NULL)
     {
       g_set_error (error,
 		   error_quark,
 		   INVALID_THEME_NAME,
-		   "ff");
+		   _("Theme name must be present"));
+      return FALSE;
     }
+  return TRUE;
+}
+
+static gboolean
+setup_directory_structure (const gchar  *theme_name,
+			   GError      **error)
+{
+  gchar *dir;
+  GnomeVFSURI *uri;
+
+  dir = g_build_filename (g_get_home_dir (), ".themes", NULL);
+  uri = gnome_vfs_uri_new (dir);
+  if (!gnome_vfs_uri_exists (uri))
+    gnome_vfs_make_directory_for_uri (uri, 0775);
+  gnome_vfs_uri_unref (uri);
+  g_free (dir);
+  
+  dir = g_build_filename (g_get_home_dir (), ".themes", theme_name, NULL);
+  uri = gnome_vfs_uri_new (dir);
+  if (!gnome_vfs_uri_exists (uri))
+    gnome_vfs_make_directory_for_uri (uri, 0775);
+  gnome_vfs_uri_unref (uri);
+  g_free (dir);
+
+  return TRUE;
+}
+
+static gboolean
+write_theme_to_disk (GnomeThemeMetaInfo  *meta_theme_info,
+		     const gchar         *theme_name,
+		     GError             **error)
+{
+  gchar *dir;
+  GnomeVFSURI *uri;
+  GnomeVFSURI *target_uri;
+  GnomeVFSHandle *handle = NULL;
+  GnomeVFSFileSize bytes_written;
+  gchar *str;
+
+  dir = g_build_filename (g_get_home_dir (), ".themes", theme_name, "index.theme~", NULL);
+  uri = gnome_vfs_uri_new (dir);
+  dir [strlen (dir) - 1] = '\000';
+  target_uri = gnome_vfs_uri_new (dir);
+  g_free (dir);
+  gnome_vfs_create_uri (&handle, uri, GNOME_VFS_OPEN_READ | GNOME_VFS_OPEN_WRITE, FALSE, 0644);
+
+  gnome_vfs_truncate_handle (handle, 0);
+
+  /* start making the theme file */
+  str = g_strdup_printf (theme_header, theme_name, theme_name);
+  gnome_vfs_write (handle, str, strlen (str), &bytes_written);
+  g_free (str);
+
+  str = g_strdup_printf ("GtkTheme=%s\n", meta_theme_info->gtk_theme_name);
+  gnome_vfs_write (handle, str, strlen (str), &bytes_written);
+  g_free (str);
+
+  str = g_strdup_printf ("MetacityTheme=%s\n", meta_theme_info->metacity_theme_name);
+  gnome_vfs_write (handle, str, strlen (str), &bytes_written);
+  g_free (str);
+
+  str = g_strdup_printf ("IconTheme=%s\n", meta_theme_info->icon_theme_name);
+  gnome_vfs_write (handle, str, strlen (str), &bytes_written);
+  g_free (str);
+
+  gnome_vfs_close (handle);
+
+  
+  gnome_vfs_move_uri (uri, target_uri, TRUE);
+  gnome_vfs_uri_unref (uri);
+  gnome_vfs_uri_unref (target_uri);
+
+  return TRUE;
+}
+
+static gboolean
+save_theme_to_disk (GnomeThemeMetaInfo  *meta_theme_info,
+		    const gchar         *theme_name,
+		    GError             **error)
+{
+  if (! check_theme_name (theme_name, error))
+    return FALSE;
+
+  if (! setup_directory_structure (theme_name, error))
+    return FALSE;
+
+  if (! write_theme_to_disk (meta_theme_info, theme_name, error))
+    return FALSE;
+  
   return TRUE;
 }
 
@@ -44,7 +135,7 @@ save_dialog_response (GtkWidget *save_dialog,
       entry = WID ("save_dialog_entry");
 
       theme_name = gtk_entry_get_text (GTK_ENTRY (entry));
-      meta_theme_info = (GnomeThemeMetaInfo *) g_object_get_data (G_OBJECT (save_dialog), "meta_theme_info");
+      meta_theme_info = (GnomeThemeMetaInfo *) g_object_get_data (G_OBJECT (save_dialog), "meta-theme-info");
       if (! save_theme_to_disk (meta_theme_info, theme_name, &error))
 	{
 	  goto out;
