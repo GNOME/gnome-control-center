@@ -329,7 +329,7 @@ esac],
 
 if test "x$ENABLE_GSTREAMER" = "xyes"; then
    have_gstreamer=no
-   PKG_CHECK_MODULES(GST, gstreamer-interfaces-0.7 >= 0.7.3.1,
+   PKG_CHECK_MODULES(GST, gstreamer-interfaces-0.8 >= 0.8.0,
 		   have_gstreamer=yes,
 		   AC_MSG_RESULT(*** All of GStreamer dependent parts will be disabled ***))
 else

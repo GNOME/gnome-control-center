@@ -40,6 +40,7 @@ pixmaps_DATA = acme-brightness.png acme-eject.png gnome-speakernotes-muted.png g
 
 EXTRA_DIST =					\
 	acme-volume-alsa.c acme-volume-alsa.h	\
+	acme-volume-gstreamer.c acme-volume-gstreamer.h	\
 	acme-volume-oss.c acme-volume-oss.h	\
 	acme-fb-level.c acme-fb-level.h		\
 	acme.h					\
