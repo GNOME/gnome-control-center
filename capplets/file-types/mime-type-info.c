@@ -30,6 +30,7 @@
 #endif
 
 #include <bonobo.h>
+#include <libgnomevfs/gnome-vfs-application-registry.h>
 
 #include "mime-type-info.h"
 #include "mime-types-model.h"
@@ -102,7 +103,12 @@ mime_type_info_load (GtkTreeModel *model, GtkTreeIter *iter)
 	info->edit_line       = g_strdup (gnome_vfs_mime_get_value (info->mime_type, "edit-line"));
 	info->print_line      = g_strdup (gnome_vfs_mime_get_value (info->mime_type, "print-line"));
 	info->default_action  = gnome_vfs_mime_get_default_application (info->mime_type);
-	info->custom_line     = g_strdup (gnome_vfs_mime_get_value (info->mime_type, "custom-line"));
+
+	if (!strncmp (info->default_action->id, "custom-", strlen ("custom-"))) {
+		info->custom_line = g_strdup (info->default_action->command);
+		gnome_vfs_mime_application_free (info->default_action);
+		info->default_action = NULL;
+	}
 
 	component_info = gnome_vfs_mime_get_default_component (info->mime_type);
 
@@ -119,14 +125,28 @@ mime_type_info_load (GtkTreeModel *model, GtkTreeIter *iter)
 void
 mime_type_info_save (const MimeTypeInfo *info)
 {
-	gchar *tmp;
+	gchar *tmp, *tmp1;
+	gchar *appid;
 
 	gnome_vfs_mime_set_description (info->mime_type, info->description);
 	gnome_vfs_mime_set_icon (info->mime_type, info->icon_name);
-	gnome_vfs_mime_set_default_application (info->mime_type, info->default_action->id);
-	gnome_vfs_mime_set_value (info->mime_type, "custom-line", info->custom_line);
 	gnome_vfs_mime_set_value (info->mime_type, "print-line", info->print_line);
 	gnome_vfs_mime_set_value (info->mime_type, "edit-line", info->edit_line);
+
+	if (info->default_action != NULL) {
+		gnome_vfs_mime_set_default_application (info->mime_type, info->default_action->id);
+	}
+	else if (info->custom_line != NULL && *info->custom_line != '\0') {
+		tmp = g_strdup (info->mime_type);
+		for (tmp1 = tmp; *tmp1 != '\0'; tmp1++)
+			if (*tmp1 == '/') *tmp1 = '-';
+		appid = g_strconcat ("custom-", tmp, NULL);
+		g_free (tmp);
+
+		gnome_vfs_application_registry_set_value (appid, "command", info->custom_line);
+
+		gnome_vfs_mime_set_default_application (info->mime_type, appid);
+	}
 
 	tmp = form_extensions_string (info, " ", NULL);
 	gnome_vfs_mime_set_extensions_list (info->mime_type, tmp);

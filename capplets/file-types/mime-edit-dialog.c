@@ -450,6 +450,8 @@ store_data (MimeEditDialog *dialog)
 
 	GList         *ext_list;
 
+	GnomeVFSMimeApplication *app;
+
 	g_free (dialog->p->info->description);
 	dialog->p->info->description = g_strdup (gtk_entry_get_text (GTK_ENTRY (WID ("description_entry"))));
 
@@ -473,7 +475,11 @@ store_data (MimeEditDialog *dialog)
 	menu_item = (g_list_nth (menu_shell->children, idx))->data;
 
 	gnome_vfs_mime_application_free (dialog->p->info->default_action);
-	dialog->p->info->default_action = gnome_vfs_mime_application_copy (g_object_get_data (menu_item, "app"));
+	app = g_object_get_data (menu_item, "app");
+	if (app != NULL)
+		dialog->p->info->default_action = gnome_vfs_mime_application_copy (app);
+	else
+		dialog->p->info->default_action = NULL;
 
 	g_free (dialog->p->info->custom_line);
 	dialog->p->info->custom_line = g_strdup (gnome_file_entry_get_full_path (GNOME_FILE_ENTRY (WID ("program_entry")), FALSE));

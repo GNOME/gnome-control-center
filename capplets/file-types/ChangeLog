@@ -1,5 +1,10 @@
 2002-01-11  Bradford Hovinen  <hovinen@ximian.com>
 
+	* mime-type-info.c (mime_type_info_load): Read custom_line from
+	default_action
+	(mime_type_info_save): Set custom line through GnomeVFS app
+	registry
+
 	* file-types-capplet.c (row_activated_cb): Implement. Callback for
 	row_activated signal
 
