@@ -10,10 +10,14 @@ Gladedir = $(datadir)/control-center-data
 Glade_DATA = \
 	sound-properties.glade
 
+oafdir = $(datadir)/oaf
+oaf_DATA = \
+	Bonobo_Control_Capplet_sound_properties.oaf
+
 glade_msgs = \
 	sound-properties.glade.h
 
-EXTRA_DIST = ChangeLog $(Applications_DATA) $(Glade_DATA) $(glade_msgs)
+EXTRA_DIST = ChangeLog $(Applications_DATA) $(Glade_DATA) $(glade_msgs) $(oaf_DATA)
 
 INCLUDES = \
         -DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\
@@ -26,9 +30,12 @@ INCLUDES = \
 
 bin_PROGRAMS = sound-properties-capplet
 
+#sound_properties_capplet_SOURCES = \
+#	prefs-widget.c prefs-widget.h \
+#	preferences.c preferences.h \
+#	main.c
+
 sound_properties_capplet_SOURCES = \
-	prefs-widget.c prefs-widget.h \
-	preferences.c preferences.h \
-	main.c
+	sound-properties-capplet.c
 
 sound_properties_capplet_LDADD = @CAPPLET_LIBS@
