@@ -234,6 +234,13 @@ dialog_response (GtkWidget *widget,
 }
 
 static void
+accessibility_button_clicked (GtkWidget *widget,
+			      gpointer   data)
+{
+	g_spawn_command_line_async ("gnome-accessibility-keyboard-properties", NULL);
+}
+
+static void
 setup_dialog (GladeXML       *dialog,
 	      GConfChangeSet *changeset)
 {
@@ -300,6 +307,8 @@ setup_dialog (GladeXML       *dialog,
 		 NULL);
 	g_signal_connect (G_OBJECT (WID ("bell_custom_radio")), "mnemonic_activate", (GCallback) mnemonic_activate, WID ("bell_custom_entry"));
 	g_signal_connect (G_OBJECT (WID ("keyboard_dialog")), "response", (GCallback) dialog_response, changeset);
+
+	g_signal_connect (G_OBJECT (WID ("accessibility_button")), "clicked", (GCallback) accessibility_button_clicked, NULL);
 }
 
 static void
@@ -321,6 +330,7 @@ get_legacy_settings (void)
 	COPY_FROM_LEGACY (int,  "/gnome/desktop/peripherals/keyboard/bell_duration", "/Desktop/Bell/duration=100");
 }
 
+#if 0
 static void
 setup_accessibility (GladeXML *dialog, GConfChangeSet *changeset)
 {
@@ -329,6 +339,7 @@ setup_accessibility (GladeXML *dialog, GConfChangeSet *changeset)
 	GtkWidget *page = setup_accessX_dialog (changeset, FALSE);
 	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), page, label);
 }
+#endif
 
 int
 main (int argc, char **argv) 
@@ -370,8 +381,9 @@ main (int argc, char **argv)
 		changeset = NULL;
 		dialog = create_dialog ();
 		setup_dialog (dialog, changeset);
+#if 0
 		setup_accessibility (dialog, changeset);
-
+#endif
 		gtk_widget_show_all (WID ("keyboard_dialog"));
 		gtk_main ();
 	}
