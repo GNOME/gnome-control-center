@@ -131,8 +131,6 @@ setup_dialog (GladeXML       *dialog,
 	program = gnome_program_get ();
 
 	capplet_init_stock_icons ();
-        gtk_image_set_from_stock (GTK_IMAGE (WID ("repeat_image")), KEYBOARD_REPEAT, keyboard_capplet_icon_get_size());
-        gtk_image_set_from_stock (GTK_IMAGE (WID ("cursor_image")), KEYBOARD_CURSOR, keyboard_capplet_icon_get_size());
 	
 	peditor = gconf_peditor_new_boolean
 		(changeset, "/desktop/gnome/peripherals/keyboard/repeat", WID ("repeat_toggle"), NULL);
