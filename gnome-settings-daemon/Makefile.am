@@ -1,7 +1,7 @@
 INCLUDES=$(GNOME_SETTINGS_DAEMON_CFLAGS) -I$(top_srcdir)/libbackground -I$(top_srcdir) \
   -DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
-  -DESD_SERVER="\"$(ESD_SERVER)\""
-
+  -DESD_SERVER="\"$(ESD_SERVER)\""	\
+  -DDATADIR="\"$(datadir)\""
 bin_PROGRAMS=gnome-settings-daemon
 
 gnome_settings_daemon_SOURCES =	\
@@ -30,6 +30,8 @@ gnome_settings_daemon_SOURCES =	\
 	gnome-settings-screensaver.c	\
 	gnome-settings-default-editor.c	\
 	gnome-settings-default-editor.h	\
+	gnome-settings-gtk1theme.c      \
+	gnome-settings-gtk1theme.h	\
 	xsettings-common.c		\
 	xsettings-manager.c		\
 	xsettings-common.h		\

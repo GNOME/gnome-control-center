@@ -22,9 +22,9 @@ typedef struct _ThemeCallbackData
 
 GList *theme_list = NULL;
 GList *callbacks = NULL;
-const gchar *suffix = "gtk-2.0";
+const gchar *gtk2_suffix = "gtk-2.0";
 const gchar *key_suffix = "gtk-2.0-key";
-
+const gchar *metacity_suffix = "metacity-1";
 
 static ThemeInfo *
 find_theme_info_by_dir (const gchar *theme_dir)
@@ -49,10 +49,11 @@ update_theme_dir (const gchar *theme_dir)
   gboolean changed = FALSE;
   gboolean has_gtk = FALSE;
   gboolean has_keybinding = FALSE;
+  gboolean has_metacity = FALSE;
     
   gchar *tmp;
 
-  tmp = g_build_filename (theme_dir, suffix, NULL);
+  tmp = g_build_filename (theme_dir, gtk2_suffix, NULL);
   if (g_file_test (tmp, G_FILE_TEST_IS_DIR))
     {
       has_gtk = TRUE;
@@ -66,33 +67,43 @@ update_theme_dir (const gchar *theme_dir)
     }
   g_free (tmp);
 
+  tmp = g_build_filename (theme_dir, metacity_suffix, NULL);
+  if (g_file_test (tmp, G_FILE_TEST_IS_DIR))
+    {
+      has_metacity = TRUE;
+    }
+  g_free (tmp);
+
   info = find_theme_info_by_dir (theme_dir);
 
   if (info)
     {
-      if (!has_gtk && ! has_keybinding)
+      if (!has_gtk && ! has_keybinding && ! has_metacity)
 	{
 	  theme_list = g_list_remove (theme_list, info);
 	  theme_info_free (info);
 	  changed = TRUE;
 	}
       else if ((info->has_keybinding != has_keybinding) ||
-	       (info->has_gtk != has_gtk))
+	       (info->has_gtk != has_gtk) ||
+	       (info->has_metacity != has_metacity))
 	{
 	  info->has_keybinding = has_keybinding;
 	  info->has_gtk = has_gtk;
+	  info->has_metacity = has_metacity;
 	  changed = TRUE;
 	}
     }
   else
     {
-      if (has_gtk || has_keybinding)
+      if (has_gtk || has_keybinding || has_metacity)
 	{
 	  info = g_new0 (ThemeInfo, 1);
 	  info->path = g_strdup (theme_dir);
 	  info->name = g_strdup (strrchr (theme_dir, '/') + 1);
 	  info->has_gtk = has_gtk;
 	  info->has_keybinding = has_keybinding;
+	  info->has_metacity = has_metacity;
 
 	  theme_list = g_list_prepend (theme_list, info);
 	  changed = TRUE;

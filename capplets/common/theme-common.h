@@ -11,6 +11,7 @@ struct _ThemeInfo
   gchar *name;
   guint has_gtk : 1;
   guint has_keybinding : 1;
+  guint has_metacity : 1;
   guint user_writable : 1;
 };
 
