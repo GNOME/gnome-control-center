@@ -14,8 +14,13 @@ AC_PROG_CC
 AC_STDC_HEADERS
 AM_PROG_LIBTOOL
 
+
 # Internationalization support
+GETTEXT_PACKAGE=control-center
+AC_SUBST(GETTEXT_PACKAGE)
+
 ALL_LINGUAS="az ca cs da de el en_GB es et fi fr ga gl hr hu it ja ko lt lv nl nn no pl pt pt_BR ro ru sk sl sv tr uk wa zh_CN zh_TW"
+AM_GLIB_GNU_GETTEXT
 AC_PROG_INTLTOOL
 
 AC_CHECK_FUNCS(usleep)

@@ -15,8 +15,8 @@ dist-hook: control-center.spec
 
 EXTRA_DIST = \
 	control-center.spec.in	\
-	xml-i18n-extract.in \
-	xml-i18n-merge.in \
-	xml-i18n-update.in \
+	intltool-extract.in \
+	intltool-merge.in \
+	intltool-update.in \
 	control-center.png
 
