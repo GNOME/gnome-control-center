@@ -444,7 +444,7 @@ setup_accessX_dialog (GConfChangeSet *changeset)
 	g_signal_connect (G_OBJECT (WID ("load_CDE_file")),
 		"clicked",
 		G_CALLBACK (cb_load_CDE_file), toplevel);
-	g_signal_connect (G_OBJECT (WID ("launch_repeat_button")),
+	g_signal_connect (G_OBJECT (WID ("launch_keyboard_capplet")),
 		"clicked",
 		G_CALLBACK (cb_launch_keyboard_capplet), toplevel);
 

@@ -37,12 +37,20 @@ dialog_response (GtkWidget *widget,
 		 gint       response_id,
 		 GConfChangeSet *changeset)
 {
-	if (response_id == GTK_RESPONSE_HELP)
+	switch (response_id) {
+	case GTK_RESPONSE_HELP:
 		capplet_help (GTK_WINDOW (widget),
 			      "wgoscustaccess.xml",
 			      "goscustaccess-2");
-	else
+		break;
+	case GTK_RESPONSE_DELETE_EVENT:
+	case GTK_RESPONSE_CLOSE:
 		gtk_main_quit ();
+		break;
+	default:
+		/* Import CDE AccessX File */
+		break;
+	}
 }
 
 int
