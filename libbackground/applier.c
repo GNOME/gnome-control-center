@@ -1427,7 +1427,12 @@ make_root_pixmap (GdkScreen *screen, gint width, gint height)
 
 	gdk_flush ();
 
+#ifdef HAVE_GTK_MULTIHEAD
 	display_name = DisplayString (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()));
+#else
+	display_name = DisplayString (GDK_DISPLAY ());
+#endif
+
 	display = XOpenDisplay (display_name);
 
         if (display == NULL) {
@@ -1491,7 +1496,11 @@ set_root_pixmap (GdkPixmap *pixmap, GdkScreen *screen)
 	else
 		pixmap_id = 0;
 
+#ifdef HAVE_GTK_MULTIHEAD
 	display = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
+#else
+	display = GDK_DISPLAY ();
+#endif
 
 	XGrabServer (display);
 
