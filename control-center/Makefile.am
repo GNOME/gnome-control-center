@@ -11,7 +11,7 @@ splash_DATA = \
 sysdir = $(datadir)/gnome/apps/Settings
 sys_in_files = gnomecc.desktop.in
 sys_DATA = $(sys_in_files:.desktop.in=.desktop)
-@XML_I18N_MERGE_DESKTOP_RULE@
+@INTLTOOL_DESKTOP_RULE@
 
 gladedir = $(datadir)/control-center/interfaces
 glade_DATA = \

@@ -24,7 +24,7 @@ pixmaps_DATA = no-hack.png blank-screen.png
 ##
 ## You should not need to modify anything below this line
 ##
-@XML_I18N_MERGE_DESKTOP_RULE@
+@INTLTOOL_DESKTOP_RULE@
 
 ####@###GNOMECC_CAPPLETS_DESKTOP_IN_RULE@
 $(desktop).in: %.desktop.in: %.desktop.in.in

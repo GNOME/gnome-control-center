@@ -25,7 +25,7 @@ oaf_DATA = Bonobo_Control_Capplet_sound_properties.oaf
 ##
 ## You should not need to modify anything below this line
 ##
-@XML_I18N_MERGE_DESKTOP_RULE@
+@INTLTOOL_DESKTOP_RULE@
 
 $(bin_SCRIPTS): $(top_srcdir)/capplets/common/wrapper-script.in
 	sed -e "s#@BINDIR@#$(bindir)#" -e "s#@CAPPLET_NAME@#$(cappletname)-properties#" < $< > $@

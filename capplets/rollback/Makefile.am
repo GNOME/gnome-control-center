@@ -9,7 +9,7 @@ rollback_capplet_SOURCES = \
 	rollback-capplet-dialog.c	rollback-capplet-dialog.h		\
 	main.c
 
-@XML_I18N_MERGE_DESKTOP_RULE@
+@INTLTOOL_DESKTOP_RULE@
 
 ####@###GNOMECC_CAPPLETS_DESKTOP_IN_RULE@
 $(desktop).in: %.desktop.in: %.desktop.in.in

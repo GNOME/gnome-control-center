@@ -27,12 +27,8 @@
 
 #include <gnome.h>
 #include <glade/glade.h>
-
 #include <bonobo.h>
-
-#ifdef GTKHTML_HAVE_GCONF
 #include <gconf/gconf.h>
-#endif
 
 #include "capplet-dir.h"
 #include "capplet-dir-view.h"
@@ -79,9 +75,7 @@ main (int argc, char **argv)
 	if (bonobo_init (orb, CORBA_OBJECT_NIL, CORBA_OBJECT_NIL) == FALSE)
 		g_error ("Cannot initialize bonobo");
 
-#ifdef GTKHTML_HAVE_GCONF
 	gconf_init (argc, argv, NULL);
-#endif
 
 	if (capplet == NULL) {
 		gnomecc_init ();
