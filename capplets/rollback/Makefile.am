@@ -21,7 +21,7 @@ INCLUDES = \
 	-DG_LOG_DOMAIN=\"background-properties\"	\
 	-DGLADE_DATADIR=\""$(Gladedir)"\"		\
 	$(GNOME_INCLUDEDIR)				\
-	$(CAPPLET_CFLAGS)				\
+	$(ROLLBACK_CAPPLET_CFLAGS)			\
 	-I$(top_srcdir)/				\
 	-I$(top_srcdir)/intl
 
@@ -33,4 +33,4 @@ rollback_capplet_SOURCES = \
 	main.c
 
 rollback_capplet_LDADD = \
-	$(GNOME_LIBDIR)	$(CAPPLET_LIBS)
+	$(GNOME_LIBDIR)	$(ROLLBACK_CAPPLET_LIBS)

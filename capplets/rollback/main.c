@@ -41,7 +41,7 @@ main (int argc, char **argv)
 	gnome_init ("config-manager", VERSION, argc, argv);
 	glade_gnome_init ();
 
-	dialog = config_manager_dialog_new (CM_DIALOG_USER_ONLY);
+	dialog = config_manager_dialog_new (CM_DIALOG_USER);
 	gtk_widget_show (dialog);
 
 	gtk_signal_connect (GTK_OBJECT (dialog), "destroy",

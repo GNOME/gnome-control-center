@@ -1,3 +1,20 @@
+2001-01-24  Bradford Hovinen  <hovinen@ximian.com>
+
+	* config-manager-dialog.c (config_manager_dialog_finalize): Update
+	unrefs
+	(config_manager_dialog_init): GLADE_DIR -> GLADE_DATADIR
+	(config_manager_dialog_init): Remove outdated signal connections
+	(config_manager_dialog_init): Remove code to create location list
+
+	* Makefile.am (INCLUDES): Changed CAPPLET_CFLAGS to
+	ROLLBACK_CAPPLET_CFLAGS
+	(rollback_capplet_LDADD): Ditto for CAPPLET_LIBS
+
+	* config-manager-dialog.c: Remove #include
+	"create-location-dialog.h" and #include "location-list.h"; set all
+	the includes from libarchiver to get their files from the right
+	directory	
+
 2001-01-18  Bradford Hovinen  <hovinen@ximian.com>
 
 	* config-manager-dialog.c (do_rollback): Rewrite, add boolean

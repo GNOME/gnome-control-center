@@ -29,12 +29,11 @@
 
 #include <glade/glade.h>
 
+#include <ximian-archiver/archive.h>
+#include <ximian-archiver/location.h>
+#include <ximian-archiver/backend-list.h>
+
 #include "config-manager-dialog.h"
-#include "create-location-dialog.h"
-#include "archive.h"
-#include "location.h"
-#include "backend-list.h"
-#include "location-list.h"
 
 #define WID(str) (glade_xml_get_widget (dialog->p->config_dialog_data, str))
 
@@ -140,7 +139,7 @@ config_manager_dialog_init (ConfigManagerDialog *dialog)
 
 	dialog->p = g_new0 (ConfigManagerDialogPrivate, 1);
 	dialog->p->config_dialog_data =
-		glade_xml_new (GLADE_DIR "/rollback.glade",
+		glade_xml_new (GLADE_DATADIR "/rollback.glade",
 			       "config_dialog_data");
 
 	gtk_box_pack_start (GTK_BOX
@@ -172,33 +171,9 @@ config_manager_dialog_init (ConfigManagerDialog *dialog)
 				       "rollback_one_toggled_cb",
 				       rollback_one_toggled_cb,
 				       dialog);
-	glade_xml_signal_connect_data (dialog->p->config_dialog_data, 
-				       "create_cb",
-				       create_cb,
-				       dialog);
-	glade_xml_signal_connect_data (dialog->p->config_dialog_data, 
-				       "rename_cb",
-				       rename_cb,
-				       dialog);
-	glade_xml_signal_connect_data (dialog->p->config_dialog_data, 
-				       "destroy_cb",
-				       destroy_cb,
-				       dialog);
-	glade_xml_signal_connect_data (dialog->p->config_dialog_data, 
-				       "change_location_cb",
-				       change_location_cb,
-				       dialog);
-	glade_xml_signal_connect_data (dialog->p->config_dialog_data, 
-				       "edit_location_cb",
-				       edit_location_cb,
-				       dialog);
 
 	dialog->p->rollback_all = TRUE;
 	dialog->p->date = g_new (struct tm, 1);
-
-	gtk_widget_show (GTK_WIDGET (dialog->p->location_list));
-	gtk_container_add (GTK_CONTAINER (WID ("location_tree_location")),
-			   GTK_WIDGET (dialog->p->location_list));
 
 	set_backend_controls_sensitive (dialog, FALSE);
 	reset_time (dialog, 0);
@@ -251,7 +226,7 @@ config_manager_dialog_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 			archive_get_backend_list (dialog->p->archive);
 		dialog->p->current_location =
 			archive_get_current_location (dialog->p->archive);
-		populate_backends_list (dialog, dialog->p->user_list);
+		populate_backends_list (dialog, dialog->p->backend_list);
 
 		break;
 
@@ -295,21 +270,9 @@ config_manager_dialog_finalize (GtkObject *object)
 	if (dialog->p->date != NULL)
 		g_free (dialog->p->date);
 
-	if (dialog->p->type == CM_DIALOG_USER_ONLY || 
-	    dialog->p->type == CM_DIALOG_BOTH)
-	{
-		gtk_object_unref (GTK_OBJECT (dialog->p->current_user));
-		gtk_object_unref (GTK_OBJECT (dialog->p->user_list));
-		gtk_object_unref (GTK_OBJECT (dialog->p->user_archive));
-	}
-
-	if (dialog->p->type == CM_DIALOG_GLOBAL_ONLY || 
-	    dialog->p->type == CM_DIALOG_BOTH)
-	{
-		gtk_object_unref (GTK_OBJECT (dialog->p->current_global));
-		gtk_object_unref (GTK_OBJECT (dialog->p->global_list));
-		gtk_object_unref (GTK_OBJECT (dialog->p->global_archive));
-	}
+	gtk_object_unref (GTK_OBJECT (dialog->p->current_location));
+	gtk_object_unref (GTK_OBJECT (dialog->p->backend_list));
+	gtk_object_unref (GTK_OBJECT (dialog->p->archive));
 
 	g_free (dialog->p);
 
