@@ -437,6 +437,7 @@ setup_dialog (GladeXML *dialog)
   client = gconf_client_get_default ();
 
   gconf_client_add_dir (client, "/desktop/gnome/interface", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+  gconf_client_add_dir (client, "/apps/nautilus/preferences", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
   gconf_client_add_dir (client, METACITY_DIR, GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 #ifdef HAVE_XFT2  
   gconf_client_add_dir (client, FONT_RENDER_DIR, GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
