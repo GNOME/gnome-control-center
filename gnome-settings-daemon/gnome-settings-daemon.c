@@ -139,7 +139,9 @@ main (int argc, char **argv)
   GConfClient *client;
   GnomeClient *session;
   GSList *list;
-  gnome_program_init ("control-center", VERSION, LIBGNOMEUI_MODULE,
+  gchar *restart_argv[] = { "gnome2-settings-daemon", *argv, 0 };
+
+  gnome_program_init ("gnome2-settings-daemon", VERSION, LIBGNOMEUI_MODULE,
 		      argc, argv, NULL);
 
   if (xsettings_manager_check_running (gdk_display, DefaultScreen (gdk_display)))
@@ -159,6 +161,7 @@ main (int argc, char **argv)
 	}
     }
   session = gnome_master_client ();
+  gnome_client_set_restart_command (session, 2, restart_argv);
   gnome_client_set_restart_style (session, GNOME_RESTART_IMMEDIATELY);
   gnome_client_set_priority      (session, 5);
 

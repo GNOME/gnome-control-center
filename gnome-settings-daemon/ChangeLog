@@ -1,3 +1,10 @@
+2002-03-06  Miles Lane  <miles@megapathdsl.net>
+
+	* gnome-settings-daemon.c -- Correct the gnome_program_init()
+	  call to specify the correct program name.  Specify the
+	  restart command, so that the session manager knows how
+	  to restart the daemon if it is killed for any reason.
+
 2002-03-04  Anders Carlsson  <andersca@gnu.org>
 
 	* Makefile.am:
