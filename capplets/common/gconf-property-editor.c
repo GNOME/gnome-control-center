@@ -255,9 +255,9 @@ gconf_property_editor_set_prop (GObject      *object,
 		client = gconf_client_get_default ();
 		cb = g_value_get_pointer (value);
 		peditor->p->callback = (GConfClientNotifyFunc) cb;
-		if (gconf_property_editor->p->handler_id != 0) {
+		if (peditor->p->handler_id != 0) {
 			gconf_client_notify_remove (client,
-						    gconf_property_editor->p->handler_id);
+						    peditor->p->handler_id);
 		}
 		peditor->p->handler_id =
 			gconf_client_notify_add (client, peditor->p->key,
