@@ -410,8 +410,6 @@ gnome_settings_accessibility_keyboard_load (GConfClient *client)
 	gdk_error_trap_pop ();
 
 	gdk_window_add_filter (NULL, &cb_xkb_event_filter, NULL);
-
-	gnome_settings_daemon_register_callback (CONFIG_ROOT, &set_server_from_gconf);
 }
 
 #else
@@ -426,5 +424,5 @@ gnome_settings_accessibility_keyboard_load (GConfClient *client)
 void
 gnome_settings_accessibility_keyboard_init (GConfClient *client)
 {
-
+	gnome_settings_daemon_register_callback (CONFIG_ROOT, &set_server_from_gconf);
 }
