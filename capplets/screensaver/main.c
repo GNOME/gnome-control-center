@@ -67,6 +67,9 @@ store_archive_data (void)
 	xmlDocPtr xml_doc;
 	CORBA_Environment ev;
 
+	if (archive == CORBA_OBJECT_NIL)
+		return;
+
 	CORBA_exception_init (&ev);
 
 	if (capplet_get_location () == NULL)
