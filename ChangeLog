@@ -1,3 +1,15 @@
+2001-01-27  Bradford Hovinen  <hovinen@ximian.com>
+
+	* capplets/new-background-properties/applier.c
+	(applier_apply_prefs): Disable wallpaper in new_prefs structure,
+	not structure passed to function
+
+2001-01-26  Bradford Hovinen  <hovinen@ximian.com>
+
+	* capplets/new-background-properties/main.c
+	(do_restore_from_defaults): Implement. Creates a preferences
+	object with factory defaults and saves and applies those changes.
+
 2001-01-26  Marius Andreiana  <mandreiana@yahoo.com>
 
 	* *.desktop, *.directory : Added ro (Romanian) translation

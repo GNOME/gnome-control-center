@@ -352,7 +352,7 @@ applier_apply_prefs (Applier *applier, Preferences *prefs,
 #warning FIXME: should be a dialog
 			g_warning (_("Could not load pixbuf \"%s\"; disabling wallpaper."),
 				   prefs->wallpaper_filename);
-			prefs->wallpaper_enabled = FALSE;
+			new_prefs->wallpaper_enabled = FALSE;
 		}
 	}
 
