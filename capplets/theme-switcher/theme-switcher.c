@@ -141,18 +141,9 @@ read_themes (GladeXML *dialog)
 
       if (strcmp (current_theme, info->name) == 0)
 	{
-	  GtkTreeSelection *selection;
-
-	  selection = gtk_tree_view_get_selection (tree_view);
-	  gtk_tree_selection_select_iter (selection, &iter);
-	  if (initial_scroll)
-	    {
-	      GtkTreePath *path;
-
-	      path = gtk_tree_model_get_path (model, &iter);
+	  GtkTreePath *path = gtk_tree_model_get_path (model, &iter);
 	      row_ref = gtk_tree_row_reference_new (model, path);
 	      gtk_tree_path_free (path);
-	    }
 	  current_theme_found = TRUE;
 	}
 
@@ -169,36 +160,34 @@ read_themes (GladeXML *dialog)
 
   if (! current_theme_found)
     {
-      GtkTreeSelection *selection = gtk_tree_view_get_selection (tree_view);
       GtkTreeIter iter;
+      GtkTreePath *path;
 
       gtk_list_store_prepend (GTK_LIST_STORE (model), &iter);
       gtk_list_store_set (GTK_LIST_STORE (model), &iter,
 			  THEME_NAME_COLUMN, current_theme,
 			  -1);
-      gtk_tree_selection_select_iter (selection, &iter);
-      if (initial_scroll)
-	{
-	  GtkTreePath *path;
 
 	  path = gtk_tree_model_get_path (model, &iter);
 	  row_ref = gtk_tree_row_reference_new (model, path);
 	  gtk_tree_path_free (path);
 	}
-    }
 
-
-  if (row_ref && initial_scroll)
+  if (row_ref)
     {
       GtkTreePath *path;
 
       path = gtk_tree_row_reference_get_path (row_ref);
+      gtk_tree_view_set_cursor (tree_view,path, NULL, FALSE);
 
+      if (initial_scroll)
+	{
       gtk_tree_view_scroll_to_cell (tree_view, path, NULL, TRUE, 0.5, 0.0);
+	  initial_scroll = FALSE;
+	}
       
       gtk_tree_path_free (path);
       gtk_tree_row_reference_free (row_ref);
-      initial_scroll = FALSE;
     }
   setting_model = FALSE;
 
