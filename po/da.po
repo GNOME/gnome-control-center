@@ -22,8 +22,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2003-01-10 10:20-0500\n"
-"PO-Revision-Date: 2003-01-08 15:08+0100\n"
+"POT-Creation-Date: 2003-01-22 20:46+0100\n"
+"PO-Revision-Date: 2003-01-22 20:45+0100\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -409,6 +409,11 @@ msgstr "Anvend indstillingerne og afslut"
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Der opstod en fejl ved visningen af hjælp: %s"
+
+#: capplets/common/capplet-stock-icons.c:94
+#, c-format
+msgid "Unable to load capplet stock icon '%s'\n"
+msgstr "Kunne ikke indlæse lagerikon '%s'\n"
 
 #: capplets/common/file-transfer-dialog.c:95
 #, c-format
@@ -1955,8 +1960,8 @@ msgstr "_Installér"
 msgid "_Location of new theme:"
 msgstr "_Placering af det ny tema:"
 
-#: capplets/theme-switcher/gnome-theme-details.c:329
-#: capplets/theme-switcher/gnome-theme-manager.c:606
+#: capplets/theme-switcher/gnome-theme-details.c:372
+#: capplets/theme-switcher/gnome-theme-manager.c:609
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -1966,13 +1971,17 @@ msgstr ""
 "\"Temaindstillinger\"-vinduet blev installeret forkert eller at \"gnome-"
 "themes\" pakken ikke er installeret."
 
-#: capplets/theme-switcher/gnome-theme-manager.c:662
-#: capplets/theme-switcher/gnome-theme-manager.c:722
+#: capplets/theme-switcher/gnome-theme-save.c:72
+msgid "Theme name must be present"
+msgstr "Temanavn skal være til stede"
+
+#: capplets/theme-switcher/gnome-theme-manager.c:665
+#: capplets/theme-switcher/gnome-theme-manager.c:725
 msgid "Custom theme"
 msgstr "Brugerdefineret tema"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:662
-#: capplets/theme-switcher/gnome-theme-manager.c:722
+#: capplets/theme-switcher/gnome-theme-manager.c:665
+#: capplets/theme-switcher/gnome-theme-manager.c:725
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "Du kan gemme dette tema ved at trykke på 'Gem tema'-knappen."
 
@@ -2387,11 +2396,11 @@ msgid "Window manager \"%s\" has not registered a configuration tool\n"
 msgstr ""
 "Vindueshåndteringen \"%s\" har ikke registreret et konfigurationsværktøj\n"
 
-#: libwindow-settings/metacity-window-manager.c:373
+#: libwindow-settings/metacity-window-manager.c:374
 msgid "Maximize"
 msgstr "Maksimér"
 
-#: libwindow-settings/metacity-window-manager.c:374
+#: libwindow-settings/metacity-window-manager.c:375
 msgid "Roll up"
 msgstr "Rul op"
 
