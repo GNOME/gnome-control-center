@@ -22,7 +22,7 @@
       The <application>Screensaver Capplet</application> interface
       is broken into two main sections:
       <variablelist>
-	<varlistitem>
+	<varlistentry>
 	  <term>Screensaver Options</term>
 	  <listitem>
 	    <para>
@@ -31,8 +31,8 @@
 	      screensaver's behavior.
 	    </para>
 	  </listitem>
-	</varlistitem>
-	<varlistitem>
+	</varlistentry>
+	<varlistentry>
 	  <term>Screensaver Preview</term>
 	  <listitem>
 	    <para>
@@ -41,83 +41,84 @@
 	      more behavior of the screensaver.
 	    </para>
 	  </listitem>
-	</varlistitem>
+	</varlistentry>
       </variablelist>
-      <sect3 id="config-screensaver-config-basics">
-	<title>Setting Up a Screensaver</title>
-	<para>
-	  Chances are, you'll want to setup your screensaver.  Below
-	  are the steps to setup your screensaver:
-	  <orderedlist numeration="arabic">
-	    <listitem>
-	      <para>
-		You can choose different modes to display your
-		screensaver:
-		<variablelist>
-		  <varlistitem>
-		    <term>Disable Screensaver</term>
-		    <listitem>
-		      <para>
-			This will turn off your screensaver entirely.
-		      </para>
-		    </listitem>
-		  </varlistitem>
-		  <varlistitem>
-		    <term>Black screen only</term>
-		    <listitem>
-		      <para>
-			Your monitor will display only a black image
-			instead of an animation.  This is good for
-			helping to conserve power.
-		      </para>
-		    </listitem>
-		  </varlistitem>
-		  <varlistitem>
-		    <term>One screensaver all the time</term>
-		    <listitem>
-		      <para>
-			Displays only one screensaver while the
-			screensaver is active.
-		      </para>
-		    </listitem>
-		  </varlistitem>
-		  <varlistitem>
-		    <term>Random(checked screensavers)</term>
-		    <listitem>
-		      <para>
-			<application>xscreensaver</application> can
-			display screensavers in a random fashion.
-			This option displays screensavers randomly.
-			It also puts checkboxes next to the
-			screensavers, so you can choose which to
-			display.
-		      </para>
-		    </listitem>
-		  </varlistitem>
-		  <varlistitem>
-		    <term>Random (all screensavers)</term>
-		    <listitem>
-		      <para>
-			Similar to the previous option, this will
-			display random screensavers, except use the
-			entire database of screensavers in the
-			"playlist".
-		      </para>
-		    </listitem>
-		  </varlistitem>
-		</variablelist>		    
-	      </para>
-	    </listitem>
-	    <listitem>
-	      <para>
-		Select the screensaver you wish to use.
-	      </para>
-	    </listitem>
-	    <listitem>
-	      <para>
-		Set the time preferences.  The available options are:
-		<variablelist>
-		  <varlistitem>
+    </para>
+    <sect3 id="config-screensaver-config-basics">
+    <title>Setting Up a Screensaver</title>
+    <para>
+      Chances are, you'll want to setup your screensaver.  Below
+      are the steps to setup your screensaver:
+      <orderedlist numeration="arabic">
+	<listitem>
+	  <para>
+	    You can choose different modes to display your
+	    screensaver:
+	    <variablelist>
+	      <varlistentry>
+		<term>Disable Screensaver</term>
+		<listitem>
+		  <para>
+		    This will turn off your screensaver entirely.
+		  </para>
+		</listitem>
+	      </varlistentry>
+	      <varlistentry>
+		<term>Black screen only</term>
+		<listitem>
+		  <para>
+		    Your monitor will display only a black image
+		    instead of an animation.  This is good for
+		    helping to conserve power.
+		  </para>
+		</listitem>
+	      </varlistentry>
+	      <varlistentry>
+		<term>One screensaver all the time</term>
+		<listitem>
+		  <para>
+		    Displays only one screensaver while the
+		    screensaver is active.
+		  </para>
+		</listitem>
+	      </varlistentry>
+	      <varlistentry>
+		<term>Random(checked screensavers)</term>
+		<listitem>
+		  <para>
+		    <application>xscreensaver</application> can
+		    display screensavers in a random fashion.
+		    This option displays screensavers randomly.
+		    It also puts checkboxes next to the
+		    screensavers, so you can choose which to
+		    display.
+		  </para>
+		</listitem>
+	      </varlistentry>
+	      <varlistentry>
+		<term>Random (all screensavers)</term>
+		<listitem>
+		  <para>
+		    Similar to the previous option, this will
+		    display random screensavers, except use the
+		    entire database of screensavers in the
+		    "playlist".
+		  </para>
+		</listitem>
+	      </varlistentry>
+	    </variablelist>		    
+	  </para>
+	</listitem>
+	<listitem>
+	  <para>
+	    Select the screensaver you wish to use.
+	  </para>
+	</listitem>
+	<listitem>
+	  <para>
+	    Set the time preferences.  The available options are:
+	    <variablelist>
+		  <varlistentry>
 		    <term>Start screen saver after x minutes</term>
 		    <listitem>
 		      <para>
@@ -125,8 +126,8 @@
 			to start the screensaver
 		      </para>
 		    </listitem>
-		  </varlistitem>
-		  <varlistitem>
+		  </varlistentry>
+		  <varlistentry>
 		    <term>Switch screensavers after x minutes</term>
 		    <listitem>
 		      <para>
@@ -134,14 +135,65 @@
 			time which to change your screensavers.
 		      </para>
 		    </listitem>
-		  </varlistitem>
+		  </varlistentry>
 		</variablelist>
 	      </para>
 	    </listitem>
-	  </itemizedlist>
+	    <listitem>
+	      <para>
+		Press <guibutton>OK</guibutton> to apply your changes.
+	      </para>
+	    </listitem>
+	  </orderedlist>
 	</para>
       </sect3>
-    </para>
+      <sect3 id="config-screensaver-config-apm">
+	<title>Power Management</title>
+	<para>
+	  Screensavers not only look attractive and help keep your
+	  monitor healthy, they can also help to conserve power.  You
+	  should see an option in the window which says
+	  <guibutton>Enable power management</guibutton>.  This button
+	  allows you to setup power management.
+	</para>
+	<para>
+	  First, you'll need to click the button next to
+	  <guilabel>Enable power management</guilabel> to enable it.
+	  Then click the <guibutton>Configure</guibutton> button to
+	  open up the power management configuration interface.
+	</para>
+	<para>
+	  Here, you are presented with three options:
+	  <variablelist>
+	    <varlistentry>
+	      <term>Go to standby mode after x minutes</term>
+	      <listitem>
+		<para>
+		  Standby mode turns off the visible stuff on the
+		  monitor, but leaves the power on the monitor on.
+		</para>
+	      </listitem>
+	    </varlistentry>
+	    <varlistentry>
+	      <term>Go to suspend mode after x minutes</term>
+	      <listitem>
+		<para>
+		  Suspend mode is...
+		</para>
+	      </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Shut down monitor after x minutes</term>
+	  <listitem>
+	    <para>
+	      Shut down will stop nearly all the electricity going
+	      to the monitor, for optimal power savings.
+	    </para>
+	  </listitem>
+	</varlistentry>
+      </variablelist
+      </para>
+    </sect3>
   </sect2>
 </sect1>
 		  
