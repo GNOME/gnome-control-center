@@ -13,6 +13,7 @@
   <property name="resizable">True</property>
   <property name="destroy_with_parent">False</property>
   <property name="has_separator">False</property>
+  <property name="icon">gnome-settings-default-applications</property>
 
   <child internal-child="vbox">
     <widget class="GtkVBox" id="dialog-vbox1">
@@ -91,7 +92,7 @@
 		    <widget class="GtkRadioButton" id="web_select_radio">
 		      <property name="visible">True</property>
 		      <property name="can_focus">True</property>
-		      <property name="label" translatable="yes">_Select a Web Browser:</property>
+		      <property name="label" translatable="yes">_Select:</property>
 		      <property name="use_underline">True</property>
 		      <property name="relief">GTK_RELIEF_NORMAL</property>
 		      <property name="active">False</property>
@@ -241,7 +242,7 @@
 			<widget class="GtkCheckButton" id="web_custom_terminal_toggle">
 			  <property name="visible">True</property>
 			  <property name="can_focus">True</property>
-			  <property name="label" translatable="yes">Start in T_erminal</property>
+			  <property name="label" translatable="yes">Run in a t_erminal</property>
 			  <property name="use_underline">True</property>
 			  <property name="relief">GTK_RELIEF_NORMAL</property>
 			  <property name="active">False</property>
@@ -294,7 +295,7 @@
 			<widget class="GtkRadioButton" id="web_custom_radio">
 			  <property name="visible">True</property>
 			  <property name="can_focus">True</property>
-			  <property name="label" translatable="yes">C_ustom Web Browser:</property>
+			  <property name="label" translatable="yes">C_ustom:</property>
 			  <property name="use_underline">True</property>
 			  <property name="relief">GTK_RELIEF_NORMAL</property>
 			  <property name="active">False</property>
@@ -382,7 +383,7 @@
 		    <widget class="GtkRadioButton" id="mail_select_radio">
 		      <property name="visible">True</property>
 		      <property name="can_focus">True</property>
-		      <property name="label" translatable="yes">_Select a Mail Reader:</property>
+		      <property name="label" translatable="yes">_Select:</property>
 		      <property name="use_underline">True</property>
 		      <property name="relief">GTK_RELIEF_NORMAL</property>
 		      <property name="active">False</property>
@@ -532,7 +533,7 @@
 			<widget class="GtkCheckButton" id="mail_custom_terminal_toggle">
 			  <property name="visible">True</property>
 			  <property name="can_focus">True</property>
-			  <property name="label" translatable="yes">Start in T_erminal</property>
+			  <property name="label" translatable="yes">Run in a t_erminal</property>
 			  <property name="use_underline">True</property>
 			  <property name="relief">GTK_RELIEF_NORMAL</property>
 			  <property name="active">False</property>
@@ -572,7 +573,7 @@
 			<widget class="GtkRadioButton" id="mail_custom_radio">
 			  <property name="visible">True</property>
 			  <property name="can_focus">True</property>
-			  <property name="label" translatable="yes">C_ustom Mail Reader:</property>
+			  <property name="label" translatable="yes">C_ustom:</property>
 			  <property name="use_underline">True</property>
 			  <property name="relief">GTK_RELIEF_NORMAL</property>
 			  <property name="active">False</property>
@@ -660,7 +661,7 @@
 		    <widget class="GtkRadioButton" id="text_select_radio">
 		      <property name="visible">True</property>
 		      <property name="can_focus">True</property>
-		      <property name="label" translatable="yes">_Select an Editor:</property>
+		      <property name="label" translatable="yes">_Select:</property>
 		      <property name="use_underline">True</property>
 		      <property name="relief">GTK_RELIEF_NORMAL</property>
 		      <property name="active">False</property>
@@ -757,7 +758,7 @@
 			<widget class="GtkRadioButton" id="text_custom_radio">
 			  <property name="visible">True</property>
 			  <property name="can_focus">True</property>
-			  <property name="label" translatable="yes">C_ustom Editor</property>
+			  <property name="label" translatable="yes">C_ustom</property>
 			  <property name="use_underline">True</property>
 			  <property name="relief">GTK_RELIEF_NORMAL</property>
 			  <property name="active">False</property>
@@ -897,7 +898,7 @@
 		    <widget class="GtkRadioButton" id="terminal_select_radio">
 		      <property name="visible">True</property>
 		      <property name="can_focus">True</property>
-		      <property name="label" translatable="yes">_Select a Terminal:</property>
+		      <property name="label" translatable="yes">_Select:</property>
 		      <property name="use_underline">True</property>
 		      <property name="relief">GTK_RELIEF_NORMAL</property>
 		      <property name="active">False</property>
@@ -994,7 +995,7 @@
 			<widget class="GtkRadioButton" id="terminal_custom_radio">
 			  <property name="visible">True</property>
 			  <property name="can_focus">True</property>
-			  <property name="label" translatable="yes">C_ustom Terminal:</property>
+			  <property name="label" translatable="yes">C_ustom:</property>
 			  <property name="use_underline">True</property>
 			  <property name="relief">GTK_RELIEF_NORMAL</property>
 			  <property name="active">False</property>
@@ -1506,7 +1507,7 @@
 	    <widget class="GtkCheckButton" id="text_custom_terminal_toggle">
 	      <property name="visible">True</property>
 	      <property name="can_focus">True</property>
-	      <property name="label" translatable="yes">This application needs to be run in a _shell</property>
+	      <property name="label" translatable="yes">Run in a _terminal</property>
 	      <property name="use_underline">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
 	      <property name="active">False</property>
@@ -1526,7 +1527,7 @@
 	  <child>
 	    <widget class="GtkCheckButton" id="text_custom_uri_toggle">
 	      <property name="can_focus">True</property>
-	      <property name="label" translatable="yes">This application can open _URIs</property>
+	      <property name="label" translatable="yes">Can open _URIs</property>
 	      <property name="use_underline">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
 	      <property name="active">False</property>
@@ -1547,7 +1548,7 @@
 	    <widget class="GtkCheckButton" id="text_custom_multi_toggle">
 	      <property name="visible">True</property>
 	      <property name="can_focus">True</property>
-	      <property name="label" translatable="yes">This application can open _multiple files</property>
+	      <property name="label" translatable="yes">Can open multiple _files</property>
 	      <property name="use_underline">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
 	      <property name="active">False</property>
