@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.3.90\n"
-"POT-Creation-Date: 2001-03-13 00:01+0900\n"
-"PO-Revision-Date: 2001-03-13 01:40+09:00\n"
+"POT-Creation-Date: 2001-03-13 23:40+0900\n"
+"PO-Revision-Date: 2001-03-14 00:35+09:00\n"
 "Last-Translator: Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -31,6 +31,14 @@ msgid ""
 msgstr ""
 "'background-properties-capplet'の起動に初期化エラーが発生しました。\n"
 "停止中...\n"
+
+#: capplets/background-properties/background-properties.desktop.in.h:1
+msgid "Background"
+msgstr "バックグラウンド"
+
+#: capplets/background-properties/background-properties.desktop.in.h:2
+msgid "Configuration of the desktop's background"
+msgstr "デスクトップの背景の設定"
 
 #: capplets/background-properties/property-background.c:116
 msgid "Disabled"
@@ -202,21 +210,60 @@ msgstr "モード"
 msgid "Display wallpaper: tiled, centered, scaled or ratio"
 msgstr "壁紙を表示: タイル状、中央寄せ、画面サイズ、アスペクト"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:238
-msgid "Gnome editor"
-msgstr "Gnomeエディタ"
+#: capplets/desktop-links/Desktop.directory.in.h:1
+#: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:1
+msgid "Desktop"
+msgstr "デスクトップ"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:249
-msgid "Run In Terminal"
-msgstr "端末内で動かす"
+#: capplets/desktop-links/Documents.directory.in.h:1
+msgid "Configure how document types are handled"
+msgstr "文書型をどう処理するか設定"
 
-#: capplets/file-types/file-types-capplet.desktop.in.h:1
-msgid "File Types and Programs"
-msgstr "ファイルの種類とプログラム"
+#: capplets/desktop-links/Documents.directory.in.h:2
+msgid "Document Handlers"
+msgstr "文書型ハンドラ"
 
-#: capplets/file-types/file-types-capplet.desktop.in.h:2
-msgid "Specify which programs are used to open or view each file type"
-msgstr "ファイルの各種類を開いたり表示したりするのに使用するプログラムを指定"
+#. create the app
+#: capplets/desktop-links/Gnome.directory.in.h:1 control-center/main.c:197
+#: control-center/splash.c:247
+msgid "Control Center"
+msgstr "Control Center"
+
+#: capplets/desktop-links/Gnome.directory.in.h:2
+msgid "Control Center Menu"
+msgstr "GNOME コントロールセンター・メニュー"
+
+#: capplets/desktop-links/Multimedia.directory.in.h:1
+msgid "Configure the settings of your Multimedia devices"
+msgstr "マルチメディアデバイスの設定"
+
+#: capplets/desktop-links/Multimedia.directory.in.h:2
+msgid "Multimedia"
+msgstr "マルチメディア"
+
+#: capplets/desktop-links/Peripherals.directory.in.h:1
+msgid "Configure your external devices"
+msgstr "外部の機器の設定"
+
+#: capplets/desktop-links/Peripherals.directory.in.h:2
+msgid "Peripherals"
+msgstr "周辺機器"
+
+#: capplets/desktop-links/Session.directory.in.h:1
+msgid "Session"
+msgstr "セッション"
+
+#: capplets/desktop-links/Session.directory.in.h:2
+msgid "Session Management Settings"
+msgstr "セッション管理の設定"
+
+#: capplets/desktop-links/UIOptions.directory.in.h:1
+msgid "Configure the global settings of your GNOME applications"
+msgstr "GNOME アプリケーションの全般的な設定を変更"
+
+#: capplets/desktop-links/UIOptions.directory.in.h:2
+msgid "User Interface"
+msgstr "ユーザーインターフェイス"
 
 #: capplets/file-types/file-types-capplet-dialogs.c:387
 msgid "Edit Applications List"
@@ -448,9 +495,102 @@ msgstr "拡張子"
 msgid "Default Action"
 msgstr "デフォルトの動作"
 
+#: capplets/file-types/file-types-capplet.desktop.in.h:1
+msgid "File Types and Programs"
+msgstr "ファイルの種類とプログラム"
+
+#: capplets/file-types/file-types-capplet.desktop.in.h:2
+msgid "Specify which programs are used to open or view each file type"
+msgstr "ファイルの各種類を開いたり表示したりするのに使用するプログラムを指定"
+
 #: capplets/file-types/file-types-icon-entry.c:381
 msgid "Select an icon"
 msgstr "アイコンの選択"
+
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:238
+msgid "Gnome editor"
+msgstr "Gnomeエディタ"
+
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:249
+msgid "Run In Terminal"
+msgstr "端末内で動かす"
+
+#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:1
+msgid "Choose the editor that is invoked by gnome-edit"
+msgstr "gnome-edit で起動されるエディタの選択"
+
+#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:2
+msgid "Default Editor"
+msgstr "標準エディタ"
+
+#: capplets/keyboard-properties/keyboard-properties.c:262
+msgid "Keyboard bell"
+msgstr "キーボード・ベル"
+
+#: capplets/keyboard-properties/keyboard-properties.c:270
+msgid "Volume"
+msgstr "音量"
+
+#: capplets/keyboard-properties/keyboard-properties.c:273
+msgid "Pitch (Hz)"
+msgstr "ピッチ (Hz)"
+
+#: capplets/keyboard-properties/keyboard-properties.c:276
+msgid "Duration (ms)"
+msgstr "長さ (ms)"
+
+#: capplets/keyboard-properties/keyboard-properties.c:288
+msgid "Test"
+msgstr "試行"
+
+#: capplets/keyboard-properties/keyboard-properties.c:306
+msgid "Keyboard repeat rate"
+msgstr "キーボードリピート回数"
+
+#: capplets/keyboard-properties/keyboard-properties.c:316
+msgid "Enable auto-repeat"
+msgstr "自動的にリピートする"
+
+#: capplets/keyboard-properties/keyboard-properties.c:325
+msgid "Repeat rate"
+msgstr "リピート回数"
+
+#: capplets/keyboard-properties/keyboard-properties.c:328
+msgid "Repeat Delay"
+msgstr "リピートまでの間隔"
+
+#: capplets/keyboard-properties/keyboard-properties.c:330
+msgid "Keyboard click"
+msgstr "キーボードのクリック音"
+
+#: capplets/keyboard-properties/keyboard-properties.c:339
+msgid "Click on keypress"
+msgstr "キーを押すとクリック音を出す"
+
+#: capplets/keyboard-properties/keyboard-properties.c:348
+msgid "Click volume"
+msgstr "クリック音の大きさ"
+
+#: capplets/keyboard-properties/keyboard-properties.c:359
+msgid "Test settings"
+msgstr "設定のテスト"
+
+#: capplets/keyboard-properties/keyboard-properties.c:466
+msgid ""
+"an initialization error occurred while starting "
+"'keyboard-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"'keyboard-properties-capplet'の起動に初期化エラーが発生しました。\n"
+"停止中...\n"
+
+#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:1
+msgid "Keyboard"
+msgstr "キーボード"
+
+#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:2
+msgid "Keyboard Properties"
+msgstr "キーボードの設定"
 
 #: capplets/mouse-properties/mouse-properties.c:267
 msgid "Mouse buttons"
@@ -514,6 +654,14 @@ msgstr ""
 "'mouse-properties-capplet'の起動に初期化エラーが発生しました。\n"
 "停止中...\n"
 
+#: capplets/mouse-properties/mouse-properties.desktop.in.h:1
+msgid "Mouse"
+msgstr "マウス"
+
+#: capplets/mouse-properties/mouse-properties.desktop.in.h:2
+msgid "Mouse Properties"
+msgstr "マウスの設定"
+
 #: capplets/screensaver-properties/callbacks.c:102
 msgid "Require Password"
 msgstr "パスワードを要求する"
@@ -544,943 +692,6 @@ msgstr "ランダム設定"
 #, c-format
 msgid "%s Settings..."
 msgstr "%s 設定..."
-
-#: capplets/screensaver-properties/screensaver-dialog.c:46
-msgid "About:"
-msgstr "情報:"
-
-#: capplets/screensaver-properties/screensaver-dialog.c:51
-msgid "Author:"
-msgstr "作者:"
-
-#: capplets/screensaver-properties/screensaver-dialog.c:61
-msgid "Author: UNKNOWN"
-msgstr "作者: 不明"
-
-#: capplets/screensaver-properties/screensaver-dialog.c:78
-msgid "Settings"
-msgstr "設定"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:38
-msgid "RANDOM SCREENSAVER"
-msgstr "ランダムスクリーンセーバー"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:49
-msgid "Screen Saver"
-msgstr "スクリーンセーバー"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:61
-msgid ""
-"Pressing this button will popup a dialogbox that will help you setup the "
-"current screensaver."
-msgstr ""
-"このボタンを押すと、現在のスクリーンセーバーの設定をするための "
-"ダイアログが開きます。"
-
-#. set up the initial frame, and get a vbox in which to pack things.
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:88
-msgid "Screen Saver Settings"
-msgstr "スクリーンセーバーの設定"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:96
-msgid "Start After "
-msgstr "実行は"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:102
-msgid " Minutes."
-msgstr "分経ってから。"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:117
-msgid "Priority:"
-msgstr "優先度:"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:124
-msgid "Low "
-msgstr "低 "
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:126
-msgid " Normal"
-msgstr " 並"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:137
-msgid "Shutdown monitor "
-msgstr "モニターを"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:139
-msgid " minutes after screen saver has started."
-msgstr "分スクリーンセーバー起動後に落す"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:152
-msgid "Screen Saver Demo"
-msgstr "スクリーンセーバーデモ"
-
-#: capplets/keyboard-properties/keyboard-properties.c:262
-msgid "Keyboard bell"
-msgstr "キーボード・ベル"
-
-#: capplets/keyboard-properties/keyboard-properties.c:270
-msgid "Volume"
-msgstr "音量"
-
-#: capplets/keyboard-properties/keyboard-properties.c:273
-msgid "Pitch (Hz)"
-msgstr "ピッチ (Hz)"
-
-#: capplets/keyboard-properties/keyboard-properties.c:276
-msgid "Duration (ms)"
-msgstr "長さ (ms)"
-
-#: capplets/keyboard-properties/keyboard-properties.c:288
-msgid "Test"
-msgstr "試行"
-
-#: capplets/keyboard-properties/keyboard-properties.c:306
-msgid "Keyboard repeat rate"
-msgstr "キーボードリピート回数"
-
-#: capplets/keyboard-properties/keyboard-properties.c:316
-msgid "Enable auto-repeat"
-msgstr "自動的にリピートする"
-
-#: capplets/keyboard-properties/keyboard-properties.c:325
-msgid "Repeat rate"
-msgstr "リピート回数"
-
-#: capplets/keyboard-properties/keyboard-properties.c:328
-msgid "Repeat Delay"
-msgstr "リピートまでの間隔"
-
-#: capplets/keyboard-properties/keyboard-properties.c:330
-msgid "Keyboard click"
-msgstr "キーボードのクリック音"
-
-#: capplets/keyboard-properties/keyboard-properties.c:339
-msgid "Click on keypress"
-msgstr "キーを押すとクリック音を出す"
-
-#: capplets/keyboard-properties/keyboard-properties.c:348
-msgid "Click volume"
-msgstr "クリック音の大きさ"
-
-#: capplets/keyboard-properties/keyboard-properties.c:359
-msgid "Test settings"
-msgstr "設定のテスト"
-
-#: capplets/keyboard-properties/keyboard-properties.c:466
-msgid ""
-"an initialization error occurred while starting "
-"'keyboard-properties-capplet'.\n"
-"aborting...\n"
-msgstr ""
-"'keyboard-properties-capplet'の起動に初期化エラーが発生しました。\n"
-"停止中...\n"
-
-#: capplets/sound-properties/sound-properties.c:97
-msgid ""
-"an initialization error occurred while starting 'sound-properties-capplet'."
-msgstr "'sound-properties-capplet'の起動に初期化エラーが発生しました。"
-
-#: capplets/sound-properties/sound-properties.c:188
-msgid "Event"
-msgstr "イベント"
-
-#: capplets/sound-properties/sound-properties.c:189
-msgid "File to Play"
-msgstr "鳴らすファイル"
-
-#: capplets/sound-properties/sound-properties.c:243
-msgid "Enable"
-msgstr "有効"
-
-#: capplets/sound-properties/sound-properties.c:250
-msgid "Enable sound server startup"
-msgstr "起動時に音サーバーを使う"
-
-#: capplets/sound-properties/sound-properties.c:258
-msgid "Sounds for events"
-msgstr "イベントに対して効果音を鳴らす"
-
-#: capplets/sound-properties/sound-properties.c:279
-msgid "General"
-msgstr "一般"
-
-#: capplets/sound-properties/sound-properties.c:286
-msgid "Select sound file"
-msgstr "音源ファイルの選択"
-
-#: capplets/sound-properties/sound-properties.c:325
-msgid "Play"
-msgstr "鳴らす"
-
-#: capplets/sound-properties/sound-properties.c:336
-msgid "Sound Events"
-msgstr "サウンドイベント"
-
-#: capplets/sound-properties/sound-properties.c:355
-msgid ""
-"This copy of the GNOME control center was not compiled with sound support"
-msgstr "このGNOMEコントロールセンターには音のサポートが組み込まれていません"
-
-#: capplets/sound-properties/sound-properties.c:748
-msgid "The sound file for this event does not exist."
-msgstr "このイベント用の音ファイルは存在しません。"
-
-#: capplets/sound-properties/sound-properties.c:750
-msgid ""
-"The sound file for this event does not exist.\n"
-"You may want to install the gnome-audio package\n"
-"for a set of default sounds."
-msgstr ""
-"このイベント用の音ファイルは存在しません。\n"
-"標準の音源セットを gnome-audio パッケージから\n"
-"インストールするのも良いでしょう。"
-
-#: capplets/theme-switcher/demo.c:50
-msgid "One"
-msgstr "壱"
-
-#: capplets/theme-switcher/demo.c:50
-msgid "Two"
-msgstr "弐"
-
-#. just 8 short names that will serve as samples for titles in demo
-#: capplets/theme-switcher/demo.c:52
-msgid "Eenie"
-msgstr "どれに"
-
-#: capplets/theme-switcher/demo.c:52
-msgid "Meenie"
-msgstr "しようか"
-
-#: capplets/theme-switcher/demo.c:53
-msgid "Mynie"
-msgstr "な"
-
-#: capplets/theme-switcher/demo.c:53
-msgid "Moe"
-msgstr "Moe"
-
-#: capplets/theme-switcher/demo.c:54
-msgid "Catcha"
-msgstr "Catcha"
-
-#: capplets/theme-switcher/demo.c:54
-msgid "Tiger"
-msgstr "言う通り"
-
-#: capplets/theme-switcher/demo.c:55
-msgid "By Its"
-msgstr "By Its"
-
-#: capplets/theme-switcher/demo.c:55
-msgid "Toe"
-msgstr "なのな"
-
-#: capplets/theme-switcher/demo.c:114
-msgid "Selected themes from above will be tested by previewing here."
-msgstr "上で選択したテーマはここて試すことが出来ます。"
-
-#. column one
-#: capplets/theme-switcher/demo.c:119
-msgid "Sample Button"
-msgstr "サンプルButton"
-
-#: capplets/theme-switcher/demo.c:123
-msgid "Sample Check Button"
-msgstr "サンプルチェックボタン"
-
-#: capplets/theme-switcher/demo.c:128
-msgid "Sample Text Entry Field"
-msgstr "Sample テキストエントリ Field"
-
-#: capplets/theme-switcher/demo.c:139
-msgid "Submenu"
-msgstr "サブメニュー"
-
-#: capplets/theme-switcher/demo.c:146
-msgid "Item 1"
-msgstr "項目1"
-
-#: capplets/theme-switcher/demo.c:149
-msgid "Another item"
-msgstr "別の item"
-
-#: capplets/theme-switcher/demo.c:154
-msgid "Radio Button 1"
-msgstr "ラジオボタン1"
-
-#: capplets/theme-switcher/demo.c:160
-msgid "Radio Button 2"
-msgstr "Radio Button 2"
-
-#: capplets/theme-switcher/gui.c:89
-#, c-format
-msgid ""
-"Error installing theme:\n"
-"'%s'\n"
-"%s"
-msgstr ""
-"テーマのインストールに失敗:\n"
-"'%s'\n"
-"%s"
-
-#: capplets/theme-switcher/gui.c:120
-msgid "Select a theme to install"
-msgstr "インストールするテーマを選択"
-
-#: capplets/theme-switcher/gui.c:197
-msgid "Available Themes"
-msgstr "使用可能なテーマ"
-
-#: capplets/theme-switcher/gui.c:221
-msgid ""
-"Auto\n"
-"Preview"
-msgstr ""
-"自動\n"
-"試写"
-
-#: capplets/theme-switcher/gui.c:233
-msgid ""
-"Install new\n"
-"theme..."
-msgstr ""
-"新規テーマの\n"
-"インストール..."
-
-#. Font selector.
-#.
-#: capplets/theme-switcher/gui.c:239
-msgid "User Font"
-msgstr "ユーザーフォント"
-
-#. FIXME - should really get this from X somehow
-#. for now we just assume default gtk font
-#: capplets/theme-switcher/gui.c:257
-msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
-msgstr ""
-"-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*,-*-fixed-medium-r-normal-"
-"-*-120-*-*-*-*-*-*"
-
-#: capplets/theme-switcher/gui.c:276
-msgid "Use custom font."
-msgstr "特別なフォントを使う。"
-
-#: capplets/theme-switcher/install.c:26
-msgid "Home directory doesn't exist!\n"
-msgstr "ホームディレクトリが存在しません!\n"
-
-#: capplets/theme-switcher/install.c:36
-msgid "Theme does not exist"
-msgstr "テーマがありません"
-
-#: capplets/theme-switcher/install.c:68
-#, c-format
-msgid "Command '%s' failed"
-msgstr "命令 '%s' が失敗しました"
-
-#: capplets/theme-switcher/install.c:73
-msgid "Unknown file format"
-msgstr "未知のファイル形式です"
-
-#: capplets/ui-properties/ui-properties.c:54
-msgid "Can detach and move toolbars"
-msgstr "ツールバーの取り外しや移動を許可する"
-
-#: capplets/ui-properties/ui-properties.c:59
-msgid "Toolbars have relieved border"
-msgstr "ツールバーに枠をつける"
-
-#: capplets/ui-properties/ui-properties.c:64
-msgid "Toolbar buttons have relieved border"
-msgstr "ツールバーのボタンに枠をつける"
-
-#: capplets/ui-properties/ui-properties.c:69
-msgid "Toolbars have line separators"
-msgstr "ツールバーに線による区切りをつける"
-
-#: capplets/ui-properties/ui-properties.c:74
-msgid "Toolbars have text labels"
-msgstr "ツールバーに文字ラベルをつける"
-
-#: capplets/ui-properties/ui-properties.c:103
-msgid "Can detach and move menus"
-msgstr "メニューバーは取り外せたり動かせる"
-
-#: capplets/ui-properties/ui-properties.c:108
-msgid "Menus have relieved border"
-msgstr "メニューバーに枠をつける"
-
-#: capplets/ui-properties/ui-properties.c:112
-msgid "Submenus can be torn off"
-msgstr "サブメニューは切り離せる"
-
-#: capplets/ui-properties/ui-properties.c:116
-msgid "Menu items have icons"
-msgstr "メニューアイテムにアイコンをつける"
-
-#: capplets/ui-properties/ui-properties.c:140
-msgid "Statusbar is interactive when possible"
-msgstr "可能ならステータースバーをインタラクティブに"
-
-#: capplets/ui-properties/ui-properties.c:145
-msgid "Statusbar progress meter is on the right"
-msgstr "ステータスバーの進捗メーターは右に"
-
-#: capplets/ui-properties/ui-properties.c:162
-msgid "Menu Options"
-msgstr "メニューオプション"
-
-#: capplets/ui-properties/ui-properties.c:163
-msgid "Statusbar Options"
-msgstr "ステータスバーオプション"
-
-#: capplets/ui-properties/ui-properties.c:164
-msgid "Toolbar Options"
-msgstr "ツールバーオプション"
-
-#: capplets/ui-properties/ui-properties.c:170
-msgid "Dialog buttons"
-msgstr "ダイアログ・ボタン"
-
-#: capplets/ui-properties/ui-properties.c:171
-msgid "Default value"
-msgstr "デフォルト値"
-
-#: capplets/ui-properties/ui-properties.c:172
-msgid "Spread buttons out"
-msgstr "ボタンを拡げる"
-
-#: capplets/ui-properties/ui-properties.c:173
-msgid "Put buttons on edges"
-msgstr "ボタンを角におく"
-
-#: capplets/ui-properties/ui-properties.c:174
-msgid "Left-justify buttons"
-msgstr "ボタンを左寄せする"
-
-#: capplets/ui-properties/ui-properties.c:175
-msgid "Right-justify buttons"
-msgstr "ボタンを右寄せする"
-
-#: capplets/ui-properties/ui-properties.c:180
-msgid "Dialog buttons have icons"
-msgstr "ダイアログボタンにアイコンをつける"
-
-#: capplets/ui-properties/ui-properties.c:185
-msgid "Use statusbar instead of dialog when possible"
-msgstr "可能ならダイアログのかわりにステータスバーを利用する"
-
-#: capplets/ui-properties/ui-properties.c:207
-msgid "Dialog position"
-msgstr "ダイアログ表示位置"
-
-#: capplets/ui-properties/ui-properties.c:208
-msgid "Let window manager decide"
-msgstr "ウィンドウマネージャに任せる"
-
-#: capplets/ui-properties/ui-properties.c:209
-msgid "Center of the screen"
-msgstr "画面中央"
-
-#: capplets/ui-properties/ui-properties.c:210
-msgid "At the mouse pointer"
-msgstr "マウスポインタ場所"
-
-#: capplets/ui-properties/ui-properties.c:215
-msgid "Dialog hints"
-msgstr "ダイアログ・ヒント"
-
-#: capplets/ui-properties/ui-properties.c:216
-msgid "Dialogs are like other windows"
-msgstr "他のウィンドウと同じように扱う"
-
-#: capplets/ui-properties/ui-properties.c:217
-msgid "Dialogs are treated specially by window manager"
-msgstr "ダイアログは特別にウィンドウマネージャ側で扱う"
-
-#: capplets/ui-properties/ui-properties.c:222
-msgid "Place dialogs over application window when possible"
-msgstr "可能ならアプリケーションウィンドウの上にダイアログを配置する"
-
-#: capplets/ui-properties/ui-properties.c:243
-msgid "Dialog Layout"
-msgstr "ダイアログの配置"
-
-#: capplets/ui-properties/ui-properties.c:244
-msgid "Dialog Behavior"
-msgstr "ダイアログの振舞い"
-
-#: capplets/ui-properties/ui-properties.c:250
-msgid "Default MDI Mode"
-msgstr "標準MDIモード"
-
-#: capplets/ui-properties/ui-properties.c:251
-msgid "Notebook"
-msgstr "ノートブック"
-
-#: capplets/ui-properties/ui-properties.c:252
-msgid "Toplevel"
-msgstr "トップレベル"
-
-#: capplets/ui-properties/ui-properties.c:253
-msgid "Modal"
-msgstr "モーダル"
-
-#: capplets/ui-properties/ui-properties.c:258
-msgid "MDI notebook tab position"
-msgstr "MDIノートブックタブの位置"
-
-#: capplets/ui-properties/ui-properties.c:259
-msgid "Left"
-msgstr "左側"
-
-#: capplets/ui-properties/ui-properties.c:260
-msgid "Right"
-msgstr "右側"
-
-#: capplets/ui-properties/ui-properties.c:261
-msgid "Top"
-msgstr "上部"
-
-#: capplets/ui-properties/ui-properties.c:262
-msgid "Bottom"
-msgstr "下部"
-
-#: capplets/ui-properties/ui-properties.c:277
-msgid "GNOME MDI Options"
-msgstr "GNOME MDI オプション"
-
-#: capplets/url-properties/url-properties.c:51
-msgid "Error initializing the `url-properties' capplet."
-msgstr "URLハンドラキャプレットの初期化エラー"
-
-#: capplets/url-properties/url-properties.c:76
-msgid "Protocol"
-msgstr "プロトコル"
-
-#: capplets/url-properties/url-properties.c:76
-msgid "Command"
-msgstr "コマンド"
-
-#: capplets/url-properties/url-properties.c:93
-msgid "handler:"
-msgstr "ハンドラ:"
-
-#. set some commonly used handlers
-#: capplets/url-properties/url-properties.c:103
-msgid "Netscape"
-msgstr "ネットスケープ"
-
-#: capplets/url-properties/url-properties.c:108
-msgid "Netscape (new window)"
-msgstr "ネットスケープ(新規ウィンドウ)"
-
-#: capplets/url-properties/url-properties.c:121
-msgid "Help browser"
-msgstr "ヘルプ・ブラウザ"
-
-#: capplets/url-properties/url-properties.c:127
-msgid "Help browser (new window)"
-msgstr "ヘルプ・ブラウザ(新規ウィンドウ)"
-
-#: capplets/url-properties/url-properties.c:140
-msgid "Set"
-msgstr "設定"
-
-#: capplets/url-properties/url-properties.c:148
-msgid "Remove"
-msgstr "削除"
-
-#: capplets/wm-properties/wm-properties-capplet.c:142
-#, c-format
-msgid ""
-"Starting %s\n"
-"(%d seconds left before operation times out)"
-msgstr ""
-"%s を起動中\n"
-"(命令のタイムアウトまでに %d 秒あります)"
-
-#: capplets/wm-properties/wm-properties-capplet.c:303
-#, c-format
-msgid "%s (Current)"
-msgstr "%s (現在)"
-
-#: capplets/wm-properties/wm-properties-capplet.c:306
-#, c-format
-msgid "Run Configuration Tool for %s"
-msgstr "%s の設定ツールを実行"
-
-#: capplets/wm-properties/wm-properties-capplet.c:317
-msgid " (Not found)"
-msgstr " (見つからず)"
-
-#: capplets/wm-properties/wm-properties-capplet.c:356
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\tAnother window manager is already running and could not be killed\n"
-msgstr ""
-"wm-properties-capplet: ウインドウマネージャの初期化に失敗しました。\n"
-"\t別のウインドウマネージャが既に走っていて、それを止める事ができません。\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:360
-#, c-format
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\t'%s' didn't start\n"
-msgstr ""
-"wm-properties-capplet: ウインドウマネージャの初期化に失敗しました。\n"
-"\t'%s' が動きません\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:413
-msgid "Previous window manager did not die\n"
-msgstr "以前のウィンドウマネージャが死にません\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:446
-#, c-format
-msgid ""
-"Could not start '%s'.\n"
-"Falling back to previous window manager '%s'\n"
-msgstr ""
-"'%s'を起動できません。\n"
-"前のウインドウマネージャー'%s'に戻します\n"
-"\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:477
-msgid ""
-"Could not start fallback window manager.\n"
-"Please run a window manager manually. You can\n"
-"do this by selecting \"Run Program\" in the\n"
-"foot menu\n"
-msgstr ""
-"前のウインドウマネージャーに戻れません。\n"
-"手でウインドウマネージャーを起動して下さい。\n"
-"下のメニューの\"プログラム実行\"から選択しても\n"
-"実行できます。\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:502
-#: capplets/wm-properties/wm-properties-capplet.c:868
-#: capplets/wm-properties/wm-properties-capplet.c:875
-#: capplets/wm-properties/wm-properties-capplet.c:1021
-msgid "OK"
-msgstr "適用"
-
-#: capplets/wm-properties/wm-properties-capplet.c:520
-msgid ""
-"Your current window manager has been changed. In order for\n"
-"this change to be saved, you will need to save your current\n"
-"session. You can do so immediately by selecting the \"Save session\n"
-"now\" below, or you can save your session later.  This can be\n"
-"done either selecting \"Save Current Session\" under \"Settings\"\n"
-"in the main menu, or by turning on \"Save Current Setup\" when\n"
-"you log out.\n"
-msgstr ""
-"ウインドウマネージャが変更されました。この変更を保存する \n"
-"ためには、現在のセッションを保存しなければなりません。 \n"
-"「セッションを今保存」を選択するとすぐに保存できます。 \n"
-"また、後でセッションを保存することもできます。\n"
-"メインメニューの「設定」より「現在のセッションを保存」を \n"
-"選択するか、ログアウト時に「現在の設定を保存」を選択する \n"
-"ことで保存できます。\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:527
-msgid "Save Session Later"
-msgstr "セッションを後で保存"
-
-#: capplets/wm-properties/wm-properties-capplet.c:527
-msgid "Save Session Now"
-msgstr "セッションを今保存"
-
-#: capplets/wm-properties/wm-properties-capplet.c:530
-msgid ""
-"Your current window manager has been changed. In order for\n"
-"this change to be saved, you will need to save your current\n"
-"session. This can be done by either selecting \"Save Current Session\"\n"
-"under \"Settings\" in the main menu, or by turning on\n"
-"\"Save Current Setup\" when you log out.\n"
-msgstr ""
-"ウインドウマネージャが変更されました。この変更を保存するためには、\n"
-"現在のセッションを保存するようにしなければなりません。そのためには\n"
-"メインメニューの「設定」より「現在のセッションを保存」を選択するか、\n"
-"ログアウト時に「現在の設定を保存」を選択することで保存することが\n"
-"できます。\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:757
-msgid "Add New Window Manager"
-msgstr "新しいウインドウマネージャの追加"
-
-#: capplets/wm-properties/wm-properties-capplet.c:771
-msgid "Name:"
-msgstr "名前:"
-
-#: capplets/wm-properties/wm-properties-capplet.c:784
-msgid "Command:"
-msgstr "コマンド:"
-
-#: capplets/wm-properties/wm-properties-capplet.c:797
-msgid "Configuration Command:"
-msgstr "設定コマンド:"
-
-#: capplets/wm-properties/wm-properties-capplet.c:816
-msgid "Window manager is session managed"
-msgstr "ウインドウマネージャをセッションマネージャで管理する"
-
-#: capplets/wm-properties/wm-properties-capplet.c:866
-msgid "Name cannot be empty"
-msgstr "名前を指定して下さい"
-
-#: capplets/wm-properties/wm-properties-capplet.c:873
-msgid "Command cannot be empty"
-msgstr "コマンドを指定して下さい"
-
-#: capplets/wm-properties/wm-properties-capplet.c:922
-#: capplets/wm-properties/wm-properties-capplet.c:964
-msgid "Edit Window Manager"
-msgstr "ウィンドウマネージャのエディット"
-
-#: capplets/wm-properties/wm-properties-capplet.c:1020
-msgid "You cannot delete the current Window Manager"
-msgstr "使用中のウインドウマネージャは削除できません"
-
-#: capplets/wm-properties/wm-properties-capplet.c:1093
-msgid "Edit..."
-msgstr "編集..."
-
-#: capplets/wm-properties/wm-properties-capplet.c:1098
-msgid "Delete"
-msgstr "削除"
-
-#: capplets/wm-properties/wm-properties-capplet.c:1134
-msgid ""
-"an initialization error occurred while starting 'wm-properties-capplet'.\n"
-"aborting...\n"
-msgstr ""
-"'wm-properties-capplet'の起動に初期化エラーが発生しました。\n"
-"停止中...\n"
-
-#: control-center/callbacks.c:102 control-center/gnomecc.desktop.in.h:1
-msgid "GNOME Control Center"
-msgstr "GNOMEコントロールセンター"
-
-#: control-center/callbacks.c:105
-msgid "Desktop Properties manager."
-msgstr "デスクトッププロパティのマネージャです。"
-
-#: control-center/capplet-manager.c:179
-msgid "Try"
-msgstr "試行"
-
-#: control-center/capplet-manager.c:185
-msgid "Revert"
-msgstr "戻す"
-
-#. set the help item
-#: control-center/capplet-manager.c:208
-#, c-format
-msgid "Help with '%s' settings"
-msgstr "「%s」のヘルプ"
-
-#: control-center/capplet-widget-libs.c:46
-msgid "id of the capplet -- assigned by the control-center"
-msgstr "cappletのIDです -- コントロールセンターに予約されています。"
-
-#: control-center/capplet-widget-libs.c:46
-msgid "ID"
-msgstr "ID"
-
-#: control-center/capplet-widget-libs.c:47
-msgid "Multi-capplet id."
-msgstr "マルチ capplet の ID"
-
-#: control-center/capplet-widget-libs.c:47
-msgid "CAPID"
-msgstr "CAPID"
-
-#: control-center/capplet-widget-libs.c:48
-msgid "X ID of the socket it's plugged into"
-msgstr "接続中のソケットのXIDです。"
-
-#: control-center/capplet-widget-libs.c:48
-msgid "XID"
-msgstr "XID"
-
-#: control-center/capplet-widget-libs.c:49
-msgid "IOR of the control-center"
-msgstr "コントロールセンターのIORです"
-
-#: control-center/capplet-widget-libs.c:49
-msgid "IOR"
-msgstr "IOR"
-
-#: control-center/capplet-widget-libs.c:50
-msgid "Initialize session settings"
-msgstr "セッション設定の初期化"
-
-#: control-center/capplet-widget-libs.c:51
-msgid "Ignore default action.  Used for custom init-session cases"
-msgstr "標準アイコンが無効です。 カスタム初期セッションの場合を用います"
-
-#: control-center/capplet-widget.c:272
-msgid "Sorry, no help is available for these settings."
-msgstr "これらの設定に関するヘルプが見つかりません。"
-
-#: control-center/corba-glue.c:77
-msgid "capplet-command to be run."
-msgstr "実行する capplet 命令"
-
-#: control-center/corba-glue.c:77
-msgid "CAPPLET"
-msgstr "CAPPLET"
-
-#: control-center/main.c:36
-msgid "Help on control-center"
-msgstr "コントロールセンターのヘルプ"
-
-#: control-center/main.c:36
-msgid "Help with the GNOME control-center."
-msgstr "GNOMEコントロールセンターのヘルプ"
-
-#: control-center/main.c:38
-msgid "Help with the current configuration page."
-msgstr "現在の設定ページのヘルプ"
-
-#: control-center/main.c:41
-msgid "About"
-msgstr "情報"
-
-#: control-center/main.c:41
-msgid "About the GNOME control-center."
-msgstr "GNOMEコントロールセンターについて"
-
-#. we create the widgets
-#: control-center/main.c:69
-msgid "Warning:"
-msgstr "警告:"
-
-#: control-center/main.c:69
-msgid "Discard all changes"
-msgstr "全変更を破棄する"
-
-#. ...labels, etc
-#: control-center/main.c:78
-msgid ""
-"The following modules have had changes made, but not committed.  If you "
-"would like to edit them, please double click on the appropriate entry."
-msgstr ""
-"以下のモジュールには保存されていない変更があります。 "
-"変更したい場合は、該当する項目をダブルクリックして下さい。"
-
-#. create the app
-#: capplets/desktop-links/Gnome.directory.in.h:1 control-center/main.c:197
-#: control-center/splash.c:247
-msgid "Control Center"
-msgstr "Control Center"
-
-#: control-center/splash.c:48
-msgid "Operating System:"
-msgstr "OS:"
-
-#: control-center/splash.c:49
-msgid "Distribution Version:"
-msgstr "Distribution Version:"
-
-#: control-center/splash.c:50
-msgid "Processor Type:"
-msgstr "Processor Type:"
-
-#: control-center/splash.c:51
-msgid "User Name:"
-msgstr "User Name:"
-
-#: control-center/splash.c:52
-msgid "Host Name:"
-msgstr "Host Name:"
-
-#. This is about the only case where we'll put Unknown instead
-#. of simply not showing the info.
-#: control-center/splash.c:178
-msgid "Unknown"
-msgstr "不明"
-
-#: control-center/gnomecc.desktop.in.h:2
-msgid "The GNOME configuration tool"
-msgstr "GNOME 設定ツール"
-
-#: capplets/wm-properties/wm-properties.desktop.in.h:1
-msgid "Choose a window manager"
-msgstr "ウィンドウマネージャの選択"
-
-#: capplets/wm-properties/wm-properties.desktop.in.h:2
-msgid "Window Manager"
-msgstr "ウィンドウマネージャ"
-
-#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.h:1
-msgid "Enlightenment"
-msgstr "Enlightenment"
-
-#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.h:1
-msgid "Ice WM"
-msgstr "Ice WM"
-
-#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.h:1
-msgid "Scwm"
-msgstr "Scwm"
-
-#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.h:1
-msgid "Window Maker"
-msgstr "Window Maker"
-
-#: capplets/wm-properties/wm-desktops/twm.desktop.in.h:1
-msgid "twm"
-msgstr "twm"
-
-#: capplets/url-properties/url-properties.desktop.in.h:1
-msgid "Configure which programs are used to display URLs"
-msgstr "URL を表示するプログラムの設定"
-
-#: capplets/url-properties/url-properties.desktop.in.h:2
-msgid "URL Handlers"
-msgstr "URL ハンドラ:"
-
-#: capplets/ui-properties/application.desktop.in.h:1
-msgid "Applications"
-msgstr "アプリケーション"
-
-#: capplets/ui-properties/application.desktop.in.h:2
-msgid "Sets the default feel of GNOME applications"
-msgstr "GNOME アプリケーションの標準的な挙動を設定"
-
-#: capplets/ui-properties/dialogs.desktop.in.h:1
-msgid "Dialogs"
-msgstr "ダイアログ"
-
-#: capplets/ui-properties/mdi.desktop.in.h:1
-msgid "MDI"
-msgstr "MDI"
-
-#: capplets/theme-switcher/theme-selector.desktop.in.h:1
-msgid "Select which desktop theme to use"
-msgstr "デスクトップテーマの選択"
-
-#: capplets/theme-switcher/theme-selector.desktop.in.h:2
-msgid "Theme Selector"
-msgstr "テーマセレクタ"
-
-#: capplets/sound-properties/sound-properties.desktop.in.h:1
-msgid "Configure GNOME's use of sound"
-msgstr "GNOME のサウンド利用に関する設定"
-
-#: capplets/sound-properties/sound-properties.desktop.in.h:2
-msgid "Sound"
-msgstr "サウンド"
-
-#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:1
-msgid "Configure the settings of the screensaver"
-msgstr "スクリーンセーバーの設定"
-
-#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:2
-msgid "Screensaver"
-msgstr "スクリーンセーバー"
 
 #: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:1
 msgid "3D Clock"
@@ -1538,7 +749,7 @@ msgstr "速度"
 #: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:16
 msgid ""
 "This draws a working analog clock composed of floating, throbbing bubbles."
-msgstr ""
+msgstr "浮遊し、振動する泡でできたアナログ時計を描きます"
 
 #: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:17
 msgid ""
@@ -1630,7 +841,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:10
 msgid "Little Ants walk around, leaving colored trails."
-msgstr ""
+msgstr "小さな蟻が動きまわって色の付いた足跡を残します"
 
 #: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:11
 msgid "Number of ants."
@@ -1638,7 +849,7 @@ msgstr "蟻の数"
 
 #: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:12
 msgid "Print the path that the ant took in the trail."
-msgstr ""
+msgstr "蟻の足跡を表示"
 
 #: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:16
 #: capplets/screensaver-properties/screensaver-desktops/Truchet.desktop.in.h:1
@@ -1651,11 +862,11 @@ msgstr "アトランティス"
 
 #: capplets/screensaver-properties/screensaver-desktops/Atlantis.desktop.in.h:2
 msgid "Whales, dolphins and sharks swimming around, in 3D"
-msgstr ""
+msgstr "鯨やイルカやサメが 3 次元空間を泳ぎまわります"
 
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:1
-msgid " A show of objects interacting through attractive and repulsive forces."
-msgstr ""
+msgid "A show of objects interacting through attractive and repulsive forces."
+msgstr "重力や反発力で相互作用する物体のショー"
 
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:2
 msgid "Attraction"
@@ -1702,7 +913,7 @@ msgstr "点の大きさを変更"
 #: capplets/screensaver-properties/screensaver-desktops/Sierpinski.desktop.in.h:1
 #: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:1
 msgid "Change the delay in cycles."
-msgstr ""
+msgstr "回転の遅延"
 
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:7
 #: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:4
@@ -1822,13 +1033,13 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:19
 msgid "Initial spacing radius of points."
-msgstr ""
+msgstr "点間の初期半径"
 
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:20
 #: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:10
 #: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:9
 msgid "Jamie Zawinski <jwz@netscape.com>"
-msgstr ""
+msgstr "Jamie Zawinski <jwz@netscape.com>"
 
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:21
 #: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:15
@@ -1842,11 +1053,11 @@ msgstr "使用する点の数"
 
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:23
 msgid "Orbit"
-msgstr ""
+msgstr "軌道"
 
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:24
 msgid "Radius"
-msgstr ""
+msgstr "半径"
 
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:26
 msgid "Size of point."
@@ -1856,7 +1067,7 @@ msgstr "点の大きさ"
 #: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:13
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:20
 #: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:11
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:18
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:17
 #: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:14
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:23
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:19
@@ -1896,7 +1107,7 @@ msgstr "小さい"
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:29
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:21
 #: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:12
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:19
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:18
 #: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:24
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:20
@@ -1920,27 +1131,23 @@ msgstr "小さい"
 msgid "Speed of Motion."
 msgstr "動作速度"
 
-#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:31
-msgid "\317\356-\341\353\350\347\352\356"
-msgstr "速い"
-
 #: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:1
 msgid "Blitspin"
-msgstr ""
+msgstr "Blitspin"
 
 #: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:2
 msgid ""
 "Blitspin takes a bitmap and repeatedly rotates it by 90 degrees using "
 "logical operations."
-msgstr ""
+msgstr "Blitspin は論理操作により画像を 90 度回転していきます"
 
 #: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:3
 msgid "Change the delay between each 90 degree rotation."
-msgstr ""
+msgstr "90 度回転の間の間隔"
 
 #: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:4
 msgid "Change the delay between steps of rotation process."
-msgstr ""
+msgstr "回転操作の間隔"
 
 #: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:5
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:8
@@ -2031,7 +1238,7 @@ msgstr "スクリーンセーバーをモノクロで表示"
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:17
 #: capplets/screensaver-properties/screensaver-desktops/Braid.desktop.in.h:8
 #: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:10
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:16
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:19
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:9
@@ -2257,7 +1464,7 @@ msgstr "3 次元の泡"
 
 #: capplets/screensaver-properties/screensaver-desktops/Bubble3d.desktop.in.h:2
 msgid "Lots of bubbles floating around, in 3d"
-msgstr ""
+msgstr "たくさんの泡が 3 次元で浮遊します"
 
 #: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:2
 msgid "Broken"
@@ -2269,7 +1476,7 @@ msgstr "泡"
 
 #: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:4
 msgid "Bubbles exist in three dimensions."
-msgstr ""
+msgstr "3 次元空間に泡が。"
 
 #: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:5
 msgid "Bubbles sprays tiny bubbles which grow until they go pop."
@@ -2285,19 +1492,13 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:13
 msgid "James Macnicol <J.Macnicol@student.anu.edu.au>"
-msgstr ""
+msgstr "James Macnicol <J.Macnicol@student.anu.edu.au>"
 
 #: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:14
-msgid ""
-"James Macnicol <J.Macnicol@student.anu.edu.au>, \317\360\345\344\356\342: \304\350\353\377\355 \317\340\353\340\363\347\356\342 "
-"<didopalauzov@uk2.net>"
-msgstr ""
-
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:15
 msgid "Lots of random bubbles grow until they pop."
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:17
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:16
 msgid "Simple"
 msgstr "シンプル"
 
@@ -2316,19 +1517,19 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Cage.desktop.in.h:1
 msgid "Cage"
-msgstr ""
+msgstr "かご"
 
 #: capplets/screensaver-properties/screensaver-desktops/Cage.desktop.in.h:2
 msgid "The famous, M.C. Escher, impossible cage"
-msgstr ""
+msgstr "有名な M.C. エッシャーの ありえない かご"
 
 #: capplets/screensaver-properties/screensaver-desktops/Compass.desktop.in.h:1
 msgid "Compass"
-msgstr ""
+msgstr "コンパス"
 
 #: capplets/screensaver-properties/screensaver-desktops/Compass.desktop.in.h:2
 msgid "Display a spinning compass "
-msgstr ""
+msgstr "回転するコンパスを表示"
 
 #: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:2
 msgid "Change the density."
@@ -2380,7 +1581,7 @@ msgstr "クリティカル"
 
 #: capplets/screensaver-properties/screensaver-desktops/Critical.desktop.in.h:2
 msgid "Display coloured polylines"
-msgstr ""
+msgstr "色のついた多線分"
 
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:1
 msgid "Cell"
@@ -2408,7 +1609,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:17
 msgid "Jouk Jansen"
-msgstr ""
+msgstr "Jouk Jansen"
 
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:18
 msgid "Maxsize"
@@ -2467,34 +1668,28 @@ msgstr "繰り返しの数"
 
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:21
 msgid "Stephen Linhart, Ozymandias Desiderata, Jamie Zawinski"
-msgstr ""
-
-#: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:22
-msgid ""
-"Stephen Linhart, Ozymandias Desiderata, Jamie Zawinski, \317\360\345\342\356\344: \304\350\353\377\355 "
-"\317\340\353\340\363\347\356\342 <didopalauzov@uk2.net>"
-msgstr ""
+msgstr "Stephen Linhart, Ozymandias Desiderata, Jamie Zawinski"
 
 #: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:3
 msgid "Decayscreen"
-msgstr ""
+msgstr "画面崩壊"
 
 #: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:4
 msgid "Decayscreen makes a screen look like its melting down."
-msgstr ""
+msgstr "「画面崩壊」は画面を溶けたようにします"
 
 #: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:8
 msgid "Makes a screen melt down"
-msgstr ""
+msgstr "画面を溶かす"
 
 #: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:12
 msgid "Vivek Khera <khera@cs.duke.edu>"
-msgstr ""
+msgstr "Vivek Khera <khera@cs.duke.edu>"
 
 #: capplets/screensaver-properties/screensaver-desktops/Deco.desktop.in.h:1
 #: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:5
 msgid "Changes the time between redrawing the screen."
-msgstr ""
+msgstr "画面の再描画の間隔"
 
 #: capplets/screensaver-properties/screensaver-desktops/Deco.desktop.in.h:2
 msgid "Cycle through colors."
@@ -2502,7 +1697,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Deco.desktop.in.h:3
 msgid "Deco"
-msgstr ""
+msgstr "デコ"
 
 #: capplets/screensaver-properties/screensaver-desktops/Deco.desktop.in.h:4
 msgid "Deco draws tacky 70s basement wall panelling."
@@ -2521,6 +1716,8 @@ msgid ""
 "Jamie Zawinski <jwz@jwz.org>\n"
 "Michael D. Bayne <mdb@go2net.com>"
 msgstr ""
+"Jamie Zawinski <jwz@jwz.org>\n"
+"Michael D. Bayne <mdb@go2net.com>"
 
 #: capplets/screensaver-properties/screensaver-desktops/Deco.desktop.in.h:8
 msgid "This will cause the panes to flash."
@@ -2575,7 +1772,7 @@ msgstr ""
 #: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:4
 #: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:3
 msgid "Change the number to use."
-msgstr ""
+msgstr "数を変更"
 
 #: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:10
 msgid "Discrete"
@@ -2644,11 +1841,11 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:22
 msgid "Number of pixels to use."
-msgstr ""
+msgstr "使用するピクセルの数"
 
 #: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:23
 msgid "Scot Draves <spot@cs.cmu.edu>"
-msgstr ""
+msgstr "Scot Draves <spot@cs.cmu.edu>"
 
 #: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:26
 msgid "Use lissajous figures to get points."
@@ -2674,13 +1871,13 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:10
 msgid "James Youngman <jay@gnu.org>"
-msgstr ""
+msgstr "James Youngman <jay@gnu.org>"
 
 #: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:12
 #: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:17
 #: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:17
 msgid "Seconds"
-msgstr ""
+msgstr "秒"
 
 #: capplets/screensaver-properties/screensaver-desktops/Epicycle.desktop.in.h:15
 msgid "Time finished product is shown."
@@ -2692,11 +1889,11 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:1
 msgid "A waving ribbon"
-msgstr ""
+msgstr "波うつリボン"
 
 #: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:2
 msgid "Bas van Gaalen and Charles Vidal"
-msgstr ""
+msgstr "Bas van Gaalen と Charles Vidal"
 
 #: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:3
 msgid "Change the delay in movement."
@@ -2732,7 +1929,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:20
 msgid "Number"
-msgstr ""
+msgstr "数"
 
 #: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:22
 msgid "Number of cycles"
@@ -2741,7 +1938,7 @@ msgstr ""
 #: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:24
 #: capplets/screensaver-properties/screensaver-desktops/Sierpinski.desktop.in.h:14
 msgid "Speed of Motion"
-msgstr ""
+msgstr "動作速度"
 
 #: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:1
 #: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:1
@@ -2751,22 +1948,22 @@ msgstr ""
 #: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:3
 #: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:3
 msgid "Change the size of pixels in the flag."
-msgstr ""
+msgstr "旗のピクセルの大きさを変更"
 
 #: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:5
 #: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:5
 msgid "Charles Vidal <vidalc@univ-mlv.fr>"
-msgstr ""
+msgstr "Charles Vidal <vidalc@univ-mlv.fr>"
 
 #: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:9
 #: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:9
 msgid "Delay between switches."
-msgstr ""
+msgstr "切りかわるまでの間隔"
 
 #: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:11
 #: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:11
 msgid "Draws a waving flag."
-msgstr ""
+msgstr "波うつ旗を描く"
 
 #: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:13
 #: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:13
@@ -2781,7 +1978,7 @@ msgstr ""
 #: capplets/screensaver-properties/screensaver-desktops/Flag.desktop.in.h:18
 #: capplets/screensaver-properties/screensaver-desktops/Flame.desktop.in.h:18
 msgid "Size of pixels"
-msgstr ""
+msgstr "ピクセルの大きさ"
 
 #: capplets/screensaver-properties/screensaver-desktops/Flow.desktop.in.h:1
 msgid "Draws a flow of colored points"
@@ -2793,15 +1990,15 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:3
 msgid "Change the number of trees to use."
-msgstr ""
+msgstr "使用する木の数を変更"
 
 #: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:10
 msgid "Delay between redraws."
-msgstr ""
+msgstr "再描画までの間隔"
 
 #: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:12
 msgid "Draws a fractal forest."
-msgstr ""
+msgstr "フラクタルな森を描く"
 
 #: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:14
 msgid "Forest"
@@ -2813,19 +2010,19 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:18
 msgid "Number of trees to use."
-msgstr ""
+msgstr "木の数"
 
 #: capplets/screensaver-properties/screensaver-desktops/Forest.desktop.in.h:19
 msgid "Pascal Pensa <pensa@aurora.unice.fr>"
-msgstr ""
+msgstr "Pascal Pensa <pensa@aurora.unice.fr>"
 
 #: capplets/screensaver-properties/screensaver-desktops/GLPlanet.desktop.in.h:1
 msgid "A 3d globe"
-msgstr ""
+msgstr "3 次元の地球"
 
 #: capplets/screensaver-properties/screensaver-desktops/GLPlanet.desktop.in.h:2
 msgid "GLPlanet"
-msgstr ""
+msgstr "GL 惑星"
 
 #: capplets/screensaver-properties/screensaver-desktops/Galaxy.desktop.in.h:1
 msgid "Galaxy"
@@ -2833,11 +2030,11 @@ msgstr "銀河"
 
 #: capplets/screensaver-properties/screensaver-desktops/Gears.desktop.in.h:1
 msgid "Gears"
-msgstr ""
+msgstr "歯車"
 
 #: capplets/screensaver-properties/screensaver-desktops/Gears.desktop.in.h:2
 msgid "The 3d mesa demo, of gears"
-msgstr ""
+msgstr "3 次元 MESA の歯車のデモ"
 
 #: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:1
 msgid "Additive"
@@ -2857,7 +2054,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:13
 msgid "Have transparent bubbles."
-msgstr ""
+msgstr "透明な泡"
 
 #: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:14
 #: capplets/screensaver-properties/screensaver-desktops/Greynetic.desktop.in.h:9
@@ -2868,11 +2065,11 @@ msgstr ""
 #: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:9
 #: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:13
 msgid "Jamie Zawinski <jwz@jwz.org>"
-msgstr ""
+msgstr "Jamie Zawinski <jwz@jwz.org>"
 
 #: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:19
 msgid "Transparent"
-msgstr ""
+msgstr "透明"
 
 #: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:20
 msgid "Use additive color model."
@@ -2884,47 +2081,47 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:2
 msgid "Change the number of planets to use."
-msgstr ""
+msgstr "惑星の数"
 
 #: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:4
 msgid "Change whether objects should leave a trail."
-msgstr ""
+msgstr "物体が足跡を残すかどうか変更"
 
 #: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:5
 msgid "Change whether orbit should decay."
-msgstr ""
+msgstr "軌道が崩壊するかどうか変更"
 
 #: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:10
 msgid "Decay"
-msgstr ""
+msgstr "崩壊"
 
 #: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:12
 msgid "Draws a simple orbital simulation."
-msgstr ""
+msgstr "シンプルな軌道シミュレーション"
 
 #: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:13
 msgid "Grav"
-msgstr ""
+msgstr "Grav"
 
 #: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:14
 msgid "Grav draws a simple orbital simulation."
-msgstr ""
+msgstr "Grav はシンプルな軌道シミュレーションを描画"
 
 #: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:15
 msgid "Greg Bowering <greg@smug.student.adelaide.edu.au>"
-msgstr ""
+msgstr "Greg Bowering <greg@smug.student.adelaide.edu.au>"
 
 #: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:18
 msgid "Number of planets to use."
-msgstr ""
+msgstr "惑星の数"
 
 #: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:19
 msgid "Objects should leave trails behind them."
-msgstr ""
+msgstr "物体が足跡を残す"
 
 #: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:20
 msgid "Orbit should decay."
-msgstr ""
+msgstr "軌道は崩壊する"
 
 #: capplets/screensaver-properties/screensaver-desktops/Grav.desktop.in.h:21
 msgid "Trail"
@@ -2932,7 +2129,7 @@ msgstr "跡"
 
 #: capplets/screensaver-properties/screensaver-desktops/Greynetic.desktop.in.h:5
 msgid "Draws random color rectangles."
-msgstr ""
+msgstr "ランダムな色の矩形を描画"
 
 #: capplets/screensaver-properties/screensaver-desktops/Greynetic.desktop.in.h:7
 msgid "Greynetic"
@@ -2993,7 +2190,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:26
 msgid "Number of circles to use."
-msgstr ""
+msgstr "円の数"
 
 #: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:29
 msgid "Use a gradient of colors between circles."
@@ -3081,7 +2278,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Ifs.desktop.in.h:9
 msgid "Massimino Pascal <Pascal.Massimon@ens.fr>"
-msgstr ""
+msgstr "Massimino Pascal <Pascal.Massimon@ens.fr>"
 
 #: capplets/screensaver-properties/screensaver-desktops/Imsmap.desktop.in.h:1
 msgid "Imsmap"
@@ -3111,7 +2308,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Julia.desktop.in.h:13
 msgid "Julia"
-msgstr ""
+msgstr "ジュリア"
 
 #: capplets/screensaver-properties/screensaver-desktops/Julia.desktop.in.h:14
 msgid "Julia draws spinning, animating, julia-set fractals."
@@ -3119,7 +2316,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Julia.desktop.in.h:18
 msgid "Sean McCullough <bankshot@mailhost.nmt.edu>"
-msgstr ""
+msgstr "Sean McCullough <bankshot@mailhost.nmt.edu>"
 
 #: capplets/screensaver-properties/screensaver-desktops/Kaleidescope.desktop.in.h:1
 msgid "Change number of segments."
@@ -3127,15 +2324,15 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Kaleidescope.desktop.in.h:2
 msgid "Change number of trails."
-msgstr ""
+msgstr "足跡の数を変更"
 
 #: capplets/screensaver-properties/screensaver-desktops/Kaleidescope.desktop.in.h:7
 msgid "Draws rotating line segments."
-msgstr ""
+msgstr "回転する線分を描画"
 
 #: capplets/screensaver-properties/screensaver-desktops/Kaleidescope.desktop.in.h:9
 msgid "Kaleidescope"
-msgstr ""
+msgstr "万華鏡"
 
 #: capplets/screensaver-properties/screensaver-desktops/Kaleidescope.desktop.in.h:10
 msgid "Kaleidescope draws line segments in a symmetric pattern."
@@ -3151,7 +2348,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Kaleidescope.desktop.in.h:16
 msgid "Ron Tapia <tapia@nmia.com>"
-msgstr ""
+msgstr "Ron Tapia <tapia@nmia.com>"
 
 #: capplets/screensaver-properties/screensaver-desktops/Kaleidescope.desktop.in.h:17
 #: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:16
@@ -3172,7 +2369,7 @@ msgstr "3 次元の立方体がただよいます"
 
 #: capplets/screensaver-properties/screensaver-desktops/Lament.desktop.in.h:2
 msgid "Lament"
-msgstr "嘆き"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Laser.desktop.in.h:4
 msgid ""
@@ -3235,11 +2432,11 @@ msgstr "バーストの大きさ"
 
 #: capplets/screensaver-properties/screensaver-desktops/Lightning.desktop.in.h:6
 msgid "Draws fractal lightning bolts."
-msgstr ""
+msgstr "フラクタルの稲妻を描画"
 
 #: capplets/screensaver-properties/screensaver-desktops/Lightning.desktop.in.h:7
 msgid "Keith Romberg <kromberg@saxe.com>"
-msgstr ""
+msgstr "Keith Romberg <kromberg@saxe.com>"
 
 #: capplets/screensaver-properties/screensaver-desktops/Lightning.desktop.in.h:8
 msgid "Lightning"
@@ -3247,15 +2444,15 @@ msgstr "閃光"
 
 #: capplets/screensaver-properties/screensaver-desktops/Lightning.desktop.in.h:9
 msgid "Lightning draws fractal lightning bolts."
-msgstr ""
+msgstr "「閃光」はフラクタルな稲妻を描画します"
 
 #: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:1
 msgid "Caleb Cullen"
-msgstr ""
+msgstr "Caleb Cullen"
 
 #: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:5
 msgid "Change the size of object."
-msgstr ""
+msgstr "物体の大きさを変更"
 
 #: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:13
 msgid "Draws animated full-loop lisajous figures"
@@ -3263,7 +2460,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:16
 msgid "Lisa"
-msgstr ""
+msgstr "リサ"
 
 #: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:17
 msgid "Lisa draws animated full-loop lisajous figures."
@@ -3271,7 +2468,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:22
 msgid "Size of object."
-msgstr ""
+msgstr "物体の大きさ"
 
 #: capplets/screensaver-properties/screensaver-desktops/Lissie.desktop.in.h:1
 msgid "Lissie"
@@ -3299,7 +2496,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:15
 msgid "Morphing lines."
-msgstr ""
+msgstr "変形する線"
 
 #: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:16
 msgid "Number of interpolation steps."
@@ -3307,7 +2504,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:17
 msgid "Number of points."
-msgstr ""
+msgstr "点の数"
 
 #: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:18
 msgid "Open figures."
@@ -3315,7 +2512,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:19
 msgid "Points"
-msgstr ""
+msgstr "点"
 
 #: capplets/screensaver-properties/screensaver-desktops/Lmorph.desktop.in.h:20
 msgid "Points:"
@@ -3333,7 +2530,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Loop.desktop.in.h:1
 msgid "Loop"
-msgstr ""
+msgstr "ループ"
 
 #: capplets/screensaver-properties/screensaver-desktops/Loop.desktop.in.h:2
 msgid ""
@@ -3342,7 +2539,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:1
 msgid "Bridge"
-msgstr ""
+msgstr "橋"
 
 #: capplets/screensaver-properties/screensaver-desktops/Maze.desktop.in.h:2
 msgid "Color for filling completely closed off areas."
@@ -3489,7 +2686,7 @@ msgstr "Jamie  Zawinski <jwz@jwz.org>"
 
 #: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:12
 msgid "Maximum radius increment"
-msgstr ""
+msgstr "半径の増分の最大値"
 
 #: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:13
 msgid "Moire"
@@ -3497,11 +2694,11 @@ msgstr "モアレ"
 
 #: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:14
 msgid "Moire draws circular interference patterns."
-msgstr ""
+msgstr "モアレ、は円形の干渉パターンを描画します"
 
 #: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:17
 msgid "Offset"
-msgstr ""
+msgstr "オフセット"
 
 #: capplets/screensaver-properties/screensaver-desktops/Moire2.desktop.in.h:1
 msgid "Moire2"
@@ -3509,11 +2706,11 @@ msgstr "モアレ 2"
 
 #: capplets/screensaver-properties/screensaver-desktops/Morph3d.desktop.in.h:1
 msgid "A 3d flower morphs into a sphear"
-msgstr ""
+msgstr "3 次元の花が球に変形"
 
 #: capplets/screensaver-properties/screensaver-desktops/Morph3d.desktop.in.h:2
 msgid "Morph3d"
-msgstr ""
+msgstr "モーフ 3D"
 
 #: capplets/screensaver-properties/screensaver-desktops/Mountain.desktop.in.h:1
 msgid "Mountain"
@@ -3577,7 +2774,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:5
 msgid "Dale Moore <Dale.Moore@cs.cmu.edu>"
-msgstr ""
+msgstr "Dale Moore <Dale.Moore@cs.cmu.edu>"
 
 #: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:8
 msgid "Fadedelay"
@@ -3585,7 +2782,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:11
 msgid "Maximum number of lines."
-msgstr ""
+msgstr "線の数の最大値"
 
 #: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:12
 msgid "Maxlines"
@@ -3613,7 +2810,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Penetrate.desktop.in.h:1
 msgid "Display an arcade game"
-msgstr ""
+msgstr "アーケードゲームを表示"
 
 #: capplets/screensaver-properties/screensaver-desktops/Penetrate.desktop.in.h:2
 msgid "Penetrate"
@@ -3621,7 +2818,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Penrose.desktop.in.h:1
 msgid "Penrose"
-msgstr ""
+msgstr "ペンローズ"
 
 #: capplets/screensaver-properties/screensaver-desktops/Phosphor.desktop.in.h:1
 msgid ""
@@ -3635,15 +2832,15 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Pipes.desktop.in.h:1
 msgid "3d pipes flow around the screen"
-msgstr ""
+msgstr "3 次元の管が画面を走りまわります"
 
 #: capplets/screensaver-properties/screensaver-desktops/Pipes.desktop.in.h:2
 msgid "Pipes"
-msgstr ""
+msgstr "パイプ"
 
 #: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:1
 msgid "Changes frequency of missile launch."
-msgstr ""
+msgstr "ミサイル発射頻度を変更"
 
 #: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:5
 msgid "Frequency"
@@ -3664,7 +2861,7 @@ msgstr ""
 #: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:9
 #: capplets/screensaver-properties/screensaver-desktops/Xroger.desktop.in.h:3
 msgid "Jamie Zawinski"
-msgstr ""
+msgstr "Jamie Zawinski"
 
 #: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:12
 msgid "Number of particles"
@@ -3688,7 +2885,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Pyro.desktop.in.h:18
 msgid "simulates fireworks"
-msgstr ""
+msgstr "花火をシミュレート"
 
 #: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:1
 msgid "Bounce colored lines around a window."
@@ -3710,19 +2907,19 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:7
 msgid "Draw solid Qix."
-msgstr ""
+msgstr "クイックスを実線で描画"
 
 #: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:11
 msgid "Length of the Trail:"
-msgstr ""
+msgstr "跡の長さ:"
 
 #: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:12
 msgid "Number of Qix:"
-msgstr ""
+msgstr "クイックスの数"
 
 #: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:13
 msgid "Qix"
-msgstr ""
+msgstr "クイックス"
 
 #: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:14
 msgid ""
@@ -3736,7 +2933,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:17
 msgid "Set random motion for the Qix."
-msgstr ""
+msgstr "クイックスの動きをランダムにする"
 
 #: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:18
 msgid "Sets the distance between each line segment."
@@ -3764,11 +2961,6 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Rd-bomb.desktop.in.h:1
 msgid "Rd-bomb"
-msgstr ""
-
-#: capplets/desktop-links/Desktop.directory.in.h:1
-#: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:1
-msgid "Desktop"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:2
@@ -3805,7 +2997,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:10
 msgid "Tom Hammersley"
-msgstr ""
+msgstr "Tom Hammersley"
 
 #: capplets/screensaver-properties/screensaver-desktops/Rocks.desktop.in.h:1
 msgid "Rocks"
@@ -3825,7 +3017,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Rubik.desktop.in.h:2
 msgid "Rubiks Cube"
-msgstr ""
+msgstr "ルービックキューブ"
 
 #: capplets/screensaver-properties/screensaver-desktops/Shadebobs.desktop.in.h:1
 msgid ""
@@ -3838,7 +3030,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Sierpinski.desktop.in.h:7
 msgid "Desmond  Daignault"
-msgstr ""
+msgstr "Desmond  Daignault"
 
 #: capplets/screensaver-properties/screensaver-desktops/Sierpinski.desktop.in.h:12
 msgid "Sierpinski"
@@ -3850,15 +3042,15 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Slidescreen.desktop.in.h:1
 msgid "Slidescreen"
-msgstr ""
+msgstr "スライドスクリーン"
 
 #: capplets/screensaver-properties/screensaver-desktops/Slip.desktop.in.h:1
 msgid "Slip"
-msgstr ""
+msgstr "スリップ"
 
 #: capplets/screensaver-properties/screensaver-desktops/Sonar.desktop.in.h:1
 msgid "Display a Sonar scope."
-msgstr ""
+msgstr "ソナースコープを表示"
 
 #: capplets/screensaver-properties/screensaver-desktops/Sonar.desktop.in.h:2
 msgid "Sonar"
@@ -3870,7 +3062,7 @@ msgstr "球体"
 
 #: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:11
 msgid "Darrick Brown, Peter Schmitzberger, and Jamie Zawinski"
-msgstr ""
+msgstr "Darrick Brown, Peter Schmitzberger, そして Jamie Zawinski"
 
 #: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:20
 msgid "Spiral"
@@ -3882,11 +3074,11 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Spotlight.desktop.in.h:1
 msgid "Display the desktop in a spotlight"
-msgstr ""
+msgstr "デスクトップをスポットライト中に表示"
 
 #: capplets/screensaver-properties/screensaver-desktops/Spotlight.desktop.in.h:2
 msgid "Spotlight"
-msgstr ""
+msgstr "スポットライト"
 
 #: capplets/screensaver-properties/screensaver-desktops/Sproingies.desktop.in.h:1
 msgid "Sproingies"
@@ -3910,7 +3102,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Stairs.desktop.in.h:2
 msgid "The famous, M.C. Escher, impossible stairs"
-msgstr ""
+msgstr "有名な M.C.エッシャーの ありえない階段"
 
 #: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:1
 msgid " Random)"
@@ -4005,7 +3197,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Triangle.desktop.in.h:10
 msgid "Tobias Gloth"
-msgstr ""
+msgstr "Tobias Gloth"
 
 #: capplets/screensaver-properties/screensaver-desktops/Triangle.desktop.in.h:11
 msgid "Triangle"
@@ -4020,7 +3212,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Vines.desktop.in.h:9
 msgid "Tracy Camp"
-msgstr ""
+msgstr "Tracy Camp"
 
 #: capplets/screensaver-properties/screensaver-desktops/Vines.desktop.in.h:10
 msgid "Vines"
@@ -4074,11 +3266,11 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Xteevee.desktop.in.h:1
 msgid "Bars"
-msgstr ""
+msgstr "バー"
 
 #: capplets/screensaver-properties/screensaver-desktops/Xteevee.desktop.in.h:3
 msgid "Cycle modes."
-msgstr ""
+msgstr "回転モード"
 
 #: capplets/screensaver-properties/screensaver-desktops/Xteevee.desktop.in.h:4
 msgid "Cycle through all the available modes."
@@ -4086,7 +3278,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Xteevee.desktop.in.h:5
 msgid "Display color bars."
-msgstr ""
+msgstr "カラーバーを表示"
 
 #: capplets/screensaver-properties/screensaver-desktops/Xteevee.desktop.in.h:6
 msgid "Display static."
@@ -4094,7 +3286,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Xteevee.desktop.in.h:7
 msgid "Greg Knauss"
-msgstr ""
+msgstr "Greg Knauss"
 
 #: capplets/screensaver-properties/screensaver-desktops/Xteevee.desktop.in.h:8
 msgid "Roll"
@@ -4116,95 +3308,892 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Xteevee.desktop.in.h:12
 msgid "Vertical roll."
-msgstr ""
+msgstr "垂直にスクロール"
 
 #: capplets/screensaver-properties/screensaver-desktops/Xteevee.desktop.in.h:13
 msgid "Xteevee"
+msgstr "X テレビ"
+
+#: capplets/screensaver-properties/screensaver-dialog.c:46
+msgid "About:"
+msgstr "情報:"
+
+#: capplets/screensaver-properties/screensaver-dialog.c:51
+msgid "Author:"
+msgstr "作者:"
+
+#: capplets/screensaver-properties/screensaver-dialog.c:61
+msgid "Author: UNKNOWN"
+msgstr "作者: 不明"
+
+#: capplets/screensaver-properties/screensaver-dialog.c:78
+msgid "Settings"
+msgstr "設定"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:38
+msgid "RANDOM SCREENSAVER"
+msgstr "ランダムスクリーンセーバー"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:49
+msgid "Screen Saver"
+msgstr "スクリーンセーバー"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:61
+msgid ""
+"Pressing this button will popup a dialogbox that will help you setup the "
+"current screensaver."
 msgstr ""
+"このボタンを押すと、現在のスクリーンセーバーの設定をするための "
+"ダイアログが開きます。"
 
-#: capplets/mouse-properties/mouse-properties.desktop.in.h:1
-msgid "Mouse"
-msgstr "マウス"
+#. set up the initial frame, and get a vbox in which to pack things.
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:88
+msgid "Screen Saver Settings"
+msgstr "スクリーンセーバーの設定"
 
-#: capplets/mouse-properties/mouse-properties.desktop.in.h:2
-msgid "Mouse Properties"
-msgstr "マウスの設定"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:96
+msgid "Start After "
+msgstr "実行は"
 
-#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:1
-msgid "Keyboard"
-msgstr "キーボード"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:102
+msgid " Minutes."
+msgstr "分経ってから。"
 
-#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:2
-msgid "Keyboard Properties"
-msgstr "キーボードの設定"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:117
+msgid "Priority:"
+msgstr "優先度:"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:1
-msgid "Choose the editor that is invoked by gnome-edit"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:124
+msgid "Low "
+msgstr "低 "
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:126
+msgid " Normal"
+msgstr " 並"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:137
+msgid "Shutdown monitor "
+msgstr "モニターを"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:139
+msgid " minutes after screen saver has started."
+msgstr "分スクリーンセーバー起動後に落す"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:152
+msgid "Screen Saver Demo"
+msgstr "スクリーンセーバーデモ"
+
+#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:1
+msgid "Configure the settings of the screensaver"
+msgstr "スクリーンセーバーの設定"
+
+#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:2
+msgid "Screensaver"
+msgstr "スクリーンセーバー"
+
+#: capplets/sound-properties/sound-properties.c:97
+msgid ""
+"an initialization error occurred while starting 'sound-properties-capplet'."
+msgstr "'sound-properties-capplet'の起動に初期化エラーが発生しました。"
+
+#: capplets/sound-properties/sound-properties.c:188
+msgid "Event"
+msgstr "イベント"
+
+#: capplets/sound-properties/sound-properties.c:189
+msgid "File to Play"
+msgstr "鳴らすファイル"
+
+#: capplets/sound-properties/sound-properties.c:243
+msgid "Enable"
+msgstr "有効"
+
+#: capplets/sound-properties/sound-properties.c:250
+msgid "Enable sound server startup"
+msgstr "起動時に音サーバーを使う"
+
+#: capplets/sound-properties/sound-properties.c:258
+msgid "Sounds for events"
+msgstr "イベントに対して効果音を鳴らす"
+
+#: capplets/sound-properties/sound-properties.c:279
+msgid "General"
+msgstr "一般"
+
+#: capplets/sound-properties/sound-properties.c:286
+msgid "Select sound file"
+msgstr "音源ファイルの選択"
+
+#: capplets/sound-properties/sound-properties.c:325
+msgid "Play"
+msgstr "鳴らす"
+
+#: capplets/sound-properties/sound-properties.c:336
+msgid "Sound Events"
+msgstr "サウンドイベント"
+
+#: capplets/sound-properties/sound-properties.c:355
+msgid ""
+"This copy of the GNOME control center was not compiled with sound support"
+msgstr "このGNOMEコントロールセンターには音のサポートが組み込まれていません"
+
+#: capplets/sound-properties/sound-properties.c:748
+msgid "The sound file for this event does not exist."
+msgstr "このイベント用の音ファイルは存在しません。"
+
+#: capplets/sound-properties/sound-properties.c:750
+msgid ""
+"The sound file for this event does not exist.\n"
+"You may want to install the gnome-audio package\n"
+"for a set of default sounds."
 msgstr ""
+"このイベント用の音ファイルは存在しません。\n"
+"標準の音源セットを gnome-audio パッケージから\n"
+"インストールするのも良いでしょう。"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:2
-msgid "Default Editor"
-msgstr "標準エディタ"
+#: capplets/sound-properties/sound-properties.desktop.in.h:1
+msgid "Configure GNOME's use of sound"
+msgstr "GNOME のサウンド利用に関する設定"
 
-#: capplets/background-properties/background-properties.desktop.in.h:1
-msgid "Background"
-msgstr "バックグラウンド"
+#: capplets/sound-properties/sound-properties.desktop.in.h:2
+msgid "Sound"
+msgstr "サウンド"
 
-#: capplets/background-properties/background-properties.desktop.in.h:2
-msgid "Configuration of the desktop's background"
+#: capplets/theme-switcher/demo.c:50
+msgid "One"
+msgstr "壱"
+
+#: capplets/theme-switcher/demo.c:50
+msgid "Two"
+msgstr "弐"
+
+#. just 8 short names that will serve as samples for titles in demo
+#: capplets/theme-switcher/demo.c:52
+msgid "Eenie"
+msgstr "どれに"
+
+#: capplets/theme-switcher/demo.c:52
+msgid "Meenie"
+msgstr "しようか"
+
+#: capplets/theme-switcher/demo.c:53
+msgid "Mynie"
+msgstr "な"
+
+#: capplets/theme-switcher/demo.c:53
+msgid "Moe"
+msgstr "Moe"
+
+#: capplets/theme-switcher/demo.c:54
+msgid "Catcha"
+msgstr "Catcha"
+
+#: capplets/theme-switcher/demo.c:54
+msgid "Tiger"
+msgstr "言う通り"
+
+#: capplets/theme-switcher/demo.c:55
+msgid "By Its"
+msgstr "By Its"
+
+#: capplets/theme-switcher/demo.c:55
+msgid "Toe"
+msgstr "なのな"
+
+#: capplets/theme-switcher/demo.c:114
+msgid "Selected themes from above will be tested by previewing here."
+msgstr "上で選択したテーマはここて試すことが出来ます。"
+
+#. column one
+#: capplets/theme-switcher/demo.c:119
+msgid "Sample Button"
+msgstr "サンプルButton"
+
+#: capplets/theme-switcher/demo.c:123
+msgid "Sample Check Button"
+msgstr "サンプルチェックボタン"
+
+#: capplets/theme-switcher/demo.c:128
+msgid "Sample Text Entry Field"
+msgstr "Sample テキストエントリ Field"
+
+#: capplets/theme-switcher/demo.c:139
+msgid "Submenu"
+msgstr "サブメニュー"
+
+#: capplets/theme-switcher/demo.c:146
+msgid "Item 1"
+msgstr "項目1"
+
+#: capplets/theme-switcher/demo.c:149
+msgid "Another item"
+msgstr "別の item"
+
+#: capplets/theme-switcher/demo.c:154
+msgid "Radio Button 1"
+msgstr "ラジオボタン1"
+
+#: capplets/theme-switcher/demo.c:160
+msgid "Radio Button 2"
+msgstr "Radio Button 2"
+
+#: capplets/theme-switcher/gui.c:89
+#, c-format
+msgid ""
+"Error installing theme:\n"
+"'%s'\n"
+"%s"
 msgstr ""
+"テーマのインストールに失敗:\n"
+"'%s'\n"
+"%s"
 
-#: capplets/desktop-links/Documents.directory.in.h:1
-msgid "Configure how document types are handled"
+#: capplets/theme-switcher/gui.c:120
+msgid "Select a theme to install"
+msgstr "インストールするテーマを選択"
+
+#: capplets/theme-switcher/gui.c:197
+msgid "Available Themes"
+msgstr "使用可能なテーマ"
+
+#: capplets/theme-switcher/gui.c:221
+msgid ""
+"Auto\n"
+"Preview"
 msgstr ""
+"自動\n"
+"試写"
 
-#: capplets/desktop-links/Documents.directory.in.h:2
-msgid "Document Handlers"
+#: capplets/theme-switcher/gui.c:233
+msgid ""
+"Install new\n"
+"theme..."
 msgstr ""
+"新規テーマの\n"
+"インストール..."
 
-#: capplets/desktop-links/Gnome.directory.in.h:2
-msgid "Control Center Menu"
-msgstr "GNOME コントロールセンター・メニュー"
+#. Font selector.
+#.
+#: capplets/theme-switcher/gui.c:239
+msgid "User Font"
+msgstr "ユーザーフォント"
 
-#: capplets/desktop-links/Multimedia.directory.in.h:1
-msgid "Configure the settings of your Multimedia devices"
+#. FIXME - should really get this from X somehow
+#. for now we just assume default gtk font
+#: capplets/theme-switcher/gui.c:257
+msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
 msgstr ""
+"-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*,-*-fixed-medium-r-normal-"
+"-*-120-*-*-*-*-*-*"
 
-#: capplets/desktop-links/Multimedia.directory.in.h:2
-msgid "Multimedia"
-msgstr "マルチメディア"
+#: capplets/theme-switcher/gui.c:276
+msgid "Use custom font."
+msgstr "特別なフォントを使う。"
 
-#: capplets/desktop-links/Peripherals.directory.in.h:1
-msgid "Configure your external devices"
-msgstr ""
+#: capplets/theme-switcher/install.c:26
+msgid "Home directory doesn't exist!\n"
+msgstr "ホームディレクトリが存在しません!\n"
 
-#: capplets/desktop-links/Peripherals.directory.in.h:2
-msgid "Peripherals"
-msgstr "周辺機器"
+#: capplets/theme-switcher/install.c:36
+msgid "Theme does not exist"
+msgstr "テーマがありません"
 
-#: capplets/desktop-links/Session.directory.in.h:1
-msgid "Session"
-msgstr "セッション"
+#: capplets/theme-switcher/install.c:68
+#, c-format
+msgid "Command '%s' failed"
+msgstr "命令 '%s' が失敗しました"
 
-#: capplets/desktop-links/Session.directory.in.h:2
-msgid "Session Management Settings"
-msgstr "セッション管理の設定"
+#: capplets/theme-switcher/install.c:73
+msgid "Unknown file format"
+msgstr "未知のファイル形式です"
 
-#: capplets/desktop-links/UIOptions.directory.in.h:1
-msgid "Configure the global settings of your GNOME applications"
-msgstr "GNOME アプリケーションの全般的な設定を変更"
+#: capplets/theme-switcher/theme-selector.desktop.in.h:1
+msgid "Select which desktop theme to use"
+msgstr "デスクトップテーマの選択"
 
-#: capplets/desktop-links/UIOptions.directory.in.h:2
-msgid "User Interface"
-msgstr "ユーザーインターフェイス"
+#: capplets/theme-switcher/theme-selector.desktop.in.h:2
+msgid "Theme Selector"
+msgstr "テーマセレクタ"
+
+#: capplets/ui-properties/application.desktop.in.h:1
+msgid "Applications"
+msgstr "アプリケーション"
+
+#: capplets/ui-properties/application.desktop.in.h:2
+msgid "Sets the default feel of GNOME applications"
+msgstr "GNOME アプリケーションの標準的な挙動を設定"
+
+#: capplets/ui-properties/dialogs.desktop.in.h:1
+msgid "Dialogs"
+msgstr "ダイアログ"
+
+#: capplets/ui-properties/mdi.desktop.in.h:1
+msgid "MDI"
+msgstr "MDI"
+
+#: capplets/ui-properties/ui-properties.c:54
+msgid "Can detach and move toolbars"
+msgstr "ツールバーの取り外しや移動を許可する"
+
+#: capplets/ui-properties/ui-properties.c:59
+msgid "Toolbars have relieved border"
+msgstr "ツールバーに枠をつける"
+
+#: capplets/ui-properties/ui-properties.c:64
+msgid "Toolbar buttons have relieved border"
+msgstr "ツールバーのボタンに枠をつける"
+
+#: capplets/ui-properties/ui-properties.c:69
+msgid "Toolbars have line separators"
+msgstr "ツールバーに線による区切りをつける"
+
+#: capplets/ui-properties/ui-properties.c:74
+msgid "Toolbars have text labels"
+msgstr "ツールバーに文字ラベルをつける"
+
+#: capplets/ui-properties/ui-properties.c:103
+msgid "Can detach and move menus"
+msgstr "メニューバーは取り外せたり動かせる"
+
+#: capplets/ui-properties/ui-properties.c:108
+msgid "Menus have relieved border"
+msgstr "メニューバーに枠をつける"
+
+#: capplets/ui-properties/ui-properties.c:112
+msgid "Submenus can be torn off"
+msgstr "サブメニューは切り離せる"
+
+#: capplets/ui-properties/ui-properties.c:116
+msgid "Menu items have icons"
+msgstr "メニューアイテムにアイコンをつける"
+
+#: capplets/ui-properties/ui-properties.c:140
+msgid "Statusbar is interactive when possible"
+msgstr "可能ならステータースバーをインタラクティブに"
+
+#: capplets/ui-properties/ui-properties.c:145
+msgid "Statusbar progress meter is on the right"
+msgstr "ステータスバーの進捗メーターは右に"
+
+#: capplets/ui-properties/ui-properties.c:162
+msgid "Menu Options"
+msgstr "メニューオプション"
+
+#: capplets/ui-properties/ui-properties.c:163
+msgid "Statusbar Options"
+msgstr "ステータスバーオプション"
+
+#: capplets/ui-properties/ui-properties.c:164
+msgid "Toolbar Options"
+msgstr "ツールバーオプション"
+
+#: capplets/ui-properties/ui-properties.c:170
+msgid "Dialog buttons"
+msgstr "ダイアログ・ボタン"
+
+#: capplets/ui-properties/ui-properties.c:171
+msgid "Default value"
+msgstr "デフォルト値"
+
+#: capplets/ui-properties/ui-properties.c:172
+msgid "Spread buttons out"
+msgstr "ボタンを拡げる"
+
+#: capplets/ui-properties/ui-properties.c:173
+msgid "Put buttons on edges"
+msgstr "ボタンを角におく"
+
+#: capplets/ui-properties/ui-properties.c:174
+msgid "Left-justify buttons"
+msgstr "ボタンを左寄せする"
+
+#: capplets/ui-properties/ui-properties.c:175
+msgid "Right-justify buttons"
+msgstr "ボタンを右寄せする"
+
+#: capplets/ui-properties/ui-properties.c:180
+msgid "Dialog buttons have icons"
+msgstr "ダイアログボタンにアイコンをつける"
+
+#: capplets/ui-properties/ui-properties.c:185
+msgid "Use statusbar instead of dialog when possible"
+msgstr "可能ならダイアログのかわりにステータスバーを利用する"
+
+#: capplets/ui-properties/ui-properties.c:207
+msgid "Dialog position"
+msgstr "ダイアログ表示位置"
+
+#: capplets/ui-properties/ui-properties.c:208
+msgid "Let window manager decide"
+msgstr "ウィンドウマネージャに任せる"
+
+#: capplets/ui-properties/ui-properties.c:209
+msgid "Center of the screen"
+msgstr "画面中央"
+
+#: capplets/ui-properties/ui-properties.c:210
+msgid "At the mouse pointer"
+msgstr "マウスポインタ場所"
+
+#: capplets/ui-properties/ui-properties.c:215
+msgid "Dialog hints"
+msgstr "ダイアログ・ヒント"
+
+#: capplets/ui-properties/ui-properties.c:216
+msgid "Dialogs are like other windows"
+msgstr "他のウィンドウと同じように扱う"
+
+#: capplets/ui-properties/ui-properties.c:217
+msgid "Dialogs are treated specially by window manager"
+msgstr "ダイアログは特別にウィンドウマネージャ側で扱う"
+
+#: capplets/ui-properties/ui-properties.c:222
+msgid "Place dialogs over application window when possible"
+msgstr "可能ならアプリケーションウィンドウの上にダイアログを配置する"
+
+#: capplets/ui-properties/ui-properties.c:243
+msgid "Dialog Layout"
+msgstr "ダイアログの配置"
+
+#: capplets/ui-properties/ui-properties.c:244
+msgid "Dialog Behavior"
+msgstr "ダイアログの振舞い"
+
+#: capplets/ui-properties/ui-properties.c:250
+msgid "Default MDI Mode"
+msgstr "標準MDIモード"
+
+#: capplets/ui-properties/ui-properties.c:251
+msgid "Notebook"
+msgstr "ノートブック"
+
+#: capplets/ui-properties/ui-properties.c:252
+msgid "Toplevel"
+msgstr "トップレベル"
+
+#: capplets/ui-properties/ui-properties.c:253
+msgid "Modal"
+msgstr "モーダル"
+
+#: capplets/ui-properties/ui-properties.c:258
+msgid "MDI notebook tab position"
+msgstr "MDIノートブックタブの位置"
+
+#: capplets/ui-properties/ui-properties.c:259
+msgid "Left"
+msgstr "左側"
+
+#: capplets/ui-properties/ui-properties.c:260
+msgid "Right"
+msgstr "右側"
+
+#: capplets/ui-properties/ui-properties.c:261
+msgid "Top"
+msgstr "上部"
+
+#: capplets/ui-properties/ui-properties.c:262
+msgid "Bottom"
+msgstr "下部"
+
+#: capplets/ui-properties/ui-properties.c:277
+msgid "GNOME MDI Options"
+msgstr "GNOME MDI オプション"
 
 #: capplets/ui-properties/ui-properties.directory.in.h:1
 msgid "Look and Feel"
-msgstr "ルック・アンド・フィール"
+msgstr "ルック & フィール"
 
 #: capplets/ui-properties/ui-properties.directory.in.h:2
 msgid "Look and Feel Properties"
-msgstr "ルック・アンド・フィールの設定"
+msgstr "ルック & フィールの設定"
+
+#: capplets/url-properties/url-properties.c:51
+msgid "Error initializing the `url-properties' capplet."
+msgstr "URL ハンドラキャプレットの初期化エラー"
+
+#: capplets/url-properties/url-properties.c:76
+msgid "Protocol"
+msgstr "プロトコル"
+
+#: capplets/url-properties/url-properties.c:76
+msgid "Command"
+msgstr "コマンド"
+
+#: capplets/url-properties/url-properties.c:93
+msgid "handler:"
+msgstr "ハンドラ:"
+
+#. set some commonly used handlers
+#: capplets/url-properties/url-properties.c:103
+msgid "Netscape"
+msgstr "ネットスケープ"
+
+#: capplets/url-properties/url-properties.c:108
+msgid "Netscape (new window)"
+msgstr "ネットスケープ(新規ウィンドウ)"
+
+#: capplets/url-properties/url-properties.c:121
+msgid "Help browser"
+msgstr "ヘルプ・ブラウザ"
+
+#: capplets/url-properties/url-properties.c:127
+msgid "Help browser (new window)"
+msgstr "ヘルプ・ブラウザ(新規ウィンドウ)"
+
+#: capplets/url-properties/url-properties.c:140
+msgid "Set"
+msgstr "設定"
+
+#: capplets/url-properties/url-properties.c:148
+msgid "Remove"
+msgstr "削除"
+
+#: capplets/url-properties/url-properties.desktop.in.h:1
+msgid "Configure which programs are used to display URLs"
+msgstr "URL を表示するプログラムの設定"
+
+#: capplets/url-properties/url-properties.desktop.in.h:2
+msgid "URL Handlers"
+msgstr "URL ハンドラ:"
+
+#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.h:1
+msgid "Enlightenment"
+msgstr "Enlightenment"
+
+#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.h:1
+msgid "Ice WM"
+msgstr "Ice WM"
+
+#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.h:1
+msgid "Scwm"
+msgstr "Scwm"
+
+#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.h:1
+msgid "Window Maker"
+msgstr "Window Maker"
+
+#: capplets/wm-properties/wm-desktops/twm.desktop.in.h:1
+msgid "twm"
+msgstr "twm"
+
+#: capplets/wm-properties/wm-properties-capplet.c:142
+#, c-format
+msgid ""
+"Starting %s\n"
+"(%d seconds left before operation times out)"
+msgstr ""
+"%s を起動中\n"
+"(命令のタイムアウトまでに %d 秒あります)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:303
+#, c-format
+msgid "%s (Current)"
+msgstr "%s (現在)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:306
+#, c-format
+msgid "Run Configuration Tool for %s"
+msgstr "%s の設定ツールを実行"
+
+#: capplets/wm-properties/wm-properties-capplet.c:317
+msgid " (Not found)"
+msgstr " (見つからず)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:356
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\tAnother window manager is already running and could not be killed\n"
+msgstr ""
+"wm-properties-capplet: ウインドウマネージャの初期化に失敗しました。\n"
+"\t別のウインドウマネージャが既に走っていて、それを止める事ができません。\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:360
+#, c-format
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\t'%s' didn't start\n"
+msgstr ""
+"wm-properties-capplet: ウインドウマネージャの初期化に失敗しました。\n"
+"\t'%s' が動きません\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:413
+msgid "Previous window manager did not die\n"
+msgstr "以前のウィンドウマネージャが死にません\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:446
+#, c-format
+msgid ""
+"Could not start '%s'.\n"
+"Falling back to previous window manager '%s'\n"
+msgstr ""
+"'%s'を起動できません。\n"
+"前のウインドウマネージャー'%s'に戻します\n"
+"\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:477
+msgid ""
+"Could not start fallback window manager.\n"
+"Please run a window manager manually. You can\n"
+"do this by selecting \"Run Program\" in the\n"
+"foot menu\n"
+msgstr ""
+"前のウインドウマネージャーに戻れません。\n"
+"手でウインドウマネージャーを起動して下さい。\n"
+"下のメニューの\"プログラム実行\"から選択しても\n"
+"実行できます。\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:502
+#: capplets/wm-properties/wm-properties-capplet.c:868
+#: capplets/wm-properties/wm-properties-capplet.c:875
+#: capplets/wm-properties/wm-properties-capplet.c:1021
+msgid "OK"
+msgstr "適用"
+
+#: capplets/wm-properties/wm-properties-capplet.c:520
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. You can do so immediately by selecting the \"Save session\n"
+"now\" below, or you can save your session later.  This can be\n"
+"done either selecting \"Save Current Session\" under \"Settings\"\n"
+"in the main menu, or by turning on \"Save Current Setup\" when\n"
+"you log out.\n"
+msgstr ""
+"ウインドウマネージャが変更されました。この変更を保存する \n"
+"ためには、現在のセッションを保存しなければなりません。 \n"
+"「セッションを今保存」を選択するとすぐに保存できます。 \n"
+"また、後でセッションを保存することもできます。\n"
+"メインメニューの「設定」より「現在のセッションを保存」を \n"
+"選択するか、ログアウト時に「現在の設定を保存」を選択する \n"
+"ことで保存できます。\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:527
+msgid "Save Session Later"
+msgstr "セッションを後で保存"
+
+#: capplets/wm-properties/wm-properties-capplet.c:527
+msgid "Save Session Now"
+msgstr "セッションを今保存"
+
+#: capplets/wm-properties/wm-properties-capplet.c:530
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. This can be done by either selecting \"Save Current Session\"\n"
+"under \"Settings\" in the main menu, or by turning on\n"
+"\"Save Current Setup\" when you log out.\n"
+msgstr ""
+"ウインドウマネージャが変更されました。この変更を保存するためには、\n"
+"現在のセッションを保存するようにしなければなりません。そのためには\n"
+"メインメニューの「設定」より「現在のセッションを保存」を選択するか、\n"
+"ログアウト時に「現在の設定を保存」を選択することで保存することが\n"
+"できます。\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:757
+msgid "Add New Window Manager"
+msgstr "新しいウインドウマネージャの追加"
+
+#: capplets/wm-properties/wm-properties-capplet.c:771
+msgid "Name:"
+msgstr "名前:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:784
+msgid "Command:"
+msgstr "コマンド:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:797
+msgid "Configuration Command:"
+msgstr "設定コマンド:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:816
+msgid "Window manager is session managed"
+msgstr "ウインドウマネージャをセッションマネージャで管理する"
+
+#: capplets/wm-properties/wm-properties-capplet.c:866
+msgid "Name cannot be empty"
+msgstr "名前を指定して下さい"
+
+#: capplets/wm-properties/wm-properties-capplet.c:873
+msgid "Command cannot be empty"
+msgstr "コマンドを指定して下さい"
+
+#: capplets/wm-properties/wm-properties-capplet.c:922
+#: capplets/wm-properties/wm-properties-capplet.c:964
+msgid "Edit Window Manager"
+msgstr "ウィンドウマネージャのエディット"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1020
+msgid "You cannot delete the current Window Manager"
+msgstr "使用中のウインドウマネージャは削除できません"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1093
+msgid "Edit..."
+msgstr "編集..."
+
+#: capplets/wm-properties/wm-properties-capplet.c:1098
+msgid "Delete"
+msgstr "削除"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1134
+msgid ""
+"an initialization error occurred while starting 'wm-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"'wm-properties-capplet'の起動に初期化エラーが発生しました。\n"
+"停止中...\n"
+
+#: capplets/wm-properties/wm-properties.desktop.in.h:1
+msgid "Choose a window manager"
+msgstr "ウィンドウマネージャの選択"
+
+#: capplets/wm-properties/wm-properties.desktop.in.h:2
+msgid "Window Manager"
+msgstr "ウィンドウマネージャ"
+
+#: control-center/callbacks.c:102 control-center/gnomecc.desktop.in.h:1
+msgid "GNOME Control Center"
+msgstr "GNOMEコントロールセンター"
+
+#: control-center/callbacks.c:105
+msgid "Desktop Properties manager."
+msgstr "デスクトッププロパティのマネージャです。"
+
+#: control-center/capplet-manager.c:179
+msgid "Try"
+msgstr "試行"
+
+#: control-center/capplet-manager.c:185
+msgid "Revert"
+msgstr "戻す"
+
+#. set the help item
+#: control-center/capplet-manager.c:208
+#, c-format
+msgid "Help with '%s' settings"
+msgstr "「%s」のヘルプ"
+
+#: control-center/capplet-widget-libs.c:46
+msgid "id of the capplet -- assigned by the control-center"
+msgstr "cappletのIDです -- コントロールセンターに予約されています。"
+
+#: control-center/capplet-widget-libs.c:46
+msgid "ID"
+msgstr "ID"
+
+#: control-center/capplet-widget-libs.c:47
+msgid "Multi-capplet id."
+msgstr "マルチ capplet の ID"
+
+#: control-center/capplet-widget-libs.c:47
+msgid "CAPID"
+msgstr "CAPID"
+
+#: control-center/capplet-widget-libs.c:48
+msgid "X ID of the socket it's plugged into"
+msgstr "接続中のソケットのXIDです。"
+
+#: control-center/capplet-widget-libs.c:48
+msgid "XID"
+msgstr "XID"
+
+#: control-center/capplet-widget-libs.c:49
+msgid "IOR of the control-center"
+msgstr "コントロールセンターのIORです"
+
+#: control-center/capplet-widget-libs.c:49
+msgid "IOR"
+msgstr "IOR"
+
+#: control-center/capplet-widget-libs.c:50
+msgid "Initialize session settings"
+msgstr "セッション設定の初期化"
+
+#: control-center/capplet-widget-libs.c:51
+msgid "Ignore default action.  Used for custom init-session cases"
+msgstr "標準アイコンが無効です。 カスタム初期セッションの場合を用います"
+
+#: control-center/capplet-widget.c:272
+msgid "Sorry, no help is available for these settings."
+msgstr "これらの設定に関するヘルプが見つかりません。"
+
+#: control-center/corba-glue.c:77
+msgid "capplet-command to be run."
+msgstr "実行する capplet 命令"
+
+#: control-center/corba-glue.c:77
+msgid "CAPPLET"
+msgstr "CAPPLET"
+
+#: control-center/gnomecc.desktop.in.h:2
+msgid "The GNOME configuration tool"
+msgstr "GNOME 設定ツール"
+
+#: control-center/main.c:36
+msgid "Help on control-center"
+msgstr "コントロールセンターのヘルプ"
+
+#: control-center/main.c:36
+msgid "Help with the GNOME control-center."
+msgstr "GNOMEコントロールセンターのヘルプ"
+
+#: control-center/main.c:38
+msgid "Help with the current configuration page."
+msgstr "現在の設定ページのヘルプ"
+
+#: control-center/main.c:41
+msgid "About"
+msgstr "情報"
+
+#: control-center/main.c:41
+msgid "About the GNOME control-center."
+msgstr "GNOMEコントロールセンターについて"
+
+#. we create the widgets
+#: control-center/main.c:69
+msgid "Warning:"
+msgstr "警告:"
+
+#: control-center/main.c:69
+msgid "Discard all changes"
+msgstr "全変更を破棄する"
+
+#. ...labels, etc
+#: control-center/main.c:78
+msgid ""
+"The following modules have had changes made, but not committed.  If you "
+"would like to edit them, please double click on the appropriate entry."
+msgstr ""
+"以下のモジュールには保存されていない変更があります。 "
+"変更したい場合は、該当する項目をダブルクリックして下さい。"
+
+#: control-center/splash.c:48
+msgid "Operating System:"
+msgstr "OS:"
+
+#: control-center/splash.c:49
+msgid "Distribution Version:"
+msgstr "Distribution Version:"
+
+#: control-center/splash.c:50
+msgid "Processor Type:"
+msgstr "Processor Type:"
+
+#: control-center/splash.c:51
+msgid "User Name:"
+msgstr "User Name:"
+
+#: control-center/splash.c:52
+msgid "Host Name:"
+msgstr "Host Name:"
+
+#. This is about the only case where we'll put Unknown instead
+#. of simply not showing the info.
+#: control-center/splash.c:178
+msgid "Unknown"
+msgstr "不明"
+
+#~ msgid "��-瘠蒟褌"
+#~ msgstr "速い"
 
 #~ msgid "Mime Type: "
 #~ msgstr "Mime型: "
@@ -4272,11 +4261,7 @@ msgstr "ルック・アンド・フィールの設定"
 #~ "~/.gnome/mime-info\n"
 #~ "\n"
 #~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "~/.gnome/mime-info\n"
-#~ "ディレクトリにアクセスできません。\n"
-#~ "\n"
-#~ "状態を保存することが出来なくなります。"
+#~ msgstr "Greg Knauss"
 
 #~ msgid ""
 #~ "Cannot create the file\n"
