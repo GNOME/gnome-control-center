@@ -18,7 +18,7 @@ EXTRA_DIST = $(Screensavers_DATA) README
 BUILT_SOURCES = ant.xml.h bsod.xml.h compass.xml.h flag.xml.h \
 		qix.xml.h attraction.xml.h
 		
-noinst_PROGRAMS = extract-labels $(BUILD_SOURCES)
+noinst_PROGRAMS = extract-labels $(BUILT_SOURCES)
 
 extract_labels_SOURCES = extract-labels.c
 
