@@ -1175,7 +1175,7 @@ show_new_application_window (GtkWidget *button, GtkWidget *list)
 	gtk_table_attach_defaults ( GTK_TABLE (table), command_entry, 1, 2, 1, 2);
 
 	/* Open Behavior frame */
-	/* FIXME: Need to add expected uri schemes */
+	/* FIXME bugzilla.eazel.com 6066: Need to add expected uri schemes */
 	behavior_frame = gtk_frame_new (_("Open Behavior"));
 	gtk_table_attach_defaults ( GTK_TABLE (table), behavior_frame, 0, 2, 2, 3);
 	
@@ -1294,6 +1294,7 @@ show_edit_application_window (GtkWidget *button, GtkWidget *list)
 	gtk_box_pack_start (GTK_BOX (frame_vbox), multiple_check_box, FALSE, FALSE, 0);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (multiple_check_box), application->can_open_multiple_files);
 
+	/* FIXME bugzilla.eazel.com 6066: This needs to be three options now: "yes", "no", and "use uris for non-file locations" */
 	uri_check_box = gtk_check_button_new_with_label (_("Can open from URI"));
 	gtk_box_pack_start (GTK_BOX (frame_vbox), uri_check_box, FALSE, FALSE, 0);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (uri_check_box), application->expects_uris);
