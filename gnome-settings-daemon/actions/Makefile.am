@@ -23,6 +23,9 @@ libacme_la_SOURCES = \
 	acme-volume.c acme-volume.h		\
 	acme-volume-dummy.c acme-volume-dummy.h
 
+libacme_la_LIBADD = \
+	$(ALSA_LIBS)
+
 Datadir = $(datadir)/control-center-2.0/interfaces/
 Data_DATA = acme.glade
 
