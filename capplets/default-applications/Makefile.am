@@ -4,6 +4,7 @@ gnome2_default_applications_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
 gnome2_default_applications_properties_SOURCES = \
 	gnome-default-applications-properties.c
 
+SOURCES = gnome-default-applications-properties-structs.c
 @INTLTOOL_DESKTOP_RULE@
 
 iconsdir   = $(GNOMECC_ICONS_DIR)
