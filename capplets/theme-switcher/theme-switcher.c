@@ -18,7 +18,8 @@
 #include "gconf-property-editor.h"
 #include "file-transfer-dialog.h"
 
-#define GTK_THEME_KEY "/desktop/gnome/interface/gtk_theme"
+#define GTK_THEME_KEY	"/desktop/gnome/interface/gtk_theme"
+#define ICON_THEME_KEY	"/desktop/gnome/interface/icon_theme"
 
 #define MAX_ELEMENTS_BEFORE_SCROLLING 8
 
@@ -88,6 +89,7 @@ theme_selection_changed (GtkTreeSelection *selection,
       if (old_key && strcmp (old_key, new_key))
 	{
 	  gconf_client_set_string (client, GTK_THEME_KEY, new_key, NULL);
+	  gconf_client_set_string (client, ICON_THEME_KEY, new_key, NULL);
 	}
       g_free (old_key);
     }
