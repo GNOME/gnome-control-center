@@ -28,6 +28,7 @@
 #include <sys/ioctl.h>
 #include <fcntl.h>
 #include <stdio.h>
+#include <time.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <X11/Xlib.h>
