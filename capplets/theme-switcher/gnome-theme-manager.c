@@ -126,7 +126,7 @@ idle_async_func (GdkPixbuf *pixbuf,
       gtk_tree_model_get (model, &iter,
 			  META_THEME_ID_COLUMN, &test_theme_id,
 			  -1);
-      if (test_theme_id && !strcmp (theme_id, test_theme_id))
+      if (theme_id && test_theme_id && !strcmp (theme_id, test_theme_id))
 	{
 	  gtk_list_store_set (GTK_LIST_STORE (model), &iter,
 			      META_THEME_PIXBUF_COLUMN, pixbuf ? pixbuf : default_image,
