@@ -1,3 +1,15 @@
+2002-05-12  Anders Carlsson  <andersca@gnu.org>
+
+	* gnome-mouse-properties.c: (drag_threshold_from_gconf),
+	(drag_threshold_to_gconf), (event_box_button_press_event),
+	(load_pixbufs), (setup_dialog), (create_dialog),
+	(dialog_response_cb), (main):
+	* gnome-mouse-properties.glade:
+	Lots of things. Fix drag threshold preference, use a GtkImage
+	instead of a GtkDrawingArea for the double click test. Remove
+	weird weak refs throughout the code. Clean up the glade file,
+	requires a new libglade that has an a11y ref count fix.
+	
 2002-05-10  Anders Carlsson  <andersca@gnu.org>
 
 	* gnome-mouse-properties.c: (get_default_mouse_info),

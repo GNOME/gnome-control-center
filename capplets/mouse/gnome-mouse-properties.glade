@@ -80,8 +80,8 @@
 	      <child>
 		<widget class="GtkFrame" id="frame1">
 		  <property name="visible">True</property>
-		  <property name="label" translatable="yes">Mouse Orientation</property>
 		  <property name="label_xalign">0</property>
+		  <property name="label_yalign">0.5</property>
 		  <property name="shadow_type">GTK_SHADOW_ETCHED_IN</property>
 
 		  <child>
@@ -165,6 +165,25 @@
 		      </child>
 		    </widget>
 		  </child>
+
+		  <child>
+		    <widget class="GtkLabel" id="label1">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Mouse Orientation</property>
+		      <property name="use_underline">False</property>
+		      <property name="use_markup">False</property>
+		      <property name="justify">GTK_JUSTIFY_LEFT</property>
+		      <property name="wrap">False</property>
+		      <property name="selectable">False</property>
+		      <property name="xalign">0.5</property>
+		      <property name="yalign">0.5</property>
+		      <property name="xpad">0</property>
+		      <property name="ypad">0</property>
+		    </widget>
+		    <packing>
+		      <property name="type">label_item</property>
+		    </packing>
+		  </child>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -176,8 +195,8 @@
 	      <child>
 		<widget class="GtkFrame" id="frame2">
 		  <property name="visible">True</property>
-		  <property name="label" translatable="yes">Double-click Delay</property>
 		  <property name="label_xalign">0</property>
+		  <property name="label_yalign">0.5</property>
 		  <property name="shadow_type">GTK_SHADOW_ETCHED_IN</property>
 
 		  <child>
@@ -286,14 +305,16 @@
 			  <property name="yscale">0</property>
 
 			  <child>
-			    <widget class="GtkFrame" id="frame4">
+			    <widget class="GtkEventBox" id="double_click_eventbox">
 			      <property name="visible">True</property>
-			      <property name="label_xalign">0</property>
-			      <property name="shadow_type">GTK_SHADOW_ETCHED_IN</property>
 
 			      <child>
-				<widget class="GtkDrawingArea" id="double_click_darea">
+				<widget class="GtkImage" id="double_click_image">
 				  <property name="visible">True</property>
+				  <property name="xalign">0.5</property>
+				  <property name="yalign">0.5</property>
+				  <property name="xpad">0</property>
+				  <property name="ypad">0</property>
 				</widget>
 			      </child>
 			    </widget>
@@ -306,6 +327,25 @@
 			</packing>
 		      </child>
 		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkLabel" id="label2">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Double-click Delay</property>
+		      <property name="use_underline">False</property>
+		      <property name="use_markup">False</property>
+		      <property name="justify">GTK_JUSTIFY_LEFT</property>
+		      <property name="wrap">False</property>
+		      <property name="selectable">False</property>
+		      <property name="xalign">0.5</property>
+		      <property name="yalign">0.5</property>
+		      <property name="xpad">0</property>
+		      <property name="ypad">0</property>
+		    </widget>
+		    <packing>
+		      <property name="type">label_item</property>
+		    </packing>
 		  </child>
 		</widget>
 		<packing>
@@ -350,8 +390,8 @@
 	      <child>
 		<widget class="GtkFrame" id="frame6">
 		  <property name="visible">True</property>
-		  <property name="label" translatable="yes">Cursor Theme</property>
 		  <property name="label_xalign">0</property>
+		  <property name="label_yalign">0.5</property>
 		  <property name="shadow_type">GTK_SHADOW_ETCHED_IN</property>
 
 		  <child>
@@ -365,12 +405,13 @@
 			<widget class="GtkFrame" id="frame7">
 			  <property name="visible">True</property>
 			  <property name="label_xalign">0</property>
+			  <property name="label_yalign">0.5</property>
 			  <property name="shadow_type">GTK_SHADOW_ETCHED_IN</property>
 
 			  <child>
 			    <widget class="GtkTreeView" id="cursor_tree">
 			      <property name="visible">True</property>
-			      <property name="headers_visible">True</property>
+			      <property name="headers_visible">False</property>
 			      <property name="rules_hint">True</property>
 			      <property name="reorderable">False</property>
 			      <property name="enable_search">True</property>
@@ -412,6 +453,25 @@
 		      </child>
 		    </widget>
 		  </child>
+
+		  <child>
+		    <widget class="GtkLabel" id="label6">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Cursor Theme</property>
+		      <property name="use_underline">False</property>
+		      <property name="use_markup">False</property>
+		      <property name="justify">GTK_JUSTIFY_LEFT</property>
+		      <property name="wrap">False</property>
+		      <property name="selectable">False</property>
+		      <property name="xalign">0.5</property>
+		      <property name="yalign">0.5</property>
+		      <property name="xpad">0</property>
+		      <property name="ypad">0</property>
+		    </widget>
+		    <packing>
+		      <property name="type">label_item</property>
+		    </packing>
+		  </child>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -423,8 +483,8 @@
 	      <child>
 		<widget class="GtkFrame" id="locate_pointer_frame">
 		  <property name="visible">True</property>
-		  <property name="label" translatable="yes">Locate Pointer</property>
 		  <property name="label_xalign">0</property>
+		  <property name="label_yalign">0.5</property>
 		  <property name="shadow_type">GTK_SHADOW_ETCHED_IN</property>
 
 		  <child>
@@ -480,6 +540,25 @@
 		      </child>
 		    </widget>
 		  </child>
+
+		  <child>
+		    <widget class="GtkLabel" id="label7">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Locate Pointer</property>
+		      <property name="use_underline">False</property>
+		      <property name="use_markup">False</property>
+		      <property name="justify">GTK_JUSTIFY_LEFT</property>
+		      <property name="wrap">False</property>
+		      <property name="selectable">False</property>
+		      <property name="xalign">0.5</property>
+		      <property name="yalign">0.5</property>
+		      <property name="xpad">0</property>
+		      <property name="ypad">0</property>
+		    </widget>
+		    <packing>
+		      <property name="type">label_item</property>
+		    </packing>
+		  </child>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -523,8 +602,8 @@
 	      <child>
 		<widget class="GtkFrame" id="frame3">
 		  <property name="visible">True</property>
-		  <property name="label" translatable="yes">Speed</property>
 		  <property name="label_xalign">0</property>
+		  <property name="label_yalign">0.5</property>
 		  <property name="shadow_type">GTK_SHADOW_ETCHED_IN</property>
 
 		  <child>
@@ -658,6 +737,7 @@
 			      <property name="inverted">False</property>
 			      <property name="adjustment">1 1 10 1 1 0</property>
 			      <accessibility>
+				<atkrelation target="speed_label" type="labelled-by"/>
 				<atkrelation target="low_label" type="labelled-by"/>
 				<atkrelation target="high_label" type="labelled-by"/>
 			      </accessibility>
@@ -680,8 +760,9 @@
 			      <property name="digits">1</property>
 			      <property name="update_policy">GTK_UPDATE_DISCONTINUOUS</property>
 			      <property name="inverted">False</property>
-			      <property name="adjustment">1 1 10 1 1 0</property>
+			      <property name="adjustment">6 1 10 1 1 0</property>
 			      <accessibility>
+				<atkrelation target="speed_label" type="labelled-by"/>
 				<atkrelation target="slow_label" type="labelled-by"/>
 				<atkrelation target="fast_label" type="labelled-by"/>
 			      </accessibility>
@@ -783,6 +864,25 @@
 		      </child>
 		    </widget>
 		  </child>
+
+		  <child>
+		    <widget class="GtkLabel" id="label8">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Speed</property>
+		      <property name="use_underline">False</property>
+		      <property name="use_markup">False</property>
+		      <property name="justify">GTK_JUSTIFY_LEFT</property>
+		      <property name="wrap">False</property>
+		      <property name="selectable">False</property>
+		      <property name="xalign">0.5</property>
+		      <property name="yalign">0.5</property>
+		      <property name="xpad">0</property>
+		      <property name="ypad">0</property>
+		    </widget>
+		    <packing>
+		      <property name="type">label_item</property>
+		    </packing>
+		  </child>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -794,8 +894,8 @@
 	      <child>
 		<widget class="GtkFrame" id="frame5">
 		  <property name="visible">True</property>
-		  <property name="label" translatable="yes">Drag and Drop</property>
 		  <property name="label_xalign">0</property>
+		  <property name="label_yalign">0.5</property>
 		  <property name="shadow_type">GTK_SHADOW_ETCHED_IN</property>
 
 		  <child>
@@ -935,6 +1035,25 @@
 			</packing>
 		      </child>
 		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkLabel" id="label9">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Drag and Drop</property>
+		      <property name="use_underline">False</property>
+		      <property name="use_markup">False</property>
+		      <property name="justify">GTK_JUSTIFY_LEFT</property>
+		      <property name="wrap">False</property>
+		      <property name="selectable">False</property>
+		      <property name="xalign">0.5</property>
+		      <property name="yalign">0.5</property>
+		      <property name="xpad">0</property>
+		      <property name="ypad">0</property>
+		    </widget>
+		    <packing>
+		      <property name="type">label_item</property>
+		    </packing>
 		  </child>
 		</widget>
 		<packing>

@@ -199,6 +199,26 @@ threshold_to_gconf (GConfPropertyEditor *peditor,
 	return gconf_value_float_to_int (value);
 }
 
+static GConfValue *
+drag_threshold_from_gconf (GConfPropertyEditor *peditor, 
+			   const GConfValue *value)
+{
+	GConfValue *new_value;
+
+	new_value = gconf_value_new (GCONF_VALUE_FLOAT);
+
+	gconf_value_set_float (new_value, CLAMP (gconf_value_get_int (value), 1, 10));
+
+	return new_value;
+}
+
+static GConfValue *
+drag_threshold_to_gconf (GConfPropertyEditor *peditor, 
+		    const GConfValue *value)
+{
+	return gconf_value_float_to_int (value);
+}
+
 /* Retrieve legacy settings */
 
 static void
@@ -229,22 +249,25 @@ test_maybe_timeout (struct test_data_t *data)
 
 /* Callback issued when the user clicks the double click testing area. */
 
-static gint
-drawing_area_button_press_event (GtkWidget      *widget,
-				 GdkEventButton *event,
-				 GConfChangeSet *changeset)
+static gboolean
+event_box_button_press_event (GtkWidget   *widget,
+			      GdkEventButton *event,
+			      GConfChangeSet *changeset)
 {
 	gint                       double_click_time;
 	GConfValue                *value;
-
 	static struct test_data_t  data;
 	static guint               test_on_timeout_id     = 0;
 	static guint               test_maybe_timeout_id  = 0;
 	static guint32             double_click_timestamp = 0;
-
+	GtkWidget                 *image;
+	GdkPixbuf                 *pixbuf = NULL;
+	
 	if (event->type != GDK_BUTTON_PRESS)
 		return FALSE;
 
+	image = g_object_get_data (G_OBJECT (widget), "image");
+	
 	if (!(changeset && gconf_change_set_check_value (changeset, DOUBLE_CLICK_KEY, &value))) 
 		double_click_time = gconf_client_get_int (gconf_client_get_default (), DOUBLE_CLICK_KEY, NULL);
 	else
@@ -276,31 +299,6 @@ drawing_area_button_press_event (GtkWidget      *widget,
 	}
 
 	double_click_timestamp = event->time;
-	gtk_widget_queue_draw (widget);
-
-	return TRUE;
-}
-
-/* Callback to display the appropriate image on the double click testing area. */
-
-static gint
-drawing_area_expose_event (GtkWidget      *widget,
-			   GdkEventExpose *event,
-			   GConfChangeSet *changeset)
-{
-	static gboolean  first_time = TRUE;
-	GdkPixbuf       *pixbuf = NULL;
-
-	if (first_time) {
-		gdk_window_set_events (widget->window, gdk_window_get_events (widget->window) | GDK_BUTTON_PRESS_MASK);
-		g_signal_connect (G_OBJECT (widget), "button_press_event", (GCallback) drawing_area_button_press_event, changeset);
-		first_time = FALSE;
-	}
-
-	gdk_draw_rectangle (widget->window, widget->style->white_gc,
-			    TRUE, 0, 0,
-			    widget->allocation.width,
-			    widget->allocation.height);
 
 	switch (double_click_state) {
 	case DOUBLE_CLICK_TEST_ON:
@@ -314,13 +312,8 @@ drawing_area_expose_event (GtkWidget      *widget,
 		break;
 	}
 
-	gdk_pixbuf_render_to_drawable_alpha
-		(pixbuf, widget->window,
-		 0, 0,
-		 (widget->allocation.width - gdk_pixbuf_get_width (pixbuf)) / 2,
-		 (widget->allocation.height - gdk_pixbuf_get_height (pixbuf)) / 2,
-		 -1, -1, GDK_PIXBUF_ALPHA_FULL, 0, GDK_RGB_DITHER_NORMAL, 0, 0);
-		
+	gtk_image_set_from_pixbuf (GTK_IMAGE (image), pixbuf);
+
 	return TRUE;
 }
 
@@ -356,27 +349,22 @@ load_pixbufs (void)
 
 	filename = gnome_program_locate_file (program, GNOME_FILE_DOMAIN_APP_PIXMAP, "mouse-left.png", TRUE, NULL);
 	left_handed_pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
-	g_object_add_weak_pointer (G_OBJECT (left_handed_pixbuf), (gpointer *) &left_handed_pixbuf);
 	g_free (filename);
 
 	filename = gnome_program_locate_file (program, GNOME_FILE_DOMAIN_APP_PIXMAP, "mouse-right.png", TRUE, NULL);
 	right_handed_pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
-	g_object_add_weak_pointer (G_OBJECT (right_handed_pixbuf), (gpointer *) &right_handed_pixbuf);
 	g_free (filename);
 
 	filename = gnome_program_locate_file (program, GNOME_FILE_DOMAIN_APP_PIXMAP, "double-click-on.png", TRUE, NULL);
 	double_click_on_pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
-	g_object_add_weak_pointer (G_OBJECT (double_click_on_pixbuf), (gpointer *) &double_click_on_pixbuf);
 	g_free (filename);
 
 	filename = gnome_program_locate_file (program, GNOME_FILE_DOMAIN_APP_PIXMAP, "double-click-maybe.png", TRUE, NULL);
 	double_click_maybe_pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
-	g_object_add_weak_pointer (G_OBJECT (double_click_maybe_pixbuf), (gpointer *) &double_click_maybe_pixbuf);
 	g_free (filename);
 
 	filename = gnome_program_locate_file (program, GNOME_FILE_DOMAIN_APP_PIXMAP, "double-click-off.png", TRUE, NULL);
 	double_click_off_pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
-	g_object_add_weak_pointer (G_OBJECT (double_click_off_pixbuf), (gpointer *) &double_click_off_pixbuf);
 	g_free (filename);
 
 	called = TRUE;
@@ -532,8 +520,11 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 	gconf_value_free (value);
 
 	/* Double-click time */
-	g_signal_connect (WID ("double_click_darea"), "expose_event", (GCallback) drawing_area_expose_event, changeset);
-
+	gtk_image_set_from_pixbuf (GTK_IMAGE (WID ("double_click_image")), double_click_off_pixbuf);
+	g_object_set_data (G_OBJECT (WID ("double_click_eventbox")), "image", WID ("double_click_image"));
+	g_signal_connect (WID ("double_click_eventbox"), "button_press_event",
+			  G_CALLBACK (event_box_button_press_event), changeset);
+	
 	/* Cursors page */
 	tree_view = WID ("cursor_tree");
 	cursor_font = read_cursor_font ();
@@ -665,8 +656,8 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 	/* DnD threshold */
 	gconf_peditor_new_numeric_range
 		(changeset, "/desktop/gnome/peripherals/mouse/drag_threshold", WID ("drag_threshold_scale"),
-		 "conv-to-widget-cb", threshold_from_gconf,
-		 "conv-from-widget-cb", threshold_to_gconf,
+		 "conv-to-widget-cb", drag_threshold_from_gconf,
+		 "conv-from-widget-cb", drag_threshold_to_gconf,
 		 NULL);
 
 	/* listen to cursors changing */
@@ -688,7 +679,7 @@ create_dialog (void)
 	GladeXML     *dialog;
 	GtkSizeGroup *size_group;
 
-	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gnome-mouse-properties.glade", "prefs_widget", NULL);
+	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gnome-mouse-properties.glade", "mouse_properties_dialog", NULL);
 	widget = glade_xml_get_widget (dialog, "prefs_widget");
 
 	size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
@@ -706,15 +697,13 @@ create_dialog (void)
 	gtk_size_group_add_widget (size_group, WID ("slow_label"));
 	gtk_size_group_add_widget (size_group, WID ("small_label"));
 
-	g_object_weak_ref (G_OBJECT (widget), (GWeakNotify) g_object_unref, dialog);
-
 	return dialog;
 }
 
 /* Callback issued when a button is clicked on the dialog */
 
 static void
-dialog_button_clicked_cb (GtkDialog *dialog, gint response_id, GConfChangeSet *changeset) 
+dialog_response_cb (GtkDialog *dialog, gint response_id, GConfChangeSet *changeset) 
 {
 	if (response_id == GTK_RESPONSE_HELP) {
 		GError *error = NULL;
@@ -766,17 +755,13 @@ main (int argc, char **argv)
 	} else {
 		changeset = NULL;
 		dialog = create_dialog ();
-		load_pixbufs ();
-		setup_dialog (dialog, changeset);
+		//		load_pixbufs ();
+		//		setup_dialog (dialog, changeset);
 
-		dialog_win = gtk_dialog_new_with_buttons
-			(_("Mouse Properties"), NULL, 0,
-			 GTK_STOCK_HELP, GTK_RESPONSE_HELP,
-			 GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
-			 NULL);
+		dialog_win = WID ("mouse_properties_dialog");
+		g_signal_connect (dialog_win, "response",
+				  G_CALLBACK (dialog_response_cb), changeset);
 
-		g_signal_connect (G_OBJECT (dialog_win), "response", (GCallback) dialog_button_clicked_cb, changeset);
-		gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog_win)->vbox), WID ("prefs_widget"), TRUE, TRUE, GNOME_PAD_SMALL);
 		gtk_widget_show_all (dialog_win);
 
 		gtk_main ();
