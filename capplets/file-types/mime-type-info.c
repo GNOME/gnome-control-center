@@ -346,8 +346,7 @@ get_gconf_base_name (MimeCategoryInfo *category)
 	for (tmp = tmp1; *tmp != '\0'; tmp++)
 		if (isspace (*tmp) || *tmp == '(' || *tmp == ')') *tmp = '-';
 
-	tmp = g_strconcat ("/desktop/gnome/file-types-categories/",
-			   tmp1, "/default-action-id", NULL);
+	tmp = g_strconcat ("/desktop/gnome/file-types-categories/", tmp1, NULL);
 
 	g_free (tmp1);
 	return tmp;
@@ -372,7 +371,7 @@ mime_category_info_load_all (MimeCategoryInfo *category)
 			app = gnome_vfs_application_registry_get_mime_application (appid);
 			if (!strcmp (app->name, tmp)) {
 				category->default_action = NULL;
-				category->custom_line = app->command;
+				category->custom_line = g_strdup (app->command);
 				category->needs_terminal = app->requires_terminal;
 				gnome_vfs_mime_application_free (app);
 			} else {
@@ -465,9 +464,9 @@ mime_category_info_save (MimeCategoryInfo *category)
 
 	g_free (tmp);
 
-	tmp1 = mime_category_info_get_full_name (category);
 	tmp = g_strconcat (tmp1, "/use-parent-category", NULL);
 	gconf_client_set_bool (gconf_client_get_default (), tmp, category->use_parent_category, NULL);
+	g_free (tmp);
 	g_free (tmp1);
 
 	if (app_id != NULL)

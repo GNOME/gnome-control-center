@@ -1,5 +1,13 @@
 2002-01-28  Bradford Hovinen  <hovinen@ximian.com>
 
+	* mime-type-info.c (mime_category_info_save): Don't set tmp1 with
+	the full category name, free tmp too
+	(mime_category_info_load_all): strdup app->command
+	(get_gconf_base_name): Don't put /default-action-id after the key
+	name
+
+	* category-names.h: Update category names
+
 	* mime-type-info.c (update_subcategories): Fix logic
 	(mime_type_info_load_all): Don't load default_action if
 	custom_line is set
