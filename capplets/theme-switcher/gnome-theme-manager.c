@@ -22,7 +22,8 @@
 #include "gnome-theme-manager.h"
 #include "gnome-theme-details.h"
 #include "gnome-theme-installer.h"
-#include "theme-thumbnail.h"
+#include <theme-thumbnail.h>
+#include <gnome-theme-apply.h>
 
 
 #define MAX_ELEMENTS_BEFORE_SCROLLING 3
@@ -76,7 +77,6 @@ static void      load_meta_themes                (GtkTreeView        *tree_view,
 						  GList              *meta_theme_list);
 static void      meta_theme_setup_info           (GnomeThemeMetaInfo *meta_theme_info,
 						  GladeXML           *dialog);
-static void      meta_theme_set                  (GnomeThemeMetaInfo *meta_theme_info);
 static void      meta_theme_selection_changed    (GtkTreeSelection   *selection,
 						  GladeXML           *dialog);
 static void      update_themes_from_disk         (GladeXML           *dialog);
@@ -516,42 +516,6 @@ meta_theme_setup_info (GnomeThemeMetaInfo *meta_theme_info,
 }
 
 static void
-meta_theme_set (GnomeThemeMetaInfo *meta_theme_info)
-{
-  GConfClient *client;
-  gchar *old_key;
-  GnomeWindowManager *window_manager;
-  GnomeWMSettings wm_settings;
-
-  window_manager = gnome_wm_manager_get_current (gdk_display_get_default_screen (gdk_display_get_default ()));
-
-  client = gconf_client_get_default ();
-
-  /* Set the gtk+ key */
-  old_key = gconf_client_get_string (client, GTK_THEME_KEY, NULL);
-  if (old_key && strcmp (old_key, meta_theme_info->gtk_theme_name))
-    {
-      gconf_client_set_string (client, GTK_THEME_KEY, meta_theme_info->gtk_theme_name, NULL);
-    }
-  g_free (old_key);
-
-  /* Set the wm key */
-  wm_settings.flags = GNOME_WM_SETTING_THEME;
-  wm_settings.theme = meta_theme_info->metacity_theme_name;
-  if (window_manager)
-    gnome_window_manager_change_settings (window_manager, &wm_settings);
-
-  /* set the icon theme */
-  old_key = gconf_client_get_string (client, ICON_THEME_KEY, NULL);
-  if (old_key && strcmp (old_key, meta_theme_info->icon_theme_name))
-    {
-      gconf_client_set_string (client, ICON_THEME_KEY, meta_theme_info->icon_theme_name, NULL);
-    }
-  g_free (old_key);
-
-}
-
-static void
 meta_theme_selection_changed (GtkTreeSelection *selection,
 			      GladeXML         *dialog)
 {
@@ -587,7 +551,7 @@ meta_theme_selection_changed (GtkTreeSelection *selection,
     return;
 
   if (meta_theme_info)
-    meta_theme_set (meta_theme_info);
+    gnome_meta_theme_set (meta_theme_info);
 }
 
 /* This function will adjust the list to reflect the current theme

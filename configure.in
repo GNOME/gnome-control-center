@@ -59,6 +59,7 @@ PKG_CHECK_MODULES(GNOME_SETTINGS_DAEMON, gtk+-2.0 gconf-2.0 libgnomeui-2.0 esoun
 PKG_CHECK_MODULES(OLD_CAPPLET, libgnomeui-2.0 libglade-2.0)
 PKG_CHECK_MODULES(GNOME, libgnomeui-2.0)
 PKG_CHECK_MODULES(VFS_CAPPLET, $COMMON_MODULES gnome-vfs-module-2.0 gnome-vfs-2.0)
+PKG_CHECK_MODULES(GNOME_DESKTOP, gnome-desktop-2.0)
 PKG_CHECK_MODULES(SOUND_CAPPLET, esound)
 PKG_CHECK_MODULES(METACITY, libmetacity-private)
 
@@ -109,6 +110,30 @@ if $PKG_CONFIG --atleast-version 2.1.0 gtk+-2.0; then
 else
    AC_MSG_RESULT(no)
 fi
+
+dnl ==============================================
+dnl Themus dependencies
+dnl ==============================================
+
+AC_ARG_ENABLE(themus, [  --disable-themus        Do not build themes:///],, enable_themus=yes)
+
+if test x$enable_themus = xyes; then 
+
+  PKG_CHECK_MODULES(THEME_METHOD, gnome-vfs-module-2.0 >= 2.2.0 gnome-vfs-2.0 >= 2.2.0)
+  PKG_CHECK_MODULES(THEMUS_THUMBNAILER, gdk-2.0 >= 2.2.0 libgnomeui-2.0 >= 2.2.0 libmetacity-private gnome-vfs-2.0 >= 2.2.0)
+  PKG_CHECK_MODULES(THEMUS_COMPONENT, glib-2.0 >= 2.2.0 gtk+-2.0 >= 2.2.0 atk >= 1.2.0 libgnome-2.0 >= 2.2.0 libgnomeui-2.0 >= 2.2.0 gnome-vfs-2.0 >= 2.2.0 libbonobo-2.0 >= 2.2.0 libbonoboui-2.0 >= 2.2.0 libnautilus >= 2.2.0)
+
+  THEMUS=themus
+
+fi
+
+AC_SUBST(THEME_METHOD_CFLAGS)
+AC_SUBST(THEME_METHOD_LIBS)
+AC_SUBST(THEMUS_THUMBNAILER_CFLAGS)
+AC_SUBST(THEMUS_THUMBNAILER_LIBS)
+AC_SUBST(THEMUS_COMPONENT_CFLAGS)
+AC_SUBST(THEMUS_COMPONENT_LIBS)
+AC_SUBST(THEMUS)
 
 dnl ==============================================
 dnl End: Check that we meet the  dependencies
@@ -193,6 +218,9 @@ AC_SUBST(DISPLAY_CAPPLET_LIBS)
 
 AC_SUBST(GNOMECC_CFLAGS)
 AC_SUBST(GNOMECC_LIBS)
+
+AC_SUBST(GNOME_DESKTOP_CFLAGS)
+AC_SUBST(GNOME_DESKTOP_LIBS)
 
 AC_SUBST(METACITY_CFLAGS)
 AC_SUBST(METACITY_LIBS)
@@ -289,6 +317,8 @@ capplets/network/Makefile
 capplets/windows/Makefile
 schemas/Makefile
 libsounds/Makefile
+vfs-methods/Makefile
+vfs-methods/themus/Makefile
 control-center.spec
 ])
 dnl due to a bug in intltool we need to expand something from the root last control-center.spec

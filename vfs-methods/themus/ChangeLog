@@ -1,0 +1,168 @@
+2003-05-13  Andrew Sobala  <aes@gnome.org>
+
+	* Moved to control-center.
+
+2003-05-04  Andrew Sobala  <aes@gnome.org>
+
+	* theme-method.c: (do_open): fix pointer juggling that was causing
+	nautilus crashes. Oops again.
+
+2003-05-04  Andrew Sobala  <aes@gnome.org>
+
+	* theme-method.c: (do_close): remove some g_free s that were causing
+	nautilus to hang. Oops.
+
+2003-04-22  Andrew Sobala  <aes@gnome.org>
+
+	* theme-method.conf: removed .so extension as per Christophe Fergeau's
+	comments
+
+2003-03-30  Andrew Sobala  <aes@gnome.org>
+
+	* Makefile.am: added themus.keys to DISTCLEAN
+
+2003-03-29  Andrew Sobala  <aes@gnome.org>
+
+	* .cvsignore: updated
+
+2003-03-29  Andrew Sobala  <aes@gnome.org>
+
+	* Makefile.am: make the .keys file install properly
+	* themus.keys.in: add _category
+
+2003-03-29  Andrew Sobala  <aes@gnome.org>
+
+	* Makefile.am: fix cleaning of server.in files
+
+2003-03-29  Andrew Sobala  <aes@gnome.org>
+
+	* Makefile.am: added new component build stuff
+	* Themus_Component.server.in.in: added
+	* themus-component-main.c: (image_shlib_make_object): added
+	* themus-component.c: (impl_Bonobo_Listener_event),
+	(themus_component_class_init), (themus_component_init): added
+	* themus-component.h: added
+
+2003-03-29  Andrew Sobala  <aes@gnome.org>
+
+	* themus-properties-view.c: (load_location), (do_table_attach),
+	(themus_theme_properties_view_init): add description field
+
+2003-03-16  Andrew Sobala  <aes@gnome.org>
+
+	* Makefile.am: add ChangeLog to EXTRA_DIST
+
+ 2003-03-16  Andrew Sobala  <aes@gnome.org>
+
+	* theme-method.c: (fill_info_struct), (do_open), (do_close),
+	(do_get_file_info): a certain amount of leak fixing
+
+2003-03-16  Andrew Sobala  <aes@gnome.org>
+
+	* themus-properties-view.c: (add_atk_relation),
+	(themus_theme_properties_view_init): add a11y support to property
+	page
+
+2003-03-15  Andrew Sobala  <aes@gnome.org>
+
+	* Makefile.am: s/CFLAGS/AM_CFLAGS because automake moans
+
+2003-03-15  Andrew Sobala  <aes@gnome.org>
+
+	* Themus_Properties_View.server.in.in: remove Nautilus/View interface,
+	since it blatantly isn't. Fixes: 108200
+
+2003-03-07  Andrew Sobala  <aes@gnome.org>
+
+	* Makefile.am: made correction to EXTRA_DIST.
+
+2003-03-07  Andrew Sobala  <aes@gnome.org>
+
+	* Makefile.am: add properties page files
+	* Themus_Properties_View.server.in.in, themus-properties-main.c,
+	themus-properties-view.c, themus-properties-view.h: properties page
+
+2003-03-05  Andrew Sobala  <aes@gnome.org>
+
+	* theme-method.c: (do_close): Add monitor stuff that should work, but doesn't
+
+2003-03-05  Andrew Sobala  <aes@gnome.org>
+
+	* theme-method.c: (transfer_done_targz_idle_cb),
+	(transfer_done_tarbz2_idle_cb), (create_local_uri),
+	(do_open_directory), (do_close_directory), (do_read_directory),
+	(do_open), (do_create), (do_close), (do_read), (do_write),
+	(do_seek), (do_tell), (do_get_file_info_from_handle), (do_unlink):
+	Make installing work
+
+2003-02-19  Andrew Sobala  <aes@gnome.org>
+
+	* Makefile.am: install keys
+	* theme-method.c: (do_get_file_info): gettextize "Themes"
+	* themus.keys.in: added as gnome-mime-data is in string freeze, methinks
+
+2003-02-04  Andrew Sobala  <aes@gnome.org>
+
+	* theme-method.c: (do_get_file_info): remove g_print debugging call
+	  (do_unlink): now deletes metathemes. Does this mean it's better than
+	  gnome-theme-manager?
+	  (invoke_monitors): use gchar*, not gchar in function decl. Oops.
+
+2003-02-04  Andrew Sobala  <aes@gnome.org>
+
+	* Makefile.am: CFLAGS = -g. Automake optimises by default, which is
+	silly, and made me spend hours debugging something that was being
+	crazy. This stops optimisation :)
+
+2003-02-03  Andrew Sobala  <aes@gnome.org>
+
+	* theme-method.c: (fill_info_struct), (do_read_directory),
+	(do_get_file_info): fill info structs correctly. Breaks thumbnailers,
+	but what the heck.
+
+2003-02-03  Andrew Sobala  <aes@gnome.org>
+
+	* theme-method.c: (theme_meta_info_find), (do_open),
+	(do_get_file_info), (invoke_monitors), (do_monitor_add),
+	(vfs_module_init): monitors should work now
+
+2003-02-02  Andrew Sobala  <aes@gnome.org>
+
+	* theme-method.c: (do_get_file_info): return ERROR_INTERNAL if we're
+	confused
+	* themus.schemas.in: finish renaming of mime type
+
+2003-02-02  Andrew Sobala  <aes@gnome.org>
+
+	* theme-method.c: (theme_meta_info_sort_func), (do_open_directory),
+	(do_close_directory), (do_read_directory), (do_open), (do_create),
+	(do_close), (do_read), (do_write), (do_seek), (do_tell),
+	(do_get_file_info_from_handle), (do_get_file_info), (do_unlink),
+	(vfs_module_init): Return info properly, remove debugging prints.
+	The module now works properly, but nautilus seems to randomly choose
+	the icon order. ???
+
+2003-02-01  Andrew Sobala  <aes@gnome.org>
+
+	* Makefile.am: clean generated files
+
+2003-02-01  Andrew Sobala  <aes@gnome.org>
+
+	* Makefile.am: fix schema installation
+
+2003-01-30  Andrew Sobala  <aes@gnome.org>
+
+	* Makefile.am:
+	* theme-method.c: (do_open), (do_get_file_info):
+	* theme-thumbnail.c: (fake_expose_widget), (hbox_foreach),
+	(create_image), (handle_bytes), (message_from_capplet),
+	(message_from_child), (theme_thumbnail_invalidate_cache),
+	(generate_theme_thumbnail), (generate_theme_thumbnail_async),
+	(theme_thumbnail_factory_init):
+	* theme-thumbnail.h:
+	* theme-thumbnailer.c: (save_pixbuf), (main):
+	* themus.mime:
+	* themus.schemas.in:
+
+	Attempt at doing mime types, attempt at doing thumbnails, VFS method
+	fixes and breakages.

@@ -7,7 +7,8 @@ pixmap_DATA = \
 gnome_theme_manager_LDADD = 						\
 	$(GNOMECC_CAPPLETS_LIBS) 					\
 	$(METACITY_LIBS)						\
-	$(top_builddir)/libwindow-settings/libgnome-window-settings.la
+	$(top_builddir)/libwindow-settings/libgnome-window-settings.la  \
+	$(top_builddir)/capplets/common/libcommon.la
 
 gnome_theme_manager_SOURCES =	\
 	gnome-theme-save.c	\
@@ -16,8 +17,6 @@ gnome_theme_manager_SOURCES =	\
 	gnome-theme-manager.h	\
 	gnome-theme-details.c	\
 	gnome-theme-details.h	\
-	theme-thumbnail.c	\
-	theme-thumbnail.h	\
 	gnome-theme-installer.c	\
 	gnome-theme-installer.h
 

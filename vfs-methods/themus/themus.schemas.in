@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<gconfschemafile>
+  <schemalist>
+    <schema>
+      <key>/schemas/desktop/gnome/thumbnailers/application@x-gnome-theme-installed/command</key>
+      <applyto>/desktop/gnome/thumbnailers/application@x-gnome-theme-installed/command</applyto>
+      <type>string</type>
+      <default>gnome-theme-thumbnailer %u %o</default>
+      <locale name="C">
+        <short>Thumbnail command for installed themes</short>
+        <long>
+          Set this key to the command used to create thumbnails for
+          installed themes.
+        </long>
+      </locale>
+    </schema>
+    <schema>
+      <key>/schemas/desktop/gnome/thumbnailers/application@x-gnome-theme-installed/enable</key>
+      <applyto>/desktop/gnome/thumbnailers/application@x-gnome-theme-installed/enable</applyto>
+      <type>bool</type>
+      <default>true</default>
+      <locale name="C">
+        <short>Whether to thumbnail installed themes</short>
+        <long>
+          If set to true, then installed themes will be thumbnailed.
+        </long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/desktop/gnome/thumbnailers/application@x-gnome-theme/command</key>
+      <applyto>/desktop/gnome/thumbnailers/application@x-gnome-theme/command</applyto>
+      <type>string</type>
+      <default>gnome-theme-thumbnailer %u %o</default>
+      <locale name="C">
+        <short>Thumbnail command for themes</short>
+        <long>
+          Set this key to the command used to create thumbnails for
+          themes.
+        </long>
+      </locale>
+    </schema>
+    <schema>
+      <key>/schemas/desktop/gnome/thumbnailers/application@x-gnome-theme/enable</key>
+      <applyto>/desktop/gnome/thumbnailers/application@x-gnome-theme/enable</applyto>
+      <type>bool</type>
+      <default>true</default>
+      <locale name="C">
+        <short>Whether to thumbnail themes</short>
+        <long>
+          If set to true, then themes will be thumbnailed.
+        </long>
+      </locale>
+    </schema>
+
+  </schemalist>
+</gconfschemafile>
