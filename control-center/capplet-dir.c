@@ -197,7 +197,8 @@ capplet_activate (Capplet *capplet)
 
 	entry = CAPPLET_DIR_ENTRY (capplet)->entry;
 
-	if (!strcmp (entry->exec[0], "root-manager-helper"))
+#warning FIXME: this should probably be root-manager-helper
+	if (!strncmp (entry->exec[0], "root-manager", 12))
 		start_capplet_through_root_manager (entry);
 	else
 		gnome_desktop_entry_launch (entry);
@@ -345,9 +346,9 @@ start_capplet_through_root_manager (GnomeDesktopEntry *gde)
 
 
 	oldexec = gde->exec[1];
-	gde->exec[1] = gnome_is_program_in_path (oldexec);
+	gde->exec[1] = g_concat_dir_and_file (GNOME_SBINDIR, oldexec);
 
-	cmdline = g_strjoinv (" ", gde->exec + 1);
+ 	cmdline = g_strjoinv (" ", gde->exec + 1);
 
 	g_free (gde->exec[1]);
 	gde->exec[1] = oldexec;

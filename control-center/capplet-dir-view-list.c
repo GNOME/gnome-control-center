@@ -108,10 +108,16 @@ list_populate (CappletDirView *view)
 	gnome_icon_list_freeze (GNOME_ICON_LIST (view->view));
 
 	for (i = 0, list = view->capplet_dir->entries; list; list = list->next, i++) {
+#if 0
 		item = flatten_alpha (CAPPLET_DIR_ENTRY (list->data)->pb,
 				      GNOME_CANVAS (view->view));
 		gnome_icon_list_insert_item (GNOME_ICON_LIST (view->view), i, item, 
 					     CAPPLET_DIR_ENTRY (list->data)->label);
+#else
+		gnome_icon_list_insert (GNOME_ICON_LIST (view->view), i,
+					CAPPLET_DIR_ENTRY (list->data)->icon,
+					CAPPLET_DIR_ENTRY (list->data)->label);
+#endif
 	}
 	gnome_icon_list_thaw (GNOME_ICON_LIST (view->view));
 }

@@ -18,7 +18,8 @@ INCLUDES = 			\
 	-DVERSION=\""$(VERSION)"\"			\
 	-DSETTINGS_DIR=\""$(datadir)/control-center"\"	\
 	$(LIBGLADE_CFLAGS)				\
-	-DPIXMAPS_DIR=\""$(appicondir)"\"
+	-DPIXMAPS_DIR=\""$(appicondir)"\"		\
+	-DGNOME_SBINDIR=\""$(sbindir)"\"
 
 bin_PROGRAMS = gnomecc
 

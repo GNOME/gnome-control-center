@@ -1,3 +1,13 @@
+2000-12-27  Jacob "Ulysses" Berkman  <jacob@helixcode.com>
+
+	* capplet-dir-view-list.c (list_populate): call the real
+	gnome-libs API rather than my hacked one
+
+	* capplet-dir.c (start_capplet_through_root_manager): pass the
+	correct path ($prefix/sbin/<tool>) to the root-manager
+	(capplet_activate): check that the Exec line begins with
+	root-manager rather than root-manager-helper (for now)
+
 2000-12-26  Jacob "Ulysses" Berkman  <jacob@helixcode.com>
 
 	* capplet-dir-view*.c: new html view, and split other views into
