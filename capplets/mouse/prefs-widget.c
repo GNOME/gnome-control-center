@@ -226,7 +226,7 @@ read_preferences (PrefsWidget *prefs_widget, Preferences *prefs)
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));
 
-	if (prefs->rtol) {
+	if (!prefs->rtol) {
 		gtk_toggle_button_set_active 
 			(GTK_TOGGLE_BUTTON (WID ("right_handed_select")), 
 			 TRUE);
@@ -254,7 +254,7 @@ left_handed_selected_cb (GtkToggleButton *tb, PrefsWidget *prefs_widget)
 	g_return_if_fail (IS_PREFERENCES (prefs_widget->prefs));
 
 	if (gtk_toggle_button_get_active (tb)) {
-		prefs_widget->prefs->rtol = FALSE;
+		prefs_widget->prefs->rtol = TRUE;
 		preferences_changed (prefs_widget->prefs);
 	}
 
@@ -270,7 +270,7 @@ right_handed_selected_cb (GtkToggleButton *tb, PrefsWidget *prefs_widget)
 	g_return_if_fail (IS_PREFERENCES (prefs_widget->prefs));
 
 	if (gtk_toggle_button_get_active (tb)) {
-		prefs_widget->prefs->rtol = TRUE;
+		prefs_widget->prefs->rtol = FALSE;
 		preferences_changed (prefs_widget->prefs);
 	}
 
