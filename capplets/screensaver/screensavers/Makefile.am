@@ -147,16 +147,7 @@ Screensavers = \
 	xteevee.xml \
 	zoom.xml 
 
-Translatables = $(Screensavers:.xml=.xml.h)
-$(Translatables): %.xml.h: %.xml
-	$(top_srcdir)/xml-i18n-extract --type=gettext/xml $<
-
-all: $(Translatables)
-
-EXTRA_DIST = $(Screensavers) README \
-	     $(Translatables)
-
-CLEANFILES = $(Translatables)
+EXTRA_DIST = $(Screensavers) README
 
 ADFILE = $(XSCREENSAVER_PREFIX)/lib/X11/app-defaults/XScreenSaver
 
