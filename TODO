@@ -1,0 +1,33 @@
+
+[ Things prefaced with GSD need to be fixed in the gnome-settings daemon
+  and not the dialog ]
+
+MOUSE PROPERTIES:
+
+ * Add cursors to CVS (I have them locally) and install them
+ * GSD: actually do the 'xset' to load the cursors at start time
+ * GSD: Add support for devices other than CoreInput.
+
+KEYBOARD PROPERTIES:
+
+ * GSD: support keyboard bell
+ * Remove awful jrb-art and replace with actual blinking cursor.
+
+DEFAULT APPLICATIONS PROPERTIES:
+
+ * Move to libglade support
+ * Merge in Window Manager properties
+ * Test that GConf changes affect the dialog
+
+ALL DIALOGS:
+
+ * Change buttons to use whatever the UI team comes up with
+ * Make sure GSD exists using bonobo-activation
+
+GNOME SETTINGS DAEMON:
+
+ * GSD: Confirm all XSettings settings are correct, and have support in GTK+
+ * GSD: Register with session management so we are started before
+   anything else is started
+ * GSD: add bonobo-activation support so that we can guarantee it's running.
+ * GSD: Hook up locate_pointer to the GConf key rather than do it every time.

@@ -192,12 +192,12 @@ main (int argc, char **argv)
         }
     }
   
+#if 0
   gdk_window_add_filter (NULL, manager_event_filter, NULL);
-
   gnome_settings_xsettings_load (client);
   gnome_settings_mouse_load (client);
   gnome_settings_sound_load (client);
-  
+#endif  
   if (!terminated)
     gtk_main ();
   

@@ -7,8 +7,6 @@
 
 #define MAX_BUTTONS 10
 
-
-
 static void
 set_left_handed (gboolean left_handed)
 {
