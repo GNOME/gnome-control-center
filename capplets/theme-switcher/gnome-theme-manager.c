@@ -620,6 +620,7 @@ add_custom_row_to_meta_theme (const gchar  *current_gtk_theme,
   GtkTreeIter iter;
   gboolean valid;
   gchar *blurb;
+  GdkPixbuf *pixbuf;
 
   dialog = gnome_theme_manager_get_theme_dialog ();
   tree_view = WID ("meta_theme_treeview");
@@ -628,6 +629,7 @@ add_custom_row_to_meta_theme (const gchar  *current_gtk_theme,
   custom_meta_theme_info.gtk_theme_name = g_strdup (current_gtk_theme);
   custom_meta_theme_info.metacity_theme_name = g_strdup (current_window_theme);
   custom_meta_theme_info.icon_theme_name = g_strdup (current_icon_theme);
+  custom_meta_theme_info.name = g_strdup (_("Custom Theme\n"));
 
   for (valid = gtk_tree_model_get_iter_first (model, &iter);
        valid;
@@ -653,11 +655,20 @@ add_custom_row_to_meta_theme (const gchar  *current_gtk_theme,
   blurb = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s</span>\n%s",
 			   _("Custom theme"), _("You can save this theme by pressing the Save Theme button."));
 
+  printf ("Thumbnailing\n");
+
+  /* Invalidate the cache because the custom theme has potentially changed */
+  /* Commented out because it does odd things */
+  /*theme_thumbnail_invalidate_cache (&custom_meta_theme_info);*/
+
+  pixbuf = generate_theme_thumbnail (&custom_meta_theme_info);
+
   gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+		      META_THEME_PIXBUF_COLUMN, pixbuf,
 		      META_THEME_NAME_COLUMN, blurb,
 		      META_THEME_FLAG_COLUMN, THEME_FLAG_CUSTOM,
-		      META_THEME_PIXBUF_COLUMN, default_image,
 		      -1);
+
   gtk_widget_set_sensitive (WID ("meta_theme_save_button"), TRUE);
   path = gtk_tree_model_get_path (model, &iter);
   gtk_tree_view_set_cursor (GTK_TREE_VIEW (tree_view), path, NULL, FALSE);
@@ -697,12 +708,14 @@ remove_custom_row_from_meta_theme (GtkTreeModel *model)
   g_free (custom_meta_theme_info.gtk_theme_name);
   g_free (custom_meta_theme_info.metacity_theme_name);
   g_free (custom_meta_theme_info.icon_theme_name);
+  g_free (custom_meta_theme_info.name);
 
   gtk_widget_set_sensitive (WID ("meta_theme_save_button"), FALSE);
 
   custom_meta_theme_info.gtk_theme_name = NULL;
   custom_meta_theme_info.metacity_theme_name = NULL;
   custom_meta_theme_info.icon_theme_name = NULL;
+  custom_meta_theme_info.name = NULL;
 }
 
 

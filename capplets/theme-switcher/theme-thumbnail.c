@@ -438,6 +438,15 @@ message_from_child (GIOChannel   *source,
   return TRUE;
 }
 
+void  
+theme_thumbnail_invalidate_cache (GnomeThemeMetaInfo *meta_theme_info)
+{
+  gboolean success;
+
+  success = g_hash_table_remove (theme_hash, meta_theme_info->name);
+  printf ("Success is %d\n", success);
+}
+
 GdkPixbuf *
 generate_theme_thumbnail (GnomeThemeMetaInfo *meta_theme_info)
 {
