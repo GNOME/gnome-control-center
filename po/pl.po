@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-30 20:28-0400\n"
-"PO-Revision-Date: 2003-07-12 01:00+0100\n"
+"POT-Creation-Date: 2004-08-10 09:28+0200\n"
+"PO-Revision-Date: 2004-08-03 14:22+0200\n"
 "Last-Translator: Gnome PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1588,6 +1588,19 @@ msgstr ""
 msgid "Assign shortcut keys to commands"
 msgstr "Powiązania skrótów klawiszowych z poleceniami"
 
+#: capplets/keyboard/gnome-keyboard-properties-xkb.c:69
+#: capplets/keyboard/gnome-keyboard-properties-xkb.c:95
+msgid "Unknown"
+msgstr "Nieznany"
+
+#: capplets/keyboard/gnome-keyboard-properties-xkbmc.c:80
+msgid "Models"
+msgstr "Modele"
+
+#: capplets/keyboard/gnome-keyboard-properties-xkbpv.c:59
+msgid "Keyboard layout preview"
+msgstr "Podgląd układu klawiatury"
+
 #: capplets/keyboard/gnome-keyboard-properties.c:106
 #, c-format
 msgid "There was an error launching the keyboard capplet : %s"
@@ -1611,9 +1624,8 @@ msgid "Start the page with the typing break settings showing"
 msgstr "Otwiera stronę z właściwościami przerwy w pisaniu na klawiaturze"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:3
-#, fuzzy
 msgid "..."
-msgstr "Dodaj..."
+msgstr "..."
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<b>Cursor Blinking</b>"
@@ -1660,9 +1672,8 @@ msgid "Check if breaks are allowed to be postponed"
 msgstr "Przerwy mogą być odraczane"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:15
-#, fuzzy
 msgid "Choose a keyboard model"
-msgstr "Model klawiatury XKB"
+msgstr "Wybór modelu klawiatury"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "Cursor _blinks in text boxes and fields"
@@ -1706,7 +1717,7 @@ msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:26
 msgid "Microsoft Natural Keyboard"
-msgstr ""
+msgstr "Klawiatura Naturalna Microsoft"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "Reset to de_faults"
@@ -1729,14 +1740,12 @@ msgid "_Delay:"
 msgstr "_Opóźnienie:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:33
-#, fuzzy
 msgid "_Models"
-msgstr "Model"
+msgstr "_Modele"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:34
-#, fuzzy
 msgid "_Preview"
-msgstr "Szerokość podglądu"
+msgstr "_Podgląd"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:35
 msgid "_Selected layouts:"
@@ -2120,8 +2129,8 @@ msgid "Theme name must be present"
 msgstr "Motyw musi mieć nazwę"
 
 #: capplets/theme-switcher/gnome-theme-save.c:104
-msgid "The theme already exists. Would you like to replace it ?"
-msgstr ""
+msgid "The theme already exists. Would you like to replace it?"
+msgstr "Motyw już istnieje. Czy chcesz go zastapić?"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
 msgid "Select themes for various parts of the desktop"
@@ -2419,6 +2428,34 @@ msgstr "Ustawienia okien"
 msgid "Windows"
 msgstr "Okna"
 
+#: control-center/GNOME_ControlCenter.server.in.h:1
+msgid "Control Center"
+msgstr "Centrum sterowania"
+
+#: control-center/GNOME_ControlCenter.server.in.h:2
+msgid "Control Center Viewer"
+msgstr "Przeglądarka centrum sterowania"
+
+#: control-center/GNOME_ControlCenter.server.in.h:3
+msgid "Control Center view"
+msgstr "Widok centrum sterowania"
+
+#: control-center/GNOME_ControlCenter.server.in.h:4
+msgid "Control Center view component"
+msgstr "Element widoku centrum sterowania"
+
+#: control-center/GNOME_ControlCenter.server.in.h:5
+msgid "Control Center view component's factory"
+msgstr "Generator elementu widoku centrum sterowania"
+
+#: control-center/GNOME_ControlCenter.server.in.h:6
+msgid "Control Center view factory"
+msgstr "Generator widoku centrum sterowania"
+
+#: control-center/GNOME_ControlCenter.server.in.h:7
+msgid "View as Control Center"
+msgstr "Wyświetlanie jako centrum sterowania"
+
 #: control-center/capplet-dir-view-list.c:319
 #, c-format
 msgid "GNOME Control Center: %s"
@@ -2457,6 +2494,19 @@ msgstr "Menedżer właściwości środowiska."
 msgid "Gnome Control Center : %s"
 msgstr "Centrum Sterowania GNOME : %s"
 
+#: control-center/control-center-categories.c:333
+msgid "Others"
+msgstr "Inne"
+
+#: control-center/control-center-categories.c:424
+#: control-center/control-center.c:1091
+msgid "Gnome Control Center"
+msgstr "Centrum Sterowania GNOME"
+
+#: control-center/control-center.c:78
+msgid "Use nautilus if it is running."
+msgstr "Wykorzystuje nautilusa jeśli jest uruchomiony."
+
 #: control-center/gnomecc-ui.xml.h:1
 msgid "About this application"
 msgstr "Informacje o aplikacji"
@@ -2477,19 +2527,6 @@ msgstr "_Zawartość"
 msgid "_Help"
 msgstr "Pomo_c"
 
-#: control-center/control-center-categories.c:333
-msgid "Others"
-msgstr "Inne"
-
-#: control-center/control-center-categories.c:424
-#: control-center/control-center.c:1091
-msgid "Gnome Control Center"
-msgstr "Centrum Sterowania GNOME"
-
-#: control-center/control-center.c:78
-msgid "Use nautilus if it is running."
-msgstr "Wykorzystuje nautilusa jeśli jest uruchomiony."
-
 #: control-center/gnomecc.desktop.in.h:2
 msgid "The GNOME configuration tool"
 msgstr "Narzędzie konfiguracyjne GNOME"
@@ -2497,6 +2534,10 @@ msgstr "Narzędzie konfiguracyjne GNOME"
 #: control-center/main.c:43
 msgid "Use shell even if nautilus is running."
 msgstr "Wykorzystuje powłokę, nawet jeśli uruchomiony jest Nautilus."
+
+#: gnome-settings-daemon/actions/acme.glade.h:1
+msgid "Volume"
+msgstr "Głośność"
 
 #: gnome-settings-daemon/factory.c:34
 msgid "Could not initialize Bonobo"
@@ -2540,7 +2581,7 @@ msgid ""
 "row.  This turns off the Sticky Keys feature, which affects the way your "
 "keyboard works."
 msgstr ""
-"Przyciśnięto dwa klawiasze na raz, lub przyciśnięto klawisz Shift pięć razy "
+"Przyciśnięto dwa klawisze na raz, lub przyciśnięto klawisz Shift pięć razy "
 "pod rząd. Wyłącza to funkcję trwałych klawiszy, która wpływa na sposób pracy "
 "klawiatury."
 
@@ -2664,6 +2705,37 @@ msgstr ""
 "W katalogu domowym znajduje się plik odwzorowania klawiatury (%s), którego "
 "zawartość zostanie zignorowana. Aby ją odtworzyć, można użyć ustawień "
 "klawiatury."
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:114
+#, c-format
+msgid ""
+"Couldn't execute command: %s\n"
+"Verify that this command exists."
+msgstr ""
+"Nie można uruchomić polecenia: %s\n"
+"Sprawdź czy to polecenie istnieje."
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:130
+msgid ""
+"Couldn't put the machine to sleep.\n"
+"Verify that the machine is correctly configured."
+msgstr ""
+"Nie można przełączyć komputera w stan uśpienia.\n"
+"Sprawdź czy komputer jest prawidłowo skonfigurowany."
+
+# FIXME - jakoś dziwne to, ale w acme jest tak samo
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:140
+#, c-format
+msgid "Permissions on the file %s are broken\n"
+msgstr "Brak uprawnień do pliku %s\n"
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:185
+msgid ""
+"Couldn't load the Glade file.\n"
+"Make sure that this daemon is properly installed."
+msgstr ""
+"Nie można wczytać pliku Glade.\n"
+"Upewnij się, że ten demon jest poprawnie zainstalowany."
 
 #: gnome-settings-daemon/gnome-settings-screensaver.c:92
 #, c-format
@@ -2811,6 +2883,166 @@ msgstr ""
 #: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:2
 msgid "Sync text/plain and text/* handlers"
 msgstr "Uzgadnianie sposobu obsługi text/plain i text/*"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:1
+msgid "Brightness down"
+msgstr "Zmniejszenie jasności"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:2
+msgid "Brightness down's shortcut."
+msgstr "Klawisz skrótu zmniejszenia jasności."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:3
+msgid "Brightness up"
+msgstr "Zwiększenie jasności"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
+msgid "Brightness up's shortcut."
+msgstr "Klawisz skrótu zwiększenia jasności."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
+msgid "E-mail"
+msgstr "E-mail"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:6
+msgid "E-mail's shortcut."
+msgstr "Klawisz skrótu E-mail."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
+msgid "Eject"
+msgstr "Wysunięcie nośnika"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
+msgid "Eject's shortcut."
+msgstr "Klawisz skrótu wysunięcia nośnika."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
+msgid "Home folder"
+msgstr "Folder domowy"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
+msgid "Home folder's shortcut."
+msgstr "Klawisz skrótu folderu domowego."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
+msgid "Launch help browser"
+msgstr "Uruchomienie przeglądarki pomocy"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
+msgid "Launch help browser's shortcut."
+msgstr "Klawisz skrótu uruchomienia przeglądarki pomocy."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
+msgid "Launch web browser"
+msgstr "Uruchomienie przeglądarki WWW"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
+msgid "Launch web browser's shortcut."
+msgstr "Klawisz skrótu uruchomienia przeglądarki WWW."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
+msgid "Lock screen"
+msgstr "Blokada ekranu"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
+msgid "Lock screen's shortcut."
+msgstr "Klawisz skrótu blokady ekranu."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
+msgid "Log out"
+msgstr "Wylogowanie"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
+msgid "Log out's shortcut."
+msgstr "Klawisz skrótu wylogowania."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
+msgid "Next track key's shortcut."
+msgstr "Klawisz skrótu następnej ścieżki."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
+msgid "Pause"
+msgstr "Wstrzymanie"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
+msgid "Pause key's shortcut."
+msgstr "Klawisz skrótu wstrzymania."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
+msgid "Play (or play/pause)"
+msgstr "Odtwarzanie (lub odtwarzanie/wstrzymanie)"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
+msgid "Play (or play/pause) key's shortcut."
+msgstr "Klawisz skrótu odtwarzania (lub odtwarzania/wstrzymania)."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
+msgid "Previous track key's shortcut."
+msgstr "Klawisz skrótu poprzedniej ścieżki."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
+msgid "Search"
+msgstr "Wyszukiwanie"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
+msgid "Search's shortcut."
+msgstr "Klawisz skrótu wyszukiwania."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
+msgid "Skip to next track"
+msgstr "Przejście do następnej ścieżki"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
+msgid "Skip to previous track"
+msgstr "Przejście do poprzedniej ścieżki"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
+msgid "Sleep"
+msgstr "Uśpienie"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
+msgid "Sleep's shortcut."
+msgstr "Klawisz skrótu uśpienia."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
+msgid "Stop playback key"
+msgstr "Klawisz wstrzymania odtwarzania"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
+msgid "Stop playback key's shortcut."
+msgstr "Skrót klawisza wstrzymania odtwarzania."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
+msgid "Volume down"
+msgstr "Ściszenie"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
+msgid "Volume down's shortcut."
+msgstr "Klawisz skrótu ściszenia."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
+msgid "Volume mute"
+msgstr "Wyciszenie"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
+msgid "Volume mute's shortcut"
+msgstr "Klawisz skrótu wyciszenia"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
+msgid "Volume step"
+msgstr "Krok głośności"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:38
+msgid "Volume step as percentage of volume."
+msgstr "Procentowy krok głośności."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:39
+msgid "Volume up"
+msgstr "Podgłośnienie"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
+msgid "Volume up's shortcut."
+msgstr "Klawisz skrótu podgłośnienia."
 
 #: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:1
 msgid "Display a dialog when there are errors running XScreenSaver"
@@ -3213,201 +3445,6 @@ msgstr "Tworzenie miniaturek zainstalowanych motywów"
 msgid "Whether to thumbnail themes"
 msgstr "Tworzenie miniaturek motywów"
 
-#: gnome-settings-daemon/actions/acme.glade.h:1
-msgid "Volume"
-msgstr "Głośność"
-
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:114
-#, c-format
-msgid ""
-"Couldn't execute command: %s\n"
-"Verify that this command exists."
-msgstr ""
-"Nie można uruchomić polecenia: %s\n"
-"Sprawdź czy to polecenie istnieje."
-
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:130
-msgid ""
-"Couldn't put the machine to sleep.\n"
-"Verify that the machine is correctly configured."
-msgstr ""
-"Nie można przełączyć komputera w stan uśpienia.\n"
-"Sprawdź czy komputer jest prawidłowo skonfigurowany."
-
-# FIXME - jakoś dziwne to, ale w acme jest tak samo
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:140
-#, c-format
-msgid "Permissions on the file %s are broken\n"
-msgstr "Brak uprawnień do pliku %s\n"
-
-#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:185
-msgid ""
-"Couldn't load the Glade file.\n"
-"Make sure that this daemon is properly installed."
-msgstr ""
-"Nie można wczytać pliku Glade.\n"
-"Upewnij się, że ten demon jest poprawnie zainstalowany."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:1
-msgid "Brightness down"
-msgstr "Zmniejszenie jasności"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:2
-msgid "Brightness down's shortcut."
-msgstr "Klawisz skrótu zmniejszenia jasności."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:3
-msgid "Brightness up"
-msgstr "Zwiększenie jasności"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
-msgid "Brightness up's shortcut."
-msgstr "Klawisz skrótu zwiększenia jasności."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
-msgid "E-mail"
-msgstr "E-mail"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:6
-msgid "E-mail's shortcut."
-msgstr "Klawisz skrótu E-mail."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
-msgid "Eject"
-msgstr "Wysunięcie nośnika"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
-msgid "Eject's shortcut."
-msgstr "Klawisz skrótu wysunięcia nośnika."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
-msgid "Home folder"
-msgstr "Folder domowy"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
-msgid "Home folder's shortcut."
-msgstr "Klawisz skrótu folderu domowego."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
-msgid "Launch help browser"
-msgstr "Uruchomienie przeglądarki pomocy"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
-msgid "Launch help browser's shortcut."
-msgstr "Klawisz skrótu uruchomienia przeglądarki pomocy."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
-msgid "Launch web browser"
-msgstr "Uruchomienie przeglądarki WWW"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
-msgid "Launch web browser's shortcut."
-msgstr "Klawisz skrótu uruchomienia przeglądarki WWW."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
-msgid "Lock screen"
-msgstr "Blokada ekranu"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
-msgid "Lock screen's shortcut."
-msgstr "Klawisz skrótu blokady ekranu."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
-msgid "Log out"
-msgstr "Wylogowanie"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
-msgid "Log out's shortcut."
-msgstr "Klawisz skrótu wylogowania."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
-msgid "Next track key's shortcut."
-msgstr "Klawisz skrótu następnej ścieżki."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
-msgid "Pause"
-msgstr "Wstrzymanie"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
-msgid "Pause key's shortcut."
-msgstr "Klawisz skrótu wstrzymania."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
-msgid "Play (or play/pause)"
-msgstr "Odtwarzanie (lub odtwarzanie/wstrzymanie)"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
-msgid "Play (or play/pause) key's shortcut."
-msgstr "Klawisz skrótu odtwarzania (lub odtwarzania/wstrzymania)."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
-msgid "Previous track key's shortcut."
-msgstr "Klawisz skrótu poprzedniej ścieżki."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
-msgid "Search"
-msgstr "Wyszukiwanie"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
-msgid "Search's shortcut."
-msgstr "Klawisz skrótu wyszukiwania."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
-msgid "Skip to next track"
-msgstr "Przejście do następnej ścieżki"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
-msgid "Skip to previous track"
-msgstr "Przejście do poprzedniej ścieżki"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
-msgid "Sleep"
-msgstr "Uśpienie"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
-msgid "Sleep's shortcut."
-msgstr "Klawisz skrótu uśpienia."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
-msgid "Stop playback key"
-msgstr "Klawisz wstrzymania odtwarzania"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
-msgid "Stop playback key's shortcut."
-msgstr "Skrót klawisza wstrzymania odtwarzania."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
-msgid "Volume down"
-msgstr "Ściszenie"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
-msgid "Volume down's shortcut."
-msgstr "Klawisz skrótu ściszenia."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
-msgid "Volume mute"
-msgstr "Wyciszenie"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
-msgid "Volume mute's shortcut"
-msgstr "Klawisz skrótu wyciszenia"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
-msgid "Volume step"
-msgstr "Krok głośności"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:38
-msgid "Volume step as percentage of volume."
-msgstr "Procentowy krok głośności."
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:39
-msgid "Volume up"
-msgstr "Podgłośnienie"
-
-#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
-msgid "Volume up's shortcut."
-msgstr "Klawisz skrótu podgłośnienia."
-
 #~ msgid "GNOME Default"
 #~ msgstr "Domyślne GNOME"
 
@@ -3495,9 +3532,6 @@ msgstr "Klawisz skrótu podgłośnienia."
 #~ msgid ""
 #~ "You can drag image files into the window to set the background picture."
 #~ msgstr "Aby ustawić obraz tła, przeciągnij plik z obrazem do okna."
-
-#~ msgid "Control Center Menu"
-#~ msgstr "Menu Centrum sterowania"
 
 #~ msgid "Sawfish window manager"
 #~ msgstr "Menedżer okien Sawfish"
