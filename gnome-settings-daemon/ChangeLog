@@ -1,3 +1,14 @@
+2002-08-07  Michael Meeks  <michael@ximian.com>
+
+	* gnome-settings-sound.c (stop_esd): flag that
+	we scuppered the remote daemon.
+	(apply_settings): resume it if we killed it,
+	don't kill it more than once.
+	Don't iterate over all the sounds and try to
+	push to the server if we have sound disabled,
+	saves a chunk of time.
+	This fixes the 'toggle sound a lot breaks it' bug.
+
 2002-08-03  Jody Goldberg <jody@gnome.org>
 
 	http://bugzilla.gnome.org/show_bug.cgi?id=88634
