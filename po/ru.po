@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.6\n"
-"POT-Creation-Date: 2000-08-12 15:40+0000\n"
-"PO-Revision-Date: 2000-08-12 16:11+00:00\n"
+"POT-Creation-Date: 2000-08-17 22:02+0000\n"
+"PO-Revision-Date: 2000-08-17 22:04+00:00\n"
 "Last-Translator: Sergey Panov <sipan@mit.edu>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -551,7 +551,7 @@ msgstr ""
 "ошибка инициализации при запуске 'mouse-properties-capplet'.\n"
 "исполнение прервано ...\n"
 
-#: capplets/new-screensaver-properties/preferences.c:286
+#: capplets/new-screensaver-properties/preferences.c:502
 msgid "Custom screensaver. No description available"
 msgstr "Другой хранитель экрана. Описание не доступно"
 
@@ -738,22 +738,24 @@ msgstr "Свойства"
 msgid "label1"
 msgstr "метка1"
 
-#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1103
+#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1263
 msgid ""
 "Cannot find the data to configure this screensaver. Please edit the command "
 "line below."
-msgstr "Не удалось найти данные для настройки этого хранителя экрана. Пожалуйста отредактируйте приведенную ниже командную строку."
+msgstr ""
+"Не удалось найти данные для настройки этого хранителя экрана. Пожалуйста "
+"отредактируйте приведенную ниже командную строку."
 
-#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1108
+#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1268
 msgid "Please enter a command line below."
 msgstr "Пожалуйста, введите командную строку."
 
-#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1123
+#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1283
 msgid "Visual:"
 msgstr "Видимый:"
 
-#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1152
-#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1397
+#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1312
+#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1592
 msgid "Any"
 msgstr "Любой"
 
@@ -1543,45 +1545,61 @@ msgstr ""
 "ошибка инициализации при запуске 'wm-properties-capplet'.\n"
 "исполнение прервано ...\n"
 
-#: libcapplet/capplet-widget.c:77
+#: libcapplet/capplet-widget.c:78
 msgid "id of the capplet -- assigned by the control-center"
 msgstr "идентификатор капплет -- выдается центром управления"
 
-#: libcapplet/capplet-widget.c:77
+#: libcapplet/capplet-widget.c:78
 msgid "ID"
 msgstr "ИД"
 
-#: libcapplet/capplet-widget.c:79
+#: libcapplet/capplet-widget.c:80
 msgid "Multi-capplet id."
 msgstr "Мульти-капплет идентификатор"
 
-#: libcapplet/capplet-widget.c:79
+#: libcapplet/capplet-widget.c:80
 msgid "CAPID"
 msgstr "КАПИД"
 
-#: libcapplet/capplet-widget.c:81
+#: libcapplet/capplet-widget.c:82
 msgid "X ID of the socket it's plugged into"
 msgstr "X ИД используемой розетки "
 
-#: libcapplet/capplet-widget.c:81
+#: libcapplet/capplet-widget.c:82
 msgid "XID"
 msgstr "XИД"
 
-#: libcapplet/capplet-widget.c:83
+#: libcapplet/capplet-widget.c:84
 msgid "IOR of the control-center"
 msgstr "IOR центра управления"
 
-#: libcapplet/capplet-widget.c:83
+#: libcapplet/capplet-widget.c:84
 msgid "IOR"
 msgstr "IOR"
 
-#: libcapplet/capplet-widget.c:85
+#: libcapplet/capplet-widget.c:86
 msgid "Initialize session settings"
 msgstr "Инициализировать свойства сеанса"
 
-#: libcapplet/capplet-widget.c:87
+#: libcapplet/capplet-widget.c:88
 msgid "Ignore default action.  Used for custom init-session cases"
 msgstr "Проигнорировать обычные действия. Для специальных случаев"
+
+#: libcapplet/capplet-widget.c:91
+msgid "Get an XML description of the capplet's state"
+msgstr "Получить XML описание состояния capplet"
+
+#: libcapplet/capplet-widget.c:91
+msgid "DO_GET"
+msgstr "ПОЛУЧИТЬ"
+
+#: libcapplet/capplet-widget.c:93
+msgid "Read an XML description of the capplet's state and apply it"
+msgstr "Прочесть XML описание состояния capplet и применить его"
+
+#: libcapplet/capplet-widget.c:94
+msgid "DO_SET"
+msgstr "УСТАНОВИТЬ"
 
 #: new-control-center/capplet-dir-view.c:107
 msgid "Help on control-center"
