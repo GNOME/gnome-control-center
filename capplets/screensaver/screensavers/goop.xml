@@ -4,22 +4,22 @@
 
     <command arg="-root"/>
 
-    <number label="Number of bubbles to use." low-label="Count:"
+    <number _label="Number of bubbles to use." _low-label="Count:"
             id="count" type="spinbutton" default="10" arg="-count %"
             low="1" high="100"/>
 
-    <number label="Speed of Motion." low-label="Faster" id="delay"
+    <number _label="Speed of Motion." _low-label="Faster" id="delay"
             type="slider" default="2" arg="-delay %" low="1"
-            high-label="Slower" high="500000"/>
+            _high-label="Slower" high="500000"/>
 
-    <boolean label="Display screensaver in monochrome." arg-unset=""
+    <boolean _label="Display screensaver in monochrome." arg-unset=""
              id="monochrome" test="mono" arg-set="-mono"/>
 
-    <boolean label="Have transparent bubbles."
+    <boolean _label="Have transparent bubbles."
              arg-unset="-non-transparent" id="transparent"
              arg-set="-transparent"/>
 
-    <boolean label="Use additive color model."
+    <boolean _label="Use additive color model."
              arg-unset="-subtractive" id="additive"
              arg-set="-additive"/>
 

@@ -4,24 +4,24 @@
 
     <command arg="-root"/>
 
-    <number label="Delay between each step in the maze."
-            low-label="Less Delay" id="speed delay" type="slider"
+    <number _label="Delay between each step in the maze."
+            _low-label="Less Delay" id="speed delay" type="slider"
             default="5000" arg="-solve-delay %" low="1000"
-            high-label="More Delay" high="100000"/>
+            _high-label="More Delay" high="100000"/>
 
     <number
-            label="Delay between drawing the maze and starting the solution."
-            low-label="Less Delay" id="pre-solving delay"
+            _label="Delay between drawing the maze and starting the solution."
+            _low-label="Less Delay" id="pre-solving delay"
             type="slider" default="2000000" arg="-pre-delay %"
-            low="1000000" high-label="More Delay" high="5000000"/>
+            low="1000000" _high-label="More Delay" high="5000000"/>
 
     <number
-            label="Delay between finishing the maze and starting a new one."
-            low-label="Less Delay" id="post-solving delay"
+            _label="Delay between finishing the maze and starting a new one."
+            _low-label="Less Delay" id="post-solving delay"
             type="slider" default="4000000" arg="-post-delay %"
-            low="1000000" high-label="More Delay" high="8000000"/>
+            low="1000000" _high-label="More Delay" high="8000000"/>
 
-    <boolean label="Put a bridge over the logo?" arg-unset=""
+    <boolean _label="Put a bridge over the logo?" arg-unset=""
              id="bridge" arg-set="-bridge"/>
 
 </screensaver>

@@ -4,23 +4,23 @@
 
     <command arg="-root"/>
 
-    <number low-label="Time between redraws:" id="delay" type="slider"
-            default="2" arg="-delay %" low="1" high-label="Seconds"
+    <number _low-label="Time between redraws:" id="delay" type="slider"
+            default="2" arg="-delay %" low="1" _high-label="Seconds"
             high="20"/>
 
-    <number label="Speed of Motion." low-label="Faster" id="cycles"
+    <number _label="Speed of Motion." _low-label="Faster" id="cycles"
             type="slider" default="350" arg="-cycles %" low="1"
-            high-label="Slower" high="500000"/>
+            _high-label="Slower" high="500000"/>
 
-    <number label="Number of Colors" low-label="Colors:" id="colors"
+    <number _label="Number of Colors" _low-label="Colors:" id="colors"
             type="spinbutton" default="64" arg="-ncolors %" low="1"
             high="256"/>
 
-    <number label="Number to use." low-label="Count:" id="count"
+    <number _label="Number to use." _low-label="Count:" id="count"
             type="spinbutton" default="40" arg="-count %" low="5"
             high="1000"/>
 
-    <boolean label="Display screensaver in monochrome." arg-unset=""
+    <boolean _label="Display screensaver in monochrome." arg-unset=""
              id="monochrome" test="mono" arg-set="-mono"/>
 
 </screensaver>

@@ -87,9 +87,9 @@ if test "$PKGCONFIG" = no ; then
 	AC_MSG_ERROR(pkg-config was not found. Please install version 0.8.0 or newer from http://www.freedesktop.org/software.)
 fi
 
-AC_MSG_CHECKING(for pkg-config >= 0.8.0)
+AC_MSG_CHECKING(for pkg-config >= 0.7.0)
 vers=`$PKGCONFIG --version | awk 'BEGIN { FS = "."; } { print $1 * 1000000 + $2 * 1000 + $3}'`
-if test "$vers" -ge 8000; then
+if test "$vers" -ge 7000; then
 	AC_MSG_RESULT(found)
 else
 	AC_MSG_ERROR(You need at least pkg-config 0.8.0 or greater for this version of control-center. Please install a newer version from http://www.freedesktop.org/software.)
@@ -111,7 +111,7 @@ PKG_CHECK_MODULES(SCREENSAVER_CAPPLET, $capplet_modules gal)
 PKG_CHECK_MODULES(ROLLBACK_CAPPLET, $capplet_modules)
 PKG_CHECK_MODULES(GNOMECC, gnomeui libglade xml gdk_pixbuf gnomecanvaspixbuf bonobo bonobox gtkhtml)
 PKG_CHECK_MODULES(RMHELPER, gnomeui gnomecanvaspixbuf)
-PKG_CHECK_MODULES(ARCHIVER, bonobo xml)
+PKG_CHECK_MODULES(ARCHIVER, bonobo bonobo_conf xml)
 PKG_CHECK_MODULES(MONIKER, bonobo bonobo_conf xml)
 PKG_CHECK_MODULES(CONFIG_ARCHIVER, gnome xml)
 

@@ -3,24 +3,20 @@ pixmap_DATA = \
 	no-hack.png 
 
 Applicationsdir = $(datadir)/control-center/capplets
-Applications_DATA = \
-	screensaver-properties.desktop
+Applications_in_files = screensaver-properties.desktop.in
+Applications_DATA = $(Applications_in_files:.desktop.in=.desktop)
+@XML_I18N_MERGE_DESKTOP_RULE@
 
 pApplicationsdir = $(datadir)/gnome/apps/Settings/Desktop
-pApplications_DATA = \
-	screensaver-properties.desktop
+pApplications_DATA = $(Applications_DATA)
 
 Gladedir = $(datadir)/control-center-data
 Glade_DATA = \
 	screensaver-properties.glade
 
-glade_msgs = \
-	screensaver-properties.glade.h
-
 SUBDIRS = screensavers
 
-EXTRA_DIST = ChangeLog $(Applications_DATA) $(pixmap_DATA) \
-	$(Glade_DATA) $(glade_msgs)
+EXTRA_DIST = ChangeLog $(Applications_DATA) $(pixmap_DATA) $(Glade_DATA)
 
 INCLUDES = \
         -DGNOMELOCALEDIR=\""$(datadir)/locale"\" \

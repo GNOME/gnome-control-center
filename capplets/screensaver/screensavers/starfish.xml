@@ -4,26 +4,26 @@
 
     <command arg="-root"/>
 
-    <number label="Speed of animation." low-label="Fast" id="delay"
+    <number _label="Speed of animation." _low-label="Fast" id="delay"
             type="slider" default="10000" arg="-delay %" low="1"
-            high-label="Slow" high="1000000"/>
+            _high-label="Slow" high="1000000"/>
 
-    <number label="Thickness of color bands (0 = Random)"
-            low-label="Slim" id="thickness" type="spinbutton"
+    <number _label="Thickness of color bands (0 = Random)"
+            _low-label="Slim" id="thickness" type="spinbutton"
             default="0" arg="-thickness %" low="0" high="15"/>
 
-    <number label="Quickness of rotation at each step (0 = Random)"
-            low-label="Slow" id="rotation" type="spinbutton"
+    <number _label="Quickness of rotation at each step (0 = Random)"
+            _low-label="Slow" id="rotation" type="spinbutton"
             default="0" arg="-rotation %" low="0" high="12"/>
 
-    <number label="Duration of current shape." low-label="Seconds"
+    <number _label="Duration of current shape." _low-label="Seconds"
             id="duration" type="spinbutton" default="30"
             arg="-duration %" low="1" high="60"/>
 
-    <boolean label="Use raw shapes " arg-unset="-no-blob" id="blob"
+    <boolean _label="Use raw shapes " arg-unset="-no-blob" id="blob"
              arg-set="-blob"/>
 
-    <boolean label="Change to display in monochrome." arg-unset=""
+    <boolean _label="Change to display in monochrome." arg-unset=""
              id="monochrome" test="mono" arg-set="-mono"/>
 
 </screensaver>

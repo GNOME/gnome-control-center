@@ -4,43 +4,43 @@
     <command arg="-root"/>
     <hgroup>
         <select id="shape">
-	    <option id="lines" label="Lines" 
+	    <option id="lines" _label="Lines" 
                     enable="trail_type,width" arg-set="-poly 2"/>
-	    <option id="poly" label="Polygons" 
+	    <option id="poly" _label="Polygons" 
                     enable="no_pts" test="poly > 2"/>
         </select>
-        <number id="no_pts" label="Number of points:" 
+        <number id="no_pts" _label="Number of points:" 
                 type="spinbutton" low="3" high="16" default="3"
 		arg="-poly %"/>
     </hgroup>
     <select id="trail_type">
-	<option id="discrete" label="Discrete Lines" enable="spread"/>
-	<option id="solid" label="Solid Trails" 
+	<option id="discrete" _label="Discrete Lines" enable="spread"/>
+	<option id="solid" _label="Solid Trails" 
 	        arg-set="-solid" test="solid and not (transparent or xor)"/>
-	<option id="transparent" label="Transparent Trails" 
+	<option id="transparent" _label="Transparent Trails" 
 		arg-set="-solid -transparent" test="solid and transparent"/>
-	<option id="xor" label="XOR Trails" 
+	<option id="xor" _label="XOR Trails" 
 		arg-set="-solid -xor" test="solid and xor"/>
     </select>
-    <boolean id="gravity" label="Trails attract each other" 
+    <boolean id="gravity" _label="Trails attract each other" 
              arg-set="-gravity" test="gravity"/>
-    <number id="speed" label="Speed" low-label="Slow" high-label="Fast" 
+    <number id="speed" _label="Speed" _low-label="Slow" _high-label="Fast" 
             type="slider" low="0" high="20000" default="10000" arg="-delay %" 
             from-cli-conv="20000 - var" to-cli-conv="20000 - var"/>
-    <number id="length" label="Length" low-label="Short" high-label="Long" 
+    <number id="length" _label="Length" _low-label="Short" _high-label="Long" 
             type="slider" low="0" high="1000" default="50" arg="-segments %"/>
-    <number id="width" label="Width" low-label="Narrow" high-label="Wide" 
+    <number id="width" _label="Width" _low-label="Narrow" _high-label="Wide" 
             type="slider" low="0" high="1000" default="100" arg="-size %"/>
-    <number id="spread" label="Spread between lines" 
-            low-label="Short" high-label="Long" 
+    <number id="spread" _label="Spread between lines" 
+            _low-label="Short" _high-label="Long" 
             type="slider" low="0" high="30" default="8" arg="-spread %"/>
-    <number id="count" label="Number of trails:" 
+    <number id="count" _label="Number of trails:" 
             type="spinbutton" low="1" high="100" default="1" arg="-count %"/>
     <select id="use_color">
-	<option id="color" label="Full Color" enable="shift"/>
-	<option id="mono" label="Monochrome" arg-set="-mono" test="mono"/>
+	<option id="color" _label="Full Color" enable="shift"/>
+	<option id="mono" _label="Monochrome" arg-set="-mono" test="mono"/>
     </select>
-    <number id="shift" label="Color contrast" 
-            low-label="Low" high-label="High" 
+    <number id="shift" _label="Color contrast" 
+            _low-label="Low" _high-label="High" 
             type="slider" low="0" high="25" default="3" arg="-color-shift %"/>
 </screensaver>

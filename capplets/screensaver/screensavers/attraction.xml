@@ -3,38 +3,38 @@
 <screensaver name="attraction">
     <command arg="-root"/>
     <select id="mode">
-	<option id="balls" label="Balls" arg-set="-mode balls"/>
-	<option id="lines" label="Lines" 
+	<option id="balls" _label="Balls" arg-set="-mode balls"/>
+	<option id="lines" _label="Lines" 
 	        arg-set="-mode lines" test="mode = lines"/>
-	<option id="tails" label="Tails" 
+	<option id="tails" _label="Tails" 
 	        arg-set="-mode tails" test="mode = tails"/>
-	<option id="polygons" label="Polygons" 
+	<option id="polygons" _label="Polygons" 
 		arg-set="-mode polygons" test="mode = polygons"/>
-	<option id="splines" label="Splines"
+	<option id="splines" _label="Splines"
 		arg-set="-mode splines" test="mode = splines"/>
     </select>
-    <number id="threshold" label="Threshold of repulsion" 
-	    low-label="Small" high-label="Large"
+    <number id="threshold" _label="Threshold of repulsion" 
+	    _low-label="Small" _high-label="Large"
 	    low="0" high="500" default="100"
 	    type="slider" arg="-threshold %"/>
-    <number id="segments" label="Length of Trail"
-	    low-label="Short" high-label="Long"
+    <number id="segments" _label="Length of Trail"
+	    _low-label="Short" _high-label="Long"
 	    low="1" high="1000" default="500"
 	    type="slider" arg="-segments %"/>
-    <number id="speed" label="Speed"
-	    low-label="Slow" high-label="Fast" type="slider" arg="-delay %" 
+    <number id="speed" _label="Speed"
+	    _low-label="Slow" _high-label="Fast" type="slider" arg="-delay %" 
 	    low="0" high="20000" default="10000"
 	    from-cli-conv="20000 - var" to-cli-conv="20000 - var"/>
     <select id="use_color">
-	<option id="color" label="Full Color"
+	<option id="color" _label="Full Color"
 	        enable="number_colors,color_contrast"/>
-	<option id="mono" label="Monochrome" arg-set="-mono" test="mono"/>
+	<option id="mono" _label="Monochrome" arg-set="-mono" test="mono"/>
     </select>
-    <number id="number_colors" label="Number of Colors"
+    <number id="number_colors" _label="Number of Colors"
 	    type="spinbutton" low="1" high="400" default="200" 
 	    arg="-colors %"/>
-    <number id="color_contrast" label="Color Contrast"
-	    low-label="Low" high-label="High" type="slider"
+    <number id="color_contrast" _label="Color Contrast"
+	    _low-label="Low" _high-label="High" type="slider"
 	    low="0" high="25" default="3" arg="-color-shift %"/>
 </screensaver>
 

@@ -4,15 +4,15 @@
 
     <command arg="-root"/>
 
-    <number label="Speed of Motion." low-label="Faster" id="delay"
+    <number _label="Speed of Motion." _low-label="Faster" id="delay"
             type="slider" default="2" arg="-delay %" low="1"
-            high-label="Slower" high="500000"/>
+            _high-label="Slower" high="500000"/>
 
-    <number label="Time finished product is shown."
-            low-label="Seconds" id="holdtime" type="spinbutton"
+    <number _label="Time finished product is shown."
+            _low-label="Seconds" id="holdtime" type="spinbutton"
             default="3" arg="-holdtime %" low="1" high="15"/>
 
-    <boolean label="Display screensaver in monochrome." arg-unset=""
+    <boolean _label="Display screensaver in monochrome." arg-unset=""
              id="monochrome" test="mono" arg-set="-mono"/>
 
 </screensaver>

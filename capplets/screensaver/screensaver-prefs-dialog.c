@@ -789,7 +789,7 @@ get_spinbutton (xmlNodePtr node, GtkWidget **widget)
 	g_return_val_if_fail (widget != NULL, NULL);
 	g_return_val_if_fail (node != NULL, NULL);
 
-	label_str = xmlGetProp (node, "label");
+	label_str = xmlGetProp (node, "_label");
 	low_val = xmlGetProp (node, "low");
 	high_val = xmlGetProp (node, "high");
 	default_val = xmlGetProp (node, "default");
@@ -847,7 +847,7 @@ get_check_button (ScreensaverPrefsDialog *dialog, xmlNodePtr node,
 	g_return_val_if_fail (widget != NULL, NULL);
 	g_return_val_if_fail (node != NULL, NULL);
 
-	label = xmlGetProp (node, "label");
+	label = xmlGetProp (node, "_label");
 
 	if (!label) return NULL;
 
@@ -883,7 +883,7 @@ get_select_widget (ScreensaverPrefsDialog *dialog, xmlNodePtr select_data,
 
 	g_return_val_if_fail (widget != NULL, NULL);
 
-	label_str = xmlGetProp (select_data, "label");
+	label_str = xmlGetProp (select_data, "_label");
 
 	option_menu = gtk_option_menu_new ();
 	menu = gtk_menu_new ();
@@ -898,7 +898,7 @@ get_select_widget (ScreensaverPrefsDialog *dialog, xmlNodePtr select_data,
 			     select_data);
 
 	for (node = select_data->childs; node; node = node->next) {
-		option_str = xmlGetProp (node, "label");
+		option_str = xmlGetProp (node, "_label");
 		if (!option_str) continue;
 
 		menu_item = gtk_menu_item_new_with_label (_(option_str));
@@ -953,7 +953,7 @@ get_file_entry (ScreensaverPrefsDialog *dialog, xmlNodePtr node,
 	g_return_val_if_fail (widget != NULL, NULL);
 	g_return_val_if_fail (node != NULL, NULL);
 
-	label_str = xmlGetProp (node, "label");
+	label_str = xmlGetProp (node, "_label");
 	default_str = xmlGetProp (node, "default");
 
 	entry = gnome_file_entry_new (NULL, NULL);
@@ -1002,7 +1002,7 @@ get_entry (ScreensaverPrefsDialog *dialog, xmlNodePtr node,
 	g_return_val_if_fail (widget != NULL, NULL);
 	g_return_val_if_fail (node != NULL, NULL);
 
-	label_str = xmlGetProp (node, "label");
+	label_str = xmlGetProp (node, "_label");
 	default_str = xmlGetProp (node, "default");
 
 	entry = gtk_entry_new ();
@@ -1061,9 +1061,9 @@ place_number (GtkTable *table, xmlNodePtr node, gint *row)
 	if (!type) return NULL;
 
 	if (!strcmp (type, "slider")) {
-		label_str = xmlGetProp (node, "label");
-		low_str = xmlGetProp (node, "low-label");
-		high_str = xmlGetProp (node, "high-label");
+		label_str = xmlGetProp (node, "_label");
+		low_str = xmlGetProp (node, "_low-label");
+		high_str = xmlGetProp (node, "_high-label");
 		default_val = xmlGetProp (node, "default");
 		low_val = xmlGetProp (node, "low");
 		high_val = xmlGetProp (node, "high");

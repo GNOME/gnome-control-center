@@ -4,20 +4,20 @@
 
     <command arg="-root"/>
 
-    <number label="Speed of Motion." low-label="Faster" id="delay"
+    <number _label="Speed of Motion." _low-label="Faster" id="delay"
             type="slider" default="2" arg="-delay %" low="1"
-            high-label="Slower" high="500000"/>
+            _high-label="Slower" high="500000"/>
 
-    <boolean label="Draw circles instead of pixmap bubbles."
+    <boolean _label="Draw circles instead of pixmap bubbles."
              arg-unset="" id="simple" arg-set="-simple"/>
 
-    <boolean label="Don't hide bubbles when they pop." arg-unset=""
+    <boolean _label="Don't hide bubbles when they pop." arg-unset=""
              id="broken" arg-set="-broken"/>
 
-    <boolean label="Bubbles exist in three dimensions." arg-unset=""
+    <boolean _label="Bubbles exist in three dimensions." arg-unset=""
              id="3d" arg-set="-3D"/>
 
-    <boolean label="Display screensaver in monochrome." arg-unset=""
+    <boolean _label="Display screensaver in monochrome." arg-unset=""
              id="monochrome" test="mono" arg-set="-mono"/>
 
 </screensaver>

@@ -4,20 +4,20 @@
 
     <command arg="-root"/>
 
-    <number label="Time to show each picture." low-label="Shorter"
+    <number _label="Time to show each picture." _low-label="Shorter"
             id="delay" type="slider" default="5" arg="-delay %"
-            low="2" high-label="Longer" high="30"/>
+            low="2" _high-label="Longer" high="30"/>
 
-    <number label="Maximum number of lines." low-label="Less"
+    <number _label="Maximum number of lines." _low-label="Less"
             id="maxlines" type="slider" default="200"
-            arg="-maxlines %" low="15" high-label="More" high="5000"/>
+            arg="-maxlines %" low="15" _high-label="More" high="5000"/>
 
-    <number label="Time to fade away." low-label="Shorter"
+    <number _label="Time to fade away." _low-label="Shorter"
             id="fadedelay" type="slider" default="20"
-            arg="-fadedelay %" low="1" high-label="Longer"
+            arg="-fadedelay %" low="1" _high-label="Longer"
             high="500000"/>
 
-    <boolean label="Display screensaver in monochrome." arg-unset=""
+    <boolean _label="Display screensaver in monochrome." arg-unset=""
              id="monochrome" test="mono" arg-set="-mono"/>
 
 </screensaver>

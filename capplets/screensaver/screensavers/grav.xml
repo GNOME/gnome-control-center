@@ -4,21 +4,21 @@
 
     <command arg="-root"/>
 
-    <number label="Number of Colors." low-label="Colors:" id="colors"
+    <number _label="Number of Colors." _low-label="Colors:" id="colors"
             type="spinbutton" default="200" arg="-ncolors %" low="1"
             high="256"/>
 
-    <number label="Number of planets to use." low-label="Count:"
+    <number _label="Number of planets to use." _low-label="Count:"
             id="count" type="spinbutton" default="12" arg="-count %"
             low="1" high="50"/>
 
-    <boolean label="Display screensaver in monochrome." arg-unset=""
+    <boolean _label="Display screensaver in monochrome." arg-unset=""
              id="monochrome" test="mono" arg-set="-mono"/>
 
-    <boolean label="Orbit should decay." arg-unset="-no-decay"
+    <boolean _label="Orbit should decay." arg-unset="-no-decay"
              id="decay" arg-set="-decay"/>
 
-    <boolean label="Objects should leave trails behind them."
+    <boolean _label="Objects should leave trails behind them."
              arg-unset="-no-trail" id="trail" arg-set="-trail"/>
 
 </screensaver>

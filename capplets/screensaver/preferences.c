@@ -462,7 +462,7 @@ screensaver_read_xml (xmlNodePtr saver_node)
 	saver = screensaver_new ();
 	saver->enabled = FALSE;
 
-	saver->label = g_strdup (xmlGetProp (saver_node, "label"));
+	saver->label = g_strdup (xmlGetProp (saver_node, "_label"));
 
 	for (node = saver_node->childs; node; node = node->next) {
 		if (!strcmp (node->name, "name"))
@@ -486,7 +486,7 @@ screensaver_write_xml (Screensaver *saver)
 
 	saver_node = xmlNewNode (NULL, "screensaver");
 
-	xmlNewProp (saver_node, "label", saver->label);
+	xmlNewProp (saver_node, "_label", saver->label);
 	xmlNewChild (saver_node, NULL, "name", saver->name);
 	xmlNewChild (saver_node, NULL, "command-line", saver->command_line);
 	xmlNewChild (saver_node, NULL, "visual", saver->visual);

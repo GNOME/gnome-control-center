@@ -1,10 +1,10 @@
 Applicationsdir = $(datadir)/control-center/capplets
-Applications_DATA = \
-	sound-properties.desktop
+Applications_in_files = sound-properties.desktop.in
+Applications_DATA = $(Applications_in_files:.desktop.in=.desktop)
+@XML_I18N_MERGE_DESKTOP_RULE@
 
 pApplicationsdir = $(datadir)/gnome/apps/Settings/Desktop
-pApplications_DATA = \
-	sound-properties.desktop
+pApplications_DATA = $(Applications_DATA)
 
 Gladedir = $(datadir)/control-center/interfaces
 Glade_DATA = \
@@ -18,10 +18,7 @@ oafdir = $(datadir)/oaf
 oaf_DATA = \
 	Bonobo_Control_Capplet_sound_properties.oaf
 
-glade_msgs = \
-	sound-properties.glade.h
-
-EXTRA_DIST = ChangeLog $(Applications_DATA) $(Glade_DATA) $(glade_msgs) $(oaf_DATA) $(defaults_DATA)
+EXTRA_DIST = ChangeLog $(Applications_DATA) $(Glade_DATA) $(oaf_DATA) $(defaults_DATA)
 
 INCLUDES = \
         -DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\

@@ -4,15 +4,15 @@
 
     <command arg="-root"/>
 
-    <number label="Duration of laser burst." low-label="Shorter"
+    <number _label="Duration of laser burst." _low-label="Shorter"
             id="duration" type="slider" default="200" arg="-cycles %"
-            low="10" high-label="Longer" high="1000"/>
+            low="10" _high-label="Longer" high="1000"/>
 
-    <number label="Size of burst." low-label="Segments:" id="count"
+    <number _label="Size of burst." _low-label="Segments:" id="count"
             type="spinbutton" default="10" arg="-count %" low="1"
             high="20"/>
 
-    <boolean label="Display screensaver in monochrome." arg-unset=""
+    <boolean _label="Display screensaver in monochrome." arg-unset=""
              id="mono" arg-set="-mono"/>
 
 </screensaver>

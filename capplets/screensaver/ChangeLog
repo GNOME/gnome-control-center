@@ -1,3 +1,13 @@
+2001-07-14  Carlos Perelló Marín <carlos@gnome-db.org>
+
+	* screensavers/*.xml: /s/label/_label, /s/low-label/_low-label/,
+	/s/high-label/_high-label/: Changed to let xml-i18n-tools extract
+	this labels.
+	* extract-labels.c: Removed, now, we use xml-i18n-tools.
+	* preferences.c: /s/label/_label, /s/low-label/_low-label/,
+	/s/high-label/_high-label/: Changed to sync with the xml changes.
+	* screensaver-prefs-dialog.c: ditto.
+
 2001-07-03  Richard Hestilow  <hestilow@ximian.com>
 
 	* prefs-widget.c:

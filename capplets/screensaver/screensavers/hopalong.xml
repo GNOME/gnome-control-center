@@ -4,19 +4,19 @@
 
     <command arg="-root"/>
 
-    <number label="Number of Colors." low-label="Colors:" id="colors"
+    <number _label="Number of Colors." _low-label="Colors:" id="colors"
             type="spinbutton" default="200" arg="-ncolors %" low="1"
             high="256"/>
 
-    <number label="Speed of Motion." low-label="Faster" id="cycles"
+    <number _label="Speed of Motion." _low-label="Faster" id="cycles"
             type="slider" default="2500" arg="-cycles %" low="1"
-            high-label="Slower" high="500000"/>
+            _high-label="Slower" high="500000"/>
 
-    <number label="Number of pixels before a color change."
-            low-label="Less" id="count" type="slider" default="1000"
-            arg="-count %" low="10" high-label="More" high="10000"/>
+    <number _label="Number of pixels before a color change."
+            _low-label="Less" id="count" type="slider" default="1000"
+            arg="-count %" low="10" _high-label="More" high="10000"/>
 
-    <boolean label="Display screensaver in monochrome." arg-unset=""
+    <boolean _label="Display screensaver in monochrome." arg-unset=""
              id="monochrome" test="mono" arg-set="-mono"/>
 
 </screensaver>

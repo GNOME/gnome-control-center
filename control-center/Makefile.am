@@ -12,7 +12,9 @@ splash_DATA = \
 	left.png
 
 sysdir = $(datadir)/gnome/apps/Settings
-sys_DATA = gnomecc.desktop
+sys_in_files = gnomecc.desktop.in
+sys_DATA = $(sys_in_files:.desktop.in=.desktop)
+@XML_I18N_MERGE_DESKTOP_RULE@
 
 gladedir = $(datadir)/control-center/interfaces
 glade_DATA = \
@@ -49,4 +51,4 @@ gnomecc_LDADD = \
 	@GNOMECC_LIBS@					\
 	$(INTLLIBS)
 
-EXTRA_DIST = gnomecc.desktop $(appicon_DATA) $(splash_DATA) $(glade_DATA)
+EXTRA_DIST = gnomecc.desktop.in $(appicon_DATA) $(splash_DATA) $(glade_DATA)

@@ -3,11 +3,11 @@
 <screensaver name="BSOD">
     <command arg="-root"/>
 	<!-- goes from 3 ... INT_MAX -->
-    <number id="speed" label="Speed" low-label="Slow" high-label="Fast" 
+    <number id="speed" _label="Speed" _low-label="Slow" _high-label="Fast" 
             type="slider" low="0" high="20003" default="10000" arg="-delay %" 
             from-cli-conv="20000 - var" to-cli-conv="20000 - var"/>
     <select id="use_color">
-	<option id="color" label="Full Color"/>
-	<option id="mono" label="Monochrome" arg-set="-mono" test="mono"/>
+	<option id="color" _label="Full Color"/>
+	<option id="mono" _label="Monochrome" arg-set="-mono" test="mono"/>
     </select>
 </screensaver>

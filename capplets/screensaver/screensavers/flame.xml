@@ -4,24 +4,24 @@
 
     <command arg="-root"/>
 
-    <number label="Number of fractals to generate."
-            low-label="Iterations:" id="iterations" type="spinbutton"
+    <number _label="Number of fractals to generate."
+            _low-label="Iterations:" id="iterations" type="spinbutton"
             default="25" arg="-iterations %" low="1" high="250"/>
 
-    <number label="Pixels per fractal." low-label="Less" id="points"
+    <number _label="Pixels per fractal." _low-label="Less" id="points"
             type="slider" default="10000" arg="-points %" low="1000"
-            high-label="More" high="50000"/>
+            _high-label="More" high="50000"/>
 
-    <number label="Speed of Motion." low-label="Faster" id="delay"
+    <number _label="Speed of Motion." _low-label="Faster" id="delay"
             type="slider" default="2" arg="-delay %" low="1"
-            high-label="Slower" high="500000"/>
+            _high-label="Slower" high="500000"/>
 
-    <number label="Time finished product is shown." low-label="Faster"
+    <number _label="Time finished product is shown." _low-label="Faster"
             id="delay2" type="slider" default="2000000"
-            arg="-delay2 %" low="100000" high-label="Slower"
+            arg="-delay2 %" low="100000" _high-label="Slower"
             high="7000000"/>
 
-    <boolean label="Display screensaver in monochrome." arg-unset=""
+    <boolean _label="Display screensaver in monochrome." arg-unset=""
              id="monochrome" test="mono" arg-set="-mono"/>
 
 </screensaver>

@@ -1,19 +1,16 @@
 Applicationsdir = $(datadir)/control-center/capplets
-Applications_DATA = \
-	rollback.desktop
+Applications_in_files = rollback.desktop.in
+Applications_DATA = $(Applications_in_files:.desktop.in=.desktop)
+@XML_I18N_MERGE_DESKTOP_RULE@
 
 pApplicationsdir = $(datadir)/gnome/apps/Settings/Desktop
-pApplications_DATA = \
-	rollback.desktop
+pApplications_DATA = $(Applications_DATA)
 
 Gladedir = $(datadir)/control-center-data
 Glade_DATA = \
 	rollback.glade
 
-glade_msgs = \
-	rollback.glade.h
-
-EXTRA_DIST = $(Applications_DATA) $(Glade_DATA) $(glade_msgs)
+EXTRA_DIST = $(Applications_DATA) $(Glade_DATA)
 
 INCLUDES = \
         -DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\

@@ -2,10 +2,10 @@
 
 <screensaver name="rorschach">
 	<command arg="-root"/>
-	<number id="iterations" label="Number of Iterations" low-label="Small" high-label="Large" type="slider" low="0" high="2000" default="1500" arg="-iterations %" from-cli-conv="var / 200" to-cli-conv="var * 200"/>
-	<number id="offset" label="Offset" low-label="Small" high-label="Large" type="slider" low="0" high="50" default="10" arg="-offset %"/>
-	<boolean id="xsymmetry" label="With X-axis Symmetry" arg-set="-xsymmetry" />
-	<boolean id="ysymmetry" label="With Y-axis Symmetry" arg-set="-ysymmetry" />
-	<number id="delay" label="Delay before next redraw" low-label="Short" high-label="Long" type="slider" low="0" high="50" default="5"  arg="-delay %" />
-	<number id="erase" label="Speed to clear the screen" type="spinbutton" low="0" high="20" default="3" arg="-erase-speed %" />
+	<number id="iterations" _label="Number of Iterations" _low-label="Small" _high-label="Large" type="slider" low="0" high="2000" default="1500" arg="-iterations %" from-cli-conv="var / 200" to-cli-conv="var * 200"/>
+	<number id="offset" _label="Offset" _low-label="Small" _high-label="Large" type="slider" low="0" high="50" default="10" arg="-offset %"/>
+	<boolean id="xsymmetry" _label="With X-axis Symmetry" arg-set="-xsymmetry" />
+	<boolean id="ysymmetry" _label="With Y-axis Symmetry" arg-set="-ysymmetry" />
+	<number id="delay" _label="Delay before next redraw" _low-label="Short" _high-label="Long" type="slider" low="0" high="50" default="5"  arg="-delay %" />
+	<number id="erase" _label="Speed to clear the screen" type="spinbutton" low="0" high="20" default="3" arg="-erase-speed %" />
 </screensaver>

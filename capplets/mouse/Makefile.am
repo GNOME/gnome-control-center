@@ -5,21 +5,18 @@ pixmap_DATA = \
 	mouse-right.png
 
 Applicationsdir = $(datadir)/control-center/capplets
-Applications_DATA = \
-	mouse-properties.desktop
+Applications_in_files = mouse-properties.desktop.in
+Applications_DATA = $(Applications_in_files:.desktop.in=.desktop)
+@XML_I18N_MERGE_DESKTOP_RULE@
 
 pApplicationsdir = $(datadir)/gnome/apps/Settings/Desktop
-pApplications_DATA = \
-	mouse-properties.desktop
+pApplications_DATA = $(Applications_DATA)
 
 Gladedir = $(datadir)/control-center-data
 Glade_DATA = \
 	mouse-properties.glade
 
-glade_msgs = \
-	mouse-properties.glade.h
-
-EXTRA_DIST = $(Applications_DATA) $(Glade_DATA) $(glade_msgs) $(pixmap_DATA)
+EXTRA_DIST = $(Applications_DATA) $(Glade_DATA) $(pixmap_DATA)
 
 INCLUDES = \
         -DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\

@@ -1,19 +1,16 @@
 Applicationsdir = $(datadir)/control-center/capplets
-Applications_DATA = \
-	background-properties.desktop
+Applications_in_files = background-properties.desktop.in
+Applications_DATA = $(Applications_in_files:.desktop.in=.desktop)
+@XML_I18N_MERGE_DESKTOP_RULE@
 
 pApplicationsdir = $(datadir)/gnome/apps/Settings/Desktop
-pApplications_DATA = \
-	background-properties.desktop
+pApplications_DATA = $(Applications_DATA)
 
 Gladedir = $(datadir)/control-center-data
 Glade_DATA = \
 	background-properties.glade
 
-glade_msgs = \
-	background-properties.glade.h
-
-EXTRA_DIST = $(Applications_DATA) $(Glade_DATA) $(glade_msgs)
+EXTRA_DIST = $(Applications_DATA) $(Glade_DATA)
 
 INCLUDES = \
         -DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\

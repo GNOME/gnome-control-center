@@ -4,19 +4,19 @@
 
     <command arg="-root"/>
 
-    <number label="Number of segments." low-label="Segments"
+    <number _label="Number of segments." _low-label="Segments"
             id="segments" type="spinbutton" default="7"
             arg="-nsegments %" low="1" high="50"/>
 
-    <number label="Number of trails." low-label="Less" id="trails"
+    <number _label="Number of trails." _low-label="Less" id="trails"
             type="slider" default="100" arg="-ntrails %" low="10"
-            high-label="More" high="500"/>
+            _high-label="More" high="500"/>
 
-    <number label="Speed of Motion." low-label="Faster" id="delay"
+    <number _label="Speed of Motion." _low-label="Faster" id="delay"
             type="slider" default="2" arg="-delay %" low="1"
-            high-label="Slower" high="500000"/>
+            _high-label="Slower" high="500000"/>
 
-    <boolean label="Display screensaver in monochrome."
+    <boolean _label="Display screensaver in monochrome."
              arg-unset="-color_mode nice" id="monochrome"
              arg-set="-color_mode mono"/>
 

@@ -1,7 +1,14 @@
-2001-07-15  Kjartan Maraas  <kmaraas@gnome.org>
+2001-07-14  Carlos Perelló Marín <carlos@gnome-db.org>
 
-	* configure.in: Added AM_PROG_XML_I18N_TOOLS.
-	
+	* *.directory: Renamed to *.directory.in to be used with
+	xml-i18n-tools.
+	* *.desktop: Renamed to *.desktop to be used with xml-i18n-tools.
+	* *.glade: Modified to not generate the glade.h files.
+	* *.glade.h: Removed.
+	* Makefile.am: Modify to use xml-i18n-tools
+	* configure.in: ditto.
+	* autogen.sh: ditto, now we use the macros/autogen.sh
+
 2001-07-13  Chema Celorio  <chema@celorio.com>
 
 	* configure.in (capplet_modules): wait, we don't need gnome-vfs

@@ -4,28 +4,28 @@
 
     <command arg="-root"/>
 
-    <number label="Number of Colors." low-label="Colors:" id="colors"
+    <number _label="Number of Colors." _low-label="Colors:" id="colors"
             type="spinbutton" default="64" arg="-ncolors %" low="1"
             high="256"/>
 
-    <number label="Speed of Motion." low-label="Faster" id="delay"
+    <number _label="Speed of Motion." _low-label="Faster" id="delay"
             type="slider" default="2" arg="-delay %" low="1"
-            high-label="Slower" high="500000"/>
+            _high-label="Slower" high="500000"/>
 
-    <number label="Number of polygons to use." low-label="Count:"
+    <number _label="Number of polygons to use." _low-label="Count:"
             id="count" type="spinbutton" default="1000" arg="-count %"
             low="1" high="5000"/>
 
-    <boolean label="Center image." arg-unset="-no-centre" id="centre"
+    <boolean _label="Center image." arg-unset="-no-centre" id="centre"
              arg-set="-centre"/>
 
-    <boolean label="Display screensaver in monochrome." arg-unset=""
+    <boolean _label="Display screensaver in monochrome." arg-unset=""
              id="monochrome" test="mono" arg-set="-mono"/>
 
-    <boolean label="Have at maximum size" arg-unset="-no-maxsize"
+    <boolean _label="Have at maximum size" arg-unset="-no-maxsize"
              id="maxsize" arg-set="-maxsize"/>
 
-    <boolean label="Cell" arg-unset="-no-cell" id="cell"
+    <boolean _label="Cell" arg-unset="-no-cell" id="cell"
              arg-set="-cell"/>
 
 </screensaver>

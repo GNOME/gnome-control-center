@@ -4,19 +4,19 @@
 
     <command arg="-root"/>
 
-    <number label="Number of Colors." low-label="Colors:" id="colors"
+    <number _label="Number of Colors." _low-label="Colors:" id="colors"
             type="spinbutton" default="100" arg="-ncolors %" low="1"
             high="256"/>
 
-    <number label="Delay between redraws." low-label="Faster"
+    <number _label="Delay between redraws." _low-label="Faster"
             id="cycles" type="slider" default="2" arg="-cycles %"
-            low="1" high-label="Slower" high="500000"/>
+            low="1" _high-label="Slower" high="500000"/>
 
-    <number label="Number of trees to use." low-label="Count:"
+    <number _label="Number of trees to use." _low-label="Count:"
             id="count" type="spinbutton" default="100" arg="-count %"
             low="1" high="1000"/>
 
-    <boolean label="Display screensaver in monochrome." arg-unset=""
+    <boolean _label="Display screensaver in monochrome." arg-unset=""
              id="monochrome" test="mono" arg-set="-mono"/>
 
 </screensaver>

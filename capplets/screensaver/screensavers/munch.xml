@@ -4,17 +4,17 @@
 
     <command arg="-root"/>
 
-    <number label="Speed of Motion." low-label="Faster" id="delay"
+    <number _label="Speed of Motion." _low-label="Faster" id="delay"
             type="slider" default="2" arg="-delay %" low="1"
-            high-label="Slower" high="500000"/>
+            _high-label="Slower" high="500000"/>
 
-    <boolean label="Use XOR drawing function." arg-unset="-no-xor"
+    <boolean _label="Use XOR drawing function." arg-unset="-no-xor"
              id="xor" arg-set="-xor"/>
 
-    <boolean label="Draw square at weird starting points."
+    <boolean _label="Draw square at weird starting points."
              arg-unset="-no-shift" id="shift" arg-set="-shift"/>
 
-    <boolean label="Display screensaver in monochrome." arg-unset=""
+    <boolean _label="Display screensaver in monochrome." arg-unset=""
              id="monochrome" test="mono" arg-set="-mono"/>
 
 </screensaver>
