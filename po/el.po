@@ -17,7 +17,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 1.5.5\n"
-"POT-Creation-Date: 2002-04-29 14:47-0500\n"
+"POT-Creation-Date: 2002-05-06 17:01-0500\n"
 "PO-Revision-Date: 2001-02-18 23:12:25+0900\n"
 "Last-Translator: Simos Xenitellis <simos@hellug.gr>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
@@ -357,6 +357,79 @@ msgstr ""
 
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:95
+#, c-format
+msgid "%i of %i"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:119
+#, c-format
+msgid "Transferring: %s"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:126
+#, c-format
+msgid "From: %s"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:134
+#, c-format
+msgid "To: %s"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:185
+msgid "From URI"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:186
+msgid "URI currently transferring from"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:193
+msgid "To URI"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:194
+msgid "URI currently transferring to"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:201
+msgid "Fraction completed"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:202
+msgid "Fraction of transfer currently completed"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:209
+#, fuzzy
+msgid "Current URI index"
+msgstr "Εικόνα στο κέντρο."
+
+#: capplets/common/file-transfer-dialog.c:210
+msgid "Current URI index - starts from 1"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:217
+msgid "Total URIs"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:218
+#, fuzzy
+msgid "Total number of URIs"
+msgstr "αριθμός Μυρμηγκιών"
+
+#: capplets/common/file-transfer-dialog.c:372
+#: capplets/common/file-transfer-dialog.c:374
+#, fuzzy
+msgid "Connecting..."
+msgstr "Ρυθμίσεις..."
+
+#: capplets/common/file-transfer-dialog.c:379
+#: capplets/common/file-transfer-dialog.c:381
+msgid "Downloading..."
 msgstr ""
 
 #: capplets/common/gconf-property-editor.c:172
@@ -1175,50 +1248,59 @@ msgstr "Καθορισμός χρώματος φόντου"
 msgid "Standard Desktop Font"
 msgstr ""
 
-#: capplets/keybindings/eggcellrendererkeys.c:152
-#: capplets/keybindings/eggcellrendererkeys.c:153
+#: capplets/keybindings/eggcellrendererkeys.c:156
+#: capplets/keybindings/eggcellrendererkeys.c:157
 #, fuzzy
 msgid "Accelerator modifiers"
 msgstr "Επιτάχυνση"
 
-#: capplets/keybindings/eggcellrendererkeys.c:161
-#: capplets/keybindings/eggcellrendererkeys.c:162
+#: capplets/keybindings/eggcellrendererkeys.c:165
+#: capplets/keybindings/eggcellrendererkeys.c:166
 #, fuzzy
 msgid "Accelerator key"
 msgstr "Επιτάχυνση"
 
-#: capplets/keybindings/eggcellrendererkeys.c:199
-#: capplets/keybindings/gnome-keybinding-properties.c:101
+#: capplets/keybindings/eggcellrendererkeys.c:203
+#: capplets/keybindings/gnome-keybinding-properties.c:306
 #: libbackground/applier.c:533
 msgid "Disabled"
 msgstr "Ανενεργό"
 
-#: capplets/keybindings/eggcellrendererkeys.c:302
-#: capplets/keybindings/eggcellrendererkeys.c:489
+#: capplets/keybindings/eggcellrendererkeys.c:306
+#: capplets/keybindings/eggcellrendererkeys.c:503
 msgid "Type a new accelerator, or press Backspace to clear"
 msgstr ""
 
-#: capplets/keybindings/eggcellrendererkeys.c:492
+#: capplets/keybindings/eggcellrendererkeys.c:506
 msgid "Type a new accelerator"
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:316
+#: capplets/keybindings/gnome-keybinding-properties.c:569
 #, fuzzy
 msgid "<Unknown Action>"
 msgstr "¶γνωστο"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:574
+#: capplets/keybindings/gnome-keybinding-properties.c:592
+msgid "Desktop"
+msgstr ""
+
+#: capplets/keybindings/gnome-keybinding-properties.c:596
+#, fuzzy
+msgid "Window Management"
+msgstr "Νέος διαχειριστής παραθύρων"
+
+#: capplets/keybindings/gnome-keybinding-properties.c:783
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:595
+#: capplets/keybindings/gnome-keybinding-properties.c:807
 #, fuzzy
 msgid "_Action"
 msgstr "Επιτάχυνση"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:607
+#: capplets/keybindings/gnome-keybinding-properties.c:819
 #, fuzzy
 msgid "_Shortcut"
 msgstr "Συντομεύσεις"
@@ -1286,6 +1368,7 @@ msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 #: capplets/network/gnome-network-preferences.glade.h:1
+#: capplets/theme-switcher/theme-properties.glade.h:1
 msgid "*"
 msgstr ""
 
@@ -1905,15 +1988,48 @@ msgstr ""
 msgid "Theme"
 msgstr "Δέντρο"
 
-#: capplets/theme-switcher/theme-properties.glade.h:1
+#: capplets/theme-switcher/theme-properties.glade.h:2
+#, fuzzy
+msgid "Install new theme"
+msgstr ""
+"Εγκατάσταση\n"
+"νέου θέματος..."
+
+#: capplets/theme-switcher/theme-properties.glade.h:3
+#, fuzzy
+msgid "Installed Themes"
+msgstr ""
+"Εγκατάσταση\n"
+"νέου θέματος..."
+
+#: capplets/theme-switcher/theme-properties.glade.h:4
+msgid "New themes can also be installed by dragging them into the window."
+msgstr ""
+
+#: capplets/theme-switcher/theme-properties.glade.h:5
 #, fuzzy
 msgid "Theme Properties"
 msgstr "Τροποποίηση των ρυθμίσεων του ποντικιού"
 
-#: capplets/theme-switcher/theme-properties.glade.h:2
+#: capplets/theme-switcher/theme-properties.glade.h:6
+msgid "_Go to theme folder..."
+msgstr ""
+
+#: capplets/theme-switcher/theme-properties.glade.h:7
+msgid "_Install"
+msgstr ""
+
+#: capplets/theme-switcher/theme-properties.glade.h:8
 #, fuzzy
-msgid "Themes"
-msgstr "Δέντρο"
+msgid "_Install new theme..."
+msgstr ""
+"Εγκατάσταση\n"
+"νέου θέματος..."
+
+#: capplets/theme-switcher/theme-properties.glade.h:9
+#, fuzzy
+msgid "_Location of new theme:"
+msgstr "Επιτάχυνση"
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Change how toolbars and menus are displayed"
@@ -2565,7 +2681,7 @@ msgstr "Βοήθεια"
 msgid "Use shell even if nautilus is running."
 msgstr ""
 
-#: gnome-settings-daemon/factory.c:25
+#: gnome-settings-daemon/factory.c:29
 msgid "Could not initialize Bonobo"
 msgstr ""
 
@@ -2648,6 +2764,55 @@ msgstr "Εκτέλεση"
 msgid "Select sound file"
 msgstr "Επιλογή αρχείου ήχου"
 
+#: gnome-settings-daemon/gnome-settings-font.c:74
+#, c-format
+msgid ""
+"Cannot create the directory \"%s\".\n"
+"This is needed to allow changing cursors."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-screensaver.c:92
+#, c-format
+msgid ""
+"There was an error starting up the screensaver:\n"
+"\n"
+"%s\n"
+"\n"
+"Screensaver functionality will not work in this session."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-screensaver.c:102
+msgid "_Do not show this message again"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-sound.c:59
+#, fuzzy
+msgid "Starting esd\n"
+msgstr "Ρυθμίσεις"
+
+#: gnome-settings-daemon/gnome-settings-sound.c:84
+#, fuzzy
+msgid "Stopping esd\n"
+msgstr "Παντογράφοι καμπυλών"
+
+#: gnome-settings-daemon/gnome-settings-sound.c:127
+#, c-format
+msgid "Couldn't load sound file %s as sample %s"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-sound.c:159
+msgid "Reloading events\n"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-xsettings.c:157
+#, c-format
+msgid "GConf key %s set to type %s but its expected type was %s\n"
+msgstr ""
+
+#, fuzzy
+#~ msgid "Themes"
+#~ msgstr "Δέντρο"
+
 #, fuzzy
 #~ msgid "_Program to execute"
 #~ msgstr "Πρόγραμμα"
@@ -2656,12 +2821,6 @@ msgstr "Επιλογή αρχείου ήχου"
 #, fuzzy
 #~ msgid "Use a custom font."
 #~ msgstr "Χρήση ειδικής γραμματοσειράς."
-
-#, fuzzy
-#~ msgid "Install new theme..."
-#~ msgstr ""
-#~ "Εγκατάσταση\n"
-#~ "νέου θέματος..."
 
 #, fuzzy
 #~ msgid "Select a theme to install"
@@ -2800,19 +2959,12 @@ msgstr "Επιλογή αρχείου ήχου"
 #~ msgid "1 minute ago"
 #~ msgstr "λεπτά"
 
-#, fuzzy
-#~ msgid "Current time"
-#~ msgstr "Εικόνα στο κέντρο."
-
 #~ msgid "Custom screensaver. No description available"
 #~ msgstr "Παραμετροποιημένη προφύλαξη οθόνης. Δεν υπάρχει διαθέσιμη περιγραφή"
 
 #, fuzzy
 #~ msgid "About %s\n"
 #~ msgstr "Περί"
-
-#~ msgid "Settings"
-#~ msgstr "Ρυθμίσεις"
 
 #~ msgid "label1"
 #~ msgstr "label1"
@@ -2907,9 +3059,6 @@ msgstr "Επιλογή αρχείου ήχου"
 
 #~ msgid "Twelve Sided cells"
 #~ msgstr "Κελιά Δώδεκα Πλευρών"
-
-#~ msgid "number of Ants"
-#~ msgstr "αριθμός Μυρμηγκιών"
 
 #, fuzzy
 #~ msgid "Attraction (balls)"
@@ -3298,10 +3447,6 @@ msgstr "Επιλογή αρχείου ήχου"
 #~ msgid "Sphere"
 #~ msgstr "Ταχύτητα"
 
-#, fuzzy
-#~ msgid "Sproingies"
-#~ msgstr "Παντογράφοι καμπυλών"
-
 #~ msgid "Quickness of rotation at each step (0 = Random)"
 #~ msgstr "Ταχύτητα περιστροφής σε κάθε βήμα (0 = Τυχαίο)"
 
@@ -3586,9 +3731,6 @@ msgstr "Επιλογή αρχείου ήχου"
 
 #~ msgid "Choose randomly from those checked off"
 #~ msgstr "Χρήση τυχαίας από τις επιλεγμένες"
-
-#~ msgid "Settings..."
-#~ msgstr "Ρυθμίσεις..."
 
 #~ msgid "Demo Next"
 #~ msgstr "Επόμενο Δείγμα"

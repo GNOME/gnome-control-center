@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 1.99.7\n"
-"POT-Creation-Date: 2002-04-29 14:47-0500\n"
+"POT-Creation-Date: 2002-05-06 17:01-0500\n"
 "PO-Revision-Date: 2002-04-23 01:06+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -324,6 +324,77 @@ msgstr ""
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "僅套用設定及離開"
+
+#: capplets/common/file-transfer-dialog.c:95
+#, c-format
+msgid "%i of %i"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:119
+#, c-format
+msgid "Transferring: %s"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:126
+#, c-format
+msgid "From: %s"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:134
+#, c-format
+msgid "To: %s"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:185
+msgid "From URI"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:186
+msgid "URI currently transferring from"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:193
+msgid "To URI"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:194
+msgid "URI currently transferring to"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:201
+msgid "Fraction completed"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:202
+msgid "Fraction of transfer currently completed"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:209
+msgid "Current URI index"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:210
+msgid "Current URI index - starts from 1"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:217
+msgid "Total URIs"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:218
+msgid "Total number of URIs"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:372
+#: capplets/common/file-transfer-dialog.c:374
+#, fuzzy
+msgid "Connecting..."
+msgstr "設定..."
+
+#: capplets/common/file-transfer-dialog.c:379
+#: capplets/common/file-transfer-dialog.c:381
+msgid "Downloading..."
+msgstr ""
 
 #: capplets/common/gconf-property-editor.c:172
 msgid "Key"
@@ -1085,46 +1156,55 @@ msgstr "字型屬性"
 msgid "Standard Desktop Font"
 msgstr ""
 
-#: capplets/keybindings/eggcellrendererkeys.c:152
-#: capplets/keybindings/eggcellrendererkeys.c:153
+#: capplets/keybindings/eggcellrendererkeys.c:156
+#: capplets/keybindings/eggcellrendererkeys.c:157
 msgid "Accelerator modifiers"
 msgstr ""
 
-#: capplets/keybindings/eggcellrendererkeys.c:161
-#: capplets/keybindings/eggcellrendererkeys.c:162
+#: capplets/keybindings/eggcellrendererkeys.c:165
+#: capplets/keybindings/eggcellrendererkeys.c:166
 msgid "Accelerator key"
 msgstr "快速鍵"
 
-#: capplets/keybindings/eggcellrendererkeys.c:199
-#: capplets/keybindings/gnome-keybinding-properties.c:101
+#: capplets/keybindings/eggcellrendererkeys.c:203
+#: capplets/keybindings/gnome-keybinding-properties.c:306
 #: libbackground/applier.c:533
 msgid "Disabled"
 msgstr "不使用"
 
-#: capplets/keybindings/eggcellrendererkeys.c:302
-#: capplets/keybindings/eggcellrendererkeys.c:489
+#: capplets/keybindings/eggcellrendererkeys.c:306
+#: capplets/keybindings/eggcellrendererkeys.c:503
 msgid "Type a new accelerator, or press Backspace to clear"
 msgstr ""
 
-#: capplets/keybindings/eggcellrendererkeys.c:492
+#: capplets/keybindings/eggcellrendererkeys.c:506
 msgid "Type a new accelerator"
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:316
+#: capplets/keybindings/gnome-keybinding-properties.c:569
 msgid "<Unknown Action>"
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:574
+#: capplets/keybindings/gnome-keybinding-properties.c:592
+msgid "Desktop"
+msgstr ""
+
+#: capplets/keybindings/gnome-keybinding-properties.c:596
+#, fuzzy
+msgid "Window Management"
+msgstr "視窗管理程式(_W)"
+
+#: capplets/keybindings/gnome-keybinding-properties.c:783
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:595
+#: capplets/keybindings/gnome-keybinding-properties.c:807
 msgid "_Action"
 msgstr "行動(_A)"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:607
+#: capplets/keybindings/gnome-keybinding-properties.c:819
 msgid "_Shortcut"
 msgstr "捷徑鍵(_S)"
 
@@ -1188,6 +1268,7 @@ msgstr "&lt;i&gt;慢&lt;/i&gt;"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 #: capplets/network/gnome-network-preferences.glade.h:1
+#: capplets/theme-switcher/theme-properties.glade.h:1
 msgid "*"
 msgstr "*"
 
@@ -1763,15 +1844,42 @@ msgstr ""
 msgid "Theme"
 msgstr "Gtk+ 佈景主題"
 
-#: capplets/theme-switcher/theme-properties.glade.h:1
+#: capplets/theme-switcher/theme-properties.glade.h:2
+#, fuzzy
+msgid "Install new theme"
+msgstr "安裝新的佈景主題..."
+
+#: capplets/theme-switcher/theme-properties.glade.h:3
+#, fuzzy
+msgid "Installed Themes"
+msgstr "安裝新的佈景主題..."
+
+#: capplets/theme-switcher/theme-properties.glade.h:4
+msgid "New themes can also be installed by dragging them into the window."
+msgstr ""
+
+#: capplets/theme-switcher/theme-properties.glade.h:5
 #, fuzzy
 msgid "Theme Properties"
 msgstr "CD 屬性"
 
-#: capplets/theme-switcher/theme-properties.glade.h:2
+#: capplets/theme-switcher/theme-properties.glade.h:6
+msgid "_Go to theme folder..."
+msgstr ""
+
+#: capplets/theme-switcher/theme-properties.glade.h:7
+msgid "_Install"
+msgstr ""
+
+#: capplets/theme-switcher/theme-properties.glade.h:8
 #, fuzzy
-msgid "Themes"
-msgstr "Gtk+ 佈景主題"
+msgid "_Install new theme..."
+msgstr "安裝新的佈景主題..."
+
+#: capplets/theme-switcher/theme-properties.glade.h:9
+#, fuzzy
+msgid "_Location of new theme:"
+msgstr "行動(_A)"
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Change how toolbars and menus are displayed"
@@ -2373,7 +2481,7 @@ msgstr "說明(_H)"
 msgid "Use shell even if nautilus is running."
 msgstr ""
 
-#: gnome-settings-daemon/factory.c:25
+#: gnome-settings-daemon/factory.c:29
 msgid "Could not initialize Bonobo"
 msgstr "無法初始化 Bonobo"
 
@@ -2450,6 +2558,54 @@ msgstr "播放(_P)"
 msgid "Select sound file"
 msgstr "選擇音效檔"
 
+#: gnome-settings-daemon/gnome-settings-font.c:74
+#, c-format
+msgid ""
+"Cannot create the directory \"%s\".\n"
+"This is needed to allow changing cursors."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-screensaver.c:92
+#, c-format
+msgid ""
+"There was an error starting up the screensaver:\n"
+"\n"
+"%s\n"
+"\n"
+"Screensaver functionality will not work in this session."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-screensaver.c:102
+msgid "_Do not show this message again"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-sound.c:59
+#, fuzzy
+msgid "Starting esd\n"
+msgstr "啟動中"
+
+#: gnome-settings-daemon/gnome-settings-sound.c:84
+msgid "Stopping esd\n"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-sound.c:127
+#, c-format
+msgid "Couldn't load sound file %s as sample %s"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-sound.c:159
+msgid "Reloading events\n"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-xsettings.c:157
+#, c-format
+msgid "GConf key %s set to type %s but its expected type was %s\n"
+msgstr ""
+
+#, fuzzy
+#~ msgid "Themes"
+#~ msgstr "Gtk+ 佈景主題"
+
 #~ msgid "_Program to execute"
 #~ msgstr "執行的程式(_P)"
 
@@ -2467,9 +2623,6 @@ msgstr "選擇音效檔"
 
 #~ msgid "Select which gtk+ theme to use"
 #~ msgstr "選擇要使用的 gtk+ 佈景主題"
-
-#~ msgid "Install new theme..."
-#~ msgstr "安裝新的佈景主題..."
 
 #~ msgid "Select a theme to install"
 #~ msgstr "選擇要安裝的佈景主題"
@@ -2637,9 +2790,6 @@ msgstr "選擇音效檔"
 #~ msgid "Small"
 #~ msgstr "小"
 
-#~ msgid "Settings..."
-#~ msgstr "設定..."
-
 #~ msgid "Priority"
 #~ msgstr "優先性"
 
@@ -2660,9 +2810,6 @@ msgstr "選擇音效檔"
 
 #~ msgid "State"
 #~ msgstr "狀態"
-
-#~ msgid "Starting"
-#~ msgstr "啟動中"
 
 #~ msgid "Running"
 #~ msgstr "執行中"

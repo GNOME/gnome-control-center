@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.3.10\n"
-"POT-Creation-Date: 2002-05-01 14:21-0400\n"
+"POT-Creation-Date: 2002-05-06 17:01-0500\n"
 "PO-Revision-Date: 2002-04-03 01:51+0200\n"
 "Last-Translator: Héctor García Álvarez <hector@scouts-es.org>\n"
 "Language-Team: Spanish\n"
@@ -1165,36 +1165,45 @@ msgstr "Propiedades del tipo de letra"
 msgid "Standard Desktop Font"
 msgstr ""
 
-#: capplets/keybindings/eggcellrendererkeys.c:152
-#: capplets/keybindings/eggcellrendererkeys.c:153
+#: capplets/keybindings/eggcellrendererkeys.c:156
+#: capplets/keybindings/eggcellrendererkeys.c:157
 msgid "Accelerator modifiers"
 msgstr "Modificadores del acelerador"
 
-#: capplets/keybindings/eggcellrendererkeys.c:161
-#: capplets/keybindings/eggcellrendererkeys.c:162
+#: capplets/keybindings/eggcellrendererkeys.c:165
+#: capplets/keybindings/eggcellrendererkeys.c:166
 msgid "Accelerator key"
 msgstr "tecla aceleradora"
 
-#: capplets/keybindings/eggcellrendererkeys.c:199
-#: capplets/keybindings/gnome-keybinding-properties.c:101
+#: capplets/keybindings/eggcellrendererkeys.c:203
+#: capplets/keybindings/gnome-keybinding-properties.c:306
 #: libbackground/applier.c:533
 msgid "Disabled"
 msgstr "Desactivado"
 
-#: capplets/keybindings/eggcellrendererkeys.c:302
-#: capplets/keybindings/eggcellrendererkeys.c:489
+#: capplets/keybindings/eggcellrendererkeys.c:306
+#: capplets/keybindings/eggcellrendererkeys.c:503
 msgid "Type a new accelerator, or press Backspace to clear"
 msgstr "Teclee un nuevo acelerador, o presione retroceder para limpiar"
 
-#: capplets/keybindings/eggcellrendererkeys.c:492
+#: capplets/keybindings/eggcellrendererkeys.c:506
 msgid "Type a new accelerator"
 msgstr "Teclee un nuevo acelerador"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:316
+#: capplets/keybindings/gnome-keybinding-properties.c:569
 msgid "<Unknown Action>"
 msgstr "<Acción Desconocida>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:574
+#: capplets/keybindings/gnome-keybinding-properties.c:592
+msgid "Desktop"
+msgstr ""
+
+#: capplets/keybindings/gnome-keybinding-properties.c:596
+#, fuzzy
+msgid "Window Management"
+msgstr "Gestor de _Ventanas"
+
+#: capplets/keybindings/gnome-keybinding-properties.c:783
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1202,11 +1211,11 @@ msgstr ""
 "Imposible encontrar ningún tema de teclado.  Esto significa que si "
 "instalación GTK+ ha sido incompleta."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:595
+#: capplets/keybindings/gnome-keybinding-properties.c:807
 msgid "_Action"
 msgstr "_Acción"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:607
+#: capplets/keybindings/gnome-keybinding-properties.c:819
 msgid "_Shortcut"
 msgstr "Ata_jo"
 
@@ -1847,52 +1856,41 @@ msgid "Theme"
 msgstr "Tema Gtk+"
 
 #: capplets/theme-switcher/theme-properties.glade.h:2
-msgid "Go to theme folder..."
-msgstr ""
-
-#: capplets/theme-switcher/theme-properties.glade.h:3
 #, fuzzy
 msgid "Install new theme"
 msgstr "Instalar nuevo tema..."
 
+#: capplets/theme-switcher/theme-properties.glade.h:3
+#, fuzzy
+msgid "Installed Themes"
+msgstr "Instalar nuevo tema..."
+
 #: capplets/theme-switcher/theme-properties.glade.h:4
-msgid "Install new theme..."
-msgstr "Instalar nuevo tema..."
-
-#: capplets/theme-switcher/theme-properties.glade.h:5
-#, fuzzy
-msgid "Install theme:"
-msgstr "Instalar nuevo tema..."
-
-#: capplets/theme-switcher/theme-properties.glade.h:6
-#, fuzzy
-msgid "Installed themes"
-msgstr "Instalar nuevo tema..."
-
-#: capplets/theme-switcher/theme-properties.glade.h:7
 msgid "New themes can also be installed by dragging them into the window."
 msgstr ""
 
-#: capplets/theme-switcher/theme-properties.glade.h:8
-msgid "Remove theme..."
-msgstr ""
-
-#: capplets/theme-switcher/theme-properties.glade.h:9
+#: capplets/theme-switcher/theme-properties.glade.h:5
 #, fuzzy
 msgid "Theme Properties"
 msgstr "Propiedades de CD"
 
-#: capplets/theme-switcher/theme-properties.glade.h:10
-msgid "To rename or remove a theme, click \"Manage themes\"."
+#: capplets/theme-switcher/theme-properties.glade.h:6
+msgid "_Go to theme folder..."
 msgstr ""
 
-#: capplets/theme-switcher/theme-properties.glade.h:11
+#: capplets/theme-switcher/theme-properties.glade.h:7
 msgid "_Install"
 msgstr ""
 
-#: capplets/theme-switcher/theme-properties.glade.h:12
-msgid "_Use this for my current theme."
-msgstr ""
+#: capplets/theme-switcher/theme-properties.glade.h:8
+#, fuzzy
+msgid "_Install new theme..."
+msgstr "Instalar nuevo tema..."
+
+#: capplets/theme-switcher/theme-properties.glade.h:9
+#, fuzzy
+msgid "_Location of new theme:"
+msgstr "_Acción"
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Change how toolbars and menus are displayed"
@@ -2616,6 +2614,10 @@ msgstr ""
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Install theme:"
+#~ msgstr "Instalar nuevo tema..."
 
 #~ msgid "AccessX"
 #~ msgstr "AccessX"

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.0\n"
-"POT-Creation-Date: 2002-05-04 00:56+0100\n"
+"POT-Creation-Date: 2002-05-06 17:01-0500\n"
 "PO-Revision-Date: 2002-05-04 03:50+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
@@ -77,8 +77,8 @@ msgid ""
 "Ignore all subsequent presses of the SAME key if they happen within a user "
 "selectable period of time."
 msgstr ""
-"Ignorar pressões subsequentes da MESMA tecla caso ocorram dentro de um período "
-"de tempo definido pelo utilizador."
+"Ignorar pressões subsequentes da MESMA tecla caso ocorram dentro de um "
+"período de tempo definido pelo utilizador."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:11
 msgid "Keyboard Accessibility Configuration (AccessX)"
@@ -101,8 +101,8 @@ msgid ""
 "Perform multiple simultaneous key press operations by pressing modifier keys "
 "in sequence."
 msgstr ""
-"Executar múltiplas operações de pressão de teclas primindo teclas modificadoras "
-"em sequência."
+"Executar múltiplas operações de pressão de teclas primindo teclas "
+"modificadoras em sequência."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:15
 msgid "Start mo_ving this long after keypress :"
@@ -1176,36 +1176,45 @@ msgstr "Propriedades da Fonte"
 msgid "Standard Desktop Font"
 msgstr "Fonte Standard do Ambiente"
 
-#: capplets/keybindings/eggcellrendererkeys.c:152
-#: capplets/keybindings/eggcellrendererkeys.c:153
+#: capplets/keybindings/eggcellrendererkeys.c:156
+#: capplets/keybindings/eggcellrendererkeys.c:157
 msgid "Accelerator modifiers"
 msgstr "Modificadores de atalhos"
 
-#: capplets/keybindings/eggcellrendererkeys.c:161
-#: capplets/keybindings/eggcellrendererkeys.c:162
+#: capplets/keybindings/eggcellrendererkeys.c:165
+#: capplets/keybindings/eggcellrendererkeys.c:166
 msgid "Accelerator key"
 msgstr "Tecla de atalho"
 
-#: capplets/keybindings/eggcellrendererkeys.c:199
-#: capplets/keybindings/gnome-keybinding-properties.c:101
+#: capplets/keybindings/eggcellrendererkeys.c:203
+#: capplets/keybindings/gnome-keybinding-properties.c:306
 #: libbackground/applier.c:533
 msgid "Disabled"
 msgstr "Desabilitado"
 
-#: capplets/keybindings/eggcellrendererkeys.c:302
-#: capplets/keybindings/eggcellrendererkeys.c:489
+#: capplets/keybindings/eggcellrendererkeys.c:306
+#: capplets/keybindings/eggcellrendererkeys.c:503
 msgid "Type a new accelerator, or press Backspace to clear"
 msgstr "Escreva um novo atalho, ou prima Backspace para limpar"
 
-#: capplets/keybindings/eggcellrendererkeys.c:492
+#: capplets/keybindings/eggcellrendererkeys.c:506
 msgid "Type a new accelerator"
 msgstr "Escreva um novo atalho"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:316
+#: capplets/keybindings/gnome-keybinding-properties.c:569
 msgid "<Unknown Action>"
 msgstr "<Acção Desconhecida>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:574
+#: capplets/keybindings/gnome-keybinding-properties.c:592
+msgid "Desktop"
+msgstr ""
+
+#: capplets/keybindings/gnome-keybinding-properties.c:596
+#, fuzzy
+msgid "Window Management"
+msgstr "Gestor de _Janelas"
+
+#: capplets/keybindings/gnome-keybinding-properties.c:783
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1213,11 +1222,11 @@ msgstr ""
 "Incapaz de encontrar temas de teclado. Isto significa que a sua instalação "
 "do GTK+ foi incompleta."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:595
+#: capplets/keybindings/gnome-keybinding-properties.c:807
 msgid "_Action"
 msgstr "_Acção"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:607
+#: capplets/keybindings/gnome-keybinding-properties.c:819
 msgid "_Shortcut"
 msgstr "_Atalho"
 
@@ -1266,9 +1275,9 @@ msgid ""
 "features by bringing up the 'Accessibility Settings' property dialog, or "
 "pressing the button on the right."
 msgstr ""
-"&lt;b&gt;Dica:&lt;/b&gt; Pode configurar as funcionalidades de acessibilidade "
-"do teclado abrindo a janela de configuração 'Definições de Acessibilidade' "
-"ou primindo o botão à direita."
+"&lt;b&gt;Dica:&lt;/b&gt; Pode configurar as funcionalidades de "
+"acessibilidade do teclado abrindo a janela de configuração 'Definições de "
+"Acessibilidade' ou primindo o botão à direita."
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:2
 msgid "&lt;i&gt;fast&lt;/i&gt;"
@@ -1287,8 +1296,8 @@ msgid "&lt;i&gt;slow&lt;/i&gt;"
 msgstr "&lt;i&gt;lento&lt;/i&gt;"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:6
-#: capplets/theme-switcher/theme-properties.glade.h:1
 #: capplets/network/gnome-network-preferences.glade.h:1
+#: capplets/theme-switcher/theme-properties.glade.h:1
 msgid "*"
 msgstr "*"
 
@@ -1900,48 +1909,40 @@ msgid "Theme"
 msgstr "Tema"
 
 #: capplets/theme-switcher/theme-properties.glade.h:2
-msgid "Go to theme folder..."
-msgstr "Ir para a pasta dos temas..."
-
-#: capplets/theme-switcher/theme-properties.glade.h:3
 msgid "Install new theme"
 msgstr "Instalar novo tema"
 
-#: capplets/theme-switcher/theme-properties.glade.h:4
-msgid "Install new theme..."
-msgstr "Instalar novo tema..."
-
-#: capplets/theme-switcher/theme-properties.glade.h:5
-msgid "Install theme:"
-msgstr "Instalar tema:"
-
-#: capplets/theme-switcher/theme-properties.glade.h:6
-msgid "Installed themes"
+#: capplets/theme-switcher/theme-properties.glade.h:3
+#, fuzzy
+msgid "Installed Themes"
 msgstr "Temas instalados"
 
-#: capplets/theme-switcher/theme-properties.glade.h:7
+#: capplets/theme-switcher/theme-properties.glade.h:4
 msgid "New themes can also be installed by dragging them into the window."
 msgstr "Novos temas também podem ser instalados arrastando-os para a janela."
 
-#: capplets/theme-switcher/theme-properties.glade.h:8
-msgid "Remove theme..."
-msgstr "Remover tema..."
-
-#: capplets/theme-switcher/theme-properties.glade.h:9
+#: capplets/theme-switcher/theme-properties.glade.h:5
 msgid "Theme Properties"
 msgstr "Propriedades Tema"
 
-#: capplets/theme-switcher/theme-properties.glade.h:10
-msgid "To rename or remove a theme, click \"Manage themes\"."
-msgstr "Para renomear ou remover um tema, clique \"Gerir temas\"."
+#: capplets/theme-switcher/theme-properties.glade.h:6
+#, fuzzy
+msgid "_Go to theme folder..."
+msgstr "Ir para a pasta dos temas..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:11
+#: capplets/theme-switcher/theme-properties.glade.h:7
 msgid "_Install"
 msgstr "_Instalar"
 
-#: capplets/theme-switcher/theme-properties.glade.h:12
-msgid "_Use this for my current theme."
-msgstr "_Ustilizar este como omeu tema actual."
+#: capplets/theme-switcher/theme-properties.glade.h:8
+#, fuzzy
+msgid "_Install new theme..."
+msgstr "Instalar novo tema..."
+
+#: capplets/theme-switcher/theme-properties.glade.h:9
+#, fuzzy
+msgid "_Location of new theme:"
+msgstr "_Localização:"
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Change how toolbars and menus are displayed"
@@ -2224,14 +2225,14 @@ msgstr "Ao utilizar separadores, colocar as abas à"
 msgid "Wherever the Window Manager places them"
 msgstr "Onde o Gestor de Janelas as colocar"
 
-#: capplets/url-properties/url.desktop.in.in.h:1
 #: capplets/url-properties/url-properties.desktop.in.h:1
+#: capplets/url-properties/url.desktop.in.in.h:1
 msgid "Configure which programs are used to display URLs"
 msgstr "Configurar que aplicações são utilizadas para mostrar URLs"
 
-#: capplets/url-properties/url.desktop.in.in.h:2
 #: capplets/url-properties/url-properties.c:66
 #: capplets/url-properties/url-properties.desktop.in.h:2
+#: capplets/url-properties/url.desktop.in.in.h:2
 msgid "URL Handlers"
 msgstr "Gestores URL"
 
@@ -2455,8 +2456,8 @@ msgstr "Selector Gestor de Janelas"
 msgid "HTTP Proxy Settings"
 msgstr "Definições Proxy HTTP"
 
-#: capplets/network/gnome-network-preferences.glade.h:3
 #: capplets/network/gnome-network-preferences.desktop.in.h:2
+#: capplets/network/gnome-network-preferences.glade.h:3
 msgid "Network Preferences"
 msgstr "Preferências de Rede"
 
@@ -2674,6 +2675,18 @@ msgstr "A reler eventos\n"
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "have GConf %s definida como tipo %s mas o tipo esperado era %s\n"
+
+#~ msgid "Install theme:"
+#~ msgstr "Instalar tema:"
+
+#~ msgid "Remove theme..."
+#~ msgstr "Remover tema..."
+
+#~ msgid "To rename or remove a theme, click \"Manage themes\"."
+#~ msgstr "Para renomear ou remover um tema, clique \"Gerir temas\"."
+
+#~ msgid "_Use this for my current theme."
+#~ msgstr "_Ustilizar este como omeu tema actual."
 
 #~ msgid "Themes"
 #~ msgstr "Temas"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.5.1\n"
-"POT-Creation-Date: 2002-04-29 14:47-0500\n"
+"POT-Creation-Date: 2002-05-06 17:01-0500\n"
 "PO-Revision-Date: 2002-04-10 16:34+0200\n"
 "Last-Translator: Stanislav Višňovský <visnovsky@nenya.ms.mff.cuni.cz>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -334,6 +334,76 @@ msgstr ""
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "Iba použiť nastavenie a skončiť"
+
+#: capplets/common/file-transfer-dialog.c:95
+#, c-format
+msgid "%i of %i"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:119
+#, c-format
+msgid "Transferring: %s"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:126
+#, c-format
+msgid "From: %s"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:134
+#, c-format
+msgid "To: %s"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:185
+msgid "From URI"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:186
+msgid "URI currently transferring from"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:193
+msgid "To URI"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:194
+msgid "URI currently transferring to"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:201
+msgid "Fraction completed"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:202
+msgid "Fraction of transfer currently completed"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:209
+msgid "Current URI index"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:210
+msgid "Current URI index - starts from 1"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:217
+msgid "Total URIs"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:218
+msgid "Total number of URIs"
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:372
+#: capplets/common/file-transfer-dialog.c:374
+msgid "Connecting..."
+msgstr ""
+
+#: capplets/common/file-transfer-dialog.c:379
+#: capplets/common/file-transfer-dialog.c:381
+msgid "Downloading..."
+msgstr ""
 
 #: capplets/common/gconf-property-editor.c:172
 msgid "Key"
@@ -1119,36 +1189,45 @@ msgstr "Vlastnosti písma"
 msgid "Standard Desktop Font"
 msgstr ""
 
-#: capplets/keybindings/eggcellrendererkeys.c:152
-#: capplets/keybindings/eggcellrendererkeys.c:153
+#: capplets/keybindings/eggcellrendererkeys.c:156
+#: capplets/keybindings/eggcellrendererkeys.c:157
 msgid "Accelerator modifiers"
 msgstr "Modifikátory akcelerátorov"
 
-#: capplets/keybindings/eggcellrendererkeys.c:161
-#: capplets/keybindings/eggcellrendererkeys.c:162
+#: capplets/keybindings/eggcellrendererkeys.c:165
+#: capplets/keybindings/eggcellrendererkeys.c:166
 msgid "Accelerator key"
 msgstr "Kláves akcelerátora"
 
-#: capplets/keybindings/eggcellrendererkeys.c:199
-#: capplets/keybindings/gnome-keybinding-properties.c:101
+#: capplets/keybindings/eggcellrendererkeys.c:203
+#: capplets/keybindings/gnome-keybinding-properties.c:306
 #: libbackground/applier.c:533
 msgid "Disabled"
 msgstr "Zakázané"
 
-#: capplets/keybindings/eggcellrendererkeys.c:302
-#: capplets/keybindings/eggcellrendererkeys.c:489
+#: capplets/keybindings/eggcellrendererkeys.c:306
+#: capplets/keybindings/eggcellrendererkeys.c:503
 msgid "Type a new accelerator, or press Backspace to clear"
 msgstr "Zadajte nový akcelerátor alebo ho vyčistite stlačením Backspace"
 
-#: capplets/keybindings/eggcellrendererkeys.c:492
+#: capplets/keybindings/eggcellrendererkeys.c:506
 msgid "Type a new accelerator"
 msgstr "Stlačte nový akcelerátor"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:316
+#: capplets/keybindings/gnome-keybinding-properties.c:569
 msgid "<Unknown Action>"
 msgstr "<Neznáma akcia>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:574
+#: capplets/keybindings/gnome-keybinding-properties.c:592
+msgid "Desktop"
+msgstr ""
+
+#: capplets/keybindings/gnome-keybinding-properties.c:596
+#, fuzzy
+msgid "Window Management"
+msgstr "_Správca okien"
+
+#: capplets/keybindings/gnome-keybinding-properties.c:783
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1156,11 +1235,11 @@ msgstr ""
 "Nepodarilo sa nájsť žiadne klávesové témy. To znamená, že nemáte úplne "
 "nainštalované GTK+."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:595
+#: capplets/keybindings/gnome-keybinding-properties.c:807
 msgid "_Action"
 msgstr "_Akcia"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:607
+#: capplets/keybindings/gnome-keybinding-properties.c:819
 msgid "_Shortcut"
 msgstr "Klávesová _skratka"
 
@@ -1227,6 +1306,7 @@ msgstr "&lt;i&gt;pomaly&lt;/i&gt;"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 #: capplets/network/gnome-network-preferences.glade.h:1
+#: capplets/theme-switcher/theme-properties.glade.h:1
 msgid "*"
 msgstr ""
 
@@ -1818,15 +1898,42 @@ msgstr ""
 msgid "Theme"
 msgstr "Téma Gtk+"
 
-#: capplets/theme-switcher/theme-properties.glade.h:1
+#: capplets/theme-switcher/theme-properties.glade.h:2
+#, fuzzy
+msgid "Install new theme"
+msgstr "Inštalovať novú tému..."
+
+#: capplets/theme-switcher/theme-properties.glade.h:3
+#, fuzzy
+msgid "Installed Themes"
+msgstr "Inštalovať novú tému..."
+
+#: capplets/theme-switcher/theme-properties.glade.h:4
+msgid "New themes can also be installed by dragging them into the window."
+msgstr ""
+
+#: capplets/theme-switcher/theme-properties.glade.h:5
 #, fuzzy
 msgid "Theme Properties"
 msgstr "Vlastnosti CD"
 
-#: capplets/theme-switcher/theme-properties.glade.h:2
+#: capplets/theme-switcher/theme-properties.glade.h:6
+msgid "_Go to theme folder..."
+msgstr ""
+
+#: capplets/theme-switcher/theme-properties.glade.h:7
+msgid "_Install"
+msgstr ""
+
+#: capplets/theme-switcher/theme-properties.glade.h:8
 #, fuzzy
-msgid "Themes"
-msgstr "Téma Gtk+"
+msgid "_Install new theme..."
+msgstr "Inštalovať novú tému..."
+
+#: capplets/theme-switcher/theme-properties.glade.h:9
+#, fuzzy
+msgid "_Location of new theme:"
+msgstr "_Akcia"
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Change how toolbars and menus are displayed"
@@ -2435,7 +2542,7 @@ msgstr "_Pomocník"
 msgid "Use shell even if nautilus is running."
 msgstr "Použiť shell aj keď nautilus beží."
 
-#: gnome-settings-daemon/factory.c:25
+#: gnome-settings-daemon/factory.c:29
 msgid "Could not initialize Bonobo"
 msgstr "Nepodarilo sa inicializovať Bonobo"
 
@@ -2515,6 +2622,53 @@ msgstr "_Zahrať"
 msgid "Select sound file"
 msgstr "Vyberte zvukový súbor"
 
+#: gnome-settings-daemon/gnome-settings-font.c:74
+#, c-format
+msgid ""
+"Cannot create the directory \"%s\".\n"
+"This is needed to allow changing cursors."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-screensaver.c:92
+#, c-format
+msgid ""
+"There was an error starting up the screensaver:\n"
+"\n"
+"%s\n"
+"\n"
+"Screensaver functionality will not work in this session."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-screensaver.c:102
+msgid "_Do not show this message again"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-sound.c:59
+msgid "Starting esd\n"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-sound.c:84
+msgid "Stopping esd\n"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-sound.c:127
+#, c-format
+msgid "Couldn't load sound file %s as sample %s"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-sound.c:159
+msgid "Reloading events\n"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-xsettings.c:157
+#, c-format
+msgid "GConf key %s set to type %s but its expected type was %s\n"
+msgstr ""
+
+#, fuzzy
+#~ msgid "Themes"
+#~ msgstr "Téma Gtk+"
+
 #, fuzzy
 #~ msgid "_Program to execute"
 #~ msgstr "Spustiť program"
@@ -2533,9 +2687,6 @@ msgstr "Vyberte zvukový súbor"
 
 #~ msgid "Select which gtk+ theme to use"
 #~ msgstr "Vyberte, ktorá téma Gtk+ sa má použiť"
-
-#~ msgid "Install new theme..."
-#~ msgstr "Inštalovať novú tému..."
 
 #~ msgid "Select a theme to install"
 #~ msgstr "Vyberte tému, ktorú nainštalovať"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.5.8\n"
-"POT-Creation-Date: 2002-04-30 13:47+0200\n"
+"POT-Creation-Date: 2002-05-06 17:01-0500\n"
 "PO-Revision-Date: 2002-04-30 13:50+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -36,8 +36,8 @@ msgid "Keyboard Accessibility Properties"
 msgstr "Egenskaper for tilgjengelighet for tastatur"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:1
-msgid "<b>Test</b>"
-msgstr "<b>Eksempel</b>"
+msgid "&lt;b&gt;Test&lt;/b&gt;"
+msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:2
 msgid "B_eep when modifier is pressed"
@@ -1173,36 +1173,45 @@ msgstr "Egenskaper for skrift"
 msgid "Standard Desktop Font"
 msgstr "Forvalgt skrift for skrivebordet"
 
-#: capplets/keybindings/eggcellrendererkeys.c:152
-#: capplets/keybindings/eggcellrendererkeys.c:153
+#: capplets/keybindings/eggcellrendererkeys.c:156
+#: capplets/keybindings/eggcellrendererkeys.c:157
 msgid "Accelerator modifiers"
 msgstr "Endringstaster for aksellerator"
 
-#: capplets/keybindings/eggcellrendererkeys.c:161
-#: capplets/keybindings/eggcellrendererkeys.c:162
+#: capplets/keybindings/eggcellrendererkeys.c:165
+#: capplets/keybindings/eggcellrendererkeys.c:166
 msgid "Accelerator key"
 msgstr "Hurtigtast"
 
-#: capplets/keybindings/eggcellrendererkeys.c:199
-#: capplets/keybindings/gnome-keybinding-properties.c:101
+#: capplets/keybindings/eggcellrendererkeys.c:203
+#: capplets/keybindings/gnome-keybinding-properties.c:306
 #: libbackground/applier.c:533
 msgid "Disabled"
 msgstr "Slått av"
 
-#: capplets/keybindings/eggcellrendererkeys.c:302
-#: capplets/keybindings/eggcellrendererkeys.c:489
+#: capplets/keybindings/eggcellrendererkeys.c:306
+#: capplets/keybindings/eggcellrendererkeys.c:503
 msgid "Type a new accelerator, or press Backspace to clear"
 msgstr "Skriv inn en ny aksellerator, eller trykk slett for å tømme"
 
-#: capplets/keybindings/eggcellrendererkeys.c:492
+#: capplets/keybindings/eggcellrendererkeys.c:506
 msgid "Type a new accelerator"
 msgstr "Skriv inn en ny aksellerator"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:316
+#: capplets/keybindings/gnome-keybinding-properties.c:569
 msgid "<Unknown Action>"
 msgstr "<Ukjent handling>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:574
+#: capplets/keybindings/gnome-keybinding-properties.c:592
+msgid "Desktop"
+msgstr ""
+
+#: capplets/keybindings/gnome-keybinding-properties.c:596
+#, fuzzy
+msgid "Window Management"
+msgstr "_Vindushåndterer"
+
+#: capplets/keybindings/gnome-keybinding-properties.c:783
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1210,11 +1219,11 @@ msgstr ""
 "Kan ikke finne tastaturtema. Dette betyr at din GTK+-installasjon ikke er "
 "komplett."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:595
+#: capplets/keybindings/gnome-keybinding-properties.c:807
 msgid "_Action"
 msgstr "_Handling"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:607
+#: capplets/keybindings/gnome-keybinding-properties.c:819
 msgid "_Shortcut"
 msgstr "_Snarvei"
 
@@ -1258,36 +1267,37 @@ msgstr ""
 "en daemon nå)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:1
-#: capplets/network/gnome-network-preferences.glade.h:1
-#: capplets/theme-switcher/theme-properties.glade.h:1
-msgid "*"
-msgstr "*"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:2
+#, fuzzy
 msgid ""
-"<b>Tip:</b> You can configure the keyboards accessibility features by "
-"bringing up the 'Accessibility Settings' property dialog, or pressing the "
-"button on the right."
+"&lt;b&gt;Tip:&lt;/b&gt; You can configure the keyboards accessibility "
+"features by bringing up the 'Accessibility Settings' property dialog, or "
+"pressing the button on the right."
 msgstr ""
 "<b>Tips:</b> Du kan konfigurere funksjoner for tilgjengelighet for "
 "tastaturet ved å hente opp dialogen «Innstillinger for tilgjengelighet», "
 "eller ved å trykke på knappen til høyre."
 
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:2
+msgid "&lt;i&gt;fast&lt;/i&gt;"
+msgstr ""
+
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:3
-msgid "<i>fast</i>"
-msgstr "<i>rask</i>"
+msgid "&lt;i&gt;loud&lt;/i&gt;"
+msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:4
-msgid "<i>loud</i>"
-msgstr "<i>høy</i>"
+msgid "&lt;i&gt;quiet&lt;/i&gt;"
+msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:5
-msgid "<i>quiet</i>"
-msgstr "<i>stille</i>"
+msgid "&lt;i&gt;slow&lt;/i&gt;"
+msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:6
-msgid "<i>slow</i>"
-msgstr "<i>treg</i>"
+#: capplets/network/gnome-network-preferences.glade.h:1
+#: capplets/theme-switcher/theme-properties.glade.h:1
+msgid "*"
+msgstr "*"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "Cursor"
@@ -1359,10 +1369,11 @@ msgid "Slow"
 msgstr "Sakte"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:25
+#, fuzzy
 msgid ""
-"The keyboard bell is the <i>beep</i> sound heard when the system wants to "
-"get your attention.  You can select a custom sound file to play instead of "
-"the traditional beeping noise."
+"The keyboard bell is the &lt;i&gt;beep&lt;/i&gt; sound heard when the system "
+"wants to get your attention.  You can select a custom sound file to play "
+"instead of the traditional beeping noise."
 msgstr ""
 "Tastaturpip er <i>pip</i>-lyden du hører når systemet vil ha din "
 "oppmerksomhet. Du kan velge en egendefinert lydfil som skal spilles i stedet "
@@ -1688,36 +1699,37 @@ msgid "Mouse Properties"
 msgstr "Egenskaper for mus"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:1
+#, fuzzy
 msgid ""
-"<b>Note:</b> You will need to logout and log back in for this setting to "
-"take effect."
+"&lt;b&gt;Note:&lt;/b&gt; You will need to logout and log back in for this "
+"setting to take effect."
 msgstr ""
 "<b>Merk:</b> Du vil måtte logge inn på nytt igjen for at denne innstillingen "
 "skal tre i kraft."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:2
-msgid "<i>Fast</i>"
-msgstr "<i>Rask</i>"
+msgid "&lt;i&gt;Fast&lt;/i&gt;"
+msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:3
-msgid "<i>High</i>"
-msgstr "<i>Høy</i>"
+msgid "&lt;i&gt;High&lt;/i&gt;"
+msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:4
-msgid "<i>Large</i>"
-msgstr "<i>Stor</i>"
+msgid "&lt;i&gt;Large&lt;/i&gt;"
+msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:5
-msgid "<i>Low</i>"
-msgstr "<i>Lav</i>"
+msgid "&lt;i&gt;Low&lt;/i&gt;"
+msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:6
-msgid "<i>Slow</i>"
-msgstr "<i>Treg</i>"
+msgid "&lt;i&gt;Slow&lt;/i&gt;"
+msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:7
-msgid "<i>Small</i>"
-msgstr "<i>Liten</i>"
+msgid "&lt;i&gt;Small&lt;/i&gt;"
+msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid ""
@@ -1895,48 +1907,40 @@ msgid "Theme"
 msgstr "Tema"
 
 #: capplets/theme-switcher/theme-properties.glade.h:2
-msgid "Go to theme folder..."
-msgstr "Gå til temamappen..."
-
-#: capplets/theme-switcher/theme-properties.glade.h:3
 msgid "Install new theme"
 msgstr "Installer nytt tema"
 
-#: capplets/theme-switcher/theme-properties.glade.h:4
-msgid "Install new theme..."
-msgstr "Installer nytt tema..."
-
-#: capplets/theme-switcher/theme-properties.glade.h:5
-msgid "Install theme:"
-msgstr "Installer tema:"
-
-#: capplets/theme-switcher/theme-properties.glade.h:6
-msgid "Installed themes"
+#: capplets/theme-switcher/theme-properties.glade.h:3
+#, fuzzy
+msgid "Installed Themes"
 msgstr "Installerte tema"
 
-#: capplets/theme-switcher/theme-properties.glade.h:7
+#: capplets/theme-switcher/theme-properties.glade.h:4
 msgid "New themes can also be installed by dragging them into the window."
 msgstr "Nye tema kan også installeres ved å dra dem inn i vinduet."
 
-#: capplets/theme-switcher/theme-properties.glade.h:8
-msgid "Remove theme..."
-msgstr "Fjern tema..."
-
-#: capplets/theme-switcher/theme-properties.glade.h:9
+#: capplets/theme-switcher/theme-properties.glade.h:5
 msgid "Theme Properties"
 msgstr "Egenskaper for tema"
 
-#: capplets/theme-switcher/theme-properties.glade.h:10
-msgid "To rename or remove a theme, click \"Manage themes\"."
-msgstr "For å endre navn på eller fjerne et tema, klikk «Håndter tema»."
+#: capplets/theme-switcher/theme-properties.glade.h:6
+#, fuzzy
+msgid "_Go to theme folder..."
+msgstr "Gå til temamappen..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:11
+#: capplets/theme-switcher/theme-properties.glade.h:7
 msgid "_Install"
 msgstr "_Installer"
 
-#: capplets/theme-switcher/theme-properties.glade.h:12
-msgid "_Use this for my current theme."
-msgstr "Br_uk dette som aktivt tema."
+#: capplets/theme-switcher/theme-properties.glade.h:8
+#, fuzzy
+msgid "_Install new theme..."
+msgstr "Installer nytt tema..."
+
+#: capplets/theme-switcher/theme-properties.glade.h:9
+#, fuzzy
+msgid "_Location of new theme:"
+msgstr "Lokasjonshåndtering"
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Change how toolbars and menus are displayed"
@@ -2668,6 +2672,51 @@ msgstr "Laster hendelser på nytt\n"
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "GConf-nøkkel %s satt til type %s men forventet type var %s\n"
+
+#~ msgid "<b>Test</b>"
+#~ msgstr "<b>Eksempel</b>"
+
+#~ msgid "<i>fast</i>"
+#~ msgstr "<i>rask</i>"
+
+#~ msgid "<i>loud</i>"
+#~ msgstr "<i>høy</i>"
+
+#~ msgid "<i>quiet</i>"
+#~ msgstr "<i>stille</i>"
+
+#~ msgid "<i>slow</i>"
+#~ msgstr "<i>treg</i>"
+
+#~ msgid "<i>Fast</i>"
+#~ msgstr "<i>Rask</i>"
+
+#~ msgid "<i>High</i>"
+#~ msgstr "<i>Høy</i>"
+
+#~ msgid "<i>Large</i>"
+#~ msgstr "<i>Stor</i>"
+
+#~ msgid "<i>Low</i>"
+#~ msgstr "<i>Lav</i>"
+
+#~ msgid "<i>Slow</i>"
+#~ msgstr "<i>Treg</i>"
+
+#~ msgid "<i>Small</i>"
+#~ msgstr "<i>Liten</i>"
+
+#~ msgid "Install theme:"
+#~ msgstr "Installer tema:"
+
+#~ msgid "Remove theme..."
+#~ msgstr "Fjern tema..."
+
+#~ msgid "To rename or remove a theme, click \"Manage themes\"."
+#~ msgstr "For å endre navn på eller fjerne et tema, klikk «Håndter tema»."
+
+#~ msgid "_Use this for my current theme."
+#~ msgstr "Br_uk dette som aktivt tema."
 
 #~ msgid "_Beep on state change"
 #~ msgstr "_Pip ved endring i tilstand"
@@ -4190,9 +4239,6 @@ msgstr "GConf-nøkkel %s satt til type %s men forventet type var %s\n"
 
 #~ msgid "Destroy..."
 #~ msgstr "Ødelegg..."
-
-#~ msgid "Location Management"
-#~ msgstr "Lokasjonshåndtering"
 
 #~ msgid "Rename..."
 #~ msgstr "Endre navn..."
