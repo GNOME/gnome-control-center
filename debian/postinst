@@ -1,0 +1,10 @@
+#!/bin/sh -e
+
+# Call scrollkeeper
+if [ "$1" = configure ]; then
+  scrollkeeper-update
+fi
+
+#DEBHELPER#
+
+exit 0
