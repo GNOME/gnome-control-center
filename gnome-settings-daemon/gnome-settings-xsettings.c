@@ -13,7 +13,7 @@
 #include "gnome-settings-xsettings.h"
 #include "xsettings-manager.h"
 
-extern XSettingsManager *manager;
+extern XSettingsManager **managers;
 
 #ifdef HAVE_XFT2
 #define FONT_RENDER_DIR "/desktop/gnome/font_rendering"
@@ -44,31 +44,40 @@ static void
 translate_bool_int (TranslationEntry *trans,
 		    GConfValue       *value)
 {
+  int i;
+
   g_assert (value->type == trans->gconf_type);
   
-  xsettings_manager_set_int (manager, trans->xsetting_name,
-                             gconf_value_get_bool (value));
+  for (i = 0; managers [i]; i++)  
+    xsettings_manager_set_int (managers [i], trans->xsetting_name,
+                               gconf_value_get_bool (value));
 }
 
 static void
 translate_int_int (TranslationEntry *trans,
                    GConfValue       *value)
 {
+  int i;
+
   g_assert (value->type == trans->gconf_type);
-  
-  xsettings_manager_set_int (manager, trans->xsetting_name,
-                             gconf_value_get_int (value));
+
+  for (i = 0; managers [i]; i++)  
+    xsettings_manager_set_int (managers [i], trans->xsetting_name,
+                               gconf_value_get_int (value));
 }
 
 static void
 translate_string_string (TranslationEntry *trans,
                          GConfValue       *value)
 {
+  int i;
+
   g_assert (value->type == trans->gconf_type);
 
-  xsettings_manager_set_string (manager,
-                                trans->xsetting_name,
-                                gconf_value_get_string (value));
+  for (i = 0; managers [i]; i++)  
+    xsettings_manager_set_string (managers [i],
+                                  trans->xsetting_name,
+                                  gconf_value_get_string (value));
 }
 
 static TranslationEntry translations [] = {
@@ -159,7 +168,10 @@ process_value (TranslationEntry *trans,
 {  
   if (val == NULL)
     {
-      xsettings_manager_delete_setting (manager, trans->xsetting_name);
+      int i;
+
+      for (i = 0; managers [i]; i++)  
+        xsettings_manager_delete_setting (managers [i], trans->xsetting_name);
     }
   else
     {
@@ -181,14 +193,16 @@ static void
 xsettings_callback (GConfEntry *entry)
 {
   TranslationEntry *trans;
-  trans = find_translation_entry (entry->key);
+  int i;
 
+  trans = find_translation_entry (entry->key);
   if (trans == NULL)
     return;
 
   process_value (trans, entry->value);
   
-  xsettings_manager_notify (manager);
+  for (i = 0; managers [i]; i++)  
+    xsettings_manager_notify (managers [i]);
 }
 
 void
@@ -208,11 +222,14 @@ static void
 xft_callback (GConfEntry *entry)
 {
   GConfClient *client;
+  int i;
 
   client = gconf_client_get_default ();
 
   gnome_settings_update_xft (client);
-  xsettings_manager_notify (manager);
+
+  for (i = 0; managers [i]; i++)  
+    xsettings_manager_notify (managers [i]);
 }
 
 typedef struct
@@ -320,11 +337,15 @@ gnome_xft_settings_get (GConfClient      *client,
 static void
 gnome_xft_settings_set_xsettings (GnomeXftSettings *settings)
 {
-  xsettings_manager_set_int (manager, "Xft/Antialias", settings->antialias);
-  xsettings_manager_set_int (manager, "Xft/Hinting", settings->hinting);
-  xsettings_manager_set_string (manager, "Xft/HintStyle", settings->hintstyle);
-  xsettings_manager_set_int (manager, "Xft/DPI", settings->dpi);
-  xsettings_manager_set_string (manager, "Xft/RGBA", settings->rgba);
+  int i;
+  for (i = 0; managers [i]; i++)  
+    {
+      xsettings_manager_set_int (managers [i], "Xft/Antialias", settings->antialias);
+      xsettings_manager_set_int (managers [i], "Xft/Hinting", settings->hinting);
+      xsettings_manager_set_string (managers [i], "Xft/HintStyle", settings->hintstyle);
+      xsettings_manager_set_int (managers [i], "Xft/DPI", settings->dpi);
+      xsettings_manager_set_string (managers [i], "Xft/RGBA", settings->rgba);
+    }
 }
 
 /*
@@ -509,5 +530,6 @@ gnome_settings_xsettings_load (GConfClient *client)
   gnome_settings_update_xft (client);
 #endif /* HAVE_XFT */
 
-  xsettings_manager_notify (manager);
+  for (i = 0; managers [i]; i++)  
+    xsettings_manager_notify (managers [i]);
 }

@@ -56,7 +56,7 @@ struct _GnomeSettingsDaemonPrivate {
 };
 
 static GSList *directories = NULL;
-XSettingsManager *manager;
+XSettingsManager **managers = NULL;
 
 typedef struct DirElement
 {
@@ -128,6 +128,9 @@ static void
 terminate_cb (void *data)
 {
   gboolean *terminated = data;
+
+  if (*terminated)
+    return;
   
   *terminated = TRUE;
   gtk_main_quit ();
@@ -138,7 +141,11 @@ manager_event_filter (GdkXEvent *xevent,
 		      GdkEvent  *event,
 		      gpointer   data)
 {
-  if (xsettings_manager_process_event (manager, (XEvent *)xevent))
+  int screen_num = GPOINTER_TO_INT (data);
+
+  g_return_val_if_fail (managers != NULL, GDK_FILTER_CONTINUE);
+
+  if (xsettings_manager_process_event (managers [screen_num], (XEvent *)xevent))
     return GDK_FILTER_REMOVE;
   else
     return GDK_FILTER_CONTINUE;
@@ -160,13 +167,15 @@ static void
 finalize (GObject *object)
 {
 	GnomeSettingsDaemon *daemon;
+	int                  i;
 
 	daemon = GNOME_SETTINGS_DAEMON (object);
 	if (daemon->private == NULL) {
 	  return;
 	}
 
-	xsettings_manager_destroy (manager);
+	for (i = 0; managers && managers [i]; i++)
+		xsettings_manager_destroy (managers [i]);
 
 	g_free (daemon->private);
 	daemon->private = NULL;
@@ -204,10 +213,18 @@ gnome_settings_daemon_new (void)
   GConfClient *client;
   GSList *list;
   GnomeSettingsDaemon *daemon;
+  GdkDisplay *display;
+  int i;
+  int n_screens;
+
+  display = gdk_display_get_default ();
+  n_screens = gdk_display_get_n_screens (display);
 
   daemon = g_object_new (gnome_settings_daemon_get_type (), NULL);
 
-  if (xsettings_manager_check_running (gdk_display, DefaultScreen (gdk_display)))
+  if (xsettings_manager_check_running (
+		gdk_x11_display_get_xdisplay (display),
+		gdk_screen_get_number (gdk_screen_get_default ())))
     {
       fprintf (stderr, "You can only run one xsettings manager at a time; exiting\n");
       exit (1);
@@ -215,13 +232,27 @@ gnome_settings_daemon_new (void)
       
   if (!terminated)
     {
-      manager = xsettings_manager_new (gdk_display, DefaultScreen (gdk_display),
-				       terminate_cb, &terminated);
-      if (!manager)
-	{
-	  fprintf (stderr, "Could not create xsettings manager!\n");
-	  exit (1);
-	}
+      managers = g_new (XSettingsManager *, n_screens + 1);
+
+      for (i = 0; i < n_screens; i++)
+        {
+          GdkScreen *screen;
+
+          screen = gdk_display_get_screen (display, i);
+
+          managers [i] = xsettings_manager_new (
+				gdk_x11_display_get_xdisplay (display),
+				gdk_screen_get_number (screen),
+				terminate_cb, &terminated);
+          if (!managers [i])
+	    {
+	      fprintf (stderr, "Could not create xsettings manager for screen %d!\n", i);
+	      exit (1);
+	    }
+        }
+
+      g_assert (i == n_screens);
+      managers [i] = NULL;
     }
 
   /* We use GConfClient not GConfClient because a cache isn't useful
@@ -266,8 +297,16 @@ gnome_settings_daemon_new (void)
           g_error_free (error);
         }
     }
-  
-  gdk_window_add_filter (NULL, manager_event_filter, NULL);
+ 
+  for (i = 0; i < n_screens; i++) 
+    {
+      GdkScreen *screen;
+
+      screen = gdk_display_get_screen (display, i);
+      gdk_window_add_filter (
+		gdk_screen_get_root_window (screen),
+		manager_event_filter, GINT_TO_POINTER (i));
+    }
 
 /*  gnome_settings_disk_load (client);*/
   gnome_settings_font_load (client);
