@@ -793,6 +793,14 @@ add_extension_clicked (GtkWidget *widget, gpointer data)
 	extension_list = GTK_LIST (data);
 
 	new_extension = nautilus_mime_type_capplet_show_new_extension_window ();
+	
+	/* Filter out bogus extensions */
+	if (new_extension == NULL || strlen (new_extension) <= 0 || new_extension[0] == ' ') {
+		g_free (new_extension);
+		g_message ("Bogus");
+		return;
+	}
+	
 	new_list_item = gtk_list_item_new_with_label (new_extension);
 	gtk_widget_show (new_list_item);
 
@@ -874,14 +882,16 @@ get_extensions_from_gtk_list (GtkList *list)
 }
 
 char *
-nautilus_mime_type_capplet_show_change_extension_window (const char *mime_type)
+nautilus_mime_type_capplet_show_change_extension_window (const char *mime_type, gboolean *new_list)
 {
 	GtkWidget *dialog;
 	GtkWidget *hbox;
 	GtkWidget *button;
 	GtkWidget *list;
-	char *extensions_list;
+	char *extensions_list_str;
 
+	*new_list = FALSE;
+	
         dialog = gnome_dialog_new (_("File Extensions "), 
 				   GNOME_STOCK_BUTTON_OK, 
 				   GNOME_STOCK_BUTTON_CANCEL, 
@@ -933,7 +943,6 @@ nautilus_mime_type_capplet_show_change_extension_window (const char *mime_type)
 
 
 		extensions_list = gnome_vfs_mime_get_extensions_list (mime_type);
-
 		if (extensions_list != NULL) {
 			widget_list = NULL;
 			for (temp = extensions_list; temp != NULL; temp = temp->next) {
@@ -951,21 +960,25 @@ nautilus_mime_type_capplet_show_change_extension_window (const char *mime_type)
         gtk_widget_show_all (GNOME_DIALOG (dialog)->vbox);
 
         switch (gnome_dialog_run (GNOME_DIALOG (dialog))) {
+	        /* OK */
 	        case 0:
-			extensions_list = get_extensions_from_gtk_list (GTK_LIST (list));
-			if (extensions_list == NULL) {
-				extensions_list = g_strdup ("");
+			*new_list = TRUE;
+			extensions_list_str = get_extensions_from_gtk_list (GTK_LIST (list));
+			if (extensions_list_str == NULL) {
+				extensions_list_str = g_strdup ("");				
 			}
 			break;
+		
+		/* Cancel */
 	        case 1:
 	        default:
-			extensions_list = g_strdup ("");
+			extensions_list_str = g_strdup ("");
 	        	break;
 	}        
 	gnome_dialog_close (GNOME_DIALOG (dialog));
 
 
-	return extensions_list;
+	return extensions_list_str;
 }
 
 

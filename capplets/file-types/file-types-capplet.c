@@ -474,15 +474,17 @@ change_file_extensions_clicked (GtkWidget *widget, gpointer user_data)
 {
 	const char *mime_type;
 	char *new_extensions;
+	gboolean use_new_list;
 
 	mime_type = get_selected_mime_type ();
 	if (mime_type == NULL) {
 		return;
 	}
 
-	new_extensions = nautilus_mime_type_capplet_show_change_extension_window (mime_type);
-
-	gnome_vfs_mime_set_extensions_list (mime_type, new_extensions);
+	new_extensions = nautilus_mime_type_capplet_show_change_extension_window (mime_type, &use_new_list);
+	if (use_new_list) {
+		gnome_vfs_mime_set_extensions_list (mime_type, new_extensions);
+	}
 
 	update_extensions_list (mime_type);
 }
