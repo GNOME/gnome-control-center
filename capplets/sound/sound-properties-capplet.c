@@ -171,11 +171,6 @@ main (int argc, char **argv)
 		dialog = create_dialog ();
 		setup_dialog (dialog, changeset);
 
-#if 0
-		gnome_window_icon_set_default_from_file
-			(GNOMECC_ICONS_DIR "sound-capplet.png");
-#endif
-
 		dialog_win = gtk_dialog_new_with_buttons
 			(_("Sound preferences"), NULL, GTK_DIALOG_NO_SEPARATOR,
 			 GTK_STOCK_HELP, GTK_RESPONSE_HELP,
@@ -184,6 +179,7 @@ main (int argc, char **argv)
 
 		g_signal_connect (G_OBJECT (dialog_win), "response", (GCallback) dialog_button_clicked_cb, changeset);
 		gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog_win)->vbox), WID ("prefs_widget"), TRUE, TRUE, GNOME_PAD_SMALL);
+		capplet_set_icon (dialog_win, "sound-capplet.png");
 		gtk_widget_show_all (dialog_win);
 
 		gtk_main ();
