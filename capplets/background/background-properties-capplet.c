@@ -182,6 +182,7 @@ static gboolean
 drag_motion_cb (GtkWidget *widget, GdkDragContext *context,
 		gint x, gint y, guint time, gpointer data)
 {
+	printf ("motion\n");
 	return FALSE;
 }
 
@@ -189,6 +190,7 @@ static void
 drag_leave_cb (GtkWidget *widget, GdkDragContext *context,
 	       guint time, gpointer data)
 {
+	printf ("left\n");
 	gtk_widget_queue_draw (widget);
 }
 
@@ -201,6 +203,8 @@ drag_data_received_cb (GtkWidget *widget, GdkDragContext *context,
 	GList *list;
 	GList *uris;
 	GnomeVFSURI *uri;
+
+	printf ("received\n");
 
 	if (info == TARGET_URI_LIST) {
 		uris = gnome_vfs_uri_list_parse ((gchar *) selection_data->
@@ -620,9 +624,9 @@ change_background_type_toggles (BackgroundType background_type, GtkWidget **togg
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (toggle_array[background_type]), TRUE);
 
 	if (background_type == BACKGROUND_TYPE_NO_PICTURE) {
-		gtk_label_set_text (GTK_LABEL (border_shading_label), "Fill the background with a ");
+		gtk_label_set_text (GTK_LABEL (border_shading_label), "Fill the background with a:");
 	} else {
-		gtk_label_set_text (GTK_LABEL (border_shading_label), "Border the picture with a ");
+		gtk_label_set_text (GTK_LABEL (border_shading_label), "Border the picture with a:");
 	}
 }
 
@@ -651,6 +655,12 @@ set_background_picture (const char *filename)
 	bg_preferences_load (BG_PREFERENCES (bg_preferences));
 
 	update_preview_widgets (BG_PREFERENCES (bg_preferences), appliers, BG_APPLIER (bg_root_applier));
+
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (toggle_array[BACKGROUND_TYPE_NO_PICTURE]))) {
+		/* no picture is selected, change to centered so people don't get confused as
+		   to why the image isn't "taking */
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (toggle_array[BACKGROUND_TYPE_CENTERED]), TRUE);
+	}
 }
 
 
@@ -762,6 +772,12 @@ dialog_button_clicked_cb (GtkDialog *dialog, gint response_id, GConfChangeSet *c
 	}
 }
 
+static void
+quit_cb (GtkWidget *widget, gpointer data)
+{
+	gtk_main_quit();
+}
+
 int
 main (int argc, char **argv) 
 {
@@ -826,13 +842,18 @@ main (int argc, char **argv)
 		gtk_drag_dest_set (dialog_win, GTK_DEST_DEFAULT_ALL,
 				   drop_types, n_drop_types,
 				   GDK_ACTION_COPY | GDK_ACTION_LINK | GDK_ACTION_MOVE);
-		g_signal_connect (G_OBJECT (dialog_win), "drag_motion",
+		g_signal_connect (G_OBJECT (dialog_win), "drag-motion",
 				  G_CALLBACK (drag_motion_cb), NULL);
-		g_signal_connect (G_OBJECT (dialog_win), "drag_leave",
+		g_signal_connect (G_OBJECT (dialog_win), "drag-leave",
 				  G_CALLBACK (drag_leave_cb), NULL);
-		g_signal_connect (G_OBJECT (dialog_win), "drag_data_received",
+		g_signal_connect (G_OBJECT (dialog_win), "drag-data-received",
 				  G_CALLBACK (drag_data_received_cb),
 				  NULL);
+
+		g_signal_connect (G_OBJECT (dialog_win), "close",
+				  G_CALLBACK (quit_cb), NULL);
+		g_signal_connect (G_OBJECT (dialog_win), "response",
+				  G_CALLBACK (quit_cb), NULL);
 
 		gtk_widget_show_all (dialog_win);
 
