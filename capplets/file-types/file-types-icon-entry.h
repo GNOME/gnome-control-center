@@ -15,11 +15,10 @@
 
 #include <gtk/gtkframe.h>
 #include <gtk/gtkvbox.h>
-#include <libgnome/gnome-defs.h>
 #include <libgnomeui/gnome-file-entry.h>
 
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 
 #define NAUTILUS_TYPE_MIME_ICON_ENTRY	 	 (nautilus_mime_type_icon_entry_get_type ())
@@ -67,6 +66,6 @@ gchar      *nautilus_mime_type_icon_entry_get_full_filename	(NautilusMimeIconEnt
 gchar      *nautilus_mime_type_icon_entry_get_relative_filename	(NautilusMimeIconEntry *ientry);
 void	    nautilus_mime_type_show_icon_selection 	(NautilusMimeIconEntry * ientry);
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif
