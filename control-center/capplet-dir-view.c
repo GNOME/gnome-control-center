@@ -279,7 +279,7 @@ about_menu_cb (GtkWidget *widget, CappletDirView *view)
 	static gchar *authors[] = {
 		"Bradford Hovinen <hovinen@ximian.com>",
 		"Jacob Berkman <jacob@ximian.com>",
-		"Johnathan Blandford <jrb@redhat.com>",
+		"Jonathan Blandford <jrb@redhat.com>",
 		"Jakub Steiner <jimmac@ximian.com>",
 		"Richard Hestilow <hestilow@ximian.com>",
 		"Chema Celorio <chema@ximian.com>",
