@@ -33,10 +33,10 @@
 #include <math.h>
 
 #include "capplet-util.h"
+#include "capplet-stock-icons.h"
 #include "gconf-property-editor.h"
 #include "activate-settings-daemon.h"
 
-#define IDIR GNOMECC_DATA_DIR "/pixmaps/"
 #define CONFIG_ROOT "/desktop/gnome/accessibility/keyboard"
 
 static struct {
@@ -47,22 +47,22 @@ static struct {
 	char const * const content [3];
 	gboolean always_enabled;
 } const features [] = {
-	{ "repeatkeys_enable", "repeatkeys_image", IDIR "keyboard-repeat.png",
+	{ "repeatkeys_enable", "repeatkeys_image", KEYBOARD_REPEAT,
 		"/desktop/gnome/peripherals/keyboard/repeat",
 		{ "repeatkeys_table", NULL, NULL }, TRUE },
-	{ "bouncekeys_enable", "bouncekeys_image", IDIR "accessibility-keyboard-bouncekey.png",
+	{ "bouncekeys_enable", "bouncekeys_image", ACCESSX_KEYBOARD_BOUNCE,
 		CONFIG_ROOT "/bouncekeys_enable",
 		{ "bouncekey_table", NULL, NULL }, FALSE },
-	{ "slowkeys_enable", "slowkeys_image", IDIR "accessibility-keyboard-slowkey.png",
+	{ "slowkeys_enable", "slowkeys_image", ACCESSX_KEYBOARD_SLOW,
 		CONFIG_ROOT "/slowkeys_enable",
 		{ "slowkeys_table", NULL, NULL }, FALSE },
-	{ "mousekeys_enable", "mousekeys_image", IDIR "accessibility-keyboard-mousekey.png",
+	{ "mousekeys_enable", "mousekeys_image", ACCESSX_KEYBOARD_MOUSE,
 		CONFIG_ROOT "/mousekeys_enable",
 		{ "mousekeys_table", NULL, NULL }, FALSE },
-	{ "stickykeys_enable", "stickykeys_image", IDIR "accessibility-keyboard-stickykey.png",
+	{ "stickykeys_enable", "stickykeys_image", ACCESSX_KEYBOARD_STICK,
 		CONFIG_ROOT "/stickykeys_enable",
 		{ "stickeykeys_table", NULL, NULL }, FALSE },
-	{ "togglekeys_enable", "togglekeys_image", IDIR "accessibility-keyboard-togglekey.png",
+	{ "togglekeys_enable", "togglekeys_image", ACCESSX_KEYBOARD_TOGGLE,
 		CONFIG_ROOT "/togglekeys_enable",
 		{ NULL, NULL, NULL }, FALSE },
 	{ "timeout_enable", NULL, NULL,
@@ -223,9 +223,10 @@ setup_images (GladeXML *dialog)
 {
 	int i = G_N_ELEMENTS (features);
 	while (i-- > 0)
-		if (features [i].image != NULL)
-			gtk_image_set_from_file (GTK_IMAGE (WID (features [i].image)),
-				features [i].image_file);
+		if (features [i].image != NULL) 
+			gtk_image_set_from_stock (GTK_IMAGE (WID (features [i].image)),	
+						  features [i].image_file, 
+						  keyboard_capplet_icon_get_size ());
 }
 
 static void
@@ -258,6 +259,8 @@ static void
 setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 {
 	GtkWidget *master_enable = WID ("master_enable");
+
+	capplet_init_stock_icons ();
 	setup_images (dialog);
 	setup_ranges (dialog, changeset);
 	setup_toggles (dialog, changeset);

@@ -37,22 +37,11 @@
 #include "capplet-util.h"
 #include "gconf-property-editor.h"
 #include "activate-settings-daemon.h"
-#include "inlinepixbufs.h"
+#include "capplet-stock-icons.h"
 
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <dirent.h>
-
-#define MOUSE_DBLCLCK_MAYBE "mouse-dblclck-maybe"
-#define MOUSE_DBLCLCK_ON    "mouse-dblclck-on"
-#define MOUSE_DBLCLCK_OFF   "mouse-dblclck-off"
-
-#define MOUSE_CAPPLET_DEFAULT_ICON_SIZE 100 
-
-static void mouse_init_stock_icons (void);
-static void register_mouse_stock_icons (GtkIconFactory *factory);
-
-static GtkIconSize mouse_capplet_icon_size = 0;
 
 /******************************************************************************/
 /* A quick custom widget to ensure that the left handed toggle works no matter
@@ -110,11 +99,9 @@ enum
 
 #define DOUBLE_CLICK_KEY "/desktop/gnome/peripherals/mouse/double_click"
 #define CURSOR_FONT_KEY "/desktop/gnome/peripherals/mouse/cursor_font"
-/* Write-once data; global for convenience. Set only by load_pixbufs */
 
-GdkPixbuf *left_handed_pixbuf;
-GdkPixbuf *right_handed_pixbuf;
 GConfClient *client;
+
 /* State in testing the double-click speed. Global for a great deal of
  * convenience
  */
@@ -273,7 +260,7 @@ test_maybe_timeout (struct test_data_t *data)
 	double_click_state = DOUBLE_CLICK_TEST_OFF;
 
 	gtk_image_set_from_stock (GTK_IMAGE (data->image), 
-				  MOUSE_DBLCLCK_OFF, mouse_capplet_icon_size);
+				  MOUSE_DBLCLCK_OFF, mouse_capplet_dblclck_icon_get_size());
 
 	*data->timeout_id = 0;
 
@@ -335,15 +322,15 @@ event_box_button_press_event (GtkWidget   *widget,
 	switch (double_click_state) {
 	case DOUBLE_CLICK_TEST_ON:
 		gtk_image_set_from_stock (GTK_IMAGE (image), 
-					  MOUSE_DBLCLCK_ON, mouse_capplet_icon_size);
+					  MOUSE_DBLCLCK_ON, mouse_capplet_dblclck_icon_get_size());
 		break;
 	case DOUBLE_CLICK_TEST_MAYBE:
 		gtk_image_set_from_stock (GTK_IMAGE (image), 
-					  MOUSE_DBLCLCK_MAYBE, mouse_capplet_icon_size);
+					  MOUSE_DBLCLCK_MAYBE, mouse_capplet_dblclck_icon_get_size());
 		break;
 	case DOUBLE_CLICK_TEST_OFF:
 		gtk_image_set_from_stock (GTK_IMAGE (image), 
-					  MOUSE_DBLCLCK_OFF, mouse_capplet_icon_size);
+					  MOUSE_DBLCLCK_OFF, mouse_capplet_dblclck_icon_get_size());
 		break;
 	}
 
@@ -357,38 +344,12 @@ event_box_button_press_event (GtkWidget   *widget,
 static void
 left_handed_toggle_cb (GConfPropertyEditor *peditor, const gchar *key, const GConfValue *value, GtkWidget *image)
 {
-	if (value && gconf_value_get_bool (value))
-		g_object_set (G_OBJECT (image),
-			      "pixbuf", left_handed_pixbuf,
-			      NULL);
-	else
-		g_object_set (G_OBJECT (image),
-			      "pixbuf", right_handed_pixbuf,
-			      NULL);
-}
-
-/* Load the pixbufs we are going to use */
-
-static void
-load_pixbufs (void) 
-{
-	static gboolean called = FALSE;
-	gchar *filename;
-	GnomeProgram *program;
-
-	if (called) return;
-
-	program = gnome_program_get ();
-
-	filename = gnome_program_locate_file (program, GNOME_FILE_DOMAIN_APP_PIXMAP, "mouse-left.png", TRUE, NULL);
-	left_handed_pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
-	g_free (filename);
-
-	filename = gnome_program_locate_file (program, GNOME_FILE_DOMAIN_APP_PIXMAP, "mouse-right.png", TRUE, NULL);
-	right_handed_pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
-	g_free (filename);
-
-	called = TRUE;
+	if (value && gconf_value_get_bool (value)) {
+		gtk_image_set_from_stock (GTK_IMAGE (image), MOUSE_LEFT_HANDED, mouse_capplet_icon_get_size ());
+	}
+	else {
+		gtk_image_set_from_stock (GTK_IMAGE (image), MOUSE_RIGHT_HANDED, mouse_capplet_icon_get_size ());
+	}
 }
 
 static gchar *
@@ -541,7 +502,7 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 	gconf_value_free (value);
 
 	/* Double-click time */
-	gtk_image_set_from_stock (GTK_IMAGE (WID ("double_click_image")), MOUSE_DBLCLCK_OFF, mouse_capplet_icon_size);
+	gtk_image_set_from_stock (GTK_IMAGE (WID ("double_click_image")), MOUSE_DBLCLCK_OFF, mouse_capplet_dblclck_icon_get_size ());
 	g_object_set_data (G_OBJECT (WID ("double_click_eventbox")), "image", WID ("double_click_image"));
 	g_signal_connect (WID ("double_click_eventbox"), "button_press_event",
 			  G_CALLBACK (event_box_button_press_event), changeset);
@@ -762,7 +723,7 @@ main (int argc, char **argv)
 			    GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
 			    NULL);
 
-	mouse_init_stock_icons ();
+	capplet_init_stock_icons ();
 
 	activate_settings_daemon ();
 
@@ -774,7 +735,6 @@ main (int argc, char **argv)
 	} else {
 		changeset = NULL;
 		dialog = create_dialog ();
-		load_pixbufs ();
 		setup_dialog (dialog, changeset);
 
 		dialog_win = WID ("mouse_properties_dialog");
@@ -788,52 +748,4 @@ main (int argc, char **argv)
 	}
 
 	return 0;
-}
-
-typedef struct
-{
-	char *stock_id;
-	const guint8 *icon_data;
-} MouseStockIcon;
-
-static void
-register_mouse_stock_icons (GtkIconFactory *factory)
-{
-	gint i;
-	MouseStockIcon items[] =
-	{
-		{ MOUSE_DBLCLCK_MAYBE, mouse_dblclck_maybe_data },
-		{ MOUSE_DBLCLCK_ON, mouse_dblclck_on_data },
-		{ MOUSE_DBLCLCK_OFF, mouse_dblclck_off_data }
-	};
-
-	for (i = 0; i < G_N_ELEMENTS(items); ++i) {
-		GtkIconSet *icon_set;
-		GdkPixbuf *pixbuf;
-		pixbuf = gdk_pixbuf_new_from_inline (-1, items[i].icon_data,
-						     FALSE, NULL);
-
-		icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
-		gtk_icon_factory_add (factory, items[i].stock_id, icon_set);
-
-		gtk_icon_set_unref (icon_set);
-		g_object_unref (G_OBJECT (pixbuf));
-	}
-}
-
-static void
-mouse_init_stock_icons (void)
-{
-	GtkIconFactory *factory;
-
-	factory = gtk_icon_factory_new ();
-	gtk_icon_factory_add_default (factory);
-
-	register_mouse_stock_icons (factory);
-
-	mouse_capplet_icon_size = gtk_icon_size_register ("mouse-capplet-icon",
-						  MOUSE_CAPPLET_DEFAULT_ICON_SIZE,
-						  MOUSE_CAPPLET_DEFAULT_ICON_SIZE);
-
-	g_object_unref (factory);
 }

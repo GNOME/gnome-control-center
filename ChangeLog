@@ -1,3 +1,21 @@
+2003-01-08  Rajkumar Sivasamy  <rajkumar.siva@wipro.com>
+
+	* capplets/common/capplet-stock-icons.[ch]: Utility file to register 
+	the images used by capplets as stock-icons
+
+	* capplets/common/Makefile.am: Changes to include the above file
+
+	* capplets/keyboard/gnome-keyboard-properties.c:
+	* capplets/accessibility/keyboard/accessibility-keyboard.c:
+	Use stock-icons
+
+	* capplets/mouse/Makefile.am:
+	* capplets/mouse/gnome-mouse-properties.c:
+	Use stock-icons. Also register the icons through capplet-stock-icons.[ch]
+	instead of doing it here.
+
+	Fixes Bug 101977
+
 2002-11-29  Remi Cohen-Scali  <remi@cohen-scali.com>
 
 	Reviewed by: Jody Goldberg <jody@gnome.org>
