@@ -1334,11 +1334,13 @@ slave_data_cb (GIOChannel *channel, GIOCondition condition,
 	g_return_val_if_fail (slave->config_log != NULL, FALSE);
 	g_return_val_if_fail (IS_CONFIG_LOG (slave->config_log), FALSE);
 
-	if (condition == G_IO_HUP || slave->buffer->closed) {
+	DEBUG_MSG ("Condition is %d", condition);
+
+	if (condition & G_IO_HUP || slave->buffer->closed) {
 		slave_destroy (slave);
 		return FALSE;
 	}
-	else if (condition == G_IO_IN) {
+	else if (condition & G_IO_IN) {
 		if (load_log_entry (slave->config_log, TRUE, slave->buffer,
 				    NULL) != NULL)
 			slave_broadcast_data (slave, slave->config_log);
