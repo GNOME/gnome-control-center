@@ -117,7 +117,7 @@ xkb_model_chooser_response (GtkDialog *dialog,
           gtk_tree_model_get (listStore, &iter, 
                               1, &modelName, -1);
 
-          gconf_client_set_string (gconf_client_get_default (),
+          gconf_client_set_string (xkbGConfClient,
 			           GSWITCHIT_KBD_CONFIG_KEY_MODEL,
 			           modelName, NULL);
           g_free(modelName);
@@ -131,7 +131,7 @@ choose_model(GladeXML * dialog)
   GladeXML* chooserDialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gnome-keyboard-properties.glade", "xkb_model_chooser", NULL);
   GtkWidget* chooser = CWID ( "xkb_model_chooser");
   gtk_window_set_transient_for (GTK_WINDOW (chooser), GTK_WINDOW (WID ("keyboard_dialog")));
-  currentModelName = gconf_client_get_string (gconf_client_get_default (),
+  currentModelName = gconf_client_get_string (xkbGConfClient,
 			           GSWITCHIT_KBD_CONFIG_KEY_MODEL, NULL);
   fill_models_list (chooserDialog);
   g_signal_connect (G_OBJECT (chooser),

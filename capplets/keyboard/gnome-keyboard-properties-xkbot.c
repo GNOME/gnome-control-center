@@ -148,7 +148,7 @@ can_add_option (GladeXML * dialog)
 }
 
 static void
-enable_disable_options_buttons (GladeXML * dialog)
+xkb_options_enable_disable_buttons (GladeXML * dialog)
 {
   GtkWidget *addOptionBtn = WID ("xkb_options_add");
   GtkWidget *delOptionBtn = WID ("xkb_options_remove");
@@ -164,7 +164,7 @@ enable_disable_options_buttons (GladeXML * dialog)
 }
 
 void
-prepare_selected_options_tree (GladeXML * dialog)
+xkb_options_prepare_selected_tree (GladeXML * dialog)
 {
   GtkListStore *listStore =
     gtk_list_store_new (3, G_TYPE_STRING, G_TYPE_STRING,
@@ -184,11 +184,11 @@ prepare_selected_options_tree (GladeXML * dialog)
   gtk_tree_view_append_column (GTK_TREE_VIEW (treeView), column);
   g_signal_connect_swapped (G_OBJECT (selection), "changed",
 			    G_CALLBACK
-			    (enable_disable_options_buttons), dialog);
+			    (xkb_options_enable_disable_buttons), dialog);
 }
 
 static void
-add_selected_option (GtkWidget * button, GladeXML * dialog)
+xkb_options_add_selected (GtkWidget * button, GladeXML * dialog)
 {
   GtkTreeSelection *selection =
     gtk_tree_view_get_selection (GTK_TREE_VIEW
@@ -198,16 +198,16 @@ add_selected_option (GtkWidget * button, GladeXML * dialog)
   if (gtk_tree_selection_get_selected (selection, &model, &selectedIter))
     {
       gchar *id;
-      GSList *optionsList = get_selected_options_list ();
+      GSList *optionsList = xkb_options_get_selected_list ();
       gtk_tree_model_get (model, &selectedIter, 1, &id, -1);
       optionsList = g_slist_append (optionsList, id);
-      set_selected_options_list (optionsList);
+      xkb_options_set_selected_list (optionsList);
       clear_xkb_elements_list (optionsList);
     }
 }
 
 static void
-remove_selected_option (GtkWidget * button, GladeXML * dialog)
+xkb_options_remove_selected (GtkWidget * button, GladeXML * dialog)
 {
   GtkTreeSelection *selection =
     gtk_tree_view_get_selection (GTK_TREE_VIEW
@@ -216,7 +216,7 @@ remove_selected_option (GtkWidget * button, GladeXML * dialog)
   GtkTreeModel *model;
   if (gtk_tree_selection_get_selected (selection, &model, &selectedIter))
     {
-      GSList *optionsList = get_selected_options_list ();
+      GSList *optionsList = xkb_options_get_selected_list ();
       GtkTreePath *path = gtk_tree_model_get_path (model,
 						   &selectedIter);
       if (path != NULL)
@@ -232,7 +232,7 @@ remove_selected_option (GtkWidget * button, GladeXML * dialog)
 
 	  g_free (id);
 
-	  set_selected_options_list (optionsList);
+	  xkb_options_set_selected_list (optionsList);
 	  gtk_tree_path_free (path);
 	}
       clear_xkb_elements_list (optionsList);
@@ -240,8 +240,8 @@ remove_selected_option (GtkWidget * button, GladeXML * dialog)
 }
 
 static void
-add_option_to_available_options_tree (const XklConfigItemPtr
-				      configItem, GladeXML * dialog)
+xkb_options_add_option_to_available_tree (const XklConfigItemPtr
+                                          configItem, GladeXML * dialog)
 {
   GtkWidget *optionsTree = WID ("xkb_options_available");
   GtkTreeIter iter;
@@ -258,10 +258,10 @@ add_option_to_available_options_tree (const XklConfigItemPtr
 }
 
 static void
-add_group_to_available_options_tree (const XklConfigItemPtr
-				     configItem,
-				     Bool allowMultipleSelection,
-				     GladeXML * dialog)
+xkb_options_add_group_to_available_tree (const XklConfigItemPtr
+                                         configItem,
+                                         Bool allowMultipleSelection,
+                                         GladeXML * dialog)
 {
   GtkWidget *optionsTree = WID ("xkb_options_available");
   GtkTreeStore *treeStore =
@@ -277,11 +277,11 @@ add_group_to_available_options_tree (const XklConfigItemPtr
   current1stLevelId = configItem->name;
 
   XklConfigEnumOptions (configItem->name, (ConfigItemProcessFunc)
-			add_option_to_available_options_tree, dialog);
+			xkb_options_add_option_to_available_tree, dialog);
 }
 
 void
-fill_available_options_tree (GladeXML * dialog)
+xkb_options_fill_available_tree (GladeXML * dialog)
 {
   GtkTreeStore *treeStore =
     gtk_tree_store_new (3, G_TYPE_STRING, G_TYPE_STRING,
@@ -302,19 +302,19 @@ fill_available_options_tree (GladeXML * dialog)
   gtk_tree_view_append_column (GTK_TREE_VIEW (treeView), column);
 
   XklConfigEnumOptionGroups ((GroupProcessFunc)
-			     add_group_to_available_options_tree, dialog);
+			     xkb_options_add_group_to_available_tree, dialog);
 
   sort_tree_content (treeView);
 
   g_signal_connect_swapped (G_OBJECT (selection), "changed",
 			    G_CALLBACK
-			    (enable_disable_options_buttons), dialog);
+			    (xkb_options_enable_disable_buttons), dialog);
 }
 
 void
-fill_selected_options_tree (GladeXML * dialog)
+xkb_options_fill_selected_tree (GladeXML * dialog)
 {
-  GSList *options = get_selected_options_list ();
+  GSList *options = xkb_options_get_selected_list ();
   GSList *curOption;
   GtkListStore *listStore =
     GTK_LIST_STORE (gtk_tree_view_get_model
@@ -349,30 +349,30 @@ fill_selected_options_tree (GladeXML * dialog)
     }
 
   clear_xkb_elements_list (options);
-  enable_disable_options_buttons (dialog);
+  xkb_options_enable_disable_buttons (dialog);
 }
 
 void
-register_options_buttons_handlers (GladeXML * dialog)
+xkb_options_register_buttons_handlers (GladeXML * dialog)
 {
   g_signal_connect (G_OBJECT (WID ("xkb_options_add")), "clicked",
-		    G_CALLBACK (add_selected_option), dialog);
+		    G_CALLBACK (xkb_options_add_selected), dialog);
   g_signal_connect (G_OBJECT (WID ("xkb_options_remove")), "clicked",
-		    G_CALLBACK (remove_selected_option), dialog);
+		    G_CALLBACK (xkb_options_remove_selected), dialog);
 }
 static void
-update_options_list (GConfClient * client,
-		     guint cnxn_id, GConfEntry * entry, GladeXML * dialog)
+xkb_options_update_list (GConfClient * client,
+                         guint cnxn_id, GConfEntry * entry, GladeXML * dialog)
 {
-  fill_selected_options_tree (dialog);
+  xkb_options_fill_selected_tree (dialog);
   enable_disable_restoring (dialog);
 }
 
 void
-register_options_gconf_listener (GladeXML * dialog)
+xkb_options_register_gconf_listener (GladeXML * dialog)
 {
-  gconf_client_notify_add (gconf_client_get_default (),
+  gconf_client_notify_add (xkbGConfClient,
 			   GSWITCHIT_KBD_CONFIG_KEY_OPTIONS,
 			   (GConfClientNotifyFunc)
-			   update_options_list, dialog, NULL, NULL);
+			   xkb_options_update_list, dialog, NULL, NULL);
 }

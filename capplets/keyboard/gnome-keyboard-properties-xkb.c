@@ -44,6 +44,8 @@
 
 static GSwitchItKbdConfig initialConfig;
 
+GConfClient *xkbGConfClient;
+
 char *
 xci_desc_to_utf8 (XklConfigItem * ci)
 {
@@ -105,12 +107,14 @@ cleanup_xkb_tabs (GladeXML * dialog)
   XklConfigFreeRegistry ();
   XklConfigTerm ();
   XklTerm ();
+  g_object_unref (xkbGConfClient);
+  xkbGConfClient = NULL;
 }
 
 static void
 reset_to_defaults (GtkWidget * button, GladeXML * dialog)
 {
-  gconf_client_set_bool (gconf_client_get_default (),
+  gconf_client_set_bool (xkbGConfClient,
 			 GSWITCHIT_KBD_CONFIG_KEY_OVERRIDE_SETTINGS,
 			 TRUE, NULL);
   /* all the rest is g-s-d's business */
@@ -123,33 +127,15 @@ update_model (GConfClient * client,
   enable_disable_restoring (dialog);
 }
 
-static void
-notebook_page_changed (GtkNotebook * notebook,
-                       GtkNotebookPage * page,
-                       guint pageNum,
-                       GladeXML * dialog)
-{
-  switch (pageNum)
-  {
-    case 1:
-    case 2:
-      break;
-    default:
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("enable_preview")), FALSE);
-  }
-}
-
 void
 setup_xkb_tabs (GladeXML * dialog, GConfChangeSet * changeset)
 {
-  GConfClient *confClient = gconf_client_get_default ();
-  gboolean isXkb;
+  xkbGConfClient = gconf_client_get_default ();
+  GObject * peditor;
 
   XklInit (GDK_DISPLAY ());
   XklConfigInit ();
   XklConfigLoadRegistry ();
-
-//  fill_models_option_menu (dialog);
 
   gconf_peditor_new_string
     (changeset, (gchar *) GSWITCHIT_KBD_CONFIG_KEY_MODEL,
@@ -157,58 +143,54 @@ setup_xkb_tabs (GladeXML * dialog, GConfChangeSet * changeset)
      "conv-to-widget-cb", model_to_widget,
      "conv-from-widget-cb", model_from_widget, NULL);
 
-  fill_available_layouts_tree (dialog);
-  fill_available_options_tree (dialog);
-  prepare_selected_layouts_tree (dialog);
-  prepare_selected_options_tree (dialog);
-  fill_selected_layouts_tree (dialog);
-  fill_selected_options_tree (dialog);
+  peditor = gconf_peditor_new_boolean
+    (changeset, (gchar *) GSWITCHIT_CONFIG_KEY_GROUP_PER_WINDOW, 
+	WID ("chk_separate_group_per_window"), NULL);
 
-  register_layouts_buttons_handlers (dialog);
-  register_options_buttons_handlers (dialog);
+  /*g_signal_connect (peditor, "value-changed", (GCallback) left_handed_toggle_cb, WID ("orientation_image"));*/
+
+/* tab 2 */
+  /*fill_available_layouts_tree (dialog);*/
+  xkb_layouts_prepare_selected_tree (dialog, changeset);
+  xkb_layouts_fill_selected_tree (dialog);
+
+/* tab 3 */
+  xkb_options_fill_available_tree (dialog);
+  xkb_options_prepare_selected_tree (dialog);
+  xkb_options_fill_selected_tree (dialog);
+
+  xkb_layouts_register_buttons_handlers (dialog);
+  xkb_options_register_buttons_handlers (dialog);
   g_signal_connect (G_OBJECT (WID ("xkb_reset_to_defaults")), "clicked",
 		    G_CALLBACK (reset_to_defaults), dialog);
 
   g_signal_connect_swapped (G_OBJECT (WID ("xkb_model_pick")), "clicked",
 		            G_CALLBACK (choose_model), dialog);
 
-  register_layouts_gconf_listener (dialog);
-  register_options_gconf_listener (dialog);
+  xkb_layouts_register_gconf_listener (dialog);
+  xkb_options_register_gconf_listener (dialog);
 
   g_signal_connect (G_OBJECT (WID ("keyboard_dialog")),
 		    "destroy", G_CALLBACK (cleanup_xkb_tabs), dialog);
 
-  gconf_client_notify_add (gconf_client_get_default (),
+  gconf_client_notify_add (xkbGConfClient,
 			   GSWITCHIT_KBD_CONFIG_KEY_MODEL,
 			   (GConfClientNotifyFunc)
 			   update_model, dialog, NULL, NULL);
 
-  GSwitchItKbdConfigInit (&initialConfig, confClient);
-  g_object_unref (confClient);
+  GSwitchItKbdConfigInit (&initialConfig, xkbGConfClient);
   GSwitchItKbdConfigLoadInitial (&initialConfig);
 
   enable_disable_restoring (dialog);
-
-  isXkb = !strcmp (XklGetBackendName(), "XKB");
-  if (!isXkb)
-    gtk_widget_hide (WID ("enable_preview"));
-
-  g_signal_connect_swapped (G_OBJECT (WID ("enable_preview")), "toggled",
-		            G_CALLBACK (preview_toggled), dialog);
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("enable_preview")), FALSE);
-  g_signal_connect (G_OBJECT (WID ("keyboard_notebook")), "switch-page",
-		    G_CALLBACK (notebook_page_changed), dialog);
 }
 
 void
 enable_disable_restoring (GladeXML * dialog)
 {
   GSwitchItKbdConfig gswic;
-  GConfClient *confClient = gconf_client_get_default ();
   gboolean enable;
 
-  GSwitchItKbdConfigInit (&gswic, confClient);
-  g_object_unref (confClient);
+  GSwitchItKbdConfigInit (&gswic, xkbGConfClient);
   GSwitchItKbdConfigLoad (&gswic);
 
   enable = !GSwitchItKbdConfigEquals (&gswic, &initialConfig);

@@ -191,6 +191,7 @@ get_legacy_settings (void)
 #endif
 	COPY_FROM_LEGACY (int,  "/gnome/desktop/peripherals/keyboard/bell_pitch",    "/Desktop/Bell/pitch=50");
 	COPY_FROM_LEGACY (int,  "/gnome/desktop/peripherals/keyboard/bell_duration", "/Desktop/Bell/duration=100");
+	g_object_unref (G_OBJECT (client));
 }
 
 #if 0

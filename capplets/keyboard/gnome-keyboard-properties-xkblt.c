@@ -42,10 +42,21 @@
 #define GROUP_SWITCHERS_GROUP "grp"
 #define DEFAULT_GROUP_SWITCH "grp:alts_toggle"
 
+#define SLT_COL_DESCRIPTION 0
+#define SLT_COL_DEFAULT 1
+#define SLT_COL_ID 2
+
+#define ALT_COL_DESCRIPTION 0
+#define ALT_COL_ID 1
+
+#define CWID(s) glade_xml_get_widget (chooserDialog, s)
+
 static GtkTreeIter current1stLevelIter;
 static const char *current1stLevelId;
+
 static int idx2Select = -1;
 static int maxSelectedLayouts = -1;
+static int defaultGroup = -1;
 
 void
 clear_xkb_elements_list (GSList * list)
@@ -60,10 +71,74 @@ clear_xkb_elements_list (GSList * list)
 }
 
 static void
-add_variant_to_available_layouts_tree (const XklConfigItemPtr
-				       configItem, GladeXML * dialog)
+save_default_group (int aDefaultGroup)
 {
-  GtkWidget *layoutsTree = WID ("xkb_layouts_available");
+  if (aDefaultGroup != gconf_client_get_int (xkbGConfClient, 
+                                             GSWITCHIT_CONFIG_KEY_DEFAULT_GROUP, 
+                                             NULL))
+    gconf_client_set_int (xkbGConfClient, 
+                          GSWITCHIT_CONFIG_KEY_DEFAULT_GROUP, 
+                          aDefaultGroup, 
+                          NULL);
+}
+
+static void
+def_group_in_ui_changed (GtkCellRendererToggle *cell_renderer,
+                         gchar *path, 
+                         GladeXML * dialog)
+{
+  GtkTreePath *chpath = gtk_tree_path_new_from_string (path);
+  int newDefaultGroup = -1;
+  gboolean previouslySelected = gtk_cell_renderer_toggle_get_active (cell_renderer);
+
+  if (!previouslySelected) /* prev state - non-selected! */
+  {
+    int *indices = gtk_tree_path_get_indices (chpath);
+    newDefaultGroup = indices[0];
+  }
+
+  save_default_group (newDefaultGroup);
+  gtk_tree_path_free (chpath);
+}
+
+static void
+def_group_in_gconf_changed (GConfClient * client,
+                            guint cnxn_id,
+                            GConfEntry * entry, GladeXML* dialog)
+{
+  GConfValue *value = gconf_entry_get_value (entry);
+
+  if (value->type == GCONF_VALUE_INT)
+    {
+      defaultGroup = gconf_value_get_int (value);
+      GtkWidget* treeView = WID ("xkb_layouts_selected");
+      GtkTreeModel *model = GTK_TREE_MODEL (gtk_tree_view_get_model (GTK_TREE_VIEW (treeView)));
+      GtkTreeIter iter;
+      int counter = 0;
+      if (gtk_tree_model_get_iter_first (model, &iter))
+        {
+          do
+            {
+              gboolean curVal;
+              gtk_tree_model_get (model, &iter, 
+                                  SLT_COL_DEFAULT, &curVal,
+                                  -1);
+              if (curVal != ( counter == defaultGroup))
+                gtk_list_store_set (GTK_LIST_STORE (model), &iter, 
+                                    SLT_COL_DEFAULT, counter == defaultGroup,
+                                    -1);
+              counter++;
+            }
+          while (gtk_tree_model_iter_next (model, &iter));
+        }
+    }
+}
+
+static void
+add_variant_to_available_layouts_tree (const XklConfigItemPtr configItem, 
+                                       GladeXML * chooserDialog)
+{
+  GtkWidget *layoutsTree = CWID ("xkb_layouts_available");
   GtkTreeIter iter;
   GtkTreeStore *treeStore =
     GTK_TREE_STORE (gtk_tree_view_get_model (GTK_TREE_VIEW (layoutsTree)));
@@ -72,46 +147,43 @@ add_variant_to_available_layouts_tree (const XklConfigItemPtr
   char *utfVariantName = xci_desc_to_utf8 (configItem);
 
   gtk_tree_store_append (treeStore, &iter, &current1stLevelIter);
-  gtk_tree_store_set (treeStore, &iter, 0, utfVariantName, 1,
-		      fullLayoutName, -1);
+  gtk_tree_store_set (treeStore, &iter, 
+		      ALT_COL_DESCRIPTION, utfVariantName, 
+		      ALT_COL_ID, fullLayoutName, -1);
   g_free (utfVariantName);
 }
 
 static void
-add_layout_to_available_layouts_tree (const XklConfigItemPtr
-				      configItem, GladeXML * dialog)
+add_layout_to_available_layouts_tree (const XklConfigItemPtr configItem, 
+                                      GladeXML * chooserDialog)
 {
-  GtkWidget *layoutsTree = WID ("xkb_layouts_available");
+  GtkWidget *layoutsTree = CWID ("xkb_layouts_available");
   GtkTreeStore *treeStore =
     GTK_TREE_STORE (gtk_tree_view_get_model (GTK_TREE_VIEW (layoutsTree)));
   char *utfLayoutName = xci_desc_to_utf8 (configItem);
 
   gtk_tree_store_append (treeStore, &current1stLevelIter, NULL);
-  gtk_tree_store_set (treeStore, &current1stLevelIter, 0,
-		      utfLayoutName, 1, configItem->name, -1);
+  gtk_tree_store_set (treeStore, &current1stLevelIter, 
+		      ALT_COL_DESCRIPTION, utfLayoutName, 
+		      ALT_COL_ID, configItem->name, -1);
   g_free (utfLayoutName);
 
   current1stLevelId = configItem->name;
 
   XklConfigEnumLayoutVariants (configItem->name,
-			       (ConfigItemProcessFunc)
-			       add_variant_to_available_layouts_tree, dialog);
+			       (ConfigItemProcessFunc)add_variant_to_available_layouts_tree, 
+                               chooserDialog);
 }
 
 static void
-enable_disable_layouts_buttons (GladeXML * dialog)
+xkb_layouts_enable_disable_buttons (GladeXML * dialog)
 {
   GtkWidget *addLayoutBtn = WID ("xkb_layouts_add");
   GtkWidget *delLayoutBtn = WID ("xkb_layouts_remove");
   GtkWidget *upLayoutBtn = WID ("xkb_layouts_up");
   GtkWidget *dnLayoutBtn = WID ("xkb_layouts_down");
-  GtkWidget *availableLayoutsTree = WID ("xkb_layouts_available");
   GtkWidget *selectedLayoutsTree = WID ("xkb_layouts_selected");
 
-  GtkTreeSelection *aSelection =
-    gtk_tree_view_get_selection (GTK_TREE_VIEW (availableLayoutsTree));
-  const int nSelectedAvailableLayouts =
-    gtk_tree_selection_count_selected_rows (aSelection);
   GtkTreeSelection *sSelection =
     gtk_tree_view_get_selection (GTK_TREE_VIEW (selectedLayoutsTree));
   const int nSelectedSelectedLayouts =
@@ -126,8 +198,7 @@ enable_disable_layouts_buttons (GladeXML * dialog)
 				    NULL);
 
   gtk_widget_set_sensitive (addLayoutBtn,
-			    (nSelectedAvailableLayouts > 0)
-			    && (nSelectedLayouts < maxSelectedLayouts ||
+			    (nSelectedLayouts < maxSelectedLayouts ||
 				maxSelectedLayouts == 0));
   gtk_widget_set_sensitive (delLayoutBtn, nSelectedSelectedLayouts > 0);
 
@@ -148,34 +219,74 @@ enable_disable_layouts_buttons (GladeXML * dialog)
   gtk_widget_set_sensitive (dnLayoutBtn, canMoveDn);
 }
 
-void
-prepare_selected_layouts_tree (GladeXML * dialog)
+static void
+xkb_layout_chooser_enable_disable_buttons (GladeXML * chooserDialog)
 {
-  GtkListStore *listStore =
-    gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_STRING);
-  GtkWidget *treeView = WID ("xkb_layouts_selected");
-  GtkCellRenderer *renderer =
-    GTK_CELL_RENDERER (gtk_cell_renderer_text_new ());
-  GtkTreeViewColumn *column = gtk_tree_view_column_new_with_attributes (NULL,
-									renderer,
-									"text",
-									0,
-									NULL);
-  GtkTreeSelection *selection =
-    gtk_tree_view_get_selection (GTK_TREE_VIEW (treeView));
-  gtk_tree_view_set_model (GTK_TREE_VIEW (treeView),
-			   GTK_TREE_MODEL (listStore));
-  gtk_tree_view_append_column (GTK_TREE_VIEW (treeView), column);
-  g_signal_connect_swapped (G_OBJECT (selection), "changed",
-			    G_CALLBACK
-			    (enable_disable_layouts_buttons), dialog);
-  maxSelectedLayouts = XklGetMaxNumGroups();
+  GtkWidget *availableLayoutsTree = CWID ("xkb_layouts_available");
+  GtkTreeSelection *aSelection =
+    gtk_tree_view_get_selection (GTK_TREE_VIEW (availableLayoutsTree));
+  const int nSelectedAvailableLayouts =
+    gtk_tree_selection_count_selected_rows (aSelection);
+			    
+  gtk_dialog_set_response_sensitive (GTK_DIALOG (CWID ("xkb_layout_chooser")),
+                                      GTK_RESPONSE_OK, nSelectedAvailableLayouts > 0);
 }
 
 void
-fill_selected_layouts_tree (GladeXML * dialog)
+xkb_layouts_prepare_selected_tree (GladeXML * dialog, GConfChangeSet * changeset)
 {
-  GSList *layouts = get_selected_layouts_list ();
+  GtkListStore *listStore =
+    gtk_list_store_new (3, G_TYPE_STRING, G_TYPE_BOOLEAN, G_TYPE_STRING);
+  GtkWidget *treeView = WID ("xkb_layouts_selected");
+  GtkCellRenderer *textRenderer =
+    GTK_CELL_RENDERER (gtk_cell_renderer_text_new ());
+  GtkCellRenderer *toggleRenderer =
+    GTK_CELL_RENDERER (gtk_cell_renderer_toggle_new ());
+
+  GtkTreeViewColumn *descColumn = gtk_tree_view_column_new_with_attributes (_("Layout"),
+									textRenderer,
+									"text",
+									SLT_COL_DESCRIPTION,
+									NULL);
+  GtkTreeViewColumn *defColumn = gtk_tree_view_column_new_with_attributes (_("Default"),
+									toggleRenderer,
+									"active",
+									SLT_COL_DEFAULT,
+									NULL);
+  GtkTreeSelection *selection =
+    gtk_tree_view_get_selection (GTK_TREE_VIEW (treeView));
+
+  gtk_tree_view_set_model (GTK_TREE_VIEW (treeView),
+			   GTK_TREE_MODEL (listStore));
+
+  gtk_tree_view_column_set_sizing (descColumn, GTK_TREE_VIEW_COLUMN_AUTOSIZE);
+  gtk_tree_view_column_set_sizing (defColumn, GTK_TREE_VIEW_COLUMN_AUTOSIZE);
+  gtk_tree_view_column_set_resizable (descColumn, TRUE);
+  gtk_tree_view_column_set_resizable (defColumn, TRUE);
+
+  gtk_tree_view_append_column (GTK_TREE_VIEW (treeView), descColumn);
+  gtk_tree_view_append_column (GTK_TREE_VIEW (treeView), defColumn);
+
+  g_signal_connect_swapped (G_OBJECT (selection), "changed",
+			    G_CALLBACK
+			    (xkb_layouts_enable_disable_buttons), dialog);
+  maxSelectedLayouts = XklGetMaxNumGroups();
+
+  gconf_client_notify_add (xkbGConfClient,
+                           GSWITCHIT_CONFIG_KEY_DEFAULT_GROUP,
+                           (GConfClientNotifyFunc)def_group_in_gconf_changed,
+                           dialog,
+                           NULL,
+                           NULL);
+  g_signal_connect (G_OBJECT (toggleRenderer), "toggled",
+                    G_CALLBACK (def_group_in_ui_changed), dialog);
+}
+
+void
+xkb_layouts_fill_selected_tree (GladeXML * dialog)
+{
+  GConfEntry *gce;
+  GSList *layouts = xkb_layouts_get_selected_list ();
   GSList *curLayout;
   GtkListStore *listStore =
     GTK_LIST_STORE (gtk_tree_view_get_model
@@ -194,13 +305,15 @@ fill_selected_layouts_tree (GladeXML * dialog)
       v1 = g_strdup (visible);
       utfVisible = g_locale_to_utf8 (g_strstrip (v1), -1, NULL, NULL, NULL);
       gtk_list_store_set (listStore, &iter,
-			  0, utfVisible, 1, curLayout->data, -1);
+			  SLT_COL_DESCRIPTION, utfVisible, 
+			  SLT_COL_DEFAULT, FALSE, 
+			  SLT_COL_ID, curLayout->data, -1);
       g_free (utfVisible);
       g_free (v1);
     }
 
   clear_xkb_elements_list (layouts);
-  enable_disable_layouts_buttons (dialog);
+  xkb_layouts_enable_disable_buttons (dialog);
   if (idx2Select != -1)
     {
       GtkTreeSelection *selection =
@@ -211,6 +324,13 @@ fill_selected_layouts_tree (GladeXML * dialog)
       gtk_tree_path_free (path);
       idx2Select = -1;
     }
+
+  gce = gconf_client_get_entry (xkbGConfClient, 
+                                GSWITCHIT_CONFIG_KEY_DEFAULT_GROUP, 
+                                NULL, 
+                                TRUE, 
+                                NULL);
+  def_group_in_gconf_changed (xkbGConfClient, -1, gce, dialog);
 }
 
 void
@@ -228,17 +348,17 @@ sort_tree_content (GtkWidget * treeView)
 }
 
 void
-fill_available_layouts_tree (GladeXML * dialog)
+xkb_layouts_fill_available_tree (GladeXML * chooserDialog)
 {
   GtkTreeStore *treeStore =
     gtk_tree_store_new (2, G_TYPE_STRING, G_TYPE_STRING);
-  GtkWidget *treeView = WID ("xkb_layouts_available");
+  GtkWidget *treeView = CWID ("xkb_layouts_available");
   GtkCellRenderer *renderer =
     GTK_CELL_RENDERER (gtk_cell_renderer_text_new ());
   GtkTreeViewColumn *column = gtk_tree_view_column_new_with_attributes (NULL,
 									renderer,
 									"text",
-									0,
+									ALT_COL_DESCRIPTION,
 									NULL);
   GtkTreeSelection *selection =
     gtk_tree_view_get_selection (GTK_TREE_VIEW (treeView));
@@ -248,65 +368,18 @@ fill_available_layouts_tree (GladeXML * dialog)
   gtk_tree_view_append_column (GTK_TREE_VIEW (treeView), column);
 
   XklConfigEnumLayouts ((ConfigItemProcessFunc)
-			add_layout_to_available_layouts_tree, dialog);
+			add_layout_to_available_layouts_tree, chooserDialog);
 
   sort_tree_content (treeView);
   g_signal_connect_swapped (G_OBJECT (selection), "changed",
 			    G_CALLBACK
-			    (enable_disable_layouts_buttons), dialog);
+			    (xkb_layout_chooser_enable_disable_buttons), chooserDialog);
 }
 
 static void
 add_selected_layout (GtkWidget * button, GladeXML * dialog)
 {
-  GtkTreeSelection *selection =
-    gtk_tree_view_get_selection (GTK_TREE_VIEW
-				 (WID ("xkb_layouts_available")));
-  GtkTreeIter selectedIter;
-  GtkTreeModel *model;
-  if (gtk_tree_selection_get_selected (selection, &model, &selectedIter))
-    {
-      gchar *id;
-      GSList *layoutsList = get_selected_layouts_list ();
-      gtk_tree_model_get (model, &selectedIter, 1, &id, -1);
-      layoutsList = g_slist_append (layoutsList, id);
-      set_selected_layouts_list (layoutsList);
-      // process default switcher
-      if (g_slist_length(layoutsList) >= 2)
-        {
-          GSList *optionsList = get_selected_options_list ();
-          gboolean anySwitcher = False;
-          GSList *option = optionsList;
-          while (option != NULL)
-            {
-              char *g, *o;
-              if (GSwitchItKbdConfigSplitItems (option->data, &g, &o))
-                {
-                  if (!g_ascii_strcasecmp (g, GROUP_SWITCHERS_GROUP))
-                    {
-                      anySwitcher = True;
-                      break;
-                    }
-                }
-              option = option->next;
-            }
-          if (!anySwitcher)
-            {
-              XklConfigItem ci;
-              g_snprintf( ci.name, XKL_MAX_CI_NAME_LENGTH, DEFAULT_GROUP_SWITCH );           
-              if (XklConfigFindOption( GROUP_SWITCHERS_GROUP,
-                                       &ci ))
-
-                {
-                  const gchar* id = GSwitchItKbdConfigMergeItems (GROUP_SWITCHERS_GROUP, DEFAULT_GROUP_SWITCH);
-                  optionsList = g_slist_append (optionsList, g_strdup (id));
-                  set_selected_options_list (optionsList);
-                }
-            }
-          clear_xkb_elements_list (optionsList);
-        }
-      clear_xkb_elements_list (layoutsList);
-    }
+  xkb_layout_choose (dialog);
 }
 
 static void
@@ -319,14 +392,15 @@ move_selected_layout (GladeXML * dialog, int offset)
   GtkTreeModel *model;
   if (gtk_tree_selection_get_selected (selection, &model, &selectedIter))
     {
-      GSList *layoutsList = get_selected_layouts_list ();
+      GSList *layoutsList = xkb_layouts_get_selected_list ();
       GtkTreePath *path = gtk_tree_model_get_path (model,
 						   &selectedIter);
       if (path != NULL)
 	{
 	  int *indices = gtk_tree_path_get_indices (path);
+          int idx = indices[0];
 	  char *id = NULL;
-	  GSList *node2Remove = g_slist_nth (layoutsList, indices[0]);
+	  GSList *node2Remove = g_slist_nth (layoutsList, idx);
 
 	  layoutsList = g_slist_remove_link (layoutsList, node2Remove);
 
@@ -334,15 +408,25 @@ move_selected_layout (GladeXML * dialog, int offset)
 	  g_slist_free_1 (node2Remove);
 
 	  if (offset == 0)
-	    g_free (id);
+            {
+	      g_free (id);
+              if (defaultGroup > idx)
+                save_default_group (defaultGroup - 1);
+              else if (defaultGroup == idx)
+                save_default_group (-1);
+            }
 	  else
 	    {
 	      layoutsList =
-		g_slist_insert (layoutsList, id, indices[0] + offset);
-	      idx2Select = indices[0] + offset;
+		g_slist_insert (layoutsList, id, idx + offset);
+	      idx2Select = idx + offset;
+              if (idx == defaultGroup)
+		save_default_group (idx2Select);
+              else if (idx2Select == defaultGroup)
+		save_default_group (idx);
 	    }
 
-	  set_selected_layouts_list (layoutsList);
+	  xkb_layouts_set_selected_list (layoutsList);
 	  gtk_tree_path_free (path);
 	}
       clear_xkb_elements_list (layoutsList);
@@ -368,7 +452,7 @@ down_selected_layout (GtkWidget * button, GladeXML * dialog)
 }
 
 void
-register_layouts_buttons_handlers (GladeXML * dialog)
+xkb_layouts_register_buttons_handlers (GladeXML * dialog)
 {
   g_signal_connect (G_OBJECT (WID ("xkb_layouts_add")), "clicked",
 		    G_CALLBACK (add_selected_layout), dialog);
@@ -380,19 +464,94 @@ register_layouts_buttons_handlers (GladeXML * dialog)
 		    G_CALLBACK (down_selected_layout), dialog);
 }
 
+static void 
+xkb_layout_chooser_response(GtkDialog *dialog,
+                            gint response,
+                            GladeXML *chooserDialog)
+{
+  if (response == GTK_RESPONSE_OK)
+    {
+      GtkTreeSelection *selection =
+        gtk_tree_view_get_selection (GTK_TREE_VIEW
+                                     (CWID ("xkb_layouts_available")));
+      GtkTreeIter selectedIter;
+      GtkTreeModel *model;
+      if (gtk_tree_selection_get_selected (selection, &model, &selectedIter))
+        {
+          gchar *id;
+          GSList *layoutsList = xkb_layouts_get_selected_list ();
+          gtk_tree_model_get (model, &selectedIter, 
+                              ALT_COL_ID, &id, -1);
+          layoutsList = g_slist_append (layoutsList, id);
+          xkb_layouts_set_selected_list (layoutsList);
+          /* process default switcher */
+          if (g_slist_length(layoutsList) >= 2)
+            {
+              GSList *optionsList = xkb_options_get_selected_list ();
+              gboolean anySwitcher = False;
+              GSList *option = optionsList;
+              while (option != NULL)
+                {
+                  char *g, *o;
+                  if (GSwitchItKbdConfigSplitItems (option->data, &g, &o))
+                    {
+                      if (!g_ascii_strcasecmp (g, GROUP_SWITCHERS_GROUP))
+                        {
+                          anySwitcher = True;
+                          break;
+                        }
+                    }
+                  option = option->next;
+                }
+              if (!anySwitcher)
+                {
+                  XklConfigItem ci;
+                  g_snprintf( ci.name, XKL_MAX_CI_NAME_LENGTH, DEFAULT_GROUP_SWITCH );           
+                  if (XklConfigFindOption( GROUP_SWITCHERS_GROUP,
+                                           &ci ))
+                    {
+                      const gchar* id = GSwitchItKbdConfigMergeItems (GROUP_SWITCHERS_GROUP, DEFAULT_GROUP_SWITCH);
+                      optionsList = g_slist_append (optionsList, g_strdup (id));
+                      xkb_options_set_selected_list (optionsList);
+                    }
+                }
+              clear_xkb_elements_list (optionsList);
+            }
+          clear_xkb_elements_list (layoutsList);
+        }
+    }
+}
+
 static void
-update_layouts_list (GConfClient * client,
+xkb_layouts_update_list (GConfClient * client,
 		     guint cnxn_id, GConfEntry * entry, GladeXML * dialog)
 {
-  fill_selected_layouts_tree (dialog);
+  xkb_layouts_fill_selected_tree (dialog);
   enable_disable_restoring (dialog);
 }
 
 void
-register_layouts_gconf_listener (GladeXML * dialog)
+xkb_layouts_register_gconf_listener (GladeXML * dialog)
 {
-  gconf_client_notify_add (gconf_client_get_default (),
+  gconf_client_notify_add (xkbGConfClient,
 			   GSWITCHIT_KBD_CONFIG_KEY_LAYOUTS,
 			   (GConfClientNotifyFunc)
-			   update_layouts_list, dialog, NULL, NULL);
+			   xkb_layouts_update_list, dialog, NULL, NULL);
+}
+
+void
+xkb_layout_choose (GladeXML * dialog)
+{
+  GladeXML* chooserDialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gnome-keyboard-properties.glade", "xkb_layout_chooser", NULL);
+  GtkWidget* chooser = CWID ( "xkb_layout_chooser");
+  gtk_window_set_transient_for (GTK_WINDOW (chooser), GTK_WINDOW (WID ("keyboard_dialog")));
+
+  xkb_layouts_fill_available_tree (chooserDialog);
+  xkb_layout_chooser_enable_disable_buttons (chooserDialog);
+  
+  g_signal_connect (G_OBJECT (chooser),
+		    "response", G_CALLBACK (xkb_layout_chooser_response), chooserDialog);
+
+  gtk_dialog_run (GTK_DIALOG (chooser));
+  gtk_widget_destroy (chooser);
 }
