@@ -45,8 +45,6 @@ setup_dialog (GladeXML *dialog)
   GConfClient *client;
   GtkWidget *widget;
   GObject *peditor;
-  gchar *filename;
-  GdkPixbuf *icon_pixbuf;
 
   client = gconf_client_get_default ();
 
@@ -61,11 +59,7 @@ setup_dialog (GladeXML *dialog)
 				    PEDITOR_FONT_COMBINED, NULL);
 
   widget = WID ("font_dialog");
-  filename = gnome_program_locate_file (NULL, GNOME_FILE_DOMAIN_APP_PIXMAP, "keyboard-shortcut.png", TRUE, NULL);
-  icon_pixbuf = gdk_pixbuf_new_from_file ("font-capplet.png", NULL);
-  gtk_window_set_icon (GTK_WINDOW (widget), icon_pixbuf);
-  g_free (filename);
-  g_object_unref (icon_pixbuf);
+  capplet_set_icon (widget, "font-capplet.png");
   gtk_widget_show (widget);
 
   g_signal_connect (G_OBJECT (widget),

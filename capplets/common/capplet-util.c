@@ -314,6 +314,7 @@ capplet_error_dialog (GtkWindow *parent, char const *msg, GError *err)
 		g_error_free (err);
 	}
 }
+
 /**
  * capplet_help :
  * @parent :
@@ -338,4 +339,29 @@ capplet_help (GtkWindow *parent, char const *helpfile, char const *section)
 		capplet_error_dialog (parent, 
 			_("There was an error displaying help: %s"),
 			error);
+}
+
+/**
+ * capplet_set_icon :
+ * @window :
+ * @file_name  :
+ *
+ * A quick utility routine to avoid the cut-n-paste of bogus code
+ * that caused several bugs.
+ **/
+void
+capplet_set_icon (GtkWidget *window, char const *icon_file_name)
+{
+	char *path = gnome_program_locate_file (NULL,
+		GNOME_FILE_DOMAIN_APP_PIXMAP,
+		icon_file_name, TRUE, NULL);
+
+	if (path != NULL) {
+		GdkPixbuf *icon_pixbuf = gdk_pixbuf_new_from_file (path, NULL);
+		if (icon_pixbuf != NULL) {
+			gtk_window_set_icon (GTK_WINDOW (window), icon_pixbuf);
+			g_object_unref (icon_pixbuf);
+		}
+		g_free (path);
+	}
 }

@@ -92,5 +92,6 @@ void capplet_init (int                      argc,
 
 void capplet_error_dialog (GtkWindow *parent, char const *msg, GError *err);
 void capplet_help (GtkWindow *parent, char const *helpfile, char const *section);
+void capplet_set_icon (GtkWidget *window, char const *icon_file_name);
 
 #endif /* __CAPPLET_UTIL_H */

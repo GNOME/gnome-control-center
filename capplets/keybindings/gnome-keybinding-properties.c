@@ -685,8 +685,6 @@ setup_dialog (GladeXML *dialog)
   GtkWidget *widget;
   gboolean found_keys = FALSE;
   GList *list;
-  GdkPixbuf *icon_pixbuf;
-  gchar *filename;
 
   client = gconf_client_get_default ();
 
@@ -758,13 +756,7 @@ setup_dialog (GladeXML *dialog)
   reload_key_entries (wm_common_get_current_window_manager(), dialog);
 
   widget = WID ("gnome-keybinding-dialog");
-  filename = gnome_program_locate_file (NULL, GNOME_FILE_DOMAIN_APP_PIXMAP, "keyboard-shortcut.png", TRUE, NULL);
-  icon_pixbuf = gdk_pixbuf_new_from_file ("keyboard-shortcut.png", NULL);
-  if (icon_pixbuf != NULL) {
-    gtk_window_set_icon (GTK_WINDOW (widget), icon_pixbuf);
-    g_object_unref (icon_pixbuf);
-  }
-  g_free (filename);
+  capplet_set_icon (widget, "keyboard-shortcut.png");
   gtk_widget_show (widget);
 
   g_signal_connect (G_OBJECT (widget), "response", G_CALLBACK(cb_dialog_response), NULL);
