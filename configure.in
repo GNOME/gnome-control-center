@@ -111,10 +111,28 @@ PKG_CHECK_MODULES(DISPLAY_CAPPLET, $COMMON_MODULES)
 
 DISPLAY_CAPPLET_LIBS="$DISPLAY_CAPPLET_LIBS $RANDR_LIBS"
 
-				   
 CAPPLET_LIBS="$CAPPLET_LIBS $x_libs"
 GNOMECC_LIBS="$GNOMECC_LIBS $x_libs"
 GNOME_SETTINGS_DAEMON_LIBS="$GNOME_SETTINGS_DAEMON_LIBS $x_libs"
+
+dnl
+dnl Check for libicu, needed for localization capplet
+dnl
+
+AC_ARG_ENABLE(localization-capplet, [  --enable-localization-capplet        Enables the localization capplet],, enable_localization_capplet=no)
+
+if test x$enable_localization_capplet = xyes; then 
+
+AC_CHECK_LIB(icuuc, u_cleanup_2_1, LOCALIZATION_CAPPLET_LIBS="-licui18n",
+  [AC_CHECK_HEADER(unicode/uloc.h, , AC_MSG_ERROR([[
+*** Couldn't find icu. Please download and install from
+*** http://oss.software.ibm.com/icu/ and try again.]]))])
+
+LOCALIZATION_CAPPLET=localization
+AC_SUBST(LOCALIZATION_CAPPLET_LIBS)
+AC_SUBST(LOCALIZATION_CAPPLET)
+
+fi
 
 AC_PATH_PROG(GCONFTOOL, gconftool-2)
 
@@ -127,7 +145,6 @@ AC_CHECK_HEADER(X11/Xcursor/Xcursor.h, have_xcursor=yes
 				       AC_DEFINE(HAVE_XCURSOR, 1, Have the Xcursor extension),
 				       :, [#include <X11/Xlib.h>])
 AM_CONDITIONAL(HAVE_XCURSOR, [test $have_xcursor=yes])
-
 
 dnl
 dnl Check for gtk+ with multihead support
@@ -401,6 +418,7 @@ capplets/display/Makefile
 capplets/file-types/Makefile
 capplets/file-types/libuuid/Makefile
 capplets/font/Makefile
+capplets/localization/Makefile
 capplets/keybindings/Makefile
 capplets/keyboard/Makefile
 capplets/mouse/Makefile

@@ -3,7 +3,7 @@ always_built_SUBDIRS =					\
 	default-applications desktop-links font		\
 	background keyboard mouse sound			\
 	file-types theme-switcher ui-properties		\
-	keybindings network windows
+	keybindings $(LOCALIZATION_CAPPLET) network windows
 
 if HAVE_RANDR
 randr_SUBDIRS = display
