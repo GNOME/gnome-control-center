@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-07-19 05:17+0200\n"
-"PO-Revision-Date: 2003-07-19 11:21+0300\n"
+"POT-Creation-Date: 2003-07-26 04:02+0200\n"
+"PO-Revision-Date: 2003-07-26 12:16+0300\n"
 "Last-Translator: Gil 'Dolfin' Osher <dolfin@rpg.org.il>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -68,6 +68,37 @@ msgstr "תמיכת טכנולוגיות מסייעות"
 #: capplets/accessibility/at-properties/at-properties.desktop.in.h:2
 msgid "Enable support for GNOME assistive technologies at login"
 msgstr "אפשר תמיכה לטכנולוגיות המסייעות של GNOME בהתחברות"
+
+#: capplets/accessibility/at-properties/main.c:59
+msgid ""
+"<i>No Assistive Technology is available on your system.  The 'gok' package "
+"must be installed in order to get on-screen keyboard support, and the "
+"'gnopernicus' package must be installed for screenreading and magnifying "
+"capabilities.</i>"
+msgstr ""
+"<i>אף טכנולוגייה מסייעת אינה זמינה במערכת שלך.  חבילת ה 'gok' "
+"חייבת להיות מותקנת כדי לקבל תמיכת מקלדת על המסך, וחבילת ה 'gnopernicus' "
+"חייבת להיות מותקנת לקבלת יכולות של קריאת מסך והגדלה.</i>"
+
+#: capplets/accessibility/at-properties/main.c:62
+msgid ""
+"<i>Not all available assistive technologies are installed on your system.  "
+"The 'gok' package must be installed in order to get on-screen keyboard "
+"support.</i>"
+msgstr ""
+"<i>לא כל הטכנולוגיות המסייעות הזמינות מותקנות במערכת שלך.  "
+"חבילת ה 'gok' חייבת להיות מותקנת כדי לקבל תמיכת מקלדת "
+"על המסך.</i>"
+
+#: capplets/accessibility/at-properties/main.c:65
+msgid ""
+"<i>Not all available assistive technologies are installed on your system.  "
+"The 'gnopernicus' package must be installed for screenreading and magnifying "
+"capabilities.</i>"
+msgstr ""
+"<i>לא כל הטכנולוגיות המסייעות הזמינות מותקנות במערכת שלך.  "
+"חבילת ה 'gnopernicus' חייבת להיות מותקנת לקבלת יכולות של קריאת מסך "
+"והגדלה.</i>"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:238
 #, c-format
@@ -339,9 +370,9 @@ msgstr "_אין תמונה"
 
 #: capplets/background/background-properties-capplet.c:559
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:851
+#: capplets/default-applications/gnome-default-applications-properties.c:852
 #: capplets/keyboard/gnome-keyboard-properties.c:220
-#: capplets/mouse/gnome-mouse-properties.c:716
+#: capplets/mouse/gnome-mouse-properties.c:714
 #: capplets/sound/sound-properties-capplet.c:212
 msgid "Retrieve and store legacy settings"
 msgstr "קבל ושמור הגדרות מהזיכרון"
@@ -2815,17 +2846,29 @@ msgstr "ערכי תפריט התוכן של נאוטילוס לגופנים"
 msgid "Set as Application Font"
 msgstr "קבע כגופן יישום"
 
-#: vfs-methods/themus/Themus_Component.server.in.in.h:1
-msgid "Apply theme..."
-msgstr "החל ערכת נושא..."
+#: vfs-methods/themus/apply-font.glade.h:1
+msgid " "
+msgstr " "
 
-#: vfs-methods/themus/Themus_Component.server.in.in.h:2
-msgid "Themus component"
-msgstr "רכיב ערכת נושא"
+#: vfs-methods/themus/apply-font.glade.h:2
+msgid "<span weight=\"bold\" size=\"larger\">Apply new font?</span>"
+msgstr "<span weight=\"bold\" size=\"larger\">להחל גופן חדש?</span>"
 
-#: vfs-methods/themus/Themus_Component.server.in.in.h:3
-msgid "Themus component apply theme operations"
-msgstr "רכיב ערכת נושא מחיל פעולות ערכת נושא"
+#: vfs-methods/themus/apply-font.glade.h:3
+msgid "Do _not apply font"
+msgstr "_אל תחל גופן"
+
+#: vfs-methods/themus/apply-font.glade.h:4
+msgid ""
+"The theme you have selected suggests a new font. A preview of the font is "
+"shown below."
+msgstr ""
+" ערכת הנושא שבחרת מציעה גופן חדש. תצוגה מקדימה של הגופן "
+"מוצגת מטה."
+
+#: vfs-methods/themus/apply-font.glade.h:5
+msgid "_Apply font"
+msgstr "_החל גופן"
 
 #: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
 msgid "Theme Properties content view component"
@@ -2854,6 +2897,11 @@ msgstr "ערכת נושא לסמלים"
 #: vfs-methods/themus/themus-properties-view.c:217
 msgid "URI currently displayed"
 msgstr "הכתובת המוצגת כרגע"
+
+#. translators: you may want to include non-western chars here
+#: vfs-methods/themus/themus-theme-applier.c:83
+msgid "ABCDEFG"
+msgstr "ABCDEFG אבגדהוז"
 
 #: vfs-methods/themus/themus.schemas.in.h:1
 msgid "If set to true, then installed themes will be thumbnailed."
@@ -2886,6 +2934,15 @@ msgstr "האם ליצור דוגמיות לערכות נושא מותקנות"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "האם ליצור דוגמיות לערכות נושא"
+
+#~ msgid "Apply theme..."
+#~ msgstr "החל ערכת נושא..."
+
+#~ msgid "Themus component"
+#~ msgstr "רכיב ערכת נושא"
+
+#~ msgid "Themus component apply theme operations"
+#~ msgstr "רכיב ערכת נושא מחיל פעולות ערכת נושא"
 
 #~ msgid "Select CDE AccessX file"
 #~ msgstr "בחר קובץ גישה CDE"
