@@ -64,14 +64,18 @@ make prefix=$RPM_BUILD_ROOT%{prefix} install
 
 %doc AUTHORS COPYING ChangeLog NEWS README
 %{prefix}/bin/*
+%{prefix}/etc/CORBA/servers/gnomecc.gnorba
 %{prefix}/lib/lib*.so.*
 %{prefix}/share/control-center
 %{prefix}/share/locale/*/*/*
+%{prefix}/share/apps/System/gnomecc.desktop
+%{prefix}/share/pixmaps/control-center.png
 
 %files devel
 %defattr(-, root, root)
 
 %{prefix}/lib/lib*.so
+%{prefix}/lib/*sh
 %{prefix}/lib/*a
 %{prefix}/share/idl
 %{prefix}/include/*
