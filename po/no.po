@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.6\n"
-"POT-Creation-Date: 2000-08-04 10:01-0400\n"
+"POT-Creation-Date: 2000-08-15 21:57+0200\n"
 "PO-Revision-Date: 2000-08-02 09:05+02:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -74,6 +74,8 @@ msgid "Can't find an hbox, using a normal file selection"
 msgstr "Kan ikke finne en hboks, bruker normal filvelging"
 
 #: capplets/background-properties/property-background.c:889
+#: capplets/keyboard-properties/keyboard-properties.c:277
+#: capplets/new-screensaver-properties/prefs-widget.c:301
 #: capplets/theme-switcher/gui.c:226 capplets/theme-switcher/gui.c:298
 msgid "Preview"
 msgstr "Forhåndsvisning"
@@ -109,6 +111,7 @@ msgstr "Side-ved-side"
 #: capplets/background-properties/property-background.c:1135
 #: capplets/bell-properties/bell-properties.c:61
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:179
+#: capplets/keyboard-properties/keyboard-properties.c:87
 #: capplets/mouse-properties/mouse-properties.c:111
 #: capplets/session-properties/session-properties.c:300
 #: capplets/sound-properties/sound-properties.c:690
@@ -125,6 +128,7 @@ msgstr ""
 #: capplets/background-properties/property-background.c:1137
 #: capplets/bell-properties/bell-properties.c:63
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:181
+#: capplets/keyboard-properties/keyboard-properties.c:89
 #: capplets/mouse-properties/mouse-properties.c:113
 #: capplets/session-properties/session-properties.c:302
 #: capplets/sound-properties/sound-properties.c:692
@@ -132,6 +136,8 @@ msgstr ""
 #: capplets/theme-switcher/gui.c:364
 #: capplets/ui-properties/ui-properties.c:516
 #: capplets/wm-properties/wm-properties-capplet.c:641
+#: new-control-center/capplet-dir-view.c:130
+#: new-control-center/capplet-dir-view.c:580
 msgid "Close"
 msgstr "Lukk"
 
@@ -224,6 +230,48 @@ msgstr "Gnome editor"
 msgid "Run In Terminal"
 msgstr "Kjør i terminal"
 
+#: capplets/keyboard-properties/keyboard-properties.c:228
+msgid "Auto-repeat"
+msgstr "Auto-repetering"
+
+#: capplets/keyboard-properties/keyboard-properties.c:239
+msgid "Enable auto-repeat"
+msgstr "Slå på auto-repetering"
+
+#: capplets/keyboard-properties/keyboard-properties.c:249
+msgid "Repeat rate"
+msgstr "Repeteringsintervall"
+
+#: capplets/keyboard-properties/keyboard-properties.c:252
+msgid "Repeat Delay"
+msgstr "Ventetid før repetering"
+
+#: capplets/keyboard-properties/keyboard-properties.c:254
+msgid "Keyboard click"
+msgstr "Tastatur-klikk"
+
+#: capplets/keyboard-properties/keyboard-properties.c:265
+msgid "Click on keypress"
+msgstr "Klikk ved tastetrykk"
+
+#: capplets/keyboard-properties/keyboard-properties.c:275
+msgid "Click volume"
+msgstr "Klikkvolum"
+
+#: capplets/keyboard-properties/keyboard-properties.c:285
+msgid "Test settings"
+msgstr "Testinnstillinger"
+
+#: capplets/keyboard-properties/keyboard-properties.c:327
+msgid ""
+"an initialization error occurred while starting "
+"'keyboard-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"en initialiseringsfeil oppstod under start av "
+"'keyboard-properties-capplet'.\n"
+"avbryter...\n"
+
 #. icon box
 #: capplets/mime-type/edit-window.c:261
 msgid "Select an icon..."
@@ -238,6 +286,7 @@ msgid "Add"
 msgstr "Legg til"
 
 #: capplets/mime-type/edit-window.c:309
+#: capplets/new-screensaver-properties/prefs-widget.c:272
 #: capplets/url-properties/url-properties.c:133
 msgid "Remove"
 msgstr "Fjern"
@@ -403,6 +452,7 @@ msgid "Delete"
 msgstr "Slett"
 
 #: capplets/mime-type/mime-type-capplet.c:89
+#: capplets/new-screensaver-properties/prefs-widget.c:266
 #: capplets/session-properties/session-properties.c:188
 #: capplets/wm-properties/wm-properties-capplet.c:1074
 msgid "Add..."
@@ -506,6 +556,245 @@ msgid ""
 msgstr ""
 "en initialiseringsfeil oppstod under start av 'mouse-properties-capplet'.\n"
 "avbryter...\n"
+
+#: capplets/new-screensaver-properties/preferences.c:286
+msgid "Custom screensaver. No description available"
+msgstr "Egendefinert skjermsparer. Ingen beskrivelse tilgjengelig"
+
+#: capplets/new-screensaver-properties/prefs-widget.c:185
+msgid "Selection"
+msgstr "Valg"
+
+#: capplets/new-screensaver-properties/prefs-widget.c:199
+msgid "Disable screensaver"
+msgstr "Slå av skjermsparer"
+
+#: capplets/new-screensaver-properties/prefs-widget.c:209
+msgid "Black screen only"
+msgstr "Kun sort skjerm"
+
+#: capplets/new-screensaver-properties/prefs-widget.c:218
+msgid "One screensaver all the time"
+msgstr "En skjermsparer hele tiden"
+
+#: capplets/new-screensaver-properties/prefs-widget.c:228
+msgid "Choose randomly from those checked off"
+msgstr "Velg tilfeldige skjermsparere fra valgte"
+
+#: capplets/new-screensaver-properties/prefs-widget.c:238
+msgid "Choose randomly among all screensavers"
+msgstr "Velg tilfeldig skjermsparer fra alle"
+
+#: capplets/new-screensaver-properties/prefs-widget.c:279
+msgid "Settings..."
+msgstr "Innstillinger..."
+
+#: capplets/new-screensaver-properties/prefs-widget.c:284
+#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:216
+msgid "Demo"
+msgstr "Vis"
+
+#: capplets/new-screensaver-properties/prefs-widget.c:289
+msgid "Demo Next"
+msgstr "Vis neste"
+
+#: capplets/new-screensaver-properties/prefs-widget.c:295
+msgid "Demo Previous"
+msgstr "Vis forrige"
+
+#: capplets/new-screensaver-properties/prefs-widget.c:318
+#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:204
+msgid "Description"
+msgstr "Beskrivelse"
+
+#: capplets/new-screensaver-properties/prefs-widget.c:335
+msgid "Screensaver Selection"
+msgstr "Valg av skjermsparer"
+
+#: capplets/new-screensaver-properties/prefs-widget.c:344
+msgid "Basic"
+msgstr "Grunnleggende"
+
+#: capplets/new-screensaver-properties/prefs-widget.c:356
+msgid "Start screensaver after"
+msgstr "Start skjermsparer etter"
+
+#: capplets/new-screensaver-properties/prefs-widget.c:367
+#: capplets/new-screensaver-properties/prefs-widget.c:382
+#: capplets/new-screensaver-properties/prefs-widget.c:414
+#: capplets/new-screensaver-properties/prefs-widget.c:452
+#: capplets/new-screensaver-properties/prefs-widget.c:469
+#: capplets/new-screensaver-properties/prefs-widget.c:486
+msgid "minutes"
+msgstr "minutter"
+
+#: capplets/new-screensaver-properties/prefs-widget.c:371
+msgid "Switch screensavers every"
+msgstr "Bytt skjermsparer hvert"
+
+#: capplets/new-screensaver-properties/prefs-widget.c:386
+msgid "Security"
+msgstr "Sikkerhet"
+
+#: capplets/new-screensaver-properties/prefs-widget.c:395
+msgid "Require password to unlock"
+msgstr "Trenger passord for å låse opp"
+
+#: capplets/new-screensaver-properties/prefs-widget.c:404
+msgid "Only after the screensaver has run for"
+msgstr "Kun etter at skjermspareren har kjørt i"
+
+#: capplets/new-screensaver-properties/prefs-widget.c:422
+msgid "Power Management"
+msgstr "Strømstyring"
+
+#: capplets/new-screensaver-properties/prefs-widget.c:430
+msgid "Enable power management"
+msgstr "Bruk strømstyring"
+
+#: capplets/new-screensaver-properties/prefs-widget.c:441
+msgid "Go to standby mode after"
+msgstr "Gå i ventemodus etter"
+
+#: capplets/new-screensaver-properties/prefs-widget.c:458
+msgid "Go to suspend mode after"
+msgstr "Gå i dvalemodus etter"
+
+#: capplets/new-screensaver-properties/prefs-widget.c:475
+msgid "Shut down monitor after"
+msgstr "Slå av monitor etter"
+
+#: capplets/new-screensaver-properties/prefs-widget.c:492
+msgid "General Properties"
+msgstr "Generelle egenskaper"
+
+#: capplets/new-screensaver-properties/prefs-widget.c:507
+#: capplets/session-properties/session-properties.c:178
+#: capplets/session-properties/startup-programs.c:305
+msgid "Priority"
+msgstr "Prioritet"
+
+#: capplets/new-screensaver-properties/prefs-widget.c:514
+msgid "Low"
+msgstr "Lav "
+
+#: capplets/new-screensaver-properties/prefs-widget.c:521
+msgid "High"
+msgstr "Høy"
+
+#: capplets/new-screensaver-properties/prefs-widget.c:539
+msgid "Be verbose"
+msgstr "Vis mer informasjon"
+
+#: capplets/new-screensaver-properties/prefs-widget.c:543
+msgid "Effects"
+msgstr "Effekter"
+
+#: capplets/new-screensaver-properties/prefs-widget.c:555
+msgid "Install colormap"
+msgstr "Installér fargekart"
+
+#: capplets/new-screensaver-properties/prefs-widget.c:561
+msgid "Fade to black when activating screensaver"
+msgstr ""
+
+#: capplets/new-screensaver-properties/prefs-widget.c:567
+msgid "Fade desktop back when deactivating screensaver"
+msgstr ""
+
+#: capplets/new-screensaver-properties/prefs-widget.c:576
+msgid "Fade Duration"
+msgstr ""
+
+#: capplets/new-screensaver-properties/prefs-widget.c:596
+msgid "Fade Smoothness"
+msgstr ""
+
+#: capplets/new-screensaver-properties/prefs-widget.c:617
+msgid "Long"
+msgstr "Lang"
+
+#: capplets/new-screensaver-properties/prefs-widget.c:627
+msgid "Smooth"
+msgstr "Myk"
+
+#: capplets/new-screensaver-properties/prefs-widget.c:637
+msgid "Short"
+msgstr "Kort"
+
+#: capplets/new-screensaver-properties/prefs-widget.c:647
+msgid "Jerky"
+msgstr "Hoppende"
+
+#: capplets/new-screensaver-properties/prefs-widget.c:658
+msgid "Advanced Properties"
+msgstr "Avanserte egenskaper"
+
+#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:185
+#: capplets/wm-properties/wm-properties-capplet.c:757
+msgid "Name:"
+msgstr "Navn:"
+
+#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:197
+#: capplets/session-properties/gsm-client-row.c:59
+msgid "Settings"
+msgstr "Innstillinger"
+
+#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:207
+msgid "label1"
+msgstr "etikett1"
+
+#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1103
+msgid ""
+"Cannot find the data to configure this screensaver. Please edit the command "
+"line below."
+msgstr "Kan ikke finne data for konfigurasjon av denne skjermspareren. Vennligst redigér kommandolinjen under."
+
+#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1108
+msgid "Please enter a command line below."
+msgstr "Vennligst skriv inn en kommandolinje under."
+
+#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1123
+msgid "Visual:"
+msgstr "Synlig:"
+
+#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1152
+#: capplets/new-screensaver-properties/screensaver-prefs-dialog.c:1397
+msgid "Any"
+msgstr "Enhver"
+
+#: capplets/new-screensaver-properties/selection-dialog.c:99
+msgid "Add a new screensaver"
+msgstr "Legg til ny skjermsparer"
+
+#: capplets/new-screensaver-properties/selection-dialog.c:108
+msgid "Select the screensaver to run from the list below:"
+msgstr "Velg skjermsparer som skal kjøres fra listen under:"
+
+#: capplets/new-screensaver-properties/selection-dialog.c:195
+msgid "Custom"
+msgstr "Egendefinert"
+
+#: capplets/new-screensaver-properties/selection-dialog.c:221
+msgid "New screensaver"
+msgstr "Ny skjermsparer"
+
+#: capplets/session-properties/chooser.c:57
+msgid "Session"
+msgstr "Sesjon"
+
+#. dialog
+#: capplets/session-properties/chooser.c:93
+msgid "Session Chooser"
+msgstr "Sesjonsvelger"
+
+#: capplets/session-properties/chooser.c:96
+msgid "Start Session"
+msgstr "Start sesjon"
+
+#: capplets/session-properties/chooser.c:99
+msgid "Cancel Login"
+msgstr "Avbryt innlogging"
 
 #: capplets/session-properties/gsm-client-editor.c:100
 msgid "Order: "
@@ -633,10 +922,6 @@ msgstr "Søppel"
 msgid "Discarded on logout and can die."
 msgstr "Forkast ved utlogging og kan dø."
 
-#: capplets/session-properties/gsm-client-row.c:59
-msgid "Settings"
-msgstr "Innstillinger"
-
 #: capplets/session-properties/gsm-client-row.c:60
 msgid "Always started on every login."
 msgstr "Alltid startet ved innlogging."
@@ -663,11 +948,6 @@ msgstr "Lagre endringer til sesjonen automatisk"
 msgid "Non-session-managed Startup Programs"
 msgstr "Ikke-sesjonshåndtert program i oppstart"
 
-#: capplets/session-properties/session-properties.c:178
-#: capplets/session-properties/startup-programs.c:304
-msgid "Priority"
-msgstr "Prioritet"
-
 #: capplets/session-properties/session-properties.c:179
 #: capplets/url-properties/url-properties.c:71
 msgid "Command"
@@ -681,12 +961,12 @@ msgstr "Se på aktive programmer..."
 msgid "Only display warnings."
 msgstr "Bare vis advarsler."
 
-#: capplets/session-properties/startup-programs.c:288
-#: capplets/session-properties/startup-programs.c:295
+#: capplets/session-properties/startup-programs.c:289
+#: capplets/session-properties/startup-programs.c:296
 msgid "Startup Command"
 msgstr "Oppstartskommando"
 
-#: capplets/session-properties/startup-programs.c:319
+#: capplets/session-properties/startup-programs.c:320
 msgid ""
 "Programs with smaller values are started before programs with higher values. "
 "The default value should be OK"
@@ -694,15 +974,15 @@ msgstr ""
 "Programmer med mindre verdier startes før programmer med høyere verdier. "
 "Standardverdien skal være OK"
 
-#: capplets/session-properties/startup-programs.c:338
+#: capplets/session-properties/startup-programs.c:339
 msgid "The startup command cannot be empty"
 msgstr "Oppstartskommandoen kan ikke være tom"
 
-#: capplets/session-properties/startup-programs.c:378
+#: capplets/session-properties/startup-programs.c:379
 msgid "Add Startup Program"
 msgstr "Legg til program for oppstart"
 
-#: capplets/session-properties/startup-programs.c:396
+#: capplets/session-properties/startup-programs.c:397
 msgid "Edit Startup Program"
 msgstr "Rediger program for oppstart"
 
@@ -1233,10 +1513,6 @@ msgstr "Legg til ny vindusbehandler"
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: capplets/wm-properties/wm-properties-capplet.c:757
-msgid "Name:"
-msgstr "Navn:"
-
 #: capplets/wm-properties/wm-properties-capplet.c:770
 msgid "Command:"
 msgstr "Kommando:"
@@ -1274,186 +1550,99 @@ msgstr ""
 "en initialiseringsfeil oppstod under start av 'wm-properties-capplet'.\n"
 "avbryter...\n"
 
-#~ msgid "Auto-repeat"
-#~ msgstr "Auto-repetering"
+#: libcapplet/capplet-widget.c:77
+msgid "id of the capplet -- assigned by the control-center"
+msgstr "cappletens id -- utdelt av kontrollsenteret"
 
-#~ msgid "Enable auto-repeat"
-#~ msgstr "Slå på auto-repetering"
+#: libcapplet/capplet-widget.c:77
+msgid "ID"
+msgstr "ID"
 
-#~ msgid "Repeat rate"
-#~ msgstr "Repeteringsintervall"
+#: libcapplet/capplet-widget.c:79
+msgid "Multi-capplet id."
+msgstr "Multicapplet-id."
 
-#~ msgid "Repeat Delay"
-#~ msgstr "Ventetid før repetering"
+#: libcapplet/capplet-widget.c:79
+msgid "CAPID"
+msgstr "CAPID"
 
-#~ msgid "Keyboard click"
-#~ msgstr "Tastatur-klikk"
+#: libcapplet/capplet-widget.c:81
+msgid "X ID of the socket it's plugged into"
+msgstr "X-id til socketen den er pluggen inn i"
 
-#~ msgid "Click on keypress"
-#~ msgstr "Klikk ved tastetrykk"
+#: libcapplet/capplet-widget.c:81
+msgid "XID"
+msgstr "XID"
 
-#~ msgid "Click volume"
-#~ msgstr "Klikkvolum"
+#: libcapplet/capplet-widget.c:83
+msgid "IOR of the control-center"
+msgstr "Kontrollsenterets IOR"
 
-#~ msgid "Test settings"
-#~ msgstr "Testinnstillinger"
+#: libcapplet/capplet-widget.c:83
+msgid "IOR"
+msgstr "IOR"
 
-#~ msgid ""
-#~ "an initialization error occurred while starting "
-#~ "'keyboard-properties-capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "en initialiseringsfeil oppstod under start av "
-#~ "'keyboard-properties-capplet'.\n"
-#~ "avbryter...\n"
+#: libcapplet/capplet-widget.c:85
+msgid "Initialize session settings"
+msgstr "Initiér sesjonsinstillingene"
 
-#~ msgid "Require Password"
-#~ msgstr "Trenger passord"
+#: libcapplet/capplet-widget.c:87
+msgid "Ignore default action.  Used for custom init-session cases"
+msgstr ""
+"Ignorer standard oppgave. Brukes for egendefinerte init-session tilfeller"
 
-#~ msgid "Use power management."
-#~ msgstr "Bruk strømstyring."
+#: new-control-center/capplet-dir-view.c:107
+msgid "Help on control-center"
+msgstr "Hjelp for kontrollsenter"
 
-#~ msgid "No Screensaver"
-#~ msgstr "Ingen skjermsparer"
+#: new-control-center/capplet-dir-view.c:108
+msgid "Help with the GNOME control-center."
+msgstr "Hjelp for GNOME kontrollsenter."
 
-#~ msgid "Random Screensaver"
-#~ msgstr "Vilkårlig skjermsparer"
+#: new-control-center/capplet-dir-view.c:111
+msgid "About"
+msgstr "Om"
 
-#~ msgid "Settings..."
-#~ msgstr "Innstillinger..."
+#: new-control-center/capplet-dir-view.c:112
+msgid "About the GNOME control-center."
+msgstr "Om GNOME kontrollsenter."
 
-#~ msgid "Random Settings"
-#~ msgstr "Innstillinger for vilkårlig"
+#: new-control-center/capplet-dir-view.c:124
+msgid "Up"
+msgstr "Opp"
 
-#~ msgid "%s Settings..."
-#~ msgstr "%s innstillinger..."
+#: new-control-center/capplet-dir-view.c:124
+msgid "Parent Group"
+msgstr "Foreldergruppe"
 
-#~ msgid "About:"
-#~ msgstr "Om:"
+#: new-control-center/capplet-dir-view.c:126
+msgid "Preferences"
+msgstr "Brukervalg"
 
-#~ msgid "Author:"
-#~ msgstr "Forfatter:"
+#: new-control-center/capplet-dir-view.c:127
+msgid "Control Center Preferences"
+msgstr "Brukervalg for kontrollsenter"
 
-#~ msgid "Author: UNKNOWN"
-#~ msgstr "Forfatter: UKJENT"
+#: new-control-center/capplet-dir-view.c:130
+msgid "Close this Window"
+msgstr "Lukk dette vinduet"
 
-#~ msgid "RANDOM SCREENSAVER"
-#~ msgstr "VILKÅRLIG SKJERMSPARER"
+#: new-control-center/capplet-dir-view.c:166
+msgid "Control Center"
+msgstr "Kontrollsenter"
 
-#~ msgid "Screen Saver"
-#~ msgstr "Skjermsparer"
+#: new-control-center/capplet-dir-view.c:577
+msgid ""
+"No help is available/installed. Please make sure you\n"
+"have the GNOME User's Guide installed on your system."
+msgstr ""
+"Ingen hjelp tilgjengelig/installert. Vennligst forsikre\n"
+"deg om at du har GNOME brukerhåndboken installert."
 
-#~ msgid ""
-#~ "Pressing this button will popup a dialogbox that will help you setup the "
-#~ "current screensaver."
-#~ msgstr ""
-#~ "Når du trykker på denne knappen kommer det opp en dialogboks som vil hjelpe "
-#~ "deg med å konfigurere den valgte skjermspareren."
+#: new-control-center/capplet-dir-view.c:596
+msgid "GNOME Control Center"
+msgstr "GNOME Kontrollsenter"
 
-#~ msgid "Screen Saver Settings"
-#~ msgstr "Innstillinger for skjermsparer"
-
-#~ msgid "Start After "
-#~ msgstr "Start etter "
-
-#~ msgid " Minutes."
-#~ msgstr " minutter."
-
-#~ msgid "Priority:"
-#~ msgstr "Prioritet:"
-
-#~ msgid "Low "
-#~ msgstr "Lav "
-
-#~ msgid " Normal"
-#~ msgstr " Normal"
-
-#~ msgid "Shutdown monitor "
-#~ msgstr "Slå av monitor "
-
-#~ msgid " minutes after screen saver has started."
-#~ msgstr " minutter etter at skjermspareren har startet."
-
-#~ msgid "Screen Saver Demo"
-#~ msgstr "Skjermsparerdemo"
-
-#~ msgid ""
-#~ "No help is available/installed. Please make sure you\n"
-#~ "have the GNOME User's Guide installed on your system."
-#~ msgstr ""
-#~ "Ingen hjelp tilgjengelig/installert. Vennligst forsikre\n"
-#~ "deg om at du har GNOME brukerhåndboken installert."
-
-#~ msgid "GNOME Control Center"
-#~ msgstr "GNOME Kontrollsenter"
-
-#~ msgid "Desktop Properties manager."
-#~ msgstr "Egenskaper for skrivebord."
-
-#~ msgid "Try"
-#~ msgstr "Prøv"
-
-#~ msgid "Revert"
-#~ msgstr "Forkast"
-
-#~ msgid "Help"
-#~ msgstr "Hjelp"
-
-#~ msgid "id of the capplet -- assigned by the control-center"
-#~ msgstr "cappletens id -- utdelt av kontrollsenteret"
-
-#~ msgid "ID"
-#~ msgstr "ID"
-
-#~ msgid "Multi-capplet id."
-#~ msgstr "Multicapplet-id."
-
-#~ msgid "CAPID"
-#~ msgstr "CAPID"
-
-#~ msgid "X ID of the socket it's plugged into"
-#~ msgstr "X-id til socketen den er pluggen inn i"
-
-#~ msgid "XID"
-#~ msgstr "XID"
-
-#~ msgid "IOR of the control-center"
-#~ msgstr "Kontrollsenterets IOR"
-
-#~ msgid "IOR"
-#~ msgstr "IOR"
-
-#~ msgid "Initialize session settings"
-#~ msgstr "Initiér sesjonsinstillingene"
-
-#~ msgid "Ignore default action.  Used for custom init-session cases"
-#~ msgstr ""
-#~ "Ignorer standard oppgave. Brukes for egendefinerte init-session tilfeller"
-
-#~ msgid "Sorry, no help is available for these settings."
-#~ msgstr "Beklager, ingen hjelp tilgjengelig for disse innstillingene."
-
-#~ msgid "capplet-command to be run."
-#~ msgstr "capplet-kommando som skal kjøres."
-
-#~ msgid "CAPPLET"
-#~ msgstr "CAPPLET"
-
-#~ msgid "Help with the GNOME control-center."
-#~ msgstr "Hjelp for GNOME kontrollsenter."
-
-#~ msgid "Warning:"
-#~ msgstr "Advarsel:"
-
-#~ msgid "Discard all changes"
-#~ msgstr "Forkast alle endringer"
-
-#~ msgid ""
-#~ "The following modules have had changes made, but not committed.  If you "
-#~ "would like to edit them, please double click on the appropriate entry."
-#~ msgstr ""
-#~ "De følgende modulene er fått endringer, men som ikke er aktivert. Hvis du "
-#~ "ønsker å redigere dem, vær snill å dobbeltklikk på den riktige oppføringen"
-
-#~ msgid "Control Center"
-#~ msgstr "Kontrollsenter"
+#: new-control-center/capplet-dir-view.c:599
+msgid "Desktop Properties manager."
+msgstr "Egenskaper for skrivebord."
