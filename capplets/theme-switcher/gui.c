@@ -615,4 +615,5 @@ update_theme_entries(GtkWidget *disp_list)
   } else
     g_free (d_theme);
   if (current_theme == NULL)
+    ;
 }
