@@ -33,7 +33,7 @@
 #include "mime-type-info.h"
 #include "service-info.h"
 
-#define IS_CATEGORY(entry) (entry->type == MODEL_ENTRY_CATEGORY)
+#define IS_CATEGORY(entry) ((entry) != NULL && (entry)->type == MODEL_ENTRY_CATEGORY)
 
 enum {
 	PROP_0,
@@ -395,7 +395,7 @@ mime_types_model_get_value (GtkTreeModel *tree_model, GtkTreeIter *iter, gint co
 			break;
 
 		default:
-			g_value_set_string (value, NULL);
+			g_value_set_string (value, "");
 			break;
 		}
 
@@ -422,7 +422,7 @@ mime_types_model_get_value (GtkTreeModel *tree_model, GtkTreeIter *iter, gint co
 			break;
 
 		default:
-			g_value_set_string (value, NULL);
+			g_value_set_string (value, "");
 			break;
 		}
 
@@ -462,7 +462,7 @@ mime_types_model_get_value (GtkTreeModel *tree_model, GtkTreeIter *iter, gint co
 			break;
 
 		default:
-			g_value_set_string (value, NULL);
+			g_value_set_string (value, "");
 			break;
 		}
 

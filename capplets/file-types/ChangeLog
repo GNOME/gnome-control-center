@@ -1,6 +1,12 @@
+2002-06-15  Jody Goldberg <jody@gnome.org>
+
+	* mime-types-model.c (mime_types_model_get_value) :
+	  gtk_tree_view_search_equal_func does not like NULL.
+	(IS_CATEGORY) : check for NULL.
+
 2002-06-05  Jody Goldberg <jody@gnome.org>
 
-	* mime-edit-dialog.c (mime_add_dialog_new) :
+	* mime-edit-dialog.c (mime_add_dialog_new) : tidy.
 
 	* mime-edit-dialog.c (mime_edit_editable_enters) : new.
 	(fill_dialog) : mime type is always sensitive.
