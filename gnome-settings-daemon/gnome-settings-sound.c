@@ -52,6 +52,7 @@ start_esd (void)
         time_t starttime;
         GnomeClient *client = gnome_master_client ();
 
+	g_print ("Starting esd\n");
         esdpid = gnome_execute_async (NULL, 2, (char **)esd_cmdline);
         g_snprintf (argbuf, sizeof (argbuf), "%d", esdpid);
         tmpargv[0] = "kill"; tmpargv[1] = argbuf; tmpargv[2] = NULL;
@@ -76,6 +77,9 @@ start_esd (void)
 static void
 stop_esd (void) 
 {
+	g_print ("Stopping esd\n");
+	/* Can't think of a way to do this reliably, so we fake it for now */
+	esd_standby (gnome_sound_connection_get ());
 }
 
 /* reload_foreach_cb
@@ -148,6 +152,7 @@ apply_settings (void)
 	if (!inited || event_changed_old != event_changed_new)
 	{
 		SoundProperties *props;
+		g_print ("Reloading events\n");
 		
 		inited = TRUE;
 		event_changed_old = event_changed_new;

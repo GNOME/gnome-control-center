@@ -1,3 +1,11 @@
+2002-01-08  Richard Hestilow  <hestilow@ximian.com>
+
+	* gnome-settings-daemon.c (main): Initialize libgnomeui,
+	and load sounds.
+
+	* gnome-settings-sound.c (stop_esd): Just tell esd to let go
+	of /dev/dsp.
+
 2002-01-04  Bradford Hovinen  <hovinen@ximian.com>
 
 	* all: Convert from GConfEngine to GConfClient

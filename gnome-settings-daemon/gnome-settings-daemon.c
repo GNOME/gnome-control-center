@@ -28,7 +28,9 @@
 #include <gdk/gdkx.h>
 
 #include <gconf/gconf.h>
-
+#include <libgnome/gnome-init.h>
+#include <libgnomeui/gnome-ui-init.h>
+#include <config.h>
 #include "xsettings-manager.h"
 #include "gnome-settings-daemon.h"
 
@@ -133,8 +135,9 @@ main (int argc, char **argv)
   gboolean terminated = FALSE;
   GConfClient *client;
   GSList *list;
-  gtk_init (&argc, &argv);  
-  
+  gnome_program_init ("control-center", VERSION, LIBGNOMEUI_MODULE,
+		      argc, argv, NULL);
+
   if (xsettings_manager_check_running (gdk_display, DefaultScreen (gdk_display)))
     {
       fprintf (stderr, "You can only run one xsettings manager at a time; exiting");
@@ -188,6 +191,7 @@ main (int argc, char **argv)
 
   gnome_settings_xsettings_load (client);
   gnome_settings_mouse_load (client);
+  gnome_settings_sound_load (client);
   
   if (!terminated)
     gtk_main ();
