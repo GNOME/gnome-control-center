@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.5.8\n"
-"POT-Creation-Date: 2002-05-20 01:06+0200\n"
-"PO-Revision-Date: 2002-05-19 00:56+0200\n"
+"POT-Creation-Date: 2002-05-22 00:28+0200\n"
+"PO-Revision-Date: 2002-05-22 00:30+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -179,14 +179,6 @@ msgstr "piksler/sek"
 msgid "seconds"
 msgstr "sekunder"
 
-#: capplets/background/background.desktop.in.h:1
-msgid "Background"
-msgstr "Bakgrunn"
-
-#: capplets/background/background.desktop.in.h:2
-msgid "Change the desktop background"
-msgstr "Endre skrivebordsbakgrunn"
-
 #. solid
 #: capplets/background/background-properties-capplet.c:228
 msgid "C_olor"
@@ -236,7 +228,7 @@ msgstr "_Bilde"
 
 #: capplets/background/background-properties-capplet.c:566
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:715
+#: capplets/default-applications/gnome-default-applications-properties.c:719
 #: capplets/keyboard/gnome-keyboard-properties.c:367
 #: capplets/mouse/gnome-mouse-properties.c:735
 #: capplets/sound/sound-properties-capplet.c:156
@@ -335,6 +327,14 @@ msgstr "radioknapp4"
 #: capplets/background/background-properties.glade.h:23
 msgid "radiobutton5"
 msgstr "radioknapp5"
+
+#: capplets/background/background.desktop.in.h:1
+msgid "Background"
+msgstr "Bakgrunn"
+
+#: capplets/background/background.desktop.in.h:2
+msgid "Change the desktop background"
+msgstr "Endre skrivebordsbakgrunn"
 
 #: capplets/common/activate-settings-daemon.c:18
 msgid ""
@@ -547,8 +547,8 @@ msgstr ""
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:1
-#: capplets/theme-switcher/theme-properties.glade.h:1
 #: capplets/network/gnome-network-preferences.glade.h:1
+#: capplets/theme-switcher/theme-properties.glade.h:1
 msgid "*"
 msgstr "*"
 
@@ -716,29 +716,13 @@ msgstr "Avansert"
 msgid "Advanced Settings"
 msgstr "Avanserte innstillinger"
 
-#: capplets/desktop-links/cd.desktop.in.in.h:1
-msgid "CD Properties"
-msgstr "Egenskaper for CD"
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:1
+msgid "Control Center Menu"
+msgstr "Kontrollsenter meny"
 
-#: capplets/desktop-links/cd.desktop.in.in.h:2
-msgid "Configure handling of CD devices"
-msgstr "Konfigurer håndtering av CD-enheter"
-
-#: capplets/desktop-links/legacy-applications.desktop.in.in.h:1
-msgid "Legacy Applications"
-msgstr "Eldre applikasjoner"
-
-#: capplets/desktop-links/legacy-applications.desktop.in.in.h:2
-msgid "Legacy applications settings (grdb)"
-msgstr "Innstillinger for eldre applikasjoner (grdb)"
-
-#: capplets/desktop-links/panel.desktop.in.in.h:1
-msgid "Global panel properties"
-msgstr "Globale egenskaper for panel"
-
-#: capplets/desktop-links/panel.desktop.in.in.h:2
-msgid "Panel"
-msgstr "Panel"
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:2
+msgid "Sawfish window manager"
+msgstr "Sawfish vindushåndterer"
 
 #: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
 msgid "Appearance"
@@ -812,14 +796,6 @@ msgstr "Konfigurer plassering av vinduer"
 msgid "Placement"
 msgstr "Plassering"
 
-#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:1
-msgid "Control Center Menu"
-msgstr "Kontrollsenter meny"
-
-#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:2
-msgid "Sawfish window manager"
-msgstr "Sawfish vindushåndterer"
-
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
 msgid "Enable window manager sound events"
 msgstr "Aktiver lydhendelser for vindushåndterer"
@@ -837,6 +813,30 @@ msgstr "Konfigurer arbeidsområder"
 #: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:2
 msgid "Workspaces"
 msgstr "Arbeidsområder"
+
+#: capplets/desktop-links/cd.desktop.in.in.h:1
+msgid "CD Properties"
+msgstr "Egenskaper for CD"
+
+#: capplets/desktop-links/cd.desktop.in.in.h:2
+msgid "Configure handling of CD devices"
+msgstr "Konfigurer håndtering av CD-enheter"
+
+#: capplets/desktop-links/legacy-applications.desktop.in.in.h:1
+msgid "Legacy Applications"
+msgstr "Eldre applikasjoner"
+
+#: capplets/desktop-links/legacy-applications.desktop.in.in.h:2
+msgid "Legacy applications settings (grdb)"
+msgstr "Innstillinger for eldre applikasjoner (grdb)"
+
+#: capplets/desktop-links/panel.desktop.in.in.h:1
+msgid "Global panel properties"
+msgstr "Globale egenskaper for panel"
+
+#: capplets/desktop-links/panel.desktop.in.in.h:2
+msgid "Panel"
+msgstr "Panel"
 
 #: capplets/desktop-links/session.desktop.in.in.h:1
 msgid "Configure which non-session aware programs are started up"
@@ -1253,7 +1253,7 @@ msgstr "Hurtigtast"
 
 #: capplets/keybindings/eggcellrendererkeys.c:203
 #: capplets/keybindings/gnome-keybinding-properties.c:306
-#: libbackground/applier.c:531
+#: libbackground/applier.c:525
 msgid "Disabled"
 msgstr "Slått av"
 
@@ -1875,9 +1875,42 @@ msgstr "Mus"
 msgid "Mouse Properties"
 msgstr "Egenskaper for mus"
 
-#: capplets/sound/sound.desktop.in.h:1
-msgid "Configure GNOME's use of sound"
-msgstr "Konfigurér bruk av lyd i GNOME."
+#: capplets/network/gnome-network-preferences.desktop.in.h:1
+msgid "Network"
+msgstr "Nettverk"
+
+#: capplets/network/gnome-network-preferences.desktop.in.h:2
+#: capplets/network/gnome-network-preferences.glade.h:3
+msgid "Network Preferences"
+msgstr "Brukervalg for nettverk"
+
+#: capplets/network/gnome-network-preferences.glade.h:2
+msgid "HTTP Proxy Settings"
+msgstr "Innstillinger for HTTP-proxy"
+
+#: capplets/network/gnome-network-preferences.glade.h:4
+msgid "P_ort:"
+msgstr "P_ort:"
+
+#: capplets/network/gnome-network-preferences.glade.h:5
+msgid "Pass_word:"
+msgstr "Pass_ord:"
+
+#: capplets/network/gnome-network-preferences.glade.h:6
+msgid "Pro_xy requires a username and password"
+msgstr "Pro_xy krever brukernavn og passord"
+
+#: capplets/network/gnome-network-preferences.glade.h:7
+msgid "User_name:"
+msgstr "Bruker_navn:"
+
+#: capplets/network/gnome-network-preferences.glade.h:8
+msgid "_Location:"
+msgstr "P_lassering"
+
+#: capplets/network/gnome-network-preferences.glade.h:9
+msgid "_Use HTTP proxy"
+msgstr "Br_uk HTTP-proxy"
 
 #: capplets/sound/sound-properties-capplet.c:186
 msgid "Sound preferences"
@@ -1898,6 +1931,10 @@ msgstr "_Generelt"
 #: capplets/sound/sound-properties.glade.h:4
 msgid "_Sounds for events"
 msgstr "Aktiver lyd for hendel_ser"
+
+#: capplets/sound/sound.desktop.in.h:1
+msgid "Configure GNOME's use of sound"
+msgstr "Konfigurér bruk av lyd i GNOME."
 
 #: capplets/theme-switcher/control/control.c:18
 msgid "Eenie Meenie Mynie Moe Catcha Tiger By Its Toe"
@@ -1925,6 +1962,7 @@ msgid "Submenu"
 msgstr "Undermeny"
 
 #: capplets/theme-switcher/control/control.c:74
+#: capplets/ui-properties/gnome-ui-properties.glade.h:4
 msgid "Item 1"
 msgstr "Oppføring 1"
 
@@ -2008,16 +2046,105 @@ msgstr "Oppførsel"
 msgid "Sets the default behavior of GNOME applications"
 msgstr "Setter forvalgt oppførsel for GNOME-applikasjoner"
 
-#: capplets/url-properties/url.desktop.in.in.h:1
-#: capplets/url-properties/url-properties.desktop.in.h:1
-msgid "Configure which programs are used to display URLs"
-msgstr "Konfigurer hvilke programmer som brukes for å vise URLer"
+#: capplets/ui-properties/gnome-ui-properties.glade.h:1
+msgid "A preview of what a menubar looks like with these settings."
+msgstr "En forhåndsvisning av menylinjens utseende med disse instillingene."
 
-#: capplets/url-properties/url.desktop.in.in.h:2
-#: capplets/url-properties/url-properties.c:66
-#: capplets/url-properties/url-properties.desktop.in.h:2
-msgid "URL Handlers"
-msgstr "URL-håndterere"
+#: capplets/ui-properties/gnome-ui-properties.glade.h:2
+msgid "A preview of what a toolbar looks like with these settings."
+msgstr "En forhåndsvisning av verkyøylinjens utseende med disse innstillingene."
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:3
+msgid "Icons Only"
+msgstr "Kun ikoner"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:5
+msgid "Item 2"
+msgstr "Oppføring 2"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:6
+msgid "Item 3"
+msgstr "Oppføring 3"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:7
+msgid "Menu Item 1"
+msgstr "Menyoppføring 1"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:8
+msgid "Menu Item 2"
+msgstr "Menyoppføring 2"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:9
+msgid "Menu Item 3"
+msgstr "Menyoppføring 3"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:10
+msgid "Menu Item 4"
+msgstr "Menyoppføring 4"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:11
+msgid "Menu Item 5"
+msgstr "Menyoppføring 5"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:12
+msgid "Menu items can have _icons"
+msgstr "Menyoppføringer har _ikoner"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:13
+msgid "Menus"
+msgstr "Menyer"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:14
+msgid "New File"
+msgstr "Ny fil"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:15
+msgid "Open File"
+msgstr "Åpne fil"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:16
+msgid "Priority Text Beside Icons"
+msgstr "Prioritetstekst ved siden av ikoner"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:17
+msgid "Sample Menubar"
+msgstr "Eksempel-menylinje"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:18
+msgid "Sample Toolbar"
+msgstr "Eksempel-verktøylinje"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:19
+msgid "Save File"
+msgstr "Lagre fil"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:20
+msgid "Text Below Icons"
+msgstr "Tekst under ikoner"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:21
+msgid "Text Only"
+msgstr "Kun tekst"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:22
+msgid "Toolbar"
+msgstr "Verktøylinje"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:23
+msgid "Toolbar and Menu Preferences"
+msgstr "Brukervalg for verktøylinje og meny"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:24
+msgid "Toolbars can be _detached and moved around"
+msgstr "Verktøylinjene _kan tas av og flyttes rundt"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:25
+msgid "_Menu"
+msgstr "_Meny"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:26
+msgid "_Toolbars have: "
+msgstr "_Verktøylinjer har: "
 
 #: capplets/url-properties/url-properties.c:64
 msgid "Protocol"
@@ -2026,6 +2153,12 @@ msgstr "Protokoll"
 #: capplets/url-properties/url-properties.c:64
 msgid "Command"
 msgstr "Kommando"
+
+#: capplets/url-properties/url-properties.c:66
+#: capplets/url-properties/url-properties.desktop.in.h:2
+#: capplets/url-properties/url.desktop.in.in.h:2
+msgid "URL Handlers"
+msgstr "URL-håndterere"
 
 #: capplets/url-properties/url-properties.c:89
 msgid "handler:"
@@ -2051,6 +2184,11 @@ msgstr "Hjelpleser (nytt vindu)"
 #: capplets/url-properties/url-properties.c:127
 msgid "Set"
 msgstr "Sett"
+
+#: capplets/url-properties/url-properties.desktop.in.h:1
+#: capplets/url-properties/url.desktop.in.in.h:1
+msgid "Configure which programs are used to display URLs"
+msgstr "Konfigurer hvilke programmer som brukes for å vise URLer"
 
 #: capplets/windows/gnome-window-properties.c:133
 #: capplets/wm-properties/wm-properties-capplet.c:135
@@ -2173,13 +2311,13 @@ msgstr "Ice WM"
 msgid "Scwm"
 msgstr "Scwm"
 
-#: capplets/wm-properties/wm-desktops/twm.desktop.in.in.h:1
-msgid "twm"
-msgstr "twm"
-
 #: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.in.h:1
 msgid "Window Maker"
 msgstr "Window Maker"
+
+#: capplets/wm-properties/wm-desktops/twm.desktop.in.in.h:1
+msgid "twm"
+msgstr "twm"
 
 #: capplets/wm-properties/wm-properties-capplet.c:367
 #, c-format
@@ -2276,42 +2414,10 @@ msgstr "Du kan ikke slette aktiv vindushåndterer"
 msgid "Window Manager Selector"
 msgstr "Valg av vindushåndterer"
 
-#: capplets/network/gnome-network-preferences.glade.h:2
-msgid "HTTP Proxy Settings"
-msgstr "Innstillinger for HTTP-proxy"
-
-#: capplets/network/gnome-network-preferences.glade.h:3
-#: capplets/network/gnome-network-preferences.desktop.in.h:2
-msgid "Network Preferences"
-msgstr "Brukervalg for nettverk"
-
-#: capplets/network/gnome-network-preferences.glade.h:4
-msgid "P_ort:"
-msgstr "P_ort:"
-
-#: capplets/network/gnome-network-preferences.glade.h:5
-msgid "Pass_word:"
-msgstr "Pass_ord:"
-
-#: capplets/network/gnome-network-preferences.glade.h:6
-msgid "Pro_xy requires a username and password"
-msgstr "Pro_xy krever brukernavn og passord"
-
-#: capplets/network/gnome-network-preferences.glade.h:7
-msgid "User_name:"
-msgstr "Bruker_navn:"
-
-#: capplets/network/gnome-network-preferences.glade.h:8
-msgid "_Location:"
-msgstr "P_lassering"
-
-#: capplets/network/gnome-network-preferences.glade.h:9
-msgid "_Use HTTP proxy"
-msgstr "Br_uk HTTP-proxy"
-
-#: capplets/network/gnome-network-preferences.desktop.in.h:1
-msgid "Network"
-msgstr "Nettverk"
+#: control-center/capplet-dir-view-list.c:324
+#, c-format
+msgid "GNOME Control Center: %s"
+msgstr "GNOME Kontrollsenter: %s"
 
 #: control-center/capplet-dir-view.c:158
 msgid "Layout"
@@ -2329,27 +2435,22 @@ msgstr "Katalogobjekt for capplet"
 msgid "Capplet directory that this view is viewing"
 msgstr "Capplet-katalog som denne visningen viser"
 
-#: control-center/capplet-dir-view.c:338 control-center/gnomecc.desktop.in.h:1
+#: control-center/capplet-dir-view.c:335
+msgid "translator_credits"
+msgstr "Kjartan Maraas"
+
+#: control-center/capplet-dir-view.c:344 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
 msgstr "GNOME Kontrollsenter"
 
-#: control-center/capplet-dir-view.c:341
+#: control-center/capplet-dir-view.c:347
 msgid "Desktop properties manager."
 msgstr "Håndtering av egenskaper for skrivebord."
 
-#: control-center/capplet-dir-view.c:477
+#: control-center/capplet-dir-view.c:485
 #, c-format
 msgid "Gnome Control Center : %s"
 msgstr "GNOME Kontrollsenter: %s"
-
-#: control-center/capplet-dir-view-list.c:324
-#, c-format
-msgid "GNOME Control Center: %s"
-msgstr "GNOME Kontrollsenter: %s"
-
-#: control-center/gnomecc.desktop.in.h:2
-msgid "The GNOME configuration tool"
-msgstr "Konfigurasjonsverktøy for GNOME"
 
 #: control-center/gnomecc-ui.xml.h:1
 msgid "About this application"
@@ -2375,6 +2476,10 @@ msgstr "_Fil"
 msgid "_Help"
 msgstr "_Hjelp"
 
+#: control-center/gnomecc.desktop.in.h:2
+msgid "The GNOME configuration tool"
+msgstr "Konfigurasjonsverktøy for GNOME"
+
 #: control-center/main.c:43
 msgid "Use shell even if nautilus is running."
 msgstr "Bruk skall selv om nautilus kjører."
@@ -2382,6 +2487,44 @@ msgstr "Bruk skall selv om nautilus kjører."
 #: gnome-settings-daemon/factory.c:29
 msgid "Could not initialize Bonobo"
 msgstr "Kunne ikke initiere Bonobo"
+
+#: gnome-settings-daemon/gnome-settings-font.c:74
+#, c-format
+msgid ""
+"Cannot create the directory \"%s\".\n"
+"This is needed to allow changing cursors."
+msgstr ""
+"Kan ikke opprette katalog «%s».\n"
+"Dette kreves for å tillate endring av markører."
+
+#: gnome-settings-daemon/gnome-settings-screensaver.c:92
+#, c-format
+msgid ""
+"There was an error starting up the screensaver:\n"
+"\n"
+"%s\n"
+"\n"
+"Screensaver functionality will not work in this session."
+msgstr ""
+"Det oppsto en feil ved oppstart av skjermspareren:\n"
+"\n"
+"%s\n"
+"\n"
+"Skjermsparerfunksjonen vil ikke fungere i denne sesjonen."
+
+#: gnome-settings-daemon/gnome-settings-screensaver.c:102
+msgid "_Do not show this message again"
+msgstr "_Ikke vis denne meldingen igjen"
+
+#: gnome-settings-daemon/gnome-settings-sound.c:125
+#, c-format
+msgid "Couldn't load sound file %s as sample %s"
+msgstr "Kunne ikke laste lydfil %s som sample %s"
+
+#: gnome-settings-daemon/gnome-settings-xsettings.c:150
+#, c-format
+msgid "GConf key %s set to type %s but its expected type was %s\n"
+msgstr "GConf-nøkkel %s satt til type %s men forventet type var %s\n"
 
 #: libbackground/applier.c:239
 msgid "Type"
@@ -2449,44 +2592,6 @@ msgstr "S_pill"
 msgid "Select sound file"
 msgstr "Velg lydfil"
 
-#: gnome-settings-daemon/gnome-settings-font.c:74
-#, c-format
-msgid ""
-"Cannot create the directory \"%s\".\n"
-"This is needed to allow changing cursors."
-msgstr ""
-"Kan ikke opprette katalog «%s».\n"
-"Dette kreves for å tillate endring av markører."
-
-#: gnome-settings-daemon/gnome-settings-screensaver.c:92
-#, c-format
-msgid ""
-"There was an error starting up the screensaver:\n"
-"\n"
-"%s\n"
-"\n"
-"Screensaver functionality will not work in this session."
-msgstr ""
-"Det oppsto en feil ved oppstart av skjermspareren:\n"
-"\n"
-"%s\n"
-"\n"
-"Skjermsparerfunksjonen vil ikke fungere i denne sesjonen."
-
-#: gnome-settings-daemon/gnome-settings-screensaver.c:102
-msgid "_Do not show this message again"
-msgstr "_Ikke vis denne meldingen igjen"
-
-#: gnome-settings-daemon/gnome-settings-sound.c:125
-#, c-format
-msgid "Couldn't load sound file %s as sample %s"
-msgstr "Kunne ikke laste lydfil %s som sample %s"
-
-#: gnome-settings-daemon/gnome-settings-xsettings.c:150
-#, c-format
-msgid "GConf key %s set to type %s but its expected type was %s\n"
-msgstr "GConf-nøkkel %s satt til type %s men forventet type var %s\n"
-
 #~ msgid "Accepts Line _Number"
 #~ msgstr "Godtar linje_nummer"
 
@@ -2508,68 +2613,11 @@ msgstr "GConf-nøkkel %s satt til type %s men forventet type var %s\n"
 #~ msgid "Icons and Text"
 #~ msgstr "Ikoner og tekst"
 
-#~ msgid "Item 2"
-#~ msgstr "Oppføring 2"
-
-#~ msgid "Item 3"
-#~ msgstr "Oppføring 3"
-
-#~ msgid "Menu Item 1"
-#~ msgstr "Menyoppføring 1"
-
-#~ msgid "Menu Item 2"
-#~ msgstr "Menyoppføring 2"
-
-#~ msgid "Menu Item 3"
-#~ msgstr "Menyoppføring 3"
-
-#~ msgid "Menu Item 4"
-#~ msgstr "Menyoppføring 4"
-
-#~ msgid "Menu Item 5"
-#~ msgstr "Menyoppføring 5"
-
-#~ msgid "Menu items have _icons"
-#~ msgstr "Menyoppføringer har _ikoner"
-
-#~ msgid "Menus"
-#~ msgstr "Menyer"
-
-#~ msgid "New File"
-#~ msgstr "Ny fil"
-
 #~ msgid "Only Icons"
 #~ msgstr "Kun ikoner"
 
 #~ msgid "Only Text"
 #~ msgstr "Kun tekst"
-
-#~ msgid "Open File"
-#~ msgstr "Åpne fil"
-
-#~ msgid "Sample Menubar"
-#~ msgstr "Eksempel-menylinje"
-
-#~ msgid "Sample Toolbar"
-#~ msgstr "Eksempel-verktøylinje"
-
-#~ msgid "Save File"
-#~ msgstr "Lagre fil"
-
-#~ msgid "Toolbar"
-#~ msgstr "Verktøylinje"
-
-#~ msgid "Toolbar and Menu Properties"
-#~ msgstr "Egenskaper for verktøylinje og meny"
-
-#~ msgid "Toolbars can be _detached and moved around"
-#~ msgstr "Verktøylinjene _kan tas av og flyttes rundt"
-
-#~ msgid "_Menu"
-#~ msgstr "_Meny"
-
-#~ msgid "_Toolbars have: "
-#~ msgstr "_Verktøylinjer har: "
 
 #~ msgid "At the center of the screen"
 #~ msgstr "Midt på skjermen"
