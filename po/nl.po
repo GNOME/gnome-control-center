@@ -12,7 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center CVS\n"
-"POT-Creation-Date: 2003-05-25 20:14+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-06-14 20:39+0200\n"
 "PO-Revision-Date: 2003-05-26 00:52+0100\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
@@ -37,7 +38,7 @@ msgid "Select CDE AccessX file"
 msgstr "CDE AccessX-bestand selecteren"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Toetsenbord"
@@ -301,7 +302,7 @@ msgstr "Selecteer af_beelding:"
 #: capplets/default-applications/gnome-default-applications-properties.c:724
 #: capplets/keyboard/gnome-keyboard-properties.c:290
 #: capplets/mouse/gnome-mouse-properties.c:716
-#: capplets/sound/sound-properties-capplet.c:149
+#: capplets/sound/sound-properties-capplet.c:214
 msgid "Retrieve and store legacy settings"
 msgstr "Standaardinstellingen terughalen en opslaan"
 
@@ -1098,7 +1099,7 @@ msgstr "Structuur die informatie over de MIME categorie bevat"
 
 #: capplets/file-types/mime-category-edit-dialog.c:344
 #: capplets/file-types/mime-edit-dialog.c:491
-#: capplets/file-types/mime-edit-dialog.c:595
+#: capplets/file-types/mime-edit-dialog.c:596
 #: capplets/file-types/service-edit-dialog.c:358
 #: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
@@ -1138,11 +1139,12 @@ msgid "Misc"
 msgstr "Overig"
 
 #: capplets/file-types/mime-edit-dialog.c:486
-#: capplets/file-types/mime-edit-dialog.c:545
+#: capplets/file-types/mime-edit-dialog.c:547
 msgid "None"
 msgstr "Geen"
 
-#: capplets/file-types/mime-edit-dialog.c:855
+#: capplets/file-types/mime-edit-dialog.c:852
+#: capplets/file-types/mime-edit-dialog.c:866
 msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
@@ -1150,15 +1152,15 @@ msgstr ""
 "Voert u alstublieft een geldig MIME-type in. Het zou van de vorm klasse/type "
 "moeten zijn en mag geen spaties bevatten."
 
-#: capplets/file-types/mime-edit-dialog.c:862
+#: capplets/file-types/mime-edit-dialog.c:859
 msgid "A MIME type with that name already exists, overwrite ?."
 msgstr "Een MIME-type met die naam bestaat reeds, overschrijven?"
 
-#: capplets/file-types/mime-edit-dialog.c:927
+#: capplets/file-types/mime-edit-dialog.c:931
 msgid "Category"
 msgstr "Categorie"
 
-#: capplets/file-types/mime-edit-dialog.c:932
+#: capplets/file-types/mime-edit-dialog.c:936
 msgid "Choose a file category"
 msgstr "Kies een bestandscategorie"
 
@@ -1503,8 +1505,8 @@ msgstr "_Toegankelijkheid"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:286
 #: capplets/keyboard/gnome-keyboard-properties.c:288
-#: capplets/sound/sound-properties-capplet.c:145
-#: capplets/sound/sound-properties-capplet.c:147
+#: capplets/sound/sound-properties-capplet.c:210
+#: capplets/sound/sound-properties-capplet.c:212
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
@@ -1543,17 +1545,18 @@ msgstr "Klikken bij toetsaanslag"
 msgid "Cursor Blinks"
 msgstr "Cursor knippert"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#, fuzzy
+msgid "Key presses _repeat when key is held down"
+msgstr "Toetsenbord _herhaalt wanneer de toets ingedrukt blijft"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Keyboard Bell"
 msgstr "Toetsenbordpiep"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Keyboard Preferences"
 msgstr "Toetsenbordeigenschappen"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
-msgid "Keyboard _repeats when key is held down"
-msgstr "Toetsenbord _herhaalt wanneer de toets ingedrukt blijft"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Keypress Click"
@@ -1853,7 +1856,7 @@ msgstr "Beve_iligde HTTP proxy:"
 msgid "_Username:"
 msgstr "Gebr_uikersnaam:"
 
-#: capplets/sound/sound-properties-capplet.c:175
+#: capplets/sound/sound-properties-capplet.c:241
 msgid "Sound preferences"
 msgstr "Geluidsvoorkeuren"
 
@@ -1862,20 +1865,40 @@ msgid "E_nable sound server startup"
 msgstr "S_tarten van geluidsserver inschakelen"
 
 #: capplets/sound/sound-properties.glade.h:2
+msgid "Flash _window titlebar"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:3
+msgid "Flash entire _screen"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:4
 msgid "General"
 msgstr "Algemeen"
 
-#: capplets/sound/sound-properties.glade.h:3
+#: capplets/sound/sound-properties.glade.h:5
 msgid "Sound Events"
 msgstr "Geluidsgebeurtenissen"
 
-#: capplets/sound/sound-properties.glade.h:4
+#: capplets/sound/sound-properties.glade.h:6
 msgid "Sound Preferences"
 msgstr "Geluidsvoorkeuren"
 
-#: capplets/sound/sound-properties.glade.h:5
+#: capplets/sound/sound-properties.glade.h:7
+msgid "System Bell"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:8
+msgid "_Sound an audible bell"
+msgstr ""
+
+#: capplets/sound/sound-properties.glade.h:9
 msgid "_Sounds for events"
 msgstr "_Geluiden bij gebeurtenissen"
+
+#: capplets/sound/sound-properties.glade.h:10
+msgid "_Visual feedback:"
+msgstr ""
 
 #: capplets/sound/sound.desktop.in.h:1
 msgid "Enable sound and associate sounds with events"
@@ -1975,19 +1998,25 @@ msgid "Theme"
 msgstr "Thema"
 
 #: capplets/theme-switcher/theme-install.glade.h:2
-msgid "Install new theme"
-msgstr "Nieuw thema installeren"
+#, fuzzy
+msgid "<span size=\"larger\" weight=\"bold\">Install a Theme</span>"
+msgstr "<span size=\"larger\" weight=\"bold\">Thema opslaan op schijf</span>"
 
 #: capplets/theme-switcher/theme-install.glade.h:3
+msgid "Theme Installation"
+msgstr ""
+
+#: capplets/theme-switcher/theme-install.glade.h:4
 msgid "_Install"
 msgstr "_Installeren"
 
-#: capplets/theme-switcher/theme-install.glade.h:4
-msgid "_Location of new theme:"
-msgstr "_Locatie van nieuw thema:"
+#: capplets/theme-switcher/theme-install.glade.h:5
+msgid "_Location:"
+msgstr "_Locatie"
 
 #: capplets/theme-switcher/theme-properties.glade.h:2
-msgid "<span size=\"larger\" weight=\"bold\">Save theme to disk</span>"
+#, fuzzy
+msgid "<span size=\"larger\" weight=\"bold\">Save Theme to Disk</span>"
 msgstr "<span size=\"larger\" weight=\"bold\">Thema opslaan op schijf</span>"
 
 #: capplets/theme-switcher/theme-properties.glade.h:3
@@ -2000,7 +2029,7 @@ msgstr "Letterty_pe toepassen"
 
 #: capplets/theme-switcher/theme-properties.glade.h:5
 msgid "Controls"
-msgstr "Regelaars"
+msgstr "Elementen"
 
 #: capplets/theme-switcher/theme-properties.glade.h:6
 msgid "Icons"
@@ -2013,37 +2042,52 @@ msgstr ""
 "slepen."
 
 #: capplets/theme-switcher/theme-properties.glade.h:8
-msgid "Short _Description:"
-msgstr "Korte be_schrijving"
+#, fuzzy
+msgid "Save Theme"
+msgstr "Thema op_slaan"
 
 #: capplets/theme-switcher/theme-properties.glade.h:9
+#, fuzzy
+msgid "Short _description:"
+msgstr "Korte be_schrijving"
+
+#: capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Theme Details"
 msgstr "Thema-details"
 
-#: capplets/theme-switcher/theme-properties.glade.h:10
+#: capplets/theme-switcher/theme-properties.glade.h:11
 msgid "Theme Preferences"
 msgstr "Thema-vookeuren"
 
-#: capplets/theme-switcher/theme-properties.glade.h:11
-msgid ""
-"This theme suggests a\n"
-"background:"
-msgstr ""
-"Dit thema suggereert een\n"
-"achtergrond:"
+#: capplets/theme-switcher/theme-properties.glade.h:12
+#, fuzzy
+msgid "Theme _Details"
+msgstr "Thema-details"
 
 #: capplets/theme-switcher/theme-properties.glade.h:13
-msgid ""
-"This theme suggests a\n"
-"font and background:"
+#, fuzzy
+msgid "This theme does not suggest any particular font or background."
 msgstr ""
 "Dit thema suggereert een\n"
 "lettertype en een achtergrond:"
 
+#: capplets/theme-switcher/theme-properties.glade.h:14
+#, fuzzy
+msgid "This theme suggests a background:"
+msgstr ""
+"Dit thema suggereert een\n"
+"achtergrond:"
+
 #: capplets/theme-switcher/theme-properties.glade.h:15
-msgid ""
-"This theme suggests a\n"
-"font:"
+#, fuzzy
+msgid "This theme suggests a font and a background:"
+msgstr ""
+"Dit thema suggereert een\n"
+"lettertype en een achtergrond:"
+
+#: capplets/theme-switcher/theme-properties.glade.h:16
+#, fuzzy
+msgid "This theme suggests a font:"
 msgstr ""
 "Dit thema suggereert een\n"
 "lettertype:"
@@ -2053,22 +2097,21 @@ msgid "Window Border"
 msgstr "Vensterkader"
 
 #: capplets/theme-switcher/theme-properties.glade.h:18
-msgid "_Details..."
-msgstr "_Details..."
-
-#: capplets/theme-switcher/theme-properties.glade.h:19
-msgid "_Go to theme folder"
+#, fuzzy
+msgid "_Go To Theme Folder"
 msgstr "_Ga naar thema-map"
 
-#: capplets/theme-switcher/theme-properties.glade.h:20
-msgid "_Install theme..."
+#: capplets/theme-switcher/theme-properties.glade.h:19
+#, fuzzy
+msgid "_Install Theme..."
 msgstr "Thema _installeren..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:21
-msgid "_Save theme"
+#: capplets/theme-switcher/theme-properties.glade.h:20
+#, fuzzy
+msgid "_Save Theme..."
 msgstr "Thema op_slaan"
 
-#: capplets/theme-switcher/theme-properties.glade.h:22
+#: capplets/theme-switcher/theme-properties.glade.h:21
 msgid "_Theme name:"
 msgstr "_Themanaam:"
 
@@ -2409,7 +2452,7 @@ msgid "Couldn't load sound file %s as sample %s"
 msgstr "Kon geluidsbestand %s niet laden als sample %s"
 
 #: gnome-settings-daemon/gnome-settings-xrdb.c:212
-#: gnome-settings-daemon/gnome-settings-xrdb.c:259
+#: gnome-settings-daemon/gnome-settings-xrdb.c:260
 msgid "Cannot determine user's home directory"
 msgstr "Kan de persoonlijke map van gebruiker niet bepalen"
 
@@ -2738,7 +2781,7 @@ msgstr "Weergavecomponent thema-eigenschappen"
 msgid "Themus Theme Properties view"
 msgstr "Themus Thema-eigenschappenweergave"
 
-#: vfs-methods/themus/theme-method.c:513
+#: vfs-methods/themus/theme-method.c:514
 msgid "Themes"
 msgstr "Thema's"
 
@@ -2793,6 +2836,15 @@ msgstr "Of geïnstalleerde thema's als miniatuur weergegeven moeten worden"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Of thema's als miniatuur weergegeven moeten worden"
+
+#~ msgid "Install new theme"
+#~ msgstr "Nieuw thema installeren"
+
+#~ msgid "_Location of new theme:"
+#~ msgstr "_Locatie van nieuw thema:"
+
+#~ msgid "_Details..."
+#~ msgstr "_Details..."
 
 #~ msgid ""
 #~ "<b>Note:</b> You will need to logout and log back in for this setting to "
@@ -2894,9 +2946,6 @@ msgstr "Of thema's als miniatuur weergegeven moeten worden"
 
 #~ msgid "Pro_xy requires username and password"
 #~ msgstr "Pro_xy vereist een gebruikersnaam en wachtwoord"
-
-#~ msgid "_Location:"
-#~ msgstr "_Locatie"
 
 #~ msgid "_General"
 #~ msgstr "_Algemeen"
