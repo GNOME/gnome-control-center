@@ -207,12 +207,17 @@ service_info_save (const ServiceInfo *info)
 	}
 
 	set_bool (info, "type", info->run_program);
+	set_bool (info, "enabled", TRUE);
 }
 
 void
 service_info_delete (const ServiceInfo *info)
 {
 	gchar *tmp;
+
+	tmp = get_key_name (info, "enabled");
+	gconf_client_unset (gconf_client_get_default (), tmp, NULL);
+	g_free (tmp);
 
 	tmp = get_key_name (info, "type");
 	gconf_client_unset (gconf_client_get_default (), tmp, NULL);
