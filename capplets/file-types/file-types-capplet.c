@@ -265,7 +265,7 @@ mime_list_selected_row_callback (GtkWidget *widget, gint row, gint column, GdkEv
 	/* Update info on selection */
         nautilus_mime_type_capplet_update_info (mime_type);
         
-	/* FIXME: Get user mime info and determine if we can enable the delete button */
+	/* FIXME bugzilla.eazel.com 2764: Get user mime info and determine if we can enable the delete button */
 }
 
 static void
@@ -491,7 +491,7 @@ init_mime_capplet (void)
 
 	/* Set up enabled/disabled states of capplet buttons */	
 	gtk_widget_set_sensitive (add_button, TRUE);
-	/* FIXME: this call generates a 
+	/* FIXME bugzilla.eazel.com 2765: this call generates a 
 	   Gtk-WARNING **: gtk_signal_disconnect_by_data(): could not find handler containing data (0x80FA6F8)
 	*/
 	gtk_widget_set_sensitive (remove_button, FALSE);
@@ -821,7 +821,7 @@ populate_viewer_menu (GtkWidget *component_menu, const char *mime_type)
 				/* No match found.  We need to insert a menu item
 				 * and add the application to the default list */
 
-				/* FIXME: this is obviously not finished */
+				/* FIXME bugzilla.eazel.com 2766: this is obviously not finished */
 				copy_list = NULL;
 				
 				component_name = name_from_oaf_server_info (copy_list->data);
@@ -888,7 +888,7 @@ delete_mime_clicked (GtkWidget *widget, gpointer data)
         mime_type = (const char *) gtk_clist_get_row_data (GTK_CLIST (mime_list), row);
 
         gtk_clist_remove (GTK_CLIST (mime_list), row);
-	/* FIXME: Get user mime info */
+	/* FIXME bugzilla.eazel.com 2767: Get user mime info */
         //g_hash_table_remove (user_mime_types, mi->mime_type);
 	//remove_mime_info (mi->mime_type);
 }
@@ -1196,7 +1196,7 @@ pixmap_file (const char *partial_path)
 		return NULL;
 	}
 
-	/* FIXME: Where to get DATADIR? */
+	/* FIXME bugzilla.eazel.com 2768: Where to get DATADIR? */
 	/*path = make_path (DATADIR "/pixmaps/nautilus", partial_path);*/
 	path = make_path ("/gnome/share/pixmaps/nautilus", partial_path);
 	if (g_file_exists (path)) {
