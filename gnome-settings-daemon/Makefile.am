@@ -56,7 +56,7 @@ gnome_settings_daemon_LDADD = \
 	$(top_builddir)/libbackground/libbackground.la			\
 	$(top_builddir)/libsounds/libsounds.a				\
 	$(top_builddir)/libgswitchit/libgswitchit.a			\
-	-L$(top_builddir)/libwindow-settings/ -lgnome-window-settings 	\
+	$(top_builddir)/libwindow-settings/libgnome-window-settings.la 	\
 	$(XF86MISC_LIBS)
 
 #AccessX_files = \
