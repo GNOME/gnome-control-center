@@ -1,3 +1,15 @@
+2001-05-22  JP Rosevear  <jpr@ximian.com>
+
+	* config-log.c (bind_socket): use AF_UNIX for the family
+
+	* location.c (run_backend_proc): use putenv() rather than setenv()
+	for solaris
+
+	* config-log.c: define the SUN_LEN macro for those systems not
+	having it
+	(connect_socket): use the more portable domain type, PF_LOCAL
+	seems to map to PF_UNIX on linux anyhow
+
 2001-05-12  Chema Celorio  <chema@celorio.com>
 
 	* location.c (location_store_xml): add a carriage return after the

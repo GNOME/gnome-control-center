@@ -41,6 +41,11 @@
 
 #define READ_BUF_LEN 4096
 
+#ifndef SUN_LEN
+#define SUN_LEN(ptr) ((size_t) (((struct sockaddr_un *) 0)->sun_path)	      \
+		      + strlen ((ptr)->sun_path))
+#endif
+
 static GtkObjectClass *parent_class;
 
 enum {
@@ -1073,7 +1078,7 @@ connect_socket (ConfigLog *config_log)
 	config_log->p->socket_buffer = NULL;
 	config_log->p->socket_owner = check_socket_filename (config_log);
 
-	fd = socket (PF_LOCAL, SOCK_STREAM, 0);
+	fd = socket (PF_UNIX, SOCK_STREAM, 0);
 
 	if (fd < 0) {
 		g_warning ("Could not create socket: %s", g_strerror (errno));
@@ -1166,7 +1171,7 @@ bind_socket (ConfigLog *config_log, int fd, gboolean do_connect)
 
 	/* FIXME: What if the socket filename is too long here? */
 	if (config_log->p->socket_owner || do_connect) {
-		name.sun_family = AF_LOCAL;
+		name.sun_family = AF_UNIX;
 		strncpy (name.sun_path, config_log->p->socket_filename,
 			 sizeof (name.sun_path));
 	}

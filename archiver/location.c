@@ -1479,9 +1479,9 @@ run_backend_proc (gchar *backend_id, gboolean do_get)
 		path = g_getenv ("PATH");
 
 		if (!strstr (path, XST_BACKEND_LOCATION)) {
-			path1 = g_strconcat (XST_BACKEND_LOCATION, ":", path,
-					     NULL);
-			setenv ("PATH", path1, TRUE);
+			path1 = g_strconcat ("PATH=", XST_BACKEND_LOCATION, 
+					     ":", path, NULL);
+			putenv (path1);
 			g_free (path1);
 		}
 
