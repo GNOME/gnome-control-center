@@ -250,6 +250,7 @@ fill_file_info(GnomeVFSFileInfo *file_info, GnomeVFSFileInfoOptions options,
 
     uri = gnome_vfs_get_uri_from_local_path(file);
     result = gnome_vfs_get_file_info(uri, file_info, options);
+    g_free (uri);
     if (result == GNOME_VFS_OK) {
 	g_free(file_info->name);
 	file_info->name = g_strdup(name);

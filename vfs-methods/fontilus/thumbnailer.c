@@ -221,7 +221,6 @@ main(int argc, char **argv)
     FT_Library library;
     FT_Face face;
     FT_UInt glyph_index1, glyph_index2;
-    FT_ULong charcode;
     gchar *uri;
     GdkPixbuf *pixbuf;
     guchar *buffer;
