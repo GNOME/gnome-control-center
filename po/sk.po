@@ -1,17 +1,19 @@
+# translation of gnome-control-center.HEAD.sk.po to Slovak
 # translation of sk.po to Slovak
 # Slovak translation of sk.po
 # GNOME control-center Slovak translation
 # Copyright (C) 2000,2001,2002,2003 Free Software Foundation, Inc.
 # Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>, 2000,2001,2002,2003.
 # Stanislav Višňovský <visnovsky@nenya.ms.mff.cuni.cz>, 2002
+# Stanislav Visnovsky <visnovsky@kde.org>, 2003
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: sk\n"
-"POT-Creation-Date: 2003-01-10 10:20-0500\n"
-"PO-Revision-Date: 2003-01-05 13:32+0100\n"
-"Last-Translator: Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>\n"
-"Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
+"Project-Id-Version: gnome-control-center.HEAD.sk\n"
+"POT-Creation-Date: 2003-01-23 04:58+0100\n"
+"PO-Revision-Date: 2003-01-23 22:59+0100\n"
+"Last-Translator: Stanislav Visnovsky <visnovsky@kde.org>\n"
+"Language-Team: Slovak <sk-i18n@linux.sk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -43,7 +45,6 @@ msgid "Set your keyboard accessibility preferences"
 msgstr "Nastavenie sprístupnenia klávesnice"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.c:57
-#, fuzzy
 msgid ""
 "This system does not seem to have the XKB extension.  The keyboard "
 "accessibility features will not operate without it."
@@ -392,6 +393,11 @@ msgstr "Iba použiť nastavenie a skončiť"
 msgid "There was an error displaying help: %s"
 msgstr "Pri pokuse o zobrazenie Pomocníka nastala chyba: %s"
 
+#: capplets/common/capplet-stock-icons.c:94
+#, c-format
+msgid "Unable to load capplet stock icon '%s'\n"
+msgstr "Nepodarilo sa načítať štandardnú ikonu appletu ovládacieho centra '%s'\n"
+
 #: capplets/common/file-transfer-dialog.c:95
 #, c-format
 msgid "%i of %i"
@@ -483,18 +489,15 @@ msgid "Change set"
 msgstr "Skupina zmien"
 
 #: capplets/common/gconf-property-editor.c:186
-msgid ""
-"GConf change set containing data to be forwarded to the gconf client on apply"
-msgstr ""
-"Skupina zmien GConf obsahujúca dáta predávané klientovi gconf pri použití"
+msgid "GConf change set containing data to be forwarded to the gconf client on apply"
+msgstr "Skupina zmien GConf obsahujúca dáta predávané klientovi gconf pri použití"
 
 #: capplets/common/gconf-property-editor.c:191
 msgid "Conversion to widget callback"
 msgstr "Callback pre prevod do prvku"
 
 #: capplets/common/gconf-property-editor.c:192
-msgid ""
-"Callback to be issued when data are to be converted from GConf to the widget"
+msgid "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr "Callback volaný pre prevod dát z GConf do prvku"
 
 #: capplets/common/gconf-property-editor.c:197
@@ -502,8 +505,7 @@ msgid "Conversion from widget callback"
 msgstr "Callback pre prevod z prvku"
 
 #: capplets/common/gconf-property-editor.c:198
-msgid ""
-"Callback to be issued when data are to be converted to GConf from the widget"
+msgid "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr "Callback volaný pre prevod dát do GConf z prvku"
 
 #: capplets/common/gconf-property-editor.c:203
@@ -679,8 +681,7 @@ msgstr "Podporuje _Netscape Remote Control"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:28
 msgid "Use this _editor to open text files in the file manager"
-msgstr ""
-"Použiť tento _editor pre otvorenie textových súborov v správcovi súborov"
+msgstr "Použiť tento _editor pre otvorenie textových súborov v správcovi súborov"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:29
 msgid "Web Browser"
@@ -1323,8 +1324,7 @@ msgstr ""
 #: capplets/keybindings/gnome-keybinding-properties.c:729
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
-msgstr ""
-"Chyba pri nastavovaní nového akcelerátoru v konfiguračnej databázi: %s\n"
+msgstr "Chyba pri nastavovaní nového akcelerátoru v konfiguračnej databázi: %s\n"
 
 #: capplets/keybindings/gnome-keybinding-properties.c:880
 msgid ""
@@ -1376,10 +1376,8 @@ msgstr "_Prístupnosť"
 #: capplets/keyboard/gnome-keyboard-properties.c:288
 #: capplets/sound/sound-properties-capplet.c:145
 #: capplets/sound/sound-properties-capplet.c:147
-msgid ""
-"Just apply settings and quit (compatibility only; now handled by daemon)"
-msgstr ""
-"Použiť nastavenia a skončiť (iba pre kompatibilitu, teraz spracováva démon)"
+msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
+msgstr "Použiť nastavenia a skončiť (iba pre kompatibilitu, teraz spracováva démon)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:2
 msgid "<small><i>Fast</i></small>"
@@ -1601,8 +1599,7 @@ msgid "Drag and Drop"
 msgstr "Ťahaj a pusť"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:14
-msgid ""
-"Left-handed mouse mode switches the left and right buttons on the mouse."
+msgid "Left-handed mouse mode switches the left and right buttons on the mouse."
 msgstr "Myš pre ľavákov vymení ľavé a pravé tlačidlá myši."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:15
@@ -1918,8 +1915,8 @@ msgstr "_Inštalovať"
 msgid "_Location of new theme:"
 msgstr "U_miestnenie novej témy:"
 
-#: capplets/theme-switcher/gnome-theme-details.c:329
-#: capplets/theme-switcher/gnome-theme-manager.c:606
+#: capplets/theme-switcher/gnome-theme-details.c:372
+#: capplets/theme-switcher/gnome-theme-manager.c:609
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -1929,13 +1926,17 @@ msgstr ""
 "správne nainštalované \"Nastavenie tém\" alebo nemáte nainštalovaný balík "
 "\"gnome-themes\"."
 
-#: capplets/theme-switcher/gnome-theme-manager.c:662
-#: capplets/theme-switcher/gnome-theme-manager.c:722
+#: capplets/theme-switcher/gnome-theme-save.c:72
+msgid "Theme name must be present"
+msgstr "Musíte zadať meno témy"
+
+#: capplets/theme-switcher/gnome-theme-manager.c:665
+#: capplets/theme-switcher/gnome-theme-manager.c:725
 msgid "Custom theme"
 msgstr "Vlastná téma"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:662
-#: capplets/theme-switcher/gnome-theme-manager.c:722
+#: capplets/theme-switcher/gnome-theme-manager.c:665
+#: capplets/theme-switcher/gnome-theme-manager.c:725
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "Pomocou tlačidla Uložiť tému ju môžete uložiť."
 
@@ -2348,17 +2349,16 @@ msgstr "Vyberte zvukový súbor"
 msgid "Window manager \"%s\" has not registered a configuration tool\n"
 msgstr "Správca okien \"%s\" nemá zaregistrovaný nástroj pre nastavenie\n"
 
-#: libwindow-settings/metacity-window-manager.c:373
+#: libwindow-settings/metacity-window-manager.c:374
 msgid "Maximize"
 msgstr "Maximalizovať"
 
-#: libwindow-settings/metacity-window-manager.c:374
+#: libwindow-settings/metacity-window-manager.c:375
 msgid "Roll up"
 msgstr "Zabaliť"
 
 #: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
-msgid ""
-"If true, the mime handlers for text/plain and text/* will be kept in sync"
+msgid "If true, the mime handlers for text/plain and text/* will be kept in sync"
 msgstr ""
 "Ak je zapnuté, programy pre MIME typy text/plain a text/* budú nastavené "
 "rovnako"
@@ -2400,8 +2400,7 @@ msgid "RGBA Order"
 msgstr "Poradie RGBA"
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:5
-msgid ""
-"Resolution used for converting font sizes to pixel sizes, in dots per inch"
+msgid "Resolution used for converting font sizes to pixel sizes, in dots per inch"
 msgstr ""
 "Rozlíšenie používané pri prevode veľkosti písiem na body v jednotkách body "
 "na palec."
@@ -2436,3 +2435,4 @@ msgstr ""
 "Typ rád používaných pri zobrazovaní písiem. Možné hodnoty sú:  \"none\" - "
 "bez rád, \"slight\", \"medium\", a \"full\" - maximálne množstvo rád, môže "
 "spôsobiť poškodenie tvaru písmen."
+
