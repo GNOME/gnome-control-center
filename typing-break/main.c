@@ -55,7 +55,6 @@ main (int argc, char *argv[])
 	gint          i;
 	DrWright     *drwright;
 	DrwSelection *selection;
-	GnomeClient  *client;
 	gboolean      no_check = FALSE;
 
 	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);  

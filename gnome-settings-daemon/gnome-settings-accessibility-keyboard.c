@@ -27,6 +27,7 @@
 #include <gdk/gdk.h>
 #include <gdk/gdkx.h>
 #include <gconf/gconf-client.h>
+#include <libgnome/gnome-help.h>
 
 #include "gnome-settings-accessibility-keyboard.h"
 #include "gnome-settings-daemon.h"
@@ -322,7 +323,7 @@ ax_response_callback (gint response_id, guint revert_controls_mask, gboolean ena
 									      0,
 									      GTK_MESSAGE_ERROR,
 									      GTK_BUTTONS_CLOSE,
-									      _("There was an error displaying help:"), 
+									      _("There was an error displaying help: %s"), 
 									      err->message);
 			    g_signal_connect (G_OBJECT (error_dialog),
 					      "response",

@@ -1,3 +1,10 @@
+2004-02-16  Jody Goldberg <jody@gnome.org>
+
+	* gnome-settings-accessibility-keyboard.c : include
+	  libgnome/gnome-help.h to avoid potential crash on 64 bit arches.
+	(ax_response_callback) : actually display the error message on
+	  failure.
+
 2004-02-15  Anders Carlsson  <andersca@gnome.org>
 
 	* actions/Makefile.am: Link with ALSA_LIBS.

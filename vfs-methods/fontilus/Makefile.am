@@ -34,7 +34,7 @@ mimeinfo_DATA = fontilus.keys fontilus.mime
 appregdir = $(datadir)/application-registry
 appreg_DATA = fontilus.applications
 
-schemasdir = $(sysconfdir)/gconf/schemas
+schemasdir = $(GCONF_SCHEMA_FILE_DIR)
 schemas_DATA = fontilus.schemas
 
 serverdir = $(libdir)/bonobo/servers
@@ -42,10 +42,14 @@ server_DATA = fontilus.server
 fontilus.server.in: fontilus.server.in.in
 	sed -e "s|\@LIBEXECDIR\@|$(libexecdir)|" $< > $@
 
+if GCONF_SCHEMAS_INSTALL
 install-data-local:
 	if test -z "$(DESTDIR)"; then \
-	  GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule fontilus.schemas; \
+	  GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(srcdir)/fontilus.schemas; \
 	fi
+else
+install-data-local:
+endif
 
 @INTLTOOL_DIRECTORY_RULE@
 @INTLTOOL_SCHEMAS_RULE@

@@ -1,3 +1,17 @@
+2004-02-16  Jody Goldberg <jody@gnome.org>
+
+	* gconf-property-editor.c (peditor_image_clicked_cb) : Use the monitor
+	  size kludge for the vertical size of the new file selector.
+
+2003-12-07  Jan Arne Petersen  <jpetersen@uni-bonn.de>
+
+	* gconf-property-editor.c: (peditor_image_set_filename),
+	(peditor_image_chooser_response_cb),
+	(peditor_image_chooser_update_preview_cb),
+	(peditor_image_clicked_cb): replace
+	PreviewFileSelection (GtkFileSelection) with GtkFileChooser, use new
+	gdk_pixbuf_new_from_file_at_size method to load a scaled image.
+
 2004-02-13  Jody Goldberg <jody@gnome.org>
 
 	* Release 2.5.3

@@ -51,7 +51,7 @@ vfsmoduleconf_DATA = theme-method.conf
 vfsdirectorydir = $(datadir)/gnome/vfolders
 vfsdirectory_DATA = theme-method.directory
 
-schemasdir       = $(sysconfdir)/gconf/schemas
+schemasdir       = $(GCONF_SCHEMA_FILE_DIR)
 schemas_in_files = themus.schemas.in
 schemas_DATA     = $(schemas_in_files:.schemas.in=.schemas)
 
@@ -70,10 +70,14 @@ Themus_Properties_View.server.in: Themus_Properties_View.server.in.in
 
 CLEANFILES = Themus_Properties_View.server Themus_Properties_View.server.in
 
+if GCONF_SCHEMAS_INSTALL
 install-data-local:
 	if test -z "$(DESTDIR)"; then \
-	  GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule themus.schemas; \
+	  GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(srcdir)/themus.schemas; \
 	fi
+else
+install-data-local:
+endif
 
 @INTLTOOL_KEYS_RULE@
 @INTLTOOL_SERVER_RULE@  

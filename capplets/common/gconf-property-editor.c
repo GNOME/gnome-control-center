@@ -31,8 +31,6 @@
 #include "gconf-property-editor.h"
 #include "gconf-property-editor-marshal.h"
 
-#include "preview-file-selection.h"
-
 enum {
 	VALUE_CHANGED,
 	LAST_SIGNAL
@@ -1525,7 +1523,6 @@ gboolean
 peditor_image_set_filename (GConfPropertyEditor *peditor, const gchar *filename)
 {
 	GdkPixbuf *pixbuf = NULL;
-	GdkPixbuf *scaled;
 	GtkImage *image = NULL;
 	const int scale = 100;
 	gchar *message = NULL;
@@ -1544,7 +1541,7 @@ peditor_image_set_filename (GConfPropertyEditor *peditor, const gchar *filename)
 					   filename);
 
 	}
-	else if (!(pixbuf = gdk_pixbuf_new_from_file (filename, NULL)))
+	else if (!(pixbuf = gdk_pixbuf_new_from_file_at_size (filename, scale, scale, NULL)))
 	{
 		message = g_strdup_printf (_("I don't know how to open the file '%s'.\n"
 					     "Perhaps it's "
@@ -1592,34 +1589,39 @@ peditor_image_set_filename (GConfPropertyEditor *peditor, const gchar *filename)
 		return FALSE;
 	}
 
-	scaled = preview_file_selection_intelligent_scale (pixbuf,
-							   scale);
-
-	gtk_image_set_from_pixbuf (image, scaled);
+	gtk_image_set_from_pixbuf (image, pixbuf);
 	g_object_unref (G_OBJECT (pixbuf));
-	g_object_unref (G_OBJECT (scaled));
 
 	return TRUE;
 }
 
 void
-peditor_image_fsel_ok_cb (GtkFileSelection *fsel, gpointer data)
+peditor_image_chooser_response_cb (GtkWidget *chooser,
+				   gint response,
+				   GConfPropertyEditor *peditor)
 {
 	GConfValue *value, *value_wid;
-	GConfPropertyEditor *peditor;
-	const gchar *filename;
+	gchar *filename;
 
-	peditor = g_object_get_data (G_OBJECT (fsel), "peditor");
+	if (response == GTK_RESPONSE_CANCEL ||
+	    response == GTK_RESPONSE_DELETE_EVENT)
+	{
+		gtk_widget_destroy (chooser);
+		return;
+	}
 
 	if (!peditor->p->inited)
 		return;
 
-	filename = gtk_file_selection_get_filename (fsel);
+	filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (chooser));
 	if (!(filename && peditor_image_set_filename (peditor, filename)))
+	{
+		g_free (filename);
 		return;
+	}
 
 	value_wid = gconf_value_new (GCONF_VALUE_STRING);
-	gconf_value_set_string (value_wid, gtk_file_selection_get_filename (fsel));
+	gconf_value_set_string (value_wid, filename);
 	value = peditor->p->conv_from_widget_cb (peditor, value_wid);
 
 	peditor_set_gconf_value (peditor, peditor->p->key, value);
@@ -1627,7 +1629,29 @@ peditor_image_fsel_ok_cb (GtkFileSelection *fsel, gpointer data)
 
 	gconf_value_free (value_wid);
 	gconf_value_free (value);
-	gtk_widget_destroy (GTK_WIDGET (fsel));
+	g_free (filename);
+	gtk_widget_destroy (chooser);
+}
+
+void
+peditor_image_chooser_update_preview_cb (GtkFileChooser *chooser,
+					 GtkImage *preview)
+{
+	char *filename;
+	GdkPixbuf *pixbuf = NULL;
+	const int scale = 100;
+
+	filename = gtk_file_chooser_get_preview_filename (chooser);
+
+	if (filename != NULL && g_file_test (filename, G_FILE_TEST_IS_REGULAR))
+		pixbuf = gdk_pixbuf_new_from_file_at_size (filename, scale, scale, NULL);
+
+	gtk_image_set_from_pixbuf (preview, pixbuf);
+
+	g_free (filename);
+
+	if (pixbuf != NULL)
+		gdk_pixbuf_unref (pixbuf);
 }
 
 void
@@ -1635,10 +1659,42 @@ peditor_image_clicked_cb (GConfPropertyEditor *peditor, GtkButton *button)
 {
 	GConfValue *value = NULL, *value_wid;
 	const gchar *filename;
-	GtkWidget *fsel;
+	GtkWidget *chooser, *toplevel, *preview, *preview_box;
+	GdkRectangle rect;
+	int kludge_height;
 
-	fsel = preview_file_selection_new (_("Please select an image."), TRUE);
-	gtk_window_set_modal (GTK_WINDOW (fsel), TRUE);
+	toplevel = gtk_widget_get_toplevel (GTK_WIDGET (button));
+	chooser = gtk_file_chooser_dialog_new (_("Please select an image."),
+					       GTK_IS_WINDOW (toplevel) ? GTK_WINDOW (toplevel)
+					       				: NULL,
+					       GTK_FILE_CHOOSER_ACTION_OPEN,
+					       GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					       _("_Select"), GTK_RESPONSE_OK,
+					       NULL);
+
+	preview = gtk_image_new ();
+
+	preview_box = gtk_hbox_new (FALSE, 6);
+	gtk_box_pack_start (GTK_BOX (preview_box), preview, FALSE, TRUE, 0);
+	gtk_container_set_border_width (GTK_CONTAINER (preview_box), 6);
+
+	gtk_widget_show_all (preview_box);
+	gtk_file_chooser_set_preview_widget (GTK_FILE_CHOOSER (chooser),
+					     preview_box);
+	gtk_file_chooser_set_preview_widget_active (GTK_FILE_CHOOSER (chooser),
+						    TRUE);
+
+	gtk_dialog_set_default_response (GTK_DIALOG (chooser), GTK_RESPONSE_OK);
+	gtk_window_set_destroy_with_parent (GTK_WINDOW (chooser), TRUE);
+	gtk_window_set_modal (GTK_WINDOW (chooser), TRUE);
+
+	/* the new file selectors vertical height negotiation isn't wonderful,
+	 * kludge up a rough version that uses a fraction of the screen height for now */
+	gdk_screen_get_monitor_geometry (GTK_WINDOW (toplevel)->screen, 0, &rect);
+	kludge_height = rect.height * .6;
+	if (kludge_height < 400)
+		kludge_height = rect.height * .9;
+	gtk_window_set_default_size (GTK_WINDOW (chooser), -1, kludge_height);
 
 	/* need the current filename */
 	if (peditor->p->changeset)
@@ -1659,24 +1715,19 @@ peditor_image_clicked_cb (GConfPropertyEditor *peditor, GtkButton *button)
 	filename = gconf_value_get_string (value_wid);
 
 	if (filename && strcmp (filename, ""))
-		gtk_file_selection_set_filename (GTK_FILE_SELECTION (fsel), filename);
+		gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (chooser), filename);
 
-	g_object_set_data (G_OBJECT (fsel), "peditor", peditor);
-
-	g_signal_connect_swapped  (G_OBJECT (GTK_FILE_SELECTION (fsel)->ok_button),
-				   "clicked",
-				   (GCallback) peditor_image_fsel_ok_cb,
-				   fsel);
-	
-	g_signal_connect_swapped  (G_OBJECT (GTK_FILE_SELECTION (fsel)->cancel_button),
-				   "clicked",
-				   (GCallback) gtk_widget_destroy,
-				   fsel);
+	g_signal_connect (G_OBJECT (chooser), "update-preview",
+			  G_CALLBACK (peditor_image_chooser_update_preview_cb),
+			  preview);
+	g_signal_connect (G_OBJECT (chooser), "response",
+			  G_CALLBACK (peditor_image_chooser_response_cb),
+			  peditor);
 
 	if (gtk_grab_get_current ())
-		gtk_grab_add (fsel);
+		gtk_grab_add (chooser);
 	
-	gtk_widget_show (fsel);
+	gtk_widget_show (chooser);
 
 	gconf_value_free (value);
 	gconf_value_free (value_wid);
