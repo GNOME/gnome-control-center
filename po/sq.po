@@ -1,3 +1,4 @@
+# translation of gnome-control-center.HEAD.sq.po to Albanian
 # Përkthimi i mesazheve të gnome-control-center në shqip
 # This file is distributed under the same license as the gnome-control-center package.
 # Copyright (C) 2003, 2004, 2005 Free Software Foundation, Inc.
@@ -6,16 +7,17 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-control-center HEAD\n"
+"Project-Id-Version: gnome-control-center.HEAD.sq\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-03 21:36+0100\n"
-"PO-Revision-Date: 2005-02-04 17:58+0100\n"
-"Last-Translator: Elian Myftiu <elian@lycos.com>\n"
+"POT-Creation-Date: 2005-02-05 14:39+0100\n"
+"PO-Revision-Date: 2005-02-06 19:33+0100\n"
+"Last-Translator: Elian Myftiu <elian@alblinux.net>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: KBabel 1.9.1\n"
 
 #: capplets/about-me/e-image-chooser.c:172
 msgid "Choose Image"
@@ -1137,13 +1139,15 @@ msgstr "Mundësitë"
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
 "settings will be restored."
+msgid_plural ""
 "Testing the new settings. If you don't respond in %d seconds the previous "
 "settings will be restored."
-msgstr ""
+msgstr[0] ""
 "Duke provuar rregullimet e reja. Nëse nuk përgjigjesh brenda %d sekonde do "
-"të rikthehem tek rregullimet e mëparshme. "
-"Duke provuar rregullimet e reja. Nëse nuk përgjigjesh brenda %d sekondash do "
 "të rikthehem tek rregullimet e mëparshme."
+msgstr[1] ""
+"Duke provuar rregullimet e reja. Nëse nuk përgjigjesh brenda %d sekondash do të "
+"rikthehem tek rregullimet e mëparshme."
 
 #: capplets/display/main.c:626
 msgid "Keep Resolution"
@@ -1642,14 +1646,18 @@ msgid ""
 "The font selected is %d point large, and may make it difficult to "
 "effectively use the computer.  It is recommended that you select a size "
 "smaller than %d."
+msgid_plural ""
 "The font selected is %d points large, and may make it difficult to "
 "effectively use the computer.  It is recommended that you select a size "
 "smaller than %d."
-msgstr ""
+msgstr[0] ""
 "Gërma e zgjedhur është %d pikë e gjerë, dhe mund ta vështirësojë përdorimin "
-"efikas të kompjuterit.  Këshillohet zgjedhja e një madhësie më të vogël se %d."
-"Gërma e zgjedhur është %d pika e gjerë, dhe mund ta vështirësojë përdorimin "
-"efikas të kompjuterit.  Këshillohet zgjedhja e një madhësie më të vogël se %d."
+"efikas të kompjuterit.  Këshillohet zgjedhja e një madhësie më të vogël se %"
+"d."
+msgstr[1] ""
+"Gërma e zgjedhur është %d pika e gjerë, dhe mund ta vështirësojë "
+"përdorimin efikas të kompjuterit.  Këshillohet zgjedhja e një madhësie më të "
+"vogël se %d."
 
 #: capplets/font/main.c:514
 #, c-format
@@ -1657,12 +1665,14 @@ msgid ""
 "The font selected is %d point large, and may make it difficult to "
 "effectively use the computer.  It is recommended that you select a smaller "
 "sized font."
+msgid_plural ""
 "The font selected is %d points large, and may make it difficult to "
 "effectively use the computer.  It is recommended that you select a smaller "
 "sized font."
-msgstr ""
+msgstr[0] ""
 "Gërma e zgjedhur është %d pikë e gjerë,dhe mund t'a vështirësojë përdorimin "
 "efikas të kompjuterit.  Këshillohet zgjedhja e një madhësie më të të vogël."
+msgstr[1] ""
 "Gërma e zgjedhur është %d pika e gjerë,dhe mund t'a vështirësojë përdorimin "
 "efikas të kompjuterit.  Këshillohet zgjedhja e një madhësie më të vogël."
 
@@ -2747,7 +2757,7 @@ msgstr "Fabrika e paraqitjes së Qendrës së Kontrollit"
 msgid "View as Control Center"
 msgstr "Paraqite si Qendër Kontrolli"
 
-#: control-center/control-center-categories.c:248
+#: control-center/control-center-categories.c:249
 msgid "Others"
 msgstr "Të tjerë"
 
@@ -2874,18 +2884,18 @@ msgstr ""
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
-"It can have under various circumstances:\n"
+"It can happen under various circumstances:\n"
 "- a bug in libxklavier library\n"
 "- a bug in X server (xkbcomp, xmodmap utilities)\n"
-"- X server with incompatible libxkbfile implemenation\n"
+"- X server with incompatible libxkbfile implementation\n"
 "\n"
 "X server version data:\n"
 "%s\n"
 "%d\n"
 "%s\n"
 "If you report this situation as a bug, please include:\n"
-"- The result of <b>xprop -root | grep XKB</b>\n"
-"- The result of <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/kbd</b>"
+"- The result of %s\n"
+"- The result of %s"
 msgstr ""
 "Gabim gjatë aktivimit të konfigurimit të XKB.\n"
 "Ndoshta si pasojë e këtyre rrethanave:\n"
@@ -2898,8 +2908,8 @@ msgstr ""
 "%d\n"
 "%s\n"
 "Nëse raporton këtë situatë si një gabim (bug), të lutem përfshi:\n"
-"- Rezultatin e <b>xprop -root | grep XKB</b>\n"
-"- Rezultatin e <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/kbd</b>"
+"- Rezultatin e %s\n"
+"- Rezultatin e %s"
 
 #: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:113
 msgid ""
@@ -2913,7 +2923,7 @@ msgstr ""
 "përdorësh një konfigurim më të thjeshtë, apo një version më të ri të "
 "programit XFree."
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:216
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:218
 msgid ""
 "The X system keyboard settings differ from your current GNOME keyboard "
 "settings.  Which set would you like to use?"
@@ -2921,11 +2931,11 @@ msgstr ""
 "Rregullimet e tastierës së sistemit X ndryshojnë nga ato të rregullimeve nga "
 "ana e GNOME-s.  Cilin nga të dy dëshiron të përdorësh?"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:219
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:221
 msgid "Use X settings"
 msgstr "Përdor rregullimet e X"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:221
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:223
 msgid "Use GNOME settings"
 msgstr "Përdor rregullimet e GNOME-s"
 
@@ -3464,7 +3474,7 @@ msgstr "Shkruar nga Richard Hult &lt;richard@imendio.com&gt;"
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Eye candy shtuar nga Anders Carlsson"
 
-#: typing-break/drwright.c:832
+#: typing-break/drwright.c:833
 msgid "Break reminder"
 msgstr "Kujtuesi i pushimit"
 
@@ -3476,13 +3486,13 @@ msgstr "Programi për kontrollin e shkrimit është duke funksionuar."
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
-"right-clicking on your panel and choose 'Add to panel -> Utilities -> "
-"Notification area'."
+"right-clicking on your panel and choosing 'Add to panel', selecting "
+"'Notification area' and clicking 'Add'."
 msgstr ""
 "Programi për kontrollin e të shkruarit përdor zonën e lajmërimeve për të "
 "shfaqur informacionet. Mesa duket ju nuk keni asnjë zonë lajmërimesh tek "
-"paneli juaj. Mund të shtoni një zonë lajmërimi me një klikim të djathtë tek "
-"paneli juaj dhe zgjidhni 'Shtoi panelit -> Utility -> Zona e njoftimit'."
+"paneli juaj. Mund ta shtoni me një klikim të djathtë tek paneli juaj dhe duke "
+"zgjedhur 'Shtoi panelit' , gjeni 'Zona e njoftimit' dhe duke klikuar mbi 'Shto'."
 
 #: vfs-methods/fontilus/font-view.c:125
 msgid "The quick brown fox jumps over the lazy dog. 0123456789"
