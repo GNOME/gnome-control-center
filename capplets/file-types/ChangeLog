@@ -1,5 +1,12 @@
 2002-01-27  Bradford Hovinen  <hovinen@ximian.com>
 
+	* mime-type-info.c (set_subcategory_ids): Don't set subcategory
+	ids unless use_parent_category is set
+	(mime_category_info_save, mime_category_info_load_all): Get/set
+	use_parent_category
+	(reduce_supported_app_list, find_possible_supported_apps): Check
+	use_parent_category field
+
 	* mime-edit-dialog.c (choose_cat_cb): Use
 	mime_category_info_get_full_name
 

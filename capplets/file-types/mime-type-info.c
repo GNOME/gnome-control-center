@@ -326,13 +326,13 @@ mime_category_info_new (MimeCategoryInfo *parent, const gchar *name, GtkTreeMode
 void
 mime_category_info_load_all (MimeCategoryInfo *category)
 {
-	gchar *tmp;
+	gchar *tmp, *tmp1;
 	gchar *appid;
 	GnomeVFSMimeApplication *app;
 
+	tmp1 = mime_category_info_get_full_name (category);
 	tmp = g_strconcat ("/desktop/gnome/file-types-categories/",
-			   mime_category_info_get_full_name (category),
-			   "/default-action-id", NULL);
+			   tmp1, "/default-action-id", NULL);
 	appid = gconf_client_get_string (gconf_client_get_default (), tmp, NULL);
 	g_free (tmp);
 
@@ -352,6 +352,13 @@ mime_category_info_load_all (MimeCategoryInfo *category)
 		category->default_action = NULL;
 		category->custom_line = NULL;
 	}
+
+	tmp = g_strconcat ("/desktop/gnome/file-types-categories/",
+			   tmp1, "/use-parent-category", NULL);
+	category->use_parent_category = gconf_client_get_bool (gconf_client_get_default (), tmp, NULL);
+	g_free (tmp);
+
+	g_free (tmp1);
 }
 
 static void
@@ -383,8 +390,9 @@ set_subcategory_ids (ModelEntry *entry, MimeCategoryInfo *category, gchar *app_i
 		break;
 
 	case MODEL_ENTRY_CATEGORY:
-		for (tmp = entry->first_child; tmp != NULL; tmp = tmp->next)
-			set_subcategory_ids (tmp, category, app_id);
+		if (entry != MODEL_ENTRY (category) && MIME_CATEGORY_INFO (entry)->use_parent_category)
+			for (tmp = entry->first_child; tmp != NULL; tmp = tmp->next)
+				set_subcategory_ids (tmp, category, app_id);
 		break;
 
 	default:
@@ -404,7 +412,6 @@ mime_category_info_save (MimeCategoryInfo *category)
 	tmp1 = mime_category_info_get_full_name (category);
 	tmp = g_strconcat ("/desktop/gnome/file-types-categories/",
 			   tmp1, "/default-action-id", NULL);
-	g_free (tmp1);
 
 	if (category->default_action != NULL) {
 		gconf_client_set_string (gconf_client_get_default (),
@@ -436,12 +443,18 @@ mime_category_info_save (MimeCategoryInfo *category)
 
 	g_free (tmp);
 
+	tmp1 = mime_category_info_get_full_name (category);
+	tmp = g_strconcat ("/desktop/gnome/file-types-categories/",
+			   tmp1, "/use-parent-category", NULL);
+	gconf_client_set_bool (gconf_client_get_default (), tmp, category->use_parent_category, NULL);
+	g_free (tmp1);
+
 	if (app_id != NULL)
 		set_subcategory_ids (MODEL_ENTRY (category), category, app_id);
 }
 
 static GList *
-find_possible_supported_apps (ModelEntry *entry) 
+find_possible_supported_apps (ModelEntry *entry, gboolean top) 
 {
 	GList      *ret;
 	ModelEntry *tmp;
@@ -450,8 +463,11 @@ find_possible_supported_apps (ModelEntry *entry)
 
 	switch (entry->type) {
 	case MODEL_ENTRY_CATEGORY:
+		if (!top && !MIME_CATEGORY_INFO (entry)->use_parent_category)
+			return NULL;
+
 		for (tmp = entry->first_child; tmp != NULL; tmp = tmp->next) {
-			ret = find_possible_supported_apps (tmp);
+			ret = find_possible_supported_apps (tmp, FALSE);
 
 			if (ret != NULL)
 				return ret;
@@ -494,15 +510,18 @@ intersect_lists (GList *list, GList *list1)
 }
 
 static GList *
-reduce_supported_app_list (ModelEntry *entry, GList *list) 
+reduce_supported_app_list (ModelEntry *entry, GList *list, gboolean top) 
 {
 	GList      *type_list;
 	ModelEntry *tmp;
 
 	switch (entry->type) {
 	case MODEL_ENTRY_CATEGORY:
+		if (!top && !MIME_CATEGORY_INFO (entry)->use_parent_category)
+			break;
+
 		for (tmp = entry->first_child; tmp != NULL; tmp = tmp->next)
-			list = reduce_supported_app_list (tmp, list);
+			list = reduce_supported_app_list (tmp, list, FALSE);
 		break;
 
 	case MODEL_ENTRY_MIME_TYPE:
@@ -526,8 +545,8 @@ mime_category_info_find_apps (MimeCategoryInfo *info)
 {
 	GList *ret;
 
-	ret = find_possible_supported_apps (MODEL_ENTRY (info));
-	return reduce_supported_app_list (MODEL_ENTRY (info), ret);
+	ret = find_possible_supported_apps (MODEL_ENTRY (info), TRUE);
+	return reduce_supported_app_list (MODEL_ENTRY (info), ret, TRUE);
 }
 
 gchar *

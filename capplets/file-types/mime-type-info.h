@@ -69,6 +69,8 @@ struct _MimeCategoryInfo
 	GnomeVFSMimeApplication *default_action;
 	gchar                   *custom_line;
 	gboolean                 needs_terminal;
+
+	gboolean                 use_parent_category;
 };
 
 void          load_all_mime_types                  (GtkTreeModel       *model);
