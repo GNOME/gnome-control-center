@@ -570,14 +570,15 @@ nautilus_mime_type_capplet_show_new_mime_window (void)
 	
         gtk_widget_show_all (GNOME_DIALOG (dialog)->vbox);
         switch (gnome_dialog_run (GNOME_DIALOG (dialog))) {
-        case 0:
-		capplet_widget_state_changed (CAPPLET_WIDGET (capplet),
-					      TRUE);
-                add_new_mime_type (gtk_entry_get_text (GTK_ENTRY (mime_entry)),
-				   gtk_entry_get_text (GTK_ENTRY (ext_entry)));
-        case 1:
-                gtk_widget_destroy (dialog);
-        default:;
+	        case 0:
+			/* Add new mime type here */
+
+	        case 1:
+	                gtk_widget_destroy (dialog);
+			break;
+			
+		default:
+			break;
         }
 }
 
@@ -607,9 +608,6 @@ nautilus_mime_type_capplet_show_new_extension_window (void)
         
         switch (gnome_dialog_run (GNOME_DIALOG (dialog))) {
 	        case 0:
-			capplet_widget_state_changed (CAPPLET_WIDGET (capplet),
-						      TRUE);
-
 			nautilus_mime_type_capplet_add_extension (gtk_entry_get_text 
 							         (GTK_ENTRY (mime_entry)));
 

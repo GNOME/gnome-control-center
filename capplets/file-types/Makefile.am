@@ -9,8 +9,7 @@ bin_PROGRAMS = nautilus-mime-type-capplet
 
 nautilus_mime_type_capplet_SOURCES =\
 	nautilus-mime-type-capplet.c\
-	nautilus-mime-type-capplet-dialogs.c\
-	mime-data.c
+	nautilus-mime-type-capplet-dialogs.c
 
 nautilus_mime_type_capplet_LDADD =\
 			$(CAPPLET_LIBDIR) \
