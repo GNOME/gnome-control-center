@@ -220,6 +220,7 @@ static void
 setup_dialog (GtkWidget *widget, Bonobo_PropertyBag bag)
 {
 	GladeXML *dialog;
+	Applier *applier;
 
 	dialog = gtk_object_get_data (GTK_OBJECT (widget), "glade-data");
 	CUSTOM_CREATE_PEDITOR (option_menu, ulong, "orientation", "color_option");	
@@ -237,7 +238,8 @@ setup_dialog (GtkWidget *widget, Bonobo_PropertyBag bag)
 	bonobo_event_source_client_add_listener (bag, property_change_cb,
 						 NULL, NULL, bag);
 
-	gtk_signal_connect_after (GTK_OBJECT (applier_class_get_preview_widget ()), "realize", realize_cb, bag);
+	applier = gtk_object_get_data (GTK_OBJECT (widget), "applier");
+	gtk_signal_connect_after (GTK_OBJECT (applier_get_preview_widget (applier)), "realize", realize_cb, bag);
 }
 
 static GtkWidget*
@@ -252,11 +254,12 @@ create_dialog (void)
 	gtk_object_set_data (GTK_OBJECT (widget), "glade-data", dialog);
 
 	applier = APPLIER (applier_new ());
+	gtk_object_set_data (GTK_OBJECT (widget), "applier", applier);
 
 	/* Minor GUI addition */
 	holder = WID ("preview_holder");
 	gtk_box_pack_start (GTK_BOX (holder),
-			    applier_class_get_preview_widget (),
+			    applier_get_preview_widget (applier),
 			    TRUE, TRUE, 0);
 	gtk_widget_show_all (holder);
 
@@ -273,7 +276,7 @@ int
 main (int argc, char **argv) 
 {
 	const gchar* legacy_files[] = { "Background", NULL };
-	
+
 	glade_gnome_init ();
 	gnomelib_register_popt_table (options, "background options");
 

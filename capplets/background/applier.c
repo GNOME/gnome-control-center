@@ -47,7 +47,6 @@
 
 #define PDEBUG(pix) (g_print ("file %s: line %d (%s): Setting pixbuf to %i %i\n", __FILE__, __LINE__, __PRETTY_FUNCTION__, gdk_pixbuf_get_width (pix), gdk_pixbuf_get_height (pix)))
 
-static GtkWidget *preview_widget;
 static gboolean gdk_pixbuf_xlib_inited = FALSE;
 
 typedef struct _Renderer Renderer;
@@ -76,7 +75,7 @@ struct _Renderer
 	gboolean            is_root;
 	gboolean            is_set;
 
-	Applier            *applier;
+	GtkWidget          *widget;
 	Preferences        *prefs;
 
 	gint                x;         /* Geometry relative to pixmap */
@@ -316,7 +315,7 @@ applier_apply_prefs (Applier *applier, Preferences *prefs,
 	}
 
 	if (!prefs->enabled) {
-		draw_disabled_message (applier_class_get_preview_widget ());
+		draw_disabled_message (applier_get_preview_widget (applier));
 		return;
 	}
 
@@ -407,7 +406,7 @@ applier_apply_prefs (Applier *applier, Preferences *prefs,
 }
 
 GtkWidget *
-applier_class_get_preview_widget (void) 
+applier_get_preview_widget (Applier *applier) 
 {
 	GdkPixbuf *pixbuf;
 	GdkPixmap *pixmap;
@@ -418,7 +417,7 @@ applier_class_get_preview_widget (void)
 	gchar *filename;
 	GdkGC *gc;
 
-	if (preview_widget != NULL) return preview_widget;
+	if (applier->private->preview_widget != NULL) return applier->private->preview_widget;
 
 	filename = gnome_pixmap_file ("monitor.png");
 	visual = gdk_window_get_visual (GDK_ROOT_PARENT ());
@@ -477,15 +476,15 @@ applier_class_get_preview_widget (void)
 		mask = NULL;
 	}
 
-	preview_widget = gtk_pixmap_new (pixmap, mask);
-	gtk_widget_show (preview_widget);
+	applier->private->preview_widget = gtk_pixmap_new (pixmap, mask);
+	gtk_widget_show (applier->private->preview_widget);
 	gdk_pixbuf_unref (pixbuf);
 	g_free (filename);
 
 	gtk_widget_pop_visual ();
 	gtk_widget_pop_colormap ();
 
-	return preview_widget;
+	return applier->private->preview_widget;
 }
 
 static void
@@ -610,10 +609,11 @@ renderer_new (Applier *applier, gboolean is_root)
 		renderer->pixmap = 0;
 		renderer->is_set = FALSE;
 	} else {
-		if (!GTK_WIDGET_REALIZED (applier->private->preview_widget))
-			gtk_widget_realize (applier->private->preview_widget);
+		renderer->widget = applier_get_preview_widget (applier);
 
-		renderer->applier = applier;
+		if (!GTK_WIDGET_REALIZED (renderer->widget))
+			gtk_widget_realize (renderer->widget);
+
 		renderer->x = MONITOR_CONTENTS_X;
 		renderer->y = MONITOR_CONTENTS_Y;
 		renderer->width = MONITOR_CONTENTS_WIDTH;
@@ -841,9 +841,10 @@ renderer_render_wallpaper (Renderer *renderer)
 					(renderer->wallpaper_pixbuf,
 					 renderer->pixbuf,
 					 renderer->wx, renderer->wy,
-					 renderer->wwidth, 
-					 renderer->wheight,
-					 renderer->wx, renderer->wy,
+					 MIN (renderer->wwidth, renderer->width), 
+					 MIN (renderer->wheight, renderer->height),
+					 renderer->wx - renderer->srcx,
+					 renderer->wy - renderer->srcy,
 					 scalex, scaley,
 					 GDK_INTERP_BILINEAR);
 			} else {
@@ -980,7 +981,7 @@ renderer_render_to_screen (Renderer *renderer)
 			gdk_window_clear (GDK_ROOT_PARENT ());
 		} else {
 			gdk_color_alloc (gdk_window_get_colormap
-					 (renderer->applier->private->preview_widget->window), 
+					 (renderer->widget->window), 
 					 renderer->prefs->color1);
 			gdk_gc_set_foreground (gc, renderer->prefs->color1);
 			XFillRectangle (GDK_DISPLAY (), renderer->pixmap, xgc, 

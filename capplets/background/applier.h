@@ -59,6 +59,6 @@ void         applier_destroy     (GtkObject *object);
 void         applier_apply_prefs (Applier *applier, Preferences *prefs,
 				  gboolean do_root, gboolean do_preview);
 
-GtkWidget   *applier_class_get_preview_widget (void);
+GtkWidget   *applier_get_preview_widget (Applier *applier);
 
 #endif /* __APPLIER_H */

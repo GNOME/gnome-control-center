@@ -93,7 +93,7 @@ preferences_init (Preferences *prefs)
 	prefs->orientation        = ORIENTATION_VERT;
 	prefs->wallpaper_type     = WPTYPE_TILED;
 	prefs->wallpaper_filename = NULL;
-	prefs->wallpaper_sel_path = g_get_home_dir ();
+	prefs->wallpaper_sel_path = g_strdup (g_get_home_dir ());
 	prefs->auto_apply         = TRUE;
 	prefs->wallpapers         = NULL;
 	prefs->adjust_opacity     = TRUE;
