@@ -1,5 +1,4 @@
 #include <gnome.h>
-#include <libgnomeui/gtk-socket.h>
 #include <gtk-xmhtml/gtk-xmhtml.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
