@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-23 21:47+0100\n"
-"PO-Revision-Date: 2004-02-23 22:02+0100\n"
+"POT-Creation-Date: 2004-02-29 19:40+0100\n"
+"PO-Revision-Date: 2004-02-29 19:44+0100\n"
 "Last-Translator: Alessio Dessì <alkex@inwind.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "MIME-Version: 1.0\n"
@@ -524,7 +524,7 @@ msgstr "Gradiente orizzontale"
 msgid "Vertical Gradient"
 msgstr "Gradiente verticale"
 
-#: capplets/background/gnome-wp-info.c:46
+#: capplets/background/gnome-wp-info.c:49
 msgid "No Wallpaper"
 msgstr "Nessuno sfondo"
 
@@ -2792,7 +2792,7 @@ msgstr ""
 "Errore nel tentativo di eseguire (%s)\n"
 "che è associata al tasto (%s)"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:61
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:65
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2818,7 +2818,7 @@ msgstr ""
 "- <b>xprop -root | grep XKB</b>\n"
 "- <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b>"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:71
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:75
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2829,6 +2829,17 @@ msgstr ""
 "Ci possono essere problemi con configurazioni complesse di XKB.\n"
 "Provare con una configurazione più semplice o utilizzando una versione più "
 "recente del software XFree."
+
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:151
+#, c-format
+msgid ""
+"You have a keyboard remapping file (%s) in your home directory whose "
+"contents will now be ignored. You can use the keyboard preferences to "
+"restore them."
+msgstr ""
+"È disponibile nella propria home directory un file (%s) per rimappare la "
+"tastiera ma sarà ignorato. È possibile usare le preferenze della tastiera "
+"per ripristinare queste impostazioni."
 
 #: gnome-settings-daemon/gnome-settings-screensaver.c:92
 #, c-format
@@ -3446,11 +3457,11 @@ msgstr "Cartella personale"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
 msgid "Launch Help Browser"
-msgstr "Avvia aiuto"
+msgstr "Avvia il visualizzatore di manuali"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
 msgid "Launch Help Browser's shortcut."
-msgstr "Scorciatoia per la consultazione dell'aiuto."
+msgstr "Scorciatoia per avviare il visualizzatore di manuali."
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
 msgid "Launch Web Browser"
