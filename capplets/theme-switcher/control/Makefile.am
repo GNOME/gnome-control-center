@@ -1,15 +1,12 @@
 bin_PROGRAMS = gnome-theme-preview 
 
-INCLUDES =	\
-        -DGNOMELOCALEDIR=\""$(datadir)/locale"\"        \
-	-I$(top_srcdir) 				\
-	@CONTROL_CFLAGS@
+INCLUDES = $(GNOMECC_CAPPLET_CFLAGS) $(CONTROL_CFLAGS)
 
 gnome_theme_preview_SOURCES =			\
 	control.c
 
 gnome_theme_preview_LDADD =			\
-	@CONTROL_LIBS@
+	$(CONTROL_LIBS)
 
 serverdir = $(libdir)/bonobo/servers
 server_in_files = GNOME_Theme_Preview.server.in

@@ -38,9 +38,9 @@ install-data-am: install-data-local
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
 EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST)
-iconsdir   = $(GNOMECC_ICONS_DIR)
-Gladedir   = $(GNOMECC_GLADE_DIR)
-pixmapdir  = $(GNOMECC_PIXMAPS_DIR)
+iconsdir   = $(GNOMECC_DATA_DIR)/icons
+Gladedir   = $(GNOMECC_DATA_DIR)/interfaces
+pixmapdir  = $(GNOMECC_DATA_DIR)/pixmaps
 Glade_DATA = $(cappletname)-properties.glade
 icons_DATA = $(cappletname)-capplet.png
 desktop    = $(cappletname).desktop
