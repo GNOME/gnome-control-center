@@ -131,12 +131,10 @@ get_int_from_changeset (GConfChangeSet *changeset, gchar *key)
 {
 	GConfValue *value;
 
-	gconf_change_set_check_value (changeset, key, &value);
-
-	if (value == NULL)
-		return gconf_client_get_int (gconf_client_get_default (), key, NULL);
-	else
+	if (gconf_change_set_check_value (changeset, key, &value))
 		return gconf_value_get_int (value);	
+	else
+		return gconf_client_get_int (gconf_client_get_default (), key, NULL);
 }
 
 static void
