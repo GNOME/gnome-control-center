@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-01 05:31+0100\n"
-"PO-Revision-Date: 2005-01-22 17:04+0800\n"
+"POT-Creation-Date: 2005-02-02 05:34+0100\n"
+"PO-Revision-Date: 2005-02-02 17:40+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
@@ -2232,7 +2232,7 @@ msgstr "事件产生音效(_S)"
 msgid "_Visual feedback:"
 msgstr "视觉反馈(_V)："
 
-#: capplets/theme-switcher/gnome-theme-details.c:370
+#: capplets/theme-switcher/gnome-theme-details.c:349
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -2241,19 +2241,75 @@ msgstr ""
 "在您的系统中找不到主题。可能是您的“主题首选项”对话框安装不正确，或者没有安"
 "装“gnome-themes”包。"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:103
+#: capplets/theme-switcher/gnome-theme-installer.c:214
 msgid "This theme is not in a supported format."
 msgstr "主题的格式不被支持。"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:139
+#: capplets/theme-switcher/gnome-theme-installer.c:229
+msgid "Failed to create temporal directory"
+msgstr "创建临时目录失败"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:246
+msgid ""
+"Can not install theme. \n"
+"There are not bzip2 utility in the system."
+msgstr "无法安装主题。\n系统中没有 bzip2 工具。"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:260
+#: capplets/theme-switcher/gnome-theme-installer.c:289
+#: capplets/theme-switcher/gnome-theme-installer.c:355
+msgid "Installation Failed"
+msgstr "主题失败"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:276
+msgid ""
+"Can not install themes. \n"
+"There are not gzip utility in the system."
+msgstr "无法安装主题。\n系统中没有 gzip 工具。"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:306
+#, c-format
+msgid ""
+"Icon Theme %s correctly installed.\n"
+"You can select it in the theme details."
+msgstr "图标主题 %s 已正确安装。\n您可以在主题细节中选择该主题。"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:309
+#, c-format
+msgid "Gnome Theme %s correctly installed"
+msgstr "Gnmoe 主题 %s 已正确安装"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:312
+#, c-format
+msgid ""
+"Windows Border Theme %s correctly installed.\n"
+"You can select it in the theme details."
+msgstr "窗口边框主题 %s 已正确安装。\n您可以在主题细节中选择该主题。"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:315
+#, c-format
+msgid ""
+"Controls Theme %s correctly installed.\n"
+"You can select it in the theme details."
+msgstr "控件主题 %s 已正确安装。\n您可以在主题细节中选择该主题。"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:323
+msgid "The theme is a engine. You need to compile the theme."
+msgstr "主题是一个引擎。您需要编译主题。"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:335
+msgid "The file format is invalid"
+msgstr "文件格式无效"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:407
 msgid "No theme file location specified to install"
 msgstr "没有指定要安装的主题的文件位置"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:156
+#: capplets/theme-switcher/gnome-theme-installer.c:424
 msgid "The theme file location specified to install is invalid"
 msgstr "所指定要安装的主题文件的位置无效"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:176
+#: capplets/theme-switcher/gnome-theme-installer.c:444
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -2262,12 +2318,22 @@ msgstr ""
 "没有足够的权限将主题安装到：\n"
 "%s"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:216
+#: capplets/theme-switcher/gnome-theme-installer.c:463
+msgid "The file format is invalid."
+msgstr "文件格式无效。"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:490
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
 "selected as the source location"
 msgstr "%s 将要作为主题文件安装的目的路径。所以，您不能将其选为源位置"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:543
+msgid ""
+"Cannot install theme.\n"
+"The tar program is not installed on your system."
+msgstr "无法安装主题。\n您的系统中未安装 tar 程序。"
 
 #: capplets/theme-switcher/gnome-theme-manager.c:676
 msgid "Custom theme"
@@ -2277,7 +2343,7 @@ msgstr "自定义主题"
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "按保存主题按钮可以保存此主题。"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:1454
+#: capplets/theme-switcher/gnome-theme-manager.c:1466
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -3268,7 +3334,7 @@ msgstr "键盘型号"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:16
 msgid "modmap file list"
-msgstr ""
+msgstr "modmap 文件列表"
 
 #: typing-break/drw-break-window.c:209
 msgid "_Postpone break"
@@ -3541,10 +3607,3 @@ msgstr "是否将已安装的主题显示为缩略图"
 msgid "Whether to thumbnail themes"
 msgstr "是否将主题显示为缩略图"
 
-#~ msgid ""
-#~ "You have a keyboard remapping file (%s) in your home directory whose "
-#~ "contents will now be ignored. You can use the keyboard preferences to "
-#~ "restore them."
-#~ msgstr ""
-#~ "在您的主目录中存在一个键盘映射文件(%s)，该文件的内容现在将被忽略。您可以使"
-#~ "用键盘首选项进行恢复。"
