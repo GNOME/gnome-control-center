@@ -40,8 +40,6 @@
 
 #include "gnome-keyboard-properties-xkb.h"
 
-#define CWID(s) glade_xml_get_widget (chooserDialog, s)
-
 static GSwitchItKbdConfig initialConfig;
 
 GConfClient *xkbGConfClient;

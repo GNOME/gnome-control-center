@@ -35,8 +35,6 @@
 #include "gnome-keyboard-properties-xkb.h"
 #include "libkbdraw/keyboard-drawing.h"
 
-#define CWID(s) glade_xml_get_widget (chooserDialog, s)
-
 #ifdef HAVE_X11_EXTENSIONS_XKB_H
 #include "X11/XKBlib.h"
 /**

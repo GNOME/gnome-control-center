@@ -43,26 +43,6 @@
 #define GROUP_SWITCHERS_GROUP "grp"
 #define DEFAULT_GROUP_SWITCH "grp:alts_toggle"
 
-#define SLT_COL_DESCRIPTION 0
-#define SLT_COL_DEFAULT 1
-#define SLT_COL_ID 2
-
-#define ALT_COL_DESCRIPTION 0
-#define ALT_COL_ID 1
-
-#define CWID(s) glade_xml_get_widget (chooserDialog, s)
-
-#ifdef HAVE_X11_EXTENSIONS_XKB_H
-#include "X11/XKBlib.h"
-/**
- * BAD STYLE: Taken from xklavier_private_xkb.h
- * Any ideas on architectural improvements are WELCOME
- */
-extern Bool _XklXkbConfigPrepareNative( const XklConfigRecPtr data, XkbComponentNamesPtr componentNamesPtr );
-extern void _XklXkbConfigCleanupNative( XkbComponentNamesPtr componentNamesPtr );
-/* */
-#endif
-
 static GtkTreeIter current1stLevelIter;
 static const char *current1stLevelId;
 
@@ -72,8 +52,6 @@ static int defaultGroup = -1;
 
 static GtkCellRenderer *textRenderer;
 static GtkCellRenderer *toggleRenderer;
-
-static GtkWidget* kbdraw;
 
 void
 clear_xkb_elements_list (GSList * list)
@@ -138,11 +116,11 @@ def_group_in_gconf_changed (GConfClient * client,
             {
               gboolean curVal;
               gtk_tree_model_get (model, &iter, 
-                                  SLT_COL_DEFAULT, &curVal,
+                                  SEL_LAYOUT_TREE_COL_DEFAULT, &curVal,
                                   -1);
               if (curVal != ( counter == defaultGroup))
                 gtk_list_store_set (GTK_LIST_STORE (model), &iter, 
-                                    SLT_COL_DEFAULT, counter == defaultGroup,
+                                    SEL_LAYOUT_TREE_COL_DEFAULT, counter == defaultGroup,
                                     -1);
               counter++;
             }
@@ -165,8 +143,8 @@ add_variant_to_available_layouts_tree (const XklConfigItemPtr configItem,
 
   gtk_tree_store_append (treeStore, &iter, &current1stLevelIter);
   gtk_tree_store_set (treeStore, &iter, 
-		      ALT_COL_DESCRIPTION, utfVariantName, 
-		      ALT_COL_ID, fullLayoutName, -1);
+		      AVAIL_LAYOUT_TREE_COL_DESCRIPTION, utfVariantName, 
+		      AVAIL_LAYOUT_TREE_COL_ID, fullLayoutName, -1);
   g_free (utfVariantName);
 }
 
@@ -181,8 +159,8 @@ add_layout_to_available_layouts_tree (const XklConfigItemPtr configItem,
 
   gtk_tree_store_append (treeStore, &current1stLevelIter, NULL);
   gtk_tree_store_set (treeStore, &current1stLevelIter, 
-		      ALT_COL_DESCRIPTION, utfLayoutName, 
-		      ALT_COL_ID, configItem->name, -1);
+		      AVAIL_LAYOUT_TREE_COL_DESCRIPTION, utfLayoutName, 
+		      AVAIL_LAYOUT_TREE_COL_ID, configItem->name, -1);
   g_free (utfLayoutName);
 
   current1stLevelId = configItem->name;
@@ -272,11 +250,11 @@ xkb_layouts_prepare_selected_tree (GladeXML * dialog, GConfChangeSet * changeset
 
   descColumn = gtk_tree_view_column_new_with_attributes (_("Layout"),
                                                          textRenderer,
-                                                         "text", SLT_COL_DESCRIPTION,
+                                                         "text", SEL_LAYOUT_TREE_COL_DESCRIPTION,
                                                          NULL);
   defColumn = gtk_tree_view_column_new_with_attributes (_("Default"),
                                                         toggleRenderer,
-                                                        "active", SLT_COL_DEFAULT,
+                                                        "active", SEL_LAYOUT_TREE_COL_DEFAULT,
                                                         NULL);
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeView));
 
@@ -309,60 +287,7 @@ xkb_layouts_prepare_selected_tree (GladeXML * dialog, GConfChangeSet * changeset
 static void
 xkb_layout_chooser_selection_changed (GladeXML * chooserDialog)
 {
-#ifdef HAVE_X11_EXTENSIONS_XKB_H
-  GtkWidget *availableLayoutsTree = CWID ("xkb_layouts_available");
-  GtkTreeSelection *selection =
-    gtk_tree_view_get_selection (GTK_TREE_VIEW (availableLayoutsTree));
-  GtkTreeIter selectedIter;
-  GtkTreeModel *model;
-  if (kbdraw != NULL &&
-      gtk_tree_selection_get_selected (selection, &model, &selectedIter))
-    {
-      gchar *id;
-      XklConfigRec data;
-      char **p, *layout, *variant;
-      int i;
-      XkbComponentNamesRec componentNames;
-
-      gtk_tree_model_get (model, &selectedIter, ALT_COL_ID, &id, -1);
-      XklConfigRecInit (&data);
-      if (XklConfigGetFromServer (&data))
-        {
-          if( ( p = data.layouts ) != NULL )
-          {
-            for( i = data.numLayouts; --i >= 0; )
-              free( *p++ );
-          }
-
-          if( ( p = data.variants ) != NULL )
-          {
-            for( i = data.numVariants; --i >= 0; )
-              free( *p++ );
-          }
-          data.numLayouts = 
-          data.numVariants = 1;
-          data.layouts = realloc (data.layouts, sizeof (char*));
-          data.variants = realloc (data.variants, sizeof (char*));
-          if (GSwitchItKbdConfigSplitItems (id, &layout, &variant)
-              && variant != NULL) 
-            {
-              data.layouts[0] = (layout == NULL) ? NULL : strdup (layout);
-              data.variants[0] = (variant == NULL) ? NULL : strdup (variant);
-            } else 
-            {
-              data.layouts[0] = (id == NULL) ? NULL : strdup (id);
-              data.variants[0] = NULL;
-            }
-          if (_XklXkbConfigPrepareNative (&data, &componentNames))
-            {
-              keyboard_drawing_set_keyboard (KEYBOARD_DRAWING (kbdraw), &componentNames);
-
-              _XklXkbConfigCleanupNative( &componentNames );
-            }
-        }
-      XklConfigRecDestroy (&data);
-    }
-#endif
+  xkb_layout_preview_update (chooserDialog);
   xkb_layout_chooser_enable_disable_buttons (chooserDialog);
 }
 
@@ -389,9 +314,9 @@ xkb_layouts_fill_selected_tree (GladeXML * dialog)
       v1 = g_strdup (visible);
       utfVisible = g_locale_to_utf8 (g_strstrip (v1), -1, NULL, NULL, NULL);
       gtk_list_store_set (listStore, &iter,
-			  SLT_COL_DESCRIPTION, utfVisible, 
-			  SLT_COL_DEFAULT, FALSE, 
-			  SLT_COL_ID, curLayout->data, -1);
+			  SEL_LAYOUT_TREE_COL_DESCRIPTION, utfVisible, 
+			  SEL_LAYOUT_TREE_COL_DEFAULT, FALSE, 
+			  SEL_LAYOUT_TREE_COL_ID, curLayout->data, -1);
       g_free (utfVisible);
       g_free (v1);
     }
@@ -442,7 +367,7 @@ xkb_layouts_fill_available_tree (GladeXML * chooserDialog)
   GtkTreeViewColumn *column = gtk_tree_view_column_new_with_attributes (NULL,
 									renderer,
 									"text",
-									ALT_COL_DESCRIPTION,
+									AVAIL_LAYOUT_TREE_COL_DESCRIPTION,
 									NULL);
   GtkTreeSelection *selection =
     gtk_tree_view_get_selection (GTK_TREE_VIEW (treeView));
@@ -565,7 +490,7 @@ xkb_layout_chooser_response(GtkDialog *dialog,
           gchar *id;
           GSList *layoutsList = xkb_layouts_get_selected_list ();
           gtk_tree_model_get (model, &selectedIter, 
-                              ALT_COL_ID, &id, -1);
+                              AVAIL_LAYOUT_TREE_COL_ID, &id, -1);
           layoutsList = g_slist_append (layoutsList, id);
           xkb_layouts_set_selected_list (layoutsList);
           /* process default switcher */
@@ -628,6 +553,7 @@ xkb_layout_choose (GladeXML * dialog)
 {
   GladeXML* chooserDialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gnome-keyboard-properties.glade", "xkb_layout_chooser", NULL);
   GtkWidget* chooser = CWID ( "xkb_layout_chooser");
+  GtkWidget* kbdraw = NULL;
 
   gtk_window_set_transient_for (GTK_WINDOW (chooser), GTK_WINDOW (WID ("keyboard_dialog")));
 
@@ -637,8 +563,8 @@ xkb_layout_choose (GladeXML * dialog)
 #ifdef HAVE_X11_EXTENSIONS_XKB_H
   if (!strcmp (XklGetBackendName(), "XKB"))
   {
-    kbdraw = create_preview_widget (dialog);
-
+    kbdraw = xkb_layout_preview_create_widget (chooserDialog);
+    g_object_set_data (G_OBJECT (chooser), "kbdraw", kbdraw);
     gtk_container_add (GTK_CONTAINER (CWID ("vboxPreview")), kbdraw);
     gtk_widget_show_all (kbdraw);
   } else
@@ -652,6 +578,4 @@ xkb_layout_choose (GladeXML * dialog)
 
   gtk_dialog_run (GTK_DIALOG (chooser));
   gtk_widget_destroy (chooser);
-
-  kbdraw = NULL;
 }
