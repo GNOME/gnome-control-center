@@ -423,7 +423,7 @@ read_browser (GConfClient *client,
 			return;
 		}
 	}
-	if (strlen(browser) != 0) {
+	if (browser && strlen(browser) != 0) {
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("web_select_radio")), TRUE);
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("web_custom_radio")), TRUE);
 	} else {
@@ -468,7 +468,7 @@ read_mailer (GConfClient *client,
 		}
         }
 		
-	if (strlen(mailer) != 0) {
+	if (mailer && strlen(mailer) != 0) {
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("mail_select_radio")), TRUE);
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("mail_custom_radio")), TRUE);
 	} else {
