@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * Copyright (C) 2003-2004 Imendio AB
+ * Copyright (C) 2003-2005 Imendio HB
  * Copyright (C) 2002-2003 Richard Hult <richard@imendio.com>
  * Copyright (C) 2002 CodeFactory AB
  *
@@ -57,11 +57,6 @@ typedef enum {
 	STATE_BREAK_DONE
 } DrwState;
 
-typedef enum {
-	AUTO_BREAK,
-	MANUAL_BREAK
-} DrwBreakType;
-
 struct _DrWright {
 	/* Widgets. */
 	GtkWidget      *break_window;
@@ -74,7 +69,6 @@ struct _DrWright {
 	DrwState        state;
 	GTimer         *timer;
 	GTimer         *idle_timer;
-	GTimer         *break_warn_timer;	
 
 	gint            last_elapsed_time;
 	
@@ -86,7 +80,6 @@ struct _DrWright {
 	gint            warn_time;
 
 	gboolean        enabled;
-	DrwBreakType    break_type;
 
 	guint           clock_timeout_id;
 	guint           blink_timeout_id;
@@ -317,7 +310,6 @@ maybe_change_state (DrWright *dr)
 {
 	gint elapsed_time;
 	gint elapsed_idle_time;
-	gint elapsed_break_warn_time;
 
 	if (debug) {
 		g_timer_reset (dr->idle_timer);
@@ -325,7 +317,6 @@ maybe_change_state (DrWright *dr)
 	
 	elapsed_time = g_timer_elapsed (dr->timer, NULL);
 	elapsed_idle_time = g_timer_elapsed (dr->idle_timer, NULL);
-	elapsed_break_warn_time = g_timer_elapsed (dr->break_warn_timer, NULL);
 
 	if (elapsed_time > dr->last_elapsed_time + dr->warn_time) {
 		/* If the timeout is delayed by the amount of warning time, then
@@ -367,8 +358,7 @@ maybe_change_state (DrWright *dr)
 	case STATE_TYPE:
 		if (elapsed_time >= dr->type_time - dr->warn_time) {
 			dr->state = STATE_WARN_TYPE;
-			g_timer_stop (dr->timer);
-			g_timer_start(dr->break_warn_timer);
+			g_timer_start (dr->timer);
 
 			start_blinking (dr);
  		} else if (elapsed_time >= dr->type_time) {
@@ -381,7 +371,7 @@ maybe_change_state (DrWright *dr)
 		break;
 
 	case STATE_WARN_TYPE:
-		if (elapsed_break_warn_time >= dr->warn_time) {
+		if (elapsed_time >= dr->warn_time) {
 			dr->state = STATE_BREAK_SETUP;
 		}
 		else if (!dr->is_active) {
@@ -411,11 +401,7 @@ maybe_change_state (DrWright *dr)
 		stop_blinking (dr);
 		gtk_image_set_from_pixbuf (GTK_IMAGE (dr->icon_image), dr->red_bar);
 
-		if (dr->break_type == AUTO_BREAK)
-			g_timer_start (dr->timer);
-		else
-			g_timer_stop (dr->timer);
-		g_timer_start (dr->break_warn_timer);
+		g_timer_start (dr->timer);
 
 		dr->break_window = drw_break_window_new ();
 
@@ -444,7 +430,7 @@ maybe_change_state (DrWright *dr)
 		break;
 	       
 	case STATE_BREAK:
-		if (elapsed_break_warn_time >= dr->break_time) {
+		if (elapsed_time >= dr->break_time) {
 			dr->state = STATE_BREAK_DONE_SETUP;
 		}
 		break;
@@ -573,7 +559,6 @@ popup_break_cb (gpointer   callback_data,
 	DrWright  *dr = callback_data;
 
 	if (dr->enabled) {
-		dr->break_type = MANUAL_BREAK;
 		dr->state = STATE_BREAK_SETUP;
 		maybe_change_state (dr);
 	}
@@ -766,7 +751,7 @@ break_window_done_cb (GtkWidget *window,
 	
 	dr->state = STATE_BREAK_DONE_SETUP;
 	dr->break_window = NULL;
-	
+
 	update_tooltip (dr);
 	maybe_change_state (dr);
 }
@@ -777,16 +762,11 @@ break_window_postpone_cb (GtkWidget *window,
 {
 	gtk_widget_destroy (dr->break_window);
 
-	if (dr->break_type == MANUAL_BREAK) {
-                dr->state = STATE_TYPE;
-                g_timer_continue (dr->timer);
-                dr->break_type = AUTO_BREAK;
-        } else {
-                dr->state = STATE_WARN_TYPE;
-                start_blinking (dr);
-        }
+	dr->state = STATE_WARN_TYPE;
 	dr->break_window = NULL;
 
+	g_timer_start (dr->timer);
+	start_blinking (dr);
 	update_icon (dr);
 	update_tooltip (dr);
 }
@@ -985,7 +965,6 @@ drwright_new (void)
 	
 	dr->timer = g_timer_new ();
 	dr->idle_timer = g_timer_new ();
-	dr->break_warn_timer = g_timer_new ();
 	
 	dr->state = STATE_START;
 
