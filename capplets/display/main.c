@@ -255,7 +255,7 @@ wrap_in_label (GtkWidget *child, char *text)
   char *str;
 
   vbox = gtk_vbox_new (FALSE, 6);
-  label = 0;
+  label = NULL;
 
   label = gtk_label_new ("");
 

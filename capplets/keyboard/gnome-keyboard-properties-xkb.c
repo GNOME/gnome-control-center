@@ -137,8 +137,8 @@ chk_separate_group_per_window_toggled (GConfPropertyEditor *peditor,
 void
 setup_xkb_tabs (GladeXML * dialog, GConfChangeSet * changeset)
 {
-  xkbGConfClient = gconf_client_get_default ();
   GObject * peditor;
+  xkbGConfClient = gconf_client_get_default ();
 
   XklInit (GDK_DISPLAY ());
   XklConfigInit ();

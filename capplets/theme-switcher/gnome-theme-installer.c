@@ -4,6 +4,7 @@
 #include <string.h>
 #include <libwindow-settings/gnome-wm-manager.h>
 #include "gnome-theme-installer.h"
+#include "gnome-theme-details.h"
 #include <gconf/gconf-client.h>
 #include <glade/glade.h>
 #include <libgnomevfs/gnome-vfs-async-ops.h>
@@ -73,31 +74,43 @@ file_theme_type(gchar *dir)
 		
 		pattern = g_pattern_spec_new ("*[Icon Theme]*");
 		if (g_pattern_match_string(pattern,file_contents)) {
+			g_free (filename);
+			gnome_vfs_uri_unref (src_uri);
 			return THEME_ICON;
 		}
 		
 		pattern = g_pattern_spec_new ("*[X-GNOME-Metatheme]*");
 		if (g_pattern_match_string(pattern,file_contents)) {
+			g_free (filename);
+			gnome_vfs_uri_unref (src_uri);
 			return THEME_GNOME;
 		}
 	}
-	
+	g_free (filename);	
+	gnome_vfs_uri_unref (src_uri);
+
 	filename = g_strdup_printf ("%s/gtk-2.0/gtkrc",dir);
 	src_uri = gnome_vfs_uri_new (filename);
+	g_free (filename);
 	if (gnome_vfs_uri_exists(src_uri)) {
+		gnome_vfs_uri_unref (src_uri);
 		return THEME_GTK;
 	}
 	
 	filename = g_strdup_printf ("%s/metacity-1/metacity-theme-1.xml",dir);
 	src_uri = gnome_vfs_uri_new (filename);
+	g_free (filename);
 	if (gnome_vfs_uri_exists (src_uri)) {
+		gnome_vfs_uri_unref (src_uri);
 		return THEME_METACITY;
 	}
 	
 	
 	filename = g_strdup_printf ("%s/configure.in",dir);
 	src_uri = gnome_vfs_uri_new (filename);
+	g_free (filename);
 	if (gnome_vfs_uri_exists (src_uri)) {
+		gnome_vfs_uri_unref (src_uri);
 		return THEME_ENGINE;
 	}
 	
@@ -215,6 +228,8 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);		
 		gnome_vfs_unlink(path);		
+		g_free (theme_props->target_tmp_dir);
+		g_free (theme_props);
 		return;	
 	}
 	
@@ -229,6 +244,9 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 						_("Failed to create temporary directory"));
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);			
+		g_free (command);
+		g_free (theme_props->target_tmp_dir);
+		g_free (theme_props);
 		return;	
 	}
 	
@@ -247,6 +265,10 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 			gtk_dialog_run (GTK_DIALOG (dialog));
 			gtk_widget_destroy (dialog);
 			gnome_vfs_unlink(path);			
+			g_free (command);
+			g_free (theme_props->target_tmp_dir);
+			g_free (theme_props->filename);
+			g_free (theme_props);
 			return;	
 		}
 		
@@ -260,7 +282,11 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 							_("Installation Failed"));
 			gtk_dialog_run (GTK_DIALOG (dialog));
 			gtk_widget_destroy (dialog);	
-			cleanup_tmp_dir (theme_props);				
+			cleanup_tmp_dir (theme_props);
+			g_free (theme_props->target_tmp_dir);
+			g_free (theme_props->filename);
+			g_free (theme_props);
+			g_free (command);
 			return;	
 		}
 	}
@@ -268,15 +294,19 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 	if (theme_props->filetype == TARGZ ) {
 		if (!g_file_test ("/bin/gzip", G_FILE_TEST_EXISTS)) {
 			GtkWidget *dialog;
-				
+
 			dialog = gtk_message_dialog_new (NULL,
 						GTK_DIALOG_MODAL,
 						GTK_MESSAGE_ERROR,
 						GTK_BUTTONS_OK,
 						_("Can not install themes. \nThe gzip utility is not installed."));
 			gtk_dialog_run (GTK_DIALOG (dialog));
-			gtk_widget_destroy (dialog);			
+			gtk_widget_destroy (dialog);
 			gnome_vfs_unlink(path);
+			g_free (command);
+			g_free (theme_props->target_tmp_dir);
+			g_free (theme_props->filename);
+			g_free (theme_props);
 			return;	
 		}
 		if (!transfer_done_targz_idle_cb(theme_props)) {
@@ -288,8 +318,12 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 				   			GTK_BUTTONS_OK,
 							_("Installation Failed"));
 			gtk_dialog_run (GTK_DIALOG (dialog));
-			gtk_widget_destroy (dialog);		
-			cleanup_tmp_dir (theme_props);				
+			gtk_widget_destroy (dialog);
+			cleanup_tmp_dir (theme_props);
+			g_free (theme_props->target_tmp_dir);
+			g_free (theme_props->filename);
+			g_free (theme_props);
+			g_free (command);
 			return;	
 		}	
 	}
@@ -297,7 +331,7 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 	/* What type of theme it is ? */	
 	if (g_spawn_command_line_sync (command, &first_line, NULL, &status, NULL) && status == 0) {
 		dir = g_strsplit(g_strchomp(first_line),"/",0);
-		theme_props->theme_tmp_dir=g_strdup(g_build_filename(theme_props->target_tmp_dir,dir[0],NULL));
+		theme_props->theme_tmp_dir=g_build_filename(theme_props->target_tmp_dir,dir[0],NULL);
 		
 		theme_type = file_theme_type(theme_props->theme_tmp_dir);
 		gnome_vfs_unlink (theme_props->filename); 
@@ -315,15 +349,20 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 			theme_props->user_message=g_strdup_printf(_("Controls Theme %s correctly installed.\nYou can select it in the theme details."),dir[0]);
 		} else if (theme_type == THEME_ENGINE) {
 			GtkWidget *dialog;
-			
+
 			dialog = gtk_message_dialog_new (NULL,
 			  	       GTK_DIALOG_MODAL,
 				       GTK_MESSAGE_ERROR,
 				       GTK_BUTTONS_OK,
 				       _("The theme is an engine. You need to compile the theme."));
 			gtk_dialog_run (GTK_DIALOG (dialog));
-			gtk_widget_destroy (dialog);		
-			cleanup_tmp_dir(theme_props);			
+			gtk_widget_destroy (dialog);
+			cleanup_tmp_dir(theme_props);
+			g_free (theme_props->target_tmp_dir);
+			g_free (theme_props->filename);
+			g_free (theme_props->theme_tmp_dir);
+			g_free (theme_props);
+			g_free (command);
 			return;	
 		} else {
 			GtkWidget *dialog;
@@ -334,7 +373,12 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 				       GTK_BUTTONS_OK,
 				       _("The file format is invalid"));
 			gtk_dialog_run (GTK_DIALOG (dialog));
-			gtk_widget_destroy (dialog);			
+			gtk_widget_destroy (dialog);
+                        g_free (theme_props->target_tmp_dir);
+                        g_free (theme_props->filename);
+                        g_free (theme_props->theme_tmp_dir);
+                        g_free (theme_props);
+			g_free (command);
 			return;	
 		}
 		/* Move the Dir to the target dir */
@@ -356,6 +400,13 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 			gtk_dialog_run (GTK_DIALOG (dialog));
 			gtk_widget_destroy (dialog);
 			cleanup_tmp_dir(theme_props);
+                        g_free (theme_props->target_tmp_dir);
+                        g_free (theme_props->filename);
+                        g_free (theme_props->theme_tmp_dir);
+			g_free (theme_props->target_dir);
+			g_free (theme_props->user_message);
+                        g_free (theme_props);
+			g_free (command);
 			return;	
 		} else {
 			GtkWidget *dialog;
@@ -368,11 +419,21 @@ transfer_done_cb (GtkWidget *dlg, gchar *path)
 			gtk_dialog_run (GTK_DIALOG (dialog));
 			gtk_widget_destroy (dialog);
 			cleanup_tmp_dir (theme_props);			
+                        g_free (theme_props->target_tmp_dir);
+                        g_free (theme_props->filename);
+                        g_free (theme_props->theme_tmp_dir);
+			g_free (theme_props->target_dir);
+			g_free (theme_props->user_message);
+                        g_free (theme_props);
+			g_free (command);
 			return;	
 		}
 		
 	}
-	g_free(theme_props);
+	g_free (command);
+	g_free (theme_props->target_tmp_dir);
+	g_free (theme_props->filename);
+	g_free (theme_props);
 }
 
 static void
@@ -444,11 +505,13 @@ install_dialog_response (GtkWidget *widget, int response_id, gpointer data)
                                                           _("Insufficient permissions to install the theme in:\n%s"), path);
 			gtk_dialog_run (GTK_DIALOG (dialog));
 			gtk_widget_destroy (dialog);
+			g_free (path);
 			return;
                 } 
 		
 		while(TRUE) {
 		  	gchar *file_tmp;
+			GtkWidget *dialog;
 		  	int len = strlen (base);
 		  
 		  	if (base && len > 7 && ( (!strcmp (base + len - 7, ".tar.gz")) || (!strcmp (base + len - 4, ".tgz")) ))
@@ -463,7 +526,7 @@ install_dialog_response (GtkWidget *widget, int response_id, gpointer data)
 						_("The file format is invalid."));
 				gtk_dialog_run (GTK_DIALOG (dialog));
 				gtk_widget_destroy (dialog);		
-				gnome_vfs_unlink(path);		
+				g_free (path);		
 		    		return;
 			}
 		  
@@ -494,6 +557,7 @@ install_dialog_response (GtkWidget *widget, int response_id, gpointer data)
 			g_free (base);
 			g_free (filename);
 			g_free(temppath);
+			g_free (path);
 			return;
 		}
 		g_free(temppath);
@@ -557,6 +621,8 @@ gnome_theme_installer_run (GtkWidget *parent, gchar *filename)
 
 	while (gtk_dialog_run (GTK_DIALOG (widget)) == GTK_RESPONSE_HELP)
 		;
+
+	gnome_theme_details_reread_themes_from_disk();
 
 	gtk_widget_destroy (widget);
 	g_object_unref (G_OBJECT (dialog));

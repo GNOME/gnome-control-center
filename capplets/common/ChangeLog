@@ -1,3 +1,10 @@
+2005-02-08  Sebastien Bacher  <seb128@debian.org>
+
+	* gnome-theme-info.c: (update_common_theme_dir_index):
+	* theme-thumbnail.c: (create_image):
+	patch by Kjartan Maraas <kmaraas@gnome.org>, move to use GtkIconTheme
+	and remove a load of leaks in the theme manager code (Closes: #166267).
+
 2005-02-03  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* gnome-theme-info.c: (update_theme_index),

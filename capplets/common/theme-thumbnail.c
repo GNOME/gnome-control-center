@@ -117,18 +117,15 @@ create_image (ThemeThumbnailData *theme_thumbnail_data,
   MetaFrameFlags flags;
   MetaTheme *theme = NULL;
   GtkSettings *settings;
-  GnomeIconTheme *icon_theme;
+  GtkIconTheme *icon_theme;
   GdkPixbuf *folder_icon;
-  char *folder_icon_name;
-  char *foo;
+  GtkIconInfo *folder_icon_info;
+  const gchar *filename;
 
   settings = gtk_settings_get_default ();
   g_object_set (G_OBJECT (settings),
 		"gtk-theme-name", (char *) theme_thumbnail_data->control_theme_name->data,
 		"gtk-font-name", (char *) theme_thumbnail_data->application_font->data,
-		NULL);
-  g_object_get (G_OBJECT (settings),
-		"gtk-icon-sizes", &foo,
 		NULL);
   theme = meta_theme_load ((char *) theme_thumbnail_data->wm_theme_name->data, NULL);
 
@@ -197,27 +194,30 @@ create_image (ThemeThumbnailData *theme_thumbnail_data,
   gdk_pixbuf_get_from_drawable (pixbuf, pixmap, NULL, 0, 0, 0, 0, ICON_SIZE_WIDTH, ICON_SIZE_HEIGHT);
 
   /* Handle the icon theme */
-  icon_theme = gnome_icon_theme_new ();
-  gnome_icon_theme_set_allow_svg (icon_theme, TRUE);
-  gnome_icon_theme_set_custom_theme (icon_theme, (char *) theme_thumbnail_data->icon_theme_name->data);
+  icon_theme = gtk_icon_theme_new ();
+  gtk_icon_theme_set_custom_theme (icon_theme, (char *) theme_thumbnail_data->icon_theme_name->data);
 
   /* Have to try both "folder" and "gnome-fs-directory" seems themes seem to use either name */
-  folder_icon_name = gnome_icon_theme_lookup_icon (icon_theme, "folder", 48, NULL, NULL);
-  if (folder_icon_name == NULL) {
-    folder_icon_name = gnome_icon_theme_lookup_icon (icon_theme, "gnome-fs-directory", 48, NULL, NULL);
+  folder_icon_info = gtk_icon_theme_lookup_icon (icon_theme, "folder", 48, GTK_ICON_LOOKUP_FORCE_SVG);
+  if (folder_icon_info == NULL) {
+    folder_icon_info = gtk_icon_theme_lookup_icon (icon_theme, "gnome-fs-directory", 48, GTK_ICON_LOOKUP_FORCE_SVG);
   }
  
   g_object_unref (icon_theme);
+
+  filename = gtk_icon_info_get_filename (folder_icon_info);
  
-  if (folder_icon_name != NULL)
+  if (filename != NULL)
     {
-      folder_icon = gdk_pixbuf_new_from_file (folder_icon_name, NULL);
-      g_free (folder_icon_name);
+      folder_icon = gdk_pixbuf_new_from_file (filename, NULL);
     }
   else
     {
       folder_icon = NULL;
     }
+
+  gtk_icon_info_free (folder_icon_info);
+
   /* render the icon to the thumbnail */
   if (folder_icon)
     {

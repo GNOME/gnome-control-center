@@ -1,3 +1,11 @@
+2005-02-08  Sebastien Bacher  <seb128@debian.org>
+
+	* gnome-theme-installer.c: (file_theme_type), (transfer_done_cb),
+	(install_dialog_response), (gnome_theme_installer_run):
+	patch by Kjartan Maraas <kmaraas@gnome.org>, remove a load of leaks
+	and make sure newly installed themes show up in the relevant lists 
+	without having to close/open the dialog again (Closes: #166267).
+
 2005-02-07  Sebastien Bacher  <seb128@debian.org>
 
 	* gnome-theme-installer.c: (transfer_done_cb): fix some strings,

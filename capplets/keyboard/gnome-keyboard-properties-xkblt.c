@@ -105,11 +105,11 @@ def_group_in_gconf_changed (GConfClient * client,
 
   if (value->type == GCONF_VALUE_INT)
     {
-      defaultGroup = gconf_value_get_int (value);
       GtkWidget* treeView = WID ("xkb_layouts_selected");
       GtkTreeModel *model = GTK_TREE_MODEL (gtk_tree_view_get_model (GTK_TREE_VIEW (treeView)));
       GtkTreeIter iter;
       int counter = 0;
+      defaultGroup = gconf_value_get_int (value);
       if (gtk_tree_model_get_iter_first (model, &iter))
         {
           do

@@ -687,7 +687,7 @@ update_common_theme_dir_index (GnomeVFSURI *theme_index_uri,
       if (theme_exists)
 	{
 	  g_hash_table_insert (hash_by_uri, g_strdup (common_theme_dir), theme_info);
-	  add_data_to_hash_by_name (hash_by_name, g_strdup (name), theme_info);
+	  add_data_to_hash_by_name (hash_by_name, name, theme_info);
 	  handle_change_signal (icon_theme?GNOME_THEME_TYPE_ICON:GNOME_THEME_TYPE_METATHEME,
 				theme_info, GNOME_THEME_CHANGE_CREATED, 0);
 	}
@@ -705,7 +705,7 @@ update_common_theme_dir_index (GnomeVFSURI *theme_index_uri,
 	  if (cmp != 0)
 	    {
 	      g_hash_table_insert (hash_by_uri, g_strdup (common_theme_dir), theme_info);
-	      add_data_to_hash_by_name (hash_by_name, g_strdup (name), theme_info);
+	      add_data_to_hash_by_name (hash_by_name, name, theme_info);
 	      handle_change_signal (icon_theme?GNOME_THEME_TYPE_ICON:GNOME_THEME_TYPE_METATHEME,
 				    theme_info, GNOME_THEME_CHANGE_CHANGED, 0);
 	      if (icon_theme)
