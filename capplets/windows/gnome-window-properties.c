@@ -555,6 +555,7 @@ reload_mouse_modifiers (void)
         gboolean have_hyper;
         gboolean have_super;
         int min_keycode, max_keycode;
+        int mod_meta, mod_super, mod_hyper;
   
         XDisplayKeycodes (gdk_display,
                           &min_keycode,
@@ -576,6 +577,7 @@ reload_mouse_modifiers (void)
          */
         map_size = 8 * modmap->max_keypermod;
         i = 3 * modmap->max_keypermod;
+        mod_meta = mod_super = mod_hyper = 0;
         while (i < map_size) {
                 /* get the key code at this point in the map,
                  * see if its keysym is one we're interested in
@@ -590,20 +592,29 @@ reload_mouse_modifiers (void)
                         while (j < keysyms_per_keycode) {              
                                 if (syms[j] == XK_Super_L ||
                                     syms[j] == XK_Super_R)
-                                        have_super = TRUE;
+                                        mod_super = i / modmap->max_keypermod;
                                 else if (syms[j] == XK_Hyper_L ||
                                          syms[j] == XK_Hyper_R)
-                                        have_hyper = TRUE;                          
+                                        mod_hyper = i / modmap->max_keypermod;
                                 else if ((syms[j] == XK_Meta_L ||
-                                          syms[j] == XK_Meta_R) &&
-                                         (1 << ( i / modmap->max_keypermod)) != Mod1Mask)
-                                        have_meta = TRUE;
+                                          syms[j] == XK_Meta_R))
+                                        mod_meta = i / modmap->max_keypermod;
                                 ++j;
                         }
                 }
           
                 ++i;
         }
+        
+        if ((1 << mod_meta) != Mod1Mask)
+                have_meta = TRUE;
+        if (mod_super != 0 && 
+            mod_super != mod_meta)
+                have_super = TRUE;
+        if (mod_hyper != 0 && 
+            mod_hyper != mod_meta && 
+            mod_hyper != mod_super)
+                have_hyper = TRUE;
 
         XFreeModifiermap (modmap);
         XFree (keymap);
