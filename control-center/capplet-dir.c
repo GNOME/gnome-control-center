@@ -403,15 +403,14 @@ capplet_control_launch (const gchar *capplet_name)
 	gchar *oaf_iid, *moniker;
 	gchar *tmp, *tmp1;
 
-	GtkWidget *app, *control, *box, *buttons, *ok_button, *cancel_button;
-	BonoboUIContainer *uic;
+	GtkWidget *app, *control;
 	BonoboControlFrame *frame;
 	Bonobo_PropertyBag bag;
 	Bonobo_Property property;
 	CORBA_Environment ev;
 	BonoboArg *value;
 
-	g_return_if_fail (capplet_name != NULL);
+	g_return_val_if_fail (capplet_name != NULL, NULL);
 
 	CORBA_exception_init (&ev);
 
@@ -423,14 +422,9 @@ capplet_control_launch (const gchar *capplet_name)
 	moniker = g_strconcat ("archiver:", tmp, NULL);
 
 	/* FIXME: Use a human-readable capplet name here */
-	app = bonobo_window_new (tmp, _("Capplet"));
-	uic = bonobo_ui_container_new ();
-	bonobo_ui_container_set_win (uic, BONOBO_WINDOW (app));
-
-	box = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
-	bonobo_window_set_contents (BONOBO_WINDOW (app), box);
-
-	control = bonobo_widget_new_control (oaf_iid, BONOBO_OBJREF (uic));
+	app = gnome_dialog_new (_("Capplet"), GNOME_STOCK_BUTTON_OK,
+				GNOME_STOCK_BUTTON_CANCEL, NULL);
+	control = bonobo_widget_new_control (oaf_iid, CORBA_OBJECT_NIL);
 
 	if (control == NULL) {
 		g_critical ("Could not create capplet control");
@@ -439,18 +433,7 @@ capplet_control_launch (const gchar *capplet_name)
 		goto end;
 	}
 
-	gtk_box_pack_start (GTK_BOX (box), control, TRUE, TRUE, 0);
-
-	buttons = gtk_hbutton_box_new ();
-	ok_button = gtk_button_new_with_label (_("Ok"));
-	gtk_signal_connect (GTK_OBJECT (ok_button), "clicked",
-			    (GtkSignalFunc) capplet_ok_cb, app);
-	gtk_box_pack_start (GTK_BOX (buttons), ok_button, TRUE, FALSE, 0);
-	cancel_button = gtk_button_new_with_label (_("Cancel"));
-	gtk_signal_connect (GTK_OBJECT (ok_button), "clicked",
-			    (GtkSignalFunc) capplet_cancel_cb, app);
-	gtk_box_pack_start (GTK_BOX (buttons), cancel_button, TRUE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (box), buttons, TRUE, FALSE, 0);
+	gtk_box_pack_start (GNOME_DIALOG (app)->vbox, control, TRUE, TRUE, 0);
 
 	frame = bonobo_widget_get_control_frame (BONOBO_WIDGET (control));
 	bag = bonobo_control_frame_get_control_property_bag (frame, &ev);
