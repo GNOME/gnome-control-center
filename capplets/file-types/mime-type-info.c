@@ -909,7 +909,7 @@ get_category (const gchar *category_name, const gchar *category_desc, GtkTreeMod
 			if (child->type != MODEL_ENTRY_CATEGORY)
 				continue;
 
-			if (!strcmp ((category_name == NULL) ?
+			if (!g_ascii_strcasecmp ((category_name == NULL) ?
 				     MIME_CATEGORY_INFO (child)->description :
 				     MIME_CATEGORY_INFO (child)->name,
 				     categories[i]))
