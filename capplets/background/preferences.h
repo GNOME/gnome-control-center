@@ -45,8 +45,8 @@ typedef enum _orientation_t {
 } orientation_t;
 
 typedef enum _wallpaper_type_t {
-	WPTYPE_TILED, WPTYPE_CENTERED, WPTYPE_SCALED_ASPECT,
-	WPTYPE_SCALED, WPTYPE_EMBOSSED
+	WPTYPE_TILED, WPTYPE_CENTERED, WPTYPE_SCALED,
+	WPTYPE_STRETCHED, WPTYPE_EMBOSSED
 } wallpaper_type_t;
 
 struct _Preferences
@@ -85,9 +85,6 @@ guint        preferences_get_type              (void);
 GtkObject   *preferences_new                   (void);
 GtkObject   *preferences_clone                 (const Preferences     *prefs);
 
-gboolean     preferences_need_color_opts       (Preferences           *prefs,
-					       GdkPixbuf   *wallpaper_pixbuf);
-
 GtkObject   *preferences_new_from_bonobo_pbag  (Bonobo_PropertyBag     pb,
 						CORBA_Environment     *ev);
 GtkObject   *preferences_new_from_bonobo_db    (Bonobo_ConfigDatabase  db,
@@ -102,5 +99,7 @@ void         preferences_load_from_bonobo_db   (Preferences           *prefs,
 void         preferences_apply_event           (Preferences           *prefs,
 						const gchar           *event_name,
 						const CORBA_any       *value);
+
+void         preferences_save                  (const Preferences     *prefs);
 
 #endif /* __PREFERENCES_H */

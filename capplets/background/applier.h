@@ -41,10 +41,14 @@ typedef struct _ApplierClass ApplierClass;
 
 typedef struct _ApplierPrivate ApplierPrivate;
 
+typedef enum _ApplierType {
+	APPLIER_ROOT, APPLIER_PREVIEW
+} ApplierType;
+
 struct _Applier
 {
 	GtkObject         object;
-	ApplierPrivate   *private;
+	ApplierPrivate   *p;
 };
 
 struct _ApplierClass
@@ -54,14 +58,13 @@ struct _ApplierClass
 
 guint        applier_get_type             (void);
 
-GtkObject   *applier_new                  (void);
+GtkObject   *applier_new                  (ApplierType        type);
 
 void         applier_apply_prefs          (Applier           *applier,
-					   const Preferences *prefs,
-					   gboolean           do_root,
-					   gboolean           do_preview);
+					   const Preferences *prefs);
 
-gboolean     applier_render_color_p       (Applier           *applier);
+gboolean     applier_render_color_p       (const Applier     *applier,
+					   const Preferences *prefs);
 
 GtkWidget   *applier_get_preview_widget   (Applier           *applier);
 GdkPixbuf   *applier_get_wallpaper_pixbuf (Applier           *applier);

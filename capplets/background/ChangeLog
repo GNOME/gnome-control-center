@@ -1,4 +1,12 @@
+2001-09-21  Bradford Hovinen  <hovinen@ximian.com>
+
+	* applier.c: Total reorganization
+
 2001-09-17  Bradford Hovinen  <hovinen@ximian.com>
+
+	* preferences.c (preferences_save): Move from
+	applier.c:output_compat_prefs; it really belongs here
+	(preferences_class_init): Don't construct an applier here
 
 	* background-properties-capplet.c (setup_dialog): Create a new
 	applier for every dialog

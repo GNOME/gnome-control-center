@@ -32,7 +32,6 @@
 #include <bonobo.h>
 
 #include "preferences.h"
-#include "applier.h"
 
 /* Convenience macro to abort if there is an exception set */
 
@@ -59,7 +58,6 @@ static c_type local_bonobo_config_get_##name  (Bonobo_ConfigDatabase  db,     \
 }
 
 static GtkObjectClass *parent_class;
-static Applier *applier = NULL;
 
 static void      preferences_init             (Preferences               *prefs);
 static void      preferences_class_init       (PreferencesClass          *class);
@@ -137,9 +135,6 @@ preferences_class_init (PreferencesClass *class)
 
 	parent_class = 
 		GTK_OBJECT_CLASS (gtk_type_class (gtk_object_get_type ()));
-
-	if (applier == NULL)
-		applier = APPLIER (applier_new ());
 }
 
 GtkObject *
@@ -398,6 +393,50 @@ preferences_apply_event (Preferences     *prefs,
 	} else {
 		g_warning ("%s: Unknown property: %s", __FUNCTION__, name);
 	}
+}
+
+/**
+ * preferences_save:
+ * @prefs:
+ *
+ * Save a preferences structure using the legacy gnome_config API
+ **/
+
+void
+preferences_save (const Preferences *prefs)
+{
+	static const gint wallpaper_types[] = { 0, 1, 3, 2 };
+	gchar *color;
+
+	gnome_config_pop_prefix ();
+	gnome_config_set_bool ("/Background/Default/Enabled", prefs->enabled);
+	gnome_config_set_string ("/Background/Default/wallpaper",
+				 (prefs->wallpaper_filename) ? prefs->wallpaper_filename : "none");
+	gnome_config_set_int ("/Background/Default/wallpaperAlign", wallpaper_types[prefs->wallpaper_type]);
+
+	color = g_strdup_printf ("#%02x%02x%02x",
+		prefs->color1->red >> 8,
+		prefs->color1->green >> 8,
+		prefs->color1->blue >> 8);
+	gnome_config_set_string ("/Background/Default/color1", color);
+	g_free (color);
+
+	color = g_strdup_printf ("#%02x%02x%02x",
+		prefs->color2->red >> 8,
+		prefs->color2->green >> 8,
+		prefs->color2->blue >> 8);
+	gnome_config_set_string ("/Background/Default/color2", color);
+	g_free (color);
+
+	gnome_config_set_string ("/Background/Default/simple",
+		       		 (prefs->gradient_enabled) ? "gradient" : "solid");
+	gnome_config_set_string ("/Background/Default/gradient",
+				   (prefs->orientation == ORIENTATION_VERT) ? "vertical" : "horizontal");
+	
+	gnome_config_set_bool ("/Background/Default/adjustOpacity", prefs->adjust_opacity);
+	gnome_config_set_int ("/Background/Default/opacity", prefs->opacity);
+
+	gnome_config_sync ();
 }
 
 static GdkColor *
