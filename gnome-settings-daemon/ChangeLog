@@ -1,3 +1,8 @@
+2002-04-04  jacob berkman  <jacob@ximian.com>
+
+	* gnome-settings-accessibility-keyboard.c (set_server_from_gconf):
+	prefer gdk_flush() to XFlush() (fixes bug #77208)
+
 2002-03-29  Jody Goldberg <jody@gnome.org>
 
 	* gnome-settings-accessibility-keyboard.c
