@@ -39,6 +39,9 @@
 
 #include "gnome-keyboard-properties-xkb.h"
 
+#define GROUP_SWITCHERS_GROUP "grp"
+#define DEFAULT_GROUP_SWITCH "grp:alt_shift_toggle"
+
 static GtkTreeIter current1stLevelIter;
 static const char *current1stLevelId;
 static int idx2Select = -1;
@@ -55,16 +58,6 @@ clear_xkb_elements_list (GSList * list)
       g_slist_free_1 (p);
     }
 }
-
-#define get_selected_layouts_list() \
-	gconf_client_get_list (gconf_client_get_default (), \
-				      GSWITCHIT_CONFIG_XKB_KEY_LAYOUTS, \
-				      GCONF_VALUE_STRING, NULL)
-
-#define set_selected_layouts_list(list) \
-	gconf_client_set_list (gconf_client_get_default (), \
-			       GSWITCHIT_CONFIG_XKB_KEY_LAYOUTS, \
-			       GCONF_VALUE_STRING, (list), NULL)
 
 static void
 add_variant_to_available_layouts_tree (const XklConfigItemPtr
@@ -277,6 +270,40 @@ add_selected_layout (GtkWidget * button, GladeXML * dialog)
       gtk_tree_model_get (model, &selectedIter, 1, &id, -1);
       layoutsList = g_slist_append (layoutsList, id);
       set_selected_layouts_list (layoutsList);
+      // process default switcher
+      if (g_slist_length(layoutsList) >= 2)
+        {
+          GSList *optionsList = get_selected_options_list ();
+          gboolean anySwitcher = False;
+          GSList *option = optionsList;
+          while (option != NULL)
+            {
+              char *g, *o;
+              if (GSwitchItConfigSplitItems (option->data, &g, &o))
+                {
+                  if (!g_ascii_strcasecmp (g, GROUP_SWITCHERS_GROUP))
+                    {
+                      anySwitcher = True;
+                      break;
+                    }
+                }
+              option = option->next;
+            }
+          if (!anySwitcher)
+            {
+              XklConfigItem ci;
+              g_snprintf( ci.name, XKL_MAX_CI_NAME_LENGTH, DEFAULT_GROUP_SWITCH );           
+              if (XklConfigFindOption( GROUP_SWITCHERS_GROUP,
+                                       &ci ))
+
+                {
+                  const gchar* id = GSwitchItConfigMergeItems (GROUP_SWITCHERS_GROUP, DEFAULT_GROUP_SWITCH);
+                  optionsList = g_slist_append (optionsList, g_strdup (id));
+                  set_selected_options_list (optionsList);
+                }
+            }
+          clear_xkb_elements_list (optionsList);
+        }
       clear_xkb_elements_list (layoutsList);
     }
 }
