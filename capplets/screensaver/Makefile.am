@@ -19,7 +19,7 @@ screensaver_properties_capplet_SOURCES = \
 	resources.c				resources.h\
 	XScreenSaver_ad.h
 
-pixmaps_DATA = no-hack.png 
+pixmaps_DATA = no-hack.png blank-screen.png 
 
 ##
 ## You should not need to modify anything below this line

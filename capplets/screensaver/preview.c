@@ -272,6 +272,21 @@ close_preview (void)
 	}
 }
 
+void
+show_blank_preview (void)
+{
+	GdkPixbuf *pixbuf;
+	
+	close_preview ();
+	gtk_widget_map (preview_window);
+
+	pixbuf = gdk_pixbuf_new_from_file (GNOMECC_PIXMAPS_DIR "/blank-screen.png");
+	gdk_pixbuf_render_to_drawable
+		(pixbuf, (GdkDrawable *) preview_window->window,
+		 preview_window->style->fg_gc[0], 0, 0, 0, 0,
+		 300, 250, GDK_RGB_DITHER_NONE, 0, 0);
+}
+
 /* Ick... */
 
 static GdkWindow *

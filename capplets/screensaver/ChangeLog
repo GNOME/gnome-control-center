@@ -1,3 +1,12 @@
+2001-07-03  Richard Hestilow  <hestilow@ximian.com>
+
+	* preview.[ch]: New function show_blank_preview.
+
+	* prefs-widget.c (prefs_widget_set_mode): Call show_blank_preview
+	if set to disabled or blank screen.
+	(selection_changed_cb): Don't show the preview if mode is set to
+	disabled or blank screen.
+
 2001-07-20  Chema Celorio  <chema@celorio.com>
 
 	* RELEASE : 1.5.0
@@ -38,7 +47,6 @@
 
 	* Makefile.am (SUBDIRS): clean
 
->>>>>>> 1.38
 2001-07-17  Bradford Hovinen  <hovinen@ximian.com>
 
 	* Makefile.am (EXTRA_DIST): Changed Applications_DATA to

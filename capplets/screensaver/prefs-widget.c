@@ -517,6 +517,9 @@ prefs_widget_set_mode (PrefsWidget *prefs_widget, SelectionMode mode)
 		e_selection_model_select_single_row (
 			E_SELECTION_MODEL (E_TABLE (prefs_widget->priv->table)->selection), row);
 	}
+
+	if (mode == SM_DISABLE_SCREENSAVER || mode == SM_BLANK_SCREEN)
+		show_blank_preview ();
 }
 
 void
@@ -682,7 +685,9 @@ selection_changed_cb (ETable *table, PrefsWidget *prefs_widget)
 	prefs_widget->selected_saver = saver;	
 	if (prefs_widget->selection_mode == SM_ONE_SCREENSAVER_ONLY)
 		state_changed_cb (GTK_WIDGET (table), prefs_widget);
-	show_preview (saver);
+	if (prefs_widget->selection_mode != SM_DISABLE_SCREENSAVER &&
+	    prefs_widget->selection_mode != SM_BLANK_SCREEN)
+		show_preview (saver);
 }
 
 static void
