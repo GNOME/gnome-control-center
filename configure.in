@@ -5,121 +5,31 @@ AM_INIT_AUTOMAKE(control-center, 1.5.10)
 
 AM_MAINTAINER_MODE
 
-dnl
-dnl let applications configure for gnome
-dnl
-gnome_cv_use_gnome=yes
-
-AM_ACLOCAL_INCLUDE(macros)
-
-AM_PROG_XML_I18N_TOOLS
-GNOME_INIT
-GNOME_COMPILE_WARNINGS
+GNOME_COMMON_INIT
+GNOME_PLATFORM_GNOME_2(yes, force)
+GNOME_COMPILE_WARNINGS(maximum)
 
 AC_ISC_POSIX
 AC_PROG_CC
 AC_STDC_HEADERS
-AC_ARG_PROGRAM
 AM_PROG_LIBTOOL
-AM_PROG_LEX
-AC_PROG_YACC
 
-dnl utility conditional
-AM_CONDITIONAL(FALSE, test "x" = "y")
-
+# Internationalization support
 ALL_LINGUAS="az ca cs da de el en_GB es et fi fr ga gl hr hu it ja ko lt lv nl nn no pl pt pt_BR ro ru sk sl sv tr uk wa zh_CN zh_TW"
-AM_GNOME_GETTEXT
-
-GNOME_XML_CHECK
-XML_CFLAGS=`gnome-config --cflags xml`
-AC_SUBST(XML_CFLAGS)
-
-AM_PATH_LIBGLADE(,,"gnome")
-
-AC_CHECK_HEADERS(dlfcn.h dl.h)
-AC_CHECK_LIB(dl, dlopen, DL_LIB="-ldl",[
-AC_CHECK_LIB(dld, shl_load, DL_LIB="-ldld",[
-AC_CHECK_FUNCS(dlopen, DL_LIB="",
-AC_MSG_ERROR(Dynamic linking is not available on this platform.  Some
-apps, like panel, will not run properly.))
-])])
-AC_SUBST(DL_LIB)
+AC_PROG_INTLTOOL
 
 AC_CHECK_FUNCS(usleep)
 AC_CHECK_FUNCS(putenv,[AC_DEFINE(HAVE_PUTENV)])
 AC_CHECK_FUNCS(setenv,[AC_DEFINE(HAVE_SETENV)])
 
-AM_PATH_LIBGLADE(,AC_MSG_ERROR([You must have LibGlade installed.]), gnome)
-
 dnl keyboard-properties-capplet
 AC_CHECK_HEADERS(X11/extensions/xf86misc.h, XF86MISC_LIBS="-lXxf86misc")
 AC_SUBST(XF86MISC_LIBS)
 
-dnl esd-manager
-have_libesd=no
-AM_PATH_ESD(,have_libesd=yes,
-[AC_MSG_WARN([*** \`esd-manager' will not be built ***])])
-AM_CONDITIONAL(HAVE_LIBESD, test yes = $have_libesd)
-if test "$have_libesd" = yes; then
-	AC_DEFINE(HAVE_ESD)
-	AC_DEFINE(HAVE_LIBESD)
-fi
-
-dnl session-properties
-AM_CONDITIONAL(SESSION, test "$GNOME_HAVE_SM" = true)
-
-CFLAGS="-O2 -g -Wall $CFLAGS"
-AC_SUBST(CFLAGS)
-
-dnl ==============================================
-dnl Check for pkg-config 
-dnl ==============================================
-AC_PATH_PROG(PKGCONFIG, pkg-config, no)
-if test "$PKGCONFIG" = no ; then
-	AC_MSG_ERROR(pkg-config was not found. Please install version 0.8.0 or newer from http://www.freedesktop.org/software/pkgconfig.)
-fi
-AC_MSG_CHECKING(for pkg-config >= 0.8.0)
-vers=`$PKGCONFIG --version | awk 'BEGIN { FS = "."; } { print $1 * 1000000 + $2 * 1000 + $3}'`
-if test "$vers" -ge 8000; then
-	AC_MSG_RESULT(found)
-else
-	AC_MSG_ERROR(You need at least pkg-config 0.8.0 or greater for this version of control-center. Please install a newer version from http://www.freedesktop.org/software.)
-fi
-dnl ==============================================
-dnl Check for pkg-config 
-dnl ==============================================
-dnl ==============================================
-dnl Check for --enable-bonobo-conf option
-dnl ==============================================
-
-AC_ARG_ENABLE(bonobo-conf,[     --disable-bonobo-conf    Disable bonobo-conf support in the capplets],[
-CC_USE_BONOBO_CONF=no
-],[
-CC_USE_BONOBO_CONF=yes
-])
-
-if test "x$CC_USE_BONOBO_CONF" = "xyes"; then
-PKG_BONOBO_CHECK="bonobo bonobox"
-PKG_BONOBO_CONF_CHECK="bonobo bonobo_conf >= 0.12"
-bonobo_conf_enable=yes
-libcommon_enable=yes
-LIBCOMMON_DIR=common
-moniker_enable=yes
-AC_DEFINE(HAVE_BONOBO)
-else
-PKG_BONOBO_CHECK=
-PKG_BONOBO_CONF_CHECK=
-bonobo_conf_enable=
-libcommon_enable=
-LIBCOMMON_DIR=
-moniker_enable=
-fi
-
-
 dnl ==============================================
 dnl Check that we meet the  dependencies
 dnl ==============================================
-capplet_modules="libcapplet >= 1.5.4 libglade-gnome gdk_pixbuf gdk_pixbuf_xlib gal >= 0.12"
+capplet_modules="libglade gdk_pixbuf gdk_pixbuf_xlib gal >= 0.12"
 PKG_CHECK_MODULES(CAPPLET, $capplet_modules bonobo bonobo_conf >= 0.12)
 PKG_CHECK_MODULES(GNOMECC, gnomeui libglade xml gdk_pixbuf gnomecanvaspixbuf bonobo bonobox gtkhtml >= 0.15.0)
 PKG_CHECK_MODULES(RMHELPER, gnomeui gnomecanvaspixbuf)
@@ -127,9 +37,11 @@ PKG_CHECK_MODULES(ARCHIVER, bonobo bonobo_conf >= 0.12 xml)
 PKG_CHECK_MODULES(CONFIG_ARCHIVER, bonobo gnome xml)
 PKG_CHECK_MODULES(MONIKER, bonobo bonobo_conf >= 0.12 xml)
 
+SCREENSAVER=screensaver
 AC_PATH_PROG(XSCREENSAVER, xscreensaver, no)
 if test "$XSCREENSAVER" = no ; then
-	AC_MSG_ERROR(xscreensaver was not found. It can be downloaded from http://www.jwz.org/xscreensaver/.)
+	AC_MSG_WARN(xscreensaver was not found. It can be downloaded from http://www.jwz.org/xscreensaver/.)
+	SCREENSAVER=
 fi
 XSCREENSAVER_BIN_DIR=`dirname $XSCREENSAVER`
 # sigh, lame 
@@ -142,9 +54,12 @@ AC_SUBST(XSCREENSAVER_PREFIX)
 
 AC_PATH_PROG(PERL, perl, no)
 if test "$PERL" = no ; then
-	AC_MSG_ERROR(Perl was not found.)
+	AC_MSG_WARN(Perl was not found. Disabling screensaver capplet)
+	SCREENSAVER=
 fi
 AC_SUBST(PERL)
+
+AC_SUBST(SCREENSAVER)
 
 dnl ==============================================
 dnl End: Check that we meet the  dependencies
@@ -154,13 +69,8 @@ dnl ==============================================
 dnl ==============================================
 dnl Define the main variables
 dnl ==============================================
-if test "x$libcommon_enable" = "xyes"; then
 COMMON_CFLAGS="-I\$(top_srcdir)/capplets/common"
 COMMON_LIBS="\$(top_builddir)/capplets/common/libcommon.a"
-else
-COMMON_CFLAGS=
-COMMON_LIBS=
-fi
 
 EXTRA_CFLAGS="-I\$(top_srcdir)/intl -I\$(top_srcdir)/ -DG_LOG_DOMAIN=\"\\\"\$(cappletname)-properties\\\"\" -DGNOMELOCALEDIR=\"\\\"${datadir}/locale\\\"\""
 
@@ -208,34 +118,6 @@ dnl ==============================================
 dnl End: Define the directories 
 dnl ==============================================
 
-
-dnl ==============================================
-dnl Macro for the common code
-dnl ==============================================
-dnl AC_DEFUN(AC_PROG_GNOMECC_CAPLETS,
-dnl [
-dnl GNOMECC_CAPPLETS_DESKTOP_IN_RULE='$(desktop).in: \%.desktop.in: \%.desktop.in.in\
-dnl	sed -e \"s#@DESKTOP_EXEC_LINE@#$(DESKTOP_EXEC_LINE)#\" -e \"s#Icon=.\*#Icon=$(GNOMECC_ICONS_DIR)/${cappletname}-capplet.png#\" < $< \> ${cappletname}.desktop.in\
-dnl d\
-dnl install-data-local:\
-dnl	$(mkinstalldirs) $(datadir)/control-center/capplets/$(cappletgroup)\
-dnl	$(INSTALL_DATA) $(desktop) $(datadir)/control-center/capplets/$(cappletgroup)$(desktop)\
-dnl install-data-am: install-data-local'
-dnl AC_DIVERT_PUSH(AC_DIVERSION_SED)dnl
-dnl s%@GNOMECC_CAPPLETS_DESKTOP_IN_RULE@%[$]GNOMECC_CAPPLETS_DESKTOP_IN_RULE%g
-dnl AC_DIVERT_POP()dnl
-dnl
-dnl # Redirect the config.log output again, so that the ltconfig log is not
-dnl # clobbered by the next message.
-dnl exec 5>>./config.log
-dnl ])
-dnl AC_PROG_GNOMECC_CAPPLETS
-dnl ==============================================
-dnl End : Macro for the common code
-dnl ==============================================
-
-
-
 dnl =======================================
 dnl Variables for config_archiverConf.sh.in
 dnl =======================================
@@ -264,7 +146,6 @@ capplets/default-applications/Makefile
 capplets/desktop-links/Makefile
 capplets/keyboard/Makefile
 capplets/mouse/Makefile
-dnl capplets/rollback/Makefile
 capplets/screensaver/Makefile
 capplets/screensaver/screensavers/Makefile
 capplets/screensaver/screensavers/magic.pl
