@@ -188,8 +188,6 @@ create_dialog (void)
 	GtkTreeViewColumn *column;
 	GtkTreeSelection  *selection;
 
-	gint               col_offset;
-
 	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/file-types-properties.glade", "main_dialog", NULL);
 
 	model = GTK_TREE_MODEL (mime_types_model_new (FALSE));
@@ -197,19 +195,23 @@ create_dialog (void)
 
 	gtk_tree_view_set_model (GTK_TREE_VIEW (treeview), model);
 
-	/* Icon column */
+	/* Icon/description column */
+	column = gtk_tree_view_column_new ();
+
 	renderer = gtk_cell_renderer_pixbuf_new ();
-	gtk_tree_view_insert_column_with_attributes
-		(GTK_TREE_VIEW (treeview), -1, NULL, renderer,
-		 "pixbuf", MODEL_COLUMN_ICON,
-		 NULL);
+	gtk_tree_view_column_pack_start (column, renderer, FALSE);
+	gtk_tree_view_column_set_attributes
+		(column, renderer, "pixbuf", MODEL_COLUMN_ICON, NULL);
 
 	/* Description column */
 	renderer = gtk_cell_renderer_text_new ();
-	col_offset = gtk_tree_view_insert_column_with_attributes
-		(GTK_TREE_VIEW (treeview), -1, _("Description"), renderer,
-		 "text", MODEL_COLUMN_DESCRIPTION,
-		 NULL);
+	gtk_tree_view_column_pack_start (column, renderer, FALSE);
+	gtk_tree_view_column_set_attributes
+		(column, renderer, "text", MODEL_COLUMN_DESCRIPTION, NULL);
+
+	gtk_tree_view_column_set_title (column, _("Description"));
+	gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
+	gtk_tree_view_set_expander_column (GTK_TREE_VIEW (treeview), column);
 
 	/* Extensions column */
 	renderer = gtk_cell_renderer_text_new ();
@@ -217,9 +219,6 @@ create_dialog (void)
 		(GTK_TREE_VIEW (treeview), -1, _("Extensions"), renderer,
 		 "text", MODEL_COLUMN_FILE_EXT,
 		 NULL);
-
-	column = gtk_tree_view_get_column (GTK_TREE_VIEW (treeview), col_offset - 1);
-	gtk_tree_view_set_expander_column (GTK_TREE_VIEW (treeview), column);
 
 	gtk_widget_set_sensitive (WID ("edit_button"), FALSE);
 	gtk_widget_set_sensitive (WID ("remove_button"), FALSE);
