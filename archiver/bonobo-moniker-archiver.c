@@ -118,6 +118,7 @@ bonobo_moniker_archiver_factory (BonoboGenericFactory *this,
 				 const char           *object_id,
 				 void                 *closure)
 {
+	free (malloc (10));
 
 	if (!strcmp (object_id, "OAFIID:Bonobo_Moniker_archiver")) {
 

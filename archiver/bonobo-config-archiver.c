@@ -528,13 +528,7 @@ bonobo_config_archiver_destroy (GtkObject *object)
 
 	if (archiver_db->fp)
 		fclose (archiver_db->fp);
-#if 0
-	if (archiver_db->es)
-		bonobo_object_unref (BONOBO_OBJECT (archiver_db->es));
-#endif
-	if (archiver_db->pb)
-		bonobo_object_unref (BONOBO_OBJECT (archiver_db->pb));
-			
+	
 	parent_class->destroy (object);
 }
 
