@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 1.5.7\n"
-"POT-Creation-Date: 2001-09-05 11:56+0200\n"
-"PO-Revision-Date: 2001-09-01 22:36GMT +0200\n"
+"POT-Creation-Date: 2001-09-25 20:43+0200\n"
+"PO-Revision-Date: 2001-09-20 22:36GMT +0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkish <linuxaz@azerimal.net>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.8\n"
 
-#: archiver/config-archiver.c:307 archiver/location.c:445
+#: archiver/archive.c:614
+#, fuzzy
+msgid "Default location"
+msgstr "Əsas Yer"
+
+#: archiver/config-archiver.c:307 archiver/location.c:460
 msgid "Default Location"
 msgstr "Əsas Yer"
 
@@ -176,13 +181,13 @@ msgstr "Yer adı əlavə etmə, adını dəyişdirmə seçənəkləri"
 msgid "Options for adding and removing backends"
 msgstr "Bəkend əlavə etmə, adını dəyişdirmə seçənəkləri"
 
-#: capplets/background/applier.c:355
+#: capplets/background/applier.c:381
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr ""
 "Rəsm buferi '%s' yüklənə bilmədi; divar kağızı fəaliyyəti dayandırılır."
 
-#: capplets/background/applier.c:501
+#: capplets/background/applier.c:520
 msgid "Disabled"
 msgstr "Bağlı"
 
@@ -243,8 +248,21 @@ msgid "Tiled"
 msgstr "Döşənmiş"
 
 #: capplets/background/background-properties.glade.h:13
+msgid "Use a picture for the background"
+msgstr "Rəsmi arxa plan üçün istifadə et"
+
+#: capplets/background/background-properties.glade.h:14
 msgid "Vertical gradient"
 msgstr "Şaquli qradient"
+
+#: capplets/background/background-properties-capplet.c:47
+#, fuzzy
+msgid "Set background image."
+msgstr "Arxa plan rəsmi"
+
+#: capplets/background/background-properties-capplet.c:47
+msgid "IMAGE-FILE"
+msgstr ""
 
 #: capplets/background/prefs-widget.c:362
 msgid "(None)"
@@ -263,19 +281,19 @@ msgstr "Heç bir hbox tapılmadı, sıravi fayl seçkisini istifadə edəcəm"
 msgid "Preview"
 msgstr "Nümayiş"
 
-#: capplets/common/capplet-util.c:490
+#: capplets/common/capplet-util.c:503
 msgid "Just apply settings and quit"
 msgstr "Təkcə qurğuları əlavə et və çıx"
 
-#: capplets/common/capplet-util.c:492
+#: capplets/common/capplet-util.c:505
 msgid "Initialize the session"
 msgstr "İclası hazırla"
 
-#: capplets/common/capplet-util.c:494
+#: capplets/common/capplet-util.c:507
 msgid "Retrieve and store legacy settings"
 msgstr "Miras qurğularını al və saxla"
 
-#: capplets/common/capplet-util.c:503
+#: capplets/common/capplet-util.c:516
 msgid "Capplet options"
 msgstr "Kapplet seçənəkləri"
 
@@ -606,6 +624,78 @@ msgstr "Sağaxay"
 msgid "Sensitivity:"
 msgstr "Həssasiyyət:"
 
+#: capplets/rollback/main.c:39
+#, fuzzy
+msgid "Rollback the capplet given"
+msgstr "Quğuları verilən nöqtəyə qaytar"
+
+#: capplets/rollback/main.c:41
+msgid "Operate on global backends"
+msgstr ""
+
+#: capplets/rollback/main.c:55
+#, fuzzy
+msgid "Options for the rollback GUI"
+msgstr "Qaytarma seçənəkləri"
+
+#: capplets/rollback/rollback-capplet-dialog.c:46
+msgid "1 year ago"
+msgstr ""
+
+#: capplets/rollback/rollback-capplet-dialog.c:46
+msgid "6 months ago"
+msgstr ""
+
+#: capplets/rollback/rollback-capplet-dialog.c:46
+msgid "1 month ago"
+msgstr ""
+
+#: capplets/rollback/rollback-capplet-dialog.c:46
+msgid "1 week ago"
+msgstr ""
+
+#: capplets/rollback/rollback-capplet-dialog.c:47
+msgid "3 days ago"
+msgstr ""
+
+#: capplets/rollback/rollback-capplet-dialog.c:47
+msgid "1 day ago"
+msgstr ""
+
+#: capplets/rollback/rollback-capplet-dialog.c:47
+msgid "1 hour ago"
+msgstr ""
+
+#: capplets/rollback/rollback-capplet-dialog.c:47
+#, fuzzy
+msgid "30 minutes ago"
+msgstr "dəqiqə"
+
+#: capplets/rollback/rollback-capplet-dialog.c:48
+#, fuzzy
+msgid "10 minutes ago"
+msgstr "dəqiqə"
+
+#: capplets/rollback/rollback-capplet-dialog.c:48
+#, fuzzy
+msgid "5 minutes ago"
+msgstr "dəqiqə"
+
+#: capplets/rollback/rollback-capplet-dialog.c:48
+#, fuzzy
+msgid "1 minute ago"
+msgstr "dəqiqə"
+
+#: capplets/rollback/rollback-capplet-dialog.c:48
+#, fuzzy
+msgid "Current time"
+msgstr "Mərkəzi rəsm."
+
+#: capplets/rollback/rollback-capplet-dialog.c:169
+#, fuzzy
+msgid "Rollback"
+msgstr "Rocks"
+
 #: capplets/screensaver/preferences.c:786
 msgid "Custom screensaver. No description available"
 msgstr "Hazırkı ekran qoruyucu. Mə'lumat yoxdur"
@@ -619,7 +709,7 @@ msgstr "İşlət"
 msgid "Screensaver"
 msgstr "Ekran Qoruyucular"
 
-#: capplets/screensaver/prefs-widget.c:920
+#: capplets/screensaver/prefs-widget.c:924
 #, c-format
 msgid "About %s\n"
 msgstr "%s haqqında\n"
@@ -949,7 +1039,6 @@ msgid "Length of Trail"
 msgstr "İz buraxma müddəti"
 
 #: capplets/screensaver/screensavers/attraction.xml.h:6
-#, fuzzy
 msgid ""
 "Like qix, this uses a simple motion model to generate many different display "
 "modes.  The control points attract each other up to a certain distance, and "
@@ -965,11 +1054,11 @@ msgid ""
 "\n"
 "Written by Jamie Zawinski, based on Lisp code by John Pezaris."
 msgstr ""
-"Like qix, this uses a simple simple motion model to generate many different "
-"display modes.  The control points attract each other up to a certain "
-"distance, and then begin to repel each other.  The attraction/repulsion is "
-"proportional to the distance between any two particles, similar to the "
-"strong and weak nuclear forces.  \n"
+"Like qix, this uses a simple motion model to generate many different display "
+"modes.  The control points attract each other up to a certain distance, and "
+"then begin to repel each other.  The attraction/repulsion is proportional to "
+"the distance between any two particles, similar to the strong and weak "
+"nuclear forces.  \n"
 "\n"
 "One of the most interesting ways to watch this hack is simply as bouncing "
 "balls, because their motions and interactions with each other are so odd.  "
@@ -3430,6 +3519,11 @@ msgstr "Hazırkı"
 msgid "New screensaver"
 msgstr "Yeni ekran qoruyucu"
 
+#: capplets/sound/prefs-widget.c:137
+#, fuzzy
+msgid "Play"
+msgstr "Pulsar"
+
 #: capplets/sound/sound.desktop.in.in.h:1
 msgid "Configure GNOME's use of sound"
 msgstr "GNOME səs istifadəsini qur"
@@ -3538,3 +3632,96 @@ msgstr "CAPPLET"
 #: control-center/main.c:80
 msgid "GNOME Control Center options"
 msgstr "GNOME İdarə Mərkəzi seçənəkləri"
+
+#~ msgid "Large"
+#~ msgstr "Geniş"
+
+#~ msgid "Small"
+#~ msgstr "Kıçık"
+
+#~ msgid "Many"
+#~ msgstr "Birçox"
+
+#~ msgid "Two"
+#~ msgstr "İki"
+
+#~ msgid "Faster"
+#~ msgstr "Daha Sür'ətli"
+
+#~ msgid "Slower"
+#~ msgstr "Daha Yavaş"
+
+#~ msgid "Colors:"
+#~ msgstr "Rənglər:"
+
+#~ msgid "Count:"
+#~ msgstr "Miqdar:"
+
+#~ msgid "Denser"
+#~ msgstr "Sıxlaşdırıcı"
+
+#~ msgid "Seeds"
+#~ msgstr "Oxlar"
+
+#~ msgid "Thinner"
+#~ msgstr "Daha İncə"
+
+#~ msgid "Less"
+#~ msgstr "Daha Az"
+
+#~ msgid "More"
+#~ msgstr "Daha Çox"
+
+#~ msgid "Time between redraws:"
+#~ msgstr "Yenidən cızılma arasındakı müddət:"
+
+#~ msgid "seconds"
+#~ msgstr "saniyə"
+
+#~ msgid "Seconds"
+#~ msgstr "Saniyə"
+
+#~ msgid "Iterations:"
+#~ msgstr "İterasiyalar:"
+
+#~ msgid "Closer"
+#~ msgstr "Daha Yaxın"
+
+#~ msgid "Farther"
+#~ msgstr "daha Uzaq"
+
+#~ msgid "Segments"
+#~ msgstr "Seqmentlər"
+
+#~ msgid "Longer"
+#~ msgstr "Daha Uzun"
+
+#~ msgid "Segments:"
+#~ msgstr "Seqmentlər."
+
+#~ msgid "Shorter"
+#~ msgstr "Daha Qısa"
+
+#~ msgid "Larger"
+#~ msgstr "Daha Enli"
+
+#~ msgid "Smaller"
+#~ msgstr "Daha Kiçik"
+
+#~ msgid "Points:"
+#~ msgstr "Nöqtə:"
+
+#~ msgid "Less Delay"
+#~ msgstr "Daha Qısa Gecikmə"
+
+#~ msgid "More Delay"
+#~ msgstr "Daha Uzun Gecikmə"
+
+#~ msgid "Narrow"
+#~ msgstr "Daha Dar"
+
+#~ msgid "Wide"
+#~ msgstr "Geniş"
+
+#~ msgid "Slim"
+#~ msgstr "İncə"
