@@ -37,11 +37,26 @@
 #include "capplet-dir.h"
 #include "capplet-dir-view.h"
 
+static gint 
+real_launch_control (gchar *capplet)
+{
+	GtkWidget *app;
+	if ((app = capplet_control_launch (capplet, _("Configuraiton"))) == NULL)
+	{
+		gtk_main_quit ();
+		return FALSE;
+	}
+
+	gtk_signal_connect (GTK_OBJECT (app), "destroy",
+			    GTK_SIGNAL_FUNC (gtk_main_quit), NULL);
+
+	return FALSE;
+}
+
 int
 main (int argc, char **argv) 
 {
 	CORBA_ORB orb;
-	GtkWidget *app;
 
 	static gchar *capplet = NULL;
 	static struct poptOption gnomecc_options[] = {
@@ -78,11 +93,7 @@ main (int argc, char **argv)
 			return -1;
 		capplet_dir_entry_activate (entry, NULL);
 	} else {
-		if ((app = capplet_control_launch (capplet, _("Configuraiton"))) == NULL)
-			return -1;
-
-		gtk_signal_connect (GTK_OBJECT (app), "destroy",
-				    GTK_SIGNAL_FUNC (gtk_main_quit), NULL);
+		gtk_idle_add ((GtkFunction) real_launch_control, capplet);
 	}
 
 	bonobo_main ();

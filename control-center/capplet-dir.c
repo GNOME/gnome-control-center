@@ -202,9 +202,11 @@ capplet_activate (Capplet *capplet)
 	entry = CAPPLET_DIR_ENTRY (capplet)->entry;
 
 #warning FIXME: this should probably be root-manager-helper
+#if 0
 	if (!strncmp (entry->exec[0], "gnomecc", strlen ("gnomecc")))
 		capplet_control_launch (entry->exec[2], entry->name);
-	else if (!strncmp (entry->exec[0], "root-manager", strlen ("root-manager")))
+#endif
+	if (!strncmp (entry->exec[0], "root-manager", strlen ("root-manager")))
 		start_capplet_through_root_manager (entry);
 	else
 		gnome_desktop_entry_launch (entry);

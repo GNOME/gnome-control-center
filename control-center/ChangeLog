@@ -1,3 +1,11 @@
+2001-07-25  Richard Hestilow  <hestilow@ximian.com>
+
+	* main.c (main): Move capplet-launching code into an idle handler.
+	Bonobo sucks like that.
+
+	* capplet-dir.c (capplet_activate): Remove the check for gnomecc,
+	it was causing grief with bonobo. Story at 11.
+
 2001-07-24  Chema Celorio  <chema@celorio.com>
 
 	* capplet-dir-view-html.c (html_create): set the usize of hte
