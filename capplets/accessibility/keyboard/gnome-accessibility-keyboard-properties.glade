@@ -256,7 +256,7 @@
 		    <widget class="GtkButton" id="launch_keyboard_capplet">
 		      <property name="visible">True</property>
 		      <property name="can_focus">True</property>
-		      <property name="label" translatable="yes">Repeat Key Preferences</property>
+		      <property name="label" translatable="yes">Repeat Key Pre_ferences</property>
 		      <property name="use_underline">True</property>
 		      <property name="relief">GTK_RELIEF_NORMAL</property>
 		    </widget>
@@ -321,7 +321,7 @@
 		    <widget class="GtkCheckButton" id="stickykeys_modifier_beep">
 		      <property name="visible">True</property>
 		      <property name="can_focus">True</property>
-		      <property name="label" translatable="yes">B_eep when modifier is pressed</property>
+		      <property name="label" translatable="yes">_Beep when modifier is pressed</property>
 		      <property name="use_underline">True</property>
 		      <property name="relief">GTK_RELIEF_NORMAL</property>
 		      <property name="active">True</property>
@@ -505,9 +505,9 @@ two keys pressed simultaneously</property>
 			  <property name="wrap">False</property>
 			  <property name="adjustment">1 0 100 1 10 10</property>
 			  <accessibility>
-			    <atkrelation target="slowkeys_delay_slide" type="controlled-by"/>
-			    <atkrelation target="slowkeys_label" type="labelled-by"/>
 			    <atkrelation target="slowkeys_title" type="labelled-by"/>
+			    <atkrelation target="slowkeys_label" type="labelled-by"/>
+			    <atkrelation target="slowkeys_delay_slide" type="controlled-by"/>
 			  </accessibility>
 			</widget>
 			<packing>
@@ -721,7 +721,7 @@ two keys pressed simultaneously</property>
 		  <child>
 		    <widget class="GtkLabel" id="bouncekeys_title">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">_Ignore keypresses within  :</property>
+		      <property name="label" translatable="yes">I_gnore keypresses within  :</property>
 		      <property name="use_underline">True</property>
 		      <property name="use_markup">False</property>
 		      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -785,9 +785,9 @@ two keys pressed simultaneously</property>
 			  <property name="wrap">False</property>
 			  <property name="adjustment">1 0 100 1 10 10</property>
 			  <accessibility>
-			    <atkrelation target="bouncekeys_delay_slide" type="controlled-by"/>
-			    <atkrelation target="bouncekeys_label" type="labelled-by"/>
 			    <atkrelation target="bouncekeys_title" type="labelled-by"/>
+			    <atkrelation target="bouncekeys_label" type="labelled-by"/>
+			    <atkrelation target="bouncekeys_delay_slide" type="controlled-by"/>
 			  </accessibility>
 			</widget>
 			<packing>
@@ -1018,9 +1018,9 @@ two keys pressed simultaneously</property>
 		      <property name="wrap">False</property>
 		      <property name="adjustment">1 0 100 1 10 10</property>
 		      <accessibility>
-			<atkrelation target="mousekeys_max_speed_label" type="labelled-by"/>
-			<atkrelation target="mousekeys_max_speed_title" type="labelled-by"/>
 			<atkrelation target="mousekeys_accel_time_slide" type="controlled-by"/>
+			<atkrelation target="mousekeys_max_speed_title" type="labelled-by"/>
+			<atkrelation target="mousekeys_max_speed_label" type="labelled-by"/>
 		      </accessibility>
 		    </widget>
 		    <packing>
@@ -1059,7 +1059,7 @@ two keys pressed simultaneously</property>
 		  <child>
 		    <widget class="GtkLabel" id="mousekeys_accel_time_title">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Time to _accelerate to max speed :</property>
+		      <property name="label" translatable="yes">Time to acce_lerate to max speed :</property>
 		      <property name="use_underline">True</property>
 		      <property name="use_markup">False</property>
 		      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -1096,9 +1096,9 @@ two keys pressed simultaneously</property>
 		      <property name="wrap">False</property>
 		      <property name="adjustment">1 0 100 1 10 10</property>
 		      <accessibility>
-			<atkrelation target="mousekeys_init_delay_label" type="labelled-by"/>
-			<atkrelation target="mousekeys_init_delay_title" type="labelled-by"/>
 			<atkrelation target="mousekeys_init_delay_slide" type="controlled-by"/>
+			<atkrelation target="mousekeys_init_delay_title" type="labelled-by"/>
+			<atkrelation target="mousekeys_init_delay_label" type="labelled-by"/>
 		      </accessibility>
 		    </widget>
 		    <packing>
@@ -1122,9 +1122,9 @@ two keys pressed simultaneously</property>
 		      <property name="wrap">False</property>
 		      <property name="adjustment">1 0 100 1 10 10</property>
 		      <accessibility>
-			<atkrelation target="mousekeys_accel_time_label" type="labelled-by"/>
-			<atkrelation target="mousekeys_accel_time_title" type="labelled-by"/>
 			<atkrelation target="mousekeys_max_speed_slide" type="controlled-by"/>
+			<atkrelation target="mousekeys_accel_time_title" type="labelled-by"/>
+			<atkrelation target="mousekeys_accel_time_label" type="labelled-by"/>
 		      </accessibility>
 		    </widget>
 		    <packing>
