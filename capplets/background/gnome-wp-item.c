@@ -53,7 +53,8 @@ GnomeWPItem * gnome_wp_item_new (const gchar * filename,
   item->pcolor = gdk_color_copy (&color1);
   item->scolor = gdk_color_copy (&color2);
 
-  if (!strncmp (item->fileinfo->mime_type, "image/", strlen ("image/"))) {
+  if (item->fileinfo != NULL &&
+      !strncmp (item->fileinfo->mime_type, "image/", strlen ("image/"))) {
     if (item->name == NULL) {
       item->name = g_strdup (item->fileinfo->name);
     }
