@@ -636,14 +636,12 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 	gconf_peditor_new_numeric_range
 		(changeset, "/desktop/gnome/peripherals/mouse/motion_threshold", WID ("sensitivity_scale"),
 		 "conv-to-widget-cb", threshold_from_gconf,
-		 "conv-from-widget-cb", gconf_value_float_to_int,
 		 NULL);
 
 	/* DnD threshold */
 	gconf_peditor_new_numeric_range
 		(changeset, "/desktop/gnome/peripherals/mouse/drag_threshold", WID ("drag_threshold_scale"),
 		 "conv-to-widget-cb", drag_threshold_from_gconf,
-		 "conv-from-widget-cb", gconf_value_float_to_int,
 		 NULL);
 
 	/* listen to cursors changing */
