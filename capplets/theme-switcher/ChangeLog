@@ -2,6 +2,14 @@
 
 	* theme-thumbnail.c: (create_image):
 
+	Change the order of priority between folder icon names,
+	since gnome-fs-directory is in the backup theme and will
+	otherwise take precedence. This fix is a hack.
+
+2002-12-31  Seth Nickell  <snickell@stanford.edu>
+
+	* theme-thumbnail.c: (create_image):
+
 	Thumbnail for themes (most currently) that use
 	"gnome-fs-directory" as the icon name for folders rather
 	than "folder".
