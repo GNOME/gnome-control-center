@@ -9,11 +9,13 @@
 <!ENTITY CONFIG-KBD SYSTEM "config-kbd.xml">
 <!ENTITY CONFIG-MOUSE SYSTEM "config-mouse.xml">
 <!ENTITY CONFIG-SCREENSAVER SYSTEM "config-screensaver.xml">
+<!ENTITY CONFIG-FILE-TYPE SYSTEM "config-file-type.xml">
 <!ENTITY CONFIG-BEHAVIOR SYSTEM "config-behavior.xml">
 <!ENTITY CONFIG-CD SYSTEM "config-cds.xml">
 <!ENTITY CONFIG-BACKGROUND SYSTEM "config-background.xml">
 <!ENTITY CONFIG-KEYBINDINGS SYSTEM "config-keybindings.xml">
 <!ENTITY CONFIG-THEME SYSTEM "config-themes.xml">
+<!ENTITY CONFIG-ACCESSIBILITY-KEYBOARD SYSTEM "config-accessibility-keyboard.xml">
 ]>
 
 <article id="index" lang="en">
@@ -169,6 +171,14 @@
 	    <para>
 	      Selects the screensaver of choice and other properties
 	      of the screensaver.
+	    </para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><xref linkend="config-file-type" /></term>
+	  <listitem>
+	    <para>
+		Configures file types and services.
 	    </para>
 	  </listitem>
 	</varlistentry>
@@ -368,6 +378,25 @@
       </variablelist>
     </para>
   </sect1>
+  <sect1 id="accessibilty-section">
+    <title>The Accessibility Section</title>
+    <para>
+      The accessibility section is included in the <application>GNOME
+      Control Center</application> package.  It helps to configure
+      various assistive technologies.
+      <variablelist>
+	<varlistentry>
+	  <term><xref linkend="config-accessibility-keyboard" /></term>
+	  <listitem>
+	    <para>
+		Adjusts extended keyboard capabilities to facilate use by those
+		with additional needs.
+	    </para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </para>
+  </sect1>
 &CONFIG-DEFAULT-APPS;
 &CONFIG-HINTS;
 &CONFIG-HTML;
@@ -375,9 +404,11 @@
 &CONFIG-MOUSE;
 &CONFIG-SOUND;
 &CONFIG-SCREENSAVER;
+&CONFIG-FILE-TYPE;
 &CONFIG-BEHAVIOR;
 &CONFIG-CD;
 &CONFIG-BACKGROUND;
 &CONFIG-KEYBINDINGS;
 &CONFIG-THEME;
+&CONFIG-ACCESSIBILITY-KEYBOARD;
 </article>

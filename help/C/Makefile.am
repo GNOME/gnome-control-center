@@ -12,6 +12,9 @@ entities = config-background.xml \
            config-mouse.xml \
            config-screensaver.xml \
            config-sound.xml \
-           config-themes.xml
+           config-themes.xml \
+	   config-file-type.xml \
+	   config-accessibility-keyboard.xml
+
 include $(top_srcdir)/help/xmldocs.make
 dist-hook: app-dist-hook
