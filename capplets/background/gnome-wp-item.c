@@ -1,7 +1,7 @@
 /*
  *  Authors: Rodney Dawes <dobey@ximian.com>
  *
- *  Copyright 2003 Novell, Inc. (www.novell.com)
+ *  Copyright 2003-2004 Novell, Inc. (www.novell.com)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of version 2 of the GNU General Public License
@@ -20,12 +20,58 @@
 
 #include <config.h>
 
+#include <gconf/gconf-client.h>
 #include <gnome.h>
 #include <string.h>
 #include <libgnomevfs/gnome-vfs-mime-handlers.h>
 
 #include "gnome-wp-item.h"
 #include "gnome-wp-utils.h"
+
+GnomeWPItem * gnome_wp_item_new (const gchar * filename,
+				 GHashTable * wallpapers,
+				 GnomeThumbnailFactory * thumbnails) {
+  GnomeWPItem * item = NULL;
+  GdkColor color1, color2;
+  GConfClient * client;
+
+  client = gconf_client_get_default ();
+
+  item = g_new0 (GnomeWPItem, 1);
+  
+  item->filename = g_strdup (filename);
+
+  item->fileinfo = gnome_wp_info_new (item->filename, thumbnails);
+
+  item->shade_type = gconf_client_get_string (client, WP_SHADING_KEY, NULL);
+  item->pri_color = gconf_client_get_string (client, WP_PCOLOR_KEY, NULL);
+  item->sec_color = gconf_client_get_string (client, WP_SCOLOR_KEY, NULL);
+
+  gdk_color_parse (item->pri_color, &color1);
+  gdk_color_parse (item->sec_color, &color2);
+     
+  item->pcolor = gdk_color_copy (&color1);
+  item->scolor = gdk_color_copy (&color2);
+
+  if (!strncmp (item->fileinfo->mime_type, "image/", strlen ("image/"))) {
+    if (item->name == NULL) {
+      item->name = g_strdup (item->fileinfo->name);
+    }
+    item->options = gconf_client_get_string (client, WP_OPTIONS_KEY, NULL);
+
+    if (!strcmp (item->options, "none")) {
+      item->options = g_strdup ("wallpaper");
+    }
+    gnome_wp_item_update_description (item);
+     
+    g_hash_table_insert (wallpapers, g_strdup (item->filename), item);
+  } else {
+    gnome_wp_item_free (item);
+    item = NULL;
+  }
+
+  return item;
+}
 
 void gnome_wp_item_free (GnomeWPItem * item) {
   if (item == NULL) {

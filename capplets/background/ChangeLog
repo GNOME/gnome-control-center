@@ -1,3 +1,46 @@
+2004-06-28  Rodney Dawes  <dobey@novell.com>
+
+	* *.[ch]: Update copyright info to have correct years (2003-2004)
+
+	* gnome-wp-capplet.c (gnome_wp_capplet_scroll_to_item):
+	Abstract this code out so that we don't have to duplicated it every
+	time we want to scroll to a particular item in the list
+
+	(gnome_wp_add_image): Update this to return the new item that we
+	created, and don't scroll to or set as the wallpaper, every time we
+	call this function
+	Use the new gnome_wp_item_new () call to create items
+
+	(gnome_wp_add_images): Change the API to not use the files argument
+	any longer, as we don't need it without the GTK+ 2.2 compat code
+	Add all the items to the list and select the last one when finished
+
+	(gnome_wp_file_open_dialog): Update to not pass in the files argument
+	to gnome_wp_add_images () and free the GSList of filenames
+
+	(bg_add_multiple_files): merge this code into the normal callback for
+	when images are dragged to the dialog
+
+	(bg_properties_dragged_image): Don't check if the list is more than
+	1 or not here, and always call gnome_wp_add_images () with the full
+	list that we are given
+	Convert the GList of GnomeVFSURIs that we get from gnome-vfs to a
+	GSList of char * uris to pass into gnome_wp_add_images ()
+
+	(gnome_wp_load_stuffs, gnome_wp_file_changed):
+	Use the new gnome_wp_capplet_scroll_to_item () and gnome_wp_item_new ()
+	API calls instead of duplicating code
+
+	* gnome-wp-capplet.h: Remove the GConf key path defines from here
+
+	* gnome-wp-item.[ch]: Add the gnome_wp_item_new () call to create the
+	GnomeWPItem structure for storing wallpapers in
+
+	* gnome-wp-utils.h: Put the GConf key path defines in here
+
+	* gnome-wp-xml.c (gnome_wp_load_legacy): Use the gnome_wp_item_new ()
+	call to create items from the old legacy (XD2 capplet) list file
+
 2004-05-14  Muktha Narayan <muktha.narayan@wipro.com>
 
 	* gnome-wp-capplet.c (set_accessible_name): New

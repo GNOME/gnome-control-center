@@ -1,7 +1,7 @@
 /*
  *  Authors: Rodney Dawes <dobey@ximian.com>
  *
- *  Copyright 2003 Novell, Inc. (www.novell.com)
+ *  Copyright 2003-2004 Novell, Inc. (www.novell.com)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of version 2 of the GNU General Public License
@@ -23,6 +23,15 @@
 
 #include <glib.h>
 #include <gtk/gtk.h>
+
+#define WP_PATH_KEY "/desktop/gnome/background"
+#define WP_FILE_KEY WP_PATH_KEY "/picture_filename"
+#define WP_OPTIONS_KEY WP_PATH_KEY "/picture_options"
+#define WP_SHADING_KEY WP_PATH_KEY "/color_shading_type"
+#define WP_PCOLOR_KEY WP_PATH_KEY "/primary_color"
+#define WP_SCOLOR_KEY WP_PATH_KEY "/secondary_color"
+#define WP_KEYBOARD_PATH "/desktop/gnome/peripherals/keyboard"
+#define WP_DELAY_KEY WP_KEYBOARD_PATH "/delay"
 
 G_BEGIN_DECLS
 

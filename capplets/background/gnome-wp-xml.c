@@ -1,7 +1,7 @@
 /*
  *  Authors: Rodney Dawes <dobey@ximian.com>
  *
- *  Copyright 2003 Novell, Inc. (www.novell.com)
+ *  Copyright 2003-2004 Novell, Inc. (www.novell.com)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of version 2 of the GNU General Public License
@@ -56,7 +56,6 @@ static void gnome_wp_xml_set_bool (const xmlNode * parent,
 static void gnome_wp_load_legacy (GnomeWPCapplet * capplet) {
   FILE * fp;
   gchar * foo, * filename;
-  GdkColor color1, color2;
 
   filename = g_build_filename (g_get_home_dir (), ".gnome2",
 			       "wallpapers.list", NULL);
@@ -80,42 +79,8 @@ static void gnome_wp_load_legacy (GnomeWPCapplet * capplet) {
 	  continue;
 	}
 
-	item = g_new0 (GnomeWPItem, 1);
-
-	item->filename = g_strdup (foo);
-
-	item->fileinfo = gnome_wp_info_new (item->filename, capplet->thumbs);
-
-	if (item->fileinfo == NULL) {
-	  gnome_wp_item_free (item);
-	  continue;
-	}
-
-	item->shade_type = gconf_client_get_string (capplet->client,
-						    WP_SHADING_KEY, NULL);
-	item->pri_color = gconf_client_get_string (capplet->client,
-						   WP_PCOLOR_KEY, NULL);
-	item->sec_color = gconf_client_get_string (capplet->client,
-						   WP_SCOLOR_KEY, NULL);
-
-	gdk_color_parse (item->pri_color, &color1);
-	gdk_color_parse (item->sec_color, &color2);
-     
-	item->pcolor = gdk_color_copy (&color1);
-	item->scolor = gdk_color_copy (&color2);
-
-	if (!strncmp (item->fileinfo->mime_type, "image/",
-		      strlen ("image/"))) {
-	  if (item->name == NULL) {
-	    item->name = g_strdup (item->fileinfo->name);
-	  }
-	  item->options = gconf_client_get_string (capplet->client,
-						   WP_OPTIONS_KEY,
-						   NULL);
-
-	  gnome_wp_item_update_description (item);
-	  g_hash_table_insert (capplet->wphash, g_strdup (item->filename), item);
-	} else {
+	item = gnome_wp_item_new (foo, capplet->wphash, capplet->thumbs);
+	if (item != NULL && item->fileinfo == NULL) {
 	  gnome_wp_item_free (item);
 	}
       }
