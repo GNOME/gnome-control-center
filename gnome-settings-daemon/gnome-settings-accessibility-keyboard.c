@@ -183,8 +183,11 @@ set_gconf_from_server (GConfEntry *ignored)
 	XkbDescRec	*desc;
 	GConfClient	*client = gconf_client_get_default ();
 
+	gdk_error_trap_push ();
 	desc = XkbGetMap(GDK_DISPLAY (), 0, XkbUseCoreKbd);
 	XkbGetControls (GDK_DISPLAY (), XkbAllControlsMask, desc);
+	XFlush (GDK_DISPLAY ());
+	gdk_error_trap_pop ();
 
 	desc->ctrls->ax_options = XkbAX_LatchToLockMask;
 
@@ -275,13 +278,18 @@ gnome_settings_accessibility_keyboard_init (GConfClient *client)
 {
 	int opcode, errorBase, major, minor;
 
+	gdk_error_trap_push ();
+
 	if (!XkbQueryExtension (GDK_DISPLAY (),
 		&opcode, &xkbEventBase, &errorBase, &major, &minor) ||
 	    !XkbUseExtension (GDK_DISPLAY (), &major, &minor))
 		return;
-
 	XkbSelectEvents (GDK_DISPLAY (),
 		XkbUseCoreKbd, XkbAllEventsMask, XkbAllEventsMask);
+
+	XFlush (GDK_DISPLAY ());
+	gdk_error_trap_pop ();
+
 	gdk_window_add_filter (NULL, &cb_xkb_event_filter, NULL);
 
 	gnome_settings_daemon_register_callback (CONFIG_ROOT, &set_server_from_gconf);

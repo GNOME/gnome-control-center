@@ -1,5 +1,12 @@
 2002-03-29  Jody Goldberg <jody@gnome.org>
 
+	* gnome-settings-accessibility-keyboard.c
+	(gnome_settings_accessibility_keyboard_init) : get really anal about
+	  potential X errors.
+	(set_gconf_from_server) : ditto.
+
+2002-03-29  Jody Goldberg <jody@gnome.org>
+
 	* gnome-settings-accessibility-keyboard.c (set_server_from_gconf) :
 	  Add a gdk_error_trap just in case.
 
