@@ -1,5 +1,11 @@
 2000-08-10  Bradford Hovinen  <hovinen@helixcode.com>
 
+	* screensaver-prefs-dialog.c (write_command_line): Fix memory leak
+	(read_select): Disable all widgets associated with unselected
+	nodes before enabling those associated with selected one
+	(read_select): Don't iterate through menu items
+	(read_number): Don't crash if person used bad argument
+
 	* expr.c (int_parse_atom): Have string -> boolean conversion
 	always convert to FALSE
 	(int_parse_factor): Set result to boolean TRUE when symbol of

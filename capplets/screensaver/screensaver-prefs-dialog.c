@@ -572,11 +572,14 @@ write_command_line (gchar *name, xmlNodePtr argument_data, GTree *widget_db)
 			arg = NULL;
 
 		if (arg) {
-			if (name || flag) g_string_append (line, " ");
+			if (*arg && (name || flag)) 
+				g_string_append (line, " ");
 			g_string_append (line, arg);
 			flag = TRUE;
 
-			if (!strcmp (node->name, "number")) g_free (arg);
+			if (!strcmp (node->name, "number") ||
+			    !strcmp (node->name, "hgroup")) 
+				g_free (arg);
 		}
 	}
 
@@ -1233,7 +1236,7 @@ read_number (GTree *widget_db, xmlNodePtr argument_data, GScanner *cli_db)
 	args = g_strsplit (arg_line, " ", -1);
 
 	arg = g_scanner_scope_lookup_symbol (cli_db, 0, args[0] + 1);
-	if (!arg) return;
+	if (!arg || arg == (char *) 1) return;
 
 	if (!(id = xmlGetProp (argument_data, "id"))) return;
 	set = g_tree_lookup (widget_db, id);
@@ -1304,7 +1307,16 @@ read_select (GTree *widget_db, xmlNodePtr argument_data,
 	 * deselect signals to do the same when an option is selected 
 	 */
 
-	menu_item_node = GTK_MENU_SHELL (menu)->children;
+	node = argument_data->childs; i = 0;
+
+	while (node) {
+		if (i != set_idx)
+			set_widgets_sensitive (widget_db,
+					       xmlGetProp (node, "enable"),
+					       FALSE);
+		node = node->next; i++;
+	}
+
 	node = argument_data->childs; i = 0;
 
 	while (node) {
@@ -1314,13 +1326,10 @@ read_select (GTree *widget_db, xmlNodePtr argument_data,
 			set_widgets_sensitive (widget_db,
 					       xmlGetProp (node, "enable"),
 					       TRUE);
-		} else {
-			set_widgets_sensitive (widget_db,
-					       xmlGetProp (node, "enable"),
-					       FALSE);
+			break;
 		}
 
-		node = node->next; menu_item_node = menu_item_node->next; i++;
+		node = node->next; i++;
 	}
 }
 
