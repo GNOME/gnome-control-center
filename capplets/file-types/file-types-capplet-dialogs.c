@@ -571,7 +571,6 @@ nautilus_mime_type_capplet_show_new_mime_window (void)
 	GtkWidget *desc_entry;
 	GtkWidget *hbox;
 	GtkWidget *vbox;
-	GnomeVFSResult result;
 	const char *type, *description;
 	char *mime_type;
 
@@ -616,7 +615,8 @@ nautilus_mime_type_capplet_show_new_mime_window (void)
 			
 			/* Add new mime type here */
 			if (strlen (type) > 3) {
-				result = gnome_vfs_mime_set_registered_type_key (type, "description", description);
+				gnome_vfs_mime_set_registered_type_key (type, "description", description);
+				gnome_vfs_mime_set_value (type, "description", description);
 				mime_type = g_strdup (type);
 			}
 			/* Fall through to close dialog */

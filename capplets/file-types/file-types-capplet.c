@@ -901,7 +901,7 @@ add_mime_clicked (GtkWidget *widget, gpointer data)
 		if (description != NULL && strlen (description) > 0) {
 			text[0] = g_strdup (description);
 		} else {
-			text[0] = "";
+			text[0] = g_strdup ("");
 		}
 
 		/* Add mime type to second column */
