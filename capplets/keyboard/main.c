@@ -35,6 +35,9 @@
 
 #include <capplet-widget.h>
 
+#include <ximian-archiver/archive.h>
+#include <ximian-archiver/location.h>
+
 #include "preferences.h"
 #include "prefs-widget.h"
 
@@ -43,10 +46,27 @@ static Preferences *old_prefs;
 static PrefsWidget *prefs_widget;
 
 static void
+store_archive_data (void) 
+{
+	Archive *archive;
+	Location *location;
+	xmlDocPtr xml_doc;
+
+	archive = ARCHIVE (archive_load (FALSE));
+	location = archive_get_current_location (archive);
+	xml_doc = preferences_write_xml (prefs);
+	location_store_xml (location, "keyboard-properties-capplet",
+			    xml_doc, STORE_MASK_PREVIOUS);
+	xmlFreeDoc (xml_doc);
+	archive_close (archive);
+}
+
+static void
 ok_cb (GtkWidget *widget) 
 {
 	preferences_save (prefs);
 	preferences_apply_now (prefs);
+	store_archive_data ();
 }
 
 static void
