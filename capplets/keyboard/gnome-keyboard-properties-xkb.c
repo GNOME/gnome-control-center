@@ -233,8 +233,6 @@ enable_disable_restoring (GladeXML * dialog)
   GConfClient *confClient = gconf_client_get_default ();
   gboolean enable;
 
-  memset (&gswic, 0, sizeof (gswic));
-
   GSwitchItXkbConfigInit (&gswic, confClient);
   g_object_unref (confClient);
   GSwitchItXkbConfigLoad (&gswic);

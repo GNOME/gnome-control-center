@@ -81,8 +81,6 @@ apply_settings (void)
 	if (!initedOk)
 		return;
 
-	memset (&gswic, 0, sizeof (gswic));
-
 	confClient = gconf_client_get_default ();
 	GSwitchItXkbConfigInit (&gswic, confClient);
 	g_object_unref (confClient);
