@@ -1265,6 +1265,21 @@ location_does_backend_change (Location *location, Location *location1,
 	return ret;
 }
 
+/* location_get_config_log:
+ * @location:
+ *
+ * Returns the config log object for this location
+ */
+
+ConfigLog *
+location_get_config_log (Location *location) 
+{
+	g_return_val_if_fail (location != NULL, FALSE);
+	g_return_val_if_fail (IS_LOCATION (location), FALSE);
+
+	return location->p->config_log;
+}
+
 static gint
 get_backends_cb (BackendList *backend_list, gchar *backend_id,
 		 Location *location) 

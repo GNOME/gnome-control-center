@@ -147,4 +147,6 @@ gboolean location_does_backend_change (Location *location,
 				       Location *location1,
 				       gchar *backend_id);
 
+ConfigLog *location_get_config_log (Location *location);
+
 #endif /* __LOCATION */
