@@ -52,10 +52,8 @@ apply_settings (Bonobo_ConfigDatabase db)
 
 	enable_esd = bonobo_config_get_boolean (db, "/main/enable_esd", NULL);
 
-#if 0
         if (enable_esd && gnome_sound_connection < 0)
                 start_esd ();
-#endif
 
 	if (!enable_esd && gnome_sound_connection >= 0)
 		system ("killall esd");
