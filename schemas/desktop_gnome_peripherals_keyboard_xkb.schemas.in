@@ -1,70 +1,116 @@
+<?xml version="1.0"?>
 <gconfschemafile>
   <schemalist>
     <schema>
-      <key>/schemas/desktop/gnome/peripherals/keyboard/xkb/overrideSettings</key>
-      <applyto>/desktop/gnome/peripherals/keyboard/xkb/overrideSettings</applyto>
+      <key>/schemas/desktop/gnome/peripherals/keyboard/kbd/overrideSettings</key>
+      <applyto>/desktop/gnome/peripherals/keyboard/kbd/overrideSettings</applyto>
       <owner>gnome</owner>    
       <type>bool</type>
       <default>true</default>
       <locale name="C">
-        <short>XKB settings in gconf will be overridden from the system ASAP</short>
-        <long>Very soon, XKB settings in gconf will be overridden (from the system configuration)</long>
+        <short>Keyboard settings in gconf will be overridden from the system ASAP</short>
+        <long>Very soon, keyboard settings in gconf will be overridden (from the system configuration)</long>
       </locale>
     </schema>
 
     <schema>
-      <key>/schemas/desktop/gnome/peripherals/keyboard/xkb/model</key>
-      <applyto>/desktop/gnome/peripherals/keyboard/xkb/model</applyto>
+      <key>/schemas/desktop/gnome/peripherals/keyboard/kbd/model</key>
+      <applyto>/desktop/gnome/peripherals/keyboard/kbd/model</applyto>
       <owner>gnome</owner>    
       <type>string</type>
       <default>pc105</default>
       <locale name="C">
-        <short>XKB keyboard model</short>
-        <long>XKB keyboard model</long>
+        <short>Keyboard model</short>
+        <long>keyboard model</long>
       </locale>
     </schema>
 
     <schema>
-      <key>/schemas/desktop/gnome/peripherals/keyboard/xkb/layouts</key>
-      <applyto>/desktop/gnome/peripherals/keyboard/xkb/layouts</applyto>
+      <key>/schemas/desktop/gnome/peripherals/keyboard/kbd/layouts</key>
+      <applyto>/desktop/gnome/peripherals/keyboard/kbd/layouts</applyto>
       <owner>gnome</owner>    
       <type>list</type>
       <list_type>string</list_type>
       <default>[us]</default>
       <locale name="C">
-        <short>XKB keyboard layout</short>
-        <long>XKB keyboard layout</long>
+        <short>Keyboard layout</short>
+        <long>keyboard layout</long>
       </locale>
     </schema>
 
     <schema>
-      <key>/schemas/desktop/gnome/peripherals/keyboard/xkb/options</key>
-      <applyto>/desktop/gnome/peripherals/keyboard/xkb/options</applyto>
+      <key>/schemas/desktop/gnome/peripherals/keyboard/kbd/options</key>
+      <applyto>/desktop/gnome/peripherals/keyboard/kbd/options</applyto>
       <owner>gnome</owner>    
       <type>list</type>
       <list_type>string</list_type>
       <default>[]</default>
       <locale name="C">
-        <short>XKB options</short>
-        <long>XKB options</long>
+        <short>Keyboard options</short>
+        <long>Keyboard options</long>
       </locale>
     </schema>
 
     <schema>
-      <key>/schemas/desktop/gnome/peripherals/keyboard/xkb/update_handlers</key>
-      <applyto>/desktop/gnome/peripherals/keyboard/xkb/update_handlers</applyto>
+      <key>/schemas/desktop/gnome/peripherals/keyboard/general/update_handlers</key>
+      <applyto>/desktop/gnome/peripherals/keyboard/general/update_handlers</applyto>
       <owner>gnome</owner>    
       <type>list</type>
       <list_type>string</list_type>
       <default>[]</default>
       <locale name="C">
-	<!--
-        <short>XKB Update Handlers</short>
-	<long>A collection of scripts to run whenever the XKB state is
+        <short>Keyboard Update Handlers</short>
+	<long>A collection of scripts to run whenever the keyboard state is
 		reloaded.  Useful for re-applying xmodmap based adjustments</long>
-		-->
       </locale>
     </schema>
 
+    <schema>
+      <key>/schemas/desktop/gnome/peripherals/keyboard/general/defaultGroup</key>
+      <applyto>/desktop/gnome/peripherals/keyboard/general/defaultGroup</applyto>
+      <owner>gnome</owner>    
+      <type>int</type>
+      <default>-1</default>
+      <locale name="C">
+        <short>Default group, assigned on window creation</short>
+	<long>Default group, assigned on window creation</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/desktop/gnome/peripherals/keyboard/general/groupPerWindow</key>
+      <applyto>/desktop/gnome/peripherals/keyboard/general/groupPerWindow</applyto>
+      <owner>gnome</owner>    
+      <type>bool</type>
+      <default>true</default>
+      <locale name="C">
+        <short>Keep and manage separate group per window</short>
+	<long>Keep and manage separate group per window</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/desktop/gnome/peripherals/keyboard/general/handleIndicators</key>
+      <applyto>/desktop/gnome/peripherals/keyboard/general/handleIndicators</applyto>
+      <owner>gnome</owner>    
+      <type>bool</type>
+      <default>true</default>
+      <locale name="C">
+        <short>Save/restore indicators together with layout groups</short>
+	<long>Save/restore indicators together with layout groups</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/desktop/gnome/peripherals/keyboard/general/layoutNamesAsGroupNames</key>
+      <applyto>/desktop/gnome/peripherals/keyboard/general/layoutNamesAsGroupNames</applyto>
+      <owner>gnome</owner>    
+      <type>bool</type>
+      <default>true</default>
+      <locale name="C">
+        <short>Show layout names instead of group names</short>
+	<long>Show layout names instead of group names (only for versions of XFree supporting multiple layouts)</long>
+      </locale>
+    </schema>
   </schemalist>
 </gconfschemafile>
