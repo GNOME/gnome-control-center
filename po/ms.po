@@ -4,9 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-07-07 00:27-0400\n"
-"PO-Revision-Date: 2003-05-14 11:43+0800\n"
+"POT-Creation-Date: 2003-07-27 11:12+0800\n"
+"PO-Revision-Date: 2003-07-27 11:11+0800\n"
 "Last-Translator: Hasbullah Bin Pit <sebol@ikhlas.com>\n"
 "Language-Team: Projek Gabai <gabai-penyumbang@lists.sourceforge.org>\n"
 "MIME-Version: 1.0\n"
@@ -14,14 +13,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
-#, fuzzy
 msgid "<b>Applications</b>"
-msgstr "Aplikasi Warisan"
+msgstr "<b>Aplikasi</b>"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:2
-#, fuzzy
 msgid "<b>Support</b>"
-msgstr "<b>Keupayaan</b>"
+msgstr "<b>Sokongan</b>"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:3
 msgid ""
@@ -30,13 +27,12 @@ msgid ""
 msgstr ""
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:4
-#, fuzzy
 msgid "Assistive Technology Preferences"
-msgstr "Keutamaan Tetingkap"
+msgstr "Keutamaan Aplikasi Teknologi Penolong"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:5
 msgid "Close and _Log Out"
-msgstr ""
+msgstr "Tutup dan _Log Keluar"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:6
 msgid "Start these assistive technologies every time you log in:"
@@ -52,19 +48,40 @@ msgstr ""
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:9
 msgid "_On-screen keyboard"
-msgstr ""
+msgstr "Papan kekunci pada-_skrin"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:10
-#, fuzzy
 msgid "_Screenreader"
-msgstr "Skrin"
+msgstr "Pembaca _skrin"
 
 #: capplets/accessibility/at-properties/at-properties.desktop.in.h:1
 msgid "Assistive Technology Support"
-msgstr ""
+msgstr "Sokongan Teknologi Pertolongan"
 
 #: capplets/accessibility/at-properties/at-properties.desktop.in.h:2
 msgid "Enable support for GNOME assistive technologies at login"
+msgstr "Hidupkan sokongan bagi teknologi pertolongan GNOME pasa logmasuk"
+
+#: capplets/accessibility/at-properties/main.c:59
+msgid ""
+"<i>No Assistive Technology is available on your system.  The 'gok' package "
+"must be installed in order to get on-screen keyboard support, and the "
+"'gnopernicus' package must be installed for screenreading and magnifying "
+"capabilities.</i>"
+msgstr ""
+
+#: capplets/accessibility/at-properties/main.c:62
+msgid ""
+"<i>Not all available assistive technologies are installed on your system.  "
+"The 'gok' package must be installed in order to get on-screen keyboard "
+"support.</i>"
+msgstr ""
+
+#: capplets/accessibility/at-properties/main.c:65
+msgid ""
+"<i>Not all available assistive technologies are installed on your system.  "
+"The 'gnopernicus' package must be installed for screenreading and magnifying "
+"capabilities.</i>"
 msgstr ""
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:238
@@ -79,11 +96,11 @@ msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Tak dapat mengimport tetapan AccessX dari fail '%s'"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:465
-msgid "Select CDE AccessX file"
-msgstr "Pilih fail AccessX CDE"
+msgid "Import Feature Settings File"
+msgstr "Import Fail Tetapan Keupayaan"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Papan Kekunci"
@@ -93,53 +110,54 @@ msgid "Set your keyboard accessibility preferences"
 msgstr "Tetapkan ciri-ciri Kebolehcapaian Papan Kekunci"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.c:60
-#, fuzzy
 msgid ""
 "This system does not seem to have the XKB extension.  The keyboard "
 "accessibility features will not operate without it."
 msgstr ""
 "Sistem ini nampaknya tidak mempunyai sambungan XKB. Kebolehcapaian papan "
-"kekunci tidak akan beroperasi dengannya"
+"kekunci tidak akan beroperasi dengannya."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
+#: capplets/font/font-properties.glade.h:1
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
+#: capplets/mouse/gnome-mouse-properties.glade.h:1
+#: capplets/ui-properties/gnome-ui-properties.glade.h:1
+msgid "    "
+msgstr "    "
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:1
 #: capplets/file-types/file-types-properties.glade.h:1
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:2
 #: capplets/network/gnome-network-preferences.glade.h:2
 #: capplets/theme-switcher/theme-install.glade.h:1
 #: capplets/theme-switcher/theme-properties.glade.h:1
 msgid "*"
 msgstr "*"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
-#, fuzzy
-msgid "<b>Enable Bo_unce Keys</b>"
-msgstr "Hidupkan Kekunci _Bounce"
-
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
-#, fuzzy
-msgid "<b>Enable Slo_w Keys</b>"
-msgstr "Hidupkan Kekunci _Perlahan"
+msgid "<b>Enable Bo_unce Keys</b>"
+msgstr "<b>Hidupkan Kekunci _Bounce</b>"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
+msgid "<b>Enable Slo_w Keys</b>"
+msgstr "<b>Hidupkan Kekunci _Perlahan</b>"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
 msgid "<b>Enable _Mouse Keys</b>"
 msgstr "<b>Hidupkan Kekunci _Tetikus</b>"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
-#, fuzzy
-msgid "<b>Enable _Repeat Keys</b>"
-msgstr "Hidupkan Kekunci _Tetikus"
-
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
+msgid "<b>Enable _Repeat Keys</b>"
+msgstr "<b>Hidupkan Kekunci _Ulangan</b>"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
 msgid "<b>Enable _Sticky Keys</b>"
 msgstr "<b>Hidupkan Kekunci _Melekat</b>"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
 msgid "<b>Features</b>"
 msgstr "<b>Keupayaan</b>"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
-msgid "<b>Mouse</b>"
-msgstr "<b>Tetikus</b>"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
 msgid "<b>Toggle Keys</b>"
@@ -159,9 +177,8 @@ msgid "Beep when _features turned on or off from keyboard"
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
-#, fuzzy
 msgid "Beep when _modifier is pressed"
-msgstr "_Beep bila modifier ditekan"
+msgstr "Beep bila _modifier ditekan"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
 msgid "Beep when an LED is turned on and two beeps when one is turned off."
@@ -212,9 +229,8 @@ msgid "Ma_ximum pointer speed:"
 msgstr "Kelajuan ma_ksima penuding:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
-#: capplets/mouse/mouse.desktop.in.h:1
-msgid "Mouse"
-msgstr "Tetikus"
+msgid "Mouse Keys"
+msgstr "kekunci Tetikus"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
 msgid "Mouse _Preferences..."
@@ -233,7 +249,7 @@ msgid ""
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "S_peed:"
 msgstr "Ke_lajuan:"
 
@@ -255,14 +271,14 @@ msgstr "_Hidupkan ciri-ciri kebolehcapaian Papan Kekunci"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
 msgid "_Import Feature Settings..."
-msgstr ""
+msgstr "_Import Tetapak Keupayaan..."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:35
-#, fuzzy
 msgid "_Only accept keys held for:"
-msgstr "_Hanya terima tekanan kekunci selepas:"
+msgstr "_Hanya terima tekanan kekunci bagi:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "_Type to test settings:"
 msgstr "_Taip untuk uji tetapan:"
 
@@ -275,9 +291,8 @@ msgid "_pressed"
 msgstr "dite_kan"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:39
-#, fuzzy
 msgid "_rejected"
-msgstr "kekunci di_lepaskan"
+msgstr "di_lepaskan"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:40
 msgid "characters/second"
@@ -299,129 +314,132 @@ msgstr "saat"
 
 #. solid
 #: capplets/background/background-properties-capplet.c:228
-msgid "C_olor:"
-msgstr "_Warna:"
+msgid "Co_lor:"
+msgstr "Wa_rna:"
 
 #. horiz
 #: capplets/background/background-properties-capplet.c:232
-msgid "_Left Color:"
-msgstr "Warna Ki_ri:"
+msgid "_Left color:"
+msgstr "Warna ki_ri:"
 
 #: capplets/background/background-properties-capplet.c:233
-msgid "_Right Color:"
-msgstr "Warna Ka_nan:"
+msgid "_Right color:"
+msgstr "Warna ka_nan:"
 
 #. vert
 #: capplets/background/background-properties-capplet.c:236
-msgid "_Top Color:"
-msgstr "Warna _Atas:"
+msgid "Top co_lor:"
+msgstr "Warna _atas:"
 
 #: capplets/background/background-properties-capplet.c:237
-msgid "_Bottom Color:"
-msgstr "Warna _Bawah:"
+msgid "_Bottom color:"
+msgstr "Warna _bawah:"
 
 #: capplets/background/background-properties-capplet.c:398
-msgid "_Wallpaper"
-msgstr "_Kertas Dinding"
+#, fuzzy
+msgid "_Tile"
+msgstr "_Fail"
 
 #: capplets/background/background-properties-capplet.c:398
-msgid "C_entered"
-msgstr "Tengah"
+msgid "C_enter"
+msgstr "_Tengah"
 
 #: capplets/background/background-properties-capplet.c:398
-msgid "_Scaled"
+msgid "Sc_ale"
 msgstr "Di_skala"
 
 #: capplets/background/background-properties-capplet.c:398
-msgid "Stretc_hed"
+msgid "_Stretch"
 msgstr "Di_regang"
 
 #: capplets/background/background-properties-capplet.c:398
 msgid "_No Picture"
 msgstr "_Tiada Gambar"
 
-#: capplets/background/background-properties-capplet.c:433
-msgid "Select _picture:"
-msgstr "_Pilih gambar:"
-
-#: capplets/background/background-properties-capplet.c:567
+#: capplets/background/background-properties-capplet.c:559
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:834
-#: capplets/keyboard/gnome-keyboard-properties.c:222
-#: capplets/mouse/gnome-mouse-properties.c:716
-#: capplets/sound/sound-properties-capplet.c:214
+#: capplets/default-applications/gnome-default-applications-properties.c:852
+#: capplets/keyboard/gnome-keyboard-properties.c:220
+#: capplets/mouse/gnome-mouse-properties.c:714
+#: capplets/sound/sound-properties-capplet.c:212
 msgid "Retrieve and store legacy settings"
 msgstr "Terima dan simpan tetapan warisan"
 
-#: capplets/background/background-properties-capplet.c:593
+#: capplets/background/background-properties-capplet.c:585
 #: capplets/background/background-properties.glade.h:2
 msgid "Background Preferences"
 msgstr "Keutamaan Latarbelakang"
 
 #: capplets/background/background-properties.glade.h:1
-msgid "A preview of the background picture."
-msgstr "Prebiu bagi gambar latar belakang."
+msgid "Bac_kground style:"
+msgstr "Gaya Latar Be_lakang:"
 
 #: capplets/background/background-properties.glade.h:3
-msgid "Background Preview"
-msgstr "Prebiu latarbelakang"
+msgid "E-Mail"
+msgstr "E-Mel"
 
 #: capplets/background/background-properties.glade.h:4
-msgid "Background _Style:"
-msgstr "Gaya Latar Belakang:"
-
-#: capplets/background/background-properties.glade.h:5
 msgid "Horizontal gradient"
 msgstr "Gradien Mengufuk"
 
-#: capplets/background/background-properties.glade.h:6
+#: capplets/background/background-properties.glade.h:5
 msgid "Pick a color"
 msgstr "Pilih satu warna"
 
+#: capplets/background/background-properties.glade.h:6
+msgid "Picture _options:"
+msgstr "_Opsyen gambar:"
+
 #: capplets/background/background-properties.glade.h:7
-msgid "Picture Options:"
-msgstr "Opsyen Gambar:"
-
-#: capplets/background/background-properties.glade.h:8
-#: libbackground/preview-file-selection.c:212
-msgid "Preview"
-msgstr "Prebiu"
-
-#: capplets/background/background-properties.glade.h:9
 msgid "Primary Color"
 msgstr "Warna Utama"
 
-#: capplets/background/background-properties.glade.h:10
+#: capplets/background/background-properties.glade.h:8
 msgid "Secondary Color"
 msgstr "Warna Sekunder"
 
-#: capplets/background/background-properties.glade.h:11
+#: capplets/background/background-properties.glade.h:9
+msgid "Select _picture:"
+msgstr "_Pilih gambar:"
+
+#: capplets/background/background-properties.glade.h:10
 msgid "Solid color"
 msgstr "Warna Solid"
 
-#: capplets/background/background-properties.glade.h:12
-msgid "The background picture's file name."
-msgstr "Nama fail gambar latarbelakang."
-
-#: capplets/background/background-properties.glade.h:13
+#: capplets/background/background-properties.glade.h:11
 msgid "To set the background picture, drop an image or click to browse."
 msgstr ""
 "Untuk menetapkan gambar latar belakang, jatuhkan imej atau klik untuk "
 "lungsur."
 
-#: capplets/background/background-properties.glade.h:14
+#: capplets/background/background-properties.glade.h:12
 msgid "Vertical gradient"
 msgstr "Gradien menegak"
 
-#: capplets/background/background-properties.glade.h:15
-msgid ""
-"You can drag image files\n"
-"into the window to set the \n"
-"background picture."
+#: capplets/background/background-properties.glade.h:13
+msgid "You can drag image files into the window to set the background picture."
 msgstr ""
-"Anda boleh jeret fal imej\n"
-"ke tetingkap untuk menetapkan\n"
-"gambar latar belakang"
+"Anda boleh jeret fal imejke tetingkap untuk menetapkangambar latar belakang."
+
+#: capplets/background/background-properties.glade.h:14
+msgid "radiobutton1"
+msgstr "radiobutton1"
+
+#: capplets/background/background-properties.glade.h:15
+msgid "radiobutton2"
+msgstr "radiobutton2"
+
+#: capplets/background/background-properties.glade.h:16
+msgid "radiobutton3"
+msgstr "radiobutton3"
+
+#: capplets/background/background-properties.glade.h:17
+msgid "radiobutton4"
+msgstr "radiobutton4"
+
+#: capplets/background/background-properties.glade.h:18
+msgid "radiobutton5"
+msgstr "radiobutton5"
 
 #: capplets/background/background.desktop.in.h:1
 msgid "Background"
@@ -664,9 +682,8 @@ msgid "C_ustom Help Browser:"
 msgstr "Pelayar Bantuan _Sendiri:"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:6
-#, fuzzy
 msgid "C_ustom Mail Reader:"
-msgstr "Pelayar Bantuan _Sendiri:"
+msgstr "Pembaca Emel _Sendiri:"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:7
 msgid "C_ustom Terminal:"
@@ -689,9 +706,8 @@ msgid "Default Help Browser"
 msgstr "Pelayar Bantuan Default"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:12
-#, fuzzy
 msgid "Default Mail Reader"
-msgstr "Pengurus Tetingkap Default"
+msgstr "Pembaca Emel Default"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:13
 msgid "Default Terminal"
@@ -727,7 +743,7 @@ msgstr "Pelayar Bantuan"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:21
 msgid "Mail Reader"
-msgstr ""
+msgstr "Pembaca Mel"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:23
 msgid ""
@@ -791,9 +807,8 @@ msgid "_Select a Help Browser:"
 msgstr "_Pilih Pelayar Bantuan:"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:37
-#, fuzzy
 msgid "_Select a Mail Reader:"
-msgstr "_Pilih Pelayar Bantuan:"
+msgstr "_Pilih Pembaca Emel:"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:38
 msgid "_Select a Terminal:"
@@ -932,7 +947,7 @@ msgstr "Tetapan aplikasi warisan (grdb)"
 
 #: capplets/display/display-properties.desktop.in.h:1
 msgid "Change screen resolution"
-msgstr ""
+msgstr "Tukar resolusi skrin"
 
 #: capplets/display/display-properties.desktop.in.h:2
 msgid "Screen Resolution"
@@ -944,36 +959,36 @@ msgid "%d Hz"
 msgstr "%d Hz"
 
 #: capplets/display/main.c:367
-msgid "Resolution:"
-msgstr "Resolusi:"
+msgid "_Resolution:"
+msgstr "_Resolusi:"
 
-#: capplets/display/main.c:385
-msgid "Refresh rate:"
-msgstr "Kadar kesegaran:"
+#: capplets/display/main.c:386
+msgid "Re_fresh rate:"
+msgstr "Kadar ke_segaran:"
 
-#: capplets/display/main.c:405
+#: capplets/display/main.c:407
 msgid "Default Settings"
 msgstr "Tetapan Default"
 
-#: capplets/display/main.c:407
+#: capplets/display/main.c:409
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "Tetapan Skrin %d\n"
 
-#: capplets/display/main.c:432
+#: capplets/display/main.c:434
 msgid "Screen Resolution Preferences"
 msgstr "Keutamaan Resolusi Skrin"
 
-#: capplets/display/main.c:460
+#: capplets/display/main.c:464
 #, c-format
 msgid "Make default for this _computer (%s) only"
 msgstr "Jadikan default bagi _komputer (%s) ini sahaja"
 
-#: capplets/display/main.c:478
+#: capplets/display/main.c:482
 msgid "Options"
 msgstr "Opsen"
 
-#: capplets/display/main.c:499
+#: capplets/display/main.c:503
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d seconds the previous "
@@ -982,19 +997,19 @@ msgstr ""
 "Mencuba tetapan baru. Jika anda tak bertindakbalas dalam %d saat tetapan "
 "terdahulu akan digunakan."
 
-#: capplets/display/main.c:549
+#: capplets/display/main.c:553
 msgid "Do you want to keep this resolution?"
 msgstr "Adakah anda akan mengekalkan resolusi ini?"
 
-#: capplets/display/main.c:586
+#: capplets/display/main.c:590
 msgid "Use _previous resolution"
 msgstr "Guna resolusi ter_dahulu"
 
-#: capplets/display/main.c:588
+#: capplets/display/main.c:592
 msgid "_Keep resolution"
 msgstr "_Kekalkan resolusi"
 
-#: capplets/display/main.c:747
+#: capplets/display/main.c:751
 msgid ""
 "The Xserver doesn't support the XRandR extension, runtime resolution changes "
 "aren't possible."
@@ -1002,7 +1017,7 @@ msgstr ""
 "Pelayan X tak menyokong sambungan XRandR, penukaran resolusi ketika "
 "terlaksana adalah mustahil."
 
-#: capplets/display/main.c:759
+#: capplets/display/main.c:763
 msgid ""
 "The version of the XRandR extension is incompatible with this program, "
 "runtime resolution changes aren't possible."
@@ -1321,127 +1336,128 @@ msgstr "Font"
 msgid "Select fonts for the desktop"
 msgstr "Pilih font bagi desktop"
 
-#: capplets/font/font-properties.glade.h:1
+#: capplets/font/font-properties.glade.h:2
+#, fuzzy
+msgid "<b>Font Rendering</b>"
+msgstr "Rendering Font"
+
+#: capplets/font/font-properties.glade.h:3
 msgid "Best _shapes"
 msgstr "_Bentuk terbaik"
 
-#: capplets/font/font-properties.glade.h:2
+#: capplets/font/font-properties.glade.h:4
 msgid "Best co_ntrast"
 msgstr "_Kontras terbaik"
 
-#: capplets/font/font-properties.glade.h:3
+#: capplets/font/font-properties.glade.h:5
 msgid "De_tails..."
 msgstr "P_erincian..."
 
-#: capplets/font/font-properties.glade.h:4
+#: capplets/font/font-properties.glade.h:6
 msgid "Font Preferences"
 msgstr "Keutamaan Font"
 
-#: capplets/font/font-properties.glade.h:5
-msgid "Font Rendering"
-msgstr "Rendering Font"
-
-#: capplets/font/font-properties.glade.h:6
+#: capplets/font/font-properties.glade.h:7
 msgid "Font Rendering Details"
 msgstr "Perincian Rendering Font"
 
-#: capplets/font/font-properties.glade.h:7
+#: capplets/font/font-properties.glade.h:8
 msgid "G_rayscale"
 msgstr "Skala _kelabu"
 
-#: capplets/font/font-properties.glade.h:8
+#: capplets/font/font-properties.glade.h:9
 msgid "Go to font folder"
 msgstr "Pergi ke folder font"
 
-#: capplets/font/font-properties.glade.h:9
+#: capplets/font/font-properties.glade.h:10
 msgid "Hinting:"
 msgstr "Bayangan:"
 
-#: capplets/font/font-properties.glade.h:10
+#: capplets/font/font-properties.glade.h:11
 msgid "N_one"
 msgstr "_Tiada"
 
-#: capplets/font/font-properties.glade.h:11
+#: capplets/font/font-properties.glade.h:12
 msgid "Resolution (_dots per inch):"
 msgstr "Resolusi (_dot per inci):"
 
-#: capplets/font/font-properties.glade.h:12
+#: capplets/font/font-properties.glade.h:13
 msgid "Set the font for applications"
 msgstr "Tetapkan font bagi aplikasi"
 
-#: capplets/font/font-properties.glade.h:13
+#: capplets/font/font-properties.glade.h:14
 msgid "Set the font for the icons on the desktop"
 msgstr "Tetapkan font bagi ikon pada dekstop"
 
-#: capplets/font/font-properties.glade.h:14
+#: capplets/font/font-properties.glade.h:15
 msgid "Set the monospace font for terminals and similar applications"
 msgstr "Tetapkan font monoruang bagi terimnal dan aplikasi setaranya"
 
-#: capplets/font/font-properties.glade.h:15
+#: capplets/font/font-properties.glade.h:16
 msgid "Smoothing:"
 msgstr ""
 
-#: capplets/font/font-properties.glade.h:16
+#: capplets/font/font-properties.glade.h:17
 msgid "Sub_pixel (LCDs)"
 msgstr "Sub_piksel (LCD)"
 
-#: capplets/font/font-properties.glade.h:17
+#: capplets/font/font-properties.glade.h:18
 msgid "Sub_pixel smoothing (LCDs)"
 msgstr ""
 
-#: capplets/font/font-properties.glade.h:18
+#: capplets/font/font-properties.glade.h:19
 msgid "Subpixel order:"
 msgstr "Turutan subpiksel:"
 
-#: capplets/font/font-properties.glade.h:19
+#: capplets/font/font-properties.glade.h:20
 msgid "VB_GR"
 msgstr "VB_GR"
 
-#: capplets/font/font-properties.glade.h:20
+#: capplets/font/font-properties.glade.h:21
 msgid "_Application font:"
 msgstr "Font _Aplikasi:"
 
-#: capplets/font/font-properties.glade.h:21
+#: capplets/font/font-properties.glade.h:22
 msgid "_BGR"
 msgstr "_BGR"
 
-#: capplets/font/font-properties.glade.h:22
+#: capplets/font/font-properties.glade.h:23
 msgid "_Desktop font:"
 msgstr "Font _desktop:"
 
-#: capplets/font/font-properties.glade.h:23
+#: capplets/font/font-properties.glade.h:24
 msgid "_Full"
 msgstr "_Penuh"
 
-#: capplets/font/font-properties.glade.h:24
+#: capplets/font/font-properties.glade.h:25
 msgid "_Medium"
 msgstr "_Medium"
 
-#: capplets/font/font-properties.glade.h:25
+#: capplets/font/font-properties.glade.h:26
 msgid "_Monochrome"
 msgstr "_Monokrom"
 
-#: capplets/font/font-properties.glade.h:26
+#: capplets/font/font-properties.glade.h:27
 msgid "_None"
 msgstr "_Tiada"
 
-#: capplets/font/font-properties.glade.h:27
+#: capplets/font/font-properties.glade.h:28
 msgid "_RGB"
 msgstr "_RGB"
 
-#: capplets/font/font-properties.glade.h:28
+#: capplets/font/font-properties.glade.h:29
 msgid "_Slight"
 msgstr ""
 
-#: capplets/font/font-properties.glade.h:29
+#: capplets/font/font-properties.glade.h:30
 msgid "_Terminal font:"
 msgstr "Font _terminal"
 
-#: capplets/font/font-properties.glade.h:30
+#: capplets/font/font-properties.glade.h:31
 msgid "_VRGB"
 msgstr "_VRGB"
 
-#: capplets/font/font-properties.glade.h:31
+#: capplets/font/font-properties.glade.h:32
 msgid "_Window title font:"
 msgstr "Font tajuk _tetingkap:"
 
@@ -1550,113 +1566,110 @@ msgstr "Umpuk kekunci pintasan pada arahan"
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Terdapat ralat melancarkan caplet papan kekunci: %s"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:201
+#: capplets/keyboard/gnome-keyboard-properties.c:199
 msgid "_Accessibility"
 msgstr "Keboleh_capaikan"
 
+#: capplets/keyboard/gnome-keyboard-properties.c:216
 #: capplets/keyboard/gnome-keyboard-properties.c:218
-#: capplets/keyboard/gnome-keyboard-properties.c:220
+#: capplets/sound/sound-properties-capplet.c:208
 #: capplets/sound/sound-properties-capplet.c:210
-#: capplets/sound/sound-properties-capplet.c:212
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
 "Hanya terapkan tetapan dan keluar (kompatibiliti sahaja; kini dikendali oleh "
 "deamon)"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
-#, fuzzy
-msgid "<b>Cursor Blinks</b>"
-msgstr "Kerdipan Kursor"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:2
-#, fuzzy
-msgid "<b>Repeat Keys</b>"
-msgstr "Hidupkan Kekunci _Tetikus"
-
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+msgid "<b>Cursor Blinking</b>"
+msgstr "<b>Kerdipan Kursor</b>"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+msgid "<b>Repeat Keys</b>"
+msgstr "<b>Kekunci _Ulangan</b>"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>Laju</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>Panjang</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>Pendek</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Perlahan</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
-msgid "Check if breaks are allowed to be postponed"
-msgstr ""
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
-msgid "Duration of the break when typing is disallowed"
-msgstr ""
-
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:10
-msgid "Duration of work before forcing a break"
+msgid "All_ow postponing of breaks"
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+msgid "Check if breaks are allowed to be postponed"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+msgid "Cursor _blinks in text boxes and fields"
+msgstr "_Kerdipan kursor pada kekotak dan medan teks"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+msgid "Duration of the break when typing is disallowed"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+msgid "Duration of work before forcing a break"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
 #, fuzzy
 msgid "Key presses _repeat when key is held down"
 msgstr "_Ulangan apabila kekunci ditekan"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
 msgid "Keyboard Preferences"
 msgstr "Keutamaan Papan Kekunci"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
 msgid "Typing Break"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
 msgid "_Accessibility..."
 msgstr "Keboleh_capaian..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
-msgid "_Allow postponing of breaks"
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+msgid "_Break interval lasts:"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
-msgid "_Break interval lasts"
-msgstr ""
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
-#, fuzzy
-msgid "_Cursor blinks in text boxes and fields"
-msgstr "_Kerdipan  pada kekotak dan medan teks"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "_Delay:"
 msgstr "_Sela:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid "_Speed:"
 msgstr "Ke_lajuan:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
-msgid "_Work interval lasts"
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
+msgid "_Work interval lasts:"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "minutes"
-msgstr ""
+msgstr "minit"
 
 #: capplets/keyboard/keyboard.desktop.in.h:2
 msgid "Set your keyboard preferences"
@@ -1735,39 +1748,29 @@ msgstr ""
 "<b>Kursor Putih Besar</b>\n"
 "Versi besar bagi kursor putih"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:1
-#, fuzzy
-msgid "    "
-msgstr "      "
-
 #: capplets/mouse/gnome-mouse-properties.glade.h:2
-#, fuzzy
 msgid "<b>Cursor Theme</b>"
-msgstr "Tema Kursor"
+msgstr "<b>Tema Kursor</b>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:3
 msgid "<b>Double-Click Timeout </b>"
-msgstr ""
+msgstr "<b>Hadmasa Dwi-Klik </b>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:4
-#, fuzzy
 msgid "<b>Drag and Drop</b>"
-msgstr "Heret dan Jatuh"
+msgstr "<b>Heret dan Jatuh</b>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:5
-#, fuzzy
 msgid "<b>Locate Pointer</b>"
-msgstr "Cari Pointer"
+msgstr "<b>Cari Pointer</b>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:6
-#, fuzzy
 msgid "<b>Mouse Orientation</b>"
-msgstr "Orientasi Tetikus"
+msgstr "<b>Orientasi Tetikus</b>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:7
-#, fuzzy
 msgid "<b>Speed</b>"
-msgstr "<b>Keupayaan</b>"
+msgstr "<b>Kelajuan</b>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid ""
@@ -1804,9 +1807,8 @@ msgid "Buttons"
 msgstr "Butang"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:16
-#, fuzzy
 msgid "Cursor _themes:"
-msgstr "Tema Kursor"
+msgstr "_Tema kursor:"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:17
 msgid "Cursors"
@@ -1842,16 +1844,19 @@ msgstr "_Treshold:"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:25
 msgid "_Timeout:"
-msgstr ""
+msgstr "_Hadmasa:"
+
+#: capplets/mouse/mouse.desktop.in.h:1
+msgid "Mouse"
+msgstr "Tetikus"
 
 #: capplets/mouse/mouse.desktop.in.h:2
 msgid "Set your mouse preferences"
 msgstr "Tetapkan keutamaan tetikus"
 
 #: capplets/network/gnome-network-preferences.desktop.in.h:1
-#, fuzzy
 msgid "Network Proxy"
-msgstr "Proksi rangkaian"
+msgstr "Proksi Rangkaian"
 
 #: capplets/network/gnome-network-preferences.desktop.in.h:2
 msgid "Network proxy preferences"
@@ -1886,28 +1891,28 @@ msgid "HTTP Proxy Details"
 msgstr "Perincian Proksi HTTP"
 
 #: capplets/network/gnome-network-preferences.glade.h:9
+msgid "H_TTP proxy:"
+msgstr "Proksi H_TTP:"
+
+#: capplets/network/gnome-network-preferences.glade.h:10
 msgid "Network Proxy Configuration"
 msgstr "Konfigurasi Proksi Rangkaian"
 
-#: capplets/network/gnome-network-preferences.glade.h:10
+#: capplets/network/gnome-network-preferences.glade.h:11
 msgid "Port:"
 msgstr "Liang:"
 
-#: capplets/network/gnome-network-preferences.glade.h:11
+#: capplets/network/gnome-network-preferences.glade.h:12
 msgid "S_ocks host:"
 msgstr "_Hos soket:"
 
-#: capplets/network/gnome-network-preferences.glade.h:12
+#: capplets/network/gnome-network-preferences.glade.h:13
 msgid "_Details"
 msgstr "_Perincian"
 
-#: capplets/network/gnome-network-preferences.glade.h:13
+#: capplets/network/gnome-network-preferences.glade.h:14
 msgid "_FTP proxy:"
 msgstr "Proksi _FTP:"
-
-#: capplets/network/gnome-network-preferences.glade.h:14
-msgid "_HTTP proxy:"
-msgstr "Proksi _HTTP:"
 
 #: capplets/network/gnome-network-preferences.glade.h:15
 msgid "_Password:"
@@ -1921,7 +1926,7 @@ msgstr "Proksi HTTP _Selamat:"
 msgid "_Username:"
 msgstr "_Namapengguna:"
 
-#: capplets/sound/sound-properties-capplet.c:241
+#: capplets/sound/sound-properties-capplet.c:239
 msgid "Sound preferences"
 msgstr "Keutamaan Bunyi"
 
@@ -1930,11 +1935,11 @@ msgid "E_nable sound server startup"
 msgstr "_Hidupkan pelayan bunyi permulaan"
 
 #: capplets/sound/sound-properties.glade.h:2
-msgid "Flash _window titlebar"
+msgid "Flash _entire screen"
 msgstr ""
 
 #: capplets/sound/sound-properties.glade.h:3
-msgid "Flash entire _screen"
+msgid "Flash _window titlebar"
 msgstr ""
 
 #: capplets/sound/sound-properties.glade.h:4
@@ -1951,11 +1956,11 @@ msgstr "Keutamaan Bunyi"
 
 #: capplets/sound/sound-properties.glade.h:7
 msgid "System Bell"
-msgstr ""
+msgstr "Loceng Sistem"
 
 #: capplets/sound/sound-properties.glade.h:8
 msgid "_Sound an audible bell"
-msgstr ""
+msgstr "_Bunyikan locang boleh didengar"
 
 #: capplets/sound/sound-properties.glade.h:9
 msgid "_Sounds for events"
@@ -1963,7 +1968,7 @@ msgstr "_Bunyi bagi acara"
 
 #: capplets/sound/sound-properties.glade.h:10
 msgid "_Visual feedback:"
-msgstr ""
+msgstr "Maklumbalas _visual:"
 
 #: capplets/sound/sound.desktop.in.h:1
 msgid "Enable sound and associate sounds with events"
@@ -2060,27 +2065,24 @@ msgid "Theme"
 msgstr "Tema"
 
 #: capplets/theme-switcher/theme-install.glade.h:2
-#, fuzzy
 msgid "<span size=\"larger\" weight=\"bold\">Install a Theme</span>"
-msgstr "<span size=\"larger\" weight=\"bold\">Simpan tema ke cakera</span>"
+msgstr "<span size=\"larger\" weight=\"bold\">Pasang Tema</span>"
 
 #: capplets/theme-switcher/theme-install.glade.h:3
 msgid "Theme Installation"
-msgstr ""
+msgstr "Pemasangan Tema"
 
 #: capplets/theme-switcher/theme-install.glade.h:4
 msgid "_Install"
 msgstr "_Pasang"
 
 #: capplets/theme-switcher/theme-install.glade.h:5
-#, fuzzy
 msgid "_Location:"
-msgstr "_Pemecutan:"
+msgstr "_Lokasi:"
 
 #: capplets/theme-switcher/theme-properties.glade.h:2
-#, fuzzy
 msgid "<span size=\"larger\" weight=\"bold\">Save Theme to Disk</span>"
-msgstr "<span size=\"larger\" weight=\"bold\">Simpan tema ke cakera</span>"
+msgstr "<span size=\"larger\" weight=\"bold\">Simpan Tema ke Cakera</span>"
 
 #: capplets/theme-switcher/theme-properties.glade.h:3
 msgid "Apply _Background"
@@ -2103,14 +2105,12 @@ msgid "New themes can also be installed by dragging them into the window."
 msgstr "Tema baru boleh juga dipasang dengan mengheret tema ke tetingkap."
 
 #: capplets/theme-switcher/theme-properties.glade.h:8
-#, fuzzy
 msgid "Save Theme"
-msgstr "_Simpan tema"
+msgstr "Simpan Tema"
 
 #: capplets/theme-switcher/theme-properties.glade.h:9
-#, fuzzy
 msgid "Short _description:"
-msgstr "_Huraian Pendek:"
+msgstr "_Huraian pendek:"
 
 #: capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Theme Details"
@@ -2121,30 +2121,20 @@ msgid "Theme Preferences"
 msgstr "Keutamaan Tema"
 
 #: capplets/theme-switcher/theme-properties.glade.h:12
-#, fuzzy
 msgid "Theme _Details"
-msgstr "Perincian Tema"
+msgstr "_Perincian Tema"
 
 #: capplets/theme-switcher/theme-properties.glade.h:13
-#, fuzzy
 msgid "This theme does not suggest any particular font or background."
-msgstr ""
-"Tema ini mencadangkan \n"
-"font dan latarbelakang:"
+msgstr "Tema ini mencadangkan font dan latarbelakang."
 
 #: capplets/theme-switcher/theme-properties.glade.h:14
-#, fuzzy
 msgid "This theme suggests a background:"
-msgstr ""
-"Tema ini mencadangkan\n"
-"latarbelakang:"
+msgstr "Tema ini mencadangkan latarbelakang:"
 
 #: capplets/theme-switcher/theme-properties.glade.h:15
-#, fuzzy
 msgid "This theme suggests a font and a background:"
-msgstr ""
-"Tema ini mencadangkan \n"
-"font dan latarbelakang:"
+msgstr "Tema ini mencadangkan font dan latarbelakang:"
 
 #: capplets/theme-switcher/theme-properties.glade.h:16
 #, fuzzy
@@ -2158,19 +2148,16 @@ msgid "Window Border"
 msgstr "Sempadan Tetingkap"
 
 #: capplets/theme-switcher/theme-properties.glade.h:18
-#, fuzzy
 msgid "_Go To Theme Folder"
-msgstr "_Pergi ke folder tema"
+msgstr "_Pergi ke Folder Tema"
 
 #: capplets/theme-switcher/theme-properties.glade.h:19
-#, fuzzy
 msgid "_Install Theme..."
-msgstr "_Pasang tema..."
+msgstr "_Pasang Tema..."
 
 #: capplets/theme-switcher/theme-properties.glade.h:20
-#, fuzzy
 msgid "_Save Theme..."
-msgstr "_Simpan tema"
+msgstr "_Simpan Tema..."
 
 #: capplets/theme-switcher/theme-properties.glade.h:21
 msgid "_Theme name:"
@@ -2192,29 +2179,25 @@ msgstr "Kelakuan"
 msgid "Sets the default behavior of GNOME applications"
 msgstr "Tetapkan kelakuan default bagi aplikasi GNOME"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:1
-msgid "A preview of what a menubar looks like with these settings."
-msgstr "Prebiu bagaimana bar menu dilihat dengan tetapan ini."
-
 #: capplets/ui-properties/gnome-ui-properties.glade.h:2
-msgid "A preview of what a toolbar looks like with these settings."
-msgstr "Prebiu bagaimana toolbar menu dilihat dengan tetapan ini."
+msgid "<b>Behavior and Appearance</b>"
+msgstr "<b>Penampilan dan Kelakuan</b>"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:3
+msgid "<b>Preview</b>"
+msgstr "<b>Prebiu</b>"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:4
 msgid "C_ut"
 msgstr "_Potong"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:4
-msgid "Icons Only"
-msgstr "Ikon Sahaja"
-
 #: capplets/ui-properties/gnome-ui-properties.glade.h:5
-msgid "Menu and Toolbar Preferences"
-msgstr "Keutamaan Menu dan Toolbar"
+msgid "Icons only"
+msgstr "Ikon sahaja"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:6
-msgid "Menus"
-msgstr "Menu"
+msgid "Menu and Toolbar Preferences"
+msgstr "Keutamaan Menu dan Toolbar"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:7
 msgid "New File"
@@ -2225,83 +2208,67 @@ msgid "Open File"
 msgstr "Buka Fail"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:9
-msgid "Sample menubar:"
-msgstr "Bar Menu contoh:"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:10
-msgid "Sample toolbar:"
-msgstr "Toolbar contoh:"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:11
 msgid "Save File"
 msgstr "Simpan Fail"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:12
-msgid "Select the toolbar style."
-msgstr "Pilih gaya toolbar."
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:13
+#: capplets/ui-properties/gnome-ui-properties.glade.h:10
 msgid "Show _icons in menus"
 msgstr "Papar _ikon pada menu"
 
+#: capplets/ui-properties/gnome-ui-properties.glade.h:11
+msgid "Text below icons"
+msgstr "Teks dibawah ikon"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:12
+msgid "Text beside icons"
+msgstr "Teks di sebelah ikon"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:13
+msgid "Text only"
+msgstr "Teks sahaja"
+
 #: capplets/ui-properties/gnome-ui-properties.glade.h:14
-msgid "Text Below Icons"
-msgstr "Teks Dibawah Ikon"
+msgid "Toolbar _button labels: "
+msgstr "Label _butang toolbar: "
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:15
-msgid "Text Beside Icons"
-msgstr "Teks di Sebelah Ikon"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:16
-msgid "Text Only"
-msgstr "Teks Sahaja"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:17
-msgid "Toolbar"
-msgstr "Toolbar"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:18
-msgid "Toolbars can be _detached and moved around"
-msgstr "Toolbar boleh di_pisahkan dan dipindahkan"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:19
-msgid "_Button Labels: "
-msgstr "Label _Butang: "
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:20
 msgid "_Copy"
 msgstr "_Salin"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:21
+#: capplets/ui-properties/gnome-ui-properties.glade.h:16
+msgid "_Detachable toolbars"
+msgstr "Toolbar boleh _lerai"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:17
 msgid "_Edit"
 msgstr "_Edit"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:22
+#: capplets/ui-properties/gnome-ui-properties.glade.h:18
 #: control-center/gnomecc-ui.xml.h:5
 msgid "_File"
 msgstr "_Fail"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:23
+#: capplets/ui-properties/gnome-ui-properties.glade.h:19
 msgid "_New"
 msgstr "Ba_ru"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:24
+#: capplets/ui-properties/gnome-ui-properties.glade.h:20
 msgid "_Open"
 msgstr "_Buka"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:25
+#: capplets/ui-properties/gnome-ui-properties.glade.h:21
 msgid "_Paste"
 msgstr "_Tepek"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:26
+#: capplets/ui-properties/gnome-ui-properties.glade.h:22
 msgid "_Print"
 msgstr "_Cetak"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:27
+#: capplets/ui-properties/gnome-ui-properties.glade.h:23
 msgid "_Quit"
 msgstr "_Keluar"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:28
+#: capplets/ui-properties/gnome-ui-properties.glade.h:24
 msgid "_Save"
 msgstr "_Simpan"
 
@@ -2562,11 +2529,15 @@ msgstr "Skrin dimana BGAplier akan lukis"
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Gagal mendapatkan hbox, gunakan seleksi fail biasa"
 
-#: libsounds/sound-view.c:128
+#: libbackground/preview-file-selection.c:212
+msgid "Preview"
+msgstr "Prebiu"
+
+#: libsounds/sound-view.c:129
 msgid "The sound file for this event does not exist."
 msgstr "Fail bunyi untuk acara ini tidak wujud."
 
-#: libsounds/sound-view.c:130
+#: libsounds/sound-view.c:131
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -2576,25 +2547,29 @@ msgstr ""
 "Anda juga boleh pasang pakej gnome-audio\n"
 "untuk menetapkan bunyi default."
 
-#: libsounds/sound-view.c:222
+#: libsounds/sound-view.c:224
 msgid "Event"
 msgstr "Acara"
 
-#: libsounds/sound-view.c:229
-msgid "File to play"
-msgstr "Fail untuk dimainkan"
+#: libsounds/sound-view.c:233
+msgid "Sound File"
+msgstr "Fail Bunyi"
 
-#: libsounds/sound-view.c:244
-msgid "_Sounds"
-msgstr "_Bunyi"
+#: libsounds/sound-view.c:249
+msgid "_Sounds:"
+msgstr "_Bunyi:"
 
-#: libsounds/sound-view.c:258
+#: libsounds/sound-view.c:263
+msgid "Sound _file:"
+msgstr "_Fail bunyi:"
+
+#: libsounds/sound-view.c:267
+msgid "Select Sound File"
+msgstr "Pilih Fail Bunyi"
+
+#: libsounds/sound-view.c:285
 msgid "_Play"
 msgstr "_Main"
-
-#: libsounds/sound-view.c:264
-msgid "Select sound file"
-msgstr "Pilih fail bunyi"
 
 #: libwindow-settings/gnome-wm-manager.c:320
 #, c-format
@@ -2689,14 +2664,12 @@ msgstr ""
 
 #. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
 #: typing-break/drwright.c:138
-#, fuzzy
 msgid "/_Preferences"
-msgstr "Keutamaan Font"
+msgstr "/Ke_utamaan"
 
 #: typing-break/drwright.c:139
-#, fuzzy
 msgid "/_About"
-msgstr "_Perihal"
+msgstr "/_Perihal"
 
 #: typing-break/drwright.c:141
 msgid "/_Take a Break"
@@ -2728,9 +2701,8 @@ msgid "Don't Quit"
 msgstr ""
 
 #: typing-break/drwright.c:605
-#, fuzzy
 msgid "Quit"
-msgstr "_Keluar"
+msgstr "Keluar"
 
 #: typing-break/drwright.c:655
 msgid "About GNOME Typing Monitor"
@@ -2752,11 +2724,11 @@ msgstr ""
 msgid "Break reminder"
 msgstr ""
 
-#: typing-break/main.c:126
+#: typing-break/main.c:94
 msgid "The typing monitor is already running."
 msgstr ""
 
-#: typing-break/main.c:139
+#: typing-break/main.c:107
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
@@ -2886,17 +2858,28 @@ msgstr "Kemasukan menu konteks Nautilus bagi font"
 msgid "Set as Application Font"
 msgstr "Tetapkan sebagai Font Aplikasi"
 
-#: vfs-methods/themus/Themus_Component.server.in.in.h:1
-msgid "Apply theme..."
-msgstr "Terap Tema..."
+#: vfs-methods/themus/apply-font.glade.h:1
+msgid " "
+msgstr " "
 
-#: vfs-methods/themus/Themus_Component.server.in.in.h:2
-msgid "Themus component"
-msgstr "Komponen Themus"
+#: vfs-methods/themus/apply-font.glade.h:2
+msgid "<span weight=\"bold\" size=\"larger\">Apply new font?</span>"
+msgstr "<span weight=\"bold\" size=\"larger\">Terapkan font baru?</span>"
 
-#: vfs-methods/themus/Themus_Component.server.in.in.h:3
-msgid "Themus component apply theme operations"
-msgstr "Komponen Themus menerapkan operasi tema"
+#: vfs-methods/themus/apply-font.glade.h:3
+msgid "Do _not apply font"
+msgstr "Ja_ngan terapkan font"
+
+#: vfs-methods/themus/apply-font.glade.h:4
+msgid ""
+"The theme you have selected suggests a new font. A preview of the font is "
+"shown below."
+msgstr ""
+"Tema yang anda pilih mencadangkan font baru. Prebiu font dipaparkan dibawah."
+
+#: vfs-methods/themus/apply-font.glade.h:5
+msgid "_Apply font"
+msgstr "Ter_apkan font"
 
 #: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
 msgid "Theme Properties content view component"
@@ -2925,6 +2908,11 @@ msgstr "Tema ikon"
 #: vfs-methods/themus/themus-properties-view.c:217
 msgid "URI currently displayed"
 msgstr "URI yang dipaparkan"
+
+#. translators: you may want to include non-western chars here
+#: vfs-methods/themus/themus-theme-applier.c:83
+msgid "ABCDEFG"
+msgstr "ABCDEFG"
 
 #: vfs-methods/themus/themus.schemas.in.h:1
 msgid "If set to true, then installed themes will be thumbnailed."
@@ -2962,102 +2950,3 @@ msgstr "Samada untuk meng'thumbnail'kan tema dipasang"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Samada untuk meng'thumbnail'kan tema"
-
-#~ msgid "Bee_p"
-#~ msgstr "Bee_p"
-
-#~ msgid "C_ustom:"
-#~ msgstr "Ter_sendiri:"
-
-#~ msgid "Clic_k on keypress"
-#~ msgstr "Kli_k pada tekanan kekunci"
-
-#~ msgid "Keyboard Bell"
-#~ msgstr "Bunyi Papan Kekunci"
-
-#~ msgid "Keypress Click"
-#~ msgstr "Klik Tekanankekunci"
-
-#~ msgid "Repeat Keys"
-#~ msgstr "Kekunci Ulangan"
-
-#~ msgid "_Off"
-#~ msgstr "_Off"
-
-#~ msgid "_Volume:"
-#~ msgstr "_Volum:"
-
-#~ msgid "loud"
-#~ msgstr "kuat"
-
-#~ msgid "quiet"
-#~ msgstr "senyap"
-
-#~ msgid "Install new theme"
-#~ msgstr "Pasang tema baru"
-
-#~ msgid "_Location of new theme:"
-#~ msgstr "_Lokasi bagi tema baru:"
-
-#~ msgid "_Details..."
-#~ msgstr "_Terperinci..."
-
-#~ msgid ""
-#~ "<b>Note:</b> You will need to logout and log back in for this setting to "
-#~ "take effect."
-#~ msgstr ""
-#~ "<b>Perhatian:</b>  Anda perlu logkeluar dan logmasuk semula supaya "
-#~ "tetapan ini bertindak."
-
-#~ msgid ""
-#~ "Animates a quick marker around the cursor when the Control key has been "
-#~ "pressed and released."
-#~ msgstr ""
-#~ "Gerakkan quick marker sekitar kursor apabila kekunci Control ditekan dan "
-#~ "dilepaskan."
-
-#~ msgid "Double-click Delay"
-#~ msgstr "Sela masa dwi-klik"
-
-#~ msgid ""
-#~ "Left-handed mouse mode switches the left and right buttons on the mouse."
-#~ msgstr ""
-#~ "Mod tetikus kidal akan menukarkan butang kiri dan kanan pada tetikus."
-
-#~ msgid ""
-#~ "Maximum time allowed between clicks when double-clicking.   Use the box "
-#~ "on the right to test."
-#~ msgstr ""
-#~ "Masa maksima yang dibenarkan bagi setiap klik bila dwi-klik.  Gunakan "
-#~ "kekotak di sebelah kanan untuk ujian."
-
-#~ msgid ""
-#~ "Set the distance you need to move your cursor before dragging an item."
-#~ msgstr ""
-#~ "Tetapkan jarak yang diperlukan untuk menggerakkan kursor sebelum "
-#~ "mengheret sesuatu item."
-
-#~ msgid "Set the speed of your pointing device."
-#~ msgstr "Tetapkan kelajuan peranti tunjuk anda."
-
-#~ msgid "Speed"
-#~ msgstr "Kelajuan"
-
-#~ msgid "_Delay (sec):"
-#~ msgstr "_Sela (saat):"
-
-#~ msgid "_Show position of cursor when the Control key is pressed"
-#~ msgstr "_Paparkan kedudukan kursor apabila kekunci Control ditekan"
-
-#~ msgid "GNOME desktop theme"
-#~ msgstr "Tema desktop GNOME"
-
-#~ msgid "Installed GNOME desktop theme"
-#~ msgstr "Tema dekstop GNOME yg dipasang"
-
-# #-#-#-#-#  longgok.edited (longokan)  #-#-#-#-#
-# kerana tak muat
-# #-#-#-#-#  longgok.edited (longokan)  #-#-#-#-#
-# kerana tak muat
-#~ msgid "User Interface"
-#~ msgstr "Antaramuka Pengguna"
