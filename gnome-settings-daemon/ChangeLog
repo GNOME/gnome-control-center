@@ -1,3 +1,19 @@
+2002-03-10  Seth Nickell  <snickell@stanford.edu>
+
+        Make the settings daemon a singleton BonoboObject so capplets
+	can detect whether its running and activate it if its not.
+	
+	* Makefile.am:
+	* factory.c: (main):
+	* gnome-settings-daemon.c: (awake_impl), (finalize),
+	(gnome_settings_daemon_class_init), (gnome_settings_daemon_init),
+	(gnome_settings_daemon_new):
+	* gnome-settings-daemon.h:
+
+	Convert the settings-daemon into a BonoboObject and add code to
+	register it with bonobo-activation. Still has a main loop that can
+	be run normally to launch the settings daemon.
+	
 2002-03-06  Miles Lane  <miles@megapathdsl.net>
 
 	* gnome-settings-daemon.c -- Correct the gnome_program_init()

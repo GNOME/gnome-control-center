@@ -30,7 +30,6 @@
 #include <gconf/gconf.h>
 #include <libgnome/gnome-init.h>
 #include <libgnomeui/gnome-ui-init.h>
-#include <libgnomeui/gnome-client.h>
 #include <config.h>
 #include "xsettings-manager.h"
 #include "gnome-settings-daemon.h"
@@ -41,6 +40,13 @@
 #include "gnome-settings-background.h"
 #include "gnome-settings-sound.h"
 #include "gnome-settings-wm.h"
+
+#include "GNOME_SettingsDaemon.h"
+
+static GObjectClass *parent_class = NULL;
+
+struct _GnomeSettingsDaemonPrivate {
+};
 
 static GSList *directories = NULL;
 XSettingsManager *manager;
@@ -131,17 +137,66 @@ manager_event_filter (GdkXEvent *xevent,
     return GDK_FILTER_CONTINUE;
 }
 
-int 
-main (int argc, char **argv)
+CORBA_boolean
+awake_impl (PortableServer_Servant servant,
+	    const CORBA_char      *service,
+	    CORBA_Environment     *ev)
+{
+  printf ("I received an activate request for %s\n", service);
+  return TRUE;
+}
+
+
+static void
+finalize (GObject *object)
+{
+	GnomeSettingsDaemon *daemon;
+
+	daemon = GNOME_SETTINGS_DAEMON (object);
+	if (daemon->private == NULL) {
+	  return;
+	}
+
+	xsettings_manager_destroy (manager);
+
+	g_free (daemon->private);
+	daemon->private = NULL;
+
+	G_OBJECT_CLASS (parent_class)->finalize (object);
+}
+
+static void
+gnome_settings_daemon_class_init (GnomeSettingsDaemonClass *klass)
+{
+  GObjectClass *object_class;
+
+  object_class = G_OBJECT_CLASS (klass);
+
+  object_class->finalize = finalize;
+
+  klass->epv.awake = awake_impl;
+
+  parent_class = g_type_class_peek_parent (klass);
+}
+
+static void
+gnome_settings_daemon_init (GnomeSettingsDaemon *settings)
+{
+  settings->private = g_new (GnomeSettingsDaemonPrivate, 1);
+}
+
+BONOBO_TYPE_FUNC_FULL(GnomeSettingsDaemon, GNOME_SettingsDaemon,
+		      BONOBO_TYPE_OBJECT, gnome_settings_daemon)
+
+GObject *
+gnome_settings_daemon_new (void)
 {
   gboolean terminated = FALSE;
   GConfClient *client;
-  GnomeClient *session;
   GSList *list;
-  gchar *restart_argv[] = { "gnome2-settings-daemon", *argv, 0 };
+  GnomeSettingsDaemon *daemon;
 
-  gnome_program_init ("gnome2-settings-daemon", VERSION, LIBGNOMEUI_MODULE,
-		      argc, argv, NULL);
+  daemon = g_object_new (gnome_settings_daemon_get_type (), NULL);
 
   if (xsettings_manager_check_running (gdk_display, DefaultScreen (gdk_display)))
     {
@@ -159,13 +214,6 @@ main (int argc, char **argv)
 	  exit (1);
 	}
     }
-  session = gnome_master_client ();
-  gnome_client_set_restart_command (session, 2, restart_argv);
-  gnome_client_set_restart_style (session, GNOME_RESTART_IMMEDIATELY);
-  gnome_client_set_priority      (session, 5);
-
-
-  gconf_init (argc, argv, NULL); /* exits w/ message on failure */  
 
   /* We use GConfClient not GConfClient because a cache isn't useful
    * for us
@@ -210,10 +258,5 @@ main (int argc, char **argv)
   gnome_settings_background_load (client);
   gnome_settings_wm_load (client);
   
-  if (!terminated)
-    gtk_main ();
-  
-  xsettings_manager_destroy (manager);
-
-  return 0;
+  return G_OBJECT (daemon);
 }
