@@ -1,5 +1,23 @@
 2000-09-24  Bradford Hovinen  <hovinen@helixcode.com>
 
+	* capplets/new-ui-properties/preferences.c
+ 	(preferences_clone): Copy dialog_use_icons field
+
+	* capplets/new-ui-properties/prefs-widget-dialogs.c: Use standard
+	macro for dialog_icons
+
+	* capplets/new-ui-properties/prefs-widget.h
+ 	(struct _widget_desc_t): Remove field prefs_offset
+
+	* capplets/new-ui-properties/preferences.c
+ 	(preferences_get_dialog_icons): 
+	(preferences_set_dialog_icons): Implement
+
+	* capplets/new-ui-properties/prefs-widget.c (read_preferences): 
+	(register_callbacks): 
+	(toggled_cb): 
+	(selected_cb): Remove support for direct struct offset manipulation
+
 	* capplets/Makefile.am (always_built_SUBDIRS): Change
 	ui-properties to new-ui-properties
 

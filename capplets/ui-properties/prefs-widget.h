@@ -42,7 +42,6 @@ struct _widget_desc_t
 	char                *name;
 	gint               (*get_func) (Preferences *);
 	void               (*set_func) (Preferences *, gint);
-	gint                 prefs_offset;
 };
 
 typedef struct _widget_desc_t widget_desc_t;
@@ -50,15 +49,13 @@ typedef struct _widget_desc_t widget_desc_t;
 #define WD_CHECK(name, namestr) \
      { WDTYPE_CHECK, namestr "_toggle", \
 	(gint (*) (Preferences *)) preferences_get_##name, \
-	(void (*) (Preferences *, gint)) preferences_set_##name, \
-	 0}
+	(void (*) (Preferences *, gint)) preferences_set_##name }
 #define WD_OPTION(name, namestr) \
      { WDTYPE_OPTION, namestr "_select", \
 	(gint (*) (Preferences *)) preferences_get_##name, \
-	(void (*) (Preferences *, gint)) preferences_set_##name, \
-	 0}
+	(void (*) (Preferences *, gint)) preferences_set_##name }
 #define WD_END \
-     { WDTYPE_NONE, NULL, NULL, NULL, 0 }
+     { WDTYPE_NONE, NULL, NULL, NULL }
 
 /* Preferences widget class proper */
 

@@ -31,9 +31,6 @@
 
 #define WID(str) (glade_xml_get_widget (prefs_widget->dialog_data, str))
 
-#define VALUE_AT_OFFSET(st, offset) \
-     (*((int *) (((char *) st) + offset)))
-
 enum {
 	ARG_0,
 	ARG_PREFERENCES,
@@ -246,7 +243,7 @@ static void
 read_preferences (PrefsWidget *prefs_widget, Preferences *prefs) 
 {
 	widget_desc_t *widget_desc;
-	int i, value;
+	int i;
 
 	g_return_if_fail (prefs_widget != NULL);
 	g_return_if_fail (IS_PREFS_WIDGET (prefs_widget));
@@ -261,27 +258,21 @@ read_preferences (PrefsWidget *prefs_widget, Preferences *prefs)
 
 	for (i = 0; widget_desc[i].type != WDTYPE_NONE; i++) {
 		g_return_if_fail (widget_desc[i].name != NULL);
-
-		if (widget_desc[i].get_func)
-			value = widget_desc[i].get_func (prefs);
-		else if (widget_desc[i].prefs_offset)
-			value = VALUE_AT_OFFSET (prefs,
-						 widget_desc[i].prefs_offset);
-		else
-			continue;
+		g_return_if_fail (widget_desc[i].get_func != NULL);
+		g_return_if_fail (widget_desc[i].set_func != NULL);
 
 		switch (widget_desc[i].type) {
 		case WDTYPE_CHECK:
 			gtk_toggle_button_set_active 
 				(GTK_TOGGLE_BUTTON (WID (widget_desc[i].name)),
-				 value);
+				 widget_desc[i].get_func (prefs));
 					 
 			break;
 
 		case WDTYPE_OPTION:
 			gtk_option_menu_set_history
 				(GTK_OPTION_MENU (WID (widget_desc[i].name)),
-				 value);
+				 widget_desc[i].get_func (prefs));
 			break;
 
 		case WDTYPE_NONE:
@@ -316,6 +307,8 @@ register_callbacks (PrefsWidget *prefs_widget, GladeXML *dialog_data)
 
 	for (i = 0; widget_desc[i].type != WDTYPE_NONE; i++) {
 		g_return_if_fail (widget_desc[i].name != NULL);
+		g_return_if_fail (widget_desc[i].get_func != NULL);
+		g_return_if_fail (widget_desc[i].set_func != NULL);
 
 		if (widget_desc[i].type == WDTYPE_OPTION) {
 			menu = glade_xml_get_widget (dialog_data,
@@ -388,13 +381,8 @@ toggled_cb (GtkToggleButton *tb, PrefsWidget *prefs_widget)
 	widget_desc = find_widget_desc_with_name (prefs_widget, widget_name);
 	g_return_if_fail (widget_desc != NULL);
 
-	if (widget_desc->set_func)
-		widget_desc->set_func (prefs_widget->prefs,
-				       gtk_toggle_button_get_active (tb));
-	else if (widget_desc->prefs_offset)
-		VALUE_AT_OFFSET (prefs_widget->prefs,
-				 widget_desc->prefs_offset) =
-			gtk_toggle_button_get_active (tb);
+	widget_desc->set_func (prefs_widget->prefs,
+			       gtk_toggle_button_get_active (tb));
 
 	preferences_changed (prefs_widget->prefs);
         capplet_widget_state_changed (CAPPLET_WIDGET (prefs_widget), TRUE);
@@ -418,11 +406,7 @@ selected_cb (GtkMenuItem *mi, PrefsWidget *prefs_widget)
 	widget_desc = find_widget_desc_with_name (prefs_widget, widget_name);
 	g_return_if_fail (widget_desc != NULL);
 
-	if (widget_desc->set_func)
-		widget_desc->set_func (prefs_widget->prefs, index);
-	else if (widget_desc->prefs_offset)
-		VALUE_AT_OFFSET (prefs_widget->prefs,
-				 widget_desc->prefs_offset) = index;
+	widget_desc->set_func (prefs_widget->prefs, index);
 
 	preferences_changed (prefs_widget->prefs);
         capplet_widget_state_changed (CAPPLET_WIDGET (prefs_widget), TRUE);

@@ -112,6 +112,7 @@ preferences_clone (Preferences *prefs)
 	new_prefs = PREFERENCES (object);
 	memcpy (new_prefs->gnome_prefs, prefs->gnome_prefs, 
 		sizeof (GnomePreferences));
+	new_prefs->dialog_use_icons = prefs->dialog_use_icons;
 
 	return object;
 }
@@ -623,6 +624,16 @@ preferences_get_mdi_tab_pos (Preferences *prefs)
 	return prefs->gnome_prefs->mdi_tab_pos;
 }
 
+int
+preferences_get_dialog_icons (Preferences *prefs)
+{
+	g_return_val_if_fail (prefs != NULL, 0);
+	g_return_val_if_fail (IS_PREFERENCES (prefs), 0);
+	g_return_val_if_fail (prefs->gnome_prefs != NULL, 0);
+
+	return prefs->dialog_use_icons;
+}
+
 void
 preferences_set_dialog_buttons_style (Preferences *prefs,
 				      GtkButtonBoxStyle style) 
@@ -852,4 +863,14 @@ preferences_set_mdi_tab_pos (Preferences *prefs, GtkPositionType type)
 	g_return_if_fail (prefs->gnome_prefs != NULL);
 
 	prefs->gnome_prefs->mdi_tab_pos = type;
+}
+
+void
+preferences_set_dialog_icons (Preferences *prefs, int s) 
+{
+	g_return_if_fail (prefs != NULL);
+	g_return_if_fail (IS_PREFERENCES (prefs));
+	g_return_if_fail (prefs->gnome_prefs != NULL);
+
+	prefs->dialog_use_icons = s;
 }

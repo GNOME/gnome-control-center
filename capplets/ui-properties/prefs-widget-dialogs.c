@@ -37,8 +37,7 @@ static widget_desc_t widget_desc[] = {
 	WD_OPTION (dialog_position, "dialog_position"),
 	WD_OPTION (dialog_type, "dialog_type"),
 	WD_CHECK (dialog_centered, "dialog_centered"),
-	{ WDTYPE_CHECK, "dialog_icons_toggle", NULL, NULL,
-	  GTK_STRUCT_OFFSET (Preferences, dialog_use_icons) },
+	WD_CHECK (dialog_icons, "dialog_icons"),
 	WD_END
 };
 

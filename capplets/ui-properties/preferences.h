@@ -95,6 +95,7 @@ GtkWindowType preferences_get_dialog_type              (Preferences *prefs);
 GtkWindowPosition preferences_get_dialog_position      (Preferences *prefs);
 GnomeMDIMode preferences_get_mdi_mode                  (Preferences *prefs);
 GtkPositionType preferences_get_mdi_tab_pos            (Preferences *prefs);
+int preferences_get_dialog_icons                       (Preferences *prefs);
 
 void preferences_set_dialog_buttons_style          (Preferences *prefs,
 						    GtkButtonBoxStyle);
@@ -124,5 +125,6 @@ void preferences_set_mdi_mode                      (Preferences *prefs,
 						    GnomeMDIMode);
 void preferences_set_mdi_tab_pos                   (Preferences *prefs,
 						    GtkPositionType);
+void preferences_set_dialog_icons                  (Preferences *prefs, int);
 
 #endif /* __PREFERENCES_H */
