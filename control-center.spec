@@ -1,6 +1,6 @@
 # Note that this is NOT a relocatable package
-%define ver      0.99.0
-%define rel      1
+%define ver      0.99.3
+%define rel      SNAP
 %define prefix   /usr
 
 Summary: GNOME control center
@@ -65,7 +65,7 @@ make prefix=$RPM_BUILD_ROOT%{prefix} install
 %doc AUTHORS COPYING ChangeLog NEWS README
 %{prefix}/bin/*
 %{prefix}/lib/lib*.so.*
-%{prefix}/share/control-center/*
+%{prefix}/share/control-center
 %{prefix}/share/locale/*/*/*
 
 %files devel
