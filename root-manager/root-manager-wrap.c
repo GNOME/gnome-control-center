@@ -348,7 +348,7 @@ userhelper_parse_childout(char* outline)
 			}
 		}
 #ifdef DEBUG_USERHELPER
-		g_print("(%d) \"%s\"\n", prompt_type, prompt);
+		fprintf (stderr, "(%d) \"%s\"\n", prompt_type, prompt);
 #endif
 
 		msg->type = prompt_type;
@@ -383,7 +383,7 @@ userhelper_parse_childout(char* outline)
 			resp->responses++;
 			resp->rows++;
 #ifdef DEBUG_USERHELPER
-			g_print(_("Need %d responses.\n"), resp->responses);
+			fprintf (stderr, _("Need %d responses.\n"), resp->responses);
 #endif
 			break;
 
@@ -436,7 +436,7 @@ userhelper_parse_childout(char* outline)
 		case UH_EXPECT_RESP:
 			g_free(msg); /* useless */
 			if (resp->responses != atoi(prompt)) {
-				g_print(_("You want %d response(s) from %d entry fields!?!?!\n"),
+				fprintf (stderr, _("You want %d response(s) from %d entry fields!?!?!\n"),
 					atoi(prompt), resp->responses);
 				exit (1);
 			}

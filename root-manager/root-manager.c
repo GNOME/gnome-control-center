@@ -442,13 +442,13 @@ int main(int argc, char *argv[])
     }
 
     if (argc < 2) {
-	    fprintf(stderr, _("Usage: root-helper fd"));
+	    fprintf(stderr, _("Usage: root-helper fd\n"));
 	    exit(ERR_INVALID_CALL);
     }
 
     fd = atoi (argv[1]);
     if (fd <= STDERR_FILENO) {
-	    fprintf (stderr, _("Usage: root-helper fd"));
+	    fprintf (stderr, _("Usage: root-helper fd\n"));
 	    exit(ERR_INVALID_CALL);
     }
     
