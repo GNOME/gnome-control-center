@@ -441,19 +441,25 @@ create_dialog (ApplierSet *set)
 	return dialog;
 }
 
-/* Callback issued when a button is clicked on the dialog */
 
 static void
-dialog_button_clicked_cb (GtkDialog *dialog, gint response_id, GConfChangeSet *changeset) 
+cb_dialog_response (GtkDialog *dialog, gint response_id)
 {
-	switch (response_id) {
-	case GTK_RESPONSE_CLOSE:
-	case GTK_RESPONSE_DELETE_EVENT:
-		gtk_main_quit ();
-		break;
-	}
-}
+	if (response_id == GTK_RESPONSE_HELP) {
+		GError *error = NULL;
 
+		/* TODO : get this written */
+		gnome_help_display_desktop (NULL,
+			"control-center-manual",
+			"config-background.xml",
+			"CONFIGURATION", &error);
+		if (error) {
+			g_warning ("help error: %s\n", error->message);
+			g_error_free (error);
+		}
+	} else
+		gtk_main_quit ();
+}
 /* Callback issued during drag movements */
 
 static gboolean
@@ -561,7 +567,9 @@ main (int argc, char **argv)
 		gtk_window_set_icon (GTK_WINDOW(dialog_win), pixbuf);
 		gdk_pixbuf_unref (pixbuf);
 
-		g_signal_connect (G_OBJECT (dialog_win), "response", (GCallback) dialog_button_clicked_cb, NULL);
+		g_signal_connect (G_OBJECT (dialog_win),
+				    "response",
+				    G_CALLBACK (cb_dialog_response), NULL);
 
 		gtk_drag_dest_set (dialog_win, GTK_DEST_DEFAULT_ALL,
 				   drop_types, n_drop_types,
