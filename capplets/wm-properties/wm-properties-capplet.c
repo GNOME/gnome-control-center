@@ -502,6 +502,22 @@ restart_failure (WMResult reason)
         }
 }
 
+static void
+show_restart_info (void)
+{
+        GtkWidget *dialog = gnome_message_box_new (
+          _("Your current window manager has been changed. In order for\n"
+            "this change to be saved, you will need to save your current\n"
+            "session. This can be done either selecting \"Save Current Session\"\n"
+            "under \"Settings\" in the main menu, or by turning on\n"
+            "\"Save Current Setup\" when you log out.\n"),
+                GNOME_MESSAGE_BOX_INFO, "OK", NULL);
+
+        gtk_window_set_title (GTK_WINDOW (dialog), "Window Manager");
+        
+        gnome_dialog_run (GNOME_DIALOG (dialog));
+}
+
 static void 
 restart_finish (void)
 {
@@ -510,6 +526,8 @@ restart_finish (void)
         case STATE_REVERT:
         case STATE_OK:
         case STATE_CANCEL:
+                hide_restart_dialog();
+                show_restart_info();
                 restart_finalize();
                 break;
 
