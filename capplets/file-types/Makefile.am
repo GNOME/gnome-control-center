@@ -19,7 +19,8 @@ nautilus_mime_type_capplet_LDADD =\
 			$(CAPPLET_LIBS) \
 			$(ORBIT_LIBS) \
 			$(INTLLIBS) \
-			$(top_builddir)/libgnomevfs/libgnomevfs.la
+			$(top_builddir)/libgnomevfs/libgnomevfs.la \
+			$(libdir)/libgdk_pixbuf.so
 
 
 sysdir = $(datadir)/control-center

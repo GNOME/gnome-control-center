@@ -27,7 +27,7 @@
 
 void 	    nautilus_mime_type_capplet_update_info 		   (const char *mime_type);
 void 	    nautilus_mime_type_capplet_update_application_info 	   (const char *mime_type);
-void 	    nautilus_mime_type_capplet_update_component_info   	   (const char *mime_type);
+void 	    nautilus_mime_type_capplet_update_viewer_info   	   (const char *mime_type);
 void 	    nautilus_mime_type_capplet_add_extension 		   (const char *extension);
 const char *nautilus_mime_type_capplet_get_selected_item_mime_type (void);
 

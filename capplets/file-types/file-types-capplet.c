@@ -33,6 +33,7 @@
 #include <sys/types.h>
 
 #include <capplet-widget.h>
+#include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gnome.h>
 #include <gtk/gtk.h>
 #include <libgnomevfs/gnome-vfs-mime-handlers.h>
@@ -45,13 +46,18 @@
 
 /* Local Prototypes */
 static void	 init_mime_capplet 	  	(void);
-static void 	 populate_application_menu 	(GtkWidget 	*menu, 	 const char *mime_string);
-static void 	 populate_component_menu	(GtkWidget 	*menu, 	 const char *mime_string);
-static void	 delete_mime_clicked       	(GtkWidget 	*widget, gpointer   data);
-static void	 add_mime_clicked 	  	(GtkWidget 	*widget, gpointer   data);
-static void	 edit_applications_clicked 	(GtkWidget 	*widget, gpointer   data);
-static void	 edit_components_clicked   	(GtkWidget 	*widget, gpointer   data);
+static void 	 populate_application_menu 	(GtkWidget 	*menu, 	 
+						 const char 	*mime_string);
+static void 	 populate_viewer_menu		(GtkWidget 	*menu, 	 
+						 const char 	*mime_string);
+static void	 delete_mime_clicked       	(GtkWidget 	*widget, 
+						 gpointer   	data);
+static void	 add_mime_clicked 	  	(GtkWidget 	*widget, 
+						 gpointer   	data);
+static void	 edit_default_clicked 		(GtkWidget 	*widget, 	
+						 gpointer   	data);
 static GtkWidget *create_mime_list_and_scroller (void);
+static char 	 *pixmap_file 			(const char 	*partial_path);
 
 
 static void 	ok_callback 		  	(void);
@@ -62,8 +68,10 @@ GtkWidget *remove_button = NULL;
 GtkWidget *add_button = NULL;
 GtkWidget *info_frame = NULL;
 GtkWidget *icon_entry, *extension_list, *mime_list;
-GtkWidget *application_menu, *component_menu;
-GtkWidget *none_button, *application_button, *component_button;
+GtkWidget *default_menu;
+GtkWidget *application_button, *viewer_button;
+GtkLabel  *icon_entry_label;
+GtkWidget *description_entry, *mime_label;
 
 /*
  *  main
@@ -93,18 +101,6 @@ main (int argc, char **argv)
         return 0;
 }
 
-static GtkWidget *
-left_aligned_button (gchar *label)
-{
-  GtkWidget *button = gtk_button_new_with_label (label);
-  gtk_misc_set_alignment (GTK_MISC (GTK_BIN (button)->child),
-			  0.0, 0.5);
-  gtk_misc_set_padding (GTK_MISC (GTK_BIN (button)->child),
-			GNOME_PAD_SMALL, 0);
-  
-  return button;
-}
-
 static void
 ok_callback ()
 {
@@ -124,7 +120,7 @@ populate_extension_list (const char *mime_type, GtkCList *list)
 	/* Clear out old items */
 	gtk_clist_clear (list);
 
-	extensions = gnome_vfs_mime_get_extensions (mime_type);
+	extensions = gnome_vfs_mime_get_extensions_list (mime_type);
 	if (extensions == NULL) {
 		return;
 	}
@@ -133,8 +129,9 @@ populate_extension_list (const char *mime_type, GtkCList *list)
 		extension[0] = (char *)element->data;
 		if (strlen (element->data) > 0) {
 			row = gtk_clist_append (list, extension);
+			
 			/* Set to deletable */
-			gtk_clist_set_row_data (list, row, GINT_TO_POINTER (TRUE));
+			gtk_clist_set_row_data (list, row, GINT_TO_POINTER (FALSE));
 		}
 	}
 
@@ -237,8 +234,9 @@ extension_list_selected (GtkWidget *clist, gint row, gint column, gpointer data)
 static void
 extension_list_deselected (GtkWidget *clist, gint row, gint column, gpointer data)
 {
-        if (g_list_length (GTK_CLIST (clist)->selection) == 0)
+        if (g_list_length (GTK_CLIST (clist)->selection) == 0) {
 	        gtk_widget_set_sensitive (remove_button, FALSE);
+	}
 }
 
 static void
@@ -258,48 +256,64 @@ mime_list_selected_row_callback (GtkWidget *widget, gint row, gint column, GdkEv
 }
 
 static void
-none_button_toggled (GtkToggleButton *button, gpointer user_data)
-{
-	if (gtk_toggle_button_get_active (button)) {
-		gnome_vfs_mime_set_default_action_type (nautilus_mime_type_capplet_get_selected_item_mime_type (), 
-					GNOME_VFS_MIME_ACTION_TYPE_NONE);
-	}
-}
-
-static void
 application_button_toggled (GtkToggleButton *button, gpointer user_data)
 {
+	const char *mime_type;
+	
 	if (gtk_toggle_button_get_active (button)) {
-		gnome_vfs_mime_set_default_action_type (nautilus_mime_type_capplet_get_selected_item_mime_type (), 
-					GNOME_VFS_MIME_ACTION_TYPE_APPLICATION);
+
+		mime_type = nautilus_mime_type_capplet_get_selected_item_mime_type ();
+		
+		gnome_vfs_mime_set_default_action_type (mime_type, GNOME_VFS_MIME_ACTION_TYPE_APPLICATION);
+
+		/* Populate menu with application items */
+		populate_application_menu (default_menu, mime_type);						
 	}
 }
 
 static void
-component_button_toggled (GtkToggleButton *button, gpointer user_data)
+viewer_button_toggled (GtkToggleButton *button, gpointer user_data)
 {
+	const char *mime_type;
+	
 	if (gtk_toggle_button_get_active (button)) {
-		gnome_vfs_mime_set_default_action_type (nautilus_mime_type_capplet_get_selected_item_mime_type (), 
-					GNOME_VFS_MIME_ACTION_TYPE_COMPONENT);
+		mime_type = nautilus_mime_type_capplet_get_selected_item_mime_type ();
+
+		gnome_vfs_mime_set_default_action_type (mime_type, GNOME_VFS_MIME_ACTION_TYPE_COMPONENT);
+
+		/* Populate menu with viewer items */
+		populate_viewer_menu (default_menu, mime_type);
 	}
 }
 
+static void 
+icon_changed (GtkWidget *entry, gpointer user_data)
+{
+	gchar *filename;
+	
+	filename = gnome_icon_entry_get_filename (GNOME_ICON_ENTRY (icon_entry));
+
+	if (filename != NULL) {
+		g_message ("%s", filename);
+	} else {
+		g_message ("No filename");
+		g_free (filename);
+	}
+}
 
 static void
 init_mime_capplet (void)
 {
 	GtkWidget *main_vbox;
-        GtkWidget *vbox, *hbox, *frame_vbox;
+        GtkWidget *vbox, *hbox;
         GtkWidget *button;
-        GtkWidget *label;
-        GtkWidget *icon_entry;
         GtkWidget *mime_list_container;
         GtkWidget *extension_scroller;
-        GtkWidget *action_frame;
-        GtkWidget *table;
+        GtkWidget *frame;
+        GtkWidget *alignment;
+        GtkWidget *table, *extensions_table;
+	GList     *children;
 	
-        gchar *title[2] = {"Extensions"};
-        
 	capplet = capplet_widget_new ();
 
 	/* Main vertical box */                    
@@ -321,42 +335,105 @@ init_mime_capplet (void)
         gtk_box_pack_start (GTK_BOX (main_vbox), info_frame, FALSE, FALSE, 0);
 
 	/* Create table */
-	table = gtk_table_new (4, 4, FALSE);
+	table = gtk_table_new (2, 2, FALSE);
 	gtk_container_add (GTK_CONTAINER (info_frame), table);	
 	gtk_table_set_row_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
 	gtk_table_set_col_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
 	
- 	/* Create label, menu and edit button for default applications */
-	label = gtk_label_new (_("Default Application:"));
-	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-	gtk_table_attach_defaults ( GTK_TABLE (table), label, 0, 1, 0, 1);
+	/* Set up top left area.  This contains the icon display, mime description,
+	   mime type label and change icon button */
+	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
+	gtk_table_attach_defaults ( GTK_TABLE (table), hbox, 0, 1, 0, 1);
+	vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
+	gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 0);
+
+	icon_entry = gnome_icon_entry_new ("mime_icon_entry", NULL);
+	children = gtk_container_children (GTK_CONTAINER (GNOME_ICON_ENTRY (icon_entry)->pickbutton));
+	icon_entry_label = GTK_LABEL (children->data);
+	gtk_label_set_text (icon_entry_label, NULL);
+	gtk_signal_connect (GTK_OBJECT (gnome_icon_entry_gtk_entry (GNOME_ICON_ENTRY (icon_entry))),
+			    "changed", icon_changed, NULL);
+	gtk_box_pack_start (GTK_BOX (vbox), icon_entry, FALSE, FALSE, 0);
 	
-	application_menu = gtk_option_menu_new();
-	gtk_table_attach_defaults ( GTK_TABLE (table), application_menu, 1, 2, 0, 1);
+	button = gtk_button_new_with_label (_("Change Icon"));
+	gtk_signal_connect (GTK_OBJECT (button), "clicked", icon_changed, NULL);
+	gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
 
-        button = left_aligned_button (_("Edit List"));
-        gtk_table_attach_defaults ( GTK_TABLE (table), button, 2, 3, 0, 1);
-	gtk_signal_connect (GTK_OBJECT (button), "clicked", edit_applications_clicked, mime_list);
+	vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
+	gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 0);
+
+	description_entry = gtk_entry_new ();
+	alignment = gtk_alignment_new (0, 0, 0, 0);
+	gtk_box_pack_start (GTK_BOX (vbox), alignment, FALSE, FALSE, 0);	
+	gtk_container_add (GTK_CONTAINER (alignment), description_entry);
 	
-	/* Create label, menu and edit button for default components */
-	label = gtk_label_new (_("Default Viewer:"));
-	gtk_table_attach_defaults ( GTK_TABLE (table), label, 0, 1, 1, 2);
+	mime_label = gtk_label_new (_("Mime Type"));
+	alignment = gtk_alignment_new (0, 0, 0, 0);
+	gtk_box_pack_start (GTK_BOX (vbox), alignment, FALSE, FALSE, 0);
+	gtk_container_add (GTK_CONTAINER (alignment), mime_label);
 
-	component_menu = gtk_option_menu_new();
-	gtk_table_attach_defaults ( GTK_TABLE (table), component_menu, 1, 2, 1, 2);
+	/* Set up bottom left area.  This contains two buttons to add
+	   and delete mime types */
+	vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
+	gtk_table_attach_defaults ( GTK_TABLE (table), vbox, 0, 1, 1, 2);
 
-        button = left_aligned_button (_("Edit List"));
-	gtk_table_attach_defaults ( GTK_TABLE (table), button, 2, 3, 1, 2);
-	gtk_signal_connect (GTK_OBJECT (button), "clicked", edit_components_clicked, mime_list);
+	alignment = gtk_alignment_new (0, 0.5, 0, 0);
+	gtk_box_pack_start (GTK_BOX (vbox), alignment, FALSE, FALSE, 0);
+	
+	button = gtk_button_new_with_label (_("Add new Mime type..."));
+	gtk_signal_connect (GTK_OBJECT (button), "clicked", add_mime_clicked, NULL);
+	gtk_container_add (GTK_CONTAINER (alignment), button);
 
-	/* Add icon box */
-	icon_entry = gnome_icon_entry_new ("mime_icon_entry", _("Select an icon..."));
-	/*gtk_signal_connect (GTK_OBJECT (gnome_icon_entry_gtk_entry (GNOME_ICON_ENTRY (icon_entry))),
-			    "changed", icon_changed, NULL);*/
-	gtk_table_attach_defaults ( GTK_TABLE (table), icon_entry, 0, 1, 2, 4);
+	alignment = gtk_alignment_new (0, 0, 0, 0);
+	gtk_box_pack_start (GTK_BOX (vbox), alignment, FALSE, FALSE, 0);
 
-	/* Add extension list and buttons */
-	extension_list = gtk_clist_new_with_titles (1, title);
+	button = gtk_button_new_with_label (_("Delete this Mime type..."));
+	gtk_container_add (GTK_CONTAINER (alignment), button);
+	gtk_signal_connect (GTK_OBJECT (delete_button), "clicked", delete_mime_clicked, NULL);
+
+	/* Set up top right area. */
+	frame = gtk_frame_new ("Default Action:");
+	gtk_table_attach_defaults ( GTK_TABLE (table), frame, 1, 2, 0, 1);
+	
+	vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
+	gtk_container_add (GTK_CONTAINER (frame), vbox);
+
+	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
+	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+
+	viewer_button = gtk_radio_button_new_with_label (NULL, _("Use Viewer"));
+	gtk_box_pack_start (GTK_BOX (hbox), viewer_button, FALSE, FALSE, 0);
+	gtk_signal_connect (GTK_OBJECT (viewer_button), "toggled",
+			    GTK_SIGNAL_FUNC (viewer_button_toggled), NULL);
+
+	application_button = gtk_radio_button_new_with_label_from_widget ( 
+		           GTK_RADIO_BUTTON (viewer_button), _("Open With Application"));
+	gtk_box_pack_start (GTK_BOX (hbox), application_button, FALSE, FALSE, 0);
+	gtk_signal_connect (GTK_OBJECT (application_button), "toggled",
+			    GTK_SIGNAL_FUNC (application_button_toggled), NULL);
+
+	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
+	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+
+	default_menu = gtk_option_menu_new();
+	gtk_widget_set_usize (GTK_WIDGET (default_menu), 170, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), default_menu, FALSE, FALSE, 0);
+
+        button = gtk_button_new_with_label (_("Edit List"));
+        gtk_widget_set_usize (GTK_WIDGET (button), 70, 0);
+        gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+	gtk_signal_connect (GTK_OBJECT (button), "clicked", edit_default_clicked, mime_list);
+
+	/* Set up bottom right area. */
+	frame = gtk_frame_new ("Extensions:");
+	gtk_table_attach_defaults ( GTK_TABLE (table), frame, 1, 2, 1, 2);
+
+	extensions_table = gtk_table_new (2, 2, FALSE);
+	gtk_container_add (GTK_CONTAINER (frame), extensions_table);	
+	gtk_table_set_row_spacings (GTK_TABLE (extensions_table), 10);
+	gtk_table_set_col_spacings (GTK_TABLE (extensions_table), 10);
+
+	extension_list = gtk_clist_new (1);
 	gtk_clist_column_titles_passive (GTK_CLIST (extension_list));
 	gtk_clist_set_auto_sort (GTK_CLIST (extension_list), TRUE);
 	gtk_clist_set_selection_mode (GTK_CLIST (extension_list), GTK_SELECTION_BROWSE);
@@ -364,19 +441,17 @@ init_mime_capplet (void)
 
 	extension_scroller = gtk_scrolled_window_new (NULL, NULL);
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (extension_scroller),
-					GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+					GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
 	gtk_container_add (GTK_CONTAINER (extension_scroller), extension_list);
 
 	gtk_widget_set_usize (extension_scroller, 150, 60);
-	gtk_table_attach_defaults ( GTK_TABLE (table), extension_scroller, 1, 2, 2, 4);
+	gtk_table_attach_defaults ( GTK_TABLE (extensions_table), extension_scroller, 0, 1, 0, 2);
 
-        add_button = gtk_button_new_with_label (_("Add"));
-	gtk_widget_set_sensitive (add_button, TRUE);
-	gtk_table_attach_defaults ( GTK_TABLE (table), add_button, 2, 3, 2, 3);
+        add_button = gtk_button_new_with_label (_("Add"));	
+	gtk_table_attach_defaults ( GTK_TABLE (extensions_table), add_button, 1, 2, 0, 1);
 
-        remove_button = gtk_button_new_with_label (_("Remove"));
-	gtk_widget_set_sensitive (remove_button, FALSE);
-	gtk_table_attach_defaults ( GTK_TABLE (table), remove_button, 2, 3, 3, 4);
+        remove_button = gtk_button_new_with_label (_("Remove"));	
+	gtk_table_attach_defaults ( GTK_TABLE (extensions_table), remove_button, 1, 2, 1, 2);
 
 	gtk_signal_connect (GTK_OBJECT (remove_button), "clicked",
 			    GTK_SIGNAL_FUNC (remove_extension_clicked), NULL);
@@ -387,41 +462,11 @@ init_mime_capplet (void)
 	gtk_signal_connect (GTK_OBJECT (extension_list), "unselect-row",
 			    GTK_SIGNAL_FUNC (extension_list_deselected), NULL);
 
-	/* Default Action frame */
-	action_frame = gtk_frame_new (_("Default Action"));
-	gtk_table_attach_defaults ( GTK_TABLE (table), action_frame, 3, 4, 0, 4);
 
-	frame_vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
-	gtk_container_add (GTK_CONTAINER (action_frame), frame_vbox);
-
-	none_button = gtk_radio_button_new_with_label (NULL, _("No Default"));
-	gtk_box_pack_start (GTK_BOX (frame_vbox), none_button, FALSE, FALSE, 0);
-	gtk_signal_connect (GTK_OBJECT (none_button), "toggled",
-			    GTK_SIGNAL_FUNC (none_button_toggled), NULL);
-
-	application_button = gtk_radio_button_new_with_label_from_widget ( 
-		           GTK_RADIO_BUTTON (none_button), _("Use Application"));
-	gtk_box_pack_start (GTK_BOX (frame_vbox), application_button, FALSE, FALSE, 0);
-	gtk_signal_connect (GTK_OBJECT (application_button), "toggled",
-			    GTK_SIGNAL_FUNC (application_button_toggled), NULL);
-
-	component_button = gtk_radio_button_new_with_label_from_widget ( 
-		           GTK_RADIO_BUTTON (application_button), _("Use Viewer"));
-	gtk_box_pack_start (GTK_BOX (frame_vbox), component_button, FALSE, FALSE, 0);
-	gtk_signal_connect (GTK_OBJECT (component_button), "toggled",
-			    GTK_SIGNAL_FUNC (component_button_toggled), NULL);
-
-	/* Mime list Add and Delete buttons */
-        button = left_aligned_button (_("Add..."));
-        gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
-	gtk_signal_connect (GTK_OBJECT (button), "clicked", add_mime_clicked, NULL);
-        
-	delete_button = left_aligned_button (_("Delete"));
-        gtk_signal_connect (GTK_OBJECT (delete_button), "clicked", delete_mime_clicked, NULL);
-        gtk_box_pack_start (GTK_BOX (vbox), delete_button, FALSE, FALSE, 0);
-
-	/* Set up enabled/disabled states of capplet buttons */
-
+	/* Set up enabled/disabled states of capplet buttons */	
+	gtk_widget_set_sensitive (add_button, TRUE);
+	gtk_widget_set_sensitive (remove_button, FALSE);
+	
 	/* Yes, show all widgets */
         gtk_widget_show_all (capplet);
 
@@ -449,43 +494,64 @@ void
 nautilus_mime_type_capplet_update_info (const char *mime_type) {
 
 	GnomeVFSMimeAction *action;
-
+	const char *icon_name, *description;
+	char *path;
+	
 	/* Update frame label with mime type */
 	gtk_frame_set_label (GTK_FRAME (info_frame), mime_type);
+
+	/* Update text items */
+	gtk_label_set_text (GTK_LABEL (mime_label), mime_type);
+
+	/* Add description to first column */
+	description = gnome_vfs_mime_description (mime_type);	
+	if (description != NULL && strlen (description) > 0) {
+		gtk_entry_set_text (GTK_ENTRY (description_entry), description);
+	} else {
+		gtk_entry_set_text (GTK_ENTRY (description_entry), "No Description");
+	}
+
+	gtk_editable_set_editable (GTK_EDITABLE (description_entry), FALSE);
 	
 	/* Update menus */
-	populate_application_menu (application_menu, mime_type);
-	populate_component_menu (component_menu, mime_type);
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (application_button))) {
+		populate_application_menu (default_menu, mime_type);						
+	} else {
+		populate_viewer_menu (default_menu, mime_type);						
+	}
 
-	/* Update extesnions list */
+	/* Update extensions list */
 	populate_extension_list (mime_type, GTK_CLIST (extension_list));
 
 	/* Set icon for mime type */
-	gnome_icon_entry_set_icon (GNOME_ICON_ENTRY (icon_entry),
-				   gnome_vfs_mime_get_value (mime_type, "icon-filename"));
+	icon_name = gnome_vfs_mime_get_value (mime_type, "icon-filename");
+	path = pixmap_file (icon_name);
+	gnome_icon_entry_set_icon (GNOME_ICON_ENTRY (icon_entry), path);
+	if (path != NULL) {
+		g_free (path);
+		g_message ("%s", gnome_icon_entry_get_filename (GNOME_ICON_ENTRY (icon_entry)));
+	} else {
+		gtk_label_set_text (icon_entry_label, NULL);		
+	}
 
 	/* Indicate default action */	
 	action = gnome_vfs_mime_get_default_action (mime_type);
 	if (action != NULL) {
 		switch (action->action_type) {
-			case GNOME_VFS_MIME_ACTION_TYPE_NONE:
-				gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (none_button), TRUE);
-				break;
-
 			case GNOME_VFS_MIME_ACTION_TYPE_APPLICATION:
 				gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (application_button), TRUE);
 				break;
 
 			case GNOME_VFS_MIME_ACTION_TYPE_COMPONENT:
-				gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (component_button), TRUE);
+				gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (viewer_button), TRUE);
 				break;
 				
 			default:
-				gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (none_button), TRUE);
+				gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (application_button), TRUE);
 				break;
 		}
 	} else {
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (none_button), TRUE);
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (application_button), TRUE);
 	}
 }
 
@@ -624,7 +690,7 @@ populate_application_menu (GtkWidget *application_menu, const char *mime_type)
 		}
 	}
 	
-	gtk_option_menu_set_menu (GTK_OPTION_MENU (application_menu), new_menu);
+	gtk_option_menu_set_menu (GTK_OPTION_MENU (default_menu), new_menu);
 }
 
 
@@ -646,7 +712,7 @@ component_menu_activated (GtkWidget *menu_item, gpointer data)
 }
 
 static void
-populate_component_menu (GtkWidget *component_menu, const char *mime_type)
+populate_viewer_menu (GtkWidget *component_menu, const char *mime_type)
 {
 	GtkWidget *new_menu;
 	GtkWidget *menu_item;
@@ -769,7 +835,7 @@ populate_component_menu (GtkWidget *component_menu, const char *mime_type)
 		}
 	}
 	
-	gtk_option_menu_set_menu (GTK_OPTION_MENU (component_menu), new_menu);
+	gtk_option_menu_set_menu (GTK_OPTION_MENU (default_menu), new_menu);
 }
 
 
@@ -804,37 +870,7 @@ add_mime_clicked (GtkWidget *widget, gpointer data)
 }
 
 static void
-edit_applications_clicked (GtkWidget *widget, gpointer data)
-{	
-	GtkWidget *list;
-	const char *mime_type;
-	GList *p;
-	GtkCListRow *row;
-
-	g_return_if_fail (GTK_IS_CLIST (data));
-
-	list = data;
-	row = NULL;
-
-	/* Get first selected row.  This will be the only selection for this list */
-	for (p = GTK_CLIST (list)->row_list; p != NULL; p = p->next) {
-		row = p->data;
-		if (row->state == GTK_STATE_SELECTED) {
-			break;
-		}
-	}
-
-	if (row == NULL) {
-		return;
-	}
-	
-	/* Show dialog */
-	mime_type = (const char *) row->data;
-	show_edit_applications_dialog (mime_type);
-}
-
-static void
-edit_components_clicked (GtkWidget *widget, gpointer data)
+edit_default_clicked (GtkWidget *widget, gpointer data)
 {
 	GtkWidget *list;
 	const char *mime_type;
@@ -860,7 +896,12 @@ edit_components_clicked (GtkWidget *widget, gpointer data)
 	
 	/* Show dialog */
 	mime_type = (const char *) row->data;
-	show_edit_components_dialog (mime_type);
+
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (application_button))) {
+		show_edit_applications_dialog (mime_type);
+	} else {
+		show_edit_components_dialog (mime_type);
+	}
 }
 
 /*
@@ -873,7 +914,7 @@ edit_components_clicked (GtkWidget *widget, gpointer data)
 void
 nautilus_mime_type_capplet_update_application_info (const char *mime_type)
 {
-	populate_application_menu (application_menu, mime_type);
+	populate_application_menu (default_menu, mime_type);
 }
 
 /*
@@ -884,41 +925,72 @@ nautilus_mime_type_capplet_update_application_info (const char *mime_type)
  */
  
 void
-nautilus_mime_type_capplet_update_component_info (const char *mime_type)
+nautilus_mime_type_capplet_update_viewer_info (const char *mime_type)
 {
-	populate_component_menu (component_menu, mime_type);
+	populate_viewer_menu (default_menu, mime_type);
 }
 
 
 static void
 insert_mime_vals_into_clist (GList *type_list, GtkCList *clist)
 {
-	static gchar *text[2];        
+	static gchar *text[3];        
 	const char *description;
+	char *extensions;
 	char *mime_string;
         gint row;
 	GList *element;
+	GdkPixbuf *pixbuf;
+	GdkPixmap *pixmap;
+	GdkBitmap *bitmap;
 	
 	for (element = type_list; element != NULL; element= element->next) {
 		mime_string = (char *)element->data;
 		
 		/* Make sure we do not include comments */
 		if (mime_string[0] != '#') {
-			/* Add mime type to first column */
-			text[0] = mime_string;
 
-			/* Add description to second column */
+			/* Add description to first column */
 			description = gnome_vfs_mime_description (mime_string);	
 			if (description != NULL && strlen (description) > 0) {
-				text[1] = g_strdup (description);
+				text[0] = g_strdup (description);
 			} else {
-				text[1] = g_strdup ("");
+				text[0] = g_strdup ("");
 			}
-			
-		        row = gtk_clist_insert (GTK_CLIST (clist), 1, text);
+
+			/* Add mime type to second column */
+			text[1] = mime_string;
+
+			/* Add extension to third columns */
+			extensions = gnome_vfs_mime_get_extensions_string (mime_string);
+			if (extensions != NULL) {
+				text[2] = extensions;
+			}
+
+			/* Add default action to fourth column */
+			text[3] = "Action";
+
+			/* Insert item into list */
+			row = gtk_clist_insert (GTK_CLIST (clist), 1, text);
 		        gtk_clist_set_row_data (GTK_CLIST (clist), row, g_strdup(mime_string));
 
-			g_free (text[1]);
+			/* Set column icons */
+			pixbuf = gdk_pixbuf_new_from_file ("/gnome/share/pixmaps/nautilus/eazel/i-regular-12.png");
+			if (pixbuf != NULL) {
+				gdk_pixbuf_render_pixmap_and_mask (pixbuf, &pixmap, &bitmap, 100);
+				gtk_clist_set_pixtext (clist, row, 0, text[0], 5, pixmap, bitmap);
+				gdk_pixbuf_unref (pixbuf);
+			}
+
+			pixbuf = gdk_pixbuf_new_from_file ("/gnome/share/pixmaps/nautilus/eazel/i-regular-12.png");
+			if (pixbuf != NULL) {
+				gdk_pixbuf_render_pixmap_and_mask (pixbuf, &pixmap, &bitmap, 100);
+				gtk_clist_set_pixtext (clist, row, 3, text[3], 5, pixmap, bitmap);
+				gdk_pixbuf_unref (pixbuf);
+			}
+			
+			g_free (text[0]);
+			g_free (extensions);
 		}
 	}
 }
@@ -927,18 +999,19 @@ static GtkWidget *
 create_mime_list_and_scroller (void)
 {
         GtkWidget *window;
-        gchar *titles[3];
+        gchar *titles[4];
 	GList *type_list;
-	
-        titles[0] = _("Mime Type");
-        titles[1] = _("Description");
-        titles[2] = _("Application");
+	        
+        titles[0] = _("Description");
+        titles[1] = _("Mime Type");
+        titles[2] = _("Extension");
+        titles[3] = _("Action");
         
         window = gtk_scrolled_window_new (NULL, NULL);
         gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (window),
                                         GTK_POLICY_AUTOMATIC,
                                         GTK_POLICY_AUTOMATIC);
-	mime_list = gtk_clist_new_with_titles (3, titles);
+	mime_list = gtk_clist_new_with_titles (4, titles);
         gtk_clist_set_selection_mode (GTK_CLIST (mime_list), GTK_SELECTION_BROWSE);
         gtk_clist_set_auto_sort (GTK_CLIST (mime_list), TRUE);
 
@@ -973,4 +1046,54 @@ nautilus_mime_type_capplet_get_selected_item_mime_type (void)
 	mime_type = (const char *) gtk_clist_get_row_data (clist, row);
 
 	return mime_type;
+}
+
+
+/**
+ * make_path:
+ * 
+ * Make a path name from a base path and name. The base path
+ * can end with or without a separator character.
+ *
+ * Return value: the combined path name.
+ **/
+static char * 
+make_path (const char *path, const char* name)
+{
+    	gboolean insert_separator;
+    	int path_length;
+	char *result;
+
+	path_length = strlen (path);
+    	insert_separator = path_length > 0 && 
+    			   name[0] != '\0' && 
+    			   path[path_length - 1] != G_DIR_SEPARATOR;
+
+    	if (insert_separator) {
+    		result = g_strconcat (path, G_DIR_SEPARATOR_S, name, NULL);
+    	} else {
+    		result = g_strconcat (path, name, NULL);
+    	}
+
+	return result;
+}
+
+static char *
+pixmap_file (const char *partial_path)
+{
+	char *path;
+
+	if (partial_path == NULL) {
+		return NULL;
+	}
+
+	/* FIXME: Where to get DATADIR? */
+	/*path = make_path (DATADIR "/pixmaps/nautilus", partial_path);*/
+	path = make_path ("/gnome/share/pixmaps/nautilus", partial_path);
+	if (g_file_exists (path)) {
+		return path;
+	} else {
+		g_free (path);
+		return NULL;
+	}
 }
