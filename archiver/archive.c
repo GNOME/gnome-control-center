@@ -356,15 +356,6 @@ archive_load (gboolean is_global)
 	return object;
 }
 
-static gint
-free_location_cb (gchar *locid, BonoboObject *location) 
-{
-	bonobo_object_unref (location);
-	g_free (locid);
-
-	return FALSE;
-}
-
 static void 
 archive_destroy (GtkObject *object) 
 {
@@ -376,11 +367,6 @@ archive_destroy (GtkObject *object)
 	DEBUG_MSG ("Enter");
 
 	archive = ARCHIVE (object);
-
-	g_tree_traverse (archive->locations, 
-			 (GTraverseFunc) free_location_cb,
-			 G_IN_ORDER,
-			 NULL);
 
 	g_tree_destroy (archive->locations);
 
