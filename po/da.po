@@ -21,8 +21,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-23 20:58+0100\n"
-"PO-Revision-Date: 2004-02-23 20:50+0100\n"
+"POT-Creation-Date: 2004-03-03 19:00+0100\n"
+"PO-Revision-Date: 2004-03-03 19:01+0100\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -491,39 +491,40 @@ msgstr "_Stil:"
 msgid "There was an error displaying help: %s"
 msgstr "Der opstod en fejl ved visningen af hjælp: %s"
 
-#: capplets/background/gnome-wp-capplet.c:171
-msgid "Add Wallpapers"
-msgstr "Tilføj baggrunde"
-
-#: capplets/background/gnome-wp-capplet.c:1265
+#: capplets/background/gnome-wp-capplet.c:1269
 msgid "Centered"
 msgstr "Centreret"
 
-#: capplets/background/gnome-wp-capplet.c:1287
+#: capplets/background/gnome-wp-capplet.c:1291
 msgid "Fill Screen"
 msgstr "Udfyld skærm"
 
-#: capplets/background/gnome-wp-capplet.c:1307
+#: capplets/background/gnome-wp-capplet.c:1311
 msgid "Scaled"
 msgstr "Skaleret"
 
-#: capplets/background/gnome-wp-capplet.c:1327
+#: capplets/background/gnome-wp-capplet.c:1331
 msgid "Tiled"
 msgstr "Side-om-side"
 
-#: capplets/background/gnome-wp-capplet.c:1359
+#: capplets/background/gnome-wp-capplet.c:1363
 msgid "Solid Color"
 msgstr "Ensfarvet"
 
-#: capplets/background/gnome-wp-capplet.c:1375
+#: capplets/background/gnome-wp-capplet.c:1379
 msgid "Horizontal Gradient"
 msgstr "Vandret farveovergang"
 
-#: capplets/background/gnome-wp-capplet.c:1391
+#: capplets/background/gnome-wp-capplet.c:1395
 msgid "Vertical Gradient"
 msgstr "Lodret farveovergang"
 
-#: capplets/background/gnome-wp-info.c:46
+#: capplets/background/gnome-wp-capplet.c:1432
+#: capplets/background/gnome-wp-capplet.c:1443
+msgid "Add Wallpapers"
+msgstr "Tilføj baggrunde"
+
+#: capplets/background/gnome-wp-info.c:49
 msgid "No Wallpaper"
 msgstr "Ingen baggrund"
 
@@ -1101,42 +1102,42 @@ msgstr "Skift skærmopløsning"
 msgid "Screen Resolution"
 msgstr "Skærmopløsning"
 
-#: capplets/display/main.c:274
+#: capplets/display/main.c:279
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: capplets/display/main.c:377
+#: capplets/display/main.c:382
 msgid "_Resolution:"
 msgstr "_Opløsning:"
 
-#: capplets/display/main.c:396
+#: capplets/display/main.c:401
 msgid "Re_fresh rate:"
 msgstr "Optegnings_frekvens:"
 
-#: capplets/display/main.c:417
+#: capplets/display/main.c:422
 msgid "Default Settings"
 msgstr "Forvalgte indstillinger"
 
-#: capplets/display/main.c:419
+#: capplets/display/main.c:424
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "Indstillinger for skærm %d\n"
 
-#: capplets/display/main.c:445
+#: capplets/display/main.c:450
 msgid "Screen Resolution Preferences"
 msgstr "Indstillinger for skærmopløsning"
 
-#: capplets/display/main.c:482
+#: capplets/display/main.c:487
 #, c-format
 msgid "_Make default for this computer (%s) only"
 msgstr "Gør til forvalg for denne _maskine (%s) kun"
 
-#: capplets/display/main.c:500
+#: capplets/display/main.c:505
 msgid "Options"
 msgstr "Indstillinger"
 
-#: capplets/display/main.c:521
+#: capplets/display/main.c:526
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
@@ -1151,19 +1152,19 @@ msgstr[1] ""
 "Tester de nye indstillinger. Hvis du ikke svarer inden for %d sekunder, vil "
 "de foregående indstillinger blive gendannet."
 
-#: capplets/display/main.c:570
+#: capplets/display/main.c:575
 msgid "Do you want to keep this resolution?"
 msgstr "Vil du beholde denne opløsning?"
 
-#: capplets/display/main.c:595
+#: capplets/display/main.c:600
 msgid "Use _previous resolution"
 msgstr "Benyt _foregående opløsning"
 
-#: capplets/display/main.c:595
+#: capplets/display/main.c:600
 msgid "_Keep resolution"
 msgstr "_Behold opløsning"
 
-#: capplets/display/main.c:746
+#: capplets/display/main.c:749
 msgid ""
 "The XServer does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
@@ -1171,7 +1172,7 @@ msgstr ""
 "X-serveren understøtter ikke XRandR-udvidelsen. Skift af opløsning under "
 "kørsel er ikke muligt."
 
-#: capplets/display/main.c:754
+#: capplets/display/main.c:757
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
@@ -2277,7 +2278,7 @@ msgid "Two"
 msgstr "To"
 
 #: capplets/theme-switcher/gnome-theme-details.c:372
-#: capplets/theme-switcher/gnome-theme-manager.c:609
+#: capplets/theme-switcher/gnome-theme-manager.c:600
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -2304,25 +2305,17 @@ msgstr ""
 "%s er den sti hvor temafilerne vil blive installeret. Dette kan ikke vælges "
 "som kildeplaceringen"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:301
-msgid ""
-"The gnome-theme-manager does not know how to change the themes on the "
-"current window manager."
-msgstr ""
-"Temahåndtering ved ikke hvordan temaerne for den aktuelle vindueshåndtering "
-"skiftes."
-
-#: capplets/theme-switcher/gnome-theme-manager.c:665
-#: capplets/theme-switcher/gnome-theme-manager.c:725
+#: capplets/theme-switcher/gnome-theme-manager.c:656
+#: capplets/theme-switcher/gnome-theme-manager.c:716
 msgid "Custom theme"
 msgstr "Brugerdefineret tema"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:665
-#: capplets/theme-switcher/gnome-theme-manager.c:725
+#: capplets/theme-switcher/gnome-theme-manager.c:656
+#: capplets/theme-switcher/gnome-theme-manager.c:716
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "Du kan gemme dette tema ved at trykke på 'Gem tema'-knappen."
 
-#: capplets/theme-switcher/gnome-theme-manager.c:1418
+#: capplets/theme-switcher/gnome-theme-manager.c:1409
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -2778,7 +2771,7 @@ msgstr ""
 "Fejl ved forsøg på kørsel af %s\n"
 "som er kædet til nøglen %s"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:61
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:65
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2803,7 +2796,7 @@ msgstr ""
 "- Data fra <b>xprop -root | grep XKB</b>\n"
 "- Data fra <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b>"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:71
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:75
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2813,6 +2806,14 @@ msgstr ""
 "Du bruger XFree 4.3.0.\n"
 "Der er kendte problemer med komplekse XKB-konfigurationer.\n"
 "Prøv en simplere konfiguration eller en nyere udgave af XFree."
+
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:151
+#, c-format
+msgid ""
+"You have a keyboard remapping file (%s) in your home directory whose "
+"contents will now be ignored. You can use the keyboard preferences to "
+"restore them."
+msgstr "Du har en tasteomdøbningsfil (%s) i din hjemmemappe hvis indhold nu bliver ignoreret. Du kan gendanne ændringerne under tastaturindstilingerne."
 
 #: gnome-settings-daemon/gnome-settings-screensaver.c:92
 #, c-format
@@ -2927,7 +2928,7 @@ msgstr "Lyd_fil:"
 msgid "Select Sound File"
 msgstr "Vælg en lydfil"
 
-#: libsounds/sound-view.c:323
+#: libsounds/sound-view.c:324
 msgid "_Play"
 msgstr "_Afspil"
 
@@ -3552,6 +3553,13 @@ msgstr "Lydstyrke op"
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
 msgid "Volume up's shortcut."
 msgstr "Genvej for lydstyrke op."
+
+#~ msgid ""
+#~ "The gnome-theme-manager does not know how to change the themes on the "
+#~ "current window manager."
+#~ msgstr ""
+#~ "Temahåndtering ved ikke hvordan temaerne for den aktuelle "
+#~ "vindueshåndtering skiftes."
 
 #~ msgid "There was an error displaying help:"
 #~ msgstr "Der opstod en fejl ved visningen af hjælp:"
