@@ -632,7 +632,7 @@ add_custom_row_to_meta_theme (const gchar  *current_gtk_theme,
   custom_meta_theme_info.gtk_theme_name = g_strdup (current_gtk_theme);
   custom_meta_theme_info.metacity_theme_name = g_strdup (current_window_theme);
   custom_meta_theme_info.icon_theme_name = g_strdup (current_icon_theme);
-  custom_meta_theme_info.name = g_strdup (_("Custom Theme\n"));
+  custom_meta_theme_info.name = g_strdup ("Custom Theme");
 
   for (valid = gtk_tree_model_get_iter_first (model, &iter);
        valid;
