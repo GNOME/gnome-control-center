@@ -31,48 +31,6 @@
     <spacing>0</spacing>
 
     <widget>
-      <class>GtkHBox</class>
-      <name>hbox3</name>
-      <homogeneous>False</homogeneous>
-      <spacing>0</spacing>
-      <child>
-	<padding>0</padding>
-	<expand>False</expand>
-	<fill>False</fill>
-      </child>
-
-      <widget>
-	<class>GtkVBox</class>
-	<name>preview_holder</name>
-	<homogeneous>False</homogeneous>
-	<spacing>0</spacing>
-	<child>
-	  <padding>0</padding>
-	  <expand>True</expand>
-	  <fill>True</fill>
-	</child>
-
-	<widget>
-	  <class>Placeholder</class>
-	</widget>
-      </widget>
-    </widget>
-
-    <widget>
-      <class>GtkCheckButton</class>
-      <name>picture_enabled_check</name>
-      <can_focus>True</can_focus>
-      <label>Use a picture for the background</label>
-      <active>False</active>
-      <draw_indicator>True</draw_indicator>
-      <child>
-	<padding>0</padding>
-	<expand>False</expand>
-	<fill>False</fill>
-      </child>
-    </widget>
-
-    <widget>
       <class>GtkFrame</class>
       <name>picture_frame</name>
       <border_width>4</border_width>
@@ -83,6 +41,7 @@
 	<padding>0</padding>
 	<expand>False</expand>
 	<fill>False</fill>
+	<pack>GTK_PACK_END</pack>
       </child>
 
       <widget>
@@ -321,6 +280,7 @@ Stretched
 	<padding>0</padding>
 	<expand>False</expand>
 	<fill>False</fill>
+	<pack>GTK_PACK_END</pack>
       </child>
 
       <widget>
@@ -391,6 +351,21 @@ Vertical gradient
 	  </child>
 	</widget>
       </widget>
+    </widget>
+
+    <widget>
+      <class>GtkCheckButton</class>
+      <name>picture_enabled_check</name>
+      <can_focus>True</can_focus>
+      <label>Use a picture for the background</label>
+      <active>False</active>
+      <draw_indicator>True</draw_indicator>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+	<pack>GTK_PACK_END</pack>
+      </child>
     </widget>
   </widget>
 </widget>

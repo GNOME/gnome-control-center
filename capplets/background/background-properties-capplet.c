@@ -242,7 +242,7 @@ create_dialog (void)
 	g_signal_connect_swapped (G_OBJECT (widget), "destroy", (GCallback) g_object_unref, G_OBJECT (applier));
 
 	/* Minor GUI addition */
-	holder = WID ("preview_holder");
+	holder = WID ("prefs_widget");
 	gtk_box_pack_start (GTK_BOX (holder), applier_get_preview_widget (applier), TRUE, TRUE, 0);
 	gtk_widget_show_all (holder);
 
