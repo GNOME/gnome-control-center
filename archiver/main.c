@@ -302,6 +302,9 @@ main (int argc, char **argv)
 	Archive *archive;
 	Location *location = NULL;
 
+	/* For Electric Fence */
+	free (malloc (1));
+
         bindtextdomain (PACKAGE, GNOMELOCALEDIR);
         textdomain (PACKAGE);
 

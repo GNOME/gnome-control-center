@@ -1,3 +1,58 @@
+2001-04-20  Bradford Hovinen  <hovinen@ximian.com>
+
+	* config-log.c: Added InputBuffer, removed get_line
+	(struct _Slave):
+	(struct _ConfigLogPrivate ): Replaced GIOChannel * and FILE * with
+	InputBuffer *'s
+	(input_buffer_new): Implement. Constructs a new input buffer
+	(input_buffer_destroy): Implement. Destroys an input buffer and
+	closes the file descriptor
+	(input_buffer_cycle): Implement (borrowed from GDict). Reads
+	additional data from the input file
+	(input_buffer_read_line): Implement (borrowed from GDict). Reads a
+	line from the input file and returns a pointer to it
+	(input_buffer_write): Implement. Write the indicated string out to
+	the channel
+
+2001-04-15  Bradford Hovinen  <hovinen@ximian.com>
+
+	* config-log.c (config_log_set_arg): Create semaphore for
+	auto-reloading
+	(do_load): Removed locking code
+	(load_log_entry): Support prepending log entries to the beginning
+	of the log; free entry->date if parsing was unsuccessful
+	(config_log_reset_filenames): Unlink socket filename if not owner
+	(config_log_reset_filenames): Rebind socket when filename is reset
+	(connect_socket): Implement. Creates or connects to the socket
+	associated with the config log
+	(check_socket_filename): Implement. Checks to see if the filename
+	associated with the socket is in use.
+	(bind_socket): Implement. Binds the socket to the filename.
+	(socket_connect_cb): Implement. Callback issued when a master gets
+	a new connection.
+	(socket_data_cb): Implement. Callback issued when a slave gets
+	data from the master.
+	(slave_new): Implement. Creates a new slave structure
+	(slave_destroy): Implement. Destroys a slave structure
+	(slave_data_cb): Implement. Callback issued when data comes in
+	from a slave
+	(slave_broadcast_data): Implement. Broadcast the first log entry
+	to all the slaves except the given one
+	(disconnect_socket): Implement. Disconnects the socket
+	(config_log_open): Call connect_socket
+	(do_unload): Don't dump the log unless currently the socket owner
+	(config_log_write_entry): Broadcast data to slaves or write data
+	to socket, depending on whether currently the socket owner
+
+2001-04-14  Bradford Hovinen  <hovinen@ximian.com>
+
+	* config-log.c (do_unload): Add a parameter write_log to tell
+	whether to write out the log when unloading
+	(config_log_finalize): Implement
+
+	* config-log.[ch]: Put all data fields in ConfigLogPrivate
+	structure
+
 2001-04-11  Bradford Hovinen  <hovinen@ximian.com>
 
 	* location.c (run_backend_proc): Make sure to search location of

@@ -34,6 +34,7 @@
 
 typedef struct _ConfigLog ConfigLog;
 typedef struct _ConfigLogClass ConfigLogClass;
+typedef struct _ConfigLogPrivate ConfigLogPrivate;
 
 typedef struct _Location Location;
 
@@ -44,14 +45,7 @@ struct _ConfigLog
 {
 	GtkObject object;
 
-	Location *location;
-
-	FILE *file;
-	char *filename;
-	char *lock_filename;
-
-	GList *log_data;
-	GList *first_old;
+	ConfigLogPrivate *p;
 };
 
 struct _ConfigLogClass 
@@ -59,30 +53,31 @@ struct _ConfigLogClass
 	GtkObjectClass parent;
 };
 
-guint config_log_get_type (void);
+guint      config_log_get_type                 (void);
 
-GtkObject *config_log_open (Location *location);
-void config_log_delete (ConfigLog *config_log);
+GtkObject *config_log_open                     (Location *location);
+void       config_log_delete                   (ConfigLog *config_log);
 
-gint config_log_get_rollback_id_for_date    (ConfigLog *config_log,
-					     struct tm *date,
-					     gchar *backend_id);
-gint config_log_get_rollback_id_by_steps    (ConfigLog *config_log,
-					     guint steps,
-					     gchar *backend_id);
+gint       config_log_get_rollback_id_for_date (ConfigLog *config_log,
+						struct tm *date,
+						gchar *backend_id);
+gint       config_log_get_rollback_id_by_steps (ConfigLog *config_log,
+						guint steps,
+						gchar *backend_id);
 
-gchar *config_log_get_backend_id_for_id     (ConfigLog *config_log,
-					     gint id);
-struct tm *config_log_get_date_for_id       (ConfigLog *config_log,
-					     gint id);
+gchar     *config_log_get_backend_id_for_id    (ConfigLog *config_log,
+						gint id);
+struct tm *config_log_get_date_for_id          (ConfigLog *config_log,
+						gint id);
 
-gint config_log_write_entry                 (ConfigLog *config_log,
-					     gchar *backend_id);
+gint       config_log_write_entry              (ConfigLog *config_log,
+						gchar *backend_id);
 
-void config_log_iterate                     (ConfigLog *config_log,
-					     ConfigLogIteratorCB callback,
-					     gpointer data);
+void       config_log_iterate                  (ConfigLog *config_log,
+						ConfigLogIteratorCB callback,
+						gpointer data);
 
-void config_log_reset_filenames             (ConfigLog *config_log);
+void       config_log_reset_filenames          (ConfigLog *config_log);
+void       config_log_reload                   (ConfigLog *config_log);
 
 #endif /* __CONFIG_LOG */
