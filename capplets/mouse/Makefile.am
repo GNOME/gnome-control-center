@@ -7,11 +7,15 @@ gnome2_mouse_properties_SOURCES = gnome-mouse-properties.c
 
 pixmapdir  = $(GNOMECC_PIXMAPS_DIR)
 pixmap_DATA = \
-	double-click-on.png	\
-	double-click-off.png	\
-	double-click-maybe.png	\
-	mouse-left.png		\
-	mouse-right.png
+	double-click-on.png		\
+	double-click-off.png		\
+	double-click-maybe.png		\
+	mouse-left.png			\
+	mouse-right.png			\
+	mouse-cursor-normal.png		\
+	mouse-cursor-white.png		\
+	mouse-cursor-normal-large.png	\
+	mouse-cursor-white-large.png
 
 Gladedir   = $(GNOMECC_GLADE_DIR)
 Glade_DATA = gnome-mouse-properties.glade

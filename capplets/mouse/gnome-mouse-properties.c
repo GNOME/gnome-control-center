@@ -330,6 +330,11 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 	GtkTreeViewColumn *column;
 	GtkTreeIter        iter;
 	GConfValue        *value;
+	gchar             *filename;
+	GdkPixbuf         *pixbuf;
+	GnomeProgram *program;
+
+	program = gnome_program_get ();
 
 	/* Buttons page */
 	/* Left-handed toggle */
@@ -360,24 +365,40 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 	gtk_tree_view_column_set_attributes (column, renderer,
 					     "markup", COLUMN_TEXT,
 					     NULL);
+
+	filename = gnome_program_locate_file (program, GNOME_FILE_DOMAIN_APP_PIXMAP, "mouse-cursor-normal.png", TRUE, NULL);
+	pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
+	g_free (filename);
 	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-			    COLUMN_PIXBUF, gdk_pixbuf_new_from_file ("mouse-cursor-normal.png", NULL),
+			    COLUMN_PIXBUF, pixbuf,
 			    COLUMN_TEXT, "<b>Default Cursor</b>\nThe default cursor that ships with X",
 			    -1);
+
+	filename = gnome_program_locate_file (program, GNOME_FILE_DOMAIN_APP_PIXMAP, "mouse-cursor-white.png", TRUE, NULL);
+	pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
+	g_free (filename);
 	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-			    COLUMN_PIXBUF, gdk_pixbuf_new_from_file ("mouse-cursor-white.png", NULL),
+			    COLUMN_PIXBUF, pixbuf,
 			    COLUMN_TEXT, "<b>White Cursor</b>\nThe default cursor inverted",
 			    -1);
+
+	filename = gnome_program_locate_file (program, GNOME_FILE_DOMAIN_APP_PIXMAP, "mouse-cursor-normal-large.png", TRUE, NULL);
+	pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
+	g_free (filename);
 	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-			    COLUMN_PIXBUF, gdk_pixbuf_new_from_file ("mouse-cursor-normal-large.png", NULL),
+			    COLUMN_PIXBUF, pixbuf,
 			    COLUMN_TEXT, "<b>Large Cursor</b>\nLarge version of normal cursor",
 			    -1);
+
+	filename = gnome_program_locate_file (program, GNOME_FILE_DOMAIN_APP_PIXMAP, "mouse-cursor-white-large.png", TRUE, NULL);
+	pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
+	g_free (filename);
 	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-			    COLUMN_PIXBUF, gdk_pixbuf_new_from_file ("mouse-cursor-white-large.png", NULL),
+			    COLUMN_PIXBUF, pixbuf,
 			    COLUMN_TEXT, "<b>Large White Cursor</b>\nLarge version of white cursor",
 			    -1);
 	gtk_tree_view_append_column (GTK_TREE_VIEW (tree_view), column);
