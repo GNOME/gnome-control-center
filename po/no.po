@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: control-center 1.0.5\n"
-"POT-Creation-Date: 1999-08-04 10:12+0200\n"
-"PO-Revision-Date: 1999-08-04 10:13+02:00\n"
+"Project-Id-Version: control-center 1.0.6\n"
+"POT-Creation-Date: 1999-08-12 23:47+0200\n"
+"PO-Revision-Date: 1999-08-12 23:50+02:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -264,8 +264,9 @@ msgstr "Rediger"
 
 #. we initialize everything
 #: capplets/mime-type/edit-window.c:238
-msgid "Set actions for "
-msgstr "Sett handlinger for "
+#, c-format
+msgid "Set actions for %s"
+msgstr "Sett handlinger for %s"
 
 #: capplets/mime-type/mime-data.c:354
 msgid "Mime Type"
@@ -915,149 +916,165 @@ msgstr "Kommandoen '%s' feilet"
 msgid "Unknown file format"
 msgstr "Ukjent filformat"
 
-#: capplets/ui-properties/ui-properties.c:46
-msgid "Default Gtk setting"
-msgstr "Standard instillinger for Gtk"
-
-#: capplets/ui-properties/ui-properties.c:47
-msgid "Spread buttons out"
-msgstr "Spre knappene utover"
-
-#: capplets/ui-properties/ui-properties.c:48
-msgid "Put buttons on edges"
-msgstr "Plasser knappene på kantene"
-
-#: capplets/ui-properties/ui-properties.c:49
-msgid "Left-justify buttons"
-msgstr "Venstrejuster knappene"
-
-#: capplets/ui-properties/ui-properties.c:50
-msgid "Right-justify buttons"
-msgstr "Høyrejuster knappene"
-
-#: capplets/ui-properties/ui-properties.c:56
-msgid "Let window manager decide"
-msgstr "La vindusbehandleren avgjøre"
-
-#: capplets/ui-properties/ui-properties.c:57
-msgid "Center of the screen"
-msgstr "Midt på skjermen"
-
-#: capplets/ui-properties/ui-properties.c:58
-msgid "At the mouse pointer"
-msgstr "Ved musepekeren"
-
-#: capplets/ui-properties/ui-properties.c:64
-msgid "Dialogs are like other windows"
-msgstr "Dialoger behandles som andre vinduer"
-
-#: capplets/ui-properties/ui-properties.c:65
-msgid "Dialogs are treated specially by window manager"
-msgstr "Dialoger behandles som spesielle av vindusbehandleren"
-
-#: capplets/ui-properties/ui-properties.c:72
-msgid "Notebook"
-msgstr "Notisblokk"
-
-#: capplets/ui-properties/ui-properties.c:73
-msgid "Toplevel"
-msgstr "Toppnivå"
-
-#: capplets/ui-properties/ui-properties.c:74
-msgid "Modal"
-msgstr "Modal"
-
-#: capplets/ui-properties/ui-properties.c:80
-msgid "Left"
-msgstr "Venstre"
-
-#: capplets/ui-properties/ui-properties.c:81
-msgid "Right"
-msgstr "Høyre"
-
-#: capplets/ui-properties/ui-properties.c:82
-msgid "Top"
-msgstr "Øverst"
-
-#: capplets/ui-properties/ui-properties.c:83
-msgid "Bottom"
-msgstr "Nederst"
-
-#: capplets/ui-properties/ui-properties.c:201
-msgid "Dialog buttons"
-msgstr "Dialogknapper"
-
-#: capplets/ui-properties/ui-properties.c:206
-msgid "Dialog position"
-msgstr "Dialogplassering"
-
-#: capplets/ui-properties/ui-properties.c:211
-msgid "Dialog hints"
-msgstr "Dialoghint"
-
-#: capplets/ui-properties/ui-properties.c:218
-msgid "Use statusbar instead of dialog when possible"
-msgstr "Bruk statuslinje i stedet for dialog når mulig"
-
-#: capplets/ui-properties/ui-properties.c:228
-msgid "Place dialogs over application window when possible"
-msgstr "Plasser dialogene over applikasjonsvinduet når mulig"
-
-#: capplets/ui-properties/ui-properties.c:245
+#: capplets/ui-properties/ui-properties.c:53
 msgid "Can detach and move toolbars"
 msgstr "Kan ta av og flytte verktøylinjer"
 
-#: capplets/ui-properties/ui-properties.c:254
-msgid "Can detach and move menubars"
-msgstr "Kan ta av og flytte menylinjer"
-
-#: capplets/ui-properties/ui-properties.c:263
-msgid "Menus can be torn off"
-msgstr "Menyer kan rives av"
-
-#: capplets/ui-properties/ui-properties.c:273
-msgid "Menubars have relieved border"
-msgstr "Manylinjer har avslepen kant"
-
-#: capplets/ui-properties/ui-properties.c:282
+#: capplets/ui-properties/ui-properties.c:58
 msgid "Toolbars have relieved border"
 msgstr "Verktøylinjer har avslepen kant"
 
-#: capplets/ui-properties/ui-properties.c:291
+#: capplets/ui-properties/ui-properties.c:63
 msgid "Toolbar buttons have relieved border"
 msgstr "Verktøylinjeknapper har avslepen kant"
 
-#: capplets/ui-properties/ui-properties.c:300
+#: capplets/ui-properties/ui-properties.c:68
 msgid "Toolbars have line separators"
 msgstr "Verktøylinjer har linjeseparatorer"
 
-#: capplets/ui-properties/ui-properties.c:309
+#: capplets/ui-properties/ui-properties.c:73
 msgid "Toolbars have text labels"
 msgstr "Verktøylinjer har tekstetiketter"
 
-#: capplets/ui-properties/ui-properties.c:318
-msgid "Statusbar is interactive when possible"
-msgstr "Statuslinjen er interaktiv når mulig"
+#: capplets/ui-properties/ui-properties.c:102
+msgid "Can detach and move menus"
+msgstr "Kan ta av og flytte menyer"
 
-#: capplets/ui-properties/ui-properties.c:327
-msgid "Statusbar progress meter on right"
-msgstr "Visning av fremgang for statuslinje til høyre"
+#: capplets/ui-properties/ui-properties.c:107
+msgid "Menus have relieved border"
+msgstr "Manyer har avslepen kant"
 
-#: capplets/ui-properties/ui-properties.c:338
-msgid "Dialog buttons have icons"
-msgstr "Dialogknapper har ikoner"
+#: capplets/ui-properties/ui-properties.c:111
+msgid "Submenus can be torn off"
+msgstr "Undermenyer kan rives av"
 
-#: capplets/ui-properties/ui-properties.c:350
+#: capplets/ui-properties/ui-properties.c:115
 msgid "Menu items have icons"
 msgstr "Menyoppføringer har ikoner"
 
-#: capplets/ui-properties/ui-properties.c:368
-msgid "Default MDI mode"
-msgstr "Standard MDI modus"
+#: capplets/ui-properties/ui-properties.c:138
+msgid "Statusbar is interactive when possible"
+msgstr "Statuslinjen er interaktiv når mulig"
 
-#: capplets/ui-properties/ui-properties.c:373
-msgid "MDI notebook tab position"
-msgstr "Tabulatorposisjon for MDI notisblokk"
+#: capplets/ui-properties/ui-properties.c:143
+msgid "Statusbar progress meter is on the right"
+msgstr "Visning av fremgang for statuslinje til høyre"
+
+#: capplets/ui-properties/ui-properties.c:160
+msgid "Menu Options"
+msgstr "Alternativer for meny"
+
+#: capplets/ui-properties/ui-properties.c:161
+msgid "Statusbar Options"
+msgstr "Alternativer for statuslinje"
+
+#: capplets/ui-properties/ui-properties.c:162
+msgid "Toolbar Options"
+msgstr "Alternativer for verktøylinje"
+
+#: capplets/ui-properties/ui-properties.c:168
+msgid "Dialog buttons"
+msgstr "Dialogknapper"
+
+#: capplets/ui-properties/ui-properties.c:169
+msgid "Default value"
+msgstr "Standardverdi"
+
+#: capplets/ui-properties/ui-properties.c:170
+msgid "Spread buttons out"
+msgstr "Spre knappene utover"
+
+#: capplets/ui-properties/ui-properties.c:171
+msgid "Put buttons on edges"
+msgstr "Plasser knappene på kantene"
+
+#: capplets/ui-properties/ui-properties.c:172
+msgid "Left-justify buttons"
+msgstr "Venstrejuster knappene"
+
+#: capplets/ui-properties/ui-properties.c:173
+msgid "Right-justify buttons"
+msgstr "Høyrejuster knappene"
+
+#: capplets/ui-properties/ui-properties.c:178
+msgid "Dialog buttons have icons"
+msgstr "Dialogknapper har ikoner"
+
+#: capplets/ui-properties/ui-properties.c:183
+msgid "Use statusbar instead of dialog when possible"
+msgstr "Bruk statuslinje i stedet for dialog når mulig"
+
+#: capplets/ui-properties/ui-properties.c:205
+msgid "Dialog position"
+msgstr "Dialogplassering"
+
+#: capplets/ui-properties/ui-properties.c:206
+msgid "Let window manager decide"
+msgstr "La vindusbehandleren avgjøre"
+
+#: capplets/ui-properties/ui-properties.c:207
+msgid "Center of the screen"
+msgstr "Midt på skjermen"
+
+#: capplets/ui-properties/ui-properties.c:208
+msgid "At the mouse pointer"
+msgstr "Ved musepekeren"
+
+#: capplets/ui-properties/ui-properties.c:213
+msgid "Dialog hints"
+msgstr "Dialoghint"
+
+#: capplets/ui-properties/ui-properties.c:214
+msgid "Dialogs are like other windows"
+msgstr "Dialoger behandles som andre vinduer"
+
+#: capplets/ui-properties/ui-properties.c:215
+msgid "Dialogs are treated specially by window manager"
+msgstr "Dialoger behandles som spesielle av vindusbehandleren"
+
+#: capplets/ui-properties/ui-properties.c:220
+msgid "Place dialogs over application window when possible"
+msgstr "Plasser dialogene over applikasjonsvinduet når mulig"
+
+#: capplets/ui-properties/ui-properties.c:241
+msgid "Dialog Layout"
+msgstr "Dialogutseende"
+
+#: capplets/ui-properties/ui-properties.c:242
+msgid "Dialog Behavior"
+msgstr "Dialogoppførsel"
+
+#: capplets/ui-properties/ui-properties.c:248
+msgid "Notebook"
+msgstr "Notisblokk"
+
+#: capplets/ui-properties/ui-properties.c:249
+msgid "Toplevel"
+msgstr "Toppnivå"
+
+#: capplets/ui-properties/ui-properties.c:250
+msgid "Modal"
+msgstr "Modal"
+
+#: capplets/ui-properties/ui-properties.c:255
+msgid "Left"
+msgstr "Venstre"
+
+#: capplets/ui-properties/ui-properties.c:256
+msgid "Right"
+msgstr "Høyre"
+
+#: capplets/ui-properties/ui-properties.c:257
+msgid "Top"
+msgstr "Øverst"
+
+#: capplets/ui-properties/ui-properties.c:258
+msgid "Bottom"
+msgstr "Nederst"
+
+#: capplets/ui-properties/ui-properties.c:273
+msgid "GNOME MDI Options"
+msgstr "Alternativer for GNOME MDI"
 
 #: capplets/url-properties/url-properties.c:48
 msgid "Error initializing the `url-properties' capplet."
@@ -1200,11 +1217,11 @@ msgstr ""
 "en initialiseringsfeil oppstod under start av 'wm-properties-capplet'.\n"
 "avbryter...\n"
 
-#: control-center/callbacks.c:79
+#: control-center/callbacks.c:85
 msgid "GNOME Control Center"
 msgstr "GNOME Kontrollsenter"
 
-#: control-center/callbacks.c:82
+#: control-center/callbacks.c:88
 msgid "Desktop Properties manager."
 msgstr "Egenskaper for skrivebord."
 
@@ -1292,9 +1309,6 @@ msgstr ""
 "ønsker å redigere dem, vær snill å dobbeltklikk på den riktige oppføringen"
 
 #. create the app
-#: control-center/main.c:184
+#: control-center/main.c:187
 msgid "Control Center"
 msgstr "Kontrollsenter"
-
-#~ msgid "Radio Button 3"
-#~ msgstr "Radioknapp 3"
