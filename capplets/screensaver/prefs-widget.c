@@ -702,7 +702,7 @@ selection_foreach_func (int model_row, int *closure)
 static gint
 random_timeout_cb (PrefsWidget *prefs_widget)
 {
-	GList *l;
+	GList *l, *old;
  
   	g_return_val_if_fail (prefs_widget != NULL, FALSE);
 	
@@ -729,12 +729,18 @@ random_timeout_cb (PrefsWidget *prefs_widget)
 			if (!l)
 				l = prefs_widget->screensavers;
 		}
-		
+	
+		if (l)
+			old = l->next;
+		else
+			old = NULL;
+
 		while (l)
 		{
 			/* Are we back to where we started? */
 			if (((Screensaver*) l->data)->enabled
-			    || l == prefs_widget->priv->random_current)
+			    || l == prefs_widget->priv->random_current
+			    || (old && old == l))
 				break;
 			
 			l = l->next;
