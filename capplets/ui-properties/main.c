@@ -73,9 +73,9 @@ main (int argc, char **argv)
 {
 	gchar *restart_args[3];
 
-	bindtextdomain (PACKAGE, GNOMELOCALEDIR);
-	bind_textdomain_codeset (PACKAGE, "UTF-8");
-	textdomain (PACKAGE);
+	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
+	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+	textdomain (GETTEXT_PACKAGE);
 
   	gnome_program_init ("ui-properties-capplet", VERSION,
 		      LIBGNOMEUI_MODULE, argc, argv,
