@@ -8,11 +8,11 @@ always_built_SUBDIRS = desktop-links  \
 SUBDIRS = $(always_built_SUBDIRS)
 
 INCLUDES = \
-        -DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\
-	-DGNOME_ICONDIR=\""${prefix}/share/pixmaps"\"	\
-	-DGLADE_DATADIR=\""$(Gladedir)"\"		\
-	@CAPPLET_CFLAGS@				\
-	-I$(top_srcdir)					\
+        -DGNOMELOCALEDIR=\""$(datadir)/locale"\" 		\
+	-DGNOME_ICONDIR=\""${prefix}/share/pixmaps"\"		\
+	-DGLADE_DATADIR=\""$(datadir)/control-center-data"\"	\
+	@CAPPLET_CFLAGS@					\
+	-I$(top_srcdir)						\
 	-I$(top_srcdir)/intl
 
 bin_PROGRAMS = sound-properties-capplet

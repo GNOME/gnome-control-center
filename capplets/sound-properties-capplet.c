@@ -25,6 +25,10 @@
 #  include <config.h>
 #endif
 
+#define DEBUG_MSG(str, args...) \
+              g_log (G_LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "(%d:%s) " str, \
+		     getpid (), __FUNCTION__ , ## args)
+
 /* Macros for variables that vary from capplet to capplet */
 
 #define DEFAULT_MONIKER          "archiver:sound-properties"
@@ -199,8 +203,23 @@ create_dialog_cb (BonoboGenericFactory *factory, gpointer data)
 	GtkWidget            *pf;
 
 	if (control == NULL) {
+		DEBUG_MSG ("Creating control");
+
 		dialog = glade_xml_new (GLADE_FILE, "prefs_widget");
+
+		if (dialog == NULL) {
+			g_critical ("Could not load glade file");
+			return NULL;
+		}
+
 		widget = glade_xml_get_widget (dialog, "prefs_widget");
+
+		if (widget == NULL) {
+			g_critical ("Could not find preferences widget");
+			return NULL;
+		}
+
+		DEBUG_MSG ("Loaded dialog: %p, %p", dialog, widget);
 
 		pf = bonobo_property_frame_new (NULL, NULL);
 		gtk_container_add (GTK_CONTAINER (pf), widget);
