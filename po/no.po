@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-centre 1.0.4\n"
-"POT-Creation-Date: 1999-03-26 00:00+0100\n"
+"POT-Creation-Date: 1999-04-01 18:22-0500\n"
 "PO-Revision-Date: 1999-03-26 00:05+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -42,88 +42,98 @@ msgstr "Vertikal"
 msgid "Horizontal"
 msgstr "Horisontal"
 
-#: capplets/background-properties/property-background.c:827
+#: capplets/background-properties/property-background.c:877
 msgid "Wallpaper Selection"
 msgstr "Bakgrunnsvalg"
 
-#: capplets/background-properties/property-background.c:869
+#: capplets/background-properties/property-background.c:882
+msgid "Can't find an hbox, using a normal file selection"
+msgstr ""
+
+#: capplets/background-properties/property-background.c:887
+#: capplets/screensaver-properties/screensaver-dialog.c:25
+#: capplets/theme-switcher/gui.c:225 capplets/theme-switcher/gui.c:281
+msgid "Preview"
+msgstr "Forhåndsvisning"
+
+#: capplets/background-properties/property-background.c:944
 msgid "Wallpaper"
 msgstr "Bakgrunn"
 
-#: capplets/background-properties/property-background.c:872
+#: capplets/background-properties/property-background.c:947
 msgid " Browse... "
 msgstr " Se på... "
 
-#: capplets/background-properties/property-background.c:877
+#: capplets/background-properties/property-background.c:952
 msgid "none"
 msgstr "ingen"
 
-#: capplets/background-properties/property-background.c:921
+#: capplets/background-properties/property-background.c:996
 msgid "Scaled"
 msgstr "Skalert"
 
-#: capplets/background-properties/property-background.c:931
+#: capplets/background-properties/property-background.c:1006
 msgid "Scaled (keep aspect)"
 msgstr "Skalert (behold høyde-/breddeforhold)"
 
-#: capplets/background-properties/property-background.c:943
+#: capplets/background-properties/property-background.c:1018
 msgid "Centered"
 msgstr "Sentrert"
 
-#: capplets/background-properties/property-background.c:955
+#: capplets/background-properties/property-background.c:1030
 msgid "Tiled"
 msgstr "Side-ved-side"
 
-#: capplets/background-properties/property-background.c:1275
+#: capplets/background-properties/property-background.c:1350
 msgid "Disable background selection"
 msgstr "Slå av bakgrunnsvalg"
 
-#: capplets/background-properties/property-background.c:1404
+#: capplets/background-properties/property-background.c:1479
 msgid "Set parameters from saved state and exit"
 msgstr "Sett parametere fra lagret tilstand og avslutt"
 
-#: capplets/background-properties/property-background.c:1405
+#: capplets/background-properties/property-background.c:1480
 msgid "IMAGE"
 msgstr "IMAGE"
 
-#: capplets/background-properties/property-background.c:1405
+#: capplets/background-properties/property-background.c:1480
 msgid "Sets the wallpaper to the value specified"
 msgstr "Setter bakgrunnen til spesifiser verdi"
 
-#: capplets/background-properties/property-background.c:1406
-#: capplets/background-properties/property-background.c:1407
+#: capplets/background-properties/property-background.c:1481
+#: capplets/background-properties/property-background.c:1482
 msgid "COLOR"
 msgstr "FARGE"
 
-#: capplets/background-properties/property-background.c:1406
+#: capplets/background-properties/property-background.c:1481
 msgid "Specifies the background color"
 msgstr "Spesifiserer bakgrunnsfargen"
 
-#: capplets/background-properties/property-background.c:1407
+#: capplets/background-properties/property-background.c:1482
 msgid "Specifies end background color for gradient"
 msgstr "Spesifiserer bakgrunnsfargen for gradienten"
 
-#: capplets/background-properties/property-background.c:1408
+#: capplets/background-properties/property-background.c:1483
 msgid "ORIENT"
 msgstr "ORIENT"
 
-#: capplets/background-properties/property-background.c:1408
+#: capplets/background-properties/property-background.c:1483
 msgid "Gradient orientation: vertical or horizontal"
 msgstr "Orientering for gradient: vertikal eller horisontal"
 
-#: capplets/background-properties/property-background.c:1409
+#: capplets/background-properties/property-background.c:1484
 msgid "Use a solid fill for the background"
 msgstr "Bruk helfylt bakgrunn"
 
-#: capplets/background-properties/property-background.c:1410
+#: capplets/background-properties/property-background.c:1485
 msgid "Use a gradient fill for the background"
 msgstr "Bruk gradvis fyll for bakgrunnen"
 
-#: capplets/background-properties/property-background.c:1411
+#: capplets/background-properties/property-background.c:1486
 msgid "MODE"
 msgstr "MODUS"
 
-#: capplets/background-properties/property-background.c:1411
+#: capplets/background-properties/property-background.c:1486
 msgid "Display wallpaper: tiled, centered, scaled or ratio"
 msgstr "Vis bakgrunn: side-ved-side, sentrert, skalert eller rate"
 
@@ -147,11 +157,11 @@ msgstr "Varighet (ms)"
 msgid "Test"
 msgstr "Test"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:190
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:193
 msgid "Gnome editor"
 msgstr "Gnome editor"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:201
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:204
 msgid "Run In Terminal"
 msgstr "Kjør i terminal"
 
@@ -236,32 +246,27 @@ msgstr "Trenger passord"
 msgid "Use power management."
 msgstr "Bruk strømstyring."
 
-#: capplets/screensaver-properties/callbacks.c:296
+#: capplets/screensaver-properties/callbacks.c:314
 msgid "No Screensaver"
 msgstr "Ingen skjermsparer"
 
-#: capplets/screensaver-properties/callbacks.c:301
+#: capplets/screensaver-properties/callbacks.c:319
 msgid "Random Screensaver"
 msgstr "Vilkårlig skjermsparer"
 
-#: capplets/screensaver-properties/callbacks.c:476
+#: capplets/screensaver-properties/callbacks.c:494
 #: capplets/screensaver-properties/screensaver-properties-capplet.c:54
 msgid "Settings..."
 msgstr "Innstillinger..."
 
 #. we need to special case random
-#: capplets/screensaver-properties/callbacks.c:484
+#: capplets/screensaver-properties/callbacks.c:502
 msgid "Random Settings"
 msgstr "Innstillinger for vilkårlig"
 
-#: capplets/screensaver-properties/callbacks.c:492
+#: capplets/screensaver-properties/callbacks.c:510
 msgid " Settings"
 msgstr " Innstillinger"
-
-#: capplets/screensaver-properties/screensaver-dialog.c:25
-#: capplets/theme-switcher/gui.c:196 capplets/theme-switcher/gui.c:219
-msgid "Preview"
-msgstr "Forhåndsvisning"
 
 #: capplets/screensaver-properties/screensaver-dialog.c:46
 msgid "About:"
@@ -278,6 +283,10 @@ msgstr "Forfatter: UKJENT"
 #: capplets/screensaver-properties/screensaver-dialog.c:78
 msgid "Settings"
 msgstr "Innstillinger"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:36
+msgid "RANDOM SCREENSAVER"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-properties-capplet.c:47
 msgid "Screen Saver"
@@ -416,7 +425,7 @@ msgstr ""
 msgid "Close"
 msgstr "Lukk"
 
-#: capplets/theme-switcher/gui.c:56
+#: capplets/theme-switcher/gui.c:83
 #, c-format
 msgid ""
 "Error installing theme:\n"
@@ -427,15 +436,15 @@ msgstr ""
 "'%s'\n"
 "%s"
 
-#: capplets/theme-switcher/gui.c:87
+#: capplets/theme-switcher/gui.c:114
 msgid "Select a theme to install"
 msgstr "Velg et tema for installasjon"
 
-#: capplets/theme-switcher/gui.c:163
+#: capplets/theme-switcher/gui.c:191
 msgid "Available Themes"
 msgstr "Tilgjengelige temaer"
 
-#: capplets/theme-switcher/gui.c:188
+#: capplets/theme-switcher/gui.c:216
 msgid ""
 "Auto\n"
 "Preview"
@@ -443,7 +452,7 @@ msgstr ""
 "Automatisk\n"
 "Forhåndsvisning"
 
-#: capplets/theme-switcher/gui.c:199
+#: capplets/theme-switcher/gui.c:228
 msgid ""
 "Install new\n"
 "theme..."
@@ -451,11 +460,15 @@ msgstr ""
 "Installer nytt\n"
 "tema..."
 
-#. HTML widget describing themes
+#. Font selector.
 #.
-#: capplets/theme-switcher/gui.c:205
-msgid "Theme Information"
-msgstr "Informasjon om tema"
+#: capplets/theme-switcher/gui.c:234
+msgid "User Font"
+msgstr ""
+
+#: capplets/theme-switcher/gui.c:255
+msgid "Use custom font."
+msgstr ""
 
 #: capplets/ui-properties/ui-properties.c:53
 msgid "Default Gtk setting"
@@ -737,3 +750,6 @@ msgstr ""
 #: control-center/main.c:162
 msgid "Control Center"
 msgstr "Kontrollsenter"
+
+#~ msgid "Theme Information"
+#~ msgstr "Informasjon om tema"

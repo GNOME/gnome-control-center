@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center VERSION\n"
-"POT-Creation-Date: 1999-03-22 11:56-0500\n"
+"POT-Creation-Date: 1999-04-01 18:22-0500\n"
 "PO-Revision-Date: 1998-02-28 19:34+0100\n"
 "Last-Translator: Vincent Renardias <vincent@debian.org>\n"
 "Language-Team: Vincent Renardias <vincent@debian.org>\n"
@@ -42,88 +42,98 @@ msgstr "Vertical"
 msgid "Horizontal"
 msgstr "Horizontal"
 
-#: capplets/background-properties/property-background.c:810
+#: capplets/background-properties/property-background.c:877
 msgid "Wallpaper Selection"
 msgstr "Sélection du papier peint"
 
-#: capplets/background-properties/property-background.c:852
+#: capplets/background-properties/property-background.c:882
+msgid "Can't find an hbox, using a normal file selection"
+msgstr ""
+
+#: capplets/background-properties/property-background.c:887
+#: capplets/screensaver-properties/screensaver-dialog.c:25
+#: capplets/theme-switcher/gui.c:225 capplets/theme-switcher/gui.c:281
+msgid "Preview"
+msgstr "Prévisualisation"
+
+#: capplets/background-properties/property-background.c:944
 msgid "Wallpaper"
 msgstr "Papier peint"
 
-#: capplets/background-properties/property-background.c:855
+#: capplets/background-properties/property-background.c:947
 msgid " Browse... "
 msgstr " Parcourir... "
 
-#: capplets/background-properties/property-background.c:860
+#: capplets/background-properties/property-background.c:952
 msgid "none"
 msgstr "aucun"
 
-#: capplets/background-properties/property-background.c:904
+#: capplets/background-properties/property-background.c:996
 msgid "Scaled"
 msgstr "Redimentionnée"
 
-#: capplets/background-properties/property-background.c:914
+#: capplets/background-properties/property-background.c:1006
 msgid "Scaled (keep aspect)"
 msgstr "Redimentionnée (en conservant l'aspect)"
 
-#: capplets/background-properties/property-background.c:926
+#: capplets/background-properties/property-background.c:1018
 msgid "Centered"
 msgstr "Centré"
 
-#: capplets/background-properties/property-background.c:938
+#: capplets/background-properties/property-background.c:1030
 msgid "Tiled"
 msgstr "Mosaïque"
 
-#: capplets/background-properties/property-background.c:1258
+#: capplets/background-properties/property-background.c:1350
 msgid "Disable background selection"
 msgstr ""
 
-#: capplets/background-properties/property-background.c:1387
+#: capplets/background-properties/property-background.c:1479
 msgid "Set parameters from saved state and exit"
 msgstr "Restaurer les paramétres sauvegarder et quitter"
 
-#: capplets/background-properties/property-background.c:1388
+#: capplets/background-properties/property-background.c:1480
 msgid "IMAGE"
 msgstr "IMAGE"
 
-#: capplets/background-properties/property-background.c:1388
+#: capplets/background-properties/property-background.c:1480
 msgid "Sets the wallpaper to the value specified"
 msgstr "Utiliser la couleur spécifiée pour le fond d'écran"
 
-#: capplets/background-properties/property-background.c:1389
-#: capplets/background-properties/property-background.c:1390
+#: capplets/background-properties/property-background.c:1481
+#: capplets/background-properties/property-background.c:1482
 msgid "COLOR"
 msgstr "COULEUR"
 
-#: capplets/background-properties/property-background.c:1389
+#: capplets/background-properties/property-background.c:1481
 msgid "Specifies the background color"
 msgstr "Spécifier une couleur de fond d'écran"
 
-#: capplets/background-properties/property-background.c:1390
+#: capplets/background-properties/property-background.c:1482
 msgid "Specifies end background color for gradient"
 msgstr "Spéficier la couleur de fin de gradient pour la couleur de fond"
 
-#: capplets/background-properties/property-background.c:1391
+#: capplets/background-properties/property-background.c:1483
 msgid "ORIENT"
 msgstr "ORIENT"
 
-#: capplets/background-properties/property-background.c:1391
+#: capplets/background-properties/property-background.c:1483
 msgid "Gradient orientation: vertical or horizontal"
 msgstr "Orientation du gradient: vertical ou horizontal"
 
-#: capplets/background-properties/property-background.c:1392
+#: capplets/background-properties/property-background.c:1484
 msgid "Use a solid fill for the background"
 msgstr "Utiliser une couleur uniforme pour le fond d'écran"
 
-#: capplets/background-properties/property-background.c:1393
+#: capplets/background-properties/property-background.c:1485
 msgid "Use a gradient fill for the background"
 msgstr "Utiliser un dégradé de couleur pour le fond d'écran"
 
-#: capplets/background-properties/property-background.c:1394
+#: capplets/background-properties/property-background.c:1486
 msgid "MODE"
 msgstr "MODE"
 
-#: capplets/background-properties/property-background.c:1394
+#: capplets/background-properties/property-background.c:1486
 msgid "Display wallpaper: tiled, centered, scaled or ratio"
 msgstr "Affichage du papier peint: mosaique, centré, redimentionné ou ratio"
 
@@ -147,11 +157,11 @@ msgstr "Durée (ms)"
 msgid "Test"
 msgstr ""
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:190
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:193
 msgid "Gnome editor"
 msgstr "Editeur Gnome"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:201
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:204
 msgid "Run In Terminal"
 msgstr ""
 
@@ -236,32 +246,27 @@ msgstr "Nécessite un mot de passe"
 msgid "Use power management."
 msgstr "Utiliser la gestion de l'énergie."
 
-#: capplets/screensaver-properties/callbacks.c:296
+#: capplets/screensaver-properties/callbacks.c:314
 msgid "No Screensaver"
 msgstr "Pas d'économiseur d'écran"
 
-#: capplets/screensaver-properties/callbacks.c:301
+#: capplets/screensaver-properties/callbacks.c:319
 msgid "Random Screensaver"
 msgstr "Economiseur d'écran Aléatoire"
 
-#: capplets/screensaver-properties/callbacks.c:476
+#: capplets/screensaver-properties/callbacks.c:494
 #: capplets/screensaver-properties/screensaver-properties-capplet.c:54
 msgid "Settings..."
 msgstr "Paramétres..."
 
 #. we need to special case random
-#: capplets/screensaver-properties/callbacks.c:484
+#: capplets/screensaver-properties/callbacks.c:502
 msgid "Random Settings"
 msgstr "Paramétres Aléatoires"
 
-#: capplets/screensaver-properties/callbacks.c:492
+#: capplets/screensaver-properties/callbacks.c:510
 msgid " Settings"
 msgstr " Paramétres"
-
-#: capplets/screensaver-properties/screensaver-dialog.c:25
-#: capplets/theme-switcher/gui.c:196 capplets/theme-switcher/gui.c:219
-msgid "Preview"
-msgstr "Prévisualisation"
 
 #: capplets/screensaver-properties/screensaver-dialog.c:46
 msgid "About:"
@@ -278,6 +283,10 @@ msgstr "Auteur: INCONNU"
 #: capplets/screensaver-properties/screensaver-dialog.c:78
 msgid "Settings"
 msgstr "Paramétres"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:36
+msgid "RANDOM SCREENSAVER"
+msgstr ""
 
 #: capplets/screensaver-properties/screensaver-properties-capplet.c:47
 msgid "Screen Saver"
@@ -328,9 +337,31 @@ msgstr " minutes après le démarrage de l'économiseur d'écran."
 msgid "Screen Saver Demo"
 msgstr "Démo de l'économiseur d'écran"
 
-#: capplets/session-properties/session-properties.c:102
+#: capplets/session-properties/session-properties.c:147
 msgid "Program:"
 msgstr "Programme:"
+
+#: capplets/session-properties/session-properties.c:171
+msgid "Session"
+msgstr ""
+
+#. dialog
+#: capplets/session-properties/session-properties.c:207
+msgid "Session Chooser"
+msgstr ""
+
+#: capplets/session-properties/session-properties.c:210
+msgid "Start Session"
+msgstr ""
+
+#: capplets/session-properties/session-properties.c:213
+#, fuzzy
+msgid "Cancel Login"
+msgstr "Annuler"
+
+#: capplets/session-properties/session-properties.c:236
+msgid "Only display warnings."
+msgstr ""
 
 #: capplets/sound-properties/sound-properties.c:191
 msgid "Category"
@@ -392,7 +423,7 @@ msgstr ""
 msgid "Close"
 msgstr "Fermer"
 
-#: capplets/theme-switcher/gui.c:56
+#: capplets/theme-switcher/gui.c:83
 #, c-format
 msgid ""
 "Error installing theme:\n"
@@ -400,16 +431,16 @@ msgid ""
 "%s"
 msgstr ""
 
-#: capplets/theme-switcher/gui.c:87
+#: capplets/theme-switcher/gui.c:114
 #, fuzzy
 msgid "Select a theme to install"
 msgstr "Sélection du fichier à sauvegarder"
 
-#: capplets/theme-switcher/gui.c:163
+#: capplets/theme-switcher/gui.c:191
 msgid "Available Themes"
 msgstr "Thèmes Disponibles"
 
-#: capplets/theme-switcher/gui.c:188
+#: capplets/theme-switcher/gui.c:216
 msgid ""
 "Auto\n"
 "Preview"
@@ -417,7 +448,7 @@ msgstr ""
 "Auto\n"
 "Prévisualisation"
 
-#: capplets/theme-switcher/gui.c:199
+#: capplets/theme-switcher/gui.c:228
 msgid ""
 "Install new\n"
 "theme..."
@@ -425,11 +456,15 @@ msgstr ""
 "Installer le\n"
 "nouveau thème..."
 
-#. HTML widget describing themes
+#. Font selector.
 #.
-#: capplets/theme-switcher/gui.c:205
-msgid "Theme Information"
-msgstr "Informations sur le thème"
+#: capplets/theme-switcher/gui.c:234
+msgid "User Font"
+msgstr ""
+
+#: capplets/theme-switcher/gui.c:255
+msgid "Use custom font."
+msgstr ""
 
 #: capplets/ui-properties/ui-properties.c:53
 msgid "Default Gtk setting"
@@ -711,6 +746,9 @@ msgstr ""
 #: control-center/main.c:162
 msgid "Control Center"
 msgstr ""
+
+#~ msgid "Theme Information"
+#~ msgstr "Informations sur le thème"
 
 #~ msgid "Default Gtk setting [FIXME - Describe this better]"
 #~ msgstr "Configuration de Gtk par défaut"
