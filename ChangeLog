@@ -1,3 +1,8 @@
+2001-06-20  Bradford Hovinen  <hovinen@ximian.com>
+
+	* capplets/new-*/main.c (do_set_xml): Don't save unless
+	apply_settings is set
+
 2001-06-20  Richard Hestilow  <hestilow@ximian.com>
 
 	* capplets/new-background-properties/applicer.c
@@ -16,6 +21,12 @@
 	* capplets/new-*/main.c (do_set_xml): Use read () rather than
 	fread () to make sure to catch end-of-file. Gracefully handle
 	no-data case.
+
+2001-06-12  Bradford Hovinen  <hovinen@ximian.com>
+
+	* capplets/new-mouse-properties/main.c (ok_cb):
+	(cancel_cb): Add #ifdef HAVE_XIMIAN_ARCHIVER around some parts
+	missing it
 
 2001-06-07  Christian Rose  <menthos@menthos.com>
 

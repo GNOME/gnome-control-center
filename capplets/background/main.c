@@ -175,10 +175,10 @@ do_set_xml (gboolean apply_settings)
 			prefs = preferences_read_xml (doc);
 
 			if (prefs != NULL) {
-				preferences_save (prefs);
-
-				if (apply_settings)
+				if (apply_settings) {
+					preferences_save (prefs);
 					preferences_apply_now (prefs);
+				}
 
 				return;
 			}
