@@ -1,3 +1,14 @@
+2002-03-26  jacob berkman  <jacob@ximian.com>
+
+	* capplets/Makefile.am (always_built_SUBDIRS): remove screensaver
+
+	* capplets/screensaver/: remove as xscreensaver provides these
+	things
+
+	* configure.in: remove xscreensaver check again as xscreensaver
+	supplies the .desktop file for itself
+	(AC_OUTPUT): remove capplets/screensaver/Makefile
+
 2002-03-26  Richard Hestilow  <hestilow@ximian.com>
 
 	* configure.in: The check for xscreensaver got removed, add it back

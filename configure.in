@@ -53,11 +53,6 @@ PKG_CHECK_MODULES(GNOME, libgnomeui-2.0)
 PKG_CHECK_MODULES(VFS_CAPPLET, $COMMON_MODULES gnome-vfs-module-2.0 gnome-vfs-2.0)
 PKG_CHECK_MODULES(SOUND_CAPPLET, esound)
 
-AC_PATH_PROG(XSCREENSAVER, xscreensaver, no)
-if test "$XSCREENSAVER" = no ; then
- 	AC_MSG_ERROR(xscreensaver was not found. It can be downloaded from http://www.jwz.org/xscreensaver/.)
-fi
-
 AC_PATH_PROG(GCONFTOOL, gconftool-2)
 
 dnl ==============================================
@@ -202,7 +197,6 @@ capplets/font/Makefile
 capplets/keybindings/Makefile
 capplets/keyboard/Makefile
 capplets/mouse/Makefile
-capplets/screensaver/Makefile
 capplets/sound/Makefile
 capplets/theme-switcher/Makefile
 capplets/theme-switcher/control/Makefile
