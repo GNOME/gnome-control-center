@@ -99,7 +99,7 @@ struct _ApplierPrivate
 	GdkPixbuf          *pixbuf;            /* "working" pixbuf - All data
 						* are rendered onto this for
 						* display */
-	Pixmap              pixmap;            /* Pixmap onto which we dump the
+	GdkPixmap          *pixmap;            /* Pixmap onto which we dump the
 						* pixbuf above when we are ready
 						* to render to the screen */
 	gboolean            pixmap_is_set;     /* TRUE iff the pixmap above
@@ -165,9 +165,9 @@ static gboolean wallpaper_full_cover_p (const Applier     *applier,
 					const Preferences *prefs);
 static gboolean render_small_pixmap_p  (const Preferences *prefs);
 
-static Pixmap make_root_pixmap       (gint               width,
+static GdkPixmap *make_root_pixmap   (gint               width,
 				      gint               height);
-static void set_root_pixmap          (Pixmap             pixmap);
+static void set_root_pixmap          (GdkPixmap         *pixmap);
 
 static gboolean is_nautilus_running  (void);
 
@@ -254,7 +254,7 @@ applier_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 			applier->p->render_geom.y = 0;
 			applier->p->render_geom.width = gdk_screen_width ();
 			applier->p->render_geom.height = gdk_screen_height ();
-			applier->p->pixmap = 0;
+			applier->p->pixmap = NULL;
 			applier->p->pixmap_is_set = FALSE;
 			break;
 
@@ -355,7 +355,7 @@ applier_apply_prefs (Applier           *applier,
 	g_return_if_fail (IS_APPLIER (applier));
 
 	if (applier->p->type == APPLIER_ROOT && applier->p->nautilus_running)
-		set_root_pixmap (-1);
+		set_root_pixmap ((GdkPixmap *) -1);
 
 	if (!prefs->enabled) {
 		if (applier->p->type == APPLIER_PREVIEW)
@@ -747,7 +747,6 @@ static void
 render_to_screen (Applier *applier, const Preferences *prefs) 
 {
 	GdkGC *gc;
-	GC xgc;
 
 	g_return_if_fail (applier != NULL);
 	g_return_if_fail (IS_APPLIER (applier));
@@ -755,7 +754,6 @@ render_to_screen (Applier *applier, const Preferences *prefs)
 	g_return_if_fail (IS_PREFERENCES (prefs));
 
 	gc = gdk_gc_new (GDK_ROOT_PARENT ());
-	xgc = GDK_GC_XGC (gc);
 
 	if (applier->p->pixbuf != NULL) {
 		if (applier->p->pixbuf_render_geom.x != 0 ||
@@ -763,26 +761,25 @@ render_to_screen (Applier *applier, const Preferences *prefs)
 		    applier->p->pixbuf_render_geom.width != applier->p->render_geom.width ||
 		    applier->p->pixbuf_render_geom.height != applier->p->render_geom.height)
 		{
-			gdk_color_alloc (gdk_window_get_colormap (GDK_ROOT_PARENT()), prefs->color1);
+			gdk_color_alloc (gdk_window_get_colormap (GDK_ROOT_PARENT ()), prefs->color1);
 			gdk_gc_set_foreground (gc, prefs->color1);
-			XFillRectangle (GDK_DISPLAY (),
-					applier->p->pixmap, xgc, 
-					applier->p->render_geom.x,
-					applier->p->render_geom.y, 
-					applier->p->render_geom.width,
-					applier->p->render_geom.height);
+			gdk_draw_rectangle (applier->p->pixmap, gc, TRUE,
+					    applier->p->render_geom.x,
+					    applier->p->render_geom.y, 
+					    applier->p->render_geom.width,
+					    applier->p->render_geom.height);
 		}
 
-		gdk_pixbuf_xlib_render_to_drawable
+		gdk_pixbuf_render_to_drawable
 			(applier->p->pixbuf,
-			 applier->p->pixmap, xgc,
+			 applier->p->pixmap, gc,
 			 applier->p->pixbuf_xlate.x,
 			 applier->p->pixbuf_xlate.y,
 			 applier->p->pixbuf_render_geom.x,
 			 applier->p->pixbuf_render_geom.y,
 			 applier->p->pixbuf_render_geom.width,
 			 applier->p->pixbuf_render_geom.height,
-			 XLIB_RGB_DITHER_MAX, 0, 0);
+			 GDK_RGB_DITHER_MAX, 0, 0);
 	} else {
 		if (applier->p->type == APPLIER_ROOT) {
 			gdk_color_alloc (gdk_window_get_colormap (GDK_ROOT_PARENT()), prefs->color1);
@@ -792,12 +789,11 @@ render_to_screen (Applier *applier, const Preferences *prefs)
 		else if (applier->p->type == APPLIER_PREVIEW) {
 			gdk_color_alloc (gdk_window_get_colormap (applier->p->preview_widget->window), prefs->color1);
 			gdk_gc_set_foreground (gc, prefs->color1);
-			XFillRectangle (GDK_DISPLAY (),
-					applier->p->pixmap, xgc, 
-					applier->p->render_geom.x,
-					applier->p->render_geom.y, 
-					applier->p->render_geom.width,
-					applier->p->render_geom.height);
+			gdk_draw_rectangle (applier->p->pixmap, gc, TRUE,
+					    applier->p->render_geom.x,
+					    applier->p->render_geom.y, 
+					    applier->p->render_geom.width,
+					    applier->p->render_geom.height);
 		}
 	}
 
@@ -805,7 +801,7 @@ render_to_screen (Applier *applier, const Preferences *prefs)
 	    (prefs->wallpaper_enabled || prefs->gradient_enabled))
 		set_root_pixmap (applier->p->pixmap);
 	else if (applier->p->type == APPLIER_ROOT && !applier->p->pixmap_is_set)
-		set_root_pixmap (None);
+		set_root_pixmap (NULL);
 
 	gdk_gc_destroy (gc);
 }
@@ -844,8 +840,7 @@ create_pixmap (Applier *applier, const Preferences *prefs)
 		if (!GTK_WIDGET_REALIZED (applier->p->preview_widget))
 			gtk_widget_realize (applier->p->preview_widget);
 
-		applier->p->pixmap = 
-			GDK_WINDOW_XWINDOW (GTK_PIXMAP (applier->p->preview_widget)->pixmap);
+		applier->p->pixmap = GTK_PIXMAP (applier->p->preview_widget)->pixmap;
 		applier->p->pixmap_is_set = TRUE;
 		break;
 	}
@@ -1299,23 +1294,23 @@ render_small_pixmap_p (const Preferences *prefs)
 /* Create a persistant pixmap. We create a separate display
  * and set the closedown mode on it to RetainPermanent
  */
-static Pixmap
+static GdkPixmap *
 make_root_pixmap (gint width, gint height)
 {
 	Display *display;
-	Pixmap result;
+	Pixmap xpixmap;
 	
 	display = XOpenDisplay (gdk_display_name);
 	XSetCloseDownMode (display, RetainPermanent);
 
-	result = XCreatePixmap (display,
-				DefaultRootWindow (display),
-				width, height,
-				xlib_rgb_get_depth ());
+	xpixmap = XCreatePixmap (display,
+				 DefaultRootWindow (display),
+				 width, height,
+				 DefaultDepthOfScreen (DefaultScreenOfDisplay (GDK_DISPLAY ())));
 
 	XCloseDisplay (display);
 
-	return result;
+	return gdk_pixmap_foreign_new (xpixmap);
 }
 
 /* Set the root pixmap, and properties pointing to it. We
@@ -1326,12 +1321,15 @@ make_root_pixmap (gint width, gint height)
  */
 
 static void 
-set_root_pixmap (Pixmap pixmap) 
+set_root_pixmap (GdkPixmap *pixmap) 
 {
 	GdkAtom type;
 	gulong nitems, bytes_after;
 	gint format;
 	guchar *data_esetroot;
+	Pixmap pixmap_id;
+
+	pixmap_id = GDK_WINDOW_XWINDOW (pixmap);
 
 	XGrabServer (GDK_DISPLAY ());
 
@@ -1347,28 +1345,28 @@ set_root_pixmap (Pixmap pixmap)
 
 			old_pixmap = *((Pixmap *) data_esetroot);
 
-			if (pixmap != -1 && old_pixmap != pixmap)
-				XKillClient(GDK_DISPLAY (), old_pixmap);
-			else if (pixmap == -1)
-				pixmap = old_pixmap;
+			if (pixmap != (GdkPixmap *) -1 && old_pixmap != pixmap_id)
+				XKillClient (GDK_DISPLAY (), old_pixmap);
+			else if (pixmap == (GdkPixmap *) -1)
+				pixmap_id = old_pixmap;
 		}
 
 		XFree (data_esetroot);
 	}
 
-	if (pixmap != None && pixmap != -1) {
+	if (pixmap != NULL && pixmap != (GdkPixmap *) -1) {
 		XChangeProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (),
 				 gdk_atom_intern ("ESETROOT_PMAP_ID", FALSE),
 				 XA_PIXMAP, 32, PropModeReplace,
-				 (guchar *) &pixmap, 1);
+				 (guchar *) &pixmap_id, 1);
 		XChangeProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (),
 				 gdk_atom_intern ("_XROOTPMAP_ID", FALSE),
 				 XA_PIXMAP, 32, PropModeReplace,
-				 (guchar *) &pixmap, 1);
+				 (guchar *) &pixmap_id, 1);
 
 		XSetWindowBackgroundPixmap (GDK_DISPLAY (), GDK_ROOT_WINDOW (),
-					    pixmap);
-	} else if (pixmap == None) {
+					    pixmap_id);
+	} else if (pixmap == NULL) {
 		XDeleteProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (),
 				 gdk_atom_intern ("ESETROOT_PMAP_ID", FALSE));
 		XDeleteProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (),
@@ -1377,7 +1375,7 @@ set_root_pixmap (Pixmap pixmap)
 
 	XClearWindow (GDK_DISPLAY (), GDK_ROOT_WINDOW ());
 	XUngrabServer (GDK_DISPLAY ());
-	XFlush(GDK_DISPLAY ());
+	XFlush (GDK_DISPLAY ());
 }
 
 static gboolean

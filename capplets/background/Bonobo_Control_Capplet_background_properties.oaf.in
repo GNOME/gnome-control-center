@@ -17,4 +17,13 @@
 	<oaf_attribute name="name" type="string" value="Background properties capplet"/>
 </oaf_server>
 
+<oaf_server iid="OAFIID:Bonobo_Listener_background_properties" type="factory"
+	    location="OAFIID:Bonobo_Control_Capplet_background_properties_Factory">
+	<oaf_attribute name="repo_ids" type="stringv">
+		<item value="IDL:Bonobo/Listener:1.0"/>
+		<item value="IDL:Bonobo/Unknown:1.0"/>
+	</oaf_attribute>
+	<oaf_attribute name="name" type="string" value="Listener for changes to background properties"/>
+</oaf_server>
+
 </oaf_info>
