@@ -1,4 +1,4 @@
-appicondir = $(datadir)/pixmaps
+appicondir = $(datadir)/control-center/icons
 appicon_DATA = control-center.png
 
 splashdir = $(datadir)/pixmaps/gnomecc
@@ -48,4 +48,21 @@ gnomecc_LDADD = \
 	@GNOMECC_LIBS@					\
 	$(INTLLIBS)
 
-EXTRA_DIST = gnomecc.desktop.in $(appicon_DATA) $(splash_DATA) $(glade_DATA)
+EXTRA_DIST = gnomecc.desktop.in $(appicon_DATA) $(splash_DATA) $(glade_DATA) $(groups_in_files)
+
+paneldir        = $(datadir)/gnome/apps/Settings
+ccenterdir      = $(datadir)/control-center/capplets
+ccenter_DATA = Gnome.directory
+groups = Gnome
+groups_files = $(groups:=.directory)
+groups_in_files = $(groups_files:.directory=.directory.in)
+
+$(groups_in_files): %.directory.in: %.directory.in.in
+	    sed s#Icon=#Icon=$(GNOMECC_ICONS_DIR)/control-center.png# < $< > $@
+
+$(groups_files): %.directory: %.directory.in
+	$(top_builddir)/xml-i18n-merge -d $(top_srcdir)/po $< $@
+
+install-data-local:
+	$(mkinstalldirs) $(datadir)/control-center/capplets/$(cappletgroup)
+	$(INSTALL_DATA) $(srcdir)/$(groups).directory $(datadir)/control-center/capplets/.directory
