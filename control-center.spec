@@ -1,5 +1,5 @@
 # Note that this is NOT a relocatable package
-%define ver      0.99
+%define ver      0.99.0
 %define rel      1
 %define prefix   /usr
 
@@ -14,9 +14,8 @@ BuildRoot: /var/tmp/control-center-root
 Obsoletes: gnome
 Packager: Jonathan Blandford <jrb@redhat.com>
 URL: http://www.gnome.org
-Prereq: /sbin/install-info
 Docdir: %{prefix}/doc
-Requires: xscreensaver
+Requires: xscreensaver >= 2.34
 Requires: gnome-core >= 0.99
 Requires: ORBit >= 0.3.0
 
@@ -28,10 +27,9 @@ name but really GNOME is a nice GUI desktop environment.  It makes
 using your computer easy, powerful, and easy to configure.
 
 %package devel
-Summary: GNOME control-center, includes
+Summary: GNOME control-center includes
 Group: X11/Libraries
-Requires: gnome-core
-PreReq: /sbin/install-info
+Requires: control-center
 
 %description devel
 Capplet development stuff
@@ -47,15 +45,7 @@ Capplet development stuff
 %setup
 
 %build
-# Needed for snapshot releases.
 CFLAGS="$RPM_OPT_FLAGS" ./configure --prefix=%prefix
-
-if [ "$SMP" != "" ]; then
-  (make "MAKE=make -k -j $SMP"; exit 0)
-  make
-else
-  make
-fi
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -63,7 +53,7 @@ rm -rf $RPM_BUILD_ROOT
 make prefix=$RPM_BUILD_ROOT%{prefix} install
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+#rm -rf $RPM_BUILD_ROOT
 
 %post -p /sbin/ldconfig
 
@@ -75,7 +65,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS COPYING ChangeLog NEWS README
 %{prefix}/bin/*
 %{prefix}/lib/lib*.so.*
-%{prefix}/share/control-center
+%{prefix}/share/control-center/*
 %{prefix}/share/locale/*/*/*
 
 %files devel
