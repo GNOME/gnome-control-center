@@ -242,7 +242,7 @@ control_center_get_information (void)
 
 	information = g_new0 (ControlCenterInformation, 1);
 
-	menu_tree = menu_tree_lookup ("preferences.menu");
+	menu_tree = menu_tree_lookup ("preferences.menu", MENU_TREE_FLAGS_NONE);
 
 	if (!(menu_root = menu_tree_get_root_directory (menu_tree))) {
 		menu_tree_unref (menu_tree);
