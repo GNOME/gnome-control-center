@@ -574,7 +574,7 @@ egg_pixbuf_new_from_file_at_size (const char *filename,
                 g_set_error (error,
                              G_FILE_ERROR,
                              g_file_error_from_errno (errno),
-#warning store translation here after gnome-2-6 branches
+/* FIXME warning store translation here after gnome-2-6 branches */
                              "Failed to open file '%s': %s",
                              filename, g_strerror (errno));
 		return NULL;
@@ -613,7 +613,7 @@ egg_pixbuf_new_from_file_at_size (const char *filename,
 		g_set_error (error,
                              GDK_PIXBUF_ERROR,
                              GDK_PIXBUF_ERROR_FAILED,
-#warning store translation here after gnome-2-6 branches
+/* FIXME warning store translation here after gnome-2-6 branches */
                              "Failed to load image '%s': reason not known, probably a corrupt image file",
                              filename);
 		return NULL;
