@@ -78,6 +78,7 @@ static void	 edit_default_clicked 			(GtkWidget 	*widget,
 						 	 gpointer   	data);
 static GtkWidget *create_mime_list_and_scroller 	(void);
 static void 	 ok_callback 		  		(void);
+static void 	 help_callback 		  		(void);
 static void	 gtk_widget_make_bold 			(GtkWidget 	*widget);
 static GdkFont 	 *gdk_font_get_bold 			(const GdkFont  *plain_font);
 static void	 gtk_widget_set_font 			(GtkWidget 	*widget, 
@@ -219,6 +220,15 @@ static void
 ok_callback ()
 {
 }
+
+static void
+help_callback ()
+{
+    GnomeHelpMenuEntry help_entry= {"control-center",
+    "filetypes.html"};
+    gnome_help_display (NULL, &help_entry);
+}
+
 
 static void
 populate_extension_list (const char *mime_type, GtkCList *list)
@@ -846,6 +856,9 @@ init_mime_capplet (const char *scroll_to_mime_type)
         /* Setup capplet signals */
         gtk_signal_connect(GTK_OBJECT(capplet), "ok",
                            GTK_SIGNAL_FUNC(ok_callback), NULL);
+
+        gtk_signal_connect(GTK_OBJECT(capplet), "help",
+                           GTK_SIGNAL_FUNC(help_callback), NULL);
 
 	gtk_signal_connect (GTK_OBJECT (mime_list),"select_row",
        	                   GTK_SIGNAL_FUNC (mime_list_selected_row_callback), NULL);

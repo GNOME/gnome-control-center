@@ -1,3 +1,30 @@
+2001-03-28  Dan Mueth  <dan@eazel.com>
+
+	Fixing every capplet in control-center, since none of them
+	actually used the ghelp URL handler as they should - instead
+	they were pulling up help as a normal URL ie. in Netscape.
+	Now they should load in the ghelp handler.
+	It is cute how almost every one has a different help callback 
+	function name, although the contents are pretty much identical.
+
+	* capplets/background-properties/property-background.c:
+	(background_help):
+	* capplets/bell-properties/bell-properties.c: (bell_help):
+	* capplets/file-types/file-types-capplet.c: (help_callback),
+	(init_mime_capplet):
+	* capplets/gnome-edit-properties/gnome-edit-properties.c:
+	(edit_help):
+	* capplets/keyboard-properties/keyboard-properties.c:
+	(keyboard_help):
+	* capplets/mouse-properties/mouse-properties.c: (mouse_help):
+	* capplets/screensaver-properties/callbacks.c: (help_callback):
+	* capplets/session-properties/session-properties.c: (help):
+	* capplets/sound-properties/sound-properties.c: (ui_do_help):
+	* capplets/theme-switcher/gui.c: (click_help):
+	* capplets/ui-properties/ui-properties.c: (help):
+	* capplets/url-properties/url-properties.c: (url_capplet_help):
+	* capplets/wm-properties/wm-properties-capplet.c: (help_callback):
+
 2001-03-27  Dan Mueth  <dan@eazel.com>
 
 	Fixed screenshot links.
