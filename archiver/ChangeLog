@@ -1,3 +1,20 @@
+2000-12-22  Bradford Hovinen  <hovinen@helixcode.com>
+
+	* archive.c (foreach_cb):
+	(archive_foreach_child_location): Use auxillary structure to pass
+	data to traversal callback
+	(archive_get_location): 
+	(archive_register_location): strdup() location ids
+	(free_location_cb): free() key
+
+2000-12-20  Bradford Hovinen  <hovinen@helixcode.com>
+
+	* location.c (location_get_parent): Implement
+
+	* archive.c (load_all_locations): Implement
+	(foreach_cb): 
+	(archive_foreach_child_location): Implement
+
 2000-12-19  Bradford Hovinen  <hovinen@helixcode.com>
 
 	* Makefile.am (bin_PROGRAMS): Changed name of archiver to

@@ -29,30 +29,49 @@
 #include <sys/types.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <dirent.h>
+#include <errno.h>
 
 #include "archive.h"
 
+typedef struct _GRealTree  GRealTree;
+typedef struct _GTreeNode  GTreeNode;
+
+typedef struct _foreach_t foreach_t;
+
+struct _foreach_t 
+{
+	Archive     *archive;
+	LocationCB   callback;
+	Location    *parent;
+	gpointer     user_data;
+};
+
 static GtkObjectClass *parent_class;
+
+static Archive *user_archive;
+static Archive *global_archive;
 
 enum {
 	ARG_0,
 	ARG_PREFIX
 };
 
-static void archive_init (Archive *archive);
-static void archive_class_init (ArchiveClass *klass);
+static void archive_init          (Archive *archive);
+static void archive_class_init    (ArchiveClass *klass);
 
-static void archive_destroy    (GtkObject *object);
+static void archive_destroy       (GtkObject *object);
 
-static void archive_set_arg (GtkObject *object,
-			     GtkArg *arg,
-			     guint arg_id);
+static void archive_set_arg       (GtkObject *object,
+				   GtkArg *arg,
+				   guint arg_id);
 
-static void archive_get_arg (GtkObject *object,
-			     GtkArg *arg,
-			     guint arg_id);
+static void archive_get_arg       (GtkObject *object,
+				   GtkArg *arg,
+				   guint arg_id);
 
-static gboolean do_load (Archive *archive);
+static gboolean do_load           (Archive *archive);
+static void load_all_locations    (Archive *archive);
 
 guint
 archive_get_type (void) 
@@ -162,6 +181,11 @@ archive_load (gboolean is_global)
 	GtkObject *object;
 	gchar *prefix;
 
+	if (is_global && global_archive != NULL)
+		return GTK_OBJECT (global_archive);
+	else if (user_archive != NULL)
+		return GTK_OBJECT (user_archive);
+
 	if (is_global)
 		prefix = CONFIGDIR "/helix-config";
 	else
@@ -184,6 +208,11 @@ archive_load (gboolean is_global)
 	ARCHIVE (object)->backend_list = 
 		BACKEND_LIST (backend_list_new (is_global));
 
+	if (is_global)
+		global_archive = ARCHIVE (object);
+	else
+		user_archive = ARCHIVE (object);
+
 	return object;
 }
 
@@ -191,6 +220,7 @@ static gint
 free_location_cb (gchar *locid, Location *location) 
 {
 	location_close (location);
+	g_free (locid);
 
 	return FALSE;
 }
@@ -262,7 +292,8 @@ archive_get_location (Archive *archive, const gchar *locid)
 		if (!loc_obj) return NULL;
 
 		if (loc_obj)
-			g_tree_insert (archive->locations, locid, loc_obj);
+			g_tree_insert (archive->locations, 
+				       g_strdup (locid), loc_obj);
 	}
 
 	if (loc_obj) {
@@ -290,7 +321,7 @@ archive_register_location (Archive *archive, Location *location)
 	g_return_if_fail (IS_LOCATION (location));
 
 	g_tree_insert (archive->locations,
-		       location_get_id (location),
+		       g_strdup (location_get_id (location)),
 		       location);
 }
 
@@ -501,6 +532,51 @@ archive_get_backend_list (Archive *archive)
 	return archive->backend_list;
 }
 
+static gint
+foreach_cb (gchar *key, Location *value, foreach_t *data) 
+{
+	if (location_get_parent (value) == data->parent)
+		return data->callback (data->archive, value, 
+				       data->user_data);
+	else
+		return 0;
+}
+
+/**
+ * archive_foreach_child_location:
+ * @archive:
+ * @callback: Callback to invoke
+ * @parent: Iterate through the children of this location; iterate through
+ * toplevel locations if this is NULL
+ * @data: Arbitrary data to pass to the callback
+ *
+ * Invoke the given callback for each location that inherits the given
+ * location, or for each toplevel location if the parent given is
+ * NULL. Terminate the iteration if any child returns a nonzero value
+ **/
+
+void
+archive_foreach_child_location (Archive *archive, LocationCB callback,
+				Location *parent, gpointer data)
+{
+	foreach_t f_data;
+
+	g_return_if_fail (archive != NULL);
+	g_return_if_fail (IS_ARCHIVE (archive));
+
+	load_all_locations (archive);
+
+	f_data.archive = archive;
+	f_data.callback = callback;
+	f_data.parent = parent;
+	f_data.user_data = data;
+
+	g_tree_traverse (archive->locations,
+			 (GTraverseFunc) foreach_cb,
+			 G_IN_ORDER,
+			 &f_data);
+}
+
 /* Load the archive information from disk; return TRUE on success and FALSE on 
  * failure
  */
@@ -520,4 +596,40 @@ do_load (Archive *archive)
 	if (ret == -1) return FALSE;
 
 	return TRUE;
+}
+
+/* Load and register all the locations for this archive */
+
+static void
+load_all_locations (Archive *archive) 
+{
+	DIR *archive_dir;
+	struct dirent entry, *entryp;
+	gchar *filename;
+
+	archive_dir = opendir (archive->prefix);
+
+	if (archive_dir == NULL) {
+		g_warning ("load_all_locations: %s", g_strerror (errno));
+		return;
+	}
+
+	while (1) {
+		if (readdir_r (archive_dir, &entry, &entryp)) {
+			g_warning ("load_all_locations: %s",
+				   g_strerror (errno));
+			break;
+		}
+
+		if (entryp == NULL) break;
+
+		if (strcmp (entry.d_name, ".") &&
+		    strcmp (entry.d_name, ".."))
+		{
+			filename = g_concat_dir_and_file (archive->prefix,
+							  entry.d_name);
+			if (g_file_test (filename, G_FILE_TEST_ISDIR))
+				archive_get_location (archive, entry.d_name);
+		}
+	}
 }

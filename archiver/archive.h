@@ -34,16 +34,17 @@
 #define IS_ARCHIVE(obj)       GTK_CHECK_TYPE (obj, archive_get_type ())
 
 typedef struct _ArchiveClass ArchiveClass;
+typedef gint (*LocationCB) (Archive *, Location *, gpointer);
 
 struct _Archive 
 {
-	GtkObject object;
+	GtkObject    object;
 
-	gchar *prefix;
-	GTree *locations;
-	gboolean is_global;
+	gchar       *prefix;
+	GTree       *locations;
+	gboolean     is_global;
 
-	gchar *current_location_id;
+	gchar       *current_location_id;
 
 	BackendList *backend_list;
 };
@@ -53,25 +54,35 @@ struct _ArchiveClass
 	GtkObjectClass parent;
 };
 
-guint archive_get_type (void);
+guint        archive_get_type                (void);
 
-GtkObject *archive_load (gboolean is_global);
+GtkObject   *archive_load                    (gboolean is_global);
 
-void archive_close      (Archive *archive);
+void         archive_close                   (Archive *archive);
 
-Location *archive_get_location (Archive *archive, const gchar *location);
-void archive_register_location (Archive *archive, Location *location);
-void archive_unregister_location (Archive *archive, Location *location);
+Location    *archive_get_location            (Archive *archive,
+					      const gchar *location);
+void         archive_register_location       (Archive *archive,
+					      Location *location);
+void         archive_unregister_location     (Archive *archive,
+					      Location *location);
 
-Location *archive_get_current_location (Archive *archive);
-void archive_set_current_location (Archive *archive, Location *location);
+Location    *archive_get_current_location    (Archive *archive);
+void         archive_set_current_location    (Archive *archive,
+					      Location *location);
 
 const gchar *archive_get_current_location_id (Archive *archive);
-void archive_set_current_location_id (Archive *archive, const gchar *locid);
+void         archive_set_current_location_id (Archive *archive,
+					      const gchar *locid);
 
-const gchar *archive_get_prefix (Archive *archive);
-gboolean archive_is_global (Archive *archive);
+const gchar *archive_get_prefix              (Archive *archive);
+gboolean     archive_is_global               (Archive *archive);
 
-BackendList *archive_get_backend_list (Archive *archive);
+BackendList *archive_get_backend_list        (Archive *archive);
+
+void         archive_foreach_child_location  (Archive *archive,
+					      LocationCB callback,
+					      Location *parent,
+					      gpointer data);
 
 #endif /* __ARCHIVE */

@@ -799,6 +799,24 @@ location_find_path_from_common_parent (Location *location,
 }
 
 /**
+ * location_get_parent
+ * @location:
+ *
+ * Returns a reference to the location that this location inherits
+ *
+ * Return value: Reference to parent location
+ **/
+
+Location *
+location_get_parent (Location *location)
+{
+	g_return_val_if_fail (location != NULL, NULL);
+	g_return_val_if_fail (IS_LOCATION (location), NULL);
+
+	return location->p->inherits_location;
+}
+
+/**
  * location_get_path:
  * @location: 
  * 

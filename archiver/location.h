@@ -103,6 +103,7 @@ void location_foreach_backend      (Location *location,
 GList *location_find_path_from_common_parent (Location *location, 
 					      Location *location2);
 
+Location *location_get_parent      (Location *location);
 const gchar *location_get_path     (Location *location);
 const gchar *location_get_label    (Location *location);
 const gchar *location_get_id       (Location *location);
