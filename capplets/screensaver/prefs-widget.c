@@ -34,6 +34,7 @@
 #include "rc-parse.h"
 #include <gal/e-table/e-table.h>
 #include <gal/e-table/e-table-simple.h>
+#include <gal/widgets/e-unicode.h>
 
 #define WID(str) (glade_xml_get_widget (prefs_widget->priv->xml, str))
 
@@ -53,6 +54,7 @@ struct _PrefsWidgetPrivate
 	guint random_timeout;
 	GList *random_current;
 	GtkWindow *parent;
+	gchar **translated;
 
 	/* Copied from Preferences...for OK/Cancel support in dialog */
 	gboolean  power_management;
@@ -171,8 +173,20 @@ guint prefs_widget_get_type (void)
 static void
 prefs_widget_destroy (PrefsWidget *prefs_widget)
 {
+	int i;
+
 	if (prefs_widget->priv->xml)
 		gtk_object_destroy (GTK_OBJECT (prefs_widget->priv->xml));
+
+	if (prefs_widget->priv->translated)
+	{
+		for (i = 0; prefs_widget->priv->translated[i] != NULL; i++)
+			g_free (prefs_widget->priv->translated[i]);
+		g_free (prefs_widget->priv->translated);
+	}
+
+	close_preview ();
+
 	g_free (prefs_widget->priv);
 
 	if (GTK_OBJECT_CLASS (prefs_widget_parent_class)->destroy)
@@ -534,7 +548,27 @@ prefs_widget_set_mode (PrefsWidget *prefs_widget, SelectionMode mode)
 void
 prefs_widget_set_screensavers (PrefsWidget *prefs_widget, GList *screensavers)
 {
+	int i;
+	GList *l;
+	Screensaver *saver;
+
+	if (prefs_widget->priv->translated)
+	{
+		for (i = 0; prefs_widget->priv->translated[i] != NULL; i++)
+			g_free (prefs_widget->priv->translated[i]);
+		g_free (prefs_widget->priv->translated);
+	}
+	
 	prefs_widget->screensavers = screensavers;
+	/* Good thing this is called infrequently */
+	prefs_widget->priv->translated = g_new0 (gchar*,
+			g_list_length (screensavers) + 1);
+	for (l = screensavers, i = 0; l != NULL; l = l->next, i++)
+	{
+		saver = l->data;
+		prefs_widget->priv->translated[i] = e_utf8_from_locale_string (gettext (saver->label));
+	}
+	
 	e_table_model_changed (prefs_widget->priv->etm);
 }
 
@@ -583,14 +617,16 @@ model_value_at (ETableModel *etm, int col, int row, void *data)
 {
 	PrefsWidget *prefs_widget = PREFS_WIDGET (data);
 	Screensaver *saver = g_list_nth_data (prefs_widget->screensavers, row);
-
+	
 	if (!saver)
 		return NULL;
 	
 	if (col == 0)
 		return GINT_TO_POINTER (saver->enabled);
 	else
-		return saver->label;
+	{
+		return prefs_widget->priv->translated[row]; 
+	}
 }
 
 static void
@@ -872,15 +908,15 @@ about_cb (GtkWidget *widget, PrefsWidget *prefs_widget)
 	gchar *desc, *name;
 
 	desc = screensaver_get_desc (prefs_widget->selected_saver);
-	label = gtk_label_new (desc);
+	label = gtk_label_new (gettext (desc));
 	gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
 	
 #if 0
 	name = screensaver_get_label (prefs_widget->selected_saver->name);
 #endif
-	name = g_strdup (prefs_widget->selected_saver->label);
+	name = g_strdup (gettext (prefs_widget->selected_saver->label));
 	
-	title = g_strdup_printf ("About %s\n", name);
+	title = g_strdup_printf (_("About %s\n"), name);
 	g_free (name);
 	
 	dlg = gnome_dialog_new (title, GNOME_STOCK_BUTTON_CLOSE, NULL);

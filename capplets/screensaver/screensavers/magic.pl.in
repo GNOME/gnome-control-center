@@ -150,20 +150,16 @@ if ($thefile)
 		}
 		elsif ($_ =~ /\-?(\w[\w\-]+) ((.+\w)?)[\t ]+/)
 		{
-			if ($1 eq "-") { print "$1 $2\n";}
 			my %saver = ("name" => $1,
 				     "command" => $2);
 			$savers{$1} = \%saver;
 			next;
 		}
 		
-		if ($name eq "rd-bomb") { print "$label $name $command\n";}
-		if ($name eq "cosmos") { print "$label $name $command\n";}
 		if ($name)
 		{
 			if ($savers{$name} and $label)
 			{
-				if ($name eq "xmountains") { print "erk\n"};
 				my %saver = %{$savers{$name}};
 				my @fakes;
 				if ($saver{"fakes"})
@@ -226,7 +222,10 @@ if ($adfile)
 		$_ =~ s/\</&lt;/g;
 		$_ =~ s/\>/&gt;/g;
 		$_ =~ s/[\t ]*\n$//g;
+		# lame
 		$_ =~ s/\n\n\! \(xrdb prevention kludge\: whole file\) \*\///g;
+		$_ =~ s/\n\n\n\!\=+[\w\n\t \!]+\=+//g;
+
 		my $desc;
 		my $label;
 		if ($type eq "documentation")
@@ -277,10 +276,6 @@ foreach $key (keys %savers)
 	my %saver = %{$savers{$key}};
 	my $name = $saver{"name"};
 	my $label = $saver{"label"};
-	if ($key eq "xmountains")
-	{
-		print "$name\n";
-	}
 	my $command = $saver{"command"};
 	my $desc = $saver{"desc"};
 	my @fakes;
@@ -395,7 +390,7 @@ foreach $key (keys %savers)
 					print OUTFILE $str;
 				}
 			}
-			elsif ($foo =~ /\<fake/)
+			elsif ($foo =~ /\<fake name/)
 			{
 				# we handle the fakes later 
 			}

@@ -271,9 +271,9 @@ screensaver_prefs_dialog_new (Screensaver *saver)
 
 	dialog->saver = saver;
 
-	title = g_strdup_printf ("%s properties", saver->label);
+	title = g_strdup_printf (_("%s properties"), gettext (saver->label));
 	gtk_entry_set_text (GTK_ENTRY (dialog->name_entry), 
-			    saver->label);
+			    gettext (saver->label));
 
 	if (arg_mapping_exists (saver)) {
 		dialog->cli_args_db = 
@@ -308,7 +308,7 @@ screensaver_prefs_dialog_new (Screensaver *saver)
 			   settings_widget);
 
 	gtk_label_set_text (GTK_LABEL (dialog->description), 
-			    screensaver_get_desc (saver));
+			    gettext (screensaver_get_desc (saver)));
 
 	if (dialog->argument_data)
 		place_screensaver_properties (dialog, dialog->argument_data);

@@ -251,6 +251,59 @@ clone_cb (gchar *key, gchar *value, Preferences *new_prefs)
 	return 0;
 }
 
+static Screensaver*
+screensaver_clone (Screensaver *oldsaver)
+{
+	Screensaver *saver;
+	GList *l;
+	g_return_val_if_fail (oldsaver != NULL, NULL);
+
+	saver = screensaver_new ();
+	saver->id = oldsaver->id;
+	saver->name = g_strdup (oldsaver->name);
+	saver->filename = g_strdup (oldsaver->filename);
+	saver->label = g_strdup (oldsaver->label);
+	saver->description = g_strdup (oldsaver->description);
+	if (oldsaver->command_line)
+		saver->command_line = g_strdup (oldsaver->command_line);
+	if (oldsaver->compat_command_line)
+		saver->compat_command_line = g_strdup (oldsaver->compat_command_line);
+	if (oldsaver->visual)
+		saver->visual = g_strdup (oldsaver->name);
+	saver->enabled = oldsaver->enabled;
+	if (oldsaver->fakepreview)
+		saver->fakepreview = g_strdup (oldsaver->fakepreview);
+
+	for (l = oldsaver->fakes; l != NULL; l = l->next)
+	{
+		saver->fakes = g_list_prepend (saver->fakes, g_strdup (l->data));
+	}
+
+	saver->fakes = g_list_reverse (saver->fakes);
+
+	return saver;
+}
+
+static GList*
+copy_screensavers (GList *screensavers, GHashTable *savers_hash)
+{
+	GList *ret = NULL, *l;
+	Screensaver *saver;
+
+	g_return_val_if_fail (savers_hash != NULL, NULL);
+
+	for (l = screensavers; l != NULL; l = l->next)
+	{
+		saver = screensaver_clone (l->data);
+		ret = g_list_prepend (ret, saver);
+		g_hash_table_insert (savers_hash, saver->name, saver);
+		saver->link = ret;
+	}
+
+	ret = g_list_reverse (ret);
+	return ret;
+}
+
 Preferences *
 preferences_clone (Preferences *prefs) 
 {
@@ -271,6 +324,9 @@ preferences_clone (Preferences *prefs)
 	g_tree_traverse (prefs->config_db, (GTraverseFunc) clone_cb,
 			 G_IN_ORDER, new_prefs);
 
+	new_prefs->screensavers = copy_screensavers (prefs->screensavers, 
+						     new_prefs->savers_hash);
+			
 	read_prefs_from_db (new_prefs);
 	return new_prefs;
 }
@@ -514,14 +570,27 @@ screensaver_new (void)
 void
 screensaver_destroy (Screensaver *saver) 
 {
+	GList *l;
+	
 	if (!saver) return;
 
 	if (saver->visual) g_free (saver->visual);
 	if (saver->name) g_free (saver->name);
+	if (saver->filename) g_free (saver->filename);
 	if (saver->command_line) g_free (saver->command_line);
+	if (saver->compat_command_line) g_free (saver->compat_command_line);
 	if (saver->label) g_free (saver->label);
 	if (saver->description) g_free (saver->description);
+	if (saver->fakepreview) g_free (saver->fakepreview);
 
+	for (l = saver->fakes; l != NULL; l = l->next)
+	{
+		g_free (l->data);
+	}
+
+	if (saver->fakes)
+		g_list_free (saver->fakes);
+	
 	g_free (saver);
 }
 

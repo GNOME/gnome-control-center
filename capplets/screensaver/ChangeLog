@@ -1,3 +1,23 @@
+2001-08-10  Richard Hestilow  <hestilow@ximian.com>
+
+	* Makefile.am (pixmaps_DATA): Remove screen.png,
+	  which was commented out anyway.
+
+	* preferences.c (screensaver_clone): Added.
+	  (copy_screensavers): Added.
+	  (preferences_clone): Copy screensaver list.
+	  (screensaver_destroy): Destroy new fields.
+	* prefs-widget.c (prefs_widget_set_screensavers): Translate
+	  strings and utf8ize ahead of time.
+	  (prefs_widget_destroy): Free translated strings.
+	  (model_value_at): Return pre-translated string.
+	  (about_cb): Call gettext on desc, name, and title.
+	* screensaver-prefs-dialog.c (screensaver_prefs_dialog_new):
+	  Call gettext on label and desc.
+	* capplets/screensavers/Makefile.am: Fixes for make distcheck.
+	* capplets/screensavers/magic.pl.in: Fix description parsing bug,
+	  and fakepreview lost bug.
+	  
 2001-08-10  Carlos Perelló Marín <carlos@gnome-db.org>
 
 	* Makefile.am: Disabled desktop.png. It doesn't exists.

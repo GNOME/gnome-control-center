@@ -8,7 +8,6 @@ pixmaps_DATA = \
 	vidwhacker.png \
 	webcollage.png
 	
-# This is not _DATA because we install _all_ xml files in install-data-local
 Screensavers = \
 	3d_clock.xml \
 	ant.xml \
@@ -147,11 +146,12 @@ Screensavers = \
 	xteevee.xml \
 	zoom.xml 
 
-EXTRA_DIST = $(Screensavers) README
+saversdir = $(GNOMECC_SCREENSAVERS_DIR)
+savers_DATA = $(Screensavers)
+
+EXTRA_DIST = $(Screensavers) README $(pixmaps_DATA)
 
 ADFILE = $(XSCREENSAVER_PREFIX)/lib/X11/app-defaults/XScreenSaver
 
 install-data-local:
-	$(mkinstalldirs) $(DESTDIR)$(GNOMECC_SCREENSAVERS_DIR)
-	$(INSTALL_DATA) *.xml $(DESTDIR)$(GNOMECC_SCREENSAVERS_DIR)
-	@PERL@ $(top_srcdir)/capplets/screensaver/screensavers/magic.pl --adfile $(ADFILE) --merge $(DESTDIR)$(GNOMECC_SCREENSAVERS_DIR)
+	@PERL@ magic.pl --adfile $(ADFILE) --merge $(GNOMECC_SCREENSAVERS_DIR)
