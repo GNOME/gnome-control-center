@@ -20,25 +20,26 @@ extern EditorDescription ecurrent_info;
 extern HelpViewDescription hcurrent_info;
 extern TerminalDescription tcurrent_info;
 
-extern void set_selected_terminal( gchar *string );
-extern void set_selected_help( gchar *string );
-extern void set_selected_editor( gchar *string );
-extern void set_selected_browser( gchar *string );
+extern int set_selected_terminal( gchar *string );
+extern int set_selected_help( gchar *string );
+extern int set_selected_editor( gchar *string );
+extern int set_selected_browser( gchar *string );
 
 void
 on_radiodefeditor_toggled              (GtkToggleButton *togglebutton,
                                         gpointer         user_data)
 {
         gint a = GTK_TOGGLE_BUTTON (togglebutton)->active;
+	int index = -1;
         /* Editor Custom */
         gtk_widget_set_sensitive(gtk_object_get_data (GTK_OBJECT (capplet), "table17"), !a);
         /* Editor Default */
         gtk_widget_set_sensitive(gtk_object_get_data (GTK_OBJECT (capplet), "editorselect"), a);
 
         if (a)
-		set_selected_editor (gtk_entry_get_text (gtk_object_get_data (GTK_OBJECT(capplet), "combo_editor")));
+		index =	set_selected_editor (gtk_entry_get_text (gtk_object_get_data (GTK_OBJECT(capplet), "combo_editor")));
 
-        ecurrent_info.use_name = a;
+        ecurrent_info.index = index;
 
         edit_changed (togglebutton, user_data);
 
@@ -98,15 +99,16 @@ on_seldefbrowser_toggled               (GtkToggleButton *togglebutton,
                                         gpointer         user_data)
 {
         gint a = GTK_TOGGLE_BUTTON (togglebutton)->active;
+	int index = -1;
         /* Browser Custom */
         gtk_widget_set_sensitive(gtk_object_get_data (GTK_OBJECT (capplet), "table20"), !a);
         /* Browser Default */
         gtk_widget_set_sensitive(gtk_object_get_data (GTK_OBJECT (capplet), "browserselect"), a);        
 
         if (a)
-        	set_selected_browser (gtk_entry_get_text (gtk_object_get_data (GTK_OBJECT(capplet), "combo_browser")));        
+        	index = set_selected_browser (gtk_entry_get_text (gtk_object_get_data (GTK_OBJECT(capplet), "combo_browser")));        
 
-        bcurrent_info.use_name = a;
+        bcurrent_info.index = index;
 
         edit_changed (togglebutton, user_data);
 }
@@ -165,15 +167,17 @@ on_seldefview_toggled                  (GtkToggleButton *togglebutton,
                                         gpointer         user_data)
 {
         gint a = GTK_TOGGLE_BUTTON (togglebutton)->active;
+	int index = -1;
         /* Help Custom */
         gtk_widget_set_sensitive(gtk_object_get_data (GTK_OBJECT (capplet), "table23"), !a);
         /* Help Default */
         gtk_widget_set_sensitive(gtk_object_get_data (GTK_OBJECT (capplet), "helpselect"), a);
 
+	g_print ("view toggled\n");
         if (a)
-        	set_selected_terminal (gtk_entry_get_text (gtk_object_get_data (GTK_OBJECT(capplet), "combo_term")));
+        	index =set_selected_help (gtk_entry_get_text (gtk_object_get_data (GTK_OBJECT(capplet), "combo_help")));
 
-        hcurrent_info.use_name = a;
+        hcurrent_info.index = index;
 
         edit_changed (togglebutton, user_data);
 }
@@ -183,7 +187,7 @@ void
 on_combo_help_changed                  (GtkEditable     *editable,
                                         gpointer         user_data)
 {
-        set_selected_terminal (gtk_entry_get_text (editable));
+        set_selected_help (gtk_entry_get_text (editable)); 
         
         edit_changed (editable, user_data);
 
@@ -231,15 +235,16 @@ on_seldefterm_toggled                  (GtkToggleButton *togglebutton,
                                         gpointer         user_data)
 {
         gint a = GTK_TOGGLE_BUTTON (togglebutton)->active;
+	int index = -1;
         /* Terminal Custom */
         gtk_widget_set_sensitive(gtk_object_get_data (GTK_OBJECT (capplet), "table26"), !a);
         /* Terminal Default */
         gtk_widget_set_sensitive(gtk_object_get_data (GTK_OBJECT (capplet), "termselect"), a);
         
         if (a)
-        	set_selected_help (gtk_entry_get_text (gtk_object_get_data (GTK_OBJECT(capplet), "combo_help")));
+        	index = set_selected_terminal (gtk_entry_get_text (gtk_object_get_data (GTK_OBJECT(capplet), "combo_term")));
 
-        tcurrent_info.use_name = a;
+        tcurrent_info.index = index;
 
         edit_changed (togglebutton, user_data);
         
@@ -250,8 +255,7 @@ void
 on_combo_term_changed                  (GtkEditable     *editable,
                                         gpointer         user_data)
 {
-
-        set_selected_help (gtk_entry_get_text (editable)); 
+        set_selected_terminal (gtk_entry_get_text (editable));
 
         edit_changed (editable, user_data);
 }

@@ -7,37 +7,36 @@ typedef struct _TerminalDesciption TerminalDescription;
 
 struct _EditorDescription
 {
-        gchar *name;
+	gchar *name;
         gchar *executable_name;
         gboolean needs_term;
-        gchar *execution_type;
         gboolean accepts_lineno;
-        gboolean use_name;
+	int index;
 };
 
 struct _BrowserDescription
 {
-        gchar *name;
+	gchar *name;
         gchar *executable_name;
         gboolean needs_term;
         gboolean nremote;
-        gboolean use_name;
+	int index;
 };
 
 struct _HelpViewDescription
 {
-        gchar *name;
+	gchar *name;
         gchar *executable_name;
         gboolean needs_term;
         gboolean allows_urls;
-        gboolean use_name;
+	int index;
 };
 
 struct _TerminalDesciption
 {
-        gchar *name;
+	gchar *name;
         gchar *executable_name;
         gchar *exec_app;
-        gboolean use_name;
+	int index;
 };
 

@@ -95,7 +95,12 @@ edit_create (void)
 
   tooltips = gtk_tooltips_new ();
 
-  capplet = capplet_widget_new();
+  capplet = gtk_dialog_new_with_buttons (_("Default Applications"), NULL,
+		  			 -1,
+					 GTK_STOCK_HELP, GTK_RESPONSE_HELP,
+					 GTK_STOCK_APPLY, GTK_RESPONSE_APPLY,
+					 GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+					 NULL);
   ignore_changes = TRUE;
 
   notebook1 = gtk_notebook_new ();
@@ -103,7 +108,8 @@ edit_create (void)
   gtk_object_set_data_full (GTK_OBJECT (capplet), "notebook1", notebook1,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (notebook1);
-  gtk_container_add (GTK_CONTAINER (capplet), notebook1);
+  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (capplet)->vbox), notebook1,
+		      TRUE, TRUE, 0);
 
   frame1 = gtk_frame_new (_("Gnome Default Editor"));
   gtk_widget_ref (frame1);

@@ -3,7 +3,6 @@
  * Based on capplets/gnome-edit-properties/gnome-edit-properties.c.
  */
 #include <config.h>
-#include "capplet-widget.h"
 #include <stdio.h>
 #include <stdarg.h>
 #include <gtk/gtk.h>
@@ -12,6 +11,9 @@
 #include "gnome.h"
 #include "defaults.h"
 #include "interface.h"
+#include <gconf/gconf-client.h>
+
+#define GNOME_DESKTOP_PREFIX "/desktop/gnome/applications"
 
 void fill_default_browser (void);
 void fill_default_terminal (void);
@@ -23,20 +25,25 @@ static void fill_browser_data (BrowserDescription *info);
 static void fill_help_data (HelpViewDescription *info);
 static void fill_term_data (TerminalDescription *info);
 
-static void set_combo_terminal( gchar *string );
-static void set_combo_help( gchar *string );
-static void set_combo_editor( gchar *string );
-static void set_combo_browser( gchar *string );
+static int editor_find_index (EditorDescription *info);
+static int browser_find_index (BrowserDescription *info);
+static int help_find_index (HelpViewDescription *info);
+static int term_find_index (TerminalDescription *info);
+
+static void set_combo_terminal( int index );
+static void set_combo_help( int index );
+static void set_combo_editor( int index );
+static void set_combo_browser( int index );
 
 static void revert_all (void);
 static void write_all (BrowserDescription *bd, EditorDescription *ed, HelpViewDescription *hd, TerminalDescription *td);
 static void help_all (void);
 static void apply_all (void);
 
-void set_selected_terminal( gchar *string );
-void set_selected_help( gchar *string );
-void set_selected_editor( gchar *string );
-void set_selected_browser( gchar *string );
+int set_selected_terminal( gchar *string );
+int set_selected_help( gchar *string );
+int set_selected_editor( gchar *string );
+int set_selected_browser( gchar *string );
 
 gboolean ignore_changes = TRUE;
 
@@ -52,20 +59,20 @@ TerminalDescription tcurrent_info = { NULL };
 
 EditorDescription possible_editors[] =
 {
-        { "gedit",        "gedit",  FALSE, "executable",  FALSE },
-        { "Emacs",        "emacs",  FALSE, "executable",  TRUE },
-        { "XEmacs",       "xemacs", FALSE, "executable",  TRUE },
-        { "vi",           "vi",     TRUE,  "executable",  TRUE },
-        { "Go",           "go",     FALSE, "executable",  FALSE },
-        { "GWP",          "gwp",    FALSE, "executable",  FALSE },
-        { "Jed",          "jed",    TRUE,  "executable",  TRUE },
-        { "Joe",          "joe",    TRUE,  "executable",  TRUE },
-        { "Pico",         "pico",   TRUE,  "executable",  TRUE },
-        { "vim",          "vim",    TRUE,  "executable",  TRUE },
-        { "gvim",         "gvim",   FALSE, "executable",  TRUE },
-        { "ed",           "ed",     TRUE,  "executable",  FALSE },
-        { "GMC/CoolEdit", "gmc -e", FALSE, "mc-internal", FALSE },
-	{ "Nedit",        "nedit",  FALSE, "executable",  FALSE }
+        { "gedit",        "gedit",  FALSE,  FALSE },
+        { "Emacs",        "emacs",  FALSE,  TRUE },
+        { "XEmacs",       "xemacs", FALSE,  TRUE },
+        { "vi",           "vi",     TRUE,  TRUE },
+        { "Go",           "go",     FALSE,  FALSE },
+        { "GWP",          "gwp",    FALSE,  FALSE },
+        { "Jed",          "jed",    TRUE,  TRUE },
+        { "Joe",          "joe",    TRUE,  TRUE },
+        { "Pico",         "pico",   TRUE,  TRUE },
+        { "vim",          "vim",    TRUE,  TRUE },
+        { "gvim",         "gvim",   FALSE,  TRUE },
+        { "ed",           "ed",     TRUE,  FALSE },
+        { "GMC/CoolEdit", "gmc -e", FALSE, FALSE },
+	{ "Nedit",        "nedit",  FALSE, FALSE }
 };
 
 BrowserDescription possible_browsers[] =
@@ -103,130 +110,70 @@ GtkWidget *checkbox;
 static void
 edit_read(void)
 {
-        gint term_argc;
+	GConfClient *client;
         gchar **term_argv;
-        gchar *check1, *check2;
+        gchar *tmp;
 
         fill_default_help ();
         fill_default_terminal ();
         fill_default_browser ();
         fill_default_editor ();
+       
+	client = gconf_client_get_default ();
         
-        check1 = gnome_config_get_string("/editor/Editor/EDITNAME");
-        check2 = gnome_config_get_string("/editor/Editor/EDITOR");
-        if (check1 || !check2) {
-                eoriginal_info.use_name = TRUE;
-                ecurrent_info.use_name = TRUE;
-        } else {
-                eoriginal_info.use_name = FALSE;
-                ecurrent_info.use_name = FALSE;
-        }
-        g_free (check1);
-        g_free (check2);
-        eoriginal_info.name = gnome_config_get_string("/editor/Editor/EDITNAME");
-        eoriginal_info.executable_name = gnome_config_get_string("/editor/Editor/EDITOR");
-        eoriginal_info.needs_term = gnome_config_get_bool_with_default("/editor/Editor/NEEDS_TERM", NULL);
-        eoriginal_info.execution_type = gnome_config_get_string("/editor/Editor/EDITOR_TYPE");
-        eoriginal_info.accepts_lineno = gnome_config_get_bool_with_default("/editor/Editor/ACCEPTS_LINE_NO", NULL);
+        eoriginal_info.executable_name = gconf_client_get_string (client, GNOME_DESKTOP_PREFIX "/editor/exec", NULL);
+        eoriginal_info.needs_term = gconf_client_get_bool (client, GNOME_DESKTOP_PREFIX "/editor/needs_term", NULL);
+        eoriginal_info.accepts_lineno = gconf_client_get_bool (client, GNOME_DESKTOP_PREFIX "/editor/accepts_lineno", NULL);
+	eoriginal_info.index = editor_find_index (&eoriginal_info);
+	if (eoriginal_info.index != -1)
+		eoriginal_info.name = possible_editors[eoriginal_info.index].name;
 
-        ecurrent_info.name = gnome_config_get_string("/editor/Editor/EDITNAME=gedit");
-        ecurrent_info.executable_name = gnome_config_get_string("/editor/Editor/EDITOR=gedit");
-        ecurrent_info.needs_term = gnome_config_get_bool_with_default("/editor/Editor/NEEDS_TERM=FALSE", NULL);
-        ecurrent_info.execution_type = gnome_config_get_string("/editor/Editor/EDITOR_TYPE=executable");
-        ecurrent_info.accepts_lineno = gnome_config_get_bool_with_default("/editor/Editor/ACCEPTS_LINE_NO=TRUE", NULL);
+	ecurrent_info.name = eoriginal_info.name;
+        ecurrent_info.executable_name = g_strdup (eoriginal_info.executable_name);
+        ecurrent_info.needs_term = eoriginal_info.needs_term;
+        ecurrent_info.accepts_lineno = eoriginal_info.accepts_lineno;
+	ecurrent_info.index = eoriginal_info.index;
         
-        check1 = gnome_config_get_string("/gnome-moz-remote/Mozilla/BROWSER");
-        check2 = gnome_config_get_string("/gnome-moz-remote/Mozilla/filename");
-        if (check1 || !check2) {
-                boriginal_info.use_name = TRUE;
-                bcurrent_info.use_name = TRUE;
-        } else {
-                boriginal_info.use_name = FALSE;
-                bcurrent_info.use_name = FALSE;
-        }
-        g_free (check1);
-        g_free (check2);
-        if (gnome_is_program_in_path ("mozilla")) {
-                bcurrent_info.name = gnome_config_get_string("/gnome-moz-remote/Mozilla/BROWSER=Mozilla/Netscape 6");
-                bcurrent_info.executable_name = gnome_config_get_string("/gnome-moz-remote/Mozilla/filename=mozilla");
-        } else {
-                bcurrent_info.name = gnome_config_get_string("/gnome-moz-remote/Mozilla/BROWSER=Netscape Communicator");
-                bcurrent_info.executable_name = gnome_config_get_string("/gnome-moz-remote/Mozilla/filename=netscape");
-        }
-        bcurrent_info.needs_term = gnome_config_get_bool_with_default("/gnome-moz-remote/Mozilla/NEEDS_TERM=FALSE", NULL);
-        bcurrent_info.nremote = gnome_config_get_bool_with_default("/gnome-moz-remote/Mozilla/NREMOTE=TRUE", NULL);
+        boriginal_info.executable_name = gconf_client_get_string (client, GNOME_DESKTOP_PREFIX "/browser/exec", NULL);
+        boriginal_info.needs_term = gconf_client_get_bool (client, GNOME_DESKTOP_PREFIX "/browser/needs_term", NULL);
+        boriginal_info.nremote = gconf_client_get_bool (client, GNOME_DESKTOP_PREFIX "/browser/nremote", NULL);
+	boriginal_info.index = browser_find_index (&boriginal_info);
+	if (boriginal_info.index != -1)
+		boriginal_info.name = possible_browsers[boriginal_info.index].name;
 
-        boriginal_info.name = gnome_config_get_string("/gnome-moz-remote/Mozilla/BROWSER");
-        boriginal_info.executable_name = gnome_config_get_string("/gnome-moz-remote/Mozilla/filename");
-        boriginal_info.needs_term = gnome_config_get_bool_with_default("/gnome-moz-remote/Mozilla/NEEDS_TERM", NULL);
-        boriginal_info.nremote = gnome_config_get_bool_with_default("/gnome-moz-remote/Mozilla/NREMOTE", NULL);
-        
-        /* An smarter person would wonder why we are setting values in different places.  It's because of the */
-        /* silly way url-properties works.  Originally, I was going to replace that applet, but people seem to use it. */
-        /* For simplicity, at first, we will only support the ghelp calls.  Not info or man. */
-        check1 = gnome_config_get_string("/Gnome/URL Handler Data/GHELP");
-        check2 = gnome_config_get_string("/Gnome/URL Handlers/ghelp-show");
-        if (check1 || !check2) {
-                horiginal_info.use_name = TRUE;
-                hcurrent_info.use_name = TRUE;
-        } else {
-                horiginal_info.use_name = FALSE;
-                hcurrent_info.use_name = FALSE;
-        }
-        g_free (check1);
-        g_free (check2);
-        if (gnome_is_program_in_path ("nautilus")) {
-                hcurrent_info.name = gnome_config_get_string("/Gnome/URL Handler Data/GHELP=nautilus");
-                hcurrent_info.executable_name = gnome_config_get_string ("/Gnome/URL Handlers/ghelp-show=nautilus");
-        } else {
-                hcurrent_info.name = gnome_config_get_string("/Gnome/URL Handler Data/GHELP=Gnome Help Browser");
-                hcurrent_info.executable_name = gnome_config_get_string ("/Gnome/URL Handlers/ghelp-show=gnome-help-browser");
-        }
-        hcurrent_info.needs_term = gnome_config_get_bool_with_default("/Gnome/URL Handler Data/GHELP_TERM=FALSE", NULL);
-        hcurrent_info.allows_urls = gnome_config_get_bool_with_default("/Gnome/URL Handler Data/GHELP_URLS=TRUE", NULL);
+	bcurrent_info.name = boriginal_info.name;
+        bcurrent_info.executable_name = g_strdup (boriginal_info.executable_name);
+        bcurrent_info.needs_term = boriginal_info.needs_term;
+        bcurrent_info.nremote = boriginal_info.nremote;
+	bcurrent_info.index = boriginal_info.index;
+	
+        horiginal_info.executable_name = gconf_client_get_string (client, GNOME_DESKTOP_PREFIX "/help_viewer/exec", NULL);
+        horiginal_info.needs_term = gconf_client_get_bool (client, GNOME_DESKTOP_PREFIX "/help_viewer/needs_term", NULL);
+        horiginal_info.allows_urls = gconf_client_get_bool (client, GNOME_DESKTOP_PREFIX "/help_viewer/accepts_urls", NULL);
+	horiginal_info.index = help_find_index (&horiginal_info);
+	if (horiginal_info.index != -1)
+		horiginal_info.name = possible_helpviewers[horiginal_info.index].name;
 
-        horiginal_info.name = gnome_config_get_string("/Gnome/URL Handler Data/GHELP");
-        horiginal_info.executable_name = gnome_config_get_string ("/Gnome/URL Handlers/ghelp-show");
-        horiginal_info.needs_term = gnome_config_get_bool_with_default("/Gnome/URL Handler Data/GHELP_TERM", NULL);
-        horiginal_info.allows_urls = gnome_config_get_bool_with_default("/Gnome/URL Handler Data/GHELP_URLS", NULL);
+	hcurrent_info.name = horiginal_info.name;
+        hcurrent_info.executable_name = g_strdup (horiginal_info.executable_name);
+        hcurrent_info.needs_term = horiginal_info.needs_term;
+        hcurrent_info.allows_urls = horiginal_info.allows_urls;
+	hcurrent_info.index = horiginal_info.index;
 
-        /* Ugh.  This one is really complex. */
-        check1 = gnome_config_get_string("/Gnome/Applications/TERMNAME");
-        check2 = gnome_config_get_string("/Gnome/Applications/Terminal");
-        if (check1 || !check2) {
-                toriginal_info.use_name = TRUE;
-                tcurrent_info.use_name = TRUE;
-        } else {
-                toriginal_info.use_name = FALSE;
-                tcurrent_info.use_name = FALSE;
-        }
-        g_free (check1);
-        g_free (check2);
-        gnome_config_get_vector ("/Gnome/Applications/Terminal",
-                                 &term_argc, &term_argv);
-        if (term_argv == NULL) {
-                toriginal_info.executable_name = NULL;
-                toriginal_info.exec_app = NULL;
+	tmp = gconf_client_get_string (client, GNOME_DESKTOP_PREFIX "/terminal", NULL);
+	term_argv = g_strsplit (tmp, " ", 3);
+        toriginal_info.executable_name = term_argv[0];
+	toriginal_info.exec_app = term_argv[1];
 
-                if (gnome_is_program_in_path ("gnome-terminal")) {
-                        tcurrent_info.name = g_strdup ("Gnome Terminal");
-                        tcurrent_info.executable_name = g_strdup ("gnome-terminal");
-                        tcurrent_info.exec_app = g_strdup ("-x");
-                } else {
-                        tcurrent_info.name = g_strdup ("Standard XTerminal");
-                        tcurrent_info.executable_name = g_strdup ("xterm");
-                        tcurrent_info.exec_app = g_strdup ("-e");
-                }
-        } else {
-                tcurrent_info.name = gnome_config_get_string("/Gnome/Applications/TERMNAME");
-                tcurrent_info.executable_name = term_argv[0];
-                tcurrent_info.exec_app = term_argv[1];
+	toriginal_info.index = term_find_index (&toriginal_info);
+	g_free (term_argv);
+	if (toriginal_info.index != -1)
+		toriginal_info.name = possible_terminals[toriginal_info.index].name;
 
-                toriginal_info.executable_name = term_argv[0];
-                toriginal_info.exec_app = term_argv[1];
-        }
-
-        toriginal_info.name = gnome_config_get_string("/Gnome/Applications/TERMNAME");
+	tcurrent_info.name = toriginal_info.name;
+        tcurrent_info.executable_name = g_strdup (toriginal_info.executable_name);
+        tcurrent_info.executable_name = g_strdup (toriginal_info.exec_app);
+	tcurrent_info.index = toriginal_info.index;
 
         /* Set sensitivity. */
 
@@ -234,13 +181,15 @@ edit_read(void)
         fill_browser_data (&bcurrent_info);
         fill_help_data (&hcurrent_info);
         fill_term_data (&tcurrent_info);
+
+	g_object_unref (G_OBJECT (client));
 }
 
 void
 edit_changed (GtkWidget *widget, gpointer data)
 {
-        if (!ignore_changes)
-                capplet_widget_state_changed(CAPPLET_WIDGET (capplet), TRUE);
+//        if (!ignore_changes)
+  //              capplet_widget_state_changed(CAPPLET_WIDGET (capplet), TRUE);
 }
 
 static void
@@ -280,8 +229,8 @@ fill_editor_data (EditorDescription *info)
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (gtk_object_get_data (GTK_OBJECT (capplet), "editorlineno")),
                                       info->accepts_lineno);
         
-        if (info->use_name) {
-                set_combo_editor (info->name);
+        if (info->index != -1) {
+                set_combo_editor (info->index);
                 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
                                               (gtk_object_get_data (GTK_OBJECT (capplet), "radiodefeditor")), 
                                               TRUE);
@@ -308,8 +257,8 @@ fill_browser_data (BrowserDescription *info)
                                       info->nremote);
         
 
-        if (info->use_name) {
-                set_combo_browser (info->name);
+        if (info->index != -1) {
+                set_combo_browser (info->index);
                 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
                                               (gtk_object_get_data (GTK_OBJECT (capplet), "seldefbrowser")), 
                                               TRUE);
@@ -333,8 +282,8 @@ fill_help_data (HelpViewDescription *info)
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (gtk_object_get_data (GTK_OBJECT (capplet), "helpurls")),
                                       info->allows_urls);
 
-        if (info->use_name) {
-                set_combo_help (info->name);
+        if (info->index != -1) {
+                set_combo_help (info->index);
                 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
                                               (gtk_object_get_data (GTK_OBJECT (capplet), "seldefview")), 
                                               TRUE);
@@ -351,10 +300,10 @@ fill_term_data (TerminalDescription *info)
                             info->executable_name);
 
         gtk_entry_set_text (GTK_ENTRY (gtk_object_get_data (GTK_OBJECT (capplet), "termexec")),
-                            info->exec_app);
+                            (info->exec_app) ? info->exec_app : "");
 
-        if (info->use_name) {
-                set_combo_terminal (info->name); 
+        if (info->index != -1) {
+                set_combo_terminal (info->index); 
                 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
                                               (gtk_object_get_data (GTK_OBJECT (capplet), "seldefterm")), 
                                               TRUE);
@@ -365,21 +314,33 @@ fill_term_data (TerminalDescription *info)
         }
 }
 
+static void
+response_cb (GtkDialog *dialog, gint response_id, gpointer data)
+{
+	switch (response_id)
+	{
+	case GTK_RESPONSE_NONE:
+	case GTK_RESPONSE_CLOSE:
+		gtk_main_quit ();
+		break;
+	case GTK_RESPONSE_APPLY:
+		apply_all ();
+		break;
+	case GTK_RESPONSE_HELP:
+		help_all ();
+		break;
+	}
+}
+
 int
 main (int argc, char **argv)
 {
-				setlocale(LC_ALL, "");
+	setlocale(LC_ALL, "");
         bindtextdomain (PACKAGE, GNOMELOCALEDIR);
         textdomain (PACKAGE);
 
-        switch (gnome_capplet_init ("default-application-properties", VERSION, argc,
-                                    argv, NULL, 0, NULL)) {
-                
-        case -1:
-                return 0;
-        default:
-		break;
-        }
+	gnome_program_init ("default-applications-properties", VERSION,
+			    LIBGNOMEUI_MODULE, argc, argv, NULL);
         
         ignore_changes = TRUE;
 
@@ -390,17 +351,8 @@ main (int argc, char **argv)
         edit_read ();
 
         /* Connect the wrapper signals */
-
-        gtk_signal_connect (GTK_OBJECT (capplet), "help",
-                            GTK_SIGNAL_FUNC (help_all), NULL);
-        gtk_signal_connect (GTK_OBJECT (capplet), "try",
-                            GTK_SIGNAL_FUNC (apply_all), NULL);
-        gtk_signal_connect (GTK_OBJECT (capplet), "revert",
-                            GTK_SIGNAL_FUNC (revert_all), NULL);
-        gtk_signal_connect (GTK_OBJECT (capplet), "ok",
-                            GTK_SIGNAL_FUNC (apply_all), NULL);
-        gtk_signal_connect (GTK_OBJECT (capplet), "cancel",
-                            GTK_SIGNAL_FUNC (revert_all), NULL);
+	g_signal_connect (G_OBJECT (capplet), "response",
+			  response_cb, NULL);
 
         ignore_changes = FALSE;
 
@@ -430,76 +382,73 @@ apply_all (void)
 static void 
 help_all (void)
 {
+}
 
+static gchar*
+compose_full_term_exec (TerminalDescription *td, gchar *execstr)
+{
+	g_return_val_if_fail (td != NULL, NULL);
+	g_return_val_if_fail (execstr != NULL, NULL);
+
+	if (td->exec_app)
+		return g_strconcat (td->executable_name, " ", td->exec_app, " ", execstr, " ", "\"%s\"", NULL);
+	else
+		return g_strconcat (td->executable_name, " ", execstr, " ", "\"%s\"", NULL);
 }
 
 static void 
 write_all (BrowserDescription *bd, EditorDescription *ed, HelpViewDescription *hd, TerminalDescription *td)
 {
-        gchar *av_term[2];
-
-        if (ed->use_name && ed->name) {
-                gnome_config_set_string ("/editor/Editor/EDITNAME", ed->name);
-        } else {
-                gnome_config_clean_key("/editor/Editor/EDITNAME");
-        }
-        if (bd->use_name && bd->name) {
-                gnome_config_set_string ("/gnome-moz-remote/Mozilla/BROWSER", bd->name);
-        } else {
-                gnome_config_clean_key("/gnome-moz-remote/Mozilla/BROWSER");
-        }
-        if (hd->use_name && hd->name) {
-                gnome_config_set_string ("/Gnome/URL Handler Data/GHELP", hd->name);
-        } else {
-                gnome_config_clean_key("/Gnome/URL Handler Data/GHELP");
-        }
-        if (td->use_name && td->name) {
-                gnome_config_set_string ("/Gnome/Applications/TERMNAME", td->name);
-        } else {
-                gnome_config_clean_key("/Gnome/Applications/TERMNAME");
-        }
+        gchar *tmp;
+	GConfClient *client = gconf_client_get_default ();
         
         if (ed->executable_name)
-                gnome_config_set_string("/editor/Editor/EDITOR", ed->executable_name);
+		gconf_client_set_string (client, GNOME_DESKTOP_PREFIX "/editor/exec", ed->executable_name, NULL);
         else
-                gnome_config_clean_key("/editor/Editor/EDITOR");
-        gnome_config_set_bool("/editor/Editor/NEEDS_TERM", ed->needs_term);
-        if (ed->execution_type)
-                gnome_config_set_string("/editor/Editor/EDITOR_TYPE", ed->execution_type);
+		gconf_client_unset (client, GNOME_DESKTOP_PREFIX "/editor/exec", NULL);
+	gconf_client_set_bool (client, GNOME_DESKTOP_PREFIX "/editor/needs_term", ed->needs_term, NULL);
+	gconf_client_set_bool (client, GNOME_DESKTOP_PREFIX "/editor/accepts_lineno", ed->accepts_lineno, NULL);
+        
+         if (bd->executable_name)
+		gconf_client_set_string (client, GNOME_DESKTOP_PREFIX "/browser/exec", bd->executable_name, NULL);
         else
-                gnome_config_clean_key("/editor/Editor/EDITOR_TYPE");
-        gnome_config_set_bool("/editor/Editor/ACCEPTS_LINE_NO", ed->accepts_lineno);
-        
-        if (bd->executable_name)
-                gnome_config_set_string("/gnome-moz-remote/Mozilla/filename", bd->executable_name);
-        else 
-                gnome_config_clean_key("/gnome-moz-remote/Mozilla/filename");
-        
-        if (bd->executable_name) {
-                gnome_config_set_bool("/gnome-moz-remote/Mozilla/NEEDS_TERM", bd->needs_term);
-                gnome_config_set_bool("/gnome-moz-remote/Mozilla/NREMOTE", bd->nremote);
-        } else {
-                gnome_config_clean_key ("/gnome-moz-remote/Mozilla/NEEDS_TERM");
-                gnome_config_clean_key ("/gnome-moz-remote/Mozilla/NREMOTE");
-        }
-        
-        if (hd->executable_name)
-                gnome_config_set_string ("/Gnome/URL Handlers/ghelp-show", hd->executable_name);
-        else
-                gnome_config_clean_key("/Gnome/URL Handlers/ghelp-show");
-        gnome_config_set_bool("/Gnome/URL Handler Data/GHELP_TERM", hd->needs_term);
-        gnome_config_set_bool("/Gnome/URL Handler Data/GHELP_URLS", hd->allows_urls);        
-        
-        av_term[0] = td->executable_name;
-        av_term[1] = td->exec_app;
-        if (td->exec_app && td->executable_name)
-                gnome_config_set_vector ("/Gnome/Applications/Terminal", 2, av_term);
-        else if (td->executable_name) 
-                gnome_config_set_string ("/Gnome/Applications/Terminal", td->executable_name);
-        else
-                gnome_config_clean_key("/Gnome/Applications/Terminal");
+		gconf_client_unset (client, GNOME_DESKTOP_PREFIX "/browser/exec", NULL);
+	gconf_client_set_bool (client, GNOME_DESKTOP_PREFIX "/browser/needs_term", bd->needs_term, NULL);
+	gconf_client_set_bool (client, GNOME_DESKTOP_PREFIX "/browser/nremote", bd->nremote, NULL);
+       
+	if (bd->needs_term)
+		tmp = compose_full_term_exec (td, bd->executable_name);
+	else
+		tmp = g_strconcat (bd->executable_name, " \"%s\"", NULL);
+	gconf_client_set_string (client, "/desktop/gnome/url-handlers/default-show", tmp, NULL);
+	g_free (tmp);
 
-        gnome_config_sync ();
+	if (hd->executable_name)
+		gconf_client_set_string (client, GNOME_DESKTOP_PREFIX "/help_viewer/exec", hd->executable_name, NULL);
+        else
+		gconf_client_unset (client, GNOME_DESKTOP_PREFIX "/help_viewer/exec", NULL);
+	gconf_client_set_bool (client, GNOME_DESKTOP_PREFIX "/help_viewer/needs_term", hd->needs_term, NULL);
+	gconf_client_set_bool (client, GNOME_DESKTOP_PREFIX "/help_viewer/accepts_urls", hd->allows_urls, NULL);
+
+	if (hd->needs_term)
+		tmp = compose_full_term_exec (td, hd->executable_name);
+	else
+		tmp = g_strconcat (hd->executable_name, " \"%s\"", NULL);
+	gconf_client_set_string (client, "/desktop/gnome/url-handlers/ghelp-show", tmp, NULL);
+	g_free (tmp);
+
+        if (td->exec_app && td->executable_name)
+	{
+		tmp = g_strconcat (td->executable_name, " ", td->exec_app, NULL);
+		gconf_client_set_string (client, GNOME_DESKTOP_PREFIX "/terminal", tmp, NULL);
+		g_free (tmp);
+	}
+        else if (td->executable_name)
+		gconf_client_set_string (client, GNOME_DESKTOP_PREFIX "/terminal", td->executable_name, NULL);
+        else
+		gconf_client_unset (client, GNOME_DESKTOP_PREFIX "/terminal", NULL);
+	
+	g_object_unref (G_OBJECT (client));
 }
 
 void fill_default_browser ()
@@ -574,97 +523,47 @@ void fill_default_editor ()
 
 
 static void
-set_combo_browser( gchar *string )
+set_combo_browser(int index)
 {
-        gint i;
         GtkWidget *combo = gtk_object_get_data (GTK_OBJECT (capplet), "browserselect");
         
-        if (!string)
-                return;
-
-        for ( i = 0; i < sizeof(possible_browsers) / sizeof(possible_browsers[0]); i++ ) {
-                if ( ! strcmp( possible_browsers[ i ].executable_name, string ) ) {
-                        gtk_entry_set_text ( GTK_ENTRY(GTK_COMBO(combo)->entry),
-                                             possible_browsers[ i ].name ); 
-                        return;
-                }
-        }
-        gtk_entry_set_text( GTK_ENTRY(GTK_COMBO(combo)->entry), string );
+	gtk_entry_set_text (GTK_ENTRY(GTK_COMBO(combo)->entry),
+			    possible_browsers[ index ].name ); 
 }
 
 static void
-set_combo_editor( gchar *string )
+set_combo_editor(int index)
 {
-        gint i;
         GtkWidget *combo = gtk_object_get_data (GTK_OBJECT (capplet), "editorselect");
         
-        if (!string)
-                return;
-
-        for ( i = 0; i < sizeof(possible_editors) / sizeof(possible_editors[0]); i++ ) {
-                if ( ! strcmp( possible_editors[ i ].executable_name, string ) ) {
-                        gtk_entry_set_text ( GTK_ENTRY(GTK_COMBO(combo)->entry),
-                                             possible_editors[ i ].name ); 
-                        return;
-                }
-        }
-        gtk_entry_set_text( GTK_ENTRY(GTK_COMBO(combo)->entry), string ); 
+	gtk_entry_set_text (GTK_ENTRY(GTK_COMBO(combo)->entry),
+			    possible_editors[ index ].name ); 
 }
 
 static void
-set_combo_help( gchar *string )
+set_combo_help(int index)
 {
-        gint i;
         GtkWidget *combo = gtk_object_get_data (GTK_OBJECT (capplet), "helpselect");
-        
-        if (!string)
-                return;
-
-        for ( i = 0;
-              i < sizeof(possible_helpviewers) / sizeof(possible_helpviewers[0]);
-              i++ ) {
-                if ( ! strcmp( possible_helpviewers[ i ].executable_name, string ) )
-                        {
-                                gtk_entry_set_text
-                                        ( GTK_ENTRY(GTK_COMBO(combo)->entry),
-                                          possible_helpviewers[ i ].name ); 
-                                return;
-                        }
-        }
-        gtk_entry_set_text( GTK_ENTRY(GTK_COMBO(combo)->entry), string );
+	gtk_entry_set_text (GTK_ENTRY(GTK_COMBO(combo)->entry),
+			    possible_helpviewers[ index ].name ); 
 }
 
 static void
-set_combo_terminal( gchar *string )
+set_combo_terminal(int index)
 {
-        gint i;
         GtkWidget *combo = gtk_object_get_data (GTK_OBJECT (capplet), "termselect");
-        
-        if (!string)
-                return;
-
-        for ( i = 0;
-              i < sizeof(possible_terminals) / sizeof(possible_terminals[0]);
-              i++ ) {
-                if ( ! strcmp( possible_terminals[ i ].executable_name, string ) )
-                        {
-                                gtk_entry_set_text
-                                        ( GTK_ENTRY(GTK_COMBO(combo)->entry),
-                                          possible_terminals[ i ].name ); 
-                                return;
-                        }
-        }
-        gtk_entry_set_text( GTK_ENTRY(GTK_COMBO(combo)->entry), string );
+	gtk_entry_set_text (GTK_ENTRY(GTK_COMBO(combo)->entry),
+			    possible_terminals[ index ].name ); 
 }
 
-void
+int
 set_selected_browser( gchar *string )
 {
         gint i;
         GtkWidget *combo = gtk_object_get_data (GTK_OBJECT (capplet), "browserselect");
         
         if (!string)
-                return;
+                return -1;
 
         for ( i = 0; i < sizeof(possible_browsers) / sizeof(possible_browsers[0]); i++ ) {
                 if ( ! strcmp( possible_browsers[ i ].name, string ) ) {
@@ -674,20 +573,21 @@ set_selected_browser( gchar *string )
                                                       possible_browsers[ i ].needs_term);
                         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (gtk_object_get_data (GTK_OBJECT (capplet), "browserremote")),
                                                       possible_browsers[ i ].nremote);
-                        return;
+                        return i;
                 }
         }
         /*        gtk_entry_set_text( GTK_ENTRY(GTK_COMBO(combo)->entry), string );*/
+	return -1;
 }
 
-void
+int 
 set_selected_editor( gchar *string )
 {
         gint i;
         GtkWidget *combo = gtk_object_get_data (GTK_OBJECT (capplet), "editorselect");
         
         if (!string)
-                return;
+                return -1;
 
         for ( i = 0; i < sizeof(possible_editors) / sizeof(possible_editors[0]); i++ ) {
                 if ( ! strcmp( possible_editors[ i ].name, string ) ) {
@@ -697,20 +597,21 @@ set_selected_editor( gchar *string )
                                                       possible_editors[ i ].needs_term);
                         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (gtk_object_get_data (GTK_OBJECT (capplet), "editorlineno")),
                                                       possible_editors[ i ].accepts_lineno);
-                        return;
+                        return i;
                 }
         }
         /*        gtk_entry_set_text( GTK_ENTRY(GTK_COMBO(combo)->entry), string ); */
+	return -1;
 }
 
-void
+int
 set_selected_help( gchar *string )
 {
         gint i;
         GtkWidget *combo = gtk_object_get_data (GTK_OBJECT (capplet), "helpselect");
         
         if (!string)
-                return;
+                return -1;
 
         for ( i = 0;
               i < sizeof(possible_helpviewers) / sizeof(possible_helpviewers[0]);
@@ -723,20 +624,21 @@ set_selected_help( gchar *string )
                                                               possible_helpviewers[ i ].needs_term);
                                 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (gtk_object_get_data (GTK_OBJECT (capplet), "helpurls")),
                                                               possible_helpviewers[ i ].allows_urls);
-                                return;
+                                return i;
                         }
         }
         /*        gtk_entry_set_text( GTK_ENTRY(GTK_COMBO(combo)->entry), string );*/
+	return -1;
 }
 
-void
+int
 set_selected_terminal( gchar *string )
 {
         gint i;
         GtkWidget *combo = gtk_object_get_data (GTK_OBJECT (capplet), "termselect");
         
         if (!string)
-                return;
+                return -1;
 
         for ( i = 0;
               i < sizeof(possible_terminals) / sizeof(possible_terminals[0]);
@@ -747,10 +649,82 @@ set_selected_terminal( gchar *string )
                                                     possible_terminals[ i ].executable_name);
                                 gtk_entry_set_text (GTK_ENTRY (gtk_object_get_data (GTK_OBJECT (capplet), "termexec")),
                                                     possible_terminals[ i ].exec_app);
-                                return;
+                                return i;
                         }
         }
         /*        gtk_entry_set_text( GTK_ENTRY(GTK_COMBO(combo)->entry), string );*/
+	return -1;
 }
 
+static int editor_find_index (EditorDescription *info)
+{
+	int i;
+
+	g_return_val_if_fail (info != NULL, -1);
+
+        for ( i = 0;
+              i < sizeof(possible_editors) / sizeof(possible_editors[0]);
+              i++ ) {
+		if (!strcmp (possible_editors[i].executable_name, info->executable_name) &&
+		    possible_editors[i].needs_term == info->needs_term &&
+		    possible_editors[i].accepts_lineno == info->accepts_lineno)
+			return i;
+	}
+	
+	return -1;
+}
+
+static int browser_find_index (BrowserDescription *info)
+{
+	int i;
+
+	g_return_val_if_fail (info != NULL, -1);
+
+        for ( i = 0;
+              i < sizeof(possible_browsers) / sizeof(possible_browsers[0]);
+              i++ ) {
+		if (!strcmp (possible_browsers[i].executable_name, info->executable_name) &&
+		    possible_browsers[i].needs_term == info->needs_term &&
+		    possible_browsers[i].nremote == info->nremote)
+			return i;
+	}
+	
+	return -1;
+
+}
+
+static int help_find_index (HelpViewDescription *info)
+{
+	int i;
+
+	g_return_val_if_fail (info != NULL, -1);
+
+        for ( i = 0;
+              i < sizeof(possible_helpviewers) / sizeof(possible_helpviewers[0]);
+              i++ ) {
+		if (!strcmp (possible_helpviewers[i].executable_name, info->executable_name) &&
+		    possible_helpviewers[i].needs_term == info->needs_term &&
+		    possible_helpviewers[i].allows_urls == info->allows_urls)
+			return i;
+	}
+	
+	return -1;
+}
+
+static int term_find_index (TerminalDescription *info)
+{
+	int i;
+
+	g_return_val_if_fail (info != NULL, -1);
+
+        for ( i = 0;
+              i < sizeof(possible_terminals) / sizeof(possible_terminals[0]);
+              i++ ) {
+		if (!strcmp (possible_terminals[i].executable_name, info->executable_name) &&
+		    !strcmp (possible_terminals[i].exec_app, info->exec_app))
+			return i;
+	}
+	
+	return -1;
+}
 
