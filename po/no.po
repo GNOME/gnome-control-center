@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.5.8\n"
-"POT-Creation-Date: 2002-03-03 08:54+0100\n"
-"PO-Revision-Date: 2002-03-03 08:58+0100\n"
+"POT-Creation-Date: 2002-03-12 18:52+0100\n"
+"PO-Revision-Date: 2002-03-12 18:52+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -21,16 +21,20 @@ msgstr "Bakgrunn"
 msgid "Configuration of the desktop's background"
 msgstr "Konfigurasjon av skrivebordsbakgrunn"
 
-#: capplets/background/background-properties-capplet.c:289
+#: capplets/background/background-properties-capplet.c:238
+msgid "Please select a background image"
+msgstr "Vennligst velg et bakgrunnsbilde"
+
+#: capplets/background/background-properties-capplet.c:292
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:575
-#: capplets/keyboard/gnome-keyboard-properties.c:319
-#: capplets/mouse/gnome-mouse-properties.c:678
-#: capplets/sound/sound-properties-capplet.c:139
+#: capplets/default-applications/gnome-default-applications-properties.c:622
+#: capplets/keyboard/gnome-keyboard-properties.c:320
+#: capplets/mouse/gnome-mouse-properties.c:681
+#: capplets/sound/sound-properties-capplet.c:140
 msgid "Retrieve and store legacy settings"
 msgstr "Hent og lagre gamle innstillinger"
 
-#: capplets/background/background-properties-capplet.c:312
+#: capplets/background/background-properties-capplet.c:315
 msgid "Background properties"
 msgstr "Egenskaper for bakgrunn"
 
@@ -301,7 +305,6 @@ msgid "Legacy applications settings (grdb)"
 msgstr "Innstillinger for eldre applikasjoner (grdb)"
 
 #: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
-#: control-center/gnomecc.glade.h:1
 msgid "Appearance"
 msgstr "Utseende"
 
@@ -525,7 +528,7 @@ msgid "Add service..."
 msgstr "Legg til tjeneste..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
-#: capplets/file-types/mime-edit-dialog.c:748
+#: capplets/file-types/mime-edit-dialog.c:750
 msgid "Category"
 msgstr "Kategori"
 
@@ -666,7 +669,7 @@ msgstr "Sann hvis denne dialogen er ment for å legge til en MIME-type"
 msgid "None"
 msgstr "Ingen"
 
-#: capplets/file-types/mime-edit-dialog.c:673
+#: capplets/file-types/mime-edit-dialog.c:675
 msgid ""
 "Invalid MIME type. Please enter a valid MIME type, or leave the field blank "
 "to have one generated for you."
@@ -674,11 +677,11 @@ msgstr ""
 "Ugyldig MIME-type. Vennligst oppgi en gyldig MIME-type, eller la feltet stå "
 "tomt for å generere en automatisk."
 
-#: capplets/file-types/mime-edit-dialog.c:684
+#: capplets/file-types/mime-edit-dialog.c:686
 msgid "There already exists a MIME type of that name."
 msgstr "En MIME-type med dette navnet finnes allerede."
 
-#: capplets/file-types/mime-edit-dialog.c:753
+#: capplets/file-types/mime-edit-dialog.c:755
 msgid "Choose a file category"
 msgstr "Velg en filkategori"
 
@@ -767,10 +770,10 @@ msgstr "Skrift"
 msgid "Select which font to use"
 msgstr "Velg skrift som skal brukes"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:315
-#: capplets/keyboard/gnome-keyboard-properties.c:317
-#: capplets/sound/sound-properties-capplet.c:135
-#: capplets/sound/sound-properties-capplet.c:137
+#: capplets/keyboard/gnome-keyboard-properties.c:316
+#: capplets/keyboard/gnome-keyboard-properties.c:318
+#: capplets/sound/sound-properties-capplet.c:136
+#: capplets/sound/sound-properties-capplet.c:138
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
@@ -867,7 +870,10 @@ msgid ""
 "The keyboard bell is the &lt;i&gt;beep&lt;/i&gt; sound heard when the system "
 "wants to get your attention.  You can select a custom sound file to play "
 "instead of the traditional beeping noise."
-msgstr "Tastaturpip er &lt;i&gt;pip&lt;/i&gt;-lyden du hører når systemet vil ha din oppmerksomhet. Du kan velge en egendefinert lydfil som skal spilles i stedet for den tradisjonelle pipelyden."
+msgstr ""
+"Tastaturpip er &lt;i&gt;pip&lt;/i&gt;-lyden du hører når systemet vil ha din "
+"oppmerksomhet. Du kan velge en egendefinert lydfil som skal spilles i stedet "
+"for den tradisjonelle pipelyden."
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "Very fast"
@@ -909,7 +915,7 @@ msgstr "_Volum:"
 msgid "Keyboard"
 msgstr "Tastatur"
 
-#: capplets/mouse/gnome-mouse-properties.c:407
+#: capplets/mouse/gnome-mouse-properties.c:410
 #, c-format
 msgid ""
 "<b>Unknown Cursor</b>\n"
@@ -918,7 +924,7 @@ msgstr ""
 "<b>Ukjent markør</b>\n"
 "%s"
 
-#: capplets/mouse/gnome-mouse-properties.c:505
+#: capplets/mouse/gnome-mouse-properties.c:508
 msgid ""
 "<b>Default Cursor - Current</b>\n"
 "The default cursor that ships with X"
@@ -926,7 +932,7 @@ msgstr ""
 "<b>Forvalgt markør - Aktiv</b>\n"
 "Standardmarkør som følger med X"
 
-#: capplets/mouse/gnome-mouse-properties.c:508
+#: capplets/mouse/gnome-mouse-properties.c:511
 msgid ""
 "<b>Default Cursor</b>\n"
 "The default cursor that ships with X"
@@ -934,7 +940,7 @@ msgstr ""
 "<b>Forvalgt markør</b>\n"
 "Standardmarkør som følger med X"
 
-#: capplets/mouse/gnome-mouse-properties.c:526
+#: capplets/mouse/gnome-mouse-properties.c:529
 msgid ""
 "<b>White Cursor - Current</b>\n"
 "The default cursor inverted"
@@ -942,7 +948,7 @@ msgstr ""
 "<b>Hvit markør - Aktiv</b>\n"
 "Omvendt versjon av standardmarkør"
 
-#: capplets/mouse/gnome-mouse-properties.c:529
+#: capplets/mouse/gnome-mouse-properties.c:532
 msgid ""
 "<b>White Cursor</b>\n"
 "The default cursor inverted"
@@ -950,7 +956,7 @@ msgstr ""
 "<b>Hvit markør</b>\n"
 "Omvendt standardmarkør"
 
-#: capplets/mouse/gnome-mouse-properties.c:547
+#: capplets/mouse/gnome-mouse-properties.c:550
 msgid ""
 "<b>Large Cursor - Current</b>\n"
 "Large version of normal cursor"
@@ -958,7 +964,7 @@ msgstr ""
 "<b>Stor markør - Aktiv</b>\n"
 "Stor versjon av standardmarkør"
 
-#: capplets/mouse/gnome-mouse-properties.c:550
+#: capplets/mouse/gnome-mouse-properties.c:553
 msgid ""
 "<b>Large Cursor</b>\n"
 "Large version of normal cursor"
@@ -966,7 +972,7 @@ msgstr ""
 "<b>Stor markør</b>\n"
 "Stor versjon av standardmarkør"
 
-#: capplets/mouse/gnome-mouse-properties.c:568
+#: capplets/mouse/gnome-mouse-properties.c:571
 msgid ""
 "<b>Large White Cursor - Current</b>\n"
 "Large version of white cursor"
@@ -974,7 +980,7 @@ msgstr ""
 "<b>Stor hvit markør - Aktiv</b>\n"
 "Stor versjon av hvit markør"
 
-#: capplets/mouse/gnome-mouse-properties.c:571
+#: capplets/mouse/gnome-mouse-properties.c:574
 msgid ""
 "<b>Large White Cursor</b>\n"
 "Large version of white cursor"
@@ -982,7 +988,7 @@ msgstr ""
 "<b>Stor hvit markør</b>\n"
 "Stor versjon av hvit markør"
 
-#: capplets/mouse/gnome-mouse-properties.c:703
+#: capplets/mouse/gnome-mouse-properties.c:708
 #: capplets/mouse/gnome-mouse-properties.glade.h:18
 #: capplets/mouse/mouse.desktop.in.h:2
 msgid "Mouse Properties"
@@ -995,7 +1001,8 @@ msgid ""
 "effect."
 msgstr ""
 "&lt;b&gt;Merk:&lt;/b&gt;\n"
-"\t\t\t    Du vil måtte logge inn på nytt igjen for at denne innstillingen skal tre i kraft."
+"\t\t\t    Du vil måtte logge inn på nytt igjen for at denne innstillingen "
+"skal tre i kraft."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:3
 msgid "&lt;i&gt;Fast&lt;/i&gt;"
@@ -1126,7 +1133,7 @@ msgstr "Skjermsparer"
 msgid "Configure GNOME's use of sound"
 msgstr "Konfigurér bruk av lyd i GNOME."
 
-#: capplets/sound/sound-properties-capplet.c:167
+#: capplets/sound/sound-properties-capplet.c:170
 msgid "Sound properties"
 msgstr "Egenskaper for lyd"
 
@@ -1234,26 +1241,14 @@ msgid "Select which gtk+ theme to use"
 msgstr "Velg gtk+-tema som skal brukes"
 
 #: capplets/theme-switcher/gtk-theme-selector.glade.h:1
-msgid "Auto Preview"
-msgstr "Automatisk forhåndsvisning"
-
-#: capplets/theme-switcher/gtk-theme-selector.glade.h:2
-msgid "Available Themes"
-msgstr "Tilgjengelige tema"
-
-#: capplets/theme-switcher/gtk-theme-selector.glade.h:3
 msgid "Gtk+ Theme"
 msgstr "Gtk+ tema"
 
-#: capplets/theme-switcher/gtk-theme-selector.glade.h:4
+#: capplets/theme-switcher/gtk-theme-selector.glade.h:2
 msgid "Install new theme..."
 msgstr "Installer nytt tema..."
 
-#: capplets/theme-switcher/gtk-theme-selector.glade.h:5
-msgid "Preview"
-msgstr "Forhåndsvisning"
-
-#: capplets/theme-switcher/main.c:218
+#: capplets/theme-switcher/main.c:211
 msgid "Select a theme to install"
 msgstr "Velg et tema som skal installeres"
 
@@ -1353,48 +1348,36 @@ msgstr "_Meny"
 msgid "_Toolbars have: "
 msgstr "_Verktøylinjer har: "
 
-#: control-center/capplet-dir-view.c:148
+#: control-center/capplet-dir-view.c:153
 msgid "Layout"
 msgstr "Utseende"
 
-#: control-center/capplet-dir-view.c:149
+#: control-center/capplet-dir-view.c:154
 msgid "Layout to use for this view of the capplets"
 msgstr "Utseende som skal brukes for denne visningen av cappletene"
 
-#: control-center/capplet-dir-view.c:155
+#: control-center/capplet-dir-view.c:160
 msgid "Capplet directory object"
 msgstr "Katalogobjekt for capplet"
 
-#: control-center/capplet-dir-view.c:156
+#: control-center/capplet-dir-view.c:161
 msgid "Capplet directory that this view is viewing"
 msgstr "Capplet-katalog som denne visningen viser"
 
-#: control-center/capplet-dir-view.c:313 control-center/gnomecc.desktop.in.h:1
+#: control-center/capplet-dir-view.c:318 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
 msgstr "GNOME Kontrollsenter"
 
-#: control-center/capplet-dir-view.c:316
+#: control-center/capplet-dir-view.c:321
 msgid "Desktop properties manager."
 msgstr "Håndtering av egenskaper for skrivebord."
 
-#: control-center/capplet-dir-view.c:450
+#: control-center/capplet-dir-view.c:455
 #, c-format
 msgid "Gnome Control Center : %s"
 msgstr "GNOME Kontrollsenter: %s"
 
-#: control-center/capplet-dir-view.c:503
-msgid ""
-"No help is available/installed. Please make sure you\n"
-"have the GNOME User's Guide installed on your system."
-msgstr ""
-"Ingen hjelp tilgjengelig/installert. Vennligst forsikre\n"
-"deg om at du har GNOME brukerhåndboken installert."
-
-#: control-center/capplet-dir-view.c:506
-msgid "Close"
-msgstr "Lukk"
-
-#: control-center/capplet-dir-view-list.c:325
+#: control-center/capplet-dir-view-list.c:324
 #, c-format
 msgid "GNOME Control Center: %s"
 msgstr "GNOME Kontrollsenter: %s"
@@ -1403,37 +1386,21 @@ msgstr "GNOME Kontrollsenter: %s"
 msgid "The GNOME configuration tool"
 msgstr "Konfigurasjonsverktøy for GNOME"
 
-#: control-center/gnomecc.glade.h:2
-msgid "Browse with multiple windows"
-msgstr "Bla gjennom med flere vinduer"
+#: control-center/gnomecc-ui.xml.h:1
+msgid "About this application"
+msgstr "Om denne applikasjonen"
 
-#: control-center/gnomecc.glade.h:3
-msgid "Browse with single window"
-msgstr "Bla gjennom med et enkelt vindu"
+#: control-center/gnomecc-ui.xml.h:2
+msgid "_About..."
+msgstr "_Om..."
 
-#: control-center/gnomecc.glade.h:4
-msgid "Display control panels as HTML"
-msgstr "Vis kontrollpaneler som HTML"
+#: control-center/gnomecc-ui.xml.h:3
+msgid "_File"
+msgstr "_Fil"
 
-#: control-center/gnomecc.glade.h:5
-msgid "Display control panels as a set of icons"
-msgstr "Vis kontrollpaneler som et sett ikoner"
-
-#: control-center/gnomecc.glade.h:6
-msgid "Display control panels as a tree"
-msgstr "Vis kontrollpaneler som et tre"
-
-#: control-center/gnomecc.glade.h:7
-msgid "Launch control panels in separate windows"
-msgstr "Start kontrollpaneler i adskilte vinduer"
-
-#: control-center/gnomecc.glade.h:8
-msgid "New-control-center"
-msgstr "Nytt kontrollsenter"
-
-#: control-center/gnomecc.glade.h:9
-msgid "Put control panels in the control center's window"
-msgstr "Plasser kontrollpaneler i kontrollsenterets vindu"
+#: control-center/gnomecc-ui.xml.h:4
+msgid "_Help"
+msgstr "_Hjelp"
 
 #: control-center/main.c:43
 msgid "Use shell even if nautilus is running."
@@ -1460,11 +1427,19 @@ msgstr "Kunne ikke laste pixbuf \"%s\"; slår av bakgrunn."
 msgid "Disabled"
 msgstr "Slått av"
 
-#: libsounds/sound-view.c:104
+#: libbackground/preview-file-selection.c:186
+msgid "Can't find an hbox, using a normal file selection"
+msgstr "Kan ikke finne en hbox, bruker vanlig filvalg"
+
+#: libbackground/preview-file-selection.c:191
+msgid "Preview"
+msgstr "Forhåndsvisning"
+
+#: libsounds/sound-view.c:116
 msgid "The sound file for this event does not exist."
 msgstr "Lydfilen for denne hendelsen eksisterer ikke."
 
-#: libsounds/sound-view.c:106
+#: libsounds/sound-view.c:118
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -1474,21 +1449,61 @@ msgstr ""
 "Du må kanskje installere gnome-audio pakken\n"
 "for å få et forvalgt sett med lyder."
 
-#: libsounds/sound-view.c:160
+#: libsounds/sound-view.c:209
 msgid "Event"
 msgstr "Hendelse"
 
-#: libsounds/sound-view.c:160
-msgid "File to Play"
+#: libsounds/sound-view.c:216
+msgid "File to play"
 msgstr "Fil som skal spilles"
 
-#: libsounds/sound-view.c:193
+#: libsounds/sound-view.c:238
 msgid "Play"
 msgstr "Spill"
 
-#: libsounds/sound-view.c:199
+#: libsounds/sound-view.c:244
 msgid "Select sound file"
 msgstr "Velg lydfil"
+
+#~ msgid "Auto Preview"
+#~ msgstr "Automatisk forhåndsvisning"
+
+#~ msgid "Available Themes"
+#~ msgstr "Tilgjengelige tema"
+
+#~ msgid ""
+#~ "No help is available/installed. Please make sure you\n"
+#~ "have the GNOME User's Guide installed on your system."
+#~ msgstr ""
+#~ "Ingen hjelp tilgjengelig/installert. Vennligst forsikre\n"
+#~ "deg om at du har GNOME brukerhåndboken installert."
+
+#~ msgid "Close"
+#~ msgstr "Lukk"
+
+#~ msgid "Browse with multiple windows"
+#~ msgstr "Bla gjennom med flere vinduer"
+
+#~ msgid "Browse with single window"
+#~ msgstr "Bla gjennom med et enkelt vindu"
+
+#~ msgid "Display control panels as HTML"
+#~ msgstr "Vis kontrollpaneler som HTML"
+
+#~ msgid "Display control panels as a set of icons"
+#~ msgstr "Vis kontrollpaneler som et sett ikoner"
+
+#~ msgid "Display control panels as a tree"
+#~ msgstr "Vis kontrollpaneler som et tre"
+
+#~ msgid "Launch control panels in separate windows"
+#~ msgstr "Start kontrollpaneler i adskilte vinduer"
+
+#~ msgid "New-control-center"
+#~ msgstr "Nytt kontrollsenter"
+
+#~ msgid "Put control panels in the control center's window"
+#~ msgstr "Plasser kontrollpaneler i kontrollsenterets vindu"
 
 #~ msgid "<i>fast</i>"
 #~ msgstr "<i>rask</i>"
@@ -1669,9 +1684,6 @@ msgstr "Velg lydfil"
 
 #~ msgid "Wallpaper Selection"
 #~ msgstr "Valg av bakgrunn"
-
-#~ msgid "Can't find an hbox, using a normal file selection"
-#~ msgstr "Kan ikke finne en hbox, bruker vanlig filvalg"
 
 #~ msgid "Gnome Default Editor"
 #~ msgstr "Standard redigeringsprogram for GNOME"
@@ -2897,9 +2909,6 @@ msgstr "Velg lydfil"
 
 #~ msgid "Opacity (percent):"
 #~ msgstr "Ugjennomsiktighet (prosent):"
-
-#~ msgid "Set background image."
-#~ msgstr "Sett bakgrunnsbilde."
 
 #~ msgid "IMAGE-FILE"
 #~ msgstr "BILDE-FIL"
