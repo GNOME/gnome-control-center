@@ -190,8 +190,6 @@ main (int argc, char **argv)
 	bindtextdomain (PACKAGE, GNOMELOCALEDIR);
 	textdomain (PACKAGE);
 
-	glade_gnome_init ();
-	
 	res = gnome_capplet_init ("screensaver-properties",
 				  VERSION, argc, argv, NULL,
 				  0, NULL);

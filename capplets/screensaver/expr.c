@@ -27,21 +27,39 @@
 
 #include "expr.h"
 
-static gdouble  int_parse_sentence (GScanner *scanner);
-static gdouble  int_parse_unary    (GScanner *scanner);
-static gdouble  int_parse_atom     (GScanner *scanner);
-static gdouble  int_parse_expr     (GScanner *scanner, gboolean expr,
+typedef enum {
+	TYPE_BOOLEAN, TYPE_DOUBLE, TYPE_STRING
+} value_type_t;
+
+typedef struct {
+	value_type_t type;
+	union {
+		gboolean v_bool;
+		gdouble v_double;
+		gchar *v_string;
+	} u;
+} value_t;
+
+static value_t  int_parse_sentence (GScanner *scanner);
+static value_t  int_parse_unary    (GScanner *scanner);
+static value_t  int_parse_atom     (GScanner *scanner);
+static value_t  int_parse_expr     (GScanner *scanner, gboolean expr,
 				    gboolean neg);
-static gdouble  int_parse_term     (GScanner *scanner, gboolean expr, 
+static value_t  int_parse_term     (GScanner *scanner, gboolean expr, 
 				    gboolean inv);
-static gdouble  int_parse_factor   (GScanner *scanner, gboolean expr);
+static value_t  int_parse_factor   (GScanner *scanner, gboolean expr);
 
 gboolean 
 parse_sentence (gchar *sentence, GScanner *scanner) 
 {
+	value_t val;
+
 	g_scanner_input_text (scanner, sentence, strlen (sentence));
 	g_scanner_get_next_token (scanner);
-	return int_parse_sentence (scanner) != 0.0;
+	val = int_parse_sentence (scanner);
+	g_assert (val.type == TYPE_BOOLEAN);
+
+	return val.u.v_bool;
 }
 
 gdouble
@@ -50,7 +68,7 @@ parse_expr (gchar *expr, gdouble var)
 	static GScannerConfig config;
 	GScanner *scanner;
 	gchar *var_string;
-	gfloat ret;
+	value_t ret;
 
 	config.cset_skip_characters = " \t\n";
 	config.cset_identifier_first = "abcdefghijklmnopqrstuvwxyz";
@@ -66,20 +84,22 @@ parse_expr (gchar *expr, gdouble var)
 	g_scanner_scope_add_symbol (scanner, 0, "var", var_string);
 
 	ret = int_parse_expr (scanner, TRUE, FALSE);
+	g_assert (ret.type == TYPE_DOUBLE);
 
 	g_free (var_string);
 	g_scanner_destroy (scanner);
-	return ret;
+	return ret.u.v_double;
 }
 
-static gdouble
+static value_t
 int_parse_sentence (GScanner *scanner) 
 {
 	GTokenType token_type;
 	GTokenValue value;
-	gdouble left;
+	value_t left, right;
 
 	left = int_parse_unary (scanner);
+	g_assert (left.type == TYPE_BOOLEAN);
 
 	token_type = g_scanner_cur_token (scanner);
 	value = g_scanner_cur_value (scanner);
@@ -88,26 +108,31 @@ int_parse_sentence (GScanner *scanner)
 	    (token_type == G_TOKEN_SYMBOL && value.v_symbol == SYMBOL_AND)) 
 	{
 		g_scanner_get_next_token (scanner);
-		return (int_parse_sentence (scanner) != 0.0 && 
-			left != 0.0) ? 1.0 : 0.0;
+		right = int_parse_sentence (scanner);
+		g_assert (right.type == TYPE_BOOLEAN);
+		left.u.v_bool = left.u.v_bool && right.u.v_bool;
+		return left;
 	}
 	else if ((token_type == G_TOKEN_CHAR && value.v_char == '|') || 
 		 (token_type == G_TOKEN_SYMBOL && 
 		  value.v_symbol == SYMBOL_OR)) 
 	{
 		g_scanner_get_next_token (scanner);
-		return (int_parse_sentence (scanner) != 0.0 || 
-			left != 0.0) ? 1.0 : 0.0;
+		right = int_parse_sentence (scanner);
+		g_assert (right.type == TYPE_BOOLEAN);
+		left.u.v_bool = left.u.v_bool || right.u.v_bool;
+		return left;
 	}
 
 	return left;
 }
 
-static gdouble
+static value_t
 int_parse_unary (GScanner *scanner) 
 {
 	GTokenType token_type;
 	GTokenValue value;
+	value_t op;
 
 	token_type = g_scanner_cur_token (scanner);
 	value = g_scanner_cur_value (scanner);
@@ -116,18 +141,23 @@ int_parse_unary (GScanner *scanner)
 	    (token_type == G_TOKEN_SYMBOL && value.v_symbol == SYMBOL_NOT))
 	{
 		g_scanner_get_next_token (scanner);
-		return (int_parse_unary (scanner) != 0.0) ? 0.0 : 1.0;
+		op = int_parse_unary (scanner);
+		g_assert (op.type == TYPE_BOOLEAN);
+		op.u.v_bool = !op.u.v_bool;
+		return op;
 	} else {
-		return (int_parse_atom (scanner) != 0.0) ? 1.0 : 0.0;
+		op = int_parse_atom (scanner);
+		g_assert (op.type == TYPE_BOOLEAN);
+		return op;
 	}
 }
 
-static gdouble
+static value_t
 int_parse_atom (GScanner *scanner) 
 {
 	GTokenType token_type;
 	GTokenValue value;
-	gdouble left;
+	value_t left, right;
 
 	left = int_parse_expr (scanner, FALSE, FALSE);
 
@@ -137,31 +167,58 @@ int_parse_atom (GScanner *scanner)
 		value = g_scanner_cur_value (scanner);
 		if (value.v_char == '=') {
 			g_scanner_get_next_token (scanner);
-			return (int_parse_expr (scanner, FALSE, FALSE)
-				== left) ? 1.0 : 0.0;
+			right = int_parse_expr (scanner, FALSE, FALSE);
+
+			if (left.type != right.type)
+				left.u.v_bool = FALSE;
+			else if (left.type == TYPE_DOUBLE)
+				left.u.v_bool = (left.u.v_double ==
+						 right.u.v_double);
+			else if (left.type == TYPE_STRING)
+				left.u.v_bool =
+					(strcmp (left.u.v_string,
+						 right.u.v_string) == 0);
 		}
 		else if (value.v_char == '<') {
 			g_scanner_get_next_token (scanner);
-			return (int_parse_expr (scanner, FALSE, FALSE)
-				> left) ? 1.0 : 0.0;
+			right = int_parse_expr (scanner, FALSE, FALSE);
+			
+			if (left.type != TYPE_DOUBLE ||
+			    right.type != TYPE_DOUBLE) 
+				left.u.v_bool = FALSE;
+			else
+				left.u.v_bool = (left.u.v_double <
+						 right.u.v_double);
 		}
 		else if (value.v_char == '>') {
 			g_scanner_get_next_token (scanner);
-			return (int_parse_expr (scanner, FALSE, FALSE)
-				< left) ? 1.0 : 0.0;
+			right = int_parse_expr (scanner, FALSE, FALSE);
+			
+			if (left.type != TYPE_DOUBLE ||
+			    right.type != TYPE_DOUBLE) 
+				left.u.v_bool = FALSE;
+			else
+				left.u.v_bool = (left.u.v_double >
+						 right.u.v_double);
 		}
+	} else {
+		if (left.type == TYPE_DOUBLE)
+			left.u.v_bool = (left.u.v_double != 0.0);
+		else if (left.type == TYPE_STRING)
+			left.u.v_bool = (left.u.v_string != NULL);
 	}
+
+	left.type = TYPE_BOOLEAN;
 
 	return left;
 }
 
-static gdouble
+static value_t
 int_parse_expr (GScanner *scanner, gboolean expr, gboolean neg) 
 {
 	GTokenType token_type;
 	GTokenValue value;
-	gdouble left;
-	gdouble ret;
+	value_t left, right;
 
 	left = int_parse_term (scanner, expr, FALSE);
 
@@ -171,28 +228,41 @@ int_parse_expr (GScanner *scanner, gboolean expr, gboolean neg)
 		value = g_scanner_cur_value (scanner);
 		if (value.v_char == '+') {
 			g_scanner_get_next_token (scanner);
-			return left + int_parse_expr (scanner, expr, FALSE);
+			right = int_parse_expr (scanner, expr, FALSE);
+
+			if (left.type != TYPE_DOUBLE || 
+			    right.type != TYPE_DOUBLE)
+				left.u.v_double = 0.0;
+			else
+				left.u.v_double += right.u.v_double;
+
+			left.type = TYPE_DOUBLE;
 		}
 		else if (value.v_char == '-') {
 			g_scanner_get_next_token (scanner);
-			ret = int_parse_expr (scanner, expr, TRUE);
-			if (neg) 
-				return left + ret;
+			right = int_parse_expr (scanner, expr, TRUE);
+
+			if (left.type != TYPE_DOUBLE ||
+			    right.type != TYPE_DOUBLE)
+				left.u.v_double = 0.0;
+			else if (neg) 
+				left.u.v_double += right.u.v_double;
 			else
-				return left - ret;
+				left.u.v_double -= right.u.v_double;
+
+			left.type = TYPE_DOUBLE;
 		}
 	}
 
 	return left;
 }
 
-static gdouble
+static value_t
 int_parse_term (GScanner *scanner, gboolean expr, gboolean inv)
 {
 	GTokenType token_type;
 	GTokenValue value;
-	gdouble left;
-	gdouble ret;
+	value_t left, right;
 
 	left = int_parse_factor (scanner, expr);
 
@@ -202,27 +272,41 @@ int_parse_term (GScanner *scanner, gboolean expr, gboolean inv)
 		value = g_scanner_cur_value (scanner);
 		if (token_type == '*') {
 			g_scanner_get_next_token (scanner);
-			return left * int_parse_term (scanner, expr, FALSE);
+			right = int_parse_term (scanner, expr, FALSE);
+
+			if (left.type != TYPE_DOUBLE || 
+			    right.type != TYPE_DOUBLE)
+				left.u.v_double = 0.0;
+			else
+				left.u.v_double *= right.u.v_double;
+
+			left.type = TYPE_DOUBLE;
 		}
 		else if (token_type == '/') {
 			g_scanner_get_next_token (scanner);
-			ret = int_parse_term (scanner, expr, TRUE);
-			if (inv) 
-				return left * ret;
+			right = int_parse_expr (scanner, expr, TRUE);
+
+			if (left.type != TYPE_DOUBLE ||
+			    right.type != TYPE_DOUBLE)
+				left.u.v_double = 0.0;
+			else if (inv) 
+				left.u.v_double *= right.u.v_double;
 			else
-				return left / ret;
+				left.u.v_double /= right.u.v_double;
+
+			left.type = TYPE_DOUBLE;
 		}
 	}
 
 	return left;
 }
 
-static gdouble
+static value_t
 int_parse_factor (GScanner *scanner, gboolean expr) 
 {
 	GTokenType token_type;
 	GTokenValue value;
-	gdouble ret;
+	value_t ret;
 
 	token_type = g_scanner_cur_token (scanner);
 	value = g_scanner_cur_value (scanner);
@@ -235,25 +319,42 @@ int_parse_factor (GScanner *scanner, gboolean expr)
 			ret = int_parse_sentence (scanner);
 
 		g_scanner_get_next_token (scanner);
+
 		return ret;
 	}
 	else if (token_type == G_TOKEN_INT) {
-		return value.v_int;
+		ret.type = TYPE_DOUBLE;
+		ret.u.v_double = (gdouble) value.v_int;
+
+		return ret;
 	}
 	else if (token_type == G_TOKEN_FLOAT) {
-		return value.v_float;
+		ret.type = TYPE_DOUBLE;
+		ret.u.v_double = (gdouble) value.v_float;
+
+		return ret;
 	}
 	else if (token_type == G_TOKEN_SYMBOL) {
-		if (value.v_symbol == (gpointer) 1)
-			return (gint) value.v_symbol;
-		else
-			return g_strtod (value.v_symbol, NULL);
+		if (value.v_symbol == (gpointer) 1) {
+			ret.type = TYPE_DOUBLE;
+			ret.u.v_double = 1.0;
+		} else {
+			ret.type = TYPE_DOUBLE;
+			ret.u.v_double = g_strtod (value.v_symbol, NULL);
+		}
+
+		return ret;
 	}
 	else if (token_type == G_TOKEN_IDENTIFIER) {
-		return 0.0;
+		ret.type = TYPE_STRING;
+		ret.u.v_string = value.v_identifier;
+
+		return ret;
 	} else {
 		g_scanner_error (scanner, "Parse error in expression");
 	}
 
-	return 0;
+	ret.type = TYPE_BOOLEAN;
+	ret.u.v_bool = FALSE;
+	return ret;
 }
