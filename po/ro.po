@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.0.1-1\n"
-"POT-Creation-Date: 2002-11-02 13:45-0500\n"
+"POT-Creation-Date: 2002-11-23 21:17-0500\n"
 "PO-Revision-Date: 2002-09-05 16:53+0300\n"
 "Last-Translator: Mugurel Tudor <mugurelu@go.ro>\n"
 "Language-Team: română <ro@li.org>\n"
@@ -65,13 +65,13 @@ msgid "Beep if key is re_jected"
 msgstr "Bip când tasta este _refuzată"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
+msgid "Beep when _features turned on or off from keyboard"
+msgstr ""
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
 #, fuzzy
 msgid "Beep when _modifier is pressed"
 msgstr "B_ip când modificatorul este apăsat"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
-msgid "Beep when a _feature is turned on or off"
-msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
 msgid "Beep when an LED is turned on and two beeps when one is turned off."
@@ -301,7 +301,7 @@ msgstr "_Fără imagine"
 msgid "Select _picture:"
 msgstr "Selectaţi _imaginea:"
 
-#: capplets/background/background-properties-capplet.c:561
+#: capplets/background/background-properties-capplet.c:567
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
 #: capplets/keyboard/gnome-keyboard-properties.c:294
@@ -310,7 +310,7 @@ msgstr "Selectaţi _imaginea:"
 msgid "Retrieve and store legacy settings"
 msgstr "Recuperează şi memorează setările anterioare"
 
-#: capplets/background/background-properties-capplet.c:587
+#: capplets/background/background-properties-capplet.c:593
 #: capplets/background/background-properties.glade.h:2
 msgid "Background Preferences"
 msgstr "Preferinţe fundal"
@@ -1877,51 +1877,81 @@ msgid "Select themes for various parts of the desktop"
 msgstr "Selectează teme pentru diferite porţiuni ale desktop-ului"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
-#: capplets/theme-switcher/theme-properties.glade.h:6
+#: capplets/theme-switcher/theme-properties.glade.h:4
 msgid "Theme"
 msgstr "Temă"
 
 #: capplets/theme-switcher/theme-properties.glade.h:1
 #, fuzzy
-msgid "Apply _Background"
-msgstr "Fundal"
-
-#: capplets/theme-switcher/theme-properties.glade.h:2
-#, fuzzy
-msgid "Apply _Font"
-msgstr "Aplică acum"
-
-#: capplets/theme-switcher/theme-properties.glade.h:3
-#, fuzzy
 msgid "Controls"
 msgstr "Control UI"
 
-#: capplets/theme-switcher/theme-properties.glade.h:4
+#: capplets/theme-switcher/theme-properties.glade.h:2
 #, fuzzy
 msgid "Icons"
 msgstr "Doar iconiţe"
 
-#: capplets/theme-switcher/theme-properties.glade.h:5
+#: capplets/theme-switcher/theme-properties.glade.h:3
 msgid "New themes can also be installed by dragging them into the window."
 msgstr ""
 "Temele noi pot fi instalate şi prin tragerea lor deasupra acestei ferestre."
 
-#: capplets/theme-switcher/theme-properties.glade.h:7
+#: capplets/theme-switcher/theme-properties.glade.h:5
 msgid "Theme Preferences"
 msgstr "Preferinţe temă"
 
+#: capplets/theme-switcher/theme-properties.glade.h:6
+msgid ""
+"This theme suggests a matching\n"
+"background:"
+msgstr ""
+
 #: capplets/theme-switcher/theme-properties.glade.h:8
+msgid ""
+"This theme suggests a matching\n"
+"font and background"
+msgstr ""
+
+#: capplets/theme-switcher/theme-properties.glade.h:10
+msgid "This theme suggests a matching font:"
+msgstr ""
+
+#: capplets/theme-switcher/theme-properties.glade.h:11
+#, fuzzy
+msgid "Use _Background"
+msgstr "Fundal"
+
+#: capplets/theme-switcher/theme-properties.glade.h:12
+#, fuzzy
+msgid "Use _Font"
+msgstr "Font"
+
+#: capplets/theme-switcher/theme-properties.glade.h:13
+msgid "Use _Font "
+msgstr ""
+
+#: capplets/theme-switcher/theme-properties.glade.h:14
+#, fuzzy
+msgid "Use _background"
+msgstr "Fundal"
+
+#: capplets/theme-switcher/theme-properties.glade.h:15
 #, fuzzy
 msgid "Window Border"
 msgstr "Aspect margine fereastră"
 
-#: capplets/theme-switcher/theme-properties.glade.h:9
+#: capplets/theme-switcher/theme-properties.glade.h:16
 msgid "_Go to theme folder"
 msgstr "_Du-te în directorul cu teme"
 
-#: capplets/theme-switcher/theme-properties.glade.h:10
+#: capplets/theme-switcher/theme-properties.glade.h:17
 msgid "_Install New Theme..."
 msgstr "_Instalează o nouă temă..."
+
+#: capplets/theme-switcher/theme-properties.glade.h:18
+#, fuzzy
+msgid "_Save Theme"
+msgstr "Temă"
 
 #: capplets/theme-switcher/theme-install.glade.h:2
 msgid "Install new theme"
@@ -1934,6 +1964,17 @@ msgstr "_Instalează"
 #: capplets/theme-switcher/theme-install.glade.h:4
 msgid "_Location of new theme:"
 msgstr "_Localizarea noii teme:"
+
+#: capplets/theme-switcher/gnome-theme-manager.c:615
+#, fuzzy
+msgid "Current modified"
+msgstr "Index curent URI"
+
+#: capplets/theme-switcher/gnome-theme-manager.c:634
+msgid ""
+"No themes could be found on your system.  This probably means that your "
+"\"Theme Preferences\" dialog was improperly installed."
+msgstr ""
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
@@ -2177,11 +2218,13 @@ msgid "Overview of the control center"
 msgstr "Privire de ansamblu asupra centrului de control"
 
 #: control-center/gnomecc-ui.xml.h:3
-msgid "_About..."
+#, fuzzy
+msgid "_About"
 msgstr "_Despre..."
 
 #: control-center/gnomecc-ui.xml.h:4
-msgid "_Contents..."
+#, fuzzy
+msgid "_Contents"
 msgstr "_Conţinut..."
 
 #: control-center/gnomecc-ui.xml.h:6
@@ -2267,7 +2310,7 @@ msgstr "_Nu mai arăta acest mesaj pe viitor"
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Nu am putut încărca fişierul de sunet %s ca eşantion %s"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:172
+#: gnome-settings-daemon/gnome-settings-xsettings.c:184
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "Cheia GConf %s este setată la tipul %s dar tipul aşteptat era %s\n"
@@ -2350,6 +2393,22 @@ msgstr "Selectează fişierul de sunet"
 #, c-format
 msgid "Window manager \"%s\" has not registered a configuration tool\n"
 msgstr ""
+
+#: libwindow-settings/metacity-window-manager.c:373
+msgid "Maximize"
+msgstr ""
+
+#: libwindow-settings/metacity-window-manager.c:374
+msgid "Roll up"
+msgstr ""
+
+#, fuzzy
+#~ msgid "Apply _Background"
+#~ msgstr "Fundal"
+
+#, fuzzy
+#~ msgid "Apply _Font"
+#~ msgstr "Aplică acum"
 
 #, fuzzy
 #~ msgid "Beep when enabling/disabling _keyboard accessibility features"

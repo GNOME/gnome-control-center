@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center\n"
-"POT-Creation-Date: 2002-11-02 13:45-0500\n"
+"POT-Creation-Date: 2002-11-23 21:17-0500\n"
 "PO-Revision-Date: 2002-07-15 13:11+0200\n"
 "Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -67,13 +67,13 @@ msgid "Beep if key is re_jected"
 msgstr "Sygnał dźwiękowy przy o_drzuceniu klawisza"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
+msgid "Beep when _features turned on or off from keyboard"
+msgstr ""
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
 #, fuzzy
 msgid "Beep when _modifier is pressed"
 msgstr "Sygnał dźwiękowy przy przyciśnięciu _modyfikatora"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
-msgid "Beep when a _feature is turned on or off"
-msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
 msgid "Beep when an LED is turned on and two beeps when one is turned off."
@@ -309,7 +309,7 @@ msgstr "_Bez obrazu"
 msgid "Select _picture:"
 msgstr "Wybierz _obraz:"
 
-#: capplets/background/background-properties-capplet.c:561
+#: capplets/background/background-properties-capplet.c:567
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
 #: capplets/keyboard/gnome-keyboard-properties.c:294
@@ -318,7 +318,7 @@ msgstr "Wybierz _obraz:"
 msgid "Retrieve and store legacy settings"
 msgstr "Pobiera i zapisuje tradycyjne ustawienia"
 
-#: capplets/background/background-properties-capplet.c:587
+#: capplets/background/background-properties-capplet.c:593
 #: capplets/background/background-properties.glade.h:2
 msgid "Background Preferences"
 msgstr "Ustawienia tła"
@@ -1894,50 +1894,80 @@ msgid "Select themes for various parts of the desktop"
 msgstr "Wybór motywów różnych części środowiska"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
-#: capplets/theme-switcher/theme-properties.glade.h:6
+#: capplets/theme-switcher/theme-properties.glade.h:4
 msgid "Theme"
 msgstr "Motyw"
 
 #: capplets/theme-switcher/theme-properties.glade.h:1
 #, fuzzy
-msgid "Apply _Background"
-msgstr "Tło"
-
-#: capplets/theme-switcher/theme-properties.glade.h:2
-#, fuzzy
-msgid "Apply _Font"
-msgstr "Zastosuj teraz"
-
-#: capplets/theme-switcher/theme-properties.glade.h:3
-#, fuzzy
 msgid "Controls"
 msgstr "Kontrolujący obiekt"
 
-#: capplets/theme-switcher/theme-properties.glade.h:4
+#: capplets/theme-switcher/theme-properties.glade.h:2
 #, fuzzy
 msgid "Icons"
 msgstr "Tylko ikony"
 
-#: capplets/theme-switcher/theme-properties.glade.h:5
+#: capplets/theme-switcher/theme-properties.glade.h:3
 msgid "New themes can also be installed by dragging them into the window."
 msgstr "Nowe motywy można również instalować przeciągając je do tego okna."
 
-#: capplets/theme-switcher/theme-properties.glade.h:7
+#: capplets/theme-switcher/theme-properties.glade.h:5
 msgid "Theme Preferences"
 msgstr "Ustawienia motywu"
 
+#: capplets/theme-switcher/theme-properties.glade.h:6
+msgid ""
+"This theme suggests a matching\n"
+"background:"
+msgstr ""
+
 #: capplets/theme-switcher/theme-properties.glade.h:8
+msgid ""
+"This theme suggests a matching\n"
+"font and background"
+msgstr ""
+
+#: capplets/theme-switcher/theme-properties.glade.h:10
+msgid "This theme suggests a matching font:"
+msgstr ""
+
+#: capplets/theme-switcher/theme-properties.glade.h:11
+#, fuzzy
+msgid "Use _Background"
+msgstr "Tło"
+
+#: capplets/theme-switcher/theme-properties.glade.h:12
+#, fuzzy
+msgid "Use _Font"
+msgstr "Czcionki"
+
+#: capplets/theme-switcher/theme-properties.glade.h:13
+msgid "Use _Font "
+msgstr ""
+
+#: capplets/theme-switcher/theme-properties.glade.h:14
+#, fuzzy
+msgid "Use _background"
+msgstr "Tło"
+
+#: capplets/theme-switcher/theme-properties.glade.h:15
 #, fuzzy
 msgid "Window Border"
 msgstr "Wygląd krawędzi okna"
 
-#: capplets/theme-switcher/theme-properties.glade.h:9
+#: capplets/theme-switcher/theme-properties.glade.h:16
 msgid "_Go to theme folder"
 msgstr "_Przejdź do folderu z motywem"
 
-#: capplets/theme-switcher/theme-properties.glade.h:10
+#: capplets/theme-switcher/theme-properties.glade.h:17
 msgid "_Install New Theme..."
 msgstr "Za_instaluj nowy motyw..."
+
+#: capplets/theme-switcher/theme-properties.glade.h:18
+#, fuzzy
+msgid "_Save Theme"
+msgstr "Motyw"
 
 #: capplets/theme-switcher/theme-install.glade.h:2
 msgid "Install new theme"
@@ -1950,6 +1980,17 @@ msgstr "Za_instaluj"
 #: capplets/theme-switcher/theme-install.glade.h:4
 msgid "_Location of new theme:"
 msgstr "P_ołożenie nowego motywu:"
+
+#: capplets/theme-switcher/gnome-theme-manager.c:615
+#, fuzzy
+msgid "Current modified"
+msgstr "Bieżący indeks URI"
+
+#: capplets/theme-switcher/gnome-theme-manager.c:634
+msgid ""
+"No themes could be found on your system.  This probably means that your "
+"\"Theme Preferences\" dialog was improperly installed."
+msgstr ""
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
@@ -2199,11 +2240,13 @@ msgid "Overview of the control center"
 msgstr "Podsumowanie Panelu Sterowania"
 
 #: control-center/gnomecc-ui.xml.h:3
-msgid "_About..."
+#, fuzzy
+msgid "_About"
 msgstr "_Informacje o..."
 
 #: control-center/gnomecc-ui.xml.h:4
-msgid "_Contents..."
+#, fuzzy
+msgid "_Contents"
 msgstr "_Zawartość..."
 
 #: control-center/gnomecc-ui.xml.h:6
@@ -2291,7 +2334,7 @@ msgstr "_Nie wyświetlaj więcej tego komunikatu"
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Nie można wczytać pliku dźwiękowego %s jako próbki %s"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:172
+#: gnome-settings-daemon/gnome-settings-xsettings.c:184
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr ""
@@ -2378,6 +2421,22 @@ msgstr "Wybór pliku dźwiękowego"
 #, c-format
 msgid "Window manager \"%s\" has not registered a configuration tool\n"
 msgstr ""
+
+#: libwindow-settings/metacity-window-manager.c:373
+msgid "Maximize"
+msgstr ""
+
+#: libwindow-settings/metacity-window-manager.c:374
+msgid "Roll up"
+msgstr ""
+
+#, fuzzy
+#~ msgid "Apply _Background"
+#~ msgstr "Tło"
+
+#, fuzzy
+#~ msgid "Apply _Font"
+#~ msgstr "Zastosuj teraz"
 
 #, fuzzy
 #~ msgid "Beep when enabling/disabling _keyboard accessibility features"

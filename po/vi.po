@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center VERSION\n"
-"POT-Creation-Date: 2002-11-02 13:45-0500\n"
+"POT-Creation-Date: 2002-11-23 21:17-0500\n"
 "PO-Revision-Date: 2002-08-17 18:23+0700\n"
 "Last-Translator: pclouds <pclouds@gmx.net>\n"
 "Language-Team: GnomeVI <gnomevi-list@lists.sourceforge.net>\n"
@@ -64,13 +64,13 @@ msgid "Beep if key is re_jected"
 msgstr "phím bị từ _chối"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
+msgid "Beep when _features turned on or off from keyboard"
+msgstr ""
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
 #, fuzzy
 msgid "Beep when _modifier is pressed"
 msgstr "Kêu bíp khi phím bổ trợ được nhấn"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
-msgid "Beep when a _feature is turned on or off"
-msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
 msgid "Beep when an LED is turned on and two beeps when one is turned off."
@@ -306,7 +306,7 @@ msgstr "Không dùng ảnh"
 msgid "Select _picture:"
 msgstr "_Chọn trình xử lý văn bản:"
 
-#: capplets/background/background-properties-capplet.c:561
+#: capplets/background/background-properties-capplet.c:567
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
 #: capplets/keyboard/gnome-keyboard-properties.c:294
@@ -315,7 +315,7 @@ msgstr "_Chọn trình xử lý văn bản:"
 msgid "Retrieve and store legacy settings"
 msgstr "Nhận và lưu thiết lập truyền thống"
 
-#: capplets/background/background-properties-capplet.c:587
+#: capplets/background/background-properties-capplet.c:593
 #: capplets/background/background-properties.glade.h:2
 msgid "Background Preferences"
 msgstr "Thông số nền"
@@ -1910,52 +1910,82 @@ msgid "Select themes for various parts of the desktop"
 msgstr "Đặt font cho biểu tượng và desktop"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
-#: capplets/theme-switcher/theme-properties.glade.h:6
+#: capplets/theme-switcher/theme-properties.glade.h:4
 msgid "Theme"
 msgstr "Theme"
 
 #: capplets/theme-switcher/theme-properties.glade.h:1
 #, fuzzy
-msgid "Apply _Background"
-msgstr "Nền"
-
-#: capplets/theme-switcher/theme-properties.glade.h:2
-#, fuzzy
-msgid "Apply _Font"
-msgstr "Áp dụng ngay"
-
-#: capplets/theme-switcher/theme-properties.glade.h:3
-#, fuzzy
 msgid "Controls"
 msgstr "Điều khiển UI"
 
-#: capplets/theme-switcher/theme-properties.glade.h:4
+#: capplets/theme-switcher/theme-properties.glade.h:2
 #, fuzzy
 msgid "Icons"
 msgstr "Chỉ biểu tượng"
 
-#: capplets/theme-switcher/theme-properties.glade.h:5
+#: capplets/theme-switcher/theme-properties.glade.h:3
 msgid "New themes can also be installed by dragging them into the window."
 msgstr "Theme mới có thể được cài đặt bằng cách kéo nó vào cửa sổ."
 
-#: capplets/theme-switcher/theme-properties.glade.h:7
+#: capplets/theme-switcher/theme-properties.glade.h:5
 #, fuzzy
 msgid "Theme Preferences"
 msgstr "Thông số Theme Gtk+"
 
+#: capplets/theme-switcher/theme-properties.glade.h:6
+msgid ""
+"This theme suggests a matching\n"
+"background:"
+msgstr ""
+
 #: capplets/theme-switcher/theme-properties.glade.h:8
+msgid ""
+"This theme suggests a matching\n"
+"font and background"
+msgstr ""
+
+#: capplets/theme-switcher/theme-properties.glade.h:10
+msgid "This theme suggests a matching font:"
+msgstr ""
+
+#: capplets/theme-switcher/theme-properties.glade.h:11
+#, fuzzy
+msgid "Use _Background"
+msgstr "Nền"
+
+#: capplets/theme-switcher/theme-properties.glade.h:12
+#, fuzzy
+msgid "Use _Font"
+msgstr "Font"
+
+#: capplets/theme-switcher/theme-properties.glade.h:13
+msgid "Use _Font "
+msgstr ""
+
+#: capplets/theme-switcher/theme-properties.glade.h:14
+#, fuzzy
+msgid "Use _background"
+msgstr "Nền"
+
+#: capplets/theme-switcher/theme-properties.glade.h:15
 #, fuzzy
 msgid "Window Border"
 msgstr "Diện mạo biên cửa sổ"
 
-#: capplets/theme-switcher/theme-properties.glade.h:9
+#: capplets/theme-switcher/theme-properties.glade.h:16
 msgid "_Go to theme folder"
 msgstr "Đ_i tới thư mục theme"
 
-#: capplets/theme-switcher/theme-properties.glade.h:10
+#: capplets/theme-switcher/theme-properties.glade.h:17
 #, fuzzy
 msgid "_Install New Theme..."
 msgstr "_Cài theme mới..."
+
+#: capplets/theme-switcher/theme-properties.glade.h:18
+#, fuzzy
+msgid "_Save Theme"
+msgstr "Theme"
 
 #: capplets/theme-switcher/theme-install.glade.h:2
 msgid "Install new theme"
@@ -1968,6 +1998,17 @@ msgstr "_Cài đặt"
 #: capplets/theme-switcher/theme-install.glade.h:4
 msgid "_Location of new theme:"
 msgstr "_Vị trí theme mới:"
+
+#: capplets/theme-switcher/gnome-theme-manager.c:615
+#, fuzzy
+msgid "Current modified"
+msgstr "Chỉ mục URI hiện thời"
+
+#: capplets/theme-switcher/gnome-theme-manager.c:634
+msgid ""
+"No themes could be found on your system.  This probably means that your "
+"\"Theme Preferences\" dialog was improperly installed."
+msgstr ""
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
@@ -2217,11 +2258,13 @@ msgid "Overview of the control center"
 msgstr "Tổng quan về trung tâm điều khiển"
 
 #: control-center/gnomecc-ui.xml.h:3
-msgid "_About..."
+#, fuzzy
+msgid "_About"
 msgstr "_Giới thiệu..."
 
 #: control-center/gnomecc-ui.xml.h:4
-msgid "_Contents..."
+#, fuzzy
+msgid "_Contents"
 msgstr "_Nội dung..."
 
 #: control-center/gnomecc-ui.xml.h:6
@@ -2305,7 +2348,7 @@ msgstr "Đừn_g hiện thông điệp này lần nữa"
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Không thể nạp tập tin âm thanh %s làm mẫu %s"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:172
+#: gnome-settings-daemon/gnome-settings-xsettings.c:184
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "Khoá GConf %s dùng kiểu %s nhưng lẽ ra phải dùng kiểu %s\n"
@@ -2388,6 +2431,22 @@ msgstr "Chọn tập tin âm thanh"
 #, c-format
 msgid "Window manager \"%s\" has not registered a configuration tool\n"
 msgstr ""
+
+#: libwindow-settings/metacity-window-manager.c:373
+msgid "Maximize"
+msgstr ""
+
+#: libwindow-settings/metacity-window-manager.c:374
+msgid "Roll up"
+msgstr ""
+
+#, fuzzy
+#~ msgid "Apply _Background"
+#~ msgstr "Nền"
+
+#, fuzzy
+#~ msgid "Apply _Font"
+#~ msgstr "Áp dụng ngay"
 
 #, fuzzy
 #~ msgid "Beep when enabling/disabling _keyboard accessibility features"

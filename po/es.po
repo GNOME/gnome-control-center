@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.3.10\n"
-"POT-Creation-Date: 2002-11-02 13:45-0500\n"
+"POT-Creation-Date: 2002-11-23 21:17-0500\n"
 "PO-Revision-Date: 2002-06-09 20:45+0200\n"
 "Last-Translator: Lucas Di Pentima <lucas@lunix.com.ar>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
@@ -69,13 +69,13 @@ msgid "Beep if key is re_jected"
 msgstr "la tecla se ha re_chazado"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
+msgid "Beep when _features turned on or off from keyboard"
+msgstr ""
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
 #, fuzzy
 msgid "Beep when _modifier is pressed"
 msgstr "E_mitir un pitido cuando se pulsa una tecla modificadora"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
-msgid "Beep when a _feature is turned on or off"
-msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
 msgid "Beep when an LED is turned on and two beeps when one is turned off."
@@ -313,7 +313,7 @@ msgstr "_Sin imagen"
 msgid "Select _picture:"
 msgstr "_Seleccione un editor:"
 
-#: capplets/background/background-properties-capplet.c:561
+#: capplets/background/background-properties-capplet.c:567
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
 #: capplets/keyboard/gnome-keyboard-properties.c:294
@@ -322,7 +322,7 @@ msgstr "_Seleccione un editor:"
 msgid "Retrieve and store legacy settings"
 msgstr "Obtener y almacenar opciones heredadas"
 
-#: capplets/background/background-properties-capplet.c:587
+#: capplets/background/background-properties-capplet.c:593
 #: capplets/background/background-properties.glade.h:2
 msgid "Background Preferences"
 msgstr "Preferencias del fondo de pantalla"
@@ -1933,53 +1933,83 @@ msgid "Select themes for various parts of the desktop"
 msgstr "Definir la tipografía para los iconos en el escritorio"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
-#: capplets/theme-switcher/theme-properties.glade.h:6
+#: capplets/theme-switcher/theme-properties.glade.h:4
 msgid "Theme"
 msgstr "Tema"
 
 #: capplets/theme-switcher/theme-properties.glade.h:1
 #, fuzzy
-msgid "Apply _Background"
-msgstr "Tapiz"
-
-#: capplets/theme-switcher/theme-properties.glade.h:2
-#, fuzzy
-msgid "Apply _Font"
-msgstr "Aplicar ahora"
-
-#: capplets/theme-switcher/theme-properties.glade.h:3
-#, fuzzy
 msgid "Controls"
 msgstr "Control de interfaz de usuario"
 
-#: capplets/theme-switcher/theme-properties.glade.h:4
+#: capplets/theme-switcher/theme-properties.glade.h:2
 #, fuzzy
 msgid "Icons"
 msgstr "Sólo iconos"
 
-#: capplets/theme-switcher/theme-properties.glade.h:5
+#: capplets/theme-switcher/theme-properties.glade.h:3
 msgid "New themes can also be installed by dragging them into the window."
 msgstr ""
 "Los nuevos temas pueden ser instalados arrastrándolos dentro de la ventana."
 
-#: capplets/theme-switcher/theme-properties.glade.h:7
+#: capplets/theme-switcher/theme-properties.glade.h:5
 #, fuzzy
 msgid "Theme Preferences"
 msgstr "Preferencias del tema GTK+"
 
+#: capplets/theme-switcher/theme-properties.glade.h:6
+msgid ""
+"This theme suggests a matching\n"
+"background:"
+msgstr ""
+
 #: capplets/theme-switcher/theme-properties.glade.h:8
+msgid ""
+"This theme suggests a matching\n"
+"font and background"
+msgstr ""
+
+#: capplets/theme-switcher/theme-properties.glade.h:10
+msgid "This theme suggests a matching font:"
+msgstr ""
+
+#: capplets/theme-switcher/theme-properties.glade.h:11
+#, fuzzy
+msgid "Use _Background"
+msgstr "Tapiz"
+
+#: capplets/theme-switcher/theme-properties.glade.h:12
+#, fuzzy
+msgid "Use _Font"
+msgstr "Tipografía"
+
+#: capplets/theme-switcher/theme-properties.glade.h:13
+msgid "Use _Font "
+msgstr ""
+
+#: capplets/theme-switcher/theme-properties.glade.h:14
+#, fuzzy
+msgid "Use _background"
+msgstr "Tapiz"
+
+#: capplets/theme-switcher/theme-properties.glade.h:15
 #, fuzzy
 msgid "Window Border"
 msgstr "Apariencia del borde de la ventana"
 
-#: capplets/theme-switcher/theme-properties.glade.h:9
+#: capplets/theme-switcher/theme-properties.glade.h:16
 msgid "_Go to theme folder"
 msgstr "Ir a la carpeta de _temas"
 
-#: capplets/theme-switcher/theme-properties.glade.h:10
+#: capplets/theme-switcher/theme-properties.glade.h:17
 #, fuzzy
 msgid "_Install New Theme..."
 msgstr "_Instalar nuevo tema..."
+
+#: capplets/theme-switcher/theme-properties.glade.h:18
+#, fuzzy
+msgid "_Save Theme"
+msgstr "Tema"
 
 #: capplets/theme-switcher/theme-install.glade.h:2
 msgid "Install new theme"
@@ -1992,6 +2022,17 @@ msgstr "_Instalar"
 #: capplets/theme-switcher/theme-install.glade.h:4
 msgid "_Location of new theme:"
 msgstr "_Ubicación del nuevo tema:"
+
+#: capplets/theme-switcher/gnome-theme-manager.c:615
+#, fuzzy
+msgid "Current modified"
+msgstr "Indice URI actual"
+
+#: capplets/theme-switcher/gnome-theme-manager.c:634
+msgid ""
+"No themes could be found on your system.  This probably means that your "
+"\"Theme Preferences\" dialog was improperly installed."
+msgstr ""
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
@@ -2246,11 +2287,13 @@ msgid "Overview of the control center"
 msgstr "Vista general del centro de control"
 
 #: control-center/gnomecc-ui.xml.h:3
-msgid "_About..."
+#, fuzzy
+msgid "_About"
 msgstr "_Acerca de..."
 
 #: control-center/gnomecc-ui.xml.h:4
-msgid "_Contents..."
+#, fuzzy
+msgid "_Contents"
 msgstr "_Contenidos..."
 
 #: control-center/gnomecc-ui.xml.h:6
@@ -2338,7 +2381,7 @@ msgstr "_No mostrar este mensaje otra vez"
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "No se pudo cargar el archivo de sonido %s como evento %s"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:172
+#: gnome-settings-daemon/gnome-settings-xsettings.c:184
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr ""
@@ -2427,6 +2470,22 @@ msgstr "Seleccione un archivo de sonido"
 #, c-format
 msgid "Window manager \"%s\" has not registered a configuration tool\n"
 msgstr ""
+
+#: libwindow-settings/metacity-window-manager.c:373
+msgid "Maximize"
+msgstr ""
+
+#: libwindow-settings/metacity-window-manager.c:374
+msgid "Roll up"
+msgstr ""
+
+#, fuzzy
+#~ msgid "Apply _Background"
+#~ msgstr "Tapiz"
+
+#, fuzzy
+#~ msgid "Apply _Font"
+#~ msgstr "Aplicar ahora"
 
 #, fuzzy
 #~ msgid "Beep when enabling/disabling _keyboard accessibility features"
