@@ -1102,10 +1102,11 @@ static void wallpaper_properties_init (void) {
 
   if (icofile != NULL) {
     capplet->sitem = gtk_image_new_from_file (icofile);
-    g_free (icofile);
     gtk_box_pack_start (GTK_BOX (mbox), capplet->sitem, FALSE, FALSE, 0);
     gtk_widget_show (capplet->sitem);
   }
+  g_free (icofile);
+
   label = gtk_label_new (_("Scaled"));
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
   gtk_box_pack_start (GTK_BOX (mbox), label, TRUE, TRUE, 0);
@@ -1127,6 +1128,8 @@ static void wallpaper_properties_init (void) {
     gtk_box_pack_start (GTK_BOX (mbox), capplet->witem, FALSE, FALSE, 0);
     gtk_widget_show (capplet->witem);
   }
+  g_free (icofile);
+
   label = gtk_label_new (_("Tiled"));
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
   gtk_box_pack_start (GTK_BOX (mbox), label, TRUE, TRUE, 0);
