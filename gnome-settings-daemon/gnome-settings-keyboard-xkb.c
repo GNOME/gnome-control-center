@@ -32,6 +32,8 @@
 
 #include <string.h>
 
+#include <libgnome/gnome-i18n.h>
+
 #include <libxklavier/xklavier.h>
 #include <libgswitchit/gswitchit_xkb_config.h>
 
@@ -42,11 +44,39 @@ static GSwitchItXkbConfig gswic;
 static gboolean initedOk;
 
 static void
+activation_error (void)
+{
+	char *vendor = ServerVendor (GDK_DISPLAY ());
+	int release = VendorRelease (GDK_DISPLAY ());
+	gboolean badXFree430Release = (!strcmp (vendor,
+						"The XFree86 Project, Inc"))
+	    && (release == 40300000);
+
+	GtkWidget *msg = gtk_message_dialog_new (NULL,
+						 GTK_DIALOG_MODAL |
+						 GTK_DIALOG_DESTROY_WITH_PARENT,
+						 GTK_MESSAGE_ERROR,
+						 GTK_BUTTONS_OK,
+						 _
+						 ("Error activating XKB configuration.\n"
+						  "Probably internal X server problem.\n\nX server version data:\n%s\n%d%s"),
+						 vendor,
+						 release,
+						 badXFree430Release ?
+						 _
+						 ("You are using XFree 4.3.0.\n"
+						  "There are known problems with complex XKB configurations.\n"
+						  "Try using simpler configuration or taking more fresh version of XFree software.")
+						 : "");
+	gtk_dialog_run (GTK_DIALOG (msg));
+	gtk_widget_destroy (msg);
+}
+
+static void
 apply_settings (void)
 {
 	GConfClient *confClient;
 
-	printf ("xkb.apply_settings!\n");
 	memset (&gswic, 0, sizeof (gswic));
 
 	confClient = gconf_client_get_default ();
@@ -57,8 +87,10 @@ apply_settings (void)
 	if (!gswic.overrideSettings)
 		GSwitchItXkbConfigLoadInitial (&gswic);
 
-	if (!GSwitchItXkbConfigActivate (&gswic))
+	if (!GSwitchItXkbConfigActivate (&gswic)) {
 		g_warning ("Could not activate the XKB configuration");
+		activation_error ();
+	}
 
 	GSwitchItXkbConfigTerm (&gswic);
 }
