@@ -7,9 +7,9 @@ INCLUDES = \
 	-I$(top_srcdir)/						\
 	@CAPPLET_CFLAGS@
 
-noinst_LIBRARIES = libbackground.a
+noinst_LTLIBRARIES = libbackground.la
 
-libbackground_a_SOURCES = \
+libbackground_la_SOURCES = \
 	applier.c	applier.h	\
 	preferences.c	preferences.h
 
