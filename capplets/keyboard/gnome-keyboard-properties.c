@@ -47,8 +47,24 @@ static GladeXML *
 create_dialog (void)
 {
 	GladeXML *dialog;
+	GtkSizeGroup *size_group;
 
 	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gnome-keyboard-properties.glade", "keyboard_dialog", NULL);
+
+	size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
+	gtk_size_group_add_widget (size_group, WID ("repeat_slow_label"));
+	gtk_size_group_add_widget (size_group, WID ("delay_short_label"));
+	gtk_size_group_add_widget (size_group, WID ("blink_slow_label"));
+
+	size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
+	gtk_size_group_add_widget (size_group, WID ("repeat_fast_label"));
+	gtk_size_group_add_widget (size_group, WID ("delay_long_label"));
+	gtk_size_group_add_widget (size_group, WID ("blink_fast_label"));
+
+	size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
+	gtk_size_group_add_widget (size_group, WID ("repeat_delay_scale"));
+	gtk_size_group_add_widget (size_group, WID ("repeat_speed_scale"));
+	gtk_size_group_add_widget (size_group, WID ("cursor_blink_time_scale"));
 
 	return dialog;
 }

@@ -92,6 +92,8 @@ vfs_change_cb (GnomeVFSMIMEMonitor *monitor, GConfClient *client)
 	star_app  = gnome_vfs_mime_get_default_application ("text/*");
 	plain_app = gnome_vfs_mime_get_default_application ("text/plain");
 
+	if (star_app == NULL || plain_app == NULL)
+		return;
 	if (!strcmp (star_app->id, plain_app->id))
 		return;
 
