@@ -56,6 +56,7 @@ xkb_enabled (void)
 		      GTK_MESSAGE_WARNING, GTK_BUTTONS_CLOSE,
 		      _("This system does not seem to have the XKB extension.  The keyboard accessibility features will not operate with it."));
 		gtk_dialog_run (GTK_DIALOG (warn));
+		gtk_widget_destroy (warn);
 	}
 }
 #endif
