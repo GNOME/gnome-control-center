@@ -161,12 +161,11 @@ set_locate_pointer (gboolean locate_pointer)
   int n_screens;
   int n_keys;
   gboolean has_entries;
+  static const guint keyvals[] = { GDK_Control_L, GDK_Control_R };
+  unsigned j;
 
   display = gdk_display_get_default ();
   n_screens = gdk_display_get_n_screens (display);
-
-  static const guint keyvals[] = { GDK_Control_L, GDK_Control_R };
-  unsigned j;
 
   for (j = 0 ; j < G_N_ELEMENTS (keyvals) ; j++) {
     has_entries = gdk_keymap_get_entries_for_keyval (gdk_keymap_get_default (),
