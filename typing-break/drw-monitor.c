@@ -38,6 +38,8 @@ struct _DrwMonitorPriv {
 	XScreenSaverInfo *ss_info;
 	guint             timeout_id;
 	unsigned long     last_idle;
+
+	time_t            last_activity;
 };
 
 /* Signals */
@@ -139,12 +141,19 @@ static gboolean
 drw_monitor_timeout (DrwMonitor *monitor)
 {
 	DrwMonitorPriv *priv;
+ 	time_t          now;
 
 	priv = monitor->priv;
 	
 	if (XScreenSaverQueryInfo (GDK_DISPLAY (), DefaultRootWindow (GDK_DISPLAY ()), priv->ss_info) != 0) {
 		if (priv->ss_info->idle < priv->last_idle) {
-			g_signal_emit (monitor, signals[ACTIVITY], 0, NULL);			
+ 			now = time (NULL);
+ 
+ 			if (now - priv->last_activity < 25) {
+ 				g_signal_emit (monitor, signals[ACTIVITY], 0, NULL);
+ 			}
+ 			
+ 			priv->last_activity = now;
 		}
 
 		priv->last_idle = priv->ss_info->idle;
@@ -168,6 +177,8 @@ drw_monitor_setup (DrwMonitor *monitor)
 
 	priv->ss_info = XScreenSaverAllocInfo ();
 
+	priv->last_activity = time (NULL);
+	
 	priv->timeout_id = g_timeout_add (3000, (GSourceFunc) drw_monitor_timeout, monitor);
 	
 	return TRUE;
