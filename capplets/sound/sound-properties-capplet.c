@@ -64,6 +64,8 @@ apply_settings (Bonobo_ConfigDatabase db)
 	if (!enable_esd)
 		system ("killall esd");
 
+	system ("gmix -i");
+
 	/* gnome-libs checks this */
 	gnome_config_set_bool ("/sound/system/settings/event_sounds", event_sounds);
 	gnome_config_set_bool ("/sound/system/settings/enable_esd", enable_esd);
