@@ -5,7 +5,8 @@ bin_PROGRAMS = keyboard-properties
 keyboard_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(XF86MISC_LIBS)
 
 bonobo_sources =				\
-	keyboard-properties.c
+	keyboard-properties.c		\
+	bonobo-property-editor-range.c bonobo-property-editor-range.h
 
 legacy_sources =				\
 	main.c					\
