@@ -502,6 +502,7 @@ do_get_file_info(GnomeVFSMethod *method,
 		 GnomeVFSContext *context)
 {
 	gchar *path = NULL;
+	GnomeThemeMetaInfo *theme;
 	
 	path = get_path_from_uri(uri);
 	if (!path)
@@ -529,7 +530,6 @@ do_get_file_info(GnomeVFSMethod *method,
 	}
 	else {
 		g_free (path);
-		GnomeThemeMetaInfo *theme;
 		
 		theme = theme_meta_info_find (uri);
 		if (theme)

@@ -164,7 +164,7 @@ themus_theme_properties_view_init (ThemusThemePropertiesView *view)
 	gtk_label_set_markup (GTK_LABEL (view->details->description_caption),
 			g_strconcat ("<b>", _("Description"), ":</b>", NULL));
 	view->details->description = gtk_label_new (NULL);
-	gtk_label_set_line_wrap (GTK_LABEL (view->details->description_caption), TRUE);
+	gtk_label_set_line_wrap (GTK_LABEL (view->details->description), TRUE);
 	view->details->gtk_caption = gtk_label_new (NULL);
 	gtk_label_set_markup (GTK_LABEL (view->details->gtk_caption),
 			g_strconcat ("<b>", _("Control theme"), ":</b>", NULL));
