@@ -212,7 +212,7 @@ setup_appearance_option_menu (GtkWidget *appearance_option_menu, GnomeWindowMana
 
                 gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
 
-                if ((current_theme_name != NULL) && (strcmp (theme_name, current_theme_name) == 0))
+                if ((current_theme_name != NULL) && (theme_name != NULL) && (strcmp (theme_name, current_theme_name) == 0))
                         gtk_option_menu_set_history (GTK_OPTION_MENU (appearance_option_menu), index);
 
                 index++;
