@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center VERSION\n"
-"POT-Creation-Date: 1999-08-05 08:27+0200\n"
+"POT-Creation-Date: 1999-08-13 10:25+0200\n"
 "PO-Revision-Date: 1998-02-28 19:34+0100\n"
 "Last-Translator: Vincent Renardias <vincent@ldsol.com>\n"
 "Language-Team: Gnome French Team <gnomefr@gnomefr.traduc.org>\n"
@@ -269,8 +269,9 @@ msgstr "Editer"
 
 #. we initialize everything
 #: capplets/mime-type/edit-window.c:238
-msgid "Set actions for "
-msgstr "Définir les actions pour le type "
+#, c-format
+msgid "Set actions for %s"
+msgstr "Définir les actions pour %s"
 
 #: capplets/mime-type/mime-data.c:354
 msgid "Mime Type"
@@ -677,11 +678,11 @@ msgstr "Enlever Programme"
 
 #: capplets/session-properties/session-properties.c:149
 msgid "Prompt on logout"
-msgstr ""
+msgstr "Confirmer la fin de session"
 
 #: capplets/session-properties/session-properties.c:156
 msgid "Automatically save changes to session"
-msgstr ""
+msgstr "Enregistrer automatiquement les changements à la session"
 
 #: capplets/session-properties/session-properties.c:183
 msgid "Priority"
@@ -694,7 +695,7 @@ msgstr "Commande"
 
 #: capplets/session-properties/session-properties.c:213
 msgid "Browse Currently Running Programs..."
-msgstr ""
+msgstr "Voir les programmes en cours d'exécution..."
 
 #: capplets/session-properties/session-properties.c:379
 msgid "Only display warnings."
@@ -704,7 +705,8 @@ msgstr "Afficher seulement les avertissements."
 msgid ""
 "Programs with smaller values are started before programs with higher values. "
 "The default value should be OK"
-msgstr ""
+msgstr "Les programmes avec des valeurs plus petites sont démarrées avant ceux "
+"ayant des valeurs plus élevées. La valeur par défaut devrait convenir."
 
 #: capplets/session-properties/startup-programs.c:338
 msgid "The startup command cannot be empty"
@@ -712,11 +714,11 @@ msgstr "La commande de démarrage ne peux être vide"
 
 #: capplets/session-properties/startup-programs.c:378
 msgid "Add Startup Program"
-msgstr ""
+msgstr "Ajouter un programme de démarrage"
 
 #: capplets/session-properties/startup-programs.c:396
 msgid "Edit Startup Program"
-msgstr ""
+msgstr "Éditer le programme de démarrage"
 
 #: capplets/sound-properties/sound-properties.c:184
 msgid "Category"
@@ -843,15 +845,15 @@ msgstr "Zone de texte"
 
 #: capplets/theme-switcher/demo.c:139
 msgid "Submenu"
-msgstr ""
+msgstr "Sous-menu"
 
 #: capplets/theme-switcher/demo.c:146
 msgid "Item 1"
-msgstr ""
+msgstr "Élément 1"
 
 #: capplets/theme-switcher/demo.c:149
 msgid "Another item"
-msgstr ""
+msgstr "Un autre élément"
 
 #: capplets/theme-switcher/demo.c:154
 msgid "Radio Button 1"
@@ -923,153 +925,169 @@ msgstr "Échec de la command '%s'"
 msgid "Unknown file format"
 msgstr "Format de fichier inconnu"
 
-#: capplets/ui-properties/ui-properties.c:46
-msgid "Default Gtk setting"
-msgstr "Paramètres Gtk par défaut"
+#: capplets/ui-properties/ui-properties.c:53
+msgid "Can detach and move toolbars"
+msgstr "Barres d'outils détachables et mobiles"
 
-#: capplets/ui-properties/ui-properties.c:47
+#: capplets/ui-properties/ui-properties.c:58
+msgid "Toolbars have relieved border"
+msgstr "Les barres d'outils ont des bords en relief"
+
+#: capplets/ui-properties/ui-properties.c:63
+msgid "Toolbar buttons have relieved border"
+msgstr "Les boutons des barres d'outils ont des bords en relief"
+
+#: capplets/ui-properties/ui-properties.c:68
+msgid "Toolbars have line separators"
+msgstr "Les barres d'outils ont des lignes de séparation"
+
+#: capplets/ui-properties/ui-properties.c:73
+msgid "Toolbars have text labels"
+msgstr "Les barres d'outils ont des étiquettes"
+
+#: capplets/ui-properties/ui-properties.c:102
+msgid "Can detach and move menus"
+msgstr "Barres de menu détachables et mobiles"
+
+#: capplets/ui-properties/ui-properties.c:107
+msgid "Menus have relieved border"
+msgstr "Les barres de menu ont des bords en relief"
+
+#: capplets/ui-properties/ui-properties.c:111
+msgid "Submenus can be torn off"
+msgstr "Les menus peuvent être séparés"
+
+#: capplets/ui-properties/ui-properties.c:115
+msgid "Menu items have icons"
+msgstr "Entrées des menus avec icones"
+
+#: capplets/ui-properties/ui-properties.c:138
+msgid "Statusbar is interactive when possible"
+msgstr "La barre d'état interactive si possible"
+
+#: capplets/ui-properties/ui-properties.c:143
+msgid "Statusbar progress meter is on the right"
+msgstr "La barre de progression va vers la droite"
+
+#: capplets/ui-properties/ui-properties.c:160
+msgid "Menu Options"
+msgstr "Options des menus"
+
+#: capplets/ui-properties/ui-properties.c:161
+msgid "Statusbar Options"
+msgstr "Options des barres d'état"
+
+#: capplets/ui-properties/ui-properties.c:162
+msgid "Toolbar Options"
+msgstr "Options des barres d'outils"
+
+#: capplets/ui-properties/ui-properties.c:168
+msgid "Dialog buttons"
+msgstr "Boutons de la boîte de dialogue"
+
+#: capplets/ui-properties/ui-properties.c:169
+msgid "Default value"
+msgstr "Valeur par défaut"
+
+#: capplets/ui-properties/ui-properties.c:170
 msgid "Spread buttons out"
 msgstr "Espacer les boutons"
 
-#: capplets/ui-properties/ui-properties.c:48
+#: capplets/ui-properties/ui-properties.c:171
 msgid "Put buttons on edges"
 msgstr "Mettre les boutons sur les bords"
 
-#: capplets/ui-properties/ui-properties.c:49
+#: capplets/ui-properties/ui-properties.c:172
 msgid "Left-justify buttons"
 msgstr "Justification à gauche des boutons"
 
-#: capplets/ui-properties/ui-properties.c:50
+#: capplets/ui-properties/ui-properties.c:173
 msgid "Right-justify buttons"
 msgstr "Justification à droite des boutons"
 
-#: capplets/ui-properties/ui-properties.c:56
+#: capplets/ui-properties/ui-properties.c:178
+msgid "Dialog buttons have icons"
+msgstr "Les entrées des menus ont des icônes"
+
+#: capplets/ui-properties/ui-properties.c:183
+msgid "Use statusbar instead of dialog when possible"
+msgstr "Utiliser la barre d'état à la place des boîtes de dialogue si possible"
+
+#: capplets/ui-properties/ui-properties.c:205
+msgid "Dialog position"
+msgstr "Position de la boîte de dialogue"
+
+#: capplets/ui-properties/ui-properties.c:206
 msgid "Let window manager decide"
 msgstr "Laisser le gestionnaire de fenêtres décider"
 
-#: capplets/ui-properties/ui-properties.c:57
+#: capplets/ui-properties/ui-properties.c:207
 msgid "Center of the screen"
 msgstr "Centre de l'écran"
 
-#: capplets/ui-properties/ui-properties.c:58
+#: capplets/ui-properties/ui-properties.c:208
 msgid "At the mouse pointer"
 msgstr "Au pointeur de la souris"
 
-#: capplets/ui-properties/ui-properties.c:64
+#: capplets/ui-properties/ui-properties.c:213
+msgid "Dialog hints"
+msgstr "Astuces pour les boîtes de dialogue"
+
+#: capplets/ui-properties/ui-properties.c:214
 msgid "Dialogs are like other windows"
 msgstr "Les boîtes de dialogue sont comme les autres fenêtres"
 
-#: capplets/ui-properties/ui-properties.c:65
+#: capplets/ui-properties/ui-properties.c:215
 msgid "Dialogs are treated specially by window manager"
 msgstr ""
 "Les boîtes de dialogue sont traitées de manière spéciale par\n"
 "le gestionnaire de fenêtres"
 
-#: capplets/ui-properties/ui-properties.c:72
-msgid "Notebook"
-msgstr "Carnet"
-
-#: capplets/ui-properties/ui-properties.c:73
-msgid "Toplevel"
-msgstr "1er niveau"
-
-#: capplets/ui-properties/ui-properties.c:74
-msgid "Modal"
-msgstr "Modal"
-
-#: capplets/ui-properties/ui-properties.c:80
-msgid "Left"
-msgstr "Gauche"
-
-#: capplets/ui-properties/ui-properties.c:81
-msgid "Right"
-msgstr "Droite"
-
-#: capplets/ui-properties/ui-properties.c:82
-msgid "Top"
-msgstr "Haut"
-
-#: capplets/ui-properties/ui-properties.c:83
-msgid "Bottom"
-msgstr "Bas"
-
-#: capplets/ui-properties/ui-properties.c:201
-msgid "Dialog buttons"
-msgstr "Boutons de la boîte de dialogue"
-
-#: capplets/ui-properties/ui-properties.c:206
-msgid "Dialog position"
-msgstr "Position de la boîte de dialogue"
-
-#: capplets/ui-properties/ui-properties.c:211
-msgid "Dialog hints"
-msgstr "Astuces pour les boîtes de dialogue"
-
-#: capplets/ui-properties/ui-properties.c:218
-msgid "Use statusbar instead of dialog when possible"
-msgstr "Utiliser la barre d'état à la place des boîtes de dialogue si possible"
-
-#: capplets/ui-properties/ui-properties.c:228
+#: capplets/ui-properties/ui-properties.c:220
 msgid "Place dialogs over application window when possible"
 msgstr ""
 "Placer les boîtes de dialogue par dessus la fenêtre de l'application si "
 "possible"
 
-#: capplets/ui-properties/ui-properties.c:245
-msgid "Can detach and move toolbars"
-msgstr "Barres d'outils détachables et mobiles"
+#: capplets/ui-properties/ui-properties.c:241
+msgid "Dialog Layout"
+msgstr "Disposition de la boîte de dialogue"
 
-#: capplets/ui-properties/ui-properties.c:254
-msgid "Can detach and move menubars"
-msgstr "Barres de menu détachables et mobiles"
+#: capplets/ui-properties/ui-properties.c:242
+msgid "Dialog Behavior"
+msgstr "Comportement de la boîte de dialogue"
 
-#: capplets/ui-properties/ui-properties.c:263
-msgid "Menus can be torn off"
-msgstr "Les menus peuvent être séparés"
+#: capplets/ui-properties/ui-properties.c:248
+msgid "Notebook"
+msgstr "Carnet"
+
+#: capplets/ui-properties/ui-properties.c:249
+msgid "Toplevel"
+msgstr "1er niveau"
+
+#: capplets/ui-properties/ui-properties.c:250
+msgid "Modal"
+msgstr "Modal"
+
+#: capplets/ui-properties/ui-properties.c:255
+msgid "Left"
+msgstr "Gauche"
+
+#: capplets/ui-properties/ui-properties.c:256
+msgid "Right"
+msgstr "Droite"
+
+#: capplets/ui-properties/ui-properties.c:257
+msgid "Top"
+msgstr "Haut"
+
+#: capplets/ui-properties/ui-properties.c:258
+msgid "Bottom"
+msgstr "Bas"
 
 #: capplets/ui-properties/ui-properties.c:273
-msgid "Menubars have relieved border"
-msgstr "Les barres de menu ont des bords en relief"
-
-#: capplets/ui-properties/ui-properties.c:282
-msgid "Toolbars have relieved border"
-msgstr "Les barres d'outils ont des bords en relief"
-
-#: capplets/ui-properties/ui-properties.c:291
-msgid "Toolbar buttons have relieved border"
-msgstr "Les boutons des barres d'outils ont des bords en relief"
-
-#: capplets/ui-properties/ui-properties.c:300
-msgid "Toolbars have line separators"
-msgstr "Les barres d'outils ont des lignes de séparation"
-
-#: capplets/ui-properties/ui-properties.c:309
-msgid "Toolbars have text labels"
-msgstr "Les barres d'outils ont des étiquettes"
-
-#: capplets/ui-properties/ui-properties.c:318
-msgid "Statusbar is interactive when possible"
-msgstr "La barre d'état interactive si possible"
-
-#: capplets/ui-properties/ui-properties.c:327
-msgid "Statusbar progress meter on right"
-msgstr "La barre de progression va vers la droite"
-
-#: capplets/ui-properties/ui-properties.c:338
-msgid "Dialog buttons have icons"
-msgstr "Les entrées des menus ont des icônes"
-
-#: capplets/ui-properties/ui-properties.c:350
-msgid "Menu items have icons"
-msgstr "Entrées des menus avec icones"
-
-#: capplets/ui-properties/ui-properties.c:368
-msgid "Default MDI mode"
-msgstr "Mode MDI par défaut"
-
-#: capplets/ui-properties/ui-properties.c:373
-msgid "MDI notebook tab position"
-msgstr "Position des onglets des carnets MDI"
+msgid "GNOME MDI Options"
+msgstr "Options GNOME MDI"
 
 #: capplets/url-properties/url-properties.c:48
 msgid "Error initializing the `url-properties' capplet."
@@ -1212,11 +1230,11 @@ msgstr ""
 "Une erreur d'initialisation a eu lieu lors du démarrage\n"
 "de 'wm-properties-capplet'. Abandon...\n"
 
-#: control-center/callbacks.c:79
+#: control-center/callbacks.c:85
 msgid "GNOME Control Center"
 msgstr "Centre de contrôle GNOME"
 
-#: control-center/callbacks.c:82
+#: control-center/callbacks.c:88
 msgid "Desktop Properties manager."
 msgstr "Gestionnaires des propriétés du bureau."
 
@@ -1306,9 +1324,15 @@ msgstr ""
 "l'entrée appropriée."
 
 #. create the app
-#: control-center/main.c:184
+#: control-center/main.c:187
 msgid "Control Center"
 msgstr "Centre de Contrôle"
+
+#~ msgid "Default Gtk setting"
+#~ msgstr "Paramètres Gtk par défaut"
+
+#~ msgid "MDI notebook tab position"
+#~ msgstr "Position des onglets des carnets MDI"
 
 #~ msgid "Run command"
 #~ msgstr "Exécuter une commande"
@@ -1942,14 +1966,8 @@ msgstr "Centre de Contrôle"
 #~ msgid "Options for Action"
 #~ msgstr "Options pour cette action"
 
-#~ msgid "Basic Options"
-#~ msgstr "Options de base"
-
 #~ msgid "Desktops"
 #~ msgstr "Bureaux"
-
-#~ msgid "Behavior"
-#~ msgstr "Comportement"
 
 #~ msgid "Audio"
 #~ msgstr "Audio"
