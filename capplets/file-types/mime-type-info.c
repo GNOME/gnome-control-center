@@ -138,7 +138,7 @@ get_icon_pixbuf (MimeTypeInfo *info, const gchar *icon_path, gboolean want_large
 		info->icon_pixbuf = gdk_pixbuf_new_from_file (icon_path, NULL);
 
 		if (info->icon_pixbuf == NULL) {
-			get_icon_pixbuf (info, NULL, want_large);
+			return;
 		}
 		else if (!want_large) {
 			info->small_icon_pixbuf =
@@ -231,6 +231,9 @@ mime_type_info_get_icon (MimeTypeInfo *info)
 {
 	if (info->small_icon_pixbuf == NULL)
 		get_icon_pixbuf (info, mime_type_info_get_icon_path (info), FALSE);
+	if (info->icon_pixbuf == NULL) 
+		get_icon_pixbuf (info, NULL, FALSE);
+
 	if (info->small_icon_pixbuf != NULL)
 		g_object_ref (G_OBJECT (info->small_icon_pixbuf));
 	return info->small_icon_pixbuf;
