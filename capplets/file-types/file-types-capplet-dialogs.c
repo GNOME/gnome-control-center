@@ -740,6 +740,9 @@ nautilus_mime_type_capplet_show_new_mime_window (void)
 	
 	gnome_dialog_set_close (GNOME_DIALOG (dialog), FALSE);
 
+	/* Set focus to text entry widget */
+	gtk_widget_grab_focus (mime_entry);
+
         gtk_widget_show_all (GNOME_DIALOG (dialog)->vbox);
 
         switch (gnome_dialog_run (GNOME_DIALOG (dialog))) {
@@ -797,7 +800,6 @@ add_extension_clicked (GtkWidget *widget, gpointer data)
 	/* Filter out bogus extensions */
 	if (new_extension == NULL || strlen (new_extension) <= 0 || new_extension[0] == ' ') {
 		g_free (new_extension);
-		g_message ("Bogus");
 		return;
 	}
 	
@@ -1013,7 +1015,7 @@ nautilus_mime_type_capplet_show_new_extension_window (void)
         gtk_widget_show_all (GNOME_DIALOG (dialog)->vbox);
 
 	/* Set focus to text entry widget */
-	gtk_window_set_focus (GTK_WINDOW (dialog), mime_entry);
+	gtk_widget_grab_focus (mime_entry);
 	
 	new_extension = g_strdup ("");
         switch (gnome_dialog_run (GNOME_DIALOG (dialog))) {
@@ -1207,7 +1209,7 @@ show_new_application_window (GtkWidget *button, GtkWidget *list)
 	gtk_widget_show_all (GNOME_DIALOG (dialog)->vbox);
 
 	/* Set focus to text entry widget */
-	gtk_window_set_focus (GTK_WINDOW (dialog), app_entry);
+	gtk_widget_grab_focus (app_entry);
 
 	switch (gnome_dialog_run (GNOME_DIALOG (dialog))) {
 	        case 0:	
@@ -1318,7 +1320,7 @@ show_edit_application_window (GtkWidget *button, GtkWidget *list)
 	gtk_widget_show_all (GNOME_DIALOG (dialog)->vbox);
 
 	/* Set focus to text entry widget */
-	gtk_window_set_focus (GTK_WINDOW (dialog), app_entry);
+	gtk_widget_grab_focus (app_entry);
 
 	switch (gnome_dialog_run (GNOME_DIALOG (dialog))) {
 	        case 0:
