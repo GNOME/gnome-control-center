@@ -1,3 +1,10 @@
+2002-02-07  Richard Hestilow  <hestilow@ximian.com>
+
+	* applier.c (BGApplierPrivate): Add "timeout" field.
+	(bg_apply_cleanup_cb): Added.
+	(bg_applier_apply_prefs): Add/reset timeout for cleanup function
+	if we load a pixbuf.
+
 2002-02-04  Lauris Kaplinski  <lauris@ximian.com>
 
 	* preferences.c (read_wptype_from_string): Do not crash on NULL

@@ -107,6 +107,9 @@ struct _BGApplierPrivate
 	gboolean            pixmap_is_set;     /* TRUE iff the pixmap above
 						* has been set as the root
 						* pixmap */
+	guint               timeout;           /* "Cleanup" timeout handler;
+						* reset to 30 seconds every
+						* time apply is called. */
 };
 
 static GObjectClass *parent_class;
@@ -177,6 +180,8 @@ static void set_root_pixmap          (GdkPixmap         *pixmap);
 
 static gboolean is_nautilus_running  (void);
 
+static gboolean cleanup_cb           (BGApplier *bg_applier);
+
 guint
 bg_applier_get_type (void)
 {
@@ -213,6 +218,7 @@ bg_applier_init (BGApplier *bg_applier, BGApplierClass *class)
 	bg_applier->p->pixbuf           = NULL;
 	bg_applier->p->wallpaper_pixbuf = NULL;
 	bg_applier->p->nautilus_running = is_nautilus_running ();
+	bg_applier->p->timeout          = 0;
 }
 
 static void
@@ -396,6 +402,14 @@ bg_applier_apply_prefs (BGApplier           *bg_applier,
 				        g_warning (_("Could not load pixbuf \"%s\"; disabling wallpaper."),
 						   new_prefs->wallpaper_filename);
 					new_prefs->wallpaper_enabled = FALSE;
+				
+				}
+				else
+				{
+					if (bg_applier->p->timeout)
+						g_source_remove (bg_applier->p->timeout);
+					bg_applier->p->timeout = g_timeout_add (30000, (GSourceFunc) cleanup_cb, bg_applier);
+
 				}
 			}
 		}
@@ -1393,4 +1407,17 @@ is_nautilus_running (void)
 		XFree (data);
 
 	return running;
+}
+
+static gboolean
+cleanup_cb (BGApplier *bg_applier)
+{
+	if (bg_applier->p->wallpaper_pixbuf != NULL)
+	{
+		g_object_unref (G_OBJECT (bg_applier->p->wallpaper_pixbuf));
+		bg_applier->p->wallpaper_pixbuf = NULL;	
+	}
+	bg_applier->p->timeout = 0;
+	
+	return FALSE;
 }
