@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.3.10\n"
-"POT-Creation-Date: 2002-06-03 22:01+0200\n"
+"POT-Creation-Date: 2002-06-04 00:44+0200\n"
 "PO-Revision-Date: 2002-06-03 11:35GMT\n"
 "Last-Translator: Lucas Di Pentima <lucas@lunix.com.ar>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
@@ -17,6 +17,94 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.9.5\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:206
+#: libwindow-settings/gnome-wm-manager.c:149
+#, c-format
+msgid ""
+"Starting %s\n"
+"(%d seconds left before operation times out)"
+msgstr ""
+"Iniciando %s\n"
+"(quedan %d segundos antes de que se agote el tiempo de espera máximo de la "
+"operación)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:420
+#: libwindow-settings/gnome-wm-manager.c:303
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\tAnother window manager is already running and could not be killed\n"
+msgstr ""
+"wm-properties-capplet: No se puede inicializar el gestor de ventanas.\n"
+"\tHay otro gestor de ventanas ejecutándose y no es posible eliminarlo\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:424
+#: libwindow-settings/gnome-wm-manager.c:307
+#, c-format
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\t'%s' didn't start\n"
+msgstr ""
+"wm-properties-capplet: No se puede inicializar el gestor de ventanas.\n"
+"\t'%s' no se ha iniciado\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:473
+#: libwindow-settings/gnome-wm-manager.c:356
+msgid "Previous window manager did not die\n"
+msgstr "El gestor de ventanas anterior no ha finalizado\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:506
+#: libwindow-settings/gnome-wm-manager.c:389
+#, c-format
+msgid ""
+"Could not start '%s'.\n"
+"Falling back to previous window manager '%s'\n"
+msgstr ""
+"No se ha podido iniciar '%s'.\n"
+"Se va a volver al gestor de ventanas anterior '%s'\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:537
+#: libwindow-settings/gnome-wm-manager.c:420
+msgid ""
+"Could not start fallback window manager.\n"
+"Please run a window manager manually. You can\n"
+"do this by selecting \"Run Program\" in the\n"
+"foot menu\n"
+msgstr ""
+"No se ha podido iniciar el gestor de ventanas predeterminado.\n"
+"Ejecute un gestor de ventanas manualmente. Para ello puede\n"
+"seleccionar \"Ejecutar programa\" en el\n"
+"menú inferior\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:562
+#: capplets/wm-properties/wm-properties-capplet.c:812
+#: capplets/wm-properties/wm-properties-capplet.c:921
+#: capplets/wm-properties/wm-properties-capplet.c:928
+#: capplets/wm-properties/wm-properties-capplet.c:1070
+#: libwindow-settings/gnome-wm-manager.c:445
+msgid "OK"
+msgstr "Aceptar"
+
+#: capplets/desktop-links/Accessibility.directory.in.h:1
+#: capplets/desktop-links/Accessibility.directory.in.in.h:1
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+msgid "Accessibility"
+msgstr "Accesibilidad"
+
+#: capplets/desktop-links/Accessibility.directory.in.h:2
+#: capplets/desktop-links/Accessibility.directory.in.in.h:2
+msgid "Accessibility Settings"
+msgstr "Configuraciones de accesibilidad"
+
+#: capplets/desktop-links/Advanced.directory.in.h:1
+#: capplets/desktop-links/Advanced.directory.in.in.h:1
+msgid "Advanced"
+msgstr "Avanzadas"
+
+#: capplets/desktop-links/Advanced.directory.in.h:2
+#: capplets/desktop-links/Advanced.directory.in.in.h:2
+msgid "Advanced Settings"
+msgstr "Configuraciones avanzadas"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:262
 msgid "_Enable keyboard accessibility"
@@ -69,7 +157,6 @@ msgstr "Habilitar teclas de _rebote"
 msgid "Enable _Mouse Keys"
 msgstr "Habilitar teclas de _ratón"
 
-# SUN CHANGED MESSAGE
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:8
 msgid "Enable _Sticky Keys"
 msgstr "Habilitar Teclas _adheribles"
@@ -715,23 +802,6 @@ msgstr "_Seleccione un navegador de web:"
 msgid "_Select an Editor:"
 msgstr "_Seleccione un editor:"
 
-#: capplets/desktop-links/Accessibility.directory.in.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
-msgid "Accessibility"
-msgstr "Accesibilidad"
-
-#: capplets/desktop-links/Accessibility.directory.in.in.h:2
-msgid "Accessibility Settings"
-msgstr "Configuraciones de accesibilidad"
-
-#: capplets/desktop-links/Advanced.directory.in.in.h:1
-msgid "Advanced"
-msgstr "Avanzadas"
-
-#: capplets/desktop-links/Advanced.directory.in.in.h:2
-msgid "Advanced Settings"
-msgstr "Configuraciones avanzadas"
-
 #: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:1
 msgid "Control Center Menu"
 msgstr "Menú del Centro de control"
@@ -804,7 +874,6 @@ msgstr "Configurar las funciones de mover y cambiar tamaño de ventanas"
 msgid "Moving and Resizing"
 msgstr "Mover y cambiar de tamaño"
 
-# SUN CHANGED MESSAGE
 #: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:1
 msgid "Configure window placement"
 msgstr "Configurar la gestión de energía"
@@ -851,7 +920,6 @@ msgstr "Configuración de aplicaciones heredadas (grdb)"
 msgid "Global panel properties"
 msgstr "Propiedades globales del panel"
 
-# SUN NEW TRANSLATION
 #: capplets/desktop-links/panel.desktop.in.in.h:2
 msgid "Panel"
 msgstr "Panel"
@@ -1455,7 +1523,6 @@ msgstr "_Velocidad de repetición de las teclas:"
 msgid "Set the speed the cursor blinks in text fields."
 msgstr "Establecer la velocidad de parpadeo del cursor en los campos de texto."
 
-# SUN CHANGED MESSAGE
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "Set the volume of the clicking sound made when pressing a key"
 msgstr "Establecer el volumen del sonido del clic de pulsación de las teclas"
@@ -2295,16 +2362,6 @@ msgstr "twm"
 msgid "Initialize session settings"
 msgstr "Inicializar valores de configuración de sesión"
 
-#: capplets/wm-properties/wm-properties-capplet.c:206
-#, c-format
-msgid ""
-"Starting %s\n"
-"(%d seconds left before operation times out)"
-msgstr ""
-"Iniciando %s\n"
-"(quedan %d segundos antes de que se agote el tiempo de espera máximo de la "
-"operación)"
-
 #: capplets/wm-properties/wm-properties-capplet.c:367
 #, c-format
 msgid "%s (Current)"
@@ -2318,57 +2375,6 @@ msgstr "Ejecutar herramienta de configuración de %s"
 #: capplets/wm-properties/wm-properties-capplet.c:381
 msgid " (Not found)"
 msgstr " (No encontrado)"
-
-#: capplets/wm-properties/wm-properties-capplet.c:420
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\tAnother window manager is already running and could not be killed\n"
-msgstr ""
-"wm-properties-capplet: No se puede inicializar el gestor de ventanas.\n"
-"\tHay otro gestor de ventanas ejecutándose y no es posible eliminarlo\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:424
-#, c-format
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\t'%s' didn't start\n"
-msgstr ""
-"wm-properties-capplet: No se puede inicializar el gestor de ventanas.\n"
-"\t'%s' no se ha iniciado\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:473
-msgid "Previous window manager did not die\n"
-msgstr "El gestor de ventanas anterior no ha finalizado\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:506
-#, c-format
-msgid ""
-"Could not start '%s'.\n"
-"Falling back to previous window manager '%s'\n"
-msgstr ""
-"No se ha podido iniciar '%s'.\n"
-"Se va a volver al gestor de ventanas anterior '%s'\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:537
-msgid ""
-"Could not start fallback window manager.\n"
-"Please run a window manager manually. You can\n"
-"do this by selecting \"Run Program\" in the\n"
-"foot menu\n"
-msgstr ""
-"No se ha podido iniciar el gestor de ventanas predeterminado.\n"
-"Ejecute un gestor de ventanas manualmente. Para ello puede\n"
-"seleccionar \"Ejecutar programa\" en el\n"
-"menú inferior\n"
-
-# SUN NEW TRANSLATION
-#: capplets/wm-properties/wm-properties-capplet.c:562
-#: capplets/wm-properties/wm-properties-capplet.c:812
-#: capplets/wm-properties/wm-properties-capplet.c:921
-#: capplets/wm-properties/wm-properties-capplet.c:928
-#: capplets/wm-properties/wm-properties-capplet.c:1070
-msgid "OK"
-msgstr "Aceptar"
 
 #: capplets/wm-properties/wm-properties-capplet.c:580
 msgid ""
