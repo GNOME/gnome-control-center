@@ -41,8 +41,6 @@ static GtkWidget *wm_widget;
 static GtkWidget *apply_now_button;
 static GtkWidget *properties_box;
 
-static void state_changed (void);
-
 static GtkWidget *wm_menu;
 static GtkWidget *option_menu;
 static GList *wm_menu_window_managers;
@@ -63,7 +61,7 @@ wm_selection_changed (GtkOptionMenu *option_menu, gpointer data)
         if (!in_fill) {
                 if (wm != selected_wm) {
                         selected_wm = wm;
-			state_changed ();
+			wm_set_change_pending (TRUE);
                 }
         }
 }
@@ -126,12 +124,6 @@ response_cb (GtkDialog *dialog, gint response_id, gpointer data)
 		gtk_main_quit ();
 		break;
 	}
-}
-
-static void
-state_changed (void)
-{
-        set_wm_change_pending (TRUE);
 }
 
 static void

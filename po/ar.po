@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2002-05-24 17:00-0500\n"
+"POT-Creation-Date: 2002-06-02 17:13-0700\n"
 "PO-Revision-Date: 2002-05-31 17:39-0300\n"
 "Last-Translator: Isam Bayazidi <bayazidi@arabeyes.org>\n"
 "Language-Team: Arabic <support@arabeyes.org>\n"
@@ -227,16 +227,16 @@ msgstr "بدون صورة"
 msgid "_Picture"
 msgstr "صورة"
 
-#: capplets/background/background-properties-capplet.c:566
+#: capplets/background/background-properties-capplet.c:558
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:719
-#: capplets/keyboard/gnome-keyboard-properties.c:367
-#: capplets/mouse/gnome-mouse-properties.c:735
-#: capplets/sound/sound-properties-capplet.c:156
+#: capplets/default-applications/gnome-default-applications-properties.c:712
+#: capplets/keyboard/gnome-keyboard-properties.c:359
+#: capplets/mouse/gnome-mouse-properties.c:727
+#: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
 msgstr "أسترجع و خزن أعدادات الموروث"
 
-#: capplets/background/background-properties-capplet.c:591
+#: capplets/background/background-properties-capplet.c:584
 #: capplets/background/background-properties.glade.h:2
 msgid "Background Preferences"
 msgstr "تفضيلات الخلفية"
@@ -352,6 +352,11 @@ msgstr ""
 msgid "Just apply settings and quit"
 msgstr "طبق الإعدادات و أخرج"
 
+#: capplets/common/capplet-util.c:315
+#, c-format
+msgid "There was an error displaying help: %s"
+msgstr ""
+
 #: capplets/common/file-transfer-dialog.c:95
 #, c-format
 msgid "%i of %i"
@@ -443,24 +448,30 @@ msgid "Change set"
 msgstr "مجموعة تغييرات"
 
 #: capplets/common/gconf-property-editor.c:186
-msgid "GConf change set containing data to be forwarded to the gconf client on apply"
-msgstr "مجموعة تغييرات GConf التي تحوي البيانات المرسلة إلى عميل gconf لتطبيقها"
+msgid ""
+"GConf change set containing data to be forwarded to the gconf client on apply"
+msgstr ""
+"مجموعة تغييرات GConf التي تحوي البيانات المرسلة إلى عميل gconf لتطبيقها"
 
 #: capplets/common/gconf-property-editor.c:191
 msgid "Conversion to widget callback"
 msgstr "تحويل لاتصال معاكس لكائن"
 
 #: capplets/common/gconf-property-editor.c:192
-msgid "Callback to be issued when data are to be converted from GConf to the widget"
-msgstr "الاتصال المعاكس الذي يتم تفعيله حينما يتم تحويل البيانات من GConf للكائن"
+msgid ""
+"Callback to be issued when data are to be converted from GConf to the widget"
+msgstr ""
+"الاتصال المعاكس الذي يتم تفعيله حينما يتم تحويل البيانات من GConf للكائن"
 
 #: capplets/common/gconf-property-editor.c:197
 msgid "Conversion from widget callback"
 msgstr "تحويل من اتصال معاكس لكائن"
 
 #: capplets/common/gconf-property-editor.c:198
-msgid "Callback to be issued when data are to be converted to GConf from the widget"
-msgstr "الاتصال المعاكس الذي يتم تفعيله حينما يتم تحويل البيانات من الكائن إلى GConf"
+msgid ""
+"Callback to be issued when data are to be converted to GConf from the widget"
+msgstr ""
+"الاتصال المعاكس الذي يتم تفعيله حينما يتم تحويل البيانات من الكائن إلى GConf"
 
 #: capplets/common/gconf-property-editor.c:203
 msgid "UI Control"
@@ -484,7 +495,8 @@ msgstr "بيانات محرّر الخاصية الذي يحرر الاتصال 
 
 #: capplets/common/gconf-property-editor.c:227
 msgid "Callback to be issued when property editor object data is to be freed"
-msgstr "الاتصال المعاكس الذي يتم تفعيله حينما يتم تحرير بيانات كائن محرر الخاصية"
+msgstr ""
+"الاتصال المعاكس الذي يتم تفعيله حينما يتم تحرير بيانات كائن محرر الخاصية"
 
 #: capplets/common/gconf-property-editor.c:1484
 #, c-format
@@ -906,25 +918,25 @@ msgid "Source Code"
 msgstr "الشفرة المصدرية"
 
 #: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:753
+#: capplets/file-types/mime-type-info.c:724
 msgid "Audio"
 msgstr "صوت"
 
 #: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:749
+#: capplets/file-types/mime-type-info.c:720
 msgid "Images"
 msgstr "الصور"
 
 #: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:751
+#: capplets/file-types/mime-type-info.c:722
 msgid "Video"
 msgstr "فيديو"
 
-#: capplets/file-types/file-types-capplet.c:231
+#: capplets/file-types/file-types-capplet.c:222
 msgid "Description"
 msgstr "الوصف"
 
-#: capplets/file-types/file-types-capplet.c:238
+#: capplets/file-types/file-types-capplet.c:229
 #: capplets/mime-type/new-mime-window.c:39
 msgid "Extensions"
 msgstr "امتدادات"
@@ -1125,6 +1137,11 @@ msgstr "الفئة"
 msgid "Choose a file category"
 msgstr "اختر فئة للملف"
 
+#: capplets/file-types/mime-type-info.c:726
+#, fuzzy
+msgid "Misc"
+msgstr "متفرقات"
+
 #: capplets/file-types/mime-types-model.c:167
 #: capplets/file-types/mime-types-model.c:168
 msgid "Model for categories only"
@@ -1166,7 +1183,8 @@ msgstr "فضلا أدخل اسم البروتوكول."
 msgid ""
 "Invalid protocol name. Please enter a protocol name without any spaces or "
 "punctuation."
-msgstr "اسم بروتوكول غير صحيح. فضلا أدخل اسم بروتوكول دون أي فراغات أو علامات ترقيم."
+msgstr ""
+"اسم بروتوكول غير صحيح. فضلا أدخل اسم بروتوكول دون أي فراغات أو علامات ترقيم."
 
 #: capplets/file-types/service-edit-dialog.c:523
 msgid "There is already a protocol by that name."
@@ -1209,16 +1227,28 @@ msgid "Font"
 msgstr "الخط"
 
 #: capplets/font/font-properties.glade.h:1
-msgid "File Manager Font"
-msgstr "خط مدير الملفات"
+#, fuzzy
+msgid "Font Preferences"
+msgstr "تفضيلات الصوت"
 
 #: capplets/font/font-properties.glade.h:2
-msgid "Font Properties"
-msgstr "خصائص الخط"
+#, fuzzy
+msgid "Set the font for applications"
+msgstr "يعرّف التصرف الافتراضي لتطبيقات جينوم"
 
 #: capplets/font/font-properties.glade.h:3
-msgid "Standard Desktop Font"
+msgid "Set the font for the icons on the desktop"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:4
+#, fuzzy
+msgid "Standard _application font:"
 msgstr "خط سطح المكتب القياسي"
+
+#: capplets/font/font-properties.glade.h:5
+#, fuzzy
+msgid "_Desktop font:"
+msgstr "اختصارات سطح المكتب"
 
 #: capplets/keybindings/eggcellrendererkeys.c:158
 #: capplets/keybindings/eggcellrendererkeys.c:159
@@ -1232,7 +1262,7 @@ msgstr "مفتاح المسرّع"
 
 #: capplets/keybindings/eggcellrendererkeys.c:206
 #: capplets/keybindings/gnome-keybinding-properties.c:306
-#: libbackground/applier.c:525
+#: libbackground/applier.c:521
 msgid "Disabled"
 msgstr "معطل"
 
@@ -1262,17 +1292,18 @@ msgstr "إدارة النوافذ"
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "حدث خطأ أثناء تعيين مسرع جديد في قاعدة بيانات الإعدادات: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:840
+#: capplets/keybindings/gnome-keybinding-properties.c:851
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
-msgstr "تعذر العثور على أي تيمة للوحة المفاتيح. هذا يعني أن تنصيبك إلى GTK+ لم يكتمل."
+msgstr ""
+"تعذر العثور على أي تيمة للوحة المفاتيح. هذا يعني أن تنصيبك إلى GTK+ لم يكتمل."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:865
+#: capplets/keybindings/gnome-keybinding-properties.c:876
 msgid "Action"
 msgstr "فعل"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:877
+#: capplets/keybindings/gnome-keybinding-properties.c:888
 msgid "Shortcut"
 msgstr "اختصار"
 
@@ -1305,16 +1336,18 @@ msgstr "اختصارات سطح المكتب"
 msgid "Associate keyboard shortcuts with panel actions"
 msgstr "اربط اختصارات لوحة المفاتيح مع أحداث لوحة المهام"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:346
+#: capplets/keyboard/gnome-keyboard-properties.c:338
 msgid "_Accessibility"
 msgstr "الإعانة"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:363
-#: capplets/keyboard/gnome-keyboard-properties.c:365
-#: capplets/sound/sound-properties-capplet.c:152
-#: capplets/sound/sound-properties-capplet.c:154
-msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
-msgstr "فقط طبّق التعيينات واخرج (للتوافق فقط؛ يتم التعامل معها عن طريق جني حاليا)"
+#: capplets/keyboard/gnome-keyboard-properties.c:355
+#: capplets/keyboard/gnome-keyboard-properties.c:357
+#: capplets/sound/sound-properties-capplet.c:145
+#: capplets/sound/sound-properties-capplet.c:147
+msgid ""
+"Just apply settings and quit (compatibility only; now handled by daemon)"
+msgstr ""
+"فقط طبّق التعيينات واخرج (للتوافق فقط؛ يتم التعامل معها عن طريق جني حاليا)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:2
 msgid "<i>fast</i>"
@@ -1408,7 +1441,8 @@ msgstr "بطيئة"
 msgid ""
 "The keyboard bell is the <i>beep</i> sound heard when the system wants to "
 "get your attention."
-msgstr "جرس لوحة المفاتيح هو صوت <i>الصفير</i> المسموع حينما يريد النظام تنبيهك. "
+msgstr ""
+"جرس لوحة المفاتيح هو صوت <i>الصفير</i> المسموع حينما يريد النظام تنبيهك. "
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:28
 msgid "Very Fast"
@@ -1424,8 +1458,8 @@ msgid ""
 "'Accessibility Settings' property dialog, or pressing the button on the "
 "right."
 msgstr ""
-"بإمكانك إعداد مزايا الإعانة للوحة المفاتيح بإحضار مربع حوار "
-"خاصية 'إعدادات الإعانة' أو بكبس الزر على اليمين."
+"بإمكانك إعداد مزايا الإعانة للوحة المفاتيح بإحضار مربع حوار خاصية 'إعدادات "
+"الإعانة' أو بكبس الزر على اليمين."
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "_Accessibility..."
@@ -1717,7 +1751,8 @@ msgstr ""
 msgid ""
 "<b>Note:</b> You will need to logout and log back in for this setting to "
 "take effect."
-msgstr "<b> ملاحظة</b> يجب أن تخرج وترجع مرة أخرى حتى تأخذ هذه اﻹعدادات تأثيرها."
+msgstr ""
+"<b> ملاحظة</b> يجب أن تخرج وترجع مرة أخرى حتى تأخذ هذه اﻹعدادات تأثيرها."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:2
 msgid "<i>Fast</i>"
@@ -1770,7 +1805,8 @@ msgid "Drag and Drop"
 msgstr "السحب واﻹفلات"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:14
-msgid "Left-handed mouse mode switches the left and right buttons on the mouse."
+msgid ""
+"Left-handed mouse mode switches the left and right buttons on the mouse."
 msgstr "نظام فأرة اليد اليسرى يغيّر اﻷزرار اليسرى واليمنى على الفأرة."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:15
@@ -1878,7 +1914,7 @@ msgstr "المكان:"
 msgid "_Use HTTP proxy"
 msgstr "استخدم بروكسي HTTP"
 
-#: capplets/sound/sound-properties-capplet.c:186
+#: capplets/sound/sound-properties-capplet.c:180
 msgid "Sound preferences"
 msgstr "تفضيلات الصوت"
 
@@ -2156,82 +2192,7 @@ msgstr "تعيين"
 msgid "Configure which programs are used to display URLs"
 msgstr "عرّف أي البرامج التي يتم استخدامها لعرض عناوين URL"
 
-#: capplets/windows/gnome-window-properties.c:133
-#: capplets/wm-properties/wm-properties-capplet.c:135
-msgid "Initialize session settings"
-msgstr "تهيئة تعيينات الجلسة"
-
-#: capplets/windows/gnome-window-properties.c:232
-#: capplets/wm-properties/wm-properties-capplet.c:206
-#, c-format
-msgid ""
-"Starting %s\n"
-"(%d seconds left before operation times out)"
-msgstr ""
-"البدء %s\n"
-"(%d ثوان متبقية قبل انتهاء مدة العملية)"
-
-#: capplets/windows/gnome-window-properties.c:393
-#: capplets/wm-properties/wm-properties-capplet.c:381
-msgid " (Not found)"
-msgstr " (لا يوجد)"
-
-#: capplets/windows/gnome-window-properties.c:416
-#: capplets/wm-properties/wm-properties-capplet.c:420
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\tAnother window manager is already running and could not be killed\n"
-msgstr ""
-"wm-properties-capplet: لم أستطع تهيئة مدير النوافذ.\n"
-"\tمدير نوافذ آخر يعمل مسبقا ولا يمكن إنهاؤه\n"
-
-#: capplets/windows/gnome-window-properties.c:420
-#: capplets/wm-properties/wm-properties-capplet.c:424
-#, c-format
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\t'%s' didn't start\n"
-msgstr ""
-"wm-properties-capplet: لم أستطع تهيئة مدير النوافذ.\n"
-"\tلم يبدأ '%s'\n"
-
-#: capplets/windows/gnome-window-properties.c:469
-#: capplets/wm-properties/wm-properties-capplet.c:473
-msgid "Previous window manager did not die\n"
-msgstr "لم يمت مدير النوافذ السابق\n"
-
-#: capplets/windows/gnome-window-properties.c:502
-#: capplets/wm-properties/wm-properties-capplet.c:506
-#, c-format
-msgid ""
-"Could not start '%s'.\n"
-"Falling back to previous window manager '%s'\n"
-msgstr ""
-"لم أستطع بدء '%s'.\n"
-"الرجوع لمدير النوافذ السابق '%s'\n"
-
-#: capplets/windows/gnome-window-properties.c:533
-#: capplets/wm-properties/wm-properties-capplet.c:537
-msgid ""
-"Could not start fallback window manager.\n"
-"Please run a window manager manually. You can\n"
-"do this by selecting \"Run Program\" in the\n"
-"foot menu\n"
-msgstr ""
-"تعذر بدء مدير النوافذ الرجوعي.\n"
-"فضلا شغل مدير نوافذ يدويا. باستطاعتك فعل ذلك باختيار \"شغل البرنامج\" في\n"
-"القائمة السفلى\n"
-
-#: capplets/windows/gnome-window-properties.c:558
-#: capplets/wm-properties/wm-properties-capplet.c:562
-#: capplets/wm-properties/wm-properties-capplet.c:812
-#: capplets/wm-properties/wm-properties-capplet.c:921
-#: capplets/wm-properties/wm-properties-capplet.c:928
-#: capplets/wm-properties/wm-properties-capplet.c:1070
-msgid "OK"
-msgstr "موافق"
-
-#: capplets/windows/gnome-window-properties.c:797
+#: capplets/windows/gnome-window-properties.c:222
 msgid "Window Preferences"
 msgstr "تفضيلات النافذة"
 
@@ -2284,6 +2245,19 @@ msgstr "Window Maker"
 msgid "twm"
 msgstr "twm"
 
+#: capplets/wm-properties/wm-properties-capplet.c:135
+msgid "Initialize session settings"
+msgstr "تهيئة تعيينات الجلسة"
+
+#: capplets/wm-properties/wm-properties-capplet.c:206
+#, c-format
+msgid ""
+"Starting %s\n"
+"(%d seconds left before operation times out)"
+msgstr ""
+"البدء %s\n"
+"(%d ثوان متبقية قبل انتهاء مدة العملية)"
+
 #: capplets/wm-properties/wm-properties-capplet.c:367
 #, c-format
 msgid "%s (Current)"
@@ -2293,6 +2267,59 @@ msgstr "%s (الحالي)"
 #, c-format
 msgid "Run Configuration Tool for %s"
 msgstr "نفّذ أداة التعريف لـ %s"
+
+#: capplets/wm-properties/wm-properties-capplet.c:381
+msgid " (Not found)"
+msgstr " (لا يوجد)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:420
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\tAnother window manager is already running and could not be killed\n"
+msgstr ""
+"wm-properties-capplet: لم أستطع تهيئة مدير النوافذ.\n"
+"\tمدير نوافذ آخر يعمل مسبقا ولا يمكن إنهاؤه\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:424
+#, c-format
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\t'%s' didn't start\n"
+msgstr ""
+"wm-properties-capplet: لم أستطع تهيئة مدير النوافذ.\n"
+"\tلم يبدأ '%s'\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:473
+msgid "Previous window manager did not die\n"
+msgstr "لم يمت مدير النوافذ السابق\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:506
+#, c-format
+msgid ""
+"Could not start '%s'.\n"
+"Falling back to previous window manager '%s'\n"
+msgstr ""
+"لم أستطع بدء '%s'.\n"
+"الرجوع لمدير النوافذ السابق '%s'\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:537
+msgid ""
+"Could not start fallback window manager.\n"
+"Please run a window manager manually. You can\n"
+"do this by selecting \"Run Program\" in the\n"
+"foot menu\n"
+msgstr ""
+"تعذر بدء مدير النوافذ الرجوعي.\n"
+"فضلا شغل مدير نوافذ يدويا. باستطاعتك فعل ذلك باختيار \"شغل البرنامج\" في\n"
+"القائمة السفلى\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:562
+#: capplets/wm-properties/wm-properties-capplet.c:812
+#: capplets/wm-properties/wm-properties-capplet.c:921
+#: capplets/wm-properties/wm-properties-capplet.c:928
+#: capplets/wm-properties/wm-properties-capplet.c:1070
+msgid "OK"
+msgstr "موافق"
 
 #: capplets/wm-properties/wm-properties-capplet.c:580
 msgid ""
@@ -2498,7 +2525,8 @@ msgstr "النوع"
 msgid ""
 "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
 "for preview"
-msgstr "ننوع bg_applier: BGAPPLIER_ROOT للمستخدم الجذري BG_APPLIER_PREVIEW للمعاينة"
+msgstr ""
+"ننوع bg_applier: BGAPPLIER_ROOT للمستخدم الجذري BG_APPLIER_PREVIEW للمعاينة"
 
 #: libbackground/applier.c:247
 msgid "Preview Width"
@@ -2553,6 +2581,12 @@ msgstr "تشغيل"
 #: libsounds/sound-view.c:257
 msgid "Select sound file"
 msgstr "اختر ملف صوت"
+
+#~ msgid "File Manager Font"
+#~ msgstr "خط مدير الملفات"
+
+#~ msgid "Font Properties"
+#~ msgstr "خصائص الخط"
 
 #~ msgid "Accepts Line _Number"
 #~ msgstr "يق_بل رقم السطر"
@@ -2709,4 +2743,3 @@ msgstr "اختر ملف صوت"
 
 #~ msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 #~ msgstr "لم أستطع تحميل بيكسبف \"%s\"؛ تعطيل ورق الجدران."
-

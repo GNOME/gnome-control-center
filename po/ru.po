@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2002-05-27 03:34+0400\n"
+"POT-Creation-Date: 2002-06-02 17:13-0700\n"
 "PO-Revision-Date: 2002-05-27 03:34+04:00\n"
 "Last-Translator: Dmitry G. Mastrukov <dmitry@taurussoft.org>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
@@ -230,16 +230,16 @@ msgstr "Не_т картинки"
 msgid "_Picture"
 msgstr "Ка_ртинка"
 
-#: capplets/background/background-properties-capplet.c:566
+#: capplets/background/background-properties-capplet.c:558
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:720
-#: capplets/keyboard/gnome-keyboard-properties.c:367
-#: capplets/mouse/gnome-mouse-properties.c:735
-#: capplets/sound/sound-properties-capplet.c:156
+#: capplets/default-applications/gnome-default-applications-properties.c:712
+#: capplets/keyboard/gnome-keyboard-properties.c:359
+#: capplets/mouse/gnome-mouse-properties.c:727
+#: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
 msgstr "Запрос и сохранение старых настроек"
 
-#: capplets/background/background-properties-capplet.c:592
+#: capplets/background/background-properties-capplet.c:584
 #: capplets/background/background-properties.glade.h:2
 msgid "Background Preferences"
 msgstr "Настроить фон"
@@ -358,6 +358,11 @@ msgstr ""
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "Только применить установки и выйти"
+
+#: capplets/common/capplet-util.c:315
+#, c-format
+msgid "There was an error displaying help: %s"
+msgstr ""
 
 #: capplets/common/file-transfer-dialog.c:95
 #, c-format
@@ -928,25 +933,25 @@ msgid "Source Code"
 msgstr "Исходный код"
 
 #: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:753
+#: capplets/file-types/mime-type-info.c:724
 msgid "Audio"
 msgstr "Аудио"
 
 #: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:749
+#: capplets/file-types/mime-type-info.c:720
 msgid "Images"
 msgstr "Изображения"
 
 #: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:751
+#: capplets/file-types/mime-type-info.c:722
 msgid "Video"
 msgstr "Видео"
 
-#: capplets/file-types/file-types-capplet.c:231
+#: capplets/file-types/file-types-capplet.c:222
 msgid "Description"
 msgstr "Описание"
 
-#: capplets/file-types/file-types-capplet.c:238
+#: capplets/file-types/file-types-capplet.c:229
 #: capplets/mime-type/new-mime-window.c:39
 msgid "Extensions"
 msgstr "Расширения"
@@ -1150,6 +1155,11 @@ msgstr "Категория"
 msgid "Choose a file category"
 msgstr "Выберите категорию файла"
 
+#: capplets/file-types/mime-type-info.c:726
+#, fuzzy
+msgid "Misc"
+msgstr "_Разное"
+
 #: capplets/file-types/mime-types-model.c:167
 #: capplets/file-types/mime-types-model.c:168
 msgid "Model for categories only"
@@ -1268,7 +1278,7 @@ msgstr "Клавиша ускорителя"
 
 #: capplets/keybindings/eggcellrendererkeys.c:206
 #: capplets/keybindings/gnome-keybinding-properties.c:306
-#: libbackground/applier.c:525
+#: libbackground/applier.c:521
 msgid "Disabled"
 msgstr "Выкл."
 
@@ -1298,7 +1308,7 @@ msgstr "Управление окнами"
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Ошибка установки нового ускорителя в базе данных конфигурации: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:840
+#: capplets/keybindings/gnome-keybinding-properties.c:851
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1306,11 +1316,11 @@ msgstr ""
 "Невозможно найти клавиатурные темы. Это значит, что установка GTK+ является "
 "неполной."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:865
+#: capplets/keybindings/gnome-keybinding-properties.c:876
 msgid "Action"
 msgstr "Действие"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:877
+#: capplets/keybindings/gnome-keybinding-properties.c:888
 msgid "Shortcut"
 msgstr "Комбинации клавиш"
 
@@ -1343,14 +1353,14 @@ msgstr "Комбинации клавиш _Рабочего стола:"
 msgid "Associate keyboard shortcuts with panel actions"
 msgstr "Ассоциировать комбинации клавиш с действиями панели"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:346
+#: capplets/keyboard/gnome-keyboard-properties.c:338
 msgid "_Accessibility"
 msgstr "_Специальные возможности"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:363
-#: capplets/keyboard/gnome-keyboard-properties.c:365
-#: capplets/sound/sound-properties-capplet.c:152
-#: capplets/sound/sound-properties-capplet.c:154
+#: capplets/keyboard/gnome-keyboard-properties.c:355
+#: capplets/keyboard/gnome-keyboard-properties.c:357
+#: capplets/sound/sound-properties-capplet.c:145
+#: capplets/sound/sound-properties-capplet.c:147
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
@@ -1927,7 +1937,7 @@ msgstr "Распо_ложение:"
 msgid "_Use HTTP proxy"
 msgstr "Использовать _прокси типа HTTP"
 
-#: capplets/sound/sound-properties-capplet.c:187
+#: capplets/sound/sound-properties-capplet.c:180
 msgid "Sound preferences"
 msgstr "Настроить звук"
 
@@ -2206,83 +2216,7 @@ msgstr "Установить"
 msgid "Configure which programs are used to display URLs"
 msgstr "Настроить, какие программы будут использованы для отображения URL"
 
-#: capplets/windows/gnome-window-properties.c:133
-#: capplets/wm-properties/wm-properties-capplet.c:135
-msgid "Initialize session settings"
-msgstr "Инициализировать установки сессии"
-
-#: capplets/windows/gnome-window-properties.c:232
-#: capplets/wm-properties/wm-properties-capplet.c:206
-#, c-format
-msgid ""
-"Starting %s\n"
-"(%d seconds left before operation times out)"
-msgstr ""
-"Запускается %s\n"
-"(%d секунд осталось до истечения времени операции)"
-
-#: capplets/windows/gnome-window-properties.c:393
-#: capplets/wm-properties/wm-properties-capplet.c:381
-msgid " (Not found)"
-msgstr " (не найден)"
-
-#: capplets/windows/gnome-window-properties.c:416
-#: capplets/wm-properties/wm-properties-capplet.c:420
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\tAnother window manager is already running and could not be killed\n"
-msgstr ""
-"wm-properties-capplet: Невозможно инициализировать диспетчер окон.\n"
-"\tДругой диспетчер окон уже запущен и не может быть завершён\n"
-
-#: capplets/windows/gnome-window-properties.c:420
-#: capplets/wm-properties/wm-properties-capplet.c:424
-#, c-format
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\t'%s' didn't start\n"
-msgstr ""
-"wm-properties-capplet: Невозможно инициализировать диспетчер окон.\n"
-"\t\"%s\" не стартовал\n"
-
-#: capplets/windows/gnome-window-properties.c:469
-#: capplets/wm-properties/wm-properties-capplet.c:473
-msgid "Previous window manager did not die\n"
-msgstr "Предыдущий дистпетчер окон не завершился\n"
-
-#: capplets/windows/gnome-window-properties.c:502
-#: capplets/wm-properties/wm-properties-capplet.c:506
-#, c-format
-msgid ""
-"Could not start '%s'.\n"
-"Falling back to previous window manager '%s'\n"
-msgstr ""
-"Не удалось стартовать \"%s\".\n"
-"Откат на предыдущий диспетчер окон \"%s\"\n"
-
-#: capplets/windows/gnome-window-properties.c:533
-#: capplets/wm-properties/wm-properties-capplet.c:537
-msgid ""
-"Could not start fallback window manager.\n"
-"Please run a window manager manually. You can\n"
-"do this by selecting \"Run Program\" in the\n"
-"foot menu\n"
-msgstr ""
-"Не удалось стартовать предыдущий диспетчер окон.\n"
-"Запустите диспетчер окон вручную. Это можно сделать\n"
-"путём выбора пунктоа \"Запустить программу\" в\n"
-"главном меню\n"
-
-#: capplets/windows/gnome-window-properties.c:558
-#: capplets/wm-properties/wm-properties-capplet.c:562
-#: capplets/wm-properties/wm-properties-capplet.c:812
-#: capplets/wm-properties/wm-properties-capplet.c:921
-#: capplets/wm-properties/wm-properties-capplet.c:928
-#: capplets/wm-properties/wm-properties-capplet.c:1070
-msgid "OK"
-msgstr "OK"
-
-#: capplets/windows/gnome-window-properties.c:797
+#: capplets/windows/gnome-window-properties.c:222
 msgid "Window Preferences"
 msgstr "Настроить окно"
 
@@ -2335,6 +2269,19 @@ msgstr "Window Maker"
 msgid "twm"
 msgstr "twm"
 
+#: capplets/wm-properties/wm-properties-capplet.c:135
+msgid "Initialize session settings"
+msgstr "Инициализировать установки сессии"
+
+#: capplets/wm-properties/wm-properties-capplet.c:206
+#, c-format
+msgid ""
+"Starting %s\n"
+"(%d seconds left before operation times out)"
+msgstr ""
+"Запускается %s\n"
+"(%d секунд осталось до истечения времени операции)"
+
 #: capplets/wm-properties/wm-properties-capplet.c:367
 #, c-format
 msgid "%s (Current)"
@@ -2344,6 +2291,60 @@ msgstr "%s (текущий)"
 #, c-format
 msgid "Run Configuration Tool for %s"
 msgstr "Запустить средство конфигурации для %s"
+
+#: capplets/wm-properties/wm-properties-capplet.c:381
+msgid " (Not found)"
+msgstr " (не найден)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:420
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\tAnother window manager is already running and could not be killed\n"
+msgstr ""
+"wm-properties-capplet: Невозможно инициализировать диспетчер окон.\n"
+"\tДругой диспетчер окон уже запущен и не может быть завершён\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:424
+#, c-format
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\t'%s' didn't start\n"
+msgstr ""
+"wm-properties-capplet: Невозможно инициализировать диспетчер окон.\n"
+"\t\"%s\" не стартовал\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:473
+msgid "Previous window manager did not die\n"
+msgstr "Предыдущий дистпетчер окон не завершился\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:506
+#, c-format
+msgid ""
+"Could not start '%s'.\n"
+"Falling back to previous window manager '%s'\n"
+msgstr ""
+"Не удалось стартовать \"%s\".\n"
+"Откат на предыдущий диспетчер окон \"%s\"\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:537
+msgid ""
+"Could not start fallback window manager.\n"
+"Please run a window manager manually. You can\n"
+"do this by selecting \"Run Program\" in the\n"
+"foot menu\n"
+msgstr ""
+"Не удалось стартовать предыдущий диспетчер окон.\n"
+"Запустите диспетчер окон вручную. Это можно сделать\n"
+"путём выбора пунктоа \"Запустить программу\" в\n"
+"главном меню\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:562
+#: capplets/wm-properties/wm-properties-capplet.c:812
+#: capplets/wm-properties/wm-properties-capplet.c:921
+#: capplets/wm-properties/wm-properties-capplet.c:928
+#: capplets/wm-properties/wm-properties-capplet.c:1070
+msgid "OK"
+msgstr "OK"
 
 #: capplets/wm-properties/wm-properties-capplet.c:580
 msgid ""

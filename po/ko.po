@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.99.10\n"
-"POT-Creation-Date: 2002-05-30 15:33+0900\n"
+"POT-Creation-Date: 2002-06-02 17:13-0700\n"
 "PO-Revision-Date: 2002-05-30 15:54+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: Korean <gnome-kr-translation@lists.sourceforge.net>\n"
@@ -912,17 +912,17 @@ msgid "Source Code"
 msgstr "소스 코드"
 
 #: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:726
+#: capplets/file-types/mime-type-info.c:724
 msgid "Audio"
 msgstr "오디오"
 
 #: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:722
+#: capplets/file-types/mime-type-info.c:720
 msgid "Images"
 msgstr "그림"
 
 #: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:724
+#: capplets/file-types/mime-type-info.c:722
 msgid "Video"
 msgstr "비디오"
 
@@ -1131,7 +1131,7 @@ msgstr "범주"
 msgid "Choose a file category"
 msgstr "파일 분류 선택"
 
-#: capplets/file-types/mime-type-info.c:728
+#: capplets/file-types/mime-type-info.c:726
 msgid "Misc"
 msgstr "기타"
 
@@ -1251,7 +1251,7 @@ msgstr "단축 키"
 
 #: capplets/keybindings/eggcellrendererkeys.c:206
 #: capplets/keybindings/gnome-keybinding-properties.c:306
-#: libbackground/applier.c:525
+#: libbackground/applier.c:521
 msgid "Disabled"
 msgstr "사용 않음"
 
@@ -2180,83 +2180,7 @@ msgstr "설정"
 msgid "Configure which programs are used to display URLs"
 msgstr "어떤 프로그램으로 URL을 표시할 것인지 설정합니다"
 
-#: capplets/windows/gnome-window-properties.c:133
-#: capplets/wm-properties/wm-properties-capplet.c:135
-msgid "Initialize session settings"
-msgstr "세션 설정 초기화"
-
-#: capplets/windows/gnome-window-properties.c:232
-#: capplets/wm-properties/wm-properties-capplet.c:206
-#, c-format
-msgid ""
-"Starting %s\n"
-"(%d seconds left before operation times out)"
-msgstr ""
-"%s 시작중\n"
-"(작업 시간이 초과될 때까지 %d초 남았습니다)"
-
-#: capplets/windows/gnome-window-properties.c:393
-#: capplets/wm-properties/wm-properties-capplet.c:381
-msgid " (Not found)"
-msgstr " (찾을 수 없음)"
-
-#: capplets/windows/gnome-window-properties.c:416
-#: capplets/wm-properties/wm-properties-capplet.c:420
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\tAnother window manager is already running and could not be killed\n"
-msgstr ""
-"wm-properties-capplet: 창 관리자를 초기화할 수 없습니다\n"
-"\t다른 창 관리자가 이미 실행중이고 강제로 종료할 수 없습니다\n"
-
-#: capplets/windows/gnome-window-properties.c:420
-#: capplets/wm-properties/wm-properties-capplet.c:424
-#, c-format
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\t'%s' didn't start\n"
-msgstr ""
-"wm-properties-capplet: 창 관리자를 초기화할 수 없습니다.\n"
-"\t'%s'이(가) 시작하지 않습니다\n"
-
-#: capplets/windows/gnome-window-properties.c:469
-#: capplets/wm-properties/wm-properties-capplet.c:473
-msgid "Previous window manager did not die\n"
-msgstr "이전의 창 관리자가 끝나지 않았습니다\n"
-
-#: capplets/windows/gnome-window-properties.c:502
-#: capplets/wm-properties/wm-properties-capplet.c:506
-#, c-format
-msgid ""
-"Could not start '%s'.\n"
-"Falling back to previous window manager '%s'\n"
-msgstr ""
-"'%s'을(를) 시작할 없습니다.\n"
-"이전의 창 관리자인 '%s'(으)로 돌아갑니다\n"
-
-#: capplets/windows/gnome-window-properties.c:533
-#: capplets/wm-properties/wm-properties-capplet.c:537
-msgid ""
-"Could not start fallback window manager.\n"
-"Please run a window manager manually. You can\n"
-"do this by selecting \"Run Program\" in the\n"
-"foot menu\n"
-msgstr ""
-"대체 창 관리자를 시작할 수 없습니다.\n"
-"수동으로 창 관리자를 시작하십시오.  발바닥\n"
-"메뉴에서 \"프로그램 실행\"을 선택하시면\n"
-"실행할 수 있습니다\n"
-
-#: capplets/windows/gnome-window-properties.c:558
-#: capplets/wm-properties/wm-properties-capplet.c:562
-#: capplets/wm-properties/wm-properties-capplet.c:812
-#: capplets/wm-properties/wm-properties-capplet.c:921
-#: capplets/wm-properties/wm-properties-capplet.c:928
-#: capplets/wm-properties/wm-properties-capplet.c:1070
-msgid "OK"
-msgstr "확인"
-
-#: capplets/windows/gnome-window-properties.c:797
+#: capplets/windows/gnome-window-properties.c:222
 msgid "Window Preferences"
 msgstr "창 기본 설정"
 
@@ -2309,6 +2233,19 @@ msgstr "윈도우 메이커"
 msgid "twm"
 msgstr "twm"
 
+#: capplets/wm-properties/wm-properties-capplet.c:135
+msgid "Initialize session settings"
+msgstr "세션 설정 초기화"
+
+#: capplets/wm-properties/wm-properties-capplet.c:206
+#, c-format
+msgid ""
+"Starting %s\n"
+"(%d seconds left before operation times out)"
+msgstr ""
+"%s 시작중\n"
+"(작업 시간이 초과될 때까지 %d초 남았습니다)"
+
 #: capplets/wm-properties/wm-properties-capplet.c:367
 #, c-format
 msgid "%s (Current)"
@@ -2318,6 +2255,60 @@ msgstr "%s (현재)"
 #, c-format
 msgid "Run Configuration Tool for %s"
 msgstr "%s에 대한 설정 도구 실행"
+
+#: capplets/wm-properties/wm-properties-capplet.c:381
+msgid " (Not found)"
+msgstr " (찾을 수 없음)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:420
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\tAnother window manager is already running and could not be killed\n"
+msgstr ""
+"wm-properties-capplet: 창 관리자를 초기화할 수 없습니다\n"
+"\t다른 창 관리자가 이미 실행중이고 강제로 종료할 수 없습니다\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:424
+#, c-format
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\t'%s' didn't start\n"
+msgstr ""
+"wm-properties-capplet: 창 관리자를 초기화할 수 없습니다.\n"
+"\t'%s'이(가) 시작하지 않습니다\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:473
+msgid "Previous window manager did not die\n"
+msgstr "이전의 창 관리자가 끝나지 않았습니다\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:506
+#, c-format
+msgid ""
+"Could not start '%s'.\n"
+"Falling back to previous window manager '%s'\n"
+msgstr ""
+"'%s'을(를) 시작할 없습니다.\n"
+"이전의 창 관리자인 '%s'(으)로 돌아갑니다\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:537
+msgid ""
+"Could not start fallback window manager.\n"
+"Please run a window manager manually. You can\n"
+"do this by selecting \"Run Program\" in the\n"
+"foot menu\n"
+msgstr ""
+"대체 창 관리자를 시작할 수 없습니다.\n"
+"수동으로 창 관리자를 시작하십시오.  발바닥\n"
+"메뉴에서 \"프로그램 실행\"을 선택하시면\n"
+"실행할 수 있습니다\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:562
+#: capplets/wm-properties/wm-properties-capplet.c:812
+#: capplets/wm-properties/wm-properties-capplet.c:921
+#: capplets/wm-properties/wm-properties-capplet.c:928
+#: capplets/wm-properties/wm-properties-capplet.c:1070
+msgid "OK"
+msgstr "확인"
 
 #: capplets/wm-properties/wm-properties-capplet.c:580
 msgid ""

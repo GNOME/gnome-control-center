@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 1.99.10\n"
-"POT-Creation-Date: 2002-05-21 14:58+0800\n"
+"POT-Creation-Date: 2002-06-02 17:13-0700\n"
 "PO-Revision-Date: 2002-05-21 15:59+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -38,8 +38,8 @@ msgid "Keyboard Accessibility Properties"
 msgstr "鍵盤輔助功能偏好設定"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:1
-msgid "&lt;b&gt;Test&lt;/b&gt;"
-msgstr "&lt;b&gt;測試&lt;/b&gt;"
+msgid "<b>Test</b>"
+msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:2
 msgid "B_eep when modifier is pressed"
@@ -220,16 +220,16 @@ msgstr "不使用圖案(_N)"
 msgid "_Picture"
 msgstr "圖案(_P)"
 
-#: capplets/background/background-properties-capplet.c:566
+#: capplets/background/background-properties-capplet.c:558
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:719
-#: capplets/keyboard/gnome-keyboard-properties.c:367
-#: capplets/mouse/gnome-mouse-properties.c:735
-#: capplets/sound/sound-properties-capplet.c:156
+#: capplets/default-applications/gnome-default-applications-properties.c:712
+#: capplets/keyboard/gnome-keyboard-properties.c:359
+#: capplets/mouse/gnome-mouse-properties.c:727
+#: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
 msgstr "讀入舊版本的設定"
 
-#: capplets/background/background-properties-capplet.c:591
+#: capplets/background/background-properties-capplet.c:584
 #: capplets/background/background-properties.glade.h:2
 msgid "Background Preferences"
 msgstr "背景圖案偏好設定"
@@ -344,6 +344,11 @@ msgstr ""
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "套用設定並離開"
+
+#: capplets/common/capplet-util.c:315
+#, c-format
+msgid "There was an error displaying help: %s"
+msgstr ""
 
 #: capplets/common/file-transfer-dialog.c:95
 #, c-format
@@ -525,7 +530,7 @@ msgid "Please specify a name and a command for this editor."
 msgstr "請指定此編輯器的名稱及執行時所用的指令。"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: capplets/network/gnome-network-preferences.glade.h:1
 #: capplets/theme-switcher/theme-properties.glade.h:1
 msgid "*"
@@ -902,25 +907,25 @@ msgid "Source Code"
 msgstr "源代碼"
 
 #: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:753
+#: capplets/file-types/mime-type-info.c:724
 msgid "Audio"
 msgstr "音效"
 
 #: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:749
+#: capplets/file-types/mime-type-info.c:720
 msgid "Images"
 msgstr "圖像"
 
 #: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:751
+#: capplets/file-types/mime-type-info.c:722
 msgid "Video"
 msgstr "視像"
 
-#: capplets/file-types/file-types-capplet.c:231
+#: capplets/file-types/file-types-capplet.c:222
 msgid "Description"
 msgstr "描述"
 
-#: capplets/file-types/file-types-capplet.c:238
+#: capplets/file-types/file-types-capplet.c:229
 #: capplets/mime-type/new-mime-window.c:39
 msgid "Extensions"
 msgstr "延伸檔名"
@@ -1120,6 +1125,11 @@ msgstr "分類"
 msgid "Choose a file category"
 msgstr "請選擇檔案分類"
 
+#: capplets/file-types/mime-type-info.c:726
+#, fuzzy
+msgid "Misc"
+msgstr "其它(_M)"
+
 #: capplets/file-types/mime-types-model.c:167
 #: capplets/file-types/mime-types-model.c:168
 msgid "Model for categories only"
@@ -1204,39 +1214,51 @@ msgid "Font"
 msgstr "字型"
 
 #: capplets/font/font-properties.glade.h:1
-msgid "File Manager Font"
-msgstr "檔案管理程式的字型"
+#, fuzzy
+msgid "Font Preferences"
+msgstr "音效偏好設定"
 
 #: capplets/font/font-properties.glade.h:2
-msgid "Font Properties"
-msgstr "字型屬性"
+#, fuzzy
+msgid "Set the font for applications"
+msgstr "設定 GNOME 應用程式的預設顯示方式"
 
 #: capplets/font/font-properties.glade.h:3
-msgid "Standard Desktop Font"
-msgstr "標準桌面字型"
+msgid "Set the font for the icons on the desktop"
+msgstr ""
 
-#: capplets/keybindings/eggcellrendererkeys.c:156
-#: capplets/keybindings/eggcellrendererkeys.c:157
+#: capplets/font/font-properties.glade.h:4
+#, fuzzy
+msgid "Standard _application font:"
+msgstr "錯誤的應用程式指令"
+
+#: capplets/font/font-properties.glade.h:5
+#, fuzzy
+msgid "_Desktop font:"
+msgstr "桌面捷徑鍵(_D)："
+
+#: capplets/keybindings/eggcellrendererkeys.c:158
+#: capplets/keybindings/eggcellrendererkeys.c:159
 msgid "Accelerator modifiers"
 msgstr ""
 
-#: capplets/keybindings/eggcellrendererkeys.c:165
-#: capplets/keybindings/eggcellrendererkeys.c:166
+#: capplets/keybindings/eggcellrendererkeys.c:167
+#: capplets/keybindings/eggcellrendererkeys.c:168
 msgid "Accelerator key"
 msgstr "快速鍵"
 
-#: capplets/keybindings/eggcellrendererkeys.c:203
+#: capplets/keybindings/eggcellrendererkeys.c:206
 #: capplets/keybindings/gnome-keybinding-properties.c:306
-#: libbackground/applier.c:531
+#: libbackground/applier.c:521
 msgid "Disabled"
 msgstr "無效"
 
-#: capplets/keybindings/eggcellrendererkeys.c:306
-#: capplets/keybindings/eggcellrendererkeys.c:503
+#: capplets/keybindings/eggcellrendererkeys.c:309
+#: capplets/keybindings/eggcellrendererkeys.c:506
 msgid "Type a new accelerator, or press Backspace to clear"
 msgstr "請輸入新的快速鍵，或是按 Backspace 清除原有按鍵"
 
-#: capplets/keybindings/eggcellrendererkeys.c:506
+#: capplets/keybindings/eggcellrendererkeys.c:509
 msgid "Type a new accelerator"
 msgstr "請輸入新的快速鍵"
 
@@ -1252,22 +1274,22 @@ msgstr "桌面"
 msgid "Window Management"
 msgstr "視窗管理"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:698
+#: capplets/keybindings/gnome-keybinding-properties.c:699
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "在組態資料庫中設定新的快速鍵時出現錯誤：%s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:839
+#: capplets/keybindings/gnome-keybinding-properties.c:851
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:864
+#: capplets/keybindings/gnome-keybinding-properties.c:876
 msgid "Action"
 msgstr "行動"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:876
+#: capplets/keybindings/gnome-keybinding-properties.c:888
 msgid "Shortcut"
 msgstr "捷徑鍵"
 
@@ -1300,33 +1322,33 @@ msgstr "桌面捷徑鍵(_D)："
 msgid "Associate keyboard shortcuts with panel actions"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.c:346
+#: capplets/keyboard/gnome-keyboard-properties.c:338
 msgid "_Accessibility"
 msgstr "輔助技術(_A)"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:363
-#: capplets/keyboard/gnome-keyboard-properties.c:365
-#: capplets/sound/sound-properties-capplet.c:152
-#: capplets/sound/sound-properties-capplet.c:154
+#: capplets/keyboard/gnome-keyboard-properties.c:355
+#: capplets/keyboard/gnome-keyboard-properties.c:357
+#: capplets/sound/sound-properties-capplet.c:145
+#: capplets/sound/sound-properties-capplet.c:147
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
-msgid "&lt;i&gt;fast&lt;/i&gt;"
-msgstr "&lt;i&gt;快&lt;/i&gt;"
-
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:2
-msgid "&lt;i&gt;loud&lt;/i&gt;"
-msgstr "&lt;i&gt;響&lt;/i&gt;"
+msgid "<i>fast</i>"
+msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:3
-msgid "&lt;i&gt;quiet&lt;/i&gt;"
-msgstr "&lt;i&gt;靜&lt;/i&gt;"
+msgid "<i>loud</i>"
+msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:4
-msgid "&lt;i&gt;slow&lt;/i&gt;"
-msgstr "&lt;i&gt;慢&lt;/i&gt;"
+msgid "<i>quiet</i>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+msgid "<i>slow</i>"
+msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "Cursor"
@@ -1402,8 +1424,8 @@ msgstr "慢"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid ""
-"The keyboard bell is the &lt;i&gt;beep&lt;/i&gt; sound heard when the system "
-"wants to get your attention."
+"The keyboard bell is the <i>beep</i> sound heard when the system wants to "
+"get your attention."
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:28
@@ -1705,34 +1727,35 @@ msgstr ""
 "比正常的白色鼠標較大"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:1
+#, fuzzy
 msgid ""
-"&lt;b&gt;Note:&lt;/b&gt; You will need to logout and log back in for this "
-"setting to take effect."
+"<b>Note:</b> You will need to logout and log back in for this setting to "
+"take effect."
 msgstr "&lt;b&gt;注意：&lt;/b&gt; 必須登出後再登入才會令設定生效。"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:2
-msgid "&lt;i&gt;Fast&lt;/i&gt;"
-msgstr "&lt;i&gt;快&lt;/i&gt;"
+msgid "<i>Fast</i>"
+msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:3
-msgid "&lt;i&gt;High&lt;/i&gt;"
-msgstr "&lt;i&gt;高&lt;/i&gt;"
+msgid "<i>High</i>"
+msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:4
-msgid "&lt;i&gt;Large&lt;/i&gt;"
-msgstr "&lt;i&gt;大&lt;/i&gt;"
+msgid "<i>Large</i>"
+msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:5
-msgid "&lt;i&gt;Low&lt;/i&gt;"
-msgstr "&lt;i&gt;低&lt;/i&gt;"
+msgid "<i>Low</i>"
+msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:6
-msgid "&lt;i&gt;Slow&lt;/i&gt;"
-msgstr "&lt;i&gt;慢&lt;/i&gt;"
+msgid "<i>Slow</i>"
+msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:7
-msgid "&lt;i&gt;Small&lt;/i&gt;"
-msgstr "&lt;i&gt;小&lt;/i&gt;"
+msgid "<i>Small</i>"
+msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid ""
@@ -1870,7 +1893,7 @@ msgstr "位置(_L)："
 msgid "_Use HTTP proxy"
 msgstr "使用 HTTP 代理伺服器(_U)"
 
-#: capplets/sound/sound-properties-capplet.c:186
+#: capplets/sound/sound-properties-capplet.c:180
 msgid "Sound preferences"
 msgstr "音效偏好設定"
 
@@ -2148,82 +2171,7 @@ msgstr "設定"
 msgid "Configure which programs are used to display URLs"
 msgstr "設定顯示 URL 所用的程式"
 
-#: capplets/windows/gnome-window-properties.c:133
-#: capplets/wm-properties/wm-properties-capplet.c:135
-msgid "Initialize session settings"
-msgstr "初始化作業階段設定"
-
-#: capplets/windows/gnome-window-properties.c:232
-#: capplets/wm-properties/wm-properties-capplet.c:206
-#, c-format
-msgid ""
-"Starting %s\n"
-"(%d seconds left before operation times out)"
-msgstr ""
-"正在啟動 %s\n"
-"（%d 秒後定為逾時）"
-
-#: capplets/windows/gnome-window-properties.c:393
-#: capplets/wm-properties/wm-properties-capplet.c:381
-msgid " (Not found)"
-msgstr " (找不到)"
-
-#: capplets/windows/gnome-window-properties.c:416
-#: capplets/wm-properties/wm-properties-capplet.c:420
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\tAnother window manager is already running and could not be killed\n"
-msgstr ""
-"wm-properties-capplet：無法初始化視窗管理程式。\n"
-"\t另一個視窗管理程式已經在執行並且無法停止\n"
-
-#: capplets/windows/gnome-window-properties.c:420
-#: capplets/wm-properties/wm-properties-capplet.c:424
-#, c-format
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\t'%s' didn't start\n"
-msgstr ""
-"wm-properties-capplet：無法初始化視窗管理程式。\n"
-"\t‘%s’無法啟動\n"
-
-#: capplets/windows/gnome-window-properties.c:469
-#: capplets/wm-properties/wm-properties-capplet.c:473
-msgid "Previous window manager did not die\n"
-msgstr "前一個視窗管理程式尚未結束\n"
-
-#: capplets/windows/gnome-window-properties.c:502
-#: capplets/wm-properties/wm-properties-capplet.c:506
-#, c-format
-msgid ""
-"Could not start '%s'.\n"
-"Falling back to previous window manager '%s'\n"
-msgstr ""
-"無法啟動‘%s’。\n"
-"回到前一個視窗管理程式‘%s’\n"
-
-#: capplets/windows/gnome-window-properties.c:533
-#: capplets/wm-properties/wm-properties-capplet.c:537
-msgid ""
-"Could not start fallback window manager.\n"
-"Please run a window manager manually. You can\n"
-"do this by selecting \"Run Program\" in the\n"
-"foot menu\n"
-msgstr ""
-"無法啟動後備的視窗管理程式。請自行啟動\n"
-"視窗管理程式。你可以在腳印選單中選擇\n"
-"「執行程式」來進行。\n"
-
-#: capplets/windows/gnome-window-properties.c:558
-#: capplets/wm-properties/wm-properties-capplet.c:562
-#: capplets/wm-properties/wm-properties-capplet.c:812
-#: capplets/wm-properties/wm-properties-capplet.c:921
-#: capplets/wm-properties/wm-properties-capplet.c:928
-#: capplets/wm-properties/wm-properties-capplet.c:1070
-msgid "OK"
-msgstr "確定"
-
-#: capplets/windows/gnome-window-properties.c:797
+#: capplets/windows/gnome-window-properties.c:222
 msgid "Window Preferences"
 msgstr "視窗偏好設定"
 
@@ -2276,6 +2224,19 @@ msgstr "Window Maker"
 msgid "twm"
 msgstr "twm"
 
+#: capplets/wm-properties/wm-properties-capplet.c:135
+msgid "Initialize session settings"
+msgstr "初始化作業階段設定"
+
+#: capplets/wm-properties/wm-properties-capplet.c:206
+#, c-format
+msgid ""
+"Starting %s\n"
+"(%d seconds left before operation times out)"
+msgstr ""
+"正在啟動 %s\n"
+"（%d 秒後定為逾時）"
+
 #: capplets/wm-properties/wm-properties-capplet.c:367
 #, c-format
 msgid "%s (Current)"
@@ -2285,6 +2246,59 @@ msgstr "%s (使用中)"
 #, c-format
 msgid "Run Configuration Tool for %s"
 msgstr "執行 %s 的設定工具"
+
+#: capplets/wm-properties/wm-properties-capplet.c:381
+msgid " (Not found)"
+msgstr " (找不到)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:420
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\tAnother window manager is already running and could not be killed\n"
+msgstr ""
+"wm-properties-capplet：無法初始化視窗管理程式。\n"
+"\t另一個視窗管理程式已經在執行並且無法停止\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:424
+#, c-format
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\t'%s' didn't start\n"
+msgstr ""
+"wm-properties-capplet：無法初始化視窗管理程式。\n"
+"\t‘%s’無法啟動\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:473
+msgid "Previous window manager did not die\n"
+msgstr "前一個視窗管理程式尚未結束\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:506
+#, c-format
+msgid ""
+"Could not start '%s'.\n"
+"Falling back to previous window manager '%s'\n"
+msgstr ""
+"無法啟動‘%s’。\n"
+"回到前一個視窗管理程式‘%s’\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:537
+msgid ""
+"Could not start fallback window manager.\n"
+"Please run a window manager manually. You can\n"
+"do this by selecting \"Run Program\" in the\n"
+"foot menu\n"
+msgstr ""
+"無法啟動後備的視窗管理程式。請自行啟動\n"
+"視窗管理程式。你可以在腳印選單中選擇\n"
+"「執行程式」來進行。\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:562
+#: capplets/wm-properties/wm-properties-capplet.c:812
+#: capplets/wm-properties/wm-properties-capplet.c:921
+#: capplets/wm-properties/wm-properties-capplet.c:928
+#: capplets/wm-properties/wm-properties-capplet.c:1070
+msgid "OK"
+msgstr "確定"
 
 #: capplets/wm-properties/wm-properties-capplet.c:580
 msgid ""
@@ -2388,15 +2402,19 @@ msgstr ""
 msgid "Capplet directory that this view is viewing"
 msgstr ""
 
-#: control-center/capplet-dir-view.c:338 control-center/gnomecc.desktop.in.h:1
+#: control-center/capplet-dir-view.c:335
+msgid "translator_credits"
+msgstr ""
+
+#: control-center/capplet-dir-view.c:344 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
 msgstr "GNOME 控制中心"
 
-#: control-center/capplet-dir-view.c:341
+#: control-center/capplet-dir-view.c:347
 msgid "Desktop properties manager."
 msgstr "桌面屬性管理程式"
 
-#: control-center/capplet-dir-view.c:477
+#: control-center/capplet-dir-view.c:485
 #, c-format
 msgid "Gnome Control Center : %s"
 msgstr "Gnome 控制中心：%s"
@@ -2538,6 +2556,48 @@ msgstr "播放(_P)"
 #: libsounds/sound-view.c:257
 msgid "Select sound file"
 msgstr "選擇音效檔"
+
+#~ msgid "&lt;b&gt;Test&lt;/b&gt;"
+#~ msgstr "&lt;b&gt;測試&lt;/b&gt;"
+
+#~ msgid "File Manager Font"
+#~ msgstr "檔案管理程式的字型"
+
+#~ msgid "Font Properties"
+#~ msgstr "字型屬性"
+
+#~ msgid "Standard Desktop Font"
+#~ msgstr "標準桌面字型"
+
+#~ msgid "&lt;i&gt;fast&lt;/i&gt;"
+#~ msgstr "&lt;i&gt;快&lt;/i&gt;"
+
+#~ msgid "&lt;i&gt;loud&lt;/i&gt;"
+#~ msgstr "&lt;i&gt;響&lt;/i&gt;"
+
+#~ msgid "&lt;i&gt;quiet&lt;/i&gt;"
+#~ msgstr "&lt;i&gt;靜&lt;/i&gt;"
+
+#~ msgid "&lt;i&gt;slow&lt;/i&gt;"
+#~ msgstr "&lt;i&gt;慢&lt;/i&gt;"
+
+#~ msgid "&lt;i&gt;Fast&lt;/i&gt;"
+#~ msgstr "&lt;i&gt;快&lt;/i&gt;"
+
+#~ msgid "&lt;i&gt;High&lt;/i&gt;"
+#~ msgstr "&lt;i&gt;高&lt;/i&gt;"
+
+#~ msgid "&lt;i&gt;Large&lt;/i&gt;"
+#~ msgstr "&lt;i&gt;大&lt;/i&gt;"
+
+#~ msgid "&lt;i&gt;Low&lt;/i&gt;"
+#~ msgstr "&lt;i&gt;低&lt;/i&gt;"
+
+#~ msgid "&lt;i&gt;Slow&lt;/i&gt;"
+#~ msgstr "&lt;i&gt;慢&lt;/i&gt;"
+
+#~ msgid "&lt;i&gt;Small&lt;/i&gt;"
+#~ msgstr "&lt;i&gt;小&lt;/i&gt;"
 
 #~ msgid "Accepts Line _Number"
 #~ msgstr "可接受行數(_N)"
@@ -2812,9 +2872,6 @@ msgstr "選擇音效檔"
 
 #~ msgid "Bad Application Name"
 #~ msgstr "錯誤的應用程式名稱"
-
-#~ msgid "Bad Application Command"
-#~ msgstr "錯誤的應用程式指令"
 
 #~ msgid "Edit Application"
 #~ msgstr "編輯應用程式"
