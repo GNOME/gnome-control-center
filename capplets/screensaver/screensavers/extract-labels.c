@@ -27,8 +27,8 @@
 
 #include <stdio.h>
 #include <glib.h>
-#include <parser.h>
-#include <tree.h>
+#include <gnome-xml/parser.h>
+#include <gnome-xml/tree.h>
 
 static void
 write_label (xmlNodePtr node, char *attr, FILE *out) 
