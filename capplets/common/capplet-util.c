@@ -123,6 +123,10 @@ set_moniker_cb (BonoboPropertyBag *bag, BonoboArg *arg, guint arg_id,
 
 	pf = BONOBO_PROPERTY_FRAME (bonobo_control_get_widget (control));
 	bonobo_property_frame_set_moniker (pf, full_moniker);
+
+	if (pf->proxy->bag == CORBA_OBJECT_NIL)
+		gnome_error_dialog ("Could not load your configuration settings.");
+
 	proxy = BONOBO_OBJREF (pf->proxy);
 
 	db = gtk_object_get_data (GTK_OBJECT (pf), "config-database");
@@ -133,7 +137,7 @@ set_moniker_cb (BonoboPropertyBag *bag, BonoboArg *arg, guint arg_id,
 	db = bonobo_get_object (moniker, "IDL:Bonobo/ConfigDatabase:1.0", ev);
 
 	if (BONOBO_EX (ev) || db == CORBA_OBJECT_NIL)
-		g_critical ("Could not resolve configuration moniker; will not be able to save settings");
+		g_critical ("Could not resolve configuration moniker; will not be able to apply settings");
 
 	gtk_object_set_data (GTK_OBJECT (pf), "config-database", db);
 	gtk_signal_connect (GTK_OBJECT (pf), "destroy",
