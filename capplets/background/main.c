@@ -225,6 +225,8 @@ setup_dialog (GtkWidget *widget, Bonobo_PropertyBag bag)
 	bonobo_peditor_set_property (ed, bag, "wallpaper_type", TC_ulong, NULL);
 
 	CUSTOM_CREATE_PEDITOR (int_range, long, "opacity", "opacity_spin");	
+	gtk_widget_hide (WID ("opacity_spin"));
+	gtk_widget_hide (WID ("opacity_label"));
 
 	bonobo_event_source_client_add_listener (bag, property_change_cb,
 						 NULL, NULL, bag);
