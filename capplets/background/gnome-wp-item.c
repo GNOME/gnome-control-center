@@ -18,10 +18,14 @@
  *
  */
 
-#include "gnome-wp-item.h"
-#include "gnome-wp-utils.h"
+#include <config.h>
+
+#include <gnome.h>
 #include <string.h>
 #include <libgnomevfs/gnome-vfs-mime-handlers.h>
+
+#include "gnome-wp-item.h"
+#include "gnome-wp-utils.h"
 
 void gnome_wp_item_free (GnomeWPItem * item) {
   if (item == NULL) {
@@ -49,12 +53,66 @@ void gnome_wp_item_free (GnomeWPItem * item) {
   item = NULL;
 }
 
+static void collect_save_options (GdkPixbuf * pixbuf,
+				  gchar *** keys,
+				  gchar *** vals,
+				  gint width,
+				  gint height) {
+  gchar ** options;
+  gint n, count;
+
+  count = 0;
+
+  options = g_object_get_qdata (G_OBJECT (pixbuf),
+				g_quark_from_static_string ("gdk_pixbuf_options"));
+  if (options) {
+    for (n = 0; options[2 * n]; n++) {
+      ++count;
+      
+      *keys = g_realloc (*keys, sizeof (gchar *) * (count + 1));
+      *vals = g_realloc (*vals, sizeof (gchar *) * (count + 1));
+
+      (*keys)[count - 1] = g_strdup (options[2 * n]);
+      (*vals)[count - 1] = g_strdup (options[2 * n + 1]);
+      
+      (*keys)[count] = NULL;
+      (*vals)[count] = NULL;
+    }
+  }
+  ++count;
+
+  *keys = g_realloc (*keys, sizeof (gchar *) * (count + 1));
+  *vals = g_realloc (*vals, sizeof (gchar *) * (count + 1));
+
+  (*keys)[count - 1] = g_strdup ("tEXt::Thumb::Image::Width");
+  (*vals)[count - 1] = g_strdup_printf ("%d", width);
+
+  (*keys)[count] = NULL;
+  (*vals)[count] = NULL;
+
+  ++count;
+
+  *keys = g_realloc (*keys, sizeof (gchar *) * (count + 1));
+  *vals = g_realloc (*vals, sizeof (gchar *) * (count + 1));
+
+  (*keys)[count - 1] = g_strdup ("tEXt::Thumb::Image::Height");
+  (*vals)[count - 1] = g_strdup_printf ("%d", height);
+
+  (*keys)[count] = NULL;
+  (*vals)[count] = NULL;
+}
+
+#define LIST_IMAGE_WIDTH 64
+
 GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
 					 GnomeThumbnailFactory * thumbs) {
   GdkPixbuf * pixbuf, * bgpixbuf;
+  GdkPixbuf * tmpbuf;
   GdkPixbuf * scaled = NULL;
-  gint rw, rh, sw, sh, bw, bh, pw, ph, th, tw;
+  gint sw, sh, bw, bh, pw, ph, tw, th;
   gdouble ratio;
+
+  sw = sh = bw = bh = pw = ph = tw = th = 0;
 
   /*
      Get the size of the screen and calculate our aspect ratio divisor
@@ -63,7 +121,7 @@ GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
   */
   sw = gdk_screen_get_width (gdk_screen_get_default ());
   sh = gdk_screen_get_height (gdk_screen_get_default ());
-  ratio = (gdouble) sw / (gdouble) 64;
+  ratio = (gdouble) sw / (gdouble) LIST_IMAGE_WIDTH;
   bw = sw / ratio;
   bh = sh / ratio;
 
@@ -93,7 +151,7 @@ GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
       g_file_test (item->fileinfo->thumburi, G_FILE_TEST_EXISTS)) {
     pixbuf = gdk_pixbuf_new_from_file (item->fileinfo->thumburi, NULL);
   } else if (!strcmp (item->filename, "(none)")) {
-    pixbuf = gdk_pixbuf_copy (bgpixbuf);
+    return bgpixbuf;
   } else {
     pixbuf = gnome_thumbnail_factory_generate_thumbnail (thumbs,
 							 gnome_vfs_escape_path_string (item->filename),
@@ -103,68 +161,60 @@ GdkPixbuf * gnome_wp_item_get_thumbnail (GnomeWPItem * item,
 					    item->fileinfo->mtime);
   }
 
-  if (pixbuf != NULL && strcmp (item->filename, "(none)") != 0) {
+  if (pixbuf != NULL) {
     const gchar * w_val, * h_val;
 
     w_val = gdk_pixbuf_get_option (pixbuf, "tEXt::Thumb::Image::Width");
     h_val = gdk_pixbuf_get_option (pixbuf, "tEXt::Thumb::Image::Height");
     if (item->width <= 0 || item->height <= 0) {
       if (w_val && h_val) {
-	item->width = rw = atoi (w_val);
-	item->height = rh = atoi (h_val);
+	item->width = atoi (w_val);
+	item->height = atoi (h_val);
       } else {
-	GdkPixbuf * tmpbuf = gdk_pixbuf_new_from_file (item->filename, NULL);
-	
-	item->width = rw = gdk_pixbuf_get_width (tmpbuf);
-	item->height = rh = gdk_pixbuf_get_height (tmpbuf);
-	
+	gchar ** keys = NULL;
+	gchar ** vals = NULL;
+
+	tmpbuf = gdk_pixbuf_new_from_file (item->filename, NULL);
+
+	item->width = gdk_pixbuf_get_width (tmpbuf);
+	item->height = gdk_pixbuf_get_height (tmpbuf);
+
+	collect_save_options (pixbuf, &keys, &vals, item->width, item->height);
+	gdk_pixbuf_savev (pixbuf, item->fileinfo->thumburi, "png",
+			  keys, vals, NULL);
+
 	g_object_unref (tmpbuf);
+	g_strfreev (keys);
+	g_strfreev (vals);
       }
-    } else {
-	rw = item->width;
-	rh = item->height;
     }
 
     pw = gdk_pixbuf_get_width (pixbuf);
     ph = gdk_pixbuf_get_height (pixbuf);
 
-    if (rw >= sw && rh >= sh) {
-      ratio = (gdouble) rw / (gdouble) sw;
-      tw = ratio * bw;
-      th = ratio * bh;
-    } else {
-      if (pw > ph) {
-	ratio = (gdouble) pw / (gdouble) (bw - 16);
-      } else {
-	ratio = (gdouble) ph / (gdouble) (bh - 16);
-      }
-      tw = pw / ratio;
-      th = ph / ratio;
-    }
-    scaled = gnome_thumbnail_scale_down_pixbuf (pixbuf, tw, th);
+    if (item->width <= bw && item->height <= bh)
+      ratio = 1.0;
+
+    tw = item->width / ratio;
+    th = item->height / ratio;
 
     if (!strcmp (item->options, "wallpaper")) {
-      pixbuf = gnome_wp_pixbuf_tile (scaled, bgpixbuf);
+      scaled = gnome_wp_pixbuf_tile (pixbuf, bgpixbuf, tw, th);
     } else if (!strcmp (item->options, "centered")) {
-      pixbuf = gnome_wp_pixbuf_center (scaled, bgpixbuf);
+      scaled = gnome_wp_pixbuf_center (pixbuf, bgpixbuf, tw, th);
     } else if (!strcmp (item->options, "stretched")) {
-      scaled = gnome_thumbnail_scale_down_pixbuf (pixbuf, bw, bh);
-      pixbuf = gnome_wp_pixbuf_center (scaled, bgpixbuf);
+      scaled = gnome_wp_pixbuf_center (pixbuf, bgpixbuf, bw, bh);
     } else if (!strcmp (item->options, "scaled")) {
-      if (ph > bh && pw > bw) {
-	if ((gdouble) ph * (gdouble) bw > (gdouble) pw * (gdouble) bh) {
-	  tw = 0.5 + (gdouble) pw * (gdouble) bh / (gdouble) ph;
-	  th = bh;
-	} else {
-	  th = 0.5 + (gdouble) ph * (gdouble) bw / (gdouble) pw;
-	  tw = bw;
-	}
-	scaled = gnome_thumbnail_scale_down_pixbuf (pixbuf, tw, th);
+      if ((gdouble) ph * (gdouble) bw > (gdouble) pw * (gdouble) bh) {
+	tw = 0.5 + (gdouble) pw * (gdouble) bh / (gdouble) ph;
+	th = bh;
+      } else {
+	th = 0.5 + (gdouble) ph * (gdouble) bw / (gdouble) pw;
+	tw = bw;
       }
-      pixbuf = gnome_wp_pixbuf_center (scaled, bgpixbuf);
+      scaled = gnome_wp_pixbuf_center (pixbuf, bgpixbuf, tw, th);
     }
   }
-  scaled = gdk_pixbuf_copy (pixbuf);
 
   g_object_unref (pixbuf);
   g_object_unref (bgpixbuf);
@@ -176,9 +226,12 @@ void gnome_wp_item_update_description (GnomeWPItem * item) {
   if (!strcmp (item->filename, "(none)")) {
     item->description = g_strdup_printf ("<b>%s</b>", item->name);
   } else {
-    item->description = g_strdup_printf ("<b>%s</b>\n%s (%LuK)",
+    item->description = g_strdup_printf ("<b>%s</b>\n"
+					 "%s %dx%d pixels (%LuK)",
 					 item->name,
 					 gnome_vfs_mime_get_description (item->fileinfo->mime_type),
+					 item->width,
+					 item->height,
 					 item->fileinfo->size / 1024);
   }
 }

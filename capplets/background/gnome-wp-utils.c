@@ -105,7 +105,10 @@ GdkPixbuf * gnome_wp_pixbuf_new_solid (GdkColor * color,
 }
 
 GdkPixbuf * gnome_wp_pixbuf_tile (GdkPixbuf * src_pixbuf,
-				  GdkPixbuf * dest_pixbuf) {
+				  GdkPixbuf * dest_pixbuf,
+				  gint scaled_width,
+				  gint scaled_height) {
+  GdkPixbuf * tmpbuf;
   gdouble cx, cy;
   gint dwidth, dheight;
   gint swidth, sheight;
@@ -115,28 +118,35 @@ GdkPixbuf * gnome_wp_pixbuf_tile (GdkPixbuf * src_pixbuf,
     return gdk_pixbuf_copy (src_pixbuf);
   }
 
-  swidth = gdk_pixbuf_get_width (src_pixbuf);
-  sheight = gdk_pixbuf_get_height (src_pixbuf);
+  tmpbuf = gdk_pixbuf_scale_simple (src_pixbuf, scaled_width, scaled_height,
+				    GDK_INTERP_BILINEAR);
+
+  swidth = gdk_pixbuf_get_width (tmpbuf);
+  sheight = gdk_pixbuf_get_height (tmpbuf);
 
   dwidth = gdk_pixbuf_get_width (dest_pixbuf);
   dheight = gdk_pixbuf_get_height (dest_pixbuf);
 
   for (cy = 0; cy < dheight; cy += sheight) {
     for (cx = 0; cx < dwidth; cx += swidth) {
-      gdk_pixbuf_composite (src_pixbuf, dest_pixbuf, cx, cy,
+      gdk_pixbuf_composite (tmpbuf, dest_pixbuf, cx, cy,
 			    MIN (swidth, dwidth - cx),
 			    MIN (sheight, dheight - cy),
-			    cx, cy, 1.0, 1.0, GDK_INTERP_BILINEAR, alpha);
+			    cx, cy, 1.0, 1.0,
+			    GDK_INTERP_BILINEAR, alpha);
     }
   }
+  g_object_unref (tmpbuf);
 
   return gdk_pixbuf_copy (dest_pixbuf);
 }
 
 GdkPixbuf * gnome_wp_pixbuf_center (GdkPixbuf * src_pixbuf,
-				    GdkPixbuf * dest_pixbuf) {
-  gint ox, oy;
-  gint cx, cy;
+				    GdkPixbuf * dest_pixbuf,
+				    gint scaled_width,
+				    gint scaled_height) {
+  GdkPixbuf * tmpbuf;
+  gint ox, oy, cx, cy;
   gint dwidth, dheight;
   gint swidth, sheight;
   gint cwidth, cheight;
@@ -148,8 +158,11 @@ GdkPixbuf * gnome_wp_pixbuf_center (GdkPixbuf * src_pixbuf,
 
   ox = cx = oy = cy = 0;
 
-  swidth = gdk_pixbuf_get_width (src_pixbuf);
-  sheight = gdk_pixbuf_get_height (src_pixbuf);
+  tmpbuf = gdk_pixbuf_scale_simple (src_pixbuf, scaled_width, scaled_height,
+				    GDK_INTERP_BILINEAR);
+
+  swidth = gdk_pixbuf_get_width (tmpbuf);
+  sheight = gdk_pixbuf_get_height (tmpbuf);
 
   dwidth = gdk_pixbuf_get_width (dest_pixbuf);
   dheight = gdk_pixbuf_get_height (dest_pixbuf);
@@ -165,7 +178,7 @@ GdkPixbuf * gnome_wp_pixbuf_center (GdkPixbuf * src_pixbuf,
   }
 
   if (dheight > sheight) {
-    oy = ((dheight - sheight) / 2) - 1;
+    oy = ((dheight - sheight) / 2);
     cy = 0;
     cheight = sheight;
   } else {
@@ -174,14 +187,12 @@ GdkPixbuf * gnome_wp_pixbuf_center (GdkPixbuf * src_pixbuf,
     cheight = dheight;
   }
 
-  if (gdk_pixbuf_get_has_alpha (src_pixbuf))
-    gdk_pixbuf_composite (src_pixbuf, dest_pixbuf, 0, 0,
-			  dwidth, dheight,
-			  ox, oy, 1.0, 1.0, GDK_INTERP_BILINEAR, alpha);
-  else
-    gdk_pixbuf_copy_area (src_pixbuf, cx, cy, cwidth, cheight,
-			  dest_pixbuf, ox, oy);
+  gdk_pixbuf_composite (tmpbuf, dest_pixbuf, ox, oy,
+			cwidth, cheight,
+			ox - cx, oy - cy, 1.0, 1.0,
+			GDK_INTERP_BILINEAR, alpha);
 
+  g_object_unref (tmpbuf);
   return gdk_pixbuf_copy (dest_pixbuf);
 }
 
