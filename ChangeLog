@@ -1,5 +1,17 @@
 2000-10-06  Bradford Hovinen  <hovinen@helixcode.com>
 
+	* capplets/background-properties/property-background.c
+	(fill_monitor): Set the root pixmap to NULL when optimizing for
+ 	the no wallpaper case
+	(background_try):
+	(background_cancel):
+	(background_revert):
+	(background_ok): Write settings before applying
+
+	From Mike Engber <engber@eazel.com>:
+	(fill_monitor): Set last argument on make_background to FALSE if
+	there is no image
+
 	* capplets/mime-type/mime-type-capplet.c (help_callback): Remove
  	reference to GNOME User's Guide, replace with Control Center
  	Documentation
