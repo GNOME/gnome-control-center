@@ -36,6 +36,46 @@ typedef struct {
   
 static GSList *binding_list = NULL;
 
+char *
+screen_exec_display_string (XEvent *xevent)
+{
+  GString    *str;
+  const char *old_display;
+  char       *retval;
+  char       *p;
+
+#ifdef HAVE_GTK_MULTIHEAD
+  
+  GdkScreen  *screen = NULL;
+  
+  GdkWindow *window = gdk_xid_table_lookup (xevent->xkey.root);
+  
+  if (window)
+    screen = gdk_drawable_get_screen (GDK_DRAWABLE (window));
+       
+  g_assert (GDK_IS_SCREEN (screen));
+
+  old_display = gdk_display_get_name (gdk_screen_get_display (screen));
+
+  str = g_string_new ("DISPLAY=");
+  g_string_append (str, old_display);
+
+  p = strrchr (str->str, '.');
+  if (p && p >  strchr (str->str, ':'))
+          g_string_truncate (str, p - str->str);
+
+  g_string_append_printf (str, ".%d", gdk_screen_get_number (screen));
+
+  retval = str->str;
+
+  g_string_free (str, FALSE);
+
+  return retval;
+#else
+  return g_strdup ("DISPLAY=:0.0");
+#endif
+}
+
 static gint 
 compare_bindings (gconstpointer a, gconstpointer b)
 {
@@ -284,8 +324,33 @@ keybindings_filter (GdkXEvent *gdk_xevent,
           (state & USED_MODS) == binding->key.state)
         {
           GError* error = NULL;
+	  gboolean retval;
+	  gchar **argv = NULL;
+	  gchar **envp = NULL;
 
-          if (!g_spawn_command_line_async (binding->action, &error))
+	  g_return_val_if_fail (binding->action != NULL, GDK_FILTER_CONTINUE);
+
+	  if (!g_shell_parse_argv (binding->action,
+				   NULL, &argv,
+				   &error))
+	    return GDK_FILTER_CONTINUE;
+
+	  envp = g_new0 (gchar *, 2);
+	  envp [0] = screen_exec_display_string (xevent);
+	  envp [1] = NULL;
+	  
+	  retval = g_spawn_async (NULL,
+				  argv,
+				  envp,
+				  G_SPAWN_SEARCH_PATH,
+				  NULL,
+				  NULL,
+				  NULL,
+				  &error);
+	  g_strfreev (argv);
+	  g_strfreev (envp);
+
+          if (!retval)
 	    {
 	      GtkWidget *dialog = gtk_message_dialog_new (NULL, 0, GTK_MESSAGE_WARNING,
 							  GTK_BUTTONS_CLOSE,
@@ -307,11 +372,11 @@ keybindings_filter (GdkXEvent *gdk_xevent,
 void
 gnome_settings_keybindings_init (GConfClient *client)
 {
-	gnome_settings_daemon_register_callback (GCONF_BINDING_DIR, bindings_callback);
-	gdk_window_add_filter (gdk_get_default_root_window (),
-			       keybindings_filter,
-			       NULL);
-
+  gnome_settings_daemon_register_callback (GCONF_BINDING_DIR, bindings_callback);
+  
+  gdk_window_add_filter (gdk_get_default_root_window (),
+			 keybindings_filter,
+			 NULL);
 }
 
 void
