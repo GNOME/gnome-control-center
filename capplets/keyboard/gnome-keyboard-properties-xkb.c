@@ -135,7 +135,7 @@ add_model_to_option_menu (const XklConfigItemPtr configItem, GtkWidget * menu)
       GtkWidget *menuItem = GTK_WIDGET (existingItemNode->data);
       GtkWidget *lbl = GTK_BIN (menuItem)->child;
       const char *txt = gtk_label_get_text (GTK_LABEL (lbl));
-      if (g_strcasecmp (txt, utfModelName) > 0)
+      if (g_utf8_collate(txt, utfModelName) > 0)
 	break;
     }
   g_free (utfModelName);
