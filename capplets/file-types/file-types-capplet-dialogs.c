@@ -57,7 +57,9 @@ typedef struct {
 /* Global variables */
 static edit_dialog_details *edit_application_details = NULL;
 static edit_dialog_details *edit_component_details = NULL;
-extern GtkWidget *capplet;
+
+/* Local prototypes */
+static void show_new_application_window (void);
 
 static void
 edit_applications_dialog_destroy (GtkWidget *widget, gpointer data)
@@ -279,8 +281,9 @@ populate_default_components_box (GtkWidget *box, const char *mime_type)
 static void
 initialize_edit_applications_dialog (const char *mime_type)
 {
-	GtkWidget *main_vbox, *vbox;
+	GtkWidget *main_vbox, *vbox, *hbox;
 	GtkWidget *scroller, *label;
+	GtkWidget *button;
 	char *label_text;
 	
 	edit_application_details = g_new0 (edit_dialog_details, 1);
@@ -321,6 +324,16 @@ initialize_edit_applications_dialog (const char *mime_type)
 
 	vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
 	gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (scroller), vbox);
+
+	/* Add edit buttons */
+	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
+	gtk_box_pack_start (GTK_BOX (main_vbox), hbox, FALSE, FALSE, 0);	
+	button = gtk_button_new_with_label (_("Add Application..."));
+	gtk_signal_connect_object (GTK_OBJECT (button), "clicked", show_new_application_window, NULL);
+	
+	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+	button = gtk_button_new_with_label (_("Delete Application"));
+	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 
 	populate_default_applications_box (vbox, mime_type);
 
@@ -614,6 +627,79 @@ nautilus_mime_type_capplet_show_new_extension_window (void)
 			nautilus_mime_type_capplet_add_extension (gtk_entry_get_text 
 							         (GTK_ENTRY (mime_entry)));
 
+	        case 1:
+	                gtk_widget_destroy (dialog);
+	                break;
+	                
+	        default:
+	        	break;
+	}        
+}
+
+static void
+add_new_application (const char *name, const char *id, const char *command)
+{
+	GnomeVFSMimeApplication *app;
+	const char *mime_type;
+	
+	if ((strlen (id) <= 0) || (strlen (command) <= 0)) {
+		return;
+	}
+
+	mime_type = nautilus_mime_type_capplet_get_selected_item_mime_type ();
+	g_assert (mime_type);
+
+	app = g_new0 (GnomeVFSMimeApplication, 1);
+
+	app->id = g_strdup (id);
+	app->name = g_strdup (name);
+	app->command = g_strdup (command);
+	app->can_open_multiple_files = FALSE;
+	app->can_open_uris = FALSE;
+	app->requires_terminal = FALSE;
+
+
+	gnome_vfs_mime_application_free (app);
+}
+
+static void
+show_new_application_window (void)
+{
+        GtkWidget *app_entry, *command_entry;
+	GtkWidget *hbox;
+	GtkWidget *dialog;
+	GtkWidget *label;
+	
+        dialog = gnome_dialog_new (_("Add New Application"), GNOME_STOCK_BUTTON_OK, GNOME_STOCK_BUTTON_CANCEL, NULL);	
+
+	label = gtk_label_new (_("Application Name:"));
+	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
+	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
+	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+	app_entry = gtk_entry_new ();
+        gtk_box_pack_start (GTK_BOX (hbox), app_entry, TRUE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), hbox, FALSE, FALSE, 0);	
+
+	label = gtk_label_new (_("Application Command:"));
+	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
+	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
+	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+	command_entry = gtk_entry_new ();
+        gtk_box_pack_start (GTK_BOX (hbox), command_entry, TRUE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), hbox, FALSE, FALSE, 0);	
+
+        gtk_widget_show_all (GNOME_DIALOG (dialog)->vbox);
+
+	/* Set focus to text entry widget */
+	gtk_window_set_focus (GTK_WINDOW (dialog), app_entry);
+
+        switch (gnome_dialog_run (GNOME_DIALOG (dialog))) {
+	        case 0:
+			add_new_application (gtk_entry_get_text (GTK_ENTRY (app_entry)),
+					     gtk_entry_get_text (GTK_ENTRY (app_entry)),
+					     gtk_entry_get_text (GTK_ENTRY (command_entry)));
+	        	
+	        
 	        case 1:
 	                gtk_widget_destroy (dialog);
 	                break;
