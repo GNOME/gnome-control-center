@@ -81,6 +81,16 @@ AC_SUBST(LIBBONOBO_IDL_DIR)
 BONOBO_ACTIVATION_IDL_DIR="`$PKG_CONFIG --variable=idldir bonobo-activation-2.0`"
 AC_SUBST(BONOBO_ACTIVATION_IDL_DIR)
 
+# esd
+ESDSERVERDIR=`$PKG_CONFIG --variable=esd_serverdir esound`
+if test x"$ESDSERVERDIR" = x; then
+   ESD_SERVER="esd"
+else
+   ESD_SERVER="$ESDSERVERDIR/esd"
+fi
+AC_SUBST(ESD_SERVER)
+
+
 dnl ==============================================
 dnl Special GConf section 
 dnl ==============================================

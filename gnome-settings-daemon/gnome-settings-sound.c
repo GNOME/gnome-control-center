@@ -50,7 +50,7 @@ static void
 start_esd (void) 
 {
         int esdpid;
-        static const char *esd_cmdline[] = {"esd", "-nobeeps", NULL};
+        static const char *esd_cmdline[] = {ESD_SERVER, "-nobeeps", NULL};
         char *tmpargv[3];
         char argbuf[32];
         time_t starttime;
