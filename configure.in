@@ -126,6 +126,7 @@ PKG_CHECK_MODULES(RMHELPER, gnomeui gnomecanvaspixbuf)
 PKG_CHECK_MODULES(ARCHIVER, bonobo bonobo_conf >= 0.12 xml)
 PKG_CHECK_MODULES(CONFIG_ARCHIVER, bonobo gnome xml)
 PKG_CHECK_MODULES(MONIKER, bonobo bonobo_conf >= 0.12 xml)
+PKG_CHECK_MODULES(GNOME, gnome)
 
 AC_PATH_PROG(XSCREENSAVER, xscreensaver, no)
 if test "$XSCREENSAVER" = no ; then
@@ -269,5 +270,6 @@ capplets/screensaver/Makefile
 capplets/screensaver/screensavers/Makefile
 capplets/screensaver/screensavers/magic.pl
 capplets/sound/Makefile
+libsounds/Makefile
 idl/Makefile
 intl/Makefile])
