@@ -157,7 +157,7 @@ bell_guard (GtkWidget *toggle,
 	gtk_widget_set_sensitive (WID ("bell_custom_fileentry"), GTK_TOGGLE_BUTTON (toggle)->active);
 }
 
-gboolean
+static gboolean
 mnemonic_activate (GtkWidget *toggle,
 		   gboolean   group_cycling,
 		   GtkWidget *entry)
@@ -191,37 +191,37 @@ setup_dialog (GladeXML       *dialog,
 	g_free (filename);
 
 	peditor = gconf_peditor_new_boolean
-		(NULL, "/desktop/gnome/peripherals/keyboard/repeat", WID ("repeat_toggle"), NULL);
+		(changeset, "/desktop/gnome/peripherals/keyboard/repeat", WID ("repeat_toggle"), NULL);
 	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("repeat_table"));
 
 	gconf_peditor_new_select_menu
-		(NULL, "/gnome/desktop/peripherals/keyboard/delay", WID ("repeat_delay_omenu"),
+		(changeset, "/gnome/desktop/peripherals/keyboard/delay", WID ("repeat_delay_omenu"),
 		 "conv-to-widget-cb", delay_to_widget,
 		 "conv-from-widget-cb", delay_from_widget,
 		 NULL);
 
 	gconf_peditor_new_select_menu
-		(NULL, "/gnome/desktop/peripherals/keyboard/rate", WID ("repeat_speed_omenu"),
+		(changeset, "/gnome/desktop/peripherals/keyboard/rate", WID ("repeat_speed_omenu"),
 		 "conv-to-widget-cb", rate_to_widget,
 		 "conv-from-widget-cb", rate_from_widget,
 		 NULL);
 
 	peditor = gconf_peditor_new_boolean
-		(NULL, "/desktop/gnome/interface/cursor_blink", WID ("cursor_toggle"), NULL);
+		(changeset, "/desktop/gnome/interface/cursor_blink", WID ("cursor_toggle"), NULL);
 	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("cursor_hbox"));
 	gconf_peditor_new_numeric_range
-		(NULL, "/desktop/gnome/interface/cursor_blink_time", WID ("cursor_blink_time_scale"), NULL);
+		(changeset, "/desktop/gnome/interface/cursor_blink_time", WID ("cursor_blink_time_scale"), NULL);
 
 
 	peditor = gconf_peditor_new_boolean
-		(NULL, "/desktop/gnome/peripherals/keyboard/click", WID ("volume_toggle"), NULL);
+		(changeset, "/desktop/gnome/peripherals/keyboard/click", WID ("volume_toggle"), NULL);
 	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("volume_hbox"));
 	gconf_peditor_new_numeric_range
-		(NULL, "/desktop/gnome/peripherals/keyboard/clickvolume", WID ("volume_scale"), NULL);
+		(changeset, "/desktop/gnome/peripherals/keyboard/clickvolume", WID ("volume_scale"), NULL);
 	
 	g_signal_connect (G_OBJECT (WID ("bell_custom_radio")), "toggled", (GCallback) bell_guard, dialog);
 	peditor = gconf_peditor_new_select_radio
-		(NULL, "/desktop/gnome/peripherals/keyboard/bell_mode",
+		(changeset, "/desktop/gnome/peripherals/keyboard/bell_mode",
 		 gtk_radio_button_get_group (GTK_RADIO_BUTTON (WID ("bell_disabled_radio"))),
 		 "conv-to-widget-cb", bell_to_widget,
 		 "conv-from-widget-cb", bell_from_widget,
@@ -254,9 +254,7 @@ int
 main (int argc, char **argv) 
 {
 	GConfClient    *client;
-	GConfChangeSet *changeset;
 	GladeXML       *dialog;
-	GtkWidget      *dialog_win;
 
 	static gboolean apply_only;
 	static gboolean get_legacy;
@@ -286,14 +284,11 @@ main (int argc, char **argv)
 	if (get_legacy) {
 		get_legacy_settings ();
 	} else {
-		changeset = gconf_change_set_new ();
 		dialog = create_dialog ();
-		setup_dialog (dialog, changeset);
+		setup_dialog (dialog, NULL);
 
 		gtk_widget_show_all (WID ("keyboard_dialog"));
 		gtk_main ();
-
-		gconf_change_set_unref (changeset);
 	}
 
 	return 0;

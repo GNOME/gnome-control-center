@@ -32,21 +32,10 @@
 
 #include "gnome-settings-keyboard.h"
 #include "gnome-settings-daemon.h"
-#include "gnome-settings-locate-pointer.h"
-#include <gdk/gdkkeysyms.h>
-#include <X11/keysym.h>
 
 #ifdef HAVE_X11_EXTENSIONS_XF86MISC_H
 #  include <X11/extensions/xf86misc.h>
 #endif
-
-#undef HAVE_XKB
-#ifdef HAVE_XKB
-#  include <X11/XKBlib.h>
-#endif
-
-static gboolean use_xkb = FALSE;
-static gint xkb_event_type = 0;
 
 static void
 apply_settings (void)
@@ -83,7 +72,6 @@ apply_settings (void)
 		{
 			kbdsettings.type = 0;
                         kbdsettings.rate = rate;
-			g_message ("Setting rate to %d", kbdsettings.rate);
                         kbdsettings.delay = delay;
 			kbdsettings.servnumlock = False;
                         XF86MiscSetKbdSettings (GDK_DISPLAY (), &kbdsettings);
@@ -105,106 +93,10 @@ apply_settings (void)
 }
 
 
-#if 0
-//def HAVE_XKB
-/* XKB support
- */
-static GdkFilterReturn
-gnome_settings_keyboard_xkb_filter (GdkXEvent *xevent,
-				    GdkEvent  *event,
-				    gpointer   data)
-{
-	if (((XEvent *) xevent)->type == xkb_event_type) {
-	      XkbEvent *xkb_event = (XkbEvent *)xevent;
-	      if (xkb_event->any.xkb_type == XkbStateNotify) {
-		      /* gnome_settings_locate_pointer (); */
-	      }
-	}
-	return GDK_FILTER_CONTINUE;
-}
-#endif
-
-#define KEYBOARD_GROUP_SHIFT 13
-#define KEYBOARD_GROUP_MASK ((1 << 13) | (1 << 14))
-/* Owen magic */
-static GdkFilterReturn
-filter (GdkXEvent *xevent,
-	GdkEvent  *event,
-	gpointer   data)
-{
-	XEvent *xev = (XEvent *) xevent;
-	guint keyval;
-		gint group;
-
-	if (xev->type == KeyPress ||
-	    xev->type == KeyRelease) {
-
-		/* get the keysym */
-		group = (xev->xkey.state & KEYBOARD_GROUP_MASK) >> KEYBOARD_GROUP_SHIFT;
-		gdk_keymap_translate_keyboard_state (gdk_keymap_get_default (),
-						     xev->xkey.keycode,
-						     xev->xkey.state,
-						     group,
-						     &keyval,
-						     NULL, NULL, NULL);
-		if (keyval == GDK_Control_L) {
-			if (xev->type == KeyPress) {
-				XAllowEvents (gdk_x11_get_default_xdisplay (),
-					      SyncKeyboard,
-					      xev->xkey.time);
-			} else {
-				XAllowEvents (gdk_x11_get_default_xdisplay (),
-					      AsyncKeyboard,
-					      xev->xkey.time);
-				gnome_settings_locate_pointer ();
-			}
-		} else {
-			XAllowEvents (gdk_x11_get_default_xdisplay (),
-				      ReplayKeyboard,
-				      xev->xkey.time);
-			XUngrabKeyboard (gdk_x11_get_default_xdisplay (),
-					 xev->xkey.time);
-		}
-
-		return GDK_FILTER_REMOVE;
-	}
-	return GDK_FILTER_CONTINUE;
-
-}
-
-static void
-gnome_settings_keyboard_init_xkb (void)
-{
-	GdkKeymapKey *keys;
-	int n_keys;
-		
-	if (gdk_keymap_get_entries_for_keyval (gdk_keymap_get_default (),
-					       GDK_Control_L,
-					       &keys,
-					       &n_keys)) {
-		gint i;
-
-		for (i = 0; i < n_keys; i++) {
-			XGrabKey (gdk_x11_get_default_xdisplay (),
-				  keys[i].keycode,
-				  AnyModifier,
-				  GDK_ROOT_WINDOW (),
-				  False,
-				  GrabModeAsync,
-				  GrabModeSync);
-		}
-		g_free (keys);
-		gdk_window_add_filter (gdk_get_default_root_window (), filter, NULL);
-	}
-}
-
-
-
 void
 gnome_settings_keyboard_init (GConfClient *client)
 {
 	gnome_settings_daemon_register_callback ("/desktop/gnome/peripherals/keyboard", (KeyCallbackFunc) apply_settings);
-	gnome_settings_keyboard_init_xkb ();
 }
 
 void
@@ -213,25 +105,3 @@ gnome_settings_keyboard_load (GConfClient *client)
 	apply_settings ();
 }
 
-
-#if 0
-	//def HAVE_XKB
-	gint xkb_major = XkbMajorVersion;
-	gint xkb_minor = XkbMinorVersion;
-	g_print ("foo1\n");
-	if (XkbLibraryVersion (&xkb_major, &xkb_minor)) {
-		xkb_major = XkbMajorVersion;
-		xkb_minor = XkbMinorVersion;
-		g_print ("foo2\n");
-
-		if (XkbQueryExtension (gdk_display, NULL, &xkb_event_type, NULL,
-				       &xkb_major, &xkb_minor)) {
-			g_print ("foo3\n");
-			XkbSelectEvents (gdk_display,
-					 XkbUseCoreKbd,
-					 XkbMapNotifyMask | XkbStateNotifyMask,
-					 XkbMapNotifyMask | XkbStateNotifyMask);
-			gdk_window_add_filter (NULL, gnome_settings_keyboard_xkb_filter, NULL);
-		}
-	}
-#endif

@@ -141,7 +141,6 @@ xsettings_callback (GConfEntry *entry)
   TranslationEntry *trans;
   trans = find_translation_entry (entry->key);
 
-  g_print ("daemon: notified on %s\n", entry->key);
   if (trans == NULL)
     return;
 

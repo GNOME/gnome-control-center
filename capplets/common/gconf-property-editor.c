@@ -679,7 +679,8 @@ peditor_select_radio_value_changed (GConfClient         *client,
 		value_wid = peditor->p->conv_to_widget_cb (value);
 		group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (peditor->p->ui_control));
 		group = g_slist_nth (group, gconf_value_get_int (value_wid));
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (group->data), TRUE);
+		if (group && group->data)
+			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (group->data), TRUE);
 		gconf_value_free (value_wid);
 	}
 }
