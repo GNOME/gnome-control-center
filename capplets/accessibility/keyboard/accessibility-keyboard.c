@@ -86,9 +86,9 @@ static struct {
 	  "/desktop/gnome/peripherals/keyboard/delay" },
 	{ "repeatkeys_rate_slide",	"repeatkeys_rate_spin",      90,   10,  210,   10,
 	  "/desktop/gnome/peripherals/keyboard/rate" },
-	{ "bouncekeys_delay_slide",	"bouncekeys_delay_spin",     300,   0,  900,   10,
+	{ "bouncekeys_delay_slide",	"bouncekeys_delay_spin",       0,   0,  900,   10,
 	  CONFIG_ROOT "/bouncekeys_delay" },
-	{ "slowkeys_delay_slide",	"slowkeys_delay_spin",	     300,   0,  500,   10,
+	{ "slowkeys_delay_slide",	"slowkeys_delay_spin",	       0,   0,  500,   10,
 	  CONFIG_ROOT "/slowkeys_delay" },
 	  /* WARNING anything larger than approx 512 seems to loose all keyboard input */
 	{ "mousekeys_max_speed_slide",	"mousekeys_max_speed_spin",  300,  10, 500,   10,
