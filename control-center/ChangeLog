@@ -1,3 +1,10 @@
+2002-01-09  Jean Schurger <jschurger@schurger.org>
+
+	* capplet-dir.c (capplet_new): Check for entry->icon[0] != 0
+		if (Icon =) in the desktop file.
+		if entry->icon is a DIR
+		If entry->icon[0] still NULL.
+
 2002-01-03  Richard Hestilow  <hestilow@ximian.com>
 
 	* capplet-dir.c (capplet_new): Check for ditem::icon != NULL

@@ -99,34 +99,44 @@ capplet_new (CappletDir *dir, gchar *desktop_path)
 	entry->label = g_strdup (gnome_desktop_item_get_string (dentry,
 			GNOME_DESKTOP_ITEM_NAME));
 	entry->icon = g_strdup (gnome_desktop_item_get_string (dentry, GNOME_DESKTOP_ITEM_ICON));
-	if (entry->icon && entry->icon[0] != '/')
-	{
-		gchar *old = entry->icon;
-		entry->icon = g_concat_dir_and_file (PIXMAPS_DIR, old);
-		g_free (old);
+
+	if (entry->icon[0] == 0) {
+		g_free(entry->icon);
+		entry->icon = NULL;
 	}
-	if (!g_file_exists (entry->icon))
-	{
-		const gchar *icon;
-		g_free (entry->icon);
-		icon = gnome_desktop_item_get_string (dentry, GNOME_DESKTOP_ITEM_ICON);
-		if (icon)
-			entry->icon = gnome_pixmap_file (icon);
-
-		if (!entry->icon)
-			entry->icon = gnome_pixmap_file ("gnome-unknown.png");
-	}
-	entry->path = g_strdup (gnome_desktop_item_get_location (dentry));
-
-	entry->exec = vec;
-	entry->dir = dir;
-
-	if (entry->icon == NULL)
+	
+	if (entry->icon) {
+		if (entry->icon[0] != '/')
+		{
+			gchar *old = entry->icon;
+			entry->icon = g_concat_dir_and_file (PIXMAPS_DIR, old);
+			g_free (old);
+		}
+		if (!g_file_exists (entry->icon) || g_file_test(entry->icon, G_FILE_TEST_IS_DIR))
+		{
+			const gchar *icon;
+			g_free (entry->icon);
+			icon = gnome_desktop_item_get_string (dentry, GNOME_DESKTOP_ITEM_ICON);
+			if (icon)
+				entry->icon = gnome_pixmap_file (icon);
+	
+			if (!entry->icon)
+				entry->icon = gnome_pixmap_file ("gnome-unknown.png");
+		}
+	} else {
 		entry->icon = gnome_program_locate_file
 			(gnome_program_get (), GNOME_FILE_DOMAIN_APP_PIXMAP,
 			 "control-center.png", TRUE, NULL);
+	}
+
+	if (!entry->icon) { /* if entry->icon still NULL */
+		entry->icon = gnome_pixmap_file ("gnome-unknown.png");
+	}
 
 	entry->pb = gdk_pixbuf_new_from_file (entry->icon, NULL);
+	entry->path = g_strdup (gnome_desktop_item_get_location (dentry));
+	entry->exec = vec;
+	entry->dir = dir;
 
 	g_hash_table_insert (capplet_hash, g_strdup (desktop_path), entry);
 
