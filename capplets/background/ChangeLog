@@ -1,3 +1,11 @@
+2001-09-17  Bradford Hovinen  <hovinen@ximian.com>
+
+	* background-properties-capplet.c (setup_dialog): Create a new
+	applier for every dialog
+	(create_dialog): Create applier locally, just for this one widget
+	(apply_settings): Create applier locally and destroy on exit
+	(main): Remove call to gnome_window_set_...
+
 2001-09-14  Bradford Hovinen  <hovinen@ximian.com>
 
 	* background-properties-capplet.c (property_change_cb): Use
@@ -6,6 +14,7 @@
 	(get_legacy_settings): Set the wallpaper_enabled flag based on the
 	value of wallpaper_filename; use (none) as the default for
 	wallpaper_filename
+	(setup_dialog): Removed unused variable
 
 	* applier.c (applier_render_color_p): Renamed from
 	applier_render_gradient_p; check both solid color and gradient

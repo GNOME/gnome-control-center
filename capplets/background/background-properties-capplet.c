@@ -39,8 +39,6 @@ bonobo_config_set_filename (Bonobo_ConfigDatabase db,
 			    const char *value,
 			    CORBA_Environment *opt_ev);
 
-static Applier *applier = NULL;
-
 /* Popt option for compat reasons */
 static gchar *background_image = NULL;
 
@@ -53,12 +51,13 @@ const struct poptOption options [] = {
 static void
 apply_settings (Bonobo_ConfigDatabase db)
 {
-	GtkObject *prefs;
-	CORBA_Environment ev;
+	GtkObject         *prefs;
+	Applier           *applier;
+	CORBA_Environment  ev;
 	
 	CORBA_exception_init (&ev);
-	if (applier == NULL)
-		applier = APPLIER (applier_new ());
+
+	applier = APPLIER (applier_new ());
 
 	/* Hackity hackty */
 	if (background_image != NULL) {
@@ -74,6 +73,8 @@ apply_settings (Bonobo_ConfigDatabase db)
 		applier_apply_prefs (applier, PREFERENCES (prefs), TRUE, FALSE);
 		gtk_object_destroy (GTK_OBJECT (prefs));
 	}
+
+	gtk_object_destroy (GTK_OBJECT (applier));
 
 	CORBA_exception_free (&ev);
 }
@@ -203,6 +204,7 @@ property_change_cb (BonoboListener     *listener,
 		    Preferences        *prefs)
 {
 	GladeXML *dialog;
+	Applier  *applier;
 	
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));
@@ -213,6 +215,7 @@ property_change_cb (BonoboListener     *listener,
 	dialog = gtk_object_get_data (GTK_OBJECT (prefs), "glade-data");
 
 	preferences_apply_event (prefs, event_name, any);
+	applier = gtk_object_get_data (GTK_OBJECT (WID ("prefs_widget")), "applier");
 	applier_apply_prefs (applier, prefs, FALSE, TRUE);
 
 	if (!strcmp (event_name, "Bonobo/Property:change:wallpaper_type")
@@ -226,6 +229,7 @@ static gboolean
 real_realize_cb (Preferences *prefs) 
 {
 	GladeXML *dialog;
+	Applier  *applier;
 
 	g_return_val_if_fail (prefs != NULL, TRUE);
 	g_return_val_if_fail (IS_PREFERENCES (prefs), TRUE);
@@ -234,6 +238,7 @@ real_realize_cb (Preferences *prefs)
 		return FALSE;
 
 	dialog = gtk_object_get_data (GTK_OBJECT (prefs), "glade-data");
+	applier = gtk_object_get_data (GTK_OBJECT (WID ("prefs_widget")), "applier");
 
 	applier_apply_prefs (applier, prefs, FALSE, TRUE);
 
@@ -268,8 +273,7 @@ setup_dialog (GtkWidget *widget, Bonobo_PropertyBag bag)
 	GladeXML          *dialog;
 	Applier           *applier;
 	GtkObject         *prefs;
-	Bonobo_Property    prop;
-	
+
 	CORBA_Environment  ev;
 
 	CORBA_exception_init (&ev);
@@ -321,7 +325,8 @@ create_dialog (void)
 {
 	GtkWidget *holder;
 	GtkWidget *widget;
-	GladeXML *dialog;
+	GladeXML  *dialog;
+	Applier   *applier;
 
 	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/background-properties.glade", "prefs_widget");
 	widget = glade_xml_get_widget (dialog, "prefs_widget");
@@ -329,21 +334,14 @@ create_dialog (void)
 
 	applier = APPLIER (applier_new ());
 	gtk_object_set_data (GTK_OBJECT (widget), "applier", applier);
+	gtk_signal_connect_object (GTK_OBJECT (widget), "destroy", GTK_SIGNAL_FUNC (gtk_object_destroy), GTK_OBJECT (applier));
 
 	/* Minor GUI addition */
 	holder = WID ("preview_holder");
-	gtk_box_pack_start (GTK_BOX (holder),
-			    applier_get_preview_widget (applier),
-			    TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (holder), applier_get_preview_widget (applier), TRUE, TRUE, 0);
 	gtk_widget_show_all (holder);
 
-#if 0
-	gnome_entry_append_history (GNOME_ENTRY (gnome_file_entry_gnome_entry (GNOME_FILE_ENTRY (WID ("image_fileentry")))), 0, "(none)");
-#endif
-
-	gtk_signal_connect_object (GTK_OBJECT (widget), "destroy",
-				   GTK_SIGNAL_FUNC (gtk_object_destroy),
-			   	   GTK_OBJECT (dialog));
+	gtk_signal_connect_object (GTK_OBJECT (widget), "destroy", GTK_SIGNAL_FUNC (gtk_object_destroy), GTK_OBJECT (dialog));
 
 	return widget;
 }
@@ -358,7 +356,5 @@ main (int argc, char **argv)
 
 	capplet_init (argc, argv, legacy_files, apply_settings, create_dialog, setup_dialog, get_legacy_settings);
 
-	gnome_window_icon_set_default_from_file
-		(GNOMECC_ICONS_DIR"/gnome-ccbackground.png");
 	return 0;
 }
