@@ -202,8 +202,8 @@ setup_font_sample (GtkWidget   *darea,
 	const char *string1 = "abcfgop AO ";
 	const char *string2 = "abcfgop";
 
-	XftColor black = { 0, {      0,      0,       0, 0xffff } };
-	XftColor white = { 0, { 0xffff, 0xffff,  0xffff, 0xffff } };
+	XftColor black, white;
+	XRenderColor rendcolor;
 
 	Display *xdisplay = gdk_x11_get_default_xdisplay ();
 
@@ -265,6 +265,17 @@ setup_font_sample (GtkWidget   *darea,
 
 	draw = XftDrawCreate (xdisplay, GDK_DRAWABLE_XID (pixmap), xvisual, xcolormap);
 
+	rendcolor.red = 0;
+	rendcolor.green = 0;
+	rendcolor.blue = 0;
+	rendcolor.alpha = 0xffff;
+	XftColorAllocValue (xdisplay, xvisual, xcolormap, &rendcolor, &black);
+	
+	rendcolor.red = 0xffff;
+	rendcolor.green = 0xffff;
+	rendcolor.blue = 0xffff;
+	rendcolor.alpha = 0xffff;
+	XftColorAllocValue (xdisplay, xvisual, xcolormap, &rendcolor, &white);
 	XftDrawRect (draw, &white, 0, 0, width, height);
 	if (font1)
 		XftDrawStringUtf8 (draw, &black, font1,
