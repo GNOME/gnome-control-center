@@ -1,9 +1,80 @@
-We have just begun the GNOME 2 port of the control center on the HEAD
-branch of CVS. At this point, it is not guaranteed to compile or
-run. If you wish to have a working control center, use the branch
-gnome-1-4-branch by issuing the following command:
+GNOME Control Center  
+====================
+Version: 2.1.4
 
-cvs -z3 up -r gnome-1-4-branch
+GNOME Control Center for the GNOME 2.2 Beta Desktop contains the following -
 
-Please do not file bug reports pertaining to the current state of the
-HEAD branch.
+	gnome-accessibility-keyboard-properties	
+	gnome-background-properties	
+	gnome-default-applications-properties
+	gnome-file-types-properties
+	gnome-font-properties
+	gnome-keybinding-properties
+	gnome-keyboard-properties
+	gnome-mouse-properties
+	gnome-network-preferences
+	gnome-sound-properties
+	gnome-theme-manager
+	gnome-ui-properties
+	gnome-window-properties
+	gnome-control-center
+	gnome-settings-daemon 
+
+Requirements -
+
+	intltool	>= 0.21
+	gtk+		>= 2.0.0
+	gconf		>= 2.0.0
+	libgnome	>= 2.0.0
+	libgnomeui	>= 2.0.0
+	libglade	>= 2.0.0
+	libbonobo	>= 2.0.0
+	libbonoboui	>= 2.0.0
+	libgnomevfs	>= 2.0.0
+	gnome-desktop	>= 2.0.0
+	
+Installation -
+
+See the file 'INSTALL'
+
+How to report bugs -
+
+Bugs should be reported to the GNOME bug tracking system under the product
+control-center. It is available at http://bugzilla.gnome.org. 
+
+In the report please include the following information -
+
+	Operating system and version
+	For Linux, version of the C library
+	How to reproduce the bug if possible
+	If the bug was a crash, include the exact text that was printed out
+	A stacktrace where possible [see below]
+
+How to get a stack trace -
+
+If the crash is reproducible, it is possible to get a stack trace and 
+attach it to the bug report. The following steps are used to obtain a 
+stack trace -
+	
+	Run the program in gdb [the GNU debugger] or any other debugger
+		ie. gdb gnome-calculator
+	Start the program
+		ie. (gdb) run
+	Reproduce the crash and the program will exit to the gdb prompt
+	Get the back trace
+		ie. (gdb) bt
+
+Once you have the backtrace, copy and paste this either into the 
+'Comments' field or attach a file with it included.
+
+
+Patches -
+
+Patches should be submitted to bugzilla.gnome.org or emailed to one of
+the people listed in the MAINTAINERS file. If using bugzilla, attach
+the patch to a new bug report [or preferably, check to see if there is
+already a bug report that corresponds to your patch]. Bug reports 
+containing patches should include the 'PATCH' keyword.
+
+Patches should be created using the unified diff form.
+	ie. cvs diff -u file-to-be-patched.c > patch.diff
