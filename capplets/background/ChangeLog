@@ -1,3 +1,11 @@
+2004-04-24  Rodney Dawes <dobey@ximian.com>
+
+	* gnome-wp-capplet.c (bg_add_multiple_files):
+	(bg_properties_dragged_image): Check that the mime type is image/* and
+	destroy the item structure if it isn't, and ignore the file
+
+	Fixes #139534
+
 2004-04-15  Jody Goldberg <jody@gnome.org>
 
 	* Release 2.6.1
