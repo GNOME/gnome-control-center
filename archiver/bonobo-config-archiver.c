@@ -221,6 +221,11 @@ real_sync (BonoboConfigDatabase *db,
 	if (!db->writeable)
 		return;
 
+	/* FIXME: This will not work correctly in the pathlogical case that two
+	 * ConfigArchiver objects sync at almost exactly the same time.
+	 */
+
+	archiver_db->is_up_to_date = TRUE;
 	location_client_store_xml (archiver_db->location, archiver_db->backend_id, 
 				   archiver_db->doc, ConfigArchiver_STORE_MASK_PREVIOUS, ev);
 
@@ -703,6 +708,11 @@ new_rollback_cb (BonoboListener        *listener,
 		 BonoboConfigArchiver  *archiver_db)
 {
 	BonoboArg *arg;
+
+	if (archiver_db->is_up_to_date) {
+		archiver_db->is_up_to_date = FALSE;
+		return;
+	}
 
 	if (archiver_db->dir != NULL) {
 		delete_dir_data (archiver_db->dir, TRUE);

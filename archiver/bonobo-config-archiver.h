@@ -67,6 +67,7 @@ struct _BonoboConfigArchiver {
 	BonoboPropertyBag             *pb;
 
 	Bonobo_EventSource_ListenerId  listener_id;
+	gboolean                       is_up_to_date;
 };
 
 typedef struct {

@@ -4,6 +4,9 @@
 	listener id in the archiver_db structure
 	(bonobo_config_archiver_destroy): Remove the event source
 	listener; destroy the XML cache
+	(new_rollback_cb): Don't reload everything if we initiated the
+	sync ourselves
+	(real_sync): Mark that we are currently up to date
 
 2001-09-22  Bradford Hovinen  <hovinen@ximian.com>
 
