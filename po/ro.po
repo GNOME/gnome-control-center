@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 2.0\n"
-"POT-Creation-Date: 2002-03-25 00:42-0500\n"
+"POT-Creation-Date: 2002-03-28 09:22-0500\n"
 "PO-Revision-Date: 2002-02-04 01:24+0200\n"
 "Last-Translator: Marius Andreiana <mandreiana@yahoo.com>\n"
 "Language-Team: Romanian <ro@li.org>\n"
@@ -14,17 +14,17 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:229
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:259
 #, fuzzy
 msgid "_Enable keyboard accesibility"
 msgstr "Activează clic tastatură"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:302
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:326
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr ""
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:414
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:438
 #, fuzzy
 msgid "Select CDE AccessX file"
 msgstr "Selectează fişierul de sunet"
@@ -133,6 +133,7 @@ msgid "_Disable if unused for "
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:20
+#: capplets/sound/sound-properties.glade.h:3
 #, fuzzy
 msgid "_General"
 msgstr "General"
@@ -251,10 +252,10 @@ msgstr ""
 
 #: capplets/background/background-properties-capplet.c:515
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:622
-#: capplets/keyboard/gnome-keyboard-properties.c:331
+#: capplets/default-applications/gnome-default-applications-properties.c:592
+#: capplets/keyboard/gnome-keyboard-properties.c:348
 #: capplets/mouse/gnome-mouse-properties.c:691
-#: capplets/sound/sound-properties-capplet.c:140
+#: capplets/sound/sound-properties-capplet.c:148
 msgid "Retrieve and store legacy settings"
 msgstr "Primeşte şi stochează setările legacy"
 
@@ -417,7 +418,7 @@ msgstr ""
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:1307
+#: capplets/common/gconf-property-editor.c:1312
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -426,7 +427,7 @@ msgid ""
 "picture."
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:1315
+#: capplets/common/gconf-property-editor.c:1320
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -435,7 +436,7 @@ msgid ""
 "Please select a different picture instead."
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:1399
+#: capplets/common/gconf-property-editor.c:1404
 msgid "Please select an image."
 msgstr ""
 
@@ -443,8 +444,8 @@ msgstr ""
 msgid ""
 "Unable to start the settings manager 'gnome2-settings-daemon'.\n"
 "Without the GNOME settings manager running, some preferences may not take "
-"effect. This couldindicate a problem with Bonobo, or a non-GNOME (e.g. KDE) "
-"settings manager may alreadybe active and conflicting with the GNOME "
+"effect. This could indicate a problem with Bonobo, or a non-GNOME (e.g. KDE) "
+"settings manager may already be active and conflicting with the GNOME "
 "settings manager."
 msgstr ""
 
@@ -599,7 +600,6 @@ msgid "_Window Manager"
 msgstr "Manager de ferestre"
 
 #: capplets/desktop-links/Accessibility.directory.in.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.c:311
 msgid "Accessibility"
 msgstr ""
 
@@ -1127,37 +1127,18 @@ msgid "Select which font to use"
 msgstr "Selectaţi care temă să fie folosită"
 
 #: capplets/font/font-properties.glade.h:1
-msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr ""
+#, fuzzy
+msgid "Font properties"
+msgstr "Proprietăţi maus"
 
 #: capplets/font/font-properties.glade.h:2
-#, fuzzy
-msgid "Desktop Font"
-msgstr "Desktop"
-
-#: capplets/font/font-properties.glade.h:3
-msgid "File Manager Font"
+msgid "Font settings only apply to new programs."
 msgstr ""
 
-#: capplets/font/font-properties.glade.h:4
+#: capplets/font/font-properties.glade.h:3
 #, fuzzy
-msgid "Font Preferences"
-msgstr "Interferenţă"
-
-#: capplets/font/font-properties.glade.h:5
-#, fuzzy
-msgid "Pick a Font"
-msgstr "Alegeţi o culoare"
-
-#: capplets/font/font-properties.glade.h:6
-#, fuzzy
-msgid "Select the desktop font"
-msgstr "Selectaţi o temă pentru instalare"
-
-#: capplets/font/font-properties.glade.h:7
-#, fuzzy
-msgid "Set to Default"
-msgstr "Reîntoarce-te la setările implicite ale sistemului"
+msgid "Use a custom font."
+msgstr "Utilizează un font specific"
 
 #: capplets/keybindings/eggcellrendererkeys.c:152
 #: capplets/keybindings/eggcellrendererkeys.c:153
@@ -1172,8 +1153,8 @@ msgid "Accelerator key"
 msgstr "Accelerare"
 
 #: capplets/keybindings/eggcellrendererkeys.c:199
-#: capplets/keybindings/gnome-keybinding-properties.c:54
-#: libbackground/applier.c:469
+#: capplets/keybindings/gnome-keybinding-properties.c:88
+#: libbackground/applier.c:466
 msgid "Disabled"
 msgstr "Dezactivat"
 
@@ -1186,23 +1167,23 @@ msgstr ""
 msgid "Type a new accelerator"
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:250
+#: capplets/keybindings/gnome-keybinding-properties.c:284
 #, fuzzy
 msgid "<Unknown Action>"
 msgstr "Necunoscut"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:411
+#: capplets/keybindings/gnome-keybinding-properties.c:443
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:465
+#: capplets/keybindings/gnome-keybinding-properties.c:506
 #, fuzzy
 msgid "_Action"
 msgstr "Atracţie"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:477
+#: capplets/keybindings/gnome-keybinding-properties.c:518
 #, fuzzy
 msgid "_Shortcut"
 msgstr "Scurtături"
@@ -1213,6 +1194,7 @@ msgid "Desktop Shortcuts:"
 msgstr "Scurtături"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:2
+#: capplets/keybindings/keybinding.desktop.in.h:2
 #, fuzzy
 msgid "Keyboard Shortcuts"
 msgstr "Proprietăţi tastatură"
@@ -1228,18 +1210,18 @@ msgid ""
 msgstr ""
 
 #: capplets/keybindings/keybinding.desktop.in.h:1
-msgid "Keybinding"
+msgid "Associate keyboard shortcuts with panel actions"
 msgstr ""
 
-#: capplets/keybindings/keybinding.desktop.in.h:2
+#: capplets/keyboard/gnome-keyboard-properties.c:328
 #, fuzzy
-msgid "Keybinding Properties"
-msgstr "Proprietăţi tastatură"
+msgid "_Accessibility"
+msgstr "Testează setări"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:327
-#: capplets/keyboard/gnome-keyboard-properties.c:329
-#: capplets/sound/sound-properties-capplet.c:136
-#: capplets/sound/sound-properties-capplet.c:138
+#: capplets/keyboard/gnome-keyboard-properties.c:344
+#: capplets/keyboard/gnome-keyboard-properties.c:346
+#: capplets/sound/sound-properties-capplet.c:144
+#: capplets/sound/sound-properties-capplet.c:146
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
@@ -1571,37 +1553,28 @@ msgstr "Limită"
 msgid "Mouse"
 msgstr "Maus"
 
-#: capplets/screensaver/screensaver.desktop.in.h:1
-msgid "Configure the settings of the screensaver"
-msgstr "Configuraţi setările protectorului de ecran"
-
-#: capplets/screensaver/screensaver.desktop.in.h:2
-msgid "Screensaver"
-msgstr "Screensaver"
-
 #: capplets/sound/sound.desktop.in.h:1
 msgid "Configure GNOME's use of sound"
 msgstr "Configuraţi folosirea sunetelor în GNOME"
 
-#: capplets/sound/sound-properties-capplet.c:170
+#: capplets/sound/sound-properties-capplet.c:178
 #, fuzzy
-msgid "Sound properties"
-msgstr "Proprietăţi maus"
+msgid "Sound preferences"
+msgstr "Interferenţă"
 
 #: capplets/sound/sound-properties.glade.h:1
-msgid "Enable sound server startup"
+#, fuzzy
+msgid "E_nable sound server startup"
 msgstr "Activează serverul de sunet la pornire"
 
 #: capplets/sound/sound-properties.glade.h:2
-msgid "General"
-msgstr "General"
-
-#: capplets/sound/sound-properties.glade.h:3
-msgid "Sound Events"
+#, fuzzy
+msgid "Sound _Events"
 msgstr "Evenimente de sunet"
 
 #: capplets/sound/sound-properties.glade.h:4
-msgid "Sounds for events"
+#, fuzzy
+msgid "_Sounds for events"
 msgstr "Sunete pentru evenimente"
 
 #. just 8 short names that will serve as samples for titles in demo
@@ -1883,22 +1856,22 @@ msgstr "Helix"
 msgid "Use shell even if nautilus is running."
 msgstr ""
 
-#: gnome-settings-daemon/factory.c:30
+#: gnome-settings-daemon/factory.c:25
 msgid "Could not initialize Bonobo"
 msgstr ""
 
-#: libbackground/applier.c:235
+#: libbackground/applier.c:230
 #, fuzzy
 msgid "Type"
 msgstr "Tip Mime:"
 
-#: libbackground/applier.c:236
+#: libbackground/applier.c:231
 msgid ""
 "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
 "for preview"
 msgstr ""
 
-#: libbackground/applier.c:401
+#: libbackground/applier.c:398
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "Nu s-a putut încărca imaginea \"%s\"; dezactivez fundalul."
@@ -1941,6 +1914,35 @@ msgstr "Redă"
 #: libsounds/sound-view.c:244
 msgid "Select sound file"
 msgstr "Selectează fişierul de sunet"
+
+#, fuzzy
+#~ msgid "Desktop Font"
+#~ msgstr "Desktop"
+
+#, fuzzy
+#~ msgid "Pick a Font"
+#~ msgstr "Alegeţi o culoare"
+
+#, fuzzy
+#~ msgid "Select the desktop font"
+#~ msgstr "Selectaţi o temă pentru instalare"
+
+#, fuzzy
+#~ msgid "Set to Default"
+#~ msgstr "Reîntoarce-te la setările implicite ale sistemului"
+
+#, fuzzy
+#~ msgid "Keybinding Properties"
+#~ msgstr "Proprietăţi tastatură"
+
+#~ msgid "Configure the settings of the screensaver"
+#~ msgstr "Configuraţi setările protectorului de ecran"
+
+#~ msgid "Screensaver"
+#~ msgstr "Screensaver"
+
+#~ msgid "General"
+#~ msgstr "General"
 
 #~ msgid "(None)"
 #~ msgstr "(Nimic)"
@@ -3146,9 +3148,6 @@ msgstr "Selectează fişierul de sunet"
 
 #~ msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
 #~ msgstr "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-iso8859-2"
-
-#~ msgid "Use custom font."
-#~ msgstr "Utilizează un font specific"
 
 #~ msgid "Home directory doesn't exist!\n"
 #~ msgstr "Directorul acasă nu există!\n"

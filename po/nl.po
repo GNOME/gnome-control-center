@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center CVS\n"
-"POT-Creation-Date: 2002-03-25 00:42-0500\n"
+"POT-Creation-Date: 2002-03-28 09:22-0500\n"
 "PO-Revision-Date: 2002-03-07 10:29+0100\n"
 "Last-Translator: Huib Kleinhout <huib@stack.nl>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -17,16 +17,16 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:229
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:259
 msgid "_Enable keyboard accesibility"
 msgstr ""
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:302
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:326
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr ""
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:414
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:438
 #, fuzzy
 msgid "Select CDE AccessX file"
 msgstr "Selecteer geluidsbestand"
@@ -137,6 +137,7 @@ msgid "_Disable if unused for "
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:20
+#: capplets/sound/sound-properties.glade.h:3
 #, fuzzy
 msgid "_General"
 msgstr "Algemeen"
@@ -247,10 +248,10 @@ msgstr ""
 
 #: capplets/background/background-properties-capplet.c:515
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:622
-#: capplets/keyboard/gnome-keyboard-properties.c:331
+#: capplets/default-applications/gnome-default-applications-properties.c:592
+#: capplets/keyboard/gnome-keyboard-properties.c:348
 #: capplets/mouse/gnome-mouse-properties.c:691
-#: capplets/sound/sound-properties-capplet.c:140
+#: capplets/sound/sound-properties-capplet.c:148
 msgid "Retrieve and store legacy settings"
 msgstr "Ga terug naar de standaard instellingen"
 
@@ -420,7 +421,7 @@ msgstr ""
 "Callback die wordt gestuurd wanneer gegevens moeten worden omgezet naar "
 "GConf vanuit de widget"
 
-#: capplets/common/gconf-property-editor.c:1307
+#: capplets/common/gconf-property-editor.c:1312
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -429,7 +430,7 @@ msgid ""
 "picture."
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:1315
+#: capplets/common/gconf-property-editor.c:1320
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -438,7 +439,7 @@ msgid ""
 "Please select a different picture instead."
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:1399
+#: capplets/common/gconf-property-editor.c:1404
 msgid "Please select an image."
 msgstr ""
 
@@ -446,8 +447,8 @@ msgstr ""
 msgid ""
 "Unable to start the settings manager 'gnome2-settings-daemon'.\n"
 "Without the GNOME settings manager running, some preferences may not take "
-"effect. This couldindicate a problem with Bonobo, or a non-GNOME (e.g. KDE) "
-"settings manager may alreadybe active and conflicting with the GNOME "
+"effect. This could indicate a problem with Bonobo, or a non-GNOME (e.g. KDE) "
+"settings manager may already be active and conflicting with the GNOME "
 "settings manager."
 msgstr ""
 
@@ -581,7 +582,6 @@ msgid "_Window Manager"
 msgstr "_Window Manager"
 
 #: capplets/desktop-links/Accessibility.directory.in.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.c:311
 msgid "Accessibility"
 msgstr ""
 
@@ -1072,37 +1072,17 @@ msgid "Select which font to use"
 msgstr "Kies het lettertype dat gebruikt dient te worden"
 
 #: capplets/font/font-properties.glade.h:1
-msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr ""
+#, fuzzy
+msgid "Font properties"
+msgstr "Geluid Instellingen"
 
 #: capplets/font/font-properties.glade.h:2
-msgid "Desktop Font"
+msgid "Font settings only apply to new programs."
 msgstr ""
 
 #: capplets/font/font-properties.glade.h:3
-#, fuzzy
-msgid "File Manager Font"
-msgstr "File Transfer Protocol"
-
-#: capplets/font/font-properties.glade.h:4
-#, fuzzy
-msgid "Font Preferences"
-msgstr "Lettertype eigenschappen"
-
-#: capplets/font/font-properties.glade.h:5
-#, fuzzy
-msgid "Pick a Font"
-msgstr "Kies een kleur"
-
-#: capplets/font/font-properties.glade.h:6
-#, fuzzy
-msgid "Select the desktop font"
-msgstr "Selecteer een te installeren thema"
-
-#: capplets/font/font-properties.glade.h:7
-#, fuzzy
-msgid "Set to Default"
-msgstr "Gebruik categorie standaarden"
+msgid "Use a custom font."
+msgstr "Gebruik een aangepast lettertype"
 
 #: capplets/keybindings/eggcellrendererkeys.c:152
 #: capplets/keybindings/eggcellrendererkeys.c:153
@@ -1116,8 +1096,8 @@ msgid "Accelerator key"
 msgstr "Ver_snelling:"
 
 #: capplets/keybindings/eggcellrendererkeys.c:199
-#: capplets/keybindings/gnome-keybinding-properties.c:54
-#: libbackground/applier.c:469
+#: capplets/keybindings/gnome-keybinding-properties.c:88
+#: libbackground/applier.c:466
 msgid "Disabled"
 msgstr "Uitgeschakeld"
 
@@ -1130,22 +1110,22 @@ msgstr ""
 msgid "Type a new accelerator"
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:250
+#: capplets/keybindings/gnome-keybinding-properties.c:284
 msgid "<Unknown Action>"
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:411
+#: capplets/keybindings/gnome-keybinding-properties.c:443
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:465
+#: capplets/keybindings/gnome-keybinding-properties.c:506
 #, fuzzy
 msgid "_Action"
 msgstr "Acties"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:477
+#: capplets/keybindings/gnome-keybinding-properties.c:518
 #, fuzzy
 msgid "_Shortcut"
 msgstr "Snelkoppelingen"
@@ -1156,6 +1136,7 @@ msgid "Desktop Shortcuts:"
 msgstr "Snelkoppelingen"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:2
+#: capplets/keybindings/keybinding.desktop.in.h:2
 #, fuzzy
 msgid "Keyboard Shortcuts"
 msgstr "Toetsenbord Instellingen"
@@ -1171,18 +1152,18 @@ msgid ""
 msgstr ""
 
 #: capplets/keybindings/keybinding.desktop.in.h:1
-msgid "Keybinding"
+msgid "Associate keyboard shortcuts with panel actions"
 msgstr ""
 
-#: capplets/keybindings/keybinding.desktop.in.h:2
+#: capplets/keyboard/gnome-keyboard-properties.c:328
 #, fuzzy
-msgid "Keybinding Properties"
-msgstr "Toetsenbord Instellingen"
+msgid "_Accessibility"
+msgstr "Geavanceerde Instellingen"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:327
-#: capplets/keyboard/gnome-keyboard-properties.c:329
-#: capplets/sound/sound-properties-capplet.c:136
-#: capplets/sound/sound-properties-capplet.c:138
+#: capplets/keyboard/gnome-keyboard-properties.c:344
+#: capplets/keyboard/gnome-keyboard-properties.c:346
+#: capplets/sound/sound-properties-capplet.c:144
+#: capplets/sound/sound-properties-capplet.c:146
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
@@ -1531,36 +1512,28 @@ msgstr "_Drempelwaarde:"
 msgid "Mouse"
 msgstr "Muis"
 
-#: capplets/screensaver/screensaver.desktop.in.h:1
-msgid "Configure the settings of the screensaver"
-msgstr "Configureer de instellingen van de schermbeveiliging"
-
-#: capplets/screensaver/screensaver.desktop.in.h:2
-msgid "Screensaver"
-msgstr "Schermbeveiliging"
-
 #: capplets/sound/sound.desktop.in.h:1
 msgid "Configure GNOME's use of sound"
 msgstr "Configureer het gebruik van geluid in GNOME"
 
-#: capplets/sound/sound-properties-capplet.c:170
-msgid "Sound properties"
-msgstr "Geluid Instellingen"
+#: capplets/sound/sound-properties-capplet.c:178
+#, fuzzy
+msgid "Sound preferences"
+msgstr "Lettertype eigenschappen"
 
 #: capplets/sound/sound-properties.glade.h:1
-msgid "Enable sound server startup"
+#, fuzzy
+msgid "E_nable sound server startup"
 msgstr "Geluid server inschakelen"
 
 #: capplets/sound/sound-properties.glade.h:2
-msgid "General"
-msgstr "Algemeen"
-
-#: capplets/sound/sound-properties.glade.h:3
-msgid "Sound Events"
+#, fuzzy
+msgid "Sound _Events"
 msgstr "Geluid Gebeurtenissen"
 
 #: capplets/sound/sound-properties.glade.h:4
-msgid "Sounds for events"
+#, fuzzy
+msgid "_Sounds for events"
 msgstr "Geluiden bij gebeurtenissen"
 
 #. just 8 short names that will serve as samples for titles in demo
@@ -1819,15 +1792,15 @@ msgstr ""
 msgid "Use shell even if nautilus is running."
 msgstr "Gebruik 'shell' zelfs wanneer nautilus werkt."
 
-#: gnome-settings-daemon/factory.c:30
+#: gnome-settings-daemon/factory.c:25
 msgid "Could not initialize Bonobo"
 msgstr ""
 
-#: libbackground/applier.c:235
+#: libbackground/applier.c:230
 msgid "Type"
 msgstr "Type"
 
-#: libbackground/applier.c:236
+#: libbackground/applier.c:231
 msgid ""
 "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
 "for preview"
@@ -1835,7 +1808,7 @@ msgstr ""
 "Type bg_applier: BG_APPLIER_ROOT voor root venster of BG_APPLIER_PREVIEW "
 "voor een voorbeeld"
 
-#: libbackground/applier.c:401
+#: libbackground/applier.c:398
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "Kon pixbuf \"%s\" niet laden; achtergrond uitgeschakeld."
@@ -1879,6 +1852,35 @@ msgstr "Afspelen"
 msgid "Select sound file"
 msgstr "Selecteer geluidsbestand"
 
+#, fuzzy
+#~ msgid "File Manager Font"
+#~ msgstr "File Transfer Protocol"
+
+#, fuzzy
+#~ msgid "Pick a Font"
+#~ msgstr "Kies een kleur"
+
+#, fuzzy
+#~ msgid "Select the desktop font"
+#~ msgstr "Selecteer een te installeren thema"
+
+#, fuzzy
+#~ msgid "Set to Default"
+#~ msgstr "Gebruik categorie standaarden"
+
+#, fuzzy
+#~ msgid "Keybinding Properties"
+#~ msgstr "Toetsenbord Instellingen"
+
+#~ msgid "Configure the settings of the screensaver"
+#~ msgstr "Configureer de instellingen van de schermbeveiliging"
+
+#~ msgid "Screensaver"
+#~ msgstr "Schermbeveiliging"
+
+#~ msgid "General"
+#~ msgstr "Algemeen"
+
 #~ msgid "Background colors"
 #~ msgstr "Achtergrond kleuren"
 
@@ -1900,9 +1902,6 @@ msgstr "Selecteer geluidsbestand"
 
 #~ msgid "Use a picture for the background"
 #~ msgstr "Gebruik een plaatje als achtergrond"
-
-#~ msgid "Use a custom font."
-#~ msgstr "Gebruik een aangepast lettertype"
 
 #~ msgid "Auto Preview"
 #~ msgstr "Automatisch Voorbeeld"

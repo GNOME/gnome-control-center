@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center\n"
-"POT-Creation-Date: 2002-03-25 00:42-0500\n"
+"POT-Creation-Date: 2002-03-28 09:22-0500\n"
 "PO-Revision-Date: 2002-03-24 13:59+0100\n"
 "Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -17,16 +17,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:229
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:259
 msgid "_Enable keyboard accesibility"
 msgstr "_Dostępność klawiatury"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:302
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:326
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Nie można zaimportować ustawień AccessX z pliku \"%s\""
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:414
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:438
 msgid "Select CDE AccessX file"
 msgstr "Wybór pliku CDE AccessX"
 
@@ -135,6 +135,7 @@ msgid "_Disable if unused for "
 msgstr "U_nieaktywnienie jeśli nie używane przez "
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:20
+#: capplets/sound/sound-properties.glade.h:3
 msgid "_General"
 msgstr "_Ogólne"
 
@@ -244,10 +245,10 @@ msgstr "_Bez obrazu"
 
 #: capplets/background/background-properties-capplet.c:515
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:622
-#: capplets/keyboard/gnome-keyboard-properties.c:331
+#: capplets/default-applications/gnome-default-applications-properties.c:592
+#: capplets/keyboard/gnome-keyboard-properties.c:348
 #: capplets/mouse/gnome-mouse-properties.c:691
-#: capplets/sound/sound-properties-capplet.c:140
+#: capplets/sound/sound-properties-capplet.c:148
 msgid "Retrieve and store legacy settings"
 msgstr "Pobiera i zapisuje tradycyjne ustawienia"
 
@@ -402,7 +403,7 @@ msgstr "Funkcja zwalniająca dane obiektu edytora własności"
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr "Funkcja wywoływana przed usunięciem obiektu edytora własności"
 
-#: capplets/common/gconf-property-editor.c:1307
+#: capplets/common/gconf-property-editor.c:1312
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -414,7 +415,7 @@ msgstr ""
 "\n"
 "Upewnij się, że plik istnieje i spróbuj ponownie lub wybierz inny obraz."
 
-#: capplets/common/gconf-property-editor.c:1315
+#: capplets/common/gconf-property-editor.c:1320
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -427,16 +428,17 @@ msgstr ""
 "\n"
 "Wybierz inny plik z obrazem."
 
-#: capplets/common/gconf-property-editor.c:1399
+#: capplets/common/gconf-property-editor.c:1404
 msgid "Please select an image."
 msgstr "Wybór obrazu tła"
 
 #: capplets/common/activate-settings-daemon.c:18
+#, fuzzy
 msgid ""
 "Unable to start the settings manager 'gnome2-settings-daemon'.\n"
 "Without the GNOME settings manager running, some preferences may not take "
-"effect. This couldindicate a problem with Bonobo, or a non-GNOME (e.g. KDE) "
-"settings manager may alreadybe active and conflicting with the GNOME "
+"effect. This could indicate a problem with Bonobo, or a non-GNOME (e.g. KDE) "
+"settings manager may already be active and conflicting with the GNOME "
 "settings manager."
 msgstr ""
 "Nie można uruchomić menedżera ustawień - \"gnome2-settings-daemon\".\n"
@@ -573,7 +575,6 @@ msgid "_Window Manager"
 msgstr "_Menedżer okien"
 
 #: capplets/desktop-links/Accessibility.directory.in.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.c:311
 msgid "Accessibility"
 msgstr "Dostępność"
 
@@ -1066,32 +1067,17 @@ msgid "Select which font to use"
 msgstr "Wybór używanej czcionki"
 
 #: capplets/font/font-properties.glade.h:1
-msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr "AaĄąBbCcĆćDdEeĘęFfGgHhIiJjKkLlŁłMmNnŃńOoÓóPpQqRrSsŚśTtUuVvWwXxYyZzŹźŻż"
+#, fuzzy
+msgid "Font properties"
+msgstr "Ustawienia dźwięku"
 
 #: capplets/font/font-properties.glade.h:2
-msgid "Desktop Font"
-msgstr "Czcionka biurka"
+msgid "Font settings only apply to new programs."
+msgstr ""
 
 #: capplets/font/font-properties.glade.h:3
-msgid "File Manager Font"
-msgstr "Czcionka menedżera plików"
-
-#: capplets/font/font-properties.glade.h:4
-msgid "Font Preferences"
-msgstr "Ustawienia czcionki"
-
-#: capplets/font/font-properties.glade.h:5
-msgid "Pick a Font"
-msgstr "Wybór czcionki"
-
-#: capplets/font/font-properties.glade.h:6
-msgid "Select the desktop font"
-msgstr "Wybór czcionki biurka"
-
-#: capplets/font/font-properties.glade.h:7
-msgid "Set to Default"
-msgstr "Ustaw domyślną"
+msgid "Use a custom font."
+msgstr ""
 
 #: capplets/keybindings/eggcellrendererkeys.c:152
 #: capplets/keybindings/eggcellrendererkeys.c:153
@@ -1104,8 +1090,8 @@ msgid "Accelerator key"
 msgstr "Klawisz akceleratora"
 
 #: capplets/keybindings/eggcellrendererkeys.c:199
-#: capplets/keybindings/gnome-keybinding-properties.c:54
-#: libbackground/applier.c:469
+#: capplets/keybindings/gnome-keybinding-properties.c:88
+#: libbackground/applier.c:466
 msgid "Disabled"
 msgstr "Nieaktywny"
 
@@ -1118,11 +1104,11 @@ msgstr "Podaj nowy akcelerator lub przyciśnij Backspace, aby go wyczyścić"
 msgid "Type a new accelerator"
 msgstr "Podaj nowy akcelerator"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:250
+#: capplets/keybindings/gnome-keybinding-properties.c:284
 msgid "<Unknown Action>"
 msgstr "<Nieznana czynność>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:411
+#: capplets/keybindings/gnome-keybinding-properties.c:443
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1130,11 +1116,11 @@ msgstr ""
 "Nie można odnaleźć żadnych motywów klawiszowych. Oznacza to, że instalacja "
 "GTK+ jest niekompletna."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:465
+#: capplets/keybindings/gnome-keybinding-properties.c:506
 msgid "_Action"
 msgstr "_Czynność"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:477
+#: capplets/keybindings/gnome-keybinding-properties.c:518
 msgid "_Shortcut"
 msgstr "_Skrót"
 
@@ -1143,6 +1129,7 @@ msgid "Desktop Shortcuts:"
 msgstr "Skróty klawiszowe środowiska:"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:2
+#: capplets/keybindings/keybinding.desktop.in.h:2
 msgid "Keyboard Shortcuts"
 msgstr "Skróty klawiszowe"
 
@@ -1159,17 +1146,18 @@ msgstr ""
 "skrótów, a następnie przyciśnij wybraną kombinację klawiszy."
 
 #: capplets/keybindings/keybinding.desktop.in.h:1
-msgid "Keybinding"
-msgstr "Powiązania klawiszy"
+msgid "Associate keyboard shortcuts with panel actions"
+msgstr ""
 
-#: capplets/keybindings/keybinding.desktop.in.h:2
-msgid "Keybinding Properties"
-msgstr "Ustawienia powiązań klawiszy"
+#: capplets/keyboard/gnome-keyboard-properties.c:328
+#, fuzzy
+msgid "_Accessibility"
+msgstr "Dostępność"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:327
-#: capplets/keyboard/gnome-keyboard-properties.c:329
-#: capplets/sound/sound-properties-capplet.c:136
-#: capplets/sound/sound-properties-capplet.c:138
+#: capplets/keyboard/gnome-keyboard-properties.c:344
+#: capplets/keyboard/gnome-keyboard-properties.c:346
+#: capplets/sound/sound-properties-capplet.c:144
+#: capplets/sound/sound-properties-capplet.c:146
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
@@ -1516,36 +1504,28 @@ msgstr "Prz_esunięcie progowe:"
 msgid "Mouse"
 msgstr "Mysz"
 
-#: capplets/screensaver/screensaver.desktop.in.h:1
-msgid "Configure the settings of the screensaver"
-msgstr "Konfiguracja ustawień wygaszacza ekranu"
-
-#: capplets/screensaver/screensaver.desktop.in.h:2
-msgid "Screensaver"
-msgstr "Wygaszacz ekranu"
-
 #: capplets/sound/sound.desktop.in.h:1
 msgid "Configure GNOME's use of sound"
 msgstr "Konfiguracja wykorzystania dźwięku przez GNOME"
 
-#: capplets/sound/sound-properties-capplet.c:170
-msgid "Sound properties"
-msgstr "Ustawienia dźwięku"
+#: capplets/sound/sound-properties-capplet.c:178
+#, fuzzy
+msgid "Sound preferences"
+msgstr "Ustawienia czcionki"
 
 #: capplets/sound/sound-properties.glade.h:1
-msgid "Enable sound server startup"
+#, fuzzy
+msgid "E_nable sound server startup"
 msgstr "Uruchamianie serwera dźwięku"
 
 #: capplets/sound/sound-properties.glade.h:2
-msgid "General"
-msgstr "Ogólne"
-
-#: capplets/sound/sound-properties.glade.h:3
-msgid "Sound Events"
+#, fuzzy
+msgid "Sound _Events"
 msgstr "Dźwięki zdarzeń"
 
 #: capplets/sound/sound-properties.glade.h:4
-msgid "Sounds for events"
+#, fuzzy
+msgid "_Sounds for events"
 msgstr "Powiązanie dźwięków ze zdarzeniami"
 
 #. just 8 short names that will serve as samples for titles in demo
@@ -1801,15 +1781,15 @@ msgstr "Pomo_c"
 msgid "Use shell even if nautilus is running."
 msgstr "Wykorzystuje powłokę, nawet jeśli uruchomiony jest Nautilus."
 
-#: gnome-settings-daemon/factory.c:30
+#: gnome-settings-daemon/factory.c:25
 msgid "Could not initialize Bonobo"
 msgstr "Nie można zainicjować Bonobo"
 
-#: libbackground/applier.c:235
+#: libbackground/applier.c:230
 msgid "Type"
 msgstr "Typ"
 
-#: libbackground/applier.c:236
+#: libbackground/applier.c:231
 msgid ""
 "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
 "for preview"
@@ -1817,7 +1797,7 @@ msgstr ""
 "Typ bg_applier: BG_APPLIER_ROOT dla głównego okna serwera lub "
 "BG_APPLIER_PREVIEW dla podglądu"
 
-#: libbackground/applier.c:401
+#: libbackground/applier.c:398
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "Nie można odczytać obrazu \"%s\"; rezygnacja z tapety."
@@ -1859,3 +1839,36 @@ msgstr "Odtwórz"
 #: libsounds/sound-view.c:244
 msgid "Select sound file"
 msgstr "Wybór pliku dźwiękowego"
+
+#~ msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+#~ msgstr "AaĄąBbCcĆćDdEeĘęFfGgHhIiJjKkLlŁłMmNnŃńOoÓóPpQqRrSsŚśTtUuVvWwXxYyZzŹźŻż"
+
+#~ msgid "Desktop Font"
+#~ msgstr "Czcionka biurka"
+
+#~ msgid "File Manager Font"
+#~ msgstr "Czcionka menedżera plików"
+
+#~ msgid "Pick a Font"
+#~ msgstr "Wybór czcionki"
+
+#~ msgid "Select the desktop font"
+#~ msgstr "Wybór czcionki biurka"
+
+#~ msgid "Set to Default"
+#~ msgstr "Ustaw domyślną"
+
+#~ msgid "Keybinding"
+#~ msgstr "Powiązania klawiszy"
+
+#~ msgid "Keybinding Properties"
+#~ msgstr "Ustawienia powiązań klawiszy"
+
+#~ msgid "Configure the settings of the screensaver"
+#~ msgstr "Konfiguracja ustawień wygaszacza ekranu"
+
+#~ msgid "Screensaver"
+#~ msgstr "Wygaszacz ekranu"
+
+#~ msgid "General"
+#~ msgstr "Ogólne"

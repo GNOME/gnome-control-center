@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
-"POT-Creation-Date: 2002-03-25 00:42-0500\n"
+"POT-Creation-Date: 2002-03-28 09:22-0500\n"
 "PO-Revision-Date: 2002-03-18 00:54+0800\n"
 "Last-Translator: Khairulanuar Abd Majid <khairul@ikhlas.com>\n"
 "Language-Team: Projek Gabai <gabai-penyumbang@lists.sourceforge.org>\n"
@@ -12,16 +12,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:229
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:259
 msgid "_Enable keyboard accesibility"
 msgstr ""
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:302
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:326
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr ""
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:414
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:438
 #, fuzzy
 msgid "Select CDE AccessX file"
 msgstr "Pilih fail bunyi"
@@ -131,6 +131,7 @@ msgid "_Disable if unused for "
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:20
+#: capplets/sound/sound-properties.glade.h:3
 #, fuzzy
 msgid "_General"
 msgstr "Am"
@@ -242,10 +243,10 @@ msgstr ""
 
 #: capplets/background/background-properties-capplet.c:515
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:622
-#: capplets/keyboard/gnome-keyboard-properties.c:331
+#: capplets/default-applications/gnome-default-applications-properties.c:592
+#: capplets/keyboard/gnome-keyboard-properties.c:348
 #: capplets/mouse/gnome-mouse-properties.c:691
-#: capplets/sound/sound-properties-capplet.c:140
+#: capplets/sound/sound-properties-capplet.c:148
 msgid "Retrieve and store legacy settings"
 msgstr "Terima dan simpan tetapan warisan"
 
@@ -402,7 +403,7 @@ msgid "Callback to be issued when property editor object data is to be freed"
 msgstr ""
 "Panggilbalik yang akan diisukan apabila data property editor yang dikosongkan"
 
-#: capplets/common/gconf-property-editor.c:1307
+#: capplets/common/gconf-property-editor.c:1312
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -411,7 +412,7 @@ msgid ""
 "picture."
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:1315
+#: capplets/common/gconf-property-editor.c:1320
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -420,7 +421,7 @@ msgid ""
 "Please select a different picture instead."
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:1399
+#: capplets/common/gconf-property-editor.c:1404
 msgid "Please select an image."
 msgstr "Sila pilih satu imej."
 
@@ -428,8 +429,8 @@ msgstr "Sila pilih satu imej."
 msgid ""
 "Unable to start the settings manager 'gnome2-settings-daemon'.\n"
 "Without the GNOME settings manager running, some preferences may not take "
-"effect. This couldindicate a problem with Bonobo, or a non-GNOME (e.g. KDE) "
-"settings manager may alreadybe active and conflicting with the GNOME "
+"effect. This could indicate a problem with Bonobo, or a non-GNOME (e.g. KDE) "
+"settings manager may already be active and conflicting with the GNOME "
 "settings manager."
 msgstr ""
 
@@ -562,7 +563,6 @@ msgid "_Window Manager"
 msgstr "Pengurus Tetingkap"
 
 #: capplets/desktop-links/Accessibility.directory.in.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.c:311
 msgid "Accessibility"
 msgstr ""
 
@@ -1052,32 +1052,17 @@ msgid "Select which font to use"
 msgstr "Pilih font mana yang hendak digunakan"
 
 #: capplets/font/font-properties.glade.h:1
-msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+#, fuzzy
+msgid "Font properties"
+msgstr "Ciri-ciri Bunyi"
 
 #: capplets/font/font-properties.glade.h:2
-msgid "Desktop Font"
-msgstr "Font Desktop"
+msgid "Font settings only apply to new programs."
+msgstr ""
 
 #: capplets/font/font-properties.glade.h:3
-msgid "File Manager Font"
-msgstr "Font Pengurus Fail"
-
-#: capplets/font/font-properties.glade.h:4
-msgid "Font Preferences"
-msgstr "Keutamaan Font"
-
-#: capplets/font/font-properties.glade.h:5
-msgid "Pick a Font"
-msgstr "Pilih satu Font"
-
-#: capplets/font/font-properties.glade.h:6
-msgid "Select the desktop font"
-msgstr "Pilih font desktop"
-
-#: capplets/font/font-properties.glade.h:7
-msgid "Set to Default"
-msgstr "Tetapkan ke Default"
+msgid "Use a custom font."
+msgstr ""
 
 #: capplets/keybindings/eggcellrendererkeys.c:152
 #: capplets/keybindings/eggcellrendererkeys.c:153
@@ -1090,8 +1075,8 @@ msgid "Accelerator key"
 msgstr "Kekunci pemecut"
 
 #: capplets/keybindings/eggcellrendererkeys.c:199
-#: capplets/keybindings/gnome-keybinding-properties.c:54
-#: libbackground/applier.c:469
+#: capplets/keybindings/gnome-keybinding-properties.c:88
+#: libbackground/applier.c:466
 msgid "Disabled"
 msgstr "Dimatikan"
 
@@ -1104,11 +1089,11 @@ msgstr "Taip pemecut baru, atau tekan Backspace untuk terangkan"
 msgid "Type a new accelerator"
 msgstr "Taip pemecut baru"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:250
+#: capplets/keybindings/gnome-keybinding-properties.c:284
 msgid "<Unknown Action>"
 msgstr "<Aksi Tidak diketahui>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:411
+#: capplets/keybindings/gnome-keybinding-properties.c:443
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1116,11 +1101,11 @@ msgstr ""
 "Tak dapat menjumpai tema papankekunci. Ini bermaksud pemasangan GTK+ tidak "
 "dipasang dengan sempurna."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:465
+#: capplets/keybindings/gnome-keybinding-properties.c:506
 msgid "_Action"
 msgstr "_Aksi"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:477
+#: capplets/keybindings/gnome-keybinding-properties.c:518
 msgid "_Shortcut"
 msgstr "Pinta_san"
 
@@ -1130,6 +1115,7 @@ msgid "Desktop Shortcuts:"
 msgstr "Font Desktop"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:2
+#: capplets/keybindings/keybinding.desktop.in.h:2
 #, fuzzy
 msgid "Keyboard Shortcuts"
 msgstr "Ciri-ciri Papan Kekunci"
@@ -1145,17 +1131,18 @@ msgid ""
 msgstr ""
 
 #: capplets/keybindings/keybinding.desktop.in.h:1
-msgid "Keybinding"
-msgstr "Pengikatan Kekunci"
+msgid "Associate keyboard shortcuts with panel actions"
+msgstr ""
 
-#: capplets/keybindings/keybinding.desktop.in.h:2
-msgid "Keybinding Properties"
-msgstr "Ciri-ciri Pengikatan Kekunci"
+#: capplets/keyboard/gnome-keyboard-properties.c:328
+#, fuzzy
+msgid "_Accessibility"
+msgstr "Tetapan Lanjutan"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:327
-#: capplets/keyboard/gnome-keyboard-properties.c:329
-#: capplets/sound/sound-properties-capplet.c:136
-#: capplets/sound/sound-properties-capplet.c:138
+#: capplets/keyboard/gnome-keyboard-properties.c:344
+#: capplets/keyboard/gnome-keyboard-properties.c:346
+#: capplets/sound/sound-properties-capplet.c:144
+#: capplets/sound/sound-properties-capplet.c:146
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
@@ -1502,36 +1489,28 @@ msgstr "_Treshold:"
 msgid "Mouse"
 msgstr "Tetikus"
 
-#: capplets/screensaver/screensaver.desktop.in.h:1
-msgid "Configure the settings of the screensaver"
-msgstr "Konfigurasikan tetapan bagi screensaver"
-
-#: capplets/screensaver/screensaver.desktop.in.h:2
-msgid "Screensaver"
-msgstr "Screensaver"
-
 #: capplets/sound/sound.desktop.in.h:1
 msgid "Configure GNOME's use of sound"
 msgstr "Konfigurasi penggunaan bunyi GNOME"
 
-#: capplets/sound/sound-properties-capplet.c:170
-msgid "Sound properties"
-msgstr "Ciri-ciri Bunyi"
+#: capplets/sound/sound-properties-capplet.c:178
+#, fuzzy
+msgid "Sound preferences"
+msgstr "Keutamaan Font"
 
 #: capplets/sound/sound-properties.glade.h:1
-msgid "Enable sound server startup"
+#, fuzzy
+msgid "E_nable sound server startup"
 msgstr "Aktifkan pelayan bunyi mula"
 
 #: capplets/sound/sound-properties.glade.h:2
-msgid "General"
-msgstr "Am"
-
-#: capplets/sound/sound-properties.glade.h:3
-msgid "Sound Events"
+#, fuzzy
+msgid "Sound _Events"
 msgstr "Bunyi Peristiwa"
 
 #: capplets/sound/sound-properties.glade.h:4
-msgid "Sounds for events"
+#, fuzzy
+msgid "_Sounds for events"
 msgstr "Bunyi bagi peristiwa"
 
 #. just 8 short names that will serve as samples for titles in demo
@@ -1787,15 +1766,15 @@ msgstr "_Bantuan"
 msgid "Use shell even if nautilus is running."
 msgstr "Guna shell walaupun semasa nautilus terlaksana."
 
-#: gnome-settings-daemon/factory.c:30
+#: gnome-settings-daemon/factory.c:25
 msgid "Could not initialize Bonobo"
 msgstr "Tak dapat menginitialisasikan Bonobo"
 
-#: libbackground/applier.c:235
+#: libbackground/applier.c:230
 msgid "Type"
 msgstr "Jenis"
 
-#: libbackground/applier.c:236
+#: libbackground/applier.c:231
 msgid ""
 "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
 "for preview"
@@ -1803,7 +1782,7 @@ msgstr ""
 "Jenis bg_applier: BG_APPLIER_ROOT pada tetingkap root atau "
 "BG_APPLIER_PREVIEW untuk prebiu"
 
-#: libbackground/applier.c:401
+#: libbackground/applier.c:398
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "Tak dapat memuatkan pixbuf \"%s\"; mematikan wallpaper."
@@ -1845,6 +1824,39 @@ msgstr "Main"
 #: libsounds/sound-view.c:244
 msgid "Select sound file"
 msgstr "Pilih fail bunyi"
+
+#~ msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+#~ msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+
+#~ msgid "Desktop Font"
+#~ msgstr "Font Desktop"
+
+#~ msgid "File Manager Font"
+#~ msgstr "Font Pengurus Fail"
+
+#~ msgid "Pick a Font"
+#~ msgstr "Pilih satu Font"
+
+#~ msgid "Select the desktop font"
+#~ msgstr "Pilih font desktop"
+
+#~ msgid "Set to Default"
+#~ msgstr "Tetapkan ke Default"
+
+#~ msgid "Keybinding"
+#~ msgstr "Pengikatan Kekunci"
+
+#~ msgid "Keybinding Properties"
+#~ msgstr "Ciri-ciri Pengikatan Kekunci"
+
+#~ msgid "Configure the settings of the screensaver"
+#~ msgstr "Konfigurasikan tetapan bagi screensaver"
+
+#~ msgid "Screensaver"
+#~ msgstr "Screensaver"
+
+#~ msgid "General"
+#~ msgstr "Am"
 
 #~ msgid "<i>fast</i>"
 #~ msgstr "<i>pantas</i>"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.53\n"
-"POT-Creation-Date: 2002-03-25 00:42-0500\n"
+"POT-Creation-Date: 2002-03-28 09:22-0500\n"
 "PO-Revision-Date: 2000-05-12 00:09+0200\n"
 "Last-Translator: Ruben Lopez Gomez <ryu@mundivia.es>\n"
 "Language-Team: Galician <gpul-traduccion@ceu.fi.udc.es>\n"
@@ -13,17 +13,17 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:229
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:259
 #, fuzzy
 msgid "_Enable keyboard accesibility"
 msgstr "Clic do teclado"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:302
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:326
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr ""
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:414
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:438
 #, fuzzy
 msgid "Select CDE AccessX file"
 msgstr "Elixir ficheiro de son"
@@ -132,6 +132,7 @@ msgid "_Disable if unused for "
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:20
+#: capplets/sound/sound-properties.glade.h:3
 #, fuzzy
 msgid "_General"
 msgstr "Xeral"
@@ -248,10 +249,10 @@ msgstr ""
 
 #: capplets/background/background-properties-capplet.c:515
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:622
-#: capplets/keyboard/gnome-keyboard-properties.c:331
+#: capplets/default-applications/gnome-default-applications-properties.c:592
+#: capplets/keyboard/gnome-keyboard-properties.c:348
 #: capplets/mouse/gnome-mouse-properties.c:691
-#: capplets/sound/sound-properties-capplet.c:140
+#: capplets/sound/sound-properties-capplet.c:148
 msgid "Retrieve and store legacy settings"
 msgstr ""
 
@@ -415,7 +416,7 @@ msgstr ""
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:1307
+#: capplets/common/gconf-property-editor.c:1312
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -424,7 +425,7 @@ msgid ""
 "picture."
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:1315
+#: capplets/common/gconf-property-editor.c:1320
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -433,7 +434,7 @@ msgid ""
 "Please select a different picture instead."
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:1399
+#: capplets/common/gconf-property-editor.c:1404
 msgid "Please select an image."
 msgstr ""
 
@@ -441,8 +442,8 @@ msgstr ""
 msgid ""
 "Unable to start the settings manager 'gnome2-settings-daemon'.\n"
 "Without the GNOME settings manager running, some preferences may not take "
-"effect. This couldindicate a problem with Bonobo, or a non-GNOME (e.g. KDE) "
-"settings manager may alreadybe active and conflicting with the GNOME "
+"effect. This could indicate a problem with Bonobo, or a non-GNOME (e.g. KDE) "
+"settings manager may already be active and conflicting with the GNOME "
 "settings manager."
 msgstr ""
 
@@ -593,7 +594,6 @@ msgid "_Window Manager"
 msgstr "Editar o Xestor de Fiestras"
 
 #: capplets/desktop-links/Accessibility.directory.in.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.c:311
 msgid "Accessibility"
 msgstr ""
 
@@ -1104,35 +1104,18 @@ msgid "Select which font to use"
 msgstr ""
 
 #: capplets/font/font-properties.glade.h:1
-msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr ""
+#, fuzzy
+msgid "Font properties"
+msgstr "Propiedades do rato."
 
 #: capplets/font/font-properties.glade.h:2
-msgid "Desktop Font"
+msgid "Font settings only apply to new programs."
 msgstr ""
 
 #: capplets/font/font-properties.glade.h:3
-msgid "File Manager Font"
-msgstr ""
-
-#: capplets/font/font-properties.glade.h:4
 #, fuzzy
-msgid "Font Preferences"
-msgstr "Centro de control"
-
-#: capplets/font/font-properties.glade.h:5
-#, fuzzy
-msgid "Pick a Font"
-msgstr "Cor principal"
-
-#: capplets/font/font-properties.glade.h:6
-#, fuzzy
-msgid "Select the desktop font"
-msgstr "Elixir un tema para instalar"
-
-#: capplets/font/font-properties.glade.h:7
-msgid "Set to Default"
-msgstr ""
+msgid "Use a custom font."
+msgstr "Usar fonte habitual."
 
 #: capplets/keybindings/eggcellrendererkeys.c:152
 #: capplets/keybindings/eggcellrendererkeys.c:153
@@ -1147,8 +1130,8 @@ msgid "Accelerator key"
 msgstr "Aceleración"
 
 #: capplets/keybindings/eggcellrendererkeys.c:199
-#: capplets/keybindings/gnome-keybinding-properties.c:54
-#: libbackground/applier.c:469
+#: capplets/keybindings/gnome-keybinding-properties.c:88
+#: libbackground/applier.c:466
 msgid "Disabled"
 msgstr "Desactivado"
 
@@ -1161,23 +1144,23 @@ msgstr ""
 msgid "Type a new accelerator"
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:250
+#: capplets/keybindings/gnome-keybinding-properties.c:284
 #, fuzzy
 msgid "<Unknown Action>"
 msgstr "Descoñecido"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:411
+#: capplets/keybindings/gnome-keybinding-properties.c:443
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:465
+#: capplets/keybindings/gnome-keybinding-properties.c:506
 #, fuzzy
 msgid "_Action"
 msgstr "Aceleración"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:477
+#: capplets/keybindings/gnome-keybinding-properties.c:518
 #, fuzzy
 msgid "_Shortcut"
 msgstr "Atallos"
@@ -1188,6 +1171,7 @@ msgid "Desktop Shortcuts:"
 msgstr "Atallos"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:2
+#: capplets/keybindings/keybinding.desktop.in.h:2
 #, fuzzy
 msgid "Keyboard Shortcuts"
 msgstr "Propiedades do teclado"
@@ -1203,18 +1187,17 @@ msgid ""
 msgstr ""
 
 #: capplets/keybindings/keybinding.desktop.in.h:1
-msgid "Keybinding"
+msgid "Associate keyboard shortcuts with panel actions"
 msgstr ""
 
-#: capplets/keybindings/keybinding.desktop.in.h:2
-#, fuzzy
-msgid "Keybinding Properties"
-msgstr "Propiedades do teclado"
+#: capplets/keyboard/gnome-keyboard-properties.c:328
+msgid "_Accessibility"
+msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.c:327
-#: capplets/keyboard/gnome-keyboard-properties.c:329
-#: capplets/sound/sound-properties-capplet.c:136
-#: capplets/sound/sound-properties-capplet.c:138
+#: capplets/keyboard/gnome-keyboard-properties.c:344
+#: capplets/keyboard/gnome-keyboard-properties.c:346
+#: capplets/sound/sound-properties-capplet.c:144
+#: capplets/sound/sound-properties-capplet.c:146
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
@@ -1541,39 +1524,28 @@ msgstr "Umbral"
 msgid "Mouse"
 msgstr "Rato"
 
-#: capplets/screensaver/screensaver.desktop.in.h:1
-#, fuzzy
-msgid "Configure the settings of the screensaver"
-msgstr "Centro da pantalla"
-
-#: capplets/screensaver/screensaver.desktop.in.h:2
-#, fuzzy
-msgid "Screensaver"
-msgstr "Protector de pantalla"
-
 #: capplets/sound/sound.desktop.in.h:1
 msgid "Configure GNOME's use of sound"
 msgstr "Configurar o son de GNOME"
 
-#: capplets/sound/sound-properties-capplet.c:170
+#: capplets/sound/sound-properties-capplet.c:178
 #, fuzzy
-msgid "Sound properties"
-msgstr "Propiedades do rato."
+msgid "Sound preferences"
+msgstr "Centro de control"
 
 #: capplets/sound/sound-properties.glade.h:1
-msgid "Enable sound server startup"
+#, fuzzy
+msgid "E_nable sound server startup"
 msgstr "Activar servidor de son na inicialización"
 
 #: capplets/sound/sound-properties.glade.h:2
-msgid "General"
-msgstr "Xeral"
-
-#: capplets/sound/sound-properties.glade.h:3
-msgid "Sound Events"
+#, fuzzy
+msgid "Sound _Events"
 msgstr "Eventos de son"
 
 #: capplets/sound/sound-properties.glade.h:4
-msgid "Sounds for events"
+#, fuzzy
+msgid "_Sounds for events"
 msgstr "Sons para eventos"
 
 #. just 8 short names that will serve as samples for titles in demo
@@ -1852,22 +1824,22 @@ msgstr ""
 msgid "Use shell even if nautilus is running."
 msgstr ""
 
-#: gnome-settings-daemon/factory.c:30
+#: gnome-settings-daemon/factory.c:25
 msgid "Could not initialize Bonobo"
 msgstr ""
 
-#: libbackground/applier.c:235
+#: libbackground/applier.c:230
 #, fuzzy
 msgid "Type"
 msgstr "Tipo Mime"
 
-#: libbackground/applier.c:236
+#: libbackground/applier.c:231
 msgid ""
 "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
 "for preview"
 msgstr ""
 
-#: libbackground/applier.c:401
+#: libbackground/applier.c:398
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr ""
@@ -1910,6 +1882,29 @@ msgstr "Reproducir"
 #: libsounds/sound-view.c:244
 msgid "Select sound file"
 msgstr "Elixir ficheiro de son"
+
+#, fuzzy
+#~ msgid "Pick a Font"
+#~ msgstr "Cor principal"
+
+#, fuzzy
+#~ msgid "Select the desktop font"
+#~ msgstr "Elixir un tema para instalar"
+
+#, fuzzy
+#~ msgid "Keybinding Properties"
+#~ msgstr "Propiedades do teclado"
+
+#, fuzzy
+#~ msgid "Configure the settings of the screensaver"
+#~ msgstr "Centro da pantalla"
+
+#, fuzzy
+#~ msgid "Screensaver"
+#~ msgstr "Protector de pantalla"
+
+#~ msgid "General"
+#~ msgstr "Xeral"
 
 #~ msgid "Wallpaper Selection"
 #~ msgstr "Escoller papel tapiz"
@@ -2629,9 +2624,6 @@ msgstr "Elixir ficheiro de son"
 
 #~ msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
 #~ msgstr "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
-
-#~ msgid "Use custom font."
-#~ msgstr "Usar fonte habitual."
 
 #~ msgid "Home directory doesn't exist!\n"
 #~ msgstr "'O directorio `Home' non existe!\n"

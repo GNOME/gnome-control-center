@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.5.8\n"
-"POT-Creation-Date: 2002-03-26 09:16+0100\n"
+"POT-Creation-Date: 2002-03-28 09:22-0500\n"
 "PO-Revision-Date: 2002-03-26 09:16+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -149,6 +149,7 @@ msgid "_Disable if unused for "
 msgstr "_Deaktiver hvis ubrukt i "
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:20
+#: capplets/sound/sound-properties.glade.h:3
 msgid "_General"
 msgstr "_Generelt"
 
@@ -258,10 +259,10 @@ msgstr "I_ngen bilde"
 
 #: capplets/background/background-properties-capplet.c:515
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:622
-#: capplets/keyboard/gnome-keyboard-properties.c:345
+#: capplets/default-applications/gnome-default-applications-properties.c:592
+#: capplets/keyboard/gnome-keyboard-properties.c:348
 #: capplets/mouse/gnome-mouse-properties.c:691
-#: capplets/sound/sound-properties-capplet.c:140
+#: capplets/sound/sound-properties-capplet.c:148
 msgid "Retrieve and store legacy settings"
 msgstr "Hent og lagre gamle innstillinger"
 
@@ -423,7 +424,7 @@ msgstr ""
 "Tilbakekall som skal utstedes når objektdata for redigering av egenskaper "
 "skal frigis"
 
-#: capplets/common/gconf-property-editor.c:1307
+#: capplets/common/gconf-property-editor.c:1312
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -436,7 +437,7 @@ msgstr ""
 "Vennligst sjekk at denne eksisterer og prøv på nytt, eller velg et annet "
 "bakgrunnsbilde."
 
-#: capplets/common/gconf-property-editor.c:1315
+#: capplets/common/gconf-property-editor.c:1320
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -449,7 +450,7 @@ msgstr ""
 "\n"
 "Vennligst velg et annet bilde i stedet."
 
-#: capplets/common/gconf-property-editor.c:1399
+#: capplets/common/gconf-property-editor.c:1404
 msgid "Please select an image."
 msgstr "Vennligst velg et bilde."
 
@@ -1087,32 +1088,17 @@ msgid "Select which font to use"
 msgstr "Velg skrift som skal brukes"
 
 #: capplets/font/font-properties.glade.h:1
-msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZzÆæØøÅå"
+#, fuzzy
+msgid "Font properties"
+msgstr "Egenskaper for lyd"
 
 #: capplets/font/font-properties.glade.h:2
-msgid "Desktop Font"
-msgstr "Skrift for skrivebord"
+msgid "Font settings only apply to new programs."
+msgstr ""
 
 #: capplets/font/font-properties.glade.h:3
-msgid "File Manager Font"
-msgstr "Skrift for filhåndterer"
-
-#: capplets/font/font-properties.glade.h:4
-msgid "Font Preferences"
-msgstr "Egenskaper for skrifter"
-
-#: capplets/font/font-properties.glade.h:5
-msgid "Pick a Font"
-msgstr "Velg en skrift"
-
-#: capplets/font/font-properties.glade.h:6
-msgid "Select the desktop font"
-msgstr "Velg skrift for skrivebordet"
-
-#: capplets/font/font-properties.glade.h:7
-msgid "Set to Default"
-msgstr "Sett til forvalg"
+msgid "Use a custom font."
+msgstr "Bruk en egendefinert skrift."
 
 #: capplets/keybindings/eggcellrendererkeys.c:152
 #: capplets/keybindings/eggcellrendererkeys.c:153
@@ -1125,8 +1111,8 @@ msgid "Accelerator key"
 msgstr "Hurtigtast"
 
 #: capplets/keybindings/eggcellrendererkeys.c:199
-#: capplets/keybindings/gnome-keybinding-properties.c:54
-#: libbackground/applier.c:469
+#: capplets/keybindings/gnome-keybinding-properties.c:88
+#: libbackground/applier.c:466
 msgid "Disabled"
 msgstr "Slått av"
 
@@ -1139,11 +1125,11 @@ msgstr "Skriv inn en ny aksellerator, eller trykk slett for å tømme"
 msgid "Type a new accelerator"
 msgstr "Skriv inn en ny aksellerator"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:250
+#: capplets/keybindings/gnome-keybinding-properties.c:284
 msgid "<Unknown Action>"
 msgstr "<Ukjent handling>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:411
+#: capplets/keybindings/gnome-keybinding-properties.c:443
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1151,11 +1137,11 @@ msgstr ""
 "Kan ikke finne tastaturtema. Dette betyr at din GTK+-installasjon ikke er "
 "komplett."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:465
+#: capplets/keybindings/gnome-keybinding-properties.c:506
 msgid "_Action"
 msgstr "_Handling"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:477
+#: capplets/keybindings/gnome-keybinding-properties.c:518
 msgid "_Shortcut"
 msgstr "_Snarvei"
 
@@ -1164,6 +1150,7 @@ msgid "Desktop Shortcuts:"
 msgstr "Skrivebordsnarveier:"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:2
+#: capplets/keybindings/keybinding.desktop.in.h:2
 msgid "Keyboard Shortcuts"
 msgstr "Tastatursnarveier"
 
@@ -1180,21 +1167,17 @@ msgstr ""
 "trykker en tastekombinasjon du vil assosiere den med."
 
 #: capplets/keybindings/keybinding.desktop.in.h:1
-msgid "Keybinding"
-msgstr "Tastaturbinding"
+msgid "Associate keyboard shortcuts with panel actions"
+msgstr ""
 
-#: capplets/keybindings/keybinding.desktop.in.h:2
-msgid "Keybinding Properties"
-msgstr "Egenskaper for tastaturbinding"
-
-#: capplets/keyboard/gnome-keyboard-properties.c:325
+#: capplets/keyboard/gnome-keyboard-properties.c:328
 msgid "_Accessibility"
 msgstr "_Tilgjengelighet"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:341
-#: capplets/keyboard/gnome-keyboard-properties.c:343
-#: capplets/sound/sound-properties-capplet.c:136
-#: capplets/sound/sound-properties-capplet.c:138
+#: capplets/keyboard/gnome-keyboard-properties.c:344
+#: capplets/keyboard/gnome-keyboard-properties.c:346
+#: capplets/sound/sound-properties-capplet.c:144
+#: capplets/sound/sound-properties-capplet.c:146
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
@@ -1538,36 +1521,28 @@ msgstr "_Terskel:"
 msgid "Mouse"
 msgstr "Mus"
 
-#: capplets/screensaver/screensaver.desktop.in.h:1
-msgid "Configure the settings of the screensaver"
-msgstr "Endre innstillingene for skjermspareren"
-
-#: capplets/screensaver/screensaver.desktop.in.h:2
-msgid "Screensaver"
-msgstr "Skjermsparer"
-
 #: capplets/sound/sound.desktop.in.h:1
 msgid "Configure GNOME's use of sound"
 msgstr "Konfigurér bruk av lyd i GNOME."
 
-#: capplets/sound/sound-properties-capplet.c:170
-msgid "Sound properties"
-msgstr "Egenskaper for lyd"
+#: capplets/sound/sound-properties-capplet.c:178
+#, fuzzy
+msgid "Sound preferences"
+msgstr "Egenskaper for skrifter"
 
 #: capplets/sound/sound-properties.glade.h:1
-msgid "Enable sound server startup"
+#, fuzzy
+msgid "E_nable sound server startup"
 msgstr "Slå på oppstart av lydtjener"
 
 #: capplets/sound/sound-properties.glade.h:2
-msgid "General"
-msgstr "Generelt"
-
-#: capplets/sound/sound-properties.glade.h:3
-msgid "Sound Events"
+#, fuzzy
+msgid "Sound _Events"
 msgstr "Lydhendelser"
 
 #: capplets/sound/sound-properties.glade.h:4
-msgid "Sounds for events"
+#, fuzzy
+msgid "_Sounds for events"
 msgstr "Slå på lyd for hendelser"
 
 #. just 8 short names that will serve as samples for titles in demo
@@ -1827,11 +1802,11 @@ msgstr "Bruk skall selv om nautilus kjører."
 msgid "Could not initialize Bonobo"
 msgstr "Kunne ikke initiere Bonobo"
 
-#: libbackground/applier.c:235
+#: libbackground/applier.c:230
 msgid "Type"
 msgstr "Type"
 
-#: libbackground/applier.c:236
+#: libbackground/applier.c:231
 msgid ""
 "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
 "for preview"
@@ -1839,7 +1814,7 @@ msgstr ""
 "Type bg_applier: BG_APPLIER_ROOT for rotvinduet eller BG_APPLIER_PREVIEW for "
 "forhåndsvisning"
 
-#: libbackground/applier.c:401
+#: libbackground/applier.c:398
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "Kunne ikke laste pixbuf \"%s\"; slår av bakgrunn."
@@ -1882,6 +1857,39 @@ msgstr "Spill"
 msgid "Select sound file"
 msgstr "Velg lydfil"
 
+#~ msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+#~ msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZzÆæØøÅå"
+
+#~ msgid "Desktop Font"
+#~ msgstr "Skrift for skrivebord"
+
+#~ msgid "File Manager Font"
+#~ msgstr "Skrift for filhåndterer"
+
+#~ msgid "Pick a Font"
+#~ msgstr "Velg en skrift"
+
+#~ msgid "Select the desktop font"
+#~ msgstr "Velg skrift for skrivebordet"
+
+#~ msgid "Set to Default"
+#~ msgstr "Sett til forvalg"
+
+#~ msgid "Keybinding"
+#~ msgstr "Tastaturbinding"
+
+#~ msgid "Keybinding Properties"
+#~ msgstr "Egenskaper for tastaturbinding"
+
+#~ msgid "Configure the settings of the screensaver"
+#~ msgstr "Endre innstillingene for skjermspareren"
+
+#~ msgid "Screensaver"
+#~ msgstr "Skjermsparer"
+
+#~ msgid "General"
+#~ msgstr "Generelt"
+
 #~ msgid "Background colors"
 #~ msgstr "Bakgrunnsfarger"
 
@@ -1914,9 +1922,6 @@ msgstr "Velg lydfil"
 
 #~ msgid "Vertical Gradient"
 #~ msgstr "Vertikal gradient"
-
-#~ msgid "Use a custom font."
-#~ msgstr "Bruk en egendefinert skrift."
 
 #~ msgid "Auto Preview"
 #~ msgstr "Automatisk forhåndsvisning"
