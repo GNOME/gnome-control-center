@@ -634,7 +634,7 @@ mime_edit_dialog_get_app (GladeXML *glade, char const *mime_type,
 		/* I have no idea what semantics people want, but I'll be anal
 		 * and avoid NULL
 		 */
-		if (cmd != NULL)
+		if (cmd == NULL)
 			cmd = g_strdup ("");
 		base_cmd = g_path_get_basename  (cmd);
 		if (base_cmd == NULL);
