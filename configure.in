@@ -59,6 +59,7 @@ PKG_CHECK_MODULES(OLD_CAPPLET, libgnomeui-2.0 libglade-2.0)
 PKG_CHECK_MODULES(GNOME, libgnomeui-2.0)
 PKG_CHECK_MODULES(VFS_CAPPLET, $COMMON_MODULES gnome-vfs-module-2.0 gnome-vfs-2.0)
 PKG_CHECK_MODULES(SOUND_CAPPLET, esound)
+PKG_CHECK_MODULES(METACITY, libmetacity-private)
 
 dnl
 dnl Check for Xft version 2; we build in extra functionality to the font capplet
@@ -169,6 +170,9 @@ AC_SUBST(FONT_CAPPLET_LIBS)
 
 AC_SUBST(GNOMECC_CFLAGS)
 AC_SUBST(GNOMECC_LIBS)
+
+AC_SUBST(METACITY_CFLAGS)
+AC_SUBST(METACITY_LIBS)
 
 dnl ==============================================
 dnl End: Define the main variables

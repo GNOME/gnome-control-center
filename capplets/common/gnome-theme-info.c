@@ -37,8 +37,8 @@ GList *callbacks = NULL;
 const gchar *gtk2_suffix = "gtk-2.0";
 const gchar *key_suffix = "gtk-2.0-key";
 const gchar *metacity_suffix = "metacity-1";
-const gchar *icon_theme_file = "index.theme";
-const gchar *meta_theme_file = "index.theme";
+const gchar *icon_theme_file_id = "index.theme";
+const gchar *meta_theme_file_id = "index.theme";
 
 static GnomeThemeMetaInfo *
 read_meta_theme (const gchar *theme_name,
@@ -54,6 +54,7 @@ read_meta_theme (const gchar *theme_name,
 
   meta_theme_info = gnome_theme_meta_info_new ();
   meta_theme_info->path = g_strdup (meta_theme_file);
+  meta_theme_info->name = g_strdup (theme_name);
 
   str = gnome_desktop_item_get_string (meta_theme_ditem, GNOME_DESKTOP_ITEM_NAME);
   if (str == NULL)
@@ -138,12 +139,12 @@ update_theme_dir (const gchar *theme_dir)
   gboolean has_metacity = FALSE;
   gchar *tmp;
 
-  tmp = g_build_filename (theme_dir, meta_theme_file, NULL);
+  tmp = g_build_filename (theme_dir, meta_theme_file_id, NULL);
   if (g_file_test (tmp, G_FILE_TEST_IS_REGULAR))
     {
       GnomeThemeMetaInfo *meta_theme_info;
 
-      meta_theme_info = read_meta_theme (tmp, strrchr (theme_dir, '/'));
+      meta_theme_info = read_meta_theme (strrchr (theme_dir, '/')+1, tmp);
       if (meta_theme_info != NULL)
 	g_hash_table_insert (meta_theme_hash, meta_theme_info->name, meta_theme_info);
     }
@@ -227,7 +228,7 @@ update_icon_theme_dir (const gchar *theme_dir)
   gboolean changed = FALSE;
   gchar *tmp;
 
-  tmp = g_build_filename (theme_dir, icon_theme_file, NULL);
+  tmp = g_build_filename (theme_dir, icon_theme_file_id, NULL);
   if (g_file_test (tmp, G_FILE_TEST_IS_REGULAR))
     {
       icon_theme_info = read_icon_theme (tmp);
@@ -587,6 +588,7 @@ void
 gnome_theme_meta_info_free (GnomeThemeMetaInfo *meta_theme_info)
 {
   g_free (meta_theme_info->path);
+  g_free (meta_theme_info->readable_name);
   g_free (meta_theme_info->name);
   g_free (meta_theme_info->comment);
   g_free (meta_theme_info->application_font);

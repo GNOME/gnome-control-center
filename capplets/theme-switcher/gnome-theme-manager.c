@@ -863,15 +863,23 @@ setup_tree_view (GtkTreeView *tree_view,
 {
   GtkTreeModel *model;
   GtkTreeSelection *selection;
+  GtkCellRenderer *renderer;
+
+  renderer = g_object_new (GTK_TYPE_CELL_RENDERER_PIXBUF,
+			   "xpad", 4,
+			   "ypad", 4,
+			   NULL);
+			   
 
   gtk_tree_view_insert_column_with_attributes (tree_view,
  					       -1, NULL,
- 					       gtk_cell_renderer_pixbuf_new (),
+ 					       renderer,
  					       "pixbuf", PIXBUF_COLUMN,
  					       NULL);
+  renderer = gtk_cell_renderer_text_new ();
   gtk_tree_view_insert_column_with_attributes (tree_view,
  					       -1, NULL,
- 					       gtk_cell_renderer_text_new (),
+ 					       renderer,
  					       "markup", THEME_NAME_COLUMN,
  					       NULL);
 
