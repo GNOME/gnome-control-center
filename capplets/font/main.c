@@ -29,6 +29,11 @@ static void cb_show_details (GtkWidget *button,
 #define DESKTOP_FONT_KEY       "/apps/nautilus/preferences/desktop_font"
 #define WINDOW_TITLE_FONT_KEY  "/desktop/gnome/applications/window_manager/titlebar_font"
 
+#define METACITY_DIR "/apps/metacity/general"
+#define WINDOW_TITLE_FONT_KEY METACITY_DIR "/titlebar_font"
+#define WINDOW_TITLE_USES_SYSTEM_KEY METACITY_DIR "/titlebar_uses_system_font"
+#define MONOSPACE_FONT_KEY "/desktop/gnome/interface/monospace_font_name"
+
 #ifdef HAVE_XFT2
 #define FONT_RENDER_DIR "/desktop/gnome/font_rendering"
 #define FONT_ANTIALIASING_KEY FONT_RENDER_DIR "/antialiasing"
@@ -218,7 +223,7 @@ setup_font_sample (GtkWidget   *darea,
 	pattern = FcPatternBuild (NULL,
 				  FC_FAMILY, FcTypeString, "Serif",
 				  FC_SLANT, FcTypeInteger, FC_SLANT_ROMAN,
-				  FC_SIZE, FcTypeDouble, 20.,
+				  FC_SIZE, FcTypeDouble, 18.,
 				  NULL);
 	font1 = open_pattern (pattern, antialiasing, hinting);
 	FcPatternDestroy (pattern);
@@ -309,6 +314,8 @@ font_render_get_gconf (Antialiasing *antialiasing,
 	if (hint_str)
 		gconf_string_to_enum (hint_enums, hint_str, &val);
 	*hinting = val;
+
+	g_object_unref (client);
 }
 
 typedef struct {
@@ -371,6 +378,8 @@ font_radio_toggled (GtkToggleButton *toggle_button,
 		gconf_client_set_string (client, FONT_HINTING_KEY, 
 					 gconf_enum_to_string (hint_enums, pair->hinting),
 					 NULL);
+
+		g_object_unref (client);
 	}
 
 	/* Restore back to the previous state until we get notification
@@ -398,6 +407,25 @@ setup_font_pair (GtkWidget    *radio,
 }
 #endif /* HAVE_XFT2 */
 
+static void
+metacity_titlebar_load_sensitivity (GConfClient *client,
+				    GladeXML    *dialog)
+{
+	gtk_widget_set_sensitive (WID ("window_title_font"),
+				  !gconf_client_get_bool (client,
+							  WINDOW_TITLE_USES_SYSTEM_KEY,
+							  NULL));
+}
+
+static void
+metacity_changed (GConfClient *client,
+		  guint        cnxn_id,
+		  GConfEntry  *entry,
+		  gpointer     user_data)
+{
+	if (strcmp (entry->key, WINDOW_TITLE_USES_SYSTEM_KEY) == 0)
+		metacity_titlebar_load_sensitivity (client, user_data);
+}
 
 static void
 setup_dialog (GladeXML *dialog)
@@ -409,6 +437,7 @@ setup_dialog (GladeXML *dialog)
   client = gconf_client_get_default ();
 
   gconf_client_add_dir (client, "/desktop/gnome/interface", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+  gconf_client_add_dir (client, METACITY_DIR, GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 #ifdef HAVE_XFT2  
   gconf_client_add_dir (client, FONT_RENDER_DIR, GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 #endif  /* HAVE_XFT2 */
@@ -424,6 +453,16 @@ setup_dialog (GladeXML *dialog)
   peditor = gconf_peditor_new_font (NULL, WINDOW_TITLE_FONT_KEY,
 		  		    WID ("window_title_font"),
 				    PEDITOR_FONT_COMBINED, NULL);
+
+  peditor = gconf_peditor_new_font (NULL, MONOSPACE_FONT_KEY,
+		  		    WID ("monospace_font"),
+				    PEDITOR_FONT_COMBINED, NULL);
+
+  gconf_client_notify_add (client, METACITY_DIR,
+			   metacity_changed,
+			   dialog, NULL, NULL);
+
+  metacity_titlebar_load_sensitivity (client, dialog);
 
   widget = WID ("font_dialog");
   capplet_set_icon (widget, "font-capplet.png");
@@ -452,6 +491,8 @@ setup_dialog (GladeXML *dialog)
     G_CALLBACK (cb_dialog_response), NULL);
  
   gtk_widget_show (widget);
+
+  g_object_unref (client);
 }
 
 #ifdef HAVE_XFT2 
@@ -700,6 +741,8 @@ cb_show_details (GtkWidget *button,
 		g_signal_connect (G_OBJECT (details_dialog),
 				  "delete_event",
 				  G_CALLBACK (gtk_true), NULL);
+
+		g_object_unref (client);
 	}
 
 	gtk_window_present (GTK_WINDOW (details_dialog));
