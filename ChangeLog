@@ -1,3 +1,19 @@
+2001-03-09  Maciej Stachowiak  <mjs@eazel.com>
+
+	xml-i18n-toolized everything. Bye bye .desktop and .directory
+	files, hello .desktop.in and .directory.in files. Updated
+	Makefile.am's as needed and POTFILES.in, as well as all po files.
+
+	* *.desktop --> *.desktop.in
+	* *.directory --> *.directory.in
+	
+	* All Makefile.am: Fix to generate .directory from .directory.in
+	and .desktop from .desktop.in.
+	
+	* po/POTFILES.in: Added all the new .in files.
+
+	* po/*.po: Translations pulled from .desktop files should be added.
+	
 2001-03-08  Christophe Merlet  <redfox@eikonex.org>
 
 	* capplets/*/*.desktop: Updated and added French translations..

@@ -24,11 +24,14 @@ theme_selector_capplet_LDADD = ../../control-center/libcapplet.la \
 	$(GNOMEUI_LIBS) $(INTLLIBS) \
 	-lImlib  $(GTKXMHTML_LIBS) -lgnorba
 
-EXTRA_DIST = \
-	theme-selector.desktop
+EXTRA_DIST =					\
+	theme-selector.desktop.in		\
+	theme-selector.desktop.in
 
 sysdir = $(datadir)/control-center/Desktop
-sys_DATA = theme-selector.desktop
+sys_in_files = theme-selector.desktop.in
+sys_DATA = $(sys_in_files:.desktop.in=.desktop)
+@XML_I18N_MERGE_DESKTOP_RULE@
 
 install-data-local:
 	$(INSTALL_DATA) $(srcdir)/theme-selector.desktop $(DESTDIR)$(datadir)/gnome/apps/Settings/Desktop/theme-selector.desktop

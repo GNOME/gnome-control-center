@@ -14,11 +14,14 @@ url_properties_LDADD = ../../control-center/libcapplet.la \
 		     $(GNOMEUI_LIBS) $(INTLLIBS) -lgnorba
 
 
-EXTRA_DIST = \
-	url-properties.desktop
+EXTRA_DIST =					\
+	url-properties.desktop.in		\
+	url-properties.desktop.in
 
 sysdir = $(datadir)/control-center/Documents
-sys_DATA = url-properties.desktop
+sys_in_files = url-properties.desktop.in
+sys_DATA = $(sys_in_files:.desktop.in=.desktop)
+@XML_I18N_MERGE_DESKTOP_RULE@
 
 install-data-local:
 	$(INSTALL_DATA) $(srcdir)/url-properties.desktop $(DESTDIR)$(datadir)/gnome/apps/Settings/Documents/url-properties.desktop
