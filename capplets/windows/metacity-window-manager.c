@@ -12,6 +12,7 @@
 static GnomeWindowManagerClass *parent_class;
 
 struct _MetacityWindowManagerPrivate {
+  int padding;
 };
 
 /* this function is called when the shared lib is loaded */
