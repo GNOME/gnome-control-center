@@ -1,3 +1,21 @@
+2000-08-18  Bradford Hovinen  <hovinen@helixcode.com>
+
+	* capplets/background-properties/app-background.c (main): Call
+	do_set_xml and do_get_xml when --get or --set detected
+
+	* capplets/background-properties/property-background.c 
+	(background_read_from_xml): 
+	(background_write_to_xml): Implement. Read/write XML snapshot of
+	the system's current state
+	(get_color): Implement. Read a color represented as a string and
+	fill in a GdkColor structure
+	(do_get_xml): 
+	(do_set_xml): Implement. Do operations required for a --get and
+	--set, respectively
+
+	* capplets/background-properties/Makefile.am (INCLUDES): Add XML_CFLAGS
+	(background_properties_capplet_LDADD): Add GNOME_XML_LIB
+
 Tue Aug  8 10:11:40 2000  Bradford Hovinen  <hovinen@helixcode.com>
 
 	* capplets/keyboard-properties/keyboard-properties.c (keyboard_read):
