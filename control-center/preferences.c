@@ -32,6 +32,8 @@
 
 #include <glade/glade.h>
 
+#include <gconf/gconf.h>
+
 static GnomeCCPreferences *old_prefs;
 
 static GtkWidget *prefs_dialog;
@@ -134,27 +136,35 @@ gnomecc_preferences_copy (GnomeCCPreferences *new, GnomeCCPreferences *old)
 void 
 gnomecc_preferences_load (GnomeCCPreferences *prefs) 
 {
+	GConfEngine *engine;
+
 	g_return_if_fail (prefs != NULL);
 
-	gnome_config_push_prefix ("/control-center/appearance");
-	prefs->embed = gnome_config_get_bool ("embed=false");
-	prefs->single_window = gnome_config_get_bool ("single_window=true");
-	prefs->layout = gnome_config_get_int ("layout=1");
-	gnome_config_pop_prefix ();
+#if 0
+	engine = gconf_engine_get_default ();
+
+	prefs->embed = gconf_engine_get_bool (engine, "/apps/control-center/appearance/embed", NULL);
+	prefs->single_window = gconf_engine_get_bool (engine, "/apps/control-center/appearance/single-window", NULL);
+	prefs->layout = gconf_engine_get_int (engine, "/apps/control-center/appearance/layout", NULL);
+#endif
+
+	prefs->embed = FALSE;
+	prefs->single_window = TRUE;
+	prefs->layout = 1;
 }
 
 void 
 gnomecc_preferences_save (GnomeCCPreferences *prefs) 
 {
+	GConfEngine *engine;
+
 	g_return_if_fail (prefs != NULL);
 
-	gnome_config_push_prefix ("/control-center/appearance");
-	gnome_config_set_bool ("embed", prefs->embed);
-	gnome_config_set_bool ("single_window", prefs->single_window);
-	gnome_config_set_bool ("layout", prefs->layout);
-	gnome_config_pop_prefix ();
+	engine = gconf_engine_get_default ();
 
-	gnome_config_sync ();
+	gconf_engine_set_bool (engine, "/apps/control-center/appearance/embed", prefs->embed, NULL);
+	gconf_engine_set_bool (engine, "/apps/control-center/appearance/single-window", prefs->single_window, NULL);
+	gconf_engine_set_bool (engine, "/apps/control-center/appearance/layout", prefs->layout, NULL);
 }
 
 static void
@@ -317,7 +327,7 @@ gnomecc_preferences_get_config_dialog (GnomeCCPreferences *prefs)
 
 	glade_xml_signal_connect (prefs_dialog_data,
 				  "tree_widget_toggled_cb",
-				  tree_widget_toggled_cb);
+				  (GCallback) tree_widget_toggled_cb);
 
 	return prefs_dialog;
 }
