@@ -854,7 +854,7 @@ validate_data (MimeEditDialog *dialog)
 				GTK_WINDOW (dialog->p->dialog_win),
 				GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_ERROR,
 				GTK_BUTTONS_OK_CANCEL,
-				_("A MIME type with that name already exists, overwrite ?."));
+				_("A MIME type with that name already exists, overwrite ?"));
 		}
 	} else {
 		err_dialog = gtk_message_dialog_new (
