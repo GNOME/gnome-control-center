@@ -283,7 +283,7 @@ fill_editor_data (EditorDescription *info)
         if (info->use_name) {
                 set_combo_editor (info->name);
                 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
-                                              (gtk_object_get_data (GTK_OBJECT (capplet), "radiodefeditorm")), 
+                                              (gtk_object_get_data (GTK_OBJECT (capplet), "radiodefeditor")), 
                                               TRUE);
         } else {
                 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 

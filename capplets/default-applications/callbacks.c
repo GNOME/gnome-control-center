@@ -35,7 +35,8 @@ on_radiodefeditor_toggled              (GtkToggleButton *togglebutton,
         /* Editor Default */
         gtk_widget_set_sensitive(gtk_object_get_data (GTK_OBJECT (capplet), "editorselect"), a);
 
-        set_selected_editor (gtk_entry_get_text (gtk_object_get_data (GTK_OBJECT(capplet), "editorselect")));
+        if (a)
+		set_selected_editor (gtk_entry_get_text (gtk_object_get_data (GTK_OBJECT(capplet), "combo_editor")));
 
         ecurrent_info.use_name = a;
 
@@ -102,7 +103,8 @@ on_seldefbrowser_toggled               (GtkToggleButton *togglebutton,
         /* Browser Default */
         gtk_widget_set_sensitive(gtk_object_get_data (GTK_OBJECT (capplet), "browserselect"), a);        
 
-        set_selected_browser (gtk_entry_get_text (gtk_object_get_data (GTK_OBJECT(capplet), "browserselect")));        
+        if (a)
+        	set_selected_browser (gtk_entry_get_text (gtk_object_get_data (GTK_OBJECT(capplet), "combo_browser")));        
 
         bcurrent_info.use_name = a;
 
@@ -168,7 +170,8 @@ on_seldefview_toggled                  (GtkToggleButton *togglebutton,
         /* Help Default */
         gtk_widget_set_sensitive(gtk_object_get_data (GTK_OBJECT (capplet), "helpselect"), a);
 
-        set_selected_terminal (gtk_entry_get_text (gtk_object_get_data (GTK_OBJECT(capplet), "termselect")));
+        if (a)
+        	set_selected_terminal (gtk_entry_get_text (gtk_object_get_data (GTK_OBJECT(capplet), "combo_term")));
 
         hcurrent_info.use_name = a;
 
@@ -233,7 +236,8 @@ on_seldefterm_toggled                  (GtkToggleButton *togglebutton,
         /* Terminal Default */
         gtk_widget_set_sensitive(gtk_object_get_data (GTK_OBJECT (capplet), "termselect"), a);
         
-        set_selected_help (gtk_entry_get_text (gtk_object_get_data (GTK_OBJECT(capplet), "helpselect")));
+        if (a)
+        	set_selected_help (gtk_entry_get_text (gtk_object_get_data (GTK_OBJECT(capplet), "combo_help")));
 
         tcurrent_info.use_name = a;
 
