@@ -1482,7 +1482,6 @@ run_backend_proc (gchar *backend_id, gboolean do_get)
 			path1 = g_strconcat ("PATH=", XST_BACKEND_LOCATION, 
 					     ":", path, NULL);
 			putenv (path1);
-			g_free (path1);
 		}
 
 		args[0] = gnome_is_program_in_path (backend_id);
