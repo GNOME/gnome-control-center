@@ -314,6 +314,7 @@ icon_selected_cb (GtkButton *button, NautilusMimeIconEntry *icon_entry)
 				filename++;
 				mime_type = nautilus_mime_type_capplet_get_selected_item_mime_type ();
 				gnome_vfs_mime_set_icon (mime_type, filename);
+				nautilus_mime_type_capplet_update_mime_list_icon (mime_type);
 			}
 			g_free (path);
 		}
@@ -376,11 +377,11 @@ nautilus_mime_type_show_icon_selection (NautilusMimeIconEntry *icon_entry)
 	/* Are we part of a modal window?  If so, we need to be modal too. */
 	tl = gtk_widget_get_toplevel (GTK_WIDGET (icon_entry->frame));
 	
-	if(!p) {
-		if(fe->default_path)
+	if (!p) {
+		if (fe->default_path) {
 			p = g_strdup (fe->default_path);
-		else {
-			/*get around the g_free/free issue*/
+		} else {
+			/* get around the g_free/free issue */
 			gchar *cwd = g_get_current_dir ();
 			p = g_strdup (cwd);
 			g_free (cwd);
@@ -390,16 +391,16 @@ nautilus_mime_type_show_icon_selection (NautilusMimeIconEntry *icon_entry)
 	}
 
 	/*figure out the directory*/
-	if(!g_file_test (p, G_FILE_TEST_ISDIR)) {
+	if (!g_file_test (p, G_FILE_TEST_ISDIR)) {
 		gchar *d;
 		d = g_dirname (p);
 		g_free (p);
 		p = d;
-		if(!g_file_test (p, G_FILE_TEST_ISDIR)) {
+		if (!g_file_test (p, G_FILE_TEST_ISDIR)) {
 			g_free (p);
-			if (fe->default_path)
+			if (fe->default_path) {
 				p = g_strdup (fe->default_path);
-			else {
+			} else {
 				/*get around the g_free/free issue*/
 				gchar *cwd = g_get_current_dir ();
 				p = g_strdup (cwd);
@@ -412,18 +413,18 @@ nautilus_mime_type_show_icon_selection (NautilusMimeIconEntry *icon_entry)
 	}
 	
 
-	if(icon_entry->pick_dialog==NULL ||
-	   icon_entry->pick_dialog_dir==NULL ||
-	   strcmp(p,icon_entry->pick_dialog_dir)!=0) {
+	if (icon_entry->pick_dialog==NULL || icon_entry->pick_dialog_dir==NULL ||
+	    strcmp(p,icon_entry->pick_dialog_dir)!=0) {
 		GtkWidget * iconsel;
 		
-		if(icon_entry->pick_dialog) {
+		if (icon_entry->pick_dialog) {
 			gtk_container_remove (GTK_CONTAINER (icon_entry->fentry->parent), icon_entry->fentry);
-			gtk_widget_destroy(icon_entry->pick_dialog);
+			gtk_widget_destroy (icon_entry->pick_dialog);
 		}
 		
-		if(icon_entry->pick_dialog_dir)
+		if (icon_entry->pick_dialog_dir) {
 			g_free(icon_entry->pick_dialog_dir);
+		}
 		icon_entry->pick_dialog_dir = p;
 		icon_entry->pick_dialog = 
 			gnome_dialog_new(GNOME_FILE_ENTRY(icon_entry->fentry)->browse_dialog_title,

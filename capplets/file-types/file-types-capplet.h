@@ -30,6 +30,6 @@ void 	    nautilus_mime_type_capplet_update_application_info 	   (const char *mi
 void 	    nautilus_mime_type_capplet_update_viewer_info   	   (const char *mime_type);
 void 	    nautilus_mime_type_capplet_add_extension 		   (const char *extension);
 const char *nautilus_mime_type_capplet_get_selected_item_mime_type (void);
-
+void	    nautilus_mime_type_capplet_update_mime_list_icon 	   (const char *mime_string);
 
 #endif /* NAUTILUS_MIME_TYPE_CAPPLET_H */

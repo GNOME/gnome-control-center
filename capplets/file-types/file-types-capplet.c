@@ -1032,6 +1032,57 @@ edit_default_clicked (GtkWidget *widget, gpointer data)
 	}
 }
 
+
+void
+nautilus_mime_type_capplet_update_mime_list_icon (const char *mime_string)
+{
+	static gchar *text[0];        
+	const char *description, *description_icon_name;
+	char *description_icon_path;
+        gint row;
+	GdkPixbuf *pixbuf;
+	GdkPixmap *pixmap;
+	GdkBitmap *bitmap;
+	GtkCList *clist;
+
+	clist = GTK_CLIST (mime_list);
+	
+	pixbuf = NULL;
+	
+	row = GPOINTER_TO_INT (clist->selection->data);
+
+	/* Get description text */
+	description = gnome_vfs_mime_get_description (mime_string);	
+	if (description != NULL && strlen (description) > 0) {
+		text[0] = g_strdup (description);
+	} else {
+		text[0] = g_strdup ("");
+	}
+
+	/* Set description column icon */
+	description_icon_name = gnome_vfs_mime_get_icon (mime_string);			
+	if (description_icon_name != NULL) {
+		/* Get custom icon */
+		description_icon_path = gnome_pixmap_file (description_icon_name);
+		if (description_icon_path != NULL) {
+			pixbuf = gdk_pixbuf_new_from_file (description_icon_path);
+			g_free (description_icon_path);
+		}
+	} else {
+		/* Use default icon */
+		pixbuf = gdk_pixbuf_new_from_file ("/gnome/share/pixmaps/nautilus/i-regular-24.png");
+	}
+
+	if (pixbuf != NULL) {
+		pixbuf = capplet_gdk_pixbuf_scale_to_fit (pixbuf, 18, 18);
+		gdk_pixbuf_render_pixmap_and_mask (pixbuf, &pixmap, &bitmap, 100);
+		gtk_clist_set_pixtext (clist, row, 0, text[0], 5, pixmap, bitmap);
+		gdk_pixbuf_unref (pixbuf);
+	}
+
+	g_free (text[0]);
+}
+
 /*
  * nautilus_mime_type_capplet_update_application_info
  * 
@@ -1438,3 +1489,4 @@ capplet_gdk_pixbuf_scale_to_fit (GdkPixbuf *pixbuf, int max_width, int max_heigh
 	
 	return pixbuf;
 }
+
