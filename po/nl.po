@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-center CVS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-07-07 12:41+0200\n"
+"POT-Creation-Date: 2003-07-16 12:15+0200\n"
 "PO-Revision-Date: 2003-07-04 22:28+0100\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
@@ -352,13 +352,15 @@ msgstr "Selecteer af_beelding:"
 
 #: capplets/background/background-properties-capplet.c:567
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:834
+#: capplets/default-applications/gnome-default-applications-properties.c:851
 #: capplets/keyboard/gnome-keyboard-properties.c:222
 #: capplets/mouse/gnome-mouse-properties.c:716
-#: capplets/sound/sound-properties-capplet.c:214
+#: capplets/sound/sound-properties-capplet.c:212
 msgid "Retrieve and store legacy settings"
 msgstr "Standaardinstellingen terughalen en opslaan"
 
+#: capplets/background/background-properties-capplet.c:593
+#: capplets/background/background-properties.glade.h:2
 msgid "Background Preferences"
 msgstr "Achtergrond-voorkeuren"
 
@@ -366,6 +368,7 @@ msgstr "Achtergrond-voorkeuren"
 msgid "A preview of the background picture."
 msgstr "Een voorbeeld van de achtergrondafbeelding."
 
+#: capplets/background/background-properties.glade.h:3
 msgid "Background Preview"
 msgstr "Achtergrond-voorbeeld"
 
@@ -712,7 +715,7 @@ msgstr "Standaard web-browser"
 msgid "Default Window Manager"
 msgstr "Standaard window manager"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:15
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:17
 msgid "Delete"
 msgstr "Verwijderen"
 
@@ -887,7 +890,7 @@ msgstr "Selecteer uw gevorderdheidsniveau in Sawfish"
 
 #: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
 msgid "Miscellaneous"
-msgstr "Diversen"
+msgstr "Allerlei"
 
 #: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
 msgid "Select miscellaneous window options"
@@ -1085,7 +1088,7 @@ msgstr "Uit te voeren programma"
 
 #: capplets/file-types/file-types-properties.glade.h:15
 msgid "Run a program"
-msgstr "Een programma uitvoeren"
+msgstr "Programma uitvoeren"
 
 #: capplets/file-types/file-types-properties.glade.h:16
 msgid "Run in _Terminal"
@@ -1474,7 +1477,7 @@ msgstr "Het type sneltoets"
 
 #: capplets/keybindings/eggcellrendererkeys.c:219
 #: capplets/keybindings/gnome-keybinding-properties.c:204
-#: libbackground/applier.c:588
+#: libbackground/applier.c:588 typing-break/drwright.c:446
 msgid "Disabled"
 msgstr "Uitgeschakeld"
 
@@ -1568,8 +1571,8 @@ msgstr "_Toegankelijkheid"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:218
 #: capplets/keyboard/gnome-keyboard-properties.c:220
+#: capplets/sound/sound-properties-capplet.c:208
 #: capplets/sound/sound-properties-capplet.c:210
-#: capplets/sound/sound-properties-capplet.c:212
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
@@ -1928,7 +1931,7 @@ msgstr "Beve_iligde HTTP proxy:"
 msgid "_Username:"
 msgstr "Gebr_uikersnaam:"
 
-#: capplets/sound/sound-properties-capplet.c:241
+#: capplets/sound/sound-properties-capplet.c:239
 msgid "Sound preferences"
 msgstr "Geluidsvoorkeuren"
 
@@ -1937,12 +1940,13 @@ msgid "E_nable sound server startup"
 msgstr "S_tarten van geluidsserver inschakelen"
 
 #: capplets/sound/sound-properties.glade.h:2
-msgid "Flash _window titlebar"
-msgstr "Titelbalk van _venster laten knipperen"
+#, fuzzy
+msgid "Flash _entire screen"
+msgstr "Gehele scher_m laten knipperen"
 
 #: capplets/sound/sound-properties.glade.h:3
-msgid "Flash entire _screen"
-msgstr "Gehele scher_m laten knipperen"
+msgid "Flash _window titlebar"
+msgstr "Titelbalk van _venster laten knipperen"
 
 #: capplets/sound/sound-properties.glade.h:4
 msgid "General"
@@ -2083,7 +2087,7 @@ msgstr "_Installeren"
 
 #: capplets/theme-switcher/theme-install.glade.h:5
 msgid "_Location:"
-msgstr "_Locatie:"
+msgstr "_Lokatie:"
 
 #: capplets/theme-switcher/theme-properties.glade.h:2
 msgid "<span size=\"larger\" weight=\"bold\">Save Theme to Disk</span>"
@@ -2287,7 +2291,7 @@ msgstr "_Plakken"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:26
 msgid "_Print"
-msgstr "A_fdrukken"
+msgstr "Af_drukken"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:27
 msgid "_Quit"
@@ -2365,7 +2369,7 @@ msgstr "GNOME Configuratiecentrum: %s"
 
 #: control-center/capplet-dir-view.c:158
 msgid "Layout"
-msgstr "Opmaak"
+msgstr "Lay-out"
 
 #: control-center/capplet-dir-view.c:159
 msgid "Layout to use for this view of the capplets"
@@ -2563,11 +2567,11 @@ msgstr "Scherm waar BGApplier op moet tekenen"
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Kan geen \"hbox\" vinden, normale bestandsselectie wordt gebruikt"
 
-#: libsounds/sound-view.c:128
+#: libsounds/sound-view.c:129
 msgid "The sound file for this event does not exist."
 msgstr "Het geluidsbestand voor deze gebeurtenis bestaat niet."
 
-#: libsounds/sound-view.c:130
+#: libsounds/sound-view.c:131
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -2577,25 +2581,33 @@ msgstr ""
 "U kunt het gnome-audio pakket installeren\n"
 "voor een verzameling standaardgeluiden."
 
-#: libsounds/sound-view.c:222
+#: libsounds/sound-view.c:224
 msgid "Event"
 msgstr "Gebeurtenis"
 
-#: libsounds/sound-view.c:229
-msgid "File to play"
-msgstr "Af te spelen bestand"
+#: libsounds/sound-view.c:233
+#, fuzzy
+msgid "Sound File"
+msgstr "Geluidsbestand selecteren"
 
-#: libsounds/sound-view.c:244
-msgid "_Sounds"
+#: libsounds/sound-view.c:249
+#, fuzzy
+msgid "_Sounds:"
 msgstr "_Geluiden"
 
-#: libsounds/sound-view.c:258
+#: libsounds/sound-view.c:263
+#, fuzzy
+msgid "Sound _file:"
+msgstr "Geluidsbestand selecteren"
+
+#: libsounds/sound-view.c:267
+#, fuzzy
+msgid "Select Sound File"
+msgstr "Geluidsbestand selecteren"
+
+#: libsounds/sound-view.c:285
 msgid "_Play"
 msgstr "_Afspelen"
-
-#: libsounds/sound-view.c:264
-msgid "Select sound file"
-msgstr "Geluidsbestand selecteren"
 
 #: libwindow-settings/gnome-wm-manager.c:320
 #, c-format
@@ -2949,7 +2961,7 @@ msgstr "Pictogrammen-thema"
 
 #: vfs-methods/themus/themus-properties-view.c:217
 msgid "URI currently displayed"
-msgstr "Huidige URI"
+msgstr "Huidig weergegeven URI"
 
 #: vfs-methods/themus/themus.schemas.in.h:1
 msgid "If set to true, then installed themes will be thumbnailed."
@@ -2986,6 +2998,9 @@ msgstr "Of geïnstalleerde thema's als miniatuur weergegeven moeten worden"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Of thema's als miniatuur weergegeven moeten worden"
+
+#~ msgid "File to play"
+#~ msgstr "Af te spelen bestand"
 
 #
 #
