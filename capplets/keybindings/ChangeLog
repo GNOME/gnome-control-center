@@ -1,3 +1,9 @@
+2002-05-06  Anders Carlsson  <andersca@gnu.org>
+
+	* gnome-keybinding-properties.c (get_wm_name): It's true that
+	g_utf8_validate doesn't like '\000' in strings, but that should
+	be fixed in the programs that set the hints. (Eg Metacity).
+
 Sun May  5 22:15:18 2002  Jonathan Blandford  <jrb@gnome.org>
 
 	* gnome-keybinding-properties.c (get_wm_name): g_utf8_validate

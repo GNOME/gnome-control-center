@@ -151,7 +151,7 @@ get_wm_name (void)
       return NULL;
     }
 
-  if (!g_utf8_validate (val, nitems - 1, NULL))
+  if (!g_utf8_validate (val, nitems, NULL))
     {
       XFree (val);
       return NULL;
