@@ -734,6 +734,9 @@ dpi_load (GConfClient   *client,
 {
 	gdouble dpi = gconf_client_get_float (client, FONT_DPI_KEY, NULL);
 
+	if (dpi < 50.)
+		dpi = 50.;
+
 	in_change = TRUE;
 	gtk_spin_button_set_value (spinner, dpi);
 	in_change = FALSE;
