@@ -3,9 +3,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: control-center 2.0.0\n"
-"POT-Creation-Date: 2002-06-25 16:28+0900\n"
-"PO-Revision-Date: 2002-06-25 16:33+0900\n"
+"Project-Id-Version: control-center 1.99.10\n"
+"POT-Creation-Date: 2002-07-09 20:04+0900\n"
+"PO-Revision-Date: 2002-07-09 20:04+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: Korean <gnome-kr-translation@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -228,7 +228,7 @@ msgstr "그림 없음(_N)"
 msgid "Select _picture:"
 msgstr "그림 선택(_P):"
 
-#: capplets/background/background-properties-capplet.c:558
+#: capplets/background/background-properties-capplet.c:561
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
 #: capplets/keyboard/gnome-keyboard-properties.c:363
@@ -237,7 +237,7 @@ msgstr "그림 선택(_P):"
 msgid "Retrieve and store legacy settings"
 msgstr "물려받은 설정을 되찾아서 저장합니다"
 
-#: capplets/background/background-properties-capplet.c:584
+#: capplets/background/background-properties-capplet.c:587
 #: capplets/background/background-properties.glade.h:2
 msgid "Background Preferences"
 msgstr "배경 기본 설정"
@@ -330,7 +330,7 @@ msgstr ""
 msgid "Just apply settings and quit"
 msgstr "설정을 적용하고 마칩니다"
 
-#: capplets/common/capplet-util.c:339
+#: capplets/common/capplet-util.c:340
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "도움말을 표시하는 데 오류가 발생했습니다: %s"
@@ -864,25 +864,25 @@ msgid "Source Code"
 msgstr "소스 코드"
 
 #: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:664
+#: capplets/file-types/mime-type-info.c:673
 msgid "Audio"
 msgstr "오디오"
 
 #: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:660
+#: capplets/file-types/mime-type-info.c:669
 msgid "Images"
 msgstr "그림"
 
 #: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:662
+#: capplets/file-types/mime-type-info.c:671
 msgid "Video"
 msgstr "비디오"
 
-#: capplets/file-types/file-types-capplet.c:226
+#: capplets/file-types/file-types-capplet.c:227
 msgid "Description"
 msgstr "설명"
 
-#: capplets/file-types/file-types-capplet.c:233
+#: capplets/file-types/file-types-capplet.c:234
 msgid "Extensions"
 msgstr "확장자"
 
@@ -1021,8 +1021,8 @@ msgid "Structure containing information on the MIME category"
 msgstr "MIME 범주에 정보를 포함하는 구조"
 
 #: capplets/file-types/mime-category-edit-dialog.c:344
-#: capplets/file-types/mime-edit-dialog.c:442
-#: capplets/file-types/mime-edit-dialog.c:546
+#: capplets/file-types/mime-edit-dialog.c:465
+#: capplets/file-types/mime-edit-dialog.c:569
 #: capplets/file-types/service-edit-dialog.c:358
 #: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
@@ -1056,32 +1056,35 @@ msgstr "대화 상자가 MIME 타입을 추가하기 위한 것이면 참"
 msgid "Add file type"
 msgstr "파일 형식 추가"
 
-#: capplets/file-types/mime-edit-dialog.c:437
-#: capplets/file-types/mime-edit-dialog.c:496
+#: capplets/file-types/mime-edit-dialog.c:409
+#: capplets/file-types/mime-type-info.c:675
+msgid "Misc"
+msgstr "기타"
+
+#: capplets/file-types/mime-edit-dialog.c:460
+#: capplets/file-types/mime-edit-dialog.c:519
 msgid "None"
 msgstr "없음"
 
-#: capplets/file-types/mime-edit-dialog.c:802
+#: capplets/file-types/mime-edit-dialog.c:825
 msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
-msgstr "올바른 MIME 타입을 입력하십시오.  MIME 타입은 \"클래스/타입\"의 형태가 되어야 하고 공백이 들어가면 안 됩니다."
+msgstr ""
+"올바른 MIME 타입을 입력하십시오.  MIME 타입은 \"클래스/타입\"의 형태가 되어"
+"야 하고 공백이 들어가면 안 됩니다."
 
-#: capplets/file-types/mime-edit-dialog.c:810
+#: capplets/file-types/mime-edit-dialog.c:832
 msgid "A MIME type with that name already exists, overwrite ?."
 msgstr "그 이름의 MIME 타입이 이미 존재합니다, 덮어쓸까요 ?"
 
-#: capplets/file-types/mime-edit-dialog.c:875
+#: capplets/file-types/mime-edit-dialog.c:897
 msgid "Category"
 msgstr "범주"
 
-#: capplets/file-types/mime-edit-dialog.c:880
+#: capplets/file-types/mime-edit-dialog.c:902
 msgid "Choose a file category"
 msgstr "파일 분류 선택"
-
-#: capplets/file-types/mime-type-info.c:666
-msgid "Misc"
-msgstr "기타"
 
 #: capplets/file-types/mime-types-model.c:167
 #: capplets/file-types/mime-types-model.c:168
@@ -1180,8 +1183,8 @@ msgid "Set the font for the icons on the desktop"
 msgstr "바탕 화면 위의 아이콘에 쓰일 글꼴 설정"
 
 #: capplets/font/font-properties.glade.h:4
-msgid "Standard _application font:"
-msgstr "표준 응용프로그램 글꼴(_A):"
+msgid "_Application font:"
+msgstr "응용프로그램 글꼴(_A):"
 
 #: capplets/font/font-properties.glade.h:5
 msgid "_Desktop font:"
@@ -1229,17 +1232,17 @@ msgstr "창 관리자"
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "설정 데이터 베이스에서 새로운 단축글쇠 설정 오류: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:710
+#: capplets/keybindings/gnome-keybinding-properties.c:708
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
 msgstr "키보드 테마를 찾을 수 없습니다.  GTK+ 설치가 불완전하기 때문입니다."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:735
+#: capplets/keybindings/gnome-keybinding-properties.c:733
 msgid "Action"
 msgstr "동작"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:747
+#: capplets/keybindings/gnome-keybinding-properties.c:745
 msgid "Shortcut"
 msgstr "바로 가기"
 
