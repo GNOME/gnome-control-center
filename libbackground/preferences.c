@@ -291,6 +291,7 @@ bg_preferences_save (BGPreferences *prefs)
 
 	cs = gconf_change_set_new ();
 	gconf_change_set_set_bool (cs, DGB "enabled", prefs->enabled);
+	gconf_change_set_set_bool (cs, DGB "wallpaper-enabled", prefs->wallpaper_enabled);
 	gconf_change_set_set_int (cs, DGB "wallpaper-type", prefs->wallpaper_type);
 	gconf_change_set_set_string (cs, DGB "wallpaper-filename", prefs->wallpaper_filename);
 	
