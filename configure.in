@@ -108,7 +108,7 @@ capplet_modules="libcapplet libglade-gnome gdk_pixbuf bonobo_conf $ARCHIVER_MODU
 PKG_CHECK_MODULES(CAPPLET, $capplet_modules)
 PKG_CHECK_MODULES(BG_CAPPLET, $capplet_modules gdk_pixbuf_xlib)
 PKG_CHECK_MODULES(SCREENSAVER_CAPPLET, $capplet_modules gal)
-PKG_CHECK_MODULES(ROLLBACK_CAPPLET, $capplet_modules)
+dnl PKG_CHECK_MODULES(ROLLBACK_CAPPLET, $capplet_modules)
 PKG_CHECK_MODULES(GNOMECC, gnomeui libglade xml gdk_pixbuf gnomecanvaspixbuf bonobo bonobox gtkhtml)
 PKG_CHECK_MODULES(RMHELPER, gnomeui gnomecanvaspixbuf)
 PKG_CHECK_MODULES(ARCHIVER, bonobo bonobo_conf xml)
@@ -156,7 +156,7 @@ capplets/desktop-links/Makefile
 capplets/desktop-links/Sawfish/Makefile
 capplets/keyboard/Makefile
 capplets/mouse/Makefile
-capplets/rollback/Makefile
+dnl capplets/rollback/Makefile
 capplets/screensaver/Makefile
 capplets/screensaver/screensavers/Makefile
 capplets/sound/Makefile
