@@ -29,6 +29,7 @@
 #include <gnome-xml/parser.h>
 
 #include "archiver-client.h"
+#include "util.h"
 
 static void merge_xml_docs           (xmlDocPtr child_doc,
 				      xmlDocPtr parent_doc);
@@ -56,18 +57,22 @@ static gboolean compare_xml_nodes    (xmlNodePtr node1, xmlNodePtr node2);
 
 xmlDocPtr
 location_client_load_rollback_data (ConfigArchiver_Location  location,
-				    struct tm               *date,
+				    const struct tm         *date,
 				    guint                    steps,
-				    gchar                   *backend_id,
+				    const gchar             *backend_id,
 				    gboolean                 parent_chain,
 				    CORBA_Environment       *opt_ev)
 {
-	gchar *filename;
-	time_t time_g;
-	xmlDocPtr doc = NULL, parent_doc = NULL;
-	ConfigArchiver_ContainmentType type = ConfigArchiver_CONTAIN_FULL;
-	ConfigArchiver_Location parent = CORBA_OBJECT_NIL;
-	CORBA_Environment my_ev;
+	gchar                          *filename;
+	struct tm                      *date_c;
+	time_t                          time_g;
+
+	xmlDocPtr                       doc        = NULL;
+	xmlDocPtr                       parent_doc = NULL;
+	ConfigArchiver_ContainmentType  type       = ConfigArchiver_CONTAIN_FULL;
+	ConfigArchiver_Location         parent     = CORBA_OBJECT_NIL;
+
+	CORBA_Environment               my_ev;
 
 	g_return_val_if_fail (location != CORBA_OBJECT_NIL, NULL);
 
@@ -76,13 +81,20 @@ location_client_load_rollback_data (ConfigArchiver_Location  location,
 		CORBA_exception_init (opt_ev);
 	}
 
-	if (date != NULL)
-		time_g = mktime (date);
-	else
+	if (date != NULL) {
+		date_c = dup_date (date);
+		time_g = mktime (date_c) + date_c->tm_gmtoff;
+		if (date_c->tm_isdst) time_g -= 3600;
+		g_free (date_c);
+	} else {
 		time_g = 0;
+	}
 
 	filename = ConfigArchiver_Location_getRollbackFilename
 		(location, time_g, steps, backend_id, parent_chain, opt_ev);
+
+	if (!BONOBO_EX (opt_ev) && filename != NULL)
+		DEBUG_MSG ("Loading rollback data: %s", filename);
 
 	if (!BONOBO_EX (opt_ev) && filename != NULL)
 		doc = xmlParseFile (filename);
@@ -127,16 +139,17 @@ location_client_load_rollback_data (ConfigArchiver_Location  location,
 
 void 
 location_client_store_xml (ConfigArchiver_Location   location,
-			   gchar                    *backend_id,
+			   const gchar              *backend_id,
 			   xmlDocPtr                 xml_doc,
 			   ConfigArchiver_StoreType  store_type,
 			   CORBA_Environment        *opt_ev) 
 {
-	xmlDocPtr parent_doc, prev_doc = NULL;
-	char *filename;
-	ConfigArchiver_ContainmentType contain_type;
-	ConfigArchiver_Location parent;
-	CORBA_Environment my_ev;
+	xmlDocPtr                       parent_doc;
+	xmlDocPtr                       prev_doc = NULL;
+	char                           *filename;
+	ConfigArchiver_ContainmentType  contain_type;
+	ConfigArchiver_Location         parent;
+	CORBA_Environment               my_ev;
 
 	g_return_if_fail (location != CORBA_OBJECT_NIL);
 	g_return_if_fail (xml_doc != NULL);
@@ -191,9 +204,14 @@ location_client_store_xml (ConfigArchiver_Location   location,
 	if (parent != CORBA_OBJECT_NIL)
 		bonobo_object_release_unref (parent, NULL);
 
-	filename = ConfigArchiver_Location_getStorageFilename (location, backend_id, store_type == ConfigArchiver_STORE_DEFAULT, opt_ev);
-	xmlSaveFile (filename, xml_doc);
-	CORBA_free (filename);
+	filename = ConfigArchiver_Location_getStorageFilename
+		(location, backend_id, store_type == ConfigArchiver_STORE_DEFAULT, opt_ev);
+
+	if (!BONOBO_EX (opt_ev) && filename != NULL) {
+		xmlSaveFile (filename, xml_doc);
+		ConfigArchiver_Location_storageComplete (location, filename, opt_ev);
+		CORBA_free (filename);
+	}
 
 	if (opt_ev == &my_ev)
 		CORBA_exception_free (opt_ev);

@@ -22,6 +22,8 @@
 
 BEGIN_GNOME_DECLS
 
+#define EX_SET_NOT_FOUND(ev) bonobo_exception_set (ev, ex_Bonobo_Moniker_InterfaceNotFound)
+
 #define BONOBO_CONFIG_ARCHIVER_TYPE        (bonobo_config_archiver_get_type ())
 #define BONOBO_CONFIG_ARCHIVER(o)	   (GTK_CHECK_CAST ((o), BONOBO_CONFIG_ARCHIVER_TYPE, BonoboConfigArchiver))
 #define BONOBO_CONFIG_ARCHIVER_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), BONOBO_CONFIG_ARCHIVER_TYPE, BonoboConfigArchiverClass))
@@ -59,7 +61,7 @@ struct _BonoboConfigArchiver {
 	ConfigArchiver_Archive   archive;
 	ConfigArchiver_Location  location;
 	gchar                   *backend_id;
-	gchar                   *real_name;
+	gchar                   *moniker;
 
 	BonoboEventSource       *es;
 	BonoboPropertyBag       *pb;
@@ -76,8 +78,7 @@ bonobo_config_archiver_get_type  (void);
 Bonobo_ConfigDatabase
 bonobo_config_archiver_new (Bonobo_Moniker               parent,
 			    const Bonobo_ResolveOptions *options,
-			    const char                  *backend_id,
-			    const char                  *location_id,
+			    const char                  *moniker,
 			    CORBA_Environment           *ev);
 
 END_GNOME_DECLS

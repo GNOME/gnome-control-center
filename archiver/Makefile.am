@@ -16,7 +16,6 @@ INCLUDES = 			\
 	-DLOCATION_DIR=\""$(datadir)/control-center/archiver"\"			\
 	-DGLADE_DIR=\""$(INTERFACES_DIR)"\"							\
 	-DXST_BACKEND_LOCATION=\""$(datadir)/setup-tool-backends/scripts"\"	\
-	-DDEFAULTS_DIR=\""$(datadir)/control-center/defaults"\"			\
 	@ARCHIVER_CFLAGS@							\
 	@MONIKER_CFLAGS@
 

@@ -370,7 +370,7 @@ config_log_get_rollback_id_by_steps (ConfigLog *config_log,
 
 /* Return the backend that generated the data with the given id */
 
-gchar *
+const gchar *
 config_log_get_backend_id_for_id (ConfigLog *config_log, gint id) 
 {
 	GList *node;

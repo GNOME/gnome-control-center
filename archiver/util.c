@@ -63,6 +63,7 @@ parse_date (char *str)
 	if (!ok) return NULL;
 
 	date = g_new (struct tm, 1);
+	date->tm_isdst = 0;
 	date->tm_year = value - 1900;
 	date->tm_mon = 11;
 	date->tm_mday = 31;
@@ -92,6 +93,9 @@ parse_date (char *str)
 
 	if (extract_number (&str, &value, 2))
 		date->tm_sec = value;
+
+	date->tm_zone = "GMT";
+	date->tm_gmtoff = 0;
 
 	return date;
 }

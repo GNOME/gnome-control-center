@@ -1,3 +1,60 @@
+2001-09-07  Bradford Hovinen  <hovinen@ximian.com>
+
+	* archiver-client.c (location_client_store_xml): Make backend_id
+	const
+
+	* util.c (parse_date): Set the time zone
+	(parse_date): Initialize tm_isdst
+
+	* archiver-client.c (location_client_store_xml): Call
+	ConfigArchiver_Location_storageComplete when done
+	(location_client_store_xml): Don't try to save the XML file if
+	there was an error getting the storage filename
+
+	* location.c (location_storage_complete): Implement
+	(impl_ConfigArchiver_Location_storageComplete): Implement
+
+	* config-log.c (config_log_get_backend_id_for_id): Make return
+	value const
+
+2001-09-04  Bradford Hovinen  <hovinen@ximian.com>
+
+	* location.c (location_get_storage_filename): Notify listeners
+	that new rollback data is available
+
+	* bonobo-config-archiver.c (new_rollback_cb): Implement
+	(bonobo_config_archiver_new): Connect above to event source
+
+	* location.c (location_store): 
+	(location_init): Construct an event source and add its interface
+
+	* Makefile.am (INCLUDES): Remove -DDEFAULTS_DIR
+
+2001-09-03  Bradford Hovinen  <hovinen@ximian.com>
+
+	* bonobo-config-archiver.c (bonobo_config_archiver_new): Accept
+	complete moniker as an argument; do the parsing here
+
+	* archiver-client.c (location_client_load_rollback_data): Adjust
+	time from mktime according to time zone information
+
+	* bonobo-moniker-archiver.c (is_leap_year): 
+	(mod_date_by_str): Implement
+	(parse_name): Use correct math for computing offsets
+
+	* bonobo-config-archiver.c (bonobo_config_archiver_new): Don't
+	print an error message if the parent moniker is bad
+	(bonobo_config_archiver_new): Remove debugging messages
+
+	* archiver-client.c (location_client_load_rollback_data): Make
+	date and backend_id const
+
+	* bonobo-moniker-archiver.c (archiverdb_resolve): Determine date
+	from moniker and pass to bonobo_config_archiver_new
+
+	* bonobo-config-archiver.c (bonobo_config_archiver_new): Accept
+	date structure as argument
+
 2001-08-29  Bradford Hovinen  <hovinen@ximian.com>
 
 	* archive.c (foreach_build_list_cb): Don't unref the location if

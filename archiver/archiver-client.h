@@ -31,14 +31,14 @@
 #include "ConfigArchiver.h"
 
 xmlDocPtr location_client_load_rollback_data (ConfigArchiver_Location   location,
-					      struct tm                *date,
+					      const struct tm          *date,
 					      guint                     steps,
-					      gchar                    *backend_id,
+					      const gchar              *backend_id,
 					      gboolean                  parent_chain,
 					      CORBA_Environment        *opt_ev);
 
 void      location_client_store_xml          (ConfigArchiver_Location   location, 
-					      gchar                    *backend_id, 
+					      const gchar              *backend_id, 
 					      xmlDocPtr                 xml_doc,
 					      ConfigArchiver_StoreType  store_type,
 					      CORBA_Environment        *opt_ev);

@@ -63,18 +63,20 @@ struct _BackendNote
 
 struct _LocationPrivate 
 {
-	Archive         *archive;
-	gchar           *locid;
-	gchar           *fullpath;
-	gchar           *label;
+	Archive           *archive;
+	gchar             *locid;
+	gchar             *fullpath;
+	gchar             *label;
 
-	Location        *parent;
-	GList           *contains_list;      /* List of BackendNotes */
-	gboolean         is_new;
-	gboolean         contains_list_dirty;
-	gboolean         deleted;
+	Location          *parent;
+	GList             *contains_list;      /* List of BackendNotes */
+	gboolean           is_new;
+	gboolean           contains_list_dirty;
+	gboolean           deleted;
 
-	ConfigLog       *config_log;
+	ConfigLog         *config_log;
+
+	BonoboEventSource *es;
 };
 
 #define LOCATION_FROM_SERVANT(servant) (LOCATION (bonobo_object_from_servant (servant)))
@@ -171,6 +173,14 @@ impl_ConfigArchiver_Location_getRollbackFilename (PortableServer_Servant  servan
 	}
 
 	return ret;
+}
+
+static void
+impl_ConfigArchiver_Location_storageComplete (PortableServer_Servant  servant,
+					       const CORBA_char       *filename,
+					       CORBA_Environment      *ev) 
+{
+	location_storage_complete (LOCATION_FROM_SERVANT (servant), filename);
 }
 
 static void
@@ -348,11 +358,15 @@ BONOBO_X_TYPE_FUNC_FULL (Location, ConfigArchiver_Location, BONOBO_X_OBJECT_TYPE
 static void
 location_init (Location *location) 
 {
-	location->p = g_new0 (LocationPrivate, 1);
-	location->p->archive = NULL;
-	location->p->locid = NULL;
-	location->p->is_new = FALSE;
+	location->p                      = g_new0 (LocationPrivate, 1);
+	location->p->archive             = NULL;
+	location->p->locid               = NULL;
+	location->p->is_new              = FALSE;
 	location->p->contains_list_dirty = FALSE;
+
+	location->p->es                  = bonobo_event_source_new ();
+
+	bonobo_object_add_interface (BONOBO_OBJECT (location), BONOBO_OBJECT (location->p->es));
 }
 
 static void
@@ -391,6 +405,7 @@ location_class_init (LocationClass *klass)
 
 	klass->epv.getStorageFilename  = impl_ConfigArchiver_Location_getStorageFilename;
 	klass->epv.getRollbackFilename = impl_ConfigArchiver_Location_getRollbackFilename;
+	klass->epv.storageComplete     = impl_ConfigArchiver_Location_storageComplete;
 	klass->epv.rollbackBackends    = impl_ConfigArchiver_Location_rollbackBackends;
 	klass->epv.getModificationTime = impl_ConfigArchiver_Location_getModificationTime;
 	klass->epv.contains            = impl_ConfigArchiver_Location_contains;
@@ -775,7 +790,7 @@ location_get_storage_filename (Location      *location,
 			       const gchar   *backend_id,
 			       gboolean       is_default)
 {
-	guint id;
+	guint      id;
 
 	g_return_val_if_fail (location != NULL, NULL);
 	g_return_val_if_fail (IS_LOCATION (location), NULL);
@@ -830,6 +845,40 @@ location_get_rollback_filename (Location        *location,
 }
 
 /**
+ * location_storage_complete:
+ * @location:
+ * @filename:
+ *
+ * Notify the location object that storage of the rollback data at the given
+ * filename is complete
+ **/
+
+void
+location_storage_complete (Location *location, const gchar *filename) 
+{
+	const gchar *tmp;
+	const gchar *backend_id;
+	guint        id;
+	BonoboArg   *value;
+
+	tmp = strrchr (filename, '/');
+
+	if (tmp == NULL)
+		return;
+
+	sscanf (tmp + 1, "%x", &id);
+
+	backend_id = config_log_get_backend_id_for_id
+		(location->p->config_log, id);
+
+	value = bonobo_arg_new (BONOBO_ARG_STRING);
+	BONOBO_ARG_SET_STRING (value, backend_id);
+	bonobo_event_source_notify_listeners
+		(location->p->es, "ConfigArchiver/Location:newRollbackData", value, NULL);
+	bonobo_arg_release (value);
+}
+
+/**
  * location_store:
  * @location: 
  * @backend_id: 
@@ -852,10 +901,10 @@ gint
 location_store (Location *location, gchar *backend_id, FILE *input,
 		StoreType store_type) 
 {
-	xmlDocPtr doc;
-	char buffer[2048];
-	int t = 0;
-	GString *doc_str;
+	xmlDocPtr          doc;
+	char               buffer[2048];
+	int                t = 0;
+	GString           *doc_str;
 
 	g_return_val_if_fail (location != NULL, -2);
 	g_return_val_if_fail (IS_LOCATION (location), -2);
@@ -886,6 +935,7 @@ location_store (Location *location, gchar *backend_id, FILE *input,
 	}
 
 	g_string_free (doc_str, TRUE);
+
 	return 0;
 }
 

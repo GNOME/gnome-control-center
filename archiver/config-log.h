@@ -66,7 +66,7 @@ gint       config_log_get_rollback_id_by_steps (ConfigLog           *config_log,
 						guint                steps,
 						const gchar         *backend_id);
 
-gchar     *config_log_get_backend_id_for_id    (ConfigLog           *config_log,
+const gchar *config_log_get_backend_id_for_id  (ConfigLog           *config_log,
 						gint                 id);
 const struct tm *config_log_get_date_for_id    (ConfigLog           *config_log,
 						gint                 id);

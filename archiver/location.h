@@ -83,6 +83,9 @@ gchar          *location_get_rollback_filename        (Location        *location
 						       const gchar     *backend_id,
 						       gboolean         parent_chain);
 
+void            location_storage_complete             (Location        *location,
+						       const gchar     *filename);
+
 gint            location_store                        (Location        *location, 
 						       gchar           *backend_id, 
 						       FILE            *input,

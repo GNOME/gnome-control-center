@@ -7,55 +7,19 @@
  *
  * Copyright 2001 Ximian, Inc.
  */
-#include <config.h>
-#include <bonobo/bonobo-main.h>
-#include <bonobo/bonobo-context.h>
-#include <bonobo/bonobo-moniker.h>
-#include <bonobo/bonobo-moniker-util.h>
-#include <bonobo/bonobo-moniker-simple.h>
-#include <bonobo/bonobo-shlib-factory.h>
-#include <bonobo/bonobo-exception.h>
+
+#ifdef HAVE_CONFIG_H
+#  include <config.h>
+#endif
+
+#include <bonobo.h>
 
 #include "bonobo-config-archiver.h"
 #include "archive.h"
 #include "util.h"
 
-#define EX_SET_NOT_FOUND(ev) bonobo_exception_set (ev, ex_Bonobo_Moniker_InterfaceNotFound)
-
 static Archive *user_archive = NULL;
 static Archive *global_archive = NULL;
-
-/* parse_name
- *
- * Given a moniker with a backend id and (possibly) a location id encoded
- * therein, parse out the backend id and the location id and set the pointers
- * given to them.
- *
- * FIXME: Is this encoding really the way we want to do this? Ask Dietmar and
- * Michael.
- */
-
-static gboolean
-parse_name (const gchar *name, gchar **backend_id, gchar **location) 
-{
-	gchar *e;
-
-	if (name[0] == '[') {
-		e = strchr (name + 1, ']');
-
-		if (e != NULL)
-			*location = g_strndup (name + 1, e - name + 1);
-		else
-			return FALSE;
-
-		*backend_id = g_strdup (e + 1);
-	} else {
-		*backend_id = g_strdup (name);
-		*location = NULL;
-	}
-
-	return TRUE;
-}
 
 static void
 archive_destroy_cb (Archive *archive) 
@@ -129,7 +93,6 @@ archiverdb_resolve (BonoboMoniker               *moniker,
 	Bonobo_Moniker          parent;
 	Bonobo_ConfigDatabase   db;
 	const gchar            *name;
-	gchar                  *backend_id, *locid;
 
 	if (strcmp (requested_interface, "IDL:Bonobo/ConfigDatabase:1.0")) {
 		EX_SET_NOT_FOUND (ev);
@@ -147,20 +110,12 @@ archiverdb_resolve (BonoboMoniker               *moniker,
 
 	name = bonobo_moniker_get_name (moniker);
 
-	if (parse_name (name, &backend_id, &locid) < 0) {
-		EX_SET_NOT_FOUND (ev);
-		return CORBA_OBJECT_NIL;
-	}
-
-	db = bonobo_config_archiver_new (parent, options, backend_id, locid, ev);
+	db = bonobo_config_archiver_new (parent, options, name, ev);
 
 	if (db == CORBA_OBJECT_NIL || BONOBO_EX (ev))
 		EX_SET_NOT_FOUND (ev);
 
 	bonobo_object_release_unref (parent, NULL);
-
-	g_free (backend_id);
-	g_free (locid);
 
 	return db;
 }			
