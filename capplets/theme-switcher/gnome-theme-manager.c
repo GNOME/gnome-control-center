@@ -290,22 +290,13 @@ load_meta_themes (GtkTreeView *tree_view,
   window_manager = gnome_wm_manager_get_current (gdk_display_get_default_screen (gdk_display_get_default ()));
   wm_settings.flags = GNOME_WM_SETTING_THEME;
 
-  if (! window_manager)
+  if (window_manager)
     {
-      GtkWidget *dialog;
-
-      dialog = gtk_message_dialog_new (NULL,
-				       GTK_DIALOG_MODAL,
-				       GTK_MESSAGE_ERROR,
-				       GTK_BUTTONS_OK,
-				       _("The gnome-theme-manager does not know how to change the themes on the current window manager."));
-      gtk_dialog_run (GTK_DIALOG (dialog));
-      gtk_widget_destroy (dialog);
-      exit (0);
+      gnome_window_manager_get_settings (window_manager, &wm_settings);
+      current_window_theme = g_strdup (wm_settings.theme);
     }
-
-  gnome_window_manager_get_settings (window_manager, &wm_settings);
-  current_window_theme = g_strdup (wm_settings.theme);
+  else
+    current_window_theme = g_strdup (window_theme_default_name);
 
   /* FIXME: What do we really do when there is no theme? */
   if (current_icon_theme == NULL)
