@@ -23,15 +23,15 @@ glade_DATA = \
 	icon-view.xpm		\
 	tree-view.xpm
 
-INCLUDES = 			\
+INCLUDES = 						\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\
 	-DGLADEDIR=\""$(datadir)/control-center-data"\"	\
 	-I$(top_srcdir)/intl -I$(top_builddir)/intl	\
 	-DVERSION=\""$(VERSION)"\"			\
 	-DSETTINGS_DIR=\""$(datadir)/control-center"\"	\
 	-DPIXMAPS_DIR=\""$(appicondir)"\"		\
-	-DART_DIR=\""$(splashdir)"\"		\
-	-DGNOME_SBINDIR=\""$(sbindir)"\"
+	-DART_DIR=\""$(splashdir)"\"			\
+	-DGNOME_SBINDIR=\""$(sbindir)"\"		\
 	$(GNOMECC_CFLAGS)
 
 bin_PROGRAMS = gnomecc
