@@ -5,13 +5,67 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-center 2.2.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-06-24 16:13-0400\n"
+"POT-Creation-Date: 2003-07-07 00:27-0400\n"
 "PO-Revision-Date: 2003-05-03 01:59+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GTP Korean <gnome-kr-translation@gnome.or.kr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
+#, fuzzy
+msgid "<b>Applications</b>"
+msgstr "기존 응용프로그램"
+
+#: capplets/accessibility/at-properties/at-enable-dialog.glade.h:2
+#, fuzzy
+msgid "<b>Support</b>"
+msgstr "<b>기능</b>"
+
+#: capplets/accessibility/at-properties/at-enable-dialog.glade.h:3
+msgid ""
+"<small><i><b>Note:</b> Changes to this setting will not take effect until "
+"you next log in.</i></small>"
+msgstr ""
+
+#: capplets/accessibility/at-properties/at-enable-dialog.glade.h:4
+#, fuzzy
+msgid "Assistive Technology Preferences"
+msgstr "창 기본 설정"
+
+#: capplets/accessibility/at-properties/at-enable-dialog.glade.h:5
+msgid "Close and _Log Out"
+msgstr ""
+
+#: capplets/accessibility/at-properties/at-enable-dialog.glade.h:6
+msgid "Start these assistive technologies every time you log in:"
+msgstr ""
+
+#: capplets/accessibility/at-properties/at-enable-dialog.glade.h:7
+msgid "_Enable assistive technologies"
+msgstr ""
+
+#: capplets/accessibility/at-properties/at-enable-dialog.glade.h:8
+msgid "_Magnifier"
+msgstr ""
+
+#: capplets/accessibility/at-properties/at-enable-dialog.glade.h:9
+msgid "_On-screen keyboard"
+msgstr ""
+
+#: capplets/accessibility/at-properties/at-enable-dialog.glade.h:10
+#, fuzzy
+msgid "_Screenreader"
+msgstr "화면"
+
+#: capplets/accessibility/at-properties/at-properties.desktop.in.h:1
+msgid "Assistive Technology Support"
+msgstr ""
+
+#: capplets/accessibility/at-properties/at-properties.desktop.in.h:2
+msgid "Enable support for GNOME assistive technologies at login"
+msgstr ""
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:238
 #, c-format
@@ -29,7 +83,7 @@ msgid "Select CDE AccessX file"
 msgstr "CDE AccessX 파일 선택"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "글쇠판"
@@ -49,7 +103,6 @@ msgstr ""
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:1
 #: capplets/file-types/file-types-properties.glade.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: capplets/network/gnome-network-preferences.glade.h:2
 #: capplets/theme-switcher/theme-install.glade.h:1
 #: capplets/theme-switcher/theme-properties.glade.h:1
@@ -175,7 +228,7 @@ msgstr ""
 "변경 글쇠를 눌러서 차례대로 누른 글쇠가 동시에 눌려진 것처럼 처리합니다."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
 msgid "S_peed:"
 msgstr "속도(_P):"
 
@@ -286,8 +339,8 @@ msgstr "그림 선택(_P):"
 
 #: capplets/background/background-properties-capplet.c:567
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:724
-#: capplets/keyboard/gnome-keyboard-properties.c:290
+#: capplets/default-applications/gnome-default-applications-properties.c:834
+#: capplets/keyboard/gnome-keyboard-properties.c:222
 #: capplets/mouse/gnome-mouse-properties.c:716
 #: capplets/sound/sound-properties-capplet.c:214
 msgid "Retrieve and store legacy settings"
@@ -534,7 +587,7 @@ msgstr "등록 정보 편집기 데이타 free하는 콜백"
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr "등록 정보 편집기 오브젝트의 데이타를 free할 때 실행할 콜백"
 
-#: capplets/common/gconf-property-editor.c:1486
+#: capplets/common/gconf-property-editor.c:1531
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -546,7 +599,7 @@ msgstr ""
 "\n"
 "파일이 있는지 확인하고 다시 시도하거나, 다른 바탕 그림을 선택하십시오."
 
-#: capplets/common/gconf-property-editor.c:1494
+#: capplets/common/gconf-property-editor.c:1539
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -559,12 +612,12 @@ msgstr ""
 "\n"
 "대신 다른 그림을 선택하십시오."
 
-#: capplets/common/gconf-property-editor.c:1585
+#: capplets/common/gconf-property-editor.c:1630
 msgid "Please select an image."
 msgstr "그림을 선택하십시오."
 
 #: capplets/default-applications/default-applications.desktop.in.h:1
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:19
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:22
 msgid "Preferred Applications"
 msgstr "기본 프로그램"
 
@@ -572,7 +625,7 @@ msgstr "기본 프로그램"
 msgid "Select your default applications"
 msgstr "기본 프로그램을 선택하십시오"
 
-#: capplets/default-applications/gnome-default-applications-properties.c:105
+#: capplets/default-applications/gnome-default-applications-properties.c:114
 msgid "Please specify a name and a command for this editor."
 msgstr "이 편집기의 이름과 명령을 지정하십시오."
 
@@ -593,59 +646,73 @@ msgid "C_ustom Help Browser:"
 msgstr "사용자 설정 도움말 브라우저(_U):"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:6
+#, fuzzy
+msgid "C_ustom Mail Reader:"
+msgstr "사용자 설정 도움말 브라우저(_U):"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:7
 msgid "C_ustom Terminal:"
 msgstr "사용자 설정 터미널(_U):"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:7
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:8
 msgid "C_ustom Web Browser:"
 msgstr "사용자 설정 웹 브라우저(_U):"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:8
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:9
 msgid "Co_mmand:"
 msgstr "명령어(_M):"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:9
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:10
 msgid "Custom Editor Properties"
 msgstr "사용자 설정 편집기 등록 정보"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:10
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:11
 msgid "Default Help Browser"
 msgstr "기본 도움말 브라우저"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:11
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:12
+#, fuzzy
+msgid "Default Mail Reader"
+msgstr "기본 창 관리자"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:13
 msgid "Default Terminal"
 msgstr "기본 터미널"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:12
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:14
 msgid "Default Text Editor"
 msgstr "기본 문서 편집기"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:13
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:15
 msgid "Default Web Browser"
 msgstr "기본 웹 브라우저"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:14
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:16
 msgid "Default Window Manager"
 msgstr "기본 창 관리자"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:15
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:17
 msgid "Delete"
 msgstr "지우기"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:16
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:18
 msgid "E_xec Flag:"
 msgstr "실행 플래그(_X):"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:17
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:19
 msgid "Edit..."
 msgstr "편집..."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:18
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:20
 msgid "Help Browser"
 msgstr "도움말 보기 프로그램"
 
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:21
+msgid "Mail Reader"
+msgstr ""
+
 # humor
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:20
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:23
 msgid ""
 "Select the window manager you want.  You will need to hit apply, wave the "
 "magic wand, and do a magic dance for it to work."
@@ -653,68 +720,73 @@ msgstr ""
 "사용하고 싶은 창 관리자를 선택하십시오.  창 관리자를 바꾸게 하려면 적용을 누"
 "르고, 마법 지팡이를 휘두른 다음, 마법의 춤을 추십시오."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:21
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:24
 msgid "Start in T_erminal"
 msgstr "터미널에서 시작(_E)"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:22
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:25
 msgid "Terminal"
 msgstr "터미널"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:23
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:26
 msgid "Text Editor"
 msgstr "문서 편집기"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:24
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:27
 msgid "This application can open _URIs"
 msgstr "이 응용프로그램은 URI를 열 수 있습니다(_U)"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:25
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:28
 msgid "This application can open _multiple files"
 msgstr "이 응용프로그램은 여러 파일을 열 수 있습니다(_M)"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:26
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:29
 msgid "This application needs to be run in a _shell"
 msgstr "이 응용프로그램은 쉘에서 실행하여야 합니다(_S)"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:27
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:30
 msgid "Understands _Netscape Remote Control"
 msgstr "넷스케이프 원격 조종 받아들이기(_N)"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:28
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:31
 msgid "Use this _editor to open text files in the file manager"
 msgstr "파일 관리자에서 텍스트 파일을 열 때 이 편집기를 사용합니다(_E)"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:29
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:32
 msgid "Web Browser"
 msgstr "웹 브라우저"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:30
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:33
 msgid "Window Manager"
 msgstr "창 관리자"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:34
 #: capplets/file-types/file-types-properties.glade.h:22
 msgid "_Name:"
 msgstr "이름"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:32
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:35
 msgid "_Properties..."
 msgstr "등록 정보(_P)..."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:33
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:36
 msgid "_Select a Help Browser:"
 msgstr "도움말 브라우저 선택(_S):"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:34
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:37
+#, fuzzy
+msgid "_Select a Mail Reader:"
+msgstr "도움말 브라우저 선택(_S):"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:38
 msgid "_Select a Terminal:"
 msgstr "터미널 선택(_S):"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:35
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:39
 msgid "_Select a Web Browser:"
 msgstr "웹 브라우저 선택(_S):"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:36
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:40
 msgid "_Select an Editor:"
 msgstr "편집기 선택(_S):"
 
@@ -820,7 +892,6 @@ msgid "Associate sounds with window manager events"
 msgstr "창 관리자 이벤트에 사운드를 연결합니다"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
 #: capplets/sound/sound.desktop.in.h:2
 msgid "Sound"
 msgstr "소리"
@@ -1375,7 +1446,7 @@ msgstr "새 바로가기 글쇠를 넣으십시오."
 
 #: capplets/keybindings/eggcellrendererkeys.c:219
 #: capplets/keybindings/gnome-keybinding-properties.c:204
-#: libbackground/applier.c:588
+#: libbackground/applier.c:588 typing-break/drwright.c:446
 msgid "Disabled"
 msgstr "사용 않음"
 
@@ -1453,107 +1524,116 @@ msgstr "텍스트 편집 바로가기 글쇠(_T):"
 msgid "Assign shortcut keys to commands"
 msgstr "명령어에 단축 글쇠를 지정합니다"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:162
+#: capplets/keyboard/gnome-keyboard-properties.c:104
 #, c-format
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "글쇠판 애플릿을 시작하는 데 오류가 발생했습니다: %s"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:269
+#: capplets/keyboard/gnome-keyboard-properties.c:201
 msgid "_Accessibility"
 msgstr "접근성 기능(_A)"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:286
-#: capplets/keyboard/gnome-keyboard-properties.c:288
+#: capplets/keyboard/gnome-keyboard-properties.c:218
+#: capplets/keyboard/gnome-keyboard-properties.c:220
 #: capplets/sound/sound-properties-capplet.c:210
 #: capplets/sound/sound-properties-capplet.c:212
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "설정을 적용하고 마칩니다 (호환성; 이제 데몬이 처리합니다)"
 
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
+#, fuzzy
+msgid "<b>Cursor Blinks</b>"
+msgstr "커서 깜빡이기"
+
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:2
+#, fuzzy
+msgid "<b>Repeat Keys</b>"
+msgstr "<b>반복 글쇠 쓰기(_M)</b>"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+msgid "<b>_Lock screen to enforce typing break</b>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>빠르게</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>길게</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>짧게</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>느리게</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
-msgid "Bee_p"
-msgstr "삑소리 나기(_P)"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
-msgid "C_ustom:"
-msgstr "사용자 설정(_U)"
-
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:8
-msgid "Clic_k on keypress"
-msgstr "글쇠를 누르면 클릭(_K)"
+msgid "Check if breaks are allowed to be postponed"
+msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:9
-msgid "Cursor Blinks"
-msgstr "커서 깜빡이기"
+msgid "Duration of the break when typing is disallowed"
+msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+msgid "Duration of work before forcing a break"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 #, fuzzy
 msgid "Key presses _repeat when key is held down"
 msgstr "글쇠를 누르고 있을 때 글쇠 반복(_R)"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
-msgid "Keyboard Bell"
-msgstr "글쇠판 삑소리"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Keyboard Preferences"
 msgstr "글쇠판 등록 정보"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:14
-msgid "Keypress Click"
-msgstr "글쇠누름 클릭"
+msgid ""
+"Lock screen after a certain duration to help prevent repetitive keyboard use "
+"injuries"
+msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
-msgid "Repeat Keys"
-msgstr "반복 글쇠"
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+msgid "Typing Break"
+msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
 msgid "_Accessibility..."
 msgstr "접근성 기능(_A)..."
 
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
+msgid "_Allow postponing of breaks"
+msgstr ""
+
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:19
-msgid "_Blinks in text boxes and fields"
-msgstr "글자 상자에서 커서 깜박이기(_B)"
+msgid "_Break interval lasts"
+msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:20
-msgid "_Delay:"
-msgstr "지연 시간(_D):"
+#, fuzzy
+msgid "_Cursor blinks in text boxes and fields"
+msgstr "글자 상자에서 커서 깜박이기(_B)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:21
-msgid "_Off"
-msgstr "끄기(_O)"
+msgid "_Delay:"
+msgstr "지연 시간(_D):"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid "_Speed:"
 msgstr "속도(_S):"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:23
-msgid "_Volume:"
-msgstr "볼륨(_V):"
+msgid "_Work interval lasts"
+msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:24
-msgid "loud"
-msgstr "크게"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
-msgid "quiet"
-msgstr "작게"
+msgid "minutes"
+msgstr ""
 
 #: capplets/keyboard/keyboard.desktop.in.h:2
 msgid "Set your keyboard preferences"
@@ -1916,7 +1996,7 @@ msgid "Two"
 msgstr "둘"
 
 #: capplets/theme-switcher/gnome-theme-details.c:372
-#: capplets/theme-switcher/gnome-theme-manager.c:590
+#: capplets/theme-switcher/gnome-theme-manager.c:589
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -1925,17 +2005,17 @@ msgstr ""
 "시스템에서 테마를 찾을 수 없습니다. \"테마 기본 설정\" 대화상자가 잘못 설치되"
 "었거나 \"gnome-themes\"꾸러미가 설치 되지 않았을 것입니다."
 
-#: capplets/theme-switcher/gnome-theme-manager.c:646
-#: capplets/theme-switcher/gnome-theme-manager.c:706
+#: capplets/theme-switcher/gnome-theme-manager.c:645
+#: capplets/theme-switcher/gnome-theme-manager.c:705
 msgid "Custom theme"
 msgstr "사용자 테마"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:646
-#: capplets/theme-switcher/gnome-theme-manager.c:706
+#: capplets/theme-switcher/gnome-theme-manager.c:645
+#: capplets/theme-switcher/gnome-theme-manager.c:705
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "테마 저장 단추를 누르면 이 테마를 저장할 수 있습니다."
 
-#: capplets/theme-switcher/gnome-theme-manager.c:1399
+#: capplets/theme-switcher/gnome-theme-manager.c:1398
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -2343,32 +2423,37 @@ msgstr ""
 "\"%s\" 디렉토리를 만들 수 없습니다.\n"
 "커서를 바꾸려면 이 디렉토리를 만들어야 합니다."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:146
+#: gnome-settings-daemon/gnome-settings-keybindings.c:165
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "글쇠 바인딩에 (%s) 대한 행동이 여러 번 정의되어 있습니다\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:159
+#: gnome-settings-daemon/gnome-settings-keybindings.c:178
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "글쇠 바인딩에 (%s) 대한 바인딩이 여러 번 정의되어 있습니다\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:165
+#: gnome-settings-daemon/gnome-settings-keybindings.c:184
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "글쇠 바인딩이 (%s) 불완전합니다\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:193
+#: gnome-settings-daemon/gnome-settings-keybindings.c:212
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "글쇠 바인딩이 (%s) 잘못되었습니다\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:281
+#: gnome-settings-daemon/gnome-settings-keybindings.c:248
+#, c-format
+msgid "It seems that another application already has access to key '%d'."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-keybindings.c:317
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "글쇠 바인딩이 (%s) 이미 사용중입니다\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:357
+#: gnome-settings-daemon/gnome-settings-keybindings.c:393
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2406,10 +2491,14 @@ msgstr "사운드 파일 %s을(를) 샘플 %s(으)로 읽어들일 수 없습니
 msgid "Cannot determine user's home directory"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:179
+#: gnome-settings-daemon/gnome-settings-xsettings.c:180
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "GConf 키 %s이(가) %s 타입으로 지정되었지만 예상되는 타입은 %s입니다\n"
+
+#: gnome-settings-daemon/reaper.c:109
+msgid "Error creating signal pipe."
+msgstr ""
 
 #: libbackground/applier.c:254
 msgid "Type"
@@ -2574,6 +2663,91 @@ msgstr ""
 "글꼴을 그릴 때 쓰이는 힌팅의 형식. 쓸 수 있는 값은: \"none\" - 힌팅 쓰지 않"
 "음. \"slight\", \"medium\", \"full\" - 정한 만큼 힌팅하기; 글자 모양이 흐려집"
 "니다."
+
+#: typing-break/drw-break-window.c:260
+msgid "Postpone break"
+msgstr ""
+
+#: typing-break/drw-break-window.c:298
+msgid "Take a break!"
+msgstr ""
+
+#. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
+#: typing-break/drwright.c:138
+#, fuzzy
+msgid "/_Preferences"
+msgstr "글꼴 기본 설정"
+
+#: typing-break/drwright.c:139
+#, fuzzy
+msgid "/_About"
+msgstr "정보(_A)"
+
+#: typing-break/drwright.c:141
+msgid "/_Take a Break"
+msgstr ""
+
+#: typing-break/drwright.c:464
+#, c-format
+msgid "%d minutes until the next break"
+msgstr ""
+
+#: typing-break/drwright.c:467
+msgid "One minute until the next break"
+msgstr ""
+
+#: typing-break/drwright.c:469
+msgid "Less than one minute until the next break"
+msgstr ""
+
+#: typing-break/drwright.c:589
+msgid "Quit DrWright?"
+msgstr ""
+
+#: typing-break/drwright.c:590
+msgid "Don't forget to take regular breaks."
+msgstr ""
+
+#: typing-break/drwright.c:601
+msgid "Don't Quit"
+msgstr ""
+
+#: typing-break/drwright.c:605
+#, fuzzy
+msgid "Quit"
+msgstr "마침(_Q)"
+
+#: typing-break/drwright.c:655
+msgid "About GNOME Typing Monitor"
+msgstr ""
+
+#: typing-break/drwright.c:679
+msgid "A computer break reminder."
+msgstr ""
+
+#: typing-break/drwright.c:680
+msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
+msgstr ""
+
+#: typing-break/drwright.c:681
+msgid "Eye candy added by Anders Carlsson"
+msgstr ""
+
+#: typing-break/drwright.c:840
+msgid "Break reminder"
+msgstr ""
+
+#: typing-break/main.c:126
+msgid "The typing monitor is already running."
+msgstr ""
+
+#: typing-break/main.c:139
+msgid ""
+"The typing monitor uses the notification area to display information. You "
+"don't seem to have a notification area on your panel. You can add it by "
+"right-clicking on your panel and choose 'Add to panel -> Utilities -> "
+"Notification area'."
+msgstr ""
 
 #: vfs-methods/fontilus/font-view.c:101
 msgid "The quick brown fox jumps over the lazy dog. 0123456789"
@@ -2771,6 +2945,36 @@ msgstr "설치된 테마를 미리보기"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "테마를 미리보기"
+
+#~ msgid "Bee_p"
+#~ msgstr "삑소리 나기(_P)"
+
+#~ msgid "C_ustom:"
+#~ msgstr "사용자 설정(_U)"
+
+#~ msgid "Clic_k on keypress"
+#~ msgstr "글쇠를 누르면 클릭(_K)"
+
+#~ msgid "Keyboard Bell"
+#~ msgstr "글쇠판 삑소리"
+
+#~ msgid "Keypress Click"
+#~ msgstr "글쇠누름 클릭"
+
+#~ msgid "Repeat Keys"
+#~ msgstr "반복 글쇠"
+
+#~ msgid "_Off"
+#~ msgstr "끄기(_O)"
+
+#~ msgid "_Volume:"
+#~ msgstr "볼륨(_V):"
+
+#~ msgid "loud"
+#~ msgstr "크게"
+
+#~ msgid "quiet"
+#~ msgstr "작게"
 
 #~ msgid "Install new theme"
 #~ msgstr "새 테마 설치"
