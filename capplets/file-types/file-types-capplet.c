@@ -741,37 +741,38 @@ component_menu_activated (GtkWidget *menu_item, gpointer data)
 static void
 populate_viewer_menu (GtkWidget *component_menu, const char *mime_type)
 {
-	GtkWidget *new_menu;
-	GtkWidget *menu_item;
+	GtkWidget *new_menu, *menu_item;
 	GList *component_list, *copy_list;
-	GList *list_element;
-	gboolean has_none, found_match;
-	char *component_name;
 	OAF_ServerInfo *default_component;
 	OAF_ServerInfo *info;
+	gboolean has_none, found_match;
+	char *mime_copy, *component_name;
 	const char *iid;
 	GList *children;
 	int index;
-	
+
 	has_none = TRUE;
 	found_match = FALSE;
 
+	mime_copy = g_strdup (mime_type);
+	
 	new_menu = gtk_menu_new ();
 	
 	/* Get the default component */
 	default_component = gnome_vfs_mime_get_default_component (mime_type);
 
-	/* Fill list with default components */
+	/* Get the component short list */
 	component_list = gnome_vfs_mime_get_short_list_components (mime_type);
 	if (component_list != NULL) {
-		for (list_element = component_list; list_element != NULL; list_element = list_element->next) {
+		for (copy_list = component_list; copy_list != NULL; copy_list = copy_list->next) {
 			has_none = FALSE;
 
-			component_name = name_from_oaf_server_info (list_element->data);
+			component_name = name_from_oaf_server_info (copy_list->data);
 			menu_item = gtk_menu_item_new_with_label (component_name);
+			g_free (component_name);
 
 			/* Store copy of component name and mime type in item; free when item destroyed. */
-			info = list_element->data;
+			info = copy_list->data;
 			gtk_object_set_data_full (GTK_OBJECT (menu_item),
 						  "iid",
 						  g_strdup (info->iid),
@@ -788,11 +789,11 @@ populate_viewer_menu (GtkWidget *component_menu, const char *mime_type)
 			gtk_signal_connect (GTK_OBJECT (menu_item), "activate", 
 					    component_menu_activated, NULL);
 		}
-
+	
 		gnome_vfs_mime_component_list_free (component_list);
 	}
-	
-	/* Add a "None" item */
+
+	/* Find all components or add a "None" item */
 	if (has_none && default_component == NULL) {		
 		menu_item = gtk_menu_item_new_with_label (_("None"));
 		gtk_menu_append (GTK_MENU (new_menu), menu_item);
@@ -813,26 +814,18 @@ populate_viewer_menu (GtkWidget *component_menu, const char *mime_type)
 			}
 			g_list_free (children);
 
-			/* FIXME: 2766. folowing line added to avoid crashes in certain cases. 
-			 someone needs to cleanup all this code for true. */
-			found_match = TRUE;
-
 			/* See if we have a match */
 			if (found_match) {
-				/* Have menu appear with default application selected */
+				/* Have menu appear with default component selected */
 				gtk_menu_set_active (GTK_MENU (new_menu), index);
 			} else {
 				/* No match found.  We need to insert a menu item
-				 * and add the application to the default list */
-
-				/* FIXME bugzilla.eazel.com 2766: this is obviously not finished */
-				copy_list = NULL;
-				
-				component_name = name_from_oaf_server_info (copy_list->data);
+				 * and add the component to the default list */
+				component_name = name_from_oaf_server_info (default_component);
 				menu_item = gtk_menu_item_new_with_label (component_name);
+				g_free (component_name);
 
-
-				/* Store copy of application name and mime type in item; free when item destroyed. */
+				/* Store copy of component name and mime type in item; free when item destroyed. */
 				gtk_object_set_data_full (GTK_OBJECT (menu_item),
 							  "iid",
 							  g_strdup (default_component->iid),
