@@ -392,9 +392,15 @@ read_browser (GConfClient *client,
 			g_free (browser);
 			return;
 		}
-        }
-	gtk_toggle_button_set_inconsistent (GTK_TOGGLE_BUTTON (WID ("web_select_radio")), TRUE);
-	gtk_toggle_button_set_inconsistent (GTK_TOGGLE_BUTTON (WID ("web_custom_radio")), TRUE);
+	}
+	if (strlen(browser) != 0) {
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("web_select_radio")), TRUE);
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("web_custom_radio")), TRUE);
+	} else {
+		gtk_toggle_button_set_inconsistent (GTK_TOGGLE_BUTTON (WID ("web_select_radio")), TRUE);
+		gtk_toggle_button_set_inconsistent (GTK_TOGGLE_BUTTON (WID ("web_custom_radio")), TRUE);
+	}
+	
 	g_free (browser);
 }
 
@@ -431,8 +437,14 @@ read_mailer (GConfClient *client,
 			return;
 		}
         }
-	gtk_toggle_button_set_inconsistent (GTK_TOGGLE_BUTTON (WID ("mail_select_radio")), TRUE);
-	gtk_toggle_button_set_inconsistent (GTK_TOGGLE_BUTTON (WID ("mail_custom_radio")), TRUE);
+		
+	if (strlen(mailer) != 0) {
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("mail_select_radio")), TRUE);
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("mail_custom_radio")), TRUE);
+	} else {
+		gtk_toggle_button_set_inconsistent (GTK_TOGGLE_BUTTON (WID ("mail_select_radio")), TRUE);
+		gtk_toggle_button_set_inconsistent (GTK_TOGGLE_BUTTON (WID ("mail_custom_radio")), TRUE);
+	}
 	g_free (mailer);
 
 
