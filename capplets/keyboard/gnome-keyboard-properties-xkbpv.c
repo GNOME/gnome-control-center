@@ -31,15 +31,15 @@
 #include "capplet-util.h"
 
 #include "gnome-keyboard-properties-xkb.h"
-#include "kbdraw/keyboard-drawing.h"
+#include "libkbdraw/keyboard-drawing.h"
 
 void
 init_preview (GladeXML * dialog)
 {
   GtkWidget *frame = WID ("preview_frame");
   GtkWidget *kbdraw = keyboard_drawing_new ();
-  keyboard_drawing_do_track_group (KEYBOARD_DRAWING (kbdraw), TRUE);
-  keyboard_drawing_do_track_config (KEYBOARD_DRAWING (kbdraw), TRUE);
+  keyboard_drawing_set_track_group (KEYBOARD_DRAWING (kbdraw), TRUE);
+  keyboard_drawing_set_track_config (KEYBOARD_DRAWING (kbdraw), TRUE);
   gtk_container_add (GTK_CONTAINER (frame), kbdraw);
   gtk_widget_show (kbdraw);
 }
