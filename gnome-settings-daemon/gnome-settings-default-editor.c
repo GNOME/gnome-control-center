@@ -85,8 +85,8 @@ vfs_change_cb (GnomeVFSMIMEMonitor *monitor, GConfClient *client)
 
 	PRINT_STATE;
 
-	if (!sync_changes_cb)
-		return;
+	//if (!sync_changes_cb)
+	//	return;
 
 	
 	star_app  = gnome_vfs_mime_get_default_application ("text/*");

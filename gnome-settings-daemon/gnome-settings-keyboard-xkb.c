@@ -43,7 +43,9 @@
 #include "gnome-settings-keyboard-xkb.h"
 #include "gnome-settings-daemon.h"
 
-static GSwitchItKbdConfig gswic;
+static GSwitchItConfig gswic;
+static GSwitchItKbdConfig gswikc;
+
 static gboolean initedOk;
 
 static PostActivationCallback paCallback = NULL;
@@ -57,7 +59,7 @@ typedef enum {
 	RESPONSE_USE_GNOME
 } SysConfigChangedMsgResponse;
 
-/* #define GSDKX */
+#define noGSDKX
 
 #ifdef GSDKX
 static FILE *logfile;
@@ -89,10 +91,14 @@ activation_error (void)
 							     GTK_BUTTONS_CLOSE,
 							     _
 							     ("Error activating XKB configuration.\n"
-							      "Probably internal X server problem.\n\nX server version data:\n%s\n%d\n%s\n"
+							      "It can have under various circumstances:\n"
+							      "- a bug in libxklavier library\n"
+							      "- a bug in X server (xkbcomp, xmodmap utilities)\n"
+							      "- X server with incompatible libxkbfile implemenation\n\n"
+							      "X server version data:\n%s\n%d\n%s\n"
 							      "If you report this situation as a bug, please include:\n"
 							      "- The result of <b>xprop -root | grep XKB</b>\n"
-							      "- The result of <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b>"),
+							      "- The result of <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/kbd</b>"),
 							     vendor,
 							     release,
 							     badXFree430Release
@@ -116,17 +122,36 @@ apply_settings (void)
 		return;
 
 	confClient = gconf_client_get_default ();
-	GSwitchItKbdConfigInit (&gswic, confClient);
+	GSwitchItConfigInit (&gswic, confClient);
 	g_object_unref (confClient);
-	GSwitchItKbdConfigLoad (&gswic);
 
-	if (gswic.overrideSettings) {
+	GSwitchItConfigLoad (&gswic);
+	GSwitchItConfigActivate (&gswic);
+
+	GSwitchItConfigTerm (&gswic);
+}
+
+static void
+apply_xkb_settings (void)
+{
+	GConfClient *confClient;
+
+	if (!initedOk)
+		return;
+
+	confClient = gconf_client_get_default ();
+	GSwitchItKbdConfigInit (&gswikc, confClient);
+	g_object_unref (confClient);
+
+	GSwitchItKbdConfigLoad (&gswikc);
+
+	if (gswikc.overrideSettings) {
 		/* initialization - from the system settings */
-		GSwitchItKbdConfigLoadInitial (&gswic);
-		gswic.overrideSettings = FALSE;
-		GSwitchItKbdConfigSave (&gswic);
+		GSwitchItKbdConfigLoadInitial (&gswikc);
+		gswikc.overrideSettings = FALSE;
+		GSwitchItKbdConfigSave (&gswikc);
 	} else {
-		if (GSwitchItKbdConfigActivate (&gswic)) {
+		if (GSwitchItKbdConfigActivate (&gswikc)) {
 			if (paCallback != NULL) {
 				(*paCallback) (paCallbackUserData);
 			}
@@ -137,7 +162,7 @@ apply_settings (void)
 		}
 	}
 
-	GSwitchItKbdConfigTerm (&gswic);
+	GSwitchItKbdConfigTerm (&gswikc);
 }
 
 static void
@@ -145,40 +170,40 @@ gnome_settings_keyboard_xkb_sysconfig_changed_response (GtkDialog * dialog,
 							SysConfigChangedMsgResponse
 							what2do,
 							GSwitchItKbdConfig
-							* pgswicNow)
+							* pgswikcNow)
 {
 	switch (what2do) {
 	case RESPONSE_USE_X:
-		GSwitchItKbdConfigSave (pgswicNow);
+		GSwitchItKbdConfigSave (pgswikcNow);
 		break;
 	case RESPONSE_USE_GNOME:
 		/* Do absolutely nothing - just keep things the way they are */
 		break;
 	}
 	gtk_widget_destroy (GTK_WIDGET (dialog));
-	GSwitchItKbdConfigTerm (pgswicNow);
-	g_free (pgswicNow);
+	GSwitchItKbdConfigTerm (pgswikcNow);
+	g_free (pgswikcNow);
 }
 
 static void
 gnome_settings_keyboard_xkb_analyze_sysconfig (void)
 {
 	GConfClient *confClient;
-	GSwitchItKbdConfig gswicWas, *pgswicNow;
+	GSwitchItKbdConfig gswikcWas, *pgswikcNow;
 	gboolean isConfigChanged;
 
 	if (!initedOk)
 		return;
-	pgswicNow = g_new (GSwitchItKbdConfig, 1);
+	pgswikcNow = g_new (GSwitchItKbdConfig, 1);
 	confClient = gconf_client_get_default ();
-	GSwitchItKbdConfigInit (&gswicWas, confClient);
-	GSwitchItKbdConfigInit (pgswicNow, confClient);
+	GSwitchItKbdConfigInit (&gswikcWas, confClient);
+	GSwitchItKbdConfigInit (pgswikcNow, confClient);
 	g_object_unref (confClient);
-	GSwitchItKbdConfigLoadSysBackup (&gswicWas);
-	GSwitchItKbdConfigLoadInitial (pgswicNow);
+	GSwitchItKbdConfigLoadSysBackup (&gswikcWas);
+	GSwitchItKbdConfigLoadInitial (pgswikcNow);
 
-	isConfigChanged = g_slist_length (gswicWas.layouts) &&
-	    !GSwitchItKbdConfigEquals (pgswicNow, &gswicWas);
+	isConfigChanged = g_slist_length (gswikcWas.layouts) &&
+	    !GSwitchItKbdConfigEquals (pgswikcNow, &gswikcWas);
 	/* config was changed!!! */
 	if (isConfigChanged) {
 		GtkWidget *msg = gtk_message_dialog_new_with_markup (NULL,
@@ -199,13 +224,13 @@ gnome_settings_keyboard_xkb_analyze_sysconfig (void)
 		g_signal_connect (msg, "response",
 				  G_CALLBACK
 				  (gnome_settings_keyboard_xkb_sysconfig_changed_response),
-				  pgswicNow);
+				  pgswikcNow);
 		gtk_widget_show (msg);
 	}
-	GSwitchItKbdConfigSaveSysBackup (pgswicNow);
+	GSwitchItKbdConfigSaveSysBackup (pgswikcNow);
 	if (!isConfigChanged) 
-		g_free (pgswicNow);
-	GSwitchItKbdConfigTerm (&gswicWas);
+		g_free (pgswikcNow);
+	GSwitchItKbdConfigTerm (&gswikcWas);
 }
 
 static void
@@ -281,21 +306,22 @@ gnome_settings_keyboard_xkb_init (GConfClient * client)
 		XklBackupNamesProp ();
 		gnome_settings_keyboard_xkb_analyze_sysconfig ();
 		gnome_settings_keyboard_xkb_chk_lcl_xmm ();
+
 		gnome_settings_daemon_register_callback
-		    ("/desktop/gnome/peripherals/keyboard/xkb",
+		    (GSWITCHIT_CONFIG_DIR,
 		     (KeyCallbackFunc) apply_settings);
 
-		if (XklGetBackendFeatures() & 
-		    XKLF_REQUIRES_MANUAL_LAYOUT_MANAGEMENT)
-		{
-			gdk_window_add_filter (NULL,
-					       (GdkFilterFunc) XklFilterEvents,
-					       NULL);
-			gdk_window_add_filter (gdk_get_default_root_window(),
-					       (GdkFilterFunc) XklFilterEvents,
-					       NULL);
-			XklStartListen (XKLL_MANAGE_LAYOUTS);
-		}
+		gnome_settings_daemon_register_callback
+		    (GSWITCHIT_KBD_CONFIG_DIR,
+		     (KeyCallbackFunc) apply_xkb_settings);
+
+		gdk_window_add_filter (NULL,
+				       (GdkFilterFunc) XklFilterEvents,
+				       NULL);
+		gdk_window_add_filter (gdk_get_default_root_window(),
+				       (GdkFilterFunc) XklFilterEvents,
+				       NULL);
+		XklStartListen (XKLL_MANAGE_LAYOUTS | XKLL_MANAGE_WINDOW_STATES);
 	}
 }
 
@@ -303,4 +329,5 @@ void
 gnome_settings_keyboard_xkb_load (GConfClient * client)
 {
 	apply_settings ();
+	apply_xkb_settings ();
 }
