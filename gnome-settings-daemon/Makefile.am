@@ -1,9 +1,5 @@
 SUBDIRS = xrdb actions
 
-if HAVE_FB
-FB_CFLAGS = -DHAVE_FB
-endif
-
 INCLUDES=$(LIBXKLAVIER_CFLAGS) $(GNOME_SETTINGS_DAEMON_CFLAGS) -I$(top_srcdir)/libbackground -I$(top_srcdir) \
   -DGNOMELOCALEDIR="\"$(datadir)/locale\"" 	\
   -DESD_SERVER="\"$(ESD_SERVER)\""		\

@@ -32,12 +32,6 @@
 
 #include "eggaccelerators.h"
 
-#include "actions/acme.h"
-#include "actions/acme-volume.h"
-
-#define DIALOG_TIMEOUT 1000     /* dialog timeout in ms */
-#define VOLUME_STEP 6           /* percents for one volume button press */
-                                                                                
 #if defined(__powerpc__) && defined (__linux__)
 #define USE_FBLEVEL
 #include "actions/acme-fb-level.h"
@@ -45,6 +39,12 @@
 #undef USE_FBLEVEL
 #endif
 
+#include "actions/acme.h"
+#include "actions/acme-volume.h"
+
+#define DIALOG_TIMEOUT 1000     /* dialog timeout in ms */
+#define VOLUME_STEP 6           /* percents for one volume button press */
+                                                                                
 /* we exclude shift, GDK_CONTROL_MASK and GDK_MOD1_MASK since we know what
    these modifiers mean
    these are the mods whose combinations are bound by the keygrabbing code */
