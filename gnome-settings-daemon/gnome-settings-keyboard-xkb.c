@@ -55,10 +55,10 @@ static gboolean initedOk;
 static PostActivationCallback paCallback = NULL;
 static void *paCallbackUserData = NULL;
 
-static const char DISABLE_XMM_WARNING_KEY[] =
-    "/desktop/gnome/peripherals/keyboard/disable_xmm_and_xkb_warning";
 static const char KNOWN_FILES_KEY[] =
     "/desktop/gnome/peripherals/keyboard/general/known_file_list";
+static const char DISABLE_SYSCONF_CHANGED_WARNING_KEY[] =
+    "/desktop/gnome/peripherals/keyboard/general/disable_sysconfig_changed_warning";
 
 typedef enum {
 	RESPONSE_USE_X,
@@ -177,6 +177,9 @@ gnome_settings_keyboard_xkb_sysconfig_changed_response (GtkDialog * dialog,
 							SysConfigChangedMsgResponse
 							what2do)
 {
+	gboolean dontShowAgain = gtk_toggle_button_get_active (
+		GTK_TOGGLE_BUTTON (g_object_get_data (G_OBJECT (dialog), "chkDontShowAgain")));
+
 	switch (what2do) {
 	case RESPONSE_USE_X:
 		GSwitchItKbdConfigSaveToGConf (&initialSysKbdConfig);
@@ -184,6 +187,13 @@ gnome_settings_keyboard_xkb_sysconfig_changed_response (GtkDialog * dialog,
 	case RESPONSE_USE_GNOME:
 		/* Do absolutely nothing - just keep things the way they are */
 		break;
+	}
+
+	if (dontShowAgain) {
+		GConfClient *confClient;
+		confClient = gconf_client_get_default ();
+		gconf_client_set_bool (confClient, DISABLE_SYSCONF_CHANGED_WARNING_KEY, TRUE, NULL);
+		g_object_unref (confClient);
 	}
 	gtk_widget_destroy (GTK_WIDGET (dialog));
 }
@@ -193,13 +203,14 @@ gnome_settings_keyboard_xkb_analyze_sysconfig (void)
 {
 	GConfClient *confClient;
 	GSwitchItKbdConfig backupGConfKbdConfig;
-	gboolean isConfigChanged;
+	gboolean isConfigChanged, dontShow;
 
 	if (!initedOk)
 		return;
 	confClient = gconf_client_get_default ();
 	GSwitchItKbdConfigInit (&backupGConfKbdConfig, confClient);
 	GSwitchItKbdConfigInit (&initialSysKbdConfig, confClient);
+	dontShow = gconf_client_get_bool (confClient, DISABLE_SYSCONF_CHANGED_WARNING_KEY, NULL);
 	g_object_unref (confClient);
 	GSwitchItKbdConfigLoadFromGConfBackup (&backupGConfKbdConfig);
 	GSwitchItKbdConfigLoadFromXInitial (&initialSysKbdConfig);
@@ -209,26 +220,43 @@ gnome_settings_keyboard_xkb_analyze_sysconfig (void)
 	    !GSwitchItKbdConfigEquals (&initialSysKbdConfig, &backupGConfKbdConfig);
 	/* config was changed!!! */
 	if (isConfigChanged) {
-		GtkWidget *msg = gtk_message_dialog_new_with_markup (NULL,
-								     0,
-								     GTK_MESSAGE_INFO,
-								     GTK_BUTTONS_NONE,
+		if (dontShow) {
+			g_warning ("The system configuration changed - but we remain silent\n");
+		} else {
+			GtkWidget *chkDontShowAgain = gtk_check_button_new_with_mnemonic (_ ("Do _not show this warning again"));
+			GtkWidget *alignDontShowAgain = gtk_alignment_new (0.5, 
+									   0.5, 
+									   0, 
+									   0);
+			GtkWidget *msg = gtk_message_dialog_new_with_markup (NULL,
+									     0,
+									     GTK_MESSAGE_INFO,
+									     GTK_BUTTONS_NONE,
 /* !! temporary one */
-								     _
-								     ("The X system keyboard settings differ from your current GNOME "
-								      "keyboard settings.  Which set would you like to use?"));
-		gtk_dialog_add_buttons (GTK_DIALOG (msg),
-					_("Use X settings"),
-					RESPONSE_USE_X,
-					_("Use GNOME settings"),
-					RESPONSE_USE_GNOME, NULL);
-		gtk_dialog_set_default_response (GTK_DIALOG (msg),
-						 RESPONSE_USE_GNOME);
-		g_signal_connect (msg, "response",
-				  G_CALLBACK
-				  (gnome_settings_keyboard_xkb_sysconfig_changed_response),
-				  NULL);
-		gtk_widget_show (msg);
+									     _
+									     ("The X system keyboard settings differ from your current GNOME "
+									      "keyboard settings.  Which set would you like to use?"));
+			gtk_container_set_border_width (GTK_CONTAINER (alignDontShowAgain), 
+						        12);
+			gtk_container_add (GTK_CONTAINER (alignDontShowAgain), 
+					   chkDontShowAgain);
+			gtk_container_add (GTK_CONTAINER ((GTK_DIALOG (msg))->vbox), 
+					   alignDontShowAgain);
+
+			gtk_dialog_add_buttons (GTK_DIALOG (msg),
+						_("Use X settings"),
+						RESPONSE_USE_X,
+						_("Use GNOME settings"),
+						RESPONSE_USE_GNOME, NULL);
+			gtk_dialog_set_default_response (GTK_DIALOG (msg),
+							 RESPONSE_USE_GNOME);
+			g_object_set_data (G_OBJECT (msg), "chkDontShowAgain", chkDontShowAgain);
+			g_signal_connect (msg, "response",
+					  G_CALLBACK
+					  (gnome_settings_keyboard_xkb_sysconfig_changed_response),
+					  NULL);
+			gtk_widget_show_all (msg);
+		}
 	}
 	GSwitchItKbdConfigSaveToGConfBackup (&initialSysKbdConfig);
 	GSwitchItKbdConfigTerm (&backupGConfKbdConfig);
