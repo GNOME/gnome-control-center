@@ -348,7 +348,7 @@ fill_dialog (MimeEditDialog *dialog)
 	gtk_entry_set_text (GTK_ENTRY (WID ("mime_type_entry")), dialog->p->info->mime_type);
 	gtk_entry_set_text (GTK_ENTRY (WID ("category_entry")), mime_type_info_get_category_name (dialog->p->info));
 
-	dialog->p->use_cat_dfl = !dialog->p->info->override_category;
+	dialog->p->use_cat_dfl = dialog->p->info->use_category;
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("use_category_defaults_toggle")), dialog->p->use_cat_dfl);
 	update_sensitivity (dialog);
 
@@ -583,8 +583,8 @@ store_data (MimeEditDialog *dialog)
 		dialog->p->info->small_icon_pixbuf = NULL;
 	}
 
-	dialog->p->info->override_category =
-		!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (WID ("use_category_defaults_toggle")));
+	dialog->p->info->use_category =
+		gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (WID ("use_category_defaults_toggle")));
 
 	option_menu = GTK_OPTION_MENU (WID ("component_select"));
 	menu_shell = GTK_MENU_SHELL (gtk_option_menu_get_menu (option_menu));

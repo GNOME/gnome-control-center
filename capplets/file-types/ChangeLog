@@ -1,5 +1,11 @@
 2002-01-27  Bradford Hovinen  <hovinen@ximian.com>
 
+	* mime-type-info.c (mime_type_info_load_all, mime_type_info_save):
+	Rename override_category as use_category; give it the opposite
+	meaning
+	(reduce_supported_app_list, find_possible_supported_apps): Update
+	according to the above
+
 	* mime-edit-dialog.c (fill_dialog): Set
 	use_category_defaults_toggle
 	(store_data): Set override_category
