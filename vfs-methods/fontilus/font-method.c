@@ -161,7 +161,7 @@ ensure_font_list(void)
     pat = FcPatternCreate();
     os = FcObjectSetBuild(FC_FILE, FC_FAMILY, FC_WEIGHT, FC_SLANT, 0);
 
-    font_list = FcFontList(0, pat, os);
+    font_list = FcFontList(NULL, pat, os);
 
     FcPatternDestroy(pat);
     FcObjectSetDestroy(os);
@@ -250,6 +250,7 @@ fill_file_info(GnomeVFSFileInfo *file_info, GnomeVFSFileInfoOptions options,
 
     uri = gnome_vfs_get_uri_from_local_path(file);
     result = gnome_vfs_get_file_info(uri, file_info, options);
+    g_free (uri);
     if (result == GNOME_VFS_OK) {
 	g_free(file_info->name);
 	file_info->name = g_strdup(name);
