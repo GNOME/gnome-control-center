@@ -1,3382 +1,740 @@
-# ko.po -- Korean messages for control-center
-# Copyright (C) 1998, 1999 Free Software Foundation, Inc.
-# Changwoo Ryu <cwryu@adam.kaist.ac.kr>, 1998.
-# update by Young-Ho, Cha <ganadist@chollian.net>, 2001.
 msgid ""
 msgstr ""
-"Project-Id-Version: control-center 1.3.90\n"
-"POT-Creation-Date: 2001-07-10 18:52-0500\n"
-"PO-Revision-Date: 2001-03-11 15:24+0900\n"
-"Last-Translator: Young-Ho, Cha <ganadist@chollian.net>\n"
+"Project-Id-Version: control-center 1.99.2\n"
+"POT-Creation-Date: 2002-02-06 18:28+0900\n"
+"PO-Revision-Date: 2002-02-06 10:03+0900\n"
+"Last-Translator: Young-Ho Cha <ganadist@chollian.net>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=euc-kr\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: capplets/background/applier.c:352
+#: capplets/background/background.desktop.in.h:1
+msgid "Background"
+msgstr "배경"
+
+#: capplets/background/background.desktop.in.h:2
+msgid "Configuration of the desktop's background"
+msgstr "바탕화면의 배경을 설정합니다"
+
+#: capplets/background/background-properties-capplet.c:459
 #, c-format
-msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
+msgid ""
+"Couldn't find the file '%s'.\n"
+"\n"
+"Please make sure it exists and try again, or choose a different background "
+"picture."
+msgstr ""
+"파일 '%s'를 찾을 수 없습니다.\n"
+"\n"
+"파일이 있는지 확인하고 다시 시도하거나, 다른 배경 그림을 선택하십시오."
+
+#: capplets/background/background-properties-capplet.c:484
+#, c-format
+msgid ""
+"I don't know how to open the file '%s'.\n"
+"Perhaps its a kind of picture that is not yet supported.\n"
+"\n"
+"Please select a different picture instead."
+msgstr ""
+"파일 '%s'를 열수 있는 방법이 없습니다.\n"
+"이러한 그림형식을 아직 지원하지 않습니다.\n"
+"\n"
+"대신 다른 그림을 선택하십시오."
+
+#: capplets/background/background-properties-capplet.c:779
+#: capplets/common/capplet-util.c:243
+#: capplets/default-applications/gnome-default-applications-properties.c:615
+#: capplets/keyboard/gnome-keyboard-properties.c:267
+#: capplets/mouse/gnome-mouse-properties.c:473
+#: capplets/sound/sound-properties-capplet.c:143
+msgid "Retrieve and store legacy settings"
+msgstr "물려받은 설정을 되찾아서 저장합니다"
+
+#: capplets/background/background-properties-capplet.c:815
+msgid "Background Properties"
+msgstr "배경 설정"
+
+#: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
+msgid "Just apply settings and quit"
+msgstr "설정을 적용하고 마칩니다"
+
+#: capplets/common/gconf-property-editor.c:144
+msgid "Key"
+msgstr "키"
+
+#: capplets/common/gconf-property-editor.c:145
+msgid "GConf key to which this property editor is attached"
 msgstr ""
 
-#: capplets/background/applier.c:495
-msgid "Disabled"
-msgstr "사용 않음"
+#: capplets/common/gconf-property-editor.c:151
+msgid "Callback"
+msgstr ""
 
-#: capplets/background/background-properties.glade.h:27
-#: capplets/background/prefs-widget.c:361
+#: capplets/common/gconf-property-editor.c:152
+msgid "Issue this callback when the value associated with key gets changed"
+msgstr ""
+
+#: capplets/common/gconf-property-editor.c:157
+msgid "Change set"
+msgstr ""
+
+#: capplets/common/gconf-property-editor.c:158
+msgid ""
+"GConf change set containing data to be forwarded to the gconf client on apply"
+msgstr ""
+
+#: capplets/common/gconf-property-editor.c:163
+msgid "Conversion to widget callback"
+msgstr ""
+
+#: capplets/common/gconf-property-editor.c:164
+msgid ""
+"Callback to be issued when data are to be converted from GConf to the widget"
+msgstr ""
+
+#: capplets/common/gconf-property-editor.c:169
+msgid "Conversion from widget callback"
+msgstr ""
+
+#: capplets/common/gconf-property-editor.c:170
+msgid ""
+"Callback to be issued when data are to be converted to GConf from the widget"
+msgstr ""
+
+#: capplets/common/gconf-property-editor.c:175
+msgid "UI Control"
+msgstr "UI 컨트롤"
+
+#: capplets/common/gconf-property-editor.c:176
+msgid "Object that controls the property (normally a widget)"
+msgstr ""
+
+#: capplets/default-applications/default-applications.desktop.in.h:1
+msgid "Choose the applications used by default"
+msgstr "기본값으로 사용될 응용프로그램을 선택합니다"
+
+#: capplets/default-applications/default-applications.desktop.in.h:2
+msgid "Default Applications"
+msgstr "기본 응용프로그램"
+
+#: capplets/desktop-links/Advanced.directory.in.in.h:1
+msgid "Advanced"
+msgstr "고급"
+
+#: capplets/desktop-links/Advanced.directory.in.in.h:2
+msgid "Advanced Settings"
+msgstr "고급 설정"
+
+#: capplets/desktop-links/cd.desktop.in.in.h:1
+msgid "CD Properties"
+msgstr "CD 설정"
+
+#: capplets/desktop-links/cd.desktop.in.in.h:2
+msgid "Configure handling of CD devices"
+msgstr "CD 장치 처리를 설정합니다"
+
+#: capplets/desktop-links/legacy-applications.desktop.in.in.h:1
+msgid "Legacy Applications"
+msgstr "기존 응용프로그램"
+
+#: capplets/desktop-links/legacy-applications.desktop.in.in.h:2
+msgid "Legacy applications settings (grdb)"
+msgstr "기존 응용프로그램 설정(grdb)"
+
+#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
+msgid "Appearance"
+msgstr "모양새"
+
+#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:2
+msgid "Configure window appearance"
+msgstr "창의 모양새를 설정합니다"
+
+#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:1
+msgid "Configure key shortcuts"
+msgstr "단축글쇠를 설정합니다"
+
+#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:2
+msgid "Shortcuts"
+msgstr "단축글쇠"
+
+#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:1
+msgid "Configure window focusing"
+msgstr "창 초점을 설정합니다"
+
+#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:2
+msgid "Focus behavior"
+msgstr "초점 행동"
+
+#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
+msgid "Configure window properties"
+msgstr "창 속성을 설정합니다"
+
+#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:2
+msgid "Matched Windows"
+msgstr "일치되는 창"
+
+#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:1
+msgid "Configure window minimization and maximization"
+msgstr "창의 최소화와 최대화를 설정합니다"
+
+#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:2
+msgid "Minimizing and Maximizing"
+msgstr "최소화와 최대화"
+
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
+msgid "Configure window manager configuration properties"
+msgstr "창 관리자의 설정 속성을 설정합니다"
+
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:2
+msgid "Meta"
+msgstr "메타"
+
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
+msgid "Configure miscellaneous window features"
+msgstr "기타 창 기능을 설정합니다"
+
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
+msgid "Miscellaneous"
+msgstr "기타사항"
+
+#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:1
+msgid "Configure window move/resize"
+msgstr "창 이동/크기조정을 설정합니다"
+
+#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:2
+msgid "Moving and Resizing"
+msgstr "이동및 크기조정"
+
+#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:1
+msgid "Configure window placement"
+msgstr "창 배치를 설정합니다"
+
+#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:2
+msgid "Placement"
+msgstr "배치"
+
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:1
+msgid "Control Center Menu"
+msgstr "조정 센터 메뉴"
+
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:2
+msgid "Sawfish window manager"
+msgstr "소피시 창 관리자"
+
+#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
 #, fuzzy
-msgid "(None)"
-msgstr "없음"
+msgid "Enable window manager sound events"
+msgstr "전원 관리 기능 사용(_p)"
 
-#: capplets/background/prefs-widget.c:615
-msgid "Wallpaper Selection"
-msgstr "벽지 고르기"
+#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
+#: capplets/sound/sound.desktop.in.h:2
+msgid "Sound"
+msgstr "소리"
 
-#: capplets/background/prefs-widget.c:622
-msgid "Can't find an hbox, using a normal file selection"
-msgstr "정상적인 파일선택 대화상자에서, hbox를 찾을 수 없습니다."
+#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:1
+msgid "Configure workspaces"
+msgstr "작업공간을 설정합니다"
 
-#: capplets/background/prefs-widget.c:628
-#: capplets/screensaver/screensaver-properties.glade.h:31
-msgid "Preview"
-msgstr "미리보기"
+#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:2
+msgid "Workspaces"
+msgstr "작업 공간"
+
+#: capplets/desktop-links/session.desktop.in.in.h:1
+msgid "Configure which non-session aware programs are started up"
+msgstr "세션과 상관없는 프로그램 시작을 설정합니다"
+
+#: capplets/desktop-links/session.desktop.in.in.h:2
+msgid "Startup Programs"
+msgstr "시작 프로그램"
 
 #.
-#. * Translatable strings file generated by Glade.
+#. * Translatable strings file
 #. * Add this file to your project's POTFILES.in.
 #. * DO NOT compile it as part of your application.
 #.
-#: capplets/background/background-properties.glade.h:7
-msgid "window2"
-msgstr ""
+#: capplets/file-types/category-names.h:7
+msgid "Documents"
+msgstr "문서"
 
-#: capplets/background/background-properties.glade.h:8
-#, fuzzy
-msgid "Use GNOME for setting background"
-msgstr "그놈이 배경설정을 함"
+#: capplets/file-types/category-names.h:8
+msgid "Word Processor"
+msgstr "워드 프로세서"
 
-#: capplets/background/background-properties.glade.h:9
-msgid "Colors"
-msgstr "색상"
+#: capplets/file-types/category-names.h:9
+msgid "Published Materials"
+msgstr "출판물"
 
-#: capplets/background/background-properties.glade.h:10
-msgid "Effect"
-msgstr ""
+#: capplets/file-types/category-names.h:10
+msgid "Spreadsheet"
+msgstr "스프레드시트"
 
-#: capplets/background/background-properties.glade.h:11
-#, fuzzy
-msgid "Primary color"
-msgstr "기본 색상"
+#: capplets/file-types/category-names.h:11
+msgid "Presentation"
+msgstr "프레젠테이션"
 
-#: capplets/background/background-properties.glade.h:12
-msgid "Right or bottom color"
-msgstr ""
+#: capplets/file-types/category-names.h:12
+msgid "Diagram"
+msgstr "다이아그램"
 
-#: capplets/background/background-properties.glade.h:13
-#: capplets/background/background-properties.glade.h:14
-#, fuzzy
-msgid "Pick a color"
-msgstr "기본 색상"
+#: capplets/file-types/category-names.h:13
+msgid "TeX"
+msgstr "TeX"
 
-#: capplets/background/background-properties.glade.h:15
-#, fuzzy
-msgid "Solid Color"
-msgstr "2차 색상"
+#: capplets/file-types/category-names.h:14
+msgid "Vector Graphics"
+msgstr "벡터 그래픽"
 
-#: capplets/background/background-properties.glade.h:16
-msgid "Vertical Gradient"
-msgstr "수직으로 서서히 변화"
+#: capplets/file-types/category-names.h:15
+msgid "World Wide Web"
+msgstr "웹 문서"
 
-#: capplets/background/background-properties.glade.h:17
-msgid "Horizontal Gradient"
-msgstr "수평으로 서서히 변화"
+#: capplets/file-types/category-names.h:16
+msgid "Plain Text"
+msgstr "일반 텍스트"
 
-#: capplets/background/background-properties.glade.h:18
-msgid "Apply changes automatically"
-msgstr ""
+#: capplets/file-types/category-names.h:17
+msgid "Extended Markup Language (XML)"
+msgstr "확장 마크업 언어 (XML)"
 
-#: capplets/background/background-properties.glade.h:19
-msgid "Wallpaper"
-msgstr "벽지"
+#: capplets/file-types/category-names.h:18
+msgid "Information"
+msgstr "정보"
 
-#: capplets/background/background-properties.glade.h:20
-#, fuzzy
-msgid "File"
-msgstr "타일"
+#: capplets/file-types/category-names.h:19
+msgid "Financial"
+msgstr "재정"
 
-#: capplets/background/background-properties.glade.h:21
-msgid "Display Style"
-msgstr ""
+#: capplets/file-types/category-names.h:20
+msgid "Calendar"
+msgstr "달력"
 
-#: capplets/background/background-properties.glade.h:22
-msgid "Tiled"
-msgstr "타일"
+#: capplets/file-types/category-names.h:21
+msgid "Contacts"
+msgstr "연락처"
 
-#: capplets/background/background-properties.glade.h:23
-msgid "Centered"
-msgstr "중앙"
+#: capplets/file-types/category-names.h:22
+msgid "Packages"
+msgstr "꾸러미"
 
-#: capplets/background/background-properties.glade.h:24
-#, fuzzy
-msgid "Scaled (keep aspect ratio)"
-msgstr "크기 조정 (가로세로 비율 유지)"
+#: capplets/file-types/category-names.h:23
+msgid "Software Development"
+msgstr "소프트웨어 개발"
 
-#: capplets/background/background-properties.glade.h:25
-msgid "Stretched (change aspect ratio)"
-msgstr ""
+#: capplets/file-types/category-names.h:24
+msgid "Source Code"
+msgstr "소스 코드"
 
-#: capplets/background/background-properties.glade.h:26
-#, fuzzy
-msgid "Browse..."
-msgstr " 찾아보기... "
+#: capplets/file-types/category-names.h:25
+msgid "Audio"
+msgstr "오디오"
 
-#: capplets/background/background-properties.glade.h:28
-msgid "Adjust wallpaper's transparency"
-msgstr ""
+#: capplets/file-types/category-names.h:26
+msgid "Images"
+msgstr "그림"
 
-#: capplets/background/background-properties.glade.h:29
-#, fuzzy
-msgid "More Transparent"
-msgstr "투명"
+#: capplets/file-types/category-names.h:27
+msgid "Video"
+msgstr "비디오"
 
-#: capplets/background/background-properties.glade.h:30
-#, fuzzy
-msgid "More Solid"
-msgstr "채워진 색깔"
-
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/keyboard/keyboard-properties.glade.h:7
-#: capplets/screensaver/screensaver-properties.glade.h:23
-#: capplets/sound/sound-properties.glade.h:7
-msgid "window1"
-msgstr ""
-
-#: capplets/keyboard/keyboard-properties.glade.h:8
-#, fuzzy
-msgid "Enable Keyboard Repeat"
-msgstr "자동반복하기"
-
-#: capplets/keyboard/keyboard-properties.glade.h:9
-msgid "Delay Until Repeat"
-msgstr ""
-
-#: capplets/keyboard/keyboard-properties.glade.h:10
-msgid "....a"
-msgstr ""
-
-#: capplets/keyboard/keyboard-properties.glade.h:11
-#, fuzzy
-msgid "...a"
-msgstr "추가..."
-
-#: capplets/keyboard/keyboard-properties.glade.h:12
-msgid "..a"
-msgstr ""
-
-#: capplets/keyboard/keyboard-properties.glade.h:13
-msgid ".a"
-msgstr ""
-
-#: capplets/keyboard/keyboard-properties.glade.h:14
-#, fuzzy
-msgid "Key Repeat Rate"
-msgstr "반복정도"
-
-#: capplets/keyboard/keyboard-properties.glade.h:15
-msgid "a....a"
-msgstr ""
-
-#: capplets/keyboard/keyboard-properties.glade.h:16
-msgid "a...a"
-msgstr ""
-
-#: capplets/keyboard/keyboard-properties.glade.h:17
-msgid "a..a"
-msgstr ""
-
-#: capplets/keyboard/keyboard-properties.glade.h:18
-msgid "a.a"
-msgstr ""
-
-#: capplets/keyboard/keyboard-properties.glade.h:19
-#, fuzzy
-msgid "Enable Keyboard Click"
-msgstr "키보드 누를때 소리"
-
-#: capplets/keyboard/keyboard-properties.glade.h:20
-msgid "Keyboard click"
-msgstr "키보드 누를때 소리"
-
-#: capplets/keyboard/keyboard-properties.glade.h:21
-msgid "Click volume"
-msgstr "누를때 소리 크기"
-
-#: capplets/keyboard/keyboard-properties.glade.h:22
-#, fuzzy
-msgid "Type here to test setting"
-msgstr "설정 테스트"
-
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/mouse/mouse-properties.glade.h:7
-#, fuzzy
-msgid "Mouse Configuration"
-msgstr "마우스 움직임"
-
-#: capplets/mouse/mouse-properties.glade.h:8
-msgid "My mouse is:"
-msgstr ""
-
-#: capplets/mouse/mouse-properties.glade.h:9
-msgid "Left handed"
-msgstr "왼손잡이"
-
-#: capplets/mouse/mouse-properties.glade.h:10
-msgid "Right handed"
-msgstr "오른손잡이"
-
-#: capplets/mouse/mouse-properties.glade.h:11
-#: capplets/screensaver/screensavers/3d_clock.xml.h:11
-#: capplets/screensaver/screensavers/ant.xml.h:10
-#: capplets/screensaver/screensavers/attraction.xml.h:19
-#: capplets/screensaver/screensavers/bsod.xml.h:8
-#: capplets/screensaver/screensavers/compass.xml.h:10
-#: capplets/screensaver/screensavers/flag.xml.h:10
-#: capplets/screensaver/screensavers/qix.xml.h:16
-#: capplets/screensaver/screensavers/starfish.xml.h:9
-#: capplets/screensaver/screensavers/starfish.xml.h:13
-msgid "Slow"
-msgstr "느리게"
-
-#: capplets/mouse/mouse-properties.glade.h:12
-#: capplets/screensaver/screensavers/3d_clock.xml.h:12
-#: capplets/screensaver/screensavers/ant.xml.h:11
-#: capplets/screensaver/screensavers/attraction.xml.h:20
-#: capplets/screensaver/screensavers/bsod.xml.h:9
-#: capplets/screensaver/screensavers/compass.xml.h:11
-#: capplets/screensaver/screensavers/flag.xml.h:11
-#: capplets/screensaver/screensavers/qix.xml.h:17
-#: capplets/screensaver/screensavers/starfish.xml.h:8
-msgid "Fast"
-msgstr "빠르게"
-
-#: capplets/mouse/mouse-properties.glade.h:13
-msgid "Mouse speed:"
-msgstr ""
-
-#: capplets/mouse/mouse-properties.glade.h:14
-#: capplets/screensaver/screensavers/3d_clock.xml.h:8
-#: capplets/screensaver/screensavers/3d_clock.xml.h:14
-#: capplets/screensaver/screensavers/attraction.xml.h:25
-#: capplets/screensaver/screensavers/qix.xml.h:31
-#, fuzzy
-msgid "Low"
-msgstr "낮음"
-
-#: capplets/mouse/mouse-properties.glade.h:15
-#: capplets/screensaver/screensavers/3d_clock.xml.h:9
-#: capplets/screensaver/screensavers/3d_clock.xml.h:15
-#: capplets/screensaver/screensavers/attraction.xml.h:26
-#: capplets/screensaver/screensavers/qix.xml.h:32
-#, fuzzy
-msgid "High"
-msgstr "오른쪽"
-
-#: capplets/mouse/mouse-properties.glade.h:16
-msgid "Sensitivity:"
-msgstr ""
-
-#: capplets/screensaver/preferences.c:508
-msgid "Custom screensaver. No description available"
-msgstr ""
-
-#: capplets/screensaver/prefs-widget.c:160
-msgid "Use"
-msgstr ""
-
-#: capplets/screensaver/prefs-widget.c:160
-#, fuzzy
-msgid "Screensaver"
-msgstr "화면 보호기"
-
-#: capplets/screensaver/screensaver-prefs-dialog.c:185
-msgid "Name:"
-msgstr "이름:"
-
-#: capplets/screensaver/screensaver-prefs-dialog.c:197
-msgid "Settings"
-msgstr "설정"
-
-#: capplets/screensaver/screensaver-prefs-dialog.c:204
+#: capplets/file-types/file-types-capplet.c:212
 msgid "Description"
 msgstr "설명"
 
-#: capplets/screensaver/screensaver-prefs-dialog.c:207
-msgid "label1"
+#: capplets/file-types/file-types-capplet.c:219
+msgid "Extensions"
+msgstr "확장자"
+
+#: capplets/file-types/file-types.desktop.in.h:1
+msgid "File Types and Programs"
+msgstr "파일 형식과 프로그램"
+
+#: capplets/file-types/file-types.desktop.in.h:2
+msgid "Specify which programs are used to open or view each file type"
+msgstr "각 파일 형식을 열거나 볼때 사용되는 프로그램을 지정합니다"
+
+#: capplets/file-types/mime-category-edit-dialog.c:137
+msgid "Edit file category"
+msgstr "파일 분류 편집"
+
+#: capplets/file-types/mime-category-edit-dialog.c:171
+#: capplets/file-types/mime-edit-dialog.c:204
+#: capplets/file-types/service-edit-dialog.c:166
+#: capplets/file-types/service-edit-dialog.c:167
+msgid "Model"
+msgstr "모델"
+
+#: capplets/file-types/mime-category-edit-dialog.c:172
+msgid "GtkTreeModel that contains the category data"
+msgstr "분류 데이터를 포함하는 GtkTreeModel"
+
+#: capplets/file-types/mime-category-edit-dialog.c:177
+msgid "MIME category info"
+msgstr "MIME 분류 정보"
+
+#: capplets/file-types/mime-category-edit-dialog.c:178
+msgid "Structure containing information on the MIME category"
+msgstr "MIME 분류에서 정보를 포함하는 구조"
+
+#: capplets/file-types/mime-category-edit-dialog.c:343
+#: capplets/file-types/mime-edit-dialog.c:392
+#: capplets/file-types/mime-edit-dialog.c:492
+#: capplets/file-types/service-edit-dialog.c:351
+#: capplets/file-types/service-edit-dialog.c:397
+msgid "Custom"
+msgstr "사용자 설정"
+
+#: capplets/file-types/mime-edit-dialog.c:164
+msgid "Extension"
+msgstr "확장자"
+
+#: capplets/file-types/mime-edit-dialog.c:167
+msgid "Edit file type"
+msgstr "파일 형식 편집"
+
+#: capplets/file-types/mime-edit-dialog.c:205
+msgid "Underlying model to notify when Ok is clicked"
+msgstr "확인이 눌러졌을때 알려주는 기초 모델"
+
+#: capplets/file-types/mime-edit-dialog.c:212
+msgid "MIME type information"
+msgstr "MIME 형식 정보"
+
+#: capplets/file-types/mime-edit-dialog.c:213
+msgid "Structure with data on the MIME type"
 msgstr ""
 
-#: capplets/screensaver/screensaver-prefs-dialog.c:216
-#, fuzzy
-msgid "Demo"
-msgstr "삭제"
+#: capplets/file-types/mime-edit-dialog.c:219
+msgid "Is add dialog"
+msgstr ""
 
-#: capplets/screensaver/screensaver-prefs-dialog.c:1360
-#, fuzzy
-msgid "There are no configurable settings for this screensaver."
-msgstr "화면 보호기 설정"
+#: capplets/file-types/mime-edit-dialog.c:220
+msgid "True if this dialog is for adding a MIME type"
+msgstr ""
 
-#: capplets/screensaver/screensaver-prefs-dialog.c:1369
+#: capplets/file-types/mime-edit-dialog.c:387
+#: capplets/file-types/mime-edit-dialog.c:442
+msgid "None"
+msgstr ""
+
+#: capplets/file-types/mime-edit-dialog.c:673
 msgid ""
-"Cannot find the data to configure this screensaver. Please edit the command "
-"line below."
+"Invalid MIME type. Please enter a valid MIME type, or leave the field blank "
+"to have one generated for you."
 msgstr ""
 
-#: capplets/screensaver/screensaver-prefs-dialog.c:1374
-#, fuzzy
-msgid "Please enter a command line below."
-msgstr "명령을 입력하여야 합니다."
-
-#: capplets/screensaver/screensaver-prefs-dialog.c:1389
-msgid "Visual:"
+#: capplets/file-types/mime-edit-dialog.c:684
+msgid "There already exists a MIME type of that name."
 msgstr ""
 
-#: capplets/screensaver/screensaver-prefs-dialog.c:1418
-#: capplets/screensaver/screensaver-prefs-dialog.c:1714
-#, fuzzy
-msgid "Any"
-msgstr "개미"
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/3d_clock.xml.h:7
-#, fuzzy
-msgid "Twist:"
-msgstr "꼬임"
-
-#: capplets/screensaver/screensavers/3d_clock.xml.h:10
-msgid "Twist speed:"
+#: capplets/file-types/mime-edit-dialog.c:748
+msgid "Category"
 msgstr ""
 
-#: capplets/screensaver/screensavers/3d_clock.xml.h:13
-#, fuzzy
-msgid "Wobble:"
-msgstr "흔들림"
+#: capplets/file-types/mime-edit-dialog.c:753
+msgid "Choose a file category"
+msgstr "파일 분류 선택"
 
-#: capplets/screensaver/screensavers/3d_clock.xml.h:16
-#, fuzzy
-msgid "Size:"
-msgstr "크기"
-
-#: capplets/screensaver/screensavers/3d_clock.xml.h:17
-#: capplets/screensaver/screensavers/ant.xml.h:13
-#: capplets/screensaver/screensavers/attraction.xml.h:13
-#: capplets/screensaver/screensavers/flag.xml.h:13
-#: capplets/screensaver/screensavers/rorschach.xml.h:8
-#: capplets/screensaver/screensavers/rorschach.xml.h:11
-msgid "Small"
-msgstr "작게"
-
-#: capplets/screensaver/screensavers/3d_clock.xml.h:18
-#: capplets/screensaver/screensavers/ant.xml.h:14
-#: capplets/screensaver/screensavers/attraction.xml.h:14
-#: capplets/screensaver/screensavers/flag.xml.h:14
-#: capplets/screensaver/screensavers/rorschach.xml.h:9
-#: capplets/screensaver/screensavers/rorschach.xml.h:12
-msgid "Large"
-msgstr "크게"
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/ant.xml.h:7
-msgid "Sharp turns"
+#: capplets/file-types/mime-types-model.c:167
+#: capplets/file-types/mime-types-model.c:168
+msgid "Model for categories only"
 msgstr ""
 
-#: capplets/screensaver/screensavers/ant.xml.h:8
-msgid "Truchet lines"
+#: capplets/file-types/mime-types-model.c:420
+msgid "Internet Services"
+msgstr "인터넷 서비스"
+
+#: capplets/file-types/service-edit-dialog.c:133
+msgid "Edit service information"
+msgstr "서비스 정보 편집"
+
+#: capplets/file-types/service-edit-dialog.c:174
+msgid "Service info"
+msgstr "서비스 정보"
+
+#: capplets/file-types/service-edit-dialog.c:175
+msgid "Structure containing service information"
 msgstr ""
 
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/ant.xml.h:9
-#: capplets/screensaver/screensavers/attraction.xml.h:18
-#: capplets/screensaver/screensavers/bsod.xml.h:7
-#: capplets/screensaver/screensavers/compass.xml.h:9
-#: capplets/screensaver/screensavers/flag.xml.h:9
-#: capplets/screensaver/screensavers/qix.xml.h:15
-msgid "Speed"
-msgstr "속도"
-
-#: capplets/screensaver/screensavers/ant.xml.h:12
-#: capplets/screensaver/screensavers/flag.xml.h:12
-msgid "Timeout"
+#: capplets/file-types/service-edit-dialog.c:181
+msgid "Is add"
 msgstr ""
 
-#: capplets/screensaver/screensavers/ant.xml.h:15
-msgid "Random"
-msgstr "무작위"
-
-#: capplets/screensaver/screensavers/ant.xml.h:16
-msgid "Specific"
+#: capplets/file-types/service-edit-dialog.c:182
+msgid "TRUE if this is an add service dialog"
 msgstr ""
 
-#: capplets/screensaver/screensavers/ant.xml.h:17
-msgid "number of Ants"
+#: capplets/file-types/service-edit-dialog.c:489
+msgid "Please enter a protocol name."
+msgstr "프로토콜 이름을 입력하십시오."
+
+#: capplets/file-types/service-edit-dialog.c:502
+msgid ""
+"Invalid protocol name. Please enter a protocol name without any spaces or "
+"punctuation."
+msgstr ""
+"잘못된 프로토콜 이름입니다. 공백이나 구두점 없이 프로토콜 이름을 입력하십시오"
+
+#: capplets/file-types/service-edit-dialog.c:515
+msgid "There is already a protocol by that name."
+msgstr "그러한 프로토콜은 이미 있습니다"
+
+#: capplets/file-types/service-info.c:44
+msgid "Unknown service types"
+msgstr "알수 없는 서비스 형식"
+
+#: capplets/file-types/service-info.c:45
+msgid "World wide web"
 msgstr ""
 
-#: capplets/screensaver/screensavers/ant.xml.h:18
-msgid "Random size upto"
+#: capplets/file-types/service-info.c:46
+msgid "File transfer protocol"
+msgstr "파일 전송 프로토콜"
+
+#: capplets/file-types/service-info.c:47
+msgid "Detailed documentation"
+msgstr "상세 문서"
+
+#: capplets/file-types/service-info.c:48
+msgid "Manual pages"
+msgstr "설명서 페이지"
+
+#: capplets/file-types/service-info.c:49
+msgid "Electronic mail transmission"
+msgstr "전자 메일 전송"
+
+#: capplets/keyboard/gnome-keyboard-properties.c:263
+#: capplets/keyboard/gnome-keyboard-properties.c:265
+#: capplets/sound/sound-properties-capplet.c:139
+#: capplets/sound/sound-properties-capplet.c:141
+msgid ""
+"Just apply settings and quit (compatibility only; now handled by daemon)"
+msgstr ""
+"설정을 적용하고 마칩니다 (호환성; 이제 데몬이 처리합니다)"
+
+#: capplets/keyboard/keyboard.desktop.in.h:1
+msgid "Keyboard"
+msgstr "글쇠판"
+
+#: capplets/keyboard/keyboard.desktop.in.h:2
+msgid "Keyboard Properties"
+msgstr "글쇠판 설정"
+
+#: capplets/mouse/gnome-mouse-properties.c:498
+#: capplets/mouse/mouse.desktop.in.h:2
+msgid "Mouse Properties"
+msgstr "마우스 설정"
+
+#: capplets/mouse/mouse.desktop.in.h:1
+msgid "Mouse"
+msgstr "마우스"
+
+#: capplets/screensaver/screensaver.desktop.in.h:1
+msgid "Configure the settings of the screensaver"
+msgstr "화면 보호기를 설정합니다"
+
+#: capplets/screensaver/screensaver.desktop.in.h:2
+msgid "Screensaver"
+msgstr "화면 보호기"
+
+#: capplets/sound/sound.desktop.in.h:1
+msgid "Configure GNOME's use of sound"
+msgstr "그놈에서 사용되는 소리를 설정합니다"
+
+#: capplets/sound/sound-properties-capplet.c:171
+msgid "Sound properties"
+msgstr "소리 설정"
+
+#. just 8 short names that will serve as samples for titles in demo
+#: capplets/theme-switcher/control/control.c:19
+msgid "Eenie"
 msgstr ""
 
-#: capplets/screensaver/screensavers/ant.xml.h:19
-#: capplets/screensaver/screensavers/flag.xml.h:16
-msgid "Specific size of"
+#: capplets/theme-switcher/control/control.c:19
+msgid "Mynie"
 msgstr ""
 
-#: capplets/screensaver/screensavers/ant.xml.h:20
-#: capplets/screensaver/screensavers/flag.xml.h:17
-msgid "Number of colours"
+#: capplets/theme-switcher/control/control.c:19
+msgid "Catcha"
 msgstr ""
 
-#: capplets/screensaver/screensavers/ant.xml.h:21
-#: capplets/screensaver/screensavers/flag.xml.h:18
+#: capplets/theme-switcher/control/control.c:19
+msgid "By Its"
+msgstr ""
+
+#: capplets/theme-switcher/control/control.c:20
+msgid "Meenie"
+msgstr ""
+
+#: capplets/theme-switcher/control/control.c:20
+msgid "Moe"
+msgstr ""
+
+#: capplets/theme-switcher/control/control.c:20
+msgid "Tiger"
+msgstr ""
+
+#: capplets/theme-switcher/control/control.c:20
+msgid "Toe"
+msgstr ""
+
+#: capplets/theme-switcher/control/control.c:38
+msgid "Selected themes from above will be tested by previewing here."
+msgstr ""
+
+#. column one
+#: capplets/theme-switcher/control/control.c:43
+msgid "Sample Button"
+msgstr "예제 버튼"
+
+#: capplets/theme-switcher/control/control.c:47
+msgid "Sample Check Button"
+msgstr "예제 체크 버튼"
+
+#: capplets/theme-switcher/control/control.c:53
+msgid "Sample Text Entry Field"
+msgstr "예제 텍스트 항목 필드"
+
+#: capplets/theme-switcher/control/control.c:64
+msgid "Submenu"
+msgstr "하위 메뉴"
+
+#: capplets/theme-switcher/control/control.c:69
+msgid "Item 1"
+msgstr "항목 1"
+
+#: capplets/theme-switcher/control/control.c:71
+msgid "Another item"
+msgstr "다른 항목"
+
+#: capplets/theme-switcher/control/control.c:75
+msgid "Radio Button 1"
+msgstr "라디오 버튼 1"
+
+#: capplets/theme-switcher/control/control.c:81
+msgid "Radio Button 2"
+msgstr "라디오 버튼 2"
+
+#: capplets/theme-switcher/control/control.c:102
+msgid "One"
+msgstr "하나"
+
+#: capplets/theme-switcher/control/control.c:108
 msgid "Two"
 msgstr "둘"
 
-#: capplets/screensaver/screensavers/ant.xml.h:22
-#: capplets/screensaver/screensavers/flag.xml.h:19
-msgid "Many"
-msgstr ""
-
-#: capplets/screensaver/screensavers/ant.xml.h:23
-#, fuzzy
-msgid "Randomize"
-msgstr "무작위"
-
-#: capplets/screensaver/screensavers/ant.xml.h:24
-msgid "Three Sided cells"
-msgstr ""
-
-#: capplets/screensaver/screensavers/ant.xml.h:25
-msgid "Four Sided cells"
-msgstr ""
-
-#: capplets/screensaver/screensavers/ant.xml.h:26
-msgid "Six Sided cells"
-msgstr ""
-
-#: capplets/screensaver/screensavers/ant.xml.h:27
-msgid "Nine Sided cells"
-msgstr ""
-
-#: capplets/screensaver/screensavers/ant.xml.h:28
-msgid "Twelve Sided cells"
-msgstr ""
-
-#: capplets/screensaver/screensavers/ant.xml.h:29
-#: capplets/screensaver/screensavers/attraction.xml.h:22
-#: capplets/screensaver/screensavers/bsod.xml.h:11
-#: capplets/screensaver/screensavers/compass.xml.h:13
-#: capplets/screensaver/screensavers/flag.xml.h:21
-#: capplets/screensaver/screensavers/qix.xml.h:29
-msgid "Monochrome"
-msgstr "단색"
-
-#: capplets/screensaver/screensavers/ant.xml.h:30
-#: capplets/screensaver/screensavers/attraction.xml.h:21
-#: capplets/screensaver/screensavers/bsod.xml.h:10
-#: capplets/screensaver/screensavers/compass.xml.h:12
-#: capplets/screensaver/screensavers/flag.xml.h:20
-#: capplets/screensaver/screensavers/qix.xml.h:28
-#, fuzzy
-msgid "Full Color"
-msgstr "색깔"
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/attraction.xml.h:7
-#, fuzzy
-msgid "Balls"
-msgstr "막대"
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/attraction.xml.h:8
-#: capplets/screensaver/screensavers/qix.xml.h:7
-#, fuzzy
-msgid "Lines"
-msgstr "덩쿨"
-
-#: capplets/screensaver/screensavers/attraction.xml.h:9
-#, fuzzy
-msgid "Tails"
-msgstr "꼬임"
-
-#: capplets/screensaver/screensavers/attraction.xml.h:10
-#: capplets/screensaver/screensavers/qix.xml.h:8
-msgid "Polygons"
-msgstr ""
-
-#: capplets/screensaver/screensavers/attraction.xml.h:11
-#, fuzzy
-msgid "Splines"
-msgstr "덩쿨"
-
-#: capplets/screensaver/screensavers/attraction.xml.h:12
-msgid "Threshold of repulsion"
-msgstr ""
-
-#: capplets/screensaver/screensavers/attraction.xml.h:15
-msgid "Length of Trail"
-msgstr ""
-
-#: capplets/screensaver/screensavers/attraction.xml.h:16
-#: capplets/screensaver/screensavers/qix.xml.h:19
-#: capplets/screensaver/screensavers/qix.xml.h:25
-#: capplets/screensaver/screensavers/rorschach.xml.h:16
-#, fuzzy
-msgid "Short"
-msgstr "탐지기"
-
-#: capplets/screensaver/screensavers/attraction.xml.h:17
-#: capplets/screensaver/screensavers/qix.xml.h:20
-#: capplets/screensaver/screensavers/qix.xml.h:26
-#: capplets/screensaver/screensavers/rorschach.xml.h:17
-msgid "Long"
-msgstr ""
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/attraction.xml.h:23
-#: capplets/screensaver/screensavers/braid.xml.h:7
-#: capplets/screensaver/screensavers/fadeplot.xml.h:7
-#: capplets/screensaver/screensavers/sierpinski.xml.h:7
-#: capplets/screensaver/screensavers/spiral.xml.h:12
-#: capplets/screensaver/screensavers/triangle.xml.h:7
-#: capplets/screensaver/screensavers/vines.xml.h:7
-msgid "Number of Colors"
-msgstr ""
-
-#: capplets/screensaver/screensavers/attraction.xml.h:24
-#, fuzzy
-msgid "Color Contrast"
-msgstr "색상"
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/blitspin.xml.h:7
-msgid "Speed of rotation."
-msgstr ""
-
-#: capplets/screensaver/screensavers/blitspin.xml.h:8
-#: capplets/screensaver/screensavers/blitspin.xml.h:11
-#: capplets/screensaver/screensavers/bouboule.xml.h:10
-#: capplets/screensaver/screensavers/bubbles.xml.h:8
-#: capplets/screensaver/screensavers/coral.xml.h:13
-#: capplets/screensaver/screensavers/crystal.xml.h:10
-#: capplets/screensaver/screensavers/cynosure.xml.h:13
-#: capplets/screensaver/screensavers/decayscreen.xml.h:8
-#: capplets/screensaver/screensavers/discrete.xml.h:10
-#: capplets/screensaver/screensavers/drift.xml.h:10
-#: capplets/screensaver/screensavers/epicycle.xml.h:8
-#: capplets/screensaver/screensavers/fadeplot.xml.h:12
-#: capplets/screensaver/screensavers/flame.xml.h:13
-#: capplets/screensaver/screensavers/flame.xml.h:16
-#: capplets/screensaver/screensavers/forest.xml.h:10
-#: capplets/screensaver/screensavers/goop.xml.h:10
-#: capplets/screensaver/screensavers/greynetic.xml.h:8
-#: capplets/screensaver/screensavers/halo.xml.h:12
-#: capplets/screensaver/screensavers/helix.xml.h:8
-#: capplets/screensaver/screensavers/hopalong.xml.h:10
-#: capplets/screensaver/screensavers/hypercube.xml.h:11
-#: capplets/screensaver/screensavers/jigsaw.xml.h:8
-#: capplets/screensaver/screensavers/julia.xml.h:10
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:13
-#: capplets/screensaver/screensavers/lisa.xml.h:10
-#: capplets/screensaver/screensavers/lmorph.xml.h:13
-#: capplets/screensaver/screensavers/moire.xml.h:8
-#: capplets/screensaver/screensavers/munch.xml.h:8
-#: capplets/screensaver/screensavers/pyro.xml.h:11
-#: capplets/screensaver/screensavers/sierpinski.xml.h:10
-#: capplets/screensaver/screensavers/spiral.xml.h:10
-#, fuzzy
-msgid "Faster"
-msgstr "빠르게"
-
-#: capplets/screensaver/screensavers/blitspin.xml.h:9
-#: capplets/screensaver/screensavers/blitspin.xml.h:12
-#: capplets/screensaver/screensavers/bouboule.xml.h:11
-#: capplets/screensaver/screensavers/bubbles.xml.h:9
-#: capplets/screensaver/screensavers/coral.xml.h:14
-#: capplets/screensaver/screensavers/crystal.xml.h:11
-#: capplets/screensaver/screensavers/cynosure.xml.h:14
-#: capplets/screensaver/screensavers/decayscreen.xml.h:9
-#: capplets/screensaver/screensavers/discrete.xml.h:11
-#: capplets/screensaver/screensavers/drift.xml.h:11
-#: capplets/screensaver/screensavers/epicycle.xml.h:9
-#: capplets/screensaver/screensavers/fadeplot.xml.h:13
-#: capplets/screensaver/screensavers/fadeplot.xml.h:16
-#: capplets/screensaver/screensavers/flame.xml.h:14
-#: capplets/screensaver/screensavers/flame.xml.h:17
-#: capplets/screensaver/screensavers/forest.xml.h:11
-#: capplets/screensaver/screensavers/goop.xml.h:11
-#: capplets/screensaver/screensavers/greynetic.xml.h:9
-#: capplets/screensaver/screensavers/halo.xml.h:13
-#: capplets/screensaver/screensavers/helix.xml.h:9
-#: capplets/screensaver/screensavers/hopalong.xml.h:11
-#: capplets/screensaver/screensavers/hypercube.xml.h:12
-#: capplets/screensaver/screensavers/jigsaw.xml.h:9
-#: capplets/screensaver/screensavers/julia.xml.h:11
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:14
-#: capplets/screensaver/screensavers/lisa.xml.h:11
-#: capplets/screensaver/screensavers/lmorph.xml.h:14
-#: capplets/screensaver/screensavers/moire.xml.h:9
-#: capplets/screensaver/screensavers/munch.xml.h:9
-#: capplets/screensaver/screensavers/pyro.xml.h:10
-#: capplets/screensaver/screensavers/sierpinski.xml.h:11
-#: capplets/screensaver/screensavers/spiral.xml.h:11
-#, fuzzy
-msgid "Slower"
-msgstr "느리게"
-
-#: capplets/screensaver/screensavers/blitspin.xml.h:10
-msgid "Speed of the 90 degree rotation."
-msgstr ""
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/blitspin.xml.h:13
-#: capplets/screensaver/screensavers/bouboule.xml.h:15
-#: capplets/screensaver/screensavers/braid.xml.h:9
-#: capplets/screensaver/screensavers/bubbles.xml.h:13
-#: capplets/screensaver/screensavers/crystal.xml.h:15
-#: capplets/screensaver/screensavers/cynosure.xml.h:15
-#: capplets/screensaver/screensavers/decayscreen.xml.h:10
-#: capplets/screensaver/screensavers/discrete.xml.h:14
-#: capplets/screensaver/screensavers/drift.xml.h:15
-#: capplets/screensaver/screensavers/epicycle.xml.h:12
-#: capplets/screensaver/screensavers/fadeplot.xml.h:17
-#: capplets/screensaver/screensavers/flame.xml.h:18
-#: capplets/screensaver/screensavers/forest.xml.h:14
-#: capplets/screensaver/screensavers/goop.xml.h:12
-#: capplets/screensaver/screensavers/grav.xml.h:11
-#: capplets/screensaver/screensavers/greynetic.xml.h:10
-#: capplets/screensaver/screensavers/halo.xml.h:14
-#: capplets/screensaver/screensavers/helix.xml.h:10
-#: capplets/screensaver/screensavers/hopalong.xml.h:15
-#: capplets/screensaver/screensavers/hypercube.xml.h:13
-#: capplets/screensaver/screensavers/ifs.xml.h:9
-#: capplets/screensaver/screensavers/julia.xml.h:14
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:15
-#: capplets/screensaver/screensavers/laser.xml.h:12
-#: capplets/screensaver/screensavers/lightning.xml.h:9
-#: capplets/screensaver/screensavers/lisa.xml.h:17
-#: capplets/screensaver/screensavers/lmorph.xml.h:16
-#: capplets/screensaver/screensavers/moire.xml.h:15
-#: capplets/screensaver/screensavers/munch.xml.h:12
-#: capplets/screensaver/screensavers/pedal.xml.h:16
-#: capplets/screensaver/screensavers/sierpinski.xml.h:12
-#: capplets/screensaver/screensavers/spiral.xml.h:16
-#: capplets/screensaver/screensavers/triangle.xml.h:9
-#: capplets/screensaver/screensavers/vines.xml.h:9
-#: capplets/screensaver/screensavers/xroger.xml.h:7
-#, fuzzy
-msgid "Display screensaver in monochrome."
-msgstr "단색으로 표시합니다."
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/bouboule.xml.h:7
-#: capplets/screensaver/screensavers/crystal.xml.h:7
-#: capplets/screensaver/screensavers/cynosure.xml.h:7
-#: capplets/screensaver/screensavers/discrete.xml.h:7
-#: capplets/screensaver/screensavers/drift.xml.h:7
-#: capplets/screensaver/screensavers/forest.xml.h:7
-#: capplets/screensaver/screensavers/grav.xml.h:7
-#: capplets/screensaver/screensavers/halo.xml.h:7
-#: capplets/screensaver/screensavers/hopalong.xml.h:7
-#: capplets/screensaver/screensavers/ifs.xml.h:7
-#: capplets/screensaver/screensavers/julia.xml.h:7
-#: capplets/screensaver/screensavers/lightning.xml.h:7
-#: capplets/screensaver/screensavers/lisa.xml.h:7
-#: capplets/screensaver/screensavers/moire.xml.h:10
-msgid "Number of Colors."
-msgstr ""
-
-#: capplets/screensaver/screensavers/bouboule.xml.h:8
-#: capplets/screensaver/screensavers/braid.xml.h:8
-#: capplets/screensaver/screensavers/crystal.xml.h:8
-#: capplets/screensaver/screensavers/cynosure.xml.h:8
-#: capplets/screensaver/screensavers/discrete.xml.h:8
-#: capplets/screensaver/screensavers/drift.xml.h:8
-#: capplets/screensaver/screensavers/fadeplot.xml.h:8
-#: capplets/screensaver/screensavers/forest.xml.h:8
-#: capplets/screensaver/screensavers/grav.xml.h:8
-#: capplets/screensaver/screensavers/halo.xml.h:8
-#: capplets/screensaver/screensavers/hopalong.xml.h:8
-#: capplets/screensaver/screensavers/ifs.xml.h:8
-#: capplets/screensaver/screensavers/julia.xml.h:8
-#: capplets/screensaver/screensavers/lightning.xml.h:8
-#: capplets/screensaver/screensavers/lisa.xml.h:8
-#: capplets/screensaver/screensavers/moire.xml.h:11
-#: capplets/screensaver/screensavers/sierpinski.xml.h:8
-#: capplets/screensaver/screensavers/spiral.xml.h:13
-#: capplets/screensaver/screensavers/triangle.xml.h:8
-#: capplets/screensaver/screensavers/vines.xml.h:8
-#, fuzzy
-msgid "Colors:"
-msgstr "색상"
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/bouboule.xml.h:9
-#: capplets/screensaver/screensavers/bubbles.xml.h:7
-#: capplets/screensaver/screensavers/coral.xml.h:12
-#: capplets/screensaver/screensavers/crystal.xml.h:9
-#: capplets/screensaver/screensavers/cynosure.xml.h:12
-#: capplets/screensaver/screensavers/decayscreen.xml.h:7
-#: capplets/screensaver/screensavers/discrete.xml.h:9
-#: capplets/screensaver/screensavers/drift.xml.h:9
-#: capplets/screensaver/screensavers/epicycle.xml.h:7
-#: capplets/screensaver/screensavers/flame.xml.h:12
-#: capplets/screensaver/screensavers/goop.xml.h:9
-#: capplets/screensaver/screensavers/greynetic.xml.h:7
-#: capplets/screensaver/screensavers/halo.xml.h:11
-#: capplets/screensaver/screensavers/hopalong.xml.h:9
-#: capplets/screensaver/screensavers/hypercube.xml.h:10
-#: capplets/screensaver/screensavers/jigsaw.xml.h:7
-#: capplets/screensaver/screensavers/julia.xml.h:9
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:12
-#: capplets/screensaver/screensavers/lisa.xml.h:9
-#: capplets/screensaver/screensavers/lmorph.xml.h:12
-#: capplets/screensaver/screensavers/moire.xml.h:7
-#: capplets/screensaver/screensavers/munch.xml.h:7
-#: capplets/screensaver/screensavers/spiral.xml.h:9
-msgid "Speed of Motion."
-msgstr ""
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/bouboule.xml.h:12
-#: capplets/screensaver/screensavers/goop.xml.h:7
-#, fuzzy
-msgid "Number of bubbles to use."
-msgstr "사용할 거품의 개수를 바꿉니다."
-
-#: capplets/screensaver/screensavers/bouboule.xml.h:13
-#: capplets/screensaver/screensavers/crystal.xml.h:13
-#: capplets/screensaver/screensavers/discrete.xml.h:13
-#: capplets/screensaver/screensavers/drift.xml.h:13
-#: capplets/screensaver/screensavers/fadeplot.xml.h:10
-#: capplets/screensaver/screensavers/forest.xml.h:13
-#: capplets/screensaver/screensavers/goop.xml.h:8
-#: capplets/screensaver/screensavers/grav.xml.h:10
-#: capplets/screensaver/screensavers/halo.xml.h:10
-#: capplets/screensaver/screensavers/julia.xml.h:13
-#: capplets/screensaver/screensavers/lisa.xml.h:13
-#: capplets/screensaver/screensavers/pyro.xml.h:8
-#: capplets/screensaver/screensavers/spiral.xml.h:15
-#, fuzzy
-msgid "Count:"
-msgstr "이 프로그램은:"
-
-#: capplets/screensaver/screensavers/bouboule.xml.h:14
-msgid "Use red/blue 3d seperation."
-msgstr "빨강/파랑 삼차원 분리 사용"
-
-#: capplets/screensaver/screensavers/bubbles.xml.h:10
-msgid "Draw circles instead of pixmap bubbles."
-msgstr ""
-
-#: capplets/screensaver/screensavers/bubbles.xml.h:11
-msgid "Don't hide bubbles when they pop."
-msgstr "거품이 터질때 숨기지 않습니다."
-
-#: capplets/screensaver/screensavers/bubbles.xml.h:12
-msgid "Bubbles exist in three dimensions."
-msgstr ""
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/compass.xml.h:7
-msgid "Use double buffering"
-msgstr ""
-
-#: capplets/screensaver/screensavers/compass.xml.h:8
-msgid "Don't use double bufferinge"
-msgstr ""
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/coral.xml.h:7
-msgid "Density"
-msgstr ""
-
-#: capplets/screensaver/screensavers/coral.xml.h:8
-#, fuzzy
-msgid "Denser"
-msgstr "일반"
-
-#: capplets/screensaver/screensavers/coral.xml.h:9
-#, fuzzy
-msgid "Thinner"
-msgstr "Tiger"
-
-#: capplets/screensaver/screensavers/coral.xml.h:10
-msgid "Number of seeds"
-msgstr ""
-
-#: capplets/screensaver/screensavers/coral.xml.h:11
-msgid "Seeds"
-msgstr ""
-
-#: capplets/screensaver/screensavers/crystal.xml.h:12
-#, fuzzy
-msgid "Number of polygons to use."
-msgstr "사용할 색상의 개수를 바꿉니다."
-
-#: capplets/screensaver/screensavers/crystal.xml.h:14
-#, fuzzy
-msgid "Center image."
-msgstr "중앙"
-
-#: capplets/screensaver/screensavers/crystal.xml.h:16
-msgid "Have at maximum size"
-msgstr ""
-
-#: capplets/screensaver/screensavers/crystal.xml.h:17
-msgid "Cell"
-msgstr ""
-
-#: capplets/screensaver/screensavers/cynosure.xml.h:9
-msgid "Number of iterations."
-msgstr ""
-
-#: capplets/screensaver/screensavers/cynosure.xml.h:10
-#: capplets/screensaver/screensavers/flame.xml.h:10
-#: capplets/screensaver/screensavers/hopalong.xml.h:13
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:10
-#: capplets/screensaver/screensavers/lmorph.xml.h:10
-#: capplets/screensaver/screensavers/pedal.xml.h:11
-#: capplets/screensaver/screensavers/pyro.xml.h:13
-msgid "Less"
-msgstr ""
-
-#: capplets/screensaver/screensavers/cynosure.xml.h:11
-#: capplets/screensaver/screensavers/fadeplot.xml.h:15
-#: capplets/screensaver/screensavers/flame.xml.h:11
-#: capplets/screensaver/screensavers/hopalong.xml.h:14
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:11
-#: capplets/screensaver/screensavers/lmorph.xml.h:11
-#: capplets/screensaver/screensavers/pedal.xml.h:12
-#: capplets/screensaver/screensavers/pyro.xml.h:14
-#, fuzzy
-msgid "More"
-msgstr "모아레"
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/deco.xml.h:7
-#: capplets/screensaver/screensavers/spiral.xml.h:7
-msgid "Time between redraws:"
-msgstr ""
-
-#: capplets/screensaver/screensavers/deco.xml.h:8
-msgid "seconds"
-msgstr ""
-
-#: capplets/screensaver/screensavers/deco.xml.h:9
-msgid "Use color when drawing."
-msgstr ""
-
-#: capplets/screensaver/screensavers/deco.xml.h:10
-msgid "Cycle through colors."
-msgstr ""
-
-#: capplets/screensaver/screensavers/discrete.xml.h:12
-#: capplets/screensaver/screensavers/julia.xml.h:12
-#: capplets/screensaver/screensavers/lisa.xml.h:12
-#: capplets/screensaver/screensavers/spiral.xml.h:14
-#, fuzzy
-msgid "Number to use."
-msgstr "사용할 개수를 바꿉니다."
-
-#: capplets/screensaver/screensavers/drift.xml.h:12
-#, fuzzy
-msgid "Number of pixels to use."
-msgstr "사용할 점의 개수를 바꿉니다."
-
-#: capplets/screensaver/screensavers/drift.xml.h:14
-msgid "Fractals should grow."
-msgstr ""
-
-#: capplets/screensaver/screensavers/drift.xml.h:16
-msgid "Use lissajous figures to get points."
-msgstr ""
-
-#: capplets/screensaver/screensavers/epicycle.xml.h:10
-#: capplets/screensaver/screensavers/flame.xml.h:15
-msgid "Time finished product is shown."
-msgstr ""
-
-#: capplets/screensaver/screensavers/epicycle.xml.h:11
-#: capplets/screensaver/screensavers/spiral.xml.h:8
-#: capplets/screensaver/screensavers/starfish.xml.h:15
-#, fuzzy
-msgid "Seconds"
-msgstr "소리"
-
-#: capplets/screensaver/screensavers/fadeplot.xml.h:9
-msgid "Number"
-msgstr ""
-
-#: capplets/screensaver/screensavers/fadeplot.xml.h:11
-#: capplets/screensaver/screensavers/sierpinski.xml.h:9
-msgid "Speed of Motion"
-msgstr ""
-
-#: capplets/screensaver/screensavers/fadeplot.xml.h:14
-msgid "Number of cycles"
-msgstr ""
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/flag.xml.h:7
-msgid "Text for flag"
-msgstr ""
-
-#: capplets/screensaver/screensavers/flag.xml.h:8
-msgid "Bitmap for flag"
-msgstr ""
-
-#: capplets/screensaver/screensavers/flag.xml.h:15
-msgid "Random size up to"
-msgstr ""
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/flame.xml.h:7
-msgid "Number of fractals to generate."
-msgstr ""
-
-#: capplets/screensaver/screensavers/flame.xml.h:8
-#, fuzzy
-msgid "Iterations:"
-msgstr "인력"
-
-#: capplets/screensaver/screensavers/flame.xml.h:9
-msgid "Pixels per fractal."
-msgstr ""
-
-#: capplets/screensaver/screensavers/forest.xml.h:9
-msgid "Delay between redraws."
-msgstr ""
-
-#: capplets/screensaver/screensavers/forest.xml.h:12
-#, fuzzy
-msgid "Number of trees to use."
-msgstr "사용할 나무의 수를 바꿉니다."
-
-#: capplets/screensaver/screensavers/goop.xml.h:13
-msgid "Have transparent bubbles."
-msgstr ""
-
-#: capplets/screensaver/screensavers/goop.xml.h:14
-msgid "Use additive color model."
-msgstr ""
-
-#: capplets/screensaver/screensavers/grav.xml.h:9
-#, fuzzy
-msgid "Number of planets to use."
-msgstr "사용할 점의 개수를 바꿉니다."
-
-#: capplets/screensaver/screensavers/grav.xml.h:12
-msgid "Orbit should decay."
-msgstr ""
-
-#: capplets/screensaver/screensavers/grav.xml.h:13
-msgid "Objects should leave trails behind them."
-msgstr ""
-
-#: capplets/screensaver/screensavers/halo.xml.h:9
-#, fuzzy
-msgid "Number of circles to use."
-msgstr "사용할 나무의 수를 바꿉니다."
-
-#: capplets/screensaver/screensavers/halo.xml.h:15
-#, fuzzy
-msgid "Use a gradient of colors between circles."
-msgstr "배경에 단계적인 색 사용"
-
-#: capplets/screensaver/screensavers/halo.xml.h:16
-msgid "Animate circles."
-msgstr ""
-
-#: capplets/screensaver/screensavers/halo.xml.h:17
-msgid "Cycle through colormap."
-msgstr ""
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/helix.xml.h:7
-msgid "Time between redraws."
-msgstr ""
-
-#: capplets/screensaver/screensavers/hopalong.xml.h:12
-msgid "Number of pixels before a color change."
-msgstr ""
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/hypercube.xml.h:7
-msgid "Distance from center of cube"
-msgstr ""
-
-#: capplets/screensaver/screensavers/hypercube.xml.h:8
-#, fuzzy
-msgid "Closer"
-msgstr "닫기"
-
-#: capplets/screensaver/screensavers/hypercube.xml.h:9
-msgid "Farther"
-msgstr ""
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:7
-msgid "Number of segments."
-msgstr ""
-
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:8
-msgid "Segments"
-msgstr ""
-
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:9
-msgid "Number of trails."
-msgstr ""
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/laser.xml.h:7
-msgid "Duration of laser burst."
-msgstr ""
-
-#: capplets/screensaver/screensavers/laser.xml.h:8
-#: capplets/screensaver/screensavers/pedal.xml.h:8
-#: capplets/screensaver/screensavers/pedal.xml.h:14
-#, fuzzy
-msgid "Shorter"
-msgstr "구면"
-
-#: capplets/screensaver/screensavers/laser.xml.h:9
-#: capplets/screensaver/screensavers/pedal.xml.h:9
-#: capplets/screensaver/screensavers/pedal.xml.h:15
-#, fuzzy
-msgid "Longer"
-msgstr "없음"
-
-#: capplets/screensaver/screensavers/laser.xml.h:10
-msgid "Size of burst."
-msgstr ""
-
-#: capplets/screensaver/screensavers/laser.xml.h:11
-msgid "Segments:"
-msgstr ""
-
-#: capplets/screensaver/screensavers/lisa.xml.h:14
-msgid "Size of object."
-msgstr ""
-
-#: capplets/screensaver/screensavers/lisa.xml.h:15
-#: capplets/screensaver/screensavers/moire.xml.h:13
-#, fuzzy
-msgid "Smaller"
-msgstr "작게"
-
-#: capplets/screensaver/screensavers/lisa.xml.h:16
-#: capplets/screensaver/screensavers/moire.xml.h:14
-#, fuzzy
-msgid "Larger"
-msgstr "크게"
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/lmorph.xml.h:7
-#, fuzzy
-msgid "Number of points."
-msgstr "점의 크기를 바꿉니다."
-
-#: capplets/screensaver/screensavers/lmorph.xml.h:8
-#, fuzzy
-msgid "Points:"
-msgstr "우선순위:"
-
-#: capplets/screensaver/screensavers/lmorph.xml.h:9
-msgid "Number of interpolation steps."
-msgstr ""
-
-#: capplets/screensaver/screensavers/lmorph.xml.h:15
-msgid "Open figures."
-msgstr ""
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/maze.xml.h:7
-msgid "Delay between each step in the maze."
-msgstr ""
-
-#: capplets/screensaver/screensavers/maze.xml.h:8
-#: capplets/screensaver/screensavers/maze.xml.h:11
-#: capplets/screensaver/screensavers/maze.xml.h:14
-#, fuzzy
-msgid "Less Delay"
-msgstr "반복 지연"
-
-#: capplets/screensaver/screensavers/maze.xml.h:9
-#: capplets/screensaver/screensavers/maze.xml.h:12
-#: capplets/screensaver/screensavers/maze.xml.h:15
-#, fuzzy
-msgid "More Delay"
-msgstr "반복 지연"
-
-#: capplets/screensaver/screensavers/maze.xml.h:10
-msgid "Delay between drawing the maze and starting the solution."
-msgstr ""
-
-#: capplets/screensaver/screensavers/maze.xml.h:13
-msgid "Delay between finishing the maze and starting a new one."
-msgstr ""
-
-#: capplets/screensaver/screensavers/maze.xml.h:16
-msgid "Put a bridge over the logo?"
-msgstr ""
-
-#: capplets/screensaver/screensavers/moire.xml.h:12
-msgid "Maximum radius increment"
-msgstr ""
-
-#: capplets/screensaver/screensavers/munch.xml.h:10
-msgid "Use XOR drawing function."
-msgstr ""
-
-#: capplets/screensaver/screensavers/munch.xml.h:11
-msgid "Draw square at weird starting points."
-msgstr ""
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/pedal.xml.h:7
-msgid "Time to show each picture."
-msgstr ""
-
-#: capplets/screensaver/screensavers/pedal.xml.h:10
-msgid "Maximum number of lines."
-msgstr ""
-
-#: capplets/screensaver/screensavers/pedal.xml.h:13
-msgid "Time to fade away."
-msgstr ""
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/pyro.xml.h:7
-msgid "Particles on screen"
-msgstr ""
-
-#: capplets/screensaver/screensavers/pyro.xml.h:9
-#, fuzzy
-msgid "Frequency of missile launch"
-msgstr "미사일이 발사되는 빈도를 바꿉니다."
-
-#: capplets/screensaver/screensavers/pyro.xml.h:12
-msgid "Number of particles"
-msgstr ""
-
-#: capplets/screensaver/screensavers/qix.xml.h:9
-msgid "Number of points:"
-msgstr ""
-
-#: capplets/screensaver/screensavers/qix.xml.h:10
-msgid "Discrete Lines"
-msgstr ""
-
-#: capplets/screensaver/screensavers/qix.xml.h:11
-msgid "Solid Trails"
-msgstr ""
-
-#: capplets/screensaver/screensavers/qix.xml.h:12
-#, fuzzy
-msgid "Transparent Trails"
-msgstr "투명"
-
-#: capplets/screensaver/screensavers/qix.xml.h:13
-msgid "XOR Trails"
-msgstr ""
-
-#: capplets/screensaver/screensavers/qix.xml.h:14
-msgid "Trails attract each other"
-msgstr ""
-
-#: capplets/screensaver/screensavers/qix.xml.h:18
-#, fuzzy
-msgid "Length"
-msgstr "왼쪽"
-
-#: capplets/screensaver/screensavers/qix.xml.h:21
-msgid "Width"
-msgstr ""
-
-#: capplets/screensaver/screensavers/qix.xml.h:22
-msgid "Narrow"
-msgstr ""
-
-#: capplets/screensaver/screensavers/qix.xml.h:23
-msgid "Wide"
-msgstr ""
-
-#: capplets/screensaver/screensavers/qix.xml.h:24
-msgid "Spread between lines"
-msgstr ""
-
-#: capplets/screensaver/screensavers/qix.xml.h:27
-msgid "Number of trails:"
-msgstr ""
-
-#: capplets/screensaver/screensavers/qix.xml.h:30
-#, fuzzy
-msgid "Color contrast"
-msgstr "색상"
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/rorschach.xml.h:7
-msgid "Number of Iterations"
-msgstr ""
-
-#: capplets/screensaver/screensavers/rorschach.xml.h:10
-msgid "Offset"
-msgstr ""
-
-#: capplets/screensaver/screensavers/rorschach.xml.h:13
-msgid "With X-axis Symmetry"
-msgstr ""
-
-#: capplets/screensaver/screensavers/rorschach.xml.h:14
-msgid "With Y-axis Symmetry"
-msgstr ""
-
-#: capplets/screensaver/screensavers/rorschach.xml.h:15
-msgid "Delay before next redraw"
-msgstr ""
-
-#: capplets/screensaver/screensavers/rorschach.xml.h:18
-#, fuzzy
-msgid "Speed to clear the screen"
-msgstr "화면의 중앙"
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/starfish.xml.h:7
-msgid "Speed of animation."
-msgstr ""
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
+msgid "Gtk+ Theme Selector"
+msgstr "Gtk+ 테마 선택기"
 
-#: capplets/screensaver/screensavers/starfish.xml.h:10
-msgid "Thickness of color bands (0 = Random)"
-msgstr ""
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
+msgid "Select which gtk+ theme to use"
+msgstr "사용할 gtk+ 테마를 선택합니다"
 
-#: capplets/screensaver/screensavers/starfish.xml.h:11
-#, fuzzy
-msgid "Slim"
-msgstr "채워진 색깔"
-
-#: capplets/screensaver/screensavers/starfish.xml.h:12
-msgid "Quickness of rotation at each step (0 = Random)"
-msgstr ""
+#: capplets/theme-switcher/main.c:213
+msgid "Select a theme to install"
+msgstr "설치할 테마 선택"
 
-#: capplets/screensaver/screensavers/starfish.xml.h:14
-msgid "Duration of current shape."
-msgstr ""
+#: capplets/ui-properties/behavior.desktop.in.h:1
+msgid "Sets the default behavior of GNOME applications"
+msgstr "그놈 응용프로그램의 기본 행동을 설정합니다"
 
-#: capplets/screensaver/screensavers/starfish.xml.h:16
-msgid "Use raw shapes "
-msgstr ""
+#: capplets/ui-properties/behavior.desktop.in.h:2
+msgid "Toolbars & Menus"
+msgstr "도구막대와 메뉴"
 
-#: capplets/screensaver/screensavers/starfish.xml.h:17
-msgid "Change to display in monochrome."
-msgstr "단색으로 표시합니다."
+#: control-center/capplet-dir-view.c:146
+msgid "Layout"
+msgstr "배치"
 
-#: capplets/screensaver/selection-dialog.c:99
-#, fuzzy
-msgid "Add a new screensaver"
-msgstr "화면 보호기 아무거나"
+#: control-center/capplet-dir-view.c:147
+msgid "Layout to use for this view of the capplets"
+msgstr "capplets의 이 보기를 사용하기 위해 로그아웃"
 
-#: capplets/screensaver/selection-dialog.c:108
-msgid "Select the screensaver to run from the list below:"
-msgstr ""
+#: control-center/capplet-dir-view.c:153
+msgid "Capplet directory object"
+msgstr "Capplet 디렉토리 객체"
 
-#: capplets/screensaver/selection-dialog.c:194
-msgid "Custom"
+#: control-center/capplet-dir-view.c:154
+msgid "Capplet directory that this view is viewing"
 msgstr ""
-
-#: capplets/screensaver/selection-dialog.c:220
-#, fuzzy
-msgid "New screensaver"
-msgstr "화면 보호기 없음"
-
-#: capplets/sound/prefs-widget.c:137
-msgid "Play"
-msgstr "소리 내기"
-
-#: capplets/sound/sound-properties.glade.h:8
-msgid "Enable"
-msgstr "사용하기"
-
-#: capplets/sound/sound-properties.glade.h:9
-msgid "Enable sound server startup"
-msgstr "사운드 서버 시작하기"
-
-#: capplets/sound/sound-properties.glade.h:10
-msgid "Sounds for events"
-msgstr "효과음"
-
-#: capplets/sound/sound-properties.glade.h:11
-msgid "General"
-msgstr "일반"
-
-#: capplets/sound/sound-properties.glade.h:12
-msgid "Event"
-msgstr "이벤트"
-
-#: capplets/sound/sound-properties.glade.h:13
-msgid "File to Play"
-msgstr "소리낼 파일"
-
-#: capplets/sound/sound-properties.glade.h:14
-msgid "Sound Events"
-msgstr "소리 이벤트"
 
-#: control-center/capplet-dir-view.c:321
+#: control-center/capplet-dir-view.c:308 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
 msgstr "그놈 조정 센터"
 
-#: control-center/capplet-dir-view.c:322
-#, fuzzy
+#: control-center/capplet-dir-view.c:311
 msgid "Desktop properties manager."
 msgstr "바탕화면 설정 관리자."
 
-#: control-center/capplet-dir-view.c:519
-#, fuzzy
+#: control-center/capplet-dir-view.c:445
+#, c-format
+msgid "Gnome Control Center : %s"
+msgstr "그놈 조정 센터 : %s"
+
+#: control-center/capplet-dir-view.c:488
 msgid ""
 "No help is available/installed. Please make sure you\n"
 "have the GNOME User's Guide installed on your system."
 msgstr ""
-"현재 상태에서 도움말을 이용할 수 없거나 도움말이 설치되지 않았습니다. 그놈 "
-"사용자 안내서를 시스템에 설치했는지 확인하세요."
+"도움말을 이용할 수 없거나 도움말이 설치되지 않았습니다.\n"
+"그놈 사용자 안내서를 시스템에 설치했는지 확인하세요."
 
-#: control-center/capplet-dir-view.c:522
+#: control-center/capplet-dir-view.c:491
 msgid "Close"
 msgstr "닫기"
 
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: control-center/gnomecc.glade.h:7
-msgid "Launch control panels in separate windows"
-msgstr ""
-
-#: control-center/gnomecc.glade.h:8
-msgid "Put control panels in the control center's window"
-msgstr ""
-
-#: control-center/gnomecc.glade.h:9
-msgid "Display control panels as HTML"
-msgstr ""
-
-#: control-center/gnomecc.glade.h:10
-msgid "Display control panels as a set of icons"
-msgstr ""
-
-#: control-center/gnomecc.glade.h:11
-msgid "Display control panels as a tree"
-msgstr ""
-
-#: control-center/gnomecc.glade.h:12
-#, fuzzy
-msgid "Browse with single window"
-msgstr "도움말 보기 프로그램 (새 창)"
-
-#: control-center/gnomecc.glade.h:13
-msgid "Browse with multiple windows"
-msgstr ""
-
-#: control-center/gnomecc.glade.h:14
-msgid "Appearance"
-msgstr ""
-
-#: control-center/gnomecc.glade.h:15
-#, fuzzy
-msgid "New-control-center"
-msgstr "조정 센터의 도움말"
-
-#: control-center/gnomecc.glade.h:16
-msgid "HTML"
-msgstr ""
-
-#: control-center/gnomecc.glade.h:17
-msgid "Icon List"
-msgstr ""
-
-#: control-center/gnomecc.glade.h:18
-msgid "Tree"
-msgstr ""
-
-#: root-manager/root-manager.c:110
+#: control-center/capplet-dir-view-list.c:325
 #, c-format
-msgid "Got error %d.\n"
-msgstr ""
+msgid "GNOME Control Center: %s"
+msgstr "그놈 조정 센터: %s"
 
-#: root-manager/root-manager.c:206
-#, c-format
-msgid "Password for %s"
-msgstr ""
-
-#: root-manager/root-manager.c:401
-msgid "Consistency checking is not turned on."
-msgstr ""
-
-#: root-manager/root-manager.c:403
-msgid "Block is fine."
-msgstr ""
-
-#: root-manager/root-manager.c:405
-msgid "Block freed twice."
-msgstr ""
-
-#: root-manager/root-manager.c:407
-msgid "Memory before the block was clobbered."
-msgstr ""
-
-#: root-manager/root-manager.c:409
-msgid "Memory after the block was clobbered."
-msgstr ""
-
-#: root-manager/root-manager.c:440
-msgid "userhelper must be setuid root\n"
-msgstr ""
-
-#: root-manager/root-manager.c:445 root-manager/root-manager.c:451
-msgid "Usage: root-helper fd\n"
-msgstr ""
-
-#: root-manager/root-manager.c:555
-#, c-format
-msgid "PAM returned = %d\n"
-msgstr ""
-
-#: root-manager/root-manager.c:556
-#, c-format
-msgid "about to authenticate \"%s\"\n"
-msgstr ""
-
-#: root-manager/root-manager.c:633 root-manager/root-manager.c:701
-#, c-format
-msgid "about to exec \"%s\"\n"
-msgstr ""
-
-#: root-manager/root-manager-wrap.c:56
-msgid "Pipe error.\n"
-msgstr ""
-
-#: root-manager/root-manager-wrap.c:62
-msgid "Cannot fork().\n"
-msgstr ""
-
-#: root-manager/root-manager-wrap.c:83 root-manager/root-manager-wrap.c:93
-msgid "dup2() error.\n"
-msgstr ""
-
-#: root-manager/root-manager-wrap.c:123
-#, c-format
-msgid "execl() error, errno=%d\n"
-msgstr ""
-
-#: root-manager/root-manager-wrap.c:152
-msgid "Information updated."
-msgstr ""
-
-#: root-manager/root-manager-wrap.c:155
-msgid ""
-"The password you typed is invalid.\n"
-"Please try again."
-msgstr ""
-
-#: root-manager/root-manager-wrap.c:158
-msgid ""
-"One or more of the changed fields is invalid.\n"
-"This is probably due to either colons or commas in one of the fields.\n"
-"Please remove those and try again."
-msgstr ""
-
-#: root-manager/root-manager-wrap.c:161
-msgid "Password resetting error."
-msgstr ""
-
-#: root-manager/root-manager-wrap.c:164
-msgid ""
-"Some systems files are locked.\n"
-"Please try again in a few moments."
-msgstr ""
-
-#: root-manager/root-manager-wrap.c:167
-#, fuzzy
-msgid "Unknown user."
-msgstr "알수 없음"
-
-#: root-manager/root-manager-wrap.c:170
-msgid "Insufficient rights."
-msgstr ""
-
-#: root-manager/root-manager-wrap.c:173
-msgid "Invalid call to sub process."
-msgstr ""
-
-#: root-manager/root-manager-wrap.c:176
-msgid ""
-"Your current shell is not listed in /etc/shells.\n"
-"You are not allowed to change your shell.\n"
-"Consult your system administrator."
-msgstr ""
-
-#. well, this is unlikely to work either, but at least we tried...
-#: root-manager/root-manager-wrap.c:180
-msgid "Out of memory."
-msgstr ""
-
-#: root-manager/root-manager-wrap.c:183
-msgid "The exec() call failed."
-msgstr ""
-
-#: root-manager/root-manager-wrap.c:186
-msgid "Failed to find selected program."
-msgstr ""
-
-#: root-manager/root-manager-wrap.c:189
-#, fuzzy
-msgid "Unknown error."
-msgstr "알수 없음"
-
-#: root-manager/root-manager-wrap.c:192
-msgid "Unknown exit code."
-msgstr ""
-
-#: root-manager/root-manager-wrap.c:280
-msgid "Input"
-msgstr ""
-
-#: root-manager/root-manager-wrap.c:386
-#, c-format
-msgid "Need %d responses.\n"
-msgstr ""
-
-#: root-manager/root-manager-wrap.c:411
-msgid ""
-"In order to make changes to your system, you\n"
-"must enter the administrator (root) password."
-msgstr ""
-
-#: root-manager/root-manager-wrap.c:425
-msgid "Error"
-msgstr ""
-
-#: root-manager/root-manager-wrap.c:439
-#, c-format
-msgid "You want %d response(s) from %d entry fields!?!?!\n"
-msgstr ""
-
-#: root-manager/root-manager-wrap.c:445
-msgid "Run Unprivileged"
-msgstr ""
-
-#: archiver/location.c:228
-#, fuzzy
-msgid "Default Location"
-msgstr "기본 행동"
-
-#: archiver/main.c:77
-msgid "Store XML data in the archive"
-msgstr ""
-
-#: archiver/main.c:79
-msgid "Roll back the configuration to a given point"
-msgstr ""
-
-#: archiver/main.c:81
-#, fuzzy
-msgid "Change the location profile to the given one"
-msgstr "원래 그림의 비율을 바꿉니다."
-
-#: archiver/main.c:83
-msgid "Push configuration data out to client machines (UNIMPLEMENTED)"
-msgstr ""
-
-#: archiver/main.c:85
-msgid "Rename a location to a new name"
-msgstr ""
-
-#: archiver/main.c:87
-msgid "Add a new location to the archive"
-msgstr ""
-
-#: archiver/main.c:89
-msgid "Remove a location from the archive"
-msgstr ""
-
-#: archiver/main.c:91
-msgid "Add a given backend to the given location"
-msgstr ""
-
-#: archiver/main.c:93
-msgid "Remove the given backend from the given location"
-msgstr ""
-
-#: archiver/main.c:99
-msgid "Use the global repository"
-msgstr ""
-
-#: archiver/main.c:101
-msgid "Identifier of location profile on which to operate"
-msgstr ""
-
-#: archiver/main.c:102
-msgid "LOCATION"
-msgstr ""
-
-#: archiver/main.c:104
-msgid "Backend being used for this operation"
-msgstr ""
-
-#: archiver/main.c:104
-msgid "BACKEND_ID"
-msgstr ""
-
-#: archiver/main.c:110
-msgid "Store only the differences with the parent location's config"
-msgstr ""
-
-#: archiver/main.c:112
-msgid "Store only those settings set in the previous config"
-msgstr ""
-
-#: archiver/main.c:118
-msgid "Date to which to roll back"
-msgstr ""
-
-#: archiver/main.c:118
-msgid "DATE"
-msgstr ""
-
-#: archiver/main.c:120
-msgid "Roll back all configuration items"
-msgstr ""
-
-#: archiver/main.c:122
-msgid "Roll back to the revision REVISION_ID"
-msgstr ""
-
-#: archiver/main.c:122
-msgid "REVISION_ID"
-msgstr ""
-
-#: archiver/main.c:124
-msgid "Roll back to the last known revision"
-msgstr ""
-
-#: archiver/main.c:126
-msgid "Roll back by STEPS revisions"
-msgstr ""
-
-#: archiver/main.c:126
-msgid "STEPS"
-msgstr ""
-
-#: archiver/main.c:128
-msgid "Don't run the backend, just dump the output"
-msgstr ""
-
-#: archiver/main.c:134
-msgid "Parent location for the new location"
-msgstr ""
-
-#: archiver/main.c:134
-#, fuzzy
-msgid "PARENT"
-msgstr "<방향>"
-
-#: archiver/main.c:136
-msgid "New name to assign to the location"
-msgstr ""
-
-#: archiver/main.c:136
-msgid "NEW_NAME"
-msgstr ""
-
-#: archiver/main.c:142
-msgid "Add/remove this backend to/from the master backend list"
-msgstr ""
-
-#: archiver/main.c:144
-msgid "Full containment"
-msgstr ""
-
-#: archiver/main.c:146
-#, fuzzy
-msgid "Partial containment"
-msgstr "수직으로 서서히 변화"
-
-#: archiver/main.c:313
-msgid "Global archiver options"
-msgstr ""
-
-#: archiver/main.c:315
-msgid "Archiver commands"
-msgstr ""
-
-#: archiver/main.c:317
-msgid "Options for storing data"
-msgstr ""
-
-#: archiver/main.c:319
-msgid "Options for rolling back"
-msgstr ""
-
-#: archiver/main.c:321
-msgid "Options for adding or renaming locations"
-msgstr ""
-
-#: archiver/main.c:324
-msgid "Options for adding and removing backends"
-msgstr ""
-
-#: capplets/rollback/main.c:37
-msgid "Operate on global backends"
-msgstr ""
-
-#: capplets/rollback/main.c:50
-msgid "Options for the rollback GUI"
-msgstr ""
-
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensaver-properties.glade.h:7
-#, fuzzy
-msgid "About \"<Screensaver name>\""
-msgstr "화면 보호기"
-
-#: capplets/screensaver/screensaver-properties.glade.h:8
-msgid ""
-"Draws quasiperiodic tilings; think of the implications on modern formica "
-"technology. Written by Time Korlove. In April 1997, Sir Roger Penrose, a "
-"British math professor who has worked with Stephen Hawking on such topics as "
-"relatvity, black holes, and whether time has a beginning, files a "
-"copyright-infringement lawsuit against Kimberly-Clark Corporation, wchih "
-"Penrose said copied a pattern he created ( apattern demonstrating that \"a "
-"nonrepeating pattern could exist in nature\") for its Kleenex quilted toilet "
-"paper. "
-msgstr ""
-
-#: capplets/screensaver/screensaver-properties.glade.h:9
-#, fuzzy
-msgid "Configure Power Management"
-msgstr "전원 관리 기능 사용"
-
-#: capplets/screensaver/screensaver-properties.glade.h:10
-#, fuzzy
-msgid "Shut down monitor after"
-msgstr "모니터 셧다운"
-
-#: capplets/screensaver/screensaver-properties.glade.h:11
-#: capplets/screensaver/screensaver-properties.glade.h:13
-#: capplets/screensaver/screensaver-properties.glade.h:15
-#: capplets/screensaver/screensaver-properties.glade.h:24
-#: capplets/screensaver/screensaver-properties.glade.h:25
-#, fuzzy
-msgid "minutes"
-msgstr " 분."
-
-#: capplets/screensaver/screensaver-properties.glade.h:12
-msgid "Go to suspend mode after"
-msgstr ""
-
-#: capplets/screensaver/screensaver-properties.glade.h:14
-msgid "Go to standby mode after"
-msgstr ""
-
-#: capplets/screensaver/screensaver-properties.glade.h:16
-#, fuzzy
-msgid "Settings for \"<Screensaver name>\""
-msgstr "화면 보호기"
-
-#: capplets/screensaver/screensaver-properties.glade.h:17
-#, fuzzy
-msgid ""
-"There are no configurable settings for this\n"
-"screensaver. "
-msgstr "화면 보호기 설정"
-
-#: capplets/screensaver/screensaver-properties.glade.h:19
-#, fuzzy
-msgid "_Add"
-msgstr "추가..."
-
-#: capplets/screensaver/screensaver-properties.glade.h:20
-#, fuzzy
-msgid "_Settings"
-msgstr "설정"
-
-#: capplets/screensaver/screensaver-properties.glade.h:21
-#, fuzzy
-msgid "_Remove"
-msgstr "삭제"
-
-#: capplets/screensaver/screensaver-properties.glade.h:22
-#, fuzzy
-msgid "_About this screensaver..."
-msgstr "화면 보호기"
-
-#: capplets/screensaver/screensaver-properties.glade.h:26
-#, fuzzy
-msgid "S_tart screensaver after "
-msgstr "화면 보호기"
-
-#: capplets/screensaver/screensaver-properties.glade.h:27
-#, fuzzy
-msgid "S_witch screensavers after "
-msgstr "화면 보호기"
-
-#: capplets/screensaver/screensaver-properties.glade.h:28
-#, fuzzy
-msgid "R_equire password to unlock screen"
-msgstr "암호 필요"
-
-#: capplets/screensaver/screensaver-properties.glade.h:29
-#, fuzzy
-msgid "Enable _power management"
-msgstr "전원 관리 기능 사용"
-
-#: capplets/screensaver/screensaver-properties.glade.h:30
-msgid " Configure..."
-msgstr ""
-
-#: capplets/screensaver/screensaver-properties.glade.h:32
-#, fuzzy
-msgid "_Mode:"
-msgstr "Moe"
-
-#: capplets/screensaver/screensaver-properties.glade.h:33
-#, fuzzy
-msgid "Disable screensaver"
-msgstr "화면 보호기"
-
-#: capplets/screensaver/screensaver-properties.glade.h:34
-msgid "Black screen only"
-msgstr ""
-
-#: capplets/screensaver/screensaver-properties.glade.h:35
-msgid "One screensaver all the time"
-msgstr ""
-
-#: capplets/screensaver/screensaver-properties.glade.h:36
-#, fuzzy
-msgid "Random (checked screensavers)"
-msgstr "화면 보호기 아무거나"
-
-#: capplets/screensaver/screensaver-properties.glade.h:37
-#, fuzzy
-msgid "Random (all screensavers)"
-msgstr "화면 보호기 아무거나"
-
-#: capplets/sound/sound-properties-capplet.c:360
-msgid "Just apply settings and quit"
-msgstr ""
-
-#: capplets/sound/sound-properties-capplet.c:362
-msgid "Retrieve and store legacy settings"
-msgstr ""
-
-#: capplets/sound/sound-properties-capplet.c:372
-msgid "Capplet options"
-msgstr ""
-
-#. FIXME: Use a human-readable capplet name here
-#: control-center/capplet-dir.c:453
-msgid "Capplet"
-msgstr ""
-
-#: root-manager/root-manager-helper.c:55
-msgid "Could not connect to X Display"
-msgstr ""
-
-#: root-manager/root-manager-helper.c:61
-msgid "Could not duplicate file descriptor"
-msgstr ""
-
-#~ msgid ""
-#~ "No help is available/installed for these settings. Please make sure you\n"
-#~ "have the GNOME User's Guide installed on your system."
-#~ msgstr ""
-#~ "현재 상태에서 도움말을 이용할 수 없거나 도움말이 설치되지 않았습니다. 그놈 "
-#~ "사용자 안내서를 시스템에 설치했는지 확인하세요."
-
-#~ msgid "Gnome editor"
-#~ msgstr "그놈 편집기"
-
-#~ msgid "Run In Terminal"
-#~ msgstr "터미널에서 실행"
-
-#, fuzzy
-#~ msgid "Select an icon..."
-#~ msgstr "아이콘 선택"
-
-#, fuzzy
-#~ msgid "Mime Type: "
-#~ msgstr "MIME 형식"
-
-#, fuzzy
-#~ msgid "Mime Type Actions"
-#~ msgstr "메뉴 선택사항"
-
-#, fuzzy
-#~ msgid "Select a file..."
-#~ msgstr "소리 파일 선택"
-
-#, fuzzy
-#~ msgid "View"
-#~ msgstr "덩쿨"
-
-#, fuzzy
-#~ msgid "Edit"
-#~ msgstr "편집..."
-
-#, fuzzy
-#~ msgid "Mime Type"
-#~ msgstr "MIME 형식"
-
-#~ msgid "Extension"
-#~ msgstr "확장자"
-
-#, fuzzy
-#~ msgid "You must enter a mime-type"
-#~ msgstr "이름을 입력하여야 합니다."
-
-#~ msgid "Delete"
-#~ msgstr "지우기"
-
-#~ msgid "Add..."
-#~ msgstr "추가..."
-
-#~ msgid "Edit..."
-#~ msgstr "편집..."
-
-#, fuzzy
-#~ msgid "Add Mime Type"
-#~ msgstr "MIME 형식 추가"
-
-#, fuzzy
-#~ msgid "Mime Type:"
-#~ msgstr "MIME 형식"
-
-#, fuzzy
-#~ msgid "Extensions"
-#~ msgstr "확장자"
-
-#, fuzzy
-#~ msgid ""
-#~ "Type in the extensions for this mime-type.\n"
-#~ "For example:  .html, .htm"
-#~ msgstr ""
-#~ "이 MIME 타입에 대한 확장자를 (점을 빼고)입력 하십시오.\n"
-#~ "공백문자로 분리하여서 몇개의 확장자를 입력할 수 있습니다,\n"
-#~ "예:  html htm"
-
-#~ msgid "Extension:"
-#~ msgstr "확장자:"
-
-#, fuzzy
-#~ msgid "Keyboard Bell"
-#~ msgstr "키보드 삑소리"
-
-#~ msgid "Volume"
-#~ msgstr "크기"
-
-#~ msgid "Pitch (Hz)"
-#~ msgstr "진동수 (헤르쯔)"
-
-#~ msgid "Duration (ms)"
-#~ msgstr "길이 (천분의 일초)"
-
-#~ msgid "Test"
-#~ msgstr "테스트"
-
-#~ msgid "Mouse buttons"
-#~ msgstr "마우스 버튼"
-
-#~ msgid "Acceleration"
-#~ msgstr "마우스 속도"
-
-#~ msgid "Threshold"
-#~ msgstr "처음 움직임"
-
-#, fuzzy
-#~ msgid "Selection"
-#~ msgstr "아이콘 선택"
-
-#~ msgid "Settings..."
-#~ msgstr "설정..."
-
-#, fuzzy
-#~ msgid "Screensaver Selection"
-#~ msgstr "화면 보호기 설정"
-
-#, fuzzy
-#~ msgid "Basic"
-#~ msgstr "막대"
-
-#, fuzzy
-#~ msgid "Only after the screensaver has run for"
-#~ msgstr " 분 (화면보호기가 시작한 후로부터)"
-
-#, fuzzy
-#~ msgid "General Properties"
-#~ msgstr "마우스를 설정합니다"
-
-#, fuzzy
-#~ msgid "Priority"
-#~ msgstr "우선순위:"
-
-#, fuzzy
-#~ msgid "Fade Duration"
-#~ msgstr "길이 (천분의 일초)"
-
-#, fuzzy
-#~ msgid "Advanced Properties"
-#~ msgstr "마우스를 설정합니다"
-
-#, fuzzy
-#~ msgid "Menus"
-#~ msgstr "뫼비우스"
-
-#, fuzzy
-#~ msgid "Menu bars have a border"
-#~ msgstr "메뉴의 테두리가 들어가 보이도록"
-
-#, fuzzy
-#~ msgid "Menus can be torn off"
-#~ msgstr "아래 메뉴를 떼어낼 수 있도록"
-
-#~ msgid "Menu items have icons"
-#~ msgstr "메뉴에 아이콘 사용"
-
-#, fuzzy
-#~ msgid "Use status bar instead of dialog when possible"
-#~ msgstr "가능한 경우에 대화창 대신에 상태막대를 사용"
-
-#, fuzzy
-#~ msgid "Status bar is interactive when possible"
-#~ msgstr "가능하면 상태바가 interactive하도록"
-
-#, fuzzy
-#~ msgid "Progress bar is on the left"
-#~ msgstr "상태막대를 오른쪽에서부터 진행"
-
-#, fuzzy
-#~ msgid "Progress bar is on the right"
-#~ msgstr "상태막대를 오른쪽에서부터 진행"
-
-#, fuzzy
-#~ msgid "Tool Bars"
-#~ msgstr "막대"
-
-#, fuzzy
-#~ msgid "Tool bars have a border"
-#~ msgstr "도구상자의 테두리가 들어가 보이도록"
-
-#, fuzzy
-#~ msgid "Tool bar buttons pop up on mouse over"
-#~ msgstr "도구상자 버튼의 테두리가 들어가 보이도록"
-
-#, fuzzy
-#~ msgid "Tool bars have line separators"
-#~ msgstr "도구상자에서 줄 구분자를 넣음"
-
-#, fuzzy
-#~ msgid "Tool bars are detachable"
-#~ msgstr "도구상자에 글자 레이블을 닮"
-
-#, fuzzy
-#~ msgid "Tool bar buttons are icons only"
-#~ msgstr "도구상자 버튼의 테두리가 들어가 보이도록"
-
-#, fuzzy
-#~ msgid "Tool bar buttons are text below icons"
-#~ msgstr "도구상자에 글자 레이블을 닮"
-
-#, fuzzy
-#~ msgid "Interface"
-#~ msgstr "사용자 인터페이스"
-
-#~ msgid "Dialogs"
-#~ msgstr "대화상자"
-
-#~ msgid "Dialog buttons have icons"
-#~ msgstr "대화창의 버튼에 아이콘 사용"
-
-#~ msgid "Place dialogs over application window when possible"
-#~ msgstr "가능한 경우 대화창을 프로그램 창 위에 위치"
-
-#, fuzzy
-#~ msgid "Dialogs open"
-#~ msgstr "대화상자"
-
-#, fuzzy
-#~ msgid "At the center of the screen"
-#~ msgstr "화면의 중앙"
-
-#~ msgid "At the mouse pointer"
-#~ msgstr "마우스 포인터 위치"
-
-#, fuzzy
-#~ msgid "Dialogs are treated"
-#~ msgstr "대화창은 다른 창과 마찬가지"
-
-#, fuzzy
-#~ msgid "Like any other window"
-#~ msgstr "대화창은 다른 창과 마찬가지"
-
-#, fuzzy
-#~ msgid "Specially by the window manager"
-#~ msgstr "대화창은 창 관리자에 의해 특별취급"
-
-#, fuzzy
-#~ msgid "Dialog Buttons"
-#~ msgstr "마우스 버튼"
-
-#, fuzzy
-#~ msgid "Spread out"
-#~ msgstr "버튼을 주위에 골고루 배치"
-
-#, fuzzy
-#~ msgid "Left aligned"
-#~ msgstr "왼손잡이"
-
-#, fuzzy
-#~ msgid "Right aligned"
-#~ msgstr "오른손잡이"
-
-#, fuzzy
-#~ msgid "Notebook tabs"
-#~ msgstr "노트북"
-
-#, fuzzy
-#~ msgid "The same window"
-#~ msgstr "넷스케이프 (새 창)"
-
-#~ msgid "Left"
-#~ msgstr "왼쪽"
-
-#~ msgid "Right"
-#~ msgstr "오른쪽"
-
-#~ msgid "Top"
-#~ msgstr "위"
-
-#~ msgid "Bottom"
-#~ msgstr "아래"
-
-#~ msgid "Session"
-#~ msgstr "세션"
-
-#, fuzzy
-#~ msgid "Session Chooser"
-#~ msgstr "세션"
-
-#, fuzzy
-#~ msgid "Start Session"
-#~ msgstr "세션"
-
-#, fuzzy
-#~ msgid "Cancel Login"
-#~ msgstr "아이콘 바꿈"
-
-#, fuzzy
-#~ msgid "Starting"
-#~ msgstr "설정"
-
-#, fuzzy
-#~ msgid "Saving session details."
-#~ msgstr "세션 설정 초기화"
-
-#~ msgid "Unknown"
-#~ msgstr "알수 없음"
-
-#, fuzzy
-#~ msgid "Normal"
-#~ msgstr "보통"
-
-#, fuzzy
-#~ msgid "Remove Program"
-#~ msgstr "삭제"
-
-#, fuzzy
-#~ msgid "Options"
-#~ msgstr "메뉴 선택사항"
-
-#~ msgid "Command"
-#~ msgstr "명령어"
-
-#, fuzzy
-#~ msgid "Startup Command"
-#~ msgstr "명령어"
-
-#, fuzzy
-#~ msgid "The startup command cannot be empty"
-#~ msgstr "명령어는 비어있으면 안 됩니다"
-
-#~ msgid "One"
-#~ msgstr "하나"
-
-# 이런 멋진 유모어를 어떻게 번역하란 말인가?
-#~ msgid "Eenie"
-#~ msgstr "Eenie"
-
-#~ msgid "Meenie"
-#~ msgstr "Meenie"
-
-#~ msgid "Mynie"
-#~ msgstr "Mynie"
-
-#~ msgid "Catcha"
-#~ msgstr "Catcha"
-
-#~ msgid "Tiger"
-#~ msgstr "Tiger"
-
-#~ msgid "By Its"
-#~ msgstr "By Its"
-
-#~ msgid "Toe"
-#~ msgstr "Toe"
-
-#~ msgid "Selected themes from above will be tested by previewing here."
-#~ msgstr "위에서 고른 테마는 여기서 미리 테스트할 수 있습니다."
-
-#~ msgid "Sample Button"
-#~ msgstr "예제 버튼"
-
-#~ msgid "Sample Check Button"
-#~ msgstr "예제 체크버튼"
-
-#~ msgid "Sample Text Entry Field"
-#~ msgstr "예제 텍스트 엔트리 필드"
-
-#~ msgid "Submenu"
-#~ msgstr "아래 메뉴"
-
-#~ msgid "Item 1"
-#~ msgstr "아이템 1"
-
-#~ msgid "Another item"
-#~ msgstr "또 아이템"
-
-#~ msgid "Radio Button 1"
-#~ msgstr "라디오 버튼 1"
-
-#~ msgid "Radio Button 2"
-#~ msgstr "라디오 버튼 2"
-
-#~ msgid ""
-#~ "Error installing theme:\n"
-#~ "'%s'\n"
-#~ "%s"
-#~ msgstr ""
-#~ "테마 설치하는 데 오류:\n"
-#~ "'%s'\n"
-#~ "%s"
-
-#~ msgid "Select a theme to install"
-#~ msgstr "설치할 테마를 선택하세요"
-
-#~ msgid "Available Themes"
-#~ msgstr "사용가능한 테마"
-
-#~ msgid ""
-#~ "Auto\n"
-#~ "Preview"
-#~ msgstr ""
-#~ "자동으로\n"
-#~ "미리보기"
-
-#~ msgid ""
-#~ "Install new\n"
-#~ "theme..."
-#~ msgstr ""
-#~ "새로운 테마\n"
-#~ "선택..."
-
-#~ msgid "User Font"
-#~ msgstr "사용자 글꼴"
-
-#~ msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
-#~ msgstr ""
-#~ "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*,-*-gulim-medium-r-normal-"
-#~ "-*-120-*-*-*-*-*-*,-*-kodig-medium-r-normal--*-120-*-*-*-*-*-*,-*-*-medium-r-"
-#~ "normal--*-120-*-*-*-*-*-*,*"
-
-#~ msgid "Use custom font."
-#~ msgstr "따로 설정한 글꼴 사용."
-
-#~ msgid "Home directory doesn't exist!\n"
-#~ msgstr "홈 디렉토리가 없습니다!\n"
-
-#~ msgid "Theme does not exist"
-#~ msgstr "테마가 존재하지 않습니다"
-
-#~ msgid "Command '%s' failed"
-#~ msgstr "'%s' 명령어가 실패했습니다"
-
-#~ msgid "Unknown file format"
-#~ msgstr "알 수 없는 파일 형식"
-
-#~ msgid "Error initializing the `url-properties' capplet."
-#~ msgstr "`url-properties' 캐플릿 초기화 오류."
-
-#~ msgid "Protocol"
-#~ msgstr "프로토콜"
-
-#~ msgid "handler:"
-#~ msgstr "핸들러:"
-
-#~ msgid "Netscape"
-#~ msgstr "넷스케이프"
-
-#~ msgid "Netscape (new window)"
-#~ msgstr "넷스케이프 (새 창)"
-
-#~ msgid "Help browser"
-#~ msgstr "도움말 보기 프로그램"
-
-#~ msgid "Help browser (new window)"
-#~ msgstr "도움말 보기 프로그램 (새 창)"
-
-#~ msgid "Set"
-#~ msgstr "설정"
-
-#~ msgid ""
-#~ "Starting %s\n"
-#~ "(%d seconds left before operation times out)"
-#~ msgstr ""
-#~ "%s 시작\n"
-#~ "(제한시간이 %d초 남았습니다)"
-
-#~ msgid "%s (Current)"
-#~ msgstr "%s (현재)"
-
-#~ msgid "Run Configuration Tool for %s"
-#~ msgstr "%s의 설정 도구 시작"
-
-#~ msgid " (Not found)"
-#~ msgstr " (찾을 수 없음)"
-
-#~ msgid ""
-#~ "wm-properties-capplet: Unable to initialize window manager.\n"
-#~ "\tAnother window manager is already running and could not be killed\n"
-#~ msgstr ""
-#~ "wm-properties-capplet: 창 관리자를 초기화할 수 없습니다.\n"
-#~ "\t이미 다른 창 관리자가 실행중이고 중단시킬 수 없습니다\n"
-
-#~ msgid ""
-#~ "wm-properties-capplet: Unable to initialize window manager.\n"
-#~ "\t'%s' didn't start\n"
-#~ msgstr ""
-#~ "wm-properties-capplet: 창 관리자를 초기화할 수 없습니다.\n"
-#~ "\t'%s'이(가) 시작하지 않습니다\n"
-
-#~ msgid "Previous window manager did not die\n"
-#~ msgstr "이전의 창 관리자가 죽지 않았습니다\n"
-
-#~ msgid ""
-#~ "Could not start '%s'.\n"
-#~ "Falling back to previous window manager '%s'\n"
-#~ msgstr ""
-#~ "'%s'를 시작할 수 없습니다.\n"
-#~ "다시 이전 창관리자 '%s'에게 돌아갑니다.\n"
-
-#~ msgid ""
-#~ "Could not start fallback window manager.\n"
-#~ "Please run a window manager manually. You can\n"
-#~ "do this by selecting \"Run Program\" in the\n"
-#~ "foot menu\n"
-#~ msgstr ""
-#~ "돌아갈 창 관리자를 시작할 수 없습니다.\n"
-#~ "수동으로 창 관리자를 실행하세요.  발바닥\n"
-#~ "메뉴에서 \"Run Program\"을 선택하면\n"
-#~ "수동으로 실행할 수 있습니다.\n"
-
-#~ msgid "OK"
-#~ msgstr "확인"
-
-#~ msgid ""
-#~ "Your current window manager has been changed. In order for\n"
-#~ "this change to be saved, you will need to save your current\n"
-#~ "session. You can do so immediately by selecting the \"Save session\n"
-#~ "now\" below, or you can save your session later.  This can be\n"
-#~ "done either selecting \"Save Current Session\" under \"Settings\"\n"
-#~ "in the main menu, or by turning on \"Save Current Setup\" when\n"
-#~ "you log out.\n"
-#~ msgstr ""
-#~ "현재 창 관리자가 바뀌었습니다.  이 바뀐 사항을\n"
-#~ "저장하려면, 현재 세션을 저장해야 합니다.  아래의 \"지금\n"
-#~ "세션 저장하기\"를 선택하면 지금 즉시 저장할 수 있고,\n"
-#~ "나중에 세션을 저장할 수도 있습니다.  세션 저장은 주 메뉴의\n"
-#~ "\"설정\" 아래의 \"현재 데스크탑 저장하기\"에서 할 수 있고, 아니면\n"
-#~ "로그아웃시에 \"현재 데스크탑 저장하기\"을 켠 다음에 로그아웃하면\n"
-#~ "저장됩니다.\n"
-
-#~ msgid "Save Session Later"
-#~ msgstr "나중에 세션 저장하기"
-
-#~ msgid "Save Session Now"
-#~ msgstr "지금 세션 저장하기"
-
-#~ msgid ""
-#~ "Your current window manager has been changed. In order for\n"
-#~ "this change to be saved, you will need to save your current\n"
-#~ "session. This can be done by either selecting \"Save Current Session\"\n"
-#~ "under \"Settings\" in the main menu, or by turning on\n"
-#~ "\"Save Current Setup\" when you log out.\n"
-#~ msgstr ""
-#~ "현재 창 관리자가 바뀌었습니다.  이 바뀐 사항을\n"
-#~ "저장하려면, 현재 세션을 저장해야 합니다.  세션 저장은 주\n"
-#~ "메뉴의 \"설정\" 아래의 \"현재 데스크탑 저장하기\"에서 할 수 있고,\n"
-#~ "아니면 로그아웃시에 \"현재 데스크탑 저장\"을 체크한 다음에\n"
-#~ "로그아웃하면 저장됩니다.\n"
-
-#~ msgid "Add New Window Manager"
-#~ msgstr "새 창 관리자 시작"
-
-#~ msgid "Command:"
-#~ msgstr "명령어:"
-
-#~ msgid "Configuration Command:"
-#~ msgstr "설정 명령어:"
-
-#~ msgid "Window manager is session managed"
-#~ msgstr "창 관리자가 세션 관리됩니다."
-
-#~ msgid "Name cannot be empty"
-#~ msgstr "이름은 비어있으면 안 됩니다"
-
-#~ msgid "Command cannot be empty"
-#~ msgstr "명령어는 비어있으면 안 됩니다"
-
-#~ msgid "Edit Window Manager"
-#~ msgstr "창 관리자 편집"
-
-#~ msgid "You cannot delete the current Window Manager"
-#~ msgstr "현재 창관리자를 지울 수 없습니다"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'wm-properties-capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "'wm-properties-capplet'을 시작하는 데 초기화 문제 발생.\n"
-#~ "중지...\n"
-
-#~ msgid "Set background image."
-#~ msgstr "배경 그림 정하기"
-
-#~ msgid "IMAGE-FILE"
-#~ msgstr "<그림-파일>"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting "
-#~ "'background-properties-capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "'background-properties-capplet'을 시작하는 데 초기화 문제 발생.\n"
-#~ "중지...\n"
-
-#~ msgid "none"
-#~ msgstr "없음"
-
-#~ msgid "Embossed Logo"
-#~ msgstr "양각 로고"
-
-#~ msgid "Scaled"
-#~ msgstr "크기 조정"
-
-#~ msgid "Set parameters from saved state and exit"
-#~ msgstr "저장된 상태에서 하고 종료"
-
-#~ msgid "IMAGE"
-#~ msgstr "그림"
-
-#~ msgid "Sets the wallpaper to the value specified"
-#~ msgstr "벽지를 지정된 값으로 맞춘다"
-
-#~ msgid "COLOR"
-#~ msgstr "<색깔>"
-
-#~ msgid "Specifies the background color"
-#~ msgstr "배경색 지정"
-
-#~ msgid "Specifies end background color for gradient"
-#~ msgstr "단계적인 배경색의 마지막 색 지정"
-
-#~ msgid "Gradient orientation: vertical or horizontal"
-#~ msgstr "단계적인 색을 사용할 방향: 수직 또는 수평"
-
-#~ msgid "Use a solid fill for the background"
-#~ msgstr "배경을 한가지 색으로 채우기"
-
-#~ msgid "MODE"
-#~ msgstr "<모드>"
-
-#~ msgid "Display wallpaper: tiled, centered, scaled or ratio"
-#~ msgstr ""
-#~ "배경그림 표시방법: tiled(바둑판), centered(중앙), scaled(그림크기조정), 혹은 "
-#~ "ratio(그림 가로세로비율 고정)"
-
-#~ msgid "File Types and Programs"
-#~ msgstr "파일 형식과 프로그램"
-
-#~ msgid "Specify which programs are used to open or view each file type"
-#~ msgstr "각 파일 형식을 열거나 볼때 쓰이는 프로그램을 지정합니다"
-
-#~ msgid "Edit Applications List"
-#~ msgstr "응용 프로그램 목록 편집"
-
-#~ msgid "Select applications to appear in menu for MIME type \"%s\""
-#~ msgstr "MIME 형식 \"%s\"에 대한 메뉴에 나타날 응용프로그램을 선택하십시오"
-
-#~ msgid "Add Application..."
-#~ msgstr "응용 프로그램 추가..."
-
-#~ msgid "Edit Application..."
-#~ msgstr "응용 프로그램 편집..."
-
-#~ msgid "Delete Application"
-#~ msgstr "응용 프로그램 지움"
-
-#~ msgid "Edit Components List"
-#~ msgstr "구성요소 목록 편집"
-
-#~ msgid "Select views to appear in menu for MIME type \"%s\""
-#~ msgstr "MIME 형식 \"%s\"에 대한 메뉴에 나타날 보기프로그램을 선택하십시오"
-
-#~ msgid ""
-#~ "The MIME type entered contained upper case characters. Upper case characters "
-#~ "were changed to lower case for you."
-#~ msgstr "MIME형식에 대문자가 포함되어 있습니다. 대문자는 소문자로 바뀝니다."
-
-#~ msgid "Add New MIME Type"
-#~ msgstr "새 MIME 형식 추가"
-
-#~ msgid "New MIME type (e.g. image/x-thumper):"
-#~ msgstr "새 MIME 형식 (예: image/x-thumper):"
-
-#~ msgid "Description (e.g. Thumper image):"
-#~ msgstr "설명 (예. Thumper 그림):"
-
-#~ msgid "File Extensions "
-#~ msgstr "파일 확장자 "
-
-#~ msgid "    Remove    "
-#~ msgstr "    삭제      "
-
-#~ msgid "Add New Extension"
-#~ msgstr "새 확장자 추가"
-
-#~ msgid ""
-#~ "\"%s\" does not exist or is not executable.\n"
-#~ "Check your spelling and make sure you have\n"
-#~ "the right permissions to execute this file."
-#~ msgstr ""
-#~ "\"%s\"가 없거나 실행할 수 없습니다.\n"
-#~ "제대로 입력하였는지와 이 파일을 실행할\n"
-#~ "수 있는 올바른 허가권을 가지고 있는지 확인하십시오."
-
-#~ msgid ""
-#~ "The command \"%s\" cannot be found.\n"
-#~ "You must use a command that can work from any command line."
-#~ msgstr ""
-#~ "명령 \"%s\"를 찾을 수 없습니다.\n"
-#~ "명령행에서 동작하는 명령을 사용하여야 합니다."
-
-#~ msgid "Bad Application Name"
-#~ msgstr "잘못된 응용 프로그램 이름"
-
-#~ msgid "Bad Application Command"
-#~ msgstr "잘못된 응용 프로그램 명령"
-
-#~ msgid "Add Application"
-#~ msgstr "응용 프로그램 추가"
-
-#~ msgid "Edit Application"
-#~ msgstr "응용 프로그램 편집"
-
-#~ msgid "Application Name:"
-#~ msgstr "응용 프로그램 이름:"
-
-#~ msgid "Application Command:"
-#~ msgstr "응용 프로그램 명령:"
-
-#~ msgid "Open Behavior"
-#~ msgstr "열기 행동"
-
-#~ msgid "Can open multiple files"
-#~ msgstr "여러 파일을 열수 있음"
-
-#~ msgid "Can open from URI"
-#~ msgstr "URI로 열수 있음"
-
-#~ msgid "Change File Extensions"
-#~ msgstr "파일 확장자 바꿈"
-
-#~ msgid "Default Action:"
-#~ msgstr "기본 행동:"
-
-#~ msgid "Use Viewer"
-#~ msgstr "보기 프로그램 사용"
-
-#~ msgid "Open With Application"
-#~ msgstr "응용 프로그램으로 열기"
-
-#~ msgid "Edit List"
-#~ msgstr "목록 편집"
-
-#~ msgid "Add New MIME Type..."
-#~ msgstr "새 MIME 형식 추가..."
-
-#~ msgid "Delete This MIME Type"
-#~ msgstr "이 MIME형식을 지움"
-
-#~ msgid "Revert to System Defaults"
-#~ msgstr "시스템 기본값으로 되돌림"
-
-#~ msgid ""
-#~ "Reverting to system settings will lose any changes\n"
-#~ "you have ever made to File Types and Programs.\n"
-#~ "Revert anyway?"
-#~ msgstr ""
-#~ "시스템 설정을 되돌리면 이때까지 설정한 파일 형식과\n"
-#~ "프로그램들의 바뀐점을 모두 잃습니다.\n"
-#~ "그래도 되돌리겠습니까?"
-
-#~ msgid "View as %s"
-#~ msgstr "%s로 보기"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'mouse-properties-capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "'mouse-properties-capplet'을 시작하는 데 초기화 문제 발생.\n"
-#~ "중지...\n"
-
-#~ msgid "Random Settings"
-#~ msgstr "아무거나 맞추기"
-
-#~ msgid "%s Settings..."
-#~ msgstr "%s 설정..."
-
-#~ msgid "Author:"
-#~ msgstr "개발자:"
-
-#~ msgid "Author: UNKNOWN"
-#~ msgstr "개발자: 알수 없음"
-
-#~ msgid "RANDOM SCREENSAVER"
-#~ msgstr "화면보호기 아무거나"
-
-#~ msgid ""
-#~ "Pressing this button will popup a dialogbox that will help you setup the "
-#~ "current screensaver."
-#~ msgstr ""
-#~ "이 버튼을 누르면 현재 화면보호기의 셋업을 도와주는 대화창이 나옵니다."
-
-#~ msgid "Start After "
-#~ msgstr "얼마 후에 시작:"
-
-#~ msgid "Screen Saver Demo"
-#~ msgstr "화면 보호기 데모"
-
-#~ msgid "Keyboard repeat rate"
-#~ msgstr "반복정도"
-
-#~ msgid "Click on keypress"
-#~ msgstr "누를때 소리 내기"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting "
-#~ "'keyboard-properties-capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "'keyboard-properties-capplet'을 시작하는 데 초기화 문제 발생.\n"
-#~ "중지...\n"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'sound-properties-capplet'."
-#~ msgstr "'sound-properties-capplet'을 시작하는 데 초기화 문제 발생."
-
-#~ msgid ""
-#~ "This copy of the GNOME control center was not compiled with sound support"
-#~ msgstr "이 그놈 조정 센터는 소리 지원 기능이 컴파일 과정에서 빠졌습니다."
-
-#~ msgid "The sound file for this event does not exist."
-#~ msgstr "이 이벤트에 대한 사운드 파일이 없습니다."
-
-#~ msgid ""
-#~ "The sound file for this event does not exist.\n"
-#~ "You may want to install the gnome-audio package\n"
-#~ "for a set of default sounds."
-#~ msgstr ""
-#~ "이 이벤트에 대한 사운드 파일이 없습니다.\n"
-#~ "기본적인 소리가 들어 있는 gnome-audio 패키지를\n"
-#~ "설치해야 할 것입니다."
-
-#~ msgid "Can detach and move toolbars"
-#~ msgstr "도구상자를 떼어서 옮길 수 있도록"
-
-#~ msgid "Can detach and move menus"
-#~ msgstr "메뉴를 떼어서 옮길 수 있도록"
-
-#~ msgid "Statusbar Options"
-#~ msgstr "상태막대 선택사항"
-
-#~ msgid "Toolbar Options"
-#~ msgstr "도구상자 선택사항"
-
-#~ msgid "Default value"
-#~ msgstr "기본값"
-
-#~ msgid "Put buttons on edges"
-#~ msgstr "버튼을 끝부분에 배치"
-
-#~ msgid "Left-justify buttons"
-#~ msgstr "왼쪽으로 치우쳐진 버튼"
-
-#~ msgid "Right-justify buttons"
-#~ msgstr "오른쪽으로 치우쳐진 버튼"
-
-#~ msgid "Dialog position"
-#~ msgstr "위치"
-
-#~ msgid "Let window manager decide"
-#~ msgstr "창 관리자가 결정"
-
-#~ msgid "Dialog hints"
-#~ msgstr "대화창 힌트"
-
-#~ msgid "Dialog Layout"
-#~ msgstr "대화창 배치"
-
-#~ msgid "Dialog Behavior"
-#~ msgstr "대화창 동작"
-
-#~ msgid "Default MDI Mode"
-#~ msgstr "기본 다중문서인터페이스 모드"
-
-#~ msgid "Toplevel"
-#~ msgstr "별도의 창"
-
-#~ msgid "Modal"
-#~ msgstr "모달"
-
-#~ msgid "MDI notebook tab position"
-#~ msgstr "다중문서인터페이스 노트북 탭 위치"
-
-#~ msgid "GNOME MDI Options"
-#~ msgstr "그놈 다중문서인터페이스 선택사항"
-
-#~ msgid "Try"
-#~ msgstr "시도"
-
-#~ msgid "Revert"
-#~ msgstr "되돌리기"
-
-#~ msgid "Help with '%s' settings"
-#~ msgstr "'%s'설정 도움말"
-
-#~ msgid "id of the capplet -- assigned by the control-center"
-#~ msgstr "캐플릿 아이디 -- 조정 센터로 지정함"
-
-#~ msgid "ID"
-#~ msgstr "아이디"
-
-#~ msgid "Multi-capplet id."
-#~ msgstr "멀티-캐플릿 아이디."
-
-#~ msgid "CAPID"
-#~ msgstr "캐플릿아이디"
-
-#~ msgid "X ID of the socket it's plugged into"
-#~ msgstr "플러그인된 소켓의 X 아이디"
-
-#~ msgid "XID"
-#~ msgstr "X아이디"
-
-#~ msgid "IOR of the control-center"
-#~ msgstr "조정 센터의 IOR"
-
-#~ msgid "IOR"
-#~ msgstr "IOR"
-
-#~ msgid "Ignore default action.  Used for custom init-session cases"
-#~ msgstr "기본 동작 무시.  세션을 초기화하는 특수한 경우 사용됨"
-
-#~ msgid "Sorry, no help is available for these settings."
-#~ msgstr "미안합니다. 현재 상태에서 도움말을 이용할 수 없습니다."
-
-#~ msgid "capplet-command to be run."
-#~ msgstr "실행할 캐플릿 명령."
-
-#~ msgid "CAPPLET"
-#~ msgstr "<캐플릿>"
-
-#~ msgid "Help with the GNOME control-center."
-#~ msgstr "그놈 조정 센터의 도움말."
-
-#~ msgid "Help with the current configuration page."
-#~ msgstr "현재 설정 페이지의 도움말."
-
-#~ msgid "About"
-#~ msgstr "이 프로그램은"
-
-#~ msgid "About the GNOME control-center."
-#~ msgstr "그놈 조정 센터에 대하여."
-
-#~ msgid "Warning:"
-#~ msgstr "경고:"
-
-#~ msgid "Discard all changes"
-#~ msgstr "변경 사항 모두 버리기"
-
-#~ msgid ""
-#~ "The following modules have had changes made, but not committed.  If you "
-#~ "would like to edit them, please double click on the appropriate entry."
-#~ msgstr ""
-#~ "다음 모듈에서 변경한 사항이 있지만, 변경사항을 저장하지 않았습니다.  이 "
-#~ "모듈에서 할 일이 있으면 해당 모듈항목에 더블클릭하세요."
-
-#~ msgid "Control Center"
-#~ msgstr "조정 센터"
-
-#~ msgid "Operating System:"
-#~ msgstr "운영 체제:"
-
-#~ msgid "Distribution Version:"
-#~ msgstr "배포판 버젼:"
-
-#~ msgid "Processor Type:"
-#~ msgstr "프로세서 형태:"
-
-#~ msgid "User Name:"
-#~ msgstr "사용자 이름:"
-
-#~ msgid "Host Name:"
-#~ msgstr "호스트 이름:"
-
-#~ msgid "The GNOME configuration tool"
-#~ msgstr "그놈 설정 프로그램"
-
-#~ msgid "Choose a window manager"
-#~ msgstr "창 관리자 선택"
-
-#~ msgid "Window Manager"
-#~ msgstr "창 관리자"
-
-#~ msgid "Enlightenment"
-#~ msgstr "인라이튼먼트"
-
-#~ msgid "Ice WM"
-#~ msgstr "Ice WM"
-
-#~ msgid "Scwm"
-#~ msgstr "scwm"
-
-#~ msgid "Window Maker"
-#~ msgstr "윈도우 메이커"
-
-#~ msgid "twm"
-#~ msgstr "twm"
-
-#~ msgid "Configure which programs are used to display URLs"
-#~ msgstr "URL을 표시할 때 사용할 프로그램 선택"
-
-#~ msgid "URL Handlers"
-#~ msgstr "URL 처리"
-
-#~ msgid "Applications"
-#~ msgstr "응용 프로그램 기본사항"
-
-#~ msgid "Sets the default feel of GNOME applications"
-#~ msgstr "그놈 응용 프로그램의 기본 사항 결정"
-
-#~ msgid "MDI"
-#~ msgstr "여러문서"
-
-#~ msgid "Select which desktop theme to use"
-#~ msgstr "어떤 데스크탑 테마를 사용할 지 선택"
-
-#~ msgid "Theme Selector"
-#~ msgstr "테마 선택"
-
-#~ msgid "Configure GNOME's use of sound"
-#~ msgstr "그놈에서 사용할 소리 설정"
-
-#~ msgid "3D Clock"
-#~ msgstr "삼차원 시계"
-
-#~ msgid "Changes the number of ants marching across the screen."
-#~ msgstr "화면에 행진할 개미의 개수를 바꿉니다."
-
-#~ msgid "Changes the size of the ants."
-#~ msgstr "개미의 크기를 바꿉니다."
-
-#~ msgid "Atlantis"
-#~ msgstr "아틀란티스"
-
-#~ msgid "Whales, dolphins and sharks swimming around, in 3D"
-#~ msgstr "삼차원으로 수영하는 고래와 돌고래, 상어"
-
-#~ msgid "Orbit"
-#~ msgstr "궤도"
-
-#~ msgid "3D"
-#~ msgstr "삼차원"
-
-#~ msgid "Blue Screen of Death"
-#~ msgstr "죽음의 파란 화면"
-
-#~ msgid "Bsod"
-#~ msgstr "Bsod"
-
-#~ msgid "Bubble3d"
-#~ msgstr "삼차원 거품"
-
-#~ msgid "Lots of bubbles floating around, in 3d"
-#~ msgstr "삼차원 떠오르는 많은 거품"
-
-#~ msgid "Bubbles"
-#~ msgstr "거품"
-
-#~ msgid "Compass"
-#~ msgstr "나침반"
-
-#~ msgid "Coral"
-#~ msgstr "산호"
-
-#~ msgid "color"
-#~ msgstr "색상"
-
-#~ msgid "Distort"
-#~ msgstr "찌그러뜨림"
-
-#~ msgid "Distort the screen"
-#~ msgstr "화면을 찌그러뜨립니다"
-
-#~ msgid "Change the size of pixels in the flag."
-#~ msgstr "깃발의 픽셀 크기를 바꿉니다."
-
-#~ msgid "Draws a waving flag."
-#~ msgstr "흔들리는 깃발을 그립니다."
-
-#~ msgid "Flag"
-#~ msgstr "깃발"
-
-#~ msgid "Draws a flow of colored points"
-#~ msgstr "색점의 흐름을 그립니다."
-
-#~ msgid "Flow"
-#~ msgstr "흐름"
-
-#~ msgid "Draws a fractal forest."
-#~ msgstr "프랙탈 숲을 그립니다."
-
-#~ msgid "Forest"
-#~ msgstr "숲"
-
-#~ msgid "A 3d globe"
-#~ msgstr "삼차원 지구"
-
-#~ msgid "Galaxy"
-#~ msgstr "은하"
-
-#~ msgid "Gears"
-#~ msgstr "기어"
-
-#~ msgid "The 3d mesa demo, of gears"
-#~ msgstr "3d mesa 의 기어 데모"
-
-#~ msgid "Helix"
-#~ msgstr "나선"
-
-#~ msgid "Interference"
-#~ msgstr "간섭"
-
-#~ msgid "Jigsaw"
-#~ msgstr "조각게임"
-
-#~ msgid "Laser"
-#~ msgstr "레이져"
-
-#~ msgid "Lightning"
-#~ msgstr "번개"
-
-#~ msgid "Moire2"
-#~ msgstr "모아레2"
-
-#~ msgid "Mountain"
-#~ msgstr "산"
-
-#~ msgid "Pedal"
-#~ msgstr "페달"
-
-#~ msgid "Phosphor"
-#~ msgstr "형광"
-
-#~ msgid "Pipes"
-#~ msgstr "수도관"
-
-#~ msgid "Frequency"
-#~ msgstr "빈도"
-
-#~ msgid "How many particles should appear when a missile explodes."
-#~ msgstr "미사일이 폭발할때 나타날 파편의 개수를 바꿉니다."
-
-#~ msgid "How many particles should be allowed on the screen at once."
-#~ msgstr "한번에 나타날 파편의 개수를 바꿉니다."
-
-#~ msgid "Desktop"
-#~ msgstr "바탕화면"
-
-#~ msgid "Ripples"
-#~ msgstr "파장"
-
-#~ msgid "Rocks"
-#~ msgstr "바위"
-
-#~ msgid "Rorschach"
-#~ msgstr "잉크 얼룩"
-
-#~ msgid "Rotor"
-#~ msgstr "회전"
-
-#~ msgid "Rubiks Cube"
-#~ msgstr "루빅 큐브"
-
-#~ msgid "Spiral"
-#~ msgstr "나선"
-
-#~ msgid "Display the desktop in a spotlight"
-#~ msgstr "바탕화면에 스팟 라이트를 쏩니다"
-
-#~ msgid "Spotlight"
-#~ msgstr "스팟 라이트"
-
-#~ msgid "Squiral"
-#~ msgstr "사각 나선"
-
-#~ msgid "Stairs"
-#~ msgstr "계단"
-
-#~ msgid "The famous, M.C. Escher, impossible stairs"
-#~ msgstr "M.C. Escher의 유명한, 불가능한 계단"
-
-#~ msgid "Rotation"
-#~ msgstr "회전"
-
-#~ msgid "Starfish"
-#~ msgstr "불가사리"
-
-#~ msgid "Swirl"
-#~ msgstr "소용돌이"
-
-#~ msgid "Triangle"
-#~ msgstr "삼각형"
-
-#~ msgid "Worm"
-#~ msgstr "벌레"
-
-#~ msgid "Display flames at the bottom of the screen"
-#~ msgstr "화면아래에 불꽃을 보여줍니다"
-
-#~ msgid "Xflame"
-#~ msgstr "Xflame"
-
-#~ msgid "Screens from the movie The Matrix"
-#~ msgstr "영화 매트릭스 화면"
-
-#~ msgid "Xmatrix"
-#~ msgstr "매트릭스"
-
-#~ msgid "Xteevee"
-#~ msgstr "Xteevee"
-
-#~ msgid "Mouse"
-#~ msgstr "마우스"
-
-#~ msgid "Keyboard"
-#~ msgstr "자판"
-
-#~ msgid "Keyboard Properties"
-#~ msgstr "글자판을 설정합니다"
-
-#~ msgid "Choose the editor that is invoked by gnome-edit"
-#~ msgstr "gnome-edit가 사용할 편집기를 선택합니다"
-
-#~ msgid "Default Editor"
-#~ msgstr "기본 편집기"
-
-#~ msgid "Background"
-#~ msgstr "배경"
-
-#~ msgid "Configuration of the desktop's background"
-#~ msgstr "바탕화면의 배경을 설정합니다"
-
-#~ msgid "Configure how document types are handled"
-#~ msgstr "문서 형식을 처리하는 방법을 설정합니다"
-
-#~ msgid "Document Handlers"
-#~ msgstr "문서 처리"
-
-#~ msgid "Control Center Menu"
-#~ msgstr "조정 센터 메뉴"
-
-#~ msgid "Configure the settings of your Multimedia devices"
-#~ msgstr "멀티 미디어 장치의 설정을 변경합니다."
-
-#~ msgid "Multimedia"
-#~ msgstr "멀티 미디어"
-
-#~ msgid "Configure your external devices"
-#~ msgstr "외부 장치를 설정합니다"
-
-#~ msgid "Peripherals"
-#~ msgstr "주변장치"
-
-#~ msgid "Session Management Settings"
-#~ msgstr "세션 관리를 설정합니다"
-
-#~ msgid "Configure the global settings of your GNOME applications"
-#~ msgstr "그놈 프로그램들의 전체 설정 하기"
-
-#~ msgid "Look and Feel"
-#~ msgstr "모양새"
-
-#~ msgid "Look and Feel Properties"
-#~ msgstr "모양새를 설정 합니다"
-
-#: Gnome.directory.in:3
-msgid "Control Center"
-msgstr "조종 센터"
-
-#: Gnome.directory.in:4
-msgid "Control Center Menu"
-msgstr "조종판 메뉴"
-
-#: control-center/gnomecc.desktop.in:4
+#: control-center/gnomecc.desktop.in.h:2
 msgid "The GNOME configuration tool"
-msgstr "그놈 설정 프로그램"
+msgstr "그놈 설정 도구"
 
-#: capplets/sound/sound-properties.desktop.in:3
-msgid "Sound"
-msgstr "소리"
+#: libbackground/applier.c:233
+msgid "Type"
+msgstr ""
 
-#: capplets/sound/sound-properties.desktop.in:4
-msgid "Configure GNOME's use of sound"
-msgstr "그놈에서 사용할 소리 설정"
+#: libbackground/applier.c:234
+msgid ""
+"Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
+"for preview"
+msgstr ""
 
-#: capplets/screensaver/screensaver-properties.desktop.in:4
-msgid "Configure the settings of the screensaver"
-msgstr "화면 보호기 설정"
+#: libbackground/applier.c:396
+#, c-format
+msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
+msgstr "pixbuf \"%s\"를 읽을수 없음; 배경그림을 사용할수 없습니다."
 
-#: capplets/mouse/mouse-properties.desktop.in:3
-msgid "Mouse"
-msgstr "마우스 설정"
+#: libbackground/applier.c:461
+msgid "Disabled"
+msgstr "사용 않음"
 
-#: capplets/mouse/mouse-properties.desktop.in:4
-msgid "Mouse Properties"
-msgstr "마우스 설정"
+#: libsounds/sound-view.c:99
+msgid "The sound file for this event does not exist."
+msgstr ""
 
-#: capplets/keyboard/keyboard-properties.desktop.in:3
-msgid "Keyboard"
-msgstr "자판"
+#: libsounds/sound-view.c:101
+msgid ""
+"The sound file for this event does not exist.\n"
+"You may want to install the gnome-audio package\n"
+"for a set of default sounds."
+msgstr ""
 
-#: capplets/keyboard/keyboard-properties.desktop.in:4
-msgid "Keyboard Properties"
-msgstr "자판 속성"
+#: libsounds/sound-view.c:154
+msgid "Event"
+msgstr ""
 
-#: capplets/background/background-properties.desktop.in:3
-msgid "Background"
-msgstr "배경"
+#: libsounds/sound-view.c:154
+msgid "File to Play"
+msgstr "연주될 파일"
 
-#: capplets/desktop-links/Sawfish/Sawfish.directory.in:3
-msgid "Sawfish window manager"
-msgstr "소밀 창 관리자"
+#: libsounds/sound-view.c:187
+msgid "Play"
+msgstr "연주"
 
-#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in:4
-msgid "Configure window appearance"
-msgstr "창 외양 설정"
-
-#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in:3
-msgid "Shortcuts"
-msgstr "단축키"
-
-#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in:4
-msgid "Configure key shortcuts"
-msgstr "단축키 설정"
-
-#: capplets/desktop-links/Sawfish/focus-properties.desktop.in:3
-msgid "Focus behavior"
-msgstr "초점 행동"
-
-#: capplets/desktop-links/Sawfish/focus-properties.desktop.in:4
-msgid "Configure window focusing"
-msgstr "창 입력 초점 설정"
-
-#: capplets/desktop-links/Sawfish/match-properties.desktop.in:3
-msgid "Matched Windows"
-msgstr " 창 일치시키기"
-
-#: capplets/desktop-links/Sawfish/match-properties.desktop.in:4
-msgid "Configure window properties"
-msgstr "창 속성 설정"
-
-#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in:3
-msgid "Minimizing and Maximizing"
-msgstr "최소화와 최대화"
-
-#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in:4
-msgid "Configure window minimization and maximization"
-msgstr "창 최소화와 최대화 설정"
-
-#: capplets/desktop-links/Sawfish/misc-properties.desktop.in:3
-msgid "Miscellaneous"
-msgstr "기타"
-
-#: capplets/desktop-links/Sawfish/misc-properties.desktop.in:4
-msgid "Configure miscellaneous window features"
-msgstr "기타 창 특성 설정"
-
-#: capplets/desktop-links/Sawfish/move-properties.desktop.in:3
-msgid "Moving and Resizing"
-msgstr "이동 및 크기조정"
-
-#: capplets/desktop-links/Sawfish/move-properties.desktop.in:4
-msgid "Configure window move/resize"
-msgstr "창 이동/크기조절 설정"
-
-#: capplets/desktop-links/Sawfish/placement-properties.desktop.in:3
-msgid "Placement"
-msgstr "배치"
-
-#: capplets/desktop-links/Sawfish/placement-properties.desktop.in:4
-msgid "Configure window placement"
-msgstr "창 배치 설정"
-
-#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in:3
-msgid "Workspaces"
-msgstr "작업공간"
-
-#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in:4
-msgid "Configure workspaces"
-msgstr "작업공간 설정"
+#: libsounds/sound-view.c:193
+msgid "Select sound file"
+msgstr "소리 파일 선택"
