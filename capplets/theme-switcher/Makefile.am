@@ -1,5 +1,9 @@
 bin_PROGRAMS = gnome-theme-manager
 
+pixmapdir = $(GNOMECC_PIXMAPS_DIR)
+pixmap_DATA = \
+	theme-thumbnailing.png
+
 gnome_theme_manager_LDADD = 						\
 	$(GNOMECC_CAPPLETS_LIBS) 					\
 	$(METACITY_LIBS)						\

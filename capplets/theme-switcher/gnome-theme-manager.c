@@ -930,6 +930,7 @@ setup_dialog (GladeXML *dialog)
 
   client = gconf_client_get_default ();
   window_manager = gnome_wm_manager_get_current (gdk_display_get_default_screen (gdk_display_get_default ()));
+  
   parent = WID ("theme_dialog");
 
   size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
@@ -989,8 +990,12 @@ setup_dialog (GladeXML *dialog)
   g_signal_connect (G_OBJECT (parent), "drag-leave", G_CALLBACK (gnome_theme_manager_drag_leave_cb), NULL);
   g_signal_connect (G_OBJECT (parent), "drag-data-received",G_CALLBACK (gnome_theme_manager_drag_data_received_cb), NULL);
 
+  default_image = gdk_pixbuf_new_from_file(GNOMECC_DATA_DIR "/pixmaps/theme-thumbnailing.png", NULL);
+
   capplet_set_icon (parent, "gnome-ccthemes.png");
+
   gtk_widget_show (parent);
+
 }
 
 /* Non static functions */
@@ -1209,6 +1214,7 @@ main (int argc, char *argv[])
   activate_settings_daemon ();
 
   dialog = gnome_theme_manager_get_theme_dialog ();
+
   setup_dialog (dialog);
 
   gtk_main ();
