@@ -564,8 +564,8 @@ static gint sort_alpha(const void *a, const void *b)
 
   A = GTK_BIN (a);
   B = GTK_BIN (b);
-  
-  return strcmp((char *)GTK_LABEL (A->child)->label, (char *)GTK_LABEL (B->child)->label);
+
+  return g_strcasecmp((gchar *)GTK_LABEL (A->child)->label, (gchar *)GTK_LABEL (B->child)->label);
 }
 
 void
