@@ -271,6 +271,7 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 
   g_free (toolbar_style);
 
+  gtk_window_set_resizable (GTK_WINDOW (widget), FALSE);
   gtk_widget_show_all (widget);
 }
 
