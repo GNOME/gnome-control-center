@@ -26,7 +26,6 @@
 
 #include <gtk/gtk.h>
 #include <glade/glade.h>
-#include <capplet-widget.h>
 
 #include "preferences.h"
 
@@ -70,7 +69,7 @@ typedef struct _PrefsWidgetClass PrefsWidgetClass;
 
 struct _PrefsWidget 
 {
-	CappletWidget capplet_widget;
+	GtkDialog capplet_widget;
 
 	Preferences *prefs;
 	GladeXML *dialog_data;
@@ -78,7 +77,7 @@ struct _PrefsWidget
 
 struct _PrefsWidgetClass 
 {
-	CappletWidgetClass parent_class;
+	GtkDialogClass parent_class;
 
 	void (*read_preferences) (PrefsWidget *prefs_widget,
 				  Preferences *prefs);

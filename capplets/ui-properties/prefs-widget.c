@@ -37,15 +37,12 @@ static widget_desc_t widget_desc[] = {
 	WD_CHECK (menus_have_tearoff,       "menus_have_tearoff"),
 	WD_CHECK (menus_have_icons,         "menus_have_icons"),
 
-	WD_CHECK (statusbar_not_dialog,     "statusbar_not_dialog"),
 	WD_CHECK (statusbar_is_interactive, "statusbar_is_interactive"),
 	WD_CHECK (statusbar_meter_on_left , "statusbar_meter_on_left"),
 	WD_CHECK (statusbar_meter_on_right, "statusbar_meter_on_right"),
 
 	WD_CHECK (toolbar_detachable,       "toolbar_detachable"),
 	WD_CHECK (toolbar_relief,           "toolbar_relief"),
-	WD_CHECK (toolbar_relief_btn,       "toolbar_relief_btn"),
-	WD_CHECK (toolbar_lines,            "toolbar_lines"),
 	WD_CHECK (toolbar_icons_only,       "toolbar_icons_only"),
 	WD_CHECK (toolbar_text_below,       "toolbar_text_below"),
 
@@ -75,7 +72,7 @@ enum {
 
 static guint prefs_widget_signals[LAST_SIGNAL] = { 0 };
 
-static CappletWidgetClass *parent_class;
+static GtkDialogClass *parent_class;
 
 static void prefs_widget_init             (PrefsWidget *prefs_widget);
 static void prefs_widget_class_init       (PrefsWidgetClass *class);
@@ -101,6 +98,10 @@ static void toggled_cb                    (GtkToggleButton *tb,
 					   PrefsWidget *prefs_widget);
 static void selected_cb                   (GtkMenuItem *mi,
 					   PrefsWidget *prefs_widget);
+static void capplet_widget_state_changed  (GtkDialog *dialog, gboolean state);
+static void prefs_widget_response_cb	  (PrefsWidget *prefs_widget, GtkResponseType response, gpointer data);
+
+#define CAPPLET_WIDGET(x) GTK_DIALOG(x)
 
 guint
 prefs_widget_get_type (void)
@@ -114,12 +115,12 @@ prefs_widget_get_type (void)
 			sizeof (PrefsWidgetClass),
 			(GtkClassInitFunc) prefs_widget_class_init,
 			(GtkObjectInitFunc) prefs_widget_init,
-			(GtkArgSetFunc) NULL,
-			(GtkArgGetFunc) NULL
+			NULL,
+			NULL
 		};
 
 		prefs_widget_type = 
-			gtk_type_unique (capplet_widget_get_type (), 
+			gtk_type_unique (gtk_dialog_get_type (), 
 					 &prefs_widget_info);
 	}
 
@@ -129,6 +130,14 @@ prefs_widget_get_type (void)
 static void
 prefs_widget_init (PrefsWidget *prefs_widget)
 {
+	gtk_dialog_add_buttons (GTK_DIALOG (prefs_widget),
+				GTK_STOCK_HELP, GTK_RESPONSE_HELP,
+				GTK_STOCK_APPLY, GTK_RESPONSE_APPLY,
+				GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+				NULL);
+	gtk_dialog_set_response_sensitive (GTK_DIALOG (prefs_widget), GTK_RESPONSE_APPLY, FALSE);
+	g_signal_connect (G_OBJECT (prefs_widget), "response",
+			  prefs_widget_response_cb, NULL);
 }
 
 static void
@@ -152,19 +161,16 @@ prefs_widget_class_init (PrefsWidgetClass *class)
 	prefs_widget_signals[READ_PREFERENCES] =
 		gtk_signal_new ("read-preferences",
 				GTK_RUN_FIRST,
-				object_class->type,
+				G_OBJECT_CLASS_TYPE (G_OBJECT_CLASS (object_class)),
 				GTK_SIGNAL_OFFSET (PrefsWidgetClass, 
 						   read_preferences),
 				gtk_marshal_NONE__POINTER,
 				GTK_TYPE_NONE, 1, GTK_TYPE_POINTER);
 
-	gtk_object_class_add_signals (object_class, prefs_widget_signals,
-				      LAST_SIGNAL);
-
 	class->read_preferences = read_preferences;
 
-	parent_class = CAPPLET_WIDGET_CLASS
-		(gtk_type_class (capplet_widget_get_type ()));
+	parent_class = GTK_DIALOG_CLASS 
+		(g_type_class_ref (gtk_dialog_get_type ()));
 
 	class->widget_desc = widget_desc;
 }
@@ -200,14 +206,14 @@ prefs_widget_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 
 	case ARG_DIALOG_DATA:
 		if (prefs_widget->dialog_data)
-			gtk_object_unref
-				(GTK_OBJECT (prefs_widget->dialog_data));
+			g_object_unref
+				(G_OBJECT (prefs_widget->dialog_data));
 
 		prefs_widget->dialog_data = GTK_VALUE_POINTER (*arg);
 
 		if (prefs_widget->dialog_data) {
-			gtk_object_ref 
-				(GTK_OBJECT (prefs_widget->dialog_data));
+			g_object_ref 
+				(G_OBJECT (prefs_widget->dialog_data));
 			if (prefs_widget->prefs)
 				gtk_signal_emit 
 					(GTK_OBJECT (prefs_widget),
@@ -260,7 +266,7 @@ prefs_widget_new (Preferences *prefs)
 	g_return_val_if_fail (prefs == NULL || IS_PREFERENCES (prefs), NULL);
 
 	dialog_data = glade_xml_new (GNOMECC_GLADE_DIR "/behavior-properties.glade",
-						    "prefs_widget");
+						    "prefs_widget", NULL);
 
 	widget = gtk_widget_new (prefs_widget_get_type (),
 				 "preferences", prefs,
@@ -268,7 +274,8 @@ prefs_widget_new (Preferences *prefs)
 				 NULL);
 
 	dlg_widget = glade_xml_get_widget (dialog_data, "prefs_widget");
-	gtk_container_add (GTK_CONTAINER (widget), dlg_widget);
+	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (widget)->vbox), dlg_widget,
+			    TRUE, TRUE, 0);
 
 	return widget;
 }
@@ -296,8 +303,8 @@ read_preferences (PrefsWidget *prefs_widget, Preferences *prefs)
 	g_return_if_fail (IS_PREFERENCES (prefs));
 
 	widget_desc = 
-		PREFS_WIDGET_CLASS (GTK_OBJECT
-				    (prefs_widget)->klass)->widget_desc;
+		PREFS_WIDGET_CLASS (G_OBJECT_GET_CLASS (G_OBJECT
+				    (prefs_widget)))->widget_desc;
 
 	g_return_if_fail (widget_desc != NULL);
 
@@ -340,8 +347,8 @@ register_callbacks (PrefsWidget *prefs_widget, GladeXML *dialog_data)
 	g_return_if_fail (dialog_data != NULL);
 	g_return_if_fail (GLADE_IS_XML (dialog_data));
 
-	widget_desc = PREFS_WIDGET_CLASS (GTK_OBJECT
-					  (prefs_widget)->klass)->widget_desc;
+	widget_desc = PREFS_WIDGET_CLASS (G_OBJECT_GET_CLASS (G_OBJECT
+					  (prefs_widget)))->widget_desc;
 
 	if (widget_desc == NULL)
 		return;
@@ -395,8 +402,8 @@ find_widget_desc_with_name (PrefsWidget *prefs_widget, const char *name)
 	g_return_val_if_fail (name != NULL, NULL);
 
 	widget_desc = 
-		PREFS_WIDGET_CLASS (GTK_OBJECT
-				    (prefs_widget)->klass)->widget_desc;
+		PREFS_WIDGET_CLASS (G_OBJECT_GET_CLASS (G_OBJECT
+				    (prefs_widget)))->widget_desc;
 
 	g_return_val_if_fail (widget_desc != NULL, NULL);
 
@@ -456,5 +463,26 @@ selected_cb (GtkMenuItem *mi, PrefsWidget *prefs_widget)
 
 		preferences_changed (prefs_widget->prefs);
         	capplet_widget_state_changed (CAPPLET_WIDGET (prefs_widget), TRUE);
+	}
+}
+
+
+static void
+capplet_widget_state_changed  (GtkDialog *dialog, gboolean state)
+{
+	gtk_dialog_set_response_sensitive (dialog, GTK_RESPONSE_APPLY, state);
+}
+
+static void
+prefs_widget_response_cb (PrefsWidget *prefs_widget, GtkResponseType response, gpointer data)
+{
+	switch (response)
+	{
+		case GTK_RESPONSE_APPLY:
+			preferences_save (prefs_widget->prefs);
+			break;
+		case GTK_RESPONSE_CLOSE:
+			gtk_main_quit ();
+			break;
 	}
 }

@@ -33,7 +33,6 @@ static PrefsWidgetClass *parent_class;
 
 static widget_desc_t widget_desc[] = {
 	WD_OPTION (dialog_buttons_style, "dialog_buttons_style"),
-	WD_CHECK (statusbar_not_dialog, "statusbar_not_dialog"),
 	WD_OPTION (dialog_position, "dialog_position"),
 	WD_OPTION (dialog_type, "dialog_type"),
 	WD_CHECK (dialog_centered, "dialog_centered"),
@@ -56,8 +55,8 @@ prefs_widget_dialogs_get_type (void)
 			sizeof (PrefsWidgetDialogsClass),
 			(GtkClassInitFunc) prefs_widget_dialogs_class_init,
 			(GtkObjectInitFunc) prefs_widget_dialogs_init,
-			(GtkArgSetFunc) NULL,
-			(GtkArgGetFunc) NULL
+			NULL,
+			NULL
 		};
 
 		prefs_widget_dialogs_type = 
@@ -95,7 +94,7 @@ prefs_widget_dialogs_new (Preferences *prefs)
 
 	dialog_data = 
 		glade_xml_new (GNOMECC_GLADE_DIR "/behavior-properties.glade",
-					"prefs_widget_dialogs");
+					"prefs_widget_dialogs", NULL);
 
 	widget = gtk_widget_new (prefs_widget_dialogs_get_type (),
 				 "dialog_data", dialog_data,

@@ -40,8 +40,6 @@ static widget_desc_t widget_desc[] = {
 	WD_CHECK (statusbar_meter_on_right, "statusbar_meter_on_right"),
 	WD_CHECK (toolbar_detachable, "toolbar_detachable"),
 	WD_CHECK (toolbar_relief, "toolbar_relief"),
-	WD_CHECK (toolbar_relief_btn, "toolbar_relief_btn"),
-	WD_CHECK (toolbar_lines, "toolbar_lines"),
 /*  	WD_CHECK (toolbar_labels, "toolbar_labels"), */
 	WD_END
 };
@@ -61,8 +59,8 @@ prefs_widget_app_get_type (void)
 			sizeof (PrefsWidgetAppClass),
 			(GtkClassInitFunc) prefs_widget_app_class_init,
 			(GtkObjectInitFunc) prefs_widget_app_init,
-			(GtkArgSetFunc) NULL,
-			(GtkArgGetFunc) NULL
+			NULL,
+			NULL
 		};
 
 		prefs_widget_app_type = 
@@ -99,7 +97,7 @@ prefs_widget_app_new (Preferences *prefs)
 	g_return_val_if_fail (prefs == NULL || IS_PREFERENCES (prefs), NULL);
 
 	dialog_data = glade_xml_new (GNOMECC_GLADE_DIR "/behavior-properties.glade",
-						    "prefs_widget_app");
+						    "prefs_widget_app", NULL);
 
 	widget = gtk_widget_new (prefs_widget_app_get_type (),
 				 "dialog_data", dialog_data,

@@ -28,6 +28,7 @@
 #include <stdlib.h>
 
 #include <gnome.h>
+#include <gconf/gconf-client.h>
 
 #include "preferences.h"
 
@@ -36,14 +37,9 @@ static GtkObjectClass *parent_class;
 static void preferences_init             (Preferences *prefs);
 static void preferences_class_init       (PreferencesClass *class);
 
-static gint       xml_read_int           (xmlNodePtr node);
-static xmlNodePtr xml_write_int          (gchar *name, 
-					  gint number);
-static gboolean   xml_read_bool          (xmlNodePtr node);
-static xmlNodePtr xml_write_bool         (gchar *name,
-					  gboolean value);
-
 static gint apply_timeout_cb             (Preferences *prefs);
+
+#define DGI "/desktop/gnome/interface/"
 
 guint
 preferences_get_type (void)
@@ -57,8 +53,8 @@ preferences_get_type (void)
 			sizeof (PreferencesClass),
 			(GtkClassInitFunc) preferences_class_init,
 			(GtkObjectInitFunc) preferences_init,
-			(GtkArgSetFunc) NULL,
-			(GtkArgGetFunc) NULL
+			NULL,
+			NULL
 		};
 
 		preferences_type = 
@@ -73,7 +69,6 @@ static void
 preferences_init (Preferences *prefs)
 {
 	prefs->frozen = FALSE;
-	prefs->gnome_prefs = g_new0 (GnomePreferences, 1);
 
 	/* FIXME: Code to set default values */
 }
@@ -108,14 +103,11 @@ preferences_clone (Preferences *prefs)
 
 	g_return_val_if_fail (prefs != NULL, NULL);
 	g_return_val_if_fail (IS_PREFERENCES (prefs), NULL);
-	g_return_val_if_fail (prefs->gnome_prefs != NULL, NULL);
 
 	object = preferences_new ();
 
 	new_prefs = PREFERENCES (object);
-	memcpy (new_prefs->gnome_prefs, prefs->gnome_prefs, 
-		sizeof (GnomePreferences));
-	new_prefs->dialog_use_icons = prefs->dialog_use_icons;
+	new_prefs->gnome_prefs = prefs->gnome_prefs;
 
 	return object;
 }
@@ -130,36 +122,52 @@ preferences_destroy (GtkObject *object)
 
 	prefs = PREFERENCES (object);
 
-	if (prefs->gnome_prefs) g_free (prefs->gnome_prefs);
-
 	parent_class->destroy (object);
 }
 
 void
 preferences_load (Preferences *prefs) 
 {
+	GConfClient *client;
+	
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));
-	g_return_if_fail (prefs->gnome_prefs != NULL);
 
-	gnome_preferences_load_custom (prefs->gnome_prefs);
-
-	prefs->dialog_use_icons = 
-		gnome_config_get_bool ("/Gnome/Icons/ButtonUseIcons=true");
+	client = gconf_client_get_default ();
+	prefs->gnome_prefs.menus_have_tearoff = gconf_client_get_bool (client, DGI "menus-have-tearoff", NULL);
+	prefs->gnome_prefs.statusbar_is_interactive = gconf_client_get_bool (client, DGI "statusbar-interactive", NULL);
+	prefs->gnome_prefs.menubar_relief = gconf_client_get_bool (client, DGI "menubar-relief", NULL);
+	prefs->gnome_prefs.toolbar_labels = gconf_client_get_bool (client, DGI "toolbar-labels", NULL);
+	prefs->gnome_prefs.menus_show_icons = gconf_client_get_bool (client, DGI "menus-have-icons", NULL);
+	prefs->gnome_prefs.menubar_detachable = gconf_client_get_bool (client, DGI "menubar-detachable", NULL);
+	prefs->gnome_prefs.toolbar_relief = gconf_client_get_bool (client, DGI "toolbar-relief", NULL);
+	prefs->gnome_prefs.statusbar_meter_on_right = gconf_client_get_bool (client, DGI "statusbar-meter-on-right", NULL);
+	prefs->gnome_prefs.toolbar_detachable = gconf_client_get_bool (client, DGI "toolbar-detachable", NULL);
+	
+	g_object_unref (G_OBJECT (client));
 }
 
 void 
 preferences_save (Preferences *prefs) 
 {
+
+	GConfClient *client;
+	
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));
-	g_return_if_fail (prefs->gnome_prefs != NULL);
 
-	gnome_preferences_save_custom (prefs->gnome_prefs);
-
-	gnome_config_set_bool ("/Gnome/Icons/ButtonUseIcons", 
-			       prefs->dialog_use_icons);
-	gnome_config_sync ();
+	client = gconf_client_get_default ();
+	gconf_client_set_bool (client, DGI "menus-have-tearoff", prefs->gnome_prefs.menus_have_tearoff, NULL);
+	gconf_client_set_bool (client, DGI "statusbar-interactive", prefs->gnome_prefs.statusbar_is_interactive, NULL);
+	gconf_client_set_bool (client, DGI "menubar-relief", prefs->gnome_prefs.menubar_relief, NULL);
+	gconf_client_set_bool (client, DGI "toolbar-labels", prefs->gnome_prefs.toolbar_labels, NULL);
+	gconf_client_set_bool (client, DGI "menus-have-icons", prefs->gnome_prefs.menus_show_icons, NULL);
+	gconf_client_set_bool (client, DGI "menubar-detachable", prefs->gnome_prefs.menubar_detachable, NULL);
+	gconf_client_set_bool (client, DGI "toolbar-relief", prefs->gnome_prefs.toolbar_relief, NULL);
+	gconf_client_set_bool (client, DGI "statusbar-meter-on-right", prefs->gnome_prefs.statusbar_meter_on_right, NULL);
+	gconf_client_set_bool (client, DGI "toolbar-detachable", prefs->gnome_prefs.toolbar_detachable, NULL);
+	
+	g_object_unref (G_OBJECT (client));
 }
 
 void
@@ -203,251 +211,6 @@ preferences_thaw (Preferences *prefs)
 	if (prefs->frozen > 0) prefs->frozen--;
 }
 
-Preferences *
-preferences_read_xml (xmlDocPtr xml_doc) 
-{
-	Preferences *prefs;
-	xmlNodePtr root_node, node;
-
-	prefs = PREFERENCES (preferences_new ());
-
-	root_node = xmlDocGetRootElement (xml_doc);
-
-	if (strcmp (root_node->name, "ui-properties"))
-		return NULL;
-
-	for (node = root_node->childs; node; node = node->next) {
-		if (!strcmp (node->name, "dialog-buttons-style"))
-			prefs->gnome_prefs->dialog_buttons_style = 
-				xml_read_int (node);
-		else if (!strcmp (node->name, "property-box-buttons-ok"))
-			prefs->gnome_prefs->property_box_buttons_ok =
-				xml_read_bool (node);
-		else if (!strcmp (node->name, "property-box-buttons-apply"))
-			prefs->gnome_prefs->property_box_buttons_apply =
-				xml_read_bool (node);
-		else if (!strcmp (node->name, "property-box-buttons-close"))
-			prefs->gnome_prefs->property_box_buttons_close =
-				xml_read_bool (node);
-		else if (!strcmp (node->name, "property-box-buttons-help"))
-			prefs->gnome_prefs->property_box_buttons_help =
-				xml_read_bool (node);
-		else if (!strcmp (node->name, "statusbar-not-dialog"))
-			prefs->gnome_prefs->statusbar_not_dialog =
-				xml_read_bool (node);
-		else if (!strcmp (node->name, "statusbar-is-interactive"))
-			prefs->gnome_prefs->statusbar_is_interactive =
-				xml_read_bool (node);
-		else if (!strcmp (node->name, "statusbar-meter-on-right"))
-			prefs->gnome_prefs->statusbar_meter_on_right =
-				xml_read_bool (node);
-		else if (!strcmp (node->name, "menubar-detachable"))
-			prefs->gnome_prefs->menubar_detachable =
-				xml_read_bool (node);
-		else if (!strcmp (node->name, "menubar-relief"))
-			prefs->gnome_prefs->menubar_relief =
-				xml_read_bool (node);
-		else if (!strcmp (node->name, "toolbar-detachable"))
-			prefs->gnome_prefs->toolbar_detachable =
-				xml_read_bool (node);
-		else if (!strcmp (node->name, "toolbar-relief"))
-			prefs->gnome_prefs->toolbar_relief =
-				xml_read_bool (node);
-		else if (!strcmp (node->name, "toolbar-relief-btn"))
-			prefs->gnome_prefs->toolbar_relief_btn =
-				xml_read_bool (node);
-		else if (!strcmp (node->name, "toolbar-lines"))
-			prefs->gnome_prefs->toolbar_lines =
-				xml_read_bool (node);
-		else if (!strcmp (node->name, "toolbar-labels"))
-			prefs->gnome_prefs->toolbar_labels =
-				xml_read_bool (node);
-		else if (!strcmp (node->name, "dialog-centered"))
-			prefs->gnome_prefs->dialog_centered =
-				xml_read_bool (node);
-		else if (!strcmp (node->name, "menus-have-tearoff"))
-			prefs->gnome_prefs->menus_have_tearoff =
-				xml_read_bool (node);
-		else if (!strcmp (node->name, "menus-have-icons"))
-			prefs->gnome_prefs->menus_have_icons =
-				xml_read_bool (node);
-		else if (!strcmp (node->name, "disable-imlib-cache"))
-			prefs->gnome_prefs->disable_imlib_cache =
-				xml_read_bool (node);
-		else if (!strcmp (node->name, "dialog-type"))
-			prefs->gnome_prefs->dialog_type = xml_read_int (node);
-		else if (!strcmp (node->name, "dialog-position"))
-			prefs->gnome_prefs->dialog_position =
-				xml_read_int (node);
-		else if (!strcmp (node->name, "mdi-mode"))
-			prefs->gnome_prefs->mdi_mode = xml_read_int (node);
-		else if (!strcmp (node->name, "mdi-tab-pos"))
-			prefs->gnome_prefs->mdi_tab_pos = xml_read_int (node);
-		else if (!strcmp (node->name, "dialog-use-icons"))
-			prefs->dialog_use_icons = xml_read_bool (node);
-	}
-
-	return prefs;
-}
-
-xmlDocPtr 
-preferences_write_xml (Preferences *prefs) 
-{
-	xmlDocPtr doc;
-	xmlNodePtr node;
-
-	doc = xmlNewDoc ("1.0");
-
-	node = xmlNewDocNode (doc, NULL, "ui-properties", NULL);
-
-	xmlAddChild (node, 
-		     xml_write_int ("dialog-buttons-style",
-				    prefs->gnome_prefs->dialog_buttons_style));
-
-	xmlAddChild (node,
-		     xml_write_bool ("property-box-buttons-ok",
-				     prefs->gnome_prefs->property_box_buttons_ok));
-	xmlAddChild (node,
-		     xml_write_bool ("property-box-buttons-apply",
-				     prefs->gnome_prefs->property_box_buttons_apply));
-	xmlAddChild (node,
-		     xml_write_bool ("property-box-buttons-close",
-				     prefs->gnome_prefs->property_box_buttons_close));
-	xmlAddChild (node,
-		     xml_write_bool ("property-box-buttons-help",
-				     prefs->gnome_prefs->property_box_buttons_help));
-	xmlAddChild (node,
-		     xml_write_bool ("statusbar-not-dialog",
-				     prefs->gnome_prefs->statusbar_not_dialog));
-	xmlAddChild (node,
-		     xml_write_bool ("statusbar-is-interactive",
-				     prefs->gnome_prefs->statusbar_is_interactive));
-	xmlAddChild (node,
-		     xml_write_bool ("statusbar-meter-on-right",
-				     prefs->gnome_prefs->statusbar_meter_on_right));
-	xmlAddChild (node,
-		     xml_write_bool ("menubar-detachable",
-				     prefs->gnome_prefs->menubar_detachable));
-	xmlAddChild (node,
-		     xml_write_bool ("menubar-relief",
-				     prefs->gnome_prefs->menubar_relief));
-	xmlAddChild (node,
-		     xml_write_bool ("toolbar-detachable",
-				     prefs->gnome_prefs->toolbar_detachable));
-	xmlAddChild (node,
-		     xml_write_bool ("toolbar-relief",
-				     prefs->gnome_prefs->toolbar_relief));
-	xmlAddChild (node,
-		     xml_write_bool ("toolbar-relief-btn",
-				     prefs->gnome_prefs->toolbar_relief_btn));
-	xmlAddChild (node,
-		     xml_write_bool ("toolbar-lines",
-				     prefs->gnome_prefs->toolbar_lines));
-	xmlAddChild (node,
-		     xml_write_bool ("toolbar-labels",
-				     prefs->gnome_prefs->toolbar_labels));
-	xmlAddChild (node,
-		     xml_write_bool ("dialog-centered",
-				     prefs->gnome_prefs->dialog_centered));
-	xmlAddChild (node,
-		     xml_write_bool ("menus-have-tearoff",
-				     prefs->gnome_prefs->menus_have_tearoff));
-	xmlAddChild (node,
-		     xml_write_bool ("menus-have-icons",
-				     prefs->gnome_prefs->menus_have_icons));
-	xmlAddChild (node,
-		     xml_write_bool ("disable-imlib-cache",
-				     prefs->gnome_prefs->disable_imlib_cache));
-
-	xmlAddChild (node, 
-		     xml_write_int ("dialog-type",
-				    prefs->gnome_prefs->dialog_type));
-	xmlAddChild (node, 
-		     xml_write_int ("dialog-position",
-				    prefs->gnome_prefs->dialog_position));
-	xmlAddChild (node, 
-		     xml_write_int ("mdi-mode",
-				    prefs->gnome_prefs->mdi_mode));
-	xmlAddChild (node, 
-		     xml_write_int ("mdi-tab-pos",
-				    prefs->gnome_prefs->mdi_tab_pos));
-
-	xmlAddChild (node,
-		     xml_write_bool ("dialog-use-icons",
-				     prefs->dialog_use_icons));
-
-	xmlDocSetRootElement (doc, node);
-
-	return doc;
-}
-
-/* Read a numeric value from a node */
-
-static gint
-xml_read_int (xmlNodePtr node) 
-{
-	char *text;
-
-	text = xmlNodeGetContent (node);
-
-	if (text == NULL) 
-		return 0;
-	else
-		return atoi (text);
-}
-
-/* Write out a numeric value in a node */
-
-static xmlNodePtr
-xml_write_int (gchar *name, gint number) 
-{
-	xmlNodePtr node;
-	gchar *str;
-
-	g_return_val_if_fail (name != NULL, NULL);
-
-	str = g_strdup_printf ("%d", number);
-	node = xmlNewNode (NULL, name);
-	xmlNodeSetContent (node, str);
-	g_free (str);
-
-	return node;
-}
-
-/* Read a boolean value from a node */
-
-static gboolean
-xml_read_bool (xmlNodePtr node) 
-{
-	char *text;
-
-	text = xmlNodeGetContent (node);
-
-	if (!g_strcasecmp (text, "true")) 
-		return TRUE;
-	else
-		return FALSE;
-}
-
-/* Write out a boolean value in a node */
-
-static xmlNodePtr
-xml_write_bool (gchar *name, gboolean value) 
-{
-	xmlNodePtr node;
-
-	g_return_val_if_fail (name != NULL, NULL);
-
-	node = xmlNewNode (NULL, name);
-
-	if (value)
-		xmlNodeSetContent (node, "true");
-	else
-		xmlNodeSetContent (node, "false");
-
-	return node;
-}
-
 static gint 
 apply_timeout_cb (Preferences *prefs) 
 {
@@ -456,64 +219,13 @@ apply_timeout_cb (Preferences *prefs)
 	return TRUE;
 }
 
-GtkButtonBoxStyle 
+int
 preferences_get_dialog_buttons_style (Preferences *prefs) 
 {
 	g_return_val_if_fail (prefs != NULL, 0);
 	g_return_val_if_fail (IS_PREFERENCES (prefs), 0);
-	g_return_val_if_fail (prefs->gnome_prefs != NULL, 0);
 
-	return prefs->gnome_prefs->dialog_buttons_style;
-}
-
-int
-preferences_get_property_box_buttons_ok (Preferences *prefs) 
-{
-	g_return_val_if_fail (prefs != NULL, 0);
-	g_return_val_if_fail (IS_PREFERENCES (prefs), 0);
-	g_return_val_if_fail (prefs->gnome_prefs != NULL, 0);
-
-	return prefs->gnome_prefs->property_box_buttons_ok;
-}
-
-int
-preferences_get_property_box_buttons_apply (Preferences *prefs) 
-{
-	g_return_val_if_fail (prefs != NULL, 0);
-	g_return_val_if_fail (IS_PREFERENCES (prefs), 0);
-	g_return_val_if_fail (prefs->gnome_prefs != NULL, 0);
-
-	return prefs->gnome_prefs->property_box_buttons_apply;
-}
-
-int
-preferences_get_property_box_buttons_close (Preferences *prefs) 
-{
-	g_return_val_if_fail (prefs != NULL, 0);
-	g_return_val_if_fail (IS_PREFERENCES (prefs), 0);
-	g_return_val_if_fail (prefs->gnome_prefs != NULL, 0);
-
-	return prefs->gnome_prefs->property_box_buttons_close;
-}
-
-int
-preferences_get_property_box_buttons_help (Preferences *prefs) 
-{
-	g_return_val_if_fail (prefs != NULL, 0);
-	g_return_val_if_fail (IS_PREFERENCES (prefs), 0);
-	g_return_val_if_fail (prefs->gnome_prefs != NULL, 0);
-
-	return prefs->gnome_prefs->property_box_buttons_help;
-}
-
-int
-preferences_get_statusbar_not_dialog (Preferences *prefs)
-{
-	g_return_val_if_fail (prefs != NULL, 0);
-	g_return_val_if_fail (IS_PREFERENCES (prefs), 0);
-	g_return_val_if_fail (prefs->gnome_prefs != NULL, 0);
-
-	return prefs->gnome_prefs->statusbar_not_dialog;
+	return prefs->gnome_prefs.dialog_buttons_style;
 }
 
 int
@@ -521,9 +233,8 @@ preferences_get_statusbar_is_interactive (Preferences *prefs)
 {
 	g_return_val_if_fail (prefs != NULL, 0);
 	g_return_val_if_fail (IS_PREFERENCES (prefs), 0);
-	g_return_val_if_fail (prefs->gnome_prefs != NULL, 0);
 
-	return prefs->gnome_prefs->statusbar_is_interactive;
+	return prefs->gnome_prefs.statusbar_is_interactive;
 }
 
 int
@@ -531,9 +242,8 @@ preferences_get_statusbar_meter_on_right (Preferences *prefs)
 {
 	g_return_val_if_fail (prefs != NULL, 0);
 	g_return_val_if_fail (IS_PREFERENCES (prefs), 0);
-	g_return_val_if_fail (prefs->gnome_prefs != NULL, 0);
 
-	return prefs->gnome_prefs->statusbar_meter_on_right;
+	return prefs->gnome_prefs.statusbar_meter_on_right;
 }
 
 int
@@ -541,9 +251,8 @@ preferences_get_statusbar_meter_on_left (Preferences *prefs)
 {
 	g_return_val_if_fail (prefs != NULL, 0);
 	g_return_val_if_fail (IS_PREFERENCES (prefs), 0);
-	g_return_val_if_fail (prefs->gnome_prefs != NULL, 0);
 
-	return !prefs->gnome_prefs->statusbar_meter_on_right;
+	return !prefs->gnome_prefs.statusbar_meter_on_right;
 }
 
 int
@@ -551,9 +260,8 @@ preferences_get_menubar_detachable (Preferences *prefs)
 {
 	g_return_val_if_fail (prefs != NULL, 0);
 	g_return_val_if_fail (IS_PREFERENCES (prefs), 0);
-	g_return_val_if_fail (prefs->gnome_prefs != NULL, 0);
 
-	return prefs->gnome_prefs->menubar_detachable;
+	return prefs->gnome_prefs.menubar_detachable;
 }
 
 int
@@ -561,9 +269,8 @@ preferences_get_menubar_relief (Preferences *prefs)
 {
 	g_return_val_if_fail (prefs != NULL, 0);
 	g_return_val_if_fail (IS_PREFERENCES (prefs), 0);
-	g_return_val_if_fail (prefs->gnome_prefs != NULL, 0);
 
-	return prefs->gnome_prefs->menubar_relief;
+	return prefs->gnome_prefs.menubar_relief;
 }
 
 int
@@ -571,9 +278,8 @@ preferences_get_toolbar_detachable (Preferences *prefs)
 {
 	g_return_val_if_fail (prefs != NULL, 0);
 	g_return_val_if_fail (IS_PREFERENCES (prefs), 0);
-	g_return_val_if_fail (prefs->gnome_prefs != NULL, 0);
 
-	return prefs->gnome_prefs->toolbar_detachable;
+	return prefs->gnome_prefs.toolbar_detachable;
 }
 
 int
@@ -581,29 +287,8 @@ preferences_get_toolbar_relief (Preferences *prefs)
 {
 	g_return_val_if_fail (prefs != NULL, 0);
 	g_return_val_if_fail (IS_PREFERENCES (prefs), 0);
-	g_return_val_if_fail (prefs->gnome_prefs != NULL, 0);
 
-	return prefs->gnome_prefs->toolbar_relief;
-}
-
-int
-preferences_get_toolbar_relief_btn (Preferences *prefs)
-{
-	g_return_val_if_fail (prefs != NULL, 0);
-	g_return_val_if_fail (IS_PREFERENCES (prefs), 0);
-	g_return_val_if_fail (prefs->gnome_prefs != NULL, 0);
-
-	return prefs->gnome_prefs->toolbar_relief_btn;
-}
-
-int
-preferences_get_toolbar_lines (Preferences *prefs)
-{
-	g_return_val_if_fail (prefs != NULL, 0);
-	g_return_val_if_fail (IS_PREFERENCES (prefs), 0);
-	g_return_val_if_fail (prefs->gnome_prefs != NULL, 0);
-
-	return prefs->gnome_prefs->toolbar_lines;
+	return prefs->gnome_prefs.toolbar_relief;
 }
 
 int
@@ -611,9 +296,8 @@ preferences_get_toolbar_icons_only (Preferences *prefs)
 {
 	g_return_val_if_fail (prefs != NULL, 0);
 	g_return_val_if_fail (IS_PREFERENCES (prefs), 0);
-	g_return_val_if_fail (prefs->gnome_prefs != NULL, 0);
 
-	return !prefs->gnome_prefs->toolbar_labels;
+	return !prefs->gnome_prefs.toolbar_labels;
 }
 
 int
@@ -621,9 +305,8 @@ preferences_get_toolbar_text_below (Preferences *prefs)
 {
 	g_return_val_if_fail (prefs != NULL, 0);
 	g_return_val_if_fail (IS_PREFERENCES (prefs), 0);
-	g_return_val_if_fail (prefs->gnome_prefs != NULL, 0);
 
-	return prefs->gnome_prefs->toolbar_labels;
+	return prefs->gnome_prefs.toolbar_labels;
 }
 
 int
@@ -631,9 +314,8 @@ preferences_get_dialog_centered (Preferences *prefs)
 {
 	g_return_val_if_fail (prefs != NULL, 0);
 	g_return_val_if_fail (IS_PREFERENCES (prefs), 0);
-	g_return_val_if_fail (prefs->gnome_prefs != NULL, 0);
 
-	return prefs->gnome_prefs->dialog_centered;
+	return TRUE;
 }
 
 int
@@ -641,9 +323,8 @@ preferences_get_menus_have_tearoff (Preferences *prefs)
 {
 	g_return_val_if_fail (prefs != NULL, 0);
 	g_return_val_if_fail (IS_PREFERENCES (prefs), 0);
-	g_return_val_if_fail (prefs->gnome_prefs != NULL, 0);
 
-	return prefs->gnome_prefs->menus_have_tearoff;
+	return prefs->gnome_prefs.menus_have_tearoff;
 }
 
 int
@@ -651,19 +332,8 @@ preferences_get_menus_have_icons (Preferences *prefs)
 {
 	g_return_val_if_fail (prefs != NULL, 0);
 	g_return_val_if_fail (IS_PREFERENCES (prefs), 0);
-	g_return_val_if_fail (prefs->gnome_prefs != NULL, 0);
 
-	return prefs->gnome_prefs->menus_have_icons;
-}
-
-int
-preferences_get_disable_imlib_cache (Preferences *prefs)
-{
-	g_return_val_if_fail (prefs != NULL, 0);
-	g_return_val_if_fail (IS_PREFERENCES (prefs), 0);
-	g_return_val_if_fail (prefs->gnome_prefs != NULL, 0);
-
-	return prefs->gnome_prefs->disable_imlib_cache;
+	return prefs->gnome_prefs.menus_show_icons;
 }
 
 GtkWindowType
@@ -671,9 +341,8 @@ preferences_get_dialog_type (Preferences *prefs)
 {
 	g_return_val_if_fail (prefs != NULL, 0);
 	g_return_val_if_fail (IS_PREFERENCES (prefs), 0);
-	g_return_val_if_fail (prefs->gnome_prefs != NULL, 0);
 
-	return prefs->gnome_prefs->dialog_type;
+	return 0;
 }
 
 GtkWindowPosition
@@ -681,9 +350,8 @@ preferences_get_dialog_position (Preferences *prefs)
 {
 	g_return_val_if_fail (prefs != NULL, 0);
 	g_return_val_if_fail (IS_PREFERENCES (prefs), 0);
-	g_return_val_if_fail (prefs->gnome_prefs != NULL, 0);
 
-	return prefs->gnome_prefs->dialog_position;
+	return 0;
 }
 
 GnomeMDIMode
@@ -691,9 +359,8 @@ preferences_get_mdi_mode (Preferences *prefs)
 {
 	g_return_val_if_fail (prefs != NULL, 0);
 	g_return_val_if_fail (IS_PREFERENCES (prefs), 0);
-	g_return_val_if_fail (prefs->gnome_prefs != NULL, 0);
 
-	return prefs->gnome_prefs->mdi_mode;
+	return 0;
 }
 
 GtkPositionType
@@ -701,9 +368,8 @@ preferences_get_mdi_tab_pos (Preferences *prefs)
 {
 	g_return_val_if_fail (prefs != NULL, 0);
 	g_return_val_if_fail (IS_PREFERENCES (prefs), 0);
-	g_return_val_if_fail (prefs->gnome_prefs != NULL, 0);
 
-	return prefs->gnome_prefs->mdi_tab_pos;
+	return 0;
 }
 
 int
@@ -711,9 +377,8 @@ preferences_get_dialog_icons (Preferences *prefs)
 {
 	g_return_val_if_fail (prefs != NULL, 0);
 	g_return_val_if_fail (IS_PREFERENCES (prefs), 0);
-	g_return_val_if_fail (prefs->gnome_prefs != NULL, 0);
 
-	return prefs->dialog_use_icons;
+	return prefs->gnome_prefs.dialog_icons;
 }
 
 void
@@ -721,59 +386,8 @@ preferences_set_dialog_buttons_style (Preferences *prefs, int style)
 {
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));
-	g_return_if_fail (prefs->gnome_prefs != NULL);
 
-	prefs->gnome_prefs->dialog_buttons_style = style;
-}
-
-void
-preferences_set_property_box_buttons_ok (Preferences *prefs, int s) 
-{
-	g_return_if_fail (prefs != NULL);
-	g_return_if_fail (IS_PREFERENCES (prefs));
-	g_return_if_fail (prefs->gnome_prefs != NULL);
-
-	prefs->gnome_prefs->property_box_buttons_ok = s;
-}
-
-void
-set_property_set_property_box_buttons_apply (Preferences *prefs, int s)
-{
-	g_return_if_fail (prefs != NULL);
-	g_return_if_fail (IS_PREFERENCES (prefs));
-	g_return_if_fail (prefs->gnome_prefs != NULL);
-
-	prefs->gnome_prefs->property_box_buttons_apply = s;
-}
-
-void
-preferences_set_property_box_buttons_close (Preferences *prefs, int s)
-{
-	g_return_if_fail (prefs != NULL);
-	g_return_if_fail (IS_PREFERENCES (prefs));
-	g_return_if_fail (prefs->gnome_prefs != NULL);
-
-	prefs->gnome_prefs->property_box_buttons_close = s;
-}
-
-void
-preferences_set_property_box_buttons_help (Preferences *prefs, int s)
-{
-	g_return_if_fail (prefs != NULL);
-	g_return_if_fail (IS_PREFERENCES (prefs));
-	g_return_if_fail (prefs->gnome_prefs != NULL);
-
-	prefs->gnome_prefs->property_box_buttons_help = s;
-}
-
-void
-preferences_set_statusbar_not_dialog (Preferences *prefs, int s)
-{
-	g_return_if_fail (prefs != NULL);
-	g_return_if_fail (IS_PREFERENCES (prefs));
-	g_return_if_fail (prefs->gnome_prefs != NULL);
-
-	prefs->gnome_prefs->statusbar_not_dialog = s;
+	prefs->gnome_prefs.dialog_buttons_style = style;
 }
 
 void
@@ -781,9 +395,8 @@ preferences_set_statusbar_is_interactive (Preferences *prefs, int s)
 {
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));
-	g_return_if_fail (prefs->gnome_prefs != NULL);
 
-	prefs->gnome_prefs->statusbar_is_interactive = s;
+	prefs->gnome_prefs.statusbar_is_interactive = s;
 }
 
 void
@@ -791,9 +404,8 @@ preferences_set_statusbar_meter_on_right (Preferences *prefs, int s)
 {
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));
-	g_return_if_fail (prefs->gnome_prefs != NULL);
 
-	prefs->gnome_prefs->statusbar_meter_on_right = s;
+	prefs->gnome_prefs.statusbar_meter_on_right = s;
 }
 
 void
@@ -801,9 +413,8 @@ preferences_set_statusbar_meter_on_left (Preferences *prefs, int s)
 {
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));
-	g_return_if_fail (prefs->gnome_prefs != NULL);
 
-	prefs->gnome_prefs->statusbar_meter_on_right = !s;
+	prefs->gnome_prefs.statusbar_meter_on_right = !s;
 }
 
 void
@@ -811,9 +422,8 @@ preferences_set_menubar_detachable (Preferences *prefs, int s)
 {
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));
-	g_return_if_fail (prefs->gnome_prefs != NULL);
 
-	prefs->gnome_prefs->menubar_detachable = s;
+	prefs->gnome_prefs.menubar_detachable = s;
 }
 
 void
@@ -821,9 +431,8 @@ preferences_set_menubar_relief (Preferences *prefs, int s)
 {
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));
-	g_return_if_fail (prefs->gnome_prefs != NULL);
 
-	prefs->gnome_prefs->menubar_relief = s;
+	prefs->gnome_prefs.menubar_relief = s;
 }
 
 void
@@ -831,9 +440,8 @@ preferences_set_toolbar_detachable (Preferences *prefs, int s)
 {
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));
-	g_return_if_fail (prefs->gnome_prefs != NULL);
 
-	prefs->gnome_prefs->toolbar_detachable = s;
+	prefs->gnome_prefs.toolbar_detachable = s;
 }
 
 void
@@ -841,29 +449,8 @@ preferences_set_toolbar_relief (Preferences *prefs, int s)
 {
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));
-	g_return_if_fail (prefs->gnome_prefs != NULL);
 
-	prefs->gnome_prefs->toolbar_relief = s;
-}
-
-void
-preferences_set_toolbar_relief_btn (Preferences *prefs, int s)
-{
-	g_return_if_fail (prefs != NULL);
-	g_return_if_fail (IS_PREFERENCES (prefs));
-	g_return_if_fail (prefs->gnome_prefs != NULL);
-
-	prefs->gnome_prefs->toolbar_relief_btn = s;
-}
-
-void
-preferences_set_toolbar_lines (Preferences *prefs, int s)
-{
-	g_return_if_fail (prefs != NULL);
-	g_return_if_fail (IS_PREFERENCES (prefs));
-	g_return_if_fail (prefs->gnome_prefs != NULL);
-
-	prefs->gnome_prefs->toolbar_lines = s;
+	prefs->gnome_prefs.toolbar_relief = s;
 }
 
 void
@@ -871,9 +458,8 @@ preferences_set_toolbar_icons_only (Preferences *prefs, int s)
 {
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));
-	g_return_if_fail (prefs->gnome_prefs != NULL);
 
-	prefs->gnome_prefs->toolbar_labels = !s;
+	prefs->gnome_prefs.toolbar_labels = !s;
 }
 
 void
@@ -881,9 +467,8 @@ preferences_set_toolbar_text_below (Preferences *prefs, int s)
 {
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));
-	g_return_if_fail (prefs->gnome_prefs != NULL);
 
-	prefs->gnome_prefs->toolbar_labels = s;
+	prefs->gnome_prefs.toolbar_labels = s;
 }
 
 void
@@ -891,9 +476,8 @@ preferences_set_dialog_centered (Preferences *prefs, int s)
 {
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));
-	g_return_if_fail (prefs->gnome_prefs != NULL);
 
-	prefs->gnome_prefs->dialog_centered = s;
+	prefs->gnome_prefs.dialog_centered = s;
 }
 
 void
@@ -901,9 +485,8 @@ preferences_set_menus_have_tearoff (Preferences *prefs, int s)
 {
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));
-	g_return_if_fail (prefs->gnome_prefs != NULL);
 
-	prefs->gnome_prefs->menus_have_tearoff = s;
+	prefs->gnome_prefs.menus_have_tearoff = s;
 }
 
 void
@@ -911,19 +494,8 @@ preferences_set_menus_have_icons (Preferences *prefs, int s)
 {
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));
-	g_return_if_fail (prefs->gnome_prefs != NULL);
 
-	prefs->gnome_prefs->menus_have_icons = s;
-}
-
-void
-preferences_set_disable_imlib_cache (Preferences *prefs, int s)
-{
-	g_return_if_fail (prefs != NULL);
-	g_return_if_fail (IS_PREFERENCES (prefs));
-	g_return_if_fail (prefs->gnome_prefs != NULL);
-
-	prefs->gnome_prefs->disable_imlib_cache = s;
+	prefs->gnome_prefs.menus_show_icons = s;
 }
 
 void
@@ -931,9 +503,8 @@ preferences_set_dialog_type (Preferences *prefs, int type)
 {
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));
-	g_return_if_fail (prefs->gnome_prefs != NULL);
 
-	prefs->gnome_prefs->dialog_type = type;
+	prefs->gnome_prefs.dialog_type = type;
 }
 
 void
@@ -941,9 +512,8 @@ preferences_set_dialog_position (Preferences *prefs, int pos)
 {
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));
-	g_return_if_fail (prefs->gnome_prefs != NULL);
 
-	prefs->gnome_prefs->dialog_position = pos;
+	prefs->gnome_prefs.dialog_position = pos;
 }
 
 void
@@ -951,9 +521,8 @@ preferences_set_mdi_mode (Preferences *prefs, int mode)
 {
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));
-	g_return_if_fail (prefs->gnome_prefs != NULL);
 
-	prefs->gnome_prefs->mdi_mode = mode;
+	prefs->gnome_prefs.mdi_mode = mode;
 }
 
 void
@@ -961,9 +530,8 @@ preferences_set_mdi_tab_pos (Preferences *prefs, int type)
 {
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));
-	g_return_if_fail (prefs->gnome_prefs != NULL);
 
-	prefs->gnome_prefs->mdi_tab_pos = type;
+	prefs->gnome_prefs.mdi_tab_pos = type;
 }
 
 void
@@ -971,7 +539,6 @@ preferences_set_dialog_icons (Preferences *prefs, int s)
 {
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));
-	g_return_if_fail (prefs->gnome_prefs != NULL);
 
-	prefs->dialog_use_icons = s;
+	prefs->gnome_prefs.dialog_icons = s;
 }

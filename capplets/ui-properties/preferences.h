@@ -27,8 +27,6 @@
 #include <gtk/gtk.h>
 #include <gnome.h>
 
-#include <libxml/tree.h>
-
 #define PREFERENCES(obj)          GTK_CHECK_CAST (obj, preferences_get_type (), Preferences)
 #define PREFERENCES_CLASS(klass)  GTK_CHECK_CLASS_CAST (klass, preferences_get_type (), PreferencesClass)
 #define IS_PREFERENCES(obj)       GTK_CHECK_TYPE (obj, preferences_get_type ())
@@ -43,9 +41,26 @@ struct _Preferences
 	gint              frozen;
 	guint             timeout_id;
 
-	GnomePreferences *gnome_prefs;
-
-	gboolean          dialog_use_icons;
+	struct {
+		enum { DEFAULT, SPREAD, EDGE, START, END } dialog_buttons_style;
+		gboolean dialog_icons;
+		gboolean dialog_centered;
+		GtkWindowPosition dialog_position;
+		GtkWindowType dialog_type;
+		gboolean menus_show_icons;
+		gboolean menus_have_tearoff;
+		gboolean toolbar_labels;
+		gboolean toolbar_detachable;
+		gboolean toolbar_relief;
+		gboolean toolbar_separator;
+		gboolean toolbar_popup;
+		gboolean menubar_detachable;
+		gboolean menubar_relief;
+		gboolean statusbar_meter_on_right;
+		gboolean statusbar_is_interactive;
+		GnomeMDIMode mdi_mode;
+		GtkPositionType mdi_tab_pos;
+	} gnome_prefs;
 };
 
 struct _PreferencesClass
@@ -67,9 +82,6 @@ void         preferences_apply_now  (Preferences *prefs);
 void         preferences_freeze     (Preferences *prefs);
 void         preferences_thaw       (Preferences *prefs);
 
-Preferences *preferences_read_xml   (xmlDocPtr xml_doc);
-xmlDocPtr    preferences_write_xml  (Preferences *prefs);
-
 /* get/set functions. It's really stupid that we need these */
 
 int preferences_get_menubar_detachable                 (Preferences *prefs);
@@ -77,15 +89,12 @@ int preferences_get_menubar_relief                     (Preferences *prefs);
 int preferences_get_menus_have_tearoff                 (Preferences *prefs);
 int preferences_get_menus_have_icons                   (Preferences *prefs);
 
-int preferences_get_statusbar_not_dialog               (Preferences *prefs);
 int preferences_get_statusbar_is_interactive           (Preferences *prefs);
 int preferences_get_statusbar_meter_on_left            (Preferences *prefs);
 int preferences_get_statusbar_meter_on_right           (Preferences *prefs);
 
 int preferences_get_toolbar_detachable                 (Preferences *prefs);
 int preferences_get_toolbar_relief                     (Preferences *prefs);
-int preferences_get_toolbar_relief_btn                 (Preferences *prefs);
-int preferences_get_toolbar_lines                      (Preferences *prefs);
 int preferences_get_toolbar_icons_only                 (Preferences *prefs);
 int preferences_get_toolbar_text_below                 (Preferences *prefs);
 
@@ -94,7 +103,7 @@ int preferences_get_dialog_centered                    (Preferences *prefs);
 
 GtkWindowPosition preferences_get_dialog_position      (Preferences *prefs);
 GtkWindowType preferences_get_dialog_type              (Preferences *prefs);
-GtkButtonBoxStyle preferences_get_dialog_buttons_style (Preferences *prefs);
+int preferences_get_dialog_buttons_style	       (Preferences *prefs);
 
 GnomeMDIMode preferences_get_mdi_mode                  (Preferences *prefs);
 GtkPositionType preferences_get_mdi_tab_pos            (Preferences *prefs);
@@ -117,15 +126,12 @@ void preferences_set_menubar_relief                     (Preferences *prefs, int
 void preferences_set_menus_have_tearoff                 (Preferences *prefs, int i);
 void preferences_set_menus_have_icons                   (Preferences *prefs, int i);
 
-void preferences_set_statusbar_not_dialog               (Preferences *prefs, int i);
 void preferences_set_statusbar_is_interactive           (Preferences *prefs, int i);
 void preferences_set_statusbar_meter_on_left            (Preferences *prefs, int i);
 void preferences_set_statusbar_meter_on_right           (Preferences *prefs, int i);
 
 void preferences_set_toolbar_detachable                 (Preferences *prefs, int i);
 void preferences_set_toolbar_relief                     (Preferences *prefs, int i);
-void preferences_set_toolbar_relief_btn                 (Preferences *prefs, int i);
-void preferences_set_toolbar_lines                      (Preferences *prefs, int i);
 void preferences_set_toolbar_icons_only                 (Preferences *prefs, int i);
 void preferences_set_toolbar_text_below                 (Preferences *prefs, int i);
 

@@ -52,8 +52,8 @@ prefs_widget_mdi_get_type (void)
 			sizeof (PrefsWidgetMDIClass),
 			(GtkClassInitFunc) prefs_widget_mdi_class_init,
 			(GtkObjectInitFunc) prefs_widget_mdi_init,
-			(GtkArgSetFunc) NULL,
-			(GtkArgGetFunc) NULL
+			NULL,
+			NULL
 		};
 
 		prefs_widget_mdi_type = 
@@ -91,7 +91,7 @@ prefs_widget_mdi_new (Preferences *prefs)
 
 	dialog_data = 
 		glade_xml_new (GNOMECC_GLADE_DIR "/behavior-properties.glade",
-			       "prefs_widget_mdi");
+			       "prefs_widget_mdi", NULL);
 
 	widget = gtk_widget_new (prefs_widget_mdi_get_type (),
 				 "dialog_data", dialog_data,

@@ -28,18 +28,9 @@
 #include <gtk/gtk.h>
 #include <gnome.h>
 #include <libgnomeui/gnome-window-icon.h>
-#include <tree.h>
-#include <parser.h>
 #include <fcntl.h> 
 
 #include <glade/glade.h>
-
-#include <capplet-widget.h>
-
-#ifdef HAVE_XIMIAN_ARCHIVER
-#  include <ximian-archiver/archive.h>
-#  include <ximian-archiver/location.h>
-#endif /* HAVE_XIMIAN_ARCHIVER */
 
 #include "preferences.h"
 #include "prefs-widget.h"
@@ -48,68 +39,21 @@
 #include "prefs-widget-mdi.h"
 
 static Preferences *prefs;
-static Preferences *old_prefs;
 static PrefsWidget *prefs_widget;
 
-#ifdef HAVE_XIMIAN_ARCHIVER
-
-static Archive *archive;
-static gboolean outside_location;
-
-static void
-store_archive_data (void) 
-{
-	Location *location;
-	xmlDocPtr xml_doc;
-
-	if (capplet_get_location () == NULL)
-		location = archive_get_current_location (archive);
-	else
-		location = archive_get_location (archive,
-						 capplet_get_location ());
-
-	xml_doc = preferences_write_xml (prefs);
-	location_store_xml (location, "ui-properties-capplet",
-			    xml_doc, STORE_MASK_PREVIOUS);
-	xmlFreeDoc (xml_doc);
-	archive_close (archive);
-}
-
-#endif /* HAVE_XIMIAN_ARCHIVER */
-
-static void
-ok_cb (GtkWidget *widget) 
-{
-#ifdef HAVE_XIMIAN_ARCHIVER
-	if (!outside_location)
-#endif /* HAVE_XIMIAN_ARCHIVER */
-		preferences_save (prefs);
-
-#ifdef HAVE_XIMIAN_ARCHIVER
-	store_archive_data ();
-#endif /* HAVE_XIMIAN_ARCHIVER */
-}
-
-static void
-cancel_cb (GtkWidget *widget) 
-{
-#ifdef HAVE_XIMIAN_ARCHIVER
-	if (!outside_location)
-#endif /* HAVE_XIMIAN_ARCHIVER */
-		preferences_save (old_prefs);
-}
+static gint cap_session_init = 0;
+static struct poptOption cap_options[] = {
+	{"init-session-settings", '\0', POPT_ARG_NONE, &cap_session_init, 0,
+	 N_("Initialize session settings"), NULL},
+	{NULL, '\0', 0, NULL, 0}
+};
 
 static void 
 setup_capplet_widget (void)
 {
 	preferences_freeze (prefs);
 
-	prefs_widget = prefs_widget_new (prefs);
-
-	gtk_signal_connect (GTK_OBJECT (prefs_widget), "ok", 
-			    GTK_SIGNAL_FUNC (ok_cb), NULL);
-	gtk_signal_connect (GTK_OBJECT (prefs_widget), "cancel", 
-			    GTK_SIGNAL_FUNC (cancel_cb), NULL);		
+	prefs_widget = PREFS_WIDGET (prefs_widget_new (prefs));
 
 	gtk_widget_show (GTK_WIDGET (prefs_widget));
 
@@ -187,64 +131,16 @@ do_restore_from_defaults (void)
 int
 main (int argc, char **argv)
 {
-	GnomeClient *client;
-	GnomeClientFlags flags;
-	gint token, res;
 	gchar *restart_args[3];
 
 	bindtextdomain (PACKAGE, GNOMELOCALEDIR);
 	bind_textdomain_codeset (PACKAGE, "UTF-8");
 	textdomain (PACKAGE);
 
-	glade_gnome_init ();
-	res = gnome_capplet_init ("behavior",
-				  VERSION, argc, argv, NULL,
-				  0, NULL);
-
-	if (res < 0) {
-		g_error ("Could not initialize the capplet.");
-	}
-	else if (res == 3) {
-#ifdef HAVE_XIMIAN_ARCHIVER
-		do_get_xml ();
-#endif /* HAVE_XIMIAN_ARCHIVER */
-		return 0;
-	}
-	else if (res == 4) {
-#ifdef HAVE_XIMIAN_ARCHIVER
-		do_set_xml (TRUE);
-#endif /* HAVE_XIMIAN_ARCHIVER */
-		return 0;
-	}
-	else if (res == 5) {
-		do_restore_from_defaults ();
-		return 0;
-	}
-
-	client = gnome_master_client ();
-	flags = gnome_client_get_flags (client);
-
-	if (flags & GNOME_CLIENT_IS_CONNECTED) {
-		token = gnome_startup_acquire_token
-			("GNOME_UI_PROPERTIES",
-			 gnome_client_get_id (client));
-
-		if (token) {
-			gnome_client_set_priority (client, 20);
-			gnome_client_set_restart_style (client,
-							GNOME_RESTART_ANYWAY);
-			restart_args[0] = argv[0];
-			restart_args[1] = "--init-session-settings";
-			restart_args[2] = NULL;
-			gnome_client_set_restart_command (client, 2,
-							  restart_args);
-		} else {
-			gnome_client_set_restart_style (client,
-							GNOME_RESTART_NEVER);
-		}
-	} else {
-		token = 1;
-	}
+  	gnome_program_init ("ui-properties-capplet", VERSION,
+		      LIBGNOMEUI_MODULE, argc, argv,
+		      GNOME_PARAM_POPT_TABLE, &cap_options,
+		      NULL);
 
 	gnome_window_icon_set_default_from_file (GNOMECC_ICONS_DIR"/gnome-applications.png");
 
@@ -273,15 +169,13 @@ main (int argc, char **argv)
 
 	prefs = PREFERENCES (preferences_new ());
 	preferences_load (prefs);
-	if (token) preferences_apply_now (prefs);
 
 #endif /* HAVE_XIMIAN_ARCHIVER */
 
-	if (!res) {
-		old_prefs = PREFERENCES (preferences_clone (prefs));
+	if (!cap_session_init) {
 		setup_capplet_widget ();
 
-		capplet_gtk_main ();
+		gtk_main ();
 	}
 
 	return 0;
