@@ -52,10 +52,6 @@ gint      gnome_theme_manager_sort_func                 (const gchar      *a_str
 							 const gchar      *b_str,
 							 guint             a_flag,
 							 guint             b_flag);
-gint      gnome_theme_manager_tree_sort_func            (GtkTreeModel     *model,
-							 GtkTreeIter      *a,
-							 GtkTreeIter      *b,
-							 gpointer          user_data);
 void      gnome_theme_manager_show_manage_themes        (GtkWidget        *button,
 							 gpointer          data);
 void      gnome_theme_manager_icon_show_manage_themes        (GtkWidget        *button,

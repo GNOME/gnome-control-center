@@ -538,6 +538,12 @@ update_theme_index (GnomeVFSURI       *index_uri,
 	  theme_info->has_metacity = theme_exists;
 	}
 
+      if (!theme_info->has_metacity && !theme_info->has_keybinding && !theme_info->has_gtk)
+	{
+	  g_hash_table_remove (theme_hash_by_uri, common_theme_dir);
+	  remove_data_from_hash_by_name (theme_hash_by_name, theme_info->name, theme_info);
+	}
+
       if (theme_exists && theme_used_to_exist)
 	{
 	  handle_change_signal (GNOME_THEME_TYPE_REGULAR, theme_info, GNOME_THEME_CHANGE_CHANGED, key_element);
@@ -553,8 +559,6 @@ update_theme_index (GnomeVFSURI       *index_uri,
 
       if (!theme_info->has_metacity && !theme_info->has_keybinding && !theme_info->has_gtk)
 	{
-	  g_hash_table_remove (theme_hash_by_uri, common_theme_dir);
-	  remove_data_from_hash_by_name (theme_hash_by_name, theme_info->name, theme_info);
 	  gnome_theme_info_free (theme_info);
 	}
     }
@@ -710,7 +714,7 @@ update_common_theme_dir_index (GnomeVFSURI *theme_index_uri,
 	    name = ((GnomeThemeMetaInfo *)old_theme_info)->name;
 
 	  g_hash_table_remove (hash_by_uri, common_theme_dir);
-	  remove_data_from_hash_by_name (hash_by_name, name, common_theme_dir);
+	  remove_data_from_hash_by_name (hash_by_name, name, old_theme_info);
 	  handle_change_signal (icon_theme?GNOME_THEME_TYPE_ICON:GNOME_THEME_TYPE_METATHEME,
 				old_theme_info, GNOME_THEME_CHANGE_DELETED, 0);
 	  if (icon_theme)

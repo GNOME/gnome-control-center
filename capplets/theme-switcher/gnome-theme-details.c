@@ -65,6 +65,35 @@ cb_dialog_response (GtkDialog *dialog, gint response_id)
     gtk_widget_hide (GTK_WIDGET (dialog));
 }
 
+static gint
+details_tree_sort_func (GtkTreeModel *model,
+			GtkTreeIter  *a,
+			GtkTreeIter  *b,
+			gpointer      user_data)
+{
+  gchar *a_name = NULL;
+  gchar *b_name = NULL;
+  guint a_flag = FALSE;
+  guint b_flag = FALSE;
+  gint retval;
+
+  gtk_tree_model_get (model, a,
+		      THEME_NAME_COLUMN, &a_name,
+		      THEME_FLAG_COLUMN, &a_flag,
+		      -1);
+  gtk_tree_model_get (model, b,
+		      THEME_NAME_COLUMN, &b_name,
+		      THEME_FLAG_COLUMN, &b_flag,
+		      -1);
+
+  retval = gnome_theme_manager_sort_func (a_name, b_name, a_flag, b_flag);
+
+  g_free (a_name);
+  g_free (b_name);
+
+  return retval;
+}
+
 static void
 setup_tree_view (GtkTreeView *tree_view,
 		 GCallback    changed_callback,
@@ -75,7 +104,7 @@ setup_tree_view (GtkTreeView *tree_view,
   GtkCellRenderer *renderer;
 
   model = (GtkTreeModel *) gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_UINT);
-  gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (model), 0, gnome_theme_manager_tree_sort_func, NULL, NULL);
+  gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (model), 0, details_tree_sort_func, NULL, NULL);
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (model), 0, GTK_SORT_ASCENDING);
   gtk_tree_view_set_model (tree_view, model);
   selection = gtk_tree_view_get_selection (tree_view);
@@ -86,9 +115,8 @@ setup_tree_view (GtkTreeView *tree_view,
   gtk_tree_view_insert_column_with_attributes (tree_view,
  					       -1, NULL,
  					       renderer,
- 					       "markup", THEME_NAME_COLUMN,
+ 					       "text", THEME_NAME_COLUMN,
  					       NULL);
-
 }
 
 

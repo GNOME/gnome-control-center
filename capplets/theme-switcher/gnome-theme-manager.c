@@ -285,18 +285,21 @@ load_meta_themes (GtkTreeView *tree_view,
   current_icon_theme = gconf_client_get_string (client, ICON_THEME_KEY, NULL);
   window_manager = gnome_wm_manager_get_current (gdk_display_get_default_screen (gdk_display_get_default ()));
   wm_settings.flags = GNOME_WM_SETTING_THEME;
-  if (window_manager) {
-    gnome_window_manager_get_settings (window_manager, &wm_settings);
-    current_window_theme = g_strdup (wm_settings.theme);
-  } else
-    current_window_theme = g_strdup ("");
+  if (window_manager)
+    {
+      gnome_window_manager_get_settings (window_manager, &wm_settings);
+      current_window_theme = g_strdup (wm_settings.theme);
+    }
+  else
+    {
+      current_window_theme = g_strdup ("");
+    }
 
   /* FIXME: What do we really do when there is no theme? */
   if (current_icon_theme == NULL)
     current_icon_theme = g_strdup ("Default");
   if (current_gtk_theme == NULL)
     current_gtk_theme = g_strdup ("Default");
-
 
   /* handle first time */
   if (first_time)
@@ -443,7 +446,6 @@ load_meta_themes (GtkTreeView *tree_view,
 	{
 	  /* It's a dead item. */
 	  GtkTreeIter iter_to_remove;
-
 	  iter_to_remove = iter;
 	  valid = gtk_tree_model_iter_next (model, &iter);
 	  gtk_list_store_remove (GTK_LIST_STORE (model), &iter_to_remove);
@@ -1050,8 +1052,6 @@ setup_meta_tree_view (GtkTreeView *tree_view,
 					       G_TYPE_STRING,    /* META_THEME_ID_COLUMN     */
 					       G_TYPE_UINT,      /* META_THEME_FLAG_COLUMN   */
 					       GDK_TYPE_PIXBUF); /* META_THEME_PIXBUF_COLUMN */
-  //  gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (model), 0, gnome_theme_manager_tree_sort_func, NULL, NULL);
-  //  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (model), 0, GTK_SORT_ASCENDING);
   gtk_tree_view_set_model (tree_view, model);
   selection = gtk_tree_view_get_selection (tree_view);
   gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
@@ -1217,48 +1217,6 @@ gnome_theme_manager_sort_func (const gchar *a_str,
       retval = g_utf8_collate (a_str?a_str:"",
 			       b_str?b_str:"");
     }
-  return retval;
-}
-
-gint
-gnome_theme_manager_tree_sort_func (GtkTreeModel *model,
-				    GtkTreeIter  *a,
-				    GtkTreeIter  *b,
-				    gpointer      user_data)
-{
-  GnomeThemeMetaInfo *a_meta_info;
-  GnomeThemeMetaInfo *b_meta_info;
-  gchar *a_id = NULL;
-  gchar *b_id = NULL;
-  guint a_flag = FALSE;
-  guint b_flag = FALSE;
-  gint retval;
-
-  gtk_tree_model_get (model, a,
-		      META_THEME_ID_COLUMN, &a_id,
-		      META_THEME_FLAG_COLUMN, &a_flag,
-		      -1);
-  gtk_tree_model_get (model, b,
-		      META_THEME_ID_COLUMN, &b_id,
-		      META_THEME_FLAG_COLUMN, &b_flag,
-		      -1);
-
-  if (a_id)
-    a_meta_info = gnome_theme_meta_info_find (a_id);
-  else
-    a_meta_info = &custom_meta_theme_info;
-  if (b_id)
-    b_meta_info = gnome_theme_meta_info_find (b_id);
-  else
-    b_meta_info = &custom_meta_theme_info;
-
-  retval = gnome_theme_manager_sort_func (a_meta_info?a_meta_info->readable_name:"",
-					  b_meta_info?b_meta_info->readable_name:"",
-					  a_flag, b_flag);
-
-  g_free (a_id);
-  g_free (b_id);
-
   return retval;
 }
 
