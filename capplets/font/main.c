@@ -30,19 +30,11 @@ create_dialog (void)
 static void
 cb_dialog_response (GtkDialog *dialog, gint response_id)
 {
-	if (response_id == GTK_RESPONSE_HELP) {
-		GError *error = NULL;
-
-		/* TODO : get this written */
-		gnome_help_display_desktop (NULL,
-			"control-center-manual",
+	if (response_id == GTK_RESPONSE_HELP)
+		capplet_help (GTK_WINDOW (dialog),
 			"config-font.xml",
-			"CONFIGURATION", &error);
-		if (error) {
-			g_warning ("help error: %s\n", error->message);
-			g_error_free (error);
-		}
-	} else
+			"CONFIGURATION");
+	else
 		gtk_main_quit ();
 }
 
