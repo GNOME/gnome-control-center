@@ -411,7 +411,7 @@ ax_slowkeys_warning_dialog_post (gboolean enabled)
 						    _("Slow Keys Alert"),
 						    _("You just held down the Shift key for 8 seconds.  This is the shortcut for the Slow Keys feature, which affects the way your keyboard works."),
 						    enabled ? _("Do you want to activate Slow Keys?") : 
-						    _("Do you want to deactivate Sticky Keys ?"));
+						    _("Do you want to deactivate Slow Keys?"));
 }
 
 static void
@@ -426,7 +426,7 @@ ax_stickykeys_warning_dialog_post (gboolean enabled)
 						    enabled ? _("You just pressed the Shift key 5 times in a row.  This is the shortcut for the Sticky Keys feature, which affects the way your keyboard works.") : 
 						    _("You just pressed two keys at once, or pressed the Shift key 5 times in a row.  This turns off the Sticky Keys feature, which affects the way your keyboard works."),
 						    enabled ? _("Do you want to activate Sticky Keys?") : 
-						    _("Do you want to deactivate Sticky Keys ?"));
+						    _("Do you want to deactivate Sticky Keys?"));
 }
 
 static void
