@@ -6,9 +6,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-control-center 2.2.0\n"
-"POT-Creation-Date: 2003-02-04 16:51-0500\n"
-"PO-Revision-Date: 2003-01-22 19:08+0100\n"
+"Project-Id-Version: gnome-control-center 2.2.0.1\n"
+"POT-Creation-Date: 2003-04-30 23:06+0200\n"
+"PO-Revision-Date: 2003-04-30 23:18+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
 "MIME-Version: 1.0\n"
@@ -41,7 +41,7 @@ msgstr "Teclat"
 msgid "Set your keyboard accessibility preferences"
 msgstr "Estableix les propietats d'accesibilitat del teclat"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.c:57
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.c:60
 msgid ""
 "This system does not seem to have the XKB extension.  The keyboard "
 "accessibility features will not operate without it."
@@ -295,9 +295,9 @@ msgstr "Seleccioneu una ima_tge:"
 
 #: capplets/background/background-properties-capplet.c:567
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:712
+#: capplets/default-applications/gnome-default-applications-properties.c:724
 #: capplets/keyboard/gnome-keyboard-properties.c:290
-#: capplets/mouse/gnome-mouse-properties.c:712
+#: capplets/mouse/gnome-mouse-properties.c:716
 #: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
 msgstr "Recupera i desa els paràmetres originals"
@@ -561,7 +561,7 @@ msgstr ""
 "Crida de retorn a ser emessa quan les dades objecte de l'editor de "
 "propietats es vagen a lliurar"
 
-#: capplets/common/gconf-property-editor.c:1484
+#: capplets/common/gconf-property-editor.c:1486
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -574,7 +574,7 @@ msgstr ""
 "Si us plau assegureu-vos de que existeix i intenteu-lo de nou, o escolliu "
 "una imatge de fons diferent."
 
-#: capplets/common/gconf-property-editor.c:1492
+#: capplets/common/gconf-property-editor.c:1494
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -587,7 +587,7 @@ msgstr ""
 "\n"
 "Si us plau seleccioneu una imatge diferent en el seu lloc."
 
-#: capplets/common/gconf-property-editor.c:1583
+#: capplets/common/gconf-property-editor.c:1585
 msgid "Please select an image."
 msgstr "Si us plau, seleccioneu una imatge."
 
@@ -699,7 +699,7 @@ msgstr ""
 #
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:21
 msgid "Start in T_erminal"
-msgstr "Comença a un T_erminal"
+msgstr "Inicia a un t_erminal"
 
 #
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:22
@@ -785,7 +785,7 @@ msgstr "Configuracions d'accesibilitat"
 
 #: capplets/desktop-links/Advanced.directory.in.in.h:1
 msgid "Advanced"
-msgstr "Avençat"
+msgstr "Avançat"
 
 #
 #: capplets/desktop-links/Advanced.directory.in.in.h:2
@@ -816,7 +816,7 @@ msgstr "Personalitza les dreceres per a les finestres"
 #
 #: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:2
 msgid "Shortcuts"
-msgstr "Drecera"
+msgstr "Dreceres"
 
 #: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:1
 msgid "Configure how to give focus to windows"
@@ -986,7 +986,7 @@ msgstr "Executa un programa"
 #
 #: capplets/file-types/file-types-properties.glade.h:16
 msgid "Run in _Terminal"
-msgstr "Executa a un _Terminal"
+msgstr "Executa a un _terminal"
 
 #: capplets/file-types/file-types-properties.glade.h:17
 msgid "Use parent category _defaults"
@@ -1066,8 +1066,8 @@ msgid "Structure containing information on the MIME category"
 msgstr "Estructura que conte la informació sobre la categoria MIME"
 
 #: capplets/file-types/mime-category-edit-dialog.c:344
-#: capplets/file-types/mime-edit-dialog.c:488
-#: capplets/file-types/mime-edit-dialog.c:592
+#: capplets/file-types/mime-edit-dialog.c:491
+#: capplets/file-types/mime-edit-dialog.c:595
 #: capplets/file-types/service-edit-dialog.c:358
 #: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
@@ -1104,16 +1104,16 @@ msgid "Add File Type"
 msgstr "Afegeix un tipus de fitxer"
 
 #: capplets/file-types/mime-edit-dialog.c:434
-#: capplets/file-types/mime-type-info.c:673
+#: capplets/file-types/mime-type-info.c:674
 msgid "Misc"
 msgstr "Miscel·lània"
 
-#: capplets/file-types/mime-edit-dialog.c:483
-#: capplets/file-types/mime-edit-dialog.c:542
+#: capplets/file-types/mime-edit-dialog.c:486
+#: capplets/file-types/mime-edit-dialog.c:545
 msgid "None"
 msgstr "Cap"
 
-#: capplets/file-types/mime-edit-dialog.c:852
+#: capplets/file-types/mime-edit-dialog.c:855
 msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
@@ -1121,30 +1121,35 @@ msgstr ""
 "Introduïu un tipus de MIME vàlid. Hauria d'estar en el format classe/tipus i "
 "no pot contindre cap espai."
 
-#: capplets/file-types/mime-edit-dialog.c:859
+#: capplets/file-types/mime-edit-dialog.c:862
 msgid "A MIME type with that name already exists, overwrite ?."
 msgstr "Ja existeix un tipus de MIME amb aquest nom, voleu sobreescriure-ho?"
 
-#: capplets/file-types/mime-edit-dialog.c:924
+#: capplets/file-types/mime-edit-dialog.c:927
 msgid "Category"
 msgstr "Categoria"
 
-#: capplets/file-types/mime-edit-dialog.c:929
+#: capplets/file-types/mime-edit-dialog.c:932
 msgid "Choose a file category"
 msgstr "Escull una categoria de fitxer"
 
-#: capplets/file-types/mime-type-info.c:667
+#: capplets/file-types/mime-type-info.c:602
+#, c-format
+msgid "View as %s"
+msgstr "Visualitza com %s"
+
+#: capplets/file-types/mime-type-info.c:668
 msgid "Images"
 msgstr "Imatges"
 
 #
-#: capplets/file-types/mime-type-info.c:669
+#: capplets/file-types/mime-type-info.c:670
 msgid "Video"
-msgstr "Video"
+msgstr "Vídeo"
 
-#: capplets/file-types/mime-type-info.c:671
+#: capplets/file-types/mime-type-info.c:672
 msgid "Audio"
-msgstr "Audio"
+msgstr "Àudio"
 
 #: capplets/file-types/mime-types-model.c:167
 #: capplets/file-types/mime-types-model.c:168
@@ -1152,7 +1157,7 @@ msgid "Model for categories only"
 msgstr "Solament model per categories"
 
 #
-#: capplets/file-types/mime-types-model.c:421
+#: capplets/file-types/mime-types-model.c:422
 msgid "Internet Services"
 msgstr "Serveis d'Internet"
 
@@ -1245,7 +1250,7 @@ msgstr "Millor co_ntrast"
 
 #: capplets/font/font-properties.glade.h:3
 msgid "De_tails..."
-msgstr "Detalls..."
+msgstr "De_talls..."
 
 #
 #: capplets/font/font-properties.glade.h:4
@@ -1263,7 +1268,7 @@ msgstr "Detalls de la representació dels tipus de lletra"
 
 #: capplets/font/font-properties.glade.h:7
 msgid "G_rayscale"
-msgstr "Escala de grisos"
+msgstr "Escala de g_risos"
 
 # Contorn, segons els traductos al castellà.
 # No estic gens segur. jm
@@ -1302,7 +1307,7 @@ msgstr "Sub_píxel (LCD)"
 
 #: capplets/font/font-properties.glade.h:16
 msgid "Sub_pixel smoothing (LCDs)"
-msgstr "Suavitzat de subpíxels (LCD)"
+msgstr "Suavitzat de sub_píxels (LCD)"
 
 #: capplets/font/font-properties.glade.h:17
 msgid "Subpixel order:"
@@ -1361,7 +1366,7 @@ msgstr "_VRGB"
 
 #: capplets/font/font-properties.glade.h:30
 msgid "_Window title font:"
-msgstr "Tipus de lletra del títol de les finestres:"
+msgstr "Tipus de lletra del títol de les _finestres:"
 
 #
 #: capplets/keybindings/eggcellrendererkeys.c:160
@@ -1458,7 +1463,7 @@ msgstr "Dreceres de teclat"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:3
 msgid "_Desktop shortcuts:"
-msgstr "Dreceres d'_Escriptori:"
+msgstr "_Dreceres de l'escriptori:"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:4
 msgid "_Text editing shortcuts:"
@@ -1514,7 +1519,7 @@ msgstr "Pe_rsonalitzat:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "Clic_k on keypress"
-msgstr "Fa «clic_k» en polsar tecles"
+msgstr "Fes «clic_k» en polsar tecles"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "Cursor Blinks"
@@ -1579,7 +1584,7 @@ msgstr "baix"
 msgid "Set your keyboard preferences"
 msgstr "Estableix les preferències del teclat"
 
-#: capplets/mouse/gnome-mouse-properties.c:437
+#: capplets/mouse/gnome-mouse-properties.c:439
 #, c-format
 msgid ""
 "<b>Unknown Cursor</b>\n"
@@ -1588,7 +1593,7 @@ msgstr ""
 "<b>Cursor desconegut</b>\n"
 "%s"
 
-#: capplets/mouse/gnome-mouse-properties.c:538
+#: capplets/mouse/gnome-mouse-properties.c:541
 msgid ""
 "<b>Default Cursor - Current</b>\n"
 "The default cursor that ships with X"
@@ -1596,7 +1601,7 @@ msgstr ""
 "<b>Cursor per defecte - Actual</b>\n"
 "El cursor per defecte que s'envia amb X"
 
-#: capplets/mouse/gnome-mouse-properties.c:541
+#: capplets/mouse/gnome-mouse-properties.c:544
 msgid ""
 "<b>Default Cursor</b>\n"
 "The default cursor that ships with X"
@@ -1604,7 +1609,7 @@ msgstr ""
 "<b>Cursor per defecte</b>\n"
 "El cursor per defecte que s'envia amb X"
 
-#: capplets/mouse/gnome-mouse-properties.c:559
+#: capplets/mouse/gnome-mouse-properties.c:562
 msgid ""
 "<b>White Cursor - Current</b>\n"
 "The default cursor inverted"
@@ -1612,7 +1617,7 @@ msgstr ""
 "<b>Cursor blanc - Actual</b>\n"
 "El cursor per defecte invertit"
 
-#: capplets/mouse/gnome-mouse-properties.c:562
+#: capplets/mouse/gnome-mouse-properties.c:565
 msgid ""
 "<b>White Cursor</b>\n"
 "The default cursor inverted"
@@ -1620,7 +1625,7 @@ msgstr ""
 "<b>Cursor blanc</b>\n"
 "El cursor per defecte invertit"
 
-#: capplets/mouse/gnome-mouse-properties.c:580
+#: capplets/mouse/gnome-mouse-properties.c:583
 msgid ""
 "<b>Large Cursor - Current</b>\n"
 "Large version of normal cursor"
@@ -1628,7 +1633,7 @@ msgstr ""
 "<b>Cursor gran - Actual</b>\n"
 "La versió gran del cursor normal"
 
-#: capplets/mouse/gnome-mouse-properties.c:583
+#: capplets/mouse/gnome-mouse-properties.c:586
 msgid ""
 "<b>Large Cursor</b>\n"
 "Large version of normal cursor"
@@ -1636,7 +1641,7 @@ msgstr ""
 "<b>Cursor gran</b>\n"
 "La versió gran del cursor normal"
 
-#: capplets/mouse/gnome-mouse-properties.c:601
+#: capplets/mouse/gnome-mouse-properties.c:604
 msgid ""
 "<b>Large White Cursor - Current</b>\n"
 "Large version of white cursor"
@@ -1644,7 +1649,7 @@ msgstr ""
 "<b>Cursor blanc gran - Actual</b>\n"
 "La versió gran del cursor blanc"
 
-#: capplets/mouse/gnome-mouse-properties.c:604
+#: capplets/mouse/gnome-mouse-properties.c:607
 msgid ""
 "<b>Large White Cursor</b>\n"
 "Large version of white cursor"
@@ -2052,7 +2057,7 @@ msgid "_Location of new theme:"
 msgstr "_Localització del nou tema:"
 
 #: capplets/theme-switcher/gnome-theme-details.c:372
-#: capplets/theme-switcher/gnome-theme-manager.c:609
+#: capplets/theme-switcher/gnome-theme-manager.c:610
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -2066,13 +2071,13 @@ msgstr ""
 msgid "Theme name must be present"
 msgstr "El nom del tema ha d'estar present"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:665
-#: capplets/theme-switcher/gnome-theme-manager.c:725
+#: capplets/theme-switcher/gnome-theme-manager.c:666
+#: capplets/theme-switcher/gnome-theme-manager.c:726
 msgid "Custom theme"
 msgstr "Tema personalitzat"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:665
-#: capplets/theme-switcher/gnome-theme-manager.c:725
+#: capplets/theme-switcher/gnome-theme-manager.c:666
+#: capplets/theme-switcher/gnome-theme-manager.c:726
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "Podeu desar aquest tema pressionant el botó «Desa el tema»."
 
@@ -2154,7 +2159,7 @@ msgstr "Mostra _icones en els menús"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:14
 msgid "Text Below Icons"
-msgstr "Text baix les icones"
+msgstr "Text sota les icones"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:15
 msgid "Text Beside Icons"
@@ -2203,7 +2208,7 @@ msgstr "_Obre"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:25
 msgid "_Paste"
-msgstr "Engant_xa"
+msgstr "Engan_xa"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:26
 msgid "_Print"
@@ -2249,9 +2254,7 @@ msgstr "Super (o «Windows logo»)"
 # Agarreu... si soc de l'horta jo... jm
 #: capplets/windows/gnome-window-properties.glade.h:1
 msgid "To _move a window, press-and-hold this key then grab the window:"
-msgstr ""
-"Per a _moure una finestra, pressioneu i manteniu aquesta tecla i després "
-"agarreu la finestra:"
+msgstr "Per a _moure una finestra, pressioneu i manteniu aquesta tecla i després agarreu la finestra:"
 
 #
 #: capplets/windows/gnome-window-properties.glade.h:2
@@ -2477,11 +2480,11 @@ msgstr "Pantalla on ha de dibuixar BGApplier"
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "No es pot trobar una hbox, s'usarà una selecció de fitxers normal"
 
-#: libsounds/sound-view.c:122
+#: libsounds/sound-view.c:128
 msgid "The sound file for this event does not exist."
 msgstr "El fitxer de so per aquest event no existeix."
 
-#: libsounds/sound-view.c:124
+#: libsounds/sound-view.c:130
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -2491,23 +2494,23 @@ msgstr ""
 "Potser vulgueu instal·lar el paquet gnome-audio\n"
 "per obtenir un conjunt per defecte de sons."
 
-#: libsounds/sound-view.c:216
+#: libsounds/sound-view.c:222
 msgid "Event"
 msgstr "Esdeveniments"
 
-#: libsounds/sound-view.c:223
+#: libsounds/sound-view.c:229
 msgid "File to play"
 msgstr "Fitxer a reproduir"
 
-#: libsounds/sound-view.c:238
+#: libsounds/sound-view.c:244
 msgid "_Sounds"
 msgstr "_Sons"
 
-#: libsounds/sound-view.c:252
+#: libsounds/sound-view.c:258
 msgid "_Play"
 msgstr "Re_produeix"
 
-#: libsounds/sound-view.c:258
+#: libsounds/sound-view.c:264
 msgid "Select sound file"
 msgstr "Seleccioneu un fitxer de so"
 
@@ -2522,7 +2525,7 @@ msgstr "Maximitza"
 
 #: libwindow-settings/metacity-window-manager.c:375
 msgid "Roll up"
-msgstr "Enrotllar"
+msgstr "Enrotlla"
 
 #: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
 msgid ""
