@@ -281,12 +281,16 @@ load_meta_themes (GtkTreeView *tree_view,
 
   client = gconf_client_get_default ();
 
+  /* Get the settings */
   current_gtk_theme = gconf_client_get_string (client, GTK_THEME_KEY, NULL);
   current_icon_theme = gconf_client_get_string (client, ICON_THEME_KEY, NULL);
   window_manager = gnome_wm_manager_get_current (gdk_display_get_default_screen (gdk_display_get_default ()));
-  wm_settings.flags = GNOME_WM_SETTING_THEME;
-  gnome_window_manager_get_settings (window_manager, &wm_settings);
-  current_window_theme = g_strdup (wm_settings.theme);
+  if (window_manager) {
+    wm_settings.flags = GNOME_WM_SETTING_THEME;
+    gnome_window_manager_get_settings (window_manager, &wm_settings);
+    current_window_theme = g_strdup (wm_settings.theme);
+  } else
+    current_window_theme = g_strdup ("");
 
   /* FIXME: What do we really do when there is no theme? */
   if (current_icon_theme == NULL)
@@ -813,8 +817,8 @@ update_settings_from_gconf (void)
   current_gtk_theme = gconf_client_get_string (client, GTK_THEME_KEY, NULL);
   current_icon_theme = gconf_client_get_string (client, ICON_THEME_KEY, NULL);
   window_manager = gnome_wm_manager_get_current (gdk_display_get_default_screen (gdk_display_get_default ()));
-  wm_settings.flags = GNOME_WM_SETTING_THEME;
   if (window_manager) {
+    wm_settings.flags = GNOME_WM_SETTING_THEME;
     gnome_window_manager_get_settings (window_manager, &wm_settings);
     current_window_theme = g_strdup (wm_settings.theme);
   } else
