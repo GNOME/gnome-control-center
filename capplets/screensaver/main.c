@@ -144,8 +144,6 @@ demo_cb (GtkWidget *widget)
 static void
 response_cb (GtkDialog *dialog, gint response_id, gpointer data)
 {
-	gboolean old_sm;
-
 	switch (response_id)
 	{
 	case GTK_RESPONSE_NONE:

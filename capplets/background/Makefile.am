@@ -12,9 +12,10 @@ iconsdir   = $(GNOMECC_ICONS_DIR)
 icons_DATA = background-capplet.png
 
 desktopdir = $(GNOMECC_DESKTOP_DIR)
-desktop_DATA = background.desktop
+Desktop_in_files = background.desktop.in
+desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS) -I$(top_srcdir)/libbackground
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
-EXTRA_DIST = $(Glade_DATA) $(icons_DATA) $(desktop_DATA)
+EXTRA_DIST = $(Glade_DATA) $(icons_DATA) $(Desktop_in_files)
 

@@ -19,8 +19,9 @@ Gladedir   = $(GNOMECC_DATA_DIR)/interfaces
 Glade_DATA = file-types-properties.glade
 
 desktopdir = $(GNOMECC_DATA_DIR)/capplets/Advanced
-desktop_DATA = file-types.desktop
+Desktop_in_files = file-types.desktop.in
+desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS) $(VFS_CAPPLET_CFLAGS)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
-EXTRA_DIST = $(Glade_DATA) $(desktop_DATA)
+EXTRA_DIST = $(Glade_DATA) $(Desktop_in_files)

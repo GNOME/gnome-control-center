@@ -16,8 +16,9 @@ icons_DATA = keyboard-capplet.png	\
 	keyboard-bell.png
 
 desktopdir = $(GNOMECC_DESKTOP_DIR)
-desktop_DATA = keyboard.desktop
+Desktop_in_files = keyboard.desktop.in
+desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
-EXTRA_DIST = $(Glade_DATA) $(icons_DATA) $(desktop_DATA)
+EXTRA_DIST = $(Glade_DATA) $(icons_DATA) $(Desktop_in_files)

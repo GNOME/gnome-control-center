@@ -20,8 +20,9 @@ iconsdir   = $(GNOMECC_ICONS_DIR)
 icons_DATA = mouse-capplet.png
 
 desktopdir = $(GNOMECC_DESKTOP_DIR)
-desktop_DATA = mouse.desktop
+Desktop_in_files = mouse.desktop.in
+desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
-EXTRA_DIST = $(Glade_DATA) $(icons_DATA) $(desktop_DATA) $(pixmap_DATA)
+EXTRA_DIST = $(Glade_DATA) $(icons_DATA) $(Desktop_in_files) $(pixmap_DATA)

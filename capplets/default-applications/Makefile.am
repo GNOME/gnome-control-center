@@ -13,8 +13,9 @@ Gladedir   = $(GNOMECC_GLADE_DIR)
 Glade_DATA = gnome-default-applications-properties.glade
 
 desktopdir = $(GNOMECC_DESKTOP_DIR)
-desktop_DATA = default-applications.desktop
+Desktop_in_files = default-applications.desktop.in
+desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
-EXTRA_DIST = $(Glade_DATA) $(icons_DATA) $(desktop_DATA) gnome-default-applications-properties-structs.c
+EXTRA_DIST = $(Glade_DATA) $(icons_DATA) $(Desktop_in_files) gnome-default-applications-properties-structs.c
