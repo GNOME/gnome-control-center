@@ -68,8 +68,8 @@ xkb_enabled (void)
 static XkbDescRec *
 get_xkb_desc_rec (void)
 {
-	XkbDescRec	*desc;
-	Status		 status;
+	XkbDescRec *desc;
+	Status	    status = Success; /* Any bogus value, to suppress warning */
 
 	if (!xkb_enabled ())
 		return NULL;
@@ -83,9 +83,9 @@ get_xkb_desc_rec (void)
 	XSync (GDK_DISPLAY (), FALSE);
 	gdk_error_trap_pop ();
 
-	g_return_val_if_fail (status == Success, NULL);
 	g_return_val_if_fail (desc != NULL, NULL);
 	g_return_val_if_fail (desc->ctrls != NULL, NULL);
+	g_return_val_if_fail (status == Success, NULL);
 
 	return desc;
 }
