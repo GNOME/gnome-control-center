@@ -1,3 +1,15 @@
+2002-03-15  Seth Nickell  <snickell@stanford.edu>
+
+	* preferences.c: (bg_preferences_load),
+	(bg_preferences_merge_entry), (read_wptype_from_string),
+	(read_color_from_string), (bg_preferences_get_wptype_as_string):
+	* preferences.h:
+
+	Add an enum type for specifying that we don't know the type (i.e. the
+	key was not available, or set to something invalid). Currently it
+	was using -1, which barfs with some compilers that set enums
+	to be uint.
+	
 2002-03-09  Richard Hestilow  <hestilow@ximian.com>
 
 	* preview-file-selection.[ch]: Added.

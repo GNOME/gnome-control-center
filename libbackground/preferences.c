@@ -238,7 +238,7 @@ bg_preferences_load (BGPreferences *prefs)
 
 	prefs->wallpaper_type = read_wptype_from_string (gconf_client_get_string (client, BG_PREFERENCES_PICTURE_OPTIONS, &error));
 
-	if (prefs->wallpaper_type == -1) {
+	if (prefs->wallpaper_type == WPTYPE_UNSET) {
 	  prefs->wallpaper_enabled = FALSE;
 	  prefs->wallpaper_type = WPTYPE_CENTERED;
 	} else {
@@ -262,13 +262,12 @@ bg_preferences_merge_entry (BGPreferences    *prefs,
 
 	if (!strcmp (entry->key, BG_PREFERENCES_PICTURE_OPTIONS)) {
   	        wallpaper_type_t wallpaper_type = read_wptype_from_string (g_strdup (gconf_value_get_string (value)));
-		if (wallpaper_type == -1) {
+		if (wallpaper_type == WPTYPE_UNSET) {
 		  prefs->wallpaper_enabled = FALSE;
 		} else {
 		  prefs->wallpaper_type = wallpaper_type;
 		  prefs->wallpaper_enabled = TRUE;
 		}
-		  
 	}
 	else if (!strcmp (entry->key, BG_PREFERENCES_PICTURE_FILENAME)) {
 		prefs->wallpaper_filename = g_strdup (gconf_value_get_string (value));
@@ -301,8 +300,11 @@ bg_preferences_merge_entry (BGPreferences    *prefs,
 			prefs->gradient_enabled = TRUE;
 	}
 	else if (!strcmp (entry->key, BG_PREFERENCES_DRAW_BACKGROUND)) {
-		if (gconf_value_get_bool (value))
-			prefs->enabled = TRUE;
+		if (gconf_value_get_bool (value) &&
+				(prefs->wallpaper_filename != NULL) &&
+		    strcmp (prefs->wallpaper_filename, "") != 0 &&
+		    strcmp (prefs->wallpaper_filename, "(none)") != 0)
+			prefs->wallpaper_enabled = TRUE;
 		else
 			prefs->enabled = FALSE;
 	} else {
@@ -313,7 +315,7 @@ bg_preferences_merge_entry (BGPreferences    *prefs,
 static wallpaper_type_t
 read_wptype_from_string (gchar *string)
 {
-        wallpaper_type_t type = -1;
+        wallpaper_type_t type = WPTYPE_UNSET;
       
 	if (string) {
 		if (!strncmp (string, "wallpaper", sizeof ("wallpaper"))) {
@@ -363,10 +365,7 @@ read_color_from_string (const gchar *string)
 		rgb = ((color->red >> 8) << 16) ||
 			((color->green >> 8) << 8) ||
 			(color->blue >> 8);
-#if 0
-		/* fixme: I am not sure, but this can be accomplished otherwise */
-		color->pixel = gdk_rgb_xpixel_from_rgb (rgb);
-#endif
+		gdk_rgb_find_color (gdk_rgb_get_colormap (), color);
 	}
 
 	return color;
@@ -389,6 +388,8 @@ bg_preferences_get_wptype_as_string (wallpaper_type_t wp)
 			return "embossed";
 		case WPTYPE_NONE:
 			return "none";
+	        case WPTYPE_UNSET:
+		        return NULL;
 	}
 
 	return NULL;
