@@ -208,9 +208,15 @@ setup_dialog (GladeXML *dialog)
 	GConfPropertyEditor *peditor;
 	GSList *mode_group;
 	GType mode_type = 0;
+	GConfClient *client;
+	gint port_value;
 	
 	mode_type = g_enum_register_static ("NetworkPreferencesProxyType",
 				            proxytype_values);
+
+	/* There's a bug in peditors that cause them to not initialize the entry
+	 * correctly. */
+	client = gconf_client_get_default ();
 
 	/* Hackety hack */
 	gtk_label_set_use_markup (GTK_LABEL (GTK_BIN (WID ("none_radiobutton"))->child), TRUE);
@@ -226,6 +232,8 @@ setup_dialog (GladeXML *dialog)
 			TRUE, NULL));
 	
 	/* Http */
+	port_value = gconf_client_get_int (client, HTTP_PROXY_PORT_KEY, NULL);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (WID ("http_port_spinbutton")), (gdouble) port_value);
 	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_string (
 			NULL, HTTP_PROXY_HOST_KEY, WID ("http_host_entry"),
 			"conv-from-widget-cb", extract_proxy_host,
@@ -239,6 +247,8 @@ setup_dialog (GladeXML *dialog)
 			  WID ("network_dialog"));
 
 	/* Secure */
+ 	port_value = gconf_client_get_int (client, SECURE_PROXY_PORT_KEY, NULL);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (WID ("secure_port_spinbutton")), (gdouble) port_value);
 	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_string (
 			NULL, SECURE_PROXY_HOST_KEY, WID ("secure_host_entry"),
 			"conv-from-widget-cb", extract_proxy_host,
@@ -248,6 +258,8 @@ setup_dialog (GladeXML *dialog)
 			NULL));
 
 	/* Ftp */
+ 	port_value = gconf_client_get_int (client, FTP_PROXY_PORT_KEY, NULL);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (WID ("ftp_port_spinbutton")), (gdouble) port_value);
 	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_string (
 			NULL, FTP_PROXY_HOST_KEY, WID ("ftp_host_entry"),
 			"conv-from-widget-cb", extract_proxy_host,
@@ -257,6 +269,8 @@ setup_dialog (GladeXML *dialog)
 			NULL));
 
 	/* Socks */
+ 	port_value = gconf_client_get_int (client, SOCKS_PROXY_PORT_KEY, NULL);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (WID ("socks_port_spinbutton")), (gdouble) port_value);
 	peditor = GCONF_PROPERTY_EDITOR (gconf_peditor_new_string (
 			NULL, SOCKS_PROXY_HOST_KEY, WID ("socks_host_entry"),
 			"conv-from-widget-cb", extract_proxy_host,
