@@ -15,9 +15,10 @@
 #include "capplet-widget.h"
 #include "gnome.h"
 
-#include <ximian-archiver/archive.h>
-#include <ximian-archiver/location.h>
-
+#ifdef HAVE_XIMIAN_ARCHIVER
+#  include <ximian-archiver/archive.h>
+#  include <ximian-archiver/location.h>
+#endif /* HAVE_XIMIAN_ARCHIVER */
 
 /* prototypes */
 static void restart         (gboolean force);
@@ -127,6 +128,7 @@ gboolean restart_pending = FALSE;
  */
 gboolean in_fill = FALSE;
 
+#ifdef HAVE_XIMIAN_ARCHIVER
 
 static void
 store_archive_data (void) 
@@ -144,6 +146,7 @@ store_archive_data (void)
 	archive_close (archive);
 }
 
+#endif /* HAVE_XIMIAN_ARCHIVER */
 
 static GtkWidget *
 left_aligned_button (gchar *label)
@@ -698,7 +701,9 @@ ok_callback (void)
         }
 
         wm_list_save ();
+#ifdef HAVE_XIMIAN_ARCHIVER
         store_archive_data ();
+#endif /* HAVE_XIMIAN_ARCHIVER */
 }
 
 static void

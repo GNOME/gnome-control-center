@@ -93,14 +93,32 @@ case "x$vers" in
     ;;
 esac
 
-CAPPLET_CFLAGS=`gnome-config --cflags libglade capplet gdk_pixbuf ximian_archiver`
-CAPPLET_LIBS=`gnome-config --libs libglade capplet gdk_pixbuf ximian_archiver`
+dnl
+dnl Check for libximian_archiver and set the flag
+dnl HAVE_LIBXIMIAN_ARCHIVER iff it is prsent
+dnl
+AC_MSG_CHECKING(for Ximian archiver library)
+vers=`$GNOME_CONFIG --modversion ximian_archiver 2>/dev/null`
+case "x$vers" in
+  xximian-archiver-*)
+    AC_DEFINE(HAVE_XIMIAN_ARCHIVER)
+    ARCHIVER_CFLAGS=`gnome-config --cflags ximian_archiver`
+    ARCHIVER_LIBS=`gnome-config --libs ximian_archiver`
+    AC_MSG_RESULT(found)
+    ;;
+  *)
+    AC_MSG_RESULT(not found)
+    ;;
+esac
 
-BG_CAPPLET_CFLAGS=`gnome-config --cflags libglade capplet gdk_pixbuf gdk_pixbuf_xlib ximian_archiver`
-BG_CAPPLET_LIBS=`gnome-config --libs libglade capplet gdk_pixbuf gdk_pixbuf_xlib ximian_archiver`
+CAPPLET_CFLAGS="`gnome-config --cflags libglade capplet gdk_pixbuf` $ARCHIVER_CFLAGS"
+CAPPLET_LIBS="`gnome-config --libs libglade capplet gdk_pixbuf` $ARCHIVER_LIBS"
 
-ROLLBACK_CAPPLET_CFLAGS=`gnome-config --cflags libglade capplet gdk_pixbuf ximian_archiver`
-ROLLBACK_CAPPLET_LIBS=`gnome-config --libs libglade capplet gdk_pixbuf ximian_archiver`
+BG_CAPPLET_CFLAGS="`gnome-config --cflags libglade capplet gdk_pixbuf gdk_pixbuf_xlib` $ARCHIVER_CFLAGS"
+BG_CAPPLET_LIBS="`gnome-config --libs libglade capplet gdk_pixbuf gdk_pixbuf_xlib` $ARCHIVER_LIBS"
+
+ROLLBACK_CAPPLET_CFLAGS="`gnome-config --cflags libglade capplet gdk_pixbuf` $ARCHIVER_CFLAGS"
+ROLLBACK_CAPPLET_LIBS="`gnome-config --libs libglade capplet gdk_pixbuf` $ARCHIVER_LIBS"
 
 GNOMECC_CFLAGS=`gnome-config --cflags gnomeui libglade xml gdk_pixbuf capplet gnomecanvaspixbuf gtkhtml`
 GNOMECC_LIBS=`gnome-config --libs gnomeui libglade xml gdk_pixbuf capplet gnomecanvaspixbuf gtkhtml`

@@ -35,8 +35,10 @@
 
 #include <capplet-widget.h>
 
-#include <ximian-archiver/archive.h>
-#include <ximian-archiver/location.h>
+#ifdef HAVE_XIMIAN_ARCHIVER
+#  include <ximian-archiver/archive.h>
+#  include <ximian-archiver/location.h>
+#endif /* HAVE_XIMIAN_ARCHIVER */
 
 #include "preferences.h"
 #include "prefs-widget.h"
@@ -47,6 +49,8 @@ static PrefsWidget *prefs_widget;
 
 static guint ok_handler_id;
 static guint cancel_handler_id;
+
+#ifdef HAVE_XIMIAN_ARCHIVER
 
 static Archive *archive;
 static gboolean outside_location;
@@ -70,27 +74,41 @@ store_archive_data (void)
 	archive_close (archive);
 }
 
+#endif /* HAVE_XIMIAN_ARCHIVER */
+
 static void
 ok_cb (GtkWidget *widget) 
 {
+#ifdef HAVE_XIMIAN_ARCHIVER
 	if (!outside_location) {
 		preferences_save (prefs);
 		preferences_apply_now (prefs);
 	}
+#else /* !HAVE_XIMIAN_ARCHIVER */
+	preferences_save (prefs);
+	preferences_apply_now (prefs);
+#endif /* HAVE_XIMIAN_ARCHIVER */
 
 	gtk_signal_disconnect (GTK_OBJECT (prefs_widget), ok_handler_id);
 	gtk_signal_disconnect (GTK_OBJECT (prefs_widget), cancel_handler_id);
 	gtk_object_destroy (GTK_OBJECT (prefs_widget));
+#ifdef HAVE_XIMIAN_ARCHIVER
 	store_archive_data ();
+#endif /* HAVE_XIMIAN_ARCHIVER */
 }
 
 static void
 cancel_cb (GtkWidget *widget) 
 {
+#ifdef HAVE_XIMIAN_ARCHIVER
 	if (!outside_location) {
 		preferences_save (old_prefs);
 		preferences_apply_now (old_prefs);
 	}
+#else /* !HAVE_XIMIAN_ARCHIVER */
+	preferences_save (prefs);
+	preferences_apply_now (prefs);
+#endif /* HAVE_XIMIAN_ARCHIVER */
 
 	gtk_signal_disconnect (GTK_OBJECT (prefs_widget), ok_handler_id);
 	gtk_signal_disconnect (GTK_OBJECT (prefs_widget), cancel_handler_id);
@@ -115,6 +133,8 @@ setup_capplet_widget (void)
 
 	preferences_thaw (prefs);
 }
+
+#ifdef HAVE_XIMIAN_ARCHIVER
 
 static void
 do_get_xml (void) 
@@ -162,6 +182,8 @@ do_set_xml (gboolean apply_settings)
 	return;
 }
 
+#endif /* HAVE_XIMIAN_ARCHIVER */
+
 static void
 do_restore_from_defaults (void) 
 {
@@ -190,11 +212,15 @@ main (int argc, char **argv)
 		g_error ("Could not initialize the capplet.");
 	}
 	else if (res == 3) {
+#ifdef HAVE_XIMIAN_ARCHIVER
 		do_get_xml ();
+#endif /* HAVE_XIMIAN_ARCHIVER */
 		return 0;
 	}
 	else if (res == 4) {
+#ifdef HAVE_XIMIAN_ARCHIVER
 		do_set_xml (TRUE);
+#endif /* HAVE_XIMIAN_ARCHIVER */
 		return 0;
 	}
 	else if (res == 5) {
@@ -230,6 +256,7 @@ main (int argc, char **argv)
 	gnome_window_icon_set_default_from_file
 		(GNOME_ICONDIR"/gnome-ccbackground.png");
 
+#ifdef HAVE_XIMIAN_ARCHIVER
 	archive = ARCHIVE (archive_load (FALSE));
 
 	if (capplet_get_location () != NULL &&
@@ -248,6 +275,16 @@ main (int argc, char **argv)
 	if (!outside_location && (token || res == 1)) {
 		preferences_apply_now (prefs);
 	}
+
+#else /* !HAVE_XIMIAN_ARCHIVER */
+
+	prefs = PREFERENCES (preferences_new ());
+	preferences_load (prefs);
+
+	if (token || res == 1)
+		preferences_apply_now (prefs);
+
+#endif /* HAVE_XIMIAN_ARCHIVER */
 
 	if (!res) {
 		old_prefs = PREFERENCES (preferences_clone (prefs));

@@ -1,3 +1,10 @@
+2001-05-05  Bradford Hovinen  <hovinen@ximian.com>
+
+	* configure.in: Add check for libximian_archiver; try include
+	cflags and libs only if the archiver is present *
+	capplets/*/main.c: Add #ifdef's around anything that uses the
+	Ximian archiver so that the capplets can compile without it
+
 2001-05-03  Bradford Hovinen  <hovinen@ximian.com>
 
 	* capplets/*/main.c (main): Handle --get-defaults

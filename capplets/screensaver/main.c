@@ -37,8 +37,10 @@
 
 #include <capplet-widget.h>
 
-#include <ximian-archiver/archive.h>
-#include <ximian-archiver/location.h>
+#ifdef HAVE_XIMIAN_ARCHIVER
+#  include <ximian-archiver/archive.h>
+#  include <ximian-archiver/location.h>
+#endif /* HAVE_XIMIAN_ARCHIVER */
 
 #include "preferences.h"
 #include "prefs-widget.h"
@@ -51,6 +53,8 @@ static Preferences *old_prefs;
 static PrefsWidget *prefs_widget;
 
 static CappletWidget *capplet;
+
+#ifdef HAVE_XIMIAN_ARCHIVER
 
 static Archive *archive;
 static gboolean outside_location;
@@ -74,6 +78,8 @@ store_archive_data (void)
 	archive_close (archive);
 }
 
+#endif /* HAVE_XIMIAN_ARCHIVER */
+
 static void 
 state_changed_cb (GtkWidget *widget) 
 {
@@ -88,11 +94,17 @@ try_cb (GtkWidget *widget)
 
 	old_sm = prefs->selection_mode;
 
+#ifdef HAVE_XIMIAN_ARCHIVER
 	if (!outside_location) {
 		prefs_widget_store_prefs (prefs_widget, prefs);
 		preferences_save (prefs);
 		setup_dpms (prefs);
 	}
+#else /* !HAVE_XIMIAN_ARCHIVER */
+	prefs_widget_store_prefs (prefs_widget, prefs);
+	preferences_save (prefs);
+	setup_dpms (prefs);
+#endif /* HAVE_XIMIAN_ARCHIVER */
 
 	if (old_sm == SM_DISABLE_SCREENSAVER && 
 	    prefs->selection_mode != SM_DISABLE_SCREENSAVER)
@@ -109,10 +121,15 @@ revert_cb (GtkWidget *widget)
 
 	old_sm = old_prefs->selection_mode;
 
+#ifdef HAVE_XIMIAN_ARCHIVER
 	if (!outside_location) {
 		preferences_save (old_prefs);
 		preferences_destroy (prefs);
 	}
+#else /* !HAVE_XIMIAN_ARCHIVER */
+	preferences_save (old_prefs);
+	preferences_destroy (prefs);
+#endif /* HAVE_XIMIAN_ARCHIVER */
 
 	prefs = preferences_new ();
 	preferences_load (prefs);
@@ -140,7 +157,9 @@ ok_cb (GtkWidget *widget)
 
 	close_preview ();
 
+#ifdef HAVE_XIMIAN_ARCHIVER
 	if (!outside_location) {
+#endif /* HAVE_XIMIAN_ARCHIVER */
 		prefs_widget_store_prefs (prefs_widget, prefs);
 		preferences_save (prefs);
 		setup_dpms (prefs);
@@ -150,9 +169,11 @@ ok_cb (GtkWidget *widget)
 		else if (old_sm != SM_DISABLE_SCREENSAVER && 
 			 prefs->selection_mode == SM_DISABLE_SCREENSAVER)
 			stop_xscreensaver ();
+#ifdef HAVE_XIMIAN_ARCHIVER
 	}
 
 	store_archive_data ();
+#endif /* HAVE_XIMIAN_ARCHIVER */
 }
 
 static void
@@ -164,7 +185,9 @@ cancel_cb (GtkWidget *widget)
 
 	close_preview ();
 
+#ifdef HAVE_XIMIAN_ARCHIVER
 	if (!outside_location) {
+#endif /* HAVE_XIMIAN_ARCHIVER */
 		preferences_save (old_prefs);
 		setup_dpms (old_prefs);
 
@@ -174,7 +197,9 @@ cancel_cb (GtkWidget *widget)
 		else if (old_sm != SM_DISABLE_SCREENSAVER && 
 			 prefs->selection_mode == SM_DISABLE_SCREENSAVER)
 			stop_xscreensaver ();
+#ifdef HAVE_XIMIAN_ARCHIVER
 	}
+#endif /* HAVE_XIMIAN_ARCHIVER */
 }
 
 static void
@@ -217,6 +242,8 @@ setup_capplet_widget (void)
 
 	prefs->frozen--;
 }
+
+#ifdef HAVE_XIMIAN_ARCHIVER
 
 static void
 do_get_xml (void) 
@@ -264,6 +291,8 @@ do_set_xml (gboolean apply_settings)
 	return;
 }
 
+#endif /* HAVE_XIMIAN_ARCHIVER */
+
 static void
 do_restore_from_defaults (void) 
 {
@@ -290,11 +319,15 @@ main (int argc, char **argv)
 		g_error ("Could not initialize the capplet.");
 	}
 	else if (res == 3) {
+#ifdef HAVE_XIMIAN_ARCHIVER
 		do_get_xml ();
+#endif /* HAVE_XIMIAN_ARCHIVER */
 		return 0;
 	}
 	else if (res == 4) {
+#ifdef HAVE_XIMIAN_ARCHIVER
 		do_set_xml (TRUE);
+#endif /* HAVE_XIMIAN_ARCHIVER */
 		return 0;
 	}
 	else if (res == 5) {
@@ -331,6 +364,7 @@ main (int argc, char **argv)
 		(GNOME_ICONDIR"/gnome-ccscreensaver.png");
 
 	init_resource_database (argc, argv);
+#ifdef HAVE_XIMIAN_ARCHIVER
 	archive = ARCHIVE (archive_load (FALSE));
 
 	if (capplet_get_location () != NULL &&
@@ -351,6 +385,19 @@ main (int argc, char **argv)
 			start_xscreensaver ();
 		setup_dpms (prefs);
 	}
+
+#else /* !HAVE_XIMIAN_ARCHIVER */
+
+	prefs = preferences_new ();
+	preferences_load (prefs);
+
+	if (token) {
+		if (prefs->selection_mode != SM_DISABLE_SCREENSAVER)
+			start_xscreensaver ();
+		setup_dpms (prefs);
+	}
+
+#endif /* HAVE_XIMIAN_ARCHIVER */
 
 	if (!res) {
 		old_prefs = preferences_new ();
