@@ -49,8 +49,6 @@ get_legacy_settings (void)
 
 	GConfClient *client;
 
-	static const int wallpaper_types[] = { 0, 1, 3, 2 };
-
 	client = gconf_client_get_default ();
 
 	gconf_client_set_bool (client, "/desktop/gnome/background/enabled",
