@@ -30,12 +30,41 @@ init_startup_state (GladeXML *dialog)
 	at_startup_state_initial.flags = at_startup_state.flags;
 	g_object_unref (client);
 
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("chkKeyboard")),
-				      at_startup_state.enabled.osk);	
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("chkScreenreader")),
-				      at_startup_state.enabled.screenreader);	
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("chkMagnifier")),
-				      at_startup_state.enabled.magnifier);	
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("at_keyboard_toggle")),
+				      at_startup_state.enabled.osk);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("at_screenreader_toggle")),
+				      at_startup_state.enabled.screenreader);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("at_magnifier_toggle")),
+				      at_startup_state.enabled.magnifier);
+
+	gtk_widget_set_sensitive (WID ("at_keyboard_toggle"),
+				  at_startup_state.enabled.osk_installed);
+	gtk_widget_set_sensitive (WID ("at_screenreader_toggle"),
+				  at_startup_state.enabled.screenreader_installed);
+	gtk_widget_set_sensitive (WID ("at_magnifier_toggle"),
+				  at_startup_state.enabled.magnifier_installed);
+
+	if (at_startup_state.enabled.osk_installed &&
+	    at_startup_state.enabled.screenreader_installed &&
+	    at_startup_state.enabled.magnifier_installed) {
+		gtk_widget_hide (WID ("at_applications_warning_label"));
+		gtk_widget_hide (WID ("at_applications_hseparator"));
+	} else {
+		gtk_widget_show (WID ("at_applications_warning_label"));
+		gtk_widget_show (WID ("at_applications_hseparator"));
+		if (!at_startup_state.enabled.osk_installed &&
+		    !(at_startup_state.enabled.screenreader_installed ||
+		      at_startup_state.enabled.magnifier_installed)) {
+			gtk_label_set_markup (GTK_LABEL (WID ("at_applications_warning_label")),
+					      _("<i>No Assistive Technology is available on your system.  The 'gok' package must be installed in order to get on-screen keyboard support, and the 'gnopernicus' package must be installed for screenreading and magnifying capabilities.</i>"));
+		} else if (!at_startup_state.enabled.osk_installed) {
+			gtk_label_set_markup (GTK_LABEL (WID ("at_applications_warning_label")),
+					      _("<i>Not all available assistive technologies are installed on your system.  The 'gok' package must be installed in order to get on-screen keyboard support.</i>"));
+		} else {
+			gtk_label_set_markup (GTK_LABEL (WID ("at_applications_warning_label")),
+					      _("<i>Not all available assistive technologies are installed on your system.  The 'gnopernicus' package must be installed for screenreading and magnifying capabilities.</i>"));
+		}
+	}
 }
 
 static GladeXML *
@@ -43,15 +72,15 @@ create_dialog (void)
 {
 	GladeXML *dialog;
 	
-	dialog = glade_xml_new (GLADEDIR "/at-enable-dialog.glade", "dlgATPrefs", NULL);
+	dialog = glade_xml_new (GLADEDIR "/at-enable-dialog.glade", "at_properties_dialog", NULL);
 	
-	gtk_image_set_from_stock (GTK_IMAGE (WID ("image1")),
+	gtk_image_set_from_stock (GTK_IMAGE (WID ("at_close_and_logout_image")),
 				  GTK_STOCK_QUIT, GTK_ICON_SIZE_BUTTON);
 	
-	gtk_image_set_from_file (GTK_IMAGE (WID ("image2")),
+	gtk_image_set_from_file (GTK_IMAGE (WID ("at_enable_image")),
 				 PIXMAPDIR "/at-support.png");
 	
-	gtk_image_set_from_file (GTK_IMAGE (WID ("image3")),
+	gtk_image_set_from_file (GTK_IMAGE (WID ("at_applications_image")),
 				 PIXMAPDIR "/at-startup.png");
 	
 	return dialog;
@@ -86,7 +115,7 @@ close_logout_update (GladeXML *dialog)
 		(at_startup_state.flags != at_startup_state_initial.flags) && 
 		gconf_client_get_bool (client, ACCESSIBILITY_KEY, NULL);
 
-	gtk_widget_set_sensitive (WID ("btnCloseLogout"), has_changed);
+	gtk_widget_set_sensitive (WID ("at_close_logout_button"), has_changed);
 	g_object_unref (client);
 }
 
@@ -94,13 +123,13 @@ static void
 at_startup_toggled (GtkToggleButton *toggle_button,
 		    GladeXML        *dialog)
 {
-	if (toggle_button == GTK_TOGGLE_BUTTON (WID ("chkKeyboard"))) {
+	if (toggle_button == GTK_TOGGLE_BUTTON (WID ("at_keyboard_toggle"))) {
 		at_startup_state.enabled.osk = gtk_toggle_button_get_active (toggle_button);
 	}
-	else if (toggle_button == GTK_TOGGLE_BUTTON (WID ("chkMagnifier"))) {
+	else if (toggle_button == GTK_TOGGLE_BUTTON (WID ("at_magnifier_toggle"))) {
 		at_startup_state.enabled.magnifier = gtk_toggle_button_get_active (toggle_button);
 	}
-	else if (toggle_button == GTK_TOGGLE_BUTTON (WID ("chkScreenreader"))) {
+	else if (toggle_button == GTK_TOGGLE_BUTTON (WID ("at_screenreader_toggle"))) {
 		at_startup_state.enabled.screenreader = gtk_toggle_button_get_active (toggle_button);
 	}
 	
@@ -128,11 +157,11 @@ at_startup_update_ui (GConfClient *client,
 {
 	at_startup_state_init (&at_startup_state);
   
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("chkKeyboard")),
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("at_keyboard_toggle")),
 				      at_startup_state.enabled.osk);	
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("chkScreenreader")),
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("at_screenreader_toggle")),
 				      at_startup_state.enabled.screenreader);	
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("chkMagnifier")),
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("at_magnifier_toggle")),
 				      at_startup_state.enabled.magnifier);	
 }
 
@@ -142,13 +171,10 @@ at_enable_update  (GConfClient *client,
 {
 	gboolean is_enabled = gconf_client_get_bool (client, ACCESSIBILITY_KEY, NULL);
 	
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("chkEnableAT")),
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("at_enable_toggle")),
 				      is_enabled);
 	
-	gtk_widget_set_sensitive (WID ("fraApps"), is_enabled);
-	gtk_widget_set_sensitive (WID ("chkKeyboard"), is_enabled);
-	gtk_widget_set_sensitive (WID ("chkMagnifier"), is_enabled);
-	gtk_widget_set_sensitive (WID ("chkScreenreader"), is_enabled);
+	gtk_widget_set_sensitive (WID ("at_applications_frame"), is_enabled);
 }
 
 static void
@@ -184,7 +210,7 @@ setup_dialog (GladeXML *dialog)
 	gconf_client_add_dir (client, ACCESSIBILITY_KEY_DIR, 
 			      GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 	
-	widget = WID ("chkEnableAT");
+	widget = WID ("at_enable_toggle");
 	g_signal_connect (widget, "toggled",
 			  G_CALLBACK (at_enable_toggled),   
 			  dialog);
@@ -213,23 +239,23 @@ setup_dialog (GladeXML *dialog)
 				 at_startup_changed,
 				 dialog, NULL, NULL);
 	
-	widget = WID ("chkKeyboard");
+	widget = WID ("at_keyboard_toggle");
 
 	g_signal_connect (widget, "toggled",
 			  G_CALLBACK (at_startup_toggled), 
 			  dialog);
 	
-	widget = WID ("chkMagnifier");
+	widget = WID ("at_magnifier_toggle");
 	g_signal_connect (widget, "toggled",
 			  G_CALLBACK (at_startup_toggled), 
 			  dialog);
 	
-	widget = WID ("chkScreenreader");
+	widget = WID ("at_screenreader_toggle");
 	g_signal_connect (widget, "toggled",
 			  G_CALLBACK (at_startup_toggled), 
 			  dialog);
 	
-	widget = WID ("dlgATPrefs");
+	widget = WID ("at_properties_dialog");
 	capplet_set_icon (widget, "at-enable-capplet.png");
 	
 	g_signal_connect (G_OBJECT (widget),

@@ -8,6 +8,9 @@ typedef union {
 		guint osk:1;
 		guint magnifier:1;
 		guint screenreader:1;
+		guint osk_installed:1;
+		guint magnifier_installed:1;
+		guint screenreader_installed:1;
 	} enabled;
 } AtStartupState;
 

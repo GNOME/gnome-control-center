@@ -64,6 +64,8 @@ at_startup_state_init (AtStartupState *startup_state)
 	GSList         *l;
 	GConfClient    *client = gconf_client_get_default ();
 	GSList         *at_list = at_startup_get_list (client);
+	gchar          *prog;
+
 	for (l = at_list; l; l = l->next) {
 		gchar *exec_name = (char *) l->data;
 		if (exec_name && !strcmp (exec_name, "gnopernicus")) {
@@ -85,9 +87,28 @@ at_startup_state_init (AtStartupState *startup_state)
 		}
 		g_free (exec_name);
 	}
+
 	g_slist_free (at_list);
 	g_object_unref (client);
 	at_startup_state_recent.flags = startup_state->flags;
+
+	prog = g_find_program_in_path ("gok");
+	if (prog != NULL) {
+		startup_state->enabled.osk_installed = TRUE;
+		g_free (prog);
+	} else {
+		startup_state->enabled.osk_installed = FALSE;
+	}
+
+	prog = g_find_program_in_path ("gnopernicus");
+	if (prog != NULL) {
+		startup_state->enabled.magnifier_installed = TRUE;
+		startup_state->enabled.screenreader_installed = TRUE;
+		g_free (prog);
+	} else {
+		startup_state->enabled.magnifier_installed = FALSE;
+		startup_state->enabled.screenreader_installed = FALSE;
+	}
 }
 
 void

@@ -2,8 +2,9 @@
 <!DOCTYPE glade-interface SYSTEM "http://glade.gnome.org/glade-2.0.dtd">
 
 <glade-interface>
+<requires lib="gnome"/>
 
-<widget class="GtkDialog" id="dlgATPrefs">
+<widget class="GtkDialog" id="at_properties_dialog">
   <property name="border_width">5</property>
   <property name="title" translatable="yes">Assistive Technology Preferences</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
@@ -25,7 +26,7 @@
 	  <property name="layout_style">GTK_BUTTONBOX_END</property>
 
 	  <child>
-	    <widget class="GtkButton" id="btnHelp">
+	    <widget class="GtkButton" id="at_help_button">
 	      <property name="visible">True</property>
 	      <property name="can_default">True</property>
 	      <property name="can_focus">True</property>
@@ -37,7 +38,7 @@
 	  </child>
 
 	  <child>
-	    <widget class="GtkButton" id="btnCloseLogout">
+	    <widget class="GtkButton" id="at_close_logout_button">
 	      <property name="visible">True</property>
 	      <property name="sensitive">False</property>
 	      <property name="can_default">True</property>
@@ -60,7 +61,7 @@
 		      <property name="spacing">2</property>
 
 		      <child>
-			<widget class="GtkImage" id="image1">
+			<widget class="GtkImage" id="at_close_and_logout_image">
 			  <property name="visible">True</property>
 			  <property name="xalign">0.5</property>
 			  <property name="yalign">0.5</property>
@@ -102,7 +103,7 @@
 	  </child>
 
 	  <child>
-	    <widget class="GtkButton" id="btnClose">
+	    <widget class="GtkButton" id="at_close_button">
 	      <property name="visible">True</property>
 	      <property name="can_default">True</property>
 	      <property name="has_default">True</property>
@@ -130,7 +131,7 @@
 	  <property name="spacing">18</property>
 
 	  <child>
-	    <widget class="GtkVBox" id="fraSupport">
+	    <widget class="GtkVBox" id="at_support_frame">
 	      <property name="visible">True</property>
 	      <property name="homogeneous">False</property>
 	      <property name="spacing">0</property>
@@ -169,7 +170,7 @@
 		      <property name="spacing">12</property>
 
 		      <child>
-			<widget class="GtkImage" id="image2">
+			<widget class="GtkImage" id="at_enable_image">
 			  <property name="visible">True</property>
 			  <property name="xalign">0.5</property>
 			  <property name="yalign">0</property>
@@ -190,7 +191,7 @@
 			  <property name="spacing">6</property>
 
 			  <child>
-			    <widget class="GtkCheckButton" id="chkEnableAT">
+			    <widget class="GtkCheckButton" id="at_enable_toggle">
 			      <property name="visible">True</property>
 			      <property name="can_focus">True</property>
 			      <property name="label" translatable="yes">_Enable assistive technologies</property>
@@ -208,7 +209,7 @@
 			  </child>
 
 			  <child>
-			    <widget class="GtkLabel" id="lblNote">
+			    <widget class="GtkLabel" id="at_warning_label">
 			      <property name="visible">True</property>
 			      <property name="label" translatable="yes">&lt;small&gt;&lt;i&gt;&lt;b&gt;Note:&lt;/b&gt; Changes to this setting will not take effect until you next log in.&lt;/i&gt;&lt;/small&gt;</property>
 			      <property name="use_underline">False</property>
@@ -257,7 +258,7 @@
 	  </child>
 
 	  <child>
-	    <widget class="GtkVBox" id="fraApps">
+	    <widget class="GtkVBox" id="at_applications_frame">
 	      <property name="visible">True</property>
 	      <property name="homogeneous">False</property>
 	      <property name="spacing">0</property>
@@ -296,7 +297,7 @@
 		      <property name="spacing">12</property>
 
 		      <child>
-			<widget class="GtkImage" id="image3">
+			<widget class="GtkImage" id="at_applications_image">
 			  <property name="visible">True</property>
 			  <property name="xalign">0.5</property>
 			  <property name="yalign">0</property>
@@ -317,7 +318,7 @@
 			  <property name="spacing">6</property>
 
 			  <child>
-			    <widget class="GtkLabel" id="label6">
+			    <widget class="GtkLabel" id="at_applications_label">
 			      <property name="visible">True</property>
 			      <property name="label" translatable="yes">Start these assistive technologies every time you log in:</property>
 			      <property name="use_underline">False</property>
@@ -338,7 +339,7 @@
 			  </child>
 
 			  <child>
-			    <widget class="GtkCheckButton" id="chkScreenreader">
+			    <widget class="GtkCheckButton" id="at_screenreader_toggle">
 			      <property name="visible">True</property>
 			      <property name="can_focus">True</property>
 			      <property name="label" translatable="yes">_Screenreader</property>
@@ -356,7 +357,7 @@
 			  </child>
 
 			  <child>
-			    <widget class="GtkCheckButton" id="chkMagnifier">
+			    <widget class="GtkCheckButton" id="at_magnifier_toggle">
 			      <property name="visible">True</property>
 			      <property name="can_focus">True</property>
 			      <property name="label" translatable="yes">_Magnifier</property>
@@ -374,7 +375,7 @@
 			  </child>
 
 			  <child>
-			    <widget class="GtkCheckButton" id="chkKeyboard">
+			    <widget class="GtkCheckButton" id="at_keyboard_toggle">
 			      <property name="visible">True</property>
 			      <property name="can_focus">True</property>
 			      <property name="label" translatable="yes">_On-screen keyboard</property>
@@ -383,6 +384,38 @@
 			      <property name="active">False</property>
 			      <property name="inconsistent">False</property>
 			      <property name="draw_indicator">True</property>
+			    </widget>
+			    <packing>
+			      <property name="padding">0</property>
+			      <property name="expand">False</property>
+			      <property name="fill">False</property>
+			    </packing>
+			  </child>
+
+			  <child>
+			    <widget class="GtkHSeparator" id="at_applications_hseparator">
+			      <property name="visible">True</property>
+			    </widget>
+			    <packing>
+			      <property name="padding">0</property>
+			      <property name="expand">True</property>
+			      <property name="fill">True</property>
+			    </packing>
+			  </child>
+
+			  <child>
+			    <widget class="GtkLabel" id="at_applications_warning_label">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes"></property>
+			      <property name="use_underline">False</property>
+			      <property name="use_markup">True</property>
+			      <property name="justify">GTK_JUSTIFY_LEFT</property>
+			      <property name="wrap">True</property>
+			      <property name="selectable">False</property>
+			      <property name="xalign">0</property>
+			      <property name="yalign">0.5</property>
+			      <property name="xpad">0</property>
+			      <property name="ypad">0</property>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
