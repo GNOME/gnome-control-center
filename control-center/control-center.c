@@ -1037,7 +1037,7 @@ canvas_draw_background (GnomeCanvas *canvas, GdkDrawable *drawable,
 }
 
 static ControlCenter *
-create_control_center ()
+create_control_center (void)
 {
 	ControlCenter *cc;
 	GtkWidget *scroll_window;
