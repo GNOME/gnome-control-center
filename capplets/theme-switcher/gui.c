@@ -157,13 +157,13 @@ click_try(GtkWidget *widget, gpointer data)
   /* hack for enlightenment only!!!! */
   /* FIXME: restart what ever windowmanager you have! */
   /*g_snprintf(cmd, sizeof(cmd), "eesh -e \"restart %s/e\"", dir);*/
-  printf("%s\n", cmd);
+  /* printf("%s\n", cmd); */
   send_reread();
   use_theme(rc);
   gdk_error_warnings = 0;
   signal_apply_theme(widget);
   gdk_flush();
-  system(cmd);
+  /* system(cmd); */
   gdk_error_warnings = 1;
 }
 void
@@ -193,13 +193,13 @@ click_revert(GtkWidget *widget, gpointer data)
   /* hack for enlightenment only!!!! */
   /* FIXME: restart what ever windowmanager you have! */
   /*  g_snprintf(cmd, sizeof(cmd), "eesh -e \"restart %s/e\"", dir);*/
-  printf("%s\n", cmd);
+  /* printf("%s\n", cmd); */
   send_reread();
   use_theme(rc);
   gdk_error_warnings = 0;
   signal_apply_theme(widget);
   gdk_flush();
-  system(cmd);
+  /* system(cmd); */
   gdk_error_warnings = 1;
   gtk_list_select_child (GTK_LIST (system_list), initial_theme);
 }

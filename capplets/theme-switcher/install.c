@@ -44,7 +44,7 @@ install_theme(gchar *file)
 	    {
 	      /*gzipped tarball */
 	      /*sprintf(s,"gzip -d -c < %s | tar -xf - -C %s",Theme_Tar_Ball,Theme_Path); */
-	      g_snprintf(s, sizeof(s), 
+	      g_snprintf(s, sizeof(s),
 			 "gzip -d -c < %s | (cd %s ; tar -xf -)", 
 			 file, th);
 	    }
@@ -56,9 +56,13 @@ install_theme(gchar *file)
 	      g_snprintf(s, sizeof(s), 
 			 "(cd %s ; tar -xf %s", 
 			 file, th);
-	    }
-	  system(s);
-	  wait(&i);
+	    } else
+	      s[0] = '\0';
+
+	  if(*s) {
+	    system(s);
+	    wait(&i);
+	  }
 	  return;
 	}
     }
