@@ -18,7 +18,6 @@ ui_DATA = gnomecc-ui.xml
 
 INCLUDES = 							\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 		\
-	-DGLADEDIR=\""$(gladedir)"\"	\
 	-DSETTINGS_DIR=\""$(GNOMECC_DESKTOP_DIR)"\"	\
 	-DPIXMAPS_DIR=\""$(appicondir)"\"			\
 	-DART_DIR=\""$(splashdir)"\"				\
@@ -33,10 +32,8 @@ gnome_control_center_SOURCES = \
 	capplet-dir-view.c	capplet-dir-view.h	\
 	capplet-dir-view-list.c
 
-#	capplet-dir-view-tree.c
-
 gnome_control_center_LDADD = $(GNOMECC_LIBS)
 
 EXTRA_DIST = gnomecc.desktop.in $(appicon_DATA) $(splash_DATA) $(ui_DATA)
 
-CLEANFILES=gnomecc.desktop
+CLEANFILES = gnomecc.desktop
