@@ -25,6 +25,7 @@
 # include "config.h"
 #endif
 
+#include <string.h>
 #include <glade/glade.h>
 #include <libgnomevfs/gnome-vfs-application-registry.h>
 #include <libgnomevfs/gnome-vfs-mime-handlers.h>
@@ -332,14 +333,14 @@ populate_application_list (MimeCategoryEditDialog *dialog)
 					"app", app,
 					(GDestroyNotify) gnome_vfs_mime_application_free);
 
-		gtk_menu_append (menu, menu_item);
+		gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
 		gtk_widget_show (menu_item);
 	}
 
 	dialog->p->default_action_active = !(i == 0);
 	dialog->p->custom_action = (found_idx < 0);
 
-	gtk_menu_append (menu, gtk_menu_item_new_with_label (_("Custom")));
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), gtk_menu_item_new_with_label (_("Custom")));
 
 	if (found_idx < 0) {
 		found_idx = i;

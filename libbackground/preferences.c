@@ -321,7 +321,10 @@ read_color_from_string (const gchar *string)
 		rgb = ((color->red >> 8) << 16) ||
 			((color->green >> 8) << 8) ||
 			(color->blue >> 8);
+#if 0
+		/* fixme: I am not sure, but this can be accomplished otherwise */
 		color->pixel = gdk_rgb_xpixel_from_rgb (rgb);
+#endif
 	}
 
 	return color;

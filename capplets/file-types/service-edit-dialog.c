@@ -25,6 +25,7 @@
 # include "config.h"
 #endif
 
+#include <string.h>
 #include <glade/glade.h>
 #include <gconf/gconf-client.h>
 #include <libgnomevfs/gnome-vfs-method.h>
@@ -349,7 +350,7 @@ setup_add_dialog (ServiceEditDialog *dialog)
 
 	item = gtk_menu_item_new_with_label (_("Custom"));
 	menu = gtk_menu_new ();
-	gtk_menu_append (GTK_MENU (menu), item);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
 	gtk_option_menu_set_menu (GTK_OPTION_MENU (WID ("program_select")), menu);
 
 	gtk_widget_set_sensitive (WID ("program_select"), FALSE);
@@ -387,7 +388,7 @@ populate_app_list (ServiceEditDialog *dialog)
 		item = gtk_menu_item_new_with_label (app->name);
 		g_object_set_data_full (G_OBJECT (item), "app", app, (GDestroyNotify) gnome_vfs_mime_application_free);
 		gtk_widget_show (item);
-		gtk_menu_append (menu, item);
+		gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
 
 		service_apps = service_apps->next;
 		i++;
@@ -395,7 +396,7 @@ populate_app_list (ServiceEditDialog *dialog)
 
 	item = gtk_menu_item_new_with_label (_("Custom"));
 	gtk_widget_show (item);
-	gtk_menu_append (menu, item);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
 
 	if (found_idx < 0) {
 		if (dialog->p->info->app != NULL) {
@@ -477,14 +478,15 @@ validate_data (ServiceEditDialog *dialog)
 {
 	const gchar *tmp, *tmp1;
 	gchar *dir;
-	GtkWidget *err_dialog;
+	GtkWidget *err_dialog = NULL;
 
 	tmp = gtk_entry_get_text (GTK_ENTRY (WID ("protocol_entry")));
 
 	if (tmp == NULL || *tmp == '\0') {
-		err_dialog = gnome_error_dialog_parented
-			(_("Please enter a protocol name."),
-			 GTK_WINDOW (dialog->p->dialog_win));
+		err_dialog = gtk_message_dialog_new (GTK_WINDOW (dialog->p->dialog_win),
+						     0, GTK_MESSAGE_ERROR,
+						     GTK_BUTTONS_OK,
+						     _("Please enter a protocol name."));
 
 		gtk_window_set_modal (GTK_WINDOW (err_dialog), TRUE);
 
@@ -493,9 +495,11 @@ validate_data (ServiceEditDialog *dialog)
 		for (tmp1 = tmp; *tmp1 != '\0' && isalnum (*tmp1); tmp1++);
 
 		if (*tmp1 != '\0') {
-			err_dialog = gnome_error_dialog_parented
-				(_("Invalid protocol name. Please enter a protocol name without any spaces or punctuation."),
-				 GTK_WINDOW (dialog->p->dialog_win));
+			err_dialog =
+				gtk_message_dialog_new (GTK_WINDOW (dialog->p->dialog_win),
+							0, GTK_MESSAGE_ERROR,
+							GTK_BUTTONS_OK,
+							_("Invalid protocol name. Please enter a protocol name without any spaces or punctuation."));
 
 			gtk_window_set_modal (GTK_WINDOW (err_dialog), TRUE);
 
@@ -505,9 +509,10 @@ validate_data (ServiceEditDialog *dialog)
 		if (dialog->p->is_add) {
 			dir = g_strconcat ("/desktop/gnome/url-handlers/", tmp, NULL);
 			if (get_service_info (tmp) || gconf_client_dir_exists (gconf_client_get_default (), dir, NULL)) {
-				err_dialog = gnome_error_dialog_parented
-					(_("There is already a protocol by that name."),
-					 GTK_WINDOW (dialog->p->dialog_win));
+				gtk_message_dialog_new (GTK_WINDOW (dialog->p->dialog_win),
+							0, GTK_MESSAGE_ERROR,
+							GTK_BUTTONS_OK,
+							_("There is already a protocol by that name."));
 
 				gtk_window_set_modal (GTK_WINDOW (err_dialog), TRUE);
 

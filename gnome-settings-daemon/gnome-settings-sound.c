@@ -26,13 +26,16 @@
 # include "config.h"
 #endif
 
+#include <string.h>
 #include <stdlib.h>
+#include <time.h>
 #include <esd.h>
 #include <sys/types.h>
 
 #include <gconf/gconf-client.h>
 #include <libgnome/gnome-sound.h>
 #include <libgnome/gnome-util.h>
+#include <libgnome/gnome-exec.h>
 #include <libgnomeui/gnome-client.h>
 #include "libsounds/sound-properties.h"
 #include "gnome-settings-sound.h"
@@ -106,7 +109,7 @@ reload_foreach_cb (SoundEvent *event, gpointer data)
 	file = g_strdup (event->file);
 	if (file[0] != '/')
 	{
-		tmp = gnome_sound_file (file);
+		tmp = gnome_program_locate_file (NULL, GNOME_FILE_DOMAIN_SOUND, file, TRUE, NULL);
 		g_free (file);
 		file = tmp;
 	}

@@ -95,12 +95,12 @@ gnomecc_preferences_class_init (GnomeCCPreferencesClass *klass)
 	object_class = GTK_OBJECT_CLASS (klass);
 
 	gnomecc_preferences_signals[CHANGED_SIGNAL] =
-		gtk_signal_new ("changed", GTK_RUN_FIRST, 
-				GTK_CLASS_TYPE (object_class),
-				GTK_SIGNAL_OFFSET (GnomeCCPreferencesClass, 
-						   changed),
-				gtk_marshal_NONE__NONE, 
-				GTK_TYPE_NONE, 0);
+		g_signal_new ("changed", G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_FIRST, 
+			      G_STRUCT_OFFSET (GnomeCCPreferencesClass, changed),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__VOID, 
+			      G_TYPE_NONE, 0);
 #if 0
 	gtk_object_class_add_signals (object_class, 
 				      gnomecc_preferences_signals,
@@ -111,7 +111,7 @@ gnomecc_preferences_class_init (GnomeCCPreferencesClass *klass)
 GnomeCCPreferences *
 gnomecc_preferences_new (void) 
 {
-	return gtk_type_new (gnomecc_preferences_get_type ());
+	return g_object_new (gnomecc_preferences_get_type (), NULL);
 }
 
 GnomeCCPreferences *
@@ -222,8 +222,8 @@ read_preferences (GladeXML *prefs_data, GnomeCCPreferences *prefs)
 
 	gnomecc_preferences_save (prefs);
 
-	gtk_signal_emit (GTK_OBJECT (prefs),
-			 gnomecc_preferences_signals[CHANGED_SIGNAL]);
+	g_signal_emit (GTK_OBJECT (prefs),
+		       gnomecc_preferences_signals[CHANGED_SIGNAL], 0);
 }
 
 static void
@@ -231,7 +231,7 @@ prefs_dialog_ok_cb (GtkWidget *widget, GladeXML *data)
 {
 	GnomeCCPreferences *prefs;
 
-	prefs = gtk_object_get_data (GTK_OBJECT (data), "prefs_struct");
+	prefs = g_object_get_data (G_OBJECT (data), "prefs_struct");
 	read_preferences (data, prefs);
 	gnome_dialog_close (GNOME_DIALOG (prefs_dialog));
 	prefs_dialog = NULL;

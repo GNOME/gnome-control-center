@@ -1,3 +1,17 @@
+2002-02-04  Lauris Kaplinski  <lauris@ximian.com>
+
+	* service-edit-dialog.c (setup_add_dialog): Use gtk_menu_shell_append
+	(validate_data): Use gtk_message_dialog methods
+
+	* mime-category-edit-dialog.c (populate_application_list): Use
+	gtk_menu_shell_append
+
+	* mime-edit-dialog.c (setup_add_dialog): Use gtk_menu_shell_append
+	(validate_data): Use gtk_message_dialog methods
+
+	* mime-type-info.c: #include <string.h>, kill warning
+	(mime_type_info_get_icon_path): Use g_file_test
+
 2002-01-29  Bradford Hovinen  <hovinen@ximian.com>
 
 	* file-types-capplet.c (create_dialog): Pack the icon and

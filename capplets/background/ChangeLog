@@ -1,3 +1,14 @@
+2002-02-04  Lauris Kaplinski  <lauris@ximian.com>
+
+	* background-properties-capplet.c (setup_color_widgets): Kill warning
+	(set_background_image_preview): Use g_file_test, use g_object_unref
+	instead of gdk_pixbuf_unref
+	(image_filename_clicked): Use g_signal_connect
+	(dialog_button_clicked_cb): Use GtkDialog instead of GnomeDialog
+	(realize_2_cb): Comment out to kill warning
+	(realize_cb): Ditto
+	(real_realize_cb): Ditto
+
 2002-01-13  Seth Nickell  <snickell@stanford.edu>
 
 	reviewed by: <delete if not using a buddy>

@@ -41,7 +41,7 @@ locate_pointer_expose (GtkWidget      *widget,
       size = SMALL_SIZE;
       break;
     default:
-      return;
+      return FALSE;
     }
 
   gdk_draw_rectangle (event->window,
@@ -159,8 +159,8 @@ setup_window (void)
     }
 
   gdk_window_shape_combine_mask (window, mask, 0, 0);
-  gdk_gc_destroy (gc);
-  gdk_pixmap_unref (mask);
+  g_object_unref (G_OBJECT (gc));
+  g_object_unref (G_OBJECT (mask));
   gdk_window_show (window);
 }
 

@@ -25,6 +25,7 @@
 
 #include <config.h>
 
+#include <string.h>
 #include <glib.h>
 #include <bonobo.h>
 
@@ -68,19 +69,19 @@ find_icon (const char *icon, GnomeDesktopItem *dentry)
 		if (icon_file[0] != '/')
 		{
 			gchar *old = icon_file;
-			icon_file = g_concat_dir_and_file (PIXMAPS_DIR, old);
+			icon_file = g_build_filename (PIXMAPS_DIR, old, NULL);
 			g_free (old);
 		}
-		if (!g_file_exists (icon_file) || g_file_test(icon_file, G_FILE_TEST_IS_DIR))
+		if (!g_file_test (icon_file, G_FILE_TEST_EXISTS) || g_file_test(icon_file, G_FILE_TEST_IS_DIR))
 		{
 			const gchar *icon;
 			g_free (icon_file);
 			icon = gnome_desktop_item_get_string (dentry, GNOME_DESKTOP_ITEM_ICON);
 			if (icon)
-				icon_file = gnome_pixmap_file (icon);
+				icon_file = gnome_program_locate_file (NULL, GNOME_FILE_DOMAIN_PIXMAP, icon, TRUE, NULL);
 	
 			if (!icon_file)
-				icon_file = gnome_pixmap_file ("gnome-unknown.png");
+				icon_file = gnome_program_locate_file (NULL, GNOME_FILE_DOMAIN_PIXMAP, "gnome-unknown.png", TRUE, NULL);
 		}
 	} else {
 		icon_file = gnome_program_locate_file
@@ -89,7 +90,7 @@ find_icon (const char *icon, GnomeDesktopItem *dentry)
 	}
 
 	if (!icon_file) { /* if icon_file still NULL */
-		icon_file = gnome_pixmap_file ("gnome-unknown.png");
+		icon_file = gnome_program_locate_file (NULL, GNOME_FILE_DOMAIN_PIXMAP, "gnome-unknown.png", TRUE, NULL);
 	}
 
 	return icon_file;
@@ -121,7 +122,7 @@ capplet_new (CappletDir *dir, gchar *desktop_path)
 			GNOME_DESKTOP_ITEM_EXEC);
 	/* Perhaps use poptParseArgvString here */
 	vec = g_strsplit (execstr, " ", 0);
-	if (!(execstr && execstr[0]) || !(vec && (path = gnome_is_program_in_path (vec[0]))))
+	if (!(execstr && execstr[0]) || !(vec && (path = g_find_program_in_path (vec[0]))))
 	{
 		g_strfreev (vec);
 		gnome_desktop_item_unref (dentry);
@@ -317,7 +318,7 @@ static void
 capplet_dir_shutdown (CappletDir *capplet_dir) 
 {
 	if (capplet_dir->view)
-		gtk_object_unref (GTK_OBJECT (capplet_dir->view));
+		g_object_unref (G_OBJECT (capplet_dir->view));
 
 	g_slist_foreach (capplet_dir->entries, (GFunc) cde_destroy, NULL);
 

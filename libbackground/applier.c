@@ -21,10 +21,15 @@
  * 02111-1307, USA.
  */
 
+#ifdef GDK_DISABLE_DEPRECATED
+#undef GDK_DISABLE_DEPRECATED
+#endif
+
 #ifdef HAVE_CONFIG_H
 # include "config.h"
 #endif
 
+#include <string.h>
 #include <gnome.h>
 #include <gdk/gdk.h>
 #include <gdk/gdkx.h>
@@ -320,7 +325,7 @@ bg_applier_dispose (GObject *object)
 		g_object_unref (G_OBJECT (bg_applier->p->last_prefs));
 
 	if (bg_applier->p->wallpaper_pixbuf != NULL)
-		gdk_pixbuf_unref (bg_applier->p->wallpaper_pixbuf);
+		g_object_unref (G_OBJECT (bg_applier->p->wallpaper_pixbuf));
 
 	parent_class->dispose (object);
 }
@@ -374,7 +379,7 @@ bg_applier_apply_prefs (BGApplier           *bg_applier,
 
 	if (need_wallpaper_load_p (bg_applier, new_prefs)) {
 		if (bg_applier->p->wallpaper_pixbuf != NULL)
-			gdk_pixbuf_unref (bg_applier->p->wallpaper_pixbuf);
+			g_object_unref (G_OBJECT (bg_applier->p->wallpaper_pixbuf));
 
 		bg_applier->p->wallpaper_pixbuf = NULL;
 
@@ -427,6 +432,7 @@ bg_applier_get_preview_widget (BGApplier *bg_applier)
   if (bg_applier->p->preview_widget == NULL) {
     GdkPixmap *pixmap;
 
+    /* fixme: What to do here? gdk does not export root_parent publicly (Lauris) */
     pixmap = gdk_pixmap_new (GDK_ROOT_PARENT(), 51, 38, -1);
     bg_applier->p->preview_widget = gtk_image_new_from_pixmap (pixmap, NULL);
   }
@@ -457,29 +463,35 @@ draw_disabled_message (GtkWidget *widget)
 	printf ("disabled\n");
 
 	g_return_if_fail (widget != NULL);
-	g_return_if_fail (GTK_IS_PIXMAP (widget));
+	g_return_if_fail (GTK_IS_IMAGE (widget));
 
 	w = MONITOR_CONTENTS_WIDTH;
 	h = MONITOR_CONTENTS_HEIGHT;
 	x = MONITOR_CONTENTS_X;
 	y = MONITOR_CONTENTS_Y;
 
-	if (!GTK_WIDGET_REALIZED (widget))
+	if (!GTK_WIDGET_REALIZED (widget)) {
 		gtk_widget_realize (widget);
+	}
 
-	pixmap = GTK_PIXMAP (widget)->pixmap;
-
+	gtk_image_get_pixmap (GTK_IMAGE (widget), &pixmap, NULL);
 	gc = gdk_gc_new (widget->window);
 
-	gdk_color_black (gtk_widget_get_colormap (widget), &color);
-	gdk_gc_set_foreground (gc, &color);
+	color.red = 0x0;
+	color.green = 0x0;
+	color.blue = 0x0;
+	gdk_gc_set_rgb_fg_color (gc, &color);
 	gdk_draw_rectangle (pixmap, gc, TRUE, x, y, w, h);
 
 	layout = gtk_widget_create_pango_layout (widget, disabled_string);
 	pango_layout_get_pixel_extents (layout, &extents, NULL);
 
-	gdk_color_white (gtk_widget_get_colormap (widget), &color);
-	gdk_gc_set_foreground (gc, &color);
+	color.red = 0xffff;
+	color.green = 0xffff;
+	color.blue = 0xffff;
+	gdk_gc_set_rgb_fg_color (gc, &color);
+
+	/* fixme: I do not understand the logic (Lauris) */
 
 	gdk_draw_layout (widget->window,
 			 gc,
@@ -518,7 +530,7 @@ run_render_pipeline (BGApplier *bg_applier, const BGPreferences *prefs)
 	render_to_screen (bg_applier, prefs);
 
 	if (bg_applier->p->pixbuf != NULL) {
-		gdk_pixbuf_unref (bg_applier->p->pixbuf);
+		g_object_unref (G_OBJECT (bg_applier->p->pixbuf));
 		bg_applier->p->pixbuf = NULL;
 	}
 }
@@ -634,7 +646,7 @@ render_wallpaper (BGApplier *bg_applier, const BGPreferences *prefs)
 					 GDK_INTERP_BILINEAR);
 			} else {
 				prescaled_pixbuf = bg_applier->p->wallpaper_pixbuf;
-				gdk_pixbuf_ref (prescaled_pixbuf);
+				g_object_ref (G_OBJECT (prescaled_pixbuf));
 			}
 		}
 
@@ -663,7 +675,7 @@ render_wallpaper (BGApplier *bg_applier, const BGPreferences *prefs)
 		}
 
 		if (prescaled_pixbuf != NULL)
-			gdk_pixbuf_unref (prescaled_pixbuf);
+			g_object_unref (G_OBJECT (prescaled_pixbuf));
 	}
 }
 
@@ -743,7 +755,7 @@ render_to_screen (BGApplier *bg_applier, const BGPreferences *prefs)
 	else if (bg_applier->p->type == BG_APPLIER_ROOT && !bg_applier->p->pixmap_is_set)
 		set_root_pixmap (NULL);
 
-	gdk_gc_destroy (gc);
+	g_object_unref (G_OBJECT (gc));
 }
 
 /* Create a pixmap that will replace the current root pixmap. This function has
@@ -990,7 +1002,7 @@ place_pixbuf (GdkPixbuf *dest_pixbuf,
 			 dest_geom->x, dest_geom->y);
 	} else {
 		dest_pixbuf = src_pixbuf;
-		gdk_pixbuf_ref (dest_pixbuf);
+		g_object_ref (G_OBJECT (dest_pixbuf));
 	}
 
 	return dest_pixbuf;

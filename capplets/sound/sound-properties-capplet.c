@@ -57,7 +57,7 @@ create_dialog (void)
 
 	data = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/sound-properties.glade", "prefs_widget", NULL);
 	widget = glade_xml_get_widget (data, "prefs_widget");
-	gtk_object_set_data (GTK_OBJECT (widget), "glade-data", data);
+	g_object_set_data (G_OBJECT (widget), "glade-data", data);
 
 	props = sound_properties_new ();
 	sound_properties_add_defaults (props, NULL);
@@ -65,11 +65,10 @@ create_dialog (void)
 	gtk_box_pack_start (GTK_BOX (box), sound_view_new (props),
 			    TRUE, TRUE, 0);
 
-	gtk_signal_connect_object (GTK_OBJECT (widget), "destroy",
-				   GTK_SIGNAL_FUNC (gtk_object_destroy),
-				   GTK_OBJECT (props));
+	g_signal_connect_swapped (G_OBJECT (widget), "destroy",
+				  (GCallback) gtk_object_destroy, props);
 
-	gtk_widget_set_usize (widget, -1, 250);
+	gtk_widget_set_size_request (widget, -1, 250);
 
 	return data;
 }
@@ -112,7 +111,7 @@ get_legacy_settings (void)
 }
 
 static void
-dialog_button_clicked_cb (GnomeDialog *dialog, gint response_id, GConfChangeSet *changeset) 
+dialog_button_clicked_cb (GtkDialog *dialog, gint response_id, GConfChangeSet *changeset) 
 {
 	switch (response_id) {
 	case GTK_RESPONSE_APPLY:

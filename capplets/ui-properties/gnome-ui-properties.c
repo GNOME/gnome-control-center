@@ -66,7 +66,7 @@ toolbar_to_widget (GConfValue *value)
 
 
 static void
-dialog_button_clicked_cb (GnomeDialog *dialog, gint response_id, GConfChangeSet *changeset) 
+dialog_button_clicked_cb (GtkDialog *dialog, gint response_id, GConfChangeSet *changeset) 
 {
   switch (response_id)
     {

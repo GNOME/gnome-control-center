@@ -27,6 +27,7 @@
 #  include <config.h>
 #endif
 
+#include <string.h>
 #include <gnome.h>
 #include <gconf/gconf-client.h>
 #include <glade/glade.h>
@@ -75,19 +76,19 @@ initialize_default_applications (void)
         gint i;
 
         for (i = 0; i < G_N_ELEMENTS (possible_editors); i++ ) {
-                if (gnome_is_program_in_path (possible_editors[i].executable_name))
+                if (g_find_program_in_path (possible_editors[i].executable_name))
 			possible_editors[i].in_path = TRUE;
         }
         for (i = 0; i < G_N_ELEMENTS (possible_browsers); i++ ) {
-                if (gnome_is_program_in_path (possible_browsers[i].executable_name))
+                if (g_find_program_in_path (possible_browsers[i].executable_name))
 			possible_browsers[i].in_path = TRUE;
         }
         for (i = 0; i < G_N_ELEMENTS (possible_help_viewers); i++ ) {
-                if (gnome_is_program_in_path (possible_help_viewers[i].executable_name))
+                if (g_find_program_in_path (possible_help_viewers[i].executable_name))
 			possible_help_viewers[i].in_path = TRUE;
         }
         for (i = 0; i < G_N_ELEMENTS (possible_terminals); i++ ) {
-                if (gnome_is_program_in_path (possible_terminals[i].exec))
+                if (g_find_program_in_path (possible_terminals[i].exec))
 			possible_terminals[i].in_path = TRUE;
         }
 }

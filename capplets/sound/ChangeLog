@@ -1,3 +1,10 @@
+2002-02-04  Lauris Kaplinski  <lauris@ximian.com>
+
+	* sound-properties-capplet.c (create_dialog): Use g_object_set_data,
+	use g_signal_connect
+	(dialog_button_clicked_cb): GtkDialog instead of GnomeDialog
+	(create_dialog): Use gtk_widget_set_size_request
+
 2002-01-27  Seth Nickell  <snickell@stanford.edu>
 
 	* sound.desktop.in:

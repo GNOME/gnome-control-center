@@ -29,6 +29,7 @@
 #  include "config.h"
 #endif
 
+#include <string.h>
 #include <bonobo.h>
 #include <libgnomevfs/gnome-vfs-application-registry.h>
 #include <libgnomevfs/gnome-vfs-utils.h>
@@ -141,7 +142,7 @@ mime_type_info_get_icon_path (MimeTypeInfo *info)
 	if (info->icon_name == NULL)
 		info->icon_name = g_strdup (gnome_vfs_mime_get_icon (info->mime_type));
 
-	if (g_file_exists (info->icon_name)) {
+	if (g_file_test (info->icon_name, G_FILE_TEST_EXISTS)) {
 		info->icon_path = g_strdup (info->icon_name);
 		return info->icon_path;
 	}

@@ -25,6 +25,7 @@
 
 #include <config.h>
 
+#include <string.h>
 #include <gnome.h>
 #include <gconf/gconf-client.h>
 #include <glade/glade.h>
@@ -324,6 +325,7 @@ get_legacy_settings (void)
  * making it feel more natural to the user.
  */
 
+#if 0
 static gboolean
 real_realize_cb (BGPreferences *prefs) 
 {
@@ -345,19 +347,24 @@ real_realize_cb (BGPreferences *prefs)
 
 	return FALSE;
 }
+#endif
 
+#if 0
 static gboolean
 realize_2_cb (BGPreferences *prefs) 
 {
 	gtk_idle_add ((GtkFunction) real_realize_cb, prefs);
 	return FALSE;
 }
+#endif
 
+#if 0
 static void
 realize_cb (GtkWidget *widget, BGPreferences *prefs)
 {
 	gtk_timeout_add (100, (GtkFunction) realize_2_cb, prefs);
 }
+#endif
 
 static void
 setup_color_widgets (int orientation)
@@ -384,6 +391,7 @@ setup_color_widgets (int orientation)
 		color2_string = "Bottom Color"; 
 		break;
 	default:
+		break;
 	}
 
 
@@ -440,7 +448,7 @@ set_background_image_preview (const char *filename)
 	g_assert (background_image_label != NULL);
 	g_assert (background_image_preview != NULL);
 
-	if ((filename == NULL) || (!g_file_exists (filename))) {
+	if ((filename == NULL) || (!g_file_test (filename, G_FILE_TEST_EXISTS))) {
 		gtk_label_set_text (GTK_LABEL (background_image_label), "No Picture");
 		gtk_image_set_from_stock (GTK_IMAGE (background_image_preview), GTK_STOCK_MISSING_IMAGE,
 					  GTK_ICON_SIZE_DIALOG);
@@ -506,8 +514,8 @@ set_background_image_preview (const char *filename)
   
 	scaled_pixbuf = gdk_pixbuf_scale_simple (pixbuf, width, height, GDK_INTERP_BILINEAR);
 	gtk_image_set_from_pixbuf (GTK_IMAGE (background_image_preview), scaled_pixbuf);
-	gdk_pixbuf_unref (scaled_pixbuf);
-	gdk_pixbuf_unref (pixbuf);
+	g_object_unref (G_OBJECT (scaled_pixbuf));
+	g_object_unref (G_OBJECT (pixbuf));
 
 	length = strlen (filename);
 
@@ -551,17 +559,16 @@ image_filename_clicked (GtkButton *button, gpointer user_data)
 		gtk_file_selection_set_filename (GTK_FILE_SELECTION(file_selector), old_filename);
 	}
 
-	gtk_signal_connect (GTK_OBJECT (file_selector), "destroy",
-			    GTK_SIGNAL_FUNC(gtk_widget_destroyed),
-			    &file_selector);   
+	g_signal_connect (G_OBJECT (file_selector), "destroy",
+			  (GCallback) gtk_widget_destroyed,
+			  &file_selector);
 
 
-	gtk_signal_connect (GTK_OBJECT (GTK_FILE_SELECTION (file_selector)->ok_button),
-			    "clicked", GTK_SIGNAL_FUNC (file_selector_cb), file_selector);
+	g_signal_connect (G_OBJECT (GTK_FILE_SELECTION (file_selector)->ok_button),
+			  "clicked", (GCallback ) file_selector_cb, file_selector);
 
-	gtk_signal_connect_object (GTK_OBJECT (GTK_FILE_SELECTION (file_selector)->cancel_button),
-				   "clicked", GTK_SIGNAL_FUNC(gtk_widget_destroy),
-				   GTK_OBJECT (file_selector));
+	g_signal_connect_swapped (G_OBJECT (GTK_FILE_SELECTION (file_selector)->cancel_button),
+				  "clicked", (GCallback ) gtk_widget_destroy, file_selector);
   
 	/* Display that dialog */
   
@@ -674,9 +681,9 @@ create_dialog (BGApplier **bg_appliers)
 	toggle_array[BACKGROUND_TYPE_STRETCHED]   =  glade_xml_get_widget (dialog, "stretched_toggle");
 	
 	for (i = 0; i < NUMBER_BACKGROUND_TYPES; i++) {
-		gtk_signal_connect (GTK_OBJECT (toggle_array[i]), 
-				    "clicked", GTK_SIGNAL_FUNC (background_type_toggled),
-				    toggle_array);
+		g_signal_connect (G_OBJECT (toggle_array[i]), 
+				  "clicked", (GCallback) background_type_toggled,
+				  toggle_array);
 	}
 
 	border_shading_label = glade_xml_get_widget (dialog, "border_shading_label");
@@ -727,7 +734,7 @@ create_dialog (BGApplier **bg_appliers)
 	gtk_box_pack_end (GTK_BOX (widget), bg_applier_get_preview_widget (bg_appliers [BACKGROUND_TYPE_STRETCHED]), TRUE, TRUE, 0);
 
 	widget = glade_xml_get_widget (dialog, "background_image_button");
-	gtk_signal_connect (GTK_OBJECT(widget), "clicked", GTK_SIGNAL_FUNC (image_filename_clicked), NULL);
+	g_signal_connect (G_OBJECT (widget), "clicked", (GCallback) image_filename_clicked, NULL);
 
 	background_image_preview = glade_xml_get_widget (dialog, "background_image_preview");
 
@@ -747,7 +754,7 @@ idle_draw (gpointer data)
 }
 
 static void
-dialog_button_clicked_cb (GnomeDialog *dialog, gint response_id, GConfChangeSet *changeset) 
+dialog_button_clicked_cb (GtkDialog *dialog, gint response_id, GConfChangeSet *changeset) 
 {
 	switch (response_id) {
 	case GTK_RESPONSE_CLOSE:

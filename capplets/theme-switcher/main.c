@@ -82,8 +82,11 @@ themes_list_refresh (void)
 	for (i = 0; themes[i] != NULL; i++)
 	{
 		GtkTreeIter iter;
+		gchar *basename;
+		basename = g_path_get_basename (themes[i]);
 		gtk_list_store_append (model, &iter);
-		gtk_list_store_set (model, &iter, 0, g_basename (themes[i]), -1);
+		gtk_list_store_set (model, &iter, 0, basename, -1);
+		g_free (basename);
 	}
 }
 
@@ -111,7 +114,7 @@ static gchar* get_selected_theme (void)
 }
 
 
-static const gchar* get_selected_theme_name (void)
+static gchar* get_selected_theme_name (void)
 {
 	int index = -1;
 	GtkTreeView *view = GTK_TREE_VIEW (glade_xml_get_widget (xml, "tree1"));
@@ -121,7 +124,7 @@ static const gchar* get_selected_theme_name (void)
 	if (index == -1)
 		return NULL;
 
-	return g_basename (themes[index]);
+	return g_path_get_basename (themes[index]);
 }
 
 static void
@@ -131,6 +134,7 @@ apply_cb (void)
 	if (name)
 	{
 		gconf_client_set_string (gconf_client_get_default (), "/desktop/gnome/interface/gtk_theme", name, NULL);
+		g_free (name);
 	}
 }
 
@@ -208,7 +212,7 @@ install_cb (GtkButton *b, gpointer data)
 {
 	GtkFileSelection *sel = GTK_FILE_SELECTION (gtk_file_selection_new (_("Select a theme to install")));
 	g_signal_connect (G_OBJECT (sel->ok_button), "clicked", (GCallback) fsel_ok_cb, sel);
-	gtk_signal_connect_object (GTK_OBJECT (sel->cancel_button), "clicked", (GCallback) gtk_widget_destroy, G_OBJECT (sel));
+	g_signal_connect_swapped (G_OBJECT (sel->cancel_button), "clicked", (GCallback) gtk_widget_destroy, sel);
 	gtk_widget_show_all (GTK_WIDGET (sel));
 }
 

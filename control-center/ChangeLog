@@ -1,3 +1,18 @@
+2002-02-04  Lauris Kaplinski  <lauris@ximian.com>
+
+	* capplet-dir-view-tree.c (populate_tree_branch): Use
+	g_object unref instead of gdk_pixbuf_unref
+
+	* capplet-dir-view-list.c (list_clean): Use g_object_unref
+	(sidebar_arrow_update): g_build_filename
+	(list_create): Replace deprecated methods
+
+	* preferences.c (gnomecc_preferences_class_init): Use g_signal_new
+	(read_preferences): Use g_signal_emit
+
+	* capplet-dir.c (find_icon): Use glib methods instead of
+	deprecated stuff
+
 2002-01-21  Richard Hestilow  <hestilow@ximian.com>
 
 	* main.c: Use nautilus as the shell if it is already running.

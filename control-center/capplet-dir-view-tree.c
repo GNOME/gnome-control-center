@@ -61,8 +61,8 @@ populate_tree_branch (CappletDir *dir, GtkCTree *ctree, GtkCTreeNode *parent)
 		scaled = gdk_pixbuf_scale_simple (pixbuf, 16, 16, 
 						  GDK_INTERP_BILINEAR);
 		gdk_pixbuf_render_pixmap_and_mask (scaled, &pixmap, &mask, 128);
-		gdk_pixbuf_unref (pixbuf);
-		gdk_pixbuf_unref (scaled);
+		g_object_unref (G_OBJECT (pixbuf));
+		g_object_unref (G_OBJECT (scaled));
 
 		current = gtk_ctree_insert_node 
 			(ctree, parent, NULL,

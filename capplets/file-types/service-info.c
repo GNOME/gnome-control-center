@@ -26,6 +26,7 @@
 #  include "config.h"
 #endif
 
+#include <string.h>
 #include <gconf/gconf-client.h>
 #include <libgnomevfs/gnome-vfs-application-registry.h>
 

@@ -74,10 +74,10 @@ list_clean (CappletDirView *view)
 {
 	ListViewData *data = view->view_data;
 
-	gdk_pixbuf_unref (data->header_logo);
-	gdk_pixbuf_unref (data->arrow);
-	gdk_gc_unref (data->gc1);
-	gdk_gc_unref (data->gc2);
+	g_object_unref (G_OBJECT (data->header_logo));
+	g_object_unref (G_OBJECT (data->arrow));
+	g_object_unref (G_OBJECT (data->gc1));
+	g_object_unref (G_OBJECT (data->gc2));
 
 	g_free (data);
 }
@@ -192,7 +192,7 @@ sidebar_arrow_update (CappletDirView *view)
 
 	if (!data->arrow)
 	{
-		gchar *file = g_concat_dir_and_file (ART_DIR, "active.png");
+		gchar *file = g_build_filename (ART_DIR, "active.png", NULL);
 		data->arrow = gdk_pixbuf_new_from_file (file, NULL);
 	}
 
@@ -267,7 +267,7 @@ sidebar_populate (CappletDirView *view)
 				    SIDEBAR_ACTIVE, NULL,
 				    -1);
 
-		gdk_pixbuf_unref (buf);
+		g_object_unref (G_OBJECT (buf));
 	}
 
 	g_slist_free_1 (root); /* Just this first node */
@@ -440,9 +440,9 @@ list_create (CappletDirView *view)
 
 	vbox = gtk_vbox_new (FALSE, 0);
 	darea = data->header =  gtk_drawing_area_new ();
-	gtk_widget_set_usize (darea, 48, 48);
-	gtk_signal_connect (GTK_OBJECT (darea), "expose_event",
-			    (GCallback) header_expose_cb, view);
+	gtk_widget_set_size_request (darea, 48, 48);
+	g_signal_connect (G_OBJECT (darea), "expose_event",
+			  (GCallback) header_expose_cb, view);
 
 	gtk_box_pack_start (GTK_BOX (vbox), darea, FALSE, FALSE, 0);
 		
@@ -469,7 +469,7 @@ list_create (CappletDirView *view)
 	g_signal_connect (G_OBJECT (sel), "changed", (GCallback) sidebar_select_cb, view);
 
 	sw = gtk_scrolled_window_new (NULL, NULL);
-	gtk_widget_set_usize (sw, 200, -1);
+	gtk_widget_set_size_request (sw, 200, -1);
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
 					GTK_POLICY_NEVER,
 					GTK_POLICY_AUTOMATIC);
@@ -486,7 +486,7 @@ list_create (CappletDirView *view)
 	w = gnome_icon_list_new (72, NULL, 0);
 	data->gil = GNOME_ICON_LIST (w);
 	
-	title = g_concat_dir_and_file (ART_DIR, "title.png");
+	title = g_build_filename (ART_DIR, "title.png", NULL);
 	data->header_logo = gdk_pixbuf_new_from_file (title, NULL);
 	g_free (title);
 
@@ -506,9 +506,9 @@ list_create (CappletDirView *view)
 	}
 #endif
 
-	gtk_signal_connect (GTK_OBJECT (w), "select-icon", 
-			    GTK_SIGNAL_FUNC (select_icon_list_cb),
-			    view);
+	g_signal_connect (G_OBJECT (w), "select-icon", 
+			  (GCallback) select_icon_list_cb,
+			  view);
 
 	gtk_container_add (GTK_CONTAINER (sw), w);
 	gtk_paned_add2 (GTK_PANED (hbox), sw);

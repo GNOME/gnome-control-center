@@ -25,6 +25,7 @@
 # include "config.h"
 #endif
 
+#include <string.h>
 #include <glade/glade.h>
 #include <libgnomevfs/gnome-vfs-mime-handlers.h>
 #include <libgnomevfs/gnome-vfs-application-registry.h>
@@ -385,12 +386,12 @@ setup_add_dialog (MimeEditDialog *dialog)
 
 	item = gtk_menu_item_new_with_label (_("None"));
 	menu = gtk_menu_new ();
-	gtk_menu_append (GTK_MENU (menu), item);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
 	gtk_option_menu_set_menu (GTK_OPTION_MENU (WID ("component_select")), menu);
 
 	item = gtk_menu_item_new_with_label (_("Custom"));
 	menu = gtk_menu_new ();
-	gtk_menu_append (GTK_MENU (menu), item);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
 	gtk_option_menu_set_menu (GTK_OPTION_MENU (WID ("default_action_select")), menu);
 
 	gtk_widget_set_sensitive (WID ("component_box"), FALSE);
@@ -432,14 +433,14 @@ populate_component_list (MimeEditDialog *dialog)
 		g_object_set_data (G_OBJECT (menu_item),
 				   "component", info);
 
-		gtk_menu_append (menu, menu_item);
+		gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
 		gtk_widget_show (menu_item);
 	}
 
 	dialog->p->component_active = !(i == 0);
 
 	menu_item = gtk_menu_item_new_with_label (_("None"));
-	gtk_menu_append (menu, menu_item);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
 	gtk_widget_show (menu_item);
 
 	if (found_idx < 0)
@@ -481,14 +482,14 @@ populate_application_list (MimeEditDialog *dialog)
 					"app", app,
 					(GDestroyNotify) gnome_vfs_mime_application_free);
 
-		gtk_menu_append (menu, menu_item);
+		gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
 		gtk_widget_show (menu_item);
 	}
 
 	dialog->p->default_action_active = !(i == 0);
 	dialog->p->custom_action = (found_idx < 0);
 
-	gtk_menu_append (menu, gtk_menu_item_new_with_label (_("Custom")));
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), gtk_menu_item_new_with_label (_("Custom")));
 
 	if (found_idx < 0) {
 		found_idx = i;
@@ -666,19 +667,21 @@ validate_data (MimeEditDialog *dialog)
 
 	if (tmp != NULL && *tmp != '\0') {
 		if (strchr (tmp, ' ') || !strchr (tmp, '/')) {
-			err_dialog = gnome_error_dialog_parented
-				(_("Invalid MIME type. Please enter a valid MIME type, or "
-				   "leave the field blank to have one generated for you."),
-				 GTK_WINDOW (dialog->p->dialog_win));
+			err_dialog = gtk_message_dialog_new (GTK_WINDOW (dialog->p->dialog_win),
+							     0, GTK_MESSAGE_ERROR,
+							     GTK_BUTTONS_OK,
+							     _("Invalid MIME type. Please enter a valid MIME type, or "
+							       "leave the field blank to have one generated for you."));
 
 			gtk_window_set_modal (GTK_WINDOW (err_dialog), TRUE);
 
 			return FALSE;
 		}
 		else if (dialog->p->is_add && (gnome_vfs_mime_type_is_known (tmp) || get_mime_type_info (tmp) != NULL)) {
-			err_dialog = gnome_error_dialog_parented
-				(_("There already exists a MIME type of that name."),
-				 GTK_WINDOW (dialog->p->dialog_win));
+			err_dialog = gtk_message_dialog_new (GTK_WINDOW (dialog->p->dialog_win),
+							     0, GTK_MESSAGE_ERROR,
+							     GTK_BUTTONS_OK,
+							     _("There already exists a MIME type of that name."));
 
 			gtk_window_set_modal (GTK_WINDOW (err_dialog), TRUE);
 
@@ -752,7 +755,7 @@ choose_cat_cb (MimeEditDialog *dialog)
 		 GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 		 NULL);
 
-	gtk_widget_set_usize (dialog_win, 300, 300);
+	gtk_widget_set_size_request (dialog_win, 300, 300);
 
 	scrolled_win = gtk_scrolled_window_new (NULL, NULL);
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_win), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);

@@ -225,8 +225,7 @@ drawing_area_expose_event (GtkWidget      *widget,
 			   GConfChangeSet *changeset)
 {
 	static gboolean  first_time = TRUE;
-
-	GdkPixbuf       *pixbuf;
+	GdkPixbuf       *pixbuf = NULL;
 
 	if (first_time) {
 		gdk_window_set_events (widget->window, gdk_window_get_events (widget->window) | GDK_BUTTON_PRESS_MASK);
@@ -348,7 +347,7 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 
 	/* Cursors page */
 	tree_view = WID ("cursor_tree");
-	model = (GtkTreeModel *) gtk_list_store_new (N_COLUMNS, GDK_TYPE_PIXBUF, GTK_TYPE_STRING);
+	model = (GtkTreeModel *) gtk_list_store_new (N_COLUMNS, GDK_TYPE_PIXBUF, G_TYPE_STRING);
 	gtk_tree_view_set_model (GTK_TREE_VIEW (tree_view), model);
 	column = gtk_tree_view_column_new ();
 	renderer = gtk_cell_renderer_pixbuf_new ();
@@ -447,7 +446,7 @@ create_dialog (void)
 /* Callback issued when a button is clicked on the dialog */
 
 static void
-dialog_button_clicked_cb (GnomeDialog *dialog, gint response_id, GConfChangeSet *changeset) 
+dialog_button_clicked_cb (GtkDialog *dialog, gint response_id, GConfChangeSet *changeset) 
 {
 	switch (response_id) {
 	case GTK_RESPONSE_APPLY:
