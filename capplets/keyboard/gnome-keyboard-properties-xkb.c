@@ -186,7 +186,7 @@ setup_xkb_tabs (GladeXML * dialog, GConfChangeSet * changeset)
 			   update_model, dialog, NULL, NULL);
 
   GSwitchItKbdConfigInit (&initialConfig, xkbGConfClient);
-  GSwitchItKbdConfigLoadInitial (&initialConfig);
+  GSwitchItKbdConfigLoadFromXInitial (&initialConfig);
 
   enable_disable_restoring (dialog);
   xkb_layouts_enable_disable_default (dialog, 
@@ -202,7 +202,7 @@ enable_disable_restoring (GladeXML * dialog)
   gboolean enable;
 
   GSwitchItKbdConfigInit (&gswic, xkbGConfClient);
-  GSwitchItKbdConfigLoad (&gswic);
+  GSwitchItKbdConfigLoadFromGConf (&gswic);
 
   enable = !GSwitchItKbdConfigEquals (&gswic, &initialConfig);
 
