@@ -86,6 +86,10 @@ static void      icon_key_changed                (GConfClient        *client,
 						  guint               cnxn_id,
 						  GConfEntry         *entry,
 						  gpointer            user_data);
+static void      font_key_changed                (GConfClient        *client,
+						  guint               cnxn_id,
+						  GConfEntry         *entry,
+						  gpointer            user_data);
 static void      theme_changed_func              (gpointer            uri,
 						  gpointer            user_data);
 static void      cb_dialog_response              (GtkDialog          *dialog,
@@ -924,6 +928,62 @@ window_settings_changed (GnomeWindowManager *window_manager,
 }
 
 static void
+update_font_button_state (GladeXML *dialog)
+{
+  GConfClient *client = gconf_client_get_default ();
+  GtkTreeSelection *selection;
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (WID ("meta_theme_treeview")));
+  
+  if (gtk_tree_selection_get_selected (selection, &model, &iter))
+    {
+      GnomeThemeMetaInfo *meta_theme_info;
+      char *meta_theme_name, *str;
+      
+      gtk_tree_model_get (model, &iter,
+			  META_THEME_ID_COLUMN, &meta_theme_name,
+			  -1);
+      if (!meta_theme_name)
+	return;
+      
+      meta_theme_info = gnome_theme_meta_info_find (meta_theme_name);
+
+      g_assert (meta_theme_info);
+      g_free (meta_theme_name);
+
+      str = gconf_client_get_string (client, FONT_KEY, NULL);
+      
+      if (meta_theme_info->application_font != NULL && str != NULL &&
+	  strcmp (meta_theme_info->application_font, str) == 0)
+	{
+	  gtk_widget_set_sensitive (WID ("meta_theme_font1_button"), FALSE);
+	  gtk_widget_set_sensitive (WID ("meta_theme_font2_button"), FALSE);
+	}
+      else
+	{
+	  gtk_widget_set_sensitive (WID ("meta_theme_font1_button"), TRUE);
+	  gtk_widget_set_sensitive (WID ("meta_theme_font2_button"), TRUE);
+	}
+
+      g_free (str);
+    }  
+  
+}
+
+static void
+font_key_changed (GConfClient        *client,
+		  guint               cnxn_id,
+		  GConfEntry         *entry,
+		  gpointer            user_data)
+{
+  GladeXML *dialog = user_data;
+
+  update_font_button_state (dialog);
+}
+
+static void
 icon_key_changed (GConfClient *client,
 		  guint        cnxn_id,
 		  GConfEntry  *entry,
@@ -1009,7 +1069,37 @@ gnome_theme_save_clicked (GtkWidget *button,
   gnome_theme_save_show_dialog (WID ("theme_dialog"), &custom_meta_theme_info);
 }
 
+static void
+apply_font_clicked (GtkWidget *button,
+		    gpointer   data)
+{
+  GladeXML *dialog = data;
+  GConfClient *client;
+  GtkTreeSelection *selection;
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  
+  client = gconf_client_get_default ();
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (WID ("meta_theme_treeview")));
+  
+  if (gtk_tree_selection_get_selected (selection, &model, &iter))
+    {
+      GnomeThemeMetaInfo *meta_theme_info;
+      char *meta_theme_name;
+      
+      gtk_tree_model_get (model, &iter,
+			  META_THEME_ID_COLUMN, &meta_theme_name,
+			  -1);
+      meta_theme_info = gnome_theme_meta_info_find (meta_theme_name);
 
+      g_assert (meta_theme_info);
+      g_free (meta_theme_name);
+
+      gconf_client_set_string (client, FONT_KEY, meta_theme_info->application_font, NULL);
+    }  
+}
+	    
+	    
 static void
 setup_dialog (GladeXML *dialog)
 {
@@ -1037,6 +1127,7 @@ setup_dialog (GladeXML *dialog)
 
   g_signal_connect (G_OBJECT (WID ("meta_theme_details_button")), "clicked", gnome_theme_details_show, NULL);
 
+  g_signal_connect (G_OBJECT (WID ("meta_theme_font1_button")), "clicked", G_CALLBACK (apply_font_clicked), dialog);
 
   setup_meta_tree_view (GTK_TREE_VIEW (WID ("meta_theme_treeview")),
 			(GCallback) meta_theme_selection_changed,
@@ -1053,6 +1144,10 @@ setup_dialog (GladeXML *dialog)
 			   (GConfClientNotifyFunc) &icon_key_changed,
 			   dialog, NULL, NULL);
 
+  gconf_client_notify_add (client,
+			   FONT_KEY,
+			   (GConfClientNotifyFunc) &font_key_changed,
+			   dialog, NULL, NULL);
   if (window_manager)
     g_signal_connect (G_OBJECT (window_manager),
 		      "settings_changed",
@@ -1084,6 +1179,7 @@ setup_dialog (GladeXML *dialog)
 
   capplet_set_icon (parent, "gnome-ccthemes.png");
 
+  update_font_button_state (dialog);
   gtk_widget_show (parent);
 
 }

@@ -198,6 +198,7 @@ create_image (ThemeThumbnailData *theme_thumbnail_data,
 
   /* Handle the icon theme */
   icon_theme = gnome_icon_theme_new ();
+  gnome_icon_theme_set_allow_svg (icon_theme, TRUE);
   gnome_icon_theme_set_custom_theme (icon_theme, (char *) theme_thumbnail_data->icon_theme_name->data);
 
   /* Have to try both "folder" and "gnome-fs-directory" seems themes seem to use either name */
