@@ -1,3 +1,12 @@
+2001-07-25  Chema Celorio  <chema@celorio.com>
+
+	* configure.in (GNOMECC_CAPPLETS_OAF_FILE_IN_RULE): scape correctly the
+	OAF_FILE_IN_RULE, it was not escaped before but for some reason it didn't
+	generated and error
+
+	* capplets/Makefile.am (SUBDIRS): we need to build LIBCOMMON_DIR
+	before the capplets cause the capplets link with ../common/libcommon.a
+
 2001-07-25  Bradford Hovinen  <hovinen@ximian.com>
 
 	* configure.in: Remove IMLIB check

@@ -2,4 +2,4 @@ always_built_SUBDIRS =						\
 	background keyboard mouse screensaver sound		\
 	default-applications desktop-links
 
-SUBDIRS = $(always_built_SUBDIRS) $(LIBCOMMON_DIR)
+SUBDIRS =  $(LIBCOMMON_DIR) $(always_built_SUBDIRS)
