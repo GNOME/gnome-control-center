@@ -74,7 +74,6 @@ get_font(Display *xdisplay, FT_Face face, gint size, FcCharSet *charset)
     XftDefaultSubstitute (xdisplay, screen, pattern);
 
     font = XftFontOpenPattern(xdisplay, pattern);
-    FcPatternDestroy(pattern);
 
     return font;
 }

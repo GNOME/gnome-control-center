@@ -1,3 +1,15 @@
+2004-12-10  James Henstridge  <james@jamesh.id.au>
+
+	* Makefile.am (install-desktop-database): update the desktop file
+	database on install, since we install a new mime action.
+
+	* font-view.c (get_font): don't free the pattern when creating the
+	font object, since XftFontOpenPattern takes ownership of the
+	pattern.
+
+	* gnome-font-viewer.desktop.in.in (Exec): use %u instead of %U,
+	since we only support openning one file.
+
 2004-11-28  James Henstridge  <james@jamesh.id.au>
 
 	* thumbnailer.c (main): use gnome_vfs_make_uri_from_shell_arg() to

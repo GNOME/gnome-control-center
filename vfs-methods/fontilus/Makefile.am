@@ -38,14 +38,19 @@ desktopdir = $(datadir)/applications
 desktop_in_files = gnome-font-viewer.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
+install-data-local: install-gconf-schemas install-desktop-database
+
 if GCONF_SCHEMAS_INSTALL
-install-data-local:
+install-gconf-schemas:
 	if test -z "$(DESTDIR)"; then \
 	  GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule fontilus.schemas; \
 	fi
 else
-install-data-local:
+install-gconf-schemas:
 endif
+
+install-desktop-database:
+	update-desktop-database $(DESTDIR)$(desktopdir)
 
 @INTLTOOL_DESKTOP_RULE@
 @INTLTOOL_DIRECTORY_RULE@
