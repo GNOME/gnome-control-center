@@ -26,6 +26,7 @@
 #endif
 
 #include <gnome.h>
+#include <gdk/gdkx.h>
 #include <gconf/gconf-client.h>
 #include <glade/glade.h>
 
@@ -117,6 +118,7 @@ cleanup_xkb_tabs (GladeXML * dialog)
 {
   XklConfigFreeRegistry ();
   XklConfigTerm ();
+  XklTerm ();
 }
 
 static void
@@ -135,7 +137,7 @@ add_model_to_option_menu (const XklConfigItemPtr configItem, GtkWidget * menu)
       GtkWidget *menuItem = GTK_WIDGET (existingItemNode->data);
       GtkWidget *lbl = GTK_BIN (menuItem)->child;
       const char *txt = gtk_label_get_text (GTK_LABEL (lbl));
-      if (g_utf8_collate(txt, utfModelName) > 0)
+      if (g_utf8_collate (txt, utfModelName) > 0)
 	break;
     }
   g_free (utfModelName);
@@ -176,9 +178,17 @@ reset_to_defaults (GtkWidget * button, GladeXML * dialog)
   /* all the rest is g-s-d's business */
 }
 
+static void
+update_model (GConfClient * client,
+	      guint cnxn_id, GConfEntry * entry, GladeXML * dialog)
+{
+  enable_disable_restoring (dialog);
+}
+
 void
 setup_xkb_tabs (GladeXML * dialog, GConfChangeSet * changeset)
 {
+  XklInit (GDK_DISPLAY ());
   XklConfigInit ();
   XklConfigLoadRegistry ();
 
@@ -207,4 +217,30 @@ setup_xkb_tabs (GladeXML * dialog, GConfChangeSet * changeset)
 
   g_signal_connect (G_OBJECT (WID ("keyboard_dialog")),
 		    "destroy", G_CALLBACK (cleanup_xkb_tabs), dialog);
+
+  gconf_client_notify_add (gconf_client_get_default (),
+			   GSWITCHIT_CONFIG_XKB_KEY_MODEL,
+			   (GConfClientNotifyFunc)
+			   update_model, dialog, NULL, NULL);
+
+  enable_disable_restoring (dialog);
+}
+
+void
+enable_disable_restoring (GladeXML * dialog)
+{
+  GSwitchItXkbConfig gswic;
+  GConfClient *confClient = gconf_client_get_default ();
+  gboolean enable;
+
+  memset (&gswic, 0, sizeof (gswic));
+
+  GSwitchItXkbConfigInit (&gswic, confClient);
+  g_object_unref (confClient);
+  GSwitchItXkbConfigLoad (&gswic);
+
+  enable = !GSwitchItXkbConfigEqualsToInitial (&gswic);
+
+  GSwitchItXkbConfigTerm (&gswic);
+  gtk_widget_set_sensitive (WID ("xkb_reset_to_defaults"), enable);
 }

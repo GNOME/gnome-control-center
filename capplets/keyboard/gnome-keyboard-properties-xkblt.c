@@ -357,6 +357,7 @@ update_layouts_list (GConfClient * client,
 		     guint cnxn_id, GConfEntry * entry, GladeXML * dialog)
 {
   fill_selected_layouts_tree (dialog);
+  enable_disable_restoring (dialog);
 }
 
 void

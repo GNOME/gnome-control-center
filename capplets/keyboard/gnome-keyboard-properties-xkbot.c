@@ -375,6 +375,7 @@ update_options_list (GConfClient * client,
 		     guint cnxn_id, GConfEntry * entry, GladeXML * dialog)
 {
   fill_selected_options_tree (dialog);
+  enable_disable_restoring (dialog);
 }
 
 void

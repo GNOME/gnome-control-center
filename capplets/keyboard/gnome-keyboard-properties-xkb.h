@@ -56,5 +56,7 @@ extern char *xci_desc_to_utf8 (XklConfigItem * ci);
 
 extern void sort_tree_content (GtkWidget * treeView);
 
+extern void enable_disable_restoring(GladeXML * dialog);
+
 G_END_DECLS
 #endif				/* __GNOME_KEYBOARD_PROPERTY_XKB_H */
