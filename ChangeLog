@@ -1,3 +1,14 @@
+2001-1-16  Mike Engber  <engber@eazel.com> 
+
+	* capplets/background-properties/render-background.c: We were
+	leaking x-server memory. The test before the call to XKillClient,
+	nitems == 4, always failed. It should have been nitems == 1. Also,
+	we now free the ptr returned by XGetWindowProperty whenever it's
+	not NULL - previously we were never freeing it because of the
+	aforementioned problem, but in general, it needs to always be
+	freed. Also, we now examine the return value from XGetWindowProperty
+	before using its results.
+
 Wed Jan 03 04:15:04 2001  George Lebl <jirka@5z.com>
 
 	* capplets/background-properties/render-background.c: Do what the
