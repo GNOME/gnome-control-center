@@ -28,7 +28,7 @@
 #include <glib.h>
 
 /* Uncomment this if you want debugs: */
-#undef DEBUG_ME_MORE
+#define DEBUG_ME_MORE
 
 #ifdef DEBUG_ME_MORE
 #  ifdef __GNUC__

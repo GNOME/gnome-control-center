@@ -2,6 +2,10 @@
 
 	* bonobo-config-archiver.c (bonobo_config_archiver_new): Add
 	mechanism for quitting once the moniker is no longer in use
+	(bonobo_config_archiver_new): Make archive a static variable
+	(bonobo_config_archiver_new): Explicitly destroy archive when
+	program quits
+	(timeout_cb): Remove
 
 	* config-log.c (slave_apprise_data): Remove
 

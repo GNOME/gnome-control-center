@@ -124,6 +124,14 @@ set_moniker_cb (BonoboPropertyBag *bag, BonoboArg *arg, guint arg_id,
 		setup_cb (GTK_BIN (pf)->child, proxy);
 }
 
+/* TEMPORARY */
+
+static void
+pbproxy_destroy_cb (BonoboPropertyFrame *pf) 
+{
+	DEBUG_MSG ("Enter: %d", GTK_OBJECT (pf->proxy)->ref_count);
+}
+
 /* get_control_cb
  *
  * Callback to construct the main dialog box for this capplet; invoked by Bonobo
@@ -162,6 +170,9 @@ get_control_cb (BonoboPropertyControl *property_control, gint page_number)
 					 BONOBO_PROPERTY_WRITEABLE);
 
 		bonobo_control_set_automerge (control, TRUE);
+
+		gtk_signal_connect (GTK_OBJECT (pf), "destroy",
+				    GTK_SIGNAL_FUNC (pbproxy_destroy_cb), NULL);
 	} else {
 		return NULL;
 	}
@@ -224,14 +235,17 @@ create_control_cb (BonoboGenericFactory *factory, Bonobo_ConfigDatabase db)
 static gchar *
 get_factory_name (const gchar *binary) 
 {
-	gchar *tmp, *tmp1, *res;
+	gchar *s, *tmp, *tmp1, *res;
 
-	tmp = g_strdup (binary);
+	s = g_strdup (binary);
+	tmp = strrchr (s, '/');
+	if (tmp == NULL) tmp = s;
+	else tmp++;
 	if ((tmp1 = strstr (tmp, "-capplet")) != NULL) *tmp1 = '\0';
 	while ((tmp1 = strchr (tmp, '-')) != NULL) *tmp1 = '_';
 
 	res = g_strconcat ("OAFIID:Bonobo_Control_Capplet_", tmp, "_Factory", NULL);
-	g_free (tmp);
+	g_free (s);
 	return res;
 }
 
@@ -243,13 +257,16 @@ get_factory_name (const gchar *binary)
 static gchar *
 get_default_moniker (const gchar *binary) 
 {
-	gchar *tmp, *tmp1, *res;
+	gchar *s, *tmp, *tmp1, *res;
 
-	tmp = g_strdup (binary);
+	s = g_strdup (binary);
+	tmp = strrchr (s, '/');
+	if (tmp == NULL) tmp = s;
+	else tmp++;
 	if ((tmp1 = strstr (tmp, "-capplet")) != NULL) *tmp1 = '\0';
 
 	res = g_strconcat ("archiver:", tmp, NULL);
-	g_free (tmp);
+	g_free (s);
 	return res;
 }
 
@@ -261,9 +278,12 @@ get_default_moniker (const gchar *binary)
 static gchar *
 get_property_name (const gchar *binary) 
 {
-	gchar *tmp, *tmp1, *res;
+	gchar *s, *tmp, *tmp1, *res;
 
-	tmp = g_strdup (binary);
+	s = g_strdup (binary);
+	tmp = strrchr (s, '/');
+	if (tmp == NULL) tmp = s;
+	else tmp++;
 	if ((tmp1 = strstr (tmp, "-capplet")) != NULL) *tmp1 = '\0';
 
 	for (tmp1 = tmp; *tmp1 != '\0'; tmp1++) {
@@ -272,7 +292,7 @@ get_property_name (const gchar *binary)
 	}
 
 	res = g_strconcat ("GNOME_", tmp, NULL);
-	g_free (tmp);
+	g_free (s);
 	return res;
 }
 

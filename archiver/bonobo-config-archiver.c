@@ -23,6 +23,7 @@
 #include <gnome-xml/xmlmemory.h>
 #include <gtk/gtkmain.h>
 
+#include "util.h"
 #include "bonobo-config-archiver.h"
 
 static GtkObjectClass *parent_class = NULL;
@@ -223,24 +224,6 @@ real_sync (BonoboConfigDatabase *db,
 			    archiver_db->doc, STORE_MASK_PREVIOUS);
 }
 
-static gint
-timeout_cb (gpointer data)
-{
-	BonoboConfigArchiver *archiver_db = BONOBO_CONFIG_ARCHIVER (data);
-	CORBA_Environment ev;
-
-	CORBA_exception_init(&ev);
-
-	real_sync (BONOBO_CONFIG_DATABASE (data), &ev);
-	
-	CORBA_exception_free (&ev);
-
-	archiver_db->time_id = 0;
-
-	/* remove the timeout */
-	return 0;
-}
-
 static void
 notify_listeners (BonoboConfigArchiver *archiver_db, 
 		  const char        *key, 
@@ -310,11 +293,6 @@ real_set_value (BonoboConfigDatabase *db,
        
 	bonobo_ui_node_add_child ((BonoboUINode *)de->dir->node, 
 				  (BonoboUINode *)de->node);
-
-/*  	if (!archiver_db->time_id) */
-/*  		archiver_db->time_id = gtk_timeout_add (FLUSH_INTERVAL * 1000,  */
-/*  						  (GtkFunction)timeout_cb,  */
-/*  						  archiver_db); */
 
 	notify_listeners (archiver_db, key, value);
 }
@@ -610,6 +588,15 @@ fill_cache (BonoboConfigArchiver *archiver_db)
 	}
 }
 
+/* TEMPORARY */
+
+static void
+unref_cb (GtkObject *db, GtkObject *ref_obj) 
+{
+	DEBUG_MSG ("Enter");
+	gtk_object_unref (ref_obj);
+}
+
 Bonobo_ConfigDatabase
 bonobo_config_archiver_new (const char *backend_id, const char *location_id)
 {
@@ -617,8 +604,8 @@ bonobo_config_archiver_new (const char *backend_id, const char *location_id)
 	Bonobo_ConfigDatabase  db;
 	CORBA_Environment      ev;
 	gchar                 *real_name;
-	Archive               *archive;
 
+	static Archive        *archive = NULL;
 	static GtkObject      *ref_obj = NULL;
 
 	g_return_val_if_fail (backend_id != NULL, NULL);
@@ -647,7 +634,8 @@ bonobo_config_archiver_new (const char *backend_id, const char *location_id)
 		return CORBA_OBJECT_NIL;
 	}
 
-	archive = ARCHIVE (archive_load (FALSE));
+	if (archive == NULL)
+		archive = ARCHIVE (archive_load (FALSE));
 
 	if (location_id == NULL || *location_id == '\0')
 		archiver_db->location = archive_get_current_location (archive);
@@ -704,12 +692,17 @@ bonobo_config_archiver_new (const char *backend_id, const char *location_id)
 	if (ref_obj == NULL) {
 		ref_obj = gtk_object_new (gtk_object_get_type (), NULL);
 		gtk_signal_connect (ref_obj, "destroy", GTK_SIGNAL_FUNC (gtk_main_quit), NULL);
+		gtk_signal_connect_object (ref_obj, "destroy",
+					   GTK_SIGNAL_FUNC (gtk_object_destroy),
+					   GTK_OBJECT (archive));
 	} else {
 		gtk_object_ref (ref_obj);
 	}
 
-	gtk_signal_connect_object (GTK_OBJECT (archiver_db), "destroy",
-				   GTK_SIGNAL_FUNC (gtk_object_unref), ref_obj);
+	DEBUG_MSG ("_ref complete");
+
+	gtk_signal_connect (GTK_OBJECT (archiver_db), "destroy",
+			    GTK_SIGNAL_FUNC (unref_cb), ref_obj);
 
 	return db;
 }
