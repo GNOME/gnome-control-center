@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-04 01:27+0200\n"
-"PO-Revision-Date: 2005-02-04 01:33+0200\n"
+"POT-Creation-Date: 2005-02-05 12:53+0200\n"
+"PO-Revision-Date: 2005-02-05 12:56+0200\n"
 "Last-Translator: Žygimantas Beručka <uid0@akl.lt>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
 "MIME-Version: 1.0\n"
@@ -2903,18 +2903,18 @@ msgstr ""
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
-"It can have under various circumstances:\n"
+"It can happen under various circumstances:\n"
 "- a bug in libxklavier library\n"
 "- a bug in X server (xkbcomp, xmodmap utilities)\n"
-"- X server with incompatible libxkbfile implemenation\n"
+"- X server with incompatible libxkbfile implementation\n"
 "\n"
 "X server version data:\n"
 "%s\n"
 "%d\n"
 "%s\n"
 "If you report this situation as a bug, please include:\n"
-"- The result of <b>xprop -root | grep XKB</b>\n"
-"- The result of <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/kbd</b>"
+"- The result of %s\n"
+"- The result of %s"
 msgstr ""
 "Klaida aktyvuojant XKB konfigūraciją.\n"
 "Tai gali atsitikti esant įvairiom aplinkybėm:\n"
@@ -2927,8 +2927,8 @@ msgstr ""
 "%d\n"
 "%s\n"
 "Jeigu Jūs pranešite apie šią situaciją kaip klaidą, prašom įtraukite:\n"
-"- <b>xprop -root | grep XKB</b> rezultatą\n"
-"- <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b> rezultatą"
+"- %s rezultatą\n"
+"- %s rezultatą"
 
 #: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:113
 msgid ""
@@ -2942,7 +2942,7 @@ msgstr ""
 "Pabandykit naudoti paprastesnes konfigūracijas arba gaukit naujesnę XFree "
 "versiją."
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:216
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:218
 msgid ""
 "The X system keyboard settings differ from your current GNOME keyboard "
 "settings.  Which set would you like to use?"
@@ -2950,11 +2950,11 @@ msgstr ""
 "X sistemos klaviatūros nustatymai skiriasi nuo Jūsų dabartinių GNOME "
 "klaviatūros nustatymų.  Kurį rinkinį norite naudoti?"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:219
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:221
 msgid "Use X settings"
 msgstr "Naudoti X serverio nustatymus"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:221
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:223
 msgid "Use GNOME settings"
 msgstr "Naudoti GNOME nustatymus"
 
