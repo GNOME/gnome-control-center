@@ -4,7 +4,6 @@
 #include <config.h>
 
 #include <string.h>
-#include <gtk/gtk.h>
 #include <gconf/gconf-client.h>
 #include <glade/glade.h>
 #include <libgnomevfs/gnome-vfs-async-ops.h>

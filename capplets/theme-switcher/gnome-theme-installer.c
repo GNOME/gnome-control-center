@@ -4,7 +4,6 @@
 #include <string.h>
 #include <libwindow-settings/gnome-wm-manager.h>
 #include "gnome-theme-installer.h"
-#include <gtk/gtk.h>
 #include <gconf/gconf-client.h>
 #include <glade/glade.h>
 #include <libgnomevfs/gnome-vfs-async-ops.h>
