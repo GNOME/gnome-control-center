@@ -187,10 +187,10 @@ archive_load (gboolean is_global)
 		return GTK_OBJECT (user_archive);
 
 	if (is_global)
-		prefix = CONFIGDIR "/helix-config";
+		prefix = CONFIGDIR "/ximian-config";
 	else
 		prefix = g_concat_dir_and_file (g_get_home_dir (),
-						".gnome/helix-config");
+						".gnome/ximian-config");
 
 	object = gtk_object_new (archive_get_type (),
 				 "prefix", prefix,
@@ -438,7 +438,7 @@ archive_set_current_location_id (Archive *archive, const gchar *locid)
 	if (archive->is_global)
 		gnome_config_push_prefix ("=" LOCATION_DIR "=");
 	else
-		gnome_config_push_prefix ("helix-config/");
+		gnome_config_push_prefix ("ximian-config/");
 
 	gnome_config_set_string ("config/current/location",
 				 archive->current_location_id);
@@ -466,7 +466,7 @@ archive_get_current_location_id (Archive *archive)
 		if (archive->is_global)
 			gnome_config_push_prefix ("=" LOCATION_DIR "=");
 		else
-			gnome_config_push_prefix ("helix-config/");
+			gnome_config_push_prefix ("ximian-config/");
 
 		archive->current_location_id =
 			gnome_config_get_string

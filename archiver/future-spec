@@ -1,8 +1,8 @@
 Changes to the Helix Configuration Manager
-Copyright (C) 2000 Helix Code, Inc.
-Written by Bradford Hovinen <hovinen@helixcode.com>
+Copyright (C) 2000 Ximian, Inc.
+Written by Bradford Hovinen <hovinen@ximian.com>
 
-As it stands, capplets and Helix Setup Tools are both run as separate
+As it stands, capplets and Ximian Setup Tools are both run as separate
 processes through the exec() facility. It is planned that the capplets 
 shall become Bonobo controls in the future, once the OAF/gnorba
 compatibility problems are worked out. This changes the design of the
@@ -11,17 +11,17 @@ to take full advantage of these changes.
 
 1. Capplets become Bonobo controls
 
-It stands to reason that the front ends for Helix Setup Tools should
+It stands to reason that the front ends for Ximian Setup Tools should
 become Bonobo controls at the same time as capplets. They can each
 implement the same interface (say, Bonobo::Capplet) with methods
 getXML(), setXML(), ok(), cancel(), and init() and hence look the same
-to the shell. This means that the front ends for the Helix Setup Tools
-run as the same user as HCM and respond in the same way as capplets do
-to requests to embed them in the HCM shell window. This is essential
+to the shell. This means that the front ends for the Ximian Setup Tools
+run as the same user as XCM and respond in the same way as capplets do
+to requests to embed them in the XCM shell window. This is essential
 for a consistent user interface that will not result in end-user
-confusion [1]. HCM itself may then export an interface that includes
+confusion [1]. XCM itself may then export an interface that includes
 the method runBackend(), to which the frontend supplies a stream of
-XML that HCM passes through the root manager to the backend via a
+XML that XCM passes through the root manager to the backend via a
 standard pipe [2]. The backend is then responsible for running the
 program that archives the XML -- there is no other way to place that
 XML in a central, system-wide repository. I suggest, therefore, that

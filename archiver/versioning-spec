@@ -1,15 +1,15 @@
 Configuration rollback, location management, and cluster support
-Copyright (C) 2000 Helix Code, Inc.
-Written by Bradford Hovinen <hovinen@helixcode.com>
+Copyright (C) 2001 Ximian, Inc.
+Written by Bradford Hovinen <hovinen@ximian.com>
 
 I.   Basic architecture
 
 A. Components
 
-1. Helix Configuration Manager
+1. Ximian Configuration Manager
 
-The GUI shell, here referred to as the Helix Configuration Manager
-(HCM), acts as launching point for the capplets and Helix Setup Tools,
+The GUI shell, here referred to as the Ximian Configuration Manager
+(XCM), acts as launching point for the capplets and Ximian Tools,
 and a control center for managing rollback, location management, and
 clustering. It launches other components and knows how to find
 archived configuration data for rollback. When rollback or a change of
@@ -27,7 +27,7 @@ interface). --get returns an XML description of the capplet's state
 for archival purposes and --set takes an XML description of the
 capplet's state and applies those settings to the desktop.
 
-3. Helix Setup Tools (HSTs)
+3. Ximian Setup Tools (XSTs)
 
 These programs are for system-wide configuration and must run as root
 in order to apply changes. They may also run as a regular user in
@@ -42,7 +42,7 @@ arguments, analogous to the arguments in capplets mentioned above.
 
 The root manager process runs as root and is launched through
 gnome-su. It accepts on stdin a set of programs to launch, one per
-line, with command line arguments. HCM uses it to launch Helix Setup
+line, with command line arguments. XCM uses it to launch Ximian Setup
 Tools so that they run as root, without needing to ask the user for a
 password each time a tool is run. The root manager is run exactly once 
 through console-helper the first time a tool that must be run as root
@@ -70,14 +70,14 @@ name of the active location (cf. section IV) and <revision> is
 incremented after each change.
 
 When the capplets are converted into Bonobo controls, the situation
-will be slightly different. HCM will be the recipient of the `Ok'
+will be slightly different. XCM will be the recipient of the `Ok'
 signal, so it will invoke the OKClicked() method of the
 Bonobo::Capplet interface on the appropriate capplet. It will also
 invoke the GetXML() method of the same interface in order to retrieve
 an XML snapshot of the state and store that snapshot with
-do-changes. Hence, much of the action moves from the capplet to HCM.
+do-changes. Hence, much of the action moves from the capplet to XCM.
 
-In the case of Helix Setup Tools, the frontend passes the XML through
+In the case of Ximian Setup Tools, the frontend passes the XML through
 the do-changes script to the backend whenever the `Ok' button is
 clicked. It passes to do-changes the argument --backend <backend name> 
 so that do-changes will also invoke the indicated backend and pass the 
@@ -85,16 +85,16 @@ XML to it.
 
 III. Rollback process
 
-From within the HCM, the user may elect to roll back either his
+From within the XCM, the user may elect to roll back either his
 personal configuration or that of the system to a particular
-date. HCM looks for a revision directory in the current location
+date. XCM looks for a revision directory in the current location
 profile with the most recent modification date that is not more recent 
-than the date specified by the user. HCM also has a list of what
-capplets (or HSTs) constitute a complete snapshot of the system's
+than the date specified by the user. XCM also has a list of what
+capplets (or XSTs) constitute a complete snapshot of the system's
 configuration. In order to perform a complete rollback, it backtracks
 through the revision directories, picking up XML snapshots of capplets 
 until it has a complete set and applies them through the --set
-method. In the case of HSTs, the HCM knows how to invoke the backend
+method. In the case of XSTs, the XCM knows how to invoke the backend
 and does so as necessary.
 
 IV.  Location management
@@ -109,13 +109,13 @@ network, it would be advantageous to switch to that network's
 configuration with a minimum of hassle.
 
 As mentioned above, configuration data is stored in separate
-directories corresponding to the name of a given location. HCM has the 
+directories corresponding to the name of a given location. XCM has the 
 ability to apply a set of configuration files from a given location in 
 a manner similar to the rollback procedure described above. When the
 user selects an alternative configuration, it simply goes through the
 revision history for that location, pulls a complete set of
 configuration files, and applies them. The procedure is similar for
-both capplets and HSTs.
+both capplets and XSTs.
 
 In addition, locations may be expressed hierarchically. For example, a 
 user might specify a location called `Boston' that describes language, 
@@ -128,17 +128,17 @@ To implement this, each location directory contains some metadata that
 describes what configuration data is valid for it and what other
 configuration it inherits from. There are one or more root
 configurations that contain a complete set of data. When applying a
-new location, HCM looks first at that location's directory, pulling a
+new location, XCM looks first at that location's directory, pulling a
 complete set of all the configuration data defined by that location,
 and then goes to the next level up in the location hierarchy and does
 the same thing. It also keeps track of the common subtree root between
 the old and new locations so that only the configuration items that
 actually change are collected.
 
-From a user's perspective, the HCM will present a tree showing the
+From a user's perspective, the XCM will present a tree showing the
 existing locations. Users may create a new location derived from an
 existing one. When the user elects to configure a particular location, 
-the HCM shell includes icons that are grayed out, indicating that
+the XCM shell includes icons that are grayed out, indicating that
 those configuration items are not set in this particular location. If
 the user attempts to change them, they become specific to that
 particular location and are recolored accordingly.
@@ -171,23 +171,23 @@ VI.  Issues
 changes, so that the user can configure a location without switching
 to it.
 
-2. Can we make the HST frontends Bonobo controls, and can we have them 
+2. Can we make the XST frontends Bonobo controls, and can we have them 
 run as the regular user rather than as root? This would ensure that
 certain user interface preferences, such as themes, are kept
-consistent for a given user between capplets and HSTs. The way to
-implement this is to have a method on the HCM interface called
+consistent for a given user between capplets and XSTs. The way to
+implement this is to have a method on the XCM interface called
 RunBackend() which returns a BonoboObject referring to the backend
-that implements the Bonobo::HSTBackend interface, which is similar to
+that implements the Bonobo::XSTBackend interface, which is similar to
 the Bonobo::Capplet interface mentioned above. The interface defines
 the GetXML and SetXML methods. The object should also implement
-another, HST-specific interface to facilitate setting specific
+another, XST-specific interface to facilitate setting specific
 configuration variables, so that live update may be implemented. The
 root manager must then be extended to support some sort of secure
 forwarding, allowing the user to access that particular CORBA object.
 
-3. If we make the HSTs into Bonobo controls, can we give them the same 
+3. If we make the XSTs into Bonobo controls, can we give them the same 
 Bonobo::Capplet interface that is given to the Capplets? This would
-make everything a bit simpler from the HCM's perspective, since it
+make everything a bit simpler from the XCM's perspective, since it
 then does not need to know the difference between Capplets and
-HSTs -- it then only needs to implement the RunBackend() method for
-the benefit of the HSTs.
+XSTs -- it then only needs to implement the RunBackend() method for
+the benefit of the XSTs.
