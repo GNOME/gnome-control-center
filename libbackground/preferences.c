@@ -271,22 +271,22 @@ bg_preferences_merge_entry (BGPreferences    *prefs,
 static wallpaper_type_t
 read_wptype_from_string (gchar *string)
 {
-        wallpaper_type_t type;
+        wallpaper_type_t type = -1;
       
-	if (!strncmp (string, "wallpaper", sizeof ("wallpaper"))) {
-	        type =  WPTYPE_TILED;
-	} else if (!strncmp (string, "centered", sizeof ("centered"))) {
-	        type =  WPTYPE_CENTERED;
-	} else if (!strncmp (string, "scaled", sizeof ("scaled"))) {
-	        type =  WPTYPE_SCALED;
-	} else if (!strncmp (string, "stretched", sizeof ("stretched"))) {
-	        type =  WPTYPE_STRETCHED;
-	} else if (!strncmp (string, "embossed", sizeof ("embossed"))) {
-	        type =  WPTYPE_EMBOSSED;
-	} else {
-	        type = -1;
+	if (string) {
+		if (!strncmp (string, "wallpaper", sizeof ("wallpaper"))) {
+			type =  WPTYPE_TILED;
+		} else if (!strncmp (string, "centered", sizeof ("centered"))) {
+			type =  WPTYPE_CENTERED;
+		} else if (!strncmp (string, "scaled", sizeof ("scaled"))) {
+			type =  WPTYPE_SCALED;
+		} else if (!strncmp (string, "stretched", sizeof ("stretched"))) {
+			type =  WPTYPE_STRETCHED;
+		} else if (!strncmp (string, "embossed", sizeof ("embossed"))) {
+			type =  WPTYPE_EMBOSSED;
+		}
+		g_free (string);
 	}
-	g_free (string);
 
 	return type;
 }
@@ -294,17 +294,17 @@ read_wptype_from_string (gchar *string)
 static orientation_t
 read_orientation_from_string (gchar *string)
 {
-        orientation_t type;
+        orientation_t type = ORIENTATION_SOLID;
 
-	if (!strncmp (string, "vertical-gradient", sizeof ("vertical-gradient"))) {
-	        type = ORIENTATION_VERT;
-	} else if (!strncmp (string, "horizontal-gradient", sizeof ("horizontal-gradient"))) {
-	        type = ORIENTATION_HORIZ;
-	} else {
-	        type = ORIENTATION_SOLID;
+	if (string) {
+		if (!strncmp (string, "vertical-gradient", sizeof ("vertical-gradient"))) {
+			type = ORIENTATION_VERT;
+		} else if (!strncmp (string, "horizontal-gradient", sizeof ("horizontal-gradient"))) {
+			type = ORIENTATION_HORIZ;
+		}
+		g_free (string);
 	}
 	   
-	g_free (string);
 	return type;
 }
 

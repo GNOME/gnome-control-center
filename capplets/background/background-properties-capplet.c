@@ -82,21 +82,20 @@ set_picture_is_present (gboolean present)
 static BackgroundType
 string_to_background_type (char *string)
 {
-        BackgroundType type;
+        BackgroundType type = BACKGROUND_TYPE_NO_PICTURE;
       
-	if (!strncmp (string, "wallpaper", sizeof ("wallpaper"))) {
-	        type =  BACKGROUND_TYPE_WALLPAPER;
-	} else if (!strncmp (string, "centered", sizeof ("centered"))) {
-	        type =  BACKGROUND_TYPE_CENTERED;
-	} else if (!strncmp (string, "scaled", sizeof ("scaled"))) {
-	        type =  BACKGROUND_TYPE_SCALED;
-	} else if (!strncmp (string, "stretched", sizeof ("stretched"))) {
-	        type =  BACKGROUND_TYPE_STRETCHED;
-	} else {
-	        type = BACKGROUND_TYPE_NO_PICTURE;
+	if (string) {
+		if (!strncmp (string, "wallpaper", sizeof ("wallpaper"))) {
+			type =  BACKGROUND_TYPE_WALLPAPER;
+		} else if (!strncmp (string, "centered", sizeof ("centered"))) {
+			type =  BACKGROUND_TYPE_CENTERED;
+		} else if (!strncmp (string, "scaled", sizeof ("scaled"))) {
+			type =  BACKGROUND_TYPE_SCALED;
+		} else if (!strncmp (string, "stretched", sizeof ("stretched"))) {
+			type =  BACKGROUND_TYPE_STRETCHED;
+		}
+		g_free (string);
 	}
-
-	g_free (string);
 
 	return type;
 }
@@ -137,17 +136,17 @@ orientation_to_string (orientation_t orientation)
 static orientation_t
 string_to_orientation (gchar *string)
 {
-        orientation_t type;
+        orientation_t type = ORIENTATION_SOLID;
 
-	if (!strncmp (string, "vertical-gradient", sizeof ("vertical-gradient"))) {
-	        type = ORIENTATION_VERT;
-	} else if (!strncmp (string, "horizontal-gradient", sizeof ("horizontal-gradient"))) {
-	        type = ORIENTATION_HORIZ;
-	} else {
-	        type = ORIENTATION_SOLID;
+	if (string) {
+		if (!strncmp (string, "vertical-gradient", sizeof ("vertical-gradient"))) {
+			type = ORIENTATION_VERT;
+		} else if (!strncmp (string, "horizontal-gradient", sizeof ("horizontal-gradient"))) {
+			type = ORIENTATION_HORIZ;
+		}
+		g_free (string);
 	}
 	   
-	g_free (string);
 	return type;
 }
 

@@ -267,7 +267,7 @@ drawing_area_expose_event (GtkWidget      *widget,
 static void
 left_handed_toggle_cb (GConfPropertyEditor *peditor, const gchar *key, const GConfValue *value, GtkWidget *image)
 {
-	if (gconf_value_get_bool (value))
+	if (value && gconf_value_get_bool (value))
 		g_object_set (G_OBJECT (image),
 			      "pixbuf", left_handed_pixbuf,
 			      NULL);

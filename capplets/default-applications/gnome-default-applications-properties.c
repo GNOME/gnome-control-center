@@ -125,7 +125,7 @@ read_editor (GConfClient *client,
 		if (possible_editors[i].in_path == FALSE)
 			continue;
 		
-		if (strcmp (editor, possible_editors[i].executable_name) == 0 &&
+		if (editor && strcmp (editor, possible_editors[i].executable_name) == 0 &&
 		    needs_term == possible_editors[i].needs_term &&
 		    accepts_lineno == possible_editors[i].accepts_lineno) {
 			gtk_entry_set_text (GTK_ENTRY (WID ("text_select_combo_entry")),
@@ -209,7 +209,7 @@ read_browser (GConfClient *client,
 		if (possible_browsers[i].in_path == FALSE)
 			continue;
 		
-		if (strcmp (browser, possible_browsers[i].executable_name) == 0 &&
+		if (browser && strcmp (browser, possible_browsers[i].executable_name) == 0 &&
 		    needs_term == possible_browsers[i].needs_term &&
 		    nremote == possible_browsers[i].nremote) {
 			gtk_entry_set_text (GTK_ENTRY (WID ("web_select_combo_entry")),
@@ -291,7 +291,7 @@ read_help_viewer (GConfClient *client,
 		if (possible_help_viewers[i].in_path == FALSE)
 			continue;
 		
-		if (strcmp (help_viewer, possible_help_viewers[i].executable_name) == 0 &&
+		if (help_viewer && strcmp (help_viewer, possible_help_viewers[i].executable_name) == 0 &&
 		    needs_term == possible_help_viewers[i].needs_term &&
 		    accepts_lineno == possible_help_viewers[i].accepts_urls) {
 			gtk_entry_set_text (GTK_ENTRY (WID ("help_select_combo_entry")),

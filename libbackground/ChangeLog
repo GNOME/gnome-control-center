@@ -1,5 +1,8 @@
 2002-02-04  Lauris Kaplinski  <lauris@ximian.com>
 
+	* preferences.c (read_wptype_from_string): Do not crash on NULL
+	(read_orientation_from_string): Ditto
+
 	* applier.c (bg_applier_dispose): Replace deprecated methods
 	(draw_disabled_message): Use gtk_image instead of gtk_pixmap,
 	replace deprecated methods
