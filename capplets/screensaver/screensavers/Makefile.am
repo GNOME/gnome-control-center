@@ -11,7 +11,8 @@ Screensavers_DATA = \
 	compass.xml \
 	flag.xml \
 	qix.xml \
-	attraction.xml
+	attraction.xml \
+	rorschach.xml
 
 screensavers_msgs = \
 	ant.xml.h \
@@ -19,7 +20,8 @@ screensavers_msgs = \
 	compass.xml.h \
 	flag.xml.h \
 	qix.xml.h \
-	attraction.xml.h
+	attraction.xml.h \
+	rorschach.xml.h
 
 EXTRA_DIST = $(Screensavers_DATA) $(screensavers_msgs) README
 
@@ -33,14 +35,12 @@ extract_labels_LDADD = \
 	$(GNOME_XML_LIB)
 
 ant.xml.h: $(srcdir)/ant.xml extract-labels
-	./extract-labels $(srcdir)/ant.xml
 bsod.xml.h: $(srcdir)/bsod.xml extract-labels
-	./extract-labels $(srcdir)/bsod.xml
 compass.xml.h: $(srcdir)/compass.xml extract-labels
-	./extract-labels $(srcdir)/compass.xml
 flag.xml.h: $(srcdir)/flag.xml extract-labels
-	./extract-labels $(srcdir)/flag.xml
 qix.xml.h: $(srcdir)/qix.xml extract-labels
-	./extract-labels $(srcdir)/qix.xml
 attraction.xml.h: $(srcdir)/attraction.xml extract-labels
-	./extract-labels $(srcdir)/attraction.xml
+rorschach.xml.h: $(srcdir)/rorschach.xml extract-labels
+
+%.xml.h: %.xml
+	./extract-labels $<

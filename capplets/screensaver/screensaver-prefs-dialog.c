@@ -460,7 +460,7 @@ write_boolean (xmlNodePtr argument_data, GTree *widget_db)
 	    (GTK_TOGGLE_BUTTON (set->value_widget)))
 		return xmlGetProp (argument_data, "arg-set");
 	else 
-		return NULL;
+		return xmlGetProp (argument_data, "arg-unset");
 }
 
 static gchar *
