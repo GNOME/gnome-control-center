@@ -183,7 +183,6 @@ set_moniker_cb (BonoboPropertyBag *bag, BonoboArg *arg, guint arg_id,
 static void
 close_cb (void)
 {
-	gtk_widget_destroy (widget);
 	gtk_object_destroy (GTK_OBJECT (dialog));
 	control = NULL;
 }
