@@ -152,8 +152,7 @@ static GdkPixbuf *tile_pixbuf        (GdkPixbuf         *dest_pixbuf,
 				      GdkRectangle      *field_geom,
 				      guint              alpha,
 				      GdkColor          *bg_color);
-static guchar *fill_gradient         (gint               w,
-				      gint               h,
+static void fill_gradient            (GdkPixbuf         *pixbuf,
 				      GdkColor          *c1,
 				      GdkColor          *c2,
 				      orientation_t      orientation);
@@ -598,8 +597,6 @@ run_render_pipeline (Applier *applier, const Preferences *prefs)
 static void
 render_background (Applier *applier, const Preferences *prefs) 
 {
-	guchar *gradient_data;
-
 	g_return_if_fail (applier != NULL);
 	g_return_if_fail (IS_APPLIER (applier));
 	g_return_if_fail (prefs != NULL);
@@ -616,24 +613,15 @@ render_background (Applier *applier, const Preferences *prefs)
 				applier->p->grad_geom.x = 32;
 		}
 
-		/* N.B. This raw gradient data is freed automatically when the
-		 * pixbuf is destroyed */
-
-		gradient_data = 
-			fill_gradient (applier->p->grad_geom.x,
-				       applier->p->grad_geom.y,
-				       prefs->color1, prefs->color2, 
-				       prefs->orientation);
-
 		applier->p->pixbuf = 
-			gdk_pixbuf_new_from_data (gradient_data,
-						  GDK_COLORSPACE_RGB, 
-						  FALSE, 8, 
-						  applier->p->grad_geom.x, 
-						  applier->p->grad_geom.y, 
-						  applier->p->grad_geom.x * 3, 
-						  (GdkPixbufDestroyNotify) g_free, 
-						  NULL);
+			gdk_pixbuf_new (GDK_COLORSPACE_RGB, 
+					FALSE, 8, 
+					applier->p->grad_geom.x, 
+					applier->p->grad_geom.y);
+
+		fill_gradient (applier->p->pixbuf,
+			       prefs->color1, prefs->color2, 
+			       prefs->orientation);
 
 		applier->p->pixbuf_render_geom.width = applier->p->grad_geom.x;
 		applier->p->pixbuf_render_geom.height = applier->p->grad_geom.y;
@@ -795,7 +783,7 @@ render_to_screen (Applier *applier, const Preferences *prefs)
 			 applier->p->pixbuf_render_geom.y,
 			 applier->p->pixbuf_render_geom.width,
 			 applier->p->pixbuf_render_geom.height,
-			 GDK_RGB_DITHER_NORMAL, 0, 0);
+			 GDK_RGB_DITHER_MAX, 0, 0);
 	} else {
 		if (applier->p->type == APPLIER_ROOT) {
 			gdk_color_alloc (gdk_window_get_colormap (GDK_ROOT_PARENT()), prefs->color1);
@@ -1147,17 +1135,21 @@ tile_pixbuf (GdkPixbuf *dest_pixbuf,
  * into a GdkPixbuf
  */
 
-static guchar *
-fill_gradient (gint w, gint h, GdkColor *c1, GdkColor *c2, orientation_t orientation)
+static void
+fill_gradient (GdkPixbuf     *pixbuf,
+	       GdkColor      *c1,
+	       GdkColor      *c2,
+	       orientation_t  orientation)
 {
-	gint i, j;
-	gint dr, dg, db;
-	gint gs1, w3;
-	gint vc = (orientation == ORIENTATION_HORIZ || (c1 == c2));
-	guchar *b, *row, *d, *buffer;
-
-	buffer = g_new (guchar, w * h * 3);
-	d = buffer;
+	int i, j;
+	int dr, dg, db;
+	int gs1;
+	int vc = ((orientation == ORIENTATION_HORIZ) || (c1 == c2));
+	int w = gdk_pixbuf_get_width (pixbuf);
+	int h = gdk_pixbuf_get_height (pixbuf);
+	guchar *b, *row;
+	guchar *d = gdk_pixbuf_get_pixels (pixbuf);
+	int rowstride = gdk_pixbuf_get_rowstride (pixbuf);
 
 #define R1 c1->red
 #define G1 c1->green
@@ -1171,9 +1163,8 @@ fill_gradient (gint w, gint h, GdkColor *c1, GdkColor *c2, orientation_t orienta
 	db = B2 - B1;
 
 	gs1 = (orientation == ORIENTATION_VERT) ? h-1 : w-1;
-	w3 = w*3;
 
-	row = g_new (guchar, w3);
+	row = g_new (unsigned char, rowstride);
 
 	if (vc) {
 		b = row;
@@ -1186,8 +1177,7 @@ fill_gradient (gint w, gint h, GdkColor *c1, GdkColor *c2, orientation_t orienta
 
 	for (i = 0; i < h; i++) {
 		if (!vc) {
-			guchar cr, cg, cb;
-
+			unsigned char cr, cg, cb;
 			cr = (R1 + (i * dr) / gs1) >> 8;
 			cg = (G1 + (i * dg) / gs1) >> 8;
 			cb = (B1 + (i * db) / gs1) >> 8;
@@ -1198,8 +1188,8 @@ fill_gradient (gint w, gint h, GdkColor *c1, GdkColor *c2, orientation_t orienta
 				*b++ = cb;
 			}
 		}
-		memcpy (d, row, w3);
-		d += w3;
+		memcpy (d, row, w * 3);
+		d += rowstride;
 	}
 
 #undef R1
@@ -1210,8 +1200,6 @@ fill_gradient (gint w, gint h, GdkColor *c1, GdkColor *c2, orientation_t orienta
 #undef B2
 
 	g_free (row);
-
-	return buffer;
 }
 
 /* Boolean predicates to assist optimization and rendering */
