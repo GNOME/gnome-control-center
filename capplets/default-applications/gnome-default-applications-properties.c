@@ -430,8 +430,6 @@ dialog_response (GtkDialog *widget,
 {
 
 	switch (response_id) {
-	case 0: /* Help */
-		break;
 	case 1: /* Apply */
 		write_editor (dialog);
 		write_browser (dialog);
@@ -439,15 +437,7 @@ dialog_response (GtkDialog *widget,
 		write_terminal (dialog);
 		
 		break;
-	case 2: /* OK */
-		write_editor (dialog);
-		write_browser (dialog);
-		write_help_viewer (dialog);
-		write_terminal (dialog);
-
-		gtk_main_quit ();
-		break;
-	case 3:  /* Close */
+	case 2:  /* Close */
 	case -4: /* keyboard esc or WM close */
 		gtk_main_quit ();
 		break;
