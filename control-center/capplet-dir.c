@@ -475,7 +475,7 @@ capplet_control_launch (const gchar *capplet_name, gchar *window_title)
 
 	tmp = g_strdup (capplet_name);
 	if ((tmp1 = strstr (tmp, "-capplet")) != NULL) *tmp1 = '\0';
-	moniker = g_strconcat ("archive:user-archive#archiverdb:", tmp, NULL);
+	moniker = g_strconcat ("config:/apps/gnome-control-center-1.6/", tmp, NULL);
 	while ((tmp1 = strchr (tmp, '-'))) *tmp1 = '_';
 
 	oaf_iid = g_strconcat ("OAFIID:Bonobo_Control_Capplet_", tmp, NULL);
