@@ -498,6 +498,7 @@ setup_dialog (GladeXML *dialog)
 		    G_CALLBACK (drag_data_received_cb),
 		    dialog);
 
+  capplet_set_icon (widget, "gnome-ccthemes.png");
   gtk_widget_show (widget);
 }
 
@@ -519,7 +520,6 @@ main (int argc, char *argv[])
 
   dialog = create_dialog ();
   setup_dialog (dialog);
-
   gtk_main ();
 
   return 0;
