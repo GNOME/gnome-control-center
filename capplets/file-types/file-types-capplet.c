@@ -82,8 +82,8 @@ GtkWidget *add_button = NULL;
 GtkWidget *icon_entry, *extension_list, *mime_list;
 GtkWidget *default_menu;
 GtkWidget *application_button, *viewer_button;
-GtkLabel  *icon_entry_label;
-GtkWidget *description_entry, *mime_label;
+GtkLabel  *mime_label;
+GtkWidget *description_entry;
 
 /*
  *  main
@@ -336,6 +336,7 @@ init_mime_capplet (void)
 	
 	capplet = capplet_widget_new ();
 
+
 	/* Main vertical box */                    
 	main_vbox = gtk_vbox_new (FALSE, GNOME_PAD);
 	gtk_container_set_border_width (GTK_CONTAINER (main_vbox), GNOME_PAD_SMALL);
@@ -344,7 +345,9 @@ init_mime_capplet (void)
         /* Main horizontal box and mime list*/                    
         hbox = gtk_hbox_new (FALSE, GNOME_PAD);
         gtk_box_pack_start (GTK_BOX (main_vbox), hbox, TRUE, TRUE, 0);
+	g_print ("stuff going on.\n");
         mime_list_container = create_mime_list_and_scroller ();
+	g_print ("mime created\n");
         gtk_box_pack_start (GTK_BOX (hbox), mime_list_container, TRUE, TRUE, 0);         
 	
 	vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
@@ -382,11 +385,11 @@ init_mime_capplet (void)
 	gtk_widget_set_usize (description_entry, 200, 0);
 	gtk_widget_make_bold (GTK_WIDGET (description_entry));
 	
-	mime_label = gtk_label_new (_("Mime Type"));	
+	mime_label = GTK_LABEL (gtk_label_new (_("Mime Type")));	
 	gtk_label_set_justify (GTK_LABEL (mime_label), GTK_JUSTIFY_RIGHT);
 	alignment = gtk_alignment_new (0, 0, 0, 0);
 	gtk_box_pack_start (GTK_BOX (vbox), alignment, FALSE, FALSE, 0);
-	gtk_container_add (GTK_CONTAINER (alignment), mime_label);
+	gtk_container_add (GTK_CONTAINER (alignment), GTK_WIDGET(mime_label));
 
 	/* Set up bottom left area.  This contains two buttons to add
 	   and delete mime types */
@@ -514,6 +517,8 @@ init_mime_capplet (void)
 	gtk_clist_select_row (GTK_CLIST (mime_list), 0, 0);
 
 	capplet_widget_state_changed (CAPPLET_WIDGET (capplet), FALSE);
+
+	g_print ("initialized\n");
 }
 
 
@@ -557,11 +562,6 @@ nautilus_mime_type_capplet_update_info (const char *mime_type) {
 	icon_name = gnome_vfs_mime_get_icon (mime_type);
 	path = pixmap_file (icon_name);
 	nautilus_mime_type_icon_entry_set_icon (NAUTILUS_MIME_ICON_ENTRY (icon_entry), path);
-	if (path != NULL) {
-		g_free (path);
-	} else {
-		gtk_label_set_text (icon_entry_label, NULL);		
-	}
 
 	/* Indicate default action */	
 	action = gnome_vfs_mime_get_default_action (mime_type);
@@ -1028,8 +1028,11 @@ populate_mime_list (GList *type_list, GtkCList *clist)
 			}
 
 			/* Set up action column */
+
+			g_print ("will get action soon\n");
 			pixbuf = NULL;
 			action = gnome_vfs_mime_get_default_action (mime_string);
+			g_print ("got action \n");
 			if (action != NULL) {
 				switch (action->action_type) {
 					case GNOME_VFS_MIME_ACTION_TYPE_APPLICATION:
@@ -1113,7 +1116,9 @@ create_mime_list_and_scroller (void)
         gtk_clist_set_auto_sort (GTK_CLIST (mime_list), TRUE);
 
 	type_list = gnome_vfs_get_registered_mime_types ();
+	g_print ("populate begin \n");
 	populate_mime_list (type_list, GTK_CLIST (mime_list));
+	g_print ("populate end \n");
 	gnome_vfs_mime_registered_mime_type_list_free (type_list);
 	
         gtk_clist_columns_autosize (GTK_CLIST (mime_list));
