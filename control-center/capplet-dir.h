@@ -90,6 +90,7 @@ void             capplet_dir_init           (CappletDirView *(*cb)
 
 CappletDir      *get_root_capplet_dir       (void);
 
-GtkWidget       *capplet_control_launch     (const gchar *capplet_name);
+GtkWidget       *capplet_control_launch     (const gchar *capplet_name,
+					     gchar *window_title);
 
 #endif /* __CAPPLET_DIR_H */

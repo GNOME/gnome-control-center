@@ -70,7 +70,7 @@ main (int argc, char **argv)
 		capplet_dir_entry_activate 
 			(CAPPLET_DIR_ENTRY (get_root_capplet_dir ()), NULL);
 	} else {
-		if ((app = capplet_control_launch (capplet)) == NULL)
+		if ((app = capplet_control_launch (capplet, _("Configuraiton"))) == NULL)
 			return -1;
 
 		gtk_signal_connect (GTK_OBJECT (app), "destroy",

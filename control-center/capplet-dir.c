@@ -199,7 +199,7 @@ capplet_activate (Capplet *capplet)
 
 #warning FIXME: this should probably be root-manager-helper
 	if (!strncmp (entry->exec[0], "gnomecc", strlen ("gnomecc")))
-		capplet_control_launch (entry->exec[2]);
+		capplet_control_launch (entry->exec[2], entry->name);
 	else if (!strncmp (entry->exec[0], "root-manager", strlen ("root-manager")))
 		start_capplet_through_root_manager (entry);
 	else
@@ -409,7 +409,7 @@ capplet_cancel_cb (GtkWidget *widget, GtkWidget *app)
  */
 
 GtkWidget *
-capplet_control_launch (const gchar *capplet_name)
+capplet_control_launch (const gchar *capplet_name, gchar *window_title)
 {
 	gchar *oaf_iid, *moniker;
 	gchar *tmp, *tmp1;
@@ -450,7 +450,7 @@ capplet_control_launch (const gchar *capplet_name)
 	}
 
 	/* FIXME: Use a human-readable capplet name here */
-	app = gnome_dialog_new (_("Capplet"), GNOME_STOCK_BUTTON_OK,
+	app = gnome_dialog_new (window_title, GNOME_STOCK_BUTTON_OK,
 				GNOME_STOCK_BUTTON_CANCEL, NULL);
 	gtk_object_set_data (GTK_OBJECT (app), "property-control", property_control);
 	control = bonobo_widget_new_control_from_objref (control_ref, CORBA_OBJECT_NIL);
