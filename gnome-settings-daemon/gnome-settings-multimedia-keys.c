@@ -99,12 +99,24 @@ static void
 execute (char *cmd, gboolean sync)
 {
 	gboolean retval;
+	gchar **argv;
+	gint argc;
+	
+	retval = FALSE;
 
-	if (sync != FALSE)
-		retval = g_spawn_command_line_sync
-			(cmd, NULL, NULL, NULL, NULL);
-	else
-		retval = g_spawn_command_line_async (cmd, NULL);
+	if (g_shell_parse_argv (cmd, &argc, &argv, NULL)) {
+		if (sync != FALSE) {
+			retval = g_spawn_sync (g_get_home_dir (), 
+			                       argv, NULL, G_SPAWN_SEARCH_PATH,
+			                       NULL, NULL, NULL, NULL, NULL, NULL);
+		}
+		else {
+			retval = g_spawn_async (g_get_home_dir (), 
+			                        argv, NULL, G_SPAWN_SEARCH_PATH,
+			                        NULL, NULL, NULL, NULL);
+		}
+		g_strfreev (argv);
+	}
 
 	if (retval == FALSE)
 	{
