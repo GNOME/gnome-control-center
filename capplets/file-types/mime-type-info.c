@@ -359,7 +359,7 @@ mime_category_info_load_all (MimeCategoryInfo *category)
 
 	if (appid != NULL && *appid != '\0') {
 		tmp = g_strdup_printf ("Custom %s", category->name);
-		app = gnome_vfs_mime_application_new_from_id (appid);
+		app = gnome_vfs_application_registry_get_mime_application (appid);
 		if (!strcmp (app->name, tmp)) {
 			category->default_action = NULL;
 			category->custom_line = app->command;
