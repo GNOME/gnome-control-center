@@ -462,7 +462,7 @@ cb_load_CDE_file (GtkButton *button, GtkWidget *dialog)
 {
 	if (fsel == NULL) {
 		fsel = GTK_FILE_SELECTION (
-			gtk_file_selection_new (_("Select CDE AccessX file")));
+			gtk_file_selection_new (_("Import Feature Settings File")));
 
 		gtk_file_selection_hide_fileop_buttons (GTK_FILE_SELECTION (fsel));
 		gtk_file_selection_set_select_multiple (GTK_FILE_SELECTION (fsel), FALSE);
