@@ -48,7 +48,7 @@ static GList          *remove_list = NULL;
 static GConfChangeSet *changeset = NULL;
 
 static void
-add_cb (GtkButton *button, GladeXML *dialog) 
+add_mime_cb (GtkButton *button, GladeXML *dialog) 
 {
 	GObject         *add_dialog;
 
@@ -184,7 +184,7 @@ create_dialog (void)
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
 	gtk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE);
 
-	g_signal_connect (G_OBJECT (WID ("add_button")), "clicked", (GCallback) add_cb, dialog);
+	g_signal_connect (G_OBJECT (WID ("add_mime_button")), "clicked", (GCallback) add_mime_cb, dialog);
 	g_signal_connect (G_OBJECT (WID ("edit_button")), "clicked", (GCallback) edit_cb, dialog);
 	g_signal_connect (G_OBJECT (WID ("remove_button")), "clicked", (GCallback) remove_cb, dialog);
 	g_signal_connect (G_OBJECT (selection), "changed", (GCallback) selection_changed_cb, dialog);
