@@ -5,7 +5,8 @@ INCLUDES = -I. -I$(srcdir) 				\
 	$(OAF_CFLAGS)					\
 	$(GNOME_INCLUDEDIR)				\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
-	-I$(includedir)
+	-I$(includedir)					\
+	$(WERROR)
 
 bin_PROGRAMS = nautilus-mime-type-capplet
 
