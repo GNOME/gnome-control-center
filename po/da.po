@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gnome kontrolcenter 1.3.0\n"
 "POT-Creation-Date: 2001-01-03 19:58+0100\n"
-"PO-Revision-Date: 2001-01-04 07:19+01:00\n"
+"PO-Revision-Date: 2001-01-27 07:19+01:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: danish <sslug-locale@sslug.dk>\n"
 "MIME-Version: 1.0\n"
@@ -30,7 +30,7 @@ msgstr ""
 #: capplets/session-properties/session-properties.c:345
 #: capplets/theme-switcher/gui.c:368
 #: capplets/wm-properties/wm-properties-capplet.c:646
-#: new-control-center/capplet-dir-view.c:495
+#: new-control-center/capplet-dir-view.c:522
 msgid "Close"
 msgstr "Luk"
 
@@ -2432,7 +2432,6 @@ msgstr ""
 #: capplets/wm-properties/wm-properties-capplet.c:859
 #: capplets/wm-properties/wm-properties-capplet.c:866
 #: capplets/wm-properties/wm-properties-capplet.c:1012
-#: root-manager/userdialogs.c:193
 msgid "OK"
 msgstr "Ok"
 
@@ -2521,15 +2520,15 @@ msgstr ""
 "En opstartsfejl opstod da 'wm-properties-capplet' startede.\n"
 "Afbryder...\n"
 
-#: new-control-center/capplet-dir-view.c:289
+#: new-control-center/capplet-dir-view.c:321
 msgid "GNOME Control Center"
 msgstr "Gnome kontrolcenter"
 
-#: new-control-center/capplet-dir-view.c:290
+#: new-control-center/capplet-dir-view.c:322
 msgid "Desktop properties manager."
 msgstr "Behandling af egenskaber for skrivebord."
 
-#: new-control-center/capplet-dir-view.c:492
+#: new-control-center/capplet-dir-view.c:519
 msgid ""
 "No help is available/installed. Please make sure you\n"
 "have the GNOME User's Guide installed on your system."
@@ -2590,77 +2589,81 @@ msgstr "Ikonliste"
 msgid "Tree"
 msgstr "Træ"
 
-#: root-manager/root-manager.c:107
+#: root-manager/root-manager.c:110
 #, c-format
 msgid "Got error %d.\n"
 msgstr "Fejl %d.\n"
 
-#: root-manager/root-manager.c:203
+#: root-manager/root-manager.c:206
 #, c-format
 msgid "Password for %s"
 msgstr "Adgangskode for %s"
 
-#: root-manager/root-manager.c:398
+#: root-manager/root-manager.c:401
 msgid "Consistency checking is not turned on."
 msgstr "Konsistenstjek er ikke slået på."
 
-#: root-manager/root-manager.c:400
+#: root-manager/root-manager.c:403
 msgid "Block is fine."
 msgstr "Blok er fin."
 
-#: root-manager/root-manager.c:402
+#: root-manager/root-manager.c:405
 msgid "Block freed twice."
 msgstr "Blok frigivet to gange."
 
-#: root-manager/root-manager.c:404
+#: root-manager/root-manager.c:407
 msgid "Memory before the block was clobbered."
 msgstr "Lager før blok var tilsmudset."
 
-#: root-manager/root-manager.c:406
+#: root-manager/root-manager.c:409
 msgid "Memory after the block was clobbered."
 msgstr "Lager efter blokken var tilsmudset."
 
-#: root-manager/root-manager.c:437
+#: root-manager/root-manager.c:440
 msgid "userhelper must be setuid root\n"
 msgstr "brugerhjælpeprogram skal være setuid root\n"
 
-#: root-manager/root-manager.c:548
+#: root-manager/root-manager.c:445 root-manager/root-manager.c:451
+msgid "Usage: root-helper fd\n"
+msgstr "Brug: root-helper fd\n"
+
+#: root-manager/root-manager.c:555
 #, c-format
 msgid "PAM returned = %d\n"
 msgstr "PAM returnerede = %d\n"
 
-#: root-manager/root-manager.c:549
+#: root-manager/root-manager.c:556
 #, c-format
 msgid "about to authenticate \"%s\"\n"
 msgstr "ved at godkende '%s'\n"
 
-#: root-manager/root-manager.c:625 root-manager/root-manager.c:693
+#: root-manager/root-manager.c:633 root-manager/root-manager.c:701
 #, c-format
 msgid "about to exec \"%s\"\n"
 msgstr "Ved at udføre '%s'\n"
 
-#: root-manager/root-manager-wrap.c:49
+#: root-manager/root-manager-wrap.c:56
 msgid "Pipe error.\n"
 msgstr "Rør-fejl.\n"
 
-#: root-manager/root-manager-wrap.c:55
+#: root-manager/root-manager-wrap.c:62
 msgid "Cannot fork().\n"
 msgstr "Kan ikke forgrene (fork()).\n"
 
-#: root-manager/root-manager-wrap.c:76 root-manager/root-manager-wrap.c:86
+#: root-manager/root-manager-wrap.c:83 root-manager/root-manager-wrap.c:93
 msgid "dup2() error.\n"
 msgstr "dup2() fejl.\n"
 
-#: root-manager/root-manager-wrap.c:116
+#: root-manager/root-manager-wrap.c:123
 #, c-format
 msgid "execl() error, errno=%d\n"
 msgstr "execl() fejl, fejlnr=%d\n"
 
-#: root-manager/root-manager-wrap.c:145
+#: root-manager/root-manager-wrap.c:152
 msgid "Information updated."
 msgstr "Information er opdateret."
 
-#: root-manager/root-manager-wrap.c:148
+#: root-manager/root-manager-wrap.c:155
 msgid ""
 "The password you typed is invalid.\n"
 "Please try again."
@@ -2668,7 +2671,7 @@ msgstr ""
 "Adgangskoden som du tastede er ugyldig.\n"
 "Prøv venligst igen."
 
-#: root-manager/root-manager-wrap.c:151
+#: root-manager/root-manager-wrap.c:158
 msgid ""
 "One or more of the changed fields is invalid.\n"
 "This is probably due to either colons or commas in one of the fields.\n"
@@ -2678,11 +2681,11 @@ msgstr ""
 "Dette skyldes formentlig enten kommaer eller semikolonner i et af felterne.\n"
 "Fjern venligst disse og prøv igen."
 
-#: root-manager/root-manager-wrap.c:154
+#: root-manager/root-manager-wrap.c:161
 msgid "Password resetting error."
 msgstr "Fejl ved klargøring af adgangskode."
 
-#: root-manager/root-manager-wrap.c:157
+#: root-manager/root-manager-wrap.c:164
 msgid ""
 "Some systems files are locked.\n"
 "Please try again in a few moments."
@@ -2690,19 +2693,19 @@ msgstr ""
 "Nogen systemfiler er låste.\n"
 "Prøv venligst igen om et øjeblik."
 
-#: root-manager/root-manager-wrap.c:160
+#: root-manager/root-manager-wrap.c:167
 msgid "Unknown user."
 msgstr "Ukendt bruger."
 
-#: root-manager/root-manager-wrap.c:163
+#: root-manager/root-manager-wrap.c:170
 msgid "Insufficient rights."
 msgstr "Utilstrækkelige rettigheder."
 
-#: root-manager/root-manager-wrap.c:166
+#: root-manager/root-manager-wrap.c:173
 msgid "Invalid call to sub process."
 msgstr "Ugyldigt kald af underproces"
 
-#: root-manager/root-manager-wrap.c:169
+#: root-manager/root-manager-wrap.c:176
 msgid ""
 "Your current shell is not listed in /etc/shells.\n"
 "You are not allowed to change your shell.\n"
@@ -2713,366 +2716,52 @@ msgstr ""
 "Tal med din systemadministrator."
 
 #. well, this is unlikely to work either, but at least we tried...
-#: root-manager/root-manager-wrap.c:173
+#: root-manager/root-manager-wrap.c:180
 msgid "Out of memory."
 msgstr "Løbet tør for hukommelse."
 
-#: root-manager/root-manager-wrap.c:176
+#: root-manager/root-manager-wrap.c:183
 msgid "The exec() call failed."
 msgstr "exec() kaldet mislykkedes."
 
-#: root-manager/root-manager-wrap.c:179
+#: root-manager/root-manager-wrap.c:186
 msgid "Failed to find selected program."
 msgstr "Kunne ikke finde det valgte program."
 
-#: root-manager/root-manager-wrap.c:182
+#: root-manager/root-manager-wrap.c:189
 msgid "Unknown error."
 msgstr "Ukendt fejl."
 
-#: root-manager/root-manager-wrap.c:185
+#: root-manager/root-manager-wrap.c:192
 msgid "Unknown exit code."
 msgstr "Ukendt afslutningskode."
 
-#: root-manager/root-manager-wrap.c:241
+#: root-manager/root-manager-wrap.c:280
 msgid "Input"
 msgstr "Inddata"
 
-#: root-manager/root-manager-wrap.c:350
+#: root-manager/root-manager-wrap.c:386
 #, c-format
 msgid "Need %d responses.\n"
 msgstr "Behøver %d svar.\n"
 
-#: root-manager/root-manager-wrap.c:375
-#, c-format
+#: root-manager/root-manager-wrap.c:411
 msgid ""
-"In order to run \"%s\" with root's privileges, additional information is "
-"required."
+"In order to make changes to your system, you\n"
+"must enter the administrator (root) password."
 msgstr ""
-"For at udføre '%s' uden root's rettigheder, er yderligere information "
-"påkrævet."
+"For at lave ændringer på dit system skal du\n"
+"indtaste adgangskoden for systemadministoren (root)."
 
-#: root-manager/root-manager-wrap.c:388 root-manager/userdialogs.c:81
+#: root-manager/root-manager-wrap.c:425
 msgid "Error"
 msgstr "Fejl"
 
-#: root-manager/root-manager-wrap.c:402
+#: root-manager/root-manager-wrap.c:439
 #, c-format
 msgid "You want %d response(s) from %d entry fields!?!?!\n"
 msgstr "Du ønsker %d svar fra %d indgangsfelter!?!?\n"
 
-#: root-manager/userdialogs.c:35
-msgid "Message"
-msgstr "Meddelelse"
-
-#: root-manager/userdialogs.c:124 root-manager/userdialogs.c:126
-#: root-manager/userdialogs.c:185
-msgid "Prompt"
-msgstr "Ledetekst"
-
-#~ msgid "Solid Color"
-#~ msgstr "Fast farve"
-
-#~ msgid "Vertical Gradient"
-#~ msgstr "Lodret farveovergang"
-
-#~ msgid "Horizontal Gradent"
-#~ msgstr "Vandret farveovergang"
-
-#~ msgid "Tiled"
-#~ msgstr "Stablet"
-
-#~ msgid "Centered"
-#~ msgstr "Centreret"
-
-#~ msgid "Scaled (keep aspect ratio)"
-#~ msgstr "Skaleret (bevar størrelsesforhold)"
-
-#~ msgid "Stretched (change aspect ratio)"
-#~ msgstr "Strukket (ændr størrelsesforhold)"
-
-#~ msgid "Embossed"
-#~ msgstr "Forhøjet"
-
-#~ msgid "Color"
-#~ msgstr "Farve"
-
-#~ msgid "Solid"
-#~ msgstr "Ensfarvet"
-
-#~ msgid "Vertical"
-#~ msgstr "Lodret"
-
-#~ msgid "Scaled"
-#~ msgstr "Skaleret"
-
-#~ msgid "Disable background selection"
-#~ msgstr "Brug ikke baggrundsvælger"
-
-#~ msgid "Auto-repeat"
-#~ msgstr "Auto-gentag"
-
-#~ msgid "Repeat delay"
-#~ msgstr "Ventetid før gentagelse"
-
-#~ msgid "Click on keypress"
-#~ msgstr "Klik ved tastetryk"
-
-#~ msgid "Menu Options"
-#~ msgstr "Menuindstillinger"
-
-#~ msgid "Can detach and move menus"
-#~ msgstr "Kan afrive og flytte menulinier"
-
-#~ msgid "Statusbar Options"
-#~ msgstr "Statuslinieindstillinger"
-
-#~ msgid "Toolbar Options"
-#~ msgstr "Værktøjslinieindstillinger"
-
-#~ msgid "Can detach and move toolbars"
-#~ msgstr "Kan afrive og flytte værktøjslinier"
-
-#~ msgid "Dialog Layout"
-#~ msgstr "Dialogudseende"
-
-#~ msgid ""
-#~ "Default value\n"
-#~ "Spread buttons out\n"
-#~ "Put buttons on edges\n"
-#~ "Left-justify buttons\n"
-#~ "Right-justify buttons\n"
-#~ msgstr ""
-#~ "Standardværdi\n"
-#~ "Spred knapper ud\n"
-#~ "Placér knapper ved kanten\n"
-#~ "Venstrejustér knapper\n"
-#~ "Højrejustér knapper\n"
-
-#~ msgid "Dialog Behavior"
-#~ msgstr "Dialogopførsel"
-
-#~ msgid "Dialog position:"
-#~ msgstr "Dialogplacering:"
-
-#~ msgid ""
-#~ "Let window manager decide\n"
-#~ "Center of the screen\n"
-#~ "At the mouse pointer\n"
-#~ msgstr ""
-#~ "Lad vindushåndtereren bestemme\n"
-#~ "Midt på skærmen\n"
-#~ "Ved musepegeren\n"
-
-#~ msgid ""
-#~ "Dialogs are like other windows\n"
-#~ "Dialogs are treated specially by the window manager\n"
-#~ msgstr ""
-#~ "Dialoger er som andre vinduer\n"
-#~ "Dialoger behandles som specielle af vindusbehandleren\n"
-
-#~ msgid "window3"
-#~ msgstr "vindue3"
-
-#~ msgid "GNOME MDI Options"
-#~ msgstr "GNOME MDI-indstillinger"
-
-#~ msgid "Default MDI Mode:"
-#~ msgstr "Standard MDI-modus:"
-
-#~ msgid "MDI notebook tab position:"
-#~ msgstr "Arkfaneposition for MDI-notesblok:"
-
-#~ msgid ""
-#~ "Notebook\n"
-#~ "Toplevel\n"
-#~ "Modal\n"
-#~ msgstr ""
-#~ "Notesblok\n"
-#~ "Topniveau\n"
-#~ "Modal\n"
-
-#~ msgid ""
-#~ "Left\n"
-#~ "Right\n"
-#~ "Top\n"
-#~ "Bottom\n"
-#~ msgstr ""
-#~ "Venstre\n"
-#~ "Højre\n"
-#~ "Top\n"
-#~ "Bund\n"
-
-#~ msgid "id of the capplet -- assigned by the control-center"
-#~ msgstr "kappletens id -- tildelt af kontrolcenteret"
-
-#~ msgid "ID"
-#~ msgstr "ID"
-
-#~ msgid "Multi-capplet id."
-#~ msgstr "Multi-kapplet-id."
-
-#~ msgid "CAPID"
-#~ msgstr "CAPID"
-
-#~ msgid "X ID of the socket it's plugged into"
-#~ msgstr "X-id af sokkelen som den er tilsluttet"
-
-#~ msgid "XID"
-#~ msgstr "XID"
-
-#~ msgid "IOR of the control-center"
-#~ msgstr "Kontrolcenterets IOR"
-
-#~ msgid "IOR"
-#~ msgstr "IOR"
-
-#~ msgid "Initialize session settings"
-#~ msgstr "Start sessionsindstillinger"
-
-#~ msgid "Ignore default action.  Used for custom init-session cases"
-#~ msgstr ""
-#~ "Ignorer standard handling. Bruges når du anvender din egen init-session"
-
-#~ msgid "Get an XML description of the capplet's state"
-#~ msgstr "Find en XML beskrivelse af cappletens status"
-
-#~ msgid "DO_GET"
-#~ msgstr "DO_GET"
-
-#~ msgid "Read an XML description of the capplet's state and apply it"
-#~ msgstr "Læs en XML beskrivelse af cappletens status og anvend den"
-
-#~ msgid "DO_SET"
-#~ msgstr "DO_SET"
-
-#~ msgid "Help with the GNOME control-center."
-#~ msgstr "Gnome kontrolcenterets hjælp."
-
-#~ msgid "About"
-#~ msgstr "Om..."
-
-#~ msgid "About the GNOME control-center."
-#~ msgstr "Om Gnome kontrolcentret."
-
-#~ msgid "Up"
-#~ msgstr "Op"
-
-#~ msgid "Parent Group"
-#~ msgstr "Forældergruppe"
-
-#~ msgid "Preferences"
-#~ msgstr "Brugervalg"
-
-#~ msgid "Control Center Preferences"
-#~ msgstr "Brugervalg for kontrolcenter"
-
-#~ msgid "Control Center"
-#~ msgstr "Kontrolcenter"
-
-#~ msgid "Set background image."
-#~ msgstr "Vælg baggrundsbillede"
-
-#~ msgid "IMAGE-FILE"
-#~ msgstr "IMAGE-FILE"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting "
-#~ "'background-properties-capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "en opstartsfejl opstod under opstart af 'background-properties-capplet'.\n"
-#~ "afslutter...\n"
-
-#~ msgid "Set parameters from saved state and exit"
-#~ msgstr "Brug parametre fra gemt status og afslut"
-
-#~ msgid "IMAGE"
-#~ msgstr "IMAGE"
-
-#~ msgid "Sets the wallpaper to the value specified"
-#~ msgstr "Sætter baggrundsbilledet til den angivede værdi"
-
-#~ msgid "COLOR"
-#~ msgstr "COLOR"
-
-#~ msgid "Specifies the background color"
-#~ msgstr "Angiver baggrundsfarven"
-
-#~ msgid "Specifies end background color for gradient"
-#~ msgstr "Angiver slutbaggrundsfarve for overgang"
-
-#~ msgid "ORIENT"
-#~ msgstr "ORIENT"
-
-#~ msgid "Gradient orientation: vertical or horizontal"
-#~ msgstr "Overgangsorientering: lodret eller vandret"
-
-#~ msgid "MODE"
-#~ msgstr "MODE"
-
-#~ msgid "Display wallpaper: tiled, centered, scaled or ratio"
-#~ msgstr "Vis baggrund: side-om-side, centreret, skaleret eller ratio"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'bell-properties-capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "en opstartsfejl opstod under start af 'bell-properties-capplet'.\n"
-#~ "afbryder...\n"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting "
-#~ "'keyboard-properties-capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "en opstartsfejl opstod under start af 'keyboard-properties-capplet'.\n"
-#~ "afslutter...\n"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'mouse-properties-capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "en opstartsfejl opstod under start af 'mouse-properties-capplet'.\n"
-#~ "afbryder...\n"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'sound-properties-capplet'."
-#~ msgstr "en opstartsfejl opstod da 'sound-properties-capplet' startede."
-
-#~ msgid "Select sound file"
-#~ msgstr "Vælg lydfil"
-
-#~ msgid ""
-#~ "This copy of the GNOME control center was not compiled with sound support"
-#~ msgstr ""
-#~ "Denne kopi af Gnome kontrolcentret er ikke kompileret med lydunderstøttelse"
-
-#~ msgid "The sound file for this event does not exist."
-#~ msgstr "Lydfilen for denne hændelse eksisterer ikke"
-
-#~ msgid ""
-#~ "The sound file for this event does not exist.\n"
-#~ "You may want to install the gnome-audio package\n"
-#~ "for a set of default sounds."
-#~ msgstr ""
-#~ "Lydfilen for denne hændelse eksisterer ikke.\n"
-#~ "Du skal installere gnome-audio-pakken hvis du\n"
-#~ "ønsker et sæt standardlyde."
-
-#~ msgid "Default value"
-#~ msgstr "Standardværdi"
-
-#~ msgid "Put buttons on edges"
-#~ msgstr "Placér knapper på kanterne"
-
-#~ msgid "Left-justify buttons"
-#~ msgstr "Venstrejustér knapper"
-
-#~ msgid "Right-justify buttons"
-#~ msgstr "Højrejustér knapper"
-
-#~ msgid "Toplevel"
-#~ msgstr "Topniveau"
-
-#~ msgid "Modal"
-#~ msgstr "Modal"
+#: root-manager/root-manager-wrap.c:445
+msgid "Run Unprivileged"
+msgstr "Kør upriviligeret"
