@@ -1,5 +1,14 @@
 2000-09-10  Bradford Hovinen  <hovinen@helixcode.com>
 
+	* capplets/new-background-properties/prefs-widget.c 
+	(read_preferences): Set gradient/wallpaper/background controls'
+	sensitivity depending on whether they are enabled
+
+	* capplets/new-background-properties/applier.c 
+	(renderer_render_to_screen): Fixed solid, no wallpaper case to
+	work correctly with preview window; don't set root pixmap if
+	neither wallpaper nor gradient enabled
+
 	* all: Chnaged #include "config.h" to #ifdef HAVE_CONFIG_H ...
 	* *.desktop, *.directory: Updated French translations
 	* po/POTFILES.in: Added screensaver XML files

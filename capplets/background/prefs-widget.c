@@ -294,14 +294,17 @@ read_preferences (PrefsWidget *prefs_widget, Preferences *prefs)
 		 prefs->color2->red, prefs->color2->green,
 		 prefs->color2->blue, 0xffff);
 
-	if (prefs->gradient_enabled)
+	if (prefs->gradient_enabled) {
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
 					      (WID ("gradient_select")),
 					      TRUE);
-	else
+		set_gradient_controls_sensitive (prefs_widget, TRUE);
+	} else {
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
 					      (WID ("solid_select")),
 					      TRUE);
+		set_gradient_controls_sensitive (prefs_widget, FALSE);
+	}
 
 	if (prefs->orientation == ORIENTATION_VERT)
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
@@ -320,10 +323,13 @@ read_preferences (PrefsWidget *prefs_widget, Preferences *prefs)
 			 prefs->wallpaper_sel_path);
 
 	if (prefs->wallpaper_filename) {
-		 entry = gnome_file_entry_gtk_entry 
-			 (GNOME_FILE_ENTRY (widget));
-		 gtk_entry_set_text (GTK_ENTRY (entry),
-				     prefs->wallpaper_filename);
+		entry = gnome_file_entry_gtk_entry 
+			(GNOME_FILE_ENTRY (widget));
+		gtk_entry_set_text (GTK_ENTRY (entry),
+				    prefs->wallpaper_filename);
+		set_wallpaper_controls_sensitive (prefs_widget, TRUE);
+	} else {
+		set_wallpaper_controls_sensitive (prefs_widget, FALSE);
 	}
 
 	switch (prefs->wallpaper_type) {
@@ -356,14 +362,17 @@ read_preferences (PrefsWidget *prefs_widget, Preferences *prefs)
 		break;
 	}
 
-	if (prefs->enabled)
+	if (prefs->enabled) {
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
 					      (WID ("disable_toggle")),
 					      FALSE);
-	else
+		set_background_controls_sensitive (prefs_widget, TRUE);
+	} else {
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
 					      (WID ("disable_toggle")),
 					      TRUE);
+		set_background_controls_sensitive (prefs_widget, FALSE);
+	}
 
 	preferences_apply_preview (prefs);
 }
@@ -495,7 +504,8 @@ wallpaper_entry_changed_cb (GtkEntry *e, PrefsWidget *prefs_widget)
 
 	if (prefs_widget->prefs->wallpaper_filename &&
 	    strlen (prefs_widget->prefs->wallpaper_filename) &&
-	    g_strcasecmp (prefs_widget->prefs->wallpaper_filename, "none")) {
+	    g_strcasecmp (prefs_widget->prefs->wallpaper_filename, "none")) 
+	{
 		set_wallpaper_controls_sensitive (prefs_widget, TRUE);
 		prefs_widget->prefs->wallpaper_enabled = TRUE;
 	} else {

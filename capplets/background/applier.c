@@ -663,14 +663,14 @@ renderer_render_background (Renderer *renderer)
 				renderer->gwidth = 32;
 		}
 
+		if (renderer->pixbuf != NULL)
+			gdk_pixbuf_unref (renderer->pixbuf);
+
 		renderer->gradient_data = 
 			fill_gradient (renderer->gwidth, renderer->gheight,
 				       renderer->prefs->color1, 
 				       renderer->prefs->color2, 
 				       renderer->prefs->orientation);
-
-		if (renderer->pixbuf != NULL)
-			gdk_pixbuf_unref (renderer->pixbuf);
 
 		renderer->pixbuf = 
 			gdk_pixbuf_new_from_data (renderer->gradient_data,
@@ -837,12 +837,27 @@ renderer_render_to_screen (Renderer *renderer)
 			 renderer->wwidth, renderer->wheight,
 			 GDK_RGB_DITHER_NORMAL, 0, 0);
 	} else {
-		gdk_window_set_background (GDK_ROOT_PARENT(), 
-					   renderer->prefs->color1);
-		gdk_window_clear (GDK_ROOT_PARENT());
+		if (renderer->is_root) {
+			gdk_color_alloc (gdk_window_get_colormap
+					 (GDK_ROOT_PARENT()), 
+					 renderer->prefs->color1);
+			gdk_window_set_background (GDK_ROOT_PARENT (), 
+						   renderer->prefs->color1);
+			gdk_window_clear (GDK_ROOT_PARENT ());
+		} else {
+			gdk_color_alloc (gdk_window_get_colormap
+					 (preview_widget->window), 
+					 renderer->prefs->color1);
+			gdk_gc_set_foreground (gc, renderer->prefs->color1);
+			XFillRectangle (GDK_DISPLAY (), renderer->pixmap, xgc, 
+					renderer->x, renderer->y, 
+					renderer->width, renderer->height);
+		}
 	}
 
-	if (renderer->is_root && !renderer->is_set)
+	if (renderer->is_root && !renderer->is_set &&
+	    (renderer->prefs->wallpaper_enabled || 
+	     renderer->prefs->gradient_enabled))
 		set_root_pixmap (renderer->pixmap);
 
 	gdk_gc_destroy (gc);
