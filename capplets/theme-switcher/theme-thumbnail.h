@@ -9,7 +9,8 @@ typedef void (* ThemeThumbnailFunc) (GdkPixbuf          *pixbuf,
 				     gpointer            data);
 
 
-GdkPixbuf *generate_theme_thumbnail         (GnomeThemeMetaInfo *meta_theme_info);
+GdkPixbuf *generate_theme_thumbnail         (GnomeThemeMetaInfo *meta_theme_info,
+					     gboolean            clear_cache);
 void       generate_theme_thumbnail_async   (GnomeThemeMetaInfo *meta_theme_info,
 					     ThemeThumbnailFunc  func,
 					     gpointer            data,

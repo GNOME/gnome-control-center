@@ -417,7 +417,7 @@ load_meta_themes (GtkTreeView *tree_view,
 	  blurb = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s</span>\n%s",
 				   list_meta_theme_info->readable_name, list_meta_theme_info->comment);
 	  if (i <= MAX_ELEMENTS_BEFORE_SCROLLING)
-	    pixbuf = generate_theme_thumbnail (list_meta_theme_info);
+	    pixbuf = generate_theme_thumbnail (list_meta_theme_info, FALSE);
 	  else
 	    pixbuf = default_image;
 
@@ -622,9 +622,13 @@ add_custom_row_to_meta_theme (const gchar  *current_gtk_theme,
   tree_view = WID ("meta_theme_treeview");
   model = gtk_tree_view_get_model (GTK_TREE_VIEW (tree_view));
 
+  g_free (custom_meta_theme_info.gtk_theme_name);
   custom_meta_theme_info.gtk_theme_name = g_strdup (current_gtk_theme);
+  g_free (custom_meta_theme_info.metacity_theme_name);
   custom_meta_theme_info.metacity_theme_name = g_strdup (current_window_theme);
+  g_free (custom_meta_theme_info.icon_theme_name);
   custom_meta_theme_info.icon_theme_name = g_strdup (current_icon_theme);
+  g_free (custom_meta_theme_info.name);
   custom_meta_theme_info.name = g_strdup ("Custom Theme");
 
   for (valid = gtk_tree_model_get_iter_first (model, &iter);
@@ -655,7 +659,9 @@ add_custom_row_to_meta_theme (const gchar  *current_gtk_theme,
   /* Commented out because it does odd things */
   /*theme_thumbnail_invalidate_cache (&custom_meta_theme_info);*/
 
-  pixbuf = generate_theme_thumbnail (&custom_meta_theme_info);
+  pixbuf = generate_theme_thumbnail (&custom_meta_theme_info, TRUE);
+  g_print ("%d %d\n" ,gdk_pixbuf_get_width (pixbuf), gdk_pixbuf_get_height (pixbuf));
+  gdk_pixbuf_save (pixbuf, "/tmp/out.png", "png", NULL, NULL);
 
   gtk_list_store_set (GTK_LIST_STORE (model), &iter,
 		      META_THEME_PIXBUF_COLUMN, pixbuf,

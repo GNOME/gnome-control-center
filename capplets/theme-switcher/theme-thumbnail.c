@@ -121,6 +121,7 @@ create_image (ThemeThumbnailData *theme_thumbnail_data,
   GdkPixbuf *folder_icon;
   char *folder_icon_name;
   char *foo;
+
   settings = gtk_settings_get_default ();
   g_object_set (G_OBJECT (settings),
 		"gtk-theme-name", (char *) theme_thumbnail_data->control_theme_name->data,
@@ -384,7 +385,6 @@ message_from_child (GIOChannel   *source,
                                     1024,
                                     &bytes_read,
                                     NULL);
-
   switch (status)
     {
     case G_IO_STATUS_NORMAL:
@@ -448,7 +448,8 @@ theme_thumbnail_invalidate_cache (GnomeThemeMetaInfo *meta_theme_info)
 }
 
 GdkPixbuf *
-generate_theme_thumbnail (GnomeThemeMetaInfo *meta_theme_info)
+generate_theme_thumbnail (GnomeThemeMetaInfo *meta_theme_info,
+			  gboolean            clear_cache)
 {
   GdkPixbuf *retval = NULL;
   GdkPixbuf *pixbuf = NULL;
@@ -461,7 +462,10 @@ generate_theme_thumbnail (GnomeThemeMetaInfo *meta_theme_info)
   pixbuf = g_hash_table_lookup (theme_hash, meta_theme_info->name);
   if (pixbuf != NULL)
     {
-      return pixbuf;
+      if (clear_cache)
+	;//g_hash_table_remove (theme_hash, meta_theme_info->name);
+      else
+	return pixbuf;
     }
 
   pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, ICON_SIZE_WIDTH, ICON_SIZE_HEIGHT);
@@ -478,7 +482,16 @@ generate_theme_thumbnail (GnomeThemeMetaInfo *meta_theme_info)
 
   for (i = 0; i < ICON_SIZE_HEIGHT; i++)
     {
-      read (pipe_from_factory_fd[0], pixels + (rowstride)*i, ICON_SIZE_WIDTH * gdk_pixbuf_get_n_channels (pixbuf));
+      gint j = 0;
+      gint bytes_read;
+
+      do
+	{
+	  bytes_read = read (pipe_from_factory_fd[0], pixels + (rowstride)*i + j, ICON_SIZE_WIDTH * gdk_pixbuf_get_n_channels (pixbuf) - j);
+	  if (bytes_read > 0)
+	    j += bytes_read;
+	}
+      while (j < ICON_SIZE_WIDTH * gdk_pixbuf_get_n_channels (pixbuf));
     }
 
   retval = gdk_pixbuf_scale_simple (pixbuf, ICON_SIZE_WIDTH/2, ICON_SIZE_HEIGHT/2, GDK_INTERP_BILINEAR);

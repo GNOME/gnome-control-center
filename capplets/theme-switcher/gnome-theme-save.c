@@ -55,6 +55,7 @@ setup_directory_structure (const gchar  *theme_name,
 static gboolean
 write_theme_to_disk (GnomeThemeMetaInfo  *meta_theme_info,
 		     const gchar         *theme_name,
+		     const gchar         *theme_description,
 		     GError             **error)
 {
   gchar *dir;
@@ -74,7 +75,7 @@ write_theme_to_disk (GnomeThemeMetaInfo  *meta_theme_info,
   gnome_vfs_truncate_handle (handle, 0);
 
   /* start making the theme file */
-  str = g_strdup_printf (theme_header, theme_name, theme_name);
+  str = g_strdup_printf (theme_header, theme_name, theme_description);
   gnome_vfs_write (handle, str, strlen (str), &bytes_written);
   g_free (str);
 
@@ -103,6 +104,7 @@ write_theme_to_disk (GnomeThemeMetaInfo  *meta_theme_info,
 static gboolean
 save_theme_to_disk (GnomeThemeMetaInfo  *meta_theme_info,
 		    const gchar         *theme_name,
+		    const gchar         *theme_description,
 		    GError             **error)
 {
   if (! check_theme_name (theme_name, error))
@@ -111,7 +113,7 @@ save_theme_to_disk (GnomeThemeMetaInfo  *meta_theme_info,
   if (! setup_directory_structure (theme_name, error))
     return FALSE;
 
-  if (! write_theme_to_disk (meta_theme_info, theme_name, error))
+  if (! write_theme_to_disk (meta_theme_info, theme_name, theme_description, error))
     return FALSE;
   
   return TRUE;
@@ -123,20 +125,32 @@ save_dialog_response (GtkWidget *save_dialog,
 		      gpointer   data)
 {
   GnomeThemeMetaInfo *meta_theme_info;
+  char *theme_description = NULL;
   GError *error = NULL;
 
   if (response_id == GTK_RESPONSE_OK)
     {
       GladeXML *dialog;
       GtkWidget *entry;
+      GtkWidget *text_view;
+      GtkTextBuffer *buffer;
       const char *theme_name;
+      GtkTextIter start_iter;
+      GtkTextIter end_iter;
 
+      
       dialog = gnome_theme_manager_get_theme_dialog ();
       entry = WID ("save_dialog_entry");
-
       theme_name = gtk_entry_get_text (GTK_ENTRY (entry));
+      
+      text_view = WID ("save_dialog_textview");
+      buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));
+      gtk_text_buffer_get_start_iter (buffer, &start_iter);
+      gtk_text_buffer_get_end_iter (buffer, &end_iter);
+      theme_description = gtk_text_buffer_get_text (buffer, &start_iter, &end_iter, FALSE);
+      
       meta_theme_info = (GnomeThemeMetaInfo *) g_object_get_data (G_OBJECT (save_dialog), "meta-theme-info");
-      if (! save_theme_to_disk (meta_theme_info, theme_name, &error))
+      if (! save_theme_to_disk (meta_theme_info, theme_name, theme_description, &error))
 	{
 	  goto out;
 	}
@@ -145,6 +159,7 @@ save_dialog_response (GtkWidget *save_dialog,
  out:
   g_clear_error (&error);
   gtk_widget_hide (save_dialog);
+  g_free (theme_description);
 }
 
 static inline gboolean
