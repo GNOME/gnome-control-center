@@ -225,7 +225,7 @@ real_sync (BonoboConfigDatabase *db,
 			    archiver_db->doc, STORE_MASK_PREVIOUS);
 
 	arg = bonobo_arg_new (BONOBO_ARG_NULL);
-	bonobo_event_source_notify_listeners (archiver_db->es, "Bonobo/ConfigDatabase:sync", arg, &ev);
+	bonobo_event_source_notify_listeners (archiver_db->es, "Bonobo/ConfigDatabase:sync", arg, ev);
 	bonobo_arg_release (arg);
 }
 
