@@ -1,16 +1,16 @@
 # control-center de.po
 # Copyright (C) 1998 Free Software Foundation, Inc.
-# Karl Eichwalder <ke@suse.de>, 1999.
+# Karl Eichwalder <ke@suse.de>, 1999, 2000.
 # Matthias Warkus <mawa@iname.com>, 1999.
 # Karsten Weiss <karsten@addx.au.s.shuttle.de>, 1999.
 # Carsten Schaar <nhadcasc@fs-maphy.uni-hannover.de>, 1998.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: control-center 1.0.51\n"
-"POT-Creation-Date: 2000-03-29 17:55-0500\n"
-"PO-Revision-Date: 2000-03-29 20:25+02:00\n"
-"Last-Translator: Matthias Warkus <mawa@iname.com>\n"
+"Project-Id-Version: control-center 1.0.52\n"
+"POT-Creation-Date: 2000-03-30 07:32+0200\n"
+"PO-Revision-Date: 2000-03-30 07:37+02:00\n"
+"Last-Translator: Karl Eichwalder <ke@suse.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
@@ -43,15 +43,15 @@ msgstr "Farben"
 
 #: capplets/background-properties/property-background.c:619
 msgid "Solid"
-msgstr ""
+msgstr "Einfarbig"
 
 #: capplets/background-properties/property-background.c:625
 msgid "Horizontal Gradient"
-msgstr ""
+msgstr "Horizontaler Farbverlauf"
 
 #: capplets/background-properties/property-background.c:631
 msgid "Vertical Gradient"
-msgstr ""
+msgstr "Vertikaler Farbverlauf"
 
 #: capplets/background-properties/property-background.c:667
 msgid "Primary Color"
@@ -106,7 +106,6 @@ msgid "Tiled"
 msgstr "Gefliest"
 
 #: capplets/background-properties/property-background.c:1104
-#: capplets/bell-properties/bell-properties.c:61
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:179
 #: capplets/keyboard-properties/keyboard-properties.c:91
 #: capplets/keyboard-properties/keyboard-properties.c:410
@@ -127,7 +126,6 @@ msgstr ""
 "ist."
 
 #: capplets/background-properties/property-background.c:1106
-#: capplets/bell-properties/bell-properties.c:63
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:181
 #: capplets/keyboard-properties/keyboard-properties.c:93
 #: capplets/keyboard-properties/keyboard-properties.c:412
@@ -196,38 +194,6 @@ msgstr "MODUS"
 msgid "Display wallpaper: tiled, centered, scaled or ratio"
 msgstr "Hintergrund anzeigen: gefliest, zentriert, skaliert oder maßstäblich"
 
-#: capplets/bell-properties/bell-properties.c:178
-msgid "Keyboard Bell"
-msgstr "Tastaturglocke"
-
-#: capplets/bell-properties/bell-properties.c:189
-#: capplets/keyboard-properties/keyboard-properties.c:258
-msgid "Volume"
-msgstr "Lautstärke"
-
-#: capplets/bell-properties/bell-properties.c:192
-#: capplets/keyboard-properties/keyboard-properties.c:261
-msgid "Pitch (Hz)"
-msgstr "Tonhöhe (Hz)"
-
-#: capplets/bell-properties/bell-properties.c:195
-#: capplets/keyboard-properties/keyboard-properties.c:264
-msgid "Duration (ms)"
-msgstr "Dauer (ms)"
-
-#: capplets/bell-properties/bell-properties.c:219
-#: capplets/keyboard-properties/keyboard-properties.c:276
-msgid "Test"
-msgstr "Testen"
-
-#: capplets/bell-properties/bell-properties.c:241
-msgid ""
-"an initialization error occurred while starting 'bell-properties-capplet'.\n"
-"aborting...\n"
-msgstr ""
-"Initialisierungsfehler beim Starten von »bell-properties-capplet«.\n"
-"Abbruch...\n"
-
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:237
 msgid "Gnome editor"
 msgstr "Gnome-Editor"
@@ -237,14 +203,28 @@ msgid "Run In Terminal"
 msgstr "Im Terminal ausführen"
 
 #: capplets/keyboard-properties/keyboard-properties.c:250
-#, fuzzy
 msgid "Keyboard bell"
 msgstr "Tastaturglocke"
 
+#: capplets/keyboard-properties/keyboard-properties.c:258
+msgid "Volume"
+msgstr "Lautstärke"
+
+#: capplets/keyboard-properties/keyboard-properties.c:261
+msgid "Pitch (Hz)"
+msgstr "Tonhöhe (Hz)"
+
+#: capplets/keyboard-properties/keyboard-properties.c:264
+msgid "Duration (ms)"
+msgstr "Dauer (ms)"
+
+#: capplets/keyboard-properties/keyboard-properties.c:276
+msgid "Test"
+msgstr "Testen"
+
 #: capplets/keyboard-properties/keyboard-properties.c:294
-#, fuzzy
 msgid "Keyboard repeat rate"
-msgstr "Geschwindigkeit"
+msgstr "Tastaturwiederholrate"
 
 #: capplets/keyboard-properties/keyboard-properties.c:304
 msgid "Enable auto-repeat"
@@ -1553,6 +1533,3 @@ msgstr ""
 #: control-center/main.c:194
 msgid "Control Center"
 msgstr "Kontrollzentrum"
-
-#~ msgid "Auto-repeat"
-#~ msgstr "Tastenwiederholung"
