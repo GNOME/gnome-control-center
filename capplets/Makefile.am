@@ -3,10 +3,12 @@ always_built_SUBDIRS =					\
 	default-applications desktop-links font		\
 	background keyboard mouse sound			\
 	file-types theme-switcher ui-properties		\
-	keybindings network
+	keybindings network windows
 
 SUBDIRS =  $(always_built_SUBDIRS)
 
 DIST_SUBDIRS = \
-	$(always_built_SUBDIRS)	\
-	windows
+	$(always_built_SUBDIRS)
+
+
+
