@@ -3,7 +3,8 @@ bin_PROGRAMS = gnome-keybinding-properties
 gnome_keybinding_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
 gnome_keybinding_properties_SOURCES = 	\
 	gnome-keybinding-properties.c	\
-	eggcellrendererkeys.c
+	eggcellrendererkeys.c		\
+	eggcellrendererkeys.h
 
 @INTLTOOL_DESKTOP_RULE@
 
