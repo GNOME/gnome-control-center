@@ -2,8 +2,7 @@ SUBDIRS = Sawfish
 
 capplets = \
 	cd \
-	legacy-applications \
-	session
+	legacy-applications
 
 ## Pixmaps
 
