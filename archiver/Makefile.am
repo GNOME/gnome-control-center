@@ -53,3 +53,7 @@ helix_config_manager_LDADD = \
 	$(GNOME_XML_LIB)						\
 	$(LIBGLADE_LIBS)						\
 	libhelix_archiver.a
+
+EXTRA_DIST = \
+	$(Locationmeta_DATA) \
+	$(glade_DATA)
