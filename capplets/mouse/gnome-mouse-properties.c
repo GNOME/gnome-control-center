@@ -53,7 +53,7 @@ static void
 apply_settings (Bonobo_ConfigDatabase db) 
 {
         unsigned char buttons[MAX_BUTTONS], i;
-        int nbuttons, num, max, den;
+        int nbuttons, num, den, idx_1 = 0, idx_3 = 1;
 	ulong accel, threshold;
         gboolean rtol;
 	CORBA_Environment ev;
@@ -63,9 +63,18 @@ apply_settings (Bonobo_ConfigDatabase db)
         rtol = bonobo_config_get_ulong (db, "/main/right-to-left", &ev);
 
         nbuttons = XGetPointerMapping (GDK_DISPLAY (), buttons, MAX_BUTTONS);
-        max = MIN (nbuttons, 3);
-        for (i = 0; i < max; i++)
-                buttons[i] = rtol ? (max - i) : (i + 1);
+
+        for (i = 0; i < nbuttons; i++) {
+		if (buttons[i] == 1)
+			idx_1 = i;
+		else if (buttons[i] == ((nbuttons < 3) ? 2 : 3))
+			idx_3 = i;
+	}
+
+	if ((rtol && idx_1 < idx_3) || (!rtol && idx_1 > idx_3)) {
+		buttons[idx_1] = ((nbuttons < 3) ? 2 : 3);
+		buttons[idx_3] = 1;
+	}
 
         XSetPointerMapping (GDK_DISPLAY (), buttons, nbuttons);
 
