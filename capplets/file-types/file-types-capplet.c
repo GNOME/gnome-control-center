@@ -1260,7 +1260,7 @@ nautilus_mime_type_capplet_get_selected_item_mime_type (void)
 	}
 
 	/* This is a single selection list, so we just use the first item in 
-	 * the list to retireve the data */
+	 * the list to retrieve the data */
 	row = GPOINTER_TO_INT (clist->selection->data);
 
 	mime_type = (const char *) gtk_clist_get_row_data (clist, row);
