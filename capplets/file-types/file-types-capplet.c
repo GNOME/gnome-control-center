@@ -34,6 +34,7 @@
 
 #include <capplet-widget.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
+#include <gdk/gdkprivate.h>
 #include <gnome.h>
 #include <gtk/gtk.h>
 #include <libgnomevfs/gnome-vfs-mime-handlers.h>
@@ -61,9 +62,13 @@ static void	 edit_default_clicked 		(GtkWidget 	*widget,
 						 gpointer   	data);
 static GtkWidget *create_mime_list_and_scroller (void);
 static char 	 *pixmap_file 			(const char 	*partial_path);
-
-
-static void 	ok_callback 		  	(void);
+static void 	 ok_callback 		  	(void);
+static void	 gtk_widget_make_bold 		(GtkWidget 	*widget);
+static GdkFont 	 *gdk_font_get_bold 		(const GdkFont  *plain_font);
+static void	 gtk_widget_set_font 		(GtkWidget 	*widget, 
+						 GdkFont 	*font);
+static void	 gtk_style_set_font 		(GtkStyle 	*style, 
+						 GdkFont 	*font);
 
 GtkWidget *capplet = NULL;
 GtkWidget *delete_button = NULL;
@@ -370,6 +375,7 @@ init_mime_capplet (void)
 	gtk_box_pack_start (GTK_BOX (vbox), alignment, FALSE, FALSE, 0);	
 	gtk_container_add (GTK_CONTAINER (alignment), description_entry);
 	gtk_widget_set_usize (description_entry, 200, 0);
+	gtk_widget_make_bold (GTK_WIDGET (description_entry));
 	
 	mime_label = gtk_label_new (_("Mime Type"));	
 	gtk_label_set_justify (GTK_LABEL (mime_label), GTK_JUSTIFY_RIGHT);
@@ -1178,4 +1184,141 @@ pixmap_file (const char *partial_path)
 		g_free (path);
 		return NULL;
 	}
+}
+
+
+/**
+ * gtk_label_make_bold.
+ *
+ * Switches the font of label to a bold equivalent.
+ * @label: The label.
+ **/
+
+static void
+gtk_widget_make_bold (GtkWidget *widget)
+{
+	GtkStyle *style;
+	GdkFont *bold_font;
+
+	g_return_if_fail (GTK_IS_WIDGET (widget));
+	style = gtk_widget_get_style (widget);
+
+	bold_font = gdk_font_get_bold (style->font);
+
+	if (bold_font == NULL) {
+		return;
+	}
+
+	gtk_widget_set_font (widget, bold_font);
+	gdk_font_unref (bold_font);
+}
+
+/**
+ * gtk_widget_set_font
+ *
+ * Sets the font for a widget's style, managing the style objects.
+ * @widget: The widget.
+ * @font: The font.
+ **/
+static void
+gtk_widget_set_font (GtkWidget *widget, GdkFont *font)
+{
+	GtkStyle *new_style;
+	
+	g_return_if_fail (GTK_IS_WIDGET (widget));
+	g_return_if_fail (font != NULL);
+	
+	new_style = gtk_style_copy (gtk_widget_get_style (widget));
+
+	gtk_style_set_font (new_style, font);
+	
+	gtk_widget_set_style (widget, new_style);
+	gtk_style_unref (new_style);
+}
+
+/**
+ * gtk_style_set_font
+ *
+ * Sets the font in a style object, managing the ref. counts.
+ * @style: The style to change.
+ * @font: The new font.
+ **/
+static void
+gtk_style_set_font (GtkStyle *style, GdkFont *font)
+{
+	g_return_if_fail (style != NULL);
+	g_return_if_fail (font != NULL);
+	
+	gdk_font_ref (font);
+	gdk_font_unref (style->font);
+	style->font = font;
+}
+
+/**
+ * gdk_font_get_bold
+ * @plain_font: A font.
+ * Returns: A bold variant of @plain_font or NULL.
+ *
+ * Tries to find a bold flavor of a given font. Returns NULL if none is available.
+ */
+static GdkFont *
+gdk_font_get_bold (const GdkFont *plain_font)
+{
+	const char *plain_name;
+	const char *scanner;
+	char *bold_name;
+	int count;
+	GSList *p;
+	GdkFont *result;
+	GdkFontPrivate *private_plain;
+
+	private_plain = (GdkFontPrivate *)plain_font;
+
+	if (private_plain->names == NULL) {
+		return NULL;
+	}
+
+
+	/* -foundry-family-weight-slant-sel_width-add-style-pixels-points-hor_res-ver_res-spacing-average_width-char_set_registry-char_set_encoding */
+
+	bold_name = NULL;
+	for (p = private_plain->names; p != NULL; p = p->next) {
+		plain_name = (const char *)p->data;
+		scanner = plain_name;
+
+		/* skip past foundry and family to weight */
+		for (count = 2; count > 0; count--) {
+			scanner = strchr (scanner + 1, '-');
+			if (!scanner) {
+				break;
+			}
+		}
+
+		if (!scanner) {
+			/* try the other names in the list */
+			continue;
+		}
+		g_assert (*scanner == '-');
+
+		/* copy "-foundry-family-" over */
+		scanner++;
+		bold_name = g_strndup (plain_name, scanner - plain_name);
+
+		/* skip weight */
+		scanner = strchr (scanner, '-');
+		g_assert (scanner != NULL);
+
+		/* add "bold" and copy everything past weight over */
+		bold_name = g_strconcat (bold_name, "bold", scanner, NULL);
+		break;
+	}
+	
+	if (bold_name == NULL) {
+		return NULL;
+	}
+	
+	result = gdk_font_load (bold_name);
+	g_free (bold_name);
+
+	return result;
 }
