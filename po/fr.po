@@ -13,10 +13,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: control-center 2.5.3\n"
+"Project-Id-Version: control-center 2.5.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-13 09:32-0500\n"
-"PO-Revision-Date: 2004-01-17 14:42+0100\n"
+"POT-Creation-Date: 2004-02-27 12:57+0100\n"
+"PO-Revision-Date: 2004-02-27 11:53+0100\n"
 "Last-Translator: Christophe Merlet (RedFox) <redfox@redfoxcenter.org>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -114,15 +114,19 @@ msgstr ""
 "préférences de la souris : %s"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:337
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:395
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:396
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr ""
 "Impossible d'importer les paramètres AccessX à partir du fichier « %s »"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:468
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:433
 msgid "Import Feature Settings File"
 msgstr "Importer le fichier de réglages des fonctionnalités"
+
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:437
+msgid "_Import"
+msgstr "_Importer"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:18
@@ -344,49 +348,49 @@ msgid "seconds"
 msgstr "secondes"
 
 #. solid
-#: capplets/background/background-properties-capplet.c:228
+#: capplets/background/background-properties-capplet.c:227
 msgid "Co_lor:"
 msgstr "C_ouleur :"
 
 #. horiz
-#: capplets/background/background-properties-capplet.c:232
+#: capplets/background/background-properties-capplet.c:231
 msgid "_Left color:"
 msgstr "Couleur de _gauche :"
 
-#: capplets/background/background-properties-capplet.c:233
+#: capplets/background/background-properties-capplet.c:232
 msgid "_Right color:"
 msgstr "Couleur de _droite :"
 
 #. vert
-#: capplets/background/background-properties-capplet.c:236
+#: capplets/background/background-properties-capplet.c:235
 msgid "Top co_lor:"
 msgstr "Couleur du _haut :"
 
-#: capplets/background/background-properties-capplet.c:237
+#: capplets/background/background-properties-capplet.c:236
 msgid "_Bottom color:"
 msgstr "Couleur du _bas :"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "_Tile"
 msgstr "_Mosaïque"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "C_enter"
 msgstr "_Centré"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "Sc_ale"
 msgstr "_Redimensionné"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "_Stretch"
 msgstr "_Étiré"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "_No Picture"
 msgstr "_Aucune image"
 
-#: capplets/background/background-properties-capplet.c:559
+#: capplets/background/background-properties-capplet.c:558
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:723
 #: capplets/keyboard/gnome-keyboard-properties.c:224
@@ -395,7 +399,7 @@ msgstr "_Aucune image"
 msgid "Retrieve and store legacy settings"
 msgstr "Récupérer et enregistrer une configuration antérieure"
 
-#: capplets/background/background-properties-capplet.c:585
+#: capplets/background/background-properties-capplet.c:584
 #: capplets/background/background-properties.glade.h:2
 msgid "Background Preferences"
 msgstr "Préférences de l'arrière-plan"
@@ -413,6 +417,7 @@ msgid "Horizontal gradient"
 msgstr "Dégradé horizontal"
 
 #: capplets/background/background-properties.glade.h:5
+#: capplets/background/gnome-background-properties.glade.h:4
 msgid "Pick a color"
 msgstr "Choisissez une couleur"
 
@@ -452,32 +457,24 @@ msgstr ""
 "Vous pouvez glisser des images sur la fenêtre pour définir l'arrière-plan."
 
 #: capplets/background/background.desktop.in.h:1
-#, fuzzy
 msgid "Change your Desktop Background settings"
-msgstr "Personnalise l'arrière-plan de votre bureau"
+msgstr "Modifi les réglages de l'arrière-plan de votre bureau"
 
 #: capplets/background/background.desktop.in.h:2
-#, fuzzy
 msgid "Desktop Background"
-msgstr "Arrière-plan"
+msgstr "Arrière-plan du bureau"
 
 #: capplets/background/gnome-background-properties.glade.h:1
 msgid "<b>Desktop _Wallpaper</b>"
 msgstr "<b>_Papier peint du bureau</b>"
 
 #: capplets/background/gnome-background-properties.glade.h:2
-#, fuzzy
 msgid "<b>_Desktop Colors</b>"
-msgstr "<b>_Couleurs du bureau</b> "
+msgstr "<b>_Couleurs du bureau</b>"
 
 #: capplets/background/gnome-background-properties.glade.h:3
-#, fuzzy
 msgid "Desktop Background Preferences"
-msgstr "Préférences de l'arrière-plan"
-
-#: capplets/background/gnome-background-properties.glade.h:4
-msgid "Zgjidh një ngjyrë"
-msgstr ""
+msgstr "Préférences de l'arrière-plan du bureau"
 
 #: capplets/background/gnome-background-properties.glade.h:5
 msgid "_Add Wallpaper"
@@ -489,6 +486,7 @@ msgstr "_Style :"
 
 #: capplets/background/gnome-wp-capplet.c:72
 #: capplets/common/capplet-util.c:340
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:326
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Il y a eu une erreur lors de l'affichage de l'aide : %s"
@@ -525,7 +523,7 @@ msgstr "Dégradé horizontal"
 msgid "Vertical Gradient"
 msgstr "Dégradé vertical"
 
-#: capplets/background/gnome-wp-info.c:46
+#: capplets/background/gnome-wp-info.c:49
 msgid "No Wallpaper"
 msgstr "Aucun papier peint"
 
@@ -623,84 +621,84 @@ msgstr "Connexion en cours..."
 msgid "Downloading..."
 msgstr "Téléchargement..."
 
-#: capplets/common/gconf-property-editor.c:172
+#: capplets/common/gconf-property-editor.c:170
 msgid "Key"
 msgstr "Touche"
 
-#: capplets/common/gconf-property-editor.c:173
+#: capplets/common/gconf-property-editor.c:171
 msgid "GConf key to which this property editor is attached"
 msgstr "Touche GConf à laquelle cet éditeur de paramètres est rattaché"
 
-#: capplets/common/gconf-property-editor.c:179
+#: capplets/common/gconf-property-editor.c:177
 msgid "Callback"
 msgstr "Fonction de rappel"
 
-#: capplets/common/gconf-property-editor.c:180
+#: capplets/common/gconf-property-editor.c:178
 msgid "Issue this callback when the value associated with key gets changed"
 msgstr ""
 "Émettre cette fonction de rappel quand la valeur associée à cette touche est "
 "modifiée"
 
-#: capplets/common/gconf-property-editor.c:185
+#: capplets/common/gconf-property-editor.c:183
 msgid "Change set"
 msgstr "Ensemble de changements"
 
-#: capplets/common/gconf-property-editor.c:186
+#: capplets/common/gconf-property-editor.c:184
 msgid ""
 "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
 "Ensemble de changements GConf à être transmit au client gconf en appuyant "
 "sur « Appliquer »"
 
-#: capplets/common/gconf-property-editor.c:191
+#: capplets/common/gconf-property-editor.c:189
 msgid "Conversion to widget callback"
 msgstr "Fonction de rappel de la conversion vers le widget"
 
-#: capplets/common/gconf-property-editor.c:192
+#: capplets/common/gconf-property-editor.c:190
 msgid ""
 "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr ""
 "Fonction de rappel devant être émise lorsque les données doivent être "
 "converties de GConf vers le widget"
 
-#: capplets/common/gconf-property-editor.c:197
+#: capplets/common/gconf-property-editor.c:195
 msgid "Conversion from widget callback"
 msgstr "Fonction de rappel pour la conversion à partir d'un widget"
 
-#: capplets/common/gconf-property-editor.c:198
+#: capplets/common/gconf-property-editor.c:196
 msgid ""
 "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr ""
 "Fonction de rappel devant être émise lorsque les données doivent être "
 "converties vers GConf à partir d'un widget"
 
-#: capplets/common/gconf-property-editor.c:203
+#: capplets/common/gconf-property-editor.c:201
 msgid "UI Control"
 msgstr "Contrôle de l'interface utilisateur"
 
-#: capplets/common/gconf-property-editor.c:204
+#: capplets/common/gconf-property-editor.c:202
 msgid "Object that controls the property (normally a widget)"
 msgstr "Objet qui contrôle le paramètre (normalement un widget)"
 
-#: capplets/common/gconf-property-editor.c:219
+#: capplets/common/gconf-property-editor.c:217
 msgid "Property editor object data"
 msgstr "données d'un objet éditeur de paramètres"
 
-#: capplets/common/gconf-property-editor.c:220
+#: capplets/common/gconf-property-editor.c:218
 msgid "Custom data required by the specific property editor"
 msgstr "Données particulières requises par l'éditeur de paramètres spécifique"
 
-#: capplets/common/gconf-property-editor.c:226
+#: capplets/common/gconf-property-editor.c:224
 msgid "Property editor data freeing callback"
 msgstr "Données de l'éditeur de paramètres qui libèrent la fonction de rappel"
 
-#: capplets/common/gconf-property-editor.c:227
+#: capplets/common/gconf-property-editor.c:225
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr ""
 "Fonction de rappel devant être émise lorsque les données de l'objet "
 "d'éditeur de paramètres doivent être libérées"
 
-#: capplets/common/gconf-property-editor.c:1541
+#: capplets/common/gconf-property-editor.c:1538
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -713,7 +711,7 @@ msgstr ""
 "Veuillez vous assurer qu'il existe et essayez de nouveau, ou choisissez une "
 "image d'arrière-plan différente."
 
-#: capplets/common/gconf-property-editor.c:1549
+#: capplets/common/gconf-property-editor.c:1546
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -726,9 +724,13 @@ msgstr ""
 "\n"
 "Veuillez plutôt sélectionner une image différente."
 
-#: capplets/common/gconf-property-editor.c:1640
+#: capplets/common/gconf-property-editor.c:1665
 msgid "Please select an image."
 msgstr "Veuillez sélectionner une image."
+
+#: capplets/common/gconf-property-editor.c:1670
+msgid "_Select"
+msgstr "_Sélectionner"
 
 #: capplets/default-applications/default-applications.desktop.in.h:1
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:18
@@ -753,7 +755,7 @@ msgstr "Encompass"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:12
 msgid "Firebird/FireFox"
-msgstr ""
+msgstr "Firebird/FireFox"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:13
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:14
@@ -769,9 +771,8 @@ msgid "Konqueror"
 msgstr "Konqueror"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:17
-#, fuzzy
 msgid "W3M Text Browser"
-msgstr "Navigateur texte Lynx"
+msgstr "Navigateur texte W3M"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:18
 msgid "Lynx Text Browser"
@@ -1123,20 +1124,20 @@ msgstr "Réglages par défaut"
 msgid "Screen %d Settings\n"
 msgstr "Réglages de l'écran %d\n"
 
-#: capplets/display/main.c:444
+#: capplets/display/main.c:445
 msgid "Screen Resolution Preferences"
 msgstr "Préférences de la résolution de l'écran"
 
-#: capplets/display/main.c:476
+#: capplets/display/main.c:482
 #, c-format
 msgid "_Make default for this computer (%s) only"
 msgstr "_Mettre par défaut pour cet ordinateur (%s) seulement"
 
-#: capplets/display/main.c:494
+#: capplets/display/main.c:500
 msgid "Options"
 msgstr "Options"
 
-#: capplets/display/main.c:515
+#: capplets/display/main.c:521
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
@@ -1151,19 +1152,19 @@ msgstr[1] ""
 "Test les nouveaux réglages. Si vous ne répondez pas dans %d secondes, les "
 "réglages précédents seront restaurés."
 
-#: capplets/display/main.c:564
+#: capplets/display/main.c:570
 msgid "Do you want to keep this resolution?"
 msgstr "Voulez-vous garder cette résolution ?"
 
-#: capplets/display/main.c:589
+#: capplets/display/main.c:595
 msgid "Use _previous resolution"
 msgstr "Utiliser la résolution _précédente"
 
-#: capplets/display/main.c:589
+#: capplets/display/main.c:595
 msgid "_Keep resolution"
 msgstr "_Garder la résolution"
 
-#: capplets/display/main.c:740
+#: capplets/display/main.c:746
 msgid ""
 "The XServer does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
@@ -1171,7 +1172,7 @@ msgstr ""
 "Le serveur X ne supporte pas l'extension XRandR. Le changement de résolution "
 "à la volée n'est pas disponible."
 
-#: capplets/display/main.c:748
+#: capplets/display/main.c:754
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
@@ -1179,12 +1180,16 @@ msgstr ""
 "La version de l'extension XRandR est incompatible avec ce programme. Le "
 "changement de résolution à la volée n'est pas disponible."
 
-#: capplets/file-types/file-types-capplet.c:196
+#: capplets/file-types/file-types-capplet.c:158
+msgid "Are you sure you want to permanently delete this entry?"
+msgstr "Êtes-vous sûr de vouloir supprimer définitivement cette entrée ?"
+
+#: capplets/file-types/file-types-capplet.c:210
 #: vfs-methods/themus/themus-properties-view.c:163
 msgid "Description"
 msgstr "Description"
 
-#: capplets/file-types/file-types-capplet.c:218
+#: capplets/file-types/file-types-capplet.c:232
 msgid "Extensions"
 msgstr "Extensions"
 
@@ -1385,9 +1390,8 @@ msgstr ""
 "ne doit pas contenir d'espace."
 
 #: capplets/file-types/mime-edit-dialog.c:857
-#, fuzzy
 msgid "A MIME type with that name already exists, overwrite?"
-msgstr "Un type MIME avec ce nom existe déjà, l'écraser ?"
+msgstr "Un type MIME avec ce nom existe déjà, voulez-vous l'écraser ?"
 
 #: capplets/file-types/mime-edit-dialog.c:929
 msgid "Category"
@@ -1701,7 +1705,7 @@ msgstr "Le type de l'accélération."
 
 #: capplets/keybindings/eggcellrendererkeys.c:240
 #: capplets/keybindings/gnome-keybinding-properties.c:235
-#: libbackground/applier.c:588 typing-break/drwright.c:464
+#: libbackground/applier.c:588 typing-break/drwright.c:473
 msgid "Disabled"
 msgstr "Désactivé"
 
@@ -1732,7 +1736,7 @@ msgstr "Bureau"
 msgid "Window Management"
 msgstr "Gestion des fenêtres"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:737
+#: capplets/keybindings/gnome-keybinding-properties.c:736
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1741,21 +1745,21 @@ msgstr ""
 "Le raccourci « %s » est déjà utilisé pour :\n"
 " « %s »\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:768
+#: capplets/keybindings/gnome-keybinding-properties.c:766
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 "Erreur lors de la définition du nouvel accélérateur dans la base de données "
 "de configuration : %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:818
+#: capplets/keybindings/gnome-keybinding-properties.c:812
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr ""
 "Erreur lors de la suppression de l'accélérateur dans la base de données de "
 "configuration : %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:967
+#: capplets/keybindings/gnome-keybinding-properties.c:960
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1763,11 +1767,11 @@ msgstr ""
 "Impossible de trouver un seul thème de clavier.  Cela veut dire que votre "
 "installation de GTK+ est vraisemblablement incomplète."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:989
+#: capplets/keybindings/gnome-keybinding-properties.c:982
 msgid "Action"
 msgstr "Action"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:1013
+#: capplets/keybindings/gnome-keybinding-properties.c:1006
 msgid "Shortcut"
 msgstr "Raccourci"
 
@@ -1844,14 +1848,12 @@ msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Lent</i></small>"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:10
-#, fuzzy
 msgid "A_vailable layouts:"
-msgstr "Langues disponibles"
+msgstr "_Agencements disponibles :"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:11
-#, fuzzy
 msgid "A_vailable options:"
-msgstr "Langues disponibles"
+msgstr "_Options disponibles :"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "All_ow postponing of breaks"
@@ -1886,14 +1888,12 @@ msgid "Keyboard _model:"
 msgstr "_Modèle du clavier :"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:21
-#, fuzzy
 msgid "Layout Options"
-msgstr "_Options de l'agencement :"
+msgstr "Options de l'agencement"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:22
-#, fuzzy
 msgid "Layouts"
-msgstr "Agencement"
+msgstr "Agencements"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid ""
@@ -1904,7 +1904,6 @@ msgstr ""
 "causer par une utilisation répétitive du clavier"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:24
-#, fuzzy
 msgid "Reset to de_faults"
 msgstr "_Réinitialiser aux valeurs par défaut"
 
@@ -1925,14 +1924,12 @@ msgid "_Delay:"
 msgstr "_Délai :"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:30
-#, fuzzy
 msgid "_Selected layouts:"
-msgstr "_Sélectionnez un éditeur :"
+msgstr "_Agencements sélectionnés :"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:31
-#, fuzzy
 msgid "_Selected options:"
-msgstr "_Options de l'image :"
+msgstr "_Options sélectionnées :"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:32
 msgid "_Speed:"
@@ -2324,6 +2321,8 @@ msgid ""
 "The gnome-theme-manager does not know how to change the themes on the "
 "current window manager."
 msgstr ""
+"Le gnome-theme-manager ne sais pas comment changer le thème du gestionnaire "
+"de fenêtres actuel."
 
 #: capplets/theme-switcher/gnome-theme-manager.c:665
 #: capplets/theme-switcher/gnome-theme-manager.c:725
@@ -2709,15 +2708,11 @@ msgstr "Utiliser le shell même si Nautilus est en marche."
 msgid "Could not initialize Bonobo"
 msgstr "Impossible d'initialiser Bonobo"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:325
-msgid "There was an error displaying help:"
-msgstr "Il y a eu une erreur lors de l'affichage de l'aide :"
-
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
 msgid "Slow Keys Alert"
 msgstr "Alerte de touches lentes"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
 msgid ""
 "You just held down the Shift key for 8 seconds.  This is the shortcut for "
 "the Slow Keys feature, which affects the way your keyboard works."
@@ -2726,20 +2721,19 @@ msgstr ""
 "pour activer la fonctionnalité des touches lentes, qui affecte la manière "
 "dont votre clavier fonctionne."
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
 msgid "Do you want to activate Slow Keys?"
 msgstr "Voulez-vous activer les touches lentes ?"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
-msgid "Do you want to deactivate Sticky Keys?"
-msgstr "Voulez-vous désactiver les touches collantes ?"
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:414
+msgid "Do you want to deactivate Slow Keys?"
+msgstr "Voulez-vous désactiver les touches lentes ?"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:424
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:425
 msgid "Sticky Keys Alert"
 msgstr "Alerte touches collantes"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:425
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
 msgid ""
 "You just pressed the Shift key 5 times in a row.  This is the shortcut for "
 "the Sticky Keys feature, which affects the way your keyboard works."
@@ -2748,7 +2742,7 @@ msgstr ""
 "pour activer la fonctionnalité des touches collantes, qui affecte la manière "
 "dont votre clavier fonctionne."
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
 msgid ""
 "You just pressed two keys at once, or pressed the Shift key 5 times in a "
 "row.  This turns off the Sticky Keys feature, which affects the way your "
@@ -2758,8 +2752,12 @@ msgstr ""
 "fois de suite. C'est le raccourci pour désactiver la fonctionnalité des "
 "touches collantes, qui affecte la manière dont votre clavier fonctionne."
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
 msgid "Do you want to activate Sticky Keys?"
+msgstr "Voulez-vous désactiver les touches collantes ?"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:429
+msgid "Do you want to deactivate Sticky Keys?"
 msgstr "Voulez-vous désactiver les touches collantes ?"
 
 #: gnome-settings-daemon/gnome-settings-font.c:102
@@ -2824,6 +2822,17 @@ msgid ""
 "- The result of <b>xprop -root | grep XKB</b>\n"
 "- The result of <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b>"
 msgstr ""
+"Erreur lors de l'activation de la configuration XKB.\n"
+"Probablement un problème interne au serveur X.\n"
+"\n"
+"Données de version du serveur X :\n"
+"%s\n"
+"%d\n"
+"%s\n"
+"Si vous rapportez cette situation comme une anomalie, veuillez inclure :\n"
+"- Le résultat de <b>xprop -root | grep XKB</b>\n"
+"- Le résultat de <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</"
+"b>"
 
 #: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:71
 msgid ""
@@ -2911,15 +2920,6 @@ msgstr "Écran"
 #: libbackground/applier.c:280
 msgid "Screen on which BGApplier is to draw"
 msgstr "Écran sur lequel BGApplier doit dessiner"
-
-#: libbackground/preview-file-selection.c:207
-msgid "Can't find an hbox, using a normal file selection"
-msgstr ""
-"Impossible de trouver une hbox, utilisation d'un sélecteur de fichier normal"
-
-#: libbackground/preview-file-selection.c:212
-msgid "Preview"
-msgstr "Prévisualisation"
 
 #: libsounds/sound-view.c:121 libsounds/sound-view.c:146
 msgid "The sound file for this event does not exist."
@@ -3090,40 +3090,39 @@ msgstr ""
 "Les réglages XKB dans gconf seront bientôt écrasés par les réglages du "
 "système"
 
-#: typing-break/drw-break-window.c:189
-#, fuzzy
+#: typing-break/drw-break-window.c:191
 msgid "_Postpone break"
-msgstr "Reporter la pause"
+msgstr "_Reporter la pause"
 
-#: typing-break/drw-break-window.c:227
+#: typing-break/drw-break-window.c:239
 msgid "Take a break!"
 msgstr "Faites une pause !"
 
 #. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
-#: typing-break/drwright.c:135
+#: typing-break/drwright.c:136
 msgid "/_Preferences"
 msgstr "/_Préférences"
 
-#: typing-break/drwright.c:136
+#: typing-break/drwright.c:137
 msgid "/_About"
 msgstr "/À _propos"
 
-#: typing-break/drwright.c:138
+#: typing-break/drwright.c:139
 msgid "/_Take a Break"
 msgstr "/_Faites une pause"
 
-#: typing-break/drwright.c:482
+#: typing-break/drwright.c:491
 #, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
 msgstr[0] "%d minute avant la prochaine pause"
 msgstr[1] "%d minutes avant la prochaine pause"
 
-#: typing-break/drwright.c:486
+#: typing-break/drwright.c:495
 msgid "Less than one minute until the next break"
 msgstr "Moins d'une minute avant la prochaine pause"
 
-#: typing-break/drwright.c:581
+#: typing-break/drwright.c:590
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
@@ -3132,31 +3131,31 @@ msgstr ""
 "Impossible d'afficher la boîte de dialogue de propriétés de fin de pause "
 "avec l'erreur suivante : %s"
 
-#: typing-break/drwright.c:621
+#: typing-break/drwright.c:638
 msgid "About GNOME Typing Monitor"
 msgstr "À propos du moniteur de saisie GNOME"
 
-#: typing-break/drwright.c:645
+#: typing-break/drwright.c:662
 msgid "A computer break reminder."
 msgstr "Une alarme de pause informatique."
 
-#: typing-break/drwright.c:646
+#: typing-break/drwright.c:663
 msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
 msgstr "Écrit par Richard Hult &lt;richard@imendio.com&gt;"
 
-#: typing-break/drwright.c:647
+#: typing-break/drwright.c:664
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Rendu joli par Anders Carlsson"
 
-#: typing-break/drwright.c:820
+#: typing-break/drwright.c:839
 msgid "Break reminder"
 msgstr "Alarme de pause"
 
-#: typing-break/main.c:94
+#: typing-break/main.c:93
 msgid "The typing monitor is already running."
 msgstr "Le moniteur de saisie est déjà en cours de fonctionnement."
 
-#: typing-break/main.c:107
+#: typing-break/main.c:106
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
@@ -3585,1156 +3584,3 @@ msgstr "Augmenter le volume"
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
 msgid "Volume up's shortcut."
 msgstr "Raccourci pour augmenter le volume."
-
-#~ msgid "Desktop Wallpaper"
-#~ msgstr "Papier peint du bureau"
-
-#~ msgid "Desktop Wallpaper Preferences"
-#~ msgstr "Préférences du papier peint du bureau"
-
-#~ msgid "Advanced Layout Options"
-#~ msgstr "Options avancées d'agencement"
-
-#~ msgid "Core Layout Configuration"
-#~ msgstr "Configuration principal de l'agencement"
-
-#~ msgid "_Layouts:"
-#~ msgstr "_Agencements :"
-
-#~ msgid "Show"
-#~ msgstr "Afficher"
-
-#~ msgid "Language"
-#~ msgstr "Langue"
-
-#~ msgid "$1,234.56"
-#~ msgstr "$1,234.56"
-
-#~ msgid "1/2/03"
-#~ msgstr "1/2/03"
-
-#~ msgid "12:34 AM"
-#~ msgstr "12:34 AM"
-
-#~ msgid "4:56 PM"
-#~ msgstr "4:56 PM"
-
-#~ msgid "<b>Dates</b>"
-#~ msgstr "<b>Dates</b>"
-
-#~ msgid "<b>Languages in use:</b>"
-#~ msgstr "<b>Langues utilisé :</b>"
-
-#~ msgid "<b>Numbers</b>"
-#~ msgstr "<b>Nombres</b>"
-
-#~ msgid "<b>Times</b>"
-#~ msgstr "<b>Heures</b>"
-
-#~ msgid "C_hange languages in use..."
-#~ msgstr "_Modifier la langue utilisée..."
-
-#~ msgid ""
-#~ "Changes will not take effect for the\n"
-#~ "desktop's bars and menus before\n"
-#~ "next time you log in. Changes take\n"
-#~ "effect in applications next time you\n"
-#~ "run them."
-#~ msgstr ""
-#~ "Les modifications ne prendront pas effet pour\n"
-#~ "les barres et menus du bureau avant que vous\n"
-#~ "ne vous reconnectiez. Les modifications prendront\n"
-#~ "effet dans les applications la prochaine fois\n"
-#~ "que vous les lancerez."
-
-#~ msgid "Customize _dates..."
-#~ msgstr "_Dates personnalisées..."
-
-#~ msgid "Customize _numbers..."
-#~ msgstr "_Nombres personnalisés..."
-
-#~ msgid "Customize _times..."
-#~ msgstr "_Heures personnalisées..."
-
-#~ msgid ""
-#~ "Drag languages to set the preferred\n"
-#~ "order of use; If there exists a\n"
-#~ "translation in the first language it will\n"
-#~ "be used, otherwise the next will be tried"
-#~ msgstr ""
-#~ "Glissez les langues pour définir l'ordre\n"
-#~ "préféré d'utilisation ; Si il existe une\n"
-#~ "traduction dans la première langue sélectionné\n"
-#~ "elle sera utilisée, sinon la prochaine\n"
-#~ "sera essayée"
-
-#~ msgid "Formats"
-#~ msgstr "Formats"
-
-#~ msgid "Jan 2, 2003"
-#~ msgstr "Jan 2, 2003"
-
-#~ msgid "Language and Culture Preferences"
-#~ msgstr "Préférences des langues et cultures"
-
-#~ msgid "Measurement _Units:"
-#~ msgstr "_Unités de mesure :"
-
-#~ msgid "Select the items that appear in the Languages list:"
-#~ msgstr ""
-#~ "Sélectionnez les éléments qui apparaitront dans la liste des langues :"
-
-#~ msgid "Show _all regions"
-#~ msgstr "Afficher _toutes les régions"
-
-#~ msgid "Thursday, January 2, 2003"
-#~ msgstr "Thursday, January 2, 2003"
-
-#~ msgid ""
-#~ "Your preferred language differs\n"
-#~ "from that of your currently\n"
-#~ "selected date, time, and number\n"
-#~ "formats. You can change your\n"
-#~ "formats in the Formats tab."
-#~ msgstr ""
-#~ "Votre langue préféré diffère des\n"
-#~ "formats de date, heure et nombres\n"
-#~ "actuellement sélectionnés. Vous\n"
-#~ "pouvez changez de formats dans\n"
-#~ "l'onglet Formats."
-
-#~ msgid "_Region:"
-#~ msgstr "_Région :"
-
-#~ msgid "Language and Culture"
-#~ msgstr "Langue et culture"
-
-#~ msgid "Set your language and culture preferences"
-#~ msgstr "Défini vos préférences de langue et culture"
-
-#~ msgid ""
-#~ "Error activating XKB configuration.\n"
-#~ "Probably internal X server problem.\n"
-#~ "\n"
-#~ "X server version data:\n"
-#~ "%s\n"
-#~ "%d\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Erreur lors de l'activation de la configuration XKB.\n"
-#~ "Probablement une erreur interne du serveur X.\n"
-#~ "\n"
-#~ "Donnée de version du serveur X :\n"
-#~ "%s\n"
-#~ "%d\n"
-#~ "%s"
-
-#~ msgid "_Ignore system configuration"
-#~ msgstr "_Ignorer la configuration du système"
-
-#~ msgid "radiobutton1"
-#~ msgstr "radiobutton1"
-
-#~ msgid "radiobutton2"
-#~ msgstr "radiobutton2"
-
-#~ msgid "radiobutton3"
-#~ msgstr "radiobutton3"
-
-#~ msgid "radiobutton4"
-#~ msgstr "radiobutton4"
-
-#~ msgid "radiobutton5"
-#~ msgstr "radiobutton5"
-
-#~ msgid "Behavior"
-#~ msgstr "Comportement"
-
-#~ msgid "Sets the default behavior of GNOME applications"
-#~ msgstr "Règle le comportement des applications GNOME"
-
-#~ msgid "One minute until the next break"
-#~ msgstr "Une minute avant la prochaine pause"
-
-#~ msgid "Yelp Gnome Help Browser"
-#~ msgstr "Navigateur d'aide Gnome Yelp"
-
-#~ msgid "Gnome Help Browser"
-#~ msgstr "Navigateur d'aide Gnome"
-
-#~ msgid "Acce_pts URLs"
-#~ msgstr "Accepte les _URLs"
-
-#~ msgid "C_ustom Help Browser:"
-#~ msgstr "Navigateur d'aide _personnalisé :"
-
-#~ msgid "Default Help Browser"
-#~ msgstr "Navigateur d'aide par défaut"
-
-#~ msgid "_Select a Help Browser:"
-#~ msgstr "_Sélectionnez un navigateur d'aide :"
-
-#~ msgid ""
-#~ "<b>Default Cursor - Current</b>\n"
-#~ "The default cursor that ships with X"
-#~ msgstr ""
-#~ "<b>Curseur par défaut - Courant</b>\n"
-#~ "Le curseur par défaut livré avec X Window"
-
-#~ msgid ""
-#~ "<b>White Cursor - Current</b>\n"
-#~ "The default cursor inverted"
-#~ msgstr ""
-#~ "<b>Curseur blanc - Courant</b>\n"
-#~ "Le curseur par défaut inversé"
-
-#~ msgid ""
-#~ "<b>Large Cursor - Current</b>\n"
-#~ "Large version of normal cursor"
-#~ msgstr ""
-#~ "<b>Grand curseur - Courant</b>\n"
-#~ "Version agrandie du curseur par défaut"
-
-#~ msgid "<b>Cursor Theme</b>"
-#~ msgstr "<b>Thème de curseur</b>"
-
-#~ msgid "Quit DrWright?"
-#~ msgstr "Quitter DrWright ?"
-
-#~ msgid "Don't forget to take regular breaks."
-#~ msgstr "N'oubliez pas de faire des pauses régulières."
-
-#~ msgid "Don't Quit"
-#~ msgstr "Ne pas quitter"
-
-#~ msgid "Quit"
-#~ msgstr "Quitter"
-
-#~ msgid "Select CDE AccessX file"
-#~ msgstr "Sélectionnez le fichier CDE AccessX"
-
-#~ msgid "A preview of the background picture."
-#~ msgstr "Aperçu de l'image d'arrière-plan."
-
-#~ msgid "Background Preview"
-#~ msgstr "Aperçu de l'arrière-plan"
-
-#~ msgid "The background picture's file name."
-#~ msgstr "Nom du fichier de l'image d'arrière-plan."
-
-#~ msgid "A preview of what a menubar looks like with these settings."
-#~ msgstr "Apparence d'une barre de menu avec ces réglages."
-
-#~ msgid "A preview of what a toolbar looks like with these settings."
-#~ msgstr "Apparence d'une barre d'outils avec ces réglages."
-
-#~ msgid "Menus"
-#~ msgstr "Menus"
-
-#~ msgid "Sample menubar:"
-#~ msgstr "Exemple de barre de menu :"
-
-#~ msgid "Select the toolbar style."
-#~ msgstr "Sélectionnez un style pour les barres d'outils."
-
-#~ msgid "Toolbar"
-#~ msgstr "Barre d'outils"
-
-#~ msgid "Toolbars can be _detached and moved around"
-#~ msgstr "Les barres d'outils sont _détachables"
-
-#~ msgid "File to play"
-#~ msgstr "Fichier à jouer"
-
-#~ msgid "Apply theme..."
-#~ msgstr "Appliquer un thème..."
-
-#~ msgid "Themus component"
-#~ msgstr "Composant Themus"
-
-#~ msgid "Themus component apply theme operations"
-#~ msgstr "Le composant Themus applique des opérations sur les thèmes"
-
-#~ msgid "Bee_p"
-#~ msgstr "_Bip"
-
-#~ msgid "C_ustom:"
-#~ msgstr "_Personnalisé :"
-
-#~ msgid "Clic_k on keypress"
-#~ msgstr "_Clic au pressage de touche"
-
-#~ msgid "Keypress Click"
-#~ msgstr "Clic au pressage de touche"
-
-#~ msgid "Repeat Keys"
-#~ msgstr "Touches de répétition"
-
-#~ msgid "_Off"
-#~ msgstr "_Off"
-
-#~ msgid "loud"
-#~ msgstr "fort"
-
-#~ msgid "quiet"
-#~ msgstr "silence"
-
-#~ msgid "Install new theme"
-#~ msgstr "Installer un nouveau thème"
-
-#~ msgid "_Location of new theme:"
-#~ msgstr "_Emplacement du nouveau thème :"
-
-#~ msgid "_Details..."
-#~ msgstr "_Détails..."
-
-#~ msgid ""
-#~ "<b>Note:</b> You will need to logout and log back in for this setting to "
-#~ "take effect."
-#~ msgstr ""
-#~ "<b>Remarque :</b> Il faut que vous fermiez la session et que vous vous "
-#~ "reconnectiez pour que ce réglage soit pris en compte."
-
-#~ msgid ""
-#~ "Animates a quick marker around the cursor when the Control key has been "
-#~ "pressed and released."
-#~ msgstr ""
-#~ "Affiche un bref marqueur autour du curseur lorsque la touche Contrôle "
-#~ "(Ctrl) a été enfoncée puis relâchée."
-
-#~ msgid "Double-click Delay"
-#~ msgstr "Délai du double-clic"
-
-#~ msgid ""
-#~ "Left-handed mouse mode switches the left and right buttons on the mouse."
-#~ msgstr "Le mode gaucher inverse les boutons droits et gauches de la souris."
-
-#~ msgid ""
-#~ "Maximum time allowed between clicks when double-clicking.   Use the box "
-#~ "on the right to test."
-#~ msgstr ""
-#~ "Temps maximum permis entre les clics et les double-clics.  Utiliser la "
-#~ "boîte située à droite pour tester."
-
-#~ msgid ""
-#~ "Set the distance you need to move your cursor before dragging an item."
-#~ msgstr ""
-#~ "Défini la distance à partir de laquelle le curseur commencer à glisser un "
-#~ "objet."
-
-#~ msgid "Set the speed of your pointing device."
-#~ msgstr "Défini la vitesse de votre pointeur."
-
-#~ msgid "_Delay (sec):"
-#~ msgstr "_Délai (sec) :"
-
-#~ msgid "_Show position of cursor when the Control key is pressed"
-#~ msgstr ""
-#~ "_Afficher la position du curseur lorsque la touche contrôle (Ctrl) est "
-#~ "appuyée"
-
-#~ msgid "_Repeat Keys"
-#~ msgstr "Touches de _répétition"
-
-#~ msgid "Beep when enabling/disabling _keyboard accessibility features"
-#~ msgstr ""
-#~ "Bip quand vous activez/désactivez les fonctionnalités d'accessibilité du "
-#~ "_clavier"
-
-#~ msgid "Beep when:"
-#~ msgstr "Bip lorsque :"
-
-#~ msgid "Repeat Key Pre_ferences"
-#~ msgstr "Pré_férences de répétition des touches"
-
-#~ msgid "Start mo_ving this long after keypress :"
-#~ msgstr "_Commencer à bouger après ce lapse de temps :"
-
-#~ msgid "Toggle and Repeat Keys"
-#~ msgstr "Touches de basculement et de répétition"
-
-#~ msgid "_Import CDE AccessX file"
-#~ msgstr "_Importer le fichier CDE AccessX"
-
-#~ msgid ""
-#~ "_Turn off Sticky Keys when\n"
-#~ "two keys pressed simultaneously"
-#~ msgstr ""
-#~ "_Désactiver Sticky Keys lorsque deux\n"
-#~ "touches sont enfoncées simultanément"
-
-#~ msgid "msecs"
-#~ msgstr "millisecondes"
-
-#~ msgid "_Category"
-#~ msgstr "_Catégorie"
-
-#~ msgid "_Delete"
-#~ msgstr "_Supprimer"
-
-#~ msgid "_Name"
-#~ msgstr "_Nom"
-
-#~ msgid "Associate applications with file types"
-#~ msgstr "Applications associées avec les types de fichier"
-
-#~ msgid "That accelerator key is already in use by: %s\n"
-#~ msgstr "Cette touche d'accélération est déjà utilisée par : %s\n"
-
-#~ msgid "Pro_xy requires username and password"
-#~ msgstr "Le pro_xy nécessite un identifiant et un mot de passe"
-
-#~ msgid "_General"
-#~ msgstr "_Général"
-
-#~ msgid "Installed Themes"
-#~ msgstr "Thèmes installés"
-
-#~ msgid "List of available GTK+ themes"
-#~ msgstr "Liste des thèmes GTK+ disponibles"
-
-#~ msgid "Titlebar Font"
-#~ msgstr "Police de la barre de titre"
-
-#~ msgid "Window Border Appearance"
-#~ msgstr "Apparence des bordures de fenêtres"
-
-#~ msgid "Window Manager:"
-#~ msgstr "Gestionnaire de fenêtres :"
-
-#~ msgid ""
-#~ "Starting %s\n"
-#~ "(%d seconds left before operation times out)"
-#~ msgstr ""
-#~ "Démarrage de %s\n"
-#~ "(%d secondes avant expiration du temps imparti)"
-
-#~ msgid ""
-#~ "wm-properties-capplet: Unable to initialize window manager.\n"
-#~ "\tAnother window manager is already running and could not be killed\n"
-#~ msgstr ""
-#~ "wm-properties-capplet : Impossible d'initialiser le\n"
-#~ "gestionnaire de fenêtres.\n"
-#~ "\tUn autre gestionnaire de fenêtres est déjà en cours d'exécution et ne "
-#~ "peux pas être terminé\n"
-
-#~ msgid ""
-#~ "wm-properties-capplet: Unable to initialize window manager.\n"
-#~ "\t'%s' didn't start\n"
-#~ msgstr ""
-#~ "wm-properties-capplet : Impossible d'initialiser le gestionnaire de "
-#~ "fenêtres.\n"
-#~ "\t« %s » n'a pas démarré\n"
-
-#~ msgid "Previous window manager did not die\n"
-#~ msgstr "Le gestionnaire de fenêtres précédent fonctionne toujours\n"
-
-#~ msgid ""
-#~ "Could not start '%s'.\n"
-#~ "Falling back to previous window manager '%s'\n"
-#~ msgstr ""
-#~ "N'a pas pu démarrer « %s ».\n"
-#~ "Retourne au gestionnaire de fenêtres précédent « %s »\n"
-
-#~ msgid ""
-#~ "Could not start fallback window manager.\n"
-#~ "Please run a window manager manually. You can\n"
-#~ "do this by selecting \"Run Program\" in the\n"
-#~ "foot menu\n"
-#~ msgstr ""
-#~ "N'a pas pu démarrer le gestionnaire de fenêtres précédent.\n"
-#~ "Démarrez un gestionnaire de fenêtres manuellement.\n"
-#~ "Vous pouvez le faire en sélectionnant « Exécuter... »\n"
-#~ "dans le menu GNOME\n"
-
-#~ msgid "OK"
-#~ msgstr "Valider"
-
-#~ msgid "Edit Menu"
-#~ msgstr "Menu d'édition"
-
-#~ msgid "_Menu"
-#~ msgstr "_Menu"
-
-#~ msgid "Documents"
-#~ msgstr "Documents"
-
-#~ msgid "Word Processor"
-#~ msgstr "Traitement de texte"
-
-#~ msgid "Published Materials"
-#~ msgstr "Support de publication"
-
-#~ msgid "Spreadsheet"
-#~ msgstr "Tableur"
-
-#~ msgid "Presentation"
-#~ msgstr "Présentation"
-
-#~ msgid "Diagram"
-#~ msgstr "Diagramme"
-
-#~ msgid "TeX"
-#~ msgstr "TeX"
-
-#~ msgid "Vector Graphics"
-#~ msgstr "Graphiques vectoriels"
-
-#~ msgid "World Wide Web"
-#~ msgstr "World Wide Web"
-
-#~ msgid "Plain Text"
-#~ msgstr "Texte brut"
-
-#~ msgid "Extended Markup Language (XML)"
-#~ msgstr "Langage de marquage étendu (XML)"
-
-#~ msgid "Information"
-#~ msgstr "Information"
-
-#~ msgid "Financial"
-#~ msgstr "Finance"
-
-#~ msgid "Calendar"
-#~ msgstr "Calendrier"
-
-#~ msgid "Contacts"
-#~ msgstr "Contacts"
-
-#~ msgid "Packages"
-#~ msgstr "Archives"
-
-#~ msgid "Software Development"
-#~ msgstr "Développement logiciel"
-
-#~ msgid "Source Code"
-#~ msgstr "Code source"
-
-#~ msgid "faster"
-#~ msgstr "plus rapide"
-
-#~ msgid "_Keyboard"
-#~ msgstr "_Clavier"
-
-#~ msgid "_Misc"
-#~ msgstr "_Divers"
-
-#~ msgid "_Picture"
-#~ msgstr "_Image"
-
-#~ msgid "Bor_der the picture with a:"
-#~ msgstr "_Entourer l'image avec :"
-
-#~ msgid "Choose the applications used by default"
-#~ msgstr "Choisisser les applications devant être utilisées par défaut"
-
-#~ msgid "Configure window appearance"
-#~ msgstr "Configure l'apparence des fenêtres"
-
-#~ msgid "Configure window properties"
-#~ msgstr "Configurer les propriétés des fenêtres"
-
-#~ msgid "Configure window manager configuration properties"
-#~ msgstr "Configurer les propriétés des fenêtres"
-
-#~ msgid "Configure window placement"
-#~ msgstr "Configurer le placement des fenêtres"
-
-#~ msgid "File types and Internet Services"
-#~ msgstr "Types de fichier et services Internet"
-
-#~ msgid "Needs _terminal"
-#~ msgstr "A besoin d'un _terminal"
-
-#~ msgid "_Add"
-#~ msgstr "A_jouter"
-
-#~ msgid "_Protocol name"
-#~ msgstr "Nom du _protocole"
-
-#~ msgid ""
-#~ "Invalid MIME type. Please enter a valid MIME type, or leave the field "
-#~ "blank to have one generated for you."
-#~ msgstr ""
-#~ "Type MIME invalide.  Veuillez saisir un type de MIME valide, ou bien "
-#~ "laisser le champs vierge et un type sera généré pour vous."
-
-#~ msgid "There already exists a MIME type of that name."
-#~ msgstr "Il existe déjà un type MIME ayant le même nom."
-
-#~ msgid "Change the default fonts used by the desktop and applications"
-#~ msgstr "Change les polices utilisées par le bureau et les applications"
-
-#~ msgid "Keyboard _Navigation scheme for use in applications:"
-#~ msgstr "Méthode de navigation du clavier à utiliser dans les applications:"
-
-#~ msgid ""
-#~ "To assign a shortcut to an action, click in the shortcut column and press "
-#~ "the key combination you want to associate with it."
-#~ msgstr ""
-#~ "Pour assigner un raccourci à une action donnée, cliquez dans la colonne "
-#~ "Raccourci et appuyez sur les touches de la combinaison que vous avez "
-#~ "choisi."
-
-#~ msgid "Associate keyboard shortcuts with panel actions"
-#~ msgstr "Associer des raccourcis-clavier avec des actions de panneau"
-
-#~ msgid "<i>fast</i>"
-#~ msgstr "<i>rapide</i>"
-
-#~ msgid "<i>loud</i>"
-#~ msgstr "<i>bruyant</i>"
-
-#~ msgid "<i>quiet</i>"
-#~ msgstr "<i>calme</i>"
-
-#~ msgid "<i>slow</i>"
-#~ msgstr "<i>lent</i>"
-
-#~ msgid "Fast"
-#~ msgstr "Rapide"
-
-#~ msgid "Key_press makes sound"
-#~ msgstr "L'enfoncement des touches émet un son"
-
-#~ msgid "Keyboard bell _enabled"
-#~ msgstr "Bip du clavier activé"
-
-#~ msgid "Keyboard bell _off"
-#~ msgstr "Bip du clavier désactivé"
-
-#~ msgid "Keyclick Volume"
-#~ msgstr "Volume des cliques"
-
-#~ msgid "Long"
-#~ msgstr "Longue"
-
-#~ msgid "Repeat s_peed:"
-#~ msgstr "Vitesse de _répétition :"
-
-#~ msgid "Set the speed the cursor blinks in text fields."
-#~ msgstr ""
-#~ "Défini la vitesse de clignotement du curseur dans les champs de texte."
-
-#~ msgid "Set the volume of the clicking sound made when pressing a key"
-#~ msgstr "Régler le volume des sons émits lorsqu'une touche est enfoncée"
-
-#~ msgid "Short"
-#~ msgstr "Courte"
-
-#, fuzzy
-#~ msgid ""
-#~ "The keyboard bell is the <i>beep</i> sound heard when the system wants to "
-#~ "get your attention."
-#~ msgstr ""
-#~ "La cloche du clavier est le bip entendu lorsque le système veut attirer "
-#~ "votre attention.  Vous pouvez choisir un fichier sonore personnalisé au "
-#~ "lieu du bip traditionnel."
-
-#~ msgid "Very Fast"
-#~ msgstr "Très rapide"
-
-#~ msgid "Very Short"
-#~ msgstr "Très courte"
-
-#~ msgid "_Blink speed:"
-#~ msgstr "Vitesse de _clignotement :"
-
-#~ msgid "_Custom keyboard bell:"
-#~ msgstr "Cloche du clavier personnalisée : "
-
-#~ msgid "Keyboard Properties"
-#~ msgstr "Configuration des propriétés du clavier"
-
-#~ msgid "Configure GNOME's use of sound"
-#~ msgstr "Configuration des effets sonores de GNOME"
-
-#~ msgid "Change the appearance of buttons, scrollbars, etc"
-#~ msgstr "Modifie l'apparence des boutons, barres de défilement, ..."
-
-#~ msgid "Change how toolbars and menus are displayed"
-#~ msgstr ""
-#~ "Modifie la façon dont sont affichés les barres d'outils et les menus"
-
-#~ msgid "Toolbars & Menus"
-#~ msgstr "Barres d'outils et Menus"
-
-#~ msgid "Item 2"
-#~ msgstr "Élément 2"
-
-#~ msgid "Item 3"
-#~ msgstr "Élément 3"
-
-#~ msgid "Menu Item 1"
-#~ msgstr "Élément de menu 1"
-
-#~ msgid "Menu Item 2"
-#~ msgstr "Élément de menu 2"
-
-#~ msgid "Menu Item 3"
-#~ msgstr "Élément de menu 3"
-
-#~ msgid "Menu Item 4"
-#~ msgstr "Élément de menu 4"
-
-#~ msgid "Menu Item 5"
-#~ msgstr "Élément de menu 5"
-
-#~ msgid "Menu items can have _icons"
-#~ msgstr "Les éléments de menus peuvent avoir des _icônes"
-
-#~ msgid "_Toolbars have: "
-#~ msgstr "Les _barres d'outils ont : "
-
-#~ msgid "CD Properties"
-#~ msgstr "Propriétés du CD"
-
-#~ msgid "Configure handling of CD devices"
-#~ msgstr "Configurer la gestion des périphériques de disques compactes"
-
-#~ msgid "Global panel properties"
-#~ msgstr "Propriétés globales du tableau de bord"
-
-#~ msgid "Panel"
-#~ msgstr "Tableau de bord"
-
-#~ msgid "Select an icon..."
-#~ msgstr "Sélectionnez une icône..."
-
-#~ msgid "Mime Type: "
-#~ msgstr "Type MIME : "
-
-#~ msgid "Remove"
-#~ msgstr "Enlever"
-
-#~ msgid "First Regular Expression: "
-#~ msgstr "Première expression régulière : "
-
-#~ msgid "Second Regular Expression: "
-#~ msgstr "Seconde expression régulière : "
-
-#~ msgid "Mime Type Actions"
-#~ msgstr "Actions sur les types MIME"
-
-#~ msgid "Example: emacs %f"
-#~ msgstr "Exemple : emacs %f"
-
-#~ msgid "Select a file..."
-#~ msgstr "Sélectionnez un fichier..."
-
-#~ msgid "Set actions for %s"
-#~ msgstr "Définir les actions pour %s"
-
-#~ msgid "Mime Type"
-#~ msgstr "Type MIME"
-
-#~ msgid "You must enter a mime-type"
-#~ msgstr "Vous devez saisir un type MIME"
-
-#~ msgid ""
-#~ "You must add either a regular-expression or\n"
-#~ "a file-name extension"
-#~ msgstr ""
-#~ "Vous devez ajouter soit une expression régulière\n"
-#~ "soit une extension de nom de fichier"
-
-#~ msgid ""
-#~ "Please put your mime-type in the format:\n"
-#~ "CATEGORY/TYPE\n"
-#~ "\n"
-#~ "For Example:\n"
-#~ "image/png"
-#~ msgstr ""
-#~ "Veuillez écrire votre type MIME sous la forme :\n"
-#~ "CATEGORIE/TYPE\n"
-#~ "\n"
-#~ "Par exemple :\n"
-#~ "image/png"
-
-#~ msgid "This mime-type already exists"
-#~ msgstr "Ce type MIME existe déjà"
-
-#~ msgid ""
-#~ "We are unable to create the directory\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "Impossible de créer le répertoire\n"
-#~ "~/.gnome/mime-info/\n"
-#~ "\n"
-#~ "L'état ne pourra pas être sauvegardé."
-
-#~ msgid ""
-#~ "We are unable to access the directory\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "Impossible d'accéder au répertoire\n"
-#~ "~/.gnome/mime-info/\n"
-#~ "\n"
-#~ "L'état ne pourra pas être sauvegardé."
-
-#~ msgid ""
-#~ "Cannot create the file\n"
-#~ "~/.gnome/mime-info/user.mime\n"
-#~ "\n"
-#~ "We will not be able to save the state"
-#~ msgstr ""
-#~ "Impossible de créer le fichier\n"
-#~ "~/.gnome/mime-info/user.mime\n"
-#~ "\n"
-#~ "L'état ne pourra pas être sauvegardé."
-
-#~ msgid ""
-#~ "Cannot create the file\n"
-#~ "~/.gnome/mime-info/user.keys.\n"
-#~ "\n"
-#~ "We will not be able to save the state"
-#~ msgstr ""
-#~ "Impossible de créer le fichier\n"
-#~ "~/.gnome/mime-info/user.keys\n"
-#~ "\n"
-#~ "L'état ne pourra pas être sauvegardé."
-
-#~ msgid "Mime Types"
-#~ msgstr "Types MIME"
-
-#~ msgid "Add Mime Type"
-#~ msgstr "Ajouter un type MIME"
-
-#~ msgid ""
-#~ "Add a new Mime Type\n"
-#~ "For example:  image/tiff; text/x-scheme"
-#~ msgstr ""
-#~ "Ajouter un nouveau type MIME\n"
-#~ "Par exemple :  image/tiff; text/x-scheme"
-
-#~ msgid ""
-#~ "Type in the extensions for this mime-type.\n"
-#~ "For example:  .html, .htm"
-#~ msgstr ""
-#~ "Tapez les extensions de fichier pour ce type MIME.\n"
-#~ "Par exemple :  .html, .htm"
-
-#~ msgid "Extension:"
-#~ msgstr "Extension :"
-
-#~ msgid "Regular Expressions"
-#~ msgstr "Expressions régulières"
-
-#~ msgid ""
-#~ "You can set up two regular expressions here to identify the Mime Type\n"
-#~ "by.  These fields are optional."
-#~ msgstr ""
-#~ "Vous pouvez donner deux expressions régulières pour\n"
-#~ "identifier le type MIME. Ces champs sont optionnels."
-
-#~ msgid "Command"
-#~ msgstr "Commande"
-
-#~ msgid "URL Handlers"
-#~ msgstr "Gestionnaires d'URL"
-
-#~ msgid "handler:"
-#~ msgstr "gestionnaire :"
-
-#~ msgid "Netscape (new window)"
-#~ msgstr "Netscape (nouvelle fenêtre)"
-
-#~ msgid "Help browser"
-#~ msgstr "Navigateur d'aide"
-
-#~ msgid "Help browser (new window)"
-#~ msgstr "Navigateur d'aide (nouvelle fenêtre)"
-
-#~ msgid "Set"
-#~ msgstr "Définir"
-
-#~ msgid "Enlightenment"
-#~ msgstr "Enlightenment"
-
-#~ msgid "Ice WM"
-#~ msgstr "Ice WM"
-
-#~ msgid "Scwm"
-#~ msgstr "Scwm"
-
-#~ msgid "twm"
-#~ msgstr "twm"
-
-#~ msgid "Initialize session settings"
-#~ msgstr "Initialiser les réglages de la session"
-
-#~ msgid "%s (Current)"
-#~ msgstr "%s (En cours)"
-
-#~ msgid "Run Configuration Tool for %s"
-#~ msgstr "Lancer l'outil de configuration pour %s"
-
-#~ msgid " (Not found)"
-#~ msgstr " (non trouvé)"
-
-#~ msgid ""
-#~ "Your current window manager has been changed. In order for\n"
-#~ "this change to be saved, you will need to save your current\n"
-#~ "session. You can do so immediately by selecting the \"Save session\n"
-#~ "now\" below, or you can save your session later.  This can be\n"
-#~ "done either selecting \"Save Current Session\" under \"Settings\"\n"
-#~ "in the main menu, or by turning on \"Save Current Setup\" when\n"
-#~ "you log out.\n"
-#~ msgstr ""
-#~ "Votre gestionnaire de fenêtres courant a changé. Pour que le\n"
-#~ "changement soit enregistré, vous devez enregistrer la session actuelle.\n"
-#~ "Cela peut être fait immédiatement en sélectionnant « Enregistrer la\n"
-#~ "session maintenant » ci-dessous; vous pouvez aussi enregistrer votre\n"
-#~ "session plus tard. Ceci peut être fait en sélectionnant\n"
-#~ "« Enregistrer la session actuelle » dans la rubrique du menu principal\n"
-#~ "ou alors en activant « Enregistrer la session actuelle » en vous\n"
-#~ "deconnectant.\n"
-
-#~ msgid "Save Session Later"
-#~ msgstr "Enregistrer la session plus tard"
-
-#~ msgid "Save Session Now"
-#~ msgstr "Enregistrer la session maintenant"
-
-#~ msgid ""
-#~ "Your current window manager has been changed. In order for\n"
-#~ "this change to be saved, you will need to save your current\n"
-#~ "session. This can be done by either selecting \"Save Current Session\"\n"
-#~ "under \"Settings\" in the main menu, or by turning on\n"
-#~ "\"Save Current Setup\" when you log out.\n"
-#~ msgstr ""
-#~ "Votre gestionnaire de fenêtres a été changé. Pour que le\n"
-#~ "changement soit enregistré, vous devez enregistrer la session actuelle.\n"
-#~ "Cela peut être fait en sélectionnant « Enregistrer la session courante »\n"
-#~ "sous l'entrée « Paramétres » du menu principal ou en activant\n"
-#~ "l'option « Enregistrer la configuration actuelle » à la fin de votre "
-#~ "session.\n"
-
-#~ msgid "Add New Window Manager"
-#~ msgstr "Ajoutez un nouveau gestionnaire de fenêtres"
-
-#~ msgid "Cancel"
-#~ msgstr "Annuler"
-
-#~ msgid "Command:"
-#~ msgstr "Commande :"
-
-#~ msgid "Window manager is session managed"
-#~ msgstr "Le gestionnaire de fenêtres est géré par la session"
-
-#~ msgid "Name cannot be empty"
-#~ msgstr "Le champ du nom ne doit pas être vide"
-
-#~ msgid "Command cannot be empty"
-#~ msgstr "La champ de la commande ne peut pas être vide"
-
-#~ msgid "Edit Window Manager"
-#~ msgstr "Éditer le gestionnaire de fenêtres"
-
-#~ msgid "You cannot delete the current Window Manager"
-#~ msgstr "Vous ne pouvez pas supprimer le gestionnaire de fenêtres actuel"
-
-#~ msgid "Window Manager Selector"
-#~ msgstr "Sélecteur de gestionnaire de fenêtres"
-
-#~ msgid "&lt;b&gt;Test&lt;/b&gt;"
-#~ msgstr "&lt;b&gt;Test&lt;/b&gt;"
-
-#~ msgid "Accepts Line _Number"
-#~ msgstr "Accepte les _numéros de lignes"
-
-#~ msgid "_Add..."
-#~ msgstr "A_jouter..."
-
-#~ msgid "_Action"
-#~ msgstr "_Action"
-
-#~ msgid "&lt;i&gt;fast&lt;/i&gt;"
-#~ msgstr "&lt;i&gt;rapide&lt;/i&gt;"
-
-#~ msgid "&lt;i&gt;loud&lt;/i&gt;"
-#~ msgstr "&lt;i&gt;fort&lt;/i&gt;"
-
-#~ msgid "&lt;i&gt;quiet&lt;/i&gt;"
-#~ msgstr "&lt;i&gt;silencieux&lt;/i&gt;"
-
-#~ msgid "&lt;i&gt;slow&lt;/i&gt;"
-#~ msgstr "&lt;i&gt;lent&lt;/i&gt;"
-
-#~ msgid "Very long"
-#~ msgstr "Trés long"
-
-#~ msgid "_Sound"
-#~ msgstr "_Son"
-
-#~ msgid "&lt;i&gt;Fast&lt;/i&gt;"
-#~ msgstr "&lt;i&gt;Rapide&lt;/i&gt"
-
-#~ msgid "&lt;i&gt;High&lt;/i&gt;"
-#~ msgstr "&lt;i&gt;Élevé&lt;/i&gt;"
-
-#~ msgid "&lt;i&gt;Large&lt;/i&gt;"
-#~ msgstr "&lt;i&gt;Grand&lt;/i&gt;"
-
-#~ msgid "&lt;i&gt;Low&lt;/i&gt;"
-#~ msgstr "&lt;i&gt;Faible&lt;/i&gt;"
-
-#~ msgid "&lt;i&gt;Slow&lt;/i&gt;"
-#~ msgstr "&lt;i&gt;Lent&lt;/i&gt;"
-
-#~ msgid "&lt;i&gt;Small&lt;/i&gt;"
-#~ msgstr "&lt;i&gt;Petit&lt;/i&gt;"
-
-#~ msgid "Icons and Text"
-#~ msgstr "Icônes et texte"
-
-#~ msgid "Only Icons"
-#~ msgstr "Icônes seulement"
-
-#~ msgid "Only Text"
-#~ msgstr "Texte seulement"
-
-#~ msgid "At the center of the screen"
-#~ msgstr "Au centre de l'écran"
-
-#~ msgid "At the mouse pointer"
-#~ msgstr "Au pointeur de la souris"
-
-#~ msgid "Bottom"
-#~ msgstr "Bas"
-
-#, fuzzy
-#~ msgid "Dialog Buttons"
-#~ msgstr "Les boîtes de dialogue s'ouvrent"
-
-#, fuzzy
-#~ msgid "Dialog buttons have icons"
-#~ msgstr "Les boutons des barres d'outils ont seulement des icônes"
-
-#~ msgid "Dialogs"
-#~ msgstr "Boîtes de dialogues"
-
-#~ msgid "Dialogs are treated"
-#~ msgstr "Les boîtes de dialogue sont traitées"
-
-#~ msgid "Dialogs open"
-#~ msgstr "Les boîtes de dialogue s'ouvrent"
-
-#~ msgid "Interface"
-#~ msgstr "Interface"
-
-#~ msgid "Left"
-#~ msgstr "Gauche"
-
-#~ msgid "Like any other window"
-#~ msgstr "Comme les autres fenêtres"
-
-#~ msgid "Menu bars are detachable"
-#~ msgstr "Les barre de menus sont détachables"
-
-#~ msgid "Menu bars have a border"
-#~ msgstr "Les barres de menus ont des bords en relief"
-
-#~ msgid "Menu items have icons"
-#~ msgstr "Les éléments des menus ont des _icônes"
-
-#~ msgid "Menus can be torn off"
-#~ msgstr "Les menus peuvent être séparés"
-
-#~ msgid "Multiple Documents"
-#~ msgstr "Documents multiples"
-
-#~ msgid "Notebook tabs"
-#~ msgstr "Onglets de carnet"
-
-#~ msgid "Place dialogs over application window when possible"
-#~ msgstr ""
-#~ "Placer les boîtes de dialogue au-dessus de la fenêtre de l'application si "
-#~ "possible"
-
-#~ msgid "Progress bar is on the left"
-#~ msgstr "La barre de progression va vers la gauche"
-
-#~ msgid "Progress bar is on the right"
-#~ msgstr "La barre de progression va vers la droite"
-
-#~ msgid "Seperate windows"
-#~ msgstr "Fenêtres séparées"
-
-#~ msgid "Settings will not take effect until applications restart"
-#~ msgstr ""
-#~ "Les réglages ne prendront effet que lorsque l'application redémarrera."
-
-#~ msgid "Specially by the window manager"
-#~ msgstr "Spécialement par le gestionnaire de fenêtres"
-
-#, fuzzy
-#~ msgid "Spread out"
-#~ msgstr "Tableur"
-
-#~ msgid "Status Bar"
-#~ msgstr "Barre d'état"
-
-#~ msgid "Status bar is interactive when possible"
-#~ msgstr "La barre d'état est interactive si possible"
-
-#~ msgid "The same window"
-#~ msgstr "La même fenêtre"
-
-#~ msgid "Tool Bars"
-#~ msgstr "Barre d'outils"
-
-#~ msgid "Tool bar buttons are icons only"
-#~ msgstr "Les boutons des barres d'outils ont seulement des icônes"
-
-#~ msgid "Tool bar buttons are text below icons"
-#~ msgstr "Les boutons des barres d'outils ont des étiquettes sous les icônes"
-
-#~ msgid "Tool bar buttons pop up on mouse over"
-#~ msgstr "Les boutons des barres d'outils réagissent au passage de la souris"
-
-#~ msgid "Tool bars are detachable"
-#~ msgstr "Les barres d'outils sont détachables"
-
-#~ msgid "Tool bars have a border"
-#~ msgstr "Les barres de menus ont des bords en relief"
-
-#~ msgid "Tool bars have line separators"
-#~ msgstr "Les barres d'outils ont des lignes de séparation"
-
-#~ msgid "Top"
-#~ msgstr "Haut"
-
-#~ msgid "Use status bar instead of dialog when possible"
-#~ msgstr ""
-#~ "Utiliser la barre d'état à la place des boîtes de dialogue si possible"
-
-#~ msgid "When opening Multiple documents, use"
-#~ msgstr "Quand on ouvre plusieurs documents, utiliser"
-
-#~ msgid "When using Notebook tabs, place the tabs on the"
-#~ msgstr "Quand on utilise des onglets de carnet, placer les onglets sur"
-
-#~ msgid "Wherever the Window Manager places them"
-#~ msgstr "Là où les place le gestionnaire de fenêtre"
-
-#~ msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
-#~ msgstr ""
-#~ "Impossible de charger le pixbuf « %s » ; désactivation du papier peint."
-
-#~ msgid "Select which font to use"
-#~ msgstr "Sélectionner quel police doit être utilisée"
-
-#~ msgid "Font settings only apply to new programs."
-#~ msgstr ""
-#~ "Les paramètres de polices ne s'appliquent qu'aux nouveaux programmes."
-
-#~ msgid "Use a custom font."
-#~ msgstr "Utiliser une police personnalisée."
-
-#~ msgid "Select which gtk+ theme to use"
-#~ msgstr "Sélectionner le thème GTK+ à utiliser"
