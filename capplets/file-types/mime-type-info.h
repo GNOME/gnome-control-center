@@ -36,6 +36,9 @@ typedef struct _MimeTypeInfo MimeTypeInfo;
 
 struct _MimeTypeInfo
 {
+	GtkTreeModel            *model;
+	GtkTreeIter             *iter;
+
 	gchar                   *mime_type;
 	gchar                   *description;
 	gchar                   *icon_name;
@@ -50,9 +53,11 @@ struct _MimeTypeInfo
 	gboolean                 is_category;
 };
 
-MimeTypeInfo *mime_type_info_load (const gchar        *mime_type);
-void          mime_type_info_save (const MimeTypeInfo *info);
-void          mime_type_info_free (MimeTypeInfo       *info);
+MimeTypeInfo *mime_type_info_load   (GtkTreeModel       *model,
+				     GtkTreeIter        *iter);
+void          mime_type_info_save   (const MimeTypeInfo *info);
+void          mime_type_info_update (MimeTypeInfo       *info);
+void          mime_type_info_free   (MimeTypeInfo       *info);
 
 char         *mime_type_get_pretty_name_for_server (Bonobo_ServerInfo *server);
 

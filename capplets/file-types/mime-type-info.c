@@ -32,6 +32,7 @@
 #include <bonobo.h>
 
 #include "mime-type-info.h"
+#include "mime-types-model.h"
 
 static GList *dirty_list = NULL;
 
@@ -61,28 +62,56 @@ get_lang_list (void)
         return retval;
 }
 
-MimeTypeInfo *
-mime_type_info_load (const gchar *mime_type)
+static gchar *
+form_extensions_string (const MimeTypeInfo *info, gchar *sep, gchar *prepend) 
 {
-	MimeTypeInfo            *info;
-	Bonobo_ServerInfo       *component_info;
+	gchar *tmp;
+	gchar **array;
+	GList *l;
+	gint i = 0;
+
+	if (prepend == NULL)
+		prepend = "";
+
+	array = g_new0 (gchar *, g_list_length (info->file_extensions) + 1);
+	for (l = info->file_extensions; l != NULL; l = l->next)
+		array[i++] = g_strconcat (prepend, l->data, NULL);
+	tmp = g_strjoinv (sep, array);
+	g_strfreev (array);
+
+	return tmp;
+}
+
+MimeTypeInfo *
+mime_type_info_load (GtkTreeModel *model, GtkTreeIter *iter)
+{
+	MimeTypeInfo      *info;
+	Bonobo_ServerInfo *component_info;
+	GValue             mime_type;
+
+	mime_type.g_type = G_TYPE_INVALID;
+	gtk_tree_model_get_value (model, iter, MIME_TYPE_COLUMN, &mime_type);
 
 	info = g_new0 (MimeTypeInfo, 1);
-	info->mime_type       = g_strdup (mime_type);
-	info->description     = g_strdup (gnome_vfs_mime_get_description (mime_type));
-	info->icon_name       = g_strdup (gnome_vfs_mime_get_icon (mime_type));
-	info->file_extensions = gnome_vfs_mime_get_extensions_list (mime_type);
-	info->edit_line       = g_strdup (gnome_vfs_mime_get_value (mime_type, "edit-line"));
-	info->print_line      = g_strdup (gnome_vfs_mime_get_value (mime_type, "print-line"));
-	info->default_action  = gnome_vfs_mime_get_default_application (mime_type);
-	info->custom_line     = g_strdup (gnome_vfs_mime_get_value (mime_type, "custom-line"));
+	info->model           = model;
+	info->iter            = gtk_tree_iter_copy (iter);
+	info->mime_type       = g_value_dup_string (&mime_type);
+	info->description     = g_strdup (gnome_vfs_mime_get_description (info->mime_type));
+	info->icon_name       = g_strdup (gnome_vfs_mime_get_icon (info->mime_type));
+	info->file_extensions = gnome_vfs_mime_get_extensions_list (info->mime_type);
+	info->edit_line       = g_strdup (gnome_vfs_mime_get_value (info->mime_type, "edit-line"));
+	info->print_line      = g_strdup (gnome_vfs_mime_get_value (info->mime_type, "print-line"));
+	info->default_action  = gnome_vfs_mime_get_default_application (info->mime_type);
+	info->custom_line     = g_strdup (gnome_vfs_mime_get_value (info->mime_type, "custom-line"));
 
-	component_info = gnome_vfs_mime_get_default_component (mime_type);
+	component_info = gnome_vfs_mime_get_default_component (info->mime_type);
 
 	if (component_info != NULL) {
 		info->default_component_id = component_info->iid;
 		CORBA_free (component_info);
 	}
+
+	g_value_unset (&mime_type);
 
 	return info;
 }
@@ -91,9 +120,6 @@ void
 mime_type_info_save (const MimeTypeInfo *info)
 {
 	gchar *tmp;
-	gchar **array;
-	GList *l;
-	gint i = 0;
 
 	gnome_vfs_mime_set_description (info->mime_type, info->description);
 	gnome_vfs_mime_set_icon (info->mime_type, info->icon_name);
@@ -102,13 +128,25 @@ mime_type_info_save (const MimeTypeInfo *info)
 	gnome_vfs_mime_set_value (info->mime_type, "print-line", info->print_line);
 	gnome_vfs_mime_set_value (info->mime_type, "edit-line", info->edit_line);
 
-	array = g_new0 (gchar *, g_list_length (info->file_extensions) + 1);
-	for (l = info->file_extensions; l != NULL; l = l->next)
-		array[i++] = l->data;
-	tmp = g_strjoinv (" ", array);
-	g_free (array);
-
+	tmp = form_extensions_string (info, " ", NULL);
 	gnome_vfs_mime_set_extensions_list (info->mime_type, tmp);
+	g_free (tmp);
+}
+
+void
+mime_type_info_update (MimeTypeInfo *info) 
+{
+	GdkPixbuf *pixbuf;
+	gchar *tmp;
+
+	pixbuf = get_icon_pixbuf (info->icon_name);
+
+	tmp = form_extensions_string (info, ", ", ".");
+	gtk_tree_store_set (GTK_TREE_STORE (info->model), info->iter,
+			    DESCRIPTION_COLUMN, info->description,
+			    ICON_COLUMN, pixbuf,
+			    EXTENSIONS_COLUMN, tmp,
+			    -1);
 	g_free (tmp);
 }
 

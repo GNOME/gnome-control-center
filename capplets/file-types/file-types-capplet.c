@@ -59,7 +59,6 @@ edit_cb (GtkButton *button, GladeXML *dialog)
 	GtkTreeModel      *model;
 	GtkTreeSelection  *selection;
 	GtkTreeIter        iter;
-	GValue             mime_type;
 
 	GObject           *edit_dialog;
 
@@ -67,15 +66,10 @@ edit_cb (GtkButton *button, GladeXML *dialog)
 	selection = gtk_tree_view_get_selection (treeview);
 	gtk_tree_selection_get_selected (selection, &model, &iter);
 
-	mime_type.g_type = G_TYPE_INVALID;
-	gtk_tree_model_get_value (model, &iter, MIME_TYPE_COLUMN, &mime_type);
-
 	if (model_entry_is_protocol (model, &iter))
-		edit_dialog = service_edit_dialog_new (service_info_load (g_value_get_string (&mime_type), NULL));
+		edit_dialog = service_edit_dialog_new (service_info_load (model, &iter, NULL));
 	else
-		edit_dialog = mime_edit_dialog_new (mime_type_info_load (g_value_get_string (&mime_type)));
-
-	g_value_unset (&mime_type);
+		edit_dialog = mime_edit_dialog_new (mime_type_info_load (model, &iter));
 }
 
 static void

@@ -35,6 +35,9 @@ G_BEGIN_DECLS
 typedef struct _ServiceInfo ServiceInfo;
 
 struct _ServiceInfo {
+	GtkTreeModel            *model;
+	GtkTreeIter             *iter;
+
 	gchar                   *protocol;
 	gchar                   *description;
 	gboolean                 run_program;
@@ -44,11 +47,13 @@ struct _ServiceInfo {
 	gboolean                 need_terminal;
 };
 
-ServiceInfo *service_info_load (const gchar       *protocol,
-				GConfChangeSet    *changeset);
-void         service_info_save (const ServiceInfo *info,
-				GConfChangeSet    *changeset);
-void         service_info_free (ServiceInfo       *info);
+ServiceInfo *service_info_load   (GtkTreeModel      *model,
+				  GtkTreeIter       *iter,
+				  GConfChangeSet    *changeset);
+void         service_info_save   (const ServiceInfo *info,
+				  GConfChangeSet    *changeset);
+void         service_info_update (ServiceInfo       *info);
+void         service_info_free   (ServiceInfo       *info);
 
 G_END_DECLS
 

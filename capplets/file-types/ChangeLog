@@ -1,5 +1,40 @@
 2002-01-11  Bradford Hovinen  <hovinen@ximian.com>
 
+	* mime-edit-dialog.c (add_ext_cb): Terminate column list with -1
+
+	* service-edit-dialog.c (store_data): Call service_info_update
+
+	* mime-edit-dialog.c (store_data): Call mime_type_info_update
+
+	* mime-type-info.c (mime_type_info_update): Implement. Updates the
+	model with data from the structure
+
+	* service-info.c (service_info_update): Implement. Updates the
+	model with data from the structure
+
+	* mime-type-info.c (form_extensions_string): Implement. Factor
+	from mime_type_info_save
+
+	* service-info.c (service_info_load): Accept model and iter rather
+	than protocol name; read protocol name from model
+
+	* mime-type-info.c (mime_type_info_load): Accept model and iter
+	rather than mime type; read the mime type from the model
+
+	* mime-types-model.c (get_icon_pixbuf): Make this public
+
+	* service-edit-dialog.c (fill_dialog): Set the protocol entry
+	insensitive if the protocol is already set; don't put unknown in
+	the protocol entry
+
+	* mime-types-model.c: Include gnome-vfs-mime-info.h
+
+	* service-info.c (get_string): Call get_description_for_protocol
+	if we are fetching the description and it is not in the changeset
+
+	* mime-types-model.c (get_description_for_protocol): Make this
+	public
+
 	* service-edit-dialog.c (store_data): Implement
 	(program_sensitive_cb): Implement
 	(response_cb): Call store_data if response_id is OK

@@ -29,6 +29,7 @@
 #include <libgnomevfs/gnome-vfs.h>
 #include <libgnomevfs/gnome-vfs-mime-handlers.h>
 #include <libgnomevfs/gnome-vfs-mime-utils.h>
+#include <libgnomevfs/gnome-vfs-mime-info.h>
 
 #include <gconf/gconf.h>
 #include <gconf/gconf-client.h>
@@ -49,56 +50,15 @@ const gchar *url_descriptions[][2] = {
 	{ NULL,      NULL }
 };
 
-static GdkPixbuf *
-get_icon_pixbuf (const gchar *short_icon_name) 
-{
-	gchar *icon_name;
-	GdkPixbuf *pixbuf, *pixbuf1;
-
-	static GHashTable *pixbuf_table;
-
-	if (pixbuf_table == NULL)
-		pixbuf_table = g_hash_table_new (g_str_hash, g_str_equal);
-
-	if (short_icon_name == NULL)
-		short_icon_name = "nautilus/i-regular-24.png";
-
-	icon_name = gnome_program_locate_file
-		(gnome_program_get (), GNOME_FILE_DOMAIN_PIXMAP,
-		 short_icon_name, TRUE, NULL);
-
-	if (icon_name != NULL) {
-		pixbuf1 = g_hash_table_lookup (pixbuf_table, icon_name);
-
-		if (pixbuf1 != NULL) {
-			g_object_ref (G_OBJECT (pixbuf1));
-		} else {
-			pixbuf = gdk_pixbuf_new_from_file (icon_name, NULL);
-
-			if (pixbuf == NULL)
-				pixbuf = get_icon_pixbuf (NULL);
-
-			pixbuf1 = gdk_pixbuf_scale_simple (pixbuf, 16, 16, GDK_INTERP_BILINEAR);
-			g_object_unref (G_OBJECT (pixbuf));
-		}
-
-		g_free (icon_name);
-	} else {
-		pixbuf1 = get_icon_pixbuf (NULL);
-	}
-
-	return pixbuf1;
-}
-
 static gchar *
 get_category_path_for_mime_type (const gchar *mime_type) 
 {
-	gchar *path;
+	const gchar *path;
 
 	path = gnome_vfs_mime_get_value (mime_type, "category");
 
 	if (path != NULL)
-		return path;
+		return g_strdup (path);
 	else if (!strncmp (mime_type, "image", strlen ("image")))
 		return "Images";
 	else if (!strncmp (mime_type, "video", strlen ("video")))
@@ -177,27 +137,6 @@ get_protocol_name (const gchar *key)
 		return protocol_name + 1;
 	else
 		return NULL;
-}
-
-static gchar *
-get_description_for_protocol (const gchar *protocol_name) 
-{
-	gchar *description;
-	gchar *key;
-	int    i;
-
-	key = g_strconcat ("/desktop/gnome/url-handlers/", protocol_name, "/description", NULL);
-	description = gconf_client_get_string (gconf_client_get_default (), key, NULL);
-	g_free (key);
-
-	if (description != NULL)
-		return description;
-
-	for (i = 0; url_descriptions[i][0] != NULL; i++)
-		if (!strcmp (url_descriptions[i][0], protocol_name))
-			return g_strdup (url_descriptions[i][1]);
-
-	return NULL;
 }
 
 GtkTreeModel *
@@ -286,6 +225,68 @@ mime_types_model_new (void)
 	g_slist_free (url_list);
 
 	return GTK_TREE_MODEL (model);
+}
+
+GdkPixbuf *
+get_icon_pixbuf (const gchar *short_icon_name) 
+{
+	gchar *icon_name;
+	GdkPixbuf *pixbuf, *pixbuf1;
+
+	static GHashTable *pixbuf_table;
+
+	if (pixbuf_table == NULL)
+		pixbuf_table = g_hash_table_new (g_str_hash, g_str_equal);
+
+	if (short_icon_name == NULL)
+		short_icon_name = "nautilus/i-regular-24.png";
+
+	icon_name = gnome_program_locate_file
+		(gnome_program_get (), GNOME_FILE_DOMAIN_PIXMAP,
+		 short_icon_name, TRUE, NULL);
+
+	if (icon_name != NULL) {
+		pixbuf1 = g_hash_table_lookup (pixbuf_table, icon_name);
+
+		if (pixbuf1 != NULL) {
+			g_object_ref (G_OBJECT (pixbuf1));
+		} else {
+			pixbuf = gdk_pixbuf_new_from_file (icon_name, NULL);
+
+			if (pixbuf == NULL)
+				pixbuf = get_icon_pixbuf (NULL);
+
+			pixbuf1 = gdk_pixbuf_scale_simple (pixbuf, 16, 16, GDK_INTERP_BILINEAR);
+			g_object_unref (G_OBJECT (pixbuf));
+		}
+
+		g_free (icon_name);
+	} else {
+		pixbuf1 = get_icon_pixbuf (NULL);
+	}
+
+	return pixbuf1;
+}
+
+gchar *
+get_description_for_protocol (const gchar *protocol_name) 
+{
+	gchar *description;
+	gchar *key;
+	int    i;
+
+	key = g_strconcat ("/desktop/gnome/url-handlers/", protocol_name, "/description", NULL);
+	description = gconf_client_get_string (gconf_client_get_default (), key, NULL);
+	g_free (key);
+
+	if (description != NULL)
+		return description;
+
+	for (i = 0; url_descriptions[i][0] != NULL; i++)
+		if (!strcmp (url_descriptions[i][0], protocol_name))
+			return g_strdup (url_descriptions[i][1]);
+
+	return NULL;
 }
 
 gboolean

@@ -250,8 +250,12 @@ fill_dialog (ServiceEditDialog *dialog)
 	if (dialog->p->info->description != NULL)
 		gtk_entry_set_text (GTK_ENTRY (WID ("description_entry")), dialog->p->info->description);
 
-	if (dialog->p->info->protocol != NULL)
-		gtk_entry_set_text (GTK_ENTRY (WID ("protocol_entry")), dialog->p->info->protocol);
+	if (dialog->p->info->protocol != NULL) {
+		if (strcmp (dialog->p->info->protocol, "unknown"))
+			gtk_entry_set_text (GTK_ENTRY (WID ("protocol_entry")), dialog->p->info->protocol);
+
+		gtk_widget_set_sensitive (WID ("protocol_entry"), FALSE);
+	}
 
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("look_at_content_toggle")), !dialog->p->info->run_program);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("run_program_toggle")), dialog->p->info->run_program);
@@ -297,6 +301,8 @@ store_data (ServiceEditDialog *dialog)
 	g_free (dialog->p->info->custom_line);
 	dialog->p->info->custom_line =
 		g_strdup (gnome_file_entry_get_full_path (GNOME_FILE_ENTRY (WID ("custom_program_entry")), FALSE));
+
+	service_info_update (dialog->p->info);
 }
 
 static void

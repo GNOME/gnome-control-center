@@ -36,9 +36,13 @@ enum {
 	EXTENSIONS_COLUMN
 };
 
-GtkTreeModel *mime_types_model_new (void);
+GtkTreeModel *mime_types_model_new         (void);
 
-gboolean      model_entry_is_protocol (GtkTreeModel *model, GtkTreeIter *iter);
+GdkPixbuf    *get_icon_pixbuf              (const gchar *short_icon_name);
+gchar        *get_description_for_protocol (const gchar  *protocol_name);
+
+gboolean      model_entry_is_protocol      (GtkTreeModel *model,
+					    GtkTreeIter  *iter);
 
 G_END_DECLS
 

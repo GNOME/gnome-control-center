@@ -29,6 +29,7 @@
 #include <gconf/gconf-client.h>
 
 #include "service-info.h"
+#include "mime-types-model.h"
 
 static gchar *
 get_key_name (const ServiceInfo *info, gchar *end) 
@@ -79,7 +80,10 @@ get_string (const ServiceInfo *info, gchar *end, GConfChangeSet *changeset)
 		found = gconf_change_set_check_value (changeset, key, &value);
 
 	if (!found || changeset == NULL) {
-		ret = gconf_client_get_string (gconf_client_get_default (), key, NULL);
+		if (!strcmp (end, "description"))
+			ret = get_description_for_protocol (info->protocol);
+		else
+			ret = gconf_client_get_string (gconf_client_get_default (), key, NULL);
 	} else {
 		ret = g_strdup (gconf_value_get_string (value));
 		gconf_value_free (value);
@@ -116,13 +120,19 @@ get_bool (const ServiceInfo *info, gchar *end, GConfChangeSet *changeset)
 }
 
 ServiceInfo *
-service_info_load (const gchar *protocol, GConfChangeSet *changeset)
+service_info_load (GtkTreeModel *model, GtkTreeIter *iter, GConfChangeSet *changeset)
 {
 	ServiceInfo *info;
-	gchar *id;
+	gchar       *id;
+	GValue       protocol;
+
+	protocol.g_type = G_TYPE_INVALID;
+	gtk_tree_model_get_value (model, iter, MIME_TYPE_COLUMN, &protocol);
 
 	info = g_new0 (ServiceInfo, 1);
-	info->protocol = g_strdup (protocol);
+	info->model = model;
+	info->iter = gtk_tree_iter_copy (iter);
+	info->protocol = g_value_dup_string (&protocol);
 	info->description = get_string (info, "description", changeset);
 	info->run_program = get_bool (info, "type", changeset);
 	info->custom_line = get_string (info, "command", changeset);
@@ -151,6 +161,14 @@ service_info_save (const ServiceInfo *info, GConfChangeSet *changeset)
 
 	set_bool (info, "type", info->run_program, changeset);
 	set_bool (info, "need-terminal", info->need_terminal, changeset);
+}
+
+void
+service_info_update (ServiceInfo *info) 
+{
+	gtk_tree_store_set (GTK_TREE_STORE (info->model), info->iter,
+			    DESCRIPTION_COLUMN, info->description,
+			    -1);
 }
 
 void

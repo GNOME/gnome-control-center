@@ -483,6 +483,7 @@ store_data (MimeEditDialog *dialog)
 	g_list_foreach (ext_list, (GFunc) g_free, NULL);
 	g_list_free (ext_list);
 
+	mime_type_info_update (dialog->p->info);
 	mime_type_append_to_dirty_list (dialog->p->info);
 }
 
@@ -515,7 +516,7 @@ add_ext_cb (MimeEditDialog *dialog)
 	if (response_id == GTK_RESPONSE_OK) {
 		gtk_tree_store_append (dialog->p->ext_store, &iter, NULL);
 		gtk_tree_store_set (dialog->p->ext_store, &iter, 0,
-				    gtk_entry_get_text (GTK_ENTRY (ext_entry)));
+				    gtk_entry_get_text (GTK_ENTRY (ext_entry)), -1);
 	}
 
 	gtk_widget_destroy (GTK_WIDGET (add_dialog));
