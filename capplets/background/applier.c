@@ -880,7 +880,6 @@ renderer_render_wallpaper (Renderer *renderer)
 					(gdouble) renderer->pwidth;
 				scaley = (gdouble) renderer->wheight / 
 					(gdouble) renderer->pheight;
-				g_message ("Scaling by %f %f", scalex, scaley);
 				gdk_pixbuf_scale 
 					(renderer->wallpaper_pixbuf,
 					 renderer->pixbuf,
