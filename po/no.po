@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.5.8\n"
-"POT-Creation-Date: 2002-01-30 23:13+0100\n"
-"PO-Revision-Date: 2002-01-30 23:28+0100\n"
+"POT-Creation-Date: 2002-02-10 14:30+0100\n"
+"PO-Revision-Date: 2002-02-10 14:30+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr "Bakgrunn"
 msgid "Configuration of the desktop's background"
 msgstr "Konfigurasjon av skrivebordsbakgrunn"
 
-#: capplets/background/background-properties-capplet.c:451
+#: capplets/background/background-properties-capplet.c:462
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -31,9 +31,10 @@ msgid ""
 msgstr ""
 "Kunne ikke finne filen «%s».\n"
 "\n"
-"Vennligst sjekk at denne eksisterer og prøv på nytt, eller velg et annet bakgrunnsbilde."
+"Vennligst sjekk at denne eksisterer og prøv på nytt, eller velg et annet "
+"bakgrunnsbilde."
 
-#: capplets/background/background-properties-capplet.c:476
+#: capplets/background/background-properties-capplet.c:487
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -46,16 +47,16 @@ msgstr ""
 "\n"
 "Vennligst velg et annet bilde i stedet."
 
-#: capplets/background/background-properties-capplet.c:772
+#: capplets/background/background-properties-capplet.c:794
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:614
-#: capplets/keyboard/gnome-keyboard-properties.c:267
-#: capplets/mouse/gnome-mouse-properties.c:474
-#: capplets/sound/sound-properties-capplet.c:144
+#: capplets/default-applications/gnome-default-applications-properties.c:615
+#: capplets/keyboard/gnome-keyboard-properties.c:279
+#: capplets/mouse/gnome-mouse-properties.c:494
+#: capplets/sound/sound-properties-capplet.c:143
 msgid "Retrieve and store legacy settings"
 msgstr "Hent og lagre gamle innstillinger"
 
-#: capplets/background/background-properties-capplet.c:808
+#: capplets/background/background-properties-capplet.c:830
 msgid "Background Properties"
 msgstr "Egenskaper for bakgrunn"
 
@@ -109,7 +110,9 @@ msgstr "Konvertering fra widget tilbakekall"
 #: capplets/common/gconf-property-editor.c:170
 msgid ""
 "Callback to be issued when data are to be converted to GConf from the widget"
-msgstr "Tilbakekall som skal utstedes når data skal konverteres til GConf fra widgetene"
+msgstr ""
+"Tilbakekall som skal utstedes når data skal konverteres til GConf fra "
+"widgetene"
 
 #: capplets/common/gconf-property-editor.c:175
 msgid "UI Control"
@@ -359,87 +362,90 @@ msgstr "Filtyper og programmerc"
 
 #: capplets/file-types/file-types.desktop.in.h:2
 msgid "Specify which programs are used to open or view each file type"
-msgstr "Oppgi hvilke programmer som skal brukes for å åpne eller vise hver filtype"
+msgstr ""
+"Oppgi hvilke programmer som skal brukes for å åpne eller vise hver filtype"
 
-#: capplets/file-types/mime-category-edit-dialog.c:136
+#: capplets/file-types/mime-category-edit-dialog.c:137
 msgid "Edit file category"
 msgstr "Rediger filkategori"
 
-#: capplets/file-types/mime-category-edit-dialog.c:170
-#: capplets/file-types/mime-edit-dialog.c:203
-#: capplets/file-types/service-edit-dialog.c:165
+#: capplets/file-types/mime-category-edit-dialog.c:171
+#: capplets/file-types/mime-edit-dialog.c:204
 #: capplets/file-types/service-edit-dialog.c:166
+#: capplets/file-types/service-edit-dialog.c:167
 msgid "Model"
 msgstr "Modell"
 
-#: capplets/file-types/mime-category-edit-dialog.c:171
+#: capplets/file-types/mime-category-edit-dialog.c:172
 msgid "GtkTreeModel that contains the category data"
 msgstr "GtkTreeModel som inneholder kategoridata"
 
-#: capplets/file-types/mime-category-edit-dialog.c:176
+#: capplets/file-types/mime-category-edit-dialog.c:177
 msgid "MIME category info"
 msgstr "Informasjon om MIME-kategori"
 
-#: capplets/file-types/mime-category-edit-dialog.c:177
+#: capplets/file-types/mime-category-edit-dialog.c:178
 msgid "Structure containing information on the MIME category"
 msgstr "Struktur som inneholder informasjon om MIME-kategori"
 
-#: capplets/file-types/mime-category-edit-dialog.c:342
-#: capplets/file-types/mime-edit-dialog.c:391
-#: capplets/file-types/mime-edit-dialog.c:491
-#: capplets/file-types/service-edit-dialog.c:350
-#: capplets/file-types/service-edit-dialog.c:396
+#: capplets/file-types/mime-category-edit-dialog.c:343
+#: capplets/file-types/mime-edit-dialog.c:392
+#: capplets/file-types/mime-edit-dialog.c:492
+#: capplets/file-types/service-edit-dialog.c:351
+#: capplets/file-types/service-edit-dialog.c:397
 msgid "Custom"
 msgstr "Egendefinert"
 
-#: capplets/file-types/mime-edit-dialog.c:163
+#: capplets/file-types/mime-edit-dialog.c:164
 msgid "Extension"
 msgstr "Filtype"
 
-#: capplets/file-types/mime-edit-dialog.c:166
+#: capplets/file-types/mime-edit-dialog.c:167
 msgid "Edit file type"
 msgstr "Rediger filtype"
 
-#: capplets/file-types/mime-edit-dialog.c:204
+#: capplets/file-types/mime-edit-dialog.c:205
 msgid "Underlying model to notify when Ok is clicked"
 msgstr "Underliggende model som skal gis beskjed når man klikker OK"
 
-#: capplets/file-types/mime-edit-dialog.c:211
+#: capplets/file-types/mime-edit-dialog.c:212
 msgid "MIME type information"
 msgstr "Informasjon om MIME-type"
 
-#: capplets/file-types/mime-edit-dialog.c:212
+#: capplets/file-types/mime-edit-dialog.c:213
 msgid "Structure with data on the MIME type"
 msgstr "Struktur med data om MIME-type"
 
-#: capplets/file-types/mime-edit-dialog.c:218
+#: capplets/file-types/mime-edit-dialog.c:219
 msgid "Is add dialog"
 msgstr "Er legg til dialog"
 
-#: capplets/file-types/mime-edit-dialog.c:219
+#: capplets/file-types/mime-edit-dialog.c:220
 msgid "True if this dialog is for adding a MIME type"
 msgstr "Sann hvis denne dialogen er ment for å legge til en MIME-type"
 
-#: capplets/file-types/mime-edit-dialog.c:386
-#: capplets/file-types/mime-edit-dialog.c:441
+#: capplets/file-types/mime-edit-dialog.c:387
+#: capplets/file-types/mime-edit-dialog.c:442
 msgid "None"
 msgstr "Ingen"
 
-#: capplets/file-types/mime-edit-dialog.c:670
+#: capplets/file-types/mime-edit-dialog.c:673
 msgid ""
 "Invalid MIME type. Please enter a valid MIME type, or leave the field blank "
 "to have one generated for you."
-msgstr "Ugyldig MIME-type. Vennligst oppgi en gyldig MIME-type, eller la feltet stå tomt for å generere en automatisk."
+msgstr ""
+"Ugyldig MIME-type. Vennligst oppgi en gyldig MIME-type, eller la feltet stå "
+"tomt for å generere en automatisk."
 
-#: capplets/file-types/mime-edit-dialog.c:680
+#: capplets/file-types/mime-edit-dialog.c:684
 msgid "There already exists a MIME type of that name."
 msgstr "En MIME-type med dette navnet finnes allerede."
 
-#: capplets/file-types/mime-edit-dialog.c:745
+#: capplets/file-types/mime-edit-dialog.c:748
 msgid "Category"
 msgstr "Kategori"
 
-#: capplets/file-types/mime-edit-dialog.c:750
+#: capplets/file-types/mime-edit-dialog.c:753
 msgid "Choose a file category"
 msgstr "Velg en filkategori"
 
@@ -452,71 +458,75 @@ msgstr "Modell kun for kategorier"
 msgid "Internet Services"
 msgstr "Internett-tjenester"
 
-#: capplets/file-types/service-edit-dialog.c:132
+#: capplets/file-types/service-edit-dialog.c:133
 msgid "Edit service information"
 msgstr "Rediger informasjon om tjeneste"
 
-#: capplets/file-types/service-edit-dialog.c:173
+#: capplets/file-types/service-edit-dialog.c:174
 msgid "Service info"
 msgstr "Tjenesteinformasjon"
 
-#: capplets/file-types/service-edit-dialog.c:174
+#: capplets/file-types/service-edit-dialog.c:175
 msgid "Structure containing service information"
 msgstr "Struktur som inneholder informasjon om tjeneste"
 
-#: capplets/file-types/service-edit-dialog.c:180
+#: capplets/file-types/service-edit-dialog.c:181
 msgid "Is add"
 msgstr "Er legg til"
 
-#: capplets/file-types/service-edit-dialog.c:181
+#: capplets/file-types/service-edit-dialog.c:182
 msgid "TRUE if this is an add service dialog"
 msgstr "SANN hvis dette er en dialog ment for å legge til tjenester"
 
-#: capplets/file-types/service-edit-dialog.c:486
+#: capplets/file-types/service-edit-dialog.c:489
 msgid "Please enter a protocol name."
 msgstr "Vennligst oppgi et navn på protokollen."
 
-#: capplets/file-types/service-edit-dialog.c:497
+#: capplets/file-types/service-edit-dialog.c:502
 msgid ""
 "Invalid protocol name. Please enter a protocol name without any spaces or "
 "punctuation."
-msgstr "Ugyldig protokollnavn. Vennligst oppgi et protokollnavn uten mellomrom eller punktum."
+msgstr ""
+"Ugyldig protokollnavn. Vennligst oppgi et protokollnavn uten mellomrom eller "
+"punktum."
 
-#: capplets/file-types/service-edit-dialog.c:509
+#: capplets/file-types/service-edit-dialog.c:515
 msgid "There is already a protocol by that name."
 msgstr "En protokoll med dette navnet finnes allerede."
 
-#: capplets/file-types/service-info.c:43
+#: capplets/file-types/service-info.c:44
 msgid "Unknown service types"
 msgstr "Ukjent typer tjenester"
 
-#: capplets/file-types/service-info.c:44
+#: capplets/file-types/service-info.c:45
 msgid "World wide web"
 msgstr "World wide web"
 
-#: capplets/file-types/service-info.c:45
+#: capplets/file-types/service-info.c:46
 msgid "File transfer protocol"
 msgstr "Fil transfer protocol"
 
-#: capplets/file-types/service-info.c:46
+#: capplets/file-types/service-info.c:47
 msgid "Detailed documentation"
 msgstr "Detaljert dokumentasjon"
 
-#: capplets/file-types/service-info.c:47
+#: capplets/file-types/service-info.c:48
 msgid "Manual pages"
 msgstr "Manualsider"
 
-#: capplets/file-types/service-info.c:48
+#: capplets/file-types/service-info.c:49
 msgid "Electronic mail transmission"
 msgstr "Overføring av elektronisk post"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:263
-#: capplets/keyboard/gnome-keyboard-properties.c:265
-#: capplets/sound/sound-properties-capplet.c:140
-#: capplets/sound/sound-properties-capplet.c:142
+#: capplets/keyboard/gnome-keyboard-properties.c:275
+#: capplets/keyboard/gnome-keyboard-properties.c:277
+#: capplets/sound/sound-properties-capplet.c:139
+#: capplets/sound/sound-properties-capplet.c:141
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
-msgstr "Bare aktiver innstillinger og avslutt (kun for kompatibilitet; håndteres av en daemon nå)"
+msgstr ""
+"Bare aktiver innstillinger og avslutt (kun for kompatibilitet; håndteres av "
+"en daemon nå)"
 
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
@@ -526,7 +536,7 @@ msgstr "Tastatur"
 msgid "Keyboard Properties"
 msgstr "Egenskaper for tastatur"
 
-#: capplets/mouse/gnome-mouse-properties.c:499
+#: capplets/mouse/gnome-mouse-properties.c:519
 #: capplets/mouse/mouse.desktop.in.h:2
 msgid "Mouse Properties"
 msgstr "Egenskaper for mus"
@@ -547,7 +557,7 @@ msgstr "Skjermsparer"
 msgid "Configure GNOME's use of sound"
 msgstr "Konfigurér bruk av lyd i GNOME."
 
-#: capplets/sound/sound-properties-capplet.c:172
+#: capplets/sound/sound-properties-capplet.c:171
 msgid "Sound properties"
 msgstr "Egenskaper for lyd"
 
@@ -597,35 +607,35 @@ msgstr "Eksempelknapp"
 msgid "Sample Check Button"
 msgstr "Eksempel på avkrysningsknapp"
 
-#: capplets/theme-switcher/control/control.c:52
+#: capplets/theme-switcher/control/control.c:53
 msgid "Sample Text Entry Field"
 msgstr "Eksempel på tekstfelt"
 
-#: capplets/theme-switcher/control/control.c:63
+#: capplets/theme-switcher/control/control.c:64
 msgid "Submenu"
 msgstr "Undermeny"
 
-#: capplets/theme-switcher/control/control.c:68
+#: capplets/theme-switcher/control/control.c:69
 msgid "Item 1"
 msgstr "Oppføring 1"
 
-#: capplets/theme-switcher/control/control.c:70
+#: capplets/theme-switcher/control/control.c:71
 msgid "Another item"
 msgstr "Nok en oppføring"
 
-#: capplets/theme-switcher/control/control.c:74
+#: capplets/theme-switcher/control/control.c:75
 msgid "Radio Button 1"
 msgstr "Radioknapp 1"
 
-#: capplets/theme-switcher/control/control.c:80
+#: capplets/theme-switcher/control/control.c:81
 msgid "Radio Button 2"
 msgstr "Radioknapp 2"
 
-#: capplets/theme-switcher/control/control.c:101
+#: capplets/theme-switcher/control/control.c:102
 msgid "One"
 msgstr "En"
 
-#: capplets/theme-switcher/control/control.c:107
+#: capplets/theme-switcher/control/control.c:108
 msgid "Two"
 msgstr "To"
 
@@ -637,7 +647,7 @@ msgstr "Gtk+ temavelger"
 msgid "Select which gtk+ theme to use"
 msgstr "Velg gtk+-tema som skal brukes"
 
-#: capplets/theme-switcher/main.c:209
+#: capplets/theme-switcher/main.c:213
 msgid "Select a theme to install"
 msgstr "Velg et tema som skal installeres"
 
@@ -699,30 +709,36 @@ msgstr "GNOME Kontrollsenter: %s"
 msgid "The GNOME configuration tool"
 msgstr "Konfigurasjonsverktøy for GNOME"
 
-#: libbackground/applier.c:228
+#: control-center/main.c:44
+msgid "Use shell even if nautilus is running."
+msgstr "Bruk skall selv om nautilus kjører."
+
+#: libbackground/applier.c:239
 msgid "Type"
 msgstr "Type"
 
-#: libbackground/applier.c:229
+#: libbackground/applier.c:240
 msgid ""
 "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
 "for preview"
-msgstr "Type bg_applier: BG_APPLIER_ROOT for rotvinduet eller BG_APPLIER_PREVIEW for forhåndsvisning"
+msgstr ""
+"Type bg_applier: BG_APPLIER_ROOT for rotvinduet eller BG_APPLIER_PREVIEW for "
+"forhåndsvisning"
 
-#: libbackground/applier.c:391
+#: libbackground/applier.c:402
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "Kunne ikke laste pixbuf \"%s\"; slår av bakgrunn."
 
-#: libbackground/applier.c:455
+#: libbackground/applier.c:475
 msgid "Disabled"
 msgstr "Slått av"
 
-#: libsounds/sound-view.c:98
+#: libsounds/sound-view.c:99
 msgid "The sound file for this event does not exist."
 msgstr "Lydfilen for denne hendelsen eksisterer ikke."
 
-#: libsounds/sound-view.c:100
+#: libsounds/sound-view.c:101
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -732,21 +748,29 @@ msgstr ""
 "Du må kanskje installere gnome-audio pakken\n"
 "for å få et forvalgt sett med lyder."
 
-#: libsounds/sound-view.c:152
+#: libsounds/sound-view.c:154
 msgid "Event"
 msgstr "Hendelse"
 
-#: libsounds/sound-view.c:152
+#: libsounds/sound-view.c:154
 msgid "File to Play"
 msgstr "Fil som skal spilles"
 
-#: libsounds/sound-view.c:185
+#: libsounds/sound-view.c:187
 msgid "Play"
 msgstr "Spill"
 
-#: libsounds/sound-view.c:191
+#: libsounds/sound-view.c:193
 msgid "Select sound file"
 msgstr "Velg lydfil"
+
+#: capplets/font/font-properties.desktop.in.h:1
+msgid "Font"
+msgstr "Skrift"
+
+#: capplets/font/font-properties.desktop.in.h:2
+msgid "Select which font to use"
+msgstr "Velg skrift som skal brukes"
 
 #~ msgid "Main"
 #~ msgstr "Hoved"
@@ -1469,9 +1493,6 @@ msgstr "Velg lydfil"
 
 #~ msgid "Delay between redraws."
 #~ msgstr "Pause mellom gjenopptegninger."
-
-#~ msgid "Forest"
-#~ msgstr "Skog"
 
 #~ msgid "Number of trees to use."
 #~ msgstr "Antall trær som skal brukes."
