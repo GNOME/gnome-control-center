@@ -60,5 +60,7 @@ extern void enable_disable_restoring(GladeXML * dialog);
 
 extern void init_preview(GladeXML * dialog);
 
+extern void choose_model(GladeXML * dialog);
+
 G_END_DECLS
 #endif				/* __GNOME_KEYBOARD_PROPERTY_XKB_H */

@@ -2,6 +2,7 @@ bin_PROGRAMS = gnome-keyboard-properties
 
 gnome_keyboard_properties_SOURCES = gnome-keyboard-properties.c \
                                     gnome-keyboard-properties-xkb.c \
+                                    gnome-keyboard-properties-xkbmc.c \
                                     gnome-keyboard-properties-xkblt.c \
                                     gnome-keyboard-properties-xkbot.c \
                                     gnome-keyboard-properties-xkbpv.c \
