@@ -152,6 +152,10 @@ dnl ==============================================
 
 
 
+dnl Here is the new sed line that adds the full path to the Exec line :
+dnl 	sed -e \"s#Icon=.\*#Icon=$(GNOMECC_ICONS_DIR)/${cappletname}-capplet.png#\" -e \"s#Exec=.\*#Exec=gnomecc --run-capplet ${bindir}/${bin_PROGRAMS}#\" < $< \> ${cappletname}.desktop.in\
+dnl
+dnl Chema
 
 dnl ==============================================
 dnl Macro for the common code
