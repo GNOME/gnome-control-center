@@ -29,6 +29,7 @@ bin_PROGRAMS = gnome2-control-center
 
 gnome2_control_center_SOURCES = \
 	main.c						\
+	preferences.h					\
 	capplet-dir.c 		capplet-dir.h 		\
 	capplet-dir-view.c	capplet-dir-view.h	\
 	capplet-dir-view-list.c
