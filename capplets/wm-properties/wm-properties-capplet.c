@@ -591,7 +591,7 @@ restart (gboolean force)
                                               1, NULL, NULL,
                                               NULL, NULL, 0, NULL,
                                               NULL, NULL, 0, 0};
-        const WindowManager twm_fallback = {NULL, "twm", "twm", 0, 0, 1, 0};
+        WindowManager twm_fallback = {NULL, "twm", "twm", 0, 0, 1, 0};
 
         twm_dentry.exec = twm_argv;
         twm_fallback.dentry = &twm_dentry;
