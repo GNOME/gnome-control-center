@@ -1412,7 +1412,10 @@ add_mime_clicked (GtkWidget *widget, gpointer data)
 					text[3] = g_strdup (default_app->name);
 
 					filename = capplet_get_icon_path (DEFAULT_ACTION_ICON);
-					pixbuf = gdk_pixbuf_new_from_file (filename);
+					if (filename != NULL) {
+						pixbuf = gdk_pixbuf_new_from_file (filename);
+						g_free (filename);
+					}
 
 					gnome_vfs_mime_application_free (default_app);
 					break;
@@ -1425,8 +1428,10 @@ add_mime_clicked (GtkWidget *widget, gpointer data)
 					text[3] = g_strdup_printf (_("View as %s"), tmp_text);
 					g_free (tmp_text);
 					filename = capplet_get_icon_path ("nautilus/gnome-library.png");
-					pixbuf = gdk_pixbuf_new_from_file (filename);
-					g_free (filename);
+					if (filename != NULL) {
+						pixbuf = gdk_pixbuf_new_from_file (filename);
+						g_free (filename);
+					}
 					CORBA_free (default_component);
 					break;
 					
@@ -1594,7 +1599,10 @@ update_mime_list_action (const char *mime_string)
 				g_free (text);
 				text = g_strdup (default_app->name);							
 				icon_path = capplet_get_icon_path (DEFAULT_ACTION_ICON);
-				pixbuf = gdk_pixbuf_new_from_file (icon_path);
+				if (icon_path != NULL) {
+					pixbuf = gdk_pixbuf_new_from_file (icon_path);
+					g_free (icon_path);
+				}
 				gnome_vfs_mime_application_free (default_app);
 				break;
 
@@ -1606,8 +1614,10 @@ update_mime_list_action (const char *mime_string)
 				text = g_strdup_printf (_("View as %s"), tmp_text);
 				g_free (tmp_text);
 				icon_path = capplet_get_icon_path ("nautilus/gnome-library.png");
-				pixbuf = gdk_pixbuf_new_from_file (icon_path);
-				g_free (icon_path);
+				if (icon_path != NULL) {
+					pixbuf = gdk_pixbuf_new_from_file (icon_path);
+					g_free (icon_path);
+				}
 				CORBA_free (default_component);
 				break;
 				
@@ -1732,7 +1742,10 @@ populate_mime_list (GList *type_list, GtkCList *clist)
 				text[3] = g_strdup (default_app->name);
 				
 				icon_path = capplet_get_icon_path (DEFAULT_ACTION_ICON);
-				pixbuf = gdk_pixbuf_new_from_file (icon_path);
+				if (icon_path != NULL) {
+					pixbuf = gdk_pixbuf_new_from_file (icon_path);
+					g_free (icon_path);
+				}
 				gnome_vfs_mime_application_free (default_app);
 				break;
 
@@ -1744,8 +1757,10 @@ populate_mime_list (GList *type_list, GtkCList *clist)
 				text[3] = g_strdup_printf (_("View as %s"), tmp_text);
 				g_free (tmp_text);
 				icon_path = capplet_get_icon_path ("nautilus/gnome-library.png");
-				pixbuf = gdk_pixbuf_new_from_file (icon_path);
-				g_free (icon_path);
+				if (icon_path != NULL) {
+					pixbuf = gdk_pixbuf_new_from_file (icon_path);
+					g_free (icon_path);
+				}
 				CORBA_free (default_component);
 				break;
 				

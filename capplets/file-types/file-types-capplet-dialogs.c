@@ -35,6 +35,7 @@
 #include <libgnomevfs/gnome-vfs-mime-handlers.h>
 #include <libgnomevfs/gnome-vfs-application-registry.h>
 #include <libgnomevfs/gnome-vfs-mime-info.h>
+#include <libgnomevfs/gnome-vfs-utils.h>
 
 #include "nautilus-mime-type-capplet.h"
 #include "nautilus-mime-type-capplet-dialogs.h"
@@ -386,6 +387,8 @@ initialize_edit_applications_dialog (const char *mime_type)
 					     GNOME_STOCK_BUTTON_OK,
 					     NULL,
 					     NULL);
+
+	/* FIXME: dialog should be parented on Control Center window */
 
 	gtk_container_set_border_width (GTK_CONTAINER (edit_application_details->window), GNOME_PAD);
   	gtk_window_set_policy (GTK_WINDOW (edit_application_details->window), FALSE, TRUE, FALSE);
@@ -1162,21 +1165,92 @@ add_item_to_application_list (GtkWidget *list, const char *name, const char *mim
 	gtk_list_select_child (GTK_LIST (list), GTK_WIDGET (list_item));	
 }
 
-static void
-show_new_application_window (GtkWidget *button, GtkWidget *list)
+static gboolean
+handle_invalid_application_input (GtkWindow *parent_window, const char *name, const char *command)
 {
-	GtkWidget *app_entry, *command_entry;
+	char *message;
+	char *stripped_name;
+	GnomeDialog *error_dialog;
+	gboolean error_in_name;
+
+	message = NULL;
+	error_in_name = FALSE;
+
+	stripped_name = g_strstrip (g_strdup (name));
+	 
+	if (strlen (stripped_name) == 0) {
+		message = g_strdup (_("You must enter a name."));
+		error_in_name = TRUE;
+	} else if (strlen (command) == 0) {
+		message = g_strdup (_("You must enter a command."));
+	} else if (!gnome_vfs_is_executable_command_string (command)) {
+		if (command[0] == '/') {
+			/* FIXME: Should strip parameters off before using in this message. */
+			/* FIXME: Should use separate messages for doesn't exist/isn't executable. */
+			/* Both of these FIXMEs would need to handle quoting to work correctly, 
+			 * since otherwise a space might be part of path or separator before parameters.
+			 */
+			/* FIXME: Should use some line-wrapping technology a la nautilus-stock-dialogs.c */
+			message = g_strdup_printf
+				(_("\"%s\" does not exist or is not executable.\n"
+				   "Check your spelling and make sure you have\n"
+				   "the right permissions to execute this file."), command);
+		} else {
+			/* FIXME: Should strip parameters off before using in this message */
+			message = g_strdup_printf
+				(_("The command \"%s\" cannot be found.\n"
+				   "You must use a command that can work from any command line."), command);
+		}
+	}
+
+	g_free (stripped_name);
+	
+	if (message != NULL) {
+		error_dialog = GNOME_DIALOG (gnome_error_dialog_parented (message,
+								          parent_window));
+		gtk_window_set_title (GTK_WINDOW (error_dialog), 
+				      error_in_name 
+				      	? _("Bad Application Name")
+				      	: _("Bad Application Command"));
+		
+		gnome_dialog_run (error_dialog);
+		g_free (message);
+		
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
+static void
+run_edit_or_new_application_dialog (const char *mime_type, GtkWidget *list, GnomeVFSMimeApplication *application)
+{
 	GtkWidget *dialog;
+	GtkWidget *app_entry, *command_entry;
 	GtkWidget *label;
 	GtkWidget *behavior_frame, *frame_vbox;
 	GtkWidget *multiple_check_box, *uri_check_box;
 	GtkWidget *table;	
-	char *name, *command, *mime_type;
+	gboolean initial_toggle_state;
+	const char *name;
+	const char *command;
+	int dialog_result;
+	gboolean entry_validated;
+	char *invalid_entry_message;
 
-	dialog = gnome_dialog_new (_("New Application"), GNOME_STOCK_BUTTON_OK, GNOME_STOCK_BUTTON_CANCEL, NULL);	
+	g_assert (mime_type != NULL || application != NULL);
+	g_assert (GTK_IS_WIDGET (list));
 
+	dialog = gnome_dialog_new (
+		application == NULL
+			? _("Add Application")
+			: _("Edit Application"), 
+		GNOME_STOCK_BUTTON_OK, GNOME_STOCK_BUTTON_CANCEL, NULL);	
+
+	/* FIXME: Dialog should be parented on Edit Applications dialog */
+	
 	/* Create table */
-	table = gtk_table_new (3, 2, FALSE);
+	table = gtk_table_new (4, 2, FALSE);
 	gtk_container_add (GTK_CONTAINER (GNOME_DIALOG (dialog)->vbox), table);	
 	gtk_table_set_row_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
 	gtk_table_set_col_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
@@ -1184,21 +1258,26 @@ show_new_application_window (GtkWidget *button, GtkWidget *list)
 	/* Application Name label and entry */
 	label = gtk_label_new (_("Application Name:"));
 	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-	gtk_table_attach_defaults ( GTK_TABLE (table), label, 0, 1, 0, 1);
+	gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 0, 1);
 
 	app_entry = gtk_entry_new ();
 	gtk_table_attach_defaults ( GTK_TABLE (table), app_entry, 1, 2, 0, 1);
+	if (application != NULL) {
+		gtk_entry_set_text (GTK_ENTRY (app_entry), application->name);
+	}
 
 	/* Application Command label and entry */
 	label = gtk_label_new (_("Application Command:"));
 	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-	gtk_table_attach_defaults ( GTK_TABLE (table), label, 0, 1, 1, 2);
+	gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 1, 2);
 
 	command_entry = gtk_entry_new ();
-	gtk_table_attach_defaults ( GTK_TABLE (table), command_entry, 1, 2, 1, 2);
-
+	gtk_table_attach_defaults (GTK_TABLE (table), command_entry, 1, 2, 1, 2);
+	if (application != NULL) {
+		gtk_entry_set_text (GTK_ENTRY (command_entry), application->command);
+	}
+	
 	/* Open Behavior frame */
-	/* FIXME bugzilla.eazel.com 6066: Need to add expected uri schemes */
 	behavior_frame = gtk_frame_new (_("Open Behavior"));
 	gtk_table_attach_defaults ( GTK_TABLE (table), behavior_frame, 0, 2, 2, 3);
 	
@@ -1207,45 +1286,69 @@ show_new_application_window (GtkWidget *button, GtkWidget *list)
 
 	multiple_check_box = gtk_check_button_new_with_label (_("Can open multiple files"));
 	gtk_box_pack_start (GTK_BOX (frame_vbox), multiple_check_box, FALSE, FALSE, 0);
+	initial_toggle_state = application == NULL
+		? FALSE
+		: application->can_open_multiple_files;
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (multiple_check_box), initial_toggle_state);
 
-	uri_check_box = gtk_check_button_new_with_label (_("Expects URIs as arguments"));
+	/* FIXME bugzilla.eazel.com 6066: This needs to be three options now: "yes", "no", and "use uris for non-file locations" */
+	uri_check_box = gtk_check_button_new_with_label (_("Can open from URI"));
 	gtk_box_pack_start (GTK_BOX (frame_vbox), uri_check_box, FALSE, FALSE, 0);
-		
-	
+	initial_toggle_state = application == NULL
+		? FALSE
+		: application->expects_uris;
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (uri_check_box), initial_toggle_state);
+
+
 	gtk_widget_show_all (GNOME_DIALOG (dialog)->vbox);
 
 	/* Set focus to text entry widget */
 	gtk_widget_grab_focus (app_entry);
 
-	if (gnome_dialog_run (GNOME_DIALOG (dialog)) == GNOME_OK) {
-		name = gtk_entry_get_text (GTK_ENTRY (app_entry));
-		command = gtk_entry_get_text (GTK_ENTRY (command_entry));
+	do {
+		dialog_result = gnome_dialog_run (GNOME_DIALOG (dialog));
+		entry_validated = FALSE;
 
-		if (strlen (name) > 0 && strlen (command) > 0) {
-			mime_type = gtk_object_get_data (GTK_OBJECT (button), "mime_type");				
-			add_or_update_application (list,
-						   gtk_entry_get_text (GTK_ENTRY (app_entry)),
-					     	   gtk_entry_get_text (GTK_ENTRY (command_entry)),
-						   
-	        			     	   gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (multiple_check_box)),
-	        			     	   gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (uri_check_box)),
-	        			     	   FALSE);				
-			add_item_to_application_list (list, name, mime_type, TRUE, -1);
+		if (dialog_result == GNOME_OK) {
+			name = gtk_entry_get_text (GTK_ENTRY (app_entry));
+			command = gtk_entry_get_text (GTK_ENTRY (command_entry));
+
+			invalid_entry_message = NULL;
+
+			if (!handle_invalid_application_input (GTK_WINDOW (dialog), name, command)) {
+				entry_validated = TRUE;
+				add_or_update_application (list,
+							   name,
+						     	   command,
+		        			     	   gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (multiple_check_box)),
+		        			     	   gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (uri_check_box)),
+		        			     	   application != NULL);
+		        	if (application == NULL) {
+					add_item_to_application_list (list, name, mime_type, TRUE, -1);
+		        	}				
+			}
 		}
+	} while (dialog_result == GNOME_OK && !entry_validated);
+	
+	/* FIXME: Close box is treated like Cancel, which loses user changes silently.
+	 * Would be better to either do nothing at all (force use of OK or Cancel) or
+	 * even put up a little dialog telling them they have to use OK or Cancel.
+	 * Too bad we can't prevent the close box from appearing. Window Managers suck.
+	 */
+	if (dialog_result >= 0) {
+		gnome_dialog_close (GNOME_DIALOG (dialog));
 	}
-
-	gnome_dialog_close (GNOME_DIALOG (dialog));
 }
 	
 static void
+show_new_application_window (GtkWidget *button, GtkWidget *list)
+{
+	run_edit_or_new_application_dialog (gtk_object_get_data (GTK_OBJECT (button), "mime_type"), list, NULL);
+}
+
+static void
 show_edit_application_window (GtkWidget *button, GtkWidget *list)
 {
-	GtkWidget *app_entry, *command_entry;
-	GtkWidget *dialog;
-	GtkWidget *label;
-	GtkWidget *behavior_frame, *frame_vbox;
-	GtkWidget *multiple_check_box, *uri_check_box;
-	GtkWidget *table;	
 	GList *selection;
 	const char *id;
 	GnomeVFSMimeApplication *application;
@@ -1273,63 +1376,8 @@ show_edit_application_window (GtkWidget *button, GtkWidget *list)
 		return;
 	}
 
-	dialog = gnome_dialog_new (_("Edit Application"), GNOME_STOCK_BUTTON_OK, GNOME_STOCK_BUTTON_CANCEL, NULL);	
-	
-	/* Create table */
-	table = gtk_table_new (4, 2, FALSE);
-	gtk_container_add (GTK_CONTAINER (GNOME_DIALOG (dialog)->vbox), table);	
-	gtk_table_set_row_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
-	gtk_table_set_col_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
+	run_edit_or_new_application_dialog (NULL, list, application);
 
-	/* Application Name label and entry */
-	label = gtk_label_new (_("Application Name:"));
-	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-	gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 0, 1);
-
-	app_entry = gtk_entry_new ();
-	gtk_table_attach_defaults ( GTK_TABLE (table), app_entry, 1, 2, 0, 1);
-	gtk_entry_set_text (GTK_ENTRY (app_entry), application->name);
-
-	/* Application Command label and entry */
-	label = gtk_label_new (_("Application Command:"));
-	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-	gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 1, 2);
-
-	command_entry = gtk_entry_new ();
-	gtk_entry_set_text (GTK_ENTRY (command_entry), application->command);
-	gtk_table_attach_defaults (GTK_TABLE (table), command_entry, 1, 2, 1, 2);
-	
-	/* Open Behavior frame */
-	behavior_frame = gtk_frame_new (_("Open Behavior"));
-	gtk_table_attach_defaults ( GTK_TABLE (table), behavior_frame, 0, 2, 2, 3);
-	
-	frame_vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
-	gtk_container_add (GTK_CONTAINER (behavior_frame), frame_vbox);
-
-	multiple_check_box = gtk_check_button_new_with_label (_("Can open multiple files"));
-	gtk_box_pack_start (GTK_BOX (frame_vbox), multiple_check_box, FALSE, FALSE, 0);
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (multiple_check_box), application->can_open_multiple_files);
-
-	/* FIXME bugzilla.eazel.com 6066: This needs to be three options now: "yes", "no", and "use uris for non-file locations" */
-	uri_check_box = gtk_check_button_new_with_label (_("Can open from URI"));
-	gtk_box_pack_start (GTK_BOX (frame_vbox), uri_check_box, FALSE, FALSE, 0);
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (uri_check_box), application->expects_uris);
-
-
-	gtk_widget_show_all (GNOME_DIALOG (dialog)->vbox);
-
-	/* Set focus to text entry widget */
-	gtk_widget_grab_focus (app_entry);
-
-	if (gnome_dialog_run (GNOME_DIALOG (dialog)) == GNOME_OK) {
-		add_or_update_application (list,
-					   gtk_entry_get_text (GTK_ENTRY (app_entry)),
-				     	   gtk_entry_get_text (GTK_ENTRY (command_entry)),
-        			     	   gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (multiple_check_box)),
-        			     	   gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (uri_check_box)),
-        			     	   TRUE);
-	}
-	gnome_dialog_close (GNOME_DIALOG (dialog));
        	gnome_vfs_mime_application_free (application);
 }
 
