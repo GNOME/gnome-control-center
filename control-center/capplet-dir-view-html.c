@@ -378,7 +378,7 @@ html_create (CappletDirView *view)
 					GTK_POLICY_NEVER,
 					GTK_POLICY_AUTOMATIC);
 	gtk_container_add (GTK_CONTAINER (sw), GTK_WIDGET (data->sidebar));
-	gtk_widget_set_usize (GTK_WIDGET (data->sidebar), 200, 0);
+	gtk_widget_set_usize (GTK_WIDGET (data->sidebar), 140, 0);
 	gtk_box_pack_start (GTK_BOX (hbox), sw, FALSE, FALSE, 0);
 
 	/* main widget */
