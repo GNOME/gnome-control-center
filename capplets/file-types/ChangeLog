@@ -1,3 +1,14 @@
+2002-08-01  Federico Mena Quintero  <federico@ximian.com>
+
+	* file-types-properties.glade: Made the file entries modal as they
+	live in modal dialogs.  Fixes #89370.
+
+	* service-edit-dialog.c (service_add_dialog_new): Return a
+	GObject, not a GtkWidget.
+
+	* file-types-capplet.c (add_service_cb): Do not assign a GtkWidget
+	to a GObject.
+
 2002-07-17  Jody Goldberg <jody@gnome.org>
 
 	* mime-type-info.c (mime_type_info_new) : no need to preload the icon.
