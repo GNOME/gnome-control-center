@@ -158,10 +158,6 @@ prefs_widget_init (PrefsWidget *prefs_widget)
 				       browse_button_cb,
 				       prefs_widget);
 	glade_xml_signal_connect_data (prefs_widget->dialog_data,
-				       "auto_apply_toggled_cb",
-				       auto_apply_toggled_cb,
-				       prefs_widget);
-	glade_xml_signal_connect_data (prefs_widget->dialog_data,
 				       "adjust_opacity_toggled_cb",
 				       adjust_opacity_toggled_cb,
 				       prefs_widget);
@@ -396,10 +392,6 @@ read_preferences (PrefsWidget *prefs_widget, Preferences *prefs)
 		(GTK_TOGGLE_BUTTON (WID ("disable_toggle")), prefs->enabled);
 
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
-				      (WID ("auto_apply")),
-				      prefs->auto_apply);
-	
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
 				      (WID ("adjust_opacity_toggle")),
 				      prefs->adjust_opacity);
 	gtk_widget_set_sensitive (GTK_WIDGET (WID ("opacity_box")),
@@ -469,7 +461,6 @@ set_background_controls_sensitive (PrefsWidget *prefs_widget, gboolean s)
 	gtk_widget_set_sensitive (WID ("adjust_opacity_toggle"), s);
 	gtk_widget_set_sensitive (WID ("opacity_box"),
 				  s && prefs_widget->prefs->adjust_opacity);
-	gtk_widget_set_sensitive (WID ("auto_apply"), s);
 }
 
 
@@ -702,23 +693,6 @@ wp_selection_cancel_cb (GtkButton *button, PrefsWidget *prefs_widget)
 	g_return_if_fail (GTK_IS_FILE_SELECTION (prefs_widget->filesel));
 
 	gtk_widget_hide (prefs_widget->filesel);
-}
-
-static void
-auto_apply_toggled_cb (GtkToggleButton *tb, PrefsWidget *prefs_widget)
-{
-	g_return_if_fail (prefs_widget != NULL);
-	g_return_if_fail (IS_PREFS_WIDGET (prefs_widget));
-	g_return_if_fail (prefs_widget->prefs != NULL);
-	g_return_if_fail (IS_PREFERENCES (prefs_widget->prefs));
-	
-	if (gtk_toggle_button_get_active (tb))
-		prefs_widget->prefs->auto_apply = TRUE;
-	else
-		prefs_widget->prefs->auto_apply = FALSE;
-	
-	preferences_changed (prefs_widget->prefs);
-	capplet_widget_state_changed (CAPPLET_WIDGET (prefs_widget), TRUE);
 }
 
 static void
