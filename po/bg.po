@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-31 09:47+0200\n"
-"PO-Revision-Date: 2005-01-31 09:46+0200\n"
+"POT-Creation-Date: 2005-02-06 11:29+0200\n"
+"PO-Revision-Date: 2005-02-06 11:28+0200\n"
 "Last-Translator: Vladimir Petkov <vpetkov@i-space.org>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "MIME-Version: 1.0\n"
@@ -2287,7 +2287,7 @@ msgstr "_Звуци за събития"
 msgid "_Visual feedback:"
 msgstr "_Визуална обратна връзка:"
 
-#: capplets/theme-switcher/gnome-theme-details.c:370
+#: capplets/theme-switcher/gnome-theme-details.c:349
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -2297,19 +2297,85 @@ msgstr ""
 "за \"Настройки на темите\" е инсталиран неправилно или нямате пакета \"gnome-"
 "themes\"."
 
-#: capplets/theme-switcher/gnome-theme-installer.c:103
+#: capplets/theme-switcher/gnome-theme-installer.c:214
 msgid "This theme is not in a supported format."
 msgstr "Темата е в неподдържан формат"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:139
+#: capplets/theme-switcher/gnome-theme-installer.c:229
+msgid "Failed to create temporal directory"
+msgstr "Неуспех при създаването на временна папка"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:246
+msgid ""
+"Can not install theme. \n"
+"There are not bzip2 utility in the system."
+msgstr ""
+"Неуспех при инсталирането на тема. \n"
+"Нямате инсталиран bzip2."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:260
+#: capplets/theme-switcher/gnome-theme-installer.c:289
+#: capplets/theme-switcher/gnome-theme-installer.c:355
+msgid "Installation Failed"
+msgstr "Инсталацията е неуспешна"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:276
+msgid ""
+"Can not install themes. \n"
+"There are not gzip utility in the system."
+msgstr ""
+"Неуспех при инсталирането на теми. \n"
+"Няма инсталиран gzip."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:306
+#, c-format
+msgid ""
+"Icon Theme %s correctly installed.\n"
+"You can select it in the theme details."
+msgstr ""
+"Темата за икони %s е инсталирана правилно.\n"
+"Можете да я изберете от списъка с теми за икони."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:309
+#, c-format
+msgid "Gnome Theme %s correctly installed"
+msgstr "Темата за GNOME %s е инсталирана правилно"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:312
+#, c-format
+msgid ""
+"Windows Border Theme %s correctly installed.\n"
+"You can select it in the theme details."
+msgstr ""
+"Темата за рамките на прозорците %s е инсталирана правилно.\n"
+"Можете да я изберете от списъка с теми за рамки на прозорците."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:315
+#, c-format
+msgid ""
+"Controls Theme %s correctly installed.\n"
+"You can select it in the theme details."
+msgstr ""
+"Темата за декорациите %s е инсталирана правилно.\n"
+"Можете да я изберете от списъка с декорации."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:323
+msgid "The theme is a engine. You need to compile the theme."
+msgstr "Темата е двигател. Трябва да я компилирате."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:335
+msgid "The file format is invalid"
+msgstr "Файловият формат е невалиден"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:407
 msgid "No theme file location specified to install"
 msgstr "Не е избран файл с тема, който да се инсталира"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:156
+#: capplets/theme-switcher/gnome-theme-installer.c:424
 msgid "The theme file location specified to install is invalid"
 msgstr "Темата посочена за инсталиране е невалидна"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:176
+#: capplets/theme-switcher/gnome-theme-installer.c:444
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -2318,7 +2384,11 @@ msgstr ""
 "Няма права за достъп, за да се инсталира темата в:\n"
 "%s"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:216
+#: capplets/theme-switcher/gnome-theme-installer.c:463
+msgid "The file format is invalid."
+msgstr "Файловият формат е невалиден."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:490
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
@@ -2326,6 +2396,14 @@ msgid ""
 msgstr ""
 "%s е пътя до мястото, където ще бъдат инсталирани файловете на темите. Той "
 "не може да бъде избран като папка източник."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:543
+msgid ""
+"Cannot install theme.\n"
+"The tar program is not installed on your system."
+msgstr ""
+"Темата не може да бъде инсталирана.\n"
+"Програмата tar не е инсталирана."
 
 #: capplets/theme-switcher/gnome-theme-manager.c:676
 msgid "Custom theme"
@@ -2335,7 +2413,7 @@ msgstr "Лична тема"
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "Може да запишете тази тема като натиснете бутона \"Запазване на тема\""
 
-#: capplets/theme-switcher/gnome-theme-manager.c:1454
+#: capplets/theme-switcher/gnome-theme-manager.c:1466
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -2691,7 +2769,7 @@ msgstr "Фабрика за изглед на контролен център"
 msgid "View as Control Center"
 msgstr "Изглед като контролен център на GNOME"
 
-#: control-center/control-center-categories.c:248
+#: control-center/control-center-categories.c:249
 msgid "Others"
 msgstr "Други"
 
@@ -2815,22 +2893,22 @@ msgstr ""
 "Грешка при изпълнението на (%s),\n"
 "която е свързана с клавиша (%s)"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:96
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:99
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
-"It can have under various circumstances:\n"
+"It can happen under various circumstances:\n"
 "- a bug in libxklavier library\n"
 "- a bug in X server (xkbcomp, xmodmap utilities)\n"
-"- X server with incompatible libxkbfile implemenation\n"
+"- X server with incompatible libxkbfile implementation\n"
 "\n"
 "X server version data:\n"
 "%s\n"
 "%d\n"
 "%s\n"
 "If you report this situation as a bug, please include:\n"
-"- The result of <b>xprop -root | grep XKB</b>\n"
-"- The result of <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/kbd</b>"
+"- The result of %s\n"
+"- The result of %s"
 msgstr ""
 "Грешка при задействането на настройките на XKB.\n"
 "В различните случаи означава следното:\n"
@@ -2843,10 +2921,10 @@ msgstr ""
 "%d\n"
 "%s\n"
 "Ако докладвате за тази ситуация като грешка, включете:\n"
-"- резултата от <b>xprop -root | grep XKB</b>\n"
-"- резултата от <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/kbd</b>"
+"- резултата от %s\n"
+"- резултата от %s"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:110
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:113
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2858,7 +2936,11 @@ msgstr ""
 "Опитайте се да използвате по-проста конфигурация или си инсталирайте нова "
 "версия на XFree."
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:213
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:226
+msgid "Do _not show this warning again"
+msgstr "_Да не се показва това съобщение отново"
+
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:237
 msgid ""
 "The X system keyboard settings differ from your current GNOME keyboard "
 "settings.  Which set would you like to use?"
@@ -2866,24 +2948,13 @@ msgstr ""
 "Настройките на клавиатурата от Х системата се различават от тези в GNOME. "
 "Кои настройки желаете да използвате?"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:216
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:247
 msgid "Use X settings"
 msgstr "Използване на настройките на X"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:218
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:249
 msgid "Use GNOME settings"
 msgstr "Използване на настройките на GNOME"
-
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:270
-#, c-format
-msgid ""
-"You have a keyboard remapping file (%s) in your home directory whose "
-"contents will now be ignored. You can use the keyboard preferences to "
-"restore them."
-msgstr ""
-"Имате файл за преподреждане на клавиатурата (%s) във вашата домашна папка, "
-"чието съдържание сега ще бъде игнорирано. Може да използвате настройките за "
-"клавиатурата, за да го възвърнете."
 
 #: gnome-settings-daemon/gnome-settings-multimedia-keys.c:126
 #, c-format
@@ -3297,42 +3368,46 @@ msgstr ""
 "клавиатурата. Полезно е, когато се прилагат промени чрез xmodmap"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
+msgid "A list of modmap files available in the $HOME directory."
+msgstr "Списък на modmap файловете е инсталирана в $HOME папка"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
 msgid "Default group, assigned on window creation"
 msgstr "Стандартна група, назначавана при създаването на прозорец"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
 msgid "Keep and manage separate group per window"
 msgstr "Запазване на отделна група за всеки прозорец"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
 msgid "Keyboard Update Handlers"
 msgstr "Модули за обработка на промените по клавиатурата"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:6
 msgid "Keyboard layout"
 msgstr "Клавиатурна подредба"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:6
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:7
 msgid "Keyboard model"
 msgstr "Модел на клавиатурата"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:7
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:8
 msgid "Keyboard options"
 msgstr "Настройки на клавиатурата"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:8
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
 msgid "Keyboard settings in gconf will be overridden from the system ASAP"
 msgstr "Настройките в gconf ще бъдат презаписани възможно най-скоро"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
 msgid "Save/restore indicators together with layout groups"
 msgstr "Запис/възстановяване на индикаторите заедно с клавиатурните подредби"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:11
 msgid "Show layout names instead of group names"
 msgstr "Показване имената на подредбите, вместо имената на групите"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:11
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:12
 msgid ""
 "Show layout names instead of group names (only for versions of XFree "
 "supporting multiple layouts)"
@@ -3340,7 +3415,12 @@ msgstr ""
 "Показване имената на подредбите, вместо имената на групите (само за версии "
 "на XFree, които поддържат множество подредби)"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:12
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:13
+msgid "Suppress the \"X sysconfig changed\" warning message"
+msgstr ""
+"Да не се извежда предупреждението \"Променена системана конфигурация на X\""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
 msgid ""
 "Very soon, keyboard settings in gconf will be overridden (from the system "
 "configuration)"
@@ -3348,13 +3428,17 @@ msgstr ""
 "Много скоро, настройките за клавиатурата в gconf ще бъдат презаписани (от "
 "системната конфигурация)"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:13
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
 msgid "keyboard layout"
 msgstr "клавиатурна подредба"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:16
 msgid "keyboard model"
 msgstr "модел на клавиатурата"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:17
+msgid "modmap file list"
+msgstr "modmap file list"
 
 #: typing-break/drw-break-window.c:209
 msgid "_Postpone break"
@@ -3413,7 +3497,7 @@ msgstr "Написан от Richard Hult &lt;richard@imendio.com&gt;"
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Залъгалките за очите добавени от Anders Carlsson"
 
-#: typing-break/drwright.c:832
+#: typing-break/drwright.c:833
 msgid "Break reminder"
 msgstr "Напомняне за почивка"
 
@@ -3425,13 +3509,13 @@ msgstr "Наблюдението при писане вече върви."
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
-"right-clicking on your panel and choose 'Add to panel -> Utilities -> "
-"Notification area'."
+"right-clicking on your panel and choosing 'Add to panel', selecting "
+"'Notification area' and clicking 'Add'."
 msgstr ""
 "Мониторът на писането използва областта за уведомяване, за да показва "
-"информация. Изглежда не сте сложили тази област на вашия панел. Може да я "
-"добавите като натиснете с дясното копче на панела и изберете \"Добавя към "
-"панела -> Полезни -> Област за уведомяване\"."
+"информация. Изглежда не сте включили тази област във Вашия панел. Може да я "
+"добавите като щракнете с десния бутон на мишката върху панела и изберете "
+"\"Добавяне към панела -> Полезни -> Област за уведомяване\"."
 
 #: vfs-methods/fontilus/font-view.c:125
 msgid "The quick brown fox jumps over the lazy dog. 0123456789"
