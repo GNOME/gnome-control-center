@@ -4,16 +4,16 @@
 # Eiichiro ITANI <emu@ceres.dti.ne.jp>, 1999
 # Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>, 2000.
 # Akira TAGOH <tagoh@gnome.gr.jp>, 2001.
-# Takeshi AIHANA <aihana@gnome.gr.jp>, 2003.
+# Takeshi AIHANA <aihana@gnome.gr.jp>, 2003-2004.
 # KAMAGASAKO Masatoshi <emerald@gnome.gr.jp>, 2003.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-30 13:00-0500\n"
-"PO-Revision-Date: 2003-10-31 01:26+0900\n"
-"Last-Translator: KAMAGASAKO Masatoshi <emerald@gnome.gr.jp>\n"
+"POT-Creation-Date: 2004-01-02 12:12+0900\n"
+"PO-Revision-Date: 2004-01-02 12:09+0900\n"
+"Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -880,7 +880,7 @@ msgstr "エディタの選択(_S):"
 
 #: capplets/desktop-links/Accessibility.directory.in.h:1
 msgid "Accessibility"
-msgstr "アクセスビリティ"
+msgstr "アクセシビリティ"
 
 #: capplets/desktop-links/Accessibility.directory.in.h:2
 msgid "Accessibility Settings"
@@ -1035,9 +1035,9 @@ msgid "Screen Resolution Preferences"
 msgstr "画面の解像度の設定"
 
 #: capplets/display/main.c:476
-#, fuzzy, c-format
+#, c-format
 msgid "_Make default for this computer (%s) only"
-msgstr "このコンピュータ (%s) でのみデフォルトにする(_C)"
+msgstr "このコンピュータ (%s) でのみデフォルトにする(_M)"
 
 #: capplets/display/main.c:494
 msgid "Options"
@@ -1046,10 +1046,13 @@ msgstr "オプション"
 #: capplets/display/main.c:515
 #, c-format
 msgid ""
+"Testing the new settings. If you don't respond in %d second the previous "
+"settings will be restored."
+msgid_plural ""
 "Testing the new settings. If you don't respond in %d seconds the previous "
 "settings will be restored."
-msgstr ""
-"変更した新しい設定をテストします。もし %d 秒間応答がない場合、以前の設定に戻"
+msgstr[0] ""
+"変更した新しい設定をテストします。もし %d 秒間応答がない場合は以前の設定に戻"
 "ります。"
 
 #: capplets/display/main.c:564
@@ -1529,29 +1532,37 @@ msgstr "キャプションのフォント(_W):"
 msgid "dots per inch"
 msgstr "解像度 (ドット/インチ)"
 
-#: capplets/font/main.c:506 capplets/font/main.c:511
+#: capplets/font/main.c:506 capplets/font/main.c:513
 msgid "Font may be too large"
 msgstr "フォントが大きすぎるようです"
 
 #: capplets/font/main.c:507
 #, c-format
 msgid ""
+"The font selected is %d point large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a size "
+"smaller than %d."
+msgid_plural ""
 "The font selected is %d points large, and may make it difficult to "
 "effectively use the computer.  It is recommended that you select a size "
 "smaller than %d."
-msgstr ""
-"選択されたフォントは %d ポイントですが、コンピュータで効果的に使用するのは困"
-"難です。%d より小さいサイズのフォントを選択することをお薦めします。"
+msgstr[0] ""
+"選択したフォントの大きさは %d ポイントですが、コンピュータで効果的に使用する"
+"のは困難です。%d より小さいフォントを選択することをお薦めします。"
 
-#: capplets/font/main.c:512
+#: capplets/font/main.c:514
 #, c-format
 msgid ""
+"The font selected is %d point large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a smaller "
+"sized font."
+msgid_plural ""
 "The font selected is %d points large, and may make it difficult to "
 "effectively use the computer.  It is recommended that you select a smaller "
 "sized font."
-msgstr ""
-"選択されたフォントは %d ポイントですが、コンピュータで効果的に使用するのは困"
-"難です。より小さいサイズのフォントを選択することをお薦めします。"
+msgstr[0] ""
+"選択したフォントの大きさは %d ポイントですが、コンピュータで効果的に使用する"
+"のは困難です。より小さいフォントを選択することをお薦めします。"
 
 #: capplets/keybindings/eggcellrendererkeys.c:161
 #: capplets/keybindings/eggcellrendererkeys.c:162
@@ -1565,9 +1576,8 @@ msgstr "アクセラレータの修飾キー"
 
 #: capplets/keybindings/eggcellrendererkeys.c:180
 #: capplets/keybindings/eggcellrendererkeys.c:181
-#, fuzzy
 msgid "Accelerator keycode"
-msgstr "アクセラレータ・キー"
+msgstr "アクセラレータ・キーコード"
 
 #: capplets/keybindings/eggcellrendererkeys.c:191
 msgid "Accel Mode"
@@ -1623,9 +1633,9 @@ msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "新しいアクセラレータを設定データベース書き込む際にエラー: %s\n"
 
 #: capplets/keybindings/gnome-keybinding-properties.c:790
-#, fuzzy, c-format
+#, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
-msgstr "新しいアクセラレータを設定データベース書き込む際にエラー: %s\n"
+msgstr "設定データベースのアクセラレータの設定を解除する際にエラー: %s\n"
 
 #: capplets/keybindings/gnome-keybinding-properties.c:939
 msgid ""
@@ -1671,7 +1681,7 @@ msgstr "キーボード Capplet の起動の際にエラーが発生しました
 
 #: capplets/keyboard/gnome-keyboard-properties.c:199
 msgid "_Accessibility"
-msgstr "アクセスビリティ(_A)"
+msgstr "アクセシビリティ(_A)"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:218
 #: capplets/keyboard/gnome-keyboard-properties.c:220
@@ -1714,9 +1724,8 @@ msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>遅い</i></small>"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:10
-#, fuzzy
 msgid "Advanced Layout Options"
-msgstr "拡張設定を行います"
+msgstr "拡張レイアウトのオプション"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "All_ow postponing of breaks"
@@ -1727,9 +1736,8 @@ msgid "Check if breaks are allowed to be postponed"
 msgstr "一休みの延長を可能にする場合は有効にして下さい"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:13
-#, fuzzy
 msgid "Core Layout Configuration"
-msgstr "ネットワーク・プロキシの設定"
+msgstr "コア・レイアウトの設定"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Cursor _blinks in text boxes and fields"
@@ -1752,14 +1760,12 @@ msgid "Keyboard Preferences"
 msgstr "キーボードの設定"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:20
-#, fuzzy
 msgid "Keyboard _model:"
-msgstr "キーボード"
+msgstr "キーボードの型式(_M):"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:21
-#, fuzzy
 msgid "Layout _options:"
-msgstr "画像のオプション(_O):"
+msgstr "レイアウトのオプション(_O):"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid ""
@@ -1773,7 +1779,7 @@ msgstr "一休み"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "_Accessibility..."
-msgstr "アクセスビリティ(_A)..."
+msgstr "アクセシビリティ(_A)..."
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:26
 msgid "_Break interval lasts:"
@@ -1784,14 +1790,12 @@ msgid "_Delay:"
 msgstr "間隔(_D):"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:28
-#, fuzzy
 msgid "_Ignore system configuration"
-msgstr "ネットワーク・プロキシの設定"
+msgstr "システム設定を無視する(_I)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:29
-#, fuzzy
 msgid "_Layouts:"
-msgstr "レイアウト"
+msgstr "レイアウト(_L):"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:30
 msgid "_Speed:"
@@ -2163,11 +2167,11 @@ msgstr ""
 
 #: capplets/theme-switcher/gnome-theme-installer.c:127
 msgid "No theme file location specified to install"
-msgstr ""
+msgstr "インストールするテーマ・ファイルのパス名が指定されていません"
 
 #: capplets/theme-switcher/gnome-theme-installer.c:146
 msgid "The theme file location specified to install is invalid"
-msgstr ""
+msgstr "インストールするテーマ・ファイルのパス名が不正です"
 
 #: capplets/theme-switcher/gnome-theme-installer.c:173
 #, c-format
@@ -2175,6 +2179,8 @@ msgid ""
 "%s is the path where the theme files will be installed. This can not be "
 "selected as the source location"
 msgstr ""
+"%s はテーマ・ファイルをインストールするパス名です。これはソースを格納するもの"
+"として選択することはできません。"
 
 #: capplets/theme-switcher/gnome-theme-manager.c:645
 #: capplets/theme-switcher/gnome-theme-manager.c:705
@@ -2185,7 +2191,7 @@ msgstr "カスタム・テーマ"
 #: capplets/theme-switcher/gnome-theme-manager.c:705
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr ""
-"[テーマの保存] をクリックすると  \n"
+"[テーマの保存] をクリックすると\n"
 "このテーマを保存できます。"
 
 #: capplets/theme-switcher/gnome-theme-manager.c:1398
@@ -2606,6 +2612,13 @@ msgid ""
 "%d\n"
 "%s"
 msgstr ""
+"XKB 設定を有効にする際にエラーが発生しました。\n"
+"おそらく X サーバ内部の問題と思われます。\n"
+"\n"
+"X サーバのバージョン情報:\n"
+"%s\n"
+"%d\n"
+"%s"
 
 #: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:66
 msgid ""
@@ -2614,6 +2627,10 @@ msgid ""
 "Try using simpler configuration or taking more fresh version of XFree "
 "software."
 msgstr ""
+"XFree 4.3.0 をお使いのようです。\n"
+"このバージョンの複雑な XKB 設定では問題が発生することが知られています。\n"
+"簡単な設定を使用するか、または最新版の XFree ソフトウェアを使用してみて下さ"
+"い。"
 
 #: gnome-settings-daemon/gnome-settings-screensaver.c:92
 #, c-format
@@ -2624,11 +2641,11 @@ msgid ""
 "\n"
 "Screensaver functionality will not work in this session."
 msgstr ""
-"スクリーンセーバを起動する際にエラーが発生しました:\n"
+"スクリーンセーバーを起動する際にエラーが発生しました:\n"
 "\n"
 "%s\n"
 "\n"
-"このセッションでは、スクリーンセーバが無効になります。"
+"このセッションでは、スクリーンセーバーが無効になります。"
 
 #: gnome-settings-daemon/gnome-settings-screensaver.c:102
 msgid "_Do not show this message again"
@@ -2833,23 +2850,20 @@ msgstr ""
 "り Hinting する; 文字の形態が歪む可能性あり。"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:1
-#, fuzzy
 msgid "XKB keyboard layout"
-msgstr "キーボード・ショートカット"
+msgstr "XKB キーボード・レイアウト"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
-#, fuzzy
 msgid "XKB keyboard model"
-msgstr "キーボード"
+msgstr "XKB キーボードの型式"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
-#, fuzzy
 msgid "XKB options"
-msgstr "オプション"
+msgstr "XKB オプション"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
 msgid "XKB settings should be overridden"
-msgstr ""
+msgstr "XKB 設定を上書きする必要があるかどうか"
 
 #: typing-break/drw-break-window.c:189
 msgid "Postpone break"
@@ -3149,27 +3163,3 @@ msgstr "インストールされたテーマをサムネイル表示するか否
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "テーマをサムネイル表示するか否か"
-
-#~ msgid "radiobutton1"
-#~ msgstr "ラジオボタン 1"
-
-#~ msgid "radiobutton2"
-#~ msgstr "ラジオボタン 2"
-
-#~ msgid "radiobutton3"
-#~ msgstr "ラジオボタン 3"
-
-#~ msgid "radiobutton4"
-#~ msgstr "ラジオボタン 4"
-
-#~ msgid "radiobutton5"
-#~ msgstr "ラジオボタン 5"
-
-#~ msgid "Behavior"
-#~ msgstr "動作"
-
-#~ msgid "Sets the default behavior of GNOME applications"
-#~ msgstr "GNOME アプリのデフォルトの振る舞いを設定します"
-
-#~ msgid "One minute until the next break"
-#~ msgstr "次の一休みまであと 1 分です"
