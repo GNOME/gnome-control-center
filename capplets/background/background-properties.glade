@@ -2,8 +2,8 @@
 <GTK-Interface>
 
 <project>
-  <name>New-background-properties</name>
-  <program_name>new-background-properties</program_name>
+  <name>new-background-capplet-mockup</name>
+  <program_name>new-background-capplet-mockup</program_name>
   <directory></directory>
   <source_directory>src</source_directory>
   <pixmaps_directory>pixmaps</pixmaps_directory>
@@ -15,7 +15,7 @@
 <widget>
   <class>GtkWindow</class>
   <name>window1</name>
-  <title>window2</title>
+  <title>window1</title>
   <type>GTK_WINDOW_TOPLEVEL</type>
   <position>GTK_WIN_POS_NONE</position>
   <modal>False</modal>
@@ -24,204 +24,72 @@
   <auto_shrink>False</auto_shrink>
 
   <widget>
-    <class>GtkTable</class>
+    <class>GtkVBox</class>
     <name>prefs_widget</name>
-    <rows>3</rows>
-    <columns>2</columns>
     <homogeneous>False</homogeneous>
-    <row_spacing>5</row_spacing>
-    <column_spacing>5</column_spacing>
+    <spacing>0</spacing>
 
     <widget>
-      <class>GtkCheckButton</class>
-      <name>disable_toggle</name>
-      <can_focus>True</can_focus>
-      <signal>
-	<name>toggled</name>
-	<handler>disable_toggled_cb</handler>
-	<last_modification_time>Wed, 06 Sep 2000 00:15:45 GMT</last_modification_time>
-      </signal>
-      <label>Use GNOME for setting background</label>
-      <active>True</active>
-      <draw_indicator>True</draw_indicator>
+      <class>GtkHBox</class>
+      <name>hbox3</name>
+      <homogeneous>False</homogeneous>
+      <spacing>0</spacing>
       <child>
-	<left_attach>0</left_attach>
-	<right_attach>1</right_attach>
-	<top_attach>0</top_attach>
-	<bottom_attach>1</bottom_attach>
-	<xpad>0</xpad>
-	<ypad>0</ypad>
-	<xexpand>False</xexpand>
-	<yexpand>False</yexpand>
-	<xshrink>False</xshrink>
-	<yshrink>False</yshrink>
-	<xfill>True</xfill>
-	<yfill>False</yfill>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
       </child>
+
+      <widget>
+	<class>GtkVBox</class>
+	<name>preview_holder</name>
+	<homogeneous>False</homogeneous>
+	<spacing>0</spacing>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+
+	<widget>
+	  <class>Placeholder</class>
+	</widget>
+      </widget>
     </widget>
 
     <widget>
       <class>GtkFrame</class>
-      <name>color_frame</name>
-      <label>Colors</label>
+      <name>frame4</name>
+      <label>Background colors</label>
       <label_xalign>0</label_xalign>
       <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
       <child>
-	<left_attach>0</left_attach>
-	<right_attach>1</right_attach>
-	<top_attach>1</top_attach>
-	<bottom_attach>2</bottom_attach>
-	<xpad>0</xpad>
-	<ypad>0</ypad>
-	<xexpand>False</xexpand>
-	<yexpand>True</yexpand>
-	<xshrink>False</xshrink>
-	<yshrink>False</yshrink>
-	<xfill>True</xfill>
-	<yfill>True</yfill>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
       </child>
 
       <widget>
-	<class>GtkTable</class>
-	<name>table4</name>
-	<border_width>4</border_width>
-	<rows>3</rows>
-	<columns>2</columns>
+	<class>GtkHBox</class>
+	<name>hbox4</name>
+	<border_width>3</border_width>
 	<homogeneous>False</homogeneous>
-	<row_spacing>4</row_spacing>
-	<column_spacing>4</column_spacing>
+	<spacing>3</spacing>
 
 	<widget>
 	  <class>GtkLabel</class>
-	  <name>label5</name>
-	  <label>Effect</label>
+	  <name>label19</name>
+	  <label>Style:</label>
 	  <justify>GTK_JUSTIFY_CENTER</justify>
 	  <wrap>False</wrap>
-	  <xalign>0</xalign>
+	  <xalign>0.5</xalign>
 	  <yalign>0.5</yalign>
 	  <xpad>0</xpad>
 	  <ypad>0</ypad>
 	  <child>
-	    <left_attach>0</left_attach>
-	    <right_attach>1</right_attach>
-	    <top_attach>0</top_attach>
-	    <bottom_attach>1</bottom_attach>
-	    <xpad>0</xpad>
-	    <ypad>0</ypad>
-	    <xexpand>False</xexpand>
-	    <yexpand>False</yexpand>
-	    <xshrink>False</xshrink>
-	    <yshrink>False</yshrink>
-	    <xfill>True</xfill>
-	    <yfill>False</yfill>
-	  </child>
-	</widget>
-
-	<widget>
-	  <class>GtkLabel</class>
-	  <name>label6</name>
-	  <label>Primary color</label>
-	  <justify>GTK_JUSTIFY_LEFT</justify>
-	  <wrap>False</wrap>
-	  <xalign>0</xalign>
-	  <yalign>0.5</yalign>
-	  <xpad>0</xpad>
-	  <ypad>0</ypad>
-	  <child>
-	    <left_attach>0</left_attach>
-	    <right_attach>1</right_attach>
-	    <top_attach>1</top_attach>
-	    <bottom_attach>2</bottom_attach>
-	    <xpad>0</xpad>
-	    <ypad>0</ypad>
-	    <xexpand>False</xexpand>
-	    <yexpand>False</yexpand>
-	    <xshrink>False</xshrink>
-	    <yshrink>False</yshrink>
-	    <xfill>True</xfill>
-	    <yfill>False</yfill>
-	  </child>
-	</widget>
-
-	<widget>
-	  <class>GtkLabel</class>
-	  <name>color2_label</name>
-	  <label>Right or bottom color</label>
-	  <justify>GTK_JUSTIFY_CENTER</justify>
-	  <wrap>False</wrap>
-	  <xalign>0</xalign>
-	  <yalign>0.5</yalign>
-	  <xpad>0</xpad>
-	  <ypad>0</ypad>
-	  <child>
-	    <left_attach>0</left_attach>
-	    <right_attach>1</right_attach>
-	    <top_attach>2</top_attach>
-	    <bottom_attach>3</bottom_attach>
-	    <xpad>0</xpad>
-	    <ypad>0</ypad>
-	    <xexpand>False</xexpand>
-	    <yexpand>False</yexpand>
-	    <xshrink>False</xshrink>
-	    <yshrink>False</yshrink>
-	    <xfill>True</xfill>
-	    <yfill>False</yfill>
-	  </child>
-	</widget>
-
-	<widget>
-	  <class>GnomeColorPicker</class>
-	  <name>color1_select</name>
-	  <can_focus>True</can_focus>
-	  <signal>
-	    <name>color_set</name>
-	    <handler>color1_select_color_set_cb</handler>
-	    <last_modification_time>Sat, 09 Dec 2000 01:18:26 GMT</last_modification_time>
-	  </signal>
-	  <dither>True</dither>
-	  <use_alpha>False</use_alpha>
-	  <title>Pick a color</title>
-	  <child>
-	    <left_attach>1</left_attach>
-	    <right_attach>2</right_attach>
-	    <top_attach>1</top_attach>
-	    <bottom_attach>2</bottom_attach>
-	    <xpad>0</xpad>
-	    <ypad>0</ypad>
-	    <xexpand>False</xexpand>
-	    <yexpand>False</yexpand>
-	    <xshrink>False</xshrink>
-	    <yshrink>False</yshrink>
-	    <xfill>True</xfill>
-	    <yfill>False</yfill>
-	  </child>
-	</widget>
-
-	<widget>
-	  <class>GnomeColorPicker</class>
-	  <name>color2_select</name>
-	  <can_focus>True</can_focus>
-	  <signal>
-	    <name>color_set</name>
-	    <handler>color2_select_color_set_cb</handler>
-	    <last_modification_time>Sat, 09 Dec 2000 01:18:35 GMT</last_modification_time>
-	  </signal>
-	  <dither>True</dither>
-	  <use_alpha>False</use_alpha>
-	  <title>Pick a color</title>
-	  <child>
-	    <left_attach>1</left_attach>
-	    <right_attach>2</right_attach>
-	    <top_attach>2</top_attach>
-	    <bottom_attach>3</bottom_attach>
-	    <xpad>0</xpad>
-	    <ypad>0</ypad>
-	    <xexpand>False</xexpand>
-	    <yexpand>False</yexpand>
-	    <xshrink>False</xshrink>
-	    <yshrink>False</yshrink>
-	    <xfill>True</xfill>
-	    <yfill>False</yfill>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
 	  </child>
 	</widget>
 
@@ -229,24 +97,43 @@
 	  <class>GtkOptionMenu</class>
 	  <name>color_option</name>
 	  <can_focus>True</can_focus>
-	  <items>Solid Color
-Vertical Gradient
-Horizontal Gradient
+	  <items>Solid color
+Horizontal gradient
+Vertical gradient
 </items>
-	  <initial_choice>1</initial_choice>
+	  <initial_choice>0</initial_choice>
 	  <child>
-	    <left_attach>1</left_attach>
-	    <right_attach>2</right_attach>
-	    <top_attach>0</top_attach>
-	    <bottom_attach>1</bottom_attach>
-	    <xpad>0</xpad>
-	    <ypad>0</ypad>
-	    <xexpand>True</xexpand>
-	    <yexpand>False</yexpand>
-	    <xshrink>False</xshrink>
-	    <yshrink>False</yshrink>
-	    <xfill>True</xfill>
-	    <yfill>False</yfill>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+	</widget>
+
+	<widget>
+	  <class>GnomeColorPicker</class>
+	  <name>colorpicker1</name>
+	  <can_focus>True</can_focus>
+	  <dither>True</dither>
+	  <use_alpha>False</use_alpha>
+	  <title>Pick a color</title>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+	</widget>
+
+	<widget>
+	  <class>GnomeColorPicker</class>
+	  <name>colorpicker2</name>
+	  <can_focus>True</can_focus>
+	  <dither>True</dither>
+	  <use_alpha>False</use_alpha>
+	  <title>Pick a color</title>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
 	  </child>
 	</widget>
       </widget>
@@ -254,39 +141,30 @@ Horizontal Gradient
 
     <widget>
       <class>GtkFrame</class>
-      <name>wallpaper_frame</name>
-      <label>Wallpaper</label>
+      <name>frame3</name>
+      <label>Background picture</label>
       <label_xalign>0</label_xalign>
       <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
       <child>
-	<left_attach>0</left_attach>
-	<right_attach>2</right_attach>
-	<top_attach>2</top_attach>
-	<bottom_attach>3</bottom_attach>
-	<xpad>0</xpad>
-	<ypad>0</ypad>
-	<xexpand>True</xexpand>
-	<yexpand>True</yexpand>
-	<xshrink>False</xshrink>
-	<yshrink>False</yshrink>
-	<xfill>True</xfill>
-	<yfill>True</yfill>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
       </child>
 
       <widget>
 	<class>GtkTable</class>
-	<name>table3</name>
-	<border_width>4</border_width>
-	<rows>4</rows>
-	<columns>3</columns>
+	<name>table1</name>
+	<border_width>3</border_width>
+	<rows>2</rows>
+	<columns>5</columns>
 	<homogeneous>False</homogeneous>
-	<row_spacing>4</row_spacing>
-	<column_spacing>4</column_spacing>
+	<row_spacing>3</row_spacing>
+	<column_spacing>3</column_spacing>
 
 	<widget>
 	  <class>GtkLabel</class>
-	  <name>label3</name>
-	  <label>File</label>
+	  <name>label14</name>
+	  <label>Image:</label>
 	  <justify>GTK_JUSTIFY_CENTER</justify>
 	  <wrap>False</wrap>
 	  <xalign>0</xalign>
@@ -311,8 +189,8 @@ Horizontal Gradient
 
 	<widget>
 	  <class>GtkLabel</class>
-	  <name>label4</name>
-	  <label>Display Style</label>
+	  <name>label15</name>
+	  <label>Style:</label>
 	  <justify>GTK_JUSTIFY_CENTER</justify>
 	  <wrap>False</wrap>
 	  <xalign>0</xalign>
@@ -336,69 +214,49 @@ Horizontal Gradient
 	</widget>
 
 	<widget>
-	  <class>GtkOptionMenu</class>
-	  <name>wp_effect_option</name>
-	  <can_focus>True</can_focus>
-	  <items>Tiled
-Centered
-Scaled (keep aspect ratio)
-Stretched (change aspect ratio)
-</items>
-	  <initial_choice>0</initial_choice>
-	  <child>
-	    <left_attach>1</left_attach>
-	    <right_attach>3</right_attach>
-	    <top_attach>1</top_attach>
-	    <bottom_attach>2</bottom_attach>
-	    <xpad>0</xpad>
-	    <ypad>0</ypad>
-	    <xexpand>True</xexpand>
-	    <yexpand>False</yexpand>
-	    <xshrink>False</xshrink>
-	    <yshrink>False</yshrink>
-	    <xfill>True</xfill>
-	    <yfill>False</yfill>
-	  </child>
-	</widget>
-
-	<widget>
-	  <class>GtkButton</class>
-	  <name>browse_button</name>
-	  <can_focus>True</can_focus>
-	  <signal>
-	    <name>clicked</name>
-	    <handler>browse_button_cb</handler>
-	    <last_modification_time>Fri, 08 Dec 2000 21:55:52 GMT</last_modification_time>
-	  </signal>
-	  <label>Browse...</label>
-	  <relief>GTK_RELIEF_NORMAL</relief>
-	  <child>
-	    <left_attach>2</left_attach>
-	    <right_attach>3</right_attach>
-	    <top_attach>0</top_attach>
-	    <bottom_attach>1</bottom_attach>
-	    <xpad>0</xpad>
-	    <ypad>0</ypad>
-	    <xexpand>False</xexpand>
-	    <yexpand>False</yexpand>
-	    <xshrink>False</xshrink>
-	    <yshrink>False</yshrink>
-	    <xfill>False</xfill>
-	    <yfill>False</yfill>
-	  </child>
-	</widget>
-
-	<widget>
-	  <class>GtkOptionMenu</class>
-	  <name>wp_file_option</name>
-	  <width>66</width>
-	  <can_focus>True</can_focus>
-	  <items>(None)
-</items>
-	  <initial_choice>0</initial_choice>
+	  <class>GtkAlignment</class>
+	  <name>alignment1</name>
+	  <xalign>7.45058e-09</xalign>
+	  <yalign>0.5</yalign>
+	  <xscale>0</xscale>
+	  <yscale>1</yscale>
 	  <child>
 	    <left_attach>1</left_attach>
 	    <right_attach>2</right_attach>
+	    <top_attach>1</top_attach>
+	    <bottom_attach>2</bottom_attach>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <xexpand>False</xexpand>
+	    <yexpand>False</yexpand>
+	    <xshrink>False</xshrink>
+	    <yshrink>False</yshrink>
+	    <xfill>True</xfill>
+	    <yfill>False</yfill>
+	  </child>
+
+	  <widget>
+	    <class>GtkOptionMenu</class>
+	    <name>image_option</name>
+	    <can_focus>True</can_focus>
+	    <items>Tiled
+Centered
+Scaled (keep aspect ratio)
+Stretched
+</items>
+	    <initial_choice>0</initial_choice>
+	  </widget>
+	</widget>
+
+	<widget>
+	  <class>GnomeFileEntry</class>
+	  <name>image_fileentry</name>
+	  <max_saved>10</max_saved>
+	  <directory>False</directory>
+	  <modal>False</modal>
+	  <child>
+	    <left_attach>1</left_attach>
+	    <right_attach>5</right_attach>
 	    <top_attach>0</top_attach>
 	    <bottom_attach>1</bottom_attach>
 	    <xpad>0</xpad>
@@ -410,25 +268,34 @@ Stretched (change aspect ratio)
 	    <xfill>True</xfill>
 	    <yfill>False</yfill>
 	  </child>
+
+	  <widget>
+	    <class>GtkEntry</class>
+	    <child_name>GnomeEntry:entry</child_name>
+	    <name>entry1</name>
+	    <can_focus>True</can_focus>
+	    <editable>True</editable>
+	    <text_visible>True</text_visible>
+	    <text_max_length>0</text_max_length>
+	    <text></text>
+	  </widget>
 	</widget>
 
 	<widget>
-	  <class>GtkCheckButton</class>
-	  <name>adjust_opacity_toggle</name>
-	  <can_focus>True</can_focus>
-	  <signal>
-	    <name>toggled</name>
-	    <handler>adjust_opacity_toggled_cb</handler>
-	    <last_modification_time>Thu, 21 Dec 2000 19:54:21 GMT</last_modification_time>
-	  </signal>
-	  <label>Adjust wallpaper's transparency</label>
-	  <active>False</active>
-	  <draw_indicator>True</draw_indicator>
+	  <class>GtkLabel</class>
+	  <name>label16</name>
+	  <label>Opacity (percent):</label>
+	  <justify>GTK_JUSTIFY_CENTER</justify>
+	  <wrap>False</wrap>
+	  <xalign>1</xalign>
+	  <yalign>0.5</yalign>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
 	  <child>
-	    <left_attach>0</left_attach>
+	    <left_attach>2</left_attach>
 	    <right_attach>3</right_attach>
-	    <top_attach>2</top_attach>
-	    <bottom_attach>3</bottom_attach>
+	    <top_attach>1</top_attach>
+	    <bottom_attach>2</bottom_attach>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
 	    <xexpand>False</xexpand>
@@ -441,107 +308,71 @@ Stretched (change aspect ratio)
 	</widget>
 
 	<widget>
-	  <class>GtkHBox</class>
-	  <name>opacity_box</name>
-	  <homogeneous>False</homogeneous>
-	  <spacing>4</spacing>
+	  <class>GtkAlignment</class>
+	  <name>alignment2</name>
+	  <xalign>7.45058e-09</xalign>
+	  <yalign>0.5</yalign>
+	  <xscale>0.5</xscale>
+	  <yscale>1</yscale>
 	  <child>
-	    <left_attach>0</left_attach>
-	    <right_attach>3</right_attach>
-	    <top_attach>3</top_attach>
-	    <bottom_attach>4</bottom_attach>
+	    <left_attach>3</left_attach>
+	    <right_attach>4</right_attach>
+	    <top_attach>1</top_attach>
+	    <bottom_attach>2</bottom_attach>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
-	    <xexpand>False</xexpand>
-	    <yexpand>True</yexpand>
+	    <xexpand>True</xexpand>
+	    <yexpand>False</yexpand>
 	    <xshrink>False</xshrink>
 	    <yshrink>False</yshrink>
 	    <xfill>True</xfill>
-	    <yfill>True</yfill>
+	    <yfill>False</yfill>
 	  </child>
 
 	  <widget>
-	    <class>GtkLabel</class>
-	    <name>label8</name>
-	    <label>More Transparent</label>
-	    <justify>GTK_JUSTIFY_CENTER</justify>
-	    <wrap>False</wrap>
-	    <xalign>0.5</xalign>
-	    <yalign>0.5</yalign>
-	    <xpad>0</xpad>
-	    <ypad>0</ypad>
-	    <child>
-	      <padding>0</padding>
-	      <expand>False</expand>
-	      <fill>False</fill>
-	    </child>
-	  </widget>
-
-	  <widget>
-	    <class>GtkHScale</class>
-	    <name>opacity_adjust</name>
+	    <class>GtkSpinButton</class>
+	    <name>opacity_spin</name>
 	    <can_focus>True</can_focus>
-	    <draw_value>False</draw_value>
-	    <value_pos>GTK_POS_TOP</value_pos>
-	    <digits>1</digits>
-	    <policy>GTK_UPDATE_CONTINUOUS</policy>
-	    <value>0</value>
-	    <lower>0</lower>
-	    <upper>256</upper>
-	    <step>2.56</step>
-	    <page>25.6</page>
-	    <page_size>25.6</page_size>
-	    <child>
-	      <padding>0</padding>
-	      <expand>True</expand>
-	      <fill>True</fill>
-	    </child>
-	  </widget>
-
-	  <widget>
-	    <class>GtkLabel</class>
-	    <name>label9</name>
-	    <label>More Opaque</label>
-	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <climb_rate>1</climb_rate>
+	    <digits>0</digits>
+	    <numeric>True</numeric>
+	    <update_policy>GTK_UPDATE_ALWAYS</update_policy>
+	    <snap>False</snap>
 	    <wrap>False</wrap>
-	    <xalign>0.5</xalign>
-	    <yalign>0.5</yalign>
-	    <xpad>0</xpad>
-	    <ypad>0</ypad>
-	    <child>
-	      <padding>0</padding>
-	      <expand>False</expand>
-	      <fill>False</fill>
-	    </child>
+	    <value>100</value>
+	    <lower>0</lower>
+	    <upper>10000</upper>
+	    <step>1</step>
+	    <page>10</page>
+	    <page_size>10</page_size>
 	  </widget>
 	</widget>
-      </widget>
-    </widget>
 
-    <widget>
-      <class>GtkFrame</class>
-      <name>monitor_frame</name>
-      <width>210</width>
-      <height>170</height>
-      <label_xalign>0</label_xalign>
-      <shadow_type>GTK_SHADOW_NONE</shadow_type>
-      <child>
-	<left_attach>1</left_attach>
-	<right_attach>2</right_attach>
-	<top_attach>0</top_attach>
-	<bottom_attach>2</bottom_attach>
-	<xpad>0</xpad>
-	<ypad>0</ypad>
-	<xexpand>False</xexpand>
-	<yexpand>False</yexpand>
-	<xshrink>False</xshrink>
-	<yshrink>False</yshrink>
-	<xfill>True</xfill>
-	<yfill>True</yfill>
-      </child>
-
-      <widget>
-	<class>Placeholder</class>
+	<widget>
+	  <class>GtkLabel</class>
+	  <name>label18</name>
+	  <label></label>
+	  <justify>GTK_JUSTIFY_CENTER</justify>
+	  <wrap>False</wrap>
+	  <xalign>0</xalign>
+	  <yalign>0.5</yalign>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <child>
+	    <left_attach>4</left_attach>
+	    <right_attach>5</right_attach>
+	    <top_attach>1</top_attach>
+	    <bottom_attach>2</bottom_attach>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <xexpand>False</xexpand>
+	    <yexpand>False</yexpand>
+	    <xshrink>False</xshrink>
+	    <yshrink>False</yshrink>
+	    <xfill>True</xfill>
+	    <yfill>False</yfill>
+	  </child>
+	</widget>
       </widget>
     </widget>
   </widget>

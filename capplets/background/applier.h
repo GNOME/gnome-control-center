@@ -29,7 +29,7 @@
 #include <X11/Xlib.h>
 #include <pthread.h>
 
-#include "preferences.h"
+#include <bonobo-conf/bonobo-config-database.h>
 
 #define APPLIER(obj)          GTK_CHECK_CAST (obj, applier_get_type (), Applier)
 #define APPLIER_CLASS(klass)  GTK_CHECK_CLASS_CAST (klass, applier_get_type (), ApplierClass)
@@ -56,9 +56,14 @@ guint        applier_get_type    (void);
 GtkObject   *applier_new         (void);
 void         applier_destroy     (GtkObject *object);
 
-void         applier_apply_prefs (Applier *applier, Preferences *prefs,
-				  gboolean do_root, gboolean do_preview);
+void         applier_apply_prefs (Applier *applier,
+				  Bonobo_PropertyBag pb,
+				  Bonobo_ConfigDatabase db,
+				  CORBA_Environment *ev,
+				  gboolean do_root,
+				  gboolean do_preview);
 
 GtkWidget   *applier_class_get_preview_widget (void);
+void 	    applier_class_destroy_preview_widget (void);
 
 #endif /* __APPLIER_H */

@@ -35,15 +35,6 @@
 typedef struct _Preferences Preferences;
 typedef struct _PreferencesClass PreferencesClass;
 
-typedef enum _orientation_t {
-	ORIENTATION_HORIZ, ORIENTATION_VERT
-} orientation_t;
-
-typedef enum _wallpaper_type_t {
-	WPTYPE_TILED, WPTYPE_CENTERED, WPTYPE_SCALED_ASPECT,
-	WPTYPE_SCALED, WPTYPE_EMBOSSED
-} wallpaper_type_t;
-
 struct _Preferences
 {
 	GtkObject         object;

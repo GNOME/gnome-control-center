@@ -36,6 +36,7 @@
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 #include <unistd.h>
+#include <bonobo.h>
 
 #include "applier.h"
 
@@ -44,10 +45,13 @@
 #define MONITOR_CONTENTS_WIDTH 157
 #define MONITOR_CONTENTS_HEIGHT 111
 
-static GtkWidget *preview_widget;
+#define PDEBUG(pix) (g_print ("file %s: line %d (%s): Setting pixbuf to %i %i\n", __FILE__, __LINE__, __PRETTY_FUNCTION__, gdk_pixbuf_get_width (pix), gdk_pixbuf_get_height (pix)))
+
+static GtkWidget *preview_widget = NULL;
 static gboolean gdk_pixbuf_xlib_inited = FALSE;
 
 typedef struct _Renderer Renderer;
+typedef struct _ApplierPreferences ApplierPreferences;
 
 enum {
 	ARG_0,
@@ -55,49 +59,77 @@ enum {
 
 struct _ApplierPrivate 
 {
-	Preferences      *root_prefs;
-	Preferences      *preview_prefs;
+	ApplierPreferences *root_prefs;
+	ApplierPreferences *preview_prefs;
 
-	GdkPixbuf        *wallpaper_pixbuf;
-	gchar            *wallpaper_filename;
+	GdkPixbuf          *wallpaper_pixbuf;
+	gchar              *wallpaper_filename;
 
-	Renderer         *root_renderer;
-	Renderer         *preview_renderer;
+	Renderer           *root_renderer;
+	Renderer           *preview_renderer;
 
-	gboolean          nautilus_running;
+	gboolean            nautilus_running;
 };
 
 struct _Renderer
 {
-	gboolean          is_root;
-	gboolean          is_set;
+	gboolean            is_root;
+	gboolean            is_set;
 
-	Preferences      *prefs;
+	ApplierPreferences *prefs;
 
-	gint              x;         /* Geometry relative to pixmap */
-	gint              y;
-	gint              width;
-	gint              height;
+	gint                x;         /* Geometry relative to pixmap */
+	gint                y;
+	gint                width;
+	gint                height;
 
-	gint              srcx;      /* Geometry relative to pixbuf */
-	gint              srcy;      /* (used when the wallpaper is too big) */
+	gint                srcx;      /* Geometry relative to pixbuf */
+	gint                srcy;      /* (used when the wallpaper is too big) */
 
-	gint              wx;        /* Geometry of wallpaper as rendered */
-	gint              wy;
-	gint              wwidth;
-	gint              wheight;
+	gint                wx;        /* Geometry of wallpaper as rendered */
+	gint                wy;
+	gint                wwidth;
+	gint                wheight;
 
-	gint              pwidth;    /* Geometry of unscaled wallpaper */
-	gint              pheight;
+	gint                pwidth;    /* Geometry of unscaled wallpaper */
+	gint                pheight;
 
-	gint              gwidth;    /* Geometry of gradient-only pixmap */
-	gint              gheight;
+	gint                gwidth;    /* Geometry of gradient-only pixmap */
+	gint                gheight;
 
-	guchar           *gradient_data;
-	GdkPixbuf        *wallpaper_pixbuf;  /* Alias only */
-	GdkPixbuf        *prescaled_pixbuf;  /* For tiled on preview */
-	GdkPixbuf        *pixbuf;
-	Pixmap            pixmap;
+	guchar             *gradient_data;
+	GdkPixbuf          *wallpaper_pixbuf;  /* Alias only */
+	GdkPixbuf          *prescaled_pixbuf;  /* For tiled on preview */
+	GdkPixbuf          *pixbuf;
+	Pixmap              pixmap;
+};
+
+typedef enum _orientation_t {
+	ORIENTATION_SOLID, ORIENTATION_HORIZ, ORIENTATION_VERT
+} orientation_t;
+
+typedef enum _wallpaper_type_t {
+	WPTYPE_TILED, WPTYPE_CENTERED, WPTYPE_SCALED_ASPECT,
+	WPTYPE_SCALED, WPTYPE_EMBOSSED
+} wallpaper_type_t;
+
+
+struct _ApplierPreferences 
+{
+	int ref_count;
+
+	gboolean          gradient_enabled;
+	gboolean          wallpaper_enabled;
+	orientation_t     orientation;
+	wallpaper_type_t  wallpaper_type;
+
+	GdkColor         *color1;
+	GdkColor         *color2;
+
+	gchar            *wallpaper_filename;
+
+	gboolean          adjust_opacity;
+	gint              opacity;
 };
 
 static GtkObjectClass *parent_class;
@@ -113,8 +145,8 @@ static void applier_get_arg          (GtkObject *object,
 				      guint arg_id);
 
 static void run_render_pipeline      (Renderer *renderer, 
-				      Preferences *old_prefs,
-				      Preferences *new_prefs,
+				      ApplierPreferences *old_prefs,
+				      ApplierPreferences *new_prefs,
 				      GdkPixbuf *wallpaper_pixbuf);
 static void draw_disabled_message    (GtkWidget *widget);
 
@@ -122,7 +154,7 @@ static Renderer *renderer_new        (gboolean is_root);
 static void renderer_destroy         (Renderer *renderer);
 
 static void renderer_set_prefs       (Renderer *renderer,
-				      Preferences *prefs);
+				      ApplierPreferences *prefs);
 static void renderer_set_wallpaper   (Renderer *renderer, 
 				      GdkPixbuf *wallpaper_pixbuf);
 
@@ -153,13 +185,22 @@ static void tile_composite           (GdkPixbuf *dest, GdkPixbuf *src,
 				      gint alpha_value);
 
 static gboolean render_gradient_p    (Renderer *renderer,
-				      Preferences *prefs);
-static gboolean render_small_pixmap_p (Preferences *prefs);
+				      ApplierPreferences *prefs);
+static gboolean render_small_pixmap_p (ApplierPreferences *prefs);
 
 static Pixmap make_root_pixmap       (gint width, gint height);
 static void set_root_pixmap          (Pixmap pixmap);
 
 static gboolean is_nautilus_running  (void);
+
+/* preferences stuff -- easier than making an object */
+static ApplierPreferences* applier_preferences_pb_new (Bonobo_PropertyBag pb, CORBA_Environment *ev);
+static ApplierPreferences* applier_preferences_db_new (Bonobo_ConfigDatabase db, CORBA_Environment *ev);
+static void applier_preferences_ref (ApplierPreferences *prefs);
+static void applier_preferences_unref (ApplierPreferences *prefs);
+static void applier_preferences_free (ApplierPreferences *prefs);
+
+static GdkColor* bonobo_color_to_gdk (Bonobo_Config_Color *color);
 
 guint
 applier_get_type (void)
@@ -210,6 +251,7 @@ applier_class_init (ApplierClass *class)
 	parent_class = 
 		GTK_OBJECT_CLASS (gtk_type_class (gtk_object_get_type ()));
 
+	g_print ("Entering class_init\n");
 	if (!gdk_pixbuf_xlib_inited) {
 		gdk_pixbuf_xlib_inited = TRUE;
 
@@ -281,11 +323,9 @@ applier_destroy (GtkObject *object)
 		renderer_destroy (applier->private->root_renderer);
 
 	if (applier->private->root_prefs != NULL)
-		gtk_object_unref 
-			(GTK_OBJECT (applier->private->root_prefs));
+		applier_preferences_unref (applier->private->root_prefs);
 	if (applier->private->preview_prefs != NULL)
-		gtk_object_unref 
-			(GTK_OBJECT (applier->private->preview_prefs));
+		applier_preferences_unref (applier->private->preview_prefs);
 
 	if (applier->private->wallpaper_pixbuf != NULL)
 		gdk_pixbuf_unref (applier->private->wallpaper_pixbuf);
@@ -298,27 +338,23 @@ applier_destroy (GtkObject *object)
 }
 
 void
-applier_apply_prefs (Applier *applier, Preferences *prefs,
-		     gboolean do_root, gboolean do_preview)
+applier_apply_prefs (Applier *applier, Bonobo_PropertyBag pb, Bonobo_ConfigDatabase db, CORBA_Environment *ev, gboolean do_root, gboolean do_preview)
 {
-	Preferences *new_prefs;
+	ApplierPreferences *prefs;
 
 	g_return_if_fail (applier != NULL);
 	g_return_if_fail (IS_APPLIER (applier));
-	g_return_if_fail (prefs != NULL);
-	g_return_if_fail (IS_PREFERENCES (prefs));
+	g_return_if_fail (pb != NULL);
 
 	if (do_root && applier->private->nautilus_running) {
 		set_root_pixmap (-1);
 		do_root = FALSE;
 	}
 
-	if (!prefs->enabled) {
-		draw_disabled_message (applier_class_get_preview_widget ());
-		return;
-	}
-
-	new_prefs = PREFERENCES (preferences_clone (prefs));
+	if (pb != CORBA_OBJECT_NIL)
+		prefs = applier_preferences_pb_new (pb, ev);
+	else
+		prefs = applier_preferences_db_new (db, ev);
 
 	if (((prefs->wallpaper_filename || 
 	      applier->private->wallpaper_filename) &&
@@ -351,11 +387,11 @@ applier_apply_prefs (Applier *applier, Preferences *prefs,
 		if (!applier->private->wallpaper_pixbuf) {
 			g_warning (_("Could not load pixbuf \"%s\"; disabling wallpaper."),
 				   prefs->wallpaper_filename);
-			new_prefs->wallpaper_enabled = FALSE;
+			prefs->wallpaper_enabled = FALSE;
 		}
 	}
 	else if (applier->private->wallpaper_pixbuf == NULL) {
-		new_prefs->wallpaper_enabled = FALSE;
+		prefs->wallpaper_enabled = FALSE;
 	}
 
 	if (do_preview) {
@@ -365,15 +401,14 @@ applier_apply_prefs (Applier *applier, Preferences *prefs,
 
 		run_render_pipeline (applier->private->preview_renderer,
 				     applier->private->preview_prefs, 
-				     new_prefs,
+				     prefs,
 				     applier->private->wallpaper_pixbuf);
 
 		if (applier->private->preview_prefs != NULL)
-			gtk_object_unref (GTK_OBJECT 
-					  (applier->private->preview_prefs));
+			applier_preferences_unref (applier->private->preview_prefs);
 
-		applier->private->preview_prefs = new_prefs;
-		gtk_object_ref (GTK_OBJECT (new_prefs));
+		applier->private->preview_prefs = prefs;
+		applier_preferences_ref (prefs);
 
 		if (preview_widget != NULL)
 			gtk_widget_queue_draw (preview_widget);
@@ -387,18 +422,16 @@ applier_apply_prefs (Applier *applier, Preferences *prefs,
 
 		run_render_pipeline (applier->private->root_renderer,
 				     applier->private->root_prefs, 
-				     new_prefs,
+				     prefs,
 				     applier->private->wallpaper_pixbuf);
 
 		if (applier->private->root_prefs != NULL)
-			gtk_object_unref (GTK_OBJECT 
-					  (applier->private->root_prefs));
-
-		applier->private->root_prefs = new_prefs;
-		gtk_object_ref (GTK_OBJECT (new_prefs));
+			applier_preferences_unref (applier->private->root_prefs);
+		applier->private->root_prefs = prefs;
+		applier_preferences_ref (prefs);
 	}
 
-	gtk_object_unref (GTK_OBJECT (new_prefs));
+	applier_preferences_unref (prefs);
 }
 
 GtkWidget *
@@ -483,6 +516,16 @@ applier_class_get_preview_widget (void)
 	return preview_widget;
 }
 
+void
+applier_class_destroy_preview_widget (void)
+{
+	if (!preview_widget)
+		return;
+	if (GTK_IS_WIDGET (preview_widget))
+		gtk_widget_destroy (preview_widget);
+	preview_widget = NULL;
+}
+
 static void
 draw_disabled_message (GtkWidget *widget)
 {
@@ -530,8 +573,8 @@ draw_disabled_message (GtkWidget *widget)
 
 static void
 run_render_pipeline (Renderer *renderer, 
-		     Preferences *old_prefs,
-		     Preferences *new_prefs,
+		     ApplierPreferences *old_prefs,
+		     ApplierPreferences *new_prefs,
 		     GdkPixbuf *wallpaper_pixbuf)
 {
 	gboolean bg_formed = FALSE;
@@ -539,9 +582,7 @@ run_render_pipeline (Renderer *renderer,
 	gboolean opt_old_prefs, opt_new_prefs;
 
 	g_return_if_fail (renderer != NULL);
-	g_return_if_fail (old_prefs == NULL || IS_PREFERENCES (old_prefs));
 	g_return_if_fail (new_prefs != NULL);
-	g_return_if_fail (IS_PREFERENCES (new_prefs));
 
 	renderer_set_prefs (renderer, new_prefs);
 
@@ -646,18 +687,17 @@ renderer_destroy (Renderer *renderer)
 }
 
 static void
-renderer_set_prefs (Renderer *renderer, Preferences *prefs) 
+renderer_set_prefs (Renderer *renderer, ApplierPreferences *prefs) 
 {
 	g_return_if_fail (renderer != NULL);
-	g_return_if_fail (prefs == NULL || IS_PREFERENCES (prefs));
 
 	if (renderer->prefs)
-		gtk_object_unref (GTK_OBJECT (renderer->prefs));
+		applier_preferences_unref (renderer->prefs);
 
 	renderer->prefs = prefs;
 
 	if (prefs)
-		gtk_object_ref (GTK_OBJECT (prefs));
+		applier_preferences_ref (prefs);
 }
 
 static void
@@ -714,6 +754,7 @@ renderer_render_background (Renderer *renderer)
 						  (GdkPixbufDestroyNotify) 
 						  g_free, 
 						  NULL);
+		PDEBUG (renderer->pixbuf); 
 	}
 }
 
@@ -740,6 +781,8 @@ renderer_render_wallpaper (Renderer *renderer)
 			      &renderer->wx, &renderer->wy,
 			      &renderer->wwidth, &renderer->wheight,
 			      &renderer->srcx, &renderer->srcy);
+
+		renderer->pwidth = MAX (renderer->pwidth, renderer->wwidth);
 
 		if (renderer->prefs->wallpaper_type == WPTYPE_TILED &&
 		    renderer->wwidth != renderer->pwidth &&
@@ -768,7 +811,7 @@ renderer_render_wallpaper (Renderer *renderer)
 					(gdouble) renderer->pheight;
 
 				if (renderer->prefs->wallpaper_type !=
-				    WPTYPE_TILED)
+				    WPTYPE_TILED) 
 					gdk_pixbuf_composite
 						(renderer->wallpaper_pixbuf,
 						 renderer->pixbuf,
@@ -822,6 +865,7 @@ renderer_render_wallpaper (Renderer *renderer)
 					 GDK_INTERP_BILINEAR,
 					 alpha_value, 65536,
 					 colorv, colorv);
+		PDEBUG (renderer->pixbuf); 
 			}
 		}
 		else if (renderer->wwidth != renderer->pwidth ||
@@ -832,7 +876,7 @@ renderer_render_wallpaper (Renderer *renderer)
 					(gdouble) renderer->pwidth;
 				scaley = (gdouble) renderer->wheight / 
 					(gdouble) renderer->pheight;
-
+ g_print ("%i %i:\n", gdk_pixbuf_get_width (renderer->pixbuf), gdk_pixbuf_get_height (renderer->pixbuf));
 				gdk_pixbuf_scale 
 					(renderer->wallpaper_pixbuf,
 					 renderer->pixbuf,
@@ -855,10 +899,12 @@ renderer_render_wallpaper (Renderer *renderer)
 						 renderer->wwidth,
 						 renderer->wheight,
 						 GDK_INTERP_BILINEAR);
+		PDEBUG (renderer->pixbuf); 
 				} else {
 					renderer->pixbuf =
 						renderer->prescaled_pixbuf;
 					gdk_pixbuf_ref (renderer->pixbuf);
+		PDEBUG (renderer->pixbuf); 
 				}
 			}
 		} else {
@@ -874,6 +920,7 @@ renderer_render_wallpaper (Renderer *renderer)
 					gdk_pixbuf_unref (renderer->pixbuf);
 
 				renderer->pixbuf = renderer->wallpaper_pixbuf;
+		PDEBUG (renderer->pixbuf); 
 
 				gdk_pixbuf_ref (renderer->pixbuf);
 			}
@@ -891,7 +938,6 @@ renderer_create_pixmap (Renderer *renderer)
 
 	g_return_if_fail (renderer != NULL);
 	g_return_if_fail (renderer->prefs != NULL);
-	g_return_if_fail (IS_PREFERENCES (renderer->prefs));
 
 	if (renderer->is_root) {
 		if (renderer->prefs->gradient_enabled &&
@@ -1088,8 +1134,7 @@ get_geometry (wallpaper_type_t wallpaper_type, GdkPixbuf *pixbuf,
 		if (vwidth < gdk_pixbuf_get_width (pixbuf) &&
 		    wallpaper_type == WPTYPE_CENTERED)
 		{
-			*srcx = (gdk_pixbuf_get_width (pixbuf) - vwidth) *
-				factor / 2;
+			*srcx = (gdk_pixbuf_get_width (pixbuf) - vwidth) / 2;
 			*rwidth = dwidth;
 		}
 		else
@@ -1107,8 +1152,7 @@ get_geometry (wallpaper_type_t wallpaper_type, GdkPixbuf *pixbuf,
 		if (vheight < gdk_pixbuf_get_height (pixbuf) &&
 		    wallpaper_type == WPTYPE_CENTERED)
 		{
-			*srcy = (gdk_pixbuf_get_height (pixbuf) - vheight) *
-				factor / 2;
+			*srcy = (gdk_pixbuf_get_height (pixbuf) - vheight) / 2;
 			*rheight = dheight;
 		}
 		else
@@ -1207,7 +1251,7 @@ render_tiled_image (Pixmap pixmap, GC xgc, GdkPixbuf *pixbuf,
 /* Return TRUE if the gradient should be rendered, false otherwise */
 
 static gboolean
-render_gradient_p (Renderer *renderer, Preferences *prefs) 
+render_gradient_p (Renderer *renderer, ApplierPreferences *prefs) 
 {
 	return prefs->gradient_enabled &&
 		!(prefs->wallpaper_enabled &&
@@ -1221,7 +1265,7 @@ render_gradient_p (Renderer *renderer, Preferences *prefs)
 /* Return TRUE if we can optimize the rendering by using a small thin pixmap */
 
 static gboolean
-render_small_pixmap_p (Preferences *prefs) 
+render_small_pixmap_p (ApplierPreferences *prefs) 
 {
 	return prefs->gradient_enabled && !prefs->wallpaper_enabled;
 }
@@ -1372,4 +1416,122 @@ is_nautilus_running (void)
 		XFree (data);
 
 	return running;
+}
+
+static gulong
+pb_get_value_ulong (Bonobo_PropertyBag bag, const gchar *prop)
+{
+	BonoboArg *arg;
+	gulong val;
+	
+	arg = bonobo_property_bag_client_get_value_any (bag, prop, NULL);
+	val = BONOBO_ARG_GET_GENERAL (arg, TC_ulong, CORBA_unsigned_long, NULL);
+	bonobo_arg_release (arg);
+	return val;
+}
+
+#define PB_GET_VALUE(v) (bonobo_property_bag_client_get_value_any (pb, (v), NULL))
+
+/* Probably has CORBA memory leaks */
+static ApplierPreferences*
+applier_preferences_pb_new (Bonobo_PropertyBag pb, CORBA_Environment *ev)
+{
+	ApplierPreferences *prefs = g_new0 (ApplierPreferences, 1);
+
+	prefs->orientation = pb_get_value_ulong (pb, "orientation");
+	if (prefs->orientation != ORIENTATION_SOLID)
+		prefs->gradient_enabled = TRUE;
+
+	prefs->wallpaper_type = pb_get_value_ulong (pb, "wallpaper_type");
+	prefs->wallpaper_filename = g_strdup (*((CORBA_char **)(PB_GET_VALUE ("wallpaper_filename"))->_value));
+	if (prefs->wallpaper_filename && strcmp (prefs->wallpaper_filename, "") != 0)
+		prefs->wallpaper_enabled = TRUE;
+	
+	prefs->color1 = bonobo_color_to_gdk ((Bonobo_Config_Color *)(PB_GET_VALUE ("color1"))->_value);
+	prefs->color2 = bonobo_color_to_gdk ((Bonobo_Config_Color *)(PB_GET_VALUE ("color2"))->_value);
+
+	prefs->opacity = BONOBO_ARG_GET_LONG (PB_GET_VALUE ("opacity"));
+	if (prefs->opacity != 100)
+		prefs->adjust_opacity = FALSE;
+
+	prefs->ref_count = 1;
+
+	return prefs;
+}
+
+#define DB_GET_VALUE(v) (bonobo_config_get_value (db, (v), NULL, NULL))
+
+static ApplierPreferences*
+applier_preferences_db_new (Bonobo_ConfigDatabase db, CORBA_Environment *ev)
+{
+	ApplierPreferences *prefs = g_new0 (ApplierPreferences, 1);
+
+	prefs->orientation = bonobo_config_get_ulong (db, "/main/orientation", NULL);
+	if (prefs->orientation != ORIENTATION_SOLID)
+		prefs->gradient_enabled = TRUE;
+
+	prefs->wallpaper_type = bonobo_config_get_ulong (db, "/main/wallpaper_type", NULL);
+	prefs->wallpaper_filename = g_strdup (*((CORBA_char **)(DB_GET_VALUE ("/main/wallpaper_filename"))->_value));
+	if (prefs->wallpaper_filename && strcmp (prefs->wallpaper_filename, "") != 0)
+		prefs->wallpaper_enabled = TRUE;
+	
+	prefs->color1 = bonobo_color_to_gdk ((Bonobo_Config_Color *)(DB_GET_VALUE ("/main/color1"))->_value);
+	prefs->color2 = bonobo_color_to_gdk ((Bonobo_Config_Color *)(DB_GET_VALUE ("/main/color2"))->_value);
+
+	prefs->opacity = BONOBO_ARG_GET_LONG (DB_GET_VALUE ("/main/opacity"));
+	if (prefs->opacity != 100)
+		prefs->adjust_opacity = FALSE;
+
+	prefs->ref_count = 1;
+
+	return prefs;
+}
+
+static void
+applier_preferences_ref (ApplierPreferences *prefs)
+{
+	g_return_if_fail (prefs != NULL);
+	
+	prefs->ref_count++;
+}
+
+static void
+applier_preferences_unref (ApplierPreferences *prefs)
+{
+	g_return_if_fail (prefs != NULL);
+
+	prefs->ref_count--;
+	if (prefs->ref_count < 1)
+		applier_preferences_free (prefs);
+}
+
+static void
+applier_preferences_free (ApplierPreferences *prefs)
+{
+	g_return_if_fail (prefs != NULL);
+	
+	if (prefs->wallpaper_filename)
+		g_free (prefs->wallpaper_filename);
+
+	if (prefs->color1)
+		g_free (prefs->color1);
+	if (prefs->color2)
+		g_free (prefs->color2);
+
+	g_free (prefs);
+}
+
+static GdkColor*
+bonobo_color_to_gdk (Bonobo_Config_Color *color)
+{
+	GdkColor *ret;
+	
+	g_return_val_if_fail (color != NULL, NULL);
+
+	ret = g_new0 (GdkColor, 1);
+	ret->red = color->r * 65535;
+	ret->green = color->g * 65535;
+	ret->blue = color->b * 65535;
+
+	return ret;
 }

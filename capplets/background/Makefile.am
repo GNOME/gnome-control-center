@@ -1,15 +1,19 @@
 cappletname = background
 cappletgroup = 
-bin_PROGRAMS = background-properties
+bin_PROGRAMS = background-properties-capplet
 
-background_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
-background_properties_SOURCES = \
+background_properties_capplet_LDADD = $(GNOMECC_CAPPLETS_LIBS)
+background_properties_capplet_SOURCES = \
 	main.c\
-	prefs-widget.c		prefs-widget.h \
-	preferences.c		preferences.h \
-	applier.c		applier.h
+	applier.c applier.h
 
 pixmap_DATA = 
+
+defaultsdir= $(datadir)/control-center/defaults
+defaults_DATA = background-properties.xml
+
+oafdir = $(datadir)/oaf
+oaf_DATA = Bonobo_Control_Capplet_background_properties.oaf
 
 ##
 ## You should not need to modify anything below this line
