@@ -1,5 +1,11 @@
 2004-11-28  James Henstridge  <james@jamesh.id.au>
 
+	* thumbnailer.c (main): use gnome_vfs_make_uri_from_shell_arg() to
+	parse the first argument.
+	(main): if the glyphs for 'A' and 'a' aren't found, pick some
+	other ones so we display something possibly relevant.
+	(draw_char): pass in a glyph index rather than a character.
+
 	* font-view.c: apply Federic Zhang <federic.zhang@sun.com>'s patch
 	to speed up loading of large (eg. CJK) fonts, plus a few small bug
 	fixes.  Fixes bug #142878.

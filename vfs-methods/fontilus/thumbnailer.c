@@ -92,27 +92,24 @@ draw_bitmap(GdkPixbuf *pixbuf, FT_Bitmap *bitmap, gint off_x, gint off_y)
 }
 
 static void
-draw_char(GdkPixbuf *pixbuf, FT_Face face, gchar character,
+draw_char(GdkPixbuf *pixbuf, FT_Face face, FT_UInt glyph_index,
 	  gint *pen_x, gint *pen_y)
 {
     FT_Error error;
-    FT_UInt glyph_index;
     FT_GlyphSlot slot;
 
     slot = face->glyph;
 
-    glyph_index = FT_Get_Char_Index(face, character);
-
     error = FT_Load_Glyph(face, glyph_index, FT_LOAD_DEFAULT);
     if (error) {
-	g_printerr("could not load character '%c': %s\n", character,
+	g_printerr("could not load glyph index '%ud': %s\n", glyph_index,
 		   get_ft_error(error));
 	return;
     }
 
     error = FT_Render_Glyph(slot, ft_render_mode_normal);
     if (error) {
-	g_printerr("could not render glyph for '%c': %s\n", character,
+	g_printerr("could not render glyph index '%ud': %s\n", glyph_index,
 		   get_ft_error(error));
 	return;
     }
@@ -223,6 +220,9 @@ main(int argc, char **argv)
     FT_Error error;
     FT_Library library;
     FT_Face face;
+    FT_UInt glyph_index1, glyph_index2;
+    FT_ULong charcode;
+    gchar *uri;
     GdkPixbuf *pixbuf;
     guchar *buffer;
     gint i, len, pen_x, pen_y;
@@ -243,12 +243,14 @@ main(int argc, char **argv)
 	return 1;
     }
 
-    error = FT_New_Face_From_URI(library, argv[1], 0, &face);
+    uri = gnome_vfs_make_uri_from_shell_arg (argv[1]);
+    error = FT_New_Face_From_URI(library, uri, 0, &face);
     if (error) {
-	g_printerr("could not load face '%s': %s\n", argv[1],
+	g_printerr("could not load face '%s': %s\n", uri,
 		   get_ft_error(error));
 	return 1;
     }
+    g_free (uri);
 
     error = FT_Set_Pixel_Sizes(face, 0, FONT_SIZE);
     if (error) {
@@ -283,8 +285,16 @@ main(int argc, char **argv)
     pen_x = FONT_SIZE/2;
     pen_y = FONT_SIZE;
 
-    draw_char(pixbuf, face, 'A', &pen_x, &pen_y);
-    draw_char(pixbuf, face, 'a', &pen_x, &pen_y);
+    glyph_index1 = FT_Get_Char_Index (face, 'A');
+    glyph_index2 = FT_Get_Char_Index (face, 'a');
+
+    /* if the glyphs for those letters don't exist, pick some other
+     * glyphs. */
+    if (glyph_index1 == 0) glyph_index1 = MIN (65, face->num_glyphs-1);
+    if (glyph_index2 == 0) glyph_index2 = MIN (97, face->num_glyphs-1);
+
+    draw_char(pixbuf, face, glyph_index1, &pen_x, &pen_y);
+    draw_char(pixbuf, face, glyph_index2, &pen_x, &pen_y);
 
     save_pixbuf(pixbuf, argv[2]);
     gdk_pixbuf_unref(pixbuf);

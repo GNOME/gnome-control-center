@@ -128,7 +128,7 @@ fontilus_context_menu_get_file_items (NautilusMenuProvider *provider,
     if (nautilus_file_info_is_directory (file)) goto end;
 
     /* create the context menu item */
-    item = nautilus_menu_item_new ("fontilus-set-default-font",
+    item = nautilus_menu_item_new ("Fontilus::set_default_font",
 				   _("Set as Application Font"),
 				   _("Sets the default application font"),
 				   NULL);
