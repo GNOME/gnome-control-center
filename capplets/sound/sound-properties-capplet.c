@@ -235,7 +235,7 @@ set_moniker_cb (BonoboPropertyBag *bag, BonoboArg *arg, guint arg_id,
 	/* Begin per-capplet part */
 
 	CREATE_PEDITOR (boolean, "enable_esd", "enable_toggle");
-	CREATE_PEDITOR (boolean, "event_sound", "events_toggle");
+	CREATE_PEDITOR (boolean, "event_sounds", "events_toggle");
 
 	/* End per-capplet part */
 }
