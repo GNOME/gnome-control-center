@@ -331,6 +331,7 @@ config_log_open (Location *location)
 				 "location", location,
 				 NULL);
 
+	config_log_reset_filenames (CONFIG_LOG (object));
 	do_load (CONFIG_LOG (object));
 	connect_socket (CONFIG_LOG (object));
 
@@ -635,6 +636,7 @@ config_log_reload (ConfigLog *config_log)
 	g_return_if_fail (IS_CONFIG_LOG (config_log));
 
 	do_unload (config_log, FALSE);
+	config_log_reset_filenames (config_log);
 	do_load (config_log);
 }
 
@@ -891,17 +893,13 @@ do_load (ConfigLog *config_log)
 	g_return_val_if_fail (config_log->p->location != NULL, FALSE);
 	g_return_val_if_fail (IS_LOCATION (config_log->p->location), FALSE);
 
-	config_log_reset_filenames (config_log);
-
 	fd = open (config_log->p->filename, O_RDONLY);
 
 	if (fd != -1)
 		config_log->p->file_buffer = 
 			io_buffer_new (g_io_channel_unix_new (fd), FALSE);
-	else {
-		g_warning ("Could not open config log: %s", g_strerror (errno));
+	else
 		config_log->p->file_buffer = NULL;
-	}
 
 	return TRUE;
 }

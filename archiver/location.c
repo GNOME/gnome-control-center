@@ -525,6 +525,13 @@ location_store (Location *location, gchar *backend_id, FILE *input,
 
 	if (doc_str->len > 0) {
 		doc = xmlParseDoc (doc_str->str);
+
+		if (doc == NULL) {
+			g_warning ("Could not parse XML");
+			g_string_free (doc_str, TRUE);
+			return;
+		}
+
 		location_store_xml (location, backend_id, doc, store_type);
 		xmlFreeDoc (doc);
 	} else {
@@ -562,6 +569,7 @@ location_store_xml (Location *location, gchar *backend_id, xmlDocPtr xml_doc,
 	g_return_if_fail (IS_LOCATION (location));
 	g_return_if_fail (location->p->config_log != NULL);
 	g_return_if_fail (IS_CONFIG_LOG (location->p->config_log));
+	g_return_if_fail (xml_doc != NULL);
 
 	contain_type = location_contains (location, backend_id);
 
