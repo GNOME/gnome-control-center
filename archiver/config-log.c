@@ -824,8 +824,10 @@ parse_line (char *buffer, int *id, struct tm *date, char **backend_id)
 	if (extract_number (&buffer, &date->tm_sec, 2) == FALSE)
 		return FALSE;
 
+#ifdef __USE_BSD
 	date->tm_gmtoff = 0;
 	date->tm_zone = "GMT";
+#endif
 
 	if (!isspace (*buffer) || *(buffer + 1) == '\0') return FALSE;
 	buffer++;

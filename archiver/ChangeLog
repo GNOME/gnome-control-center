@@ -1,5 +1,10 @@
 2001-09-28  Bradford Hovinen  <hovinen@ximian.com>
 
+	* config-log.c (parse_line): Only set tm_gmtoff and tm_zone fields
+	if __USE_BSD is defined
+
+	* util.c (parse_date): Ditto
+
 	* bonobo-config-archiver.c (bonobo_config_archiver_new): Store the
 	listener id in the archiver_db structure
 	(bonobo_config_archiver_destroy): Remove the event source

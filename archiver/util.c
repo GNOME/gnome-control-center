@@ -94,8 +94,10 @@ parse_date (char *str)
 	if (extract_number (&str, &value, 2))
 		date->tm_sec = value;
 
+#ifdef __USE_BSD
 	date->tm_zone = "GMT";
 	date->tm_gmtoff = 0;
+#endif
 
 	return date;
 }
