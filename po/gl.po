@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.53\n"
-"POT-Creation-Date: 2000-04-02 23:38+0200\n"
-"PO-Revision-Date: 2000-04-11 00:05+0200\n"
+"POT-Creation-Date: 2000-04-25 11:07+0200\n"
+"PO-Revision-Date: 2000-04-25 11:11+0200\n"
 "Last-Translator: Ruben Lopez Gomez <ryu@mundivia.es>\n"
 "Language-Team: Galician <gpul-traduccion@ceu.fi.udc.es>\n"
 "MIME-Version: 1.0\n"
@@ -715,7 +715,9 @@ msgstr "Gardando"
 msgid "Saving session details."
 msgstr "Gardando detalles da sesión."
 
-#: capplets/session-properties/gsm-client-row.c:43
+#. This is about the only case where we'll put Unknown instead
+#. of simply not showing the info.
+#: capplets/session-properties/gsm-client-row.c:43 control-center/splash.c:168
 msgid "Unknown"
 msgstr "Descoñecido"
 
@@ -1301,7 +1303,7 @@ msgstr ""
 #: capplets/wm-properties/wm-properties-capplet.c:860
 #: capplets/wm-properties/wm-properties-capplet.c:867
 #: capplets/wm-properties/wm-properties-capplet.c:1013
-#: control-center/capplet-manager.c:172
+#: control-center/capplet-manager.c:187
 msgid "OK"
 msgstr "Aceptar"
 
@@ -1348,7 +1350,7 @@ msgid "Add New Window Manager"
 msgstr "Engadir outro Xestor de Fiestras"
 
 #: capplets/wm-properties/wm-properties-capplet.c:752
-#: control-center/capplet-manager.c:177
+#: control-center/capplet-manager.c:192
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -1410,16 +1412,16 @@ msgstr "Centro de Control de GNOME"
 msgid "Desktop Properties manager."
 msgstr "Propiedades do Escritorio."
 
-#: control-center/capplet-manager.c:162
+#: control-center/capplet-manager.c:177
 msgid "Try"
 msgstr "Probar"
 
-#: control-center/capplet-manager.c:167
+#: control-center/capplet-manager.c:182
 msgid "Revert"
 msgstr "Desfacer"
 
 #. set the help item
-#: control-center/capplet-manager.c:190
+#: control-center/capplet-manager.c:205
 #, c-format
 msgid "Help with '%s' settings"
 msgstr "Axuda coa configuración de '%s'"
@@ -1478,45 +1480,65 @@ msgstr "comando capplet a executar."
 msgid "CAPPLET"
 msgstr "CAPPLET"
 
-#: control-center/main.c:34
+#: control-center/main.c:35
 msgid "Help on control-center"
 msgstr "Axuda do centro de control"
 
-#: control-center/main.c:34
+#: control-center/main.c:35
 msgid "Help with the GNOME control-center."
 msgstr "Axuda do centro de control de GNOME"
 
-#: control-center/main.c:36
+#: control-center/main.c:37
 msgid "Help with the current configuration page."
 msgstr "Axuda coa páxina de configuración actual"
 
-#: control-center/main.c:39
+#: control-center/main.c:40
 msgid "About"
 msgstr "Acerca de"
 
-#: control-center/main.c:39
+#: control-center/main.c:40
 msgid "About the GNOME control-center."
 msgstr "Acerca do centro de control de GNOME"
 
 #. we create the widgets
-#: control-center/main.c:66
+#: control-center/main.c:68
 msgid "Warning:"
 msgstr "Advertencia:"
 
-#: control-center/main.c:66
+#: control-center/main.c:68
 msgid "Discard all changes"
 msgstr "Desfacer tódolos cambios"
 
 #. ...labels, etc
-#: control-center/main.c:75
+#: control-center/main.c:77
 msgid ""
 "The following modules have had changes made, but not committed.  If you "
 "would like to edit them, please double click on the appropriate entry."
 msgstr ""
-"Os seguintes módulos sufriron cambios, pero non foron actualizados. Se "
-"quere editalos, faga doble clic na entrada apropiada."
+"Os seguintes módulos sufriron cambios, pero non foron actualizados. Se quere "
+"editalos, faga doble clic na entrada apropiada."
 
 #. create the app
-#: control-center/main.c:194
+#: control-center/main.c:196 control-center/splash.c:237
 msgid "Control Center"
 msgstr "Centro de control"
+
+#: control-center/splash.c:48
+msgid "Operating System:"
+msgstr "Sistema Operativo:"
+
+#: control-center/splash.c:49
+msgid "Distribution Version:"
+msgstr "Versión da Distribución:"
+
+#: control-center/splash.c:50
+msgid "Processor Type:"
+msgstr "Tipo de Procesador:"
+
+#: control-center/splash.c:51
+msgid "User Name:"
+msgstr "Nome de Usuario:"
+
+#: control-center/splash.c:52
+msgid "Host Name:"
+msgstr "Nome da Máquina:"
