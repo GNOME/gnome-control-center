@@ -3,12 +3,18 @@ always_built_SUBDIRS =					\
 	default-applications desktop-links font		\
 	background keyboard mouse sound			\
 	file-types theme-switcher ui-properties		\
-	keybindings network windows
+	keybindings network windows 
 
-SUBDIRS =  $(always_built_SUBDIRS)
+if HAVE_RANDR
+randr_SUBDIRS = display
+else
+randr_SUBDIRS = 
+endif
+
+SUBDIRS =  $(always_built_SUBDIRS) $(randr_SUBDIRS)
 
 DIST_SUBDIRS = \
-	$(always_built_SUBDIRS)
+	$(always_built_SUBDIRS) display
 
 
 

@@ -47,6 +47,7 @@ AC_SUBST(XF86MISC_LIBS)
 AC_CHECK_HEADERS(X11/extensions/XKB.h)
 CPPFLAGS=$savecppflags
 
+	
 dnl ==============================================
 dnl Check that we meet the  dependencies
 dnl ==============================================
@@ -72,7 +73,26 @@ if $PKG_CONFIG --exists xft ; then
 fi
 
 PKG_CHECK_MODULES(FONT_CAPPLET, $COMMON_MODULES $xft_modules)
+				
+dnl
+dnl Check for XRandR, needed for display capplet
+dnl		
+	
+have_randr=no
+AC_CHECK_LIB(Xrandr, XRRUpdateConfiguration,
+  [AC_CHECK_HEADER(X11/extensions/Xrandr.h,
+     have_randr=yes
+     RANDR_LIBS="-lXrandr -lXrender"
+     AC_DEFINE(HAVE_RANDR, 1, Have the Xrandr extension library),
+	  :, [#include <X11/Xlib.h>])], : ,
+       -lXrandr -lXrender $x_libs)
+AM_CONDITIONAL(HAVE_RANDR, [test $have_randr = yes])
+	
+PKG_CHECK_MODULES(DISPLAY_CAPPLET, $COMMON_MODULES)
 
+DISPLAY_CAPPLET_LIBS="$DISPLAY_CAPPLET_LIBS $RANDR_LIBS"
+
+				   
 CAPPLET_LIBS="$CAPPLET_LIBS $x_libs"
 GNOMECC_LIBS="$GNOMECC_LIBS $x_libs"
 GNOME_SETTINGS_DAEMON_LIBS="$GNOME_SETTINGS_DAEMON_LIBS $x_libs"
@@ -168,6 +188,9 @@ AC_SUBST(SOUND_CAPPLET_LIBS)
 AC_SUBST(FONT_CAPPLET_CFLAGS)
 AC_SUBST(FONT_CAPPLET_LIBS)
 
+AC_SUBST(DISPLAY_CAPPLET_CFLAGS)
+AC_SUBST(DISPLAY_CAPPLET_LIBS)
+
 AC_SUBST(GNOMECC_CFLAGS)
 AC_SUBST(GNOMECC_LIBS)
 
@@ -249,6 +272,7 @@ capplets/common/Makefile
 capplets/background/Makefile
 capplets/default-applications/Makefile
 capplets/desktop-links/Makefile
+capplets/display/Makefile
 capplets/file-types/Makefile
 capplets/file-types/libuuid/Makefile
 capplets/font/Makefile
