@@ -198,6 +198,46 @@ strip_whitespace (const gchar *line)
 	return s;
 }
 
+/* Get a list of directories where screensavers could be found */
+
+static GList *
+get_screensaver_dir_list (void) 
+{
+	char buffer[1024];
+	char *xss_name, *strings_name, *grep_name, *command;
+	FILE *in;
+	GList *list_head = NULL, *list_tail = NULL;
+
+	xss_name = gnome_is_program_in_path ("xscreensaver");
+	strings_name = gnome_is_program_in_path ("strings");
+	grep_name = gnome_is_program_in_path ("grep");
+
+	if (!xss_name || !strings_name || !grep_name) {
+		/* No grep or strings, so it's hopeless... */
+		list_head = g_list_append (NULL,
+					   "/usr/X11R6/lib/xscreensaver");
+		return list_head;
+	}
+
+	command = g_strconcat (strings_name, " ", xss_name, " | ",
+			       grep_name, " -G \"^/\"", NULL);
+	in = popen (command, "r");
+
+	while (fgets (buffer, 1024, in)) {
+		buffer[strlen(buffer) - 1] = '\0';
+
+		if (g_file_test (buffer, G_FILE_TEST_ISDIR)) {
+			list_tail = g_list_append (NULL, g_strdup (buffer));
+			if (!list_head)
+				list_head = list_tail;
+			else
+				list_tail = list_tail->next;
+		}
+	}
+
+	return list_head;
+}
+
 /* command_exists
  *
  * Given a command line, determines if the command may be executed
@@ -206,6 +246,8 @@ strip_whitespace (const gchar *line)
 static gboolean
 command_exists (char *command) 
 {
+	static GList *screensaver_dir_list = NULL;
+	GList *node;
 	char *program, *fullpath;
 	static char **path_dirs;
 	int i;
@@ -229,15 +271,20 @@ command_exists (char *command)
 		return ret;
 	}
 
-	/* Check the /usr/X11R6/lib/xscreensaver/ directory */
-	fullpath = g_concat_dir_and_file ("/usr/X11R6/lib/xscreensaver",
-					  program);
-	if (g_file_test (fullpath, G_FILE_TEST_ISFILE)) {
-		g_free (program);
+	/* Check the directories where screensavers are installed... */
+	if (screensaver_dir_list == NULL)
+		screensaver_dir_list = get_screensaver_dir_list ();
+
+	for (node = screensaver_dir_list; node; node = node->next) {
+		fullpath = g_concat_dir_and_file ((gchar *) node->data,
+						  program);
+		if (g_file_test (fullpath, G_FILE_TEST_ISFILE)) {
+			g_free (program);
+			g_free (fullpath);
+			return TRUE;
+		}
 		g_free (fullpath);
-		return TRUE;
 	}
-	g_free (fullpath);
 
 	fullpath = gnome_is_program_in_path (program);
 	if (fullpath)
