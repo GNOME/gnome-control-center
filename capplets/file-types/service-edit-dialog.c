@@ -310,14 +310,13 @@ service_edit_dialog_new (GtkTreeModel *model, ServiceInfo *info)
 			     NULL);
 }
 
-GtkWidget *
+GObject *
 service_add_dialog_new (GtkTreeModel *model) 
 {
-	GObject *res = g_object_new (service_edit_dialog_get_type (),
+	return g_object_new (service_edit_dialog_get_type (),
 			     "model", model,
 			     "is-add", TRUE,
 			     NULL);
-	return GTK_WIDGET (res);
 }
 
 static void

@@ -63,12 +63,11 @@ add_service_cb (GtkButton *button, GladeXML *dialog)
 {
 	GtkTreeView     *treeview;
 	GtkTreeModel    *model;
-	GtkWidget	*add_dialog;
 
 	treeview = GTK_TREE_VIEW (WID ("mime_types_tree"));
 	model = gtk_tree_view_get_model (treeview);
 
-	add_dialog = service_add_dialog_new (model);
+	service_add_dialog_new (model);
 }
 
 static GObject *

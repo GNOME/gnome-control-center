@@ -177,7 +177,7 @@ main (int argc, char **argv)
 #endif
 
 		dialog_win = gtk_dialog_new_with_buttons
-			(_("Sound preferences"), NULL, -1,
+			(_("Sound preferences"), NULL, GTK_DIALOG_NO_SEPARATOR,
 			 GTK_STOCK_HELP, GTK_RESPONSE_HELP,
 			 GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
 			 NULL);

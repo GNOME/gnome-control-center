@@ -54,7 +54,7 @@ GType service_edit_dialog_get_type (void);
 
 GObject *service_edit_dialog_new   (GtkTreeModel *model,
 				      ServiceInfo  *info);
-GtkWidget *service_add_dialog_new    (GtkTreeModel *model);
+GObject *service_add_dialog_new    (GtkTreeModel *model);
 
 G_END_DECLS
 
