@@ -4,16 +4,16 @@
 # small updates, Yanko Kaneti <yaneti@declera.com>, 2002.
 # Rostislav Raykov <zbrox@i-space.org>, 2004.
 # Vladimir Petkov <vpetkov@i-space.org>, 2004.
-# 
-# 
+# Vladimir Petkov <vpetkov@i-space.org>, 2005.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-control-center 2.8\n"
+"Project-Id-Version: gnome-control-center 2.10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-12 15:51+0100\n"
-"PO-Revision-Date: 2005-01-10 15:23+0200\n"
+"POT-Creation-Date: 2005-01-31 09:47+0200\n"
+"PO-Revision-Date: 2005-01-31 09:46+0200\n"
 "Last-Translator: Vladimir Petkov <vpetkov@i-space.org>\n"
-"Language-Team: Bulgarian GNOME translation team <dict@linux.zonebg.com>\n"
+"Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -365,6 +365,7 @@ msgstr "    "
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:1
 #: capplets/file-types/file-types-properties.glade.h:1
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:2
 #: capplets/network/gnome-network-preferences.glade.h:2
 #: capplets/theme-switcher/theme-install.glade.h:1
 #: capplets/theme-switcher/theme-properties.glade.h:1
@@ -467,7 +468,7 @@ msgstr "_Максимална скорост на курсора:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
 msgid "Mouse Keys"
-msgstr "Клавиши на мишката"
+msgstr "Бутони на мишката"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
 msgid "Mouse _Preferences..."
@@ -1235,7 +1236,7 @@ msgstr "_Избор..."
 
 #: capplets/file-types/file-types-properties.glade.h:7
 msgid "Cate_gory:"
-msgstr "Категория:"
+msgstr "Кате_гория:"
 
 #: capplets/file-types/file-types-properties.glade.h:8
 msgid "D_efault action:"
@@ -1754,11 +1755,11 @@ msgstr ""
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "Грешка при изтриване на ускорител в конфигурационната база данни: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:831
+#: capplets/keybindings/gnome-keybinding-properties.c:849
 msgid "Action"
 msgstr "Действие"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:855
+#: capplets/keybindings/gnome-keybinding-properties.c:873
 msgid "Shortcut"
 msgstr "Бърз клавиш"
 
@@ -1788,11 +1789,16 @@ msgstr "Неизвестен"
 msgid "Layout"
 msgstr "Подредба"
 
+#. The first radio in a group is to be "Default", meaning none of
+#. the below options are to be included in the selected list.
+#. This is a HIG-compliant alternative to allowing no
+#. selection in the group.
 #: capplets/keyboard/gnome-keyboard-properties-xkblt.c:255
+#: capplets/keyboard/gnome-keyboard-properties-xkbot.c:206
 msgid "Default"
 msgstr "Стандартен"
 
-#: capplets/keyboard/gnome-keyboard-properties-xkbmc.c:78
+#: capplets/keyboard/gnome-keyboard-properties-xkbmc.c:75
 msgid "Models"
 msgstr "Модели"
 
@@ -1817,45 +1823,41 @@ msgstr "Само използва настройките и излиза"
 msgid "Start the page with the typing break settings showing"
 msgstr "Започва страницата с показани настройки за почивките при писане"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:2
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
 msgid "..."
 msgstr "..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<b>Cursor Blinking</b>"
 msgstr "<b>Мигащ показалец</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "<b>Repeat Keys</b>"
 msgstr "<b>Повторни клавиши</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr "<b>Заключване на екрана, за да се подсигури почивка при печатане</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>Бърз</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>Дълъг</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>Къс</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Бавен</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "A_vailable layouts:"
 msgstr "Налични подредби:"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
-msgid "A_vailable options:"
-msgstr "Налични опции:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "All_ow postponing of breaks"
@@ -1938,24 +1940,24 @@ msgid "_Accessibility..."
 msgstr "_Достъпност..."
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:33
+msgid "_Add..."
+msgstr "_Добавяне..."
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:34
 msgid "_Break interval lasts:"
 msgstr "Продължителност на _почивката:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:34
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:35
 msgid "_Delay:"
 msgstr "_Закъснение:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:35
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:36
 msgid "_Models:"
 msgstr "_Модели:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:36
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:37
 msgid "_Selected layouts:"
 msgstr "Избрана подредба:"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:37
-msgid "_Selected options:"
-msgstr "Избрани опции:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:38
 msgid "_Speed:"
@@ -2167,7 +2169,7 @@ msgstr "      "
 
 #: capplets/network/gnome-network-preferences.glade.h:3
 msgid "<b>Ignore host list</b>"
-msgstr ""
+msgstr "<b>списък на хостовете за игнориране</b>"
 
 #: capplets/network/gnome-network-preferences.glade.h:4
 msgid "<b>_Automatic proxy configuration</b>"
@@ -2186,9 +2188,8 @@ msgid "<b>_Use authentication</b>"
 msgstr "<b>Използване на идентификация</b>"
 
 #: capplets/network/gnome-network-preferences.glade.h:8
-#, fuzzy
 msgid "Advanced Configuration"
-msgstr "URL за автоматична настройка:"
+msgstr "Допълнителни настройки"
 
 #: capplets/network/gnome-network-preferences.glade.h:9
 msgid "Autoconfiguration _URL:"
@@ -2211,9 +2212,8 @@ msgid "Port:"
 msgstr "Порт:"
 
 #: capplets/network/gnome-network-preferences.glade.h:14
-#, fuzzy
 msgid "Proxy Configuration"
-msgstr "<b>Ръчна настройка на сървъра посредник</b>"
+msgstr "Настройка на сървър посредник"
 
 #: capplets/network/gnome-network-preferences.glade.h:15
 msgid "S_ocks host:"
@@ -2544,30 +2544,34 @@ msgid "_Edit"
 msgstr "_Редактиране"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:18
+msgid "_Editable menu accelerators"
+msgstr "_Редактируеми ускорители на менюто"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:19
 msgid "_File"
 msgstr "_Файл"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:19
+#: capplets/ui-properties/gnome-ui-properties.glade.h:20
 msgid "_New"
 msgstr "_Нов"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:20
+#: capplets/ui-properties/gnome-ui-properties.glade.h:21
 msgid "_Open"
 msgstr "_Отваряне"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:21
+#: capplets/ui-properties/gnome-ui-properties.glade.h:22
 msgid "_Paste"
 msgstr "_Поставяне"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:22
+#: capplets/ui-properties/gnome-ui-properties.glade.h:23
 msgid "_Print"
 msgstr "_Разпечатване"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:23
+#: capplets/ui-properties/gnome-ui-properties.glade.h:24
 msgid "_Quit"
 msgstr "_Спиране на програмата"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:24
+#: capplets/ui-properties/gnome-ui-properties.glade.h:25
 msgid "_Save"
 msgstr "_Запазване"
 
@@ -2691,12 +2695,12 @@ msgstr "Изглед като контролен център на GNOME"
 msgid "Others"
 msgstr "Други"
 
-#: control-center/control-center.c:1005
+#: control-center/control-center.c:1010
 #: control-center/gnomecc.desktop.in.in.h:1
 msgid "GNOME Control Center"
 msgstr "Контролен център на GNOME"
 
-#: control-center/control-center.c:1121
+#: control-center/control-center.c:1126
 msgid "Desktop Preferences"
 msgstr "Настройки на работния плот"
 
@@ -3641,15 +3645,3 @@ msgstr "Дали да прави малки изображения за инст
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Дали да прави малки изображения за темите"
-
-#~ msgid "FTP proxy port"
-#~ msgstr "Порт за FTP сървър посредник"
-
-#~ msgid "HTTP proxy port"
-#~ msgstr "Порт за HTTP сървър посредник"
-
-#~ msgid "Secure HTTP proxy port"
-#~ msgstr "Сигурен порт на HTTPS сървъра посредник:"
-
-#~ msgid "Socks host port"
-#~ msgstr "Порт на Socks хост"
