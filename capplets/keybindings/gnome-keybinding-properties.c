@@ -169,7 +169,7 @@ make_key_theme_menu_item (const gchar *key_theme)
 
   if (!strcmp (key_theme, "Default"))
     {
-      retval = gtk_menu_item_new_with_label ("GNOME Default");
+      retval = gtk_menu_item_new_with_label (_("GNOME Default"));
       g_object_set_data_full (G_OBJECT (retval), LABEL_DATA, g_strdup ("Default"), g_free);
     }
   else
