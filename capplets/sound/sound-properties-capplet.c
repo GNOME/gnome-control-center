@@ -45,6 +45,12 @@
 
 static SoundProperties *props = NULL;
 
+static void
+props_changed_cb (SoundProperties *p, SoundEvent *event, gpointer data)
+{
+	sound_properties_user_save (p);
+}
+
 /* create_dialog
  *
  * Create the dialog box and return it as a GtkWidget
@@ -62,6 +68,8 @@ create_dialog (void)
 
 	props = sound_properties_new ();
 	sound_properties_add_defaults (props, NULL);
+	g_signal_connect (G_OBJECT (props), "event_changed",
+			  (GCallback) props_changed_cb, NULL);  
 	box = glade_xml_get_widget (data, "events_vbox");
 	gtk_box_pack_start (GTK_BOX (box), sound_view_new (props),
 			    TRUE, TRUE, 0);
@@ -167,7 +175,7 @@ main (int argc, char **argv)
 #endif
 
 		dialog_win = gtk_dialog_new_with_buttons
-			(_("Sound properties"), NULL, -1,
+			(_("Sound preferences"), NULL, -1,
 			 GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
 			 NULL);
 
