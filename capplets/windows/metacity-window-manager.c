@@ -1,5 +1,7 @@
-#include <dirent.h>
 #include <config.h>
+#include <sys/types.h>
+#include <dirent.h>
+#include <string.h>
 #include <gconf/gconf-client.h>
 
 #include "metacity-window-manager.h"
