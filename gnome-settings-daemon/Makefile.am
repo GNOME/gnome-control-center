@@ -11,6 +11,8 @@ gnome_settings_daemon_SOURCES =		\
 	gnome-settings-background.c	\
 	gnome-settings-xsettings.c	\
 	gnome-settings-xsettings.h	\
+	gnome-settings-sound.c		\
+	gnome-settings-sound.h		\
 	xsettings-common.c		\
 	xsettings-manager.c		\
 	xsettings-common.h		\
@@ -21,5 +23,6 @@ bin_PROGRAMS=gnome-settings-daemon
 gnome_settings_daemon_LDADD = \
 	$(GNOME_SETTINGS_DAEMON_LIBS)			\
 	$(top_builddir)/libbackground/libbackground.a	\
+	$(top_builddir)/libsounds/libsounds.a		\
 	$(XF86MISC_LIBS)
 

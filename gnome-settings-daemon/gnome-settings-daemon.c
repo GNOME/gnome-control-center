@@ -36,6 +36,7 @@
 #include "gnome-settings-mouse.h"
 #include "gnome-settings-keyboard.h"
 #include "gnome-settings-background.h"
+#include "gnome-settings-sound.h"
 
 static GSList *directories = NULL;
 XSettingsManager *manager;
@@ -161,6 +162,7 @@ main (int argc, char **argv)
   gnome_settings_mouse_init (engine);
   gnome_settings_keyboard_init (engine);
   gnome_settings_background_init (engine);
+  gnome_settings_sound_init (engine);
 
   for (list = directories; list; list = list->next)
     {
