@@ -115,23 +115,6 @@ demo_main(int argc, char **argv, gint in_fd)
   gtk_label_set_justify (GTK_LABEL (widget), GTK_JUSTIFY_LEFT);
   gtk_table_attach (GTK_TABLE (table), widget, 0, 3, 0, 1, 0, 0, GNOME_PAD_SMALL, GNOME_PAD_SMALL);
 
-  menubar = gtk_menu_bar_new();
-  gtk_table_attach (GTK_TABLE (table), menubar, 0, 3, 1, 2, 0, 0, GNOME_PAD_SMALL, GNOME_PAD_SMALL);
-
-  widget = gtk_menu_item_new_with_label(_("Submenu"));
-  gtk_widget_show(widget);
-  gtk_menu_bar_append(GTK_MENU_BAR(menubar), widget);
-  gtk_widget_show(menubar);
-
-  menu = gtk_menu_new();
-  gtk_menu_item_set_submenu(GTK_MENU_ITEM(widget), menu);
-  widget = gtk_menu_item_new_with_label(_("Item 1"));
-  gtk_widget_show(widget);
-  gtk_menu_append(GTK_MENU(menu), widget);
-  widget = gtk_menu_item_new_with_label(_("Another item"));
-  gtk_widget_show(widget);
-  gtk_menu_append(GTK_MENU(menu), widget);
-
   /* column one */
   widget = gtk_button_new_with_label (_("Sample Button"));
   hbox = gtk_hbox_new (FALSE, 0);
@@ -149,19 +132,32 @@ demo_main(int argc, char **argv, gint in_fd)
   gtk_table_attach (GTK_TABLE (table), hbox, 0, 1, 4, 5, GTK_EXPAND | GTK_FILL, 0, GNOME_PAD_SMALL, GNOME_PAD_SMALL);
 
   /* column two */
-  widget = gtk_radio_button_new_with_label (NULL, _("Radio Button 1"));
-  hbox = gtk_hbox_new (FALSE, 0);
-  gtk_box_pack_start (GTK_BOX (hbox), widget, FALSE, FALSE, 0);
-  group = gtk_radio_button_group (GTK_RADIO_BUTTON (widget));
-  gtk_table_attach (GTK_TABLE (table), hbox, 1, 2, 2, 3, GTK_EXPAND | GTK_FILL, 0, 0, GNOME_PAD_SMALL);
 
-  widget = gtk_radio_button_new_with_label (group, _("Radio Button 2"));
+  menubar = gtk_menu_bar_new();
+  gtk_table_attach (GTK_TABLE (table), menubar, 1, 2, 2, 3, 0, 0, GNOME_PAD_SMALL, GNOME_PAD_SMALL);
+
+  widget = gtk_menu_item_new_with_label(_("Submenu"));
+  gtk_widget_show(widget);
+  gtk_menu_bar_append(GTK_MENU_BAR(menubar), widget);
+  gtk_widget_show(menubar);
+
+  menu = gtk_menu_new();
+  gtk_menu_item_set_submenu(GTK_MENU_ITEM(widget), menu);
+  widget = gtk_menu_item_new_with_label(_("Item 1"));
+  gtk_widget_show(widget);
+  gtk_menu_append(GTK_MENU(menu), widget);
+  widget = gtk_menu_item_new_with_label(_("Another item"));
+  gtk_widget_show(widget);
+  gtk_menu_append(GTK_MENU(menu), widget);
+
+
+  widget = gtk_radio_button_new_with_label (NULL, _("Radio Button 1"));
   hbox = gtk_hbox_new (FALSE, 0);
   gtk_box_pack_start (GTK_BOX (hbox), widget, FALSE, FALSE, 0);
   group = gtk_radio_button_group (GTK_RADIO_BUTTON (widget));
   gtk_table_attach (GTK_TABLE (table), hbox, 1, 2, 3, 4, GTK_EXPAND | GTK_FILL, 0, 0, 0);
 
-  widget = gtk_radio_button_new_with_label (group, _("Radio Button 3"));
+  widget = gtk_radio_button_new_with_label (group, _("Radio Button 2"));
   hbox = gtk_hbox_new (FALSE, 0);
   gtk_box_pack_start (GTK_BOX (hbox), widget, FALSE, FALSE, 0);
   group = gtk_radio_button_group (GTK_RADIO_BUTTON (widget));
