@@ -172,10 +172,8 @@ acme_volume_gstreamer_close_real (AcmeVolumeGStreamer *self)
 	if (self->_priv->mixer != NULL)
 	{
 		gst_element_set_state (GST_ELEMENT(self->_priv->mixer), GST_STATE_NULL);
-		gst_element_set_state (GST_ELEMENT(self->_priv->track), GST_STATE_NULL);
-
-		g_object_unref (GST_OBJECT (self->_priv->mixer));	    
-		g_object_unref (GST_OBJECT (self->_priv->track));	    
+		gst_object_unref (GST_OBJECT (self->_priv->mixer));	    
+		g_object_unref (G_OBJECT (self->_priv->track));
 		self->_priv->mixer=NULL;
 		self->_priv->track=NULL;
 	}
@@ -270,8 +268,9 @@ acme_volume_gstreamer_open (AcmeVolumeGStreamer *vol)
 
 					g_object_ref (self->_priv->mixer);
 					g_object_ref (self->_priv->track);
-
-					break;
+					if (array)
+						g_value_array_free (array);
+					return TRUE;
 				}
 			}
 			
