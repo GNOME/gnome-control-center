@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.52\n"
-"POT-Creation-Date: 2001-02-14 20:16-0500\n"
-"PO-Revision-Date: 2000-04-01 02:46+04:00\n"
+"POT-Creation-Date: 2001-02-28 17:48+0300\n"
+"PO-Revision-Date: 2001-02-28 17:53+03:00\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -86,7 +86,7 @@ msgstr "нет"
 
 #: capplets/background-properties/property-background.c:688
 msgid "Embossed Logo"
-msgstr ""
+msgstr "Рельефная эмблема"
 
 #: capplets/background-properties/property-background.c:699
 msgid "Scaled"
@@ -113,7 +113,7 @@ msgstr "Мозаика"
 #: capplets/sound-properties/sound-properties.c:693
 #: capplets/theme-switcher/gui.c:367
 #: capplets/ui-properties/ui-properties.c:516
-#: capplets/url-properties/url-properties.c:256
+#: capplets/url-properties/url-properties.c:272
 #: capplets/wm-properties/wm-properties-capplet.c:649
 msgid ""
 "No help is available/installed for these settings. Please make sure you\n"
@@ -133,9 +133,9 @@ msgstr ""
 #: capplets/sound-properties/sound-properties.c:756
 #: capplets/theme-switcher/gui.c:369
 #: capplets/ui-properties/ui-properties.c:518
-#: capplets/url-properties/url-properties.c:258
+#: capplets/url-properties/url-properties.c:274
 #: capplets/wm-properties/wm-properties-capplet.c:651
-#: control-center/capplet-widget.c:263
+#: control-center/capplet-widget.c:273
 msgid "Close"
 msgstr "Закрыть"
 
@@ -219,7 +219,7 @@ msgid "Add"
 msgstr "Добавить"
 
 #: capplets/mime-type/edit-window.c:312
-#: capplets/url-properties/url-properties.c:138
+#: capplets/url-properties/url-properties.c:148
 msgid "Remove"
 msgstr "Удалить"
 
@@ -354,13 +354,12 @@ msgstr ""
 "Состояние не будет сохранено."
 
 #: capplets/mime-type/mime-type-capplet.c:79
-#, fuzzy
 msgid ""
 "No help is available/installed for these settings. Please make sure you\n"
 "have the Control Center documentation installed on your system."
 msgstr ""
-"Справочная информация для этих настроек не доступна. Проверьте пожалуйста\n"
-"что Руководство пользователя GNOME установлено на вашей системе."
+"Справочная информация для этих настроек не доступна или не установлена. Проверьте пожалуйста,\n"
+"что документация Центра Управления установлена в вашей системе."
 
 #: capplets/mime-type/mime-type-capplet.c:95
 #: capplets/wm-properties/wm-properties-capplet.c:1098
@@ -1012,28 +1011,28 @@ msgstr "Протокол"
 msgid "Command"
 msgstr "Команда"
 
-#: capplets/url-properties/url-properties.c:92
+#: capplets/url-properties/url-properties.c:93
 msgid "handler:"
 msgstr "обработчик:"
 
 #. set some commonly used handlers
-#: capplets/url-properties/url-properties.c:102
+#: capplets/url-properties/url-properties.c:103
 msgid "Netscape"
 msgstr "Netscape"
 
-#: capplets/url-properties/url-properties.c:107
+#: capplets/url-properties/url-properties.c:108
 msgid "Netscape (new window)"
 msgstr "Netscape (в новом окне)"
 
-#: capplets/url-properties/url-properties.c:113
+#: capplets/url-properties/url-properties.c:121
 msgid "Help browser"
 msgstr "Справочный навигатор"
 
-#: capplets/url-properties/url-properties.c:118
+#: capplets/url-properties/url-properties.c:127
 msgid "Help browser (new window)"
 msgstr "Справочный навигатор (в новом окне)"
 
-#: capplets/url-properties/url-properties.c:130
+#: capplets/url-properties/url-properties.c:140
 msgid "Set"
 msgstr "Установить"
 
@@ -1254,15 +1253,15 @@ msgstr "Инициализировать свойства сеанса"
 msgid "Ignore default action.  Used for custom init-session cases"
 msgstr "Проигнорировать обычные действия. Для специальных случаев"
 
-#: control-center/capplet-widget.c:262
+#: control-center/capplet-widget.c:272
 msgid "Sorry, no help is available for these settings."
 msgstr "К сожалению информация о этих настройках отсутствует."
 
-#: control-center/corba-glue.c:75
+#: control-center/corba-glue.c:77
 msgid "capplet-command to be run."
 msgstr "исполнить капплет-команду."
 
-#: control-center/corba-glue.c:75
+#: control-center/corba-glue.c:77
 msgid "CAPPLET"
 msgstr "КАППЛЕТ"
 
@@ -1311,210 +1310,26 @@ msgstr "Центр управления GNOME"
 
 #: control-center/splash.c:48
 msgid "Operating System:"
-msgstr ""
+msgstr "Операционная система:"
 
 #: control-center/splash.c:49
 msgid "Distribution Version:"
-msgstr ""
+msgstr "Версия дистрибутива:"
 
 #: control-center/splash.c:50
 msgid "Processor Type:"
-msgstr ""
+msgstr "Тип процессора:"
 
 #: control-center/splash.c:51
-#, fuzzy
 msgid "User Name:"
-msgstr "Имя:"
+msgstr "Имя пользователя:"
 
 #: control-center/splash.c:52
-#, fuzzy
 msgid "Host Name:"
-msgstr "Имя:"
+msgstr "Название компьютера:"
 
 #. This is about the only case where we'll put Unknown instead
 #. of simply not showing the info.
 #: control-center/splash.c:178
 msgid "Unknown"
 msgstr "Неизвест."
-
-#, fuzzy
-#~ msgid "Session"
-#~ msgstr "Расширение"
-
-#, fuzzy
-#~ msgid "Session Chooser"
-#~ msgstr "Сохранить сеанс позже"
-
-#, fuzzy
-#~ msgid "Start Session"
-#~ msgstr "Сохранить сеанс сейчас"
-
-#, fuzzy
-#~ msgid "Cancel Login"
-#~ msgstr "Отменить"
-
-#~ msgid "Order: "
-#~ msgstr "Порядок: "
-
-#~ msgid "Style: "
-#~ msgstr "Стиль: "
-
-#~ msgid "This button sets the start order of the selected programs.\n"
-#~ msgstr "Эта кнопка задает порядок запуска выбранных программ.\n"
-
-#~ msgid ""
-#~ "This button sets the restart style of the selected programs:\n"
-#~ "Normal programs are unaffected by logouts but can die;\n"
-#~ "Respawn programs are never allowed to die;\n"
-#~ "Trash programs are discarded on logout and can die;\n"
-#~ "Settings programs are always started on every login."
-#~ msgstr ""
-#~ "Эта кнопка задает стиль повторного запуска выбранных программ:\n"
-#~ "Обычные программы сохраняются при окончании работы, но \"смертны\";\n"
-#~ "Перезапускаемые программы \"бессмертны\";\n"
-#~ "Выбрасываемые программы \"смертны\" и выкидываются при окончании работы;\n"
-#~ "Настраивающие программы запускаются в начале каждого сеанса работы."
-
-#~ msgid ""
-#~ "This button produces a key to the program states below:\n"
-#~ "Inactive programs are waiting to start or have finished;\n"
-#~ "Starting programs are being given time to get running;\n"
-#~ "Running programs are normal members of the session;\n"
-#~ "Saving programs are saving their session details;\n"
-#~ "Programs which make no contact have Unknown states.\n"
-#~ msgstr ""
-#~ "Эта кнопка выдает следующие типы состояний программ:\n"
-#~ "Бездействующие программы ожидают запуска или уже завершены;\n"
-#~ "Запускаемые программы, которым отведено время на запуск;\n"
-#~ "Исполняемые программы это обычные участники сеанса;\n"
-#~ "Программы сохраняющие подробности своего сеанса;\n"
-#~ "Неизвест. программы не сообщили свое состояние.\n"
-
-#~ msgid "This column gives the command used to start a program."
-#~ msgstr "Эта колонка задает команду запуска программы."
-
-#~ msgid "Order"
-#~ msgstr "Порядок"
-
-#~ msgid "Style"
-#~ msgstr "Стиль"
-
-#~ msgid "State"
-#~ msgstr "Состояние"
-
-#~ msgid "Program"
-#~ msgstr "Программа"
-
-#~ msgid "Inactive"
-#~ msgstr "Бездействует"
-
-#~ msgid "Waiting to start or already finished."
-#~ msgstr "Ожидает запуска или уже завершена."
-
-#~ msgid "Starting"
-#~ msgstr "Запускается"
-
-#~ msgid "Started but has not yet reported state."
-#~ msgstr "Запустилась, но еще не сообщила состояние"
-
-#~ msgid "Running"
-#~ msgstr "Исполняется"
-
-#~ msgid "A normal member of the session."
-#~ msgstr "Обычный участник сеанса."
-
-#~ msgid "Saving"
-#~ msgstr "Сохраняет"
-
-#~ msgid "Saving session details."
-#~ msgstr "Сохраняет подробности сеанса."
-
-#~ msgid "State not reported within timeout."
-#~ msgstr "За отведенное время состояние не сообщено."
-
-#~ msgid "Normal"
-#~ msgstr "Нормальная"
-
-#~ msgid "Unaffected by logouts but can die."
-#~ msgstr "Сохраняется при окончании работы, но \"смертна\"."
-
-#~ msgid "Respawn"
-#~ msgstr "Перезапускаемая"
-
-#~ msgid "Never allowed to die."
-#~ msgstr "\"Бессмертная\" программа"
-
-#~ msgid "Trash"
-#~ msgstr "Выбрасываемая"
-
-#~ msgid "Discarded on logout and can die."
-#~ msgstr "Выкидывается при окончании работы и \"смертна\"."
-
-#~ msgid "Always started on every login."
-#~ msgstr "Запускается в начале каждого сеанса работы."
-
-#~ msgid "Remove Program"
-#~ msgstr "Удалить программу"
-
-#~ msgid "Options"
-#~ msgstr "Параметры"
-
-#~ msgid "Show splash screen on login"
-#~ msgstr "Показывать заставку при входе"
-
-#~ msgid "Prompt on logout"
-#~ msgstr "Спрашивать при окончании работы"
-
-#~ msgid "Automatically save changes to session"
-#~ msgstr "Автоматически сохранять изменения сеанса"
-
-#~ msgid "Non-session-managed Startup Programs"
-#~ msgstr "Программы запуска без поддержки сессий"
-
-#~ msgid "Priority"
-#~ msgstr "Приоритет"
-
-#~ msgid "Browse Currently Running Programs..."
-#~ msgstr "Просмотр запущенных программ..."
-
-#~ msgid "Only display warnings."
-#~ msgstr "Только показывать предупреждения."
-
-#~ msgid "Startup Command"
-#~ msgstr "Команда запуска"
-
-#~ msgid ""
-#~ "Programs with smaller values are started before programs with higher values. "
-#~ "The default value should be OK"
-#~ msgstr ""
-#~ "Программы с меньшим числом запускаются до программ с большим числом. "
-#~ "Подразумеваемое значение должно быть OK"
-
-#~ msgid "The startup command cannot be empty"
-#~ msgstr "Команда запуска не может быть пустой"
-
-#~ msgid "Add Startup Program"
-#~ msgstr "Добавление команды запуска"
-
-#~ msgid "Edit Startup Program"
-#~ msgstr "Изменений команды запуска"
-
-#~ msgid ""
-#~ "No help is available/installed. Please make sure you\n"
-#~ "have the GNOME User's Guide installed on your system."
-#~ msgstr ""
-#~ "Справочная информация не доступна. Проверьте пожалуйста что\n"
-#~ "Руководство пользователя GNOME установлено на вашей системе."
-
-#~ msgid "Keyboard Bell"
-#~ msgstr "Звонок клавиатуры"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'bell-properties-capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "ошибка инициализации при запуске 'bell-properties-capplet'.\n"
-#~ "исполнение прервано ...\n"
-
-#~ msgid "Cancel"
-#~ msgstr "Отменить"
