@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-25 04:21+0100\n"
-"PO-Revision-Date: 2005-01-25 12:58+0200\n"
+"POT-Creation-Date: 2005-02-09 14:53+0100\n"
+"PO-Revision-Date: 2005-02-09 19:09+0200\n"
 "Last-Translator: Leonid Kanter <leon@asplinux.ru>\n"
 "Language-Team:  <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -287,7 +287,7 @@ msgstr "Поддержка вспомогательных технологий"
 
 #: capplets/accessibility/at-properties/at-properties.desktop.in.in.h:2
 msgid "Enable support for GNOME assistive technologies at login"
-msgstr "Диалог настройки вспомогательных технологий Гнома"
+msgstr "Диалог настройки вспомогательных технологий GNOME"
 
 #: capplets/accessibility/at-properties/main.c:60
 msgid ""
@@ -598,43 +598,43 @@ msgstr "_Стиль:"
 msgid "There was an error displaying help: %s"
 msgstr "Произошла ошибка при отображении справки: %s"
 
-#: capplets/background/gnome-wp-capplet.c:1064
-#: capplets/background/gnome-wp-capplet.c:1080
+#: capplets/background/gnome-wp-capplet.c:1061
+#: capplets/background/gnome-wp-capplet.c:1077
 msgid "Centered"
 msgstr "По центру"
 
-#: capplets/background/gnome-wp-capplet.c:1088
-#: capplets/background/gnome-wp-capplet.c:1103
+#: capplets/background/gnome-wp-capplet.c:1085
+#: capplets/background/gnome-wp-capplet.c:1100
 msgid "Fill Screen"
 msgstr "На весь экран"
 
-#: capplets/background/gnome-wp-capplet.c:1111
-#: capplets/background/gnome-wp-capplet.c:1126
+#: capplets/background/gnome-wp-capplet.c:1108
+#: capplets/background/gnome-wp-capplet.c:1123
 msgid "Scaled"
 msgstr "Масштабировать"
 
-#: capplets/background/gnome-wp-capplet.c:1134
-#: capplets/background/gnome-wp-capplet.c:1149
+#: capplets/background/gnome-wp-capplet.c:1131
+#: capplets/background/gnome-wp-capplet.c:1146
 msgid "Tiled"
 msgstr "Черепицей"
 
-#: capplets/background/gnome-wp-capplet.c:1173
-#: capplets/background/gnome-wp-capplet.c:1182
+#: capplets/background/gnome-wp-capplet.c:1170
+#: capplets/background/gnome-wp-capplet.c:1179
 msgid "Solid Color"
 msgstr "Сплошной цвет"
 
-#: capplets/background/gnome-wp-capplet.c:1190
-#: capplets/background/gnome-wp-capplet.c:1199
+#: capplets/background/gnome-wp-capplet.c:1187
+#: capplets/background/gnome-wp-capplet.c:1196
 msgid "Horizontal Gradient"
 msgstr "Горизонтальный переход"
 
-#: capplets/background/gnome-wp-capplet.c:1207
-#: capplets/background/gnome-wp-capplet.c:1216
+#: capplets/background/gnome-wp-capplet.c:1204
+#: capplets/background/gnome-wp-capplet.c:1213
 msgid "Vertical Gradient"
 msgstr "Вертикальный переход"
 
 #. Create the file chooser dialog stuff here
-#: capplets/background/gnome-wp-capplet.c:1263
+#: capplets/background/gnome-wp-capplet.c:1260
 msgid "Add Wallpaper"
 msgstr "Добавить обои"
 
@@ -659,10 +659,10 @@ msgid ""
 "settings manager."
 msgstr ""
 "Невозможно запустить менеджер установок \"gnome2-settings-daemon\".\n"
-"Без менеджера параметров среды Гном некоторые настройки могут не иметь "
+"Без менеджера параметров среды GNOME некоторые настройки могут не иметь "
 "эффекта. Либо это проблемы с системой Bonobo, либо иной менеджер установок "
 "(например, среды KDE) может быть уже запущен и конфликтовать с менеджером "
-"установок среды Гном."
+"установок среды GNOME."
 
 #: capplets/common/capplet-stock-icons.c:94
 #, c-format
@@ -2085,7 +2085,9 @@ msgstr "<b>Скорость</b>"
 msgid ""
 "<i><small><b>Note:</b> Changes to this setting will not take effect until "
 "next time you log in.</small></i>"
-msgstr "<i><small><b>Примечание:</b> Изменение этого параметра вступит в действие только после следующей регистрации в системе.</small></i>"
+msgstr ""
+"<i><small><b>Примечание:</b> Изменение этого параметра вступит в действие "
+"только после следующей регистрации в системе.</small></i>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid "<i>Fast</i>"
@@ -2299,7 +2301,7 @@ msgstr "Использовать звуки _для событий"
 msgid "_Visual feedback:"
 msgstr "_Визуальное отображение:"
 
-#: capplets/theme-switcher/gnome-theme-details.c:370
+#: capplets/theme-switcher/gnome-theme-details.c:349
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -2308,19 +2310,85 @@ msgstr ""
 "Ни одна тема не найдена в системе. Скорее всего, это значит, что диалог "
 "\"Тема\" был неверно установлен или не был установлен пакет \"gnome-themes\"."
 
-#: capplets/theme-switcher/gnome-theme-installer.c:103
+#: capplets/theme-switcher/gnome-theme-installer.c:227
 msgid "This theme is not in a supported format."
 msgstr "Формат этой темы не поддерживается."
 
-#: capplets/theme-switcher/gnome-theme-installer.c:139
+#: capplets/theme-switcher/gnome-theme-installer.c:244
+msgid "Failed to create temporary directory"
+msgstr "Не удается создать временный каталог"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:264
+msgid ""
+"Can not install theme. \n"
+"The bzip2 utility is not installed."
+msgstr ""
+"Не удается установить тему.\n"
+"Утилита bzip2 не установлена."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:282
+#: capplets/theme-switcher/gnome-theme-installer.c:319
+#: capplets/theme-switcher/gnome-theme-installer.c:399
+msgid "Installation Failed"
+msgstr "Ошибка установки"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:302
+msgid ""
+"Can not install themes. \n"
+"The gzip utility is not installed."
+msgstr ""
+"Не удается установить темы. \n"
+"Утилита gzip не установлена."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:340
+#, c-format
+msgid ""
+"Icon Theme %s correctly installed.\n"
+"You can select it in the theme details."
+msgstr ""
+"Тема значков %s установлена корректно.\n"
+"Вы можете выбрать её в меню настройки темы."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:343
+#, c-format
+msgid "Gnome Theme %s correctly installed"
+msgstr "Тема среды GNOME %s установлена корректно"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:346
+#, c-format
+msgid ""
+"Windows Border Theme %s correctly installed.\n"
+"You can select it in the theme details."
+msgstr ""
+"Тема обрамления окон %s установлена корректно.\n"
+"Вы можете выбрать ее в меню параметров темы."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:349
+#, c-format
+msgid ""
+"Controls Theme %s correctly installed.\n"
+"You can select it in the theme details."
+msgstr ""
+"Тема элементов управления %s установлена корректно.\n"
+"Вы можете выбрать ее в меню параметров темы."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:357
+msgid "The theme is an engine. You need to compile the theme."
+msgstr "Тема является движком. Ее необходимо скомпилировать."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:374
+msgid "The file format is invalid"
+msgstr "Неверный формат файла"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:468
 msgid "No theme file location specified to install"
 msgstr "Не указан адрес файла темы для установки"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:156
+#: capplets/theme-switcher/gnome-theme-installer.c:485
 msgid "The theme file location specified to install is invalid"
 msgstr "Указанный адрес файла темы недействителен"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:176
+#: capplets/theme-switcher/gnome-theme-installer.c:505
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -2329,7 +2397,11 @@ msgstr ""
 "Недостаточно прав, чтобы установить тему в:\n"
 "%s"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:216
+#: capplets/theme-switcher/gnome-theme-installer.c:526
+msgid "The file format is invalid."
+msgstr "Неверный формат файла."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:553
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
@@ -2337,6 +2409,14 @@ msgid ""
 msgstr ""
 "%s - это путь, где должен быть установлен файл темы. Он не может быть выбран "
 "как исходный адрес"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:607
+msgid ""
+"Cannot install theme.\n"
+"The tar program is not installed on your system."
+msgstr ""
+"Не удается установить тему.\n"
+"В вашей системе не установлена программа tar."
 
 #: capplets/theme-switcher/gnome-theme-manager.c:676
 msgid "Custom theme"
@@ -2346,7 +2426,7 @@ msgstr "Другая тема"
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "Тему можно сохранить, нажав кнопку \"Сохранить тему\"."
 
-#: capplets/theme-switcher/gnome-theme-manager.c:1454
+#: capplets/theme-switcher/gnome-theme-manager.c:1466
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -2698,23 +2778,23 @@ msgstr "Фабрика просмотра в виде Центра управл�
 msgid "View as Control Center"
 msgstr "Режим просмотра: Центр управления"
 
-#: control-center/control-center-categories.c:248
+#: control-center/control-center-categories.c:249
 msgid "Others"
 msgstr "Прочие"
 
-#: control-center/control-center.c:1005
+#: control-center/control-center.c:1010
 #: control-center/gnomecc.desktop.in.in.h:1
 msgid "GNOME Control Center"
-msgstr "Центр управления средой Гном"
+msgstr "Центр управления средой GNOME"
 
-#: control-center/control-center.c:1121
+#: control-center/control-center.c:1126
 msgid "Desktop Preferences"
 msgstr "Параметры рабочего стола"
 
 #: control-center/gnomecc.desktop.in.in.h:2
 #: vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:2
 msgid "The GNOME configuration tool"
-msgstr "Утилита настройки среды Гном"
+msgstr "Утилита настройки среды GNOME"
 
 #: gnome-settings-daemon/actions/acme.glade.h:1
 msgid "Volume"
@@ -2823,22 +2903,22 @@ msgstr ""
 "Произошла ошибка при попытке запустить команду (%s),\n"
 "которая привязана к клавише (%s)"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:96
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:99
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
-"It can have under various circumstances:\n"
+"It can happen under various circumstances:\n"
 "- a bug in libxklavier library\n"
 "- a bug in X server (xkbcomp, xmodmap utilities)\n"
-"- X server with incompatible libxkbfile implemenation\n"
+"- X server with incompatible libxkbfile implementation\n"
 "\n"
 "X server version data:\n"
 "%s\n"
 "%d\n"
 "%s\n"
 "If you report this situation as a bug, please include:\n"
-"- The result of <b>xprop -root | grep XKB</b>\n"
-"- The result of <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/kbd</b>"
+"- The result of %s\n"
+"- The result of %s"
 msgstr ""
 "Ошибка активирования параметров XKB.\n"
 "Она может произойти при следующих обстоятельствах:\n"
@@ -2851,11 +2931,10 @@ msgstr ""
 "%d\n"
 "%s\n"
 "При составлении отчета об ошибке пожалуйста включите:\n"
-"- Результат команды <b>xprop -root | grep XKB</b>\n"
-"- Результат команды <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/"
-"xkb</b>"
+"- Результат %s\n"
+"- Результат %s</b>"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:110
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:113
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2866,32 +2945,25 @@ msgstr ""
 "Эта версия имеет известные проблемы со сложной настройкой XKB.\n"
 "Попробуйте использовать более простую настройку или обновите XFree86."
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:213
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:226
+msgid "Do _not show this warning again"
+msgstr "_Не показывать больше это предупреждение"
+
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:237
 msgid ""
 "The X system keyboard settings differ from your current GNOME keyboard "
 "settings.  Which set would you like to use?"
 msgstr ""
-"Параметры клавиатуры системы X отличаются от параметров среды Гном. Какие вы "
+"Параметры клавиатуры системы X отличаются от параметров среды GNOME. Какие вы "
 "хотите использовать?"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:216
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:247
 msgid "Use X settings"
 msgstr "Параметры системы X"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:218
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:249
 msgid "Use GNOME settings"
-msgstr "Параметры среды Гном"
-
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:270
-#, c-format
-msgid ""
-"You have a keyboard remapping file (%s) in your home directory whose "
-"contents will now be ignored. You can use the keyboard preferences to "
-"restore them."
-msgstr ""
-"Файл переназначения клавиатуры (%s) существует в домашнем каталоге, но его "
-"содержимое игнорируется. Для использования файла измените параметры "
-"клавиатуры."
+msgstr "Параметры среды GNOME"
 
 #: gnome-settings-daemon/gnome-settings-multimedia-keys.c:126
 #, c-format
@@ -2956,6 +3028,30 @@ msgstr "Не удалось определить домашний каталог
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "Ключ \"%s\" системы GConf установлен в тип %s, а ожидаемый тип был %s\n"
+
+#: gnome-settings-daemon/modmap-dialog.glade.h:1
+msgid "A_vailable files:"
+msgstr "_Доступные файлы:"
+
+#: gnome-settings-daemon/modmap-dialog.glade.h:2
+msgid "Do _not show this warning again."
+msgstr "_Не показывать больше это предупреждение."
+
+#: gnome-settings-daemon/modmap-dialog.glade.h:3
+msgid "Do you like to load the modmap file(s)?"
+msgstr "Загрузить файл(ы) modmap?"
+
+#: gnome-settings-daemon/modmap-dialog.glade.h:4
+msgid "Load modmap files"
+msgstr "Загрузка файлов modmap"
+
+#: gnome-settings-daemon/modmap-dialog.glade.h:5
+msgid "_Load"
+msgstr "_Загрузить"
+
+#: gnome-settings-daemon/modmap-dialog.glade.h:6
+msgid "_Loaded files:"
+msgstr "_Загруженные файлы:"
 
 #: gnome-settings-daemon/reaper.c:103
 msgid "Error creating signal pipe."
@@ -3301,44 +3397,48 @@ msgstr ""
 "Полезно при повторном применении параметров на основе xmodmap"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
+msgid "A list of modmap files available in the $HOME directory."
+msgstr "Список файлов modmap, доступных в каталоге $HOME."
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
 msgid "Default group, assigned on window creation"
 msgstr "Группа по умолчанию, назначаемая для создаваемых окон"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
 msgid "Keep and manage separate group per window"
 msgstr "Сохранять и поддерживать отдельные группы для окон"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
 msgid "Keyboard Update Handlers"
 msgstr "Обработчики обновления клавиатуры"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:6
 msgid "Keyboard layout"
 msgstr "Раскладка клавиатуры"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:6
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:7
 msgid "Keyboard model"
 msgstr "Модель клавиатуры"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:7
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:8
 msgid "Keyboard options"
 msgstr "Параметры клавиатуры"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:8
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
 msgid "Keyboard settings in gconf will be overridden from the system ASAP"
 msgstr ""
 "Параметры клавиатуры в gconf будут переписаны из системы, как только это "
 "будет возможно"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
 msgid "Save/restore indicators together with layout groups"
 msgstr "Сохранять/восстанавливать индикаторы вместе с группами раскладок"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:11
 msgid "Show layout names instead of group names"
 msgstr "Показывать имена раскладок вместо имен групп"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:11
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:12
 msgid ""
 "Show layout names instead of group names (only for versions of XFree "
 "supporting multiple layouts)"
@@ -3346,7 +3446,11 @@ msgstr ""
 "Показывать имена раскладок вместо имен групп (только для версий XFree, "
 "поддерживающих несколько раскладок)"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:12
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:13
+msgid "Suppress the \"X sysconfig changed\" warning message"
+msgstr "Не выводить предупреждение об изменении системной конфигурации X"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
 msgid ""
 "Very soon, keyboard settings in gconf will be overridden (from the system "
 "configuration)"
@@ -3354,13 +3458,17 @@ msgstr ""
 "Очень скоро параметры клавиатуры в gconf будут перезаписаны (из системной "
 "конфигурации)"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:13
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
 msgid "keyboard layout"
 msgstr "раскладка клавиатуры"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:16
 msgid "keyboard model"
 msgstr "модель клавиатуры"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:17
+msgid "modmap file list"
+msgstr "список файлов modmap"
 
 #: typing-break/drw-break-window.c:209
 msgid "_Postpone break"
@@ -3418,7 +3526,7 @@ msgstr "Автор: Ричард Халт (Richard Hult) &lt;richard@imendio.com
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Дизайн: Андерс Карлссон (Anders Carlsson)"
 
-#: typing-break/drwright.c:832
+#: typing-break/drwright.c:833
 msgid "Break reminder"
 msgstr "Напоминание о перерыве"
 
@@ -3430,10 +3538,10 @@ msgstr "Монитор печати уже запущен."
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
-"right-clicking on your panel and choose 'Add to panel -> Utilities -> "
-"Notification area'."
+"right-clicking on your panel and choosing 'Add to panel', selecting "
+"'Notification area' and clicking 'Add'."
 msgstr ""
-"Монитор печати использует область уведомления для отображения информации. "
+"Монитор печати использует область уведомления для отображения информации."
 "Похоже, что на вашей панели нет области уведомления. Вы можете добавить ее, "
 "щелкнув правой кнопкой на панели и выбрав \"Добавить на панель -> Утилиты -> "
 "Область уведомления\"."
