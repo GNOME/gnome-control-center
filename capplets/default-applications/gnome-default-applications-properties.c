@@ -48,11 +48,6 @@
 #define DEFAULT_APPS_KEY_MAILER_NEEDS_TERM DEFAULT_APPS_KEY_MAILER_PATH"/needs_terminal"
 #define DEFAULT_APPS_KEY_MAILER_EXEC       DEFAULT_APPS_KEY_MAILER_PATH"/command"
 
-#define DEFAULT_APPS_KEY_HELP_VIEWER_PATH "/desktop/gnome/applications/help_viewer"
-#define DEFAULT_APPS_KEY_HELP_VIEWER_NEEDS_TERM DEFAULT_APPS_KEY_HELP_VIEWER_PATH"/needs_term"
-#define DEFAULT_APPS_KEY_HELP_VIEWER_ACCEPTS_URLS DEFAULT_APPS_KEY_HELP_VIEWER_PATH"/accepts_urls"
-#define DEFAULT_APPS_KEY_HELP_VIEWER_EXEC DEFAULT_APPS_KEY_HELP_VIEWER_PATH"/exec"
-
 #define DEFAULT_APPS_KEY_TERMINAL_PATH "/desktop/gnome/applications/terminal"
 #define DEFAULT_APPS_KEY_TERMINAL_EXEC_ARG DEFAULT_APPS_KEY_TERMINAL_PATH"/exec_arg"
 #define DEFAULT_APPS_KEY_TERMINAL_EXEC DEFAULT_APPS_KEY_TERMINAL_PATH"/exec"
@@ -61,7 +56,6 @@
 
 typedef struct _BrowserDescription BrowserDescription;
 typedef struct _MailerDescription MailerDescription;
-typedef struct _HelpViewDescription HelpViewDescription;
 typedef struct _TerminalDesciption TerminalDescription;
 
 /* All defined below */
@@ -85,7 +79,7 @@ on_text_custom_properties_clicked (GtkWidget *w, GladeXML *dialog)
 	mime_app = gnome_vfs_application_registry_get_mime_application (MIME_APPLICATION_ID);
 
 	gtk_entry_set_text (GTK_ENTRY (WID ("text_custom_name_entry")),
-			    mime_app ? mime_app->name : "");
+			    mime_app ? _(mime_app->name) : "");
 	gtk_entry_set_text (GTK_ENTRY (WID ("text_custom_command_entry")),
 			    mime_app ? mime_app->command : "");
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("text_custom_multi_toggle")),
@@ -226,13 +220,6 @@ initialize_default_applications (void)
 		}
         }
 
-        for (i = 0; i < G_N_ELEMENTS (possible_help_viewers); i++ ) {
-                gchar *help_viewers = g_find_program_in_path (possible_help_viewers[i].executable_name);
-		if (help_viewers) {
-			possible_help_viewers[i].in_path = TRUE;
-			g_free (help_viewers);
-		}
-        }
         for (i = 0; i < G_N_ELEMENTS (possible_terminals); i++ ) {
                 gchar *terminals = g_find_program_in_path (possible_terminals[i].exec);
 		if (terminals) {
@@ -271,7 +258,7 @@ read_editor (GConfClient *client,
 
 		if (strcmp (mime_app->command, li_app->command) == 0 &&
 		    mime_app->requires_terminal == li_app->requires_terminal) {
-			gtk_entry_set_text (GTK_ENTRY (WID ("text_select_combo_entry")), mime_app->name);
+			gtk_entry_set_text (GTK_ENTRY (WID ("text_select_combo_entry")), _(mime_app->name));
 			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("text_custom_radio")), TRUE);
 			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("text_select_radio")), TRUE);
 			gnome_vfs_mime_application_free (mime_app);
@@ -372,13 +359,6 @@ setup_peditors (GConfClient *client,
 				   WID ("mail_custom_terminal_toggle"), NULL);
 	gconf_peditor_new_string  (changeset, DEFAULT_APPS_KEY_MAILER_EXEC,
 				   WID ("mail_custom_command_entry"), NULL);
-
-	gconf_peditor_new_boolean (changeset, DEFAULT_APPS_KEY_HELP_VIEWER_NEEDS_TERM,
-				   WID ("help_custom_terminal_toggle"), NULL);
-	gconf_peditor_new_boolean (changeset, DEFAULT_APPS_KEY_HELP_VIEWER_ACCEPTS_URLS,
-				   WID ("help_custom_url_toggle"), NULL);
-	gconf_peditor_new_string  (changeset, DEFAULT_APPS_KEY_HELP_VIEWER_EXEC,
-				   WID ("help_custom_command_entry"), NULL);
 
 	gconf_peditor_new_string  (changeset, DEFAULT_APPS_KEY_TERMINAL_EXEC,
 				   WID ("terminal_custom_command_entry"), NULL);
@@ -500,74 +480,6 @@ mailer_setup_custom (GtkWidget *entry,
 	}
 }
 
-static void
-read_help_viewer (GConfClient *client,
-	     GladeXML    *dialog)
-{
-	GError *error = NULL;
-	gchar *help_viewer;
-	gboolean needs_term;
-	gboolean accepts_urls;
-	gint i;
-
-	needs_term = gconf_client_get_bool (client, DEFAULT_APPS_KEY_HELP_VIEWER_NEEDS_TERM, &error);
-	if (error) {
-		/* hp will shoot me -- I'll do this later. */
-		return;
-	}
-	accepts_urls = gconf_client_get_bool (client, DEFAULT_APPS_KEY_HELP_VIEWER_ACCEPTS_URLS, &error);
-	if (error) {
-		return;
-	}
-	help_viewer = gconf_client_get_string (client, DEFAULT_APPS_KEY_HELP_VIEWER_EXEC, &error);
-	if (error) {
-		return;
-	}
-
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("help_custom_terminal_toggle")), needs_term);
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("help_custom_url_toggle")), accepts_urls);
-	gtk_entry_set_text (GTK_ENTRY (WID ("help_custom_command_entry")), help_viewer);
-
-	for (i = 0; i < G_N_ELEMENTS (possible_help_viewers); i++ ) {
-		if (possible_help_viewers[i].in_path == FALSE)
-			continue;
-		
-		if (help_viewer && strcmp (help_viewer, possible_help_viewers[i].executable_name) == 0 &&
-		    needs_term == possible_help_viewers[i].needs_term &&
-		    accepts_urls == possible_help_viewers[i].accepts_urls) {
-			gtk_entry_set_text (GTK_ENTRY (WID ("help_select_combo_entry")),
-					    _(possible_help_viewers[i].name));
-			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("help_custom_radio")), TRUE);
-			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("help_select_radio")), TRUE);
-			g_free (help_viewer);
-			return;
-		}
-        }
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("help_select_radio")), TRUE);
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("help_custom_radio")), TRUE);
-	g_free (help_viewer);
-}
-
-static void
-help_setup_custom (GtkWidget *entry,
-		   GladeXML  *dialog)
-{
-	gint i;
-	const gchar *help_viewer = gtk_entry_get_text (GTK_ENTRY (entry));
-
-	for (i = 0; i < G_N_ELEMENTS (possible_help_viewers); i++ ) {
-		if (! strcmp (_(possible_help_viewers[i].name), help_viewer)) {
-			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("help_custom_terminal_toggle")),
-						      possible_help_viewers[i].needs_term);
-			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("help_custom_url_toggle")),
-						      possible_help_viewers[i].accepts_urls);
-			gtk_entry_set_text (GTK_ENTRY (WID ("help_custom_command_entry")),
-					    possible_help_viewers[i].executable_name);
-			return;
-		}
-	}
-}
-
 
 static void
 read_terminal (GConfClient *client,
@@ -637,7 +549,6 @@ value_changed_cb (GConfClient *client,
 	if (strncmp (key, DEFAULT_APPS_KEY_MAILER_PATH, strlen (DEFAULT_APPS_KEY_MAILER_PATH)) == 0) {
 		gconf_client_set_bool (client, DEFAULT_APPS_KEY_MAILER_PATH"/enabled", TRUE, NULL);
 	} else if (strncmp (key, DEFAULT_APPS_KEY_BROWSER_PATH, strlen (DEFAULT_APPS_KEY_BROWSER_PATH)) == 0) {
-	} else if (strncmp (key, DEFAULT_APPS_KEY_HELP_VIEWER_PATH, strlen (DEFAULT_APPS_KEY_HELP_VIEWER_PATH)) == 0) {
 	} else if (strncmp (key, DEFAULT_APPS_KEY_TERMINAL_PATH, strlen (DEFAULT_APPS_KEY_TERMINAL_PATH)) == 0) {
 	}
 }
@@ -648,9 +559,7 @@ dialog_response (GtkDialog *widget,
 		 GladeXML  *dialog)
 {
 	if (response_id == GTK_RESPONSE_HELP)
-		capplet_help (GTK_WINDOW (widget),
-			"wgoscustlookandfeel.xml",
-			"goscustdoc-2");
+		capplet_help (GTK_WINDOW (widget), "wgoscustlookandfeel.xml", "goscustdoc-2");
 	else
 		gtk_main_quit ();
 }
@@ -668,7 +577,7 @@ create_dialog (GConfClient *client)
 
 	/* Editors page */
 	for (li = text_editors; li; li = li->next) {
-		strings = g_list_append (strings, ((GnomeVFSMimeApplication *)li->data)->name);
+		strings = g_list_append (strings, _(((GnomeVFSMimeApplication *)li->data)->name));
 	}
 	if (strings) {
 		/* We have default editors */
@@ -761,37 +670,6 @@ create_dialog (GConfClient *client)
 			  WID ("mail_custom_vbox"));
 
 	read_mailer (client, dialog);
-	/* Help page */
-	
-	for (i = 0; i < G_N_ELEMENTS (possible_help_viewers); i++ ) {
-		if (possible_help_viewers[i].in_path)
-			strings = g_list_append (strings, _(possible_help_viewers[i].name));
-	}
-	if (strings) {
-		/* We have default help viewers */
-		gtk_combo_set_popdown_strings (GTK_COMBO(WID ("help_select_combo")), strings);
-		g_list_free (strings);
-		strings = NULL;
-	} else {
-		/* No default help viewers */
-		gtk_widget_set_sensitive (WID ("help_select_radio"), FALSE);
-	}
-
-	/* Source of command string */
-	g_object_set_data (G_OBJECT (WID ("help_select_radio")), "entry", WID ("help_select_combo_entry"));
-	/* Source of command string */
-	g_object_set_data (G_OBJECT (WID ("help_custom_radio")), "entry", WID ("help_custom_command_entry"));
-
-	g_signal_connect (G_OBJECT (WID ("help_select_combo_entry")),
-			  "changed", (GCallback) help_setup_custom,
-			  dialog);
-	g_signal_connect (G_OBJECT (WID ("help_select_radio")),
-			  "toggled", (GCallback) generic_guard,
-			  WID ("help_select_combo"));
-	g_signal_connect (G_OBJECT (WID ("help_custom_radio")),
-			  "toggled", (GCallback) generic_guard,
-			  WID ("help_custom_vbox"));
-	read_help_viewer (client, dialog);	
 
 
 	/* Terminal */
@@ -866,7 +744,6 @@ main (int argc, char **argv)
 	client = gconf_client_get_default ();
 
 	gconf_client_add_dir (client, "/desktop/gnome/applications/browser", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
-	gconf_client_add_dir (client, "/desktop/gnome/applications/help_viewer", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 	gconf_client_add_dir (client, "/desktop/gnome/applications/terminal", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 
 	if (get_legacy) {
