@@ -7,9 +7,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: control-center 1.2.2\n"
-"POT-Creation-Date: 2001-02-14 20:16-0500\n"
-"PO-Revision-Date: 2001-01-04 17:57+0100\n"
+"Project-Id-Version: control-center 1.2.3\n"
+"POT-Creation-Date: 2001-03-08 15:32+0100\n"
+"PO-Revision-Date: 2001-03-08 14:52+0100\n"
 "Last-Translator: Christophe Merlet (RedFox) <redfox@eikonex.org>\n"
 "Language-Team: Gnome French Team <gnomefr@gnomefr.traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -66,6 +66,7 @@ msgid "Wallpaper Selection"
 msgstr "Sélection du papier peint"
 
 #: capplets/background-properties/property-background.c:573
+#: capplets/file-types/file-types-icon-entry.c:258
 msgid "Can't find an hbox, using a normal file selection"
 msgstr ""
 "Impossible de trouver une hbox, utilisation d'une sélection de fichier "
@@ -73,6 +74,7 @@ msgstr ""
 
 #: capplets/background-properties/property-background.c:578
 #: capplets/background-properties/property-background.c:1090
+#: capplets/file-types/file-types-icon-entry.c:264
 #: capplets/keyboard-properties/keyboard-properties.c:354
 #: capplets/screensaver-properties/screensaver-dialog.c:25
 #: capplets/theme-switcher/gui.c:230 capplets/theme-switcher/gui.c:302
@@ -87,7 +89,11 @@ msgstr "Papier peint"
 msgid " Browse... "
 msgstr " Parcourir... "
 
+#. Add default action to fourth column
 #: capplets/background-properties/property-background.c:643
+#: capplets/file-types/file-types-capplet.c:1387
+#: capplets/file-types/file-types-capplet.c:1587
+#: capplets/file-types/file-types-capplet.c:1713
 msgid "none"
 msgstr "aucun"
 
@@ -120,7 +126,7 @@ msgstr "Mosaïque"
 #: capplets/sound-properties/sound-properties.c:693
 #: capplets/theme-switcher/gui.c:367
 #: capplets/ui-properties/ui-properties.c:516
-#: capplets/url-properties/url-properties.c:256
+#: capplets/url-properties/url-properties.c:272
 #: capplets/wm-properties/wm-properties-capplet.c:649
 msgid ""
 "No help is available/installed for these settings. Please make sure you\n"
@@ -133,16 +139,15 @@ msgstr ""
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:182
 #: capplets/keyboard-properties/keyboard-properties.c:99
 #: capplets/keyboard-properties/keyboard-properties.c:424
-#: capplets/mime-type/mime-type-capplet.c:81
 #: capplets/mouse-properties/mouse-properties.c:114
 #: capplets/screensaver-properties/callbacks.c:804
 #: capplets/sound-properties/sound-properties.c:695
 #: capplets/sound-properties/sound-properties.c:756
 #: capplets/theme-switcher/gui.c:369
 #: capplets/ui-properties/ui-properties.c:518
-#: capplets/url-properties/url-properties.c:258
+#: capplets/url-properties/url-properties.c:274
 #: capplets/wm-properties/wm-properties-capplet.c:651
-#: control-center/capplet-widget.c:263
+#: control-center/capplet-widget.c:273
 msgid "Close"
 msgstr "Fermer"
 
@@ -209,221 +214,253 @@ msgstr "Éditeur Gnome"
 msgid "Run In Terminal"
 msgstr "Exécuter dans un terminal"
 
-#: capplets/mime-type/edit-window.c:250
-#: capplets/mime-type/new-mime-window.c:35
-msgid "Extensions"
-msgstr "Extensions"
+#: capplets/file-types/file-types-capplet.desktop.in.h:1
+msgid "File Types and Programs"
+msgstr "Types de fichiers et programmes"
 
-#. icon box
-#: capplets/mime-type/edit-window.c:264
-msgid "Select an icon..."
-msgstr "Sélectionnez une icône..."
+#: capplets/file-types/file-types-capplet.desktop.in.h:2
+msgid "Specify which programs are used to open or view each file type"
+msgstr ""
+"Spécifie quels sont les programmes utilisés pour ouvrir ou visionner chaque "
+"type de fichier"
 
-#: capplets/mime-type/edit-window.c:274
-msgid "Mime Type: "
-msgstr "Type MIME : "
+#: capplets/file-types/file-types-capplet-dialogs.c:387
+msgid "Edit Applications List"
+msgstr "Éditez la liste des applications"
 
-#: capplets/mime-type/edit-window.c:304
-msgid "Add"
-msgstr "Ajouter"
-
-#: capplets/mime-type/edit-window.c:312
-#: capplets/url-properties/url-properties.c:138
-msgid "Remove"
-msgstr "Enlever"
-
-#. gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
-#: capplets/mime-type/edit-window.c:339
-#: capplets/mime-type/new-mime-window.c:65
-msgid "First Regular Expression: "
-msgstr "Première expression régulière : "
-
-#: capplets/mime-type/edit-window.c:347
-#: capplets/mime-type/new-mime-window.c:76
-msgid "Second Regular Expression: "
-msgstr "Seconde expression régulière : "
-
-#. Actions box
-#: capplets/mime-type/edit-window.c:354
-msgid "Mime Type Actions"
-msgstr "Actions sur les types MIME"
-
-#: capplets/mime-type/edit-window.c:361
+#. Add label
+#: capplets/file-types/file-types-capplet-dialogs.c:409
 #, c-format
-msgid "Example: emacs %f"
-msgstr "Exemple : emacs %f"
+msgid "Select applications to appear in menu for MIME type \"%s\""
+msgstr ""
+"Sélectionnez les applications à faire apparaître dans le menu pour le type "
+"MIME « %s »"
 
-#: capplets/mime-type/edit-window.c:366
-msgid "Open"
-msgstr "Ouvrir"
+#: capplets/file-types/file-types-capplet-dialogs.c:433
+msgid "Add Application..."
+msgstr "Ajouter une application..."
 
-#: capplets/mime-type/edit-window.c:372 capplets/mime-type/edit-window.c:388
-#: capplets/mime-type/edit-window.c:403
-msgid "Select a file..."
-msgstr "Sélectionnez un fichier..."
+#: capplets/file-types/file-types-capplet-dialogs.c:440
+msgid "Edit Application..."
+msgstr "Éditer l'application..."
 
-#: capplets/mime-type/edit-window.c:381
-msgid "View"
-msgstr "Voir"
+#: capplets/file-types/file-types-capplet-dialogs.c:446
+msgid "Delete Application"
+msgstr "Supprimer l'application"
 
-#: capplets/mime-type/edit-window.c:397
-msgid "Edit"
-msgstr "Éditer"
+#: capplets/file-types/file-types-capplet-dialogs.c:480
+msgid "Edit Components List"
+msgstr "Éditez la liste des composants"
 
-#. we initialize everything
-#: capplets/mime-type/edit-window.c:446
+#. Add label
+#: capplets/file-types/file-types-capplet-dialogs.c:500
 #, c-format
-msgid "Set actions for %s"
-msgstr "Définir les actions pour %s"
-
-#: capplets/mime-type/mime-data.c:380
-msgid "Mime Type"
-msgstr "Type MIME"
-
-#: capplets/mime-type/mime-data.c:381
-msgid "Extension"
-msgstr "Extension"
-
-#: capplets/mime-type/mime-data.c:488
-msgid "You must enter a mime-type"
-msgstr "Vous devez saisir un type MIME"
-
-#: capplets/mime-type/mime-data.c:493
-msgid ""
-"You must add either a regular-expression or\n"
-"a file-name extension"
+msgid "Select views to appear in menu for MIME type \"%s\""
 msgstr ""
-"Vous devez ajouter soit une expression régulière\n"
-"soit une extension de nom de fichier"
+"Sélectionnez les vues à faire apparaître dans le menu pour le type MIME « %s "
+"»"
 
-#: capplets/mime-type/mime-data.c:497
+#: capplets/file-types/file-types-capplet-dialogs.c:720
 msgid ""
-"Please put your mime-type in the format:\n"
-"CATEGORY/TYPE\n"
-"\n"
-"For Example:\n"
-"image/png"
+"The MIME type entered contained upper case characters. Upper case characters "
+"were changed to lower case for you."
 msgstr ""
-"Écrivez votre type MIME sous la forme :\n"
-"CATÉGORIE/TYPE\n"
-"\n"
-"Par exemple :\n"
-"image/png"
+"Le type MIME saisi contient des caractères majuscules. Les caractères "
+"majuscules seront transformés en minuscules pour vous."
 
-#: capplets/mime-type/mime-data.c:502
-msgid "This mime-type already exists"
-msgstr "Ce type MIME existe déjà"
+#: capplets/file-types/file-types-capplet-dialogs.c:723
+msgid "Add New MIME Type"
+msgstr "Ajouter un nouveau type MIME"
 
-#: capplets/mime-type/mime-data.c:583 capplets/mime-type/mime-info.c:425
-msgid ""
-"We are unable to create the directory\n"
-"~/.gnome/mime-info\n"
-"\n"
-"We will not be able to save the state."
-msgstr ""
-"Impossible de créer le répertoire\n"
-"~/.gnome/mime-info/\n"
-"\n"
-"L'état ne pourra pas être sauvegardé"
+#: capplets/file-types/file-types-capplet-dialogs.c:769
+msgid "Add MIME Type"
+msgstr "Ajoutez un type MIME"
 
-#: capplets/mime-type/mime-data.c:589 capplets/mime-type/mime-info.c:431
-msgid ""
-"We are unable to access the directory\n"
-"~/.gnome/mime-info\n"
-"\n"
-"We will not be able to save the state."
-msgstr ""
-"Impossible d'accéder au répertoire\n"
-"~/.gnome/mime-info/\n"
-"\n"
-"L'état ne pourra pas être sauvegardé"
+#: capplets/file-types/file-types-capplet-dialogs.c:773
+msgid "New MIME type (e.g. image/x-thumper):"
+msgstr "Nouveau type MIME (par ex. image/x-thumper) :"
 
-#: capplets/mime-type/mime-data.c:600
-msgid ""
-"Cannot create the file\n"
-"~/.gnome/mime-info/user.mime\n"
-"\n"
-"We will not be able to save the state"
-msgstr ""
-"Impossible de créer le fichier\n"
-"~/.gnome/mime-info/user.mime\n"
-"\n"
-"L'état ne pourra pas être sauvegardé"
+#: capplets/file-types/file-types-capplet-dialogs.c:780
+msgid "Description (e.g. Thumper image):"
+msgstr "Description (par ex. image Thunder) :"
 
-#: capplets/mime-type/mime-info.c:442
-msgid ""
-"Cannot create the file\n"
-"~/.gnome/mime-info/user.keys\n"
-"\n"
-"We will not be able to save the state"
-msgstr ""
-"Impossible de créer le fichier\n"
-"~/.gnome/mime-info/user.keys\n"
-"\n"
-"L'état ne pourra pas être sauvegardé"
+#: capplets/file-types/file-types-capplet-dialogs.c:947
+msgid "File Extensions "
+msgstr "Extensions de fichier"
 
-#: capplets/mime-type/mime-type-capplet.c:79
-msgid ""
-"No help is available/installed for these settings. Please make sure you\n"
-"have the Control Center documentation installed on your system."
-msgstr ""
-"Aucune aide n'est disponible/installé pour ces paramétres. Assurez-vous\n"
-"que la documentation du centre de controle est installé sur votre système."
-
-#: capplets/mime-type/mime-type-capplet.c:95
-#: capplets/wm-properties/wm-properties-capplet.c:1098
-msgid "Delete"
-msgstr "Effacer"
-
-#: capplets/mime-type/mime-type-capplet.c:105
+#: capplets/file-types/file-types-capplet-dialogs.c:967
 #: capplets/wm-properties/wm-properties-capplet.c:1088
 msgid "Add..."
 msgstr "Ajouter..."
 
-#: capplets/mime-type/mime-type-capplet.c:109
-#: capplets/wm-properties/wm-properties-capplet.c:1093
-msgid "Edit..."
-msgstr "Éditer..."
+#: capplets/file-types/file-types-capplet-dialogs.c:972
+msgid "    Remove    "
+msgstr "   Supprimer   "
 
-#: capplets/mime-type/new-mime-window.c:21
-msgid "Add Mime Type"
-msgstr "Ajouter un type MIME"
+#: capplets/file-types/file-types-capplet-dialogs.c:1041
+msgid "Add New Extension"
+msgstr "Ajoutez une nouvelle extension"
 
-#: capplets/mime-type/new-mime-window.c:22
+#: capplets/file-types/file-types-capplet-dialogs.c:1045
 msgid ""
-"Add a new Mime Type\n"
-"For example:  image/tiff; text/x-scheme"
+"Type in the extensions for this mime-type (without dot).\n"
+"You can enter several extensions seperated by a space,\n"
+"for example: html htm"
 msgstr ""
-"Ajouter un nouveau type MIME\n"
-"Par exemple :  image/tiff; text/x-scheme"
+"Saisissez les extensions de fichier pour ce type MIME (sans le point).\n"
+"Vous pouvez saisir plusieurs extensions séparées par un espace,\n"
+"Par exemple : html htm"
 
-#: capplets/mime-type/new-mime-window.c:27
-msgid "Mime Type:"
-msgstr "Type MIME : "
-
-#: capplets/mime-type/new-mime-window.c:39
-msgid ""
-"Type in the extensions for this mime-type.\n"
-"For example:  .html, .htm"
-msgstr ""
-"Tapez les extensions de fichier pour ce type MIME.\n"
-"Par exemple :  .html, .htm"
-
-#: capplets/mime-type/new-mime-window.c:46
+#: capplets/file-types/file-types-capplet-dialogs.c:1052
 msgid "Extension:"
 msgstr "Extension : "
 
-#: capplets/mime-type/new-mime-window.c:51
-msgid "Regular Expressions"
-msgstr "Expressions régulières"
+#: capplets/file-types/file-types-capplet-dialogs.c:1194
+msgid "You must enter a name."
+msgstr "Vous devez saisir un nom."
 
-#: capplets/mime-type/new-mime-window.c:55
+#: capplets/file-types/file-types-capplet-dialogs.c:1197
+msgid "You must enter a command."
+msgstr "Vous devez saisir une commande"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1207
+#, c-format
 msgid ""
-"You can set up two regular expressions here to identify the Mime Type\n"
-"by.  These fields are optional."
+"\"%s\" does not exist or is not executable.\n"
+"Check your spelling and make sure you have\n"
+"the right permissions to execute this file."
 msgstr ""
-"Vous pouvez donner deux expressions régulières pour\n"
-"identifier le type MIME. Ces champs sont optionnels."
+"« %s » n'existe pas ou n'est pas exécutable.\n"
+"Vérifiez votre orthographe et si vous avez les\n"
+"permissions nécessaires pour exécuter ce fichier."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1213
+#, c-format
+msgid ""
+"The command \"%s\" cannot be found.\n"
+"You must use a command that can work from any command line."
+msgstr ""
+"La commande « %s » ne peut être trouvé.\n"
+"Vous devez utiliser une commande qui fonctionne depuis la ligne de commande."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1225
+msgid "Bad Application Name"
+msgstr "Mauvais nom d'application"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1226
+msgid "Bad Application Command"
+msgstr "Mauvaise commande d'application"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1258
+msgid "Add Application"
+msgstr "Ajouter une application"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1259
+msgid "Edit Application"
+msgstr "Éditer l'application"
+
+#. Application Name label and entry
+#: capplets/file-types/file-types-capplet-dialogs.c:1271
+msgid "Application Name:"
+msgstr "Nom de l'application :"
+
+#. Application Command label and entry
+#: capplets/file-types/file-types-capplet-dialogs.c:1282
+msgid "Application Command:"
+msgstr "Commande de l'application :"
+
+#. Open Behavior frame
+#: capplets/file-types/file-types-capplet-dialogs.c:1293
+msgid "Open Behavior"
+msgstr "Comportement de l'ouverture"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1299
+msgid "Can open multiple files"
+msgstr "Peut ouvrir plusieurs fichiers"
+
+#. FIXME bugzilla.eazel.com 6066: This needs to be three options now: "yes", "no", and "use uris for non-file locations"
+#: capplets/file-types/file-types-capplet-dialogs.c:1307
+msgid "Can open from URI"
+msgstr "Peut ouvrir depuis une URI"
+
+#: capplets/file-types/file-types-capplet.c:735
+#: capplets/file-types/file-types-capplet.c:1877
+msgid "MIME Type"
+msgstr "Type MIME"
+
+#: capplets/file-types/file-types-capplet.c:742
+msgid "Change Icon"
+msgstr "Changer l'icône"
+
+#: capplets/file-types/file-types-capplet.c:749
+msgid "Change File Extensions"
+msgstr "Changer les extensions de fichier"
+
+#: capplets/file-types/file-types-capplet.c:757
+msgid "Default Action:"
+msgstr "Action par défaut :"
+
+#: capplets/file-types/file-types-capplet.c:769
+msgid "Use Viewer"
+msgstr "Utiliser un visionneur"
+
+#: capplets/file-types/file-types-capplet.c:775
+msgid "Open With Application"
+msgstr "Ouvrir avec l'application"
+
+#: capplets/file-types/file-types-capplet.c:786
+msgid "Edit List"
+msgstr "Éditer la liste"
+
+#: capplets/file-types/file-types-capplet.c:811
+msgid "Add New MIME Type..."
+msgstr "Ajouter un nouveau type MIME..."
+
+#: capplets/file-types/file-types-capplet.c:817
+msgid "Delete This MIME Type"
+msgstr "Supprimer ce type MIME"
+
+#: capplets/file-types/file-types-capplet.c:828
+msgid "Revert to System Defaults"
+msgstr "Revenir aux valeurs par défaut"
+
+#: capplets/file-types/file-types-capplet.c:1069
+#: capplets/file-types/file-types-capplet.c:1213
+msgid "None"
+msgstr "Aucun"
+
+#: capplets/file-types/file-types-capplet.c:1318
+msgid ""
+"Reverting to system settings will lose any changes\n"
+"you have ever made to File Types and Programs.\n"
+"Revert anyway?"
+msgstr ""
+"Revenir aux valeurs par défaults perdra tous les changement\n"
+"Que vous avez pu faire aux types de fichiers et programmes.\n"
+"Revenir malgré tout ?"
+
+#: capplets/file-types/file-types-capplet.c:1428
+#: capplets/file-types/file-types-capplet.c:1614
+#: capplets/file-types/file-types-capplet.c:1757
+#, c-format
+msgid "View as %s"
+msgstr "Voir en tant que %s"
+
+#: capplets/file-types/file-types-capplet.c:1876
+msgid "Description"
+msgstr "Description"
+
+#: capplets/file-types/file-types-capplet.c:1878
+msgid "Extension"
+msgstr "Extension"
+
+#: capplets/file-types/file-types-capplet.c:1879
+msgid "Default Action"
+msgstr "Action par défaut"
+
+#: capplets/file-types/file-types-icon-entry.c:381
+msgid "Select an icon"
+msgstr "Sélectionnez une icône"
 
 #: capplets/mouse-properties/mouse-properties.c:267
 msgid "Mouse buttons"
@@ -822,11 +859,11 @@ msgstr "Police utilisateur"
 #. for now we just assume default gtk font
 #: capplets/theme-switcher/gui.c:257
 msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
-msgstr "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
+msgstr "-adobe-helvetica-medium-r-normal-*-*-120-*-*-*-*-*-*"
 
 #: capplets/theme-switcher/gui.c:276
 msgid "Use custom font."
-msgstr "Utiliser une police personnalisée"
+msgstr "Utiliser une police personnalisée."
 
 #: capplets/theme-switcher/install.c:26
 msgid "Home directory doesn't exist!\n"
@@ -839,7 +876,7 @@ msgstr "Le thème n'existe pas"
 #: capplets/theme-switcher/install.c:68
 #, c-format
 msgid "Command '%s' failed"
-msgstr "Échec de la command '%s'"
+msgstr "La commande « %s » a échouée"
 
 #: capplets/theme-switcher/install.c:73
 msgid "Unknown file format"
@@ -1029,30 +1066,34 @@ msgstr "Protocole"
 msgid "Command"
 msgstr "Commande"
 
-#: capplets/url-properties/url-properties.c:92
+#: capplets/url-properties/url-properties.c:93
 msgid "handler:"
 msgstr "gestionnaire :"
 
 #. set some commonly used handlers
-#: capplets/url-properties/url-properties.c:102
+#: capplets/url-properties/url-properties.c:103
 msgid "Netscape"
 msgstr "Netscape"
 
-#: capplets/url-properties/url-properties.c:107
+#: capplets/url-properties/url-properties.c:108
 msgid "Netscape (new window)"
 msgstr "Netscape (nouvelle fenêtre)"
 
-#: capplets/url-properties/url-properties.c:113
+#: capplets/url-properties/url-properties.c:121
 msgid "Help browser"
 msgstr "Navigateur d'aide GNOME"
 
-#: capplets/url-properties/url-properties.c:118
+#: capplets/url-properties/url-properties.c:127
 msgid "Help browser (new window)"
 msgstr "Navigateur d'aide Gnome (nouvelle fenêtre)"
 
-#: capplets/url-properties/url-properties.c:130
+#: capplets/url-properties/url-properties.c:140
 msgid "Set"
 msgstr "Ajouter"
+
+#: capplets/url-properties/url-properties.c:148
+msgid "Remove"
+msgstr "Enlever"
 
 #: capplets/wm-properties/wm-properties-capplet.c:142
 #, c-format
@@ -1142,8 +1183,8 @@ msgstr ""
 "Votre gestionnaire de fenêtre a été changé. Pour que le\n"
 "changement soit enregistré, vous devez enregistrer la session actuelle.\n"
 "Cela peut être fait en sélectionnant « Enregistrer la session maintenant »\n"
-"ci-dessous, ou vous pouvez enregistrer votre session plus tard. Ce la peut\n"
-"etre fait soit en sélectionnant « Enregistrer la configuration actuelle »\n"
+"ci-dessous, ou vous pouvez enregistrer votre session plus tard. Cela peut\n"
+"être fait soit en sélectionnant « Enregistrer la configuration actuelle »\n"
 "sous « Paramètres/Session » dans le menu principal, soit en cochant\n"
 "« Enregistrer la session en cours » quand vous quitterez la session.\n"
 
@@ -1172,7 +1213,7 @@ msgstr ""
 
 #: capplets/wm-properties/wm-properties-capplet.c:757
 msgid "Add New Window Manager"
-msgstr "Ajouter un nouveau gestionnaire de fenêtres"
+msgstr "Ajoutez un nouveau gestionnaire de fenêtres"
 
 #: capplets/wm-properties/wm-properties-capplet.c:771
 msgid "Name:"
@@ -1207,6 +1248,14 @@ msgstr "Éditer le gestionnaire de fenêtres"
 msgid "You cannot delete the current Window Manager"
 msgstr "Vous ne pouvez pas supprimer le gestionnaire de fenêtres actuel"
 
+#: capplets/wm-properties/wm-properties-capplet.c:1093
+msgid "Edit..."
+msgstr "Éditer..."
+
+#: capplets/wm-properties/wm-properties-capplet.c:1098
+msgid "Delete"
+msgstr "Effacer"
+
 #: capplets/wm-properties/wm-properties-capplet.c:1134
 msgid ""
 "an initialization error occurred while starting 'wm-properties-capplet'.\n"
@@ -1221,7 +1270,7 @@ msgstr "Centre de contrôle GNOME"
 
 #: control-center/callbacks.c:105
 msgid "Desktop Properties manager."
-msgstr "Gestionnaires des propriétés du bureau."
+msgstr "Gestionnaire de propriétés du bureau."
 
 #: control-center/capplet-manager.c:179
 msgid "Try"
@@ -1279,15 +1328,15 @@ msgstr ""
 "Ignore l'action par défaut. Utilisé dans le cas d'une\n"
 "initialisation de session personnalisée"
 
-#: control-center/capplet-widget.c:262
+#: control-center/capplet-widget.c:272
 msgid "Sorry, no help is available for these settings."
 msgstr "Désolé, aucune aide n'est disponible pour ces paramétres."
 
-#: control-center/corba-glue.c:75
+#: control-center/corba-glue.c:77
 msgid "capplet-command to be run."
 msgstr "capplet-command à lancer."
 
-#: control-center/corba-glue.c:75
+#: control-center/corba-glue.c:77
 msgid "CAPPLET"
 msgstr "CAPPLET"
 
@@ -1361,6 +1410,130 @@ msgstr "Nom d'hôte :"
 msgid "Unknown"
 msgstr "Inconnu"
 
+#~ msgid "Mime Type: "
+#~ msgstr "Type MIME : "
+
+#~ msgid "Add"
+#~ msgstr "Ajouter"
+
+#~ msgid "First Regular Expression: "
+#~ msgstr "Première expression régulière : "
+
+#~ msgid "Second Regular Expression: "
+#~ msgstr "Seconde expression régulière : "
+
+#~ msgid "Mime Type Actions"
+#~ msgstr "Actions sur les types MIME"
+
+#~ msgid "Example: emacs %f"
+#~ msgstr "Exemple : emacs %f"
+
+#~ msgid "Open"
+#~ msgstr "Ouvrir"
+
+#~ msgid "Select a file..."
+#~ msgstr "Sélectionnez un fichier..."
+
+#~ msgid "View"
+#~ msgstr "Voir"
+
+#~ msgid "Set actions for %s"
+#~ msgstr "Définir les actions pour %s"
+
+#~ msgid ""
+#~ "You must add either a regular-expression or\n"
+#~ "a file-name extension"
+#~ msgstr ""
+#~ "Vous devez ajouter soit une expression régulière\n"
+#~ "soit une extension de nom de fichier"
+
+#~ msgid ""
+#~ "Please put your mime-type in the format:\n"
+#~ "CATEGORY/TYPE\n"
+#~ "\n"
+#~ "For Example:\n"
+#~ "image/png"
+#~ msgstr ""
+#~ "Écrivez votre type MIME sous la forme :\n"
+#~ "CATÉGORIE/TYPE\n"
+#~ "\n"
+#~ "Par exemple :\n"
+#~ "image/png"
+
+#~ msgid "This mime-type already exists"
+#~ msgstr "Ce type MIME existe déjà"
+
+#~ msgid ""
+#~ "We are unable to create the directory\n"
+#~ "~/.gnome/mime-info\n"
+#~ "\n"
+#~ "We will not be able to save the state."
+#~ msgstr ""
+#~ "Impossible de créer le répertoire\n"
+#~ "~/.gnome/mime-info/\n"
+#~ "\n"
+#~ "L'état ne pourra pas être sauvegardé"
+
+#~ msgid ""
+#~ "We are unable to access the directory\n"
+#~ "~/.gnome/mime-info\n"
+#~ "\n"
+#~ "We will not be able to save the state."
+#~ msgstr ""
+#~ "Impossible d'accéder au répertoire\n"
+#~ "~/.gnome/mime-info/\n"
+#~ "\n"
+#~ "L'état ne pourra pas être sauvegardé"
+
+#~ msgid ""
+#~ "Cannot create the file\n"
+#~ "~/.gnome/mime-info/user.mime\n"
+#~ "\n"
+#~ "We will not be able to save the state"
+#~ msgstr ""
+#~ "Impossible de créer le fichier\n"
+#~ "~/.gnome/mime-info/user.mime\n"
+#~ "\n"
+#~ "L'état ne pourra pas être sauvegardé"
+
+#~ msgid ""
+#~ "Cannot create the file\n"
+#~ "~/.gnome/mime-info/user.keys\n"
+#~ "\n"
+#~ "We will not be able to save the state"
+#~ msgstr ""
+#~ "Impossible de créer le fichier\n"
+#~ "~/.gnome/mime-info/user.keys\n"
+#~ "\n"
+#~ "L'état ne pourra pas être sauvegardé"
+
+#~ msgid ""
+#~ "No help is available/installed for these settings. Please make sure you\n"
+#~ "have the Control Center documentation installed on your system."
+#~ msgstr ""
+#~ "Aucune aide n'est disponible/installé pour ces paramétres. Assurez-vous\n"
+#~ "que la documentation du centre de controle est installé sur votre système."
+
+#~ msgid ""
+#~ "Add a new Mime Type\n"
+#~ "For example:  image/tiff; text/x-scheme"
+#~ msgstr ""
+#~ "Ajouter un nouveau type MIME\n"
+#~ "Par exemple :  image/tiff; text/x-scheme"
+
+#~ msgid "Mime Type:"
+#~ msgstr "Type MIME : "
+
+#~ msgid "Regular Expressions"
+#~ msgstr "Expressions régulières"
+
+#~ msgid ""
+#~ "You can set up two regular expressions here to identify the Mime Type\n"
+#~ "by.  These fields are optional."
+#~ msgstr ""
+#~ "Vous pouvez donner deux expressions régulières pour\n"
+#~ "identifier le type MIME. Ces champs sont optionnels."
+
 #~ msgid "Session"
 #~ msgstr "Session"
 
@@ -1369,9 +1542,6 @@ msgstr "Inconnu"
 
 #~ msgid "Start Session"
 #~ msgstr "Démarrer une session"
-
-#~ msgid "Cancel Login"
-#~ msgstr "Annuler la connexion"
 
 #~ msgid "Order: "
 #~ msgstr "Ordre : "
