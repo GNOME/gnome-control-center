@@ -393,13 +393,25 @@ capplet_ok_cb (GtkWidget *widget, GtkWidget *app)
 	Bonobo_PropertyControl_notifyAction (pc, 0, Bonobo_PropertyControl_APPLY, &ev);
 	gtk_widget_destroy (app);
 
+	bonobo_object_release_unref (pc, &ev);
+
 	CORBA_exception_free (&ev);
 }
 
 static void
 capplet_cancel_cb (GtkWidget *widget, GtkWidget *app) 
 {
+	CORBA_Environment ev;
+	Bonobo_PropertyControl pc;
+
+	CORBA_exception_init (&ev);
+
+	pc = gtk_object_get_data (GTK_OBJECT (app), "property-control");
 	gtk_widget_destroy (app);
+
+	bonobo_object_release_unref (pc, &ev);
+
+	CORBA_exception_free (&ev);
 }
 
 /* capplet_control_launch
