@@ -3,7 +3,7 @@ SUBDIRS = . location-manager-capplet
 confexecdir = $(libdir)
 confexec_DATA = ximian_archiverConf.sh
 
-Locationmetadir = $(datadir)/ximian-config/default
+Locationmetadir = $(datadir)/ximian-setup-tools/archiver
 Locationmeta_DATA = default-user.xml default-global.xml
 
 includedir = $(prefix)/include/ximian-archiver
@@ -14,7 +14,7 @@ INCLUDES = 			\
 	-DVERSION=\""$(VERSION)"\"			\
 	-DG_LOG_DOMAIN=\"libximian-archiver\"		\
 	-DCONFIGDIR=\""/etc"\"				\
-	-DLOCATION_DIR=\""$(datadir)/ximian-config/default"\"	\
+	-DLOCATION_DIR=\""$(datadir)/ximian-setup-tools/archiver"\"	\
 	-DGLADE_DIR=\""$(INTERFACES_DIR)"\"		\
 	-DXST_BACKEND_LOCATION=\""$(datadir)/ximian-setup-tools/scripts"\"	\
 	$(GNOME_XML_CFLAGS)				\

@@ -1,5 +1,14 @@
 2001-06-20  Bradford Hovinen  <hovinen@ximian.com>
 
+	* config-log.c (slave_data_cb): Dump the log after loading it from
+	the slave
+	(dump_log): Set first_old to the beginning of the list after the dump
+	(do_load): Don't call do_unload
+	(socket_data_cb): Check for hang up first
+
+	* archive.c, Makefile.am: Replace all instances of ximian-config
+	with ximian-setup-tools
+
 	* config-log.c (slave_new): Don't apprise slave of new data
 	(config_log_write_entry): Dump log after every write
 

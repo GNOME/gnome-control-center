@@ -532,6 +532,7 @@ config_log_write_entry (ConfigLog *config_log, gchar *backend_id,
 	if (config_log->p->socket_owner) {
 		slave_broadcast_data (NULL, config_log);
 		dump_log (config_log);
+		do_load (config_log);
 	} else {
 		write_log (config_log->p->socket_buffer, entry);
 	}
@@ -633,6 +634,7 @@ config_log_reload (ConfigLog *config_log)
 	g_return_if_fail (config_log != NULL);
 	g_return_if_fail (IS_CONFIG_LOG (config_log));
 
+	do_unload (config_log, FALSE);
 	do_load (config_log);
 }
 
@@ -889,7 +891,6 @@ do_load (ConfigLog *config_log)
 	g_return_val_if_fail (config_log->p->location != NULL, FALSE);
 	g_return_val_if_fail (IS_LOCATION (config_log->p->location), FALSE);
 
-	do_unload (config_log, FALSE);
 	config_log_reset_filenames (config_log);
 
 	fd = open (config_log->p->filename, O_RDONLY);
@@ -897,8 +898,10 @@ do_load (ConfigLog *config_log)
 	if (fd != -1)
 		config_log->p->file_buffer = 
 			io_buffer_new (g_io_channel_unix_new (fd), FALSE);
-	else
+	else {
+		g_warning ("Could not open config log: %s", g_strerror (errno));
 		config_log->p->file_buffer = NULL;
+	}
 
 	return TRUE;
 }
@@ -1039,12 +1042,15 @@ dump_log (ConfigLog *config_log)
 	     first = first->next)
 		write_log (output, first->data);
 
+	config_log->p->first_old = config_log->p->log_data;
+
 	if (config_log->p->file_buffer) {
 		io_buffer_rewind (config_log->p->file_buffer);
 		io_buffer_dump (config_log->p->file_buffer, output);
 	}
 
 	io_buffer_destroy (output);
+	close (out_fd);
 
 	if (config_log->p->filename)
 		rename (filename_out, config_log->p->filename);
@@ -1268,14 +1274,15 @@ socket_data_cb (GIOChannel *channel, GIOCondition condition,
 
 	DEBUG_MSG ("Enter");
 
-	if (condition == G_IO_IN) {
-		load_log_entry (config_log, TRUE,
-				config_log->p->socket_buffer, NULL);
-	}
-	else if (condition == G_IO_HUP) {
+	if (condition & G_IO_HUP) {
+		DEBUG_MSG ("Connection closing");
 		disconnect_socket (config_log);
 		connect_socket (config_log);
 		return FALSE;
+	}
+	else if (condition & G_IO_IN) {
+		load_log_entry (config_log, TRUE,
+				config_log->p->socket_buffer, NULL);
 	}
 
 	DEBUG_MSG ("Exit");
@@ -1343,8 +1350,12 @@ slave_data_cb (GIOChannel *channel, GIOCondition condition,
 	}
 	else if (condition & G_IO_IN) {
 		if (load_log_entry (slave->config_log, TRUE, slave->buffer,
-				    NULL) != NULL)
+				    NULL) != NULL) 
+		{
 			slave_broadcast_data (slave, slave->config_log);
+			dump_log (slave->config_log);
+			do_load (slave->config_log);
+		}
 	}
 
 	DEBUG_MSG ("Exit");
