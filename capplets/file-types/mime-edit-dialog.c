@@ -667,7 +667,7 @@ validate_data (MimeEditDialog *dialog)
 	if (tmp != NULL && *tmp != '\0') {
 		if (strchr (tmp, ' ') || !strchr (tmp, '/')) {
 			err_dialog = gnome_error_dialog_parented
-				(_("Invalid MIME type. Please enter a valid MIME type, or"
+				(_("Invalid MIME type. Please enter a valid MIME type, or "
 				   "leave the field blank to have one generated for you."),
 				 GTK_WINDOW (dialog->p->dialog_win));
 
