@@ -1,3 +1,5 @@
+SUBDIRS = control
+
 bin_PROGRAMS = gnome-font-and-theme-properties
 
 gnome_font_and_theme_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
