@@ -1,5 +1,4 @@
-/* This program was written with lots of love under the GPL by Jonathan
- * Blandford <jrb@gnome.org>
+/* This program was written under the GPL by Jonathan Blandford <jrb@gnome.org>
  */
 
 #include <config.h>
@@ -19,102 +18,222 @@
 #include "activate-settings-daemon.h"
 #include "gconf-property-editor.h"
 #include "file-transfer-dialog.h"
+#include "gnome-theme-manager.h"
+#include "gnome-theme-details.h"
 #include "gnome-theme-installer.h"
 #include "theme-thumbnail.h"
 
-#define GTK_THEME_KEY      "/desktop/gnome/interface/gtk_theme"
-#define WINDOW_THEME_KEY   "/desktop/gnome/applications/window_manager/theme"
-#define ICON_THEME_KEY     "/desktop/gnome/interface/icon_theme"
-#define METACITY_THEME_DIR "/apps/metacity/general"
-#define METACITY_THEME_KEY METACITY_THEME_DIR "/theme"
-
-#define META_THEME_DEFAULT_NAME   "Default"
-#define GTK_THEME_DEFAULT_NAME    "Default"
-#define WINDOW_THEME_DEFAULT_NAME "Atlanta"
-#define ICON_THEME_DEFAULT_NAME   "Default"
 
 #define MAX_ELEMENTS_BEFORE_SCROLLING 3
 
-static void read_themes (GladeXML *dialog);
+/* Events: There are two types of change events we worry about.  The first is
+ * when the theme settings change.  In this case, we can quickly update the UI
+ * to reflect.  The other is when the themes themselves change.
+ *
+ * The code in gnome-theme-manager.c will update the main dialog and proxy the
+ * update notifications for the details dialog.
+ */
 
 enum
 {
-  META_THEME_NAME_COLUMN,
-  META_THEME_ID_COLUMN,
-  META_PIXBUF_COLUMN,
-  META_DEFAULT_THEME_COLUMN,
-  META_xN_COLUMNS
+  META_THEME_NAME_COLUMN = THEME_NAME_COLUMN,
+  META_THEME_ID_COLUMN = THEME_ID_COLUMN,
+  META_THEME_FLAG_COLUMN = THEME_FLAG_COLUMN,
+  META_THEME_PIXBUF_COLUMN,
+  META_N_COLUMNS
 };
 
-enum
-{
-  THEME_NAME_COLUMN,
-  THEME_ID_COLUMN,
-  PIXBUF_COLUMN,
-  DEFAULT_THEME_COLUMN,
-  N_COLUMNS
-};
-
-enum
-{
-  TARGET_URI_LIST,
-  TARGET_NS_URL
-};
-
-static GtkTargetEntry drop_types[] =
+GtkTargetEntry drop_types[] =
 {
   {"text/uri-list", 0, TARGET_URI_LIST},
   {"_NETSCAPE_URL", 0, TARGET_NS_URL}
 };
 
-static gint n_drop_types = sizeof (drop_types) / sizeof (GtkTargetEntry);
+gint n_drop_types = sizeof (drop_types) / sizeof (GtkTargetEntry);
 
 static gboolean setting_model = FALSE;
-static gboolean initial_scroll = TRUE;
+static gboolean idle_running = FALSE;
+static GdkPixbuf *default_image = NULL;
 
-static GladeXML *
-create_dialog (void)
-{
-  GladeXML *dialog;
+static GnomeThemeMetaInfo custom_meta_theme_info = {};
 
-  dialog = glade_xml_new (GLADEDIR "/theme-properties.glade", NULL, NULL);
-
-  return dialog;
-}
+/* Function Prototypes */
+static void      idle_async_func                 (GdkPixbuf          *pixbuf,
+						  gpointer            data);
+static void      list_data_free                  (gpointer            data);
+static gboolean  load_theme_in_idle              (gpointer            data);
+static void      add_pixbuf_idle                 (GtkTreeModel       *model);
+static void      load_meta_themes                (GtkTreeView        *tree_view,
+						  GList              *meta_theme_list,
+						  char               *default_theme);
+static void      meta_theme_setup_info           (GnomeThemeMetaInfo *meta_theme_info,
+						  GladeXML           *dialog);
+static void      meta_theme_set                  (GnomeThemeMetaInfo *meta_theme_info);
+static void      meta_theme_selection_changed    (GtkTreeSelection   *selection,
+						  GladeXML           *dialog);
+static void      update_themes_from_disk         (GladeXML           *dialog);
+static void      update_settings_from_gconf      (void);
+static void      gtk_theme_key_changed           (GConfClient        *client,
+						  guint               cnxn_id,
+						  GConfEntry         *entry,
+						  gpointer            user_data);
+static void      window_settings_changed         (GnomeWindowManager *window_manager,
+						  GladeXML           *dialog);
+static void      icon_key_changed                (GConfClient        *client,
+						  guint               cnxn_id,
+						  GConfEntry         *entry,
+						  gpointer            user_data);
+static void      theme_changed_func              (gpointer            uri,
+						  gpointer            user_data);
+static void      cb_dialog_response              (GtkDialog          *dialog,
+						  gint                response_id);
+static void      setup_meta_tree_view            (GtkTreeView        *tree_view,
+						  GCallback           changed_callback,
+						  GladeXML           *dialog);
+static void      setup_dialog                    (GladeXML           *dialog);
 
 
 static void
-async_func (GdkPixbuf *pixbuf,
-	    gpointer    data)
+idle_async_func (GdkPixbuf *pixbuf,
+		 gpointer   data)
 {
   GList *list = data;
-  GtkTreeIter *iter = list->next->data;
-  GtkTreeModel *model = list->data;
+  gchar *theme_id;
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  gboolean valid;
 
-  gtk_list_store_set (GTK_LIST_STORE (model), iter,
-		      PIXBUF_COLUMN, pixbuf,
-		      -1);
+  theme_id = list->next->data;
+  model = list->data;
+
+  for (valid = gtk_tree_model_get_iter_first (model, &iter);
+       valid;
+       valid = gtk_tree_model_iter_next (model, &iter))
+    {
+      gchar *test_theme_id;
+      gtk_tree_model_get (model, &iter,
+			  META_THEME_ID_COLUMN, &test_theme_id,
+			  -1);
+      if (test_theme_id && !strcmp (theme_id, test_theme_id))
+	{
+	  gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+			      META_THEME_PIXBUF_COLUMN, pixbuf,
+			      -1);
+	  g_free (test_theme_id);
+	  break;
+	}
+      g_free (test_theme_id);
+    }
+
+  idle_running = FALSE;
+  add_pixbuf_idle (model);
 }
 
+static void
+list_data_free (gpointer data)
+{
+  GList *list_data = data;
+
+  g_object_unref (G_OBJECT (list_data->data));
+  g_free (list_data->next->data);
+  g_list_free (list_data);
+}
+
+
+static gboolean
+load_theme_in_idle (gpointer data)
+{
+  GtkTreeModel *model = data;
+  GtkTreeIter iter;
+  gboolean valid;
+
+  for (valid = gtk_tree_model_get_iter_first (model, &iter);
+       valid;
+       valid = gtk_tree_model_iter_next (model, &iter))
+    {
+      GdkPixbuf *pixbuf = NULL;
+      gchar *theme_id = NULL;
+
+      gtk_tree_model_get (model, &iter,
+			  META_THEME_PIXBUF_COLUMN, &pixbuf,
+			  -1);
+      if (pixbuf == default_image)
+	{
+	  GList *list_data = NULL;
+	  GnomeThemeMetaInfo *meta_theme_info;
+
+	  gtk_tree_model_get (model, &iter,
+			      META_THEME_ID_COLUMN, &theme_id,
+			      -1);
+	  if (theme_id == NULL)
+	    {
+	      meta_theme_info = &custom_meta_theme_info;
+	      continue;
+	    }
+	  else
+	    {
+	      meta_theme_info = gnome_theme_meta_info_find (theme_id);
+	    }
+
+	  /* We should always have a metatheme file */
+	  g_assert (meta_theme_info);
+
+	  list_data = g_list_prepend (list_data, theme_id);
+	  g_object_ref (model);
+	  list_data = g_list_prepend (list_data, model);
+	  generate_theme_thumbnail_async (meta_theme_info,
+					  idle_async_func,
+					  list_data,
+					  list_data_free);
+
+	  return FALSE;
+	}
+    }
+
+  /* If we're done loading all the main themes, lets initialize the details
+   * dialog if it hasn't been done yet.  If it has, then this call is harmless.
+   */
+  gnome_theme_details_init ();
+
+  return FALSE;
+}
+
+/* FIXME: we need a way to cancel the pixbuf loading if we get a theme updating
+ * during the pixbuf generation.
+ */
+static void
+add_pixbuf_idle (GtkTreeModel *model)
+{
+  if (idle_running)
+    return;
+
+  idle_running = TRUE;
+  g_object_ref (model);
+  g_idle_add_full (G_PRIORITY_LOW,
+		   load_theme_in_idle,
+		   model,
+		   g_object_unref);
+}
+
+/* Loads up a list of GnomeMetaThemeInfo.
+ */
 static void
 load_meta_themes (GtkTreeView *tree_view,
 		  GList       *meta_theme_list,
-		  char        *current_theme,
 		  char        *default_theme)
 {
   GList *list;
   GtkTreeModel *model;
   GtkWidget *swindow;
   gint i = 0;
-  gboolean current_theme_found = FALSE;
-  GtkTreeRowReference *row_ref = NULL;
 
   swindow = GTK_WIDGET (tree_view)->parent;
   model = gtk_tree_view_get_model (tree_view);
+  g_assert (model);
 
   setting_model = TRUE;
   gtk_list_store_clear (GTK_LIST_STORE (model));
-  
+
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (swindow),
 				  GTK_POLICY_NEVER, GTK_POLICY_NEVER);
   gtk_widget_set_usize (swindow, -1, -1);
@@ -133,34 +252,18 @@ load_meta_themes (GtkTreeView *tree_view,
       else
 	is_default = FALSE;
 
-      if (strcmp (current_theme, meta_theme_info->name) == 0)
-	{
-	  GtkTreePath *path = gtk_tree_model_get_path (model, &iter);
-	  row_ref = gtk_tree_row_reference_new (model, path);
-	  gtk_tree_path_free (path);
-	  current_theme_found = TRUE;
-	}
       blurb = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s</span>\n%s",
 			       meta_theme_info->readable_name, meta_theme_info->comment);
-      pixbuf = NULL;
-      pixbuf = generate_theme_thumbnail (meta_theme_info);
       if (i <= MAX_ELEMENTS_BEFORE_SCROLLING)
-	{
-	  GtkTreeIter *new_iter = gtk_tree_iter_copy (&iter);
-	  GList *list_data = NULL;
-
-	  list_data = g_list_prepend (list_data, new_iter);
-	  list_data = g_list_prepend (list_data, model);
-#if 0
-	  //pixbuf = generate_theme_thumbnail (meta_theme_info);
-#endif  
-	}
+	pixbuf = generate_theme_thumbnail (meta_theme_info);
+      else
+	pixbuf = default_image;
 
       gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-			  PIXBUF_COLUMN, pixbuf,
-			  THEME_NAME_COLUMN, blurb,
-			  THEME_ID_COLUMN, meta_theme_info->name,
-			  DEFAULT_THEME_COLUMN, is_default,
+			  META_THEME_PIXBUF_COLUMN, pixbuf,
+			  META_THEME_NAME_COLUMN, blurb,
+			  META_THEME_ID_COLUMN, meta_theme_info->name,
+			  META_THEME_FLAG_COLUMN, is_default ? THEME_FLAG_DEFAULT : 0,
 			  -1);
       g_free (blurb);
 
@@ -175,192 +278,8 @@ load_meta_themes (GtkTreeView *tree_view,
       i++;
     }
 
-  if (! current_theme_found)
-    {
-      GtkTreeIter iter;
-      GtkTreePath *path;
-      gboolean is_default;
-
-      if (strcmp (default_theme, current_theme) == 0)
-	is_default = TRUE;
-      else
-	is_default = FALSE;
-      gtk_list_store_prepend (GTK_LIST_STORE (model), &iter);
-      gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-			  THEME_NAME_COLUMN, current_theme,
-			  THEME_ID_COLUMN, current_theme,
-			  DEFAULT_THEME_COLUMN, is_default,
-			  -1);
-
-      path = gtk_tree_model_get_path (model, &iter);
-      row_ref = gtk_tree_row_reference_new (model, path);
-      gtk_tree_path_free (path);
-    }
-
-  if (row_ref)
-    {
-      GtkTreePath *path;
-
-      path = gtk_tree_row_reference_get_path (row_ref);
-      gtk_tree_view_set_cursor (tree_view,path, NULL, FALSE);
-
-      if (initial_scroll)
-	{
-	  gtk_tree_view_scroll_to_cell (tree_view, path, NULL, TRUE, 0.5, 0.0);
-	  initial_scroll = FALSE;
-	}
-      
-      gtk_tree_path_free (path);
-      gtk_tree_row_reference_free (row_ref);
-    }
+  add_pixbuf_idle (model);
   setting_model = FALSE;
-}
-
-static void
-load_theme_names (GtkTreeView *tree_view,
-		  GList       *theme_list,
-		  char        *current_theme,
-		  gchar       *default_theme)
-{
-  GList *list;
-  GtkTreeModel *model;
-  GtkWidget *swindow;
-  gint i = 0;
-  gboolean current_theme_found = FALSE;
-  GtkTreeRowReference *row_ref = NULL;
-
-  swindow = GTK_WIDGET (tree_view)->parent;
-  model = gtk_tree_view_get_model (tree_view);
-
-  setting_model = TRUE;
-  gtk_list_store_clear (GTK_LIST_STORE (model));
-  
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (swindow),
-				  GTK_POLICY_NEVER, GTK_POLICY_NEVER);
-  gtk_widget_set_usize (swindow, -1, -1);
-
-  for (list = theme_list; list; list = list->next)
-    {
-      const char *name = list->data;
-      GtkTreeIter iter;
-      gboolean is_default;
-
-      gtk_list_store_prepend (GTK_LIST_STORE (model), &iter);
-
-      if (strcmp (default_theme, name) == 0)
-	is_default = TRUE;
-      else
-	is_default = FALSE;
-
-      if (strcmp (current_theme, name) == 0)
-	{
-	  GtkTreePath *path = gtk_tree_model_get_path (model, &iter);
-	  row_ref = gtk_tree_row_reference_new (model, path);
-	  gtk_tree_path_free (path);
-	  current_theme_found = TRUE;
-	}
-      gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-			  THEME_NAME_COLUMN, name,
-			  THEME_ID_COLUMN, name,
-			  DEFAULT_THEME_COLUMN, is_default,
-			  -1);
-
-      if (i == MAX_ELEMENTS_BEFORE_SCROLLING)
-	{
-	  GtkRequisition rectangle;
-	  gtk_widget_size_request (GTK_WIDGET (tree_view), &rectangle);
-	  gtk_widget_set_usize (swindow, -1, rectangle.height);
-	  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (swindow),
-					  GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-	}
-      i++;
-    }
-
-  if (! current_theme_found)
-    {
-      GtkTreeIter iter;
-      GtkTreePath *path;
-      gboolean is_default;
-
-      if (strcmp (default_theme, current_theme) == 0)
-	is_default = TRUE;
-      else
-	is_default = FALSE;
-      gtk_list_store_prepend (GTK_LIST_STORE (model), &iter);
-      gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-			  THEME_NAME_COLUMN, current_theme,
-			  THEME_ID_COLUMN, current_theme,
-			  DEFAULT_THEME_COLUMN, is_default,
-			  -1);
-
-      path = gtk_tree_model_get_path (model, &iter);
-      row_ref = gtk_tree_row_reference_new (model, path);
-      gtk_tree_path_free (path);
-    }
-
-  if (row_ref)
-    {
-      GtkTreePath *path;
-
-      path = gtk_tree_row_reference_get_path (row_ref);
-      gtk_tree_view_set_cursor (tree_view,path, NULL, FALSE);
-
-      if (initial_scroll)
-	{
-	  gtk_tree_view_scroll_to_cell (tree_view, path, NULL, TRUE, 0.5, 0.0);
-	  initial_scroll = FALSE;
-	}
-      
-      gtk_tree_path_free (path);
-      gtk_tree_row_reference_free (row_ref);
-    }
-  setting_model = FALSE;
-}
-
-/* Shared by icons and gtk+ */
-static void
-update_gconf_key_from_selection (GtkTreeSelection *selection,
-				 const gchar      *gconf_key)
-{
-  GtkTreeModel *model;
-  gchar *new_key;
-  GConfClient *client;
-  GtkTreeIter iter;
-
-  if (setting_model)
-    return;
-
-  client = gconf_client_get_default ();
-
-  if (gtk_tree_selection_get_selected (selection, &model, &iter))
-    {
-      gtk_tree_model_get (model, &iter,
-			  THEME_ID_COLUMN, &new_key,
-			  -1);
-    }
-  else
-    /* This shouldn't happen */
-    {
-      new_key = NULL;
-    }
-
-  if (new_key != NULL)
-    {
-      gchar *old_key;
-
-      old_key = gconf_client_get_string (client, gconf_key, NULL);
-      if (old_key && strcmp (old_key, new_key))
-	{
-	  gconf_client_set_string (client, gconf_key, new_key, NULL);
-	}
-      g_free (old_key);
-    }
-  else
-    {
-      gconf_client_unset (client, gconf_key, NULL);
-    }
-  g_free (new_key);
-  g_object_unref (client);
 }
 
 static void
@@ -430,7 +349,7 @@ meta_theme_set (GnomeThemeMetaInfo *meta_theme_info)
       gconf_client_set_string (client, ICON_THEME_KEY, meta_theme_info->icon_theme_name, NULL);
     }
   g_free (old_key);
-  
+
 }
 
 static void
@@ -445,14 +364,23 @@ meta_theme_selection_changed (GtkTreeSelection *selection,
   if (gtk_tree_selection_get_selected (selection, &model, &iter))
     {
       gtk_tree_model_get (model, &iter,
-			  THEME_ID_COLUMN, &meta_theme_name,
+			  META_THEME_ID_COLUMN, &meta_theme_name,
 			  -1);
     }
   else
-    /* This shouldn't happen */
-    return;
+    {
+      /* I probably just added a row. */
+      return;
+    }
 
-  meta_theme_info = gnome_theme_meta_info_find (meta_theme_name);
+  if (meta_theme_name)
+    {
+      meta_theme_info = gnome_theme_meta_info_find (meta_theme_name);
+    }
+  else
+    {
+      meta_theme_info = &custom_meta_theme_info;
+    }
   meta_theme_setup_info (meta_theme_info, dialog);
 
   if (setting_model)
@@ -462,64 +390,17 @@ meta_theme_selection_changed (GtkTreeSelection *selection,
     meta_theme_set (meta_theme_info);
 }
 
-static void
-gtk_theme_selection_changed (GtkTreeSelection *selection,
-			     gpointer          data)
-{
-  update_gconf_key_from_selection (selection, GTK_THEME_KEY);
-}
-
-static void
-window_theme_selection_changed (GtkTreeSelection *selection,
-				gpointer          data)
-{
-  GnomeWindowManager *window_manager;
-  GnomeWMSettings wm_settings;
-  GtkTreeIter iter;
-  gchar *window_theme_name;
-  GtkTreeModel *model;
-
-  if (setting_model)
-    return;
-
-  if (gtk_tree_selection_get_selected (selection, &model, &iter))
-    {
-      gtk_tree_model_get (model, &iter,
-			  THEME_ID_COLUMN, &window_theme_name,
-			  -1);
-    }
-  else
-    /* This shouldn't happen */
-    return;
-
-  window_manager = gnome_wm_manager_get_current (gdk_display_get_default_screen (gdk_display_get_default ()));
-
-  wm_settings.flags = GNOME_WM_SETTING_THEME;
-  wm_settings.theme = window_theme_name;
-  gnome_window_manager_change_settings (window_manager, &wm_settings);
-
-}
-
-static void
-icon_theme_selection_changed (GtkTreeSelection *selection,
-			     gpointer          data)
-{
-  update_gconf_key_from_selection (selection, ICON_THEME_KEY);
-}
-
-
-/* This function will adjust the UI to reflect the current theme/gconf
- * situation.  It is called after the themes change on disk, or a gconf-key
- * changes.
+/* This function will adjust the list to reflect the current theme
+ * situation.  It is called after the themes change on disk.  Currently, it
+ * recreates the entire list.
  */
 static void
-read_themes (GladeXML *dialog)
+update_themes_from_disk (GladeXML *dialog)
 {
   GList *theme_list;
   GList *string_list;
   GList *list;
   GConfClient *client;
-  gchar *current_meta_theme;
   gchar *current_gtk_theme;
   gchar *current_window_theme;
   gchar *current_icon_theme;
@@ -528,13 +409,9 @@ read_themes (GladeXML *dialog)
   GtkWidget *notebook;
 
   gboolean have_meta_theme;
-  gboolean have_gtk_theme;
-  gboolean have_window_theme;
-  gboolean have_icon_theme;
 
   client = gconf_client_get_default ();
 
-  current_meta_theme = NULL;
   current_gtk_theme = gconf_client_get_string (client, GTK_THEME_KEY, NULL);
   current_icon_theme = gconf_client_get_string (client, ICON_THEME_KEY, NULL);
   window_manager = gnome_wm_manager_get_current (gdk_display_get_default_screen (gdk_display_get_default ()));
@@ -542,113 +419,43 @@ read_themes (GladeXML *dialog)
   gnome_window_manager_get_settings (window_manager, &wm_settings);
   current_window_theme = g_strdup (wm_settings.theme);
 
+  /* FIXME: What do we really do when there is no theme?  Ask Havoc here. */
+  /* BROKEN BROKEN BROKEN */
   if (current_icon_theme == NULL)
     current_icon_theme = g_strdup ("Default");
   if (current_gtk_theme == NULL)
     current_gtk_theme = g_strdup ("Default");
 
   notebook = WID ("theme_notebook");
-  
-  /* First, we update the GTK+ themes page */
-  theme_list = gnome_theme_info_find_by_type (GNOME_THEME_GTK_2);
-  string_list = NULL;
-  for (list = theme_list; list; list = list->next)
-    {
-      GnomeThemeInfo *info = list->data;
-      string_list = g_list_prepend (string_list, info->name);
-    }
 
-  if (string_list == NULL)
-    {
-      gtk_widget_hide (WID ("control_theme_vbox"));
-      have_gtk_theme = FALSE;
-    }
-  else
-    {
-      gtk_widget_show (WID ("control_theme_vbox"));
-      have_gtk_theme = TRUE;
-      load_theme_names (GTK_TREE_VIEW (WID ("control_theme_treeview")), string_list, current_gtk_theme, GTK_THEME_DEFAULT_NAME);
-      g_list_free (string_list);
-    }
-  g_list_free (theme_list);
-
-  /* Next, we do the window managers */
-  string_list = gnome_window_manager_get_theme_list (window_manager);
-  if (string_list == NULL)
-    {
-      gtk_widget_hide (WID ("window_theme_vbox"));
-      have_window_theme = FALSE;
-    }
-  else
-    {
-      gtk_widget_show (WID ("window_theme_vbox"));
-      have_window_theme = TRUE;
-      load_theme_names (GTK_TREE_VIEW (WID ("window_theme_treeview")), string_list, current_window_theme, WINDOW_THEME_DEFAULT_NAME);
-      g_list_free (string_list);
-    }
-
-  /* Third, we do the icon theme */
-  theme_list = gnome_theme_icon_info_find_all ();
-  string_list = NULL;
-
-  for (list = theme_list; list; list = list->next)
-    {
-      GnomeThemeIconInfo *info = list->data;
-      string_list = g_list_prepend (string_list, info->name);
-    }
-
-  if (string_list == NULL)
-    {
-      gtk_widget_hide (WID ("icon_theme_vbox"));
-      have_icon_theme = FALSE;
-    }
-  else
-    {
-      gtk_widget_show (WID ("icon_theme_vbox"));
-      have_icon_theme = TRUE;
-      load_theme_names (GTK_TREE_VIEW (WID ("icon_theme_treeview")), string_list, current_icon_theme, ICON_THEME_DEFAULT_NAME);
-      g_list_free (string_list);
-    }
-  g_list_free (theme_list);
-
-  /* Finally, we do the Meta themes */
   theme_list = gnome_theme_meta_info_find_all ();
   string_list = NULL;
   for (list = theme_list; list; list = list->next)
     {
       GnomeThemeMetaInfo *info = list->data;
 
-      if (! strcmp (info->gtk_theme_name, current_gtk_theme) &&
-	  ! strcmp (info->icon_theme_name, current_icon_theme) &&
-	  ! strcmp (info->metacity_theme_name, current_window_theme))
-	{
-	  current_meta_theme = g_strdup (info->name);
-	}
       string_list = g_list_prepend (string_list, info);
     }
 
   if (string_list == NULL)
     {
       have_meta_theme = FALSE;
-      gtk_widget_hide (WID ("meta_theme_hbox"));
     }
   else
     {
       have_meta_theme = TRUE;
       gtk_widget_show (WID ("meta_theme_hbox"));
-      if (current_meta_theme == NULL)
-	current_meta_theme = g_strdup (_("Current modified"));
-      load_meta_themes (GTK_TREE_VIEW (WID ("meta_theme_treeview")), string_list, current_meta_theme, META_THEME_DEFAULT_NAME);
+      load_meta_themes (GTK_TREE_VIEW (WID ("meta_theme_treeview")), string_list, META_THEME_DEFAULT_NAME);
       g_list_free (string_list);
     }
   g_list_free (theme_list);
-  
-  
+
   g_free (current_gtk_theme);
   g_free (current_icon_theme);
-  g_free (current_meta_theme);
-  
-  if (! have_meta_theme && ! have_icon_theme && !have_window_theme && ! have_gtk_theme)
+
+  update_settings_from_gconf ();
+
+  if (! have_meta_theme)
     {
       GtkWidget *dialog;
 
@@ -656,83 +463,414 @@ read_themes (GladeXML *dialog)
 				       GTK_DIALOG_MODAL,
 				       GTK_MESSAGE_ERROR,
 				       GTK_BUTTONS_OK,
-				       _("No themes could be found on your system.  This probably means that your \"Theme Preferences\" dialog was improperly installed."));
+				       _("No themes could be found on your system.  This probably means that your \"Theme Preferences\" dialog was improperly installed, or you haven't installed the \"gnome-themes\" package."));
       gtk_dialog_run (GTK_DIALOG (dialog));
       gtk_widget_destroy (dialog);
       exit (0);
     }
 }
 
+static void
+add_custom_row_to_meta_theme (const gchar  *current_gtk_theme,
+			      const gchar  *current_window_theme,
+			      const gchar  *current_icon_theme)
+{
+  GladeXML *dialog;
+  GtkWidget *tree_view;
+  GtkTreeModel *model;
+  GtkTreePath *path;
+  GtkTreeIter iter;
+  gboolean valid;
+  gchar *blurb;
+
+  dialog = gnome_theme_manager_get_theme_dialog ();
+  tree_view = WID ("meta_theme_treeview");
+  model = gtk_tree_view_get_model (GTK_TREE_VIEW (tree_view));
+  
+  custom_meta_theme_info.gtk_theme_name = g_strdup (current_gtk_theme);
+  custom_meta_theme_info.metacity_theme_name = g_strdup (current_window_theme);
+  custom_meta_theme_info.icon_theme_name = g_strdup (current_icon_theme);
+
+  for (valid = gtk_tree_model_get_iter_first (model, &iter);
+       valid;
+       valid = gtk_tree_model_iter_next (model, &iter))
+    {
+      guint theme_flags = 0;
+
+      gtk_tree_model_get (model, &iter,
+			  META_THEME_FLAG_COLUMN, &theme_flags,
+			  -1);
+      if (theme_flags & THEME_FLAG_CUSTOM)
+	break;
+
+    }
+
+  /* if we found a custom row and broke out of the list above, valid will be
+   * TRUE.  If we didn't, we need to add a new iter.
+   */
+  if (!valid)
+    gtk_list_store_prepend (GTK_LIST_STORE (model), &iter);
+
+  /* set the values of the Custom theme. */
+  blurb = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s</span>\n%s",
+			   _("Custom theme"), _("You can save this theme by pressing the Save Theme button."));
+
+  gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+		      META_THEME_NAME_COLUMN, blurb,
+		      META_THEME_FLAG_COLUMN, THEME_FLAG_CUSTOM,
+		      META_THEME_PIXBUF_COLUMN, default_image,
+		      -1);
+  path = gtk_tree_model_get_path (model, &iter);
+  gtk_tree_view_set_cursor (GTK_TREE_VIEW (tree_view), path, NULL, FALSE);
+  gtk_tree_path_free (path);
+  g_free (blurb);
+}
 
 
 static void
-theme_key_changed (GConfClient *client,
-		   guint        cnxn_id,
-		   GConfEntry  *entry,
-		   gpointer     user_data)
+remove_custom_row_from_meta_theme (GtkTreeModel *model)
 {
-  if (!strcmp (entry->key, GTK_THEME_KEY) || !strcmp (entry->key, ICON_THEME_KEY))
+  GtkTreeIter iter;
+  GtkTreeIter next_iter;
+  gboolean valid;
+
+  valid = gtk_tree_model_get_iter_first (model, &iter);
+  while (valid)
     {
-      read_themes ((GladeXML *)user_data);
+      guint theme_flags = 0;
+
+      next_iter = iter;
+      valid = gtk_tree_model_iter_next (model, &next_iter);
+
+      gtk_tree_model_get (model, &iter,
+			  META_THEME_FLAG_COLUMN, &theme_flags,
+			  -1);
+
+      if (theme_flags & THEME_FLAG_CUSTOM)
+	{
+	  gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
+	}
+      iter = next_iter;
     }
+  g_free (custom_meta_theme_info.gtk_theme_name);
+  g_free (custom_meta_theme_info.metacity_theme_name);
+  g_free (custom_meta_theme_info.icon_theme_name);
+
+  custom_meta_theme_info.gtk_theme_name = NULL;
+  custom_meta_theme_info.metacity_theme_name = NULL;
+  custom_meta_theme_info.icon_theme_name = NULL;
+}
+
+
+/* Sets the list to point to the current theme.  Also creates the 'Custom Theme'
+ * field if needed */
+static void
+update_settings_from_gconf (void)
+{
+  GConfClient *client;
+  gchar *current_gtk_theme;
+  gchar *current_window_theme;
+  gchar *current_icon_theme;
+  GnomeWindowManager *window_manager;
+  GnomeWMSettings wm_settings;
+  GtkWidget *tree_view;
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  GladeXML *dialog;
+  gboolean valid;
+  gboolean custom_theme_found;
+
+  client = gconf_client_get_default ();
+
+  /* Get the settings */
+  current_gtk_theme = gconf_client_get_string (client, GTK_THEME_KEY, NULL);
+  current_icon_theme = gconf_client_get_string (client, ICON_THEME_KEY, NULL);
+  window_manager = gnome_wm_manager_get_current (gdk_display_get_default_screen (gdk_display_get_default ()));
+  wm_settings.flags = GNOME_WM_SETTING_THEME;
+  gnome_window_manager_get_settings (window_manager, &wm_settings);
+  current_window_theme = g_strdup (wm_settings.theme);
+  custom_theme_found = TRUE;
+
+  /* Walk the tree looking for the current one. */
+  dialog = gnome_theme_manager_get_theme_dialog ();
+  tree_view = WID ("meta_theme_treeview");
+  g_assert (tree_view);
+  model = gtk_tree_view_get_model (GTK_TREE_VIEW (tree_view));
+
+  for (valid = gtk_tree_model_get_iter_first (model, &iter);
+       valid;
+       valid = gtk_tree_model_iter_next (model, &iter))
+    {
+      gchar *row_theme_id = NULL;
+      guint row_theme_flags = 0;
+      GnomeThemeMetaInfo *meta_theme_info;
+
+      gtk_tree_model_get (model, &iter,
+			  META_THEME_ID_COLUMN, &row_theme_id,
+			  META_THEME_FLAG_COLUMN, &row_theme_flags,
+			  -1);
+
+      if (row_theme_flags & THEME_FLAG_CUSTOM)
+	{
+	  meta_theme_info = &custom_meta_theme_info;
+	}
+      else if (row_theme_id)
+	{
+	  meta_theme_info = gnome_theme_meta_info_find (row_theme_id);
+	}
+      else
+	{
+	  meta_theme_info = &custom_meta_theme_info;
+	}
+      g_free (row_theme_id);
+
+      if (meta_theme_info == &(custom_meta_theme_info))
+	custom_theme_found = TRUE;
+      else if (! strcmp (current_gtk_theme, meta_theme_info->gtk_theme_name) &&
+	  ! strcmp (current_window_theme, meta_theme_info->metacity_theme_name) &&
+	  ! strcmp (current_icon_theme, meta_theme_info->icon_theme_name))
+	{
+	  GtkTreePath *path;
+
+	  path = gtk_tree_model_get_path (model, &iter);
+	  gtk_tree_view_set_cursor (GTK_TREE_VIEW (tree_view), path, NULL, FALSE);
+	  gtk_tree_path_free (path);
+	  custom_theme_found = FALSE;
+
+	  break;
+	}
+    }
+
+  if (custom_theme_found)
+    add_custom_row_to_meta_theme (current_gtk_theme, current_window_theme, current_icon_theme);
+  else
+    remove_custom_row_from_meta_theme (model);
+
+  g_free (current_gtk_theme);
+  g_free (current_window_theme);
+  g_free (current_icon_theme);
+  add_pixbuf_idle (model);
+}
+
+static void
+gtk_theme_key_changed (GConfClient *client,
+		       guint        cnxn_id,
+		       GConfEntry  *entry,
+		       gpointer     user_data)
+{
+  if (strcmp (entry->key, GTK_THEME_KEY))
+    return;
+
+  update_settings_from_gconf ();
+  gnome_theme_details_update_from_gconf ();
 }
 
 static void
 window_settings_changed (GnomeWindowManager *window_manager,
 			 GladeXML           *dialog)
 {
-  /* We regretfully reread the entire capplet when this happens.
-   * We should prolly change the lib to pass in a mask of changes.
-   */
-  read_themes (dialog);
+  /* There is no way to know what changed, so we just check it all */
+  update_settings_from_gconf ();
+  gnome_theme_details_update_from_gconf ();
 }
 
 static void
 icon_key_changed (GConfClient *client,
-		      guint        cnxn_id,
-		      GConfEntry  *entry,
-		      gpointer     user_data)
+		  guint        cnxn_id,
+		  GConfEntry  *entry,
+		  gpointer     user_data)
 {
   if (strcmp (entry->key, ICON_THEME_KEY))
     return;
 
-  read_themes ((GladeXML *)user_data);
+  update_settings_from_gconf ();
+  gnome_theme_details_update_from_gconf ();
 }
 
+/* FIXME: We want a more sophisticated theme_changed func sometime */
 static void
 theme_changed_func (gpointer uri,
 		    gpointer user_data)
 {
-  read_themes ((GladeXML *)user_data);
+  GladeXML *dialog;
+
+  dialog = gnome_theme_manager_get_theme_dialog ();
+
+  update_themes_from_disk ((GladeXML *)user_data);
+  gnome_theme_details_reread_themes_from_disk ();
+  gtk_widget_grab_focus (WID ("meta_theme_treeview"));
 }
 
-static gint
-sort_func (GtkTreeModel *model,
-	   GtkTreeIter  *a,
-	   GtkTreeIter  *b,
-	   gpointer      user_data)
+static void
+cb_dialog_response (GtkDialog *dialog, gint response_id)
+{
+  if (response_id == GTK_RESPONSE_HELP)
+    capplet_help (GTK_WINDOW (dialog), "wgoscustdesk.xml", "goscustdesk-12");
+  else
+    gtk_main_quit ();
+}
+
+static void
+setup_meta_tree_view (GtkTreeView *tree_view,
+		      GCallback    changed_callback,
+		      GladeXML    *dialog)
+{
+  GtkTreeModel *model;
+  GtkTreeSelection *selection;
+  GtkCellRenderer *renderer;
+
+  renderer = g_object_new (GTK_TYPE_CELL_RENDERER_PIXBUF,
+			   "xpad", 4,
+			   "ypad", 4,
+			   NULL);
+
+  gtk_tree_view_insert_column_with_attributes (tree_view,
+ 					       -1, NULL,
+ 					       renderer,
+ 					       "pixbuf", META_THEME_PIXBUF_COLUMN,
+ 					       NULL);
+  renderer = gtk_cell_renderer_text_new ();
+  gtk_tree_view_insert_column_with_attributes (tree_view,
+ 					       -1, NULL,
+ 					       renderer,
+ 					       "markup", META_THEME_NAME_COLUMN,
+ 					       NULL);
+
+  model = (GtkTreeModel *) gtk_list_store_new (META_N_COLUMNS,
+					       G_TYPE_STRING,    /* META_THEME_NAME_COLUMN   */
+					       G_TYPE_STRING,    /* META_THEME_ID_COLUMN     */
+					       G_TYPE_UINT,      /* META_THEME_FLAG_COLUMN   */
+					       GDK_TYPE_PIXBUF); /* META_THEME_PIXBUF_COLUMN */
+  gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (model), 0, gnome_theme_manager_tree_sort_func, NULL, NULL);
+  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (model), 0, GTK_SORT_ASCENDING);
+  gtk_tree_view_set_model (tree_view, model);
+  selection = gtk_tree_view_get_selection (tree_view);
+  gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
+  g_signal_connect (G_OBJECT (selection), "changed", changed_callback, dialog);
+}
+
+static void
+setup_dialog (GladeXML *dialog)
+{
+  GConfClient *client;
+  GtkWidget *parent, *widget;
+  GnomeWindowManager *window_manager;
+  GtkSizeGroup *size_group;
+
+  client = gconf_client_get_default ();
+  window_manager = gnome_wm_manager_get_current (gdk_display_get_default_screen (gdk_display_get_default ()));
+  parent = WID ("theme_dialog");
+
+  size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
+  gtk_size_group_add_widget (size_group, WID ("meta_theme_details_button"));
+  gtk_size_group_add_widget (size_group, WID ("meta_theme_install_button"));
+  gtk_size_group_add_widget (size_group, WID ("meta_theme_save_button"));
+  gtk_size_group_add_widget (size_group, WID ("meta_theme_font1_button"));
+  gtk_size_group_add_widget (size_group, WID ("meta_theme_background1_button"));
+  gtk_size_group_add_widget (size_group, WID ("meta_theme_font2_button"));
+  gtk_size_group_add_widget (size_group, WID ("meta_theme_background2_button"));
+  g_object_unref (size_group);
+
+  g_signal_connect (G_OBJECT (WID ("meta_theme_details_button")), "clicked", gnome_theme_details_show, NULL);
+
+
+  setup_meta_tree_view (GTK_TREE_VIEW (WID ("meta_theme_treeview")),
+			(GCallback) meta_theme_selection_changed,
+			dialog);
+
+  gconf_client_add_dir (client, "/desktop/gnome/interface", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+
+  gconf_client_notify_add (client,
+			   GTK_THEME_KEY,
+			   (GConfClientNotifyFunc) &gtk_theme_key_changed,
+			   dialog, NULL, NULL);
+  gconf_client_notify_add (client,
+			   ICON_THEME_KEY,
+			   (GConfClientNotifyFunc) &icon_key_changed,
+			   dialog, NULL, NULL);
+
+  g_signal_connect (G_OBJECT (window_manager), "settings_changed", (GCallback) window_settings_changed, dialog);
+  update_themes_from_disk (dialog);
+  gtk_widget_grab_focus (WID ("meta_theme_treeview"));
+  gnome_theme_info_register_theme_change (theme_changed_func, dialog);
+
+  /* gtk themes */
+  widget = WID ("control_install_button");
+  g_signal_connect_swapped (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_installer_run), parent);
+  widget = WID ("control_manage_button");
+  g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_manager_show_manage_themes), dialog);
+
+  /* window manager themes */
+  widget = WID ("window_install_button");
+  g_signal_connect_swapped (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_installer_run), parent);
+  widget = WID ("window_manage_button");
+  g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_manager_window_show_manage_themes), dialog);
+
+  /* icon themes */
+  widget = WID ("icon_install_button");
+  g_signal_connect_swapped (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_installer_run), parent);
+  widget = WID ("icon_manage_button");
+  g_signal_connect (G_OBJECT (widget), "clicked",G_CALLBACK (gnome_theme_manager_show_manage_themes), dialog);
+
+
+
+/*
+  g_signal_connect (G_OBJECT (WID ("install_dialog")), "response",
+		    G_CALLBACK (install_dialog_response), dialog);
+  */
+
+  g_signal_connect (G_OBJECT (parent), "response", G_CALLBACK (cb_dialog_response), NULL);
+
+  gtk_drag_dest_set (parent, GTK_DEST_DEFAULT_ALL,
+		     drop_types, n_drop_types,
+		     GDK_ACTION_COPY | GDK_ACTION_LINK | GDK_ACTION_MOVE);
+  g_signal_connect (G_OBJECT (parent), "drag-motion", G_CALLBACK (gnome_theme_manager_drag_motion_cb), NULL);
+  g_signal_connect (G_OBJECT (parent), "drag-leave", G_CALLBACK (gnome_theme_manager_drag_leave_cb), NULL);
+  g_signal_connect (G_OBJECT (parent), "drag-data-received",G_CALLBACK (gnome_theme_manager_drag_data_received_cb), NULL);
+
+  capplet_set_icon (parent, "gnome-ccthemes.png");
+  gtk_widget_show (parent);
+}
+
+/* Non static fucntions */
+GladeXML *
+gnome_theme_manager_get_theme_dialog (void)
+{
+  static GladeXML *dialog = NULL;
+
+  if (dialog == NULL)
+    dialog = glade_xml_new (GLADEDIR "/theme-properties.glade", NULL, NULL);
+
+  return dialog;
+}
+
+gint
+gnome_theme_manager_tree_sort_func (GtkTreeModel *model,
+				    GtkTreeIter  *a,
+				    GtkTreeIter  *b,
+				    gpointer      user_data)
 {
   gchar *a_str = NULL;
   gchar *b_str = NULL;
-  gboolean a_default = FALSE;
-  gboolean b_default = FALSE;
+  guint a_default = FALSE;
+  guint b_default = FALSE;
   gint retval;
 
   gtk_tree_model_get (model, a,
-		      THEME_NAME_COLUMN, &a_str,
-		      DEFAULT_THEME_COLUMN, &a_default,
+		      META_THEME_NAME_COLUMN, &a_str,
+		      META_THEME_FLAG_COLUMN, &a_default,
 		      -1);
   gtk_tree_model_get (model, b,
-		      THEME_NAME_COLUMN, &b_str,
-		      DEFAULT_THEME_COLUMN, &b_default,
+		      META_THEME_NAME_COLUMN, &b_str,
+		      META_THEME_FLAG_COLUMN, &b_default,
 		      -1);
 
   if (a_str == NULL) a_str = g_strdup ("");
   if (b_str == NULL) b_str = g_strdup ("");
 
-  if (a_default)
+  if (a_default & THEME_FLAG_DEFAULT)
     retval = -1;
-  else if (b_default)
+  else if (b_default & THEME_FLAG_DEFAULT)
     retval = 1;
   else
     retval = g_utf8_collate (a_str, b_str);
@@ -743,87 +881,9 @@ sort_func (GtkTreeModel *model,
   return retval;
 }
 
-/* Show the nautilus themes window */
-static void
-window_show_manage_themes (GtkWidget *button, gpointer data)
-{
-	gchar *path, *command;
-	GnomeVFSURI *uri;
-	GnomeWindowManager *wm;
-	
-	wm = gnome_wm_manager_get_current (gdk_display_get_default_screen (gdk_display_get_default ()));
-	
-	path = gnome_window_manager_get_user_theme_folder (wm);
-	g_object_unref (G_OBJECT (wm));
-
-	uri = gnome_vfs_uri_new (path);
-
-	if (!gnome_vfs_uri_exists (uri)) {
-		/* Create the directory */
-		gnome_vfs_make_directory_for_uri (uri, 0775);
-	}
-	gnome_vfs_uri_unref (uri);
-
-
-	command = g_strdup_printf ("nautilus --no-desktop %s", path);
-	g_free (path);
-
-	g_spawn_command_line_async (command, NULL);
-	g_free (command);
-}
-
-
-static void
-show_install_dialog (GtkWidget *button, gpointer parent)
-{
-  gnome_theme_installer_run (parent, NULL);
-}
-/* Callback issued during drag movements */
-
-static gboolean
-drag_motion_cb (GtkWidget *widget, GdkDragContext *context,
-		gint x, gint y, guint time, gpointer data)
-{
-	return FALSE;
-}
-
-/* Callback issued during drag leaves */
-
-static void
-drag_leave_cb (GtkWidget *widget, GdkDragContext *context,
-	       guint time, gpointer data)
-{
-	gtk_widget_queue_draw (widget);
-}
-
-/* Callback issued on actual drops. Attempts to load the file dropped. */
-static void
-drag_data_received_cb (GtkWidget *widget, GdkDragContext *context,
-		       gint x, gint y,
-		       GtkSelectionData *selection_data,
-		       guint info, guint time, gpointer data)
-{
-	GList *uris;
-	gchar *filename = NULL;
-
-	if (!(info == TARGET_URI_LIST || info == TARGET_NS_URL))
-		return;
-
-	uris = gnome_vfs_uri_list_parse ((gchar *) selection_data->data);
-	if (uris != NULL && uris->data != NULL) {
-		GnomeVFSURI *uri = (GnomeVFSURI *) uris->data;
-		filename = gnome_vfs_unescape_string (
-			gnome_vfs_uri_get_path (uri), G_DIR_SEPARATOR_S);
-		gnome_vfs_uri_list_unref (uris);
-	}
-
-	gnome_theme_installer_run (widget, filename);
-	g_free (filename);
-}
-
 /* Starts nautilus on the themes directory*/
-static void
-show_manage_themes (GtkWidget *button, gpointer data)
+void
+gnome_theme_manager_show_manage_themes (GtkWidget *button, gpointer data)
 {
 	gchar *path, *command;
 	GnomeVFSURI *uri;
@@ -844,171 +904,89 @@ show_manage_themes (GtkWidget *button, gpointer data)
 	g_free (command);
 }
 
-static void
-cb_dialog_response (GtkDialog *dialog, gint response_id)
+/* Show the nautilus themes window */
+void
+gnome_theme_manager_window_show_manage_themes (GtkWidget *button, gpointer data)
 {
-	if (response_id == GTK_RESPONSE_HELP)
-		capplet_help (GTK_WINDOW (dialog),
-			"wgoscustdesk.xml",
-			"goscustdesk-12");
-	else
-		gtk_main_quit ();
+	gchar *path, *command;
+	GnomeVFSURI *uri;
+	GnomeWindowManager *wm;
+
+	wm = gnome_wm_manager_get_current (gdk_display_get_default_screen (gdk_display_get_default ()));
+
+	path = gnome_window_manager_get_user_theme_folder (wm);
+	g_object_unref (G_OBJECT (wm));
+
+	uri = gnome_vfs_uri_new (path);
+
+	if (!gnome_vfs_uri_exists (uri)) {
+		/* Create the directory */
+		gnome_vfs_make_directory_for_uri (uri, 0775);
+	}
+	gnome_vfs_uri_unref (uri);
+
+
+	command = g_strdup_printf ("nautilus --no-desktop %s", path);
+	g_free (path);
+
+	g_spawn_command_line_async (command, NULL);
+	g_free (command);
 }
 
-static void
-setup_tree_view (GtkTreeView *tree_view,
-		 GCallback    changed_callback,
-		 GladeXML    *dialog)
+/* Callback issued during drag movements */
+gboolean
+gnome_theme_manager_drag_motion_cb (GtkWidget *widget, GdkDragContext *context,
+				    gint x, gint y, guint time, gpointer data)
 {
-  GtkTreeModel *model;
-  GtkTreeSelection *selection;
-  GtkCellRenderer *renderer;
-
-  renderer = g_object_new (GTK_TYPE_CELL_RENDERER_PIXBUF,
-			   "xpad", 4,
-			   "ypad", 4,
-			   NULL);
-			   
-
-  gtk_tree_view_insert_column_with_attributes (tree_view,
- 					       -1, NULL,
- 					       renderer,
- 					       "pixbuf", PIXBUF_COLUMN,
- 					       NULL);
-  renderer = gtk_cell_renderer_text_new ();
-  gtk_tree_view_insert_column_with_attributes (tree_view,
- 					       -1, NULL,
- 					       renderer,
- 					       "markup", THEME_NAME_COLUMN,
- 					       NULL);
-
-  model = (GtkTreeModel *) gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_STRING, GDK_TYPE_PIXBUF, G_TYPE_BOOLEAN);
-  gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (model), 0, sort_func, NULL, NULL);
-  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (model), 0, GTK_SORT_ASCENDING);
-  gtk_tree_view_set_model (tree_view, model);
-  selection = gtk_tree_view_get_selection (tree_view);
-  gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
-  g_signal_connect (G_OBJECT (selection), "changed", changed_callback, dialog);
+	return FALSE;
 }
 
-
-static void
-setup_dialog (GladeXML *dialog)
+/* Callback issued during drag leaves */
+void
+gnome_theme_manager_drag_leave_cb (GtkWidget *widget, GdkDragContext *context,
+	       guint time, gpointer data)
 {
-  GConfClient *client;
-  GtkWidget *parent, *widget;
-  GnomeWindowManager *window_manager;
-  GtkSizeGroup *size_group;
-  
-  client = gconf_client_get_default ();
-  window_manager = gnome_wm_manager_get_current (gdk_display_get_default_screen (gdk_display_get_default ()));
-  parent = WID ("theme_dialog");
-
-  size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-  gtk_size_group_add_widget (size_group, WID ("meta_theme_install_button"));
-  gtk_size_group_add_widget (size_group, WID ("meta_theme_save_button"));
-  g_object_unref (size_group);
-
-  
-  size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-  gtk_size_group_add_widget (size_group, WID ("meta_theme_font1_button"));
-  gtk_size_group_add_widget (size_group, WID ("meta_theme_background1_button"));
-  gtk_size_group_add_widget (size_group, WID ("meta_theme_font2_button"));
-  gtk_size_group_add_widget (size_group, WID ("meta_theme_background2_button"));
-  g_object_unref (size_group);
-
-
-  setup_tree_view (GTK_TREE_VIEW (WID ("meta_theme_treeview")),
-  		   (GCallback) meta_theme_selection_changed,
-		   dialog);
-  setup_tree_view (GTK_TREE_VIEW (WID ("control_theme_treeview")),
-  		   (GCallback) gtk_theme_selection_changed,
-		   dialog);
-  setup_tree_view (GTK_TREE_VIEW (WID ("window_theme_treeview")),
-  		   (GCallback) window_theme_selection_changed,
-		   dialog);
-  setup_tree_view (GTK_TREE_VIEW (WID ("icon_theme_treeview")),
-  		   (GCallback) icon_theme_selection_changed,
-		   dialog);
-
-  gconf_client_add_dir (client, "/desktop/gnome/interface", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
-
-  gconf_client_notify_add (client,
-			   GTK_THEME_KEY,
-			   (GConfClientNotifyFunc) &theme_key_changed,
-			   dialog, NULL, NULL);
-  gconf_client_notify_add (client,
-			   ICON_THEME_KEY,
-			   (GConfClientNotifyFunc) &icon_key_changed,
-			   dialog, NULL, NULL);
-
-  g_signal_connect (G_OBJECT (window_manager), "settings_changed", (GCallback)window_settings_changed, dialog);
-  read_themes (dialog);
-
-  gnome_theme_info_register_theme_change (theme_changed_func, dialog);
-
-  /* gtk themes */
-  widget = WID ("control_install_button");
-  g_signal_connect (G_OBJECT (widget), "clicked",
-		    G_CALLBACK (show_install_dialog), parent);
-  widget = WID ("control_manage_button");
-  g_signal_connect (G_OBJECT (widget), "clicked",
-		    G_CALLBACK (show_manage_themes), dialog);
-
-  /* window manager themes */
-  widget = WID ("window_install_button");
-  g_signal_connect (G_OBJECT (widget), "clicked",
-		    G_CALLBACK (show_install_dialog), parent);
-  widget = WID ("window_manage_button");
-  g_signal_connect (G_OBJECT (widget), "clicked",
-		    G_CALLBACK (window_show_manage_themes), dialog);
-
-  /* icon themes */
-  widget = WID ("icon_install_button");
-  g_signal_connect (G_OBJECT (widget), "clicked",
-		    G_CALLBACK (show_install_dialog), parent);
-  widget = WID ("icon_manage_button");
-  g_signal_connect (G_OBJECT (widget), "clicked",
-		    G_CALLBACK (show_manage_themes), dialog);
-
-
-
-/*
-  g_signal_connect (G_OBJECT (WID ("install_dialog")), "response",
-		    G_CALLBACK (install_dialog_response), dialog);
-  */
-
-  g_signal_connect (G_OBJECT (parent),
-		    "response",
-		    G_CALLBACK (cb_dialog_response), NULL);
-
-  gtk_drag_dest_set (parent, GTK_DEST_DEFAULT_ALL,
-		     drop_types, n_drop_types,
-		     GDK_ACTION_COPY | GDK_ACTION_LINK | GDK_ACTION_MOVE);
-
-  g_signal_connect (G_OBJECT (parent), "drag-motion",
-		    G_CALLBACK (drag_motion_cb), NULL);
-  g_signal_connect (G_OBJECT (parent), "drag-leave",
-		    G_CALLBACK (drag_leave_cb), NULL);
-  g_signal_connect (G_OBJECT (parent), "drag-data-received",
-		    G_CALLBACK (drag_data_received_cb),
-		    dialog);
-
-  capplet_set_icon (parent, "gnome-ccthemes.png");
-  gtk_widget_show (parent);
+	gtk_widget_queue_draw (widget);
 }
+
+/* Callback issued on actual drops. Attempts to load the file dropped. */
+void
+gnome_theme_manager_drag_data_received_cb (GtkWidget *widget, GdkDragContext *context,
+					   gint x, gint y,
+					   GtkSelectionData *selection_data,
+					   guint info, guint time, gpointer data)
+{
+	GList *uris;
+	gchar *filename = NULL;
+
+	if (!(info == TARGET_URI_LIST || info == TARGET_NS_URL))
+		return;
+
+	uris = gnome_vfs_uri_list_parse ((gchar *) selection_data->data);
+	if (uris != NULL && uris->data != NULL) {
+		GnomeVFSURI *uri = (GnomeVFSURI *) uris->data;
+		filename = gnome_vfs_unescape_string (
+			gnome_vfs_uri_get_path (uri), G_DIR_SEPARATOR_S);
+		gnome_vfs_uri_list_unref (uris);
+	}
+
+	gnome_theme_installer_run (widget, filename);
+	g_free (filename);
+}
+
 
 int
 main (int argc, char *argv[])
 {
   GladeXML *dialog;
 
+  /* We need to do this before we initialize anything else */
+  theme_thumbnail_factory_init (argc, argv);
+
   bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
 
-  setup_theme_thumbnail_factory (argc, argv);
-  
   gnome_program_init ("gnome-theme-properties", VERSION,
 		      LIBGNOMEUI_MODULE, argc, argv,
 		      GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
@@ -1016,9 +994,10 @@ main (int argc, char *argv[])
 
   gnome_wm_manager_init ();
   activate_settings_daemon ();
-  dialog = create_dialog ();
 
+  dialog = gnome_theme_manager_get_theme_dialog ();
   setup_dialog (dialog);
+
   gtk_main ();
 
   return 0;

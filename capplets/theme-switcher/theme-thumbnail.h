@@ -14,7 +14,7 @@ void       generate_theme_thumbnail_async (GnomeThemeMetaInfo *meta_theme_info,
 					   ThemeThumbnailFunc  func,
 					   gpointer            data,
 					   GDestroyNotify      destroy);
-void       setup_theme_thumbnail_factory  (int                 argc,
+void       theme_thumbnail_factory_init   (int                 argc,
 					   char               *argv[]);
 
 

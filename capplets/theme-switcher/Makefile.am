@@ -7,6 +7,9 @@ gnome_theme_manager_LDADD = 						\
 
 gnome_theme_manager_SOURCES =	\
 	gnome-theme-manager.c	\
+	gnome-theme-manager.h	\
+	gnome-theme-details.c	\
+	gnome-theme-details.h	\
 	theme-thumbnail.c	\
 	theme-thumbnail.h	\
 	gnome-theme-installer.c	\

@@ -5,6 +5,7 @@
 #include <metacity-private/theme-parser.h>
 #include <metacity-private/preview-widget.h>
 #include <signal.h>
+#include <errno.h>
 
 /* We have to #undef this as metacity #defines these. */
 #undef _
@@ -33,18 +34,17 @@ typedef struct
 } ThemeThumbnailAsyncData;
 
 
-
 GHashTable *theme_hash = NULL;
-
 ThemeThumbnailAsyncData async_data;
+
 
 /* Protocol */
 
-/* Our protocol is pretty simple.  The parent process will write three strings
- * (separated by a '\000') They are the widget theme, the wm theme, and the icon
- * theme.  Then, it will wait for the child to write back the data.  It expects
- * ICON_SIZE_WIDTH * ICON_SIZE_HEIGHT * 4 bytes of information.  After that, the
- * child is ready for the next theme to render.
+/* Our protocol is pretty simple.  The parent process will write four strings
+ * (separated by a '\000') They are the widget theme, the wm theme, the icon
+ * theme, and the font string.  Then, it will wait for the child to write back
+ * the data.  The parent expects ICON_SIZE_WIDTH * ICON_SIZE_HEIGHT * 4 bytes of
+ * information.  After that, the child is ready for the next theme to render.
  */
 
 enum
@@ -401,15 +401,22 @@ message_from_child (GIOChannel   *source,
 	  g_object_unref (pixbuf);
 
  	  (* async_data.func) (scaled_pixbuf, async_data.user_data);
+	  if (async_data.destroy)
+	    (* async_data.destroy) (async_data.user_data);
 
+	  /* Clean up async_data */
+	  g_free (async_data.meta_theme_name);
 	  g_source_remove (async_data.watch_id);
 	  g_io_channel_unref (async_data.channel);
-	  async_data.channel = NULL;
-	  if (async_data.destroy)
-	    (* async_data.destroy) (async_data.data);
-	  g_free (async_data.meta_theme_name);
+
+	  /* reset async_data */
 	  async_data.meta_theme_name = NULL;
+	  async_data.channel = NULL;
+	  async_data.func = NULL;
+	  async_data.user_data = NULL;
+	  async_data.destroy = NULL;
 	  async_data.set = FALSE;
+	  g_byte_array_set_size (async_data.data, 0);
 	}
       return TRUE;
     case G_IO_STATUS_AGAIN:
@@ -432,7 +439,7 @@ generate_theme_thumbnail (GnomeThemeMetaInfo *meta_theme_info)
   GdkPixbuf *pixbuf = NULL;
   gint i, rowstride;
   char *pixels;
-
+  gboolean write_bytes;
 
   g_return_val_if_fail (async_data.set == FALSE, NULL);
 
@@ -443,7 +450,7 @@ generate_theme_thumbnail (GnomeThemeMetaInfo *meta_theme_info)
     }
 
   pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, ICON_SIZE_WIDTH, ICON_SIZE_HEIGHT);
-  write (pipe_to_factory_fd[1], meta_theme_info->gtk_theme_name, strlen (meta_theme_info->gtk_theme_name) + 1);
+  write_bytes = write (pipe_to_factory_fd[1], meta_theme_info->gtk_theme_name, strlen (meta_theme_info->gtk_theme_name) + 1);
   write (pipe_to_factory_fd[1], meta_theme_info->metacity_theme_name, strlen (meta_theme_info->metacity_theme_name) + 1);
   write (pipe_to_factory_fd[1], meta_theme_info->icon_theme_name, strlen (meta_theme_info->icon_theme_name) + 1);
   if (meta_theme_info->application_font == NULL)
@@ -483,20 +490,22 @@ generate_theme_thumbnail_async (GnomeThemeMetaInfo *meta_theme_info,
 	(* destroy) (user_data);
       return;
     }
-  
-  async_data.channel = g_io_channel_unix_new (pipe_from_factory_fd[0]);
 
-  g_io_channel_set_flags (async_data.channel, g_io_channel_get_flags (async_data.channel) |
-			  G_IO_FLAG_NONBLOCK, NULL);
-  g_io_channel_set_encoding (async_data.channel, NULL, NULL);
-  async_data.watch_id = g_io_add_watch (async_data.channel, G_IO_IN | G_IO_HUP, message_from_child, NULL);
+  if (async_data.channel == NULL)
+    {
+      async_data.channel = g_io_channel_unix_new (pipe_from_factory_fd[0]);
+      g_io_channel_set_flags (async_data.channel, g_io_channel_get_flags (async_data.channel) |
+			      G_IO_FLAG_NONBLOCK, NULL);
+      g_io_channel_set_encoding (async_data.channel, NULL, NULL);
+      async_data.watch_id = g_io_add_watch (async_data.channel, G_IO_IN | G_IO_HUP, message_from_child, NULL);
+    }
+
 
   async_data.set = TRUE;
   async_data.meta_theme_name = g_strdup (meta_theme_info->name);
   async_data.func = func;
   async_data.user_data = user_data;
   async_data.destroy = destroy;
-
 
   write (pipe_to_factory_fd[1], meta_theme_info->gtk_theme_name, strlen (meta_theme_info->gtk_theme_name) + 1);
   write (pipe_to_factory_fd[1], meta_theme_info->metacity_theme_name, strlen (meta_theme_info->metacity_theme_name) + 1);
@@ -508,7 +517,7 @@ generate_theme_thumbnail_async (GnomeThemeMetaInfo *meta_theme_info,
 }
 
 void
-setup_theme_thumbnail_factory (int argc, char *argv[])
+theme_thumbnail_factory_init (int argc, char *argv[])
 {
   pipe (pipe_to_factory_fd);
   pipe (pipe_from_factory_fd);
@@ -541,6 +550,8 @@ setup_theme_thumbnail_factory (int argc, char *argv[])
       gtk_main ();
       _exit (0);
     }
+
+  g_assert (child_pid > 0);
 
   /* Parent */
   close (pipe_to_factory_fd[0]);
