@@ -9,18 +9,23 @@ INCLUDES = 			\
 	-DLOCATION_DIR=\""$(datadir)/hcm/default"\"	\
 	$(XML_CFLAGS)
 
-bin_PROGRAMS = archiver
+bin_PROGRAMS = helix-archiver
+lib_LIBRARIES = libhelix_archiver.a
 
-archiver_SOURCES = \
-	main.c						\
+libhelix_archiver_a_SOURCES = \
 	archive.c	archive.h			\
 	location.c	location.h			\
 	config-log.c	config-log.h			\
 	backend-list.c	backend-list.h			\
 	util.c		util.h
 
-archiver_LDADD = \
+helix_archiver_SOURCES = \
+	main.c
+
+helix_archiver_LDADD = \
 	$(GNOME_LIBDIR)					\
 	$(GNOMEUI_LIBS)					\
 	$(INTLLIBS)					\
-	$(GNOME_XML_LIB)
+	$(GNOME_XML_LIB)				\
+	helix_archiver.a
+
