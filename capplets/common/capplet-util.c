@@ -303,7 +303,7 @@ capplet_help (GtkWindow *parent, char const *helpfile, char const *section)
 	g_return_if_fail (section != NULL);
 
 	gnome_help_display_desktop (NULL,
-		"control-center-manual",
+		"user-guide",
 		helpfile, section, &error);
 	if (error) {
 		GtkWidget *dialog;

@@ -32,8 +32,8 @@ cb_dialog_response (GtkDialog *dialog, gint response_id)
 {
 	if (response_id == GTK_RESPONSE_HELP)
 		capplet_help (GTK_WINDOW (dialog),
-			"config-font.xml",
-			"CONFIGURATION");
+			"wgoscustdesk.xml",
+			"goscustdesk-38");
 	else
 		gtk_main_quit ();
 }

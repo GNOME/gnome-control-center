@@ -362,8 +362,8 @@ install_dialog_response (GtkWidget *widget, int response_id, gpointer data)
 	
 	if (response_id == GTK_RESPONSE_HELP) {
 		capplet_help (GTK_WINDOW (widget),
-			"config-themes.xml",
-			"config-theme-add");
+			"wgoscustdesk.xml",
+			"goscustdesk-12");
 		return;
 	}
 
@@ -413,8 +413,8 @@ cb_dialog_response (GtkDialog *dialog, gint response_id)
 {
 	if (response_id == GTK_RESPONSE_HELP)
 		capplet_help (GTK_WINDOW (dialog),
-			"config-themes.xml",
-			"CONFIGURATION");
+			"wgoscustdesk.xml",
+			"goscustdesk-12");
 	else
 		gtk_main_quit ();
 }

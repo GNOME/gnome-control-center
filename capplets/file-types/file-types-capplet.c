@@ -180,8 +180,8 @@ cb_file_type_dialog_response (GtkDialog *dialog, gint response_id)
 {
 	if (response_id == GTK_RESPONSE_HELP)
 		capplet_help (GTK_WINDOW (dialog),
-			"config-file-type.xml",
-			"CONFIGURATION");
+			"wgoscustlookandfeel.xml",
+			"goscustdoc-7");
 	else
 		gtk_main_quit ();
 }

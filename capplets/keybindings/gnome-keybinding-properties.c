@@ -807,6 +807,17 @@ start_editing_cb (GtkTreeView    *tree_view,
 }
 
 static void
+cb_dialog_response (GtkWidget *widget, gint response_id, gpointer data)
+{
+	if (response_id == GTK_RESPONSE_HELP)
+		capplet_help (GTK_WINDOW (widget),
+			      "wgoscustdesk.xml",
+			      "goscustdesk-39");
+	else
+		gtk_main_quit ();
+}
+
+static void
 setup_dialog (GladeXML *dialog)
 {
   GConfClient *client;
@@ -896,7 +907,7 @@ setup_dialog (GladeXML *dialog)
   g_object_unref (icon_pixbuf);
   gtk_widget_show (widget);
 
-  g_signal_connect (G_OBJECT (widget), "response", gtk_main_quit, NULL);
+  g_signal_connect (G_OBJECT (widget), "response", G_CALLBACK(cb_dialog_response), NULL);
   g_signal_connect (G_OBJECT (widget), "close", gtk_main_quit, NULL);
 }
 

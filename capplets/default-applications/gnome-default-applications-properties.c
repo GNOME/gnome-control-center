@@ -542,8 +542,8 @@ dialog_response (GtkDialog *widget,
 {
 	if (response_id == GTK_RESPONSE_HELP)
 		capplet_help (GTK_WINDOW (widget),
-			"config-default-apps.xml",
-			"CONFIGURATION");
+			"wgoscustlookandfeel.xml",
+			"goscustdoc-2");
 	else
 		gtk_main_quit ();
 }
