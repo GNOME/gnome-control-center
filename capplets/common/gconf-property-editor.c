@@ -311,9 +311,13 @@ peditor_string_value_changed (GConfEngine *engine, guint cnxn_id, GConfEntry *en
 }
 
 static void
-peditor_string_widget_changed (GConfPropertyEditor *peditor, GtkEntry *entry)
+peditor_string_widget_changed (GConfPropertyEditor *peditor)
 {
 	GConfValue *value;
+	GtkEntry *entry;
+
+	/* I do this so that we don't have to deal with multiple callback signatures */
+	entry = g_object_get_data (peditor, "entry");
 
 	gconf_change_set_set_string (peditor->p->changeset, peditor->p->key, gtk_entry_get_text (entry));
 	gconf_change_set_check_value (peditor->p->changeset, peditor->p->key, &value);
@@ -334,11 +338,7 @@ gconf_peditor_new_string (GConfChangeSet *changeset, gchar *key, GtkWidget *entr
 				"object", entry,
 				NULL);
 
-	g_signal_connect_swapped (G_OBJECT (entry), "insert_at_cursor",
-				  (GCallback) peditor_string_widget_changed, peditor);
-	g_signal_connect_swapped (G_OBJECT (entry), "delete_from_cursor",
-				  (GCallback) peditor_string_widget_changed, peditor);
-	g_signal_connect_swapped (G_OBJECT (entry), "paste_clipboard",
+	g_signal_connect_swapped (G_OBJECT (entry), "changed",
 				  (GCallback) peditor_string_widget_changed, peditor);
 	g_object_set_data (peditor, "entry", entry);
 
@@ -534,17 +534,19 @@ gconf_peditor_new_select_radio (GConfChangeSet *changeset, gchar *key, GSList *r
 }
 
 static void
-guard_value_changed (GConfEngine *engine, guint cnxn_id, GConfEntry *entry, GtkWidget *widget) 
+guard_value_changed (GConfPropertyEditor *peditor, const gchar *key, const GConfValue *value, GtkWidget *widget) 
 {
-}
-
-static void
-guard_widget_changed (GConfPropertyEditor *peditor, gchar *key, GConfValue *value, GtkWidget *widget) 
-{
+	gtk_widget_set_sensitive (widget, gconf_value_get_bool (value));
 }
 
 void
-peditor_widget_set_guard (GConfPropertyEditor *peditor, GtkWidget *widget, gchar *key)
+gconf_peditor_widget_set_guard (GConfPropertyEditor *peditor, GtkWidget *widget)
 {
+	GConfEngine *engine;
+
+	engine = gconf_engine_get_default ();
+	gtk_widget_set_sensitive (widget, gconf_engine_get_bool (engine, peditor->p->key, NULL));
+
+	g_signal_connect (G_OBJECT (peditor), "value-changed", (GCallback) guard_value_changed, widget);
 }
 

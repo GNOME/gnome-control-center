@@ -76,8 +76,7 @@ GObject *gconf_peditor_new_select_radio (GConfChangeSet      *changeset,
 					 GSList              *radio_group);
 
 void gconf_peditor_widget_set_guard     (GConfPropertyEditor *peditor,
-					 GtkWidget           *widget,
-					 gchar               *key);
+					 GtkWidget           *widget);
 
 G_END_DECLS
 
