@@ -1,3 +1,10 @@
+2001-12-07  Bradford Hovinen  <hovinen@ximian.com>
+
+	* background-properties-capplet.c (main): Remove use of
+	capplet_init, instead do the initialization ourselves (note: this
+	means we are no longer a Bonobo control)
+	(dialog_button_clicked_cb): Implement
+
 2001-10-19  Jakub Steiner <jimmac@ximian.com>
 
 	* background-capplet.png: more clear brush

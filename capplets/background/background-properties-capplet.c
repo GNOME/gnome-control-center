@@ -251,13 +251,60 @@ create_dialog (void)
 	return widget;
 }
 
+static void
+dialog_button_clicked_cb (GnomeDialog *dialog, gint button_number, GConfChangeSet *changeset) 
+{
+	if (button_number == 0)
+		gconf_engine_commit_change_set (gconf_engine_get_default (), changeset, TRUE, NULL);
+	else if (button_number == 1)
+		gnome_dialog_close (dialog);
+}
+
 int
 main (int argc, char **argv) 
 {
-	g_type_init ();
-	glade_init ();
+	GConfChangeSet *changeset;
+	GtkWidget      *widget;
+	GtkWidget      *dialog;
 
-	capplet_init (argc, argv, apply_settings, create_dialog, setup_dialog, get_legacy_settings);	
+	static gboolean apply_only;
+	static gboolean get_legacy;
+	static struct poptOption cap_options[] = {
+		{ "apply", '\0', POPT_ARG_NONE, &apply_only, 0,
+		  N_("Just apply settings and quit"), NULL },
+		{ "init-session-settings", '\0', POPT_ARG_NONE, &apply_only, 0,
+		  N_("Just apply settings and quit"), NULL },
+		{ "get-legacy", '\0', POPT_ARG_NONE, &get_legacy, 0,
+		  N_("Retrieve and store legacy settings"), NULL },
+		{ NULL, '\0', 0, NULL, 0, NULL, NULL }
+	};
+
+	bindtextdomain (PACKAGE, GNOMELOCALEDIR);
+	textdomain (PACKAGE);
+
+	gnome_program_init (argv[0], VERSION, LIBGNOMEUI_MODULE, argc, argv,
+			    GNOME_PARAM_POPT_TABLE, cap_options,
+			    NULL);
+
+	setup_session_mgmt (argv[0]);
+
+	if (apply_only) {
+		apply_settings ();
+	}
+	else if (get_legacy) {
+		get_legacy_settings ();
+	} else {
+		changeset = gconf_change_set_new ();
+		widget = create_dialog ();
+		setup_dialog (widget, changeset);
+
+		dialog = gnome_dialog_new (_("Background properties"), GTK_STOCK_APPLY, GTK_STOCK_CLOSE);
+		g_signal_connect (G_OBJECT (dialog), "clicked", (GCallback) dialog_button_clicked_cb, changeset);
+		gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), widget, TRUE, TRUE, GNOME_PAD_SMALL);
+
+		gtk_main ();
+		gconf_change_set_unref (changeset);
+	}
 
 	return 0;
 }
