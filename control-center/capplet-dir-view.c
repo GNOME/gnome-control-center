@@ -390,6 +390,7 @@ capplet_dir_view_load_dir (CappletDirView *view, CappletDir *dir)
 	GdkBitmap *bitmap;
 	CappletDirEntry *entry;
 	int parents = 0;
+	gchar *title;
 
 	g_return_if_fail (view != NULL);
 	g_return_if_fail (IS_CAPPLET_DIR_VIEW (view));
@@ -404,7 +405,9 @@ capplet_dir_view_load_dir (CappletDirView *view, CappletDir *dir)
 	if (view->impl && view->impl->populate)
 		view->impl->populate (view);
 
-	gtk_window_set_title (GTK_WINDOW (view->app), dir->entry.entry->name);
+	title = g_strdup_printf (_("Gnome Control Center : %s"), dir->entry.entry->name);
+	gtk_window_set_title (GTK_WINDOW (view->app), title);
+	g_free (title);
 
 	menu = gtk_menu_new ();
 

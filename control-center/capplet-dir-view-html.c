@@ -194,6 +194,7 @@ sidebar_populate (CappletDirView *view)
 "<html>"
 "<head>"
 "</head>"
+//"<body bgcolor=\"#AAAAAA\" marginheight=\"0\" marginwidth=\"0\">"
 "<body bgcolor=\"#d9d9d9\" marginheight=\"0\" marginwidth=\"0\">"
 "<table border=\"0\" width=\"100%%\" cellspacing=\"1\" cellpadding=\"4\">"
 "<tr><td colspan=\"3\">&nbsp;</td></tr>"
