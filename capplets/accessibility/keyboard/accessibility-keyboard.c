@@ -28,6 +28,7 @@
 #include <gnome.h>
 #include <gconf/gconf-client.h>
 #include <glade/glade.h>
+#include <X11/Xlib.h>
 #include <X11/Xresource.h>
 #include <math.h>
 
