@@ -982,7 +982,9 @@ nautilus_mime_type_capplet_show_new_extension_window (void)
 				   GNOME_STOCK_BUTTON_CANCEL, NULL);
 	gnome_dialog_set_default (GNOME_DIALOG (dialog), 0);
 	gnome_dialog_set_close (GNOME_DIALOG (dialog), FALSE);
-	label = gtk_label_new (_("Type in the extensions for this mime-type.\nFor example:  .html, .htm"));
+	label = gtk_label_new (_("Type in the extensions for this mime-type (without dot).\n"
+				 "You can enter several extensions seperated by a space,\n"
+				 "for example: html htm"));
 	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
 	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
 	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
