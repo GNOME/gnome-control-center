@@ -1,5 +1,5 @@
 always_built_SUBDIRS = desktop-links mouse-properties \
-	new-screensaver-properties background-properties \
+	new-screensaver-properties new-background-properties \
         theme-switcher sound-properties bell-properties \
 	ui-properties url-properties gnome-edit-properties \
 	session-properties wm-properties keyboard-properties \
