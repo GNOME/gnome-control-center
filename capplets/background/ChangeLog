@@ -1,3 +1,16 @@
+2004-02-24  Rodney Dawes  <dobey@ximian.com>
+
+	* gnome-wp-item.c (gnome_wp_item_get_thumbnail): Add some explanatory
+	comments to bits of the code
+	Fix the ratio calculation to handle images of all sizes (#134541)
+	Don't force tiling of square images
+	Don't do _save_thumbnail () for the custom thumbnails
+	If pixbuf is NULL, copy away bgpixbuf and return that instead
+	* gnome-wp-utils.c (gnome_wp_tile_pixbuf):
+	(gnome_wp_center_pixbuf): Return copied pixbufs
+
+	Fixes #134541
+
 2004-02-17  Rodney Dawes  <dobey@ximian.com>
 
 	* gnome-background-properties.glade: Use untranslated strings for
