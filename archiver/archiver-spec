@@ -8,20 +8,20 @@ Diagram:
 
 	 + toplevel
 	 |-+ Location 1
-	 | |- CCYYMMDD-hhmm-<id>.xml
+	 | |- <id>.xml
 	 | |  .
 	 | |  .
 	 | |  .
 	 | |- metadata.log:
-	 | |  [<id> <date> <time> <backend>         ] ^
-	 | |  [ .                                   ] | Time
-	 | |  [ .                                   ] |
-	 | |  [ .                                   ] |
+	 | |  [<id> <date> <time> <backend>                         ] ^
+	 | |  [ .                                                   ] | Time
+	 | |  [ .                                                   ] |
+	 | |  [ .                                                   ] |
 	 | \- metadata.xml:
-	 |    [...                                  ]
-	 |    [<inherits>location</inherits>        ]
-	 |    [<valid-config>backend</valid-config> ]
-	 |    [...                                  ]
+	 |    [...                                                  ]
+	 |    [<inherits>location</inherits>                        ]
+	 |    [<contains backend-id="backend" type="full|partial"/> ]
+	 |    [...                                                  ]
 	 |-+ Location 2
 	 |   ...
 
@@ -65,7 +65,51 @@ same standards for the archiver as for other backends and hence make
 it a CORBA service, where the tool-specific interface is as described
 above.
 
-3. Future directions
+3. Fine-grained location management
+
+A slight modification of the basic location management system allows
+individual settings to be covered by a location as well as entire
+backends. The contains tag in a location's metadata file contains the
+attribute type, which may either by "full" or "partial". In the former
+case, rollback proceeds as described above. If it is the latter, the
+archiver, upon rolling back or setting configuration for the relevant
+backend in that location, first retrieves the required configuration
+from both the location and its parent using the same algorithm. It
+then uses an XML merging algorithm to combine the two XML files into
+one, allowing the child location's data to override its parent's
+data. This can be accomplished using the same technique as Bonobo uses
+to allow components to override toolbars and menus in the container.
+
+When a child location partially defines the data for a particular
+backend, it must store only those configuration settings that the user
+explicitly changed when updating that backend's configuration under
+that location. If the frontend simply dumped its entire XML snapshot
+to the log, all of the configuration settings would be reflected in
+that snapshot, and under the method indicated above, partial
+containment would be equivalent to full containment. Therefore, when a
+frontend stores its configuration under partial containment, the
+archiver must run a node-for-node comparison between the XML data of
+the parent location (retrieved using the method indicated above) and
+that of the child location. Only those nodes that are different are
+actually stored in the configuration log.
+
+When comparing XML nodes, there must be a way to identify distinct
+nodes for comparison. For example, in a network configuration backend,
+there might be one node for each interface. If, under the parent
+location, the nodes are ordered with interface "eth0" before interface
+"eth1", while under the child location, they are in reverse order, but
+the configuration is otherwise identical, it is not the intention of
+the user that child location should override any configuration data of
+the parent location. Therefore, the best method for comparing XML data
+is to compare each child of a given node in one source to all the
+children of the relevant node in the other source. If any child in the
+other source matches, then the XML node is a duplicate and may be
+thrown out. If there is another node such that the name and attributes
+are the same, but the children are different, then the algorithm
+should be invoked recursively to determine the differences among the
+children. If there is no such node, then the node should be included.
+
+4. Future directions
 
 The metafile log structure may run into scalability problems for
 installations have have been in place for a long time. An alternative
@@ -75,3 +119,4 @@ the case of corruption; such a utility could simply introspect each of
 the XML files in a directory. Provided that each XML file contains
 enough information to create a file entry, which is trivial, recovery
 is assured.
+
