@@ -1,6 +1,7 @@
 #include <config.h>
 #include "capplet-widget.h"
 #include <libgnomeui/gnome-window-icon.h>
+#include <locale.h>
 #include "da.h"
 
 #define THEME_SWITCHER_VERSION "0.1"

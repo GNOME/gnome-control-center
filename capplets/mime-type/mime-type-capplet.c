@@ -11,6 +11,7 @@
 #include <dirent.h>
 #include <regex.h>
 #include <ctype.h>
+#include <locale.h>
 #include "mime-data.h"
 #include "mime-info.h"
 #include "edit-window.h"

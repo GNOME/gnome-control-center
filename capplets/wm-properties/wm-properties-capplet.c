@@ -6,6 +6,7 @@
  */
 #include <ctype.h>
 #include <config.h>
+#include <locale.h>
 #include "wm-properties.h"
 #include "capplet-widget.h"
 #include <gnome.h>

@@ -23,6 +23,7 @@
 #include <gtk/gtk.h>
 #include "capplet-widget.h"
 #include <gnome.h>
+#include <locale.h>
 
 GtkWidget *capplet, *protocol, *combo, *clist;
 
