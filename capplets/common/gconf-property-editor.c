@@ -248,7 +248,8 @@ peditor_boolean_value_changed (GConfEngine *engine, guint cnxn_id, GConfEntry *e
 	tb = g_object_get_data (G_OBJECT (peditor), "toggle-button");
 
 	value = gconf_entry_get_value (entry);
-	if (gtk_toggle_button_get_active (tb) != gconf_value_get_bool (value))
+
+	if (value != NULL && gtk_toggle_button_get_active (tb) != gconf_value_get_bool (value))
 		gtk_toggle_button_set_active (tb, gconf_value_get_bool (value));
 }
 
@@ -297,7 +298,8 @@ peditor_string_value_changed (GConfEngine *engine, guint cnxn_id, GConfEntry *en
 	gtk_entry = g_object_get_data (G_OBJECT (peditor), "entry");
 
 	value = gconf_entry_get_value (entry);
-	if (strcmp (gtk_entry_get_text (gtk_entry), gconf_value_get_string (value))) {
+
+	if (value != NULL && strcmp (gtk_entry_get_text (gtk_entry), gconf_value_get_string (value))) {
 		gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
 		gtk_entry_set_text (gtk_entry, gconf_value_get_string (value));
 	}
@@ -359,12 +361,15 @@ peditor_color_value_changed (GConfEngine *engine, guint cnxn_id, GConfEntry *ent
 
 	cp = g_object_get_data (G_OBJECT (peditor), "cp");
 	value = gconf_entry_get_value (entry);
-	gdk_color_parse (gconf_value_get_string (value), color);
-	gnome_color_picker_get_i16 (cp, &r, &g, &b, &a);
 
-	if (r != color->red || g != color->green || b != color->blue) {
-		gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
-		gnome_color_picker_set_i16 (cp, color->red, color->green, color->blue, 65535);
+	if (value != NULL) {
+		gdk_color_parse (gconf_value_get_string (value), color);
+		gnome_color_picker_get_i16 (cp, &r, &g, &b, &a);
+
+		if (r != color->red || g != color->green || b != color->blue) {
+			gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
+			gnome_color_picker_set_i16 (cp, color->red, color->green, color->blue, 65535);
+		}
 	}
 }
 
@@ -420,10 +425,12 @@ peditor_select_menu_value_changed (GConfEngine *engine, guint cnxn_id, GConfEntr
 	gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
 	value = gconf_entry_get_value (entry);
 
-	option_menu = g_object_get_data (G_OBJECT (peditor), "option-menu");
-	menu = GTK_MENU (gtk_option_menu_get_menu (option_menu));
-	item = g_list_nth (GTK_MENU_SHELL (menu)->children, gconf_value_get_int (value));
-	gtk_menu_item_activate (GTK_MENU_ITEM (item->data));
+	if (value != NULL) {
+		option_menu = g_object_get_data (G_OBJECT (peditor), "option-menu");
+		menu = GTK_MENU (gtk_option_menu_get_menu (option_menu));
+		item = g_list_nth (GTK_MENU_SHELL (menu)->children, gconf_value_get_int (value));
+		gtk_menu_item_activate (GTK_MENU_ITEM (item->data));
+	}
 }
 
 static void
@@ -485,9 +492,11 @@ peditor_select_radio_value_changed (GConfEngine *engine, guint cnxn_id, GConfEnt
 	gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
 	value = gconf_entry_get_value (entry);
 
-	group = g_object_get_data (G_OBJECT (peditor), "group");
-	group = g_slist_nth (group, gconf_value_get_int (value));
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (group->data), TRUE);
+	if (value != NULL) {
+		group = g_object_get_data (G_OBJECT (peditor), "group");
+		group = g_slist_nth (group, gconf_value_get_int (value));
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (group->data), TRUE);
+	}
 }
 
 static void
