@@ -465,12 +465,6 @@ capplet_control_launch (const gchar *capplet_name, gchar *window_title)
 	property_control = bonobo_get_object (oaf_iid, "IDL:Bonobo/PropertyControl:1.0", &ev);
 	g_free (oaf_iid);
 
-	if (BONOBO_EX (&ev) && !strcmp (ev._repo_id, "IDL:Bonobo/Moniker/InterfaceNotFound:1.0")) {
-		/* Capplet is already running in this case */
-		g_free (moniker);
-		return NULL;
-	}
-
 	if (BONOBO_EX (&ev) || property_control == CORBA_OBJECT_NIL) {
 		dialog = gnome_error_dialog ("Could not load the capplet.");
 		gnome_dialog_run_and_close (GNOME_DIALOG (dialog));
