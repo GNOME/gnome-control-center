@@ -10,7 +10,7 @@
 
 #undef GNOMECC_DATA_DIR
 
-#undef PACKAGE
+#undef GETTEXT_PACKAGE
 #undef VERSION
 
 #undef HAVE_ESD
