@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2003-06-28 17:45+0200\n"
-"PO-Revision-Date: 2003-06-28 17:47+0200\n"
+"POT-Creation-Date: 2003-07-04 21:41+0200\n"
+"PO-Revision-Date: 2003-07-04 21:42+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -34,7 +34,7 @@ msgstr ""
 "gälla först nästa gång du loggar in.</i></small>"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:4
-msgid "Assitive Technology Preferences"
+msgid "Assistive Technology Preferences"
 msgstr "Inställningar för hjälpmedelsfunktioner"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:5
@@ -598,7 +598,7 @@ msgstr "Återanrop som frigör egenskapsredigerardata"
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr "Återanrop att utföras då objektdata från egenskapsdata frigörs"
 
-#: capplets/common/gconf-property-editor.c:1523
+#: capplets/common/gconf-property-editor.c:1531
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -611,7 +611,7 @@ msgstr ""
 "Försäkra dig om att den finns och försök igen, eller välj en annan "
 "bakgrundsbild."
 
-#: capplets/common/gconf-property-editor.c:1531
+#: capplets/common/gconf-property-editor.c:1539
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -624,7 +624,7 @@ msgstr ""
 "\n"
 "Välj en annan bild istället."
 
-#: capplets/common/gconf-property-editor.c:1622
+#: capplets/common/gconf-property-editor.c:1630
 msgid "Please select an image."
 msgstr "Välj en bild."
 
@@ -2012,7 +2012,7 @@ msgid "Two"
 msgstr "Två"
 
 #: capplets/theme-switcher/gnome-theme-details.c:372
-#: capplets/theme-switcher/gnome-theme-manager.c:590
+#: capplets/theme-switcher/gnome-theme-manager.c:589
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -2022,17 +2022,17 @@ msgstr ""
 "\"Temainställningar\"-dialog inte installerades korrekt, eller att du inte "
 "har installerat paketet \"gnome-themes\"."
 
-#: capplets/theme-switcher/gnome-theme-manager.c:646
-#: capplets/theme-switcher/gnome-theme-manager.c:706
+#: capplets/theme-switcher/gnome-theme-manager.c:645
+#: capplets/theme-switcher/gnome-theme-manager.c:705
 msgid "Custom theme"
 msgstr "Anpassat tema"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:646
-#: capplets/theme-switcher/gnome-theme-manager.c:706
+#: capplets/theme-switcher/gnome-theme-manager.c:645
+#: capplets/theme-switcher/gnome-theme-manager.c:705
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "Du kan spara detta tema genom att trycka på knappen Spara tema."
 
-#: capplets/theme-switcher/gnome-theme-manager.c:1399
+#: capplets/theme-switcher/gnome-theme-manager.c:1398
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -2424,32 +2424,38 @@ msgstr ""
 "Kan inte skapa katalogen \"%s\".\n"
 "Detta krävs för att möjliggöra ändring av muspekare."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:146
+#: gnome-settings-daemon/gnome-settings-keybindings.c:165
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "Tangentbindningen (%s) har dess åtgärd definierad flera gånger\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:159
+#: gnome-settings-daemon/gnome-settings-keybindings.c:178
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "Tangentbindningen (%s) har dess bindning definierad flera gånger\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:165
+#: gnome-settings-daemon/gnome-settings-keybindings.c:184
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "Tangentbindningen (%s) är ofullständig\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:193
+#: gnome-settings-daemon/gnome-settings-keybindings.c:212
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "Tangentbindningen (%s) är ogiltig\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:281
+#: gnome-settings-daemon/gnome-settings-keybindings.c:248
+#, c-format
+msgid "It seems that another application already has access to key '%d'."
+msgstr ""
+"Det verkar som om ett annat program redan har tillgång till nyckeln \"%d\"."
+
+#: gnome-settings-daemon/gnome-settings-keybindings.c:317
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "Tangentbindningen (%s) används redan\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:357
+#: gnome-settings-daemon/gnome-settings-keybindings.c:393
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2487,7 +2493,7 @@ msgstr "Kunde inte läsa in ljudfilen %s som prov %s"
 msgid "Cannot determine user's home directory"
 msgstr "Kan inte avgöra användarens hemkatalog"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:179
+#: gnome-settings-daemon/gnome-settings-xsettings.c:180
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr ""
@@ -2966,6 +2972,9 @@ msgstr "Huruvida det ska skapas miniatyrbilder för installerade teman"
 msgid "Whether to thumbnail themes"
 msgstr "Huruvida det ska skapas miniatyrbilder för teman"
 
+#~ msgid "Assitive Technology Preferences"
+#~ msgstr "Inställningar för hjälpmedelsfunktioner"
+
 #~ msgid "_Lock screen to enforce typing break"
 #~ msgstr "_Lås skärmen för att tvinga fram paus i skrivandet"
 
@@ -2974,9 +2983,6 @@ msgstr "Huruvida det ska skapas miniatyrbilder för teman"
 
 #~ msgid "Support"
 #~ msgstr "Stöd"
-
-#~ msgid "Assistive Technology Preferences"
-#~ msgstr "Inställningar för hjälpmedelsfunktioner"
 
 #~ msgid "Start these assistive technologies every time you log in."
 #~ msgstr "Starta dessa hjällpmedelsfunktioner varje gång du loggar in."
