@@ -250,13 +250,15 @@ msgstr "Szerkeszt"
 
 #: capplets/mime-type/mime-data.c:449
 msgid "You must enter a mime-type"
-msgstr ""
+msgstr "Egy mime típust kell megadnod"
 
 #: capplets/mime-type/mime-data.c:454
 msgid ""
 "You must add either a regular-expression or\n"
 "a file-name extension"
 msgstr ""
+"Vagy egy reguláris kifejezést, vagy\n"
+"egy fájlnév-kiterjesztést adj meg"
 
 #: capplets/mime-type/mime-data.c:458
 msgid ""
@@ -266,10 +268,15 @@ msgid ""
 "For Example:\n"
 "image/png"
 msgstr ""
+"Kérlek a mime típusodat ebben a formátumban add meg:\n"
+"KATEGÓRIA/TÍPUS\n"
+"\n"
+"Például:\n"
+"image/png"
 
 #: capplets/mime-type/mime-data.c:463
 msgid "This mime-type already exists"
-msgstr ""
+msgstr "Ez a mime típus már létezik"
 
 #: capplets/mime-type/mime-data.c:561
 msgid ""
@@ -278,6 +285,10 @@ msgid ""
 "\n"
 "We will not be able to save the state"
 msgstr ""
+"Nem tudom létrehozni a fájlt\n"
+"~/.gnome/mime-info/user.mime\n"
+"\n"
+"Nem tudjuk elmenteni az állást"
 
 #: capplets/mime-type/mime-info.c:440
 msgid ""
@@ -286,6 +297,10 @@ msgid ""
 "\n"
 "We will not be able to save the state"
 msgstr ""
+"Nem tudom létrehozni a fájlt\n"
+"~/.gnome/mime-info/user.keys\n"
+"\n"
+"Nem tudjuk elmenteni az állást"
 
 #: capplets/mime-type/mime-type-capplet.c:77
 #: capplets/wm-properties/wm-properties-capplet.c:1016
@@ -303,56 +318,55 @@ msgid "Edit..."
 msgstr "Szerkeszt..."
 
 #: capplets/mime-type/new-mime-window.c:20
-#, fuzzy
 msgid "Add Mime Type"
-msgstr "Mime típus: "
+msgstr "Mime típus hozzáadása"
 
 #: capplets/mime-type/new-mime-window.c:21
 msgid ""
 "Add a new Mime Type\n"
 "For example:  image/tiff; text/x-scheme"
 msgstr ""
+"Adj meg egy új mime típust\n"
+"Például: image/tiff; text/x-scheme"
 
 #: capplets/mime-type/new-mime-window.c:26
-#, fuzzy
 msgid "Mime Type:"
 msgstr "Mime típus: "
 
 #: capplets/mime-type/new-mime-window.c:34
-#, fuzzy
 msgid "Extensions"
-msgstr "Kiterjesztés: "
+msgstr "Kiterjesztések"
 
 #: capplets/mime-type/new-mime-window.c:38
 msgid ""
 "Type in the extensions for this mime-type.\n"
 "For example:  .html, .htm"
 msgstr ""
+"Írd be a mime típus kiterjesztését.\n"
+"Például: .html, .htm"
 
 #: capplets/mime-type/new-mime-window.c:45
-#, fuzzy
 msgid "Extension:"
-msgstr "Kiterjesztés: "
+msgstr "Kiterjesztés:"
 
 #: capplets/mime-type/new-mime-window.c:50
-#, fuzzy
 msgid "Regular Expresions"
-msgstr "Elsõ reguláris kifejezés: "
+msgstr "Reguláris kifejezések"
 
 #: capplets/mime-type/new-mime-window.c:54
 msgid ""
 "You can set up two regular expressions here to identify the Mime Type\n"
 "by.  These fields are optional."
 msgstr ""
+"Két reguláris kifejezést adhatsz meg itt, a mime típus meghatározására.\n"
+"Ezek opcionálisak."
 
 #. gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
 #: capplets/mime-type/new-mime-window.c:64
-#, fuzzy
 msgid "First Regular Expression: "
 msgstr "Elsõ reguláris kifejezés: "
 
 #: capplets/mime-type/new-mime-window.c:75
-#, fuzzy
 msgid "Second Regular Expression: "
 msgstr "Második reguláris kifejezés: "
 
@@ -500,15 +514,15 @@ msgstr "Képernyõvédõ bemutató"
 
 #: capplets/session-properties/gsm-client-editor.c:100
 msgid "Order: "
-msgstr ""
+msgstr "Sorrend: "
 
 #: capplets/session-properties/gsm-client-editor.c:110
 msgid "Style: "
-msgstr ""
+msgstr "Stílus: "
 
 #: capplets/session-properties/gsm-client-list.c:30
 msgid "This button sets the start order of the selected programs.\n"
-msgstr ""
+msgstr "Ezek a gombok beállítják a kiválasztott programok sorrendjét.\n"
 
 #: capplets/session-properties/gsm-client-list.c:31
 msgid ""
@@ -518,6 +532,11 @@ msgid ""
 "Trash programs are discarded on logout and can die;\n"
 "Settings programs are always started on every login."
 msgstr ""
+"Ez a gomb állítja be az újraindítás stílusát a kiválasztott programoknál:\n"
+"Normális programok: kilépés után visszatöltõdnek, kilövõdhetnek \n"
+"Respawn programok: nem lövõdhetnek ki \n"
+"Trash programok: kilépéskor elfelejtõdnek, kilövõdhetnek \n"
+"Settings programok: minden belépéskor elindulnak."
 
 #: capplets/session-properties/gsm-client-list.c:36
 msgid ""
@@ -528,22 +547,28 @@ msgid ""
 "Saving programs are saving their session details;\n"
 "Programs which make no contact have Unknown states.\n"
 msgstr ""
+"Ez a gomb a következõ programállapotok között vált:\n"
+"Nem aktív: indításra vár, vagy befejezõdött\n"
+"Induló: épp indul\n"
+"Futó: ez a normális állapot\n"
+"Mentõdõ: a program menti állapotát\n"
+"Nem ismert: nincs kapcsolat a programmal\n"
 
 #: capplets/session-properties/gsm-client-list.c:42
 msgid "This column gives the command used to start a program."
-msgstr ""
+msgstr "Ez az oszlop a program indításához szükséges parancsot adja meg."
 
 #: capplets/session-properties/gsm-client-list.c:132
 msgid "Order"
-msgstr ""
+msgstr "Sorrend"
 
 #: capplets/session-properties/gsm-client-list.c:132
 msgid "Style"
-msgstr ""
+msgstr "Stílus"
 
 #: capplets/session-properties/gsm-client-list.c:132
 msgid "State"
-msgstr ""
+msgstr "Állapot"
 
 #: capplets/session-properties/gsm-client-list.c:132
 msgid "Program"
@@ -551,53 +576,51 @@ msgstr ""
 
 #: capplets/session-properties/gsm-client-row.c:31
 msgid "Inactive"
-msgstr ""
+msgstr "Nem aktív"
 
 #: capplets/session-properties/gsm-client-row.c:32
 msgid "Waiting to start or already finished."
-msgstr ""
+msgstr "Indításra vár, vagy végzett."
 
 #: capplets/session-properties/gsm-client-row.c:34
-#, fuzzy
 msgid "Starting"
-msgstr "Beállítások"
+msgstr "Indítás"
 
 #: capplets/session-properties/gsm-client-row.c:35
 msgid "Started but has not yet reported state."
-msgstr ""
+msgstr "El lett indítva, de állapotáról nem tudunk."
 
 #: capplets/session-properties/gsm-client-row.c:37
 msgid "Running"
-msgstr ""
+msgstr "Futó"
 
 #: capplets/session-properties/gsm-client-row.c:38
 msgid "A normal member of the session."
-msgstr ""
+msgstr "Normális futó program."
 
 #: capplets/session-properties/gsm-client-row.c:40
 msgid "Saving"
-msgstr ""
+msgstr "Mentõdõ"
 
 #: capplets/session-properties/gsm-client-row.c:41
 msgid "Saving session details."
-msgstr ""
+msgstr "Mentõdik a folyamat-állapot."
 
 #: capplets/session-properties/gsm-client-row.c:43
 msgid "Unknown"
-msgstr ""
+msgstr "Nem ismert"
 
 #: capplets/session-properties/gsm-client-row.c:44
 msgid "State not reported within timeout."
-msgstr ""
+msgstr "Az állapotát nem közli a program."
 
 #: capplets/session-properties/gsm-client-row.c:50
-#, fuzzy
 msgid "Normal"
 msgstr " Normális"
 
 #: capplets/session-properties/gsm-client-row.c:51
 msgid "Unaffected by logouts but can die."
-msgstr ""
+msgstr "Belépéskor újratöltõdik, de megállhat."
 
 #: capplets/session-properties/gsm-client-row.c:53
 msgid "Respawn"
@@ -605,7 +628,7 @@ msgstr ""
 
 #: capplets/session-properties/gsm-client-row.c:54
 msgid "Never allowed to die."
-msgstr ""
+msgstr "Nem lövõdhet ki."
 
 #: capplets/session-properties/gsm-client-row.c:56
 msgid "Trash"
@@ -613,11 +636,11 @@ msgstr ""
 
 #: capplets/session-properties/gsm-client-row.c:57
 msgid "Discarded on logout and can die."
-msgstr ""
+msgstr "Kilövõdhet, nem fog belépéskor elindulni."
 
 #: capplets/session-properties/gsm-client-row.c:60
 msgid "Always started on every login."
-msgstr ""
+msgstr "Minden belépéskor elindul."
 
 #: capplets/session-properties/session-properties.c:147
 msgid "Program:"
@@ -754,77 +777,73 @@ msgstr "Beállított betûtípust használj."
 
 #: capplets/theme-switcher/demo.c:50
 msgid "One"
-msgstr ""
+msgstr "Egy"
 
 #: capplets/theme-switcher/demo.c:50
-#, fuzzy
 msgid "Two"
-msgstr "Fent"
+msgstr "Kettõ"
 
 #. just 8 short names that will serve as samples for titles in demo
 #: capplets/theme-switcher/demo.c:52
-#, fuzzy
 msgid "Eenie"
-msgstr "Esemény"
+msgstr "Ecc"
 
 #: capplets/theme-switcher/demo.c:52
 msgid "Meenie"
-msgstr ""
+msgstr "Pecc"
 
 #: capplets/theme-switcher/demo.c:53
 msgid "Mynie"
-msgstr ""
+msgstr "Kimehetsz"
 
 #: capplets/theme-switcher/demo.c:53
 msgid "Moe"
-msgstr ""
+msgstr "Holnap"
 
 #: capplets/theme-switcher/demo.c:54
 msgid "Catcha"
-msgstr ""
+msgstr "Után"
 
 #: capplets/theme-switcher/demo.c:54
-#, fuzzy
 msgid "Tiger"
-msgstr "Csempézett"
+msgstr "Bejöhetsz"
 
 #: capplets/theme-switcher/demo.c:55
 msgid "By Its"
-msgstr ""
+msgstr "Cérnára"
 
 #: capplets/theme-switcher/demo.c:55
-#, fuzzy
 msgid "Toe"
-msgstr "Fent"
+msgstr "Cinegére..."
 
 #: capplets/theme-switcher/demo.c:114
 msgid "Selected themes from above will be tested by previewing here."
-msgstr ""
+msgstr "A kiválasztott témák tesztelhetõk itt."
 
 #: capplets/theme-switcher/demo.c:119
 msgid "Sample Button"
-msgstr ""
+msgstr "Mintagomb"
 
 #: capplets/theme-switcher/demo.c:123
 msgid "Sample Check Button"
-msgstr ""
+msgstr "Minta kijelölõgomb"
 
 #: capplets/theme-switcher/demo.c:128
 msgid "Sample Text Entry Field"
-msgstr ""
+msgstr "Minta szövegbeviteli mezõ"
 
 #. column two
 #: capplets/theme-switcher/demo.c:135
 msgid "Radio Button 1"
-msgstr ""
+msgstr "Rádiógomb 1"
 
 #: capplets/theme-switcher/demo.c:141
 msgid "Radio Button 2"
-msgstr ""
+msgstr "Rádiógomb 2"
 
 #: capplets/theme-switcher/demo.c:147
 msgid "Radio Button 3"
-msgstr ""
+msgstr "Rádiógomb 3"
 
 #: capplets/ui-properties/ui-properties.c:53
 msgid "Default Gtk setting"
@@ -1201,478 +1220,3 @@ msgstr ""
 #: control-center/main.c:162
 msgid "Control Center"
 msgstr "Vezérlõpult"
-
-#~ msgid "Run command"
-#~ msgstr "Parancs futtatása"
-
-#~ msgid "Restart Enlightenment"
-#~ msgstr "Az Enlightenment újraintítása"
-
-#~ msgid "Exit Enlightenment"
-#~ msgstr "Kilépés az Enlightenmentbõl"
-
-#~ msgid "Goto Next Desktop"
-#~ msgstr "Ugrás a következõ lapra"
-
-#~ msgid "Goto Previous Deskop"
-#~ msgstr "Ugrás az elõzõ lapra"
-
-#~ msgid "Goto Desktop"
-#~ msgstr "Lapra ugrás..."
-
-#~ msgid "Raise Desktop"
-#~ msgstr "Lap elõtérbe hozása"
-
-#~ msgid "Lower Desktop"
-#~ msgstr "Lap háttérbe tétele"
-
-#~ msgid "Reset Desktop In Place"
-#~ msgstr "Helyben resetelés"
-
-#~ msgid "Cleanup Windows"
-#~ msgstr "Ablakok tisztítása"
-
-#~ msgid "Scroll Windows to left"
-#~ msgstr "Ablakok görgetése balra"
-
-#~ msgid "Scroll Windows to right"
-#~ msgstr "Ablakok görgetése jobbra"
-
-#~ msgid "Scroll Windows up"
-#~ msgstr "Ablakok görgetése fel"
-
-#~ msgid "Scroll Windows down"
-#~ msgstr "Ablakok görgetése le"
-
-#~ msgid "Scroll Windows by [X Y] pixels"
-#~ msgstr "Ablakok görgetése [X Y] képpontal"
-
-#~ msgid "Move mouse pointer to left"
-#~ msgstr "Egér mozgatása balra"
-
-#~ msgid "Move mouse pointer to right"
-#~ msgstr "Egér mozgatása jobbra"
-
-#~ msgid "Move mouse pointer up"
-#~ msgstr "Egér mozgatása fel"
-
-#~ msgid "Move mouse pointer down"
-#~ msgstr "Egér mozgatása le"
-
-#~ msgid "Move mouse pointer by [X Y]"
-#~ msgstr "Egér mozgatása [X Y] képponttal"
-
-#~ msgid "Goto Desktop area [X Y]"
-#~ msgstr "Az [X Y] képernyõre ugrás"
-
-#~ msgid "Move to Desktop area on the left"
-#~ msgstr "Képernyõugrás balra"
-
-#~ msgid "Move to Desktop area on the right"
-#~ msgstr "Képernyõugrás jobbra"
-
-#~ msgid "Move to Desktop area above"
-#~ msgstr "Képernyõugrás fel"
-
-#~ msgid "Move to Desktop area below"
-#~ msgstr "Képernyõugrás le"
-
-#~ msgid "Raise Window"
-#~ msgstr "Ablak elõtérbe hozása"
-
-#~ msgid "Lower Window"
-#~ msgstr "Ablak háttérbe tétele"
-
-#~ msgid "Close Window"
-#~ msgstr "Ablak bezárása"
-
-#~ msgid "Annihilate Window"
-#~ msgstr "Ablak kilövése"
-
-#~ msgid "Stick / Unstick Window"
-#~ msgstr "Ablak elrejtése/mutatása"
-
-#~ msgid "Iconify Window"
-#~ msgstr "Ikonizálás"
-
-#~ msgid "Shade / Unshade Window"
-#~ msgstr "Elmosás/élesítés"
-
-#~ msgid "Maximise Height of Window"
-#~ msgstr "Magasság maximalizálása"
-
-#~ msgid "Maximise Height of Window to whole screen"
-#~ msgstr "Az ablak magasságának maximalizálása a képernyõre"
-
-#~ msgid "Maximise Height of Window toavailable space"
-#~ msgstr "Maximalizálás a lehetõségekhez"
-
-#~ msgid "Maximise Width of Window"
-#~ msgstr "Szélesség maximalizálása"
-
-#~ msgid "Maximise Width of Window to whole screen"
-#~ msgstr "Az ablak szélességének maximalizálása a képernyõre"
-
-#~ msgid "Maximise Width of Window toavailable space"
-#~ msgstr "Maximalizálás a lehetõségekhez"
-
-#~ msgid "Maximise Size of Window"
-#~ msgstr "Az ablak méretének maximalizálása"
-
-#~ msgid "Maximise Size of Window to whole screen"
-#~ msgstr "Az ablak méretének maximalizálása a teljes képernyõre"
-
-#~ msgid "Maximise Size of Window toavailable space"
-#~ msgstr "A lehetõségekhez mérten maximalizálás"
-
-#~ msgid "Send window to next desktop"
-#~ msgstr "A következõ képernyõre küldés"
-
-#~ msgid "Send window to previous desktop"
-#~ msgstr "Az elõzõ képernyõre küldés"
-
-#~ msgid "Switch focus to next window"
-#~ msgstr "A következõ ablakra fókuszálás"
-
-#~ msgid "Switch focus to previous window"
-#~ msgstr "Az elõzõ ablakra fókuszálás"
-
-#~ msgid "Glue / Unglue Window to Desktop screen"
-#~ msgstr "Az ablak képernyõre ragasztása/feltépése "
-
-#~ msgid "Set Window layer to On Top"
-#~ msgstr "Az ablak fölsõ rétegre emelése"
-
-#~ msgid "Set Window layer to Above"
-#~ msgstr "Az ablak fölmozgatása egy réteggel"
-
-#~ msgid "Set Window layer to Normal"
-#~ msgstr "Az ablak normál rétegre tétele"
-
-#~ msgid "Set Window layer to Below"
-#~ msgstr "Az ablak lemozgatása egy réteggel"
-
-#~ msgid "Set Window layer"
-#~ msgstr "Az ablak rétegének beállítása"
-
-#~ msgid "Move Window to area on left"
-#~ msgstr "Az ablak balra mozgatása a területen"
-
-#~ msgid "Move Window to area on right"
-#~ msgstr "Az ablak jobbra mozgatása a területen"
-
-#~ msgid "Move Window to area above"
-#~ msgstr "Az ablak felmozgatása a területen"
-
-#~ msgid "Move Window to area below"
-#~ msgstr "Az ablak lemozgatása a területen"
-
-#~ msgid "Move Window by area [X Y]"
-#~ msgstr "Az ablak mozgatása [X Y]-al a területen"
-
-#~ msgid "Set Window border style to the Default"
-#~ msgstr "Az ablak kerettípusának alapértelmezettre állítása"
-
-#~ msgid "Set Window border style to the Borderless"
-#~ msgstr "Az ablak kerettípusának keretnélkülire állítása"
-
-#~ msgid "Forget everything about Window"
-#~ msgstr "Mindent felejts el az ablakkal kapcsolatban"
-
-#~ msgid "Remember all Window settings"
-#~ msgstr "Jegyezd meg az ablak beállításait"
-
-#~ msgid "Remeber Window Border"
-#~ msgstr "Jegyezd meg az ablak keretét"
-
-#~ msgid "Remeber Window Desktop"
-#~ msgstr "Jegyezd meg, melyik képernyõn van az ablak"
-
-#~ msgid "Remeber Window Desktop Area"
-#~ msgstr "Jegyezd meg a képernyõterületet"
-
-#~ msgid "Remeber Window Size"
-#~ msgstr "Jegyezd meg az ablakméretet"
-
-#~ msgid "Remeber Window Location"
-#~ msgstr "Jegyezd meg az ablak helyét"
-
-#~ msgid "Remeber Window Layer"
-#~ msgstr "Jegyezd meg a réteget"
-
-#~ msgid "Remeber Window Stickyness"
-#~ msgstr "Jegyezd meg a ragadósságot"
-
-#~ msgid "Remeber Window Shadedness"
-#~ msgstr "Jegyezd meg az átlátszóságot"
-
-#~ msgid "%1.0f Desktop"
-#~ msgstr "%1.0f lap"
-
-#~ msgid "%1.0f Desktops"
-#~ msgstr "%1.0f lapok"
-
-#~ msgid ""
-#~ "The virutal desktop size will be\n"
-#~ "%1.0f x %1.0f\n"
-#~ "screens in size"
-#~ msgstr ""
-#~ "A virtuális képernyõ mérete\n"
-#~ "%1.0f x %1.0f\n"
-#~ "lesz"
-
-#~ msgid ""
-#~ "The number of separate desktops\n"
-#~ "layered on top of eachother"
-#~ msgstr ""
-#~ "A különálló lapok száma\n"
-#~ "melyek egymás fölött vannak"
-
-#~ msgid "Opaque"
-#~ msgstr "Egyben"
-
-#~ msgid "Lined"
-#~ msgstr "Vonalas"
-
-#~ msgid "Box"
-#~ msgstr "Keret"
-
-#~ msgid "Shaded"
-#~ msgstr "Elmosott"
-
-#~ msgid "Semi-Solid"
-#~ msgstr "Ál-szolíd"
-
-#~ msgid "Translucent"
-#~ msgstr "Áttetszõ"
-
-#~ msgid "Mouse Pointer"
-#~ msgstr "Egérmutató"
-
-#~ msgid "Pointer Clicks"
-#~ msgstr "Egér"
-
-#~ msgid "Move Methods"
-#~ msgstr "Mozgatási módok"
-
-#~ msgid "Resize Methods"
-#~ msgstr "Méretezési módok"
-
-#~ msgid "Keyboard focus follows"
-#~ msgstr "Billentyûzetfókusz"
-
-#~ msgid "Animate menus"
-#~ msgstr "Menük animálása"
-
-#~ msgid "Enable Enlightenments background selection"
-#~ msgstr "Enlightenment háttérbeállítás engedélyezése"
-
-#~ msgid "Advanced Focus"
-#~ msgstr "Fókusz"
-
-#~ msgid "All new windows that appear get the keyboard focus"
-#~ msgstr "Minden új ablak amelyik elõtûnik, megkapja a billentyûzetfókuszt"
-
-#~ msgid "All new popup windows get the keyboard focus"
-#~ msgstr "Minden új ablak megkapja a billentyûzetfókuszt"
-
-#~ msgid "Miscellaneous"
-#~ msgstr "Egyéb"
-
-#~ msgid "Tooltips ON/OFF & timeout for tooltip popup (sec)"
-#~ msgstr "Segédszövegek megjelenítése és idõzítése"
-
-#~ msgid "Automatic raising of windows after X seconds"
-#~ msgstr "Automatikusan elõtérbe kerülnek az ablakok x másodperc múlva"
-
-#~ msgid "Display icons when windows are iconified"
-#~ msgstr "Ikonok megjelenítése minimalizálás után"
-
-#~ msgid "Place windows manually"
-#~ msgstr "Ablakok kirakása kézzel"
-
-#~ msgid "Size of Virtual Screen"
-#~ msgstr "Virtuális képernyõ mérete"
-
-#~ msgid "Separate Desktops"
-#~ msgstr "Lapok elválasztása"
-
-#~ msgid "Number of colours in gradient"
-#~ msgstr "Gradiensben szereplõ színek száma"
-
-#~ msgid "Image file"
-#~ msgstr "Képfájl"
-
-#~ msgid "Browse"
-#~ msgstr "Keres"
-
-#~ msgid "None"
-#~ msgstr "Nincs"
-
-#~ msgid "Image display options"
-#~ msgstr "Képmegjelenítési opciók"
-
-#~ msgid "Repeat tiles across screen"
-#~ msgstr "Kép ismétlése"
-
-#~ msgid "Retain image aspect ratio"
-#~ msgstr "Kép átméretezése"
-
-#~ msgid "Maximise height to fit screen"
-#~ msgstr "Kép magasságának maximalizálása"
-
-#~ msgid "Maximise width to fit screen"
-#~ msgstr "Kép szélességének maximalizálása"
-
-#~ msgid "Top left"
-#~ msgstr "bal fent"
-
-#~ msgid "Top middle"
-#~ msgstr "fent középen"
-
-#~ msgid "Top right"
-#~ msgstr "jobb fent"
-
-#~ msgid "Right middle"
-#~ msgstr "jobb középen"
-
-#~ msgid "Bottom right"
-#~ msgstr "jobb lent"
-
-#~ msgid "Bottom middle"
-#~ msgstr "lent középen"
-
-#~ msgid "Bottom left"
-#~ msgstr "bal lent"
-
-#~ msgid "Left middle"
-#~ msgstr "bal középen"
-
-#~ msgid "Enlightenment: Edit Background"
-#~ msgstr "Enlightenment: háttér szerkesztése"
-
-#~ msgid "Solid Colour"
-#~ msgstr "Szín"
-
-#~ msgid "Background Image"
-#~ msgstr "Háttérkép"
-
-#~ msgid "Overlayed Logo"
-#~ msgstr "Föléhelyezett logo"
-
-#~ msgid "Done"
-#~ msgstr "Kész"
-
-#~ msgid "High quality rendering for background"
-#~ msgstr "A háttér jó minõségû megjelenítése"
-
-#~ msgid "No background"
-#~ msgstr "Nincs háttér"
-
-#~ msgid "Add new..."
-#~ msgstr "Új hozzáadása"
-
-#~ msgid "Enable sounds in Enlightenment"
-#~ msgstr "Enlightenment-hangok engedélyezése"
-
-#~ msgid "Modifier"
-#~ msgstr "Módosító"
-
-#~ msgid "Key"
-#~ msgstr "Billentyû"
-
-#~ msgid "Action to perform"
-#~ msgstr "Végzendõ mûvelet"
-
-#~ msgid "Optional parameters"
-#~ msgstr "További paraméterek"
-
-#~ msgid "List of keyboard shortcuts"
-#~ msgstr "Billentyûkombinációk listája"
-
-#~ msgid "New"
-#~ msgstr "Új"
-
-#~ msgid "Edit current selected keyboard shortcut"
-#~ msgstr "A kiválasztott gyorsbillentyû szerkesztése"
-
-#~ msgid "Change..."
-#~ msgstr "Módosít..."
-
-#~ msgid "NONE"
-#~ msgstr "SEMMI"
-
-#~ msgid "Options for Action"
-#~ msgstr "Opciók a mûveletekhez"
-
-#~ msgid "Basic Options"
-#~ msgstr "Alap opciók"
-
-#~ msgid "Desktops"
-#~ msgstr "Lapok"
-
-#~ msgid "Behavior"
-#~ msgstr "Megjelenés"
-
-#~ msgid "Audio"
-#~ msgstr "Hang"
-
-#~ msgid "Special FX"
-#~ msgstr "Efektusok"
-
-#~ msgid "Backgrounds"
-#~ msgstr "Háttér"
-
-#~ msgid "Themes"
-#~ msgstr "Témák"
-
-#~ msgid "Keyboard Shortcuts"
-#~ msgstr "Billentyûzet"
-
-#~ msgid "Enlightenment Configuration Editor"
-#~ msgstr "Enlightenment konfiguráló"
-
-#~ msgid "Scanning Enlightenment Configuration..."
-#~ msgstr "Vizsgálom a jelenlegi beállításokat..."
-
-#~ msgid "Select a file to save"
-#~ msgstr "Fájl mentése"
-
-#~ msgid "Select a file to load"
-#~ msgstr "Fájl betöltése"
-
-#~ msgid "Set Printout settings"
-#~ msgstr "Kiiratási beállítások"
-
-#~ msgid "Saved Image Settings"
-#~ msgstr "Mentett kép beállítások"
-
-#~ msgid "Print Command:"
-#~ msgstr "Nyomtatási parancs:"
-
-#~ msgid "Print"
-#~ msgstr "Nyomtatás"
-
-#~ msgid "Image Format:"
-#~ msgstr "Képformátum:"
-
-#~ msgid "Quality Settings"
-#~ msgstr "Minõségi beállítások"
-
-#~ msgid "Page Settings"
-#~ msgstr "Lapbeállítások"
-
-#~ msgid "Scaling Factor:"
-#~ msgstr "Skálázási faktor:"
-
-#~ msgid "Select a file"
-#~ msgstr "Válassz ki egy fájlt"
-
-#~ msgid "Load all files in directory"
-#~ msgstr "Töltsd be az összes fájlt a könyvtárból"
-
-#~ msgid "Use Previews"
-#~ msgstr "Elõnézetek használata"
-
-#~ msgid "Image Information"
-#~ msgstr "Képinformációk"
