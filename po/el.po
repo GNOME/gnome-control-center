@@ -20,6 +20,7 @@
 # kostas: 533 messages, 06Jan2003, one more update.
 # kostas: 537 messages, 26Jan2003, one more update.
 # kostas:  650 messages, 22Jul2003, one more update.
+# kostas:  655 messages, 27Jul2003, one more update.
 # Spiros Papadimitriou <spapadim+@cs.cmu.edu>, 2000.
 # Simos Xenitellis <simos@hellug.gr>, 2000, 2001, 2002.
 # Nikos Charonitakis <charosn@her.forthnet.gr>, 2002.
@@ -29,14 +30,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: el\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-07-07 00:27-0400\n"
-"PO-Revision-Date: 2003-07-22 18:21+0300\n"
+"POT-Creation-Date: 2003-07-27 18:46+0300\n"
+"PO-Revision-Date: 2003-07-27 19:01+0300\n"
 "Last-Translator: Kostas Papadimas <pkst@gmx.net>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 "X-Generator: KBabel 1.0\n"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
@@ -89,7 +90,38 @@ msgstr "Υποστήριξη βοηθητικής τεχνολογίας"
 
 #: capplets/accessibility/at-properties/at-properties.desktop.in.h:2
 msgid "Enable support for GNOME assistive technologies at login"
-msgstr "Ενεργοποίηση υποστήριξης για τις βοηθητικές τεχνολογίες του Gnome κατά την είσοδο"
+msgstr ""
+"Ενεργοποίηση υποστήριξης για τις βοηθητικές τεχνολογίες του Gnome κατά την "
+"είσοδο"
+
+#: capplets/accessibility/at-properties/main.c:59
+msgid ""
+"<i>No Assistive Technology is available on your system.  The 'gok' package "
+"must be installed in order to get on-screen keyboard support, and the "
+"'gnopernicus' package must be installed for screenreading and magnifying "
+"capabilities.</i>"
+msgstr ""
+"<i>Δεν υπάρχει διαθέσιμη Βοηθητική Τεχνολογία στο σύστημα σας.  Θα πρέπει "
+"να εγκατασταθεί το πακέτο 'gok' για υποστήριξη πληκτρολογίου οθόνης και το πακέτο "
+"'gnopernicus' για δυνατότητες μεγέθυνσης και ανάγνωσης οθόνης.</i>"
+
+#: capplets/accessibility/at-properties/main.c:62
+msgid ""
+"<i>Not all available assistive technologies are installed on your system.  "
+"The 'gok' package must be installed in order to get on-screen keyboard "
+"support.</i>"
+msgstr ""
+"<i>Δεν έχουν εγκατασταθεί όλες οι Βοηθητικές Τεχνολογίες στο σύστημα σας.  Θα πρέπει "
+"να εγκατασταθεί το πακέτο 'gok' για υποστήριξη πληκτρολογίου οθόνης.</i>"
+
+#: capplets/accessibility/at-properties/main.c:65
+msgid ""
+"<i>Not all available assistive technologies are installed on your system.  "
+"The 'gnopernicus' package must be installed for screenreading and magnifying "
+"capabilities.</i>"
+msgstr ""
+"<i>Δεν έχουν εγκατασταθεί όλες οι Βοηθητικές Τεχνολογίες στο σύστημα σας. Θα πρέπει "
+"να εγκατασταθεί το πακέτο 'gnopernicus' για δυνατότητες μεγέθυνσης και ανάγνωσης οθόνης.</i>"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:238
 #, c-format
@@ -103,11 +135,11 @@ msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Αδυναμία εισαγωγής ρυθμίσεων  AccessX από το αρχείο  '%s'"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:465
-msgid "Select CDE AccessX file"
-msgstr "Επιλογή αρχείου AccessX του CDE"
+msgid "Import Feature Settings File"
+msgstr "Εισαγωγή αρχείου ρυθμίσεων χαρακτηριστικών"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Πληκτρολόγιο"
@@ -125,41 +157,46 @@ msgstr ""
 "προσβασιμότητας πληκτρολογίου δεν θα λειτουργούν χωρίς αυτό."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
+#: capplets/font/font-properties.glade.h:1
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
+#: capplets/mouse/gnome-mouse-properties.glade.h:1
+#: capplets/ui-properties/gnome-ui-properties.glade.h:1
+msgid "    "
+msgstr "    "
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:1
 #: capplets/file-types/file-types-properties.glade.h:1
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:2
 #: capplets/network/gnome-network-preferences.glade.h:2
 #: capplets/theme-switcher/theme-install.glade.h:1
 #: capplets/theme-switcher/theme-properties.glade.h:1
 msgid "*"
 msgstr "*"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
 msgid "<b>Enable Bo_unce Keys</b>"
 msgstr "<b>Ενεργοποίηση Πλήκτρων ανα_πήδησης</b>"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
 msgid "<b>Enable Slo_w Keys</b>"
 msgstr "<b>Ενεργοποίηση Αρ_γών Πλήκτρων</b>"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
 msgid "<b>Enable _Mouse Keys</b>"
 msgstr "<b>Ενεργοποίηση Πλήκτρων Για _Ποντίκι</b>"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
 msgid "<b>Enable _Repeat Keys</b>"
 msgstr "<b>Ενεργοποίηση Πλήκτρων Επα_νάληψης</b>"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
 msgid "<b>Enable _Sticky Keys</b>"
 msgstr "<b>Ενεργοποίηση _Κολλημένων Πλήκτρων</b>"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
 msgid "<b>Features</b>"
 msgstr "<b>Χαρακτηριστικά</b>"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
-msgid "<b>Mouse</b>"
-msgstr "<b>Ποντίκι</b>"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
 msgid "<b>Toggle Keys</b>"
@@ -232,9 +269,8 @@ msgid "Ma_ximum pointer speed:"
 msgstr "Μέ_γιστη ταχύτητα δρομέα:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
-#: capplets/mouse/mouse.desktop.in.h:1
-msgid "Mouse"
-msgstr "Ποντίκι"
+msgid "Mouse Keys"
+msgstr "Πλήκτρα ποντικιού"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
 msgid "Mouse _Preferences..."
@@ -257,7 +293,7 @@ msgstr ""
 "πλήκτρων modifier σε σειρά."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "S_peed:"
 msgstr "Τα_χύτητα:"
 
@@ -286,6 +322,7 @@ msgid "_Only accept keys held for:"
 msgstr "_Να γίνεται αποδοχή πλήκτρων που πατήθηκαν για:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "_Type to test settings:"
 msgstr "_Πληκτρολογήστε για να δοκιμάσετε τις ρυθμίσεις:"
 
@@ -321,130 +358,135 @@ msgstr "δευτερόλεπτα"
 
 #. solid
 #: capplets/background/background-properties-capplet.c:228
-msgid "C_olor:"
+msgid "Co_lor:"
 msgstr "Χ_ρώμα:"
 
 #. horiz
 #: capplets/background/background-properties-capplet.c:232
-msgid "_Left Color:"
+msgid "_Left color:"
 msgstr "Χρώμα Αριστε_ρά:"
 
 #: capplets/background/background-properties-capplet.c:233
-msgid "_Right Color:"
+msgid "_Right color:"
 msgstr "Χρώμα _Δεξιά:"
 
 #. vert
 #: capplets/background/background-properties-capplet.c:236
-msgid "_Top Color:"
+msgid "Top co_lor:"
 msgstr "Χρώμα Ε_πάνω:"
 
 #: capplets/background/background-properties-capplet.c:237
-msgid "_Bottom Color:"
+msgid "_Bottom color:"
 msgstr "Χρώμα _Κάτω:"
 
 #: capplets/background/background-properties-capplet.c:398
-msgid "_Wallpaper"
-msgstr "_Ταπετσαρία"
+msgid "_Tile"
+msgstr "_Πλακίδιο"
 
 #: capplets/background/background-properties-capplet.c:398
-msgid "C_entered"
+msgid "C_enter"
 msgstr "Κ_εντραρισμένη"
 
 # For lack of a better term...?  Anaklimakwsh ???
 #: capplets/background/background-properties-capplet.c:398
-msgid "_Scaled"
+msgid "Sc_ale"
 msgstr "_Σε κλίμακα"
 
 #: capplets/background/background-properties-capplet.c:398
-msgid "Stretc_hed"
+msgid "_Stretch"
 msgstr "Τεντ_ωμένη"
 
 #: capplets/background/background-properties-capplet.c:398
 msgid "_No Picture"
 msgstr "_Χωρίς Εικόνα"
 
-#: capplets/background/background-properties-capplet.c:433
-msgid "Select _picture:"
-msgstr "Επιλογή ει_κόνας:"
-
-#: capplets/background/background-properties-capplet.c:567
+#: capplets/background/background-properties-capplet.c:559
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:834
-#: capplets/keyboard/gnome-keyboard-properties.c:222
-#: capplets/mouse/gnome-mouse-properties.c:716
-#: capplets/sound/sound-properties-capplet.c:214
+#: capplets/default-applications/gnome-default-applications-properties.c:852
+#: capplets/keyboard/gnome-keyboard-properties.c:220
+#: capplets/mouse/gnome-mouse-properties.c:714
+#: capplets/sound/sound-properties-capplet.c:212
 msgid "Retrieve and store legacy settings"
 msgstr "Ανάσυρση και αποθήκευση ρυθμίσεων  legacy "
 
-#: capplets/background/background-properties-capplet.c:593
+#: capplets/background/background-properties-capplet.c:585
 #: capplets/background/background-properties.glade.h:2
 msgid "Background Preferences"
 msgstr "Προτιμήσεις Παρασκηνίου"
 
 #: capplets/background/background-properties.glade.h:1
-msgid "A preview of the background picture."
-msgstr "Προεπισκόπηση της εικόνας φόντου."
-
-#: capplets/background/background-properties.glade.h:3
-msgid "Background Preview"
-msgstr "Προεπισκόπηση Παρασκηνίου"
-
-#: capplets/background/background-properties.glade.h:4
-msgid "Background _Style:"
+msgid "Bac_kground style:"
 msgstr "Στυλ Παρασκη_νίου:"
 
-#: capplets/background/background-properties.glade.h:5
+#: capplets/background/background-properties.glade.h:3
+msgid "E-Mail"
+msgstr "E-Mail"
+
+#: capplets/background/background-properties.glade.h:4
 msgid "Horizontal gradient"
 msgstr "Οριζόντια διαβάθμιση"
 
-#: capplets/background/background-properties.glade.h:6
+#: capplets/background/background-properties.glade.h:5
 msgid "Pick a color"
 msgstr "Επιλογή χρώματος"
 
+#: capplets/background/background-properties.glade.h:6
+msgid "Picture _options:"
+msgstr "Επιλογές ει_κόνας:"
+
 #: capplets/background/background-properties.glade.h:7
-msgid "Picture Options:"
-msgstr "Επιλογές Εικόνας:"
-
-#: capplets/background/background-properties.glade.h:8
-#: libbackground/preview-file-selection.c:212
-msgid "Preview"
-msgstr "Προεπισκόπηση"
-
-#: capplets/background/background-properties.glade.h:9
 msgid "Primary Color"
 msgstr "Κύριο Χρώμα"
 
-#: capplets/background/background-properties.glade.h:10
+#: capplets/background/background-properties.glade.h:8
 msgid "Secondary Color"
 msgstr "Δευτερεύον Χρώμα"
 
-#: capplets/background/background-properties.glade.h:11
+#: capplets/background/background-properties.glade.h:9
+msgid "Select _picture:"
+msgstr "Επιλογή ει_κόνας:"
+
+#: capplets/background/background-properties.glade.h:10
 msgid "Solid color"
 msgstr "Συμπαγές Χρώμα"
 
-#: capplets/background/background-properties.glade.h:12
-msgid "The background picture's file name."
-msgstr "Το όνομα αρχείου της εικόνας παρασκηνίου."
-
-#: capplets/background/background-properties.glade.h:13
+#: capplets/background/background-properties.glade.h:11
 msgid "To set the background picture, drop an image or click to browse."
 msgstr ""
 "Για να ορίσετε εικόνα παρασκηνίου, σύρτε μια εικόνα ή κάντε κλίκ για "
 "αναζήτηση"
 
-#: capplets/background/background-properties.glade.h:14
+#: capplets/background/background-properties.glade.h:12
 msgid "Vertical gradient"
 msgstr "Κάθετη διαβάθμιση"
 
+#: capplets/background/background-properties.glade.h:13
+msgid "You can drag image files into the window to set the background picture."
+msgstr "Μπορείτε να σύρετε αρχεία εικόνας στο παράθυρο για να ορίσετε την εικόνα παρασκηνίου."
+
+# FIX?? (next 2)
+#: capplets/background/background-properties.glade.h:14
+msgid "radiobutton1"
+msgstr "Ραδιοπλήκτρο 1"
+
 #: capplets/background/background-properties.glade.h:15
-msgid ""
-"You can drag image files\n"
-"into the window to set the \n"
-"background picture."
-msgstr ""
-"Μπορείτε να σύρετε αρχεία εικόνας\n"
-"στο παράθυρο για να ορίσετε \n"
-"την εικόνα παρασκηνίου."
+msgid "radiobutton2"
+msgstr "Ραδιοπλήκτρο 2"
+
+# FIX?? (next 2)
+#: capplets/background/background-properties.glade.h:16
+msgid "radiobutton3"
+msgstr "Ραδιοπλήκτρο3"
+
+# FIX?? (next 2)
+#: capplets/background/background-properties.glade.h:17
+msgid "radiobutton4"
+msgstr "Ραδιοπλήκτρο4"
+
+# FIX?? (next 2)
+#: capplets/background/background-properties.glade.h:18
+msgid "radiobutton5"
+msgstr "Ραδιοπλήκτρο5"
 
 #: capplets/background/background.desktop.in.h:1
 msgid "Background"
@@ -970,36 +1012,36 @@ msgid "%d Hz"
 msgstr "%d Hz"
 
 #: capplets/display/main.c:367
-msgid "Resolution:"
-msgstr "Ανάλυση:"
+msgid "_Resolution:"
+msgstr "Ανά_λυση:"
 
-#: capplets/display/main.c:385
-msgid "Refresh rate:"
-msgstr "Ρυθμός ανανέωσης:"
+#: capplets/display/main.c:386
+msgid "Re_fresh rate:"
+msgstr "Ρυθμός ανα_νέωσης:"
 
-#: capplets/display/main.c:405
+#: capplets/display/main.c:407
 msgid "Default Settings"
 msgstr "Εξ ορισμού ρυθμίσεις"
 
-#: capplets/display/main.c:407
+#: capplets/display/main.c:409
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "Ρυθμίσεις %d Οθόνης\n"
 
-#: capplets/display/main.c:432
+#: capplets/display/main.c:434
 msgid "Screen Resolution Preferences"
 msgstr "Προτιμήσεις ανάλυσης οθόνης"
 
-#: capplets/display/main.c:460
+#: capplets/display/main.c:464
 #, c-format
 msgid "Make default for this _computer (%s) only"
 msgstr "Να γίνει προεπιλεγμένο μόνο για αυτό τον υ_πολογιστή (%s)"
 
-#: capplets/display/main.c:478
+#: capplets/display/main.c:482
 msgid "Options"
 msgstr "Επιλογές"
 
-#: capplets/display/main.c:499
+#: capplets/display/main.c:503
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d seconds the previous "
@@ -1008,19 +1050,19 @@ msgstr ""
 "Δοκιμή των νέων ρυθμίσεων. Αν δεν ανταποκριθείτε σε %d δευτερόλεπτα θα γίνει "
 "επαναφορά των προηγούμενων ρυθμίσεων."
 
-#: capplets/display/main.c:549
+#: capplets/display/main.c:553
 msgid "Do you want to keep this resolution?"
 msgstr "Θέλετε να κρατήσετε αυτή την ανάλυση?"
 
-#: capplets/display/main.c:586
+#: capplets/display/main.c:590
 msgid "Use _previous resolution"
 msgstr "Χρήση _προηγούμενης ανάλυσης"
 
-#: capplets/display/main.c:588
+#: capplets/display/main.c:592
 msgid "_Keep resolution"
 msgstr "_Διατήρηση ανάλυσης"
 
-#: capplets/display/main.c:747
+#: capplets/display/main.c:751
 msgid ""
 "The Xserver doesn't support the XRandR extension, runtime resolution changes "
 "aren't possible."
@@ -1028,7 +1070,7 @@ msgstr ""
 "Ο εξυπηρετητής Χ δεν υποστηρίζει την επέκταση XRandR και έτσι οι αλλαγές "
 "ανάλυσης runtime δεν είναι δυνατές."
 
-#: capplets/display/main.c:759
+#: capplets/display/main.c:763
 msgid ""
 "The version of the XRandR extension is incompatible with this program, "
 "runtime resolution changes aren't possible."
@@ -1349,127 +1391,127 @@ msgstr "Γραμματοσειρά"
 msgid "Select fonts for the desktop"
 msgstr "Επιλογή γραμματοσειρών για την επιφάνεια εργασίας"
 
-#: capplets/font/font-properties.glade.h:1
+#: capplets/font/font-properties.glade.h:2
+msgid "<b>Font Rendering</b>"
+msgstr "<b>Εμφάνιση γραμματοσειράς</b>"
+
+#: capplets/font/font-properties.glade.h:3
 msgid "Best _shapes"
 msgstr "Βέλτιστα _σχήματα"
 
-#: capplets/font/font-properties.glade.h:2
+#: capplets/font/font-properties.glade.h:4
 msgid "Best co_ntrast"
 msgstr "Βέλτιστη αντί_θεση"
 
-#: capplets/font/font-properties.glade.h:3
+#: capplets/font/font-properties.glade.h:5
 msgid "De_tails..."
 msgstr "Λεπτο_μέρειες..."
 
-#: capplets/font/font-properties.glade.h:4
+#: capplets/font/font-properties.glade.h:6
 msgid "Font Preferences"
 msgstr "Προτιμήσεις Γραμματοσειρών"
 
-#: capplets/font/font-properties.glade.h:5
-msgid "Font Rendering"
-msgstr "Εμφάνιση γραμματοσειράς"
-
-#: capplets/font/font-properties.glade.h:6
+#: capplets/font/font-properties.glade.h:7
 msgid "Font Rendering Details"
 msgstr "Λεπτομέρειες εμφάνισης γραμματοσειράς"
 
-#: capplets/font/font-properties.glade.h:7
+#: capplets/font/font-properties.glade.h:8
 msgid "G_rayscale"
 msgstr "Κλίμακα του _γκρί"
 
-#: capplets/font/font-properties.glade.h:8
+#: capplets/font/font-properties.glade.h:9
 msgid "Go to font folder"
 msgstr "Μετάβαση στο φάκελο γραμματοσειρών"
 
-#: capplets/font/font-properties.glade.h:9
+#: capplets/font/font-properties.glade.h:10
 msgid "Hinting:"
 msgstr "Hinting:"
 
-#: capplets/font/font-properties.glade.h:10
+#: capplets/font/font-properties.glade.h:11
 msgid "N_one"
 msgstr "Κα_νένα"
 
-#: capplets/font/font-properties.glade.h:11
+#: capplets/font/font-properties.glade.h:12
 msgid "Resolution (_dots per inch):"
 msgstr "Ανάλυση (_κουκίδες ανά ίντσα)"
 
-#: capplets/font/font-properties.glade.h:12
+#: capplets/font/font-properties.glade.h:13
 msgid "Set the font for applications"
 msgstr "Ορισμός γραμματοσειράς εφαρμογών"
 
-#: capplets/font/font-properties.glade.h:13
+#: capplets/font/font-properties.glade.h:14
 msgid "Set the font for the icons on the desktop"
 msgstr "Ορισμός γραμματοσειράς για τα εικονίδια στην επιφάνεια εργασίας"
 
-#: capplets/font/font-properties.glade.h:14
+#: capplets/font/font-properties.glade.h:15
 msgid "Set the monospace font for terminals and similar applications"
 msgstr "Ορισμός γραμματοσειράς monospace για τερματικά και παρόμοιες εφαρμογές"
 
-#: capplets/font/font-properties.glade.h:15
+#: capplets/font/font-properties.glade.h:16
 msgid "Smoothing:"
 msgstr "Εξομάλυνση:"
 
-#: capplets/font/font-properties.glade.h:16
+#: capplets/font/font-properties.glade.h:17
 msgid "Sub_pixel (LCDs)"
 msgstr "Sub_pixel (LCDs)"
 
-#: capplets/font/font-properties.glade.h:17
+#: capplets/font/font-properties.glade.h:18
 msgid "Sub_pixel smoothing (LCDs)"
 msgstr "Εξομάλυνση Sub_pixel (LCDs)"
 
-#: capplets/font/font-properties.glade.h:18
+#: capplets/font/font-properties.glade.h:19
 msgid "Subpixel order:"
 msgstr "Σειρά Subpixel:"
 
-#: capplets/font/font-properties.glade.h:19
+#: capplets/font/font-properties.glade.h:20
 msgid "VB_GR"
 msgstr "VB_GR"
 
-#: capplets/font/font-properties.glade.h:20
+#: capplets/font/font-properties.glade.h:21
 msgid "_Application font:"
 msgstr "Γραμματοσειρά εφαρμο_γής:"
 
-#: capplets/font/font-properties.glade.h:21
+#: capplets/font/font-properties.glade.h:22
 msgid "_BGR"
 msgstr "_BGR"
 
-#: capplets/font/font-properties.glade.h:22
+#: capplets/font/font-properties.glade.h:23
 msgid "_Desktop font:"
 msgstr "Γραμματοσειρά  ε_πιφάνειας εργασίας:"
 
-#: capplets/font/font-properties.glade.h:23
+#: capplets/font/font-properties.glade.h:24
 msgid "_Full"
 msgstr "_Πλήρες"
 
-#: capplets/font/font-properties.glade.h:24
+#: capplets/font/font-properties.glade.h:25
 msgid "_Medium"
 msgstr "_Μέτριο"
 
-#: capplets/font/font-properties.glade.h:25
+#: capplets/font/font-properties.glade.h:26
 msgid "_Monochrome"
 msgstr "_Μονόχρωμο"
 
-#: capplets/font/font-properties.glade.h:26
+#: capplets/font/font-properties.glade.h:27
 msgid "_None"
 msgstr "_Κανένα"
 
-#: capplets/font/font-properties.glade.h:27
+#: capplets/font/font-properties.glade.h:28
 msgid "_RGB"
 msgstr "_RGB"
 
-#: capplets/font/font-properties.glade.h:28
+#: capplets/font/font-properties.glade.h:29
 msgid "_Slight"
 msgstr "_Ελαφρύ"
 
-#: capplets/font/font-properties.glade.h:29
+#: capplets/font/font-properties.glade.h:30
 msgid "_Terminal font:"
 msgstr "Γραμμματοσειράς _τερματικού:"
 
-#: capplets/font/font-properties.glade.h:30
+#: capplets/font/font-properties.glade.h:31
 msgid "_VRGB"
 msgstr "_VRGB"
 
-#: capplets/font/font-properties.glade.h:31
+#: capplets/font/font-properties.glade.h:32
 msgid "_Window title font:"
 msgstr "Γραμματοσειρά τίτλου _παραθύρου:"
 
@@ -1578,108 +1620,108 @@ msgstr "Ορισμός πλήκτρων συντόμευσης σε εντολέ
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Σφάλμα εκκίνησης capplet πληκτρολογίου : %s"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:201
+#: capplets/keyboard/gnome-keyboard-properties.c:199
 msgid "_Accessibility"
 msgstr "_Προσβασιμότητα"
 
+#: capplets/keyboard/gnome-keyboard-properties.c:216
 #: capplets/keyboard/gnome-keyboard-properties.c:218
-#: capplets/keyboard/gnome-keyboard-properties.c:220
+#: capplets/sound/sound-properties-capplet.c:208
 #: capplets/sound/sound-properties-capplet.c:210
-#: capplets/sound/sound-properties-capplet.c:212
 msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
 "Εφαρμογή μόνο των ρυθμίσεων και έξοδος (συμβατότητα μόνο; now handled by "
 "daemon)"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
-msgid "<b>Cursor Blinks</b>"
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+msgid "<b>Cursor Blinking</b>"
 msgstr "<b>Δρομέας Αναβοσβήνει</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:2
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<b>Repeat Keys</b>"
 msgstr "<b>Πλήκτρα Επανάληψης</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr "<b>_Κλείδωμα οθόνης για την επιβολή διαλείματος πληκτρολόγησης</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>Γρήγορο</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>Μακρύ</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>Σύντομο</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Αργό</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+msgid "All_ow postponing of breaks"
+msgstr "Να επι_τρέπεται η αναβολή διαλειμμάτων"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "Check if breaks are allowed to be postponed"
 msgstr "έλεγος για τον αν θα επιτρέπεται η αναβολή διαλειμάτων"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+msgid "Cursor _blinks in text boxes and fields"
+msgstr "_Αναβόσβήνει σε πεδία και κουτιά κειμένου"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Duration of the break when typing is disallowed"
 msgstr "Διάρκεια του διαλείματος όταν απαγορεύεται η πληκτρολόγηση"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Duration of work before forcing a break"
 msgstr "Διάρκεια εργασίας πριν την επιβολή διαλείματος"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
 msgid "Key presses _repeat when key is held down"
 msgstr "Επανάληψη _πληκτρολογίου κατά το κράτημα ενός πλήκτρου"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
 msgid "Keyboard Preferences"
 msgstr "Προτιμήσεις Πληκτρολογίου"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
 msgstr ""
-"Κλειδωμα οθόνης μετά από μια συγκεκριμένη διάρκεια για την αποφυγή του συνδρόμου "
-"συνδρόμου του καρπιαίου σωλήνα."
+"Κλειδωμα οθόνης μετά από μια συγκεκριμένη διάρκεια για την αποφυγή του "
+"συνδρόμου συνδρόμου του καρπιαίου σωλήνα."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
 msgid "Typing Break"
 msgstr "Διάλειμμα πληκτρολόγησης"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
 msgid "_Accessibility..."
 msgstr "_Προσβασιμότητα..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
-msgid "_Allow postponing of breaks"
-msgstr "Να επι_τρέπεται η αναβολή διαλειμμάτων"
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+msgid "_Break interval lasts:"
+msgstr "Το διά_λειμμα διαρκεί:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
-msgid "_Break interval lasts"
-msgstr "Το διά_λειμμα διαρκεί"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
-msgid "_Cursor blinks in text boxes and fields"
-msgstr "_Αναβόσβήνει σε πεδία και κουτιά κειμένου"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "_Delay:"
 msgstr "Καθυ_στέρηση:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid "_Speed:"
 msgstr "Τα_χύτητα:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
-msgid "_Work interval lasts"
-msgstr "Η ερ_γασία διαρκεί"
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
+msgid "_Work interval lasts:"
+msgstr "Η ερ_γασία διαρκεί:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "minutes"
 msgstr "λεπτά"
 
@@ -1759,10 +1801,6 @@ msgid ""
 msgstr ""
 "<b>Μεγάλος Λευκός Δρομέας</b>\n"
 "Μεγάλη έκδοση του λευκού δρομέα"
-
-#: capplets/mouse/gnome-mouse-properties.glade.h:1
-msgid "    "
-msgstr "    "
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:2
 msgid "<b>Cursor Theme</b>"
@@ -1864,6 +1902,10 @@ msgstr "_Κατώφλι:"
 msgid "_Timeout:"
 msgstr "_Διάρκεια:"
 
+#: capplets/mouse/mouse.desktop.in.h:1
+msgid "Mouse"
+msgstr "Ποντίκι"
+
 #: capplets/mouse/mouse.desktop.in.h:2
 msgid "Set your mouse preferences"
 msgstr "Καθορισμός προτιμήσεων ποντικιού"
@@ -1905,28 +1947,28 @@ msgid "HTTP Proxy Details"
 msgstr "Λεπτομέρειες διαμεσολαβητή HTTP"
 
 #: capplets/network/gnome-network-preferences.glade.h:9
+msgid "H_TTP proxy:"
+msgstr "Διαμεσολαβητής _HTTP:"
+
+#: capplets/network/gnome-network-preferences.glade.h:10
 msgid "Network Proxy Configuration"
 msgstr "Ρύθμιση διαμεσολαβητή δικτύου"
 
-#: capplets/network/gnome-network-preferences.glade.h:10
+#: capplets/network/gnome-network-preferences.glade.h:11
 msgid "Port:"
 msgstr "Θύρα:"
 
-#: capplets/network/gnome-network-preferences.glade.h:11
+#: capplets/network/gnome-network-preferences.glade.h:12
 msgid "S_ocks host:"
 msgstr "S_ocks host:"
 
-#: capplets/network/gnome-network-preferences.glade.h:12
+#: capplets/network/gnome-network-preferences.glade.h:13
 msgid "_Details"
 msgstr "_Λεπτομέρειες"
 
-#: capplets/network/gnome-network-preferences.glade.h:13
+#: capplets/network/gnome-network-preferences.glade.h:14
 msgid "_FTP proxy:"
 msgstr "Διαμεσολαβητής _FTP:"
-
-#: capplets/network/gnome-network-preferences.glade.h:14
-msgid "_HTTP proxy:"
-msgstr "Διαμεσολαβητής _HTTP:"
 
 #: capplets/network/gnome-network-preferences.glade.h:15
 msgid "_Password:"
@@ -1940,7 +1982,7 @@ msgstr "_Ασφαλής διαμεσολαβητής HTTP:"
 msgid "_Username:"
 msgstr "_Όνομα χρήστη:"
 
-#: capplets/sound/sound-properties-capplet.c:241
+#: capplets/sound/sound-properties-capplet.c:239
 msgid "Sound preferences"
 msgstr "Προτιμήσεις ήχου"
 
@@ -1949,12 +1991,12 @@ msgid "E_nable sound server startup"
 msgstr "Ε_νεργοποίηση εκκίνησης εξυπηρετητή ήχων"
 
 #: capplets/sound/sound-properties.glade.h:2
-msgid "Flash _window titlebar"
-msgstr "Αναβόσβημα γραμμής τίτλου _παραθύρου"
+msgid "Flash _entire screen"
+msgstr "Αναβόσβημα ό_λης της οθόνης"
 
 #: capplets/sound/sound-properties.glade.h:3
-msgid "Flash entire _screen"
-msgstr "Αναβόσβημα ό_λης της οθόνης"
+msgid "Flash _window titlebar"
+msgstr "Αναβόσβημα γραμμής τίτλου _παραθύρου"
 
 #: capplets/sound/sound-properties.glade.h:4
 msgid "General"
@@ -2198,31 +2240,25 @@ msgstr "Συμπεριφορά"
 msgid "Sets the default behavior of GNOME applications"
 msgstr "Καθορίζει την προεπιλεγμένη συμπεριφορά των εφαρμογών του  GNOME"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:1
-msgid "A preview of what a menubar looks like with these settings."
-msgstr ""
-"Προεπισκόπηση για το πώς θα δείχνει η εργαλειοθήκη μενού με αυτές τις "
-"ρυθμίσεις."
-
 #: capplets/ui-properties/gnome-ui-properties.glade.h:2
-msgid "A preview of what a toolbar looks like with these settings."
-msgstr "Προεπισκόπηση για το πώς θα δείχνει η εργαλειοθήκη  με αυτές τς ρυθμίσεις"
+msgid "<b>Behavior and Appearance</b>"
+msgstr "<b>Συμπεριφορά και εμφάνιση</b>"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:3
+msgid "<b>Preview</b>"
+msgstr "<b>Προεπισκόπηση</b>"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:4
 msgid "C_ut"
 msgstr "Αποκο_πή"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:4
-msgid "Icons Only"
+#: capplets/ui-properties/gnome-ui-properties.glade.h:5
+msgid "Icons only"
 msgstr "Εικονίδια Μόνο"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:5
+#: capplets/ui-properties/gnome-ui-properties.glade.h:6
 msgid "Menu and Toolbar Preferences"
 msgstr "Προτιμήσεις Μενού και Εργαλειοθήκης"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:6
-msgid "Menus"
-msgstr "Μενού"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:7
 msgid "New File"
@@ -2233,84 +2269,68 @@ msgid "Open File"
 msgstr "Άνοιγμα Αρχείου"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:9
-msgid "Sample menubar:"
-msgstr "Δείγμα μπάρας μενού:"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:10
-msgid "Sample toolbar:"
-msgstr "Δείγμα εργαλειοθήκης:"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:11
 msgid "Save File"
 msgstr "Αποθήκευση Αρχείου"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:12
-msgid "Select the toolbar style."
-msgstr "Επιλογή στύλ εργαλειοθήκης."
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:13
+#: capplets/ui-properties/gnome-ui-properties.glade.h:10
 msgid "Show _icons in menus"
 msgstr "Εμφάνιση ε_ικονιδίων στα μενού"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:14
-msgid "Text Below Icons"
+#: capplets/ui-properties/gnome-ui-properties.glade.h:11
+msgid "Text below icons"
 msgstr "Κείμενο κάτω από τα Εικονίδια"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:15
-msgid "Text Beside Icons"
-msgstr "Κείμενο κάτω από τα Εικονίδια"
+#: capplets/ui-properties/gnome-ui-properties.glade.h:12
+msgid "Text beside icons"
+msgstr "Κείμενο δίπλα από τα Εικονίδια"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:16
-msgid "Text Only"
+#: capplets/ui-properties/gnome-ui-properties.glade.h:13
+msgid "Text only"
 msgstr "Κείμενο Μόνο"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:17
-msgid "Toolbar"
-msgstr "Εργαλειοθήκη"
+#: capplets/ui-properties/gnome-ui-properties.glade.h:14
+msgid "Toolbar _button labels: "
+msgstr "Ετι_κέτες Κουμπιών εργαλειοθήκης:"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:18
-msgid "Toolbars can be _detached and moved around"
-msgstr "Οι εργαλειοθήκες να είναι αποσπώμενες και μετακινούμενες"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:19
-msgid "_Button Labels: "
-msgstr "Ετι_κέτες Κουμπιών: "
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:20
+#: capplets/ui-properties/gnome-ui-properties.glade.h:15
 msgid "_Copy"
 msgstr "Αντιγρα_φή"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:21
+#: capplets/ui-properties/gnome-ui-properties.glade.h:16
+msgid "_Detachable toolbars"
+msgstr "Αποσ_πώμενες εργαλειοθήκες:"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:17
 msgid "_Edit"
 msgstr "_Επεξεργασία"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:22
+#: capplets/ui-properties/gnome-ui-properties.glade.h:18
 #: control-center/gnomecc-ui.xml.h:5
 msgid "_File"
 msgstr "_Αρχείο"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:23
+#: capplets/ui-properties/gnome-ui-properties.glade.h:19
 msgid "_New"
 msgstr "_Νέο"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:24
+#: capplets/ui-properties/gnome-ui-properties.glade.h:20
 msgid "_Open"
 msgstr "_Άνοιγμα"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:25
+#: capplets/ui-properties/gnome-ui-properties.glade.h:21
 msgid "_Paste"
 msgstr "Επι_κόλληση"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:26
+#: capplets/ui-properties/gnome-ui-properties.glade.h:22
 msgid "_Print"
 msgstr "_Εκτύπωση"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:27
+#: capplets/ui-properties/gnome-ui-properties.glade.h:23
 msgid "_Quit"
 msgstr "_Τερματισμός"
 
 # For lack of a better term...?  Anaklimakwsh ???
-#: capplets/ui-properties/gnome-ui-properties.glade.h:28
+#: capplets/ui-properties/gnome-ui-properties.glade.h:24
 msgid "_Save"
 msgstr "_Αποθήκευση"
 
@@ -2576,11 +2596,15 @@ msgstr "Οθόνη στην οποία θα σχεδιάζεται το BGApplie
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Δε βρέθηκε hbox, χρήση απλού επιλογέα αρχείων"
 
-#: libsounds/sound-view.c:128
+#: libbackground/preview-file-selection.c:212
+msgid "Preview"
+msgstr "Προεπισκόπηση"
+
+#: libsounds/sound-view.c:129
 msgid "The sound file for this event does not exist."
 msgstr "Το αρχείο ήχου για το παρόν συμβάν δεν υπάρχει."
 
-#: libsounds/sound-view.c:130
+#: libsounds/sound-view.c:131
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -2590,25 +2614,29 @@ msgstr ""
 "Εάν επιθυμείτε, μπορείτε να εγκαταστήσετε το πακέτο\n"
 "gnome-audio, με συλλογή μερικών ήχων."
 
-#: libsounds/sound-view.c:222
+#: libsounds/sound-view.c:224
 msgid "Event"
 msgstr "Συμβάν"
 
-#: libsounds/sound-view.c:229
-msgid "File to play"
-msgstr "Αρχείο προς αναπαραγωγή"
+#: libsounds/sound-view.c:233
+msgid "Sound File"
+msgstr "Αρχείο ήχου"
 
-#: libsounds/sound-view.c:244
-msgid "_Sounds"
-msgstr "_Ήχοι"
+#: libsounds/sound-view.c:249
+msgid "_Sounds:"
+msgstr "_Ήχοι:"
 
-#: libsounds/sound-view.c:258
+#: libsounds/sound-view.c:263
+msgid "Sound _file:"
+msgstr "Αρχείο ή_χου:"
+
+#: libsounds/sound-view.c:267
+msgid "Select Sound File"
+msgstr "Επιλογή αρχείου ήχου"
+
+#: libsounds/sound-view.c:285
 msgid "_Play"
 msgstr "_Αναπαραγωγή"
-
-#: libsounds/sound-view.c:264
-msgid "Select sound file"
-msgstr "Επιλογή αρχείου ήχου"
 
 #: libwindow-settings/gnome-wm-manager.c:320
 #, c-format
@@ -2774,11 +2802,11 @@ msgstr "Γραφικά προστέθηκαν από τον Anders Carlsson"
 msgid "Break reminder"
 msgstr "Υπενθύμιση διαλείμματος"
 
-#: typing-break/main.c:126
+#: typing-break/main.c:94
 msgid "The typing monitor is already running."
 msgstr "Η παρακολούθηση πληκτρολόγησης τρέχει ήδη."
 
-#: typing-break/main.c:139
+#: typing-break/main.c:107
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
@@ -2786,9 +2814,9 @@ msgid ""
 "Notification area'."
 msgstr ""
 "Η παρακολούθηση πληκτρολόγησης χρησιμοποιεί την περιοχή ειδοποίησης για να "
-"προβάλλει πληροφορίες. Φαίνεται ότι δεν έχετε την περιοχή ειδοποίησης στο ταμπλώ σας. "
-"Μπορείτε να την προσθέσετε κάνοντας δεξί κλικ στο ταμπλώ και επιλέγοντας "
-"'Προσθήκη στο ταμπλώ ->Βοηθήματα ->Περιοχή ειδοποίησης' ."
+"προβάλλει πληροφορίες. Φαίνεται ότι δεν έχετε την περιοχή ειδοποίησης στο "
+"ταμπλώ σας. Μπορείτε να την προσθέσετε κάνοντας δεξί κλικ στο ταμπλώ και "
+"επιλέγοντας 'Προσθήκη στο ταμπλώ ->Βοηθήματα ->Περιοχή ειδοποίησης' ."
 
 #: vfs-methods/fontilus/font-view.c:101
 msgid "The quick brown fox jumps over the lazy dog. 0123456789"
@@ -2926,17 +2954,29 @@ msgstr "Καταχωρήσεις μενού περιεχομένου του Να
 msgid "Set as Application Font"
 msgstr "Ορισμός ως γραμματοσειρά εγαρμογής"
 
-#: vfs-methods/themus/Themus_Component.server.in.in.h:1
-msgid "Apply theme..."
-msgstr "Εφαρμογή θέματος..."
+#: vfs-methods/themus/apply-font.glade.h:1
+msgid " "
+msgstr " "
 
-#: vfs-methods/themus/Themus_Component.server.in.in.h:2
-msgid "Themus component"
-msgstr "Συστατικό Themus"
+#: vfs-methods/themus/apply-font.glade.h:2
+msgid "<span weight=\"bold\" size=\"larger\">Apply new font?</span>"
+msgstr "<span weight=\"bold\" size=\"larger\">Εφαρμογή νέας γραμματοσειράς?</span>"
 
-#: vfs-methods/themus/Themus_Component.server.in.in.h:3
-msgid "Themus component apply theme operations"
-msgstr "Λειτουργίες εφαρμογής θέματος συστατικού του Themus"
+#: vfs-methods/themus/apply-font.glade.h:3
+msgid "Do _not apply font"
+msgstr "Να μην ε_φαρμοστεί η γραμματοσειρά"
+
+#: vfs-methods/themus/apply-font.glade.h:4
+msgid ""
+"The theme you have selected suggests a new font. A preview of the font is "
+"shown below."
+msgstr ""
+"Το θέμα που επιλέξατε προτείνει μια νέα γραμματοσειρά. Μια προεπισκόπηση "
+"της γραμματοσειράς φαίνεται παρακάτω."
+
+#: vfs-methods/themus/apply-font.glade.h:5
+msgid "_Apply font"
+msgstr "Εφαρμογή _Γραμματοσειράς"
 
 #: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
 msgid "Theme Properties content view component"
@@ -2965,6 +3005,11 @@ msgstr "Θέμα εικονιδίου"
 #: vfs-methods/themus/themus-properties-view.c:217
 msgid "URI currently displayed"
 msgstr "URI το οποίο προβάλλεται"
+
+#. translators: you may want to include non-western chars here
+#: vfs-methods/themus/themus-theme-applier.c:83
+msgid "ABCDEFG"
+msgstr "ΑΒΓΔΕΖΗΘ"
 
 #: vfs-methods/themus/themus.schemas.in.h:1
 msgid "If set to true, then installed themes will be thumbnailed."
@@ -3001,6 +3046,60 @@ msgstr "Αν θα γίνεται προεπισκόπηση εγκατεστημ
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Αν θα γίνεται προεπισκόπηση θεμάτων"
+
+#~ msgid "Select CDE AccessX file"
+#~ msgstr "Επιλογή αρχείου AccessX του CDE"
+
+#~ msgid "<b>Mouse</b>"
+#~ msgstr "<b>Ποντίκι</b>"
+
+#~ msgid "_Wallpaper"
+#~ msgstr "_Ταπετσαρία"
+
+#~ msgid "A preview of the background picture."
+#~ msgstr "Προεπισκόπηση της εικόνας φόντου."
+
+#~ msgid "Background Preview"
+#~ msgstr "Προεπισκόπηση Παρασκηνίου"
+
+#~ msgid "The background picture's file name."
+#~ msgstr "Το όνομα αρχείου της εικόνας παρασκηνίου."
+
+#~ msgid "A preview of what a menubar looks like with these settings."
+#~ msgstr ""
+#~ "Προεπισκόπηση για το πώς θα δείχνει η εργαλειοθήκη μενού με αυτές τις "
+#~ "ρυθμίσεις."
+
+#~ msgid "A preview of what a toolbar looks like with these settings."
+#~ msgstr ""
+#~ "Προεπισκόπηση για το πώς θα δείχνει η εργαλειοθήκη  με αυτές τς ρυθμίσεις"
+
+#~ msgid "Menus"
+#~ msgstr "Μενού"
+
+#~ msgid "Sample menubar:"
+#~ msgstr "Δείγμα μπάρας μενού:"
+
+#~ msgid "Select the toolbar style."
+#~ msgstr "Επιλογή στύλ εργαλειοθήκης."
+
+#~ msgid "Toolbar"
+#~ msgstr "Εργαλειοθήκη"
+
+#~ msgid "Toolbars can be _detached and moved around"
+#~ msgstr "Οι εργαλειοθήκες να είναι αποσπώμενες και μετακινούμενες"
+
+#~ msgid "File to play"
+#~ msgstr "Αρχείο προς αναπαραγωγή"
+
+#~ msgid "Apply theme..."
+#~ msgstr "Εφαρμογή θέματος..."
+
+#~ msgid "Themus component"
+#~ msgstr "Συστατικό Themus"
+
+#~ msgid "Themus component apply theme operations"
+#~ msgstr "Λειτουργίες εφαρμογής θέματος συστατικού του Themus"
 
 #~ msgid "Bee_p"
 #~ msgstr "Ή_χηση"
