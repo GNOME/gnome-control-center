@@ -1,48 +1,36 @@
-# Danish translation for the Gnome Control Center.
-# Copyright (C) 1998,1999, 2001 Free Software Foundation, Inc.
+# Danish translation of the Gnome Control Center.
+# Copyright (C) 1998, 99, 2000, 01, 02 Free Software Foundation, Inc.
 # Kenneth Christiansen <kenneth@ripen.dk>, 1998-2000.
 # Birger Langkjer <birger.langkjer@image.dk>
 # Keld Simonsen <keld@dkuug.dk>, 2000.
-# Ole Laursen <olau@hardworking.dk>, 2001.
+# Ole Laursen <olau@hardworking.dk>, 2001, 02.
 #
 # Konventioner:
 #
-# number of x to use -> antal x
-# hack -> pauseskærm
-# GL -> 3d
+#   capplet -> kontrolcenterprogram
+#   GL -> 3d
+#   hack -> pauseskÃ¦rm
+#   number of x to use -> antal x
+#   properties -> indstillinger
 #
-# Punktummerne efter pauseskærmsteksterne er strøget fordi de passer
-# dårligt ind. Navnene på pauseskærmene oversættes frit på baggrund af
-# en test af den enkelte pauseskærm.
+# Punktummerne efter pauseskÃ¦rmsteksterne er strÃ¸get fordi de passer
+# dÃ¥rligt ind. Navnene pÃ¥ pauseskÃ¦rmene oversÃ¦ttes frit pÃ¥ baggrund af
+# en test af den enkelte pauseskÃ¦rm.
 #
-# Undgå sammensætninger med 'indstil x' fordi indstil også kan betyde stop.
+# UndgÃ¥ sammensÃ¦tninger med 'indstil x' fordi indstil ogsÃ¥ kan betyde stop.
 #
-# RETMIG: der kan godt bruges en grundig test af oversættelserne af pauseskærmsnavnene
+# RETMIG: der kan godt bruges en grundig test af oversÃ¦ttelserne af pauseskÃ¦rmsnavnene
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2002-01-28 21:49-0600\n"
-"PO-Revision-Date: 2001-11-12 22:49+0100\n"
+"POT-Creation-Date: 2002-02-02 19:05+0100\n"
+"PO-Revision-Date: 2002-02-02 19:04+0100\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: capplets/background/background-properties-capplet.c:291
-#: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:614
-#: capplets/keyboard/gnome-keyboard-properties.c:267
-#: capplets/mouse/gnome-mouse-properties.c:474
-#: capplets/sound/sound-properties-capplet.c:144
-msgid "Retrieve and store legacy settings"
-msgstr "Skaf og gem gamle indstillinger"
-
-#: capplets/background/background-properties-capplet.c:315
-#, fuzzy
-msgid "Background properties"
-msgstr "Baggrundsfarver"
 
 #: capplets/background/background.desktop.in.h:1
 msgid "Background"
@@ -50,7 +38,46 @@ msgstr "Baggrund"
 
 #: capplets/background/background.desktop.in.h:2
 msgid "Configuration of the desktop's background"
-msgstr "Konfigurér skrivebordsbaggrunden"
+msgstr "KonfigurÃ©r skrivebordsbaggrunden"
+
+#: capplets/background/background-properties-capplet.c:451
+#, c-format
+msgid ""
+"Couldn't find the file '%s'.\n"
+"\n"
+"Please make sure it exists and try again, or choose a different background "
+"picture."
+msgstr ""
+"Kunne ikke finde filen '%s'.\n"
+"\n"
+"Sikr dig at den eksisterer og prÃ¸v igen, eller vÃ¦lg et andet "
+"baggrundsbillede."
+
+#: capplets/background/background-properties-capplet.c:476
+#, c-format
+msgid ""
+"I don't know how to open the file '%s'.\n"
+"Perhaps its a kind of picture that is not yet supported.\n"
+"\n"
+"Please select a different picture instead."
+msgstr ""
+"Det vides ikke hvordan filen '%s' skal Ã¥bnes.\n"
+"MÃ¥ske er det en form for billede som endnu ikke er understÃ¸ttet.\n"
+"\n"
+"VÃ¦lg venligst et andet billede i stedet for."
+
+#: capplets/background/background-properties-capplet.c:772
+#: capplets/common/capplet-util.c:243
+#: capplets/default-applications/gnome-default-applications-properties.c:614
+#: capplets/keyboard/gnome-keyboard-properties.c:267
+#: capplets/mouse/gnome-mouse-properties.c:474
+#: capplets/sound/sound-properties-capplet.c:144
+msgid "Retrieve and store legacy settings"
+msgstr "Indhent og gem gamle indstillinger"
+
+#: capplets/background/background-properties-capplet.c:808
+msgid "Background Properties"
+msgstr "Indstillinger for baggrund"
 
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
@@ -58,70 +85,461 @@ msgstr "Anvend indstillingerne og afslut"
 
 #: capplets/common/gconf-property-editor.c:144
 msgid "Key"
-msgstr ""
+msgstr "NÃ¸gle"
 
 #: capplets/common/gconf-property-editor.c:145
 msgid "GConf key to which this property editor is attached"
-msgstr ""
+msgstr "GConf-nÃ¸gle som dette egenskabsredigeringsprogram er tilknyttet til"
 
 #: capplets/common/gconf-property-editor.c:151
 msgid "Callback"
-msgstr ""
+msgstr "Tilbagekald"
 
 #: capplets/common/gconf-property-editor.c:152
 msgid "Issue this callback when the value associated with key gets changed"
 msgstr ""
+"UdfÃ¸r dette tilbagekald nÃ¥r vÃ¦rdien der er associeret med nÃ¸glen, Ã¦ndres"
 
+# RETMIG: find ud af hvad dette er
 #: capplets/common/gconf-property-editor.c:157
 msgid "Change set"
-msgstr ""
+msgstr "SkiftesÃ¦t"
 
 #: capplets/common/gconf-property-editor.c:158
 msgid ""
 "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
+"GConf-skiftesÃ¦t som indeholder data der skal videresendes til GConf-klienten "
+"ved anvendelse"
 
 #: capplets/common/gconf-property-editor.c:163
 msgid "Conversion to widget callback"
-msgstr ""
+msgstr "Konvertering til kontrol-tilbagekald"
 
 #: capplets/common/gconf-property-editor.c:164
 msgid ""
 "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr ""
+"Tilbagekald som bliver udfÃ¸rt nÃ¥r data skal konverteres fra GConf til "
+"kontrollen"
 
 #: capplets/common/gconf-property-editor.c:169
 msgid "Conversion from widget callback"
-msgstr ""
+msgstr "Konvertering fra kontrol-tilbagekald"
 
 #: capplets/common/gconf-property-editor.c:170
 msgid ""
 "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr ""
+"Tilbagekald som bliver udfÃ¸rt nÃ¥r data skal konverteres til GConf fra "
+"kontrollen"
 
 #: capplets/common/gconf-property-editor.c:175
 msgid "UI Control"
-msgstr ""
+msgstr "GrÃ¦nsefladekontrol"
 
 #: capplets/common/gconf-property-editor.c:176
 msgid "Object that controls the property (normally a widget)"
-msgstr ""
+msgstr "Objekt der kontrollerer egenskaben (normalt en kontrol)"
 
 #: capplets/default-applications/default-applications.desktop.in.h:1
 msgid "Choose the applications used by default"
-msgstr "Vælg de programmer der bruges automatisk"
+msgstr "VÃ¦lg de programmer der bruges automatisk"
 
 #: capplets/default-applications/default-applications.desktop.in.h:2
 msgid "Default Applications"
 msgstr "Forvalgte programmer"
 
-#: capplets/keyboard/keyboard.desktop.in.h:1
-msgid "Keyboard"
-msgstr "Tastatur"
+#: capplets/desktop-links/Advanced.directory.in.in.h:1
+msgid "Advanced"
+msgstr "Avanceret"
 
-#: capplets/keyboard/keyboard.desktop.in.h:2
-msgid "Keyboard Properties"
-msgstr "Tastaturindstillinger"
+#: capplets/desktop-links/Advanced.directory.in.in.h:2
+msgid "Advanced Settings"
+msgstr "Avancerede indstillinger"
+
+#: capplets/desktop-links/cd.desktop.in.in.h:1
+msgid "CD Properties"
+msgstr "Indstillinger for cd"
+
+#: capplets/desktop-links/cd.desktop.in.in.h:2
+msgid "Configure handling of CD devices"
+msgstr "KonfigurÃ©r hÃ¥ndteringen af cd-enheder"
+
+#: capplets/desktop-links/legacy-applications.desktop.in.in.h:1
+msgid "Legacy Applications"
+msgstr "Gamle programmer"
+
+#: capplets/desktop-links/legacy-applications.desktop.in.in.h:2
+msgid "Legacy applications settings (grdb)"
+msgstr "Indstillinger for Ã¦ldre programmer (grdb)"
+
+#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
+msgid "Appearance"
+msgstr "Udseende"
+
+#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:2
+msgid "Configure window appearance"
+msgstr "KonfigurÃ©r vinduesudseendet"
+
+#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:1
+msgid "Configure key shortcuts"
+msgstr "KonfigurÃ©r tastaturgenveje"
+
+#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:2
+msgid "Shortcuts"
+msgstr "Genveje"
+
+#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:1
+msgid "Configure window focusing"
+msgstr "KonfigurÃ©r vinduesfokusering"
+
+#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:2
+msgid "Focus behavior"
+msgstr "FokusopfÃ¸rsel"
+
+#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
+msgid "Configure window properties"
+msgstr "KonfigurÃ©r egenskaber for bestemte vinduer"
+
+# passer bedre
+#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:2
+msgid "Matched Windows"
+msgstr "Vinduestilpasninger"
+
+#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:1
+msgid "Configure window minimization and maximization"
+msgstr "KonfigurÃ©r vinduesmaksimering og -minimering"
+
+#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:2
+msgid "Minimizing and Maximizing"
+msgstr "Maksimering/minimering"
+
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
+msgid "Configure window manager configuration properties"
+msgstr "KonfigurÃ©r mÃ¥den vindueshÃ¥ndteringsindstillinger indstilles pÃ¥"
+
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:2
+msgid "Meta"
+msgstr "Meta"
+
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
+msgid "Configure miscellaneous window features"
+msgstr "KonfigurÃ©r diverse vinduesfunktioner"
+
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
+msgid "Miscellaneous"
+msgstr "Diverse"
+
+#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:1
+msgid "Configure window move/resize"
+msgstr "KonfigurÃ©r flytning og Ã¦ndring af stÃ¸rrelse"
+
+#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:2
+msgid "Moving and Resizing"
+msgstr "Flytning og stÃ¸rrelsesÃ¦ndring"
+
+#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:1
+msgid "Configure window placement"
+msgstr "KonfigurÃ©r mÃ¥den vinduer placeres pÃ¥"
+
+#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:2
+msgid "Placement"
+msgstr "Placering"
+
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:1
+msgid "Control Center Menu"
+msgstr "Kontrolcentermenu"
+
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:2
+msgid "Sawfish window manager"
+msgstr "VindueshÃ¥ndtering (Sawfish)"
+
+#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
+msgid "Enable window manager sound events"
+msgstr "KonfigurÃ©r lyde for vindueshÃ¥ndteringshÃ¦ndelser"
+
+#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
+#: capplets/sound/sound.desktop.in.h:2
+msgid "Sound"
+msgstr "Lyd"
+
+#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:1
+msgid "Configure workspaces"
+msgstr "KonfigurÃ©r arbejds- og visningsomrÃ¥der"
+
+#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:2
+msgid "Workspaces"
+msgstr "ArbejdsomrÃ¥der"
+
+#: capplets/desktop-links/session.desktop.in.in.h:1
+msgid "Configure which non-session aware programs are started up"
+msgstr "KonfigurÃ©r hvilke ikke-sessionshÃ¥ndterede programmer bliver startet op"
+
+#: capplets/desktop-links/session.desktop.in.in.h:2
+msgid "Startup Programs"
+msgstr "Opstartsprogrammer"
+
+#.
+#. * Translatable strings file
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: capplets/file-types/category-names.h:7
+msgid "Documents"
+msgstr "Dokumenter"
+
+#: capplets/file-types/category-names.h:8
+msgid "Word Processor"
+msgstr "Tekstbehandling"
+
+#: capplets/file-types/category-names.h:9
+msgid "Published Materials"
+msgstr "Publicerede materialer"
+
+#: capplets/file-types/category-names.h:10
+msgid "Spreadsheet"
+msgstr "Regneark"
+
+#: capplets/file-types/category-names.h:11
+msgid "Presentation"
+msgstr "PrÃ¦sentation"
+
+#: capplets/file-types/category-names.h:12
+msgid "Diagram"
+msgstr "Diagram"
+
+#: capplets/file-types/category-names.h:13
+msgid "TeX"
+msgstr "TeX"
+
+#: capplets/file-types/category-names.h:14
+msgid "Vector Graphics"
+msgstr "Vectorgrafik"
+
+#: capplets/file-types/category-names.h:15
+msgid "World Wide Web"
+msgstr "Internet"
+
+#: capplets/file-types/category-names.h:16
+msgid "Plain Text"
+msgstr "Almindlig tekst"
+
+#: capplets/file-types/category-names.h:17
+msgid "Extended Markup Language (XML)"
+msgstr "XML"
+
+#: capplets/file-types/category-names.h:18
+msgid "Information"
+msgstr "Information"
+
+#: capplets/file-types/category-names.h:19
+msgid "Financial"
+msgstr "Finansielt"
+
+#: capplets/file-types/category-names.h:20
+msgid "Calendar"
+msgstr "Kalender"
+
+#: capplets/file-types/category-names.h:21
+msgid "Contacts"
+msgstr "Kontakter"
+
+#: capplets/file-types/category-names.h:22
+msgid "Packages"
+msgstr "Pakker"
+
+#: capplets/file-types/category-names.h:23
+msgid "Software Development"
+msgstr "Programudvikling"
+
+#: capplets/file-types/category-names.h:24
+msgid "Source Code"
+msgstr "Kildekode"
+
+#: capplets/file-types/category-names.h:25
+msgid "Audio"
+msgstr "Lyd"
+
+#: capplets/file-types/category-names.h:26
+msgid "Images"
+msgstr "Billeder"
+
+#: capplets/file-types/category-names.h:27
+msgid "Video"
+msgstr "Video"
+
+#: capplets/file-types/file-types-capplet.c:212
+msgid "Description"
+msgstr "Beskrivelse"
+
+#: capplets/file-types/file-types-capplet.c:219
+msgid "Extensions"
+msgstr "Udvidelser"
+
+#: capplets/file-types/file-types.desktop.in.h:1
+msgid "File Types and Programs"
+msgstr "Filtypeassocieringer"
+
+#: capplets/file-types/file-types.desktop.in.h:2
+msgid "Specify which programs are used to open or view each file type"
+msgstr ""
+"Angiv hvilke programmer der bruges til at Ã¥bne eller vise forskellige "
+"filtyper"
+
+#: capplets/file-types/mime-category-edit-dialog.c:136
+msgid "Edit file category"
+msgstr "RedigÃ©r filkategori"
+
+#: capplets/file-types/mime-category-edit-dialog.c:170
+#: capplets/file-types/mime-edit-dialog.c:203
+#: capplets/file-types/service-edit-dialog.c:165
+#: capplets/file-types/service-edit-dialog.c:166
+msgid "Model"
+msgstr "Model"
+
+#: capplets/file-types/mime-category-edit-dialog.c:171
+msgid "GtkTreeModel that contains the category data"
+msgstr "GtkTreeModel der indeholder kategoridata"
+
+#: capplets/file-types/mime-category-edit-dialog.c:176
+msgid "MIME category info"
+msgstr "MIME-kategori-info"
+
+#: capplets/file-types/mime-category-edit-dialog.c:177
+msgid "Structure containing information on the MIME category"
+msgstr "Struktur der indeholder oplysninger om MIME-kategorien"
+
+#: capplets/file-types/mime-category-edit-dialog.c:342
+#: capplets/file-types/mime-edit-dialog.c:391
+#: capplets/file-types/mime-edit-dialog.c:491
+#: capplets/file-types/service-edit-dialog.c:350
+#: capplets/file-types/service-edit-dialog.c:396
+msgid "Custom"
+msgstr "Selvvalgt"
+
+#: capplets/file-types/mime-edit-dialog.c:163
+msgid "Extension"
+msgstr "Udvidelse"
+
+#: capplets/file-types/mime-edit-dialog.c:166
+msgid "Edit file type"
+msgstr "RedigÃ©r filtype"
+
+#: capplets/file-types/mime-edit-dialog.c:204
+msgid "Underlying model to notify when Ok is clicked"
+msgstr "UnderlÃ¦ggende model der skal underrettes nÃ¥r der klikkes pÃ¥ O.k."
+
+#: capplets/file-types/mime-edit-dialog.c:211
+msgid "MIME type information"
+msgstr "MIME-type-information"
+
+#: capplets/file-types/mime-edit-dialog.c:212
+msgid "Structure with data on the MIME type"
+msgstr "Struktur med data om MIME-typen"
+
+#: capplets/file-types/mime-edit-dialog.c:218
+msgid "Is add dialog"
+msgstr "Er tilfÃ¸jelsesvindue"
+
+#: capplets/file-types/mime-edit-dialog.c:219
+msgid "True if this dialog is for adding a MIME type"
+msgstr "TRUE hvis dette vindue er til alt tilfÃ¸je en MIME-type"
+
+#: capplets/file-types/mime-edit-dialog.c:386
+#: capplets/file-types/mime-edit-dialog.c:441
+msgid "None"
+msgstr "Ingen"
+
+#: capplets/file-types/mime-edit-dialog.c:670
+msgid ""
+"Invalid MIME type. Please enter a valid MIME type, or leave the field blank "
+"to have one generated for you."
+msgstr ""
+"Ugyldig MIME-type. Indtast venligst en gyldig MIME-type eller lad feltet "
+"vÃ¦re tomt for at fÃ¥ en genereret for dig."
+
+#: capplets/file-types/mime-edit-dialog.c:680
+msgid "There already exists a MIME type of that name."
+msgstr "Der eksisterer allerede en MIME-type med det navn."
+
+#: capplets/file-types/mime-edit-dialog.c:745
+msgid "Category"
+msgstr "Kategori"
+
+#: capplets/file-types/mime-edit-dialog.c:750
+msgid "Choose a file category"
+msgstr "VÃ¦lg en filkategori"
+
+#: capplets/file-types/mime-types-model.c:167
+#: capplets/file-types/mime-types-model.c:168
+msgid "Model for categories only"
+msgstr "Model til kategorier kun"
+
+#: capplets/file-types/mime-types-model.c:420
+msgid "Internet Services"
+msgstr "Internettjenester"
+
+#: capplets/file-types/service-edit-dialog.c:132
+msgid "Edit service information"
+msgstr "RedigÃ©r tjenesteinformation"
+
+#: capplets/file-types/service-edit-dialog.c:173
+msgid "Service info"
+msgstr "Tjenesteinfo"
+
+#: capplets/file-types/service-edit-dialog.c:174
+msgid "Structure containing service information"
+msgstr "Struktur der indeholder tjenesteinformation"
+
+#: capplets/file-types/service-edit-dialog.c:180
+msgid "Is add"
+msgstr "Er tilfÃ¸j"
+
+#: capplets/file-types/service-edit-dialog.c:181
+msgid "TRUE if this is an add service dialog"
+msgstr "TRUE hvis dette er et tjenestetilfÃ¸jelsesvindue"
+
+# ditto
+#: capplets/file-types/service-edit-dialog.c:486
+msgid "Please enter a protocol name."
+msgstr "Indtast venligst et protokolnavn."
+
+#: capplets/file-types/service-edit-dialog.c:497
+msgid ""
+"Invalid protocol name. Please enter a protocol name without any spaces or "
+"punctuation."
+msgstr ""
+"Ugyldigt protokolnavn. Indtast venligst et protokolnavn uden mellemrum eller "
+"punktuering."
+
+#: capplets/file-types/service-edit-dialog.c:509
+msgid "There is already a protocol by that name."
+msgstr "Der eksisterer allerede en protokol med det navn."
+
+#: capplets/file-types/service-info.c:43
+msgid "Unknown service types"
+msgstr "Ukendte tjenestetyper"
+
+#: capplets/file-types/service-info.c:44
+msgid "World wide web"
+msgstr "Internet"
+
+#: capplets/file-types/service-info.c:45
+msgid "File transfer protocol"
+msgstr "FiloverfÃ¸rselsprotokol"
+
+#: capplets/file-types/service-info.c:46
+msgid "Detailed documentation"
+msgstr "Detaljeret dokumentation"
+
+#: capplets/file-types/service-info.c:47
+msgid "Manual pages"
+msgstr "Manualsider"
+
+#: capplets/file-types/service-info.c:48
+msgid "Electronic mail transmission"
+msgstr "Epost-overfÃ¸rsel"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:263
 #: capplets/keyboard/gnome-keyboard-properties.c:265
@@ -130,58 +548,156 @@ msgstr "Tastaturindstillinger"
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
+"Anvend blot indstillingerne og afslut (for kompatibilitet kun; nu hÃ¥ndteret "
+"af dÃ¦mon)"
+
+#: capplets/keyboard/keyboard.desktop.in.h:1
+msgid "Keyboard"
+msgstr "Tastatur"
+
+#: capplets/keyboard/keyboard.desktop.in.h:2
+msgid "Keyboard Properties"
+msgstr "Indstillinger for tastatur"
+
+#: capplets/mouse/gnome-mouse-properties.c:499
+#: capplets/mouse/mouse.desktop.in.h:2
+msgid "Mouse Properties"
+msgstr "Indstillinger for mus"
 
 #: capplets/mouse/mouse.desktop.in.h:1
 msgid "Mouse"
 msgstr "Mus"
 
-#: capplets/mouse/gnome-mouse-properties.c:499
-#: capplets/mouse/mouse.desktop.in.h:2
-msgid "Mouse Properties"
-msgstr "Museindstillinger"
+#: capplets/screensaver/screensaver.desktop.in.h:1
+msgid "Configure the settings of the screensaver"
+msgstr "KonfigurÃ©r pauseskÃ¦rmen"
 
-#: capplets/sound/sound-properties-capplet.c:172
-#, fuzzy
-msgid "Sound properties"
-msgstr "Baggrundsfarver"
+#: capplets/screensaver/screensaver.desktop.in.h:2
+msgid "Screensaver"
+msgstr "PauseskÃ¦rm"
 
 #: capplets/sound/sound.desktop.in.h:1
 msgid "Configure GNOME's use of sound"
-msgstr "Konfigurér brugen af lyd i Gnome"
+msgstr "KonfigurÃ©r brugen af lyd i Gnome"
 
-#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
-#: capplets/sound/sound.desktop.in.h:2
-msgid "Sound"
-msgstr "Lyd"
+#: capplets/sound/sound-properties-capplet.c:172
+msgid "Sound properties"
+msgstr "Indstillinger for lyd"
 
-#: control-center/Gnome.directory.in.in.h:1
-msgid "Main"
-msgstr "Hoved"
+#. just 8 short names that will serve as samples for titles in demo
+#: capplets/theme-switcher/control/control.c:19
+msgid "Eenie"
+msgstr "NÃ¥r det"
 
-#: control-center/Gnome.directory.in.in.h:2
-msgid "Main Settings"
-msgstr "Hovedindstillinger"
+#: capplets/theme-switcher/control/control.c:19
+msgid "Mynie"
+msgstr "Regner"
 
-#: control-center/capplet-dir-view-list.c:325
-#, fuzzy, c-format
-msgid "GNOME Control Center: %s"
-msgstr "Kontrolcenter:"
+#: capplets/theme-switcher/control/control.c:19
+msgid "Catcha"
+msgstr "FÃ¥r man"
+
+#: capplets/theme-switcher/control/control.c:19
+msgid "By Its"
+msgstr "Fregner"
+
+#: capplets/theme-switcher/control/control.c:20
+msgid "Meenie"
+msgstr "NÃ¥r det"
+
+#: capplets/theme-switcher/control/control.c:20
+msgid "Moe"
+msgstr "Sner"
+
+#: capplets/theme-switcher/control/control.c:20
+msgid "Tiger"
+msgstr "FÃ¥r man"
+
+#: capplets/theme-switcher/control/control.c:20
+msgid "Toe"
+msgstr "Fler'"
+
+# dÃ¦kker bedre end direkte oversÃ¦ttelse som bliver kluntet
+#: capplets/theme-switcher/control/control.c:38
+msgid "Selected themes from above will be tested by previewing here."
+msgstr "Det valgte tema vises her som en test."
+
+#. column one
+#: capplets/theme-switcher/control/control.c:43
+msgid "Sample Button"
+msgstr "PrÃ¸veknap"
+
+#: capplets/theme-switcher/control/control.c:47
+msgid "Sample Check Button"
+msgstr "PrÃ¸veafkrydsningsknap"
+
+#: capplets/theme-switcher/control/control.c:52
+msgid "Sample Text Entry Field"
+msgstr "PrÃ¸veindtastningsfelt"
+
+#: capplets/theme-switcher/control/control.c:63
+msgid "Submenu"
+msgstr "Undermenu"
+
+#: capplets/theme-switcher/control/control.c:68
+msgid "Item 1"
+msgstr "Punkt 1"
+
+#: capplets/theme-switcher/control/control.c:70
+msgid "Another item"
+msgstr "Et andet punkt"
+
+#: capplets/theme-switcher/control/control.c:74
+msgid "Radio Button 1"
+msgstr "Radioknap 1"
+
+#: capplets/theme-switcher/control/control.c:80
+msgid "Radio Button 2"
+msgstr "Radioknap 2"
+
+#: capplets/theme-switcher/control/control.c:101
+msgid "One"
+msgstr "En"
+
+#: capplets/theme-switcher/control/control.c:107
+msgid "Two"
+msgstr "To"
+
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
+msgid "Gtk+ Theme Selector"
+msgstr "Gtk+-temavÃ¦lger"
+
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
+msgid "Select which gtk+ theme to use"
+msgstr "VÃ¦lg hvilket Gtk+-tema der skal bruges"
+
+#: capplets/theme-switcher/main.c:209
+msgid "Select a theme to install"
+msgstr "VÃ¦lg et tema der skal installeres"
+
+#: capplets/ui-properties/behavior.desktop.in.h:1
+msgid "Sets the default behavior of GNOME applications"
+msgstr "KonfigurÃ©r standardopfÃ¸rslen for Gnome-programmer"
+
+#: capplets/ui-properties/behavior.desktop.in.h:2
+msgid "Toolbars & Menus"
+msgstr "VÃ¦rktÃ¸jslinjer og menuer"
 
 #: control-center/capplet-dir-view.c:146
 msgid "Layout"
-msgstr ""
+msgstr "Layout"
 
 #: control-center/capplet-dir-view.c:147
 msgid "Layout to use for this view of the capplets"
-msgstr ""
+msgstr "Layout der skal bruges for denne visning af kontrolcenterprogrammerne"
 
 #: control-center/capplet-dir-view.c:153
 msgid "Capplet directory object"
-msgstr ""
+msgstr "Mappeobjekt for kontrolcenterprogram"
 
 #: control-center/capplet-dir-view.c:154
 msgid "Capplet directory that this view is viewing"
-msgstr ""
+msgstr "Mappe for kontrolcenterprogram som denne visning viser"
 
 #: control-center/capplet-dir-view.c:308 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
@@ -189,7 +705,7 @@ msgstr "Kontrolcenter"
 
 #: control-center/capplet-dir-view.c:311
 msgid "Desktop properties manager."
-msgstr "Håndtering af skrivebordsegenskaber"
+msgstr "HÃ¥ndtering af skrivebordsindstillinger"
 
 #: control-center/capplet-dir-view.c:445
 #, c-format
@@ -201,42 +717,46 @@ msgid ""
 "No help is available/installed. Please make sure you\n"
 "have the GNOME User's Guide installed on your system."
 msgstr ""
-"Ingen hjælp tilgængelig/installeret. Sørg venligst for\n"
-"at du har Gnomes brugervejledning installeret på systemet."
+"Ingen hjÃ¦lp tilgÃ¦ngelig/installeret. SÃ¸rg venligst for\n"
+"at du har Gnomes brugervejledning installeret pÃ¥ systemet."
 
 #: control-center/capplet-dir-view.c:491
 msgid "Close"
 msgstr "Luk"
 
+#: control-center/capplet-dir-view-list.c:325
+#, c-format
+msgid "GNOME Control Center: %s"
+msgstr "Kontrolcenter: %s"
+
 #: control-center/gnomecc.desktop.in.h:2
 msgid "The GNOME configuration tool"
-msgstr "Et centralt opsætningsværktøj til Gnome"
+msgstr "Et centralt opsÃ¦tningsvÃ¦rktÃ¸j til Gnome"
 
 #: libbackground/applier.c:228
 msgid "Type"
 msgstr "Type"
 
 #: libbackground/applier.c:229
-#, fuzzy
 msgid ""
 "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
 "for preview"
 msgstr ""
-"Anvendelsestype: APPLIER_ROOT for rodvinduet eller APPLIER_PREVIEW for "
-"eksempel"
+"Type af bg_applier: BG_APPLIER_ROOT for rodvinduet eller BG_APPLIER_PREVIEW "
+"for eksempel"
 
-#: libbackground/applier.c:388
+#: libbackground/applier.c:391
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
-msgstr "Kunne ikke indlæse billedet '%s'; deaktiverer baggrundsbillede"
+msgstr "Kunne ikke indlÃ¦se billedet '%s'; deaktiverer baggrundsbillede."
 
-#: libbackground/applier.c:505
+#: libbackground/applier.c:455
 msgid "Disabled"
 msgstr "Deaktiveret"
 
 #: libsounds/sound-view.c:98
 msgid "The sound file for this event does not exist."
-msgstr ""
+msgstr "Lydfilen for denne hÃ¦ndelse eksisterer ikke."
 
 #: libsounds/sound-view.c:100
 msgid ""
@@ -244,448 +764,31 @@ msgid ""
 "You may want to install the gnome-audio package\n"
 "for a set of default sounds."
 msgstr ""
+"Lydfilen for denne hÃ¦ndelse eksisterer ikke.\n"
+"Du kan evt. installere gnome-audio-pakken\n"
+"for et sÃ¦t standardlyde."
 
 #: libsounds/sound-view.c:152
 msgid "Event"
-msgstr ""
+msgstr "HÃ¦ndelse"
 
 #: libsounds/sound-view.c:152
 msgid "File to Play"
-msgstr ""
+msgstr "Fil at afspille"
 
 #: libsounds/sound-view.c:185
-#, fuzzy
 msgid "Play"
-msgstr "Pulsar"
+msgstr "Spil"
 
 #: libsounds/sound-view.c:191
-#, fuzzy
 msgid "Select sound file"
-msgstr "Vælg en fremviser..."
+msgstr "VÃ¦lg en lydfil"
 
-#: capplets/file-types/file-types.desktop.in.h:1
-msgid "File Types and Programs"
-msgstr ""
+#~ msgid "Main"
+#~ msgstr "Hoved"
 
-#: capplets/file-types/file-types.desktop.in.h:2
-msgid "Specify which programs are used to open or view each file type"
-msgstr ""
-
-#: capplets/file-types/mime-types-model.c:167
-#: capplets/file-types/mime-types-model.c:168
-msgid "Model for categories only"
-msgstr ""
-
-#: capplets/file-types/mime-types-model.c:420
-#, fuzzy
-msgid "Internet Services"
-msgstr "Interferens"
-
-#: capplets/file-types/mime-edit-dialog.c:163
-#, fuzzy
-msgid "Extension"
-msgstr "Udstansning"
-
-#: capplets/file-types/mime-edit-dialog.c:166
-msgid "Edit file type"
-msgstr ""
-
-#: capplets/file-types/mime-category-edit-dialog.c:170
-#: capplets/file-types/mime-edit-dialog.c:203
-#: capplets/file-types/service-edit-dialog.c:165
-#: capplets/file-types/service-edit-dialog.c:166
-#, fuzzy
-msgid "Model"
-msgstr "T_ilstand:"
-
-#: capplets/file-types/mime-edit-dialog.c:204
-msgid "Underlying model to notify when Ok is clicked"
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:211
-msgid "MIME type information"
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:212
-msgid "Structure with data on the MIME type"
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:218
-msgid "Is add dialog"
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:219
-msgid "True if this dialog is for adding a MIME type"
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:386
-#: capplets/file-types/mime-edit-dialog.c:441
-#, fuzzy
-msgid "None"
-msgstr "Længere"
-
-#: capplets/file-types/mime-category-edit-dialog.c:342
-#: capplets/file-types/mime-edit-dialog.c:391
-#: capplets/file-types/mime-edit-dialog.c:491
-#: capplets/file-types/service-edit-dialog.c:350
-#: capplets/file-types/service-edit-dialog.c:396
-msgid "Custom"
-msgstr "Selvvalgt"
-
-#: capplets/file-types/mime-edit-dialog.c:670
-msgid ""
-"Invalid MIME type. Please enter a valid MIME type, or leave the field blank "
-"to have one generated for you."
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:680
-msgid "There already exists a MIME type of that name."
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:745
-msgid "Category"
-msgstr ""
-
-#: capplets/file-types/mime-edit-dialog.c:750
-msgid "Choose a file category"
-msgstr ""
-
-#: capplets/file-types/mime-category-edit-dialog.c:136
-msgid "Edit file category"
-msgstr ""
-
-#: capplets/file-types/mime-category-edit-dialog.c:171
-msgid "GtkTreeModel that contains the category data"
-msgstr ""
-
-#: capplets/file-types/mime-category-edit-dialog.c:176
-msgid "MIME category info"
-msgstr ""
-
-#: capplets/file-types/mime-category-edit-dialog.c:177
-msgid "Structure containing information on the MIME category"
-msgstr ""
-
-#: capplets/file-types/service-info.c:43
-msgid "Unknown service types"
-msgstr ""
-
-#: capplets/file-types/service-info.c:44
-msgid "World wide web"
-msgstr ""
-
-#: capplets/file-types/service-info.c:45
-msgid "File transfer protocol"
-msgstr ""
-
-# i hvert fald bedre end standardsted...
-#: capplets/file-types/service-info.c:46
-#, fuzzy
-msgid "Detailed documentation"
-msgstr "Hjemsted"
-
-#: capplets/file-types/service-info.c:47
-msgid "Manual pages"
-msgstr ""
-
-#: capplets/file-types/service-info.c:48
-msgid "Electronic mail transmission"
-msgstr ""
-
-#: capplets/file-types/service-edit-dialog.c:132
-msgid "Edit service information"
-msgstr ""
-
-#: capplets/file-types/service-edit-dialog.c:173
-msgid "Service info"
-msgstr ""
-
-#: capplets/file-types/service-edit-dialog.c:174
-msgid "Structure containing service information"
-msgstr ""
-
-#: capplets/file-types/service-edit-dialog.c:180
-msgid "Is add"
-msgstr ""
-
-#: capplets/file-types/service-edit-dialog.c:181
-msgid "TRUE if this is an add service dialog"
-msgstr ""
-
-# ditto
-#: capplets/file-types/service-edit-dialog.c:486
-#, fuzzy
-msgid "Please enter a protocol name."
-msgstr "Indtast venligst en kommandolinje."
-
-#: capplets/file-types/service-edit-dialog.c:497
-msgid ""
-"Invalid protocol name. Please enter a protocol name without any spaces or "
-"punctuation."
-msgstr ""
-
-#: capplets/file-types/service-edit-dialog.c:509
-msgid "There is already a protocol by that name."
-msgstr ""
-
-#.
-#. * Translatable strings file
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/file-types/category-names.h:7
-msgid "Documents"
-msgstr ""
-
-#: capplets/file-types/category-names.h:8
-msgid "Word Processor"
-msgstr ""
-
-#: capplets/file-types/category-names.h:9
-msgid "Published Materials"
-msgstr ""
-
-#: capplets/file-types/category-names.h:10
-msgid "Spreadsheet"
-msgstr ""
-
-#: capplets/file-types/category-names.h:11
-msgid "Presentation"
-msgstr ""
-
-#: capplets/file-types/category-names.h:12
-msgid "Diagram"
-msgstr ""
-
-#: capplets/file-types/category-names.h:13
-msgid "TeX"
-msgstr ""
-
-#: capplets/file-types/category-names.h:14
-msgid "Vector Graphics"
-msgstr ""
-
-#: capplets/file-types/category-names.h:15
-msgid "World Wide Web"
-msgstr ""
-
-#: capplets/file-types/category-names.h:16
-#, fuzzy
-msgid "Plain Text"
-msgstr "Globus"
-
-#: capplets/file-types/category-names.h:17
-msgid "Extended Markup Language (XML)"
-msgstr ""
-
-#: capplets/file-types/category-names.h:18
-#, fuzzy
-msgid "Information"
-msgstr "Opsætning"
-
-#: capplets/file-types/category-names.h:19
-msgid "Financial"
-msgstr ""
-
-#: capplets/file-types/category-names.h:20
-msgid "Calendar"
-msgstr ""
-
-#: capplets/file-types/category-names.h:21
-msgid "Contacts"
-msgstr ""
-
-#: capplets/file-types/category-names.h:22
-msgid "Packages"
-msgstr ""
-
-#: capplets/file-types/category-names.h:23
-msgid "Software Development"
-msgstr ""
-
-#: capplets/file-types/category-names.h:24
-msgid "Source Code"
-msgstr ""
-
-#: capplets/file-types/category-names.h:25
-msgid "Audio"
-msgstr ""
-
-#: capplets/file-types/category-names.h:26
-#, fuzzy
-msgid "Images"
-msgstr "Billede:"
-
-#: capplets/file-types/category-names.h:27
-#, fuzzy
-msgid "Video"
-msgstr "Bred"
-
-#: capplets/theme-switcher/main.c:209
-#, fuzzy
-msgid "Select a theme to install"
-msgstr "Vælg en terminal"
-
-#: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
-msgid "Gtk+ Theme Selector"
-msgstr ""
-
-#: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
-msgid "Select which gtk+ theme to use"
-msgstr ""
-
-#: capplets/ui-properties/behavior.desktop.in.h:1
-#, fuzzy
-msgid "Behavior"
-msgstr "Fokusopførsel"
-
-#: capplets/ui-properties/behavior.desktop.in.h:2
-msgid "Sets the default behavior of GNOME applications"
-msgstr ""
-
-#: capplets/ui-properties/main.c:47
-#, fuzzy
-msgid "Initialize session settings"
-msgstr "Klargør sessionen"
-
-#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:1
-msgid "Control Center Menu"
-msgstr "Kontrolcentermenu"
-
-#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:2
-msgid "Sawfish window manager"
-msgstr "Vindueshåndtering (Sawfish)"
-
-#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
-msgid "Appearance"
-msgstr "Udseende"
-
-#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:2
-msgid "Configure window appearance"
-msgstr "Indstil vinduesudseendet"
-
-#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:1
-msgid "Configure key shortcuts"
-msgstr "Indstil tastaturgenveje"
-
-#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:2
-msgid "Shortcuts"
-msgstr "Genveje"
-
-#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:1
-msgid "Configure window focusing"
-msgstr "Indstil vinduesfokusering"
-
-#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:2
-msgid "Focus behavior"
-msgstr "Fokusopførsel"
-
-#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
-msgid "Configure window properties"
-msgstr "Indstil egenskaber for bestemte vinduer"
-
-#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:2
-msgid "Matched Windows"
-msgstr "Vinduestilpasninger"
-
-#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:1
-msgid "Configure window minimization and maximization"
-msgstr "Indstil vinduesmaksimering og -minimering"
-
-#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:2
-msgid "Minimizing and Maximizing"
-msgstr "Maksimering/minimering"
-
-#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
-msgid "Configure window manager configuration properties"
-msgstr "Indstil måden vindueshåndteringsindstillinger indstilles på"
-
-#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:2
-msgid "Meta"
-msgstr "Meta"
-
-#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
-msgid "Configure miscellaneous window features"
-msgstr "Indstil diverse vinduesfunktioner"
-
-#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
-msgid "Miscellaneous"
-msgstr "Diverse"
-
-#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:1
-msgid "Configure window move/resize"
-msgstr "Indstil flytning og ændring af størrelse"
-
-#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:2
-msgid "Moving and Resizing"
-msgstr "Flytning og størrelsesændring"
-
-#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:1
-msgid "Configure window placement"
-msgstr "Indstil vinduesplaceringer"
-
-#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:2
-#, fuzzy
-msgid "Placement"
-msgstr "Lament"
-
-#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
-msgid "Enable window manager sound events"
-msgstr "Indstil lyde for vindueshåndteringshændelser"
-
-#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:1
-msgid "Configure workspaces"
-msgstr "Indstil arbejds- og visningsområder"
-
-#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:2
-msgid "Workspaces"
-msgstr "Arbejdsområder"
-
-#: capplets/desktop-links/Advanced.directory.in.in.h:1
-msgid "Advanced"
-msgstr ""
-
-#: capplets/desktop-links/Advanced.directory.in.in.h:2
-#, fuzzy
-msgid "Advanced Settings"
-msgstr "Hovedindstillinger"
-
-#: capplets/desktop-links/cd.desktop.in.in.h:1
-#, fuzzy
-msgid "CD Properties"
-msgstr "Indstillinger for %s"
-
-#: capplets/desktop-links/cd.desktop.in.in.h:2
-#, fuzzy
-msgid "Configure handling of CD devices"
-msgstr "Indstil egenskaber for bestemte vinduer"
-
-#: capplets/desktop-links/legacy-applications.desktop.in.in.h:1
-#, fuzzy
-msgid "Legacy Applications"
-msgstr "Forvalgte programmer"
-
-#: capplets/desktop-links/legacy-applications.desktop.in.in.h:2
-msgid "Legacy applications settings (grdb)"
-msgstr ""
-
-#: capplets/desktop-links/panel.desktop.in.in.h:1
-#, fuzzy
-msgid "Global panel properties"
-msgstr "Globale arkiveringstilvalg"
-
-#: capplets/desktop-links/panel.desktop.in.in.h:2
-#, fuzzy
-msgid "Panel"
-msgstr "Globus"
-
-#: capplets/desktop-links/session.desktop.in.in.h:1
-msgid "Configure which non-session aware programs are started up"
-msgstr ""
-
-#: capplets/desktop-links/session.desktop.in.in.h:2
-msgid "Startup Programs"
-msgstr ""
+#~ msgid "Main Settings"
+#~ msgstr "Hovedindstillinger"
 
 # i hvert fald bedre end standardsted...
 #~ msgid "Default location"
@@ -694,9 +797,9 @@ msgstr ""
 #~ msgid "Store XML data in the archive"
 #~ msgstr "Gem XML-data i arkivet"
 
-# dækker vist meningen bedst
+# dÃ¦kker vist meningen bedst
 #~ msgid "Roll back the configuration to a given point"
-#~ msgstr "Gå tilbage til en tidligere konfiguration"
+#~ msgstr "GÃ¥ tilbage til en tidligere konfiguration"
 
 #~ msgid "Change the location profile to the given one"
 #~ msgstr "Skift stedprofilen til det angivne"
@@ -709,19 +812,19 @@ msgstr ""
 #~ msgstr "Giv et sted et nyt navn"
 
 #~ msgid "Add a new location to the archive"
-#~ msgstr "Tilføj et nyt sted til arkivet"
+#~ msgstr "TilfÃ¸j et nyt sted til arkivet"
 
 #~ msgid "Remove a location from the archive"
 #~ msgstr "Fjern et sted fra arkivet"
 
 #~ msgid "Add a given backend to the given location"
-#~ msgstr "Tilføj en given bagende til den givne sted"
+#~ msgstr "TilfÃ¸j en given bagende til den givne sted"
 
 #~ msgid "Remove the given backend from the given location"
 #~ msgstr "Fjern den givne bagende fra det givne sted"
 
 #~ msgid "Perform garbage collection on the given location"
-#~ msgstr "Udfør affaldsopsamling ved det givne sted"
+#~ msgstr "UdfÃ¸r affaldsopsamling ved det givne sted"
 
 #~ msgid "Use the global repository"
 #~ msgstr "Benyt det globale arkiv"
@@ -743,10 +846,10 @@ msgstr ""
 
 #~ msgid "Store only those settings set in the previous config"
 #~ msgstr ""
-#~ "Gem kun de indstillinger der blev sat i den foregående konfiguration"
+#~ "Gem kun de indstillinger der blev sat i den foregÃ¥ende konfiguration"
 
 #~ msgid "Date to which to roll back"
-#~ msgstr "Dato der skal gås tilbage til"
+#~ msgstr "Dato der skal gÃ¥s tilbage til"
 
 #~ msgid "DATE"
 #~ msgstr "DATO"
@@ -755,22 +858,22 @@ msgstr ""
 #~ msgstr "Skift alle konfigurationspunkterne tilbage"
 
 #~ msgid "Roll back to the revision REVISION_ID"
-#~ msgstr "Gå tilbage til revisionen REVISIONS-ID"
+#~ msgstr "GÃ¥ tilbage til revisionen REVISIONS-ID"
 
 #~ msgid "REVISION_ID"
 #~ msgstr "REVISIONS-ID"
 
 #~ msgid "Roll back to the last known revision"
-#~ msgstr "Gå tilbage til den sidst kendte revision"
+#~ msgstr "GÃ¥ tilbage til den sidst kendte revision"
 
 #~ msgid "Roll back by STEPS revisions"
-#~ msgstr "Gå TRIN revisioner tilbage"
+#~ msgstr "GÃ¥ TRIN revisioner tilbage"
 
 #~ msgid "STEPS"
 #~ msgstr "TRIN"
 
 #~ msgid "Don't run the backend, just dump the output"
-#~ msgstr "Kør ikke bagenden, vis kun uddata"
+#~ msgstr "KÃ¸r ikke bagenden, vis kun uddata"
 
 #~ msgid "Parent location for the new location"
 #~ msgstr "Ophavstedet for det nye sted"
@@ -786,7 +889,7 @@ msgstr ""
 
 # RETMIG: hovedbagendelisten
 #~ msgid "Add/remove this backend to/from the master backend list"
-#~ msgstr "Tilføj/fjern denne bagende fra hovedbagendelisten"
+#~ msgstr "TilfÃ¸j/fjern denne bagende fra hovedbagendelisten"
 
 #~ msgid "Full containment"
 #~ msgstr "Fuld indeholdelse"
@@ -802,16 +905,16 @@ msgstr ""
 
 # der er plads nok
 #~ msgid "Options for rolling back"
-#~ msgstr "Tilvalg til at gå tilbage til tidligere indstillinger"
+#~ msgstr "Tilvalg til at gÃ¥ tilbage til tidligere indstillinger"
 
 #~ msgid "Options for adding or renaming locations"
-#~ msgstr "Tilvalg til at tilføje eller omdøbe steder"
+#~ msgstr "Tilvalg til at tilfÃ¸je eller omdÃ¸be steder"
 
 #~ msgid "Options for adding and removing backends"
-#~ msgstr "Tilvalg til at tilføje eller fjerne bagender"
+#~ msgstr "Tilvalg til at tilfÃ¸je eller fjerne bagender"
 
 #~ msgid "Wallpaper Selection"
-#~ msgstr "Billedvælger"
+#~ msgstr "BilledvÃ¦lger"
 
 #~ msgid "Preview"
 #~ msgstr "Smugkig"
@@ -820,11 +923,11 @@ msgstr ""
 #~ msgstr "Forvalgt redigeringsprogram til Gnome"
 
 #~ msgid "Select an Editor"
-#~ msgstr "Vælg et redigeringsprogram"
+#~ msgstr "VÃ¦lg et redigeringsprogram"
 
 #~ msgid "With this option, you can select a predefined Editor as your default"
 #~ msgstr ""
-#~ "Med denne indstillinger kan du vælge et prædefineret redigeringsprogram "
+#~ "Med denne indstillinger kan du vÃ¦lge et prÃ¦defineret redigeringsprogram "
 #~ "som forvalg"
 
 #~ msgid "Custom Editor"
@@ -864,12 +967,12 @@ msgstr ""
 #~ msgstr "Forvalgt netsurfningsprogram til Gnome"
 
 #~ msgid "Select a Web Browser"
-#~ msgstr "Vælg et netsurfningsprogram"
+#~ msgstr "VÃ¦lg et netsurfningsprogram"
 
 #~ msgid ""
 #~ "With this option, you can select a predefined Web Browser as your default"
 #~ msgstr ""
-#~ "Med denne indstillinger kan du vælge et prædefineret surfningsprogram som "
+#~ "Med denne indstillinger kan du vÃ¦lge et prÃ¦defineret surfningsprogram som "
 #~ "forvalg"
 
 #~ msgid "Custom Web Browser"
@@ -883,16 +986,16 @@ msgstr ""
 #~ msgstr "Starter netsurfningsprogrammet i et terminalvindue"
 
 #~ msgid "Understands Netscape Remote Control"
-#~ msgstr "Forstår Netscape-fjernbetjening"
+#~ msgstr "ForstÃ¥r Netscape-fjernbetjening"
 
 #~ msgid ""
 #~ "Does this web browser support the netscape remote control protocol?  If "
 #~ "in doubt, and this web browser isn't Netscape or Mozilla, it probably "
 #~ "doesn't."
 #~ msgstr ""
-#~ "Angiver om surfningprogrammet understøtter fjernbetjeningsprotokollen til "
+#~ "Angiver om surfningprogrammet understÃ¸tter fjernbetjeningsprotokollen til "
 #~ "Netscape. Hvis du er i tvivl, og det ikke drejer sig om Netscape eller "
-#~ "Mozilla, gør det sandsynligvis ikke."
+#~ "Mozilla, gÃ¸r det sandsynligvis ikke."
 
 #~ msgid "Please enter the command line used to start this web browser"
 #~ msgstr ""
@@ -903,42 +1006,42 @@ msgstr ""
 #~ msgstr "Surfningsprogram"
 
 #~ msgid "Default Help Viewer"
-#~ msgstr "Forvalgt hjælpefremviser"
+#~ msgstr "Forvalgt hjÃ¦lpefremviser"
 
 #~ msgid "Select a Viewer"
-#~ msgstr "Vælg en fremviser..."
+#~ msgstr "VÃ¦lg en fremviser..."
 
 #~ msgid "With this option you can select a predefined help viewer."
-#~ msgstr "Med denne indstilling kan du vælge en prædefineret hjælpefremviser."
+#~ msgstr "Med denne indstilling kan du vÃ¦lge en prÃ¦defineret hjÃ¦lpefremviser."
 
 #~ msgid "Custom Help Viewer"
-#~ msgstr "Selvvalgt hjælpefremviser"
+#~ msgstr "Selvvalgt hjÃ¦lpefremviser"
 
 #~ msgid "With this option you can create your own help viewer"
-#~ msgstr "Med denne indstilling kan du angive din egen hjælpefremviser"
+#~ msgstr "Med denne indstilling kan du angive din egen hjÃ¦lpefremviser"
 
 #~ msgid "Does this help viewer need an xterm for display?"
-#~ msgstr "Starter hjælpefremviseren i et terminalvindue"
+#~ msgstr "Starter hjÃ¦lpefremviseren i et terminalvindue"
 
 #~ msgid "Accepts URLs"
 #~ msgstr "Accepterer URL'er"
 
 #~ msgid "Does this help viewer allow URLs for help?"
-#~ msgstr "Angiver om hjælpefremviseren tillader URL'er til hjælp"
+#~ msgstr "Angiver om hjÃ¦lpefremviseren tillader URL'er til hjÃ¦lp"
 
 #~ msgid "Please enter the command line used to start this help viewer"
 #~ msgstr ""
 #~ "Indtast en kommandolinje som skal bruges til at starte denne "
-#~ "hjælpefremviser"
+#~ "hjÃ¦lpefremviser"
 
 #~ msgid "Help Viewer"
-#~ msgstr "Hjælpefremviser"
+#~ msgstr "HjÃ¦lpefremviser"
 
 #~ msgid "Default Terminal"
 #~ msgstr "Standardterminalen"
 
 #~ msgid "With this option you can select a predefined terminal."
-#~ msgstr "Med denne indstilling kan du vælge en prædefineret terminal."
+#~ msgstr "Med denne indstilling kan du vÃ¦lge en prÃ¦defineret terminal."
 
 #~ msgid "Custom Terminal"
 #~ msgstr "Selvvalgt terminal"
@@ -948,14 +1051,14 @@ msgstr ""
 
 # "tilvalg" fordi det er kommandolinjeparametre
 #~ msgid "Exec Flag:"
-#~ msgstr "Kørselstilvalg:"
+#~ msgstr "KÃ¸rselstilvalg:"
 
 #~ msgid ""
 #~ "Please enter the flag used by this terminal to specify the command to run "
 #~ "on startup.  For example, in 'xterm' this would be '-e'."
 #~ msgstr ""
 #~ "Det tilvalg som bruges af denne terminal til at angive kommandoen som "
-#~ "skal køres ved opstarten, f.eks. ville det for 'xterm' være '-e'."
+#~ "skal kÃ¸res ved opstarten, f.eks. ville det for 'xterm' vÃ¦re '-e'."
 
 #~ msgid "Please enter the command line used to start this terminal"
 #~ msgstr ""
@@ -970,45 +1073,18 @@ msgstr ""
 #~ msgid "Couldn't create pixmap from file: %s"
 #~ msgstr "Kunne ikke oprette billede fra fil: %s"
 
-# dækker vist meningen bedst
+# dÃ¦kker vist meningen bedst
 #, fuzzy
 #~ msgid "Rollback the capplet given"
-#~ msgstr "Gå tilbage til en tidligere konfiguration"
+#~ msgstr "GÃ¥ tilbage til en tidligere konfiguration"
 
 # der er plads nok
 #, fuzzy
 #~ msgid "Options for the rollback GUI"
-#~ msgstr "Tilvalg til at gå tilbage til tidligere indstillinger"
-
-#, fuzzy
-#~ msgid "30 minutes ago"
-#~ msgstr "minutter"
-
-#, fuzzy
-#~ msgid "10 minutes ago"
-#~ msgstr "minutter"
-
-#, fuzzy
-#~ msgid "5 minutes ago"
-#~ msgstr "minutter"
-
-#, fuzzy
-#~ msgid "1 minute ago"
-#~ msgstr "minutter"
-
-#, fuzzy
-#~ msgid "Current time"
-#~ msgstr "Centrer billede"
-
-#, fuzzy
-#~ msgid "Rollback"
-#~ msgstr "Klippestykker"
+#~ msgstr "Tilvalg til at gÃ¥ tilbage til tidligere indstillinger"
 
 #~ msgid "Custom screensaver. No description available"
-#~ msgstr "Selvvalgt pauseskærm. Ingen beskrivelse tilgængelig."
-
-#~ msgid "Screensaver"
-#~ msgstr "Pauseskærm"
+#~ msgstr "Selvvalgt pauseskÃ¦rm. Ingen beskrivelse tilgÃ¦ngelig."
 
 #~ msgid "About %s\n"
 #~ msgstr "Om %s\n"
@@ -1019,9 +1095,6 @@ msgstr ""
 #~ msgid "Settings"
 #~ msgstr "Indstillinger"
 
-#~ msgid "Description"
-#~ msgstr "Beskrivelse"
-
 #~ msgid "label1"
 #~ msgstr "etiket1"
 
@@ -1029,25 +1102,22 @@ msgstr ""
 #~ msgstr "Demo"
 
 #~ msgid "There are no configurable settings for this screensaver."
-#~ msgstr "For denne pauseskærm er der ingen indstillinger der kan ændres."
+#~ msgstr "For denne pauseskÃ¦rm er der ingen indstillinger der kan Ã¦ndres."
 
-# nedenunder overflødigt
+# nedenunder overflÃ¸digt
 #~ msgid ""
 #~ "Cannot find the data to configure this screensaver. Please edit the "
 #~ "command line below."
 #~ msgstr ""
-#~ "Kan ikke finde oplysninger til indstilling af denne pauseskærm. Tilret "
+#~ "Kan ikke finde oplysninger til indstilling af denne pauseskÃ¦rm. Tilret "
 #~ "venligst kommandolinjen."
 
-# dækker over 'visual'-begrebet i X, ca. = farvedybde her
+# dÃ¦kker over 'visual'-begrebet i X, ca. = farvedybde her
 #~ msgid "Visual:"
 #~ msgstr "Farvedybde:"
 
 #~ msgid "Any"
 #~ msgstr "Enhver"
-
-#~ msgid "Configure the settings of the screensaver"
-#~ msgstr "Konfigurér pauseskærmen"
 
 #~ msgid "3d clock"
 #~ msgstr "Ur i 3d"
@@ -1056,7 +1126,7 @@ msgstr ""
 #~ msgstr "Hurtig"
 
 #~ msgid "High"
-#~ msgstr "Høj"
+#~ msgstr "HÃ¸j"
 
 #~ msgid "Large"
 #~ msgstr "Stor"
@@ -1065,7 +1135,7 @@ msgstr ""
 #~ msgstr "Lav"
 
 #~ msgid "Size:"
-#~ msgstr "Størrelse:"
+#~ msgstr "StÃ¸rrelse:"
 
 #~ msgid "Slow"
 #~ msgstr "Langsom"
@@ -1089,10 +1159,10 @@ msgstr ""
 #~ "their path. Then, as they pass over changed pixels, their behavior is "
 #~ "influenced. Written by David Bagley."
 #~ msgstr ""
-#~ "En cellulær automat som egentligt er en to-dimensional Turing-maskine: "
-#~ "efterhånden som hovederne (myrerne) vandrer over skærmen, ændrer de "
-#~ "værdierne i punkterne på deres vej. Og når de passerer ændrede punkter, "
-#~ "indvirker det på deres opførsel. Skrevet af David Bagley."
+#~ "En cellulÃ¦r automat som egentligt er en to-dimensional Turing-maskine: "
+#~ "efterhÃ¥nden som hovederne (myrerne) vandrer over skÃ¦rmen, Ã¦ndrer de "
+#~ "vÃ¦rdierne i punkterne pÃ¥ deres vej. Og nÃ¥r de passerer Ã¦ndrede punkter, "
+#~ "indvirker det pÃ¥ deres opfÃ¸rsel. Skrevet af David Bagley."
 
 #~ msgid "Ant"
 #~ msgstr "Myrer"
@@ -1116,13 +1186,13 @@ msgstr ""
 #~ msgstr "Antal farver"
 
 #~ msgid "Random"
-#~ msgstr "Tilfældig"
+#~ msgstr "TilfÃ¦ldig"
 
 #~ msgid "Random size upto"
-#~ msgstr "Tilfældig størrelse op til"
+#~ msgstr "TilfÃ¦ldig stÃ¸rrelse op til"
 
 #~ msgid "Randomize"
-#~ msgstr "Tilfældig"
+#~ msgstr "TilfÃ¦ldig"
 
 #~ msgid "Sharp turns"
 #~ msgstr "Skarpe sving"
@@ -1134,7 +1204,7 @@ msgstr ""
 #~ msgstr "Specifik"
 
 #~ msgid "Specific size of"
-#~ msgstr "Specifik størrelse på"
+#~ msgstr "Specifik stÃ¸rrelse pÃ¥"
 
 #~ msgid "Speed"
 #~ msgstr "Hastighed"
@@ -1151,9 +1221,6 @@ msgstr ""
 #~ msgid "Twelve Sided cells"
 #~ msgstr "Tolvsidede celler"
 
-#~ msgid "Two"
-#~ msgstr "To"
-
 #~ msgid "number of Ants"
 #~ msgstr "Antal myrer"
 
@@ -1167,11 +1234,11 @@ msgstr ""
 #~ "by Mark Kilgard."
 #~ msgstr ""
 #~ "Dette er xfishtank i en udvidet udgave: en GL-animation af et antal af "
-#~ "hajer, delfiner og hvaler. Svømmebevægelserne er fine. Oprindeligt "
+#~ "hajer, delfiner og hvaler. SvÃ¸mmebevÃ¦gelserne er fine. Oprindeligt "
 #~ "skrevet af Mark Kilgard."
 
 #~ msgid "Attraction (balls)"
-#~ msgstr "Tiltrækning mellem kugler"
+#~ msgstr "TiltrÃ¦kning mellem kugler"
 
 #~ msgid "Balls"
 #~ msgstr "Kugler"
@@ -1180,7 +1247,7 @@ msgstr ""
 #~ msgstr "Farvekontrast"
 
 #~ msgid "Length of Trail"
-#~ msgstr "Sporlængde"
+#~ msgstr "SporlÃ¦ngde"
 
 #, fuzzy
 #~ msgid ""
@@ -1195,19 +1262,19 @@ msgstr ""
 #~ "or by the edge of the screen. It looks quite chaotic. Written by Jamie "
 #~ "Zawinski, based on Lisp code by John Pezaris."
 #~ msgstr ""
-#~ "Ligesom qix bruger dette en simpel bevægelsesmodel til at generere mange "
-#~ "forskellige fremvisningstilstande. Kontrolpunkterne tiltrækker hinanden "
-#~ "indtil en vis afstand og begynder derefter at frastøde hinanden. "
-#~ "Tiltrækningen/frastødningen er proportional til afstanden mellem de to "
-#~ "partikler ligesom ved de stærke og svage atomare kræfter.\n"
+#~ "Ligesom qix bruger dette en simpel bevÃ¦gelsesmodel til at generere mange "
+#~ "forskellige fremvisningstilstande. Kontrolpunkterne tiltrÃ¦kker hinanden "
+#~ "indtil en vis afstand og begynder derefter at frastÃ¸de hinanden. "
+#~ "TiltrÃ¦kningen/frastÃ¸dningen er proportional til afstanden mellem de to "
+#~ "partikler ligesom ved de stÃ¦rke og svage atomare krÃ¦fter.\n"
 #~ "\n"
-#~ "En af de mest interessante måder at kigge på denne pauseskærm er "
-#~ "simpelthen som hoppende bolde fordi deres bevægelser og samspil er så "
-#~ "mærkelige. Nogle gange kommer to bolde ind i et tæt kredsløb om hinanden "
-#~ "som så afbrydes af en tredje eller af skærmens kant. Det ser ret kaotisk "
+#~ "En af de mest interessante mÃ¥der at kigge pÃ¥ denne pauseskÃ¦rm er "
+#~ "simpelthen som hoppende bolde fordi deres bevÃ¦gelser og samspil er sÃ¥ "
+#~ "mÃ¦rkelige. Nogle gange kommer to bolde ind i et tÃ¦t kredslÃ¸b om hinanden "
+#~ "som sÃ¥ afbrydes af en tredje eller af skÃ¦rmens kant. Det ser ret kaotisk "
 #~ "ud.\n"
 #~ "\n"
-#~ "Skrevet af Jamie Zawinski, baseret på Lisp-kode af John Pezaris."
+#~ "Skrevet af Jamie Zawinski, baseret pÃ¥ Lisp-kode af John Pezaris."
 
 #~ msgid "Lines"
 #~ msgstr "Linjer"
@@ -1231,9 +1298,9 @@ msgstr ""
 #~ msgstr "Haler"
 
 #~ msgid "Threshold of repulsion"
-#~ msgstr "Tærskel for frastødning"
+#~ msgstr "TÃ¦rskel for frastÃ¸dning"
 
-# se næste tekst for forklaring
+# se nÃ¦ste tekst for forklaring
 #~ msgid "Blaster"
 #~ msgstr "Kamp"
 
@@ -1243,15 +1310,15 @@ msgstr ""
 #~ "colored circles) doing battle in front of a moving star field. Written by "
 #~ "Jonathan Lin."
 #~ msgstr ""
-#~ "Tegner en simulation af flyvende rumkampsrobotter (snedigt forklædt som "
-#~ "farvede cirkler) der kæmper foran en stjernehimmel i bevægelse. Skrevet "
+#~ "Tegner en simulation af flyvende rumkampsrobotter (snedigt forklÃ¦dt som "
+#~ "farvede cirkler) der kÃ¦mper foran en stjernehimmel i bevÃ¦gelse. Skrevet "
 #~ "af Jonathan Lin."
 
 #~ msgid "BlitSpin"
 #~ msgstr "Blitspin"
 
 #~ msgid "Display screensaver in monochrome."
-#~ msgstr "Vis pauseskærmen i sort/hvid"
+#~ msgstr "Vis pauseskÃ¦rmen i sort/hvid"
 
 #~ msgid "Faster"
 #~ msgstr "Hurtigere"
@@ -1280,14 +1347,14 @@ msgstr ""
 #~ "Blitspin roterer et billede 90 grader igen og igen vha. logiske "
 #~ "operationer: billedet deles op i kvadranter som skiftes med uret. Det "
 #~ "samme foretages igen med mindre og mindre kvadranter, bortset fra at alle "
-#~ "underkvadranter af en given størrelse roteres parallelt. Skrevet af Jamie "
-#~ "Zawinski på grundlag af noget sejt SmallTalk-kode i Byte Magazine i "
+#~ "underkvadranter af en given stÃ¸rrelse roteres parallelt. Skrevet af Jamie "
+#~ "Zawinski pÃ¥ grundlag af noget sejt SmallTalk-kode i Byte Magazine i "
 #~ "1981.\n"
 #~ "\n"
-#~ "Når man kigger på det, ser det ud til at opløses i statisk støj og så "
+#~ "NÃ¥r man kigger pÃ¥ det, ser det ud til at oplÃ¸ses i statisk stÃ¸j og sÃ¥ "
 #~ "samle sig selv igen, blot roteret. Du kan angive det billede der skal "
-#~ "bruges, som en XBM- eller XPM-fil eller sætte den til at bruge "
-#~ "skærmbilledet."
+#~ "bruges, som en XBM- eller XPM-fil eller sÃ¦tte den til at bruge "
+#~ "skÃ¦rmbilledet."
 
 #~ msgid "Bouboule"
 #~ msgstr "Bouboule"
@@ -1305,7 +1372,7 @@ msgstr ""
 #~ msgstr "Antal bobler som skal anvendes"
 
 #~ msgid "Speed of Motion."
-#~ msgstr "Bevægelseshastighed"
+#~ msgstr "BevÃ¦gelseshastighed"
 
 #, fuzzy
 #~ msgid ""
@@ -1313,11 +1380,11 @@ msgstr ""
 #~ "sized spots painted on its invisible surface. Written by Jeremie Petit."
 #~ msgstr ""
 #~ "Dette tegner hvad der ligner en drejende, deformerende ballon med "
-#~ "variende størrelse pletter tegnet på dens usynlige overflade. Skrevet af "
+#~ "variende stÃ¸rrelse pletter tegnet pÃ¥ dens usynlige overflade. Skrevet af "
 #~ "Jeremie Petit."
 
 #~ msgid "Use red/blue 3d seperation."
-#~ msgstr "Brug rød/blå separation for en 3d-agtig effekt."
+#~ msgstr "Brug rÃ¸d/blÃ¥ separation for en 3d-agtig effekt."
 
 #~ msgid "Braid"
 #~ msgstr "Farveflet"
@@ -1327,11 +1394,11 @@ msgstr ""
 #~ "Draws random color-cycling inter-braided concentric circles. Written by "
 #~ "John Neil."
 #~ msgstr ""
-#~ "Tegner tilfældige farveomskiftende, sammenflettende, koncentriske "
+#~ "Tegner tilfÃ¦ldige farveomskiftende, sammenflettende, koncentriske "
 #~ "cirkler. Skrevet af John Neil."
 
 #~ msgid "BSOD"
-#~ msgstr "Blå død"
+#~ msgstr "BlÃ¥ dÃ¸d"
 
 #, fuzzy
 #~ msgid ""
@@ -1339,9 +1406,9 @@ msgstr ""
 #~ "emulation, this hack simulates popular screen savers from a number of "
 #~ "less robust operating systems. Written by Jamie Zawinski."
 #~ msgstr ""
-#~ "\"Blå død\" dækker over \"dødens blå skærm\" eller \"Blue Screen of Death"
-#~ "\" som den hedder på engelsk. Som et eksempel på det mest udsøgte inden "
-#~ "for pc-emulering simuleres populære pauseskærme fra diverse, ikke så "
+#~ "\"BlÃ¥ dÃ¸d\" dÃ¦kker over \"dÃ¸dens blÃ¥ skÃ¦rm\" eller \"Blue Screen of Death"
+#~ "\" som den hedder pÃ¥ engelsk. Som et eksempel pÃ¥ det mest udsÃ¸gte inden "
+#~ "for pc-emulering simuleres populÃ¦re pauseskÃ¦rme fra diverse, ikke sÃ¥ "
 #~ "robuste styresystemer. Skrevet af Jamie Zawinski."
 
 #~ msgid "Bubble3D"
@@ -1352,8 +1419,8 @@ msgstr ""
 #~ "Draws a stream of rising, undulating 3D bubbles, rising toward the top of "
 #~ "the screen, with nice specular reflections. Written by Richard Jones."
 #~ msgstr ""
-#~ "Tegner en strøm af bølgende 3d-bobler der hæver sig mod toppen af "
-#~ "skærmen, med fine højlysreflektioner. Skrevet af Richard Jones."
+#~ "Tegner en strÃ¸m af bÃ¸lgende 3d-bobler der hÃ¦ver sig mod toppen af "
+#~ "skÃ¦rmen, med fine hÃ¸jlysreflektioner. Skrevet af Richard Jones."
 
 #~ msgid "Bubbles"
 #~ msgstr "Bobler"
@@ -1362,7 +1429,7 @@ msgstr ""
 #~ msgstr "Bobler eksisterer i 3 dimensioner."
 
 #~ msgid "Don't hide bubbles when they pop."
-#~ msgstr "Skjul ikke bobler når de sprænger."
+#~ msgstr "Skjul ikke bobler nÃ¥r de sprÃ¦nger."
 
 #~ msgid "Draw circles instead of pixmap bubbles."
 #~ msgstr "Tegn cirkler i stedet for billedbobler."
@@ -1373,9 +1440,9 @@ msgstr ""
 #~ "small bubbles appear, and as they get closer to each other, they combine "
 #~ "to form larger bubbles, which eventually pop. Written by James Macnicol."
 #~ msgstr ""
-#~ "Simulerer den form for bobbelformation der opstår når vand koger: små "
-#~ "bobler opstår, og som de kommer tættere på hinanden, smelter de sammen "
-#~ "til større bobler der til sidst brister. Skrevet af James Macnicol."
+#~ "Simulerer den form for bobbelformation der opstÃ¥r nÃ¥r vand koger: smÃ¥ "
+#~ "bobler opstÃ¥r, og som de kommer tÃ¦ttere pÃ¥ hinanden, smelter de sammen "
+#~ "til stÃ¸rre bobler der til sidst brister. Skrevet af James Macnicol."
 
 #, fuzzy
 #~ msgid ""
@@ -1385,8 +1452,8 @@ msgstr ""
 #~ "Shane Smit."
 #~ msgstr ""
 #~ "Lidt ligesom 'Kighul', bortset fra at i stedet for blot at vise en del af "
-#~ "skrivebordet, laver pauseskærmen et højdekort ud fra det. Så den laver en "
-#~ "omstrejfende del af skrivebordet om til 3d på basis af farveintensiteten. "
+#~ "skrivebordet, laver pauseskÃ¦rmen et hÃ¸jdekort ud fra det. SÃ¥ den laver en "
+#~ "omstrejfende del af skrivebordet om til 3d pÃ¥ basis af farveintensiteten. "
 #~ "Skrevet af Shane Smit."
 
 #~ msgid "Bumps"
@@ -1400,7 +1467,7 @@ msgstr ""
 #~ "This draws Escher's ``Impossible Cage,'' a 3d analog of a moebius strip, "
 #~ "and rotates it in three dimensions. Written by Marcelo Vianna."
 #~ msgstr ""
-#~ "Tegner Eschers \"Umuligt bur\", en 3d-analog til Möbius-strimmelen, og "
+#~ "Tegner Eschers \"Umuligt bur\", en 3d-analog til MÃ¶bius-strimmelen, og "
 #~ "roterer den i tre dimensioner. Skrevet af Marcelo Vianna."
 
 #~ msgid "C Curve"
@@ -1411,13 +1478,13 @@ msgstr ""
 #~ "Generates self-similar linear fractals, including the classic ``C "
 #~ "Curve.'' Written by Rick Campbell."
 #~ msgstr ""
-#~ "Tegner selvsimilare, lineære fraktaler, inklusiv den klassiske \"C-kurve"
+#~ "Tegner selvsimilare, lineÃ¦re fraktaler, inklusiv den klassiske \"C-kurve"
 #~ "\". Skrevet af Rick Campbell."
 
 #~ msgid "Compass"
 #~ msgstr "Kompas"
 
-# 'double buffering' betyder at man bruger én buffer (mystisk teknisk udtryk)
+# 'double buffering' betyder at man bruger Ã©n buffer (mystisk teknisk udtryk)
 #~ msgid "Don't use double bufferinge"
 #~ msgstr "Benyt ikke mellemlager"
 
@@ -1426,8 +1493,8 @@ msgstr ""
 #~ "This draws a compass, with all elements spinning about randomly, for that "
 #~ "``lost and nauseous'' feeling. Written by Jamie Zawinski."
 #~ msgstr ""
-#~ "Tegner et kompas hvor alle delene drejer omkring tilfældigt for at "
-#~ "fremkalde følelsen af \"faret vild og med kvalme\". Skrevet af Jamie "
+#~ "Tegner et kompas hvor alle delene drejer omkring tilfÃ¦ldigt for at "
+#~ "fremkalde fÃ¸lelsen af \"faret vild og med kvalme\". Skrevet af Jamie "
 #~ "Zawinski."
 
 # ditto
@@ -1438,27 +1505,24 @@ msgstr ""
 #~ msgstr "Koraller"
 
 #~ msgid "Denser"
-#~ msgstr "Tættere"
+#~ msgstr "TÃ¦ttere"
 
 #~ msgid "Density"
-#~ msgstr "Tæthed"
+#~ msgstr "TÃ¦thed"
 
 #~ msgid "Number of seeds"
-#~ msgstr "Antal frø"
+#~ msgstr "Antal frÃ¸"
 
 #~ msgid "Seeds"
-#~ msgstr "Frø"
+#~ msgstr "FrÃ¸"
 
 #, fuzzy
 #~ msgid ""
 #~ "Simulates coral growth, albeit somewhat slowly. This image doesn't really "
 #~ "do it justice. Written by Frederick Roeber."
 #~ msgstr ""
-#~ "Simulerer koralvækst, dog noget langsomt. Billedet yder det ikke rigtigt "
-#~ "retfærdighed. Skrevet af Frederick Röber."
-
-#~ msgid "Thinner"
-#~ msgstr "Tyndere"
+#~ "Simulerer koralvÃ¦kst, dog noget langsomt. Billedet yder det ikke rigtigt "
+#~ "retfÃ¦rdighed. Skrevet af Frederick RÃ¶ber."
 
 #~ msgid "Cosmos"
 #~ msgstr "Kosmos"
@@ -1468,8 +1532,8 @@ msgstr ""
 #~ "Draws fireworks and zooming, fading flares. By Tom Campbell. You can find "
 #~ "it at <http://www.mindspring.com/~campbell/cosmos/>."
 #~ msgstr ""
-#~ "Tegner fyrværkeri og zoomende, falmende blus. Af Tom Campbell. "
-#~ "Hjemmesiden er på <http://www.mindspring.com/~campbell/cosmos/>."
+#~ "Tegner fyrvÃ¦rkeri og zoomende, falmende blus. Af Tom Campbell. "
+#~ "Hjemmesiden er pÃ¥ <http://www.mindspring.com/~campbell/cosmos/>."
 
 #~ msgid "Critical"
 #~ msgstr "Kritisk"
@@ -1480,8 +1544,8 @@ msgstr ""
 #~ "squiggles, but after a few iterations, order begins to appear. Written by "
 #~ "Martin Pool."
 #~ msgstr ""
-#~ "Tegner et system af selvorganiserende linjer. Starter som tilfældige "
-#~ "kruseduller, men efter et par iterationer begynder et mønster at dukke "
+#~ "Tegner et system af selvorganiserende linjer. Starter som tilfÃ¦ldige "
+#~ "kruseduller, men efter et par iterationer begynder et mÃ¸nster at dukke "
 #~ "op. Skrevet af Martin Pool."
 
 #~ msgid "Cell"
@@ -1494,14 +1558,14 @@ msgstr ""
 #~ msgstr "Krystal"
 
 #~ msgid "Have at maximum size"
-#~ msgstr "Hav ved maksimal størrelse"
+#~ msgstr "Hav ved maksimal stÃ¸rrelse"
 
 #~ msgid ""
 #~ "Moving polygons, similar to a kaleidescope (more like a kaleidescope than "
 #~ "the hack called `kaleid,' actually.) This one by Jouk Jansen."
 #~ msgstr ""
-#~ "Polygoner i bevægelser ligesom et kalejdoskop (tættere på et kalejdoskop "
-#~ "end pauseskærmen med det navn, faktisk). Skrevet af Jouk Jansen."
+#~ "Polygoner i bevÃ¦gelser ligesom et kalejdoskop (tÃ¦ttere pÃ¥ et kalejdoskop "
+#~ "end pauseskÃ¦rmen med det navn, faktisk). Skrevet af Jouk Jansen."
 
 #~ msgid "Number of polygons to use."
 #~ msgstr "Antallet af polygoner"
@@ -1513,8 +1577,8 @@ msgstr ""
 #~ "wrote a Java applet clone. That clone was discovered by Jamie Zawinski, "
 #~ "and ported to C for inclusion here."
 #~ msgstr ""
-#~ "Ligesom 'Firkanter', men knap så vild. Den første implementering var af "
-#~ "Stephen Linhart; så skrev Ozymandias G. Desiderata en Java-applet-klon. "
+#~ "Ligesom 'Firkanter', men knap sÃ¥ vild. Den fÃ¸rste implementering var af "
+#~ "Stephen Linhart; sÃ¥ skrev Ozymandias G. Desiderata en Java-applet-klon. "
 #~ "Klonen blev opdaget af Jamie Zawinski og porteret til C for at kunne "
 #~ "komme med her."
 
@@ -1524,13 +1588,10 @@ msgstr ""
 #~ msgid "Less"
 #~ msgstr "Mindre"
 
-#~ msgid "More"
-#~ msgstr "Flere"
-
 #~ msgid "Number of iterations."
 #~ msgstr "Antal iterationer"
 
-# en morgenstjerne har et hoved der minder om dette - "farekugle" lyder mærkeligt
+# en morgenstjerne har et hoved der minder om dette - "farekugle" lyder mÃ¦rkeligt
 #~ msgid "DangerBall"
 #~ msgstr "Morgenstjerne"
 
@@ -1539,11 +1600,11 @@ msgstr ""
 #~ "Draws a ball that periodically extrudes many random spikes. Ouch! Written "
 #~ "by Jamie Zawinski."
 #~ msgstr ""
-#~ "Tegner en kugle der periodisk udsender mange tilfældige spir. Av! Skrevet "
+#~ "Tegner en kugle der periodisk udsender mange tilfÃ¦ldige spir. Av! Skrevet "
 #~ "af Jamie Zawinski."
 
 #~ msgid "DecayScreen"
-#~ msgstr "Smeltende skærm"
+#~ msgstr "Smeltende skÃ¦rm"
 
 #, fuzzy
 #~ msgid ""
@@ -1558,17 +1619,17 @@ msgstr ""
 #~ "instead! This works nicely if you leave some some random television "
 #~ "station plugged in."
 #~ msgstr ""
-#~ "Tager skærmbilledet og får det til at smelte. Du har utvivlsomt set denne "
-#~ "effekt før, men ingen pauseskærm ville være komplet uden den. Den virker "
+#~ "Tager skÃ¦rmbilledet og fÃ¥r det til at smelte. Du har utvivlsomt set denne "
+#~ "effekt fÃ¸r, men ingen pauseskÃ¦rm ville vÃ¦re komplet uden den. Den virker "
 #~ "bedst hvis der er noget meget farverigt synligt. Advarsel: hvis effekten "
-#~ "forsætter efter pauseskærmen er slået fra så søg lægehjælp. Skrevet af "
+#~ "forsÃ¦tter efter pauseskÃ¦rmen er slÃ¥et fra sÃ¥ sÃ¸g lÃ¦gehjÃ¦lp. Skrevet af "
 #~ "David Wald og Vivek Khera.\n"
 #~ "\n"
-#~ "Mange af pauseskærmene er i stand til at tage et billede af dit "
-#~ "skrivebord og manipulere det på en eller anden måde. På SGI-systemer kan "
-#~ "disser programmer (på tilfældig vis) udtrække kildebilledet fra systemets "
+#~ "Mange af pauseskÃ¦rmene er i stand til at tage et billede af dit "
+#~ "skrivebord og manipulere det pÃ¥ en eller anden mÃ¥de. PÃ¥ SGI-systemer kan "
+#~ "disser programmer (pÃ¥ tilfÃ¦ldig vis) udtrÃ¦kke kildebilledet fra systemets "
 #~ "videoinddata i stedet! Dette virker godt hvis du f.eks. har en eller "
-#~ "anden tilfældig tv-station koblet på."
+#~ "anden tilfÃ¦ldig tv-station koblet pÃ¥."
 
 #~ msgid "Cycle through colors."
 #~ msgstr "Skift mellem farver."
@@ -1583,9 +1644,9 @@ msgstr ""
 #~ "is ugly enough to peel paint.'') Written by Jamie Zawinski, inspired by "
 #~ "Java code by Michael Bayne."
 #~ msgstr ""
-#~ "Underdeler og farver rektangler på tilfældig vis. Det ser ud som gamle "
-#~ "70'er vægpaneler (Raven siger: \"denne pauseskærm er grim nok til at "
-#~ "skrælle maling af\"). Skrevet af Jamie Zawinski, inspiret af Java-kode af "
+#~ "Underdeler og farver rektangler pÃ¥ tilfÃ¦ldig vis. Det ser ud som gamle "
+#~ "70'er vÃ¦gpaneler (Raven siger: \"denne pauseskÃ¦rm er grim nok til at "
+#~ "skrÃ¦lle maling af\"). Skrevet af Jamie Zawinski, inspiret af Java-kode af "
 #~ "Michael Bayne."
 
 #~ msgid "Time between redraws:"
@@ -1608,8 +1669,8 @@ msgstr ""
 #~ "Written by Jamie Zawinski."
 #~ msgstr ""
 #~ "Tegner pulserende sekvenser af stjerne, cirkler og linjer. Det vil se "
-#~ "bedre ud hvis det var hurtigere, men der er vist ingen måde hvor på dette "
-#~ "både kan være hurtigt og flimrefrit. Endnu en grund til at X er skod. "
+#~ "bedre ud hvis det var hurtigere, men der er vist ingen mÃ¥de hvor pÃ¥ dette "
+#~ "bÃ¥de kan vÃ¦re hurtigt og flimrefrit. Endnu en grund til at X er skod. "
 #~ "Skrevet af Jamie Zawinski."
 
 #, fuzzy
@@ -1617,11 +1678,11 @@ msgstr ""
 #~ "A cellular automaton that starts with a random field, and organizes it "
 #~ "into stripes and spirals. Written by David Bagley."
 #~ msgstr ""
-#~ "En cellulær automat der starter med et tilfældigt felt og organiserer det "
+#~ "En cellulÃ¦r automat der starter med et tilfÃ¦ldigt felt og organiserer det "
 #~ "i striber og spiraler. Skrevet af David Bagley."
 
 #~ msgid "Demon"
-#~ msgstr "Dæmon"
+#~ msgstr "DÃ¦mon"
 
 #~ msgid "Discrete"
 #~ msgstr "Diskret"
@@ -1632,13 +1693,13 @@ msgstr ""
 #~ "Julia, and a few others. Written by Tim Auckland."
 #~ msgstr ""
 #~ "Flere \"diskret kort\"-systemer, inklusiv nye varianter af Hopalong og "
-#~ "Julia og nogle få andre. Skrevet af Tim Auckland."
+#~ "Julia og nogle fÃ¥ andre. Skrevet af Tim Auckland."
 
 #~ msgid "Number to use."
 #~ msgstr "Antal der skal bruges"
 
 #~ msgid "Distort"
-#~ msgstr "Forvrængning"
+#~ msgstr "ForvrÃ¦ngning"
 
 #, fuzzy
 #~ msgid ""
@@ -1646,8 +1707,8 @@ msgstr ""
 #~ "wander around the screen, magnifying whatever is underneath. Written by "
 #~ "Jonas Munsin."
 #~ msgstr ""
-#~ "Lader en gennemsigtig linse vandre omkring på skærmbilledet, mens den "
-#~ "forstørrer det der er neden under den. Skrevet af Jonas Munsin."
+#~ "Lader en gennemsigtig linse vandre omkring pÃ¥ skÃ¦rmbilledet, mens den "
+#~ "forstÃ¸rrer det der er neden under den. Skrevet af Jonas Munsin."
 
 #~ msgid "Drift"
 #~ msgstr "Drift"
@@ -1662,7 +1723,7 @@ msgstr ""
 #~ "collection of fine hacks."
 #~ msgstr ""
 #~ "Hvordan kan man overhovedet beskrive dette hvis ikke som \"rekursive, "
-#~ "fraktale, kosmiske flammer i drift\"? En anden fin pauseskærm fra Scott "
+#~ "fraktale, kosmiske flammer i drift\"? En anden fin pauseskÃ¦rm fra Scott "
 #~ "Draves samling."
 
 #~ msgid "Number of pixels to use."
@@ -1672,7 +1733,7 @@ msgstr ""
 #~ msgstr "Brug Lissajous-figurer til at skaffe punkter"
 
 #~ msgid "ElectricSheep"
-#~ msgstr "Elektrisk får"
+#~ msgstr "Elektrisk fÃ¥r"
 
 #, fuzzy
 #~ msgid ""
@@ -1684,17 +1745,17 @@ msgstr ""
 #~ "the Internet. By Scott Draves. You can find it at <http://www."
 #~ "electricsheep.org/>. See that web site for configuration information."
 #~ msgstr ""
-#~ "Elektrisk får er en pauseskærm der viser en MPEG-video af en animeret, "
-#~ "fraktal flamme, mens den er i baggrunden hjælper med genereringscykler "
-#~ "til den næste animation. En gang i mellem sender den så de færdige "
+#~ "Elektrisk fÃ¥r er en pauseskÃ¦rm der viser en MPEG-video af en animeret, "
+#~ "fraktal flamme, mens den er i baggrunden hjÃ¦lper med genereringscykler "
+#~ "til den nÃ¦ste animation. En gang i mellem sender den sÃ¥ de fÃ¦rdige "
 #~ "billeder til serveren hvor de bliver komprimeret til distribuering til "
 #~ "alle klienter.\n"
 #~ "\n"
-#~ "Pauseskærmen kan kun anbefales hvis du har en hurtig "
+#~ "PauseskÃ¦rmen kan kun anbefales hvis du har en hurtig "
 #~ "internetforbindelse.\n"
 #~ "\n"
-#~ "Af Scott Draves. Du kan finde den på <http://www.electricsheep.org/>. Se "
-#~ "også den side for konfigurationsinformation. "
+#~ "Af Scott Draves. Du kan finde den pÃ¥ <http://www.electricsheep.org/>. Se "
+#~ "ogsÃ¥ den side for konfigurationsinformation. "
 
 #~ msgid "Epicycle"
 #~ msgstr "Epicykel"
@@ -1709,13 +1770,13 @@ msgstr ""
 #~ "and so on, several times. These were the basis for the pre-heliocentric "
 #~ "model of planetary motion. Written by James Youngman."
 #~ msgstr ""
-#~ "Tegner den bane som fremkommer ved at følge et punkt på kanten af en "
-#~ "cirkel. Cirklen roterer omkring kanten på en anden cirkel, osv., flere "
-#~ "gange. Disse bevægelser var grundlaget for den præ-heliocentriske model "
-#~ "af planetar bevægelse. Skrevet af James Youngman."
+#~ "Tegner den bane som fremkommer ved at fÃ¸lge et punkt pÃ¥ kanten af en "
+#~ "cirkel. Cirklen roterer omkring kanten pÃ¥ en anden cirkel, osv., flere "
+#~ "gange. Disse bevÃ¦gelser var grundlaget for den prÃ¦-heliocentriske model "
+#~ "af planetar bevÃ¦gelse. Skrevet af James Youngman."
 
 #~ msgid "Time finished product is shown."
-#~ msgstr "Tid det tager før færdigt produkt vises"
+#~ msgstr "Tid det tager fÃ¸r fÃ¦rdigt produkt vises"
 
 #, fuzzy
 #~ msgid ""
@@ -1723,7 +1784,7 @@ msgstr ""
 #~ "turn inside out. Created by David Konerding from the samples that come "
 #~ "with the GL Extrusion library by Linas Vepstas."
 #~ msgstr ""
-#~ "Tegner diverse roterende, udstansede former der drejer sig, strækker sig "
+#~ "Tegner diverse roterende, udstansede former der drejer sig, strÃ¦kker sig "
 #~ "og vender indersiden udad. Lavet af David Konerding fra de eksempler der "
 #~ "kommer med GL-udstansningsbiblioteket af Linas Vepstas."
 
@@ -1732,7 +1793,7 @@ msgstr ""
 #~ "Draws what looks like a waving ribbon following a sinusoidal path. "
 #~ "Written by Bas van Gaalen and Charles Vidal."
 #~ msgstr ""
-#~ "Tegner hvad der ligner et bølgende bånd der følger en sinus-bane. Skrevet "
+#~ "Tegner hvad der ligner et bÃ¸lgende bÃ¥nd der fÃ¸lger en sinus-bane. Skrevet "
 #~ "af Bas van Gaalen og Charles Vidal."
 
 #~ msgid "FadePlot"
@@ -1745,7 +1806,7 @@ msgstr ""
 #~ msgstr "Antal runder"
 
 #~ msgid "Speed of Motion"
-#~ msgstr "Bevægelseshastighed"
+#~ msgstr "BevÃ¦gelseshastighed"
 
 #~ msgid "Bitmap for flag"
 #~ msgstr "Billede af flag"
@@ -1754,12 +1815,12 @@ msgstr ""
 #~ msgstr "Flag"
 
 #~ msgid "Random size up to"
-#~ msgstr "Tilfældig størrelse op til"
+#~ msgstr "TilfÃ¦ldig stÃ¸rrelse op til"
 
 #~ msgid "Text for flag"
 #~ msgstr "Tekst til flag"
 
-# det giver ikke mening at nævne kommandolinjeparametre i denne sammenhæng
+# det giver ikke mening at nÃ¦vne kommandolinjeparametre i denne sammenhÃ¦ng
 #, fuzzy
 #~ msgid ""
 #~ "This draws a waving colored flag, that undulates its way around the "
@@ -1768,9 +1829,9 @@ msgstr ""
 #~ "picture of ``Bob,'' but you can replace the text or the image with a "
 #~ "command-line option. Written by Charles Vidal and Jamie Zawinski."
 #~ msgstr ""
-#~ "Tegner et bølgende farvet flag som blafrer omkring på skærmen. Tricket er "
-#~ "at flaget kan indeholde vilkårlige tekst og billeder. Som standard viser "
-#~ "den enten det nuværende systemnavn og styresystemstype eller et billede "
+#~ "Tegner et bÃ¸lgende farvet flag som blafrer omkring pÃ¥ skÃ¦rmen. Tricket er "
+#~ "at flaget kan indeholde vilkÃ¥rlige tekst og billeder. Som standard viser "
+#~ "den enten det nuvÃ¦rende systemnavn og styresystemstype eller et billede "
 #~ "af \"Bob\", men du kan erstatte teksten eller billedet. Skrevet af "
 #~ "Charles Vidal og Jamie Zawinski."
 
@@ -1778,7 +1839,7 @@ msgstr ""
 #~ msgid "Another iterative fractal generator. Written by Scott Draves."
 #~ msgstr "En anden iterativ fraktalgenerator. Skrevet af Scott Draves."
 
-# der er allerede en anden pauseskærm med navnet "flammer"
+# der er allerede en anden pauseskÃ¦rm med navnet "flammer"
 #~ msgid "Flame"
 #~ msgstr "Fraktale flammer"
 
@@ -1796,11 +1857,11 @@ msgstr ""
 #~ "Another series of strange attractors: a flowing series of points, making "
 #~ "strange rotational shapes. Written by Jeff Butterworth."
 #~ msgstr ""
-#~ "En anden serie af \"mærkelige\" tiltrækkere: en strømmende serie af "
-#~ "punkter der laver mærkelige roterende former. Skrevet af Jeff Butterworth."
+#~ "En anden serie af \"mÃ¦rkelige\" tiltrÃ¦kkere: en strÃ¸mmende serie af "
+#~ "punkter der laver mÃ¦rkelige roterende former. Skrevet af Jeff Butterworth."
 
 #~ msgid "Flow"
-#~ msgstr "Farvestrøm"
+#~ msgstr "FarvestrÃ¸m"
 
 #~ msgid "Delay between redraws."
 #~ msgstr "Ventetid mellem genoptegninger:"
@@ -1809,14 +1870,14 @@ msgstr ""
 #~ msgstr "Skov"
 
 #~ msgid "Number of trees to use."
-#~ msgstr "Antallet af træer som skal bruges"
+#~ msgstr "Antallet af trÃ¦er som skal bruges"
 
 #, fuzzy
 #~ msgid ""
 #~ "This draws fractal trees. Written by Peter Baumung. Everybody loves "
 #~ "fractals, right?"
 #~ msgstr ""
-#~ "Tegner fraktale træer. Skrevet af Peter Baumung. Alle elsker fraktaler, "
+#~ "Tegner fraktale trÃ¦er. Skrevet af Peter Baumung. Alle elsker fraktaler, "
 #~ "ikke?"
 
 #~ msgid "Galaxy"
@@ -1829,7 +1890,7 @@ msgstr ""
 #~ "Siegmund."
 #~ msgstr ""
 #~ "Tegner drejende galakser som kolliderer og spreder deres stjerne til alle "
-#~ "de, øhm, fire verdenshjørner eller noget i den retning. Oprindeligt et "
+#~ "de, Ã¸hm, fire verdenshjÃ¸rner eller noget i den retning. Oprindeligt et "
 #~ "Amiga-program af Uli Siegmund."
 
 #~ msgid "Gears"
@@ -1841,7 +1902,7 @@ msgstr ""
 #~ "dimensions. Another GL hack, by Danny Sung, Brian Paul, Ed Mackey, and "
 #~ "Jamie Zawinski."
 #~ msgstr ""
-#~ "Tegner et antal drejende sammenlåste tandhjul der roterer i tre "
+#~ "Tegner et antal drejende sammenlÃ¥ste tandhjul der roterer i tre "
 #~ "dimensioner, af Danny Sung, Brian Paul, Ed Mackey og Jamie Zawinski."
 
 #, fuzzy
@@ -1849,7 +1910,7 @@ msgstr ""
 #~ "Draws a rippling waves on a rotating wireframe grid, using GL. Written by "
 #~ "Josiah Pease."
 #~ msgstr ""
-#~ "Tegner krusende bølger på et roterende gitter i 3d. Skrevet af Josiah "
+#~ "Tegner krusende bÃ¸lger pÃ¥ et roterende gitter i 3d. Skrevet af Josiah "
 #~ "Pease."
 
 #~ msgid "GFlux"
@@ -1864,7 +1925,7 @@ msgstr ""
 #~ msgstr ""
 #~ "Tegner en planet der tumler omkring i rummet. Skrevet af David Konerding. "
 #~ "Det indbyggede billede er et kort over jorden (udtrukket fra 'Jorden'), "
-#~ "men du kan få enhver tekstur foldet omkring kuglen, f.eks. de planetare "
+#~ "men du kan fÃ¥ enhver tekstur foldet omkring kuglen, f.eks. de planetare "
 #~ "billeder fra 'Solsystem'."
 
 #, fuzzy
@@ -1872,7 +1933,7 @@ msgstr ""
 #~ "Displays a few lines of text spinning around in a solid 3D font. Written "
 #~ "by Jamie Zawinski."
 #~ msgstr ""
-#~ "Viser nogle få linjer tekst der drejer omkring i en udfyldt 3d-"
+#~ "Viser nogle fÃ¥ linjer tekst der drejer omkring i en udfyldt 3d-"
 #~ "skrifttype. Skrevet af Jamie Zawinski."
 
 #~ msgid "GLText"
@@ -1886,7 +1947,7 @@ msgstr ""
 #~ "Replays historical games of go (aka wei-chi and baduk) on the screen. By "
 #~ "Scott Draves. You can find it at <http://www.draves.org/goban/>."
 #~ msgstr ""
-#~ "Viser historiske spil Go (alias Wei-Chi og Baduk) på skærmen. Af Scott "
+#~ "Viser historiske spil Go (alias Wei-Chi og Baduk) pÃ¥ skÃ¦rmen. Af Scott "
 #~ "Draves. Hjemmesiden er <http://www.draves.org/goban/>."
 
 # minder lidt om slimklatter
@@ -1894,7 +1955,7 @@ msgstr ""
 #~ msgstr "Slim"
 
 #~ msgid "Have transparent bubbles."
-#~ msgstr "Lad boblerne være gennemsigtige"
+#~ msgstr "Lad boblerne vÃ¦re gennemsigtige"
 
 #, fuzzy
 #~ msgid ""
@@ -1906,11 +1967,11 @@ msgstr ""
 #~ "kind of effect in real life by having several layers plastic with colored "
 #~ "oil between them. Written by Jamie Zawinski."
 #~ msgstr ""
-#~ "Tegner en mængde animerede, gennemsigtige amøbelignende dråber. Dråberne "
-#~ "skifter form efterhånden som de vandrer omkring på skærmen, og er "
-#~ "gennemsigtige så du kan se de underste gennem de øverste - når to "
+#~ "Tegner en mÃ¦ngde animerede, gennemsigtige amÃ¸belignende drÃ¥ber. DrÃ¥berne "
+#~ "skifter form efterhÃ¥nden som de vandrer omkring pÃ¥ skÃ¦rmen, og er "
+#~ "gennemsigtige sÃ¥ du kan se de underste gennem de Ã¸verste - nÃ¥r to "
 #~ "passerer over hinanden, forenes farverne. Ideen til dette kom fra en sej "
-#~ "musemåtte som giver den samme effekt i virkeligheden ved at have flere "
+#~ "musemÃ¥tte som giver den samme effekt i virkeligheden ved at have flere "
 #~ "lag plastik med farvet olie mellem dem. Skrevet af Jamie Zawinski."
 
 #~ msgid "Use additive color model."
@@ -1926,15 +1987,15 @@ msgstr ""
 #~ msgstr "Objekter skal efterlade sig spor"
 
 #~ msgid "Orbit should decay."
-#~ msgstr "Aftagende kredsløb"
+#~ msgstr "Aftagende kredslÃ¸b"
 
 #, fuzzy
 #~ msgid ""
 #~ "This program draws a simple orbital simulation. If you turn on trails, it "
 #~ "looks kind of like a cloud-chamber photograph. Written by Greg Bowering."
 #~ msgstr ""
-#~ "Tegner en simpel kredsløbssimulering. Hvis du slår spor til, ligner det "
-#~ "lidt et tågekammerfotografi. Skrevet af Greg Bowering."
+#~ "Tegner en simpel kredslÃ¸bssimulering. Hvis du slÃ¥r spor til, ligner det "
+#~ "lidt et tÃ¥gekammerfotografi. Skrevet af Greg Bowering."
 
 #~ msgid "Greynetic"
 #~ msgstr "Firkanter"
@@ -1944,14 +2005,14 @@ msgstr ""
 #~ "This draws random colored and stippled rectangles. Written by Jamie "
 #~ "Zawinski."
 #~ msgstr ""
-#~ "Tegner tilfældige farvede og stiplede rektangler. Skrevet af Jamie "
+#~ "Tegner tilfÃ¦ldige farvede og stiplede rektangler. Skrevet af Jamie "
 #~ "Zawinski."
 
 #~ msgid "Animate circles."
-#~ msgstr "Animér cirkler"
+#~ msgstr "AnimÃ©r cirkler"
 
 #~ msgid "Cycle through colormap."
-#~ msgstr "Gennemløb farverne"
+#~ msgstr "GennemlÃ¸b farverne"
 
 #~ msgid "Halo"
 #~ msgstr "Glorie"
@@ -1965,9 +2026,9 @@ msgstr ""
 #~ "can also animate the control-points, but that takes a lot of CPU and "
 #~ "bandwidth. Written by Jamie Zawinski."
 #~ msgstr ""
-#~ "Tegner desorienterende, psykedeliske cirkulære mønstre der gør ondt at se "
-#~ "på. Kan også animere kontrolpunkterne, men det optager en hel del "
-#~ "båndbredde og processorkraft. Skrevet af Jamie Zawinski."
+#~ "Tegner desorienterende, psykedeliske cirkulÃ¦re mÃ¸nstre der gÃ¸r ondt at se "
+#~ "pÃ¥. Kan ogsÃ¥ animere kontrolpunkterne, men det optager en hel del "
+#~ "bÃ¥ndbredde og processorkraft. Skrevet af Jamie Zawinski."
 
 #~ msgid "Use a gradient of colors between circles."
 #~ msgstr "Tegn en farveovergang mellem cirklerne"
@@ -1980,7 +2041,7 @@ msgstr ""
 #~ "This repeatedly generates spirally string-art-ish patterns. Written by "
 #~ "Jamie Zawinski."
 #~ msgstr ""
-#~ "Genererer gentagende spirale stregtegneagtige mønstre. Skrevet af Jamie "
+#~ "Genererer gentagende spirale stregtegneagtige mÃ¸nstre. Skrevet af Jamie "
 #~ "Zawinski."
 
 #~ msgid "Time between redraws."
@@ -1990,7 +2051,7 @@ msgstr ""
 #~ msgstr "Hopalong"
 
 #~ msgid "Number of pixels before a color change."
-#~ msgstr "Antal billedpunkter før farveskifte"
+#~ msgstr "Antal billedpunkter fÃ¸r farveskifte"
 
 #, fuzzy
 #~ msgid ""
@@ -1998,9 +2059,9 @@ msgstr ""
 #~ "plane, from a 1986 Scientific American article. Mostly written by Patrick "
 #~ "Naughton."
 #~ msgstr ""
-#~ "Tegner kniplingsagtive, fraktale mønstre baseret på iteration i det "
-#~ "imaginære plan - fra en Scientific American-artikel fra 1986. For den "
-#~ "største dels vedkommende skrevet af Patrick Naughton."
+#~ "Tegner kniplingsagtive, fraktale mÃ¸nstre baseret pÃ¥ iteration i det "
+#~ "imaginÃ¦re plan - fra en Scientific American-artikel fra 1986. For den "
+#~ "stÃ¸rste dels vedkommende skrevet af Patrick Naughton."
 
 #~ msgid "Hyperball"
 #~ msgstr "Hyperkugle"
@@ -2012,12 +2073,12 @@ msgstr ""
 #~ "4D analog to the dodecahedron. Written by Joe Keane."
 #~ msgstr ""
 #~ "Hyperkuglen er i forhold til en hyperterning som en dodekahedron er i "
-#~ "forhold til en terning: pauseskærmen viser en 2d-projektion af sekvensen "
+#~ "forhold til en terning: pauseskÃ¦rmen viser en 2d-projektion af sekvensen "
 #~ "af 3d-objekter som er projektionerne af 4d-analogen til dodekahedronen. "
 #~ "Skrevet af Joe Keane."
 
 #~ msgid "Closer"
-#~ msgstr "Tættere"
+#~ msgstr "TÃ¦ttere"
 
 #~ msgid "Distance from center of cube"
 #~ msgstr "Afstand fra centrum af terningen"
@@ -2039,14 +2100,14 @@ msgstr ""
 #~ "long, or your brain will melt. Written by Joe Keane, Fritz Mueller, and "
 #~ "Jamie Zawinski."
 #~ msgstr ""
-#~ "Viser 2d-projektionerne af rækken af 3d-objekter som er projektionerne af "
+#~ "Viser 2d-projektionerne af rÃ¦kken af 3d-objekter som er projektionerne af "
 #~ "4d-analogen til en terning: som et kvadrat er sammensat af fire linjer "
-#~ "der hver især berører to andre, og som en terning er sammensat af seks "
-#~ "kvadrater der hver berører fire andre, er en hyperterning sammensat af "
-#~ "otte terninger der hver berører seks andre. For at gøre det lettere at se "
-#~ "rotationen benyttes forskellige farver til hver af kanterne. Tænk ikke "
-#~ "for længe over dette, ellers brænder din hjerne bare sammen. Skrevet af "
-#~ "Joe Keane, Fritz Müller og Jamie Zawinski."
+#~ "der hver isÃ¦r berÃ¸rer to andre, og som en terning er sammensat af seks "
+#~ "kvadrater der hver berÃ¸rer fire andre, er en hyperterning sammensat af "
+#~ "otte terninger der hver berÃ¸rer seks andre. For at gÃ¸re det lettere at se "
+#~ "rotationen benyttes forskellige farver til hver af kanterne. TÃ¦nk ikke "
+#~ "for lÃ¦nge over dette, ellers brÃ¦nder din hjerne bare sammen. Skrevet af "
+#~ "Joe Keane, Fritz MÃ¼ller og Jamie Zawinski."
 
 #~ msgid "IFS"
 #~ msgstr "IFS"
@@ -2060,7 +2121,7 @@ msgstr ""
 #~ "Skrevet af Massimino Pascal."
 
 #~ msgid "IMSmap"
-#~ msgstr "Skymønstre"
+#~ msgstr "SkymÃ¸nstre"
 
 # RETMIG: hvad i alverden er CAT-scans?
 #, fuzzy
@@ -2076,18 +2137,18 @@ msgstr ""
 #~ "the others tend to generate images that look like heat-maps or CAT-scans. "
 #~ "Written by Juergen Nickelsen and Jamie Zawinski."
 #~ msgstr ""
-#~ "Genererer tilfældige skylignende mønstre. De ser helt forskellige ud i "
-#~ "sort/hvid i forhold til i farver. Den grundlæggende idé er at tage fire "
-#~ "punkter ved kanten af billedet og tildele dem en tilfældig \"elevering\". "
-#~ "Derefter findes punktet mellem dem og tildeles en værdi som er "
-#~ "gennemsnittet af de andre fire plus et tilfældigt afsæt. Farvningen "
-#~ "baseres derefter på eleveringen.\n"
+#~ "Genererer tilfÃ¦ldige skylignende mÃ¸nstre. De ser helt forskellige ud i "
+#~ "sort/hvid i forhold til i farver. Den grundlÃ¦ggende idÃ© er at tage fire "
+#~ "punkter ved kanten af billedet og tildele dem en tilfÃ¦ldig \"elevering\". "
+#~ "Derefter findes punktet mellem dem og tildeles en vÃ¦rdi som er "
+#~ "gennemsnittet af de andre fire plus et tilfÃ¦ldigt afsÃ¦t. Farvningen "
+#~ "baseres derefter pÃ¥ eleveringen.\n"
 #~ "\n"
-#~ "Farveudvælgelsen sker ved at binde eleveringen til enten farvetonen, "
-#~ "mætningen eller lysstyrken og tildele tilfældige værdier til de andre. "
-#~ "\"Lysstyrke\"-tilstanden giver ofte skylignende mønstre, mens de andre "
+#~ "FarveudvÃ¦lgelsen sker ved at binde eleveringen til enten farvetonen, "
+#~ "mÃ¦tningen eller lysstyrken og tildele tilfÃ¦ldige vÃ¦rdier til de andre. "
+#~ "\"Lysstyrke\"-tilstanden giver ofte skylignende mÃ¸nstre, mens de andre "
 #~ "giver billeder der ser ud som varmekort eller CAT-skanningerne. Skrevet "
-#~ "af Jürgen Nickelsen og Jamie Zawinski."
+#~ "af JÃ¼rgen Nickelsen og Jamie Zawinski."
 
 #, fuzzy
 #~ msgid ""
@@ -2095,8 +2156,8 @@ msgstr ""
 #~ "waves, and allowing them to interfere with each other as their origins "
 #~ "move. Written by Hannu Mallat."
 #~ msgstr ""
-#~ "En anden farvefeltspauseskærm, denne virker ved at beregne aftagnede "
-#~ "sinus-bølger og lade dem interferere med hinanden efterhånden som deres "
+#~ "En anden farvefeltspauseskÃ¦rm, denne virker ved at beregne aftagnede "
+#~ "sinus-bÃ¸lger og lade dem interferere med hinanden efterhÃ¥nden som deres "
 #~ "nulpunkter flytter sig. Skrevet af Hannu Mallet."
 
 #~ msgid "Jigsaw"
@@ -2111,12 +2172,12 @@ msgstr ""
 #~ "image, it is sometimes pretty hard to guess what the image is going to "
 #~ "look like once the puzzle is solved. Written by Jamie Zawinski."
 #~ msgstr ""
-#~ "Indfanger skærmbilledet, skærer det op i et puslespil, blander det og "
-#~ "giver sig så til at løse det. Dette virker specielt godt hvis du fodrer "
+#~ "Indfanger skÃ¦rmbilledet, skÃ¦rer det op i et puslespil, blander det og "
+#~ "giver sig sÃ¥ til at lÃ¸se det. Dette virker specielt godt hvis du fodrer "
 #~ "det med et eksternt videosignal i stedet for at lade det bruge "
-#~ "skærmbilledet (faktisk er dette hvis generelt set sandt...). Når det "
-#~ "bruger videobilledet, kan det til tider være ret svært at gætte hvordan "
-#~ "billedet kommer til at se ud når puslespillet er løst. Skrevet af Jamie "
+#~ "skÃ¦rmbilledet (faktisk er dette hvis generelt set sandt...). NÃ¥r det "
+#~ "bruger videobilledet, kan det til tider vÃ¦re ret svÃ¦rt at gÃ¦tte hvordan "
+#~ "billedet kommer til at se ud nÃ¥r puslespillet er lÃ¸st. Skrevet af Jamie "
 #~ "Zawinski."
 
 #~ msgid "Julia"
@@ -2131,10 +2192,10 @@ msgstr ""
 #~ "in front of the image, which indicates the control point from which the "
 #~ "rest of the image was generated. Written by Sean McCullough."
 #~ msgstr ""
-#~ "Tegner drejende, animerede (er du ved at se et mønster her?) "
-#~ "udforskninger af Julia-mængder. Du har sandsynligvis set statiske "
-#~ "billeder af denne fraktale form før, men det er også meget morsomt at se "
-#~ "den i bevægelse. En interessant detalje er at der er en lille svingende "
+#~ "Tegner drejende, animerede (er du ved at se et mÃ¸nster her?) "
+#~ "udforskninger af Julia-mÃ¦ngder. Du har sandsynligvis set statiske "
+#~ "billeder af denne fraktale form fÃ¸r, men det er ogsÃ¥ meget morsomt at se "
+#~ "den i bevÃ¦gelse. En interessant detalje er at der er en lille svingende "
 #~ "prik der passerer forbi foran i billedet - denne prik indikerer det "
 #~ "kontrolpunkt som resten af billedet blev dannet ud fra. Skrevet af Sean "
 #~ "McCullough."
@@ -2147,10 +2208,10 @@ msgstr ""
 #~ "is nice, but I think it needs more solids, or perhaps just brighter "
 #~ "colors. More variations in the rotational speed might help, too."
 #~ msgstr ""
-#~ "Endnu en klon af et ældgammelt legetøj, bestående mest af vilde, "
-#~ "roterende bevægelser af farvede linjer. Af Ron Tapia. Bevægelsen er fin, "
-#~ "men behøver nok flere ensfarvede felter eller måske bare lysere farver. "
-#~ "Flere variationer i rotationshastigheden ville måske også hjælpe."
+#~ "Endnu en klon af et Ã¦ldgammelt legetÃ¸j, bestÃ¥ende mest af vilde, "
+#~ "roterende bevÃ¦gelser af farvede linjer. Af Ron Tapia. BevÃ¦gelsen er fin, "
+#~ "men behÃ¸ver nok flere ensfarvede felter eller mÃ¥ske bare lysere farver. "
+#~ "Flere variationer i rotationshastigheden ville mÃ¥ske ogsÃ¥ hjÃ¦lpe."
 
 #~ msgid "Kaleidescope"
 #~ msgstr "Kalejdoskop"
@@ -2172,8 +2233,8 @@ msgstr ""
 #~ "Spiraling, spinning, and very, very fast splashes of color rush toward "
 #~ "the screen. Written by Teemu Suutari."
 #~ msgstr ""
-#~ "Spiralerende, drejernde og meget, meget hurtige farvesjask drøner mod "
-#~ "skærmen. Skrevet af Teemu Suutari."
+#~ "Spiralerende, drejernde og meget, meget hurtige farvesjask drÃ¸ner mod "
+#~ "skÃ¦rmen. Skrevet af Teemu Suutari."
 
 #, fuzzy
 #~ msgid ""
@@ -2181,9 +2242,9 @@ msgstr ""
 #~ "Requires OpenGL, and a machine with fast hardware support for texture "
 #~ "maps. Warning: occasionally opens doors. Written by Jamie Zawinski."
 #~ msgstr ""
-#~ "Animerer en simulering af Lemarchands æske ved hele tiden at løse sig "
-#~ "selv. Kræver OpenGL og en maskine med en hurtige hardwareunderstøttelse "
-#~ "af teksturafbildning. Advarsel: åbner til tider døre. Skrevet af Jamie "
+#~ "Animerer en simulering af Lemarchands Ã¦ske ved hele tiden at lÃ¸se sig "
+#~ "selv. KrÃ¦ver OpenGL og en maskine med en hurtige hardwareunderstÃ¸ttelse "
+#~ "af teksturafbildning. Advarsel: Ã¥bner til tider dÃ¸re. Skrevet af Jamie "
 #~ "Zawinski."
 
 #~ msgid "Duration of laser burst."
@@ -2198,7 +2259,7 @@ msgstr ""
 #~ "Moving radiating lines, that look vaguely like scanning laser beams. "
 #~ "Written by Pascal Pensa. (Frankie say: relax.)"
 #~ msgstr ""
-#~ "Radiale linjer i bevægelse, ligner en smule skannende laserstråler. "
+#~ "Radiale linjer i bevÃ¦gelse, ligner en smule skannende laserstrÃ¥ler. "
 #~ "Skrevet af Pascal Pensa (Frankie siger: slap af)."
 
 #~ msgid "Segments:"
@@ -2208,7 +2269,7 @@ msgstr ""
 #~ msgstr "Kortere"
 
 #~ msgid "Size of burst."
-#~ msgstr "Størrelsen af udsendelse"
+#~ msgstr "StÃ¸rrelsen af udsendelse"
 
 #~ msgid "Lightning"
 #~ msgstr "Lyn"
@@ -2222,13 +2283,13 @@ msgstr ""
 #~ "bare der var lyd med... Skrevet af Keith Romberg."
 
 #~ msgid "Larger"
-#~ msgstr "Større"
+#~ msgstr "StÃ¸rre"
 
 #~ msgid "Lisa"
 #~ msgstr "Lisa"
 
 #~ msgid "Size of object."
-#~ msgstr "Størrelsen af objekterne"
+#~ msgstr "StÃ¸rrelsen af objekterne"
 
 #~ msgid "Smaller"
 #~ msgstr "Mindre"
@@ -2239,7 +2300,7 @@ msgstr ""
 #~ "the Phantom Zone prisoners in during their trial in Superman? I think "
 #~ "that was one of these."
 #~ msgstr ""
-#~ "Tegner Lisajous-løkker, af Caleb Cullen. Kan du huske den anordning "
+#~ "Tegner Lisajous-lÃ¸kker, af Caleb Cullen. Kan du huske den anordning "
 #~ "Phantom Zone-fangerne var anbragt i under retsagen i Superman? Det var "
 #~ "vist en af disse."
 
@@ -2248,7 +2309,7 @@ msgstr ""
 #~ "Another Lissajous figure. This one draws the progress of circular shapes "
 #~ "along a path. Written by Alexander Jolk."
 #~ msgstr ""
-#~ "En anden Lisajous-figur. Denne tegner fremgangen af cirkulære former "
+#~ "En anden Lisajous-figur. Denne tegner fremgangen af cirkulÃ¦re former "
 #~ "langs en bane. Skrevet af Alexander Jolk."
 
 #~ msgid "Lissie"
@@ -2264,7 +2325,7 @@ msgstr ""
 #~ msgstr "Antal punkter"
 
 #~ msgid "Open figures."
-#~ msgstr "Åbne figurer"
+#~ msgstr "Ã…bne figurer"
 
 #~ msgid "Points:"
 #~ msgstr "Punkter:"
@@ -2274,23 +2335,23 @@ msgstr ""
 #~ "This generates random spline-ish line drawings and morphs between them. "
 #~ "Written by Sverre H. Huseby and Glenn T. Lines."
 #~ msgstr ""
-#~ "Genererer tilfældige kurveagtige linjetegninger og morfer mellem dem. "
+#~ "Genererer tilfÃ¦ldige kurveagtige linjetegninger og morfer mellem dem. "
 #~ "Skrevet af Sverre H. Huseby og Glenn T. Lines."
 
-# se næste for forklaring
+# se nÃ¦ste for forklaring
 #~ msgid "Loop"
-#~ msgstr "Løkkekolonier"
+#~ msgstr "LÃ¸kkekolonier"
 
 #, fuzzy
 #~ msgid ""
 #~ "This one produces loop-shaped colonies that spawn, age, and eventually "
 #~ "die. Written by David Bagley."
 #~ msgstr ""
-#~ "Producerer løkkeformede kolonier der opstår, ældes og til sidst uddør. "
+#~ "Producerer lÃ¸kkeformede kolonier der opstÃ¥r, Ã¦ldes og til sidst uddÃ¸r. "
 #~ "Skrevet af David Bagley."
 
 #~ msgid "Delay between drawing the maze and starting the solution."
-#~ msgstr "Ventetid mellem labyrinten optegnes og løsningen vises"
+#~ msgstr "Ventetid mellem labyrinten optegnes og lÃ¸sningen vises"
 
 #~ msgid "Delay between each step in the maze."
 #~ msgstr "Ventetid mellem hvert skridt i labyrinten."
@@ -2305,7 +2366,7 @@ msgstr ""
 #~ msgstr "Labyrint"
 
 #~ msgid "More Delay"
-#~ msgstr "Længere tid"
+#~ msgstr "LÃ¦ngere tid"
 
 #~ msgid "Put a bridge over the logo?"
 #~ msgstr "Anbring en bro over logoet"
@@ -2316,9 +2377,9 @@ msgstr ""
 #~ "generates a random maze, then solves it with visual feedback. Originally "
 #~ "by Jim Randell; modified by a cast of thousands."
 #~ msgstr ""
-#~ "Dette er den ældgamle X-labyrintdemo, ændret så den virker med "
-#~ "pauseskærmsprogrammet. Den genererer en tilfældig labyrint og løser den "
-#~ "derefter med visuel feedback. Oprindeligt skrevet af Jim Randell; ændret "
+#~ "Dette er den Ã¦ldgamle X-labyrintdemo, Ã¦ndret sÃ¥ den virker med "
+#~ "pauseskÃ¦rmsprogrammet. Den genererer en tilfÃ¦ldig labyrint og lÃ¸ser den "
+#~ "derefter med visuel feedback. Oprindeligt skrevet af Jim Randell; Ã¦ndret "
 #~ "af tusindvis gennem tiden."
 
 #, fuzzy
@@ -2327,17 +2388,14 @@ msgstr ""
 #~ "Strip II,'' a GL image of ants walking along the surface of a moebius "
 #~ "strip."
 #~ msgstr ""
-#~ "En M. C. Escher-pauseskærm af Marcelo Vianna, tegner \"Möbius Strip II\", "
-#~ "et 3d-billede af myrer der går langs overfladen af en Möbius-strimmel."
+#~ "En M. C. Escher-pauseskÃ¦rm af Marcelo Vianna, tegner \"MÃ¶bius Strip II\", "
+#~ "et 3d-billede af myrer der gÃ¥r langs overfladen af en MÃ¶bius-strimmel."
 
 #~ msgid "Moebius"
-#~ msgstr "Möbius"
+#~ msgstr "MÃ¶bius"
 
 #~ msgid "Maximum radius increment"
-#~ msgstr "Maksimal radiusforøgelse"
-
-#~ msgid "Moire"
-#~ msgstr "Moire"
+#~ msgstr "Maksimal radiusforÃ¸gelse"
 
 #, fuzzy
 #~ msgid ""
@@ -2349,13 +2407,13 @@ msgstr ""
 #~ "expressed with just a pair of loops and a handful of arithmetic, giving "
 #~ "it a high ``display hack metric''."
 #~ msgstr ""
-#~ "Tegner seje cirkulære interferensmønstre. De fleste af de cirkler du ser "
-#~ "bliver ikke eksplicit genereret, men dukker op som en følge af "
+#~ "Tegner seje cirkulÃ¦re interferensmÃ¸nstre. De fleste af de cirkler du ser "
+#~ "bliver ikke eksplicit genereret, men dukker op som en fÃ¸lge af "
 #~ "interaktion med de andre punkter der er blevet tegnet. Skrevet af Jamie "
 #~ "Zawinski, inspiret af Java-kode af Michael Bayne. Som han gjorde "
-#~ "opmærksom på er skønheden ved denne effekt at hjertet af "
-#~ "fremvisningsalgoritmen kan udtrykkes med blot et løkkepar og en smule "
-#~ "aritmetik, hvad der giver meget på sejhedsmeteret."
+#~ "opmÃ¦rksom pÃ¥ er skÃ¸nheden ved denne effekt at hjertet af "
+#~ "fremvisningsalgoritmen kan udtrykkes med blot et lÃ¸kkepar og en smule "
+#~ "aritmetik, hvad der giver meget pÃ¥ sejhedsmeteret."
 
 #, fuzzy
 #~ msgid ""
@@ -2365,11 +2423,11 @@ msgstr ""
 #~ "of one another, causing the interference lines to ``spray.'' Written by "
 #~ "Jamie Zawinski."
 #~ msgstr ""
-#~ "Et andet eksempel på al det sjov man kan få ud af Moire-"
-#~ "interferensmønstre; pauseskærmen genererer felter af koncentriske cirkler "
+#~ "Et andet eksempel pÃ¥ al det sjov man kan fÃ¥ ud af Moire-"
+#~ "interferensmÃ¸nstre; pauseskÃ¦rmen genererer felter af koncentriske cirkler "
 #~ "eller ovaler og kombinerer planerne via forskellige operationer. Planerne "
-#~ "bevæges uafhængigt af hinanden, hvad der forårsager interferenslinjerne "
-#~ "til at \"sprøjte\" op. Skrevet af Jamie Zawinski."
+#~ "bevÃ¦ges uafhÃ¦ngigt af hinanden, hvad der forÃ¥rsager interferenslinjerne "
+#~ "til at \"sprÃ¸jte\" op. Skrevet af Jamie Zawinski."
 
 #~ msgid "Moire2"
 #~ msgstr "Moire, animeret"
@@ -2380,8 +2438,8 @@ msgstr ""
 #~ "molecules are built in, and it can also read PDB (Protein Data Base) "
 #~ "files as input. Written by Jamie Zawinski."
 #~ msgstr ""
-#~ "Tegner flere forskellige repræsentationer af molekyler. Nogle almindelige "
-#~ "molekyler er indbygget, og pauseskærmen kan også læse PDB-filer "
+#~ "Tegner flere forskellige reprÃ¦sentationer af molekyler. Nogle almindelige "
+#~ "molekyler er indbygget, og pauseskÃ¦rmen kan ogsÃ¥ lÃ¦se PDB-filer "
 #~ "(proteindatabasefiler). Skrevet af Jamie Zawinski."
 
 #~ msgid "Molecule"
@@ -2393,7 +2451,7 @@ msgstr ""
 #~ "shiny-plastic feel as Superquadrics, as many computer-generated objects "
 #~ "do..."
 #~ msgstr ""
-#~ "En anden 3d-omformende pauseskærm, af Marcelo Vianna. Den har det samme "
+#~ "En anden 3d-omformende pauseskÃ¦rm, af Marcelo Vianna. Den har det samme "
 #~ "skinnende plastic-look som Superquadrics, som mange computergenererede "
 #~ "ting har..."
 
@@ -2405,7 +2463,7 @@ msgstr ""
 #~ "Generates random 3d plots that look vaguely mountainous. Written by "
 #~ "Pascal Pensa."
 #~ msgstr ""
-#~ "Genererer tilfældige 3d-plot der ser svagt bjergagtige ud. Skrevet af "
+#~ "Genererer tilfÃ¦ldige 3d-plot der ser svagt bjergagtige ud. Skrevet af "
 #~ "Pascal Pensa."
 
 #~ msgid "Mountain"
@@ -2426,16 +2484,16 @@ msgstr ""
 #~ "        XOR 1,2\t\t\t\t\t\t\t      \n"
 #~ "        JRST .-4\t\t\t\t\t\t      \n"
 #~ "\n"
-#~ "Ifølge HAKMEM, i 1962, skrev Jackson Wright den ovenstående PDP-1-kode. "
-#~ "Denne kode lever stadig i denne pauseskærm, omkring 40 år efter. Antallet "
+#~ "IfÃ¸lge HAKMEM, i 1962, skrev Jackson Wright den ovenstÃ¥ende PDP-1-kode. "
+#~ "Denne kode lever stadig i denne pauseskÃ¦rm, omkring 40 Ã¥r efter. Antallet "
 #~ "af omgivende linjer kode er dog steget en del. Denne version er af Tim "
 #~ "Showalter."
 
 #~ msgid "Draw square at weird starting points."
-#~ msgstr "Tegn kvadraterne ved mærkelige startpunkter"
+#~ msgstr "Tegn kvadraterne ved mÃ¦rkelige startpunkter"
 
 #~ msgid "Munch"
-#~ msgstr "Firkantæder"
+#~ msgstr "FirkantÃ¦der"
 
 #~ msgid "Use XOR drawing function."
 #~ msgstr "Benyt XOR-tegnefunktionen"
@@ -2445,12 +2503,12 @@ msgstr ""
 #~ "Draws different shapes composed of nervously vibrating squiggles, as if "
 #~ "seen through a camera operated by a monkey on crack. By Dan Bornstein."
 #~ msgstr ""
-#~ "Tegner forskelliger figurer sammensata af nervøst vibrerende kruseduller "
-#~ "som hvis man så gennem et kamera der blev betjent af en abe på stoffer. "
+#~ "Tegner forskelliger figurer sammensata af nervÃ¸st vibrerende kruseduller "
+#~ "som hvis man sÃ¥ gennem et kamera der blev betjent af en abe pÃ¥ stoffer. "
 #~ "Af Dan Bornstein."
 
 #~ msgid "NerveRot"
-#~ msgstr "Nerveråd"
+#~ msgstr "NerverÃ¥d"
 
 #, fuzzy
 #~ msgid ""
@@ -2459,13 +2517,13 @@ msgstr ""
 #~ "program like `zippy' or `fortune'. This was extracted from `xnlock' by "
 #~ "Dan Heller. Colorized by Jamie Zawinski."
 #~ msgstr ""
-#~ "En lille man med en stor næse vandrer omkring på din skærm og siger ting. "
+#~ "En lille man med en stor nÃ¦se vandrer omkring pÃ¥ din skÃ¦rm og siger ting. "
 #~ "De ting han siger kan komme fra en fil eller fra et eksternt program som "
-#~ "'zippy' eller 'fortune'. Pauseskærmen blev udtrukket af 'xnlock' af Dan "
+#~ "'zippy' eller 'fortune'. PauseskÃ¦rmen blev udtrukket af 'xnlock' af Dan "
 #~ "Heller. Farvelagt af Jamie Zawinski."
 
 #~ msgid "Noseguy"
-#~ msgstr "Næsefyr"
+#~ msgstr "NÃ¦sefyr"
 
 #~ msgid "Maximum number of lines."
 #~ msgstr "Maksimalt antal linjer"
@@ -2480,10 +2538,10 @@ msgstr ""
 #~ "giving it an even/odd winding rule. Written by Dale Moore, based on some "
 #~ "ancient PDP-11 code."
 #~ msgstr ""
-#~ "En form for kombineret spirograf/stregtegning. Pauseskærmen genererer en "
-#~ "stor kompleks polygon, og lader X-serveren gøre størstedelen af arbejdet "
+#~ "En form for kombineret spirograf/stregtegning. PauseskÃ¦rmen genererer en "
+#~ "stor kompleks polygon, og lader X-serveren gÃ¸re stÃ¸rstedelen af arbejdet "
 #~ "ved at give den en lige/ulige bugtningsregel. Skrevet af Dale Moore, "
-#~ "baseret på noget ældgammelt PDP-11-kode."
+#~ "baseret pÃ¥ noget Ã¦ldgammelt PDP-11-kode."
 
 #~ msgid "Time to fade away."
 #~ msgstr "Den tid det tager for billedet at tone bort"
@@ -2492,7 +2550,7 @@ msgstr ""
 #~ msgstr "Den tid det tager at vise hvert billede"
 
 #~ msgid "Penetrate"
-#~ msgstr "Gennemtrængning"
+#~ msgstr "GennemtrÃ¦ngning"
 
 #, fuzzy
 #~ msgid ""
@@ -2516,20 +2574,20 @@ msgstr ""
 #~ "Knight of the Realm, then a last stand must be taken.'' As reported by "
 #~ "News of the Weird #491, 4-jul-1997."
 #~ msgstr ""
-#~ "Tegner næstenperiodiske fliser; tænk på følgerne for den moderne\n"
+#~ "Tegner nÃ¦stenperiodiske fliser; tÃ¦nk pÃ¥ fÃ¸lgerne for den moderne\n"
 #~ "formica-teknologi. Skrevet af Time Korlove.\n"
 #~ "\n"
-#~ "I april 1997 sagsøgte Sir Roger Penrose, en britisk professor i\n"
+#~ "I april 1997 sagsÃ¸gte Sir Roger Penrose, en britisk professor i\n"
 #~ "matematik som har arbejdet sammen med Stephen Hawking inden for emner\n"
 #~ "som relativitet, sorte huller og om tiden har en begyndelse,\n"
-#~ "Kimberly-Clark Corporation som Penrose mente havde kopieret et mønster\n"
-#~ "han havde skabt (som demonstrerede at \"et ikke-gentagende mønster\n"
+#~ "Kimberly-Clark Corporation som Penrose mente havde kopieret et mÃ¸nster\n"
+#~ "han havde skabt (som demonstrerede at \"et ikke-gentagende mÃ¸nster\n"
 #~ "kunne eksistere i naturen\"), til deres perforerede toiletpapir,\n"
 #~ "Kleenex. Penrose sagde at han ikke bryder sig om retsprocesser, men\n"
-#~ "\"når det drejer sig om at Storbritanniens befolkning bliver opfordret\n"
-#~ "af en multinational koncern til at tørre deres ender i hvad der ser ud\n"
-#~ "til at være arbejde af en ridder af riget, så må man sætte sig til\n"
-#~ "modværge\".\n"
+#~ "\"nÃ¥r det drejer sig om at Storbritanniens befolkning bliver opfordret\n"
+#~ "af en multinational koncern til at tÃ¸rre deres ender i hvad der ser ud\n"
+#~ "til at vÃ¦re arbejde af en ridder af riget, sÃ¥ mÃ¥ man sÃ¦tte sig til\n"
+#~ "modvÃ¦rge\".\n"
 #~ "\n"
 #~ "Kilde: \"News of the Weird\", nr. 491, 4. juli, 1997."
 
@@ -2545,7 +2603,7 @@ msgstr ""
 #~ "circles overlap and leave spiral interference in their wake. Written by "
 #~ "Dan Bornstein."
 #~ msgstr ""
-#~ "Simulerer kolonier af mug der gror i en petriskål. Voksende, farve "
+#~ "Simulerer kolonier af mug der gror i en petriskÃ¥l. Voksende, farve "
 #~ "cirkler overlapper og efterlader spiralinterferens i deres spor. Skrevet "
 #~ "af Dan Bornstein."
 
@@ -2556,11 +2614,11 @@ msgstr ""
 #~ "Written by Jamie Zawinski."
 #~ msgstr ""
 #~ "Tegner en simulation af en gammel terminal med store billedpunkter og "
-#~ "langsomt aftagende fosfor. Kan køre alle programmer som en kilde til "
+#~ "langsomt aftagende fosfor. Kan kÃ¸re alle programmer som en kilde til "
 #~ "teksten der vises. Skrevet af Jamie Zawinski."
 
 #~ msgid "Phosphor"
-#~ msgstr "Efterglød"
+#~ msgstr "EfterglÃ¸d"
 
 #, fuzzy
 #~ msgid ""
@@ -2568,13 +2626,13 @@ msgstr ""
 #~ "probably seen this GL hack. This version is by Marcelo Vianna."
 #~ msgstr ""
 #~ "Hvis du nogensinde har siddet i samme rum som en Windows NT-maskine, har "
-#~ "du sandsynligvis set denne 3d-pauseskærm. Denne version er af Marcelo "
+#~ "du sandsynligvis set denne 3d-pauseskÃ¦rm. Denne version er af Marcelo "
 #~ "Vianna."
 
 #~ msgid "Pipes"
-#~ msgstr "Rør"
+#~ msgstr "RÃ¸r"
 
-# RETMIG: find ud af hvad "mip" står for
+# RETMIG: find ud af hvad "mip" stÃ¥r for
 #, fuzzy
 #~ msgid ""
 #~ "Draws some intersecting planes, making use of alpha blending, fog, "
@@ -2582,9 +2640,9 @@ msgstr ""
 #~ "tell how fast your graphics card is... Requires OpenGL. Written by David "
 #~ "Konerding."
 #~ msgstr ""
-#~ "Tegner nogle planer der skærer hinanden, med brug af alfablanding, tåge, "
-#~ "teksturer og mip-kort, plus en måler med billeder pr. sekund så du kan se "
-#~ "hvor hurtigt grafikkortet er... Kræver OpenGL. Skrevet af David Konerding."
+#~ "Tegner nogle planer der skÃ¦rer hinanden, med brug af alfablanding, tÃ¥ge, "
+#~ "teksturer og mip-kort, plus en mÃ¥ler med billeder pr. sekund sÃ¥ du kan se "
+#~ "hvor hurtigt grafikkortet er... KrÃ¦ver OpenGL. Skrevet af David Konerding."
 
 #~ msgid "Pulsar"
 #~ msgstr "Pulsar"
@@ -2596,16 +2654,16 @@ msgstr ""
 #~ msgstr "Antal partikler"
 
 #~ msgid "Particles on screen"
-#~ msgstr "Partikler på skærmen"
+#~ msgstr "Partikler pÃ¥ skÃ¦rmen"
 
 #~ msgid "Pyro"
-#~ msgstr "Fyrværkeri"
+#~ msgstr "FyrvÃ¦rkeri"
 
 #, fuzzy
 #~ msgid ""
 #~ "Pyro draws exploding fireworks. Blah blah blah. Written by Jamie Zawinski."
 #~ msgstr ""
-#~ "Pyro tegner eksploderende fyrværkeri. Bla, bla, bla. Skrevet af Jamie "
+#~ "Pyro tegner eksploderende fyrvÃ¦rkeri. Bla, bla, bla. Skrevet af Jamie "
 #~ "Zawinski."
 
 #~ msgid "Color contrast"
@@ -2615,7 +2673,7 @@ msgstr ""
 #~ msgstr "Adskilte linjer"
 
 #~ msgid "Length"
-#~ msgstr "Længde"
+#~ msgstr "LÃ¦ngde"
 
 #~ msgid "Narrow"
 #~ msgstr "Smal"
@@ -2643,14 +2701,14 @@ msgstr ""
 #~ "filled polygons, overlapping translucent areas... Written by Jamie "
 #~ "Zawinski."
 #~ msgstr ""
-#~ "Dette er den schweiziske lommekniv for qix-programmer. Den lader en række "
-#~ "linjesegmenter vandre rundt på skærmen og bruger variationer af denne "
-#~ "grundlæggende bevægelse til at lave alle mulige forskellige former for "
-#~ "repræsentationer: linjesegmenter, udfyldte polygoner, overlappende "
+#~ "Dette er den schweiziske lommekniv for qix-programmer. Den lader en rÃ¦kke "
+#~ "linjesegmenter vandre rundt pÃ¥ skÃ¦rmen og bruger variationer af denne "
+#~ "grundlÃ¦ggende bevÃ¦gelse til at lave alle mulige forskellige former for "
+#~ "reprÃ¦sentationer: linjesegmenter, udfyldte polygoner, overlappende "
 #~ "gennemsigtige arealer... Skrevet af Jamie Zawinski."
 
 #~ msgid "Trails attract each other"
-#~ msgstr "Spor tiltrækker hinanden"
+#~ msgstr "Spor tiltrÃ¦kker hinanden"
 
 #~ msgid "Transparent Trails"
 #~ msgstr "Gennemsigtige spor"
@@ -2668,8 +2726,8 @@ msgstr ""
 #~ "react in unpredictable ways. ``RD'' stands for reaction-diffusion."
 #~ msgstr ""
 #~ "En anden variation af 'Bombe'-programmet af Scott Draves. Tegner et net "
-#~ "af voksende, kvadratisk-lignende former der når de støder sammen, "
-#~ "reagerer på uforudsigelige måder."
+#~ "af voksende, kvadratisk-lignende former der nÃ¥r de stÃ¸der sammen, "
+#~ "reagerer pÃ¥ uforudsigelige mÃ¥der."
 
 # se ovenfor
 #~ msgid "RD-Bomb"
@@ -2678,15 +2736,15 @@ msgstr ""
 #~ msgid "Ripples (oily)"
 #~ msgstr "Krusninger (olieagtige)"
 
-# dette er i GUI-sammenhænge - at beskrive '-water'-tilvalget er derfor uheldigt
+# dette er i GUI-sammenhÃ¦nge - at beskrive '-water'-tilvalget er derfor uheldigt
 #, fuzzy
 #~ msgid ""
 #~ "This draws rippling interference patterns like splashing water. With the -"
 #~ "water option, it manipulates your desktop image to look like something is "
 #~ "dripping into it. Written by Tom Hammersley."
 #~ msgstr ""
-#~ "Tegner krusende interferens mønstre som plaskende vand. Kan bringes til "
-#~ "at manipulere skærmbilledet så det ser ud til at noget drypper på det. "
+#~ "Tegner krusende interferens mÃ¸nstre som plaskende vand. Kan bringes til "
+#~ "at manipulere skÃ¦rmbilledet sÃ¥ det ser ud til at noget drypper pÃ¥ det. "
 #~ "Skrevet af Tom Hammersley."
 
 #~ msgid "Rocks"
@@ -2699,11 +2757,11 @@ msgstr ""
 #~ "blue glasses! Mostly written by Jamie Zawinski."
 #~ msgstr ""
 #~ "Tegner en animation af flyvning gennem et asteroidefelt med skift i "
-#~ "rotation og regning. Kan også vise 3d-separation til brug med rød/blå-"
-#~ "briller! For størstepartens vedkommende skrevet af Jamie Zawinski."
+#~ "rotation og regning. Kan ogsÃ¥ vise 3d-separation til brug med rÃ¸d/blÃ¥-"
+#~ "briller! For stÃ¸rstepartens vedkommende skrevet af Jamie Zawinski."
 
 #~ msgid "Delay before next redraw"
-#~ msgstr "Ventetid før næste optegning"
+#~ msgstr "Ventetid fÃ¸r nÃ¦ste optegning"
 
 #~ msgid "Number of Iterations"
 #~ msgstr "Antal iterationer"
@@ -2715,7 +2773,7 @@ msgstr ""
 #~ msgstr "Rorschach"
 
 #~ msgid "Speed to clear the screen"
-#~ msgstr "Hastighed for rydning af skærmen"
+#~ msgstr "Hastighed for rydning af skÃ¦rmen"
 
 #, fuzzy
 #~ msgid ""
@@ -2725,11 +2783,11 @@ msgstr ""
 #~ "Any deep-seated neurotic tendencies which this program reveals are your "
 #~ "own problem. Written by Jamie Zawinski."
 #~ msgstr ""
-#~ "Genererer tilfældige blækklatmønstre. Algoritmen er forførende enkel i "
+#~ "Genererer tilfÃ¦ldige blÃ¦kklatmÃ¸nstre. Algoritmen er forfÃ¸rende enkel i "
 #~ "betragtning af hvor godt den virker; den lader blot en prik vandre "
-#~ "tilfældigt rundt på skærmen og spejler så billedet vandret eller lodret "
-#~ "eller begge dele. Enhver dybtgående neurotisk tendens som denne "
-#~ "pauseskærm måtte afsløre er dit eget problem. Skrevet af Jamie Zawinski."
+#~ "tilfÃ¦ldigt rundt pÃ¥ skÃ¦rmen og spejler sÃ¥ billedet vandret eller lodret "
+#~ "eller begge dele. Enhver dybtgÃ¥ende neurotisk tendens som denne "
+#~ "pauseskÃ¦rm mÃ¥tte afslÃ¸re er dit eget problem. Skrevet af Jamie Zawinski."
 
 #~ msgid "With X-axis Symmetry"
 #~ msgstr "Symmetrisk om x-aksen"
@@ -2743,8 +2801,8 @@ msgstr ""
 #~ "segment moving along a complex spiraling curve. I tweaked this to "
 #~ "generate curvier lines, but still frames of it don't look like much."
 #~ msgstr ""
-#~ "En anden ældgammel xlock-demo, denne af Tom Lawrence. Den tegner et "
-#~ "linjestykke der bevæger sig langs en kompleks spiralerende kurve. Den er "
+#~ "En anden Ã¦ldgammel xlock-demo, denne af Tom Lawrence. Den tegner et "
+#~ "linjestykke der bevÃ¦ger sig langs en kompleks spiralerende kurve. Den er "
 #~ "manipuleret til at generere mere kurvede linjer, men enkeltbilleder af "
 #~ "den ser ikke ud af meget."
 
@@ -2756,10 +2814,10 @@ msgstr ""
 #~ "Creates a collage of rotated and scaled portions of the screen. Written "
 #~ "by Claudio Matsuoka."
 #~ msgstr ""
-#~ "Laver en kollage af roterede og skalerede dele af skærmen. Skrevet af "
+#~ "Laver en kollage af roterede og skalerede dele af skÃ¦rmen. Skrevet af "
 #~ "Claudio Matsuoka."
 
-# se foregående tekst for forklaring
+# se foregÃ¥ende tekst for forklaring
 #~ msgid "RotZoomer"
 #~ msgstr "Kollage"
 
@@ -2769,22 +2827,22 @@ msgstr ""
 #~ "shuffles and solves itself. Another fine GL hack by Marcelo Vianna."
 #~ msgstr ""
 #~ "Tegner en Rubiks terning der roterer i tre dimensioner og hele tiden "
-#~ "blander sig og løser sig selv igen. En 3d-pauseskærm af Marcelo Vianna."
+#~ "blander sig og lÃ¸ser sig selv igen. En 3d-pauseskÃ¦rm af Marcelo Vianna."
 
 #~ msgid "Rubik"
 #~ msgstr "Rubik"
 
-# se næste tekst for forklaring
+# se nÃ¦ste tekst for forklaring
 #~ msgid "ShadeBobs"
-#~ msgstr "Neonrør"
+#~ msgstr "NeonrÃ¸r"
 
 #, fuzzy
 #~ msgid ""
 #~ "This draws smoothly-shaded oscilating oval patterns, that look something "
 #~ "like vapor trails or neon tubes. Written by Shane Smit."
 #~ msgstr ""
-#~ "Tegner jævnt skyggede, oscillerende ovale mønstre der ser ud som dampspor "
-#~ "eller neonrør. Skrevet af Shane Smit."
+#~ "Tegner jÃ¦vnt skyggede, oscillerende ovale mÃ¸nstre der ser ud som dampspor "
+#~ "eller neonrÃ¸r. Skrevet af Shane Smit."
 
 #~ msgid "Sierpinski"
 #~ msgstr "Sierpinski"
@@ -2808,7 +2866,7 @@ msgstr ""
 #~ "Tegner den tre-dimensionale variant af den rekursive Sierpinski-"
 #~ "trekantsfraktal. Skrevet af Tim Robinson og Jamie Zawinski."
 
-# se næste tekst for forklaring - skærmen opdeles i felter der skydes
+# se nÃ¦ste tekst for forklaring - skÃ¦rmen opdeles i felter der skydes
 # rundt mellem hinanden 
 #~ msgid "SlideScreen"
 #~ msgstr "Skydefelter"
@@ -2821,15 +2879,15 @@ msgstr ""
 #~ "of which is missing. I hate trying to solve those puzzles, but watching "
 #~ "one permute itself is more amusing. Written by Jamie Zawinski."
 #~ msgstr ""
-#~ "Tager hvad der nu er på skærmen, opdeler billedet i et net og giver sig "
+#~ "Tager hvad der nu er pÃ¥ skÃ¦rmen, opdeler billedet i et net og giver sig "
 #~ "derefter til at felterne rundt som om det var et af de irriterende 16-"
-#~ "puslespil hvor der er et net af kvadrater hvoraf én mangler. Det er "
-#~ "genererende at forsøge at løse den slags puslespil, men at se et "
+#~ "puslespil hvor der er et net af kvadrater hvoraf Ã©n mangler. Det er "
+#~ "genererende at forsÃ¸ge at lÃ¸se den slags puslespil, men at se et "
 #~ "permutere sig selv er mere underholdende. Skrevet af Jamie Zawinski."
 
-# er meget forvrænget
+# er meget forvrÃ¦nget
 #~ msgid "Slip"
-#~ msgstr "Forvrængning"
+#~ msgstr "ForvrÃ¦ngning"
 
 #, fuzzy
 #~ msgid ""
@@ -2841,11 +2899,11 @@ msgstr ""
 #~ "image of your current desktop to chew on. Originally written by Scott "
 #~ "Draves; whacked on by Jamie Zawinski."
 #~ msgstr ""
-#~ "Denne pauseskærm smider nogle tilfældige bit på skærmen, suger dem gennem "
-#~ "en jetmotor og spytter dem ud på den anden side. For at undgå at lave "
-#~ "billedet helt om til hakkekød indsprøjtes nogle farveklatter på scenen, "
-#~ "eller det går i spin eller bliver strakt som karamel eller (dette er min "
-#~ "tilføjelse) det aktuelle skrivebordsområde bliver brugt som kildebillede. "
+#~ "Denne pauseskÃ¦rm smider nogle tilfÃ¦ldige bit pÃ¥ skÃ¦rmen, suger dem gennem "
+#~ "en jetmotor og spytter dem ud pÃ¥ den anden side. For at undgÃ¥ at lave "
+#~ "billedet helt om til hakkekÃ¸d indsprÃ¸jtes nogle farveklatter pÃ¥ scenen, "
+#~ "eller det gÃ¥r i spin eller bliver strakt som karamel eller (dette er min "
+#~ "tilfÃ¸jelse) det aktuelle skrivebordsomrÃ¥de bliver brugt som kildebillede. "
 #~ "Oprindeligt skrevet af Scott Draves, bearbejdet af Jamie Zawinski."
 
 #~ msgid "Sonar"
@@ -2860,12 +2918,12 @@ msgstr ""
 #~ "easy to make it monitor other sources of data, too. (Processes? Active "
 #~ "network connections? CPU usage per user?) Written by Stephen Martin."
 #~ msgstr ""
-#~ "Tegner et simulering af en sonarskærm. Som standard vises et tilfældigt "
-#~ "udvalg af \"bussemænd\" på skærmen, men hvis pauseskærmen er oversat på "
-#~ "den rigtige måde, kan den pinge (høhø) dit lokale netværk og faktisk "
-#~ "plotte afstanden til de andre værter på netværket i forhold til dig. Det "
-#~ "ville være let at få den til at overvåge andre datakilder også "
-#~ "(processer? aktive netværksforbindelser? processorforbrug pr. bruger?). "
+#~ "Tegner et simulering af en sonarskÃ¦rm. Som standard vises et tilfÃ¦ldigt "
+#~ "udvalg af \"bussemÃ¦nd\" pÃ¥ skÃ¦rmen, men hvis pauseskÃ¦rmen er oversat pÃ¥ "
+#~ "den rigtige mÃ¥de, kan den pinge (hÃ¸hÃ¸) dit lokale netvÃ¦rk og faktisk "
+#~ "plotte afstanden til de andre vÃ¦rter pÃ¥ netvÃ¦rket i forhold til dig. Det "
+#~ "ville vÃ¦re let at fÃ¥ den til at overvÃ¥ge andre datakilder ogsÃ¥ "
+#~ "(processer? aktive netvÃ¦rksforbindelser? processorforbrug pr. bruger?). "
 #~ "Skrevet af Stephen Martin."
 
 #, fuzzy
@@ -2876,11 +2934,11 @@ msgstr ""
 #~ "Documentation for some programs that are not bundled with XScreenSaver ! !"
 #~ "============================================================================="
 #~ msgstr ""
-#~ "Simulerer racerkørsel gennem en klipperig minegang eller en vildt "
+#~ "Simulerer racerkÃ¸rsel gennem en klipperig minegang eller en vildt "
 #~ "dansende orm. Skrevet af Conrad Parker."
 
 #~ msgid "SpeedMine"
-#~ msgstr "Minekørsel"
+#~ msgstr "MinekÃ¸rsel"
 
 #, fuzzy
 #~ msgid ""
@@ -2888,8 +2946,8 @@ msgstr ""
 #~ "shaded spheres in multiple colors. This hack traces its lineage back to "
 #~ "Tom Duff in 1982."
 #~ msgstr ""
-#~ "En anden af de klassiske skærmmanipulationer fra en fjern fortid, denne "
-#~ "tegner 3d-agtige kugler i flere farver. Pauseskærmens aner kan spores "
+#~ "En anden af de klassiske skÃ¦rmmanipulationer fra en fjern fortid, denne "
+#~ "tegner 3d-agtige kugler i flere farver. PauseskÃ¦rmens aner kan spores "
 #~ "tilbage til Tom Duff i 1982."
 
 #~ msgid "Sphere"
@@ -2900,8 +2958,8 @@ msgstr ""
 #~ "Moving circular patterns, by Peter Schmitzberger. Moving circular "
 #~ "patterns means moire; interference patterns, of course."
 #~ msgstr ""
-#~ "Cirkulære mønstre i bevægelse, af Peter Schmitzberger. Cirkulære mønstre "
-#~ "i bevægelse betyder Moire-interferensmønstre, naturligvis."
+#~ "CirkulÃ¦re mÃ¸nstre i bevÃ¦gelse, af Peter Schmitzberger. CirkulÃ¦re mÃ¸nstre "
+#~ "i bevÃ¦gelse betyder Moire-interferensmÃ¸nstre, naturligvis."
 
 #~ msgid "Spiral"
 #~ msgstr "Spiral"
@@ -2911,15 +2969,15 @@ msgstr ""
 #~ "Draws a spotlight scanning across a black screen, illumnating the "
 #~ "underlying desktop when it passes. Written by Rick Schultz."
 #~ msgstr ""
-#~ "Tegner et højlys der bevæger sig over en sort skærm og oplyser "
-#~ "skrivebordet nedenunder når den passerer. Skrevet af Rick Schultz."
+#~ "Tegner et hÃ¸jlys der bevÃ¦ger sig over en sort skÃ¦rm og oplyser "
+#~ "skrivebordet nedenunder nÃ¥r den passerer. Skrevet af Rick Schultz."
 
 #~ msgid "Spotlight"
 #~ msgstr "Kighul"
 
 #, fuzzy
 #~ msgid "Q-Bert meets Marble Madness! Written by Ed Mackey."
-#~ msgstr "Q-bert møder Marble Madness! Skrevet af Ed Mackey."
+#~ msgstr "Q-bert mÃ¸der Marble Madness! Skrevet af Ed Mackey."
 
 #~ msgid "Sproingies"
 #~ msgstr "Fjederhoppere"
@@ -2930,9 +2988,9 @@ msgstr ""
 #~ "grow outward until they hit something, then they go around it. Written by "
 #~ "Jeff Epler."
 #~ msgstr ""
-#~ "Tegner en mængde af interagerende firkantspiralproducerende automater. "
-#~ "Spiralerne vokser udad til de støder ind i et eller andet, hverefter de "
-#~ "bevæger sig rundt om det. Skrevet af Jeff Epler."
+#~ "Tegner en mÃ¦ngde af interagerende firkantspiralproducerende automater. "
+#~ "Spiralerne vokser udad til de stÃ¸der ind i et eller andet, hverefter de "
+#~ "bevÃ¦ger sig rundt om det. Skrevet af Jeff Epler."
 
 #~ msgid "Squiral"
 #~ msgstr "Firaler"
@@ -2949,10 +3007,10 @@ msgstr ""
 #~ "~amil/ssystem/>."
 #~ msgstr ""
 #~ "Solsystem er en 3d-simulation af et solsystem. Den simulerer "
-#~ "overflyvninger af solen, de ni planeter og nogle få større satelitter, "
+#~ "overflyvninger af solen, de ni planeter og nogle fÃ¥ stÃ¸rre satelitter, "
 #~ "med fire kameratilstande. Skrevet af Raul Alonso. Dette er ikke "
 #~ "inkluderet i denne pakke, men hvis du ikke allerede har programmet, kan "
-#~ "du finde det på <<http://www1.las.es/~amil/ssystem/>."
+#~ "du finde det pÃ¥ <<http://www1.las.es/~amil/ssystem/>."
 
 #~ msgid "Stairs"
 #~ msgstr "Trapper"
@@ -2961,17 +3019,17 @@ msgstr ""
 #~ "by Marcelo Vianna's third Escher GL hack, this one draws an ``infinite'' "
 #~ "staircase."
 #~ msgstr ""
-#~ "Marcelo Viannas tredje Escher-pauseskærm i 3d. Tegner en \"uendelig\" "
+#~ "Marcelo Viannas tredje Escher-pauseskÃ¦rm i 3d. Tegner en \"uendelig\" "
 #~ "trappe."
 
 #~ msgid "Change to display in monochrome."
 #~ msgstr "Skift til sort/hvid-fremvisning"
 
 #~ msgid "Duration of current shape."
-#~ msgstr "Nuværende forms varighed"
+#~ msgstr "NuvÃ¦rende forms varighed"
 
 #~ msgid "Quickness of rotation at each step (0 = Random)"
-#~ msgstr "Hurtighed for rotation ved hvert trin (0 = tilfældig)"
+#~ msgstr "Hurtighed for rotation ved hvert trin (0 = tilfÃ¦ldig)"
 
 #~ msgid "Slim"
 #~ msgstr "Tynd"
@@ -2980,10 +3038,10 @@ msgstr ""
 #~ msgstr "Animationshastighed"
 
 #~ msgid "Starfish"
-#~ msgstr "Søstjerne"
+#~ msgstr "SÃ¸stjerne"
 
 #~ msgid "Thickness of color bands (0 = Random)"
-#~ msgstr "Tykkelse af farvebånd (0 = tilfældig)"
+#~ msgstr "Tykkelse af farvebÃ¥nd (0 = tilfÃ¦ldig)"
 
 #, fuzzy
 #~ msgid ""
@@ -2992,13 +3050,13 @@ msgstr ""
 #~ "these shapes to lay down a field of colors, which are then cycled. The "
 #~ "motion is very organic. Written by Jamie Zawinski."
 #~ msgstr ""
-#~ "Genererer en sekvens af bølgende, bankende, stjernelignende mønstre som "
-#~ "pulserer, roterer og krænger vrangen ud. En anden fremvisningsmåde bruger "
+#~ "Genererer en sekvens af bÃ¸lgende, bankende, stjernelignende mÃ¸nstre som "
+#~ "pulserer, roterer og krÃ¦nger vrangen ud. En anden fremvisningsmÃ¥de bruger "
 #~ "disse former til at lave en farveflade hvor farverne skifter rundt. "
-#~ "Bevægelsen er meget organisk. Skrevet af Jamie Zawinski."
+#~ "BevÃ¦gelsen er meget organisk. Skrevet af Jamie Zawinski."
 
 #~ msgid "Use raw shapes "
-#~ msgstr "Brug rå former"
+#~ msgstr "Brug rÃ¥ former"
 
 #, fuzzy
 #~ msgid ""
@@ -3006,7 +3064,7 @@ msgstr ""
 #~ "over a star field, like at the beginning of the movie of the same name. "
 #~ "Written by Jamie Zawinski and Claudio Matauoka."
 #~ msgstr ""
-#~ "Tegner en strøm af tekst der langsomt ruller ud i horisonten ved en "
+#~ "Tegner en strÃ¸m af tekst der langsomt ruller ud i horisonten ved en "
 #~ "bestemt vinkel, over en stjernehimmel, ligesom indledningen til filmen "
 #~ "med det samme navn. Skrevet af Jamie Zawinski og Claudio Matauoka."
 
@@ -3019,16 +3077,16 @@ msgstr ""
 #~ "patterns. Written by Andrew Plotkin, based on SGI's `electropaint' "
 #~ "screensaver."
 #~ msgstr ""
-#~ "Kæder af farverige kvadrater danser omkring hinanden i komplekse, spirale "
-#~ "mønstre. Skrevet af Andrew Plotkin, baseret på SGI's 'electropaint'-"
-#~ "pauseskærm."
+#~ "KÃ¦der af farverige kvadrater danser omkring hinanden i komplekse, spirale "
+#~ "mÃ¸nstre. Skrevet af Andrew Plotkin, baseret pÃ¥ SGI's 'electropaint'-"
+#~ "pauseskÃ¦rm."
 
-# se ovenstående for forklaring
+# se ovenstÃ¥ende for forklaring
 #~ msgid "StonerView"
-#~ msgstr "Kvadratkæder"
+#~ msgstr "KvadratkÃ¦der"
 
 #~ msgid "Strange"
-#~ msgstr "Mærkelig"
+#~ msgstr "MÃ¦rkelig"
 
 #, fuzzy
 #~ msgid ""
@@ -3036,8 +3094,8 @@ msgstr ""
 #~ "field of dots that swoops and twists around. The motion is very nice. "
 #~ "Written by Massimino Pascal."
 #~ msgstr ""
-#~ "Tegner \"mærkelige\" tiltrækkere: det er et farverigt, uforudsigeligt "
-#~ "levende felt af punkter der slår ned og drejer sig. Bevægelsen er "
+#~ "Tegner \"mÃ¦rkelige\" tiltrÃ¦kkere: det er et farverigt, uforudsigeligt "
+#~ "levende felt af punkter der slÃ¥r ned og drejer sig. BevÃ¦gelsen er "
 #~ "virkeligt fin. Skrevet af Massimino Pascal."
 
 #, fuzzy
@@ -3046,12 +3104,12 @@ msgstr ""
 #~ "BASIC on a Commodore 64 in 1987, as a 320x200 black and white wireframe. "
 #~ "Now it is GL and has specular reflections."
 #~ msgstr ""
-#~ "Ed Mackey rapporterer at han skrev den første version af dette program i "
-#~ "BASIC på en Commodore 64 i 1987, som en 320x200 sort/hvid rammemodel. Nu "
-#~ "er den skrevet med OpenGL og har højlysrefleksioner."
+#~ "Ed Mackey rapporterer at han skrev den fÃ¸rste version af dette program i "
+#~ "BASIC pÃ¥ en Commodore 64 i 1987, som en 320x200 sort/hvid rammemodel. Nu "
+#~ "er den skrevet med OpenGL og har hÃ¸jlysrefleksioner."
 
-# RETMIG: hvad hedder "quadrics" på dansk?
-# når noget bedre er fundet skal det også koordineres med en anden tekst
+# RETMIG: hvad hedder "quadrics" pÃ¥ dansk?
+# nÃ¥r noget bedre er fundet skal det ogsÃ¥ koordineres med en anden tekst
 #~ msgid "Superquadrics"
 #~ msgstr "Superquadrics"
 
@@ -3061,15 +3119,15 @@ msgstr ""
 #~ "but you might have seen a Mac program similar to this called FlowFazer. "
 #~ "There is also a cool Java applet of a similar concept"
 #~ msgstr ""
-#~ "Mere flydende, turbulente mønstre. Denne version er af M. Dobie og R. "
-#~ "Taylor, men du har måske set et Mac-program der ligner dette, ved navn "
+#~ "Mere flydende, turbulente mÃ¸nstre. Denne version er af M. Dobie og R. "
+#~ "Taylor, men du har mÃ¥ske set et Mac-program der ligner dette, ved navn "
 #~ "Flow Fazer. Der eksisterer en sej Java-applet med et lignende koncept."
 
-# En anden hedder allerede hvirvel, og denne minder også mere om flødeskumsturbulens
+# En anden hedder allerede hvirvel, og denne minder ogsÃ¥ mere om flÃ¸deskumsturbulens
 #~ msgid "Swirl"
 #~ msgstr "Turbulens"
 
-# se næste
+# se nÃ¦ste
 #~ msgid "T3D"
 #~ msgstr "Analogt 3d-ur"
 
@@ -3078,7 +3136,7 @@ msgstr ""
 #~ "This draws a working analog clock composed of floating, throbbing "
 #~ "bubbles. Written by Bernd Paysan."
 #~ msgstr ""
-#~ "Tegner et værkende analogt ur sammensat af flydende, pulserende bobler. "
+#~ "Tegner et vÃ¦rkende analogt ur sammensat af flydende, pulserende bobler. "
 #~ "Skrevet af Bernd Paysan."
 
 #, fuzzy
@@ -3086,7 +3144,7 @@ msgstr ""
 #~ "Generates random mountain ranges using iterative subdivision of "
 #~ "triangles. Written by Tobias Gloth."
 #~ msgstr ""
-#~ "Tegner tilfældige bjergkæder vha. iterative underopdelinger af trekanter. "
+#~ "Tegner tilfÃ¦ldige bjergkÃ¦der vha. iterative underopdelinger af trekanter. "
 #~ "Skrevet af Tobias Gloth."
 
 #~ msgid "Triangle"
@@ -3097,7 +3155,7 @@ msgstr ""
 #~ "This draws line- and arc-based Truchet patterns that tile the screen. "
 #~ "Written by Adrian Likins."
 #~ msgstr ""
-#~ "Tegner linje- og buebaserede Truchet-mønstre der fliselægger skærmen. "
+#~ "Tegner linje- og buebaserede Truchet-mÃ¸nstre der fliselÃ¦gger skÃ¦rmen. "
 #~ "Skrevet af Adrian Likins."
 
 #~ msgid "Truchet"
@@ -3118,16 +3176,16 @@ msgstr ""
 #~ msgstr ""
 #~ "Dette er faktisk blot et kommandoskalsprogram der tager et "
 #~ "videosekvensbillede fra systemets video-inddata og derefter bruger nogle "
-#~ "PBM-filtre (valgt tilfældigt) til at manipulere og sammensætte billedet "
-#~ "igen på forskellige måder (kantfinding, fratrækning af billedet fra en "
-#~ "roteret version af det, osv.). Så viser det billedet nogle få sekunder og "
+#~ "PBM-filtre (valgt tilfÃ¦ldigt) til at manipulere og sammensÃ¦tte billedet "
+#~ "igen pÃ¥ forskellige mÃ¥der (kantfinding, fratrÃ¦kning af billedet fra en "
+#~ "roteret version af det, osv.). SÃ¥ viser det billedet nogle fÃ¥ sekunder og "
 #~ "starter forfra. Dette virker rigtigt fint hvis du blot fodrer det med "
 #~ "almindeligt tv.\n"
 #~ "\n"
-#~ "I øjeblikket er de tre linjer af programmet der skaffer kildebilledet, "
-#~ "SGI-specifikke, men det burde være trivielt at justere det til at virke "
-#~ "på andre systemer der har adgang til videobilleder (indsend venligst "
-#~ "ændringerne hvis du gør dette...)."
+#~ "I Ã¸jeblikket er de tre linjer af programmet der skaffer kildebilledet, "
+#~ "SGI-specifikke, men det burde vÃ¦re trivielt at justere det til at virke "
+#~ "pÃ¥ andre systemer der har adgang til videobilleder (indsend venligst "
+#~ "Ã¦ndringerne hvis du gÃ¸r dette...)."
 
 #~ msgid "VidWhacker"
 #~ msgstr "Videobearbejdning."
@@ -3138,8 +3196,8 @@ msgstr ""
 #~ "patterns. It scatters them around your screen until it fills up, then it "
 #~ "clears the screen and starts over. Written by Tracy Camp and David Hansen."
 #~ msgstr ""
-#~ "Genererer kontinuerte sekvenser af små, kurvende geometriske mønstre som "
-#~ "bliver spredt ud over skærmen til den er fyldt op, hvorefter den ryddes, "
+#~ "Genererer kontinuerte sekvenser af smÃ¥, kurvende geometriske mÃ¸nstre som "
+#~ "bliver spredt ud over skÃ¦rmen til den er fyldt op, hvorefter den ryddes, "
 #~ "og der begyndes forfra igen. Skrevet af Tracy Camp og David Hansen."
 
 #~ msgid "Vines"
@@ -3149,7 +3207,7 @@ msgstr ""
 #~ msgid ""
 #~ "Draws a colorful random-walk, in various forms. Written by Rick Campbell."
 #~ msgstr ""
-#~ "Tegner farverige tilfældige vandringer, i forskellige former. Skrevet af "
+#~ "Tegner farverige tilfÃ¦ldige vandringer, i forskellige former. Skrevet af "
 #~ "Rick Campbell."
 
 #~ msgid "Wander"
@@ -3165,15 +3223,15 @@ msgstr ""
 #~ "pictures. This is because most of the web is pictures of text. Which is "
 #~ "pretty sad.) Written by Jamie Zawinski."
 #~ msgstr ""
-#~ "Denne pauseskærm laver kollager ud af tilfældige billeder som udtrækkes "
-#~ "fra internetsider. Billederne findes ved at lave tilfældige søgninger på "
-#~ "internettet og så udtrække billeder fra de returnerede sider. De fundne "
-#~ "billeder kan evt. filtreres gennem 'Videobearbejder' nævnt andetsteds, "
+#~ "Denne pauseskÃ¦rm laver kollager ud af tilfÃ¦ldige billeder som udtrÃ¦kkes "
+#~ "fra internetsider. Billederne findes ved at lave tilfÃ¦ldige sÃ¸gninger pÃ¥ "
+#~ "internettet og sÃ¥ udtrÃ¦kke billeder fra de returnerede sider. De fundne "
+#~ "billeder kan evt. filtreres gennem 'Videobearbejder' nÃ¦vnt andetsteds, "
 #~ "hvad der ser virkeligt sejt ud.\n"
 #~ "\n"
-#~ "Skrevet af Jamie Zawinski (bemærk at de fleste fundne billeder i "
+#~ "Skrevet af Jamie Zawinski (bemÃ¦rk at de fleste fundne billeder i "
 #~ "virkeligheden viser tekst og ikke \"rigtige\" billeder - dette skyldes at "
-#~ "de fleste billeder på internettet desværre er billeder af tekst)."
+#~ "de fleste billeder pÃ¥ internettet desvÃ¦rre er billeder af tekst)."
 
 #~ msgid "WebCollage"
 #~ msgstr "Netcollage"
@@ -3185,18 +3243,18 @@ msgstr ""
 #~ "on and off at random. By Paul 'Joey' Clark."
 #~ msgstr ""
 #~ "Flyvende stjerner interagerer gennem en blandingn af simple "
-#~ "todimensionale kraftfelter. Styrken af hvert kraftfelt ændres hele tiden "
-#~ "og bliver slået fra og til tilfældigt. Af Paul 'Joey' Clark."
+#~ "todimensionale kraftfelter. Styrken af hvert kraftfelt Ã¦ndres hele tiden "
+#~ "og bliver slÃ¥et fra og til tilfÃ¦ldigt. Af Paul 'Joey' Clark."
 
-# parodi på WWW, plat oversættelse, men hvad
+# parodi pÃ¥ WWW, plat oversÃ¦ttelse, men hvad
 #~ msgid "WhirlwindWarp"
-#~ msgstr "Verdensvævvendinger"
+#~ msgstr "VerdensvÃ¦vvendinger"
 
 #, fuzzy
 #~ msgid ""
 #~ "Draws zooming chains of sinusoidal spots. Written by Ashton Trey Belew."
 #~ msgstr ""
-#~ "Tegner zoomende kæder af sinuspletter. Skrevet af Ashton Trey Belew."
+#~ "Tegner zoomende kÃ¦der af sinuspletter. Skrevet af Ashton Trey Belew."
 
 #~ msgid "WhirlyGig"
 #~ msgstr "Snurretop"
@@ -3207,8 +3265,8 @@ msgstr ""
 #~ "screen. Written by Brad Taylor, Dave Lemke, Boris Putanec, and Henrik "
 #~ "Theiling."
 #~ msgstr ""
-#~ "En ældgammel xlock-effekt der består i at tegne flerfarvede orme der "
-#~ "kravler omkring på skærmen. Skrevet af Brad Taylor, Dave Lemke, Boris "
+#~ "En Ã¦ldgammel xlock-effekt der bestÃ¥r i at tegne flerfarvede orme der "
+#~ "kravler omkring pÃ¥ skÃ¦rmen. Skrevet af Brad Taylor, Dave Lemke, Boris "
 #~ "Putanec og Henrik Theiling."
 
 #~ msgid "Worm"
@@ -3224,10 +3282,10 @@ msgstr ""
 #~ "included with the XScreenSaver package, but if you don't have it already, "
 #~ "you can find it at <http://limax.paru.cas.cz/~hubicka/XaoS/>."
 #~ msgstr ""
-#~ "XaoS genererer hurtige, løbende animationer af Mandelbrotmængden og andre "
-#~ "fraktale mængder. Skrevet af Thomas Marsh og Jan Hubicka. XaoS er ikke "
+#~ "XaoS genererer hurtige, lÃ¸bende animationer af MandelbrotmÃ¦ngden og andre "
+#~ "fraktale mÃ¦ngder. Skrevet af Thomas Marsh og Jan Hubicka. XaoS er ikke "
 #~ "inkluderet i XScreenSaver-pakken, men hvis du ikke allerede har "
-#~ "programmet, kan du finde det på <http://limax.paru.cas.cz/~hubicka/XaoS/>."
+#~ "programmet, kan du finde det pÃ¥ <http://limax.paru.cas.cz/~hubicka/XaoS/>."
 
 #~ msgid "XDaliClock"
 #~ msgstr "Dali-ur"
@@ -3240,9 +3298,9 @@ msgstr ""
 #~ "you can find it at <http://www.jwz.org/xdaliclock/>."
 #~ msgstr ""
 #~ "Dali-ur tegner et stort digitalt ur hvor tallene skifter ved at \"smelte"
-#~ "\" sammen til deres nye former. Skrevet af Jamie Zawinski. Pauseskærmen "
-#~ "bygger på programmet XDaliClock som ikke er inkluderet i XScreenSaver-"
-#~ "pakken, men hvis du ikke allerede har programmet, kan du finde det på "
+#~ "\" sammen til deres nye former. Skrevet af Jamie Zawinski. PauseskÃ¦rmen "
+#~ "bygger pÃ¥ programmet XDaliClock som ikke er inkluderet i XScreenSaver-"
+#~ "pakken, men hvis du ikke allerede har programmet, kan du finde det pÃ¥ "
 #~ "<http://www.jwz.org/xdaliclock/>."
 
 #, fuzzy
@@ -3254,10 +3312,10 @@ msgstr ""
 #~ "cs.colorado.edu/~tuna/xearth/>."
 #~ msgstr ""
 #~ "Jorden tegner et billede af jorden som den ser ud fra din favoritposition "
-#~ "i rummet, korrekt skygget svarende til den nuværende position af solen. "
+#~ "i rummet, korrekt skygget svarende til den nuvÃ¦rende position af solen. "
 #~ "Skrevet af Kirk Johnson. Programmet 'xearth' som ligger bag, er ikke "
 #~ "inkluderet i denne pakke, men hvis du ikke allerede har det, kan du finde "
-#~ "det på <http://www.cs.colorado.edu/~tuna/xearth/>."
+#~ "det pÃ¥ <http://www.cs.colorado.edu/~tuna/xearth/>."
 
 #~ msgid "Xearth"
 #~ msgstr "Jorden"
@@ -3269,7 +3327,7 @@ msgstr ""
 #~ "Linux/X11/demos/>."
 #~ msgstr ""
 #~ "Fisk! Det bagvedliggende program er ikke inkluderet i denne pakke, men "
-#~ "hvis du ikke allerede har det, kan du finde det på <http://metalab.unc."
+#~ "hvis du ikke allerede har det, kan du finde det pÃ¥ <http://metalab.unc."
 #~ "edu/pub/Linux/X11/demos/>."
 
 #~ msgid "XFishTank"
@@ -3281,7 +3339,7 @@ msgstr ""
 #~ "and set it on fire too. Written by Carsten Haitzler, hacked on by many "
 #~ "others."
 #~ msgstr ""
-#~ "Tegner en simulering af pulserende ild. Der kan også blive sat ild til et "
+#~ "Tegner en simulering af pulserende ild. Der kan ogsÃ¥ blive sat ild til et "
 #~ "valgfrit billede. Skrevet af Carsten Haitzler, bearbejdet af mange andre."
 
 #~ msgid "Xflame"
@@ -3294,10 +3352,10 @@ msgstr ""
 #~ "``The Shining,'' you won't get it. Those who have describe this hack as "
 #~ "``inspired.''"
 #~ msgstr ""
-#~ "Dette program opfører sig skizofrent og laver en masse tastefejl. Skrevet "
-#~ "af Jamie Zawinski. Hvis du ikke har set Stanley Kubricks mesterværk, "
-#~ "\"Ondskabens hotel\", vil du ikke forstå den. De der har, beskriver "
-#~ "pauseskærmen som \"inspireret\"."
+#~ "Dette program opfÃ¸rer sig skizofrent og laver en masse tastefejl. Skrevet "
+#~ "af Jamie Zawinski. Hvis du ikke har set Stanley Kubricks mestervÃ¦rk, "
+#~ "\"Ondskabens hotel\", vil du ikke forstÃ¥ den. De der har, beskriver "
+#~ "pauseskÃ¦rmen som \"inspireret\"."
 
 #~ msgid "Xjack"
 #~ msgstr "Jack"
@@ -3308,8 +3366,8 @@ msgstr ""
 #~ "``Lyapunov exponent.'' It has a cool interactive mode, too. Written by "
 #~ "Ron Record."
 #~ msgstr ""
-#~ "Genererer flotte fraktalbilleder vha. skræmmende matematik involverende "
-#~ "\"Lyapunov-eksponenten\". Der er også en sej interaktiv tilstand. Skrevet "
+#~ "Genererer flotte fraktalbilleder vha. skrÃ¦mmende matematik involverende "
+#~ "\"Lyapunov-eksponenten\". Der er ogsÃ¥ en sej interaktiv tilstand. Skrevet "
 #~ "af Ron Record."
 
 #~ msgid "Xlyap"
@@ -3334,15 +3392,15 @@ msgstr ""
 #~ "~spb/xmountains/>. Be sure to compile it with -DVROOT or it won't work "
 #~ "right when launched by the xscreensaver daemon."
 #~ msgstr ""
-#~ "Genererer realistisk udseende fraktale landskaber med snedækkede bjerge "
-#~ "nær vand - enten fra siden eller ovenfra. Skrevet af Stephen Booth. Det "
+#~ "Genererer realistisk udseende fraktale landskaber med snedÃ¦kkede bjerge "
+#~ "nÃ¦r vand - enten fra siden eller ovenfra. Skrevet af Stephen Booth. Det "
 #~ "bagvedliggende program er ikke inkluderet i denne pakke, men hvis du ikke "
-#~ "allerede har det, kan du finde det på <http://www.epcc.ed.ac.uk/~spb/"
+#~ "allerede har det, kan du finde det pÃ¥ <http://www.epcc.ed.ac.uk/~spb/"
 #~ "xmountains/>\n"
 #~ "\n"
-#~ "Hvis du selv oversætter det, så sikr dig at du oversætter det med -"
-#~ "DVROOT, ellers virker det ikke korrekt når det bliver kørt af "
-#~ "pauseskærmsdæmonen."
+#~ "Hvis du selv oversÃ¦tter det, sÃ¥ sikr dig at du oversÃ¦tter det med -"
+#~ "DVROOT, ellers virker det ikke korrekt nÃ¥r det bliver kÃ¸rt af "
+#~ "pauseskÃ¦rmsdÃ¦monen."
 
 #~ msgid "Xmountains"
 #~ msgstr "Bjerge"
@@ -3353,19 +3411,19 @@ msgstr ""
 #~ "Draws a few swarms of critters flying around the screen, with nicely "
 #~ "faded color trails behind them. Written by Chris Leger."
 #~ msgstr ""
-#~ "Tegne sværme af stråler der flyver omkring på skærmen med smukt falmende "
+#~ "Tegne svÃ¦rme af strÃ¥ler der flyver omkring pÃ¥ skÃ¦rmen med smukt falmende "
 #~ "farvespor efter dem. Skrevet af Chris Leger."
 
 #~ msgid "XRaySwarm"
-#~ msgstr "Strålesværm"
+#~ msgstr "StrÃ¥lesvÃ¦rm"
 
 #, fuzzy
 #~ msgid ""
 #~ "The XScreenSaver logo. Don't you hate it? So do I. Would you like to "
 #~ "design a new logo for XScreenSaver? If so, send jwz your submissions."
 #~ msgstr ""
-#~ "Logoet for pauseskærmsprogrammet. Hader du det ikke? Det gør jeg også. "
-#~ "Vil du gerne designe et nyt? Hvis du vil, så send jwz@jwz.org dit bidrag."
+#~ "Logoet for pauseskÃ¦rmsprogrammet. Hader du det ikke? Det gÃ¸r jeg ogsÃ¥. "
+#~ "Vil du gerne designe et nyt? Hvis du vil, sÃ¥ send jwz@jwz.org dit bidrag."
 
 #~ msgid "Xroger"
 #~ msgstr "Xroger"
@@ -3376,7 +3434,7 @@ msgstr ""
 #~ "find it at <http://www.euronet.nl/~rja/Xsnow/>."
 #~ msgstr ""
 #~ "Tegner dalende sne og en lejlighedsvis lille julemand. Af Rick Jansen. Du "
-#~ "kan finde det bagvedliggende program på <http://www.euronet.nl/~rja/Xsnow/"
+#~ "kan finde det bagvedliggende program pÃ¥ <http://www.euronet.nl/~rja/Xsnow/"
 #~ ">."
 
 #~ msgid "Xsnow"
@@ -3387,7 +3445,7 @@ msgstr ""
 #~ "Simulates that pen-in-nested-plastic-gears toy from your childhood. By "
 #~ "Rohit Singh."
 #~ msgstr ""
-#~ "Simulerer pind i indlejrede plastictandhjul-legetøj fra din barndom. Af "
+#~ "Simulerer pind i indlejrede plastictandhjul-legetÃ¸j fra din barndom. Af "
 #~ "Rohit Singh."
 
 #~ msgid "XSpiroGraph"
@@ -3401,10 +3459,10 @@ msgstr ""
 #~ "XTeeVee simulates various television problems, including static, loss of "
 #~ "vertical hold, and a test pattern. By Greg Knauss."
 #~ msgstr ""
-#~ "Fjernsyn simulerer diverse tv-problemer såsom hvid støj, tab af lodret "
-#~ "synkronisering og et testmønster. Af Greg Knauss."
+#~ "Fjernsyn simulerer diverse tv-problemer sÃ¥som hvid stÃ¸j, tab af lodret "
+#~ "synkronisering og et testmÃ¸nster. Af Greg Knauss."
 
-# "fatbits" er vist overflødigt, i hvert fald svært at oversætte
+# "fatbits" er vist overflÃ¸digt, i hvert fald svÃ¦rt at oversÃ¦tte
 #~ msgid "Zoom (Fatbits)"
 #~ msgstr "Zoom"
 
@@ -3414,19 +3472,19 @@ msgstr ""
 #~ "option the result is like looking through many overlapping lenses rather "
 #~ "than just a simple zoom. Written by James Macnicol."
 #~ msgstr ""
-#~ "Zoomer ind på en del af skærmen og bevæger sig derefter omkring. Med "
-#~ "linseeffekten slået til bliver resultatet som hvis man kigger gennem "
+#~ "Zoomer ind pÃ¥ en del af skÃ¦rmen og bevÃ¦ger sig derefter omkring. Med "
+#~ "linseeffekten slÃ¥et til bliver resultatet som hvis man kigger gennem "
 #~ "mange overlappende linser snarere end blot en simpel zoom. Skrevet af "
 #~ "James Macnicol."
 
 #~ msgid "Add a new screensaver"
-#~ msgstr "Tilføj en ny pauseskærm"
+#~ msgstr "TilfÃ¸j en ny pauseskÃ¦rm"
 
 #~ msgid "Select the screensaver to run from the list below:"
-#~ msgstr "Vælg pauseskærm som skal benyttes, fra listen under:"
+#~ msgstr "VÃ¦lg pauseskÃ¦rm som skal benyttes, fra listen under:"
 
 #~ msgid "New screensaver"
-#~ msgstr "Ny pauseskærm"
+#~ msgstr "Ny pauseskÃ¦rm"
 
 #~ msgid "GNOME Control Center:"
 #~ msgstr "Kontrolcenter:"
@@ -3435,18 +3493,18 @@ msgstr ""
 #~ msgstr "Adgangskode for %s"
 
 #~ msgid "Enable sound server startup"
-#~ msgstr "Aktivér lydserveropstart"
+#~ msgstr "AktivÃ©r lydserveropstart"
 
 #, fuzzy
 #~ msgid "General"
-#~ msgstr "Gennemtrængning"
+#~ msgstr "GennemtrÃ¦ngning"
 
 #, fuzzy
 #~ msgid "Sound Events"
-#~ msgstr "Lyde for hændelser"
+#~ msgstr "Lyde for hÃ¦ndelser"
 
 #~ msgid "Sounds for events"
-#~ msgstr "Lyde for hændelser"
+#~ msgstr "Lyde for hÃ¦ndelser"
 
 #~ msgid "Background picture"
 #~ msgstr "Baggrundsbillede"
@@ -3461,7 +3519,7 @@ msgstr ""
 #~ msgstr "Uigennemsigtighed (i %):"
 
 #~ msgid "Pick a color"
-#~ msgstr "Vælg en farve"
+#~ msgstr "VÃ¦lg en farve"
 
 # '(keep aspect ratio)' giver sig selv
 #~ msgid "Scaled (keep aspect ratio)"
@@ -3498,16 +3556,16 @@ msgstr ""
 #~ msgstr "Kliklydstyrke"
 
 #~ msgid "Delay before repeat:"
-#~ msgstr "Ventetid før gentagelse:"
+#~ msgstr "Ventetid fÃ¸r gentagelse:"
 
 #~ msgid "Duration (ms)"
 #~ msgstr "Varighed (ms)"
 
 #~ msgid "Enable Keyboard Click"
-#~ msgstr "Aktivér tastaturklik"
+#~ msgstr "AktivÃ©r tastaturklik"
 
 #~ msgid "Enable Keyboard Repeat"
-#~ msgstr "Aktivér tastaturgentagelse"
+#~ msgstr "AktivÃ©r tastaturgentagelse"
 
 #~ msgid "Key repeat rate:"
 #~ msgstr "Gentagelseshastighed:"
@@ -3531,10 +3589,10 @@ msgstr ""
 #~ msgstr "Lydstyrke"
 
 #~ msgid "Left handed"
-#~ msgstr "Venstrehåndet"
+#~ msgstr "VenstrehÃ¥ndet"
 
 #~ msgid "Mouse Configuration"
-#~ msgstr "Museopsætning"
+#~ msgstr "MuseopsÃ¦tning"
 
 #~ msgid "Mouse speed:"
 #~ msgstr "Musehastighed:"
@@ -3543,25 +3601,25 @@ msgstr ""
 #~ msgstr "Min mus er:"
 
 #~ msgid "Right handed"
-#~ msgstr "Højrehåndet"
+#~ msgstr "HÃ¸jrehÃ¥ndet"
 
 #~ msgid "Sensitivity:"
-#~ msgstr "Følsomhed:"
+#~ msgstr "FÃ¸lsomhed:"
 
 #~ msgid " Configure..."
-#~ msgstr " Konfigurér..."
+#~ msgstr " KonfigurÃ©r..."
 
 #~ msgid "About \"<Screensaver name>\""
-#~ msgstr "Om \"<pauseskærmsnavn>\""
+#~ msgstr "Om \"<pauseskÃ¦rmsnavn>\""
 
 #~ msgid "Black screen only"
-#~ msgstr "Kun sort skærm"
+#~ msgstr "Kun sort skÃ¦rm"
 
 #~ msgid "Configure Power Management"
-#~ msgstr "Konfigurér strømstyring"
+#~ msgstr "KonfigurÃ©r strÃ¸mstyring"
 
 #~ msgid "Disable screensaver"
-#~ msgstr "Deaktivér pauseskærm"
+#~ msgstr "DeaktivÃ©r pauseskÃ¦rm"
 
 #~ msgid ""
 #~ "Draws quasiperiodic tilings; think of the implications on modern formica "
@@ -3573,60 +3631,60 @@ msgstr ""
 #~ "\"a nonrepeating pattern could exist in nature\") for its Kleenex quilted "
 #~ "toilet paper. "
 #~ msgstr ""
-#~ "Tegner næstenperiodiske fliser; tænk på følgerne for den moderne\n"
-#~ "formica-teknologi. Skrevet af Time Korlove. I april 1997 sagsøgte Sir\n"
+#~ "Tegner nÃ¦stenperiodiske fliser; tÃ¦nk pÃ¥ fÃ¸lgerne for den moderne\n"
+#~ "formica-teknologi. Skrevet af Time Korlove. I april 1997 sagsÃ¸gte Sir\n"
 #~ "Roger Penrose, en britisk professor i matematik som har arbejdet\n"
 #~ "sammen med Stephen Hawking inden for emner som relativitet, sorte huller\n"
 #~ "og om tiden har en begyndelse, Kimberly-Clark Corporation som Penrose\n"
-#~ "mente havde kopieret et mønster han havde skabt (som demonstrerede\n"
-#~ "at \"et ikke-gentagende mønster kunne eksistere i naturen\"), til deres\n"
+#~ "mente havde kopieret et mÃ¸nster han havde skabt (som demonstrerede\n"
+#~ "at \"et ikke-gentagende mÃ¸nster kunne eksistere i naturen\"), til deres\n"
 #~ "Kleenex perforerede toiletpapir."
 
 #~ msgid "Enable _power management"
-#~ msgstr "Aktivér _strømstyring"
+#~ msgstr "AktivÃ©r _strÃ¸mstyring"
 
 #~ msgid "Go to standby mode after"
-#~ msgstr "Gå i ventetilstand efter"
+#~ msgstr "GÃ¥ i ventetilstand efter"
 
 #~ msgid "Go to suspend mode after"
-#~ msgstr "Gå i dvaletilstand efter"
+#~ msgstr "GÃ¥ i dvaletilstand efter"
 
 #~ msgid "One screensaver all the time"
-#~ msgstr "Samme pauseskærm hele tiden"
+#~ msgstr "Samme pauseskÃ¦rm hele tiden"
 
 #~ msgid "R_equire password to unlock screen"
-#~ msgstr "Kr_æver adgangskode for at låse op"
+#~ msgstr "Kr_Ã¦ver adgangskode for at lÃ¥se op"
 
-# paranteser åndssvage her
+# paranteser Ã¥ndssvage her
 #~ msgid "Random (all screensavers)"
-#~ msgstr "Tilfældig blandt alle pauseskærme"
+#~ msgstr "TilfÃ¦ldig blandt alle pauseskÃ¦rme"
 
 #~ msgid "Random (checked screensavers)"
-#~ msgstr "Tilfældig blandt valgte pauseskærme"
+#~ msgstr "TilfÃ¦ldig blandt valgte pauseskÃ¦rme"
 
 #~ msgid "S_tart screensaver after "
-#~ msgstr "S_tart pauseskærm efter "
+#~ msgstr "S_tart pauseskÃ¦rm efter "
 
 #~ msgid "S_witch screensavers after "
-#~ msgstr "S_kift pauseskærm efter "
+#~ msgstr "S_kift pauseskÃ¦rm efter "
 
 #~ msgid "Settings for \"<Screensaver name>\""
-#~ msgstr "Indstillinger for \"<pauseskærmsnavn>\""
+#~ msgstr "Indstillinger for \"<pauseskÃ¦rmsnavn>\""
 
 #~ msgid "Shut down monitor after"
-#~ msgstr "Sluk skærm efter"
+#~ msgstr "Sluk skÃ¦rm efter"
 
-# direkte oversættelse bliver kluntet
+# direkte oversÃ¦ttelse bliver kluntet
 #~ msgid ""
 #~ "There are no configurable settings for this\n"
 #~ "screensaver. "
-#~ msgstr "For denne pauseskærm er der ingen indstillinger."
+#~ msgstr "For denne pauseskÃ¦rm er der ingen indstillinger."
 
 #~ msgid "_About this screensaver..."
-#~ msgstr "_Om denne pauseskærm..."
+#~ msgstr "_Om denne pauseskÃ¦rm..."
 
 #~ msgid "_Add"
-#~ msgstr "_Tilføj"
+#~ msgstr "_TilfÃ¸j"
 
 #~ msgid "_Remove"
 #~ msgstr "_Fjern"
@@ -3644,10 +3702,10 @@ msgstr ""
 #~ msgstr "Vis kontrolpaneler som HTML"
 
 #~ msgid "Display control panels as a set of icons"
-#~ msgstr "Vis kontrolpaneler som et sæt af ikoner"
+#~ msgstr "Vis kontrolpaneler som et sÃ¦t af ikoner"
 
 #~ msgid "Display control panels as a tree"
-#~ msgstr "Vis kontrolpaneler som et træ"
+#~ msgstr "Vis kontrolpaneler som et trÃ¦"
 
 #~ msgid "Launch control panels in separate windows"
 #~ msgstr "Start kontrolpaneler i separate vinduer"
@@ -3659,7 +3717,7 @@ msgstr ""
 #~ msgstr "Put kontrolpaneler i kontrolcentrets vindue"
 
 #~ msgid "Run the capplet CAPPLET"
-#~ msgstr "Kør kontrolcenterprogrammet KCPROG"
+#~ msgstr "KÃ¸r kontrolcenterprogrammet KCPROG"
 
 #~ msgid "CAPPLET"
 #~ msgstr "KCPROG"
@@ -3680,25 +3738,25 @@ msgstr ""
 #~ msgstr "Gentagelsesforsinkelse:"
 
 #~ msgid "Rename the selected location"
-#~ msgstr "Omdøb det markerede sted"
+#~ msgstr "OmdÃ¸b det markerede sted"
 
 #~ msgid "Delete the selected location"
 #~ msgstr "Slet det markerede sted"
 
 #~ msgid "Edit settings for the selected backend"
-#~ msgstr "Ændr indstillingerne for den markerede bagende"
+#~ msgstr "Ã†ndr indstillingerne for den markerede bagende"
 
 #~ msgid "Select the selected backend for this location"
-#~ msgstr "Vælg den markerede bagende til dette sted"
+#~ msgstr "VÃ¦lg den markerede bagende til dette sted"
 
 #~ msgid "_Deselect"
-#~ msgstr "_Fravælg"
+#~ msgstr "_FravÃ¦lg"
 
 #~ msgid "Deselect the selected backend for this location"
-#~ msgstr "Fravælg den markerede bagende for dette sted"
+#~ msgstr "FravÃ¦lg den markerede bagende for dette sted"
 
 #~ msgid "_Location"
 #~ msgstr "St_ed"
 
 #~ msgid "Location Manager"
-#~ msgstr "Stedhåndtering"
+#~ msgstr "StedhÃ¥ndtering"
