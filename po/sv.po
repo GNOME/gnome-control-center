@@ -1,7 +1,7 @@
 # Swedish messages for gnome-control-center.
-# Copyright (C) 1998, 1999, 2000, 2001, 2002, 2003, 2004 Free Software Foundation, Inc.
+# Copyright (C) 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005 Free Software Foundation, Inc.
 # Martin Wahlen <mva@sbbs.se>, 1998, 1999.
-# Christian Rose <menthos@menthos.com>, 2000, 2001, 2002, 2003, 2004.
+# Christian Rose <menthos@menthos.com>, 2000, 2001, 2002, 2003, 2004, 2005.
 #
 # $Id$
 #
@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-12 15:51+0100\n"
-"PO-Revision-Date: 2004-12-23 17:14+0100\n"
+"POT-Creation-Date: 2005-01-23 21:55+0100\n"
+"PO-Revision-Date: 2005-01-23 21:56+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -368,6 +368,7 @@ msgstr "    "
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:1
 #: capplets/file-types/file-types-properties.glade.h:1
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:2
 #: capplets/network/gnome-network-preferences.glade.h:2
 #: capplets/theme-switcher/theme-install.glade.h:1
 #: capplets/theme-switcher/theme-properties.glade.h:1
@@ -1760,11 +1761,11 @@ msgstr "Fel vid inställning av ny snabbtangent i konfigurationsdatabasen: %s\n"
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "Fel vid borttagning av snabbtangent i konfigurationsdatabasen: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:831
+#: capplets/keybindings/gnome-keybinding-properties.c:849
 msgid "Action"
 msgstr "Åtgärd"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:855
+#: capplets/keybindings/gnome-keybinding-properties.c:873
 msgid "Shortcut"
 msgstr "Genväg"
 
@@ -1794,11 +1795,16 @@ msgstr "Okänd"
 msgid "Layout"
 msgstr "Layout"
 
+#. The first radio in a group is to be "Default", meaning none of
+#. the below options are to be included in the selected list.
+#. This is a HIG-compliant alternative to allowing no
+#. selection in the group.
 #: capplets/keyboard/gnome-keyboard-properties-xkblt.c:255
+#: capplets/keyboard/gnome-keyboard-properties-xkbot.c:206
 msgid "Default"
 msgstr "Standard"
 
-#: capplets/keyboard/gnome-keyboard-properties-xkbmc.c:78
+#: capplets/keyboard/gnome-keyboard-properties-xkbmc.c:75
 msgid "Models"
 msgstr "Modeller"
 
@@ -1827,45 +1833,41 @@ msgstr ""
 msgid "Start the page with the typing break settings showing"
 msgstr "Starta sidan utan att inställningarna för skrivandepaus visas"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:2
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
 msgid "..."
 msgstr "..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<b>Cursor Blinking</b>"
 msgstr "<b>Markörblinkning</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "<b>Repeat Keys</b>"
 msgstr "<b>Repeteringstangenter</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "<b>_Lock screen to enforce typing break</b>"
 msgstr "<b>_Lås skärmen för att tvinga fram paus i skrivandet</b>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "<small><i>Fast</i></small>"
 msgstr "<small><i>Snabb</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "<small><i>Long</i></small>"
 msgstr "<small><i>Lång</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "<small><i>Short</i></small>"
 msgstr "<small><i>Kort</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Långsam</i></small>"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "A_vailable layouts:"
 msgstr "_Tillgängliga layouter:"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
-msgid "A_vailable options:"
-msgstr "_Tillgängliga alternativ:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "All_ow postponing of breaks"
@@ -1876,12 +1878,10 @@ msgid "Check if breaks are allowed to be postponed"
 msgstr "Kryssa i om pauser ska tillåtas att avbrytas"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:14
-#, fuzzy
 msgid "Choose A Keyboard Model"
 msgstr "Välj en tangentbordsmodell"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:15
-#, fuzzy
 msgid "Choose A Layout"
 msgstr "Välj en layout"
 
@@ -1935,7 +1935,6 @@ msgid "Preview:"
 msgstr "Förhandsgranska:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:28
-#, fuzzy
 msgid "Reset To De_faults"
 msgstr "Återställ till _standardvärdena"
 
@@ -1952,25 +1951,24 @@ msgid "_Accessibility..."
 msgstr "_Tillgänglighet..."
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:33
+msgid "_Add..."
+msgstr "_Lägg till..."
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:34
 msgid "_Break interval lasts:"
 msgstr "_Pausen varar:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:34
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:35
 msgid "_Delay:"
 msgstr "_Fördröjning:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:35
-#, fuzzy
-msgid "_Models:"
-msgstr "_Modeller"
-
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:36
-msgid "_Selected layouts:"
-msgstr "_Valda layouter:"
+msgid "_Models:"
+msgstr "_Modeller:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:37
-msgid "_Selected options:"
-msgstr "_Valda alternativ:"
+msgid "_Selected layouts:"
+msgstr "_Valda layouter:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:38
 msgid "_Speed:"
@@ -2081,7 +2079,6 @@ msgid "<b>Speed</b>"
 msgstr "<b>Hastighet</b>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:7
-#, fuzzy
 msgid ""
 "<i><small><b>Note:</b> Changes to this setting will not take effect until "
 "next time you log in.</small></i>"
@@ -2183,7 +2180,7 @@ msgstr "      "
 
 #: capplets/network/gnome-network-preferences.glade.h:3
 msgid "<b>Ignore host list</b>"
-msgstr ""
+msgstr "<b>Ignorera värdlista</b>"
 
 #: capplets/network/gnome-network-preferences.glade.h:4
 msgid "<b>_Automatic proxy configuration</b>"
@@ -2202,9 +2199,8 @@ msgid "<b>_Use authentication</b>"
 msgstr "<b>_Använd autentisering</b>"
 
 #: capplets/network/gnome-network-preferences.glade.h:8
-#, fuzzy
 msgid "Advanced Configuration"
-msgstr "Avancerade inställningar"
+msgstr "Avancerad konfiguration"
 
 #: capplets/network/gnome-network-preferences.glade.h:9
 msgid "Autoconfiguration _URL:"
@@ -2227,9 +2223,8 @@ msgid "Port:"
 msgstr "Port:"
 
 #: capplets/network/gnome-network-preferences.glade.h:14
-#, fuzzy
 msgid "Proxy Configuration"
-msgstr "Konfiguration av nätverksproxyserver"
+msgstr "Konfiguration av proxyserver"
 
 #: capplets/network/gnome-network-preferences.glade.h:15
 msgid "S_ocks host:"
@@ -2559,30 +2554,34 @@ msgid "_Edit"
 msgstr "_Redigera"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:18
+msgid "_Editable menu accelerators"
+msgstr "_Redigerbara menysnabbtangenter"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:19
 msgid "_File"
 msgstr "_Arkiv"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:19
+#: capplets/ui-properties/gnome-ui-properties.glade.h:20
 msgid "_New"
 msgstr "_Ny"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:20
+#: capplets/ui-properties/gnome-ui-properties.glade.h:21
 msgid "_Open"
 msgstr "_Öppna"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:21
+#: capplets/ui-properties/gnome-ui-properties.glade.h:22
 msgid "_Paste"
 msgstr "Klistra _in"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:22
+#: capplets/ui-properties/gnome-ui-properties.glade.h:23
 msgid "_Print"
 msgstr "Skriv _ut"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:23
+#: capplets/ui-properties/gnome-ui-properties.glade.h:24
 msgid "_Quit"
 msgstr "_Avsluta"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:24
+#: capplets/ui-properties/gnome-ui-properties.glade.h:25
 msgid "_Save"
 msgstr "_Spara"
 
@@ -2827,8 +2826,11 @@ msgstr ""
 "Fel vid försök att köra (%s)\n"
 "som är länkad till tangenten (%s)"
 
+# Mycket buggigt originalmeddelande. Skräp in, skräp ut.
+# http://bugzilla.gnome.org/show_bug.cgi?id=165018
+#
 #: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:96
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Error activating XKB configuration.\n"
 "It can have under various circumstances:\n"
@@ -2845,7 +2847,10 @@ msgid ""
 "- The result of <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/kbd</b>"
 msgstr ""
 "Fel vid aktivering av XKB-konfiguration.\n"
-"Troligtvis internt X-serverproblem.\n"
+"Det kan ha under diverse omständigheter:\n"
+"- en bugg i biblioteket libxklavier\n"
+"- en bugg i X-servern (verktygen xkbcomp, xmodmap)\n"
+"- X-server med inkompatibel implementation av libxkbfile\n"
 "\n"
 "Versionsdata för X-servern:\n"
 "%s\n"
@@ -2853,7 +2858,7 @@ msgstr ""
 "%s\n"
 "Om du rapporterar detta som ett fel ber vi dig ta med:\n"
 "- Resultatet av <b>xprop -root | grep XKB</b>\n"
-"- Resultatet av <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b>"
+"- Resultatet av <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/kbd</b>"
 
 #: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:110
 msgid ""
@@ -3663,6 +3668,30 @@ msgstr "Huruvida det ska skapas miniatyrbilder för installerade teman"
 msgid "Whether to thumbnail themes"
 msgstr "Huruvida det ska skapas miniatyrbilder för teman"
 
+#~ msgid "Choose a Keyboard Model"
+#~ msgstr "Välj en tangentbordsmodell"
+
+#~ msgid "Choose a keyboard model"
+#~ msgstr "Välj en tangentbordsmodell"
+
+#~ msgid "Choose a Layout"
+#~ msgstr "Välj en layout"
+
+#~ msgid "Reset to De_faults"
+#~ msgstr "Återställ till _standardvärdena"
+
+#~ msgid "_Models"
+#~ msgstr "_Modeller"
+
+#~ msgid "Ignore host list"
+#~ msgstr "Ignorera värdlista"
+
+#~ msgid "A_vailable options:"
+#~ msgstr "_Tillgängliga alternativ:"
+
+#~ msgid "_Selected options:"
+#~ msgstr "_Valda alternativ:"
+
 #~ msgid "Retype New Passsword:"
 #~ msgstr "Ange det nya lösenordet igen:"
 
@@ -3933,9 +3962,6 @@ msgstr "Huruvida det ska skapas miniatyrbilder för teman"
 
 #~ msgid "<New accelerator>"
 #~ msgstr "<Ny snabbtangent>"
-
-#~ msgid "New accelerator"
-#~ msgstr "Ny snabbtangent"
 
 #~ msgid "Type a new accelerator, or press Backspace to clear"
 #~ msgstr "Tryck en ny snabbtangent, eller tryck backsteg för att tömma"
@@ -4946,9 +4972,6 @@ msgstr "Huruvida det ska skapas miniatyrbilder för teman"
 
 #~ msgid "_Button Labels:"
 #~ msgstr "_Knappetiketter:"
-
-#~ msgid "_Add..."
-#~ msgstr "_Lägg till..."
 
 #~ msgid "<i>fast</i>"
 #~ msgstr "<i>snabb</i>"
