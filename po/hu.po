@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-center 2.1.0\n"
 "POT-Creation-Date: 2002-12-06 14:44+0100\n"
-"PO-Revision-Date: 2002-12-06 15:07+0100\n"
+"PO-Revision-Date: 2002-12-07 13:35+0100\n"
 "Last-Translator: Andras Timar <timar@gnome.hu>\n"
 "Language-Team: Hungarian <hu@gnome.hu>\n"
 "MIME-Version: 1.0\n"
@@ -67,7 +67,7 @@ msgstr "Hangjelzés a billentyű _elutasításakor"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
 msgid "Beep when _features turned on or off from keyboard"
-msgstr ""
+msgstr "Hangjelzés a sajátosságok ki- vagy bekapcsolásakor a billentyűzeten"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
 msgid "Beep when _modifier is pressed"
@@ -87,11 +87,11 @@ msgstr "_Késleltetés:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
 msgid "Delay between keypress and pointer mo_vement:"
-msgstr ""
+msgstr "Késleltetés a billentyű lenyomása és az egérmutató _mozdítása között:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
 msgid "Disa_ble if two keys pressed together"
-msgstr ""
+msgstr "Letiltás _két billentyű egyidejű lenyomásakor"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:11
 msgid "E_nable Toggle Keys"
@@ -115,7 +115,7 @@ msgstr "_Ragadós billentyűk engedélyezése"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
 msgid "Features"
-msgstr ""
+msgstr "Sajátosságok"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
 msgid "Filters"
@@ -193,7 +193,7 @@ msgstr "Billentyűzet kisegítő lehetőségeinek _engedélyezése"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
 msgid "_Import Feature Settings..."
-msgstr ""
+msgstr "_Sajátosságok importálása..."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
 msgid "_Only accept keys held for:"
@@ -1530,7 +1530,7 @@ msgid ""
 "Large version of white cursor"
 msgstr ""
 "<b>Nagy fehér kurzor - Jelenlegi</b>\n"
-"Az fehér kurzor nagyobb verziója"
+"A fehér kurzor nagyobb verziója"
 
 #: capplets/mouse/gnome-mouse-properties.c:643
 msgid ""
@@ -1538,7 +1538,7 @@ msgid ""
 "Large version of white cursor"
 msgstr ""
 "<b>Nagy fehér kurzor</b>\n"
-"Az fehér kurzor nagyobb verziója"
+"A fehér kurzor nagyobb verziója"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:1
 msgid ""
@@ -1647,7 +1647,7 @@ msgstr "_Gyorsítás:"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:24
 msgid "_Delay (sec):"
-msgstr "_Késleltetés(mp):"
+msgstr "_Késleltetés (mp):"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:25
 msgid "_Left-handed mouse"
@@ -1928,6 +1928,9 @@ msgid ""
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
 "installed the \"gnome-themes\" package."
 msgstr ""
+"A rendszereden nem találhatóak témák. Ez valószínűleg azért van, mert a "
+"\"Témabeállítások\" alkalmazás nem megfelelően lett telepítve, vagy nem "
+"telepítetted a \"gnome-themes\" csomagot."
 
 #: capplets/theme-switcher/gnome-theme-manager.c:517
 msgid "Custom theme"
@@ -1935,7 +1938,7 @@ msgstr "Egyéni téma"
 
 #: capplets/theme-switcher/gnome-theme-manager.c:517
 msgid "You can save this theme by pressing the Save Theme button."
-msgstr ""
+msgstr "A témát mentheted a Téma mentése gomb segítségével."
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
@@ -2073,6 +2076,10 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
+"<b>Nem sikerült elindítani az ablakkezelődhöz tartozó beállítóalkalmazást.</"
+"b>\n"
+"\n"
+"%s"
 
 #: capplets/windows/gnome-window-properties.c:624
 msgid "Control"
@@ -2093,6 +2100,8 @@ msgstr "Super (vagy \"Windows logó\")"
 #: capplets/windows/gnome-window-properties.glade.h:1
 msgid "To _move a window, press-and-hold this key then grab the window:"
 msgstr ""
+"Az ablak á_thelyezéséhez tartsd lenyomva ezt a billentyűt, és húzd el az "
+"ablakot:"
 
 #: capplets/windows/gnome-window-properties.glade.h:2
 msgid "Window Preferences"
@@ -2356,14 +2365,16 @@ msgstr "Felgördítés"
 msgid ""
 "If true, the mime handlers for text/plain and text/* will be kept in sync"
 msgstr ""
+"Ha ez be van állítva, a text/plain és a text/* MIME-kezelője szinkronban "
+"lesz."
 
 #: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:2
 msgid "Sync text/plain and text/* handlers"
-msgstr ""
+msgstr "A text/plain és a text/* kezelőjének szinkronizálása"
 
 #: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:1
 msgid "Display a dialog when there are errors running XScreenSaver"
-msgstr ""
+msgstr "Párbeszédablak megjelenítése a képernyővédő hibája esetén"
 
 #: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:2
 msgid "Run XScreenSaver at login"
@@ -2397,6 +2408,8 @@ msgstr "RGBA-sorrend"
 msgid ""
 "Resolution used for converting font sizes to pixel sizes, in dots per inch"
 msgstr ""
+"A felbontás a betűméret és a képpontok közötti átváltáshoz kell, pont/"
+"hüvelyk a mértékegysége."
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:6
 msgid ""
@@ -2405,6 +2418,10 @@ msgid ""
 "most common. \"bgr\" - blue on left. \"vrgb\" - red on top. \"vbgr\" - red "
 "on bottom."
 msgstr ""
+"A szubpixelek sorrendje az LCD-képernyőn; csak akkor használatos, ha az "
+"élsimítás \"RGBA\"-ra ven állítva. A lehetséges értékek: \"RGB\" - a piros a "
+"bal oldalon, ez a leggyakoribb. \"BGR\" - kék a bal oldalon. \"VRGB\" - "
+"piros a tetején. \"VBGR\" - piros az alján."
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:7
 msgid ""
@@ -2412,6 +2429,10 @@ msgid ""
 "\"none\" - no antialiasing. \"grayscale\" - standard grayscale antialising. "
 "\"rgba\" - subpixel antialising. (LCD screens only)."
 msgstr ""
+"A betűk megjelenítésénél használt élsimítás típusa. A lehetséges értékek: "
+"\"Nincs\" - nincs élsimítás. \"Szürkeárnyalatos\" - szabványos "
+"szürkeárnyalatos élsimítás. \"RGBA\" - szubpixeles élsimítás (csak LCD-"
+"képernyőkön)."
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:8
 msgid ""
@@ -2419,3 +2440,6 @@ msgid ""
 "\" - no hinting, \"slight\", \"medium\", and \"full\" - as much hinting as "
 "possible; may cause distortion of letter forms."
 msgstr ""
+"A betűk megjelenítéséhez használt hinting típusa. A lehetséges értékek: "
+"\"Nincs\" - nincs hinting, \"Enyhe\", \"Közepes\" és \"Teljes\" - akkora "
+"hinting, amennyi csak lehetséges; eltorzíthatja a betűk alakját."
