@@ -74,6 +74,8 @@ preferences_init (Preferences *prefs)
 {
 	prefs->frozen = FALSE;
 	prefs->gnome_prefs = g_new0 (GnomePreferences, 1);
+
+	/* FIXME: Code to set default values */
 }
 
 static void

@@ -86,9 +86,39 @@ preferences_get_type (void)
 static void
 preferences_init (Preferences *prefs)
 {
+        unsigned char buttons[MAX_BUTTONS];
+        int acc_num, acc_den, thresh;
+
 	prefs->frozen = FALSE;
 
-	/* Code to initialize preferences object to defaults */
+	/* Load default values */
+
+        prefs->nbuttons = XGetPointerMapping (GDK_DISPLAY (), buttons,
+					      MAX_BUTTONS);
+        g_assert (prefs->nbuttons <= MAX_BUTTONS);
+
+	XGetPointerControl (GDK_DISPLAY (), &acc_num, &acc_den, &thresh);
+
+	prefs->threshold = thresh;
+
+	if (acc_num != 1 && acc_den != 1) {
+		if (acc_num > acc_den) {
+			acc_num = (int) ((double) acc_num / acc_den);
+			acc_den = 1;
+		} else {
+			acc_den = (int) ((double) acc_den / acc_num);
+			acc_num = 1;
+		}
+	}
+
+	if (acc_num > MAX_ACCEL)
+		acc_num = MAX_ACCEL;
+	if (acc_den > MAX_ACCEL)
+		acc_den = MAX_ACCEL;
+	if (acc_den == 1)
+		prefs->acceleration = acc_num + MAX_ACCEL - 1;
+	else
+		prefs->acceleration = MAX_ACCEL - acc_den;
 }
 
 static void

@@ -78,12 +78,22 @@ preferences_get_type (void)
 static void
 preferences_init (Preferences *prefs)
 {
-	prefs->frozen = FALSE;
+	prefs->frozen             = FALSE;
 
-	prefs->color1 = NULL;
-	prefs->color2 = NULL;
+	/* Load default values */
+	prefs->color1             = read_color_from_string ("#39374b");
+	prefs->color2             = read_color_from_string ("#42528f");
+	prefs->enabled            = TRUE;
+	prefs->wallpaper_enabled  = FALSE;
+	prefs->gradient_enabled   = TRUE;
+	prefs->orientation        = ORIENTATION_VERT;
+	prefs->wallpaper_type     = WPTYPE_TILED;
 	prefs->wallpaper_filename = NULL;
-	prefs->wallpaper_sel_path = NULL;
+	prefs->wallpaper_sel_path = g_get_home_dir ();
+	prefs->auto_apply         = TRUE;
+	prefs->wallpapers         = NULL;
+	prefs->adjust_opacity     = TRUE;
+	prefs->opacity            = 255;
 }
 
 static void
@@ -222,7 +232,7 @@ preferences_load (Preferences *prefs)
 		gnome_config_get_bool ("/Background/Default/autoApply=true");
 
 	if (!g_strcasecmp (prefs->wallpaper_filename, "(None)")) {
-		g_free(prefs->wallpaper_filename);
+		g_free (prefs->wallpaper_filename);
 		prefs->wallpaper_filename = NULL;
 		prefs->wallpaper_enabled = FALSE;
 	} else {
@@ -245,7 +255,7 @@ preferences_load (Preferences *prefs)
 
 	prefs->adjust_opacity =
 		gnome_config_get_bool
-		("/Background/Default/adjustOpacity=true");
+		("/Background/Default/adjustOpacity=false"); 
 
 	prefs->opacity =
 		gnome_config_get_int ("/Background/Default/opacity=255");
@@ -379,12 +389,12 @@ preferences_read_xml (xmlDocPtr xml_doc)
 	prefs->orientation = ORIENTATION_VERT;
 
 	if (prefs->color1) {
-		gdk_color_free (prefs->color1);
+		g_free (prefs->color1);
 		prefs->color1 = NULL;
 	}
 
 	if (prefs->color2) {
-		gdk_color_free (prefs->color2);
+		g_free (prefs->color2);
 		prefs->color2 = NULL;
 	}
 
@@ -524,7 +534,7 @@ xml_read_bool (xmlNodePtr node)
 
 	text = xmlNodeGetContent (node);
 
-	if (!g_strcasecmp (text, "true")) 
+	if (text != NULL && !g_strcasecmp (text, "true")) 
 		return TRUE;
 	else
 		return FALSE;

@@ -152,6 +152,14 @@ do_set_xml (gboolean apply_settings)
 	return;
 }
 
+static void
+do_restore_from_defaults (void) 
+{
+	prefs = PREFERENCES (preferences_new ());
+	preferences_save (prefs);
+	preferences_apply_now (prefs);
+}
+
 int
 main (int argc, char **argv)
 {
@@ -177,6 +185,10 @@ main (int argc, char **argv)
 	}
 	else if (res == 4) {
 		do_set_xml (TRUE);
+		return 0;
+	}
+	else if (res == 5) {
+		do_restore_from_defaults ();
 		return 0;
 	}
 

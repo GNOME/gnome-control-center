@@ -157,6 +157,15 @@ preferences_new (void)
 
 	prefs = g_new0 (Preferences, 1);
 
+	/* Load default values */
+	preferences_load_from_xrdb (prefs);
+
+	prefs->selection_mode   = 3;
+	prefs->power_management = FALSE;
+	prefs->standby_time     = 0;
+	prefs->suspend_time     = 0;
+	prefs->power_down_time  = 20;
+
 	return prefs;
 }
 

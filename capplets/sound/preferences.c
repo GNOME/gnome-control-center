@@ -106,9 +106,21 @@ preferences_get_type (void)
 static void
 preferences_init (Preferences *prefs)
 {
-	prefs->frozen = FALSE;
-	prefs->categories = g_tree_new ((GCompareFunc) strcmp);
-	prefs->cat_byfile = g_tree_new ((GCompareFunc) strcmp);
+	gchar *ctmp;
+
+	prefs->frozen              = FALSE;
+	prefs->categories          = g_tree_new ((GCompareFunc) strcmp);
+	prefs->cat_byfile          = g_tree_new ((GCompareFunc) strcmp);
+
+	/* Load default values */
+	prefs->enable_esd          = FALSE;
+	prefs->enable_sound_events = FALSE;
+
+	ctmp = gnome_config_file ("/sound/events");
+	if (ctmp != NULL) {
+		read_path (prefs, ctmp);
+		g_free (ctmp);
+	}
 }
 
 static void

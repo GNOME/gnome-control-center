@@ -85,9 +85,33 @@ preferences_get_type (void)
 static void
 preferences_init (Preferences *prefs)
 {
+	XKeyboardState kbdstate;
+        gint event_base_return, error_base_return;
+
+	XGetKeyboardControl (GDK_DISPLAY (), &kbdstate);
+
 	prefs->frozen = FALSE;
 
-	/* Code to initialize preferences object to defaults */
+	prefs->repeat = kbdstate.global_auto_repeat;
+
+#ifdef HAVE_X11_EXTENSIONS_XF86MISC_H
+	if (XF86MiscQueryExtension (GDK_DISPLAY (),
+				    &event_base_return,
+				    &error_base_return) == True)
+	{
+		XF86MiscGetKbdSettings (GDK_DISPLAY (), &kbdsettings);
+		prefs->rate = kbdsettings.rate;
+		prefs->delay = kbdsettings.delay;
+	} else {
+		prefs->rate = 5;
+		prefs->delay = 500;
+	}
+#else
+	/* FIXME: how to get the keyboard speed on non-xf86? */
+	prefs->rate = 5;
+	prefs->delay = 500;
+#endif
+
 }
 
 static void
