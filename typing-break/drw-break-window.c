@@ -139,7 +139,6 @@ drw_break_window_init (DrwBreakWindow *window)
         DrwBreakWindowPriv *priv;
 	GtkWidget          *vbox;
 	GtkWidget          *hbox;
-	GtkWidget          *frame;
 	GtkWidget          *align;
 	GtkWidget          *monitor_box;
 	gchar              *str;
@@ -178,10 +177,6 @@ drw_break_window_init (DrwBreakWindow *window)
 	gtk_widget_realize (GTK_WIDGET (window));
 
 	drw_setup_background (GTK_WIDGET (window));
-	
-	frame = gtk_frame_new (NULL);
-	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_NONE);
-	gtk_widget_show (frame);
 	
 	align = gtk_alignment_new (0.5, 0.5, 0.0, 0.0);
 	gtk_widget_show (align);
@@ -242,8 +237,7 @@ drw_break_window_init (DrwBreakWindow *window)
 	vbox = gtk_vbox_new (FALSE, 0);
 	gtk_widget_show (vbox);
 	
-	gtk_container_add (GTK_CONTAINER (align), frame);
-	gtk_container_add (GTK_CONTAINER (frame), vbox);
+	gtk_container_add (GTK_CONTAINER (align), vbox);
 
 	priv->break_label = gtk_label_new (NULL);
 	gtk_widget_show (priv->break_label);
