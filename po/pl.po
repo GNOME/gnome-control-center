@@ -9,14 +9,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center\n"
-"POT-Creation-Date: 2003-08-27 15:02-0400\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-10-28 16:59-0500\n"
 "PO-Revision-Date: 2003-07-12 01:00+0100\n"
 "Last-Translator: Gnome PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
 msgid "<b>Applications</b>"
@@ -101,18 +101,18 @@ msgstr ""
 "systemie.  Aby móc korzystać z lupy i czytnika ekranowego należy "
 "zainstalować pakiet \"gnopernicus\"."
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:236
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:241
 #, c-format
 msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr "Przy otwieraniu okna ustawień myszy wystąpił błąd: %s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:332
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:390
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:337
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:395
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Nie można zaimportować ustawień AccessX z pliku \"%s\""
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:463
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:468
 msgid "Import Feature Settings File"
 msgstr "Zaimportowanie pliku ustawienia właściwości"
 
@@ -674,10 +674,6 @@ msgstr "Preferowane aplikacje"
 msgid "Select your default applications"
 msgstr "Wybór domyślnych aplikacji"
 
-#: capplets/default-applications/gnome-default-applications-properties.c:108
-msgid "Please specify a name and a command for this editor."
-msgstr "Wprowadź nazwę edytora i uruchamiające go polecenie."
-
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:39
 msgid "Epiphany"
 msgstr "Epiphany"
@@ -754,6 +750,10 @@ msgstr "RXVT"
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:70
 msgid "ETerm"
 msgstr "ETerm"
+
+#: capplets/default-applications/gnome-default-applications-properties.c:108
+msgid "Please specify a name and a command for this editor."
+msgstr "Wprowadź nazwę edytora i uruchamiające go polecenie."
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:2
 msgid "Add..."
@@ -870,7 +870,7 @@ msgid "Window Manager"
 msgstr "Menedżer okien"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:30
-#: capplets/file-types/file-types-properties.glade.h:22
+#: capplets/file-types/file-types-properties.glade.h:23
 msgid "_Name:"
 msgstr "_Nazwa:"
 
@@ -1030,37 +1030,37 @@ msgstr "Rozdzielczość ekranu"
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: capplets/display/main.c:376
+#: capplets/display/main.c:377
 msgid "_Resolution:"
 msgstr "_Rozdzielczość:"
 
-#: capplets/display/main.c:395
+#: capplets/display/main.c:396
 msgid "Re_fresh rate:"
 msgstr "S_zybkość odświeżania:"
 
-#: capplets/display/main.c:416
+#: capplets/display/main.c:417
 msgid "Default Settings"
 msgstr "Ustawienia domyślne"
 
-#: capplets/display/main.c:418
+#: capplets/display/main.c:419
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "Ustawienia ekranu %d\n"
 
-#: capplets/display/main.c:443
+#: capplets/display/main.c:444
 msgid "Screen Resolution Preferences"
 msgstr "Preferencje rozdzielczości ekranu"
 
-#: capplets/display/main.c:475
+#: capplets/display/main.c:476
 #, c-format
 msgid "Make default for this _computer (%s) only"
 msgstr "Uczyń ustawienie domyślnym tylko dla tego _komputera (%s)"
 
-#: capplets/display/main.c:493
+#: capplets/display/main.c:494
 msgid "Options"
 msgstr "Opcje"
 
-#: capplets/display/main.c:514
+#: capplets/display/main.c:515
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d seconds the previous "
@@ -1069,19 +1069,19 @@ msgstr ""
 "Testowanie nowych ustawień. Jeśli nie odpowiesz w ciągu %d sekund, zostaną "
 "przywrócone poprzednie ustawienia."
 
-#: capplets/display/main.c:563
+#: capplets/display/main.c:564
 msgid "Do you want to keep this resolution?"
 msgstr "Czy chcesz zatrzymać tą rozdzielczość?"
 
-#: capplets/display/main.c:588
+#: capplets/display/main.c:589
 msgid "Use _previous resolution"
 msgstr "Użyj pop_rzedniej rozdzielczości"
 
-#: capplets/display/main.c:588
+#: capplets/display/main.c:589
 msgid "_Keep resolution"
 msgstr "_Zatrzymaj rozdzielczość"
 
-#: capplets/display/main.c:739
+#: capplets/display/main.c:740
 msgid ""
 "The XServer does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
@@ -1089,7 +1089,7 @@ msgstr ""
 "Serwer X Window nie obsługuje rozszerzenia XRandR. Zmiany rozdzielczości "
 "podczas pracy serwera nie są możliwe."
 
-#: capplets/display/main.c:747
+#: capplets/display/main.c:748
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
@@ -1107,7 +1107,7 @@ msgid "Extensions"
 msgstr "Rozszerzenia"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
-#: capplets/file-types/file-types-properties.glade.h:10
+#: capplets/file-types/file-types-properties.glade.h:11
 msgid "File Types and Programs"
 msgstr "Typy plików i programy"
 
@@ -1130,83 +1130,88 @@ msgid "Add _Service..."
 msgstr "Dodaj _usługę..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
+#, fuzzy
+msgid "Browse icons"
+msgstr "sekund"
+
+#: capplets/file-types/file-types-properties.glade.h:6
 msgid "C_hoose..."
 msgstr "_Wybierz..."
 
-#: capplets/file-types/file-types-properties.glade.h:6
+#: capplets/file-types/file-types-properties.glade.h:7
 msgid "Cate_gory:"
 msgstr "_Kategoria:"
 
-#: capplets/file-types/file-types-properties.glade.h:7
+#: capplets/file-types/file-types-properties.glade.h:8
 msgid "D_efault action:"
 msgstr "_Domyślna czynność:"
 
-#: capplets/file-types/file-types-properties.glade.h:8
+#: capplets/file-types/file-types-properties.glade.h:9
 msgid "Default _action:"
 msgstr "Domyślna _czynność:"
 
-#: capplets/file-types/file-types-properties.glade.h:9
+#: capplets/file-types/file-types-properties.glade.h:10
 #: capplets/file-types/mime-edit-dialog.c:208
 msgid "Edit file type"
 msgstr "Modyfikacja typu pliku"
 
-#: capplets/file-types/file-types-properties.glade.h:11
+#: capplets/file-types/file-types-properties.glade.h:12
 msgid "Filename extensions:"
 msgstr "Rozszerzenia nazw plików:"
 
-#: capplets/file-types/file-types-properties.glade.h:12
+#: capplets/file-types/file-types-properties.glade.h:13
 msgid "Look at content"
 msgstr "Sprawdzanie zawartości"
 
-#: capplets/file-types/file-types-properties.glade.h:13
+#: capplets/file-types/file-types-properties.glade.h:14
 msgid "P_rogram:"
 msgstr "_Program:"
 
-#: capplets/file-types/file-types-properties.glade.h:14
+#: capplets/file-types/file-types-properties.glade.h:15
 msgid "Program to Run"
 msgstr "Uruchamiany program"
 
-#: capplets/file-types/file-types-properties.glade.h:15
+#: capplets/file-types/file-types-properties.glade.h:16
 msgid "Run a program"
 msgstr "Uruchomienie programu"
 
-#: capplets/file-types/file-types-properties.glade.h:16
+#: capplets/file-types/file-types-properties.glade.h:17
 msgid "Run in _Terminal"
 msgstr "Uruchamianie w t_erminalu"
 
-#: capplets/file-types/file-types-properties.glade.h:17
+#: capplets/file-types/file-types-properties.glade.h:18
 msgid "Use parent category _defaults"
 msgstr "Użycie wartości domyślnych dla kategorii _nadrzędnej"
 
-#: capplets/file-types/file-types-properties.glade.h:18
+#: capplets/file-types/file-types-properties.glade.h:19
 msgid "_Add:"
 msgstr "_Dodaj:"
 
-#: capplets/file-types/file-types-properties.glade.h:19
+#: capplets/file-types/file-types-properties.glade.h:20
 msgid "_Description:"
 msgstr "_Opis:"
 
-#: capplets/file-types/file-types-properties.glade.h:20
+#: capplets/file-types/file-types-properties.glade.h:21
 msgid "_Edit..."
 msgstr "Z_modyfikuj..."
 
-#: capplets/file-types/file-types-properties.glade.h:21
+#: capplets/file-types/file-types-properties.glade.h:22
 msgid "_MIME type:"
 msgstr "_Typ MIME:"
 
-#: capplets/file-types/file-types-properties.glade.h:23
+#: capplets/file-types/file-types-properties.glade.h:24
 msgid "_Program to run:"
 msgstr "U_ruchamiany program:"
 
-#: capplets/file-types/file-types-properties.glade.h:24
+#: capplets/file-types/file-types-properties.glade.h:25
 msgid "_Protocol:"
 msgstr "Nazwa pr_otokołu:"
 
-#: capplets/file-types/file-types-properties.glade.h:25
+#: capplets/file-types/file-types-properties.glade.h:26
 msgid "_Remove"
 msgstr "_Usuń"
 
-#: capplets/file-types/file-types-properties.glade.h:26
+#: capplets/file-types/file-types-properties.glade.h:27
 msgid "_Viewer component:"
 msgstr "_Komponent przeglądarki:"
 
@@ -1416,78 +1421,83 @@ msgstr "Wybór czcionek używanych w środowisku"
 msgid "<b>Font Rendering</b>"
 msgstr "<b>Renderowanie czcionek</b>"
 
-#: capplets/font/font-properties.glade.h:3
-msgid "Best _shapes"
-msgstr "Najlepsze k_ształty"
-
-#: capplets/font/font-properties.glade.h:4
-msgid "Best co_ntrast"
-msgstr "Najlepszy _kontrast"
-
-#: capplets/font/font-properties.glade.h:5
-msgid "De_tails..."
-msgstr "Sz_czegóły..."
-
-#: capplets/font/font-properties.glade.h:6
-msgid "Font Preferences"
-msgstr "Ustawienia czcionek"
-
-#: capplets/font/font-properties.glade.h:7
-msgid "Font Rendering Details"
-msgstr "Szczegóły dotyczące renderowania czcionek"
-
-#: capplets/font/font-properties.glade.h:8
-msgid "G_rayscale"
-msgstr "Skala sza_rości"
-
-#: capplets/font/font-properties.glade.h:9
-msgid "Go to font folder"
-msgstr "Przejdź do foldera czcionek"
-
 # Zna ktoś polski odpowiednik? IMHO nie ma takiego
 # Chyba, że nazwiemy to mechanizmem poprawiającym jakość
 # druku na urządzeniach o niskiej rozdzielczości.
 # Trzeba to przyjąć tak jak widget i tyle.
-#: capplets/font/font-properties.glade.h:10
-msgid "Hinting:"
+#: capplets/font/font-properties.glade.h:3
+#, fuzzy
+msgid "<b>Hinting</b>:"
 msgstr "Hinting:"
 
+#: capplets/font/font-properties.glade.h:4
+#, fuzzy
+msgid "<b>Smoothing</b>:"
+msgstr "Wygładzanie:"
+
+#: capplets/font/font-properties.glade.h:5
+#, fuzzy
+msgid "<b>Subpixel order</b>:"
+msgstr "Kolejność składowych pikseli:"
+
+#: capplets/font/font-properties.glade.h:6
+msgid "Best _shapes"
+msgstr "Najlepsze k_ształty"
+
+#: capplets/font/font-properties.glade.h:7
+msgid "Best co_ntrast"
+msgstr "Najlepszy _kontrast"
+
+#: capplets/font/font-properties.glade.h:8
+msgid "De_tails..."
+msgstr "Sz_czegóły..."
+
+#: capplets/font/font-properties.glade.h:9
+msgid "Font Preferences"
+msgstr "Ustawienia czcionek"
+
+#: capplets/font/font-properties.glade.h:10
+msgid "Font Rendering Details"
+msgstr "Szczegóły dotyczące renderowania czcionek"
+
 #: capplets/font/font-properties.glade.h:11
+msgid "G_rayscale"
+msgstr "Skala sza_rości"
+
+#: capplets/font/font-properties.glade.h:12
+#, fuzzy
+msgid "Go _to font folder"
+msgstr "Przejdź do foldera czcionek"
+
+#: capplets/font/font-properties.glade.h:13
 msgid "N_one"
 msgstr "_Brak"
 
-#: capplets/font/font-properties.glade.h:12
-msgid "Resolution (_dots per inch):"
-msgstr "_Rozdzielczość (punkty na cal):"
+#: capplets/font/font-properties.glade.h:14
+#, fuzzy
+msgid "R_esolution :"
+msgstr "_Rozdzielczość:"
 
-#: capplets/font/font-properties.glade.h:13
+#: capplets/font/font-properties.glade.h:15
 msgid "Set the font for applications"
 msgstr "Ustawia czcionki używane przez aplikacje"
 
-#: capplets/font/font-properties.glade.h:14
+#: capplets/font/font-properties.glade.h:16
 msgid "Set the font for the icons on the desktop"
 msgstr "Ustawia czcionki używane przez ikony i biurko"
 
-#: capplets/font/font-properties.glade.h:15
+#: capplets/font/font-properties.glade.h:17
 msgid "Set the monospace font for terminals and similar applications"
 msgstr ""
 "Ustawia czcionkę ze stałym odstępem dla terminali i podobnych aplikacji"
 
-#: capplets/font/font-properties.glade.h:16
-msgid "Smoothing:"
-msgstr "Wygładzanie:"
-
-#: capplets/font/font-properties.glade.h:17
+#: capplets/font/font-properties.glade.h:18
 msgid "Sub_pixel (LCDs)"
 msgstr "Podp_ikselowe (wyświetlacze LCD)"
 
-#: capplets/font/font-properties.glade.h:18
+#: capplets/font/font-properties.glade.h:19
 msgid "Sub_pixel smoothing (LCDs)"
 msgstr "Wygładzanie podp_ikselowe (wyświetlacze LCD)"
-
-#: capplets/font/font-properties.glade.h:19
-msgid "Subpixel order:"
-msgstr "Kolejność składowych pikseli:"
 
 #: capplets/font/font-properties.glade.h:20
 msgid "VB_GR"
@@ -1545,6 +1555,31 @@ msgstr "_VRGB"
 #: capplets/font/font-properties.glade.h:33
 msgid "_Window title font:"
 msgstr "_Czcionka tytułu okna:"
+
+#: capplets/font/font-properties.glade.h:34
+#, fuzzy
+msgid "dots per inch"
+msgstr "_Rozdzielczość (punkty na cal):"
+
+#: capplets/font/main.c:506 capplets/font/main.c:511
+msgid "Font may be too large"
+msgstr ""
+
+#: capplets/font/main.c:507
+#, c-format
+msgid ""
+"The font selected is %d points large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a size "
+"smaller than %d."
+msgstr ""
+
+#: capplets/font/main.c:512
+#, c-format
+msgid ""
+"The font selected is %d points large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a smaller "
+"sized font."
+msgstr ""
 
 #: capplets/keybindings/eggcellrendererkeys.c:160
 #: capplets/keybindings/eggcellrendererkeys.c:161
@@ -2785,19 +2820,17 @@ msgid "/_Take a Break"
 msgstr "/C_zas na przerwę"
 
 #: typing-break/drwright.c:466
-#, c-format
-msgid "%d minutes until the next break"
-msgstr "%d minut do przerwy"
+#, fuzzy, c-format
+msgid "%d minute until the next break"
+msgid_plural "%d minutes until the next break"
+msgstr[0] "%d minut do przerwy"
+msgstr[1] "%d minut do przerwy"
 
-#: typing-break/drwright.c:469
-msgid "One minute until the next break"
-msgstr "Jedna minuta do przerwy"
-
-#: typing-break/drwright.c:471
+#: typing-break/drwright.c:470
 msgid "Less than one minute until the next break"
 msgstr "Mniej niż minuta do przerwy"
 
-#: typing-break/drwright.c:566
+#: typing-break/drwright.c:565
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
@@ -2805,23 +2838,23 @@ msgid ""
 msgstr ""
 "Nie można wyświetlić okna właściwości przerw w pisaniu z powodu błędu: %s"
 
-#: typing-break/drwright.c:606
+#: typing-break/drwright.c:605
 msgid "About GNOME Typing Monitor"
 msgstr "O monitorze pisania na klawiaturze "
 
-#: typing-break/drwright.c:630
+#: typing-break/drwright.c:629
 msgid "A computer break reminder."
 msgstr "Program do przypominania o przerwach w pracy z komputerem."
 
-#: typing-break/drwright.c:631
+#: typing-break/drwright.c:630
 msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
 msgstr "Napisany przez Richarda Hulta &lt;richard@imendio.com&gt;"
 
-#: typing-break/drwright.c:632
+#: typing-break/drwright.c:631
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Grafika autorstwa Andresa Carlssona"
 
-#: typing-break/drwright.c:805
+#: typing-break/drwright.c:804
 msgid "Break reminder"
 msgstr "Program do przypominania o przerwach"
 
@@ -2971,6 +3004,14 @@ msgstr "Wpisy menu kontekstowego dla czcionek w programie Nautilus"
 msgid "Set as Application Font"
 msgstr "Ustaw jako czcionkę aplikacji"
 
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
+msgid "Theme Properties content view component"
+msgstr "Komponent widoku zawartości z ustawieniami motywu"
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
+msgid "Themus Theme Properties view"
+msgstr "Widok ustawień motywu programu Themus"
+
 #: vfs-methods/themus/apply-font.glade.h:1
 msgid " "
 msgstr " "
@@ -2992,14 +3033,6 @@ msgstr "Wybrany motyw proponuje nową czcionkę. Jej podgląd jest poniżej."
 #: vfs-methods/themus/apply-font.glade.h:5
 msgid "_Apply font"
 msgstr "Zastosuj _czcionkę"
-
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
-msgid "Theme Properties content view component"
-msgstr "Komponent widoku zawartości z ustawieniami motywu"
-
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
-msgid "Themus Theme Properties view"
-msgstr "Widok ustawień motywu programu Themus"
 
 #: vfs-methods/themus/theme-method.c:514
 msgid "Themes"
@@ -3062,6 +3095,9 @@ msgstr "Tworzenie miniaturek zainstalowanych motywów"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Tworzenie miniaturek motywów"
+
+#~ msgid "One minute until the next break"
+#~ msgstr "Jedna minuta do przerwy"
 
 #~ msgid "Acce_pts URLs"
 #~ msgstr "Obsługuje _URL-e"

@@ -8,14 +8,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center VERSION\n"
-"POT-Creation-Date: 2003-08-27 15:02-0400\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-10-28 16:59-0500\n"
 "PO-Revision-Date: 2003-10-04 16:31+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
 msgid "<b>Applications</b>"
@@ -99,18 +99,18 @@ msgstr ""
 "usnadnění. Pro čtení obrazovky a zvětšování musí být nainstalován balíček "
 "'gnopernicus'."
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:236
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:241
 #, c-format
 msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr "Nastala chyba při spouštění dialogu s nastavením myši: %s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:332
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:390
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:337
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:395
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Nelze importovat nastavení AccessX ze souboru '%s'"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:463
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:468
 msgid "Import Feature Settings File"
 msgstr "Importovat soubor nastavení vlastností"
 
@@ -678,10 +678,6 @@ msgstr "Preferované aplikace"
 msgid "Select your default applications"
 msgstr "Vyberte své výchozí aplikace"
 
-#: capplets/default-applications/gnome-default-applications-properties.c:108
-msgid "Please specify a name and a command for this editor."
-msgstr "Zadejte prosím název a příkaz pro tento editor."
-
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:39
 msgid "Epiphany"
 msgstr "Epiphany"
@@ -758,6 +754,10 @@ msgstr "RXVT"
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:70
 msgid "ETerm"
 msgstr "ETerm"
+
+#: capplets/default-applications/gnome-default-applications-properties.c:108
+msgid "Please specify a name and a command for this editor."
+msgstr "Zadejte prosím název a příkaz pro tento editor."
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:2
 msgid "Add..."
@@ -872,7 +872,7 @@ msgid "Window Manager"
 msgstr "Správce oken"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:30
-#: capplets/file-types/file-types-properties.glade.h:22
+#: capplets/file-types/file-types-properties.glade.h:23
 msgid "_Name:"
 msgstr "_Název:"
 
@@ -1031,37 +1031,37 @@ msgstr "Rozlišení obrazovky"
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: capplets/display/main.c:376
+#: capplets/display/main.c:377
 msgid "_Resolution:"
 msgstr "_Rozlišení:"
 
-#: capplets/display/main.c:395
+#: capplets/display/main.c:396
 msgid "Re_fresh rate:"
 msgstr "Obnovovací _frekvence:"
 
-#: capplets/display/main.c:416
+#: capplets/display/main.c:417
 msgid "Default Settings"
 msgstr "Implicitní nastavení"
 
-#: capplets/display/main.c:418
+#: capplets/display/main.c:419
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "Nastavení obrazovky %d\n"
 
-#: capplets/display/main.c:443
+#: capplets/display/main.c:444
 msgid "Screen Resolution Preferences"
 msgstr "Nastavení rozlišení obrazovky"
 
-#: capplets/display/main.c:475
+#: capplets/display/main.c:476
 #, c-format
 msgid "Make default for this _computer (%s) only"
 msgstr "Nastavit implicitní jen pro tento _počítač (%s)"
 
-#: capplets/display/main.c:493
+#: capplets/display/main.c:494
 msgid "Options"
 msgstr "Možnosti"
 
-#: capplets/display/main.c:514
+#: capplets/display/main.c:515
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d seconds the previous "
@@ -1070,27 +1070,27 @@ msgstr ""
 "Testuji nové nastavení. Pokud nezareagujete do %d sekund, bude předchozí "
 "nastavení obnoveno."
 
-#: capplets/display/main.c:563
+#: capplets/display/main.c:564
 msgid "Do you want to keep this resolution?"
 msgstr "Chcete ponechat toto rozlišení?"
 
-#: capplets/display/main.c:588
+#: capplets/display/main.c:589
 msgid "Use _previous resolution"
 msgstr "Použít před_chozí rozlišení"
 
-#: capplets/display/main.c:588
+#: capplets/display/main.c:589
 msgid "_Keep resolution"
 msgstr "Po_nechat rozlišení"
 
 # FIXME: s/Xs/X s/
-#: capplets/display/main.c:739
+#: capplets/display/main.c:740
 msgid ""
 "The XServer does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
 msgstr ""
 "X server nepodporuje rozšíření XRandR, změny rozlišení za běhu nejsou možné."
 
-#: capplets/display/main.c:747
+#: capplets/display/main.c:748
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
@@ -1108,7 +1108,7 @@ msgid "Extensions"
 msgstr "Přípony"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
-#: capplets/file-types/file-types-properties.glade.h:10
+#: capplets/file-types/file-types-properties.glade.h:11
 msgid "File Types and Programs"
 msgstr "Typy souborů a programy"
 
@@ -1130,83 +1130,88 @@ msgid "Add _Service..."
 msgstr "Přidat _službu..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
+#, fuzzy
+msgid "Browse icons"
+msgstr "sekund"
+
+#: capplets/file-types/file-types-properties.glade.h:6
 msgid "C_hoose..."
 msgstr "_Vybrat..."
 
-#: capplets/file-types/file-types-properties.glade.h:6
+#: capplets/file-types/file-types-properties.glade.h:7
 msgid "Cate_gory:"
 msgstr "Kate_gorie:"
 
-#: capplets/file-types/file-types-properties.glade.h:7
+#: capplets/file-types/file-types-properties.glade.h:8
 msgid "D_efault action:"
 msgstr "Implicitní _akce:"
 
-#: capplets/file-types/file-types-properties.glade.h:8
+#: capplets/file-types/file-types-properties.glade.h:9
 msgid "Default _action:"
 msgstr "Implicitní _akce:"
 
-#: capplets/file-types/file-types-properties.glade.h:9
+#: capplets/file-types/file-types-properties.glade.h:10
 #: capplets/file-types/mime-edit-dialog.c:208
 msgid "Edit file type"
 msgstr "Upravit typ souboru"
 
-#: capplets/file-types/file-types-properties.glade.h:11
+#: capplets/file-types/file-types-properties.glade.h:12
 msgid "Filename extensions:"
 msgstr "Přípony názvů souborů:"
 
-#: capplets/file-types/file-types-properties.glade.h:12
+#: capplets/file-types/file-types-properties.glade.h:13
 msgid "Look at content"
 msgstr "Zobrazit obsah"
 
-#: capplets/file-types/file-types-properties.glade.h:13
+#: capplets/file-types/file-types-properties.glade.h:14
 msgid "P_rogram:"
 msgstr "P_rogram:"
 
-#: capplets/file-types/file-types-properties.glade.h:14
+#: capplets/file-types/file-types-properties.glade.h:15
 msgid "Program to Run"
 msgstr "Program ke spuštění"
 
-#: capplets/file-types/file-types-properties.glade.h:15
+#: capplets/file-types/file-types-properties.glade.h:16
 msgid "Run a program"
 msgstr "Spustit program"
 
-#: capplets/file-types/file-types-properties.glade.h:16
+#: capplets/file-types/file-types-properties.glade.h:17
 msgid "Run in _Terminal"
 msgstr "Spustit v t_erminálu"
 
-#: capplets/file-types/file-types-properties.glade.h:17
+#: capplets/file-types/file-types-properties.glade.h:18
 msgid "Use parent category _defaults"
 msgstr "Použít nastavení ro_dičovské kategorie"
 
-#: capplets/file-types/file-types-properties.glade.h:18
+#: capplets/file-types/file-types-properties.glade.h:19
 msgid "_Add:"
 msgstr "Přid_at:"
 
-#: capplets/file-types/file-types-properties.glade.h:19
+#: capplets/file-types/file-types-properties.glade.h:20
 msgid "_Description:"
 msgstr "_Popis:"
 
-#: capplets/file-types/file-types-properties.glade.h:20
+#: capplets/file-types/file-types-properties.glade.h:21
 msgid "_Edit..."
 msgstr "_Upravit..."
 
-#: capplets/file-types/file-types-properties.glade.h:21
+#: capplets/file-types/file-types-properties.glade.h:22
 msgid "_MIME type:"
 msgstr "Typ _MIME:"
 
-#: capplets/file-types/file-types-properties.glade.h:23
+#: capplets/file-types/file-types-properties.glade.h:24
 msgid "_Program to run:"
 msgstr "_Program ke spuštění:"
 
-#: capplets/file-types/file-types-properties.glade.h:24
+#: capplets/file-types/file-types-properties.glade.h:25
 msgid "_Protocol:"
 msgstr "Pro_tokol:"
 
-#: capplets/file-types/file-types-properties.glade.h:25
+#: capplets/file-types/file-types-properties.glade.h:26
 msgid "_Remove"
 msgstr "_Odstranit"
 
-#: capplets/file-types/file-types-properties.glade.h:26
+#: capplets/file-types/file-types-properties.glade.h:27
 msgid "_Viewer component:"
 msgstr "Komponenta pro_hlížeče:"
 
@@ -1416,72 +1421,77 @@ msgid "<b>Font Rendering</b>"
 msgstr "<b>Vykreslování písma</b>"
 
 #: capplets/font/font-properties.glade.h:3
+#, fuzzy
+msgid "<b>Hinting</b>:"
+msgstr "Zeštíhlení:"
+
+#: capplets/font/font-properties.glade.h:4
+#, fuzzy
+msgid "<b>Smoothing</b>:"
+msgstr "Vyhlazování:"
+
+#: capplets/font/font-properties.glade.h:5
+#, fuzzy
+msgid "<b>Subpixel order</b>:"
+msgstr "Pořadí podpixelů:"
+
+#: capplets/font/font-properties.glade.h:6
 msgid "Best _shapes"
 msgstr "Nejlepší _tvary"
 
-#: capplets/font/font-properties.glade.h:4
+#: capplets/font/font-properties.glade.h:7
 msgid "Best co_ntrast"
 msgstr "Nejlepší _kontrast"
 
-#: capplets/font/font-properties.glade.h:5
+#: capplets/font/font-properties.glade.h:8
 msgid "De_tails..."
 msgstr "Podrobno_sti..."
 
-#: capplets/font/font-properties.glade.h:6
+#: capplets/font/font-properties.glade.h:9
 msgid "Font Preferences"
 msgstr "Nastavení písma"
 
-#: capplets/font/font-properties.glade.h:7
+#: capplets/font/font-properties.glade.h:10
 msgid "Font Rendering Details"
 msgstr "Podrobnosti vykreslování písma"
 
-#: capplets/font/font-properties.glade.h:8
+#: capplets/font/font-properties.glade.h:11
 msgid "G_rayscale"
 msgstr "Stupně še_di"
 
-#: capplets/font/font-properties.glade.h:9
-msgid "Go to font folder"
+#: capplets/font/font-properties.glade.h:12
+#, fuzzy
+msgid "Go _to font folder"
 msgstr "Přejít do adresáře s písmy"
 
-#: capplets/font/font-properties.glade.h:10
-msgid "Hinting:"
-msgstr "Zeštíhlení:"
-
-#: capplets/font/font-properties.glade.h:11
+#: capplets/font/font-properties.glade.h:13
 msgid "N_one"
 msgstr "Žád_né"
 
-#: capplets/font/font-properties.glade.h:12
-msgid "Resolution (_dots per inch):"
-msgstr "_Rozlišení (bodů na palec):"
+#: capplets/font/font-properties.glade.h:14
+#, fuzzy
+msgid "R_esolution :"
+msgstr "_Rozlišení:"
 
-#: capplets/font/font-properties.glade.h:13
+#: capplets/font/font-properties.glade.h:15
 msgid "Set the font for applications"
 msgstr "Nastavit písmo pro aplikace"
 
-#: capplets/font/font-properties.glade.h:14
+#: capplets/font/font-properties.glade.h:16
 msgid "Set the font for the icons on the desktop"
 msgstr "Nastavit písmo pro ikony na pracovní ploše"
 
-#: capplets/font/font-properties.glade.h:15
+#: capplets/font/font-properties.glade.h:17
 msgid "Set the monospace font for terminals and similar applications"
 msgstr "Nastavit neproporcionální písmo pro terminály a podobné aplikace"
 
-#: capplets/font/font-properties.glade.h:16
-msgid "Smoothing:"
-msgstr "Vyhlazování:"
-
-#: capplets/font/font-properties.glade.h:17
+#: capplets/font/font-properties.glade.h:18
 msgid "Sub_pixel (LCDs)"
 msgstr "Pod_pixelové (LCD)"
 
-#: capplets/font/font-properties.glade.h:18
+#: capplets/font/font-properties.glade.h:19
 msgid "Sub_pixel smoothing (LCDs)"
 msgstr "Podpixelové _vyhlazování (LCD)"
-
-#: capplets/font/font-properties.glade.h:19
-msgid "Subpixel order:"
-msgstr "Pořadí podpixelů:"
 
 #: capplets/font/font-properties.glade.h:20
 msgid "VB_GR"
@@ -1539,6 +1549,31 @@ msgstr "_VRGB"
 #: capplets/font/font-properties.glade.h:33
 msgid "_Window title font:"
 msgstr "Písmo titulku _okna:"
+
+#: capplets/font/font-properties.glade.h:34
+#, fuzzy
+msgid "dots per inch"
+msgstr "_Rozlišení (bodů na palec):"
+
+#: capplets/font/main.c:506 capplets/font/main.c:511
+msgid "Font may be too large"
+msgstr ""
+
+#: capplets/font/main.c:507
+#, c-format
+msgid ""
+"The font selected is %d points large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a size "
+"smaller than %d."
+msgstr ""
+
+#: capplets/font/main.c:512
+#, c-format
+msgid ""
+"The font selected is %d points large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a smaller "
+"sized font."
+msgstr ""
 
 #: capplets/keybindings/eggcellrendererkeys.c:160
 #: capplets/keybindings/eggcellrendererkeys.c:161
@@ -2771,19 +2806,17 @@ msgid "/_Take a Break"
 msgstr "/_Udělat si přestávku"
 
 #: typing-break/drwright.c:466
-#, c-format
-msgid "%d minutes until the next break"
-msgstr "%d minut do další přestávky"
+#, fuzzy, c-format
+msgid "%d minute until the next break"
+msgid_plural "%d minutes until the next break"
+msgstr[0] "%d minut do další přestávky"
+msgstr[1] "%d minut do další přestávky"
 
-#: typing-break/drwright.c:469
-msgid "One minute until the next break"
-msgstr "Jedna minuta do další přestávky"
-
-#: typing-break/drwright.c:471
+#: typing-break/drwright.c:470
 msgid "Less than one minute until the next break"
 msgstr "Méně než jedna minuta do další přestávky"
 
-#: typing-break/drwright.c:566
+#: typing-break/drwright.c:565
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
@@ -2792,23 +2825,23 @@ msgstr ""
 "Nemohu zobrazit dialog vlastností přestávky ve psaní kvůli následující "
 "chybě: %s"
 
-#: typing-break/drwright.c:606
+#: typing-break/drwright.c:605
 msgid "About GNOME Typing Monitor"
 msgstr "O Sledování psaní GNOME"
 
-#: typing-break/drwright.c:630
+#: typing-break/drwright.c:629
 msgid "A computer break reminder."
 msgstr "Upomínač na přestávky od počítače."
 
-#: typing-break/drwright.c:631
+#: typing-break/drwright.c:630
 msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
 msgstr "Napsal Richard Hult &lt;richard@imendio.com&gt;"
 
-#: typing-break/drwright.c:632
+#: typing-break/drwright.c:631
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Pastvu pro oči přidal Anders Carlsson"
 
-#: typing-break/drwright.c:805
+#: typing-break/drwright.c:804
 msgid "Break reminder"
 msgstr "Připomenutí přestávky"
 
@@ -2957,6 +2990,14 @@ msgstr "Položky kontextového menu Nautilus pro písma"
 msgid "Set as Application Font"
 msgstr "Nastavit jako písmo aplikací"
 
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
+msgid "Theme Properties content view component"
+msgstr "Komponenta zobrazení obsahu Vlastnosti tématu"
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
+msgid "Themus Theme Properties view"
+msgstr "Pohled Themus Vlastnosti tématu"
+
 #: vfs-methods/themus/apply-font.glade.h:1
 msgid " "
 msgstr " "
@@ -2980,14 +3021,6 @@ msgstr ""
 #: vfs-methods/themus/apply-font.glade.h:5
 msgid "_Apply font"
 msgstr "_Použít písmo"
-
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
-msgid "Theme Properties content view component"
-msgstr "Komponenta zobrazení obsahu Vlastnosti tématu"
-
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
-msgid "Themus Theme Properties view"
-msgstr "Pohled Themus Vlastnosti tématu"
 
 #: vfs-methods/themus/theme-method.c:514
 msgid "Themes"
@@ -3049,6 +3082,9 @@ msgstr "Jestli zobrazovat náhledy nainstalovaných témat"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Jestli zobrazovat náhledy témat"
+
+#~ msgid "One minute until the next break"
+#~ msgstr "Jedna minuta do další přestávky"
 
 #~ msgid "Acce_pts URLs"
 #~ msgstr "Akce_ptuje URL"

@@ -10,14 +10,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center HEAD\n"
-"POT-Creation-Date: 2003-08-27 15:02-0400\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-10-28 16:59-0500\n"
 "PO-Revision-Date: 2003-08-16 16:12+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
 msgid "<b>Applications</b>"
@@ -102,18 +102,18 @@ msgstr ""
 "れていません。スクリーン・リーダと虫眼鏡の機能を利用する場合は、パッケージ "
 "'gnopernicus' をインストールして下さい。"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:236
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:241
 #, c-format
 msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr "マウス設定ダイアログを起動する際にエラーが発生しました: %s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:332
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:390
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:337
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:395
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "ファイル '%s' から AccessX の設定を読み込めません。"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:463
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:468
 msgid "Import Feature Settings File"
 msgstr "機能設定ファイルの取り込み"
 
@@ -676,10 +676,6 @@ msgstr "お気に入りのアプリ"
 msgid "Select your default applications"
 msgstr "デフォルトで使用するアプリを設定します"
 
-#: capplets/default-applications/gnome-default-applications-properties.c:108
-msgid "Please specify a name and a command for this editor."
-msgstr "このエディタの名前とコマンドを指定して下さい。"
-
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:39
 msgid "Epiphany"
 msgstr "Epiphany"
@@ -756,6 +752,10 @@ msgstr "RXVT"
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:70
 msgid "ETerm"
 msgstr "ETerm"
+
+#: capplets/default-applications/gnome-default-applications-properties.c:108
+msgid "Please specify a name and a command for this editor."
+msgstr "このエディタの名前とコマンドを指定して下さい。"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:2
 msgid "Add..."
@@ -871,7 +871,7 @@ msgid "Window Manager"
 msgstr "ウィンドウ・マネージャ"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:30
-#: capplets/file-types/file-types-properties.glade.h:22
+#: capplets/file-types/file-types-properties.glade.h:23
 msgid "_Name:"
 msgstr "名前(_N):"
 
@@ -1030,37 +1030,37 @@ msgstr "画面の解像度"
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: capplets/display/main.c:376
+#: capplets/display/main.c:377
 msgid "_Resolution:"
 msgstr "解像度(_R):"
 
-#: capplets/display/main.c:395
+#: capplets/display/main.c:396
 msgid "Re_fresh rate:"
 msgstr "リフレッシュ・レート(_F):"
 
-#: capplets/display/main.c:416
+#: capplets/display/main.c:417
 msgid "Default Settings"
 msgstr "デフォルトの設定"
 
-#: capplets/display/main.c:418
+#: capplets/display/main.c:419
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "画面 %d の設定\n"
 
-#: capplets/display/main.c:443
+#: capplets/display/main.c:444
 msgid "Screen Resolution Preferences"
 msgstr "画面の解像度の設定"
 
-#: capplets/display/main.c:475
+#: capplets/display/main.c:476
 #, c-format
 msgid "Make default for this _computer (%s) only"
 msgstr "このコンピュータ (%s) でのみデフォルトにする(_C)"
 
-#: capplets/display/main.c:493
+#: capplets/display/main.c:494
 msgid "Options"
 msgstr "オプション"
 
-#: capplets/display/main.c:514
+#: capplets/display/main.c:515
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d seconds the previous "
@@ -1069,19 +1069,19 @@ msgstr ""
 "変更した新しい設定をテストします。もし %d 秒間応答がない場合、以前の設定に戻"
 "ります。"
 
-#: capplets/display/main.c:563
+#: capplets/display/main.c:564
 msgid "Do you want to keep this resolution?"
 msgstr "この解像度を使用しますか？"
 
-#: capplets/display/main.c:588
+#: capplets/display/main.c:589
 msgid "Use _previous resolution"
 msgstr "以前の解像度を使用する(_P)"
 
-#: capplets/display/main.c:588
+#: capplets/display/main.c:589
 msgid "_Keep resolution"
 msgstr "この解像度を使用する(_K)"
 
-#: capplets/display/main.c:739
+#: capplets/display/main.c:740
 msgid ""
 "The XServer does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
@@ -1089,7 +1089,7 @@ msgstr ""
 "お使いの X サーバは XRandR 拡張をサポートしていません。サイズを表示する動的な"
 "解像度変更はできません。"
 
-#: capplets/display/main.c:747
+#: capplets/display/main.c:748
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
@@ -1107,7 +1107,7 @@ msgid "Extensions"
 msgstr "拡張子"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
-#: capplets/file-types/file-types-properties.glade.h:10
+#: capplets/file-types/file-types-properties.glade.h:11
 msgid "File Types and Programs"
 msgstr "ファイルの関連づけ"
 
@@ -1128,83 +1128,88 @@ msgid "Add _Service..."
 msgstr "サービスの追加(_S)..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
+#, fuzzy
+msgid "Browse icons"
+msgstr "秒"
+
+#: capplets/file-types/file-types-properties.glade.h:6
 msgid "C_hoose..."
 msgstr "選択(_H)..."
 
-#: capplets/file-types/file-types-properties.glade.h:6
+#: capplets/file-types/file-types-properties.glade.h:7
 msgid "Cate_gory:"
 msgstr "カテゴリ(_G):"
 
-#: capplets/file-types/file-types-properties.glade.h:7
+#: capplets/file-types/file-types-properties.glade.h:8
 msgid "D_efault action:"
 msgstr "デフォルトのアクション(_E):"
 
-#: capplets/file-types/file-types-properties.glade.h:8
+#: capplets/file-types/file-types-properties.glade.h:9
 msgid "Default _action:"
 msgstr "デフォルトのアクション(_A):"
 
-#: capplets/file-types/file-types-properties.glade.h:9
+#: capplets/file-types/file-types-properties.glade.h:10
 #: capplets/file-types/mime-edit-dialog.c:208
 msgid "Edit file type"
 msgstr "ファイルの種類の編集"
 
-#: capplets/file-types/file-types-properties.glade.h:11
+#: capplets/file-types/file-types-properties.glade.h:12
 msgid "Filename extensions:"
 msgstr "ファイル名の拡張子:"
 
-#: capplets/file-types/file-types-properties.glade.h:12
+#: capplets/file-types/file-types-properties.glade.h:13
 msgid "Look at content"
 msgstr "内容をみる"
 
-#: capplets/file-types/file-types-properties.glade.h:13
+#: capplets/file-types/file-types-properties.glade.h:14
 msgid "P_rogram:"
 msgstr "プログラム(_R):"
 
-#: capplets/file-types/file-types-properties.glade.h:14
+#: capplets/file-types/file-types-properties.glade.h:15
 msgid "Program to Run"
 msgstr "実行するプログラム"
 
-#: capplets/file-types/file-types-properties.glade.h:15
+#: capplets/file-types/file-types-properties.glade.h:16
 msgid "Run a program"
 msgstr "実行するプログラム"
 
-#: capplets/file-types/file-types-properties.glade.h:16
+#: capplets/file-types/file-types-properties.glade.h:17
 msgid "Run in _Terminal"
 msgstr "端末内で起動する(_T)"
 
-#: capplets/file-types/file-types-properties.glade.h:17
+#: capplets/file-types/file-types-properties.glade.h:18
 msgid "Use parent category _defaults"
 msgstr "をデフォルトで親のカテゴリを使用する(_D)"
 
-#: capplets/file-types/file-types-properties.glade.h:18
+#: capplets/file-types/file-types-properties.glade.h:19
 msgid "_Add:"
 msgstr "追加(_A):"
 
-#: capplets/file-types/file-types-properties.glade.h:19
+#: capplets/file-types/file-types-properties.glade.h:20
 msgid "_Description:"
 msgstr "説明(_D):"
 
-#: capplets/file-types/file-types-properties.glade.h:20
+#: capplets/file-types/file-types-properties.glade.h:21
 msgid "_Edit..."
 msgstr "編集(_E)..."
 
-#: capplets/file-types/file-types-properties.glade.h:21
+#: capplets/file-types/file-types-properties.glade.h:22
 msgid "_MIME type:"
 msgstr "MIME型(_M):"
 
-#: capplets/file-types/file-types-properties.glade.h:23
+#: capplets/file-types/file-types-properties.glade.h:24
 msgid "_Program to run:"
 msgstr "実行するプログラム(_P):"
 
-#: capplets/file-types/file-types-properties.glade.h:24
+#: capplets/file-types/file-types-properties.glade.h:25
 msgid "_Protocol:"
 msgstr "プロトコル(_P):"
 
-#: capplets/file-types/file-types-properties.glade.h:25
+#: capplets/file-types/file-types-properties.glade.h:26
 msgid "_Remove"
 msgstr "削除(_R)"
 
-#: capplets/file-types/file-types-properties.glade.h:26
+#: capplets/file-types/file-types-properties.glade.h:27
 msgid "_Viewer component:"
 msgstr "表示コンポーネント(_V):"
 
@@ -1413,73 +1418,78 @@ msgid "<b>Font Rendering</b>"
 msgstr "<b>フォントのレンダリング形式</b>"
 
 #: capplets/font/font-properties.glade.h:3
+#, fuzzy
+msgid "<b>Hinting</b>:"
+msgstr "画面ピクセルの設定 (Hinting):"
+
+#: capplets/font/font-properties.glade.h:4
+#, fuzzy
+msgid "<b>Smoothing</b>:"
+msgstr "スムージング (Smoothing):"
+
+#: capplets/font/font-properties.glade.h:5
+#, fuzzy
+msgid "<b>Subpixel order</b>:"
+msgstr "サブピクセルの順番:"
+
+#: capplets/font/font-properties.glade.h:6
 msgid "Best _shapes"
 msgstr "最適なシェープ(_S)"
 
-#: capplets/font/font-properties.glade.h:4
+#: capplets/font/font-properties.glade.h:7
 msgid "Best co_ntrast"
 msgstr "最適なコントラスト(_N)"
 
-#: capplets/font/font-properties.glade.h:5
+#: capplets/font/font-properties.glade.h:8
 msgid "De_tails..."
 msgstr "詳細(_T)..."
 
-#: capplets/font/font-properties.glade.h:6
+#: capplets/font/font-properties.glade.h:9
 msgid "Font Preferences"
 msgstr "フォントのプロパティ"
 
-#: capplets/font/font-properties.glade.h:7
+#: capplets/font/font-properties.glade.h:10
 msgid "Font Rendering Details"
 msgstr "レンダリング形式の詳細"
 
-#: capplets/font/font-properties.glade.h:8
+#: capplets/font/font-properties.glade.h:11
 msgid "G_rayscale"
 msgstr "グレースケール(_R)"
 
-#: capplets/font/font-properties.glade.h:9
-msgid "Go to font folder"
+#: capplets/font/font-properties.glade.h:12
+#, fuzzy
+msgid "Go _to font folder"
 msgstr "フォントのフォルダへジャンプ"
 
-#: capplets/font/font-properties.glade.h:10
-msgid "Hinting:"
-msgstr "画面ピクセルの設定 (Hinting):"
-
-#: capplets/font/font-properties.glade.h:11
+#: capplets/font/font-properties.glade.h:13
 msgid "N_one"
 msgstr "なし(_O)"
 
-#: capplets/font/font-properties.glade.h:12
-msgid "Resolution (_dots per inch):"
-msgstr "解像度 (ドット/インチ)(_D):"
+#: capplets/font/font-properties.glade.h:14
+#, fuzzy
+msgid "R_esolution :"
+msgstr "解像度(_R):"
 
-#: capplets/font/font-properties.glade.h:13
+#: capplets/font/font-properties.glade.h:15
 msgid "Set the font for applications"
 msgstr "アプリケーションで使用するフォントを選択して下さい"
 
-#: capplets/font/font-properties.glade.h:14
+#: capplets/font/font-properties.glade.h:16
 msgid "Set the font for the icons on the desktop"
 msgstr "デスクトップにあるアイコンに使用するフォントを選択して下さい"
 
-#: capplets/font/font-properties.glade.h:15
+#: capplets/font/font-properties.glade.h:17
 msgid "Set the monospace font for terminals and similar applications"
 msgstr ""
 "端末やそれに類するアプリケーションで使用する固定フォントを選択して下さい"
 
-#: capplets/font/font-properties.glade.h:16
-msgid "Smoothing:"
-msgstr "スムージング (Smoothing):"
-
-#: capplets/font/font-properties.glade.h:17
+#: capplets/font/font-properties.glade.h:18
 msgid "Sub_pixel (LCDs)"
 msgstr "サブピクセル (LCDs)(_P)"
 
-#: capplets/font/font-properties.glade.h:18
+#: capplets/font/font-properties.glade.h:19
 msgid "Sub_pixel smoothing (LCDs)"
 msgstr "サブピクセルのスムージング (LCDs)(_P)"
-
-#: capplets/font/font-properties.glade.h:19
-msgid "Subpixel order:"
-msgstr "サブピクセルの順番:"
 
 #: capplets/font/font-properties.glade.h:20
 msgid "VB_GR"
@@ -1537,6 +1547,31 @@ msgstr "VRGB(_V)"
 #: capplets/font/font-properties.glade.h:33
 msgid "_Window title font:"
 msgstr "キャプションのフォント(_W):"
+
+#: capplets/font/font-properties.glade.h:34
+#, fuzzy
+msgid "dots per inch"
+msgstr "解像度 (ドット/インチ)(_D):"
+
+#: capplets/font/main.c:506 capplets/font/main.c:511
+msgid "Font may be too large"
+msgstr ""
+
+#: capplets/font/main.c:507
+#, c-format
+msgid ""
+"The font selected is %d points large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a size "
+"smaller than %d."
+msgstr ""
+
+#: capplets/font/main.c:512
+#, c-format
+msgid ""
+"The font selected is %d points large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a smaller "
+"sized font."
+msgstr ""
 
 #: capplets/keybindings/eggcellrendererkeys.c:160
 #: capplets/keybindings/eggcellrendererkeys.c:161
@@ -2771,19 +2806,17 @@ msgid "/_Take a Break"
 msgstr "/一休みする(_T)"
 
 #: typing-break/drwright.c:466
-#, c-format
-msgid "%d minutes until the next break"
-msgstr "次の一休みまで %d 分あります"
+#, fuzzy, c-format
+msgid "%d minute until the next break"
+msgid_plural "%d minutes until the next break"
+msgstr[0] "次の一休みまで %d 分あります"
+msgstr[1] "次の一休みまで %d 分あります"
 
-#: typing-break/drwright.c:469
-msgid "One minute until the next break"
-msgstr "次の一休みまであと 1 分です"
-
-#: typing-break/drwright.c:471
+#: typing-break/drwright.c:470
 msgid "Less than one minute until the next break"
 msgstr "次の一休みまで 1 分を切りました"
 
-#: typing-break/drwright.c:566
+#: typing-break/drwright.c:565
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
@@ -2791,23 +2824,23 @@ msgid ""
 msgstr ""
 "次のエラーにより \"キー入力の一休み設定ダイアログ\" を開けませんでした: %s"
 
-#: typing-break/drwright.c:606
+#: typing-break/drwright.c:605
 msgid "About GNOME Typing Monitor"
 msgstr "GNOME 一休み催促ツールについて"
 
-#: typing-break/drwright.c:630
+#: typing-break/drwright.c:629
 msgid "A computer break reminder."
 msgstr "コンピュータの一休み催促ツールです。"
 
-#: typing-break/drwright.c:631
+#: typing-break/drwright.c:630
 msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
 msgstr "作者: Richard Hult &lt;richard@imendio.com&gt;"
 
-#: typing-break/drwright.c:632
+#: typing-break/drwright.c:631
 msgid "Eye candy added by Anders Carlsson"
 msgstr "目玉のキャンディの提供: Anders Carlsson"
 
-#: typing-break/drwright.c:805
+#: typing-break/drwright.c:804
 msgid "Break reminder"
 msgstr "一休み催促ツール"
 
@@ -2956,6 +2989,14 @@ msgstr "フォント表示の Nautilus コンテキスト・メニュー"
 msgid "Set as Application Font"
 msgstr "アプリのフォントにセットする"
 
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
+msgid "Theme Properties content view component"
+msgstr "テーマ・プロパティ内容表示コンポーネント"
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
+msgid "Themus Theme Properties view"
+msgstr "themes テーマ・プロパティ・ビュー"
+
 #: vfs-methods/themus/apply-font.glade.h:1
 msgid " "
 msgstr " "
@@ -2980,14 +3021,6 @@ msgstr ""
 #: vfs-methods/themus/apply-font.glade.h:5
 msgid "_Apply font"
 msgstr "フォントの適用(_A)"
-
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
-msgid "Theme Properties content view component"
-msgstr "テーマ・プロパティ内容表示コンポーネント"
-
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
-msgid "Themus Theme Properties view"
-msgstr "themes テーマ・プロパティ・ビュー"
 
 #: vfs-methods/themus/theme-method.c:514
 msgid "Themes"
@@ -3049,3 +3082,6 @@ msgstr "インストールされたテーマをサムネイル表示するか否
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "テーマをサムネイル表示するか否か"
+
+#~ msgid "One minute until the next break"
+#~ msgstr "次の一休みまであと 1 分です"

@@ -6,14 +6,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.ro\n"
-"POT-Creation-Date: 2003-08-27 15:02-0400\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-10-28 16:59-0500\n"
 "PO-Revision-Date: 2003-09-08 03:07+0300\n"
 "Last-Translator: Mugurel Tudor <mugurelu@go.ro>\n"
 "Language-Team:  <gnomero-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 "X-Generator: KBabel 1.0.1\n"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
@@ -97,20 +97,20 @@ msgstr ""
 "Nu toate tehnologiile de asistenţă sunt instalate. Pachetul „gnopernicus“ "
 "trebuie instalat pentru facilităţi de citire ecran şi mărire."
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:236
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:241
 #, c-format
 msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr ""
 "A intervenit o eroare la lansarea dialogului pentru preferinţele mouse-ului: "
 "%s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:332
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:390
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:337
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:395
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Nu am putut importa setările AccessX din fişierul „%s“"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:463
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:468
 msgid "Import Feature Settings File"
 msgstr "Importă setările din fişier"
 
@@ -675,10 +675,6 @@ msgstr "Aplicaţii preferate"
 msgid "Select your default applications"
 msgstr "Selectaţi aplicaţiile implicite"
 
-#: capplets/default-applications/gnome-default-applications-properties.c:108
-msgid "Please specify a name and a command for this editor."
-msgstr "Specificaţi un nume şi o comandă pentru acest editor."
-
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:39
 msgid "Epiphany"
 msgstr "Epiphany"
@@ -755,6 +751,10 @@ msgstr "RXVT"
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:70
 msgid "ETerm"
 msgstr "ETerm"
+
+#: capplets/default-applications/gnome-default-applications-properties.c:108
+msgid "Please specify a name and a command for this editor."
+msgstr "Specificaţi un nume şi o comandă pentru acest editor."
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:2
 msgid "Add..."
@@ -872,7 +872,7 @@ msgid "Window Manager"
 msgstr "Administrator de ferestre"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:30
-#: capplets/file-types/file-types-properties.glade.h:22
+#: capplets/file-types/file-types-properties.glade.h:23
 msgid "_Name:"
 msgstr "_Nume:"
 
@@ -1031,37 +1031,37 @@ msgstr "Rezoluţie ecran"
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: capplets/display/main.c:376
+#: capplets/display/main.c:377
 msgid "_Resolution:"
 msgstr "Re_zoluţie:"
 
-#: capplets/display/main.c:395
+#: capplets/display/main.c:396
 msgid "Re_fresh rate:"
 msgstr "Rată re_fresh:"
 
-#: capplets/display/main.c:416
+#: capplets/display/main.c:417
 msgid "Default Settings"
 msgstr "Setări implicite"
 
-#: capplets/display/main.c:418
+#: capplets/display/main.c:419
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "Setări ecran %d\n"
 
-#: capplets/display/main.c:443
+#: capplets/display/main.c:444
 msgid "Screen Resolution Preferences"
 msgstr "Preferinţe rezoluţie ecran"
 
-#: capplets/display/main.c:475
+#: capplets/display/main.c:476
 #, c-format
 msgid "Make default for this _computer (%s) only"
 msgstr "Implicit doar pentru acest _calculator (%s)"
 
-#: capplets/display/main.c:493
+#: capplets/display/main.c:494
 msgid "Options"
 msgstr "Opţiuni"
 
-#: capplets/display/main.c:514
+#: capplets/display/main.c:515
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d seconds the previous "
@@ -1070,19 +1070,19 @@ msgstr ""
 "Testez noile setări. Dacă nu răspundeţi în %d secunde setările vechi vor fi "
 "restaurate."
 
-#: capplets/display/main.c:563
+#: capplets/display/main.c:564
 msgid "Do you want to keep this resolution?"
 msgstr "Doriţi să păstraţi această rezoluţie?"
 
-#: capplets/display/main.c:588
+#: capplets/display/main.c:589
 msgid "Use _previous resolution"
 msgstr "_Utilizează rezoluţia precedentă"
 
-#: capplets/display/main.c:588
+#: capplets/display/main.c:589
 msgid "_Keep resolution"
 msgstr "_Păstrează rezoluţia"
 
-#: capplets/display/main.c:739
+#: capplets/display/main.c:740
 msgid ""
 "The XServer does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
@@ -1090,7 +1090,7 @@ msgstr ""
 "Serverul X nu suportă extensia XRandR. Ca atare nu puteţi schimba rezoluţia "
 "în timp ce acesta este pornit."
 
-#: capplets/display/main.c:747
+#: capplets/display/main.c:748
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
@@ -1108,7 +1108,7 @@ msgid "Extensions"
 msgstr "Extensii"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
-#: capplets/file-types/file-types-properties.glade.h:10
+#: capplets/file-types/file-types-properties.glade.h:11
 msgid "File Types and Programs"
 msgstr "Tipuri de fişiere şi programe"
 
@@ -1131,83 +1131,88 @@ msgid "Add _Service..."
 msgstr "Adaugă _serviciu..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
+#, fuzzy
+msgid "Browse icons"
+msgstr "secunde"
+
+#: capplets/file-types/file-types-properties.glade.h:6
 msgid "C_hoose..."
 msgstr "A_legeţi..."
 
-#: capplets/file-types/file-types-properties.glade.h:6
+#: capplets/file-types/file-types-properties.glade.h:7
 msgid "Cate_gory:"
 msgstr "Cate_gorie:"
 
-#: capplets/file-types/file-types-properties.glade.h:7
+#: capplets/file-types/file-types-properties.glade.h:8
 msgid "D_efault action:"
 msgstr "Acţiu_ne implicită:"
 
-#: capplets/file-types/file-types-properties.glade.h:8
+#: capplets/file-types/file-types-properties.glade.h:9
 msgid "Default _action:"
 msgstr "Acţiune i_mplicită:"
 
-#: capplets/file-types/file-types-properties.glade.h:9
+#: capplets/file-types/file-types-properties.glade.h:10
 #: capplets/file-types/mime-edit-dialog.c:208
 msgid "Edit file type"
 msgstr "Editare tip de fişier"
 
-#: capplets/file-types/file-types-properties.glade.h:11
+#: capplets/file-types/file-types-properties.glade.h:12
 msgid "Filename extensions:"
 msgstr "Extensii fişiere:"
 
-#: capplets/file-types/file-types-properties.glade.h:12
+#: capplets/file-types/file-types-properties.glade.h:13
 msgid "Look at content"
 msgstr "Analizează conţinutul"
 
-#: capplets/file-types/file-types-properties.glade.h:13
+#: capplets/file-types/file-types-properties.glade.h:14
 msgid "P_rogram:"
 msgstr "Pro_gram:"
 
-#: capplets/file-types/file-types-properties.glade.h:14
+#: capplets/file-types/file-types-properties.glade.h:15
 msgid "Program to Run"
 msgstr "Program de pornit"
 
-#: capplets/file-types/file-types-properties.glade.h:15
+#: capplets/file-types/file-types-properties.glade.h:16
 msgid "Run a program"
 msgstr "Porneşte un program"
 
-#: capplets/file-types/file-types-properties.glade.h:16
+#: capplets/file-types/file-types-properties.glade.h:17
 msgid "Run in _Terminal"
 msgstr "Porneşte în _terminal"
 
-#: capplets/file-types/file-types-properties.glade.h:17
+#: capplets/file-types/file-types-properties.glade.h:18
 msgid "Use parent category _defaults"
 msgstr "Utilizează setările implicite ale categoriei _părinte"
 
-#: capplets/file-types/file-types-properties.glade.h:18
+#: capplets/file-types/file-types-properties.glade.h:19
 msgid "_Add:"
 msgstr "_Adaugă:"
 
-#: capplets/file-types/file-types-properties.glade.h:19
+#: capplets/file-types/file-types-properties.glade.h:20
 msgid "_Description:"
 msgstr "_Descriere:"
 
-#: capplets/file-types/file-types-properties.glade.h:20
+#: capplets/file-types/file-types-properties.glade.h:21
 msgid "_Edit..."
 msgstr "_Editare..."
 
-#: capplets/file-types/file-types-properties.glade.h:21
+#: capplets/file-types/file-types-properties.glade.h:22
 msgid "_MIME type:"
 msgstr "Tip _MIME:"
 
-#: capplets/file-types/file-types-properties.glade.h:23
+#: capplets/file-types/file-types-properties.glade.h:24
 msgid "_Program to run:"
 msgstr "_Program de pornit:"
 
-#: capplets/file-types/file-types-properties.glade.h:24
+#: capplets/file-types/file-types-properties.glade.h:25
 msgid "_Protocol:"
 msgstr "_Protocol:"
 
-#: capplets/file-types/file-types-properties.glade.h:25
+#: capplets/file-types/file-types-properties.glade.h:26
 msgid "_Remove"
 msgstr "Şter_ge"
 
-#: capplets/file-types/file-types-properties.glade.h:26
+#: capplets/file-types/file-types-properties.glade.h:27
 msgid "_Viewer component:"
 msgstr "Componentă _vizualizare:"
 
@@ -1418,72 +1423,77 @@ msgid "<b>Font Rendering</b>"
 msgstr "<b>Randare fonturi</b>"
 
 #: capplets/font/font-properties.glade.h:3
+#, fuzzy
+msgid "<b>Hinting</b>:"
+msgstr "Aproximare:"
+
+#: capplets/font/font-properties.glade.h:4
+#, fuzzy
+msgid "<b>Smoothing</b>:"
+msgstr "Netezire:"
+
+#: capplets/font/font-properties.glade.h:5
+#, fuzzy
+msgid "<b>Subpixel order</b>:"
+msgstr "Ordine subpixel:"
+
+#: capplets/font/font-properties.glade.h:6
 msgid "Best _shapes"
 msgstr "Cele mai bun_e forme"
 
-#: capplets/font/font-properties.glade.h:4
+#: capplets/font/font-properties.glade.h:7
 msgid "Best co_ntrast"
 msgstr "Cel mai b_un contrast"
 
-#: capplets/font/font-properties.glade.h:5
+#: capplets/font/font-properties.glade.h:8
 msgid "De_tails..."
 msgstr "Detal_ii..."
 
-#: capplets/font/font-properties.glade.h:6
+#: capplets/font/font-properties.glade.h:9
 msgid "Font Preferences"
 msgstr "Preferinţe fonturi"
 
-#: capplets/font/font-properties.glade.h:7
+#: capplets/font/font-properties.glade.h:10
 msgid "Font Rendering Details"
 msgstr "Detalii randare fonturi"
 
-#: capplets/font/font-properties.glade.h:8
+#: capplets/font/font-properties.glade.h:11
 msgid "G_rayscale"
 msgstr "Scală de _gri"
 
-#: capplets/font/font-properties.glade.h:9
-msgid "Go to font folder"
+#: capplets/font/font-properties.glade.h:12
+#, fuzzy
+msgid "Go _to font folder"
 msgstr "Deschide dosarul fonturilor"
 
-#: capplets/font/font-properties.glade.h:10
-msgid "Hinting:"
-msgstr "Aproximare:"
-
-#: capplets/font/font-properties.glade.h:11
+#: capplets/font/font-properties.glade.h:13
 msgid "N_one"
 msgstr "N_iciuna"
 
-#: capplets/font/font-properties.glade.h:12
-msgid "Resolution (_dots per inch):"
-msgstr "Re_zoluţia în puncte/ţol (dpi):"
+#: capplets/font/font-properties.glade.h:14
+#, fuzzy
+msgid "R_esolution :"
+msgstr "Re_zoluţie:"
 
-#: capplets/font/font-properties.glade.h:13
+#: capplets/font/font-properties.glade.h:15
 msgid "Set the font for applications"
 msgstr "Setaţi fontul pentru aplicaţii"
 
-#: capplets/font/font-properties.glade.h:14
+#: capplets/font/font-properties.glade.h:16
 msgid "Set the font for the icons on the desktop"
 msgstr "Setaţi fontul pentru iconiţele de pe desktop"
 
-#: capplets/font/font-properties.glade.h:15
+#: capplets/font/font-properties.glade.h:17
 msgid "Set the monospace font for terminals and similar applications"
 msgstr "Setaţi fontul monospaţiat pentru terminale şi aplicaţii similare"
 
-#: capplets/font/font-properties.glade.h:16
-msgid "Smoothing:"
-msgstr "Netezire:"
-
-#: capplets/font/font-properties.glade.h:17
+#: capplets/font/font-properties.glade.h:18
 msgid "Sub_pixel (LCDs)"
 msgstr "Subpi_xel (LCD-uri)"
 
-#: capplets/font/font-properties.glade.h:18
+#: capplets/font/font-properties.glade.h:19
 msgid "Sub_pixel smoothing (LCDs)"
 msgstr "Netezire subpi_xel (LCD-uri)"
-
-#: capplets/font/font-properties.glade.h:19
-msgid "Subpixel order:"
-msgstr "Ordine subpixel:"
 
 #: capplets/font/font-properties.glade.h:20
 msgid "VB_GR"
@@ -1541,6 +1551,31 @@ msgstr "_VRGB"
 #: capplets/font/font-properties.glade.h:33
 msgid "_Window title font:"
 msgstr "Font tit_luri ferestre:"
+
+#: capplets/font/font-properties.glade.h:34
+#, fuzzy
+msgid "dots per inch"
+msgstr "Re_zoluţia în puncte/ţol (dpi):"
+
+#: capplets/font/main.c:506 capplets/font/main.c:511
+msgid "Font may be too large"
+msgstr ""
+
+#: capplets/font/main.c:507
+#, c-format
+msgid ""
+"The font selected is %d points large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a size "
+"smaller than %d."
+msgstr ""
+
+#: capplets/font/main.c:512
+#, c-format
+msgid ""
+"The font selected is %d points large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a smaller "
+"sized font."
+msgstr ""
 
 #: capplets/keybindings/eggcellrendererkeys.c:160
 #: capplets/keybindings/eggcellrendererkeys.c:161
@@ -2778,19 +2813,17 @@ msgid "/_Take a Break"
 msgstr "/_Luaţi o pauză"
 
 #: typing-break/drwright.c:466
-#, c-format
-msgid "%d minutes until the next break"
-msgstr "%d minute până la următoarea pauză"
+#, fuzzy, c-format
+msgid "%d minute until the next break"
+msgid_plural "%d minutes until the next break"
+msgstr[0] "%d minute până la următoarea pauză"
+msgstr[1] "%d minute până la următoarea pauză"
 
-#: typing-break/drwright.c:469
-msgid "One minute until the next break"
-msgstr "Un minut până la următoarea pauză"
-
-#: typing-break/drwright.c:471
+#: typing-break/drwright.c:470
 msgid "Less than one minute until the next break"
 msgstr "Mai puţin de un minut până la următoarea pauză"
 
-#: typing-break/drwright.c:566
+#: typing-break/drwright.c:565
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
@@ -2799,23 +2832,23 @@ msgstr ""
 "Nu am reuşit să deschid dialog pentru setarea pauzelor de lucru. Eroarea "
 "este: %s"
 
-#: typing-break/drwright.c:606
+#: typing-break/drwright.c:605
 msgid "About GNOME Typing Monitor"
 msgstr "Despre monitorul de tastare GNOME"
 
-#: typing-break/drwright.c:630
+#: typing-break/drwright.c:629
 msgid "A computer break reminder."
 msgstr "Un program pentru pauzele de lucru în munca cu calculatorul."
 
-#: typing-break/drwright.c:631
+#: typing-break/drwright.c:630
 msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
 msgstr "Scris de Richard Hult <richard@imendio.com>"
 
-#: typing-break/drwright.c:632
+#: typing-break/drwright.c:631
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Îmbunătăţiri vizuale aduse de Anders Carlsson"
 
-#: typing-break/drwright.c:805
+#: typing-break/drwright.c:804
 msgid "Break reminder"
 msgstr "Monitorizare pauze"
 
@@ -2965,6 +2998,14 @@ msgstr "Intrări pentru fonturi în meniul contextual Nautilus"
 msgid "Set as Application Font"
 msgstr "Setează ca font pentru aplicaţii"
 
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
+msgid "Theme Properties content view component"
+msgstr "Componentă vizualizare conţinut pentru proprietăţi teme."
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
+msgid "Themus Theme Properties view"
+msgstr "Vizualizare proprietăţi temă Themus"
+
 #: vfs-methods/themus/apply-font.glade.h:1
 msgid " "
 msgstr " "
@@ -2988,14 +3029,6 @@ msgstr ""
 #: vfs-methods/themus/apply-font.glade.h:5
 msgid "_Apply font"
 msgstr "Aplică _fontul"
-
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
-msgid "Theme Properties content view component"
-msgstr "Componentă vizualizare conţinut pentru proprietăţi teme."
-
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
-msgid "Themus Theme Properties view"
-msgstr "Vizualizare proprietăţi temă Themus"
 
 #: vfs-methods/themus/theme-method.c:514
 msgid "Themes"
@@ -3058,3 +3091,6 @@ msgstr "Dacă să se creeze miniaturi pentru temele instalate"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Dacă să se creeze miniaturi pentru teme"
+
+#~ msgid "One minute until the next break"
+#~ msgstr "Un minut până la următoarea pauză"

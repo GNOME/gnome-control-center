@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-10-25 14:06+0200\n"
+"POT-Creation-Date: 2003-10-28 16:59-0500\n"
 "PO-Revision-Date: 2003-10-25 14:09+0200\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
@@ -110,18 +110,18 @@ msgstr ""
 "Ikke alle assisterende teknologier er tilgængelige på dit system. Pakken "
 "'gnopernicus' skal installeres for at få skærmoplæsning og forstørrelse."
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:236
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:241
 #, c-format
 msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr "Der opstod en fejl ved kørsel af museindstillingsvinduet: %s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:332
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:390
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:337
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:395
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Kunne ikke importere AccessX-indstillinger fra filen '%s'"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:463
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:468
 msgid "Import Feature Settings File"
 msgstr "Importér fil med facilitetsindstillinger"
 
@@ -1437,74 +1437,79 @@ msgstr "Vælg skrifttyper for skrivebordet"
 msgid "<b>Font Rendering</b>"
 msgstr "<b>Skriftvisning</b>"
 
+# hinting er svært at oversætte, dette dækker vist
 #: capplets/font/font-properties.glade.h:3
+#, fuzzy
+msgid "<b>Hinting</b>:"
+msgstr "Justering:"
+
+#: capplets/font/font-properties.glade.h:4
+#, fuzzy
+msgid "<b>Smoothing</b>:"
+msgstr "Udjævning:"
+
+#: capplets/font/font-properties.glade.h:5
+#, fuzzy
+msgid "<b>Subpixel order</b>:"
+msgstr "Delpunktsorden:"
+
+#: capplets/font/font-properties.glade.h:6
 msgid "Best _shapes"
 msgstr "Bedste _former"
 
-#: capplets/font/font-properties.glade.h:4
+#: capplets/font/font-properties.glade.h:7
 msgid "Best co_ntrast"
 msgstr "Bedste _kontrast"
 
-#: capplets/font/font-properties.glade.h:5
+#: capplets/font/font-properties.glade.h:8
 msgid "De_tails..."
 msgstr "_Detaljer..."
 
-#: capplets/font/font-properties.glade.h:6
+#: capplets/font/font-properties.glade.h:9
 msgid "Font Preferences"
 msgstr "Skrifttypeindstillinger"
 
-#: capplets/font/font-properties.glade.h:7
+#: capplets/font/font-properties.glade.h:10
 msgid "Font Rendering Details"
 msgstr "Skriftvisningsdetaljer"
 
-#: capplets/font/font-properties.glade.h:8
+#: capplets/font/font-properties.glade.h:11
 msgid "G_rayscale"
 msgstr "_Gråtone"
 
-#: capplets/font/font-properties.glade.h:9
-msgid "Go to font folder"
+#: capplets/font/font-properties.glade.h:12
+#, fuzzy
+msgid "Go _to font folder"
 msgstr "Gå til skrifttypemappen"
 
-# hinting er svært at oversætte, dette dækker vist
-#: capplets/font/font-properties.glade.h:10
-msgid "Hinting:"
-msgstr "Justering:"
-
-#: capplets/font/font-properties.glade.h:11
+#: capplets/font/font-properties.glade.h:13
 msgid "N_one"
 msgstr "_Ingen"
 
-#: capplets/font/font-properties.glade.h:12
-msgid "Resolution (_dots per inch):"
-msgstr "Opløsning (_punkter pr. tomme):"
+#: capplets/font/font-properties.glade.h:14
+#, fuzzy
+msgid "R_esolution :"
+msgstr "_Opløsning:"
 
-#: capplets/font/font-properties.glade.h:13
+#: capplets/font/font-properties.glade.h:15
 msgid "Set the font for applications"
 msgstr "Vælg standardskrifttypen for programmer"
 
-#: capplets/font/font-properties.glade.h:14
+#: capplets/font/font-properties.glade.h:16
 msgid "Set the font for the icons on the desktop"
 msgstr "Vælg skrifttypen for ikoner på skrivebordet"
 
-#: capplets/font/font-properties.glade.h:15
+#: capplets/font/font-properties.glade.h:17
 msgid "Set the monospace font for terminals and similar applications"
 msgstr "Vælg den faste bredde skrifttype for terminaler og lignende programmer"
 
-#: capplets/font/font-properties.glade.h:16
-msgid "Smoothing:"
-msgstr "Udjævning:"
-
-#: capplets/font/font-properties.glade.h:17
+#: capplets/font/font-properties.glade.h:18
 msgid "Sub_pixel (LCDs)"
 msgstr "Del_punkt (LCD-skærme)"
 
-#: capplets/font/font-properties.glade.h:18
+#: capplets/font/font-properties.glade.h:19
 msgid "Sub_pixel smoothing (LCDs)"
 msgstr "Del_punktsudjævning (LCD-skærme)"
-
-#: capplets/font/font-properties.glade.h:19
-msgid "Subpixel order:"
-msgstr "Delpunktsorden:"
 
 #: capplets/font/font-properties.glade.h:20
 msgid "VB_GR"
@@ -1563,25 +1568,34 @@ msgstr "_VRGB"
 msgid "_Window title font:"
 msgstr "Skrifttype for _vinduestitler:"
 
-#: capplets/font/main.c:494 capplets/font/main.c:499
+#: capplets/font/font-properties.glade.h:34
+#, fuzzy
+msgid "dots per inch"
+msgstr "Opløsning (_punkter pr. tomme):"
+
+#: capplets/font/main.c:506 capplets/font/main.c:511
 msgid "Font may be too large"
 msgstr "Skrifttype er muligvis for stor"
 
-#: capplets/font/main.c:495
+#: capplets/font/main.c:507
 #, c-format
 msgid ""
 "The font selected is %d points large, and may make it difficult to "
 "effectively use the computer.  It is recommended that you select a size "
 "smaller than %d."
-msgstr "Den valgte skrifttype er %d punkter stor og kan gøre det svært at benytte systemet. Det anbefales at du vælger en størrelse der er mindre end %d."
+msgstr ""
+"Den valgte skrifttype er %d punkter stor og kan gøre det svært at benytte "
+"systemet. Det anbefales at du vælger en størrelse der er mindre end %d."
 
-#: capplets/font/main.c:500
+#: capplets/font/main.c:512
 #, c-format
 msgid ""
 "The font selected is %d points large, and may make it difficult to "
 "effectively use the computer.  It is recommended that you select a smaller "
 "sized font."
-msgstr "Den valgte skrifttype er %d punkter stor og kan gøre det svært at benytte systemet. Det anbefales at du vælger en skrifttype med en mindre størrelse."
+msgstr ""
+"Den valgte skrifttype er %d punkter stor og kan gøre det svært at benytte "
+"systemet. Det anbefales at du vælger en skrifttype med en mindre størrelse."
 
 #: capplets/keybindings/eggcellrendererkeys.c:160
 #: capplets/keybindings/eggcellrendererkeys.c:161
