@@ -119,7 +119,7 @@ dnl ==============================================
 GNOMECC_CAPPLETS_CFLAGS="${CAPPLET_CFLAGS} -I\$(top_srcdir)/intl -I\$(top_srcdir)/ -DG_LOG_DOMAIN=\"\\\"\$(cappletname)-properties\\\"\" -DGLADE_DATADIR=\"\\\"${datadir}/control-center\\\"\" -DGNOMELOCALEDIR=\"\\\"${datadir}/locale\\\"\" -I\$(top_srcdir)/capplets/common "
 GNOMECC_CAPPLETS_LIBS="${CAPPLET_LIBS} \$(top_builddir)/capplets/common/libcommon.a"
 GNOMECC_CAPPLETS_CLEANFILES="\$(desktop) \$(desktop).in"
-GNOMECC_CAPPLETS_EXTRA_DIST="ChangeLog \$(desktop).in.in \$(desktop).in \$(desktop) \$(cappletname)-capplet.png \$(cappletname)-properties.glade \$(pixmaps_DATA)"
+GNOMECC_CAPPLETS_EXTRA_DIST="ChangeLog \$(desktop).in.in \$(cappletname)-capplet.png \$(cappletname)-properties.glade \$(pixmaps_DATA)"
 
 AC_SUBST(GNOMECC_CAPPLETS_EXTRA_DIST)
 AC_SUBST(GNOMECC_CAPPLETS_CLEANFILES)
@@ -163,7 +163,7 @@ GNOMECC_CAPPLETS_DESKTOP_IN_RULE='$(desktop).in: \%.desktop.in: \%.desktop.in.in
 \
 install-data-local:\
 	$(mkinstalldirs) $(datadir)/control-center/capplets/$(cappletgroup)\
-	$(INSTALL_DATA) $(srcdir)/$(desktop) $(datadir)/control-center/capplets/$(cappletgroup)$(desktop)\
+	$(INSTALL_DATA) $(desktop) $(datadir)/control-center/capplets/$(cappletgroup)$(desktop)\
 install-data-am: install-data-local'
 AC_DIVERT_PUSH(AC_DIVERSION_SED)dnl
 s%@GNOMECC_CAPPLETS_DESKTOP_IN_RULE@%[$]GNOMECC_CAPPLETS_DESKTOP_IN_RULE%g

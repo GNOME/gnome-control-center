@@ -66,6 +66,28 @@ $(groups_files): %.directory: %.directory.in
 
 install-data-local:
 	$(mkinstalldirs) $(datadir)/control-center/capplets
-	$(INSTALL_DATA) $(srcdir)/Gnome.directory $(datadir)/control-center/capplets/.directory
+	$(INSTALL_DATA) Gnome.directory $(datadir)/control-center/capplets/.directory
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #all-local: Gnome.directory
