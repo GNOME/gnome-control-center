@@ -553,6 +553,37 @@ list_reveal_row (GtkCList *clist, int row_index)
      	}
 }
 
+
+
+static int
+find_row_for_mime_type (const char *mime_type, GtkCList *mime_list)
+{
+	gboolean found_one;
+	int index;
+	const char *row_data;
+	
+	if (mime_type == NULL) {
+		return -1;
+	}
+	
+	found_one = FALSE;
+	
+	for (index = 0; index < mime_list->rows; index++) {
+		row_data = gtk_clist_get_row_data (mime_list, index);
+		if (row_data != NULL && strcmp (row_data, mime_type) == 0) {
+			found_one = TRUE;
+			break;	
+		}		
+	}
+				
+	if (found_one) {
+		return index;
+	}
+	
+	return -1;
+}
+
+
 static void
 init_mime_capplet (const char *scroll_to_mime_type)
 {
@@ -562,9 +593,7 @@ init_mime_capplet (const char *scroll_to_mime_type)
         GtkWidget *mime_list_container;
         GtkWidget *frame;
         GtkWidget *table;
-	int index, list_width, column_width;
-	gboolean found_one;
-	const char *row_data;
+	int index, list_width, column_width, found_index;
 
 	capplet = capplet_widget_new ();
 
@@ -748,25 +777,18 @@ init_mime_capplet (const char *scroll_to_mime_type)
 	gtk_clist_sort (GTK_CLIST (mime_list));
 	
 	/* Attempt to select specified mime type in list */
-	if (scroll_to_mime_type != NULL) {
-		found_one = FALSE;
-		
-		for (index = 0; index < GTK_CLIST (mime_list)->rows; index++) {
-			row_data = gtk_clist_get_row_data (GTK_CLIST (mime_list), index);
-			if (row_data != NULL && strcmp (row_data, scroll_to_mime_type) == 0) {
-				/* Select mime type and bail */
-				found_one = TRUE;
-				gtk_clist_select_row (GTK_CLIST (mime_list), index, 1);
-				list_reveal_row (GTK_CLIST (mime_list), index);
-				break;	
-			}		
-		}
-				
-		if (!found_one) {
-			gtk_clist_select_row (GTK_CLIST (mime_list), 0, 0);
+	if (scroll_to_mime_type != NULL) {		
+		found_index = find_row_for_mime_type (scroll_to_mime_type, GTK_CLIST (mime_list));
+		if (found_index != -1) {
+			gtk_clist_select_row (GTK_CLIST (mime_list), found_index, 1);
+			list_reveal_row (GTK_CLIST (mime_list), found_index);
+		} else {
+			gtk_clist_select_row (GTK_CLIST (mime_list), 0, 1);
+			list_reveal_row (GTK_CLIST (mime_list), 0);
 		}			
 	} else {
 		gtk_clist_select_row (GTK_CLIST (mime_list), 0, 0);
+		list_reveal_row (GTK_CLIST (mime_list), 0);
 	}
 	
 	capplet_widget_state_changed (CAPPLET_WIDGET (capplet), TRUE);
@@ -814,6 +836,7 @@ nautilus_mime_type_capplet_update_info (const char *mime_type) {
 	icon_name = gnome_vfs_mime_get_icon (mime_type);
 	if (icon_name != NULL) {
 		path = gnome_vfs_icon_path_from_filename (icon_name);
+		g_message ("Looking for icon %s", path);
 		if (path != NULL) {
 			nautilus_mime_type_icon_entry_set_icon (NAUTILUS_MIME_ICON_ENTRY (icon_entry), path);
 			g_free (path);
@@ -1206,6 +1229,7 @@ add_mime_clicked (GtkWidget *widget, gpointer data)
 	GnomeVFSMimeAction *action;
 	GnomeVFSMimeApplication *default_app;
 	OAF_ServerInfo *default_component;
+	int found_index;
 	
 	mime_string = nautilus_mime_type_capplet_show_new_mime_window ();
 	if (mime_string != NULL) {
@@ -1291,6 +1315,14 @@ add_mime_clicked (GtkWidget *widget, gpointer data)
 			gdk_pixbuf_unref (pixbuf);
 		}
 		
+		/* Sort, select and scroll to new mime type */
+		gtk_clist_sort (GTK_CLIST (mime_list));
+		found_index = find_row_for_mime_type (mime_string, GTK_CLIST (mime_list));
+		if (found_index != -1) {
+			gtk_clist_select_row (GTK_CLIST (mime_list), found_index, 1);
+			list_reveal_row (GTK_CLIST (mime_list), found_index);
+		}			
+
 		g_free (text[0]);
 		g_free (text[1]);
 		g_free (text[2]);
