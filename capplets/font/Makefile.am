@@ -32,4 +32,4 @@ INCLUDES   = $(FONT_CAPPLET_CFLAGS)     \
 	     -DGLADEDIR=\""$(gladedir)"\" \
 	     -DPIXMAPDIR=\""$(pixmapdir)"\"
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
-EXTRA_DIST = $(Desktop_in_files) $(icons_DATA) $(glade_DATA)
+EXTRA_DIST = $(Desktop_in_files) $(icons_DATA) $(glade_DATA) $(pixmap_DATA)
