@@ -1,22 +1,21 @@
-# translation of gnome-control-center.HEAD.sq.po to Albanian
 # Përkthimi i mesazheve të gnome-control-center në shqip
 # This file is distributed under the same license as the gnome-control-center package.
 # Copyright (C) 2003, 2004, 2005 Free Software Foundation, Inc.
 # Elian Myftiu <elian@alblinux.net>, 2003, 2004, 2005.
-# 
-# 
+#
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-control-center.HEAD.sq\n"
+"Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-30 05:29+0100\n"
-"PO-Revision-Date: 2005-01-30 13:09+0100\n"
-"Last-Translator: Elian Myftiu <elian@alblinux.net>\n"
+"POT-Creation-Date: 2005-02-03 21:36+0100\n"
+"PO-Revision-Date: 2005-02-04 17:58+0100\n"
+"Last-Translator: Elian Myftiu <elian@lycos.com>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);X-Generator: KBabel 1.9.1"
+"Plural-Forms: nplurals=2; plural=(n != 1);"
 
 #: capplets/about-me/e-image-chooser.c:172
 msgid "Choose Image"
@@ -1142,8 +1141,9 @@ msgid ""
 "settings will be restored."
 msgstr ""
 "Duke provuar rregullimet e reja. Nëse nuk përgjigjesh brenda %d sekonde do "
+"të rikthehem tek rregullimet e mëparshme. "
+"Duke provuar rregullimet e reja. Nëse nuk përgjigjesh brenda %d sekondash do "
 "të rikthehem tek rregullimet e mëparshme."
-"Duke provuar rregullimet e reja. Nëse nuk përgjigjesh brenda %d sekondash do të rikthehem tek rregullimet e mëparshme."
 
 #: capplets/display/main.c:626
 msgid "Keep Resolution"
@@ -1648,9 +1648,8 @@ msgid ""
 msgstr ""
 "Gërma e zgjedhur është %d pikë e gjerë, dhe mund ta vështirësojë përdorimin "
 "efikas të kompjuterit.  Këshillohet zgjedhja e një madhësie më të vogël se %d."
-"Gërma e zgjedhur është %d pika e gjerë, dhe mund ta vështirësojë "
-"përdorimin efikas të kompjuterit.  Këshillohet zgjedhja e një madhësie më të "
-"vogël se %d."
+"Gërma e zgjedhur është %d pika e gjerë, dhe mund ta vështirësojë përdorimin "
+"efikas të kompjuterit.  Këshillohet zgjedhja e një madhësie më të vogël se %d."
 
 #: capplets/font/main.c:514
 #, c-format
@@ -2269,7 +2268,7 @@ msgstr "_Tinguj për efekte"
 msgid "_Visual feedback:"
 msgstr "Feedback _vizual:"
 
-#: capplets/theme-switcher/gnome-theme-details.c:370
+#: capplets/theme-switcher/gnome-theme-details.c:349
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -2279,19 +2278,85 @@ msgstr ""
 "Preferences\" nuk është instaluar mirë, ose nuk keni instaluar paketin "
 "\"gnome themes\"."
 
-#: capplets/theme-switcher/gnome-theme-installer.c:103
+#: capplets/theme-switcher/gnome-theme-installer.c:214
 msgid "This theme is not in a supported format."
 msgstr "Kjo temë nuk është e një formati të duhur."
 
-#: capplets/theme-switcher/gnome-theme-installer.c:139
+#: capplets/theme-switcher/gnome-theme-installer.c:229
+msgid "Failed to create temporal directory"
+msgstr "Dështoi në krijimin e kartelës së përkohshme"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:246
+msgid ""
+"Can not install theme. \n"
+"There are not bzip2 utility in the system."
+msgstr ""
+"I pamundur instalimi i temës. \n"
+"Në sistem nuk gjenden veglat bzip2."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:260
+#: capplets/theme-switcher/gnome-theme-installer.c:289
+#: capplets/theme-switcher/gnome-theme-installer.c:355
+msgid "Installation Failed"
+msgstr "Instalimi Dështoi"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:276
+msgid ""
+"Can not install themes. \n"
+"There are not gzip utility in the system."
+msgstr ""
+"I pamundur instalimi i temës. \n"
+"Në sistem nuk gjenden vegla gzip."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:306
+#, c-format
+msgid ""
+"Icon Theme %s correctly installed.\n"
+"You can select it in the theme details."
+msgstr ""
+"Tema e Ikonave %s u instalua me sukses.\n"
+"Mund ta zgjedhësh në detajet e temës."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:309
+#, c-format
+msgid "Gnome Theme %s correctly installed"
+msgstr "Tema Gnome %s u instalua me sukses"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:312
+#, c-format
+msgid ""
+"Windows Border Theme %s correctly installed.\n"
+"You can select it in the theme details."
+msgstr ""
+"Tema e Anëve të Dritareve %s u instalua me sukses.\n"
+"Mund ta zgjedhësh në detajet e temës."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:315
+#, c-format
+msgid ""
+"Controls Theme %s correctly installed.\n"
+"You can select it in the theme details."
+msgstr ""
+"Tema e Kontrolleve %s u instalua me sukses.\n"
+"Mund ta zgjedhësh në detajet e temës."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:323
+msgid "The theme is a engine. You need to compile the theme."
+msgstr "Tema është një motor temash. Duhet të përpilosh temën."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:335
+msgid "The file format is invalid"
+msgstr "Lloji i file-it të dhënë nuk është i vlefshëm"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:407
 msgid "No theme file location specified to install"
 msgstr "Nuk u gjend file për temën e përcaktuar për instalim"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:156
+#: capplets/theme-switcher/gnome-theme-installer.c:424
 msgid "The theme file location specified to install is invalid"
 msgstr "Vendndodhja e file të temës, përcaktuar për instalim, nuk është e vlefshme"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:176
+#: capplets/theme-switcher/gnome-theme-installer.c:444
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -2300,7 +2365,11 @@ msgstr ""
 "Leje të pamjaftueshme për instalimin e temës në:\n"
 "%s"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:216
+#: capplets/theme-switcher/gnome-theme-installer.c:463
+msgid "The file format is invalid."
+msgstr "Lloji i file-it të dhënë nuk është i vlefshëm."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:490
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
@@ -2308,6 +2377,14 @@ msgid ""
 msgstr ""
 "%s është vendndodhja ku file-t e temës do instalohen. Kjo nuk mund të "
 "zgjidhet si vendndodhja e buruesit"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:543
+msgid ""
+"Cannot install theme.\n"
+"The tar program is not installed on your system."
+msgstr ""
+"I pamundur instalimi i temës.\n"
+"Programi tar nuk është instaluar në sistemin tënd."
 
 #: capplets/theme-switcher/gnome-theme-manager.c:676
 msgid "Custom theme"
@@ -2317,7 +2394,7 @@ msgstr "Tema e zakonshme"
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "Mund t'a ruash këtë temë duke shtypur butonin \"Ruaj Temën\"."
 
-#: capplets/theme-switcher/gnome-theme-manager.c:1454
+#: capplets/theme-switcher/gnome-theme-manager.c:1466
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -2793,7 +2870,7 @@ msgstr ""
 "Gabim në ekzekutimin e (%s)\n"
 "që është lidhur me çelsin (%s)"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:96
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:99
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2824,7 +2901,7 @@ msgstr ""
 "- Rezultatin e <b>xprop -root | grep XKB</b>\n"
 "- Rezultatin e <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/kbd</b>"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:110
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:113
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2836,7 +2913,7 @@ msgstr ""
 "përdorësh një konfigurim më të thjeshtë, apo një version më të ri të "
 "programit XFree."
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:213
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:216
 msgid ""
 "The X system keyboard settings differ from your current GNOME keyboard "
 "settings.  Which set would you like to use?"
@@ -2844,24 +2921,13 @@ msgstr ""
 "Rregullimet e tastierës së sistemit X ndryshojnë nga ato të rregullimeve nga "
 "ana e GNOME-s.  Cilin nga të dy dëshiron të përdorësh?"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:216
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:219
 msgid "Use X settings"
 msgstr "Përdor rregullimet e X"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:218
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:221
 msgid "Use GNOME settings"
 msgstr "Përdor rregullimet e GNOME-s"
-
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:270
-#, c-format
-msgid ""
-"You have a keyboard remapping file (%s) in your home directory whose "
-"contents will now be ignored. You can use the keyboard preferences to "
-"restore them."
-msgstr ""
-"Ju keni një file (%s) për rihartimin e tastierës në directory tuaj \"home\", "
-"përmbajtja e të cilit do të shpërfillet. Mund të përdorni preferimet e "
-"tastierës për të rivendosur atë file."
 
 #: gnome-settings-daemon/gnome-settings-multimedia-keys.c:126
 #, c-format
@@ -3274,42 +3340,46 @@ msgstr ""
 "me xmodmap"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
+msgid "A list of modmap files available in the $HOME directory."
+msgstr "Një listë file-sh modmap gjendet në kartelën $HOME."
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
 msgid "Default group, assigned on window creation"
 msgstr "Grupi i parazgjedhur, caktuar në krijimin e dritares"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
 msgid "Keep and manage separate group per window"
 msgstr "Mbaj dhe organizo grup të veçantë për dritaren"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
 msgid "Keyboard Update Handlers"
 msgstr "Trajtuesit e Freskuesit të Tastierës"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:6
 msgid "Keyboard layout"
 msgstr "Skema e tastierës"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:6
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:7
 msgid "Keyboard model"
 msgstr "Modeli i tastierës"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:7
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:8
 msgid "Keyboard options"
 msgstr "Mundësitë e tastierës"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:8
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
 msgid "Keyboard settings in gconf will be overridden from the system ASAP"
 msgstr "Të dhënat e XKB-së në gconf do të mbishkruhen nga ASAP"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
 msgid "Save/restore indicators together with layout groups"
 msgstr "Ruaj/rivendos treguesit bashkë me grupet e skemave"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:11
 msgid "Show layout names instead of group names"
 msgstr "Shfaq emrat e skemave në vend të atyre të grupeve"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:11
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:12
 msgid ""
 "Show layout names instead of group names (only for versions of XFree "
 "supporting multiple layouts)"
@@ -3317,7 +3387,7 @@ msgstr ""
 "Shfaq emrat e skemave në vend të atyre të grupeve (vetëm për versionet e "
 "XFree që mbështesin skemat e shumëfishta)"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:12
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:13
 msgid ""
 "Very soon, keyboard settings in gconf will be overridden (from the system "
 "configuration)"
@@ -3325,13 +3395,17 @@ msgstr ""
 "Shumë shpejt, të dhënat e tastierës në gconf do anashkalohen (nga "
 "konfigurimi i sistemit)"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:13
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
 msgid "keyboard layout"
 msgstr "skema e tastierës"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
 msgid "keyboard model"
 msgstr "modeli i tastierës"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:16
+msgid "modmap file list"
+msgstr "listë file-sh modmap"
 
 #: typing-break/drw-break-window.c:209
 msgid "_Postpone break"
