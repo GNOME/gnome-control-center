@@ -8,11 +8,14 @@
 #include <gtk/gtk.h>
 #include <gconf/gconf-client.h>
 #include <glade/glade.h>
+#include <libgnomevfs/gnome-vfs-async-ops.h>
+#include <libgnomevfs/gnome-vfs-ops.h>
 
 #include "theme-common.h"
 #include "capplet-util.h"
 #include "activate-settings-daemon.h"
 #include "gconf-property-editor.h"
+#include "file-transfer-dialog.h"
 
 #define GTK_THEME_KEY "/desktop/gnome/interface/gtk_theme"
 
@@ -24,15 +27,27 @@ enum
   N_COLUMNS
 };
 
-gboolean setting_model = FALSE;
+enum
+{
+  TARGET_URI_LIST,
+  TARGET_NS_URL
+};
 
+static GtkTargetEntry drop_types[] =
+{
+  {"text/uri-list", 0, TARGET_URI_LIST},
+  {"_NETSCAPE_URL", 0, TARGET_NS_URL}
+};
+
+static gint n_drop_types = sizeof (drop_types) / sizeof (GtkTargetEntry);
+static gboolean setting_model = FALSE;
 
 static GladeXML *
 create_dialog (void)
 {
   GladeXML *dialog;
 
-  dialog = glade_xml_new (GLADEDIR "/theme-properties.glade", "theme_dialog", NULL);
+  dialog = glade_xml_new (GLADEDIR "/theme-properties.glade", NULL, NULL);
 
   return dialog;
 }
@@ -198,6 +213,146 @@ sort_func (GtkTreeModel *model,
  return g_utf8_collate (a_str, b_str);
 }
 
+/* Callback issued during drag movements */
+
+static gboolean
+drag_motion_cb (GtkWidget *widget, GdkDragContext *context,
+		gint x, gint y, guint time, gpointer data)
+{
+	return FALSE;
+}
+
+/* Callback issued during drag leaves */
+
+static void
+drag_leave_cb (GtkWidget *widget, GdkDragContext *context,
+	       guint time, gpointer data)
+{
+	gtk_widget_queue_draw (widget);
+}
+
+/* Callback issued on actual drops. Attempts to load the file dropped. */
+static void
+drag_data_received_cb (GtkWidget *widget, GdkDragContext *context,
+		       gint x, gint y,
+		       GtkSelectionData *selection_data,
+		       guint info, guint time, gpointer data)
+{
+	GList *uris;
+	GladeXML *dialog = data;
+	gchar *filename;
+
+	if (!(info == TARGET_URI_LIST || info == TARGET_NS_URL))
+		return;
+
+	uris = gnome_vfs_uri_list_parse ((gchar *) selection_data->data);
+
+	filename = gnome_vfs_uri_to_string (uris->data, GNOME_VFS_URI_HIDE_NONE);
+	if (strncmp (filename, "http://", 7) && strncmp (filename, "ftp://", 6))
+	{
+		g_free (filename);
+		filename = gnome_vfs_uri_to_string (uris->data, GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD);
+	}
+	gnome_file_entry_set_filename (GNOME_FILE_ENTRY (WID ("install_theme_picker")), filename);
+	g_free (filename);
+	gnome_vfs_uri_list_unref (uris);
+	gtk_widget_show (WID ("install_dialog"));
+}
+
+static void
+show_install_dialog (GtkWidget *button, gpointer data)
+{
+	GladeXML *dialog = data;
+	gtk_widget_show (WID ("install_dialog"));
+}
+
+static void
+show_manage_themes (GtkWidget *button, gpointer data)
+{
+	gchar *command = g_strdup_printf ("nautilus --no-desktop %s/.themes",
+					  g_get_home_dir ());
+	g_spawn_command_line_async (command, NULL);
+	g_free (command);
+}
+
+static void
+transfer_cancel_cb (GtkWidget *dlg, gchar *path)
+{
+	gnome_vfs_unlink (path);
+	g_free (path);
+	gtk_widget_destroy (dlg);
+}
+
+static void
+transfer_done_cb (GtkWidget *dlg, gchar *path)
+{
+	int len = strlen (path);
+	if (path && len > 7 && !strcmp (path + len - 7, ".tar.gz"))
+	{
+		int status;
+		gchar *command;
+		/* this should be something more clever and nonblocking */
+		command = g_strdup_printf ("sh -c 'gzip -d -c < \"%s\" | tar xf - -C \"%s/.themes\"'",
+					   path, g_get_home_dir ());
+		g_print ("untarring %s\n", command);
+		if (g_spawn_command_line_sync (command, NULL, NULL, &status, NULL) && status == 0)
+			gnome_vfs_unlink (path);
+		g_free (command);
+	}
+	g_free (path);
+	gtk_widget_destroy (dlg);
+}
+
+static void
+install_dialog_response (GtkWidget *widget, int response_id, gpointer data)
+{
+	GladeXML *dialog = data;
+	GtkWidget *dlg;
+	gchar *filename, *path, *base;
+	GList *src, *target;
+	GnomeVFSURI *src_uri;
+	const gchar *raw;
+	
+	gtk_widget_hide (widget);
+	
+	switch (response_id)
+	{
+	case 0:
+		raw = gtk_entry_get_text (GTK_ENTRY (gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (WID ("install_theme_picker")))));
+		if (strncmp (raw, "http://", 7) && strncmp (raw, "ftp://", 6) && *raw != '/')
+			filename = gnome_file_entry_get_full_path (GNOME_FILE_ENTRY (WID ("install_theme_picker")), TRUE);
+		else
+			filename = g_strdup (raw);
+
+		src_uri = gnome_vfs_uri_new (filename);
+		base = gnome_vfs_uri_extract_short_name (src_uri);
+		src = g_list_append (NULL, src_uri);
+		path = g_build_filename (g_get_home_dir (), ".themes",
+				         base, NULL);
+		target = g_list_append (NULL, gnome_vfs_uri_new (path));
+		
+		dlg = file_transfer_dialog_new ();
+		file_transfer_dialog_wrap_async_xfer (FILE_TRANSFER_DIALOG (dlg),
+						      src, target,
+						      GNOME_VFS_XFER_RECURSIVE,
+						      GNOME_VFS_XFER_ERROR_MODE_QUERY,
+						      GNOME_VFS_XFER_OVERWRITE_MODE_QUERY,
+						      GNOME_VFS_PRIORITY_DEFAULT);
+		gnome_vfs_uri_list_unref (src);
+		gnome_vfs_uri_list_unref (target);
+		g_free (base);
+		g_free (filename);
+		g_signal_connect (G_OBJECT (dlg), "cancel",
+				  G_CALLBACK (transfer_cancel_cb), path);
+		g_signal_connect (G_OBJECT (dlg), "done",
+				  G_CALLBACK (transfer_done_cb), path);
+		gtk_widget_show (dlg);
+		break;
+	default:
+		break;
+	}
+}
+
 static void
 setup_dialog (GladeXML *dialog)
 {
@@ -230,19 +385,41 @@ setup_dialog (GladeXML *dialog)
   read_themes (dialog);
   theme_common_register_theme_change (theme_changed_func, dialog);
 
+  widget = WID ("install_button");
+  g_signal_connect (G_OBJECT (widget), "clicked",
+		    G_CALLBACK (show_install_dialog), dialog);
+  widget = WID ("manage_button");
+  g_signal_connect (G_OBJECT (widget), "clicked",
+		    G_CALLBACK (show_manage_themes), dialog);
+
+  widget = WID ("install_dialog");
+  g_signal_connect (G_OBJECT (widget), "response",
+		    G_CALLBACK (install_dialog_response), dialog);
+  
   widget = WID ("theme_dialog");
-  gtk_widget_show (widget);
 
   g_signal_connect (G_OBJECT (widget), "response", gtk_main_quit, NULL);
   g_signal_connect (G_OBJECT (widget), "close", gtk_main_quit, NULL);
+
+  gtk_drag_dest_set (widget, GTK_DEST_DEFAULT_ALL,
+		     drop_types, n_drop_types,
+		     GDK_ACTION_COPY | GDK_ACTION_LINK | GDK_ACTION_MOVE);
+
+  g_signal_connect (G_OBJECT (widget), "drag-motion",
+		    G_CALLBACK (drag_motion_cb), NULL);
+  g_signal_connect (G_OBJECT (widget), "drag-leave",
+		    G_CALLBACK (drag_leave_cb), NULL);
+  g_signal_connect (G_OBJECT (widget), "drag-data-received",
+		    G_CALLBACK (drag_data_received_cb),
+		    dialog);
+
+  gtk_widget_show (widget);
 }
 
 int
 main (int argc, char *argv[])
 {
   GladeXML *dialog;
-
-  gtk_init (&argc, &argv);
 
   bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
