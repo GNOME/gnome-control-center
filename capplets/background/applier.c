@@ -63,6 +63,8 @@ struct _ApplierPrivate
 
 	Renderer         *root_renderer;
 	Renderer         *preview_renderer;
+
+	gboolean          nautilus_running;
 };
 
 struct _Renderer
@@ -146,6 +148,8 @@ static gboolean render_small_pixmap_p (Preferences *prefs);
 static Pixmap make_root_pixmap       (gint width, gint height);
 static void set_root_pixmap          (Pixmap pixmap);
 
+static gboolean is_nautilus_running  (void);
+
 guint
 applier_get_type (void)
 {
@@ -178,6 +182,7 @@ applier_init (Applier *applier)
 	applier->private->preview_prefs = NULL;
 	applier->private->root_renderer = NULL;
 	applier->private->preview_renderer = NULL;
+	applier->private->nautilus_running = is_nautilus_running ();
 }
 
 static void
@@ -291,6 +296,11 @@ applier_apply_prefs (Applier *applier, Preferences *prefs,
 	g_return_if_fail (IS_APPLIER (applier));
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));
+
+	if (do_root && applier->private->nautilus_running) {
+		set_root_pixmap (None);
+		do_root = FALSE;
+	}
 
 	if (!prefs->enabled) {
 		draw_disabled_message (applier_class_get_preview_widget ());
@@ -859,6 +869,8 @@ renderer_render_to_screen (Renderer *renderer)
 	    (renderer->prefs->wallpaper_enabled || 
 	     renderer->prefs->gradient_enabled))
 		set_root_pixmap (renderer->pixmap);
+	else if (renderer->is_root && !renderer->is_set)
+		set_root_pixmap (None);
 
 	gdk_gc_destroy (gc);
 }
@@ -1079,34 +1091,104 @@ set_root_pixmap (Pixmap pixmap)
 	gint format;
 	guchar *data_esetroot;
 
-	XGrabServer (GDK_DISPLAY());
+	XGrabServer (GDK_DISPLAY ());
 
-	XGetWindowProperty (GDK_DISPLAY(), GDK_ROOT_WINDOW(),
-			    gdk_atom_intern("ESETROOT_PMAP_ID", FALSE),
+	XGetWindowProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (),
+			    gdk_atom_intern ("ESETROOT_PMAP_ID", FALSE),
 			    0L, 1L, False, XA_PIXMAP,
 			    &type, &format, &nitems, &bytes_after,
 			    &data_esetroot);
 
 	if (type == XA_PIXMAP) {
 		if (format == 32 && nitems == 4)
-			XKillClient(GDK_DISPLAY(), *((Pixmap*)data_esetroot));
+			XKillClient(GDK_DISPLAY (), 
+				    *((Pixmap *) data_esetroot));
 
 		XFree (data_esetroot);
 	}
 
-	XChangeProperty (GDK_DISPLAY(), GDK_ROOT_WINDOW(),
-			 gdk_atom_intern("ESETROOT_PMAP_ID", FALSE), XA_PIXMAP,
-			 32, PropModeReplace,
-			 (guchar *) &pixmap, 1);
-	XChangeProperty (GDK_DISPLAY(), GDK_ROOT_WINDOW(),
-			 gdk_atom_intern("_XROOTPMAP_ID", FALSE), XA_PIXMAP,
-			 32, PropModeReplace,
-			 (guchar *) &pixmap, 1);
+	if (pixmap != None) {
+		XChangeProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (),
+				 gdk_atom_intern ("ESETROOT_PMAP_ID", FALSE),
+				 XA_PIXMAP, 32, PropModeReplace,
+				 (guchar *) &pixmap, 1);
+		XChangeProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (),
+				 gdk_atom_intern ("_XROOTPMAP_ID", FALSE),
+				 XA_PIXMAP, 32, PropModeReplace,
+				 (guchar *) &pixmap, 1);
 
-	XSetWindowBackgroundPixmap (GDK_DISPLAY(), GDK_ROOT_WINDOW(), pixmap);
+		XSetWindowBackgroundPixmap (GDK_DISPLAY (), GDK_ROOT_WINDOW (),
+					    pixmap);
+	} else {
+		XDeleteProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (),
+				 gdk_atom_intern ("ESETROOT_PMAP_ID", FALSE));
+		XDeleteProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (),
+				 gdk_atom_intern ("_XROOTPMAP_ID", FALSE));
+	}
+
 	XClearWindow (GDK_DISPLAY (), GDK_ROOT_WINDOW ());
+	XUngrabServer (GDK_DISPLAY ());
+	XFlush(GDK_DISPLAY ());
+}
 
-	XUngrabServer (GDK_DISPLAY());
-	
-	XFlush(GDK_DISPLAY());
+static gboolean
+is_nautilus_running (void)
+{
+	Atom window_id_atom;
+	Window nautilus_xid;
+	Atom actual_type;
+	int actual_format;
+	unsigned long nitems, bytes_after;
+	unsigned char *data;
+	int retval;
+	Atom wmclass_atom;
+	gboolean running;
+	gint error;
+
+	window_id_atom = XInternAtom (GDK_DISPLAY (), 
+				      "NAUTILUS_DESKTOP_WINDOW_ID", False);
+
+	if (window_id_atom == None) return FALSE;
+
+	retval = XGetWindowProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (),
+				     window_id_atom, 0, 1, False, XA_WINDOW,
+				     &actual_type, &actual_format, &nitems,
+				     &bytes_after, &data);
+
+	if (data != NULL) {
+		nautilus_xid = *(Window *) data;
+		XFree (data);
+	}
+
+	if (actual_type != XA_WINDOW) return FALSE;
+	if (actual_format != 32) return FALSE;
+
+	wmclass_atom = XInternAtom (GDK_DISPLAY (), "WM_CLASS");
+
+	gdk_error_trap_push ();
+
+	retval = XGetWindowProperty (GDK_DISPLAY (), nautilus_xid,
+				     wmclass_atom, 0, 23, False, XA_STRING,
+				     &actual_type, &actual_format, &nitems,
+				     &bytes_after, &data);
+
+	error = gdk_error_trap_pop ();
+
+	if (error == BadWindow) return FALSE;
+
+	if (actual_type == XA_STRING &&
+	    nitems == 2 &&
+	    bytes_after == 0 &&
+	    actual_format == 8 &&
+	    data != NULL &&
+	    !strcmp (data, "desktop_window") &&
+	    !strcmp (data + strlen (data) + 1, "Nautilus"))
+		running = TRUE;
+	else
+		running = FALSE;
+
+	if (data != NULL)
+		XFree (data);
+
+	return running;
 }

@@ -1,3 +1,16 @@
+2000-10-21  Bradford Hovinen  <hovinen@helixcode.com>
+
+	* capplets/new-background-properties/applier.c (set_root_pixmap):
+	If the passed pixmap is None, delete the root pixmap properties
+	and don't try to set the background on the root window
+	(is_nautilus_running): Implement. Return TRUE iff Nautilus is
+	running, FALSE otherwise
+	(applier_apply_prefs): If Nautilus is running and we are rendering
+	to the root pixmap, just remove the root pixmap window property
+	(renderer_render_to_screen): Set root pixmap to None (i.e.,
+	destroy root pixmap) if we're rendering a solid background to the
+	root window
+
 2000-10-16  Stanislav Brabec  <utx@penguin.cz>
 
 	* capplets/new-screensaver-properties/screensavers/Makefile.am:
