@@ -798,13 +798,13 @@ init_mime_capplet (const char *scroll_to_mime_type)
 				  (GtkAttachOptions) (0), 0, 0);
 		gtk_widget_set_usize (hbox, 1, 11);
 				
-		button = gtk_button_new_with_label (_("Add new MIME type..."));
+		button = gtk_button_new_with_label (_("Add New MIME Type..."));
 		gtk_signal_connect (GTK_OBJECT (button), "clicked", add_mime_clicked, NULL);
 		gtk_table_attach (GTK_TABLE (small_table), button, 0, 1, 1, 2,
 				  (GtkAttachOptions) (GTK_FILL),
 				  (GtkAttachOptions) (0), 0, 0);
 
-		button = gtk_button_new_with_label (_("Delete this MIME type..."));
+		button = gtk_button_new_with_label (_("Delete This MIME Type"));
 		gtk_signal_connect (GTK_OBJECT (button), "clicked", delete_mime_clicked, NULL);
 		gtk_table_attach (GTK_TABLE (small_table), button, 0, 1, 2, 3,
 				  (GtkAttachOptions) (GTK_FILL),
