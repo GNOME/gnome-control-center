@@ -7,6 +7,8 @@ AM_MAINTAINER_MODE
 
 AM_ACLOCAL_INCLUDE(macros)
 
+AM_PROG_XML_I18N_TOOLS
+
 dnl
 dnl let applications configure for gnome
 dnl
@@ -115,6 +117,28 @@ echo "ftp://www.rasterman.com/pub/enlightenment/"
 echo "ftp://ftp.labs.redhat.com/pub/imlib/"
 AC_MSG_ERROR([Fatal Error: no Imlib detected.])])
 
+
+dnl
+dnl gnome-vfs
+dnl
+AC_MSG_CHECKING(for gnome-vfs library >= 0.9)
+VFS_CFLAGS=`gnome-vfs-config --cflags`
+VFS_LIBS=`gnome-vfs-config --libs vfs`
+if test "x$VFS_CFLAGS" != x ; then
+    vers=`gnome-vfs-config --version | awk 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
+    if test "$vers" -ge 0004200; then
+        AC_MSG_RESULT(found)
+    else
+       AC_MSG_ERROR(You need at least gnome-vfs version 0.4.2 for control-center)
+    fi
+else
+    AC_MSG_ERROR(Did not find GdkPixbuf installed)
+fi
+AC_SUBST(VFS_CFLAGS)
+AC_SUBST(VFS_LIBS)
+
+
+
 AC_DEFINE_UNQUOTED(GNOME_ICONDIR, "${prefix}/share/pixmaps")
 
 AC_OUTPUT([
@@ -127,7 +151,8 @@ macros/Makefile
 control-center/Makefile
 capplets/Makefile
 capplets/mouse-properties/Makefile
-capplets/mime-type/Makefile
+capplets/file-types/Makefile
+capplets/file-types/libuuid/Makefile
 capplets/keyboard-properties/Makefile
 capplets/desktop-links/Makefile
 capplets/background-properties/Makefile

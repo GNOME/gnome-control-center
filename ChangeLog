@@ -1,3 +1,29 @@
+2001-03-07  Maciej Stachowiak  <mjs@eazel.com>
+
+	Part of the fix for bugzilla.eazel.com bug 588 (Remove old "MIME
+	types" capplet from control center)
+
+	* autogen.sh: xml-i18n-toolize
+	* configure.in: Check for gnome-vfs, generate Makefiles for capplet/file-types
+	* control-center.spec.in: Depend on gnome-vfs, newer ORBit.
+
+	* capplets/Makefile.am: Add file-types capplet to build, remove
+	mime-type capplet.
+	
+	* capplets/file-types/Makefile.am,
+	capplets/file-types/file-types-capplet-dialogs.c,
+	capplets/file-types/file-types-capplet.c,
+	capplets/file-types/file-types-icon-entry.c,
+	capplets/file-types/file-types-capplet-dialogs.h,
+	capplets/file-types/file-types-capplet.h,
+	capplets/file-types/file-types-icon-entry.h: New MIME capplet
+	moved here from gnome-vfs.
+
+	* capplets/mime-type/*: removed.
+
+	* po/POTFILES.in: Removed old mime-type capplet files, added
+	file-types capplet files.
+
 2001-02-22  Gene Z. Ragan  <gzr@eazel.com>
 
 	reviewed by: Jacob Berkman <jacob@ximian.com>

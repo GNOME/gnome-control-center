@@ -21,7 +21,8 @@ Docdir: %{prefix}/doc
 
 Requires: xscreensaver >= 3.00
 Requires: gnome-libs >= 1.0.0
-Requires: ORBit >= 0.4.0
+Requires: ORBit >= 0.5.6
+Requires: gnome-vfs >= 0.9
 
 %description
 Control-center is a configuration tool for easily
@@ -120,6 +121,7 @@ rm -rf $RPM_BUILD_ROOT
 %{prefix}/lib/lib*.so.*
 /etc/CORBA/servers/*
 %{prefix}/share/control-center
+%{prefix}/share/control-center/*
 %{prefix}/share/pixmaps/*
 # install is broken have not figured out quite where 
 # Tue Jul 11 07:06:54 PDT 2000 Robin * Slomkowski <rslomkow@eazel.com>

@@ -58,6 +58,16 @@ grep "^AM_GNU_GETTEXT" configure.in >/dev/null && {
   }
 }
 
+
+(grep "^AM_PROG_XML_I18N_TOOLS" $srcdir/configure.in >/dev/null) && {
+  (xml-i18n-toolize --version) < /dev/null > /dev/null 2>&1 || {
+    echo 
+    echo "You must have xml-i18n-tools installed to compile $PROJECT."
+    DIE = 1;
+  }
+}
+
+
 if test "$DIE" -eq 1; then
 	exit 1
 fi
@@ -108,6 +118,10 @@ do
 	echo "no" | gettextize --force --copy
 	echo "Making $dr/aclocal.m4 writable ..."
 	test -r $dr/aclocal.m4 && chmod u+w $dr/aclocal.m4
+      fi
+      if grep "^AM_PROG_XML_I18N_TOOLS" configure.in >/dev/null; then
+        echo "Running xml-i18n-toolize..."
+	xml-i18n-toolize --copy --force --automake
       fi
       if grep "^AM_PROG_LIBTOOL" configure.in >/dev/null; then
 	echo "Running libtoolize..."
