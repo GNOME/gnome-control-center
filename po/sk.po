@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.5.1\n"
-"POT-Creation-Date: 2002-03-07 10:51+0100\n"
-"PO-Revision-Date: 2002-03-07 10:52+0100\n"
+"POT-Creation-Date: 2002-03-13 14:56+0100\n"
+"PO-Revision-Date: 2002-03-13 14:57+0100\n"
 "Last-Translator: Stanislav Višňovský <visnovsky@nenya.ms.mff.cuni.cz>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -22,16 +22,20 @@ msgstr "Pozadie"
 msgid "Configuration of the desktop's background"
 msgstr "Nastavenie pozadia plochy"
 
-#: capplets/background/background-properties-capplet.c:289
+#: capplets/background/background-properties-capplet.c:238
+msgid "Please select a background image"
+msgstr "Prosím, vyberte obrázok pre pozadie"
+
+#: capplets/background/background-properties-capplet.c:292
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:575
-#: capplets/keyboard/gnome-keyboard-properties.c:319
-#: capplets/mouse/gnome-mouse-properties.c:678
-#: capplets/sound/sound-properties-capplet.c:138
+#: capplets/default-applications/gnome-default-applications-properties.c:622
+#: capplets/keyboard/gnome-keyboard-properties.c:320
+#: capplets/mouse/gnome-mouse-properties.c:681
+#: capplets/sound/sound-properties-capplet.c:140
 msgid "Retrieve and store legacy settings"
 msgstr "Získať a uložiť predchádzajúce nastavenie"
 
-#: capplets/background/background-properties-capplet.c:312
+#: capplets/background/background-properties-capplet.c:315
 msgid "Background properties"
 msgstr "Vlastnosti pozadia"
 
@@ -292,7 +296,6 @@ msgid "Legacy applications settings (grdb)"
 msgstr "Nastavenie starších aplikácií (grdb)"
 
 #: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
-#: control-center/gnomecc.glade.h:1
 msgid "Appearance"
 msgstr "Vzhľad"
 
@@ -517,7 +520,7 @@ msgid "Add service..."
 msgstr "Pridať službu..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
-#: capplets/file-types/mime-edit-dialog.c:748
+#: capplets/file-types/mime-edit-dialog.c:750
 msgid "Category"
 msgstr "Kategória"
 
@@ -658,7 +661,7 @@ msgstr "TRUE ak je to dialóg pre pridanie typu MIME"
 msgid "None"
 msgstr "Žiadny"
 
-#: capplets/file-types/mime-edit-dialog.c:673
+#: capplets/file-types/mime-edit-dialog.c:675
 msgid ""
 "Invalid MIME type. Please enter a valid MIME type, or leave the field blank "
 "to have one generated for you."
@@ -666,11 +669,11 @@ msgstr ""
 "Neplatný typ MIME. Prosím, zadajte platný typ MIME alebo nechajte pole "
 "prázdne, aby sa meno vygenerovalo za vás."
 
-#: capplets/file-types/mime-edit-dialog.c:684
+#: capplets/file-types/mime-edit-dialog.c:686
 msgid "There already exists a MIME type of that name."
 msgstr "Už existuje typ MIME s týmto menom."
 
-#: capplets/file-types/mime-edit-dialog.c:753
+#: capplets/file-types/mime-edit-dialog.c:755
 msgid "Choose a file category"
 msgstr "Vyberte kategóriu súboru"
 
@@ -759,10 +762,10 @@ msgstr "Písmo"
 msgid "Select which font to use"
 msgstr "Vyberte, ktoré písmo sa má použiť"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:315
-#: capplets/keyboard/gnome-keyboard-properties.c:317
-#: capplets/sound/sound-properties-capplet.c:134
+#: capplets/keyboard/gnome-keyboard-properties.c:316
+#: capplets/keyboard/gnome-keyboard-properties.c:318
 #: capplets/sound/sound-properties-capplet.c:136
+#: capplets/sound/sound-properties-capplet.c:138
 msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "Použiť nastavenia a skončiť (iba pre kompatibilitu, teraz spracováva démon)"
 
@@ -901,7 +904,7 @@ msgstr "_Hlasitosť:"
 msgid "Keyboard"
 msgstr "Klávesnica"
 
-#: capplets/mouse/gnome-mouse-properties.c:407
+#: capplets/mouse/gnome-mouse-properties.c:410
 #, c-format
 msgid ""
 "<b>Unknown Cursor</b>\n"
@@ -910,7 +913,7 @@ msgstr ""
 "<b>Neznámy kurzor</b>\n"
 "%s"
 
-#: capplets/mouse/gnome-mouse-properties.c:505
+#: capplets/mouse/gnome-mouse-properties.c:508
 msgid ""
 "<b>Default Cursor - Current</b>\n"
 "The default cursor that ships with X"
@@ -918,7 +921,7 @@ msgstr ""
 "<b>Štandardný kurzor - aktuálny</b>\n"
 "Štandardný kurzor dodávaný s X"
 
-#: capplets/mouse/gnome-mouse-properties.c:508
+#: capplets/mouse/gnome-mouse-properties.c:511
 msgid ""
 "<b>Default Cursor</b>\n"
 "The default cursor that ships with X"
@@ -926,7 +929,7 @@ msgstr ""
 "<b>Štandardný kurzor</b>\n"
 "Štandardný kurzor dodávaný s X"
 
-#: capplets/mouse/gnome-mouse-properties.c:526
+#: capplets/mouse/gnome-mouse-properties.c:529
 msgid ""
 "<b>White Cursor - Current</b>\n"
 "The default cursor inverted"
@@ -934,7 +937,7 @@ msgstr ""
 "<b>Biely kurzor - aktuálny</b>\n"
 "Invertovaný štandardný kurzor"
 
-#: capplets/mouse/gnome-mouse-properties.c:529
+#: capplets/mouse/gnome-mouse-properties.c:532
 msgid ""
 "<b>White Cursor</b>\n"
 "The default cursor inverted"
@@ -942,7 +945,7 @@ msgstr ""
 "<b>Biely kurzor</b>\n"
 "Invertovaný štandardný kurzor"
 
-#: capplets/mouse/gnome-mouse-properties.c:547
+#: capplets/mouse/gnome-mouse-properties.c:550
 msgid ""
 "<b>Large Cursor - Current</b>\n"
 "Large version of normal cursor"
@@ -950,7 +953,7 @@ msgstr ""
 "<b>Veľký kurzor - aktuálny</b>\n"
 "Veľká verzia normálneho kurzoru"
 
-#: capplets/mouse/gnome-mouse-properties.c:550
+#: capplets/mouse/gnome-mouse-properties.c:553
 msgid ""
 "<b>Large Cursor</b>\n"
 "Large version of normal cursor"
@@ -958,7 +961,7 @@ msgstr ""
 "<b>Veľký kurzor</b>\n"
 "Veľká verzia normálneho kurzoru"
 
-#: capplets/mouse/gnome-mouse-properties.c:568
+#: capplets/mouse/gnome-mouse-properties.c:571
 msgid ""
 "<b>Large White Cursor - Current</b>\n"
 "Large version of white cursor"
@@ -966,7 +969,7 @@ msgstr ""
 "<b>Veľký biely kurzor - aktuálny</b>\n"
 "Veľká verzia bieleho kurzoru"
 
-#: capplets/mouse/gnome-mouse-properties.c:571
+#: capplets/mouse/gnome-mouse-properties.c:574
 msgid ""
 "<b>Large White Cursor</b>\n"
 "Large version of white cursor"
@@ -974,7 +977,7 @@ msgstr ""
 "<b>Veľký biely kurzor</b>\n"
 "Veľká verzia bieleho kurzoru"
 
-#: capplets/mouse/gnome-mouse-properties.c:703
+#: capplets/mouse/gnome-mouse-properties.c:708
 #: capplets/mouse/gnome-mouse-properties.glade.h:18
 #: capplets/mouse/mouse.desktop.in.h:2
 msgid "Mouse Properties"
@@ -1116,7 +1119,7 @@ msgstr "Šetrič obrazovky"
 msgid "Configure GNOME's use of sound"
 msgstr "Nastavenie zvuku v GNOME"
 
-#: capplets/sound/sound-properties-capplet.c:162
+#: capplets/sound/sound-properties-capplet.c:170
 msgid "Sound properties"
 msgstr "Vlastnosti zvuku"
 
@@ -1224,26 +1227,14 @@ msgid "Select which gtk+ theme to use"
 msgstr "Vyberte, ktorá téma Gtk+ sa má použiť"
 
 #: capplets/theme-switcher/gtk-theme-selector.glade.h:1
-msgid "Auto Preview"
-msgstr "Automatický náhľad"
-
-#: capplets/theme-switcher/gtk-theme-selector.glade.h:2
-msgid "Available Themes"
-msgstr "Témy k dispozícii"
-
-#: capplets/theme-switcher/gtk-theme-selector.glade.h:3
 msgid "Gtk+ Theme"
 msgstr "Téma Gtk+"
 
-#: capplets/theme-switcher/gtk-theme-selector.glade.h:4
+#: capplets/theme-switcher/gtk-theme-selector.glade.h:2
 msgid "Install new theme..."
 msgstr "Inštalovať novú tému..."
 
-#: capplets/theme-switcher/gtk-theme-selector.glade.h:5
-msgid "Preview"
-msgstr "Náhľad"
-
-#: capplets/theme-switcher/main.c:218
+#: capplets/theme-switcher/main.c:211
 msgid "Select a theme to install"
 msgstr "Vyberte tému, ktorú nainštalovať"
 
@@ -1343,48 +1334,36 @@ msgstr "_Menu"
 msgid "_Toolbars have: "
 msgstr "_Panely nástrojov majú:"
 
-#: control-center/capplet-dir-view.c:148
+#: control-center/capplet-dir-view.c:153
 msgid "Layout"
 msgstr "Rozloženie"
 
-#: control-center/capplet-dir-view.c:149
+#: control-center/capplet-dir-view.c:154
 msgid "Layout to use for this view of the capplets"
 msgstr "Rozloženie pre tento pohľad modulu"
 
-#: control-center/capplet-dir-view.c:155
+#: control-center/capplet-dir-view.c:160
 msgid "Capplet directory object"
 msgstr "Objekt priečinku modulov"
 
-#: control-center/capplet-dir-view.c:156
+#: control-center/capplet-dir-view.c:161
 msgid "Capplet directory that this view is viewing"
 msgstr "Priečinok modulov, ktorý tento pohľad zobrazuje."
 
-#: control-center/capplet-dir-view.c:313 control-center/gnomecc.desktop.in.h:1
+#: control-center/capplet-dir-view.c:318 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
 msgstr "GNOME Ovládacie centrum"
 
-#: control-center/capplet-dir-view.c:316
+#: control-center/capplet-dir-view.c:321
 msgid "Desktop properties manager."
 msgstr "Správca nastavenia."
 
-#: control-center/capplet-dir-view.c:450
+#: control-center/capplet-dir-view.c:457
 #, c-format
 msgid "Gnome Control Center : %s"
 msgstr "GNOME Ovládacie centrum: %s"
 
-#: control-center/capplet-dir-view.c:503
-msgid ""
-"No help is available/installed. Please make sure you\n"
-"have the GNOME User's Guide installed on your system."
-msgstr ""
-"Pre tieto nastavenia nie je pomocník k dispozícii. Prosím, overte, že\n"
-"máte nainštalovaný Používateľský manuál GNOME."
-
-#: control-center/capplet-dir-view.c:506
-msgid "Close"
-msgstr "Zavrieť"
-
-#: control-center/capplet-dir-view-list.c:325
+#: control-center/capplet-dir-view-list.c:324
 #, c-format
 msgid "GNOME Control Center: %s"
 msgstr "GNOME Ovládacie centrum: %s"
@@ -1393,37 +1372,21 @@ msgstr "GNOME Ovládacie centrum: %s"
 msgid "The GNOME configuration tool"
 msgstr "Nástroj pre nastavenie GNOME"
 
-#: control-center/gnomecc.glade.h:2
-msgid "Browse with multiple windows"
-msgstr "Prehliadať pomocou viacerých okien"
+#: control-center/gnomecc-ui.xml.h:1
+msgid "About this application"
+msgstr "O tejto aplikácii"
 
-#: control-center/gnomecc.glade.h:3
-msgid "Browse with single window"
-msgstr "Prehliadať v jednom okne"
+#: control-center/gnomecc-ui.xml.h:2
+msgid "_About..."
+msgstr "_O programe..."
 
-#: control-center/gnomecc.glade.h:4
-msgid "Display control panels as HTML"
-msgstr "Zobraziť ovládacie panely ako HTML"
+#: control-center/gnomecc-ui.xml.h:3
+msgid "_File"
+msgstr "_Súbor"
 
-#: control-center/gnomecc.glade.h:5
-msgid "Display control panels as a set of icons"
-msgstr "Zobraziť ovládacie panely ako skupinu ikon"
-
-#: control-center/gnomecc.glade.h:6
-msgid "Display control panels as a tree"
-msgstr "Zobraziť ovládacie panely ako strom"
-
-#: control-center/gnomecc.glade.h:7
-msgid "Launch control panels in separate windows"
-msgstr "Spustiť ovládacie panely v samostatných oknách"
-
-#: control-center/gnomecc.glade.h:8
-msgid "New-control-center"
-msgstr "GNOME Ovládacie centrum"
-
-#: control-center/gnomecc.glade.h:9
-msgid "Put control panels in the control center's window"
-msgstr "Vložiť ovládacie panely do okna ovládacieho centra"
+#: control-center/gnomecc-ui.xml.h:4
+msgid "_Help"
+msgstr "_Pomocník"
 
 #: control-center/main.c:43
 msgid "Use shell even if nautilus is running."
@@ -1449,6 +1412,14 @@ msgstr "Nepodarilo sa načítať \"%s\", vypínam tapetu."
 #: libbackground/applier.c:515
 msgid "Disabled"
 msgstr "Zakázané"
+
+#: libbackground/preview-file-selection.c:186
+msgid "Can't find an hbox, using a normal file selection"
+msgstr "Nepodarilo sa nájsť hbox, použijem normálny výber súboru"
+
+#: libbackground/preview-file-selection.c:191
+msgid "Preview"
+msgstr "Náhľad"
 
 #: libsounds/sound-view.c:116
 msgid "The sound file for this event does not exist."
@@ -1479,4 +1450,44 @@ msgstr "Zahrať"
 #: libsounds/sound-view.c:244
 msgid "Select sound file"
 msgstr "Vyberte zvukový súbor"
+
+#~ msgid "Auto Preview"
+#~ msgstr "Automatický náhľad"
+
+#~ msgid "Available Themes"
+#~ msgstr "Témy k dispozícii"
+
+#~ msgid ""
+#~ "No help is available/installed. Please make sure you\n"
+#~ "have the GNOME User's Guide installed on your system."
+#~ msgstr ""
+#~ "Pre tieto nastavenia nie je pomocník k dispozícii. Prosím, overte, že\n"
+#~ "máte nainštalovaný Používateľský manuál GNOME."
+
+#~ msgid "Close"
+#~ msgstr "Zavrieť"
+
+#~ msgid "Browse with multiple windows"
+#~ msgstr "Prehliadať pomocou viacerých okien"
+
+#~ msgid "Browse with single window"
+#~ msgstr "Prehliadať v jednom okne"
+
+#~ msgid "Display control panels as HTML"
+#~ msgstr "Zobraziť ovládacie panely ako HTML"
+
+#~ msgid "Display control panels as a set of icons"
+#~ msgstr "Zobraziť ovládacie panely ako skupinu ikon"
+
+#~ msgid "Display control panels as a tree"
+#~ msgstr "Zobraziť ovládacie panely ako strom"
+
+#~ msgid "Launch control panels in separate windows"
+#~ msgstr "Spustiť ovládacie panely v samostatných oknách"
+
+#~ msgid "New-control-center"
+#~ msgstr "GNOME Ovládacie centrum"
+
+#~ msgid "Put control panels in the control center's window"
+#~ msgstr "Vložiť ovládacie panely do okna ovládacieho centra"
 
