@@ -173,6 +173,22 @@ realize_cb (GtkWidget *widget, Preferences *prefs)
 }
 
 static void
+peditor_value_changed (GConfPropertyEditor *peditor, const gchar *key, const GConfValue *value, Preferences *prefs) 
+{
+	GConfEntry *entry;
+	Applier *applier;
+
+	entry = gconf_entry_new (key, value);
+	preferences_merge_entry (prefs, entry);
+	gconf_entry_free (entry);
+
+	applier = g_object_get_data (G_OBJECT (prefs), "applier");
+
+	if (GTK_WIDGET_REALIZED (applier_get_preview_widget (applier)))
+		applier_apply_prefs (applier, PREFERENCES (prefs));
+}
+
+static void
 setup_dialog (GtkWidget *widget, GConfChangeSet *changeset)
 {
 	GladeXML                      *dialog;
@@ -181,12 +197,20 @@ setup_dialog (GtkWidget *widget, GConfChangeSet *changeset)
 	GConfEngine                   *engine;
 	GObject                       *peditor;
 
+	prefs = preferences_new ();
+	preferences_load (PREFERENCES (prefs));
+
 	dialog = g_object_get_data (G_OBJECT (widget), "glade-data");
 	peditor = gconf_peditor_new_select_menu (changeset, "/background-properties/orientation", WID ("color_option"));
+	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
 	peditor = gconf_peditor_new_color (changeset, "/background-properties/color1", WID ("colorpicker1"));
+	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
 	peditor = gconf_peditor_new_color (changeset, "/background-properties/color2", WID ("colorpicker2"));
+	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
 	peditor = gconf_peditor_new_filename (changeset, "/background-properties/wallpaper-filename", WID ("image_fileentry"));
+	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
 	peditor = gconf_peditor_new_select_menu (changeset, "/background-properties/wallpaper-type", WID ("image_option"));
+	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
 
 #if 0
 	gconf_peditor_new_int_spin (changeset, "/background-properties/opacity", WID ("opacity_spin"));
@@ -203,12 +227,10 @@ setup_dialog (GtkWidget *widget, GConfChangeSet *changeset)
 	engine = gconf_engine_get_default ();
 	gconf_engine_set_bool (engine, "enabled", TRUE, NULL);
 
-	prefs = preferences_new ();
-	preferences_load (PREFERENCES (prefs));
+	applier = g_object_get_data (G_OBJECT (widget), "applier");
 
 	g_object_set_data (prefs, "glade-data", dialog);
-
-	applier = g_object_get_data (G_OBJECT (widget), "applier");
+	g_object_set_data (prefs, "applier", applier);
 
 	if (GTK_WIDGET_REALIZED (applier_get_preview_widget (applier)))
 		applier_apply_prefs (applier, PREFERENCES (prefs));
