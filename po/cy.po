@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-13 02:05-0500\n"
+"POT-Creation-Date: 2004-01-14 01:22-0500\n"
 "PO-Revision-Date: 2003-08-27 00:31+0100\n"
 "Last-Translator: Dafydd Harries <daf@parnassus.ath.cx>\n"
 "Language-Team: Cymraeg <gnome-cy@www.linux.org.uk>\n"
@@ -455,9 +455,78 @@ msgid "Desktop Wallpaper"
 msgstr ""
 
 #: capplets/background/background.desktop.in.h:2
+#: capplets/background/gnome-wp-capplet.c:1146
 #, fuzzy
 msgid "Desktop Wallpaper Preferences"
 msgstr "Hoffterau Bysellfwrdd"
+
+#: capplets/background/gnome-wp-capplet.c:72
+#: capplets/common/capplet-util.c:340
+#, c-format
+msgid "There was an error displaying help: %s"
+msgstr "Gwall wrth ddangos cymorth:%s"
+
+#: capplets/background/gnome-wp-capplet.c:169
+msgid "Add Wallpapers"
+msgstr ""
+
+#: capplets/background/gnome-wp-capplet.c:1191
+#, fuzzy
+msgid "<b>Desktop _Wallpaper</b>"
+msgstr "Hoffterau Bysellfwrdd"
+
+#: capplets/background/gnome-wp-capplet.c:1276
+#, fuzzy
+msgid "_Style:"
+msgstr "Arddull:"
+
+#: capplets/background/gnome-wp-capplet.c:1303
+#, fuzzy
+msgid "Centered"
+msgstr "C_anoli"
+
+#: capplets/background/gnome-wp-capplet.c:1325
+#, fuzzy
+msgid "Fill Screen"
+msgstr "Sgrîn"
+
+#: capplets/background/gnome-wp-capplet.c:1345
+#, fuzzy
+msgid "Scaled"
+msgstr "G_raddio"
+
+#: capplets/background/gnome-wp-capplet.c:1365
+#, fuzzy
+msgid "Tiled"
+msgstr "_Teilio"
+
+#: capplets/background/gnome-wp-capplet.c:1402
+msgid "_Add Wallpaper"
+msgstr ""
+
+#. The Wallpaper Background Colors Section
+#: capplets/background/gnome-wp-capplet.c:1433
+msgid "<b>_Desktop Colors</b> "
+msgstr ""
+
+#: capplets/background/gnome-wp-capplet.c:1465
+#, fuzzy
+msgid "Solid Color"
+msgstr "Lliw unffurf"
+
+#: capplets/background/gnome-wp-capplet.c:1481
+#, fuzzy
+msgid "Horizontal Gradient"
+msgstr "Graddfa ar led"
+
+#: capplets/background/gnome-wp-capplet.c:1497
+#, fuzzy
+msgid "Vertical Gradient"
+msgstr "Graddfa fertigol"
+
+#: capplets/background/gnome-wp-info.c:46
+msgid "No Wallpaper"
+msgstr ""
 
 #: capplets/common/activate-settings-daemon.c:18
 msgid ""
@@ -481,11 +550,6 @@ msgstr "Methu llwytho'r eicon stoc capplet '%s'\n"
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "Cymhwyso'r gosodiadau a terfynu"
-
-#: capplets/common/capplet-util.c:340
-#, c-format
-msgid "There was an error displaying help: %s"
-msgstr "Gwall wrth ddangos cymorth:%s"
 
 #: capplets/common/file-transfer-dialog.c:95
 #, c-format
@@ -2719,6 +2783,54 @@ msgstr "Defnyddio plisgyn, er rheda nautilus"
 msgid "Could not initialize Bonobo"
 msgstr "Methu ymgychwyn Bonobo"
 
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:325
+#, fuzzy
+msgid "There was an error displaying help:"
+msgstr "Gwall wrth ddangos cymorth:%s"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
+msgid "Slow Keys Alert"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+msgid ""
+"You just held down the Shift key for 8 seconds.  This is the shortcut for "
+"the Slow Keys feature, which affects the way your keyboard works."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
+#, fuzzy
+msgid "Do you want to activate Slow Keys?"
+msgstr "A hoffech gadw'r cyfranniad yma?"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
+#, fuzzy
+msgid "Do you want to deactivate Sticky Keys ?"
+msgstr "A hoffech gadw'r cyfranniad yma?"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:424
+msgid "Sticky Keys Alert"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:425
+msgid ""
+"You just pressed the Shift key 5 times in a row.  This is the shortcut for "
+"the Sticky Keys feature, which affects the way your keyboard works."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
+msgid ""
+"You just pressed two keys at once, or pressed the Shift key 5 times in a "
+"row.  This turns off the Sticky Keys feature, which affects the way your "
+"keyboard works."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
+#, fuzzy
+msgid "Do you want to activate Sticky Keys?"
+msgstr "A hoffech gadw'r cyfranniad yma?"
+
 #: gnome-settings-daemon/gnome-settings-font.c:102
 #, c-format
 msgid ""
@@ -3330,6 +3442,211 @@ msgstr "A ddylid creu lluniau cryno o themâu sefydliedig"
 msgid "Whether to thumbnail themes"
 msgstr "A ddylid creu lluniau cryno o themâu"
 
+#: gnome-settings-daemon/actions/acme.glade.h:1
+#, fuzzy
+msgid "Volume"
+msgstr "_Lefel Sain:"
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:113
+#, c-format
+msgid ""
+"Couldn't execute command: %s\n"
+"Verify that this command exists."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:129
+msgid ""
+"Couldn't put the machine to sleep.\n"
+"Verify that the machine is correctly configured."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:139
+#, c-format
+msgid "Permissions on the file %s are broken\n"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:900
+msgid ""
+"Couldn't load the Glade file.\n"
+"Make sure that this daemon is properly installed."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:1
+msgid "Brightness down"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:2
+msgid "Brightness down's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:3
+msgid "Brightness up"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
+msgid "Brightness up's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
+#, fuzzy
+msgid "E-mail"
+msgstr "Ebost"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:6
+msgid "E-mail's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
+#, fuzzy
+msgid "Eject"
+msgstr "Digwyddiad"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
+#, fuzzy
+msgid "Eject's shortcut."
+msgstr "_Byrlwybrau penbwrdd:"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
+#, fuzzy
+msgid "Home Folder"
+msgstr "_Mynd i'r Blygell Thema"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
+#, fuzzy
+msgid "Launch Help Browser"
+msgstr "Porydd Cymorth"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
+msgid "Launch Help Browser's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
+#, fuzzy
+msgid "Launch Web Browser"
+msgstr "Porwr Gwe"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
+msgid "Launch Web Browser's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
+#, fuzzy
+msgid "Lock Screen"
+msgstr "Sgrîn"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
+msgid "Lock Screen's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
+#, fuzzy
+msgid "Log Out"
+msgstr "Cyflwyniad"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
+msgid "Log Out's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
+msgid "My Home Folder's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
+msgid "Next track key's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
+#, fuzzy
+msgid "Pause"
+msgstr "_Gludo"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
+msgid "Pause key's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
+msgid "Play (or Play/Pause)"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
+msgid "Play (or Play/Pause) key's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
+msgid "Previous track key's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
+msgid "Search"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
+#, fuzzy
+msgid "Search's shortcut."
+msgstr "Byrlwybr"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
+msgid "Skip to Next track"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
+msgid "Skip to Previous track"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
+#, fuzzy
+msgid "Sleep"
+msgstr "Cyflymder"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
+#, fuzzy
+msgid "Sleep's shortcut."
+msgstr "Byrlwybr"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
+msgid "Stop playback key"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
+msgid "Stop playback key's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
+#, fuzzy
+msgid "Volume down"
+msgstr "_Lefel Sain:"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
+msgid "Volume down's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
+#, fuzzy
+msgid "Volume mute"
+msgstr "_Lefel Sain:"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
+msgid "Volume mute's shortcut"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
+#, fuzzy
+msgid "Volume step"
+msgstr "_Lefel Sain:"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:38
+msgid "Volume step as percentage of volume."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:39
+#, fuzzy
+msgid "Volume up"
+msgstr "_Lefel Sain:"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
+msgid "Volume up's shortcut."
+msgstr ""
+
 #~ msgid "Background"
 #~ msgstr "Cefndir"
 
@@ -3372,9 +3689,6 @@ msgstr "A ddylid creu lluniau cryno o themâu"
 
 #~ msgid "Default Help Browser"
 #~ msgstr "Porwr Cymorth Arferol"
-
-#~ msgid "Help Browser"
-#~ msgstr "Porydd Cymorth"
 
 #~ msgid "_Select a Help Browser:"
 #~ msgstr "_Dewiswch Borwr Cymorth:"
@@ -3466,9 +3780,6 @@ msgstr "A ddylid creu lluniau cryno o themâu"
 #~ msgid "_Off"
 #~ msgstr "_I ffwrdd"
 
-#~ msgid "_Volume:"
-#~ msgstr "_Lefel Sain:"
-
 #~ msgid "loud"
 #~ msgstr "uchel"
 
@@ -3509,9 +3820,6 @@ msgstr "A ddylid creu lluniau cryno o themâu"
 
 #~ msgid "Set the speed of your pointing device."
 #~ msgstr "Gosodwch gyflymder eich dyfais bwyntio"
-
-#~ msgid "Speed"
-#~ msgstr "Cyflymder"
 
 #~ msgid "_Delay (sec):"
 #~ msgstr "_Oediad (eil):"

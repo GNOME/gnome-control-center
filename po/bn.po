@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gnome Control Center 2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-13 02:05-0500\n"
+"POT-Creation-Date: 2004-01-14 01:22-0500\n"
 "PO-Revision-Date: 2003-03-07 12:12+0600\n"
 "Last-Translator: Progga <abulfazl@juniv.edu>\n"
 "Language-Team: Bangla <gnome-translation@bengalinux.org>\n"
@@ -442,9 +442,81 @@ msgid "Desktop Wallpaper"
 msgstr "_ওয়ালপেপার"
 
 #: capplets/background/background.desktop.in.h:2
+#: capplets/background/gnome-wp-capplet.c:1146
 #, fuzzy
 msgid "Desktop Wallpaper Preferences"
 msgstr "কীবোর্ড সম্বন্ধীয় পছন্দ"
+
+#: capplets/background/gnome-wp-capplet.c:72
+#: capplets/common/capplet-util.c:340
+#, c-format
+msgid "There was an error displaying help: %s"
+msgstr "সহায়ক তথ্য দেখাতে সমস্যা হয়েছে: %s"
+
+#: capplets/background/gnome-wp-capplet.c:169
+#, fuzzy
+msgid "Add Wallpapers"
+msgstr "_ওয়ালপেপার"
+
+#: capplets/background/gnome-wp-capplet.c:1191
+#, fuzzy
+msgid "<b>Desktop _Wallpaper</b>"
+msgstr "_ওয়ালপেপার"
+
+#: capplets/background/gnome-wp-capplet.c:1276
+#, fuzzy
+msgid "_Style:"
+msgstr "বর্গ:"
+
+#: capplets/background/gnome-wp-capplet.c:1303
+#, fuzzy
+msgid "Centered"
+msgstr "কে_ন্দ্রস্থিত"
+
+#: capplets/background/gnome-wp-capplet.c:1325
+#, fuzzy
+msgid "Fill Screen"
+msgstr "পর্দা"
+
+#: capplets/background/gnome-wp-capplet.c:1345
+#, fuzzy
+msgid "Scaled"
+msgstr "_মাপা"
+
+#: capplets/background/gnome-wp-capplet.c:1365
+#, fuzzy
+msgid "Tiled"
+msgstr "_টাইল"
+
+#: capplets/background/gnome-wp-capplet.c:1402
+#, fuzzy
+msgid "_Add Wallpaper"
+msgstr "_ওয়ালপেপার"
+
+#. The Wallpaper Background Colors Section
+#: capplets/background/gnome-wp-capplet.c:1433
+msgid "<b>_Desktop Colors</b> "
+msgstr ""
+
+#: capplets/background/gnome-wp-capplet.c:1465
+#, fuzzy
+msgid "Solid Color"
+msgstr "সুষম রং"
+
+#: capplets/background/gnome-wp-capplet.c:1481
+#, fuzzy
+msgid "Horizontal Gradient"
+msgstr "অনুভূমিক ঢালের মাত্রা"
+
+#: capplets/background/gnome-wp-capplet.c:1497
+#, fuzzy
+msgid "Vertical Gradient"
+msgstr "উল্লম্ব ঢালের মাত্রা"
+
+#: capplets/background/gnome-wp-info.c:46
+#, fuzzy
+msgid "No Wallpaper"
+msgstr "_ওয়ালপেপার"
 
 #: capplets/common/activate-settings-daemon.c:18
 msgid ""
@@ -467,11 +539,6 @@ msgstr "সিঅ্যাপলেট স্টক আইকন '%s' পড়া 
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "সেটিংগুলোকে কার্যকর করুন এবং প্রোগ্রামটি বন্ধ করুন"
-
-#: capplets/common/capplet-util.c:340
-#, c-format
-msgid "There was an error displaying help: %s"
-msgstr "সহায়ক তথ্য দেখাতে সমস্যা হয়েছে: %s"
 
 #: capplets/common/file-transfer-dialog.c:95
 #, c-format
@@ -2695,6 +2762,54 @@ msgstr "যদি নটিল্যাস চলতেও থাকে তব�
 msgid "Could not initialize Bonobo"
 msgstr "বনোবোর প্রাথমিক প্রস্তুতি সম্পন্ন করা যায়নি"
 
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:325
+#, fuzzy
+msgid "There was an error displaying help:"
+msgstr "সহায়ক তথ্য দেখাতে সমস্যা হয়েছে: %s"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
+msgid "Slow Keys Alert"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+msgid ""
+"You just held down the Shift key for 8 seconds.  This is the shortcut for "
+"the Slow Keys feature, which affects the way your keyboard works."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
+#, fuzzy
+msgid "Do you want to activate Slow Keys?"
+msgstr "আপনি কি এই রেসোলিউশনে কাজ করতে চান?"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
+#, fuzzy
+msgid "Do you want to deactivate Sticky Keys ?"
+msgstr "আপনি কি এই রেসোলিউশনে কাজ করতে চান?"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:424
+msgid "Sticky Keys Alert"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:425
+msgid ""
+"You just pressed the Shift key 5 times in a row.  This is the shortcut for "
+"the Sticky Keys feature, which affects the way your keyboard works."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
+msgid ""
+"You just pressed two keys at once, or pressed the Shift key 5 times in a "
+"row.  This turns off the Sticky Keys feature, which affects the way your "
+"keyboard works."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
+#, fuzzy
+msgid "Do you want to activate Sticky Keys?"
+msgstr "আপনি কি এই রেসোলিউশনে কাজ করতে চান?"
+
 #: gnome-settings-daemon/gnome-settings-font.c:102
 #, c-format
 msgid ""
@@ -3292,6 +3407,212 @@ msgstr "ইনস্টল করা থিম থাম্বনেল কর�
 msgid "Whether to thumbnail themes"
 msgstr "থিম থাম্বনেল করা হবে কিনা"
 
+#: gnome-settings-daemon/actions/acme.glade.h:1
+#, fuzzy
+msgid "Volume"
+msgstr "_আয়তনঃ"
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:113
+#, c-format
+msgid ""
+"Couldn't execute command: %s\n"
+"Verify that this command exists."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:129
+msgid ""
+"Couldn't put the machine to sleep.\n"
+"Verify that the machine is correctly configured."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:139
+#, c-format
+msgid "Permissions on the file %s are broken\n"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:900
+msgid ""
+"Couldn't load the Glade file.\n"
+"Make sure that this daemon is properly installed."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:1
+msgid "Brightness down"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:2
+msgid "Brightness down's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:3
+msgid "Brightness up"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
+msgid "Brightness up's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
+#, fuzzy
+msgid "E-mail"
+msgstr "ই-মেল"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:6
+msgid "E-mail's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
+#, fuzzy
+msgid "Eject"
+msgstr "ঘটনা"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
+#, fuzzy
+msgid "Eject's shortcut."
+msgstr "_ডেস্কটপ শর্টকাট:"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
+#, fuzzy
+msgid "Home Folder"
+msgstr "যে ফোল্ডারে থিমসমূহ আছে _তাতে প্রবেশ করা হোক"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
+#, fuzzy
+msgid "Launch Help Browser"
+msgstr "সহায়ক তথ্য প্রদর্শনকারী ব্রাউজার"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
+msgid "Launch Help Browser's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
+#, fuzzy
+msgid "Launch Web Browser"
+msgstr "ওয়েব ব্রাউজার"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
+msgid "Launch Web Browser's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
+#, fuzzy
+msgid "Lock Screen"
+msgstr "পর্দা"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
+msgid "Lock Screen's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
+#, fuzzy
+msgid "Log Out"
+msgstr "বিন্যাস"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
+msgid "Log Out's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
+msgid "My Home Folder's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
+msgid "Next track key's shortcut."
+msgstr ""
+
+# Example of Free translation. Another meaning can be ব্যবহার করা
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
+#, fuzzy
+msgid "Pause"
+msgstr "_পেস্ট"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
+msgid "Pause key's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
+msgid "Play (or Play/Pause)"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
+msgid "Play (or Play/Pause) key's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
+msgid "Previous track key's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
+msgid "Search"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
+#, fuzzy
+msgid "Search's shortcut."
+msgstr "শর্টকাট"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
+msgid "Skip to Next track"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
+msgid "Skip to Previous track"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
+#, fuzzy
+msgid "Sleep"
+msgstr "গতি"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
+#, fuzzy
+msgid "Sleep's shortcut."
+msgstr "শর্টকাট"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
+msgid "Stop playback key"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
+msgid "Stop playback key's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
+#, fuzzy
+msgid "Volume down"
+msgstr "_আয়তনঃ"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
+msgid "Volume down's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
+#, fuzzy
+msgid "Volume mute"
+msgstr "_আয়তনঃ"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
+msgid "Volume mute's shortcut"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
+#, fuzzy
+msgid "Volume step"
+msgstr "_আয়তনঃ"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:38
+msgid "Volume step as percentage of volume."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:39
+#, fuzzy
+msgid "Volume up"
+msgstr "_আয়তনঃ"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
+msgid "Volume up's shortcut."
+msgstr ""
+
 #~ msgid "Background"
 #~ msgstr "পটভূমি"
 
@@ -3346,9 +3667,6 @@ msgstr "থিম থাম্বনেল করা হবে কিনা"
 
 #~ msgid "Default Help Browser"
 #~ msgstr "সহায়ক তথ্য প্রদর্শনকারী ডিফল্ট ব্রাউজার"
-
-#~ msgid "Help Browser"
-#~ msgstr "সহায়ক তথ্য প্রদর্শনকারী ব্রাউজার"
 
 #~ msgid "_Select a Help Browser:"
 #~ msgstr "কোন একটি সহায়ক তথ্য প্রদর্শনকারী ব্রাউজার _বেছে নিনঃ"
@@ -3426,9 +3744,6 @@ msgstr "থিম থাম্বনেল করা হবে কিনা"
 #~ msgid "_Off"
 #~ msgstr "_বন্ধ"
 
-#~ msgid "_Volume:"
-#~ msgstr "_আয়তনঃ"
-
 #~ msgid "loud"
 #~ msgstr "উচ্চঃস্বর"
 
@@ -3475,9 +3790,6 @@ msgstr "থিম থাম্বনেল করা হবে কিনা"
 
 #~ msgid "Set the speed of your pointing device."
 #~ msgstr "পয়েন্টার হিসেবে ব্যবহৃত যন্ত্রটি কি গতিতে নড়াচড়া করবে তা নির্ধারণ করুন।"
-
-#~ msgid "Speed"
-#~ msgstr "গতি"
 
 #~ msgid "_Delay (sec):"
 #~ msgstr "_বিলম্ব (সেকেন্ড)ঃ"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: தமிழ் கனோம் Control Center 2.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-13 02:05-0500\n"
+"POT-Creation-Date: 2004-01-14 01:22-0500\n"
 "PO-Revision-Date: 2002-11-11 19:20-0600\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil <tamilinix@yahoogroups.com>\n"
@@ -467,9 +467,82 @@ msgid "Desktop Wallpaper"
 msgstr "சுவர்-காகிதம்"
 
 #: capplets/background/background.desktop.in.h:2
+#: capplets/background/gnome-wp-capplet.c:1146
 #, fuzzy
 msgid "Desktop Wallpaper Preferences"
 msgstr "வலையமைப்பு பண்புகள்"
+
+#: capplets/background/gnome-wp-capplet.c:72
+#: capplets/common/capplet-util.c:340
+#, c-format
+msgid "There was an error displaying help: %s"
+msgstr ""
+"தொடங்கும் போது பிழை.\n"
+"\n"
+"%s"
+
+#: capplets/background/gnome-wp-capplet.c:169
+#, fuzzy
+msgid "Add Wallpapers"
+msgstr "சுவர்-காகிதம்"
+
+#: capplets/background/gnome-wp-capplet.c:1191
+#, fuzzy
+msgid "<b>Desktop _Wallpaper</b>"
+msgstr "சுவர்-காகிதம்"
+
+#: capplets/background/gnome-wp-capplet.c:1276
+msgid "_Style:"
+msgstr ""
+
+#: capplets/background/gnome-wp-capplet.c:1303
+#, fuzzy
+msgid "Centered"
+msgstr "நடுவில்"
+
+#: capplets/background/gnome-wp-capplet.c:1325
+msgid "Fill Screen"
+msgstr ""
+
+#: capplets/background/gnome-wp-capplet.c:1345
+#, fuzzy
+msgid "Scaled"
+msgstr "அளவுமாற்றி"
+
+#: capplets/background/gnome-wp-capplet.c:1365
+#, fuzzy
+msgid "Tiled"
+msgstr "_கோப்பு"
+
+#: capplets/background/gnome-wp-capplet.c:1402
+#, fuzzy
+msgid "_Add Wallpaper"
+msgstr "சுவர்-காகிதம்"
+
+#. The Wallpaper Background Colors Section
+#: capplets/background/gnome-wp-capplet.c:1433
+msgid "<b>_Desktop Colors</b> "
+msgstr ""
+
+#: capplets/background/gnome-wp-capplet.c:1465
+#, fuzzy
+msgid "Solid Color"
+msgstr "ஒரே வண்ணம்"
+
+#: capplets/background/gnome-wp-capplet.c:1481
+#, fuzzy
+msgid "Horizontal Gradient"
+msgstr "கிடைதிசை வண்ணமாற்றம்"
+
+#: capplets/background/gnome-wp-capplet.c:1497
+#, fuzzy
+msgid "Vertical Gradient"
+msgstr "செங்குத்தமான வண்ணமாற்றம்"
+
+#: capplets/background/gnome-wp-info.c:46
+#, fuzzy
+msgid "No Wallpaper"
+msgstr "சுவர்-காகிதம்"
 
 #: capplets/common/activate-settings-daemon.c:18
 msgid ""
@@ -488,14 +561,6 @@ msgstr ""
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr ""
-
-#: capplets/common/capplet-util.c:340
-#, c-format
-msgid "There was an error displaying help: %s"
-msgstr ""
-"தொடங்கும் போது பிழை.\n"
-"\n"
-"%s"
 
 #: capplets/common/file-transfer-dialog.c:95
 #, c-format
@@ -2774,6 +2839,54 @@ msgstr "நாடிலஸ் இயங்கிக்கொண்டிரு�
 msgid "Could not initialize Bonobo"
 msgstr "Bonobo தொடங்க முடியவில்லை"
 
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:325
+#, fuzzy
+msgid "There was an error displaying help:"
+msgstr ""
+"தொடங்கும் போது பிழை.\n"
+"\n"
+"%s"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
+msgid "Slow Keys Alert"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+msgid ""
+"You just held down the Shift key for 8 seconds.  This is the shortcut for "
+"the Slow Keys feature, which affects the way your keyboard works."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
+msgid "Do you want to activate Slow Keys?"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
+msgid "Do you want to deactivate Sticky Keys ?"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:424
+msgid "Sticky Keys Alert"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:425
+msgid ""
+"You just pressed the Shift key 5 times in a row.  This is the shortcut for "
+"the Sticky Keys feature, which affects the way your keyboard works."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
+msgid ""
+"You just pressed two keys at once, or pressed the Shift key 5 times in a "
+"row.  This turns off the Sticky Keys feature, which affects the way your "
+"keyboard works."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
+msgid "Do you want to activate Sticky Keys?"
+msgstr ""
+
 #: gnome-settings-daemon/gnome-settings-font.c:102
 #, c-format
 msgid ""
@@ -3368,6 +3481,209 @@ msgstr ""
 msgid "Whether to thumbnail themes"
 msgstr ""
 
+#: gnome-settings-daemon/actions/acme.glade.h:1
+#, fuzzy
+msgid "Volume"
+msgstr "ஒலி-அளவு:"
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:113
+#, c-format
+msgid ""
+"Couldn't execute command: %s\n"
+"Verify that this command exists."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:129
+msgid ""
+"Couldn't put the machine to sleep.\n"
+"Verify that the machine is correctly configured."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:139
+#, c-format
+msgid "Permissions on the file %s are broken\n"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:900
+msgid ""
+"Couldn't load the Glade file.\n"
+"Make sure that this daemon is properly installed."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:1
+msgid "Brightness down"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:2
+msgid "Brightness down's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:3
+msgid "Brightness up"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
+msgid "Brightness up's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
+msgid "E-mail"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:6
+msgid "E-mail's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
+#, fuzzy
+msgid "Eject"
+msgstr "நிகழ்வு"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
+#, fuzzy
+msgid "Eject's shortcut."
+msgstr "_கனிமேசை குறுக்கு வழிகள்:"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
+#, fuzzy
+msgid "Home Folder"
+msgstr "உருகாறு அடைவுக்குப் போகவும்"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
+#, fuzzy
+msgid "Launch Help Browser"
+msgstr "உதவி மேலோடி"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
+msgid "Launch Help Browser's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
+#, fuzzy
+msgid "Launch Web Browser"
+msgstr "வலை மேலோடி"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
+msgid "Launch Web Browser's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
+msgid "Lock Screen"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
+msgid "Lock Screen's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
+#, fuzzy
+msgid "Log Out"
+msgstr "இட அமைவு"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
+msgid "Log Out's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
+msgid "My Home Folder's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
+msgid "Next track key's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
+#, fuzzy
+msgid "Pause"
+msgstr "_ஒட்டு"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
+msgid "Pause key's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
+msgid "Play (or Play/Pause)"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
+msgid "Play (or Play/Pause) key's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
+msgid "Previous track key's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
+msgid "Search"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
+#, fuzzy
+msgid "Search's shortcut."
+msgstr "குறுக்கு வழி"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
+msgid "Skip to Next track"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
+msgid "Skip to Previous track"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
+#, fuzzy
+msgid "Sleep"
+msgstr "வேகம்"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
+#, fuzzy
+msgid "Sleep's shortcut."
+msgstr "குறுக்கு வழி"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
+msgid "Stop playback key"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
+msgid "Stop playback key's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
+#, fuzzy
+msgid "Volume down"
+msgstr "ஒலி-அளவு:"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
+msgid "Volume down's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
+#, fuzzy
+msgid "Volume mute"
+msgstr "ஒலி-அளவு:"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
+msgid "Volume mute's shortcut"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
+#, fuzzy
+msgid "Volume step"
+msgstr "ஒலி-அளவு:"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:38
+msgid "Volume step as percentage of volume."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:39
+#, fuzzy
+msgid "Volume up"
+msgstr "ஒலி-அளவு:"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
+msgid "Volume up's shortcut."
+msgstr ""
+
 #~ msgid "Background"
 #~ msgstr "பின்னணி"
 
@@ -3424,9 +3740,6 @@ msgstr ""
 
 #~ msgid "Default Help Browser"
 #~ msgstr "கொடாநிலை உதவி மேலோடி"
-
-#~ msgid "Help Browser"
-#~ msgstr "உதவி மேலோடி"
 
 #~ msgid "_Select a Help Browser:"
 #~ msgstr "உதவி மேலோடியைத் தெரிவுசெய்:"
@@ -3510,9 +3823,6 @@ msgstr ""
 #~ msgid "_Off"
 #~ msgstr "கிடையாது"
 
-#~ msgid "_Volume:"
-#~ msgstr "ஒலி-அளவு:"
-
 #~ msgid "loud"
 #~ msgstr "சத்தமாக"
 
@@ -3558,9 +3868,6 @@ msgstr ""
 
 #~ msgid "Set the speed of your pointing device."
 #~ msgstr "உங்கள் சுட்டியின் வேகத்தை அமைக்கவும்."
-
-#~ msgid "Speed"
-#~ msgstr "வேகம்"
 
 #~ msgid "_Delay (sec):"
 #~ msgstr "தாமதம் (நொடிகள்):"

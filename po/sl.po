@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-13 02:05-0500\n"
+"POT-Creation-Date: 2004-01-14 01:22-0500\n"
 "PO-Revision-Date: 2002-06-09 20:17+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -438,9 +438,80 @@ msgid "Desktop Wallpaper"
 msgstr "_Tapeta"
 
 #: capplets/background/background.desktop.in.h:2
+#: capplets/background/gnome-wp-capplet.c:1146
 #, fuzzy
 msgid "Desktop Wallpaper Preferences"
 msgstr "Nastavitv tipkovnice"
+
+#: capplets/background/gnome-wp-capplet.c:72
+#: capplets/common/capplet-util.c:340
+#, c-format
+msgid "There was an error displaying help: %s"
+msgstr "Ob prikazovanju pomoči se je zgodila napaka: %s"
+
+#: capplets/background/gnome-wp-capplet.c:169
+#, fuzzy
+msgid "Add Wallpapers"
+msgstr "_Tapeta"
+
+#: capplets/background/gnome-wp-capplet.c:1191
+#, fuzzy
+msgid "<b>Desktop _Wallpaper</b>"
+msgstr "_Tapeta"
+
+#: capplets/background/gnome-wp-capplet.c:1276
+#, fuzzy
+msgid "_Style:"
+msgstr "Slog:"
+
+#: capplets/background/gnome-wp-capplet.c:1303
+#, fuzzy
+msgid "Centered"
+msgstr "Na _sredini"
+
+#: capplets/background/gnome-wp-capplet.c:1325
+#, fuzzy
+msgid "Fill Screen"
+msgstr "Zaslon"
+
+#: capplets/background/gnome-wp-capplet.c:1345
+#, fuzzy
+msgid "Scaled"
+msgstr "Po_večano"
+
+#: capplets/background/gnome-wp-capplet.c:1365
+msgid "Tiled"
+msgstr "Tlakovano"
+
+#: capplets/background/gnome-wp-capplet.c:1402
+#, fuzzy
+msgid "_Add Wallpaper"
+msgstr "_Tapeta"
+
+#. The Wallpaper Background Colors Section
+#: capplets/background/gnome-wp-capplet.c:1433
+msgid "<b>_Desktop Colors</b> "
+msgstr ""
+
+#: capplets/background/gnome-wp-capplet.c:1465
+#, fuzzy
+msgid "Solid Color"
+msgstr "Barva polnjenja"
+
+#: capplets/background/gnome-wp-capplet.c:1481
+#, fuzzy
+msgid "Horizontal Gradient"
+msgstr "Vodoravni preliv"
+
+#: capplets/background/gnome-wp-capplet.c:1497
+#, fuzzy
+msgid "Vertical Gradient"
+msgstr "Navpični preliv"
+
+#: capplets/background/gnome-wp-info.c:46
+#, fuzzy
+msgid "No Wallpaper"
+msgstr "_Tapeta"
 
 #: capplets/common/activate-settings-daemon.c:18
 msgid ""
@@ -463,11 +534,6 @@ msgstr "Nisem mogel naložiti komplet ikon za nastavitvene vstavke '%s'\n"
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "Le uveljavi nastavitve in končaj"
-
-#: capplets/common/capplet-util.c:340
-#, c-format
-msgid "There was an error displaying help: %s"
-msgstr "Ob prikazovanju pomoči se je zgodila napaka: %s"
 
 #: capplets/common/file-transfer-dialog.c:95
 #, c-format
@@ -2708,6 +2774,54 @@ msgstr "Uporabi lupino tudi kadar nautilus teče."
 msgid "Could not initialize Bonobo"
 msgstr "Nisem mogel inicializirati bonoba"
 
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:325
+#, fuzzy
+msgid "There was an error displaying help:"
+msgstr "Ob prikazovanju pomoči se je zgodila napaka: %s"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
+msgid "Slow Keys Alert"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+msgid ""
+"You just held down the Shift key for 8 seconds.  This is the shortcut for "
+"the Slow Keys feature, which affects the way your keyboard works."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
+#, fuzzy
+msgid "Do you want to activate Slow Keys?"
+msgstr "Želite ohraniti to ločljivost?"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
+#, fuzzy
+msgid "Do you want to deactivate Sticky Keys ?"
+msgstr "Želite ohraniti to ločljivost?"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:424
+msgid "Sticky Keys Alert"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:425
+msgid ""
+"You just pressed the Shift key 5 times in a row.  This is the shortcut for "
+"the Sticky Keys feature, which affects the way your keyboard works."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
+msgid ""
+"You just pressed two keys at once, or pressed the Shift key 5 times in a "
+"row.  This turns off the Sticky Keys feature, which affects the way your "
+"keyboard works."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
+#, fuzzy
+msgid "Do you want to activate Sticky Keys?"
+msgstr "Želite ohraniti to ločljivost?"
+
 #: gnome-settings-daemon/gnome-settings-font.c:102
 #, c-format
 msgid ""
@@ -3310,6 +3424,214 @@ msgstr "Ali naj se prikažejo sličice nameščenih tem"
 msgid "Whether to thumbnail themes"
 msgstr "Ali naj se prikažejo sličice tem"
 
+#: gnome-settings-daemon/actions/acme.glade.h:1
+#, fuzzy
+msgid "Volume"
+msgstr "_Glasnost:"
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:113
+#, c-format
+msgid ""
+"Couldn't execute command: %s\n"
+"Verify that this command exists."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:129
+msgid ""
+"Couldn't put the machine to sleep.\n"
+"Verify that the machine is correctly configured."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:139
+#, c-format
+msgid "Permissions on the file %s are broken\n"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:900
+msgid ""
+"Couldn't load the Glade file.\n"
+"Make sure that this daemon is properly installed."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:1
+msgid "Brightness down"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:2
+msgid "Brightness down's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:3
+msgid "Brightness up"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
+msgid "Brightness up's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
+#, fuzzy
+msgid "E-mail"
+msgstr "E-pošta"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:6
+msgid "E-mail's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
+#, fuzzy
+msgid "Eject"
+msgstr "Dogodek"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
+#, fuzzy
+msgid "Eject's shortcut."
+msgstr "Bližnjice _namizja"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
+#, fuzzy
+msgid "Home Folder"
+msgstr "_Pojdi v mapo tem"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
+#, fuzzy
+msgid "Launch Help Browser"
+msgstr "Brskalnik po pomoči"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
+msgid "Launch Help Browser's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
+#, fuzzy
+msgid "Launch Web Browser"
+msgstr "Spletni brskalnik"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
+msgid "Launch Web Browser's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
+#, fuzzy
+msgid "Lock Screen"
+msgstr "Zaslon"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
+msgid "Lock Screen's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
+#, fuzzy
+msgid "Log Out"
+msgstr "Postavitev"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
+msgid "Log Out's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
+msgid "My Home Folder's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
+msgid "Next track key's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
+#, fuzzy
+msgid "Pause"
+msgstr "_Prilepi"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
+#, fuzzy
+msgid "Pause key's shortcut."
+msgstr "Nastavi tipkovnične povezave"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
+msgid "Play (or Play/Pause)"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
+msgid "Play (or Play/Pause) key's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
+#, fuzzy
+msgid "Previous track key's shortcut."
+msgstr "Nastavi tipkovnične povezave"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
+msgid "Search"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
+#, fuzzy
+msgid "Search's shortcut."
+msgstr "Bližnjica"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
+msgid "Skip to Next track"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
+msgid "Skip to Previous track"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
+#, fuzzy
+msgid "Sleep"
+msgstr "Hitrost"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
+#, fuzzy
+msgid "Sleep's shortcut."
+msgstr "Bližnjica"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
+msgid "Stop playback key"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
+msgid "Stop playback key's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
+#, fuzzy
+msgid "Volume down"
+msgstr "_Glasnost:"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
+msgid "Volume down's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
+#, fuzzy
+msgid "Volume mute"
+msgstr "_Glasnost:"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
+#, fuzzy
+msgid "Volume mute's shortcut"
+msgstr "Nastavi tipkovnične povezave"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
+#, fuzzy
+msgid "Volume step"
+msgstr "_Glasnost:"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:38
+msgid "Volume step as percentage of volume."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:39
+#, fuzzy
+msgid "Volume up"
+msgstr "_Glasnost:"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
+msgid "Volume up's shortcut."
+msgstr ""
+
 #~ msgid "Background"
 #~ msgstr "Ozadje"
 
@@ -3365,9 +3687,6 @@ msgstr "Ali naj se prikažejo sličice tem"
 #~ msgid "Default Help Browser"
 #~ msgstr "Privzet brskalnik po pomoči"
 
-#~ msgid "Help Browser"
-#~ msgstr "Brskalnik po pomoči"
-
 #~ msgid "Bee_p"
 #~ msgstr "_Pisk"
 
@@ -3382,9 +3701,6 @@ msgstr "Ali naj se prikažejo sličice tem"
 
 #~ msgid "_Off"
 #~ msgstr "_Izključeno"
-
-#~ msgid "_Volume:"
-#~ msgstr "_Glasnost:"
 
 #~ msgid "loud"
 #~ msgstr "glasno"
@@ -3449,9 +3765,6 @@ msgstr "Ali naj se prikažejo sličice tem"
 
 #~ msgid "Set the speed of your pointing device."
 #~ msgstr "Nastavi hitrost vašega kazalca"
-
-#~ msgid "Speed"
-#~ msgstr "Hitrost"
 
 #~ msgid "_Delay (sec):"
 #~ msgstr "_Premor (sek):"
@@ -3549,9 +3862,6 @@ msgstr "Ali naj se prikažejo sličice tem"
 
 #~ msgid "Configure window appearance"
 #~ msgstr "Nastavi videz oken"
-
-#~ msgid "Configure key shortcuts"
-#~ msgstr "Nastavi tipkovnične povezave"
 
 #~ msgid "Configure window properties"
 #~ msgstr "Nastavi lastnosti oken"
@@ -4320,9 +4630,6 @@ msgstr "Ali naj se prikažejo sličice tem"
 
 #~ msgid "Scaled (keep aspect ratio)"
 #~ msgstr "Raztegnjeno (ohrani razmerja)"
-
-#~ msgid "Tiled"
-#~ msgstr "Tlakovano"
 
 #~ msgid "Use a picture for the background"
 #~ msgstr "Uporabi sliko za ozadje"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-13 04:32+0100\n"
+"POT-Creation-Date: 2004-01-14 01:22-0500\n"
 "PO-Revision-Date: 2004-01-13 14:41+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -448,8 +448,80 @@ msgid "Desktop Wallpaper"
 msgstr "Tapeta na pracovní ploše"
 
 #: capplets/background/background.desktop.in.h:2
+#: capplets/background/gnome-wp-capplet.c:1146
 msgid "Desktop Wallpaper Preferences"
 msgstr "Nastavení tapety na pracovní ploše"
+
+#: capplets/background/gnome-wp-capplet.c:72
+#: capplets/common/capplet-util.c:340
+#, c-format
+msgid "There was an error displaying help: %s"
+msgstr "Nastala chyba při zobrazení nápovědy: %s"
+
+#: capplets/background/gnome-wp-capplet.c:169
+#, fuzzy
+msgid "Add Wallpapers"
+msgstr "Tapeta na pracovní ploše"
+
+#: capplets/background/gnome-wp-capplet.c:1191
+#, fuzzy
+msgid "<b>Desktop _Wallpaper</b>"
+msgstr "Tapeta na pracovní ploše"
+
+#: capplets/background/gnome-wp-capplet.c:1276
+#, fuzzy
+msgid "_Style:"
+msgstr "Styl:"
+
+#: capplets/background/gnome-wp-capplet.c:1303
+#, fuzzy
+msgid "Centered"
+msgstr "Na stř_ed"
+
+#: capplets/background/gnome-wp-capplet.c:1325
+#, fuzzy
+msgid "Fill Screen"
+msgstr "Obrazovka"
+
+#: capplets/background/gnome-wp-capplet.c:1345
+#, fuzzy
+msgid "Scaled"
+msgstr "_Přizpůsobená"
+
+#: capplets/background/gnome-wp-capplet.c:1365
+#, fuzzy
+msgid "Tiled"
+msgstr "_Tapeta"
+
+#: capplets/background/gnome-wp-capplet.c:1402
+#, fuzzy
+msgid "_Add Wallpaper"
+msgstr "Tapeta na pracovní ploše"
+
+#. The Wallpaper Background Colors Section
+#: capplets/background/gnome-wp-capplet.c:1433
+msgid "<b>_Desktop Colors</b> "
+msgstr ""
+
+#: capplets/background/gnome-wp-capplet.c:1465
+#, fuzzy
+msgid "Solid Color"
+msgstr "Plná barva"
+
+#: capplets/background/gnome-wp-capplet.c:1481
+#, fuzzy
+msgid "Horizontal Gradient"
+msgstr "Horizontální přechod"
+
+#: capplets/background/gnome-wp-capplet.c:1497
+#, fuzzy
+msgid "Vertical Gradient"
+msgstr "Vertikální přechod"
+
+#: capplets/background/gnome-wp-info.c:46
+#, fuzzy
+msgid "No Wallpaper"
+msgstr "Tapeta na pracovní ploše"
 
 #: capplets/common/activate-settings-daemon.c:18
 msgid ""
@@ -473,11 +545,6 @@ msgstr "Nelze načíst ikonu capletu '%s'\n"
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "Pouze aplikovat nastavení a skončit"
-
-#: capplets/common/capplet-util.c:340
-#, c-format
-msgid "There was an error displaying help: %s"
-msgstr "Nastala chyba při zobrazení nápovědy: %s"
 
 #: capplets/common/file-transfer-dialog.c:95
 #, c-format
@@ -1610,7 +1677,7 @@ msgid "The type of accelerator."
 msgstr "Typ klávesové zkratky."
 
 #: capplets/keybindings/eggcellrendererkeys.c:240
-#: capplets/keybindings/gnome-keybinding-properties.c:207
+#: capplets/keybindings/gnome-keybinding-properties.c:235
 #: libbackground/applier.c:588 typing-break/drwright.c:448
 msgid "Disabled"
 msgstr "Vypnuto"
@@ -1624,23 +1691,23 @@ msgstr "Zadejte novou zkratku, nebo ji vymažte klávesou Backspace"
 msgid "Type a new accelerator"
 msgstr "Zadejte novou zkratku"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:174
+#: capplets/keybindings/gnome-keybinding-properties.c:202
 msgid "GNOME Default"
 msgstr "Implicitní GNOME"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:549
+#: capplets/keybindings/gnome-keybinding-properties.c:577
 msgid "<Unknown Action>"
 msgstr "<Neznámá akce>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:568
+#: capplets/keybindings/gnome-keybinding-properties.c:596
 msgid "Desktop"
 msgstr "Plocha"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:572
+#: capplets/keybindings/gnome-keybinding-properties.c:600
 msgid "Window Management"
 msgstr "Správa oken"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:709
+#: capplets/keybindings/gnome-keybinding-properties.c:737
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1649,17 +1716,17 @@ msgstr ""
 "Zkratka \"%s\" se již používá pro:\n"
 " \"%s\"\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:740
+#: capplets/keybindings/gnome-keybinding-properties.c:768
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Chyba při nastavení nové zkratky v databázi s nastavením: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:790
+#: capplets/keybindings/gnome-keybinding-properties.c:818
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "Chyba při rušení zkratky v databázi s nastavením: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:939
+#: capplets/keybindings/gnome-keybinding-properties.c:967
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1667,11 +1734,11 @@ msgstr ""
 "Nelze nalézt žádné téma pro klávesnici. To znamená, že vaše instalace GTK+ "
 "není úplná."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:961
+#: capplets/keybindings/gnome-keybinding-properties.c:989
 msgid "Action"
 msgstr "Akce"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:985
+#: capplets/keybindings/gnome-keybinding-properties.c:1013
 msgid "Shortcut"
 msgstr "Zkratka"
 
@@ -2718,6 +2785,54 @@ msgstr "Použít shell i pokud běží aplikace Nautilus."
 msgid "Could not initialize Bonobo"
 msgstr "Selhala inicializace systému Bonobo"
 
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:325
+#, fuzzy
+msgid "There was an error displaying help:"
+msgstr "Nastala chyba při zobrazení nápovědy: %s"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
+msgid "Slow Keys Alert"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+msgid ""
+"You just held down the Shift key for 8 seconds.  This is the shortcut for "
+"the Slow Keys feature, which affects the way your keyboard works."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
+#, fuzzy
+msgid "Do you want to activate Slow Keys?"
+msgstr "Chcete ponechat toto rozlišení?"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
+#, fuzzy
+msgid "Do you want to deactivate Sticky Keys ?"
+msgstr "Chcete ponechat toto rozlišení?"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:424
+msgid "Sticky Keys Alert"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:425
+msgid ""
+"You just pressed the Shift key 5 times in a row.  This is the shortcut for "
+"the Sticky Keys feature, which affects the way your keyboard works."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
+msgid ""
+"You just pressed two keys at once, or pressed the Shift key 5 times in a "
+"row.  This turns off the Sticky Keys feature, which affects the way your "
+"keyboard works."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
+#, fuzzy
+msgid "Do you want to activate Sticky Keys?"
+msgstr "Chcete ponechat toto rozlišení?"
+
 #: gnome-settings-daemon/gnome-settings-font.c:102
 #, c-format
 msgid ""
@@ -2727,37 +2842,37 @@ msgstr ""
 "Nelze vytvořit adresář \"%s\".\n"
 "To je nutné, má-li být možné změnit kurzory."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:165
+#: gnome-settings-daemon/gnome-settings-keybindings.c:162
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "Svázání s klávesami (%s) má svoji akci definovanou vícekrát\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:178
+#: gnome-settings-daemon/gnome-settings-keybindings.c:175
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "Svázání s klávesami (%s) má svoji vazbu definovanou vícekrát\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:184
+#: gnome-settings-daemon/gnome-settings-keybindings.c:181
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "Svázání s klávesami (%s) není úplné\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:212
+#: gnome-settings-daemon/gnome-settings-keybindings.c:209
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "Svázání s klávesami (%s) není platné\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:248
+#: gnome-settings-daemon/gnome-settings-keybindings.c:245
 #, c-format
 msgid "It seems that another application already has access to key '%d'."
 msgstr "Zdá se, že ke klávese '%d' již má přístup jiná aplikace."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:317
+#: gnome-settings-daemon/gnome-settings-keybindings.c:314
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "Svázání s klávesami (%s) se již používá\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:393
+#: gnome-settings-daemon/gnome-settings-keybindings.c:390
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -3340,6 +3455,211 @@ msgstr "Jestli zobrazovat náhledy nainstalovaných témat"
 msgid "Whether to thumbnail themes"
 msgstr "Jestli zobrazovat náhledy témat"
 
+#: gnome-settings-daemon/actions/acme.glade.h:1
+#, fuzzy
+msgid "Volume"
+msgstr "_Hlasitost:"
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:113
+#, c-format
+msgid ""
+"Couldn't execute command: %s\n"
+"Verify that this command exists."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:129
+msgid ""
+"Couldn't put the machine to sleep.\n"
+"Verify that the machine is correctly configured."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:139
+#, c-format
+msgid "Permissions on the file %s are broken\n"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:900
+msgid ""
+"Couldn't load the Glade file.\n"
+"Make sure that this daemon is properly installed."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:1
+msgid "Brightness down"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:2
+msgid "Brightness down's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:3
+msgid "Brightness up"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
+msgid "Brightness up's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
+#, fuzzy
+msgid "E-mail"
+msgstr "E-mail"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:6
+msgid "E-mail's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
+#, fuzzy
+msgid "Eject"
+msgstr "Událost"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
+#, fuzzy
+msgid "Eject's shortcut."
+msgstr "Zkratky _prostředí pracovní plochy:"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
+#, fuzzy
+msgid "Home Folder"
+msgstr "Pře_jít do adresáře s tématy"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
+#, fuzzy
+msgid "Launch Help Browser"
+msgstr "Prohlížeč nápovědy"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
+msgid "Launch Help Browser's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
+#, fuzzy
+msgid "Launch Web Browser"
+msgstr "WWW prohlížeč"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
+msgid "Launch Web Browser's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
+#, fuzzy
+msgid "Lock Screen"
+msgstr "Obrazovka"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
+msgid "Lock Screen's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
+#, fuzzy
+msgid "Log Out"
+msgstr "Rozložení"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
+msgid "Log Out's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
+msgid "My Home Folder's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
+msgid "Next track key's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
+#, fuzzy
+msgid "Pause"
+msgstr "V_ložit"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
+msgid "Pause key's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
+msgid "Play (or Play/Pause)"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
+msgid "Play (or Play/Pause) key's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
+msgid "Previous track key's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
+msgid "Search"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
+#, fuzzy
+msgid "Search's shortcut."
+msgstr "Zkratka"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
+msgid "Skip to Next track"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
+msgid "Skip to Previous track"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
+#, fuzzy
+msgid "Sleep"
+msgstr "_Pípnout"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
+#, fuzzy
+msgid "Sleep's shortcut."
+msgstr "Zkratka"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
+msgid "Stop playback key"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
+msgid "Stop playback key's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
+#, fuzzy
+msgid "Volume down"
+msgstr "_Hlasitost:"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
+msgid "Volume down's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
+#, fuzzy
+msgid "Volume mute"
+msgstr "_Hlasitost:"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
+msgid "Volume mute's shortcut"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
+#, fuzzy
+msgid "Volume step"
+msgstr "_Hlasitost:"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:38
+msgid "Volume step as percentage of volume."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:39
+#, fuzzy
+msgid "Volume up"
+msgstr "_Hlasitost:"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
+msgid "Volume up's shortcut."
+msgstr ""
+
 #~ msgid "Behavior"
 #~ msgstr "Chování"
 
@@ -3351,9 +3671,6 @@ msgstr "Jestli zobrazovat náhledy témat"
 
 #~ msgid "Default Help Browser"
 #~ msgstr "Implicitní prohlížeč nápovědy"
-
-#~ msgid "Help Browser"
-#~ msgstr "Prohlížeč nápovědy"
 
 #~ msgid "_Select a Help Browser:"
 #~ msgstr "_Vyberte prohlížeč nápovědy:"
@@ -3400,11 +3717,5 @@ msgstr "Jestli zobrazovat náhledy témat"
 #~ msgid "/_Remove Icon"
 #~ msgstr "/_Odstranit ikonu"
 
-#~ msgid "Bee_p"
-#~ msgstr "_Pípnout"
-
 #~ msgid "Keypress Click"
 #~ msgstr "Kliknutí klávesy"
-
-#~ msgid "_Volume:"
-#~ msgstr "_Hlasitost:"

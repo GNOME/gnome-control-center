@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-13 02:05-0500\n"
+"POT-Creation-Date: 2004-01-14 01:22-0500\n"
 "PO-Revision-Date: 2004-01-04 13:07+0100\n"
 "Last-Translator: Åsmund Skjæveland <aasmunds@fys.uio.no>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -450,9 +450,77 @@ msgid "Desktop Wallpaper"
 msgstr ""
 
 #: capplets/background/background.desktop.in.h:2
+#: capplets/background/gnome-wp-capplet.c:1146
 #, fuzzy
 msgid "Desktop Wallpaper Preferences"
 msgstr "Eigenskapar for lyd"
+
+#: capplets/background/gnome-wp-capplet.c:72
+#: capplets/common/capplet-util.c:340
+#, c-format
+msgid "There was an error displaying help: %s"
+msgstr "Ein feil oppstod når hjelpeteksten skulle visast: %s"
+
+#: capplets/background/gnome-wp-capplet.c:169
+msgid "Add Wallpapers"
+msgstr ""
+
+#: capplets/background/gnome-wp-capplet.c:1191
+#, fuzzy
+msgid "<b>Desktop _Wallpaper</b>"
+msgstr "Eigenskapar for lyd"
+
+#: capplets/background/gnome-wp-capplet.c:1276
+#, fuzzy
+msgid "_Style:"
+msgstr "Stil:"
+
+#: capplets/background/gnome-wp-capplet.c:1303
+#, fuzzy
+msgid "Centered"
+msgstr "_Midtstill"
+
+#: capplets/background/gnome-wp-capplet.c:1325
+#, fuzzy
+msgid "Fill Screen"
+msgstr "Skjerm"
+
+#: capplets/background/gnome-wp-capplet.c:1345
+#, fuzzy
+msgid "Scaled"
+msgstr "Sk_aler"
+
+#: capplets/background/gnome-wp-capplet.c:1365
+msgid "Tiled"
+msgstr "Flislagt"
+
+#: capplets/background/gnome-wp-capplet.c:1402
+msgid "_Add Wallpaper"
+msgstr ""
+
+#. The Wallpaper Background Colors Section
+#: capplets/background/gnome-wp-capplet.c:1433
+msgid "<b>_Desktop Colors</b> "
+msgstr ""
+
+#: capplets/background/gnome-wp-capplet.c:1465
+#, fuzzy
+msgid "Solid Color"
+msgstr "Heilfylt farge"
+
+#: capplets/background/gnome-wp-capplet.c:1481
+#, fuzzy
+msgid "Horizontal Gradient"
+msgstr "Vassrett gradient"
+
+#: capplets/background/gnome-wp-capplet.c:1497
+#, fuzzy
+msgid "Vertical Gradient"
+msgstr "Loddrett gradient"
+
+#: capplets/background/gnome-wp-info.c:46
+msgid "No Wallpaper"
+msgstr ""
 
 #: capplets/common/activate-settings-daemon.c:18
 msgid ""
@@ -476,11 +544,6 @@ msgstr "Kan ikkje lasta capplet sitt standardikon «%s»\n"
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "Ta i bruk innstillingar og avslutt"
-
-#: capplets/common/capplet-util.c:340
-#, c-format
-msgid "There was an error displaying help: %s"
-msgstr "Ein feil oppstod når hjelpeteksten skulle visast: %s"
 
 #: capplets/common/file-transfer-dialog.c:95
 #, c-format
@@ -2723,6 +2786,54 @@ msgstr "Bruk skal sjølv om Nautilus køyrer."
 msgid "Could not initialize Bonobo"
 msgstr "Kunne ikkje starta Bonobo"
 
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:325
+#, fuzzy
+msgid "There was an error displaying help:"
+msgstr "Ein feil oppstod når hjelpeteksten skulle visast: %s"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
+msgid "Slow Keys Alert"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+msgid ""
+"You just held down the Shift key for 8 seconds.  This is the shortcut for "
+"the Slow Keys feature, which affects the way your keyboard works."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
+#, fuzzy
+msgid "Do you want to activate Slow Keys?"
+msgstr "Vil du ha denne oppløysinga?"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
+#, fuzzy
+msgid "Do you want to deactivate Sticky Keys ?"
+msgstr "Vil du ha denne oppløysinga?"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:424
+msgid "Sticky Keys Alert"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:425
+msgid ""
+"You just pressed the Shift key 5 times in a row.  This is the shortcut for "
+"the Sticky Keys feature, which affects the way your keyboard works."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
+msgid ""
+"You just pressed two keys at once, or pressed the Shift key 5 times in a "
+"row.  This turns off the Sticky Keys feature, which affects the way your "
+"keyboard works."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
+#, fuzzy
+msgid "Do you want to activate Sticky Keys?"
+msgstr "Vil du ha denne oppløysinga?"
+
 #: gnome-settings-daemon/gnome-settings-font.c:102
 #, c-format
 msgid ""
@@ -3346,6 +3457,215 @@ msgstr "Om det skal lagast miniatyrar av installerte drakter"
 msgid "Whether to thumbnail themes"
 msgstr "Om det skal lagast miniatyrar av drakter"
 
+#: gnome-settings-daemon/actions/acme.glade.h:1
+#, fuzzy
+msgid "Volume"
+msgstr "Lydstyrke"
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:113
+#, c-format
+msgid ""
+"Couldn't execute command: %s\n"
+"Verify that this command exists."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:129
+msgid ""
+"Couldn't put the machine to sleep.\n"
+"Verify that the machine is correctly configured."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:139
+#, c-format
+msgid "Permissions on the file %s are broken\n"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:900
+msgid ""
+"Couldn't load the Glade file.\n"
+"Make sure that this daemon is properly installed."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:1
+msgid "Brightness down"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:2
+msgid "Brightness down's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:3
+msgid "Brightness up"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
+msgid "Brightness up's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
+#, fuzzy
+msgid "E-mail"
+msgstr "E-post"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:6
+msgid "E-mail's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
+#, fuzzy
+msgid "Eject"
+msgstr "Hending"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
+#, fuzzy
+msgid "Eject's shortcut."
+msgstr "Skrivebor_dsnarvegar:"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
+#, fuzzy
+msgid "Home Folder"
+msgstr "_Gå til draktmappa"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
+#, fuzzy
+msgid "Launch Help Browser"
+msgstr "Nettlesar"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
+msgid "Launch Help Browser's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
+#, fuzzy
+msgid "Launch Web Browser"
+msgstr "Nettlesar"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
+msgid "Launch Web Browser's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
+#, fuzzy
+msgid "Lock Screen"
+msgstr "Skjerm"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
+msgid "Lock Screen's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
+#, fuzzy
+msgid "Log Out"
+msgstr "Formgjeving"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
+msgid "Log Out's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
+msgid "My Home Folder's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
+msgid "Next track key's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
+#, fuzzy
+msgid "Pause"
+msgstr "_Lim inn"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
+#, fuzzy
+msgid "Pause key's shortcut."
+msgstr "Set opp hurtigtastar"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
+msgid "Play (or Play/Pause)"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
+msgid "Play (or Play/Pause) key's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
+#, fuzzy
+msgid "Previous track key's shortcut."
+msgstr "Set opp hurtigtastar"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
+#, fuzzy
+msgid "Search"
+msgstr "Fjernare"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
+#, fuzzy
+msgid "Search's shortcut."
+msgstr "Snarveg"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
+msgid "Skip to Next track"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
+msgid "Skip to Previous track"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
+#, fuzzy
+msgid "Sleep"
+msgstr "Skli"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
+#, fuzzy
+msgid "Sleep's shortcut."
+msgstr "Snarveg"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
+msgid "Stop playback key"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
+msgid "Stop playback key's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
+#, fuzzy
+msgid "Volume down"
+msgstr "Lydstyrke"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
+msgid "Volume down's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
+#, fuzzy
+msgid "Volume mute"
+msgstr "Lydstyrke"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
+#, fuzzy
+msgid "Volume mute's shortcut"
+msgstr "Set opp hurtigtastar"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
+#, fuzzy
+msgid "Volume step"
+msgstr "Lydstyrke"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:38
+msgid "Volume step as percentage of volume."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:39
+#, fuzzy
+msgid "Volume up"
+msgstr "Lydstyrke"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
+msgid "Volume up's shortcut."
+msgstr ""
+
 #~ msgid "Background"
 #~ msgstr "Bakgrunn"
 
@@ -3404,10 +3724,6 @@ msgstr "Om det skal lagast miniatyrar av drakter"
 #~ msgstr "Standardverdi"
 
 #, fuzzy
-#~ msgid "Help Browser"
-#~ msgstr "Nettlesar"
-
-#, fuzzy
 #~ msgid "_Select a Help Browser:"
 #~ msgstr "Hjelplesar"
 
@@ -3434,10 +3750,6 @@ msgstr "Om det skal lagast miniatyrar av drakter"
 #, fuzzy
 #~ msgid "_Off"
 #~ msgstr "Avstand"
-
-#, fuzzy
-#~ msgid "_Volume:"
-#~ msgstr "Lydstyrke"
 
 #, fuzzy
 #~ msgid "loud"
@@ -3519,9 +3831,6 @@ msgstr "Om det skal lagast miniatyrar av drakter"
 
 #~ msgid "Configure window appearance"
 #~ msgstr "Set opp vindaugsutsjånad"
-
-#~ msgid "Configure key shortcuts"
-#~ msgstr "Set opp hurtigtastar"
 
 #~ msgid "Configure window properties"
 #~ msgstr "Sett opp vindaugseigenskapar"
@@ -3845,9 +4154,6 @@ msgstr "Om det skal lagast miniatyrar av drakter"
 #, fuzzy
 #~ msgid "Scaled (keep aspect ratio)"
 #~ msgstr "Skalert (ta vare høgde og breidde forhold)"
-
-#~ msgid "Tiled"
-#~ msgstr "Flislagt"
 
 #, fuzzy
 #~ msgid "Use a picture for the background"
@@ -4513,9 +4819,6 @@ msgstr "Om det skal lagast miniatyrar av drakter"
 #~ msgid "SlideScreen"
 #~ msgstr "Skyv skjermen"
 
-#~ msgid "Slip"
-#~ msgstr "Skli"
-
 #~ msgid "Sonar"
 #~ msgstr "Sonar"
 
@@ -4597,10 +4900,6 @@ msgstr "Om det skal lagast miniatyrar av drakter"
 #, fuzzy
 #~ msgid "XDaliClock"
 #~ msgstr "3D klokke"
-
-#, fuzzy
-#~ msgid "Xearth"
-#~ msgstr "Fjernare"
 
 #~ msgid "Xflame"
 #~ msgstr "Xflame"

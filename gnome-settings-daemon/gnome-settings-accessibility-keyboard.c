@@ -526,8 +526,8 @@ set_gconf_from_server (GConfEntry *ignored)
 	changed |= (stickykeys_changed | slowkeys_changed);
 
 	if (changed) {
-	gconf_client_commit_change_set (client, cs, FALSE, NULL);
-	gconf_client_suggest_sync (client, NULL);
+		gconf_client_commit_change_set (client, cs, FALSE, NULL);
+		gconf_client_suggest_sync (client, NULL);
 	}
 	gconf_change_set_unref (cs);
 }
