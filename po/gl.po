@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center (Gnome 2.0.0) 1.5.1\n"
-"POT-Creation-Date: 2003-05-07 14:06-0400\n"
+"POT-Creation-Date: 2003-05-20 18:58-0400\n"
 "PO-Revision-Date: 2002-06-20 12:53+0200\n"
 "Last-Translator: Xabi García <xabigf@gmx.net>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
@@ -52,8 +52,8 @@ msgstr ""
 #: capplets/file-types/file-types-properties.glade.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: capplets/network/gnome-network-preferences.glade.h:2
-#: capplets/theme-switcher/theme-properties.glade.h:1
 #: capplets/theme-switcher/theme-install.glade.h:1
+#: capplets/theme-switcher/theme-properties.glade.h:1
 msgid "*"
 msgstr "*"
 
@@ -265,6 +265,7 @@ msgid "pixels/second"
 msgstr "píxels/segundo"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
+#: capplets/mouse/gnome-mouse-properties.glade.h:26
 #: capplets/windows/gnome-window-properties.glade.h:7
 msgid "seconds"
 msgstr "segundos"
@@ -424,6 +425,11 @@ msgstr ""
 "alleo a GNOME (ex. KDE) poida estar activo e faga conflicto co xestor\n"
 "de configuracións de GNOME."
 
+#: capplets/common/capplet-stock-icons.c:94
+#, c-format
+msgid "Unable to load capplet stock icon '%s'\n"
+msgstr ""
+
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "Aplica-la configuración e saír"
@@ -432,11 +438,6 @@ msgstr "Aplica-la configuración e saír"
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Ocorreu un erro mentres se amosaba a axuda: %s"
-
-#: capplets/common/capplet-stock-icons.c:94
-#, c-format
-msgid "Unable to load capplet stock icon '%s'\n"
-msgstr ""
 
 #: capplets/common/file-transfer-dialog.c:95
 #, c-format
@@ -974,6 +975,7 @@ msgid ""
 msgstr ""
 
 #: capplets/file-types/file-types-capplet.c:196
+#: vfs-methods/themus/themus-properties-view.c:165
 msgid "Description"
 msgstr "Descrición"
 
@@ -1728,130 +1730,112 @@ msgstr ""
 "Versión grande do punteiro branco"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:1
-msgid ""
-"<b>Note:</b> You will need to logout and log back in for this setting to "
-"take effect."
-msgstr "<b>Nota:</b> É preciso "
+msgid "    "
+msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:2
-msgid "<i>Fast</i>"
-msgstr "<i>Rápido</i>"
+#, fuzzy
+msgid "<b>Cursor Theme</b>"
+msgstr "Tema do Punteiro"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:3
-msgid "<i>High</i>"
-msgstr "<i>Alto</i>"
+msgid "<b>Double-Click Timeout </b>"
+msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:4
-msgid "<i>Large</i>"
-msgstr "<i>Grande</i>"
+#, fuzzy
+msgid "<b>Drag and Drop</b>"
+msgstr "Arrastrar e soltar"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:5
-msgid "<i>Low</i>"
-msgstr "<i>Baixo</i>"
+#, fuzzy
+msgid "<b>Locate Pointer</b>"
+msgstr "Localizar Punteiro"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:6
-msgid "<i>Slow</i>"
-msgstr "<i>Lento</i>"
+#, fuzzy
+msgid "<b>Mouse Orientation</b>"
+msgstr "Orientación do rato"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:7
-msgid "<i>Small</i>"
-msgstr "<i>Pequeno</i>"
+#, fuzzy
+msgid "<b>Speed</b>"
+msgstr "<i>Rápido</i>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid ""
-"Animates a quick marker around the cursor when the Control key has been "
-"pressed and released."
+"<i><small><b>Note:</b> Changes to this setting will not take effect until "
+"you next log in.</small></i>"
 msgstr ""
-"Anima un marcador rápido ó redor do cursor cando a tecla Control prémese e "
-"sóltase."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:9
+msgid "<i>Fast</i>"
+msgstr "<i>Rápido</i>"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:10
+msgid "<i>High</i>"
+msgstr "<i>Alto</i>"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:11
+msgid "<i>Large</i>"
+msgstr "<i>Grande</i>"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:12
+msgid "<i>Low</i>"
+msgstr "<i>Baixo</i>"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:13
+msgid "<i>Slow</i>"
+msgstr "<i>Lento</i>"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:14
+msgid "<i>Small</i>"
+msgstr "<i>Pequeno</i>"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:15
 msgid "Buttons"
 msgstr "Botóns"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:10
-msgid "Cursor Theme"
+#: capplets/mouse/gnome-mouse-properties.glade.h:16
+#, fuzzy
+msgid "Cursor _themes:"
 msgstr "Tema do Punteiro"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:11
+#: capplets/mouse/gnome-mouse-properties.glade.h:17
 msgid "Cursors"
 msgstr "Punteiros"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:12
-msgid "Double-click Delay"
-msgstr "Retardo da doble prema"
-
-#: capplets/mouse/gnome-mouse-properties.glade.h:13
-msgid "Drag and Drop"
-msgstr "Arrastrar e soltar"
-
-#: capplets/mouse/gnome-mouse-properties.glade.h:14
-msgid ""
-"Left-handed mouse mode switches the left and right buttons on the mouse."
-msgstr "O modo de rato de man esquerda cambia os botóns dereito e esquerdo."
-
-#: capplets/mouse/gnome-mouse-properties.glade.h:15
-msgid "Locate Pointer"
-msgstr "Localizar Punteiro"
-
-#: capplets/mouse/gnome-mouse-properties.glade.h:16
-msgid ""
-"Maximum time allowed between clicks when double-clicking.   Use the box on "
-"the right to test."
+#: capplets/mouse/gnome-mouse-properties.glade.h:18
+msgid "Highlight the _pointer when you press Ctrl"
 msgstr ""
-"Tempo máximo aturado entre premas da doble prema.   Emprega-la caixa da "
-"dereita para probar."
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:17
+#: capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "Motion"
 msgstr "Movemento"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:18
-msgid "Mouse Orientation"
-msgstr "Orientación do rato"
-
-#: capplets/mouse/gnome-mouse-properties.glade.h:19
+#: capplets/mouse/gnome-mouse-properties.glade.h:20
 msgid "Mouse Preferences"
 msgstr "Preferencias do rato"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:20
-msgid "Set the distance you need to move your cursor before dragging an item."
-msgstr ""
-"Especifica-la distancia que debe desprazarse o rato antes de arrastrar un "
-"elemento."
-
 #: capplets/mouse/gnome-mouse-properties.glade.h:21
-msgid "Set the speed of your pointing device."
-msgstr "Determina-la velocidade do dispositivo do punteiro."
-
-#: capplets/mouse/gnome-mouse-properties.glade.h:22
-msgid "Speed"
-msgstr "Velocidade"
-
-#: capplets/mouse/gnome-mouse-properties.glade.h:23
 msgid "_Acceleration:"
 msgstr "_Aceleración"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:24
-msgid "_Delay (sec):"
-msgstr "_Retardo (seg):"
-
-#: capplets/mouse/gnome-mouse-properties.glade.h:25
+#: capplets/mouse/gnome-mouse-properties.glade.h:22
 msgid "_Left-handed mouse"
 msgstr "Rato _esquerdeiro"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:26
+#: capplets/mouse/gnome-mouse-properties.glade.h:23
 msgid "_Sensitivity:"
 msgstr "_Sensibilidade:"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:27
-msgid "_Show position of cursor when the Control key is pressed"
-msgstr ""
-"_Amosa-la posición do punteiro cando a tecla de Control se atopa premida"
-
-#: capplets/mouse/gnome-mouse-properties.glade.h:28
+#: capplets/mouse/gnome-mouse-properties.glade.h:24
 msgid "_Threshold:"
 msgstr "_Umbral"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:25
+msgid "_Timeout:"
+msgstr ""
 
 #: capplets/mouse/mouse.desktop.in.h:2
 #, fuzzy
@@ -1860,7 +1844,7 @@ msgstr "Preferencias do rato"
 
 #: capplets/network/gnome-network-preferences.desktop.in.h:1
 #, fuzzy
-msgid "Network proxy"
+msgid "Network Proxy"
 msgstr "Rede"
 
 #: capplets/network/gnome-network-preferences.desktop.in.h:2
@@ -2020,14 +2004,57 @@ msgstr "Un"
 msgid "Two"
 msgstr "Dous"
 
+#: capplets/theme-switcher/gnome-theme-details.c:372
+#: capplets/theme-switcher/gnome-theme-manager.c:590
+msgid ""
+"No themes could be found on your system.  This probably means that your "
+"\"Theme Preferences\" dialog was improperly installed, or you haven't "
+"installed the \"gnome-themes\" package."
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-manager.c:646
+#: capplets/theme-switcher/gnome-theme-manager.c:706
+#, fuzzy
+msgid "Custom theme"
+msgstr "Tema do Punteiro"
+
+#: capplets/theme-switcher/gnome-theme-manager.c:646
+#: capplets/theme-switcher/gnome-theme-manager.c:706
+msgid "You can save this theme by pressing the Save Theme button."
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-manager.c:1399
+msgid ""
+"The default theme schemas could not be found on your system.  This means "
+"that you probably don't have metacity installed, or that your gconf is "
+"configured incorrectly."
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-save.c:72
+msgid "Theme name must be present"
+msgstr ""
+
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
 #, fuzzy
 msgid "Select themes for various parts of the desktop"
 msgstr "Escolle-la fonte para os iconos do escritorio"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:1
 msgid "Theme"
 msgstr "Tema"
+
+#: capplets/theme-switcher/theme-install.glade.h:2
+msgid "Install new theme"
+msgstr "Instalar un novo tema"
+
+#: capplets/theme-switcher/theme-install.glade.h:3
+msgid "_Install"
+msgstr "_Instalar"
+
+#: capplets/theme-switcher/theme-install.glade.h:4
+msgid "_Location of new theme:"
+msgstr "_Localización do novo tema:"
 
 #: capplets/theme-switcher/theme-properties.glade.h:2
 msgid "<span size=\"larger\" weight=\"bold\">Save theme to disk</span>"
@@ -2119,48 +2146,6 @@ msgstr "Tema"
 #, fuzzy
 msgid "_Theme name:"
 msgstr "_Nome de usuario:"
-
-#: capplets/theme-switcher/theme-install.glade.h:2
-msgid "Install new theme"
-msgstr "Instalar un novo tema"
-
-#: capplets/theme-switcher/theme-install.glade.h:3
-msgid "_Install"
-msgstr "_Instalar"
-
-#: capplets/theme-switcher/theme-install.glade.h:4
-msgid "_Location of new theme:"
-msgstr "_Localización do novo tema:"
-
-#: capplets/theme-switcher/gnome-theme-details.c:372
-#: capplets/theme-switcher/gnome-theme-manager.c:626
-msgid ""
-"No themes could be found on your system.  This probably means that your "
-"\"Theme Preferences\" dialog was improperly installed, or you haven't "
-"installed the \"gnome-themes\" package."
-msgstr ""
-
-#: capplets/theme-switcher/gnome-theme-save.c:72
-msgid "Theme name must be present"
-msgstr ""
-
-#: capplets/theme-switcher/gnome-theme-manager.c:682
-#: capplets/theme-switcher/gnome-theme-manager.c:742
-#, fuzzy
-msgid "Custom theme"
-msgstr "Tema do Punteiro"
-
-#: capplets/theme-switcher/gnome-theme-manager.c:682
-#: capplets/theme-switcher/gnome-theme-manager.c:742
-msgid "You can save this theme by pressing the Save Theme button."
-msgstr ""
-
-#: capplets/theme-switcher/gnome-theme-manager.c:1435
-msgid ""
-"The default theme schemas could not be found on your system.  This means "
-"that you probably don't have metacity installed, or that your gconf is "
-"configured incorrectly."
-msgstr ""
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
@@ -2506,6 +2491,11 @@ msgstr "_Non amosar esta mensaxe outra vez"
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Non se puido carga-lo ficheiro de son %s como evento de %s"
 
+#: gnome-settings-daemon/gnome-settings-xrdb.c:212
+#: gnome-settings-daemon/gnome-settings-xrdb.c:259
+msgid "Cannot determine user's home directory"
+msgstr ""
+
 #: gnome-settings-daemon/gnome-settings-xsettings.c:179
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
@@ -2667,6 +2657,132 @@ msgid ""
 "\" - no hinting, \"slight\", \"medium\", and \"full\" - as much hinting as "
 "possible; may cause distortion of letter forms."
 msgstr ""
+
+#: vfs-methods/themus/theme-method.c:513
+#, fuzzy
+msgid "Themes"
+msgstr "Tema"
+
+#: vfs-methods/themus/themus-properties-view.c:170
+#, fuzzy
+msgid "Control theme"
+msgstr "Tema do Punteiro"
+
+#: vfs-methods/themus/themus-properties-view.c:174
+#, fuzzy
+msgid "Window border theme"
+msgstr "Apariencia do borde da fiestra"
+
+#: vfs-methods/themus/themus-properties-view.c:178
+#, fuzzy
+msgid "Icon theme"
+msgstr "Tema do Punteiro"
+
+#: vfs-methods/themus/themus-properties-view.c:217
+#, fuzzy
+msgid "URI currently displayed"
+msgstr "Transferindo actualmente para a URI"
+
+#: vfs-methods/themus/themus.schemas.in.h:1
+msgid "If set to true, then installed themes will be thumbnailed."
+msgstr ""
+
+#: vfs-methods/themus/themus.schemas.in.h:2
+msgid "If set to true, then themes will be thumbnailed."
+msgstr ""
+
+#: vfs-methods/themus/themus.schemas.in.h:3
+msgid ""
+"Set this key to the command used to create thumbnails for installed themes."
+msgstr ""
+
+#: vfs-methods/themus/themus.schemas.in.h:4
+msgid "Set this key to the command used to create thumbnails for themes."
+msgstr ""
+
+#: vfs-methods/themus/themus.schemas.in.h:5
+msgid "Thumbnail command for installed themes"
+msgstr ""
+
+#: vfs-methods/themus/themus.schemas.in.h:6
+msgid "Thumbnail command for themes"
+msgstr ""
+
+#: vfs-methods/themus/themus.schemas.in.h:7
+msgid "Whether to thumbnail installed themes"
+msgstr ""
+
+#: vfs-methods/themus/themus.schemas.in.h:8
+msgid "Whether to thumbnail themes"
+msgstr ""
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
+msgid "Theme Properties content view component"
+msgstr ""
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
+#, fuzzy
+msgid "Themus Theme Properties view"
+msgstr "Propiedades do rato"
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:1
+#, fuzzy
+msgid "Apply theme..."
+msgstr "_Instalar novo tema..."
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:2
+#, fuzzy
+msgid "Themus component"
+msgstr "Compoñente de visualización"
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:3
+msgid "Themus component apply theme operations"
+msgstr ""
+
+#~ msgid ""
+#~ "<b>Note:</b> You will need to logout and log back in for this setting to "
+#~ "take effect."
+#~ msgstr "<b>Nota:</b> É preciso "
+
+#~ msgid ""
+#~ "Animates a quick marker around the cursor when the Control key has been "
+#~ "pressed and released."
+#~ msgstr ""
+#~ "Anima un marcador rápido ó redor do cursor cando a tecla Control prémese "
+#~ "e sóltase."
+
+#~ msgid "Double-click Delay"
+#~ msgstr "Retardo da doble prema"
+
+#~ msgid ""
+#~ "Left-handed mouse mode switches the left and right buttons on the mouse."
+#~ msgstr "O modo de rato de man esquerda cambia os botóns dereito e esquerdo."
+
+#~ msgid ""
+#~ "Maximum time allowed between clicks when double-clicking.   Use the box "
+#~ "on the right to test."
+#~ msgstr ""
+#~ "Tempo máximo aturado entre premas da doble prema.   Emprega-la caixa da "
+#~ "dereita para probar."
+
+#~ msgid ""
+#~ "Set the distance you need to move your cursor before dragging an item."
+#~ msgstr ""
+#~ "Especifica-la distancia que debe desprazarse o rato antes de arrastrar un "
+#~ "elemento."
+
+#~ msgid "Set the speed of your pointing device."
+#~ msgstr "Determina-la velocidade do dispositivo do punteiro."
+
+#~ msgid "Speed"
+#~ msgstr "Velocidade"
+
+#~ msgid "_Delay (sec):"
+#~ msgstr "_Retardo (seg):"
+
+#~ msgid "_Show position of cursor when the Control key is pressed"
+#~ msgstr ""
+#~ "_Amosa-la posición do punteiro cando a tecla de Control se atopa premida"
 
 #, fuzzy
 #~ msgid "_Repeat Keys"
@@ -2980,9 +3096,6 @@ msgstr ""
 
 #~ msgid "Keyboard Properties"
 #~ msgstr "Propiedades do teclado"
-
-#~ msgid "Mouse Properties"
-#~ msgstr "Propiedades do rato"
 
 #~ msgid "Configure GNOME's use of sound"
 #~ msgstr "Configura-lo uso do son de GNOME"

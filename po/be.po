@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.gnome-2-2.be\n"
-"POT-Creation-Date: 2003-05-07 14:06-0400\n"
+"POT-Creation-Date: 2003-05-20 18:58-0400\n"
 "PO-Revision-Date: 2003-05-01 12:26+0300\n"
 "Last-Translator: Ales Nyakhaychyk <nab@mail.by>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
@@ -52,8 +52,8 @@ msgstr ""
 #: capplets/file-types/file-types-properties.glade.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: capplets/network/gnome-network-preferences.glade.h:2
-#: capplets/theme-switcher/theme-properties.glade.h:1
 #: capplets/theme-switcher/theme-install.glade.h:1
+#: capplets/theme-switcher/theme-properties.glade.h:1
 msgid "*"
 msgstr "*"
 
@@ -248,6 +248,7 @@ msgid "pixels/second"
 msgstr "піксэляў/сэк"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
+#: capplets/mouse/gnome-mouse-properties.glade.h:26
 #: capplets/windows/gnome-window-properties.glade.h:7
 msgid "seconds"
 msgstr "сэкундаў"
@@ -398,6 +399,11 @@ msgstr ""
 "гэта праблемы з Bonobo, альбо іншы мэнаджар наладак (напрыклад, KDE) можа "
 "быць запушчаны й канфліктаваць з мэнаджарам наладак GNOME."
 
+#: capplets/common/capplet-stock-icons.c:94
+#, c-format
+msgid "Unable to load capplet stock icon '%s'\n"
+msgstr "Немагчыма загрузіць значку (stock) каплета '%s'\n"
+
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "Толькі ужыць усталёўкі й выйсьці"
@@ -406,11 +412,6 @@ msgstr "Толькі ужыць усталёўкі й выйсьці"
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Памылка пад час адлюстраваньня дапамогі: %s"
-
-#: capplets/common/capplet-stock-icons.c:94
-#, c-format
-msgid "Unable to load capplet stock icon '%s'\n"
-msgstr "Немагчыма загрузіць значку (stock) каплета '%s'\n"
 
 #: capplets/common/file-transfer-dialog.c:95
 #, c-format
@@ -943,6 +944,7 @@ msgid ""
 msgstr ""
 
 #: capplets/file-types/file-types-capplet.c:196
+#: vfs-methods/themus/themus-properties-view.c:165
 msgid "Description"
 msgstr "Апісаньне"
 
@@ -1665,136 +1667,121 @@ msgstr ""
 "Павялічаная вэрсыя белага курсора"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:1
-msgid ""
-"<b>Note:</b> You will need to logout and log back in for this setting to "
-"take effect."
-msgstr ""
-"<b>Заўвага:</b> Дзеля таго каб усталёўкі падзейнічалі, трэба выйсьці й "
-"нанова ўвайсьці ў сыстэму."
+#, fuzzy
+msgid "    "
+msgstr "      "
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:2
-msgid "<i>Fast</i>"
-msgstr "<i>Хутка</i>"
+#, fuzzy
+msgid "<b>Cursor Theme</b>"
+msgstr "Тэма курсора"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:3
-msgid "<i>High</i>"
-msgstr "<i>Высокая</i>"
+msgid "<b>Double-Click Timeout </b>"
+msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:4
-msgid "<i>Large</i>"
-msgstr "<i>Вялікі</i>"
+#, fuzzy
+msgid "<b>Drag and Drop</b>"
+msgstr "Перанос і кіданьне"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:5
-msgid "<i>Low</i>"
-msgstr "<i>Нізкая</i>"
+#, fuzzy
+msgid "<b>Locate Pointer</b>"
+msgstr "Адшукаць указальнік"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:6
-msgid "<i>Slow</i>"
-msgstr "<i>Павольна</i>"
+#, fuzzy
+msgid "<b>Mouse Orientation</b>"
+msgstr "Арыентацыя мышы"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:7
-msgid "<i>Small</i>"
-msgstr "<i>Малы</i>"
+#, fuzzy
+msgid "<b>Speed</b>"
+msgstr "Магчымасьці"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid ""
-"Animates a quick marker around the cursor when the Control key has been "
-"pressed and released."
-msgstr "Малюе вакол курсора адзнаку пад час націску клявішы Ctrl."
+"<i><small><b>Note:</b> Changes to this setting will not take effect until "
+"you next log in.</small></i>"
+msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:9
+msgid "<i>Fast</i>"
+msgstr "<i>Хутка</i>"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:10
+msgid "<i>High</i>"
+msgstr "<i>Высокая</i>"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:11
+msgid "<i>Large</i>"
+msgstr "<i>Вялікі</i>"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:12
+msgid "<i>Low</i>"
+msgstr "<i>Нізкая</i>"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:13
+msgid "<i>Slow</i>"
+msgstr "<i>Павольна</i>"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:14
+msgid "<i>Small</i>"
+msgstr "<i>Малы</i>"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:15
 msgid "Buttons"
 msgstr "Кнопкі"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:10
-msgid "Cursor Theme"
+#: capplets/mouse/gnome-mouse-properties.glade.h:16
+#, fuzzy
+msgid "Cursor _themes:"
 msgstr "Тэма курсора"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:11
+#: capplets/mouse/gnome-mouse-properties.glade.h:17
 msgid "Cursors"
 msgstr "Курсоры"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:12
-msgid "Double-click Delay"
-msgstr "Затрымка падвойнага кліку"
-
-#: capplets/mouse/gnome-mouse-properties.glade.h:13
-msgid "Drag and Drop"
-msgstr "Перанос і кіданьне"
-
-#: capplets/mouse/gnome-mouse-properties.glade.h:14
-msgid ""
-"Left-handed mouse mode switches the left and right buttons on the mouse."
-msgstr "Рэжым мышы пад левую руку зьмяняе мейсцамі левую й правую кнопкі мышы."
-
-#: capplets/mouse/gnome-mouse-properties.glade.h:15
-msgid "Locate Pointer"
-msgstr "Адшукаць указальнік"
-
-#: capplets/mouse/gnome-mouse-properties.glade.h:16
-msgid ""
-"Maximum time allowed between clicks when double-clicking.   Use the box on "
-"the right to test."
+#: capplets/mouse/gnome-mouse-properties.glade.h:18
+msgid "Highlight the _pointer when you press Ctrl"
 msgstr ""
-"Максымальны час між клікамі ў падвойным кліке. Выкарыстоўвайце поле з "
-"правага боку для праверкі."
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:17
+#: capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "Motion"
 msgstr "Рух"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:18
-msgid "Mouse Orientation"
-msgstr "Арыентацыя мышы"
-
-#: capplets/mouse/gnome-mouse-properties.glade.h:19
+#: capplets/mouse/gnome-mouse-properties.glade.h:20
 msgid "Mouse Preferences"
 msgstr "Перавагі мышы"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:20
-msgid "Set the distance you need to move your cursor before dragging an item."
-msgstr ""
-"Усталяваць адлегласьць, на якую павінны быць зрушаны курсор для пераносу "
-"элемэнта."
-
 #: capplets/mouse/gnome-mouse-properties.glade.h:21
-msgid "Set the speed of your pointing device."
-msgstr "Усталяваць хуткасьць курсора."
-
-#: capplets/mouse/gnome-mouse-properties.glade.h:22
-msgid "Speed"
-msgstr "Хуткасьць"
-
-#: capplets/mouse/gnome-mouse-properties.glade.h:23
 msgid "_Acceleration:"
 msgstr "Паск_арэньне:"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:24
-msgid "_Delay (sec):"
-msgstr "Зат_рымка (сэк):"
-
-#: capplets/mouse/gnome-mouse-properties.glade.h:25
+#: capplets/mouse/gnome-mouse-properties.glade.h:22
 msgid "_Left-handed mouse"
 msgstr "Мыш пад _левую руку"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:26
+#: capplets/mouse/gnome-mouse-properties.glade.h:23
 msgid "_Sensitivity:"
 msgstr "_Чуласьць:"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:27
-msgid "_Show position of cursor when the Control key is pressed"
-msgstr "Адлюстро_ўваць разьмяшчэньне курсора калі націснута клявіша Ctrl"
-
-#: capplets/mouse/gnome-mouse-properties.glade.h:28
+#: capplets/mouse/gnome-mouse-properties.glade.h:24
 msgid "_Threshold:"
 msgstr "_Парог:"
+
+#: capplets/mouse/gnome-mouse-properties.glade.h:25
+msgid "_Timeout:"
+msgstr ""
 
 #: capplets/mouse/mouse.desktop.in.h:2
 msgid "Set your mouse preferences"
 msgstr "Усталяваньне перавагаў для вашае мышы"
 
 #: capplets/network/gnome-network-preferences.desktop.in.h:1
-msgid "Network proxy"
+#, fuzzy
+msgid "Network Proxy"
 msgstr "Сеткавы проксі"
 
 #: capplets/network/gnome-network-preferences.desktop.in.h:2
@@ -1942,13 +1929,59 @@ msgstr "Адзін"
 msgid "Two"
 msgstr "Два"
 
+#: capplets/theme-switcher/gnome-theme-details.c:372
+#: capplets/theme-switcher/gnome-theme-manager.c:590
+msgid ""
+"No themes could be found on your system.  This probably means that your "
+"\"Theme Preferences\" dialog was improperly installed, or you haven't "
+"installed the \"gnome-themes\" package."
+msgstr ""
+"Няма тэмаў на вашае сыстэме. Гэта можа азначаць, што верагодна кетска "
+"ўсталяваны дыялёг \"Перавагі для тэмы\",  ці вы ня маеце ўсталяванага пакета "
+"\"gnome-themes\"."
+
+#: capplets/theme-switcher/gnome-theme-manager.c:646
+#: capplets/theme-switcher/gnome-theme-manager.c:706
+msgid "Custom theme"
+msgstr "Тэма карыстальніка"
+
+#: capplets/theme-switcher/gnome-theme-manager.c:646
+#: capplets/theme-switcher/gnome-theme-manager.c:706
+msgid "You can save this theme by pressing the Save Theme button."
+msgstr ""
+"Вы можаце захаваць гэтую тэму, калі націсьніце кнопку \"Захаваць тэму\"."
+
+#: capplets/theme-switcher/gnome-theme-manager.c:1399
+msgid ""
+"The default theme schemas could not be found on your system.  This means "
+"that you probably don't have metacity installed, or that your gconf is "
+"configured incorrectly."
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-save.c:72
+msgid "Theme name must be present"
+msgstr "Мусіць прысутнічаць назва тэмы"
+
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
 msgid "Select themes for various parts of the desktop"
 msgstr "Усталяваньне тэмаў для розных частак стальца"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:1
 msgid "Theme"
 msgstr "Тэма"
+
+#: capplets/theme-switcher/theme-install.glade.h:2
+msgid "Install new theme"
+msgstr "Усталяваць новую тэму"
+
+#: capplets/theme-switcher/theme-install.glade.h:3
+msgid "_Install"
+msgstr "_Усталяваць"
+
+#: capplets/theme-switcher/theme-install.glade.h:4
+msgid "_Location of new theme:"
+msgstr "_Разьмяшчэньне новае тэмы:"
 
 #: capplets/theme-switcher/theme-properties.glade.h:2
 msgid "<span size=\"larger\" weight=\"bold\">Save theme to disk</span>"
@@ -2034,51 +2067,6 @@ msgstr "_Захаваць тэму"
 #: capplets/theme-switcher/theme-properties.glade.h:22
 msgid "_Theme name:"
 msgstr "Назва _тэмы:"
-
-#: capplets/theme-switcher/theme-install.glade.h:2
-msgid "Install new theme"
-msgstr "Усталяваць новую тэму"
-
-#: capplets/theme-switcher/theme-install.glade.h:3
-msgid "_Install"
-msgstr "_Усталяваць"
-
-#: capplets/theme-switcher/theme-install.glade.h:4
-msgid "_Location of new theme:"
-msgstr "_Разьмяшчэньне новае тэмы:"
-
-#: capplets/theme-switcher/gnome-theme-details.c:372
-#: capplets/theme-switcher/gnome-theme-manager.c:626
-msgid ""
-"No themes could be found on your system.  This probably means that your "
-"\"Theme Preferences\" dialog was improperly installed, or you haven't "
-"installed the \"gnome-themes\" package."
-msgstr ""
-"Няма тэмаў на вашае сыстэме. Гэта можа азначаць, што верагодна кетска "
-"ўсталяваны дыялёг \"Перавагі для тэмы\",  ці вы ня маеце ўсталяванага пакета "
-"\"gnome-themes\"."
-
-#: capplets/theme-switcher/gnome-theme-save.c:72
-msgid "Theme name must be present"
-msgstr "Мусіць прысутнічаць назва тэмы"
-
-#: capplets/theme-switcher/gnome-theme-manager.c:682
-#: capplets/theme-switcher/gnome-theme-manager.c:742
-msgid "Custom theme"
-msgstr "Тэма карыстальніка"
-
-#: capplets/theme-switcher/gnome-theme-manager.c:682
-#: capplets/theme-switcher/gnome-theme-manager.c:742
-msgid "You can save this theme by pressing the Save Theme button."
-msgstr ""
-"Вы можаце захаваць гэтую тэму, калі націсьніце кнопку \"Захаваць тэму\"."
-
-#: capplets/theme-switcher/gnome-theme-manager.c:1435
-msgid ""
-"The default theme schemas could not be found on your system.  This means "
-"that you probably don't have metacity installed, or that your gconf is "
-"configured incorrectly."
-msgstr ""
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
@@ -2411,6 +2399,11 @@ msgstr "_Ня адлюстроўваць гэтае паведамленьне �
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Ня атрымалася загрузіць гукавы файл %s у якасьці узору %s"
 
+#: gnome-settings-daemon/gnome-settings-xrdb.c:212
+#: gnome-settings-daemon/gnome-settings-xrdb.c:259
+msgid "Cannot determine user's home directory"
+msgstr ""
+
 #: gnome-settings-daemon/gnome-settings-xsettings.c:179
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
@@ -2583,6 +2576,132 @@ msgstr ""
 "Тып удакладненьня для вываду шрыфтоў. Магчымыя значэньні: \"none\"  - бяз "
 "удакладненьня, \"slight\", \"medium\", і \"full\" - найбольшае "
 "ўдакладненьне;  можа выклікаць скажэньне формы літараў."
+
+#: vfs-methods/themus/theme-method.c:513
+#, fuzzy
+msgid "Themes"
+msgstr "Тэма"
+
+#: vfs-methods/themus/themus-properties-view.c:170
+#, fuzzy
+msgid "Control theme"
+msgstr "Тэма карыстальніка"
+
+#: vfs-methods/themus/themus-properties-view.c:174
+#, fuzzy
+msgid "Window border theme"
+msgstr "Рамка акна"
+
+#: vfs-methods/themus/themus-properties-view.c:178
+#, fuzzy
+msgid "Icon theme"
+msgstr "Тэма карыстальніка"
+
+#: vfs-methods/themus/themus-properties-view.c:217
+#, fuzzy
+msgid "URI currently displayed"
+msgstr "URI, куды адбываецца перамяшчэньне"
+
+#: vfs-methods/themus/themus.schemas.in.h:1
+msgid "If set to true, then installed themes will be thumbnailed."
+msgstr ""
+
+#: vfs-methods/themus/themus.schemas.in.h:2
+msgid "If set to true, then themes will be thumbnailed."
+msgstr ""
+
+#: vfs-methods/themus/themus.schemas.in.h:3
+msgid ""
+"Set this key to the command used to create thumbnails for installed themes."
+msgstr ""
+
+#: vfs-methods/themus/themus.schemas.in.h:4
+msgid "Set this key to the command used to create thumbnails for themes."
+msgstr ""
+
+#: vfs-methods/themus/themus.schemas.in.h:5
+msgid "Thumbnail command for installed themes"
+msgstr ""
+
+#: vfs-methods/themus/themus.schemas.in.h:6
+msgid "Thumbnail command for themes"
+msgstr ""
+
+#: vfs-methods/themus/themus.schemas.in.h:7
+msgid "Whether to thumbnail installed themes"
+msgstr ""
+
+#: vfs-methods/themus/themus.schemas.in.h:8
+msgid "Whether to thumbnail themes"
+msgstr ""
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
+msgid "Theme Properties content view component"
+msgstr ""
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
+#, fuzzy
+msgid "Themus Theme Properties view"
+msgstr "Уласьцівасьці мышы"
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:1
+#, fuzzy
+msgid "Apply theme..."
+msgstr "_Усталяваць тэму..."
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:2
+#, fuzzy
+msgid "Themus component"
+msgstr "Кампанэнт праглядальніка:"
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:3
+msgid "Themus component apply theme operations"
+msgstr ""
+
+#~ msgid ""
+#~ "<b>Note:</b> You will need to logout and log back in for this setting to "
+#~ "take effect."
+#~ msgstr ""
+#~ "<b>Заўвага:</b> Дзеля таго каб усталёўкі падзейнічалі, трэба выйсьці й "
+#~ "нанова ўвайсьці ў сыстэму."
+
+#~ msgid ""
+#~ "Animates a quick marker around the cursor when the Control key has been "
+#~ "pressed and released."
+#~ msgstr "Малюе вакол курсора адзнаку пад час націску клявішы Ctrl."
+
+#~ msgid "Double-click Delay"
+#~ msgstr "Затрымка падвойнага кліку"
+
+#~ msgid ""
+#~ "Left-handed mouse mode switches the left and right buttons on the mouse."
+#~ msgstr ""
+#~ "Рэжым мышы пад левую руку зьмяняе мейсцамі левую й правую кнопкі мышы."
+
+#~ msgid ""
+#~ "Maximum time allowed between clicks when double-clicking.   Use the box "
+#~ "on the right to test."
+#~ msgstr ""
+#~ "Максымальны час між клікамі ў падвойным кліке. Выкарыстоўвайце поле з "
+#~ "правага боку для праверкі."
+
+#~ msgid ""
+#~ "Set the distance you need to move your cursor before dragging an item."
+#~ msgstr ""
+#~ "Усталяваць адлегласьць, на якую павінны быць зрушаны курсор для пераносу "
+#~ "элемэнта."
+
+#~ msgid "Set the speed of your pointing device."
+#~ msgstr "Усталяваць хуткасьць курсора."
+
+#~ msgid "Speed"
+#~ msgstr "Хуткасьць"
+
+#~ msgid "_Delay (sec):"
+#~ msgstr "Зат_рымка (сэк):"
+
+#~ msgid "_Show position of cursor when the Control key is pressed"
+#~ msgstr "Адлюстро_ўваць разьмяшчэньне курсора калі націснута клявіша Ctrl"
 
 #~ msgid "_Repeat Keys"
 #~ msgstr "_Паўтор клявішаў"
@@ -2899,9 +3018,6 @@ msgstr ""
 
 #~ msgid "Keyboard Properties"
 #~ msgstr "Уласьцівасьці клявіятуры"
-
-#~ msgid "Mouse Properties"
-#~ msgstr "Уласьцівасьці мышы"
 
 #~ msgid "Configure GNOME's use of sound"
 #~ msgstr "Канфігураваньне выкарыстаньня гуку ў GNOME"

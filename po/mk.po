@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD\n"
-"POT-Creation-Date: 2003-05-07 14:06-0400\n"
+"POT-Creation-Date: 2003-05-20 18:58-0400\n"
 "PO-Revision-Date: 2002-12-15 23:13+0100\n"
 "Last-Translator: Maratonec 4 <maraton@localhost.localdomain>\n"
 "Language-Team: Macedonian <en@li.org>\n"
@@ -55,8 +55,8 @@ msgstr ""
 #: capplets/file-types/file-types-properties.glade.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: capplets/network/gnome-network-preferences.glade.h:2
-#: capplets/theme-switcher/theme-properties.glade.h:1
 #: capplets/theme-switcher/theme-install.glade.h:1
+#: capplets/theme-switcher/theme-properties.glade.h:1
 msgid "*"
 msgstr "*"
 
@@ -246,6 +246,7 @@ msgid "pixels/second"
 msgstr "пиксели/секунда"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
+#: capplets/mouse/gnome-mouse-properties.glade.h:26
 #: capplets/windows/gnome-window-properties.glade.h:7
 msgid "seconds"
 msgstr "секунди"
@@ -395,6 +396,11 @@ msgstr ""
 "Ова може да покаже проблем со Bonobo, или не-GNOME (пр. KDE) менаџери за "
 "подесувања веќе се активни и се во конфликт со GNOME менаџерот за подесувања."
 
+#: capplets/common/capplet-stock-icons.c:94
+#, c-format
+msgid "Unable to load capplet stock icon '%s'\n"
+msgstr ""
+
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "Само примени подесувања и напушти"
@@ -403,11 +409,6 @@ msgstr "Само примени подесувања и напушти"
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Грешка при прикажувањето на помошта: %s"
-
-#: capplets/common/capplet-stock-icons.c:94
-#, c-format
-msgid "Unable to load capplet stock icon '%s'\n"
-msgstr ""
 
 #: capplets/common/file-transfer-dialog.c:95
 #, c-format
@@ -935,6 +936,7 @@ msgid ""
 msgstr ""
 
 #: capplets/file-types/file-types-capplet.c:196
+#: vfs-methods/themus/themus-properties-view.c:165
 msgid "Description"
 msgstr "Опис"
 
@@ -1627,122 +1629,106 @@ msgid ""
 msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:1
-msgid ""
-"<b>Note:</b> You will need to logout and log back in for this setting to "
-"take effect."
+msgid "    "
 msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:2
-msgid "<i>Fast</i>"
+msgid "<b>Cursor Theme</b>"
 msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:3
-msgid "<i>High</i>"
+msgid "<b>Double-Click Timeout </b>"
 msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:4
-msgid "<i>Large</i>"
+msgid "<b>Drag and Drop</b>"
 msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:5
-msgid "<i>Low</i>"
+msgid "<b>Locate Pointer</b>"
 msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:6
-msgid "<i>Slow</i>"
+msgid "<b>Mouse Orientation</b>"
 msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:7
-msgid "<i>Small</i>"
-msgstr ""
+#, fuzzy
+msgid "<b>Speed</b>"
+msgstr "Карактеристики"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid ""
-"Animates a quick marker around the cursor when the Control key has been "
-"pressed and released."
+"<i><small><b>Note:</b> Changes to this setting will not take effect until "
+"you next log in.</small></i>"
 msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:9
-msgid "Buttons"
+msgid "<i>Fast</i>"
 msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:10
-msgid "Cursor Theme"
+msgid "<i>High</i>"
 msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:11
-msgid "Cursors"
+msgid "<i>Large</i>"
 msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:12
-msgid "Double-click Delay"
+msgid "<i>Low</i>"
 msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:13
-msgid "Drag and Drop"
+msgid "<i>Slow</i>"
 msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:14
-msgid ""
-"Left-handed mouse mode switches the left and right buttons on the mouse."
+msgid "<i>Small</i>"
 msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:15
-msgid "Locate Pointer"
+msgid "Buttons"
 msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:16
-msgid ""
-"Maximum time allowed between clicks when double-clicking.   Use the box on "
-"the right to test."
+msgid "Cursor _themes:"
 msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:17
-msgid "Motion"
+msgid "Cursors"
 msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:18
-msgid "Mouse Orientation"
+msgid "Highlight the _pointer when you press Ctrl"
 msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:19
-msgid "Mouse Preferences"
+msgid "Motion"
 msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:20
-msgid "Set the distance you need to move your cursor before dragging an item."
+msgid "Mouse Preferences"
 msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:21
-msgid "Set the speed of your pointing device."
-msgstr ""
-
-#: capplets/mouse/gnome-mouse-properties.glade.h:22
-msgid "Speed"
-msgstr ""
-
-#: capplets/mouse/gnome-mouse-properties.glade.h:23
 msgid "_Acceleration:"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:24
-msgid "_Delay (sec):"
-msgstr ""
-
-#: capplets/mouse/gnome-mouse-properties.glade.h:25
+#: capplets/mouse/gnome-mouse-properties.glade.h:22
 msgid "_Left-handed mouse"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:26
+#: capplets/mouse/gnome-mouse-properties.glade.h:23
 msgid "_Sensitivity:"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:27
-msgid "_Show position of cursor when the Control key is pressed"
+#: capplets/mouse/gnome-mouse-properties.glade.h:24
+msgid "_Threshold:"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:28
-msgid "_Threshold:"
+#: capplets/mouse/gnome-mouse-properties.glade.h:25
+msgid "_Timeout:"
 msgstr ""
 
 #: capplets/mouse/mouse.desktop.in.h:2
@@ -1750,7 +1736,7 @@ msgid "Set your mouse preferences"
 msgstr ""
 
 #: capplets/network/gnome-network-preferences.desktop.in.h:1
-msgid "Network proxy"
+msgid "Network Proxy"
 msgstr ""
 
 #: capplets/network/gnome-network-preferences.desktop.in.h:2
@@ -1898,12 +1884,54 @@ msgstr ""
 msgid "Two"
 msgstr ""
 
+#: capplets/theme-switcher/gnome-theme-details.c:372
+#: capplets/theme-switcher/gnome-theme-manager.c:590
+msgid ""
+"No themes could be found on your system.  This probably means that your "
+"\"Theme Preferences\" dialog was improperly installed, or you haven't "
+"installed the \"gnome-themes\" package."
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-manager.c:646
+#: capplets/theme-switcher/gnome-theme-manager.c:706
+msgid "Custom theme"
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-manager.c:646
+#: capplets/theme-switcher/gnome-theme-manager.c:706
+msgid "You can save this theme by pressing the Save Theme button."
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-manager.c:1399
+msgid ""
+"The default theme schemas could not be found on your system.  This means "
+"that you probably don't have metacity installed, or that your gconf is "
+"configured incorrectly."
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-save.c:72
+msgid "Theme name must be present"
+msgstr ""
+
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
 msgid "Select themes for various parts of the desktop"
 msgstr ""
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:1
 msgid "Theme"
+msgstr ""
+
+#: capplets/theme-switcher/theme-install.glade.h:2
+msgid "Install new theme"
+msgstr ""
+
+#: capplets/theme-switcher/theme-install.glade.h:3
+msgid "_Install"
+msgstr ""
+
+#: capplets/theme-switcher/theme-install.glade.h:4
+msgid "_Location of new theme:"
 msgstr ""
 
 #: capplets/theme-switcher/theme-properties.glade.h:2
@@ -1982,47 +2010,6 @@ msgstr ""
 
 #: capplets/theme-switcher/theme-properties.glade.h:22
 msgid "_Theme name:"
-msgstr ""
-
-#: capplets/theme-switcher/theme-install.glade.h:2
-msgid "Install new theme"
-msgstr ""
-
-#: capplets/theme-switcher/theme-install.glade.h:3
-msgid "_Install"
-msgstr ""
-
-#: capplets/theme-switcher/theme-install.glade.h:4
-msgid "_Location of new theme:"
-msgstr ""
-
-#: capplets/theme-switcher/gnome-theme-details.c:372
-#: capplets/theme-switcher/gnome-theme-manager.c:626
-msgid ""
-"No themes could be found on your system.  This probably means that your "
-"\"Theme Preferences\" dialog was improperly installed, or you haven't "
-"installed the \"gnome-themes\" package."
-msgstr ""
-
-#: capplets/theme-switcher/gnome-theme-save.c:72
-msgid "Theme name must be present"
-msgstr ""
-
-#: capplets/theme-switcher/gnome-theme-manager.c:682
-#: capplets/theme-switcher/gnome-theme-manager.c:742
-msgid "Custom theme"
-msgstr ""
-
-#: capplets/theme-switcher/gnome-theme-manager.c:682
-#: capplets/theme-switcher/gnome-theme-manager.c:742
-msgid "You can save this theme by pressing the Save Theme button."
-msgstr ""
-
-#: capplets/theme-switcher/gnome-theme-manager.c:1435
-msgid ""
-"The default theme schemas could not be found on your system.  This means "
-"that you probably don't have metacity installed, or that your gconf is "
-"configured incorrectly."
 msgstr ""
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
@@ -2338,6 +2325,11 @@ msgstr ""
 msgid "Couldn't load sound file %s as sample %s"
 msgstr ""
 
+#: gnome-settings-daemon/gnome-settings-xrdb.c:212
+#: gnome-settings-daemon/gnome-settings-xrdb.c:259
+msgid "Cannot determine user's home directory"
+msgstr ""
+
 #: gnome-settings-daemon/gnome-settings-xsettings.c:179
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
@@ -2490,6 +2482,81 @@ msgid ""
 "The type of hinting to use when rendering fonts. Possible values are: \"none"
 "\" - no hinting, \"slight\", \"medium\", and \"full\" - as much hinting as "
 "possible; may cause distortion of letter forms."
+msgstr ""
+
+#: vfs-methods/themus/theme-method.c:513
+msgid "Themes"
+msgstr ""
+
+#: vfs-methods/themus/themus-properties-view.c:170
+#, fuzzy
+msgid "Control theme"
+msgstr "Мени за Центар за Контрола"
+
+#: vfs-methods/themus/themus-properties-view.c:174
+msgid "Window border theme"
+msgstr ""
+
+#: vfs-methods/themus/themus-properties-view.c:178
+msgid "Icon theme"
+msgstr ""
+
+#: vfs-methods/themus/themus-properties-view.c:217
+#, fuzzy
+msgid "URI currently displayed"
+msgstr "URI моментално пренесува до"
+
+#: vfs-methods/themus/themus.schemas.in.h:1
+msgid "If set to true, then installed themes will be thumbnailed."
+msgstr ""
+
+#: vfs-methods/themus/themus.schemas.in.h:2
+msgid "If set to true, then themes will be thumbnailed."
+msgstr ""
+
+#: vfs-methods/themus/themus.schemas.in.h:3
+msgid ""
+"Set this key to the command used to create thumbnails for installed themes."
+msgstr ""
+
+#: vfs-methods/themus/themus.schemas.in.h:4
+msgid "Set this key to the command used to create thumbnails for themes."
+msgstr ""
+
+#: vfs-methods/themus/themus.schemas.in.h:5
+msgid "Thumbnail command for installed themes"
+msgstr ""
+
+#: vfs-methods/themus/themus.schemas.in.h:6
+msgid "Thumbnail command for themes"
+msgstr ""
+
+#: vfs-methods/themus/themus.schemas.in.h:7
+msgid "Whether to thumbnail installed themes"
+msgstr ""
+
+#: vfs-methods/themus/themus.schemas.in.h:8
+msgid "Whether to thumbnail themes"
+msgstr ""
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
+msgid "Theme Properties content view component"
+msgstr ""
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
+msgid "Themus Theme Properties view"
+msgstr ""
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:1
+msgid "Apply theme..."
+msgstr ""
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:2
+msgid "Themus component"
+msgstr ""
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:3
+msgid "Themus component apply theme operations"
 msgstr ""
 
 #~ msgid "_Repeat Keys"
