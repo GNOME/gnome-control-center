@@ -15,6 +15,10 @@
 #include "capplet-widget.h"
 #include "gnome.h"
 
+#include <ximian-archiver/archive.h>
+#include <ximian-archiver/location.h>
+
+
 /* prototypes */
 static void restart         (gboolean force);
 static void try_callback    (void);
@@ -122,6 +126,24 @@ gboolean restart_pending = FALSE;
 /* Set TRUE while we are filling in the list
  */
 gboolean in_fill = FALSE;
+
+
+static void
+store_archive_data (void) 
+{
+	Archive *archive;
+	Location *location;
+	xmlDocPtr xml_doc;
+
+	archive = ARCHIVE (archive_load (FALSE));
+	location = archive_get_current_location (archive);
+	xml_doc = wm_list_write_to_xml ();
+	location_store_xml (location, "wm-properties-capplet",
+			    xml_doc, STORE_MASK_PREVIOUS);
+	xmlFreeDoc (xml_doc);
+	archive_close (archive);
+}
+
 
 static GtkWidget *
 left_aligned_button (gchar *label)
@@ -656,7 +678,7 @@ ok_callback (void)
         case STATE_IDLE:
                 state = STATE_OK;
                 restart(FALSE);
-                return;
+                break;
                 
         case STATE_TRY:
                 state = STATE_OK;
@@ -674,6 +696,9 @@ ok_callback (void)
                 g_warning ("ok callback in state %d!!!\n", state);
                 return;
         }
+
+        wm_list_save ();
+        store_archive_data ();
 }
 
 static void

@@ -1,3 +1,15 @@
+2001-03-18  Ravi Pratap  <ravi@che.iitm.ac.in>
+
+	* control-center/capplet-widget.h (CAPPLET_WIDGET_CLASS): Correct
+	to cast to CappletWidgetClass
+
+	* capplets/wm-properties.c (store_archive_data): add
+	(ok_callback): Modify to store settings using wm_list_save 
+
+	* capplets/gnome-edit-properties.c (edit_apply): Modify to call
+	store_archive_data before exiting.
+	(current_info): Add new global variable to hold current state.
+
 2001-03-15  Bradford Hovinen  <hovinen@ximian.com>
 
 	* capplets/new-*/main.c: Added code to store archive data with the
