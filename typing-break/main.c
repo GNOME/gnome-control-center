@@ -31,38 +31,6 @@
 gboolean debug = FALSE;
 
 static gboolean
-session_die (GnomeClient *client, gpointer client_data)
-{
-	gtk_main_quit ();
-
-	return TRUE;
-}
-
-static gboolean
-session_save (GnomeClient        *client,
-	      gint                phase,
-	      GnomeRestartStyle   rstyle,
-	      gint                shutdown,
-	      GnomeInteractStyle  istyle,
-	      gint                fast,
-	      gpointer            user_data)
-{
-	gchar *argv[2];
-	
-	/* Only with glib 2.2:
-	 * argv[0] = g_get_application_name ();
-	 */
-	
-	argv[0] = user_data;
-	argv[1] = "-n";
-	   
-	gnome_client_set_clone_command (client, 2, argv);
-        gnome_client_set_restart_command (client, 2, argv);
-
-	return TRUE;
-}
-
-static gboolean
 have_tray (void)
 {
 	Screen *xscreen = DefaultScreenOfDisplay (gdk_display);
@@ -146,26 +114,6 @@ main (int argc, char *argv[])
 		gtk_widget_destroy (dialog);
 	}
 	
-	client = gnome_master_client ();
-
-	gnome_client_set_priority (client, 70);
-	if (!debug) {
-		gnome_client_set_restart_style (client, GNOME_RESTART_IMMEDIATELY);
-	} else {
-		/* Don't respawn in debug mode. */
-		gnome_client_set_restart_style (client, GNOME_RESTART_IF_RUNNING);
-	}
-	
-	g_signal_connect (client,
-			  "save_yourself",
-			  G_CALLBACK (session_save),
-			  argv[0]);
-
-	g_signal_connect (client,
-			  "die",
-			  G_CALLBACK (session_die),
-			  NULL);
-
 	drwright = drwright_new ();
 
 	gtk_main ();
