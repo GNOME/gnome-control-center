@@ -526,10 +526,9 @@ capplet_init (int                      argc,
 	}
 
 	if ((apply_only || init_session) && apply_fn != NULL) {
-		if (needs_legacy) {
+		setup_session_mgmt (argv[0]);
+		if (needs_legacy)
 			get_legacy_fn (db);
-			Bonobo_ConfigDatabase_sync (db, &ev);
-		}
 
 		apply_fn (db);
 	}
