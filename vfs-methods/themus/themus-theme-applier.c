@@ -17,9 +17,10 @@
  * Boston, MA 02111-1307, USA.
  */
 
+#include <libgnome/libgnome.h>
+#include <libgnomeui/libgnomeui.h>
 #include <libbonobo.h>
 #include <libgnomevfs/gnome-vfs.h>
-#include "themus-component.h"
 #include <gnome-theme-info.h>
 #include <gnome-theme-apply.h>
 #include <gconf/gconf-client.h>
@@ -28,35 +29,33 @@
 
 #define FONT_KEY           "/desktop/gnome/interface/font_name"
 
-static void
-impl_Bonobo_Listener_event (PortableServer_Servant servant,
-			    const CORBA_char *event_name,
-			    const CORBA_any *args,
-			    CORBA_Environment *ev)
+int main (int argc, char* argv[])
 {
-	ThemusComponent *component;
-	const CORBA_sequence_CORBA_string *list;
-	
+	GValue value = { 0, };
 	GnomeVFSURI *uri;
 	GnomeThemeMetaInfo *theme;
 	GConfClient *client;
+	GnomeProgram *program;
+	poptContext ctx;
+	gchar **args;
 
-	component = THEMUS_COMPONENT (bonobo_object_from_servant (servant));
-
-	if (!CORBA_TypeCode_equivalent (args->_type, TC_CORBA_sequence_CORBA_string, ev)) {
-		return;
-	}
-
-	list = (CORBA_sequence_CORBA_string *)args->_value;
-
-	g_return_if_fail (component != NULL);
-	g_return_if_fail (list != NULL);
+	program = gnome_program_init ("ThemeApplier", "0.3.0", LIBGNOMEUI_MODULE, argc, 
+		argv, GNOME_PARAM_NONE);
 	
-	if (strcmp (event_name, "ApplyTheme") == 0) {
-		uri = gnome_vfs_uri_new (list->_buffer[0]);
+	g_value_init (&value, G_TYPE_POINTER);
+	g_object_get_property (G_OBJECT (program), GNOME_PARAM_POPT_CONTEXT, &value);
+	ctx = g_value_get_pointer (&value);
+	g_value_unset (&value);
+	args = (char**) poptGetArgs(ctx);
+
+	if (args)
+	{
+		gnome_vfs_init ();
+		gnome_theme_init (FALSE);
+		
+		uri = gnome_vfs_uri_new (args[0]);
 		g_assert (uri != NULL);
 		
-
 		theme = gnome_theme_read_meta_theme (uri);
 		gnome_vfs_uri_unref (uri);
 		
@@ -68,26 +67,7 @@ impl_Bonobo_Listener_event (PortableServer_Servant servant,
 			client = gconf_client_get_default ();
 			gconf_client_set_string (client, FONT_KEY, theme->application_font, NULL);
 		}
+		return 0;
 	}
+	else return 1;
 }
-
-
-/* initialize the class */
-static void
-themus_component_class_init (ThemusComponentClass *class)
-{
-	POA_Bonobo_Listener__epv *epv = &class->epv;
-	epv->event = impl_Bonobo_Listener_event;
-}
-
-
-static void
-themus_component_init (ThemusComponent *component)
-{
-	gnome_theme_init (FALSE);
-}
-
-BONOBO_TYPE_FUNC_FULL (ThemusComponent, 
-		       Bonobo_Listener, 
-		       BONOBO_TYPE_OBJECT,
-		       themus_component);
