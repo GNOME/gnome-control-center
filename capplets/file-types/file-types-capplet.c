@@ -961,14 +961,15 @@ populate_mime_list (GList *type_list, GtkCList *clist)
 	GnomeVFSMimeApplication *default_app;
 	OAF_ServerInfo *default_component;
 
-	//gtk_clist_set_row_height (clist, 20);
-	
+	//gtk_clist_set_row_height (clist, 20);		
 	for (element = type_list; element != NULL; element= element->next) {
 		mime_string = (char *)element->data;
 		
 		/* Make sure we do not include comments */
 		if (mime_string[0] != '#') {
 
+			pixbuf = NULL;
+			
 			/* Add description to first column */
 			description = gnome_vfs_mime_get_description (mime_string);	
 			if (description != NULL && strlen (description) > 0) {
@@ -1000,7 +1001,10 @@ populate_mime_list (GList *type_list, GtkCList *clist)
 			if (description_icon_name != NULL) {
 				/* Get custom icon */
 				description_icon_path = gnome_pixmap_file (description_icon_name);
-				pixbuf = gdk_pixbuf_new_from_file (description_icon_path);				
+				if (description_icon_path != NULL) {
+					pixbuf = gdk_pixbuf_new_from_file (description_icon_path);
+					g_free (description_icon_path);
+				}
 			} else {
 				/* Use default icon */
 				pixbuf = gdk_pixbuf_new_from_file ("/gnome/share/pixmaps/nautilus/i-regular-24.png");
@@ -1014,7 +1018,6 @@ populate_mime_list (GList *type_list, GtkCList *clist)
 			}
 
 			/* Set up action column */
-
 			pixbuf = NULL;
 			action = gnome_vfs_mime_get_default_action (mime_string);
 			if (action != NULL) {
@@ -1028,7 +1031,10 @@ populate_mime_list (GList *type_list, GtkCList *clist)
 						if (action_icon_name != NULL) {
 							/* Get custom icon */
 							action_icon_path = gnome_pixmap_file (action_icon_name);
-							pixbuf = gdk_pixbuf_new_from_file (action_icon_path);				
+							if (action_icon_path != NULL) {
+								pixbuf = gdk_pixbuf_new_from_file (action_icon_path);
+								g_free (action_icon_path);
+							}
 						} else {
 							/* Use default icon */
 							pixbuf = gdk_pixbuf_new_from_file ("/gnome/share/pixmaps/nautilus/i-executable.png");
