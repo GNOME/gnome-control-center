@@ -4,7 +4,7 @@
  * Copyright (C) 2000-2001 Ximian, Inc.
  *
  * Written by: Bradford Hovinen <hovinen@ximian.com>,
- *             Richard Hestilow <hestilow@ximian.com>
+ *             Rachel Hestilow <hestilow@ximian.com>
  *             Seth Nickell     <snickell@stanford.edu>
  *
  * This program is free software; you can redistribute it and/or modify

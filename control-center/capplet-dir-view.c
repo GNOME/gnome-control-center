@@ -300,7 +300,7 @@ about_menu_cb (BonoboUIComponent *uic, gpointer data, const char *cname)
 		"Jacob Berkman <jacob@ximian.com>",
 		"Jonathan Blandford <jrb@redhat.com>",
 		"Chema Celorio <chema@ximian.com>",
-		"Richard Hestilow <hestilow@ximian.com>",
+		"Rachel Hestilow <hestilow@ximian.com>",
 		"Bradford Hovinen <hovinen@ximian.com>",
 		"Lauris Kaplinski <lauris@ximian.com>",
 		"Seth Nickell <snickell@stanford.edu>",

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.5\n"
-"POT-Creation-Date: 2002-03-28 09:22-0500\n"
+"POT-Creation-Date: 2002-04-21 15:46-0500\n"
 "PO-Revision-Date: 2000-10-11 13:47+02:00\n"
 "Last-Translator: David Sauer <davids@penguin.cz>\n"
 "Language-Team: czech <cs@li.org>\n"
@@ -13,24 +13,25 @@ msgstr ""
 "Content-Type: text/plain; charset=ISO-8859-2\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:259
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:262
 #, fuzzy
-msgid "_Enable keyboard accesibility"
+msgid "_Enable keyboard accessibility"
 msgstr "Pípání kláves"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:326
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:329
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr ""
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:438
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:441
 #, fuzzy
 msgid "Select CDE AccessX file"
 msgstr "Výbìr souboru se zvukem"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-msgid "AccessX"
-msgstr ""
+#: capplets/keyboard/keyboard.desktop.in.h:1
+msgid "Keyboard"
+msgstr "Klávesnice"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:2
 #, fuzzy
@@ -38,7 +39,7 @@ msgid "Keyboard Accessibility Properties"
 msgstr "Vlastnosti klávesnice"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:1
-msgid "&lt;b&gt;Sample&lt;/b&gt;"
+msgid "&lt;b&gt;Test&lt;/b&gt;"
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:2
@@ -46,14 +47,11 @@ msgid "B_eep when modifier is pressed"
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:3
-msgid "Beep when:"
+msgid "Beep when an LED is turned on and two beeps when one is turned off."
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:4
-msgid ""
-"BounceKeys can benefit users who sometimes tremor when they release a key.  "
-"BounceKeys instructs the system to ignore all subsequent presses of the SAME "
-"key if they happen within a user selectable period of time."
+msgid "Beep when:"
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:5
@@ -77,39 +75,34 @@ msgid "Enable _Toggle Keys"
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:10
-msgid "Keyboard Accessibility Configuration"
+msgid ""
+"Ignore all subsequent presses of the SAME key if they happen within a user "
+"selectable period of time."
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:11
-msgid "Ma_ximum pointer speed :"
-msgstr ""
+#, fuzzy
+msgid "Keyboard Accessibility Configuration (AccessX)"
+msgstr "Vlastnosti klávesnice"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:12
-msgid ""
-"MouseKeys can benefit StickyKey users or anyone unable to use the pointing "
-"device or in need of 'pixel by pixel' position control of the pointer.  When "
-"activated, MouseKeys turns the numeric keypad into a mouse control pad. "
+msgid "Ma_ximum pointer speed :"
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:13
 msgid ""
-"SlowKeys can benefit users who hit unwanted keys as they type.  SlowKeys "
-"instructs the system not to accept keys as pressed, unless the key has been "
-"pressed and held for a user adjustable amount of time (i.e., the key delay)."
+"Only accept keys after they have been pressed and held for a user adjustable "
+"amount of time."
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:14
-msgid "Start mo_ving this long after keypress :"
+msgid ""
+"Perform multiple simultaneous key press operations by pressing modifier keys "
+"in sequence."
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:15
-msgid ""
-"StickyKeys can benefit users who type with only one finger or who might use "
-"a mouth or head mounted-stick.  StickyKeys allows users to perform multiple "
-"simultaneous key press operations by pressing the keys in sequence.  For "
-"example, if an application requires a user to simultaneously press the "
-"'Ctrl' and 'Tab' key, a StickyKeys user can press the 'Ctrl' key, release "
-"it, and then press the 'Tab' key and release it, achieving the same result."
+msgid "Start mo_ving this long after keypress :"
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:16
@@ -117,39 +110,35 @@ msgid "Time to _accelerate to max speed :"
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:17
-msgid ""
-"ToggleKeys can benefit the visually impaired user who has difficulty seeing "
-"the small LED keyboard indicators.  ToggleKeys provides one beep when an LED "
-"(e.g., the Caps Lock LED) is turned on and two beeps when it is turned off"
+msgid "Turn the numeric keypad into a mouse control pad."
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:18
-msgid "_Beep on state change"
-msgstr ""
+#, fuzzy
+msgid "_Beep when enabling/disabling keyboard accessibility features"
+msgstr "Pípání kláves"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:19
 msgid "_Disable if unused for "
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:20
-#: capplets/sound/sound-properties.glade.h:3
-#, fuzzy
-msgid "_General"
-msgstr "Obecné"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:21
 msgid "_Ignore keypresses within  :"
 msgstr ""
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:22
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:21
 msgid "_Import CDE AccessX file"
 msgstr ""
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:23
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:22
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
 #, fuzzy
 msgid "_Keyboard"
 msgstr "Klávesnice"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:23
+msgid "_Misc"
+msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:24
 msgid "_Only accept keypress after :"
@@ -241,34 +230,34 @@ msgid "_Scaled"
 msgstr "Pøizpùsobená"
 
 #: capplets/background/background-properties-capplet.c:392
-msgid "S_tretched"
+msgid "Stretc_hed"
 msgstr ""
 
 #: capplets/background/background-properties-capplet.c:392
 msgid "_No Picture"
 msgstr ""
 
-#: capplets/background/background-properties-capplet.c:515
+#: capplets/background/background-properties-capplet.c:427
+msgid "_Picture"
+msgstr ""
+
+#: capplets/background/background-properties-capplet.c:531
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:592
-#: capplets/keyboard/gnome-keyboard-properties.c:348
+#: capplets/keyboard/gnome-keyboard-properties.c:359
 #: capplets/mouse/gnome-mouse-properties.c:691
 #: capplets/sound/sound-properties-capplet.c:148
 msgid "Retrieve and store legacy settings"
 msgstr ""
 
-#: capplets/background/background-properties-capplet.c:540
-#, fuzzy
-msgid "Background properties"
-msgstr "Pozadí"
-
+#: capplets/background/background-properties-capplet.c:556
 #: capplets/background/background-properties.glade.h:1
 #, fuzzy
-msgid "Background Properties"
+msgid "Background Preferences"
 msgstr "Pozadí"
 
 #: capplets/background/background-properties.glade.h:2
-msgid "Border the picture with a:"
+msgid "Bor_der the picture with a:"
 msgstr ""
 
 #: capplets/background/background-properties.glade.h:3
@@ -291,60 +280,65 @@ msgid "Picture Options:"
 msgstr "Nastavení stavové øádky"
 
 #: capplets/background/background-properties.glade.h:7
-msgid "Picture:"
-msgstr ""
-
-#: capplets/background/background-properties.glade.h:8
 #, fuzzy
 msgid "Primary Color"
 msgstr "Naberte barvu"
 
-#: capplets/background/background-properties.glade.h:9
+#: capplets/background/background-properties.glade.h:8
 #, fuzzy
 msgid "Secondary Color"
 msgstr "Barva"
 
-#: capplets/background/background-properties.glade.h:10
+#: capplets/background/background-properties.glade.h:9
 #, fuzzy
 msgid "Solid color"
 msgstr "Barva"
 
-#: capplets/background/background-properties.glade.h:11
+#: capplets/background/background-properties.glade.h:10
 #, fuzzy
 msgid "Vertical gradient"
 msgstr "Gradient"
 
-#: capplets/background/background-properties.glade.h:12
+#: capplets/background/background-properties.glade.h:11
 msgid ""
 "You can drag image files\n"
 "into the window to set the \n"
 "background picture."
 msgstr ""
 
-#: capplets/background/background-properties.glade.h:15
+#: capplets/background/background-properties.glade.h:14
 #, fuzzy
 msgid "radiobutton1"
 msgstr "Rádiové tlaèítko 1"
 
-#: capplets/background/background-properties.glade.h:16
+#: capplets/background/background-properties.glade.h:15
 #, fuzzy
 msgid "radiobutton2"
 msgstr "Rádiové tlaèítko 2"
 
-#: capplets/background/background-properties.glade.h:17
+#: capplets/background/background-properties.glade.h:16
 #, fuzzy
 msgid "radiobutton3"
 msgstr "Rádiové tlaèítko 2"
 
-#: capplets/background/background-properties.glade.h:18
+#: capplets/background/background-properties.glade.h:17
 #, fuzzy
 msgid "radiobutton4"
 msgstr "Rádiové tlaèítko 2"
 
-#: capplets/background/background-properties.glade.h:19
+#: capplets/background/background-properties.glade.h:18
 #, fuzzy
 msgid "radiobutton5"
 msgstr "Rádiové tlaèítko 2"
+
+#: capplets/common/activate-settings-daemon.c:18
+msgid ""
+"Unable to start the settings manager 'gnome-settings-daemon'.\n"
+"Without the GNOME settings manager running, some preferences may not take "
+"effect. This could indicate a problem with Bonobo, or a non-GNOME (e.g. KDE) "
+"settings manager may already be active and conflicting with the GNOME "
+"settings manager."
+msgstr ""
 
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
@@ -417,7 +411,7 @@ msgstr ""
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:1312
+#: capplets/common/gconf-property-editor.c:1384
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -426,7 +420,7 @@ msgid ""
 "picture."
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:1320
+#: capplets/common/gconf-property-editor.c:1392
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -435,17 +429,8 @@ msgid ""
 "Please select a different picture instead."
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:1404
+#: capplets/common/gconf-property-editor.c:1476
 msgid "Please select an image."
-msgstr ""
-
-#: capplets/common/activate-settings-daemon.c:18
-msgid ""
-"Unable to start the settings manager 'gnome2-settings-daemon'.\n"
-"Without the GNOME settings manager running, some preferences may not take "
-"effect. This could indicate a problem with Bonobo, or a non-GNOME (e.g. KDE) "
-"settings manager may already be active and conflicting with the GNOME "
-"settings manager."
 msgstr ""
 
 #: capplets/default-applications/default-applications.desktop.in.h:1
@@ -453,6 +438,7 @@ msgid "Choose the applications used by default"
 msgstr ""
 
 #: capplets/default-applications/default-applications.desktop.in.h:2
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:15
 #, fuzzy
 msgid "Preferred Applications"
 msgstr "Standardní nastavení Gtk"
@@ -491,39 +477,34 @@ msgstr "Pøíkaz:"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:8
 #, fuzzy
-msgid "Default Applications"
-msgstr "Standardní nastavení Gtk"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:9
-#, fuzzy
 msgid "Default Help Browser"
 msgstr "Standardní hodnota"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:10
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:9
 #, fuzzy
 msgid "Default Terminal"
 msgstr "Standardní hodnota"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:11
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:10
 #, fuzzy
 msgid "Default Text Editor"
 msgstr "Editor pro soubory Gnome"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:12
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:11
 #, fuzzy
 msgid "Default Web Browser"
 msgstr "Prohlí¾eè nápovìdy"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:13
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:12
 #, fuzzy
 msgid "Default Window Manager"
 msgstr "Editace vlastností správce oken"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:14
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:13
 msgid "E_xec Flag:"
 msgstr ""
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:15
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:14
 #, fuzzy
 msgid "He_lp Browser"
 msgstr "Prohlí¾eè nápovìdy"
@@ -564,6 +545,7 @@ msgid "_Delete"
 msgstr "Vymazat"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:23
+#: capplets/file-types/file-types-properties.glade.h:19
 #, fuzzy
 msgid "_Edit..."
 msgstr "Úpravy..."
@@ -599,6 +581,7 @@ msgid "_Window Manager"
 msgstr "Editace vlastností správce oken"
 
 #: capplets/desktop-links/Accessibility.directory.in.in.h:1
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "Accessibility"
 msgstr ""
 
@@ -634,6 +617,16 @@ msgstr "Standardní nastavení Gtk"
 #: capplets/desktop-links/legacy-applications.desktop.in.in.h:2
 msgid "Legacy applications settings (grdb)"
 msgstr ""
+
+#: capplets/desktop-links/panel.desktop.in.in.h:1
+#, fuzzy
+msgid "Global panel properties"
+msgstr "Pozadí"
+
+#: capplets/desktop-links/panel.desktop.in.in.h:2
+#, fuzzy
+msgid "Panel"
+msgstr "Zru¹it"
 
 #: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
 msgid "Appearance"
@@ -689,6 +682,7 @@ msgid "Configure miscellaneous window features"
 msgstr "Nastavení ostatních vlastností"
 
 #: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
+#: capplets/ui-properties/ui-properties.glade.h:45
 msgid "Miscellaneous"
 msgstr "Rùzné"
 
@@ -733,6 +727,15 @@ msgstr "Nastavení pracovních ploch"
 #: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:2
 msgid "Workspaces"
 msgstr "Pracovní plochy"
+
+#: capplets/desktop-links/session.desktop.in.in.h:1
+msgid "Configure which non-session aware programs are started up"
+msgstr ""
+
+#: capplets/desktop-links/session.desktop.in.in.h:2
+#, fuzzy
+msgid "Startup Programs"
+msgstr "Pøidat program pøi startu"
 
 #.
 #. * Translatable strings file
@@ -831,20 +834,22 @@ msgstr "Velké"
 msgid "Video"
 msgstr "Prohlí¾et"
 
-#: capplets/file-types/file-types-capplet.c:212
-#: capplets/file-types/file-types-properties.glade.h:8
+#: capplets/file-types/file-types-capplet.c:222
 #, fuzzy
 msgid "Description"
 msgstr "Výbìr ikony..."
 
-#: capplets/file-types/file-types-capplet.c:219
+#: capplets/file-types/file-types-capplet.c:229
+#: capplets/mime-type/new-mime-window.c:39
 msgid "Extensions"
 msgstr "Pøípony"
 
+#: capplets/file-types/file-types-capplet.desktop.in.h:1
 #: capplets/file-types/file-types.desktop.in.h:1
 msgid "File Types and Programs"
 msgstr ""
 
+#: capplets/file-types/file-types-capplet.desktop.in.h:2
 #: capplets/file-types/file-types.desktop.in.h:2
 msgid "Specify which programs are used to open or view each file type"
 msgstr ""
@@ -856,110 +861,113 @@ msgstr "Nastavení"
 
 #: capplets/file-types/file-types-properties.glade.h:2
 #, fuzzy
-msgid "Add"
-msgstr "Pøidat"
+msgid "Add _file type..."
+msgstr "Pøidat MIME typ"
 
 #: capplets/file-types/file-types-properties.glade.h:3
 #, fuzzy
-msgid "Add file type..."
-msgstr "Pøidat MIME typ"
-
-#: capplets/file-types/file-types-properties.glade.h:4
-#, fuzzy
-msgid "Add service..."
+msgid "Add _service..."
 msgstr "Pøidat..."
 
-#: capplets/file-types/file-types-properties.glade.h:5
-#: capplets/file-types/mime-edit-dialog.c:750
-msgid "Category"
-msgstr "Kategorie"
-
-#: capplets/file-types/file-types-properties.glade.h:6
-#, fuzzy
-msgid "Choose..."
-msgstr " Probírat... "
-
-#: capplets/file-types/file-types-properties.glade.h:7
+#: capplets/file-types/file-types-properties.glade.h:4
 #, fuzzy
 msgid "Default action"
 msgstr "Standardní nastavení Gtk"
 
-#: capplets/file-types/file-types-properties.glade.h:9
+#: capplets/file-types/file-types-properties.glade.h:5
 #: capplets/file-types/mime-edit-dialog.c:167
 msgid "Edit file type"
 msgstr ""
 
-#: capplets/file-types/file-types-properties.glade.h:10
-msgid "Edit..."
-msgstr "Úpravy..."
-
-#: capplets/file-types/file-types-properties.glade.h:11
+#: capplets/file-types/file-types-properties.glade.h:6
 msgid "File types and Internet Services"
 msgstr ""
 
-#: capplets/file-types/file-types-properties.glade.h:12
+#: capplets/file-types/file-types-properties.glade.h:7
 #, fuzzy
 msgid "Filename extensions"
 msgstr "Pøípony"
 
-#: capplets/file-types/file-types-properties.glade.h:13
+#: capplets/file-types/file-types-properties.glade.h:8
 msgid "Look at content"
 msgstr ""
 
-#: capplets/file-types/file-types-properties.glade.h:14
+#: capplets/file-types/file-types-properties.glade.h:9
 #, fuzzy
-msgid "MIME Type"
-msgstr "MIME typ:"
-
-#: capplets/file-types/file-types-properties.glade.h:15
-#, fuzzy
-msgid "Name"
-msgstr "Jméno:"
-
-#: capplets/file-types/file-types-properties.glade.h:16
-#, fuzzy
-msgid "Needs terminal"
+msgid "Needs _terminal"
 msgstr "Spustit v terminálu"
 
-#: capplets/file-types/file-types-properties.glade.h:17
-msgid "Program"
-msgstr "Program"
-
-#: capplets/file-types/file-types-properties.glade.h:18
-msgid "Program to execute"
-msgstr ""
-
-#: capplets/file-types/file-types-properties.glade.h:19
+#: capplets/file-types/file-types-properties.glade.h:10
 #, fuzzy
 msgid "Program to run"
 msgstr "Program"
 
-#: capplets/file-types/file-types-properties.glade.h:20
-#, fuzzy
-msgid "Protocol name"
-msgstr "Protokol"
-
-#: capplets/file-types/file-types-properties.glade.h:21
-#, fuzzy
-msgid "Remove"
-msgstr "Odstranit"
-
-#: capplets/file-types/file-types-properties.glade.h:22
+#: capplets/file-types/file-types-properties.glade.h:11
 #, fuzzy
 msgid "Run a program"
 msgstr "Program"
 
-#: capplets/file-types/file-types-properties.glade.h:23
-msgid "Use category defaults"
+#: capplets/file-types/file-types-properties.glade.h:12
+msgid "Use category _defaults"
 msgstr ""
 
-#: capplets/file-types/file-types-properties.glade.h:24
-msgid "Use parent category defaults"
+#: capplets/file-types/file-types-properties.glade.h:13
+msgid "Use parent category _defaults"
 msgstr ""
 
-#: capplets/file-types/file-types-properties.glade.h:25
+#: capplets/file-types/file-types-properties.glade.h:14
 msgid "Viewing component"
 msgstr ""
+
+#: capplets/file-types/file-types-properties.glade.h:15
+#, fuzzy
+msgid "_Add"
+msgstr "Pøidat"
+
+#: capplets/file-types/file-types-properties.glade.h:16
+#, fuzzy
+msgid "_Category"
+msgstr "Kategorie"
+
+#: capplets/file-types/file-types-properties.glade.h:17
+#, fuzzy
+msgid "_Choose..."
+msgstr " Probírat... "
+
+#: capplets/file-types/file-types-properties.glade.h:18
+#, fuzzy
+msgid "_Description"
+msgstr "Výbìr ikony..."
+
+#: capplets/file-types/file-types-properties.glade.h:20
+#, fuzzy
+msgid "_MIME Type"
+msgstr "MIME typ:"
+
+#: capplets/file-types/file-types-properties.glade.h:21
+#, fuzzy
+msgid "_Name"
+msgstr "Jméno:"
+
+#: capplets/file-types/file-types-properties.glade.h:22
+#, fuzzy
+msgid "_Program"
+msgstr "Program"
+
+#: capplets/file-types/file-types-properties.glade.h:23
+#, fuzzy
+msgid "_Program to execute"
+msgstr "Program"
+
+#: capplets/file-types/file-types-properties.glade.h:24
+#, fuzzy
+msgid "_Protocol name"
+msgstr "Protokol"
+
+#: capplets/file-types/file-types-properties.glade.h:25
+#, fuzzy
+msgid "_Remove"
+msgstr "Odstranit"
 
 #: capplets/file-types/mime-category-edit-dialog.c:137
 msgid "Edit file category"
@@ -986,14 +994,15 @@ msgid "Structure containing information on the MIME category"
 msgstr ""
 
 #: capplets/file-types/mime-category-edit-dialog.c:343
-#: capplets/file-types/mime-edit-dialog.c:392
-#: capplets/file-types/mime-edit-dialog.c:492
-#: capplets/file-types/service-edit-dialog.c:351
-#: capplets/file-types/service-edit-dialog.c:397
+#: capplets/file-types/mime-edit-dialog.c:409
+#: capplets/file-types/mime-edit-dialog.c:513
+#: capplets/file-types/service-edit-dialog.c:354
+#: capplets/file-types/service-edit-dialog.c:400
 msgid "Custom"
 msgstr ""
 
 #: capplets/file-types/mime-edit-dialog.c:164
+#: capplets/mime-type/mime-data.c:385
 #, fuzzy
 msgid "Extension"
 msgstr "Pøípona:"
@@ -1018,23 +1027,27 @@ msgstr ""
 msgid "True if this dialog is for adding a MIME type"
 msgstr ""
 
-#: capplets/file-types/mime-edit-dialog.c:387
-#: capplets/file-types/mime-edit-dialog.c:442
+#: capplets/file-types/mime-edit-dialog.c:404
+#: capplets/file-types/mime-edit-dialog.c:463
 #, fuzzy
 msgid "None"
 msgstr "¾ádná"
 
-#: capplets/file-types/mime-edit-dialog.c:675
+#: capplets/file-types/mime-edit-dialog.c:696
 msgid ""
 "Invalid MIME type. Please enter a valid MIME type, or leave the field blank "
 "to have one generated for you."
 msgstr ""
 
-#: capplets/file-types/mime-edit-dialog.c:686
+#: capplets/file-types/mime-edit-dialog.c:703
 msgid "There already exists a MIME type of that name."
 msgstr ""
 
-#: capplets/file-types/mime-edit-dialog.c:755
+#: capplets/file-types/mime-edit-dialog.c:768
+msgid "Category"
+msgstr "Kategorie"
+
+#: capplets/file-types/mime-edit-dialog.c:773
 msgid "Choose a file category"
 msgstr ""
 
@@ -1067,17 +1080,17 @@ msgstr ""
 msgid "TRUE if this is an add service dialog"
 msgstr ""
 
-#: capplets/file-types/service-edit-dialog.c:489
+#: capplets/file-types/service-edit-dialog.c:492
 msgid "Please enter a protocol name."
 msgstr ""
 
-#: capplets/file-types/service-edit-dialog.c:502
+#: capplets/file-types/service-edit-dialog.c:504
 msgid ""
 "Invalid protocol name. Please enter a protocol name without any spaces or "
 "punctuation."
 msgstr ""
 
-#: capplets/file-types/service-edit-dialog.c:515
+#: capplets/file-types/service-edit-dialog.c:518
 msgid "There is already a protocol by that name."
 msgstr ""
 
@@ -1106,6 +1119,11 @@ msgstr ""
 #: capplets/file-types/service-info.c:49
 msgid "Electronic mail transmission"
 msgstr ""
+
+#: capplets/file-types/service-info.c:50
+#, fuzzy
+msgid "Gnome documentation"
+msgstr "Standardní nastavení Gtk"
 
 #: capplets/font/font-properties.desktop.in.h:1
 #, fuzzy
@@ -1143,8 +1161,8 @@ msgid "Accelerator key"
 msgstr "Zrychlení"
 
 #: capplets/keybindings/eggcellrendererkeys.c:199
-#: capplets/keybindings/gnome-keybinding-properties.c:88
-#: libbackground/applier.c:466
+#: capplets/keybindings/gnome-keybinding-properties.c:101
+#: libbackground/applier.c:533
 msgid "Disabled"
 msgstr "Zakázán"
 
@@ -1157,23 +1175,23 @@ msgstr ""
 msgid "Type a new accelerator"
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:284
+#: capplets/keybindings/gnome-keybinding-properties.c:315
 #, fuzzy
 msgid "<Unknown Action>"
 msgstr "Neznámý"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:443
+#: capplets/keybindings/gnome-keybinding-properties.c:573
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:506
+#: capplets/keybindings/gnome-keybinding-properties.c:594
 #, fuzzy
 msgid "_Action"
 msgstr "Zrychlení"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:518
+#: capplets/keybindings/gnome-keybinding-properties.c:606
 #, fuzzy
 msgid "_Shortcut"
 msgstr "Klávesové zkratky"
@@ -1203,13 +1221,13 @@ msgstr ""
 msgid "Associate keyboard shortcuts with panel actions"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.c:328
+#: capplets/keyboard/gnome-keyboard-properties.c:338
 #, fuzzy
 msgid "_Accessibility"
 msgstr "Náhodné nastavení"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:344
-#: capplets/keyboard/gnome-keyboard-properties.c:346
+#: capplets/keyboard/gnome-keyboard-properties.c:355
+#: capplets/keyboard/gnome-keyboard-properties.c:357
 #: capplets/sound/sound-properties-capplet.c:144
 #: capplets/sound/sound-properties-capplet.c:146
 msgid ""
@@ -1217,70 +1235,67 @@ msgid ""
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:1
-msgid "&lt;i&gt;fast&lt;/i&gt;"
+msgid ""
+"&lt;b&gt;Tip:&lt;/b&gt; You can configure the keyboards accessibility "
+"features by bringing up the 'Accessibility Settings' property dialog, or "
+"pressing the button on the right."
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:2
-msgid "&lt;i&gt;loud&lt;/i&gt;"
+msgid "&lt;i&gt;fast&lt;/i&gt;"
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:3
-msgid "&lt;i&gt;quiet&lt;/i&gt;"
+msgid "&lt;i&gt;loud&lt;/i&gt;"
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:4
-msgid "&lt;i&gt;slow&lt;/i&gt;"
+msgid "&lt;i&gt;quiet&lt;/i&gt;"
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:5
-msgid "Cursor"
+msgid "&lt;i&gt;slow&lt;/i&gt;"
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:6
-msgid "Fast"
-msgstr "Rychle"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
-msgid "Key_press makes sound"
+msgid "*"
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:8
+msgid "Cursor"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
+msgid "Key_press makes sound"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
 msgid "Keyboard Bell"
 msgstr "Zvonek klávesnice"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 #: capplets/keyboard/keyboard.desktop.in.h:2
 msgid "Keyboard Properties"
 msgstr "Vlastnosti klávesnice"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Keyboard _repeats when key is held down"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 #, fuzzy
 msgid "Keyboard bell _enabled"
 msgstr "Zvonek klávesnice"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 #, fuzzy
 msgid "Keyboard bell _off"
 msgstr "Zvonek klávesnice"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
 #, fuzzy
 msgid "Keyclick Volume"
 msgstr "Hlasitost pípnutí"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
-#, fuzzy
-msgid "Long"
-msgstr "¾ádná"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
-#, fuzzy
-msgid "Medium"
-msgstr "My¹"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 #, fuzzy
@@ -1301,59 +1316,260 @@ msgid "Set the volume of the clicking sound made when pressing a key"
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:20
-#, fuzzy
-msgid "Short"
-msgstr "Klávesové zkratky"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
-msgid "Slow"
-msgstr "Pomalu"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid ""
 "The keyboard bell is the &lt;i&gt;beep&lt;/i&gt; sound heard when the system "
 "wants to get your attention.  You can select a custom sound file to play "
 "instead of the traditional beeping noise."
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
-msgid "Very fast"
-msgstr ""
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#, fuzzy
+msgid "_Accessibility..."
+msgstr "Náhodné nastavení"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
-msgid "Very long"
-msgstr ""
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid "_Blink speed:"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "_Cursor blinks in text fields"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
 #, fuzzy
 msgid "_Custom keyboard bell:"
 msgstr "Zvonek klávesnice"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "_Delay before repeating:"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:30
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
 #, fuzzy
 msgid "_Sound"
 msgstr "Zvuk"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
 #, fuzzy
 msgid "_Volume:"
 msgstr "Hlasitost"
 
-#: capplets/keyboard/keyboard.desktop.in.h:1
-msgid "Keyboard"
-msgstr "Klávesnice"
+#. icon box
+#: capplets/mime-type/edit-window.c:266
+#, fuzzy
+msgid "Select an icon..."
+msgstr "Výbìr ikony..."
+
+#: capplets/mime-type/edit-window.c:276
+#: capplets/mime-type/new-mime-window.c:31
+msgid "Mime Type: "
+msgstr "Typ MIME: "
+
+#: capplets/mime-type/edit-window.c:306
+#, fuzzy
+msgid "Add"
+msgstr "Pøidat"
+
+#: capplets/mime-type/edit-window.c:314
+#: capplets/url-properties/url-properties.c:135
+#, fuzzy
+msgid "Remove"
+msgstr "Odstranit"
+
+#. gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
+#: capplets/mime-type/edit-window.c:341
+#: capplets/mime-type/new-mime-window.c:69
+msgid "First Regular Expression: "
+msgstr "První regulární výraz: "
+
+#: capplets/mime-type/edit-window.c:349
+#: capplets/mime-type/new-mime-window.c:80
+msgid "Second Regular Expression: "
+msgstr "Druhý regulární výraz: "
+
+#. Actions box
+#: capplets/mime-type/edit-window.c:356
+msgid "Mime Type Actions"
+msgstr "Akce s MIME typy"
+
+#: capplets/mime-type/edit-window.c:363
+#, c-format
+msgid "Example: emacs %f"
+msgstr "Pøíklad: emacs %f"
+
+#: capplets/mime-type/edit-window.c:368
+#, fuzzy
+msgid "Open"
+msgstr "Otevøít"
+
+#: capplets/mime-type/edit-window.c:374 capplets/mime-type/edit-window.c:390
+#: capplets/mime-type/edit-window.c:405
+#, fuzzy
+msgid "Select a file..."
+msgstr "Výbìr souboru se zvukem"
+
+#: capplets/mime-type/edit-window.c:383
+#, fuzzy
+msgid "View"
+msgstr "minuty"
+
+#: capplets/mime-type/edit-window.c:399
+msgid "Edit"
+msgstr "Editovat"
+
+#. we initialize everything
+#: capplets/mime-type/edit-window.c:448
+#, c-format
+msgid "Set actions for %s"
+msgstr "Nastavit akce pro %s"
+
+#: capplets/mime-type/mime-data.c:384
+#, fuzzy
+msgid "Mime Type"
+msgstr "Typ MIME: "
+
+#: capplets/mime-type/mime-data.c:493
+msgid "You must enter a mime-type"
+msgstr "Musíte zadat MIME typ"
+
+#: capplets/mime-type/mime-data.c:498
+msgid ""
+"You must add either a regular-expression or\n"
+"a file-name extension"
+msgstr ""
+"Je nutné pøidat buï regulární výraz\n"
+"nebo pøíponu souboru"
+
+#: capplets/mime-type/mime-data.c:502
+msgid ""
+"Please put your mime-type in the format:\n"
+"CATEGORY/TYPE\n"
+"\n"
+"For Example:\n"
+"image/png"
+msgstr ""
+"Zadejte prosím MIME typ ve formátu:\n"
+"KATEGORIE/TYP\n"
+"\n"
+"Pøíklad:\n"
+"image/png"
+
+#: capplets/mime-type/mime-data.c:507
+msgid "This mime-type already exists"
+msgstr "Tento MIME typ ji¾ existuje"
+
+#: capplets/mime-type/mime-data.c:588 capplets/mime-type/mime-info.c:427
+msgid ""
+"We are unable to create the directory\n"
+"~/.gnome/mime-info\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+"Nelze vytvoøit adresáø\n"
+"~/.gnome/mime-info\n"
+"\n"
+"Nelze ulo¾it souèasný stav."
+
+#: capplets/mime-type/mime-data.c:594 capplets/mime-type/mime-info.c:433
+msgid ""
+"We are unable to access the directory\n"
+"~/.gnome/mime-info\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+"K adresáøi ~/.gnome/mime-info není\n"
+"pøístup.\n"
+"\n"
+"Nebude mo¾no ulo¾it souèasný stav."
+
+#: capplets/mime-type/mime-data.c:605
+msgid ""
+"Cannot create the file\n"
+"~/.gnome/mime-info/user.mime\n"
+"\n"
+"We will not be able to save the state"
+msgstr ""
+"Nelze vytvoøit soubor\n"
+"~/.gnome/mime-info/user.mime\n"
+"\n"
+"Nelze ulo¾it souèasný stav."
+
+#: capplets/mime-type/mime-info.c:444
+#, fuzzy
+msgid ""
+"Cannot create the file\n"
+"~/.gnome/mime-info/user.keys.\n"
+"\n"
+"We will not be able to save the state"
+msgstr ""
+"Nelze vytvoøit soubor\n"
+"~/.gnome/mime-info/user.keys\n"
+"\n"
+"Nelze ulo¾ít zmìny."
+
+#: capplets/mime-type/mime-type-capplet.c:83
+#: capplets/wm-properties/wm-properties-capplet.c:1161
+#, fuzzy
+msgid "Delete"
+msgstr "Vymazat"
+
+#: capplets/mime-type/mime-type-capplet.c:93
+#: capplets/wm-properties/wm-properties-capplet.c:1151
+#, fuzzy
+msgid "Add..."
+msgstr "Pøidat..."
+
+#: capplets/mime-type/mime-type-capplet.c:97
+#: capplets/wm-properties/wm-properties-capplet.c:1156
+msgid "Edit..."
+msgstr "Úpravy..."
+
+#: capplets/mime-type/mime-type.desktop.in.in.h:1
+msgid "Configure how files are associated and started"
+msgstr ""
+
+#: capplets/mime-type/mime-type.desktop.in.in.h:2
+#, fuzzy
+msgid "Mime Types"
+msgstr "Typ MIME: "
+
+#: capplets/mime-type/new-mime-window.c:25
+#, fuzzy
+msgid "Add Mime Type"
+msgstr "Typ MIME: "
+
+#: capplets/mime-type/new-mime-window.c:26
+msgid ""
+"Add a new Mime Type\n"
+"For example:  image/tiff; text/x-scheme"
+msgstr ""
+"Pøidat nový MIME typ\n"
+"Pøíklad:  image/tiff; text/x-scheme atd."
+
+#: capplets/mime-type/new-mime-window.c:43
+msgid ""
+"Type in the extensions for this mime-type.\n"
+"For example:  .html, .htm"
+msgstr ""
+"Zadejte pøípony pro tento MIME typ.\n"
+"Pøíklad: .html, .htm"
+
+#: capplets/mime-type/new-mime-window.c:50
+#, fuzzy
+msgid "Extension:"
+msgstr "Pøípona:"
+
+#: capplets/mime-type/new-mime-window.c:55
+msgid "Regular Expressions"
+msgstr "Regulární výrazy"
+
+#: capplets/mime-type/new-mime-window.c:59
+msgid ""
+"You can set up two regular expressions here to identify the Mime Type\n"
+"by.  These fields are optional."
+msgstr ""
+"K identifikaci MIME typu mù¾ete nastavit a¾ 2 regulární výrazy.\n"
+"Tyto polo¾ky nemusíte vyplnit."
 
 #: capplets/mouse/gnome-mouse-properties.c:420
 #, c-format
@@ -1411,129 +1627,128 @@ msgid ""
 msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.c:718
-#: capplets/mouse/gnome-mouse-properties.glade.h:18
+#: capplets/mouse/gnome-mouse-properties.glade.h:17
 #: capplets/mouse/mouse.desktop.in.h:2
 msgid "Mouse Properties"
 msgstr "Vlastnosti my¹i"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:1
 msgid ""
-"&lt;b&gt;Note:&lt;/b&gt;\n"
-"\t\t\t    You will need to logout and log back in for this setting to take "
-"effect."
+"&lt;b&gt;Note:&lt;/b&gt; You will need to logout and log back in for this "
+"setting to take effect."
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:3
+#: capplets/mouse/gnome-mouse-properties.glade.h:2
 msgid "&lt;i&gt;Fast&lt;/i&gt;"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:4
+#: capplets/mouse/gnome-mouse-properties.glade.h:3
 msgid "&lt;i&gt;High&lt;/i&gt;"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:5
+#: capplets/mouse/gnome-mouse-properties.glade.h:4
 msgid "&lt;i&gt;Large&lt;/i&gt;"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:6
+#: capplets/mouse/gnome-mouse-properties.glade.h:5
 msgid "&lt;i&gt;Low&lt;/i&gt;"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:7
+#: capplets/mouse/gnome-mouse-properties.glade.h:6
 msgid "&lt;i&gt;Slow&lt;/i&gt;"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:8
+#: capplets/mouse/gnome-mouse-properties.glade.h:7
 msgid "&lt;i&gt;Small&lt;/i&gt;"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:9
+#: capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid ""
 "Animates a quick marker around the cursor when the Control key has been "
 "pressed and released."
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:10
+#: capplets/mouse/gnome-mouse-properties.glade.h:9
 msgid "C_ursors"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:11
+#: capplets/mouse/gnome-mouse-properties.glade.h:10
 msgid "Cursor Theme"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:12
+#: capplets/mouse/gnome-mouse-properties.glade.h:11
 msgid "Double-click Delay"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:13
+#: capplets/mouse/gnome-mouse-properties.glade.h:12
 msgid "Drag and Drop"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:14
+#: capplets/mouse/gnome-mouse-properties.glade.h:13
 msgid ""
 "Left-handed mouse mode switches the left and right buttons on the mouse."
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:15
+#: capplets/mouse/gnome-mouse-properties.glade.h:14
 msgid "Locate Pointer"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:16
+#: capplets/mouse/gnome-mouse-properties.glade.h:15
 msgid ""
 "Maximum time allowed between clicks when double-clicking.   Use the box on "
 "the right to test."
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:17
+#: capplets/mouse/gnome-mouse-properties.glade.h:16
 #, fuzzy
 msgid "Mouse Orientation"
 msgstr "Tlaèítka my¹i"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:19
+#: capplets/mouse/gnome-mouse-properties.glade.h:18
 msgid "Set the distance you need to move your cursor before dragging an item."
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:20
+#: capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "Set the speed of your pointing device."
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:21
+#: capplets/mouse/gnome-mouse-properties.glade.h:20
 #, fuzzy
 msgid "Speed"
 msgstr "Výbìr ikony..."
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:22
+#: capplets/mouse/gnome-mouse-properties.glade.h:21
 #, fuzzy
 msgid "_Acceleration:"
 msgstr "Zrychlení"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:23
+#: capplets/mouse/gnome-mouse-properties.glade.h:22
 #, fuzzy
 msgid "_Buttons"
 msgstr "Tlaèítka dialogù"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:24
+#: capplets/mouse/gnome-mouse-properties.glade.h:23
 msgid "_Delay (sec):"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:25
+#: capplets/mouse/gnome-mouse-properties.glade.h:24
 #, fuzzy
 msgid "_Left-handed mouse"
 msgstr "Pro leváky"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:26
+#: capplets/mouse/gnome-mouse-properties.glade.h:25
 msgid "_Motion"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:27
+#: capplets/mouse/gnome-mouse-properties.glade.h:26
 msgid "_Sensitivity:"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:28
+#: capplets/mouse/gnome-mouse-properties.glade.h:27
 msgid "_Show position of cursor when the Control key is pressed"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:29
+#: capplets/mouse/gnome-mouse-properties.glade.h:28
 #, fuzzy
 msgid "_Threshold:"
 msgstr "Zpo¾dìní zaèátku pohybu"
@@ -1561,97 +1776,73 @@ msgstr "Povolit start zvukového serveru"
 msgid "Sound _Events"
 msgstr "Zvukové události"
 
+#: capplets/sound/sound-properties.glade.h:3
+#, fuzzy
+msgid "_General"
+msgstr "Obecné"
+
 #: capplets/sound/sound-properties.glade.h:4
 #, fuzzy
 msgid "_Sounds for events"
 msgstr "Ozvuèení pro události"
 
-#. just 8 short names that will serve as samples for titles in demo
-#: capplets/theme-switcher/control/control.c:19
-msgid "Eenie"
-msgstr "Krab"
+#: capplets/theme-switcher/control/control.c:18
+msgid "Eenie Meenie Mynie Moe Catcha Tiger By Its Toe"
+msgstr ""
 
-#: capplets/theme-switcher/control/control.c:19
-msgid "Mynie"
-msgstr "Had"
-
-#: capplets/theme-switcher/control/control.c:19
-msgid "Catcha"
-msgstr "Koèka"
-
-#: capplets/theme-switcher/control/control.c:19
-msgid "By Its"
-msgstr "Cizí"
-
-#: capplets/theme-switcher/control/control.c:20
-msgid "Meenie"
-msgstr "Krabice"
-
-#: capplets/theme-switcher/control/control.c:20
-#, fuzzy
-msgid "Moe"
-msgstr "Hadice"
-
-#: capplets/theme-switcher/control/control.c:20
-msgid "Tiger"
-msgstr "Tygr"
-
-#: capplets/theme-switcher/control/control.c:20
-#, fuzzy
-msgid "Toe"
-msgstr "Nahoøe"
-
-#: capplets/theme-switcher/control/control.c:38
+#: capplets/theme-switcher/control/control.c:43
 msgid "Selected themes from above will be tested by previewing here."
 msgstr "Vybrané téma je mo¾né otestovat zde"
 
 #. column one
-#: capplets/theme-switcher/control/control.c:43
+#: capplets/theme-switcher/control/control.c:48
 msgid "Sample Button"
 msgstr "Jednoduché tlaèítko"
 
-#: capplets/theme-switcher/control/control.c:47
+#: capplets/theme-switcher/control/control.c:52
 msgid "Sample Check Button"
 msgstr "Zatrhávací tlaèítko"
 
-#: capplets/theme-switcher/control/control.c:53
+#: capplets/theme-switcher/control/control.c:58
 msgid "Sample Text Entry Field"
 msgstr "Jednoduchá textová polo¾ka"
 
-#: capplets/theme-switcher/control/control.c:64
+#: capplets/theme-switcher/control/control.c:69
 msgid "Submenu"
 msgstr "Podmenu"
 
-#: capplets/theme-switcher/control/control.c:69
+#: capplets/theme-switcher/control/control.c:74
 #: capplets/ui-properties/gnome2-ui-properties.glade.h:2
 msgid "Item 1"
 msgstr "Polo¾ka 1"
 
-#: capplets/theme-switcher/control/control.c:71
+#: capplets/theme-switcher/control/control.c:76
 msgid "Another item"
 msgstr "Jiná polo¾ka"
 
-#: capplets/theme-switcher/control/control.c:75
+#: capplets/theme-switcher/control/control.c:80
 msgid "Radio Button 1"
 msgstr "Rádiové tlaèítko 1"
 
-#: capplets/theme-switcher/control/control.c:81
+#: capplets/theme-switcher/control/control.c:86
 msgid "Radio Button 2"
 msgstr "Rádiové tlaèítko 2"
 
-#: capplets/theme-switcher/control/control.c:102
+#: capplets/theme-switcher/control/control.c:107
 msgid "One"
 msgstr "Tvar 1"
 
-#: capplets/theme-switcher/control/control.c:108
+#: capplets/theme-switcher/control/control.c:113
 msgid "Two"
 msgstr "Tvar 2"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
 msgid "Gtk+ Theme Selector"
 msgstr ""
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
 msgid "Select which gtk+ theme to use"
 msgstr ""
 
@@ -1672,6 +1863,7 @@ msgid "Select a theme to install"
 msgstr "Vyberte téma k instalaci"
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
+#: capplets/ui-properties/behavior.desktop.in.in.h:2
 msgid "Sets the default behavior of GNOME applications"
 msgstr ""
 
@@ -1679,6 +1871,11 @@ msgstr ""
 #, fuzzy
 msgid "Toolbars & Menus"
 msgstr "Nastavení nástrojových li¹t"
+
+#: capplets/ui-properties/behavior.desktop.in.in.h:1
+#, fuzzy
+msgid "Behavior"
+msgstr "Chování dialogù"
 
 #: capplets/ui-properties/gnome2-ui-properties.glade.h:1
 msgid "Icons and Text"
@@ -1721,6 +1918,7 @@ msgid "Menu items have _icons"
 msgstr "Polo¾ky menu obsahují ikony"
 
 #: capplets/ui-properties/gnome2-ui-properties.glade.h:11
+#: capplets/ui-properties/ui-properties.glade.h:8
 #, fuzzy
 msgid "Menus"
 msgstr "My¹"
@@ -1777,6 +1975,429 @@ msgstr ""
 #, fuzzy
 msgid "_Toolbars have: "
 msgstr "Nástrojové li¹ty mají zvý¹ený okraj"
+
+#.
+#. * Translatable strings file generated by Glade.
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: capplets/ui-properties/ui-properties.glade.h:7
+#, fuzzy
+msgid "window4"
+msgstr "okno1"
+
+#: capplets/ui-properties/ui-properties.glade.h:9
+#, fuzzy
+msgid "Menu bars are detachable"
+msgstr "Menu mají zvý¹ený okraj"
+
+#: capplets/ui-properties/ui-properties.glade.h:10
+#, fuzzy
+msgid "Menu bars have a border"
+msgstr "Menu mají zvý¹ený okraj"
+
+#: capplets/ui-properties/ui-properties.glade.h:11
+#, fuzzy
+msgid "Menus can be torn off"
+msgstr "Trhací podmenu"
+
+#: capplets/ui-properties/ui-properties.glade.h:12
+#, fuzzy
+msgid "Menu items have icons"
+msgstr "Polo¾ky menu obsahují ikony"
+
+#: capplets/ui-properties/ui-properties.glade.h:13
+msgid "Status Bar"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:14
+#, fuzzy
+msgid "Use status bar instead of dialog when possible"
+msgstr "Pou¾ít stavovou øádku místo dialogù, pokud je to mo¾né"
+
+#: capplets/ui-properties/ui-properties.glade.h:15
+#, fuzzy
+msgid "Status bar is interactive when possible"
+msgstr "Interaktivní stavová øádka (pokud je to mo¾né)"
+
+#: capplets/ui-properties/ui-properties.glade.h:16
+#, fuzzy
+msgid "Progress bar is on the left"
+msgstr "Prùbìh operací vpravo na stavové øádce"
+
+#: capplets/ui-properties/ui-properties.glade.h:17
+#, fuzzy
+msgid "Progress bar is on the right"
+msgstr "Prùbìh operací vpravo na stavové øádce"
+
+#: capplets/ui-properties/ui-properties.glade.h:18
+#, fuzzy
+msgid "Tool Bars"
+msgstr "Nastavení nástrojových li¹t"
+
+#: capplets/ui-properties/ui-properties.glade.h:19
+#, fuzzy
+msgid "Tool bars have a border"
+msgstr "Menu mají zvý¹ený okraj"
+
+#: capplets/ui-properties/ui-properties.glade.h:20
+#, fuzzy
+msgid "Tool bar buttons pop up on mouse over"
+msgstr "Tlaèítka nástrojových li¹t mají zvý¹ený okraj"
+
+#: capplets/ui-properties/ui-properties.glade.h:21
+#, fuzzy
+msgid "Tool bars have line separators"
+msgstr "Nástrojové li¹ty obsahují oddìlovaèe"
+
+#: capplets/ui-properties/ui-properties.glade.h:22
+#, fuzzy
+msgid "Tool bars are detachable"
+msgstr "Nástrojové li¹ty obsahují text"
+
+#: capplets/ui-properties/ui-properties.glade.h:23
+#, fuzzy
+msgid "Tool bar buttons are icons only"
+msgstr "Tlaèítka nástrojových li¹t mají zvý¹ený okraj"
+
+#: capplets/ui-properties/ui-properties.glade.h:24
+#, fuzzy
+msgid "Tool bar buttons are text below icons"
+msgstr "Nástrojové li¹ty obsahují text"
+
+#: capplets/ui-properties/ui-properties.glade.h:25
+msgid "Interface"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:26
+#, fuzzy
+msgid "Dialogs"
+msgstr "Práce s dialogy"
+
+#: capplets/ui-properties/ui-properties.glade.h:27
+msgid "Place dialogs over application window when possible"
+msgstr "Dialogy umístit nad okno aplikace - pokud je to mo¾né"
+
+#: capplets/ui-properties/ui-properties.glade.h:28
+#, fuzzy
+msgid "Dialogs open"
+msgstr "Tlaèítka dialogù"
+
+#: capplets/ui-properties/ui-properties.glade.h:29
+msgid "Wherever the Window Manager places them"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:30
+#, fuzzy
+msgid "At the center of the screen"
+msgstr "Støed obrazovky"
+
+#: capplets/ui-properties/ui-properties.glade.h:31
+msgid "At the mouse pointer"
+msgstr "Na ukazateli my¹i"
+
+#: capplets/ui-properties/ui-properties.glade.h:32
+#, fuzzy
+msgid "Dialogs are treated"
+msgstr "Dialogy jako jiná okna"
+
+#: capplets/ui-properties/ui-properties.glade.h:33
+#, fuzzy
+msgid "Like any other window"
+msgstr "Dialogy jako jiná okna"
+
+#: capplets/ui-properties/ui-properties.glade.h:34
+#, fuzzy
+msgid "Specially by the window manager"
+msgstr "Ponechat na správci oken"
+
+#: capplets/ui-properties/ui-properties.glade.h:35
+#, fuzzy
+msgid "Multiple Documents"
+msgstr "Standardní nastavení Gtk"
+
+#: capplets/ui-properties/ui-properties.glade.h:36
+#, fuzzy
+msgid "Notebook tabs"
+msgstr "Notebook"
+
+#: capplets/ui-properties/ui-properties.glade.h:37
+#, fuzzy
+msgid "Seperate windows"
+msgstr "Netscape (nové okno)"
+
+#: capplets/ui-properties/ui-properties.glade.h:38
+#, fuzzy
+msgid "The same window"
+msgstr "Netscape (nové okno)"
+
+#: capplets/ui-properties/ui-properties.glade.h:39
+#, fuzzy
+msgid "Left"
+msgstr "Vlevo"
+
+#: capplets/ui-properties/ui-properties.glade.h:40
+#, fuzzy
+msgid "Right"
+msgstr "Vpravo"
+
+#: capplets/ui-properties/ui-properties.glade.h:41
+#, fuzzy
+msgid "Top"
+msgstr "Tvar 2"
+
+#: capplets/ui-properties/ui-properties.glade.h:42
+#, fuzzy
+msgid "Bottom"
+msgstr "Dole"
+
+#: capplets/ui-properties/ui-properties.glade.h:43
+msgid "When opening Multiple documents, use"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:44
+msgid "When using Notebook tabs, place the tabs on the"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:46
+msgid "Settings will not take effect until applications restart"
+msgstr ""
+
+#: capplets/url-properties/url-properties.desktop.in.h:1
+#: capplets/url-properties/url.desktop.in.in.h:1
+msgid "Configure which programs are used to display URLs"
+msgstr ""
+
+#: capplets/url-properties/url-properties.c:66
+#: capplets/url-properties/url-properties.desktop.in.h:2
+#: capplets/url-properties/url.desktop.in.in.h:2
+msgid "URL Handlers"
+msgstr ""
+
+#: capplets/url-properties/url-properties.c:64
+#, fuzzy
+msgid "Protocol"
+msgstr "Protokol"
+
+#: capplets/url-properties/url-properties.c:64
+msgid "Command"
+msgstr "Pøíkaz"
+
+#: capplets/url-properties/url-properties.c:89
+#, fuzzy
+msgid "handler:"
+msgstr "program:"
+
+#. set some commonly used handlers
+#: capplets/url-properties/url-properties.c:99
+msgid "Netscape"
+msgstr "Netscape"
+
+#: capplets/url-properties/url-properties.c:104
+msgid "Netscape (new window)"
+msgstr "Netscape (nové okno)"
+
+#: capplets/url-properties/url-properties.c:110
+#, fuzzy
+msgid "Help browser"
+msgstr "Prohlí¾eè nápovìdy"
+
+#: capplets/url-properties/url-properties.c:115
+msgid "Help browser (new window)"
+msgstr "Otevøi nové okno prohlí¾eèe"
+
+#: capplets/url-properties/url-properties.c:127
+msgid "Set"
+msgstr "Nastavit"
+
+#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.in.h:1
+msgid "Enlightenment"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.in.h:1
+msgid "Ice WM"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.in.h:1
+msgid "Scwm"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/twm.desktop.in.in.h:1
+msgid "twm"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.in.h:1
+#, fuzzy
+msgid "Window Maker"
+msgstr "Editace vlastností správce oken"
+
+#: capplets/wm-properties/wm-properties-capplet.c:135
+#, fuzzy
+msgid "Initialize session settings"
+msgstr "Inicializace nastavení sezení"
+
+#: capplets/wm-properties/wm-properties-capplet.c:206
+#, c-format
+msgid ""
+"Starting %s\n"
+"(%d seconds left before operation times out)"
+msgstr ""
+"Startuje se %s\n"
+"(zbývá %d sekund)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:367
+#, c-format
+msgid "%s (Current)"
+msgstr "%s (Souèasný)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:370
+#, c-format
+msgid "Run Configuration Tool for %s"
+msgstr "Supstit konfiguraci pro %s"
+
+#: capplets/wm-properties/wm-properties-capplet.c:381
+msgid " (Not found)"
+msgstr " (Nenalezen)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:420
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\tAnother window manager is already running and could not be killed\n"
+msgstr ""
+"wm-properties-capplet: Nelze inicializovat správce oken.\n"
+"\tJi¾ bì¾í jiný správce oken a nemù¾e být ukonèen\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:424
+#, c-format
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\t'%s' didn't start\n"
+msgstr ""
+"wm-properties-capplet: Nelze inicializovat správce oken.\n"
+"\t'%s' neodstratoval.\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:473
+msgid "Previous window manager did not die\n"
+msgstr "Pøedchozí správce oken nebyl ukonèen.\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:506
+#, c-format
+msgid ""
+"Could not start '%s'.\n"
+"Falling back to previous window manager '%s'\n"
+msgstr ""
+"Nelze odstartovat '%s'.\n"
+"Zkou¹í se pøedchozí správce oken '%s'\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:537
+msgid ""
+"Could not start fallback window manager.\n"
+"Please run a window manager manually. You can\n"
+"do this by selecting \"Run Program\" in the\n"
+"foot menu\n"
+msgstr ""
+"Nelze odstartovat standardní (ev. pøedchozí) správce oken.\n"
+"Spustì prosím správce oken z pøíkazové øádky. Lze to udìlat\n"
+"tøeba z menu polo¾kou \"Spustit program\".\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:562
+#: capplets/wm-properties/wm-properties-capplet.c:812
+#: capplets/wm-properties/wm-properties-capplet.c:921
+#: capplets/wm-properties/wm-properties-capplet.c:928
+#: capplets/wm-properties/wm-properties-capplet.c:1070
+msgid "OK"
+msgstr "OK"
+
+#: capplets/wm-properties/wm-properties-capplet.c:580
+#, fuzzy
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. You can do so immediately by selecting the \"Save session\n"
+"now\" below, or you can save your session later.  This can be\n"
+"done either selecting \"Save Current Session\" under \"Settings\"\n"
+"in the main menu, or by turning on \"Save Current Setup\" when\n"
+"you log out.\n"
+msgstr ""
+"Vá¹ aktuální správce oken byl zmìnìn. Aby se tyto zmìny ulo¾ily,\n"
+"musíte ulo¾it sezení. To mù¾e být proveden buï polo¾kou \n"
+"\"Ulo¾iy aktuální sezení\" pod \"Nastavení\" v hlavním menu, nebo\n"
+"zatr¾ením \"Ulo¾it aktuální sezení\" pøi odhlá¹ení.\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:587
+#, fuzzy
+msgid "Save Session Later"
+msgstr "Start sezení"
+
+#: capplets/wm-properties/wm-properties-capplet.c:587
+#, fuzzy
+msgid "Save Session Now"
+msgstr "Start sezení"
+
+#: capplets/wm-properties/wm-properties-capplet.c:590
+#, fuzzy
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. This can be done by either selecting \"Save Current Session\"\n"
+"under \"Settings\" in the main menu, or by turning on\n"
+"\"Save Current Setup\" when you log out.\n"
+msgstr ""
+"Vá¹ aktuální správce oken byl zmìnìn. Aby se tyto zmìny ulo¾ily,\n"
+"musíte ulo¾it sezení. To mù¾e být proveden buï polo¾kou \n"
+"\"Ulo¾iy aktuální sezení\" pod \"Nastavení\" v hlavním menu, nebo\n"
+"zatr¾ením \"Ulo¾it aktuální sezení\" pøi odhlá¹ení.\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:811
+msgid "Add New Window Manager"
+msgstr "Pøidat dal¹ího správce oken"
+
+#: capplets/wm-properties/wm-properties-capplet.c:812
+#, fuzzy
+msgid "Cancel"
+msgstr "Zru¹it"
+
+#: capplets/wm-properties/wm-properties-capplet.c:824
+#, fuzzy
+msgid "Name:"
+msgstr "Jméno:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:837
+#, fuzzy
+msgid "Command:"
+msgstr "Pøíkaz:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:850
+msgid "Configuration Command:"
+msgstr "Konfiguraèní pøíkaz:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:869
+msgid "Window manager is session managed"
+msgstr "Správce oken podléhá správì sezení (session managed)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:919
+msgid "Name cannot be empty"
+msgstr "Jméno nemù¾e zùstat prázdné"
+
+#: capplets/wm-properties/wm-properties-capplet.c:926
+msgid "Command cannot be empty"
+msgstr "Pøíkaz nemù¾e zùstat nevyplnìn"
+
+#: capplets/wm-properties/wm-properties-capplet.c:974
+#: capplets/wm-properties/wm-properties-capplet.c:1012
+#, fuzzy
+msgid "Edit Window Manager"
+msgstr "Editace vlastností správce oken"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1069
+msgid "You cannot delete the current Window Manager"
+msgstr "Nemù¾ete smazat aktuálního správce oken"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1111
+#: capplets/wm-properties/wm-properties-capplet.c:1123
+#, fuzzy
+msgid "Window Manager Selector"
+msgstr "Editace vlastností správce oken"
 
 #: control-center/capplet-dir-view.c:153
 #, fuzzy
@@ -1845,18 +2466,36 @@ msgstr ""
 msgid "Could not initialize Bonobo"
 msgstr ""
 
-#: libbackground/applier.c:230
+#: libbackground/applier.c:239
 #, fuzzy
 msgid "Type"
 msgstr "Typ MIME"
 
-#: libbackground/applier.c:231
+#: libbackground/applier.c:240
 msgid ""
 "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
 "for preview"
 msgstr ""
 
-#: libbackground/applier.c:398
+#: libbackground/applier.c:247
+#, fuzzy
+msgid "Preview Width"
+msgstr "Náhled"
+
+#: libbackground/applier.c:248
+msgid "Width if applier is a preview: Defaults to 64."
+msgstr ""
+
+#: libbackground/applier.c:255
+#, fuzzy
+msgid "Preview Height"
+msgstr "Náhled"
+
+#: libbackground/applier.c:256
+msgid "Height if applier is a preview: Defaults to 48."
+msgstr ""
+
+#: libbackground/applier.c:454
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr ""
@@ -1883,23 +2522,80 @@ msgstr ""
 "Mù¾ete nainstalovat balík gnome-audio, který obsahuje\n"
 "sadu standardních zvukù."
 
-#: libsounds/sound-view.c:209
+#: libsounds/sound-view.c:210
 msgid "Event"
 msgstr "Událost"
 
-#: libsounds/sound-view.c:216
+#: libsounds/sound-view.c:217
 #, fuzzy
 msgid "File to play"
 msgstr "Pøehrávaný soubor"
 
-#: libsounds/sound-view.c:238
+#: libsounds/sound-view.c:232
 #, fuzzy
-msgid "Play"
+msgid "_Sounds"
+msgstr "Zvuk"
+
+#: libsounds/sound-view.c:245
+#, fuzzy
+msgid "_Play"
 msgstr "Pøehrát"
 
-#: libsounds/sound-view.c:244
+#: libsounds/sound-view.c:251
 msgid "Select sound file"
 msgstr "Výbìr souboru se zvukem"
+
+#, fuzzy
+#~ msgid "Background properties"
+#~ msgstr "Pozadí"
+
+#, fuzzy
+#~ msgid "Default Applications"
+#~ msgstr "Standardní nastavení Gtk"
+
+#~ msgid "Fast"
+#~ msgstr "Rychle"
+
+#, fuzzy
+#~ msgid "Long"
+#~ msgstr "¾ádná"
+
+#, fuzzy
+#~ msgid "Medium"
+#~ msgstr "My¹"
+
+#, fuzzy
+#~ msgid "Short"
+#~ msgstr "Klávesové zkratky"
+
+#~ msgid "Slow"
+#~ msgstr "Pomalu"
+
+#~ msgid "Eenie"
+#~ msgstr "Krab"
+
+#~ msgid "Mynie"
+#~ msgstr "Had"
+
+#~ msgid "Catcha"
+#~ msgstr "Koèka"
+
+#~ msgid "By Its"
+#~ msgstr "Cizí"
+
+#~ msgid "Meenie"
+#~ msgstr "Krabice"
+
+#, fuzzy
+#~ msgid "Moe"
+#~ msgstr "Hadice"
+
+#~ msgid "Tiger"
+#~ msgstr "Tygr"
+
+#, fuzzy
+#~ msgid "Toe"
+#~ msgstr "Nahoøe"
 
 #, fuzzy
 #~ msgid "Pick a Font"
@@ -1924,10 +2620,6 @@ msgstr "Výbìr souboru se zvukem"
 #~ msgid "General"
 #~ msgstr "Obecné"
 
-#, fuzzy
-#~ msgid "Startup Programs"
-#~ msgstr "Pøidat program pøi startu"
-
 #~ msgid ""
 #~ "No help is available/installed. Please make sure you\n"
 #~ "have the GNOME User's Guide installed on your system."
@@ -1941,18 +2633,6 @@ msgstr "Výbìr souboru se zvukem"
 #, fuzzy
 #~ msgid "Main Settings"
 #~ msgstr " Nastavení"
-
-#, fuzzy
-#~ msgid "Behavior"
-#~ msgstr "Chování dialogù"
-
-#, fuzzy
-#~ msgid "Initialize session settings"
-#~ msgstr "Inicializace nastavení sezení"
-
-#, fuzzy
-#~ msgid "Panel"
-#~ msgstr "Zru¹it"
 
 #, fuzzy
 #~ msgid "PARENT"
@@ -2232,10 +2912,6 @@ msgstr "Výbìr souboru se zvukem"
 #~ msgstr "Pøehrát"
 
 #, fuzzy
-#~ msgid "Length"
-#~ msgstr "Vlevo"
-
-#, fuzzy
 #~ msgid "Wide"
 #~ msgstr "program:"
 
@@ -2266,14 +2942,6 @@ msgstr "Výbìr souboru se zvukem"
 #, fuzzy
 #~ msgid "Triangle"
 #~ msgstr "Dla¾dice"
-
-#, fuzzy
-#~ msgid "Vines"
-#~ msgstr "minuty"
-
-#, fuzzy
-#~ msgid "Wander"
-#~ msgstr "program:"
 
 #, fuzzy
 #~ msgid "Worm"
@@ -2448,86 +3116,6 @@ msgstr "Výbìr souboru se zvukem"
 #~ "instalovánu\n"
 #~ "souèasnou verzi U¾ivatelské pøíruèky Gnome."
 
-#~ msgid "Mime Type: "
-#~ msgstr "Typ MIME: "
-
-#~ msgid "First Regular Expression: "
-#~ msgstr "První regulární výraz: "
-
-#~ msgid "Second Regular Expression: "
-#~ msgstr "Druhý regulární výraz: "
-
-#~ msgid "Mime Type Actions"
-#~ msgstr "Akce s MIME typy"
-
-#~ msgid "Example: emacs %f"
-#~ msgstr "Pøíklad: emacs %f"
-
-#~ msgid "Edit"
-#~ msgstr "Editovat"
-
-#~ msgid "Set actions for %s"
-#~ msgstr "Nastavit akce pro %s"
-
-#~ msgid "You must enter a mime-type"
-#~ msgstr "Musíte zadat MIME typ"
-
-#~ msgid ""
-#~ "You must add either a regular-expression or\n"
-#~ "a file-name extension"
-#~ msgstr ""
-#~ "Je nutné pøidat buï regulární výraz\n"
-#~ "nebo pøíponu souboru"
-
-#~ msgid ""
-#~ "Please put your mime-type in the format:\n"
-#~ "CATEGORY/TYPE\n"
-#~ "\n"
-#~ "For Example:\n"
-#~ "image/png"
-#~ msgstr ""
-#~ "Zadejte prosím MIME typ ve formátu:\n"
-#~ "KATEGORIE/TYP\n"
-#~ "\n"
-#~ "Pøíklad:\n"
-#~ "image/png"
-
-#~ msgid "This mime-type already exists"
-#~ msgstr "Tento MIME typ ji¾ existuje"
-
-#~ msgid ""
-#~ "We are unable to create the directory\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "Nelze vytvoøit adresáø\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "Nelze ulo¾it souèasný stav."
-
-#~ msgid ""
-#~ "We are unable to access the directory\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "K adresáøi ~/.gnome/mime-info není\n"
-#~ "pøístup.\n"
-#~ "\n"
-#~ "Nebude mo¾no ulo¾it souèasný stav."
-
-#~ msgid ""
-#~ "Cannot create the file\n"
-#~ "~/.gnome/mime-info/user.mime\n"
-#~ "\n"
-#~ "We will not be able to save the state"
-#~ msgstr ""
-#~ "Nelze vytvoøit soubor\n"
-#~ "~/.gnome/mime-info/user.mime\n"
-#~ "\n"
-#~ "Nelze ulo¾it souèasný stav."
-
 #, fuzzy
 #~ msgid ""
 #~ "We are unable to create the directory\n"
@@ -2551,42 +3139,6 @@ msgstr "Výbìr souboru se zvukem"
 #~ "pøístup.\n"
 #~ "\n"
 #~ "Nebude mo¾no ulo¾it souèasný stav."
-
-#, fuzzy
-#~ msgid ""
-#~ "Cannot create the file\n"
-#~ "~/.gnome/mime-info/user.keys.\n"
-#~ "\n"
-#~ "We will not be able to save the state"
-#~ msgstr ""
-#~ "Nelze vytvoøit soubor\n"
-#~ "~/.gnome/mime-info/user.keys\n"
-#~ "\n"
-#~ "Nelze ulo¾ít zmìny."
-
-#~ msgid ""
-#~ "Add a new Mime Type\n"
-#~ "For example:  image/tiff; text/x-scheme"
-#~ msgstr ""
-#~ "Pøidat nový MIME typ\n"
-#~ "Pøíklad:  image/tiff; text/x-scheme atd."
-
-#~ msgid ""
-#~ "Type in the extensions for this mime-type.\n"
-#~ "For example:  .html, .htm"
-#~ msgstr ""
-#~ "Zadejte pøípony pro tento MIME typ.\n"
-#~ "Pøíklad: .html, .htm"
-
-#~ msgid "Regular Expressions"
-#~ msgstr "Regulární výrazy"
-
-#~ msgid ""
-#~ "You can set up two regular expressions here to identify the Mime Type\n"
-#~ "by.  These fields are optional."
-#~ msgstr ""
-#~ "K identifikaci MIME typu mù¾ete nastavit a¾ 2 regulární výrazy.\n"
-#~ "Tyto polo¾ky nemusíte vyplnit."
 
 #~ msgid "Settings..."
 #~ msgstr "Nastavení..."
@@ -2606,82 +3158,8 @@ msgstr "Výbìr souboru se zvukem"
 #~ msgid "Fade Duration"
 #~ msgstr "Délka (ms)"
 
-#, fuzzy
-#~ msgid "window4"
-#~ msgstr "okno1"
-
-#, fuzzy
-#~ msgid "Menu bars have a border"
-#~ msgstr "Menu mají zvý¹ený okraj"
-
-#, fuzzy
-#~ msgid "Menus can be torn off"
-#~ msgstr "Trhací podmenu"
-
-#, fuzzy
-#~ msgid "Use status bar instead of dialog when possible"
-#~ msgstr "Pou¾ít stavovou øádku místo dialogù, pokud je to mo¾né"
-
-#, fuzzy
-#~ msgid "Status bar is interactive when possible"
-#~ msgstr "Interaktivní stavová øádka (pokud je to mo¾né)"
-
-#, fuzzy
-#~ msgid "Progress bar is on the left"
-#~ msgstr "Prùbìh operací vpravo na stavové øádce"
-
-#, fuzzy
-#~ msgid "Progress bar is on the right"
-#~ msgstr "Prùbìh operací vpravo na stavové øádce"
-
-#, fuzzy
-#~ msgid "Tool bar buttons pop up on mouse over"
-#~ msgstr "Tlaèítka nástrojových li¹t mají zvý¹ený okraj"
-
-#, fuzzy
-#~ msgid "Tool bars have line separators"
-#~ msgstr "Nástrojové li¹ty obsahují oddìlovaèe"
-
-#, fuzzy
-#~ msgid "Tool bar buttons are icons only"
-#~ msgstr "Tlaèítka nástrojových li¹t mají zvý¹ený okraj"
-
-#, fuzzy
-#~ msgid "Tool bar buttons are text below icons"
-#~ msgstr "Nástrojové li¹ty obsahují text"
-
-#, fuzzy
-#~ msgid "Dialogs"
-#~ msgstr "Práce s dialogy"
-
 #~ msgid "Dialog buttons have icons"
 #~ msgstr "Tlaèítka dialogù obsahují ikony"
-
-#~ msgid "Place dialogs over application window when possible"
-#~ msgstr "Dialogy umístit nad okno aplikace - pokud je to mo¾né"
-
-#, fuzzy
-#~ msgid "Dialogs open"
-#~ msgstr "Tlaèítka dialogù"
-
-#, fuzzy
-#~ msgid "At the center of the screen"
-#~ msgstr "Støed obrazovky"
-
-#~ msgid "At the mouse pointer"
-#~ msgstr "Na ukazateli my¹i"
-
-#, fuzzy
-#~ msgid "Dialogs are treated"
-#~ msgstr "Dialogy jako jiná okna"
-
-#, fuzzy
-#~ msgid "Like any other window"
-#~ msgstr "Dialogy jako jiná okna"
-
-#, fuzzy
-#~ msgid "Specially by the window manager"
-#~ msgstr "Ponechat na správci oken"
 
 #, fuzzy
 #~ msgid "Left aligned"
@@ -2690,18 +3168,6 @@ msgstr "Výbìr souboru se zvukem"
 #, fuzzy
 #~ msgid "Right aligned"
 #~ msgstr "Pro praváky"
-
-#, fuzzy
-#~ msgid "Notebook tabs"
-#~ msgstr "Notebook"
-
-#, fuzzy
-#~ msgid "The same window"
-#~ msgstr "Netscape (nové okno)"
-
-#, fuzzy
-#~ msgid "Right"
-#~ msgstr "Vpravo"
 
 #~ msgid "Session"
 #~ msgstr "Sezení"
@@ -2812,9 +3278,6 @@ msgstr "Výbìr souboru se zvukem"
 #~ msgid "Non-session-managed Startup Programs"
 #~ msgstr "Programy, které nepodléhají správì sezení"
 
-#~ msgid "Command"
-#~ msgstr "Pøíkaz"
-
 #~ msgid "Browse Currently Running Programs..."
 #~ msgstr "Procházet aktuálnì bì¾ící programy..."
 
@@ -2873,125 +3336,6 @@ msgstr "Výbìr souboru se zvukem"
 
 #~ msgid "Error initializing the `url-properties' capplet."
 #~ msgstr "Chyba pøi inicializaci konfiguraèního apletu 'url-properties'."
-
-#~ msgid "Netscape"
-#~ msgstr "Netscape"
-
-#~ msgid "Netscape (new window)"
-#~ msgstr "Netscape (nové okno)"
-
-#~ msgid "Help browser (new window)"
-#~ msgstr "Otevøi nové okno prohlí¾eèe"
-
-#~ msgid "Set"
-#~ msgstr "Nastavit"
-
-#~ msgid ""
-#~ "Starting %s\n"
-#~ "(%d seconds left before operation times out)"
-#~ msgstr ""
-#~ "Startuje se %s\n"
-#~ "(zbývá %d sekund)"
-
-#~ msgid "%s (Current)"
-#~ msgstr "%s (Souèasný)"
-
-#~ msgid "Run Configuration Tool for %s"
-#~ msgstr "Supstit konfiguraci pro %s"
-
-#~ msgid " (Not found)"
-#~ msgstr " (Nenalezen)"
-
-#~ msgid ""
-#~ "wm-properties-capplet: Unable to initialize window manager.\n"
-#~ "\tAnother window manager is already running and could not be killed\n"
-#~ msgstr ""
-#~ "wm-properties-capplet: Nelze inicializovat správce oken.\n"
-#~ "\tJi¾ bì¾í jiný správce oken a nemù¾e být ukonèen\n"
-
-#~ msgid ""
-#~ "wm-properties-capplet: Unable to initialize window manager.\n"
-#~ "\t'%s' didn't start\n"
-#~ msgstr ""
-#~ "wm-properties-capplet: Nelze inicializovat správce oken.\n"
-#~ "\t'%s' neodstratoval.\n"
-
-#~ msgid "Previous window manager did not die\n"
-#~ msgstr "Pøedchozí správce oken nebyl ukonèen.\n"
-
-#~ msgid ""
-#~ "Could not start '%s'.\n"
-#~ "Falling back to previous window manager '%s'\n"
-#~ msgstr ""
-#~ "Nelze odstartovat '%s'.\n"
-#~ "Zkou¹í se pøedchozí správce oken '%s'\n"
-
-#~ msgid ""
-#~ "Could not start fallback window manager.\n"
-#~ "Please run a window manager manually. You can\n"
-#~ "do this by selecting \"Run Program\" in the\n"
-#~ "foot menu\n"
-#~ msgstr ""
-#~ "Nelze odstartovat standardní (ev. pøedchozí) správce oken.\n"
-#~ "Spustì prosím správce oken z pøíkazové øádky. Lze to udìlat\n"
-#~ "tøeba z menu polo¾kou \"Spustit program\".\n"
-
-#~ msgid "OK"
-#~ msgstr "OK"
-
-#, fuzzy
-#~ msgid ""
-#~ "Your current window manager has been changed. In order for\n"
-#~ "this change to be saved, you will need to save your current\n"
-#~ "session. You can do so immediately by selecting the \"Save session\n"
-#~ "now\" below, or you can save your session later.  This can be\n"
-#~ "done either selecting \"Save Current Session\" under \"Settings\"\n"
-#~ "in the main menu, or by turning on \"Save Current Setup\" when\n"
-#~ "you log out.\n"
-#~ msgstr ""
-#~ "Vá¹ aktuální správce oken byl zmìnìn. Aby se tyto zmìny ulo¾ily,\n"
-#~ "musíte ulo¾it sezení. To mù¾e být proveden buï polo¾kou \n"
-#~ "\"Ulo¾iy aktuální sezení\" pod \"Nastavení\" v hlavním menu, nebo\n"
-#~ "zatr¾ením \"Ulo¾it aktuální sezení\" pøi odhlá¹ení.\n"
-
-#, fuzzy
-#~ msgid "Save Session Later"
-#~ msgstr "Start sezení"
-
-#, fuzzy
-#~ msgid "Save Session Now"
-#~ msgstr "Start sezení"
-
-#, fuzzy
-#~ msgid ""
-#~ "Your current window manager has been changed. In order for\n"
-#~ "this change to be saved, you will need to save your current\n"
-#~ "session. This can be done by either selecting \"Save Current Session\"\n"
-#~ "under \"Settings\" in the main menu, or by turning on\n"
-#~ "\"Save Current Setup\" when you log out.\n"
-#~ msgstr ""
-#~ "Vá¹ aktuální správce oken byl zmìnìn. Aby se tyto zmìny ulo¾ily,\n"
-#~ "musíte ulo¾it sezení. To mù¾e být proveden buï polo¾kou \n"
-#~ "\"Ulo¾iy aktuální sezení\" pod \"Nastavení\" v hlavním menu, nebo\n"
-#~ "zatr¾ením \"Ulo¾it aktuální sezení\" pøi odhlá¹ení.\n"
-
-#~ msgid "Add New Window Manager"
-#~ msgstr "Pøidat dal¹ího správce oken"
-
-#~ msgid "Configuration Command:"
-#~ msgstr "Konfiguraèní pøíkaz:"
-
-#~ msgid "Window manager is session managed"
-#~ msgstr "Správce oken podléhá správì sezení (session managed)"
-
-#~ msgid "Name cannot be empty"
-#~ msgstr "Jméno nemù¾e zùstat prázdné"
-
-#~ msgid "Command cannot be empty"
-#~ msgstr "Pøíkaz nemù¾e zùstat nevyplnìn"
-
-#~ msgid "You cannot delete the current Window Manager"
-#~ msgstr "Nemù¾ete smazat aktuálního správce oken"
 
 #~ msgid ""
 #~ "an initialization error occurred while starting 'wm-properties-capplet'.\n"

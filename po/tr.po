@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 1.5.0\n"
-"POT-Creation-Date: 2002-03-28 09:22-0500\n"
+"POT-Creation-Date: 2002-04-21 15:46-0500\n"
 "PO-Revision-Date: 2001-11-07 08:54+0200\n"
 "Last-Translator: Görkem Çetin <gorkem@gelecek.com.tr>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
@@ -14,23 +14,25 @@ msgstr ""
 "Content-Type: text/plain; charset=ISO-8859-9\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:259
-msgid "_Enable keyboard accesibility"
-msgstr ""
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:262
+#, fuzzy
+msgid "_Enable keyboard accessibility"
+msgstr "Klavye Özellikleri"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:326
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:329
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr ""
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:438
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:441
 #, fuzzy
 msgid "Select CDE AccessX file"
 msgstr "Ses dosyasýný seçin"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-msgid "AccessX"
-msgstr ""
+#: capplets/keyboard/keyboard.desktop.in.h:1
+msgid "Keyboard"
+msgstr "Klavye"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:2
 #, fuzzy
@@ -38,7 +40,7 @@ msgid "Keyboard Accessibility Properties"
 msgstr "Klavye Özellikleri"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:1
-msgid "&lt;b&gt;Sample&lt;/b&gt;"
+msgid "&lt;b&gt;Test&lt;/b&gt;"
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:2
@@ -46,14 +48,11 @@ msgid "B_eep when modifier is pressed"
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:3
-msgid "Beep when:"
+msgid "Beep when an LED is turned on and two beeps when one is turned off."
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:4
-msgid ""
-"BounceKeys can benefit users who sometimes tremor when they release a key.  "
-"BounceKeys instructs the system to ignore all subsequent presses of the SAME "
-"key if they happen within a user selectable period of time."
+msgid "Beep when:"
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:5
@@ -77,39 +76,34 @@ msgid "Enable _Toggle Keys"
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:10
-msgid "Keyboard Accessibility Configuration"
+msgid ""
+"Ignore all subsequent presses of the SAME key if they happen within a user "
+"selectable period of time."
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:11
-msgid "Ma_ximum pointer speed :"
-msgstr ""
+#, fuzzy
+msgid "Keyboard Accessibility Configuration (AccessX)"
+msgstr "Klavye Özellikleri"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:12
-msgid ""
-"MouseKeys can benefit StickyKey users or anyone unable to use the pointing "
-"device or in need of 'pixel by pixel' position control of the pointer.  When "
-"activated, MouseKeys turns the numeric keypad into a mouse control pad. "
+msgid "Ma_ximum pointer speed :"
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:13
 msgid ""
-"SlowKeys can benefit users who hit unwanted keys as they type.  SlowKeys "
-"instructs the system not to accept keys as pressed, unless the key has been "
-"pressed and held for a user adjustable amount of time (i.e., the key delay)."
+"Only accept keys after they have been pressed and held for a user adjustable "
+"amount of time."
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:14
-msgid "Start mo_ving this long after keypress :"
+msgid ""
+"Perform multiple simultaneous key press operations by pressing modifier keys "
+"in sequence."
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:15
-msgid ""
-"StickyKeys can benefit users who type with only one finger or who might use "
-"a mouth or head mounted-stick.  StickyKeys allows users to perform multiple "
-"simultaneous key press operations by pressing the keys in sequence.  For "
-"example, if an application requires a user to simultaneously press the "
-"'Ctrl' and 'Tab' key, a StickyKeys user can press the 'Ctrl' key, release "
-"it, and then press the 'Tab' key and release it, achieving the same result."
+msgid "Start mo_ving this long after keypress :"
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:16
@@ -117,14 +111,11 @@ msgid "Time to _accelerate to max speed :"
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:17
-msgid ""
-"ToggleKeys can benefit the visually impaired user who has difficulty seeing "
-"the small LED keyboard indicators.  ToggleKeys provides one beep when an LED "
-"(e.g., the Caps Lock LED) is turned on and two beeps when it is turned off"
+msgid "Turn the numeric keypad into a mouse control pad."
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:18
-msgid "_Beep on state change"
+msgid "_Beep when enabling/disabling keyboard accessibility features"
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:19
@@ -132,23 +123,22 @@ msgid "_Disable if unused for "
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:20
-#: capplets/sound/sound-properties.glade.h:3
-msgid "_General"
-msgstr ""
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:21
 msgid "_Ignore keypresses within  :"
 msgstr ""
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:22
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:21
 msgid "_Import CDE AccessX file"
 msgstr ""
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:23
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:22
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
 #, fuzzy
 msgid "_Keyboard"
 msgstr "Klavye"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:23
+msgid "_Misc"
+msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:24
 msgid "_Only accept keypress after :"
@@ -232,33 +222,34 @@ msgid "_Scaled"
 msgstr ""
 
 #: capplets/background/background-properties-capplet.c:392
-msgid "S_tretched"
+msgid "Stretc_hed"
 msgstr ""
 
 #: capplets/background/background-properties-capplet.c:392
 msgid "_No Picture"
 msgstr ""
 
-#: capplets/background/background-properties-capplet.c:515
+#: capplets/background/background-properties-capplet.c:427
+msgid "_Picture"
+msgstr ""
+
+#: capplets/background/background-properties-capplet.c:531
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:592
-#: capplets/keyboard/gnome-keyboard-properties.c:348
+#: capplets/keyboard/gnome-keyboard-properties.c:359
 #: capplets/mouse/gnome-mouse-properties.c:691
 #: capplets/sound/sound-properties-capplet.c:148
 msgid "Retrieve and store legacy settings"
 msgstr "Eski ayarlarý al ve sakla"
 
-#: capplets/background/background-properties-capplet.c:540
-#, fuzzy
-msgid "Background properties"
-msgstr "Arkaplan Özellikleri"
-
+#: capplets/background/background-properties-capplet.c:556
 #: capplets/background/background-properties.glade.h:1
-msgid "Background Properties"
+#, fuzzy
+msgid "Background Preferences"
 msgstr "Arkaplan Özellikleri"
 
 #: capplets/background/background-properties.glade.h:2
-msgid "Border the picture with a:"
+msgid "Bor_der the picture with a:"
 msgstr ""
 
 #: capplets/background/background-properties.glade.h:3
@@ -278,56 +269,61 @@ msgid "Picture Options:"
 msgstr ""
 
 #: capplets/background/background-properties.glade.h:7
-msgid "Picture:"
-msgstr ""
-
-#: capplets/background/background-properties.glade.h:8
 msgid "Primary Color"
 msgstr ""
 
-#: capplets/background/background-properties.glade.h:9
+#: capplets/background/background-properties.glade.h:8
 msgid "Secondary Color"
 msgstr ""
 
-#: capplets/background/background-properties.glade.h:10
+#: capplets/background/background-properties.glade.h:9
 msgid "Solid color"
 msgstr ""
 
-#: capplets/background/background-properties.glade.h:11
+#: capplets/background/background-properties.glade.h:10
 msgid "Vertical gradient"
 msgstr ""
 
-#: capplets/background/background-properties.glade.h:12
+#: capplets/background/background-properties.glade.h:11
 msgid ""
 "You can drag image files\n"
 "into the window to set the \n"
 "background picture."
 msgstr ""
 
-#: capplets/background/background-properties.glade.h:15
+#: capplets/background/background-properties.glade.h:14
 #, fuzzy
 msgid "radiobutton1"
 msgstr "1. Radyo Düðmesi"
 
-#: capplets/background/background-properties.glade.h:16
+#: capplets/background/background-properties.glade.h:15
 #, fuzzy
 msgid "radiobutton2"
 msgstr "2. Radyo Düðmesi"
 
-#: capplets/background/background-properties.glade.h:17
+#: capplets/background/background-properties.glade.h:16
 #, fuzzy
 msgid "radiobutton3"
 msgstr "2. Radyo Düðmesi"
 
-#: capplets/background/background-properties.glade.h:18
+#: capplets/background/background-properties.glade.h:17
 #, fuzzy
 msgid "radiobutton4"
 msgstr "2. Radyo Düðmesi"
 
-#: capplets/background/background-properties.glade.h:19
+#: capplets/background/background-properties.glade.h:18
 #, fuzzy
 msgid "radiobutton5"
 msgstr "2. Radyo Düðmesi"
+
+#: capplets/common/activate-settings-daemon.c:18
+msgid ""
+"Unable to start the settings manager 'gnome-settings-daemon'.\n"
+"Without the GNOME settings manager running, some preferences may not take "
+"effect. This could indicate a problem with Bonobo, or a non-GNOME (e.g. KDE) "
+"settings manager may already be active and conflicting with the GNOME "
+"settings manager."
+msgstr ""
 
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
@@ -400,7 +396,7 @@ msgstr ""
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:1312
+#: capplets/common/gconf-property-editor.c:1384
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -409,7 +405,7 @@ msgid ""
 "picture."
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:1320
+#: capplets/common/gconf-property-editor.c:1392
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -418,17 +414,8 @@ msgid ""
 "Please select a different picture instead."
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:1404
+#: capplets/common/gconf-property-editor.c:1476
 msgid "Please select an image."
-msgstr ""
-
-#: capplets/common/activate-settings-daemon.c:18
-msgid ""
-"Unable to start the settings manager 'gnome2-settings-daemon'.\n"
-"Without the GNOME settings manager running, some preferences may not take "
-"effect. This could indicate a problem with Bonobo, or a non-GNOME (e.g. KDE) "
-"settings manager may already be active and conflicting with the GNOME "
-"settings manager."
 msgstr ""
 
 #: capplets/default-applications/default-applications.desktop.in.h:1
@@ -436,6 +423,7 @@ msgid "Choose the applications used by default"
 msgstr "Öntanýmlý uygulamalarý seçiniz"
 
 #: capplets/default-applications/default-applications.desktop.in.h:2
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:15
 #, fuzzy
 msgid "Preferred Applications"
 msgstr "Öntanýmlý Uygulamalar"
@@ -469,35 +457,31 @@ msgid "Co_mmand:"
 msgstr ""
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:8
-msgid "Default Applications"
-msgstr "Öntanýmlý Uygulamalar"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:9
 msgid "Default Help Browser"
 msgstr ""
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:10
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:9
 msgid "Default Terminal"
 msgstr ""
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:11
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:10
 msgid "Default Text Editor"
 msgstr ""
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:12
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:11
 msgid "Default Web Browser"
 msgstr ""
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:13
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:12
 #, fuzzy
 msgid "Default Window Manager"
 msgstr "Sawfish pencere yöneticisi"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:14
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:13
 msgid "E_xec Flag:"
 msgstr ""
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:15
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:14
 msgid "He_lp Browser"
 msgstr ""
 
@@ -532,6 +516,7 @@ msgid "_Delete"
 msgstr ""
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:23
+#: capplets/file-types/file-types-properties.glade.h:19
 msgid "_Edit..."
 msgstr ""
 
@@ -562,6 +547,7 @@ msgid "_Window Manager"
 msgstr "Sawfish pencere yöneticisi"
 
 #: capplets/desktop-links/Accessibility.directory.in.in.h:1
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "Accessibility"
 msgstr ""
 
@@ -593,6 +579,15 @@ msgstr "Özel Uygulamalar"
 #: capplets/desktop-links/legacy-applications.desktop.in.in.h:2
 msgid "Legacy applications settings (grdb)"
 msgstr "Özel uygulama ayarlarý (grdb)"
+
+#: capplets/desktop-links/panel.desktop.in.in.h:1
+#, fuzzy
+msgid "Global panel properties"
+msgstr "Ses özellikleri"
+
+#: capplets/desktop-links/panel.desktop.in.in.h:2
+msgid "Panel"
+msgstr ""
 
 #: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
 msgid "Appearance"
@@ -647,6 +642,7 @@ msgid "Configure miscellaneous window features"
 msgstr "Çeþitli pencere özelliklerini yapýlandýr"
 
 #: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
+#: capplets/ui-properties/ui-properties.glade.h:45
 msgid "Miscellaneous"
 msgstr "Çeþitli"
 
@@ -690,6 +686,15 @@ msgstr "Çalýþma alanlarýný yapýlandýr"
 #: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:2
 msgid "Workspaces"
 msgstr "Çalýþma alanlarý"
+
+#: capplets/desktop-links/session.desktop.in.in.h:1
+msgid "Configure which non-session aware programs are started up"
+msgstr ""
+
+#: capplets/desktop-links/session.desktop.in.in.h:2
+#, fuzzy
+msgid "Startup Programs"
+msgstr "Baþlangýç Programlarý"
 
 #.
 #. * Translatable strings file
@@ -783,19 +788,21 @@ msgstr "Resimler"
 msgid "Video"
 msgstr "Video"
 
-#: capplets/file-types/file-types-capplet.c:212
-#: capplets/file-types/file-types-properties.glade.h:8
+#: capplets/file-types/file-types-capplet.c:222
 msgid "Description"
 msgstr "Açýklama"
 
-#: capplets/file-types/file-types-capplet.c:219
+#: capplets/file-types/file-types-capplet.c:229
+#: capplets/mime-type/new-mime-window.c:39
 msgid "Extensions"
 msgstr "Uzantýlar"
 
+#: capplets/file-types/file-types-capplet.desktop.in.h:1
 #: capplets/file-types/file-types.desktop.in.h:1
 msgid "File Types and Programs"
 msgstr "Dosya Türleri ve Programlar"
 
+#: capplets/file-types/file-types-capplet.desktop.in.h:2
 #: capplets/file-types/file-types.desktop.in.h:2
 msgid "Specify which programs are used to open or view each file type"
 msgstr ""
@@ -805,104 +812,105 @@ msgid "Actions"
 msgstr ""
 
 #: capplets/file-types/file-types-properties.glade.h:2
-msgid "Add"
-msgstr ""
-
-#: capplets/file-types/file-types-properties.glade.h:3
 #, fuzzy
-msgid "Add file type..."
+msgid "Add _file type..."
 msgstr "Dosya türünü düzenle"
 
+#: capplets/file-types/file-types-properties.glade.h:3
+msgid "Add _service..."
+msgstr ""
+
 #: capplets/file-types/file-types-properties.glade.h:4
-msgid "Add service..."
-msgstr ""
-
-#: capplets/file-types/file-types-properties.glade.h:5
-#: capplets/file-types/mime-edit-dialog.c:750
-msgid "Category"
-msgstr "Kategori"
-
-#: capplets/file-types/file-types-properties.glade.h:6
-msgid "Choose..."
-msgstr ""
-
-#: capplets/file-types/file-types-properties.glade.h:7
 #, fuzzy
 msgid "Default action"
 msgstr "Öntanýmlý Uygulamalar"
 
-#: capplets/file-types/file-types-properties.glade.h:9
+#: capplets/file-types/file-types-properties.glade.h:5
 #: capplets/file-types/mime-edit-dialog.c:167
 msgid "Edit file type"
 msgstr "Dosya türünü düzenle"
 
-#: capplets/file-types/file-types-properties.glade.h:10
-msgid "Edit..."
-msgstr ""
-
-#: capplets/file-types/file-types-properties.glade.h:11
+#: capplets/file-types/file-types-properties.glade.h:6
 #, fuzzy
 msgid "File types and Internet Services"
 msgstr "Ýnternet Servisleri"
 
-#: capplets/file-types/file-types-properties.glade.h:12
+#: capplets/file-types/file-types-properties.glade.h:7
 #, fuzzy
 msgid "Filename extensions"
 msgstr "Uzantýlar"
 
-#: capplets/file-types/file-types-properties.glade.h:13
+#: capplets/file-types/file-types-properties.glade.h:8
 msgid "Look at content"
 msgstr ""
 
-#: capplets/file-types/file-types-properties.glade.h:14
-#, fuzzy
-msgid "MIME Type"
-msgstr "Tür"
-
-#: capplets/file-types/file-types-properties.glade.h:15
-msgid "Name"
+#: capplets/file-types/file-types-properties.glade.h:9
+msgid "Needs _terminal"
 msgstr ""
 
-#: capplets/file-types/file-types-properties.glade.h:16
-msgid "Needs terminal"
-msgstr ""
-
-#: capplets/file-types/file-types-properties.glade.h:17
-#, fuzzy
-msgid "Program"
-msgstr "Baþlangýç Programlarý"
-
-#: capplets/file-types/file-types-properties.glade.h:18
-msgid "Program to execute"
-msgstr ""
-
-#: capplets/file-types/file-types-properties.glade.h:19
+#: capplets/file-types/file-types-properties.glade.h:10
 msgid "Program to run"
 msgstr ""
 
-#: capplets/file-types/file-types-properties.glade.h:20
-#, fuzzy
-msgid "Protocol name"
-msgstr "Lütfen bir protokol adý verin."
-
-#: capplets/file-types/file-types-properties.glade.h:21
-msgid "Remove"
-msgstr ""
-
-#: capplets/file-types/file-types-properties.glade.h:22
+#: capplets/file-types/file-types-properties.glade.h:11
 msgid "Run a program"
 msgstr ""
 
+#: capplets/file-types/file-types-properties.glade.h:12
+msgid "Use category _defaults"
+msgstr ""
+
+#: capplets/file-types/file-types-properties.glade.h:13
+msgid "Use parent category _defaults"
+msgstr ""
+
+#: capplets/file-types/file-types-properties.glade.h:14
+msgid "Viewing component"
+msgstr ""
+
+#: capplets/file-types/file-types-properties.glade.h:15
+msgid "_Add"
+msgstr ""
+
+#: capplets/file-types/file-types-properties.glade.h:16
+#, fuzzy
+msgid "_Category"
+msgstr "Kategori"
+
+#: capplets/file-types/file-types-properties.glade.h:17
+msgid "_Choose..."
+msgstr ""
+
+#: capplets/file-types/file-types-properties.glade.h:18
+#, fuzzy
+msgid "_Description"
+msgstr "Açýklama"
+
+#: capplets/file-types/file-types-properties.glade.h:20
+#, fuzzy
+msgid "_MIME Type"
+msgstr "Tür"
+
+#: capplets/file-types/file-types-properties.glade.h:21
+msgid "_Name"
+msgstr ""
+
+#: capplets/file-types/file-types-properties.glade.h:22
+#, fuzzy
+msgid "_Program"
+msgstr "Baþlangýç Programlarý"
+
 #: capplets/file-types/file-types-properties.glade.h:23
-msgid "Use category defaults"
+msgid "_Program to execute"
 msgstr ""
 
 #: capplets/file-types/file-types-properties.glade.h:24
-msgid "Use parent category defaults"
-msgstr ""
+#, fuzzy
+msgid "_Protocol name"
+msgstr "Lütfen bir protokol adý verin."
 
 #: capplets/file-types/file-types-properties.glade.h:25
-msgid "Viewing component"
+msgid "_Remove"
 msgstr ""
 
 #: capplets/file-types/mime-category-edit-dialog.c:137
@@ -929,14 +937,15 @@ msgid "Structure containing information on the MIME category"
 msgstr ""
 
 #: capplets/file-types/mime-category-edit-dialog.c:343
-#: capplets/file-types/mime-edit-dialog.c:392
-#: capplets/file-types/mime-edit-dialog.c:492
-#: capplets/file-types/service-edit-dialog.c:351
-#: capplets/file-types/service-edit-dialog.c:397
+#: capplets/file-types/mime-edit-dialog.c:409
+#: capplets/file-types/mime-edit-dialog.c:513
+#: capplets/file-types/service-edit-dialog.c:354
+#: capplets/file-types/service-edit-dialog.c:400
 msgid "Custom"
 msgstr "Özel"
 
 #: capplets/file-types/mime-edit-dialog.c:164
+#: capplets/mime-type/mime-data.c:385
 msgid "Extension"
 msgstr "Uzantý"
 
@@ -960,23 +969,27 @@ msgstr ""
 msgid "True if this dialog is for adding a MIME type"
 msgstr ""
 
-#: capplets/file-types/mime-edit-dialog.c:387
-#: capplets/file-types/mime-edit-dialog.c:442
+#: capplets/file-types/mime-edit-dialog.c:404
+#: capplets/file-types/mime-edit-dialog.c:463
 msgid "None"
 msgstr "Hiçbiri"
 
-#: capplets/file-types/mime-edit-dialog.c:675
+#: capplets/file-types/mime-edit-dialog.c:696
 msgid ""
 "Invalid MIME type. Please enter a valid MIME type, or leave the field blank "
 "to have one generated for you."
 msgstr ""
 "Geçersiz MIME türü. Lütfen geçerli bir MIME türü yazýn, ya da boþ býrakýn."
 
-#: capplets/file-types/mime-edit-dialog.c:686
+#: capplets/file-types/mime-edit-dialog.c:703
 msgid "There already exists a MIME type of that name."
 msgstr "Bu isimde bir MIME türü zaten var."
 
-#: capplets/file-types/mime-edit-dialog.c:755
+#: capplets/file-types/mime-edit-dialog.c:768
+msgid "Category"
+msgstr "Kategori"
+
+#: capplets/file-types/mime-edit-dialog.c:773
 msgid "Choose a file category"
 msgstr "Bir dosya kategorisi seçin"
 
@@ -1009,11 +1022,11 @@ msgstr ""
 msgid "TRUE if this is an add service dialog"
 msgstr ""
 
-#: capplets/file-types/service-edit-dialog.c:489
+#: capplets/file-types/service-edit-dialog.c:492
 msgid "Please enter a protocol name."
 msgstr "Lütfen bir protokol adý verin."
 
-#: capplets/file-types/service-edit-dialog.c:502
+#: capplets/file-types/service-edit-dialog.c:504
 msgid ""
 "Invalid protocol name. Please enter a protocol name without any spaces or "
 "punctuation."
@@ -1021,7 +1034,7 @@ msgstr ""
 "Gerçersiz protokol adý. Lütfen içinde boþluk karakteri olmayan bir protokol "
 "adý giriniz."
 
-#: capplets/file-types/service-edit-dialog.c:515
+#: capplets/file-types/service-edit-dialog.c:518
 msgid "There is already a protocol by that name."
 msgstr "Bu isimde bir protokol zaten var."
 
@@ -1048,6 +1061,11 @@ msgstr "Kýlavuz sayfalarý"
 #: capplets/file-types/service-info.c:49
 msgid "Electronic mail transmission"
 msgstr "Elektronik posta aktarýmý"
+
+#: capplets/file-types/service-info.c:50
+#, fuzzy
+msgid "Gnome documentation"
+msgstr "Ayrýntýlý belge"
 
 #: capplets/font/font-properties.desktop.in.h:1
 msgid "Font"
@@ -1082,8 +1100,8 @@ msgid "Accelerator key"
 msgstr ""
 
 #: capplets/keybindings/eggcellrendererkeys.c:199
-#: capplets/keybindings/gnome-keybinding-properties.c:88
-#: libbackground/applier.c:466
+#: capplets/keybindings/gnome-keybinding-properties.c:101
+#: libbackground/applier.c:533
 msgid "Disabled"
 msgstr "Kapalý"
 
@@ -1096,21 +1114,21 @@ msgstr ""
 msgid "Type a new accelerator"
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:284
+#: capplets/keybindings/gnome-keybinding-properties.c:315
 msgid "<Unknown Action>"
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:443
+#: capplets/keybindings/gnome-keybinding-properties.c:573
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:506
+#: capplets/keybindings/gnome-keybinding-properties.c:594
 msgid "_Action"
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:518
+#: capplets/keybindings/gnome-keybinding-properties.c:606
 #, fuzzy
 msgid "_Shortcut"
 msgstr "Kýsayollar"
@@ -1140,13 +1158,13 @@ msgstr ""
 msgid "Associate keyboard shortcuts with panel actions"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.c:328
+#: capplets/keyboard/gnome-keyboard-properties.c:338
 #, fuzzy
 msgid "_Accessibility"
 msgstr "Geliþmiþ Ayarlar"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:344
-#: capplets/keyboard/gnome-keyboard-properties.c:346
+#: capplets/keyboard/gnome-keyboard-properties.c:355
+#: capplets/keyboard/gnome-keyboard-properties.c:357
 #: capplets/sound/sound-properties-capplet.c:144
 #: capplets/sound/sound-properties-capplet.c:146
 msgid ""
@@ -1154,67 +1172,66 @@ msgid ""
 msgstr "Ayarlarý uygula ve çýk"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:1
-msgid "&lt;i&gt;fast&lt;/i&gt;"
+msgid ""
+"&lt;b&gt;Tip:&lt;/b&gt; You can configure the keyboards accessibility "
+"features by bringing up the 'Accessibility Settings' property dialog, or "
+"pressing the button on the right."
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:2
-msgid "&lt;i&gt;loud&lt;/i&gt;"
+msgid "&lt;i&gt;fast&lt;/i&gt;"
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:3
-msgid "&lt;i&gt;quiet&lt;/i&gt;"
+msgid "&lt;i&gt;loud&lt;/i&gt;"
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:4
-msgid "&lt;i&gt;slow&lt;/i&gt;"
+msgid "&lt;i&gt;quiet&lt;/i&gt;"
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:5
-#, fuzzy
-msgid "Cursor"
-msgstr "Özel"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
-msgid "Fast"
+msgid "&lt;i&gt;slow&lt;/i&gt;"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
-msgid "Key_press makes sound"
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+msgid "*"
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 #, fuzzy
+msgid "Cursor"
+msgstr "Özel"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
+msgid "Key_press makes sound"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#, fuzzy
 msgid "Keyboard Bell"
 msgstr "Klavye"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 #: capplets/keyboard/keyboard.desktop.in.h:2
 msgid "Keyboard Properties"
 msgstr "Klavye Özellikleri"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Keyboard _repeats when key is held down"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Keyboard bell _enabled"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 #, fuzzy
 msgid "Keyboard bell _off"
 msgstr "Klavye"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
-msgid "Keyclick Volume"
-msgstr ""
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
-msgid "Long"
-msgstr ""
-
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:15
-msgid "Medium"
+msgid "Keyclick Volume"
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:16
@@ -1234,57 +1251,224 @@ msgid "Set the volume of the clicking sound made when pressing a key"
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:20
-#, fuzzy
-msgid "Short"
-msgstr "Kýsayollar"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
-msgid "Slow"
-msgstr ""
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid ""
 "The keyboard bell is the &lt;i&gt;beep&lt;/i&gt; sound heard when the system "
 "wants to get your attention.  You can select a custom sound file to play "
 "instead of the traditional beeping noise."
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
-msgid "Very fast"
-msgstr ""
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#, fuzzy
+msgid "_Accessibility..."
+msgstr "Geliþmiþ Ayarlar"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
-msgid "Very long"
-msgstr ""
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid "_Blink speed:"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "_Cursor blinks in text fields"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid "_Custom keyboard bell:"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "_Delay before repeating:"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:30
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
 #, fuzzy
 msgid "_Sound"
 msgstr "Ses"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
 msgid "_Volume:"
 msgstr ""
 
-#: capplets/keyboard/keyboard.desktop.in.h:1
-msgid "Keyboard"
-msgstr "Klavye"
+#. icon box
+#: capplets/mime-type/edit-window.c:266
+#, fuzzy
+msgid "Select an icon..."
+msgstr "Kurulacak bir tema seçiniz"
+
+#: capplets/mime-type/edit-window.c:276
+#: capplets/mime-type/new-mime-window.c:31
+#, fuzzy
+msgid "Mime Type: "
+msgstr "Tür"
+
+#: capplets/mime-type/edit-window.c:306
+msgid "Add"
+msgstr ""
+
+#: capplets/mime-type/edit-window.c:314
+#: capplets/url-properties/url-properties.c:135
+msgid "Remove"
+msgstr ""
+
+#. gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
+#: capplets/mime-type/edit-window.c:341
+#: capplets/mime-type/new-mime-window.c:69
+msgid "First Regular Expression: "
+msgstr ""
+
+#: capplets/mime-type/edit-window.c:349
+#: capplets/mime-type/new-mime-window.c:80
+msgid "Second Regular Expression: "
+msgstr ""
+
+#. Actions box
+#: capplets/mime-type/edit-window.c:356
+msgid "Mime Type Actions"
+msgstr ""
+
+#: capplets/mime-type/edit-window.c:363
+#, c-format
+msgid "Example: emacs %f"
+msgstr ""
+
+#: capplets/mime-type/edit-window.c:368
+msgid "Open"
+msgstr ""
+
+#: capplets/mime-type/edit-window.c:374 capplets/mime-type/edit-window.c:390
+#: capplets/mime-type/edit-window.c:405
+#, fuzzy
+msgid "Select a file..."
+msgstr "Ses dosyasýný seçin"
+
+#: capplets/mime-type/edit-window.c:383
+#, fuzzy
+msgid "View"
+msgstr "Video"
+
+#: capplets/mime-type/edit-window.c:399
+msgid "Edit"
+msgstr ""
+
+#. we initialize everything
+#: capplets/mime-type/edit-window.c:448
+#, c-format
+msgid "Set actions for %s"
+msgstr ""
+
+#: capplets/mime-type/mime-data.c:384
+#, fuzzy
+msgid "Mime Type"
+msgstr "Tür"
+
+#: capplets/mime-type/mime-data.c:493
+msgid "You must enter a mime-type"
+msgstr ""
+
+#: capplets/mime-type/mime-data.c:498
+msgid ""
+"You must add either a regular-expression or\n"
+"a file-name extension"
+msgstr ""
+
+#: capplets/mime-type/mime-data.c:502
+msgid ""
+"Please put your mime-type in the format:\n"
+"CATEGORY/TYPE\n"
+"\n"
+"For Example:\n"
+"image/png"
+msgstr ""
+
+#: capplets/mime-type/mime-data.c:507
+msgid "This mime-type already exists"
+msgstr ""
+
+#: capplets/mime-type/mime-data.c:588 capplets/mime-type/mime-info.c:427
+msgid ""
+"We are unable to create the directory\n"
+"~/.gnome/mime-info\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+
+#: capplets/mime-type/mime-data.c:594 capplets/mime-type/mime-info.c:433
+msgid ""
+"We are unable to access the directory\n"
+"~/.gnome/mime-info\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+
+#: capplets/mime-type/mime-data.c:605
+msgid ""
+"Cannot create the file\n"
+"~/.gnome/mime-info/user.mime\n"
+"\n"
+"We will not be able to save the state"
+msgstr ""
+
+#: capplets/mime-type/mime-info.c:444
+msgid ""
+"Cannot create the file\n"
+"~/.gnome/mime-info/user.keys.\n"
+"\n"
+"We will not be able to save the state"
+msgstr ""
+
+#: capplets/mime-type/mime-type-capplet.c:83
+#: capplets/wm-properties/wm-properties-capplet.c:1161
+msgid "Delete"
+msgstr ""
+
+#: capplets/mime-type/mime-type-capplet.c:93
+#: capplets/wm-properties/wm-properties-capplet.c:1151
+msgid "Add..."
+msgstr ""
+
+#: capplets/mime-type/mime-type-capplet.c:97
+#: capplets/wm-properties/wm-properties-capplet.c:1156
+msgid "Edit..."
+msgstr ""
+
+#: capplets/mime-type/mime-type.desktop.in.in.h:1
+msgid "Configure how files are associated and started"
+msgstr ""
+
+#: capplets/mime-type/mime-type.desktop.in.in.h:2
+#, fuzzy
+msgid "Mime Types"
+msgstr "Tür"
+
+#: capplets/mime-type/new-mime-window.c:25
+#, fuzzy
+msgid "Add Mime Type"
+msgstr "Dosya türünü düzenle"
+
+#: capplets/mime-type/new-mime-window.c:26
+msgid ""
+"Add a new Mime Type\n"
+"For example:  image/tiff; text/x-scheme"
+msgstr ""
+
+#: capplets/mime-type/new-mime-window.c:43
+msgid ""
+"Type in the extensions for this mime-type.\n"
+"For example:  .html, .htm"
+msgstr ""
+
+#: capplets/mime-type/new-mime-window.c:50
+#, fuzzy
+msgid "Extension:"
+msgstr "Uzantý"
+
+#: capplets/mime-type/new-mime-window.c:55
+msgid "Regular Expressions"
+msgstr ""
+
+#: capplets/mime-type/new-mime-window.c:59
+msgid ""
+"You can set up two regular expressions here to identify the Mime Type\n"
+"by.  These fields are optional."
+msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.c:420
 #, c-format
@@ -1342,125 +1526,124 @@ msgid ""
 msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.c:718
-#: capplets/mouse/gnome-mouse-properties.glade.h:18
+#: capplets/mouse/gnome-mouse-properties.glade.h:17
 #: capplets/mouse/mouse.desktop.in.h:2
 msgid "Mouse Properties"
 msgstr "Fare Özellikleri"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:1
 msgid ""
-"&lt;b&gt;Note:&lt;/b&gt;\n"
-"\t\t\t    You will need to logout and log back in for this setting to take "
-"effect."
+"&lt;b&gt;Note:&lt;/b&gt; You will need to logout and log back in for this "
+"setting to take effect."
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:3
+#: capplets/mouse/gnome-mouse-properties.glade.h:2
 msgid "&lt;i&gt;Fast&lt;/i&gt;"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:4
+#: capplets/mouse/gnome-mouse-properties.glade.h:3
 msgid "&lt;i&gt;High&lt;/i&gt;"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:5
+#: capplets/mouse/gnome-mouse-properties.glade.h:4
 msgid "&lt;i&gt;Large&lt;/i&gt;"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:6
+#: capplets/mouse/gnome-mouse-properties.glade.h:5
 msgid "&lt;i&gt;Low&lt;/i&gt;"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:7
+#: capplets/mouse/gnome-mouse-properties.glade.h:6
 msgid "&lt;i&gt;Slow&lt;/i&gt;"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:8
+#: capplets/mouse/gnome-mouse-properties.glade.h:7
 msgid "&lt;i&gt;Small&lt;/i&gt;"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:9
+#: capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid ""
 "Animates a quick marker around the cursor when the Control key has been "
 "pressed and released."
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:10
+#: capplets/mouse/gnome-mouse-properties.glade.h:9
 msgid "C_ursors"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:11
+#: capplets/mouse/gnome-mouse-properties.glade.h:10
 msgid "Cursor Theme"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:12
+#: capplets/mouse/gnome-mouse-properties.glade.h:11
 msgid "Double-click Delay"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:13
+#: capplets/mouse/gnome-mouse-properties.glade.h:12
 msgid "Drag and Drop"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:14
+#: capplets/mouse/gnome-mouse-properties.glade.h:13
 msgid ""
 "Left-handed mouse mode switches the left and right buttons on the mouse."
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:15
+#: capplets/mouse/gnome-mouse-properties.glade.h:14
 msgid "Locate Pointer"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:16
+#: capplets/mouse/gnome-mouse-properties.glade.h:15
 msgid ""
 "Maximum time allowed between clicks when double-clicking.   Use the box on "
 "the right to test."
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:17
+#: capplets/mouse/gnome-mouse-properties.glade.h:16
 #, fuzzy
 msgid "Mouse Orientation"
 msgstr "Sunum"
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:19
+#: capplets/mouse/gnome-mouse-properties.glade.h:18
 msgid "Set the distance you need to move your cursor before dragging an item."
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:20
+#: capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "Set the speed of your pointing device."
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:21
+#: capplets/mouse/gnome-mouse-properties.glade.h:20
 msgid "Speed"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:22
+#: capplets/mouse/gnome-mouse-properties.glade.h:21
 msgid "_Acceleration:"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:23
+#: capplets/mouse/gnome-mouse-properties.glade.h:22
 msgid "_Buttons"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:24
+#: capplets/mouse/gnome-mouse-properties.glade.h:23
 msgid "_Delay (sec):"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:25
+#: capplets/mouse/gnome-mouse-properties.glade.h:24
 msgid "_Left-handed mouse"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:26
+#: capplets/mouse/gnome-mouse-properties.glade.h:25
 msgid "_Motion"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:27
+#: capplets/mouse/gnome-mouse-properties.glade.h:26
 msgid "_Sensitivity:"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:28
+#: capplets/mouse/gnome-mouse-properties.glade.h:27
 msgid "_Show position of cursor when the Control key is pressed"
 msgstr ""
 
-#: capplets/mouse/gnome-mouse-properties.glade.h:29
+#: capplets/mouse/gnome-mouse-properties.glade.h:28
 msgid "_Threshold:"
 msgstr ""
 
@@ -1486,95 +1669,72 @@ msgstr ""
 msgid "Sound _Events"
 msgstr "Ses özellikleri"
 
+#: capplets/sound/sound-properties.glade.h:3
+msgid "_General"
+msgstr ""
+
 #: capplets/sound/sound-properties.glade.h:4
 #, fuzzy
 msgid "_Sounds for events"
 msgstr "Ses özellikleri"
 
-#. just 8 short names that will serve as samples for titles in demo
-#: capplets/theme-switcher/control/control.c:19
-msgid "Eenie"
-msgstr "Gubarcýk"
+#: capplets/theme-switcher/control/control.c:18
+msgid "Eenie Meenie Mynie Moe Catcha Tiger By Its Toe"
+msgstr ""
 
-#: capplets/theme-switcher/control/control.c:19
-msgid "Mynie"
-msgstr "Helvacýk"
-
-#: capplets/theme-switcher/control/control.c:19
-msgid "Catcha"
-msgstr "Atili"
-
-#: capplets/theme-switcher/control/control.c:19
-msgid "By Its"
-msgstr "Batili"
-
-#: capplets/theme-switcher/control/control.c:20
-msgid "Meenie"
-msgstr "Voltran"
-
-#: capplets/theme-switcher/control/control.c:20
-msgid "Moe"
-msgstr "Minnoþ"
-
-#: capplets/theme-switcher/control/control.c:20
-msgid "Tiger"
-msgstr "Kaplan"
-
-#: capplets/theme-switcher/control/control.c:20
-msgid "Toe"
-msgstr "Enik"
-
-#: capplets/theme-switcher/control/control.c:38
+#: capplets/theme-switcher/control/control.c:43
 msgid "Selected themes from above will be tested by previewing here."
 msgstr ""
 
 #. column one
-#: capplets/theme-switcher/control/control.c:43
+#: capplets/theme-switcher/control/control.c:48
 msgid "Sample Button"
 msgstr "Örnek Düðme"
 
-#: capplets/theme-switcher/control/control.c:47
+#: capplets/theme-switcher/control/control.c:52
 msgid "Sample Check Button"
 msgstr "Örnek Kontrol Düðmesi"
 
-#: capplets/theme-switcher/control/control.c:53
+#: capplets/theme-switcher/control/control.c:58
 msgid "Sample Text Entry Field"
 msgstr "Örnek Metin Yazma Bölgesi"
 
-#: capplets/theme-switcher/control/control.c:64
+#: capplets/theme-switcher/control/control.c:69
 msgid "Submenu"
 msgstr "Alt menü"
 
-#: capplets/theme-switcher/control/control.c:69
+#: capplets/theme-switcher/control/control.c:74
 #: capplets/ui-properties/gnome2-ui-properties.glade.h:2
 msgid "Item 1"
 msgstr "1. Öðe"
 
-#: capplets/theme-switcher/control/control.c:71
+#: capplets/theme-switcher/control/control.c:76
 msgid "Another item"
 msgstr "Diðer bir öðe"
 
-#: capplets/theme-switcher/control/control.c:75
+#: capplets/theme-switcher/control/control.c:80
 msgid "Radio Button 1"
 msgstr "1. Radyo Düðmesi"
 
-#: capplets/theme-switcher/control/control.c:81
+#: capplets/theme-switcher/control/control.c:86
 msgid "Radio Button 2"
 msgstr "2. Radyo Düðmesi"
 
-#: capplets/theme-switcher/control/control.c:102
+#: capplets/theme-switcher/control/control.c:107
 msgid "One"
 msgstr "Bir"
 
-#: capplets/theme-switcher/control/control.c:108
+#: capplets/theme-switcher/control/control.c:113
 msgid "Two"
 msgstr "Ýki"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
 msgid "Gtk+ Theme Selector"
 msgstr "Gtk+ Tema Seçici"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
 msgid "Select which gtk+ theme to use"
 msgstr "Kullanýlacak gtk+ temasýný seçin"
 
@@ -1592,12 +1752,18 @@ msgid "Select a theme to install"
 msgstr "Kurulacak bir tema seçiniz"
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
+#: capplets/ui-properties/behavior.desktop.in.in.h:2
 msgid "Sets the default behavior of GNOME applications"
 msgstr "GNOME uygulamalarýnýn öntanýmlý davranýþýný belirler"
 
 #: capplets/ui-properties/behavior.desktop.in.h:2
 msgid "Toolbars & Menus"
 msgstr "Araç çubuklarý & Menüler"
+
+#: capplets/ui-properties/behavior.desktop.in.in.h:1
+#, fuzzy
+msgid "Behavior"
+msgstr "Odaklama davranýþlarý"
 
 #: capplets/ui-properties/gnome2-ui-properties.glade.h:1
 msgid "Icons and Text"
@@ -1639,6 +1805,7 @@ msgid "Menu items have _icons"
 msgstr ""
 
 #: capplets/ui-properties/gnome2-ui-properties.glade.h:11
+#: capplets/ui-properties/ui-properties.glade.h:8
 #, fuzzy
 msgid "Menus"
 msgstr "Fare"
@@ -1694,6 +1861,381 @@ msgstr ""
 #, fuzzy
 msgid "_Toolbars have: "
 msgstr "Araç çubuklarý & Menüler"
+
+#.
+#. * Translatable strings file generated by Glade.
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: capplets/ui-properties/ui-properties.glade.h:7
+msgid "window4"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:9
+msgid "Menu bars are detachable"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:10
+msgid "Menu bars have a border"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:11
+msgid "Menus can be torn off"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:12
+msgid "Menu items have icons"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:13
+msgid "Status Bar"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:14
+msgid "Use status bar instead of dialog when possible"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:15
+msgid "Status bar is interactive when possible"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:16
+msgid "Progress bar is on the left"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:17
+msgid "Progress bar is on the right"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:18
+#, fuzzy
+msgid "Tool Bars"
+msgstr "Araç çubuklarý & Menüler"
+
+#: capplets/ui-properties/ui-properties.glade.h:19
+#, fuzzy
+msgid "Tool bars have a border"
+msgstr "Araç çubuklarý & Menüler"
+
+#: capplets/ui-properties/ui-properties.glade.h:20
+msgid "Tool bar buttons pop up on mouse over"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:21
+#, fuzzy
+msgid "Tool bars have line separators"
+msgstr "Araç çubuklarý & Menüler"
+
+#: capplets/ui-properties/ui-properties.glade.h:22
+#, fuzzy
+msgid "Tool bars are detachable"
+msgstr "Araç çubuklarý & Menüler"
+
+#: capplets/ui-properties/ui-properties.glade.h:23
+msgid "Tool bar buttons are icons only"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:24
+msgid "Tool bar buttons are text below icons"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:25
+msgid "Interface"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:26
+msgid "Dialogs"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:27
+msgid "Place dialogs over application window when possible"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:28
+msgid "Dialogs open"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:29
+msgid "Wherever the Window Manager places them"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:30
+#, fuzzy
+msgid "At the center of the screen"
+msgstr "Ekran koruyucusunun ayarlarýný yapýn"
+
+#: capplets/ui-properties/ui-properties.glade.h:31
+msgid "At the mouse pointer"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:32
+msgid "Dialogs are treated"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:33
+msgid "Like any other window"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:34
+#, fuzzy
+msgid "Specially by the window manager"
+msgstr "Sawfish pencere yöneticisi"
+
+#: capplets/ui-properties/ui-properties.glade.h:35
+#, fuzzy
+msgid "Multiple Documents"
+msgstr "Belgeler"
+
+#: capplets/ui-properties/ui-properties.glade.h:36
+msgid "Notebook tabs"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:37
+#, fuzzy
+msgid "Seperate windows"
+msgstr "Eþleþen Pencereler"
+
+#: capplets/ui-properties/ui-properties.glade.h:38
+msgid "The same window"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:39
+msgid "Left"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:40
+msgid "Right"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:41
+#, fuzzy
+msgid "Top"
+msgstr "Ýki"
+
+#: capplets/ui-properties/ui-properties.glade.h:42
+msgid "Bottom"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:43
+msgid "When opening Multiple documents, use"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:44
+msgid "When using Notebook tabs, place the tabs on the"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:46
+msgid "Settings will not take effect until applications restart"
+msgstr ""
+
+#: capplets/url-properties/url-properties.desktop.in.h:1
+#: capplets/url-properties/url.desktop.in.in.h:1
+msgid "Configure which programs are used to display URLs"
+msgstr ""
+
+#: capplets/url-properties/url-properties.c:66
+#: capplets/url-properties/url-properties.desktop.in.h:2
+#: capplets/url-properties/url.desktop.in.in.h:2
+msgid "URL Handlers"
+msgstr ""
+
+#: capplets/url-properties/url-properties.c:64
+#, fuzzy
+msgid "Protocol"
+msgstr "Lütfen bir protokol adý verin."
+
+#: capplets/url-properties/url-properties.c:64
+msgid "Command"
+msgstr ""
+
+#: capplets/url-properties/url-properties.c:89
+msgid "handler:"
+msgstr ""
+
+#. set some commonly used handlers
+#: capplets/url-properties/url-properties.c:99
+msgid "Netscape"
+msgstr ""
+
+#: capplets/url-properties/url-properties.c:104
+msgid "Netscape (new window)"
+msgstr ""
+
+#: capplets/url-properties/url-properties.c:110
+msgid "Help browser"
+msgstr ""
+
+#: capplets/url-properties/url-properties.c:115
+msgid "Help browser (new window)"
+msgstr ""
+
+#: capplets/url-properties/url-properties.c:127
+msgid "Set"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.in.h:1
+msgid "Enlightenment"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.in.h:1
+msgid "Ice WM"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.in.h:1
+msgid "Scwm"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/twm.desktop.in.in.h:1
+msgid "twm"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.in.h:1
+#, fuzzy
+msgid "Window Maker"
+msgstr "Sawfish pencere yöneticisi"
+
+#: capplets/wm-properties/wm-properties-capplet.c:135
+msgid "Initialize session settings"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:206
+#, c-format
+msgid ""
+"Starting %s\n"
+"(%d seconds left before operation times out)"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:367
+#, c-format
+msgid "%s (Current)"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:370
+#, c-format
+msgid "Run Configuration Tool for %s"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:381
+msgid " (Not found)"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:420
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\tAnother window manager is already running and could not be killed\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:424
+#, c-format
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\t'%s' didn't start\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:473
+#, fuzzy
+msgid "Previous window manager did not die\n"
+msgstr "Pencere yöneticisi ses olaylarýný etkinleþtir"
+
+#: capplets/wm-properties/wm-properties-capplet.c:506
+#, c-format
+msgid ""
+"Could not start '%s'.\n"
+"Falling back to previous window manager '%s'\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:537
+msgid ""
+"Could not start fallback window manager.\n"
+"Please run a window manager manually. You can\n"
+"do this by selecting \"Run Program\" in the\n"
+"foot menu\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:562
+#: capplets/wm-properties/wm-properties-capplet.c:812
+#: capplets/wm-properties/wm-properties-capplet.c:921
+#: capplets/wm-properties/wm-properties-capplet.c:928
+#: capplets/wm-properties/wm-properties-capplet.c:1070
+msgid "OK"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:580
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. You can do so immediately by selecting the \"Save session\n"
+"now\" below, or you can save your session later.  This can be\n"
+"done either selecting \"Save Current Session\" under \"Settings\"\n"
+"in the main menu, or by turning on \"Save Current Setup\" when\n"
+"you log out.\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:587
+msgid "Save Session Later"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:587
+msgid "Save Session Now"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:590
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. This can be done by either selecting \"Save Current Session\"\n"
+"under \"Settings\" in the main menu, or by turning on\n"
+"\"Save Current Setup\" when you log out.\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:811
+#, fuzzy
+msgid "Add New Window Manager"
+msgstr "Sawfish pencere yöneticisi"
+
+#: capplets/wm-properties/wm-properties-capplet.c:812
+msgid "Cancel"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:824
+msgid "Name:"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:837
+msgid "Command:"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:850
+msgid "Configuration Command:"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:869
+msgid "Window manager is session managed"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:919
+msgid "Name cannot be empty"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:926
+msgid "Command cannot be empty"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:974
+#: capplets/wm-properties/wm-properties-capplet.c:1012
+#, fuzzy
+msgid "Edit Window Manager"
+msgstr "Sawfish pencere yöneticisi"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1069
+msgid "You cannot delete the current Window Manager"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:1111
+#: capplets/wm-properties/wm-properties-capplet.c:1123
+#, fuzzy
+msgid "Window Manager Selector"
+msgstr "Sawfish pencere yöneticisi"
 
 #: control-center/capplet-dir-view.c:153
 msgid "Layout"
@@ -1758,17 +2300,33 @@ msgstr ""
 msgid "Could not initialize Bonobo"
 msgstr ""
 
-#: libbackground/applier.c:230
+#: libbackground/applier.c:239
 msgid "Type"
 msgstr "Tür"
 
-#: libbackground/applier.c:231
+#: libbackground/applier.c:240
 msgid ""
 "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
 "for preview"
 msgstr ""
 
-#: libbackground/applier.c:398
+#: libbackground/applier.c:247
+msgid "Preview Width"
+msgstr ""
+
+#: libbackground/applier.c:248
+msgid "Width if applier is a preview: Defaults to 64."
+msgstr ""
+
+#: libbackground/applier.c:255
+msgid "Preview Height"
+msgstr ""
+
+#: libbackground/applier.c:256
+msgid "Height if applier is a preview: Defaults to 48."
+msgstr ""
+
+#: libbackground/applier.c:454
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "\"%s\" resmi yüklenemedi; duvar kaðýdý iptal ediliyor."
@@ -1795,22 +2353,63 @@ msgstr ""
 "Kullanýlabilir ses dosyalarý için gnome-audio\n"
 "paketini kurmalýsýnýz."
 
-#: libsounds/sound-view.c:209
+#: libsounds/sound-view.c:210
 msgid "Event"
 msgstr "Olay"
 
-#: libsounds/sound-view.c:216
+#: libsounds/sound-view.c:217
 #, fuzzy
 msgid "File to play"
 msgstr "Çalýnacak Dosya"
 
-#: libsounds/sound-view.c:238
-msgid "Play"
+#: libsounds/sound-view.c:232
+#, fuzzy
+msgid "_Sounds"
+msgstr "Ses"
+
+#: libsounds/sound-view.c:245
+#, fuzzy
+msgid "_Play"
 msgstr "Çal"
 
-#: libsounds/sound-view.c:244
+#: libsounds/sound-view.c:251
 msgid "Select sound file"
 msgstr "Ses dosyasýný seçin"
+
+#, fuzzy
+#~ msgid "Background properties"
+#~ msgstr "Arkaplan Özellikleri"
+
+#~ msgid "Default Applications"
+#~ msgstr "Öntanýmlý Uygulamalar"
+
+#, fuzzy
+#~ msgid "Short"
+#~ msgstr "Kýsayollar"
+
+#~ msgid "Eenie"
+#~ msgstr "Gubarcýk"
+
+#~ msgid "Mynie"
+#~ msgstr "Helvacýk"
+
+#~ msgid "Catcha"
+#~ msgstr "Atili"
+
+#~ msgid "By Its"
+#~ msgstr "Batili"
+
+#~ msgid "Meenie"
+#~ msgstr "Voltran"
+
+#~ msgid "Moe"
+#~ msgstr "Minnoþ"
+
+#~ msgid "Tiger"
+#~ msgstr "Kaplan"
+
+#~ msgid "Toe"
+#~ msgstr "Enik"
 
 #, fuzzy
 #~ msgid "File Manager Font"
@@ -1823,9 +2422,6 @@ msgstr "Ses dosyasýný seçin"
 #, fuzzy
 #~ msgid "Keybinding Properties"
 #~ msgstr "Klavye Özellikleri"
-
-#~ msgid "Configure the settings of the screensaver"
-#~ msgstr "Ekran koruyucusunun ayarlarýný yapýn"
 
 #~ msgid "Screensaver"
 #~ msgstr "Ekran Koruyucusu"

@@ -5,7 +5,7 @@
  *
  * Authors: Jacob Berkman <jacob@ximian.com>
  *          Bradford Hovinen <hovinen@ximian.com>
- *          Richard Hestilow <hestilow@ximian.com>
+ *          Rachel Hestilow <hestilow@ximian.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

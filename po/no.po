@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.5.8\n"
-"POT-Creation-Date: 2002-04-19 21:26+0200\n"
+"POT-Creation-Date: 2002-04-21 15:46-0500\n"
 "PO-Revision-Date: 2002-04-19 21:31+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -36,8 +36,8 @@ msgid "Keyboard Accessibility Properties"
 msgstr "Egenskaper for tilgjengelighet for tastatur"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:1
-msgid "<b>Test</b>"
-msgstr "<b>Eksempel</b>"
+msgid "&lt;b&gt;Test&lt;/b&gt;"
+msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:2
 msgid "B_eep when modifier is pressed"
@@ -75,7 +75,9 @@ msgstr "Aktiver _BryterTaster"
 msgid ""
 "Ignore all subsequent presses of the SAME key if they happen within a user "
 "selectable period of time."
-msgstr "Ignorer alle etterfølgende trykk på SAMME tast hvis de skjer innenfor en tidsramme som kan bestemmes av brukeren."
+msgstr ""
+"Ignorer alle etterfølgende trykk på SAMME tast hvis de skjer innenfor en "
+"tidsramme som kan bestemmes av brukeren."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:11
 msgid "Keyboard Accessibility Configuration (AccessX)"
@@ -97,7 +99,8 @@ msgstr ""
 msgid ""
 "Perform multiple simultaneous key press operations by pressing modifier keys "
 "in sequence."
-msgstr "Utfør flere samtidige tastetrykk ved å holde nede endringstaster i sekvens."
+msgstr ""
+"Utfør flere samtidige tastetrykk ved å holde nede endringstaster i sekvens."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:15
 msgid "Start mo_ving this long after keypress :"
@@ -311,6 +314,21 @@ msgstr "radioknapp4"
 msgid "radiobutton5"
 msgstr "radioknapp5"
 
+#: capplets/common/activate-settings-daemon.c:18
+msgid ""
+"Unable to start the settings manager 'gnome-settings-daemon'.\n"
+"Without the GNOME settings manager running, some preferences may not take "
+"effect. This could indicate a problem with Bonobo, or a non-GNOME (e.g. KDE) "
+"settings manager may already be active and conflicting with the GNOME "
+"settings manager."
+msgstr ""
+"Kan ikke starte programmet som håndterer innstillinger «gnome-settings-"
+"daemon».\n"
+"Uten dette programmet vil noen brukervalg ikke tas i bruk. Dette kan "
+"indikere et problem med Bonobo, eller et annet program for håndtering av "
+"innstillinger (f.eks. KDE) kan være aktivt og i konflikt med GNOME's program "
+"for håndtering av innstillinger."
+
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "Bare aktiver innstillingene og avslutt"
@@ -420,17 +438,6 @@ msgstr ""
 #: capplets/common/gconf-property-editor.c:1476
 msgid "Please select an image."
 msgstr "Vennligst velg et bilde."
-
-#: capplets/common/activate-settings-daemon.c:18
-msgid ""
-"Unable to start the settings manager 'gnome-settings-daemon'.\n"
-"Without the GNOME settings manager running, some preferences may not take "
-"effect. This could indicate a problem with Bonobo, or a non-GNOME (e.g. KDE) "
-"settings manager may already be active and conflicting with the GNOME "
-"settings manager."
-msgstr ""
-"Kan ikke starte programmet som håndterer innstillinger «gnome-settings-daemon».\n"
-"Uten dette programmet vil noen brukervalg ikke tas i bruk. Dette kan indikere et problem med Bonobo, eller et annet program for håndtering av innstillinger (f.eks. KDE) kan være aktivt og i konflikt med GNOME's program for håndtering av innstillinger."
 
 #: capplets/default-applications/default-applications.desktop.in.h:1
 msgid "Choose the applications used by default"
@@ -591,6 +598,132 @@ msgstr "Eldre applikasjoner"
 msgid "Legacy applications settings (grdb)"
 msgstr "Innstillinger for eldre applikasjoner (grdb)"
 
+#: capplets/desktop-links/panel.desktop.in.in.h:1
+#, fuzzy
+msgid "Global panel properties"
+msgstr "Egenskaper for skrift"
+
+#: capplets/desktop-links/panel.desktop.in.in.h:2
+#, fuzzy
+msgid "Panel"
+msgstr "Pedal"
+
+#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
+msgid "Appearance"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:2
+#, fuzzy
+msgid "Configure window appearance"
+msgstr "Konfigurer arbeidsområder"
+
+#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:1
+#, fuzzy
+msgid "Configure key shortcuts"
+msgstr "Konfigurer arbeidsområder"
+
+#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:2
+#, fuzzy
+msgid "Shortcuts"
+msgstr "_Snarvei"
+
+#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:1
+#, fuzzy
+msgid "Configure window focusing"
+msgstr "Konfigurer arbeidsområder"
+
+#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:2
+msgid "Focus behavior"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
+#, fuzzy
+msgid "Configure window properties"
+msgstr "Konfigurer arbeidsområder"
+
+#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:2
+msgid "Matched Windows"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:1
+msgid "Configure window minimization and maximization"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:2
+msgid "Minimizing and Maximizing"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
+msgid "Configure window manager configuration properties"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:2
+msgid "Meta"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
+msgid "Configure miscellaneous window features"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
+#: capplets/ui-properties/ui-properties.glade.h:45
+msgid "Miscellaneous"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:1
+#, fuzzy
+msgid "Configure window move/resize"
+msgstr "Konfigurer arbeidsområder"
+
+#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:2
+msgid "Moving and Resizing"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:1
+#, fuzzy
+msgid "Configure window placement"
+msgstr "Konfigurer strømstyring"
+
+#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:2
+msgid "Placement"
+msgstr ""
+
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:1
+#, fuzzy
+msgid "Control Center Menu"
+msgstr "Kontrollsenter"
+
+#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:2
+#, fuzzy
+msgid "Sawfish window manager"
+msgstr "_Vindushåndterer"
+
+#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
+#, fuzzy
+msgid "Enable window manager sound events"
+msgstr "Bruk _strømstyring"
+
+#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
+#: capplets/sound/sound.desktop.in.h:2
+msgid "Sound"
+msgstr "Lyd"
+
+#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:1
+msgid "Configure workspaces"
+msgstr "Konfigurer arbeidsområder"
+
+#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:2
+msgid "Workspaces"
+msgstr "Arbeidsområder"
+
+#: capplets/desktop-links/session.desktop.in.in.h:1
+msgid "Configure which non-session aware programs are started up"
+msgstr "Konfigurer oppstart av programmer som ikke støtter sesjonshåndtering"
+
+#: capplets/desktop-links/session.desktop.in.in.h:2
+msgid "Startup Programs"
+msgstr "Oppstartsprogrammer"
+
 #.
 #. * Translatable strings file
 #. * Add this file to your project's POTFILES.in.
@@ -688,13 +821,16 @@ msgid "Description"
 msgstr "Beskrivelse"
 
 #: capplets/file-types/file-types-capplet.c:229
+#: capplets/mime-type/new-mime-window.c:39
 msgid "Extensions"
 msgstr "Filtyper"
 
+#: capplets/file-types/file-types-capplet.desktop.in.h:1
 #: capplets/file-types/file-types.desktop.in.h:1
 msgid "File Types and Programs"
 msgstr "Filtyper og programmer"
 
+#: capplets/file-types/file-types-capplet.desktop.in.h:2
 #: capplets/file-types/file-types.desktop.in.h:2
 msgid "Specify which programs are used to open or view each file type"
 msgstr ""
@@ -829,6 +965,7 @@ msgid "Custom"
 msgstr "Egendefinert"
 
 #: capplets/file-types/mime-edit-dialog.c:164
+#: capplets/mime-type/mime-data.c:385
 msgid "Extension"
 msgstr "Filtype"
 
@@ -995,11 +1132,11 @@ msgstr "Skriv inn en ny aksellerator, eller trykk slett for å tømme"
 msgid "Type a new accelerator"
 msgstr "Skriv inn en ny aksellerator"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:314
+#: capplets/keybindings/gnome-keybinding-properties.c:315
 msgid "<Unknown Action>"
 msgstr "<Ukjent handling>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:572
+#: capplets/keybindings/gnome-keybinding-properties.c:573
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1007,11 +1144,11 @@ msgstr ""
 "Kan ikke finne tastaturtema. Dette betyr at din GTK+-installasjon ikke er "
 "komplett."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:593
+#: capplets/keybindings/gnome-keybinding-properties.c:594
 msgid "_Action"
 msgstr "_Handling"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:605
+#: capplets/keybindings/gnome-keybinding-properties.c:606
 msgid "_Shortcut"
 msgstr "_Snarvei"
 
@@ -1055,31 +1192,35 @@ msgstr ""
 "en daemon nå)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:1
-msgid "*"
-msgstr "*"
+#, fuzzy
+msgid ""
+"&lt;b&gt;Tip:&lt;/b&gt; You can configure the keyboards accessibility "
+"features by bringing up the 'Accessibility Settings' property dialog, or "
+"pressing the button on the right."
+msgstr ""
+"<b>Tips:</b> Du kan konfigurere funksjoner for tilgjengelighet for "
+"tastaturet ved å hente opp dialogen «Innstillinger for tilgjengelighet», "
+"eller ved å trykke på knappen til høyre."
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:2
-msgid ""
-"<b>Tip:</b> You can configure the keyboards accessibility features by "
-"bringing up the 'Accessibility Settings' property dialog, or pressing the "
-"button on the right."
-msgstr "<b>Tips:</b> Du kan konfigurere funksjoner for tilgjengelighet for tastaturet ved å hente opp dialogen «Innstillinger for tilgjengelighet», eller ved å trykke på knappen til høyre."
+msgid "&lt;i&gt;fast&lt;/i&gt;"
+msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:3
-msgid "<i>fast</i>"
-msgstr "<i>rask</i>"
+msgid "&lt;i&gt;loud&lt;/i&gt;"
+msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:4
-msgid "<i>loud</i>"
-msgstr "<i>høy</i>"
+msgid "&lt;i&gt;quiet&lt;/i&gt;"
+msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:5
-msgid "<i>quiet</i>"
-msgstr "<i>stille</i>"
+msgid "&lt;i&gt;slow&lt;/i&gt;"
+msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:6
-msgid "<i>slow</i>"
-msgstr "<i>treg</i>"
+msgid "*"
+msgstr "*"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "Cursor"
@@ -1131,10 +1272,11 @@ msgid "Set the volume of the clicking sound made when pressing a key"
 msgstr "Sett volumet for klikkelyden som lages når man trykker ned en tast"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:20
+#, fuzzy
 msgid ""
-"The keyboard bell is the <i>beep</i> sound heard when the system wants to "
-"get your attention.  You can select a custom sound file to play instead of "
-"the traditional beeping noise."
+"The keyboard bell is the &lt;i&gt;beep&lt;/i&gt; sound heard when the system "
+"wants to get your attention.  You can select a custom sound file to play "
+"instead of the traditional beeping noise."
 msgstr ""
 "Tastaturpip er <i>pip</i>-lyden du hører når systemet vil ha din "
 "oppmerksomhet. Du kan velge en egendefinert lydfil som skal spilles i stedet "
@@ -1167,6 +1309,195 @@ msgstr "_Lyd"
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:28
 msgid "_Volume:"
 msgstr "_Volum:"
+
+#. icon box
+#: capplets/mime-type/edit-window.c:266
+#, fuzzy
+msgid "Select an icon..."
+msgstr "_Velg en tekstredigerer"
+
+#: capplets/mime-type/edit-window.c:276
+#: capplets/mime-type/new-mime-window.c:31
+msgid "Mime Type: "
+msgstr ""
+
+#: capplets/mime-type/edit-window.c:306
+#, fuzzy
+msgid "Add"
+msgstr "_Legg til"
+
+#: capplets/mime-type/edit-window.c:314
+#: capplets/url-properties/url-properties.c:135
+#, fuzzy
+msgid "Remove"
+msgstr "Fje_rn"
+
+#. gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
+#: capplets/mime-type/edit-window.c:341
+#: capplets/mime-type/new-mime-window.c:69
+msgid "First Regular Expression: "
+msgstr ""
+
+#: capplets/mime-type/edit-window.c:349
+#: capplets/mime-type/new-mime-window.c:80
+msgid "Second Regular Expression: "
+msgstr ""
+
+#. Actions box
+#: capplets/mime-type/edit-window.c:356
+msgid "Mime Type Actions"
+msgstr ""
+
+#: capplets/mime-type/edit-window.c:363
+#, c-format
+msgid "Example: emacs %f"
+msgstr ""
+
+#: capplets/mime-type/edit-window.c:368
+#, fuzzy
+msgid "Open"
+msgstr "Åpne fil"
+
+#: capplets/mime-type/edit-window.c:374 capplets/mime-type/edit-window.c:390
+#: capplets/mime-type/edit-window.c:405
+#, fuzzy
+msgid "Select a file..."
+msgstr "Velg lydfil"
+
+#: capplets/mime-type/edit-window.c:383
+#, fuzzy
+msgid "View"
+msgstr "Lianer"
+
+#: capplets/mime-type/edit-window.c:399
+#, fuzzy
+msgid "Edit"
+msgstr "Rediger..."
+
+#. we initialize everything
+#: capplets/mime-type/edit-window.c:448
+#, c-format
+msgid "Set actions for %s"
+msgstr ""
+
+#: capplets/mime-type/mime-data.c:384
+#, fuzzy
+msgid "Mime Type"
+msgstr "_MIME-type"
+
+#: capplets/mime-type/mime-data.c:493
+msgid "You must enter a mime-type"
+msgstr ""
+
+#: capplets/mime-type/mime-data.c:498
+msgid ""
+"You must add either a regular-expression or\n"
+"a file-name extension"
+msgstr ""
+
+#: capplets/mime-type/mime-data.c:502
+msgid ""
+"Please put your mime-type in the format:\n"
+"CATEGORY/TYPE\n"
+"\n"
+"For Example:\n"
+"image/png"
+msgstr ""
+
+#: capplets/mime-type/mime-data.c:507
+msgid "This mime-type already exists"
+msgstr ""
+
+#: capplets/mime-type/mime-data.c:588 capplets/mime-type/mime-info.c:427
+msgid ""
+"We are unable to create the directory\n"
+"~/.gnome/mime-info\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+
+#: capplets/mime-type/mime-data.c:594 capplets/mime-type/mime-info.c:433
+msgid ""
+"We are unable to access the directory\n"
+"~/.gnome/mime-info\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+
+#: capplets/mime-type/mime-data.c:605
+msgid ""
+"Cannot create the file\n"
+"~/.gnome/mime-info/user.mime\n"
+"\n"
+"We will not be able to save the state"
+msgstr ""
+
+#: capplets/mime-type/mime-info.c:444
+msgid ""
+"Cannot create the file\n"
+"~/.gnome/mime-info/user.keys.\n"
+"\n"
+"We will not be able to save the state"
+msgstr ""
+
+#: capplets/mime-type/mime-type-capplet.c:83
+#: capplets/wm-properties/wm-properties-capplet.c:1161
+#, fuzzy
+msgid "Delete"
+msgstr "_Slett"
+
+#: capplets/mime-type/mime-type-capplet.c:93
+#: capplets/wm-properties/wm-properties-capplet.c:1151
+#, fuzzy
+msgid "Add..."
+msgstr "_Legg til..."
+
+#: capplets/mime-type/mime-type-capplet.c:97
+#: capplets/wm-properties/wm-properties-capplet.c:1156
+msgid "Edit..."
+msgstr "Rediger..."
+
+#: capplets/mime-type/mime-type.desktop.in.in.h:1
+#, fuzzy
+msgid "Configure how files are associated and started"
+msgstr "Konfigurer oppstart av programmer som ikke støtter sesjonshåndtering"
+
+#: capplets/mime-type/mime-type.desktop.in.in.h:2
+#, fuzzy
+msgid "Mime Types"
+msgstr "_MIME-type"
+
+#: capplets/mime-type/new-mime-window.c:25
+#, fuzzy
+msgid "Add Mime Type"
+msgstr "Legg til _filtype..."
+
+#: capplets/mime-type/new-mime-window.c:26
+msgid ""
+"Add a new Mime Type\n"
+"For example:  image/tiff; text/x-scheme"
+msgstr ""
+
+#: capplets/mime-type/new-mime-window.c:43
+msgid ""
+"Type in the extensions for this mime-type.\n"
+"For example:  .html, .htm"
+msgstr ""
+
+#: capplets/mime-type/new-mime-window.c:50
+#, fuzzy
+msgid "Extension:"
+msgstr "Filtype"
+
+#: capplets/mime-type/new-mime-window.c:55
+msgid "Regular Expressions"
+msgstr ""
+
+#: capplets/mime-type/new-mime-window.c:59
+msgid ""
+"You can set up two regular expressions here to identify the Mime Type\n"
+"by.  These fields are optional."
+msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.c:420
 #, c-format
@@ -1248,36 +1579,37 @@ msgid "Mouse Properties"
 msgstr "Egenskaper for mus"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:1
+#, fuzzy
 msgid ""
-"<b>Note:</b> You will need to logout and log back in for this setting to "
-"take effect."
+"&lt;b&gt;Note:&lt;/b&gt; You will need to logout and log back in for this "
+"setting to take effect."
 msgstr ""
 "<b>Merk:</b> Du vil måtte logge inn på nytt igjen for at denne innstillingen "
 "skal tre i kraft."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:2
-msgid "<i>Fast</i>"
-msgstr "<i>Rask</i>"
+msgid "&lt;i&gt;Fast&lt;/i&gt;"
+msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:3
-msgid "<i>High</i>"
-msgstr "<i>Høy</i>"
+msgid "&lt;i&gt;High&lt;/i&gt;"
+msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:4
-msgid "<i>Large</i>"
-msgstr "<i>Stor</i>"
+msgid "&lt;i&gt;Large&lt;/i&gt;"
+msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:5
-msgid "<i>Low</i>"
-msgstr "<i>Lav</i>"
+msgid "&lt;i&gt;Low&lt;/i&gt;"
+msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:6
-msgid "<i>Slow</i>"
-msgstr "<i>Treg</i>"
+msgid "&lt;i&gt;Slow&lt;/i&gt;"
+msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:7
-msgid "<i>Small</i>"
-msgstr "<i>Liten</i>"
+msgid "&lt;i&gt;Small&lt;/i&gt;"
+msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid ""
@@ -1376,10 +1708,6 @@ msgstr "Mus"
 msgid "Configure GNOME's use of sound"
 msgstr "Konfigurér bruk av lyd i GNOME."
 
-#: capplets/sound/sound.desktop.in.h:2
-msgid "Sound"
-msgstr "Lyd"
-
 #: capplets/sound/sound-properties-capplet.c:178
 msgid "Sound preferences"
 msgstr "Brukervalg for lyd"
@@ -1451,10 +1779,12 @@ msgid "Two"
 msgstr "To"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
 msgid "Gtk+ Theme Selector"
 msgstr "Gtk+ temavelger"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
 msgid "Select which gtk+ theme to use"
 msgstr "Velg gtk+-tema som skal brukes"
 
@@ -1471,12 +1801,17 @@ msgid "Select a theme to install"
 msgstr "Velg et tema som skal installeres"
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
+#: capplets/ui-properties/behavior.desktop.in.in.h:2
 msgid "Sets the default behavior of GNOME applications"
 msgstr "Setter forvalgt oppførsel for GNOME-applikasjoner"
 
 #: capplets/ui-properties/behavior.desktop.in.h:2
 msgid "Toolbars & Menus"
 msgstr "Verktøylinjer og menyer"
+
+#: capplets/ui-properties/behavior.desktop.in.in.h:1
+msgid "Behavior"
+msgstr ""
 
 #: capplets/ui-properties/gnome2-ui-properties.glade.h:1
 msgid "Icons and Text"
@@ -1515,6 +1850,7 @@ msgid "Menu items have _icons"
 msgstr "Menyoppføringer har _ikoner"
 
 #: capplets/ui-properties/gnome2-ui-properties.glade.h:11
+#: capplets/ui-properties/ui-properties.glade.h:8
 msgid "Menus"
 msgstr "Menyer"
 
@@ -1565,6 +1901,392 @@ msgstr "_Meny"
 #: capplets/ui-properties/gnome2-ui-properties.glade.h:23
 msgid "_Toolbars have: "
 msgstr "_Verktøylinjer har: "
+
+#.
+#. * Translatable strings file generated by Glade.
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: capplets/ui-properties/ui-properties.glade.h:7
+msgid "window4"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:9
+msgid "Menu bars are detachable"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:10
+msgid "Menu bars have a border"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:11
+msgid "Menus can be torn off"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:12
+#, fuzzy
+msgid "Menu items have icons"
+msgstr "Menyoppføringer har _ikoner"
+
+#: capplets/ui-properties/ui-properties.glade.h:13
+msgid "Status Bar"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:14
+msgid "Use status bar instead of dialog when possible"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:15
+msgid "Status bar is interactive when possible"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:16
+msgid "Progress bar is on the left"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:17
+msgid "Progress bar is on the right"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:18
+#, fuzzy
+msgid "Tool Bars"
+msgstr "Verktøylinje"
+
+#: capplets/ui-properties/ui-properties.glade.h:19
+#, fuzzy
+msgid "Tool bars have a border"
+msgstr "_Verktøylinjer har: "
+
+#: capplets/ui-properties/ui-properties.glade.h:20
+msgid "Tool bar buttons pop up on mouse over"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:21
+#, fuzzy
+msgid "Tool bars have line separators"
+msgstr "_Verktøylinjer har: "
+
+#: capplets/ui-properties/ui-properties.glade.h:22
+#, fuzzy
+msgid "Tool bars are detachable"
+msgstr "Verktøylinjene _kan tas av og flyttes rundt"
+
+#: capplets/ui-properties/ui-properties.glade.h:23
+msgid "Tool bar buttons are icons only"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:24
+msgid "Tool bar buttons are text below icons"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:25
+msgid "Interface"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:26
+msgid "Dialogs"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:27
+msgid "Place dialogs over application window when possible"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:28
+msgid "Dialogs open"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:29
+msgid "Wherever the Window Manager places them"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:30
+#, fuzzy
+msgid "At the center of the screen"
+msgstr "Hastighet for tømming av skjermen"
+
+#: capplets/ui-properties/ui-properties.glade.h:31
+msgid "At the mouse pointer"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:32
+msgid "Dialogs are treated"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:33
+msgid "Like any other window"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:34
+#, fuzzy
+msgid "Specially by the window manager"
+msgstr "Standard vindushåndterer"
+
+#: capplets/ui-properties/ui-properties.glade.h:35
+#, fuzzy
+msgid "Multiple Documents"
+msgstr "Dokumenter"
+
+#: capplets/ui-properties/ui-properties.glade.h:36
+msgid "Notebook tabs"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:37
+msgid "Seperate windows"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:38
+msgid "The same window"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:39
+#, fuzzy
+msgid "Left"
+msgstr "Lengde"
+
+#: capplets/ui-properties/ui-properties.glade.h:40
+#, fuzzy
+msgid "Right"
+msgstr "Høy"
+
+#: capplets/ui-properties/ui-properties.glade.h:41
+#, fuzzy
+msgid "Top"
+msgstr "Toe"
+
+#: capplets/ui-properties/ui-properties.glade.h:42
+#, fuzzy
+msgid "Bottom"
+msgstr "_Nederste farge"
+
+#: capplets/ui-properties/ui-properties.glade.h:43
+msgid "When opening Multiple documents, use"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:44
+msgid "When using Notebook tabs, place the tabs on the"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:46
+msgid "Settings will not take effect until applications restart"
+msgstr ""
+
+#: capplets/url-properties/url-properties.desktop.in.h:1
+#: capplets/url-properties/url.desktop.in.in.h:1
+#, fuzzy
+msgid "Configure which programs are used to display URLs"
+msgstr "Konfigurer oppstart av programmer som ikke støtter sesjonshåndtering"
+
+#: capplets/url-properties/url-properties.c:66
+#: capplets/url-properties/url-properties.desktop.in.h:2
+#: capplets/url-properties/url.desktop.in.in.h:2
+msgid "URL Handlers"
+msgstr ""
+
+#: capplets/url-properties/url-properties.c:64
+#, fuzzy
+msgid "Protocol"
+msgstr "_Protokollnavn"
+
+#: capplets/url-properties/url-properties.c:64
+#, fuzzy
+msgid "Command"
+msgstr "Ko_mmando:"
+
+#: capplets/url-properties/url-properties.c:89
+#, fuzzy
+msgid "handler:"
+msgstr "Vandre"
+
+#. set some commonly used handlers
+#: capplets/url-properties/url-properties.c:99
+msgid "Netscape"
+msgstr ""
+
+#: capplets/url-properties/url-properties.c:104
+msgid "Netscape (new window)"
+msgstr ""
+
+#: capplets/url-properties/url-properties.c:110
+#, fuzzy
+msgid "Help browser"
+msgstr "Hje_lpleser"
+
+#: capplets/url-properties/url-properties.c:115
+#, fuzzy
+msgid "Help browser (new window)"
+msgstr "Bla gjennom med et enkelt vindu"
+
+#: capplets/url-properties/url-properties.c:127
+msgid "Set"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.in.h:1
+msgid "Enlightenment"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.in.h:1
+msgid "Ice WM"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.in.h:1
+msgid "Scwm"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/twm.desktop.in.in.h:1
+msgid "twm"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.in.h:1
+#, fuzzy
+msgid "Window Maker"
+msgstr "_Vindushåndterer"
+
+#: capplets/wm-properties/wm-properties-capplet.c:135
+msgid "Initialize session settings"
+msgstr "Initier innstillinger for sesjon"
+
+#: capplets/wm-properties/wm-properties-capplet.c:206
+#, c-format
+msgid ""
+"Starting %s\n"
+"(%d seconds left before operation times out)"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:367
+#, c-format
+msgid "%s (Current)"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:370
+#, fuzzy, c-format
+msgid "Run Configuration Tool for %s"
+msgstr "Konfigurasjon"
+
+#: capplets/wm-properties/wm-properties-capplet.c:381
+msgid " (Not found)"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:420
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\tAnother window manager is already running and could not be killed\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:424
+#, c-format
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\t'%s' didn't start\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:473
+msgid "Previous window manager did not die\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:506
+#, c-format
+msgid ""
+"Could not start '%s'.\n"
+"Falling back to previous window manager '%s'\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:537
+msgid ""
+"Could not start fallback window manager.\n"
+"Please run a window manager manually. You can\n"
+"do this by selecting \"Run Program\" in the\n"
+"foot menu\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:562
+#: capplets/wm-properties/wm-properties-capplet.c:812
+#: capplets/wm-properties/wm-properties-capplet.c:921
+#: capplets/wm-properties/wm-properties-capplet.c:928
+#: capplets/wm-properties/wm-properties-capplet.c:1070
+msgid "OK"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:580
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. You can do so immediately by selecting the \"Save session\n"
+"now\" below, or you can save your session later.  This can be\n"
+"done either selecting \"Save Current Session\" under \"Settings\"\n"
+"in the main menu, or by turning on \"Save Current Setup\" when\n"
+"you log out.\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:587
+msgid "Save Session Later"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:587
+msgid "Save Session Now"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:590
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. This can be done by either selecting \"Save Current Session\"\n"
+"under \"Settings\" in the main menu, or by turning on\n"
+"\"Save Current Setup\" when you log out.\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:811
+#, fuzzy
+msgid "Add New Window Manager"
+msgstr "_Vindushåndterer"
+
+#: capplets/wm-properties/wm-properties-capplet.c:812
+#, fuzzy
+msgid "Cancel"
+msgstr "Celle"
+
+#: capplets/wm-properties/wm-properties-capplet.c:824
+#, fuzzy
+msgid "Name:"
+msgstr "_Navn"
+
+#: capplets/wm-properties/wm-properties-capplet.c:837
+#, fuzzy
+msgid "Command:"
+msgstr "Ko_mmando:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:850
+#, fuzzy
+msgid "Configuration Command:"
+msgstr "Konfigurasjon"
+
+#: capplets/wm-properties/wm-properties-capplet.c:869
+msgid "Window manager is session managed"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:919
+msgid "Name cannot be empty"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:926
+msgid "Command cannot be empty"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:974
+#: capplets/wm-properties/wm-properties-capplet.c:1012
+#, fuzzy
+msgid "Edit Window Manager"
+msgstr "_Vindushåndterer"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1069
+msgid "You cannot delete the current Window Manager"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:1111
+#: capplets/wm-properties/wm-properties-capplet.c:1123
+#, fuzzy
+msgid "Window Manager Selector"
+msgstr "_Vindushåndterer"
 
 #: control-center/capplet-dir-view.c:153
 msgid "Layout"
@@ -1703,6 +2425,39 @@ msgstr "S_pill"
 msgid "Select sound file"
 msgstr "Velg lydfil"
 
+#~ msgid "<b>Test</b>"
+#~ msgstr "<b>Eksempel</b>"
+
+#~ msgid "<i>fast</i>"
+#~ msgstr "<i>rask</i>"
+
+#~ msgid "<i>loud</i>"
+#~ msgstr "<i>høy</i>"
+
+#~ msgid "<i>quiet</i>"
+#~ msgstr "<i>stille</i>"
+
+#~ msgid "<i>slow</i>"
+#~ msgstr "<i>treg</i>"
+
+#~ msgid "<i>Fast</i>"
+#~ msgstr "<i>Rask</i>"
+
+#~ msgid "<i>High</i>"
+#~ msgstr "<i>Høy</i>"
+
+#~ msgid "<i>Large</i>"
+#~ msgstr "<i>Stor</i>"
+
+#~ msgid "<i>Low</i>"
+#~ msgstr "<i>Lav</i>"
+
+#~ msgid "<i>Slow</i>"
+#~ msgstr "<i>Treg</i>"
+
+#~ msgid "<i>Small</i>"
+#~ msgstr "<i>Liten</i>"
+
 #~ msgid ""
 #~ "MouseKeys can benefit StickyKey users or anyone unable to use the "
 #~ "pointing device or in need of 'pixel by pixel' position control of the "
@@ -1744,9 +2499,6 @@ msgstr "Velg lydfil"
 #~ msgid "_Beep on state change"
 #~ msgstr "_Pip ved endring i tilstand"
 
-#~ msgid "Edit..."
-#~ msgstr "Rediger..."
-
 #~ msgid "<b>slow</b>"
 #~ msgstr "<b>treg</b>"
 
@@ -1770,12 +2522,6 @@ msgstr "Velg lydfil"
 
 #~ msgid "Very long"
 #~ msgstr "Meget lang"
-
-#~ msgid "Configure workspaces"
-#~ msgstr "Konfigurer arbeidsområder"
-
-#~ msgid "Workspaces"
-#~ msgstr "Arbeidsområder"
 
 #~ msgid "Background properties"
 #~ msgstr "Egenskaper for bakgrunn"
@@ -1803,9 +2549,6 @@ msgstr "Velg lydfil"
 
 #~ msgid "Tiger"
 #~ msgstr "Tiger"
-
-#~ msgid "Toe"
-#~ msgstr "Toe"
 
 #~ msgid "Image:"
 #~ msgstr "Bilde:"
@@ -1853,9 +2596,6 @@ msgstr "Velg lydfil"
 #~ msgid "Browse with multiple windows"
 #~ msgstr "Bla gjennom med flere vinduer"
 
-#~ msgid "Browse with single window"
-#~ msgstr "Bla gjennom med et enkelt vindu"
-
 #~ msgid "Display control panels as HTML"
 #~ msgstr "Vis kontrollpaneler som HTML"
 
@@ -1874,21 +2614,11 @@ msgstr "Velg lydfil"
 #~ msgid "Put control panels in the control center's window"
 #~ msgstr "Plasser kontrollpaneler i kontrollsenterets vindu"
 
-#~ msgid "Configure which non-session aware programs are started up"
-#~ msgstr ""
-#~ "Konfigurer oppstart av programmer som ikke støtter sesjonshåndtering"
-
-#~ msgid "Startup Programs"
-#~ msgstr "Oppstartsprogrammer"
-
 #~ msgid "Main"
 #~ msgstr "Hoved"
 
 #~ msgid "Main Settings"
 #~ msgstr "Hovedinnstillinger"
-
-#~ msgid "Initialize session settings"
-#~ msgstr "Initier innstillinger for sesjon"
 
 #~ msgid "Store XML data in the archive"
 #~ msgstr "Lagre XML-data i arkivet"
@@ -2172,9 +2902,6 @@ msgstr "Velg lydfil"
 #~ msgid "3d clock"
 #~ msgstr "3D-klokke"
 
-#~ msgid "High"
-#~ msgstr "Høy"
-
 #~ msgid "Large"
 #~ msgstr "Stor"
 
@@ -2389,9 +3116,6 @@ msgstr "Velg lydfil"
 
 #~ msgid "Critical"
 #~ msgstr "Kritisk"
-
-#~ msgid "Cell"
-#~ msgstr "Celle"
 
 #~ msgid "Center image."
 #~ msgstr "Sentrer bilde."
@@ -2714,9 +3438,6 @@ msgstr "Velg lydfil"
 #~ msgid "Maximum number of lines."
 #~ msgstr "Maksimalt antall linjer."
 
-#~ msgid "Pedal"
-#~ msgstr "Pedal"
-
 #~ msgid "Time to fade away."
 #~ msgstr "Tid før utvisking."
 
@@ -2785,9 +3506,6 @@ msgstr "Velg lydfil"
 #~ msgid "Discrete Lines"
 #~ msgstr "Diskrete linjer"
 
-#~ msgid "Length"
-#~ msgstr "Lengde"
-
 #~ msgid "Narrow"
 #~ msgstr "Smal"
 
@@ -2838,9 +3556,6 @@ msgstr "Velg lydfil"
 
 #~ msgid "Rorschach"
 #~ msgstr "Rorschach"
-
-#~ msgid "Speed to clear the screen"
-#~ msgstr "Hastighet for tømming av skjermen"
 
 #~ msgid "With X-axis Symmetry"
 #~ msgstr "Med symmetri om X-aksen"
@@ -2931,12 +3646,6 @@ msgstr "Velg lydfil"
 
 #~ msgid "Truchet"
 #~ msgstr "Truchet"
-
-#~ msgid "Vines"
-#~ msgstr "Lianer"
-
-#~ msgid "Wander"
-#~ msgstr "Vandre"
 
 #~ msgid "WebCollage"
 #~ msgstr "WebCollage"
@@ -3194,9 +3903,6 @@ msgstr "Velg lydfil"
 #~ msgid "Right handed"
 #~ msgstr "Høyrehendt"
 
-#~ msgid "Configuration"
-#~ msgstr "Konfigurasjon"
-
 #~ msgid "Run the capplet CAPPLET"
 #~ msgstr "Kjør cappleten CAPPLET"
 
@@ -3224,9 +3930,6 @@ msgstr "Velg lydfil"
 #~ msgid "Black screen only"
 #~ msgstr "Kun sort skjerm"
 
-#~ msgid "Configure Power Management"
-#~ msgstr "Konfigurer strømstyring"
-
 #~ msgid "Disable screensaver"
 #~ msgstr "Slå av skjermsparer"
 
@@ -3247,9 +3950,6 @@ msgstr "Velg lydfil"
 #~ "Clark Corporation fordi Penrose mente de hadde stjålet et mønster han "
 #~ "hadde laget (et mønster som demonstrerer at \"et ikke-repeterende mønster "
 #~ "kan eksistere i naturen\") til bruk på sitt Kleenex toalettpapir."
-
-#~ msgid "Enable _power management"
-#~ msgstr "Bruk _strømstyring"
 
 #~ msgid "Go to standby mode after"
 #~ msgstr "Gå i ventemodus etter"
@@ -3302,9 +4002,6 @@ msgstr "Velg lydfil"
 
 #~ msgid "Delay until repeat:"
 #~ msgstr "Pause før gjentakelse:"
-
-#~ msgid "Control Center"
-#~ msgstr "Kontrollsenter"
 
 #~ msgid "Adjust wallpaper's transparency"
 #~ msgstr "Juster bakgrunnens gjennomsiktighet"

@@ -5,7 +5,7 @@
  * Copyright (C) 2001 Jonathan Blandford
  *
  * Written by: Bradford Hovinen <hovinen@ximian.com>
- *             Richard Hestilow <hestilow@ximian.com>
+ *             Rachel Hestilow <hestilow@ximian.com>
  *	       Jonathan Blandford <jrb@redhat.com>
  *
  * This program is free software; you can redistribute it and/or modify

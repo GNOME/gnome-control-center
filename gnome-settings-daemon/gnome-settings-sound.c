@@ -4,7 +4,7 @@
  *
  * Copyright © 2001 Ximian, Inc.
  *
- * Written by Richard Hestilow <hestilow@ximian.com>
+ * Written by Rachel Hestilow <hestilow@ximian.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
