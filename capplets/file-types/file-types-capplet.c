@@ -33,6 +33,8 @@
 
 #include <gnome.h>
 #include <glade/glade.h>
+#include <gconf/gconf-client.h>
+#include <gconf/gconf-changeset.h>
 
 #include "mime-types-model.h"
 #include "mime-edit-dialog.h"
@@ -42,7 +44,8 @@
 
 #define WID(x) (glade_xml_get_widget (dialog, x))
 
-static GList *remove_list = NULL;
+static GList          *remove_list = NULL;
+static GConfChangeSet *changeset = NULL;
 
 static void
 add_cb (GtkButton *button, GladeXML *dialog) 
@@ -67,7 +70,7 @@ edit_cb (GtkButton *button, GladeXML *dialog)
 	gtk_tree_selection_get_selected (selection, &model, &iter);
 
 	if (model_entry_is_protocol (model, &iter))
-		edit_dialog = service_edit_dialog_new (service_info_load (model, &iter, NULL));
+		edit_dialog = service_edit_dialog_new (service_info_load (model, &iter, changeset));
 	else
 		edit_dialog = mime_edit_dialog_new (mime_type_info_load (model, &iter));
 }
@@ -144,9 +147,6 @@ create_dialog (void)
 	return dialog;
 }
 
-/* Stupid gnome-vfs install bug */
-void gnome_vfs_mime_registered_mime_type_delete (const gchar *mime_type);
-
 static void
 apply_cb (void) 
 {
@@ -155,6 +155,8 @@ apply_cb (void)
 	g_list_foreach (remove_list, (GFunc) gnome_vfs_mime_registered_mime_type_delete, NULL);
 	g_list_foreach (remove_list, (GFunc) g_free, NULL);
 	g_list_free (remove_list);
+
+	gconf_client_commit_change_set (gconf_client_get_default (), changeset, TRUE, NULL);
 }
 
 int
@@ -168,6 +170,7 @@ main (int argc, char **argv)
 
 	gnome_program_init ("gnome-file-types-properties", VERSION, LIBGNOMEUI_MODULE, argc, argv, NULL);
 
+	changeset = gconf_change_set_new ();
 	dialog = create_dialog ();
 
 	g_signal_connect (G_OBJECT (WID ("main_apply_button")), "clicked", (GCallback) apply_cb, NULL);

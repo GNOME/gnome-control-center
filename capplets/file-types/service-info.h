@@ -45,13 +45,14 @@ struct _ServiceInfo {
 	GnomeVFSMimeApplication *app;
 	gchar                   *custom_line;
 	gboolean                 need_terminal;
+
+	GConfChangeSet          *changeset;
 };
 
 ServiceInfo *service_info_load   (GtkTreeModel      *model,
 				  GtkTreeIter       *iter,
 				  GConfChangeSet    *changeset);
-void         service_info_save   (const ServiceInfo *info,
-				  GConfChangeSet    *changeset);
+void         service_info_save   (const ServiceInfo *info);
 void         service_info_update (ServiceInfo       *info);
 void         service_info_free   (ServiceInfo       *info);
 

@@ -1,6 +1,13 @@
 2002-01-11  Bradford Hovinen  <hovinen@ximian.com>
 
+	* file-types-capplet.c (apply_cb): Commit the changeset
+	(main): Construct a changeset
+	(edit_cb): Pass the changeset to service_info_new
+
 	* service-info.c (set_string): Don't set the value if it is NULL
+	(service_info_load): Store changeset in info structure
+	(service_info_save): Don't require a changeset; use the one stored
+	in the structure
 
 	* service-edit-dialog.c (store_data): Call service_info_save
 

@@ -135,6 +135,7 @@ service_info_load (GtkTreeModel *model, GtkTreeIter *iter, GConfChangeSet *chang
 	info = g_new0 (ServiceInfo, 1);
 	info->model = model;
 	info->iter = gtk_tree_iter_copy (iter);
+	info->changeset = changeset;
 	info->protocol = g_value_dup_string (&protocol);
 	info->description = get_string (info, "description", changeset);
 	info->run_program = get_bool (info, "type", changeset);
@@ -150,20 +151,20 @@ service_info_load (GtkTreeModel *model, GtkTreeIter *iter, GConfChangeSet *chang
 }
 
 void
-service_info_save (const ServiceInfo *info, GConfChangeSet *changeset)
+service_info_save (const ServiceInfo *info)
 {
-	set_string (info, "description", info->description, changeset);
+	set_string (info, "description", info->description, info->changeset);
 
 	if (info->app == NULL) {
-		set_string (info, "command", info->custom_line, changeset);
-		set_string (info, "command-id", "", changeset);
+		set_string (info, "command", info->custom_line, info->changeset);
+		set_string (info, "command-id", "", info->changeset);
 	} else {
-		set_string (info, "command", info->app->command, changeset);
-		set_string (info, "command-id", info->app->id, changeset);
+		set_string (info, "command", info->app->command, info->changeset);
+		set_string (info, "command-id", info->app->id, info->changeset);
 	}
 
-	set_bool (info, "type", info->run_program, changeset);
-	set_bool (info, "need-terminal", info->need_terminal, changeset);
+	set_bool (info, "type", info->run_program, info->changeset);
+	set_bool (info, "need-terminal", info->need_terminal, info->changeset);
 }
 
 void
