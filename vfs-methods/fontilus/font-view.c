@@ -64,13 +64,12 @@ main(int argc, char **argv)
 	return 1;
     }
 
-    error = FT_Init_FreeType(&library);
-    if (error) {
-	g_printerr("could not initialise freetype\n");
+    if (!XftInitFtLibrary()) {
+	g_printerr("could not initialise freetype library\n");
 	return 1;
     }
 
-    error = FT_New_Face_From_URI(library, argv[1], 0, &face);
+    error = FT_New_Face_From_URI(_XftFTlibrary, argv[1], 0, &face);
     if (error) {
 	g_printerr("could not load face '%s'\n", argv[1]);
 	return 1;
@@ -82,12 +81,9 @@ main(int argc, char **argv)
 			     NULL);
     font = XftFontOpenPattern(GDK_DISPLAY(), pattern);
     if (!font) {
-	g_printerr("could not load face\n");
+	g_printerr("could not load Xft face\n");
 	return 1;
     }
-
-    g_message("ascent=%d, descent=%d, height=%d",
-	      font->ascent, font->descent, font->height);
 
     window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title(GTK_WINDOW(window), "Foo");

@@ -27,6 +27,7 @@ vfs_stream_close(FT_Stream stream)
 {
     GnomeVFSHandle *handle = (GnomeVFSHandle *)stream->descriptor.pointer;
 
+    g_message("closing vfs stream");
     if (!handle)
 	return;
     gnome_vfs_close(handle);
