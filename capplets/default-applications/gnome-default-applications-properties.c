@@ -39,10 +39,25 @@
 #include "capplet-util.h"
 #include "gconf-property-editor.h"
 
+// Set http, https, about, and unknown keys to the chosen web browser.
+#define DEFAULT_APPS_KEY_HTTP_PATH "/desktop/gnome/url-handlers/http"
+#define DEFAULT_APPS_KEY_HTTP_NEEDS_TERM DEFAULT_APPS_KEY_HTTP_PATH"/needs_terminal"
+#define DEFAULT_APPS_KEY_HTTP_EXEC       DEFAULT_APPS_KEY_HTTP_PATH"/command"
 
-#define DEFAULT_APPS_KEY_BROWSER_PATH "/desktop/gnome/url-handlers/http"
-#define DEFAULT_APPS_KEY_BROWSER_NEEDS_TERM DEFAULT_APPS_KEY_BROWSER_PATH"/needs_terminal"
-#define DEFAULT_APPS_KEY_BROWSER_EXEC       DEFAULT_APPS_KEY_BROWSER_PATH"/command"
+#define DEFAULT_APPS_KEY_HTTPS_PATH "/desktop/gnome/url-handlers/https"
+#define DEFAULT_APPS_KEY_HTTPS_NEEDS_TERM DEFAULT_APPS_KEY_HTTPS_PATH"/needs_terminal"
+#define DEFAULT_APPS_KEY_HTTPS_EXEC       DEFAULT_APPS_KEY_HTTPS_PATH"/command"
+
+// While gnome-vfs2 does not use the "unknown" key, several widespread apps like htmlview
+// have read it for the past few years.  Setting it should not hurt.
+#define DEFAULT_APPS_KEY_UNKNOWN_PATH "/desktop/gnome/url-handlers/unknown"
+#define DEFAULT_APPS_KEY_UNKNOWN_NEEDS_TERM DEFAULT_APPS_KEY_UNKNOWN_PATH"/needs_terminal"
+#define DEFAULT_APPS_KEY_UNKNOWN_EXEC       DEFAULT_APPS_KEY_UNKNOWN_PATH"/command"
+
+// about:blank and other about: URI's are commonly used by browsers too
+#define DEFAULT_APPS_KEY_ABOUT_PATH "/desktop/gnome/url-handlers/about"
+#define DEFAULT_APPS_KEY_ABOUT_NEEDS_TERM DEFAULT_APPS_KEY_ABOUT_PATH"/needs_terminal"
+#define DEFAULT_APPS_KEY_ABOUT_EXEC       DEFAULT_APPS_KEY_ABOUT_PATH"/command"
 
 #define DEFAULT_APPS_KEY_MAILER_PATH "/desktop/gnome/url-handlers/mailto"
 #define DEFAULT_APPS_KEY_MAILER_NEEDS_TERM DEFAULT_APPS_KEY_MAILER_PATH"/needs_terminal"
@@ -344,9 +359,24 @@ setup_peditors (GConfClient *client,
 {
         GConfChangeSet *changeset = NULL;
 
-	gconf_peditor_new_boolean (changeset, DEFAULT_APPS_KEY_BROWSER_NEEDS_TERM,
+	gconf_peditor_new_boolean (changeset, DEFAULT_APPS_KEY_HTTP_NEEDS_TERM,
 				   WID ("web_custom_terminal_toggle"), NULL);
-	gconf_peditor_new_string  (changeset, DEFAULT_APPS_KEY_BROWSER_EXEC,
+	gconf_peditor_new_string  (changeset, DEFAULT_APPS_KEY_HTTP_EXEC,
+				   WID ("web_custom_command_entry"), NULL);
+
+	gconf_peditor_new_boolean (changeset, DEFAULT_APPS_KEY_HTTPS_NEEDS_TERM,
+				   WID ("web_custom_terminal_toggle"), NULL);
+	gconf_peditor_new_string  (changeset, DEFAULT_APPS_KEY_HTTPS_EXEC,
+				   WID ("web_custom_command_entry"), NULL);
+
+	gconf_peditor_new_boolean (changeset, DEFAULT_APPS_KEY_UNKNOWN_NEEDS_TERM,
+				   WID ("web_custom_terminal_toggle"), NULL);
+	gconf_peditor_new_string  (changeset, DEFAULT_APPS_KEY_UNKNOWN_EXEC,
+				   WID ("web_custom_command_entry"), NULL);
+
+	gconf_peditor_new_boolean (changeset, DEFAULT_APPS_KEY_ABOUT_NEEDS_TERM,
+				   WID ("web_custom_terminal_toggle"), NULL);
+	gconf_peditor_new_string  (changeset, DEFAULT_APPS_KEY_ABOUT_EXEC,
 				   WID ("web_custom_command_entry"), NULL);
 
 	gconf_peditor_new_boolean (changeset, DEFAULT_APPS_KEY_MAILER_NEEDS_TERM,
@@ -369,12 +399,12 @@ read_browser (GConfClient *client,
 	gboolean needs_term;
 	gint i;
 
-	needs_term = gconf_client_get_bool (client, DEFAULT_APPS_KEY_BROWSER_NEEDS_TERM, &error);
+	needs_term = gconf_client_get_bool (client, DEFAULT_APPS_KEY_HTTP_NEEDS_TERM, &error);
 	if (error) {
 		/* hp will shoot me -- I'll do this later. */
 		return;
 	}
-	browser = gconf_client_get_string (client, DEFAULT_APPS_KEY_BROWSER_EXEC, &error);
+	browser = gconf_client_get_string (client, DEFAULT_APPS_KEY_HTTP_EXEC, &error);
 	if (error) {
 		return;
 	}
@@ -554,7 +584,7 @@ value_changed_cb (GConfClient *client,
 	g_return_if_fail (key != NULL);
 	if (strncmp (key, DEFAULT_APPS_KEY_MAILER_PATH, strlen (DEFAULT_APPS_KEY_MAILER_PATH)) == 0) {
 		gconf_client_set_bool (client, DEFAULT_APPS_KEY_MAILER_PATH"/enabled", TRUE, NULL);
-	} else if (strncmp (key, DEFAULT_APPS_KEY_BROWSER_PATH, strlen (DEFAULT_APPS_KEY_BROWSER_PATH)) == 0) {
+	} else if (strncmp (key, DEFAULT_APPS_KEY_HTTP_PATH, strlen (DEFAULT_APPS_KEY_HTTP_PATH)) == 0) {
 	} else if (strncmp (key, DEFAULT_APPS_KEY_TERMINAL_PATH, strlen (DEFAULT_APPS_KEY_TERMINAL_PATH)) == 0) {
 	}
 }
