@@ -7,7 +7,7 @@ INCLUDES = 			\
 	-DVERSION=\""$(VERSION)"\"			\
 	-DCONFIGDIR=\""/etc"\"				\
 	-DLOCATION_DIR=\""$(datadir)/hcm/default"\"	\
-	$(XML_CFLAGS)
+	$(GNOME_XML_CFLAGS)
 
 bin_PROGRAMS = helix-archiver
 lib_LIBRARIES = libhelix_archiver.a
@@ -27,5 +27,5 @@ helix_archiver_LDADD = \
 	$(GNOMEUI_LIBS)					\
 	$(INTLLIBS)					\
 	$(GNOME_XML_LIB)				\
-	helix_archiver.a
+	libhelix_archiver.a
 
