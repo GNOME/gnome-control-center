@@ -1,3 +1,12 @@
+2004-12-10  Rodney Dawes  <dobey@novell.com>
+
+	* gnome-wp-item.c (gnome_wp_item_update_description):
+	Change the description to use "W pixels x H pixels" and ngettext for
+	each individual part, instead of just "W x H pixels" (#151425)
+
+	* gnome-wp-xml.c (gnome_wp_xml_load_xml): Don't duplicate check to
+	make sure that the root element is not NULL
+
 2004-11-09  Mark McLoughlin  <mark@skynet.ie>
 
 	* Makefile.am: install .desktop file in $(datadir)/applications.

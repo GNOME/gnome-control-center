@@ -281,10 +281,10 @@ void gnome_wp_item_update_description (GnomeWPItem * item) {
   } else {
     gchar * info;
 
-    info = g_strdup_printf (_("%s, %d x %d pixels"),
+    info = g_strdup_printf ("%s, %s x %s",
 			    gnome_vfs_mime_get_description (item->fileinfo->mime_type),
-			    item->width,
-			    item->height);
+			    ngettext ("%d pixel", "%d pixels", item->width),
+			    ngettext ("%d pixel", "%d pixels", item->height));
 
     item->description = g_markup_printf_escaped ("<b>%s</b>\n"
 						 "%s",

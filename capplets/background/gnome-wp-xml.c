@@ -101,8 +101,6 @@ static void gnome_wp_xml_load_xml (GnomeWPCapplet * capplet,
 
   root = xmlDocGetRootElement (wplist);
 
-  g_return_if_fail (root != NULL);
-
   for (list = root->children; list != NULL; list = list->next) {
     if (!strcmp (list->name, "wallpaper")) {
       GnomeWPItem * wp;
