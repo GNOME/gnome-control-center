@@ -4,8 +4,7 @@
 <glade-interface>
 
 <widget class="GtkDialog" id="network_dialog">
-  <property name="border_width">7</property>
-  <property name="visible">True</property>
+  <property name="border_width">5</property>
   <property name="title" translatable="yes">Network Proxy Configuration</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_NONE</property>
@@ -18,7 +17,7 @@
     <widget class="GtkVBox" id="dialog-vbox1">
       <property name="visible">True</property>
       <property name="homogeneous">False</property>
-      <property name="spacing">8</property>
+      <property name="spacing">0</property>
 
       <child internal-child="action_area">
 	<widget class="GtkHButtonBox" id="dialog-action_area1">
@@ -41,6 +40,7 @@
 	    <widget class="GtkButton" id="closebutton1">
 	      <property name="visible">True</property>
 	      <property name="can_default">True</property>
+	      <property name="has_default">True</property>
 	      <property name="can_focus">True</property>
 	      <property name="label">gtk-close</property>
 	      <property name="use_stock">True</property>
@@ -153,7 +153,7 @@
 			  <child>
 			    <widget class="GtkLabel" id="label6">
 			      <property name="visible">True</property>
-			      <property name="label" translatable="yes">_HTTP proxy:</property>
+			      <property name="label" translatable="yes">H_TTP proxy:</property>
 			      <property name="use_underline">True</property>
 			      <property name="use_markup">False</property>
 			      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -692,8 +692,7 @@
 </widget>
 
 <widget class="GtkDialog" id="details_dialog">
-  <property name="border_width">7</property>
-  <property name="visible">True</property>
+  <property name="border_width">5</property>
   <property name="title" translatable="yes">HTTP Proxy Details</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_NONE</property>
