@@ -117,6 +117,17 @@ gboolean restart_pending = FALSE;
  */
 gboolean in_fill = FALSE;
 
+static GtkWidget *
+left_aligned_button (gchar *label)
+{
+  GtkWidget *button = gtk_button_new_with_label (label);
+  gtk_misc_set_alignment (GTK_MISC (GTK_BIN (button)->child),
+			  0.0, 0.5);
+  gtk_misc_set_padding (GTK_MISC (GTK_BIN (button)->child),
+			GNOME_PAD_SMALL, 0);
+
+  return button;
+}
 static void
 restart_label_update (void)
 {
@@ -992,17 +1003,17 @@ wm_setup (void)
         util_vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
         gtk_box_pack_start (GTK_BOX (hbox), util_vbox, FALSE, FALSE, 0);
         
-        add_button = gtk_button_new_with_label (_("Add"));
+        add_button = left_aligned_button (_("Add..."));
         gtk_signal_connect (GTK_OBJECT (add_button), "clicked",
                             GTK_SIGNAL_FUNC (add_dialog), NULL);
         gtk_box_pack_start (GTK_BOX (util_vbox), add_button, FALSE, FALSE, 0);
 
-        edit_button = gtk_button_new_with_label (_("Edit"));
+        edit_button = left_aligned_button (_("Edit..."));
         gtk_signal_connect (GTK_OBJECT (edit_button), "clicked",
                             GTK_SIGNAL_FUNC (edit_dialog), NULL);
         gtk_box_pack_start (GTK_BOX (util_vbox), edit_button, FALSE, FALSE, 0);
 
-        delete_button = gtk_button_new_with_label (_("Delete"));
+        delete_button = left_aligned_button (_("Delete"));
         gtk_signal_connect (GTK_OBJECT (delete_button), "clicked",
                             GTK_SIGNAL_FUNC (delete), NULL);
         gtk_box_pack_start (GTK_BOX (util_vbox), delete_button, FALSE, FALSE, 0);
