@@ -35,6 +35,8 @@
 
 #include "capplet-util.h"
 #include "gconf-property-editor.h"
+#include "activate-settings-daemon.h"
+
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <dirent.h>
@@ -688,6 +690,8 @@ main (int argc, char **argv)
 			    GNOME_PARAM_POPT_TABLE, cap_options,
 			    GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
 			    NULL);
+
+	activate_settings_daemon ();
 
 	client = gconf_client_get_default ();
 	gconf_client_add_dir (client, "/desktop/gnome/peripherals/mouse", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
