@@ -30,7 +30,7 @@
 #include <gconf/gconf-client.h>
 #include <glade/glade.h>
 
-#include "libgswitchit/gswitchit_xkb_config.h"
+#include "libgswitchit/gswitchit_config.h"
 
 #include "capplet-util.h"
 #include "gconf-property-editor.h"
@@ -42,7 +42,7 @@
 
 #define CWID(s) glade_xml_get_widget (chooserDialog, s)
 
-static GSwitchItXkbConfig initialConfig;
+static GSwitchItKbdConfig initialConfig;
 
 char *
 xci_desc_to_utf8 (XklConfigItem * ci)
@@ -101,7 +101,7 @@ model_to_widget (GConfPropertyEditor * peditor, GConfValue * value)
 static void
 cleanup_xkb_tabs (GladeXML * dialog)
 {
-  GSwitchItXkbConfigTerm (&initialConfig);
+  GSwitchItKbdConfigTerm (&initialConfig);
   XklConfigFreeRegistry ();
   XklConfigTerm ();
   XklTerm ();
@@ -111,7 +111,7 @@ static void
 reset_to_defaults (GtkWidget * button, GladeXML * dialog)
 {
   gconf_client_set_bool (gconf_client_get_default (),
-			 GSWITCHIT_CONFIG_XKB_KEY_OVERRIDE_SETTINGS,
+			 GSWITCHIT_KBD_CONFIG_KEY_OVERRIDE_SETTINGS,
 			 TRUE, NULL);
   /* all the rest is g-s-d's business */
 }
@@ -152,7 +152,7 @@ setup_xkb_tabs (GladeXML * dialog, GConfChangeSet * changeset)
 //  fill_models_option_menu (dialog);
 
   gconf_peditor_new_string
-    (changeset, (gchar *) GSWITCHIT_CONFIG_XKB_KEY_MODEL,
+    (changeset, (gchar *) GSWITCHIT_KBD_CONFIG_KEY_MODEL,
      WID ("xkb_model"),
      "conv-to-widget-cb", model_to_widget,
      "conv-from-widget-cb", model_from_widget, NULL);
@@ -179,13 +179,13 @@ setup_xkb_tabs (GladeXML * dialog, GConfChangeSet * changeset)
 		    "destroy", G_CALLBACK (cleanup_xkb_tabs), dialog);
 
   gconf_client_notify_add (gconf_client_get_default (),
-			   GSWITCHIT_CONFIG_XKB_KEY_MODEL,
+			   GSWITCHIT_KBD_CONFIG_KEY_MODEL,
 			   (GConfClientNotifyFunc)
 			   update_model, dialog, NULL, NULL);
 
-  GSwitchItXkbConfigInit (&initialConfig, confClient);
+  GSwitchItKbdConfigInit (&initialConfig, confClient);
   g_object_unref (confClient);
-  GSwitchItXkbConfigLoadInitial (&initialConfig);
+  GSwitchItKbdConfigLoadInitial (&initialConfig);
 
   enable_disable_restoring (dialog);
 
@@ -203,16 +203,16 @@ setup_xkb_tabs (GladeXML * dialog, GConfChangeSet * changeset)
 void
 enable_disable_restoring (GladeXML * dialog)
 {
-  GSwitchItXkbConfig gswic;
+  GSwitchItKbdConfig gswic;
   GConfClient *confClient = gconf_client_get_default ();
   gboolean enable;
 
-  GSwitchItXkbConfigInit (&gswic, confClient);
+  GSwitchItKbdConfigInit (&gswic, confClient);
   g_object_unref (confClient);
-  GSwitchItXkbConfigLoad (&gswic);
+  GSwitchItKbdConfigLoad (&gswic);
 
-  enable = !GSwitchItXkbConfigEquals (&gswic, &initialConfig);
+  enable = !GSwitchItKbdConfigEquals (&gswic, &initialConfig);
 
-  GSwitchItXkbConfigTerm (&gswic);
+  GSwitchItKbdConfigTerm (&gswic);
   gtk_widget_set_sensitive (WID ("xkb_reset_to_defaults"), enable);
 }

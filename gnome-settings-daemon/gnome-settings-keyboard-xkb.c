@@ -26,7 +26,7 @@
 # include "config.h"
 #endif
 
-#include <glib/gstrfuncs.h>
+//#include <glib/gstrfuncs.h>
 #include <gdk/gdk.h>
 #include <gdk/gdkx.h>
 #include <gconf/gconf-client.h>
@@ -38,12 +38,12 @@
 
 #include <libxklavier/xklavier.h>
 #include <libxklavier/xklavier_config.h>
-#include <libgswitchit/gswitchit_xkb_config.h>
+#include <libgswitchit/gswitchit_config.h>
 
 #include "gnome-settings-keyboard-xkb.h"
 #include "gnome-settings-daemon.h"
 
-static GSwitchItXkbConfig gswic;
+static GSwitchItKbdConfig gswic;
 static gboolean initedOk;
 
 static PostActivationCallback paCallback = NULL;
@@ -116,17 +116,17 @@ apply_settings (void)
 		return;
 
 	confClient = gconf_client_get_default ();
-	GSwitchItXkbConfigInit (&gswic, confClient);
+	GSwitchItKbdConfigInit (&gswic, confClient);
 	g_object_unref (confClient);
-	GSwitchItXkbConfigLoad (&gswic);
+	GSwitchItKbdConfigLoad (&gswic);
 
 	if (gswic.overrideSettings) {
 		/* initialization - from the system settings */
-		GSwitchItXkbConfigLoadInitial (&gswic);
+		GSwitchItKbdConfigLoadInitial (&gswic);
 		gswic.overrideSettings = FALSE;
-		GSwitchItXkbConfigSave (&gswic);
+		GSwitchItKbdConfigSave (&gswic);
 	} else {
-		if (GSwitchItXkbConfigActivate (&gswic)) {
+		if (GSwitchItKbdConfigActivate (&gswic)) {
 			if (paCallback != NULL) {
 				(*paCallback) (paCallbackUserData);
 			}
@@ -137,26 +137,26 @@ apply_settings (void)
 		}
 	}
 
-	GSwitchItXkbConfigTerm (&gswic);
+	GSwitchItKbdConfigTerm (&gswic);
 }
 
 static void
 gnome_settings_keyboard_xkb_sysconfig_changed_response (GtkDialog * dialog,
 							SysConfigChangedMsgResponse
 							what2do,
-							GSwitchItXkbConfig
+							GSwitchItKbdConfig
 							* pgswicNow)
 {
 	switch (what2do) {
 	case RESPONSE_USE_X:
-		GSwitchItXkbConfigSave (pgswicNow);
+		GSwitchItKbdConfigSave (pgswicNow);
 		break;
 	case RESPONSE_USE_GNOME:
 		/* Do absolutely nothing - just keep things the way they are */
 		break;
 	}
 	gtk_widget_destroy (GTK_WIDGET (dialog));
-	GSwitchItXkbConfigTerm (pgswicNow);
+	GSwitchItKbdConfigTerm (pgswicNow);
 	g_free (pgswicNow);
 }
 
@@ -164,21 +164,21 @@ static void
 gnome_settings_keyboard_xkb_analyze_sysconfig (void)
 {
 	GConfClient *confClient;
-	GSwitchItXkbConfig gswicWas, *pgswicNow;
+	GSwitchItKbdConfig gswicWas, *pgswicNow;
 	gboolean isConfigChanged;
 
 	if (!initedOk)
 		return;
-	pgswicNow = g_new (GSwitchItXkbConfig, 1);
+	pgswicNow = g_new (GSwitchItKbdConfig, 1);
 	confClient = gconf_client_get_default ();
-	GSwitchItXkbConfigInit (&gswicWas, confClient);
-	GSwitchItXkbConfigInit (pgswicNow, confClient);
+	GSwitchItKbdConfigInit (&gswicWas, confClient);
+	GSwitchItKbdConfigInit (pgswicNow, confClient);
 	g_object_unref (confClient);
-	GSwitchItXkbConfigLoadSysBackup (&gswicWas);
-	GSwitchItXkbConfigLoadInitial (pgswicNow);
+	GSwitchItKbdConfigLoadSysBackup (&gswicWas);
+	GSwitchItKbdConfigLoadInitial (pgswicNow);
 
 	isConfigChanged = g_slist_length (gswicWas.layouts) &&
-	    !GSwitchItXkbConfigEquals (pgswicNow, &gswicWas);
+	    !GSwitchItKbdConfigEquals (pgswicNow, &gswicWas);
 	/* config was changed!!! */
 	if (isConfigChanged) {
 		GtkWidget *msg = gtk_message_dialog_new_with_markup (NULL,
@@ -202,10 +202,10 @@ gnome_settings_keyboard_xkb_analyze_sysconfig (void)
 				  pgswicNow);
 		gtk_widget_show (msg);
 	}
-	GSwitchItXkbConfigSaveSysBackup (pgswicNow);
+	GSwitchItKbdConfigSaveSysBackup (pgswicNow);
 	if (!isConfigChanged) 
 		g_free (pgswicNow);
-	GSwitchItXkbConfigTerm (&gswicWas);
+	GSwitchItKbdConfigTerm (&gswicWas);
 }
 
 static void

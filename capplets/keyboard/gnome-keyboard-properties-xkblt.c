@@ -29,7 +29,7 @@
 #include <gconf/gconf-client.h>
 #include <glade/glade.h>
 
-#include "libgswitchit/gswitchit_xkb_config.h"
+#include "libgswitchit/gswitchit_config.h"
 
 #include "capplet-util.h"
 #include "gconf-property-editor.h"
@@ -67,8 +67,8 @@ add_variant_to_available_layouts_tree (const XklConfigItemPtr
   GtkTreeIter iter;
   GtkTreeStore *treeStore =
     GTK_TREE_STORE (gtk_tree_view_get_model (GTK_TREE_VIEW (layoutsTree)));
-  const gchar *fullLayoutName = GSwitchItConfigMergeItems (current1stLevelId,
-							   configItem->name);
+  const gchar *fullLayoutName = GSwitchItKbdConfigMergeItems (current1stLevelId,
+							      configItem->name);
   char *utfVariantName = xci_desc_to_utf8 (configItem);
 
   gtk_tree_store_append (treeStore, &iter, &current1stLevelIter);
@@ -189,8 +189,8 @@ fill_selected_layouts_tree (GladeXML * dialog)
       char *v1, *utfVisible;
       const char *visible = (char *) curLayout->data;
       gtk_list_store_append (listStore, &iter);
-      if (GSwitchItConfigGetDescriptions (visible, &sl, &l, &sv, &v))
-	visible = GSwitchItConfigFormatFullLayout (l, v);
+      if (GSwitchItKbdConfigGetDescriptions (visible, &sl, &l, &sv, &v))
+	visible = GSwitchItKbdConfigFormatFullLayout (l, v);
       v1 = g_strdup (visible);
       utfVisible = g_locale_to_utf8 (g_strstrip (v1), -1, NULL, NULL, NULL);
       gtk_list_store_set (listStore, &iter,
@@ -280,7 +280,7 @@ add_selected_layout (GtkWidget * button, GladeXML * dialog)
           while (option != NULL)
             {
               char *g, *o;
-              if (GSwitchItConfigSplitItems (option->data, &g, &o))
+              if (GSwitchItKbdConfigSplitItems (option->data, &g, &o))
                 {
                   if (!g_ascii_strcasecmp (g, GROUP_SWITCHERS_GROUP))
                     {
@@ -298,7 +298,7 @@ add_selected_layout (GtkWidget * button, GladeXML * dialog)
                                        &ci ))
 
                 {
-                  const gchar* id = GSwitchItConfigMergeItems (GROUP_SWITCHERS_GROUP, DEFAULT_GROUP_SWITCH);
+                  const gchar* id = GSwitchItKbdConfigMergeItems (GROUP_SWITCHERS_GROUP, DEFAULT_GROUP_SWITCH);
                   optionsList = g_slist_append (optionsList, g_strdup (id));
                   set_selected_options_list (optionsList);
                 }
@@ -392,7 +392,7 @@ void
 register_layouts_gconf_listener (GladeXML * dialog)
 {
   gconf_client_notify_add (gconf_client_get_default (),
-			   GSWITCHIT_CONFIG_XKB_KEY_LAYOUTS,
+			   GSWITCHIT_KBD_CONFIG_KEY_LAYOUTS,
 			   (GConfClientNotifyFunc)
 			   update_layouts_list, dialog, NULL, NULL);
 }

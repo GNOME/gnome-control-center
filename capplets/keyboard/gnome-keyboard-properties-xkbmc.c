@@ -30,7 +30,7 @@
 #include <gconf/gconf-client.h>
 #include <glade/glade.h>
 
-#include "libgswitchit/gswitchit_xkb_config.h"
+#include "libgswitchit/gswitchit_config.h"
 
 #include "capplet-util.h"
 #include "gconf-property-editor.h"
@@ -118,7 +118,7 @@ xkb_model_chooser_response (GtkDialog *dialog,
                               1, &modelName, -1);
 
           gconf_client_set_string (gconf_client_get_default (),
-			           GSWITCHIT_CONFIG_XKB_KEY_MODEL,
+			           GSWITCHIT_KBD_CONFIG_KEY_MODEL,
 			           modelName, NULL);
           g_free(modelName);
         }
@@ -132,7 +132,7 @@ choose_model(GladeXML * dialog)
   GtkWidget* chooser = CWID ( "xkb_model_chooser");
   gtk_window_set_transient_for (GTK_WINDOW (chooser), GTK_WINDOW (WID ("keyboard_dialog")));
   currentModelName = gconf_client_get_string (gconf_client_get_default (),
-			           GSWITCHIT_CONFIG_XKB_KEY_MODEL, NULL);
+			           GSWITCHIT_KBD_CONFIG_KEY_MODEL, NULL);
   fill_models_list (chooserDialog);
   g_signal_connect (G_OBJECT (chooser),
 		    "response", G_CALLBACK (xkb_model_chooser_response), chooserDialog);

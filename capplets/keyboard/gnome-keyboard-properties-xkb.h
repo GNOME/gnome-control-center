@@ -64,22 +64,22 @@ extern void choose_model (GladeXML * dialog);
 
 #define get_selected_layouts_list() \
         gconf_client_get_list (gconf_client_get_default (), \
-                                      GSWITCHIT_CONFIG_XKB_KEY_LAYOUTS, \
+                                      GSWITCHIT_KBD_CONFIG_KEY_LAYOUTS, \
                                       GCONF_VALUE_STRING, NULL)
 
 #define set_selected_layouts_list(list) \
         gconf_client_set_list (gconf_client_get_default (), \
-                               GSWITCHIT_CONFIG_XKB_KEY_LAYOUTS, \
+                               GSWITCHIT_KBD_CONFIG_KEY_LAYOUTS, \
                                GCONF_VALUE_STRING, (list), NULL)
 
 #define get_selected_options_list() \
         gconf_client_get_list (gconf_client_get_default (), \
-                                      GSWITCHIT_CONFIG_XKB_KEY_OPTIONS, \
+                                      GSWITCHIT_KBD_CONFIG_KEY_OPTIONS, \
                                       GCONF_VALUE_STRING, NULL)
 
 #define set_selected_options_list(list) \
         gconf_client_set_list (gconf_client_get_default (), \
-                               GSWITCHIT_CONFIG_XKB_KEY_OPTIONS, \
+                               GSWITCHIT_KBD_CONFIG_KEY_OPTIONS, \
                                GCONF_VALUE_STRING, (list), NULL)
 
 G_END_DECLS

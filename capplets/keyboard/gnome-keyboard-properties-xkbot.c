@@ -29,7 +29,7 @@
 #include <gconf/gconf-client.h>
 #include <glade/glade.h>
 
-#include "libgswitchit/gswitchit_xkb_config.h"
+#include "libgswitchit/gswitchit_config.h"
 
 #include "capplet-util.h"
 #include "gconf-property-editor.h"
@@ -91,7 +91,7 @@ can_add_option (GladeXML * dialog)
   gtk_tree_model_get (availableOptionsModel, &aiter, 1,
 		      &selectedFullOptionId, -1);
 
-  if (!GSwitchItConfigSplitItems
+  if (!GSwitchItKbdConfigSplitItems
       (selectedFullOptionId, &selectedGroupId, &selectedOptionId))
     {
       gtk_tree_path_free (groupPath);
@@ -125,7 +125,7 @@ can_add_option (GladeXML * dialog)
 	      // look for options within same group
 	      char *sgid = NULL, *soid = NULL;
 	      gtk_tree_model_get (selectedOptionsModel, &siter, 1, &sid, -1);
-	      if (GSwitchItConfigSplitItems
+	      if (GSwitchItKbdConfigSplitItems
 		  (sid, &sgid, &soid)
 		  && !g_strcasecmp (sgid, selectedGroupId))
 		{
@@ -247,7 +247,7 @@ add_option_to_available_options_tree (const XklConfigItemPtr
   GtkTreeIter iter;
   GtkTreeStore *treeStore =
     GTK_TREE_STORE (gtk_tree_view_get_model (GTK_TREE_VIEW (optionsTree)));
-  const gchar *fullOptionName = GSwitchItConfigMergeItems (current1stLevelId,
+  const gchar *fullOptionName = GSwitchItKbdConfigMergeItems (current1stLevelId,
 							   configItem->name);
   char *utfOptionName = xci_desc_to_utf8 (configItem);
 
@@ -327,7 +327,7 @@ fill_selected_options_tree (GladeXML * dialog)
       char *groupName, *optionName;
       const char *visible = (char *) curOption->data;
 
-      if (GSwitchItConfigSplitItems (visible, &groupName, &optionName))
+      if (GSwitchItKbdConfigSplitItems (visible, &groupName, &optionName))
 	{
 	  XklConfigItem citem;
 	  char *v1, *utfVisible;
@@ -372,7 +372,7 @@ void
 register_options_gconf_listener (GladeXML * dialog)
 {
   gconf_client_notify_add (gconf_client_get_default (),
-			   GSWITCHIT_CONFIG_XKB_KEY_OPTIONS,
+			   GSWITCHIT_KBD_CONFIG_KEY_OPTIONS,
 			   (GConfClientNotifyFunc)
 			   update_options_list, dialog, NULL, NULL);
 }
