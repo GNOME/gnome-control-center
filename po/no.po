@@ -4,14 +4,22 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: control-centre 1.0.5\n"
-"POT-Creation-Date: 1999-05-19 14:40+0200\n"
-"PO-Revision-Date: 1999-04-20 00:40+0200\n"
-"Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
-"Language-Team: Norwegian <no@li.org>\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
-"Content-Transfer-Encoding: 8-bit\n"
+"[kmaraas@km-hk gnome-core]$ [kmaraas@km-hk kmaraas]$ cat /usr/local/bin/gnome-wm#!/bin/bash\n"
+"\n"
+"# The user can specify his prefered WM by setting the WINDOW_MANAGER\n"
+"# environment variable.\n"
+"#\n"
+"# If this is not set, we search a list of known windowmanagers and use\n"
+"# the first one that is found in the users's PATH\n"
+"#\n"
+"\n"
+"if [ -z \"$WINDOW_MANAGER\" ] ; then\n"
+"  for wm in enlightenment icewm wmaker fvwm2 fvwm ; do\n"
+"    check=`which $wm`\n"
+"    if [ $? -eq 0 ] ; then\n"
+"      WINDOW_MANAGER=$check\n"
+"      break\n"
+"    fi\n"
 
 #: capplets/background-properties/property-background.c:244
 msgid "Disabled"
@@ -25,6 +33,7 @@ msgstr "Farge"
 msgid "Color 1"
 msgstr "Farge 1"
 
+#. gtk_table_attach_defaults (GTK_TABLE(table), cp1, 0, 1, 1, 2);
 #. gtk_table_attach_defaults (GTK_TABLE(table), gtk_hseparator_new (), 0, 1, 2, 3);
 #: capplets/background-properties/property-background.c:646
 msgid "Color 2"
@@ -161,11 +170,11 @@ msgstr "Varighet (ms)"
 msgid "Test"
 msgstr "Test"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:226
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:229
 msgid "Gnome editor"
 msgstr "Gnome editor"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:237
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:240
 msgid "Run In Terminal"
 msgstr "Kjør i terminal"
 
@@ -942,84 +951,92 @@ msgstr "Kan ta av og flytte verktøylinjer"
 msgid "Can detach and move menubars"
 msgstr "Kan ta av og flytte menylinjer"
 
-#: capplets/ui-properties/ui-properties.c:270
+#: capplets/ui-properties/ui-properties.c:269
+msgid "Menus can be torn off"
+msgstr "Menyer kan rives av"
+
+#: capplets/ui-properties/ui-properties.c:279
 msgid "Menubars have relieved border"
 msgstr "Manylinjer har avslepen kant"
 
-#: capplets/ui-properties/ui-properties.c:279
+#: capplets/ui-properties/ui-properties.c:288
 msgid "Toolbars have relieved border"
 msgstr "Verktøylinjer har avslepen kant"
 
-#: capplets/ui-properties/ui-properties.c:288
+#: capplets/ui-properties/ui-properties.c:297
 msgid "Toolbar buttons have relieved border"
 msgstr "Verktøylinjeknapper har avslepen kant"
 
-#: capplets/ui-properties/ui-properties.c:297
+#: capplets/ui-properties/ui-properties.c:306
 msgid "Toolbars have line separators"
 msgstr "Verktøylinjer har linjeseparatorer"
 
-#: capplets/ui-properties/ui-properties.c:306
+#: capplets/ui-properties/ui-properties.c:315
 msgid "Toolbars have text labels"
 msgstr "Verktøylinjer har tekstetiketter"
 
-#: capplets/ui-properties/ui-properties.c:315
+#: capplets/ui-properties/ui-properties.c:324
 msgid "Statusbar is interactive when possible"
 msgstr "Statuslinjen er interaktiv når mulig"
 
-#: capplets/ui-properties/ui-properties.c:324
+#: capplets/ui-properties/ui-properties.c:333
 msgid "Statusbar progress meter on right"
 msgstr "Visning av fremgang for statuslinje til høyre"
 
-#: capplets/ui-properties/ui-properties.c:335
+#: capplets/ui-properties/ui-properties.c:344
 msgid "Dialog buttons have icons"
 msgstr "Dialogknapper har ikoner"
 
-#: capplets/ui-properties/ui-properties.c:347
+#: capplets/ui-properties/ui-properties.c:356
 msgid "Menu items have icons"
 msgstr "Menyoppføringer har ikoner"
 
-#: capplets/ui-properties/ui-properties.c:366
+#: capplets/ui-properties/ui-properties.c:375
 msgid "Default MDI mode"
 msgstr "Standard MDI modus"
 
-#: capplets/ui-properties/ui-properties.c:371
+#: capplets/ui-properties/ui-properties.c:380
 msgid "MDI notebook tab position"
 msgstr "Tabulatorposisjon for MDI notisblokk"
 
-#: capplets/url-properties/url-properties.c:69
+#: capplets/url-properties/url-properties.c:48
+msgid "Error initializing the `url-properties' capplet."
+msgstr "Feil under initialisering av `url-properties' cappleten."
+
+#: capplets/url-properties/url-properties.c:71
 msgid "Protocol"
 msgstr "Protokoll"
 
-#: capplets/url-properties/url-properties.c:69
+#: capplets/url-properties/url-properties.c:71
 msgid "Command"
 msgstr "Kommando"
 
-#: capplets/url-properties/url-properties.c:85
+#: capplets/url-properties/url-properties.c:87
 msgid "handler:"
 msgstr "håndterer:"
 
 #. set some commonly used handlers
-#: capplets/url-properties/url-properties.c:95
+#: capplets/url-properties/url-properties.c:97
 msgid "Netscape"
 msgstr "Netscape"
 
-#: capplets/url-properties/url-properties.c:100
+#: capplets/url-properties/url-properties.c:102
 msgid "Netscape (new window)"
 msgstr "Netscape (nytt vindu)"
 
-#: capplets/url-properties/url-properties.c:106
+#: capplets/url-properties/url-properties.c:108
 msgid "Help browser"
 msgstr "Hjelpleser"
 
-#: capplets/url-properties/url-properties.c:111
+#: capplets/url-properties/url-properties.c:113
 msgid "Help browser (new window)"
 msgstr "Hjelpleser (nytt vindu)"
 
-#: capplets/url-properties/url-properties.c:123
+#: capplets/url-properties/url-properties.c:125
 msgid "Set"
 msgstr "Sett"
 
-#: capplets/url-properties/url-properties.c:131
+#: capplets/url-properties/url-properties.c:133
 msgid "Remove"
 msgstr "Fjern"
 
