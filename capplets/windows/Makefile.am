@@ -16,7 +16,6 @@ wms_LTLIBRARIES =			\
 	libmetacity.la
 
 libmetacity_la_SOURCES = 		\
-	gnome-window-manager.h		\
 	metacity-window-manager.c	\
 	metacity-window-manager.h
 
