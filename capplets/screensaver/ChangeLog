@@ -1,3 +1,47 @@
+2001-08-09  Richard Hestilow  <hestilow@ximian.com>
+
+	* Makeflie.am (EXTRA_DIST): Install all pixmaps.
+	(pixmaps_DATA): Add blank-screen.png.
+
+	* pref-file.c: Replace "programs" value with a regenerated
+	string. 
+	(print_aligned_row): Added.
+	(print_list_to_str): Added.
+
+	* preferences.h (Screensaver): Add new fields "filename",
+	"compat_command_line", "fakepreview", and "fakes",
+	to deal with the new xml storage.
+	(Preferences): Add new fields "savers_hash" and "invalidsavers".
+	
+	* preferences.c (screensaver_list_prepend_dir): Added.
+	(screensaver_cmp_func): Added.
+	(screensaver_list_load): Added.
+	(preferences_new): Initialize savers_hash.
+	(clean_saver_list): Added.
+	(preferences_load): Load screensavers from xml.
+	(parse_arg_default): Added.
+	(screensaver_read_xml): Updated for the new format.
+	(screensaver_new_from_file): Added.
+
+	* prefs-widget.c (double_click_cb): Added.
+	(): Remove right click menu, add double click handler.
+	(model_is_cell_editable): Fix for etable bug.
+	(random_timeout_cb): Avoid vidwhacker and webcollage.
+	* preview.c: Optionally show fakepreview if set, and
+	deal with compat_command_line, and refresh pixbufs.
+	(command_exists): Renamed to rc_command_exists.
+
+	* rc-parse.c: (parse_screensaver_list): Merely update
+	the existing entries, via the provided hash.
+
+	* screensaver-prefs-dialog.c (get_argument_data): Just
+	find the xml file using ::filename.
+
+	* screensavers/magic.pl.in: Added.
+	* screensavers/Makefile.am: Generate .xml.h files for translators,
+	and install all .xml files and .png files, and run magic.pl on
+	make install.
+
 2001-07-31  Chema Celorio  <chema@celorio.com>
 
 	* Makefile.am (cappletname): add DISTDIR to install-data-local

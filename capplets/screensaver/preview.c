@@ -45,6 +45,8 @@
 static GtkWidget *preview_window;
 static pid_t preview_pid;
 static int timeout_id;
+static int expose_id = 0;
+static GdkPixbuf *pixbuf = NULL;
 
 #if 0
 
@@ -63,10 +65,29 @@ print_args (char **args)
 
 #endif
 
+static void
+expose_func (GtkWidget *widget, GdkEventExpose *event, gpointer data)
+{
+	if (!pixbuf)
+		return;
+	
+	gdk_pixbuf_render_to_drawable
+		(pixbuf, (GdkDrawable *) preview_window->window,
+		 preview_window->style->fg_gc[0],
+		 event->area.x, event->area.y,
+		 event->area.x, event->area.y,
+		 event->area.width, event->area.height,
+		 GDK_RGB_DITHER_NORMAL, 0, 0);
+}
+
 void 
 set_preview_window (GtkWidget *widget) 
 {
+	if (expose_id)
+		gtk_signal_disconnect (GTK_OBJECT (preview_window), expose_id);
 	preview_window = widget;
+	expose_id = gtk_signal_connect (GTK_OBJECT (preview_window),
+					"expose_event", expose_func, NULL);
 }
 
 static char **
@@ -193,6 +214,14 @@ static void
 show_screensaver (GdkWindow *window, Screensaver *saver, pid_t *pid) 
 {
 	char **args;
+	gchar *command_line;
+	
+	if (saver->command_line)
+		command_line = saver->command_line;
+	else
+	{
+		command_line = saver->compat_command_line;
+	}
 
 	*pid = fork ();
 
@@ -203,7 +232,7 @@ show_screensaver (GdkWindow *window, Screensaver *saver, pid_t *pid)
 	else if (*pid == 0) {
 		nice (20);    /* Very low priority */
 
-		args = g_strsplit (saver->command_line, " ", -1);
+		args = g_strsplit (command_line, " ", -1);
 		args = fix_arguments (args);
 		args = strip_arg (args, "-root");
 		args = add_window_arg (args, window);
@@ -222,7 +251,6 @@ show_screensaver (GdkWindow *window, Screensaver *saver, pid_t *pid)
 static gint
 show_screensaver_timeout (void) 
 {
-	GdkPixbuf *pixbuf;
 	int ret;
 
 	ret = waitpid (preview_pid, NULL, WNOHANG);
@@ -231,6 +259,9 @@ show_screensaver_timeout (void)
 		g_error ("waitpid: %s", g_strerror (errno));
 	}
 	else if (ret > 0) {
+		if (pixbuf)
+			gdk_pixbuf_unref (pixbuf);
+
 		pixbuf = gdk_pixbuf_new_from_file 
 			(GNOMECC_PIXMAPS_DIR "/no-hack.png");
 		gdk_pixbuf_render_to_drawable
@@ -249,12 +280,32 @@ show_preview (Screensaver *saver)
 {
 	/* Note: kill this next line for a very interesting effect ... */
 	close_preview ();
-	if (!saver->command_line) return;
+	if (!(saver->command_line || saver->compat_command_line || saver->fakepreview)) return;
 	gtk_widget_map (preview_window);
-	show_screensaver (preview_window->window, saver, &preview_pid);
-	timeout_id =
-		gtk_timeout_add (500, (GtkFunction)
-				 show_screensaver_timeout, NULL);
+
+	if (pixbuf)
+	{
+		gdk_pixbuf_unref (pixbuf);
+		pixbuf = NULL;
+	}
+
+	if (saver->fakepreview)
+	{
+		pixbuf = gdk_pixbuf_new_from_file (saver->fakepreview);
+		gdk_pixbuf_render_to_drawable
+			(pixbuf, (GdkDrawable *) preview_window->window,
+			 preview_window->style->fg_gc[0], 0, 0, 0, 0,
+			 gdk_pixbuf_get_width (pixbuf),
+			 gdk_pixbuf_get_height (pixbuf),
+			 GDK_RGB_DITHER_NONE, 0, 0);
+	}
+	else
+	{	
+		show_screensaver (preview_window->window, saver, &preview_pid);
+		timeout_id =
+			gtk_timeout_add (500, (GtkFunction)
+					 show_screensaver_timeout, NULL);
+	}
 }
 
 void 
@@ -275,10 +326,11 @@ close_preview (void)
 void
 show_blank_preview (void)
 {
-	GdkPixbuf *pixbuf;
-	
 	close_preview ();
 	gtk_widget_map (preview_window);
+
+	if (pixbuf)
+		gdk_pixbuf_unref (pixbuf);
 
 	pixbuf = gdk_pixbuf_new_from_file (GNOMECC_PIXMAPS_DIR "/blank-screen.png");
 	gdk_pixbuf_render_to_drawable

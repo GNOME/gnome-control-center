@@ -741,32 +741,38 @@ static xmlDocPtr
 get_argument_data (Screensaver *saver) 
 {
 	xmlDocPtr doc;
-	gchar *file_name;
-	gchar *lang;
-
+	xmlNodePtr node;
+	gboolean options = FALSE;
+	
 	g_return_val_if_fail (saver != NULL, NULL);
-	g_return_val_if_fail (saver->name != NULL, NULL);
+	g_return_val_if_fail (saver->filename != NULL, NULL);
 
-	lang = g_getenv ("LANG");
-	if (lang) 
-		lang = g_strconcat (lang, "/", NULL);
-	else
-		lang = g_strdup ("");
+	doc = xmlParseFile (saver->filename);
+	if (!doc)
+		return NULL;
 
-	file_name = g_strconcat (GNOMECC_SCREENSAVERS_DIR "/screensavers/",
-				 lang, saver->name, ".xml", NULL);
-	doc = xmlParseFile (file_name);
-	g_free (file_name);
-
-	/* Fall back on default language if given language is not found */
-	if (!doc && *lang != '\0') {
-		file_name = g_strconcat (GNOMECC_SCREENSAVERS_DIR "/screensavers/",
-					 saver->name, ".xml", NULL);
-		doc = xmlParseFile (file_name);
-		g_free (file_name);
+	if (!(doc->root && doc->root->childs))
+	{
+		xmlFreeDoc (doc);
+		return NULL;
 	}
-
-	g_free (lang);
+	
+	for (node = doc->root->childs; node != NULL; node = node->next)
+	{
+		if (!strcmp (node->name, "select")
+		 || !strcmp (node->name, "number")
+		 || !strcmp (node->name, "boolean"))
+		{
+			options = TRUE;
+			break;
+		}
+	}
+	
+	if (!options)
+	{
+		xmlFreeDoc (doc);
+		return NULL;
+	}
 
 	return doc;
 }
@@ -1352,7 +1358,7 @@ static GtkWidget *
 get_basic_screensaver_widget (ScreensaverPrefsDialog *dialog) 
 {
 	GtkWidget *vbox, *label;
-	GList *node;
+	/*GList *node;*/
 
 	vbox = gtk_vbox_new (FALSE, 10);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), 5);
@@ -1675,20 +1681,15 @@ static gboolean
 arg_mapping_exists (Screensaver *saver) 
 {
 	struct stat buf;
-	char *filename;
 	gboolean ret;
 
-	if (!saver->name) return FALSE;
+	if (!saver->filename) return FALSE;
 
-	filename = g_strconcat (GNOMECC_SCREENSAVERS_DIR "/screensavers/",
-				saver->name, ".xml", NULL);
-
-	if (stat (filename, &buf))
+	if (stat (saver->filename, &buf))
 		ret = FALSE;
 	else
 		ret = TRUE;
 
-	g_free (filename);
 	return ret;
 }
 
@@ -1730,6 +1731,7 @@ demo_cb (GtkWidget *widget, ScreensaverPrefsDialog *dialog)
 	store_cli (dialog);
 	gtk_signal_emit (GTK_OBJECT (dialog),
 			 screensaver_prefs_dialog_signals[DEMO_SIGNAL]);
+	show_blank_preview ();
 	show_demo (dialog->saver);
 }
 

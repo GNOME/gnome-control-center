@@ -1,0 +1,510 @@
+#!@PERL@ -w
+#
+# magic.pl
+#
+# Script to convert Xscreensaver cruft into xml files.
+# Copyright (C) 2001 Ximian, Inc.
+# Authors:
+#   Richard Hestilow <hestilow@ximian.com>
+# This program is licensed under the GNU GPL. See COPYING for details.
+
+use Getopt::Long;
+
+my $rcfile; # .xscreensaver usually 
+my $adfile; # app defaults file
+my $outdir; 
+my @merge;
+my @avoid;
+my $suffix = ".xml";
+my $quiet;
+
+my $help;
+
+sub usage
+{
+	print << "EOF"
+XScreensaver->XML conversion utility
+Copyright (C) 2001 Ximian, Inc.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+Usage: $0 [options]
+
+Options:
+  --rcfile <file>         XScreensaver RC file 
+  --adfile <file>         XScreensaver AppDefaults file
+  --outdir <dir>	  Directory to output to (defaults to current dir)
+  --merge <dirs>	  Merge with preexisting XML files. If used in
+  			   conjunction with --outdir, will make copies in
+			   the specified output directory rather than modifying
+			   the existing files.
+  --avoid <dirs>	  The opposite of --merge: Will not output XML files
+                           that already exist in the specified directories.
+			   Note that merging and avoiding the same directory
+			   is meaningless.
+  --suffix <suffix>	  Suffix for output files. Defaults to "$suffix".
+  --quiet		  Be quiet.
+  --help		  Display this error message.
+EOF
+;
+exit 1;
+}
+
+sub badopt
+{
+	my $opt = $_[0];
+
+	print "Unknown option $opt\n\n";
+	usage ();
+}
+
+sub find_file
+{
+	my ($file, @dirs) = @_;
+
+	foreach $dir (@dirs)
+	{
+		if (-f "$dir/$file")
+		{
+			return "$dir/$file";
+		}	
+	}
+
+	return "";
+}
+
+GetOptions ("rcfile=s", \$rcfile,
+	    "adfile=s", \$adfile,
+	    "outdir=s", \$outdir,
+	    "merge=s", \@merge,
+	    "avoid=s", \@avoid,
+	    "suffix=s", \$suffix,
+	    "quiet+", \$quiet,
+	    "help+", \$help,
+	    "<>", \&badopt);
+
+if ($help)
+{
+	usage ();
+}
+
+my %savers = ();
+my @updated_list;
+my @added_list;
+
+# Sigh
+foreach $thefile ($rcfile, $adfile)
+{
+unless ($thefile) { next; }
+
+if ($thefile)
+{
+	unless (open RCFILE, "<$thefile")
+	{
+		die "Cannot open rcfile $thefile\n";
+	}
+	
+	my $fcontents = "";
+	my $progseen = 0;
+	while (<RCFILE>)
+	{
+		if (/\*programs:/)
+		{
+			$progseen = 1;
+		}
+		elsif ($progseen)
+		{
+			$fcontents .= $_;
+		}
+		if (/\\n\n/)
+		{
+			$fcontents =~ s/\\n$//g;
+			last;
+		}
+	}
+	
+	foreach $_ (split /\\n\\\n/, $fcontents)
+	{
+		$_ =~ s/\\/ /g;
+		my $name;
+		my $label;
+		my $command;
+		if ($_ =~ /\".+\".+\".+\"/)
+		{
+			# multiple quotes
+			if ($_ =~ /\"(.+)\"\s+((\w+) .+\".+\".+)[\t ]*/)
+			{
+				$label = $1;
+				$name = $3;
+				$command = $2;
+			}
+		}
+		elsif ($_ =~ /\"(.+)\"\s*([\w\-]+) ((.+\w)?)[\t ]+/)
+		{
+			$label = $1;
+			$name = $2;
+			$command = $3;
+		}
+		elsif ($_ =~ /\-?(\w[\w\-]+) ((.+\w)?)[\t ]+/)
+		{
+			if ($1 eq "-") { print "$1 $2\n";}
+			my %saver = ("name" => $1,
+				     "command" => $2);
+			$savers{$1} = \%saver;
+			next;
+		}
+		
+		if ($name eq "rd-bomb") { print "$label $name $command\n";}
+		if ($name eq "cosmos") { print "$label $name $command\n";}
+		if ($name)
+		{
+			if ($savers{$name} and $label)
+			{
+				if ($name eq "xmountains") { print "erk\n"};
+				my %saver = %{$savers{$name}};
+				my @fakes;
+				if ($saver{"fakes"})
+				{
+					@fakes = @{$saver{"fakes"}};
+				}
+				push @fakes, $label;
+				$saver{"fakes"} = \@fakes;
+				$savers{$name} = \%saver;
+			}
+			else
+			{
+				my %saver = ("label" => $label,
+					     "name" => $name,
+					     "command" => $command);
+				$savers{$name} = \%saver;
+			}
+		}
+	}
+
+	close RCFILE;
+}
+}
+
+if ($adfile)
+{
+	my $fcontents = "";
+	
+	unless (open ADFILE, "<$adfile")
+	{
+		die "Cannot open app-defaults file $adfile\n";
+	}
+	
+	while (<ADFILE>)
+	{
+		$fcontents .= $_;
+	}
+
+	foreach $_ (split /\n\*/, $fcontents)
+	{
+		unless (/hacks\.(.+)\.(.+)\:(.+)/)
+		{
+			next;
+		}
+		unless ($2 eq "documentation" or $2 eq "name")
+		{
+			next;
+		}
+		$_ =~ s/hacks\.(.+)\.(.+)\://g;
+		my $name = $1;
+		my $type = $2;
+		$_ =~ s/[\t ]*\\[\t ]*\n/ /g;
+		$_ =~ s/\n[\t ]/\n/g;
+		$_ =~ s/\.[\t ]+/\.  /g;
+		$_ =~ s/[\t ]+\n/\n/g;
+		$_ =~ s/^\n//g;
+		$_ =~ s/\\n/\n/g;
+		$_ =~ s/^[\t ]+//g;
+		$_ =~ s/\n[\t ]/\n/g;
+		$_ =~ s/\</&lt;/g;
+		$_ =~ s/\>/&gt;/g;
+		$_ =~ s/[\t ]*\n$//g;
+		$_ =~ s/\n\n\! \(xrdb prevention kludge\: whole file\) \*\///g;
+		my $desc;
+		my $label;
+		if ($type eq "documentation")
+		{
+			$desc = $_;
+		}
+		else
+		{
+			$label = $_;
+		}
+
+		my %saver = ();
+		if ($savers{$name})
+		{
+			%saver = %{$savers{$name}};
+		}
+		$saver{"name"} = $name;
+		if ($desc)
+		{
+			$saver{"desc"} = $desc;
+		}
+		if ($label)
+		{
+			if ($saver{$label})
+			{
+				my @fakes;
+				if ($saver{"fakes"})
+				{
+					@fakes = @{$saver{"fakes"}};
+				}
+				push @fakes, $label;
+				$saver{"fakes"} = \@fakes;
+			}
+			else
+			{
+				$saver{"label"} = $label;
+			}
+		}
+
+		$savers{$name} = \%saver;
+	}
+	close ADFILE;
+}
+
+my $key;
+foreach $key (keys %savers)
+{
+	my %saver = %{$savers{$key}};
+	my $name = $saver{"name"};
+	my $label = $saver{"label"};
+	if ($key eq "xmountains")
+	{
+		print "$name\n";
+	}
+	my $command = $saver{"command"};
+	my $desc = $saver{"desc"};
+	my @fakes;
+	my $filename = "$name$suffix";
+	my $fullname;
+	my $mergefile;
+	my $mergeexists = 0;
+	my $samefile = 0;
+	my $buf = "";
+	my $str;
+
+	if ($saver{"fakes"}) {
+		@fakes = @{$saver{"fakes"}};
+	}	
+
+	if (!$label)
+	{
+		# luckily, we can pretty much assume $name is ascii.
+		$label = $name;
+		my @tmparr = split //, $label;
+		if (scalar (@tmparr))
+		{
+			$tmparr[0] =~ tr/[a-z]/[A-Z]/;
+			$label = join "", @tmparr;
+		}
+	}
+
+	if (@avoid)
+	{
+		my $avoidfile = find_file ($filename, @avoid);
+		if ($avoidfile and -f $avoidfile)
+		{
+			next;
+		}
+	}
+	
+	if (@merge)
+	{
+		$mergefile = find_file ($filename, @merge);
+		# FIXME: What about multiple-merge case?
+		if (!$mergefile and scalar (@merge) == 1)
+		{
+			$mergefile = $merge[0] . "/$filename";
+		}
+		if ($mergefile and !$outdir)
+		{
+			$fullname = $mergefile;
+			if (-f $mergefile)
+			{
+				$samefile = 1;
+			}
+		}
+	}
+	
+	if (!defined $fullname)
+	{	
+		if ($outdir)
+		{
+			unless (-d $outdir)
+			{
+				unless (mkdir $outdir)
+				{
+					die "Cannot create directory $outdir";
+				}
+			}
+			
+			$fullname = "$outdir/$filename";
+		}
+		else
+		{
+			$fullname = "$filename";
+		}
+	}
+
+	if (@merge and -f $mergefile)
+	{
+		$mergeexists = 1;
+	}
+
+	if (!$samefile)
+	{
+		unless (open OUTFILE, ">$fullname")
+		{
+			die "Cannot open output file $fullname\n";
+		}
+	}
+
+	# note that we do not print out commands for merging.
+	# this is because we assume the file has argument metadata
+	if ($mergefile and $mergeexists)
+	{
+		unless (open XMLFILE, "<$mergefile")
+		{
+			die "Cannot open file $mergefile for merging\n";
+		}
+		my $opendesc = 0;
+		my $foo;
+		foreach $foo (<XMLFILE>)
+		{
+			if ($foo =~ /\<screensaver.*\>/)
+			{
+				$str = "<screensaver name=\"$name\"";
+				$str .= " _label=\"$label\"";
+				$str .= ">\n";
+				
+				if ($samefile)
+				{
+					$buf .= $str;
+				}
+				else
+				{
+					print OUTFILE $str;
+				}
+			}
+			elsif ($foo =~ /\<fake/)
+			{
+				# we handle the fakes later 
+			}
+			elsif ($desc and $foo =~ /\<_description\>.*\<\/_description\>/)
+			{
+				$opendesc = 0;
+			}
+			elsif ($desc and $foo =~ /\<_description\>/)
+			{
+				$opendesc = 1;
+			}
+			elsif ($desc and $foo =~ /\<\/_description\>/)
+			{
+				$opendesc = 0;
+			}
+			elsif ($desc and $opendesc)
+			{
+				# part of an old description, do nothing
+			}
+			elsif ($foo =~ /\<\/screensaver\>/)
+			{
+				$str = "";
+				if ($desc and !$opendesc)
+				{
+					$str .= "    <_description>$desc</_description>\n";
+				}
+
+				foreach $fake (@fakes)
+				{
+					$str .= "    <fake name=\"$fake\"/>\n";
+				}
+				
+				$str .= "</screensaver>";
+				
+				if ($samefile)
+				{
+					$buf .= $str;
+				}
+				else
+				{
+					print OUTFILE $str;
+				}
+				last;
+			}
+			else
+			{
+				if ($samefile)
+				{
+					$buf .= $foo;
+				}
+				else
+				{
+					print OUTFILE $foo;
+				}
+			}
+		}
+
+		close OUTFILE;
+		unless (open OUTFILE, ">$mergefile")
+		{
+			die "Cannot open output file $mergefile";
+		}
+		
+		print OUTFILE $buf;
+		close OUTFILE;
+
+		push @updated_list, $fullname;
+	}
+	else
+	{
+		print OUTFILE "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n";
+		print OUTFILE "<screensaver name=\"$name\"";
+		if ($label)
+		{
+			print OUTFILE " _label=\"$label\"";
+		}
+		print OUTFILE ">\n\n";
+		if ($command)
+		{
+			print OUTFILE "    <fullcommand arg=\"$command\"/>\n\n";
+		}
+		if ($desc)
+		{
+			print OUTFILE "    <_description>$desc</_description>\n\n";
+		}
+		foreach $fake (@fakes)
+		{
+			print OUTFILE "    <fake name=\"$fake\"/>\n";
+		}
+		print OUTFILE "</screensaver>\n";
+		close OUTFILE;
+		
+		push @added_list, $fullname;
+	}
+}
+
+if ($quiet)
+{
+	exit 0;
+}
+
+my $file;
+
+if (scalar (@added_list))
+{
+	print "The following files have been added:\n";
+	foreach $file (@added_list)
+	{
+		print "$file\n";
+	}
+	print "\n";
+}

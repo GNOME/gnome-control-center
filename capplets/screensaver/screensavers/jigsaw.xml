@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
-<screensaver name="jigsaw">
+<screensaver name="jigsaw" _label="Jigsaw">
 
     <command arg="-root"/>
 
@@ -8,4 +8,7 @@
             type="slider" default="2" arg="-delay %" low="1"
             high-label="Slower" high="500000"/>
 
+    <fakepreview>jigsaw.png</fakepreview>
+
+    <_description>This grabs a screen image, carves it up into a jigsaw puzzle, shuffles it, and then solves the puzzle.  This works especially well when you feed it an external video signal instead of letting it grab the screen image (actually, I guess this is generally true...)	When it is grabbing a video image, it is sometimes pretty hard to guess what the image is going to look like once the puzzle is solved.  Written by Jamie Zawinski.</_description>
 </screensaver>

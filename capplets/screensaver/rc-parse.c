@@ -242,13 +242,13 @@ get_screensaver_dir_list (void)
 	return screensaver_dir_list;
 }
 
-/* command_exists
+/* rc_command_exists
  *
  * Given a command line, determines if the command may be executed
  */
 
-static gboolean
-command_exists (char *command) 
+gboolean
+rc_command_exists (char *command) 
 {
 	GList *screensaver_dir_list;
 	GList *node;
@@ -342,7 +342,7 @@ parse_screensaver (const char *line)
 	}
 
 	h->command_line = strip_whitespace (line);
-	if (!command_exists (h->command_line)) {
+	if (!rc_command_exists (h->command_line)) {
 		screensaver_destroy (h);
 		return NULL;
 	}
@@ -355,8 +355,8 @@ parse_screensaver (const char *line)
 
 /* Adapted from xscreensaver 3.24 driver/prefs.c line 1076 ... */
 
-GList *
-parse_screensaver_list (char *list)
+void
+parse_screensaver_list (GHashTable *savers_hash, char *list)
 {
 	int start = 0;
 	int end = 0;
@@ -368,6 +368,9 @@ parse_screensaver_list (char *list)
 
 	GList *list_head = NULL, *list_tail = NULL;
 	Screensaver *saver;
+
+	g_return_if_fail (savers_hash != NULL);
+	g_return_if_fail (list != NULL);
 
 	size = strlen (list);
 
@@ -392,19 +395,23 @@ parse_screensaver_list (char *list)
 
 		saver = parse_screensaver (list + start);
 		if (saver) {
-			saver->id = count++;
-			if (saver->enabled) number_enabled++;
-			total++;
-			list_tail = g_list_append (list_tail, saver);
-			if (!list_head) list_head = list_tail;
-			list_tail = g_list_last (list_tail);
-			saver->link = list_tail;
+			if (saver->enabled)
+			{
+				Screensaver *real_saver;
+				real_saver = g_hash_table_lookup (savers_hash,
+								  saver->name);
+				if (real_saver)
+				{
+					real_saver->enabled = TRUE;
+					real_saver->command_line =
+						g_strdup (saver->command_line);
+				}
+			}
+			screensaver_destroy (saver);
 		}
 
 		start = end + 1;
 	}
-
-	return list_head;
 }
 
 gchar *

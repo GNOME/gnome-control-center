@@ -46,12 +46,17 @@ struct _Screensaver
 {
 	guint id;
 	gchar *name;
+	gchar *filename;
 	gchar *label;
 	gchar *description;
 	gchar *command_line;
+	gchar *compat_command_line;
 	gchar *visual;
 	gboolean enabled;
 	GList *link;
+
+	gchar *fakepreview;
+	GList *fakes;
 };
 
 struct _Preferences 
@@ -79,10 +84,13 @@ struct _Preferences
 	SelectionMode selection_mode;
 
 	GList    *screensavers;
+	GHashTable *savers_hash;
 
 	gint  frozen;         /* TRUE if we shouldn't reflect
 			       * preference changes in capplet */
 	GTree *config_db;     /* key-value database of config options */
+
+	GList *invalidsavers;
 
 	/* Settings that are not stored in .xscreensaver ... */
 
@@ -105,6 +113,7 @@ Preferences *preferences_read_xml (xmlDocPtr xml_doc);
 xmlDocPtr preferences_write_xml (Preferences *prefs);
 
 Screensaver *screensaver_new (void);
+Screensaver *screensaver_new_from_file (const gchar *filename);
 void screensaver_destroy (Screensaver *saver);
 
 GList *screensaver_add (Screensaver *saver, GList *screensavers);

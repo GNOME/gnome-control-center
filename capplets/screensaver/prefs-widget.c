@@ -90,6 +90,9 @@ static void set_random_timeout            (PrefsWidget *prefs_widget,
 static void popup_item_menu               (ETable *table,
 					   int row, int col, GdkEvent *event,
 					   PrefsWidget *prefs_widget);
+static void double_click_cb		  (ETable *table,
+					   int row, int col, GdkEvent *event,
+					   PrefsWidget *prefs_widget);
 
 static void about_cb                      (GtkWidget *widget,
 					   PrefsWidget *prefs_widget);
@@ -237,10 +240,16 @@ prefs_widget_init (PrefsWidget *prefs_widget)
 	gtk_signal_connect (GTK_OBJECT (table), "selection_change",
 			    GTK_SIGNAL_FUNC (selection_changed_cb),
 			    prefs_widget);
+	/* Disabled for now -- no need for Add/Remove/About */
+#if 0
 	gtk_signal_connect (GTK_OBJECT (table), "right_click",
 			    GTK_SIGNAL_FUNC (popup_item_menu),
 			    prefs_widget);
-	
+#endif
+	gtk_signal_connect (GTK_OBJECT (table), "double_click",
+			    GTK_SIGNAL_FUNC (double_click_cb),
+			    prefs_widget);
+
 	widget = WID ("mode_option");
 	option_menu_connect (GTK_OPTION_MENU (widget),
 			     GTK_SIGNAL_FUNC (mode_changed_cb),
@@ -604,7 +613,12 @@ model_set_value_at (ETableModel *etm,
 static gboolean
 model_is_cell_editable (ETableModel *etm, int col, int row, void *data)
 {
-	return (col == 0);
+	PrefsWidget *prefs_widget = PREFS_WIDGET (data);
+
+	if (prefs_widget->selection_mode == SM_CHOOSE_FROM_LIST)
+		return (col == 0);
+	else
+		return FALSE;
 }
 
 static void *
@@ -694,7 +708,7 @@ static void
 selection_foreach_func (int model_row, int *closure)
 {
 	g_return_if_fail (closure != NULL);
-	
+
 	/* Selection mode is "single */
 	*closure = model_row;
 }
@@ -703,6 +717,7 @@ static gint
 random_timeout_cb (PrefsWidget *prefs_widget)
 {
 	GList *l, *old;
+	gboolean skippedwc = FALSE, skippedvw = FALSE;
  
   	g_return_val_if_fail (prefs_widget != NULL, FALSE);
 	
@@ -716,6 +731,35 @@ random_timeout_cb (PrefsWidget *prefs_widget)
 		/* Handles both "l initially NULL" and "end of list" */
 		if (!l)
 			l = prefs_widget->screensavers;
+		old = l;
+		/* Strip out vidwhacker and webcollage -- don't want to sneak
+		 * those into a random mode if the user didn't select them.
+		 * Especially as a preview. */
+		while (l)
+		{
+			if (skippedwc && skippedvw && old == l)
+			{
+				show_blank_preview ();
+				return FALSE;
+			}
+			if (!strcmp (((Screensaver*)l->data)->name, "webcollage"))
+			{
+				skippedwc = TRUE;
+				l = l->next;
+				if (!l)
+					l = prefs_widget->screensavers;
+				continue;
+			}
+			if (!strcmp (((Screensaver*)l->data)->name, "vidwhacker"))
+			{
+				skippedvw = TRUE;
+				l = l->next;
+				if (!l)
+					l = prefs_widget->screensavers;
+				continue;
+			}
+			break;
+		}
 	}
 	else
 	/* Skip the non-enabled ones */
@@ -813,6 +857,14 @@ popup_item_menu (ETable *table,
 }
 
 static void
+double_click_cb (ETable *table,
+		 int row, int col, GdkEvent *event,
+		 PrefsWidget *prefs_widget)
+{
+	settings_cb (NULL, prefs_widget);
+}
+
+static void
 about_cb (GtkWidget *widget, PrefsWidget *prefs_widget)
 {
 	gchar *title;
@@ -823,7 +875,11 @@ about_cb (GtkWidget *widget, PrefsWidget *prefs_widget)
 	label = gtk_label_new (desc);
 	gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
 	
+#if 0
 	name = screensaver_get_label (prefs_widget->selected_saver->name);
+#endif
+	name = g_strdup (prefs_widget->selected_saver->label);
+	
 	title = g_strdup_printf ("About %s\n", name);
 	g_free (name);
 	
@@ -844,6 +900,19 @@ about_cb (GtkWidget *widget, PrefsWidget *prefs_widget)
 }
 
 static void
+prefs_ok_cb (ScreensaverPrefsDialog *dlg, PrefsWidget *widget)
+{
+	if (dlg->saver == widget->selected_saver)
+		show_preview (widget->selected_saver);
+}
+
+static void
+prefs_demo_cb (ScreensaverPrefsDialog *dlg, PrefsWidget *widget)
+{
+	show_preview (widget->selected_saver);
+}
+
+static void
 settings_cb (GtkWidget *button, PrefsWidget *widget) 
 {
 	GtkWidget *dialog;
@@ -851,14 +920,12 @@ settings_cb (GtkWidget *button, PrefsWidget *widget)
 	if (!widget->selected_saver) return;
 
 	dialog = screensaver_prefs_dialog_new (widget->selected_saver);
-#if 0
-	gtk_signal_connect (GTK_OBJECT (dialog), "ok-clicked",
-			    GTK_SIGNAL_FUNC (screensaver_prefs_ok_cb), 
+	gtk_signal_connect_after (GTK_OBJECT (dialog), "ok-clicked",
+			    GTK_SIGNAL_FUNC (prefs_ok_cb), 
 			    widget);
-	gtk_signal_connect (GTK_OBJECT (dialog), "demo",
+	gtk_signal_connect_after (GTK_OBJECT (dialog), "demo",
 			    GTK_SIGNAL_FUNC (prefs_demo_cb), 
 			    widget);
-#endif
 	gtk_widget_show_all (dialog);
 }
 

@@ -30,8 +30,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/stat.h>
+#include <sys/types.h>
+#include <dirent.h>
 
 #include <gnome.h>
+#include <parser.h>
 
 #include "preferences.h"
 #include "preview.h"
@@ -98,7 +101,7 @@ read_prefs_from_db (Preferences *prefs)
 
 	if (value) {
 		tmp = g_strdup (value);
-		prefs->screensavers = parse_screensaver_list (tmp);
+		parse_screensaver_list (prefs->savers_hash, tmp);
 		g_free (tmp);
 	}
 }
@@ -155,12 +158,79 @@ store_prefs_in_db (Preferences *prefs)
 		       write_screensaver_list (prefs->screensavers));
 }
 
+static GList*
+screensaver_list_prepend_dir (GHashTable *savers_hash,
+			      GList *l, const gchar *dirname)
+{
+	DIR *dir;
+	struct dirent *dent;
+	gchar *filename;
+	Screensaver *saver;
+
+	g_return_val_if_fail (savers_hash != NULL, NULL);
+	g_return_val_if_fail (dirname != NULL, NULL);
+
+	dir = opendir (dirname);
+	if (!dir)
+		return l;
+
+	while ((dent = readdir (dir)))
+	{
+		if (dent->d_name[0] == '.')
+			continue;
+
+		filename = g_concat_dir_and_file (dirname, dent->d_name);
+		saver = screensaver_new_from_file (filename);
+		if (saver)
+		{
+			l = g_list_prepend (l, saver);
+			g_hash_table_insert (savers_hash,
+					     saver->name, saver);
+			saver->link = l;
+		}
+		g_free (filename);
+	}
+
+	return l;
+}
+
+static gint
+screensaver_cmp_func (gconstpointer a, gconstpointer b)
+{
+	const Screensaver *s1 = a;
+	const Screensaver *s2 = b;
+
+	return strcmp (s1->name, s2->name);
+}
+
+static GList*
+screensaver_list_load (GHashTable *savers_hash)
+{
+	GList *l = NULL;
+	
+	gchar *userdir;
+
+	l = screensaver_list_prepend_dir (savers_hash,
+					  l, GNOMECC_SCREENSAVERS_DIR);
+       	
+	userdir = g_concat_dir_and_file (g_get_home_dir (), ".screensavers");
+	l = screensaver_list_prepend_dir (savers_hash,
+					  l, userdir);
+	g_free (userdir);
+
+	/* FIXME: Does not work with utf8 */
+	l = g_list_sort (l, screensaver_cmp_func);
+	return l;
+}
+
 Preferences *
 preferences_new (void) 
 {
 	Preferences *prefs;
 
 	prefs = g_new0 (Preferences, 1);
+
+	prefs->savers_hash = g_hash_table_new (g_str_hash, g_str_equal);
 
 	/* Load default values */
 	preferences_load_from_xrdb (prefs);
@@ -187,6 +257,8 @@ preferences_clone (Preferences *prefs)
 	Preferences *new_prefs;
 
 	new_prefs = g_new0 (Preferences, 1);
+	
+	new_prefs->savers_hash = g_hash_table_new (g_str_hash, g_str_equal);
 
 	new_prefs->config_db = g_tree_new ((GCompareFunc) strcmp);
 
@@ -219,7 +291,35 @@ preferences_destroy (Preferences *prefs)
 	}
 
 	if (prefs->programs_list) g_free (prefs->programs_list);
+	g_hash_table_destroy (prefs->savers_hash);
 	g_free (prefs);
+}
+
+static void
+clean_saver_list (Preferences *prefs)
+{
+	GList *l, *next;
+	Screensaver *saver;
+	
+	l = prefs->screensavers;
+	while (l)
+	{
+		saver = l->data;
+	
+		if ((saver->command_line
+		 && !rc_command_exists (saver->command_line))
+		 || (saver->compat_command_line
+		 && !rc_command_exists (saver->compat_command_line))
+		 || !(saver->command_line || saver->compat_command_line))
+		{
+			prefs->invalidsavers = g_list_append (prefs->invalidsavers, l->data); 
+			next = l->next;
+			prefs->screensavers = g_list_remove_link (prefs->screensavers, l);
+			l = next;
+			continue;
+		}
+		l = l->next;
+	}
 }
 
 void
@@ -230,7 +330,11 @@ preferences_load (Preferences *prefs)
 	if (!preferences_load_from_file (prefs))
 		preferences_load_from_xrdb (prefs);
 
+	g_assert (prefs->screensavers == NULL);
+	prefs->screensavers = screensaver_list_load (prefs->savers_hash);
+
 	read_prefs_from_db (prefs);
+	clean_saver_list (prefs);
 
 	prefs->selection_mode =
 		gnome_config_get_int ("/Screensaver/Default/selection_mode=3");
@@ -325,8 +429,10 @@ preferences_read_xml (xmlDocPtr xml_doc)
 			prefs->lock_timeout = xml_read_int (node);
 		else if (!strcmp (node->name, "cycle"))
 			prefs->cycle = xml_read_int (node);
+#if 0
 		else if (!strcmp (node->name, "programs"))
 			prefs->screensavers = xml_get_programs_list (node);
+#endif
 		else if (!strcmp (node->name, "selection-mode"))
 			prefs->selection_mode = xml_read_int (node);
 		else if (!strcmp (node->name, "use-dpms"))
@@ -449,12 +555,50 @@ screensaver_remove (Screensaver *saver, GList *screensavers)
 
 	return g_list_remove_link (screensavers, saver->link);
 }
+#if 0
+static void
+parse_select_default (GString *s, xmlNodePtr node)
+{
+	for (node = node->childs; node != NULL; node = node->next)
+	{
+		if (strcmp (node->name, "option"))
+			continue;
+		if (xmlGetProp (node, "test"))
+			continue;
+		g_string_append (s, xmlGetProp (node, ""
+	}
+}
+#endif
+
+static void
+parse_arg_default (GString *s, xmlNodePtr node)
+{
+	gchar *arg;
+	gchar *val;
+	gchar **arr;
+	
+	arg = g_strdup (xmlGetProp (node, "arg"));
+	val = g_strdup (xmlGetProp (node, "default"));
+	if (!val)
+		return;
+	arr = g_strsplit (arg, "%", -1);
+	if (!arr)
+		return;
+
+	g_string_append_c (s, ' ');
+	g_string_append (s, arr[0]);
+	g_string_append (s, val);
+	if (arr[1] && arg[2])
+		g_string_append (s, arr[2]);
+}
 
 Screensaver *
 screensaver_read_xml (xmlNodePtr saver_node) 
 {
 	Screensaver *saver;
 	xmlNodePtr node;
+	GString *args;
+	gboolean have_args = FALSE;
 
 	if (strcmp (saver_node->name, "screensaver"))
 		return NULL;
@@ -462,20 +606,56 @@ screensaver_read_xml (xmlNodePtr saver_node)
 	saver = screensaver_new ();
 	saver->enabled = FALSE;
 
+	saver->name = g_strdup (xmlGetProp (saver_node, "name"));
 	saver->label = g_strdup (xmlGetProp (saver_node, "_label"));
 
+	args = g_string_new (saver->name);
+
 	for (node = saver_node->childs; node; node = node->next) {
-		if (!strcmp (node->name, "name"))
-			saver->name = g_strdup (xmlNodeGetContent (node));
-		else if (!strcmp (node->name, "command-line"))
+		if (!strcmp (node->name, "command-line"))
 			saver->command_line =
 				g_strdup (xmlNodeGetContent (node));
 		else if (!strcmp (node->name, "visual"))
 			saver->visual = g_strdup (xmlNodeGetContent (node));
 		else if (!strcmp (node->name, "enabled"))
 			saver->enabled = xml_read_bool (node);
+		else if (!strcmp (node->name, "_description"))
+			saver->description = g_strdup (xmlNodeGetContent (node));
+		else if (!strcmp (node->name, "fullcommand"))
+			saver->compat_command_line = g_strconcat (saver->name, " ",  xmlGetProp (node, "arg"), NULL);
+		else if (!strcmp (node->name, "number"))
+		{
+			parse_arg_default (args, node);
+			have_args = TRUE;
+		}
+		else if (!strcmp (node->name, "command"))
+		{
+			g_string_append_c (args, ' ');
+			g_string_append (args, xmlGetProp (node, "arg"));
+			have_args = TRUE;
+		}
+		else if (!strcmp (node->name, "fakepreview"))
+		{
+			saver->fakepreview = g_concat_dir_and_file (GNOMECC_PIXMAPS_DIR "/screensavers", xmlNodeGetContent (node));
+		}
+		else if (!strcmp (node->name, "fake"))
+		{
+			saver->fakes = g_list_append (saver->fakes, g_strdup (xmlGetProp (node, "name")));
+		}
 	}
 
+	if (have_args)
+	{
+		if (saver->compat_command_line)
+		{
+			g_warning ("Huh? Argument metadata and a fullcommand?");
+		}
+		else
+			saver->command_line = g_strdup (args->str);
+	}
+
+	g_string_free (args, TRUE);
+	
 	return saver;
 }
 
@@ -494,6 +674,35 @@ screensaver_write_xml (Screensaver *saver)
 
 	return saver_node;
 }
+
+Screensaver *
+screensaver_new_from_file (const gchar *filename)
+{
+	Screensaver *saver;
+	xmlDocPtr doc;
+	xmlNodePtr node;
+	
+	g_return_val_if_fail (filename != NULL, NULL);
+
+	doc = xmlParseFile (filename);
+	if (!doc)
+		return NULL;
+
+	node = doc->root;
+	if (!node)
+	{
+		xmlFreeDoc (doc);
+		return NULL;
+	}
+	
+	saver = screensaver_read_xml (node);
+	if (saver)
+		saver->filename = g_strdup (filename);
+	xmlFreeDoc (doc);
+
+	return saver;
+}
+
 
 char *
 screensaver_get_desc (Screensaver *saver) 

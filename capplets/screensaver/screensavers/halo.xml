@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
-<screensaver name="halo">
+<screensaver name="halo" _label="Halo">
 
     <command arg="-root"/>
 
     <number _label="Number of Colors." _low-label="Colors:" id="colors"
-            type="spinbutton" default="100" arg="-ncolors %" low="1"
+            type="spinbutton" default="100" arg="-colors %" low="1"
             high="256"/>
 
     <number _label="Number of circles to use." _low-label="Count:"
@@ -28,4 +28,5 @@
     <boolean _label="Cycle through colormap." arg-unset="-no-cycle"
              id="cycle" arg-set="-cycle"/>
 
+    <_description>This draws trippy psychedelic circular patterns that hurt to look at.  It can also animate the control-points, but that takes a lot of CPU and bandwidth.  Written by Jamie Zawinski.</_description>
 </screensaver>

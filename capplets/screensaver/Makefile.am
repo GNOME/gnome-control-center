@@ -19,7 +19,7 @@ screensaver_properties_capplet_SOURCES = \
 	resources.c				resources.h\
 	XScreenSaver_ad.h
 
-pixmaps_DATA = no-hack.png blank-screen.png 
+pixmaps_DATA = no-hack.png blank-screen.png screen.png 
 
 ##
 ## You should not need to modify anything below this line
@@ -39,7 +39,7 @@ install-data-am: install-data-local
 
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
-EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST) no-hack.png
+EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST) $(pixmaps_DATA) 
 iconsdir   = $(GNOMECC_ICONS_DIR)
 Gladedir   = $(GNOMECC_GLADE_DIR)
 pixmapsdir = $(GNOMECC_PIXMAPS_DIR)

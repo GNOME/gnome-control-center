@@ -32,7 +32,7 @@ double    parse_float_resource    (char *res);
 guint     parse_time_resource     (char *res, gboolean sec);
 guint     parse_seconds_resource  (char *res);
 gdouble   parse_minutes_resource  (char *res);
-GList    *parse_screensaver_list  (char *list);
+void      parse_screensaver_list  (GHashTable *savers_hash, char *list);
 
 gchar    *write_boolean           (gboolean value);
 gchar    *write_integer           (gint value);
@@ -46,5 +46,7 @@ gchar    *write_screensaver_list  (GList *screensavers);
 int       string_columns          (const char *string, int length, int start);
 
 GList    *get_screensaver_dir_list (void);
+
+gboolean  rc_command_exists       (char *command);
 
 #endif /* __RC_PARSE_H */

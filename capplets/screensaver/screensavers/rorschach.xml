@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
-<screensaver name="rorschach">
+<screensaver name="rorschach" _label="Rorschach">
 	<command arg="-root"/>
 	<number id="iterations" _label="Number of Iterations" _low-label="Small" _high-label="Large" type="slider" low="0" high="2000" default="1500" arg="-iterations %" from-cli-conv="var / 200" to-cli-conv="var * 200"/>
 	<number id="offset" _label="Offset" _low-label="Small" _high-label="Large" type="slider" low="0" high="50" default="10" arg="-offset %"/>
@@ -8,4 +8,5 @@
 	<boolean id="ysymmetry" _label="With Y-axis Symmetry" arg-set="-ysymmetry" />
 	<number id="delay" _label="Delay before next redraw" _low-label="Short" _high-label="Long" type="slider" low="0" high="50" default="5"  arg="-delay %" />
 	<number id="erase" _label="Speed to clear the screen" type="spinbutton" low="0" high="20" default="3" arg="-erase-speed %" />
+    <_description>This generates random inkblot patterns.  The algorithm is deceptively simple for how well it works; it merely walks a dot around the screen randomly, and then reflects the image horizontally, vertically, or both.  Any deep-seated neurotic tendencies which this program reveals are your own problem.  Written by Jamie Zawinski.</_description>
 </screensaver>

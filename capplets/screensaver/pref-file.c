@@ -417,6 +417,115 @@ write_preference_cb (gchar *key, gchar *value, FILE *out)
 	return FALSE;
 }
 
+static gchar*
+print_aligned_row (const gchar *lbl, const gchar *cmd, gboolean enabled)
+{
+	int len;
+	int ntab, nspc;
+	gchar *tab, *spc;
+	gchar *buf;
+
+	len = strlen (lbl) + 2; /* Quotes */
+	ntab = (30 - len) / 8;
+	nspc = (30 - len) % 8;
+	tab = g_strnfill (ntab, '\t');
+	spc = g_strnfill (nspc, ' ');
+	buf = g_strdup_printf ("%s%s%s\"%s\"  %s\n",
+			       (enabled) ? "" : "-",
+			       tab, spc,
+			       lbl, cmd);
+	g_free (tab);
+	g_free (spc);
+
+	return buf;
+}
+
+static gchar*
+print_list_to_str (Preferences *prefs)
+{
+	gchar *lbl, *cmd, *buf;
+	gchar *ret;
+	Screensaver *saver;
+	GList *l, *fake;
+	GString *s;
+	gboolean enabled;
+
+	s = g_string_new ("");
+
+	for (l = prefs->screensavers; l != NULL; l = l->next)
+	{
+		saver = l->data;
+
+		if (saver->command_line)
+			cmd = saver->command_line;
+		else if (saver->compat_command_line)
+			cmd = saver->compat_command_line;
+		else
+			continue;
+
+		if (prefs->selection_mode == SM_CHOOSE_RANDOMLY)
+		{
+			/* I wouldn't want these running unless I'd
+			 * explicitly enabled them */
+			if (!strcmp (saver->name, "webcollage")
+			 || !strcmp (saver->name, "vidwhacker"))
+				enabled = FALSE;
+			else
+				enabled = TRUE;
+		}
+		else 
+			enabled = saver->enabled;
+		if (saver->label)
+			lbl = saver->label;
+		else
+			lbl = saver->name;
+
+		buf = print_aligned_row (lbl, cmd, enabled);
+		g_string_append (s, buf);
+		g_free (buf);
+
+		for (fake = saver->fakes; fake != NULL; fake = fake->next)
+		{
+			buf = print_aligned_row (fake->data, cmd, FALSE);
+			g_string_append (s, buf);
+			g_free (buf);
+		}
+	}
+	
+	for (l = prefs->invalidsavers; l != NULL; l = l->next)
+	{	
+		saver = l->data;
+
+		if (saver->command_line)
+			cmd = saver->command_line;
+		else if (saver->compat_command_line)
+			cmd = saver->compat_command_line;
+		else
+			cmd = "/bin/true";
+
+		if (saver->label)
+			lbl = saver->label;
+		else
+			lbl = saver->name;
+
+		buf = print_aligned_row (lbl, cmd, FALSE);
+		g_string_append (s, buf);
+		g_free (buf);
+
+		for (fake = saver->fakes; fake != NULL; fake = fake->next)
+		{
+			buf = print_aligned_row (fake->data, cmd, FALSE);
+			g_string_append (s, buf);
+			g_free (buf);
+		}
+	}
+
+	ret = s->str;
+	g_string_free (s, FALSE);
+	
+	return ret;
+}
+
 /* Adapted from xscreensaver 3.24 driver/prefs.c line 537 ... */
 
 gint 
@@ -427,6 +536,7 @@ preferences_save_to_file (Preferences *prefs)
 	const char *tmp_name = init_file_tmp_name();
 	char *n2 = chase_symlinks (name);
 	struct stat st;
+	gchar *progs, *oldprogs;
 
 	FILE *out;
 
@@ -484,6 +594,15 @@ preferences_save_to_file (Preferences *prefs)
 			 "\n",
 			 "XScreenSaver", "xscreensaver", "3.24", whoami, timestr);
 	}
+
+	/* Ok this is lame, but it is easier than rewriting stuff */
+	progs = print_list_to_str (prefs);
+	oldprogs = g_tree_lookup (prefs->config_db, "programs");
+	/* Is this the right way of doing it? */
+	g_tree_remove (prefs->config_db, "programs");
+	if (oldprogs)
+		g_free (oldprogs);
+	g_tree_insert (prefs->config_db, "programs", progs);
 
 	g_tree_traverse (prefs->config_db, 
 			 (GTraverseFunc) write_preference_cb,
