@@ -678,7 +678,7 @@ init_mime_capplet (const char *scroll_to_mime_type)
         hbox = gtk_hbox_new (FALSE, GNOME_PAD);
         gtk_box_pack_start (GTK_BOX (main_vbox), hbox, TRUE, TRUE, 0);
         mime_list_container = create_mime_list_and_scroller ();
-        gtk_box_pack_start (GTK_BOX (hbox), mime_list_container, TRUE, TRUE, 0);         
+        gtk_box_pack_start (GTK_BOX (hbox), mime_list_container, TRUE, TRUE, 0);
 	
 	vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
         gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 0);
@@ -839,9 +839,15 @@ init_mime_capplet (const char *scroll_to_mime_type)
 	/* Make columns all fit within capplet list view bounds */
 	list_width = GTK_WIDGET (mime_list)->allocation.width;
 	column_width = list_width / TOTAL_COLUMNS;
+	for (index = 0; index < TOTAL_COLUMNS; index++) 
+		gtk_clist_set_column_auto_resize (GTK_CLIST (mime_list), index, TRUE);
+#if 0
+	/* This is not working */
 	for (index = 0; index < TOTAL_COLUMNS; index++) {
+		g_print ("Setting column %i with to %d\n", index, column_width);
 		gtk_clist_set_column_width (GTK_CLIST (mime_list), index, column_width);
 	}
+#endif
 
         /* Setup capplet signals */
         gtk_signal_connect(GTK_OBJECT(capplet), "ok",
@@ -1872,13 +1878,14 @@ create_mime_list_and_scroller (void)
         gchar *titles[TOTAL_COLUMNS];
 	GList *type_list;
 	int index;
-	        
+	
         titles[0] = _("Description");
         titles[1] = _("MIME Type");
         titles[2] = _("Extension");
         titles[3] = _("Default Action");
         
         window = gtk_scrolled_window_new (NULL, NULL);
+	gtk_widget_set_usize (window, 500, 200);
         gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (window),
                                         GTK_POLICY_AUTOMATIC,
                                         GTK_POLICY_AUTOMATIC);
