@@ -39,8 +39,6 @@
 
 #include "gnome-keyboard-properties-xkb.h"
 
-static int itemCounter;
-
 char *
 xci_desc_to_utf8 (XklConfigItem * ci)
 {
@@ -126,24 +124,43 @@ static void
 add_model_to_option_menu (const XklConfigItemPtr configItem,
 			  GtkWidget * menu)
 {
+	GList *existingItemNode = GTK_MENU_SHELL (menu)->children;
 	char *utfModelName = xci_desc_to_utf8 (configItem);
 	GtkWidget *menuItem = gtk_menu_item_new_with_label (utfModelName);
-	g_object_set_data (G_OBJECT (menuItem), "itemNo",
-			   GINT_TO_POINTER (itemCounter++));
+	int position = 0;
 	g_object_set_data_full (G_OBJECT (menuItem), "itemId",
 				g_strdup (configItem->name),
 				(GDestroyNotify) g_free);
+	for (; existingItemNode != NULL;
+	     position++, existingItemNode = existingItemNode->next) {
+		GtkWidget *menuItem = GTK_WIDGET (existingItemNode->data);
+		GtkWidget *lbl = GTK_BIN (menuItem)->child;
+		const char *txt = gtk_label_get_text (GTK_LABEL (lbl));
+		if (g_strcasecmp (txt, utfModelName) > 0)
+			break;
+	}
 	g_free (utfModelName);
-	gtk_menu_append (GTK_MENU (menu), GTK_WIDGET (menuItem));
+	gtk_menu_shell_insert (GTK_MENU_SHELL (menu),
+			       GTK_WIDGET (menuItem), position);
 }
 
 static void
 fill_models_option_menu (GladeXML * dialog)
 {
 	GtkWidget *menu = gtk_menu_new ();
-	itemCounter = 0;
+	int itemCounter = 0;
+	GList *items;
 	XklConfigEnumModels ((ConfigItemProcessFunc)
 			     add_model_to_option_menu, menu);
+
+	items = GTK_MENU_SHELL (menu)->children;
+	while (items != NULL) {
+		GtkWidget *menuItem = GTK_WIDGET (items->data);
+		g_object_set_data (G_OBJECT (menuItem), "itemNo",
+				   GINT_TO_POINTER (itemCounter++));
+		items = items->next;
+	}
+
 	gtk_option_menu_set_menu (GTK_OPTION_MENU (WID ("xkb_models")),
 				  GTK_WIDGET (menu));
 	gtk_widget_show_all (menu);
