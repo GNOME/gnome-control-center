@@ -55,7 +55,7 @@ struct _BackendListClass
 	POA_ConfigArchiver_BackendList__epv epv;
 };
 
-guint         backend_list_get_type    (void);
+GType         backend_list_get_type    (void);
 
 BonoboObject *backend_list_new         (gboolean is_global);
 

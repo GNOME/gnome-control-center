@@ -43,10 +43,10 @@ static widget_desc_t widget_desc[] = {
 static void prefs_widget_dialogs_init (PrefsWidgetDialogs *prefs_widget_dlgs);
 static void prefs_widget_dialogs_class_init (PrefsWidgetDialogsClass *class);
 
-guint
+GType
 prefs_widget_dialogs_get_type (void)
 {
-	static guint prefs_widget_dialogs_type = 0;
+	static GType prefs_widget_dialogs_type = 0;
 
 	if (!prefs_widget_dialogs_type) {
 		GtkTypeInfo prefs_widget_dialogs_info = {

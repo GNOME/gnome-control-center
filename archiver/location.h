@@ -63,7 +63,7 @@ struct _LocationClass
 				 xmlDocPtr xml_doc);
 };
 
-guint           location_get_type                     (void);
+GType           location_get_type                     (void);
 
 BonoboObject   *location_new                          (Archive         *archive, 
 						       const gchar     *locid, 

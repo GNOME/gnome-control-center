@@ -80,10 +80,10 @@ static SlaveHost  *slave_host_new            (gchar *hostname);
 static SlaveHost  *slave_host_read_xml       (xmlNodePtr node);
 static xmlNodePtr  slave_host_write_xml      (SlaveHost *host);
 
-guint
+GType
 cluster_get_type (void)
 {
-	static guint cluster_type = 0;
+	static GType cluster_type = 0;
 
 	if (!cluster_type) {
 		GtkTypeInfo cluster_info = {

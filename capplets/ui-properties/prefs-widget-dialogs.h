@@ -47,7 +47,7 @@ struct _PrefsWidgetDialogsClass
 	PrefsWidgetClass parent_class;
 };
 
-guint prefs_widget_dialogs_get_type (void);
+GType prefs_widget_dialogs_get_type (void);
 
 GtkWidget *prefs_widget_dialogs_new         (Preferences *prefs);
 

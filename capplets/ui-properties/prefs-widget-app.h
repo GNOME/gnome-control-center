@@ -47,7 +47,7 @@ struct _PrefsWidgetAppClass
 	PrefsWidgetClass parent_class;
 };
 
-guint prefs_widget_app_get_type (void);
+GType prefs_widget_app_get_type (void);
 
 GtkWidget *prefs_widget_app_new         (Preferences *prefs);
 

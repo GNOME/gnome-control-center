@@ -85,11 +85,11 @@ static gint time_to_x                    (time_t t, gint width);
 static gint horner                       (gint *coeff, gint degree, 
 					  gint divisor, gint x);
 
-guint
+GType
 rollback_control_get_type (void)
 {
-	static guint rollback_control_type = 0;
-
+	static GType rollback_control_type = 0;
+	
 	if (!rollback_control_type) {
 		GtkTypeInfo rollback_control_info = {
 			"RollbackControl",

@@ -54,7 +54,7 @@ struct _PrefsWidgetClass
 	CappletWidgetClass parent_class;
 };
 
-guint prefs_widget_get_type (void);
+GType prefs_widget_get_type (void);
 
 GtkWidget *prefs_widget_new         (Preferences *prefs);
 

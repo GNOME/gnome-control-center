@@ -54,10 +54,10 @@ static void rollback_widget_finalize    (GtkObject *object);
 static void rollback_widget_realize     (GtkWidget *widget);
 static void rollback_widget_unrealize   (GtkWidget *widget);
 
-guint
+GType
 rollback_widget_get_type (void)
 {
-	static guint rollback_widget_type = 0;
+	static GType rollback_widget_type = 0;
 
 	if (!rollback_widget_type) {
 		GtkTypeInfo rollback_widget_info = {

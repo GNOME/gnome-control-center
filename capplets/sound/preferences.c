@@ -79,10 +79,10 @@ static SoundEvent *sound_event_read_xml  (xmlNodePtr event_node);
 
 static void start_esd                    (void);
 
-guint
+GType
 preferences_get_type (void)
 {
-	static guint preferences_type = 0;
+	static GType preferences_type = 0;
 
 	if (!preferences_type) {
 		GtkTypeInfo preferences_info = {

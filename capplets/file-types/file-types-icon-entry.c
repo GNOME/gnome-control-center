@@ -41,10 +41,10 @@ static GtkVBoxClass *parent_class;
 
 static GtkTargetEntry drop_types[] = { { "text/uri-list", 0, 0 } };
 
-guint
+GType
 nautilus_mime_type_icon_entry_get_type (void)
 {
-	static guint icon_entry_type = 0;
+	static GType icon_entry_type = 0;
 
 	if (!icon_entry_type) {
 		GtkTypeInfo icon_entry_info = {

@@ -50,7 +50,7 @@ struct _ClusterLocationClass
 	LocationClass location_class;
 };
 
-guint cluster_location_get_type         (void);
+GType cluster_location_get_type         (void);
 
 GtkObject *cluster_location_new         (void);
 

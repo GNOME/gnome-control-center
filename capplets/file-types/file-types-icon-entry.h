@@ -46,7 +46,7 @@ struct _NautilusMimeIconEntryClass {
 };
 
 
-guint      nautilus_mime_type_icon_entry_get_type    (void);
+GType      nautilus_mime_type_icon_entry_get_type    (void);
 GtkWidget *nautilus_mime_type_icon_entry_new         (const gchar *history_id,
 					 const gchar *browse_dialog_title);
 

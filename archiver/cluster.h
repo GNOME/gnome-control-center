@@ -52,7 +52,7 @@ struct _ClusterClass
 	ArchiveClass archive_class;
 };
 
-guint      cluster_get_type          (void);
+GType      cluster_get_type          (void);
 
 GtkObject *cluster_new               (gchar         *prefix);
 GtkObject *cluster_load              (gchar         *prefix);

@@ -57,7 +57,7 @@ struct _ArchiveClass
 	POA_ConfigArchiver_Archive__epv epv;
 };
 
-guint         archive_get_type                (void);
+GType         archive_get_type                (void);
 
 gboolean      archive_construct               (Archive                       *archive,
 					       gboolean                       is_new);

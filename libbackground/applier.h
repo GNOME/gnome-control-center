@@ -56,7 +56,7 @@ struct _BGApplierClass
 	GObjectClass klass;
 };
 
-guint      bg_applier_get_type             (void);
+GType      bg_applier_get_type             (void);
 
 GObject   *bg_applier_new                  (BGApplierType          type);
 GObject   *bg_applier_new_at_size          (BGApplierType          type,

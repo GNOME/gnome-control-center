@@ -54,7 +54,7 @@ struct _ConfigLogClass
 	GtkObjectClass parent;
 };
 
-guint      config_log_get_type                 (void);
+GType      config_log_get_type                 (void);
 
 GtkObject *config_log_open                     (Location            *location);
 void       config_log_delete                   (ConfigLog           *config_log);

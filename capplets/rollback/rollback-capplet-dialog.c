@@ -106,10 +106,10 @@ static void      apply_cb                           (GtkButton                  
 static void      close_cb                           (GtkButton                  *button,
 						     RollbackCappletDialog      *dialog);
 
-guint
+GType
 rollback_capplet_dialog_get_type (void)
 {
-	static guint rollback_capplet_dialog_type = 0;
+	static GType rollback_capplet_dialog_type = 0;
 
 	if (!rollback_capplet_dialog_type) {
 		GtkTypeInfo rollback_capplet_dialog_info = {

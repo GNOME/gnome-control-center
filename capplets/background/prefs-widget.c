@@ -90,10 +90,10 @@ static void adjust_opacity_toggled_cb    (GtkToggleButton *tb,
 static void opacity_adjust_changed_cb    (GtkAdjustment *adjustment,
 					  PrefsWidget *prefs_widget);
 
-guint
+GType
 prefs_widget_get_type (void)
 {
-	static guint prefs_widget_type = 0;
+	static GType prefs_widget_type = 0;
 
 	if (!prefs_widget_type) {
 		GtkTypeInfo prefs_widget_info = {

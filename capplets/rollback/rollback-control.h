@@ -49,7 +49,7 @@ struct _RollbackControlClass
 	GnomeCanvasItemClass gnome_canvas_item_class;
 };
 
-guint rollback_control_get_type         (void);
+GType rollback_control_get_type         (void);
 
 END_GNOME_DECLS
 

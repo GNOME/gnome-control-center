@@ -79,10 +79,10 @@ static void events_tree_select_cb         (GtkCTree *ctree,
 static void sound_file_entry_changed_cb   (GtkEntry *entry, 
 					   PrefsWidget *prefs_widget);
 
-guint
+GType
 prefs_widget_get_type (void)
 {
-	static guint prefs_widget_type = 0;
+	static GType prefs_widget_type = 0;
 
 	if (!prefs_widget_type) {
 		GtkTypeInfo prefs_widget_info = {

@@ -103,10 +103,10 @@ static void prefs_widget_response_cb	  (PrefsWidget *prefs_widget, GtkResponseTy
 
 #define CAPPLET_WIDGET(x) GTK_DIALOG(x)
 
-guint
+GType
 prefs_widget_get_type (void)
 {
-	static guint prefs_widget_type = 0;
+	static GType prefs_widget_type = 0;
 
 	if (!prefs_widget_type) {
 		GtkTypeInfo prefs_widget_info = {

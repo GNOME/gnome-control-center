@@ -67,10 +67,10 @@ static gboolean host_cb                      (Cluster *cluster,
 					      gchar *hostname,
 					      pair_t *pair);
 
-guint
+GType
 cluster_location_get_type (void)
 {
-	static guint cluster_location_type = 0;
+	static GType cluster_location_type = 0;
 
 	if (!cluster_location_type) {
 		GtkTypeInfo cluster_location_info = {

@@ -49,7 +49,7 @@ struct _RollbackCappletDialogClass
 	GnomeDialogClass gnome_dialog_class;
 };
 
-guint rollback_capplet_dialog_get_type         (void);
+GType rollback_capplet_dialog_get_type         (void);
 
 GtkObject *rollback_capplet_dialog_new         (gchar *capplet_name);
 

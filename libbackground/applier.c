@@ -181,10 +181,10 @@ static gboolean cleanup_cb           (BGApplier *bg_applier);
 static void preview_realized_cb      (GtkWidget *preview,
 				      BGApplier *bg_applier);
 
-guint
+GType
 bg_applier_get_type (void)
 {
-	static guint bg_applier_type = 0;
+	static GType bg_applier_type = 0;
 
 	if (!bg_applier_type) {
 		static GTypeInfo bg_applier_info = {

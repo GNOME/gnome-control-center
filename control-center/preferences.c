@@ -51,10 +51,10 @@ static void gnomecc_preferences_class_init (GnomeCCPreferencesClass *klass);
 
 static void set_single_window_controls_sensitive (GladeXML *data, gboolean s);
 
-guint
+GType
 gnomecc_preferences_get_type (void) 
 {
-	static guint gnomecc_preferences_type;
+	static GType gnomecc_preferences_type;
 
 	if (!gnomecc_preferences_type) {
 		static const GTypeInfo gnomecc_preferences_info = {

@@ -118,10 +118,10 @@ static void       config_log_entry_destroy      (ConfigLogEntry  *entry);
 static void       dump_file                     (FILE            *input,
 						 FILE            *output);
 
-guint
+GType
 config_log_get_type (void) 
 {
-	static guint config_log_type;
+	static GType config_log_type;
 
 	if (!config_log_type) {
 		GtkTypeInfo config_log_info = {

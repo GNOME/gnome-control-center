@@ -47,10 +47,10 @@ static widget_desc_t widget_desc[] = {
 static void prefs_widget_app_init         (PrefsWidgetApp *prefs_widget_app);
 static void prefs_widget_app_class_init   (PrefsWidgetAppClass *class);
 
-guint
+GType
 prefs_widget_app_get_type (void)
 {
-	static guint prefs_widget_app_type = 0;
+	static GType prefs_widget_app_type = 0;
 
 	if (!prefs_widget_app_type) {
 		GtkTypeInfo prefs_widget_app_info = {

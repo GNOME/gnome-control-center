@@ -68,7 +68,7 @@ struct _PreferencesClass
 	GtkObjectClass klass;
 };
 
-guint        preferences_get_type   (void);
+GType        preferences_get_type   (void);
 
 GtkObject   *preferences_new        (void);
 GtkObject   *preferences_clone      (Preferences *prefs);

@@ -58,7 +58,7 @@ struct _GnomeCCPreferencesClass
 	void (*changed) (GnomeCCPreferences *);
 };
 
-guint gnomecc_preferences_get_type (void);
+GType gnomecc_preferences_get_type (void);
 
 GnomeCCPreferences *gnomecc_preferences_new (void);
 GnomeCCPreferences *gnomecc_preferences_clone (GnomeCCPreferences *prefs);

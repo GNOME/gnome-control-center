@@ -85,7 +85,7 @@ struct _PrefsWidgetClass
 	widget_desc_t *widget_desc;
 };
 
-guint prefs_widget_get_type (void);
+GType prefs_widget_get_type (void);
 
 GtkWidget *prefs_widget_new         (Preferences *prefs);
 

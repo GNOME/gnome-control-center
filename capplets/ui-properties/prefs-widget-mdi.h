@@ -47,7 +47,7 @@ struct _PrefsWidgetMDIClass
 	PrefsWidgetClass parent_class;
 };
 
-guint prefs_widget_mdi_get_type (void);
+GType prefs_widget_mdi_get_type (void);
 
 GtkWidget *prefs_widget_mdi_new         (Preferences *prefs);
 

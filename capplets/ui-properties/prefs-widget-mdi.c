@@ -40,10 +40,10 @@ static widget_desc_t widget_desc[] = {
 static void prefs_widget_mdi_init         (PrefsWidgetMDI *prefs_widget_mdi);
 static void prefs_widget_mdi_class_init   (PrefsWidgetMDIClass *class);
 
-guint
+GType
 prefs_widget_mdi_get_type (void)
 {
-	static guint prefs_widget_mdi_type = 0;
+	static GType prefs_widget_mdi_type = 0;
 
 	if (!prefs_widget_mdi_type) {
 		GtkTypeInfo prefs_widget_mdi_info = {

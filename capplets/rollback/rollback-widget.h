@@ -58,7 +58,7 @@ struct _RollbackWidgetClass
 	GnomeCanvasClass gnome_canvas_class;
 };
 
-guint rollback_widget_get_type         (void);
+GType rollback_widget_get_type         (void);
 
 GtkObject *rollback_widget_new         (void);
 
