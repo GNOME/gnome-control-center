@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.2.0\n"
-"POT-Creation-Date: 2001-03-12 15:42+0100\n"
+"POT-Creation-Date: 2001-03-15 10:16+0100\n"
 "PO-Revision-Date: Mon Dec 20 1999 21:34:11+0200\n"
 "Last-Translator: Vladimir Vuksan <vuksan@veus.hr>\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
@@ -27,6 +27,14 @@ msgid ""
 "an initialization error occurred while starting "
 "'background-properties-capplet'.\n"
 "aborting...\n"
+msgstr ""
+
+#: capplets/background-properties/background-properties.desktop.in.h:1
+msgid "Background"
+msgstr ""
+
+#: capplets/background-properties/background-properties.desktop.in.h:2
+msgid "Configuration of the desktop's background"
 msgstr ""
 
 #: capplets/background-properties/property-background.c:116
@@ -200,20 +208,64 @@ msgstr ""
 msgid "Display wallpaper: tiled, centered, scaled or ratio"
 msgstr ""
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:238
-msgid "Gnome editor"
-msgstr "Gnome ureðivaè"
-
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:249
-msgid "Run In Terminal"
-msgstr "Pokreni u terminalu"
-
-#: capplets/file-types/file-types-capplet.desktop.in.h:1
-msgid "File Types and Programs"
+#: capplets/desktop-links/Desktop.directory.in.h:1
+#: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:1
+msgid "Desktop"
 msgstr ""
 
-#: capplets/file-types/file-types-capplet.desktop.in.h:2
-msgid "Specify which programs are used to open or view each file type"
+#: capplets/desktop-links/Documents.directory.in.h:1
+msgid "Configure how document types are handled"
+msgstr ""
+
+#: capplets/desktop-links/Documents.directory.in.h:2
+msgid "Document Handlers"
+msgstr ""
+
+#. create the app
+#: capplets/desktop-links/Gnome.directory.in.h:1 control-center/main.c:197
+#: control-center/splash.c:247
+msgid "Control Center"
+msgstr "Kontrolni centar"
+
+#: capplets/desktop-links/Gnome.directory.in.h:2
+#, fuzzy
+msgid "Control Center Menu"
+msgstr "Kontrolni centar"
+
+#: capplets/desktop-links/Multimedia.directory.in.h:1
+#, fuzzy
+msgid "Configure the settings of your Multimedia devices"
+msgstr "Postava za za¹titu zaslona"
+
+#: capplets/desktop-links/Multimedia.directory.in.h:2
+msgid "Multimedia"
+msgstr ""
+
+#: capplets/desktop-links/Peripherals.directory.in.h:1
+msgid "Configure your external devices"
+msgstr ""
+
+#: capplets/desktop-links/Peripherals.directory.in.h:2
+msgid "Peripherals"
+msgstr ""
+
+#: capplets/desktop-links/Session.directory.in.h:1
+#, fuzzy
+msgid "Session"
+msgstr "Sufiks"
+
+#: capplets/desktop-links/Session.directory.in.h:2
+#, fuzzy
+msgid "Session Management Settings"
+msgstr "Postavke za¹tite zaslona"
+
+#: capplets/desktop-links/UIOptions.directory.in.h:1
+#, fuzzy
+msgid "Configure the global settings of your GNOME applications"
+msgstr "Postava za za¹titu zaslona"
+
+#: capplets/desktop-links/UIOptions.directory.in.h:2
+msgid "User Interface"
 msgstr ""
 
 #: capplets/file-types/file-types-capplet-dialogs.c:387
@@ -450,168 +502,34 @@ msgstr "Sufiks"
 msgid "Default Action"
 msgstr ""
 
+#: capplets/file-types/file-types-capplet.desktop.in.h:1
+msgid "File Types and Programs"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet.desktop.in.h:2
+msgid "Specify which programs are used to open or view each file type"
+msgstr ""
+
 #: capplets/file-types/file-types-icon-entry.c:381
 #, fuzzy
 msgid "Select an icon"
 msgstr "Izaberi ikonu..."
 
-#: capplets/mouse-properties/mouse-properties.c:267
-msgid "Mouse buttons"
-msgstr "Gumbi mi¹a"
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:238
+msgid "Gnome editor"
+msgstr "Gnome ureðivaè"
 
-#: capplets/mouse-properties/mouse-properties.c:276
-msgid "Left handed"
-msgstr "Ljevak"
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:249
+msgid "Run In Terminal"
+msgstr "Pokreni u terminalu"
 
-#: capplets/mouse-properties/mouse-properties.c:278
-msgid "Right handed"
-msgstr "De¹njak"
-
-#. Mouse motion
-#: capplets/mouse-properties/mouse-properties.c:304
-msgid "Mouse motion"
-msgstr "Pokret mi¹a"
-
-#: capplets/mouse-properties/mouse-properties.c:314
-msgid "Acceleration"
-msgstr "Ubrzanje"
-
-#: capplets/mouse-properties/mouse-properties.c:314
-#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:4
-#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:8
-#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:11
-msgid "Fast"
-msgstr "Brzo"
-
-#: capplets/mouse-properties/mouse-properties.c:314
-#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:13
-#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:21
-#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:19
-msgid "Slow"
-msgstr "Sporo"
-
-#: capplets/mouse-properties/mouse-properties.c:325
-#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:30
-msgid "Threshold"
-msgstr "Prag"
-
-#: capplets/mouse-properties/mouse-properties.c:325
-#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:6
-#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:9
-#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:10
-msgid "Large"
-msgstr "Veliko"
-
-#: capplets/mouse-properties/mouse-properties.c:325
-#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:14
-#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:15
-#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:22
-msgid "Small"
-msgstr "Malo"
-
-#: capplets/mouse-properties/mouse-properties.c:350
-msgid ""
-"an initialization error occurred while starting 'mouse-properties-capplet'.\n"
-"aborting...\n"
+#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:1
+msgid "Choose the editor that is invoked by gnome-edit"
 msgstr ""
 
-#: capplets/screensaver-properties/callbacks.c:102
-msgid "Require Password"
-msgstr "Zahtjevaj lozinku"
-
-#: capplets/screensaver-properties/callbacks.c:154
-msgid "Use power management."
-msgstr "Ukljuèi ¹tednju energije"
-
-#: capplets/screensaver-properties/callbacks.c:309
-msgid "No Screensaver"
+#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:2
+msgid "Default Editor"
 msgstr ""
-
-#: capplets/screensaver-properties/callbacks.c:314
-msgid "Random Screensaver"
-msgstr ""
-
-#: capplets/screensaver-properties/callbacks.c:483
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:56
-msgid "Settings..."
-msgstr "Postavke..."
-
-#. we need to special case random
-#: capplets/screensaver-properties/callbacks.c:491
-msgid "Random Settings"
-msgstr ""
-
-#: capplets/screensaver-properties/callbacks.c:501
-#, c-format
-msgid "%s Settings..."
-msgstr "%s postavke..."
-
-#: capplets/screensaver-properties/screensaver-dialog.c:46
-msgid "About:"
-msgstr "O:"
-
-#: capplets/screensaver-properties/screensaver-dialog.c:51
-msgid "Author:"
-msgstr "Autor:"
-
-#: capplets/screensaver-properties/screensaver-dialog.c:61
-msgid "Author: UNKNOWN"
-msgstr "Autor: Nepoznat"
-
-#: capplets/screensaver-properties/screensaver-dialog.c:78
-msgid "Settings"
-msgstr "Postavke"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:38
-msgid "RANDOM SCREENSAVER"
-msgstr ""
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:49
-msgid "Screen Saver"
-msgstr "Za¹tita zaslona"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:61
-msgid ""
-"Pressing this button will popup a dialogbox that will help you setup the "
-"current screensaver."
-msgstr ""
-
-#. set up the initial frame, and get a vbox in which to pack things.
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:88
-msgid "Screen Saver Settings"
-msgstr "Postavke za¹tite zaslona"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:96
-msgid "Start After "
-msgstr "Pokreni nakon"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:102
-msgid " Minutes."
-msgstr " minuta."
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:117
-msgid "Priority:"
-msgstr "Prioritet:"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:124
-msgid "Low "
-msgstr "Nizak"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:126
-msgid " Normal"
-msgstr " Normalan"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:137
-msgid "Shutdown monitor "
-msgstr "Iskljuèi monitor"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:139
-msgid " minutes after screen saver has started."
-msgstr " minuta nakon pokretanja za¹tite zaslona."
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:152
-msgid "Screen Saver Demo"
-msgstr "Demo za¹tite zaslona"
 
 #: capplets/keyboard-properties/keyboard-properties.c:262
 msgid "Keyboard bell"
@@ -673,788 +591,116 @@ msgid ""
 "aborting...\n"
 msgstr ""
 
-#: capplets/sound-properties/sound-properties.c:97
+#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:1
+#, fuzzy
+msgid "Keyboard"
+msgstr "Uèestalost ponavljanja"
+
+#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:2
+#, fuzzy
+msgid "Keyboard Properties"
+msgstr "Uèestalost ponavljanja"
+
+#: capplets/mouse-properties/mouse-properties.c:267
+msgid "Mouse buttons"
+msgstr "Gumbi mi¹a"
+
+#: capplets/mouse-properties/mouse-properties.c:276
+msgid "Left handed"
+msgstr "Ljevak"
+
+#: capplets/mouse-properties/mouse-properties.c:278
+msgid "Right handed"
+msgstr "De¹njak"
+
+#. Mouse motion
+#: capplets/mouse-properties/mouse-properties.c:304
+msgid "Mouse motion"
+msgstr "Pokret mi¹a"
+
+#: capplets/mouse-properties/mouse-properties.c:314
+msgid "Acceleration"
+msgstr "Ubrzanje"
+
+#: capplets/mouse-properties/mouse-properties.c:314
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:4
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:8
+#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:11
+msgid "Fast"
+msgstr "Brzo"
+
+#: capplets/mouse-properties/mouse-properties.c:314
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:13
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:21
+#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:19
+msgid "Slow"
+msgstr "Sporo"
+
+#: capplets/mouse-properties/mouse-properties.c:325
+#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:30
+msgid "Threshold"
+msgstr "Prag"
+
+#: capplets/mouse-properties/mouse-properties.c:325
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:10
+msgid "Large"
+msgstr "Veliko"
+
+#: capplets/mouse-properties/mouse-properties.c:325
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:14
+#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:15
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:22
+msgid "Small"
+msgstr "Malo"
+
+#: capplets/mouse-properties/mouse-properties.c:350
 msgid ""
-"an initialization error occurred while starting 'sound-properties-capplet'."
-msgstr ""
-
-#: capplets/sound-properties/sound-properties.c:188
-msgid "Event"
-msgstr "Dogaðaj"
-
-#: capplets/sound-properties/sound-properties.c:189
-msgid "File to Play"
-msgstr ""
-
-#: capplets/sound-properties/sound-properties.c:243
-msgid "Enable"
-msgstr "Ukljuèi"
-
-#: capplets/sound-properties/sound-properties.c:250
-msgid "Enable sound server startup"
-msgstr ""
-
-#: capplets/sound-properties/sound-properties.c:258
-msgid "Sounds for events"
-msgstr "Zvuci dogaðaja"
-
-#: capplets/sound-properties/sound-properties.c:279
-msgid "General"
-msgstr "Opæenito"
-
-#: capplets/sound-properties/sound-properties.c:286
-msgid "Select sound file"
-msgstr "Izaberi datoteku sa zvukom"
-
-#: capplets/sound-properties/sound-properties.c:325
-msgid "Play"
-msgstr "Sviraj"
-
-#: capplets/sound-properties/sound-properties.c:336
-msgid "Sound Events"
-msgstr "Zvuci dogaðaja"
-
-#: capplets/sound-properties/sound-properties.c:355
-msgid ""
-"This copy of the GNOME control center was not compiled with sound support"
-msgstr ""
-
-#: capplets/sound-properties/sound-properties.c:748
-msgid "The sound file for this event does not exist."
-msgstr ""
-
-#: capplets/sound-properties/sound-properties.c:750
-msgid ""
-"The sound file for this event does not exist.\n"
-"You may want to install the gnome-audio package\n"
-"for a set of default sounds."
-msgstr ""
-
-#: capplets/theme-switcher/demo.c:50
-msgid "One"
-msgstr "Jedan"
-
-#: capplets/theme-switcher/demo.c:50
-msgid "Two"
-msgstr "Dva"
-
-#. just 8 short names that will serve as samples for titles in demo
-#: capplets/theme-switcher/demo.c:52
-msgid "Eenie"
-msgstr ""
-
-#: capplets/theme-switcher/demo.c:52
-msgid "Meenie"
-msgstr ""
-
-#: capplets/theme-switcher/demo.c:53
-msgid "Mynie"
-msgstr ""
-
-#: capplets/theme-switcher/demo.c:53
-msgid "Moe"
-msgstr ""
-
-#: capplets/theme-switcher/demo.c:54
-msgid "Catcha"
-msgstr ""
-
-#: capplets/theme-switcher/demo.c:54
-msgid "Tiger"
-msgstr ""
-
-#: capplets/theme-switcher/demo.c:55
-msgid "By Its"
-msgstr ""
-
-#: capplets/theme-switcher/demo.c:55
-msgid "Toe"
-msgstr ""
-
-#: capplets/theme-switcher/demo.c:114
-msgid "Selected themes from above will be tested by previewing here."
-msgstr ""
-
-#. column one
-#: capplets/theme-switcher/demo.c:119
-msgid "Sample Button"
-msgstr "Ogledni gumb"
-
-#: capplets/theme-switcher/demo.c:123
-msgid "Sample Check Button"
-msgstr ""
-
-#: capplets/theme-switcher/demo.c:128
-msgid "Sample Text Entry Field"
-msgstr ""
-
-#: capplets/theme-switcher/demo.c:139
-msgid "Submenu"
-msgstr "Podizbornik"
-
-#: capplets/theme-switcher/demo.c:146
-msgid "Item 1"
-msgstr "Stavka 1"
-
-#: capplets/theme-switcher/demo.c:149
-msgid "Another item"
-msgstr "Druga stavka"
-
-#: capplets/theme-switcher/demo.c:154
-msgid "Radio Button 1"
-msgstr "Radio gumb 1"
-
-#: capplets/theme-switcher/demo.c:160
-msgid "Radio Button 2"
-msgstr "Radio gumb 2"
-
-#: capplets/theme-switcher/gui.c:89
-#, c-format
-msgid ""
-"Error installing theme:\n"
-"'%s'\n"
-"%s"
-msgstr ""
-"Gre¹ka priliko instalacije teme:\n"
-"'%s'\n"
-"%s"
-
-#: capplets/theme-switcher/gui.c:120
-msgid "Select a theme to install"
-msgstr "Izaberite temu koju ¾elite instalirati"
-
-#: capplets/theme-switcher/gui.c:197
-msgid "Available Themes"
-msgstr "Dostupne teme"
-
-#: capplets/theme-switcher/gui.c:221
-msgid ""
-"Auto\n"
-"Preview"
-msgstr ""
-
-#: capplets/theme-switcher/gui.c:233
-msgid ""
-"Install new\n"
-"theme..."
-msgstr ""
-"Instaliraj novu\n"
-"temu..."
-
-#. Font selector.
-#.
-#: capplets/theme-switcher/gui.c:239
-msgid "User Font"
-msgstr ""
-
-#. FIXME - should really get this from X somehow
-#. for now we just assume default gtk font
-#: capplets/theme-switcher/gui.c:257
-msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
-msgstr "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
-
-#: capplets/theme-switcher/gui.c:276
-msgid "Use custom font."
-msgstr ""
-
-#: capplets/theme-switcher/install.c:26
-msgid "Home directory doesn't exist!\n"
-msgstr "Poèetni direktorij ne postoji!\n"
-
-#: capplets/theme-switcher/install.c:36
-msgid "Theme does not exist"
-msgstr "Tema ne postoji"
-
-#: capplets/theme-switcher/install.c:68
-#, c-format
-msgid "Command '%s' failed"
-msgstr "Naredba '%s' nije uspjela"
-
-#: capplets/theme-switcher/install.c:73
-msgid "Unknown file format"
-msgstr "Nepoznati format datoteke"
-
-#: capplets/ui-properties/ui-properties.c:54
-msgid "Can detach and move toolbars"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:59
-msgid "Toolbars have relieved border"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:64
-msgid "Toolbar buttons have relieved border"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:69
-msgid "Toolbars have line separators"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:74
-msgid "Toolbars have text labels"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:103
-msgid "Can detach and move menus"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:108
-msgid "Menus have relieved border"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:112
-msgid "Submenus can be torn off"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:116
-msgid "Menu items have icons"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:140
-msgid "Statusbar is interactive when possible"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:145
-msgid "Statusbar progress meter is on the right"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:162
-msgid "Menu Options"
-msgstr "Postavke izbornika"
-
-#: capplets/ui-properties/ui-properties.c:163
-msgid "Statusbar Options"
-msgstr "Postavke trake stanja"
-
-#: capplets/ui-properties/ui-properties.c:164
-msgid "Toolbar Options"
-msgstr "Postavke trake s alatima"
-
-#: capplets/ui-properties/ui-properties.c:170
-msgid "Dialog buttons"
-msgstr "Gumbi dialoga"
-
-#: capplets/ui-properties/ui-properties.c:171
-msgid "Default value"
-msgstr "Uobièajena vrijednost"
-
-#: capplets/ui-properties/ui-properties.c:172
-msgid "Spread buttons out"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:173
-msgid "Put buttons on edges"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:174
-msgid "Left-justify buttons"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:175
-msgid "Right-justify buttons"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:180
-msgid "Dialog buttons have icons"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:185
-msgid "Use statusbar instead of dialog when possible"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:207
-msgid "Dialog position"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:208
-msgid "Let window manager decide"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:209
-msgid "Center of the screen"
-msgstr "Centar zaslona"
-
-#: capplets/ui-properties/ui-properties.c:210
-msgid "At the mouse pointer"
-msgstr "Ispod pokazivaèa mi¹a"
-
-#: capplets/ui-properties/ui-properties.c:215
-msgid "Dialog hints"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:216
-msgid "Dialogs are like other windows"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:217
-msgid "Dialogs are treated specially by window manager"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:222
-msgid "Place dialogs over application window when possible"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:243
-msgid "Dialog Layout"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:244
-msgid "Dialog Behavior"
-msgstr "Pona¹anje dialoga"
-
-#: capplets/ui-properties/ui-properties.c:250
-msgid "Default MDI Mode"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:251
-msgid "Notebook"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:252
-msgid "Toplevel"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:253
-msgid "Modal"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:258
-msgid "MDI notebook tab position"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:259
-msgid "Left"
-msgstr "Lijevo"
-
-#: capplets/ui-properties/ui-properties.c:260
-msgid "Right"
-msgstr "Desno"
-
-#: capplets/ui-properties/ui-properties.c:261
-msgid "Top"
-msgstr "Vrh"
-
-#: capplets/ui-properties/ui-properties.c:262
-msgid "Bottom"
-msgstr "Dno"
-
-#: capplets/ui-properties/ui-properties.c:277
-msgid "GNOME MDI Options"
-msgstr "GNOME MDI postavke"
-
-#: capplets/url-properties/url-properties.c:51
-msgid "Error initializing the `url-properties' capplet."
-msgstr ""
-
-#: capplets/url-properties/url-properties.c:76
-msgid "Protocol"
-msgstr "Protokol"
-
-#: capplets/url-properties/url-properties.c:76
-msgid "Command"
-msgstr "Naredba"
-
-#: capplets/url-properties/url-properties.c:93
-msgid "handler:"
-msgstr "rukovatelj:"
-
-#. set some commonly used handlers
-#: capplets/url-properties/url-properties.c:103
-msgid "Netscape"
-msgstr "Netscape"
-
-#: capplets/url-properties/url-properties.c:108
-msgid "Netscape (new window)"
-msgstr "Netscape (novi prozor)"
-
-#: capplets/url-properties/url-properties.c:121
-msgid "Help browser"
-msgstr ""
-
-#: capplets/url-properties/url-properties.c:127
-msgid "Help browser (new window)"
-msgstr ""
-
-#: capplets/url-properties/url-properties.c:140
-msgid "Set"
-msgstr "Postavi"
-
-#: capplets/url-properties/url-properties.c:148
-msgid "Remove"
-msgstr "Ukloni"
-
-#: capplets/wm-properties/wm-properties-capplet.c:142
-#, c-format
-msgid ""
-"Starting %s\n"
-"(%d seconds left before operation times out)"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties-capplet.c:303
-#, c-format
-msgid "%s (Current)"
-msgstr "%s (Trenutno)"
-
-#: capplets/wm-properties/wm-properties-capplet.c:306
-#, c-format
-msgid "Run Configuration Tool for %s"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties-capplet.c:317
-msgid " (Not found)"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties-capplet.c:356
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\tAnother window manager is already running and could not be killed\n"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties-capplet.c:360
-#, c-format
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\t'%s' didn't start\n"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties-capplet.c:413
-msgid "Previous window manager did not die\n"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties-capplet.c:446
-#, c-format
-msgid ""
-"Could not start '%s'.\n"
-"Falling back to previous window manager '%s'\n"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties-capplet.c:477
-msgid ""
-"Could not start fallback window manager.\n"
-"Please run a window manager manually. You can\n"
-"do this by selecting \"Run Program\" in the\n"
-"foot menu\n"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties-capplet.c:502
-#: capplets/wm-properties/wm-properties-capplet.c:868
-#: capplets/wm-properties/wm-properties-capplet.c:875
-#: capplets/wm-properties/wm-properties-capplet.c:1021
-msgid "OK"
-msgstr "U redu"
-
-#: capplets/wm-properties/wm-properties-capplet.c:520
-msgid ""
-"Your current window manager has been changed. In order for\n"
-"this change to be saved, you will need to save your current\n"
-"session. You can do so immediately by selecting the \"Save session\n"
-"now\" below, or you can save your session later.  This can be\n"
-"done either selecting \"Save Current Session\" under \"Settings\"\n"
-"in the main menu, or by turning on \"Save Current Setup\" when\n"
-"you log out.\n"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties-capplet.c:527
-msgid "Save Session Later"
-msgstr "Spremi sesiju kasnije"
-
-#: capplets/wm-properties/wm-properties-capplet.c:527
-msgid "Save Session Now"
-msgstr "Spremi sesiju odmah"
-
-#: capplets/wm-properties/wm-properties-capplet.c:530
-msgid ""
-"Your current window manager has been changed. In order for\n"
-"this change to be saved, you will need to save your current\n"
-"session. This can be done by either selecting \"Save Current Session\"\n"
-"under \"Settings\" in the main menu, or by turning on\n"
-"\"Save Current Setup\" when you log out.\n"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties-capplet.c:757
-msgid "Add New Window Manager"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties-capplet.c:771
-msgid "Name:"
-msgstr "Ime:"
-
-#: capplets/wm-properties/wm-properties-capplet.c:784
-msgid "Command:"
-msgstr "Naredba:"
-
-#: capplets/wm-properties/wm-properties-capplet.c:797
-msgid "Configuration Command:"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties-capplet.c:816
-msgid "Window manager is session managed"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties-capplet.c:866
-msgid "Name cannot be empty"
-msgstr "Ime ne mo¾e biti prazno"
-
-#: capplets/wm-properties/wm-properties-capplet.c:873
-msgid "Command cannot be empty"
-msgstr "Naredba ne mo¾e biti prazna"
-
-#: capplets/wm-properties/wm-properties-capplet.c:922
-#: capplets/wm-properties/wm-properties-capplet.c:964
-msgid "Edit Window Manager"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties-capplet.c:1020
-msgid "You cannot delete the current Window Manager"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties-capplet.c:1093
-msgid "Edit..."
-msgstr "Promijeni..."
-
-#: capplets/wm-properties/wm-properties-capplet.c:1098
-msgid "Delete"
-msgstr "Obri¹i"
-
-#: capplets/wm-properties/wm-properties-capplet.c:1134
-msgid ""
-"an initialization error occurred while starting 'wm-properties-capplet'.\n"
+"an initialization error occurred while starting 'mouse-properties-capplet'.\n"
 "aborting...\n"
 msgstr ""
 
-#: control-center/callbacks.c:102 control-center/gnomecc.desktop.in.h:1
-msgid "GNOME Control Center"
-msgstr "GNOME kontrolni centar"
-
-#: control-center/callbacks.c:105
-msgid "Desktop Properties manager."
-msgstr ""
-
-#: control-center/capplet-manager.c:179
-msgid "Try"
-msgstr "Isku¹aj"
-
-#: control-center/capplet-manager.c:185
-msgid "Revert"
-msgstr "Vrati"
-
-#. set the help item
-#: control-center/capplet-manager.c:208
-#, fuzzy, c-format
-msgid "Help with '%s' settings"
-msgstr "Isku¹aj postavke"
-
-#: control-center/capplet-widget-libs.c:46
-msgid "id of the capplet -- assigned by the control-center"
-msgstr ""
-
-#: control-center/capplet-widget-libs.c:46
-msgid "ID"
-msgstr "ID"
-
-#: control-center/capplet-widget-libs.c:47
-msgid "Multi-capplet id."
-msgstr ""
-
-#: control-center/capplet-widget-libs.c:47
-msgid "CAPID"
-msgstr "CAPID"
-
-#: control-center/capplet-widget-libs.c:48
-msgid "X ID of the socket it's plugged into"
-msgstr ""
-
-#: control-center/capplet-widget-libs.c:48
-msgid "XID"
-msgstr "XID"
-
-#: control-center/capplet-widget-libs.c:49
-msgid "IOR of the control-center"
-msgstr ""
-
-#: control-center/capplet-widget-libs.c:49
-msgid "IOR"
-msgstr "IOR"
-
-#: control-center/capplet-widget-libs.c:50
-msgid "Initialize session settings"
-msgstr ""
-
-#: control-center/capplet-widget-libs.c:51
-msgid "Ignore default action.  Used for custom init-session cases"
-msgstr ""
-
-#: control-center/capplet-widget.c:272
-msgid "Sorry, no help is available for these settings."
-msgstr ""
-
-#: control-center/corba-glue.c:77
-msgid "capplet-command to be run."
-msgstr ""
-
-#: control-center/corba-glue.c:77
-msgid "CAPPLET"
-msgstr "CAPPLET"
-
-#: control-center/main.c:36
+#: capplets/mouse-properties/mouse-properties.desktop.in.h:1
 #, fuzzy
-msgid "Help on control-center"
-msgstr "Kontrolni centar"
+msgid "Mouse"
+msgstr "Zatvori"
 
-#: control-center/main.c:36
-msgid "Help with the GNOME control-center."
-msgstr ""
-
-#: control-center/main.c:38
-msgid "Help with the current configuration page."
-msgstr ""
-
-#: control-center/main.c:41
+#: capplets/mouse-properties/mouse-properties.desktop.in.h:2
 #, fuzzy
-msgid "About"
-msgstr "O:"
-
-#: control-center/main.c:41
-#, fuzzy
-msgid "About the GNOME control-center."
-msgstr "GNOME kontrolni centar"
-
-#. we create the widgets
-#: control-center/main.c:69
-msgid "Warning:"
-msgstr "Upozorenje:"
-
-#: control-center/main.c:69
-msgid "Discard all changes"
-msgstr "Odbaci sve promjene"
-
-#. ...labels, etc
-#: control-center/main.c:78
-msgid ""
-"The following modules have had changes made, but not committed.  If you "
-"would like to edit them, please double click on the appropriate entry."
-msgstr ""
-
-#. create the app
-#: capplets/desktop-links/Gnome.directory.in.h:1 control-center/main.c:197
-#: control-center/splash.c:231
-msgid "Control Center"
-msgstr "Kontrolni centar"
-
-#: control-center/splash.c:48
-msgid "Operating System:"
-msgstr ""
-
-#: control-center/splash.c:49
-msgid "Distribution Version:"
-msgstr ""
-
-#: control-center/splash.c:50
-msgid "Processor Type:"
-msgstr ""
-
-#: control-center/splash.c:51
-#, fuzzy
-msgid "User Name:"
-msgstr "Ime:"
-
-#: control-center/splash.c:52
-#, fuzzy
-msgid "Host Name:"
-msgstr "Ime:"
-
-#. This is about the only case where we'll put Unknown instead
-#. of simply not showing the info.
-#: control-center/splash.c:168
-msgid "Unknown"
-msgstr "Nepoznat"
-
-#: control-center/gnomecc.desktop.in.h:2
-msgid "The GNOME configuration tool"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties.desktop.in.h:1
-msgid "Choose a window manager"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties.desktop.in.h:2
-msgid "Window Manager"
-msgstr ""
-
-#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.h:1
-msgid "Enlightenment"
-msgstr ""
-
-#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.h:1
-msgid "Ice WM"
-msgstr ""
-
-#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.h:1
-msgid "Scwm"
-msgstr ""
-
-#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.h:1
-msgid "Window Maker"
-msgstr ""
-
-#: capplets/wm-properties/wm-desktops/twm.desktop.in.h:1
-msgid "twm"
-msgstr ""
-
-#: capplets/url-properties/url-properties.desktop.in.h:1
-msgid "Configure which programs are used to display URLs"
-msgstr ""
-
-#: capplets/url-properties/url-properties.desktop.in.h:2
-#, fuzzy
-msgid "URL Handlers"
-msgstr "rukovatelj:"
-
-#: capplets/ui-properties/application.desktop.in.h:1
-#, fuzzy
-msgid "Applications"
-msgstr "Postavke"
-
-#: capplets/ui-properties/application.desktop.in.h:2
-msgid "Sets the default feel of GNOME applications"
-msgstr ""
-
-#: capplets/ui-properties/dialogs.desktop.in.h:1
-#, fuzzy
-msgid "Dialogs"
-msgstr "Gumbi dialoga"
-
-#: capplets/ui-properties/mdi.desktop.in.h:1
-msgid "MDI"
-msgstr ""
-
-#: capplets/theme-switcher/theme-selector.desktop.in.h:1
-#, fuzzy
-msgid "Select which desktop theme to use"
-msgstr "Izaberite temu koju ¾elite instalirati"
-
-#: capplets/theme-switcher/theme-selector.desktop.in.h:2
-msgid "Theme Selector"
-msgstr ""
-
-#: capplets/sound-properties/sound-properties.desktop.in.h:1
-msgid "Configure GNOME's use of sound"
-msgstr ""
-
-#: capplets/sound-properties/sound-properties.desktop.in.h:2
-#, fuzzy
-msgid "Sound"
-msgstr "Jednoliko"
-
-#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:1
-#, fuzzy
-msgid "Configure the settings of the screensaver"
+msgid "Mouse Properties"
 msgstr "Postava za za¹titu zaslona"
 
-#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:2
-#, fuzzy
-msgid "Screensaver"
-msgstr "Za¹tita zaslona"
+#: capplets/screensaver-properties/callbacks.c:102
+msgid "Require Password"
+msgstr "Zahtjevaj lozinku"
+
+#: capplets/screensaver-properties/callbacks.c:154
+msgid "Use power management."
+msgstr "Ukljuèi ¹tednju energije"
+
+#: capplets/screensaver-properties/callbacks.c:309
+msgid "No Screensaver"
+msgstr ""
+
+#: capplets/screensaver-properties/callbacks.c:314
+msgid "Random Screensaver"
+msgstr ""
+
+#: capplets/screensaver-properties/callbacks.c:483
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:56
+msgid "Settings..."
+msgstr "Postavke..."
+
+#. we need to special case random
+#: capplets/screensaver-properties/callbacks.c:491
+msgid "Random Settings"
+msgstr ""
+
+#: capplets/screensaver-properties/callbacks.c:501
+#, c-format
+msgid "%s Settings..."
+msgstr "%s postavke..."
 
 #: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:1
 msgid "3D Clock"
@@ -1652,7 +898,7 @@ msgstr ""
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:6
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:5
 #: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:6
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:2
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:1
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:4
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:1
 #: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:1
@@ -1837,7 +1083,7 @@ msgstr ""
 #: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:13
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:20
 #: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:11
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:18
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:17
 #: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:14
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:23
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:19
@@ -1879,7 +1125,7 @@ msgstr "Malo"
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:29
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:21
 #: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:12
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:19
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:18
 #: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:24
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:20
@@ -2011,7 +1257,7 @@ msgstr ""
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:17
 #: capplets/screensaver-properties/screensaver-desktops/Braid.desktop.in.h:8
 #: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:10
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:16
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:19
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:9
@@ -2270,16 +1516,10 @@ msgid "James Macnicol <J.Macnicol@student.anu.edu.au>"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:14
-msgid ""
-"James Macnicol <J.Macnicol@student.anu.edu.au>, Ïðåäîâ: Äèëÿí Ïàëàóçîâ "
-"<didopalauzov@uk2.net>"
-msgstr ""
-
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:15
 msgid "Lots of random bubbles grow until they pop."
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:17
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:16
 msgid "Simple"
 msgstr ""
 
@@ -2313,13 +1553,14 @@ msgstr ""
 msgid "Display a spinning compass "
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:1
-msgid "Change number of seeds."
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:2
+msgid "Change the density."
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:3
-msgid "Change the density."
-msgstr ""
+#, fuzzy
+msgid "Change the number of seeds."
+msgstr "Postava za za¹titu zaslona"
 
 #: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:4
 #, fuzzy
@@ -3779,11 +3020,6 @@ msgstr ""
 msgid "Rd-bomb"
 msgstr ""
 
-#: capplets/desktop-links/Desktop.directory.in.h:1
-#: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:1
-msgid "Desktop"
-msgstr ""
-
 #: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:2
 msgid "Display oily drops."
 msgstr ""
@@ -4148,90 +3384,487 @@ msgstr "Okomito"
 msgid "Xteevee"
 msgstr ""
 
-#: capplets/mouse-properties/mouse-properties.desktop.in.h:1
-#, fuzzy
-msgid "Mouse"
-msgstr "Zatvori"
+#: capplets/screensaver-properties/screensaver-dialog.c:46
+msgid "About:"
+msgstr "O:"
 
-#: capplets/mouse-properties/mouse-properties.desktop.in.h:2
-#, fuzzy
-msgid "Mouse Properties"
-msgstr "Postava za za¹titu zaslona"
+#: capplets/screensaver-properties/screensaver-dialog.c:51
+msgid "Author:"
+msgstr "Autor:"
 
-#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:1
-#, fuzzy
-msgid "Keyboard"
-msgstr "Uèestalost ponavljanja"
+#: capplets/screensaver-properties/screensaver-dialog.c:61
+msgid "Author: UNKNOWN"
+msgstr "Autor: Nepoznat"
 
-#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:2
-#, fuzzy
-msgid "Keyboard Properties"
-msgstr "Uèestalost ponavljanja"
+#: capplets/screensaver-properties/screensaver-dialog.c:78
+msgid "Settings"
+msgstr "Postavke"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:1
-msgid "Choose the editor that is invoked by gnome-edit"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:38
+msgid "RANDOM SCREENSAVER"
 msgstr ""
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:2
-msgid "Default Editor"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:49
+msgid "Screen Saver"
+msgstr "Za¹tita zaslona"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:61
+msgid ""
+"Pressing this button will popup a dialogbox that will help you setup the "
+"current screensaver."
 msgstr ""
 
-#: capplets/background-properties/background-properties.desktop.in.h:1
-msgid "Background"
-msgstr ""
-
-#: capplets/background-properties/background-properties.desktop.in.h:2
-msgid "Configuration of the desktop's background"
-msgstr ""
-
-#: capplets/desktop-links/Documents.directory.in.h:1
-msgid "Configure how document types are handled"
-msgstr ""
-
-#: capplets/desktop-links/Documents.directory.in.h:2
-msgid "Document Handlers"
-msgstr ""
-
-#: capplets/desktop-links/Gnome.directory.in.h:2
-#, fuzzy
-msgid "Control Center Menu"
-msgstr "Kontrolni centar"
-
-#: capplets/desktop-links/Multimedia.directory.in.h:1
-#, fuzzy
-msgid "Configure the settings of your Multimedia devices"
-msgstr "Postava za za¹titu zaslona"
-
-#: capplets/desktop-links/Multimedia.directory.in.h:2
-msgid "Multimedia"
-msgstr ""
-
-#: capplets/desktop-links/Peripherals.directory.in.h:1
-msgid "Configure your external devices"
-msgstr ""
-
-#: capplets/desktop-links/Peripherals.directory.in.h:2
-msgid "Peripherals"
-msgstr ""
-
-#: capplets/desktop-links/Session.directory.in.h:1
-#, fuzzy
-msgid "Session"
-msgstr "Sufiks"
-
-#: capplets/desktop-links/Session.directory.in.h:2
-#, fuzzy
-msgid "Session Management Settings"
+#. set up the initial frame, and get a vbox in which to pack things.
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:88
+msgid "Screen Saver Settings"
 msgstr "Postavke za¹tite zaslona"
 
-#: capplets/desktop-links/UIOptions.directory.in.h:1
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:96
+msgid "Start After "
+msgstr "Pokreni nakon"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:102
+msgid " Minutes."
+msgstr " minuta."
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:117
+msgid "Priority:"
+msgstr "Prioritet:"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:124
+msgid "Low "
+msgstr "Nizak"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:126
+msgid " Normal"
+msgstr " Normalan"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:137
+msgid "Shutdown monitor "
+msgstr "Iskljuèi monitor"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:139
+msgid " minutes after screen saver has started."
+msgstr " minuta nakon pokretanja za¹tite zaslona."
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:152
+msgid "Screen Saver Demo"
+msgstr "Demo za¹tite zaslona"
+
+#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:1
 #, fuzzy
-msgid "Configure the global settings of your GNOME applications"
+msgid "Configure the settings of the screensaver"
 msgstr "Postava za za¹titu zaslona"
 
-#: capplets/desktop-links/UIOptions.directory.in.h:2
-msgid "User Interface"
+#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:2
+#, fuzzy
+msgid "Screensaver"
+msgstr "Za¹tita zaslona"
+
+#: capplets/sound-properties/sound-properties.c:97
+msgid ""
+"an initialization error occurred while starting 'sound-properties-capplet'."
 msgstr ""
+
+#: capplets/sound-properties/sound-properties.c:188
+msgid "Event"
+msgstr "Dogaðaj"
+
+#: capplets/sound-properties/sound-properties.c:189
+msgid "File to Play"
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.c:243
+msgid "Enable"
+msgstr "Ukljuèi"
+
+#: capplets/sound-properties/sound-properties.c:250
+msgid "Enable sound server startup"
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.c:258
+msgid "Sounds for events"
+msgstr "Zvuci dogaðaja"
+
+#: capplets/sound-properties/sound-properties.c:279
+msgid "General"
+msgstr "Opæenito"
+
+#: capplets/sound-properties/sound-properties.c:286
+msgid "Select sound file"
+msgstr "Izaberi datoteku sa zvukom"
+
+#: capplets/sound-properties/sound-properties.c:325
+msgid "Play"
+msgstr "Sviraj"
+
+#: capplets/sound-properties/sound-properties.c:336
+msgid "Sound Events"
+msgstr "Zvuci dogaðaja"
+
+#: capplets/sound-properties/sound-properties.c:355
+msgid ""
+"This copy of the GNOME control center was not compiled with sound support"
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.c:748
+msgid "The sound file for this event does not exist."
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.c:750
+msgid ""
+"The sound file for this event does not exist.\n"
+"You may want to install the gnome-audio package\n"
+"for a set of default sounds."
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.desktop.in.h:1
+msgid "Configure GNOME's use of sound"
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.desktop.in.h:2
+#, fuzzy
+msgid "Sound"
+msgstr "Jednoliko"
+
+#: capplets/theme-switcher/demo.c:50
+msgid "One"
+msgstr "Jedan"
+
+#: capplets/theme-switcher/demo.c:50
+msgid "Two"
+msgstr "Dva"
+
+#. just 8 short names that will serve as samples for titles in demo
+#: capplets/theme-switcher/demo.c:52
+msgid "Eenie"
+msgstr ""
+
+#: capplets/theme-switcher/demo.c:52
+msgid "Meenie"
+msgstr ""
+
+#: capplets/theme-switcher/demo.c:53
+msgid "Mynie"
+msgstr ""
+
+#: capplets/theme-switcher/demo.c:53
+msgid "Moe"
+msgstr ""
+
+#: capplets/theme-switcher/demo.c:54
+msgid "Catcha"
+msgstr ""
+
+#: capplets/theme-switcher/demo.c:54
+msgid "Tiger"
+msgstr ""
+
+#: capplets/theme-switcher/demo.c:55
+msgid "By Its"
+msgstr ""
+
+#: capplets/theme-switcher/demo.c:55
+msgid "Toe"
+msgstr ""
+
+#: capplets/theme-switcher/demo.c:114
+msgid "Selected themes from above will be tested by previewing here."
+msgstr ""
+
+#. column one
+#: capplets/theme-switcher/demo.c:119
+msgid "Sample Button"
+msgstr "Ogledni gumb"
+
+#: capplets/theme-switcher/demo.c:123
+msgid "Sample Check Button"
+msgstr ""
+
+#: capplets/theme-switcher/demo.c:128
+msgid "Sample Text Entry Field"
+msgstr ""
+
+#: capplets/theme-switcher/demo.c:139
+msgid "Submenu"
+msgstr "Podizbornik"
+
+#: capplets/theme-switcher/demo.c:146
+msgid "Item 1"
+msgstr "Stavka 1"
+
+#: capplets/theme-switcher/demo.c:149
+msgid "Another item"
+msgstr "Druga stavka"
+
+#: capplets/theme-switcher/demo.c:154
+msgid "Radio Button 1"
+msgstr "Radio gumb 1"
+
+#: capplets/theme-switcher/demo.c:160
+msgid "Radio Button 2"
+msgstr "Radio gumb 2"
+
+#: capplets/theme-switcher/gui.c:89
+#, c-format
+msgid ""
+"Error installing theme:\n"
+"'%s'\n"
+"%s"
+msgstr ""
+"Gre¹ka priliko instalacije teme:\n"
+"'%s'\n"
+"%s"
+
+#: capplets/theme-switcher/gui.c:120
+msgid "Select a theme to install"
+msgstr "Izaberite temu koju ¾elite instalirati"
+
+#: capplets/theme-switcher/gui.c:197
+msgid "Available Themes"
+msgstr "Dostupne teme"
+
+#: capplets/theme-switcher/gui.c:221
+msgid ""
+"Auto\n"
+"Preview"
+msgstr ""
+
+#: capplets/theme-switcher/gui.c:233
+msgid ""
+"Install new\n"
+"theme..."
+msgstr ""
+"Instaliraj novu\n"
+"temu..."
+
+#. Font selector.
+#.
+#: capplets/theme-switcher/gui.c:239
+msgid "User Font"
+msgstr ""
+
+#. FIXME - should really get this from X somehow
+#. for now we just assume default gtk font
+#: capplets/theme-switcher/gui.c:257
+msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
+msgstr "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
+
+#: capplets/theme-switcher/gui.c:276
+msgid "Use custom font."
+msgstr ""
+
+#: capplets/theme-switcher/install.c:26
+msgid "Home directory doesn't exist!\n"
+msgstr "Poèetni direktorij ne postoji!\n"
+
+#: capplets/theme-switcher/install.c:36
+msgid "Theme does not exist"
+msgstr "Tema ne postoji"
+
+#: capplets/theme-switcher/install.c:68
+#, c-format
+msgid "Command '%s' failed"
+msgstr "Naredba '%s' nije uspjela"
+
+#: capplets/theme-switcher/install.c:73
+msgid "Unknown file format"
+msgstr "Nepoznati format datoteke"
+
+#: capplets/theme-switcher/theme-selector.desktop.in.h:1
+#, fuzzy
+msgid "Select which desktop theme to use"
+msgstr "Izaberite temu koju ¾elite instalirati"
+
+#: capplets/theme-switcher/theme-selector.desktop.in.h:2
+msgid "Theme Selector"
+msgstr ""
+
+#: capplets/ui-properties/application.desktop.in.h:1
+#, fuzzy
+msgid "Applications"
+msgstr "Postavke"
+
+#: capplets/ui-properties/application.desktop.in.h:2
+msgid "Sets the default feel of GNOME applications"
+msgstr ""
+
+#: capplets/ui-properties/dialogs.desktop.in.h:1
+#, fuzzy
+msgid "Dialogs"
+msgstr "Gumbi dialoga"
+
+#: capplets/ui-properties/mdi.desktop.in.h:1
+msgid "MDI"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:54
+msgid "Can detach and move toolbars"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:59
+msgid "Toolbars have relieved border"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:64
+msgid "Toolbar buttons have relieved border"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:69
+msgid "Toolbars have line separators"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:74
+msgid "Toolbars have text labels"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:103
+msgid "Can detach and move menus"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:108
+msgid "Menus have relieved border"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:112
+msgid "Submenus can be torn off"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:116
+msgid "Menu items have icons"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:140
+msgid "Statusbar is interactive when possible"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:145
+msgid "Statusbar progress meter is on the right"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:162
+msgid "Menu Options"
+msgstr "Postavke izbornika"
+
+#: capplets/ui-properties/ui-properties.c:163
+msgid "Statusbar Options"
+msgstr "Postavke trake stanja"
+
+#: capplets/ui-properties/ui-properties.c:164
+msgid "Toolbar Options"
+msgstr "Postavke trake s alatima"
+
+#: capplets/ui-properties/ui-properties.c:170
+msgid "Dialog buttons"
+msgstr "Gumbi dialoga"
+
+#: capplets/ui-properties/ui-properties.c:171
+msgid "Default value"
+msgstr "Uobièajena vrijednost"
+
+#: capplets/ui-properties/ui-properties.c:172
+msgid "Spread buttons out"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:173
+msgid "Put buttons on edges"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:174
+msgid "Left-justify buttons"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:175
+msgid "Right-justify buttons"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:180
+msgid "Dialog buttons have icons"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:185
+msgid "Use statusbar instead of dialog when possible"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:207
+msgid "Dialog position"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:208
+msgid "Let window manager decide"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:209
+msgid "Center of the screen"
+msgstr "Centar zaslona"
+
+#: capplets/ui-properties/ui-properties.c:210
+msgid "At the mouse pointer"
+msgstr "Ispod pokazivaèa mi¹a"
+
+#: capplets/ui-properties/ui-properties.c:215
+msgid "Dialog hints"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:216
+msgid "Dialogs are like other windows"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:217
+msgid "Dialogs are treated specially by window manager"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:222
+msgid "Place dialogs over application window when possible"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:243
+msgid "Dialog Layout"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:244
+msgid "Dialog Behavior"
+msgstr "Pona¹anje dialoga"
+
+#: capplets/ui-properties/ui-properties.c:250
+msgid "Default MDI Mode"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:251
+msgid "Notebook"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:252
+msgid "Toplevel"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:253
+msgid "Modal"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:258
+msgid "MDI notebook tab position"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:259
+msgid "Left"
+msgstr "Lijevo"
+
+#: capplets/ui-properties/ui-properties.c:260
+msgid "Right"
+msgstr "Desno"
+
+#: capplets/ui-properties/ui-properties.c:261
+msgid "Top"
+msgstr "Vrh"
+
+#: capplets/ui-properties/ui-properties.c:262
+msgid "Bottom"
+msgstr "Dno"
+
+#: capplets/ui-properties/ui-properties.c:277
+msgid "GNOME MDI Options"
+msgstr "GNOME MDI postavke"
 
 #: capplets/ui-properties/ui-properties.directory.in.h:1
 msgid "Look and Feel"
@@ -4240,6 +3873,368 @@ msgstr ""
 #: capplets/ui-properties/ui-properties.directory.in.h:2
 msgid "Look and Feel Properties"
 msgstr ""
+
+#: capplets/url-properties/url-properties.c:51
+msgid "Error initializing the `url-properties' capplet."
+msgstr ""
+
+#: capplets/url-properties/url-properties.c:76
+msgid "Protocol"
+msgstr "Protokol"
+
+#: capplets/url-properties/url-properties.c:76
+msgid "Command"
+msgstr "Naredba"
+
+#: capplets/url-properties/url-properties.c:93
+msgid "handler:"
+msgstr "rukovatelj:"
+
+#. set some commonly used handlers
+#: capplets/url-properties/url-properties.c:103
+msgid "Netscape"
+msgstr "Netscape"
+
+#: capplets/url-properties/url-properties.c:108
+msgid "Netscape (new window)"
+msgstr "Netscape (novi prozor)"
+
+#: capplets/url-properties/url-properties.c:121
+msgid "Help browser"
+msgstr ""
+
+#: capplets/url-properties/url-properties.c:127
+msgid "Help browser (new window)"
+msgstr ""
+
+#: capplets/url-properties/url-properties.c:140
+msgid "Set"
+msgstr "Postavi"
+
+#: capplets/url-properties/url-properties.c:148
+msgid "Remove"
+msgstr "Ukloni"
+
+#: capplets/url-properties/url-properties.desktop.in.h:1
+msgid "Configure which programs are used to display URLs"
+msgstr ""
+
+#: capplets/url-properties/url-properties.desktop.in.h:2
+#, fuzzy
+msgid "URL Handlers"
+msgstr "rukovatelj:"
+
+#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.h:1
+msgid "Enlightenment"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.h:1
+msgid "Ice WM"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.h:1
+msgid "Scwm"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.h:1
+msgid "Window Maker"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/twm.desktop.in.h:1
+msgid "twm"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:142
+#, c-format
+msgid ""
+"Starting %s\n"
+"(%d seconds left before operation times out)"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:303
+#, c-format
+msgid "%s (Current)"
+msgstr "%s (Trenutno)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:306
+#, c-format
+msgid "Run Configuration Tool for %s"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:317
+msgid " (Not found)"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:356
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\tAnother window manager is already running and could not be killed\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:360
+#, c-format
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\t'%s' didn't start\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:413
+msgid "Previous window manager did not die\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:446
+#, c-format
+msgid ""
+"Could not start '%s'.\n"
+"Falling back to previous window manager '%s'\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:477
+msgid ""
+"Could not start fallback window manager.\n"
+"Please run a window manager manually. You can\n"
+"do this by selecting \"Run Program\" in the\n"
+"foot menu\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:502
+#: capplets/wm-properties/wm-properties-capplet.c:868
+#: capplets/wm-properties/wm-properties-capplet.c:875
+#: capplets/wm-properties/wm-properties-capplet.c:1021
+msgid "OK"
+msgstr "U redu"
+
+#: capplets/wm-properties/wm-properties-capplet.c:520
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. You can do so immediately by selecting the \"Save session\n"
+"now\" below, or you can save your session later.  This can be\n"
+"done either selecting \"Save Current Session\" under \"Settings\"\n"
+"in the main menu, or by turning on \"Save Current Setup\" when\n"
+"you log out.\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:527
+msgid "Save Session Later"
+msgstr "Spremi sesiju kasnije"
+
+#: capplets/wm-properties/wm-properties-capplet.c:527
+msgid "Save Session Now"
+msgstr "Spremi sesiju odmah"
+
+#: capplets/wm-properties/wm-properties-capplet.c:530
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. This can be done by either selecting \"Save Current Session\"\n"
+"under \"Settings\" in the main menu, or by turning on\n"
+"\"Save Current Setup\" when you log out.\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:757
+msgid "Add New Window Manager"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:771
+msgid "Name:"
+msgstr "Ime:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:784
+msgid "Command:"
+msgstr "Naredba:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:797
+msgid "Configuration Command:"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:816
+msgid "Window manager is session managed"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:866
+msgid "Name cannot be empty"
+msgstr "Ime ne mo¾e biti prazno"
+
+#: capplets/wm-properties/wm-properties-capplet.c:873
+msgid "Command cannot be empty"
+msgstr "Naredba ne mo¾e biti prazna"
+
+#: capplets/wm-properties/wm-properties-capplet.c:922
+#: capplets/wm-properties/wm-properties-capplet.c:964
+msgid "Edit Window Manager"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:1020
+msgid "You cannot delete the current Window Manager"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:1093
+msgid "Edit..."
+msgstr "Promijeni..."
+
+#: capplets/wm-properties/wm-properties-capplet.c:1098
+msgid "Delete"
+msgstr "Obri¹i"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1134
+msgid ""
+"an initialization error occurred while starting 'wm-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties.desktop.in.h:1
+msgid "Choose a window manager"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties.desktop.in.h:2
+msgid "Window Manager"
+msgstr ""
+
+#: control-center/callbacks.c:102 control-center/gnomecc.desktop.in.h:1
+msgid "GNOME Control Center"
+msgstr "GNOME kontrolni centar"
+
+#: control-center/callbacks.c:105
+msgid "Desktop Properties manager."
+msgstr ""
+
+#: control-center/capplet-manager.c:179
+msgid "Try"
+msgstr "Isku¹aj"
+
+#: control-center/capplet-manager.c:185
+msgid "Revert"
+msgstr "Vrati"
+
+#. set the help item
+#: control-center/capplet-manager.c:208
+#, fuzzy, c-format
+msgid "Help with '%s' settings"
+msgstr "Isku¹aj postavke"
+
+#: control-center/capplet-widget-libs.c:46
+msgid "id of the capplet -- assigned by the control-center"
+msgstr ""
+
+#: control-center/capplet-widget-libs.c:46
+msgid "ID"
+msgstr "ID"
+
+#: control-center/capplet-widget-libs.c:47
+msgid "Multi-capplet id."
+msgstr ""
+
+#: control-center/capplet-widget-libs.c:47
+msgid "CAPID"
+msgstr "CAPID"
+
+#: control-center/capplet-widget-libs.c:48
+msgid "X ID of the socket it's plugged into"
+msgstr ""
+
+#: control-center/capplet-widget-libs.c:48
+msgid "XID"
+msgstr "XID"
+
+#: control-center/capplet-widget-libs.c:49
+msgid "IOR of the control-center"
+msgstr ""
+
+#: control-center/capplet-widget-libs.c:49
+msgid "IOR"
+msgstr "IOR"
+
+#: control-center/capplet-widget-libs.c:50
+msgid "Initialize session settings"
+msgstr ""
+
+#: control-center/capplet-widget-libs.c:51
+msgid "Ignore default action.  Used for custom init-session cases"
+msgstr ""
+
+#: control-center/capplet-widget.c:272
+msgid "Sorry, no help is available for these settings."
+msgstr ""
+
+#: control-center/corba-glue.c:77
+msgid "capplet-command to be run."
+msgstr ""
+
+#: control-center/corba-glue.c:77
+msgid "CAPPLET"
+msgstr "CAPPLET"
+
+#: control-center/gnomecc.desktop.in.h:2
+msgid "The GNOME configuration tool"
+msgstr ""
+
+#: control-center/main.c:36
+#, fuzzy
+msgid "Help on control-center"
+msgstr "Kontrolni centar"
+
+#: control-center/main.c:36
+msgid "Help with the GNOME control-center."
+msgstr ""
+
+#: control-center/main.c:38
+msgid "Help with the current configuration page."
+msgstr ""
+
+#: control-center/main.c:41
+#, fuzzy
+msgid "About"
+msgstr "O:"
+
+#: control-center/main.c:41
+#, fuzzy
+msgid "About the GNOME control-center."
+msgstr "GNOME kontrolni centar"
+
+#. we create the widgets
+#: control-center/main.c:69
+msgid "Warning:"
+msgstr "Upozorenje:"
+
+#: control-center/main.c:69
+msgid "Discard all changes"
+msgstr "Odbaci sve promjene"
+
+#. ...labels, etc
+#: control-center/main.c:78
+msgid ""
+"The following modules have had changes made, but not committed.  If you "
+"would like to edit them, please double click on the appropriate entry."
+msgstr ""
+
+#: control-center/splash.c:48
+msgid "Operating System:"
+msgstr ""
+
+#: control-center/splash.c:49
+msgid "Distribution Version:"
+msgstr ""
+
+#: control-center/splash.c:50
+msgid "Processor Type:"
+msgstr ""
+
+#: control-center/splash.c:51
+#, fuzzy
+msgid "User Name:"
+msgstr "Ime:"
+
+#: control-center/splash.c:52
+#, fuzzy
+msgid "Host Name:"
+msgstr "Ime:"
+
+#. This is about the only case where we'll put Unknown instead
+#. of simply not showing the info.
+#: control-center/splash.c:178
+msgid "Unknown"
+msgstr "Nepoznat"
 
 #~ msgid "Mime Type: "
 #~ msgstr "Mime tip:"

@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0\n"
-"POT-Creation-Date: 2001-03-12 16:03+0100\n"
+"POT-Creation-Date: 2001-03-15 10:16+0100\n"
 "PO-Revision-Date: 1999-03-18 23:11+0100\n"
 "Last-Translator: Pablo Saratxaga <srtxg@chanae.alphanet.ch>\n"
 "Language-Team: walon <linux-wa@chanae.alphanet.ch>\n"
@@ -33,6 +33,14 @@ msgid ""
 "'background-properties-capplet'.\n"
 "aborting...\n"
 msgstr ""
+
+#: capplets/background-properties/background-properties.desktop.in.h:1
+msgid "Background"
+msgstr "Fond"
+
+#: capplets/background-properties/background-properties.desktop.in.h:2
+msgid "Configuration of the desktop's background"
+msgstr "Apontiaedje do fond do scribanne"
 
 #: capplets/background-properties/property-background.c:116
 msgid "Disabled"
@@ -66,9 +74,8 @@ msgid "Secondary Color"
 msgstr "Coleur secondaire"
 
 #: capplets/background-properties/property-background.c:568
-#, fuzzy
 msgid "Wallpaper Selection"
-msgstr "Tchwezi les groupes di pacaedjes"
+msgstr "Tchwezi li tapisreye"
 
 #: capplets/background-properties/property-background.c:573
 #: capplets/file-types/file-types-icon-entry.c:258
@@ -86,7 +93,7 @@ msgstr "Vey divant"
 
 #: capplets/background-properties/property-background.c:635
 msgid "Wallpaper"
-msgstr ""
+msgstr "Tapisreye"
 
 #: capplets/background-properties/property-background.c:638
 msgid " Browse... "
@@ -113,14 +120,12 @@ msgid "Scaled (keep aspect)"
 msgstr "Al schåle (wårder les proporcions)"
 
 #: capplets/background-properties/property-background.c:721
-#, fuzzy
 msgid "Centered"
-msgstr "Internet"
+msgstr "Å mitan"
 
 #: capplets/background-properties/property-background.c:733
-#, fuzzy
 msgid "Tiled"
-msgstr "Pîces"
+msgstr "Å schaeyes"
 
 #: capplets/background-properties/property-background.c:831
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:180
@@ -209,23 +214,61 @@ msgstr "MÔDE"
 msgid "Display wallpaper: tiled, centered, scaled or ratio"
 msgstr ""
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:238
-msgid "Gnome editor"
-msgstr "Aspougneu di Gnome"
-
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:249
-msgid "Run In Terminal"
-msgstr "Enonder dins on terminå"
-
-#: capplets/file-types/file-types-capplet.desktop.in.h:1
-msgid "File Types and Programs"
-msgstr "Sôres di fitchîs èt programes"
-
-#: capplets/file-types/file-types-capplet.desktop.in.h:2
-msgid "Specify which programs are used to open or view each file type"
+#: capplets/desktop-links/Desktop.directory.in.h:1
+#: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:1
+msgid "Desktop"
 msgstr ""
-"Specifyî les programes ki sront eployîs po drovî ou vey tchaeke sôrte di "
-"fitchî"
+
+#: capplets/desktop-links/Documents.directory.in.h:1
+msgid "Configure how document types are handled"
+msgstr ""
+
+#: capplets/desktop-links/Documents.directory.in.h:2
+msgid "Document Handlers"
+msgstr ""
+
+#. create the app
+#: capplets/desktop-links/Gnome.directory.in.h:1 control-center/main.c:197
+#: control-center/splash.c:247
+msgid "Control Center"
+msgstr "Cente di Contrôle"
+
+#: capplets/desktop-links/Gnome.directory.in.h:2
+msgid "Control Center Menu"
+msgstr "Menu do cente di contrôle"
+
+#: capplets/desktop-links/Multimedia.directory.in.h:1
+msgid "Configure the settings of your Multimedia devices"
+msgstr "Apontiaedje di vos éndjins multimédia"
+
+#: capplets/desktop-links/Multimedia.directory.in.h:2
+msgid "Multimedia"
+msgstr "Multimédia"
+
+#: capplets/desktop-links/Peripherals.directory.in.h:1
+msgid "Configure your external devices"
+msgstr ""
+
+#: capplets/desktop-links/Peripherals.directory.in.h:2
+msgid "Peripherals"
+msgstr ""
+
+#: capplets/desktop-links/Session.directory.in.h:1
+msgid "Session"
+msgstr "Session"
+
+#: capplets/desktop-links/Session.directory.in.h:2
+msgid "Session Management Settings"
+msgstr "Apontiaedjes pol manaedjeu di sessions"
+
+#: capplets/desktop-links/UIOptions.directory.in.h:1
+#, fuzzy
+msgid "Configure the global settings of your GNOME applications"
+msgstr "Prôprietés do spårgneu di waitroûle"
+
+#: capplets/desktop-links/UIOptions.directory.in.h:2
+msgid "User Interface"
+msgstr "Eterface avou l' ûzeu"
 
 #: capplets/file-types/file-types-capplet-dialogs.c:387
 msgid "Edit Applications List"
@@ -233,9 +276,8 @@ msgstr "Aspougnî li djîvéye di programes"
 
 #. Add label
 #: capplets/file-types/file-types-capplet-dialogs.c:409
-#, fuzzy, c-format
 msgid "Select applications to appear in menu for MIME type \"%s\""
-msgstr "Tchwezixhoz on programe po drovi \"%s\" avou."
+msgstr "Tchwezixhoz les programes ki vont esse èl menu pol sôre MIME «%s»"
 
 #: capplets/file-types/file-types-capplet-dialogs.c:433
 msgid "Add Application..."
@@ -365,15 +407,13 @@ msgid "Open Behavior"
 msgstr "Drovaedje"
 
 #: capplets/file-types/file-types-capplet-dialogs.c:1299
-#, fuzzy
 msgid "Can open multiple files"
-msgstr "Mete multi profils"
+msgstr "Pout drovî pus d' on fitchî d' on côp"
 
 #. FIXME bugzilla.eazel.com 6066: This needs to be three options now: "yes", "no", and "use uris for non-file locations"
 #: capplets/file-types/file-types-capplet-dialogs.c:1307
-#, fuzzy
 msgid "Can open from URI"
-msgstr "Drovî a pårti d' ene _hårdéye..."
+msgstr "Pout drovî a pårti d' ene hårdéye"
 
 #: capplets/file-types/file-types-capplet.c:735
 #: capplets/file-types/file-types-capplet.c:1877
@@ -448,174 +488,35 @@ msgstr "Egztension"
 msgid "Default Action"
 msgstr "Prémetowe accion"
 
+#: capplets/file-types/file-types-capplet.desktop.in.h:1
+msgid "File Types and Programs"
+msgstr "Sôres di fitchîs èt programes"
+
+#: capplets/file-types/file-types-capplet.desktop.in.h:2
+msgid "Specify which programs are used to open or view each file type"
+msgstr ""
+"Specifyî les programes ki sront eployîs po drovî ou vey tchaeke sôrte di "
+"fitchî"
+
 #: capplets/file-types/file-types-icon-entry.c:381
 msgid "Select an icon"
 msgstr "Tchwezi ene imådjete"
 
-#: capplets/mouse-properties/mouse-properties.c:267
-msgid "Mouse buttons"
-msgstr "Botons del sori"
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:238
+msgid "Gnome editor"
+msgstr "Aspougneu di Gnome"
 
-#: capplets/mouse-properties/mouse-properties.c:276
-#, fuzzy
-msgid "Left handed"
-msgstr "plaeçmint candjî"
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:249
+msgid "Run In Terminal"
+msgstr "Enonder dins on terminå"
 
-#: capplets/mouse-properties/mouse-properties.c:278
-#, fuzzy
-msgid "Right handed"
-msgstr " &Droete "
+#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:1
+msgid "Choose the editor that is invoked by gnome-edit"
+msgstr "Tchwezixhoz l' aspougneu di tecse houkî pa gnome-edit"
 
-#. Mouse motion
-#: capplets/mouse-properties/mouse-properties.c:304
-#, fuzzy
-msgid "Mouse motion"
-msgstr "Tchûzes do module:"
-
-#: capplets/mouse-properties/mouse-properties.c:314
-#, fuzzy
-msgid "Acceleration"
-msgstr "Rascoûrti"
-
-#: capplets/mouse-properties/mouse-properties.c:314
-#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:4
-#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:8
-#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:11
-msgid "Fast"
-msgstr "Roed"
-
-#: capplets/mouse-properties/mouse-properties.c:314
-#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:13
-#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:21
-#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:19
-msgid "Slow"
-msgstr "Londjin"
-
-#: capplets/mouse-properties/mouse-properties.c:325
-#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:30
-#, fuzzy
-msgid "Threshold"
-msgstr "Sou pol flåwe tchedje"
-
-#: capplets/mouse-properties/mouse-properties.c:325
-#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:6
-#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:9
-#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:10
-msgid "Large"
-msgstr "Lådje"
-
-#: capplets/mouse-properties/mouse-properties.c:325
-#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:14
-#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:15
-#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:22
-msgid "Small"
-msgstr "Pitit"
-
-#: capplets/mouse-properties/mouse-properties.c:350
-msgid ""
-"an initialization error occurred while starting 'mouse-properties-capplet'.\n"
-"aborting...\n"
-msgstr ""
-
-#: capplets/screensaver-properties/callbacks.c:102
-msgid "Require Password"
-msgstr "Eployî on sicret"
-
-#: capplets/screensaver-properties/callbacks.c:154
-#, fuzzy
-msgid "Use power management."
-msgstr "Manaedjeu d' ûzeus èt gropes"
-
-#: capplets/screensaver-properties/callbacks.c:309
-msgid "No Screensaver"
-msgstr "Nou spårgneu di waitroûle"
-
-#: capplets/screensaver-properties/callbacks.c:314
-msgid "Random Screensaver"
-msgstr "Sipårgneu di waitroûle a l' astcheyance"
-
-#: capplets/screensaver-properties/callbacks.c:483
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:56
-msgid "Settings..."
-msgstr "Apontiaedjes..."
-
-#. we need to special case random
-#: capplets/screensaver-properties/callbacks.c:491
-#, fuzzy
-msgid "Random Settings"
-msgstr "Apontiaedjes del cåte"
-
-#: capplets/screensaver-properties/callbacks.c:501
-msgid "%s Settings..."
-msgstr "Apontiaedjes di %s..."
-
-#: capplets/screensaver-properties/screensaver-dialog.c:46
-msgid "About:"
-msgstr "Å dfait:"
-
-#: capplets/screensaver-properties/screensaver-dialog.c:51
-msgid "Author:"
-msgstr "Ôteu:"
-
-#: capplets/screensaver-properties/screensaver-dialog.c:61
-msgid "Author: UNKNOWN"
-msgstr "Ôteu: NÉN CNOXHOU"
-
-#: capplets/screensaver-properties/screensaver-dialog.c:78
-msgid "Settings"
-msgstr "Apontiaedjes"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:38
-msgid "RANDOM SCREENSAVER"
-msgstr "SIPÅRGNEU A L' ASTCHEYANCE"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:49
-msgid "Screen Saver"
-msgstr "Sipårgneu di waitroûle"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:61
-msgid ""
-"Pressing this button will popup a dialogbox that will help you setup the "
-"current screensaver."
-msgstr ""
-
-#. set up the initial frame, and get a vbox in which to pack things.
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:88
-msgid "Screen Saver Settings"
-msgstr "Apontiaedje do spårgneu di waitroûle"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:96
-msgid "Start After "
-msgstr "Enonder dispôy di "
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:102
-msgid " Minutes."
-msgstr " munutes."
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:117
-msgid "Priority:"
-msgstr "Prumîristé:"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:124
-msgid "Low "
-msgstr "Basse "
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:126
-msgid " Normal"
-msgstr " Normå"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:137
-msgid "Shutdown monitor "
-msgstr "Distinde li waitroûle "
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:139
-msgid " minutes after screen saver has started."
-msgstr " munutes après kel spårgneu di waitroûle åye stî enondé." 
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:152
-#, fuzzy
-msgid "Screen Saver Demo"
-msgstr "Sipårgneu di waitroûle"
+#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:2
+msgid "Default Editor"
+msgstr "Prémetou aspougneu di tecse"
 
 #: capplets/keyboard-properties/keyboard-properties.c:262
 msgid "Keyboard bell"
@@ -674,9 +575,8 @@ msgid "Click volume"
 msgstr "Clitcheye schaeye"
 
 #: capplets/keyboard-properties/keyboard-properties.c:359
-#, fuzzy
 msgid "Test settings"
-msgstr "Wårder les apontiaedjes"
+msgstr "Sayî l' apontiaedje"
 
 #: capplets/keyboard-properties/keyboard-properties.c:466
 msgid ""
@@ -685,804 +585,117 @@ msgid ""
 "aborting...\n"
 msgstr ""
 
-#: capplets/sound-properties/sound-properties.c:97
+#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:1
+msgid "Keyboard"
+msgstr "Taprece"
+
+#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:2
+msgid "Keyboard Properties"
+msgstr "Prôpietés del taprece"
+
+#: capplets/mouse-properties/mouse-properties.c:267
+msgid "Mouse buttons"
+msgstr "Botons del sori"
+
+#: capplets/mouse-properties/mouse-properties.c:276
+#, fuzzy
+msgid "Left handed"
+msgstr "plaeçmint candjî"
+
+#: capplets/mouse-properties/mouse-properties.c:278
+#, fuzzy
+msgid "Right handed"
+msgstr " &Droete "
+
+#. Mouse motion
+#: capplets/mouse-properties/mouse-properties.c:304
+msgid "Mouse motion"
+msgstr "Movmint del sori"
+
+#: capplets/mouse-properties/mouse-properties.c:314
+#, fuzzy
+msgid "Acceleration"
+msgstr "Rascoûrti"
+
+#: capplets/mouse-properties/mouse-properties.c:314
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:4
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:8
+#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:11
+msgid "Fast"
+msgstr "Roed"
+
+#: capplets/mouse-properties/mouse-properties.c:314
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:13
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:21
+#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:19
+msgid "Slow"
+msgstr "Londjin"
+
+#: capplets/mouse-properties/mouse-properties.c:325
+#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:30
+#, fuzzy
+msgid "Threshold"
+msgstr "Sou pol flåwe tchedje"
+
+#: capplets/mouse-properties/mouse-properties.c:325
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:10
+msgid "Large"
+msgstr "Lådje"
+
+#: capplets/mouse-properties/mouse-properties.c:325
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:14
+#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:15
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:22
+msgid "Small"
+msgstr "Pitit"
+
+#: capplets/mouse-properties/mouse-properties.c:350
 msgid ""
-"an initialization error occurred while starting 'sound-properties-capplet'."
-msgstr ""
-
-#: capplets/sound-properties/sound-properties.c:188
-#, fuzzy
-msgid "Event"
-msgstr "setinme"
-
-#: capplets/sound-properties/sound-properties.c:189
-msgid "File to Play"
-msgstr "Fitchî a djower"
-
-#: capplets/sound-properties/sound-properties.c:243
-msgid "Enable"
-msgstr "Mete èn alaedje"
-
-#: capplets/sound-properties/sound-properties.c:250
-#, fuzzy
-msgid "Enable sound server startup"
-msgstr "Mete èn oûve li sierveu di sons"
-
-#: capplets/sound-properties/sound-properties.c:258
-msgid "Sounds for events"
-msgstr ""
-
-#: capplets/sound-properties/sound-properties.c:279
-msgid "General"
-msgstr "Djenerå"
-
-#: capplets/sound-properties/sound-properties.c:286
-msgid "Select sound file"
-msgstr "Tchwezi on fitchî di son"
-
-#: capplets/sound-properties/sound-properties.c:325
-msgid "Play"
-msgstr "Djower"
-
-#: capplets/sound-properties/sound-properties.c:336
-#, fuzzy
-msgid "Sound Events"
-msgstr "Sons"
-
-#: capplets/sound-properties/sound-properties.c:355
-msgid ""
-"This copy of the GNOME control center was not compiled with sound support"
-msgstr ""
-
-#: capplets/sound-properties/sound-properties.c:748
-msgid "The sound file for this event does not exist."
-msgstr ""
-
-#: capplets/sound-properties/sound-properties.c:750
-msgid ""
-"The sound file for this event does not exist.\n"
-"You may want to install the gnome-audio package\n"
-"for a set of default sounds."
-msgstr ""
-
-#: capplets/theme-switcher/demo.c:50
-msgid "One"
-msgstr "Onk"
-
-#: capplets/theme-switcher/demo.c:50
-msgid "Two"
-msgstr "Deus"
-
-#. just 8 short names that will serve as samples for titles in demo
-#: capplets/theme-switcher/demo.c:52
-#, fuzzy
-msgid "Eenie"
-msgstr "plaijhî a-z avu"
-
-#: capplets/theme-switcher/demo.c:52
-#, fuzzy
-msgid "Meenie"
-msgstr "Merengue"
-
-#: capplets/theme-switcher/demo.c:53
-#, fuzzy
-msgid "Mynie"
-msgstr "plaijhî a-z avu"
-
-#: capplets/theme-switcher/demo.c:53
-#, fuzzy
-msgid "Moe"
-msgstr "Môde"
-
-#: capplets/theme-switcher/demo.c:54
-#, fuzzy
-msgid "Catcha"
-msgstr "Muchete"
-
-#: capplets/theme-switcher/demo.c:54
-#, fuzzy
-msgid "Tiger"
-msgstr "Eure"
-
-#: capplets/theme-switcher/demo.c:55
-#, fuzzy
-msgid "By Its"
-msgstr "Octets"
-
-#: capplets/theme-switcher/demo.c:55
-#, fuzzy
-msgid "Toe"
-msgstr "A"
-
-#: capplets/theme-switcher/demo.c:114
-msgid "Selected themes from above will be tested by previewing here."
-msgstr ""
-
-#. column one
-#: capplets/theme-switcher/demo.c:119
-#, fuzzy
-msgid "Sample Button"
-msgstr "Posse di djeus"
-
-#: capplets/theme-switcher/demo.c:123
-#, fuzzy
-msgid "Sample Check Button"
-msgstr "Coridjaedje fwait"
-
-#: capplets/theme-switcher/demo.c:128
-msgid "Sample Text Entry Field"
-msgstr ""
-
-#: capplets/theme-switcher/demo.c:139
-msgid "Submenu"
-msgstr "Sormenu"
-
-#: capplets/theme-switcher/demo.c:146
-msgid "Item 1"
-msgstr "Cayet 1"
-
-#: capplets/theme-switcher/demo.c:149
-msgid "Another item"
-msgstr "On ôte cayet"
-
-#: capplets/theme-switcher/demo.c:154
-#, fuzzy
-msgid "Radio Button 1"
-msgstr "Botons mdk"
-
-#: capplets/theme-switcher/demo.c:160
-#, fuzzy
-msgid "Radio Button 2"
-msgstr "Sori PS/2 a 3 botons"
-
-#: capplets/theme-switcher/gui.c:89
-#, fuzzy, c-format
-msgid ""
-"Error installing theme:\n"
-"'%s'\n"
-"%s"
-msgstr "dj' astale %s\n"
-
-#: capplets/theme-switcher/gui.c:120
-#, fuzzy
-msgid "Select a theme to install"
-msgstr "Tchwezixhoz les plugins a astaler"
-
-#: capplets/theme-switcher/gui.c:197
-msgid "Available Themes"
-msgstr "Tinmes k' i gn a"
-
-#: capplets/theme-switcher/gui.c:221
-#, fuzzy
-msgid ""
-"Auto\n"
-"Preview"
-msgstr "Vey divant"
-
-#: capplets/theme-switcher/gui.c:233
-#, fuzzy
-msgid ""
-"Install new\n"
-"theme..."
-msgstr "Dj' astale les fontes..."
-
-#. Font selector.
-#.
-#: capplets/theme-switcher/gui.c:239
-msgid "User Font"
-msgstr "Fonte di l' ûzeu"
-
-#. FIXME - should really get this from X somehow
-#. for now we just assume default gtk font
-#: capplets/theme-switcher/gui.c:257
-msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
-msgstr "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*,*"
-
-#: capplets/theme-switcher/gui.c:276
-msgid "Use custom font."
-msgstr "Eployî fonte da vosse."
-
-#: capplets/theme-switcher/install.c:26
-msgid "Home directory doesn't exist!\n"
-msgstr "Li ridant måjhon n' egzisteye nén!\n"
-
-#: capplets/theme-switcher/install.c:36
-msgid "Theme does not exist"
-msgstr "Li tinme n' egzisteye nén"
-
-#: capplets/theme-switcher/install.c:68
-msgid "Command '%s' failed"
-msgstr "Li comande «%s» a fwait berwete"
-
-#: capplets/theme-switcher/install.c:73
-msgid "Unknown file format"
-msgstr "Sôre di fitchî nén cnoxhowe"
-
-#: capplets/ui-properties/ui-properties.c:54
-msgid "Can detach and move toolbars"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:59
-msgid "Toolbars have relieved border"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:64
-msgid "Toolbar buttons have relieved border"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:69
-msgid "Toolbars have line separators"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:74
-msgid "Toolbars have text labels"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:103
-msgid "Can detach and move menus"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:108
-msgid "Menus have relieved border"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:112
-msgid "Submenus can be torn off"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:116
-#, fuzzy
-msgid "Menu items have icons"
-msgstr "Eployî des imådjetes di totes les cognes"
-
-#: capplets/ui-properties/ui-properties.c:140
-msgid "Statusbar is interactive when possible"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:145
-msgid "Statusbar progress meter is on the right"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:162
-msgid "Menu Options"
-msgstr "Tchûzes po les menus"
-
-#: capplets/ui-properties/ui-properties.c:163
-msgid "Statusbar Options"
-msgstr "Tchûzes pol bår ås messaedjes"
-
-#: capplets/ui-properties/ui-properties.c:164
-msgid "Toolbar Options"
-msgstr "Tchûzes pol bårs ås usteyes"
-
-#: capplets/ui-properties/ui-properties.c:170
-#, fuzzy
-msgid "Dialog buttons"
-msgstr "2 botons"
-
-#: capplets/ui-properties/ui-properties.c:171
-msgid "Default value"
-msgstr "Prémetowe valixhance"
-
-#: capplets/ui-properties/ui-properties.c:172
-#, fuzzy
-msgid "Spread buttons out"
-msgstr "Èn alaedje a l' enondaedje"
-
-#: capplets/ui-properties/ui-properties.c:173
-msgid "Put buttons on edges"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:174
-msgid "Left-justify buttons"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:175
-msgid "Right-justify buttons"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:180
-msgid "Dialog buttons have icons"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:185
-msgid "Use statusbar instead of dialog when possible"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:207
-#, fuzzy
-msgid "Dialog position"
-msgstr "Eplaeçmint del imådjete"
-
-#: capplets/ui-properties/ui-properties.c:208
-#, fuzzy
-msgid "Let window manager decide"
-msgstr "Tchwezixhoz li manaedjeu di purnea a enonder:"
-
-#: capplets/ui-properties/ui-properties.c:209
-#, fuzzy
-msgid "Center of the screen"
-msgstr "Netyî li tchûze"
-
-#: capplets/ui-properties/ui-properties.c:210
-#, fuzzy
-msgid "At the mouse pointer"
-msgstr "Tchwezixhoz les ponts di montaedje"
-
-#: capplets/ui-properties/ui-properties.c:215
-#, fuzzy
-msgid "Dialog hints"
-msgstr "Mete èn oûve les racsegnes"
-
-#: capplets/ui-properties/ui-properties.c:216
-#, fuzzy
-msgid "Dialogs are like other windows"
-msgstr "Å dzeur des ôtes purneas"
-
-#: capplets/ui-properties/ui-properties.c:217
-#, fuzzy
-msgid "Dialogs are treated specially by window manager"
-msgstr "No do programe tel ki li manaedjeu di purnea s' endè sievrè"
-
-#: capplets/ui-properties/ui-properties.c:222
-msgid "Place dialogs over application window when possible"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:243
-#, fuzzy
-msgid "Dialog Layout"
-msgstr "Adjinçmint d' astampé"
-
-#: capplets/ui-properties/ui-properties.c:244
-#, fuzzy
-msgid "Dialog Behavior"
-msgstr "Dûjhance di l' aspougneu"
-
-#: capplets/ui-properties/ui-properties.c:250
-msgid "Default MDI Mode"
-msgstr "Prémetou môde MDI"
-
-#: capplets/ui-properties/ui-properties.c:251
-msgid "Notebook"
-msgstr "Bloc di notes"
-
-#: capplets/ui-properties/ui-properties.c:252
-msgid "Toplevel"
-msgstr "Tofér al copete"
-
-#: capplets/ui-properties/ui-properties.c:253
-msgid "Modal"
-msgstr "Modå"
-
-#: capplets/ui-properties/ui-properties.c:258
-#, fuzzy
-msgid "MDI notebook tab position"
-msgstr "Eplaeçmint del _tabulåcion è môde bloc di notes: "
-
-#: capplets/ui-properties/ui-properties.c:259
-msgid "Left"
-msgstr "Hintche"
-
-#: capplets/ui-properties/ui-properties.c:260
-msgid "Right"
-msgstr "Droete"
-
-#: capplets/ui-properties/ui-properties.c:261
-msgid "Top"
-msgstr "Al copete"
-
-#: capplets/ui-properties/ui-properties.c:262
-msgid "Bottom"
-msgstr "Al valeye"
-
-#: capplets/ui-properties/ui-properties.c:277
-#, fuzzy
-msgid "GNOME MDI Options"
-msgstr "Tchûzes di l' eterface di GNOME"
-
-#: capplets/url-properties/url-properties.c:51
-msgid "Error initializing the `url-properties' capplet."
-msgstr ""
-
-#: capplets/url-properties/url-properties.c:76
-msgid "Protocol"
-msgstr "Protocole"
-
-#: capplets/url-properties/url-properties.c:76
-msgid "Command"
-msgstr "Comande"
-
-#: capplets/url-properties/url-properties.c:93
-#, fuzzy
-msgid "handler:"
-msgstr "Erôler"
-
-#. set some commonly used handlers
-#: capplets/url-properties/url-properties.c:103
-msgid "Netscape"
-msgstr "Betchteu Netscape"
-
-#: capplets/url-properties/url-properties.c:108
-msgid "Netscape (new window)"
-msgstr "Betchteu Netscape (drovî on novea purnea)"
-
-#: capplets/url-properties/url-properties.c:121
-msgid "Help browser"
-msgstr "Foyteuse di l' aidance"
-
-#: capplets/url-properties/url-properties.c:127
-msgid "Help browser (new window)"
-msgstr "Foyteuse di l' aidance (drovî on novea purnea)"
-
-#: capplets/url-properties/url-properties.c:140
-msgid "Set"
-msgstr "Mete"
-
-#: capplets/url-properties/url-properties.c:148
-msgid "Remove"
-msgstr "Bodjî foû"
-
-#: capplets/wm-properties/wm-properties-capplet.c:142
-#, c-format
-msgid ""
-"Starting %s\n"
-"(%d seconds left before operation times out)"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties-capplet.c:303
-msgid "%s (Current)"
-msgstr "% (èn alaedje pol moumint)"
-
-#: capplets/wm-properties/wm-properties-capplet.c:306
-msgid "Run Configuration Tool for %s"
-msgstr "Enonder l' usteye d' apontiaedje di %s"
-
-#: capplets/wm-properties/wm-properties-capplet.c:317
-msgid " (Not found)"
-msgstr " (Nén trové)"
-
-#: capplets/wm-properties/wm-properties-capplet.c:356
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\tAnother window manager is already running and could not be killed\n"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties-capplet.c:360
-#, c-format
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\t'%s' didn't start\n"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties-capplet.c:413
-msgid "Previous window manager did not die\n"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties-capplet.c:446
-#, c-format
-msgid ""
-"Could not start '%s'.\n"
-"Falling back to previous window manager '%s'\n"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties-capplet.c:477
-msgid ""
-"Could not start fallback window manager.\n"
-"Please run a window manager manually. You can\n"
-"do this by selecting \"Run Program\" in the\n"
-"foot menu\n"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties-capplet.c:502
-#: capplets/wm-properties/wm-properties-capplet.c:868
-#: capplets/wm-properties/wm-properties-capplet.c:875
-#: capplets/wm-properties/wm-properties-capplet.c:1021
-msgid "OK"
-msgstr "I va"
-
-#: capplets/wm-properties/wm-properties-capplet.c:520
-msgid ""
-"Your current window manager has been changed. In order for\n"
-"this change to be saved, you will need to save your current\n"
-"session. You can do so immediately by selecting the \"Save session\n"
-"now\" below, or you can save your session later.  This can be\n"
-"done either selecting \"Save Current Session\" under \"Settings\"\n"
-"in the main menu, or by turning on \"Save Current Setup\" when\n"
-"you log out.\n"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties-capplet.c:527
-msgid "Save Session Later"
-msgstr "Schaper li session pus tård"
-
-#: capplets/wm-properties/wm-properties-capplet.c:527
-msgid "Save Session Now"
-msgstr "Schaper li session asteure"
-
-#: capplets/wm-properties/wm-properties-capplet.c:530
-msgid ""
-"Your current window manager has been changed. In order for\n"
-"this change to be saved, you will need to save your current\n"
-"session. This can be done by either selecting \"Save Current Session\"\n"
-"under \"Settings\" in the main menu, or by turning on\n"
-"\"Save Current Setup\" when you log out.\n"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties-capplet.c:757
-msgid "Add New Window Manager"
-msgstr "Radjouter on novea manaedjeu di purneas"
-
-#: capplets/wm-properties/wm-properties-capplet.c:771
-msgid "Name:"
-msgstr "No:"
-
-#: capplets/wm-properties/wm-properties-capplet.c:784
-msgid "Command:"
-msgstr "Comande:"
-
-#: capplets/wm-properties/wm-properties-capplet.c:797
-msgid "Configuration Command:"
-msgstr "Comande po l' apontiaedje:"
-
-#: capplets/wm-properties/wm-properties-capplet.c:816
-msgid "Window manager is session managed"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties-capplet.c:866
-msgid "Name cannot be empty"
-msgstr "Li no n' pout nén esse vûde"
-
-#: capplets/wm-properties/wm-properties-capplet.c:873
-msgid "Command cannot be empty"
-msgstr "Li comande ni pout nén esse vûde"
-
-#: capplets/wm-properties/wm-properties-capplet.c:922
-#: capplets/wm-properties/wm-properties-capplet.c:964
-msgid "Edit Window Manager"
-msgstr "Candjî l' manaedjeu di purneas"
-
-#: capplets/wm-properties/wm-properties-capplet.c:1020
-msgid "You cannot delete the current Window Manager"
-msgstr "Vos n' ploz nén disfacer li manaedjeu di purneas èn alaedje"
-
-#: capplets/wm-properties/wm-properties-capplet.c:1093
-msgid "Edit..."
-msgstr "Candjî..."
-
-#: capplets/wm-properties/wm-properties-capplet.c:1098
-msgid "Delete"
-msgstr "Disfacer"
-
-#: capplets/wm-properties/wm-properties-capplet.c:1134
-msgid ""
-"an initialization error occurred while starting 'wm-properties-capplet'.\n"
+"an initialization error occurred while starting 'mouse-properties-capplet'.\n"
 "aborting...\n"
 msgstr ""
 
-#: control-center/callbacks.c:102 control-center/gnomecc.desktop.in.h:1
-msgid "GNOME Control Center"
-msgstr "Cente di Contrôle di GNOME"
+#: capplets/mouse-properties/mouse-properties.desktop.in.h:1
+msgid "Mouse"
+msgstr "Sori"
 
-#: control-center/callbacks.c:105
-msgid "Desktop Properties manager."
-msgstr "Manaedjeu des prôpietés do scribanne."
+#: capplets/mouse-properties/mouse-properties.desktop.in.h:2
+msgid "Mouse Properties"
+msgstr "Prôprietés del sori"
 
-#: control-center/capplet-manager.c:179
-msgid "Try"
-msgstr "Sayî"
+#: capplets/screensaver-properties/callbacks.c:102
+msgid "Require Password"
+msgstr "Eployî on sicret"
 
-#: control-center/capplet-manager.c:185
-msgid "Revert"
-msgstr "Rivni èn erî"
-
-#. set the help item
-#: control-center/capplet-manager.c:208
-msgid "Help with '%s' settings"
-msgstr "Aidance avou les apontiaedjes di «%s»"
-
-#: control-center/capplet-widget-libs.c:46
-msgid "id of the capplet -- assigned by the control-center"
-msgstr ""
-
-#: control-center/capplet-widget-libs.c:46
-msgid "ID"
-msgstr "ID"
-
-#: control-center/capplet-widget-libs.c:47
-msgid "Multi-capplet id."
-msgstr ""
-
-#: control-center/capplet-widget-libs.c:47
-msgid "CAPID"
-msgstr ""
-
-#: control-center/capplet-widget-libs.c:48
-msgid "X ID of the socket it's plugged into"
-msgstr ""
-
-#: control-center/capplet-widget-libs.c:48
+#: capplets/screensaver-properties/callbacks.c:154
 #, fuzzy
-msgid "XID"
-msgstr "ID"
+msgid "Use power management."
+msgstr "Manaedjeu d' ûzeus èt gropes"
 
-#: control-center/capplet-widget-libs.c:49
-msgid "IOR of the control-center"
-msgstr ""
+#: capplets/screensaver-properties/callbacks.c:309
+msgid "No Screensaver"
+msgstr "Nou spårgneu di waitroûle"
 
-#: control-center/capplet-widget-libs.c:49
-#, fuzzy
-msgid "IOR"
-msgstr "I/R"
+#: capplets/screensaver-properties/callbacks.c:314
+msgid "Random Screensaver"
+msgstr "Sipårgneu di waitroûle a l' astcheyance"
 
-#: control-center/capplet-widget-libs.c:50
-msgid "Initialize session settings"
-msgstr "Dj' enonde l' apontiaedje del session"
+#: capplets/screensaver-properties/callbacks.c:483
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:56
+msgid "Settings..."
+msgstr "Apontiaedjes..."
 
-#: control-center/capplet-widget-libs.c:51
-msgid "Ignore default action.  Used for custom init-session cases"
-msgstr ""
+#. we need to special case random
+#: capplets/screensaver-properties/callbacks.c:491
+msgid "Random Settings"
+msgstr "Apontiaedjes a l' astcheyance"
 
-#: control-center/capplet-widget.c:272
-msgid "Sorry, no help is available for these settings."
-msgstr "Dji rgrete, i gn a nole aidance po ces apontiaedjes la."
-
-#: control-center/corba-glue.c:77
-#, fuzzy
-msgid "capplet-command to be run."
-msgstr "Tapez ene comande a-z enonder"
-
-#: control-center/corba-glue.c:77
-msgid "CAPPLET"
-msgstr ""
-
-#: control-center/main.c:36
-msgid "Help on control-center"
-msgstr "Aidance sol cente di contrôle"
-
-#: control-center/main.c:36
-msgid "Help with the GNOME control-center."
-msgstr "Aidance sol cente di contrôle di GNOME."
-
-#: control-center/main.c:38
-msgid "Help with the current configuration page."
-msgstr "Aidance sol pådje d' apontiaedje do moumint."
-
-#: control-center/main.c:41
-msgid "About"
-msgstr "Å dfait"
-
-#: control-center/main.c:41
-msgid "About the GNOME control-center."
-msgstr "Å dfait do cente di contrôle di GNOME."
-
-#. we create the widgets
-#: control-center/main.c:69
-msgid "Warning:"
-msgstr "Advertixhmint:"
-
-#: control-center/main.c:69
-#, fuzzy
-msgid "Discard all changes"
-msgstr "Catchî tos les pårtaedjes '$'"
-
-#. ...labels, etc
-#: control-center/main.c:78
-msgid ""
-"The following modules have had changes made, but not committed.  If you "
-"would like to edit them, please double click on the appropriate entry."
-msgstr ""
-
-#. create the app
-#: capplets/desktop-links/Gnome.directory.in.h:1 control-center/main.c:197
-#: control-center/splash.c:247
-msgid "Control Center"
-msgstr "Cente di Contrôle"
-
-#: control-center/splash.c:48
-msgid "Operating System:"
-msgstr "Sistinme d' operance:"
-
-#: control-center/splash.c:49
-msgid "Distribution Version:"
-msgstr "Modéye del distribucion:"
-
-#: control-center/splash.c:50
-msgid "Processor Type:"
-msgstr "Sôrte do processeu:"
-
-#: control-center/splash.c:51
-msgid "User Name:"
-msgstr "No di l' ûzeu:"
-
-#: control-center/splash.c:52
-msgid "Host Name:"
-msgstr "No di l' éndjole:"
-
-#. This is about the only case where we'll put Unknown instead
-#. of simply not showing the info.
-#: control-center/splash.c:178
-msgid "Unknown"
-msgstr "Nén cnoxhou"
-
-#: control-center/gnomecc.desktop.in.h:2
-msgid "The GNOME configuration tool"
-msgstr "L' usteye d' apontiaedje di GNOME"
-
-#: capplets/wm-properties/wm-properties.desktop.in.h:1
-msgid "Choose a window manager"
-msgstr "Tchwezixhoz on manaedjeu di purneas"
-
-#: capplets/wm-properties/wm-properties.desktop.in.h:2
-msgid "Window Manager"
-msgstr "Manaedjeu di purneas"
-
-#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.h:1
-msgid "Enlightenment"
-msgstr "Enlightenment"
-
-#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.h:1
-msgid "Ice WM"
-msgstr "Ice WM"
-
-#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.h:1
-msgid "Scwm"
-msgstr "Scwm"
-
-#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.h:1
-msgid "Window Maker"
-msgstr "Window Maker"
-
-#: capplets/wm-properties/wm-desktops/twm.desktop.in.h:1
-msgid "twm"
-msgstr "twm"
-
-#: capplets/url-properties/url-properties.desktop.in.h:1
-msgid "Configure which programs are used to display URLs"
-msgstr ""
-
-#: capplets/url-properties/url-properties.desktop.in.h:2
-msgid "URL Handlers"
-msgstr ""
-
-#: capplets/ui-properties/application.desktop.in.h:1
-msgid "Applications"
-msgstr "Programes"
-
-#: capplets/ui-properties/application.desktop.in.h:2
-msgid "Sets the default feel of GNOME applications"
-msgstr ""
-
-#: capplets/ui-properties/dialogs.desktop.in.h:1
-msgid "Dialogs"
-msgstr "Purneas di cweriaedje"
-
-#: capplets/ui-properties/mdi.desktop.in.h:1
-msgid "MDI"
-msgstr "MDI"
-
-#: capplets/theme-switcher/theme-selector.desktop.in.h:1
-msgid "Select which desktop theme to use"
-msgstr "Tchwezixhoz li tinme do scribanne a-z eployî"
-
-#: capplets/theme-switcher/theme-selector.desktop.in.h:2
-msgid "Theme Selector"
-msgstr "Tchwezixheu di tinmes"
-
-#: capplets/sound-properties/sound-properties.desktop.in.h:1
-msgid "Configure GNOME's use of sound"
-msgstr ""
-
-#: capplets/sound-properties/sound-properties.desktop.in.h:2
-msgid "Sound"
-msgstr "Son"
-
-#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:1
-msgid "Configure the settings of the screensaver"
-msgstr ""
-
-#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:2
-msgid "Screensaver"
-msgstr "Sipårgneu di waitroûle"
+#: capplets/screensaver-properties/callbacks.c:501
+#, c-format
+msgid "%s Settings..."
+msgstr "Apontiaedjes di %s..."
 
 #: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:1
 msgid "3D Clock"
@@ -1625,13 +838,13 @@ msgstr "David Bagely"
 msgid ""
 "Determines whether or not the ant leaves a truchet in the path it leaves "
 "behind."
-msgstr ""
-"Dîre si les frumixhes fjhèt ou nén des royes tot rotant."
+msgstr "Dîre si les frumixhes fjhèt ou nén des royes tot rotant."
 
 #: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:10
 msgid "Little Ants walk around, leaving colored trails."
 msgstr ""
-"Des ptites frumixhes ki rotèt tot avå l' waitroûle, tot leyant des traces di coleur."
+"Des ptites frumixhes ki rotèt tot avå l' waitroûle, tot leyant des traces di "
+"coleur."
 
 #: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:11
 msgid "Number of ants."
@@ -1639,19 +852,16 @@ msgstr "Nombe di frumixhes."
 
 #: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:12
 msgid "Print the path that the ant took in the trail."
-msgstr ""
-"Mostrer les royes ki les frumixhes fyît"
+msgstr "Mostrer les royes ki les frumixhes fyît"
 
 #: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:16
 #: capplets/screensaver-properties/screensaver-desktops/Truchet.desktop.in.h:1
-#, fuzzy
 msgid "Truchet"
-msgstr "Såme"
+msgstr "Truchet"
 
 #: capplets/screensaver-properties/screensaver-desktops/Atlantis.desktop.in.h:1
-#, fuzzy
 msgid "Atlantis"
-msgstr "Programes"
+msgstr "Atlantis"
 
 #: capplets/screensaver-properties/screensaver-desktops/Atlantis.desktop.in.h:2
 msgid "Whales, dolphins and sharks swimming around, in 3D"
@@ -2260,9 +1470,8 @@ msgid "Change the delay."
 msgstr "Candjî li roedeu di l' animåcion."
 
 #: capplets/screensaver-properties/screensaver-desktops/Bubble3d.desktop.in.h:1
-#, fuzzy
 msgid "Bubble3d"
-msgstr "Boles"
+msgstr "Boles3D"
 
 #: capplets/screensaver-properties/screensaver-desktops/Bubble3d.desktop.in.h:2
 msgid "Lots of bubbles floating around, in 3d"
@@ -2396,19 +1605,16 @@ msgid "Cell"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:2
-#, fuzzy
 msgid "Center image."
-msgstr "Internet"
+msgstr "Mete l' imådje å mitan del waitroûle."
 
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:3
-#, fuzzy
 msgid "Centre"
-msgstr "Internet"
+msgstr "Å mitan"
 
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:6
-#, fuzzy
 msgid "Change the number of polygons to use."
-msgstr "Candjî li nombe di coleurs a eployî."
+msgstr "Candjî li nombe di poligones a eployî."
 
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:12
 msgid "Crystal"
@@ -2589,9 +1795,8 @@ msgstr ""
 #: capplets/screensaver-properties/screensaver-desktops/Julia.desktop.in.h:3
 #: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:4
 #: capplets/screensaver-properties/screensaver-desktops/Spiral.desktop.in.h:3
-#, fuzzy
 msgid "Change the number to use."
-msgstr "Candjî li nombe d' åbes."
+msgstr "Candjî li nombe a eployî."
 
 #: capplets/screensaver-properties/screensaver-desktops/Discrete.desktop.in.h:10
 msgid "Discrete"
@@ -2653,7 +1858,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:18
 msgid "Grow"
-msgstr ""
+msgstr "Crexhance"
 
 #: capplets/screensaver-properties/screensaver-desktops/Drift.desktop.in.h:19
 msgid "Lissajous"
@@ -2752,7 +1957,7 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:20
 msgid "Number"
-msgstr ""
+msgstr "Nombe"
 
 #: capplets/screensaver-properties/screensaver-desktops/Fadeplot.desktop.in.h:22
 #, fuzzy
@@ -2881,9 +2086,8 @@ msgid "Goop draws a simulation of bubbles in layers."
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:13
-#, fuzzy
 msgid "Have transparent bubbles."
-msgstr "Des gotes d' ôle ki bodjèt"
+msgstr "Avou des boles k' on voet houte."
 
 #: capplets/screensaver-properties/screensaver-desktops/Goop.desktop.in.h:14
 #: capplets/screensaver-properties/screensaver-desktops/Greynetic.desktop.in.h:9
@@ -3022,14 +2226,12 @@ msgid "Halo draws patterns based on circles."
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:23
-#, fuzzy
 msgid "Mode"
 msgstr "Môde"
 
 #: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:26
-#, fuzzy
 msgid "Number of circles to use."
-msgstr "Nombe d' åbes."
+msgstr "Nombe di cekes a eployî."
 
 #: capplets/screensaver-properties/screensaver-desktops/Halo.desktop.in.h:29
 msgid "Use a gradient of colors between circles."
@@ -3056,9 +2258,8 @@ msgid "Time between redraws."
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Hopalong.desktop.in.h:3
-#, fuzzy
 msgid "Change the number of pixels before a color change."
-msgstr "Candjî li nombe di coleurs a eployî."
+msgstr "Candjî li nombe di picsels divant di candjî d' coleur."
 
 #: capplets/screensaver-properties/screensaver-desktops/Hopalong.desktop.in.h:10
 msgid "Draws real plane fractals"
@@ -3073,9 +2274,8 @@ msgid "Hopalong generates real plan fractals."
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Hopalong.desktop.in.h:18
-#, fuzzy
 msgid "Number of pixels before a color change."
-msgstr "Nombe di picsels a eployî."
+msgstr "Nombe di picsels divant di candjî d' coleur."
 
 #: capplets/screensaver-properties/screensaver-desktops/Hopalong.desktop.in.h:19
 msgid "Patrick J. Naughton <naughton@eng.sun.com>"
@@ -3283,7 +2483,7 @@ msgstr "Grandeu des picsels"
 
 #: capplets/screensaver-properties/screensaver-desktops/Lightning.desktop.in.h:6
 msgid "Draws fractal lightning bolts."
-msgstr ""
+msgstr "Dessine des fractålès aloumîres."
 
 #: capplets/screensaver-properties/screensaver-desktops/Lightning.desktop.in.h:7
 msgid "Keith Romberg <kromberg@saxe.com>"
@@ -3295,16 +2495,15 @@ msgstr "Aloumîres"
 
 #: capplets/screensaver-properties/screensaver-desktops/Lightning.desktop.in.h:9
 msgid "Lightning draws fractal lightning bolts."
-msgstr ""
+msgstr "Ci spårgneu di waitroûle chal dessine des aloumîres tot avå."
 
 #: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:1
 msgid "Caleb Cullen"
 msgstr "Caleb Cullen"
 
 #: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:5
-#, fuzzy
 msgid "Change the size of object."
-msgstr "Candjî li grandeu des picsels."
+msgstr "Candjî li grandeu des objets."
 
 #: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:13
 msgid "Draws animated full-loop lisajous figures"
@@ -3319,9 +2518,8 @@ msgid "Lisa draws animated full-loop lisajous figures."
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Lisa.desktop.in.h:22
-#, fuzzy
 msgid "Size of object."
-msgstr "Grandeu des picsels"
+msgstr "Grandeu des objets"
 
 #: capplets/screensaver-properties/screensaver-desktops/Lissie.desktop.in.h:1
 msgid "Lissie"
@@ -3533,9 +2731,8 @@ msgid "M.C. Escher inspired ants.. in 3d"
 msgstr "Des frumixhes inspireyes da M.C. Escher... è 3D"
 
 #: capplets/screensaver-properties/screensaver-desktops/Moebius.desktop.in.h:2
-#, fuzzy
 msgid "Moebius"
-msgstr "Apontiaedjes del sori"
+msgstr "Moebius"
 
 #: capplets/screensaver-properties/screensaver-desktops/Moire.desktop.in.h:8
 msgid "Draw circular interference patterns"
@@ -3625,9 +2822,8 @@ msgid "Noseguy"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:1
-#, fuzzy
 msgid "Change maximum number of lines."
-msgstr "Candjî li nombe di boles a eployî."
+msgstr "Candjî li nombe di royes macsimom."
 
 #: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:2
 #, fuzzy
@@ -3648,9 +2844,8 @@ msgid "Fadedelay"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:11
-#, fuzzy
 msgid "Maximum number of lines."
-msgstr "Nombe di mines"
+msgstr "Nombe di royes macsimom."
 
 #: capplets/screensaver-properties/screensaver-desktops/Pedal.desktop.in.h:12
 msgid "Maxlines"
@@ -3838,11 +3033,6 @@ msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Rd-bomb.desktop.in.h:1
 msgid "Rd-bomb"
-msgstr ""
-
-#: capplets/desktop-links/Desktop.directory.in.h:1
-#: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:1
-msgid "Desktop"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:2
@@ -4040,7 +3230,6 @@ msgid "Slim"
 msgstr "Soul"
 
 #: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:20
-#, fuzzy
 msgid "Speed of animation."
 msgstr "Roedeu di l' animåcion"
 
@@ -4209,85 +3398,509 @@ msgstr "Adjinçmint d' astampé"
 msgid "Xteevee"
 msgstr ""
 
-#: capplets/mouse-properties/mouse-properties.desktop.in.h:1
-msgid "Mouse"
-msgstr "Sori"
+#: capplets/screensaver-properties/screensaver-dialog.c:46
+msgid "About:"
+msgstr "Å dfait:"
 
-#: capplets/mouse-properties/mouse-properties.desktop.in.h:2
-msgid "Mouse Properties"
-msgstr "Prôprietés del sori"
+#: capplets/screensaver-properties/screensaver-dialog.c:51
+msgid "Author:"
+msgstr "Ôteu:"
 
-#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:1
-msgid "Keyboard"
-msgstr "Taprece"
+#: capplets/screensaver-properties/screensaver-dialog.c:61
+msgid "Author: UNKNOWN"
+msgstr "Ôteu: NÉN CNOXHOU"
 
-#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:2
-msgid "Keyboard Properties"
-msgstr "Prôpietés del taprece"
+#: capplets/screensaver-properties/screensaver-dialog.c:78
+msgid "Settings"
+msgstr "Apontiaedjes"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:1
-msgid "Choose the editor that is invoked by gnome-edit"
-msgstr "Tchwezixhoz l' aspougneu di tecse houkî pa gnome-edit"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:38
+msgid "RANDOM SCREENSAVER"
+msgstr "SIPÅRGNEU A L' ASTCHEYANCE"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:2
-msgid "Default Editor"
-msgstr "Prémetou aspougneu di tecse"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:49
+msgid "Screen Saver"
+msgstr "Sipårgneu di waitroûle"
 
-#: capplets/background-properties/background-properties.desktop.in.h:1
-msgid "Background"
-msgstr "Fond"
-
-#: capplets/background-properties/background-properties.desktop.in.h:2
-msgid "Configuration of the desktop's background"
-msgstr "Apontiaedje do fond do scribanne"
-
-#: capplets/desktop-links/Documents.directory.in.h:1
-msgid "Configure how document types are handled"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:61
+msgid ""
+"Pressing this button will popup a dialogbox that will help you setup the "
+"current screensaver."
 msgstr ""
 
-#: capplets/desktop-links/Documents.directory.in.h:2
-msgid "Document Handlers"
-msgstr ""
+#. set up the initial frame, and get a vbox in which to pack things.
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:88
+msgid "Screen Saver Settings"
+msgstr "Apontiaedje do spårgneu di waitroûle"
 
-#: capplets/desktop-links/Gnome.directory.in.h:2
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:96
+msgid "Start After "
+msgstr "Enonder dispôy di "
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:102
+msgid " Minutes."
+msgstr " munutes."
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:117
+msgid "Priority:"
+msgstr "Prumîristé:"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:124
+msgid "Low "
+msgstr "Basse "
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:126
+msgid " Normal"
+msgstr " Normå"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:137
+msgid "Shutdown monitor "
+msgstr "Distinde li waitroûle "
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:139
+msgid " minutes after screen saver has started."
+msgstr " munutes après kel spårgneu di waitroûle åye stî enondé."
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:152
 #, fuzzy
-msgid "Control Center Menu"
-msgstr "Cente di Contrôle"
+msgid "Screen Saver Demo"
+msgstr "Sipårgneu di waitroûle"
 
-#: capplets/desktop-links/Multimedia.directory.in.h:1
-#, fuzzy
-msgid "Configure the settings of your Multimedia devices"
-msgstr "Prôprietés do spårgneu di waitroûle"
-
-#: capplets/desktop-links/Multimedia.directory.in.h:2
-msgid "Multimedia"
+#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:1
+msgid "Configure the settings of the screensaver"
 msgstr ""
 
-#: capplets/desktop-links/Peripherals.directory.in.h:1
-msgid "Configure your external devices"
+#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:2
+msgid "Screensaver"
+msgstr "Sipårgneu di waitroûle"
+
+#: capplets/sound-properties/sound-properties.c:97
+msgid ""
+"an initialization error occurred while starting 'sound-properties-capplet'."
 msgstr ""
 
-#: capplets/desktop-links/Peripherals.directory.in.h:2
-msgid "Peripherals"
+#: capplets/sound-properties/sound-properties.c:188
+#, fuzzy
+msgid "Event"
+msgstr "setinme"
+
+#: capplets/sound-properties/sound-properties.c:189
+msgid "File to Play"
+msgstr "Fitchî a djower"
+
+#: capplets/sound-properties/sound-properties.c:243
+msgid "Enable"
+msgstr "Mete èn alaedje"
+
+#: capplets/sound-properties/sound-properties.c:250
+#, fuzzy
+msgid "Enable sound server startup"
+msgstr "Mete èn oûve li sierveu di sons"
+
+#: capplets/sound-properties/sound-properties.c:258
+msgid "Sounds for events"
 msgstr ""
 
-#: capplets/desktop-links/Session.directory.in.h:1
-msgid "Session"
-msgstr "Session"
+#: capplets/sound-properties/sound-properties.c:279
+msgid "General"
+msgstr "Djenerå"
 
-#: capplets/desktop-links/Session.directory.in.h:2
-msgid "Session Management Settings"
-msgstr "Apontiaedjes pol manaedjeu di sessions"
+#: capplets/sound-properties/sound-properties.c:286
+msgid "Select sound file"
+msgstr "Tchwezi on fitchî di son"
 
-#: capplets/desktop-links/UIOptions.directory.in.h:1
+#: capplets/sound-properties/sound-properties.c:325
+msgid "Play"
+msgstr "Djower"
+
+#: capplets/sound-properties/sound-properties.c:336
 #, fuzzy
-msgid "Configure the global settings of your GNOME applications"
-msgstr "Prôprietés do spårgneu di waitroûle"
+msgid "Sound Events"
+msgstr "Sons"
 
-#: capplets/desktop-links/UIOptions.directory.in.h:2
+#: capplets/sound-properties/sound-properties.c:355
+msgid ""
+"This copy of the GNOME control center was not compiled with sound support"
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.c:748
+msgid "The sound file for this event does not exist."
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.c:750
+msgid ""
+"The sound file for this event does not exist.\n"
+"You may want to install the gnome-audio package\n"
+"for a set of default sounds."
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.desktop.in.h:1
+msgid "Configure GNOME's use of sound"
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.desktop.in.h:2
+msgid "Sound"
+msgstr "Son"
+
+#: capplets/theme-switcher/demo.c:50
+msgid "One"
+msgstr "Onk"
+
+#: capplets/theme-switcher/demo.c:50
+msgid "Two"
+msgstr "Deus"
+
+#. just 8 short names that will serve as samples for titles in demo
+#: capplets/theme-switcher/demo.c:52
 #, fuzzy
-msgid "User Interface"
-msgstr "Eployî fonte X"
+msgid "Eenie"
+msgstr "plaijhî a-z avu"
+
+#: capplets/theme-switcher/demo.c:52
+#, fuzzy
+msgid "Meenie"
+msgstr "Merengue"
+
+#: capplets/theme-switcher/demo.c:53
+#, fuzzy
+msgid "Mynie"
+msgstr "plaijhî a-z avu"
+
+#: capplets/theme-switcher/demo.c:53
+#, fuzzy
+msgid "Moe"
+msgstr "Môde"
+
+#: capplets/theme-switcher/demo.c:54
+#, fuzzy
+msgid "Catcha"
+msgstr "Muchete"
+
+#: capplets/theme-switcher/demo.c:54
+#, fuzzy
+msgid "Tiger"
+msgstr "Eure"
+
+#: capplets/theme-switcher/demo.c:55
+#, fuzzy
+msgid "By Its"
+msgstr "Octets"
+
+#: capplets/theme-switcher/demo.c:55
+#, fuzzy
+msgid "Toe"
+msgstr "A"
+
+#: capplets/theme-switcher/demo.c:114
+msgid "Selected themes from above will be tested by previewing here."
+msgstr ""
+
+#. column one
+#: capplets/theme-switcher/demo.c:119
+#, fuzzy
+msgid "Sample Button"
+msgstr "Posse di djeus"
+
+#: capplets/theme-switcher/demo.c:123
+#, fuzzy
+msgid "Sample Check Button"
+msgstr "Coridjaedje fwait"
+
+#: capplets/theme-switcher/demo.c:128
+msgid "Sample Text Entry Field"
+msgstr ""
+
+#: capplets/theme-switcher/demo.c:139
+msgid "Submenu"
+msgstr "Sormenu"
+
+#: capplets/theme-switcher/demo.c:146
+msgid "Item 1"
+msgstr "Cayet 1"
+
+#: capplets/theme-switcher/demo.c:149
+msgid "Another item"
+msgstr "On ôte cayet"
+
+#: capplets/theme-switcher/demo.c:154
+#, fuzzy
+msgid "Radio Button 1"
+msgstr "Botons mdk"
+
+#: capplets/theme-switcher/demo.c:160
+#, fuzzy
+msgid "Radio Button 2"
+msgstr "Sori PS/2 a 3 botons"
+
+#: capplets/theme-switcher/gui.c:89
+#, fuzzy, c-format
+msgid ""
+"Error installing theme:\n"
+"'%s'\n"
+"%s"
+msgstr "dj' astale %s\n"
+
+#: capplets/theme-switcher/gui.c:120
+#, fuzzy
+msgid "Select a theme to install"
+msgstr "Tchwezixhoz les plugins a astaler"
+
+#: capplets/theme-switcher/gui.c:197
+msgid "Available Themes"
+msgstr "Tinmes k' i gn a"
+
+#: capplets/theme-switcher/gui.c:221
+#, fuzzy
+msgid ""
+"Auto\n"
+"Preview"
+msgstr "Vey divant"
+
+#: capplets/theme-switcher/gui.c:233
+#, fuzzy
+msgid ""
+"Install new\n"
+"theme..."
+msgstr "Dj' astale les fontes..."
+
+#. Font selector.
+#.
+#: capplets/theme-switcher/gui.c:239
+msgid "User Font"
+msgstr "Fonte di l' ûzeu"
+
+#. FIXME - should really get this from X somehow
+#. for now we just assume default gtk font
+#: capplets/theme-switcher/gui.c:257
+msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
+msgstr "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*,*"
+
+#: capplets/theme-switcher/gui.c:276
+msgid "Use custom font."
+msgstr "Eployî fonte da vosse."
+
+#: capplets/theme-switcher/install.c:26
+msgid "Home directory doesn't exist!\n"
+msgstr "Li ridant måjhon n' egzisteye nén!\n"
+
+#: capplets/theme-switcher/install.c:36
+msgid "Theme does not exist"
+msgstr "Li tinme n' egzisteye nén"
+
+#: capplets/theme-switcher/install.c:68
+#, c-format
+msgid "Command '%s' failed"
+msgstr "Li comande «%s» a fwait berwete"
+
+#: capplets/theme-switcher/install.c:73
+msgid "Unknown file format"
+msgstr "Sôre di fitchî nén cnoxhowe"
+
+#: capplets/theme-switcher/theme-selector.desktop.in.h:1
+msgid "Select which desktop theme to use"
+msgstr "Tchwezixhoz li tinme do scribanne a-z eployî"
+
+#: capplets/theme-switcher/theme-selector.desktop.in.h:2
+msgid "Theme Selector"
+msgstr "Tchwezixheu di tinmes"
+
+#: capplets/ui-properties/application.desktop.in.h:1
+msgid "Applications"
+msgstr "Programes"
+
+#: capplets/ui-properties/application.desktop.in.h:2
+msgid "Sets the default feel of GNOME applications"
+msgstr ""
+
+#: capplets/ui-properties/dialogs.desktop.in.h:1
+msgid "Dialogs"
+msgstr "Purneas di cweriaedje"
+
+#: capplets/ui-properties/mdi.desktop.in.h:1
+msgid "MDI"
+msgstr "MDI"
+
+#: capplets/ui-properties/ui-properties.c:54
+msgid "Can detach and move toolbars"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:59
+msgid "Toolbars have relieved border"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:64
+msgid "Toolbar buttons have relieved border"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:69
+msgid "Toolbars have line separators"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:74
+msgid "Toolbars have text labels"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:103
+msgid "Can detach and move menus"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:108
+msgid "Menus have relieved border"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:112
+msgid "Submenus can be torn off"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:116
+#, fuzzy
+msgid "Menu items have icons"
+msgstr "Eployî des imådjetes di totes les cognes"
+
+#: capplets/ui-properties/ui-properties.c:140
+msgid "Statusbar is interactive when possible"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:145
+msgid "Statusbar progress meter is on the right"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:162
+msgid "Menu Options"
+msgstr "Tchûzes po les menus"
+
+#: capplets/ui-properties/ui-properties.c:163
+msgid "Statusbar Options"
+msgstr "Tchûzes pol bår ås messaedjes"
+
+#: capplets/ui-properties/ui-properties.c:164
+msgid "Toolbar Options"
+msgstr "Tchûzes pol bårs ås usteyes"
+
+#: capplets/ui-properties/ui-properties.c:170
+#, fuzzy
+msgid "Dialog buttons"
+msgstr "2 botons"
+
+#: capplets/ui-properties/ui-properties.c:171
+msgid "Default value"
+msgstr "Prémetowe valixhance"
+
+#: capplets/ui-properties/ui-properties.c:172
+#, fuzzy
+msgid "Spread buttons out"
+msgstr "Èn alaedje a l' enondaedje"
+
+#: capplets/ui-properties/ui-properties.c:173
+msgid "Put buttons on edges"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:174
+msgid "Left-justify buttons"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:175
+msgid "Right-justify buttons"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:180
+msgid "Dialog buttons have icons"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:185
+msgid "Use statusbar instead of dialog when possible"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:207
+#, fuzzy
+msgid "Dialog position"
+msgstr "Eplaeçmint del imådjete"
+
+#: capplets/ui-properties/ui-properties.c:208
+#, fuzzy
+msgid "Let window manager decide"
+msgstr "Tchwezixhoz li manaedjeu di purnea a enonder:"
+
+#: capplets/ui-properties/ui-properties.c:209
+#, fuzzy
+msgid "Center of the screen"
+msgstr "Netyî li tchûze"
+
+#: capplets/ui-properties/ui-properties.c:210
+#, fuzzy
+msgid "At the mouse pointer"
+msgstr "Tchwezixhoz les ponts di montaedje"
+
+#: capplets/ui-properties/ui-properties.c:215
+#, fuzzy
+msgid "Dialog hints"
+msgstr "Mete èn oûve les racsegnes"
+
+#: capplets/ui-properties/ui-properties.c:216
+#, fuzzy
+msgid "Dialogs are like other windows"
+msgstr "Å dzeur des ôtes purneas"
+
+#: capplets/ui-properties/ui-properties.c:217
+#, fuzzy
+msgid "Dialogs are treated specially by window manager"
+msgstr "No do programe tel ki li manaedjeu di purnea s' endè sievrè"
+
+#: capplets/ui-properties/ui-properties.c:222
+msgid "Place dialogs over application window when possible"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:243
+#, fuzzy
+msgid "Dialog Layout"
+msgstr "Adjinçmint d' astampé"
+
+#: capplets/ui-properties/ui-properties.c:244
+#, fuzzy
+msgid "Dialog Behavior"
+msgstr "Dûjhance di l' aspougneu"
+
+#: capplets/ui-properties/ui-properties.c:250
+msgid "Default MDI Mode"
+msgstr "Prémetou môde MDI"
+
+#: capplets/ui-properties/ui-properties.c:251
+msgid "Notebook"
+msgstr "Bloc di notes"
+
+#: capplets/ui-properties/ui-properties.c:252
+msgid "Toplevel"
+msgstr "Tofér al copete"
+
+#: capplets/ui-properties/ui-properties.c:253
+msgid "Modal"
+msgstr "Modå"
+
+#: capplets/ui-properties/ui-properties.c:258
+#, fuzzy
+msgid "MDI notebook tab position"
+msgstr "Eplaeçmint del _tabulåcion è môde bloc di notes: "
+
+#: capplets/ui-properties/ui-properties.c:259
+msgid "Left"
+msgstr "Hintche"
+
+#: capplets/ui-properties/ui-properties.c:260
+msgid "Right"
+msgstr "Droete"
+
+#: capplets/ui-properties/ui-properties.c:261
+msgid "Top"
+msgstr "Al copete"
+
+#: capplets/ui-properties/ui-properties.c:262
+msgid "Bottom"
+msgstr "Al valeye"
+
+#: capplets/ui-properties/ui-properties.c:277
+#, fuzzy
+msgid "GNOME MDI Options"
+msgstr "Tchûzes di l' eterface di GNOME"
 
 #: capplets/ui-properties/ui-properties.directory.in.h:1
 msgid "Look and Feel"
@@ -4297,3 +3910,363 @@ msgstr ""
 msgid "Look and Feel Properties"
 msgstr ""
 
+#: capplets/url-properties/url-properties.c:51
+msgid "Error initializing the `url-properties' capplet."
+msgstr ""
+
+#: capplets/url-properties/url-properties.c:76
+msgid "Protocol"
+msgstr "Protocole"
+
+#: capplets/url-properties/url-properties.c:76
+msgid "Command"
+msgstr "Comande"
+
+#: capplets/url-properties/url-properties.c:93
+#, fuzzy
+msgid "handler:"
+msgstr "Erôler"
+
+#. set some commonly used handlers
+#: capplets/url-properties/url-properties.c:103
+msgid "Netscape"
+msgstr "Betchteu Netscape"
+
+#: capplets/url-properties/url-properties.c:108
+msgid "Netscape (new window)"
+msgstr "Betchteu Netscape (drovî on novea purnea)"
+
+#: capplets/url-properties/url-properties.c:121
+msgid "Help browser"
+msgstr "Foyteuse di l' aidance"
+
+#: capplets/url-properties/url-properties.c:127
+msgid "Help browser (new window)"
+msgstr "Foyteuse di l' aidance (drovî on novea purnea)"
+
+#: capplets/url-properties/url-properties.c:140
+msgid "Set"
+msgstr "Mete"
+
+#: capplets/url-properties/url-properties.c:148
+msgid "Remove"
+msgstr "Bodjî foû"
+
+#: capplets/url-properties/url-properties.desktop.in.h:1
+msgid "Configure which programs are used to display URLs"
+msgstr ""
+
+#: capplets/url-properties/url-properties.desktop.in.h:2
+msgid "URL Handlers"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.h:1
+msgid "Enlightenment"
+msgstr "Enlightenment"
+
+#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.h:1
+msgid "Ice WM"
+msgstr "Ice WM"
+
+#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.h:1
+msgid "Scwm"
+msgstr "Scwm"
+
+#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.h:1
+msgid "Window Maker"
+msgstr "Window Maker"
+
+#: capplets/wm-properties/wm-desktops/twm.desktop.in.h:1
+msgid "twm"
+msgstr "twm"
+
+#: capplets/wm-properties/wm-properties-capplet.c:142
+#, c-format
+msgid ""
+"Starting %s\n"
+"(%d seconds left before operation times out)"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:303
+#, c-format
+msgid "%s (Current)"
+msgstr "%s (èn alaedje pol moumint)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:306
+#, c-format
+msgid "Run Configuration Tool for %s"
+msgstr "Enonder l' usteye d' apontiaedje di %s"
+
+#: capplets/wm-properties/wm-properties-capplet.c:317
+msgid " (Not found)"
+msgstr " (Nén trové)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:356
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\tAnother window manager is already running and could not be killed\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:360
+#, c-format
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\t'%s' didn't start\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:413
+msgid "Previous window manager did not die\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:446
+#, c-format
+msgid ""
+"Could not start '%s'.\n"
+"Falling back to previous window manager '%s'\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:477
+msgid ""
+"Could not start fallback window manager.\n"
+"Please run a window manager manually. You can\n"
+"do this by selecting \"Run Program\" in the\n"
+"foot menu\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:502
+#: capplets/wm-properties/wm-properties-capplet.c:868
+#: capplets/wm-properties/wm-properties-capplet.c:875
+#: capplets/wm-properties/wm-properties-capplet.c:1021
+msgid "OK"
+msgstr "I va"
+
+#: capplets/wm-properties/wm-properties-capplet.c:520
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. You can do so immediately by selecting the \"Save session\n"
+"now\" below, or you can save your session later.  This can be\n"
+"done either selecting \"Save Current Session\" under \"Settings\"\n"
+"in the main menu, or by turning on \"Save Current Setup\" when\n"
+"you log out.\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:527
+msgid "Save Session Later"
+msgstr "Schaper li session pus tård"
+
+#: capplets/wm-properties/wm-properties-capplet.c:527
+msgid "Save Session Now"
+msgstr "Schaper li session asteure"
+
+#: capplets/wm-properties/wm-properties-capplet.c:530
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. This can be done by either selecting \"Save Current Session\"\n"
+"under \"Settings\" in the main menu, or by turning on\n"
+"\"Save Current Setup\" when you log out.\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:757
+msgid "Add New Window Manager"
+msgstr "Radjouter on novea manaedjeu di purneas"
+
+#: capplets/wm-properties/wm-properties-capplet.c:771
+msgid "Name:"
+msgstr "No:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:784
+msgid "Command:"
+msgstr "Comande:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:797
+msgid "Configuration Command:"
+msgstr "Comande po l' apontiaedje:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:816
+msgid "Window manager is session managed"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:866
+msgid "Name cannot be empty"
+msgstr "Li no n' pout nén esse vûde"
+
+#: capplets/wm-properties/wm-properties-capplet.c:873
+msgid "Command cannot be empty"
+msgstr "Li comande ni pout nén esse vûde"
+
+#: capplets/wm-properties/wm-properties-capplet.c:922
+#: capplets/wm-properties/wm-properties-capplet.c:964
+msgid "Edit Window Manager"
+msgstr "Candjî l' manaedjeu di purneas"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1020
+msgid "You cannot delete the current Window Manager"
+msgstr "Vos n' ploz nén disfacer li manaedjeu di purneas èn alaedje"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1093
+msgid "Edit..."
+msgstr "Candjî..."
+
+#: capplets/wm-properties/wm-properties-capplet.c:1098
+msgid "Delete"
+msgstr "Disfacer"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1134
+msgid ""
+"an initialization error occurred while starting 'wm-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties.desktop.in.h:1
+msgid "Choose a window manager"
+msgstr "Tchwezixhoz on manaedjeu di purneas"
+
+#: capplets/wm-properties/wm-properties.desktop.in.h:2
+msgid "Window Manager"
+msgstr "Manaedjeu di purneas"
+
+#: control-center/callbacks.c:102 control-center/gnomecc.desktop.in.h:1
+msgid "GNOME Control Center"
+msgstr "Cente di Contrôle di GNOME"
+
+#: control-center/callbacks.c:105
+msgid "Desktop Properties manager."
+msgstr "Manaedjeu des prôpietés do scribanne."
+
+#: control-center/capplet-manager.c:179
+msgid "Try"
+msgstr "Sayî"
+
+#: control-center/capplet-manager.c:185
+msgid "Revert"
+msgstr "Rivni èn erî"
+
+#. set the help item
+#: control-center/capplet-manager.c:208
+#, c-format
+msgid "Help with '%s' settings"
+msgstr "Aidance avou les apontiaedjes di «%s»"
+
+#: control-center/capplet-widget-libs.c:46
+msgid "id of the capplet -- assigned by the control-center"
+msgstr ""
+
+#: control-center/capplet-widget-libs.c:46
+msgid "ID"
+msgstr "ID"
+
+#: control-center/capplet-widget-libs.c:47
+msgid "Multi-capplet id."
+msgstr ""
+
+#: control-center/capplet-widget-libs.c:47
+msgid "CAPID"
+msgstr ""
+
+#: control-center/capplet-widget-libs.c:48
+msgid "X ID of the socket it's plugged into"
+msgstr ""
+
+#: control-center/capplet-widget-libs.c:48
+#, fuzzy
+msgid "XID"
+msgstr "ID"
+
+#: control-center/capplet-widget-libs.c:49
+msgid "IOR of the control-center"
+msgstr ""
+
+#: control-center/capplet-widget-libs.c:49
+#, fuzzy
+msgid "IOR"
+msgstr "I/R"
+
+#: control-center/capplet-widget-libs.c:50
+msgid "Initialize session settings"
+msgstr "Dj' enonde l' apontiaedje del session"
+
+#: control-center/capplet-widget-libs.c:51
+msgid "Ignore default action.  Used for custom init-session cases"
+msgstr ""
+
+#: control-center/capplet-widget.c:272
+msgid "Sorry, no help is available for these settings."
+msgstr "Dji rgrete, i gn a nole aidance po ces apontiaedjes la."
+
+#: control-center/corba-glue.c:77
+#, fuzzy
+msgid "capplet-command to be run."
+msgstr "Tapez ene comande a-z enonder"
+
+#: control-center/corba-glue.c:77
+msgid "CAPPLET"
+msgstr ""
+
+#: control-center/gnomecc.desktop.in.h:2
+msgid "The GNOME configuration tool"
+msgstr "L' usteye d' apontiaedje di GNOME"
+
+#: control-center/main.c:36
+msgid "Help on control-center"
+msgstr "Aidance sol cente di contrôle"
+
+#: control-center/main.c:36
+msgid "Help with the GNOME control-center."
+msgstr "Aidance sol cente di contrôle di GNOME."
+
+#: control-center/main.c:38
+msgid "Help with the current configuration page."
+msgstr "Aidance sol pådje d' apontiaedje do moumint."
+
+#: control-center/main.c:41
+msgid "About"
+msgstr "Å dfait"
+
+#: control-center/main.c:41
+msgid "About the GNOME control-center."
+msgstr "Å dfait do cente di contrôle di GNOME."
+
+#. we create the widgets
+#: control-center/main.c:69
+msgid "Warning:"
+msgstr "Advertixhmint:"
+
+#: control-center/main.c:69
+#, fuzzy
+msgid "Discard all changes"
+msgstr "Catchî tos les pårtaedjes '$'"
+
+#. ...labels, etc
+#: control-center/main.c:78
+msgid ""
+"The following modules have had changes made, but not committed.  If you "
+"would like to edit them, please double click on the appropriate entry."
+msgstr ""
+
+#: control-center/splash.c:48
+msgid "Operating System:"
+msgstr "Sistinme d' operance:"
+
+#: control-center/splash.c:49
+msgid "Distribution Version:"
+msgstr "Modéye del distribucion:"
+
+#: control-center/splash.c:50
+msgid "Processor Type:"
+msgstr "Sôrte do processeu:"
+
+#: control-center/splash.c:51
+msgid "User Name:"
+msgstr "No di l' ûzeu:"
+
+#: control-center/splash.c:52
+msgid "Host Name:"
+msgstr "No di l' éndjole:"
+
+#. This is about the only case where we'll put Unknown instead
+#. of simply not showing the info.
+#: control-center/splash.c:178
+msgid "Unknown"
+msgstr "Nén cnoxhou"

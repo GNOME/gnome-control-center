@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.2.0\n"
-"POT-Creation-Date: 2001-03-12 15:42+0100\n"
+"POT-Creation-Date: 2001-03-15 10:16+0100\n"
 "PO-Revision-Date: 2001-02-05 00:43:13+0900\n"
 "Last-Translator: Simos Xenitellis <simos@hellug.gr>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
@@ -38,6 +38,14 @@ msgstr ""
 "σφάλμα αρχικοπόιησης κατά την εκκίνηση του εφαρμογιδίου "
 "'background-properties-capplet'.\n"
 "τερματισμός...\n"
+
+#: capplets/background-properties/background-properties.desktop.in.h:1
+msgid "Background"
+msgstr "Φόντο"
+
+#: capplets/background-properties/background-properties.desktop.in.h:2
+msgid "Configuration of the desktop's background"
+msgstr "Ρύθμιση του φόντου της οθόνης"
 
 #: capplets/background-properties/property-background.c:116
 msgid "Disabled"
@@ -212,21 +220,60 @@ msgstr "ΚΑΤΑΣΤΑΣΗ"
 msgid "Display wallpaper: tiled, centered, scaled or ratio"
 msgstr "Εμφάνιση επένδυσης: μωσαϊκό, κέντρο, νέα κλίμακα"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:238
-msgid "Gnome editor"
-msgstr "Διορθωτής του GNOME"
+#: capplets/desktop-links/Desktop.directory.in.h:1
+#: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:1
+msgid "Desktop"
+msgstr "Επιφάνεια Εργασίας"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:249
-msgid "Run In Terminal"
-msgstr "Εκτέλεση εντός τερματικού"
+#: capplets/desktop-links/Documents.directory.in.h:1
+msgid "Configure how document types are handled"
+msgstr "Ρύθμιση του τρόπου χειρισμού των ειδών των εγγράφων"
 
-#: capplets/file-types/file-types-capplet.desktop.in.h:1
-msgid "File Types and Programs"
-msgstr ""
+#: capplets/desktop-links/Documents.directory.in.h:2
+msgid "Document Handlers"
+msgstr "Χειριστές Εγγράφων"
 
-#: capplets/file-types/file-types-capplet.desktop.in.h:2
-msgid "Specify which programs are used to open or view each file type"
-msgstr ""
+#. create the app
+#: capplets/desktop-links/Gnome.directory.in.h:1 control-center/main.c:197
+#: control-center/splash.c:247
+msgid "Control Center"
+msgstr "Κέντρο Ελέγχου"
+
+#: capplets/desktop-links/Gnome.directory.in.h:2
+msgid "Control Center Menu"
+msgstr "Μενού Κέντρο Ελέγχου"
+
+#: capplets/desktop-links/Multimedia.directory.in.h:1
+msgid "Configure the settings of your Multimedia devices"
+msgstr "Ρύθμιση των ιδιοτήτων των συσκευών Πολυμέσων."
+
+#: capplets/desktop-links/Multimedia.directory.in.h:2
+msgid "Multimedia"
+msgstr "Πολυμέσα"
+
+#: capplets/desktop-links/Peripherals.directory.in.h:1
+msgid "Configure your external devices"
+msgstr "Ρύθμιση των περιφερειακών συσκευών."
+
+#: capplets/desktop-links/Peripherals.directory.in.h:2
+msgid "Peripherals"
+msgstr "Περιφερειακά"
+
+#: capplets/desktop-links/Session.directory.in.h:1
+msgid "Session"
+msgstr "Συνεδρία"
+
+#: capplets/desktop-links/Session.directory.in.h:2
+msgid "Session Management Settings"
+msgstr "Ρυθμίσεις Διαχείρησης Συνεδρίας"
+
+#: capplets/desktop-links/UIOptions.directory.in.h:1
+msgid "Configure the global settings of your GNOME applications"
+msgstr "Τροποποίηση των καθολικών ρυθμίσεων των εφαρμογών του GNOME."
+
+#: capplets/desktop-links/UIOptions.directory.in.h:2
+msgid "User Interface"
+msgstr "Διασύνδεση Χρήστη"
 
 #: capplets/file-types/file-types-capplet-dialogs.c:387
 #, fuzzy
@@ -475,10 +522,103 @@ msgstr "Επέκταση"
 msgid "Default Action"
 msgstr "Εξ' ορισμού Διορθωτής Κειμένου"
 
+#: capplets/file-types/file-types-capplet.desktop.in.h:1
+msgid "File Types and Programs"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet.desktop.in.h:2
+msgid "Specify which programs are used to open or view each file type"
+msgstr ""
+
 #: capplets/file-types/file-types-icon-entry.c:381
 #, fuzzy
 msgid "Select an icon"
 msgstr "Επιλογή εικονιδίου..."
+
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:238
+msgid "Gnome editor"
+msgstr "Διορθωτής του GNOME"
+
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:249
+msgid "Run In Terminal"
+msgstr "Εκτέλεση εντός τερματικού"
+
+#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:1
+msgid "Choose the editor that is invoked by gnome-edit"
+msgstr "Επιλογή του διορθωτή κειμένου που θα καλεί το gnome-edit"
+
+#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:2
+msgid "Default Editor"
+msgstr "Εξ' ορισμού Διορθωτής Κειμένου"
+
+#: capplets/keyboard-properties/keyboard-properties.c:262
+msgid "Keyboard bell"
+msgstr "Κουδούνι πληκτρολογίου"
+
+#: capplets/keyboard-properties/keyboard-properties.c:270
+msgid "Volume"
+msgstr "Ένταση"
+
+#: capplets/keyboard-properties/keyboard-properties.c:273
+msgid "Pitch (Hz)"
+msgstr "Συχνότητα (Hz)"
+
+#: capplets/keyboard-properties/keyboard-properties.c:276
+msgid "Duration (ms)"
+msgstr "Διάρκεια (ms)"
+
+#: capplets/keyboard-properties/keyboard-properties.c:288
+msgid "Test"
+msgstr "Δοκιμή"
+
+#: capplets/keyboard-properties/keyboard-properties.c:306
+msgid "Keyboard repeat rate"
+msgstr "Ρυθμός επανάληψης πληκτρολογίου"
+
+#: capplets/keyboard-properties/keyboard-properties.c:316
+msgid "Enable auto-repeat"
+msgstr "Ενεργοποίηση επανάληψης"
+
+#: capplets/keyboard-properties/keyboard-properties.c:325
+msgid "Repeat rate"
+msgstr "Ρυθμός επανάληψης"
+
+#: capplets/keyboard-properties/keyboard-properties.c:328
+msgid "Repeat Delay"
+msgstr "Υστέρηση επανάληψης"
+
+#: capplets/keyboard-properties/keyboard-properties.c:330
+msgid "Keyboard click"
+msgstr "Κλίκ πληκτρολογίου"
+
+#: capplets/keyboard-properties/keyboard-properties.c:339
+msgid "Click on keypress"
+msgstr "Κλίκ κατά την πίεση"
+
+#: capplets/keyboard-properties/keyboard-properties.c:348
+msgid "Click volume"
+msgstr "Ένταση κλίκ"
+
+#: capplets/keyboard-properties/keyboard-properties.c:359
+msgid "Test settings"
+msgstr "Δοκιμή ρυθμίσεων"
+
+#: capplets/keyboard-properties/keyboard-properties.c:466
+msgid ""
+"an initialization error occurred while starting "
+"'keyboard-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"σφάλμα αρχικοποίησης κατά την εκκίνηση του 'keyboard-properties-capplet'.\n"
+"τερματισμός...\n"
+
+#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:1
+msgid "Keyboard"
+msgstr "Πληκτρολόγιο"
+
+#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:2
+msgid "Keyboard Properties"
+msgstr "Ιδιότητες Πληκτρολογίου"
 
 #: capplets/mouse-properties/mouse-properties.c:267
 msgid "Mouse buttons"
@@ -542,6 +682,14 @@ msgstr ""
 "σφάλμα αρχικοποίησης κατά την εκκίνηση του 'mouse-properties-capplet'.\n"
 "τερματισμός...\n"
 
+#: capplets/mouse-properties/mouse-properties.desktop.in.h:1
+msgid "Mouse"
+msgstr "Ποντίκι"
+
+#: capplets/mouse-properties/mouse-properties.desktop.in.h:2
+msgid "Mouse Properties"
+msgstr "Ιδιότητες Ποντικιού"
+
 #: capplets/screensaver-properties/callbacks.c:102
 msgid "Require Password"
 msgstr "Απαίτηση κωδικού"
@@ -573,954 +721,6 @@ msgstr "Ρυθμίσεις τυχαίου"
 #, c-format
 msgid "%s Settings..."
 msgstr "Ρυθμίσεις %s..."
-
-#: capplets/screensaver-properties/screensaver-dialog.c:46
-msgid "About:"
-msgstr "Περί..."
-
-#: capplets/screensaver-properties/screensaver-dialog.c:51
-msgid "Author:"
-msgstr "Συγγραφέας:"
-
-#: capplets/screensaver-properties/screensaver-dialog.c:61
-msgid "Author: UNKNOWN"
-msgstr "Συγγραφέας: ΑΓΝΩΣΤΟΣ"
-
-#: capplets/screensaver-properties/screensaver-dialog.c:78
-msgid "Settings"
-msgstr "Ρυθμίσεις"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:38
-msgid "RANDOM SCREENSAVER"
-msgstr "ΤΥΧΑΙΟΣ SCREENSAVER"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:49
-msgid "Screen Saver"
-msgstr "Screensaver"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:61
-msgid ""
-"Pressing this button will popup a dialogbox that will help you setup the "
-"current screensaver."
-msgstr ""
-"Εάν πιέσετε το κουμπί θα εμφανιστεί πλαίσιο διαλόγου για τη ρύθμιση του "
-"παρόντος screensaver."
-
-#. set up the initial frame, and get a vbox in which to pack things.
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:88
-msgid "Screen Saver Settings"
-msgstr "Ρυθμίσεις screensaver"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:96
-msgid "Start After "
-msgstr "Εκκίνηση μετά από"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:102
-msgid " Minutes."
-msgstr " λεπτά."
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:117
-msgid "Priority:"
-msgstr "Προτεραιότητα:"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:124
-msgid "Low "
-msgstr "Χαμηλή "
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:126
-msgid " Normal"
-msgstr " Κανονική"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:137
-msgid "Shutdown monitor "
-msgstr "Σβήσιμο οθόνης "
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:139
-msgid " minutes after screen saver has started."
-msgstr " λεπτά μετά την έναρξη του [screen saver]."
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:152
-msgid "Screen Saver Demo"
-msgstr "Επίδειξη screensaver"
-
-#: capplets/keyboard-properties/keyboard-properties.c:262
-msgid "Keyboard bell"
-msgstr "Κουδούνι πληκτρολογίου"
-
-#: capplets/keyboard-properties/keyboard-properties.c:270
-msgid "Volume"
-msgstr "Ένταση"
-
-#: capplets/keyboard-properties/keyboard-properties.c:273
-msgid "Pitch (Hz)"
-msgstr "Συχνότητα (Hz)"
-
-#: capplets/keyboard-properties/keyboard-properties.c:276
-msgid "Duration (ms)"
-msgstr "Διάρκεια (ms)"
-
-#: capplets/keyboard-properties/keyboard-properties.c:288
-msgid "Test"
-msgstr "Δοκιμή"
-
-#: capplets/keyboard-properties/keyboard-properties.c:306
-msgid "Keyboard repeat rate"
-msgstr "Ρυθμός επανάληψης πληκτρολογίου"
-
-#: capplets/keyboard-properties/keyboard-properties.c:316
-msgid "Enable auto-repeat"
-msgstr "Ενεργοποίηση επανάληψης"
-
-#: capplets/keyboard-properties/keyboard-properties.c:325
-msgid "Repeat rate"
-msgstr "Ρυθμός επανάληψης"
-
-#: capplets/keyboard-properties/keyboard-properties.c:328
-msgid "Repeat Delay"
-msgstr "Υστέρηση επανάληψης"
-
-#: capplets/keyboard-properties/keyboard-properties.c:330
-msgid "Keyboard click"
-msgstr "Κλίκ πληκτρολογίου"
-
-#: capplets/keyboard-properties/keyboard-properties.c:339
-msgid "Click on keypress"
-msgstr "Κλίκ κατά την πίεση"
-
-#: capplets/keyboard-properties/keyboard-properties.c:348
-msgid "Click volume"
-msgstr "Ένταση κλίκ"
-
-#: capplets/keyboard-properties/keyboard-properties.c:359
-msgid "Test settings"
-msgstr "Δοκιμή ρυθμίσεων"
-
-#: capplets/keyboard-properties/keyboard-properties.c:466
-msgid ""
-"an initialization error occurred while starting "
-"'keyboard-properties-capplet'.\n"
-"aborting...\n"
-msgstr ""
-"σφάλμα αρχικοποίησης κατά την εκκίνηση του 'keyboard-properties-capplet'.\n"
-"τερματισμός...\n"
-
-#: capplets/sound-properties/sound-properties.c:97
-msgid ""
-"an initialization error occurred while starting 'sound-properties-capplet'."
-msgstr "σφάλμα αρχικοποίσης κατά την εκκίνηση του 'sound-properties-capplet'."
-
-#: capplets/sound-properties/sound-properties.c:188
-msgid "Event"
-msgstr "Συμβάν"
-
-#: capplets/sound-properties/sound-properties.c:189
-msgid "File to Play"
-msgstr "Αρχείο ήχου"
-
-#: capplets/sound-properties/sound-properties.c:243
-msgid "Enable"
-msgstr "Ενεργοποίηση"
-
-#: capplets/sound-properties/sound-properties.c:250
-msgid "Enable sound server startup"
-msgstr "Ενεργοποίηση εξυπηρέτη ήχων"
-
-#: capplets/sound-properties/sound-properties.c:258
-msgid "Sounds for events"
-msgstr "Ήχοι συμβάντων"
-
-#: capplets/sound-properties/sound-properties.c:279
-msgid "General"
-msgstr "Γενικά"
-
-#: capplets/sound-properties/sound-properties.c:286
-msgid "Select sound file"
-msgstr "Επιλογή αρχείου ήχου"
-
-#: capplets/sound-properties/sound-properties.c:325
-msgid "Play"
-msgstr "Εκτέλεση"
-
-#: capplets/sound-properties/sound-properties.c:336
-msgid "Sound Events"
-msgstr "Συμβάντα"
-
-#: capplets/sound-properties/sound-properties.c:355
-msgid ""
-"This copy of the GNOME control center was not compiled with sound support"
-msgstr "Το παρόν κέντρο ελέγχου του GNOME δεν περιλαμβάνει υποστήριξη ήχου"
-
-#: capplets/sound-properties/sound-properties.c:748
-msgid "The sound file for this event does not exist."
-msgstr "Το αρχείο ήχου για το παρόν συμβάν δεν υπάρχει."
-
-#: capplets/sound-properties/sound-properties.c:750
-msgid ""
-"The sound file for this event does not exist.\n"
-"You may want to install the gnome-audio package\n"
-"for a set of default sounds."
-msgstr ""
-"Το αρχείο ήχου για το παρόν συμβάν δεν υπάρχει.\n"
-"Εάν επιθυμείτε, μπορείτε να εγκαταστήσετε το πακέτο\n"
-"gnome-audio, με συλλογή μερικών ήχων."
-
-#: capplets/theme-switcher/demo.c:50
-msgid "One"
-msgstr "Ένα"
-
-#: capplets/theme-switcher/demo.c:50
-msgid "Two"
-msgstr "Δύο"
-
-#. just 8 short names that will serve as samples for titles in demo
-#: capplets/theme-switcher/demo.c:52
-msgid "Eenie"
-msgstr "Τρία"
-
-#: capplets/theme-switcher/demo.c:52
-msgid "Meenie"
-msgstr "Πουλάκια"
-
-#: capplets/theme-switcher/demo.c:53
-msgid "Mynie"
-msgstr "Κάθονταν"
-
-#: capplets/theme-switcher/demo.c:53
-msgid "Moe"
-msgstr "Α μπε"
-
-#: capplets/theme-switcher/demo.c:54
-msgid "Catcha"
-msgstr "Μπα"
-
-#: capplets/theme-switcher/demo.c:54
-msgid "Tiger"
-msgstr "Μπλομ"
-
-#: capplets/theme-switcher/demo.c:55
-msgid "By Its"
-msgstr "Του"
-
-#: capplets/theme-switcher/demo.c:55
-msgid "Toe"
-msgstr "κιθεμπλόμ"
-
-#: capplets/theme-switcher/demo.c:114
-msgid "Selected themes from above will be tested by previewing here."
-msgstr "Περιοχή προεπισκόπισης επιλεγμένων θεμάτων."
-
-#. column one
-#: capplets/theme-switcher/demo.c:119
-msgid "Sample Button"
-msgstr "Δείγμα Κουμπιού"
-
-# FIX??
-#: capplets/theme-switcher/demo.c:123
-msgid "Sample Check Button"
-msgstr "Δείγμα Κουμπιού Επιλογής"
-
-# TODO
-#: capplets/theme-switcher/demo.c:128
-msgid "Sample Text Entry Field"
-msgstr "Δείγμα Πεδίου Κειμένου"
-
-#: capplets/theme-switcher/demo.c:139
-msgid "Submenu"
-msgstr "Υπομενού"
-
-#: capplets/theme-switcher/demo.c:146
-msgid "Item 1"
-msgstr "Επιλογή ένα"
-
-#: capplets/theme-switcher/demo.c:149
-msgid "Another item"
-msgstr "Άλλη επιλογή"
-
-# FIX?? (next 2)
-#: capplets/theme-switcher/demo.c:154
-msgid "Radio Button 1"
-msgstr "Ραδιοπλήκτρο 1"
-
-#: capplets/theme-switcher/demo.c:160
-msgid "Radio Button 2"
-msgstr "Ραδιοπλήκτρο 2"
-
-#: capplets/theme-switcher/gui.c:89
-#, c-format
-msgid ""
-"Error installing theme:\n"
-"'%s'\n"
-"%s"
-msgstr ""
-"Σφάλμα εγκατάστασης θέματος:\n"
-"'%s'\n"
-"%s"
-
-#: capplets/theme-switcher/gui.c:120
-msgid "Select a theme to install"
-msgstr "Επιλογή θέματος προς εγκατάσταση"
-
-#: capplets/theme-switcher/gui.c:197
-msgid "Available Themes"
-msgstr "Διαθέσιμα θέματα"
-
-#: capplets/theme-switcher/gui.c:221
-msgid ""
-"Auto\n"
-"Preview"
-msgstr ""
-"Αυτόματη\n"
-"Επισκόπιση"
-
-#: capplets/theme-switcher/gui.c:233
-msgid ""
-"Install new\n"
-"theme..."
-msgstr ""
-"Εγκατάσταση\n"
-"νέου θέματος..."
-
-#. Font selector.
-#.
-#: capplets/theme-switcher/gui.c:239
-msgid "User Font"
-msgstr "Γραμματοσειρά χρήστη"
-
-#. FIXME - should really get this from X somehow
-#. for now we just assume default gtk font
-#: capplets/theme-switcher/gui.c:257
-msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
-msgstr "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
-
-# TODO
-#: capplets/theme-switcher/gui.c:276
-msgid "Use custom font."
-msgstr "Χρήση ειδικής γραμματοσειράς."
-
-#: capplets/theme-switcher/install.c:26
-msgid "Home directory doesn't exist!\n"
-msgstr "Αρχικός κατάλογος ανύπαρκτος!\n"
-
-#: capplets/theme-switcher/install.c:36
-msgid "Theme does not exist"
-msgstr "Ανύπαρκτο θέμα"
-
-#: capplets/theme-switcher/install.c:68
-#, c-format
-msgid "Command '%s' failed"
-msgstr "Εκτέλεση εντολής '%s' ανεπιτυχής"
-
-#: capplets/theme-switcher/install.c:73
-msgid "Unknown file format"
-msgstr "Άγνωστος τύπος αρχείου"
-
-# TODO
-#: capplets/ui-properties/ui-properties.c:54
-msgid "Can detach and move toolbars"
-msgstr "Ενεργ. απόσπασης και μετακίνησης εργαλειοθηκών"
-
-#: capplets/ui-properties/ui-properties.c:59
-msgid "Toolbars have relieved border"
-msgstr "Εργαλειοθήκες με ανάγλυφο πλαίσιο"
-
-#: capplets/ui-properties/ui-properties.c:64
-msgid "Toolbar buttons have relieved border"
-msgstr "Κουμπία εργαλειοθηκών με ανάγλυφο πλαίσιο"
-
-#: capplets/ui-properties/ui-properties.c:69
-msgid "Toolbars have line separators"
-msgstr "Εργαλειοθήκες με διαχωριστικά"
-
-#: capplets/ui-properties/ui-properties.c:74
-msgid "Toolbars have text labels"
-msgstr "Εργαλειοθήκες με ετικέτες"
-
-#: capplets/ui-properties/ui-properties.c:103
-msgid "Can detach and move menus"
-msgstr "Ενεργ. απόσπασης και μετακίνησης μενού"
-
-#: capplets/ui-properties/ui-properties.c:108
-msgid "Menus have relieved border"
-msgstr "Μενού με ανάγλυφο πλαίσιο"
-
-#: capplets/ui-properties/ui-properties.c:112
-msgid "Submenus can be torn off"
-msgstr "Ενεργ. απόσπασης υπομενού"
-
-#: capplets/ui-properties/ui-properties.c:116
-msgid "Menu items have icons"
-msgstr "Επιλογές μενού με εικονίδια"
-
-#: capplets/ui-properties/ui-properties.c:140
-msgid "Statusbar is interactive when possible"
-msgstr "Διαδραστική γραμμή κατάστασης όποτε είναι δυνατόν"
-
-#: capplets/ui-properties/ui-properties.c:145
-msgid "Statusbar progress meter is on the right"
-msgstr "Μετρητής προόδου δεξιά στη γραμμή κατάστασης"
-
-#: capplets/ui-properties/ui-properties.c:162
-msgid "Menu Options"
-msgstr "Επιλογές Μενού"
-
-#: capplets/ui-properties/ui-properties.c:163
-msgid "Statusbar Options"
-msgstr "Επιλογές Γραμμής Κατάστασης"
-
-#: capplets/ui-properties/ui-properties.c:164
-msgid "Toolbar Options"
-msgstr "Επιλογές Εργαλειοθήκης"
-
-#: capplets/ui-properties/ui-properties.c:170
-msgid "Dialog buttons"
-msgstr "Κουμπιά διαλόγων"
-
-#: capplets/ui-properties/ui-properties.c:171
-msgid "Default value"
-msgstr "Εξ' ορισμού τιμή"
-
-#: capplets/ui-properties/ui-properties.c:172
-msgid "Spread buttons out"
-msgstr "Άπλωμα κουμπιών"
-
-#: capplets/ui-properties/ui-properties.c:173
-msgid "Put buttons on edges"
-msgstr "Κουμπιά στις άκρες"
-
-#: capplets/ui-properties/ui-properties.c:174
-msgid "Left-justify buttons"
-msgstr "Αριστερή στοίχιση κουμπιών"
-
-#: capplets/ui-properties/ui-properties.c:175
-msgid "Right-justify buttons"
-msgstr "Δεξιά στοίχιση κουμπιών"
-
-#: capplets/ui-properties/ui-properties.c:180
-msgid "Dialog buttons have icons"
-msgstr "Κουμπιά διαλόγων με εικονίδια"
-
-#: capplets/ui-properties/ui-properties.c:185
-msgid "Use statusbar instead of dialog when possible"
-msgstr "Χρήση γραμμής κατάστασης αντί διαλόγων όποτε είναι δυνατόν"
-
-#: capplets/ui-properties/ui-properties.c:207
-msgid "Dialog position"
-msgstr "Τοποθέτηση διαλόγων"
-
-#: capplets/ui-properties/ui-properties.c:208
-msgid "Let window manager decide"
-msgstr "Κατά την επιλογή του διαχ. παραθύρων"
-
-#: capplets/ui-properties/ui-properties.c:209
-msgid "Center of the screen"
-msgstr "Στο κέντρο της οθόνης"
-
-#: capplets/ui-properties/ui-properties.c:210
-msgid "At the mouse pointer"
-msgstr "Στη θέση του δείκτη ποντικιού"
-
-#: capplets/ui-properties/ui-properties.c:215
-msgid "Dialog hints"
-msgstr "Υποδείξεις διαλόγων"
-
-#: capplets/ui-properties/ui-properties.c:216
-msgid "Dialogs are like other windows"
-msgstr "Οι διάλογοι είναι όπως τα άλλα παράθυρα"
-
-#: capplets/ui-properties/ui-properties.c:217
-msgid "Dialogs are treated specially by window manager"
-msgstr "Ειδική μεταχείριση διαλόγων από το διαχ. παραθύρων"
-
-#: capplets/ui-properties/ui-properties.c:222
-msgid "Place dialogs over application window when possible"
-msgstr "Τοποθέτηση διαλόγων πάνω από το παράθυρο εφαρμογής όποτε είναι δυνατόν"
-
-#: capplets/ui-properties/ui-properties.c:243
-msgid "Dialog Layout"
-msgstr "Διάταξη Διαλόγων"
-
-#: capplets/ui-properties/ui-properties.c:244
-msgid "Dialog Behavior"
-msgstr "Συμπεριφορά Διαλόγων"
-
-#: capplets/ui-properties/ui-properties.c:250
-msgid "Default MDI Mode"
-msgstr "Εξ' Ορισμού Κατάσταση MDI"
-
-# Please use this term consistently for this MDI option...
-#: capplets/ui-properties/ui-properties.c:251
-msgid "Notebook"
-msgstr "Τετράδιο"
-
-#: capplets/ui-properties/ui-properties.c:252
-msgid "Toplevel"
-msgstr "Παράθυρο"
-
-#: capplets/ui-properties/ui-properties.c:253
-msgid "Modal"
-msgstr "Αποκλειστικό"
-
-# Please use "tetradio" for "(MDI) notebook" consistently... 
-#: capplets/ui-properties/ui-properties.c:258
-msgid "MDI notebook tab position"
-msgstr "Θέση σελιδοδεικτών τετραδίου"
-
-#: capplets/ui-properties/ui-properties.c:259
-msgid "Left"
-msgstr "Αριστερά"
-
-#: capplets/ui-properties/ui-properties.c:260
-msgid "Right"
-msgstr "Δεξιά"
-
-#: capplets/ui-properties/ui-properties.c:261
-msgid "Top"
-msgstr "Επάνω"
-
-#: capplets/ui-properties/ui-properties.c:262
-msgid "Bottom"
-msgstr "Κάτω"
-
-#: capplets/ui-properties/ui-properties.c:277
-msgid "GNOME MDI Options"
-msgstr "Επιλογές GNOME MDI"
-
-#: capplets/url-properties/url-properties.c:51
-msgid "Error initializing the `url-properties' capplet."
-msgstr "Σφάλμα αριχκοποίησης εφαρμογιδίου `url-properties'."
-
-#: capplets/url-properties/url-properties.c:76
-msgid "Protocol"
-msgstr "Πρωτόκολο"
-
-#: capplets/url-properties/url-properties.c:76
-msgid "Command"
-msgstr "Εντολή"
-
-#: capplets/url-properties/url-properties.c:93
-msgid "handler:"
-msgstr "διαχειριστής:"
-
-#. set some commonly used handlers
-#: capplets/url-properties/url-properties.c:103
-msgid "Netscape"
-msgstr "Netscape"
-
-#: capplets/url-properties/url-properties.c:108
-msgid "Netscape (new window)"
-msgstr "Netscape (νέο παράθυρο)"
-
-#: capplets/url-properties/url-properties.c:121
-msgid "Help browser"
-msgstr "Πρόγραμμα βοήθειας"
-
-#: capplets/url-properties/url-properties.c:127
-msgid "Help browser (new window)"
-msgstr "Πρόγραμμα βοήθειας (νέο παράθυρο)"
-
-# Other options?? (shorter word)  "8esh" ??? nah...
-#: capplets/url-properties/url-properties.c:140
-msgid "Set"
-msgstr "Καθορισμός"
-
-#: capplets/url-properties/url-properties.c:148
-msgid "Remove"
-msgstr "Διαγραφή"
-
-#: capplets/wm-properties/wm-properties-capplet.c:142
-#, c-format
-msgid ""
-"Starting %s\n"
-"(%d seconds left before operation times out)"
-msgstr ""
-"Έναρξη %s\n"
-"(λήξη απόπειρας σε %d δευτερόλεπτα)"
-
-#: capplets/wm-properties/wm-properties-capplet.c:303
-#, c-format
-msgid "%s (Current)"
-msgstr "%s (Τρέχων)"
-
-#: capplets/wm-properties/wm-properties-capplet.c:306
-#, c-format
-msgid "Run Configuration Tool for %s"
-msgstr "Εκτέλεση εργαλείου ρυθμίσεων του %s"
-
-#: capplets/wm-properties/wm-properties-capplet.c:317
-msgid " (Not found)"
-msgstr " (Δε βρέθηκε)"
-
-#: capplets/wm-properties/wm-properties-capplet.c:356
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\tAnother window manager is already running and could not be killed\n"
-msgstr ""
-"wm-properties-capplet: Αρχικοποίηση διαχειριστή παραθύρων αδύνατη.\n"
-"\tΟ τερματισμός του ήδη υπάρχοντος διαχειριστή δεν ήταν δυνατός\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:360
-#, c-format
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\t'%s' didn't start\n"
-msgstr ""
-"wm-properties-capplet: Αρχικοποίηση διαχειριστή παραθύρων αδύνατη.\n"
-"\tανεπιτυχής εκκίνηση του '%s' \n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:413
-msgid "Previous window manager did not die\n"
-msgstr "Ο προηγούμενος διαχειριστής παραθύρων δεν τερματίστηκε\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:446
-#, c-format
-msgid ""
-"Could not start '%s'.\n"
-"Falling back to previous window manager '%s'\n"
-msgstr ""
-"Εκκίνηση του '%s' ανεπιτυχής.\n"
-"Επαναφορά του προηγούμενου διαχειριστή παραθύρων '%s'\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:477
-msgid ""
-"Could not start fallback window manager.\n"
-"Please run a window manager manually. You can\n"
-"do this by selecting \"Run Program\" in the\n"
-"foot menu\n"
-msgstr ""
-"Απόπειρες εκκίνησης διαχειριστή παραθύρων απέτυχαν.\n"
-"Παρακαλώ εκτελέστε κάποιο διαχειριστή. Αυτό μπορείτε να\n"
-"το κάνετε επιλέγοντας \"Εκτέλεση προγράμματος\" από το\n"
-"κεντρικό μενού του GNOME\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:502
-#: capplets/wm-properties/wm-properties-capplet.c:868
-#: capplets/wm-properties/wm-properties-capplet.c:875
-#: capplets/wm-properties/wm-properties-capplet.c:1021
-msgid "OK"
-msgstr "Εντάξει"
-
-#: capplets/wm-properties/wm-properties-capplet.c:520
-msgid ""
-"Your current window manager has been changed. In order for\n"
-"this change to be saved, you will need to save your current\n"
-"session. You can do so immediately by selecting the \"Save session\n"
-"now\" below, or you can save your session later.  This can be\n"
-"done either selecting \"Save Current Session\" under \"Settings\"\n"
-"in the main menu, or by turning on \"Save Current Setup\" when\n"
-"you log out.\n"
-msgstr ""
-"Ο διαχειριστής παραθύρων έχει αλλαχθεί. Προκειμένου να αποθηκευτεί\n"
-"αυτή η αλλαγή, πρέπει να αποθηκεύσετε την τρέχουσα συνεδρία.\n"
-"Αυτό μπορείτε να το κάνετε αμέσως, επιλέγοντας \"Αποθήκευση συνεδρίας\n"
-"τώρα\". Διαφορετικά, μπορείτε να αποθηκεύσετε τη συνεδρία αργότερα, είτε\n"
-"επιλέγοντας \"Αποθήκευση τρέχουσας συνεδρίας\" από τις \"Ρυθμίσεις\"\n"
-"στο κεντρικό μενού του GNOME, είτε επιλέγοντας \"Αποθήκευση συνεδρίας\"\n"
-"στο πλαίσιο διαλόγου κατά τον τερματισμό.\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:527
-msgid "Save Session Later"
-msgstr "Αποθήκευση συνεδρίας αργότερα"
-
-#: capplets/wm-properties/wm-properties-capplet.c:527
-msgid "Save Session Now"
-msgstr "Αποθήκευση συνεδρίας τώρα"
-
-#: capplets/wm-properties/wm-properties-capplet.c:530
-msgid ""
-"Your current window manager has been changed. In order for\n"
-"this change to be saved, you will need to save your current\n"
-"session. This can be done by either selecting \"Save Current Session\"\n"
-"under \"Settings\" in the main menu, or by turning on\n"
-"\"Save Current Setup\" when you log out.\n"
-msgstr ""
-"Ο διαχειριστής παραθύρων έχει αλλαχθεί. Προκειμένου να αποθηκευτεί\n"
-"αυτή η αλλαγή, πρέπει να αποθηκεύσετε την τρέχουσα συνεδρία.\n"
-"Αυτό μπορείτε να το κάνετε αμέσως, επιλέγοντας \"Αποθήκευση συνεδρίας\n"
-"τώρα\". Διαφορετικά, μπορείτε να αποθηκεύσετε τη συνεδρία αργότερα, είτε\n"
-"επιλέγοντας \"Αποθήκευση τρέχουσας συνεδρίας\" από τις \"Ρυθμίσεις\"\n"
-"στο κεντρικό μενού του GNOME, είτε επιλέγοντας \"Αποθήκευση συνεδρίας\"\n"
-"στο πλαίσιο διαλόγου κατά τον τερματισμό.\n"
-
-#: capplets/wm-properties/wm-properties-capplet.c:757
-msgid "Add New Window Manager"
-msgstr "Νέος διαχειριστής παραθύρων"
-
-#: capplets/wm-properties/wm-properties-capplet.c:771
-msgid "Name:"
-msgstr "Όνομα:"
-
-#: capplets/wm-properties/wm-properties-capplet.c:784
-msgid "Command:"
-msgstr "Εντολή:"
-
-#: capplets/wm-properties/wm-properties-capplet.c:797
-msgid "Configuration Command:"
-msgstr "Πρόγραμμα ρυθμίσεων:"
-
-# TODO
-#: capplets/wm-properties/wm-properties-capplet.c:816
-msgid "Window manager is session managed"
-msgstr "Ο διαχ. συνεδρίας αναλαμβάνει το διαχ. παραθύρων"
-
-#: capplets/wm-properties/wm-properties-capplet.c:866
-msgid "Name cannot be empty"
-msgstr "Δεν επιτρέπεται κενό όνομα"
-
-#: capplets/wm-properties/wm-properties-capplet.c:873
-msgid "Command cannot be empty"
-msgstr "Δεν επιτρέπεται κενή εντολή"
-
-# TODO
-#: capplets/wm-properties/wm-properties-capplet.c:922
-#: capplets/wm-properties/wm-properties-capplet.c:964
-msgid "Edit Window Manager"
-msgstr "Διόρθωση Διαχ. Παραθύρων"
-
-#: capplets/wm-properties/wm-properties-capplet.c:1020
-msgid "You cannot delete the current Window Manager"
-msgstr "Διαγραφή τρέχοντος διαχειριστή παραθύρων δεν επιτρέπεται"
-
-#: capplets/wm-properties/wm-properties-capplet.c:1093
-msgid "Edit..."
-msgstr "Διόρθωση..."
-
-#: capplets/wm-properties/wm-properties-capplet.c:1098
-msgid "Delete"
-msgstr "Διαγραφή"
-
-#: capplets/wm-properties/wm-properties-capplet.c:1134
-msgid ""
-"an initialization error occurred while starting 'wm-properties-capplet'.\n"
-"aborting...\n"
-msgstr ""
-"σφάλμα αρχικοποίησης κατά την εκκίνηση του 'wm-properties-capplet'.\n"
-"τερματισμός...\n"
-
-#: control-center/callbacks.c:102 control-center/gnomecc.desktop.in.h:1
-msgid "GNOME Control Center"
-msgstr "Κέντρο Ελέγχου GNOME"
-
-#: control-center/callbacks.c:105
-msgid "Desktop Properties manager."
-msgstr "Ρυθμίσεις επιφάνειας εργασίας."
-
-#: control-center/capplet-manager.c:179
-msgid "Try"
-msgstr "Δοκιμή"
-
-#: control-center/capplet-manager.c:185
-msgid "Revert"
-msgstr "Επαναφορά"
-
-#. set the help item
-#: control-center/capplet-manager.c:208
-#, c-format
-msgid "Help with '%s' settings"
-msgstr "Βοήθεια στη ρύθμιση '%s'"
-
-#: control-center/capplet-widget-libs.c:46
-msgid "id of the capplet -- assigned by the control-center"
-msgstr "id εφαρμογιδίου ελέγχου -- ανάθεση από το control-center"
-
-#: control-center/capplet-widget-libs.c:46
-msgid "ID"
-msgstr "ID"
-
-#: control-center/capplet-widget-libs.c:47
-msgid "Multi-capplet id."
-msgstr "ID πολλαπλού εφαμογιδίου."
-
-#: control-center/capplet-widget-libs.c:47
-msgid "CAPID"
-msgstr "CAPID"
-
-#: control-center/capplet-widget-libs.c:48
-msgid "X ID of the socket it's plugged into"
-msgstr "X ID της υποδοχής που το δέχεται"
-
-#: control-center/capplet-widget-libs.c:48
-msgid "XID"
-msgstr "XID"
-
-#: control-center/capplet-widget-libs.c:49
-msgid "IOR of the control-center"
-msgstr "IOR του control-center"
-
-#: control-center/capplet-widget-libs.c:49
-msgid "IOR"
-msgstr "IOR"
-
-#: control-center/capplet-widget-libs.c:50
-msgid "Initialize session settings"
-msgstr "Αρχικοποίηση ρυθμίσεων συνεδρίας"
-
-#: control-center/capplet-widget-libs.c:51
-msgid "Ignore default action.  Used for custom init-session cases"
-msgstr ""
-"Αγνόηση εξ' ορισμού ενέργειών.  Χρήση σε ειδικές περιπτώσεις init-session"
-
-#: control-center/capplet-widget.c:272
-msgid "Sorry, no help is available for these settings."
-msgstr "Με συγχωρείτε, δεν υπάρχει βοήθεια για αυτές τις ρυθμίσεις."
-
-#: control-center/corba-glue.c:77
-msgid "capplet-command to be run."
-msgstr "εντολή-capplet προς εκτέλεση."
-
-#: control-center/corba-glue.c:77
-msgid "CAPPLET"
-msgstr "CAPPLET"
-
-#: control-center/main.c:36
-msgid "Help on control-center"
-msgstr "Βοήθεια για το κέντρο ελέγχου"
-
-#: control-center/main.c:36
-msgid "Help with the GNOME control-center."
-msgstr "Βοήθεια για το κέντρο ελέγχου του GNOME."
-
-#: control-center/main.c:38
-msgid "Help with the current configuration page."
-msgstr "Βοήθεια για τη τρέχουσα σελίδα ρυθμίσεων."
-
-#: control-center/main.c:41
-msgid "About"
-msgstr "Σχετικά με"
-
-#: control-center/main.c:41
-msgid "About the GNOME control-center."
-msgstr "Σχετικά με το κέντρο ελέγχου του GNOME."
-
-#. we create the widgets
-#: control-center/main.c:69
-msgid "Warning:"
-msgstr "Προειδοποίηση:"
-
-#: control-center/main.c:69
-msgid "Discard all changes"
-msgstr "Απόριψη όλων των αλλαγών"
-
-#. ...labels, etc
-#: control-center/main.c:78
-msgid ""
-"The following modules have had changes made, but not committed.  If you "
-"would like to edit them, please double click on the appropriate entry."
-msgstr ""
-"Στις ακόλουθες κατηγορίες έγιναν αλλαγές που δεν έχουν οριστικοποιηθεί. Για "
-"να διορθώσετε κάτι, παρακαλώ κάντε διπλό κλίκ στην επιθυμητή κατηγορία."
-
-#. create the app
-#: capplets/desktop-links/Gnome.directory.in.h:1 control-center/main.c:197
-#: control-center/splash.c:231
-msgid "Control Center"
-msgstr "Κέντρο Ελέγχου"
-
-#: control-center/splash.c:48
-msgid "Operating System:"
-msgstr "Λειτουργικό Σύστημα:"
-
-#: control-center/splash.c:49
-msgid "Distribution Version:"
-msgstr "Έκδοση Διανομής:"
-
-#: control-center/splash.c:50
-msgid "Processor Type:"
-msgstr "Τύπος Επεξεργαστή:"
-
-#: control-center/splash.c:51
-msgid "User Name:"
-msgstr "Όνομα Χρήστη:"
-
-#: control-center/splash.c:52
-msgid "Host Name:"
-msgstr "Όνομα Συστήματος:"
-
-#. This is about the only case where we'll put Unknown instead
-#. of simply not showing the info.
-#: control-center/splash.c:168
-msgid "Unknown"
-msgstr "Άγνωστο"
-
-#: control-center/gnomecc.desktop.in.h:2
-msgid "The GNOME configuration tool"
-msgstr "Το εργαλείο ρύθμισης του GNOME"
-
-#: capplets/wm-properties/wm-properties.desktop.in.h:1
-msgid "Choose a window manager"
-msgstr "Επιτρέπει την επιλογή του διαχειριστή παραθύρων για το GNOME"
-
-#: capplets/wm-properties/wm-properties.desktop.in.h:2
-msgid "Window Manager"
-msgstr "Διαχειριστής Παραθύρων"
-
-#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.h:1
-msgid "Enlightenment"
-msgstr "Enlightenment"
-
-#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.h:1
-msgid "Ice WM"
-msgstr ""
-
-#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.h:1
-msgid "Scwm"
-msgstr ""
-
-#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.h:1
-#, fuzzy
-msgid "Window Maker"
-msgstr "Διαχειριστής Παραθύρων"
-
-#: capplets/wm-properties/wm-desktops/twm.desktop.in.h:1
-msgid "twm"
-msgstr ""
-
-#: capplets/url-properties/url-properties.desktop.in.h:1
-msgid "Configure which programs are used to display URLs"
-msgstr "Ρύθμιση των προγράμμάτων για την εμφάνιση URL."
-
-#: capplets/url-properties/url-properties.desktop.in.h:2
-msgid "URL Handlers"
-msgstr "Χειριστές URL"
-
-#: capplets/ui-properties/application.desktop.in.h:1
-msgid "Applications"
-msgstr "Εφαρμογές"
-
-#: capplets/ui-properties/application.desktop.in.h:2
-msgid "Sets the default feel of GNOME applications"
-msgstr "Ρύθμιση της εξ' ορισμού αίσθησης των εφαρμογών του GNOME."
-
-#: capplets/ui-properties/dialogs.desktop.in.h:1
-msgid "Dialogs"
-msgstr "Διάλογοι"
-
-#: capplets/ui-properties/mdi.desktop.in.h:1
-msgid "MDI"
-msgstr "Διασύνδεση Πολλαπλών Εγγράφων"
-
-#: capplets/theme-switcher/theme-selector.desktop.in.h:1
-msgid "Select which desktop theme to use"
-msgstr "Επιλέγει το θέμα της επιφάνειας εργασίας"
-
-#: capplets/theme-switcher/theme-selector.desktop.in.h:2
-msgid "Theme Selector"
-msgstr "Επιλογέας Θέματος"
-
-#: capplets/sound-properties/sound-properties.desktop.in.h:1
-msgid "Configure GNOME's use of sound"
-msgstr "Ρύθμιση της χρήσης ήχου από το GNOME."
-
-#: capplets/sound-properties/sound-properties.desktop.in.h:2
-msgid "Sound"
-msgstr "Ήχος"
-
-#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:1
-msgid "Configure the settings of the screensaver"
-msgstr "Ρύθμιση των ιδιοτήτων της προφύλαξης οθόνης"
-
-#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:2
-msgid "Screensaver"
-msgstr "Προφύλαξη Οθόνης"
 
 #: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:1
 msgid "3D Clock"
@@ -1721,7 +921,7 @@ msgstr ""
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:6
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:5
 #: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:6
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:2
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:1
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:4
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:1
 #: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:1
@@ -1905,7 +1105,7 @@ msgstr ""
 #: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:13
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:20
 #: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:11
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:18
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:17
 #: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:14
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:23
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:19
@@ -1947,7 +1147,7 @@ msgstr "Μικρό"
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:29
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:21
 #: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:12
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:19
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:18
 #: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:24
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:20
@@ -2079,7 +1279,7 @@ msgstr ""
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:17
 #: capplets/screensaver-properties/screensaver-desktops/Braid.desktop.in.h:8
 #: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:10
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:16
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:19
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:9
@@ -2338,16 +1538,10 @@ msgid "James Macnicol <J.Macnicol@student.anu.edu.au>"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:14
-msgid ""
-"James Macnicol <J.Macnicol@student.anu.edu.au>, Οπεδξβ: Δθλÿν Οΰλΰσηξβ "
-"<didopalauzov@uk2.net>"
-msgstr ""
-
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:15
 msgid "Lots of random bubbles grow until they pop."
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:17
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:16
 msgid "Simple"
 msgstr ""
 
@@ -2381,13 +1575,14 @@ msgstr ""
 msgid "Display a spinning compass "
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:1
-msgid "Change number of seeds."
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:2
+msgid "Change the density."
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:3
-msgid "Change the density."
-msgstr ""
+#, fuzzy
+msgid "Change the number of seeds."
+msgstr "Ρύθμιση των ιδιοτήτων της προφύλαξης οθόνης"
 
 #: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:4
 #, fuzzy
@@ -3857,11 +3052,6 @@ msgstr ""
 msgid "Rd-bomb"
 msgstr ""
 
-#: capplets/desktop-links/Desktop.directory.in.h:1
-#: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:1
-msgid "Desktop"
-msgstr "Επιφάνεια Εργασίας"
-
 #: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:2
 msgid "Display oily drops."
 msgstr ""
@@ -4228,81 +3418,495 @@ msgstr "Κατακόρυφο"
 msgid "Xteevee"
 msgstr ""
 
-#: capplets/mouse-properties/mouse-properties.desktop.in.h:1
-msgid "Mouse"
-msgstr "Ποντίκι"
+#: capplets/screensaver-properties/screensaver-dialog.c:46
+msgid "About:"
+msgstr "Περί..."
 
-#: capplets/mouse-properties/mouse-properties.desktop.in.h:2
-msgid "Mouse Properties"
-msgstr "Ιδιότητες Ποντικιού"
+#: capplets/screensaver-properties/screensaver-dialog.c:51
+msgid "Author:"
+msgstr "Συγγραφέας:"
 
-#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:1
-msgid "Keyboard"
-msgstr "Πληκτρολόγιο"
+#: capplets/screensaver-properties/screensaver-dialog.c:61
+msgid "Author: UNKNOWN"
+msgstr "Συγγραφέας: ΑΓΝΩΣΤΟΣ"
 
-#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:2
-msgid "Keyboard Properties"
-msgstr "Ιδιότητες Πληκτρολογίου"
+#: capplets/screensaver-properties/screensaver-dialog.c:78
+msgid "Settings"
+msgstr "Ρυθμίσεις"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:1
-msgid "Choose the editor that is invoked by gnome-edit"
-msgstr "Επιλογή του διορθωτή κειμένου που θα καλεί το gnome-edit"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:38
+msgid "RANDOM SCREENSAVER"
+msgstr "ΤΥΧΑΙΟΣ SCREENSAVER"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:2
-msgid "Default Editor"
-msgstr "Εξ' ορισμού Διορθωτής Κειμένου"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:49
+msgid "Screen Saver"
+msgstr "Screensaver"
 
-#: capplets/background-properties/background-properties.desktop.in.h:1
-msgid "Background"
-msgstr "Φόντο"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:61
+msgid ""
+"Pressing this button will popup a dialogbox that will help you setup the "
+"current screensaver."
+msgstr ""
+"Εάν πιέσετε το κουμπί θα εμφανιστεί πλαίσιο διαλόγου για τη ρύθμιση του "
+"παρόντος screensaver."
 
-#: capplets/background-properties/background-properties.desktop.in.h:2
-msgid "Configuration of the desktop's background"
-msgstr "Ρύθμιση του φόντου της οθόνης"
+#. set up the initial frame, and get a vbox in which to pack things.
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:88
+msgid "Screen Saver Settings"
+msgstr "Ρυθμίσεις screensaver"
 
-#: capplets/desktop-links/Documents.directory.in.h:1
-msgid "Configure how document types are handled"
-msgstr "Ρύθμιση του τρόπου χειρισμού των ειδών των εγγράφων"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:96
+msgid "Start After "
+msgstr "Εκκίνηση μετά από"
 
-#: capplets/desktop-links/Documents.directory.in.h:2
-msgid "Document Handlers"
-msgstr "Χειριστές Εγγράφων"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:102
+msgid " Minutes."
+msgstr " λεπτά."
 
-#: capplets/desktop-links/Gnome.directory.in.h:2
-msgid "Control Center Menu"
-msgstr "Μενού Κέντρο Ελέγχου"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:117
+msgid "Priority:"
+msgstr "Προτεραιότητα:"
 
-#: capplets/desktop-links/Multimedia.directory.in.h:1
-msgid "Configure the settings of your Multimedia devices"
-msgstr "Ρύθμιση των ιδιοτήτων των συσκευών Πολυμέσων."
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:124
+msgid "Low "
+msgstr "Χαμηλή "
 
-#: capplets/desktop-links/Multimedia.directory.in.h:2
-msgid "Multimedia"
-msgstr "Πολυμέσα"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:126
+msgid " Normal"
+msgstr " Κανονική"
 
-#: capplets/desktop-links/Peripherals.directory.in.h:1
-msgid "Configure your external devices"
-msgstr "Ρύθμιση των περιφερειακών συσκευών."
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:137
+msgid "Shutdown monitor "
+msgstr "Σβήσιμο οθόνης "
 
-#: capplets/desktop-links/Peripherals.directory.in.h:2
-msgid "Peripherals"
-msgstr "Περιφερειακά"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:139
+msgid " minutes after screen saver has started."
+msgstr " λεπτά μετά την έναρξη του [screen saver]."
 
-#: capplets/desktop-links/Session.directory.in.h:1
-msgid "Session"
-msgstr "Συνεδρία"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:152
+msgid "Screen Saver Demo"
+msgstr "Επίδειξη screensaver"
 
-#: capplets/desktop-links/Session.directory.in.h:2
-msgid "Session Management Settings"
-msgstr "Ρυθμίσεις Διαχείρησης Συνεδρίας"
+#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:1
+msgid "Configure the settings of the screensaver"
+msgstr "Ρύθμιση των ιδιοτήτων της προφύλαξης οθόνης"
 
-#: capplets/desktop-links/UIOptions.directory.in.h:1
-msgid "Configure the global settings of your GNOME applications"
-msgstr "Τροποποίηση των καθολικών ρυθμίσεων των εφαρμογών του GNOME."
+#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:2
+msgid "Screensaver"
+msgstr "Προφύλαξη Οθόνης"
 
-#: capplets/desktop-links/UIOptions.directory.in.h:2
-msgid "User Interface"
-msgstr "Διασύνδεση Χρήστη"
+#: capplets/sound-properties/sound-properties.c:97
+msgid ""
+"an initialization error occurred while starting 'sound-properties-capplet'."
+msgstr "σφάλμα αρχικοποίσης κατά την εκκίνηση του 'sound-properties-capplet'."
+
+#: capplets/sound-properties/sound-properties.c:188
+msgid "Event"
+msgstr "Συμβάν"
+
+#: capplets/sound-properties/sound-properties.c:189
+msgid "File to Play"
+msgstr "Αρχείο ήχου"
+
+#: capplets/sound-properties/sound-properties.c:243
+msgid "Enable"
+msgstr "Ενεργοποίηση"
+
+#: capplets/sound-properties/sound-properties.c:250
+msgid "Enable sound server startup"
+msgstr "Ενεργοποίηση εξυπηρέτη ήχων"
+
+#: capplets/sound-properties/sound-properties.c:258
+msgid "Sounds for events"
+msgstr "Ήχοι συμβάντων"
+
+#: capplets/sound-properties/sound-properties.c:279
+msgid "General"
+msgstr "Γενικά"
+
+#: capplets/sound-properties/sound-properties.c:286
+msgid "Select sound file"
+msgstr "Επιλογή αρχείου ήχου"
+
+#: capplets/sound-properties/sound-properties.c:325
+msgid "Play"
+msgstr "Εκτέλεση"
+
+#: capplets/sound-properties/sound-properties.c:336
+msgid "Sound Events"
+msgstr "Συμβάντα"
+
+#: capplets/sound-properties/sound-properties.c:355
+msgid ""
+"This copy of the GNOME control center was not compiled with sound support"
+msgstr "Το παρόν κέντρο ελέγχου του GNOME δεν περιλαμβάνει υποστήριξη ήχου"
+
+#: capplets/sound-properties/sound-properties.c:748
+msgid "The sound file for this event does not exist."
+msgstr "Το αρχείο ήχου για το παρόν συμβάν δεν υπάρχει."
+
+#: capplets/sound-properties/sound-properties.c:750
+msgid ""
+"The sound file for this event does not exist.\n"
+"You may want to install the gnome-audio package\n"
+"for a set of default sounds."
+msgstr ""
+"Το αρχείο ήχου για το παρόν συμβάν δεν υπάρχει.\n"
+"Εάν επιθυμείτε, μπορείτε να εγκαταστήσετε το πακέτο\n"
+"gnome-audio, με συλλογή μερικών ήχων."
+
+#: capplets/sound-properties/sound-properties.desktop.in.h:1
+msgid "Configure GNOME's use of sound"
+msgstr "Ρύθμιση της χρήσης ήχου από το GNOME."
+
+#: capplets/sound-properties/sound-properties.desktop.in.h:2
+msgid "Sound"
+msgstr "Ήχος"
+
+#: capplets/theme-switcher/demo.c:50
+msgid "One"
+msgstr "Ένα"
+
+#: capplets/theme-switcher/demo.c:50
+msgid "Two"
+msgstr "Δύο"
+
+#. just 8 short names that will serve as samples for titles in demo
+#: capplets/theme-switcher/demo.c:52
+msgid "Eenie"
+msgstr "Τρία"
+
+#: capplets/theme-switcher/demo.c:52
+msgid "Meenie"
+msgstr "Πουλάκια"
+
+#: capplets/theme-switcher/demo.c:53
+msgid "Mynie"
+msgstr "Κάθονταν"
+
+#: capplets/theme-switcher/demo.c:53
+msgid "Moe"
+msgstr "Α μπε"
+
+#: capplets/theme-switcher/demo.c:54
+msgid "Catcha"
+msgstr "Μπα"
+
+#: capplets/theme-switcher/demo.c:54
+msgid "Tiger"
+msgstr "Μπλομ"
+
+#: capplets/theme-switcher/demo.c:55
+msgid "By Its"
+msgstr "Του"
+
+#: capplets/theme-switcher/demo.c:55
+msgid "Toe"
+msgstr "κιθεμπλόμ"
+
+#: capplets/theme-switcher/demo.c:114
+msgid "Selected themes from above will be tested by previewing here."
+msgstr "Περιοχή προεπισκόπισης επιλεγμένων θεμάτων."
+
+#. column one
+#: capplets/theme-switcher/demo.c:119
+msgid "Sample Button"
+msgstr "Δείγμα Κουμπιού"
+
+# FIX??
+#: capplets/theme-switcher/demo.c:123
+msgid "Sample Check Button"
+msgstr "Δείγμα Κουμπιού Επιλογής"
+
+# TODO
+#: capplets/theme-switcher/demo.c:128
+msgid "Sample Text Entry Field"
+msgstr "Δείγμα Πεδίου Κειμένου"
+
+#: capplets/theme-switcher/demo.c:139
+msgid "Submenu"
+msgstr "Υπομενού"
+
+#: capplets/theme-switcher/demo.c:146
+msgid "Item 1"
+msgstr "Επιλογή ένα"
+
+#: capplets/theme-switcher/demo.c:149
+msgid "Another item"
+msgstr "Άλλη επιλογή"
+
+# FIX?? (next 2)
+#: capplets/theme-switcher/demo.c:154
+msgid "Radio Button 1"
+msgstr "Ραδιοπλήκτρο 1"
+
+#: capplets/theme-switcher/demo.c:160
+msgid "Radio Button 2"
+msgstr "Ραδιοπλήκτρο 2"
+
+#: capplets/theme-switcher/gui.c:89
+#, c-format
+msgid ""
+"Error installing theme:\n"
+"'%s'\n"
+"%s"
+msgstr ""
+"Σφάλμα εγκατάστασης θέματος:\n"
+"'%s'\n"
+"%s"
+
+#: capplets/theme-switcher/gui.c:120
+msgid "Select a theme to install"
+msgstr "Επιλογή θέματος προς εγκατάσταση"
+
+#: capplets/theme-switcher/gui.c:197
+msgid "Available Themes"
+msgstr "Διαθέσιμα θέματα"
+
+#: capplets/theme-switcher/gui.c:221
+msgid ""
+"Auto\n"
+"Preview"
+msgstr ""
+"Αυτόματη\n"
+"Επισκόπιση"
+
+#: capplets/theme-switcher/gui.c:233
+msgid ""
+"Install new\n"
+"theme..."
+msgstr ""
+"Εγκατάσταση\n"
+"νέου θέματος..."
+
+#. Font selector.
+#.
+#: capplets/theme-switcher/gui.c:239
+msgid "User Font"
+msgstr "Γραμματοσειρά χρήστη"
+
+#. FIXME - should really get this from X somehow
+#. for now we just assume default gtk font
+#: capplets/theme-switcher/gui.c:257
+msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
+msgstr "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
+
+# TODO
+#: capplets/theme-switcher/gui.c:276
+msgid "Use custom font."
+msgstr "Χρήση ειδικής γραμματοσειράς."
+
+#: capplets/theme-switcher/install.c:26
+msgid "Home directory doesn't exist!\n"
+msgstr "Αρχικός κατάλογος ανύπαρκτος!\n"
+
+#: capplets/theme-switcher/install.c:36
+msgid "Theme does not exist"
+msgstr "Ανύπαρκτο θέμα"
+
+#: capplets/theme-switcher/install.c:68
+#, c-format
+msgid "Command '%s' failed"
+msgstr "Εκτέλεση εντολής '%s' ανεπιτυχής"
+
+#: capplets/theme-switcher/install.c:73
+msgid "Unknown file format"
+msgstr "Άγνωστος τύπος αρχείου"
+
+#: capplets/theme-switcher/theme-selector.desktop.in.h:1
+msgid "Select which desktop theme to use"
+msgstr "Επιλέγει το θέμα της επιφάνειας εργασίας"
+
+#: capplets/theme-switcher/theme-selector.desktop.in.h:2
+msgid "Theme Selector"
+msgstr "Επιλογέας Θέματος"
+
+#: capplets/ui-properties/application.desktop.in.h:1
+msgid "Applications"
+msgstr "Εφαρμογές"
+
+#: capplets/ui-properties/application.desktop.in.h:2
+msgid "Sets the default feel of GNOME applications"
+msgstr "Ρύθμιση της εξ' ορισμού αίσθησης των εφαρμογών του GNOME."
+
+#: capplets/ui-properties/dialogs.desktop.in.h:1
+msgid "Dialogs"
+msgstr "Διάλογοι"
+
+#: capplets/ui-properties/mdi.desktop.in.h:1
+msgid "MDI"
+msgstr "Διασύνδεση Πολλαπλών Εγγράφων"
+
+# TODO
+#: capplets/ui-properties/ui-properties.c:54
+msgid "Can detach and move toolbars"
+msgstr "Ενεργ. απόσπασης και μετακίνησης εργαλειοθηκών"
+
+#: capplets/ui-properties/ui-properties.c:59
+msgid "Toolbars have relieved border"
+msgstr "Εργαλειοθήκες με ανάγλυφο πλαίσιο"
+
+#: capplets/ui-properties/ui-properties.c:64
+msgid "Toolbar buttons have relieved border"
+msgstr "Κουμπία εργαλειοθηκών με ανάγλυφο πλαίσιο"
+
+#: capplets/ui-properties/ui-properties.c:69
+msgid "Toolbars have line separators"
+msgstr "Εργαλειοθήκες με διαχωριστικά"
+
+#: capplets/ui-properties/ui-properties.c:74
+msgid "Toolbars have text labels"
+msgstr "Εργαλειοθήκες με ετικέτες"
+
+#: capplets/ui-properties/ui-properties.c:103
+msgid "Can detach and move menus"
+msgstr "Ενεργ. απόσπασης και μετακίνησης μενού"
+
+#: capplets/ui-properties/ui-properties.c:108
+msgid "Menus have relieved border"
+msgstr "Μενού με ανάγλυφο πλαίσιο"
+
+#: capplets/ui-properties/ui-properties.c:112
+msgid "Submenus can be torn off"
+msgstr "Ενεργ. απόσπασης υπομενού"
+
+#: capplets/ui-properties/ui-properties.c:116
+msgid "Menu items have icons"
+msgstr "Επιλογές μενού με εικονίδια"
+
+#: capplets/ui-properties/ui-properties.c:140
+msgid "Statusbar is interactive when possible"
+msgstr "Διαδραστική γραμμή κατάστασης όποτε είναι δυνατόν"
+
+#: capplets/ui-properties/ui-properties.c:145
+msgid "Statusbar progress meter is on the right"
+msgstr "Μετρητής προόδου δεξιά στη γραμμή κατάστασης"
+
+#: capplets/ui-properties/ui-properties.c:162
+msgid "Menu Options"
+msgstr "Επιλογές Μενού"
+
+#: capplets/ui-properties/ui-properties.c:163
+msgid "Statusbar Options"
+msgstr "Επιλογές Γραμμής Κατάστασης"
+
+#: capplets/ui-properties/ui-properties.c:164
+msgid "Toolbar Options"
+msgstr "Επιλογές Εργαλειοθήκης"
+
+#: capplets/ui-properties/ui-properties.c:170
+msgid "Dialog buttons"
+msgstr "Κουμπιά διαλόγων"
+
+#: capplets/ui-properties/ui-properties.c:171
+msgid "Default value"
+msgstr "Εξ' ορισμού τιμή"
+
+#: capplets/ui-properties/ui-properties.c:172
+msgid "Spread buttons out"
+msgstr "Άπλωμα κουμπιών"
+
+#: capplets/ui-properties/ui-properties.c:173
+msgid "Put buttons on edges"
+msgstr "Κουμπιά στις άκρες"
+
+#: capplets/ui-properties/ui-properties.c:174
+msgid "Left-justify buttons"
+msgstr "Αριστερή στοίχιση κουμπιών"
+
+#: capplets/ui-properties/ui-properties.c:175
+msgid "Right-justify buttons"
+msgstr "Δεξιά στοίχιση κουμπιών"
+
+#: capplets/ui-properties/ui-properties.c:180
+msgid "Dialog buttons have icons"
+msgstr "Κουμπιά διαλόγων με εικονίδια"
+
+#: capplets/ui-properties/ui-properties.c:185
+msgid "Use statusbar instead of dialog when possible"
+msgstr "Χρήση γραμμής κατάστασης αντί διαλόγων όποτε είναι δυνατόν"
+
+#: capplets/ui-properties/ui-properties.c:207
+msgid "Dialog position"
+msgstr "Τοποθέτηση διαλόγων"
+
+#: capplets/ui-properties/ui-properties.c:208
+msgid "Let window manager decide"
+msgstr "Κατά την επιλογή του διαχ. παραθύρων"
+
+#: capplets/ui-properties/ui-properties.c:209
+msgid "Center of the screen"
+msgstr "Στο κέντρο της οθόνης"
+
+#: capplets/ui-properties/ui-properties.c:210
+msgid "At the mouse pointer"
+msgstr "Στη θέση του δείκτη ποντικιού"
+
+#: capplets/ui-properties/ui-properties.c:215
+msgid "Dialog hints"
+msgstr "Υποδείξεις διαλόγων"
+
+#: capplets/ui-properties/ui-properties.c:216
+msgid "Dialogs are like other windows"
+msgstr "Οι διάλογοι είναι όπως τα άλλα παράθυρα"
+
+#: capplets/ui-properties/ui-properties.c:217
+msgid "Dialogs are treated specially by window manager"
+msgstr "Ειδική μεταχείριση διαλόγων από το διαχ. παραθύρων"
+
+#: capplets/ui-properties/ui-properties.c:222
+msgid "Place dialogs over application window when possible"
+msgstr "Τοποθέτηση διαλόγων πάνω από το παράθυρο εφαρμογής όποτε είναι δυνατόν"
+
+#: capplets/ui-properties/ui-properties.c:243
+msgid "Dialog Layout"
+msgstr "Διάταξη Διαλόγων"
+
+#: capplets/ui-properties/ui-properties.c:244
+msgid "Dialog Behavior"
+msgstr "Συμπεριφορά Διαλόγων"
+
+#: capplets/ui-properties/ui-properties.c:250
+msgid "Default MDI Mode"
+msgstr "Εξ' Ορισμού Κατάσταση MDI"
+
+# Please use this term consistently for this MDI option...
+#: capplets/ui-properties/ui-properties.c:251
+msgid "Notebook"
+msgstr "Τετράδιο"
+
+#: capplets/ui-properties/ui-properties.c:252
+msgid "Toplevel"
+msgstr "Παράθυρο"
+
+#: capplets/ui-properties/ui-properties.c:253
+msgid "Modal"
+msgstr "Αποκλειστικό"
+
+# Please use "tetradio" for "(MDI) notebook" consistently... 
+#: capplets/ui-properties/ui-properties.c:258
+msgid "MDI notebook tab position"
+msgstr "Θέση σελιδοδεικτών τετραδίου"
+
+#: capplets/ui-properties/ui-properties.c:259
+msgid "Left"
+msgstr "Αριστερά"
+
+#: capplets/ui-properties/ui-properties.c:260
+msgid "Right"
+msgstr "Δεξιά"
+
+#: capplets/ui-properties/ui-properties.c:261
+msgid "Top"
+msgstr "Επάνω"
+
+#: capplets/ui-properties/ui-properties.c:262
+msgid "Bottom"
+msgstr "Κάτω"
+
+#: capplets/ui-properties/ui-properties.c:277
+msgid "GNOME MDI Options"
+msgstr "Επιλογές GNOME MDI"
 
 #: capplets/ui-properties/ui-properties.directory.in.h:1
 msgid "Look and Feel"
@@ -4311,6 +3915,397 @@ msgstr "Αίσθηση χρήσης"
 #: capplets/ui-properties/ui-properties.directory.in.h:2
 msgid "Look and Feel Properties"
 msgstr "Ρυθμίσεις της αίσθησης χρήσης του περιβάλλοντος εργασίας."
+
+#: capplets/url-properties/url-properties.c:51
+msgid "Error initializing the `url-properties' capplet."
+msgstr "Σφάλμα αριχκοποίησης εφαρμογιδίου `url-properties'."
+
+#: capplets/url-properties/url-properties.c:76
+msgid "Protocol"
+msgstr "Πρωτόκολο"
+
+#: capplets/url-properties/url-properties.c:76
+msgid "Command"
+msgstr "Εντολή"
+
+#: capplets/url-properties/url-properties.c:93
+msgid "handler:"
+msgstr "διαχειριστής:"
+
+#. set some commonly used handlers
+#: capplets/url-properties/url-properties.c:103
+msgid "Netscape"
+msgstr "Netscape"
+
+#: capplets/url-properties/url-properties.c:108
+msgid "Netscape (new window)"
+msgstr "Netscape (νέο παράθυρο)"
+
+#: capplets/url-properties/url-properties.c:121
+msgid "Help browser"
+msgstr "Πρόγραμμα βοήθειας"
+
+#: capplets/url-properties/url-properties.c:127
+msgid "Help browser (new window)"
+msgstr "Πρόγραμμα βοήθειας (νέο παράθυρο)"
+
+# Other options?? (shorter word)  "8esh" ??? nah...
+#: capplets/url-properties/url-properties.c:140
+msgid "Set"
+msgstr "Καθορισμός"
+
+#: capplets/url-properties/url-properties.c:148
+msgid "Remove"
+msgstr "Διαγραφή"
+
+#: capplets/url-properties/url-properties.desktop.in.h:1
+msgid "Configure which programs are used to display URLs"
+msgstr "Ρύθμιση των προγράμμάτων για την εμφάνιση URL."
+
+#: capplets/url-properties/url-properties.desktop.in.h:2
+msgid "URL Handlers"
+msgstr "Χειριστές URL"
+
+#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.h:1
+msgid "Enlightenment"
+msgstr "Enlightenment"
+
+#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.h:1
+msgid "Ice WM"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.h:1
+msgid "Scwm"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.h:1
+#, fuzzy
+msgid "Window Maker"
+msgstr "Διαχειριστής Παραθύρων"
+
+#: capplets/wm-properties/wm-desktops/twm.desktop.in.h:1
+msgid "twm"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:142
+#, c-format
+msgid ""
+"Starting %s\n"
+"(%d seconds left before operation times out)"
+msgstr ""
+"Έναρξη %s\n"
+"(λήξη απόπειρας σε %d δευτερόλεπτα)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:303
+#, c-format
+msgid "%s (Current)"
+msgstr "%s (Τρέχων)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:306
+#, c-format
+msgid "Run Configuration Tool for %s"
+msgstr "Εκτέλεση εργαλείου ρυθμίσεων του %s"
+
+#: capplets/wm-properties/wm-properties-capplet.c:317
+msgid " (Not found)"
+msgstr " (Δε βρέθηκε)"
+
+#: capplets/wm-properties/wm-properties-capplet.c:356
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\tAnother window manager is already running and could not be killed\n"
+msgstr ""
+"wm-properties-capplet: Αρχικοποίηση διαχειριστή παραθύρων αδύνατη.\n"
+"\tΟ τερματισμός του ήδη υπάρχοντος διαχειριστή δεν ήταν δυνατός\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:360
+#, c-format
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\t'%s' didn't start\n"
+msgstr ""
+"wm-properties-capplet: Αρχικοποίηση διαχειριστή παραθύρων αδύνατη.\n"
+"\tανεπιτυχής εκκίνηση του '%s' \n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:413
+msgid "Previous window manager did not die\n"
+msgstr "Ο προηγούμενος διαχειριστής παραθύρων δεν τερματίστηκε\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:446
+#, c-format
+msgid ""
+"Could not start '%s'.\n"
+"Falling back to previous window manager '%s'\n"
+msgstr ""
+"Εκκίνηση του '%s' ανεπιτυχής.\n"
+"Επαναφορά του προηγούμενου διαχειριστή παραθύρων '%s'\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:477
+msgid ""
+"Could not start fallback window manager.\n"
+"Please run a window manager manually. You can\n"
+"do this by selecting \"Run Program\" in the\n"
+"foot menu\n"
+msgstr ""
+"Απόπειρες εκκίνησης διαχειριστή παραθύρων απέτυχαν.\n"
+"Παρακαλώ εκτελέστε κάποιο διαχειριστή. Αυτό μπορείτε να\n"
+"το κάνετε επιλέγοντας \"Εκτέλεση προγράμματος\" από το\n"
+"κεντρικό μενού του GNOME\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:502
+#: capplets/wm-properties/wm-properties-capplet.c:868
+#: capplets/wm-properties/wm-properties-capplet.c:875
+#: capplets/wm-properties/wm-properties-capplet.c:1021
+msgid "OK"
+msgstr "Εντάξει"
+
+#: capplets/wm-properties/wm-properties-capplet.c:520
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. You can do so immediately by selecting the \"Save session\n"
+"now\" below, or you can save your session later.  This can be\n"
+"done either selecting \"Save Current Session\" under \"Settings\"\n"
+"in the main menu, or by turning on \"Save Current Setup\" when\n"
+"you log out.\n"
+msgstr ""
+"Ο διαχειριστής παραθύρων έχει αλλαχθεί. Προκειμένου να αποθηκευτεί\n"
+"αυτή η αλλαγή, πρέπει να αποθηκεύσετε την τρέχουσα συνεδρία.\n"
+"Αυτό μπορείτε να το κάνετε αμέσως, επιλέγοντας \"Αποθήκευση συνεδρίας\n"
+"τώρα\". Διαφορετικά, μπορείτε να αποθηκεύσετε τη συνεδρία αργότερα, είτε\n"
+"επιλέγοντας \"Αποθήκευση τρέχουσας συνεδρίας\" από τις \"Ρυθμίσεις\"\n"
+"στο κεντρικό μενού του GNOME, είτε επιλέγοντας \"Αποθήκευση συνεδρίας\"\n"
+"στο πλαίσιο διαλόγου κατά τον τερματισμό.\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:527
+msgid "Save Session Later"
+msgstr "Αποθήκευση συνεδρίας αργότερα"
+
+#: capplets/wm-properties/wm-properties-capplet.c:527
+msgid "Save Session Now"
+msgstr "Αποθήκευση συνεδρίας τώρα"
+
+#: capplets/wm-properties/wm-properties-capplet.c:530
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. This can be done by either selecting \"Save Current Session\"\n"
+"under \"Settings\" in the main menu, or by turning on\n"
+"\"Save Current Setup\" when you log out.\n"
+msgstr ""
+"Ο διαχειριστής παραθύρων έχει αλλαχθεί. Προκειμένου να αποθηκευτεί\n"
+"αυτή η αλλαγή, πρέπει να αποθηκεύσετε την τρέχουσα συνεδρία.\n"
+"Αυτό μπορείτε να το κάνετε αμέσως, επιλέγοντας \"Αποθήκευση συνεδρίας\n"
+"τώρα\". Διαφορετικά, μπορείτε να αποθηκεύσετε τη συνεδρία αργότερα, είτε\n"
+"επιλέγοντας \"Αποθήκευση τρέχουσας συνεδρίας\" από τις \"Ρυθμίσεις\"\n"
+"στο κεντρικό μενού του GNOME, είτε επιλέγοντας \"Αποθήκευση συνεδρίας\"\n"
+"στο πλαίσιο διαλόγου κατά τον τερματισμό.\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:757
+msgid "Add New Window Manager"
+msgstr "Νέος διαχειριστής παραθύρων"
+
+#: capplets/wm-properties/wm-properties-capplet.c:771
+msgid "Name:"
+msgstr "Όνομα:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:784
+msgid "Command:"
+msgstr "Εντολή:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:797
+msgid "Configuration Command:"
+msgstr "Πρόγραμμα ρυθμίσεων:"
+
+# TODO
+#: capplets/wm-properties/wm-properties-capplet.c:816
+msgid "Window manager is session managed"
+msgstr "Ο διαχ. συνεδρίας αναλαμβάνει το διαχ. παραθύρων"
+
+#: capplets/wm-properties/wm-properties-capplet.c:866
+msgid "Name cannot be empty"
+msgstr "Δεν επιτρέπεται κενό όνομα"
+
+#: capplets/wm-properties/wm-properties-capplet.c:873
+msgid "Command cannot be empty"
+msgstr "Δεν επιτρέπεται κενή εντολή"
+
+# TODO
+#: capplets/wm-properties/wm-properties-capplet.c:922
+#: capplets/wm-properties/wm-properties-capplet.c:964
+msgid "Edit Window Manager"
+msgstr "Διόρθωση Διαχ. Παραθύρων"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1020
+msgid "You cannot delete the current Window Manager"
+msgstr "Διαγραφή τρέχοντος διαχειριστή παραθύρων δεν επιτρέπεται"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1093
+msgid "Edit..."
+msgstr "Διόρθωση..."
+
+#: capplets/wm-properties/wm-properties-capplet.c:1098
+msgid "Delete"
+msgstr "Διαγραφή"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1134
+msgid ""
+"an initialization error occurred while starting 'wm-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"σφάλμα αρχικοποίησης κατά την εκκίνηση του 'wm-properties-capplet'.\n"
+"τερματισμός...\n"
+
+#: capplets/wm-properties/wm-properties.desktop.in.h:1
+msgid "Choose a window manager"
+msgstr "Επιτρέπει την επιλογή του διαχειριστή παραθύρων για το GNOME"
+
+#: capplets/wm-properties/wm-properties.desktop.in.h:2
+msgid "Window Manager"
+msgstr "Διαχειριστής Παραθύρων"
+
+#: control-center/callbacks.c:102 control-center/gnomecc.desktop.in.h:1
+msgid "GNOME Control Center"
+msgstr "Κέντρο Ελέγχου GNOME"
+
+#: control-center/callbacks.c:105
+msgid "Desktop Properties manager."
+msgstr "Ρυθμίσεις επιφάνειας εργασίας."
+
+#: control-center/capplet-manager.c:179
+msgid "Try"
+msgstr "Δοκιμή"
+
+#: control-center/capplet-manager.c:185
+msgid "Revert"
+msgstr "Επαναφορά"
+
+#. set the help item
+#: control-center/capplet-manager.c:208
+#, c-format
+msgid "Help with '%s' settings"
+msgstr "Βοήθεια στη ρύθμιση '%s'"
+
+#: control-center/capplet-widget-libs.c:46
+msgid "id of the capplet -- assigned by the control-center"
+msgstr "id εφαρμογιδίου ελέγχου -- ανάθεση από το control-center"
+
+#: control-center/capplet-widget-libs.c:46
+msgid "ID"
+msgstr "ID"
+
+#: control-center/capplet-widget-libs.c:47
+msgid "Multi-capplet id."
+msgstr "ID πολλαπλού εφαμογιδίου."
+
+#: control-center/capplet-widget-libs.c:47
+msgid "CAPID"
+msgstr "CAPID"
+
+#: control-center/capplet-widget-libs.c:48
+msgid "X ID of the socket it's plugged into"
+msgstr "X ID της υποδοχής που το δέχεται"
+
+#: control-center/capplet-widget-libs.c:48
+msgid "XID"
+msgstr "XID"
+
+#: control-center/capplet-widget-libs.c:49
+msgid "IOR of the control-center"
+msgstr "IOR του control-center"
+
+#: control-center/capplet-widget-libs.c:49
+msgid "IOR"
+msgstr "IOR"
+
+#: control-center/capplet-widget-libs.c:50
+msgid "Initialize session settings"
+msgstr "Αρχικοποίηση ρυθμίσεων συνεδρίας"
+
+#: control-center/capplet-widget-libs.c:51
+msgid "Ignore default action.  Used for custom init-session cases"
+msgstr ""
+"Αγνόηση εξ' ορισμού ενέργειών.  Χρήση σε ειδικές περιπτώσεις init-session"
+
+#: control-center/capplet-widget.c:272
+msgid "Sorry, no help is available for these settings."
+msgstr "Με συγχωρείτε, δεν υπάρχει βοήθεια για αυτές τις ρυθμίσεις."
+
+#: control-center/corba-glue.c:77
+msgid "capplet-command to be run."
+msgstr "εντολή-capplet προς εκτέλεση."
+
+#: control-center/corba-glue.c:77
+msgid "CAPPLET"
+msgstr "CAPPLET"
+
+#: control-center/gnomecc.desktop.in.h:2
+msgid "The GNOME configuration tool"
+msgstr "Το εργαλείο ρύθμισης του GNOME"
+
+#: control-center/main.c:36
+msgid "Help on control-center"
+msgstr "Βοήθεια για το κέντρο ελέγχου"
+
+#: control-center/main.c:36
+msgid "Help with the GNOME control-center."
+msgstr "Βοήθεια για το κέντρο ελέγχου του GNOME."
+
+#: control-center/main.c:38
+msgid "Help with the current configuration page."
+msgstr "Βοήθεια για τη τρέχουσα σελίδα ρυθμίσεων."
+
+#: control-center/main.c:41
+msgid "About"
+msgstr "Σχετικά με"
+
+#: control-center/main.c:41
+msgid "About the GNOME control-center."
+msgstr "Σχετικά με το κέντρο ελέγχου του GNOME."
+
+#. we create the widgets
+#: control-center/main.c:69
+msgid "Warning:"
+msgstr "Προειδοποίηση:"
+
+#: control-center/main.c:69
+msgid "Discard all changes"
+msgstr "Απόριψη όλων των αλλαγών"
+
+#. ...labels, etc
+#: control-center/main.c:78
+msgid ""
+"The following modules have had changes made, but not committed.  If you "
+"would like to edit them, please double click on the appropriate entry."
+msgstr ""
+"Στις ακόλουθες κατηγορίες έγιναν αλλαγές που δεν έχουν οριστικοποιηθεί. Για "
+"να διορθώσετε κάτι, παρακαλώ κάντε διπλό κλίκ στην επιθυμητή κατηγορία."
+
+#: control-center/splash.c:48
+msgid "Operating System:"
+msgstr "Λειτουργικό Σύστημα:"
+
+#: control-center/splash.c:49
+msgid "Distribution Version:"
+msgstr "Έκδοση Διανομής:"
+
+#: control-center/splash.c:50
+msgid "Processor Type:"
+msgstr "Τύπος Επεξεργαστή:"
+
+#: control-center/splash.c:51
+msgid "User Name:"
+msgstr "Όνομα Χρήστη:"
+
+#: control-center/splash.c:52
+msgid "Host Name:"
+msgstr "Όνομα Συστήματος:"
+
+#. This is about the only case where we'll put Unknown instead
+#. of simply not showing the info.
+#: control-center/splash.c:178
+msgid "Unknown"
+msgstr "Άγνωστο"
 
 #~ msgid "Mime Type: "
 #~ msgstr "Τύπος MIME: "

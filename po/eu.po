@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0\n"
-"POT-Creation-Date: 2001-03-12 15:42+0100\n"
+"POT-Creation-Date: 2001-03-15 10:16+0100\n"
 "PO-Revision-Date: 2001-03-11 13:07+0100\n"
 "Last-Translator: Joseba Bidaurrazaga van Dierdonck <gcpbivaj@lg.ehu.es>\n"
 "Language-Team: EUSKARA <linux-eu@chanae.alphanet.ch>\n"
@@ -28,6 +28,14 @@ msgid ""
 "an initialization error occurred while starting "
 "'background-properties-capplet'.\n"
 "aborting...\n"
+msgstr ""
+
+#: capplets/background-properties/background-properties.desktop.in.h:1
+msgid "Background"
+msgstr "Background"
+
+#: capplets/background-properties/background-properties.desktop.in.h:2
+msgid "Configuration of the desktop's background"
 msgstr ""
 
 #: capplets/background-properties/property-background.c:116
@@ -213,23 +221,66 @@ msgstr "MODULU"
 msgid "Display wallpaper: tiled, centered, scaled or ratio"
 msgstr ""
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:238
-#, fuzzy
-msgid "Gnome editor"
-msgstr "Gnome laguntza historia"
+#: capplets/desktop-links/Desktop.directory.in.h:1
+#: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:1
+msgid "Desktop"
+msgstr "Idazmahaia"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:249
-#, fuzzy
-msgid "Run In Terminal"
-msgstr "Terminalean ekin"
-
-#: capplets/file-types/file-types-capplet.desktop.in.h:1
-msgid "File Types and Programs"
+#: capplets/desktop-links/Documents.directory.in.h:1
+msgid "Configure how document types are handled"
 msgstr ""
 
-#: capplets/file-types/file-types-capplet.desktop.in.h:2
-msgid "Specify which programs are used to open or view each file type"
+#: capplets/desktop-links/Documents.directory.in.h:2
+#, fuzzy
+msgid "Document Handlers"
+msgstr "Dokumentazioa"
+
+#. create the app
+#: capplets/desktop-links/Gnome.directory.in.h:1 control-center/main.c:197
+#: control-center/splash.c:247
+#, fuzzy
+msgid "Control Center"
+msgstr "WebControl-aren Propietateak"
+
+#: capplets/desktop-links/Gnome.directory.in.h:2
+msgid "Control Center Menu"
 msgstr ""
+
+#: capplets/desktop-links/Multimedia.directory.in.h:1
+msgid "Configure the settings of your Multimedia devices"
+msgstr ""
+
+#: capplets/desktop-links/Multimedia.directory.in.h:2
+msgid "Multimedia"
+msgstr "Multimedia"
+
+#: capplets/desktop-links/Peripherals.directory.in.h:1
+#, fuzzy
+msgid "Configure your external devices"
+msgstr "Konfiguratu zerbitzuak"
+
+#: capplets/desktop-links/Peripherals.directory.in.h:2
+msgid "Peripherals"
+msgstr ""
+
+#: capplets/desktop-links/Session.directory.in.h:1
+msgid "Session"
+msgstr "Sesio"
+
+#: capplets/desktop-links/Session.directory.in.h:2
+#, fuzzy
+msgid "Session Management Settings"
+msgstr "Sesioaren kudeaketa aukerak"
+
+#: capplets/desktop-links/UIOptions.directory.in.h:1
+#, fuzzy
+msgid "Configure the global settings of your GNOME applications"
+msgstr "Aplikazioa konfiguratu"
+
+#: capplets/desktop-links/UIOptions.directory.in.h:2
+#, fuzzy
+msgid "User Interface"
+msgstr "Sarearen interfazea"
 
 #: capplets/file-types/file-types-capplet-dialogs.c:387
 msgid "Edit Applications List"
@@ -470,190 +521,37 @@ msgstr "Sesio"
 msgid "Default Action"
 msgstr "Jatorrizkoa"
 
+#: capplets/file-types/file-types-capplet.desktop.in.h:1
+msgid "File Types and Programs"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet.desktop.in.h:2
+msgid "Specify which programs are used to open or view each file type"
+msgstr ""
+
 #: capplets/file-types/file-types-icon-entry.c:381
 #, fuzzy
 msgid "Select an icon"
 msgstr "Aukeratu animazioa"
 
-#: capplets/mouse-properties/mouse-properties.c:267
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:238
 #, fuzzy
-msgid "Mouse buttons"
-msgstr "2 botoi"
+msgid "Gnome editor"
+msgstr "Gnome laguntza historia"
 
-#: capplets/mouse-properties/mouse-properties.c:276
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:249
 #, fuzzy
-msgid "Left handed"
-msgstr "orientatu. aldatua"
+msgid "Run In Terminal"
+msgstr "Terminalean ekin"
 
-#: capplets/mouse-properties/mouse-properties.c:278
-msgid "Right handed"
+#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:1
+msgid "Choose the editor that is invoked by gnome-edit"
 msgstr ""
 
-#. Mouse motion
-#: capplets/mouse-properties/mouse-properties.c:304
+#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:2
 #, fuzzy
-msgid "Mouse motion"
-msgstr "Muduluaren aukerak:"
-
-#: capplets/mouse-properties/mouse-properties.c:314
-#, fuzzy
-msgid "Acceleration"
-msgstr "Azkarrarazlea"
-
-#: capplets/mouse-properties/mouse-properties.c:314
-#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:4
-#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:8
-#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:11
-msgid "Fast"
-msgstr "Arin"
-
-#: capplets/mouse-properties/mouse-properties.c:314
-#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:13
-#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:21
-#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:19
-msgid "Slow"
-msgstr "Astiro"
-
-#: capplets/mouse-properties/mouse-properties.c:325
-#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:30
-#, fuzzy
-msgid "Threshold"
-msgstr "Karga bajuko muga:"
-
-#: capplets/mouse-properties/mouse-properties.c:325
-#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:6
-#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:9
-#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:10
-#, fuzzy
-msgid "Large"
-msgstr "zarama"
-
-#: capplets/mouse-properties/mouse-properties.c:325
-#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:14
-#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:15
-#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:22
-#, fuzzy
-msgid "Small"
-msgstr "Txikia (%dMB)"
-
-#: capplets/mouse-properties/mouse-properties.c:350
-msgid ""
-"an initialization error occurred while starting 'mouse-properties-capplet'.\n"
-"aborting...\n"
-msgstr ""
-
-#: capplets/screensaver-properties/callbacks.c:102
-#, fuzzy
-msgid "Require Password"
-msgstr "Biaeztatu Pasahitza"
-
-#: capplets/screensaver-properties/callbacks.c:154
-#, fuzzy
-msgid "Use power management."
-msgstr "Erabiltzailearen izena"
-
-#: capplets/screensaver-properties/callbacks.c:309
-#, fuzzy
-msgid "No Screensaver"
-msgstr "Pantaila zarratu"
-
-#: capplets/screensaver-properties/callbacks.c:314
-msgid "Random Screensaver"
-msgstr ""
-
-#: capplets/screensaver-properties/callbacks.c:483
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:56
-#, fuzzy
-msgid "Settings..."
-msgstr "Konfigurazioa"
-
-#. we need to special case random
-#: capplets/screensaver-properties/callbacks.c:491
-#, fuzzy
-msgid "Random Settings"
-msgstr "Konfigurazioa"
-
-#: capplets/screensaver-properties/callbacks.c:501
-#, fuzzy, c-format
-msgid "%s Settings..."
-msgstr "Konfigurazioa"
-
-#: capplets/screensaver-properties/screensaver-dialog.c:46
-#, fuzzy
-msgid "About:"
-msgstr "Zerari buruz"
-
-#: capplets/screensaver-properties/screensaver-dialog.c:51
-msgid "Author:"
-msgstr "Egilea:"
-
-#: capplets/screensaver-properties/screensaver-dialog.c:61
-#, fuzzy
-msgid "Author: UNKNOWN"
-msgstr "Egileak: "
-
-#: capplets/screensaver-properties/screensaver-dialog.c:78
-msgid "Settings"
-msgstr "Konfigurazioa"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:38
-msgid "RANDOM SCREENSAVER"
-msgstr ""
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:49
-#, fuzzy
-msgid "Screen Saver"
-msgstr "Pantaila"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:61
-msgid ""
-"Pressing this button will popup a dialogbox that will help you setup the "
-"current screensaver."
-msgstr ""
-
-#. set up the initial frame, and get a vbox in which to pack things.
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:88
-#, fuzzy
-msgid "Screen Saver Settings"
-msgstr "Gnome pager-aren egokiera"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:96
-#, fuzzy
-msgid "Start After "
-msgstr "Haste sektorea: "
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:102
-#, fuzzy
-msgid " Minutes."
-msgstr "minutuak"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:117
-#, fuzzy
-msgid "Priority:"
-msgstr "Portua:"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:124
-#, fuzzy
-msgid "Low "
-msgstr "Gutxi"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:126
-#, fuzzy
-msgid " Normal"
-msgstr "Arrunta"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:137
-#, fuzzy
-msgid "Shutdown monitor "
-msgstr "Gehiago erakutsi"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:139
-msgid " minutes after screen saver has started."
-msgstr ""
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:152
-msgid "Screen Saver Demo"
-msgstr ""
+msgid "Default Editor"
+msgstr "Jatorrizkoa"
 
 #: capplets/keyboard-properties/keyboard-properties.c:262
 #, fuzzy
@@ -725,856 +623,127 @@ msgid ""
 "aborting...\n"
 msgstr ""
 
-#: capplets/sound-properties/sound-properties.c:97
-msgid ""
-"an initialization error occurred while starting 'sound-properties-capplet'."
-msgstr ""
+#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:1
+msgid "Keyboard"
+msgstr "Teklatua"
 
-#: capplets/sound-properties/sound-properties.c:188
+#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:2
 #, fuzzy
-msgid "Event"
-msgstr "Mugimendua"
+msgid "Keyboard Properties"
+msgstr "WebControl-aren Propietateak"
 
-#: capplets/sound-properties/sound-properties.c:189
-msgid "File to Play"
-msgstr ""
-
-#: capplets/sound-properties/sound-properties.c:243
-msgid "Enable"
-msgstr "Gaitu"
-
-#: capplets/sound-properties/sound-properties.c:250
+#: capplets/mouse-properties/mouse-properties.c:267
 #, fuzzy
-msgid "Enable sound server startup"
-msgstr "Baimendu soinu zerbitzaria"
-
-#: capplets/sound-properties/sound-properties.c:258
-msgid "Sounds for events"
-msgstr ""
-
-#: capplets/sound-properties/sound-properties.c:279
-msgid "General"
-msgstr "Orokorra"
-
-#: capplets/sound-properties/sound-properties.c:286
-#, fuzzy
-msgid "Select sound file"
-msgstr "Aukeratu fitxategia"
-
-#: capplets/sound-properties/sound-properties.c:325
-msgid "Play"
-msgstr ""
-
-#: capplets/sound-properties/sound-properties.c:336
-msgid "Sound Events"
-msgstr ""
-
-#: capplets/sound-properties/sound-properties.c:355
-msgid ""
-"This copy of the GNOME control center was not compiled with sound support"
-msgstr ""
-
-#: capplets/sound-properties/sound-properties.c:748
-msgid "The sound file for this event does not exist."
-msgstr ""
-
-#: capplets/sound-properties/sound-properties.c:750
-msgid ""
-"The sound file for this event does not exist.\n"
-"You may want to install the gnome-audio package\n"
-"for a set of default sounds."
-msgstr ""
-
-#: capplets/theme-switcher/demo.c:50
-#, fuzzy
-msgid "One"
-msgstr "berria"
-
-#: capplets/theme-switcher/demo.c:50
-#, fuzzy
-msgid "Two"
-msgstr "Goialdea"
-
-#. just 8 short names that will serve as samples for titles in demo
-#: capplets/theme-switcher/demo.c:52
-#, fuzzy
-msgid "Eenie"
-msgstr "ederra"
-
-#: capplets/theme-switcher/demo.c:52
-#, fuzzy
-msgid "Meenie"
-msgstr "Menu"
-
-#: capplets/theme-switcher/demo.c:53
-#, fuzzy
-msgid "Mynie"
-msgstr "ederra"
-
-#: capplets/theme-switcher/demo.c:53
-#, fuzzy
-msgid "Moe"
-msgstr "Mugitu"
-
-#: capplets/theme-switcher/demo.c:54
-msgid "Catcha"
-msgstr ""
-
-#: capplets/theme-switcher/demo.c:54
-#, fuzzy
-msgid "Tiger"
-msgstr "Pager"
-
-#: capplets/theme-switcher/demo.c:55
-msgid "By Its"
-msgstr ""
-
-#: capplets/theme-switcher/demo.c:55
-#, fuzzy
-msgid "Toe"
-msgstr "Goialdea"
-
-#: capplets/theme-switcher/demo.c:114
-msgid "Selected themes from above will be tested by previewing here."
-msgstr ""
-
-#. column one
-#: capplets/theme-switcher/demo.c:119
-#, fuzzy
-msgid "Sample Button"
-msgstr "Botoiak"
-
-#: capplets/theme-switcher/demo.c:123
-#, fuzzy
-msgid "Sample Check Button"
-msgstr "Baimendu botoi eskutuak"
-
-#: capplets/theme-switcher/demo.c:128
-msgid "Sample Text Entry Field"
-msgstr ""
-
-#: capplets/theme-switcher/demo.c:139
-#, fuzzy
-msgid "Submenu"
-msgstr "Submenu berria"
-
-#: capplets/theme-switcher/demo.c:146
-msgid "Item 1"
-msgstr ""
-
-#: capplets/theme-switcher/demo.c:149
-#, fuzzy
-msgid "Another item"
-msgstr "Erakutsi beste hint bat"
-
-#: capplets/theme-switcher/demo.c:154
-#, fuzzy
-msgid "Radio Button 1"
-msgstr "Mdk Botoiak"
-
-#: capplets/theme-switcher/demo.c:160
-#, fuzzy
-msgid "Radio Button 2"
-msgstr "Mdk Botoiak"
-
-#: capplets/theme-switcher/gui.c:89
-#, fuzzy, c-format
-msgid ""
-"Error installing theme:\n"
-"'%s'\n"
-"%s"
-msgstr ""
-"Errorea dokumentua kargatzerakoan:\n"
-"\n"
-"%s"
-
-#: capplets/theme-switcher/gui.c:120
-#, fuzzy
-msgid "Select a theme to install"
-msgstr "Hauta instalatu nahi duzun tamaina"
-
-#: capplets/theme-switcher/gui.c:197
-#, fuzzy
-msgid "Available Themes"
-msgstr "Erabilgarri dauden paketeak"
-
-#: capplets/theme-switcher/gui.c:221
-#, fuzzy
-msgid ""
-"Auto\n"
-"Preview"
-msgstr "Aurreikuspegia"
-
-#: capplets/theme-switcher/gui.c:233
-#, fuzzy
-msgid ""
-"Install new\n"
-"theme..."
-msgstr "Instalatu sitema"
-
-#. Font selector.
-#.
-#: capplets/theme-switcher/gui.c:239
-#, fuzzy
-msgid "User Font"
-msgstr "Erabiltzailearen izena"
-
-#. FIXME - should really get this from X somehow
-#. for now we just assume default gtk font
-#: capplets/theme-switcher/gui.c:257
-#, fuzzy
-msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
-msgstr "-*-helvetica-medium-r-normal-*-8-*-*-*-*-*-*-*"
-
-#: capplets/theme-switcher/gui.c:276
-msgid "Use custom font."
-msgstr ""
-
-#: capplets/theme-switcher/install.c:26
-msgid "Home directory doesn't exist!\n"
-msgstr ""
-
-#: capplets/theme-switcher/install.c:36
-msgid "Theme does not exist"
-msgstr ""
-
-#: capplets/theme-switcher/install.c:68
-#, fuzzy, c-format
-msgid "Command '%s' failed"
-msgstr "mkraid-ek huts egin du"
-
-#: capplets/theme-switcher/install.c:73
-#, fuzzy
-msgid "Unknown file format"
-msgstr "Sistemaren errore ezezaguna"
-
-#: capplets/ui-properties/ui-properties.c:54
-msgid "Can detach and move toolbars"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:59
-msgid "Toolbars have relieved border"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:64
-msgid "Toolbar buttons have relieved border"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:69
-msgid "Toolbars have line separators"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:74
-msgid "Toolbars have text labels"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:103
-msgid "Can detach and move menus"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:108
-msgid "Menus have relieved border"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:112
-msgid "Submenus can be torn off"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:116
-#, fuzzy
-msgid "Menu items have icons"
-msgstr "Menuaren item-a izena behar du"
-
-#: capplets/ui-properties/ui-properties.c:140
-msgid "Statusbar is interactive when possible"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:145
-msgid "Statusbar progress meter is on the right"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:162
-#, fuzzy
-msgid "Menu Options"
-msgstr "Menuaren ikonoa"
-
-#: capplets/ui-properties/ui-properties.c:163
-#, fuzzy
-msgid "Statusbar Options"
-msgstr "Saturazioa:"
-
-#: capplets/ui-properties/ui-properties.c:164
-#, fuzzy
-msgid "Toolbar Options"
-msgstr "Abiarazlearen aukera nagusiak"
-
-#: capplets/ui-properties/ui-properties.c:170
-#, fuzzy
-msgid "Dialog buttons"
+msgid "Mouse buttons"
 msgstr "2 botoi"
 
-#: capplets/ui-properties/ui-properties.c:171
+#: capplets/mouse-properties/mouse-properties.c:276
 #, fuzzy
-msgid "Default value"
-msgstr "Jatorrizkoa"
+msgid "Left handed"
+msgstr "orientatu. aldatua"
 
-#: capplets/ui-properties/ui-properties.c:172
-#, fuzzy
-msgid "Spread buttons out"
-msgstr "ezkuta botoiak"
-
-#: capplets/ui-properties/ui-properties.c:173
-msgid "Put buttons on edges"
+#: capplets/mouse-properties/mouse-properties.c:278
+msgid "Right handed"
 msgstr ""
 
-#: capplets/ui-properties/ui-properties.c:174
-msgid "Left-justify buttons"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:175
-msgid "Right-justify buttons"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:180
+#. Mouse motion
+#: capplets/mouse-properties/mouse-properties.c:304
 #, fuzzy
-msgid "Dialog buttons have icons"
-msgstr "Botoien ikonoak erakutsi"
+msgid "Mouse motion"
+msgstr "Muduluaren aukerak:"
 
-#: capplets/ui-properties/ui-properties.c:185
-msgid "Use statusbar instead of dialog when possible"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:207
+#: capplets/mouse-properties/mouse-properties.c:314
 #, fuzzy
-msgid "Dialog position"
-msgstr "Markatze aukerak"
+msgid "Acceleration"
+msgstr "Azkarrarazlea"
 
-#: capplets/ui-properties/ui-properties.c:208
+#: capplets/mouse-properties/mouse-properties.c:314
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:4
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:8
+#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:11
+msgid "Fast"
+msgstr "Arin"
+
+#: capplets/mouse-properties/mouse-properties.c:314
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:13
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:21
+#: capplets/screensaver-properties/screensaver-desktops/Starfish.desktop.in.h:19
+msgid "Slow"
+msgstr "Astiro"
+
+#: capplets/mouse-properties/mouse-properties.c:325
+#: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:30
 #, fuzzy
-msgid "Let window manager decide"
-msgstr "Hauta abiarazterakoan nahi duzun lehio kudeatzailea:"
+msgid "Threshold"
+msgstr "Karga bajuko muga:"
 
-#: capplets/ui-properties/ui-properties.c:209
+#: capplets/mouse-properties/mouse-properties.c:325
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:6
+#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:9
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:10
 #, fuzzy
-msgid "Center of the screen"
-msgstr "Ezabatu aukeratutakoa"
+msgid "Large"
+msgstr "zarama"
 
-#: capplets/ui-properties/ui-properties.c:210
+#: capplets/mouse-properties/mouse-properties.c:325
+#: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:14
+#: capplets/screensaver-properties/screensaver-desktops/Ant.desktop.in.h:15
+#: capplets/screensaver-properties/screensaver-desktops/Qix.desktop.in.h:22
 #, fuzzy
-msgid "At the mouse pointer"
-msgstr "Muntai puntuak hautatu"
+msgid "Small"
+msgstr "Txikia (%dMB)"
 
-#: capplets/ui-properties/ui-properties.c:215
-#, fuzzy
-msgid "Dialog hints"
-msgstr "Baimendu hint loginak"
-
-#: capplets/ui-properties/ui-properties.c:216
-msgid "Dialogs are like other windows"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:217
-#, fuzzy
-msgid "Dialogs are treated specially by window manager"
-msgstr "Lehio kudeatzaileak erabilitako programaren izenaren bezalakoa"
-
-#: capplets/ui-properties/ui-properties.c:222
-msgid "Place dialogs over application window when possible"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:243
-#, fuzzy
-msgid "Dialog Layout"
-msgstr "Itxura bertikala"
-
-#: capplets/ui-properties/ui-properties.c:244
-#, fuzzy
-msgid "Dialog Behavior"
-msgstr "Portaera"
-
-#: capplets/ui-properties/ui-properties.c:250
-#, fuzzy
-msgid "Default MDI Mode"
-msgstr "MDI modua"
-
-#: capplets/ui-properties/ui-properties.c:251
-msgid "Notebook"
-msgstr "Kaiera"
-
-#: capplets/ui-properties/ui-properties.c:252
-msgid "Toplevel"
-msgstr "Topea"
-
-#: capplets/ui-properties/ui-properties.c:253
-msgid "Modal"
-msgstr "Moduzkoa"
-
-#: capplets/ui-properties/ui-properties.c:258
-msgid "MDI notebook tab position"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:259
-msgid "Left"
-msgstr "Ezker"
-
-#: capplets/ui-properties/ui-properties.c:260
-msgid "Right"
-msgstr "Eskubi"
-
-#: capplets/ui-properties/ui-properties.c:261
-msgid "Top"
-msgstr "Goialdea"
-
-#: capplets/ui-properties/ui-properties.c:262
-msgid "Bottom"
-msgstr "Behealdea"
-
-#: capplets/ui-properties/ui-properties.c:277
-msgid "GNOME MDI Options"
-msgstr ""
-
-#: capplets/url-properties/url-properties.c:51
-msgid "Error initializing the `url-properties' capplet."
-msgstr ""
-
-#: capplets/url-properties/url-properties.c:76
-msgid "Protocol"
-msgstr ""
-
-#: capplets/url-properties/url-properties.c:76
-#, fuzzy
-msgid "Command"
-msgstr "Komandoa:"
-
-#: capplets/url-properties/url-properties.c:93
-#, fuzzy
-msgid "handler:"
-msgstr "Itzaldu"
-
-#. set some commonly used handlers
-#: capplets/url-properties/url-properties.c:103
-#, fuzzy
-msgid "Netscape"
-msgstr "NetWare"
-
-#: capplets/url-properties/url-properties.c:108
-#, fuzzy
-msgid "Netscape (new window)"
-msgstr "Ireki lehio berria"
-
-#: capplets/url-properties/url-properties.c:121
-#, fuzzy
-msgid "Help browser"
-msgstr "Gnome laguntzaren erakuslea"
-
-#: capplets/url-properties/url-properties.c:127
-#, fuzzy
-msgid "Help browser (new window)"
-msgstr "Zabaldu Erakuslearen lehio berria"
-
-#: capplets/url-properties/url-properties.c:140
-#, fuzzy
-msgid "Set"
-msgstr "Sektore"
-
-#: capplets/url-properties/url-properties.c:148
-msgid "Remove"
-msgstr "Ezabatu"
-
-#: capplets/wm-properties/wm-properties-capplet.c:142
-#, c-format
+#: capplets/mouse-properties/mouse-properties.c:350
 msgid ""
-"Starting %s\n"
-"(%d seconds left before operation times out)"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties-capplet.c:303
-#, c-format
-msgid "%s (Current)"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties-capplet.c:306
-#, fuzzy, c-format
-msgid "Run Configuration Tool for %s"
-msgstr "Konfigurazioa"
-
-#: capplets/wm-properties/wm-properties-capplet.c:317
-#, fuzzy
-msgid " (Not found)"
-msgstr "ez aurkitua"
-
-#: capplets/wm-properties/wm-properties-capplet.c:356
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\tAnother window manager is already running and could not be killed\n"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties-capplet.c:360
-#, c-format
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\t'%s' didn't start\n"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties-capplet.c:413
-msgid "Previous window manager did not die\n"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties-capplet.c:446
-#, c-format
-msgid ""
-"Could not start '%s'.\n"
-"Falling back to previous window manager '%s'\n"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties-capplet.c:477
-msgid ""
-"Could not start fallback window manager.\n"
-"Please run a window manager manually. You can\n"
-"do this by selecting \"Run Program\" in the\n"
-"foot menu\n"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties-capplet.c:502
-#: capplets/wm-properties/wm-properties-capplet.c:868
-#: capplets/wm-properties/wm-properties-capplet.c:875
-#: capplets/wm-properties/wm-properties-capplet.c:1021
-msgid "OK"
-msgstr "Ados"
-
-#: capplets/wm-properties/wm-properties-capplet.c:520
-msgid ""
-"Your current window manager has been changed. In order for\n"
-"this change to be saved, you will need to save your current\n"
-"session. You can do so immediately by selecting the \"Save session\n"
-"now\" below, or you can save your session later.  This can be\n"
-"done either selecting \"Save Current Session\" under \"Settings\"\n"
-"in the main menu, or by turning on \"Save Current Setup\" when\n"
-"you log out.\n"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties-capplet.c:527
-#, fuzzy
-msgid "Save Session Later"
-msgstr "Hasi sesioa"
-
-#: capplets/wm-properties/wm-properties-capplet.c:527
-#, fuzzy
-msgid "Save Session Now"
-msgstr "Hasi sesioa"
-
-#: capplets/wm-properties/wm-properties-capplet.c:530
-msgid ""
-"Your current window manager has been changed. In order for\n"
-"this change to be saved, you will need to save your current\n"
-"session. This can be done by either selecting \"Save Current Session\"\n"
-"under \"Settings\" in the main menu, or by turning on\n"
-"\"Save Current Setup\" when you log out.\n"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties-capplet.c:757
-#, fuzzy
-msgid "Add New Window Manager"
-msgstr "_Lehio berria"
-
-#: capplets/wm-properties/wm-properties-capplet.c:771
-msgid "Name:"
-msgstr "Izena:"
-
-#: capplets/wm-properties/wm-properties-capplet.c:784
-msgid "Command:"
-msgstr "Komandoa:"
-
-#: capplets/wm-properties/wm-properties-capplet.c:797
-#, fuzzy
-msgid "Configuration Command:"
-msgstr "Konfigurazioa"
-
-#: capplets/wm-properties/wm-properties-capplet.c:816
-#, fuzzy
-msgid "Window manager is session managed"
-msgstr "Lehio-kudeatzailearen sasibideak"
-
-#: capplets/wm-properties/wm-properties-capplet.c:866
-msgid "Name cannot be empty"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties-capplet.c:873
-#, fuzzy
-msgid "Command cannot be empty"
-msgstr "Komando lerroaren garaiera:"
-
-#: capplets/wm-properties/wm-properties-capplet.c:922
-#: capplets/wm-properties/wm-properties-capplet.c:964
-#, fuzzy
-msgid "Edit Window Manager"
-msgstr "Lehio menua ez"
-
-#: capplets/wm-properties/wm-properties-capplet.c:1020
-msgid "You cannot delete the current Window Manager"
-msgstr ""
-
-#: capplets/wm-properties/wm-properties-capplet.c:1093
-#, fuzzy
-msgid "Edit..."
-msgstr "Argitaratu"
-
-#: capplets/wm-properties/wm-properties-capplet.c:1098
-msgid "Delete"
-msgstr "Ezabatu"
-
-#: capplets/wm-properties/wm-properties-capplet.c:1134
-msgid ""
-"an initialization error occurred while starting 'wm-properties-capplet'.\n"
+"an initialization error occurred while starting 'mouse-properties-capplet'.\n"
 "aborting...\n"
 msgstr ""
 
-#: control-center/callbacks.c:102 control-center/gnomecc.desktop.in.h:1
-msgid "GNOME Control Center"
-msgstr ""
-
-#: control-center/callbacks.c:105
+#: capplets/mouse-properties/mouse-properties.desktop.in.h:1
 #, fuzzy
-msgid "Desktop Properties manager."
-msgstr "Idazmahaiko sarreraren propietateak"
+msgid "Mouse"
+msgstr "USB Mouse"
 
-#: control-center/capplet-manager.c:179
-msgid "Try"
-msgstr "Saiatu"
-
-#: control-center/capplet-manager.c:185
-msgid "Revert"
-msgstr "Atzera"
-
-#. set the help item
-#: control-center/capplet-manager.c:208
-#, fuzzy, c-format
-msgid "Help with '%s' settings"
-msgstr "_Lagundu"
-
-#: control-center/capplet-widget-libs.c:46
-msgid "id of the capplet -- assigned by the control-center"
-msgstr ""
-
-#: control-center/capplet-widget-libs.c:46
-msgid "ID"
-msgstr "ID"
-
-#: control-center/capplet-widget-libs.c:47
-msgid "Multi-capplet id."
-msgstr ""
-
-#: control-center/capplet-widget-libs.c:47
+#: capplets/mouse-properties/mouse-properties.desktop.in.h:2
 #, fuzzy
-msgid "CAPID"
-msgstr "CHAP"
+msgid "Mouse Properties"
+msgstr "Menuaren propietateak"
 
-#: control-center/capplet-widget-libs.c:48
-msgid "X ID of the socket it's plugged into"
-msgstr ""
-
-#: control-center/capplet-widget-libs.c:48
+#: capplets/screensaver-properties/callbacks.c:102
 #, fuzzy
-msgid "XID"
-msgstr "ID"
+msgid "Require Password"
+msgstr "Biaeztatu Pasahitza"
 
-#: control-center/capplet-widget-libs.c:49
-msgid "IOR of the control-center"
-msgstr ""
-
-#: control-center/capplet-widget-libs.c:49
-msgid "IOR"
-msgstr ""
-
-#: control-center/capplet-widget-libs.c:50
-msgid "Initialize session settings"
-msgstr "Berhasi sesioaren ezarpenak"
-
-#: control-center/capplet-widget-libs.c:51
-msgid "Ignore default action.  Used for custom init-session cases"
-msgstr ""
-
-#: control-center/capplet-widget.c:272
+#: capplets/screensaver-properties/callbacks.c:154
 #, fuzzy
-msgid "Sorry, no help is available for these settings."
-msgstr "Parkatu, ez dago disko unitate erabilgarririk"
-
-#: control-center/corba-glue.c:77
-msgid "capplet-command to be run."
-msgstr ""
-
-#: control-center/corba-glue.c:77
-msgid "CAPPLET"
-msgstr ""
-
-#: control-center/main.c:36
-msgid "Help on control-center"
-msgstr ""
-
-#: control-center/main.c:36
-msgid "Help with the GNOME control-center."
-msgstr ""
-
-#: control-center/main.c:38
-#, fuzzy
-msgid "Help with the current configuration page."
-msgstr ""
-"Aldaketak mantendu?\n"
-"Oraingo konfigurazioa:\n"
-"\n"
-"%s"
-
-#: control-center/main.c:41
-msgid "About"
-msgstr "Zerari buruz"
-
-#: control-center/main.c:41
-msgid "About the GNOME control-center."
-msgstr ""
-
-#. we create the widgets
-#: control-center/main.c:69
-#, fuzzy
-msgid "Warning:"
-msgstr "Kontuz: "
-
-#: control-center/main.c:69
-msgid "Discard all changes"
-msgstr ""
-
-#. ...labels, etc
-#: control-center/main.c:78
-msgid ""
-"The following modules have had changes made, but not committed.  If you "
-"would like to edit them, please double click on the appropriate entry."
-msgstr ""
-
-#. create the app
-#: capplets/desktop-links/Gnome.directory.in.h:1 control-center/main.c:197
-#: control-center/splash.c:231
-#, fuzzy
-msgid "Control Center"
-msgstr "WebControl-aren Propietateak"
-
-#: control-center/splash.c:48
-msgid "Operating System:"
-msgstr ""
-
-#: control-center/splash.c:49
-#, fuzzy
-msgid "Distribution Version:"
-msgstr "Distribuzioa: "
-
-#: control-center/splash.c:50
-#, fuzzy
-msgid "Processor Type:"
-msgstr "Presioa"
-
-#: control-center/splash.c:51
-#, fuzzy
-msgid "User Name:"
+msgid "Use power management."
 msgstr "Erabiltzailearen izena"
 
-#: control-center/splash.c:52
+#: capplets/screensaver-properties/callbacks.c:309
 #, fuzzy
-msgid "Host Name:"
-msgstr "Ostalariaren izena:"
+msgid "No Screensaver"
+msgstr "Pantaila zarratu"
 
-#. This is about the only case where we'll put Unknown instead
-#. of simply not showing the info.
-#: control-center/splash.c:168
-msgid "Unknown"
-msgstr "Ezezaguna"
-
-#: control-center/gnomecc.desktop.in.h:2
-#, fuzzy
-msgid "The GNOME configuration tool"
-msgstr "Frogatu konfigurazioa"
-
-#: capplets/wm-properties/wm-properties.desktop.in.h:1
-#, fuzzy
-msgid "Choose a window manager"
-msgstr "Hauta abiarazterakoan nahi duzun lehio kudeatzailea:"
-
-#: capplets/wm-properties/wm-properties.desktop.in.h:2
-#, fuzzy
-msgid "Window Manager"
-msgstr "Lehio-kudeatzailearen sasibideak"
-
-#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.h:1
-msgid "Enlightenment"
+#: capplets/screensaver-properties/callbacks.c:314
+msgid "Random Screensaver"
 msgstr ""
 
-#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.h:1
-msgid "Ice WM"
-msgstr ""
-
-#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.h:1
-msgid "Scwm"
-msgstr ""
-
-#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.h:1
+#: capplets/screensaver-properties/callbacks.c:483
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:56
 #, fuzzy
-msgid "Window Maker"
-msgstr "Lehioa"
+msgid "Settings..."
+msgstr "Konfigurazioa"
 
-#: capplets/wm-properties/wm-desktops/twm.desktop.in.h:1
-msgid "twm"
-msgstr ""
-
-#: capplets/url-properties/url-properties.desktop.in.h:1
-msgid "Configure which programs are used to display URLs"
-msgstr ""
-
-#: capplets/url-properties/url-properties.desktop.in.h:2
-msgid "URL Handlers"
-msgstr ""
-
-#: capplets/ui-properties/application.desktop.in.h:1
+#. we need to special case random
+#: capplets/screensaver-properties/callbacks.c:491
 #, fuzzy
-msgid "Applications"
-msgstr "Akzioa"
+msgid "Random Settings"
+msgstr "Konfigurazioa"
 
-#: capplets/ui-properties/application.desktop.in.h:2
-msgid "Sets the default feel of GNOME applications"
-msgstr ""
-
-#: capplets/ui-properties/dialogs.desktop.in.h:1
-#, fuzzy
-msgid "Dialogs"
-msgstr "log"
-
-#: capplets/ui-properties/mdi.desktop.in.h:1
-#, fuzzy
-msgid "MDI"
-msgstr "MD5"
-
-#: capplets/theme-switcher/theme-selector.desktop.in.h:1
-msgid "Select which desktop theme to use"
-msgstr ""
-
-#: capplets/theme-switcher/theme-selector.desktop.in.h:2
-#, fuzzy
-msgid "Theme Selector"
-msgstr "Fitxategi aukeratzailea"
-
-#: capplets/sound-properties/sound-properties.desktop.in.h:1
-msgid "Configure GNOME's use of sound"
-msgstr ""
-
-#: capplets/sound-properties/sound-properties.desktop.in.h:2
-#, fuzzy
-msgid "Sound"
-msgstr "muntatua"
-
-#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:1
-msgid "Configure the settings of the screensaver"
-msgstr ""
-
-#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:2
-#, fuzzy
-msgid "Screensaver"
-msgstr "Pantaila"
+#: capplets/screensaver-properties/callbacks.c:501
+#, fuzzy, c-format
+msgid "%s Settings..."
+msgstr "Konfigurazioa"
 
 #: capplets/screensaver-properties/screensaver-desktops/3d.desktop.in.h:1
 #, fuzzy
@@ -1773,7 +942,7 @@ msgstr "Aldatu zerbitzariaren aukerak"
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:6
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:5
 #: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:6
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:2
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:1
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:4
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:1
 #: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:1
@@ -1959,7 +1128,7 @@ msgstr "Animazioaren abiadura"
 #: capplets/screensaver-properties/screensaver-desktops/Blitspin.desktop.in.h:13
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:20
 #: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:11
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:18
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:17
 #: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:14
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:23
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:19
@@ -2000,7 +1169,7 @@ msgstr "Eskalatzeko gai"
 #: capplets/screensaver-properties/screensaver-desktops/Attraction.desktop.in.h:29
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:21
 #: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:12
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:19
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:18
 #: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:24
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:20
@@ -2133,7 +1302,7 @@ msgstr "Pantaila babesle monokromoa."
 #: capplets/screensaver-properties/screensaver-desktops/Bouboule.desktop.in.h:17
 #: capplets/screensaver-properties/screensaver-desktops/Braid.desktop.in.h:8
 #: capplets/screensaver-properties/screensaver-desktops/Bsod.desktop.in.h:10
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:16
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Crystal.desktop.in.h:19
 #: capplets/screensaver-properties/screensaver-desktops/Cynosure.desktop.in.h:15
 #: capplets/screensaver-properties/screensaver-desktops/Decayscreen.desktop.in.h:9
@@ -2399,16 +1568,10 @@ msgid "James Macnicol <J.Macnicol@student.anu.edu.au>"
 msgstr ""
 
 #: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:14
-msgid ""
-"James Macnicol <J.Macnicol@student.anu.edu.au>, Предов: Дилян Палаузов "
-"<didopalauzov@uk2.net>"
-msgstr ""
-
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:15
 msgid "Lots of random bubbles grow until they pop."
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:17
+#: capplets/screensaver-properties/screensaver-desktops/Bubbles.desktop.in.h:16
 #, fuzzy
 msgid "Simple"
 msgstr "Fitxategia"
@@ -2445,15 +1608,15 @@ msgstr "Trinkoa"
 msgid "Display a spinning compass "
 msgstr ""
 
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:1
-#, fuzzy
-msgid "Change number of seeds."
-msgstr "Erabili beharreko kolore kopurua aldatu."
-
-#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:3
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:2
 #, fuzzy
 msgid "Change the density."
 msgstr "Animazio abiadura aldatu."
+
+#: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:3
+#, fuzzy
+msgid "Change the number of seeds."
+msgstr "Erabili beharreko kolore kopurua aldatu."
 
 #: capplets/screensaver-properties/screensaver-desktops/Coral.desktop.in.h:4
 #, fuzzy
@@ -4004,11 +3167,6 @@ msgstr "Lehioaren zabalera"
 msgid "Rd-bomb"
 msgstr ""
 
-#: capplets/desktop-links/Desktop.directory.in.h:1
-#: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:1
-msgid "Desktop"
-msgstr "Idazmahaia"
-
 #: capplets/screensaver-properties/screensaver-desktops/Ripples.desktop.in.h:2
 #, fuzzy
 msgid "Display oily drops."
@@ -4400,90 +3558,536 @@ msgstr "Bertikala"
 msgid "Xteevee"
 msgstr ""
 
-#: capplets/mouse-properties/mouse-properties.desktop.in.h:1
+#: capplets/screensaver-properties/screensaver-dialog.c:46
 #, fuzzy
-msgid "Mouse"
-msgstr "USB Mouse"
+msgid "About:"
+msgstr "Zerari buruz"
 
-#: capplets/mouse-properties/mouse-properties.desktop.in.h:2
+#: capplets/screensaver-properties/screensaver-dialog.c:51
+msgid "Author:"
+msgstr "Egilea:"
+
+#: capplets/screensaver-properties/screensaver-dialog.c:61
 #, fuzzy
-msgid "Mouse Properties"
-msgstr "Menuaren propietateak"
+msgid "Author: UNKNOWN"
+msgstr "Egileak: "
 
-#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:1
-msgid "Keyboard"
-msgstr "Teklatua"
+#: capplets/screensaver-properties/screensaver-dialog.c:78
+msgid "Settings"
+msgstr "Konfigurazioa"
 
-#: capplets/keyboard-properties/keyboard-properties.desktop.in.h:2
-#, fuzzy
-msgid "Keyboard Properties"
-msgstr "WebControl-aren Propietateak"
-
-#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:1
-msgid "Choose the editor that is invoked by gnome-edit"
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:38
+msgid "RANDOM SCREENSAVER"
 msgstr ""
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.desktop.in.h:2
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:49
 #, fuzzy
-msgid "Default Editor"
+msgid "Screen Saver"
+msgstr "Pantaila"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:61
+msgid ""
+"Pressing this button will popup a dialogbox that will help you setup the "
+"current screensaver."
+msgstr ""
+
+#. set up the initial frame, and get a vbox in which to pack things.
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:88
+#, fuzzy
+msgid "Screen Saver Settings"
+msgstr "Gnome pager-aren egokiera"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:96
+#, fuzzy
+msgid "Start After "
+msgstr "Haste sektorea: "
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:102
+#, fuzzy
+msgid " Minutes."
+msgstr "minutuak"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:117
+#, fuzzy
+msgid "Priority:"
+msgstr "Portua:"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:124
+#, fuzzy
+msgid "Low "
+msgstr "Gutxi"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:126
+#, fuzzy
+msgid " Normal"
+msgstr "Arrunta"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:137
+#, fuzzy
+msgid "Shutdown monitor "
+msgstr "Gehiago erakutsi"
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:139
+msgid " minutes after screen saver has started."
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-properties-capplet.c:152
+msgid "Screen Saver Demo"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:1
+msgid "Configure the settings of the screensaver"
+msgstr ""
+
+#: capplets/screensaver-properties/screensaver-properties.desktop.in.h:2
+#, fuzzy
+msgid "Screensaver"
+msgstr "Pantaila"
+
+#: capplets/sound-properties/sound-properties.c:97
+msgid ""
+"an initialization error occurred while starting 'sound-properties-capplet'."
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.c:188
+#, fuzzy
+msgid "Event"
+msgstr "Mugimendua"
+
+#: capplets/sound-properties/sound-properties.c:189
+msgid "File to Play"
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.c:243
+msgid "Enable"
+msgstr "Gaitu"
+
+#: capplets/sound-properties/sound-properties.c:250
+#, fuzzy
+msgid "Enable sound server startup"
+msgstr "Baimendu soinu zerbitzaria"
+
+#: capplets/sound-properties/sound-properties.c:258
+msgid "Sounds for events"
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.c:279
+msgid "General"
+msgstr "Orokorra"
+
+#: capplets/sound-properties/sound-properties.c:286
+#, fuzzy
+msgid "Select sound file"
+msgstr "Aukeratu fitxategia"
+
+#: capplets/sound-properties/sound-properties.c:325
+msgid "Play"
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.c:336
+msgid "Sound Events"
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.c:355
+msgid ""
+"This copy of the GNOME control center was not compiled with sound support"
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.c:748
+msgid "The sound file for this event does not exist."
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.c:750
+msgid ""
+"The sound file for this event does not exist.\n"
+"You may want to install the gnome-audio package\n"
+"for a set of default sounds."
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.desktop.in.h:1
+msgid "Configure GNOME's use of sound"
+msgstr ""
+
+#: capplets/sound-properties/sound-properties.desktop.in.h:2
+#, fuzzy
+msgid "Sound"
+msgstr "muntatua"
+
+#: capplets/theme-switcher/demo.c:50
+#, fuzzy
+msgid "One"
+msgstr "berria"
+
+#: capplets/theme-switcher/demo.c:50
+#, fuzzy
+msgid "Two"
+msgstr "Goialdea"
+
+#. just 8 short names that will serve as samples for titles in demo
+#: capplets/theme-switcher/demo.c:52
+#, fuzzy
+msgid "Eenie"
+msgstr "ederra"
+
+#: capplets/theme-switcher/demo.c:52
+#, fuzzy
+msgid "Meenie"
+msgstr "Menu"
+
+#: capplets/theme-switcher/demo.c:53
+#, fuzzy
+msgid "Mynie"
+msgstr "ederra"
+
+#: capplets/theme-switcher/demo.c:53
+#, fuzzy
+msgid "Moe"
+msgstr "Mugitu"
+
+#: capplets/theme-switcher/demo.c:54
+msgid "Catcha"
+msgstr ""
+
+#: capplets/theme-switcher/demo.c:54
+#, fuzzy
+msgid "Tiger"
+msgstr "Pager"
+
+#: capplets/theme-switcher/demo.c:55
+msgid "By Its"
+msgstr ""
+
+#: capplets/theme-switcher/demo.c:55
+#, fuzzy
+msgid "Toe"
+msgstr "Goialdea"
+
+#: capplets/theme-switcher/demo.c:114
+msgid "Selected themes from above will be tested by previewing here."
+msgstr ""
+
+#. column one
+#: capplets/theme-switcher/demo.c:119
+#, fuzzy
+msgid "Sample Button"
+msgstr "Botoiak"
+
+#: capplets/theme-switcher/demo.c:123
+#, fuzzy
+msgid "Sample Check Button"
+msgstr "Baimendu botoi eskutuak"
+
+#: capplets/theme-switcher/demo.c:128
+msgid "Sample Text Entry Field"
+msgstr ""
+
+#: capplets/theme-switcher/demo.c:139
+#, fuzzy
+msgid "Submenu"
+msgstr "Submenu berria"
+
+#: capplets/theme-switcher/demo.c:146
+msgid "Item 1"
+msgstr ""
+
+#: capplets/theme-switcher/demo.c:149
+#, fuzzy
+msgid "Another item"
+msgstr "Erakutsi beste hint bat"
+
+#: capplets/theme-switcher/demo.c:154
+#, fuzzy
+msgid "Radio Button 1"
+msgstr "Mdk Botoiak"
+
+#: capplets/theme-switcher/demo.c:160
+#, fuzzy
+msgid "Radio Button 2"
+msgstr "Mdk Botoiak"
+
+#: capplets/theme-switcher/gui.c:89
+#, fuzzy, c-format
+msgid ""
+"Error installing theme:\n"
+"'%s'\n"
+"%s"
+msgstr ""
+"Errorea dokumentua kargatzerakoan:\n"
+"\n"
+"%s"
+
+#: capplets/theme-switcher/gui.c:120
+#, fuzzy
+msgid "Select a theme to install"
+msgstr "Hauta instalatu nahi duzun tamaina"
+
+#: capplets/theme-switcher/gui.c:197
+#, fuzzy
+msgid "Available Themes"
+msgstr "Erabilgarri dauden paketeak"
+
+#: capplets/theme-switcher/gui.c:221
+#, fuzzy
+msgid ""
+"Auto\n"
+"Preview"
+msgstr "Aurreikuspegia"
+
+#: capplets/theme-switcher/gui.c:233
+#, fuzzy
+msgid ""
+"Install new\n"
+"theme..."
+msgstr "Instalatu sitema"
+
+#. Font selector.
+#.
+#: capplets/theme-switcher/gui.c:239
+#, fuzzy
+msgid "User Font"
+msgstr "Erabiltzailearen izena"
+
+#. FIXME - should really get this from X somehow
+#. for now we just assume default gtk font
+#: capplets/theme-switcher/gui.c:257
+#, fuzzy
+msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
+msgstr "-*-helvetica-medium-r-normal-*-8-*-*-*-*-*-*-*"
+
+#: capplets/theme-switcher/gui.c:276
+msgid "Use custom font."
+msgstr ""
+
+#: capplets/theme-switcher/install.c:26
+msgid "Home directory doesn't exist!\n"
+msgstr ""
+
+#: capplets/theme-switcher/install.c:36
+msgid "Theme does not exist"
+msgstr ""
+
+#: capplets/theme-switcher/install.c:68
+#, fuzzy, c-format
+msgid "Command '%s' failed"
+msgstr "mkraid-ek huts egin du"
+
+#: capplets/theme-switcher/install.c:73
+#, fuzzy
+msgid "Unknown file format"
+msgstr "Sistemaren errore ezezaguna"
+
+#: capplets/theme-switcher/theme-selector.desktop.in.h:1
+msgid "Select which desktop theme to use"
+msgstr ""
+
+#: capplets/theme-switcher/theme-selector.desktop.in.h:2
+#, fuzzy
+msgid "Theme Selector"
+msgstr "Fitxategi aukeratzailea"
+
+#: capplets/ui-properties/application.desktop.in.h:1
+#, fuzzy
+msgid "Applications"
+msgstr "Akzioa"
+
+#: capplets/ui-properties/application.desktop.in.h:2
+msgid "Sets the default feel of GNOME applications"
+msgstr ""
+
+#: capplets/ui-properties/dialogs.desktop.in.h:1
+#, fuzzy
+msgid "Dialogs"
+msgstr "log"
+
+#: capplets/ui-properties/mdi.desktop.in.h:1
+#, fuzzy
+msgid "MDI"
+msgstr "MD5"
+
+#: capplets/ui-properties/ui-properties.c:54
+msgid "Can detach and move toolbars"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:59
+msgid "Toolbars have relieved border"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:64
+msgid "Toolbar buttons have relieved border"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:69
+msgid "Toolbars have line separators"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:74
+msgid "Toolbars have text labels"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:103
+msgid "Can detach and move menus"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:108
+msgid "Menus have relieved border"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:112
+msgid "Submenus can be torn off"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:116
+#, fuzzy
+msgid "Menu items have icons"
+msgstr "Menuaren item-a izena behar du"
+
+#: capplets/ui-properties/ui-properties.c:140
+msgid "Statusbar is interactive when possible"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:145
+msgid "Statusbar progress meter is on the right"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:162
+#, fuzzy
+msgid "Menu Options"
+msgstr "Menuaren ikonoa"
+
+#: capplets/ui-properties/ui-properties.c:163
+#, fuzzy
+msgid "Statusbar Options"
+msgstr "Saturazioa:"
+
+#: capplets/ui-properties/ui-properties.c:164
+#, fuzzy
+msgid "Toolbar Options"
+msgstr "Abiarazlearen aukera nagusiak"
+
+#: capplets/ui-properties/ui-properties.c:170
+#, fuzzy
+msgid "Dialog buttons"
+msgstr "2 botoi"
+
+#: capplets/ui-properties/ui-properties.c:171
+#, fuzzy
+msgid "Default value"
 msgstr "Jatorrizkoa"
 
-#: capplets/background-properties/background-properties.desktop.in.h:1
-msgid "Background"
-msgstr "Background"
+#: capplets/ui-properties/ui-properties.c:172
+#, fuzzy
+msgid "Spread buttons out"
+msgstr "ezkuta botoiak"
 
-#: capplets/background-properties/background-properties.desktop.in.h:2
-msgid "Configuration of the desktop's background"
+#: capplets/ui-properties/ui-properties.c:173
+msgid "Put buttons on edges"
 msgstr ""
 
-#: capplets/desktop-links/Documents.directory.in.h:1
-msgid "Configure how document types are handled"
+#: capplets/ui-properties/ui-properties.c:174
+msgid "Left-justify buttons"
 msgstr ""
 
-#: capplets/desktop-links/Documents.directory.in.h:2
-#, fuzzy
-msgid "Document Handlers"
-msgstr "Dokumentazioa"
-
-#: capplets/desktop-links/Gnome.directory.in.h:2
-msgid "Control Center Menu"
+#: capplets/ui-properties/ui-properties.c:175
+msgid "Right-justify buttons"
 msgstr ""
 
-#: capplets/desktop-links/Multimedia.directory.in.h:1
-msgid "Configure the settings of your Multimedia devices"
+#: capplets/ui-properties/ui-properties.c:180
+#, fuzzy
+msgid "Dialog buttons have icons"
+msgstr "Botoien ikonoak erakutsi"
+
+#: capplets/ui-properties/ui-properties.c:185
+msgid "Use statusbar instead of dialog when possible"
 msgstr ""
 
-#: capplets/desktop-links/Multimedia.directory.in.h:2
-msgid "Multimedia"
-msgstr "Multimedia"
-
-#: capplets/desktop-links/Peripherals.directory.in.h:1
+#: capplets/ui-properties/ui-properties.c:207
 #, fuzzy
-msgid "Configure your external devices"
-msgstr "Konfiguratu zerbitzuak"
+msgid "Dialog position"
+msgstr "Markatze aukerak"
 
-#: capplets/desktop-links/Peripherals.directory.in.h:2
-msgid "Peripherals"
+#: capplets/ui-properties/ui-properties.c:208
+#, fuzzy
+msgid "Let window manager decide"
+msgstr "Hauta abiarazterakoan nahi duzun lehio kudeatzailea:"
+
+#: capplets/ui-properties/ui-properties.c:209
+#, fuzzy
+msgid "Center of the screen"
+msgstr "Ezabatu aukeratutakoa"
+
+#: capplets/ui-properties/ui-properties.c:210
+#, fuzzy
+msgid "At the mouse pointer"
+msgstr "Muntai puntuak hautatu"
+
+#: capplets/ui-properties/ui-properties.c:215
+#, fuzzy
+msgid "Dialog hints"
+msgstr "Baimendu hint loginak"
+
+#: capplets/ui-properties/ui-properties.c:216
+msgid "Dialogs are like other windows"
 msgstr ""
 
-#: capplets/desktop-links/Session.directory.in.h:1
-msgid "Session"
-msgstr "Sesio"
-
-#: capplets/desktop-links/Session.directory.in.h:2
+#: capplets/ui-properties/ui-properties.c:217
 #, fuzzy
-msgid "Session Management Settings"
-msgstr "Sesioaren kudeaketa aukerak"
+msgid "Dialogs are treated specially by window manager"
+msgstr "Lehio kudeatzaileak erabilitako programaren izenaren bezalakoa"
 
-#: capplets/desktop-links/UIOptions.directory.in.h:1
-#, fuzzy
-msgid "Configure the global settings of your GNOME applications"
-msgstr "Aplikazioa konfiguratu"
+#: capplets/ui-properties/ui-properties.c:222
+msgid "Place dialogs over application window when possible"
+msgstr ""
 
-#: capplets/desktop-links/UIOptions.directory.in.h:2
+#: capplets/ui-properties/ui-properties.c:243
 #, fuzzy
-msgid "User Interface"
-msgstr "Sarearen interfazea"
+msgid "Dialog Layout"
+msgstr "Itxura bertikala"
+
+#: capplets/ui-properties/ui-properties.c:244
+#, fuzzy
+msgid "Dialog Behavior"
+msgstr "Portaera"
+
+#: capplets/ui-properties/ui-properties.c:250
+#, fuzzy
+msgid "Default MDI Mode"
+msgstr "MDI modua"
+
+#: capplets/ui-properties/ui-properties.c:251
+msgid "Notebook"
+msgstr "Kaiera"
+
+#: capplets/ui-properties/ui-properties.c:252
+msgid "Toplevel"
+msgstr "Topea"
+
+#: capplets/ui-properties/ui-properties.c:253
+msgid "Modal"
+msgstr "Moduzkoa"
+
+#: capplets/ui-properties/ui-properties.c:258
+msgid "MDI notebook tab position"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:259
+msgid "Left"
+msgstr "Ezker"
+
+#: capplets/ui-properties/ui-properties.c:260
+msgid "Right"
+msgstr "Eskubi"
+
+#: capplets/ui-properties/ui-properties.c:261
+msgid "Top"
+msgstr "Goialdea"
+
+#: capplets/ui-properties/ui-properties.c:262
+msgid "Bottom"
+msgstr "Behealdea"
+
+#: capplets/ui-properties/ui-properties.c:277
+msgid "GNOME MDI Options"
+msgstr ""
 
 #: capplets/ui-properties/ui-properties.directory.in.h:1
 msgid "Look and Feel"
@@ -4493,3 +4097,393 @@ msgstr ""
 #, fuzzy
 msgid "Look and Feel Properties"
 msgstr "Panelaren propietateak"
+
+#: capplets/url-properties/url-properties.c:51
+msgid "Error initializing the `url-properties' capplet."
+msgstr ""
+
+#: capplets/url-properties/url-properties.c:76
+msgid "Protocol"
+msgstr ""
+
+#: capplets/url-properties/url-properties.c:76
+#, fuzzy
+msgid "Command"
+msgstr "Komandoa:"
+
+#: capplets/url-properties/url-properties.c:93
+#, fuzzy
+msgid "handler:"
+msgstr "Itzaldu"
+
+#. set some commonly used handlers
+#: capplets/url-properties/url-properties.c:103
+#, fuzzy
+msgid "Netscape"
+msgstr "NetWare"
+
+#: capplets/url-properties/url-properties.c:108
+#, fuzzy
+msgid "Netscape (new window)"
+msgstr "Ireki lehio berria"
+
+#: capplets/url-properties/url-properties.c:121
+#, fuzzy
+msgid "Help browser"
+msgstr "Gnome laguntzaren erakuslea"
+
+#: capplets/url-properties/url-properties.c:127
+#, fuzzy
+msgid "Help browser (new window)"
+msgstr "Zabaldu Erakuslearen lehio berria"
+
+#: capplets/url-properties/url-properties.c:140
+#, fuzzy
+msgid "Set"
+msgstr "Sektore"
+
+#: capplets/url-properties/url-properties.c:148
+msgid "Remove"
+msgstr "Ezabatu"
+
+#: capplets/url-properties/url-properties.desktop.in.h:1
+msgid "Configure which programs are used to display URLs"
+msgstr ""
+
+#: capplets/url-properties/url-properties.desktop.in.h:2
+msgid "URL Handlers"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/Enlightenment.desktop.in.h:1
+msgid "Enlightenment"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/IceWM.desktop.in.h:1
+msgid "Ice WM"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/Scwm.desktop.in.h:1
+msgid "Scwm"
+msgstr ""
+
+#: capplets/wm-properties/wm-desktops/WindowMaker.desktop.in.h:1
+#, fuzzy
+msgid "Window Maker"
+msgstr "Lehioa"
+
+#: capplets/wm-properties/wm-desktops/twm.desktop.in.h:1
+msgid "twm"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:142
+#, c-format
+msgid ""
+"Starting %s\n"
+"(%d seconds left before operation times out)"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:303
+#, c-format
+msgid "%s (Current)"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:306
+#, fuzzy, c-format
+msgid "Run Configuration Tool for %s"
+msgstr "Konfigurazioa"
+
+#: capplets/wm-properties/wm-properties-capplet.c:317
+#, fuzzy
+msgid " (Not found)"
+msgstr "ez aurkitua"
+
+#: capplets/wm-properties/wm-properties-capplet.c:356
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\tAnother window manager is already running and could not be killed\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:360
+#, c-format
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\t'%s' didn't start\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:413
+msgid "Previous window manager did not die\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:446
+#, c-format
+msgid ""
+"Could not start '%s'.\n"
+"Falling back to previous window manager '%s'\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:477
+msgid ""
+"Could not start fallback window manager.\n"
+"Please run a window manager manually. You can\n"
+"do this by selecting \"Run Program\" in the\n"
+"foot menu\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:502
+#: capplets/wm-properties/wm-properties-capplet.c:868
+#: capplets/wm-properties/wm-properties-capplet.c:875
+#: capplets/wm-properties/wm-properties-capplet.c:1021
+msgid "OK"
+msgstr "Ados"
+
+#: capplets/wm-properties/wm-properties-capplet.c:520
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. You can do so immediately by selecting the \"Save session\n"
+"now\" below, or you can save your session later.  This can be\n"
+"done either selecting \"Save Current Session\" under \"Settings\"\n"
+"in the main menu, or by turning on \"Save Current Setup\" when\n"
+"you log out.\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:527
+#, fuzzy
+msgid "Save Session Later"
+msgstr "Hasi sesioa"
+
+#: capplets/wm-properties/wm-properties-capplet.c:527
+#, fuzzy
+msgid "Save Session Now"
+msgstr "Hasi sesioa"
+
+#: capplets/wm-properties/wm-properties-capplet.c:530
+msgid ""
+"Your current window manager has been changed. In order for\n"
+"this change to be saved, you will need to save your current\n"
+"session. This can be done by either selecting \"Save Current Session\"\n"
+"under \"Settings\" in the main menu, or by turning on\n"
+"\"Save Current Setup\" when you log out.\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:757
+#, fuzzy
+msgid "Add New Window Manager"
+msgstr "_Lehio berria"
+
+#: capplets/wm-properties/wm-properties-capplet.c:771
+msgid "Name:"
+msgstr "Izena:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:784
+msgid "Command:"
+msgstr "Komandoa:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:797
+#, fuzzy
+msgid "Configuration Command:"
+msgstr "Konfigurazioa"
+
+#: capplets/wm-properties/wm-properties-capplet.c:816
+#, fuzzy
+msgid "Window manager is session managed"
+msgstr "Lehio-kudeatzailearen sasibideak"
+
+#: capplets/wm-properties/wm-properties-capplet.c:866
+msgid "Name cannot be empty"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:873
+#, fuzzy
+msgid "Command cannot be empty"
+msgstr "Komando lerroaren garaiera:"
+
+#: capplets/wm-properties/wm-properties-capplet.c:922
+#: capplets/wm-properties/wm-properties-capplet.c:964
+#, fuzzy
+msgid "Edit Window Manager"
+msgstr "Lehio menua ez"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1020
+msgid "You cannot delete the current Window Manager"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:1093
+#, fuzzy
+msgid "Edit..."
+msgstr "Argitaratu"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1098
+msgid "Delete"
+msgstr "Ezabatu"
+
+#: capplets/wm-properties/wm-properties-capplet.c:1134
+msgid ""
+"an initialization error occurred while starting 'wm-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties.desktop.in.h:1
+#, fuzzy
+msgid "Choose a window manager"
+msgstr "Hauta abiarazterakoan nahi duzun lehio kudeatzailea:"
+
+#: capplets/wm-properties/wm-properties.desktop.in.h:2
+#, fuzzy
+msgid "Window Manager"
+msgstr "Lehio-kudeatzailearen sasibideak"
+
+#: control-center/callbacks.c:102 control-center/gnomecc.desktop.in.h:1
+msgid "GNOME Control Center"
+msgstr ""
+
+#: control-center/callbacks.c:105
+#, fuzzy
+msgid "Desktop Properties manager."
+msgstr "Idazmahaiko sarreraren propietateak"
+
+#: control-center/capplet-manager.c:179
+msgid "Try"
+msgstr "Saiatu"
+
+#: control-center/capplet-manager.c:185
+msgid "Revert"
+msgstr "Atzera"
+
+#. set the help item
+#: control-center/capplet-manager.c:208
+#, fuzzy, c-format
+msgid "Help with '%s' settings"
+msgstr "_Lagundu"
+
+#: control-center/capplet-widget-libs.c:46
+msgid "id of the capplet -- assigned by the control-center"
+msgstr ""
+
+#: control-center/capplet-widget-libs.c:46
+msgid "ID"
+msgstr "ID"
+
+#: control-center/capplet-widget-libs.c:47
+msgid "Multi-capplet id."
+msgstr ""
+
+#: control-center/capplet-widget-libs.c:47
+#, fuzzy
+msgid "CAPID"
+msgstr "CHAP"
+
+#: control-center/capplet-widget-libs.c:48
+msgid "X ID of the socket it's plugged into"
+msgstr ""
+
+#: control-center/capplet-widget-libs.c:48
+#, fuzzy
+msgid "XID"
+msgstr "ID"
+
+#: control-center/capplet-widget-libs.c:49
+msgid "IOR of the control-center"
+msgstr ""
+
+#: control-center/capplet-widget-libs.c:49
+msgid "IOR"
+msgstr ""
+
+#: control-center/capplet-widget-libs.c:50
+msgid "Initialize session settings"
+msgstr "Berhasi sesioaren ezarpenak"
+
+#: control-center/capplet-widget-libs.c:51
+msgid "Ignore default action.  Used for custom init-session cases"
+msgstr ""
+
+#: control-center/capplet-widget.c:272
+#, fuzzy
+msgid "Sorry, no help is available for these settings."
+msgstr "Parkatu, ez dago disko unitate erabilgarririk"
+
+#: control-center/corba-glue.c:77
+msgid "capplet-command to be run."
+msgstr ""
+
+#: control-center/corba-glue.c:77
+msgid "CAPPLET"
+msgstr ""
+
+#: control-center/gnomecc.desktop.in.h:2
+#, fuzzy
+msgid "The GNOME configuration tool"
+msgstr "Frogatu konfigurazioa"
+
+#: control-center/main.c:36
+msgid "Help on control-center"
+msgstr ""
+
+#: control-center/main.c:36
+msgid "Help with the GNOME control-center."
+msgstr ""
+
+#: control-center/main.c:38
+#, fuzzy
+msgid "Help with the current configuration page."
+msgstr ""
+"Aldaketak mantendu?\n"
+"Oraingo konfigurazioa:\n"
+"\n"
+"%s"
+
+#: control-center/main.c:41
+msgid "About"
+msgstr "Zerari buruz"
+
+#: control-center/main.c:41
+msgid "About the GNOME control-center."
+msgstr ""
+
+#. we create the widgets
+#: control-center/main.c:69
+#, fuzzy
+msgid "Warning:"
+msgstr "Kontuz: "
+
+#: control-center/main.c:69
+msgid "Discard all changes"
+msgstr ""
+
+#. ...labels, etc
+#: control-center/main.c:78
+msgid ""
+"The following modules have had changes made, but not committed.  If you "
+"would like to edit them, please double click on the appropriate entry."
+msgstr ""
+
+#: control-center/splash.c:48
+msgid "Operating System:"
+msgstr ""
+
+#: control-center/splash.c:49
+#, fuzzy
+msgid "Distribution Version:"
+msgstr "Distribuzioa: "
+
+#: control-center/splash.c:50
+#, fuzzy
+msgid "Processor Type:"
+msgstr "Presioa"
+
+#: control-center/splash.c:51
+#, fuzzy
+msgid "User Name:"
+msgstr "Erabiltzailearen izena"
+
+#: control-center/splash.c:52
+#, fuzzy
+msgid "Host Name:"
+msgstr "Ostalariaren izena:"
+
+#. This is about the only case where we'll put Unknown instead
+#. of simply not showing the info.
+#: control-center/splash.c:178
+msgid "Unknown"
+msgstr "Ezezaguna"
