@@ -26,7 +26,6 @@ static void cb_show_details (GtkWidget *button,
 
 #define GTK_FONT_KEY           "/desktop/gnome/interface/font_name"
 #define DESKTOP_FONT_KEY       "/apps/nautilus/preferences/desktop_font"
-#define WINDOW_TITLE_FONT_KEY  "/desktop/gnome/applications/window_manager/titlebar_font"
 
 #define METACITY_DIR "/apps/metacity/general"
 #define WINDOW_TITLE_FONT_KEY METACITY_DIR "/titlebar_font"
