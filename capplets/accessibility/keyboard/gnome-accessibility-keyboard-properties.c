@@ -54,7 +54,7 @@ xkb_enabled (void)
 	if (!have_xkb) {
 		GtkWidget *warn = gtk_message_dialog_new (NULL, 0,
 		      GTK_MESSAGE_WARNING, GTK_BUTTONS_CLOSE,
-		      _("This system does not seem to have the XKB extension.  The keyboard accessibility features will not operate with it."));
+		      _("This system does not seem to have the XKB extension.  The keyboard accessibility features will not operate without it."));
 		gtk_dialog_run (GTK_DIALOG (warn));
 		gtk_widget_destroy (warn);
 	}
