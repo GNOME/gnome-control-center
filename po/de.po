@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-23 23:05+0100\n"
-"PO-Revision-Date: 2004-01-23 23:05+0100\n"
+"POT-Creation-Date: 2004-02-13 15:12+0100\n"
+"PO-Revision-Date: 2004-02-13 15:11+0100\n"
 "Last-Translator: Christian Neumair <chris@gnome-de.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -455,13 +455,36 @@ msgstr ""
 "Hintergrundbild zu verwenden."
 
 #: capplets/background/background.desktop.in.h:1
-msgid "Desktop Wallpaper"
-msgstr "Desktop-Tapete"
+msgid "Change your Desktop Background settings"
+msgstr "Ihre Desktop-Hintergrundeinstellungen festlegen"
 
 #: capplets/background/background.desktop.in.h:2
-#: capplets/background/gnome-wp-capplet.c:1146
-msgid "Desktop Wallpaper Preferences"
-msgstr "Desktop-Tapeteneinstellungen"
+msgid "Desktop Background"
+msgstr "Desktop-Hintergrund"
+
+#: capplets/background/gnome-background-properties.glade.h:1
+msgid "<b>Desktop _Wallpaper</b>"
+msgstr "<b>Desktop-_Tapete</b>"
+
+#: capplets/background/gnome-background-properties.glade.h:2
+msgid "<b>_Desktop Colors</b>"
+msgstr "<b>Desktop-_Farben</b>"
+
+#: capplets/background/gnome-background-properties.glade.h:3
+msgid "Desktop Background Preferences"
+msgstr "Desktop-Hintergrundeinstellungen"
+
+#: capplets/background/gnome-background-properties.glade.h:4
+msgid "Zgjidh një ngjyrë"
+msgstr "Schwachfug!!!"
+
+#: capplets/background/gnome-background-properties.glade.h:5
+msgid "_Add Wallpaper"
+msgstr "Tapete _hinzufügen"
+
+#: capplets/background/gnome-background-properties.glade.h:6
+msgid "_Style:"
+msgstr "_Stil:"
 
 #: capplets/background/gnome-wp-capplet.c:72
 #: capplets/common/capplet-util.c:340
@@ -469,52 +492,35 @@ msgstr "Desktop-Tapeteneinstellungen"
 msgid "There was an error displaying help: %s"
 msgstr "Fehler beim Anzeigen der Hilfe: %s"
 
-#: capplets/background/gnome-wp-capplet.c:169
+#: capplets/background/gnome-wp-capplet.c:171
 msgid "Add Wallpapers"
 msgstr "Tapeten hinzufügen"
 
-#: capplets/background/gnome-wp-capplet.c:1188
-msgid "<b>Desktop _Wallpaper</b>"
-msgstr "<b>Desktop-_Tapete</b>"
-
-#: capplets/background/gnome-wp-capplet.c:1273
-msgid "_Style:"
-msgstr "_Stil:"
-
-#: capplets/background/gnome-wp-capplet.c:1300
+#: capplets/background/gnome-wp-capplet.c:1265
 msgid "Centered"
 msgstr "Zentrieren"
 
-#: capplets/background/gnome-wp-capplet.c:1322
+#: capplets/background/gnome-wp-capplet.c:1287
 msgid "Fill Screen"
 msgstr "Bildschirm füllen"
 
-#: capplets/background/gnome-wp-capplet.c:1342
+#: capplets/background/gnome-wp-capplet.c:1307
 msgid "Scaled"
 msgstr "Skalieren"
 
-#: capplets/background/gnome-wp-capplet.c:1362
+#: capplets/background/gnome-wp-capplet.c:1327
 msgid "Tiled"
 msgstr "Kacheln"
 
-#: capplets/background/gnome-wp-capplet.c:1399
-msgid "_Add Wallpaper"
-msgstr "Tapete _hinzufügen"
-
-#. The Wallpaper Background Colors Section
-#: capplets/background/gnome-wp-capplet.c:1430
-msgid "<b>_Desktop Colors</b> "
-msgstr "<b>Desktop-_Farben</b>"
-
-#: capplets/background/gnome-wp-capplet.c:1462
+#: capplets/background/gnome-wp-capplet.c:1359
 msgid "Solid Color"
 msgstr "Einfarbig"
 
-#: capplets/background/gnome-wp-capplet.c:1478
+#: capplets/background/gnome-wp-capplet.c:1375
 msgid "Horizontal Gradient"
 msgstr "Horizontaler Verlauf"
 
-#: capplets/background/gnome-wp-capplet.c:1494
+#: capplets/background/gnome-wp-capplet.c:1391
 msgid "Vertical Gradient"
 msgstr "Vertikaler Verlauf"
 
@@ -1373,7 +1379,7 @@ msgstr ""
 "Klasse/Typ vorliegen und darf keine Leerzeichen enthalten."
 
 #: capplets/file-types/mime-edit-dialog.c:857
-msgid "A MIME type with that name already exists, overwrite ?."
+msgid "A MIME type with that name already exists, overwrite?"
 msgstr "Es exstiert bereits ein gleichnamiger MIME-Typ, überschreiben?"
 
 #: capplets/file-types/mime-edit-dialog.c:929
@@ -1687,7 +1693,7 @@ msgstr "Der Tastenkombinationstyp."
 
 #: capplets/keybindings/eggcellrendererkeys.c:240
 #: capplets/keybindings/gnome-keybinding-properties.c:235
-#: libbackground/applier.c:588 typing-break/drwright.c:448
+#: libbackground/applier.c:588 typing-break/drwright.c:464
 msgid "Disabled"
 msgstr "Deaktiviert"
 
@@ -1929,151 +1935,6 @@ msgstr "Minuten"
 #: capplets/keyboard/keyboard.desktop.in.h:2
 msgid "Set your keyboard preferences"
 msgstr "Die Tastatureinstellungen festlegen"
-
-#: capplets/localization/gnome-localization-properties.c:184
-msgid "Show"
-msgstr "Anzeigen"
-
-#: capplets/localization/gnome-localization-properties.c:195
-#: capplets/localization/gnome-localization-properties.glade.h:25
-msgid "Language"
-msgstr "Sprache"
-
-#: capplets/localization/gnome-localization-properties.glade.h:1
-msgid "$1,234.56"
-msgstr "1245,56$"
-
-#: capplets/localization/gnome-localization-properties.glade.h:2
-msgid "1/2/03"
-msgstr "01.02.03"
-
-#: capplets/localization/gnome-localization-properties.glade.h:3
-msgid "12:34 AM"
-msgstr "12:34"
-
-#: capplets/localization/gnome-localization-properties.glade.h:4
-msgid "4:56 PM"
-msgstr "16:56"
-
-# Plural macht sich hier nicht gut
-#: capplets/localization/gnome-localization-properties.glade.h:5
-msgid "<b>Dates</b>"
-msgstr "<b>Datum</b>"
-
-#: capplets/localization/gnome-localization-properties.glade.h:6
-msgid "<b>Languages in use:</b>"
-msgstr "<b>Verwendete Sprachen:</b>"
-
-#: capplets/localization/gnome-localization-properties.glade.h:7
-msgid "<b>Numbers</b>"
-msgstr "<b>Zahlen</b>"
-
-# Plural macht sich hier nicht gut
-#: capplets/localization/gnome-localization-properties.glade.h:8
-msgid "<b>Times</b>"
-msgstr "<b>Uhrzeit</b>"
-
-#: capplets/localization/gnome-localization-properties.glade.h:9
-msgid "Available Languages"
-msgstr "Verfügbare Sprachen"
-
-# CHECK
-#: capplets/localization/gnome-localization-properties.glade.h:10
-msgid "C_hange languages in use..."
-msgstr "_Verwendete Sprachen festlegen..."
-
-#: capplets/localization/gnome-localization-properties.glade.h:11
-msgid ""
-"Changes will not take effect for the\n"
-"desktop's bars and menus before\n"
-"next time you log in. Changes take\n"
-"effect in applications next time you\n"
-"run them."
-msgstr ""
-"Änderungen an den Desktop-Leisten und\n"
-"-Menüs werden nicht wirksam, bevor Sie\n"
-"sich das nächste Mal anmelden. Anwendungen\n"
-"übernehmen diese Änderungen bereits ab\n"
-"Mal, wenn Sie sie ausführen."
-
-#: capplets/localization/gnome-localization-properties.glade.h:16
-msgid "Customize _dates..."
-msgstr "_Datum anpassen..."
-
-#: capplets/localization/gnome-localization-properties.glade.h:17
-msgid "Customize _numbers..."
-msgstr "_Zahlen anpassen..."
-
-#: capplets/localization/gnome-localization-properties.glade.h:18
-msgid "Customize _times..."
-msgstr "_Uhrzeit anpassen..."
-
-#: capplets/localization/gnome-localization-properties.glade.h:19
-msgid ""
-"Drag languages to set the preferred\n"
-"order of use; If there exists a\n"
-"translation in the first language it will\n"
-"be used, otherwise the next will be tried"
-msgstr ""
-"Ziehen Sie Sprachen hierher, um die bevorzugte\n"
-"Reihenfolge festzulegen; Falls eine\n"
-"Übersetzung in der ersten Sprache existiert,\n"
-"so wird diese verwendet, andernfalls wird\n"
-"mit der nächsten genauso verfahren."
-
-#: capplets/localization/gnome-localization-properties.glade.h:23
-msgid "Formats"
-msgstr "Format"
-
-#: capplets/localization/gnome-localization-properties.glade.h:24
-msgid "Jan 2, 2003"
-msgstr "2. Januar 2003"
-
-#: capplets/localization/gnome-localization-properties.glade.h:26
-msgid "Language and Culture Preferences"
-msgstr "Sprach- und Kultureinstellungen"
-
-#: capplets/localization/gnome-localization-properties.glade.h:27
-msgid "Measurement _Units:"
-msgstr "_Maßeinheiten:"
-
-#: capplets/localization/gnome-localization-properties.glade.h:28
-msgid "Select the items that appear in the Languages list:"
-msgstr "Wählen Sie die Objekte, die in der Sprachliste erscheinen sollen:"
-
-#: capplets/localization/gnome-localization-properties.glade.h:29
-msgid "Show _all regions"
-msgstr "_Alle Regionen anzeigen"
-
-#: capplets/localization/gnome-localization-properties.glade.h:30
-msgid "Thursday, January 2, 2003"
-msgstr "Dienstag, 2. Januar 2003"
-
-#: capplets/localization/gnome-localization-properties.glade.h:31
-msgid ""
-"Your preferred language differs\n"
-"from that of your currently\n"
-"selected date, time, and number\n"
-"formats. You can change your\n"
-"formats in the Formats tab."
-msgstr ""
-"Ihre bevorzugte Sprache weicht von\n"
-"Ihren momentan gewählten Datums-,\n"
-"Uhrzeit- und Zahlenformaten ab.\n"
-"Sie können diese im Format-Reiter\n"
-"anpassen."
-
-#: capplets/localization/gnome-localization-properties.glade.h:36
-msgid "_Region:"
-msgstr "_Region:"
-
-#: capplets/localization/localization.desktop.in.h:1
-msgid "Language and Culture"
-msgstr "Sprache und Kultur"
-
-#: capplets/localization/localization.desktop.in.h:2
-msgid "Set your language and culture preferences"
-msgstr "Ihre Sprach- und Kultureinstellungen festlegen"
 
 #: capplets/mouse/gnome-mouse-properties.c:496
 msgid "Unknown Cursor"
@@ -2419,7 +2280,7 @@ msgid "Two"
 msgstr "Zwei"
 
 #: capplets/theme-switcher/gnome-theme-details.c:372
-#: capplets/theme-switcher/gnome-theme-manager.c:589
+#: capplets/theme-switcher/gnome-theme-manager.c:609
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -2446,19 +2307,27 @@ msgstr ""
 "%s ist der Pfad, in dem die Themendateien installiert werden. Er kann daher "
 "nicht als Quellort verwendet werden"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:645
-#: capplets/theme-switcher/gnome-theme-manager.c:705
+#: capplets/theme-switcher/gnome-theme-manager.c:301
+msgid ""
+"The gnome-theme-manager does not know how to change the themes on the "
+"current window manager."
+msgstr ""
+"Die GNOME-Themenverwaltung hat keine Informationen darüber, wie die Themen "
+"des momentan verwenden Fenstermanagers verändert werden sollen."
+
+#: capplets/theme-switcher/gnome-theme-manager.c:665
+#: capplets/theme-switcher/gnome-theme-manager.c:725
 msgid "Custom theme"
 msgstr "Benutzerdefiniertes Thema"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:645
-#: capplets/theme-switcher/gnome-theme-manager.c:705
+#: capplets/theme-switcher/gnome-theme-manager.c:665
+#: capplets/theme-switcher/gnome-theme-manager.c:725
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr ""
 "Sie können dieses Thema speichern, indem Sie den »Thema speichern«-Knopf "
 "anklicken."
 
-#: capplets/theme-switcher/gnome-theme-manager.c:1398
+#: capplets/theme-switcher/gnome-theme-manager.c:1418
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -3055,11 +2924,11 @@ msgstr ""
 msgid "Preview"
 msgstr "Vorschau"
 
-#: libsounds/sound-view.c:130
+#: libsounds/sound-view.c:121 libsounds/sound-view.c:146
 msgid "The sound file for this event does not exist."
 msgstr "Die Audiodatei für dieses Ereignis existiert nicht."
 
-#: libsounds/sound-view.c:132
+#: libsounds/sound-view.c:148
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -3069,32 +2938,32 @@ msgstr ""
 "Sie müssen das Paket »gnome-audio« installieren,\n"
 "um die Vorgabeklänge zu erhalten"
 
-#: libsounds/sound-view.c:176
+#: libsounds/sound-view.c:192
 #, c-format
 msgid "The file %s is not a valid wav file"
 msgstr "Die Datei %s ist keine gültige wav-Datei"
 
-#: libsounds/sound-view.c:241
+#: libsounds/sound-view.c:257
 msgid "Event"
 msgstr "Ereignis"
 
-#: libsounds/sound-view.c:250
+#: libsounds/sound-view.c:266
 msgid "Sound File"
 msgstr "Audiodatei"
 
-#: libsounds/sound-view.c:266
+#: libsounds/sound-view.c:282
 msgid "_Sounds:"
 msgstr "_Klänge:"
 
-#: libsounds/sound-view.c:280
+#: libsounds/sound-view.c:296
 msgid "Sound _file:"
 msgstr "Audio_datei:"
 
-#: libsounds/sound-view.c:284
+#: libsounds/sound-view.c:300
 msgid "Select Sound File"
 msgstr "Audiodatei wählen"
 
-#: libsounds/sound-view.c:307
+#: libsounds/sound-view.c:323
 msgid "_Play"
 msgstr "_Wiedergabe"
 
@@ -3223,8 +3092,8 @@ msgstr ""
 "übergangen"
 
 #: typing-break/drw-break-window.c:189
-msgid "Postpone break"
-msgstr "Pause verschieben"
+msgid "_Postpone break"
+msgstr "Pause _verschieben"
 
 #: typing-break/drw-break-window.c:227
 msgid "Take a break!"
@@ -3243,18 +3112,18 @@ msgstr "/_Info"
 msgid "/_Take a Break"
 msgstr "/Eine _Pause machen"
 
-#: typing-break/drwright.c:466
+#: typing-break/drwright.c:482
 #, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
 msgstr[0] "%d Minute bis zur nächsten Pause"
 msgstr[1] "%d Minuten bis zur nächsten Pause"
 
-#: typing-break/drwright.c:470
+#: typing-break/drwright.c:486
 msgid "Less than one minute until the next break"
 msgstr "Weniger als eine Minute bis zur nächsten Pause"
 
-#: typing-break/drwright.c:565
+#: typing-break/drwright.c:581
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
@@ -3263,23 +3132,23 @@ msgstr ""
 "Der Tipppausen-Eigenschaftsdialog konnte auf Grund folgenden Fehlers nicht "
 "angezeigt werden: %s"
 
-#: typing-break/drwright.c:605
+#: typing-break/drwright.c:621
 msgid "About GNOME Typing Monitor"
 msgstr "Info zur GNOME-Tippüberwachung"
 
-#: typing-break/drwright.c:629
+#: typing-break/drwright.c:645
 msgid "A computer break reminder."
 msgstr "Ein Pausenerinnerer für den Computer."
 
-#: typing-break/drwright.c:630
+#: typing-break/drwright.c:646
 msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
 msgstr "Geschrieben von Richard Hult &lt;richard@imendio.com&gt;"
 
-#: typing-break/drwright.c:631
+#: typing-break/drwright.c:647
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Augenschmaus von Anders Carlsson"
 
-#: typing-break/drwright.c:804
+#: typing-break/drwright.c:820
 msgid "Break reminder"
 msgstr "Pausenerinnerer"
 
@@ -3464,7 +3333,7 @@ msgstr ""
 msgid "_Apply font"
 msgstr "Schrift an_wenden"
 
-#: vfs-methods/themus/theme-method.c:519
+#: vfs-methods/themus/theme-method.c:520
 msgid "Themes"
 msgstr "Themen"
 
@@ -3720,3 +3589,125 @@ msgstr "Lauter"
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
 msgid "Volume up's shortcut."
 msgstr "Lauter-Tastenkombination."
+
+#~ msgid "Desktop Wallpaper"
+#~ msgstr "Desktop-Tapete"
+
+#~ msgid "Desktop Wallpaper Preferences"
+#~ msgstr "Desktop-Tapeteneinstellungen"
+
+#~ msgid "Show"
+#~ msgstr "Anzeigen"
+
+#~ msgid "Language"
+#~ msgstr "Sprache"
+
+#~ msgid "$1,234.56"
+#~ msgstr "1245,56$"
+
+#~ msgid "1/2/03"
+#~ msgstr "01.02.03"
+
+#~ msgid "12:34 AM"
+#~ msgstr "12:34"
+
+#~ msgid "4:56 PM"
+#~ msgstr "16:56"
+
+# Plural macht sich hier nicht gut
+#~ msgid "<b>Dates</b>"
+#~ msgstr "<b>Datum</b>"
+
+#~ msgid "<b>Languages in use:</b>"
+#~ msgstr "<b>Verwendete Sprachen:</b>"
+
+#~ msgid "<b>Numbers</b>"
+#~ msgstr "<b>Zahlen</b>"
+
+# Plural macht sich hier nicht gut
+#~ msgid "<b>Times</b>"
+#~ msgstr "<b>Uhrzeit</b>"
+
+#~ msgid "Available Languages"
+#~ msgstr "Verfügbare Sprachen"
+
+# CHECK
+#~ msgid "C_hange languages in use..."
+#~ msgstr "_Verwendete Sprachen festlegen..."
+
+#~ msgid ""
+#~ "Changes will not take effect for the\n"
+#~ "desktop's bars and menus before\n"
+#~ "next time you log in. Changes take\n"
+#~ "effect in applications next time you\n"
+#~ "run them."
+#~ msgstr ""
+#~ "Änderungen an den Desktop-Leisten und\n"
+#~ "-Menüs werden nicht wirksam, bevor Sie\n"
+#~ "sich das nächste Mal anmelden. Anwendungen\n"
+#~ "übernehmen diese Änderungen bereits ab\n"
+#~ "Mal, wenn Sie sie ausführen."
+
+#~ msgid "Customize _dates..."
+#~ msgstr "_Datum anpassen..."
+
+#~ msgid "Customize _numbers..."
+#~ msgstr "_Zahlen anpassen..."
+
+#~ msgid "Customize _times..."
+#~ msgstr "_Uhrzeit anpassen..."
+
+#~ msgid ""
+#~ "Drag languages to set the preferred\n"
+#~ "order of use; If there exists a\n"
+#~ "translation in the first language it will\n"
+#~ "be used, otherwise the next will be tried"
+#~ msgstr ""
+#~ "Ziehen Sie Sprachen hierher, um die bevorzugte\n"
+#~ "Reihenfolge festzulegen; Falls eine\n"
+#~ "Übersetzung in der ersten Sprache existiert,\n"
+#~ "so wird diese verwendet, andernfalls wird\n"
+#~ "mit der nächsten genauso verfahren."
+
+#~ msgid "Formats"
+#~ msgstr "Format"
+
+#~ msgid "Jan 2, 2003"
+#~ msgstr "2. Januar 2003"
+
+#~ msgid "Language and Culture Preferences"
+#~ msgstr "Sprach- und Kultureinstellungen"
+
+#~ msgid "Measurement _Units:"
+#~ msgstr "_Maßeinheiten:"
+
+#~ msgid "Select the items that appear in the Languages list:"
+#~ msgstr "Wählen Sie die Objekte, die in der Sprachliste erscheinen sollen:"
+
+#~ msgid "Show _all regions"
+#~ msgstr "_Alle Regionen anzeigen"
+
+#~ msgid "Thursday, January 2, 2003"
+#~ msgstr "Dienstag, 2. Januar 2003"
+
+#~ msgid ""
+#~ "Your preferred language differs\n"
+#~ "from that of your currently\n"
+#~ "selected date, time, and number\n"
+#~ "formats. You can change your\n"
+#~ "formats in the Formats tab."
+#~ msgstr ""
+#~ "Ihre bevorzugte Sprache weicht von\n"
+#~ "Ihren momentan gewählten Datums-,\n"
+#~ "Uhrzeit- und Zahlenformaten ab.\n"
+#~ "Sie können diese im Format-Reiter\n"
+#~ "anpassen."
+
+#~ msgid "_Region:"
+#~ msgstr "_Region:"
+
+#~ msgid "Language and Culture"
+#~ msgstr "Sprache und Kultur"
+
+#~ msgid "Set your language and culture preferences"
+#~ msgstr "Ihre Sprach- und Kultureinstellungen festlegen"
