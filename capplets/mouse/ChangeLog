@@ -1,3 +1,12 @@
+2002-05-22  jacob berkman  <jacob@ximian.com>
+
+	* *.pcf(.gz):
+	* Makefile.am (cursorfont_DATA): 
+	* gnome-mouse-properties.c (setup_dialog): use .pcf, not .pcf.gz
+	as solaris can't read .gz files
+
+	fixes #78023
+
 Tue May 21 20:09:22 2002  Jonathan Blandford  <jrb@redhat.com>
 
 	* gnome-mouse-properties.c (event_box_button_press_event): fix

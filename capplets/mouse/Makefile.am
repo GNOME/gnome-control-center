@@ -20,9 +20,9 @@ pixmap_DATA = \
 
 cursorfontdir   = $(datadir)/gnome/cursor-fonts
 cursorfont_DATA = \
-	cursor-large.pcf.gz		\
-	cursor-white.pcf.gz		\
-	cursor-large-white.pcf.gz
+	cursor-large.pcf		\
+	cursor-white.pcf		\
+	cursor-large-white.pcf
 
 Gladedir   = $(GNOMECC_GLADE_DIR)
 Glade_DATA = gnome-mouse-properties.glade
