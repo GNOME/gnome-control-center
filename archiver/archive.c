@@ -337,12 +337,16 @@ Location *
 archive_get_location (Archive *archive, const gchar *locid) 
 {
 	GtkObject *loc_obj;
+	gchar *tmp;
 
 	g_return_val_if_fail (archive != NULL, NULL);
 	g_return_val_if_fail (IS_ARCHIVE (archive), NULL);
 	g_return_val_if_fail (locid != NULL, NULL);
 
-	loc_obj = g_tree_lookup (archive->locations, locid);
+	/* Stupid borken glib... */
+	tmp = g_strdup (locid);
+	loc_obj = g_tree_lookup (archive->locations, tmp);
+	g_free (tmp);
 
 	if (!loc_obj) {
 		loc_obj = location_open (archive, locid);
@@ -394,14 +398,18 @@ archive_register_location (Archive *archive, Location *location)
 void
 archive_unregister_location (Archive *archive, Location *location) 
 {
+	gchar *tmp;
+
 	g_return_if_fail (archive != NULL);
 	g_return_if_fail (IS_ARCHIVE (archive));
 	g_return_if_fail (location != NULL);
 	g_return_if_fail (IS_LOCATION (location));
 
 	if (GTK_OBJECT_DESTROYED (archive)) return;
-
-	g_tree_remove (archive->locations, location_get_id (location));
+	
+	tmp = g_strdup (location_get_id (location));
+	g_tree_remove (archive->locations, tmp);
+	g_free (tmp);
 }
 
 /**
@@ -417,12 +425,10 @@ archive_unregister_location (Archive *archive, Location *location)
 Location *
 archive_get_current_location (Archive *archive)
 {
-	gchar *locid;
+	const gchar *locid = archive_get_current_location_id (archive);
 
 	g_return_val_if_fail (archive != NULL, NULL);
 	g_return_val_if_fail (IS_ARCHIVE (archive), NULL);
-
-	locid = archive_get_current_location_id (archive);
 
 	if (locid == NULL)
 		return NULL;
