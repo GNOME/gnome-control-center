@@ -1,14 +1,14 @@
 # Control-center ja.po.
-# Copyright (C) 1998-2000 Free Software Foundation, Inc.
-# Yukihiro Nakai <Nakai@abricot.co.jp>, 1998
-# Eiichiro ITANI <emu@ceres.dti.ne.jp>, 1999
-# Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>, 2000
+# Copyright (C) 1998-2001 Free Software Foundation, Inc.
+# Yukihiro Nakai <Nakai@abricot.co.jp>, 1998.
+# Eiichiro ITANI <emu@ceres.dti.ne.jp>, 1999.
+# Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>, 2000-2001.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: control-center 1.2.2\n"
-"POT-Creation-Date: 2001-02-14 20:16-0500\n"
-"PO-Revision-Date: 2000-10-24 00:27+09:00\n"
+"Project-Id-Version: control-center 1.2.3\n"
+"POT-Creation-Date: 2001-03-09 23:30+0900\n"
+"PO-Revision-Date: 2001-03-09 23:53+09:00\n"
 "Last-Translator: Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -65,11 +65,13 @@ msgid "Wallpaper Selection"
 msgstr "壁紙選択"
 
 #: capplets/background-properties/property-background.c:573
+#: capplets/file-types/file-types-icon-entry.c:258
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "hboxが見つからないので、普通のファイル選択を使います"
 
 #: capplets/background-properties/property-background.c:578
 #: capplets/background-properties/property-background.c:1090
+#: capplets/file-types/file-types-icon-entry.c:264
 #: capplets/keyboard-properties/keyboard-properties.c:354
 #: capplets/screensaver-properties/screensaver-dialog.c:25
 #: capplets/theme-switcher/gui.c:230 capplets/theme-switcher/gui.c:302
@@ -84,7 +86,11 @@ msgstr "壁紙"
 msgid " Browse... "
 msgstr " 参照... "
 
+#. Add default action to fourth column
 #: capplets/background-properties/property-background.c:643
+#: capplets/file-types/file-types-capplet.c:1387
+#: capplets/file-types/file-types-capplet.c:1587
+#: capplets/file-types/file-types-capplet.c:1713
 msgid "none"
 msgstr "なし"
 
@@ -117,7 +123,7 @@ msgstr "タイル状に配置"
 #: capplets/sound-properties/sound-properties.c:693
 #: capplets/theme-switcher/gui.c:367
 #: capplets/ui-properties/ui-properties.c:516
-#: capplets/url-properties/url-properties.c:256
+#: capplets/url-properties/url-properties.c:272
 #: capplets/wm-properties/wm-properties-capplet.c:649
 msgid ""
 "No help is available/installed for these settings. Please make sure you\n"
@@ -130,16 +136,15 @@ msgstr ""
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:182
 #: capplets/keyboard-properties/keyboard-properties.c:99
 #: capplets/keyboard-properties/keyboard-properties.c:424
-#: capplets/mime-type/mime-type-capplet.c:81
 #: capplets/mouse-properties/mouse-properties.c:114
 #: capplets/screensaver-properties/callbacks.c:804
 #: capplets/sound-properties/sound-properties.c:695
 #: capplets/sound-properties/sound-properties.c:756
 #: capplets/theme-switcher/gui.c:369
 #: capplets/ui-properties/ui-properties.c:518
-#: capplets/url-properties/url-properties.c:258
+#: capplets/url-properties/url-properties.c:274
 #: capplets/wm-properties/wm-properties-capplet.c:651
-#: control-center/capplet-widget.c:263
+#: control-center/capplet-widget.c:273
 msgid "Close"
 msgstr "閉じる"
 
@@ -204,221 +209,247 @@ msgstr "Gnomeエディタ"
 msgid "Run In Terminal"
 msgstr "端末内で動かす"
 
-#: capplets/mime-type/edit-window.c:250
-#: capplets/mime-type/new-mime-window.c:35
-msgid "Extensions"
-msgstr "拡張子"
+#: capplets/file-types/file-types-capplet.desktop.in.h:1
+msgid "File Types and Programs"
+msgstr "ファイルの種類とプログラム"
 
-#. icon box
-#: capplets/mime-type/edit-window.c:264
-msgid "Select an icon..."
-msgstr "アイコン選択..."
+#: capplets/file-types/file-types-capplet.desktop.in.h:2
+msgid "Specify which programs are used to open or view each file type"
+msgstr "ファイルの各種類を開いたり表示したりするのに使用するプログラムを指定"
 
-#: capplets/mime-type/edit-window.c:274
-msgid "Mime Type: "
-msgstr "Mime型: "
+#: capplets/file-types/file-types-capplet-dialogs.c:387
+msgid "Edit Applications List"
+msgstr "アプリケーションの一覧を編集"
 
-#: capplets/mime-type/edit-window.c:304
-msgid "Add"
-msgstr "追加"
-
-#: capplets/mime-type/edit-window.c:312
-#: capplets/url-properties/url-properties.c:138
-msgid "Remove"
-msgstr "削除"
-
-#. gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
-#: capplets/mime-type/edit-window.c:339
-#: capplets/mime-type/new-mime-window.c:65
-msgid "First Regular Expression: "
-msgstr "第一の正規表現: "
-
-#: capplets/mime-type/edit-window.c:347
-#: capplets/mime-type/new-mime-window.c:76
-msgid "Second Regular Expression: "
-msgstr "第二の正規表現: "
-
-#. Actions box
-#: capplets/mime-type/edit-window.c:354
-msgid "Mime Type Actions"
-msgstr "MIME型による動作"
-
-#: capplets/mime-type/edit-window.c:361
+#. Add label
+#: capplets/file-types/file-types-capplet-dialogs.c:409
 #, c-format
-msgid "Example: emacs %f"
-msgstr "例: eamcs %f"
+msgid "Select applications to appear in menu for MIME type \"%s\""
+msgstr "MIME 型 \"%s\" のメニューに表われるアプリケーションを選択"
 
-#: capplets/mime-type/edit-window.c:366
-msgid "Open"
-msgstr "開く"
+#: capplets/file-types/file-types-capplet-dialogs.c:433
+msgid "Add Application..."
+msgstr "アプリケーションを追加..."
 
-#: capplets/mime-type/edit-window.c:372 capplets/mime-type/edit-window.c:388
-#: capplets/mime-type/edit-window.c:403
-msgid "Select a file..."
-msgstr "ファイルの選択..."
+#: capplets/file-types/file-types-capplet-dialogs.c:440
+msgid "Edit Application..."
+msgstr "アプリケーションを編集..."
 
-#: capplets/mime-type/edit-window.c:381
-msgid "View"
-msgstr "見る"
+#: capplets/file-types/file-types-capplet-dialogs.c:446
+msgid "Delete Application"
+msgstr "アプリケーションを削除..."
 
-#: capplets/mime-type/edit-window.c:397
-msgid "Edit"
-msgstr "編集"
+#: capplets/file-types/file-types-capplet-dialogs.c:480
+msgid "Edit Components List"
+msgstr "コンポーネントの一覧を編集"
 
-#. we initialize everything
-#: capplets/mime-type/edit-window.c:446
+#. Add label
+#: capplets/file-types/file-types-capplet-dialogs.c:500
 #, c-format
-msgid "Set actions for %s"
-msgstr "%s に対するアクションを設定"
+msgid "Select views to appear in menu for MIME type \"%s\""
+msgstr "MIME 型 \"%s\" のメニューに表われるビューを選択"
 
-#: capplets/mime-type/mime-data.c:380
-msgid "Mime Type"
-msgstr "MIME型"
-
-#: capplets/mime-type/mime-data.c:381
-msgid "Extension"
-msgstr "拡張子"
-
-#: capplets/mime-type/mime-data.c:488
-msgid "You must enter a mime-type"
-msgstr "MIME型を指定して下さい"
-
-#: capplets/mime-type/mime-data.c:493
+#: capplets/file-types/file-types-capplet-dialogs.c:720
 msgid ""
-"You must add either a regular-expression or\n"
-"a file-name extension"
+"The MIME type entered contained upper case characters. Upper case characters "
+"were changed to lower case for you."
 msgstr ""
-"正規表現もしくはファイル拡張子を\n"
-"指定して下さい。"
+"入力された MIME 型に大文字が含まれています。 "
+"大文字は小文字に変更しておきます。"
 
-#: capplets/mime-type/mime-data.c:497
-msgid ""
-"Please put your mime-type in the format:\n"
-"CATEGORY/TYPE\n"
-"\n"
-"For Example:\n"
-"image/png"
-msgstr ""
-"MIME型は次のように指定して下さい:\n"
-"カテゴリ/種類\n"
-"\n"
-"(例)\n"
-"image/png"
+#: capplets/file-types/file-types-capplet-dialogs.c:723
+msgid "Add New MIME Type"
+msgstr "新しい MIME 型の追加"
 
-#: capplets/mime-type/mime-data.c:502
-msgid "This mime-type already exists"
-msgstr "このMIME型はすでにあります"
+#: capplets/file-types/file-types-capplet-dialogs.c:769
+msgid "Add MIME Type"
+msgstr "MIME 型の追加"
 
-#: capplets/mime-type/mime-data.c:583 capplets/mime-type/mime-info.c:425
-msgid ""
-"We are unable to create the directory\n"
-"~/.gnome/mime-info\n"
-"\n"
-"We will not be able to save the state."
-msgstr ""
-"~/.gnome/mime-info\n"
-"ディレクトリを作成できません。\n"
-"\n"
-"状態を保存することが出来なくなります。"
+#: capplets/file-types/file-types-capplet-dialogs.c:773
+msgid "New MIME type (e.g. image/x-thumper):"
+msgstr "新しい MIME 型 (例: image/x-thumper):"
 
-#: capplets/mime-type/mime-data.c:589 capplets/mime-type/mime-info.c:431
-msgid ""
-"We are unable to access the directory\n"
-"~/.gnome/mime-info\n"
-"\n"
-"We will not be able to save the state."
-msgstr ""
-"~/.gnome/mime-info\n"
-"ディレクトリにアクセスできません。\n"
-"\n"
-"状態を保存することが出来なくなります。"
+#: capplets/file-types/file-types-capplet-dialogs.c:780
+msgid "Description (e.g. Thumper image):"
+msgstr "説明 (例: Thumper 画像):"
 
-#: capplets/mime-type/mime-data.c:600
-msgid ""
-"Cannot create the file\n"
-"~/.gnome/mime-info/user.mime\n"
-"\n"
-"We will not be able to save the state"
-msgstr ""
-"~/.gnome/mime-info/user.mime\n"
-"ファイルを作成できません。\n"
-"\n"
-"状態を保存することが出来ません"
+#: capplets/file-types/file-types-capplet-dialogs.c:947
+msgid "File Extensions "
+msgstr "ファイル拡張子"
 
-#: capplets/mime-type/mime-info.c:442
-msgid ""
-"Cannot create the file\n"
-"~/.gnome/mime-info/user.keys\n"
-"\n"
-"We will not be able to save the state"
-msgstr ""
-"~/.gnome/mime-info/user.keys\n"
-"ファイルを作成できません。\n"
-"\n"
-"状態を保存することが出来ません"
-
-#: capplets/mime-type/mime-type-capplet.c:79
-msgid ""
-"No help is available/installed for these settings. Please make sure you\n"
-"have the Control Center documentation installed on your system."
-msgstr ""
-"これらの設定に関するヘルプが見つからない/インストールされていません。\n"
-"GNOMEコントロールセンターのドキュメントをインストールしたか確認して下さい。"
-
-#: capplets/mime-type/mime-type-capplet.c:95
-#: capplets/wm-properties/wm-properties-capplet.c:1098
-msgid "Delete"
-msgstr "削除"
-
-#: capplets/mime-type/mime-type-capplet.c:105
+#: capplets/file-types/file-types-capplet-dialogs.c:967
 #: capplets/wm-properties/wm-properties-capplet.c:1088
 msgid "Add..."
 msgstr "追加..."
 
-#: capplets/mime-type/mime-type-capplet.c:109
-#: capplets/wm-properties/wm-properties-capplet.c:1093
-msgid "Edit..."
-msgstr "編集..."
+#: capplets/file-types/file-types-capplet-dialogs.c:972
+msgid "    Remove    "
+msgstr "     削除     "
 
-#: capplets/mime-type/new-mime-window.c:21
-msgid "Add Mime Type"
-msgstr "MIME型の追加"
+#: capplets/file-types/file-types-capplet-dialogs.c:1041
+msgid "Add New Extension"
+msgstr "新しい拡張子を追加"
 
-#: capplets/mime-type/new-mime-window.c:22
+#: capplets/file-types/file-types-capplet-dialogs.c:1045
 msgid ""
-"Add a new Mime Type\n"
-"For example:  image/tiff; text/x-scheme"
+"Type in the extensions for this mime-type (without dot).\n"
+"You can enter several extensions seperated by a space,\n"
+"for example: html htm"
 msgstr ""
-"新しいMIME型を追加します\n"
-"(例)  image/tiff; text/x-scheme"
+"この MIME 型を表す拡張子を入力して下さい。\n"
+"空白で区切れば複数の拡張子を入力できます。\n"
+"例: html htm"
 
-#: capplets/mime-type/new-mime-window.c:27
-msgid "Mime Type:"
-msgstr "MIME型:"
-
-#: capplets/mime-type/new-mime-window.c:39
-msgid ""
-"Type in the extensions for this mime-type.\n"
-"For example:  .html, .htm"
-msgstr ""
-"このMIME型を表す拡張子を入力して下さい。\n"
-"(例) .html, .htm"
-
-#: capplets/mime-type/new-mime-window.c:46
+#: capplets/file-types/file-types-capplet-dialogs.c:1052
 msgid "Extension:"
 msgstr "拡張子:"
 
-#: capplets/mime-type/new-mime-window.c:51
-msgid "Regular Expressions"
-msgstr "正規表現"
+#: capplets/file-types/file-types-capplet-dialogs.c:1194
+msgid "You must enter a name."
+msgstr "名前を入力して下さい"
 
-#: capplets/mime-type/new-mime-window.c:55
+#: capplets/file-types/file-types-capplet-dialogs.c:1197
+msgid "You must enter a command."
+msgstr "コマンドを入力して下さい"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1207
+#, c-format
 msgid ""
-"You can set up two regular expressions here to identify the Mime Type\n"
-"by.  These fields are optional."
+"\"%s\" does not exist or is not executable.\n"
+"Check your spelling and make sure you have\n"
+"the right permissions to execute this file."
 msgstr ""
-"MIME型を判別するための正規表現を二つ指定することが出来ます。\n"
-"これらのフィールドは省略可能です。"
+"\"%s\" は存在しないか、実行可能ではありません。\n"
+"綴りをチェックし、また、このファイルを実行する権限を\n"
+"持ってるかどうかを確認してください。"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1213
+#, c-format
+msgid ""
+"The command \"%s\" cannot be found.\n"
+"You must use a command that can work from any command line."
+msgstr ""
+"コマンド \"%s\" が見つかりません。\n"
+"コマンドラインから実行可能なコマンドを使わなければなりません。"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1225
+msgid "Bad Application Name"
+msgstr "エラーとなったアプリケーション名"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1226
+msgid "Bad Application Command"
+msgstr "エラーとなったアプリケーションのコマンド"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1258
+msgid "Add Application"
+msgstr "アプリケーションを追加"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1259
+msgid "Edit Application"
+msgstr "アプリケーションを編集"
+
+#. Application Name label and entry
+#: capplets/file-types/file-types-capplet-dialogs.c:1271
+msgid "Application Name:"
+msgstr "アプリケーション名:"
+
+#. Application Command label and entry
+#: capplets/file-types/file-types-capplet-dialogs.c:1282
+msgid "Application Command:"
+msgstr "アプリケーションのコマンド:"
+
+#. Open Behavior frame
+#: capplets/file-types/file-types-capplet-dialogs.c:1293
+msgid "Open Behavior"
+msgstr "「振舞い」を開く"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1299
+msgid "Can open multiple files"
+msgstr "複数のファイルを開ける"
+
+#. FIXME bugzilla.eazel.com 6066: This needs to be three options now: "yes", "no", and "use uris for non-file locations"
+#: capplets/file-types/file-types-capplet-dialogs.c:1307
+msgid "Can open from URI"
+msgstr "URI から開ける"
+
+#: capplets/file-types/file-types-capplet.c:735
+#: capplets/file-types/file-types-capplet.c:1877
+msgid "MIME Type"
+msgstr "MIME 型"
+
+#: capplets/file-types/file-types-capplet.c:742
+msgid "Change Icon"
+msgstr "アイコンを変更"
+
+#: capplets/file-types/file-types-capplet.c:749
+msgid "Change File Extensions"
+msgstr "ファイルの拡張子を変更"
+
+#: capplets/file-types/file-types-capplet.c:757
+msgid "Default Action:"
+msgstr "デフォルトの動作:"
+
+#: capplets/file-types/file-types-capplet.c:769
+msgid "Use Viewer"
+msgstr "ビューアを使用"
+
+#: capplets/file-types/file-types-capplet.c:775
+msgid "Open With Application"
+msgstr "アプリケーションから開く"
+
+#: capplets/file-types/file-types-capplet.c:786
+msgid "Edit List"
+msgstr "一覧を編集"
+
+#: capplets/file-types/file-types-capplet.c:811
+msgid "Add New MIME Type..."
+msgstr "新しい MIME 型を追加..."
+
+#: capplets/file-types/file-types-capplet.c:817
+msgid "Delete This MIME Type"
+msgstr "この MIME 型を削除"
+
+#: capplets/file-types/file-types-capplet.c:828
+msgid "Revert to System Defaults"
+msgstr "システムのデフォルトに戻す"
+
+#: capplets/file-types/file-types-capplet.c:1069
+#: capplets/file-types/file-types-capplet.c:1213
+msgid "None"
+msgstr "なし"
+
+#: capplets/file-types/file-types-capplet.c:1318
+msgid ""
+"Reverting to system settings will lose any changes\n"
+"you have ever made to File Types and Programs.\n"
+"Revert anyway?"
+msgstr ""
+"システムの設定に戻すと、あなたがファイルの種類や\n"
+"プログラムに加えた変更が失なわれます。\n"
+"本当に戻しますか?"
+
+#: capplets/file-types/file-types-capplet.c:1428
+#: capplets/file-types/file-types-capplet.c:1614
+#: capplets/file-types/file-types-capplet.c:1757
+#, c-format
+msgid "View as %s"
+msgstr "%s として表示"
+
+#: capplets/file-types/file-types-capplet.c:1876
+msgid "Description"
+msgstr "説明"
+
+#: capplets/file-types/file-types-capplet.c:1878
+msgid "Extension"
+msgstr "拡張子"
+
+#: capplets/file-types/file-types-capplet.c:1879
+msgid "Default Action"
+msgstr "デフォルトの動作"
+
+#: capplets/file-types/file-types-icon-entry.c:381
+msgid "Select an icon"
+msgstr "アイコンの選択"
 
 #: capplets/mouse-properties/mouse-properties.c:267
 msgid "Mouse buttons"
@@ -1018,30 +1049,34 @@ msgstr "プロトコル"
 msgid "Command"
 msgstr "コマンド"
 
-#: capplets/url-properties/url-properties.c:92
+#: capplets/url-properties/url-properties.c:93
 msgid "handler:"
 msgstr "ハンドラ:"
 
 #. set some commonly used handlers
-#: capplets/url-properties/url-properties.c:102
+#: capplets/url-properties/url-properties.c:103
 msgid "Netscape"
 msgstr "ネットスケープ"
 
-#: capplets/url-properties/url-properties.c:107
+#: capplets/url-properties/url-properties.c:108
 msgid "Netscape (new window)"
 msgstr "ネットスケープ(新規ウィンドウ)"
 
-#: capplets/url-properties/url-properties.c:113
+#: capplets/url-properties/url-properties.c:121
 msgid "Help browser"
 msgstr "ヘルプ・ブラウザ"
 
-#: capplets/url-properties/url-properties.c:118
+#: capplets/url-properties/url-properties.c:127
 msgid "Help browser (new window)"
 msgstr "ヘルプ・ブラウザ(新規ウィンドウ)"
 
-#: capplets/url-properties/url-properties.c:130
+#: capplets/url-properties/url-properties.c:140
 msgid "Set"
 msgstr "設定"
+
+#: capplets/url-properties/url-properties.c:148
+msgid "Remove"
+msgstr "削除"
 
 #: capplets/wm-properties/wm-properties-capplet.c:142
 #, c-format
@@ -1193,6 +1228,14 @@ msgstr "ウィンドウマネージャのエディット"
 msgid "You cannot delete the current Window Manager"
 msgstr "使用中のウインドウマネージャは削除できません"
 
+#: capplets/wm-properties/wm-properties-capplet.c:1093
+msgid "Edit..."
+msgstr "編集..."
+
+#: capplets/wm-properties/wm-properties-capplet.c:1098
+msgid "Delete"
+msgstr "削除"
+
 #: capplets/wm-properties/wm-properties-capplet.c:1134
 msgid ""
 "an initialization error occurred while starting 'wm-properties-capplet'.\n"
@@ -1263,15 +1306,15 @@ msgstr "セッション設定の初期化"
 msgid "Ignore default action.  Used for custom init-session cases"
 msgstr "標準アイコンが無効です。 カスタム初期セッションの場合を用います"
 
-#: control-center/capplet-widget.c:262
+#: control-center/capplet-widget.c:272
 msgid "Sorry, no help is available for these settings."
 msgstr "これらの設定に関するヘルプが見つかりません。"
 
-#: control-center/corba-glue.c:75
+#: control-center/corba-glue.c:77
 msgid "capplet-command to be run."
 msgstr "実行する capplet 命令"
 
-#: control-center/corba-glue.c:75
+#: control-center/corba-glue.c:77
 msgid "CAPPLET"
 msgstr "CAPPLET"
 
@@ -1344,6 +1387,130 @@ msgstr "Host Name:"
 msgid "Unknown"
 msgstr "不明"
 
+#~ msgid "Mime Type: "
+#~ msgstr "Mime型: "
+
+#~ msgid "Add"
+#~ msgstr "追加"
+
+#~ msgid "First Regular Expression: "
+#~ msgstr "第一の正規表現: "
+
+#~ msgid "Second Regular Expression: "
+#~ msgstr "第二の正規表現: "
+
+#~ msgid "Mime Type Actions"
+#~ msgstr "MIME型による動作"
+
+#~ msgid "Example: emacs %f"
+#~ msgstr "例: eamcs %f"
+
+#~ msgid "Open"
+#~ msgstr "開く"
+
+#~ msgid "Select a file..."
+#~ msgstr "ファイルの選択..."
+
+#~ msgid "View"
+#~ msgstr "見る"
+
+#~ msgid "Set actions for %s"
+#~ msgstr "%s に対するアクションを設定"
+
+#~ msgid ""
+#~ "You must add either a regular-expression or\n"
+#~ "a file-name extension"
+#~ msgstr ""
+#~ "正規表現もしくはファイル拡張子を\n"
+#~ "指定して下さい。"
+
+#~ msgid ""
+#~ "Please put your mime-type in the format:\n"
+#~ "CATEGORY/TYPE\n"
+#~ "\n"
+#~ "For Example:\n"
+#~ "image/png"
+#~ msgstr ""
+#~ "MIME型は次のように指定して下さい:\n"
+#~ "カテゴリ/種類\n"
+#~ "\n"
+#~ "(例)\n"
+#~ "image/png"
+
+#~ msgid "This mime-type already exists"
+#~ msgstr "このMIME型はすでにあります"
+
+#~ msgid ""
+#~ "We are unable to create the directory\n"
+#~ "~/.gnome/mime-info\n"
+#~ "\n"
+#~ "We will not be able to save the state."
+#~ msgstr ""
+#~ "~/.gnome/mime-info\n"
+#~ "ディレクトリを作成できません。\n"
+#~ "\n"
+#~ "状態を保存することが出来なくなります。"
+
+#~ msgid ""
+#~ "We are unable to access the directory\n"
+#~ "~/.gnome/mime-info\n"
+#~ "\n"
+#~ "We will not be able to save the state."
+#~ msgstr ""
+#~ "~/.gnome/mime-info\n"
+#~ "ディレクトリにアクセスできません。\n"
+#~ "\n"
+#~ "状態を保存することが出来なくなります。"
+
+#~ msgid ""
+#~ "Cannot create the file\n"
+#~ "~/.gnome/mime-info/user.mime\n"
+#~ "\n"
+#~ "We will not be able to save the state"
+#~ msgstr ""
+#~ "~/.gnome/mime-info/user.mime\n"
+#~ "ファイルを作成できません。\n"
+#~ "\n"
+#~ "状態を保存することが出来ません"
+
+#~ msgid ""
+#~ "Cannot create the file\n"
+#~ "~/.gnome/mime-info/user.keys\n"
+#~ "\n"
+#~ "We will not be able to save the state"
+#~ msgstr ""
+#~ "~/.gnome/mime-info/user.keys\n"
+#~ "ファイルを作成できません。\n"
+#~ "\n"
+#~ "状態を保存することが出来ません"
+
+#~ msgid ""
+#~ "No help is available/installed for these settings. Please make sure you\n"
+#~ "have the Control Center documentation installed on your system."
+#~ msgstr ""
+#~ "これらの設定に関するヘルプが見つからない/インストールされていません。\n"
+#~ "GNOMEコントロールセンターのドキュメントをインストールしたか確認して下さい。"
+
+#~ msgid ""
+#~ "Add a new Mime Type\n"
+#~ "For example:  image/tiff; text/x-scheme"
+#~ msgstr ""
+#~ "新しいMIME型を追加します\n"
+#~ "(例)  image/tiff; text/x-scheme"
+
+#~ msgid "Mime Type:"
+#~ msgstr "MIME型:"
+
+#~ msgid "Regular Expressions"
+#~ msgstr "正規表現"
+
+#~ msgid ""
+#~ "You can set up two regular expressions here to identify the Mime Type\n"
+#~ "by.  These fields are optional."
+#~ msgstr ""
+#~ "MIME型を判別するための正規表現を二つ指定することが出来ます。\n"
+#~ "これらのフィールドは省略可能です。"
+
 #~ msgid "Session"
 #~ msgstr "セッション"
 
@@ -1352,9 +1519,6 @@ msgstr "不明"
 
 #~ msgid "Start Session"
 #~ msgstr "セッション開始"
-
-#~ msgid "Cancel Login"
-#~ msgstr "ログインをキャンセル"
 
 #~ msgid "Order: "
 #~ msgstr "順番: "
