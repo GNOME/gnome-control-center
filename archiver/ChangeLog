@@ -1,3 +1,10 @@
+2001-09-28  Bradford Hovinen  <hovinen@ximian.com>
+
+	* bonobo-config-archiver.c (bonobo_config_archiver_new): Store the
+	listener id in the archiver_db structure
+	(bonobo_config_archiver_destroy): Remove the event source
+	listener; destroy the XML cache
+
 2001-09-22  Bradford Hovinen  <hovinen@ximian.com>
 
 	* bonobo-config-archiver.c (notify_listeners): Abort if the object

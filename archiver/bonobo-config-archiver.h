@@ -50,21 +50,23 @@ typedef struct {
 typedef struct _BonoboConfigArchiver        BonoboConfigArchiver;
 
 struct _BonoboConfigArchiver {
-	BonoboConfigDatabase     base;
+	BonoboConfigDatabase           base;
 
-	char                    *filename;
-	FILE                    *fp;
-	xmlDocPtr                doc;
-	DirData                 *dir;
-	guint                    time_id;
+	char                          *filename;
+	FILE                          *fp;
+	xmlDocPtr                      doc;
+	DirData                       *dir;
+	guint                          time_id;
 
-	ConfigArchiver_Archive   archive;
-	ConfigArchiver_Location  location;
-	gchar                   *backend_id;
-	gchar                   *moniker;
+	ConfigArchiver_Archive         archive;
+	ConfigArchiver_Location        location;
+	gchar                         *backend_id;
+	gchar                         *moniker;
 
-	BonoboEventSource       *es;
-	BonoboPropertyBag       *pb;
+	BonoboEventSource             *es;
+	BonoboPropertyBag             *pb;
+
+	Bonobo_EventSource_ListenerId  listener_id;
 };
 
 typedef struct {

@@ -500,13 +500,29 @@ bonobo_config_archiver_destroy (GtkObject *object)
 	if (archiver_db->moniker != NULL) {
 		bonobo_url_unregister ("BONOBO_CONF:ARCHIVER", archiver_db->moniker, &ev);
 		g_free (archiver_db->moniker);
+
+		if (BONOBO_EX (&ev)) {
+			g_critical ("Could not unregister the archiver URL");
+			CORBA_exception_init (&ev);
+		}
+	}
+
+	if (archiver_db->listener_id != 0) {
+		bonobo_event_source_client_remove_listener
+			(archiver_db->location, archiver_db->listener_id, &ev);
+
+		if (BONOBO_EX (&ev))
+			g_critical ("Could not remove the rollback data listener");
 	}
 
 	CORBA_exception_free (&ev);
 
-	if (archiver_db->doc != NULL)
+	if (archiver_db->doc != NULL) {
+		delete_dir_data (archiver_db->dir, TRUE);
+		archiver_db->dir = NULL;
 		xmlFreeDoc (archiver_db->doc);
-	
+	}
+
 	if (archiver_db->filename != NULL)
 		g_free (archiver_db->filename);
 
@@ -850,9 +866,12 @@ bonobo_config_archiver_new (Bonobo_Moniker               parent,
 	/* Listen for events pertaining to new rollback data */
 
 	if (date == NULL && location_id == NULL)
-		bonobo_event_source_client_add_listener
+		archiver_db->listener_id =
+			bonobo_event_source_client_add_listener
 			(location, (BonoboListenerCallbackFn) new_rollback_cb,
 			 "ConfigArchiver/Location:newRollbackData", ev, archiver_db);
+	else
+		archiver_db->listener_id = 0;
 
 	/* Prepare to return the database object */
 
