@@ -754,7 +754,8 @@ random_timeout_cb (PrefsWidget *prefs_widget)
 {
 	GList *l, *old;
 	gboolean skippedwc = FALSE, skippedvw = FALSE;
- 
+	gboolean beenhere = FALSE;
+	
   	g_return_val_if_fail (prefs_widget != NULL, FALSE);
 	
 	l = prefs_widget->priv->random_current;
@@ -810,20 +811,20 @@ random_timeout_cb (PrefsWidget *prefs_widget)
 				l = prefs_widget->screensavers;
 		}
 	
-		if (l)
-			old = l->next;
-		else
-			old = NULL;
+		old = l;
 
 		while (l)
 		{
 			/* Are we back to where we started? */
 			if (((Screensaver*) l->data)->enabled
 			    || l == prefs_widget->priv->random_current
-			    || (old && old == l))
+			    || (beenhere && old && old == l))
 				break;
 			
 			l = l->next;
+			
+			if (!beenhere)
+				beenhere = TRUE;
 			
 			if (!l)
 				l = prefs_widget->screensavers;
