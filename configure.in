@@ -88,8 +88,6 @@ fi
 dnl ==============================================
 dnl Check for pkg-config 
 dnl ==============================================
-
-
 dnl ==============================================
 dnl Check for --enable-bonobo-conf option
 dnl ==============================================
@@ -117,25 +115,17 @@ LIBCOMMON_DIR=
 moniker_enable=
 fi
 
-AC_SUBST(LIBCOMMON_DIR)
-
-AM_CONDITIONAL(BONOBO_CONF_ENABLE, test "x$bonobo_conf_enable" = "xyes")
-AM_CONDITIONAL(LIBCOMMON_ENABLE, test "x$libcommon_enable" = "xyes")
-AM_CONDITIONAL(MONIKER_ENABLE, test "x$moniker_enable" = "xyes")
 
 dnl ==============================================
 dnl Check that we meet the  dependencies
 dnl ==============================================
 capplet_modules="libcapplet >= 1.5.4 libglade-gnome gdk_pixbuf gdk_pixbuf_xlib gal >= 0.12"
-PKG_CHECK_MODULES(CAPPLET, $capplet_modules $PKG_BONOBO_CONF_CHECK)
-PKG_CHECK_MODULES(GNOMECC, gnomeui libglade xml gdk_pixbuf gnomecanvaspixbuf $PKG_BONOBO_CHECK gtkhtml >= 0.15.0)
+PKG_CHECK_MODULES(CAPPLET, $capplet_modules bonobo bonobo_conf >= 0.12)
+PKG_CHECK_MODULES(GNOMECC, gnomeui libglade xml gdk_pixbuf gnomecanvaspixbuf bonobo bonobox gtkhtml >= 0.15.0)
 PKG_CHECK_MODULES(RMHELPER, gnomeui gnomecanvaspixbuf)
-PKG_CHECK_MODULES(ARCHIVER, $PKG_BONOBO_CONF_CHECK xml)
+PKG_CHECK_MODULES(ARCHIVER, bonobo bonobo_conf >= 0.12 xml)
 PKG_CHECK_MODULES(CONFIG_ARCHIVER, bonobo gnome xml)
-
-if test "x$moniker_enable" = "xyes"; then
-PKG_CHECK_MODULES(MONIKER, $PKG_BONOBO_CONF_CHECK xml)
-fi
+PKG_CHECK_MODULES(MONIKER, bonobo bonobo_conf >= 0.12 xml)
 
 AC_PATH_PROG(XSCREENSAVER, xscreensaver, no)
 if test "$XSCREENSAVER" = no ; then
