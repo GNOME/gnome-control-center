@@ -127,23 +127,25 @@ static void
 populate_category (ControlCenterCategory *category,
 		   MenuTreeDirectory     *menu_directory)
 {
-	GSList *menu_entries;
+	GSList *items;
 	GSList *entries;
 	GSList *l;
 
 	entries = NULL;
 
-	menu_entries = menu_tree_directory_get_entries (menu_directory);
-	for (l = menu_entries; l; l = l->next) {
-		MenuTreeEntry *menu_entry = l->data;
+	items = menu_tree_directory_get_contents (menu_directory);
+	for (l = items; l; l = l->next) {
+		MenuTreeItem *item = l->data;
 
-		entries = g_slist_prepend (entries,
-					   control_center_entry_new (category, menu_entry));
+		if (menu_tree_item_get_type (item) == MENU_TREE_ITEM_ENTRY)
+			entries = g_slist_prepend (entries,
+						   control_center_entry_new (category,
+									     MENU_TREE_ENTRY (item)));
 
-		menu_tree_entry_unref (menu_entry);
+		menu_tree_item_unref (item);
 	}
 
-	g_slist_free (menu_entries);
+	g_slist_free (items);
 
 	if (entries != NULL) {
 		GSList *l;
@@ -196,22 +198,28 @@ static GSList *
 read_categories_from_menu_directory (MenuTreeDirectory *directory,
 				     GSList            *categories)
 {
-	GSList *subdirs;
+	GSList *items;
 	GSList *l;
 
-	subdirs = menu_tree_directory_get_subdirs (directory);
-	for (l = subdirs; l; l = l->next) {
-		MenuTreeDirectory *subdir = l->data;
+	items = menu_tree_directory_get_contents (directory);
+	for (l = items; l; l = l->next) {
+		MenuTreeItem *item = l->data;
 
-		categories = g_slist_prepend (categories,
-					      control_center_category_new (subdir, NULL, TRUE));
+		if (menu_tree_item_get_type (item) == MENU_TREE_ITEM_DIRECTORY) {
+			MenuTreeDirectory *subdir;
 
-		categories = read_categories_from_menu_directory (subdir, categories);
+			subdir = MENU_TREE_DIRECTORY (item);
 
-		menu_tree_directory_unref (subdir);
+			categories = g_slist_prepend (categories,
+						      control_center_category_new (subdir, NULL, TRUE));
+
+			categories = read_categories_from_menu_directory (subdir, categories);
+		}
+
+		menu_tree_item_unref (item);
 	}
 
-	g_slist_free (subdirs);
+	g_slist_free (items);
 
 	return categories;
 }
@@ -257,7 +265,7 @@ control_center_get_information (void)
 		}
 	}
 
-	menu_tree_directory_unref (menu_root);
+	menu_tree_item_unref (menu_root);
 
 	if (categories != NULL) {
 		GSList *l;
