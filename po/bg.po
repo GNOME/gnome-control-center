@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2002-08-20 22:52-0400\n"
+"POT-Creation-Date: 2002-10-01 14:18-0400\n"
 "PO-Revision-Date: 2002-06-24 08:10+0200\n"
 "Last-Translator: Borislav Aleksandrov <B.Aleksandrov@cnsys.bg>\n"
 "Language-Team: Bulgarian GNOME translation team <dict@linux.zonebg.com>\n"
@@ -15,18 +15,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.9.6\n"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:225
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:229
 #: capplets/keyboard/gnome-keyboard-properties.c:160
 #, c-format
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Има грешка при стартирането на контролния панел за клавиатурата : %s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:309
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:321
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:379
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Разрешава импортиране на AccessX настройки от файл '%s'"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:421
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:452
 msgid "Select CDE AccessX file"
 msgstr "Избор на CDE AccessX файл"
 
@@ -41,13 +42,22 @@ msgstr "Клавиатура"
 msgid "Set your keyboard accessibility preferences"
 msgstr "Настройка на Клавиатурна Достъпност"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
-msgid "B_eep when modifier is pressed"
-msgstr "Изда_ва звук при натиснат модификатор"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.c:57
+msgid ""
+"This system does not seem to have the XKB extension.  The keyboard "
+"accessibility features will not operate with it."
+msgstr ""
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
 msgid "Beep when an LED is turned on and two beeps when one is turned off."
 msgstr "Издава звук и LED светва и два звука когато се изключва."
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
+#, fuzzy
+msgid "Beep when enabling/disabling _keyboard accessibility features"
+msgstr ""
+"_Издава звук когато избора за достъпност на клавиши е превключен на разрешен/"
+"забранен"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
 msgid "Beep when key is re_jected"
@@ -58,30 +68,37 @@ msgid "Beep when:"
 msgstr "Звук когато:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
-msgid "Enable Slo_w Keys"
-msgstr "Разрешава _Бавни Клавиши"
+#, fuzzy
+msgid "E_nable Toggle Keys"
+msgstr "Разрешава П_ревключващи Клавиши"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
-msgid "Enable _Bounce Keys"
+#, fuzzy
+msgid "Enable Bo_unce Keys"
 msgstr "Рзрешава _Подскачащи Клавиши"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
+msgid "Enable Slo_w Keys"
+msgstr "Разрешава _Бавни Клавиши"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
 msgid "Enable _Mouse Keys"
 msgstr "Разрешава Клави_ши на Мишка"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
 msgid "Enable _Sticky Keys"
 msgstr "Разрешава _Прилепени Клавиши"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
-msgid "Enable _Toggle Keys"
-msgstr "Разрешава П_ревключващи Клавиши"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
 msgid "General"
 msgstr "Основни"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:11
+#, fuzzy
+msgid "I_gnore keypresses within:"
+msgstr "_Игнорира натиснат клавиш в :"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
 msgid ""
 "Ignore all subsequent presses of the SAME key if they happen within a user "
 "selectable period of time."
@@ -89,22 +106,24 @@ msgstr ""
 "Игнорира всички следващи натискания на СЪШИЯТ клавиш ако се случи в избран "
 "период от време."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
-msgid "Keyboard Accessibility Configuration (AccessX)"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
+#, fuzzy
+msgid "Keyboard Accessibility Preferences (AccessX)"
 msgstr "Конфигурация на Клавишна Достъпност (AccessX)"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
-msgid "Ma_ximum pointer speed :"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
+#, fuzzy
+msgid "Ma_ximum pointer speed:"
 msgstr "_Максимална скорост на курсора:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
 msgid ""
 "Only accept keys after they have been pressed and held for a user adjustable "
 "amount of time."
 msgstr ""
 "Само приема клавиши след като са натиснати и задържа за зададено време."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
 msgid ""
 "Perform multiple simultaneous key press operations by pressing modifier keys "
 "in sequence."
@@ -112,54 +131,54 @@ msgstr ""
 "Позволява операции на много последователно натиснати клавиши чрез натискане "
 "на клавиши за модификация."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
-msgid "Repeat Key Preferences"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
+#, fuzzy
+msgid "Repeat Key Pre_ferences..."
 msgstr "Настройки за повтарение на клавиш"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
-msgid "Start mo_ving this long after keypress :"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
+#, fuzzy
+msgid "Start mo_ving this long after keypress:"
 msgstr "С_тартира продължително преместване след натискане на клавиш;"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
 msgid "Testing Area"
 msgstr "Поле за тестване"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
-msgid "Time to _accelerate to max speed :"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
+#, fuzzy
+msgid "Time to acce_lerate to max speed:"
 msgstr "Време за _ускоряване до максимална скорост:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
 msgid "Toggle and Repeat Keys"
 msgstr "Клавиши за Превключване и Повторение"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
 msgid "Turn the numeric keypad into a mouse control pad."
 msgstr "Използване на блока цифрови клавиши за управление на мишката."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
-msgid "_Beep when enabling/disabling keyboard accessibility features"
-msgstr ""
-"_Издава звук когато избора за достъпност на клавиши е превключен на разрешен/"
-"забранен"
-
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
+#, fuzzy
+msgid "_Beep when modifier is pressed"
+msgstr "Изда_ва звук при натиснат модификатор"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
 msgid "_Disable if unused for "
 msgstr "_Забранява ако не се използва за"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
 msgid "_Enable keyboard accessibility"
 msgstr "Разрешава достъпност на клавиатура"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
-msgid "_Ignore keypresses within  :"
-msgstr "_Игнорира натиснат клавиш в :"
-
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
-msgid "_Import CDE AccessX file"
+#, fuzzy
+msgid "_Import CDE AccessX file..."
 msgstr "_Импорт на CDE AccessX файл"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
-msgid "_Only accept keypress after :"
+#, fuzzy
+msgid "_Only accept keypress after:"
 msgstr "_Само приема натиснат клавиш след :"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:28
@@ -857,7 +876,7 @@ msgid "Default action"
 msgstr "Подразбиращо се действие"
 
 #: capplets/file-types/file-types-properties.glade.h:7
-#: capplets/file-types/mime-edit-dialog.c:209
+#: capplets/file-types/mime-edit-dialog.c:208
 msgid "Edit file type"
 msgstr "Редактиране тип на файл"
 
@@ -952,7 +971,7 @@ msgid "Edit file category"
 msgstr "Редактира категиря файл"
 
 #: capplets/file-types/mime-category-edit-dialog.c:172
-#: capplets/file-types/mime-edit-dialog.c:256
+#: capplets/file-types/mime-edit-dialog.c:255
 #: capplets/file-types/service-edit-dialog.c:170
 #: capplets/file-types/service-edit-dialog.c:171
 msgid "Model"
@@ -971,53 +990,53 @@ msgid "Structure containing information on the MIME category"
 msgstr "Структура съдържаща информация на MIME категорията"
 
 #: capplets/file-types/mime-category-edit-dialog.c:344
-#: capplets/file-types/mime-edit-dialog.c:490
-#: capplets/file-types/mime-edit-dialog.c:594
+#: capplets/file-types/mime-edit-dialog.c:488
+#: capplets/file-types/mime-edit-dialog.c:592
 #: capplets/file-types/service-edit-dialog.c:358
 #: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
 msgstr "Потребителска"
 
-#: capplets/file-types/mime-edit-dialog.c:206
+#: capplets/file-types/mime-edit-dialog.c:205
 msgid "Extension"
 msgstr "Разширение"
 
-#: capplets/file-types/mime-edit-dialog.c:257
+#: capplets/file-types/mime-edit-dialog.c:256
 msgid "Underlying model to notify when Ok is clicked"
 msgstr "Подразбиращ се модел за известяване когато е кликнат Ok"
 
-#: capplets/file-types/mime-edit-dialog.c:264
+#: capplets/file-types/mime-edit-dialog.c:263
 msgid "MIME type information"
 msgstr "MIME тип информация"
 
-#: capplets/file-types/mime-edit-dialog.c:265
+#: capplets/file-types/mime-edit-dialog.c:264
 msgid "Structure with data on the MIME type"
 msgstr "Структура със данни за типа MIME "
 
-#: capplets/file-types/mime-edit-dialog.c:271
+#: capplets/file-types/mime-edit-dialog.c:270
 msgid "Is add dialog"
 msgstr "Е добавен диалог"
 
-#: capplets/file-types/mime-edit-dialog.c:272
+#: capplets/file-types/mime-edit-dialog.c:271
 msgid "True if this dialog is for adding a MIME type"
 msgstr "Истина ако този диалог е за добавяне на MIME тип"
 
-#: capplets/file-types/mime-edit-dialog.c:321
+#: capplets/file-types/mime-edit-dialog.c:320
 #, fuzzy
 msgid "Add File Type"
 msgstr "Добавя Mime Типове"
 
-#: capplets/file-types/mime-edit-dialog.c:435
+#: capplets/file-types/mime-edit-dialog.c:434
 #: capplets/file-types/mime-type-info.c:673
 msgid "Misc"
 msgstr "Други"
 
-#: capplets/file-types/mime-edit-dialog.c:485
-#: capplets/file-types/mime-edit-dialog.c:544
+#: capplets/file-types/mime-edit-dialog.c:483
+#: capplets/file-types/mime-edit-dialog.c:542
 msgid "None"
 msgstr "Без"
 
-#: capplets/file-types/mime-edit-dialog.c:854
+#: capplets/file-types/mime-edit-dialog.c:852
 msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
@@ -1025,15 +1044,15 @@ msgstr ""
 "Моля, въведете валиден MIME тип. Трябва да бъде във формата клас/тип и не "
 "може да съдържа интервали."
 
-#: capplets/file-types/mime-edit-dialog.c:861
+#: capplets/file-types/mime-edit-dialog.c:859
 msgid "A MIME type with that name already exists, overwrite ?."
 msgstr "MIME тип с такова име вече съществува, да бъде ли презаписан ?."
 
-#: capplets/file-types/mime-edit-dialog.c:926
+#: capplets/file-types/mime-edit-dialog.c:924
 msgid "Category"
 msgstr "Категория"
 
-#: capplets/file-types/mime-edit-dialog.c:931
+#: capplets/file-types/mime-edit-dialog.c:929
 msgid "Choose a file category"
 msgstr "Избор на категория файл"
 
@@ -1265,50 +1284,59 @@ msgstr ""
 msgid "_Window title font:"
 msgstr ""
 
-#: capplets/keybindings/eggcellrendererkeys.c:159
 #: capplets/keybindings/eggcellrendererkeys.c:160
-msgid "Accelerator modifiers"
-msgstr "Модификатори за ускорение"
-
-#: capplets/keybindings/eggcellrendererkeys.c:168
-#: capplets/keybindings/eggcellrendererkeys.c:169
+#: capplets/keybindings/eggcellrendererkeys.c:161
 msgid "Accelerator key"
 msgstr "Клавиш на ускорение"
 
-#: capplets/keybindings/eggcellrendererkeys.c:207
-#: capplets/keybindings/gnome-keybinding-properties.c:179
+#: capplets/keybindings/eggcellrendererkeys.c:170
+#: capplets/keybindings/eggcellrendererkeys.c:171
+msgid "Accelerator modifiers"
+msgstr "Модификатори за ускорение"
+
+#: capplets/keybindings/eggcellrendererkeys.c:180
+msgid "Accel Mode"
+msgstr ""
+
+#: capplets/keybindings/eggcellrendererkeys.c:181
+#, fuzzy
+msgid "The type of accelerator."
+msgstr "Задава нов ускорител"
+
+#: capplets/keybindings/eggcellrendererkeys.c:219
+#: capplets/keybindings/gnome-keybinding-properties.c:181
 #: libbackground/applier.c:588
 msgid "Disabled"
 msgstr "Забранен"
 
-#: capplets/keybindings/eggcellrendererkeys.c:318
-#: capplets/keybindings/eggcellrendererkeys.c:534
+#: capplets/keybindings/eggcellrendererkeys.c:330
+#: capplets/keybindings/eggcellrendererkeys.c:563
 msgid "Type a new accelerator, or press Backspace to clear"
 msgstr "Задайте нов ускорител, или натиснете 'Backspace ' за изчистване"
 
-#: capplets/keybindings/eggcellrendererkeys.c:537
+#: capplets/keybindings/eggcellrendererkeys.c:566
 msgid "Type a new accelerator"
 msgstr "Задава нов ускорител"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:446
+#: capplets/keybindings/gnome-keybinding-properties.c:448
 msgid "<Unknown Action>"
 msgstr "<Неизвестно Действие>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:465
+#: capplets/keybindings/gnome-keybinding-properties.c:467
 msgid "Desktop"
 msgstr "Работно място"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:469
+#: capplets/keybindings/gnome-keybinding-properties.c:471
 msgid "Window Management"
 msgstr "Мениджър на Прозорци"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:566
+#: capplets/keybindings/gnome-keybinding-properties.c:568
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 "Грешка при задаване на нов ускорител в конфигурационната база данни: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:717
+#: capplets/keybindings/gnome-keybinding-properties.c:719
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1316,11 +1344,11 @@ msgstr ""
 "Не мога да намеря клавишни теми. Това означава че вашата инсталация на GTK+ "
 "не е пълна."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:739
+#: capplets/keybindings/gnome-keybinding-properties.c:741
 msgid "Action"
 msgstr "Действие"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:755
+#: capplets/keybindings/gnome-keybinding-properties.c:759
 msgid "Shortcut"
 msgstr "Препратка"
 
@@ -1671,17 +1699,21 @@ msgstr "Настройка на Мишка"
 
 #: capplets/network/gnome-network-preferences.desktop.in.h:1
 #, fuzzy
-msgid "Network Proxy"
+msgid "Network proxy"
 msgstr "Мрежа"
 
 #: capplets/network/gnome-network-preferences.desktop.in.h:2
-#: capplets/network/gnome-network-preferences.glade.h:3
 #, fuzzy
-msgid "Network Proxy Preferences"
+msgid "Network proxy preferences"
 msgstr "Настройка на Мрежа"
 
 #: capplets/network/gnome-network-preferences.glade.h:2
 msgid "Network Preferences"
+msgstr "Настройка на Мрежа"
+
+#: capplets/network/gnome-network-preferences.glade.h:3
+#, fuzzy
+msgid "Network Proxy Preferences"
 msgstr "Настройка на Мрежа"
 
 #: capplets/network/gnome-network-preferences.glade.h:4
@@ -1870,56 +1902,56 @@ msgid "C_ut"
 msgstr "Потребителска"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:4
-#, fuzzy
-msgid "Edit Menu"
-msgstr "Редактиране"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:5
 msgid "Icons Only"
 msgstr "Само Икони"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:6
+#: capplets/ui-properties/gnome-ui-properties.glade.h:5
 #, fuzzy
 msgid "Menu and Toolbar Preferences"
 msgstr "Настройка за Лента с Инструменти и Менюта"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:7
+#: capplets/ui-properties/gnome-ui-properties.glade.h:6
 msgid "Menus"
 msgstr "Менюта"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:8
+#: capplets/ui-properties/gnome-ui-properties.glade.h:7
 msgid "New File"
 msgstr "Нов Файл"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:9
+#: capplets/ui-properties/gnome-ui-properties.glade.h:8
 msgid "Open File"
 msgstr "Отваря Файл"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:10
-msgid "Priority Text Beside Icons"
-msgstr "Приоритет на Текст Зад Икони"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:11
+#: capplets/ui-properties/gnome-ui-properties.glade.h:9
 #, fuzzy
 msgid "Sample menubar:"
 msgstr "Просто Меню"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:12
+#: capplets/ui-properties/gnome-ui-properties.glade.h:10
 #, fuzzy
 msgid "Sample toolbar:"
 msgstr "Проста Ленат с Инструменти"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:13
+#: capplets/ui-properties/gnome-ui-properties.glade.h:11
 msgid "Save File"
 msgstr "Запазва Файл"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:14
+#: capplets/ui-properties/gnome-ui-properties.glade.h:12
 msgid "Select the toolbar style."
 msgstr "Избор на стил за лентата инструменти."
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:15
+#: capplets/ui-properties/gnome-ui-properties.glade.h:13
+msgid "Show _icons in menus"
+msgstr ""
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:14
 msgid "Text Below Icons"
 msgstr "Текст Под Икони"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:15
+#, fuzzy
+msgid "Text Beside Icons"
+msgstr "Приоритет на Текст Зад Икони"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:16
 msgid "Text Only"
@@ -1943,40 +1975,42 @@ msgid "_Copy"
 msgstr ""
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:21
-msgid "_Menu"
-msgstr "_Меню"
+#, fuzzy
+msgid "_Edit"
+msgstr "_Редактиране..."
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:22
+#: control-center/gnomecc-ui.xml.h:5
+msgid "_File"
+msgstr "_Файл"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:23
 #, fuzzy
 msgid "_New"
 msgstr "_Име"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:23
+#: capplets/ui-properties/gnome-ui-properties.glade.h:24
 #, fuzzy
 msgid "_Open"
 msgstr "Отваря"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:24
+#: capplets/ui-properties/gnome-ui-properties.glade.h:25
 #, fuzzy
 msgid "_Paste"
 msgstr "Бързо"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:25
+#: capplets/ui-properties/gnome-ui-properties.glade.h:26
 msgid "_Print"
 msgstr ""
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:26
+#: capplets/ui-properties/gnome-ui-properties.glade.h:27
 msgid "_Quit"
 msgstr ""
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:27
+#: capplets/ui-properties/gnome-ui-properties.glade.h:28
 #, fuzzy
 msgid "_Save"
 msgstr "_Мащабируем"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:28
-msgid "_Show icons in menus"
-msgstr ""
 
 #: capplets/windows/gnome-window-properties.c:282
 #: capplets/windows/gnome-window-properties.glade.h:6
@@ -2065,10 +2099,6 @@ msgstr "_Относно..."
 msgid "_Contents..."
 msgstr "_Съдържание..."
 
-#: control-center/gnomecc-ui.xml.h:5
-msgid "_File"
-msgstr "_Файл"
-
 #: control-center/gnomecc-ui.xml.h:6
 msgid "_Help"
 msgstr "_Помощ"
@@ -2152,7 +2182,7 @@ msgstr "_Не показва това съобщение отново"
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Не мога да заредя звъков файл %s като %s "
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:166
+#: gnome-settings-daemon/gnome-settings-xsettings.c:170
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "Клавиша на GConf %s е зададен за тип %s, но се очакваше тип %s\n"
@@ -2223,15 +2253,15 @@ msgstr "Файл за просвирване"
 msgid "_Sounds"
 msgstr "_Звуци"
 
-#: libsounds/sound-view.c:251
+#: libsounds/sound-view.c:252
 msgid "_Play"
 msgstr "_Свири"
 
-#: libsounds/sound-view.c:257
+#: libsounds/sound-view.c:258
 msgid "Select sound file"
 msgstr "Избор на звуков файл"
 
-#: libwindow-settings/gnome-wm-manager.c:168
+#: libwindow-settings/gnome-wm-manager.c:171
 #, c-format
 msgid ""
 "Starting %s\n"
@@ -2240,7 +2270,7 @@ msgstr ""
 "Стартира %s\n"
 "(%d секунди остават преди операцията да приключи поради изтичане на времето)"
 
-#: libwindow-settings/gnome-wm-manager.c:322
+#: libwindow-settings/gnome-wm-manager.c:325
 msgid ""
 "wm-properties-capplet: Unable to initialize window manager.\n"
 "\tAnother window manager is already running and could not be killed\n"
@@ -2248,7 +2278,7 @@ msgstr ""
 "wm-properties-capplet: Немога да инициализирам мениджъра на прозорци.\n"
 "\tДруг мениджър вече се изпълнява и не можа да бъде убит\n"
 
-#: libwindow-settings/gnome-wm-manager.c:326
+#: libwindow-settings/gnome-wm-manager.c:329
 #, c-format
 msgid ""
 "wm-properties-capplet: Unable to initialize window manager.\n"
@@ -2257,11 +2287,11 @@ msgstr ""
 "wm-properties-capplet: Не мога да инициализирам мениджъра на прозорци.\n"
 "\t'%s' не е стартиран\n"
 
-#: libwindow-settings/gnome-wm-manager.c:375
+#: libwindow-settings/gnome-wm-manager.c:378
 msgid "Previous window manager did not die\n"
 msgstr "Предишният мениджър на прозорци не е умрял\n"
 
-#: libwindow-settings/gnome-wm-manager.c:408
+#: libwindow-settings/gnome-wm-manager.c:411
 #, c-format
 msgid ""
 "Could not start '%s'.\n"
@@ -2270,7 +2300,7 @@ msgstr ""
 "Не мога да стартирам '%s'.\n"
 "Връщам се на предишният мениджър на прозорци '%s'\n"
 
-#: libwindow-settings/gnome-wm-manager.c:439
+#: libwindow-settings/gnome-wm-manager.c:442
 msgid ""
 "Could not start fallback window manager.\n"
 "Please run a window manager manually. You can\n"
@@ -2282,9 +2312,16 @@ msgstr ""
 "като изберете \"Изпълнение на Програма\" в основното\n"
 "меню\n"
 
-#: libwindow-settings/gnome-wm-manager.c:464
+#: libwindow-settings/gnome-wm-manager.c:467
 msgid "OK"
 msgstr "OK"
+
+#, fuzzy
+#~ msgid "Edit Menu"
+#~ msgstr "Редактиране"
+
+#~ msgid "_Menu"
+#~ msgstr "_Меню"
 
 #~ msgid "Picture bor_der:"
 #~ msgstr "_Рамка на картинка:"

@@ -141,6 +141,7 @@ selection_changed_cb (GtkTreeSelection *selection, GladeXML *dialog)
 	gint count = 0;
 
 	gtk_tree_selection_selected_foreach (selection, (GtkTreeSelectionForeachFunc) edit_count_cb, &count);
+	puts("goo");
 
 	if (count == 0)
 		gtk_widget_set_sensitive (WID ("edit_button"), FALSE);

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2002-08-20 22:52-0400\n"
+"POT-Creation-Date: 2002-10-01 14:18-0400\n"
 "PO-Revision-Date: 2002-05-31 17:39-0300\n"
 "Last-Translator: Isam Bayazidi <bayazidi@arabeyes.org>\n"
 "Language-Team: Arabic <support@arabeyes.org>\n"
@@ -15,18 +15,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.9.6\n"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:225
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:229
 #: capplets/keyboard/gnome-keyboard-properties.c:160
 #, c-format
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr ""
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:309
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:321
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:379
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "لم أتمكن من أستيراد أعدادات AccessX من الملف '%s'"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:421
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:452
 msgid "Select CDE AccessX file"
 msgstr "اختر ملف CDE AccessX"
 
@@ -41,13 +42,20 @@ msgstr "لوحة المفاتيح"
 msgid "Set your keyboard accessibility preferences"
 msgstr "خيارات الإعانة للوحة المفاتيح"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
-msgid "B_eep when modifier is pressed"
-msgstr "صافرة عند الضعط على مفتاح محول"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.c:57
+msgid ""
+"This system does not seem to have the XKB extension.  The keyboard "
+"accessibility features will not operate with it."
+msgstr ""
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
 msgid "Beep when an LED is turned on and two beeps when one is turned off."
 msgstr "صافرة عند تشغيل أحد أضواء لوحة المفاتيح LED و صافرتان عند تعطيل أحدها."
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
+#, fuzzy
+msgid "Beep when enabling/disabling _keyboard accessibility features"
+msgstr "صافرة عند تشغيل و تعطيل مزايا الإعانة للوحة المفاتيح"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
 #, fuzzy
@@ -59,24 +67,26 @@ msgid "Beep when:"
 msgstr "صافرة عند:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
-msgid "Enable Slo_w Keys"
-msgstr "تفعيل المفاتيح البطيئة"
+#, fuzzy
+msgid "E_nable Toggle Keys"
+msgstr "تفعيل مفاتيح تغيير الحالة"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
-msgid "Enable _Bounce Keys"
+#, fuzzy
+msgid "Enable Bo_unce Keys"
 msgstr "تفعيل مفاتيح الإرتداد"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
+msgid "Enable Slo_w Keys"
+msgstr "تفعيل المفاتيح البطيئة"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
 msgid "Enable _Mouse Keys"
 msgstr "تفعيل مفاتيح الفأرة"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
 msgid "Enable _Sticky Keys"
 msgstr "تفعيل المفاتيح اللاصقة"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
-msgid "Enable _Toggle Keys"
-msgstr "تفعيل مفاتيح تغيير الحالة"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
 #, fuzzy
@@ -84,6 +94,11 @@ msgid "General"
 msgstr "عام"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:11
+#, fuzzy
+msgid "I_gnore keypresses within:"
+msgstr "تجاهل ضغطات المفاتيح خلال  :"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
 msgid ""
 "Ignore all subsequent presses of the SAME key if they happen within a user "
 "selectable period of time."
@@ -91,21 +106,23 @@ msgstr ""
 "أهمل كل التلاحقات من الضغط على نفس المفتاح إذا حدثت خلال الوقت المختار من "
 "المستخدم."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
-msgid "Keyboard Accessibility Configuration (AccessX)"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
+#, fuzzy
+msgid "Keyboard Accessibility Preferences (AccessX)"
 msgstr "تعريفات الإعانة للوحة المفاتيح (AccessX)"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
-msgid "Ma_ximum pointer speed :"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
+#, fuzzy
+msgid "Ma_ximum pointer speed:"
 msgstr "السرعة القصوى للمؤشر"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
 msgid ""
 "Only accept keys after they have been pressed and held for a user adjustable "
 "amount of time."
 msgstr "فقط أقبل المفاتيح التي ضغطت و أبقي عليها للفترة المحددة من المستخدم."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
 msgid ""
 "Perform multiple simultaneous key press operations by pressing modifier keys "
 "in sequence."
@@ -113,53 +130,54 @@ msgstr ""
 "نفذ العمليات التي تحتاج ضغط عدد من المفاتيح بوقت واحد عند الضعط على مفاتيح "
 "التحويل بالتتالي."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
 #, fuzzy
-msgid "Repeat Key Preferences"
+msgid "Repeat Key Pre_ferences..."
 msgstr "خصائص لوحة المفاتيح"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
-msgid "Start mo_ving this long after keypress :"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
+#, fuzzy
+msgid "Start mo_ving this long after keypress:"
 msgstr "إبدا بالحركة بعد هذه الفترة من الضغط على المفتاح:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
 msgid "Testing Area"
 msgstr ""
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
-msgid "Time to _accelerate to max speed :"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
+#, fuzzy
+msgid "Time to acce_lerate to max speed:"
 msgstr "الوقت اللازم للتسارع للسرعة القصوى:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
 msgid "Toggle and Repeat Keys"
 msgstr ""
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
 msgid "Turn the numeric keypad into a mouse control pad."
 msgstr "حول لوحة الأرقام إلى لوحة تحكم بالفأرة."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
-msgid "_Beep when enabling/disabling keyboard accessibility features"
-msgstr "صافرة عند تشغيل و تعطيل مزايا الإعانة للوحة المفاتيح"
-
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
+#, fuzzy
+msgid "_Beep when modifier is pressed"
+msgstr "صافرة عند الضعط على مفتاح محول"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
 msgid "_Disable if unused for "
 msgstr "تعطيل عند عدم الإستخدام لمدة "
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
 msgid "_Enable keyboard accessibility"
 msgstr "تفعيل الإعانة للوحة المفاتيح"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
-msgid "_Ignore keypresses within  :"
-msgstr "تجاهل ضغطات المفاتيح خلال  :"
-
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
-msgid "_Import CDE AccessX file"
+#, fuzzy
+msgid "_Import CDE AccessX file..."
 msgstr "استورد ملف CDE AccessX"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
-msgid "_Only accept keypress after :"
+#, fuzzy
+msgid "_Only accept keypress after:"
 msgstr "إقبل الضغط على المفتاح بعد :"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:28
@@ -856,7 +874,7 @@ msgid "Default action"
 msgstr "العمل الافتراضي"
 
 #: capplets/file-types/file-types-properties.glade.h:7
-#: capplets/file-types/mime-edit-dialog.c:209
+#: capplets/file-types/mime-edit-dialog.c:208
 msgid "Edit file type"
 msgstr "حرر نوع الملف"
 
@@ -949,7 +967,7 @@ msgid "Edit file category"
 msgstr "حرّر فئة الملف"
 
 #: capplets/file-types/mime-category-edit-dialog.c:172
-#: capplets/file-types/mime-edit-dialog.c:256
+#: capplets/file-types/mime-edit-dialog.c:255
 #: capplets/file-types/service-edit-dialog.c:170
 #: capplets/file-types/service-edit-dialog.c:171
 msgid "Model"
@@ -968,68 +986,68 @@ msgid "Structure containing information on the MIME category"
 msgstr "التركيبة التي تحوي معلومات عن فئة MIME"
 
 #: capplets/file-types/mime-category-edit-dialog.c:344
-#: capplets/file-types/mime-edit-dialog.c:490
-#: capplets/file-types/mime-edit-dialog.c:594
+#: capplets/file-types/mime-edit-dialog.c:488
+#: capplets/file-types/mime-edit-dialog.c:592
 #: capplets/file-types/service-edit-dialog.c:358
 #: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
 msgstr "مخصص"
 
-#: capplets/file-types/mime-edit-dialog.c:206
+#: capplets/file-types/mime-edit-dialog.c:205
 msgid "Extension"
 msgstr "امتداد"
 
-#: capplets/file-types/mime-edit-dialog.c:257
+#: capplets/file-types/mime-edit-dialog.c:256
 msgid "Underlying model to notify when Ok is clicked"
 msgstr "نمط التسطير للتنبيه حين نقر \"موافق\""
 
-#: capplets/file-types/mime-edit-dialog.c:264
+#: capplets/file-types/mime-edit-dialog.c:263
 msgid "MIME type information"
 msgstr "معلومات نوع MIME"
 
-#: capplets/file-types/mime-edit-dialog.c:265
+#: capplets/file-types/mime-edit-dialog.c:264
 msgid "Structure with data on the MIME type"
 msgstr "التركيبة مع البيانات عن نوع MIME"
 
-#: capplets/file-types/mime-edit-dialog.c:271
+#: capplets/file-types/mime-edit-dialog.c:270
 msgid "Is add dialog"
 msgstr "مربع حوار للإضافة"
 
-#: capplets/file-types/mime-edit-dialog.c:272
+#: capplets/file-types/mime-edit-dialog.c:271
 msgid "True if this dialog is for adding a MIME type"
 msgstr "صح إذا كان هذا المربع ﻹضافة نوع MIME"
 
-#: capplets/file-types/mime-edit-dialog.c:321
+#: capplets/file-types/mime-edit-dialog.c:320
 #, fuzzy
 msgid "Add File Type"
 msgstr "أضف نوع Mime"
 
-#: capplets/file-types/mime-edit-dialog.c:435
+#: capplets/file-types/mime-edit-dialog.c:434
 #: capplets/file-types/mime-type-info.c:673
 #, fuzzy
 msgid "Misc"
 msgstr "متفرقات"
 
-#: capplets/file-types/mime-edit-dialog.c:485
-#: capplets/file-types/mime-edit-dialog.c:544
+#: capplets/file-types/mime-edit-dialog.c:483
+#: capplets/file-types/mime-edit-dialog.c:542
 msgid "None"
 msgstr "لا شيء"
 
-#: capplets/file-types/mime-edit-dialog.c:854
+#: capplets/file-types/mime-edit-dialog.c:852
 msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
 msgstr ""
 
-#: capplets/file-types/mime-edit-dialog.c:861
+#: capplets/file-types/mime-edit-dialog.c:859
 msgid "A MIME type with that name already exists, overwrite ?."
 msgstr ""
 
-#: capplets/file-types/mime-edit-dialog.c:926
+#: capplets/file-types/mime-edit-dialog.c:924
 msgid "Category"
 msgstr "الفئة"
 
-#: capplets/file-types/mime-edit-dialog.c:931
+#: capplets/file-types/mime-edit-dialog.c:929
 msgid "Choose a file category"
 msgstr "اختر فئة للملف"
 
@@ -1263,60 +1281,69 @@ msgstr ""
 msgid "_Window title font:"
 msgstr ""
 
-#: capplets/keybindings/eggcellrendererkeys.c:159
 #: capplets/keybindings/eggcellrendererkeys.c:160
-msgid "Accelerator modifiers"
-msgstr "معدّلات المسرّع"
-
-#: capplets/keybindings/eggcellrendererkeys.c:168
-#: capplets/keybindings/eggcellrendererkeys.c:169
+#: capplets/keybindings/eggcellrendererkeys.c:161
 msgid "Accelerator key"
 msgstr "مفتاح المسرّع"
 
-#: capplets/keybindings/eggcellrendererkeys.c:207
-#: capplets/keybindings/gnome-keybinding-properties.c:179
+#: capplets/keybindings/eggcellrendererkeys.c:170
+#: capplets/keybindings/eggcellrendererkeys.c:171
+msgid "Accelerator modifiers"
+msgstr "معدّلات المسرّع"
+
+#: capplets/keybindings/eggcellrendererkeys.c:180
+msgid "Accel Mode"
+msgstr ""
+
+#: capplets/keybindings/eggcellrendererkeys.c:181
+#, fuzzy
+msgid "The type of accelerator."
+msgstr "اكتب مسرّعا جديدا"
+
+#: capplets/keybindings/eggcellrendererkeys.c:219
+#: capplets/keybindings/gnome-keybinding-properties.c:181
 #: libbackground/applier.c:588
 msgid "Disabled"
 msgstr "معطل"
 
-#: capplets/keybindings/eggcellrendererkeys.c:318
-#: capplets/keybindings/eggcellrendererkeys.c:534
+#: capplets/keybindings/eggcellrendererkeys.c:330
+#: capplets/keybindings/eggcellrendererkeys.c:563
 msgid "Type a new accelerator, or press Backspace to clear"
 msgstr "اكتب مسرّعا جديدا، أواكبس Backspace للمسح"
 
-#: capplets/keybindings/eggcellrendererkeys.c:537
+#: capplets/keybindings/eggcellrendererkeys.c:566
 msgid "Type a new accelerator"
 msgstr "اكتب مسرّعا جديدا"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:446
+#: capplets/keybindings/gnome-keybinding-properties.c:448
 msgid "<Unknown Action>"
 msgstr "<حدث مجهول>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:465
+#: capplets/keybindings/gnome-keybinding-properties.c:467
 msgid "Desktop"
 msgstr "سطح المكتب"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:469
+#: capplets/keybindings/gnome-keybinding-properties.c:471
 msgid "Window Management"
 msgstr "إدارة النوافذ"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:566
+#: capplets/keybindings/gnome-keybinding-properties.c:568
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "حدث خطأ أثناء تعيين مسرع جديد في قاعدة بيانات الإعدادات: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:717
+#: capplets/keybindings/gnome-keybinding-properties.c:719
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
 msgstr ""
 "تعذر العثور على أي تيمة للوحة المفاتيح. هذا يعني أن تنصيبك إلى GTK+ لم يكتمل."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:739
+#: capplets/keybindings/gnome-keybinding-properties.c:741
 msgid "Action"
 msgstr "فعل"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:755
+#: capplets/keybindings/gnome-keybinding-properties.c:759
 msgid "Shortcut"
 msgstr "اختصار"
 
@@ -1662,17 +1689,21 @@ msgstr "تفضيلات الفأرة"
 
 #: capplets/network/gnome-network-preferences.desktop.in.h:1
 #, fuzzy
-msgid "Network Proxy"
+msgid "Network proxy"
 msgstr "الشبكة"
 
 #: capplets/network/gnome-network-preferences.desktop.in.h:2
-#: capplets/network/gnome-network-preferences.glade.h:3
 #, fuzzy
-msgid "Network Proxy Preferences"
+msgid "Network proxy preferences"
 msgstr "تفضيلات الشبكة"
 
 #: capplets/network/gnome-network-preferences.glade.h:2
 msgid "Network Preferences"
+msgstr "تفضيلات الشبكة"
+
+#: capplets/network/gnome-network-preferences.glade.h:3
+#, fuzzy
+msgid "Network Proxy Preferences"
 msgstr "تفضيلات الشبكة"
 
 #: capplets/network/gnome-network-preferences.glade.h:4
@@ -1857,57 +1888,57 @@ msgid "C_ut"
 msgstr "مخصص"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:4
-#, fuzzy
-msgid "Edit Menu"
-msgstr "حرّر"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:5
 msgid "Icons Only"
 msgstr "ايقونات فقط"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:6
+#: capplets/ui-properties/gnome-ui-properties.glade.h:5
 #, fuzzy
 msgid "Menu and Toolbar Preferences"
 msgstr "تفضيلات شريط الأدوات و القائمة"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:7
+#: capplets/ui-properties/gnome-ui-properties.glade.h:6
 msgid "Menus"
 msgstr "قوائم"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:8
+#: capplets/ui-properties/gnome-ui-properties.glade.h:7
 msgid "New File"
 msgstr "ملف جديد"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:9
+#: capplets/ui-properties/gnome-ui-properties.glade.h:8
 msgid "Open File"
 msgstr "افتح ملفا"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:10
-msgid "Priority Text Beside Icons"
-msgstr "اﻷولوية لنصوص بجانب اﻷيقونات"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:11
+#: capplets/ui-properties/gnome-ui-properties.glade.h:9
 #, fuzzy
 msgid "Sample menubar:"
 msgstr "عينة شريط القائمة"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:12
+#: capplets/ui-properties/gnome-ui-properties.glade.h:10
 #, fuzzy
 msgid "Sample toolbar:"
 msgstr "عينة شريط الأدوات"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:13
+#: capplets/ui-properties/gnome-ui-properties.glade.h:11
 msgid "Save File"
 msgstr "احفظ الملف"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:14
+#: capplets/ui-properties/gnome-ui-properties.glade.h:12
 #, fuzzy
 msgid "Select the toolbar style."
 msgstr "اختر تيمة لتثبيتها"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:15
+#: capplets/ui-properties/gnome-ui-properties.glade.h:13
+msgid "Show _icons in menus"
+msgstr ""
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:14
 msgid "Text Below Icons"
 msgstr "نصوص أسفل اﻷيقونات"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:15
+#, fuzzy
+msgid "Text Beside Icons"
+msgstr "اﻷولوية لنصوص بجانب اﻷيقونات"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:16
 msgid "Text Only"
@@ -1931,40 +1962,42 @@ msgid "_Copy"
 msgstr ""
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:21
-msgid "_Menu"
-msgstr "قائمة"
+#, fuzzy
+msgid "_Edit"
+msgstr "حرر..."
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:22
+#: control-center/gnomecc-ui.xml.h:5
+msgid "_File"
+msgstr "ملف"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:23
 #, fuzzy
 msgid "_New"
 msgstr "الأسم"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:23
+#: capplets/ui-properties/gnome-ui-properties.glade.h:24
 #, fuzzy
 msgid "_Open"
 msgstr "افتح"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:24
+#: capplets/ui-properties/gnome-ui-properties.glade.h:25
 #, fuzzy
 msgid "_Paste"
 msgstr "سريع"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:25
+#: capplets/ui-properties/gnome-ui-properties.glade.h:26
 msgid "_Print"
 msgstr ""
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:26
+#: capplets/ui-properties/gnome-ui-properties.glade.h:27
 msgid "_Quit"
 msgstr ""
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:27
+#: capplets/ui-properties/gnome-ui-properties.glade.h:28
 #, fuzzy
 msgid "_Save"
 msgstr "تكبير"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:28
-msgid "_Show icons in menus"
-msgstr ""
 
 #: capplets/windows/gnome-window-properties.c:282
 #: capplets/windows/gnome-window-properties.glade.h:6
@@ -2053,10 +2086,6 @@ msgstr "حول..."
 msgid "_Contents..."
 msgstr "المحتويات..."
 
-#: control-center/gnomecc-ui.xml.h:5
-msgid "_File"
-msgstr "ملف"
-
 #: control-center/gnomecc-ui.xml.h:6
 msgid "_Help"
 msgstr "مساعدة"
@@ -2138,7 +2167,7 @@ msgstr "لا تظهر هذه الرسالة مرة أخرى"
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "تعذر تحميل ملف الصوت %s كمثال %s"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:166
+#: gnome-settings-daemon/gnome-settings-xsettings.c:170
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "مفتاح GConf وهو %s نوعه %s بينما النوع المتوقع كان %s\n"
@@ -2208,15 +2237,15 @@ msgstr "ملف لتشغيله"
 msgid "_Sounds"
 msgstr "اﻷصوات"
 
-#: libsounds/sound-view.c:251
+#: libsounds/sound-view.c:252
 msgid "_Play"
 msgstr "تشغيل"
 
-#: libsounds/sound-view.c:257
+#: libsounds/sound-view.c:258
 msgid "Select sound file"
 msgstr "اختر ملف صوت"
 
-#: libwindow-settings/gnome-wm-manager.c:168
+#: libwindow-settings/gnome-wm-manager.c:171
 #, c-format
 msgid ""
 "Starting %s\n"
@@ -2225,7 +2254,7 @@ msgstr ""
 "البدء %s\n"
 "(%d ثوان متبقية قبل انتهاء مدة العملية)"
 
-#: libwindow-settings/gnome-wm-manager.c:322
+#: libwindow-settings/gnome-wm-manager.c:325
 msgid ""
 "wm-properties-capplet: Unable to initialize window manager.\n"
 "\tAnother window manager is already running and could not be killed\n"
@@ -2233,7 +2262,7 @@ msgstr ""
 "wm-properties-capplet: لم أستطع تهيئة مدير النوافذ.\n"
 "\tمدير نوافذ آخر يعمل مسبقا ولا يمكن إنهاؤه\n"
 
-#: libwindow-settings/gnome-wm-manager.c:326
+#: libwindow-settings/gnome-wm-manager.c:329
 #, c-format
 msgid ""
 "wm-properties-capplet: Unable to initialize window manager.\n"
@@ -2242,11 +2271,11 @@ msgstr ""
 "wm-properties-capplet: لم أستطع تهيئة مدير النوافذ.\n"
 "\tلم يبدأ '%s'\n"
 
-#: libwindow-settings/gnome-wm-manager.c:375
+#: libwindow-settings/gnome-wm-manager.c:378
 msgid "Previous window manager did not die\n"
 msgstr "لم يمت مدير النوافذ السابق\n"
 
-#: libwindow-settings/gnome-wm-manager.c:408
+#: libwindow-settings/gnome-wm-manager.c:411
 #, c-format
 msgid ""
 "Could not start '%s'.\n"
@@ -2255,7 +2284,7 @@ msgstr ""
 "لم أستطع بدء '%s'.\n"
 "الرجوع لمدير النوافذ السابق '%s'\n"
 
-#: libwindow-settings/gnome-wm-manager.c:439
+#: libwindow-settings/gnome-wm-manager.c:442
 msgid ""
 "Could not start fallback window manager.\n"
 "Please run a window manager manually. You can\n"
@@ -2266,9 +2295,16 @@ msgstr ""
 "فضلا شغل مدير نوافذ يدويا. باستطاعتك فعل ذلك باختيار \"شغل البرنامج\" في\n"
 "القائمة السفلى\n"
 
-#: libwindow-settings/gnome-wm-manager.c:464
+#: libwindow-settings/gnome-wm-manager.c:467
 msgid "OK"
 msgstr "موافق"
+
+#, fuzzy
+#~ msgid "Edit Menu"
+#~ msgstr "حرّر"
+
+#~ msgid "_Menu"
+#~ msgstr "قائمة"
 
 #~ msgid "<b>Test</b>"
 #~ msgstr "<b> اختبار</b>"

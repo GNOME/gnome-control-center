@@ -29,6 +29,7 @@
 #include <gtk/gtkimage.h>
 #include <gtk/gtkhbox.h>
 #include <gtk/gtkframe.h>
+#include <gtk/gtklabel.h>
 #include <gtk/gtktreeview.h>
 #include <gtk/gtkmain.h>
 #include "preview-file-selection.h"
@@ -38,6 +39,7 @@
 struct _PreviewFileSelectionPrivate
 {
 	GtkWidget *preview;	
+	GtkWidget *label;
 };
 
 enum
@@ -167,20 +169,32 @@ preview_file_selection_update (PreviewFileSelection *fsel, gpointer data)
 	filename = gtk_file_selection_get_filename (GTK_FILE_SELECTION (fsel));
 	if (filename && (buf = gdk_pixbuf_new_from_file (filename, NULL)))
 	{
+		int w, h;
+		char *size;
 		GdkPixbuf *scaled = preview_file_selection_intelligent_scale (buf, SCALE); 
 		gtk_image_set_from_pixbuf (GTK_IMAGE (fsel->priv->preview),
 					   scaled);
 		g_object_unref (scaled);
+
+		w = gdk_pixbuf_get_width (buf);
+		h = gdk_pixbuf_get_height (buf);
+
+		size = g_strdup_printf ("%d x %d", w, h);
+		gtk_label_set_text (GTK_LABEL (fsel->priv->label), size);
+		g_free (size);
+
 		g_object_unref (buf);
 	}
-	else
+	else {
 		gtk_image_set_from_file (GTK_IMAGE (fsel->priv->preview), NULL);
+		gtk_label_set_text (GTK_LABEL (fsel->priv->label), " ");
+	}
 }
 
 static void
 preview_file_selection_add_preview (PreviewFileSelection *fsel)
 {
-	GtkWidget *hbox, *frame;
+	GtkWidget *hbox, *frame, *vbox;
 	
 	g_return_if_fail (IS_PREVIEW_FILE_SELECTION (fsel));
 
@@ -200,9 +214,17 @@ preview_file_selection_add_preview (PreviewFileSelection *fsel)
 	gtk_widget_show (frame);
 	gtk_box_pack_end (GTK_BOX (hbox), frame, FALSE, FALSE, 0);
 
+	vbox = gtk_vbox_new (FALSE, 2);
+	gtk_widget_show (vbox);
+	gtk_container_add (GTK_CONTAINER (frame), vbox);
+	
 	fsel->priv->preview = gtk_image_new ();
-	gtk_container_add (GTK_CONTAINER (frame), fsel->priv->preview);
+	gtk_box_pack_start (GTK_BOX (vbox), fsel->priv->preview, FALSE, FALSE, 0);
 	gtk_widget_show (fsel->priv->preview);
+	
+	fsel->priv->label = gtk_label_new ("");
+	gtk_box_pack_start (GTK_BOX (vbox), fsel->priv->label, FALSE, FALSE, 0);
+	gtk_widget_show (fsel->priv->label);
 
 	g_signal_connect_data (G_OBJECT (gtk_tree_view_get_selection (GTK_TREE_VIEW (GTK_FILE_SELECTION (fsel)->file_list))), "changed", (GCallback) preview_file_selection_update, fsel, NULL, G_CONNECT_AFTER | G_CONNECT_SWAPPED);
 

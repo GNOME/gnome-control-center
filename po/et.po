@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 2.0.0\n"
-"POT-Creation-Date: 2002-08-20 22:52-0400\n"
+"POT-Creation-Date: 2002-10-01 14:18-0400\n"
 "PO-Revision-Date: 2002-07-17 21:15+0300\n"
 "Last-Translator: Tõivo Leedjärv <toivo@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
@@ -14,18 +14,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:225
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:229
 #: capplets/keyboard/gnome-keyboard-properties.c:160
 #, c-format
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Klaviatuuri häälestuse käivitamisel tekkis viga : %s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:309
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:321
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:379
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Ei saa AccessX sätteid failist '%s' importida"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:421
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:452
 msgid "Select CDE AccessX file"
 msgstr "Vali CDE AccessX fail"
 
@@ -39,15 +40,21 @@ msgstr "Klaviatuur"
 msgid "Set your keyboard accessibility preferences"
 msgstr ""
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
-msgid "B_eep when modifier is pressed"
-msgstr "Tee _piiks muuteklahvi vajutamisel"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.c:57
+msgid ""
+"This system does not seem to have the XKB extension.  The keyboard "
+"accessibility features will not operate with it."
+msgstr ""
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
 msgid "Beep when an LED is turned on and two beeps when one is turned off."
 msgstr ""
 "Tee piiks klaviatuuri valgusdioodi (LED) sisselülitamisel ning kaks piiksu "
 "väljalülitamisel."
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
+msgid "Beep when enabling/disabling _keyboard accessibility features"
+msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
 msgid "Beep when key is re_jected"
@@ -58,30 +65,37 @@ msgid "Beep when:"
 msgstr "Tee piiks kui:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
-msgid "Enable Slo_w Keys"
-msgstr "Luba Ae_glased Klahvid"
+#, fuzzy
+msgid "E_nable Toggle Keys"
+msgstr "Luba _Lülitavad Klahvid"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
-msgid "Enable _Bounce Keys"
+#, fuzzy
+msgid "Enable Bo_unce Keys"
 msgstr "Luba _Põrkeklahvid"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
+msgid "Enable Slo_w Keys"
+msgstr "Luba Ae_glased Klahvid"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
 msgid "Enable _Mouse Keys"
 msgstr "Luba _Hiire Klahvid"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
 msgid "Enable _Sticky Keys"
 msgstr "Luba _Kleepuvad Klahvid"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
-msgid "Enable _Toggle Keys"
-msgstr "Luba _Lülitavad Klahvid"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
 msgid "General"
 msgstr "Üldine"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:11
+#, fuzzy
+msgid "I_gnore keypresses within:"
+msgstr "_Ignoreeri klahvivajutusi selle aja sees :"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
 msgid ""
 "Ignore all subsequent presses of the SAME key if they happen within a user "
 "selectable period of time."
@@ -89,15 +103,17 @@ msgstr ""
 "Ignoreeri järjestikuseid SAMA klahvi vajutusi, kui need toimuvad kasutaja "
 "määratud perioodi jooksul."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
-msgid "Keyboard Accessibility Configuration (AccessX)"
-msgstr ""
-
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
-msgid "Ma_ximum pointer speed :"
-msgstr "_Maksimaalne kursori kiirus :"
+#, fuzzy
+msgid "Keyboard Accessibility Preferences (AccessX)"
+msgstr "Klaviatuuri häälestus"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
+#, fuzzy
+msgid "Ma_ximum pointer speed:"
+msgstr "_Maksimaalne kursori kiirus :"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
 msgid ""
 "Only accept keys after they have been pressed and held for a user adjustable "
 "amount of time."
@@ -105,58 +121,60 @@ msgstr ""
 "Aktsepteeri ainult klahvivajutused, mis kestavad kauem kui kasutaja määratud "
 "aeg."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
 msgid ""
 "Perform multiple simultaneous key press operations by pressing modifier keys "
 "in sequence."
 msgstr "Koosta klahvikombinatsioonid, vajutades muuteklahve järjest ükshaaval."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
-msgid "Repeat Key Preferences"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
+#, fuzzy
+msgid "Repeat Key Pre_ferences..."
 msgstr "Klahvi kordamise häälestus"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
-msgid "Start mo_ving this long after keypress :"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
+#, fuzzy
+msgid "Start mo_ving this long after keypress:"
 msgstr "L_iigu, kui klahvivajutusest on möödunud :"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
 msgid "Testing Area"
 msgstr "Katsetamise koht"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
-msgid "Time to _accelerate to max speed :"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
+#, fuzzy
+msgid "Time to acce_lerate to max speed:"
 msgstr "Maksimaalse kiiruseni kiirendamise _aeg :"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
 msgid "Toggle and Repeat Keys"
 msgstr "Lülitavad ja kordavad klahvid"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
 msgid "Turn the numeric keypad into a mouse control pad."
 msgstr "Muuda numbriklaviatuur hiire juhtklahvideks."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
-msgid "_Beep when enabling/disabling keyboard accessibility features"
-msgstr ""
-
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
+#, fuzzy
+msgid "_Beep when modifier is pressed"
+msgstr "Tee _piiks muuteklahvi vajutamisel"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
 msgid "_Disable if unused for "
 msgstr "_Lülita välja kui kasutamata "
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
 msgid "_Enable keyboard accessibility"
 msgstr ""
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
-msgid "_Ignore keypresses within  :"
-msgstr "_Ignoreeri klahvivajutusi selle aja sees :"
-
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
-msgid "_Import CDE AccessX file"
+#, fuzzy
+msgid "_Import CDE AccessX file..."
 msgstr "_Impordi CDE AccessX fail"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
-msgid "_Only accept keypress after :"
+#, fuzzy
+msgid "_Only accept keypress after:"
 msgstr "_Aktsepteeri klahvivajutus peale :"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:28
@@ -833,7 +851,7 @@ msgid "Default action"
 msgstr "Vaiketegevus"
 
 #: capplets/file-types/file-types-properties.glade.h:7
-#: capplets/file-types/mime-edit-dialog.c:209
+#: capplets/file-types/mime-edit-dialog.c:208
 msgid "Edit file type"
 msgstr "Muuda failitüüpi"
 
@@ -922,7 +940,7 @@ msgid "Edit file category"
 msgstr "Muuda faili kategooriat"
 
 #: capplets/file-types/mime-category-edit-dialog.c:172
-#: capplets/file-types/mime-edit-dialog.c:256
+#: capplets/file-types/mime-edit-dialog.c:255
 #: capplets/file-types/service-edit-dialog.c:170
 #: capplets/file-types/service-edit-dialog.c:171
 msgid "Model"
@@ -941,52 +959,52 @@ msgid "Structure containing information on the MIME category"
 msgstr ""
 
 #: capplets/file-types/mime-category-edit-dialog.c:344
-#: capplets/file-types/mime-edit-dialog.c:490
-#: capplets/file-types/mime-edit-dialog.c:594
+#: capplets/file-types/mime-edit-dialog.c:488
+#: capplets/file-types/mime-edit-dialog.c:592
 #: capplets/file-types/service-edit-dialog.c:358
 #: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
 msgstr "Oma"
 
-#: capplets/file-types/mime-edit-dialog.c:206
+#: capplets/file-types/mime-edit-dialog.c:205
 msgid "Extension"
 msgstr "Laiendus"
 
-#: capplets/file-types/mime-edit-dialog.c:257
+#: capplets/file-types/mime-edit-dialog.c:256
 msgid "Underlying model to notify when Ok is clicked"
 msgstr ""
 
-#: capplets/file-types/mime-edit-dialog.c:264
+#: capplets/file-types/mime-edit-dialog.c:263
 msgid "MIME type information"
 msgstr "MIME tüübiinfo"
 
-#: capplets/file-types/mime-edit-dialog.c:265
+#: capplets/file-types/mime-edit-dialog.c:264
 msgid "Structure with data on the MIME type"
 msgstr ""
 
-#: capplets/file-types/mime-edit-dialog.c:271
+#: capplets/file-types/mime-edit-dialog.c:270
 msgid "Is add dialog"
 msgstr ""
 
-#: capplets/file-types/mime-edit-dialog.c:272
+#: capplets/file-types/mime-edit-dialog.c:271
 msgid "True if this dialog is for adding a MIME type"
 msgstr ""
 
-#: capplets/file-types/mime-edit-dialog.c:321
+#: capplets/file-types/mime-edit-dialog.c:320
 msgid "Add File Type"
 msgstr "Lisa failitüüp"
 
-#: capplets/file-types/mime-edit-dialog.c:435
+#: capplets/file-types/mime-edit-dialog.c:434
 #: capplets/file-types/mime-type-info.c:673
 msgid "Misc"
 msgstr ""
 
-#: capplets/file-types/mime-edit-dialog.c:485
-#: capplets/file-types/mime-edit-dialog.c:544
+#: capplets/file-types/mime-edit-dialog.c:483
+#: capplets/file-types/mime-edit-dialog.c:542
 msgid "None"
 msgstr "Ei ole"
 
-#: capplets/file-types/mime-edit-dialog.c:854
+#: capplets/file-types/mime-edit-dialog.c:852
 msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
@@ -994,15 +1012,15 @@ msgstr ""
 "Palun sisesta korrektne MIME tüüp.  See peaks olema kujul klass/tüüp ja ei "
 "või sisaldada tühikuid."
 
-#: capplets/file-types/mime-edit-dialog.c:861
+#: capplets/file-types/mime-edit-dialog.c:859
 msgid "A MIME type with that name already exists, overwrite ?."
 msgstr "Sellise nimega MIME tüüp on juba olemas, kas kirjutada üle?"
 
-#: capplets/file-types/mime-edit-dialog.c:926
+#: capplets/file-types/mime-edit-dialog.c:924
 msgid "Category"
 msgstr "Kategooria"
 
-#: capplets/file-types/mime-edit-dialog.c:931
+#: capplets/file-types/mime-edit-dialog.c:929
 msgid "Choose a file category"
 msgstr "Vali faili kategooria"
 
@@ -1231,60 +1249,69 @@ msgstr ""
 msgid "_Window title font:"
 msgstr ""
 
-#: capplets/keybindings/eggcellrendererkeys.c:159
 #: capplets/keybindings/eggcellrendererkeys.c:160
-msgid "Accelerator modifiers"
-msgstr "Kiirklahvide muuteklahvid"
-
-#: capplets/keybindings/eggcellrendererkeys.c:168
-#: capplets/keybindings/eggcellrendererkeys.c:169
+#: capplets/keybindings/eggcellrendererkeys.c:161
 msgid "Accelerator key"
 msgstr "Kiirklahv"
 
-#: capplets/keybindings/eggcellrendererkeys.c:207
-#: capplets/keybindings/gnome-keybinding-properties.c:179
+#: capplets/keybindings/eggcellrendererkeys.c:170
+#: capplets/keybindings/eggcellrendererkeys.c:171
+msgid "Accelerator modifiers"
+msgstr "Kiirklahvide muuteklahvid"
+
+#: capplets/keybindings/eggcellrendererkeys.c:180
+msgid "Accel Mode"
+msgstr ""
+
+#: capplets/keybindings/eggcellrendererkeys.c:181
+#, fuzzy
+msgid "The type of accelerator."
+msgstr "Sisesta uus kiirklahv"
+
+#: capplets/keybindings/eggcellrendererkeys.c:219
+#: capplets/keybindings/gnome-keybinding-properties.c:181
 #: libbackground/applier.c:588
 msgid "Disabled"
 msgstr "Välja lülitatud"
 
-#: capplets/keybindings/eggcellrendererkeys.c:318
-#: capplets/keybindings/eggcellrendererkeys.c:534
+#: capplets/keybindings/eggcellrendererkeys.c:330
+#: capplets/keybindings/eggcellrendererkeys.c:563
 msgid "Type a new accelerator, or press Backspace to clear"
 msgstr "Sisesta uus kiirklahv või vajuta Backspace kustutamiseks"
 
-#: capplets/keybindings/eggcellrendererkeys.c:537
+#: capplets/keybindings/eggcellrendererkeys.c:566
 #, fuzzy
 msgid "Type a new accelerator"
 msgstr "Sisesta uus kiirklahv"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:446
+#: capplets/keybindings/gnome-keybinding-properties.c:448
 msgid "<Unknown Action>"
 msgstr "<tundmatu tegevus>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:465
+#: capplets/keybindings/gnome-keybinding-properties.c:467
 msgid "Desktop"
 msgstr "Töölaud"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:469
+#: capplets/keybindings/gnome-keybinding-properties.c:471
 msgid "Window Management"
 msgstr "Akende haldus"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:566
+#: capplets/keybindings/gnome-keybinding-properties.c:568
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:717
+#: capplets/keybindings/gnome-keybinding-properties.c:719
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:739
+#: capplets/keybindings/gnome-keybinding-properties.c:741
 msgid "Action"
 msgstr "Tegevus"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:755
+#: capplets/keybindings/gnome-keybinding-properties.c:759
 msgid "Shortcut"
 msgstr "Kiirklahv"
 
@@ -1619,17 +1646,22 @@ msgid "Set your mouse preferences"
 msgstr "Hiire häälestus"
 
 #: capplets/network/gnome-network-preferences.desktop.in.h:1
-msgid "Network Proxy"
+#, fuzzy
+msgid "Network proxy"
 msgstr "Võrguproksi"
 
 #: capplets/network/gnome-network-preferences.desktop.in.h:2
-#: capplets/network/gnome-network-preferences.glade.h:3
-msgid "Network Proxy Preferences"
+#, fuzzy
+msgid "Network proxy preferences"
 msgstr "Võrguproksi häälestus"
 
 #: capplets/network/gnome-network-preferences.glade.h:2
 msgid "Network Preferences"
 msgstr "Võrgu häälestus"
+
+#: capplets/network/gnome-network-preferences.glade.h:3
+msgid "Network Proxy Preferences"
+msgstr "Võrguproksi häälestus"
 
 #: capplets/network/gnome-network-preferences.glade.h:4
 msgid "P_ort:"
@@ -1807,53 +1839,53 @@ msgid "C_ut"
 msgstr "_Oma:"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:4
-#, fuzzy
-msgid "Edit Menu"
-msgstr "Muuda"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:5
 msgid "Icons Only"
 msgstr "Ainult ikoonid"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:6
+#: capplets/ui-properties/gnome-ui-properties.glade.h:5
 msgid "Menu and Toolbar Preferences"
 msgstr "Menüü- ja tööriistaribade häälestus"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:7
+#: capplets/ui-properties/gnome-ui-properties.glade.h:6
 msgid "Menus"
 msgstr "Menüüd"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:8
+#: capplets/ui-properties/gnome-ui-properties.glade.h:7
 msgid "New File"
 msgstr "Uus fail"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:9
+#: capplets/ui-properties/gnome-ui-properties.glade.h:8
 msgid "Open File"
 msgstr "Ava fail"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:10
-msgid "Priority Text Beside Icons"
-msgstr "Tähtsam tekst ikoonide kõrval"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:11
+#: capplets/ui-properties/gnome-ui-properties.glade.h:9
 msgid "Sample menubar:"
 msgstr "Näidismenüüriba:"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:12
+#: capplets/ui-properties/gnome-ui-properties.glade.h:10
 msgid "Sample toolbar:"
 msgstr "Näidistööriistariba:"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:13
+#: capplets/ui-properties/gnome-ui-properties.glade.h:11
 msgid "Save File"
 msgstr "Salvesta fail"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:14
+#: capplets/ui-properties/gnome-ui-properties.glade.h:12
 msgid "Select the toolbar style."
 msgstr "Vali tööriistaribade laad."
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:15
+#: capplets/ui-properties/gnome-ui-properties.glade.h:13
+msgid "Show _icons in menus"
+msgstr ""
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:14
 msgid "Text Below Icons"
 msgstr "Tekst ikoonide all"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:15
+#, fuzzy
+msgid "Text Beside Icons"
+msgstr "Tähtsam tekst ikoonide kõrval"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:16
 msgid "Text Only"
@@ -1877,41 +1909,43 @@ msgid "_Copy"
 msgstr ""
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:21
-msgid "_Menu"
-msgstr "_Menüü"
+#, fuzzy
+msgid "_Edit"
+msgstr "_Muuda..."
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:22
+#: control-center/gnomecc-ui.xml.h:5
+msgid "_File"
+msgstr "_Fail"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:23
 #, fuzzy
 msgid "_New"
 msgstr "_Nimi"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:23
+#: capplets/ui-properties/gnome-ui-properties.glade.h:24
 #, fuzzy
 msgid "_Open"
 msgstr "Ava"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:24
+#: capplets/ui-properties/gnome-ui-properties.glade.h:25
 #, fuzzy
 msgid "_Paste"
 msgstr "kiirem"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:25
+#: capplets/ui-properties/gnome-ui-properties.glade.h:26
 msgid "_Print"
 msgstr ""
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:26
+#: capplets/ui-properties/gnome-ui-properties.glade.h:27
 #, fuzzy
 msgid "_Quit"
 msgstr "vaikne"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:27
+#: capplets/ui-properties/gnome-ui-properties.glade.h:28
 #, fuzzy
 msgid "_Save"
 msgstr "_Suurendatud"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:28
-msgid "_Show icons in menus"
-msgstr ""
 
 #: capplets/windows/gnome-window-properties.c:282
 #: capplets/windows/gnome-window-properties.glade.h:6
@@ -2002,10 +2036,6 @@ msgstr "_Info..."
 msgid "_Contents..."
 msgstr "_Sisukord..."
 
-#: control-center/gnomecc-ui.xml.h:5
-msgid "_File"
-msgstr "_Fail"
-
 #: control-center/gnomecc-ui.xml.h:6
 msgid "_Help"
 msgstr "_Abi"
@@ -2087,7 +2117,7 @@ msgstr "_Ära näita seda teadet uuesti"
 msgid "Couldn't load sound file %s as sample %s"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:166
+#: gnome-settings-daemon/gnome-settings-xsettings.c:170
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr ""
@@ -2157,15 +2187,15 @@ msgstr "Mängitav helifail"
 msgid "_Sounds"
 msgstr "_Helid"
 
-#: libsounds/sound-view.c:251
+#: libsounds/sound-view.c:252
 msgid "_Play"
 msgstr "_Mängi"
 
-#: libsounds/sound-view.c:257
+#: libsounds/sound-view.c:258
 msgid "Select sound file"
 msgstr "Vali helifail"
 
-#: libwindow-settings/gnome-wm-manager.c:168
+#: libwindow-settings/gnome-wm-manager.c:171
 #, c-format
 msgid ""
 "Starting %s\n"
@@ -2174,7 +2204,7 @@ msgstr ""
 "Käivitatakse %s\n"
 "(taimaut %d sekundi pärast)"
 
-#: libwindow-settings/gnome-wm-manager.c:322
+#: libwindow-settings/gnome-wm-manager.c:325
 msgid ""
 "wm-properties-capplet: Unable to initialize window manager.\n"
 "\tAnother window manager is already running and could not be killed\n"
@@ -2182,7 +2212,7 @@ msgstr ""
 "wm-properties-capplet: Ei saa aknahaldurit käivitada.\n"
 "\tTeine aknahaldur juba töötab ja seda ei olnud võimalik lõpetada\n"
 
-#: libwindow-settings/gnome-wm-manager.c:326
+#: libwindow-settings/gnome-wm-manager.c:329
 #, c-format
 msgid ""
 "wm-properties-capplet: Unable to initialize window manager.\n"
@@ -2191,11 +2221,11 @@ msgstr ""
 "wm-properties-capplet: Ei saa aknahaldurit käivitada.\n"
 "\t'%s' ei käivitunud\n"
 
-#: libwindow-settings/gnome-wm-manager.c:375
+#: libwindow-settings/gnome-wm-manager.c:378
 msgid "Previous window manager did not die\n"
 msgstr "Eelmine aknahaldur ei lõpetanud\n"
 
-#: libwindow-settings/gnome-wm-manager.c:408
+#: libwindow-settings/gnome-wm-manager.c:411
 #, c-format
 msgid ""
 "Could not start '%s'.\n"
@@ -2204,7 +2234,7 @@ msgstr ""
 "Ei saa '%s' käivitada.\n"
 "Kasutusele läheb eelmine aknahaldur '%s'\n"
 
-#: libwindow-settings/gnome-wm-manager.c:439
+#: libwindow-settings/gnome-wm-manager.c:442
 msgid ""
 "Could not start fallback window manager.\n"
 "Please run a window manager manually. You can\n"
@@ -2216,9 +2246,16 @@ msgstr ""
 "sa teha, valides \"Käivita programm\"\n"
 "\"jala\"-menüüst\n"
 
-#: libwindow-settings/gnome-wm-manager.c:464
+#: libwindow-settings/gnome-wm-manager.c:467
 msgid "OK"
 msgstr "Olgu"
+
+#, fuzzy
+#~ msgid "Edit Menu"
+#~ msgstr "Muuda"
+
+#~ msgid "_Menu"
+#~ msgstr "_Menüü"
 
 #~ msgid "Documents"
 #~ msgstr "Dokumendid"

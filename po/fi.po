@@ -21,7 +21,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 1.99.0\n"
-"POT-Creation-Date: 2002-09-14 14:49+0300\n"
+"POT-Creation-Date: 2002-10-01 14:18-0400\n"
 "PO-Revision-Date: 2002-09-14 13:31+0300\n"
 "Last-Translator: Pauli Virtanen <pauli.virtanen@hut.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -35,12 +35,13 @@ msgstr ""
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Näppäimistön hallintasovelman käynnistys epäonnistui: %s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:317
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:321
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:379
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Ei voinut tuoda AccessX-asetuksia tiedostosta \"%s\""
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:433
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:452
 msgid "Select CDE AccessX file"
 msgstr "Valitse CDE AccessX -tiedosto"
 
@@ -105,7 +106,8 @@ msgid "General"
 msgstr "Yleistä"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:11
-msgid "I_gnore keypresses within  :"
+#, fuzzy
+msgid "I_gnore keypresses within:"
 msgstr "_Sivuuta näppäilyt aikana:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
@@ -117,11 +119,13 @@ msgstr ""
 "säädettävän ajan kuluessa."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
-msgid "Keyboard Accessibility Configuration (AccessX)"
+#, fuzzy
+msgid "Keyboard Accessibility Preferences (AccessX)"
 msgstr "Näppäimistön esteettömyysasetukset (AccessX)"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
-msgid "Ma_ximum pointer speed :"
+#, fuzzy
+msgid "Ma_ximum pointer speed:"
 msgstr "S_uurin osoittimen nopeus:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
@@ -139,11 +143,13 @@ msgstr ""
 "muunnosnäppäimiä peräkkäin."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
-msgid "Repeat Key Pre_ferences"
+#, fuzzy
+msgid "Repeat Key Pre_ferences..."
 msgstr "Näppäimistön _toistoasetukset"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
-msgid "Start mo_ving this long after keypress :"
+#, fuzzy
+msgid "Start mo_ving this long after keypress:"
 msgstr "Aloita _liike, kun painalluksesta on kulunut:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
@@ -151,7 +157,8 @@ msgid "Testing Area"
 msgstr "Koealue"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
-msgid "Time to acce_lerate to max speed :"
+#, fuzzy
+msgid "Time to acce_lerate to max speed:"
 msgstr "_Suurimpaan nopeuteen kiihtymisaika:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
@@ -175,11 +182,13 @@ msgid "_Enable keyboard accessibility"
 msgstr "_Käytä esteetöntä näppäimistöä"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
-msgid "_Import CDE AccessX file"
+#, fuzzy
+msgid "_Import CDE AccessX file..."
 msgstr "_Tuo CDE AccessX -tiedosto"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
-msgid "_Only accept keypress after :"
+#, fuzzy
+msgid "_Only accept keypress after:"
 msgstr "_Hyväksy näppäimen painallus vasta kun on kulunut:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:28
@@ -1876,69 +1885,70 @@ msgid "Select the toolbar style."
 msgstr "Valitse työkalupalkin tyyli."
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:13
+#, fuzzy
+msgid "Show _icons in menus"
+msgstr "_Näytä kuvakkeet valikoissa"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:14
 msgid "Text Below Icons"
 msgstr "Teksti kuvakkeiden alla"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:14
+#: capplets/ui-properties/gnome-ui-properties.glade.h:15
 msgid "Text Beside Icons"
 msgstr "Teksti kuvakkeiden vierellä"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:15
+#: capplets/ui-properties/gnome-ui-properties.glade.h:16
 msgid "Text Only"
 msgstr "Pelkkä teksti"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:16
+#: capplets/ui-properties/gnome-ui-properties.glade.h:17
 msgid "Toolbar"
 msgstr "Työkalupalkki"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:17
+#: capplets/ui-properties/gnome-ui-properties.glade.h:18
 msgid "Toolbars can be _detached and moved around"
 msgstr "Työkalupalkkeja voi _irrottaa ja liikuttaa"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:18
+#: capplets/ui-properties/gnome-ui-properties.glade.h:19
 msgid "_Button Labels: "
 msgstr "_Painikkeiden nimiöt:"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:19
+#: capplets/ui-properties/gnome-ui-properties.glade.h:20
 msgid "_Copy"
 msgstr "_Kopioi"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:20
+#: capplets/ui-properties/gnome-ui-properties.glade.h:21
 msgid "_Edit"
 msgstr "_Muokkaa"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:21
+#: capplets/ui-properties/gnome-ui-properties.glade.h:22
 #: control-center/gnomecc-ui.xml.h:5
 msgid "_File"
 msgstr "_Tiedosto"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:22
+#: capplets/ui-properties/gnome-ui-properties.glade.h:23
 msgid "_New"
 msgstr "_Uusi"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:23
+#: capplets/ui-properties/gnome-ui-properties.glade.h:24
 msgid "_Open"
 msgstr "_Avaa"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:24
+#: capplets/ui-properties/gnome-ui-properties.glade.h:25
 msgid "_Paste"
 msgstr "L_iitä"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:25
+#: capplets/ui-properties/gnome-ui-properties.glade.h:26
 msgid "_Print"
 msgstr "Tul_osta"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:26
+#: capplets/ui-properties/gnome-ui-properties.glade.h:27
 msgid "_Quit"
 msgstr "_Lopeta"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:27
+#: capplets/ui-properties/gnome-ui-properties.glade.h:28
 msgid "_Save"
 msgstr "_Tallenna"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:28
-msgid "_Show icons in menus"
-msgstr "_Näytä kuvakkeet valikoissa"
 
 #: capplets/windows/gnome-window-properties.c:282
 #: capplets/windows/gnome-window-properties.glade.h:6
@@ -2110,7 +2120,7 @@ msgstr "_Älä näytä tätä viestiä uudestaan"
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Ei voinut ladata äänitiedostoa %s ääneksi %s"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:166
+#: gnome-settings-daemon/gnome-settings-xsettings.c:170
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "GConf-avain %s on tyyppiä %s, vaikka ohjelma odotti tyyppiä %s\n"
@@ -2242,4 +2252,3 @@ msgstr ""
 #: libwindow-settings/gnome-wm-manager.c:467
 msgid "OK"
 msgstr "OK"
-
