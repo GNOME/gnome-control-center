@@ -37,7 +37,20 @@ desktopdir = $(GNOMECC_DESKTOP_DIR)
 Desktop_in_files = mouse.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
+IMAGES = double-click-maybe.png double-click-off.png double-click-on.png
+
+VARIABLES=mouse_dblclck_maybe_data $(srcdir)/double-click-maybe.png \
+	mouse_dblclck_on_data $(srcdir)/double-click-on.png \
+	mouse_dblclck_off_data $(srcdir)/double-click-off.png
+
+BUILT_SOURCES = inlinepixbufs.h
+CLEANFILES = inlinepixbufs.h
+
+inlinepixbufs.h: $(IMAGES)
+	$(GDK_PIXBUF_CSOURCE) --raw --build-list $(VARIABLES) >$(srcdir)/inlinepixbufs.h
+
+$(OBJECTS): inlinepixbufs.h
+
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
-EXTRA_DIST = $(Glade_DATA) $(icons_DATA) $(Desktop_in_files) $(pixmap_DATA) $(cursorfont_DATA)
-
+EXTRA_DIST = $(Glade_DATA) $(icons_DATA) $(Desktop_in_files) $(pixmap_DATA) $(cursorfont_DATA) $(IMAGES)

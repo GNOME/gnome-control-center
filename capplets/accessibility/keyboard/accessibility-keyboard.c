@@ -45,28 +45,32 @@ static struct {
 	char const * const image_file;
 	char const * const gconf_key;
 	char const * const content [3];
+	gboolean always_enabled;
 } const features [] = {
+	{ "repeatkeys_enable", "repeatkeys_image", IDIR "keyboard-repeat.png",
+		"/desktop/gnome/peripherals/keyboard/repeat",
+		{ "repeatkeys_table", NULL, NULL }, TRUE },
 	{ "bouncekeys_enable", "bouncekeys_image", IDIR "accessibility-keyboard-bouncekey.png",
 		CONFIG_ROOT "/bouncekeys_enable",
-		{ "bouncekey_table", NULL, NULL } },
+		{ "bouncekey_table", NULL, NULL }, FALSE },
 	{ "slowkeys_enable", "slowkeys_image", IDIR "accessibility-keyboard-slowkey.png",
 		CONFIG_ROOT "/slowkeys_enable",
-		{ "slowkeys_table", NULL, NULL } },
+		{ "slowkeys_table", NULL, NULL }, FALSE },
 	{ "mousekeys_enable", "mousekeys_image", IDIR "accessibility-keyboard-mousekey.png",
 		CONFIG_ROOT "/mousekeys_enable",
-		{ "mousekeys_table", NULL, NULL } },
+		{ "mousekeys_table", NULL, NULL }, FALSE },
 	{ "stickykeys_enable", "stickykeys_image", IDIR "accessibility-keyboard-stickykey.png",
 		CONFIG_ROOT "/stickykeys_enable",
-		{ "stickeykeys_table", NULL, NULL } },
+		{ "stickeykeys_table", NULL, NULL }, FALSE },
 	{ "togglekeys_enable", "togglekeys_image", IDIR "accessibility-keyboard-togglekey.png",
 		CONFIG_ROOT "/togglekeys_enable",
-		{ NULL, NULL, NULL } },
+		{ NULL, NULL, NULL }, FALSE },
 	{ "timeout_enable", NULL, NULL,
 		CONFIG_ROOT "/timeout_enable",
-		{ "timeout_slide", "timeout_spin", "timeout_label" } },
+		{ "timeout_slide", "timeout_spin", "timeout_label" }, FALSE },
 	{ "feature_state_change_beep", NULL, NULL,
 		CONFIG_ROOT "/feature_state_change_beep",
-		{ NULL, NULL, NULL } }
+		{ NULL, NULL, NULL }, FALSE }
 };
 
 static struct {
@@ -78,6 +82,10 @@ static struct {
 	int step_size;
 	char const * const gconf_key;
 } const ranges [] = {
+	{ "repeatkeys_delay_slide",	"repeatkeys_delay_spin",     500, 100, 1500,   10,
+	  "/desktop/gnome/peripherals/keyboard/delay" },
+	{ "repeatkeys_rate_slide",	"repeatkeys_rate_spin",      90,   10,  210,   10,
+	  "/desktop/gnome/peripherals/keyboard/rate" },
 	{ "bouncekeys_delay_slide",	"bouncekeys_delay_spin",     300,  10,  900,   10,
 	  CONFIG_ROOT "/bouncekeys_delay" },
 	{ "slowkeys_delay_slide",	"slowkeys_delay_spin",	     300,  10,  500,   10,
@@ -221,12 +229,12 @@ setup_images (GladeXML *dialog)
 }
 
 static void
-cb_launch_keyboard_capplet (GtkButton *button, GtkWidget *dialog)
+cb_launch_mouse_capplet (GtkButton *button, GtkWidget *dialog)
 {
 	GError *err = NULL;
-	if (!g_spawn_command_line_async ("gnome-keyboard-properties", &err))
+	if (!g_spawn_command_line_async ("gnome-mouse-properties", &err))
 		capplet_error_dialog (GTK_WINDOW (gtk_widget_get_toplevel (dialog)),
-			_("There was an error launching the keyboard capplet : %s"),
+			_("There was an error launching the mouse preferences dialog: %s"),
 			err);
 }
 
@@ -238,9 +246,11 @@ cb_master_enable_toggle (GtkToggleButton *btn, GladeXML *dialog)
 	GtkWidget *w;
 
 	while (i-- > 0) {
-		w = WID (features [i].checkbox);
-		gtk_widget_set_sensitive (w, flag);
-		cb_feature_toggled (GTK_TOGGLE_BUTTON (w), GINT_TO_POINTER (i));
+		if (!features [i].always_enabled) {
+			w = WID (features [i].checkbox);
+			gtk_widget_set_sensitive (w, flag);
+			cb_feature_toggled (GTK_TOGGLE_BUTTON (w), GINT_TO_POINTER (i));
+		}
 	}
 }
 
@@ -493,9 +503,9 @@ setup_accessX_dialog (GConfChangeSet *changeset)
 	g_signal_connect (G_OBJECT (WID ("load_CDE_file")),
 		"clicked",
 		G_CALLBACK (cb_load_CDE_file), toplevel);
-	g_signal_connect (G_OBJECT (WID ("launch_keyboard_capplet")),
+	g_signal_connect (G_OBJECT (WID ("launch_mouse_capplet")),
 		"clicked",
-		G_CALLBACK (cb_launch_keyboard_capplet), toplevel);
+		G_CALLBACK (cb_launch_mouse_capplet), toplevel);
 
 	return toplevel;
 }

@@ -21,7 +21,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 1.99.0\n"
-"POT-Creation-Date: 2002-10-21 12:31-0400\n"
+"POT-Creation-Date: 2002-11-02 13:45-0500\n"
 "PO-Revision-Date: 2002-10-02 22:27+0300\n"
 "Last-Translator: Pauli Virtanen <pauli.virtanen@hut.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -29,19 +29,18 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:229
-#: capplets/keyboard/gnome-keyboard-properties.c:160
-#, c-format
-msgid "There was an error launching the keyboard capplet : %s"
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:237
+#, fuzzy, c-format
+msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr "Näppäimistön hallintasovelman käynnistys epäonnistui: %s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:321
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:379
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:331
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:389
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "AccessX-asetusten tuonti tiedostosta \"%s\" epäonnistui"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:452
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:462
 msgid "Select CDE AccessX file"
 msgstr "Valitse CDE AccessX -tiedosto"
 
@@ -64,53 +63,89 @@ msgstr ""
 "esteettömyysominaisuudet eivät toimi ilman sitä."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
-msgid "Beep when an LED is turned on and two beeps when one is turned off."
-msgstr "Piippaa kerran kun näppäimistön valo syttyy ja kahdesti kun sammuu."
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:1
+#: capplets/file-types/file-types-properties.glade.h:1
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
+#: capplets/network/gnome-network-preferences.glade.h:2
+#: capplets/theme-switcher/theme-install.glade.h:1
+msgid "*"
+msgstr "*"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
-msgid "Beep when enabling/disabling _keyboard accessibility features"
+msgid "Basic"
 msgstr ""
-"_Piippaa, kun näppäimistön esteettömyysominaisuudet otetaan tai poistetaan "
-"käytöstä"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
-msgid "Beep when key is re_jected"
+#, fuzzy
+msgid "Beep if key is re_jected"
 msgstr "Piippaa kun painallus h_ylätään"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
-msgid "Beep when:"
-msgstr "Piippaa kun:"
+#, fuzzy
+msgid "Beep when _modifier is pressed"
+msgstr "P_iippaa, kun muunnosnäppäin on painettu"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
+msgid "Beep when a _feature is turned on or off"
+msgstr ""
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
+msgid "Beep when an LED is turned on and two beeps when one is turned off."
+msgstr "Piippaa kerran kun näppäimistön valo syttyy ja kahdesti kun sammuu."
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
+#, fuzzy
+msgid "Beep when key is:"
+msgstr "Piippaa kun painallus h_ylätään"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
+#, fuzzy
+msgid "Del_ay:"
+msgstr "_Viive:"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
+msgid "Delay between keypress and pointer mo_vement:"
+msgstr ""
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
+msgid "Disa_ble if two keys pressed together"
+msgstr ""
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:11
 msgid "E_nable Toggle Keys"
 msgstr "Käytä _vipunäppäimiä"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
 msgid "Enable Bo_unce Keys"
 msgstr "Käytä _kimmonäppäimiä"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
 msgid "Enable Slo_w Keys"
 msgstr "Käytä _hitaita näppäimiä"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
 msgid "Enable _Mouse Keys"
 msgstr "Käytä _hiirinäppäimiä"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
 msgid "Enable _Sticky Keys"
 msgstr "Käytä _tarttuvia näppäimiä"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
-#: capplets/sound/sound-properties.glade.h:2
-msgid "General"
-msgstr "Yleistä"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
+msgid "Features"
+msgstr ""
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:11
-msgid "I_gnore keypresses within:"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
+#, fuzzy
+msgid "Filters"
+msgstr "_Tiedosto"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
+#, fuzzy
+msgid "I_gnore duplicate keypresses within:"
 msgstr "_Sivuuta näppäilyt aikana:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
 msgid ""
 "Ignore all subsequent presses of the SAME key if they happen within a user "
 "selectable period of time."
@@ -118,21 +153,31 @@ msgstr ""
 "Sivuuta kaikki peräkkäiset saman näppäimen painallukset, jotka tapahtuvat "
 "säädettävän ajan kuluessa."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
 msgid "Keyboard Accessibility Preferences (AccessX)"
 msgstr "Näppäimistön esteettömyysasetukset (AccessX)"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
 msgid "Ma_ximum pointer speed:"
 msgstr "S_uurin osoittimen nopeus:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
+#: capplets/mouse/mouse.desktop.in.h:1
+msgid "Mouse"
+msgstr "Hiiri"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
+#, fuzzy
+msgid "Mouse _Preferences..."
+msgstr "Hiiriasetukset"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
 msgid ""
 "Only accept keys after they have been pressed and held for a user adjustable "
 "amount of time."
 msgstr "Hyväksy vain määritellyn ajan pohjassa olleet näppäinten painallukset"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
 msgid ""
 "Perform multiple simultaneous key press operations by pressing modifier keys "
 "in sequence."
@@ -140,79 +185,83 @@ msgstr ""
 "Jäljittele monen näppäimen painamista samaan aikaan näppäilemällä "
 "muunnosnäppäimiä peräkkäin."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
-msgid "Repeat Key Pre_ferences..."
-msgstr "Näppäimistön _toistoasetukset"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+msgid "S_peed:"
+msgstr "_Nopeus:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
-msgid "Start mo_ving this long after keypress:"
-msgstr "Aloita _liike, kun painalluksesta on kulunut:"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
-msgid "Testing Area"
-msgstr "Koealue"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
-msgid "Time to acce_lerate to max speed:"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
+#, fuzzy
+msgid "Time to acce_lerate to maximum speed:"
 msgstr "_Suurimpaan nopeuteen kiihtymisaika:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
-msgid "Toggle and Repeat Keys"
-msgstr "Toisto ja vipunäppäimet"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:28
+#, fuzzy
+msgid "Toggle Keys"
+msgstr "Käytä _vipunäppäimiä"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
 msgid "Turn the numeric keypad into a mouse control pad."
 msgstr "Tee numeronäppäimistöstä hiiren ohjauspainikkeet."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
-msgid "_Beep when modifier is pressed"
-msgstr "P_iippaa, kun muunnosnäppäin on painettu"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
-msgid "_Disable if unused for "
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
+#, fuzzy
+msgid "_Disable if unused for:"
 msgstr "_Poista käytöstä jos käyttämättömänä "
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
-msgid "_Enable keyboard accessibility"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
+#, fuzzy
+msgid "_Enable keyboard accessibility features"
 msgstr "_Käytä esteetöntä näppäimistöä"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
-msgid "_Import CDE AccessX file..."
-msgstr "_Tuo CDE AccessX -tiedosto"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
-msgid "_Only accept keypress after:"
-msgstr "_Hyväksy näppäimen painallus kun on kulunut:"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:28
-msgid ""
-"_Turn off Sticky Keys when\n"
-"two keys pressed simultaneously"
-msgstr ""
-"_Poista tarttuvat näppäimet käytöstä\n"
-"kun kahta näppäintä painetaan samalla"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
-msgid "key is _accepted"
-msgstr "näppäin on _hyväksytty"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
-msgid "key is _pressed"
-msgstr "näppäin on _painettu"
-
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
-msgid "key is _rejected"
-msgstr "näppäin on h_ylätty"
+msgid "_Import Feature Settings..."
+msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
-msgid "msecs"
-msgstr "ms"
+#, fuzzy
+msgid "_Only accept keys held for:"
+msgstr "_Hyväksy näppäimen painallus kun on kulunut:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
-msgid "pixels/sec"
-msgstr "kuvapistettä/s"
+#, fuzzy
+msgid "_Repeat Keys"
+msgstr "Näppäinten toisto"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:35
+msgid "_Type to test settings:"
+msgstr ""
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
+#, fuzzy
+msgid "_accepted"
+msgstr "näppäin on _hyväksytty"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:37
+#, fuzzy
+msgid "_pressed"
+msgstr "näppäin on _painettu"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:38
+#, fuzzy
+msgid "_rejected"
+msgstr "näppäin on h_ylätty"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:39
+msgid "characters/second"
+msgstr ""
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:40
+#, fuzzy
+msgid "milliseconds"
+msgstr "sekuntia"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:41
+#, fuzzy
+msgid "pixels/second"
+msgstr "kuvapistettä/s"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:42
 msgid "seconds"
 msgstr "sekuntia"
 
@@ -267,7 +316,7 @@ msgstr "Valitse _kuva:"
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
 #: capplets/keyboard/gnome-keyboard-properties.c:294
-#: capplets/mouse/gnome-mouse-properties.c:752
+#: capplets/mouse/gnome-mouse-properties.c:751
 #: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
 msgstr "Hae ja tallenna aikaisempien versioiden asetukset"
@@ -556,14 +605,6 @@ msgstr "Valitse oletusohjelmasi"
 msgid "Please specify a name and a command for this editor."
 msgstr "Anna tämän editorin nimi ja komento."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:1
-#: capplets/file-types/file-types-properties.glade.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
-#: capplets/network/gnome-network-preferences.glade.h:1
-#: capplets/theme-switcher/theme-install.glade.h:1
-msgid "*"
-msgstr "*"
-
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:2
 msgid "Acce_pts URLs"
 msgstr "_Hyväksyy URL:eja"
@@ -770,6 +811,7 @@ msgid "Minimizing and Maximizing"
 msgstr "Pienennys ja suurennus"
 
 #: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
+#: capplets/windows/gnome-window-properties.c:600
 msgid "Meta"
 msgstr "Asetusohjelma"
 
@@ -1309,12 +1351,17 @@ msgstr "Työpöytä"
 msgid "Window Management"
 msgstr "Ikkunointi"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:568
+#: capplets/keybindings/gnome-keybinding-properties.c:593
+#, c-format
+msgid "That accelerator key is already in use by: %s\n"
+msgstr ""
+
+#: capplets/keybindings/gnome-keybinding-properties.c:620
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Virhe asettaessa uutta pikanäppäintä asetustietokantaan: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:719
+#: capplets/keybindings/gnome-keybinding-properties.c:771
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1322,11 +1369,11 @@ msgstr ""
 "Ei löytänyt näppäimistöteemoja. Tämä merkitsee, että GTK+ on asennettu "
 "puutteellisesti."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:741
+#: capplets/keybindings/gnome-keybinding-properties.c:793
 msgid "Action"
 msgstr "Toiminto"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:759
+#: capplets/keybindings/gnome-keybinding-properties.c:811
 msgid "Shortcut"
 msgstr "Pikanäppäin"
 
@@ -1350,6 +1397,11 @@ msgstr "Pikanäppäimet _tekstin muokkaamiseksi"
 #: capplets/keybindings/keybinding.desktop.in.h:1
 msgid "Assign shortcut keys to commands"
 msgstr "Liitä pikanäppäimiä komentoihin"
+
+#: capplets/keyboard/gnome-keyboard-properties.c:160
+#, c-format
+msgid "There was an error launching the keyboard capplet : %s"
+msgstr "Näppäimistön hallintasovelman käynnistys epäonnistui: %s"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:273
 msgid "_Accessibility"
@@ -1417,10 +1469,6 @@ msgstr "Ääni näppäintä painettaessa"
 msgid "Repeat Keys"
 msgstr "Näppäinten toisto"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
-msgid "S_peed:"
-msgstr "_Nopeus:"
-
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid "_Accessibility..."
 msgstr "_Esteettömyys..."
@@ -1457,7 +1505,7 @@ msgstr "hiljainen"
 msgid "Set your keyboard preferences"
 msgstr "Muuta näppäimistöasetuksia"
 
-#: capplets/mouse/gnome-mouse-properties.c:477
+#: capplets/mouse/gnome-mouse-properties.c:476
 #, c-format
 msgid ""
 "<b>Unknown Cursor</b>\n"
@@ -1466,7 +1514,7 @@ msgstr ""
 "<b>Tuntematon osoitin</b>\n"
 "%s"
 
-#: capplets/mouse/gnome-mouse-properties.c:578
+#: capplets/mouse/gnome-mouse-properties.c:577
 msgid ""
 "<b>Default Cursor - Current</b>\n"
 "The default cursor that ships with X"
@@ -1474,7 +1522,7 @@ msgstr ""
 "<b>Oletusosoitin - nykyinen</b>\n"
 "X:n mukana tuleva oletusosoitin"
 
-#: capplets/mouse/gnome-mouse-properties.c:581
+#: capplets/mouse/gnome-mouse-properties.c:580
 msgid ""
 "<b>Default Cursor</b>\n"
 "The default cursor that ships with X"
@@ -1482,7 +1530,7 @@ msgstr ""
 "<b>Oletusosoitin</b>\n"
 "X:n mukana tuleva oletusosoitin"
 
-#: capplets/mouse/gnome-mouse-properties.c:599
+#: capplets/mouse/gnome-mouse-properties.c:598
 msgid ""
 "<b>White Cursor - Current</b>\n"
 "The default cursor inverted"
@@ -1490,7 +1538,7 @@ msgstr ""
 "<b>Valkoinen osoitin - nykyinen</b>\n"
 "Oletusosoitin käänteisin värein"
 
-#: capplets/mouse/gnome-mouse-properties.c:602
+#: capplets/mouse/gnome-mouse-properties.c:601
 msgid ""
 "<b>White Cursor</b>\n"
 "The default cursor inverted"
@@ -1498,7 +1546,7 @@ msgstr ""
 "<b>Valkoinen osoitin</b>\n"
 "Oletusosoitin käänteisin värein"
 
-#: capplets/mouse/gnome-mouse-properties.c:620
+#: capplets/mouse/gnome-mouse-properties.c:619
 msgid ""
 "<b>Large Cursor - Current</b>\n"
 "Large version of normal cursor"
@@ -1506,7 +1554,7 @@ msgstr ""
 "<b>Suuri osoitin - nykyinen</b>\n"
 "Suuri versio tavallisesta osoittimesta"
 
-#: capplets/mouse/gnome-mouse-properties.c:623
+#: capplets/mouse/gnome-mouse-properties.c:622
 msgid ""
 "<b>Large Cursor</b>\n"
 "Large version of normal cursor"
@@ -1514,7 +1562,7 @@ msgstr ""
 "<b>Suuri osoitin</b>\n"
 "Suuri versio tavallisesta osoittimesta"
 
-#: capplets/mouse/gnome-mouse-properties.c:641
+#: capplets/mouse/gnome-mouse-properties.c:640
 msgid ""
 "<b>Large White Cursor - Current</b>\n"
 "Large version of white cursor"
@@ -1522,7 +1570,7 @@ msgstr ""
 "<b>Suuri valkoinen osoitin - nykyinen</b>\n"
 "Suuri versio valkoisesta osoittimesta"
 
-#: capplets/mouse/gnome-mouse-properties.c:644
+#: capplets/mouse/gnome-mouse-properties.c:643
 msgid ""
 "<b>Large White Cursor</b>\n"
 "Large version of white cursor"
@@ -1657,10 +1705,6 @@ msgstr "_Näytä osoittimen sijainti control-näppäintä painettaessa"
 msgid "_Threshold:"
 msgstr "_Kynnys:"
 
-#: capplets/mouse/mouse.desktop.in.h:1
-msgid "Mouse"
-msgstr "Hiiri"
-
 #: capplets/mouse/mouse.desktop.in.h:2
 msgid "Set your mouse preferences"
 msgstr "Muuta hiiriasetuksia"
@@ -1673,37 +1717,77 @@ msgstr "Välipalvelin"
 msgid "Network proxy preferences"
 msgstr "Välipalvelinasetukset"
 
-#: capplets/network/gnome-network-preferences.glade.h:2
-msgid "Network Preferences"
-msgstr "Verkkoasetukset"
+#: capplets/network/gnome-network-preferences.glade.h:1
+msgid "      "
+msgstr ""
 
 #: capplets/network/gnome-network-preferences.glade.h:3
-msgid "Network Proxy Preferences"
-msgstr "Välipalvelinasetukset"
+msgid "<b>_Automatic proxy configuration</b>"
+msgstr ""
 
 #: capplets/network/gnome-network-preferences.glade.h:4
-msgid "P_ort:"
-msgstr "P_ortti:"
+msgid "<b>_Direct internet connection</b>"
+msgstr ""
 
 #: capplets/network/gnome-network-preferences.glade.h:5
-msgid "Pass_word:"
-msgstr "_Salasana:"
+msgid "<b>_Manual proxy configuration</b>"
+msgstr ""
 
 #: capplets/network/gnome-network-preferences.glade.h:6
-msgid "Pro_xy requires username and password"
-msgstr "_Välipalvelin vaatii tunnuksen ja salasanan"
+msgid "<b>_Use authentication</b>"
+msgstr ""
 
 #: capplets/network/gnome-network-preferences.glade.h:7
-msgid "User_name:"
-msgstr "_Tunnus:"
+msgid "Autoconfiguration _URL:"
+msgstr ""
 
 #: capplets/network/gnome-network-preferences.glade.h:8
-msgid "_Location:"
-msgstr "Si_jainti:"
+msgid "HTTP Proxy Details"
+msgstr ""
 
 #: capplets/network/gnome-network-preferences.glade.h:9
-msgid "_Use HTTP proxy"
+#, fuzzy
+msgid "Network Proxy Configuration"
+msgstr "Välipalvelinasetukset"
+
+#: capplets/network/gnome-network-preferences.glade.h:10
+#, fuzzy
+msgid "Port:"
+msgstr "P_ortti:"
+
+#: capplets/network/gnome-network-preferences.glade.h:11
+msgid "S_ocks host:"
+msgstr ""
+
+#: capplets/network/gnome-network-preferences.glade.h:12
+#, fuzzy
+msgid "_Details"
+msgstr "_Lisätiedot..."
+
+#: capplets/network/gnome-network-preferences.glade.h:13
+#, fuzzy
+msgid "_FTP proxy:"
 msgstr "_Käytä HTTP-välipalvelinta"
+
+#: capplets/network/gnome-network-preferences.glade.h:14
+#, fuzzy
+msgid "_HTTP proxy:"
+msgstr "_Käytä HTTP-välipalvelinta"
+
+#: capplets/network/gnome-network-preferences.glade.h:15
+#, fuzzy
+msgid "_Password:"
+msgstr "_Salasana:"
+
+#: capplets/network/gnome-network-preferences.glade.h:16
+#, fuzzy
+msgid "_Secure HTTP proxy:"
+msgstr "_Käytä HTTP-välipalvelinta"
+
+#: capplets/network/gnome-network-preferences.glade.h:17
+#, fuzzy
+msgid "_Username:"
+msgstr "_Tunnus:"
 
 #: capplets/sound/sound-properties-capplet.c:180
 msgid "Sound preferences"
@@ -1712,6 +1796,10 @@ msgstr "Ääniasetukset"
 #: capplets/sound/sound-properties.glade.h:1
 msgid "E_nable sound server startup"
 msgstr "_Ota äänipalvelin käyttöön käynnistyessä"
+
+#: capplets/sound/sound-properties.glade.h:2
+msgid "General"
+msgstr "Yleistä"
 
 #: capplets/sound/sound-properties.glade.h:3
 #, fuzzy
@@ -1784,30 +1872,48 @@ msgid "Select themes for various parts of the desktop"
 msgstr "Valitse työpöydän eri osien teemat"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
+#: capplets/theme-switcher/theme-properties.glade.h:6
 msgid "Theme"
 msgstr "Teema"
 
 #: capplets/theme-switcher/theme-properties.glade.h:1
+#, fuzzy
+msgid "Apply _Background"
+msgstr "Tausta"
+
+#: capplets/theme-switcher/theme-properties.glade.h:2
+#, fuzzy
+msgid "Apply _Font"
+msgstr "Totetuta nyt"
+
+#: capplets/theme-switcher/theme-properties.glade.h:3
+#, fuzzy
+msgid "Controls"
+msgstr "Käyttöliittymäsäädin"
+
+#: capplets/theme-switcher/theme-properties.glade.h:4
+#, fuzzy
+msgid "Icons"
+msgstr "Vain kuvakkeet"
+
+#: capplets/theme-switcher/theme-properties.glade.h:5
 msgid "New themes can also be installed by dragging them into the window."
 msgstr "Uusia teemoja voi asentaa myös pudottamalla ne tähän ikkunaan."
 
-#: capplets/theme-switcher/theme-properties.glade.h:2
+#: capplets/theme-switcher/theme-properties.glade.h:7
 msgid "Theme Preferences"
 msgstr "Teema-asetukset"
 
-#: capplets/theme-switcher/theme-properties.glade.h:3
-msgid "Widget Theme"
-msgstr "Säätimien teema"
-
-#: capplets/theme-switcher/theme-properties.glade.h:4
-msgid "Window Border Theme"
+#: capplets/theme-switcher/theme-properties.glade.h:8
+#, fuzzy
+msgid "Window Border"
 msgstr "Ikkunan reunojen teema"
 
-#: capplets/theme-switcher/theme-properties.glade.h:5
+#: capplets/theme-switcher/theme-properties.glade.h:9
 msgid "_Go to theme folder"
 msgstr "_Siirry teemahakemistoon"
 
-#: capplets/theme-switcher/theme-properties.glade.h:6
+#: capplets/theme-switcher/theme-properties.glade.h:10
 msgid "_Install New Theme..."
 msgstr "_Asenna uusi teema..."
 
@@ -1952,30 +2058,58 @@ msgstr "_Lopeta"
 msgid "_Save"
 msgstr "_Tallenna"
 
-#: capplets/windows/gnome-window-properties.c:282
-#: capplets/windows/gnome-window-properties.glade.h:6
+#: capplets/windows/gnome-window-properties.c:352
+#, c-format
+msgid ""
+"<b>Cannot start the preferences application for your window manager</b>\n"
+"\n"
+"%s"
+msgstr ""
+
+#: capplets/windows/gnome-window-properties.c:575
+#, fuzzy
+msgid "Control"
+msgstr "Käyttöliittymäsäädin"
+
+#: capplets/windows/gnome-window-properties.c:580
+msgid "Alt"
+msgstr ""
+
+#: capplets/windows/gnome-window-properties.c:586
+#, fuzzy
+msgid "Hyper"
+msgstr "Tyyppi"
+
+#: capplets/windows/gnome-window-properties.c:593
+#, fuzzy
+msgid "Super"
+msgstr "Nopeus"
+
+#: capplets/windows/gnome-window-properties.glade.h:1
+msgid "To _move windows, click while holding down:"
+msgstr ""
+
+#: capplets/windows/gnome-window-properties.glade.h:2
 msgid "Window Preferences"
 msgstr "Ikkuna-asetukset"
 
-#: capplets/windows/gnome-window-properties.glade.h:1
-msgid "Apply Now"
-msgstr "Totetuta nyt"
-
-#: capplets/windows/gnome-window-properties.glade.h:2
-msgid "Select windows when the mouse moves over them"
-msgstr "Valitse ikkunat kun hiiri liikkuu niiden päälle"
-
 #: capplets/windows/gnome-window-properties.glade.h:3
-msgid "Titlebar Font"
-msgstr "Otsikkopalkin kirjasin"
+#, fuzzy
+msgid "_Double-click window titles to:"
+msgstr "_Ikkunoiden otsikon kirjasin:"
 
 #: capplets/windows/gnome-window-properties.glade.h:4
-msgid "Window Border Appearance"
-msgstr "Ikkunan reunan ulkonäkö"
+msgid "_Raise selected windows after a short time"
+msgstr ""
 
 #: capplets/windows/gnome-window-properties.glade.h:5
-msgid "Window Manager:"
-msgstr "Ikkunointiohjelma:"
+#, fuzzy
+msgid "_Select windows when the mouse moves over them"
+msgstr "Valitse ikkunat kun hiiri liikkuu niiden päälle"
+
+#: capplets/windows/gnome-window-properties.glade.h:6
+msgid "_Tenths of a second before raising the window:"
+msgstr ""
 
 #: capplets/windows/window-properties.desktop.in.h:1
 msgid "Window Properties"
@@ -2122,7 +2256,7 @@ msgstr "_Älä näytä tätä viestiä uudestaan"
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Ei voinut ladata äänitiedostoa %s ääneksi %s"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:170
+#: gnome-settings-daemon/gnome-settings-xsettings.c:172
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "GConf-avain %s on tyyppiä %s, vaikka ohjelma odotti tyyppiä %s\n"
@@ -2202,58 +2336,107 @@ msgstr "_Soita"
 msgid "Select sound file"
 msgstr "Valitse äänitiedosto"
 
-#: libwindow-settings/gnome-wm-manager.c:171
+#: libwindow-settings/gnome-wm-manager.c:320
 #, c-format
-msgid ""
-"Starting %s\n"
-"(%d seconds left before operation times out)"
+msgid "Window manager \"%s\" has not registered a configuration tool\n"
 msgstr ""
-"%s käynnistyy\n"
-"(%d sekuntia jäljellä ennen aikarajaa)"
 
-#: libwindow-settings/gnome-wm-manager.c:325
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\tAnother window manager is already running and could not be killed\n"
-msgstr ""
-"wm-properties-capplet: Ei voinut käynnistää ikkunointiohjelmaa.\n"
-"\tToinen ikkunointiohjelma on jo käynnissä eikä sitä voinut sulkea.\n"
+#~ msgid "Beep when enabling/disabling _keyboard accessibility features"
+#~ msgstr ""
+#~ "_Piippaa, kun näppäimistön esteettömyysominaisuudet otetaan tai "
+#~ "poistetaan käytöstä"
 
-#: libwindow-settings/gnome-wm-manager.c:329
-#, c-format
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\t'%s' didn't start\n"
-msgstr ""
-"wm-properties-capplet: Ei voinut käynnistää ikkunointiohjelmaa \"%s\".\n"
+#~ msgid "Beep when:"
+#~ msgstr "Piippaa kun:"
 
-#: libwindow-settings/gnome-wm-manager.c:378
-msgid "Previous window manager did not die\n"
-msgstr "Edellinen ikkunointiohjelma ei sulkeutunut.\n"
+#~ msgid "Repeat Key Pre_ferences..."
+#~ msgstr "Näppäimistön _toistoasetukset"
 
-#: libwindow-settings/gnome-wm-manager.c:411
-#, c-format
-msgid ""
-"Could not start '%s'.\n"
-"Falling back to previous window manager '%s'\n"
-msgstr ""
-"Ei voinut käynnistää ohjelmaa \"%s\".\n"
-"Palaa edelliseen ikkunointiohjelmaan \"%s\".\n"
+#~ msgid "Start mo_ving this long after keypress:"
+#~ msgstr "Aloita _liike, kun painalluksesta on kulunut:"
 
-#: libwindow-settings/gnome-wm-manager.c:442
-msgid ""
-"Could not start fallback window manager.\n"
-"Please run a window manager manually. You can\n"
-"do this by selecting \"Run Program\" in the\n"
-"foot menu\n"
-msgstr ""
-"Ei voinut käynnistää varaikkunointiohjelmaa, joten\n"
-"ikkunointiohjelma täytyy käynnistää käsin.\n"
-"Voit tehdä tämän valitsemalla päävalikosta \"Suorita...\".\n"
+#~ msgid "Testing Area"
+#~ msgstr "Koealue"
 
-#: libwindow-settings/gnome-wm-manager.c:467
-msgid "OK"
-msgstr "OK"
+#~ msgid "Toggle and Repeat Keys"
+#~ msgstr "Toisto ja vipunäppäimet"
+
+#~ msgid "_Import CDE AccessX file..."
+#~ msgstr "_Tuo CDE AccessX -tiedosto"
+
+#~ msgid ""
+#~ "_Turn off Sticky Keys when\n"
+#~ "two keys pressed simultaneously"
+#~ msgstr ""
+#~ "_Poista tarttuvat näppäimet käytöstä\n"
+#~ "kun kahta näppäintä painetaan samalla"
+
+#~ msgid "msecs"
+#~ msgstr "ms"
+
+#~ msgid "Network Preferences"
+#~ msgstr "Verkkoasetukset"
+
+#~ msgid "Pro_xy requires username and password"
+#~ msgstr "_Välipalvelin vaatii tunnuksen ja salasanan"
+
+#~ msgid "_Location:"
+#~ msgstr "Si_jainti:"
+
+#~ msgid "Widget Theme"
+#~ msgstr "Säätimien teema"
+
+#~ msgid "Titlebar Font"
+#~ msgstr "Otsikkopalkin kirjasin"
+
+#~ msgid "Window Border Appearance"
+#~ msgstr "Ikkunan reunan ulkonäkö"
+
+#~ msgid "Window Manager:"
+#~ msgstr "Ikkunointiohjelma:"
+
+#~ msgid ""
+#~ "Starting %s\n"
+#~ "(%d seconds left before operation times out)"
+#~ msgstr ""
+#~ "%s käynnistyy\n"
+#~ "(%d sekuntia jäljellä ennen aikarajaa)"
+
+#~ msgid ""
+#~ "wm-properties-capplet: Unable to initialize window manager.\n"
+#~ "\tAnother window manager is already running and could not be killed\n"
+#~ msgstr ""
+#~ "wm-properties-capplet: Ei voinut käynnistää ikkunointiohjelmaa.\n"
+#~ "\tToinen ikkunointiohjelma on jo käynnissä eikä sitä voinut sulkea.\n"
+
+#~ msgid ""
+#~ "wm-properties-capplet: Unable to initialize window manager.\n"
+#~ "\t'%s' didn't start\n"
+#~ msgstr ""
+#~ "wm-properties-capplet: Ei voinut käynnistää ikkunointiohjelmaa \"%s\".\n"
+
+#~ msgid "Previous window manager did not die\n"
+#~ msgstr "Edellinen ikkunointiohjelma ei sulkeutunut.\n"
+
+#~ msgid ""
+#~ "Could not start '%s'.\n"
+#~ "Falling back to previous window manager '%s'\n"
+#~ msgstr ""
+#~ "Ei voinut käynnistää ohjelmaa \"%s\".\n"
+#~ "Palaa edelliseen ikkunointiohjelmaan \"%s\".\n"
+
+#~ msgid ""
+#~ "Could not start fallback window manager.\n"
+#~ "Please run a window manager manually. You can\n"
+#~ "do this by selecting \"Run Program\" in the\n"
+#~ "foot menu\n"
+#~ msgstr ""
+#~ "Ei voinut käynnistää varaikkunointiohjelmaa, joten\n"
+#~ "ikkunointiohjelma täytyy käynnistää käsin.\n"
+#~ "Voit tehdä tämän valitsemalla päävalikosta \"Suorita...\".\n"
+
+#~ msgid "OK"
+#~ msgstr "OK"
 
 #~ msgid "_Category"
 #~ msgstr "_Luokka"

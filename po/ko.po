@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.99.10\n"
-"POT-Creation-Date: 2002-10-21 12:31-0400\n"
+"POT-Creation-Date: 2002-11-02 13:45-0500\n"
 "PO-Revision-Date: 2002-07-15 18:57+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: Korean <gnome-kr-translation@lists.sourceforge.net>\n"
@@ -12,19 +12,18 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:229
-#: capplets/keyboard/gnome-keyboard-properties.c:160
-#, c-format
-msgid "There was an error launching the keyboard capplet : %s"
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:237
+#, fuzzy, c-format
+msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr "키보드 애플릿을 시작하는 데 오류가 발생했습니다: %s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:321
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:379
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:331
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:389
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "AccessX 설정사항을 '%s' 파일에서 가져 올 수 없습니다"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:452
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:462
 msgid "Select CDE AccessX file"
 msgstr "CDE AccessX 파일 선택"
 
@@ -45,71 +44,117 @@ msgid ""
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
-msgid "Beep when an LED is turned on and two beeps when one is turned off."
-msgstr "LED가 켜질 때 삑 소리를 내고, LED가 꺼질 때 삑 소리 두번."
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:1
+#: capplets/file-types/file-types-properties.glade.h:1
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
+#: capplets/network/gnome-network-preferences.glade.h:2
+#: capplets/theme-switcher/theme-install.glade.h:1
+msgid "*"
+msgstr "*"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
-#, fuzzy
-msgid "Beep when enabling/disabling _keyboard accessibility features"
-msgstr "키보드 접근성 기능을 사용/해제할 때 삑소리 내기(_B)"
+msgid "Basic"
+msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
-msgid "Beep when key is re_jected"
+#, fuzzy
+msgid "Beep if key is re_jected"
 msgstr "키가 거부되었을 때 삑소리(_J)"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
-msgid "Beep when:"
-msgstr "삑소리 내기:"
+#, fuzzy
+msgid "Beep when _modifier is pressed"
+msgstr "변경 키를 눌렀을 때 삑 소리 내기(_E)"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
+msgid "Beep when a _feature is turned on or off"
+msgstr ""
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
+msgid "Beep when an LED is turned on and two beeps when one is turned off."
+msgstr "LED가 켜질 때 삑 소리를 내고, LED가 꺼질 때 삑 소리 두번."
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
+#, fuzzy
+msgid "Beep when key is:"
+msgstr "키가 거부되었을 때 삑소리(_J)"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
+#, fuzzy
+msgid "Del_ay:"
+msgstr "지연 시간(_D) (초):"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
+msgid "Delay between keypress and pointer mo_vement:"
+msgstr ""
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
+msgid "Disa_ble if two keys pressed together"
+msgstr ""
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:11
 #, fuzzy
 msgid "E_nable Toggle Keys"
 msgstr "Toggle 키 사용(_T)"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
 #, fuzzy
 msgid "Enable Bo_unce Keys"
 msgstr "Bounce 키 사용(_B)"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
 msgid "Enable Slo_w Keys"
 msgstr "Slow 키 사용(_W)"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
 msgid "Enable _Mouse Keys"
 msgstr "Mouse 키 사용(_M)"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
 msgid "Enable _Sticky Keys"
 msgstr "Sticky 키 사용(_M)"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
-#: capplets/sound/sound-properties.glade.h:2
-msgid "General"
-msgstr "일반"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
+msgid "Features"
+msgstr ""
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:11
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
 #, fuzzy
-msgid "I_gnore keypresses within:"
+msgid "Filters"
+msgstr "파일(_F)"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
+#, fuzzy
+msgid "I_gnore duplicate keypresses within:"
 msgstr "다음 시간 내에 키 누름 무시(_I) :"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
 msgid ""
 "Ignore all subsequent presses of the SAME key if they happen within a user "
 "selectable period of time."
 msgstr "지정한 시간 내에 같은 키가 연속해서 눌릴 경우 무시합니다."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
 #, fuzzy
 msgid "Keyboard Accessibility Preferences (AccessX)"
 msgstr "키보드 접근성 기능 설정 (AccessX)"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
 #, fuzzy
 msgid "Ma_ximum pointer speed:"
 msgstr "최대 포인터 속도(_X):"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
+#: capplets/mouse/mouse.desktop.in.h:1
+msgid "Mouse"
+msgstr "마우스"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
+#, fuzzy
+msgid "Mouse _Preferences..."
+msgstr "마우스 기본 설정"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
 msgid ""
 "Only accept keys after they have been pressed and held for a user adjustable "
 "amount of time."
@@ -117,92 +162,90 @@ msgstr ""
 "키를 누른 후에 사용자가 설정한 만큼의 시간동안 누르고 있어야 그 키를 받아들입"
 "니다."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
 msgid ""
 "Perform multiple simultaneous key press operations by pressing modifier keys "
 "in sequence."
 msgstr "변경 키를 눌러서 차례대로 누른 키가 동시에 눌려진 것처럼 처리합니다."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
-#, fuzzy
-msgid "Repeat Key Pre_ferences..."
-msgstr "반복 키 기본 설정"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
-#, fuzzy
-msgid "Start mo_ving this long after keypress:"
-msgstr "키를 누름 뒤에 이 만큼 지나면 움직이기 시작(_V):"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
-msgid "Testing Area"
-msgstr "테스트 영역"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
-#, fuzzy
-msgid "Time to acce_lerate to max speed:"
-msgstr "최대 속도로 가속할 시간(_A) :"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
-msgid "Toggle and Repeat Keys"
-msgstr "토글 및 반복 키"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
-msgid "Turn the numeric keypad into a mouse control pad."
-msgstr "숫자 키 패드를 마우스 컨트롤 패드로 만듭니다."
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
-#, fuzzy
-msgid "_Beep when modifier is pressed"
-msgstr "변경 키를 눌렀을 때 삑 소리 내기(_E)"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
-msgid "_Disable if unused for "
-msgstr "이 만큼의 시간동안 사용되지 않으면 끄기(_D): "
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
-#, fuzzy
-msgid "_Enable keyboard accessibility"
-msgstr "키보드 접근성 기능 기본 설정을 설정합니다"
-
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 #, fuzzy
-msgid "_Import CDE AccessX file..."
-msgstr "CDE AccessX 파일 가져 오기(_I)"
+msgid "S_peed:"
+msgstr "속도"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
 #, fuzzy
-msgid "_Only accept keypress after:"
-msgstr "이 만큼 지난 뒤에 키 누름 받아들이기(_O) :"
+msgid "Time to acce_lerate to maximum speed:"
+msgstr "최대 속도로 가속할 시간(_A) :"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:28
-msgid ""
-"_Turn off Sticky Keys when\n"
-"two keys pressed simultaneously"
-msgstr ""
-"두 키를 동시에 눌렀을 때\n"
-"StickyKeys 끄기(_T)"
+#, fuzzy
+msgid "Toggle Keys"
+msgstr "Toggle 키 사용(_T)"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
+msgid "Turn the numeric keypad into a mouse control pad."
+msgstr "숫자 키 패드를 마우스 컨트롤 패드로 만듭니다."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
-msgid "key is _accepted"
-msgstr "키를 받아들일 때(_A)"
+#, fuzzy
+msgid "_Disable if unused for:"
+msgstr "이 만큼의 시간동안 사용되지 않으면 끄기(_D): "
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
-msgid "key is _pressed"
-msgstr "키가 눌러졌을 때(_P)"
+#, fuzzy
+msgid "_Enable keyboard accessibility features"
+msgstr "키보드 접근성 기능 기본 설정을 설정합니다"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
-msgid "key is _rejected"
-msgstr "키가 거부되었을 때(_R)"
+msgid "_Import Feature Settings..."
+msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
-msgid "msecs"
-msgstr "천분의일초"
+#, fuzzy
+msgid "_Only accept keys held for:"
+msgstr "이 만큼 지난 뒤에 키 누름 받아들이기(_O) :"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
-msgid "pixels/sec"
-msgstr "픽셀/초"
+#, fuzzy
+msgid "_Repeat Keys"
+msgstr "반복 정도"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:35
+msgid "_Type to test settings:"
+msgstr ""
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
+#, fuzzy
+msgid "_accepted"
+msgstr "키를 받아들일 때(_A)"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:37
+#, fuzzy
+msgid "_pressed"
+msgstr "키가 눌러졌을 때(_P)"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:38
+#, fuzzy
+msgid "_rejected"
+msgstr "키가 거부되었을 때(_R)"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:39
+msgid "characters/second"
+msgstr ""
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:40
+#, fuzzy
+msgid "milliseconds"
+msgstr "초"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:41
+#, fuzzy
+msgid "pixels/second"
+msgstr "픽셀/초"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:42
 msgid "seconds"
 msgstr "초"
 
@@ -257,7 +300,7 @@ msgstr "그림 선택(_P):"
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
 #: capplets/keyboard/gnome-keyboard-properties.c:294
-#: capplets/mouse/gnome-mouse-properties.c:752
+#: capplets/mouse/gnome-mouse-properties.c:751
 #: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
 msgstr "물려받은 설정을 되찾아서 저장합니다"
@@ -540,14 +583,6 @@ msgstr "기본 프로그램을 선택하십시오"
 msgid "Please specify a name and a command for this editor."
 msgstr "이 편집기의 이름과 명령을 지정하십시오."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:1
-#: capplets/file-types/file-types-properties.glade.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
-#: capplets/network/gnome-network-preferences.glade.h:1
-#: capplets/theme-switcher/theme-install.glade.h:1
-msgid "*"
-msgstr "*"
-
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:2
 msgid "Acce_pts URLs"
 msgstr "URL 허용(_P)"
@@ -755,6 +790,7 @@ msgid "Minimizing and Maximizing"
 msgstr "최소화 및 최대화"
 
 #: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
+#: capplets/windows/gnome-window-properties.c:600
 msgid "Meta"
 msgstr "메타"
 
@@ -1305,22 +1341,27 @@ msgstr "바탕 화면"
 msgid "Window Management"
 msgstr "창 관리자"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:568
+#: capplets/keybindings/gnome-keybinding-properties.c:593
+#, c-format
+msgid "That accelerator key is already in use by: %s\n"
+msgstr ""
+
+#: capplets/keybindings/gnome-keybinding-properties.c:620
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "설정 데이터 베이스에서 새로운 단축글쇠 설정 오류: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:719
+#: capplets/keybindings/gnome-keybinding-properties.c:771
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
 msgstr "키보드 테마를 찾을 수 없습니다.  GTK+ 설치가 불완전하기 때문입니다."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:741
+#: capplets/keybindings/gnome-keybinding-properties.c:793
 msgid "Action"
 msgstr "동작"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:759
+#: capplets/keybindings/gnome-keybinding-properties.c:811
 msgid "Shortcut"
 msgstr "바로 가기"
 
@@ -1344,6 +1385,11 @@ msgstr "텍스트 편집 단축키(_T):"
 #: capplets/keybindings/keybinding.desktop.in.h:1
 msgid "Assign shortcut keys to commands"
 msgstr "명령어에 단축 키를 지정합니다"
+
+#: capplets/keyboard/gnome-keyboard-properties.c:160
+#, c-format
+msgid "There was an error launching the keyboard capplet : %s"
+msgstr "키보드 애플릿을 시작하는 데 오류가 발생했습니다: %s"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:273
 msgid "_Accessibility"
@@ -1412,11 +1458,6 @@ msgstr ""
 msgid "Repeat Keys"
 msgstr "반복 정도"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
-#, fuzzy
-msgid "S_peed:"
-msgstr "속도"
-
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid "_Accessibility..."
 msgstr "접근성 기능(_A)..."
@@ -1457,7 +1498,7 @@ msgstr ""
 msgid "Set your keyboard preferences"
 msgstr "키보드 등록 정보를 설정합니다"
 
-#: capplets/mouse/gnome-mouse-properties.c:477
+#: capplets/mouse/gnome-mouse-properties.c:476
 #, c-format
 msgid ""
 "<b>Unknown Cursor</b>\n"
@@ -1466,7 +1507,7 @@ msgstr ""
 "<b>알 수 없는 커서</b>\n"
 "%s"
 
-#: capplets/mouse/gnome-mouse-properties.c:578
+#: capplets/mouse/gnome-mouse-properties.c:577
 msgid ""
 "<b>Default Cursor - Current</b>\n"
 "The default cursor that ships with X"
@@ -1474,7 +1515,7 @@ msgstr ""
 "<b>기본 커서 - 현재</b>\n"
 "X에 포함되어 있는 기본 커서"
 
-#: capplets/mouse/gnome-mouse-properties.c:581
+#: capplets/mouse/gnome-mouse-properties.c:580
 msgid ""
 "<b>Default Cursor</b>\n"
 "The default cursor that ships with X"
@@ -1482,7 +1523,7 @@ msgstr ""
 "<b>기본 커서</b>\n"
 "X에 포함되어 있는 기본 커서"
 
-#: capplets/mouse/gnome-mouse-properties.c:599
+#: capplets/mouse/gnome-mouse-properties.c:598
 msgid ""
 "<b>White Cursor - Current</b>\n"
 "The default cursor inverted"
@@ -1490,7 +1531,7 @@ msgstr ""
 "<b>흰 색 커서 - 현재</b>\n"
 "기본 커서의 반전"
 
-#: capplets/mouse/gnome-mouse-properties.c:602
+#: capplets/mouse/gnome-mouse-properties.c:601
 msgid ""
 "<b>White Cursor</b>\n"
 "The default cursor inverted"
@@ -1498,7 +1539,7 @@ msgstr ""
 "<b>흰 색 커서</b>\n"
 "기본 커서의 반전"
 
-#: capplets/mouse/gnome-mouse-properties.c:620
+#: capplets/mouse/gnome-mouse-properties.c:619
 msgid ""
 "<b>Large Cursor - Current</b>\n"
 "Large version of normal cursor"
@@ -1506,7 +1547,7 @@ msgstr ""
 "<b>큰 커서 - 현재</b>\n"
 "기본 커서의 큰 버전"
 
-#: capplets/mouse/gnome-mouse-properties.c:623
+#: capplets/mouse/gnome-mouse-properties.c:622
 msgid ""
 "<b>Large Cursor</b>\n"
 "Large version of normal cursor"
@@ -1514,7 +1555,7 @@ msgstr ""
 "<b>큰 커서</b>\n"
 "기본 커서의 큰 버전"
 
-#: capplets/mouse/gnome-mouse-properties.c:641
+#: capplets/mouse/gnome-mouse-properties.c:640
 msgid ""
 "<b>Large White Cursor - Current</b>\n"
 "Large version of white cursor"
@@ -1522,7 +1563,7 @@ msgstr ""
 "<b>큰 흰 색 커서 - 현재</b>\n"
 "흰 색 커서의 큰 버전"
 
-#: capplets/mouse/gnome-mouse-properties.c:644
+#: capplets/mouse/gnome-mouse-properties.c:643
 msgid ""
 "<b>Large White Cursor</b>\n"
 "Large version of white cursor"
@@ -1653,10 +1694,6 @@ msgstr "컨트롤 키를 눌렀을 때 커서의 위치 표시(_S)"
 msgid "_Threshold:"
 msgstr "임계값(_T):"
 
-#: capplets/mouse/mouse.desktop.in.h:1
-msgid "Mouse"
-msgstr "마우스"
-
 #: capplets/mouse/mouse.desktop.in.h:2
 msgid "Set your mouse preferences"
 msgstr "마우스 기본 설정을 설정합니다"
@@ -1671,37 +1708,76 @@ msgstr "네트워크 프록시"
 msgid "Network proxy preferences"
 msgstr "네트워크 프록시 기본 설정"
 
-#: capplets/network/gnome-network-preferences.glade.h:2
-msgid "Network Preferences"
-msgstr "네트워크 기본 설정"
+#: capplets/network/gnome-network-preferences.glade.h:1
+msgid "      "
+msgstr ""
 
 #: capplets/network/gnome-network-preferences.glade.h:3
-msgid "Network Proxy Preferences"
-msgstr "네트워크 프록시 기본 설정"
+msgid "<b>_Automatic proxy configuration</b>"
+msgstr ""
 
 #: capplets/network/gnome-network-preferences.glade.h:4
-msgid "P_ort:"
-msgstr "포트(_O):"
+msgid "<b>_Direct internet connection</b>"
+msgstr ""
 
 #: capplets/network/gnome-network-preferences.glade.h:5
-msgid "Pass_word:"
-msgstr "비밀번호(_W):"
+msgid "<b>_Manual proxy configuration</b>"
+msgstr ""
 
 #: capplets/network/gnome-network-preferences.glade.h:6
-msgid "Pro_xy requires username and password"
-msgstr "프록시에 사용자 이름과 비밀번호 필요(_X)"
+msgid "<b>_Use authentication</b>"
+msgstr ""
 
 #: capplets/network/gnome-network-preferences.glade.h:7
-msgid "User_name:"
-msgstr "사용자 이름(_N):"
+msgid "Autoconfiguration _URL:"
+msgstr ""
 
 #: capplets/network/gnome-network-preferences.glade.h:8
-msgid "_Location:"
-msgstr "위치(_L):"
+msgid "HTTP Proxy Details"
+msgstr ""
 
 #: capplets/network/gnome-network-preferences.glade.h:9
-msgid "_Use HTTP proxy"
+#, fuzzy
+msgid "Network Proxy Configuration"
+msgstr "네트워크 프록시 기본 설정"
+
+#: capplets/network/gnome-network-preferences.glade.h:10
+#, fuzzy
+msgid "Port:"
+msgstr "포트(_O):"
+
+#: capplets/network/gnome-network-preferences.glade.h:11
+msgid "S_ocks host:"
+msgstr ""
+
+#: capplets/network/gnome-network-preferences.glade.h:12
+msgid "_Details"
+msgstr ""
+
+#: capplets/network/gnome-network-preferences.glade.h:13
+#, fuzzy
+msgid "_FTP proxy:"
 msgstr "HTTP 프록시 사용(_U)"
+
+#: capplets/network/gnome-network-preferences.glade.h:14
+#, fuzzy
+msgid "_HTTP proxy:"
+msgstr "HTTP 프록시 사용(_U)"
+
+#: capplets/network/gnome-network-preferences.glade.h:15
+#, fuzzy
+msgid "_Password:"
+msgstr "비밀번호(_W):"
+
+#: capplets/network/gnome-network-preferences.glade.h:16
+#, fuzzy
+msgid "_Secure HTTP proxy:"
+msgstr "HTTP 프록시 사용(_U)"
+
+#: capplets/network/gnome-network-preferences.glade.h:17
+#, fuzzy
+msgid "_Username:"
+msgstr "사용자 이름(_N):"
 
 #: capplets/sound/sound-properties-capplet.c:180
 msgid "Sound preferences"
@@ -1710,6 +1786,10 @@ msgstr "사운드 기본 설정"
 #: capplets/sound/sound-properties.glade.h:1
 msgid "E_nable sound server startup"
 msgstr "사운드 서버 시작하기(_N)"
+
+#: capplets/sound/sound-properties.glade.h:2
+msgid "General"
+msgstr "일반"
 
 #: capplets/sound/sound-properties.glade.h:3
 #, fuzzy
@@ -1782,31 +1862,48 @@ msgid "Select themes for various parts of the desktop"
 msgstr "바탕 화면의 여러 곳에 쓰일 테마를 선택합니다"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
+#: capplets/theme-switcher/theme-properties.glade.h:6
 msgid "Theme"
 msgstr "테마"
 
 #: capplets/theme-switcher/theme-properties.glade.h:1
-msgid "New themes can also be installed by dragging them into the window."
-msgstr "테마를 창에 끌어오는 방법으로도 새 테마를 설치할 수 있습니다."
+#, fuzzy
+msgid "Apply _Background"
+msgstr "배경"
 
 #: capplets/theme-switcher/theme-properties.glade.h:2
-msgid "Theme Preferences"
-msgstr "테마 기본 설정"
+#, fuzzy
+msgid "Apply _Font"
+msgstr "지금 적용"
 
 #: capplets/theme-switcher/theme-properties.glade.h:3
-msgid "Widget Theme"
-msgstr ""
+#, fuzzy
+msgid "Controls"
+msgstr "UI 컨트롤"
 
 #: capplets/theme-switcher/theme-properties.glade.h:4
 #, fuzzy
-msgid "Window Border Theme"
-msgstr "창 가장자리 모양"
+msgid "Icons"
+msgstr "아이콘만"
 
 #: capplets/theme-switcher/theme-properties.glade.h:5
+msgid "New themes can also be installed by dragging them into the window."
+msgstr "테마를 창에 끌어오는 방법으로도 새 테마를 설치할 수 있습니다."
+
+#: capplets/theme-switcher/theme-properties.glade.h:7
+msgid "Theme Preferences"
+msgstr "테마 기본 설정"
+
+#: capplets/theme-switcher/theme-properties.glade.h:8
+#, fuzzy
+msgid "Window Border"
+msgstr "창 가장자리 모양"
+
+#: capplets/theme-switcher/theme-properties.glade.h:9
 msgid "_Go to theme folder"
 msgstr "테마 폴더로 이동(_G)..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:6
+#: capplets/theme-switcher/theme-properties.glade.h:10
 msgid "_Install New Theme..."
 msgstr "새 테마 설치(_I)..."
 
@@ -1963,30 +2060,57 @@ msgstr ""
 msgid "_Save"
 msgstr "크기 조정(_S)"
 
-#: capplets/windows/gnome-window-properties.c:282
-#: capplets/windows/gnome-window-properties.glade.h:6
+#: capplets/windows/gnome-window-properties.c:352
+#, c-format
+msgid ""
+"<b>Cannot start the preferences application for your window manager</b>\n"
+"\n"
+"%s"
+msgstr ""
+
+#: capplets/windows/gnome-window-properties.c:575
+#, fuzzy
+msgid "Control"
+msgstr "UI 컨트롤"
+
+#: capplets/windows/gnome-window-properties.c:580
+msgid "Alt"
+msgstr ""
+
+#: capplets/windows/gnome-window-properties.c:586
+#, fuzzy
+msgid "Hyper"
+msgstr "형식"
+
+#: capplets/windows/gnome-window-properties.c:593
+#, fuzzy
+msgid "Super"
+msgstr "속도"
+
+#: capplets/windows/gnome-window-properties.glade.h:1
+msgid "To _move windows, click while holding down:"
+msgstr ""
+
+#: capplets/windows/gnome-window-properties.glade.h:2
 msgid "Window Preferences"
 msgstr "창 기본 설정"
 
-#: capplets/windows/gnome-window-properties.glade.h:1
-msgid "Apply Now"
-msgstr "지금 적용"
-
-#: capplets/windows/gnome-window-properties.glade.h:2
-msgid "Select windows when the mouse moves over them"
-msgstr "i마우스가 창위로 움직이면 창 선택"
-
 #: capplets/windows/gnome-window-properties.glade.h:3
-msgid "Titlebar Font"
-msgstr "제목 막대 글꼴"
+msgid "_Double-click window titles to:"
+msgstr ""
 
 #: capplets/windows/gnome-window-properties.glade.h:4
-msgid "Window Border Appearance"
-msgstr "창 가장자리 모양"
+msgid "_Raise selected windows after a short time"
+msgstr ""
 
 #: capplets/windows/gnome-window-properties.glade.h:5
-msgid "Window Manager:"
-msgstr "창 관리자:"
+#, fuzzy
+msgid "_Select windows when the mouse moves over them"
+msgstr "i마우스가 창위로 움직이면 창 선택"
+
+#: capplets/windows/gnome-window-properties.glade.h:6
+msgid "_Tenths of a second before raising the window:"
+msgstr ""
 
 #: capplets/windows/window-properties.desktop.in.h:1
 msgid "Window Properties"
@@ -2135,7 +2259,7 @@ msgstr "이 메세지를 다시 표시하지 않기(_D)"
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "사운드 파일 %s을(를) 샘플 %s(으)로 읽어들일 수 없습니다"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:170
+#: gnome-settings-daemon/gnome-settings-xsettings.c:172
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "GConf 키 %s이(가) %s 타입으로 지정되었지만 예상되는 타입은 %s입니다\n"
@@ -2214,60 +2338,108 @@ msgstr "재생(_P)"
 msgid "Select sound file"
 msgstr "소리 파일 선택"
 
-#: libwindow-settings/gnome-wm-manager.c:171
+#: libwindow-settings/gnome-wm-manager.c:320
 #, c-format
-msgid ""
-"Starting %s\n"
-"(%d seconds left before operation times out)"
+msgid "Window manager \"%s\" has not registered a configuration tool\n"
 msgstr ""
-"%s 시작중\n"
-"(작업 시간이 초과될 때까지 %d초 남았습니다)"
 
-#: libwindow-settings/gnome-wm-manager.c:325
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\tAnother window manager is already running and could not be killed\n"
-msgstr ""
-"wm-properties-capplet: 창 관리자를 초기화할 수 없습니다\n"
-"\t다른 창 관리자가 이미 실행중이고 강제로 종료할 수 없습니다\n"
+#, fuzzy
+#~ msgid "Beep when enabling/disabling _keyboard accessibility features"
+#~ msgstr "키보드 접근성 기능을 사용/해제할 때 삑소리 내기(_B)"
 
-#: libwindow-settings/gnome-wm-manager.c:329
-#, c-format
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\t'%s' didn't start\n"
-msgstr ""
-"wm-properties-capplet: 창 관리자를 초기화할 수 없습니다.\n"
-"\t'%s'이(가) 시작하지 않습니다\n"
+#~ msgid "Beep when:"
+#~ msgstr "삑소리 내기:"
 
-#: libwindow-settings/gnome-wm-manager.c:378
-msgid "Previous window manager did not die\n"
-msgstr "이전의 창 관리자가 끝나지 않았습니다\n"
+#, fuzzy
+#~ msgid "Repeat Key Pre_ferences..."
+#~ msgstr "반복 키 기본 설정"
 
-#: libwindow-settings/gnome-wm-manager.c:411
-#, c-format
-msgid ""
-"Could not start '%s'.\n"
-"Falling back to previous window manager '%s'\n"
-msgstr ""
-"'%s'을(를) 시작할 없습니다.\n"
-"이전의 창 관리자인 '%s'(으)로 돌아갑니다\n"
+#, fuzzy
+#~ msgid "Start mo_ving this long after keypress:"
+#~ msgstr "키를 누름 뒤에 이 만큼 지나면 움직이기 시작(_V):"
 
-#: libwindow-settings/gnome-wm-manager.c:442
-msgid ""
-"Could not start fallback window manager.\n"
-"Please run a window manager manually. You can\n"
-"do this by selecting \"Run Program\" in the\n"
-"foot menu\n"
-msgstr ""
-"대체 창 관리자를 시작할 수 없습니다.\n"
-"수동으로 창 관리자를 시작하십시오.  발바닥\n"
-"메뉴에서 \"프로그램 실행\"을 선택하시면\n"
-"실행할 수 있습니다\n"
+#~ msgid "Testing Area"
+#~ msgstr "테스트 영역"
 
-#: libwindow-settings/gnome-wm-manager.c:467
-msgid "OK"
-msgstr "확인"
+#~ msgid "Toggle and Repeat Keys"
+#~ msgstr "토글 및 반복 키"
+
+#, fuzzy
+#~ msgid "_Import CDE AccessX file..."
+#~ msgstr "CDE AccessX 파일 가져 오기(_I)"
+
+#~ msgid ""
+#~ "_Turn off Sticky Keys when\n"
+#~ "two keys pressed simultaneously"
+#~ msgstr ""
+#~ "두 키를 동시에 눌렀을 때\n"
+#~ "StickyKeys 끄기(_T)"
+
+#~ msgid "msecs"
+#~ msgstr "천분의일초"
+
+#~ msgid "Network Preferences"
+#~ msgstr "네트워크 기본 설정"
+
+#~ msgid "Pro_xy requires username and password"
+#~ msgstr "프록시에 사용자 이름과 비밀번호 필요(_X)"
+
+#~ msgid "_Location:"
+#~ msgstr "위치(_L):"
+
+#~ msgid "Titlebar Font"
+#~ msgstr "제목 막대 글꼴"
+
+#~ msgid "Window Border Appearance"
+#~ msgstr "창 가장자리 모양"
+
+#~ msgid "Window Manager:"
+#~ msgstr "창 관리자:"
+
+#~ msgid ""
+#~ "Starting %s\n"
+#~ "(%d seconds left before operation times out)"
+#~ msgstr ""
+#~ "%s 시작중\n"
+#~ "(작업 시간이 초과될 때까지 %d초 남았습니다)"
+
+#~ msgid ""
+#~ "wm-properties-capplet: Unable to initialize window manager.\n"
+#~ "\tAnother window manager is already running and could not be killed\n"
+#~ msgstr ""
+#~ "wm-properties-capplet: 창 관리자를 초기화할 수 없습니다\n"
+#~ "\t다른 창 관리자가 이미 실행중이고 강제로 종료할 수 없습니다\n"
+
+#~ msgid ""
+#~ "wm-properties-capplet: Unable to initialize window manager.\n"
+#~ "\t'%s' didn't start\n"
+#~ msgstr ""
+#~ "wm-properties-capplet: 창 관리자를 초기화할 수 없습니다.\n"
+#~ "\t'%s'이(가) 시작하지 않습니다\n"
+
+#~ msgid "Previous window manager did not die\n"
+#~ msgstr "이전의 창 관리자가 끝나지 않았습니다\n"
+
+#~ msgid ""
+#~ "Could not start '%s'.\n"
+#~ "Falling back to previous window manager '%s'\n"
+#~ msgstr ""
+#~ "'%s'을(를) 시작할 없습니다.\n"
+#~ "이전의 창 관리자인 '%s'(으)로 돌아갑니다\n"
+
+#~ msgid ""
+#~ "Could not start fallback window manager.\n"
+#~ "Please run a window manager manually. You can\n"
+#~ "do this by selecting \"Run Program\" in the\n"
+#~ "foot menu\n"
+#~ msgstr ""
+#~ "대체 창 관리자를 시작할 수 없습니다.\n"
+#~ "수동으로 창 관리자를 시작하십시오.  발바닥\n"
+#~ "메뉴에서 \"프로그램 실행\"을 선택하시면\n"
+#~ "실행할 수 있습니다\n"
+
+#~ msgid "OK"
+#~ msgstr "확인"
 
 #~ msgid "_Category"
 #~ msgstr "범주(_C)"

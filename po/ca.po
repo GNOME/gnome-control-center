@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.0.0\n"
-"POT-Creation-Date: 2002-10-21 12:31-0400\n"
+"POT-Creation-Date: 2002-11-02 13:45-0500\n"
 "PO-Revision-Date: 2002-07-22 12:46+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <gnome@softcatala.net>\n"
@@ -15,19 +15,18 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:229
-#: capplets/keyboard/gnome-keyboard-properties.c:160
-#, c-format
-msgid "There was an error launching the keyboard capplet : %s"
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:237
+#, fuzzy, c-format
+msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr "S'ha produït un error a l'executar la capplet del teclat: %s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:321
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:379
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:331
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:389
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Impossible d'importar els ajustaments d'AccessX des del fitxer «%s»"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:452
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:462
 msgid "Select CDE AccessX file"
 msgstr "Seleccioneu el fitxer AccesX CDE"
 
@@ -48,59 +47,92 @@ msgid ""
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
-msgid "Beep when an LED is turned on and two beeps when one is turned off."
-msgstr "Fes «beep» quan un LED s'encén i dos «beep» quan s'apaga."
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:1
+#: capplets/file-types/file-types-properties.glade.h:1
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
+#: capplets/network/gnome-network-preferences.glade.h:2
+#: capplets/theme-switcher/theme-install.glade.h:1
+msgid "*"
+msgstr "*"
 
-# Xiulet? jm
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
-#, fuzzy
-msgid "Beep when enabling/disabling _keyboard accessibility features"
+msgid "Basic"
 msgstr ""
-"Fes «_beep» quan s'habiliten/deshabiliten les característiques "
-"d'accesibiltat del teclat"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
-msgid "Beep when key is re_jected"
+#, fuzzy
+msgid "Beep if key is re_jected"
 msgstr "Fes «beep» quan la tecla és de_negada"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
-msgid "Beep when:"
-msgstr "Fes «beep» quan:"
+#, fuzzy
+msgid "Beep when _modifier is pressed"
+msgstr "Fes «beep» quan el modificador és pressionat"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
+msgid "Beep when a _feature is turned on or off"
+msgstr ""
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
+msgid "Beep when an LED is turned on and two beeps when one is turned off."
+msgstr "Fes «beep» quan un LED s'encén i dos «beep» quan s'apaga."
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
+#, fuzzy
+msgid "Beep when key is:"
+msgstr "Fes «beep» quan la tecla és de_negada"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
+#, fuzzy
+msgid "Del_ay:"
+msgstr "_Retard:"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
+msgid "Delay between keypress and pointer mo_vement:"
+msgstr ""
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
+msgid "Disa_ble if two keys pressed together"
+msgstr ""
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:11
 #, fuzzy
 msgid "E_nable Toggle Keys"
 msgstr "Habilita les tecles de commutació"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
 #, fuzzy
 msgid "Enable Bo_unce Keys"
 msgstr "Habilita les tecles de sa_lts"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
 msgid "Enable Slo_w Keys"
 msgstr "Habilita les tecles len_tes"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
 msgid "Enable _Mouse Keys"
 msgstr "Habilita les tecles del _ratolí"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
 msgid "Enable _Sticky Keys"
 msgstr "Habilita les tecles en_ganxoses"
 
-#
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
-#: capplets/sound/sound-properties.glade.h:2
-msgid "General"
-msgstr "General"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
+msgid "Features"
+msgstr ""
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:11
+#
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
 #, fuzzy
-msgid "I_gnore keypresses within:"
+msgid "Filters"
+msgstr "_Fitxer"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
+#, fuzzy
+msgid "I_gnore duplicate keypresses within:"
 msgstr "_Ignora les pressions de tecla entre:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
 msgid ""
 "Ignore all subsequent presses of the SAME key if they happen within a user "
 "selectable period of time."
@@ -109,17 +141,27 @@ msgstr ""
 "d'un perio de de temps seleccionable per l'usuari."
 
 #
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
 #, fuzzy
 msgid "Keyboard Accessibility Preferences (AccessX)"
 msgstr "Configuració d'accesibilitat del teclat (AcessX)"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
 #, fuzzy
 msgid "Ma_ximum pointer speed:"
 msgstr "Velocitat mà_xima del punter:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
+#: capplets/mouse/mouse.desktop.in.h:1
+msgid "Mouse"
+msgstr "Ratolí"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
+#, fuzzy
+msgid "Mouse _Preferences..."
+msgstr "Preferències del ratolí"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
 msgid ""
 "Only accept keys after they have been pressed and held for a user adjustable "
 "amount of time."
@@ -127,7 +169,7 @@ msgstr ""
 "Accepta solament les tecles després de que hagin estat pressionades i "
 "mantingudes per a una quantitat de temps ajustable per l'usuari."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
 msgid ""
 "Perform multiple simultaneous key press operations by pressing modifier keys "
 "in sequence."
@@ -135,87 +177,84 @@ msgstr ""
 "Realitza operacions de pressió de tecla simultània múltiple pressionant les "
 "tecles modificadores en seqüència."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
-#, fuzzy
-msgid "Repeat Key Pre_ferences..."
-msgstr "Preferències de repetició de tecles"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
-#, fuzzy
-msgid "Start mo_ving this long after keypress:"
-msgstr ""
-"Comença a mo_ure després d'aquest interval posterior a la polsació de la "
-"tecla:"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
-msgid "Testing Area"
-msgstr "Àrea de proves"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
-#, fuzzy
-msgid "Time to acce_lerate to max speed:"
-msgstr "Temps per a _accelerar a velocitat màxima:"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
-msgid "Toggle and Repeat Keys"
-msgstr "Tecles de commutació i repetició"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
-msgid "Turn the numeric keypad into a mouse control pad."
-msgstr "Converteix el teclat numèric en un teclat de control de ratolí."
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
-#, fuzzy
-msgid "_Beep when modifier is pressed"
-msgstr "Fes «beep» quan el modificador és pressionat"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
-msgid "_Disable if unused for "
-msgstr "_Deshabilita si no s'utilitza durant "
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
-msgid "_Enable keyboard accessibility"
-msgstr "_Habilita l'accesibilitat del teclat"
-
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
-#, fuzzy
-msgid "_Import CDE AccessX file..."
-msgstr "_Importa un fitxer AccessX de CDE"
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+msgid "S_peed:"
+msgstr "_Velocitat:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
 #, fuzzy
-msgid "_Only accept keypress after:"
-msgstr "N_omés accepta pressions de tecla després de:"
+msgid "Time to acce_lerate to maximum speed:"
+msgstr "Temps per a _accelerar a velocitat màxima:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:28
-msgid ""
-"_Turn off Sticky Keys when\n"
-"two keys pressed simultaneously"
-msgstr ""
-"_Desactiva les tecles enganxoses quan\n"
-"dues tecles siguin pressionades simultàniament"
+#, fuzzy
+msgid "Toggle Keys"
+msgstr "Habilita les tecles de commutació"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
+msgid "Turn the numeric keypad into a mouse control pad."
+msgstr "Converteix el teclat numèric en un teclat de control de ratolí."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
-msgid "key is _accepted"
-msgstr "la tecla és _acceptada"
+#, fuzzy
+msgid "_Disable if unused for:"
+msgstr "_Deshabilita si no s'utilitza durant "
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
-msgid "key is _pressed"
-msgstr "la tecla és _pressionada"
+#, fuzzy
+msgid "_Enable keyboard accessibility features"
+msgstr "_Habilita l'accesibilitat del teclat"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
-msgid "key is _rejected"
-msgstr "la tecla és _denegada"
+msgid "_Import Feature Settings..."
+msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
-msgid "msecs"
-msgstr "miliseg."
+#, fuzzy
+msgid "_Only accept keys held for:"
+msgstr "N_omés accepta pressions de tecla després de:"
 
+#
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
-msgid "pixels/sec"
-msgstr "pixels/seg."
+#, fuzzy
+msgid "_Repeat Keys"
+msgstr "Repetició de tecles"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:35
+msgid "_Type to test settings:"
+msgstr ""
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
+#, fuzzy
+msgid "_accepted"
+msgstr "la tecla és _acceptada"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:37
+#, fuzzy
+msgid "_pressed"
+msgstr "la tecla és _pressionada"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:38
+#, fuzzy
+msgid "_rejected"
+msgstr "la tecla és _denegada"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:39
+msgid "characters/second"
+msgstr ""
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:40
+#, fuzzy
+msgid "milliseconds"
+msgstr "segons"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:41
+#, fuzzy
+msgid "pixels/second"
+msgstr "pixels/seg."
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:42
 msgid "seconds"
 msgstr "segons"
 
@@ -274,7 +313,7 @@ msgstr "Seleccioneu una ima_tge:"
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
 #: capplets/keyboard/gnome-keyboard-properties.c:294
-#: capplets/mouse/gnome-mouse-properties.c:752
+#: capplets/mouse/gnome-mouse-properties.c:751
 #: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
 msgstr "Recupera i desa els paràmetres originals"
@@ -577,14 +616,6 @@ msgstr "Seleccioneu les aplicacions per defecte"
 msgid "Please specify a name and a command for this editor."
 msgstr "Si us plau, especifiqueu un nom i una ordre per a aquest editor."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:1
-#: capplets/file-types/file-types-properties.glade.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
-#: capplets/network/gnome-network-preferences.glade.h:1
-#: capplets/theme-switcher/theme-install.glade.h:1
-msgid "*"
-msgstr "*"
-
 #
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:2
 msgid "Acce_pts URLs"
@@ -826,6 +857,7 @@ msgid "Minimizing and Maximizing"
 msgstr "Minimització i Maximització"
 
 #: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
+#: capplets/windows/gnome-window-properties.c:600
 msgid "Meta"
 msgstr "Meta"
 
@@ -1415,14 +1447,19 @@ msgstr "Escriptori"
 msgid "Window Management"
 msgstr "Gestió de finestres"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:568
+#: capplets/keybindings/gnome-keybinding-properties.c:593
+#, c-format
+msgid "That accelerator key is already in use by: %s\n"
+msgstr ""
+
+#: capplets/keybindings/gnome-keybinding-properties.c:620
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 "Error al establir un nou accelerador en la base de dades de la configuració: "
 "%s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:719
+#: capplets/keybindings/gnome-keybinding-properties.c:771
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1431,12 +1468,12 @@ msgstr ""
 "+ és incompleta."
 
 #
-#: capplets/keybindings/gnome-keybinding-properties.c:741
+#: capplets/keybindings/gnome-keybinding-properties.c:793
 msgid "Action"
 msgstr "Acció"
 
 #
-#: capplets/keybindings/gnome-keybinding-properties.c:759
+#: capplets/keybindings/gnome-keybinding-properties.c:811
 msgid "Shortcut"
 msgstr "Drecera"
 
@@ -1460,6 +1497,11 @@ msgstr "Dreceres d'edició de _text:"
 #: capplets/keybindings/keybinding.desktop.in.h:1
 msgid "Assign shortcut keys to commands"
 msgstr "Assigna dreceres a ordres"
+
+#: capplets/keyboard/gnome-keyboard-properties.c:160
+#, c-format
+msgid "There was an error launching the keyboard capplet : %s"
+msgstr "S'ha produït un error a l'executar la capplet del teclat: %s"
 
 #
 #: capplets/keyboard/gnome-keyboard-properties.c:273
@@ -1529,10 +1571,6 @@ msgstr "«Click» en polsar tecles"
 msgid "Repeat Keys"
 msgstr "Repetició de tecles"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
-msgid "S_peed:"
-msgstr "_Velocitat:"
-
 #
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid "_Accessibility..."
@@ -1571,7 +1609,7 @@ msgstr "baix"
 msgid "Set your keyboard preferences"
 msgstr "Estableix les preferències del teclat"
 
-#: capplets/mouse/gnome-mouse-properties.c:477
+#: capplets/mouse/gnome-mouse-properties.c:476
 #, c-format
 msgid ""
 "<b>Unknown Cursor</b>\n"
@@ -1580,7 +1618,7 @@ msgstr ""
 "<b>Cursor desconegut</b>\n"
 "%s"
 
-#: capplets/mouse/gnome-mouse-properties.c:578
+#: capplets/mouse/gnome-mouse-properties.c:577
 msgid ""
 "<b>Default Cursor - Current</b>\n"
 "The default cursor that ships with X"
@@ -1588,7 +1626,7 @@ msgstr ""
 "<b>Cursor per defecte - Actual</b>\n"
 "El cursor per defecte que s'envia amb X"
 
-#: capplets/mouse/gnome-mouse-properties.c:581
+#: capplets/mouse/gnome-mouse-properties.c:580
 msgid ""
 "<b>Default Cursor</b>\n"
 "The default cursor that ships with X"
@@ -1596,7 +1634,7 @@ msgstr ""
 "<b>Cursor per defecte</b>\n"
 "El cursor per defecte que s'envia amb X"
 
-#: capplets/mouse/gnome-mouse-properties.c:599
+#: capplets/mouse/gnome-mouse-properties.c:598
 msgid ""
 "<b>White Cursor - Current</b>\n"
 "The default cursor inverted"
@@ -1604,7 +1642,7 @@ msgstr ""
 "<b>Cursor blanc - Actual</b>\n"
 "El cursor per defecte invertit"
 
-#: capplets/mouse/gnome-mouse-properties.c:602
+#: capplets/mouse/gnome-mouse-properties.c:601
 msgid ""
 "<b>White Cursor</b>\n"
 "The default cursor inverted"
@@ -1612,7 +1650,7 @@ msgstr ""
 "<b>Cursor blanc</b>\n"
 "El cursor per defecte invertit"
 
-#: capplets/mouse/gnome-mouse-properties.c:620
+#: capplets/mouse/gnome-mouse-properties.c:619
 msgid ""
 "<b>Large Cursor - Current</b>\n"
 "Large version of normal cursor"
@@ -1620,7 +1658,7 @@ msgstr ""
 "<b>Cursor gran - Actual</b>\n"
 "La versió gran del cursor normal"
 
-#: capplets/mouse/gnome-mouse-properties.c:623
+#: capplets/mouse/gnome-mouse-properties.c:622
 msgid ""
 "<b>Large Cursor</b>\n"
 "Large version of normal cursor"
@@ -1628,7 +1666,7 @@ msgstr ""
 "<b>Cursor gran</b>\n"
 "La versió gran del cursor normal"
 
-#: capplets/mouse/gnome-mouse-properties.c:641
+#: capplets/mouse/gnome-mouse-properties.c:640
 msgid ""
 "<b>Large White Cursor - Current</b>\n"
 "Large version of white cursor"
@@ -1636,7 +1674,7 @@ msgstr ""
 "<b>Cursor blanc gran - Actual</b>\n"
 "La versió gran del cursor blanc"
 
-#: capplets/mouse/gnome-mouse-properties.c:644
+#: capplets/mouse/gnome-mouse-properties.c:643
 msgid ""
 "<b>Large White Cursor</b>\n"
 "Large version of white cursor"
@@ -1773,10 +1811,6 @@ msgstr "_Mostra la posició del cursor quan la tecla Control és pressionada"
 msgid "_Threshold:"
 msgstr "_Llindar:"
 
-#: capplets/mouse/mouse.desktop.in.h:1
-msgid "Mouse"
-msgstr "Ratolí"
-
 #: capplets/mouse/mouse.desktop.in.h:2
 msgid "Set your mouse preferences"
 msgstr "Estableix les preferències del ratolí"
@@ -1791,37 +1825,78 @@ msgstr "Servidor intermediari de xarxa"
 msgid "Network proxy preferences"
 msgstr "Preferències del servidor intermediari de xarxa"
 
-#: capplets/network/gnome-network-preferences.glade.h:2
-msgid "Network Preferences"
-msgstr "Preferències de la xarxa"
+#: capplets/network/gnome-network-preferences.glade.h:1
+msgid "      "
+msgstr ""
 
 #: capplets/network/gnome-network-preferences.glade.h:3
-msgid "Network Proxy Preferences"
-msgstr "Preferències del servidor intermediari de xarxa"
+msgid "<b>_Automatic proxy configuration</b>"
+msgstr ""
 
 #: capplets/network/gnome-network-preferences.glade.h:4
-msgid "P_ort:"
-msgstr "P_ort:"
+msgid "<b>_Direct internet connection</b>"
+msgstr ""
 
 #: capplets/network/gnome-network-preferences.glade.h:5
-msgid "Pass_word:"
-msgstr "Contrasen_ya:"
+msgid "<b>_Manual proxy configuration</b>"
+msgstr ""
 
 #: capplets/network/gnome-network-preferences.glade.h:6
-msgid "Pro_xy requires username and password"
-msgstr "El servidor intermediari requerei_x un nom d'usuari i contrasenya"
+msgid "<b>_Use authentication</b>"
+msgstr ""
 
 #: capplets/network/gnome-network-preferences.glade.h:7
-msgid "User_name:"
-msgstr "_Nom d'usuari:"
+#, fuzzy
+msgid "Autoconfiguration _URL:"
+msgstr "Ordre de configuració:"
 
 #: capplets/network/gnome-network-preferences.glade.h:8
-msgid "_Location:"
-msgstr "_Lloc:"
+#, fuzzy
+msgid "HTTP Proxy Details"
+msgstr "Servidor intermediari d'HTTP"
 
 #: capplets/network/gnome-network-preferences.glade.h:9
-msgid "_Use HTTP proxy"
+#, fuzzy
+msgid "Network Proxy Configuration"
+msgstr "Preferències del servidor intermediari de xarxa"
+
+#: capplets/network/gnome-network-preferences.glade.h:10
+#, fuzzy
+msgid "Port:"
+msgstr "P_ort:"
+
+#: capplets/network/gnome-network-preferences.glade.h:11
+msgid "S_ocks host:"
+msgstr ""
+
+#: capplets/network/gnome-network-preferences.glade.h:12
+msgid "_Details"
+msgstr ""
+
+#: capplets/network/gnome-network-preferences.glade.h:13
+#, fuzzy
+msgid "_FTP proxy:"
 msgstr "_Utilitza servidor intermediari d'HTTP"
+
+#: capplets/network/gnome-network-preferences.glade.h:14
+#, fuzzy
+msgid "_HTTP proxy:"
+msgstr "_Utilitza servidor intermediari d'HTTP"
+
+#: capplets/network/gnome-network-preferences.glade.h:15
+#, fuzzy
+msgid "_Password:"
+msgstr "Contrasen_ya:"
+
+#: capplets/network/gnome-network-preferences.glade.h:16
+#, fuzzy
+msgid "_Secure HTTP proxy:"
+msgstr "_Utilitza servidor intermediari d'HTTP"
+
+#: capplets/network/gnome-network-preferences.glade.h:17
+#, fuzzy
+msgid "_Username:"
+msgstr "_Nom d'usuari:"
 
 #
 #: capplets/sound/sound-properties-capplet.c:180
@@ -1832,6 +1907,11 @@ msgstr "Preferències de So"
 #: capplets/sound/sound-properties.glade.h:1
 msgid "E_nable sound server startup"
 msgstr "Habilita l'i_nici del servidor de so"
+
+#
+#: capplets/sound/sound-properties.glade.h:2
+msgid "General"
+msgstr "General"
 
 #
 #: capplets/sound/sound-properties.glade.h:3
@@ -1909,32 +1989,49 @@ msgid "Select themes for various parts of the desktop"
 msgstr "Selecciona els temes per a varies parts de l'escriptori"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
+#: capplets/theme-switcher/theme-properties.glade.h:6
 msgid "Theme"
 msgstr "Tema"
 
 #: capplets/theme-switcher/theme-properties.glade.h:1
-msgid "New themes can also be installed by dragging them into the window."
-msgstr "Es poden instal·lar nou temes arrossegant-los a la finestra."
+#, fuzzy
+msgid "Apply _Background"
+msgstr "Propietats del fons"
 
 #: capplets/theme-switcher/theme-properties.glade.h:2
-msgid "Theme Preferences"
-msgstr "Preferències dels temes"
+#, fuzzy
+msgid "Apply _Font"
+msgstr "Aplica ara"
 
 #: capplets/theme-switcher/theme-properties.glade.h:3
-msgid "Widget Theme"
-msgstr ""
+#, fuzzy
+msgid "Controls"
+msgstr "Control d'interfície d'usuari"
 
 #: capplets/theme-switcher/theme-properties.glade.h:4
 #, fuzzy
-msgid "Window Border Theme"
-msgstr "Aparença del cantó de les finestres"
+msgid "Icons"
+msgstr "Només icones"
 
 #: capplets/theme-switcher/theme-properties.glade.h:5
+msgid "New themes can also be installed by dragging them into the window."
+msgstr "Es poden instal·lar nou temes arrossegant-los a la finestra."
+
+#: capplets/theme-switcher/theme-properties.glade.h:7
+msgid "Theme Preferences"
+msgstr "Preferències dels temes"
+
+#: capplets/theme-switcher/theme-properties.glade.h:8
+#, fuzzy
+msgid "Window Border"
+msgstr "Aparença del cantó de les finestres"
+
+#: capplets/theme-switcher/theme-properties.glade.h:9
 msgid "_Go to theme folder"
 msgstr "_Vés a la carpeta de temes"
 
 #
-#: capplets/theme-switcher/theme-properties.glade.h:6
+#: capplets/theme-switcher/theme-properties.glade.h:10
 msgid "_Install New Theme..."
 msgstr "_Instal·la un nou tema..."
 
@@ -2096,32 +2193,58 @@ msgstr "_Surt"
 msgid "_Save"
 msgstr "_Desa"
 
+#: capplets/windows/gnome-window-properties.c:352
+#, c-format
+msgid ""
+"<b>Cannot start the preferences application for your window manager</b>\n"
+"\n"
+"%s"
+msgstr ""
+
+#: capplets/windows/gnome-window-properties.c:575
+#, fuzzy
+msgid "Control"
+msgstr "Control d'interfície d'usuari"
+
+#: capplets/windows/gnome-window-properties.c:580
+msgid "Alt"
+msgstr ""
+
+#: capplets/windows/gnome-window-properties.c:586
+#, fuzzy
+msgid "Hyper"
+msgstr "Tipus"
+
+#: capplets/windows/gnome-window-properties.c:593
+#, fuzzy
+msgid "Super"
+msgstr "Velocitat"
+
+#: capplets/windows/gnome-window-properties.glade.h:1
+msgid "To _move windows, click while holding down:"
+msgstr ""
+
 #
-#: capplets/windows/gnome-window-properties.c:282
-#: capplets/windows/gnome-window-properties.glade.h:6
+#: capplets/windows/gnome-window-properties.glade.h:2
 msgid "Window Preferences"
 msgstr "Preferències de les finestres"
 
-#: capplets/windows/gnome-window-properties.glade.h:1
-msgid "Apply Now"
-msgstr "Aplica ara"
-
-#: capplets/windows/gnome-window-properties.glade.h:2
-msgid "Select windows when the mouse moves over them"
-msgstr "Selecciona les finestres quan el ratolí pasa per damunt"
-
 #: capplets/windows/gnome-window-properties.glade.h:3
-msgid "Titlebar Font"
-msgstr "Tipus de lletra del les barres de títol"
+msgid "_Double-click window titles to:"
+msgstr ""
 
 #: capplets/windows/gnome-window-properties.glade.h:4
-msgid "Window Border Appearance"
-msgstr "Aparença del cantó de les finestres"
+msgid "_Raise selected windows after a short time"
+msgstr ""
 
-#
 #: capplets/windows/gnome-window-properties.glade.h:5
-msgid "Window Manager:"
-msgstr "Gestor de finestres:"
+#, fuzzy
+msgid "_Select windows when the mouse moves over them"
+msgstr "Selecciona les finestres quan el ratolí pasa per damunt"
+
+#: capplets/windows/gnome-window-properties.glade.h:6
+msgid "_Tenths of a second before raising the window:"
+msgstr ""
 
 #
 #: capplets/windows/window-properties.desktop.in.h:1
@@ -2276,7 +2399,7 @@ msgstr "_No mostrar aquest missatge de nou"
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "No s'ha pogut carregar el fitxer de so %s com a event %s"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:170
+#: gnome-settings-daemon/gnome-settings-xsettings.c:172
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr ""
@@ -2359,60 +2482,117 @@ msgstr "Re_produeix"
 msgid "Select sound file"
 msgstr "Seleccioneu un fitxer de so"
 
-#: libwindow-settings/gnome-wm-manager.c:171
+#: libwindow-settings/gnome-wm-manager.c:320
 #, c-format
-msgid ""
-"Starting %s\n"
-"(%d seconds left before operation times out)"
+msgid "Window manager \"%s\" has not registered a configuration tool\n"
 msgstr ""
-"S'està iniciant %s\n"
-"(queden %d segons abans que l'operació excedeixi el temps)"
 
-#: libwindow-settings/gnome-wm-manager.c:325
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\tAnother window manager is already running and could not be killed\n"
-msgstr ""
-"wm-properties-capplet: No s'ha pogut inicialitzar el gestor de finestres.\n"
-"\tJa s'està executant un altre gestor de finestres que no s'ha pogut matar\n"
+# Xiulet? jm
+#, fuzzy
+#~ msgid "Beep when enabling/disabling _keyboard accessibility features"
+#~ msgstr ""
+#~ "Fes «_beep» quan s'habiliten/deshabiliten les característiques "
+#~ "d'accesibiltat del teclat"
 
-#: libwindow-settings/gnome-wm-manager.c:329
-#, c-format
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\t'%s' didn't start\n"
-msgstr ""
-"wm-properties-capplet: No s'ha pogut inicialitzar el gestor de finestres.\n"
-"\t«%s» no s'ha iniciat\n"
+#~ msgid "Beep when:"
+#~ msgstr "Fes «beep» quan:"
 
-#: libwindow-settings/gnome-wm-manager.c:378
-msgid "Previous window manager did not die\n"
-msgstr "El gestor de finestres anterior no va morir\n"
+#, fuzzy
+#~ msgid "Repeat Key Pre_ferences..."
+#~ msgstr "Preferències de repetició de tecles"
 
-#: libwindow-settings/gnome-wm-manager.c:411
-#, c-format
-msgid ""
-"Could not start '%s'.\n"
-"Falling back to previous window manager '%s'\n"
-msgstr ""
-"No s'ha pogut iniciar «%s».\n"
-"S'està tornant al gestor de finestres anterior, «%s»\n"
+#, fuzzy
+#~ msgid "Start mo_ving this long after keypress:"
+#~ msgstr ""
+#~ "Comença a mo_ure després d'aquest interval posterior a la polsació de la "
+#~ "tecla:"
 
-#: libwindow-settings/gnome-wm-manager.c:442
-msgid ""
-"Could not start fallback window manager.\n"
-"Please run a window manager manually. You can\n"
-"do this by selecting \"Run Program\" in the\n"
-"foot menu\n"
-msgstr ""
-"No s'ha pogut iniciar el gestor de finestres anterior.\n"
-"Si us plau, executeu un gestor de finestres manualment. Podeu \n"
-"fer-ho seleccionant «Executa un programa» al\n"
-"menú al peu\n"
+#~ msgid "Testing Area"
+#~ msgstr "Àrea de proves"
 
-#: libwindow-settings/gnome-wm-manager.c:467
-msgid "OK"
-msgstr "D'acord"
+#~ msgid "Toggle and Repeat Keys"
+#~ msgstr "Tecles de commutació i repetició"
+
+#, fuzzy
+#~ msgid "_Import CDE AccessX file..."
+#~ msgstr "_Importa un fitxer AccessX de CDE"
+
+#~ msgid ""
+#~ "_Turn off Sticky Keys when\n"
+#~ "two keys pressed simultaneously"
+#~ msgstr ""
+#~ "_Desactiva les tecles enganxoses quan\n"
+#~ "dues tecles siguin pressionades simultàniament"
+
+#~ msgid "msecs"
+#~ msgstr "miliseg."
+
+#~ msgid "Network Preferences"
+#~ msgstr "Preferències de la xarxa"
+
+#~ msgid "Pro_xy requires username and password"
+#~ msgstr "El servidor intermediari requerei_x un nom d'usuari i contrasenya"
+
+#~ msgid "_Location:"
+#~ msgstr "_Lloc:"
+
+#~ msgid "Titlebar Font"
+#~ msgstr "Tipus de lletra del les barres de títol"
+
+#~ msgid "Window Border Appearance"
+#~ msgstr "Aparença del cantó de les finestres"
+
+#
+#~ msgid "Window Manager:"
+#~ msgstr "Gestor de finestres:"
+
+#~ msgid ""
+#~ "Starting %s\n"
+#~ "(%d seconds left before operation times out)"
+#~ msgstr ""
+#~ "S'està iniciant %s\n"
+#~ "(queden %d segons abans que l'operació excedeixi el temps)"
+
+#~ msgid ""
+#~ "wm-properties-capplet: Unable to initialize window manager.\n"
+#~ "\tAnother window manager is already running and could not be killed\n"
+#~ msgstr ""
+#~ "wm-properties-capplet: No s'ha pogut inicialitzar el gestor de "
+#~ "finestres.\n"
+#~ "\tJa s'està executant un altre gestor de finestres que no s'ha pogut "
+#~ "matar\n"
+
+#~ msgid ""
+#~ "wm-properties-capplet: Unable to initialize window manager.\n"
+#~ "\t'%s' didn't start\n"
+#~ msgstr ""
+#~ "wm-properties-capplet: No s'ha pogut inicialitzar el gestor de "
+#~ "finestres.\n"
+#~ "\t«%s» no s'ha iniciat\n"
+
+#~ msgid "Previous window manager did not die\n"
+#~ msgstr "El gestor de finestres anterior no va morir\n"
+
+#~ msgid ""
+#~ "Could not start '%s'.\n"
+#~ "Falling back to previous window manager '%s'\n"
+#~ msgstr ""
+#~ "No s'ha pogut iniciar «%s».\n"
+#~ "S'està tornant al gestor de finestres anterior, «%s»\n"
+
+#~ msgid ""
+#~ "Could not start fallback window manager.\n"
+#~ "Please run a window manager manually. You can\n"
+#~ "do this by selecting \"Run Program\" in the\n"
+#~ "foot menu\n"
+#~ msgstr ""
+#~ "No s'ha pogut iniciar el gestor de finestres anterior.\n"
+#~ "Si us plau, executeu un gestor de finestres manualment. Podeu \n"
+#~ "fer-ho seleccionant «Executa un programa» al\n"
+#~ "menú al peu\n"
+
+#~ msgid "OK"
+#~ msgstr "D'acord"
 
 #
 #~ msgid "Add:"
@@ -2696,9 +2876,6 @@ msgstr "D'acord"
 
 #~ msgid "Mouse Properties"
 #~ msgstr "Propietats del ratolí"
-
-#~ msgid "HTTP Proxy Settings"
-#~ msgstr "Servidor intermediari d'HTTP"
 
 #~ msgid "Configure GNOME's use of sound"
 #~ msgstr "Configura els sons del GNOME"
@@ -3037,9 +3214,6 @@ msgstr "D'acord"
 #
 #~ msgid "Command:"
 #~ msgstr "Ordre:"
-
-#~ msgid "Configuration Command:"
-#~ msgstr "Ordre de configuració:"
 
 #~ msgid "Window manager is session managed"
 #~ msgstr "El gestor de finestres està gestionat per la sessió"

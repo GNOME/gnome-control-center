@@ -523,6 +523,31 @@ key_theme_changed (GConfClient *client,
 }
 
 
+static gboolean
+cb_check_for_uniqueness (GtkTreeModel *model,
+			 GtkTreePath  *path,
+			 GtkTreeIter  *iter,
+			 gpointer      user_data)
+{
+  KeyEntry *key_entry;
+  KeyEntry *tmp_key_entry;
+
+  key_entry = (KeyEntry *)user_data;
+  gtk_tree_model_get (key_entry->model, iter,
+		      KEYENTRY_COLUMN, &tmp_key_entry,
+		      -1);
+
+  if (tmp_key_entry != NULL &&
+      key_entry->keyval == tmp_key_entry->keyval &&
+      key_entry->mask   == tmp_key_entry->mask)
+    {
+      key_entry->editable = FALSE;
+      key_entry->gconf_key = tmp_key_entry->gconf_key;
+      return TRUE;
+    }
+  return FALSE;
+}
+
 static void
 accel_edited_callback (GtkCellRendererText *cell,
                        const char          *path_string,
@@ -535,7 +560,7 @@ accel_edited_callback (GtkCellRendererText *cell,
   GtkTreeModel *model;
   GtkTreePath *path = gtk_tree_path_new_from_string (path_string);
   GtkTreeIter iter;
-  KeyEntry *key_entry;
+  KeyEntry *key_entry, tmp_key;
   GError *err = NULL;
   char *str;
 
@@ -547,7 +572,34 @@ accel_edited_callback (GtkCellRendererText *cell,
 
   /* sanity check */
   if (key_entry == NULL)
+    {
+      gtk_tree_path_free (path);
+      return;
+    }
+
+  tmp_key.model  = model;
+  tmp_key.keyval = keyval;
+  tmp_key.mask   = mask;
+  tmp_key.editable = TRUE; /* kludge to stuff in a return flag */
+  gtk_tree_model_foreach (model, cb_check_for_uniqueness, &tmp_key);
+
+  /* flag to see if the new accelerator was in use by something */
+  if (!tmp_key.editable)
+    {
+      GtkWidget *dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (view))),
+				       GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL,
+				       GTK_MESSAGE_WARNING,
+				       GTK_BUTTONS_OK,
+				       _("That accelerator key is already in use by: %s\n"),
+				       key_entry->gconf_key);
+      gtk_dialog_run (GTK_DIALOG (dialog));
+      gtk_widget_destroy (dialog);
+
+      egg_cell_renderer_keys_set_accelerator (EGG_CELL_RENDERER_KEYS (cell),
+					      key_entry->keyval, key_entry->mask);
+      gtk_tree_path_free (path);
     return;
+    }
 
   str = binding_name (keyval, mask, FALSE);
 

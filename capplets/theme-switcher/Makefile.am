@@ -6,7 +6,8 @@ gnome_theme_manager_LDADD = 						\
 
 gnome_theme_manager_SOURCES =	\
 	gnome-theme-manager.c	\
-	gnome-theme-installer.c
+	gnome-theme-installer.c	\
+	gnome-theme-installer.h
 
 gnome_theme_manager_LDFLAGS = -export-dynamic
 

@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2002-10-21 12:31-0400\n"
+"POT-Creation-Date: 2002-11-02 13:45-0500\n"
 "PO-Revision-Date: 2002-06-09 20:17+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -12,20 +12,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:229
-#: capplets/keyboard/gnome-keyboard-properties.c:160
-#, c-format
-msgid "There was an error launching the keyboard capplet : %s"
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:237
+#, fuzzy, c-format
+msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr ""
 "Ob zaganjanju nastavitvenega vstavka tipkovnice se je zgodila napaka : %s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:321
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:379
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:331
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:389
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Nisem mogel uvoziti nastavitev AccessX iz datoteke '%s'"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:452
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:462
 msgid "Select CDE AccessX file"
 msgstr "Izberi datoteko CDE AccessX"
 
@@ -47,56 +46,92 @@ msgid ""
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:1
+#: capplets/file-types/file-types-properties.glade.h:1
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
+#: capplets/network/gnome-network-preferences.glade.h:2
+#: capplets/theme-switcher/theme-install.glade.h:1
+msgid "*"
+msgstr "*"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
+msgid "Basic"
+msgstr ""
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
+#, fuzzy
+msgid "Beep if key is re_jected"
+msgstr "Zapiskaj, ko je tipka za_vrnjena"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
+#, fuzzy
+msgid "Beep when _modifier is pressed"
+msgstr "_Zapiskaj, ko je prisoten spremenilnik"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
+msgid "Beep when a _feature is turned on or off"
+msgstr ""
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
 msgid "Beep when an LED is turned on and two beeps when one is turned off."
 msgstr ""
 "Zapiskaj, ko je vklopljena lučka LED in dvakrat zapiskaj, ko je izklopljena."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
 #, fuzzy
-msgid "Beep when enabling/disabling _keyboard accessibility features"
-msgstr "_Zapiskaj ob vklopu/izklopu možnosti dostopnosti tipkovnice"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
-msgid "Beep when key is re_jected"
+msgid "Beep when key is:"
 msgstr "Zapiskaj, ko je tipka za_vrnjena"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
-msgid "Beep when:"
-msgstr "Zapiskaj, ko:"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
+#, fuzzy
+msgid "Del_ay:"
+msgstr "_Premor (sek):"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
+msgid "Delay between keypress and pointer mo_vement:"
+msgstr ""
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
+msgid "Disa_ble if two keys pressed together"
+msgstr ""
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:11
 #, fuzzy
 msgid "E_nable Toggle Keys"
 msgstr "Vključi _preklopne tipke"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
 #, fuzzy
 msgid "Enable Bo_unce Keys"
 msgstr "Vključi _odskočne tipke"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
 msgid "Enable Slo_w Keys"
 msgstr "Vključi _počasne tipke"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
 msgid "Enable _Mouse Keys"
 msgstr "Vključi _miškine tipke"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
 msgid "Enable _Sticky Keys"
 msgstr "Vključi _lepljive tipke"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
-#: capplets/sound/sound-properties.glade.h:2
-msgid "General"
-msgstr "Splošno"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
+msgid "Features"
+msgstr ""
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:11
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
 #, fuzzy
-msgid "I_gnore keypresses within:"
+msgid "Filters"
+msgstr "_Datoteka"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
+#, fuzzy
+msgid "I_gnore duplicate keypresses within:"
 msgstr "_Prezri pritiske tipk znotraj  :"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
 msgid ""
 "Ignore all subsequent presses of the SAME key if they happen within a user "
 "selectable period of time."
@@ -104,17 +139,27 @@ msgstr ""
 "Prezri vse zaporedne pritiske iste tipke, če se zgodijo znotraj časa, ki "
 "ganavede uporabnik."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
 #, fuzzy
 msgid "Keyboard Accessibility Preferences (AccessX)"
 msgstr "Nastavitve dostopnosti tipkovnice (AccessX)"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
 #, fuzzy
 msgid "Ma_ximum pointer speed:"
 msgstr "Na_jvečja hitrost kazalca :"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
+#: capplets/mouse/mouse.desktop.in.h:1
+msgid "Mouse"
+msgstr "Miška"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
+#, fuzzy
+msgid "Mouse _Preferences..."
+msgstr "Nastavitve miške"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
 msgid ""
 "Only accept keys after they have been pressed and held for a user adjustable "
 "amount of time."
@@ -122,92 +167,91 @@ msgstr ""
 "Sprejmi le tipke, ko so bile pritisnjene in držane toliko časa, kot je "
 "nastavil uporabnik."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
 msgid ""
 "Perform multiple simultaneous key press operations by pressing modifier keys "
 "in sequence."
 msgstr ""
 "Izvedi več hkratnih pritiskov tipk s pritiskom spremenilnik tipk v zaporedju."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
-#, fuzzy
-msgid "Repeat Key Pre_ferences..."
-msgstr "Nastavitev ponavljanja tipk"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
-#, fuzzy
-msgid "Start mo_ving this long after keypress:"
-msgstr "Začni se _premikati tako dolgo po pritisku tipke :"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
-msgid "Testing Area"
-msgstr "Preizkusno območje"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
-#, fuzzy
-msgid "Time to acce_lerate to max speed:"
-msgstr "Čas za _pospešitev na največjo hitrost :"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
-msgid "Toggle and Repeat Keys"
-msgstr "Preklopi in ponavljanje tipk"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
-msgid "Turn the numeric keypad into a mouse control pad."
-msgstr "Spremeni numerično tipkovnico v plošček za nadzor miške."
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
-#, fuzzy
-msgid "_Beep when modifier is pressed"
-msgstr "_Zapiskaj, ko je prisoten spremenilnik"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
-msgid "_Disable if unused for "
-msgstr "_Izključi, če ni uporabljeno "
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
-msgid "_Enable keyboard accessibility"
-msgstr "_Vključi dostopnost tipkovnice"
-
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 #, fuzzy
-msgid "_Import CDE AccessX file..."
-msgstr "_Uvozi datoteko CDE AccessX"
+msgid "S_peed:"
+msgstr "Hitrost"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
 #, fuzzy
-msgid "_Only accept keypress after:"
-msgstr "_Sprejmi tipke le po :"
+msgid "Time to acce_lerate to maximum speed:"
+msgstr "Čas za _pospešitev na največjo hitrost :"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:28
-msgid ""
-"_Turn off Sticky Keys when\n"
-"two keys pressed simultaneously"
-msgstr ""
-"_Izkljči lepljive tipke,\n"
-"ko sta dve tipki pritisnjeni hkrati"
+#, fuzzy
+msgid "Toggle Keys"
+msgstr "Vključi _preklopne tipke"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
+msgid "Turn the numeric keypad into a mouse control pad."
+msgstr "Spremeni numerično tipkovnico v plošček za nadzor miške."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
-msgid "key is _accepted"
-msgstr "tipka je _sprejeta"
+#, fuzzy
+msgid "_Disable if unused for:"
+msgstr "_Izključi, če ni uporabljeno "
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
-msgid "key is _pressed"
-msgstr "tipka je _pritisnjena"
+#, fuzzy
+msgid "_Enable keyboard accessibility features"
+msgstr "_Vključi dostopnost tipkovnice"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
-msgid "key is _rejected"
-msgstr "tipka je _zavrnjena"
+msgid "_Import Feature Settings..."
+msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
-msgid "msecs"
-msgstr "milisekund"
+#, fuzzy
+msgid "_Only accept keys held for:"
+msgstr "_Sprejmi tipke le po :"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
-msgid "pixels/sec"
-msgstr "pikslov/sek"
+#, fuzzy
+msgid "_Repeat Keys"
+msgstr "Hitrost ponavljanja"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:35
+msgid "_Type to test settings:"
+msgstr ""
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
+#, fuzzy
+msgid "_accepted"
+msgstr "tipka je _sprejeta"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:37
+#, fuzzy
+msgid "_pressed"
+msgstr "tipka je _pritisnjena"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:38
+#, fuzzy
+msgid "_rejected"
+msgstr "tipka je _zavrnjena"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:39
+msgid "characters/second"
+msgstr ""
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:40
+#, fuzzy
+msgid "milliseconds"
+msgstr "sekund"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:41
+#, fuzzy
+msgid "pixels/second"
+msgstr "pikslov/sek"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:42
 msgid "seconds"
 msgstr "sekund"
 
@@ -262,7 +306,7 @@ msgstr "Izberi _sliko:"
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
 #: capplets/keyboard/gnome-keyboard-properties.c:294
-#: capplets/mouse/gnome-mouse-properties.c:752
+#: capplets/mouse/gnome-mouse-properties.c:751
 #: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
 msgstr "Prenesi in shrani zapuščene nastavitve"
@@ -554,14 +598,6 @@ msgstr "Privzeti programi"
 msgid "Please specify a name and a command for this editor."
 msgstr "Prosim, navedite ime in ukaz za ta urejevalnik."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:1
-#: capplets/file-types/file-types-properties.glade.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
-#: capplets/network/gnome-network-preferences.glade.h:1
-#: capplets/theme-switcher/theme-install.glade.h:1
-msgid "*"
-msgstr "*"
-
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:2
 msgid "Acce_pts URLs"
 msgstr "Sprejme _URLje"
@@ -773,6 +809,7 @@ msgid "Minimizing and Maximizing"
 msgstr "Razpenjanje in krčenje"
 
 #: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
+#: capplets/windows/gnome-window-properties.c:600
 msgid "Meta"
 msgstr "Alt"
 
@@ -1339,14 +1376,19 @@ msgstr "Namizje"
 msgid "Window Management"
 msgstr "Upravljanje oken"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:568
+#: capplets/keybindings/gnome-keybinding-properties.c:593
+#, c-format
+msgid "That accelerator key is already in use by: %s\n"
+msgstr ""
+
+#: capplets/keybindings/gnome-keybinding-properties.c:620
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 "Napaka ob nastavljanju novega pospeševalnika v nastavitveni zbirki podatkov: "
 "%s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:719
+#: capplets/keybindings/gnome-keybinding-properties.c:771
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1354,11 +1396,11 @@ msgstr ""
 "Nisem našel teme tipkovnice  To pomeni, da je bila vaša namestitev GTK+ "
 "nepopolna."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:741
+#: capplets/keybindings/gnome-keybinding-properties.c:793
 msgid "Action"
 msgstr "Dejanje"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:759
+#: capplets/keybindings/gnome-keybinding-properties.c:811
 msgid "Shortcut"
 msgstr "Bližnjica"
 
@@ -1383,6 +1425,12 @@ msgstr "Bližnjice _namizja"
 #: capplets/keybindings/keybinding.desktop.in.h:1
 msgid "Assign shortcut keys to commands"
 msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.c:160
+#, c-format
+msgid "There was an error launching the keyboard capplet : %s"
+msgstr ""
+"Ob zaganjanju nastavitvenega vstavka tipkovnice se je zgodila napaka : %s"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:273
 msgid "_Accessibility"
@@ -1453,11 +1501,6 @@ msgstr ""
 msgid "Repeat Keys"
 msgstr "Hitrost ponavljanja"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
-#, fuzzy
-msgid "S_peed:"
-msgstr "Hitrost"
-
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid "_Accessibility..."
 msgstr "_Dostopnost..."
@@ -1499,7 +1542,7 @@ msgstr ""
 msgid "Set your keyboard preferences"
 msgstr "Nastavitv tipkovnice"
 
-#: capplets/mouse/gnome-mouse-properties.c:477
+#: capplets/mouse/gnome-mouse-properties.c:476
 #, c-format
 msgid ""
 "<b>Unknown Cursor</b>\n"
@@ -1508,7 +1551,7 @@ msgstr ""
 "<b>Neznan kazalec</b>\n"
 "%s"
 
-#: capplets/mouse/gnome-mouse-properties.c:578
+#: capplets/mouse/gnome-mouse-properties.c:577
 msgid ""
 "<b>Default Cursor - Current</b>\n"
 "The default cursor that ships with X"
@@ -1516,7 +1559,7 @@ msgstr ""
 "<b>Privzet kazalec - trenutni</b>\n"
 "Privzet kazalec, ki pride z X"
 
-#: capplets/mouse/gnome-mouse-properties.c:581
+#: capplets/mouse/gnome-mouse-properties.c:580
 msgid ""
 "<b>Default Cursor</b>\n"
 "The default cursor that ships with X"
@@ -1524,7 +1567,7 @@ msgstr ""
 "<b>Privzet kazalec</b>\n"
 "Privzet kazalec, ki pride z X"
 
-#: capplets/mouse/gnome-mouse-properties.c:599
+#: capplets/mouse/gnome-mouse-properties.c:598
 msgid ""
 "<b>White Cursor - Current</b>\n"
 "The default cursor inverted"
@@ -1532,7 +1575,7 @@ msgstr ""
 "<b>Bel kazalec - trenutni</b>\n"
 "Invertiran privzet kazalec"
 
-#: capplets/mouse/gnome-mouse-properties.c:602
+#: capplets/mouse/gnome-mouse-properties.c:601
 msgid ""
 "<b>White Cursor</b>\n"
 "The default cursor inverted"
@@ -1540,7 +1583,7 @@ msgstr ""
 "<b>Bel kazalec</b>\n"
 "Invertiran privzet kazalec"
 
-#: capplets/mouse/gnome-mouse-properties.c:620
+#: capplets/mouse/gnome-mouse-properties.c:619
 msgid ""
 "<b>Large Cursor - Current</b>\n"
 "Large version of normal cursor"
@@ -1548,7 +1591,7 @@ msgstr ""
 "<b>Velik kazalec - trenutni</b>\n"
 "Velika različica običajnega kazalca"
 
-#: capplets/mouse/gnome-mouse-properties.c:623
+#: capplets/mouse/gnome-mouse-properties.c:622
 msgid ""
 "<b>Large Cursor</b>\n"
 "Large version of normal cursor"
@@ -1556,7 +1599,7 @@ msgstr ""
 "<b>Velik kazalec</b>\n"
 "Velika različica običajnega kazalca"
 
-#: capplets/mouse/gnome-mouse-properties.c:641
+#: capplets/mouse/gnome-mouse-properties.c:640
 msgid ""
 "<b>Large White Cursor - Current</b>\n"
 "Large version of white cursor"
@@ -1564,7 +1607,7 @@ msgstr ""
 "<b>Velik bel kazalec - trenutni</b>\n"
 "Velika različica belega kazalca"
 
-#: capplets/mouse/gnome-mouse-properties.c:644
+#: capplets/mouse/gnome-mouse-properties.c:643
 msgid ""
 "<b>Large White Cursor</b>\n"
 "Large version of white cursor"
@@ -1699,10 +1742,6 @@ msgstr "_Ko je pritisnjena tipka control, kaži položaj kazalca"
 msgid "_Threshold:"
 msgstr "_Prag:"
 
-#: capplets/mouse/mouse.desktop.in.h:1
-msgid "Mouse"
-msgstr "Miška"
-
 #: capplets/mouse/mouse.desktop.in.h:2
 #, fuzzy
 msgid "Set your mouse preferences"
@@ -1718,39 +1757,78 @@ msgstr "Omrežje"
 msgid "Network proxy preferences"
 msgstr "Nastavitve omrežja"
 
-#: capplets/network/gnome-network-preferences.glade.h:2
-msgid "Network Preferences"
-msgstr "Nastavitve omrežja"
+#: capplets/network/gnome-network-preferences.glade.h:1
+msgid "      "
+msgstr ""
 
 #: capplets/network/gnome-network-preferences.glade.h:3
-#, fuzzy
-msgid "Network Proxy Preferences"
-msgstr "Nastavitve omrežja"
+msgid "<b>_Automatic proxy configuration</b>"
+msgstr ""
 
 #: capplets/network/gnome-network-preferences.glade.h:4
-msgid "P_ort:"
-msgstr "_Vrata:"
+msgid "<b>_Direct internet connection</b>"
+msgstr ""
 
 #: capplets/network/gnome-network-preferences.glade.h:5
-msgid "Pass_word:"
-msgstr "_Geslo:"
+msgid "<b>_Manual proxy configuration</b>"
+msgstr ""
 
 #: capplets/network/gnome-network-preferences.glade.h:6
-#, fuzzy
-msgid "Pro_xy requires username and password"
-msgstr "Pos_rednik zahteva uporabniško ime in geslo"
+msgid "<b>_Use authentication</b>"
+msgstr ""
 
 #: capplets/network/gnome-network-preferences.glade.h:7
-msgid "User_name:"
-msgstr "_Uporabniško ime:"
+#, fuzzy
+msgid "Autoconfiguration _URL:"
+msgstr "Ukaz za nastavitve:"
 
 #: capplets/network/gnome-network-preferences.glade.h:8
-msgid "_Location:"
-msgstr "_Lokacija"
+#, fuzzy
+msgid "HTTP Proxy Details"
+msgstr "Nastavitve posrednika HTTP"
 
 #: capplets/network/gnome-network-preferences.glade.h:9
-msgid "_Use HTTP proxy"
+#, fuzzy
+msgid "Network Proxy Configuration"
+msgstr "Nastavitve omrežja"
+
+#: capplets/network/gnome-network-preferences.glade.h:10
+#, fuzzy
+msgid "Port:"
+msgstr "_Vrata:"
+
+#: capplets/network/gnome-network-preferences.glade.h:11
+msgid "S_ocks host:"
+msgstr ""
+
+#: capplets/network/gnome-network-preferences.glade.h:12
+msgid "_Details"
+msgstr ""
+
+#: capplets/network/gnome-network-preferences.glade.h:13
+#, fuzzy
+msgid "_FTP proxy:"
 msgstr "_Uporabi posrednika HTTP"
+
+#: capplets/network/gnome-network-preferences.glade.h:14
+#, fuzzy
+msgid "_HTTP proxy:"
+msgstr "_Uporabi posrednika HTTP"
+
+#: capplets/network/gnome-network-preferences.glade.h:15
+#, fuzzy
+msgid "_Password:"
+msgstr "_Geslo:"
+
+#: capplets/network/gnome-network-preferences.glade.h:16
+#, fuzzy
+msgid "_Secure HTTP proxy:"
+msgstr "_Uporabi posrednika HTTP"
+
+#: capplets/network/gnome-network-preferences.glade.h:17
+#, fuzzy
+msgid "_Username:"
+msgstr "_Uporabniško ime:"
 
 #: capplets/sound/sound-properties-capplet.c:180
 msgid "Sound preferences"
@@ -1759,6 +1837,10 @@ msgstr "Nastavitve zvoka"
 #: capplets/sound/sound-properties.glade.h:1
 msgid "E_nable sound server startup"
 msgstr "V_ključi zagon strežnika za zvok"
+
+#: capplets/sound/sound-properties.glade.h:2
+msgid "General"
+msgstr "Splošno"
 
 #: capplets/sound/sound-properties.glade.h:3
 #, fuzzy
@@ -1834,32 +1916,49 @@ msgid "Select themes for various parts of the desktop"
 msgstr "NAstavi pisavo za ikone na namizju"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
+#: capplets/theme-switcher/theme-properties.glade.h:6
 msgid "Theme"
 msgstr "Tema"
 
 #: capplets/theme-switcher/theme-properties.glade.h:1
+#, fuzzy
+msgid "Apply _Background"
+msgstr "Ozadje"
+
+#: capplets/theme-switcher/theme-properties.glade.h:2
+#, fuzzy
+msgid "Apply _Font"
+msgstr "Sedaj uveljavi"
+
+#: capplets/theme-switcher/theme-properties.glade.h:3
+#, fuzzy
+msgid "Controls"
+msgstr "Nadzor uporabniškega vmesnika"
+
+#: capplets/theme-switcher/theme-properties.glade.h:4
+#, fuzzy
+msgid "Icons"
+msgstr "Le ikone"
+
+#: capplets/theme-switcher/theme-properties.glade.h:5
 msgid "New themes can also be installed by dragging them into the window."
 msgstr "Nove teme se lahko namestijo tudi z spustom v okno."
 
-#: capplets/theme-switcher/theme-properties.glade.h:2
+#: capplets/theme-switcher/theme-properties.glade.h:7
 #, fuzzy
 msgid "Theme Preferences"
 msgstr "Nastavitve teme GTK+"
 
-#: capplets/theme-switcher/theme-properties.glade.h:3
-msgid "Widget Theme"
-msgstr ""
-
-#: capplets/theme-switcher/theme-properties.glade.h:4
+#: capplets/theme-switcher/theme-properties.glade.h:8
 #, fuzzy
-msgid "Window Border Theme"
+msgid "Window Border"
 msgstr "Izgled robov oken"
 
-#: capplets/theme-switcher/theme-properties.glade.h:5
+#: capplets/theme-switcher/theme-properties.glade.h:9
 msgid "_Go to theme folder"
 msgstr "_Pojdi v mapo tem"
 
-#: capplets/theme-switcher/theme-properties.glade.h:6
+#: capplets/theme-switcher/theme-properties.glade.h:10
 #, fuzzy
 msgid "_Install New Theme..."
 msgstr "_Namesti novo temo..."
@@ -2017,30 +2116,57 @@ msgstr ""
 msgid "_Save"
 msgstr "Po_večano"
 
-#: capplets/windows/gnome-window-properties.c:282
-#: capplets/windows/gnome-window-properties.glade.h:6
+#: capplets/windows/gnome-window-properties.c:352
+#, c-format
+msgid ""
+"<b>Cannot start the preferences application for your window manager</b>\n"
+"\n"
+"%s"
+msgstr ""
+
+#: capplets/windows/gnome-window-properties.c:575
+#, fuzzy
+msgid "Control"
+msgstr "Nadzor uporabniškega vmesnika"
+
+#: capplets/windows/gnome-window-properties.c:580
+msgid "Alt"
+msgstr ""
+
+#: capplets/windows/gnome-window-properties.c:586
+#, fuzzy
+msgid "Hyper"
+msgstr "Vrsta"
+
+#: capplets/windows/gnome-window-properties.c:593
+#, fuzzy
+msgid "Super"
+msgstr "Hitrost"
+
+#: capplets/windows/gnome-window-properties.glade.h:1
+msgid "To _move windows, click while holding down:"
+msgstr ""
+
+#: capplets/windows/gnome-window-properties.glade.h:2
 msgid "Window Preferences"
 msgstr "Nastavitve oken"
 
-#: capplets/windows/gnome-window-properties.glade.h:1
-msgid "Apply Now"
-msgstr "Sedaj uveljavi"
-
-#: capplets/windows/gnome-window-properties.glade.h:2
-msgid "Select windows when the mouse moves over them"
-msgstr "Izberi okna, ko gre miška nad njimi"
-
 #: capplets/windows/gnome-window-properties.glade.h:3
-msgid "Titlebar Font"
-msgstr "Pisava naziva okna"
+msgid "_Double-click window titles to:"
+msgstr ""
 
 #: capplets/windows/gnome-window-properties.glade.h:4
-msgid "Window Border Appearance"
-msgstr "Izgled robov oken"
+msgid "_Raise selected windows after a short time"
+msgstr ""
 
 #: capplets/windows/gnome-window-properties.glade.h:5
-msgid "Window Manager:"
-msgstr "Upravljalnik oken:"
+#, fuzzy
+msgid "_Select windows when the mouse moves over them"
+msgstr "Izberi okna, ko gre miška nad njimi"
+
+#: capplets/windows/gnome-window-properties.glade.h:6
+msgid "_Tenths of a second before raising the window:"
+msgstr ""
 
 #: capplets/windows/window-properties.desktop.in.h:1
 msgid "Window Properties"
@@ -2187,7 +2313,7 @@ msgstr "_Ne kaži več tega sporočila"
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Nisem mogel naložiti zvočne datoteke %s kot vzorca %s"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:170
+#: gnome-settings-daemon/gnome-settings-xsettings.c:172
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr ""
@@ -2268,60 +2394,109 @@ msgstr "_Predvajaj"
 msgid "Select sound file"
 msgstr "Izberi zvočno datoteko"
 
-#: libwindow-settings/gnome-wm-manager.c:171
+#: libwindow-settings/gnome-wm-manager.c:320
 #, c-format
-msgid ""
-"Starting %s\n"
-"(%d seconds left before operation times out)"
+msgid "Window manager \"%s\" has not registered a configuration tool\n"
 msgstr ""
-"Zaganjam %s\n"
-"(%d sekund preden potehe hasovna omejitev)"
 
-#: libwindow-settings/gnome-wm-manager.c:325
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\tAnother window manager is already running and could not be killed\n"
-msgstr ""
-"wm-properties-capplet: Ne morem inicializirati upravljalnika oken.\n"
-"\tDrug upravljalnik oken že teče in ne more biti ubit\n"
+#, fuzzy
+#~ msgid "Beep when enabling/disabling _keyboard accessibility features"
+#~ msgstr "_Zapiskaj ob vklopu/izklopu možnosti dostopnosti tipkovnice"
 
-#: libwindow-settings/gnome-wm-manager.c:329
-#, c-format
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\t'%s' didn't start\n"
-msgstr ""
-"wm-properties-capplet: Ne morem inicializirati upravljalnik oken.\n"
-"\t'%s' se ni pognal\n"
+#~ msgid "Beep when:"
+#~ msgstr "Zapiskaj, ko:"
 
-#: libwindow-settings/gnome-wm-manager.c:378
-msgid "Previous window manager did not die\n"
-msgstr "Prejšnji upravljalnik oken ni umru\n"
+#, fuzzy
+#~ msgid "Repeat Key Pre_ferences..."
+#~ msgstr "Nastavitev ponavljanja tipk"
 
-#: libwindow-settings/gnome-wm-manager.c:411
-#, c-format
-msgid ""
-"Could not start '%s'.\n"
-"Falling back to previous window manager '%s'\n"
-msgstr ""
-"Nisem mogel pognati '%s'.\n"
-"Poganjam prejšnjega upravljalnika oken '%s'\n"
+#, fuzzy
+#~ msgid "Start mo_ving this long after keypress:"
+#~ msgstr "Začni se _premikati tako dolgo po pritisku tipke :"
 
-#: libwindow-settings/gnome-wm-manager.c:442
-msgid ""
-"Could not start fallback window manager.\n"
-"Please run a window manager manually. You can\n"
-"do this by selecting \"Run Program\" in the\n"
-"foot menu\n"
-msgstr ""
-"Nisem mogel pognati prejšnjega upravljalnika oken.\n"
-"Prosim poženite upravljalnika oken ročno. To storite\n"
-"tako da izberete \"Poženi\" v \n"
-"nožnem menuju\n"
+#~ msgid "Testing Area"
+#~ msgstr "Preizkusno območje"
 
-#: libwindow-settings/gnome-wm-manager.c:467
-msgid "OK"
-msgstr "V redu"
+#~ msgid "Toggle and Repeat Keys"
+#~ msgstr "Preklopi in ponavljanje tipk"
+
+#, fuzzy
+#~ msgid "_Import CDE AccessX file..."
+#~ msgstr "_Uvozi datoteko CDE AccessX"
+
+#~ msgid ""
+#~ "_Turn off Sticky Keys when\n"
+#~ "two keys pressed simultaneously"
+#~ msgstr ""
+#~ "_Izkljči lepljive tipke,\n"
+#~ "ko sta dve tipki pritisnjeni hkrati"
+
+#~ msgid "msecs"
+#~ msgstr "milisekund"
+
+#~ msgid "Network Preferences"
+#~ msgstr "Nastavitve omrežja"
+
+#, fuzzy
+#~ msgid "Pro_xy requires username and password"
+#~ msgstr "Pos_rednik zahteva uporabniško ime in geslo"
+
+#~ msgid "_Location:"
+#~ msgstr "_Lokacija"
+
+#~ msgid "Titlebar Font"
+#~ msgstr "Pisava naziva okna"
+
+#~ msgid "Window Border Appearance"
+#~ msgstr "Izgled robov oken"
+
+#~ msgid "Window Manager:"
+#~ msgstr "Upravljalnik oken:"
+
+#~ msgid ""
+#~ "Starting %s\n"
+#~ "(%d seconds left before operation times out)"
+#~ msgstr ""
+#~ "Zaganjam %s\n"
+#~ "(%d sekund preden potehe hasovna omejitev)"
+
+#~ msgid ""
+#~ "wm-properties-capplet: Unable to initialize window manager.\n"
+#~ "\tAnother window manager is already running and could not be killed\n"
+#~ msgstr ""
+#~ "wm-properties-capplet: Ne morem inicializirati upravljalnika oken.\n"
+#~ "\tDrug upravljalnik oken že teče in ne more biti ubit\n"
+
+#~ msgid ""
+#~ "wm-properties-capplet: Unable to initialize window manager.\n"
+#~ "\t'%s' didn't start\n"
+#~ msgstr ""
+#~ "wm-properties-capplet: Ne morem inicializirati upravljalnik oken.\n"
+#~ "\t'%s' se ni pognal\n"
+
+#~ msgid "Previous window manager did not die\n"
+#~ msgstr "Prejšnji upravljalnik oken ni umru\n"
+
+#~ msgid ""
+#~ "Could not start '%s'.\n"
+#~ "Falling back to previous window manager '%s'\n"
+#~ msgstr ""
+#~ "Nisem mogel pognati '%s'.\n"
+#~ "Poganjam prejšnjega upravljalnika oken '%s'\n"
+
+#~ msgid ""
+#~ "Could not start fallback window manager.\n"
+#~ "Please run a window manager manually. You can\n"
+#~ "do this by selecting \"Run Program\" in the\n"
+#~ "foot menu\n"
+#~ msgstr ""
+#~ "Nisem mogel pognati prejšnjega upravljalnika oken.\n"
+#~ "Prosim poženite upravljalnika oken ročno. To storite\n"
+#~ "tako da izberete \"Poženi\" v \n"
+#~ "nožnem menuju\n"
+
+#~ msgid "OK"
+#~ msgstr "V redu"
 
 #, fuzzy
 #~ msgid "Add:"
@@ -2532,9 +2707,6 @@ msgstr "V redu"
 
 #~ msgid "Mouse Properties"
 #~ msgstr "Lastnosti miške"
-
-#~ msgid "HTTP Proxy Settings"
-#~ msgstr "Nastavitve posrednika HTTP"
 
 #~ msgid "Configure GNOME's use of sound"
 #~ msgstr "Nastavi uporabo zvoka v GNOMEu"
@@ -2831,9 +3003,6 @@ msgstr "V redu"
 #~ msgid "Icons and Text"
 #~ msgstr "Ikone in besedilo"
 
-#~ msgid "Only Icons"
-#~ msgstr "Le ikone"
-
 #~ msgid "Only Text"
 #~ msgstr "Le besedilo"
 
@@ -3061,9 +3230,6 @@ msgstr "V redu"
 
 #~ msgid "Command:"
 #~ msgstr "Ukaz:"
-
-#~ msgid "Configuration Command:"
-#~ msgstr "Ukaz za nastavitve:"
 
 #~ msgid "Window manager is session managed"
 #~ msgstr "Upravljalnik oken je upravljan s sejo"

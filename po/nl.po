@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center CVS\n"
-"POT-Creation-Date: 2002-10-21 12:31-0400\n"
+"POT-Creation-Date: 2002-11-02 13:45-0500\n"
 "PO-Revision-Date: 2002-06-12 00:14+0200\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
@@ -20,19 +20,18 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:229
-#: capplets/keyboard/gnome-keyboard-properties.c:160
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:237
 #, fuzzy, c-format
-msgid "There was an error launching the keyboard capplet : %s"
+msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr "Er is een fout opgetreden bij de hulpweergave: %s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:321
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:379
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:331
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:389
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "AccessX-instellingen vanuit bestand '%s' importeren is mislukt"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:452
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:462
 msgid "Select CDE AccessX file"
 msgstr "CDE AccessX-bestand selecteren"
 
@@ -54,60 +53,92 @@ msgid ""
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:1
+#: capplets/file-types/file-types-properties.glade.h:1
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
+#: capplets/network/gnome-network-preferences.glade.h:2
+#: capplets/theme-switcher/theme-install.glade.h:1
+msgid "*"
+msgstr "*"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
+msgid "Basic"
+msgstr ""
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
+#, fuzzy
+msgid "Beep if key is re_jected"
+msgstr "toets is ge_weigerd"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
+#, fuzzy
+msgid "Beep when _modifier is pressed"
+msgstr "_Piepen wanneer optietoets wordt ingedrukt"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
+msgid "Beep when a _feature is turned on or off"
+msgstr ""
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
 msgid "Beep when an LED is turned on and two beeps when one is turned off."
 msgstr ""
 "Piepen als een LED aangezet wordt en piep twee keer als er één afgezet wordt."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
 #, fuzzy
-msgid "Beep when enabling/disabling _keyboard accessibility features"
-msgstr ""
-"_Piep als toetsenbord-toegangelijkheid-eigenschappen in- of uitgeschakeld "
-"worden"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
-#, fuzzy
-msgid "Beep when key is re_jected"
+msgid "Beep when key is:"
 msgstr "toets is ge_weigerd"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
-msgid "Beep when:"
-msgstr "Piepen wanneer:"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
+#, fuzzy
+msgid "Del_ay:"
+msgstr "Ver_traging (sec):"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
+msgid "Delay between keypress and pointer mo_vement:"
+msgstr ""
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
+msgid "Disa_ble if two keys pressed together"
+msgstr ""
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:11
 #, fuzzy
 msgid "E_nable Toggle Keys"
 msgstr "_SchakelToetsen inschakelen"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
 #, fuzzy
 msgid "Enable Bo_unce Keys"
 msgstr "_KaatsToetsen inschakelen"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
 msgid "Enable Slo_w Keys"
 msgstr "_TrageToetsen inschakelen"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
 msgid "Enable _Mouse Keys"
 msgstr "_MuisToetsen inschakelen"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
 msgid "Enable _Sticky Keys"
 msgstr "_PlakToetsen inschakelen"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
-#: capplets/sound/sound-properties.glade.h:2
-#, fuzzy
-msgid "General"
-msgstr "_Algemeen"
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
+msgid "Features"
+msgstr ""
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:11
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
 #, fuzzy
-msgid "I_gnore keypresses within:"
+msgid "Filters"
+msgstr "_Bestand"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
+#, fuzzy
+msgid "I_gnore duplicate keypresses within:"
 msgstr "_Negeer toetsaanslagen binnen :"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
 msgid ""
 "Ignore all subsequent presses of the SAME key if they happen within a user "
 "selectable period of time."
@@ -115,17 +146,27 @@ msgstr ""
 "Alle opeenvolgende aanslagen van DEZELFDE toets negeren indien dit binnen "
 "een door de gebruiker in te stellen tijdsinterval gebeurt."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
 #, fuzzy
 msgid "Keyboard Accessibility Preferences (AccessX)"
 msgstr "Configuratie Toetsenbord-toegankelijkheid (AccessX)"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
 #, fuzzy
 msgid "Ma_ximum pointer speed:"
 msgstr "Ma_ximum aanwijzersnelheid:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
+#: capplets/mouse/mouse.desktop.in.h:1
+msgid "Mouse"
+msgstr "Muis"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
+#, fuzzy
+msgid "Mouse _Preferences..."
+msgstr "Muisvoorkeuren"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
 msgid ""
 "Only accept keys after they have been pressed and held for a user adjustable "
 "amount of time."
@@ -133,7 +174,7 @@ msgstr ""
 "Toetsen slechts accepteren nadat zij ingedrukt zijn en gehouden gedurende "
 "een door de gebruiker in te stellen tijdsduur."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
 msgid ""
 "Perform multiple simultaneous key press operations by pressing modifier keys "
 "in sequence."
@@ -141,85 +182,84 @@ msgstr ""
 "Voer meerdere gelijktijdige toetsaanslag-operaties uit wanneer plaktoetsen "
 "in volgorde aangeslagen worden."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
-#, fuzzy
-msgid "Repeat Key Pre_ferences..."
-msgstr "Toetsenbordeigenschappen"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
-#, fuzzy
-msgid "Start mo_ving this long after keypress:"
-msgstr "Beginnen met _bewegen deze tijdsduur na toetsaanslag:"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
-msgid "Testing Area"
-msgstr ""
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
-#, fuzzy
-msgid "Time to acce_lerate to max speed:"
-msgstr "Tijd om te _versnellen naar maximumsnelheid:"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
-msgid "Toggle and Repeat Keys"
-msgstr ""
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
-msgid "Turn the numeric keypad into a mouse control pad."
-msgstr "Maak een muis-pad van het numerieke toetsenbord"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
-#, fuzzy
-msgid "_Beep when modifier is pressed"
-msgstr "_Piepen wanneer optietoets wordt ingedrukt"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
-msgid "_Disable if unused for "
-msgstr "_Uitschakelen indien ongebruikt voor "
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
-msgid "_Enable keyboard accessibility"
-msgstr "_Toetsenbord-toegankelijkheid inschakelen"
-
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 #, fuzzy
-msgid "_Import CDE AccessX file..."
-msgstr "CDE AccessX-bestand _importeren"
+msgid "S_peed:"
+msgstr "Snelheid"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
 #, fuzzy
-msgid "_Only accept keypress after:"
-msgstr "Toetsaanslag _slechts accepteren na:"
+msgid "Time to acce_lerate to maximum speed:"
+msgstr "Tijd om te _versnellen naar maximumsnelheid:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:28
-msgid ""
-"_Turn off Sticky Keys when\n"
-"two keys pressed simultaneously"
-msgstr ""
-"PlakToetsen _uitschakelen indien\n"
-"twee toetsen gelijktijdig ingedrukt worden"
+#, fuzzy
+msgid "Toggle Keys"
+msgstr "_SchakelToetsen inschakelen"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
+msgid "Turn the numeric keypad into a mouse control pad."
+msgstr "Maak een muis-pad van het numerieke toetsenbord"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
-msgid "key is _accepted"
-msgstr "toets is gea_ccepteerd"
+#, fuzzy
+msgid "_Disable if unused for:"
+msgstr "_Uitschakelen indien ongebruikt voor "
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
-msgid "key is _pressed"
-msgstr "toets is _ingedrukt"
+#, fuzzy
+msgid "_Enable keyboard accessibility features"
+msgstr "_Toetsenbord-toegankelijkheid inschakelen"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
-msgid "key is _rejected"
-msgstr "toets is ge_weigerd"
+msgid "_Import Feature Settings..."
+msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
-msgid "msecs"
-msgstr "msec"
+#, fuzzy
+msgid "_Only accept keys held for:"
+msgstr "Toetsaanslag _slechts accepteren na:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
-msgid "pixels/sec"
-msgstr "pixels/sec"
+#, fuzzy
+msgid "_Repeat Keys"
+msgstr "Herhaalsnelheid"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:35
+msgid "_Type to test settings:"
+msgstr ""
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
+#, fuzzy
+msgid "_accepted"
+msgstr "toets is gea_ccepteerd"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:37
+#, fuzzy
+msgid "_pressed"
+msgstr "toets is _ingedrukt"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:38
+#, fuzzy
+msgid "_rejected"
+msgstr "toets is ge_weigerd"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:39
+msgid "characters/second"
+msgstr ""
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:40
+#, fuzzy
+msgid "milliseconds"
+msgstr "seconden"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:41
+#, fuzzy
+msgid "pixels/second"
+msgstr "pixels/sec"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:42
 msgid "seconds"
 msgstr "seconden"
 
@@ -280,7 +320,7 @@ msgstr "_Kies een editor..."
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
 #: capplets/keyboard/gnome-keyboard-properties.c:294
-#: capplets/mouse/gnome-mouse-properties.c:752
+#: capplets/mouse/gnome-mouse-properties.c:751
 #: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
 msgstr "Ga terug naar de standaard instellingen"
@@ -581,14 +621,6 @@ msgstr "Het lettertype instellen voor toepassingen"
 msgid "Please specify a name and a command for this editor."
 msgstr "Geef een naam en een opdracht voor deze editor."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:1
-#: capplets/file-types/file-types-properties.glade.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:1
-#: capplets/network/gnome-network-preferences.glade.h:1
-#: capplets/theme-switcher/theme-install.glade.h:1
-msgid "*"
-msgstr "*"
-
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:2
 msgid "Acce_pts URLs"
 msgstr "Acce_pteer URL's"
@@ -799,6 +831,7 @@ msgid "Minimizing and Maximizing"
 msgstr "Minimalisatie en maximalisatie"
 
 #: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
+#: capplets/windows/gnome-window-properties.c:600
 msgid "Meta"
 msgstr "Meta"
 
@@ -1362,13 +1395,18 @@ msgstr "Bureaublad"
 msgid "Window Management"
 msgstr "Vensterbeheer"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:568
+#: capplets/keybindings/gnome-keybinding-properties.c:593
+#, c-format
+msgid "That accelerator key is already in use by: %s\n"
+msgstr ""
+
+#: capplets/keybindings/gnome-keybinding-properties.c:620
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 "Fout bij het instellen van nieuwe sneltoets in configuratiedatabase: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:719
+#: capplets/keybindings/gnome-keybinding-properties.c:771
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1376,11 +1414,11 @@ msgstr ""
 "Kon geen enkel toetsenbord-thema vinden. Dit betekent dat uw GTK+-"
 "installatie incompleet is."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:741
+#: capplets/keybindings/gnome-keybinding-properties.c:793
 msgid "Action"
 msgstr "Actie"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:759
+#: capplets/keybindings/gnome-keybinding-properties.c:811
 msgid "Shortcut"
 msgstr "Sneltoets"
 
@@ -1405,6 +1443,11 @@ msgstr "_Bureaublad-sneltoetsen:"
 #: capplets/keybindings/keybinding.desktop.in.h:1
 msgid "Assign shortcut keys to commands"
 msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.c:160
+#, fuzzy, c-format
+msgid "There was an error launching the keyboard capplet : %s"
+msgstr "Er is een fout opgetreden bij de hulpweergave: %s"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:273
 msgid "_Accessibility"
@@ -1475,11 +1518,6 @@ msgstr ""
 msgid "Repeat Keys"
 msgstr "Herhaalsnelheid"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
-#, fuzzy
-msgid "S_peed:"
-msgstr "Snelheid"
-
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid "_Accessibility..."
 msgstr "_Toegankelijkheid..."
@@ -1521,7 +1559,7 @@ msgstr ""
 msgid "Set your keyboard preferences"
 msgstr "Toetsenbordeigenschappen"
 
-#: capplets/mouse/gnome-mouse-properties.c:477
+#: capplets/mouse/gnome-mouse-properties.c:476
 #, c-format
 msgid ""
 "<b>Unknown Cursor</b>\n"
@@ -1530,7 +1568,7 @@ msgstr ""
 "<b>Onbekende Cursor</b>\n"
 "%s"
 
-#: capplets/mouse/gnome-mouse-properties.c:578
+#: capplets/mouse/gnome-mouse-properties.c:577
 msgid ""
 "<b>Default Cursor - Current</b>\n"
 "The default cursor that ships with X"
@@ -1538,7 +1576,7 @@ msgstr ""
 "<b>Standaard cursor - Huidig</b>\n"
 "De standaard cursor die meegeleverd wordt met X "
 
-#: capplets/mouse/gnome-mouse-properties.c:581
+#: capplets/mouse/gnome-mouse-properties.c:580
 msgid ""
 "<b>Default Cursor</b>\n"
 "The default cursor that ships with X"
@@ -1546,7 +1584,7 @@ msgstr ""
 "<b>Standaard cursor</b>\n"
 "De standaard cursor die meegeleverd wordt met X "
 
-#: capplets/mouse/gnome-mouse-properties.c:599
+#: capplets/mouse/gnome-mouse-properties.c:598
 msgid ""
 "<b>White Cursor - Current</b>\n"
 "The default cursor inverted"
@@ -1554,7 +1592,7 @@ msgstr ""
 "<b>Witte Cursor - Huidig</b>\n"
 "De standaard cursor geïnverteerd"
 
-#: capplets/mouse/gnome-mouse-properties.c:602
+#: capplets/mouse/gnome-mouse-properties.c:601
 msgid ""
 "<b>White Cursor</b>\n"
 "The default cursor inverted"
@@ -1562,7 +1600,7 @@ msgstr ""
 "<b>Witte Cursor</b>\n"
 "De standaard cursor geïnverteerd"
 
-#: capplets/mouse/gnome-mouse-properties.c:620
+#: capplets/mouse/gnome-mouse-properties.c:619
 msgid ""
 "<b>Large Cursor - Current</b>\n"
 "Large version of normal cursor"
@@ -1570,7 +1608,7 @@ msgstr ""
 "<b>Grote Cursor - Huidig</b>\n"
 "Grote versie van de standaard cursor"
 
-#: capplets/mouse/gnome-mouse-properties.c:623
+#: capplets/mouse/gnome-mouse-properties.c:622
 msgid ""
 "<b>Large Cursor</b>\n"
 "Large version of normal cursor"
@@ -1578,7 +1616,7 @@ msgstr ""
 "<b>Grote Cursor</b>\n"
 "Grote versie van de standaard cursor"
 
-#: capplets/mouse/gnome-mouse-properties.c:641
+#: capplets/mouse/gnome-mouse-properties.c:640
 msgid ""
 "<b>Large White Cursor - Current</b>\n"
 "Large version of white cursor"
@@ -1586,7 +1624,7 @@ msgstr ""
 "<b>Grote Witte Cursor - Huidig</b>\n"
 "Grote versie van de witte cursor"
 
-#: capplets/mouse/gnome-mouse-properties.c:644
+#: capplets/mouse/gnome-mouse-properties.c:643
 msgid ""
 "<b>Large White Cursor</b>\n"
 "Large version of white cursor"
@@ -1723,10 +1761,6 @@ msgstr "_Toon positie van cursor wanneer de Control toets is ingedrukt."
 msgid "_Threshold:"
 msgstr "_Drempelwaarde:"
 
-#: capplets/mouse/mouse.desktop.in.h:1
-msgid "Mouse"
-msgstr "Muis"
-
 #: capplets/mouse/mouse.desktop.in.h:2
 #, fuzzy
 msgid "Set your mouse preferences"
@@ -1742,39 +1776,78 @@ msgstr "Netwerk"
 msgid "Network proxy preferences"
 msgstr "Netwerk-voorkeuren"
 
-#: capplets/network/gnome-network-preferences.glade.h:2
-msgid "Network Preferences"
-msgstr "Netwerk-voorkeuren"
+#: capplets/network/gnome-network-preferences.glade.h:1
+msgid "      "
+msgstr ""
 
 #: capplets/network/gnome-network-preferences.glade.h:3
-#, fuzzy
-msgid "Network Proxy Preferences"
-msgstr "Netwerk-voorkeuren"
+msgid "<b>_Automatic proxy configuration</b>"
+msgstr ""
 
 #: capplets/network/gnome-network-preferences.glade.h:4
-msgid "P_ort:"
-msgstr "P_oort:"
+msgid "<b>_Direct internet connection</b>"
+msgstr ""
 
 #: capplets/network/gnome-network-preferences.glade.h:5
-msgid "Pass_word:"
-msgstr "Wacht_woord:"
+msgid "<b>_Manual proxy configuration</b>"
+msgstr ""
 
 #: capplets/network/gnome-network-preferences.glade.h:6
-#, fuzzy
-msgid "Pro_xy requires username and password"
-msgstr "Pro_xy vereist een gebruikersnaam en wachtwoord."
+msgid "<b>_Use authentication</b>"
+msgstr ""
 
 #: capplets/network/gnome-network-preferences.glade.h:7
-msgid "User_name:"
-msgstr "Gebruikers_naam:"
+#, fuzzy
+msgid "Autoconfiguration _URL:"
+msgstr "Configuratie-opdracht:"
 
 #: capplets/network/gnome-network-preferences.glade.h:8
-msgid "_Location:"
-msgstr "_Locatie"
+#, fuzzy
+msgid "HTTP Proxy Details"
+msgstr "HTTP Proxy instellingen"
 
 #: capplets/network/gnome-network-preferences.glade.h:9
-msgid "_Use HTTP proxy"
+#, fuzzy
+msgid "Network Proxy Configuration"
+msgstr "Netwerk-voorkeuren"
+
+#: capplets/network/gnome-network-preferences.glade.h:10
+#, fuzzy
+msgid "Port:"
+msgstr "P_oort:"
+
+#: capplets/network/gnome-network-preferences.glade.h:11
+msgid "S_ocks host:"
+msgstr ""
+
+#: capplets/network/gnome-network-preferences.glade.h:12
+msgid "_Details"
+msgstr ""
+
+#: capplets/network/gnome-network-preferences.glade.h:13
+#, fuzzy
+msgid "_FTP proxy:"
 msgstr "H_TTP proxy gebruiken"
+
+#: capplets/network/gnome-network-preferences.glade.h:14
+#, fuzzy
+msgid "_HTTP proxy:"
+msgstr "H_TTP proxy gebruiken"
+
+#: capplets/network/gnome-network-preferences.glade.h:15
+#, fuzzy
+msgid "_Password:"
+msgstr "Wacht_woord:"
+
+#: capplets/network/gnome-network-preferences.glade.h:16
+#, fuzzy
+msgid "_Secure HTTP proxy:"
+msgstr "H_TTP proxy gebruiken"
+
+#: capplets/network/gnome-network-preferences.glade.h:17
+#, fuzzy
+msgid "_Username:"
+msgstr "Gebruikers_naam:"
 
 #: capplets/sound/sound-properties-capplet.c:180
 msgid "Sound preferences"
@@ -1783,6 +1856,11 @@ msgstr "Geluidsvoorkeuren"
 #: capplets/sound/sound-properties.glade.h:1
 msgid "E_nable sound server startup"
 msgstr "S_tarten van geluidsserver inschakelen"
+
+#: capplets/sound/sound-properties.glade.h:2
+#, fuzzy
+msgid "General"
+msgstr "_Algemeen"
 
 #: capplets/sound/sound-properties.glade.h:3
 #, fuzzy
@@ -1858,34 +1936,51 @@ msgid "Select themes for various parts of the desktop"
 msgstr "Het lettertype intstellen voor de pictogrammen op het bureaublad"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
+#: capplets/theme-switcher/theme-properties.glade.h:6
 msgid "Theme"
 msgstr "Thema"
 
 #: capplets/theme-switcher/theme-properties.glade.h:1
+#, fuzzy
+msgid "Apply _Background"
+msgstr "Achtergrond"
+
+#: capplets/theme-switcher/theme-properties.glade.h:2
+#, fuzzy
+msgid "Apply _Font"
+msgstr "Nu toepassen"
+
+#: capplets/theme-switcher/theme-properties.glade.h:3
+#, fuzzy
+msgid "Controls"
+msgstr "UI Regelaar"
+
+#: capplets/theme-switcher/theme-properties.glade.h:4
+#, fuzzy
+msgid "Icons"
+msgstr "Alleen pictogrammen"
+
+#: capplets/theme-switcher/theme-properties.glade.h:5
 msgid "New themes can also be installed by dragging them into the window."
 msgstr ""
 "Nieuwe thema's kunnen ook geïnstalleerd worden door ze naar het venster te "
 "slepen."
 
-#: capplets/theme-switcher/theme-properties.glade.h:2
+#: capplets/theme-switcher/theme-properties.glade.h:7
 #, fuzzy
 msgid "Theme Preferences"
 msgstr "Gtk+ thema-vookeuren"
 
-#: capplets/theme-switcher/theme-properties.glade.h:3
-msgid "Widget Theme"
-msgstr ""
-
-#: capplets/theme-switcher/theme-properties.glade.h:4
+#: capplets/theme-switcher/theme-properties.glade.h:8
 #, fuzzy
-msgid "Window Border Theme"
+msgid "Window Border"
 msgstr "Uiterlijk vensterkader"
 
-#: capplets/theme-switcher/theme-properties.glade.h:5
+#: capplets/theme-switcher/theme-properties.glade.h:9
 msgid "_Go to theme folder"
 msgstr "_Ga naar thema-map"
 
-#: capplets/theme-switcher/theme-properties.glade.h:6
+#: capplets/theme-switcher/theme-properties.glade.h:10
 #, fuzzy
 msgid "_Install New Theme..."
 msgstr "Nieuw thema _installeren..."
@@ -2043,30 +2138,57 @@ msgstr ""
 msgid "_Save"
 msgstr "Ge_schaald"
 
-#: capplets/windows/gnome-window-properties.c:282
-#: capplets/windows/gnome-window-properties.glade.h:6
+#: capplets/windows/gnome-window-properties.c:352
+#, c-format
+msgid ""
+"<b>Cannot start the preferences application for your window manager</b>\n"
+"\n"
+"%s"
+msgstr ""
+
+#: capplets/windows/gnome-window-properties.c:575
+#, fuzzy
+msgid "Control"
+msgstr "UI Regelaar"
+
+#: capplets/windows/gnome-window-properties.c:580
+msgid "Alt"
+msgstr ""
+
+#: capplets/windows/gnome-window-properties.c:586
+#, fuzzy
+msgid "Hyper"
+msgstr "Type"
+
+#: capplets/windows/gnome-window-properties.c:593
+#, fuzzy
+msgid "Super"
+msgstr "Snelheid"
+
+#: capplets/windows/gnome-window-properties.glade.h:1
+msgid "To _move windows, click while holding down:"
+msgstr ""
+
+#: capplets/windows/gnome-window-properties.glade.h:2
 msgid "Window Preferences"
 msgstr "Venstervoorkeuren"
 
-#: capplets/windows/gnome-window-properties.glade.h:1
-msgid "Apply Now"
-msgstr "Nu toepassen"
-
-#: capplets/windows/gnome-window-properties.glade.h:2
-msgid "Select windows when the mouse moves over them"
-msgstr "Vensters selecteren wanneer muis eroverheen beweegt"
-
 #: capplets/windows/gnome-window-properties.glade.h:3
-msgid "Titlebar Font"
-msgstr "Titelbalk-lettertype"
+msgid "_Double-click window titles to:"
+msgstr ""
 
 #: capplets/windows/gnome-window-properties.glade.h:4
-msgid "Window Border Appearance"
-msgstr "Uiterlijk vensterkader"
+msgid "_Raise selected windows after a short time"
+msgstr ""
 
 #: capplets/windows/gnome-window-properties.glade.h:5
-msgid "Window Manager:"
-msgstr "Window manager:"
+#, fuzzy
+msgid "_Select windows when the mouse moves over them"
+msgstr "Vensters selecteren wanneer muis eroverheen beweegt"
+
+#: capplets/windows/gnome-window-properties.glade.h:6
+msgid "_Tenths of a second before raising the window:"
+msgstr ""
 
 #: capplets/windows/window-properties.desktop.in.h:1
 msgid "Window Properties"
@@ -2217,7 +2339,7 @@ msgstr "_Dit bericht niet nogmaals weergeven"
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Kon geluidsbestand %s niet laden als sample %s"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:170
+#: gnome-settings-daemon/gnome-settings-xsettings.c:172
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "GConf-sleutel %s ingesteld op type %s maar het verwachte type was %s\n"
@@ -2296,60 +2418,105 @@ msgstr "_Afspelen"
 msgid "Select sound file"
 msgstr "Geluidsbestand selecteren"
 
-#: libwindow-settings/gnome-wm-manager.c:171
+#: libwindow-settings/gnome-wm-manager.c:320
 #, c-format
-msgid ""
-"Starting %s\n"
-"(%d seconds left before operation times out)"
+msgid "Window manager \"%s\" has not registered a configuration tool\n"
 msgstr ""
-"Bezig met starten %s\n"
-"(%d seconden over totdat tijdsduur voor deze operatie verstrijkt)"
 
-#: libwindow-settings/gnome-wm-manager.c:325
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\tAnother window manager is already running and could not be killed\n"
-msgstr ""
-"wm-properties-capplet: Niet mogelijk de window manager te initialiseren.\n"
-"\tEen andere window manager draait al en kon niet afgesloten worden.\n"
+#, fuzzy
+#~ msgid "Beep when enabling/disabling _keyboard accessibility features"
+#~ msgstr ""
+#~ "_Piep als toetsenbord-toegangelijkheid-eigenschappen in- of uitgeschakeld "
+#~ "worden"
 
-#: libwindow-settings/gnome-wm-manager.c:329
-#, c-format
-msgid ""
-"wm-properties-capplet: Unable to initialize window manager.\n"
-"\t'%s' didn't start\n"
-msgstr ""
-"wm-properties-capplet: Niet mogelijk de window manager te initialiseren.\n"
-"\t'%s' startte niet.\n"
+#~ msgid "Beep when:"
+#~ msgstr "Piepen wanneer:"
 
-#: libwindow-settings/gnome-wm-manager.c:378
-msgid "Previous window manager did not die\n"
-msgstr "Vorige window manager werd niet beëndigd.\n"
+#, fuzzy
+#~ msgid "Repeat Key Pre_ferences..."
+#~ msgstr "Toetsenbordeigenschappen"
 
-#: libwindow-settings/gnome-wm-manager.c:411
-#, c-format
-msgid ""
-"Could not start '%s'.\n"
-"Falling back to previous window manager '%s'\n"
-msgstr ""
-"Kon '%s' niet starten.\n"
-"Er wordt teruggevallen op de vorige window manager '%s'\n"
+#, fuzzy
+#~ msgid "Start mo_ving this long after keypress:"
+#~ msgstr "Beginnen met _bewegen deze tijdsduur na toetsaanslag:"
 
-#: libwindow-settings/gnome-wm-manager.c:442
-msgid ""
-"Could not start fallback window manager.\n"
-"Please run a window manager manually. You can\n"
-"do this by selecting \"Run Program\" in the\n"
-"foot menu\n"
-msgstr ""
-"De terugval-window manager kon niet gestart worden.\n"
-"Start alstublieft een window manager met de hand.\n"
-"Dit kunt u doen door \"Programma uitvoeren\" te selecteren in\n"
-"het Acties-menu.\n"
+#, fuzzy
+#~ msgid "_Import CDE AccessX file..."
+#~ msgstr "CDE AccessX-bestand _importeren"
 
-#: libwindow-settings/gnome-wm-manager.c:467
-msgid "OK"
-msgstr "OK"
+#~ msgid ""
+#~ "_Turn off Sticky Keys when\n"
+#~ "two keys pressed simultaneously"
+#~ msgstr ""
+#~ "PlakToetsen _uitschakelen indien\n"
+#~ "twee toetsen gelijktijdig ingedrukt worden"
+
+#~ msgid "msecs"
+#~ msgstr "msec"
+
+#~ msgid "Network Preferences"
+#~ msgstr "Netwerk-voorkeuren"
+
+#, fuzzy
+#~ msgid "Pro_xy requires username and password"
+#~ msgstr "Pro_xy vereist een gebruikersnaam en wachtwoord."
+
+#~ msgid "_Location:"
+#~ msgstr "_Locatie"
+
+#~ msgid "Titlebar Font"
+#~ msgstr "Titelbalk-lettertype"
+
+#~ msgid "Window Border Appearance"
+#~ msgstr "Uiterlijk vensterkader"
+
+#~ msgid "Window Manager:"
+#~ msgstr "Window manager:"
+
+#~ msgid ""
+#~ "Starting %s\n"
+#~ "(%d seconds left before operation times out)"
+#~ msgstr ""
+#~ "Bezig met starten %s\n"
+#~ "(%d seconden over totdat tijdsduur voor deze operatie verstrijkt)"
+
+#~ msgid ""
+#~ "wm-properties-capplet: Unable to initialize window manager.\n"
+#~ "\tAnother window manager is already running and could not be killed\n"
+#~ msgstr ""
+#~ "wm-properties-capplet: Niet mogelijk de window manager te initialiseren.\n"
+#~ "\tEen andere window manager draait al en kon niet afgesloten worden.\n"
+
+#~ msgid ""
+#~ "wm-properties-capplet: Unable to initialize window manager.\n"
+#~ "\t'%s' didn't start\n"
+#~ msgstr ""
+#~ "wm-properties-capplet: Niet mogelijk de window manager te initialiseren.\n"
+#~ "\t'%s' startte niet.\n"
+
+#~ msgid "Previous window manager did not die\n"
+#~ msgstr "Vorige window manager werd niet beëndigd.\n"
+
+#~ msgid ""
+#~ "Could not start '%s'.\n"
+#~ "Falling back to previous window manager '%s'\n"
+#~ msgstr ""
+#~ "Kon '%s' niet starten.\n"
+#~ "Er wordt teruggevallen op de vorige window manager '%s'\n"
+
+#~ msgid ""
+#~ "Could not start fallback window manager.\n"
+#~ "Please run a window manager manually. You can\n"
+#~ "do this by selecting \"Run Program\" in the\n"
+#~ "foot menu\n"
+#~ msgstr ""
+#~ "De terugval-window manager kon niet gestart worden.\n"
+#~ "Start alstublieft een window manager met de hand.\n"
+#~ "Dit kunt u doen door \"Programma uitvoeren\" te selecteren in\n"
+#~ "het Acties-menu.\n"
+
+#~ msgid "OK"
+#~ msgstr "OK"
 
 #, fuzzy
 #~ msgid "Add:"
@@ -2587,9 +2754,6 @@ msgstr "OK"
 
 #~ msgid "Mouse Properties"
 #~ msgstr "Muis-eigenschappen"
-
-#~ msgid "HTTP Proxy Settings"
-#~ msgstr "HTTP Proxy instellingen"
 
 #~ msgid "Configure GNOME's use of sound"
 #~ msgstr "Het gebruik van geluid in GNOME configureren"
@@ -2907,9 +3071,6 @@ msgstr "OK"
 #~ msgid "Command:"
 #~ msgstr "Opdracht:"
 
-#~ msgid "Configuration Command:"
-#~ msgstr "Configuratie-opdracht:"
-
 #~ msgid "Window manager is session managed"
 #~ msgstr "Window manager is sessiebeheerd."
 
@@ -2981,9 +3142,6 @@ msgstr "OK"
 
 #~ msgid "Icons and Text"
 #~ msgstr "Pictogrammen en Tekst"
-
-#~ msgid "Only Icons"
-#~ msgstr "Alleen pictogrammen"
 
 #~ msgid "Only Text"
 #~ msgstr "Alleen Tekst"
