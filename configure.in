@@ -17,6 +17,15 @@ AC_STDC_HEADERS
 AM_PROG_LIBTOOL
 
 
+changequote(,)dnl
+if test "x$GCC" = "xyes"; then
+  case " $CFLAGS " in
+  *[\ \	]-Wall[\ \	]*) ;;
+  *) CFLAGS="$CFLAGS -Wall" ;;
+  esac
+fi
+changequote([,])dnl
+
 # Internationalization support
 GETTEXT_PACKAGE=control-center
 AC_SUBST(GETTEXT_PACKAGE)
