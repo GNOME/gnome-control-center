@@ -30,7 +30,7 @@ setup_typing_break (gboolean enabled)
       if (typing_monitor_pid == 0)
 	{
 	  GError *error = NULL;
-	  gchar *argv[] = { "gnome-typing-monitor", NULL };
+	  gchar *argv[] = { "gnome-typing-monitor", "-n", NULL };
 
 	  if (! g_spawn_async ("/",
 			       argv, NULL,
@@ -84,7 +84,7 @@ gnome_settings_typing_break_init (GConfClient *client)
   VteReaper *reaper;
 
   reaper = vte_reaper_get();
-  g_signal_connect (G_OBJECT (reaper), "child_exited", child_exited_callback, NULL);
+  g_signal_connect (reaper, "child_exited", G_CALLBACK (child_exited_callback), NULL);
   gnome_settings_daemon_register_callback ("/desktop/gnome/typing_break", typing_break_callback);
 }
 
