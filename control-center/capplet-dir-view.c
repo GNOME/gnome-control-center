@@ -466,8 +466,7 @@ help_cb (GtkWidget *widget, CappletDirView *view)
 {
 	gchar *tmp;
 
-	if (!gnome_help_display (gnome_program_get (),
-				 "users-guide", "gcc.html",
+	if (!gnome_help_display ("users-guide", "gcc.html",
 				 NULL))
 	{
 		GtkWidget *mbox;
