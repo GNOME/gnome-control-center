@@ -366,7 +366,8 @@ warning_dialog_post (GtkWidget *dialog, GtkWidget **hbox, GCallback response,
 		     gboolean *enabled, gchar *title, gchar *user_action_string, gchar *query)
 {
 	GtkWidget *label;
-	gchar *label_markup_string = g_strconcat ("<big>", query, "</big>\n\n", user_action_string, NULL);
+	gchar *label_markup_string = g_strconcat ("<span weight=\"bold\" size=\"larger\">", 
+						  query, "</span>\n\n", user_action_string, NULL);
 
 	if (!dialog)
 	{
