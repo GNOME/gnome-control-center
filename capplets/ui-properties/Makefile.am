@@ -1,7 +1,7 @@
-bin_PROGRAMS = ui-properties
+bin_PROGRAMS = gnome2-ui-properties
 
-ui_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
-ui_properties_SOURCES = \
+gnome2_ui_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
+gnome2_ui_properties_SOURCES = \
 	prefs-widget.c			prefs-widget.h\
 	prefs-widget-mdi.c		prefs-widget-mdi.h\
 	prefs-widget-dialogs.c	prefs-widget-dialogs.h\

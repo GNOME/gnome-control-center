@@ -1,10 +1,10 @@
 SUBDIRS = libuuid
 
-bin_PROGRAMS = gnome-file-types-properties
+bin_PROGRAMS = gnome2-file-types-properties
 
-gnome_file_types_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(VFS_CAPPLET_LIBS) libuuid/libuuid.a
+gnome2_file_types_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(VFS_CAPPLET_LIBS) libuuid/libuuid.a
 
-gnome_file_types_properties_SOURCES =					\
+gnome2_file_types_properties_SOURCES =					\
 	file-types-capplet.c						\
 	mime-types-model.c		mime-types-model.h		\
 	mime-type-info.c		mime-type-info.h		\

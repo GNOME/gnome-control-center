@@ -1,9 +1,9 @@
 SUBDIRS = control
 
-bin_PROGRAMS = gtk-theme-selector-capplet
+bin_PROGRAMS = gtk2-theme-selector-capplet
 
-gtk_theme_selector_capplet_LDADD = $(GNOMECC_CAPPLETS_LIBS)
-gtk_theme_selector_capplet_SOURCES = \
+gtk2_theme_selector_capplet_LDADD = $(GNOMECC_CAPPLETS_LIBS)
+gtk2_theme_selector_capplet_SOURCES = \
 	da.h		\
 	file.c		\
 	globals.c	\
