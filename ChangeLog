@@ -1,5 +1,15 @@
 2000-08-18  Bradford Hovinen  <hovinen@helixcode.com>
 
+	* capplets/keyboard-properties/Makefile.am (INCLUDES): 
+	(keyboard_properties_LDADD): Add XML cflags/libs
+
+	* capplets/keyboard-properties/keyboard-properties.c 
+	(keyboard_read_from_xml): 
+	(keyboard_write_to_xml): 
+	(do_get_xml): 
+	(do_set_xml): Implement
+	(main): Invoke do_get_xml() and do_set_xml() on --get and --set
+
 	* capplets/gnome-edit-properties/gnome-edit-properties.c
 	(edit_read): Only do combo box stuff if no_gui flag is not set
 	(edit_read): If no_gui flag set, search through possible_editors
