@@ -49,6 +49,10 @@
 #include <esd.h>
 #include <sys/types.h>
 
+static BonoboControl *control = NULL;
+static GladeXML      *dialog;
+static GtkWidget     *widget;
+
 /* Capplet-specific prototypes */
 
 static void start_esd (void);
@@ -165,22 +169,32 @@ set_moniker_cb (BonoboPropertyBag *bag, BonoboArg *arg, guint arg_id,
 	/* End per-capplet part */
 }
 
+/* close_cb
+ *
+ * Callback issued when the dialog is destroyed. Just resets the control pointer
+ * to NULL so that the program does not think the dialog exists when it does
+ * not. Does not vary from capplet to capplet.
+ */
+
+static void
+close_cb (void)
+{
+	gtk_widget_destroy (widget);
+	gtk_object_destroy (GTK_OBJECT (dialog));
+	control = NULL;
+}
+
 /* create_dialog_cb
  *
  * Callback to construct the main dialog box for this capplet; invoked by Bonobo
  * whenever capplet activation is requested. Returns a BonoboObject representing
  * the control that encapsulates the object. This function should not vary from
  * capplet to capplet, though it assumes that the dialog data in the glade file
- * has the name "prefs_widget".
- */
+ * has the name "prefs_widget".  */
 
 static BonoboObject *
 create_dialog_cb (BonoboGenericFactory *factory, gpointer data) 
 {
-	static BonoboControl *control = NULL;
-	static GladeXML      *dialog;
-	static GtkWidget     *widget;
-
 	BonoboPropertyBag    *pb;
 	GtkWidget            *pf;
 
@@ -204,6 +218,13 @@ create_dialog_cb (BonoboGenericFactory *factory, gpointer data)
 		bonobo_property_bag_add (pb, "moniker", 1, BONOBO_ARG_STRING, NULL,
 					 "Moniker for configuration",
 					 BONOBO_PROPERTY_WRITEABLE);
+
+		bonobo_control_set_automerge (control, TRUE);
+
+		gtk_signal_connect (GTK_OBJECT (widget), "destroy",
+				    GTK_SIGNAL_FUNC (close_cb), NULL);
+		gtk_signal_connect (GTK_OBJECT (control), "destroy",
+				    GTK_SIGNAL_FUNC (close_cb), NULL);
 	} else {
 		gtk_widget_show_all (widget);
 	}

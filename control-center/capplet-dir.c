@@ -393,10 +393,11 @@ capplet_cancel_cb (GtkWidget *widget, GtkWidget *app)
 
 /* capplet_control_launch
  *
- * Launch a capplet as a Bonobo control
+ * Launch a capplet as a Bonobo control; returns the relevant BonoboWindow or
+ * NULL if the capplet could not be launched
  */
 
-void
+GtkWidget *
 capplet_control_launch (const gchar *capplet_name)
 {
 	gchar *oaf_iid, *moniker;
@@ -434,10 +435,8 @@ capplet_control_launch (const gchar *capplet_name)
 	if (control == NULL) {
 		g_critical ("Could not create capplet control");
 		gtk_widget_destroy (app);
-		g_free (oaf_iid);
-		g_free (moniker);
-		g_free (tmp);
-		return;
+		app = NULL;
+		goto end;
 	}
 
 	gtk_box_pack_start (GTK_BOX (box), control, TRUE, TRUE, 0);
@@ -460,22 +459,32 @@ capplet_control_launch (const gchar *capplet_name)
 
 	if (BONOBO_EX (&ev)) {
 		g_critical ("Could not get moniker property");
-	} else {
-		value = bonobo_arg_new (BONOBO_ARG_STRING);
-		BONOBO_ARG_SET_STRING (value, moniker);
-
-		Bonobo_Property_setValue (property, value, &ev);
-
-		if (BONOBO_EX (&ev))
-			g_critical ("Could not set moniker property");
-
-		bonobo_arg_release (value);
+		gtk_widget_destroy (app);
+		app = NULL;
+		goto end;
 	}
+
+	value = bonobo_arg_new (BONOBO_ARG_STRING);
+	BONOBO_ARG_SET_STRING (value, moniker);
+
+	Bonobo_Property_setValue (property, value, &ev);
+
+	if (BONOBO_EX (&ev)) {
+		g_critical ("Could not set moniker property");
+		gtk_widget_destroy (app);
+		app = NULL;
+		goto end;
+	}
+	
+	bonobo_arg_release (value);
 
 	gtk_widget_show_all (app);
 
+ end:
 	CORBA_exception_free (&ev);
 	g_free (oaf_iid);
 	g_free (moniker);
 	g_free (tmp);
+
+	return app;
 }

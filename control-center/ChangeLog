@@ -1,3 +1,16 @@
+2001-07-03  Bradford Hovinen  <hovinen@ximian.com>
+
+	* main.c (main): Connect destroy signal on capplet window to
+	gtk_main_quit
+
+	* capplet-dir.c (capplet_control_launch): Return pointer to
+	BonoboWindow
+
+	* main.c (main): Check return value of capplet_control_launch
+
+	* capplet-dir.c (capplet_control_launch): Use goto to make sure
+	all data structures are freed
+
 2001-07-02  Bradford Hovinen  <hovinen@ximian.com>
 
 	* capplet-dir.c (capplet_control_launch): Use bonobo_arg_... functions

@@ -37,6 +37,7 @@ int
 main (int argc, char **argv) 
 {
 	CORBA_ORB orb;
+	GtkWidget *app;
 
 	static gchar *capplet = NULL;
 	static struct poptOption gnomecc_options[] = {
@@ -61,7 +62,11 @@ main (int argc, char **argv)
 		capplet_dir_entry_activate 
 			(CAPPLET_DIR_ENTRY (get_root_capplet_dir ()), NULL);
 	} else {
-		capplet_control_launch (capplet);
+		if ((app = capplet_control_launch (capplet)) == NULL)
+			return -1;
+
+		gtk_signal_connect (GTK_OBJECT (app), "destroy",
+				    GTK_SIGNAL_FUNC (gtk_main_quit), NULL);
 	}
 
 	bonobo_main ();

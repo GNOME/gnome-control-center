@@ -107,7 +107,7 @@ else
 	AC_MSG_ERROR(You need at least pkg-config 0.6.0 or greater for this version of control-center. Please install a newer version from http://www.freedesktop.org/software.)
 fi
 
-capplet_modules="libcapplet2 libglade gdk_pixbuf bonobo-conf $ARCHIVER_MODULE"
+capplet_modules="libcapplet2 libglade gdk_pixbuf bonobo_conf $ARCHIVER_MODULE"
 
 PKG_CHECK_MODULES(CAPPLET, $capplet_modules)
 PKG_CHECK_MODULES(BG_CAPPLET, $capplet_modules gdk_pixbuf_xlib)
