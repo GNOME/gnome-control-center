@@ -4,6 +4,7 @@ INCLUDES = \
         -DGNOMELOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\" 		\
 	-DGNOME_ICONDIR=\""${prefix}/share/pixmaps"\"			\
 	-DG_LOG_DOMAIN=\"capplet-common\"				\
+	-DINSTALL_PREFIX=\"$(prefix)\"					\
 	-I$(top_srcdir)/						\
 	-I$(top_srcdir)/libbackground					\
 	@VFS_CAPPLET_CFLAGS@

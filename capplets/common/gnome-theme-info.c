@@ -365,6 +365,7 @@ gnome_theme_info_init (void)
 {
   static gboolean initted = FALSE;
   gchar *dir;
+  const gchar *gtk_data_dir;
   GnomeVFSURI *uri;
 
   if (initted)
@@ -402,7 +403,13 @@ gnome_theme_info_init (void)
   icon_themes_add_dir (dir);
   g_free (dir);
 
-  dir = gtk_rc_get_theme_dir ();
+  gtk_data_dir = g_getenv ("GTK_DATA_PREFIX");
+  if (gtk_data_dir) {
+    dir = g_build_filename (gtk_data_dir, "share", "icons", NULL);
+  } else {
+    dir = g_build_filename (INSTALL_PREFIX, "share", "icons", NULL);
+  }
+
   icon_themes_add_dir (dir);
   g_free (dir);
 
