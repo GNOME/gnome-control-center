@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.2.3\n"
-"POT-Creation-Date: 2001-02-14 20:16-0500\n"
-"PO-Revision-Date: 2000-11-11 21:14+02:00\n"
+"POT-Creation-Date: 2001-03-09 09:00-0500\n"
+"PO-Revision-Date: 2001-03-09 09:32-05:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -63,11 +63,13 @@ msgid "Wallpaper Selection"
 msgstr "Bakgrunnsvalg"
 
 #: capplets/background-properties/property-background.c:573
+#: capplets/file-types/file-types-icon-entry.c:258
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Kan ikke finne en hboks, bruker normalt filvalg"
 
 #: capplets/background-properties/property-background.c:578
 #: capplets/background-properties/property-background.c:1090
+#: capplets/file-types/file-types-icon-entry.c:264
 #: capplets/keyboard-properties/keyboard-properties.c:354
 #: capplets/screensaver-properties/screensaver-dialog.c:25
 #: capplets/theme-switcher/gui.c:230 capplets/theme-switcher/gui.c:302
@@ -82,7 +84,11 @@ msgstr "Bakgrunn"
 msgid " Browse... "
 msgstr " Bla gjennom... "
 
+#. Add default action to fourth column
 #: capplets/background-properties/property-background.c:643
+#: capplets/file-types/file-types-capplet.c:1387
+#: capplets/file-types/file-types-capplet.c:1587
+#: capplets/file-types/file-types-capplet.c:1713
 msgid "none"
 msgstr "ingen"
 
@@ -115,7 +121,7 @@ msgstr "Side-ved-side"
 #: capplets/sound-properties/sound-properties.c:693
 #: capplets/theme-switcher/gui.c:367
 #: capplets/ui-properties/ui-properties.c:516
-#: capplets/url-properties/url-properties.c:256
+#: capplets/url-properties/url-properties.c:272
 #: capplets/wm-properties/wm-properties-capplet.c:649
 msgid ""
 "No help is available/installed for these settings. Please make sure you\n"
@@ -128,16 +134,15 @@ msgstr ""
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:182
 #: capplets/keyboard-properties/keyboard-properties.c:99
 #: capplets/keyboard-properties/keyboard-properties.c:424
-#: capplets/mime-type/mime-type-capplet.c:81
 #: capplets/mouse-properties/mouse-properties.c:114
 #: capplets/screensaver-properties/callbacks.c:804
 #: capplets/sound-properties/sound-properties.c:695
 #: capplets/sound-properties/sound-properties.c:756
 #: capplets/theme-switcher/gui.c:369
 #: capplets/ui-properties/ui-properties.c:518
-#: capplets/url-properties/url-properties.c:258
+#: capplets/url-properties/url-properties.c:274
 #: capplets/wm-properties/wm-properties-capplet.c:651
-#: control-center/capplet-widget.c:263
+#: control-center/capplet-widget.c:273
 msgid "Close"
 msgstr "Lukk"
 
@@ -202,221 +207,245 @@ msgstr "Gnome editor"
 msgid "Run In Terminal"
 msgstr "Kjør i terminal"
 
-#: capplets/mime-type/edit-window.c:250
-#: capplets/mime-type/new-mime-window.c:35
-msgid "Extensions"
-msgstr "Filtyper"
+#: capplets/file-types/file-types-capplet.desktop.in.h:1
+msgid "File Types and Programs"
+msgstr "Filtyper og programmer"
 
-#. icon box
-#: capplets/mime-type/edit-window.c:264
-msgid "Select an icon..."
-msgstr "Velg et ikon..."
+#: capplets/file-types/file-types-capplet.desktop.in.h:2
+msgid "Specify which programs are used to open or view each file type"
+msgstr "Spesifiser hvilke programmer som brukes til å åpne hver enkelt filtype"
 
-#: capplets/mime-type/edit-window.c:274
-msgid "Mime Type: "
-msgstr "MIME-type: "
+#: capplets/file-types/file-types-capplet-dialogs.c:387
+msgid "Edit Applications List"
+msgstr "Rediger applikasjonslisten"
 
-#: capplets/mime-type/edit-window.c:304
-msgid "Add"
-msgstr "Legg til"
-
-#: capplets/mime-type/edit-window.c:312
-#: capplets/url-properties/url-properties.c:138
-msgid "Remove"
-msgstr "Fjern"
-
-#. gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
-#: capplets/mime-type/edit-window.c:339
-#: capplets/mime-type/new-mime-window.c:65
-msgid "First Regular Expression: "
-msgstr "Første regulære uttrykk: "
-
-#: capplets/mime-type/edit-window.c:347
-#: capplets/mime-type/new-mime-window.c:76
-msgid "Second Regular Expression: "
-msgstr "Andre regulære uttrykk: "
-
-#. Actions box
-#: capplets/mime-type/edit-window.c:354
-msgid "Mime Type Actions"
-msgstr "MIME-type handlinger"
-
-#: capplets/mime-type/edit-window.c:361
+#. Add label
+#: capplets/file-types/file-types-capplet-dialogs.c:409
 #, c-format
-msgid "Example: emacs %f"
-msgstr "Eksempel: emacs %f"
+msgid "Select applications to appear in menu for MIME type \"%s\""
+msgstr "Velg applikasjoner som skal finnes i menyen for MIME-type \"%s\""
 
-#: capplets/mime-type/edit-window.c:366
-msgid "Open"
-msgstr "Åpne"
+#: capplets/file-types/file-types-capplet-dialogs.c:433
+msgid "Add Application..."
+msgstr "Legg til applikasjon..."
 
-#: capplets/mime-type/edit-window.c:372 capplets/mime-type/edit-window.c:388
-#: capplets/mime-type/edit-window.c:403
-msgid "Select a file..."
-msgstr "Velg en fil..."
+#: capplets/file-types/file-types-capplet-dialogs.c:440
+msgid "Edit Application..."
+msgstr "Rediger applikasjon..."
 
-#: capplets/mime-type/edit-window.c:381
-msgid "View"
-msgstr "Vis"
+#: capplets/file-types/file-types-capplet-dialogs.c:446
+msgid "Delete Application"
+msgstr "Slett applikasjon"
 
-#: capplets/mime-type/edit-window.c:397
-msgid "Edit"
-msgstr "Redigér"
+#: capplets/file-types/file-types-capplet-dialogs.c:480
+msgid "Edit Components List"
+msgstr "Rediger komponentliste"
 
-#. we initialize everything
-#: capplets/mime-type/edit-window.c:446
+#. Add label
+#: capplets/file-types/file-types-capplet-dialogs.c:500
 #, c-format
-msgid "Set actions for %s"
-msgstr "Sett handlinger for %s"
+msgid "Select views to appear in menu for MIME type \"%s\""
+msgstr "Velg visninger som skal vises i menyen for MIME-type \"%s\""
 
-#: capplets/mime-type/mime-data.c:380
-msgid "Mime Type"
-msgstr "MIME-type"
-
-#: capplets/mime-type/mime-data.c:381
-msgid "Extension"
-msgstr "Filtype"
-
-#: capplets/mime-type/mime-data.c:488
-msgid "You must enter a mime-type"
-msgstr "Du må skrive inn en MIME-type"
-
-#: capplets/mime-type/mime-data.c:493
+#: capplets/file-types/file-types-capplet-dialogs.c:720
 msgid ""
-"You must add either a regular-expression or\n"
-"a file-name extension"
-msgstr ""
-"Du må legge til enten et regulært uttrykk eller\n"
-"en filtype"
+"The MIME type entered contained upper case characters. Upper case characters "
+"were changed to lower case for you."
+msgstr "MIME-typen som ble oppgitt inneholder store bokstaver. Store bokstaver ble endret til små for deg."
 
-#: capplets/mime-type/mime-data.c:497
-msgid ""
-"Please put your mime-type in the format:\n"
-"CATEGORY/TYPE\n"
-"\n"
-"For Example:\n"
-"image/png"
-msgstr ""
-"Vennligst bruk MIME-type av formatet:\n"
-"KATEGORI/TYPE\n"
-"\n"
-"For eksempel:\n"
-"image/png"
+#: capplets/file-types/file-types-capplet-dialogs.c:723
+msgid "Add New MIME Type"
+msgstr "Legg til ny MIME-type"
 
-#: capplets/mime-type/mime-data.c:502
-msgid "This mime-type already exists"
-msgstr "Denne MIME-typen eksisterer allerede"
+#: capplets/file-types/file-types-capplet-dialogs.c:769
+msgid "Add MIME Type"
+msgstr "Legg til MIME-type"
 
-#: capplets/mime-type/mime-data.c:583 capplets/mime-type/mime-info.c:425
-msgid ""
-"We are unable to create the directory\n"
-"~/.gnome/mime-info\n"
-"\n"
-"We will not be able to save the state."
-msgstr ""
-"Kan ikke opprette katalogen\n"
-"~/.gnome/mime-info\n"
-"\n"
-"Kan ikke lagre tilstandsdata."
+#: capplets/file-types/file-types-capplet-dialogs.c:773
+msgid "New MIME type (e.g. image/x-thumper):"
+msgstr "Ny MIME-type (f.eks image/x-thumper):"
 
-#: capplets/mime-type/mime-data.c:589 capplets/mime-type/mime-info.c:431
-msgid ""
-"We are unable to access the directory\n"
-"~/.gnome/mime-info\n"
-"\n"
-"We will not be able to save the state."
-msgstr ""
-"Kan ikke aksessere katalogen\n"
-"~/.gnome/mime-info\n"
-"\n"
-"Kan ikke lagre tilstandsdata."
+#: capplets/file-types/file-types-capplet-dialogs.c:780
+msgid "Description (e.g. Thumper image):"
+msgstr "Beskrivelse (f.eks Thumper-bilde):"
 
-#: capplets/mime-type/mime-data.c:600
-msgid ""
-"Cannot create the file\n"
-"~/.gnome/mime-info/user.mime\n"
-"\n"
-"We will not be able to save the state"
-msgstr ""
-"Kan ikke opprette filen\n"
-"~/.gnome/mime-info/user.mime\n"
-"\n"
-"Kan ikke lagre tilstandsdata."
+#: capplets/file-types/file-types-capplet-dialogs.c:947
+msgid "File Extensions "
+msgstr "Filtyper "
 
-#: capplets/mime-type/mime-info.c:442
-msgid ""
-"Cannot create the file\n"
-"~/.gnome/mime-info/user.keys\n"
-"\n"
-"We will not be able to save the state"
-msgstr ""
-"Kan ikke opprette filen\n"
-"~/.gnome/mime-info/user.keys\n"
-"\n"
-"Kan ikke lagre tilstandsdata."
-
-#: capplets/mime-type/mime-type-capplet.c:79
-msgid ""
-"No help is available/installed for these settings. Please make sure you\n"
-"have the Control Center documentation installed on your system."
-msgstr ""
-"Ingen hjelp er tilgjengelig/installert for disse innstillingene. Vennligst\n"
-"sjekk om dokumentasjonen til kontrollsenteret er installert på ditt system."
-
-#: capplets/mime-type/mime-type-capplet.c:95
-#: capplets/wm-properties/wm-properties-capplet.c:1098
-msgid "Delete"
-msgstr "Slett"
-
-#: capplets/mime-type/mime-type-capplet.c:105
+#: capplets/file-types/file-types-capplet-dialogs.c:967
 #: capplets/wm-properties/wm-properties-capplet.c:1088
 msgid "Add..."
 msgstr "Legg til..."
 
-#: capplets/mime-type/mime-type-capplet.c:109
-#: capplets/wm-properties/wm-properties-capplet.c:1093
-msgid "Edit..."
-msgstr "Redigér..."
+#: capplets/file-types/file-types-capplet-dialogs.c:972
+msgid "    Remove    "
+msgstr "    Fjern     "
 
-#: capplets/mime-type/new-mime-window.c:21
-msgid "Add Mime Type"
-msgstr "Legg til MIME-type"
+#: capplets/file-types/file-types-capplet-dialogs.c:1041
+msgid "Add New Extension"
+msgstr "Legg til ny filtype"
 
-#: capplets/mime-type/new-mime-window.c:22
+#: capplets/file-types/file-types-capplet-dialogs.c:1045
 msgid ""
-"Add a new Mime Type\n"
-"For example:  image/tiff; text/x-scheme"
+"Type in the extensions for this mime-type (without dot).\n"
+"You can enter several extensions seperated by a space,\n"
+"for example: html htm"
 msgstr ""
-"Legg til en ny MIME-type\n"
-"For eksempel: image/tiff; text/x-scheme"
+"Skriv inn filtypen for denne MIME-typen (uten punktum).\n"
+"Du kan oppgi flere filtyper adskilt med mellomrom,\n"
+"for eksempel: html htm"
 
-#: capplets/mime-type/new-mime-window.c:27
-msgid "Mime Type:"
-msgstr "MIME-type:"
-
-#: capplets/mime-type/new-mime-window.c:39
-msgid ""
-"Type in the extensions for this mime-type.\n"
-"For example:  .html, .htm"
-msgstr ""
-"Skriv inn filtypen for denne MIME-typen.\n"
-"For eksempel: .html, .htm"
-
-#: capplets/mime-type/new-mime-window.c:46
+#: capplets/file-types/file-types-capplet-dialogs.c:1052
 msgid "Extension:"
 msgstr "Filtype:"
 
-#: capplets/mime-type/new-mime-window.c:51
-msgid "Regular Expressions"
-msgstr "Vanlige uttrykk"
+#: capplets/file-types/file-types-capplet-dialogs.c:1194
+msgid "You must enter a name."
+msgstr "Du må oppgi et navn."
 
-#: capplets/mime-type/new-mime-window.c:55
+#: capplets/file-types/file-types-capplet-dialogs.c:1197
+msgid "You must enter a command."
+msgstr "Du må oppgi en kommando."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1207
+#, c-format
 msgid ""
-"You can set up two regular expressions here to identify the Mime Type\n"
-"by.  These fields are optional."
+"\"%s\" does not exist or is not executable.\n"
+"Check your spelling and make sure you have\n"
+"the right permissions to execute this file."
 msgstr ""
-"Du kan sette opp to regulære uttrykk her til bruk for identifisering av\n"
-"MIME-typen. Disse feltene er valgfrie."
+"\"%s\" eksisterer ikke eller er ikke kjørbar.\n"
+"Sjekk stavingen og forsikre deg om at du har\n"
+"rettigheter til å kjøre denne filen."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1213
+#, c-format
+msgid ""
+"The command \"%s\" cannot be found.\n"
+"You must use a command that can work from any command line."
+msgstr ""
+"Kommandoen \"%s\" ble ikke funnet.\n"
+"Du må bruke en kommando som fungerer fra enhver kommandolinje."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1225
+msgid "Bad Application Name"
+msgstr "Ugyldig applikasjonsnavn"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1226
+msgid "Bad Application Command"
+msgstr "Ugyldig applikasjonskommando"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1258
+msgid "Add Application"
+msgstr "Legg til applikasjon"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1259
+msgid "Edit Application"
+msgstr "Rediger applikasjon"
+
+#. Application Name label and entry
+#: capplets/file-types/file-types-capplet-dialogs.c:1271
+msgid "Application Name:"
+msgstr "Applikasjonsnavn:"
+
+#. Application Command label and entry
+#: capplets/file-types/file-types-capplet-dialogs.c:1282
+msgid "Application Command:"
+msgstr "Applikasjonskommando:"
+
+#. Open Behavior frame
+#: capplets/file-types/file-types-capplet-dialogs.c:1293
+msgid "Open Behavior"
+msgstr "Oppførsel ved åpning"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1299
+msgid "Can open multiple files"
+msgstr "Kan ikk åpne flere filer"
+
+#. FIXME bugzilla.eazel.com 6066: This needs to be three options now: "yes", "no", and "use uris for non-file locations"
+#: capplets/file-types/file-types-capplet-dialogs.c:1307
+msgid "Can open from URI"
+msgstr "Kan ikke åpne fra URI"
+
+#: capplets/file-types/file-types-capplet.c:735
+#: capplets/file-types/file-types-capplet.c:1877
+msgid "MIME Type"
+msgstr "MIME-type"
+
+#: capplets/file-types/file-types-capplet.c:742
+msgid "Change Icon"
+msgstr "Endre ikon"
+
+#: capplets/file-types/file-types-capplet.c:749
+msgid "Change File Extensions"
+msgstr "Endre filtyper"
+
+#: capplets/file-types/file-types-capplet.c:757
+msgid "Default Action:"
+msgstr "Standard handling:"
+
+#: capplets/file-types/file-types-capplet.c:769
+msgid "Use Viewer"
+msgstr "Bruk visningsprogram"
+
+#: capplets/file-types/file-types-capplet.c:775
+msgid "Open With Application"
+msgstr "Åpne med applikasjon"
+
+#: capplets/file-types/file-types-capplet.c:786
+msgid "Edit List"
+msgstr "Rediger liste"
+
+#: capplets/file-types/file-types-capplet.c:811
+msgid "Add New MIME Type..."
+msgstr "Legg til ny MIME-type..."
+
+#: capplets/file-types/file-types-capplet.c:817
+msgid "Delete This MIME Type"
+msgstr "Slett denne MIME-typen"
+
+#: capplets/file-types/file-types-capplet.c:828
+msgid "Revert to System Defaults"
+msgstr "Gå tilbake til standardinnstillingene"
+
+#: capplets/file-types/file-types-capplet.c:1069
+#: capplets/file-types/file-types-capplet.c:1213
+msgid "None"
+msgstr "Ingen"
+
+#: capplets/file-types/file-types-capplet.c:1318
+msgid ""
+"Reverting to system settings will lose any changes\n"
+"you have ever made to File Types and Programs.\n"
+"Revert anyway?"
+msgstr ""
+"Du vil miste alle endringer du har gjort tidligere ved \n"
+"å gå tilbake til system innstillingene.\n"
+"Gå tilbake likevel?"
+
+#: capplets/file-types/file-types-capplet.c:1428
+#: capplets/file-types/file-types-capplet.c:1614
+#: capplets/file-types/file-types-capplet.c:1757
+#, c-format
+msgid "View as %s"
+msgstr "Vis som %s"
+
+#: capplets/file-types/file-types-capplet.c:1876
+msgid "Description"
+msgstr "Beskrivelse"
+
+#: capplets/file-types/file-types-capplet.c:1878
+msgid "Extension"
+msgstr "Filtype"
+
+#: capplets/file-types/file-types-capplet.c:1879
+msgid "Default Action"
+msgstr "Standard handling"
+
+#: capplets/file-types/file-types-icon-entry.c:381
+msgid "Select an icon"
+msgstr "Velg et ikon"
 
 #: capplets/mouse-properties/mouse-properties.c:267
 msgid "Mouse buttons"
@@ -1015,30 +1044,34 @@ msgstr "Protokoll"
 msgid "Command"
 msgstr "Kommando"
 
-#: capplets/url-properties/url-properties.c:92
+#: capplets/url-properties/url-properties.c:93
 msgid "handler:"
 msgstr "håndterer:"
 
 #. set some commonly used handlers
-#: capplets/url-properties/url-properties.c:102
+#: capplets/url-properties/url-properties.c:103
 msgid "Netscape"
 msgstr "Netscape"
 
-#: capplets/url-properties/url-properties.c:107
+#: capplets/url-properties/url-properties.c:108
 msgid "Netscape (new window)"
 msgstr "Netscape (nytt vindu)"
 
-#: capplets/url-properties/url-properties.c:113
+#: capplets/url-properties/url-properties.c:121
 msgid "Help browser"
 msgstr "Hjelpleser"
 
-#: capplets/url-properties/url-properties.c:118
+#: capplets/url-properties/url-properties.c:127
 msgid "Help browser (new window)"
 msgstr "Hjelpleser (nytt vindu)"
 
-#: capplets/url-properties/url-properties.c:130
+#: capplets/url-properties/url-properties.c:140
 msgid "Set"
 msgstr "Sett"
+
+#: capplets/url-properties/url-properties.c:148
+msgid "Remove"
+msgstr "Fjern"
 
 #: capplets/wm-properties/wm-properties-capplet.c:142
 #, c-format
@@ -1187,6 +1220,14 @@ msgstr "Redigér vindushåndterer"
 msgid "You cannot delete the current Window Manager"
 msgstr "Du kan ikke slette aktiv vindushåndterer"
 
+#: capplets/wm-properties/wm-properties-capplet.c:1093
+msgid "Edit..."
+msgstr "Redigér..."
+
+#: capplets/wm-properties/wm-properties-capplet.c:1098
+msgid "Delete"
+msgstr "Slett"
+
 #: capplets/wm-properties/wm-properties-capplet.c:1134
 msgid ""
 "an initialization error occurred while starting 'wm-properties-capplet'.\n"
@@ -1257,15 +1298,15 @@ msgstr "Initiér sesjonsinstillingene"
 msgid "Ignore default action.  Used for custom init-session cases"
 msgstr "Ignorér standard handling. Brukes for spesielle init-session tilfeller"
 
-#: control-center/capplet-widget.c:262
+#: control-center/capplet-widget.c:272
 msgid "Sorry, no help is available for these settings."
 msgstr "Beklager, ingen hjelp tilgjengelig for disse innstillingene."
 
-#: control-center/corba-glue.c:75
+#: control-center/corba-glue.c:77
 msgid "capplet-command to be run."
 msgstr "capplet-kommando som skal kjøres."
 
-#: control-center/corba-glue.c:75
+#: control-center/corba-glue.c:77
 msgid "CAPPLET"
 msgstr "CAPPLET"
 
@@ -1337,161 +1378,3 @@ msgstr "Vertsnavn:"
 #: control-center/splash.c:178
 msgid "Unknown"
 msgstr "Ukjent"
-
-#~ msgid "Session"
-#~ msgstr "Sesjon"
-
-#~ msgid "Session Chooser"
-#~ msgstr "Sesjonsvelger"
-
-#~ msgid "Start Session"
-#~ msgstr "Start sesjon"
-
-#~ msgid "Cancel Login"
-#~ msgstr "Avbryt innlogging"
-
-#~ msgid "Order: "
-#~ msgstr "Rekkefølge: "
-
-#~ msgid "Style: "
-#~ msgstr "Stil: "
-
-#~ msgid "This button sets the start order of the selected programs.\n"
-#~ msgstr "Denne knappen setter startrekkefølgen for de valgte programmene.\n"
-
-#~ msgid ""
-#~ "This button sets the restart style of the selected programs:\n"
-#~ "Normal programs are unaffected by logouts but can die;\n"
-#~ "Respawn programs are never allowed to die;\n"
-#~ "Trash programs are discarded on logout and can die;\n"
-#~ "Settings programs are always started on every login."
-#~ msgstr ""
-#~ "Denne knappen setter stil for de valgte programmene ved omstart:\n"
-#~ "Vanlig - programmer blir ikke påvirket ved utlogging, men kan dø;\n"
-#~ "Gjenoppliv - programmer kan aldri få dø;\n"
-#~ "Søppel - programmer forkastes ved utlogging og kan dø;\n"
-#~ "Innstillinger - programmer startes alltid ved innlogging."
-
-#~ msgid ""
-#~ "This button produces a key to the program states below:\n"
-#~ "Inactive programs are waiting to start or have finished;\n"
-#~ "Starting programs are being given time to get running;\n"
-#~ "Running programs are normal members of the session;\n"
-#~ "Saving programs are saving their session details;\n"
-#~ "Programs which make no contact have Unknown states.\n"
-#~ msgstr ""
-#~ "Denne knappen viser en nøkkel til programtilstanden under:\n"
-#~ "Inaktive programmer venter på å starte eller er ferdig;\n"
-#~ "Oppstartende programmer blir gitt tid til å komme igang;\n"
-#~ "Kjørende programmer er vanlige medlemmer av sesjonen;\n"
-#~ "Lagrende programmer lagrer sine sesjonsdetaljer;\n"
-#~ "Programmer som ikke tar kontakt har Ukjent status.\n"
-
-#~ msgid "This column gives the command used to start a program."
-#~ msgstr "Denne kolonnen viser kommandoen som brukes til å starte et program."
-
-#~ msgid "Order"
-#~ msgstr "Rekkefølge"
-
-#~ msgid "Style"
-#~ msgstr "Type"
-
-#~ msgid "State"
-#~ msgstr "Tilstand"
-
-#~ msgid "Program"
-#~ msgstr "Program"
-
-#~ msgid "Inactive"
-#~ msgstr "Inaktiv"
-
-#~ msgid "Waiting to start or already finished."
-#~ msgstr "Venter på å starte eller er allerede ferdig."
-
-#~ msgid "Starting"
-#~ msgstr "Starter"
-
-#~ msgid "Started but has not yet reported state."
-#~ msgstr "Startet, men har ikke ennå rapportert status"
-
-#~ msgid "Running"
-#~ msgstr "Kjører"
-
-#~ msgid "A normal member of the session."
-#~ msgstr "Et vanlig medlem av sesjonen."
-
-#~ msgid "Saving"
-#~ msgstr "Lagrer"
-
-#~ msgid "Saving session details."
-#~ msgstr "Lagrer detaljer om sesjonen."
-
-#~ msgid "State not reported within timeout."
-#~ msgstr "Tilstand ikke rapportert før tidsavbrudd."
-
-#~ msgid "Normal"
-#~ msgstr "Normal"
-
-#~ msgid "Unaffected by logouts but can die."
-#~ msgstr "Ikke påvirket av utlogging, men kan dø."
-
-#~ msgid "Respawn"
-#~ msgstr "Gjenoppliv"
-
-#~ msgid "Never allowed to die."
-#~ msgstr "Kan aldri dø."
-
-#~ msgid "Trash"
-#~ msgstr "Søppel"
-
-#~ msgid "Discarded on logout and can die."
-#~ msgstr "Forkastes ved utlogging og kan dø."
-
-#~ msgid "Always started on every login."
-#~ msgstr "Startes alltid ved hver innlogging."
-
-#~ msgid "Remove Program"
-#~ msgstr "Fjern program"
-
-#~ msgid "Options"
-#~ msgstr "Alternativer"
-
-#~ msgid "Show splash screen on login"
-#~ msgstr "Vis velkomstbilde ved innlogging"
-
-#~ msgid "Prompt on logout"
-#~ msgstr "Spør ved utlogging"
-
-#~ msgid "Automatically save changes to session"
-#~ msgstr "Lagre endringer i sesjonen automatisk"
-
-#~ msgid "Non-session-managed Startup Programs"
-#~ msgstr "Ikke-sesjonshåndtert program i oppstart"
-
-#~ msgid "Priority"
-#~ msgstr "Prioritet"
-
-#~ msgid "Browse Currently Running Programs..."
-#~ msgstr "Bla gjennom aktive programmer..."
-
-#~ msgid "Only display warnings."
-#~ msgstr "Vis kun advarsler."
-
-#~ msgid "Startup Command"
-#~ msgstr "Oppstartskommando"
-
-#~ msgid ""
-#~ "Programs with smaller values are started before programs with higher values. "
-#~ "The default value should be OK"
-#~ msgstr ""
-#~ "Programmer med mindre verdier startes før programmer med høyere verdier. "
-#~ "Standardverdien skal være OK"
-
-#~ msgid "The startup command cannot be empty"
-#~ msgstr "Oppstartskommandoen kan ikke være tom"
-
-#~ msgid "Add Startup Program"
-#~ msgstr "Legg til program for oppstart"
-
-#~ msgid "Edit Startup Program"
-#~ msgstr "Redigér program i oppstart"
