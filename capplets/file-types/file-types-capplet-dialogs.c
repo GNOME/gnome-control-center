@@ -1112,9 +1112,15 @@ add_or_update_application (GtkWidget *list, const char *name, const char *comman
 }
 
 static void
+insert_and_select_item (GtkList *list, GtkListItem *item, int position)
+{
+}
+
+static void
 add_item_to_application_list (GtkWidget *list, const char *name, const char *mime_type, int position)
 {
 	GtkWidget *check_button, *list_item, *hbox, *label;
+	GList *items;
 	
 	/* Create list item */
 	list_item = gtk_list_item_new ();
@@ -1130,15 +1136,11 @@ add_item_to_application_list (GtkWidget *list, const char *name, const char *mim
 	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);	
 	
 	/* Add list item to list */
-	if (position == -1) {
-		gtk_container_add (GTK_CONTAINER (list), list_item);
-	} else {
-		GList *items;
 		items = g_list_alloc ();
 		items->data = list_item;
 		gtk_list_insert_items (GTK_LIST (list), items, position);
 		gtk_list_select_child (GTK_LIST (list), list_item);
-	}
+	
 	
 	gtk_widget_show_all (list);
 	
