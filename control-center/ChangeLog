@@ -5,6 +5,9 @@
 	(capplet_control_launch): Remove double-free of the moniker
 	(capplet_control_launch): Release and unref the property control
 	in the event of an error
+	(capplet_control_launch): Conclude that the capplet is already
+	running only when the exception type is
+	Bonobo/Moniker/InterfaceNotFound
 
 2001-07-23  Bradford Hovinen  <hovinen@ximian.com>
 
