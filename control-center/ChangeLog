@@ -1,5 +1,10 @@
 2001-07-26  Bradford Hovinen  <hovinen@ximian.com>
 
+	* kill-gnomecc.sh: Don't kill oafd for fear that someone may be
+	running Evolution. Kill bonobo-moniker-archiver after everything
+	else is dead. Redirect errors to /dev/null. Kill the mouse
+	properties capplet, too.
+
 	* gnomecc.glade: Don't make the main window modal
 
 	* capplet-dir.c (capplet_control_launch): Remove check for capplet
