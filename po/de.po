@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.4.x\n"
-"POT-Creation-Date: 2002-03-28 09:22-0500\n"
+"POT-Creation-Date: 2002-04-09 15:25+0200\n"
 "PO-Revision-Date: 2001-02-11 18:00+0100\n"
 "Last-Translator: Christian Meyer <chrisime@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -17,25 +17,26 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:259
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:260
 #, fuzzy
-msgid "_Enable keyboard accesibility"
+msgid "_Enable keyboard accessibility"
 msgstr "Tastaturklick aktivieren"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:326
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:327
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr ""
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:438
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:439
 #, fuzzy
 msgid "Select CDE AccessX file"
 msgstr "Wählen Sie einen Betrachter aus"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
+#: capplets/keyboard/keyboard.desktop.in.h:1
 #, fuzzy
-msgid "AccessX"
-msgstr "Adressen akzeptieren"
+msgid "Keyboard"
+msgstr "Tastaturglocke"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:2
 #, fuzzy
@@ -43,7 +44,7 @@ msgid "Keyboard Accessibility Properties"
 msgstr "Allgemeine Eigenschaften"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:1
-msgid "&lt;b&gt;Sample&lt;/b&gt;"
+msgid "&lt;b&gt;Test&lt;/b&gt;"
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:2
@@ -93,14 +94,13 @@ msgstr ""
 msgid ""
 "MouseKeys can benefit StickyKey users or anyone unable to use the pointing "
 "device or in need of 'pixel by pixel' position control of the pointer.  When "
-"activated, MouseKeys turns the numeric keypad into a mouse control pad. "
+"activated, MouseKeys turns the numeric keypad into a mouse control pad."
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:13
 msgid ""
-"SlowKeys can benefit users who hit unwanted keys as they type.  SlowKeys "
-"instructs the system not to accept keys as pressed, unless the key has been "
-"pressed and held for a user adjustable amount of time (i.e., the key delay)."
+"Only accept keys after they have been pressed and held for a user adjustable "
+"amount of time."
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:14
@@ -125,7 +125,7 @@ msgstr ""
 msgid ""
 "ToggleKeys can benefit the visually impaired user who has difficulty seeing "
 "the small LED keyboard indicators.  ToggleKeys provides one beep when an LED "
-"(e.g., the Caps Lock LED) is turned on and two beeps when it is turned off"
+"(e.g., the Caps Lock LED) is turned on and two beeps when it is turned off."
 msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:18
@@ -242,14 +242,18 @@ msgid "_Scaled"
 msgstr ""
 
 #: capplets/background/background-properties-capplet.c:392
-msgid "S_tretched"
+msgid "Stretc_hed"
 msgstr ""
 
 #: capplets/background/background-properties-capplet.c:392
 msgid "_No Picture"
 msgstr ""
 
-#: capplets/background/background-properties-capplet.c:515
+#: capplets/background/background-properties-capplet.c:427
+msgid "_Picture"
+msgstr ""
+
+#: capplets/background/background-properties-capplet.c:531
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:592
 #: capplets/keyboard/gnome-keyboard-properties.c:348
@@ -258,18 +262,14 @@ msgstr ""
 msgid "Retrieve and store legacy settings"
 msgstr ""
 
-#: capplets/background/background-properties-capplet.c:540
-#, fuzzy
-msgid "Background properties"
-msgstr "Allgemeine Eigenschaften"
-
+#: capplets/background/background-properties-capplet.c:556
 #: capplets/background/background-properties.glade.h:1
 #, fuzzy
-msgid "Background Properties"
+msgid "Background Preferences"
 msgstr "Allgemeine Eigenschaften"
 
 #: capplets/background/background-properties.glade.h:2
-msgid "Border the picture with a:"
+msgid "Bor_der the picture with a:"
 msgstr ""
 
 #: capplets/background/background-properties.glade.h:3
@@ -290,51 +290,47 @@ msgid "Picture Options:"
 msgstr ""
 
 #: capplets/background/background-properties.glade.h:7
-msgid "Picture:"
-msgstr ""
-
-#: capplets/background/background-properties.glade.h:8
 #, fuzzy
 msgid "Primary Color"
 msgstr "Wählen Sie eine Farbe aus"
 
-#: capplets/background/background-properties.glade.h:9
+#: capplets/background/background-properties.glade.h:8
 #, fuzzy
 msgid "Secondary Color"
 msgstr "Einfarbig"
 
-#: capplets/background/background-properties.glade.h:10
+#: capplets/background/background-properties.glade.h:9
 msgid "Solid color"
 msgstr "Einfarbig"
 
-#: capplets/background/background-properties.glade.h:11
+#: capplets/background/background-properties.glade.h:10
 msgid "Vertical gradient"
 msgstr "Vertikaler Verlauf"
 
-#: capplets/background/background-properties.glade.h:12
+#: capplets/background/background-properties.glade.h:11
 msgid ""
 "You can drag image files\n"
 "into the window to set the \n"
 "background picture."
 msgstr ""
 
-#: capplets/background/background-properties.glade.h:15
+#: capplets/background/background-properties.glade.h:14
 msgid "radiobutton1"
 msgstr ""
 
-#: capplets/background/background-properties.glade.h:16
+#: capplets/background/background-properties.glade.h:15
 msgid "radiobutton2"
 msgstr ""
 
-#: capplets/background/background-properties.glade.h:17
+#: capplets/background/background-properties.glade.h:16
 msgid "radiobutton3"
 msgstr ""
 
-#: capplets/background/background-properties.glade.h:18
+#: capplets/background/background-properties.glade.h:17
 msgid "radiobutton4"
 msgstr ""
 
-#: capplets/background/background-properties.glade.h:19
+#: capplets/background/background-properties.glade.h:18
 msgid "radiobutton5"
 msgstr ""
 
@@ -445,6 +441,7 @@ msgid "Choose the applications used by default"
 msgstr ""
 
 #: capplets/default-applications/default-applications.desktop.in.h:2
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:15
 #, fuzzy
 msgid "Preferred Applications"
 msgstr "Voreingestellte Anwendungen"
@@ -484,38 +481,34 @@ msgid "Co_mmand:"
 msgstr "Befehl:"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:8
-msgid "Default Applications"
-msgstr "Voreingestellte Anwendungen"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:9
 #, fuzzy
 msgid "Default Help Browser"
 msgstr "Voreingestellter Hilfe-Betrachter"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:10
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:9
 #, fuzzy
 msgid "Default Terminal"
 msgstr "Im Terminal ausführen"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:11
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:10
 #, fuzzy
 msgid "Default Text Editor"
 msgstr "Text-Editor"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:12
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:11
 #, fuzzy
 msgid "Default Web Browser"
 msgstr "Voreingestellter Webbrowser in GNOME"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:13
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:12
 msgid "Default Window Manager"
 msgstr ""
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:14
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:13
 msgid "E_xec Flag:"
 msgstr ""
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:15
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:14
 #, fuzzy
 msgid "He_lp Browser"
 msgstr "Webbrowser"
@@ -623,111 +616,6 @@ msgstr "Voreingestellte Anwendungen"
 
 #: capplets/desktop-links/legacy-applications.desktop.in.in.h:2
 msgid "Legacy applications settings (grdb)"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
-msgid "Appearance"
-msgstr "Aussehen"
-
-#: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:2
-#, fuzzy
-msgid "Configure window appearance"
-msgstr "Energiesparmodus konfigurieren"
-
-#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:1
-msgid "Configure key shortcuts"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:2
-#, fuzzy
-msgid "Shortcuts"
-msgstr "Kurz"
-
-#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:1
-msgid "Configure window focusing"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:2
-msgid "Focus behavior"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
-#, fuzzy
-msgid "Configure window properties"
-msgstr "Allgemeine Eigenschaften"
-
-#: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:2
-msgid "Matched Windows"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:1
-msgid "Configure window minimization and maximization"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:2
-msgid "Minimizing and Maximizing"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
-msgid "Configure window manager configuration properties"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:2
-msgid "Meta"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
-msgid "Configure miscellaneous window features"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
-msgid "Miscellaneous"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:1
-msgid "Configure window move/resize"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:2
-msgid "Moving and Resizing"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:1
-#, fuzzy
-msgid "Configure window placement"
-msgstr "Energiesparmodus konfigurieren"
-
-#: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:2
-#, fuzzy
-msgid "Placement"
-msgstr "Länge"
-
-#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:1
-#, fuzzy
-msgid "Control Center Menu"
-msgstr "GNOME-Kontrollzentrum"
-
-#: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:2
-msgid "Sawfish window manager"
-msgstr ""
-
-#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
-#, fuzzy
-msgid "Enable window manager sound events"
-msgstr "Energie_sparmodus aktivieren"
-
-#: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
-#: capplets/sound/sound.desktop.in.h:2
-msgid "Sound"
-msgstr "Audio"
-
-#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:1
-#, fuzzy
-msgid "Configure workspaces"
-msgstr "Energiesparmodus konfigurieren"
-
-#: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:2
-msgid "Workspaces"
 msgstr ""
 
 #.
@@ -862,7 +750,7 @@ msgid "Add service..."
 msgstr ""
 
 #: capplets/file-types/file-types-properties.glade.h:5
-#: capplets/file-types/mime-edit-dialog.c:750
+#: capplets/file-types/mime-edit-dialog.c:755
 msgid "Category"
 msgstr ""
 
@@ -977,9 +865,9 @@ msgstr ""
 
 #: capplets/file-types/mime-category-edit-dialog.c:343
 #: capplets/file-types/mime-edit-dialog.c:392
-#: capplets/file-types/mime-edit-dialog.c:492
-#: capplets/file-types/service-edit-dialog.c:351
-#: capplets/file-types/service-edit-dialog.c:397
+#: capplets/file-types/mime-edit-dialog.c:496
+#: capplets/file-types/service-edit-dialog.c:354
+#: capplets/file-types/service-edit-dialog.c:400
 msgid "Custom"
 msgstr "Benutzerdefiniert"
 
@@ -1009,22 +897,22 @@ msgid "True if this dialog is for adding a MIME type"
 msgstr ""
 
 #: capplets/file-types/mime-edit-dialog.c:387
-#: capplets/file-types/mime-edit-dialog.c:442
+#: capplets/file-types/mime-edit-dialog.c:446
 #, fuzzy
 msgid "None"
 msgstr "Länger"
 
-#: capplets/file-types/mime-edit-dialog.c:675
+#: capplets/file-types/mime-edit-dialog.c:680
 msgid ""
 "Invalid MIME type. Please enter a valid MIME type, or leave the field blank "
 "to have one generated for you."
 msgstr ""
 
-#: capplets/file-types/mime-edit-dialog.c:686
+#: capplets/file-types/mime-edit-dialog.c:691
 msgid "There already exists a MIME type of that name."
 msgstr ""
 
-#: capplets/file-types/mime-edit-dialog.c:755
+#: capplets/file-types/mime-edit-dialog.c:760
 msgid "Choose a file category"
 msgstr ""
 
@@ -1058,18 +946,18 @@ msgstr ""
 msgid "TRUE if this is an add service dialog"
 msgstr ""
 
-#: capplets/file-types/service-edit-dialog.c:489
+#: capplets/file-types/service-edit-dialog.c:492
 #, fuzzy
 msgid "Please enter a protocol name."
 msgstr "Bitte geben Sie unten einen Befehl ein."
 
-#: capplets/file-types/service-edit-dialog.c:502
+#: capplets/file-types/service-edit-dialog.c:504
 msgid ""
 "Invalid protocol name. Please enter a protocol name without any spaces or "
 "punctuation."
 msgstr ""
 
-#: capplets/file-types/service-edit-dialog.c:515
+#: capplets/file-types/service-edit-dialog.c:518
 msgid "There is already a protocol by that name."
 msgstr ""
 
@@ -1097,6 +985,11 @@ msgstr ""
 #: capplets/file-types/service-info.c:49
 msgid "Electronic mail transmission"
 msgstr ""
+
+#: capplets/file-types/service-info.c:50
+#, fuzzy
+msgid "Gnome documentation"
+msgstr "Voreingestellter Ort"
 
 #: capplets/font/font-properties.desktop.in.h:1
 #, fuzzy
@@ -1131,8 +1024,8 @@ msgid "Accelerator key"
 msgstr ""
 
 #: capplets/keybindings/eggcellrendererkeys.c:199
-#: capplets/keybindings/gnome-keybinding-properties.c:88
-#: libbackground/applier.c:466
+#: capplets/keybindings/gnome-keybinding-properties.c:86
+#: libbackground/applier.c:533
 msgid "Disabled"
 msgstr "Deaktiviert"
 
@@ -1145,21 +1038,21 @@ msgstr ""
 msgid "Type a new accelerator"
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:284
+#: capplets/keybindings/gnome-keybinding-properties.c:282
 msgid "<Unknown Action>"
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:443
+#: capplets/keybindings/gnome-keybinding-properties.c:444
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:506
+#: capplets/keybindings/gnome-keybinding-properties.c:507
 msgid "_Action"
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:518
+#: capplets/keybindings/gnome-keybinding-properties.c:519
 #, fuzzy
 msgid "_Shortcut"
 msgstr "Kurz"
@@ -1337,11 +1230,6 @@ msgstr "Audio"
 #, fuzzy
 msgid "_Volume:"
 msgstr "Lautstärke"
-
-#: capplets/keyboard/keyboard.desktop.in.h:1
-#, fuzzy
-msgid "Keyboard"
-msgstr "Tastaturglocke"
 
 #: capplets/mouse/gnome-mouse-properties.c:420
 #, c-format
@@ -1533,6 +1421,10 @@ msgstr "Maus"
 msgid "Configure GNOME's use of sound"
 msgstr ""
 
+#: capplets/sound/sound.desktop.in.h:2
+msgid "Sound"
+msgstr "Audio"
+
 #: capplets/sound/sound-properties-capplet.c:178
 #, fuzzy
 msgid "Sound preferences"
@@ -1553,86 +1445,53 @@ msgstr "Klangereignisse"
 msgid "_Sounds for events"
 msgstr "Klänge für Ereignisse"
 
-#. just 8 short names that will serve as samples for titles in demo
-#: capplets/theme-switcher/control/control.c:19
-msgid "Eenie"
+#: capplets/theme-switcher/control/control.c:18
+msgid "Eenie Meenie Mynie Moe Catcha Tiger By Its Toe"
 msgstr ""
 
-#: capplets/theme-switcher/control/control.c:19
-#, fuzzy
-msgid "Mynie"
-msgstr "Moire"
-
-#: capplets/theme-switcher/control/control.c:19
-msgid "Catcha"
-msgstr ""
-
-#: capplets/theme-switcher/control/control.c:19
-msgid "By Its"
-msgstr ""
-
-#: capplets/theme-switcher/control/control.c:20
-msgid "Meenie"
-msgstr ""
-
-#: capplets/theme-switcher/control/control.c:20
-#, fuzzy
-msgid "Moe"
-msgstr "Mehr"
-
-#: capplets/theme-switcher/control/control.c:20
-#, fuzzy
-msgid "Tiger"
-msgstr "Dünner"
-
-#: capplets/theme-switcher/control/control.c:20
-#, fuzzy
-msgid "Toe"
-msgstr "Zwei"
-
-#: capplets/theme-switcher/control/control.c:38
+#: capplets/theme-switcher/control/control.c:43
 msgid "Selected themes from above will be tested by previewing here."
 msgstr ""
 
 #. column one
-#: capplets/theme-switcher/control/control.c:43
+#: capplets/theme-switcher/control/control.c:48
 msgid "Sample Button"
 msgstr ""
 
-#: capplets/theme-switcher/control/control.c:47
+#: capplets/theme-switcher/control/control.c:52
 msgid "Sample Check Button"
 msgstr ""
 
-#: capplets/theme-switcher/control/control.c:53
+#: capplets/theme-switcher/control/control.c:58
 msgid "Sample Text Entry Field"
 msgstr ""
 
-#: capplets/theme-switcher/control/control.c:64
+#: capplets/theme-switcher/control/control.c:69
 msgid "Submenu"
 msgstr ""
 
-#: capplets/theme-switcher/control/control.c:69
+#: capplets/theme-switcher/control/control.c:74
 #: capplets/ui-properties/gnome2-ui-properties.glade.h:2
 msgid "Item 1"
 msgstr ""
 
-#: capplets/theme-switcher/control/control.c:71
+#: capplets/theme-switcher/control/control.c:76
 msgid "Another item"
 msgstr ""
 
-#: capplets/theme-switcher/control/control.c:75
+#: capplets/theme-switcher/control/control.c:80
 msgid "Radio Button 1"
 msgstr ""
 
-#: capplets/theme-switcher/control/control.c:81
+#: capplets/theme-switcher/control/control.c:86
 msgid "Radio Button 2"
 msgstr ""
 
-#: capplets/theme-switcher/control/control.c:102
+#: capplets/theme-switcher/control/control.c:107
 msgid "One"
 msgstr ""
 
-#: capplets/theme-switcher/control/control.c:108
+#: capplets/theme-switcher/control/control.c:113
 msgid "Two"
 msgstr "Zwei"
 
@@ -1822,17 +1681,35 @@ msgstr ""
 msgid "Could not initialize Bonobo"
 msgstr ""
 
-#: libbackground/applier.c:230
+#: libbackground/applier.c:239
 msgid "Type"
 msgstr ""
 
-#: libbackground/applier.c:231
+#: libbackground/applier.c:240
 msgid ""
 "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
 "for preview"
 msgstr ""
 
-#: libbackground/applier.c:398
+#: libbackground/applier.c:247
+#, fuzzy
+msgid "Preview Width"
+msgstr "Vorschau"
+
+#: libbackground/applier.c:248
+msgid "Width if applier is a preview: Defaults to 64."
+msgstr ""
+
+#: libbackground/applier.c:255
+#, fuzzy
+msgid "Preview Height"
+msgstr "Vorschau"
+
+#: libbackground/applier.c:256
+msgid "Height if applier is a preview: Defaults to 48."
+msgstr ""
+
+#: libbackground/applier.c:454
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr ""
@@ -1857,23 +1734,85 @@ msgid ""
 "for a set of default sounds."
 msgstr ""
 
-#: libsounds/sound-view.c:209
+#: libsounds/sound-view.c:210
 msgid "Event"
 msgstr ""
 
-#: libsounds/sound-view.c:216
+#: libsounds/sound-view.c:217
 msgid "File to play"
 msgstr ""
 
-#: libsounds/sound-view.c:238
+#: libsounds/sound-view.c:245
 #, fuzzy
-msgid "Play"
+msgid "_Play"
 msgstr "Pulsar"
 
-#: libsounds/sound-view.c:244
+#: libsounds/sound-view.c:251
 #, fuzzy
 msgid "Select sound file"
 msgstr "Wählen Sie einen Betrachter aus"
+
+#, fuzzy
+#~ msgid "AccessX"
+#~ msgstr "Adressen akzeptieren"
+
+#, fuzzy
+#~ msgid "Background properties"
+#~ msgstr "Allgemeine Eigenschaften"
+
+#~ msgid "Default Applications"
+#~ msgstr "Voreingestellte Anwendungen"
+
+#~ msgid "Appearance"
+#~ msgstr "Aussehen"
+
+#, fuzzy
+#~ msgid "Configure window appearance"
+#~ msgstr "Energiesparmodus konfigurieren"
+
+#, fuzzy
+#~ msgid "Shortcuts"
+#~ msgstr "Kurz"
+
+#, fuzzy
+#~ msgid "Configure window properties"
+#~ msgstr "Allgemeine Eigenschaften"
+
+#, fuzzy
+#~ msgid "Configure window placement"
+#~ msgstr "Energiesparmodus konfigurieren"
+
+#, fuzzy
+#~ msgid "Placement"
+#~ msgstr "Länge"
+
+#, fuzzy
+#~ msgid "Control Center Menu"
+#~ msgstr "GNOME-Kontrollzentrum"
+
+#, fuzzy
+#~ msgid "Enable window manager sound events"
+#~ msgstr "Energie_sparmodus aktivieren"
+
+#, fuzzy
+#~ msgid "Configure workspaces"
+#~ msgstr "Energiesparmodus konfigurieren"
+
+#, fuzzy
+#~ msgid "Mynie"
+#~ msgstr "Moire"
+
+#, fuzzy
+#~ msgid "Moe"
+#~ msgstr "Mehr"
+
+#, fuzzy
+#~ msgid "Tiger"
+#~ msgstr "Dünner"
+
+#, fuzzy
+#~ msgid "Toe"
+#~ msgstr "Zwei"
 
 #, fuzzy
 #~ msgid "Pick a Font"
