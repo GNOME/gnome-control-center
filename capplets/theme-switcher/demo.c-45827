@@ -27,7 +27,8 @@ demo_data_in(gpointer data, gint source, GdkInputCondition condition)
 {
   gchar buf[256];
   
-  if (read(source, buf, 2) == 0)
+  if (condition & GDK_INPUT_EXCEPTION ||
+      read(source, buf, 2) == 0)
     gtk_main_quit();		/* Parent exited */
   else {
     if (gtk_rc_reparse_all ())
@@ -155,7 +156,7 @@ demo_main(int argc, char **argv, gint in_fd)
 
   gtk_container_add (GTK_CONTAINER (scrolled_window), widget);
   
-  gdk_input_add_full(in_fd, GDK_INPUT_READ, demo_data_in, NULL, NULL);
+  gdk_input_add_full(in_fd, GDK_INPUT_READ | GDK_INPUT_EXCEPTION, demo_data_in, NULL, NULL);
   gtk_widget_show_all (plug);
   
   gtk_main ();
