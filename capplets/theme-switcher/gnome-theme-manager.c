@@ -39,6 +39,15 @@ static void read_themes (GladeXML *dialog);
 
 enum
 {
+  META_THEME_NAME_COLUMN,
+  META_THEME_ID_COLUMN,
+  META_PIXBUF_COLUMN,
+  META_DEFAULT_THEME_COLUMN,
+  META_xN_COLUMNS
+};
+
+enum
+{
   THEME_NAME_COLUMN,
   THEME_ID_COLUMN,
   PIXBUF_COLUMN,
@@ -118,11 +127,13 @@ load_meta_themes (GtkTreeView *tree_view,
 	  gtk_tree_path_free (path);
 	  current_theme_found = TRUE;
 	}
-      blurb = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s</span>\n\n%s", meta_theme_info->name, meta_theme_info->comment);
+      blurb = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s</span>\n\n%s",
+			       meta_theme_info->readable_name, meta_theme_info->comment);
       pixbuf = generate_theme_thumbnail (meta_theme_info);
       gtk_list_store_set (GTK_LIST_STORE (model), &iter,
 			  PIXBUF_COLUMN, pixbuf,
 			  THEME_NAME_COLUMN, blurb,
+			  THEME_ID_COLUMN, meta_theme_info->name,
 			  DEFAULT_THEME_COLUMN, is_default,
 			  -1);
       g_free (blurb);
@@ -151,6 +162,7 @@ load_meta_themes (GtkTreeView *tree_view,
       gtk_list_store_prepend (GTK_LIST_STORE (model), &iter);
       gtk_list_store_set (GTK_LIST_STORE (model), &iter,
 			  THEME_NAME_COLUMN, current_theme,
+			  THEME_ID_COLUMN, current_theme,
 			  DEFAULT_THEME_COLUMN, is_default,
 			  -1);
 
@@ -223,6 +235,7 @@ load_theme_names (GtkTreeView *tree_view,
 	}
       gtk_list_store_set (GTK_LIST_STORE (model), &iter,
 			  THEME_NAME_COLUMN, name,
+			  THEME_ID_COLUMN, name,
 			  DEFAULT_THEME_COLUMN, is_default,
 			  -1);
 
@@ -250,6 +263,7 @@ load_theme_names (GtkTreeView *tree_view,
       gtk_list_store_prepend (GTK_LIST_STORE (model), &iter);
       gtk_list_store_set (GTK_LIST_STORE (model), &iter,
 			  THEME_NAME_COLUMN, current_theme,
+			  THEME_ID_COLUMN, current_theme,
 			  DEFAULT_THEME_COLUMN, is_default,
 			  -1);
 
@@ -295,7 +309,7 @@ update_gconf_key_from_selection (GtkTreeSelection *selection,
   if (gtk_tree_selection_get_selected (selection, &model, &iter))
     {
       gtk_tree_model_get (model, &iter,
-			  THEME_NAME_COLUMN, &new_key,
+			  THEME_ID_COLUMN, &new_key,
 			  -1);
     }
   else
@@ -327,74 +341,30 @@ static void
 meta_theme_setup_info (GnomeThemeMetaInfo *meta_theme_info,
 		       GladeXML           *dialog)
 {
-	return;
+  GtkWidget *notebook;
+
+  notebook = WID ("meta_theme_notebook");
+
+
   if (meta_theme_info == NULL)
     {
-      gtk_widget_hide (WID ("meta_theme_extras_vbox"));
-      gtk_widget_hide (WID ("meta_theme_description_label"));
-      gtk_image_set_from_pixbuf (GTK_IMAGE (WID ("meta_theme_image")), NULL);
+      gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), 0);
     }
   else
     {
-      if (meta_theme_info->icon_file)
-	{
-	  gtk_image_set_from_file (GTK_IMAGE (WID ("meta_theme_image")), meta_theme_info->icon_file);
-	}
-      else
-	{
-	  gtk_image_set_from_pixbuf (GTK_IMAGE (WID ("meta_theme_image")), NULL);
-	}
-      if (meta_theme_info->comment)
-	{
-	  gchar *real_comment;
-
-	  real_comment = g_strconcat ("<span size=\"larger\" weight=\"bold\">",
-				      meta_theme_info->comment,
-				      "</span>", NULL);
-	  gtk_label_set_markup (GTK_LABEL (WID ("meta_theme_description_label")),
-				real_comment);
-	  g_free (real_comment);
-	  gtk_widget_show (WID ("meta_theme_description_label"));
-	}
-      else
-	{
-	  gtk_widget_hide (WID ("meta_theme_description_label"));
-	}
-
       if (meta_theme_info->application_font != NULL)
 	{
-	  gtk_widget_show (WID ("meta_theme_extras_vbox"));
 	  if (meta_theme_info->background_image != NULL)
-	    {
-	      gtk_label_set_text (GTK_LABEL (WID ("meta_theme_info_label")),
-				  _("This theme suggests a matching font and a background:"));
-	      gtk_widget_show (WID ("meta_theme_background_button"));
-	      gtk_widget_show (WID ("meta_theme_font_button"));
-	    }
+	    gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), 3);
 	  else
-	    {
-	      gtk_label_set_text (GTK_LABEL (WID ("meta_theme_info_label")),
-				  _("This theme suggests a matching font:"));
-	      gtk_widget_hide (WID ("meta_theme_background_button"));
-	      gtk_widget_show (WID ("meta_theme_font_button"));
-	    }
+	    gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), 1);
 	}
       else
 	{
 	  if (meta_theme_info->background_image != NULL)
-	    {
-	      gtk_widget_show (WID ("meta_theme_extras_vbox"));
-	      gtk_label_set_text (GTK_LABEL (WID ("meta_theme_info_label")),
-				  _("This theme suggests a matching background:"));
-	      gtk_widget_show (WID ("meta_theme_background_button"));
-	      gtk_widget_hide (WID ("meta_theme_font_button"));
-	    }
+	    gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), 2);
 	  else
-	    {
-	      gtk_widget_hide (WID ("meta_theme_extras_vbox"));
-	      gtk_widget_hide (WID ("meta_theme_background_button"));
-	      gtk_widget_hide (WID ("meta_theme_font_button"));
-	    }
+	    gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), 0);
 	}
     }
 }
@@ -446,7 +416,7 @@ meta_theme_selection_changed (GtkTreeSelection *selection,
   if (gtk_tree_selection_get_selected (selection, &model, &iter))
     {
       gtk_tree_model_get (model, &iter,
-			  THEME_NAME_COLUMN, &meta_theme_name,
+			  THEME_ID_COLUMN, &meta_theme_name,
 			  -1);
     }
   else
@@ -486,7 +456,7 @@ window_theme_selection_changed (GtkTreeSelection *selection,
   if (gtk_tree_selection_get_selected (selection, &model, &iter))
     {
       gtk_tree_model_get (model, &iter,
-			  THEME_NAME_COLUMN, &window_theme_name,
+			  THEME_ID_COLUMN, &window_theme_name,
 			  -1);
     }
   else
