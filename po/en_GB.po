@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-centre CVS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-18 19:59-0400\n"
-"PO-Revision-Date: 2004-05-18 20:05-0400\n"
+"POT-Creation-Date: 2004-06-02 08:22-0400\n"
+"PO-Revision-Date: 2004-06-02 08:22-0400\n"
 "Last-Translator: Gareth Owen <gowen72@yahoo.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -331,7 +331,7 @@ msgstr "pixels/second"
 #: capplets/mouse/gnome-mouse-properties.c:133
 #: capplets/mouse/gnome-mouse-properties.c:578
 #: capplets/mouse/gnome-mouse-properties.glade.h:27
-#: capplets/windows/gnome-window-properties.glade.h:7
+#: capplets/windows/gnome-window-properties.glade.h:10
 msgid "seconds"
 msgstr "seconds"
 
@@ -1150,7 +1150,7 @@ msgid "Add File Type"
 msgstr "Add File Type"
 
 #: capplets/file-types/mime-edit-dialog.c:432
-#: capplets/file-types/mime-type-info.c:763
+#: capplets/file-types/mime-type-info.c:766
 msgid "Misc"
 msgstr "Misc"
 
@@ -1180,20 +1180,20 @@ msgstr "Category"
 msgid "Choose a file category"
 msgstr "Choose a file category"
 
-#: capplets/file-types/mime-type-info.c:691
+#: capplets/file-types/mime-type-info.c:694
 #, c-format
 msgid "View as %s"
 msgstr "View as %s"
 
-#: capplets/file-types/mime-type-info.c:757
+#: capplets/file-types/mime-type-info.c:760
 msgid "Images"
 msgstr "Images"
 
-#: capplets/file-types/mime-type-info.c:759
+#: capplets/file-types/mime-type-info.c:762
 msgid "Video"
 msgstr "Video"
 
-#: capplets/file-types/mime-type-info.c:761
+#: capplets/file-types/mime-type-info.c:764
 msgid "Audio"
 msgstr "Audio"
 
@@ -2304,26 +2304,38 @@ msgid "Meta"
 msgstr "Meta"
 
 #: capplets/windows/gnome-window-properties.glade.h:1
+msgid "<b>Movement Key</b>"
+msgstr "<b>Movement Key</b>"
+
+#: capplets/windows/gnome-window-properties.glade.h:2
+msgid "<b>Titlebar Action</b>"
+msgstr "<b>Titlebar Action</b>"
+
+#: capplets/windows/gnome-window-properties.glade.h:3
+msgid "<b>Window Selection</b>"
+msgstr "<b>Window Selection</b>"
+
+#: capplets/windows/gnome-window-properties.glade.h:4
 msgid "To _move a window, press-and-hold this key then grab the window:"
 msgstr "To _move a window, press-and-hold this key then grab the window:"
 
-#: capplets/windows/gnome-window-properties.glade.h:2
+#: capplets/windows/gnome-window-properties.glade.h:5
 msgid "Window Preferences"
 msgstr "Window Preferences"
 
-#: capplets/windows/gnome-window-properties.glade.h:3
+#: capplets/windows/gnome-window-properties.glade.h:6
 msgid "_Double-click titlebar to perform this action:"
 msgstr "_Double-click titlebar to perform this action:"
 
-#: capplets/windows/gnome-window-properties.glade.h:4
+#: capplets/windows/gnome-window-properties.glade.h:7
 msgid "_Interval before raising:"
 msgstr "_Interval before raising:"
 
-#: capplets/windows/gnome-window-properties.glade.h:5
+#: capplets/windows/gnome-window-properties.glade.h:8
 msgid "_Raise selected windows after an interval"
 msgstr "_Raise selected windows after an interval"
 
-#: capplets/windows/gnome-window-properties.glade.h:6
+#: capplets/windows/gnome-window-properties.glade.h:9
 msgid "_Select windows when the mouse moves over them"
 msgstr "_Select windows when the mouse moves over them"
 
@@ -2401,11 +2413,11 @@ msgid "Others"
 msgstr "Others"
 
 #: control-center/control-center-categories.c:424
-#: control-center/control-center.c:1055
+#: control-center/control-center.c:1087
 msgid "Gnome Control Center"
 msgstr "Gnome Control Center"
 
-#: control-center/control-center.c:1153
+#: control-center/control-center.c:78
 msgid "Use nautilus if it is running."
 msgstr "Use nautilus if it is running."
 
@@ -2519,7 +2531,7 @@ msgstr ""
 "Error while trying to run (%s)\n"
 "which is linked to the key (%s)"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:70
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:73
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2544,7 +2556,7 @@ msgstr ""
 "- The result of <b>xprop -root | grep XKB</b>\n"
 "- The result of <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b>"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:80
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:83
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2555,7 +2567,7 @@ msgstr ""
 "There are known problems with complex XKB configurations.\n"
 "Try using simpler configuration or a newer version of the XFree software."
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:163
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:170
 msgid ""
 "The X system keyboard settings differ from your current GNOME keyboard "
 "settings.  Which set would you like to use?"
@@ -2563,15 +2575,15 @@ msgstr ""
 "The X system keyboard settings differ from your current GNOME keyboard "
 "settings.  Which set would you like to use?"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:166
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:173
 msgid "Use X settings"
 msgstr "Use X settings"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:168
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:175
 msgid "Use GNOME settings"
 msgstr "Use GNOME settings"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:220
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:227
 #, c-format
 msgid ""
 "You have a keyboard remapping file (%s) in your home directory whose "
