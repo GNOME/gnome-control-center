@@ -1,3 +1,24 @@
+2002-03-21  Seth Nickell  <snickell@stanford.edu>
+
+	* background-properties-capplet.c: (string_to_orientation),
+	(update_color_widget_labels_and_visibility),
+	(peditor_value_changed), (setup_dialog), (create_dialog):
+	* background-properties.glade:
+
+	Recapture some of the more subtle interactions of "Seth's UI".
+	Change colour labels when the gradient orientation changes,
+	and use mnemonics so the capplet is accessible. Pad and space
+	as designed.
+
+	There are still at least two things wrong:
+
+	1) Havoc & Jonathan convinced me that the large button with
+	   label was wrong. This should instead look like:
+	   http://beauty.stanford.edu/bg_button.png
+	   The new format should be right for all image selectors, the
+	   old mechanism had serious usability problems.
+	2) "No Picture" should be the first toggle
+
 2002-03-19  Richard Hestilow  <hestilow@ximian.com>
 
 	* background-properties-capplet.c:

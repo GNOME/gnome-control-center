@@ -5,6 +5,7 @@
  *
  * Written by: Bradford Hovinen <hovinen@ximian.com>,
  *             Richard Hestilow <hestilow@ximian.com>
+ *             Seth Nickell     <snickell@stanford.edu>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -187,23 +188,67 @@ get_legacy_settings (void)
 	gnome_config_pop_prefix ();
 }
 
-/* Show/hide the secondary color options if needed */
+static orientation_t
+string_to_orientation (const gchar *string)
+{
+        orientation_t type = ORIENTATION_SOLID;
+
+	if (string) {
+		if (!strncmp (string, "vertical-gradient", sizeof ("vertical-gradient"))) {
+			type = ORIENTATION_VERT;
+		} else if (!strncmp (string, "horizontal-gradient", sizeof ("horizontal-gradient"))) {
+			type = ORIENTATION_HORIZ;
+		}
+	}
+	   
+	return type;
+}
 
 static void
-update_secondary_color_visibility (ApplierSet *set, const gchar *value_str)
+update_color_widget_labels_and_visibility (ApplierSet *set, const gchar *value_str)
 {
-	gboolean enable; 
-	GtkWidget *color_frame;
+	gboolean two_colors = TRUE;
+	char *color1_string = NULL; 
+	char *color2_string = NULL;
 
-	g_return_if_fail (set != NULL);
-	g_return_if_fail (value_str != NULL);
+	GtkWidget *color1_label;
+	GtkWidget *color2_label;
+	GtkWidget *color2_box;
 
-	enable = strcmp (value_str, "solid");
-	color_frame = g_object_get_data (G_OBJECT (set->prefs), "color2-box");
-	if (enable)
-		gtk_widget_show (color_frame);
-	else
-		gtk_widget_hide (color_frame);
+	orientation_t orientation = string_to_orientation (value_str);
+
+	switch (orientation) {
+	case ORIENTATION_SOLID: /* solid */ 
+		color1_string = _("C_olor"); 
+		two_colors = FALSE; 
+		break;
+	case ORIENTATION_HORIZ: /* horiz */ 
+		color1_string = _("_Left Color"); 
+		color2_string = _("_Right Color"); 
+		break;
+	case ORIENTATION_VERT: /* vert  */
+		color1_string = _("_Top Color");
+		color2_string = _("_Bottom Color"); 
+		break;
+	default:
+		break;
+	}
+
+	color1_label = g_object_get_data (G_OBJECT (set->prefs), "color1-label");
+	color2_label = g_object_get_data (G_OBJECT (set->prefs), "color2-label");
+	color2_box =   g_object_get_data (G_OBJECT (set->prefs), "color2-box");
+
+	g_assert (color1_label);
+	gtk_label_set_text_with_mnemonic (GTK_LABEL(color1_label), color1_string);
+
+	if (two_colors) {
+		gtk_widget_show (color2_box);
+
+		g_assert (color2_label);
+		gtk_label_set_text_with_mnemonic (GTK_LABEL(color2_label), color2_string);
+	} else {
+		gtk_widget_hide (color2_box);
+	}
 }
 
 
@@ -276,7 +321,7 @@ peditor_value_changed (GConfPropertyEditor *peditor, const gchar *key, const GCo
 	}
 	else if (!strcmp (key, BG_PREFERENCES_COLOR_SHADING_TYPE))
 	{
-		update_secondary_color_visibility (set, gconf_value_get_string (value));
+		update_color_widget_labels_and_visibility (set, gconf_value_get_string (value));
 	}
 }
 
@@ -299,6 +344,8 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset, ApplierSet *set)
 	   callbacks */
 	g_object_set_data (G_OBJECT (set->prefs), "color-frame", WID ("color_vbox"));
 	g_object_set_data (G_OBJECT (set->prefs), "color2-box", WID ("color2_box"));
+	g_object_set_data (G_OBJECT (set->prefs), "color1-label", WID("color1_label"));
+	g_object_set_data (G_OBJECT (set->prefs), "color2-label", WID("color2_label"));
 
 	peditor = gconf_peditor_new_select_menu_with_enum
 		(changeset, BG_PREFERENCES_COLOR_SHADING_TYPE, WID ("border_shading"), bg_preferences_orientation_get_type (), NULL);
@@ -329,7 +376,7 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset, ApplierSet *set)
 	color_option = gconf_client_get_string (gconf_client_get_default (),
 						BG_PREFERENCES_COLOR_SHADING_TYPE,
 						NULL);
-	update_secondary_color_visibility (set, color_option);
+	update_color_widget_labels_and_visibility (set, color_option);
 	g_free (color_option);
 }
 
@@ -342,7 +389,7 @@ create_dialog (ApplierSet *set)
 	GladeXML  *dialog;
 	GSList *group;
 	int i;
-	const gchar *labels[] = { N_("Wallpaper"), N_("Centered"), N_("Scaled"), N_("Stretched"), N_("No Picture") };
+	const gchar *labels[] = { N_("_Wallpaper"), N_("C_entered"), N_("_Scaled"), N_("S_tretched"), N_("_No Picture") };
 
 	/* FIXME: What the hell is domain? */
 	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/background-properties.glade", "prefs_widget", NULL);
@@ -358,9 +405,9 @@ create_dialog (ApplierSet *set)
 	for (i = 0; group && i < n_enum_vals; i++, group = group->next)
 	{
 		GtkWidget *w = GTK_WIDGET (group->data);
-		GtkWidget *vbox = gtk_vbox_new (FALSE, 4);
+		GtkWidget *vbox = gtk_vbox_new (FALSE, 0);
 		
-		gtk_container_set_border_width (GTK_CONTAINER (vbox), 4);
+		gtk_container_set_border_width (GTK_CONTAINER (vbox), 0);
 		
 		gtk_widget_destroy (GTK_BIN (w)->child);
 		gtk_container_add (GTK_CONTAINER (w), vbox);
@@ -369,7 +416,7 @@ create_dialog (ApplierSet *set)
 				    bg_applier_get_preview_widget (set->appliers[i]),
 				    TRUE, TRUE, 0);
 		gtk_box_pack_start (GTK_BOX (vbox),
-				    gtk_label_new (gettext (labels[i])),
+				    gtk_label_new_with_mnemonic (gettext (labels[i])),
 				    FALSE, FALSE, 0);
 		gtk_widget_show_all (vbox);
 	}
