@@ -308,7 +308,7 @@ bg_preferences_merge_entry (BGPreferences    *prefs,
 		else
 			prefs->enabled = FALSE;
 	} else {
-		g_warning ("%s: Unknown property: %s", __FUNCTION__, entry->key);
+		g_warning ("%s: Unknown property: %s", G_GNUC_FUNCTION, entry->key);
 	}
 }
 
