@@ -76,7 +76,7 @@ dnl Check for pkg-config
 dnl ==============================================
 AC_PATH_PROG(PKGCONFIG, pkg-config, no)
 if test "$PKGCONFIG" = no ; then
-	AC_MSG_ERROR(pkg-config was not found. Please install version 0.8.0 or newer from http://www.freedesktop.org/software.)
+	AC_MSG_ERROR(pkg-config was not found. Please install version 0.8.0 or newer from http://www.freedesktop.org/software/pkgconfig.)
 fi
 AC_MSG_CHECKING(for pkg-config >= 0.8.0)
 vers=`$PKGCONFIG --version | awk 'BEGIN { FS = "."; } { print $1 * 1000000 + $2 * 1000 + $3}'`
