@@ -1,6 +1,6 @@
 /* -*- mode: c; style: linux -*- */
 
-/* main.c
+/* background-properties-capplet.c
  * Copyright (C) 2000-2001 Ximian, Inc.
  *
  * Written by: Bradford Hovinen <hovinen@ximian.com>,
@@ -27,9 +27,9 @@
 #endif
 
 #include <gnome.h>
-#include <bonobo.h>
-#include <gconf/gconf.h>
+#include <gconf/gconf-client.h>
 #include <glade/glade.h>
+
 #include "capplet-util.h"
 #include "gconf-property-editor.h"
 #include "applier.h"
