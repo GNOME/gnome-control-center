@@ -15,9 +15,6 @@
 #include "gconf-property-editor.h"
 
 #define GTK_THEME_KEY "/desktop/gnome/interface/gtk_theme"
-#define GTK_FONT_KEY "/desktop/gnome/interface/font_name"
-#define DESKTOP_FONT_NAME_KEY "/apps/nautilus/preferences/default_font"
-#define DESKTOP_FONT_SIZE_KEY "/apps/nautilus/preferences/default_font_size"
 
 #define MAX_ELEMENTS_BEFORE_SCROLLING 8
 
@@ -35,7 +32,7 @@ create_dialog (void)
 {
   GladeXML *dialog;
 
-  dialog = glade_xml_new (GLADEDIR "/gnome-font-and-theme-properties.glade", "font_and_theme_dialog", NULL);
+  dialog = glade_xml_new (GLADEDIR "/theme-properties.glade", "theme_dialog", NULL);
 
   return dialog;
 }
@@ -208,7 +205,6 @@ setup_dialog (GladeXML *dialog)
   GtkWidget *widget;
   GtkTreeModel *model;
   GtkTreeSelection *selection;
-  GObject *peditor;
 
   client = gconf_client_get_default ();
 
@@ -234,19 +230,7 @@ setup_dialog (GladeXML *dialog)
   read_themes (dialog);
   theme_common_register_theme_change (theme_changed_func, dialog);
 
-  peditor = gconf_peditor_new_font (NULL, GTK_FONT_KEY,
-		  		    WID ("application_font"),
-				    PEDITOR_FONT_COMBINED, NULL);
-
-  peditor = gconf_peditor_new_font (NULL, DESKTOP_FONT_NAME_KEY,
-		  		    WID ("desktop_font"),
-				    PEDITOR_FONT_NAME, NULL);
-
-  peditor = gconf_peditor_new_font (NULL, DESKTOP_FONT_SIZE_KEY,
-		  		    WID ("desktop_font"),
-				    PEDITOR_FONT_SIZE, NULL);
-
-  widget = WID ("font_and_theme_dialog");
+  widget = WID ("theme_dialog");
   gtk_widget_show (widget);
 
   g_signal_connect (G_OBJECT (widget), "response", gtk_main_quit, NULL);

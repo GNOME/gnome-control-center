@@ -1,9 +1,9 @@
-bin_PROGRAMS = gnome-font-and-theme-properties
+bin_PROGRAMS = gnome-theme-properties
 
-gnome_font_and_theme_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
-gnome_font_and_theme_properties_SOURCES = \
-	gnome-font-and-theme-properties.c
-gnome_font_and_theme_properties_LDFLAGS = -export-dynamic
+gnome_theme_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
+gnome_theme_properties_SOURCES = \
+	theme-switcher.c
+gnome_theme_properties_LDFLAGS = -export-dynamic
 
 @INTLTOOL_DESKTOP_RULE@
 
@@ -12,7 +12,7 @@ Desktop_in_files = gtk-theme-selector.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
 gladedir = $(GNOMECC_GLADE_DIR)
-glade_DATA = gnome-font-and-theme-properties.glade
+glade_DATA = theme-properties.glade
 
 INCLUDES   = \
 	$(GNOMECC_CAPPLETS_CFLAGS)	\
