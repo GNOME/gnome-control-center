@@ -174,16 +174,22 @@ dnl ==============================================
 dnl ==============================================
 dnl Define the directories 
 dnl ==============================================
-AC_DEFINE_UNQUOTED(GNOMECC_ICONS_DIR, "${prefix}/share/${PACKAGE}/icons")
+if test "x${prefix}" = "xNONE"; then
+  real_prefix=${ac_default_prefix}
+else
+  real_prefix=${prefix}
+fi
+
+AC_DEFINE_UNQUOTED(GNOMECC_ICONS_DIR, "${real_prefix}/share/${PACKAGE}/icons")
 GNOMECC_ICONS_DIR=""${datadir}/${PACKAGE}/icons""
 AC_SUBST(GNOMECC_ICONS_DIR)
-AC_DEFINE_UNQUOTED(GNOMECC_GLADE_DIR, "${prefix}/share/${PACKAGE}/interfaces")
+AC_DEFINE_UNQUOTED(GNOMECC_GLADE_DIR, "${real_prefix}/share/${PACKAGE}/interfaces")
 GNOMECC_GLADE_DIR=""${datadir}/${PACKAGE}/interfaces""
 AC_SUBST(GNOMECC_GLADE_DIR)
-AC_DEFINE_UNQUOTED(GNOMECC_PIXMAPS_DIR, "${prefix}/share/${PACKAGE}/pixmaps")
+AC_DEFINE_UNQUOTED(GNOMECC_PIXMAPS_DIR, "${real_prefix}/share/${PACKAGE}/pixmaps")
 GNOMECC_PIXMAPS_DIR=""${prefix}/share/${PACKAGE}/pixmaps""
 AC_SUBST(GNOMECC_PIXMAPS_DIR)
-AC_DEFINE_UNQUOTED(GNOMECC_SCREENSAVERS_DIR, "${prefix}/share/${PACKAGE}/screensavers")
+AC_DEFINE_UNQUOTED(GNOMECC_SCREENSAVERS_DIR, "${real_prefix}/share/${PACKAGE}/screensavers")
 GNOMECC_SCREENSAVERS_DIR=""${datadir}/${PACKAGE}/screensavers""
 AC_SUBST(GNOMECC_SCREENSAVERS_DIR)
 dnl ==============================================
