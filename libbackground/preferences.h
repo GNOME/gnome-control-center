@@ -26,7 +26,7 @@
 
 #include <glib-object.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
-#include <gconf/gconf.h>
+#include <gconf/gconf-client.h>
 
 #define PREFERENCES(obj)          G_TYPE_CHECK_INSTANCE_CAST (obj, preferences_get_type (), Preferences)
 #define PREFERENCES_CLASS(klass)  G_TYPE_CHECK_CLASS_CAST (klass, preferences_get_type (), PreferencesClass)

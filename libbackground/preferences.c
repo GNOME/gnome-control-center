@@ -164,25 +164,25 @@ preferences_finalize (GObject *object)
 void
 preferences_load (Preferences *prefs)
 {
-	GConfEngine *engine;
+	GConfClient *client;
 	GError      *error = NULL;
 
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));
 
-	engine = gconf_engine_get_default ();
+	client = gconf_client_get_default ();
 
-	prefs->enabled = gconf_engine_get_bool (engine, "/desktop/gnome/background/enabled", &error);
-	prefs->wallpaper_type = gconf_engine_get_int (engine, "/desktop/gnome/background/wallpaper-type", &error);
-	prefs->wallpaper_filename = gconf_engine_get_string (engine, "/desktop/gnome/background/wallpaper-filename", &error);
-	prefs->wallpaper_enabled = gconf_engine_get_bool (engine, "/desktop/gnome/background/wallpaper-enabled", &error);
-	prefs->color1 = read_color_from_string (gconf_engine_get_string (engine, "/desktop/gnome/background/color1", &error));
-	prefs->color2 = read_color_from_string (gconf_engine_get_string (engine, "/desktop/gnome/background/color2", &error));
-	prefs->opacity = gconf_engine_get_int (engine, "/desktop/gnome/background/opacity", &error);
+	prefs->enabled = gconf_client_get_bool (client, "/desktop/gnome/background/enabled", &error);
+	prefs->wallpaper_type = gconf_client_get_int (client, "/desktop/gnome/background/wallpaper-type", &error);
+	prefs->wallpaper_filename = gconf_client_get_string (client, "/desktop/gnome/background/wallpaper-filename", &error);
+	prefs->wallpaper_enabled = gconf_client_get_bool (client, "/desktop/gnome/background/wallpaper-enabled", &error);
+	prefs->color1 = read_color_from_string (gconf_client_get_string (client, "/desktop/gnome/background/color1", &error));
+	prefs->color2 = read_color_from_string (gconf_client_get_string (client, "/desktop/gnome/background/color2", &error));
+	prefs->opacity = gconf_client_get_int (client, "/desktop/gnome/background/opacity", &error);
 	if (prefs->opacity >= 100 || prefs->opacity < 0)
 		prefs->adjust_opacity = FALSE;
 
-	prefs->orientation = gconf_engine_get_int (engine, "/desktop/gnome/background/orientation", &error);
+	prefs->orientation = gconf_client_get_int (client, "/desktop/gnome/background/orientation", &error);
 
 	if (prefs->orientation == ORIENTATION_SOLID)
 		prefs->gradient_enabled = FALSE;
