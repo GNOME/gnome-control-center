@@ -29,6 +29,25 @@ create_dialog (void)
 }
 
 static void
+cb_dialog_response (GtkDialog *dialog, gint response_id)
+{
+	if (response_id == GTK_RESPONSE_HELP) {
+		GError *error = NULL;
+
+		/* TODO : get this written */
+		gnome_help_display_desktop (NULL,
+			"control-center-manual",
+			"config-font.xml",
+			"CONFIGURATION", &error);
+		if (error) {
+			g_warning ("help error: %s\n", error->message);
+			g_error_free (error);
+		}
+	} else
+		gtk_main_quit ();
+}
+
+static void
 setup_dialog (GladeXML *dialog)
 {
   GConfClient *client;
@@ -54,8 +73,9 @@ setup_dialog (GladeXML *dialog)
   widget = WID ("font_dialog");
   gtk_widget_show (widget);
 
-  g_signal_connect (G_OBJECT (widget), "response", gtk_main_quit, NULL);
-  g_signal_connect (G_OBJECT (widget), "close", gtk_main_quit, NULL);
+  g_signal_connect (G_OBJECT (widget),
+    "response",
+    G_CALLBACK (cb_dialog_response), NULL);
 }
 
 int
