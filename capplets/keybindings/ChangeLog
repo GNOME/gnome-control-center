@@ -1,3 +1,23 @@
+2002-05-06  Anders Carlsson  <andersca@gnu.org>
+
+	* eggcellrendererkeys.c: (grab_key_callback), (ungrab_stuff),
+	(pointless_eventbox_start_editing),
+	(egg_cell_renderer_keys_start_editing):
+	* eggcellrendererkeys.h:
+	Update to latest eggcellrendererkeys.
+	
+	* gnome-keybinding-properties.c: (get_wm_name),
+	(is_metacity_running), (update_wm_window),
+	(wm_window_event_filter), (initialize_wm_handling),
+	(binding_from_string), (accel_set_func), (keybinding_key_changed),
+	(clear_old_model), (count_rows_foreach), (should_show_key),
+	(append_keys_to_tree), (reload_key_entries),
+	(key_entry_controlling_key_changed), (disable_collapsing_cb),
+	(setup_dialog), (main):
+	* gnome-keybinding-properties.glade:
+	Hard-code the list of keybindings. Add Metacity keybindings 
+	and code for handling WM changes.
+	
 2002-04-26  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-keybinding-properties.c (append_keys_to_tree): fix 

@@ -7,7 +7,9 @@
 #include <string.h>
 #include <gtk/gtk.h>
 #include <gconf/gconf-client.h>
+#include <gdk/gdkx.h>
 #include <glade/glade.h>
+#include <X11/Xatom.h>
 
 #include "theme-common.h"
 #include "capplet-util.h"
@@ -16,9 +18,77 @@
 
 #define LABEL_DATA "gnome-keybinding-properties-label"
 #define KEY_THEME_KEY "/desktop/gnome/interface/gtk_key_theme"
-#define KEY_LIST_KEY "/apps/gnome_keybinding_properties/keybinding_key_list"
-#define METACITY_KEY_LIST_KEY "/apps/metacity/general/configurable_keybinding_key_list"
 #define MAX_ELEMENTS_BEFORE_SCROLLING 8
+
+typedef enum {
+  ALWAYS_VISIBLE,
+  N_WORKSPACES_GT
+} KeyListEntryVisibility;
+
+typedef struct
+{
+  const char *name;
+  KeyListEntryVisibility visibility;
+  gint data;
+} KeyListEntry;
+
+const KeyListEntry desktop_key_list[] =
+{
+  { "/apps/panel/global/run_key", ALWAYS_VISIBLE, 0 },
+  { "/apps/panel/global/menu_key", ALWAYS_VISIBLE, 0 },
+  { "/apps/panel/global/screenshot_key", ALWAYS_VISIBLE, 0 },
+  { "/apps/panel/global/window_screenshot_key", ALWAYS_VISIBLE, 0 },
+  { NULL }
+};
+
+const KeyListEntry metacity_key_list[] =
+{
+  { "/apps/metacity/window_keybindings/activate_window_menu",      ALWAYS_VISIBLE,  0 },
+  { "/apps/metacity/window_keybindings/toggle_fullscreen",         ALWAYS_VISIBLE,  0 },
+  { "/apps/metacity/window_keybindings/toggle_maximized",          ALWAYS_VISIBLE,  0 },
+  { "/apps/metacity/window_keybindings/toggle_shaded",             ALWAYS_VISIBLE,  0 },
+  { "/apps/metacity/window_keybindings/close",                     ALWAYS_VISIBLE,  0 },
+  { "/apps/metacity/window_keybindings/begin_move",                ALWAYS_VISIBLE,  0 },
+  { "/apps/metacity/window_keybindings/begin_resize",              ALWAYS_VISIBLE,  0 },
+  { "/apps/metacity/window_keybindings/toggle_on_all_workspaces",  N_WORKSPACES_GT, 1 },
+  { "/apps/metacity/window_keybindings/move_to_workspace_1",       N_WORKSPACES_GT, 1 },
+  { "/apps/metacity/window_keybindings/move_to_workspace_2",       N_WORKSPACES_GT, 1 },
+  { "/apps/metacity/window_keybindings/move_to_workspace_3",       N_WORKSPACES_GT, 2 },
+  { "/apps/metacity/window_keybindings/move_to_workspace_4",       N_WORKSPACES_GT, 3 },
+  { "/apps/metacity/window_keybindings/move_to_workspace_5",       N_WORKSPACES_GT, 4 },
+  { "/apps/metacity/window_keybindings/move_to_workspace_6",       N_WORKSPACES_GT, 5 },
+  { "/apps/metacity/window_keybindings/move_to_workspace_7",       N_WORKSPACES_GT, 6 },
+  { "/apps/metacity/window_keybindings/move_to_workspace_8",       N_WORKSPACES_GT, 7 },
+  { "/apps/metacity/window_keybindings/move_to_workspace_9",       N_WORKSPACES_GT, 8 },
+  { "/apps/metacity/window_keybindings/move_to_workspace_10",      N_WORKSPACES_GT, 9 },
+  { "/apps/metacity/window_keybindings/move_to_workspace_11",      N_WORKSPACES_GT, 10 },
+  { "/apps/metacity/window_keybindings/move_to_workspace_12",      N_WORKSPACES_GT, 11 },
+  { "/apps/metacity/window_keybindings/move_to_workspace_left",    N_WORKSPACES_GT, 1 },
+  { "/apps/metacity/window_keybindings/move_to_workspace_right",   N_WORKSPACES_GT, 1 },
+  { "/apps/metacity/window_keybindings/move_to_workspace_up",      N_WORKSPACES_GT, 1 },
+  { "/apps/metacity/window_keybindings/move_to_workspace_down",    N_WORKSPACES_GT, 1 },
+  { "/apps/metacity/global_keybindings/switch_windows",            ALWAYS_VISIBLE,  0 },
+  { "/apps/metacity/global_keybindings/switch_panels",             ALWAYS_VISIBLE,  0 },
+  { "/apps/metacity/global_keybindings/focus_previous_window",     ALWAYS_VISIBLE,  0 },
+  { "/apps/metacity/global_keybindings/show_desktop",              ALWAYS_VISIBLE,  0 },
+  { "/apps/metacity/global_keybindings/switch_to_workspace_1",     N_WORKSPACES_GT, 1 },
+  { "/apps/metacity/global_keybindings/switch_to_workspace_2",     N_WORKSPACES_GT, 1 },
+  { "/apps/metacity/global_keybindings/switch_to_workspace_3",     N_WORKSPACES_GT, 2 },
+  { "/apps/metacity/global_keybindings/switch_to_workspace_4",     N_WORKSPACES_GT, 3 },
+  { "/apps/metacity/global_keybindings/switch_to_workspace_5",     N_WORKSPACES_GT, 4 },
+  { "/apps/metacity/global_keybindings/switch_to_workspace_6",     N_WORKSPACES_GT, 5 },
+  { "/apps/metacity/global_keybindings/switch_to_workspace_7",     N_WORKSPACES_GT, 6 },
+  { "/apps/metacity/global_keybindings/switch_to_workspace_8",     N_WORKSPACES_GT, 7 },
+  { "/apps/metacity/global_keybindings/switch_to_workspace_9",     N_WORKSPACES_GT, 8 },
+  { "/apps/metacity/global_keybindings/switch_to_workspace_10",    N_WORKSPACES_GT, 9 },
+  { "/apps/metacity/global_keybindings/switch_to_workspace_11",    N_WORKSPACES_GT, 10 },
+  { "/apps/metacity/global_keybindings/switch_to_workspace_12",    N_WORKSPACES_GT, 11 },
+  { "/apps/metacity/global_keybindings/switch_to_workspace_left",  N_WORKSPACES_GT, 1 },
+  { "/apps/metacity/global_keybindings/switch_to_workspace_right", N_WORKSPACES_GT, 1 },
+  { "/apps/metacity/global_keybindings/switch_to_workspace_up",    N_WORKSPACES_GT, 1 },
+  { "/apps/metacity/global_keybindings/switch_to_workspace_down",  N_WORKSPACES_GT, 1 },
+  { NULL }
+};
 
 enum
 {
@@ -37,13 +107,148 @@ typedef struct
   guint gconf_cnxn;
 } KeyEntry;
 
-GList *signals = NULL;
+static void reload_key_entries (GladeXML *dialog);
 
+/* Our WM Window */
+static Window wm_window = None;
+
+static char *
+get_wm_name (void)
+{
+  Atom utf8_string, atom, type;
+  int result;
+  char *retval;
+  int format;
+  gulong nitems;
+  gulong bytes_after;
+  guchar *val;
+  
+  if (wm_window == None)
+      return NULL;
+  
+  utf8_string = XInternAtom (GDK_DISPLAY (), "UTF8_STRING", False);
+  atom = XInternAtom (GDK_DISPLAY (), "_NET_WM_NAME", False);
+  
+  gdk_error_trap_push ();
+  
+  result = XGetWindowProperty (GDK_DISPLAY (),
+			       wm_window,
+			       atom,
+			       0, G_MAXLONG,
+			       False, utf8_string,
+			       &type, &format, &nitems,
+			       &bytes_after, (guchar **)&val);
+
+  if (gdk_error_trap_pop () || result != Success)
+    return NULL;
+
+  if (type != utf8_string ||
+      format != 8 ||
+      nitems == 0)
+    {
+      if (val)
+	XFree (val);
+      return NULL;
+    }
+
+  if (!g_utf8_validate (val, nitems, NULL))
+    {
+      XFree (val);
+      return NULL;
+    }
+
+  retval = g_strndup (val, nitems);
+
+  XFree (val);
+
+  return retval;
+}
 
 static gboolean
 is_metacity_running (void)
 {
+  char *wm_name;
+
+  wm_name = get_wm_name ();
+  
+  if (wm_name &&
+      strcmp (wm_name, "Metacity") == 0)
+    {
+      g_free (wm_name);
+      return TRUE;
+    }
+
+  g_free (wm_name);
   return FALSE;
+}
+
+static void
+update_wm_window (void)
+{
+  Window *xwindow;
+  Atom type;
+  gint format;
+  gulong nitems;
+  gulong bytes_after;
+  
+  XGetWindowProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (),
+		      XInternAtom (GDK_DISPLAY (), "_NET_SUPPORTING_WM_CHECK", False),
+		      0, G_MAXLONG, False, XA_WINDOW, &type, &format,
+		      &nitems, &bytes_after, (guchar **) &xwindow);
+
+  if (type != XA_WINDOW)
+    {
+      wm_window = None;
+      return;
+    }
+
+  gdk_error_trap_push ();
+  XSelectInput (GDK_DISPLAY (), *xwindow, StructureNotifyMask | PropertyChangeMask);
+  XSync (GDK_DISPLAY (), False);
+  
+  if (gdk_error_trap_pop ())
+    {
+      XFree (xwindow);
+      wm_window = None;
+      return;
+    }
+
+  wm_window = *xwindow;
+  XFree (xwindow);
+}
+
+static GdkFilterReturn 
+wm_window_event_filter (GdkXEvent *xev,
+			GdkEvent  *event,
+			gpointer   data)
+{
+  XEvent *xevent = (XEvent *)xev;
+
+  if ((xevent->type == DestroyNotify &&
+       wm_window != None && xevent->xany.window == wm_window) ||
+      (xevent->type == PropertyNotify &&
+       xevent->xany.window == GDK_ROOT_WINDOW () &&
+       xevent->xproperty.atom == (XInternAtom (GDK_DISPLAY (),  "_NET_SUPPORTING_WM_CHECK", False))) ||
+      (xevent->type == PropertyNotify &&
+       wm_window != None && xevent->xany.window == wm_window &&
+       xevent->xproperty.atom == (XInternAtom (GDK_DISPLAY (), "_NET_WM_NAME", False))))
+    {
+      update_wm_window ();
+      reload_key_entries (data);
+    }
+  
+  return GDK_FILTER_CONTINUE;
+}
+
+static void
+initialize_wm_handling (GladeXML *dialog)
+{
+  gdk_window_add_filter (NULL, wm_window_event_filter, dialog);
+
+  update_wm_window ();
+  
+  XSelectInput (GDK_DISPLAY (), GDK_ROOT_WINDOW (), PropertyChangeMask);
+  XSync (GDK_DISPLAY (), False);
 }
 
 static void
@@ -101,6 +306,28 @@ binding_name (guint            keyval,
     return translate ? g_strdup (_("Disabled")) : g_strdup ("disabled");
 }
 
+static gboolean
+binding_from_string (const char      *str,
+                     guint           *accelerator_key,
+                     GdkModifierType *accelerator_mods)
+{
+  g_return_val_if_fail (accelerator_key != NULL, FALSE);
+  
+  if (str == NULL || (str && strcmp (str, "disabled") == 0))
+    {
+      *accelerator_key = 0;
+      *accelerator_mods = 0;
+      return TRUE;
+    }
+
+  gtk_accelerator_parse (str, accelerator_key, accelerator_mods);
+
+  if (*accelerator_key == 0)
+    return FALSE;
+  else
+    return TRUE;
+}
+
 static void
 accel_set_func (GtkTreeViewColumn *tree_column,
                 GtkCellRenderer   *cell,
@@ -113,7 +340,7 @@ accel_set_func (GtkTreeViewColumn *tree_column,
   gtk_tree_model_get (model, iter,
                       KEYENTRY_COLUMN, &key_entry,
                       -1);
-  
+
   if (key_entry == NULL)
     g_object_set (G_OBJECT (cell),
 		  "visible", FALSE,
@@ -151,15 +378,7 @@ keybinding_key_changed (GConfClient *client,
   key_entry = (KeyEntry *)user_data;
   key_value = gconf_value_get_string (entry->value);
 
-  if (key_value != NULL)
-    {
-      gtk_accelerator_parse (key_value, &key_entry->keyval, &key_entry->mask);
-    }
-  else
-    {
-      key_entry->keyval = 0;
-      key_entry->mask = 0;
-    }
+  binding_from_string (key_value, &key_entry->keyval, &key_entry->mask);
   key_entry->editable = gconf_entry_get_is_writable (entry);
 
   path = gtk_tree_path_new_first ();
@@ -206,46 +425,90 @@ clear_old_model (GladeXML  *dialog,
 	  gtk_tree_model_get (model, &iter,
 			      KEYENTRY_COLUMN, &key_entry,
 			      -1);
-	  gconf_client_notify_remove (client, key_entry->gconf_cnxn);
-	  g_free (key_entry->gconf_key);
-	  g_free (key_entry);
+	  if (key_entry != NULL)
+	    {
+	      gconf_client_notify_remove (client, key_entry->gconf_cnxn);
+	      g_free (key_entry->gconf_key);
+	      g_free (key_entry);
+	    }
 	}
       g_object_unref (model);
     }
 
-  model = (GtkTreeModel *) gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER);
+  model = (GtkTreeModel *) gtk_tree_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER);
   gtk_tree_view_set_model (GTK_TREE_VIEW (tree_view), model);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (WID ("actions_swindow")),
 				  GTK_POLICY_NEVER, GTK_POLICY_NEVER);
   gtk_widget_set_usize (WID ("actions_swindow"), -1, -1);
 }
 
+static gboolean
+count_rows_foreach (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data)
+{
+  gint *rows = data;
+
+  (*rows)++;
+
+  return FALSE;
+}
+
+static gboolean
+should_show_key (const KeyListEntry *entry)
+{
+  gint workspaces;
+  
+  switch (entry->visibility) {
+  case ALWAYS_VISIBLE:
+    return TRUE;
+  case N_WORKSPACES_GT:
+    workspaces = gconf_client_get_int (gconf_client_get_default (),
+				       "/apps/metacity/general/num_workspaces", NULL);
+    if (workspaces > entry->data)
+      return TRUE;
+    else
+      return FALSE;
+    break;
+  }
+
+  return FALSE;
+}
+
 static void
-append_keys_to_tree (GladeXML *dialog,
-		     GSList   *keys_list)
+append_keys_to_tree (GladeXML           *dialog,
+		     const gchar        *title,
+		     const KeyListEntry *keys_list)
 {
   GConfClient *client;
+  GtkTreeIter parent_iter;
   GtkTreeModel *model;
-  GSList *list;
-  gint i;
+  gint i, j;
 
   client = gconf_client_get_default ();
   model = gtk_tree_view_get_model (GTK_TREE_VIEW (WID ("shortcut_treeview")));
 
-  i = gtk_tree_model_iter_n_children (model, NULL);
+  i = 0;
+  gtk_tree_model_foreach (model, count_rows_foreach, &i);
 
+  gtk_tree_store_append (GTK_TREE_STORE (model), &parent_iter, NULL);
+  gtk_tree_store_set (GTK_TREE_STORE (model), &parent_iter,
+  		      DESCRIPTION_COLUMN, title,
+  		      -1);
 
-  for (list = keys_list; list; list = list->next)
+  for (j = 0; keys_list[j].name != NULL; j++)
     {
       GConfEntry *entry;
       GConfSchema *schema = NULL;
       KeyEntry *key_entry;
       GError *error = NULL;
       GtkTreeIter iter;
-      gchar *key_string;
+      const gchar *key_string;
       gchar *key_value;
 
-      key_string = g_strdup ((gchar *) list->data);
+      if (!should_show_key (&keys_list[j]))
+	continue;
+      
+      key_string = keys_list[j].name;
+
       entry = gconf_client_get_entry (client,
                                       key_string,
 				      NULL,
@@ -254,7 +517,6 @@ append_keys_to_tree (GladeXML *dialog,
       if (error || entry == NULL)
 	{
 	  /* We don't actually want to popup a dialog - just skip this one */
-	  g_free (key_string);
 	  if (error)
 	    g_error_free (error);
 	  continue;
@@ -266,7 +528,6 @@ append_keys_to_tree (GladeXML *dialog,
       if (error || schema == NULL)
 	{
 	  /* We don't actually want to popup a dialog - just skip this one */
-	  g_free (key_string);
 	  if (error)
 	    g_error_free (error);
 	  continue;
@@ -275,7 +536,7 @@ append_keys_to_tree (GladeXML *dialog,
       key_value = gconf_client_get_string (client, key_string, &error);
 
       key_entry = g_new0 (KeyEntry, 1);
-      key_entry->gconf_key = key_string;
+      key_entry->gconf_key = g_strdup (key_string);
       key_entry->editable = gconf_entry_get_is_writable (entry);
       key_entry->model = model;
       gconf_client_add_dir (client, key_string, GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
@@ -283,15 +544,7 @@ append_keys_to_tree (GladeXML *dialog,
 						       key_string,
 						       (GConfClientNotifyFunc) &keybinding_key_changed,
 						       key_entry, NULL, NULL);
-      if (key_value)
-	{
-	  gtk_accelerator_parse (key_value, &key_entry->keyval, &key_entry->mask);
-	}
-      else
-	{
-	  key_entry->keyval = 0;
-	  key_entry->mask = 0;
-	}
+      binding_from_string (key_value, &key_entry->keyval, &key_entry->mask);
       g_free (key_value);
 
       if (i == MAX_ELEMENTS_BEFORE_SCROLLING)
@@ -299,23 +552,24 @@ append_keys_to_tree (GladeXML *dialog,
 	  GtkRequisition rectangle;
 	  gtk_widget_ensure_style (WID ("shortcut_treeview"));
 	  gtk_widget_size_request (WID ("shortcut_treeview"), &rectangle);
-	  gtk_widget_set_usize (WID ("actions_swindow"), -1, rectangle.height);
+	  gtk_widget_set_size_request (WID ("actions_swindow"), -1, rectangle.height);
 	  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (WID ("actions_swindow")),
 					  GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
 	}
       i++;
-      gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+      gtk_tree_store_append (GTK_TREE_STORE (model), &iter, &parent_iter);
       if (gconf_schema_get_short_desc (schema))
-	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+	gtk_tree_store_set (GTK_TREE_STORE (model), &iter,
 			    DESCRIPTION_COLUMN,
                             gconf_schema_get_short_desc (schema),
 			    KEYENTRY_COLUMN, key_entry,
 			    -1);
       else
-	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+	gtk_tree_store_set (GTK_TREE_STORE (model), &iter,
 			    DESCRIPTION_COLUMN, _("<Unknown Action>"),
 			    KEYENTRY_COLUMN, key_entry,
 			    -1);
+      gtk_tree_view_expand_all (GTK_TREE_VIEW (WID ("shortcut_treeview")));
       gconf_entry_free (entry);
       gconf_schema_free (schema);
     }
@@ -331,75 +585,25 @@ append_keys_to_tree (GladeXML *dialog,
 }
 
 static void
-keybinding_key_list_changed (GConfClient *client,
-			     guint        cnxn_id,
-			     GConfEntry  *entry,
-			     gpointer     user_data)
+reload_key_entries (GladeXML *dialog)
 {
-  GladeXML *dialog;
-  GSList *value_list, *list;
-  GSList *keys_list = NULL;
-
-  dialog = user_data;
-
-  if (strcmp (entry->key, KEY_LIST_KEY))
-    return;
-
-  value_list = gconf_value_get_list (entry->value);
-  for (list = value_list; list; list = list->next)
-    {
-      GConfValue *value = list->data;
-      keys_list = g_slist_append (keys_list, (char *) gconf_value_get_string (value));
-    }
-
   clear_old_model (dialog, WID ("shortcut_treeview"));
-  append_keys_to_tree (dialog, keys_list);
-  g_slist_free (keys_list);
+  
+  append_keys_to_tree (dialog, _("Desktop"), desktop_key_list);
+  
   if (is_metacity_running ())
     {
-      GSList *keys_list;
-
-      keys_list = gconf_client_get_list (client, METACITY_KEY_LIST_KEY, GCONF_VALUE_STRING,  NULL);
-      append_keys_to_tree (dialog, keys_list);
+      append_keys_to_tree (dialog, _("Window Management"), metacity_key_list);
     }
 }
 
 static void
-metacity_key_list_changed (GConfClient *client,
-			   guint        cnxn_id,
-			   GConfEntry  *entry,
-			   gpointer     user_data)
+key_entry_controlling_key_changed (GConfClient *client,
+				   guint        cnxn_id,
+				   GConfEntry  *entry,
+				   gpointer     user_data)
 {
-  GladeXML *dialog;
-  GSList *value_list, *list;
-  GSList *keys_list;
-
-  if (strcmp (entry->key, METACITY_KEY_LIST_KEY))
-    return;
-  if (! is_metacity_running ())
-    return;
-
-  dialog = user_data;
-  clear_old_model (dialog, WID ("shortcut_treeview"));
-
-  keys_list = gconf_client_get_list (client, KEY_LIST_KEY, GCONF_VALUE_STRING,  NULL);
-  append_keys_to_tree (dialog, keys_list);
-  g_slist_foreach (keys_list, (GFunc) g_free, NULL);
-  g_slist_free (keys_list);
-  keys_list = NULL;
-  
-  value_list = gconf_value_get_list (entry->value);
-  for (list = value_list; list; list = list->next)
-    {
-      GConfValue *value;
-
-      value = list->data;
-      keys_list = g_slist_append (keys_list, (char *)gconf_value_get_string (value));
-    }
-
-  append_keys_to_tree (dialog, keys_list);
-  g_slist_free (keys_list);
-
+  reload_key_entries (user_data);
 }
 
 static void
@@ -541,13 +745,18 @@ theme_changed_func (gpointer  uri,
   key_theme_changed (client, 0, entry, omenu);
 }
 
+static gboolean
+disable_collapsing_cb (GtkTreeView *tree_view, GtkTreeIter *iter, GtkTreePath *path)
+{
+  return TRUE;
+}
+
 static void
 setup_dialog (GladeXML *dialog)
 {
   GConfClient *client;
   GList *key_theme_list;
   GtkCellRenderer *renderer;
-  GSList *keys_list;
   GtkWidget *widget;
   gboolean found_keys = FALSE;
   GList *list;
@@ -590,6 +799,9 @@ setup_dialog (GladeXML *dialog)
     }
 
 
+  g_signal_connect (WID ("shortcut_treeview"), "test_collapse_row",
+		    G_CALLBACK (disable_collapsing_cb), NULL),
+		    
   gtk_tree_view_insert_column_with_attributes (GTK_TREE_VIEW (WID ("shortcut_treeview")),
 					       -1,
 					       _("_Action"),
@@ -608,30 +820,14 @@ setup_dialog (GladeXML *dialog)
 					      renderer,
 					      accel_set_func, NULL, NULL);
   gconf_client_add_dir (client, "/apps/gnome_keybinding_properties", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
-  gconf_client_notify_add (client,
-			   KEY_LIST_KEY,
-			   (GConfClientNotifyFunc) &keybinding_key_list_changed,
-			   dialog, NULL, NULL);
   gconf_client_add_dir (client, "/apps/metacity/general", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
   gconf_client_notify_add (client,
-			   METACITY_KEY_LIST_KEY,
-			   (GConfClientNotifyFunc) &metacity_key_list_changed,
+			   "/apps/metacity/general/num_workspaces",
+			   (GConfClientNotifyFunc) &key_entry_controlling_key_changed,
 			   dialog, NULL, NULL);
-
+  
   /* set up the dialog */
-  clear_old_model (dialog, WID ("shortcut_treeview"));
-  keys_list = gconf_client_get_list (client, KEY_LIST_KEY, GCONF_VALUE_STRING,  NULL);
-  append_keys_to_tree (dialog, keys_list);
-  g_slist_foreach (keys_list, (GFunc) g_free, NULL);
-  g_slist_free (keys_list);
-
-  if (is_metacity_running ())
-    {
-      keys_list = gconf_client_get_list (client, METACITY_KEY_LIST_KEY, GCONF_VALUE_STRING,  NULL);
-      append_keys_to_tree (dialog, keys_list);
-      g_slist_foreach (keys_list, (GFunc) g_free, NULL);
-      g_slist_free (keys_list);
-    }
+  reload_key_entries (dialog);
 
   widget = WID ("gnome-keybinding-dialog");
   gtk_widget_show (widget);
@@ -658,8 +854,9 @@ main (int argc, char *argv[])
   activate_settings_daemon ();
 
   dialog = create_dialog ();
+  initialize_wm_handling (dialog);
   setup_dialog (dialog);
-
+  
   gtk_main ();
 
   return 0;
