@@ -63,7 +63,6 @@ static void	 add_mime_clicked 	  		(GtkWidget 	*widget,
 static void	 edit_default_clicked 			(GtkWidget 	*widget, 	
 						 	 gpointer   	data);
 static GtkWidget *create_mime_list_and_scroller 	(void);
-static char 	 *pixmap_file 				(const char 	*partial_path);
 static void 	 ok_callback 		  		(void);
 static void	 gtk_widget_make_bold 			(GtkWidget 	*widget);
 static GdkFont 	 *gdk_font_get_bold 			(const GdkFont  *plain_font);
@@ -111,7 +110,6 @@ main (int argc, char **argv)
 
 	if (init_results == 0) {
 		init_mime_capplet ();
-		g_print ("initilaized\n");
 	        capplet_gtk_main ();
 	}
         return 0;
@@ -300,25 +298,6 @@ viewer_button_toggled (GtkToggleButton *button, gpointer user_data)
 }
 
 static void 
-icon_changed (GtkWidget *entry, gpointer user_data)
-{
-	gchar *path, *filename;
-	const char *mime_type;
-	
-	path = nautilus_mime_type_icon_entry_get_filename (NAUTILUS_MIME_ICON_ENTRY (icon_entry));
-	if (path != NULL) {
-		g_message ("%s", path);
-		filename = strrchr (path, '/');
-		if (filename != NULL) {
-			filename++;
-			mime_type = nautilus_mime_type_capplet_get_selected_item_mime_type ();
-			gnome_vfs_mime_set_icon (mime_type, filename);
-		}
-		g_free (path);
-	}
-}
-
-static void 
 change_icon_clicked (GtkWidget *entry, gpointer user_data)
 {
 	nautilus_mime_type_show_icon_selection (NAUTILUS_MIME_ICON_ENTRY (user_data));
@@ -338,7 +317,6 @@ init_mime_capplet (void)
 	int index, list_width, column_width;
 	
 	capplet = capplet_widget_new ();
-
 
 	/* Main vertical box */                    
 	main_vbox = gtk_vbox_new (FALSE, GNOME_PAD);
@@ -368,8 +346,6 @@ init_mime_capplet (void)
 	gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 0);
 
 	icon_entry = nautilus_mime_type_icon_entry_new ("mime_icon_entry", NULL);
-	gtk_signal_connect (GTK_OBJECT (nautilus_mime_type_icon_entry_gtk_entry (NAUTILUS_MIME_ICON_ENTRY (icon_entry))),
-			    "changed", icon_changed, NULL);
 	gtk_box_pack_start (GTK_BOX (vbox), icon_entry, FALSE, FALSE, 0);
 	
 	button = gtk_button_new_with_label (_("Change Icon"));
@@ -491,13 +467,14 @@ init_mime_capplet (void)
 
 	/* Set up enabled/disabled states of capplet buttons */	
 	gtk_widget_set_sensitive (add_button, TRUE);
+	gtk_widget_set_sensitive (remove_button, FALSE);
+	
 	/* FIXME bugzilla.eazel.com 2765: this call generates a 
 	   Gtk-WARNING **: gtk_signal_disconnect_by_data(): could not find handler containing data (0x80FA6F8)
 	*/
-	gtk_widget_set_sensitive (remove_button, FALSE);
-	
+
 	/* Yes, show all widgets */
-        gtk_widget_show_all (capplet);
+	gtk_widget_show_all (capplet);
 
 	/* Make columns all fit within capplet list view bounds */
 	list_width = GTK_WIDGET (mime_list)->allocation.width;
@@ -558,8 +535,19 @@ nautilus_mime_type_capplet_update_info (const char *mime_type) {
 
 	/* Set icon for mime type */
 	icon_name = gnome_vfs_mime_get_icon (mime_type);
-	path = pixmap_file (icon_name);
-	nautilus_mime_type_icon_entry_set_icon (NAUTILUS_MIME_ICON_ENTRY (icon_entry), path);
+	if (icon_name != NULL) {
+		path = gnome_pixmap_file (icon_name);
+		if (path != NULL) {
+			nautilus_mime_type_icon_entry_set_icon (NAUTILUS_MIME_ICON_ENTRY (icon_entry), path);
+			g_free (path);
+		} else {
+			/* No icon */
+			nautilus_mime_type_icon_entry_set_icon (NAUTILUS_MIME_ICON_ENTRY (icon_entry), NULL);
+		}
+	} else {
+		/* No icon */
+		nautilus_mime_type_icon_entry_set_icon (NAUTILUS_MIME_ICON_ENTRY (icon_entry), NULL);
+	}
 
 	/* Indicate default action */	
 	action = gnome_vfs_mime_get_default_action (mime_type);
@@ -1011,7 +999,7 @@ populate_mime_list (GList *type_list, GtkCList *clist)
 			description_icon_name = gnome_vfs_mime_get_icon (mime_string);			
 			if (description_icon_name != NULL) {
 				/* Get custom icon */
-				description_icon_path = pixmap_file (description_icon_name);
+				description_icon_path = gnome_pixmap_file (description_icon_name);
 				pixbuf = gdk_pixbuf_new_from_file (description_icon_path);				
 			} else {
 				/* Use default icon */
@@ -1039,7 +1027,7 @@ populate_mime_list (GList *type_list, GtkCList *clist)
 						action_icon_name = gnome_vfs_mime_get_icon (mime_string);			
 						if (action_icon_name != NULL) {
 							/* Get custom icon */
-							action_icon_path = pixmap_file (action_icon_name);
+							action_icon_path = gnome_pixmap_file (action_icon_name);
 							pixbuf = gdk_pixbuf_new_from_file (action_icon_path);				
 						} else {
 							/* Use default icon */
@@ -1153,57 +1141,6 @@ nautilus_mime_type_capplet_get_selected_item_mime_type (void)
 
 	return mime_type;
 }
-
-
-/**
- * make_path:
- * 
- * Make a path name from a base path and name. The base path
- * can end with or without a separator character.
- *
- * Return value: the combined path name.
- **/
-static char * 
-make_path (const char *path, const char* name)
-{
-    	gboolean insert_separator;
-    	int path_length;
-	char *result;
-
-	path_length = strlen (path);
-    	insert_separator = path_length > 0 && 
-    			   name[0] != '\0' && 
-    			   path[path_length - 1] != G_DIR_SEPARATOR;
-
-    	if (insert_separator) {
-    		result = g_strconcat (path, G_DIR_SEPARATOR_S, name, NULL);
-    	} else {
-    		result = g_strconcat (path, name, NULL);
-    	}
-
-	return result;
-}
-
-static char *
-pixmap_file (const char *partial_path)
-{
-	char *path;
-
-	if (partial_path == NULL) {
-		return NULL;
-	}
-
-	/* FIXME bugzilla.eazel.com 2768: Where to get DATADIR? */
-	/*path = make_path (DATADIR "/pixmaps/nautilus", partial_path);*/
-	path = make_path ("/gnome/share/pixmaps/nautilus", partial_path);
-	if (g_file_exists (path)) {
-		return path;
-	} else {
-		g_free (path);
-		return NULL;
-	}
-}
-
 
 /**
  * gtk_label_make_bold.

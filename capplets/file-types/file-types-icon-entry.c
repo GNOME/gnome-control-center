@@ -12,6 +12,7 @@
 #include <config.h>
 
 #include "nautilus-mime-type-icon-entry.h"
+#include "nautilus-mime-type-capplet.h"
 
 #include <gdk_imlib.h>
 #include <gnome.h>
@@ -25,6 +26,7 @@
 #include <gtk/gtksignal.h>
 #include <gtk/gtkpixmap.h>
 #include <gtk/gtkscrolledwindow.h>
+#include <libgnomevfs/gnome-vfs-mime-handlers.h>
 
 #include <string.h>
 #include <sys/stat.h>
@@ -285,159 +287,173 @@ browse_clicked(GnomeFileEntry *fentry, NautilusMimeIconEntry *ientry)
 }
 
 static void
-icon_selected_cb (GtkButton * button, NautilusMimeIconEntry * ientry)
+icon_selected_cb (GtkButton *button, NautilusMimeIconEntry *icon_entry)
 {
-	const gchar * icon;
-	GnomeIconSelection * gis;
+	const gchar *icon;
+	GnomeIconSelection *gis;
+	gchar *path, *filename;
+	const char *mime_type;
+	GtkWidget *entry;
 
-	g_return_if_fail (ientry != NULL);
-	g_return_if_fail (NAUTILUS_MIME_IS_ICON_ENTRY (ientry));
+	g_return_if_fail (icon_entry != NULL);
+	g_return_if_fail (NAUTILUS_MIME_IS_ICON_ENTRY (icon_entry));
 
-	gis =  gtk_object_get_user_data(GTK_OBJECT(ientry));
-	gnome_icon_selection_stop_loading(gis);
-	icon = gnome_icon_selection_get_icon(gis, TRUE);
+	gis =  gtk_object_get_user_data (GTK_OBJECT (icon_entry));
+	gnome_icon_selection_stop_loading (gis);
+	icon = gnome_icon_selection_get_icon (gis, TRUE);
 
 	if (icon != NULL) {
-		GtkWidget *e = nautilus_mime_type_icon_entry_gtk_entry (ientry);
-		gtk_entry_set_text(GTK_ENTRY(e),icon);
-		entry_changed (NULL, ientry);
+		entry = nautilus_mime_type_icon_entry_gtk_entry (icon_entry);
+		gtk_entry_set_text (GTK_ENTRY (entry), icon);
+		entry_changed (NULL, icon_entry);
+	
+		path = nautilus_mime_type_icon_entry_get_filename (NAUTILUS_MIME_ICON_ENTRY (icon_entry));
+		if (path != NULL) {
+			filename = strrchr (path, '/');			
+			if (filename != NULL) {
+				filename++;
+				mime_type = nautilus_mime_type_capplet_get_selected_item_mime_type ();
+				gnome_vfs_mime_set_icon (mime_type, filename);
+			}
+			g_free (path);
+		}
 	}
 }
 
 static void
-cancel_pressed (GtkButton * button, NautilusMimeIconEntry * ientry)
+cancel_pressed (GtkButton * button, NautilusMimeIconEntry * icon_entry)
 {
 	GnomeIconSelection * gis;
 
-	g_return_if_fail (ientry != NULL);
-	g_return_if_fail (NAUTILUS_MIME_IS_ICON_ENTRY (ientry));
+	g_return_if_fail (icon_entry != NULL);
+	g_return_if_fail (NAUTILUS_MIME_IS_ICON_ENTRY (icon_entry));
 
-	gis =  gtk_object_get_user_data(GTK_OBJECT(ientry));
+	gis =  gtk_object_get_user_data(GTK_OBJECT(icon_entry));
 	gnome_icon_selection_stop_loading(gis);
 }
 
 
 static void
-gil_icon_selected_cb (GnomeIconList *gil, gint num, GdkEvent *event, NautilusMimeIconEntry *ientry)
+gil_icon_selected_cb (GnomeIconList *gil, gint num, GdkEvent *event, NautilusMimeIconEntry *icon_entry)
 {
 	const gchar * icon;
 	GnomeIconSelection * gis;
 
-	g_return_if_fail (ientry != NULL);
-	g_return_if_fail (NAUTILUS_MIME_IS_ICON_ENTRY (ientry));
+	g_return_if_fail (icon_entry != NULL);
+	g_return_if_fail (NAUTILUS_MIME_IS_ICON_ENTRY (icon_entry));
 
-	gis =  gtk_object_get_user_data(GTK_OBJECT(ientry));
+	gis =  gtk_object_get_user_data(GTK_OBJECT(icon_entry));
 	icon = gnome_icon_selection_get_icon(gis, TRUE);
 
 	if (icon != NULL) {
-		GtkWidget *e = nautilus_mime_type_icon_entry_gtk_entry(ientry);
+		GtkWidget *e = nautilus_mime_type_icon_entry_gtk_entry(icon_entry);
 		gtk_entry_set_text(GTK_ENTRY(e),icon);
 		
 	}
 
 	if(event && event->type == GDK_2BUTTON_PRESS && ((GdkEventButton *)event)->button == 1) {
 		gnome_icon_selection_stop_loading(gis);
-		entry_changed (NULL, ientry);
-		gtk_widget_hide(ientry->pick_dialog);
+		entry_changed (NULL, icon_entry);
+		gtk_widget_hide(icon_entry->pick_dialog);
 	}
 }
 
 void
-nautilus_mime_type_show_icon_selection (NautilusMimeIconEntry *ientry)
+nautilus_mime_type_show_icon_selection (NautilusMimeIconEntry *icon_entry)
 {
 	GnomeFileEntry *fe;
 	gchar *p;
 	gchar *curfile;
 	GtkWidget *tl;
 
-	g_return_if_fail (ientry != NULL);
-	g_return_if_fail (NAUTILUS_MIME_IS_ICON_ENTRY (ientry));
+	g_return_if_fail (icon_entry != NULL);
+	g_return_if_fail (NAUTILUS_MIME_IS_ICON_ENTRY (icon_entry));
 
-	fe = GNOME_FILE_ENTRY (ientry->fentry);
+	fe = GNOME_FILE_ENTRY (icon_entry->fentry);
 	p = gnome_file_entry_get_full_path (fe, FALSE);
-	curfile = nautilus_mime_type_icon_entry_get_filename (ientry);
+	curfile = nautilus_mime_type_icon_entry_get_filename (icon_entry);
 
 	/* Are we part of a modal window?  If so, we need to be modal too. */
-	tl = gtk_widget_get_toplevel (GTK_WIDGET (ientry->frame));
+	tl = gtk_widget_get_toplevel (GTK_WIDGET (icon_entry->frame));
 	
 	if(!p) {
 		if(fe->default_path)
-			p = g_strdup(fe->default_path);
+			p = g_strdup (fe->default_path);
 		else {
 			/*get around the g_free/free issue*/
 			gchar *cwd = g_get_current_dir ();
-			p = g_strdup(cwd);
-			g_free(cwd);
+			p = g_strdup (cwd);
+			g_free (cwd);
 		}
-		gtk_entry_set_text (GTK_ENTRY (gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (ientry->fentry))),
+		gtk_entry_set_text (GTK_ENTRY (gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (icon_entry->fentry))),
 				    p);
 	}
 
 	/*figure out the directory*/
-	if(!g_file_test (p,G_FILE_TEST_ISDIR)) {
+	if(!g_file_test (p, G_FILE_TEST_ISDIR)) {
 		gchar *d;
 		d = g_dirname (p);
 		g_free (p);
 		p = d;
-		if(!g_file_test (p,G_FILE_TEST_ISDIR)) {
+		if(!g_file_test (p, G_FILE_TEST_ISDIR)) {
 			g_free (p);
-			if(fe->default_path)
-				p = g_strdup(fe->default_path);
+			if (fe->default_path)
+				p = g_strdup (fe->default_path);
 			else {
 				/*get around the g_free/free issue*/
 				gchar *cwd = g_get_current_dir ();
-				p = g_strdup(cwd);
+				p = g_strdup (cwd);
 				free(cwd);
 			}
-			gtk_entry_set_text (GTK_ENTRY (gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (ientry->fentry))),
+			gtk_entry_set_text (GTK_ENTRY (gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (icon_entry->fentry))),
 				    p);
-			g_return_if_fail(g_file_test (p,G_FILE_TEST_ISDIR));
+			g_return_if_fail (g_file_test (p,G_FILE_TEST_ISDIR));
 		}
 	}
 	
 
-	if(ientry->pick_dialog==NULL ||
-	   ientry->pick_dialog_dir==NULL ||
-	   strcmp(p,ientry->pick_dialog_dir)!=0) {
+	if(icon_entry->pick_dialog==NULL ||
+	   icon_entry->pick_dialog_dir==NULL ||
+	   strcmp(p,icon_entry->pick_dialog_dir)!=0) {
 		GtkWidget * iconsel;
 		
-		if(ientry->pick_dialog) {
-			gtk_container_remove (GTK_CONTAINER (ientry->fentry->parent), ientry->fentry);
-			gtk_widget_destroy(ientry->pick_dialog);
+		if(icon_entry->pick_dialog) {
+			gtk_container_remove (GTK_CONTAINER (icon_entry->fentry->parent), icon_entry->fentry);
+			gtk_widget_destroy(icon_entry->pick_dialog);
 		}
 		
-		if(ientry->pick_dialog_dir)
-			g_free(ientry->pick_dialog_dir);
-		ientry->pick_dialog_dir = p;
-		ientry->pick_dialog = 
-			gnome_dialog_new(GNOME_FILE_ENTRY(ientry->fentry)->browse_dialog_title,
+		if(icon_entry->pick_dialog_dir)
+			g_free(icon_entry->pick_dialog_dir);
+		icon_entry->pick_dialog_dir = p;
+		icon_entry->pick_dialog = 
+			gnome_dialog_new(GNOME_FILE_ENTRY(icon_entry->fentry)->browse_dialog_title,
 					 GNOME_STOCK_BUTTON_OK,
 					 GNOME_STOCK_BUTTON_CANCEL,
 					 NULL);
 		if (GTK_WINDOW (tl)->modal) {
-			gtk_window_set_modal (GTK_WINDOW (ientry->pick_dialog), TRUE);
-			gnome_dialog_set_parent (GNOME_DIALOG (ientry->pick_dialog), GTK_WINDOW (tl)); 
+			gtk_window_set_modal (GTK_WINDOW (icon_entry->pick_dialog), TRUE);
+			gnome_dialog_set_parent (GNOME_DIALOG (icon_entry->pick_dialog), GTK_WINDOW (tl)); 
 		}
-		gnome_dialog_close_hides(GNOME_DIALOG(ientry->pick_dialog), TRUE);
-		gnome_dialog_set_close  (GNOME_DIALOG(ientry->pick_dialog), TRUE);
+		gnome_dialog_close_hides(GNOME_DIALOG(icon_entry->pick_dialog), TRUE);
+		gnome_dialog_set_close  (GNOME_DIALOG(icon_entry->pick_dialog), TRUE);
 
-		gtk_window_set_policy(GTK_WINDOW(ientry->pick_dialog), 
+		gtk_window_set_policy(GTK_WINDOW(icon_entry->pick_dialog), 
 				      TRUE, TRUE, TRUE);
 
 		iconsel = gnome_icon_selection_new();
 
-		gtk_object_set_user_data(GTK_OBJECT(ientry), iconsel);
+		gtk_object_set_user_data(GTK_OBJECT(icon_entry), iconsel);
 
 		gnome_icon_selection_add_directory(GNOME_ICON_SELECTION(iconsel),
-						   ientry->pick_dialog_dir);
+						   icon_entry->pick_dialog_dir);
 
 
-		gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(ientry->pick_dialog)->vbox),
-				   ientry->fentry, FALSE, FALSE, 0);
-		gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(ientry->pick_dialog)->vbox),
+		gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(icon_entry->pick_dialog)->vbox),
+				   icon_entry->fentry, FALSE, FALSE, 0);
+		gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(icon_entry->pick_dialog)->vbox),
 				   iconsel, TRUE, TRUE, 0);
 
-		gtk_widget_show_all(ientry->pick_dialog);
+		gtk_widget_show_all(icon_entry->pick_dialog);
 
 		gnome_icon_selection_show_icons(GNOME_ICON_SELECTION(iconsel));
 
@@ -445,22 +461,22 @@ nautilus_mime_type_show_icon_selection (NautilusMimeIconEntry *ientry)
 			gnome_icon_selection_select_icon(GNOME_ICON_SELECTION(iconsel), 
 							 g_filename_pointer(curfile));
 
-		gnome_dialog_button_connect(GNOME_DIALOG(ientry->pick_dialog), 
+		gnome_dialog_button_connect(GNOME_DIALOG (icon_entry->pick_dialog), 
 					    0, /* OK button */
-					    GTK_SIGNAL_FUNC(icon_selected_cb),
-					    ientry);
-		gnome_dialog_button_connect(GNOME_DIALOG(ientry->pick_dialog), 
+					    GTK_SIGNAL_FUNC (icon_selected_cb),
+					    icon_entry);
+		gnome_dialog_button_connect(GNOME_DIALOG(icon_entry->pick_dialog), 
 					    1, /* Cancel button */
 					    GTK_SIGNAL_FUNC(cancel_pressed),
-					    ientry);
+					    icon_entry);
 		gtk_signal_connect_after(GTK_OBJECT(GNOME_ICON_SELECTION(iconsel)->gil), "select_icon",
 					 GTK_SIGNAL_FUNC(gil_icon_selected_cb),
-					 ientry);
+					 icon_entry);
 	} else {
 		GnomeIconSelection *gis =
-			gtk_object_get_user_data(GTK_OBJECT(ientry));
-		if(!GTK_WIDGET_VISIBLE(ientry->pick_dialog))
-			gtk_widget_show(ientry->pick_dialog);
+			gtk_object_get_user_data(GTK_OBJECT(icon_entry));
+		if(!GTK_WIDGET_VISIBLE(icon_entry->pick_dialog))
+			gtk_widget_show(icon_entry->pick_dialog);
 		if(gis) {
 			gnome_icon_selection_show_icons(gis);
 		}
