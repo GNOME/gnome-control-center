@@ -1,0 +1,41 @@
+Preface
+
+This document describes the scenarios which have to be checked every time someone makes changes in the gnome keyboard handling modules, namely:
+
+- libxklavier (project in freedesktop.org CVS)
+- libgswitchit (virtual module in gnome.org CVS)
+- gnome-settings-daemon (module in gnome-control-center, gnome.org CVS)
+- gnome-keyboard-properties (module in gnome-control-center, gnome.org CVS)
+- gnome-keyboard-indicator (module in gnome-applets, gnome.org CVS)
+
+Changes in configuration
+
+The tests should be performed under different configurations, controlled by several variables:
+
+- "group per window" mode (GPW: on/off): visible in UI
+- "default group" (DG: switchited off - or some group selected): only in GConf
+- "keep indicators with the group" (IPW: on/off): only in GConf
+- "hidden groups" (HG: some list of groups, can be empty): only in GConf
+
+Taking that parameters DG and IPW only make sense when GPW is on, there are 5 combinations possible for the first 3 parameters. Taking that DG and IPW do not interfere, it is reasonable to test 3 combinations:
+
+- GPW: off
+- GPW: on, DG: off, IPW: off
+- GPW: on, DG: {some value}, IPW: on
+
+It is necessary to perform each test with the empty and non-empty HG. If HG is not empty, every test should be performed with both "enabled" and "hidden" groups.
+
+Test cases
+
+1. Open a terminal window. Type in some characters. Change the group using some chosen keyboard combination (default LAlt-RAlt or any other from the list of available ones). Type in some characters - ensure the group was changed.
+
+2. Same as #1 - but change the group by clicking on the indicator applet
+
+3. Same as #1 - but choose the group from the applet's menu 
+
+4. Set the US group in one terminal window. Create new terminal window. Ensure the group matches the DG setting.
+
+5. Switch between two terminal windows using Alt-Tab. Ensure the behaviour matches the GPW setting and IPW setting.
+
+6. Same as #5, but switch using the panel WindowList applet.
+
