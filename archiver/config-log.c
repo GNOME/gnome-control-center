@@ -171,7 +171,6 @@ static void       slave_destroy                 (Slave *slave);
 static gboolean   slave_data_cb                 (GIOChannel *channel,
 						 GIOCondition condition,
 						 Slave *slave);
-static void       slave_apprise_data            (Slave *slave);
 static void       slave_broadcast_data          (Slave *slave,
 						 ConfigLog *config_log);
 
@@ -1397,26 +1396,6 @@ slave_broadcast_data (Slave *slave, ConfigLog *config_log)
 	}
 
 	DEBUG_MSG ("Exit");
-}
-
-/* Sends all the new log entries to the given slave */
-
-static void
-slave_apprise_data (Slave *slave) 
-{
-	GList *node;
-	ConfigLogEntry *current;
-
-	g_return_if_fail (slave != NULL);
-	g_return_if_fail (IS_CONFIG_LOG (slave->config_log));
-
-	for (node = slave->config_log->p->log_data;
-	     node != slave->config_log->p->first_old;
-	     node = node->next)
-	{
-		current = node->data;
-		write_log (slave->buffer, current);
-	}
 }
 
 static IOBuffer *
