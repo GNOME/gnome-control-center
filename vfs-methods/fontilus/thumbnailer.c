@@ -223,7 +223,7 @@ main(int argc, char **argv)
     FT_Error error;
     FT_Library library;
     FT_Face face;
-    GdkPixbuf *pixbuf, *pixbuf2;
+    GdkPixbuf *pixbuf;
     guchar *buffer;
     gint i, len, pen_x, pen_y;
 
