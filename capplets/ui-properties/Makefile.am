@@ -8,7 +8,10 @@ Gladedir = $(datadir)/control-center-data
 Glade_DATA = \
 	ui-properties.glade
 
-EXTRA_DIST = ChangeLog $(Applications_DATA) $(Glade_DATA)
+glade_msgs = \
+	ui-properties.glade.h
+
+EXTRA_DIST = ChangeLog $(Applications_DATA) $(Glade_DATA) $(glade_msgs)
 
 INCLUDES = \
         -DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\

@@ -6,7 +6,10 @@ Gladedir = $(datadir)/control-center-data
 Glade_DATA = \
 	keyboard-properties.glade
 
-EXTRA_DIST = ChangeLog $(Applications_DATA) $(Glade_DATA)
+glade_msgs = \
+	keyboard-properties.glade.h
+
+EXTRA_DIST = ChangeLog $(Applications_DATA) $(Glade_DATA) $(glade_msgs)
 
 INCLUDES = \
         -DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\
