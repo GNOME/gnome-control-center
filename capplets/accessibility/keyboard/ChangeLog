@@ -1,3 +1,13 @@
+2002-09-11  Jody Goldberg <jody@gnome.org>
+
+	* gnome-accessibility-keyboard-properties.glade : Fix conflicting
+	  accelerators.
+
+	* accessibility-keyboard.c (setup_dialog) : connect the simple items
+	  before the master.
+	(cb_master_enable_toggle) : desensitize the subfeature content if the
+	  master switch is disabled.
+
 2002-09-10  Jody Goldberg <jody@gnome.org>
 
 	* gnome-accessibility-keyboard-properties.glade : remove the atk

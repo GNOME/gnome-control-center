@@ -109,7 +109,9 @@ set_sensitive (GladeXML *dialog, char const *name, gboolean state)
 static void
 cb_feature_toggled (GtkToggleButton *btn, gpointer feature_index)
 {
-	gboolean const state = gtk_toggle_button_get_active (btn);
+	gboolean const state =
+		(GTK_WIDGET_STATE (btn) != GTK_STATE_INSENSITIVE) &&
+		gtk_toggle_button_get_active (btn);
 	GladeXML *dialog = g_object_get_data (G_OBJECT (btn), "dialog");
 	int feature, i;
 
@@ -233,26 +235,30 @@ cb_master_enable_toggle (GtkToggleButton *btn, GladeXML *dialog)
 {
 	int i = G_N_ELEMENTS (features);
 	gboolean flag = gtk_toggle_button_get_active (btn);
+	GtkWidget *w;
 
-	while (i-- > 0)
-		gtk_widget_set_sensitive (WID (features [i].checkbox), flag);
+	while (i-- > 0) {
+		w = WID (features [i].checkbox);
+		gtk_widget_set_sensitive (w, flag);
+		cb_feature_toggled (GTK_TOGGLE_BUTTON (w), GINT_TO_POINTER (i));
+	}
 }
 
 static void
 setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 {
 	GtkWidget *master_enable = WID ("master_enable");
+	setup_images (dialog);
+	setup_ranges (dialog, changeset);
+	setup_toggles (dialog, changeset);
+	setup_simple_toggles (dialog, changeset);
+
 	g_signal_connect (master_enable,
 		"toggled",
 		G_CALLBACK (cb_master_enable_toggle), dialog);
 	gconf_peditor_new_boolean (changeset,
 		CONFIG_ROOT "/enable",
 		GTK_WIDGET (master_enable), NULL);
-
-	setup_images (dialog);
-	setup_ranges (dialog, changeset);
-	setup_toggles (dialog, changeset);
-	setup_simple_toggles (dialog, changeset);
 }
 
 /*******************************************************************************/
