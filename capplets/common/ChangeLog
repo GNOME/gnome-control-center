@@ -2,6 +2,15 @@
 
 	* gconf-property-editor.c (peditor_color_value_changed): Use a
 	local stack variable for the color rather than a pointer. Duh.
+	(peditor_select_menu_widget_changed): Use
+	gtk_option_menu_get_history
+	(peditor_select_menu_widget_changed): Accept option_menu as
+	parameter
+	(gconf_peditor_new_select_menu): Connect changed signal rather
+	than activate signal on the menu items
+	(gconf_property_editor_get_key): Implement
+	(peditor_color_widget_changed): Use correct signature for the
+	signal handler
 
 2001-12-08  Bradford Hovinen  <hovinen@ximian.com>
 

@@ -239,6 +239,12 @@ gconf_property_editor_finalize (GObject *object)
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
+const gchar *
+gconf_property_editor_get_key (GConfPropertyEditor *peditor)
+{
+	return peditor->p->key;
+}
+
 static void
 peditor_boolean_value_changed (GConfEngine *engine, guint cnxn_id, GConfEntry *entry, GConfPropertyEditor *peditor) 
 {
@@ -372,14 +378,12 @@ peditor_color_value_changed (GConfEngine *engine, guint cnxn_id, GConfEntry *ent
 }
 
 static void
-peditor_color_widget_changed (GConfPropertyEditor *peditor, GnomeColorPicker *cp)
+peditor_color_widget_changed (GConfPropertyEditor *peditor, guint r, guint g, guint b, guint a, GnomeColorPicker *cp)
 {
 	gchar *str;
-	guint8 r, g, b, a;
 	GConfValue *value;
 
-	gnome_color_picker_get_i8 (cp, &r, &g, &b, &a);
-	str = g_strdup_printf ("#%02x%02x%02x", r, g, b);
+	str = g_strdup_printf ("#%02x%02x%02x", r >> 8, g >> 8, b >> 8);
 	gconf_change_set_set_string (peditor->p->changeset, peditor->p->key, str);
 
 	gconf_change_set_check_value (peditor->p->changeset, peditor->p->key, &value);
@@ -431,16 +435,12 @@ peditor_select_menu_value_changed (GConfEngine *engine, guint cnxn_id, GConfEntr
 }
 
 static void
-peditor_select_menu_widget_changed (GConfPropertyEditor *peditor, GtkMenuItem *item)
+peditor_select_menu_widget_changed (GConfPropertyEditor *peditor, GtkOptionMenu *option_menu)
 {
-	GtkOptionMenu *option_menu;
-	GtkMenu *menu;
 	gint idx;
 	GConfValue *value;
 
-	option_menu = g_object_get_data (G_OBJECT (peditor), "option-menu");
-	menu = GTK_MENU (gtk_option_menu_get_menu (option_menu));
-	idx = g_list_index (GTK_MENU_SHELL (menu)->children, item);
+	idx = gtk_option_menu_get_history (option_menu);
 
 	gconf_change_set_set_int (peditor->p->changeset, peditor->p->key, idx);
 
@@ -454,7 +454,6 @@ gconf_peditor_new_select_menu (GConfChangeSet *changeset, gchar *key, GtkWidget 
 	GObject *peditor;
 	GConfEngine *engine;
 	GConfEntry *gconf_entry;
-	GtkMenu *menu;
 	GList *item;
 
 	peditor = g_object_new (gconf_property_editor_get_type (),
@@ -464,11 +463,8 @@ gconf_peditor_new_select_menu (GConfChangeSet *changeset, gchar *key, GtkWidget 
 				"object", option_menu,
 				NULL);
 
-	menu = GTK_MENU (gtk_option_menu_get_menu (GTK_OPTION_MENU (option_menu)));
-
-	for (item = GTK_MENU_SHELL (menu)->children; item != NULL; item = item->next)
-		g_signal_connect_swapped (G_OBJECT (item->data), "activate",
-					  (GCallback) peditor_select_menu_widget_changed, peditor);
+	g_signal_connect_swapped (G_OBJECT (option_menu), "changed",
+				  (GCallback) peditor_select_menu_widget_changed, peditor);
 
 	g_object_set_data (peditor, "option-menu", option_menu);
 
