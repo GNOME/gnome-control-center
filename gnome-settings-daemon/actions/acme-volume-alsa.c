@@ -36,6 +36,8 @@
 #define D(x...)
 #endif
 
+#define ROUND(x) ((x - (int)x > 0.5) ? x+1 : x)
+
 struct AcmeVolumeAlsaPrivate
 {
 	gboolean use_pcm;
@@ -50,7 +52,6 @@ static GObjectClass *parent_class = NULL;
 
 static int acme_volume_alsa_get_volume (AcmeVolume *self);
 static void acme_volume_alsa_set_volume (AcmeVolume *self, int val);
-static gboolean acme_volume_alsa_mixer_check (AcmeVolumeAlsa *self, int fd);
 
 static void
 acme_volume_alsa_finalize (GObject *object)
@@ -66,12 +67,6 @@ acme_volume_alsa_finalize (GObject *object)
 		g_free (self->_priv);
 
 	G_OBJECT_CLASS (parent_class)->finalize (object);
-}
-
-static int
-acme_volume_alsa_vol_check (AcmeVolumeAlsa *self, int volume)
-{
-	return CLAMP (volume, self->_priv->pmin, self->_priv->pmax);
 }
 
 static void
@@ -134,27 +129,35 @@ acme_volume_alsa_get_volume (AcmeVolume *vol)
 	AcmeVolumeAlsa *self = (AcmeVolumeAlsa *) vol;
 	long lval, rval;
 	int tmp;
+	float alsa_vol;
 
 	snd_mixer_selem_get_playback_volume(self->_priv->elem,
 			SND_MIXER_SCHN_FRONT_LEFT, &lval);
 	snd_mixer_selem_get_playback_volume(self->_priv->elem,
 			SND_MIXER_SCHN_FRONT_RIGHT, &rval);
 
-	tmp = acme_volume_alsa_vol_check (self, (int) (lval + rval) / 2);
-	return (tmp * 100 / self->_priv->pmax);
+	alsa_vol = (lval + rval) / 2;
+	alsa_vol = alsa_vol * 100 / (self->_priv->pmax - self->_priv->pmin);
+	tmp = ROUND (alsa_vol);
+
+	return tmp;
 }
 
 static void
 acme_volume_alsa_set_volume (AcmeVolume *vol, int val)
 {
 	AcmeVolumeAlsa *self = (AcmeVolumeAlsa *) vol;
+	float volume;
+	int tmp;
 
-	val = (long) acme_volume_alsa_vol_check (self,
-			val * self->_priv->pmax / 100);
+	volume = (float) val / 100 * (self->_priv->pmax - self->_priv->pmin);
+	volume = CLAMP (volume, self->_priv->pmin, self->_priv->pmax);
+	tmp = ROUND (volume);
+
 	snd_mixer_selem_set_playback_volume(self->_priv->elem,
-			SND_MIXER_SCHN_FRONT_LEFT, val);
+			SND_MIXER_SCHN_FRONT_LEFT, tmp);
 	snd_mixer_selem_set_playback_volume(self->_priv->elem,
-			SND_MIXER_SCHN_FRONT_RIGHT, val);
+			SND_MIXER_SCHN_FRONT_RIGHT, tmp);
 }
 
 static void

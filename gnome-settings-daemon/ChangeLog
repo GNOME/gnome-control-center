@@ -1,3 +1,10 @@
+2004-02-29  Bastien Nocera  <hadess@hadess.net>
+
+	* actions/acme-volume-alsa.c: (acme_volume_alsa_get_volume),
+	(acme_volume_alsa_set_volume): better ALSA volume steps, using
+	rounding up rather than normal float to int casting
+	(Closes: #124741)
+
 2004-02-25  Bastien Nocera  <hadess@hadess.net>
 
 	* actions/Makefile.am:
