@@ -319,7 +319,6 @@ fill_service_apps (void)
 		g_strfreev (uri_schemes);
 	}
 
-	g_list_foreach (app_list, (GFunc) g_free, NULL);
 	g_list_free (app_list);
 }
 

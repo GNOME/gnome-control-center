@@ -184,7 +184,7 @@ cb_file_type_dialog_response (GtkDialog *dialog, gint response_id)
 
 		/* TODO : get this written */
 		gnome_help_display_desktop (NULL,
-			"config-file-type",
+			"control-center-manual",
 			"config-file-type.xml",
 			"CONFIGURATION", &error);
 		if (error) {
