@@ -1,6 +1,32 @@
+2001-04-24  Bradford Hovinen  <hovinen@ximian.com>
+
+	* capplets/*/main.c:
+	* capplets/*/preferences.c: Support --location
+
+2001-04-24  Bradford Hovinen  <hovinen@ximian.com>
+
+	* capplets/Makefile.am (always_built_SUBDIRS): Compile in
+	new-screensaver-properties
+
 2001-04-24  Anna Marie Dirks <anna@ximian.com> 
 	* capplets/interfaces/control-center.glade: This is the initial mockup of my reorganization of control center's menus; I'm committing it to garner input. This file includes separate menus for simple, intermediate and advanced modes; it does not include any graphics (yet).  
 
+2001-04-14  Bradford Hovinen <hovinen@ximian.com>
+
+	* capplets/*/main.c: Don't apply settings if editing settings
+	outside the current location
+
+2001-04-13  Bradford Hovinen <hovinen@ximian.com>
+
+	* capplets/*/main.c: Read XML from stdin if --location is passed
+
+2001-04-12  Bradford Hovinen <hovinen@ximian.com>
+
+	* capplets/*/main.c: Support --location command line option to
+	edit settings in a location different from the current one
+
+	* capplets/*/preferences.[ch]: Support multi-level freezing and
+	thawing, so that we can permanently disable applying changes
 
 2001-03-29  Anna Marie Dirks <anna@ximian.com> 
 	* capplets/interfaces: added this directory to store gladed mockups of new capplets. 
