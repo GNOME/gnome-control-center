@@ -1,23 +1,33 @@
 # control-center fr.po
 # Copyright (C) 1998 Free Software Foundation, Inc.
-# Vincent Renardias <vincent@debian.org>, 1998, 1999.
+# Vincent Renardias <vincent@ldsol.com>, 1998, 1999.
+# Fabrice Bellet <Fabrice.Bellet@imag.fr>, 1999.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center VERSION\n"
-"POT-Creation-Date: 1999-05-19 14:40+0200\n"
+"POT-Creation-Date: 1999-06-25 14:35+0200\n"
 "PO-Revision-Date: 1998-02-28 19:34+0100\n"
-"Last-Translator: Vincent Renardias <vincent@debian.org>\n"
-"Language-Team: Vincent Renardias <vincent@debian.org>\n"
+"Last-Translator: Vincent Renardias <vincent@ldsol.com>\n"
+"Language-Team: Gnome French Team <gnomefr@gnomefr.traduc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: capplets/background-properties/app-background.c:13
+msgid "Set background image."
+msgstr "Changer l'image de fond."
+
+#: capplets/background-properties/app-background.c:13
+msgid "IMAGE-FILE"
+msgstr "FICHIER-IMAGE"
 
 #: capplets/background-properties/property-background.c:244
 msgid "Disabled"
 msgstr "Désactivé"
 
 #: capplets/background-properties/property-background.c:619
+#: capplets/e-conf/e-conf_filesel.c:779
 msgid "Color"
 msgstr "Couleur"
 
@@ -25,6 +35,7 @@ msgstr "Couleur"
 msgid "Color 1"
 msgstr "Couleur 1"
 
+#. gtk_table_attach_defaults (GTK_TABLE(table), cp1, 0, 1, 1, 2);
 #. gtk_table_attach_defaults (GTK_TABLE(table), gtk_hseparator_new (), 0, 1, 2, 3);
 #: capplets/background-properties/property-background.c:646
 msgid "Color 2"
@@ -34,9 +45,11 @@ msgstr "Couleur 2"
 msgid "Solid"
 msgstr "Solide"
 
+#. gradient background selector pane
 #: capplets/background-properties/property-background.c:657
+#: capplets/e-conf/e-conf.c:3626
 msgid "Gradient"
-msgstr "Gradient"
+msgstr "Dégradé"
 
 #: capplets/background-properties/property-background.c:658
 msgid "Vertical"
@@ -83,6 +96,7 @@ msgid "Scaled (keep aspect)"
 msgstr "Redimentionnée (en conservant l'aspect)"
 
 #: capplets/background-properties/property-background.c:1019
+#: capplets/e-conf/e-conf.c:3528
 msgid "Centered"
 msgstr "Centré"
 
@@ -96,7 +110,7 @@ msgstr "Désactiver le choix du fond d'écran"
 
 #: capplets/background-properties/property-background.c:1480
 msgid "Set parameters from saved state and exit"
-msgstr "Restaurer les paramétres sauvegarder et quitter"
+msgstr "Restaurer les paramètres sauvegarder et quitter"
 
 #: capplets/background-properties/property-background.c:1481
 msgid "IMAGE"
@@ -121,7 +135,7 @@ msgstr "Spéficier la couleur de fin de gradient pour la couleur de fond"
 
 #: capplets/background-properties/property-background.c:1484
 msgid "ORIENT"
-msgstr "ORIENT"
+msgstr "ORIENTATION"
 
 #: capplets/background-properties/property-background.c:1484
 msgid "Gradient orientation: vertical or horizontal"
@@ -145,7 +159,7 @@ msgstr "Affichage du papier peint: mosaique, centré, redimentionné ou ratio"
 
 #: capplets/bell-properties/bell-properties.c:170
 msgid "Keyboard Bell"
-msgstr "Clic Clavier"
+msgstr "Bip Clavier"
 
 #: capplets/bell-properties/bell-properties.c:181
 msgid "Volume"
@@ -163,11 +177,954 @@ msgstr "Durée (ms)"
 msgid "Test"
 msgstr "Test"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:226
+#: capplets/e-conf/e-conf.c:213
+msgid "Run command"
+msgstr "Exécuter Commande"
+
+#: capplets/e-conf/e-conf.c:215
+msgid "Restart Enlightenment"
+msgstr "Redémmarer Enlightenment"
+
+#: capplets/e-conf/e-conf.c:216
+msgid "Exit Enlightenment"
+msgstr "Quitter Enlightenment"
+
+#: capplets/e-conf/e-conf.c:218
+msgid "Goto Next Desktop"
+msgstr "Aller au Bureau Suivant"
+
+#: capplets/e-conf/e-conf.c:219
+msgid "Goto Previous Deskop"
+msgstr "Aller au Bureau Précédent"
+
+#: capplets/e-conf/e-conf.c:220
+msgid "Goto Desktop"
+msgstr "Aller au Bureau"
+
+#: capplets/e-conf/e-conf.c:221
+msgid "Raise Desktop"
+msgstr "Élever Bureau"
+
+#: capplets/e-conf/e-conf.c:222
+msgid "Lower Desktop"
+msgstr "Abaisser Bureau"
+
+#: capplets/e-conf/e-conf.c:223
+#, fuzzy
+msgid "Reset Desktop In Place"
+msgstr "Séparer les bureaux"
+
+#: capplets/e-conf/e-conf.c:225
+msgid "Toggle Deskrays"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:227
+msgid "Cleanup Windows"
+msgstr "Nettoyer Fenêtres"
+
+#: capplets/e-conf/e-conf.c:228
+msgid "Scroll Windows to left"
+msgstr "Faire défiler la fenêtre à gauche"
+
+#: capplets/e-conf/e-conf.c:229
+msgid "Scroll Windows to right"
+msgstr "Faire défiler la fenêtre à droite"
+
+#: capplets/e-conf/e-conf.c:230
+msgid "Scroll Windows up"
+msgstr "Faire défiler la fenêtre vers le haut"
+
+#: capplets/e-conf/e-conf.c:231
+msgid "Scroll Windows down"
+msgstr "Faire défiler la fenêtre vers le bas"
+
+#: capplets/e-conf/e-conf.c:232
+msgid "Scroll Windows by [X Y] pixels"
+msgstr "Faire défiler de [X Y] pixels"
+
+#: capplets/e-conf/e-conf.c:234
+msgid "Move mouse pointer to left"
+msgstr "Déplacer le pointeur de la souris à gauche"
+
+#: capplets/e-conf/e-conf.c:235
+msgid "Move mouse pointer to right"
+msgstr "Déplacer le pointeur de la souris à droite"
+
+#: capplets/e-conf/e-conf.c:236
+msgid "Move mouse pointer up"
+msgstr "Déplacer le pointeur de la souris vers le haut"
+
+#: capplets/e-conf/e-conf.c:237
+msgid "Move mouse pointer down"
+msgstr "Déplacer le pointeur de la souris vers le bas"
+
+#: capplets/e-conf/e-conf.c:238
+msgid "Move mouse pointer by [X Y]"
+msgstr "Déplacer le pointeur de la souris de [X Y]"
+
+#: capplets/e-conf/e-conf.c:240
+msgid "Goto Desktop area [X Y]"
+msgstr "Aller au Bureau [X Y]"
+
+#: capplets/e-conf/e-conf.c:241
+msgid "Move to Desktop area on the left"
+msgstr "Aller au bureau de gauche"
+
+#: capplets/e-conf/e-conf.c:242
+msgid "Move to Desktop area on the right"
+msgstr "Aller au bureau de gauche"
+
+#: capplets/e-conf/e-conf.c:243
+msgid "Move to Desktop area above"
+msgstr "Aller au bureau d'en dessous"
+
+#: capplets/e-conf/e-conf.c:244
+msgid "Move to Desktop area below"
+msgstr "Aller au bureau d'au dessus"
+
+#: capplets/e-conf/e-conf.c:246
+msgid "Raise Window"
+msgstr "Élever Fenêtre"
+
+#: capplets/e-conf/e-conf.c:247
+msgid "Lower Window"
+msgstr "Abaisser Fenêtre"
+
+#: capplets/e-conf/e-conf.c:248
+msgid "Close Window"
+msgstr "Fermer Fenêtre"
+
+#: capplets/e-conf/e-conf.c:249
+msgid "Annihilate Window"
+msgstr "Annihiler Fenêtre"
+
+#: capplets/e-conf/e-conf.c:250
+msgid "Stick / Unstick Window"
+msgstr "Coller / Décoller Fenêtre"
+
+#: capplets/e-conf/e-conf.c:251
+msgid "Iconify Window"
+msgstr "Iconifier Fenêtre"
+
+#: capplets/e-conf/e-conf.c:252
+msgid "Shade / Unshade Window"
+msgstr "Ombrer / Désombrer Fenêtre"
+
+#: capplets/e-conf/e-conf.c:253
+msgid "Maximise Height of Window"
+msgstr "Maximiser la hauteur de la fenêtre"
+
+#: capplets/e-conf/e-conf.c:254
+msgid "Maximise Height of Window to whole screen"
+msgstr "Maximiser la hauteur de la fenêtre pour tenir dans l'écran"
+
+#: capplets/e-conf/e-conf.c:255
+msgid "Maximise Height of Window to available space"
+msgstr "Maximiser la hauteur de la fenêtre"
+
+#: capplets/e-conf/e-conf.c:256
+msgid "Maximise Width of Window"
+msgstr "Maximiser la largeur de la fenêtre"
+
+#: capplets/e-conf/e-conf.c:257
+msgid "Maximise Width of Window to whole screen"
+msgstr "Maximiser la largeur de la fenêtre pour occuper tout l'écran"
+
+#: capplets/e-conf/e-conf.c:258
+msgid "Maximise Width of Window to available space"
+msgstr "Maximiser la largeur pour tenir dans l'écran"
+
+#: capplets/e-conf/e-conf.c:259
+msgid "Maximise Size of Window"
+msgstr "Maximiser la taille de la fenêtre"
+
+#: capplets/e-conf/e-conf.c:260
+msgid "Maximise Size of Window to whole screen"
+msgstr "Maximiser la fenêtre pour occuper tout l'écran"
+
+#: capplets/e-conf/e-conf.c:261
+#, fuzzy
+msgid "Maximise Size of Window to available space"
+msgstr "Maximiser la largeur pour tenir dans l'écran"
+
+#: capplets/e-conf/e-conf.c:262
+msgid "Send window to next desktop"
+msgstr "Envoyer la fenêtre sur le bureau suivant"
+
+#: capplets/e-conf/e-conf.c:263
+msgid "Send window to previous desktop"
+msgstr "Envoyer la fenêtre sur le bureau précédent"
+
+#: capplets/e-conf/e-conf.c:264
+msgid "Switch focus to next window"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:265
+#, fuzzy
+msgid "Switch focus to previous window"
+msgstr "Envoyer la fenêtre sur le bureau précédent"
+
+#: capplets/e-conf/e-conf.c:266
+msgid "Glue / Unglue Window to Desktop screen"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:267
+#, fuzzy
+msgid "Set Window layer to On Top"
+msgstr "Envoyer la fenêtre sur le bureau suivant"
+
+#: capplets/e-conf/e-conf.c:268
+msgid "Set Window layer to Above"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:269
+msgid "Set Window layer to Normal"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:270
+msgid "Set Window layer to Below"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:271
+#, fuzzy
+msgid "Set Window layer"
+msgstr "Laisser le gestionnaire de fenêtres décider"
+
+#: capplets/e-conf/e-conf.c:272
+#, fuzzy
+msgid "Move Window to area on left"
+msgstr "Au pointeur de la souris"
+
+#: capplets/e-conf/e-conf.c:273
+#, fuzzy
+msgid "Move Window to area on right"
+msgstr "Au pointeur de la souris"
+
+#: capplets/e-conf/e-conf.c:274
+msgid "Move Window to area above"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:275
+msgid "Move Window to area below"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:276
+#, fuzzy
+msgid "Move Window by area [X Y]"
+msgstr "Au pointeur de la souris"
+
+#: capplets/e-conf/e-conf.c:277
+msgid "Set Window border style to the Default"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:278
+msgid "Set Window border style to the Borderless"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:279
+msgid "Forget everything about Window"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:280
+#, fuzzy
+msgid "Remember all Window settings"
+msgstr "Paramétres Aléatoires"
+
+#: capplets/e-conf/e-conf.c:281
+#, fuzzy
+msgid "Remeber Window Border"
+msgstr "Paramétres Aléatoires"
+
+#: capplets/e-conf/e-conf.c:282
+#, fuzzy
+msgid "Remeber Window Desktop"
+msgstr "Paramétres Aléatoires"
+
+#: capplets/e-conf/e-conf.c:283
+#, fuzzy
+msgid "Remeber Window Desktop Area"
+msgstr "Paramétres Aléatoires"
+
+#: capplets/e-conf/e-conf.c:284
+#, fuzzy
+msgid "Remeber Window Size"
+msgstr "Paramétres Aléatoires"
+
+#: capplets/e-conf/e-conf.c:285
+#, fuzzy
+msgid "Remeber Window Location"
+msgstr "Paramétres Aléatoires"
+
+#: capplets/e-conf/e-conf.c:286
+#, fuzzy
+msgid "Remeber Window Layer"
+msgstr "Paramétres Aléatoires"
+
+#: capplets/e-conf/e-conf.c:287
+#, fuzzy
+msgid "Remeber Window Stickyness"
+msgstr "Paramétres Aléatoires"
+
+#: capplets/e-conf/e-conf.c:288
+#, fuzzy
+msgid "Remeber Window Shadedness"
+msgstr "Paramétres Aléatoires"
+
+#: capplets/e-conf/e-conf.c:294 capplets/e-conf/e-conf.c:4497
+msgid "CTRL"
+msgstr "CTRL"
+
+#: capplets/e-conf/e-conf.c:295 capplets/e-conf/e-conf.c:4503
+msgid "ALT"
+msgstr "ALT"
+
+#: capplets/e-conf/e-conf.c:296 capplets/e-conf/e-conf.c:4509
+msgid "SHIFT"
+msgstr "SHIFT"
+
+#: capplets/e-conf/e-conf.c:297 capplets/e-conf/e-conf.c:4515
+msgid "CTRL & ALT"
+msgstr "CTRL & ALT"
+
+#: capplets/e-conf/e-conf.c:298 capplets/e-conf/e-conf.c:4521
+msgid "CTRL & SHIFT"
+msgstr "CTRL & SHIFT"
+
+#: capplets/e-conf/e-conf.c:299 capplets/e-conf/e-conf.c:4527
+msgid "ALT & SHIFT"
+msgstr "ALT & SHIFT"
+
+#: capplets/e-conf/e-conf.c:300 capplets/e-conf/e-conf.c:4533
+msgid "CTRL & ALT & SHIFT"
+msgstr "CTRL & ALT & SHIFT"
+
+#: capplets/e-conf/e-conf.c:1327 control-center/capplet-manager.c:170
+msgid "Try"
+msgstr "Essayer"
+
+#: capplets/e-conf/e-conf.c:1330 control-center/capplet-manager.c:175
+msgid "Revert"
+msgstr "Enlever"
+
+#: capplets/e-conf/e-conf.c:1333
+#: capplets/wm-properties/wm-properties-capplet.c:685
+#: capplets/wm-properties/wm-properties-capplet.c:793
+#: capplets/wm-properties/wm-properties-capplet.c:800
+#: capplets/wm-properties/wm-properties-capplet.c:940
+#: control-center/capplet-manager.c:180
+msgid "OK"
+msgstr "OK"
+
+#: capplets/e-conf/e-conf.c:1336 capplets/e-conf/e-conf_filesel.c:611
+#: capplets/wm-properties/wm-properties-capplet.c:685
+#: control-center/capplet-manager.c:185
+msgid "Cancel"
+msgstr "Annuler"
+
+#: capplets/e-conf/e-conf.c:1615
+#: capplets/sound-properties/sound-properties.c:248
+msgid "Enable"
+msgstr "Activer"
+
+#: capplets/e-conf/e-conf.c:1759
+#, c-format
+msgid "%1.0f Desktop"
+msgstr "%1.0f Bureau"
+
+#: capplets/e-conf/e-conf.c:1761
+#, c-format
+msgid "%1.0f Desktops"
+msgstr "%1.0f Bureaux"
+
+#: capplets/e-conf/e-conf.c:1788 capplets/e-conf/e-conf.c:1841
+#, c-format
+msgid ""
+"The virutal desktop size will be\n"
+"%1.0f x %1.0f\n"
+"screens in size"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:1849
+msgid "Edge flip resistance (milliseconds)"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:1852 capplets/e-conf/e-conf.c:2018
+#: capplets/e-conf/e-conf.c:2024 capplets/e-conf/e-conf.c:2030
+#: capplets/e-conf/e-conf.c:2035 capplets/e-conf/e-conf.c:2103
+#: capplets/e-conf/e-conf.c:2109 capplets/e-conf/e-conf.c:3685
+msgid "-"
+msgstr "-"
+
+#: capplets/e-conf/e-conf.c:1852 capplets/e-conf/e-conf.c:2018
+#: capplets/e-conf/e-conf.c:2024 capplets/e-conf/e-conf.c:2030
+#: capplets/e-conf/e-conf.c:2035 capplets/e-conf/e-conf.c:2103
+#: capplets/e-conf/e-conf.c:2109 capplets/e-conf/e-conf.c:3685
+msgid "+"
+msgstr "+"
+
+#: capplets/e-conf/e-conf.c:1911
+msgid ""
+"The number of separate desktops\n"
+"layered on top of eachother"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:1926 capplets/e-conf/e-conf.c:1941
+#: capplets/e-conf/e-conf.c:1999
+msgid "Opaque"
+msgstr "Opaque"
+
+#: capplets/e-conf/e-conf.c:1927
+msgid "Windows are moved in a solid fashion"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:1928 capplets/e-conf/e-conf.c:1943
+#: capplets/e-conf/e-conf.c:2001
+#, fuzzy
+msgid "Lined"
+msgstr "Mosaïque"
+
+#: capplets/e-conf/e-conf.c:1929
+msgid "Windows are moved by drawing construction lines around them"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:1930 capplets/e-conf/e-conf.c:1945
+#: capplets/e-conf/e-conf.c:2003
+msgid "Box"
+msgstr "Boîte"
+
+#: capplets/e-conf/e-conf.c:1931
+msgid "Windows are moved by drawing a box as their outline"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:1932 capplets/e-conf/e-conf.c:1947
+#: capplets/e-conf/e-conf.c:2005
+msgid "Shaded"
+msgstr "Ombré"
+
+#: capplets/e-conf/e-conf.c:1933
+msgid "Windows are moved by drawing a stippled outline of them"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:1934 capplets/e-conf/e-conf.c:1949
+#: capplets/e-conf/e-conf.c:2007
+msgid "Semi-Solid"
+msgstr "Semi-solide"
+
+#: capplets/e-conf/e-conf.c:1935
+msgid "Windows are moved by drawing a chequered outline of them"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:1936
+msgid "Translucent"
+msgstr "Translucide"
+
+#: capplets/e-conf/e-conf.c:1937
+msgid "Windows are moved by drawing a translucent copy of the window"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:1942
+msgid "Windows are resized as you drag"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:1944
+msgid "Windows get resized by displaying construction lines around them"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:1946
+msgid "Windows are resized by drawing a box as their outline"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:1948
+msgid "windows are resized by drawing a stippled outline of them"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:1950
+msgid "Windows are resized by drawing a chequered outline of them"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:1954
+msgid "Mouse Pointer"
+msgstr "Pointeur souris"
+
+#: capplets/e-conf/e-conf.c:1955
+msgid ""
+"Your keypresses are sent to whatever window your mouse is over at the time"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:1956
+#, fuzzy
+msgid "Sloppy Pointer"
+msgstr "Pointeur souris"
+
+#: capplets/e-conf/e-conf.c:1957
+msgid "Your keypresses are sent to the window your mouse was over last, if any"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:1958
+msgid "Pointer Clicks"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:1959
+msgid "You keypresses are sent to the window you last clicked on"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:1964
+msgid "Move Methods"
+msgstr "Méthodes de déplacement"
+
+#: capplets/e-conf/e-conf.c:1967
+msgid "Resize Methods"
+msgstr "Méthodes de redimensionnement"
+
+#: capplets/e-conf/e-conf.c:1970
+msgid "Keyboard focus follows"
+msgstr "Le focus clavier suit la souris"
+
+#: capplets/e-conf/e-conf.c:2000
+msgid "Windows are slid in a solid fashion"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:2002
+msgid "Windows are slid by drawing construction lines around them"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:2004
+msgid "Windows are slid by drawing a box as their outline"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:2006
+msgid "Windows are slid by drawing a stippled outline of them"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:2008
+msgid "Windows are slid by drawing a chequered outline of them"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:2012
+msgid "Window Sliding Methods"
+msgstr "Méthodes de déplacement des fenêtres"
+
+#: capplets/e-conf/e-conf.c:2015
+msgid "Windows slide in when they appear"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:2021
+msgid "Windows slide about when window cleanup in progress"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:2027
+msgid "Desktops slide in when changing desktops"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:2032
+msgid "Window shading speed (pixels / sec)"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:2038
+msgid "Animate menus"
+msgstr "Animer les menus"
+
+#: capplets/e-conf/e-conf.c:2040
+msgid "Reduce refresh by using more memory (use saveunders)"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:2045
+#, fuzzy
+msgid "Enable Enlightenments background selection"
+msgstr "Désactiver le choix du fond d'écran"
+
+#: capplets/e-conf/e-conf.c:2049
+msgid ""
+"This enables Enlightenments background selector. If backgrounds are selected "
+"in this section any backgrounds selected in any other selector or set by any "
+"other programs on desktop 0 will be overidden by Enlightenment"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:2075
+msgid "Advanced Focus"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:2078
+msgid "All new windows that appear get the keyboard focus"
+msgstr "Les nouvelles fenêtres obtiennent le focus clavier"
+
+#: capplets/e-conf/e-conf.c:2081
+#, fuzzy
+msgid "All new popup windows get the keyboard focus"
+msgstr "Les nouvelles fenêtres obtiennent le focus clavier"
+
+#: capplets/e-conf/e-conf.c:2084
+#, fuzzy
+msgid "Only new popup windows whose owner is focused get the keyboard focus"
+msgstr "Les nouvelles fenêtres obtiennent le focus clavier"
+
+#: capplets/e-conf/e-conf.c:2087
+#, fuzzy
+msgid "Raise windows when switching focus with the keyboard"
+msgstr "Les nouvelles fenêtres obtiennent le focus clavier"
+
+#: capplets/e-conf/e-conf.c:2090
+#, fuzzy
+msgid "Send the pointer to windows when switching focus with the keyboard"
+msgstr "Les nouvelles fenêtres obtiennent le focus clavier"
+
+#: capplets/e-conf/e-conf.c:2097
+msgid "Miscellaneous"
+msgstr "Divers"
+
+#: capplets/e-conf/e-conf.c:2100
+msgid "Tooltips ON/OFF & timeout for tooltip popup (sec)"
+msgstr "Bulles d'aides ON/OFF & timeout (sec)"
+
+#: capplets/e-conf/e-conf.c:2106
+msgid "Automatic raising of windows after X seconds"
+msgstr "Elévation automatique des fenêtres après X secondes"
+
+#: capplets/e-conf/e-conf.c:2112
+msgid "Transient popup windows appear together with leader"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:2115
+msgid "Switch to where popup window appears"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:2118
+msgid "Display icons when windows are iconified"
+msgstr "Afficher une icone pour les fenêtres iconifiées"
+
+#: capplets/e-conf/e-conf.c:2120
+msgid "Place windows manually"
+msgstr "Placer les fenêtres manuellement"
+
+#: capplets/e-conf/e-conf.c:2135
+msgid "Size of Virtual Screen"
+msgstr "Taille de l'écran virtuel"
+
+#: capplets/e-conf/e-conf.c:2148
+msgid "Separate Desktops"
+msgstr "Séparer les bureaux"
+
+#: capplets/e-conf/e-conf.c:3071
+msgid "Number of colours in gradient"
+msgstr "Nombre de couleurs en dégradé"
+
+#: capplets/e-conf/e-conf.c:3079
+msgid "2"
+msgstr "2"
+
+#: capplets/e-conf/e-conf.c:3084
+msgid "3"
+msgstr "3"
+
+#: capplets/e-conf/e-conf.c:3089
+msgid "5"
+msgstr "5"
+
+#: capplets/e-conf/e-conf.c:3362 capplets/e-conf/e-conf.c:3444
+msgid "Image file"
+msgstr "Fichier image"
+
+#: capplets/e-conf/e-conf.c:3376 capplets/e-conf/e-conf.c:3458
+msgid "Browse"
+msgstr "Parcourir"
+
+#: capplets/e-conf/e-conf.c:3382 capplets/e-conf/e-conf.c:3464
+msgid "None"
+msgstr "Aucun"
+
+#: capplets/e-conf/e-conf.c:3388 capplets/e-conf/e-conf.c:3470
+msgid "Image display options"
+msgstr "Options de l'affichage des images"
+
+#: capplets/e-conf/e-conf.c:3396
+msgid "Repeat tiles across screen"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:3404 capplets/e-conf/e-conf.c:3542
+msgid "Retain image aspect ratio"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:3412 capplets/e-conf/e-conf.c:3550
+msgid "Maximise height to fit screen"
+msgstr "Maximiser la hauteur pour tenir dans l'écran"
+
+#: capplets/e-conf/e-conf.c:3420 capplets/e-conf/e-conf.c:3558
+msgid "Maximise width to fit screen"
+msgstr "Maximiser la largeur pour tenir dans l'écran"
+
+#: capplets/e-conf/e-conf.c:3480
+msgid "Top left"
+msgstr "Haut gauche"
+
+#: capplets/e-conf/e-conf.c:3486
+msgid "Top middle"
+msgstr "Haut milieu"
+
+#: capplets/e-conf/e-conf.c:3492
+msgid "Top right"
+msgstr "Haut droite"
+
+#: capplets/e-conf/e-conf.c:3498
+msgid "Right middle"
+msgstr "Droite milieu"
+
+#: capplets/e-conf/e-conf.c:3504
+msgid "Bottom right"
+msgstr "Bas droite"
+
+#: capplets/e-conf/e-conf.c:3510
+msgid "Bottom middle"
+msgstr "Bas milieu"
+
+#: capplets/e-conf/e-conf.c:3516
+msgid "Bottom left"
+msgstr "Bas gauche"
+
+#: capplets/e-conf/e-conf.c:3522
+msgid "Left middle"
+msgstr "Gauche milieu"
+
+#: capplets/e-conf/e-conf.c:3600
+msgid "Enlightenment: Edit Background"
+msgstr "Enlightenment: Editer le fond"
+
+#. solid background selector pane
+#: capplets/e-conf/e-conf.c:3614
+msgid "Solid Colour"
+msgstr "Couleur unie"
+
+#. Backgrouund Image tile selector
+#: capplets/e-conf/e-conf.c:3634
+msgid "Background Image"
+msgstr "Image de Fond"
+
+#. Overlay Image selector
+#: capplets/e-conf/e-conf.c:3642
+msgid "Overlayed Logo"
+msgstr "Logo superposé"
+
+#: capplets/e-conf/e-conf.c:3647
+msgid ""
+"Please select the attribute of this background\n"
+"you wish to change below"
+msgstr ""
+"Choisissez les attributs de ce fond que\n"
+"vous désirrez changer"
+
+#: capplets/e-conf/e-conf.c:3652
+msgid "Done"
+msgstr "Effectué"
+
+#: capplets/e-conf/e-conf.c:3679
+msgid "High quality rendering for background"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:3682
+msgid "Minutes after which to expunge unviewed backgrounds from memory"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:3701
+msgid "Select the desktop you wish to change the background of here"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:3711
+msgid "No background"
+msgstr "Pas de fond d'écran"
+
+#: capplets/e-conf/e-conf.c:3718
+msgid ""
+"Select no background for this desktop (Enlightenment will not attempt to set "
+"any background for this desktop then)"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:3723
+msgid "Add new..."
+msgstr "Ajouter un nouveau..."
+
+#: capplets/e-conf/e-conf.c:3730
+msgid "Add a new background bookmark to your list"
+msgstr "Ajouter un nouveau signet de fond d'écran à votre liste"
+
+#: capplets/e-conf/e-conf.c:3733 capplets/e-conf/e-conf.c:4393
+#: capplets/mime-type/mime-type-capplet.c:77
+#: capplets/wm-properties/wm-properties-capplet.c:1016
+msgid "Delete"
+msgstr "Effacer"
+
+#: capplets/e-conf/e-conf.c:3740
+msgid "Remove this background bookmark from the list"
+msgstr "Enlever ce signet de la liste"
+
+#: capplets/e-conf/e-conf.c:3743 capplets/mime-type/mime-type-capplet.c:91
+#: capplets/wm-properties/wm-properties-capplet.c:1011
+msgid "Edit..."
+msgstr "Editer..."
+
+#: capplets/e-conf/e-conf.c:3750
+msgid "Edit the settings for this background bookmark"
+msgstr "Editer les paramétres de ce signet"
+
+#: capplets/e-conf/e-conf.c:3851
+msgid "Enable sounds in Enlightenment"
+msgstr "Activer les effets sonores dans Enlightenment"
+
+#: capplets/e-conf/e-conf.c:3962
+msgid "Current theme selection"
+msgstr "Thème actuellement sélectionné"
+
+#: capplets/e-conf/e-conf.c:4213
+msgid ""
+"Please press the key on the keyboard\n"
+"you wish to modify this keyboard-shortcut\n"
+"to use from now on."
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:4365 capplets/e-conf/e-conf.c:4485
+msgid "Modifier"
+msgstr "Modificateur"
+
+#: capplets/e-conf/e-conf.c:4366 capplets/e-conf/e-conf.c:4468
+msgid "Key"
+msgstr "Touche"
+
+#: capplets/e-conf/e-conf.c:4367 capplets/e-conf/e-conf.c:4554
+msgid "Action to perform"
+msgstr "Action a effectuer"
+
+#: capplets/e-conf/e-conf.c:4368
+msgid "Optional parameters"
+msgstr "Paramétres optionnels"
+
+#: capplets/e-conf/e-conf.c:4374
+msgid "List of keyboard shortcuts"
+msgstr "Liste des raccourcis clavier"
+
+#: capplets/e-conf/e-conf.c:4386
+msgid "New"
+msgstr "Nouveau"
+
+#. -----------------------------------------------------
+#: capplets/e-conf/e-conf.c:4450
+#, fuzzy
+msgid "Edit current selected keyboard shortcut"
+msgstr "Liste des raccourcis clavier"
+
+#: capplets/e-conf/e-conf.c:4478
+msgid "Change..."
+msgstr "Changer..."
+
+#: capplets/e-conf/e-conf.c:4492
+msgid "NONE"
+msgstr "AUCUN"
+
+#: capplets/e-conf/e-conf.c:4582
+msgid "Options for Action"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:4659
+msgid "Basic Options"
+msgstr "Options de Base"
+
+#: capplets/e-conf/e-conf.c:4666
+msgid "Desktops"
+msgstr "Bureaux"
+
+#: capplets/e-conf/e-conf.c:4673
+msgid "Behavior"
+msgstr "Comportement"
+
+#: capplets/e-conf/e-conf.c:4680
+msgid "Audio"
+msgstr "Audio"
+
+#: capplets/e-conf/e-conf.c:4687
+msgid "Special FX"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:4694
+msgid "Backgrounds"
+msgstr "Fonds d'écran"
+
+#: capplets/e-conf/e-conf.c:4737
+msgid "Themes"
+msgstr "Thèmes"
+
+#: capplets/e-conf/e-conf.c:4744
+msgid "Keyboard Shortcuts"
+msgstr "Raccourcis claviers"
+
+#: capplets/e-conf/e-conf.c:4825
+msgid "Enlightenment Configuration Editor"
+msgstr ""
+
+#: capplets/e-conf/e-conf.c:4832
+msgid "Scanning Enlightenment Configuration..."
+msgstr ""
+
+#: capplets/e-conf/e-conf_filesel.c:62
+msgid "Select a file to save"
+msgstr "Sélection du fichier à enregistrer"
+
+#: capplets/e-conf/e-conf_filesel.c:75 capplets/e-conf/e-conf_filesel.c:127
+#: capplets/e-conf/e-conf_filesel.c:558
+msgid "Select a file to load"
+msgstr "Sélection du fichier à charger"
+
+#: capplets/e-conf/e-conf_filesel.c:102
+#, fuzzy
+msgid "Set Printout settings"
+msgstr "Test du paramétrage"
+
+#: capplets/e-conf/e-conf_filesel.c:585
+#, fuzzy
+msgid "Saved Image Settings"
+msgstr "Paramétres de la pagination"
+
+#: capplets/e-conf/e-conf_filesel.c:592
+msgid "Print Command:"
+msgstr "Commande d'Impression:"
+
+#: capplets/e-conf/e-conf_filesel.c:605
+msgid "Print"
+msgstr "Imprimer"
+
+#: capplets/e-conf/e-conf_filesel.c:623
+msgid "Image Format:"
+msgstr "Format d'image:"
+
+#: capplets/e-conf/e-conf_filesel.c:694
+msgid "Quality Settings"
+msgstr "Paramétres de qualité"
+
+#: capplets/e-conf/e-conf_filesel.c:706
+msgid "Page Settings"
+msgstr "Paramétres de la pagination"
+
+#: capplets/e-conf/e-conf_filesel.c:792 capplets/e-conf/e-conf_filesel.c:793
+msgid "Scaling Factor:"
+msgstr "Facteur d'agrandissement:"
+
+#: capplets/e-conf/e-conf_filesel.c:822
+msgid "Select a file"
+msgstr "Sélectionnez un fichier"
+
+#: capplets/e-conf/e-conf_filesel.c:833
+msgid "Load all files in directory"
+msgstr "Charger tous les fichiers du répertoire"
+
+#: capplets/e-conf/e-conf_filesel.c:847
+msgid "Use Previews"
+msgstr "Utiliser les prévisualisations"
+
+#: capplets/e-conf/e-conf_filesel.c:857
+msgid "Image Information"
+msgstr "Informations sur l'image"
+
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:229
 msgid "Gnome editor"
 msgstr "Editeur Gnome"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:237
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:240
 msgid "Run In Terminal"
 msgstr "Exécuter dans un terminal"
 
@@ -193,11 +1150,11 @@ msgstr "Clic Clavier"
 
 #: capplets/keyboard-properties/keyboard-properties.c:247
 msgid "Click on keypress"
-msgstr "Frappe sonore"
+msgstr "Clic sur appui d'une touche"
 
 #: capplets/keyboard-properties/keyboard-properties.c:257
 msgid "Click volume"
-msgstr "Volume des clicks"
+msgstr "Volume des clics"
 
 #: capplets/keyboard-properties/keyboard-properties.c:264
 msgid "Test settings"
@@ -251,15 +1208,28 @@ msgstr "Voir"
 msgid "Edit"
 msgstr "Editer"
 
+#: capplets/mime-type/edit-window.c:239
+msgid "Set actions for "
+msgstr "Définir les actions pour le type "
+
+#: capplets/mime-type/mime-data.c:354
+msgid "Mime Type"
+msgstr "Type Mime"
+
+#: capplets/mime-type/mime-data.c:355
+msgid "Extension"
+msgstr "Extension"
+
 #: capplets/mime-type/mime-data.c:449
 msgid "You must enter a mime-type"
-msgstr ""
+msgstr "Vous devez saisir un type mime"
 
 #: capplets/mime-type/mime-data.c:454
 msgid ""
 "You must add either a regular-expression or\n"
 "a file-name extension"
-msgstr ""
+msgstr "Vous devez ajouter soit une expression rationnelle\n"
+"soit une extension de fichier"
 
 #: capplets/mime-type/mime-data.c:458
 msgid ""
@@ -268,14 +1238,17 @@ msgid ""
 "\n"
 "For Example:\n"
 "image/png"
-msgstr ""
+msgstr "Ecrivez votre type-mime sous la forme:\n"
+"CATEGORIE/TYPE\n"
+"\n"
+"Par Exemple:\n"
+"image/png"
 
 #: capplets/mime-type/mime-data.c:463
 msgid "This mime-type already exists"
-msgstr ""
+msgstr "Ce type mime existe déjà"
 
 #: capplets/mime-type/mime-data.c:561
-#, fuzzy
 msgid ""
 "Cannot create the file\n"
 "~/.gnome/mime-info/user.mime\n"
@@ -283,9 +1256,9 @@ msgid ""
 "We will not be able to save the state"
 msgstr ""
 "Impossible de créér le fichier\n"
-"~/.gnome/mime-info/user.keys\n"
+"~/.gnome/mime-info/user.mime\n"
 "\n"
-"Les changements d'états ne pouront pas être enregistrés"
+"L'état ne pourra pas être sauvegardé"
 
 #: capplets/mime-type/mime-info.c:440
 msgid ""
@@ -297,74 +1270,63 @@ msgstr ""
 "Impossible de créér le fichier\n"
 "~/.gnome/mime-info/user.keys\n"
 "\n"
-"Les changements d'états ne pouront pas être enregistrés"
-
-#: capplets/mime-type/mime-type-capplet.c:77
-#: capplets/wm-properties/wm-properties-capplet.c:1016
-msgid "Delete"
-msgstr "Effacer"
+"L'état ne pourra pas être sauvegardé"
 
 #: capplets/mime-type/mime-type-capplet.c:87
 #: capplets/wm-properties/wm-properties-capplet.c:1006
 msgid "Add..."
 msgstr "Ajouter..."
 
-#: capplets/mime-type/mime-type-capplet.c:91
-#: capplets/wm-properties/wm-properties-capplet.c:1011
-msgid "Edit..."
-msgstr "Editer..."
-
 #: capplets/mime-type/new-mime-window.c:20
-#, fuzzy
 msgid "Add Mime Type"
-msgstr "Type Mime: "
+msgstr "Ajouter un Type Mime"
 
 #: capplets/mime-type/new-mime-window.c:21
 msgid ""
 "Add a new Mime Type\n"
 "For example:  image/tiff; text/x-scheme"
 msgstr ""
+"Ajouter un nouveau Type Mime\n"
+"Par exemple:  image/tiff; text/x-scheme"
 
 #: capplets/mime-type/new-mime-window.c:26
-#, fuzzy
 msgid "Mime Type:"
 msgstr "Type Mime: "
 
 #: capplets/mime-type/new-mime-window.c:34
-#, fuzzy
 msgid "Extensions"
-msgstr "Extension: "
+msgstr "Extensions"
 
 #: capplets/mime-type/new-mime-window.c:38
 msgid ""
 "Type in the extensions for this mime-type.\n"
 "For example:  .html, .htm"
 msgstr ""
+"Saisir les extensions pour ce type mime.\n"
+"Par exemple:  .html, .htm"
 
 #: capplets/mime-type/new-mime-window.c:45
-#, fuzzy
 msgid "Extension:"
 msgstr "Extension: "
 
 #: capplets/mime-type/new-mime-window.c:50
-#, fuzzy
 msgid "Regular Expresions"
-msgstr "Première Expression Rationnelle: "
+msgstr "Expressions Rationnelles: "
 
 #: capplets/mime-type/new-mime-window.c:54
 msgid ""
 "You can set up two regular expressions here to identify the Mime Type\n"
 "by.  These fields are optional."
 msgstr ""
+"Vous pouvez identifier ce Type Mime par deux expressions régulières.\n"
+"Ces champs sont optionnels."
 
 #. gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
 #: capplets/mime-type/new-mime-window.c:64
-#, fuzzy
 msgid "First Regular Expression: "
 msgstr "Première Expression Rationnelle: "
 
 #: capplets/mime-type/new-mime-window.c:75
-#, fuzzy
 msgid "Second Regular Expression: "
 msgstr "Seconde Expression Rationnelle: "
 
@@ -395,7 +1357,7 @@ msgstr "Rapide"
 
 #: capplets/mouse-properties/mouse-properties.c:299
 msgid "Slow"
-msgstr "Lent"
+msgstr "Lente"
 
 #: capplets/mouse-properties/mouse-properties.c:310
 msgid "Threshold"
@@ -428,17 +1390,17 @@ msgstr "Economiseur d'écran Aléatoire"
 #: capplets/screensaver-properties/callbacks.c:494
 #: capplets/screensaver-properties/screensaver-properties-capplet.c:54
 msgid "Settings..."
-msgstr "Paramétres..."
+msgstr "Paramètres..."
 
 #. we need to special case random
 #: capplets/screensaver-properties/callbacks.c:502
 msgid "Random Settings"
-msgstr "Paramétres Aléatoires"
+msgstr "Paramètres Aléatoires"
 
 #: capplets/screensaver-properties/callbacks.c:512
 #, c-format
 msgid "%s Settings..."
-msgstr "Paramétres de %f..."
+msgstr "Paramètres de %s..."
 
 #: capplets/screensaver-properties/screensaver-dialog.c:46
 msgid "About:"
@@ -455,7 +1417,7 @@ msgstr "Auteur: INCONNU"
 #: capplets/screensaver-properties/screensaver-dialog.c:78
 #: capplets/session-properties/gsm-client-row.c:59
 msgid "Settings"
-msgstr "Paramétres"
+msgstr "Paramètres"
 
 #: capplets/screensaver-properties/screensaver-properties-capplet.c:36
 msgid "RANDOM SCREENSAVER"
@@ -470,13 +1432,13 @@ msgid ""
 "Pressing this button will popup a dialogbox that will help you setup the "
 "current screensaver."
 msgstr ""
-"Ce bouton ouvre une fenêtre de dialogue qui vous aidera a configurer "
+"Ce bouton ouvre une fenêtre de dialogue qui vous aidera à configurer "
 "l'économiseur d'écran."
 
 #. set up the initial frame, and get a vbox in which to pack things.
 #: capplets/screensaver-properties/screensaver-properties-capplet.c:85
 msgid "Screen Saver Settings"
-msgstr "Paramétres de l'économiseur d'écran"
+msgstr "Paramètres de l'économiseur d'écran"
 
 #: capplets/screensaver-properties/screensaver-properties-capplet.c:93
 msgid "Start After "
@@ -512,15 +1474,15 @@ msgstr "Démo de l'économiseur d'écran"
 
 #: capplets/session-properties/gsm-client-editor.c:100
 msgid "Order: "
-msgstr ""
+msgstr "Ordre: "
 
 #: capplets/session-properties/gsm-client-editor.c:110
 msgid "Style: "
-msgstr ""
+msgstr "Style: "
 
 #: capplets/session-properties/gsm-client-list.c:30
 msgid "This button sets the start order of the selected programs.\n"
-msgstr ""
+msgstr "Ce bouton définit l'ordre de démarrage des programmes sélectionnés.\n"
 
 #: capplets/session-properties/gsm-client-list.c:31
 msgid ""
@@ -530,6 +1492,13 @@ msgid ""
 "Trash programs are discarded on logout and can die;\n"
 "Settings programs are always started on every login."
 msgstr ""
+"Ce bouton définit le style du redémarrage des programmes sélectionnés.\n"
+"Les programmes normaux ne sont pas affectés par les fin de session \n"
+"mais peuvent se terminer;\n"
+"Les programmes regénérés ne sont pas autorisé à se terminer;\n"
+"Les programmes \"trash\" sont ignorés en fin de session et peuvent\n"
+"se terminer;\n"
+"Les programmes de paramètrage sont lancés à chaque début de session."
 
 #: capplets/session-properties/gsm-client-list.c:36
 msgid ""
@@ -540,56 +1509,60 @@ msgid ""
 "Saving programs are saving their session details;\n"
 "Programs which make no contact have Unknown states.\n"
 msgstr ""
+"Ce bouton produit une clé pour les états de programme suivants:\n"
+"Les programmes inactifs attendent de démarrer ou ont terminé;\n"
+"Les programmes en cours de démarrage ont du temps pour démarrer;\n"
+"Les programmes en cours d'exécution sont les membres normaux de la session;\n"
+"Les programmes en cours de sauvegarde archivent les éléments de leur session;\n"
+"Les programmes qui ne donnent pas signe de vie ont un état Inconnu.\n"
 
 #: capplets/session-properties/gsm-client-list.c:42
 msgid "This column gives the command used to start a program."
-msgstr ""
+msgstr "Cette colonne donne la commande utilisée pour démarrer le programme."
 
 #: capplets/session-properties/gsm-client-list.c:132
 msgid "Order"
-msgstr ""
+msgstr "Ordre"
 
 #: capplets/session-properties/gsm-client-list.c:132
 msgid "Style"
-msgstr ""
+msgstr "Style"
 
 #: capplets/session-properties/gsm-client-list.c:132
 msgid "State"
-msgstr ""
+msgstr "Etat"
 
 #: capplets/session-properties/gsm-client-list.c:132
-#, fuzzy
 msgid "Program"
-msgstr "Programme:"
+msgstr "Programme"
 
 #: capplets/session-properties/gsm-client-row.c:31
 msgid "Inactive"
-msgstr ""
+msgstr "Inactif"
 
 #: capplets/session-properties/gsm-client-row.c:32
 msgid "Waiting to start or already finished."
-msgstr ""
+msgstr "En attente du démarrage ou déjà terminé."
 
 #: capplets/session-properties/gsm-client-row.c:34
-#, fuzzy
 msgid "Starting"
-msgstr "Paramétres"
+msgstr "Démarrage en cours"
 
 #: capplets/session-properties/gsm-client-row.c:35
 msgid "Started but has not yet reported state."
-msgstr ""
+msgstr "A démarré mais n'a pas encore signalé son état."
 
 #: capplets/session-properties/gsm-client-row.c:37
 msgid "Running"
-msgstr ""
+msgstr "En cours d'exécution"
 
 #: capplets/session-properties/gsm-client-row.c:38
 msgid "A normal member of the session."
-msgstr ""
+msgstr "Membre normal de la session."
 
 #: capplets/session-properties/gsm-client-row.c:40
 msgid "Saving"
-msgstr ""
+msgstr "Enregistrement en cours"
 
 #: capplets/session-properties/gsm-client-row.c:41
 #, fuzzy
@@ -598,20 +1571,19 @@ msgstr "Initialiser les paramétres de session"
 
 #: capplets/session-properties/gsm-client-row.c:43
 msgid "Unknown"
-msgstr ""
+msgstr "Inconnu"
 
 #: capplets/session-properties/gsm-client-row.c:44
 msgid "State not reported within timeout."
-msgstr ""
+msgstr "État non signalé dans le temps imparti."
 
 #: capplets/session-properties/gsm-client-row.c:50
-#, fuzzy
 msgid "Normal"
-msgstr " Normale"
+msgstr " Normal"
 
 #: capplets/session-properties/gsm-client-row.c:51
 msgid "Unaffected by logouts but can die."
-msgstr ""
+msgstr "Insensible aux fins de sessions, mais peut se terminer."
 
 #: capplets/session-properties/gsm-client-row.c:53
 msgid "Respawn"
@@ -619,19 +1591,23 @@ msgstr ""
 
 #: capplets/session-properties/gsm-client-row.c:54
 msgid "Never allowed to die."
-msgstr ""
+msgstr "Jamais autorisé a terminer."
 
 #: capplets/session-properties/gsm-client-row.c:56
 msgid "Trash"
-msgstr ""
+msgstr "Trash"
 
 #: capplets/session-properties/gsm-client-row.c:57
 msgid "Discarded on logout and can die."
-msgstr ""
+msgstr "Ignoré en fin de session et peut se terminer."
 
 #: capplets/session-properties/gsm-client-row.c:60
 msgid "Always started on every login."
-msgstr ""
+msgstr "Lancé à chaque début de session."
+
+#: capplets/session-properties/gsm-protocol.c:503
+msgid "Remove Program"
+msgstr "Enlever Programme"
 
 #: capplets/session-properties/session-properties.c:147
 msgid "Program:"
@@ -656,7 +1632,7 @@ msgstr "Annuler Login"
 
 #: capplets/session-properties/session-properties.c:236
 msgid "Only display warnings."
-msgstr ""
+msgstr "Afficher seulement les avertissements."
 
 #: capplets/sound-properties/sound-properties.c:191
 msgid "Category"
@@ -670,13 +1646,9 @@ msgstr "Evénement"
 msgid "File to Play"
 msgstr "Fichier à jouer"
 
-#: capplets/sound-properties/sound-properties.c:248
-msgid "Enable"
-msgstr "Activer"
-
 #: capplets/sound-properties/sound-properties.c:255
 msgid "Enable sound server startup"
-msgstr ""
+msgstr "Autoriser l'initialisation du serveur de sons"
 
 #: capplets/sound-properties/sound-properties.c:263
 msgid "Sounds for events"
@@ -702,6 +1674,8 @@ msgstr "Evénements Sonores"
 msgid ""
 "This copy of the GNOME control center was not compiled with sound support"
 msgstr ""
+"Cette version du panneau de contrôle GNOME n'a pas été compilée avec le support "
+"pour le son"
 
 #: capplets/sound-properties/sound-properties.c:760
 msgid "The sound file for this event does not exist."
@@ -713,10 +1687,83 @@ msgid ""
 "You may want to install the gnome-audio package\n"
 "for a set of default sounds."
 msgstr ""
+"Il n'y a pas de fichier son défini pour cet événement.\n"
+"Vous pouvez installer le package gnome-audio\n"
+"pour avoir un ensemble de sons par défaut."
 
 #: capplets/sound-properties/sound-properties.c:768
 msgid "Close"
 msgstr "Fermer"
+
+#: capplets/theme-switcher/demo.c:50
+msgid "One"
+msgstr "Un"
+
+#: capplets/theme-switcher/demo.c:50
+msgid "Two"
+msgstr "Deux"
+
+#. just 8 short names that will serve as samples for titles in demo
+#: capplets/theme-switcher/demo.c:52
+msgid "Eenie"
+msgstr "Toto"
+
+#: capplets/theme-switcher/demo.c:52
+msgid "Meenie"
+msgstr "Pipo"
+
+#: capplets/theme-switcher/demo.c:53
+msgid "Mynie"
+msgstr "Penguin"
+
+#: capplets/theme-switcher/demo.c:53
+msgid "Moe"
+msgstr "Phanny"
+
+#: capplets/theme-switcher/demo.c:54
+msgid "Catcha"
+msgstr "Vincent"
+
+#: capplets/theme-switcher/demo.c:54
+msgid "Tiger"
+msgstr "Tigre"
+
+#: capplets/theme-switcher/demo.c:55
+msgid "By Its"
+msgstr "Valeur"
+
+#: capplets/theme-switcher/demo.c:55
+msgid "Toe"
+msgstr "Gasp"
+
+#: capplets/theme-switcher/demo.c:114
+msgid "Selected themes from above will be tested by previewing here."
+msgstr "Les thèmes sélectionnés au dessus sont prévisualisés ici."
+
+#: capplets/theme-switcher/demo.c:119
+msgid "Sample Button"
+msgstr "Bouton simple"
+
+#: capplets/theme-switcher/demo.c:123
+msgid "Sample Check Button"
+msgstr "Bouton de Sélection"
+
+#: capplets/theme-switcher/demo.c:128
+msgid "Sample Text Entry Field"
+msgstr "Zone de texte"
+
+#. column two
+#: capplets/theme-switcher/demo.c:135
+msgid "Radio Button 1"
+msgstr "Bouton radio 1"
+
+#: capplets/theme-switcher/demo.c:141
+msgid "Radio Button 2"
+msgstr "Bouton radio 2"
+
+#: capplets/theme-switcher/demo.c:147
+msgid "Radio Button 3"
+msgstr "Bouton radio 3"
 
 #: capplets/theme-switcher/gui.c:83
 #, c-format
@@ -731,7 +1778,7 @@ msgstr ""
 
 #: capplets/theme-switcher/gui.c:114
 msgid "Select a theme to install"
-msgstr "Sélectionnez un thème a installer"
+msgstr "Sélectionnez un thème à installer"
 
 #: capplets/theme-switcher/gui.c:191
 msgid "Available Themes"
@@ -750,7 +1797,7 @@ msgid ""
 "Install new\n"
 "theme..."
 msgstr ""
-"Installer le\n"
+"Installer un\n"
 "nouveau thème..."
 
 #. Font selector.
@@ -763,79 +1810,22 @@ msgstr "Police Utilisateur"
 msgid "Use custom font."
 msgstr "Utiliser une police personnalisée"
 
-#: capplets/theme-switcher/demo.c:50
-msgid "One"
-msgstr ""
+#: capplets/theme-switcher/install.c:26
+msgid "Home directory doesn't exist!\n"
+msgstr "Le répertoire personnel  n'existe pas!\n"
 
-#: capplets/theme-switcher/demo.c:50
-#, fuzzy
-msgid "Two"
-msgstr "Haut"
+#: capplets/theme-switcher/install.c:36
+msgid "Theme does not exist"
+msgstr "Le thème n'existe pas"
 
-#. just 8 short names that will serve as samples for titles in demo
-#: capplets/theme-switcher/demo.c:52
-#, fuzzy
-msgid "Eenie"
-msgstr "Evénement"
+#: capplets/theme-switcher/install.c:68
+#, c-format
+msgid "Command '%s' failed"
+msgstr "Échec de la command '%s'"
 
-#: capplets/theme-switcher/demo.c:52
-msgid "Meenie"
-msgstr ""
-
-#: capplets/theme-switcher/demo.c:53
-msgid "Mynie"
-msgstr ""
-
-#: capplets/theme-switcher/demo.c:53
-msgid "Moe"
-msgstr ""
-
-#: capplets/theme-switcher/demo.c:54
-msgid "Catcha"
-msgstr ""
-
-#: capplets/theme-switcher/demo.c:54
-#, fuzzy
-msgid "Tiger"
-msgstr "Mosaïque"
-
-#: capplets/theme-switcher/demo.c:55
-msgid "By Its"
-msgstr ""
-
-#: capplets/theme-switcher/demo.c:55
-#, fuzzy
-msgid "Toe"
-msgstr "Haut"
-
-#: capplets/theme-switcher/demo.c:114
-msgid "Selected themes from above will be tested by previewing here."
-msgstr ""
-
-#: capplets/theme-switcher/demo.c:119
-msgid "Sample Button"
-msgstr ""
-
-#: capplets/theme-switcher/demo.c:123
-msgid "Sample Check Button"
-msgstr ""
-
-#: capplets/theme-switcher/demo.c:128
-msgid "Sample Text Entry Field"
-msgstr ""
-
-#. column two
-#: capplets/theme-switcher/demo.c:135
-msgid "Radio Button 1"
-msgstr ""
-
-#: capplets/theme-switcher/demo.c:141
-msgid "Radio Button 2"
-msgstr ""
-
-#: capplets/theme-switcher/demo.c:147
-msgid "Radio Button 3"
-msgstr ""
+#: capplets/theme-switcher/install.c:73
+msgid "Unknown file format"
+msgstr "Format de fichier inconnu"
 
 #: capplets/ui-properties/ui-properties.c:53
 msgid "Default Gtk setting"
@@ -917,7 +1907,7 @@ msgstr "Position du dialogue"
 
 #: capplets/ui-properties/ui-properties.c:216
 msgid "Dialog hints"
-msgstr "Dialogues"
+msgstr "Suggestions de placement"
 
 #: capplets/ui-properties/ui-properties.c:223
 msgid "Use statusbar instead of dialog when possible"
@@ -935,84 +1925,92 @@ msgstr "Barres d'outils détachables et mobiles"
 msgid "Can detach and move menubars"
 msgstr "Barres de menu détachables et mobiles"
 
-#: capplets/ui-properties/ui-properties.c:270
+#: capplets/ui-properties/ui-properties.c:269
+msgid "Menus can be torn off"
+msgstr "Les menus peuvent être séparés"
+
+#: capplets/ui-properties/ui-properties.c:279
 msgid "Menubars have relieved border"
 msgstr "Bords avec relief pour les barres de menu"
 
-#: capplets/ui-properties/ui-properties.c:279
+#: capplets/ui-properties/ui-properties.c:288
 msgid "Toolbars have relieved border"
 msgstr "Bords avec relief pour les barres d'outils"
 
-#: capplets/ui-properties/ui-properties.c:288
+#: capplets/ui-properties/ui-properties.c:297
 msgid "Toolbar buttons have relieved border"
 msgstr "Bords avec relief pour les boutons des barres d'outils"
 
-#: capplets/ui-properties/ui-properties.c:297
+#: capplets/ui-properties/ui-properties.c:306
 msgid "Toolbars have line separators"
 msgstr "Barres d'outils avec des lignes de séparation"
 
-#: capplets/ui-properties/ui-properties.c:306
+#: capplets/ui-properties/ui-properties.c:315
 msgid "Toolbars have text labels"
 msgstr "Barres d'outils avec des labels textuels"
 
-#: capplets/ui-properties/ui-properties.c:315
+#: capplets/ui-properties/ui-properties.c:324
 msgid "Statusbar is interactive when possible"
 msgstr "Barre d'état interactive si possible"
 
-#: capplets/ui-properties/ui-properties.c:324
+#: capplets/ui-properties/ui-properties.c:333
 msgid "Statusbar progress meter on right"
-msgstr ""
+msgstr "Barre d'état avec indicateur de progression à droite"
 
-#: capplets/ui-properties/ui-properties.c:335
+#: capplets/ui-properties/ui-properties.c:344
 msgid "Dialog buttons have icons"
 msgstr "Boutons de dialogue avec icones"
 
-#: capplets/ui-properties/ui-properties.c:347
+#: capplets/ui-properties/ui-properties.c:356
 msgid "Menu items have icons"
 msgstr "Entrées des menus avec icones"
 
-#: capplets/ui-properties/ui-properties.c:366
+#: capplets/ui-properties/ui-properties.c:375
 msgid "Default MDI mode"
 msgstr "Mode MDI par défaut"
 
-#: capplets/ui-properties/ui-properties.c:371
+#: capplets/ui-properties/ui-properties.c:380
 msgid "MDI notebook tab position"
 msgstr "Position des onglets des carnets MDI"
 
-#: capplets/url-properties/url-properties.c:69
+#: capplets/url-properties/url-properties.c:48
+msgid "Error initializing the `url-properties' capplet."
+msgstr ""
+
+#: capplets/url-properties/url-properties.c:71
 msgid "Protocol"
 msgstr "Protocole"
 
-#: capplets/url-properties/url-properties.c:69
+#: capplets/url-properties/url-properties.c:71
 msgid "Command"
 msgstr "Commande"
 
-#: capplets/url-properties/url-properties.c:85
+#: capplets/url-properties/url-properties.c:87
 msgid "handler:"
-msgstr "gestionnaire:"
+msgstr "application:"
 
 #. set some commonly used handlers
-#: capplets/url-properties/url-properties.c:95
+#: capplets/url-properties/url-properties.c:97
 msgid "Netscape"
 msgstr "Netscape"
 
-#: capplets/url-properties/url-properties.c:100
+#: capplets/url-properties/url-properties.c:102
 msgid "Netscape (new window)"
 msgstr "Netscape (nouvelle fenêtre)"
 
-#: capplets/url-properties/url-properties.c:106
+#: capplets/url-properties/url-properties.c:108
 msgid "Help browser"
 msgstr "Navigateur d'Aide Gnome"
 
-#: capplets/url-properties/url-properties.c:111
+#: capplets/url-properties/url-properties.c:113
 msgid "Help browser (new window)"
-msgstr "Help browser (nouvelle fenêtre)"
+msgstr "Navigateur d'Aide Gnome (nouvelle fenêtre)"
 
-#: capplets/url-properties/url-properties.c:123
+#: capplets/url-properties/url-properties.c:125
 msgid "Set"
-msgstr ""
+msgstr "Ajouter"
 
-#: capplets/url-properties/url-properties.c:131
+#: capplets/url-properties/url-properties.c:133
 msgid "Remove"
 msgstr "Enlever"
 
@@ -1022,6 +2020,8 @@ msgid ""
 "Starting %s\n"
 "(%d seconds left before operation times out)"
 msgstr ""
+"Démarrer %s\n"
+"(%d secondes restantes avant l'expiration du délai)"
 
 #: capplets/wm-properties/wm-properties-capplet.c:301
 msgid " (Current)"
@@ -1036,9 +2036,9 @@ msgid " (Not found)"
 msgstr " (Non trouvé)"
 
 #: capplets/wm-properties/wm-properties-capplet.c:396
-#, fuzzy
 msgid "Previous window manager did not die\n"
-msgstr "Laisser le gestionnaire de fenêtres décider"
+msgstr "Le gestionnaire de fenêtre précédent fonctionne"
+"toujours et ne s'est pas terminé\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:429
 #, c-format
@@ -1046,6 +2046,8 @@ msgid ""
 "Could not start '%s'.\n"
 "Falling back to previous window manager '%s'\n"
 msgstr ""
+"Impossible de lancer '%s'.\n"
+"Retour au gestionnaire de fenêtre précédent '%s'\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:460
 msgid ""
@@ -1054,24 +2056,15 @@ msgid ""
 "do this by selecting \"Run Program\" in the\n"
 "foot menu\n"
 msgstr ""
+"Impossible de lancer le gestionnaire de fenêtres par défaut.\n"
+"Il vous faut lancer un gestionnaire de fenêtre manuellement.\n"
+"Sélectionnez pour cela \"Exécuter...\" dans le\n"
+"menu principal du panel de Gnome.\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:684
 #: capplets/wm-properties/wm-properties-capplet.c:840
 msgid "Add New Window Manager"
 msgstr "Ajouter un nouveau gestionnaire de fenêtres"
-
-#: capplets/wm-properties/wm-properties-capplet.c:685
-#: capplets/wm-properties/wm-properties-capplet.c:793
-#: capplets/wm-properties/wm-properties-capplet.c:800
-#: capplets/wm-properties/wm-properties-capplet.c:940
-#: control-center/capplet-manager.c:180
-msgid "OK"
-msgstr "OK"
-
-#: capplets/wm-properties/wm-properties-capplet.c:685
-#: control-center/capplet-manager.c:185
-msgid "Cancel"
-msgstr "Annuler"
 
 #: capplets/wm-properties/wm-properties-capplet.c:696
 msgid "Name:"
@@ -1091,26 +2084,27 @@ msgstr "Le gestionnaire de fenêtre est géré par la session"
 
 #: capplets/wm-properties/wm-properties-capplet.c:791
 msgid "Name cannot be empty"
-msgstr "Le nom ne peux etre vide"
+msgstr "Le nom ne peut pas être vide"
 
 #: capplets/wm-properties/wm-properties-capplet.c:798
 msgid "Command cannot be empty"
-msgstr "La commande ne peux être vide"
+msgstr "La commande ne peut pas être vide"
 
 #: capplets/wm-properties/wm-properties-capplet.c:884
-#, fuzzy
 msgid "Edit Window Manager"
-msgstr "Laisser le gestionnaire de fenêtres décider"
+msgstr "Editer le gestionnaire de fenêtres"
 
 #: capplets/wm-properties/wm-properties-capplet.c:939
 msgid "You cannot delete the current Window Manager"
-msgstr "Vous ne pouvez pas effacer le gestionnaire de fenêtres actuel"
+msgstr "Vous ne pouvez pas supprimer le gestionnaire de fenêtres actuel"
 
 #: capplets/wm-properties/wm-properties-capplet.c:1051
 msgid ""
 "an initialization error occurred while starting 'wm-properties-capplet'.\n"
 "aborting...\n"
 msgstr ""
+"une erreur d'initialisation a eu lieu au lancement de 'wm-propertier-cappler'.\n"
+"abandon...\n"
 
 #: control-center/callbacks.c:79
 msgid "GNOME Control Center"
@@ -1119,14 +2113,6 @@ msgstr "Centre de Contrôle GNOME"
 #: control-center/callbacks.c:82
 msgid "Desktop Properties manager."
 msgstr "Gestionnaires des Propriétés du Bureau."
-
-#: control-center/capplet-manager.c:170
-msgid "Try"
-msgstr "Essayer"
-
-#: control-center/capplet-manager.c:175
-msgid "Revert"
-msgstr "Enlever"
 
 #: control-center/capplet-manager.c:188 control-center/main.c:30
 msgid "Help"
@@ -1150,7 +2136,7 @@ msgstr "CAPID"
 
 #: control-center/capplet-widget-libs.c:51
 msgid "X ID of the socket it's plugged into"
-msgstr ""
+msgstr "X ID de la socket associée"
 
 #: control-center/capplet-widget-libs.c:51
 msgid "XID"
@@ -1166,11 +2152,13 @@ msgstr "IOR"
 
 #: control-center/capplet-widget-libs.c:53
 msgid "Initialize session settings"
-msgstr "Initialiser les paramétres de session"
+msgstr "Initialiser les paramètres de session"
 
 #: control-center/capplet-widget-libs.c:54
 msgid "Ignore default action.  Used for custom init-session cases"
 msgstr ""
+"Ignorer les actions par défaut. Utilisé dans les cas\n"
+"d'initialisation de session personalisée"
 
 #: control-center/corba-glue.c:75
 msgid "capplet-command to be run."
@@ -1199,402 +2187,10 @@ msgid ""
 "The following modules have had changes made, but not committed.  If you "
 "would like to edit them, please double click on the appropriate entry."
 msgstr ""
+"Les modules suivants ont subi des modifications qui n'ont pas été validées. "
+"Si vous souhaiter les éditer, double-cliquez sur les champs correspondants."
 
 #. create the app
 #: control-center/main.c:162
 msgid "Control Center"
 msgstr "Centre de Contrôle"
-
-#~ msgid "Set background image."
-#~ msgstr "Changer l'image de fond."
-
-#~ msgid "IMAGE-FILE"
-#~ msgstr "FICHIER-IMAGE"
-
-#~ msgid "Run command"
-#~ msgstr "Exécuter Commande"
-
-#~ msgid "Restart Enlightenment"
-#~ msgstr "Redémmarer Enlightenment"
-
-#~ msgid "Exit Enlightenment"
-#~ msgstr "Quitter Enlightenment"
-
-#~ msgid "Goto Next Desktop"
-#~ msgstr "Aller au Bureau Suivant"
-
-#~ msgid "Goto Previous Deskop"
-#~ msgstr "Aller au Bureau Précédent"
-
-#~ msgid "Goto Desktop"
-#~ msgstr "Aller au Bureau"
-
-#, fuzzy
-#~ msgid "Raise Desktop"
-#~ msgstr "Séparer les bureaux"
-
-#, fuzzy
-#~ msgid "Lower Desktop"
-#~ msgstr "Séparer les bureaux"
-
-#~ msgid "Cleanup Windows"
-#~ msgstr "Nettoyer Fenêtres"
-
-#, fuzzy
-#~ msgid "Move mouse pointer to left"
-#~ msgstr "Au pointeur de la souris"
-
-#, fuzzy
-#~ msgid "Move mouse pointer to right"
-#~ msgstr "Au pointeur de la souris"
-
-#, fuzzy
-#~ msgid "Move mouse pointer up"
-#~ msgstr "Au pointeur de la souris"
-
-#, fuzzy
-#~ msgid "Move mouse pointer down"
-#~ msgstr "Au pointeur de la souris"
-
-#, fuzzy
-#~ msgid "Move mouse pointer by [X Y]"
-#~ msgstr "Au pointeur de la souris"
-
-#~ msgid "Raise Window"
-#~ msgstr "Élever Fenêtre"
-
-#~ msgid "Lower Window"
-#~ msgstr "Abaisser Fenêtre"
-
-#~ msgid "Close Window"
-#~ msgstr "Fermer Fenêtre"
-
-#~ msgid "Annihilate Window"
-#~ msgstr "Annihiler Fenêtre"
-
-#~ msgid "Stick / Unstick Window"
-#~ msgstr "Coller / Décoller Fenêtre"
-
-#~ msgid "Iconify Window"
-#~ msgstr "Iconifier Fenêtre"
-
-#~ msgid "Shade / Unshade Window"
-#~ msgstr "Ombrer / Désombrer Fenêtre"
-
-#~ msgid "Maximise Height of Window"
-#~ msgstr "Maximiser la hauteur de la fenêtre"
-
-#~ msgid "Maximise Height of Window to whole screen"
-#~ msgstr "Maximiser la hauteur de la fenêtre pour tenir dans l'écran"
-
-#, fuzzy
-#~ msgid "Maximise Height of Window toavailable space"
-#~ msgstr "Maximiser la hauteur pour tenir dans l'écran"
-
-#, fuzzy
-#~ msgid "Maximise Width of Window"
-#~ msgstr "Maximiser la largeur pour tenir dans l'écran"
-
-#~ msgid "Maximise Width of Window to whole screen"
-#~ msgstr "Maximiser la largeur de la fenêtre pour occuper tout l'écran"
-
-#, fuzzy
-#~ msgid "Maximise Width of Window toavailable space"
-#~ msgstr "Maximiser la largeur pour tenir dans l'écran"
-
-#~ msgid "Maximise Size of Window"
-#~ msgstr "Maximiser la taille de la fenêtre"
-
-#, fuzzy
-#~ msgid "Maximise Size of Window to whole screen"
-#~ msgstr "Maximiser la largeur pour tenir dans l'écran"
-
-#~ msgid "Send window to next desktop"
-#~ msgstr "Envoyer la fenêtre sur le bureau suivant"
-
-#~ msgid "Send window to previous desktop"
-#~ msgstr "Envoyer la fenêtre sur le bureau précédent"
-
-#, fuzzy
-#~ msgid "Remember all Window settings"
-#~ msgstr "Paramétres Aléatoires"
-
-#, fuzzy
-#~ msgid "ALT"
-#~ msgstr "CAPPLET"
-
-#~ msgid "%1.0f Desktop"
-#~ msgstr "%1.0f Bureau"
-
-#~ msgid "%1.0f Desktops"
-#~ msgstr "%1.0f Bureaux"
-
-#~ msgid "-"
-#~ msgstr "-"
-
-#~ msgid "+"
-#~ msgstr "+"
-
-#~ msgid "Opaque"
-#~ msgstr "Opaque"
-
-#, fuzzy
-#~ msgid "Lined"
-#~ msgstr "Mosaïque"
-
-#~ msgid "Box"
-#~ msgstr "Boîte"
-
-#~ msgid "Shaded"
-#~ msgstr "Ombré"
-
-#~ msgid "Semi-Solid"
-#~ msgstr "Semi-solide"
-
-#~ msgid "Translucent"
-#~ msgstr "Translucide"
-
-#~ msgid "Mouse Pointer"
-#~ msgstr "Pointeur souris"
-
-#~ msgid "Move Methods"
-#~ msgstr "Méthodes de déplacement"
-
-#~ msgid "Resize Methods"
-#~ msgstr "Méthodes de redimensionnement"
-
-#~ msgid "Keyboard focus follows"
-#~ msgstr "Le focus clavier suit la souris"
-
-#~ msgid "Window Sliding Methods"
-#~ msgstr "Méthodes de déplacement des fenêtres"
-
-#~ msgid "Animate menus"
-#~ msgstr "Animer les menus"
-
-#~ msgid "All new windows that appear get the keyboard focus"
-#~ msgstr "Les nouvelles fenêtres obtiennent le focus clavier"
-
-#, fuzzy
-#~ msgid "All new popup windows get the keyboard focus"
-#~ msgstr "Les nouvelles fenêtres obtiennent le focus clavier"
-
-#, fuzzy
-#~ msgid "Only new popup windows whose owner is focused get the keyboard focus"
-#~ msgstr "Les nouvelles fenêtres obtiennent le focus clavier"
-
-#~ msgid "Miscellaneous"
-#~ msgstr "Divers"
-
-#~ msgid "Tooltips ON/OFF & timeout for tooltip popup (sec)"
-#~ msgstr "Bulles d'aides ON/OFF & timeout (sec)"
-
-#~ msgid "Automatic raising of windows after X seconds"
-#~ msgstr "Elévation automatique des fenêtres après X secondes"
-
-#~ msgid "Display icons when windows are iconified"
-#~ msgstr "Afficher une icone pour les fenêtres iconifiées"
-
-#~ msgid "Place windows manually"
-#~ msgstr "Placer les fenêtres manuellement"
-
-#~ msgid "Size of Virtual Screen"
-#~ msgstr "Taille de l'écran virtuel"
-
-#~ msgid "Separate Desktops"
-#~ msgstr "Séparer les bureaux"
-
-#~ msgid "Number of colours in gradient"
-#~ msgstr "Nombre de couleurs en dégradé"
-
-#~ msgid "2"
-#~ msgstr "2"
-
-#~ msgid "3"
-#~ msgstr "3"
-
-#~ msgid "5"
-#~ msgstr "5"
-
-#~ msgid "Image file"
-#~ msgstr "Fichier image"
-
-#~ msgid "Browse"
-#~ msgstr "Parcourir"
-
-#~ msgid "None"
-#~ msgstr "Aucun"
-
-#~ msgid "Image display options"
-#~ msgstr "Options de l'affichage des images"
-
-#~ msgid "Maximise height to fit screen"
-#~ msgstr "Maximiser la hauteur pour tenir dans l'écran"
-
-#~ msgid "Maximise width to fit screen"
-#~ msgstr "Maximiser la largeur pour tenir dans l'écran"
-
-#~ msgid "Top left"
-#~ msgstr "Haut gauche"
-
-#~ msgid "Top middle"
-#~ msgstr "Haut milieu"
-
-#~ msgid "Top right"
-#~ msgstr "Haut droite"
-
-#~ msgid "Right middle"
-#~ msgstr "Droite milieu"
-
-#~ msgid "Bottom right"
-#~ msgstr "Bas droite"
-
-#~ msgid "Bottom middle"
-#~ msgstr "Bas milieu"
-
-#~ msgid "Bottom left"
-#~ msgstr "Bas gauche"
-
-#~ msgid "Left middle"
-#~ msgstr "Gauche milieu"
-
-#~ msgid "Solid Colour"
-#~ msgstr "Couleur unie"
-
-#~ msgid "Background Image"
-#~ msgstr "Image de Fond"
-
-#~ msgid "Overlayed Logo"
-#~ msgstr "Logo superposé"
-
-#~ msgid ""
-#~ "Please select the attribute of this background\n"
-#~ "you wish to change below"
-#~ msgstr ""
-#~ "Choisissez les attributs de ce fond que\n"
-#~ "vous désirrez changer"
-
-#~ msgid "Done"
-#~ msgstr "Effectué"
-
-#~ msgid "No background"
-#~ msgstr "Pas de fond d'écran"
-
-#~ msgid "Add new..."
-#~ msgstr "Ajouter un nouveau..."
-
-#~ msgid "Add a new background bookmark to your list"
-#~ msgstr "Ajouter un nouveau signet de fond d'écran à votre liste"
-
-#~ msgid "Remove this background bookmark from the list"
-#~ msgstr "Enlever ce signet de la liste"
-
-#~ msgid "Edit the settings for this background bookmark"
-#~ msgstr "Editer les paramétres de ce signet"
-
-#~ msgid "Enable sounds in Enlightenment"
-#~ msgstr "Activer les effets sonores dans Enlightenment"
-
-#~ msgid "Current theme selection"
-#~ msgstr "Thème actuellement sélectionné"
-
-#~ msgid "Modifier"
-#~ msgstr "Modificateur"
-
-#~ msgid "Key"
-#~ msgstr "Touche"
-
-#~ msgid "Action to perform"
-#~ msgstr "Action a effectuer"
-
-#~ msgid "Optional parameters"
-#~ msgstr "Paramétres optionnels"
-
-#~ msgid "List of keyboard shortcuts"
-#~ msgstr "Liste des raccourcis clavier"
-
-#~ msgid "New"
-#~ msgstr "Nouveau"
-
-#~ msgid "Change..."
-#~ msgstr "Changer..."
-
-#~ msgid "NONE"
-#~ msgstr "AUCUN"
-
-#~ msgid "Basic Options"
-#~ msgstr "Options de Base"
-
-#~ msgid "Desktops"
-#~ msgstr "Bureaux"
-
-#~ msgid "Behavior"
-#~ msgstr "Comportement"
-
-#~ msgid "Audio"
-#~ msgstr "Audio"
-
-#~ msgid "Backgrounds"
-#~ msgstr "Fonds d'écran"
-
-#~ msgid "Themes"
-#~ msgstr "Thèmes"
-
-#~ msgid "Keyboard Shortcuts"
-#~ msgstr "Raccourcis claviers"
-
-#~ msgid "Select a file to save"
-#~ msgstr "Sélection du fichier à enregistrer"
-
-#~ msgid "Select a file to load"
-#~ msgstr "Sélection du fichier à charger"
-
-#, fuzzy
-#~ msgid "Set Printout settings"
-#~ msgstr "Test du paramétrage"
-
-#, fuzzy
-#~ msgid "Saved Image Settings"
-#~ msgstr "Paramétres de la pagination"
-
-#~ msgid "Print Command:"
-#~ msgstr "Commande d'Impression:"
-
-#~ msgid "Print"
-#~ msgstr "Imprimer"
-
-#~ msgid "Image Format:"
-#~ msgstr "Format d'image:"
-
-#~ msgid "Quality Settings"
-#~ msgstr "Paramétres de qualité"
-
-#~ msgid "Page Settings"
-#~ msgstr "Paramétres de la pagination"
-
-#~ msgid "Scaling Factor:"
-#~ msgstr "Facteur d'agrandissement:"
-
-#~ msgid "Select a file"
-#~ msgstr "Sélectionnez un fichier"
-
-#~ msgid "Load all files in directory"
-#~ msgstr "Charger tous les fichiers du répertoire"
-
-#~ msgid "Use Previews"
-#~ msgstr "Utiliser les prévisualisations"
-
-#~ msgid "Image Information"
-#~ msgstr "Informations sur l'image"
-
-#~ msgid "Home directory doesn't exist!\n"
-#~ msgstr "Le répertoire personnel  n'existe pas!\n"
-
-#~ msgid "Theme does not exist"
-#~ msgstr "Le thème n'existe pas"
-
-#~ msgid "Command '%s' failed"
-#~ msgstr "Échec de la command '%s'"
-
-#~ msgid "Unknown file format"
-#~ msgstr "Format de fichier inconnu"
