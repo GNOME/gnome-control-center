@@ -1,8 +1,16 @@
+2000-08-18  Bradford Hovinen  <hovinen@helixcode.com>
+
+	* preview.c (setup_path): Use setenv only when available, try to
+	use putenv otherwise
+
 2000-08-17  Stanislav Brabec  <utx@penguin.cz>
 
 	* screensavers/Makefile.am: Search .xml files in srcdir.
 
 2000-08-16  Bradford Hovinen  <hovinen@helixcode.com>
+
+	* prefs-widget.c (prefs_widget_get_prefs): Set power control
+	sensitivity when reading preferences structure
 
 	* preferences.c (preferences_write_xml): 
 	(preferences_read_xml): Added missing entries stored in

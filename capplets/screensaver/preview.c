@@ -92,6 +92,9 @@ setup_path (void)
 {
 	GString *newpath;
 	char *path;
+#if !defined(HAVE_SETENV) && defined(HAVE_PUTENV)
+	char *str;
+#endif
 	GList *node;
 
 	node = get_screensaver_dir_list ();
@@ -104,7 +107,14 @@ setup_path (void)
 		g_string_append (newpath, (gchar *) node->data);
 	}
 
+#if defined(HAVE_SETENV)
 	setenv ("PATH", newpath->str, TRUE);
+#elif defined(HAVE_PUTENV)
+	str = g_strdup_printf ("PATH=%s", newpath->str);
+	putenv (str);
+	g_free (str);
+#endif
+
 	g_string_free (newpath, TRUE);
 }
 

@@ -854,6 +854,8 @@ prefs_widget_get_prefs (PrefsWidget *prefs_widget, Preferences *prefs)
 	GtkAdjustment *adjustment;
 	GdkVisual *visual;
 
+	/* Selection mode */
+
 	prefs_widget->selection_mode = prefs->selection_mode;
 
 	switch (prefs->selection_mode) {
@@ -874,6 +876,8 @@ prefs_widget_get_prefs (PrefsWidget *prefs_widget, Preferences *prefs)
 		break;
 	}
 
+	/* Basic options */
+
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
 	
 	gtk_spin_button_set_value 
@@ -883,6 +887,8 @@ prefs_widget_get_prefs (PrefsWidget *prefs_widget, Preferences *prefs)
 	gtk_spin_button_set_value 
 		(GTK_SPIN_BUTTON (prefs_widget->cycle_length_widget),
 		 prefs->cycle);
+
+	/* Locking controls */
 
 	gtk_toggle_button_set_active 
 		(GTK_TOGGLE_BUTTON (prefs_widget->lock_widget), prefs->lock);
@@ -898,6 +904,10 @@ prefs_widget_get_prefs (PrefsWidget *prefs_widget, Preferences *prefs)
 	gtk_toggle_button_set_active 
 		(GTK_TOGGLE_BUTTON (prefs_widget->enable_timeout_widget),
 		 (gboolean) prefs->lock_timeout);
+
+	set_lock_controls_sensitive (prefs_widget, prefs->lock);
+
+	/* Power management controls */
 	
 	gtk_toggle_button_set_active 
 		(GTK_TOGGLE_BUTTON (prefs_widget->pwr_manage_enable), 
@@ -907,8 +917,6 @@ prefs_widget_get_prefs (PrefsWidget *prefs_widget, Preferences *prefs)
 		(GTK_SPIN_BUTTON (prefs_widget->standby_time_widget),
 		 prefs->standby_time);
 
-	set_standby_time_sensitive (prefs_widget, 
-				    (gboolean) prefs->standby_time);
 	gtk_toggle_button_set_active
 		(GTK_TOGGLE_BUTTON (prefs_widget->standby_monitor_toggle),
 		 (gboolean) prefs->standby_time);
@@ -917,8 +925,6 @@ prefs_widget_get_prefs (PrefsWidget *prefs_widget, Preferences *prefs)
 		(GTK_SPIN_BUTTON (prefs_widget->suspend_time_widget),
 		 prefs->suspend_time);
 
-	set_suspend_time_sensitive (prefs_widget, 
-				    (gboolean) prefs->suspend_time);
 	gtk_toggle_button_set_active
 		(GTK_TOGGLE_BUTTON (prefs_widget->suspend_monitor_toggle),
 		 (gboolean) prefs->suspend_time);
@@ -927,13 +933,25 @@ prefs_widget_get_prefs (PrefsWidget *prefs_widget, Preferences *prefs)
 		(GTK_SPIN_BUTTON (prefs_widget->shut_down_time_widget),
 		 prefs->power_down_time);
 
-	set_power_down_time_sensitive (prefs_widget, 
-				       (gboolean) prefs->power_down_time);
 	gtk_toggle_button_set_active
 		(GTK_TOGGLE_BUTTON (prefs_widget->shut_down_monitor_toggle),
 		 (gboolean) prefs->power_down_time);
 
-	set_lock_controls_sensitive (prefs_widget, prefs->lock);
+	if (prefs->power_management) {
+		set_power_controls_sensitive (prefs_widget, TRUE);
+
+		set_standby_time_sensitive (prefs_widget, 
+					    (gboolean) prefs->standby_time);
+		set_suspend_time_sensitive (prefs_widget, 
+					    (gboolean) prefs->suspend_time);
+		set_power_down_time_sensitive 
+			(prefs_widget, (gboolean) prefs->power_down_time);
+
+	} else {
+		set_power_controls_sensitive (prefs_widget, FALSE);
+	}
+
+	/* Advanced options */
 
 	adjustment = gtk_range_get_adjustment 
 		(GTK_RANGE (prefs_widget->nice_widget));
@@ -942,6 +960,8 @@ prefs_widget_get_prefs (PrefsWidget *prefs_widget, Preferences *prefs)
 	gtk_toggle_button_set_active 
 		(GTK_TOGGLE_BUTTON (prefs_widget->verbose_widget),
 		 prefs->verbose);
+
+	/* Colormap and fade controls */
 
 	visual = gdk_visual_get_system ();
 
@@ -994,6 +1014,8 @@ prefs_widget_get_prefs (PrefsWidget *prefs_widget, Preferences *prefs)
 
 		set_fade_controls_sensitive (prefs_widget, FALSE);
 	}
+
+	/* Screensavers list */
 
 	prefs_widget_set_screensavers (prefs_widget,
 				       prefs->screensavers,
