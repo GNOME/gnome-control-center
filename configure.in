@@ -28,13 +28,13 @@ ALL_LINGUAS="ar az be bg ca cs da de el en_GB es et fi fr ga gl hr hu it ja ko l
 
 GETTEXT_PACKAGE=control-center-2.0
 AC_SUBST(GETTEXT_PACKAGE)
-AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE")
+AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [Gettext package])
 
 AM_GLIB_GNU_GETTEXT
 
 AC_CHECK_FUNCS(usleep)
-AC_CHECK_FUNCS(putenv,[AC_DEFINE(HAVE_PUTENV)])
-AC_CHECK_FUNCS(setenv,[AC_DEFINE(HAVE_SETENV)])
+AC_CHECK_FUNCS(putenv,[AC_DEFINE(HAVE_PUTENV,,[putenv])])
+AC_CHECK_FUNCS(setenv,[AC_DEFINE(HAVE_SETENV,,[setenv])])
 
 AC_PATH_XTRA
 x_libs="$X_PRE_LIBS $X_LIBS -lX11 $X_EXTRA_LIBS"
@@ -68,7 +68,7 @@ dnl
 xft_modules=
 if $PKG_CONFIG --exists xft ; then
   xft_modules="xft"
-  AC_DEFINE(HAVE_XFT2)
+  AC_DEFINE(HAVE_XFT2,,[Build Xft functionality to the font capplet])
 fi
 
 PKG_CHECK_MODULES(FONT_CAPPLET, $COMMON_MODULES $xft_modules)
@@ -208,7 +208,7 @@ else
   real_prefix=${prefix}
 fi
 
-AC_DEFINE_UNQUOTED(GNOMECC_DATA_DIR, "${real_prefix}/share/${GETTEXT_PACKAGE}")
+AC_DEFINE_UNQUOTED(GNOMECC_DATA_DIR, "${real_prefix}/share/${GETTEXT_PACKAGE}",[Path to gnomecc data files])
 GNOMECC_ICONS_DIR='$(datadir)/'${GETTEXT_PACKAGE}'/icons'
 AC_SUBST(GNOMECC_ICONS_DIR)
 GNOMECC_DESKTOP_DIR='$(datadir)/'${GETTEXT_PACKAGE}'/capplets'
