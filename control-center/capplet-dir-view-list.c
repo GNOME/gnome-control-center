@@ -184,7 +184,6 @@ sidebar_arrow_update (CappletDirView *view)
 	GtkTreeIter iter;
 	int enabled, i;
 
-	g_print ("Hi\n");
 	if (!data->arrow)
 	{
 		gchar *file = g_concat_dir_and_file (ART_DIR, "active.png");
@@ -207,7 +206,6 @@ sidebar_arrow_update (CappletDirView *view)
 		enabled++;
 	}
 
-	g_print ("okay\n");
 	for (i = 0, list = root; list; list = list->next)
 	{
 		CappletDirEntry *dir = CAPPLET_DIR_ENTRY (list->data);
@@ -225,7 +223,6 @@ sidebar_arrow_update (CappletDirView *view)
 	}
 
 	g_slist_free_1 (root);
-	g_print ("right\n");
 }
 
 static void
@@ -234,7 +231,6 @@ sidebar_populate (CappletDirView *view)
 	ListViewData *data = view->view_data;
 	GSList *list, *root;
 
-	g_print ("Hi 2\n");
 	if (data->sidebar_populated)
 	{
 		sidebar_arrow_update (view);
@@ -314,8 +310,6 @@ list_populate (CappletDirView *view)
 		gnome_icon_list_insert_item (GNOME_ICON_LIST (view->view_data), i, item, 
 					     CAPPLET_DIR_ENTRY (list->data)->label);
 #else
-		g_print ("Icon: %s %s", CAPPLET_DIR_ENTRY (list->data)->icon,
-					CAPPLET_DIR_ENTRY (list->data)->label);
 		gnome_icon_list_insert (data->gil, i++,
 					CAPPLET_DIR_ENTRY (list->data)->icon,
 					CAPPLET_DIR_ENTRY (list->data)->label);
@@ -389,7 +383,7 @@ header_expose_cb (GtkWidget *darea, GdkEventExpose *event,
 	{
 		PangoContext *context = gtk_widget_get_pango_context (darea);
 		PangoFontDescription *desc = pango_font_description_copy (darea->style->font_desc);
-		pango_font_description_set_size (desc, 16);
+		pango_font_description_set_size (desc, 16 * PANGO_SCALE);
 		pango_font_description_set_weight (desc, PANGO_WEIGHT_BOLD);
 		data->layout = pango_layout_new (context);
 		pango_layout_set_font_description (data->layout, desc);
@@ -405,16 +399,17 @@ header_expose_cb (GtkWidget *darea, GdkEventExpose *event,
 			       event->area.x + event->area.width,
 			       y);
 	}
-	
-	gdk_pixbuf_render_to_drawable_alpha (data->header_logo,
-		darea->window,
-		event->area.x, event->area.y,
-		event->area.x, event->area.y,
-		MIN (gdk_pixbuf_get_width (data->header_logo), event->area.width),
-		MIN (gdk_pixbuf_get_height (data->header_logo), event->area.height),
-		GDK_PIXBUF_ALPHA_FULL, 255,
-		GDK_RGB_DITHER_MAX,
-		0, 0);
+
+	if (event->area.x < 48 && event->area.y < 48)
+		gdk_pixbuf_render_to_drawable_alpha (data->header_logo,
+			darea->window,
+			event->area.x, event->area.y,
+			event->area.x, event->area.y,
+			MIN (gdk_pixbuf_get_width (data->header_logo) - event->area.x, event->area.width),
+			MIN (gdk_pixbuf_get_height (data->header_logo) - event->area.y, event->area.height),
+			GDK_PIXBUF_ALPHA_FULL, 255,
+			GDK_RGB_DITHER_MAX,
+			0, 0);
 
 	pango_layout_set_text (data->layout, data->header_text, -1);
 	pango_layout_get_pixel_size (data->layout, &tw, &th);

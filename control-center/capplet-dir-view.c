@@ -359,7 +359,7 @@ capplet_dir_view_new (void)
 	glade_xml_signal_connect_data (xml, "close_cb", GTK_SIGNAL_FUNC (close_cb), view);
 
 	glade_xml_signal_connect_data (xml, "about_menu_cb", GTK_SIGNAL_FUNC (about_menu_cb), view);
-	gtk_object_unref (GTK_OBJECT (xml));
+	g_object_unref (G_OBJECT (xml));
 	
 	gtk_object_set (GTK_OBJECT (view), "layout", prefs->layout, NULL);
 

@@ -87,7 +87,7 @@ main (int argc, char **argv)
 		gtk_idle_add ((GtkFunction) real_launch_control, capplet);
 	}
 
-	bonobo_main ();
+	gtk_main ();
 
 	return 0;
 }

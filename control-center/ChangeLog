@@ -1,3 +1,13 @@
+2001-12-13  Richard Hestilow  <hestilow@ximian.com>
+	
+	* capplet-dir-view-list.c: Remove all g_print statements.
+	(header_expose_cb): Fix pixbuf clipping.
+	
+	* capplet-dir-view.c (capplet_dir_view_new):
+	s/gtk_object_unref/g_object_unref.
+
+	* main.c (main): s/bonobo_main/gtk_main.
+
 2001-12-08  Havoc Pennington  <hp@pobox.com>
 
 	* capplet-dir-view.c: remove unused include that broke stuff
