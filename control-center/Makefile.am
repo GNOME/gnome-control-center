@@ -10,6 +10,11 @@ sys_in_files = gnomecc.desktop.in
 sys_DATA = $(sys_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
+serverdir = $(libdir)/bonobo/servers
+server_in_files = GNOME_ControlCenter.server.in
+server_DATA = $(server_in_files:.server.in=.server)
+@INTLTOOL_SERVER_RULE@
+
 uidir = $(datadir)/gnome-2.0/ui
 ui_DATA = gnomecc-ui.xml
 
@@ -20,18 +25,34 @@ INCLUDES = 							\
 	-DPIXMAP_DIR=\""$(datadir)/pixmaps"\"			\
 	-DART_DIR=\""$(splashdir)"\"				\
 	-DGNOME_SBINDIR=\""$(sbindir)"\"			\
-	$(GNOMECC_CFLAGS)
+	$(GNOMECC_CFLAGS) $(NAUTILUS_CFLAGS)
 
 bin_PROGRAMS = gnome-control-center
 
 gnome_control_center_SOURCES = \
-	main.c						\
-	capplet-dir.c 		capplet-dir.h 		\
-	capplet-dir-view.c	capplet-dir-view.h	\
-	capplet-dir-view-list.c
+	control-center-categories.c	\
+	control-center-categories.h	\
+	control-center.c		\
+	gnomecc-rounded-rect.c		\
+	gnomecc-rounded-rect.h		\
+	gnomecc-event-box.c		\
+	gnomecc-event-box.h
 
-gnome_control_center_LDADD = $(GNOMECC_LIBS)
+gnome_control_center_LDADD = $(GNOMECC_LIBS) $(NAUTILUS_LIBS)
 
-EXTRA_DIST = gnomecc.desktop.in $(splash_DATA) $(ui_DATA)
+IMAGES = text-selection-frame.png
+VARIABLES = \
+	gnomecc_rounded_rect_frame		$(srcdir)/text-selection-frame.png
 
-CLEANFILES = gnomecc.desktop
+pixbuf_file = $(top_builddir)/control-center/gnomecc-rounded-rect-pixbuf.h
+pixbuf_file = gnomecc-rounded-rect-pixbuf.h
+noinst_DATA = $(pixbuf_file)
+
+$(pixbuf_file) : $(IMAGES)
+	   $(GDK_PIXBUF_CSOURCE) --raw --build-list $(VARIABLES) > $@
+
+EXTRA_DIST = gnomecc.desktop.in $(splash_DATA) $(ui_DATA) $(server_DATA) \
+	$(IMAGES)
+
+BUILT_SOURCES =	$(pixbuf_file)
+CLEANFILES = gnomecc.desktop $(noinst_DATA)
