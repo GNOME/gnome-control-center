@@ -995,6 +995,22 @@ insert_mime_vals_into_clist (GList *type_list, GtkCList *clist)
 	}
 }
 
+static void
+column_clicked (GtkCList *clist, gint column, gpointer user_data)
+{
+	gtk_clist_set_sort_column (clist, column);
+
+	/* Toggle sort type */
+	if (clist->sort_type == GTK_SORT_ASCENDING) {
+		gtk_clist_set_sort_type (clist, GTK_SORT_DESCENDING);
+	} else {
+		gtk_clist_set_sort_type (clist, GTK_SORT_ASCENDING);
+	}
+  
+	gtk_clist_sort (clist);
+}
+
+
 static GtkWidget *
 create_mime_list_and_scroller (void)
 {
@@ -1022,6 +1038,12 @@ create_mime_list_and_scroller (void)
         gtk_clist_columns_autosize (GTK_CLIST (mime_list));
         gtk_clist_select_row (GTK_CLIST (mime_list), 0, 0);
         gtk_container_add (GTK_CONTAINER (window), mime_list);
+
+        /* Enable all titles */
+	gtk_clist_column_titles_active (GTK_CLIST (mime_list));
+	gtk_signal_connect (GTK_OBJECT (mime_list), "click_column", 
+			    column_clicked, NULL);
+	
 
         return window;
 }
