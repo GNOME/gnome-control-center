@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.2.0\n"
-"POT-Creation-Date: 2001-07-10 18:52-0500\n"
+"POT-Creation-Date: 2001-07-28 00:13+0200\n"
 "PO-Revision-Date: 2000-06-13 05:46+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -13,281 +13,588 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: capplets/background/applier.c:352
+#: archiver/location.c:228
+msgid "Default Location"
+msgstr "Privzeta lokacija"
+
+#: archiver/main.c:77
+msgid "Store XML data in the archive"
+msgstr "V arhiv shrani podatke XML"
+
+#: archiver/main.c:79
+msgid "Roll back the configuration to a given point"
+msgstr "Prevrti nastavitve nazaj do doloèene toèke"
+
+#: archiver/main.c:81
+msgid "Change the location profile to the given one"
+msgstr "Spremeni profil lokacije na podanega"
+
+#: archiver/main.c:83
+msgid "Push configuration data out to client machines (UNIMPLEMENTED)"
+msgstr "Potisni podatke o nastavitvah v raèunalnike odjemalce (NEIMPLEMENTIRANO)"
+
+#: archiver/main.c:85
+msgid "Rename a location to a new name"
+msgstr "Preimenuj lokacijo"
+
+#: archiver/main.c:87
+msgid "Add a new location to the archive"
+msgstr "Dodaj novo lokacijo v arhiv"
+
+#: archiver/main.c:89
+msgid "Remove a location from the archive"
+msgstr "Odstrani lokacijo iz arhiva"
+
+#: archiver/main.c:91
+msgid "Add a given backend to the given location"
+msgstr ""
+
+#: archiver/main.c:93
+msgid "Remove the given backend from the given location"
+msgstr ""
+
+#: archiver/main.c:99
+msgid "Use the global repository"
+msgstr "Uporabi globalno shrambo"
+
+#: archiver/main.c:101
+msgid "Identifier of location profile on which to operate"
+msgstr "Identifikator lokacijskega profila za uporabo"
+
+#: archiver/main.c:102
+msgid "LOCATION"
+msgstr "LOKACIJA"
+
+#: archiver/main.c:104
+msgid "Backend being used for this operation"
+msgstr ""
+
+#: archiver/main.c:104
+msgid "BACKEND_ID"
+msgstr ""
+
+#: archiver/main.c:110
+msgid "Store only the differences with the parent location's config"
+msgstr "Shrani le razlike v primerjavi z nastavitvami star¹evske lokacije"
+
+#: archiver/main.c:112
+msgid "Store only those settings set in the previous config"
+msgstr "Shrani le nastavitve spremenjene v prej¹njem nastavljanju"
+
+#: archiver/main.c:118
+msgid "Date to which to roll back"
+msgstr "Datum do katerega naj prevrtim"
+
+#: archiver/main.c:118
+msgid "DATE"
+msgstr "DATUM"
+
+#: archiver/main.c:120
+msgid "Roll back all configuration items"
+msgstr "Prevrti vse predmete nastavitev"
+
+#: archiver/main.c:122
+msgid "Roll back to the revision REVISION_ID"
+msgstr "Prevrti do razlièice RAZLIÈICA"
+
+#: archiver/main.c:122
+msgid "REVISION_ID"
+msgstr "RAZLIÈICA"
+
+#: archiver/main.c:124
+msgid "Roll back to the last known revision"
+msgstr "Prevrti do zadnje znane razlièice"
+
+#: archiver/main.c:126
+msgid "Roll back by STEPS revisions"
+msgstr "Prevrti za KORAKOV razlièic"
+
+#: archiver/main.c:126
+msgid "STEPS"
+msgstr "KORAKOV"
+
+#: archiver/main.c:128
+msgid "Don't run the backend, just dump the output"
+msgstr ""
+
+#: archiver/main.c:134
+msgid "Parent location for the new location"
+msgstr ""
+
+#: archiver/main.c:134
+msgid "PARENT"
+msgstr "STAR©"
+
+#: archiver/main.c:136
+msgid "New name to assign to the location"
+msgstr "Novo ime, ki naj se dodeli lokaciji"
+
+#: archiver/main.c:136
+msgid "NEW_NAME"
+msgstr "NOVO_IME"
+
+#: archiver/main.c:142
+msgid "Add/remove this backend to/from the master backend list"
+msgstr ""
+
+#: archiver/main.c:144
+msgid "Full containment"
+msgstr "Popolno vsebovanje"
+
+#: archiver/main.c:146
+msgid "Partial containment"
+msgstr "Delno vsebovanje"
+
+#: archiver/main.c:313
+msgid "Global archiver options"
+msgstr "Mo¾nosti globalnega arhivarja"
+
+#: archiver/main.c:315
+msgid "Archiver commands"
+msgstr "Ukazi arhivarja"
+
+#: archiver/main.c:317
+msgid "Options for storing data"
+msgstr "Mo¾nosti za shranjevanje podatkov"
+
+#: archiver/main.c:319
+msgid "Options for rolling back"
+msgstr "Mo¾nosti za prevrtenje"
+
+#: archiver/main.c:321
+msgid "Options for adding or renaming locations"
+msgstr "Mo¾nosti za dodajanje ali preimenovanje lokacij"
+
+#: archiver/main.c:324
+msgid "Options for adding and removing backends"
+msgstr ""
+
+#: capplets/background/applier.c:388
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "Nisem mogel nalo¾iti slike \"%s\"; tapete izkljuèene."
 
-#: capplets/background/applier.c:495
+#: capplets/background/applier.c:543
 msgid "Disabled"
 msgstr "Izkljuèeno"
 
-#: capplets/background/background-properties.glade.h:27
-#: capplets/background/prefs-widget.c:361
-msgid "(None)"
-msgstr "(brez)"
+#: capplets/background/background.desktop.in.in.h:1
+msgid "Background"
+msgstr "Ozadje"
 
-#: capplets/background/prefs-widget.c:615
-msgid "Wallpaper Selection"
-msgstr "Izbira tapet"
+#: capplets/background/background.desktop.in.in.h:2
+msgid "Configuration of the desktop's background"
+msgstr "Nastavitev ozadja namizja"
 
-#: capplets/background/prefs-widget.c:622
-msgid "Can't find an hbox, using a normal file selection"
-msgstr "Ne najdem hbox-a, uporabljam obièajno izbiranje datotek"
+#: capplets/background/background-properties.glade.h:1
+msgid "Background colors"
+msgstr "Barve ozadja"
 
-#: capplets/background/prefs-widget.c:628
-#: capplets/screensaver/screensaver-properties.glade.h:31
-msgid "Preview"
-msgstr "Predogled"
+#: capplets/background/background-properties.glade.h:2
+msgid "Background picture"
+msgstr "Slika v ozadju"
 
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/background/background-properties.glade.h:7
-msgid "window2"
-msgstr "okno2"
-
-#: capplets/background/background-properties.glade.h:8
-msgid "Use GNOME for setting background"
-msgstr "Uporabi GNOME za nastavljanje ozadja"
-
-#: capplets/background/background-properties.glade.h:9
-msgid "Colors"
-msgstr "Barve"
-
-#: capplets/background/background-properties.glade.h:10
-msgid "Effect"
-msgstr "Uèinek"
-
-#: capplets/background/background-properties.glade.h:11
-msgid "Primary color"
-msgstr "Prvotna barva"
-
-#: capplets/background/background-properties.glade.h:12
-msgid "Right or bottom color"
-msgstr "Desna ali spodnja barva"
-
-#: capplets/background/background-properties.glade.h:13
-#: capplets/background/background-properties.glade.h:14
-msgid "Pick a color"
-msgstr "Izberi barvo"
-
-#: capplets/background/background-properties.glade.h:15
-msgid "Solid Color"
-msgstr "Barva polnjenja"
-
-#: capplets/background/background-properties.glade.h:16
-msgid "Vertical Gradient"
-msgstr "Navpièni preliv"
-
-#: capplets/background/background-properties.glade.h:17
-msgid "Horizontal Gradient"
-msgstr "Vodoravni preliv"
-
-#: capplets/background/background-properties.glade.h:18
-msgid "Apply changes automatically"
-msgstr "Samodejno uveljavi spremembe"
-
-#: capplets/background/background-properties.glade.h:19
-msgid "Wallpaper"
-msgstr "Tapeta"
-
-#: capplets/background/background-properties.glade.h:20
-msgid "File"
-msgstr "Datoteka"
-
-#: capplets/background/background-properties.glade.h:21
-msgid "Display Style"
-msgstr "Naèin prikaza"
-
-#: capplets/background/background-properties.glade.h:22
-msgid "Tiled"
-msgstr "Tlakovano"
-
-#: capplets/background/background-properties.glade.h:23
+#: capplets/background/background-properties.glade.h:3
 msgid "Centered"
 msgstr "Centrirano"
 
-#: capplets/background/background-properties.glade.h:24
+#: capplets/background/background-properties.glade.h:4
+msgid "Horizontal gradient"
+msgstr "Vodoravni preliv"
+
+#: capplets/background/background-properties.glade.h:5
+msgid "Image:"
+msgstr "Slika:"
+
+#: capplets/background/background-properties.glade.h:6
+msgid "Opacity (percent):"
+msgstr "Prosojnost (procentov):"
+
+#: capplets/background/background-properties.glade.h:7
+msgid "Pick a color"
+msgstr "Izberi barvo"
+
+#: capplets/background/background-properties.glade.h:8
 msgid "Scaled (keep aspect ratio)"
 msgstr "Raztegnjeno (ohrani razmerja)"
 
-#: capplets/background/background-properties.glade.h:25
-msgid "Stretched (change aspect ratio)"
-msgstr "Razztegnjeno (spremeni razmerja)"
+#: capplets/background/background-properties.glade.h:9
+msgid "Solid color"
+msgstr "polna barva"
 
-#: capplets/background/background-properties.glade.h:26
-msgid "Browse..."
-msgstr "Brskaj..."
+#: capplets/background/background-properties.glade.h:10
+msgid "Stretched"
+msgstr "Raztegnjeno"
 
-#: capplets/background/background-properties.glade.h:28
-msgid "Adjust wallpaper's transparency"
-msgstr "Nastavi prosojnost tapete"
+#: capplets/background/background-properties.glade.h:11
+msgid "Style:"
+msgstr "Slog:"
 
-#: capplets/background/background-properties.glade.h:29
-msgid "More Transparent"
-msgstr "Bolj prosojno"
+#: capplets/background/background-properties.glade.h:12
+msgid "Tiled"
+msgstr "Tlakovano"
 
-#: capplets/background/background-properties.glade.h:30
-msgid "More Solid"
-msgstr "Manj prosojno"
+#: capplets/background/background-properties.glade.h:13
+msgid "Vertical gradient"
+msgstr "Navpièni preliv"
 
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/keyboard/keyboard-properties.glade.h:7
-#: capplets/screensaver/screensaver-properties.glade.h:23
-#: capplets/sound/sound-properties.glade.h:7
-msgid "window1"
-msgstr "okno1"
+#: capplets/background/prefs-widget.c:362
+msgid "(None)"
+msgstr "(Brez)"
 
-#: capplets/keyboard/keyboard-properties.glade.h:8
-msgid "Enable Keyboard Repeat"
-msgstr "Vkljuèi ponavljanje tipk"
+#: capplets/background/prefs-widget.c:611
+msgid "Wallpaper Selection"
+msgstr "Izbira tapet"
+
+#: capplets/background/prefs-widget.c:618
+msgid "Can't find an hbox, using a normal file selection"
+msgstr "Ne najdem hbox-a, uporabljam obièajno izbiranje datotek"
+
+#: capplets/background/prefs-widget.c:624
+#: capplets/screensaver/screensaver-properties.glade.h:11
+msgid "Preview"
+msgstr "Predogled"
+
+#: capplets/common/capplet-util.c:490
+msgid "Just apply settings and quit"
+msgstr "Le uveljavi nastavitve in konèaj"
+
+#: capplets/common/capplet-util.c:492
+msgid "Initialize the session"
+msgstr "Inicializiraj sejo"
+
+#: capplets/common/capplet-util.c:494
+msgid "Retrieve and store legacy settings"
+msgstr ""
+
+#: capplets/common/capplet-util.c:503
+msgid "Capplet options"
+msgstr "Mo¾nosti nastavitvenega vstavka"
+
+#: capplets/default-applications/default-applications.desktop.in.in.h:1
+msgid "Choose the applications used by default"
+msgstr "Spremeni privzet program"
+
+#: capplets/default-applications/default-applications.desktop.in.in.h:2
+msgid "Default Applications"
+msgstr "Privzeti programi"
+
+#: capplets/default-applications/interface.c:108
+msgid "Gnome Default Editor"
+msgstr "Privzet urejevalnik za Gnome"
+
+#: capplets/default-applications/interface.c:125
+msgid "Select an Editor"
+msgstr "Izberi urejevalnik"
+
+#: capplets/default-applications/interface.c:134
+msgid "With this option, you can select a predefined Editor as your default"
+msgstr "S to mo¾nostjo lahko kot privzetega izberete prednastavljen urejevalnik"
+
+#: capplets/default-applications/interface.c:154
+msgid "Custom Editor"
+msgstr "Poljuben urejevalnik"
+
+#: capplets/default-applications/interface.c:163
+msgid "With this option you can create your own default editor"
+msgstr "S to mo¾nostjo lahko ustvarite svoj lasten privzet urejevalnik"
+
+#: capplets/default-applications/interface.c:174
+#: capplets/default-applications/interface.c:305
+#: capplets/default-applications/interface.c:436
+msgid "Start in Terminal"
+msgstr "Po¾eni v terminalu"
+
+#: capplets/default-applications/interface.c:182
+msgid "Does this editor need to start in an xterm?"
+msgstr "Ali se mora urejevalnik pognati v xterm-u"
+
+#: capplets/default-applications/interface.c:184
+msgid "Accepts Line Number"
+msgstr "Sprejema ¹tevilke vrstic"
+
+#: capplets/default-applications/interface.c:192
+msgid "Does this editor accept line numbers from the command line?"
+msgstr "Ali ta urejevalnik sprejema ¹tevilke vrstic iz ukazne vrstice?"
+
+#: capplets/default-applications/interface.c:203
+#: capplets/default-applications/interface.c:334
+#: capplets/default-applications/interface.c:465
+#: capplets/default-applications/interface.c:576
+msgid "Command:"
+msgstr "Ukaz:"
+
+#: capplets/default-applications/interface.c:221
+msgid "Please enter the command line used to start this editor"
+msgstr "Prosim, vpi¹ite ukaz s katerim se urejevalnik po¾ene"
+
+#: capplets/default-applications/interface.c:232
+msgid "Text Editor"
+msgstr "Urejevalnik besedila"
+
+#: capplets/default-applications/interface.c:239
+msgid "Gnome Default Web Browser"
+msgstr "Privzet spletni brskalnik za Gnome"
+
+#: capplets/default-applications/interface.c:256
+msgid "Select a Web Browser"
+msgstr "Izberite spletni brskalnik"
+
+#: capplets/default-applications/interface.c:265
+msgid ""
+"With this option, you can select a predefined Web Browser as your default"
+msgstr "S to mo¾nostjo lahko kot privzetega izberete prednastavljen brskalnik"
+
+
+#: capplets/default-applications/interface.c:285
+msgid "Custom Web Browser"
+msgstr "Poljuben brskalnik"
+
+#: capplets/default-applications/interface.c:294
+msgid "With this option you can create your own default web browser"
+msgstr "S to mo¾nostjo lahko ustvarite svoj lasten privzet brskalnik"
+
+#: capplets/default-applications/interface.c:313
+msgid "Does this web browser need to display in an xterm?"
+msgstr "Ali se mora brskalnik pognati v xterm-u"
+
+#: capplets/default-applications/interface.c:315
+msgid "Understands Netscape Remote Control"
+msgstr "Razume oddaljeno kontrolo Netscape"
+
+#: capplets/default-applications/interface.c:323
+msgid ""
+"Does this web browser support the netscape remote control protocol?  If in "
+"doubt, and this web browser isn't Netscape or Mozilla, it probably doesn't."
+msgstr ""
+"Ali ta brskalnik podpira protokol za oddaljeno upravljanje Netscape? Èe ste "
+"v dvomih in ta brskalnik ni Netscape ali Mozilla, potem verjetno ne."
+
+#: capplets/default-applications/interface.c:352
+msgid "Please enter the command line used to start this web browser"
+msgstr "Prosim, vpi¹ite ukaz s katerim se brskalnik po¾ene"
+
+#: capplets/default-applications/interface.c:363
+msgid "Web Browser"
+msgstr "Spletni brskalnik"
+
+#: capplets/default-applications/interface.c:370
+#: capplets/default-applications/interface.c:501
+msgid "Default Help Viewer"
+msgstr "Privzet pregledovalnik pomoèi"
+
+#: capplets/default-applications/interface.c:387
+msgid "Select a Viewer"
+msgstr "Izberi pregledovalnik"
+
+#: capplets/default-applications/interface.c:396
+msgid "With this option you can select a predefined help viewer."
+msgstr "S to mo¾nostjo lahko izberete prednastavljen pregledovalnik pomoèi."
+
+#: capplets/default-applications/interface.c:416
+msgid "Custom Help Viewer"
+msgstr "Poljuben pregledovalnik pomoèi"
+
+#: capplets/default-applications/interface.c:425
+msgid "With this option you can create your own help viewer"
+msgstr "S to mo¾nostjo lahko ustvarite svoj lasten pregledovalnik pomoèi"
+
+#: capplets/default-applications/interface.c:444
+msgid "Does this help viewer need an xterm for display?"
+msgstr "Ali se mora pregledovalnik pomoèi pognati v xterm-u"
+
+#: capplets/default-applications/interface.c:446
+msgid "Accepts URLs"
+msgstr "Sprejema URLje"
+
+#: capplets/default-applications/interface.c:454
+msgid "Does this help viewer allow URLs for help?"
+msgstr "Ali ta pregledovalnik pomoèi sprejema URLje do pomoèi?"
+
+#: capplets/default-applications/interface.c:483
+msgid "Please enter the command line used to start this help viewer"
+msgstr "Prosim, vpi¹ite ukaz s katerim se brskalnik po¾ene"
+
+#: capplets/default-applications/interface.c:494
+msgid "Help Viewer"
+msgstr "Pregledovalnik pomoèi"
+
+#: capplets/default-applications/interface.c:518
+msgid "Select a Terminal"
+msgstr "Izberite terminal"
+
+#: capplets/default-applications/interface.c:527
+msgid "With this option you can select a predefined terminal."
+msgstr "S to mo¾nostjo lahko izberete prednastavljen terminal."
+
+#: capplets/default-applications/interface.c:547
+msgid "Custom Terminal"
+msgstr "Poljuben terminal"
+
+#: capplets/default-applications/interface.c:556
+msgid "With this option you can create your own terminal"
+msgstr "S to mo¾nostjo lahko ustvarite svoj lasten terminal"
+
+#: capplets/default-applications/interface.c:586
+msgid "Exec Flag:"
+msgstr "Parameter za zagon:"
+
+#: capplets/default-applications/interface.c:604
+msgid ""
+"Please enter the flag used by this terminal to specify the command to run on "
+"startup.  For example, in 'xterm' this would be '-e'."
+msgstr ""
+"Prosim, vpi¹ite parameter, ki ga ta termianl uporablja, za navedbo ukaza, "
+"ki naj se za¾ene ob zagonu. Na primer, za 'xterm' bi bila odgovor '-e'." 
+
+#: capplets/default-applications/interface.c:614
+msgid "Please enter the command line used to start this terminal"
+msgstr "Prosim, vpi¹ite ukaz s katerim naj se terminal po¾ene"
+
+#: capplets/default-applications/interface.c:625
+msgid "Terminal"
+msgstr "Terminal"
+
+#: capplets/default-applications/support.c:100
+#: capplets/default-applications/support.c:138
+#, c-format
+msgid "Couldn't find pixmap file: %s"
+msgstr "Nisem na¹el datoteke z sliko: %s"
+
+#: capplets/default-applications/support.c:116
+#, c-format
+msgid "Couldn't create pixmap from file: %s"
+msgstr "Nisem mogel ustvariti slike iz datoteke: %s"
 
 #: capplets/keyboard/keyboard-properties.glade.h:9
-msgid "Delay Until Repeat"
-msgstr "Premor pred ponavljanjem"
+#: capplets/keyboard/keyboard.desktop.in.in.h:1
+msgid "Keyboard"
+msgstr "Tipkovnica"
 
-#: capplets/keyboard/keyboard-properties.glade.h:10
-msgid "....a"
-msgstr "....a"
+#: capplets/keyboard/keyboard.desktop.in.in.h:2
+msgid "Keyboard Properties"
+msgstr "Nastavitve tipkovnice"
 
-#: capplets/keyboard/keyboard-properties.glade.h:11
-msgid "...a"
-msgstr "...a"
+#: capplets/keyboard/keyboard-properties.glade.h:1
+msgid "Bell"
+msgstr "Zvonec"
 
-#: capplets/keyboard/keyboard-properties.glade.h:12
-msgid "..a"
-msgstr "..a"
-
-#: capplets/keyboard/keyboard-properties.glade.h:13
-msgid ".a"
-msgstr ".a"
-
-#: capplets/keyboard/keyboard-properties.glade.h:14
-msgid "Key Repeat Rate"
-msgstr "Hitrost ponavljanja tipk"
-
-#: capplets/keyboard/keyboard-properties.glade.h:15
-msgid "a....a"
-msgstr "a....a"
-
-#: capplets/keyboard/keyboard-properties.glade.h:16
-msgid "a...a"
-msgstr "a...a"
-
-#: capplets/keyboard/keyboard-properties.glade.h:17
-msgid "a..a"
-msgstr "a..a"
-
-#: capplets/keyboard/keyboard-properties.glade.h:18
-msgid "a.a"
-msgstr "a.a"
-
-#: capplets/keyboard/keyboard-properties.glade.h:19
-msgid "Enable Keyboard Click"
-msgstr "Vkljuèi klikanje tipkovnice"
-
-#: capplets/keyboard/keyboard-properties.glade.h:20
-msgid "Keyboard click"
-msgstr "Klik tipkovnice"
-
-#: capplets/keyboard/keyboard-properties.glade.h:21
+#: capplets/keyboard/keyboard-properties.glade.h:2
 msgid "Click volume"
 msgstr "Glasnost klika"
 
-#: capplets/keyboard/keyboard-properties.glade.h:22
-msgid "Type here to test setting"
-msgstr "Tu tipkajte za preizkus nastavitev"
+#: capplets/keyboard/keyboard-properties.glade.h:3
+msgid "Delay until repeat:"
+msgstr "Premor pred ponavljanjem:"
 
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/mouse/mouse-properties.glade.h:7
-#, fuzzy
-msgid "Mouse Configuration"
-msgstr "Premikanje mi¹ke"
+#: capplets/keyboard/keyboard-properties.glade.h:4
+msgid "Duration (ms)"
+msgstr "Trajanje (ms)"
 
-#: capplets/mouse/mouse-properties.glade.h:8
-msgid "My mouse is:"
-msgstr ""
+#: capplets/keyboard/keyboard-properties.glade.h:5
+msgid "Enable Keyboard Click"
+msgstr "Vkljuèi klikanje tipkovnice"
 
-#: capplets/mouse/mouse-properties.glade.h:9
-msgid "Left handed"
-msgstr "Za levièarje"
+#: capplets/keyboard/keyboard-properties.glade.h:6
+msgid "Enable Keyboard Repeat"
+msgstr "Vkljuèi ponavljanje"
 
-#: capplets/mouse/mouse-properties.glade.h:10
-msgid "Right handed"
-msgstr "Za desnièarje"
-
-#: capplets/mouse/mouse-properties.glade.h:11
-#: capplets/screensaver/screensavers/3d_clock.xml.h:11
-#: capplets/screensaver/screensavers/ant.xml.h:10
-#: capplets/screensaver/screensavers/attraction.xml.h:19
-#: capplets/screensaver/screensavers/bsod.xml.h:8
-#: capplets/screensaver/screensavers/compass.xml.h:10
-#: capplets/screensaver/screensavers/flag.xml.h:10
-#: capplets/screensaver/screensavers/qix.xml.h:16
-#: capplets/screensaver/screensavers/starfish.xml.h:9
-#: capplets/screensaver/screensavers/starfish.xml.h:13
-msgid "Slow"
-msgstr "Poèasno"
-
-#: capplets/mouse/mouse-properties.glade.h:12
-#: capplets/screensaver/screensavers/3d_clock.xml.h:12
-#: capplets/screensaver/screensavers/ant.xml.h:11
-#: capplets/screensaver/screensavers/attraction.xml.h:20
-#: capplets/screensaver/screensavers/bsod.xml.h:9
-#: capplets/screensaver/screensavers/compass.xml.h:11
-#: capplets/screensaver/screensavers/flag.xml.h:11
-#: capplets/screensaver/screensavers/qix.xml.h:17
-#: capplets/screensaver/screensavers/starfish.xml.h:8
+#: capplets/keyboard/keyboard-properties.glade.h:7
+#: capplets/mouse/mouse-properties.glade.h:1
 msgid "Fast"
 msgstr "Hitro"
 
-#: capplets/mouse/mouse-properties.glade.h:13
-#, fuzzy
-msgid "Mouse speed:"
-msgstr "Hitrost sukanja:"
+#: capplets/keyboard/keyboard-properties.glade.h:8
+msgid "Key repeat rate:"
+msgstr "Hitrost ponavljanja tipk:"
 
-#: capplets/mouse/mouse-properties.glade.h:14
-#: capplets/screensaver/screensavers/3d_clock.xml.h:8
-#: capplets/screensaver/screensavers/3d_clock.xml.h:14
-#: capplets/screensaver/screensavers/attraction.xml.h:25
-#: capplets/screensaver/screensavers/qix.xml.h:31
-msgid "Low"
-msgstr "Nizka "
+#: capplets/keyboard/keyboard-properties.glade.h:10
+msgid "Long"
+msgstr "Dolg"
 
-#: capplets/mouse/mouse-properties.glade.h:15
-#: capplets/screensaver/screensavers/3d_clock.xml.h:9
-#: capplets/screensaver/screensavers/3d_clock.xml.h:15
-#: capplets/screensaver/screensavers/attraction.xml.h:26
-#: capplets/screensaver/screensavers/qix.xml.h:32
+#: capplets/keyboard/keyboard-properties.glade.h:11
+msgid "Medium"
+msgstr "Srednji"
+
+#: capplets/keyboard/keyboard-properties.glade.h:12
+msgid "Pitch (Hz)"
+msgstr "Vi¹ina (Hz)"
+
+#: capplets/keyboard/keyboard-properties.glade.h:13
+msgid "Short"
+msgstr "Kratek"
+
+#: capplets/keyboard/keyboard-properties.glade.h:14
+#: capplets/mouse/mouse-properties.glade.h:10
+msgid "Slow"
+msgstr "Poèasno"
+
+#: capplets/keyboard/keyboard-properties.glade.h:15
+msgid "Test"
+msgstr "Preizkus"
+
+#: capplets/keyboard/keyboard-properties.glade.h:16
+msgid "Very fast"
+msgstr "Zelo hiter"
+
+#: capplets/keyboard/keyboard-properties.glade.h:17
+msgid "Very long"
+msgstr "Zelo dolg"
+
+#: capplets/keyboard/keyboard-properties.glade.h:18
+msgid "Volume"
+msgstr "Glasnost"
+
+#: capplets/mouse/mouse.desktop.in.in.h:1
+msgid "Mouse"
+msgstr "Mi¹ka"
+
+#: capplets/mouse/mouse.desktop.in.in.h:2
+msgid "Mouse Properties"
+msgstr "Lastnosti mi¹ke"
+
+#: capplets/mouse/mouse-properties.glade.h:2
 msgid "High"
 msgstr "Visoka"
 
-#: capplets/mouse/mouse-properties.glade.h:16
-#, fuzzy
+#: capplets/mouse/mouse-properties.glade.h:3
+msgid "Left handed"
+msgstr "Za levièarje"
+
+#: capplets/mouse/mouse-properties.glade.h:4
+msgid "Low"
+msgstr "Nizka"
+
+#: capplets/mouse/mouse-properties.glade.h:5
+msgid "Mouse Configuration"
+msgstr "Nastavitev mi¹ke"
+
+#: capplets/mouse/mouse-properties.glade.h:6
+msgid "Mouse speed:"
+msgstr "Hitrost mi¹ke:"
+
+#: capplets/mouse/mouse-properties.glade.h:7
+msgid "My mouse is:"
+msgstr "Moja mi¹ka je:"
+
+#: capplets/mouse/mouse-properties.glade.h:8
+msgid "Right handed"
+msgstr "Za desnièarje"
+
+#: capplets/mouse/mouse-properties.glade.h:9
 msgid "Sensitivity:"
-msgstr "Gostota"
+msgstr "Obèutljivost"
 
 #: capplets/screensaver/preferences.c:508
 msgid "Custom screensaver. No description available"
 msgstr "Nestandarden ohranjevalnik zaslona. Opis ni dostopen"
 
-#: capplets/screensaver/prefs-widget.c:160
+#: capplets/screensaver/prefs-widget.c:185
 msgid "Use"
-msgstr ""
+msgstr "Uporabi"
 
-#: capplets/screensaver/prefs-widget.c:160
-#, fuzzy
+#: capplets/screensaver/prefs-widget.c:185
+#: capplets/screensaver/screensaver.desktop.in.in.h:2
 msgid "Screensaver"
 msgstr "Ohranjevalnik zaslona"
 
@@ -313,7 +620,7 @@ msgstr "Demonstracija"
 
 #: capplets/screensaver/screensaver-prefs-dialog.c:1360
 msgid "There are no configurable settings for this screensaver."
-msgstr ""
+msgstr "Za ta ohranjevalnik zaslona ni spremenljivih nastavitev."
 
 #: capplets/screensaver/screensaver-prefs-dialog.c:1369
 msgid ""
@@ -334,998 +641,710 @@ msgstr "Vizualno:"
 #: capplets/screensaver/screensaver-prefs-dialog.c:1418
 #: capplets/screensaver/screensaver-prefs-dialog.c:1714
 msgid "Any"
-msgstr "Karkoli"
+msgstr "Katerkoli"
 
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/3d_clock.xml.h:7
-msgid "Twist:"
-msgstr "Sukanje:"
+#: capplets/screensaver/screensaver.desktop.in.in.h:1
+msgid "Configure the settings of the screensaver"
+msgstr "Nastavi ohranjevalnik zaslona"
 
-#: capplets/screensaver/screensavers/3d_clock.xml.h:10
-msgid "Twist speed:"
-msgstr "Hitrost sukanja:"
+#: capplets/screensaver/screensaver-properties.glade.h:1
+msgid " Configure..."
+msgstr " Nastavi..."
 
-#: capplets/screensaver/screensavers/3d_clock.xml.h:13
-msgid "Wobble:"
-msgstr "Neurejeno premikanje:"
+#: capplets/screensaver/screensaver-properties.glade.h:2
+msgid "About \"<Screensaver name>\""
+msgstr "O \"<Screensaver name>\""
 
-#: capplets/screensaver/screensavers/3d_clock.xml.h:16
+#: capplets/screensaver/screensaver-properties.glade.h:3
+msgid "Black screen only"
+msgstr "Le èrn zaslon"
+
+#: capplets/screensaver/screensaver-properties.glade.h:4
+msgid "Configure Power Management"
+msgstr "Nastavi upravljanje z energijo"
+
+#: capplets/screensaver/screensaver-properties.glade.h:5
+msgid "Disable screensaver"
+msgstr "Izkljuèi ohranjevalnik zaslona"
+
+#: capplets/screensaver/screensaver-properties.glade.h:6
+msgid ""
+"Draws quasiperiodic tilings; think of the implications on modern formica "
+"technology. Written by Time Korlove. In April 1997, Sir Roger Penrose, a "
+"British math professor who has worked with Stephen Hawking on such topics as "
+"relatvity, black holes, and whether time has a beginning, files a copyright-"
+"infringement lawsuit against Kimberly-Clark Corporation, wchih Penrose said "
+"copied a pattern he created ( apattern demonstrating that \"a nonrepeating "
+"pattern could exist in nature\") for its Kleenex quilted toilet paper. "
+msgstr ""
+
+#: capplets/screensaver/screensaver-properties.glade.h:7
+msgid "Enable _power management"
+msgstr "Vkljuèi u_pravljanje z energijo."
+
+#: capplets/screensaver/screensaver-properties.glade.h:8
+msgid "Go to standby mode after"
+msgstr "Pojdi v naèin pripravljenosti po"
+
+#: capplets/screensaver/screensaver-properties.glade.h:9
+msgid "Go to suspend mode after"
+msgstr "Pojdi v spanje po"
+
+#: capplets/screensaver/screensaver-properties.glade.h:10
+msgid "One screensaver all the time"
+msgstr "En ohranjevalnik ves èas"
+
+#: capplets/screensaver/screensaver-properties.glade.h:12
+msgid "R_equire password to unlock screen"
+msgstr "Zahtevaj geslo za _odklenitev zaslona"
+
+#: capplets/screensaver/screensaver-properties.glade.h:13
+msgid "Random (all screensavers)"
+msgstr "Nakljuèni ohranjevalnik zaslona (izmed vseh)"
+
+#: capplets/screensaver/screensaver-properties.glade.h:14
+msgid "Random (checked screensavers)"
+msgstr "Nakljuèni ohranjevalnik zaslona (izmed izbranih)"
+
+#: capplets/screensaver/screensaver-properties.glade.h:15
+msgid "S_tart screensaver after "
+msgstr "_Po¾eni ohranjevalnik po "
+
+#: capplets/screensaver/screensaver-properties.glade.h:16
+msgid "S_witch screensavers after "
+msgstr "_Zamenjaj ohranjvalnik vsakih "
+
+#: capplets/screensaver/screensaver-properties.glade.h:17
+msgid "Settings for \"<Screensaver name>\""
+msgstr "Nastavitve za \"<Screensaver name>\""
+
+#: capplets/screensaver/screensaver-properties.glade.h:18
+msgid "Shut down monitor after"
+msgstr "Ugasni zaslon po"
+
+#: capplets/screensaver/screensaver-properties.glade.h:19
+msgid ""
+"There are no configurable settings for this\n"
+"screensaver. "
+msgstr "Za ta ohranjevalnik zaslona ni \n"
+"spremenljivih nastavitev."
+
+#: capplets/screensaver/screensaver-properties.glade.h:21
+msgid "_About this screensaver..."
+msgstr "_O tem ohranjevalniku..."
+
+#: capplets/screensaver/screensaver-properties.glade.h:22
+msgid "_Add"
+msgstr "_Dodaj"
+
+#: capplets/screensaver/screensaver-properties.glade.h:23
+msgid "_Mode:"
+msgstr "_Naèin:"
+
+#: capplets/screensaver/screensaver-properties.glade.h:24
+msgid "_Remove"
+msgstr "_Odstrani"
+
+#: capplets/screensaver/screensaver-properties.glade.h:25
+msgid "_Settings"
+msgstr "_Nastavitve"
+
+#: capplets/screensaver/screensaver-properties.glade.h:26
+msgid "minutes"
+msgstr "minutah"
+
+#: capplets/screensaver/screensavers/3d_clock.xml.h:1
 msgid "Size:"
 msgstr "Velikost:"
 
-#: capplets/screensaver/screensavers/3d_clock.xml.h:17
-#: capplets/screensaver/screensavers/ant.xml.h:13
-#: capplets/screensaver/screensavers/attraction.xml.h:13
-#: capplets/screensaver/screensavers/flag.xml.h:13
-#: capplets/screensaver/screensavers/rorschach.xml.h:8
-#: capplets/screensaver/screensavers/rorschach.xml.h:11
-msgid "Small"
-msgstr "Majhen"
+#: capplets/screensaver/screensavers/3d_clock.xml.h:2
+msgid "Twist speed:"
+msgstr "Hitrost sukanja:"
 
-#: capplets/screensaver/screensavers/3d_clock.xml.h:18
-#: capplets/screensaver/screensavers/ant.xml.h:14
-#: capplets/screensaver/screensavers/attraction.xml.h:14
-#: capplets/screensaver/screensavers/flag.xml.h:14
-#: capplets/screensaver/screensavers/rorschach.xml.h:9
-#: capplets/screensaver/screensavers/rorschach.xml.h:12
-msgid "Large"
-msgstr "Velik"
+#: capplets/screensaver/screensavers/3d_clock.xml.h:3
+msgid "Twist:"
+msgstr "Sukanje:"
 
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/ant.xml.h:7
-msgid "Sharp turns"
-msgstr "Ostri obrati"
+#: capplets/screensaver/screensavers/3d_clock.xml.h:4
+msgid "Wobble:"
+msgstr "Neurejeno premikanje:"
 
-#: capplets/screensaver/screensavers/ant.xml.h:8
-msgid "Truchet lines"
-msgstr "Vzorec iz èrt"
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/ant.xml.h:9
-#: capplets/screensaver/screensavers/attraction.xml.h:18
-#: capplets/screensaver/screensavers/bsod.xml.h:7
-#: capplets/screensaver/screensavers/compass.xml.h:9
-#: capplets/screensaver/screensavers/flag.xml.h:9
-#: capplets/screensaver/screensavers/qix.xml.h:15
-msgid "Speed"
-msgstr "Hitrost"
-
-#: capplets/screensaver/screensavers/ant.xml.h:12
-#: capplets/screensaver/screensavers/flag.xml.h:12
-msgid "Timeout"
-msgstr "Èasovna omejitev"
-
-#: capplets/screensaver/screensavers/ant.xml.h:15
-msgid "Random"
-msgstr "Nakljuèno"
-
-#: capplets/screensaver/screensavers/ant.xml.h:16
-msgid "Specific"
-msgstr "Specifièno"
-
-#: capplets/screensaver/screensavers/ant.xml.h:17
-msgid "number of Ants"
-msgstr "¹tevilo mravelj"
-
-#: capplets/screensaver/screensavers/ant.xml.h:18
-msgid "Random size upto"
-msgstr "Nakljuèna velikost do"
-
-#: capplets/screensaver/screensavers/ant.xml.h:19
-#: capplets/screensaver/screensavers/flag.xml.h:16
-msgid "Specific size of"
-msgstr "Specifièna velikost"
-
-#: capplets/screensaver/screensavers/ant.xml.h:20
-#: capplets/screensaver/screensavers/flag.xml.h:17
-msgid "Number of colours"
-msgstr "©tevilo barv"
-
-#: capplets/screensaver/screensavers/ant.xml.h:21
-#: capplets/screensaver/screensavers/flag.xml.h:18
-msgid "Two"
-msgstr "Dve"
-
-#: capplets/screensaver/screensavers/ant.xml.h:22
-#: capplets/screensaver/screensavers/flag.xml.h:19
-msgid "Many"
-msgstr "Veliko"
-
-#: capplets/screensaver/screensavers/ant.xml.h:23
-msgid "Randomize"
-msgstr "Nakljuèno"
-
-#: capplets/screensaver/screensavers/ant.xml.h:24
-msgid "Three Sided cells"
-msgstr "Trostrane celice"
-
-#: capplets/screensaver/screensavers/ant.xml.h:25
+#: capplets/screensaver/screensavers/ant.xml.h:1
 msgid "Four Sided cells"
 msgstr "©tiristrane celice"
 
-#: capplets/screensaver/screensavers/ant.xml.h:26
-msgid "Six Sided cells"
-msgstr "©eststrane celice"
-
-#: capplets/screensaver/screensavers/ant.xml.h:27
-msgid "Nine Sided cells"
-msgstr "Devetstrane celice"
-
-#: capplets/screensaver/screensavers/ant.xml.h:28
-msgid "Twelve Sided cells"
-msgstr "Dvanajststrane celice"
-
-#: capplets/screensaver/screensavers/ant.xml.h:29
-#: capplets/screensaver/screensavers/attraction.xml.h:22
-#: capplets/screensaver/screensavers/bsod.xml.h:11
-#: capplets/screensaver/screensavers/compass.xml.h:13
-#: capplets/screensaver/screensavers/flag.xml.h:21
-#: capplets/screensaver/screensavers/qix.xml.h:29
-msgid "Monochrome"
-msgstr "Èrnobel"
-
-#: capplets/screensaver/screensavers/ant.xml.h:30
-#: capplets/screensaver/screensavers/attraction.xml.h:21
-#: capplets/screensaver/screensavers/bsod.xml.h:10
-#: capplets/screensaver/screensavers/compass.xml.h:12
-#: capplets/screensaver/screensavers/flag.xml.h:20
-#: capplets/screensaver/screensavers/qix.xml.h:28
+#: capplets/screensaver/screensavers/ant.xml.h:2
+#: capplets/screensaver/screensavers/attraction.xml.h:3
+#: capplets/screensaver/screensavers/bsod.xml.h:1
+#: capplets/screensaver/screensavers/compass.xml.h:2
+#: capplets/screensaver/screensavers/flag.xml.h:2
+#: capplets/screensaver/screensavers/qix.xml.h:3
 msgid "Full Color"
 msgstr "Polna barva"
 
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/attraction.xml.h:7
+#: capplets/screensaver/screensavers/ant.xml.h:3
+#: capplets/screensaver/screensavers/attraction.xml.h:6
+#: capplets/screensaver/screensavers/bsod.xml.h:2
+#: capplets/screensaver/screensavers/compass.xml.h:3
+#: capplets/screensaver/screensavers/flag.xml.h:3
+#: capplets/screensaver/screensavers/qix.xml.h:6
+msgid "Monochrome"
+msgstr "Èrnobel"
+
+#: capplets/screensaver/screensavers/ant.xml.h:4
+msgid "Nine Sided cells"
+msgstr "Devetstrane celice"
+
+#: capplets/screensaver/screensavers/ant.xml.h:5
+#: capplets/screensaver/screensavers/flag.xml.h:4
+msgid "Number of colours"
+msgstr "©tevilo barv"
+
+#: capplets/screensaver/screensavers/ant.xml.h:6
+msgid "Random"
+msgstr "Nakljuèno"
+
+#: capplets/screensaver/screensavers/ant.xml.h:7
+msgid "Random size upto"
+msgstr "Nakljuèna velikost do"
+
+#: capplets/screensaver/screensavers/ant.xml.h:8
+msgid "Randomize"
+msgstr "Nakljuèno"
+
+#: capplets/screensaver/screensavers/ant.xml.h:9
+msgid "Sharp turns"
+msgstr "Ostri obrati"
+
+#: capplets/screensaver/screensavers/ant.xml.h:10
+msgid "Six Sided cells"
+msgstr "©eststrane celice"
+
+#: capplets/screensaver/screensavers/ant.xml.h:11
+msgid "Specific"
+msgstr "Specifièno"
+
+#: capplets/screensaver/screensavers/ant.xml.h:12
+#: capplets/screensaver/screensavers/flag.xml.h:6
+msgid "Specific size of"
+msgstr "Specifièna velikost"
+
+#: capplets/screensaver/screensavers/ant.xml.h:13
+#: capplets/screensaver/screensavers/attraction.xml.h:9
+#: capplets/screensaver/screensavers/bsod.xml.h:3
+#: capplets/screensaver/screensavers/compass.xml.h:4
+#: capplets/screensaver/screensavers/flag.xml.h:7
+#: capplets/screensaver/screensavers/qix.xml.h:11
+msgid "Speed"
+msgstr "Hitrost"
+
+#: capplets/screensaver/screensavers/ant.xml.h:14
+msgid "Three Sided cells"
+msgstr "Trostrane celice"
+
+#: capplets/screensaver/screensavers/ant.xml.h:15
+#: capplets/screensaver/screensavers/flag.xml.h:9
+msgid "Timeout"
+msgstr "Èasovna omejitev"
+
+#: capplets/screensaver/screensavers/ant.xml.h:16
+msgid "Truchet lines"
+msgstr "Vzorec iz èrt"
+
+#: capplets/screensaver/screensavers/ant.xml.h:17
+msgid "Twelve Sided cells"
+msgstr "Dvanajststrane celice"
+
+#: capplets/screensaver/screensavers/ant.xml.h:18
+msgid "number of Ants"
+msgstr "¹tevilo mravelj"
+
+#: capplets/screensaver/screensavers/attraction.xml.h:1
 msgid "Balls"
 msgstr "®oge"
 
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/attraction.xml.h:8
-#: capplets/screensaver/screensavers/qix.xml.h:7
+#: capplets/screensaver/screensavers/attraction.xml.h:2
+msgid "Color Contrast"
+msgstr "Barvni kontrast"
+
+#: capplets/screensaver/screensavers/attraction.xml.h:4
+msgid "Length of Trail"
+msgstr "Dol¾ina sledi"
+
+#: capplets/screensaver/screensavers/attraction.xml.h:5
+#: capplets/screensaver/screensavers/qix.xml.h:5
 msgid "Lines"
 msgstr "Èrte"
 
-#: capplets/screensaver/screensavers/attraction.xml.h:9
-msgid "Tails"
-msgstr "Repi"
+#: capplets/screensaver/screensavers/attraction.xml.h:7
+#: capplets/screensaver/screensavers/braid.xml.h:2
+#: capplets/screensaver/screensavers/fadeplot.xml.h:3
+#: capplets/screensaver/screensavers/sierpinski.xml.h:2
+#: capplets/screensaver/screensavers/spiral.xml.h:2
+#: capplets/screensaver/screensavers/triangle.xml.h:2
+#: capplets/screensaver/screensavers/vines.xml.h:2
+msgid "Number of Colors"
+msgstr "©tevilo barv"
 
-#: capplets/screensaver/screensavers/attraction.xml.h:10
-#: capplets/screensaver/screensavers/qix.xml.h:8
+#: capplets/screensaver/screensavers/attraction.xml.h:8
+#: capplets/screensaver/screensavers/qix.xml.h:9
 msgid "Polygons"
 msgstr "Poligoni"
 
-#: capplets/screensaver/screensavers/attraction.xml.h:11
+#: capplets/screensaver/screensavers/attraction.xml.h:10
 msgid "Splines"
-msgstr "Zlepki"
+msgstr "Mehke krivulje"
+
+#: capplets/screensaver/screensavers/attraction.xml.h:11
+msgid "Tails"
+msgstr "Repi"
 
 #: capplets/screensaver/screensavers/attraction.xml.h:12
 msgid "Threshold of repulsion"
 msgstr "Prag odboja"
 
-#: capplets/screensaver/screensavers/attraction.xml.h:15
-msgid "Length of Trail"
-msgstr "Dol¾ina sledi"
-
-#: capplets/screensaver/screensavers/attraction.xml.h:16
-#: capplets/screensaver/screensavers/qix.xml.h:19
-#: capplets/screensaver/screensavers/qix.xml.h:25
-#: capplets/screensaver/screensavers/rorschach.xml.h:16
-msgid "Short"
-msgstr "Hitro"
-
-#: capplets/screensaver/screensavers/attraction.xml.h:17
-#: capplets/screensaver/screensavers/qix.xml.h:20
-#: capplets/screensaver/screensavers/qix.xml.h:26
-#: capplets/screensaver/screensavers/rorschach.xml.h:17
-msgid "Long"
-msgstr "Dolgo"
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/attraction.xml.h:23
-#: capplets/screensaver/screensavers/braid.xml.h:7
-#: capplets/screensaver/screensavers/fadeplot.xml.h:7
-#: capplets/screensaver/screensavers/sierpinski.xml.h:7
-#: capplets/screensaver/screensavers/spiral.xml.h:12
-#: capplets/screensaver/screensavers/triangle.xml.h:7
-#: capplets/screensaver/screensavers/vines.xml.h:7
-msgid "Number of Colors"
-msgstr "©tevilo barv"
-
-#: capplets/screensaver/screensavers/attraction.xml.h:24
-msgid "Color Contrast"
-msgstr "Barvni kontrast"
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/blitspin.xml.h:7
-msgid "Speed of rotation."
-msgstr "Hitrost sukanja."
-
-#: capplets/screensaver/screensavers/blitspin.xml.h:8
-#: capplets/screensaver/screensavers/blitspin.xml.h:11
-#: capplets/screensaver/screensavers/bouboule.xml.h:10
-#: capplets/screensaver/screensavers/bubbles.xml.h:8
-#: capplets/screensaver/screensavers/coral.xml.h:13
-#: capplets/screensaver/screensavers/crystal.xml.h:10
-#: capplets/screensaver/screensavers/cynosure.xml.h:13
-#: capplets/screensaver/screensavers/decayscreen.xml.h:8
-#: capplets/screensaver/screensavers/discrete.xml.h:10
-#: capplets/screensaver/screensavers/drift.xml.h:10
-#: capplets/screensaver/screensavers/epicycle.xml.h:8
-#: capplets/screensaver/screensavers/fadeplot.xml.h:12
-#: capplets/screensaver/screensavers/flame.xml.h:13
-#: capplets/screensaver/screensavers/flame.xml.h:16
-#: capplets/screensaver/screensavers/forest.xml.h:10
-#: capplets/screensaver/screensavers/goop.xml.h:10
-#: capplets/screensaver/screensavers/greynetic.xml.h:8
-#: capplets/screensaver/screensavers/halo.xml.h:12
-#: capplets/screensaver/screensavers/helix.xml.h:8
-#: capplets/screensaver/screensavers/hopalong.xml.h:10
-#: capplets/screensaver/screensavers/hypercube.xml.h:11
-#: capplets/screensaver/screensavers/jigsaw.xml.h:8
-#: capplets/screensaver/screensavers/julia.xml.h:10
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:13
-#: capplets/screensaver/screensavers/lisa.xml.h:10
-#: capplets/screensaver/screensavers/lmorph.xml.h:13
-#: capplets/screensaver/screensavers/moire.xml.h:8
-#: capplets/screensaver/screensavers/munch.xml.h:8
-#: capplets/screensaver/screensavers/pyro.xml.h:11
-#: capplets/screensaver/screensavers/sierpinski.xml.h:10
-#: capplets/screensaver/screensavers/spiral.xml.h:10
-msgid "Faster"
-msgstr "Hitro"
-
-#: capplets/screensaver/screensavers/blitspin.xml.h:9
-#: capplets/screensaver/screensavers/blitspin.xml.h:12
-#: capplets/screensaver/screensavers/bouboule.xml.h:11
-#: capplets/screensaver/screensavers/bubbles.xml.h:9
-#: capplets/screensaver/screensavers/coral.xml.h:14
-#: capplets/screensaver/screensavers/crystal.xml.h:11
-#: capplets/screensaver/screensavers/cynosure.xml.h:14
-#: capplets/screensaver/screensavers/decayscreen.xml.h:9
-#: capplets/screensaver/screensavers/discrete.xml.h:11
-#: capplets/screensaver/screensavers/drift.xml.h:11
-#: capplets/screensaver/screensavers/epicycle.xml.h:9
-#: capplets/screensaver/screensavers/fadeplot.xml.h:13
-#: capplets/screensaver/screensavers/fadeplot.xml.h:16
-#: capplets/screensaver/screensavers/flame.xml.h:14
-#: capplets/screensaver/screensavers/flame.xml.h:17
-#: capplets/screensaver/screensavers/forest.xml.h:11
-#: capplets/screensaver/screensavers/goop.xml.h:11
-#: capplets/screensaver/screensavers/greynetic.xml.h:9
-#: capplets/screensaver/screensavers/halo.xml.h:13
-#: capplets/screensaver/screensavers/helix.xml.h:9
-#: capplets/screensaver/screensavers/hopalong.xml.h:11
-#: capplets/screensaver/screensavers/hypercube.xml.h:12
-#: capplets/screensaver/screensavers/jigsaw.xml.h:9
-#: capplets/screensaver/screensavers/julia.xml.h:11
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:14
-#: capplets/screensaver/screensavers/lisa.xml.h:11
-#: capplets/screensaver/screensavers/lmorph.xml.h:14
-#: capplets/screensaver/screensavers/moire.xml.h:9
-#: capplets/screensaver/screensavers/munch.xml.h:9
-#: capplets/screensaver/screensavers/pyro.xml.h:10
-#: capplets/screensaver/screensavers/sierpinski.xml.h:11
-#: capplets/screensaver/screensavers/spiral.xml.h:11
-msgid "Slower"
-msgstr "Poèasno"
-
-#: capplets/screensaver/screensavers/blitspin.xml.h:10
-msgid "Speed of the 90 degree rotation."
-msgstr "Hitrost zasuka za 90 stopinj."
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/blitspin.xml.h:13
-#: capplets/screensaver/screensavers/bouboule.xml.h:15
-#: capplets/screensaver/screensavers/braid.xml.h:9
-#: capplets/screensaver/screensavers/bubbles.xml.h:13
-#: capplets/screensaver/screensavers/crystal.xml.h:15
-#: capplets/screensaver/screensavers/cynosure.xml.h:15
-#: capplets/screensaver/screensavers/decayscreen.xml.h:10
-#: capplets/screensaver/screensavers/discrete.xml.h:14
-#: capplets/screensaver/screensavers/drift.xml.h:15
-#: capplets/screensaver/screensavers/epicycle.xml.h:12
-#: capplets/screensaver/screensavers/fadeplot.xml.h:17
-#: capplets/screensaver/screensavers/flame.xml.h:18
-#: capplets/screensaver/screensavers/forest.xml.h:14
-#: capplets/screensaver/screensavers/goop.xml.h:12
-#: capplets/screensaver/screensavers/grav.xml.h:11
-#: capplets/screensaver/screensavers/greynetic.xml.h:10
-#: capplets/screensaver/screensavers/halo.xml.h:14
-#: capplets/screensaver/screensavers/helix.xml.h:10
-#: capplets/screensaver/screensavers/hopalong.xml.h:15
-#: capplets/screensaver/screensavers/hypercube.xml.h:13
-#: capplets/screensaver/screensavers/ifs.xml.h:9
-#: capplets/screensaver/screensavers/julia.xml.h:14
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:15
-#: capplets/screensaver/screensavers/laser.xml.h:12
-#: capplets/screensaver/screensavers/lightning.xml.h:9
-#: capplets/screensaver/screensavers/lisa.xml.h:17
-#: capplets/screensaver/screensavers/lmorph.xml.h:16
-#: capplets/screensaver/screensavers/moire.xml.h:15
-#: capplets/screensaver/screensavers/munch.xml.h:12
-#: capplets/screensaver/screensavers/pedal.xml.h:16
-#: capplets/screensaver/screensavers/sierpinski.xml.h:12
-#: capplets/screensaver/screensavers/spiral.xml.h:16
-#: capplets/screensaver/screensavers/triangle.xml.h:9
-#: capplets/screensaver/screensavers/vines.xml.h:9
-#: capplets/screensaver/screensavers/xroger.xml.h:7
+#: capplets/screensaver/screensavers/blitspin.xml.h:1
+#: capplets/screensaver/screensavers/bouboule.xml.h:1
+#: capplets/screensaver/screensavers/braid.xml.h:1
+#: capplets/screensaver/screensavers/bubbles.xml.h:2
+#: capplets/screensaver/screensavers/crystal.xml.h:3
+#: capplets/screensaver/screensavers/cynosure.xml.h:1
+#: capplets/screensaver/screensavers/decayscreen.xml.h:1
+#: capplets/screensaver/screensavers/discrete.xml.h:1
+#: capplets/screensaver/screensavers/drift.xml.h:1
+#: capplets/screensaver/screensavers/epicycle.xml.h:1
+#: capplets/screensaver/screensavers/fadeplot.xml.h:1
+#: capplets/screensaver/screensavers/flame.xml.h:1
+#: capplets/screensaver/screensavers/forest.xml.h:2
+#: capplets/screensaver/screensavers/goop.xml.h:1
+#: capplets/screensaver/screensavers/grav.xml.h:1
+#: capplets/screensaver/screensavers/greynetic.xml.h:1
+#: capplets/screensaver/screensavers/halo.xml.h:3
+#: capplets/screensaver/screensavers/helix.xml.h:1
+#: capplets/screensaver/screensavers/hopalong.xml.h:1
+#: capplets/screensaver/screensavers/hypercube.xml.h:1
+#: capplets/screensaver/screensavers/ifs.xml.h:1
+#: capplets/screensaver/screensavers/julia.xml.h:1
+#: capplets/screensaver/screensavers/kaleidescope.xml.h:1
+#: capplets/screensaver/screensavers/laser.xml.h:1
+#: capplets/screensaver/screensavers/lightning.xml.h:1
+#: capplets/screensaver/screensavers/lisa.xml.h:1
+#: capplets/screensaver/screensavers/lmorph.xml.h:1
+#: capplets/screensaver/screensavers/moire.xml.h:1
+#: capplets/screensaver/screensavers/munch.xml.h:1
+#: capplets/screensaver/screensavers/pedal.xml.h:1
+#: capplets/screensaver/screensavers/sierpinski.xml.h:1
+#: capplets/screensaver/screensavers/spiral.xml.h:1
+#: capplets/screensaver/screensavers/triangle.xml.h:1
+#: capplets/screensaver/screensavers/vines.xml.h:1
+#: capplets/screensaver/screensavers/xroger.xml.h:1
 msgid "Display screensaver in monochrome."
 msgstr "Èrnobel ohranjevalnik zaslona."
 
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/bouboule.xml.h:7
-#: capplets/screensaver/screensavers/crystal.xml.h:7
-#: capplets/screensaver/screensavers/cynosure.xml.h:7
-#: capplets/screensaver/screensavers/discrete.xml.h:7
-#: capplets/screensaver/screensavers/drift.xml.h:7
-#: capplets/screensaver/screensavers/forest.xml.h:7
-#: capplets/screensaver/screensavers/grav.xml.h:7
-#: capplets/screensaver/screensavers/halo.xml.h:7
-#: capplets/screensaver/screensavers/hopalong.xml.h:7
-#: capplets/screensaver/screensavers/ifs.xml.h:7
-#: capplets/screensaver/screensavers/julia.xml.h:7
-#: capplets/screensaver/screensavers/lightning.xml.h:7
-#: capplets/screensaver/screensavers/lisa.xml.h:7
-#: capplets/screensaver/screensavers/moire.xml.h:10
+#: capplets/screensaver/screensavers/blitspin.xml.h:2
+msgid "Speed of rotation."
+msgstr "Hitrost vrtenja."
+
+#: capplets/screensaver/screensavers/blitspin.xml.h:3
+msgid "Speed of the 90 degree rotation."
+msgstr "Hitrost zasuka za 90 stopinj."
+
+#: capplets/screensaver/screensavers/bouboule.xml.h:2
+#: capplets/screensaver/screensavers/crystal.xml.h:5
+#: capplets/screensaver/screensavers/cynosure.xml.h:2
+#: capplets/screensaver/screensavers/discrete.xml.h:2
+#: capplets/screensaver/screensavers/drift.xml.h:3
+#: capplets/screensaver/screensavers/forest.xml.h:3
+#: capplets/screensaver/screensavers/grav.xml.h:2
+#: capplets/screensaver/screensavers/halo.xml.h:4
+#: capplets/screensaver/screensavers/hopalong.xml.h:2
+#: capplets/screensaver/screensavers/ifs.xml.h:2
+#: capplets/screensaver/screensavers/julia.xml.h:2
+#: capplets/screensaver/screensavers/lightning.xml.h:2
+#: capplets/screensaver/screensavers/lisa.xml.h:2
+#: capplets/screensaver/screensavers/moire.xml.h:3
 msgid "Number of Colors."
 msgstr "©tevilo barv."
 
-#: capplets/screensaver/screensavers/bouboule.xml.h:8
-#: capplets/screensaver/screensavers/braid.xml.h:8
-#: capplets/screensaver/screensavers/crystal.xml.h:8
-#: capplets/screensaver/screensavers/cynosure.xml.h:8
-#: capplets/screensaver/screensavers/discrete.xml.h:8
-#: capplets/screensaver/screensavers/drift.xml.h:8
-#: capplets/screensaver/screensavers/fadeplot.xml.h:8
-#: capplets/screensaver/screensavers/forest.xml.h:8
-#: capplets/screensaver/screensavers/grav.xml.h:8
-#: capplets/screensaver/screensavers/halo.xml.h:8
-#: capplets/screensaver/screensavers/hopalong.xml.h:8
-#: capplets/screensaver/screensavers/ifs.xml.h:8
-#: capplets/screensaver/screensavers/julia.xml.h:8
-#: capplets/screensaver/screensavers/lightning.xml.h:8
-#: capplets/screensaver/screensavers/lisa.xml.h:8
-#: capplets/screensaver/screensavers/moire.xml.h:11
-#: capplets/screensaver/screensavers/sierpinski.xml.h:8
-#: capplets/screensaver/screensavers/spiral.xml.h:13
-#: capplets/screensaver/screensavers/triangle.xml.h:8
-#: capplets/screensaver/screensavers/vines.xml.h:8
-msgid "Colors:"
-msgstr "Barv:"
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/bouboule.xml.h:9
-#: capplets/screensaver/screensavers/bubbles.xml.h:7
-#: capplets/screensaver/screensavers/coral.xml.h:12
-#: capplets/screensaver/screensavers/crystal.xml.h:9
-#: capplets/screensaver/screensavers/cynosure.xml.h:12
-#: capplets/screensaver/screensavers/decayscreen.xml.h:7
-#: capplets/screensaver/screensavers/discrete.xml.h:9
-#: capplets/screensaver/screensavers/drift.xml.h:9
-#: capplets/screensaver/screensavers/epicycle.xml.h:7
-#: capplets/screensaver/screensavers/flame.xml.h:12
-#: capplets/screensaver/screensavers/goop.xml.h:9
-#: capplets/screensaver/screensavers/greynetic.xml.h:7
-#: capplets/screensaver/screensavers/halo.xml.h:11
-#: capplets/screensaver/screensavers/hopalong.xml.h:9
-#: capplets/screensaver/screensavers/hypercube.xml.h:10
-#: capplets/screensaver/screensavers/jigsaw.xml.h:7
-#: capplets/screensaver/screensavers/julia.xml.h:9
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:12
-#: capplets/screensaver/screensavers/lisa.xml.h:9
-#: capplets/screensaver/screensavers/lmorph.xml.h:12
-#: capplets/screensaver/screensavers/moire.xml.h:7
-#: capplets/screensaver/screensavers/munch.xml.h:7
-#: capplets/screensaver/screensavers/spiral.xml.h:9
-msgid "Speed of Motion."
-msgstr "Hitrost gibanja."
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/bouboule.xml.h:12
-#: capplets/screensaver/screensavers/goop.xml.h:7
+#: capplets/screensaver/screensavers/bouboule.xml.h:3
+#: capplets/screensaver/screensavers/goop.xml.h:3
 msgid "Number of bubbles to use."
 msgstr "©tevilo uporabljenih mehurèkov."
 
-#: capplets/screensaver/screensavers/bouboule.xml.h:13
-#: capplets/screensaver/screensavers/crystal.xml.h:13
-#: capplets/screensaver/screensavers/discrete.xml.h:13
-#: capplets/screensaver/screensavers/drift.xml.h:13
-#: capplets/screensaver/screensavers/fadeplot.xml.h:10
-#: capplets/screensaver/screensavers/forest.xml.h:13
-#: capplets/screensaver/screensavers/goop.xml.h:8
-#: capplets/screensaver/screensavers/grav.xml.h:10
-#: capplets/screensaver/screensavers/halo.xml.h:10
-#: capplets/screensaver/screensavers/julia.xml.h:13
-#: capplets/screensaver/screensavers/lisa.xml.h:13
-#: capplets/screensaver/screensavers/pyro.xml.h:8
-#: capplets/screensaver/screensavers/spiral.xml.h:15
-msgid "Count:"
-msgstr "©tevilo:"
+#: capplets/screensaver/screensavers/bouboule.xml.h:4
+#: capplets/screensaver/screensavers/bubbles.xml.h:5
+#: capplets/screensaver/screensavers/coral.xml.h:3
+#: capplets/screensaver/screensavers/crystal.xml.h:7
+#: capplets/screensaver/screensavers/cynosure.xml.h:4
+#: capplets/screensaver/screensavers/decayscreen.xml.h:2
+#: capplets/screensaver/screensavers/discrete.xml.h:4
+#: capplets/screensaver/screensavers/drift.xml.h:5
+#: capplets/screensaver/screensavers/epicycle.xml.h:2
+#: capplets/screensaver/screensavers/flame.xml.h:4
+#: capplets/screensaver/screensavers/goop.xml.h:4
+#: capplets/screensaver/screensavers/greynetic.xml.h:2
+#: capplets/screensaver/screensavers/halo.xml.h:6
+#: capplets/screensaver/screensavers/hopalong.xml.h:4
+#: capplets/screensaver/screensavers/hypercube.xml.h:3
+#: capplets/screensaver/screensavers/jigsaw.xml.h:1
+#: capplets/screensaver/screensavers/julia.xml.h:4
+#: capplets/screensaver/screensavers/kaleidescope.xml.h:4
+#: capplets/screensaver/screensavers/lisa.xml.h:5
+#: capplets/screensaver/screensavers/lmorph.xml.h:5
+#: capplets/screensaver/screensavers/moire.xml.h:4
+#: capplets/screensaver/screensavers/munch.xml.h:3
+#: capplets/screensaver/screensavers/spiral.xml.h:4
+msgid "Speed of Motion."
+msgstr "Hitrost gibanja."
 
-#: capplets/screensaver/screensavers/bouboule.xml.h:14
+#: capplets/screensaver/screensavers/bouboule.xml.h:5
 msgid "Use red/blue 3d seperation."
 msgstr "Uporabi 3d razloèevanje rdeèe in modre."
 
-#: capplets/screensaver/screensavers/bubbles.xml.h:10
-msgid "Draw circles instead of pixmap bubbles."
-msgstr "Ri¹i kro¾ce namesto mehurèkov."
-
-#: capplets/screensaver/screensavers/bubbles.xml.h:11
-msgid "Don't hide bubbles when they pop."
-msgstr "Ne skrij mehurèkov, ko poèijo."
-
-#: capplets/screensaver/screensavers/bubbles.xml.h:12
+#: capplets/screensaver/screensavers/bubbles.xml.h:1
 msgid "Bubbles exist in three dimensions."
 msgstr "Mehurèki obstajajo v treh dimenzijah."
 
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/compass.xml.h:7
-msgid "Use double buffering"
-msgstr "Uporabi dvojni izravnalnik"
+#: capplets/screensaver/screensavers/bubbles.xml.h:3
+msgid "Don't hide bubbles when they pop."
+msgstr "Ne skrij mehurèkov, ko poèijo."
 
-#: capplets/screensaver/screensavers/compass.xml.h:8
+#: capplets/screensaver/screensavers/bubbles.xml.h:4
+msgid "Draw circles instead of pixmap bubbles."
+msgstr "Ri¹i kro¾ce namesto mehurèkov."
+
+#: capplets/screensaver/screensavers/compass.xml.h:1
 msgid "Don't use double bufferinge"
 msgstr "Ne uporabljal dvojnega izravnalnika"
 
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/coral.xml.h:7
+#: capplets/screensaver/screensavers/compass.xml.h:5
+msgid "Use double buffering"
+msgstr "Uporabi dvojni izravnalnik"
+
+#: capplets/screensaver/screensavers/coral.xml.h:1
 msgid "Density"
 msgstr "Gostota"
 
-#: capplets/screensaver/screensavers/coral.xml.h:8
-msgid "Denser"
-msgstr "Redko"
-
-#: capplets/screensaver/screensavers/coral.xml.h:9
-msgid "Thinner"
-msgstr "Gosto"
-
-#: capplets/screensaver/screensavers/coral.xml.h:10
+#: capplets/screensaver/screensavers/coral.xml.h:2
 msgid "Number of seeds"
 msgstr "©tevilo semen"
 
-#: capplets/screensaver/screensavers/coral.xml.h:11
-msgid "Seeds"
-msgstr "Semen"
-
-#: capplets/screensaver/screensavers/crystal.xml.h:12
-msgid "Number of polygons to use."
-msgstr "©tevilo uporabljenih poligonov."
-
-#: capplets/screensaver/screensavers/crystal.xml.h:14
-msgid "Center image."
-msgstr "Centriraj sliko."
-
-#: capplets/screensaver/screensavers/crystal.xml.h:16
-msgid "Have at maximum size"
-msgstr "Imej najveèjo velikost"
-
-#: capplets/screensaver/screensavers/crystal.xml.h:17
+#: capplets/screensaver/screensavers/crystal.xml.h:1
 msgid "Cell"
 msgstr "Celica"
 
-#: capplets/screensaver/screensavers/cynosure.xml.h:9
+#: capplets/screensaver/screensavers/crystal.xml.h:2
+msgid "Center image."
+msgstr "Centriraj sliko"
+
+#: capplets/screensaver/screensavers/crystal.xml.h:4
+msgid "Have at maximum size"
+msgstr "Imej najveèjo velikost"
+
+#: capplets/screensaver/screensavers/crystal.xml.h:6
+msgid "Number of polygons to use."
+msgstr "©tevilo uporabljenih poligonov."
+
+#: capplets/screensaver/screensavers/cynosure.xml.h:3
 msgid "Number of iterations."
 msgstr "©tevilo ponovitev."
 
-#: capplets/screensaver/screensavers/cynosure.xml.h:10
-#: capplets/screensaver/screensavers/flame.xml.h:10
-#: capplets/screensaver/screensavers/hopalong.xml.h:13
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:10
-#: capplets/screensaver/screensavers/lmorph.xml.h:10
-#: capplets/screensaver/screensavers/pedal.xml.h:11
-#: capplets/screensaver/screensavers/pyro.xml.h:13
-msgid "Less"
-msgstr "Malo"
-
-#: capplets/screensaver/screensavers/cynosure.xml.h:11
-#: capplets/screensaver/screensavers/fadeplot.xml.h:15
-#: capplets/screensaver/screensavers/flame.xml.h:11
-#: capplets/screensaver/screensavers/hopalong.xml.h:14
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:11
-#: capplets/screensaver/screensavers/lmorph.xml.h:11
-#: capplets/screensaver/screensavers/pedal.xml.h:12
-#: capplets/screensaver/screensavers/pyro.xml.h:14
-msgid "More"
-msgstr "Veliko"
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/deco.xml.h:7
-#: capplets/screensaver/screensavers/spiral.xml.h:7
-msgid "Time between redraws:"
-msgstr "Èas med risanji:"
-
-#: capplets/screensaver/screensavers/deco.xml.h:8
-msgid "seconds"
-msgstr "sekund"
-
-#: capplets/screensaver/screensavers/deco.xml.h:9
-msgid "Use color when drawing."
-msgstr "Za risanje uporabi barve."
-
-#: capplets/screensaver/screensavers/deco.xml.h:10
+#: capplets/screensaver/screensavers/deco.xml.h:1
 msgid "Cycle through colors."
 msgstr "Kro¾i skozi barve."
 
-#: capplets/screensaver/screensavers/discrete.xml.h:12
-#: capplets/screensaver/screensavers/julia.xml.h:12
-#: capplets/screensaver/screensavers/lisa.xml.h:12
-#: capplets/screensaver/screensavers/spiral.xml.h:14
+#: capplets/screensaver/screensavers/deco.xml.h:2
+msgid "Use color when drawing."
+msgstr "Za risanje uporabi barve."
+
+#: capplets/screensaver/screensavers/discrete.xml.h:3
+#: capplets/screensaver/screensavers/julia.xml.h:3
+#: capplets/screensaver/screensavers/lisa.xml.h:3
+#: capplets/screensaver/screensavers/spiral.xml.h:3
 msgid "Number to use."
 msgstr "©tevilo uporabljenih."
 
-#: capplets/screensaver/screensavers/drift.xml.h:12
-msgid "Number of pixels to use."
-msgstr "©tevilo uporabljenih pik."
-
-#: capplets/screensaver/screensavers/drift.xml.h:14
+#: capplets/screensaver/screensavers/drift.xml.h:2
 msgid "Fractals should grow."
 msgstr "Fraktali naj rastejo."
 
-#: capplets/screensaver/screensavers/drift.xml.h:16
+#: capplets/screensaver/screensavers/drift.xml.h:4
+msgid "Number of pixels to use."
+msgstr "©tevilo uporabljenih pik."
+
+#: capplets/screensaver/screensavers/drift.xml.h:6
 msgid "Use lissajous figures to get points."
 msgstr "Uporabi lissajeve skice za pridobitev toèk."
 
-#: capplets/screensaver/screensavers/epicycle.xml.h:10
-#: capplets/screensaver/screensavers/flame.xml.h:15
+#: capplets/screensaver/screensavers/epicycle.xml.h:3
+#: capplets/screensaver/screensavers/flame.xml.h:5
 msgid "Time finished product is shown."
 msgstr "Èas, ko je konèan produkt pokazan."
 
-#: capplets/screensaver/screensavers/epicycle.xml.h:11
-#: capplets/screensaver/screensavers/spiral.xml.h:8
-#: capplets/screensaver/screensavers/starfish.xml.h:15
-msgid "Seconds"
-msgstr "Sekund"
-
-#: capplets/screensaver/screensavers/fadeplot.xml.h:9
+#: capplets/screensaver/screensavers/fadeplot.xml.h:2
 msgid "Number"
 msgstr "©tevilo"
 
-#: capplets/screensaver/screensavers/fadeplot.xml.h:11
-#: capplets/screensaver/screensavers/sierpinski.xml.h:9
-msgid "Speed of Motion"
-msgstr "Hitrost gibanja"
-
-#: capplets/screensaver/screensavers/fadeplot.xml.h:14
+#: capplets/screensaver/screensavers/fadeplot.xml.h:4
 msgid "Number of cycles"
 msgstr "©tevilo ciklov"
 
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/flag.xml.h:7
-msgid "Text for flag"
-msgstr "Besedilo za zastavo"
+#: capplets/screensaver/screensavers/fadeplot.xml.h:5
+#: capplets/screensaver/screensavers/sierpinski.xml.h:3
+msgid "Speed of Motion"
+msgstr "Hitrost gibanja"
 
-#: capplets/screensaver/screensavers/flag.xml.h:8
+#: capplets/screensaver/screensavers/flag.xml.h:1
 msgid "Bitmap for flag"
 msgstr "Slika za zastavo"
 
-#: capplets/screensaver/screensavers/flag.xml.h:15
+#: capplets/screensaver/screensavers/flag.xml.h:5
 msgid "Random size up to"
 msgstr "Nakljuèna velikost vse do"
 
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/flame.xml.h:7
+#: capplets/screensaver/screensavers/flag.xml.h:8
+msgid "Text for flag"
+msgstr "Besedilo za zastavo"
+
+#: capplets/screensaver/screensavers/flame.xml.h:2
 msgid "Number of fractals to generate."
 msgstr "©tevilo generiranih fraktalov."
 
-#: capplets/screensaver/screensavers/flame.xml.h:8
-msgid "Iterations:"
-msgstr "©tevilo ponovitev:"
-
-#: capplets/screensaver/screensavers/flame.xml.h:9
+#: capplets/screensaver/screensavers/flame.xml.h:3
 msgid "Pixels per fractal."
 msgstr "Pik na fraktal."
 
-#: capplets/screensaver/screensavers/forest.xml.h:9
+#: capplets/screensaver/screensavers/forest.xml.h:1
 msgid "Delay between redraws."
 msgstr "Premor pred naslednjim risanjem."
 
-#: capplets/screensaver/screensavers/forest.xml.h:12
+#: capplets/screensaver/screensavers/forest.xml.h:4
 msgid "Number of trees to use."
 msgstr "©tevilo uporabljenih dreves."
 
-#: capplets/screensaver/screensavers/goop.xml.h:13
+#: capplets/screensaver/screensavers/goop.xml.h:2
 msgid "Have transparent bubbles."
 msgstr "Prosojni mehurèki."
 
-#: capplets/screensaver/screensavers/goop.xml.h:14
+#: capplets/screensaver/screensavers/goop.xml.h:5
 msgid "Use additive color model."
 msgstr "Uporabi aditivni barvni model."
 
-#: capplets/screensaver/screensavers/grav.xml.h:9
+#: capplets/screensaver/screensavers/grav.xml.h:3
 msgid "Number of planets to use."
 msgstr "©tevilo uporabljenih planetov."
 
-#: capplets/screensaver/screensavers/grav.xml.h:12
-msgid "Orbit should decay."
-msgstr "Orbita naj se spu¹èa."
-
-#: capplets/screensaver/screensavers/grav.xml.h:13
+#: capplets/screensaver/screensavers/grav.xml.h:4
 msgid "Objects should leave trails behind them."
 msgstr "Predmeti naj za sabo pu¹èajo sledove."
 
-#: capplets/screensaver/screensavers/halo.xml.h:9
-msgid "Number of circles to use."
-msgstr "©tevilo uporabljenih krogov."
+#: capplets/screensaver/screensavers/grav.xml.h:5
+msgid "Orbit should decay."
+msgstr "Orbita naj se spu¹èa."
 
-#: capplets/screensaver/screensavers/halo.xml.h:15
-msgid "Use a gradient of colors between circles."
-msgstr "Uporabi prelivanje barv med krogi."
-
-#: capplets/screensaver/screensavers/halo.xml.h:16
+#: capplets/screensaver/screensavers/halo.xml.h:1
 msgid "Animate circles."
 msgstr "Animirani krogi."
 
-#: capplets/screensaver/screensavers/halo.xml.h:17
+#: capplets/screensaver/screensavers/halo.xml.h:2
 msgid "Cycle through colormap."
 msgstr "Kro¾i skozi barvno paleto."
 
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/helix.xml.h:7
+#: capplets/screensaver/screensavers/halo.xml.h:5
+msgid "Number of circles to use."
+msgstr "©tevilo uporabljenih krogov."
+
+#: capplets/screensaver/screensavers/halo.xml.h:7
+msgid "Use a gradient of colors between circles."
+msgstr "Uporabi prelivanje barv med krogi."
+
+#: capplets/screensaver/screensavers/helix.xml.h:2
 msgid "Time between redraws."
 msgstr "Èas med risanji."
 
-#: capplets/screensaver/screensavers/hopalong.xml.h:12
+#: capplets/screensaver/screensavers/hopalong.xml.h:3
 msgid "Number of pixels before a color change."
 msgstr "©tevilo pik pred spremembo barve."
 
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/hypercube.xml.h:7
+#: capplets/screensaver/screensavers/hypercube.xml.h:2
 msgid "Distance from center of cube"
 msgstr "Razdalja od sredi¹èa kocke"
 
-#: capplets/screensaver/screensavers/hypercube.xml.h:8
-msgid "Closer"
-msgstr "Blizu"
-
-#: capplets/screensaver/screensavers/hypercube.xml.h:9
-msgid "Farther"
-msgstr "Daleè"
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:7
+#: capplets/screensaver/screensavers/kaleidescope.xml.h:2
 msgid "Number of segments."
 msgstr "¹tevilo daljic."
 
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:8
-msgid "Segments"
-msgstr "Daljice"
-
-#: capplets/screensaver/screensavers/kaleidescope.xml.h:9
+#: capplets/screensaver/screensavers/kaleidescope.xml.h:3
 msgid "Number of trails."
 msgstr "©tevilo sledov."
 
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/laser.xml.h:7
+#: capplets/screensaver/screensavers/laser.xml.h:2
 msgid "Duration of laser burst."
 msgstr "Trajanje izbruha laserja."
 
-#: capplets/screensaver/screensavers/laser.xml.h:8
-#: capplets/screensaver/screensavers/pedal.xml.h:8
-#: capplets/screensaver/screensavers/pedal.xml.h:14
-msgid "Shorter"
-msgstr "Hitro"
-
-#: capplets/screensaver/screensavers/laser.xml.h:9
-#: capplets/screensaver/screensavers/pedal.xml.h:9
-#: capplets/screensaver/screensavers/pedal.xml.h:15
-msgid "Longer"
-msgstr "Dolgo"
-
-#: capplets/screensaver/screensavers/laser.xml.h:10
+#: capplets/screensaver/screensavers/laser.xml.h:3
 msgid "Size of burst."
 msgstr "Velikost izbruha."
 
-#: capplets/screensaver/screensavers/laser.xml.h:11
-msgid "Segments:"
-msgstr "Daljice:"
-
-#: capplets/screensaver/screensavers/lisa.xml.h:14
+#: capplets/screensaver/screensavers/lisa.xml.h:4
 msgid "Size of object."
 msgstr "Velikost predmeta."
 
-#: capplets/screensaver/screensavers/lisa.xml.h:15
-#: capplets/screensaver/screensavers/moire.xml.h:13
-msgid "Smaller"
-msgstr "Majhen"
-
-#: capplets/screensaver/screensavers/lisa.xml.h:16
-#: capplets/screensaver/screensavers/moire.xml.h:14
-msgid "Larger"
-msgstr "Velik"
-
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/lmorph.xml.h:7
-msgid "Number of points."
-msgstr "©tevilo toèk."
-
-#: capplets/screensaver/screensavers/lmorph.xml.h:8
-msgid "Points:"
-msgstr "Toèk:"
-
-#: capplets/screensaver/screensavers/lmorph.xml.h:9
+#: capplets/screensaver/screensavers/lmorph.xml.h:2
 msgid "Number of interpolation steps."
 msgstr "©tevilo korakov interpolacije."
 
-#: capplets/screensaver/screensavers/lmorph.xml.h:15
+#: capplets/screensaver/screensavers/lmorph.xml.h:3
+msgid "Number of points."
+msgstr "©tevilo toèk."
+
+#: capplets/screensaver/screensavers/lmorph.xml.h:4
 msgid "Open figures."
 msgstr "Odpri skice."
 
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/maze.xml.h:7
-msgid "Delay between each step in the maze."
-msgstr "Premor med vsakim korakom poti."
-
-#: capplets/screensaver/screensavers/maze.xml.h:8
-#: capplets/screensaver/screensavers/maze.xml.h:11
-#: capplets/screensaver/screensavers/maze.xml.h:14
-msgid "Less Delay"
-msgstr "Majhen premor"
-
-#: capplets/screensaver/screensavers/maze.xml.h:9
-#: capplets/screensaver/screensavers/maze.xml.h:12
-#: capplets/screensaver/screensavers/maze.xml.h:15
-msgid "More Delay"
-msgstr "Velik premor"
-
-#: capplets/screensaver/screensavers/maze.xml.h:10
+#: capplets/screensaver/screensavers/maze.xml.h:1
 msgid "Delay between drawing the maze and starting the solution."
 msgstr "Premor med risanjem zidu in zaèetkom re¹evanja."
 
-#: capplets/screensaver/screensavers/maze.xml.h:13
+#: capplets/screensaver/screensavers/maze.xml.h:2
+msgid "Delay between each step in the maze."
+msgstr "Premor med vsakim korakom poti."
+
+#: capplets/screensaver/screensavers/maze.xml.h:3
 msgid "Delay between finishing the maze and starting a new one."
 msgstr "Premor med konèanjem labirinta in zaèetkom novega."
 
-#: capplets/screensaver/screensavers/maze.xml.h:16
+#: capplets/screensaver/screensavers/maze.xml.h:4
 msgid "Put a bridge over the logo?"
 msgstr "Postavi most nad logotip?"
 
-#: capplets/screensaver/screensavers/moire.xml.h:12
+#: capplets/screensaver/screensavers/moire.xml.h:2
 msgid "Maximum radius increment"
 msgstr "Najveèje poveèanje radija"
 
-#: capplets/screensaver/screensavers/munch.xml.h:10
-msgid "Use XOR drawing function."
-msgstr "Uporabi XOR za risanje."
-
-#: capplets/screensaver/screensavers/munch.xml.h:11
+#: capplets/screensaver/screensavers/munch.xml.h:2
 msgid "Draw square at weird starting points."
 msgstr "Spremeni risanje kvadrata na èuden naèin."
 
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/pedal.xml.h:7
-msgid "Time to show each picture."
-msgstr "Èas prikaza vsake slike."
+#: capplets/screensaver/screensavers/munch.xml.h:4
+msgid "Use XOR drawing function."
+msgstr "Uporabi XOR za risanje."
 
-#: capplets/screensaver/screensavers/pedal.xml.h:10
+#: capplets/screensaver/screensavers/pedal.xml.h:2
 msgid "Maximum number of lines."
 msgstr "Najveèje ¹tevilo èrt."
 
-#: capplets/screensaver/screensavers/pedal.xml.h:13
+#: capplets/screensaver/screensavers/pedal.xml.h:3
 msgid "Time to fade away."
 msgstr "Èas za izbris."
 
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/pyro.xml.h:7
-msgid "Particles on screen"
-msgstr "Delci na zaslonu"
+#: capplets/screensaver/screensavers/pedal.xml.h:4
+msgid "Time to show each picture."
+msgstr "Èas prikaza vsake slike."
 
-#: capplets/screensaver/screensavers/pyro.xml.h:9
+#: capplets/screensaver/screensavers/pyro.xml.h:1
 msgid "Frequency of missile launch"
 msgstr "Pogostost izstreljevanja raket"
 
-#: capplets/screensaver/screensavers/pyro.xml.h:12
+#: capplets/screensaver/screensavers/pyro.xml.h:2
 msgid "Number of particles"
 msgstr "©tevilo delcev"
 
-#: capplets/screensaver/screensavers/qix.xml.h:9
+#: capplets/screensaver/screensavers/pyro.xml.h:3
+msgid "Particles on screen"
+msgstr "Delci na zaslonu"
+
+#: capplets/screensaver/screensavers/qix.xml.h:1
+msgid "Color contrast"
+msgstr "Barvni kontrast"
+
+#: capplets/screensaver/screensavers/qix.xml.h:2
+msgid "Discrete Lines"
+msgstr "Diskrete èrte"
+
+#: capplets/screensaver/screensavers/qix.xml.h:4
+msgid "Length"
+msgstr "Dol¾ina"
+
+#: capplets/screensaver/screensavers/qix.xml.h:7
 msgid "Number of points:"
 msgstr "©tevilo toèk:"
 
-#: capplets/screensaver/screensavers/qix.xml.h:10
-msgid "Discrete Lines"
-msgstr "Diskretne èrte"
+#: capplets/screensaver/screensavers/qix.xml.h:8
+msgid "Number of trails:"
+msgstr "©tevilo sledov:"
 
-#: capplets/screensaver/screensavers/qix.xml.h:11
+#: capplets/screensaver/screensavers/qix.xml.h:10
 msgid "Solid Trails"
 msgstr "Polni sledovi"
 
 #: capplets/screensaver/screensavers/qix.xml.h:12
-msgid "Transparent Trails"
-msgstr "Prosojni sledovi"
-
-#: capplets/screensaver/screensavers/qix.xml.h:13
-msgid "XOR Trails"
-msgstr "XOR sledovi"
-
-#: capplets/screensaver/screensavers/qix.xml.h:14
-msgid "Trails attract each other"
-msgstr "Sledovi prevlaèijo drug drugega"
-
-#: capplets/screensaver/screensavers/qix.xml.h:18
-msgid "Length"
-msgstr "Dol¾ina"
-
-#: capplets/screensaver/screensavers/qix.xml.h:21
-msgid "Width"
-msgstr "©irina"
-
-#: capplets/screensaver/screensavers/qix.xml.h:22
-msgid "Narrow"
-msgstr "Ozko"
-
-#: capplets/screensaver/screensavers/qix.xml.h:23
-msgid "Wide"
-msgstr "©iroko"
-
-#: capplets/screensaver/screensavers/qix.xml.h:24
 msgid "Spread between lines"
 msgstr "Sprejaj med èrtami"
 
-#: capplets/screensaver/screensavers/qix.xml.h:27
-msgid "Number of trails:"
-msgstr "©tevilo sledov:"
+#: capplets/screensaver/screensavers/qix.xml.h:13
+msgid "Trails attract each other"
+msgstr "Sledovi prevlaèijo drug drugega"
 
-#: capplets/screensaver/screensavers/qix.xml.h:30
-msgid "Color contrast"
-msgstr "Barvni kontrast"
+#: capplets/screensaver/screensavers/qix.xml.h:14
+msgid "Transparent Trails"
+msgstr "Prosojni sledovi"
 
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/rorschach.xml.h:7
-msgid "Number of Iterations"
-msgstr "©tevilo ponovitev"
+#: capplets/screensaver/screensavers/qix.xml.h:15
+msgid "Width"
+msgstr "©irina"
 
-#: capplets/screensaver/screensavers/rorschach.xml.h:10
-msgid "Offset"
-msgstr "Odmik"
+#: capplets/screensaver/screensavers/qix.xml.h:16
+msgid "XOR Trails"
+msgstr "XOR sledovi"
 
-#: capplets/screensaver/screensavers/rorschach.xml.h:13
-msgid "With X-axis Symmetry"
-msgstr "Simetrija z X osjo"
-
-#: capplets/screensaver/screensavers/rorschach.xml.h:14
-msgid "With Y-axis Symmetry"
-msgstr "Simetrija z Y osjo"
-
-#: capplets/screensaver/screensavers/rorschach.xml.h:15
+#: capplets/screensaver/screensavers/rorschach.xml.h:1
 msgid "Delay before next redraw"
 msgstr "Premor pred naslednjim risanjem"
 
-#: capplets/screensaver/screensavers/rorschach.xml.h:18
+#: capplets/screensaver/screensavers/rorschach.xml.h:2
+msgid "Number of Iterations"
+msgstr "©tevilo ponovitev"
+
+#: capplets/screensaver/screensavers/rorschach.xml.h:3
+msgid "Offset"
+msgstr "Odmik"
+
+#: capplets/screensaver/screensavers/rorschach.xml.h:4
 msgid "Speed to clear the screen"
-msgstr "Hitrost s katero se poèisti zaslon"
+msgstr "Hitrost èi¹èenja zaslona"
 
-#.
-#. * Translatable strings file generated by extract-labels
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensavers/starfish.xml.h:7
-msgid "Speed of animation."
-msgstr "Hitrost animacije."
+#: capplets/screensaver/screensavers/rorschach.xml.h:5
+msgid "With X-axis Symmetry"
+msgstr "Simetrija z X osjo"
 
-#: capplets/screensaver/screensavers/starfish.xml.h:10
-msgid "Thickness of color bands (0 = Random)"
-msgstr "©irina barvnih pasov (0 = nakljuèno)"
+#: capplets/screensaver/screensavers/rorschach.xml.h:6
+msgid "With Y-axis Symmetry"
+msgstr "Simetrija z Y osjo"
 
-#: capplets/screensaver/screensavers/starfish.xml.h:11
-msgid "Slim"
-msgstr "Ozko"
+#: capplets/screensaver/screensavers/starfish.xml.h:1
+msgid "Change to display in monochrome."
+msgstr "Spremeni zaslon v èrnobel."
 
-#: capplets/screensaver/screensavers/starfish.xml.h:12
-msgid "Quickness of rotation at each step (0 = Random)"
-msgstr "Hitrost vrtenja ob vsakem koraku (0 = nakljuèna)"
-
-#: capplets/screensaver/screensavers/starfish.xml.h:14
+#: capplets/screensaver/screensavers/starfish.xml.h:2
 msgid "Duration of current shape."
 msgstr "Trajanje trenutne oblike."
 
-#: capplets/screensaver/screensavers/starfish.xml.h:16
+#: capplets/screensaver/screensavers/starfish.xml.h:3
+msgid "Quickness of rotation at each step (0 = Random)"
+msgstr "Hitrost vrtenja ob vsakem koraku (0 = nakljuèna)"
+
+#: capplets/screensaver/screensavers/starfish.xml.h:4
+msgid "Speed of animation."
+msgstr "Hitrost animacije"
+
+#: capplets/screensaver/screensavers/starfish.xml.h:5
+msgid "Thickness of color bands (0 = Random)"
+msgstr "©irina barvnih pasov (0 = nakljuèna)"
+
+#: capplets/screensaver/screensavers/starfish.xml.h:6
 msgid "Use raw shapes "
 msgstr "Ka¾i le obrobo "
-
-#: capplets/screensaver/screensavers/starfish.xml.h:17
-msgid "Change to display in monochrome."
-msgstr "Spremeni zaslon v èrnobel."
 
 #: capplets/screensaver/selection-dialog.c:99
 msgid "Add a new screensaver"
@@ -1337,617 +1356,420 @@ msgstr "Izberite ohranjevalnik, ki naj se po¾ene iz spodnjega seznama:"
 
 #: capplets/screensaver/selection-dialog.c:194
 msgid "Custom"
-msgstr "Poljuben"
+msgstr "Prikrojeno"
 
 #: capplets/screensaver/selection-dialog.c:220
 msgid "New screensaver"
 msgstr "Nov ohranjevalnik zaslona"
 
-#: capplets/sound/prefs-widget.c:137
-msgid "Play"
-msgstr "Zaigraj"
+#: capplets/sound/sound.desktop.in.in.h:1
+msgid "Configure GNOME's use of sound"
+msgstr "Nastavi GNOME-ovo uporabo zvoka."
 
-#: capplets/sound/sound-properties.glade.h:8
-msgid "Enable"
-msgstr "Vkljuèi"
+#: capplets/sound/sound.desktop.in.in.h:2
+msgid "Sound"
+msgstr "Zvok"
 
-#: capplets/sound/sound-properties.glade.h:9
+#: capplets/sound/sound-properties.glade.h:1
 msgid "Enable sound server startup"
 msgstr "Vkljuèi zagon stre¾nika za zvok"
 
-#: capplets/sound/sound-properties.glade.h:10
+#: capplets/sound/sound-properties.glade.h:2
 msgid "Sounds for events"
 msgstr "Zvoki ob dogodkih"
 
-#: capplets/sound/sound-properties.glade.h:11
-msgid "General"
-msgstr "Splo¹no"
-
-#: capplets/sound/sound-properties.glade.h:12
-msgid "Event"
-msgstr "Dogodek"
-
-#: capplets/sound/sound-properties.glade.h:13
-msgid "File to Play"
-msgstr "Zaigraj datoteko"
-
-#: capplets/sound/sound-properties.glade.h:14
-msgid "Sound Events"
-msgstr "Zvoèni Dogodki"
-
-#: control-center/capplet-dir-view.c:321
+#: control-center/capplet-dir-view.c:296 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
 msgstr "Kontrolni center GNOME"
 
-#: control-center/capplet-dir-view.c:322
+#: control-center/capplet-dir-view.c:297
 msgid "Desktop properties manager."
 msgstr "Upravljalnik lastnosti namizja."
 
-#: control-center/capplet-dir-view.c:519
+#: control-center/capplet-dir-view.c:408
+msgid "Gnome Control Center : %s"
+msgstr "Kontrolni center Gnome : %s"
+
+#: control-center/capplet-dir-view.c:456
 msgid ""
 "No help is available/installed. Please make sure you\n"
 "have the GNOME User's Guide installed on your system."
 msgstr ""
-"Pomoè za te nastavitve ni na voljo/ni name¹èena. Prosim preprièajte se,\n"
+"Pomoè za te nastavitve ni na voljo / ni name¹èena. Prosim preprièajte se,\n"
 "da imate GNOME Uporabni¹ki Vodiè name¹èen na va¹em sistemu."
 
-#: control-center/capplet-dir-view.c:522
+#: control-center/capplet-dir-view.c:459
 msgid "Close"
 msgstr "Zapri"
 
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
+#: control-center/capplet-dir-view-html.c:150
+msgid "GNOME Control Center:"
+msgstr "Kontrolni center GNOME:"
+
+#: control-center/gnomecc.desktop.in.h:2
+msgid "The GNOME configuration tool"
+msgstr "Nastavitveno orodje GNOME-a."
+
+#: control-center/gnomecc.glade.h:1
+msgid "Appearance"
+msgstr "Videz"
+
+#: control-center/gnomecc.glade.h:2
+msgid "Browse with multiple windows"
+msgstr "Brskaj z veèimi okni"
+
+#: control-center/gnomecc.glade.h:3
+msgid "Browse with single window"
+msgstr "Brskaj z enim samim oknom"
+
+#: control-center/gnomecc.glade.h:4
+msgid "Display control panels as HTML"
+msgstr "Ka¾i kontrolne pulte kot HTML"
+
+#: control-center/gnomecc.glade.h:5
+msgid "Display control panels as a set of icons"
+msgstr "Ka¾i kontrolne pulte kot niz ikon"
+
+#: control-center/gnomecc.glade.h:6
+msgid "Display control panels as a tree"
+msgstr "Ka¾i kontrolne pulte kot drevo"
+
 #: control-center/gnomecc.glade.h:7
 msgid "Launch control panels in separate windows"
 msgstr "Po¾eni kontrolne pulte v loèenih oknih"
 
 #: control-center/gnomecc.glade.h:8
-msgid "Put control panels in the control center's window"
-msgstr "Postavi kontrolne pulte v okno kontrolnega centra"
-
-#: control-center/gnomecc.glade.h:9
-msgid "Display control panels as HTML"
-msgstr "Ka¾i kontrolne pulte kot HTML"
-
-#: control-center/gnomecc.glade.h:10
-msgid "Display control panels as a set of icons"
-msgstr "Ka¾i kontrolne pulte kot niz ikon"
-
-#: control-center/gnomecc.glade.h:11
-msgid "Display control panels as a tree"
-msgstr "Ka¾i kontrolne pulte kot drevo"
-
-#: control-center/gnomecc.glade.h:12
-msgid "Browse with single window"
-msgstr "Brskaj z enim samim oknom"
-
-#: control-center/gnomecc.glade.h:13
-msgid "Browse with multiple windows"
-msgstr "Brskaj z veèimi okni"
-
-#: control-center/gnomecc.glade.h:14
-msgid "Appearance"
-msgstr "Videz"
-
-#: control-center/gnomecc.glade.h:15
 msgid "New-control-center"
 msgstr "Nov-kontrolni-center"
 
-#: control-center/gnomecc.glade.h:16
-msgid "HTML"
-msgstr "HTML"
-
-#: control-center/gnomecc.glade.h:17
-msgid "Icon List"
-msgstr "Seznam ikon"
-
-#: control-center/gnomecc.glade.h:18
-msgid "Tree"
-msgstr "Drevo"
-
-#: root-manager/root-manager.c:110
-#, c-format
-msgid "Got error %d.\n"
-msgstr "Dobil napako %d.\n"
-
-#: root-manager/root-manager.c:206
-#, c-format
-msgid "Password for %s"
-msgstr "Geslo za %s"
-
-#: root-manager/root-manager.c:401
-msgid "Consistency checking is not turned on."
-msgstr "Preverjanje konsistence je vklopljeno."
-
-#: root-manager/root-manager.c:403
-msgid "Block is fine."
-msgstr "Blok je v redu."
-
-#: root-manager/root-manager.c:405
-msgid "Block freed twice."
-msgstr "Blok je bil spro¹èen dvakrat."
-
-#: root-manager/root-manager.c:407
-msgid "Memory before the block was clobbered."
-msgstr "Pomnilnik pred blokom je bil zbit."
-
-#: root-manager/root-manager.c:409
-msgid "Memory after the block was clobbered."
-msgstr "Pomnilnik po bloku je bil zbit."
-
-#: root-manager/root-manager.c:440
-msgid "userhelper must be setuid root\n"
-msgstr ""
-"prorgam 'userhelper' mora biti imeti pravice do izvajanja kot root (setuid "
-"root)\n"
-
-#: root-manager/root-manager.c:445 root-manager/root-manager.c:451
-msgid "Usage: root-helper fd\n"
-msgstr "Uporaba: root-helper fd\n"
-
-#: root-manager/root-manager.c:555
-#, c-format
-msgid "PAM returned = %d\n"
-msgstr "PAM je vrnil = %d\n"
-
-#: root-manager/root-manager.c:556
-#, c-format
-msgid "about to authenticate \"%s\"\n"
-msgstr "avtentificiral bom \"%s\"\n"
-
-#: root-manager/root-manager.c:633 root-manager/root-manager.c:701
-#, c-format
-msgid "about to exec \"%s\"\n"
-msgstr "izvedel bom \"%s\"\n"
-
-#: root-manager/root-manager-wrap.c:56
-msgid "Pipe error.\n"
-msgstr "Napaka cevi.\n"
-
-#: root-manager/root-manager-wrap.c:62
-msgid "Cannot fork().\n"
-msgstr "Ne morem razvejiti s fork().\n"
-
-#: root-manager/root-manager-wrap.c:83 root-manager/root-manager-wrap.c:93
-msgid "dup2() error.\n"
-msgstr "Napaka dup2().\n"
-
-#: root-manager/root-manager-wrap.c:123
-#, c-format
-msgid "execl() error, errno=%d\n"
-msgstr "napaka execl(), ¹t. napake=%d\n"
-
-#: root-manager/root-manager-wrap.c:152
-msgid "Information updated."
-msgstr "Podatek osve¾en."
-
-#: root-manager/root-manager-wrap.c:155
-msgid ""
-"The password you typed is invalid.\n"
-"Please try again."
-msgstr ""
-"Geslo, ki ste ga vpisali je napaèno.\n"
-"Prosim poskusite znova."
-
-#: root-manager/root-manager-wrap.c:158
-msgid ""
-"One or more of the changed fields is invalid.\n"
-"This is probably due to either colons or commas in one of the fields.\n"
-"Please remove those and try again."
-msgstr ""
-"Eno ali veè spremenjenih polj ni veljavnih.\n"
-"To je verjetno zaradi stolpcev ali vrstic v enem od polj.\n"
-"Prosim odstranite jih in poskusite znova."
-
-#: root-manager/root-manager-wrap.c:161
-msgid "Password resetting error."
-msgstr "Napaka ob ponastavljanju gesla."
-
-#: root-manager/root-manager-wrap.c:164
-msgid ""
-"Some systems files are locked.\n"
-"Please try again in a few moments."
-msgstr ""
-"Nekatere datoteke sistema so zaklenjene.\n"
-"Prosim poskusite znova èez nekaj èasa."
-
-#: root-manager/root-manager-wrap.c:167
-msgid "Unknown user."
-msgstr "Neznan uporabnik."
-
-#: root-manager/root-manager-wrap.c:170
-msgid "Insufficient rights."
-msgstr "Ni ustreznih pravic."
-
-#: root-manager/root-manager-wrap.c:173
-msgid "Invalid call to sub process."
-msgstr "Neveljaven klic v podproces."
-
-#: root-manager/root-manager-wrap.c:176
-msgid ""
-"Your current shell is not listed in /etc/shells.\n"
-"You are not allowed to change your shell.\n"
-"Consult your system administrator."
-msgstr ""
-"Va¹a trenutna lupina ni v seznamu v /etc/shells.\n"
-"Nimate dovoljenja, da bi spremenili svojo lupino.\n"
-"Posvetujte se z administratorjem sistema."
-
-#. well, this is unlikely to work either, but at least we tried...
-#: root-manager/root-manager-wrap.c:180
-msgid "Out of memory."
-msgstr "Zmanjkalo je pomnilnika."
-
-#: root-manager/root-manager-wrap.c:183
-msgid "The exec() call failed."
-msgstr "Klic exec() ni uspel."
-
-#: root-manager/root-manager-wrap.c:186
-msgid "Failed to find selected program."
-msgstr "Nisem uspel najti izbranega programa."
-
-#: root-manager/root-manager-wrap.c:189
-msgid "Unknown error."
-msgstr "Neznana napaka."
-
-#: root-manager/root-manager-wrap.c:192
-msgid "Unknown exit code."
-msgstr "Neznana izhodna koda."
-
-#: root-manager/root-manager-wrap.c:280
-msgid "Input"
-msgstr "Vhod"
-
-#: root-manager/root-manager-wrap.c:386
-#, c-format
-msgid "Need %d responses.\n"
-msgstr "Potrebuje se %d odgovorov.\n"
-
-#: root-manager/root-manager-wrap.c:411
-msgid ""
-"In order to make changes to your system, you\n"
-"must enter the administrator (root) password."
-msgstr ""
-"Èe ¾elite spreminjati va¹ sistem morate\n"
-"vnesti geslo administratora (root)."
-
-#: root-manager/root-manager-wrap.c:425
-msgid "Error"
-msgstr "Napaka"
-
-#: root-manager/root-manager-wrap.c:439
-#, c-format
-msgid "You want %d response(s) from %d entry fields!?!?!\n"
-msgstr "®elite %d odgovorov iz %d vhodnih polj!?!?!\n"
-
-#: root-manager/root-manager-wrap.c:445
-msgid "Run Unprivileged"
-msgstr "Po¾eni nepriviligirano"
-
-#: archiver/location.c:228
-#, fuzzy
-msgid "Default Location"
-msgstr "Privzeta vrednost"
-
-#: archiver/main.c:77
-msgid "Store XML data in the archive"
-msgstr ""
-
-#: archiver/main.c:79
-msgid "Roll back the configuration to a given point"
-msgstr ""
-
-#: archiver/main.c:81
-msgid "Change the location profile to the given one"
-msgstr ""
-
-#: archiver/main.c:83
-msgid "Push configuration data out to client machines (UNIMPLEMENTED)"
-msgstr ""
-
-#: archiver/main.c:85
-msgid "Rename a location to a new name"
-msgstr ""
-
-#: archiver/main.c:87
-msgid "Add a new location to the archive"
-msgstr ""
-
-#: archiver/main.c:89
-msgid "Remove a location from the archive"
-msgstr ""
-
-#: archiver/main.c:91
-msgid "Add a given backend to the given location"
-msgstr ""
-
-#: archiver/main.c:93
-msgid "Remove the given backend from the given location"
-msgstr ""
-
-#: archiver/main.c:99
-msgid "Use the global repository"
-msgstr ""
-
-#: archiver/main.c:101
-msgid "Identifier of location profile on which to operate"
-msgstr ""
-
-#: archiver/main.c:102
-msgid "LOCATION"
-msgstr ""
-
-#: archiver/main.c:104
-msgid "Backend being used for this operation"
-msgstr ""
-
-#: archiver/main.c:104
-msgid "BACKEND_ID"
-msgstr ""
-
-#: archiver/main.c:110
-msgid "Store only the differences with the parent location's config"
-msgstr ""
-
-#: archiver/main.c:112
-msgid "Store only those settings set in the previous config"
-msgstr ""
-
-#: archiver/main.c:118
-msgid "Date to which to roll back"
-msgstr ""
-
-#: archiver/main.c:118
-msgid "DATE"
-msgstr ""
-
-#: archiver/main.c:120
-msgid "Roll back all configuration items"
-msgstr ""
-
-#: archiver/main.c:122
-msgid "Roll back to the revision REVISION_ID"
-msgstr ""
-
-#: archiver/main.c:122
-msgid "REVISION_ID"
-msgstr ""
-
-#: archiver/main.c:124
-msgid "Roll back to the last known revision"
-msgstr ""
-
-#: archiver/main.c:126
-msgid "Roll back by STEPS revisions"
-msgstr ""
-
-#: archiver/main.c:126
-msgid "STEPS"
-msgstr ""
-
-#: archiver/main.c:128
-msgid "Don't run the backend, just dump the output"
-msgstr ""
-
-#: archiver/main.c:134
-msgid "Parent location for the new location"
-msgstr ""
-
-#: archiver/main.c:134
-#, fuzzy
-msgid "PARENT"
-msgstr "SMER"
-
-#: archiver/main.c:136
-msgid "New name to assign to the location"
-msgstr ""
-
-#: archiver/main.c:136
-msgid "NEW_NAME"
-msgstr ""
-
-#: archiver/main.c:142
-msgid "Add/remove this backend to/from the master backend list"
-msgstr ""
-
-#: archiver/main.c:144
-msgid "Full containment"
-msgstr ""
-
-#: archiver/main.c:146
-#, fuzzy
-msgid "Partial containment"
-msgstr "Navpièni preliv"
-
-#: archiver/main.c:313
-msgid "Global archiver options"
-msgstr ""
-
-#: archiver/main.c:315
-msgid "Archiver commands"
-msgstr ""
-
-#: archiver/main.c:317
-msgid "Options for storing data"
-msgstr ""
-
-#: archiver/main.c:319
-msgid "Options for rolling back"
-msgstr ""
-
-#: archiver/main.c:321
-msgid "Options for adding or renaming locations"
-msgstr ""
-
-#: archiver/main.c:324
-msgid "Options for adding and removing backends"
-msgstr ""
-
-#: capplets/rollback/main.c:37
-msgid "Operate on global backends"
-msgstr ""
-
-#: capplets/rollback/main.c:50
-msgid "Options for the rollback GUI"
-msgstr ""
-
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/screensaver/screensaver-properties.glade.h:7
-#, fuzzy
-msgid "About \"<Screensaver name>\""
-msgstr "Po¾eni ohranjevalnik po"
-
-#: capplets/screensaver/screensaver-properties.glade.h:8
-msgid ""
-"Draws quasiperiodic tilings; think of the implications on modern formica "
-"technology. Written by Time Korlove. In April 1997, Sir Roger Penrose, a "
-"British math professor who has worked with Stephen Hawking on such topics as "
-"relatvity, black holes, and whether time has a beginning, files a "
-"copyright-infringement lawsuit against Kimberly-Clark Corporation, wchih "
-"Penrose said copied a pattern he created ( apattern demonstrating that \"a "
-"nonrepeating pattern could exist in nature\") for its Kleenex quilted toilet "
-"paper. "
-msgstr ""
-
-#: capplets/screensaver/screensaver-properties.glade.h:9
-#, fuzzy
-msgid "Configure Power Management"
-msgstr "Upravljanje z energijo"
-
-#: capplets/screensaver/screensaver-properties.glade.h:10
-msgid "Shut down monitor after"
-msgstr "Ugasni zaslon po"
-
-#: capplets/screensaver/screensaver-properties.glade.h:11
-#: capplets/screensaver/screensaver-properties.glade.h:13
-#: capplets/screensaver/screensaver-properties.glade.h:15
-#: capplets/screensaver/screensaver-properties.glade.h:24
-#: capplets/screensaver/screensaver-properties.glade.h:25
-msgid "minutes"
-msgstr "minutah"
-
-#: capplets/screensaver/screensaver-properties.glade.h:12
-msgid "Go to suspend mode after"
-msgstr "Pojdi v spanje po"
-
-#: capplets/screensaver/screensaver-properties.glade.h:14
-msgid "Go to standby mode after"
-msgstr "Pojdi v naèin pripravljenosti po"
-
-#: capplets/screensaver/screensaver-properties.glade.h:16
-#, fuzzy
-msgid "Settings for \"<Screensaver name>\""
-msgstr "Po¾eni ohranjevalnik po"
-
-#: capplets/screensaver/screensaver-properties.glade.h:17
-msgid ""
-"There are no configurable settings for this\n"
-"screensaver. "
-msgstr ""
-
-#: capplets/screensaver/screensaver-properties.glade.h:19
-#, fuzzy
-msgid "_Add"
-msgstr "Dodaj"
-
-#: capplets/screensaver/screensaver-properties.glade.h:20
-#, fuzzy
-msgid "_Settings"
+#: control-center/gnomecc.glade.h:9
+msgid "Put control panels in the control center's window"
+msgstr "Postavi kontrolne pulte v okno kontrolnega centra"
+
+#: control-center/main.c:46
+msgid "Configuraiton"
 msgstr "Nastavitve"
 
-#: capplets/screensaver/screensaver-properties.glade.h:21
-#, fuzzy
-msgid "_Remove"
-msgstr "Odstrani"
+#: control-center/main.c:72
+msgid "Run the capplet CAPPLET"
+msgstr "Po¾eni nastavitveni vstavek CAPPLET"
 
-#: capplets/screensaver/screensaver-properties.glade.h:22
-#, fuzzy
-msgid "_About this screensaver..."
-msgstr "Izkljuèi ohranjevalnik zaslona"
+#: control-center/main.c:72
+msgid "CAPPLET"
+msgstr "CAPPLET"
 
-#: capplets/screensaver/screensaver-properties.glade.h:26
-#, fuzzy
-msgid "S_tart screensaver after "
-msgstr "Po¾eni ohranjevalnik po"
+#: control-center/main.c:80
+msgid "GNOME Control Center options"
+msgstr "Mo¾nosti Kontrolnega centra GNOME"
 
-#: capplets/screensaver/screensaver-properties.glade.h:27
-#, fuzzy
-msgid "S_witch screensavers after "
-msgstr "Zamenjaj ohranjvalnik vsakih"
+#: capplets/desktop-links/gnome-hint-properties.desktop.in.h:1
+msgid "Options for the startup hint dialog"
+msgstr "Mo¾nosti za zaèetno pogovorno okno z namigom"
 
-#: capplets/screensaver/screensaver-properties.glade.h:28
-#, fuzzy
-msgid "R_equire password to unlock screen"
-msgstr "Zahtevaj geslo za odklenitev"
+#: capplets/desktop-links/gnome-hint-properties.desktop.in.h:2
+msgid "Startup Hint"
+msgstr "Zaèetni namig"
 
-#: capplets/screensaver/screensaver-properties.glade.h:29
-#, fuzzy
-msgid "Enable _power management"
-msgstr "Vkljuèi upravljanje z energijo"
+#~ msgid "Set background image."
+#~ msgstr "Nastavi sliko ozadja."
 
-#: capplets/screensaver/screensaver-properties.glade.h:30
-#, fuzzy
-msgid " Configure..."
-msgstr "Odpri skice."
+#~ msgid "IMAGE-FILE"
+#~ msgstr "SLIKOVNA-DATOTEKA"
 
-#: capplets/screensaver/screensaver-properties.glade.h:32
-#, fuzzy
-msgid "_Mode:"
-msgstr "Podgan"
+#~ msgid ""
+#~ "an initialization error occurred while starting 'background-properties-"
+#~ "capplet'.\n"
+#~ "aborting...\n"
+#~ msgstr ""
+#~ "napaka pri inicializaciji ob zagonu 'background-properties-capplet'.\n"
+#~ "prekinjam...\n"
 
-#: capplets/screensaver/screensaver-properties.glade.h:33
-msgid "Disable screensaver"
-msgstr "Izkljuèi ohranjevalnik zaslona"
+#~ msgid "Color"
+#~ msgstr "Barva"
 
-#: capplets/screensaver/screensaver-properties.glade.h:34
-msgid "Black screen only"
-msgstr "Le èrn zaslon"
+#~ msgid "Solid"
+#~ msgstr "polno"
 
-#: capplets/screensaver/screensaver-properties.glade.h:35
-msgid "One screensaver all the time"
-msgstr "En ohranjevalnik ves èas"
+#~ msgid "Secondary Color"
+#~ msgstr "Drugotna barva"
 
-#: capplets/screensaver/screensaver-properties.glade.h:36
-#, fuzzy
-msgid "Random (checked screensavers)"
-msgstr "Dodaj nov ohranjevalnik zaslona"
+#~ msgid "Wallpaper"
+#~ msgstr "Tapeta"
 
-#: capplets/screensaver/screensaver-properties.glade.h:37
-#, fuzzy
-msgid "Random (all screensavers)"
-msgstr "Izbiraj nakljuèno med vsemi ohranjevalniki"
+#~ msgid " Browse... "
+#~ msgstr " Brskaj... "
 
-#: capplets/sound/sound-properties-capplet.c:360
-msgid "Just apply settings and quit"
-msgstr ""
+#~ msgid "none"
+#~ msgstr "brez"
 
-#: capplets/sound/sound-properties-capplet.c:362
-msgid "Retrieve and store legacy settings"
-msgstr ""
+#~ msgid "Embossed Logo"
+#~ msgstr "Reliefen logotip"
 
-#: capplets/sound/sound-properties-capplet.c:372
-msgid "Capplet options"
-msgstr ""
+#~ msgid "Scaled"
+#~ msgstr "Raztegnjeno"
 
-#. FIXME: Use a human-readable capplet name here
-#: control-center/capplet-dir.c:453
-msgid "Capplet"
-msgstr ""
+#~ msgid "Use GNOME to set background"
+#~ msgstr "Uporabi GNOME za nastavljanje ozadja"
 
-#: root-manager/root-manager-helper.c:55
-msgid "Could not connect to X Display"
-msgstr ""
+#~ msgid "Set parameters from saved state and exit"
+#~ msgstr "Nastavi parametre iz shranjene stanja in konèaj"
 
-#: root-manager/root-manager-helper.c:61
-msgid "Could not duplicate file descriptor"
-msgstr ""
+#~ msgid "IMAGE"
+#~ msgstr "SLIKA"
+
+#~ msgid "Sets the wallpaper to the value specified"
+#~ msgstr "Nastavi tapete na doloèeno vrednost"
+
+#~ msgid "COLOR"
+#~ msgstr "BARVA"
+
+#~ msgid "Specifies the background color"
+#~ msgstr "Doloèa barvo ozadja"
+
+#~ msgid "Specifies end background color for gradient"
+#~ msgstr "Doloèa konèno barvo preliva v ozadju"
+
+#~ msgid "Gradient orientation: vertical or horizontal"
+#~ msgstr "Smer preliva: navpièna ali vodoravna"
+
+#~ msgid "Use a solid fill for the background"
+#~ msgstr "Za ozadje uporabi enobarvno polnjenje"
+
+#~ msgid "Use a gradient fill for the background"
+#~ msgstr "Za polnjenje ozadja uporabi prelivanje"
+
+#~ msgid "MODE"
+#~ msgstr "NAÈIN"
+
+#~ msgid "Display wallpaper: tiled, centered, scaled or ratio"
+#~ msgstr ""
+#~ "Poka¾i tapete: tlakovano, centrirano, raztegnjeno ali ohrani razmerje"
+
+#~ msgid "Desktop"
+#~ msgstr "Namizje"
+
+#~ msgid "Configure how document types are handled"
+#~ msgstr "Nastavi kako naj se ravna z razliènimi tipi dokmentov"
+
+#~ msgid "Document Handlers"
+#~ msgstr "Upravljalniki dokumentov"
+
+#~ msgid "Control Center Menu"
+#~ msgstr "Menu kontrolnega centra"
+
+#~ msgid "Configure the settings of your Multimedia devices"
+#~ msgstr "Nastavi va¹e multimedijske naprav"
+
+#~ msgid "Multimedia"
+#~ msgstr "Multimedija"
+
+#~ msgid "Configure your external devices"
+#~ msgstr "Nastavi va¹e zunanje naprave"
+
+#~ msgid "Peripherals"
+#~ msgstr "Zunanje naprave"
+
+#~ msgid "Session"
+#~ msgstr "Seja"
+
+#~ msgid "Session Management Settings"
+#~ msgstr "Nastavitve upravljanja sej"
+
+#~ msgid "Configure the global settings of your GNOME applications"
+#~ msgstr "Nastavi globalne nastavitve va¹ih programov GNOME"
+
+#~ msgid "User Interface"
+#~ msgstr "Uporabni¹ki vmesnik"
+
+#~ msgid "Edit Applications List"
+#~ msgstr "Uredi seznam programov"
+
+#~ msgid "Select applications to appear in menu for MIME type \"%s\""
+#~ msgstr "Izberi programe, ki naj se pojavijo v menuju tipa mime \"%s\""
+
+#~ msgid "Add Application..."
+#~ msgstr "Dodaj program..."
+
+#~ msgid "Edit Application..."
+#~ msgstr "Uredi program..."
+
+#~ msgid "Edit Components List"
+#~ msgstr "Uredi seznam komponent"
+
+#~ msgid "Select views to appear in menu for MIME type \"%s\""
+#~ msgstr "Izberi poglede, ki naj se poka¾e za tip MIME \"%s\""
+
+#~ msgid ""
+#~ "The MIME type entered contained upper case characters. Upper case "
+#~ "characters were changed to lower case for you."
+#~ msgstr ""
+#~ "Vpisan tip MIME vsebuje velike èrke. Samodejno so bile spremenjene v male."
+
+#~ msgid "Add New MIME Type"
+#~ msgstr "Dodaj nov tip MIME"
+
+#~ msgid "Add MIME Type"
+#~ msgstr "Dodaj tip MIME"
+
+#~ msgid "New MIME type (e.g. image/x-thumper):"
+#~ msgstr "Nov tip MIME (npr.: image/x-thumper):"
+
+#~ msgid "Description (e.g. Thumper image):"
+#~ msgstr "Opis (npr.: Thumper image):"
+
+#~ msgid "File Extensions "
+#~ msgstr "Pripone datotek"
+
+#~ msgid "Add..."
+#~ msgstr "Dodaj..."
+
+#~ msgid "    Remove    "
+#~ msgstr "  Odstrani    "
+
+#~ msgid "Add New Extension"
+#~ msgstr "Dodaj novo pripono"
+
+#~ msgid ""
+#~ "Type in the extensions for this mime-type (without dot).\n"
+#~ "You can enter several extensions seperated by a space,\n"
+#~ "for example: html htm"
+#~ msgstr ""
+#~ "Vpi¹ite pripone za ta tip mime (brez pik).\n"
+#~ "Vpi¹ete lahko veè pripon loèenih s presledki, \n"
+#~ "na primer: html htm"
+
+#~ msgid "Extension:"
+#~ msgstr "Pripona:"
+
+#~ msgid "You must enter a name."
+#~ msgstr "Vpisati morate ime."
+
+#~ msgid "You must enter a command."
+#~ msgstr "Vpisati morate ukaz."
+
+#~ msgid ""
+#~ "\"%s\" does not exist or is not executable.\n"
+#~ "Check your spelling and make sure you have\n"
+#~ "the right permissions to execute this file."
+#~ msgstr ""
+#~ "\"%s\" ne obstaja ali ni izvr¹ilna datoteka.\n"
+#~ "Preverite èrkovanje in se preprièajte, da imate\n"
+#~ "ustrezna dovoljenja za izvedbo te datoteke."
+
+#~ msgid ""
+#~ "The command \"%s\" cannot be found.\n"
+#~ "You must use a command that can work from any command line."
+#~ msgstr ""
+#~ "Ukaz \"%s\" ni bil najden.\n"
+#~ "Uporabiti morate ukaz, ki deluje iz vsake ukazne vrstice."
+
+#~ msgid "Bad Application Name"
+#~ msgstr "Slabo ime programa"
+
+#~ msgid "Bad Application Command"
+#~ msgstr "Slab ukaz programa"
+
+#~ msgid "Add Application"
+#~ msgstr "Dodaj program"
+
+#~ msgid "Edit Application"
+#~ msgstr "Uredi program"
+
+#~ msgid "Application Name:"
+#~ msgstr "Ime programa:"
+
+#~ msgid "Application Command:"
+#~ msgstr "Ukaz programa:"
+
+#~ msgid "Open Behavior"
+#~ msgstr "Obna¹anje pri odprtju"
+
+#~ msgid "Can open multiple files"
+#~ msgstr "Lahko odpre veè datotek"
+
+#~ msgid "Can open from URI"
+#~ msgstr "Lahko odpre iz URIja"
+
+#~ msgid "MIME Type"
+#~ msgstr "Tip MIME"
+
+#~ msgid "Change Icon"
+#~ msgstr "Spremeni ikono"
+
+#~ msgid "Change File Extensions"
+#~ msgstr "Spremeni pripone datotek"
+
+#~ msgid "Default Action:"
+#~ msgstr "Privzeto dejanje:"
+
+#~ msgid "Open With Application"
+#~ msgstr "Odpri s programom"
+
+#~ msgid "Edit List"
+#~ msgstr "Uredi seznam"
+
+#~ msgid "Add New MIME Type..."
+#~ msgstr "Dodaj nov tip MIME..."
+
+#~ msgid "Delete This MIME Type"
+#~ msgstr "Zbri¹i ta tip MIME"
+
+#~ msgid "Revert to System Defaults"
+#~ msgstr "Povrni se na privzete sistemske nastavitve"
+
+#~ msgid "None"
+#~ msgstr "brez"
+
+#~ msgid ""
+#~ "Reverting to system settings will lose any changes\n"
+#~ "you have ever made to File Types and Programs.\n"
+#~ "Revert anyway?"
+#~ msgstr ""
+#~ "Vrnitev na privzete sistemske nastavitve bo \n"
+#~ "povzroèila izgubo vseh sprememb, ki ste jih storili\n"
+#~ "v \"Vrste datotek in programi\".\n"
+#~ "Vrni na sistemske nastavitve?"
+
+#~ msgid "View as %s"
+#~ msgstr "Glej kot %s"
+
+#~ msgid "Extension"
+#~ msgstr "Pripona"
+
+#~ msgid "File Types and Programs"
+#~ msgstr "Vrste datotek in programi"
+
+#~ msgid "Specify which programs are used to open or view each file type"
+#~ msgstr ""
+#~ "Doloèi kateri programi se uporabljajo za odpiranje ali pogled katerih "
+#~ "tipov datotek"
+
+#~ msgid "Gnome editor"
+#~ msgstr "Gnome urejevalnik"
+
+#~ msgid "Choose the editor that is invoked by gnome-edit"
+#~ msgstr "Izberite urejevalnik, ki se za¾ene z gnome-edit"
+
+#~ msgid "Keyboard bell"
+#~ msgstr "Piskanje tipkovnice"
+
+#~ msgid "Enable auto-repeat"
+#~ msgstr "Vkljuèi samodejno ponavljanje tipk"
+
+#~ msgid "Repeat rate"
+#~ msgstr "Hitrost ponavljanja tipk"
+
+#~ msgid "Repeat Delay"
+#~ msgstr "Premor med ponavljanji"
+
+#~ msgid "Keyboard click"
+#~ msgstr "Klik tipkovnice"
+
+#~ msgid "Click on keypress"
+#~ msgstr "Klik ob pritisku tipke"
+
+#~ msgid "Test settings"
+#~ msgstr "Preizkusi nastavitve"
 
 #~ msgid ""
 #~ "No help is available/installed for these settings. Please make sure you\n"
@@ -1956,202 +1778,13 @@ msgstr ""
 #~ "Pomoè za te nastavitve ni na voljo/ni name¹èena. Prosim preprièajte se,\n"
 #~ "da imate GNOME Uporabni¹ki Vodiè name¹èen na va¹em sistemu."
 
-#~ msgid "Gnome editor"
-#~ msgstr "Gnome urejevalnik"
-
-#~ msgid "Run In Terminal"
-#~ msgstr "Po¾eni v terminalu"
-
-#~ msgid "Select an icon..."
-#~ msgstr "Izberi ikono..."
-
-#~ msgid "Mime Type: "
-#~ msgstr "Tip Mime: "
-
-#~ msgid "First Regular Expression: "
-#~ msgstr "Prvi regularni izraz: "
-
-#~ msgid "Second Regular Expression: "
-#~ msgstr "Drugi regularni izraz: "
-
-#~ msgid "Mime Type Actions"
-#~ msgstr "Dejanja za tip Mime"
-
-#~ msgid "Example: emacs %f"
-#~ msgstr "Primer: emacs %f"
-
-#~ msgid "Open"
-#~ msgstr "Odpri"
-
-#~ msgid "Select a file..."
-#~ msgstr "Izberi datoteko..."
-
-#~ msgid "View"
-#~ msgstr "Pogled"
-
-#~ msgid "Edit"
-#~ msgstr "Uredi"
-
-#~ msgid "Set actions for %s"
-#~ msgstr "Nastavi dejanja za %s"
-
-#~ msgid "Mime Type"
-#~ msgstr "Tip Mime"
-
-#~ msgid "Extension"
-#~ msgstr "Pripona"
-
-#~ msgid "You must enter a mime-type"
-#~ msgstr "Morate vpisati tip mime"
-
 #~ msgid ""
-#~ "You must add either a regular-expression or\n"
-#~ "a file-name extension"
+#~ "an initialization error occurred while starting 'keyboard-properties-"
+#~ "capplet'.\n"
+#~ "aborting...\n"
 #~ msgstr ""
-#~ "Dodati morate ali regularni izraz ali\n"
-#~ "pripono datoteke"
-
-#~ msgid ""
-#~ "Please put your mime-type in the format:\n"
-#~ "CATEGORY/TYPE\n"
-#~ "\n"
-#~ "For Example:\n"
-#~ "image/png"
-#~ msgstr ""
-#~ "Prosim, podajte va¹ tip mime v formatu:\n"
-#~ "KATEGORIJA/TIP\n"
-#~ "\n"
-#~ "Na Primer:\n"
-#~ "image/png"
-
-#~ msgid "This mime-type already exists"
-#~ msgstr "Ta tip mime ¾e obstaja"
-
-#~ msgid ""
-#~ "We are unable to create the directory\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "Ne morem ustvariti imenika\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "Stanja ne bo mogoèe shraniti."
-
-#~ msgid ""
-#~ "We are unable to access the directory\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "Ne morem dostopati do imenika\n"
-#~ "~/.gnome/mime-info\n"
-#~ "\n"
-#~ "Stanja ne bo mogoèe shraniti."
-
-#~ msgid ""
-#~ "Cannot create the file\n"
-#~ "~/.gnome/mime-info/user.mime\n"
-#~ "\n"
-#~ "We will not be able to save the state"
-#~ msgstr ""
-#~ "Ne morem ustvariti datoteke\n"
-#~ "~/.gnome/mime-info/user.mime\n"
-#~ "\n"
-#~ "Stanja ne bo mogoèe shraniti"
-
-#~ msgid ""
-#~ "We are unable to create the directory\n"
-#~ "~/.gnome/mime-info.\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "Ne morem ustvariti imenika\n"
-#~ "~/.gnome/mime-info.\n"
-#~ "\n"
-#~ "Stanja ne bo mogoèe shraniti."
-
-#~ msgid ""
-#~ "We are unable to access the directory\n"
-#~ "~/.gnome/mime-info.\n"
-#~ "\n"
-#~ "We will not be able to save the state."
-#~ msgstr ""
-#~ "Ne morem dostopati do imenika\n"
-#~ "~/.gnome/mime-info.\n"
-#~ "\n"
-#~ "Stanja ne bo mogoèe shraniti."
-
-#~ msgid ""
-#~ "Cannot create the file\n"
-#~ "~/.gnome/mime-info/user.keys.\n"
-#~ "\n"
-#~ "We will not be able to save the state"
-#~ msgstr ""
-#~ "Ne morem ustvariti datoteke\n"
-#~ "~/.gnome/mime-info/user.keys.\n"
-#~ "\n"
-#~ "Stanja ne bo mogoèe shraniti"
-
-#~ msgid "Delete"
-#~ msgstr "Zbri¹i"
-
-#~ msgid "Add..."
-#~ msgstr "Dodaj..."
-
-#~ msgid "Edit..."
-#~ msgstr "Uredi..."
-
-#~ msgid "Add Mime Type"
-#~ msgstr "Dodaj tip Mime"
-
-#~ msgid ""
-#~ "Add a new Mime Type\n"
-#~ "For example:  image/tiff; text/x-scheme"
-#~ msgstr ""
-#~ "Dodaj nov tip Mime\n"
-#~ "Na primer:  image/tiff; text/x-scheme"
-
-#~ msgid "Mime Type:"
-#~ msgstr "Tip Mime:"
-
-#~ msgid "Extensions"
-#~ msgstr "Pripone"
-
-#~ msgid ""
-#~ "Type in the extensions for this mime-type.\n"
-#~ "For example:  .html, .htm"
-#~ msgstr ""
-#~ "Vpi¹i pripone za ta tip mime.\n"
-#~ "Na primer:  .html, .htm"
-
-#~ msgid "Extension:"
-#~ msgstr "Pripona:"
-
-#~ msgid "Regular Expressions"
-#~ msgstr "Regularni izrazi"
-
-#~ msgid ""
-#~ "You can set up two regular expressions here to identify the Mime Type\n"
-#~ "by.  These fields are optional."
-#~ msgstr ""
-#~ "Lahko nastavite dva regularna izraza po katerih bo tip Mime prepoznan\n"
-#~ "Ta polja niso obvezna"
-
-#~ msgid "Keyboard Bell"
-#~ msgstr "Piskanje tipkovnice"
-
-#~ msgid "Volume"
-#~ msgstr "Glasnost"
-
-#~ msgid "Pitch (Hz)"
-#~ msgstr "Vi¹ina (Hz)"
-
-#~ msgid "Duration (ms)"
-#~ msgstr "Trajanje (ms)"
-
-#~ msgid "Test"
-#~ msgstr "Preizkus"
+#~ "napaka pri inicializaciji ob zagonu 'keyboard-properties-capplet'.\n"
+#~ "prekinjam...\n"
 
 #~ msgid "Mouse buttons"
 #~ msgstr "Mi¹kini gumbi"
@@ -2162,370 +1795,1557 @@ msgstr ""
 #~ msgid "Threshold"
 #~ msgstr "Prag"
 
-#~ msgid "Selection"
-#~ msgstr "Izbira"
+#~ msgid "Large"
+#~ msgstr "Velik"
 
-#~ msgid "Choose randomly from those checked off"
-#~ msgstr "Izbiraj nakljuèno med tistimi, ki so izbrani"
+#~ msgid "Small"
+#~ msgstr "Majhen"
+
+#~ msgid ""
+#~ "an initialization error occurred while starting 'mouse-properties-"
+#~ "capplet'.\n"
+#~ "aborting...\n"
+#~ msgstr ""
+#~ "napaka pri inicializaciji ob zagonu 'mouse-properties-capplet'.\n"
+#~ "prekinjam...\n"
 
 #~ msgid "Settings..."
 #~ msgstr "Nastavitve..."
 
-#~ msgid "Demo Next"
-#~ msgstr "Demonstracija naslednjega"
+#~ msgid "Random Settings"
+#~ msgstr "Nakljuène Nastavitve"
 
-#~ msgid "Demo Previous"
-#~ msgstr "Demonstracija prej¹njega"
+#~ msgid "%s Settings..."
+#~ msgstr "Nastavitve %s..."
 
-#~ msgid "Screensaver Selection"
-#~ msgstr "Izbira ohranjevalnika zaslona"
+#~ msgid "3D Clock"
+#~ msgstr "3D ura"
 
-#~ msgid "Basic"
-#~ msgstr "Osnovno"
+#~ msgid "Bernd Paysan"
+#~ msgstr "Bernd Paysan"
 
-#~ msgid "Security"
-#~ msgstr "Varnost"
+#~ msgid "Changes the magnification of original picture."
+#~ msgstr "Spremeni poveèavo originalne slike."
 
-#~ msgid "Only after the screensaver has run for"
-#~ msgstr "Samo po tem, ko je ohranjvalnik tekel ¾e"
+#~ msgid "Modifies the direction move."
+#~ msgstr "Spremeni smer premikanja"
 
-#~ msgid "General Properties"
-#~ msgstr "Splo¹ne nastavitve"
+#~ msgid "Modifies the wobbling."
+#~ msgstr "Spremeni nihanje."
 
-#~ msgid "Priority"
-#~ msgstr "Prioriteta"
+#~ msgid "Sets the moving cycle time."
+#~ msgstr "Nastavi èas cikla."
 
-#~ msgid "Be verbose"
-#~ msgstr "Bodi zgovoren"
-
-#~ msgid "Effects"
-#~ msgstr "Uèinki"
-
-#~ msgid "Install colormap"
-#~ msgstr "Nastavi barve"
-
-#~ msgid "Fade to black when activating screensaver"
-#~ msgstr "Prelij v èrno preden se po¾ene ohranjvalnik"
-
-#~ msgid "Fade desktop back when deactivating screensaver"
-#~ msgstr "Prelij v namizje ob ustavitvi ohranjevalnika"
-
-#~ msgid "Fade Duration"
-#~ msgstr "Trajanje prelitja"
-
-#~ msgid "Fade Smoothness"
-#~ msgstr "Gladkost prelitja"
-
-#~ msgid "Smooth"
-#~ msgstr "Gladko"
-
-#~ msgid "Jerky"
-#~ msgstr "Preskakujoèe"
-
-#~ msgid "Advanced Properties"
-#~ msgstr "Napredne nastavitve"
-
-#~ msgid "window4"
-#~ msgstr "okno4"
-
-#~ msgid "Menus"
-#~ msgstr "Menuji"
-
-#~ msgid "Menu bars are detachable"
-#~ msgstr "Menujske vrstice se lahko odklopijo"
-
-#~ msgid "Menu bars have a border"
-#~ msgstr "Menujska vrstica ima rob"
-
-#~ msgid "Menus can be torn off"
-#~ msgstr "Menuji se lahko odtrgajo"
-
-#~ msgid "Menu items have icons"
-#~ msgstr "Menuji imajo ikone"
-
-#~ msgid "Status Bar"
-#~ msgstr "Vrstica stanja"
-
-#~ msgid "Use status bar instead of dialog when possible"
-#~ msgstr "Kjer je mogoèe uporabi vrstico stanja namesto dialoga"
-
-#~ msgid "Status bar is interactive when possible"
-#~ msgstr "Kadar je mo¾no naj bo vrstica stanja interaktivna"
-
-#~ msgid "Progress bar is on the left"
-#~ msgstr "Merilnik napredka je na levi"
-
-#~ msgid "Progress bar is on the right"
-#~ msgstr "Merilnik napredka je na desni"
-
-#~ msgid "Tool Bars"
-#~ msgstr "Orodne vrstice"
-
-#~ msgid "Tool bars have a border"
-#~ msgstr "Orodne vrstice imajo rob"
-
-#~ msgid "Tool bar buttons pop up on mouse over"
-#~ msgstr "Gumbi orodne vrstice se dvignejo ob prehodu mi¹ke"
-
-#~ msgid "Tool bars have line separators"
-#~ msgstr "Orodne vrstice imajo èrte loènice"
-
-#~ msgid "Tool bars are detachable"
-#~ msgstr "Orodne vrstice se lahko odklopijo"
-
-#~ msgid "Tool bar buttons are icons only"
-#~ msgstr "Gumbi orodne vrstice so le ikone"
-
-#~ msgid "Tool bar buttons are text below icons"
-#~ msgstr "Gumbi orodne vrstice so besedilo pod ikonami"
-
-#~ msgid "Interface"
-#~ msgstr "Vmesnik"
-
-#~ msgid "Dialogs"
-#~ msgstr "Dialogi"
-
-#~ msgid "Dialog buttons have icons"
-#~ msgstr "Gumbi dialogov imajo ikone"
-
-#~ msgid "Place dialogs over application window when possible"
-#~ msgstr "Postavi dialoge èez okna aplikacij, kadar je mo¾no"
-
-#~ msgid "Dialogs open"
-#~ msgstr "Odpri dialoge"
-
-#~ msgid "Wherever the Window Manager places them"
-#~ msgstr "Kjer jih postavi upravljalnik oken"
-
-#~ msgid "At the center of the screen"
-#~ msgstr "Na sredini zaslona"
-
-#~ msgid "At the mouse pointer"
-#~ msgstr "Kjer je mi¹kin kazalec"
-
-#~ msgid "Dialogs are treated"
-#~ msgstr "Dialogi se obravnavajo"
-
-#~ msgid "Like any other window"
-#~ msgstr "enako kot druga okna"
-
-#~ msgid "Specially by the window manager"
-#~ msgstr "posebej s strani upravljalnika oken"
-
-#~ msgid "Dialog Buttons"
-#~ msgstr "Gumbi dialogov"
-
-#~ msgid "Default  (Spread out - big)"
-#~ msgstr "privzeto (Razpr¹eni - na veliko)"
-
-#~ msgid "Spread out"
-#~ msgstr "razpr¹eni"
-
-#~ msgid "Spread out (big)"
-#~ msgstr "razpr¹eni (na veliko)"
-
-#~ msgid "Left aligned"
-#~ msgstr "poravnani levo"
-
-#~ msgid "Right aligned"
-#~ msgstr "poravnani desno"
-
-#~ msgid "Multiple Documents"
-#~ msgstr "Veè dokumentov"
-
-#~ msgid "Notebook tabs"
-#~ msgstr "uhlji notesnika"
-
-#~ msgid "Seperate windows"
-#~ msgstr "loèena okna"
-
-#~ msgid "The same window"
-#~ msgstr "isto okno"
-
-#~ msgid "Left"
-#~ msgstr "levo"
-
-#~ msgid "Right"
-#~ msgstr "desno"
-
-#~ msgid "Top"
-#~ msgstr "na vrhu"
-
-#~ msgid "Bottom"
-#~ msgstr "na dnu"
-
-#~ msgid "When opening Multiple documents, use"
-#~ msgstr "Ko se odpira veè dokumentov, uporabi"
-
-#~ msgid "When using Notebook tabs, place the tabs on the"
-#~ msgstr "Ko se uporabljajo uhlji notesnika, postavi uhlje"
-
-#~ msgid "Miscellaneous"
-#~ msgstr "Razno"
-
-#~ msgid "Settings will not take effect until applications restart"
-#~ msgstr "Nastavitve ne bodo uèinkovale dokler se progami ne po¾enejo znova"
-
-#~ msgid "Session"
-#~ msgstr "Seja"
-
-#~ msgid "Session Chooser"
-#~ msgstr "Izbirnik seje"
-
-#~ msgid "Start Session"
-#~ msgstr "Prièni sejo"
-
-#~ msgid "Cancel Login"
-#~ msgstr "Preklièi prijavo"
-
-#~ msgid "Order: "
-#~ msgstr "Vrstni red: "
-
-#~ msgid "Style: "
-#~ msgstr "Slog: "
-
-#~ msgid "This button sets the start order of the selected programs.\n"
-#~ msgstr "Ta gumb nastavi vrstni red poganjanja programov.\n"
+#~ msgid "Size"
+#~ msgstr "Velikost"
 
 #~ msgid ""
-#~ "This button sets the restart style of the selected programs:\n"
-#~ "Normal programs are unaffected by logouts but can die;\n"
-#~ "Respawn programs are never allowed to die;\n"
-#~ "Trash programs are discarded on logout and can die;\n"
-#~ "Settings programs are always started on every login."
+#~ "This draws a working analog clock composed of floating, throbbing bubbles."
 #~ msgstr ""
-#~ "Ta gumb nastavi slog ponovnega zagona izbranih programov:\n"
-#~ "Obièajni programi niso odvisni od odjave a lahko umrejo;\n"
-#~ "Programom pognanim venomer znova ni dovoljeno umreti;\n"
-#~ "Programi smeti so zavr¾eni pri odjavi in lahko umrejo;\n"
-#~ "Nastavitveni programi se vedno za¾enejo pri vsaki prijavi."
+#~ "To nari¹e analogno uro v teku, ki je sestavljena iz lebdeèih mehurèkov."
 
 #~ msgid ""
-#~ "This button produces a key to the program states below:\n"
-#~ "Inactive programs are waiting to start or have finished;\n"
-#~ "Starting programs are being given time to get running;\n"
-#~ "Running programs are normal members of the session;\n"
-#~ "Saving programs are saving their session details;\n"
-#~ "Programs which make no contact have Unknown states.\n"
+#~ "Time 3D is a clock.  It uses flying balls to display the time.  The balls "
+#~ "move and wobble around to give you the impression your graphic "
+#~ "workstation with its many XStone is doing something."
 #~ msgstr ""
-#~ "Ta gumb pve kljuè sledeèih stanj programa:\n"
-#~ "Neaktivni programi èakajo na zaèetek ali so ¾e konèali;\n"
-#~ "Zaganjajoèim programom je dan èas, da zaènejo teèi;\n"
-#~ "Programi v teku so obièajni èlani seje;\n"
-#~ "Shranjujoèi programi shranjujejo podrobnosti njihovih sej;\n"
-#~ "Programi, ki ne naredijo kontakta imajo Neznana stanja.\n"
+#~ "To je 3d ura. Uporablja lebdeèe mehurèke za prikaz èasa. Mehurèki se "
+#~ "premikajo in raz¹irjajo ter dajejo vtis, da va¹a grafièna delovna postaja "
+#~ "z veliko XStoni nekaj poène."
 
-#~ msgid "This column gives the command used to start a program."
-#~ msgstr "Ta stolpec ka¾e ukaz, ki naj se uporabi za zagon programa."
+#~ msgid "Twist"
+#~ msgstr "Sukanje"
 
-#~ msgid "Order"
-#~ msgstr "Vrstni red"
-
-#~ msgid "Style"
-#~ msgstr "Slog"
-
-#~ msgid "State"
-#~ msgstr "Stanje"
-
-#~ msgid "Program"
-#~ msgstr "Program"
-
-#~ msgid "Inactive"
-#~ msgstr "Nedejaven"
-
-#~ msgid "Waiting to start or already finished."
-#~ msgstr "Èaka na zaèetek ali pa je ¾e konèal."
-
-#~ msgid "Starting"
-#~ msgstr "Zaganjam"
-
-#~ msgid "Started but has not yet reported state."
-#~ msgstr "Pognan, a ¹e ni sporoèil stanja."
-
-#~ msgid "Running"
-#~ msgstr "Teèe"
-
-#~ msgid "A normal member of the session."
-#~ msgstr "Obièajen èlan seje."
-
-#~ msgid "Saving"
-#~ msgstr "Shranjujem"
-
-#~ msgid "Saving session details."
-#~ msgstr "Shranjujem podrobnosti seje."
-
-#~ msgid "Unknown"
-#~ msgstr "Neznan"
-
-#~ msgid "State not reported within timeout."
-#~ msgstr "Stanje ni bilo sporoèeno znotraj èasovne omejitve."
-
-#~ msgid "Normal"
-#~ msgstr "Obièajen"
-
-#~ msgid "Unaffected by logouts but can die."
-#~ msgstr "Neodvisen od odjave, a lahko umre."
-
-#~ msgid "Respawn"
-#~ msgstr "Pognan venomer znova"
-
-#~ msgid "Never allowed to die."
-#~ msgstr "Ne sme umreti."
-
-#~ msgid "Trash"
-#~ msgstr "Smeti"
-
-#~ msgid "Discarded on logout and can die."
-#~ msgstr "Zavr¾e se ob odjavi in lahko umre."
-
-#~ msgid "Always started on every login."
-#~ msgstr "Vedno se za¾ene pri vsaki prijavi."
-
-#~ msgid "Remove Program"
-#~ msgstr "Odstrani Program"
-
-#~ msgid "Options"
-#~ msgstr "Mo¾nosti"
-
-#~ msgid "Prompt on logout"
-#~ msgstr "Potrdi odjavo"
-
-#~ msgid "Automatically save changes to session"
-#~ msgstr "Samodejno shrani spremembe seje"
-
-#~ msgid "Non-session-managed Startup Programs"
-#~ msgstr "Zaèetni programi, ki niso del seje"
-
-#~ msgid "Command"
-#~ msgstr "Ukaz"
-
-#~ msgid "Browse Currently Running Programs..."
-#~ msgstr "Brskaj po trenutno pognanih programih..."
-
-#~ msgid "Only display warnings."
-#~ msgstr "Ka¾i le opozorila."
-
-#~ msgid "Startup Command"
-#~ msgstr "Zagonski ukaz"
+#~ msgid "Wobble"
+#~ msgstr "Nihanje"
 
 #~ msgid ""
-#~ "Programs with smaller values are started before programs with higher values. "
-#~ "The default value should be OK"
+#~ "A cellular automaton that is really a two-dimensional Turing machine: as "
+#~ "the heads (``ants'') walk along the screen, they change pixel values in "
+#~ "their path. Then, as they pass over changed pixels, their behavior is "
+#~ "influenced."
 #~ msgstr ""
-#~ "Programi z manj¹imi vrednostmi so pognani pred programi z veèjimi. Privzeta "
-#~ "vrednost bi morala ustrezati"
+#~ "Celièna avtomaticja, ki je v bistvu dvodimenzionalni Turingov stroj: "
+#~ "mravlje hodijo okoli kot glave èez zaslon in spreminjajo vrednosti "
+#~ "pikslov na njihovi poti. Potem ko gredo èez spremenjene piksle to vpliva "
+#~ "na njihovo vedenje."
 
-#~ msgid "The startup command cannot be empty"
-#~ msgstr "Zagonski ukaz ne more biti prazen"
+#~ msgid "Ants:"
+#~ msgstr "Mravelj:"
 
-#~ msgid "Add Startup Program"
-#~ msgstr "Dodaj zaèetni program"
+#~ msgid "Changes the number of ants marching across the screen."
+#~ msgstr "Spremeni ¹tevilo mravelj, ki ma¹irajo èez zaslon."
 
-#~ msgid "Edit Startup Program"
-#~ msgstr "Uredi zaèetni program"
+#~ msgid "Changes the size of the ants."
+#~ msgstr "Spremeni velikost mravelj."
+
+#~ msgid "Count"
+#~ msgstr "©tevilo"
+
+#~ msgid "David Bagely"
+#~ msgstr "David Bagely"
+
+#~ msgid ""
+#~ "Determines whether or not the ant leaves a truchet in the path it leaves "
+#~ "behind."
+#~ msgstr "Doloèi ali naj mravlje pustijo sled na poti, ki jo uberejo."
+
+#~ msgid "Little Ants walk around, leaving colored trails."
+#~ msgstr "Male mravlje hodijo okoli in pu¹èajo barvne sledi"
+
+#~ msgid "Number of ants."
+#~ msgstr "©tevilo mravelj."
+
+#~ msgid "Print the path that the ant took in the trail."
+#~ msgstr "Izpi¹i pot, ki jo je ubrala mravlja."
+
+#~ msgid "Atlantis"
+#~ msgstr "Atlantik"
+
+#~ msgid "Whales, dolphins and sharks swimming around, in 3D"
+#~ msgstr ""
+#~ "Kiti, delfini in morski psi plavjo naokoli v treh dimenzijah.             "
+
+#~ msgid ""
+#~ "A show of objects interacting through attractive and repulsive forces."
+#~ msgstr ""
+#~ "©ov predmetov, ki medsebojno delujejo drug na drugega preko privlaènih in "
+#~ "odbojnih sil."
+
+#~ msgid "Attraction"
+#~ msgstr "Privlaènost"
+
+#~ msgid ""
+#~ "Attraction is based on interactions of points which attract each other up "
+#~ "to a certain distance and then begin to repel each other."
+#~ msgstr ""
+#~ "Privlaènost temelji na interakciji med toèkami, ki se medsebojno "
+#~ "privlaèijo do neke razdalje, nato pa se zaèno odbijati."
+
+#~ msgid "Change distance at which attractive force becomes repulsive."
+#~ msgstr "Spremeni razdaljo pri kateri privlaènost postane odbojnost."
+
+#~ msgid "Change size of points."
+#~ msgstr "Spremeni ¹tevilo toèk."
+
+#~ msgid "Change the delay in cycles."
+#~ msgstr "Spremeni premor med cikli."
+
+#~ msgid "Change the number of points to use."
+#~ msgstr "Spremeni ¹tevilo uporabljenih toèk."
+
+#~ msgid "Closer"
+#~ msgstr "Blizu"
+
+#~ msgid "Count:"
+#~ msgstr "©tevilo:"
+
+#~ msgid "Delay"
+#~ msgstr "Premor"
+
+#~ msgid "Distance of attraction."
+#~ msgstr "Razdalja privlaènosti."
+
+#~ msgid "Farther"
+#~ msgstr "Daleè"
+
+#~ msgid "Faster"
+#~ msgstr "Hitro"
+
+#~ msgid "Glow"
+#~ msgstr "Svetlo"
+
+#~ msgid "Have initial forces on each point be tangential to original circle."
+#~ msgstr "Naj bodo zaèetne sile na vsako toèko tangentne na izvorni krog."
+
+#~ msgid "Have points glow vary with acceleration."
+#~ msgstr "Naj se svetlost toèk spreminja s pospe¹kom."
+
+#~ msgid "Initial spacing radius of points."
+#~ msgstr "Zaèetni radij kroga kjer so toèke."
+
+#~ msgid "Jamie Zawinski <jwz@netscape.com>"
+#~ msgstr "Jamie Zawinski <jwz@netscape.com>"
+
+#~ msgid "Larger"
+#~ msgstr "Velik"
+
+#~ msgid "Number of points to use."
+#~ msgstr "©tevilo uporabljenih toèk."
+
+#~ msgid "Orbit"
+#~ msgstr "Orbita"
+
+#~ msgid "Radius"
+#~ msgstr "Radij"
+
+#~ msgid "Size of point."
+#~ msgstr "Velikost toèke."
+
+#~ msgid "Slower"
+#~ msgstr "Poèasno"
+
+#~ msgid "Smaller"
+#~ msgstr "Majhen"
+
+#~ msgid "Blitspin"
+#~ msgstr "Blitspin"
+
+#~ msgid ""
+#~ "Blitspin takes a bitmap and repeatedly rotates it by 90 degrees using "
+#~ "logical operations."
+#~ msgstr ""
+#~ "Blitspin vzame sliko in jo zaporedoma vrti za 90 stopinj z uporabo "
+#~ "logiènih operacij."
+
+#~ msgid "Change the delay between each 90 degree rotation."
+#~ msgstr "Spremeni premor med vsakim zasukom za 90 stopinj."
+
+#~ msgid "Change the delay between steps of rotation process."
+#~ msgstr "Spremeni premor med koraki vrtenja."
+
+#~ msgid "Delay2"
+#~ msgstr "Premor2"
+
+#~ msgid "Rotates a bitmap in an interesting way."
+#~ msgstr "Vrti sliko na zanimiv naèin."
+
+#~ msgid "3D"
+#~ msgstr "3D"
+
+#~ msgid "A blob of bubbles spinning/moving around the screen."
+#~ msgstr "Skupek mehurèkov, ki se vrti/premika po zaslonu."
+
+#~ msgid "Bouboule"
+#~ msgstr "Mehurèki"
+
+#~ msgid "Bouboule changes shape and size in a blob like form."
+#~ msgstr "Skupek spreminja obliko in velikost v obliki kaplje. "
+
+#~ msgid "Change the number of bubbles to use."
+#~ msgstr "Spremeni ¹tevilo uporabljenih mehurèkov."
+
+#~ msgid "Change the number of colors to use."
+#~ msgstr "©tevilo uporabljenih barv."
+
+#~ msgid "Colors"
+#~ msgstr "Barve"
+
+#~ msgid "Colors:"
+#~ msgstr "Barv:"
+
+#~ msgid "Jeremie Petit <jpetit@essi.fr>"
+#~ msgstr "Jeremie Petit <jpetit@essi.fr>"
+
+#~ msgid "Braid"
+#~ msgstr "Preplet"
+
+#~ msgid "John Neil <neil@math.idbsu.edu>"
+#~ msgstr "John Neil <neil@math.idbsu.edu>"
+
+#~ msgid "Random color-cycling braids in a circle."
+#~ msgstr "Nakljuèni barvno vrteni prepleti v krogu."
+
+#~ msgid "The braid program draws random color-cycling braids around a circle."
+#~ msgstr "Preplet ri¹e nakljuène barvno vrtene preplete okoli kroga."
+
+#~ msgid "Blue Screen of Death"
+#~ msgstr "Modri zaslon smrti"
+
+#~ msgid "Bsod"
+#~ msgstr "Bsod"
+
+#~ msgid "Bsod simulates crash screens from other operating systems."
+#~ msgstr ""
+#~ "Modri zaslon smrti posnema zaslone drugih operacijskih sistemov, ko se "
+#~ "sesujejo."
+
+#~ msgid "Change the delay."
+#~ msgstr "Spremeni premor."
+
+#~ msgid "Bubble3d"
+#~ msgstr "Mehurèki3d"
+
+#~ msgid "Lots of bubbles floating around, in 3d"
+#~ msgstr "Veliko plavajoèih mehurèkov, v 3d"
+
+#~ msgid "Broken"
+#~ msgstr "Pokvarjeno"
+
+#~ msgid "Bubbles"
+#~ msgstr "Mehurèki"
+
+#~ msgid "Bubbles sprays tiny bubbles which grow until they go pop."
+#~ msgstr "Mehurèki razpr¹i male mehurèke, ki rastejo dokler ne poèijo."
+
+#~ msgid "James Macnicol <J.Macnicol@student.anu.edu.au>"
+#~ msgstr "James Macnicol <J.Macnicol@student.anu.edu.au>"
+
+#~ msgid "Lots of random bubbles grow until they pop."
+#~ msgstr "Veliko nakljuènih mehurèkov raste dokler ne poèijo."
+
+#~ msgid "Simple"
+#~ msgstr "Enostavno"
+
+#~ msgid "Bumps"
+#~ msgstr "Poskoki"
+
+#~ msgid "Shane Smit"
+#~ msgstr "Shane Smit"
+
+#~ msgid "Spotlights a bump map of your desktop."
+#~ msgstr "Osvetli reliefno povr¹ino va¹ega namizja."
+
+#~ msgid "The famous, M.C. Escher, impossible cage"
+#~ msgstr "Znamenita nemogoèa kletka M.C. Escherja"
+
+#~ msgid "Compass"
+#~ msgstr "Kompas"
+
+#~ msgid "Display a spinning compass "
+#~ msgstr "Ka¾i vrteè kompas "
+
+#~ msgid "Change the density."
+#~ msgstr "Spremeni gostoto."
+
+#~ msgid "Change the number of seeds."
+#~ msgstr "Spremeni ¹tevilo semen."
+
+#~ msgid "Coral"
+#~ msgstr "Korale"
+
+#~ msgid "Denser"
+#~ msgstr "Redko"
+
+#~ msgid "Frederick Roeber"
+#~ msgstr "Frederick Roeber"
+
+#~ msgid "Seeds"
+#~ msgstr "Semen"
+
+#~ msgid "Simulates coral growth"
+#~ msgstr "Posnema rast koral"
+
+#~ msgid "Simulates coral growth."
+#~ msgstr "Posnema rast koral."
+
+#~ msgid "Thinner"
+#~ msgstr "Gosto"
+
+#~ msgid "Critical"
+#~ msgstr "Kritièno"
+
+#~ msgid "Display coloured polylines"
+#~ msgstr "Ka¾i barvne poligonske èrte"
+
+#~ msgid "Centre"
+#~ msgstr "Centrirano"
+
+#~ msgid "Change the number of polygons to use."
+#~ msgstr "Spremeni ¹tevilo uporabljenih poligonov."
+
+#~ msgid "Crystal"
+#~ msgstr "Kristal"
+
+#~ msgid "Jouk Jansen"
+#~ msgstr "Jouk Jansen"
+
+#~ msgid "Maxsize"
+#~ msgstr "Najveèja velikost"
+
+#~ msgid "Moving polygons, similar to a kaleidescope."
+#~ msgstr "Premikajoèi se poligoni, podobno kaleidoskopu."
+
+#~ msgid "Change the number of iterations."
+#~ msgstr "Spremeni ¹tevilo ponovitev."
+
+#~ msgid "Cynosure"
+#~ msgstr "Cynosure"
+
+#~ msgid "Cynosure franticly displays colored rectangles."
+#~ msgstr "Cynosure besno ri¹e pobarvane pravokotnike."
+
+#~ msgid "Franticly displays colored rectangles."
+#~ msgstr "Besno ri¹e pobarvane pravokotnike."
+
+#~ msgid "Iterations"
+#~ msgstr "Ponovitev"
+
+#~ msgid "Less"
+#~ msgstr "Malo"
+
+#~ msgid "More"
+#~ msgstr "Veliko"
+
+#~ msgid "Stephen Linhart, Ozymandias Desiderata, Jamie Zawinski"
+#~ msgstr "Stephen Linhart, Ozymandias Desiderata, Jamie Zawinski"
+
+#~ msgid "Decayscreen"
+#~ msgstr "Razpad"
+
+#~ msgid "Decayscreen makes a screen look like its melting down."
+#~ msgstr "Razpad naredi vtis topljenja zaslona."
+
+#~ msgid "Makes a screen melt down"
+#~ msgstr "Stopi zaslon"
+
+#~ msgid "Vivek Khera <khera@cs.duke.edu>"
+#~ msgstr "Vivek Khera <khera@cs.duke.edu>"
+
+#~ msgid "Changes the time between redrawing the screen."
+#~ msgstr "Spremeni èas med vnoviènimi risanji zaslona."
+
+#~ msgid "Deco"
+#~ msgstr "Deko"
+
+#~ msgid "Deco draws tacky 70s basement wall panelling."
+#~ msgstr "Deko ri¹e zanimive vzorce iz 70' let."
+
+#~ msgid ""
+#~ "Determines whether to draw the panels in color, or in black and white."
+#~ msgstr "Doloèi ali naj ri¹e v barvah ali èrnobelo."
+
+#~ msgid "Draw tacky 70s basement wall panelling."
+#~ msgstr "Ri¹e zanimive vzorce iz 70' let."
+
+#~ msgid ""
+#~ "Jamie Zawinski <jwz@jwz.org>\n"
+#~ "Michael D. Bayne <mdb@go2net.com>"
+#~ msgstr ""
+#~ "Jamie Zawinski <jwz@jwz.org>\n"
+#~ "Michael D. Bayne <mdb@go2net.com>"
+
+#~ msgid "This will cause the panes to flash."
+#~ msgstr "To bo povzroèilo utripanje."
+
+#~ msgid "Time between redraws:"
+#~ msgstr "Èas med risanji:"
+
+#~ msgid "color"
+#~ msgstr "barva"
+
+#~ msgid "color-cycle"
+#~ msgstr "kro¾enje barv"
+
+#~ msgid "delay"
+#~ msgstr "premor"
+
+#~ msgid "seconds"
+#~ msgstr "sekund"
+
+#~ msgid "Deluxe"
+#~ msgstr "Delux"
+
+#~ msgid "Display nice stuff "
+#~ msgstr "Prika¾e lepe stvari "
+
+#~ msgid ""
+#~ "A cellular automata that starts with a random field, and organizes it "
+#~ "into stripes and spirals."
+#~ msgstr ""
+#~ "Celièni avtomat, ki zaène z nakljuènim poljem in ga organizira v pasove "
+#~ "in spirale."
+
+#~ msgid "Change the number to use."
+#~ msgstr "Spremeni ¹tevilo, ki naj se uporabi."
+
+#~ msgid "Discrete map systems"
+#~ msgstr "Diskretni sistemi"
+
+#~ msgid "Tim Auckland"
+#~ msgstr "Tim Auckland"
+
+#~ msgid "Distort"
+#~ msgstr "Bula"
+
+#~ msgid "Distort the screen"
+#~ msgstr "Bula na zaslonu"
+
+#~ msgid ""
+#~ "This screensaver does distortions of some areas of the screen, as if some "
+#~ "object was moving under the image"
+#~ msgstr "Ta ohranjevalnik zaslona daje vtis bule, ki se premika pod sliko"
+
+#~ msgid "Change whether fractals should grow."
+#~ msgstr "Spremeni ali naj fraktali rastejo."
+
+#~ msgid "Change whether to use lissajous figures to get points."
+#~ msgstr "Spremeni uporabo lissajousovih skic za pridobitev toèk."
+
+#~ msgid "Drift"
+#~ msgstr "Puhanje"
+
+#~ msgid "Drift draws drifting recursive fractal cosmic flames."
+#~ msgstr "Puhanje ri¹e rekurzivna fraktalna kozmièna plamena."
+
+#~ msgid "Drifting recursive fractal cosmic flames."
+#~ msgstr "Puha rekurzivna fraktalna kozmièna plamena."
+
+#~ msgid "Grow"
+#~ msgstr "Rasti"
+
+#~ msgid "Lissajous"
+#~ msgstr "Lissajous"
+
+#~ msgid "Scot Draves <spot@cs.cmu.edu>"
+#~ msgstr "Scot Draves <spot@cs.cmu.edu>"
+
+#~ msgid "Draws a point moving around a circle which moves around a circle."
+#~ msgstr "Ri¹e toèko, ki se giblje okoli kroga, ki se giblje okoli kroga."
+
+#~ msgid "Epicycle"
+#~ msgstr "Epicikel"
+
+#~ msgid ""
+#~ "Epicycle draws the path traced out by a point on the edge of a circle "
+#~ "that is rotating around the rim of another circle, and so on."
+#~ msgstr ""
+#~ "Epicikel ri¹e pot, ki jo opravi toèka, ki se giblje po kro¾nici okoli "
+#~ "druge toèke, ki se giblje po kro¾nici okoli tretje in tako naprej."
+
+#~ msgid "Holdtime"
+#~ msgstr "Prekinitev èasa"
+
+#~ msgid "James Youngman <jay@gnu.org>"
+#~ msgstr "James Youngman <jay@gnu.org>"
+
+#~ msgid "Seconds"
+#~ msgstr "Sekund"
+
+#~ msgid "When the figure is complete, epicycle pauses this number of seconds."
+#~ msgstr "Ko je skica gotova, epicikel poèaka toliko sekund."
+
+#~ msgid "A waving ribbon"
+#~ msgstr "Plapolajoè napis"
+
+#~ msgid "Bas van Gaalen and Charles Vidal"
+#~ msgstr "Bas van Gaalen and Charles Vidal"
+
+#~ msgid "Change the delay in movement."
+#~ msgstr "Spremeni premor med premiki."
+
+#~ msgid "Change the number of cycles."
+#~ msgstr "Spremeni ¹tevilo ciklov."
+
+#~ msgid "Changes the count."
+#~ msgstr "Spremeni ¹tevilo."
+
+#~ msgid "Cycles"
+#~ msgstr "Ciklov"
+
+#~ msgid "Draws what looks like a waving ribbon following a sinusoidal path."
+#~ msgstr ""
+#~ "Ri¹e nekaj kar izgleda kot plapolajoè trak, ki se giblje po sinusoidni "
+#~ "poti."
+
+#~ msgid "Fadeplot"
+#~ msgstr "Fadeplot"
+
+#~ msgid "Change the delay between changing modes."
+#~ msgstr "Spremeni premor med preklopi."
+
+#~ msgid "Change the size of pixels in the flag."
+#~ msgstr "Spremeni velikost pikslov v zastavi."
+
+#~ msgid "Charles Vidal <vidalc@univ-mlv.fr>"
+#~ msgstr "Charles Vidal <vidalc@univ-mlv.fr>"
+
+#~ msgid "Delay between switches."
+#~ msgstr "Premor med preklopi."
+
+#~ msgid "Draws a waving flag."
+#~ msgstr "Ri¹e plapolajoèo zastavo."
+
+#~ msgid "Flag"
+#~ msgstr "Zastava"
+
+#~ msgid "Flag draws a waving flab, containing text or an image."
+#~ msgstr ""
+#~ "Program Zastava ri¹e plapolajoèo zastavo, ki vsebuje besedilo ali sliko."
+
+#~ msgid "Size of pixels"
+#~ msgstr "Velikost pikslov"
+
+#~ msgid "Draws a flow of colored points"
+#~ msgstr "Ri¹e tok barvnih toèk"
+
+#~ msgid "Flow"
+#~ msgstr "Tok"
+
+#~ msgid "Change the number of trees to use."
+#~ msgstr "Spremeni ¹tevilo uporabljenih dreves."
+
+#~ msgid "Draws a fractal forest."
+#~ msgstr "Ri¹e fraktalne gozdove."
+
+#~ msgid "Forest"
+#~ msgstr "Gozd"
+
+#~ msgid "Fractal draws a fractal forest."
+#~ msgstr "Gozd ri¹e fraktalne gozdove."
+
+#~ msgid "Pascal Pensa <pensa@aurora.unice.fr>"
+#~ msgstr "Pascal Pensa <pensa@aurora.unice.fr>"
+
+#~ msgid "A 3d globe"
+#~ msgstr "3d globus"
+
+#~ msgid "GLPlanet"
+#~ msgstr "GLPlanet"
+
+#~ msgid "Galaxy"
+#~ msgstr "Galaksija"
+
+#~ msgid "Gears"
+#~ msgstr "Zobniki"
+
+#~ msgid "The 3d mesa demo, of gears"
+#~ msgstr "3d mesa demo zobnikov"
+
+#~ msgid "Additive"
+#~ msgstr "Dodatek"
+
+#~ msgid "Causes the colors to mix when overlapped."
+#~ msgstr "Povzroèi me¹anje barv kadar se prekrivajo."
+
+#~ msgid "Goop"
+#~ msgstr "Goop"
+
+#~ msgid "Goop draws a simulation of bubbles in layers."
+#~ msgstr "Goop posnema mehurèke v plasteh."
+
+#~ msgid "Jamie Zawinski <jwz@jwz.org>"
+#~ msgstr "Jamie Zawinski <jwz@jwz.org>"
+
+#~ msgid "Transparent"
+#~ msgstr "Prosojen"
+
+#~ msgid "squishy transparent oil and bubbles"
+#~ msgstr "prosojni oljni mehurèki"
+
+#~ msgid "Change the number of planets to use."
+#~ msgstr "Spremeni ¹tevilo uporabljenih planetov."
+
+#~ msgid "Change whether objects should leave a trail."
+#~ msgstr "Spremeni ali naj predmeti pu¹èajo sled."
+
+#~ msgid "Change whether orbit should decay."
+#~ msgstr "Spremeni ali naj se orbita spu¹èa."
+
+#~ msgid "Decay"
+#~ msgstr "Razpad"
+
+#~ msgid "Draws a simple orbital simulation."
+#~ msgstr "Ri¹e enostavno posnemanje orbit."
+
+#~ msgid "Grav"
+#~ msgstr "Grav"
+
+#~ msgid "Grav draws a simple orbital simulation."
+#~ msgstr "Grav ri¹e enostavno posnemanje orbit."
+
+#~ msgid "Greg Bowering <greg@smug.student.adelaide.edu.au>"
+#~ msgstr "Greg Bowering <greg@smug.student.adelaide.edu.au>"
+
+#~ msgid "Trail"
+#~ msgstr "Sled"
+
+#~ msgid "Draws random color rectangles."
+#~ msgstr "Ri¹e nakljuène pobarvane pravokotnike."
+
+#~ msgid "Greynetic"
+#~ msgstr "Greynetic"
+
+#~ msgid "Greynetic draws random rectangles."
+#~ msgstr "Greynetic ri¹e nakljuène pravokotnike."
+
+#~ msgid "Animate"
+#~ msgstr "Animiraj"
+
+#~ msgid "Change the number of circles to use."
+#~ msgstr "Spremeni ¹tevilo uporabljenih krogov."
+
+#~ msgid "Change to alternating striped curves."
+#~ msgstr "Spremeni v izmeniène krivulje."
+
+#~ msgid "Change to animated circles."
+#~ msgstr "Spremeni v animirane kroge."
+
+#~ msgid "Change to cycle through colormap."
+#~ msgstr "Spremeni v kro¾enje skozi barvno paleto."
+
+#~ msgid "Cycle"
+#~ msgstr "Kro¾i"
+
+#~ msgid "Draw circular patterns."
+#~ msgstr "Ri¹e kro¾ne vzorce."
+
+#~ msgid "Halo"
+#~ msgstr "Halo"
+
+#~ msgid "Halo draws patterns based on circles."
+#~ msgstr "Halo ri¹e vzorce temeljeèe na krogih."
+
+#~ msgid "Draws helical string-art patterns"
+#~ msgstr "Ri¹e zavite vzorce s pomoèjo èrt"
+
+#~ msgid "Helix"
+#~ msgstr "Heliks"
+
+#~ msgid "Helix draws patterns composed of line segments."
+#~ msgstr "Heliks ri¹e vzorce sestavljene iz daljic."
+
+#~ msgid "Jamie  Zawinski  <jwz@jwz.org> "
+#~ msgstr "Jamie  Zawinski  <jwz@jwz.org> "
+
+#~ msgid "Change the number of pixels before a color change."
+#~ msgstr "Spremeni ¹tevilo narisanih pikslov preden se zamenja barva."
+
+#~ msgid "Draws real plane fractals"
+#~ msgstr "Ri¹e fraktale v ravnini"
+
+#~ msgid "Hopalong"
+#~ msgstr "Hopalong"
+
+#~ msgid "Hopalong generates real plan fractals."
+#~ msgstr "Hopalong generira fraktale v ravnini."
+
+#~ msgid "Patrick J. Naughton <naughton@eng.sun.com>"
+#~ msgstr "Patrick J. Naughton <naughton@eng.sun.com>"
+
+#~ msgid "2D projection of a hypercube"
+#~ msgstr "2D projekcija hiperkocke"
+
+#~ msgid "Change the distance from center of cube"
+#~ msgstr "Spremeni razdaljo od centra kocke"
+
+#~ msgid "Distance"
+#~ msgstr "Razdalja"
+
+#~ msgid "Hypercube"
+#~ msgstr "Hiperkocka"
+
+#~ msgid "Hypercube displays a wireframe projection of a hypercube."
+#~ msgstr "Hiperkocka prika¾e ¾ièni model projekcije hiperkocke."
+
+#~ msgid "Draws spinning, colliding, iterated-function-system images."
+#~ msgstr "Ri¹e premikajoèe se slike IFS fraktalov."
+
+#~ msgid "Ifs"
+#~ msgstr "Ifs"
+
+#~ msgid "Ifs draws spinning, colliding, iterated-function-system images."
+#~ msgstr "Ri¹e premikajoèe se slike IFS fraktalov."
+
+#~ msgid "Massimino Pascal <Pascal.Massimon@ens.fr>"
+#~ msgstr "Massimino Pascal <Pascal.Massimon@ens.fr>"
+
+#~ msgid "Imsmap"
+#~ msgstr "Imsmap"
+
+#~ msgid "Interference"
+#~ msgstr "Interferenca"
+
+#~ msgid "Jigsaw"
+#~ msgstr "jigsaw"
+
+#~ msgid ""
+#~ "Jigsaw takes an image of the screen, carves it up into jigsaw puzzle "
+#~ "pieces, shuffles it, and solves it."
+#~ msgstr ""
+#~ "Jigsaw vzame sliko z zaslona, jo premeèe kot sestavljanko in jo nato "
+#~ "pravilno sestavi."
+
+#~ msgid "Permutes the screen image like a jigsaw puzzle."
+#~ msgstr "Permutira sliko zaslona kot sestavljanko."
+
+#~ msgid "Draws spinning, animating, julia-set fractals."
+#~ msgstr "Ri¹e animirane Juliajeve fraktale."
+
+#~ msgid "Julia"
+#~ msgstr "Julia"
+
+#~ msgid "Julia draws spinning, animating, julia-set fractals."
+#~ msgstr "Julia ri¹e animirane Juliajeve fraktale."
+
+#~ msgid "Sean McCullough <bankshot@mailhost.nmt.edu>"
+#~ msgstr "Sean McCullough <bankshot@mailhost.nmt.edu>"
+
+#~ msgid "Change number of segments."
+#~ msgstr "Spremeni ¹tevilo daljic."
+
+#~ msgid "Change number of trails."
+#~ msgstr "Spremeni ¹tevilo sledi."
+
+#~ msgid "Draws rotating line segments."
+#~ msgstr "Ri¹e vrteèe se daljice."
+
+#~ msgid "Kaleidescope"
+#~ msgstr "Kaleidoskop"
+
+#~ msgid "Kaleidescope draws line segments in a symmetric pattern."
+#~ msgstr "Kaleidoskop ri¹e daljice po simetriènem vzorcu."
+
+#~ msgid "Ron Tapia <tapia@nmia.com>"
+#~ msgstr "Ron Tapia <tapia@nmia.com>"
+
+#~ msgid "Segments"
+#~ msgstr "Daljice"
+
+#~ msgid "Kumppa"
+#~ msgstr "Kumppa"
+
+#~ msgid "A 3d cube floats around"
+#~ msgstr "Lebdeèa 3d kocka"
+
+#~ msgid ""
+#~ "Draws laser-like lines moving around a central focal point in varying "
+#~ "numbers and colors."
+#~ msgstr ""
+#~ "Ri¹e èrte podobne lasarju, ki se giblejo okoli centralne toèke v veèih "
+#~ "razliènih barvah."
+
+#~ msgid "Draws vaguely laser-like moving lines."
+#~ msgstr "Ri¹e èrte podobne laserju."
+
+#~ msgid "Duration"
+#~ msgstr "Trajanje"
+
+#~ msgid ""
+#~ "Duration of the laser burst.  After the burst has finished, It will move "
+#~ "to a new location on the screen."
+#~ msgstr ""
+#~ "Trajanje izbruha laserja. Ko je izbruh konèan, se bo premaknil na nov "
+#~ "polo¾aj na zaslonu."
+
+#~ msgid "Laser"
+#~ msgstr "Laser"
+
+#~ msgid "Longer"
+#~ msgstr "Dolgo"
+
+#~ msgid "Mono"
+#~ msgstr "Èrnobelo"
+
+#~ msgid "Number of segments per laser burst."
+#~ msgstr "©tevilo daljic na izbruh."
+
+#~ msgid "Pascal Pensa"
+#~ msgstr "Pascal Pensa"
+
+#~ msgid "Segments:"
+#~ msgstr "Daljice:"
+
+#~ msgid "Draws fractal lightning bolts."
+#~ msgstr "Ri¹e fraktalne strele."
+
+#~ msgid "Keith Romberg <kromberg@saxe.com>"
+#~ msgstr "Keith Romberg <kromberg@saxe.com>"
+
+#~ msgid "Lightning"
+#~ msgstr "Bliskanje"
+
+#~ msgid "Lightning draws fractal lightning bolts."
+#~ msgstr "Bliskanje ri¹e fraktalne strele."
+
+#~ msgid "Caleb Cullen"
+#~ msgstr "Caleb Cullen"
+
+#~ msgid "Change the size of object."
+#~ msgstr "Spremeni velikost predmeta."
+
+#~ msgid "Draws animated full-loop lisajous figures"
+#~ msgstr "Ri¹e animirane kro¾ne skice"
+
+#~ msgid "Lisa"
+#~ msgstr "Lisa"
+
+#~ msgid "Lisa draws animated full-loop lisajous figures."
+#~ msgstr "Lisa ri¹e animirane kro¾ne skice."
+
+#~ msgid "Lissie"
+#~ msgstr "Lissie"
+
+#~ msgid "Change from closed to open figures."
+#~ msgstr "Spremeni iz zaprtih v odprte skice."
+
+#~ msgid "Change number of interpolation steps."
+#~ msgstr "Spremeni ¹tevilo korakov interpolacije."
+
+#~ msgid "Figtype"
+#~ msgstr "Tip skice"
+
+#~ msgid "Lmorph"
+#~ msgstr "Lmorph"
+
+#~ msgid ""
+#~ "Lmorph morphs between simple linedrawings using bilinear interpolation."
+#~ msgstr ""
+#~ "Lmorph morfira med enostavnimi skicami iz èrt z uporabo bilinearne "
+#~ "interpolacije."
+
+#~ msgid "Morphing lines."
+#~ msgstr "Morfiranje èrt."
+
+#~ msgid "Points"
+#~ msgstr "Toèk"
+
+#~ msgid "Points:"
+#~ msgstr "Toèk:"
+
+#~ msgid "Steps"
+#~ msgstr "Korakov"
+
+#~ msgid ""
+#~ "Sverre  H.  Huseby <sverrehu@online.no> & Glenn T. Lines <gtl@si.sintef."
+#~ "no>"
+#~ msgstr ""
+#~ "Sverre  H.  Huseby <sverrehu@online.no> & Glenn T. Lines <gtl@si.sintef."
+#~ "no>"
+
+#~ msgid "Loop"
+#~ msgstr "Zanka"
+
+#~ msgid ""
+#~ "This one produces loop-shaped colonies that spawn, age, and eventually "
+#~ "die."
+#~ msgstr ""
+#~ "Ta ohranjevalnik ustvari kolonije v zankah, ki se delijo, starajo in na "
+#~ "koncu umrejo."
+
+#~ msgid "Bridge"
+#~ msgstr "Most"
+
+#~ msgid "Color for filling completely closed off areas."
+#~ msgstr "Barva za polnjenje popolnoma zaprtih obmoèij."
+
+#~ msgid "Color of a skipped path"
+#~ msgstr "Barva preskoèene poti"
+
+#~ msgid "Color of failed path"
+#~ msgstr "Barva neuspe¹ne poti"
+
+#~ msgid "Color of path"
+#~ msgstr "Barva poti"
+
+#~ msgid "Color of surrounded area"
+#~ msgstr "Barva mrtvih polj"
+
+#~ msgid "Controls whether or not a 'bridge' will appear over the logo."
+#~ msgstr "Nastavi ali naj se 'most' postavi nad logotip."
+
+#~ msgid "Copyright (C) 1988 by Sun Microsystems, Inc."
+#~ msgstr "Avtorske pravice pridr¾ane (C) 1988 by Sun Microsystems, Inc."
+
+#~ msgid "Dead Color"
+#~ msgstr "Mrtva barva"
+
+#~ msgid "If the solver can "
+#~ msgstr "Èe re¹evalec lahko"
+
+#~ msgid " the end of a corridor it will color it this color."
+#~ msgstr " konec hodnika ga bo pobarval s to barvo."
+
+#~ msgid "Less Delay"
+#~ msgstr "Majhen premor"
+
+#~ msgid "Live Color"
+#~ msgstr "®iva barva"
+
+#~ msgid "Maze"
+#~ msgstr "Labirint"
+
+#~ msgid "More Delay"
+#~ msgstr "Velik premor"
+
+#~ msgid "Post-Solving Delay"
+#~ msgstr "Premor po re¹evanju"
+
+#~ msgid "Pre-Solving Delay"
+#~ msgstr "Premor pred re¹evanjem"
+
+#~ msgid "Repeatedly create and solve a maze"
+#~ msgstr "Vedno znova ustvari in re¹i labirint"
+
+#~ msgid "Speed Delay"
+#~ msgstr "Premor hitrosti"
+
+#~ msgid "Surround Color"
+#~ msgstr "Barva okolja"
+
+#~ msgid "The color of a failed path (stippled with a 50% pattern)"
+#~ msgstr "Barva neuspe¹ne poti (50% sivina)"
+
+#~ msgid "The color of the path."
+#~ msgstr "Barva poti."
+
+#~ msgid ""
+#~ "The delay (in microseconds) after solving a maze and before generating a "
+#~ "new one."
+#~ msgstr ""
+#~ "Premor (v mikrosekundah) po uspe¹ni re¹itvi labirinta, preden se loti "
+#~ "naslednjega."
+
+#~ msgid "The delay (in microseconds) between each step of the solution path."
+#~ msgstr "Premor (v mikrosekundah) med vsakim korakom poti."
+
+#~ msgid ""
+#~ "The delay (in microseconds) between generating a maze and starting to "
+#~ "solve it."
+#~ msgstr ""
+#~ "Premor (v mikrosekundah) med generiranjem labirinta in zaèetkom re¹evanja."
+
+#~ msgid ""
+#~ "The maze program creates a random maze and then solves it with graphical "
+#~ "feedback."
+#~ msgstr ""
+#~ "Program Labirint ustvari nakljuèni labirint in ga nato re¹i z grafièno "
+#~ "ponazoritvijo."
+
+#~ msgid "M.C. Escher inspired ants.. in 3d"
+#~ msgstr "Mravlje inspirirane po M.C. Escherju.. v 3d"
+
+#~ msgid "Draw circular interference patterns"
+#~ msgstr "Ri¹i kro¾ne interferenène vzorce"
+
+#~ msgid "Jamie  Zawinski <jwz@jwz.org>"
+#~ msgstr "Jamie  Zawinski <jwz@jwz.org>"
+
+#~ msgid "Moire"
+#~ msgstr "Moire"
+
+#~ msgid "Moire draws circular interference patterns."
+#~ msgstr "Moire ri¹e kro¾ne interferenène vzorce."
+
+#~ msgid "Moire2"
+#~ msgstr "Moire2"
+
+#~ msgid "A 3d flower morphs into a sphear"
+#~ msgstr "3D ro¾a se morfira v sfero"
+
+#~ msgid "Morph3d"
+#~ msgstr "Morph3d"
+
+#~ msgid "Mountain"
+#~ msgstr "Gore"
+
+#~ msgid "Change to draw square at weird starting points."
+#~ msgstr "Spremeni risanje kvadrata na èuden naèin."
+
+#~ msgid "Change to use XOR drawing function."
+#~ msgstr "Uporabi XOR (ekskluzivni logièni ali) funkcijo za risanje."
+
+#~ msgid "Munch"
+#~ msgstr "Munch"
+
+#~ msgid "Munch munches squares until killed."
+#~ msgstr "Munch ¾veèi kvadrate dokler ni ubit."
+
+#~ msgid "Munching squares."
+#~ msgstr "®veèenje kvadratov."
+
+#~ msgid "Shift"
+#~ msgstr "Premik"
+
+#~ msgid "Tim  Showalter  <tjs@andrew.cmu.edu>"
+#~ msgstr "Tim  Showalter  <tjs@andrew.cmu.edu>"
+
+#~ msgid "XOR"
+#~ msgstr "XOR"
+
+#~ msgid "Noseguy"
+#~ msgstr "Nosonja"
+
+#~ msgid "Change maximum number of lines."
+#~ msgstr "Spremeni najveèje ¹tevilo èrt."
+
+#~ msgid "Change the time each picture is shown."
+#~ msgstr "Spremeni èas prikaza vsake slike."
+
+#~ msgid "Change time to fade away."
+#~ msgstr "Spremeni èas za izbris."
+
+#~ msgid "Dale Moore <Dale.Moore@cs.cmu.edu>"
+#~ msgstr "Dale Moore <Dale.Moore@cs.cmu.edu>"
+
+#~ msgid "Fadedelay"
+#~ msgstr "Premor pred zatemnitvijo"
+
+#~ msgid "Maxlines"
+#~ msgstr "Najveèje ¹tevilo èrt"
+
+#~ msgid "Pedal"
+#~ msgstr "Pdeal"
+
+#~ msgid "Pedal Displays pretty geometric pictures."
+#~ msgstr "Pedal prika¾e lepe geometrijske slike."
+
+#~ msgid "Pretty geometric picture program."
+#~ msgstr "Program za risanje lepih geometrijskih slik."
+
+#~ msgid "Display an arcade game"
+#~ msgstr "Ka¾e arkadno igro"
+
+#~ msgid "Penetrate"
+#~ msgstr "Preboj"
+
+#~ msgid "Penrose"
+#~ msgstr "Tlakovanje"
+
+#~ msgid ""
+#~ "Draws a simulation of an old terminal, with large pixels and long-sustain "
+#~ "phosphor."
+#~ msgstr ""
+#~ "Ri¹e simulacijo starega terminala z velikimi piksli in dolgo osvetljenim "
+#~ "fosforjem."
+
+#~ msgid "Phosphor"
+#~ msgstr "Fosfor"
+
+#~ msgid "3d pipes flow around the screen"
+#~ msgstr "3d cevi teèejo po zaslonu"
+
+#~ msgid "Pipes"
+#~ msgstr "Cevi"
+
+#~ msgid "Changes frequency of missile launch."
+#~ msgstr "Spremeni pogostost izstreljevanja raket."
+
+#~ msgid "Frequency"
+#~ msgstr "Frekvenca"
+
+#~ msgid "How many particles should appear when a missile explodes."
+#~ msgstr "Koliko delcev naj se pojavi ko raketo raznese."
+
+#~ msgid "How many particles should be allowed on the screen at once."
+#~ msgstr "Koliko delcev je lahko hkrati na zaslonu."
+
+#~ msgid "Jamie Zawinski"
+#~ msgstr "Jamie Zawinski"
+
+#~ msgid "Pyro"
+#~ msgstr "Pyro"
+
+#~ msgid "Scatter"
+#~ msgstr "Raztresenost"
+
+#~ msgid "The pyro program simulates fireworks."
+#~ msgstr "Program Pyro opona¹a ognjemet."
+
+#~ msgid "simulates fireworks"
+#~ msgstr "opona¹a ognjemet"
+
+#~ msgid "Bounce colored lines around a window."
+#~ msgstr "Odbija barvne èrte po oknu."
+
+#~ msgid "Changes the speed at which the Qix moves."
+#~ msgstr "Spremeni hitrost gibanja èrt."
+
+#~ msgid ""
+#~ "Determines whether the lines move erraticly, or bounce off the walls "
+#~ "linearly."
+#~ msgstr ""
+#~ "Doloèi ali se èrte premikajo nakljuèno ali se pravilno odbijajo od zidov."
+
+#~ msgid "Determines whether to fill in the gaps between the lines."
+#~ msgstr "Doloèi ali naj bo prostor med èrtami zapolnjen."
+
+#~ msgid "Draw solid Qix."
+#~ msgstr "Pusti polno sled."
+
+#~ msgid "Number of Qix:"
+#~ msgstr "©tevilo èrt:"
+
+#~ msgid "Qix"
+#~ msgstr "Qix"
+
+#~ msgid ""
+#~ "Qix bounces a series of line segments around its window. This is truly "
+#~ "the swiss army chainsaw of qix programs."
+#~ msgstr ""
+#~ "Qix odbija serije èrt po oknu. To je ¹vicarski no¾ vseh qix programov."
+
+#~ msgid "Set random motion for the Qix."
+#~ msgstr "Nakljuèno premikanje."
+
+#~ msgid "Sets the distance between each line segment."
+#~ msgstr "Nastavi premik na vsakem koraku."
+
+#~ msgid "Sets the number of Qix you have running at once."
+#~ msgstr "Nastavi ¹tevilo èrt, ki naj teèejo hkrati."
+
+#~ msgid "Sets the number of line segments to be drawn."
+#~ msgstr "Nastavi ¹tevilo èrt, ki naj bodo v sledi."
+
+#~ msgid "Speed:"
+#~ msgstr "Hitrost:"
+
+#~ msgid "Spread"
+#~ msgstr "Razpr¹itev"
+
+#~ msgid "Width of segment:"
+#~ msgstr "Premik èrt:"
+
+#~ msgid "Rd-bomb"
+#~ msgstr "Rd-bomba"
+
+#~ msgid "Display oily drops."
+#~ msgstr "Ka¾i kapljice olja"
+
+#~ msgid "Draws rippling interference patterns like splashing water."
+#~ msgstr "Ka¾e vzorce inferference kot valovanje vode."
+
+#~ msgid "Drip onto desktop."
+#~ msgstr "Pluskaj na namizje."
+
+#~ msgid "Oily"
+#~ msgstr "Oljno"
+
+#~ msgid "Ripples"
+#~ msgstr "Valovèki"
+
+#~ msgid "Stir"
+#~ msgstr "Preme¹aj"
+
+#~ msgid "Stir it up."
+#~ msgstr "Preme¹aj."
+
+#~ msgid "Stir."
+#~ msgstr "Preme¹aj."
+
+#~ msgid "Tom Hammersley"
+#~ msgstr "Tom Hammersley"
+
+#~ msgid "Rocks"
+#~ msgstr "Kamni"
+
+#~ msgid "Rorschach"
+#~ msgstr "Rorscach"
+
+#~ msgid "Rotor"
+#~ msgstr "Rotor"
+
+#~ msgid "A 3d Rubiks cube floats and twists around"
+#~ msgstr "3d Rubikova kocka leti okoli in se obraèa"
+
+#~ msgid "Rubiks Cube"
+#~ msgstr "Rubikova kocka"
+
+#~ msgid ""
+#~ "Draws smoothly-shaded oscillating oval patterns which resemble vapor "
+#~ "trails."
+#~ msgstr ""
+#~ "Ri¹e mehko senèene kro¾ne ovalne vzorce, ki spominjajo na sledi hlapov"
+
+#~ msgid "Shadebobs"
+#~ msgstr "Senèeni bobi"
+
+#~ msgid "Desmond  Daignault"
+#~ msgstr "Desmond  Daignault"
+
+#~ msgid "Sierpinski"
+#~ msgstr "Sierpinski"
+
+#~ msgid "The sierpinski program draws Sierpinski triangle fractals."
+#~ msgstr "Program Sierpinski ri¹e fraktalne trikotnike Sierpinskega."
+
+#~ msgid "Slidescreen"
+#~ msgstr "Drsilnik"
+
+#~ msgid "Slip"
+#~ msgstr "Slip"
+
+#~ msgid "Display a Sonar scope."
+#~ msgstr "Ka¾e sonarski monitor."
+
+#~ msgid "Sonar"
+#~ msgstr "Sonar"
+
+#~ msgid "Sphere"
+#~ msgstr "Sfera"
+
+#~ msgid "Darrick Brown, Peter Schmitzberger, and Jamie Zawinski"
+#~ msgstr "Darrick Brown, Peter Schmitzberger in Jamie Zawinski"
+
+#~ msgid "Spiral"
+#~ msgstr "Spirala"
+
+#~ msgid "The spiral program draws moving circular spiral patterns."
+#~ msgstr "Program spirala ri¹e gibajoèe se kro¾ne vzorce."
+
+#~ msgid "Display the desktop in a spotlight"
+#~ msgstr "Ka¾i namizje v odrski luèi"
+
+#~ msgid "Spotlight"
+#~ msgstr "Odrska luè"
+
+#~ msgid "Uhm.. *poing*"
+#~ msgstr "Hmm.. *poink*"
+
+#~ msgid "Display squared spirales"
+#~ msgstr "Ka¾i spirale"
+
+#~ msgid "Squiral"
+#~ msgstr "Squiral"
+
+#~ msgid "Stairs"
+#~ msgstr "Stopnice"
+
+#~ msgid "The famous, M.C. Escher, impossible stairs"
+#~ msgstr "Znamenite nemogoèe stopnice, M.C. Escherja"
+
+#~ msgid " Random)"
+#~ msgstr " Nakljuèno)"
+
+#~ msgid "Blob"
+#~ msgstr "Mehur"
+
+#~ msgid "Change the number of colors to use in star."
+#~ msgstr "Spremeni ¹tevilo uporabljenih barv v zvezdi."
+
+#~ msgid "How long to run before choosing a new shape."
+#~ msgstr "Koliko èasa naj teèe preden se zamenja oblika."
+
+#~ msgid "Make a star like formation using arcs."
+#~ msgstr "S pomoèjo lokov ustvari zvezdasto obliko."
+
+#~ msgid "Rotation"
+#~ msgstr "Sukanje"
+
+#~ msgid "Slim"
+#~ msgstr "Ozko"
+
+#~ msgid "Starfish"
+#~ msgstr "Morska zvezda"
+
+#~ msgid ""
+#~ "Starfish bounces a series of arcs around its window in a star like "
+#~ "formation. It uses multiple colors and multiple patterns. "
+#~ msgstr ""
+#~ "Morska zvezda odbija serjo lokov po oknu v obliki podobni zvezdi. "
+#~ "Uporablja veè barv in vzorcev."
+
+#~ msgid "Thickness"
+#~ msgstr "Debelina"
+
+#~ msgid "Wide"
+#~ msgstr "©iroko"
+
+#~ msgid "Strange"
+#~ msgstr "Èudno"
+
+#~ msgid "Superquadrics"
+#~ msgstr "Superkvadri"
+
+#~ msgid "Swirl"
+#~ msgstr "Interferenca"
+
+#~ msgid ""
+#~ "Generates random mountain ranges using iterative subdivision of "
+#~ "triangles. "
+#~ msgstr ""
+#~ "Generira nakljuène gorske panorame z uporabo iterativnega deljenja "
+#~ "trikotnikov."
+
+#~ msgid "Random mountain ranges"
+#~ msgstr "Nakljuène gorske panorame"
+
+#~ msgid "Tobias Gloth"
+#~ msgstr "Tobias Gloth"
+
+#~ msgid "Triangle"
+#~ msgstr "Trikotnik"
+
+#~ msgid ""
+#~ "The vines program is yet another geometric pattern generator, this one's "
+#~ "claim to fame being a pseudo-fractal looking vine like pattern that "
+#~ "creates nifty whirls and loops."
+#~ msgstr ""
+#~ "Program Trta je ¹e en generator geometrijskih vzorcev. Ta trdi, da ima "
+#~ "psevdo fraktalen izgled kot trta in ustvarja lepe zavojèke in zanke."
+
+#~ msgid "Tracy Camp"
+#~ msgstr "Tracy Camp"
+
+#~ msgid "draws pseudo-fractal geometric patterns"
+#~ msgstr "ri¹e psevdo fraktalne geometrijske vzorce"
+
+#~ msgid "Worm"
+#~ msgstr "Èrv"
+
+#~ msgid "Display flames at the bottom of the screen"
+#~ msgstr "Ka¾e plamena na dnu zaslona"
+
+#~ msgid "Xflame"
+#~ msgstr "Xplamen"
+
+#~ msgid "Xjack"
+#~ msgstr "Xjaka"
+
+#~ msgid "Xlyap"
+#~ msgstr "Xlyap"
+
+#~ msgid "Screens from the movie The Matrix"
+#~ msgstr "Zasloni iz filma Matrica"
+
+#~ msgid "Xmatrix"
+#~ msgstr "Xmatrica"
+
+#~ msgid ""
+#~ "The  xroger  program displays a replacement for the X logo with a more "
+#~ "accurate Look and Feel."
+#~ msgstr ""
+#~ "Program Xroger prika¾e zamenjavo za logotip X z bolj natanènim izgledom "
+#~ "in obna¹anjem."
+
+#~ msgid "The  xroger  program displays a replacement for the X logo."
+#~ msgstr "Program Xroger prika¾e zamenjavo za logotip X."
+
+#~ msgid "Xroger"
+#~ msgstr "Xroger"
+
+#~ msgid "Bars"
+#~ msgstr "Pasovi"
+
+#~ msgid "Cycle modes."
+#~ msgstr "Naèini kro¾enja"
+
+#~ msgid "Cycle through all the available modes."
+#~ msgstr "Kro¾i skozi vse mo¾ne naèine."
+
+#~ msgid "Display color bars."
+#~ msgstr "Ka¾i pasove barv."
+
+#~ msgid "Display static."
+#~ msgstr "Ka¾i ¹um."
+
+#~ msgid "Greg Knauss"
+#~ msgstr "Greg Knauss"
+
+#~ msgid "Roll"
+#~ msgstr "Vrti"
+
+#~ msgid ""
+#~ "Simulates various television problems such as static, loss of vertical "
+#~ "hold, and test patterns."
+#~ msgstr ""
+#~ "Simulira razliène probleme televizije kot so ¹um, izguba vertikalne "
+#~ "sinhronizacije in testne slike."
+
+#~ msgid "Static"
+#~ msgstr "©um"
+
+#~ msgid "Static."
+#~ msgstr "©um."
+
+#~ msgid "Vertical roll."
+#~ msgstr "Navpièno vrtenje"
+
+#~ msgid "Xteevee"
+#~ msgstr "XTV"
+
+#~ msgid "About:"
+#~ msgstr "O:"
+
+#~ msgid "Author:"
+#~ msgstr "Avtor:"
+
+#~ msgid "Author: UNKNOWN"
+#~ msgstr "Avtor: NEZNAN"
+
+#~ msgid "RANDOM SCREENSAVER"
+#~ msgstr "NAKLJUÈNI OHRANJEVALNIK ZASLONA"
+
+#~ msgid "Screen Saver"
+#~ msgstr "Ohranjevalnik zaslona"
+
+#~ msgid "Pressing this button will preview current screensaver."
+#~ msgstr ""
+#~ "Pritisk tega gumba bo povzroèil predogled trenutnega ohranjevalnika "
+#~ "zaslona."
+
+#~ msgid ""
+#~ "Pressing this button will popup a dialogbox that will help you setup the "
+#~ "current screensaver."
+#~ msgstr ""
+#~ "Pritisk tega gumba bo priklical dialog, ki bo pomagal pri nastavitvi "
+#~ "ohranjevalnika zaslona."
+
+#~ msgid "Screen Saver Settings"
+#~ msgstr "Nastavitve ohranjevalnika zaslona"
+
+#~ msgid "Start After "
+#~ msgstr "Po¾eni po "
+
+#~ msgid "Priority:"
+#~ msgstr "Prioriteta:"
+
+#~ msgid "Low "
+#~ msgstr "Nizka "
+
+#~ msgid " Normal"
+#~ msgstr " Obièajna"
+
+#~ msgid " minutes after screen saver has started."
+#~ msgstr " minut po tem, ko se je pognal ohranjevalnik zaslona."
+
+#~ msgid "Screen Saver Demo"
+#~ msgstr "Demonstracija ohranjevalnika zaslona"
+
+#~ msgid ""
+#~ "an initialization error occurred while starting 'sound-properties-"
+#~ "capplet'."
+#~ msgstr "napaka pri inicializaciji ob zagonu 'sound-properties-capplet'."
+
+#~ msgid "Event"
+#~ msgstr "Dogodek"
+
+#~ msgid "File to Play"
+#~ msgstr "Zaigraj datoteko"
+
+#~ msgid "Sound server"
+#~ msgstr "Stre¾nik za zvok"
+
+#~ msgid "Audio mixer"
+#~ msgstr "Avdio me¹alka"
+
+#~ msgid "Restore mixer levels of Gnome Mixer"
+#~ msgstr "Ponastavi vrednosti me¹alke iz Me¹alke Gnome"
+
+#~ msgid "General"
+#~ msgstr "Splo¹no"
+
+#~ msgid "Select sound file"
+#~ msgstr "Izberi zvoèno datoteko"
+
+#~ msgid "Play"
+#~ msgstr "Zaigraj"
+
+#~ msgid "Sound Events"
+#~ msgstr "Zvoèni Dogodki"
+
+#~ msgid ""
+#~ "This copy of the GNOME control center was not compiled with sound support"
+#~ msgstr ""
+#~ "Ta kopija GNOME kontrolnega centra ni bila prevedena s podporo za zvok"
+
+#~ msgid "The sound file for this event does not exist."
+#~ msgstr "Zvoèna datoteka za ta dogodek ne obstaja."
+
+#~ msgid ""
+#~ "The sound file for this event does not exist.\n"
+#~ "You may want to install the gnome-audio package\n"
+#~ "for a set of default sounds."
+#~ msgstr ""
+#~ "Zvoèna datoteka za ta dogodek ne obstaja.\n"
+#~ "Morda bi ¾eleli namestiti gnome-audio paket\n"
+#~ "za zbirko privzetih zvokov."
 
 #~ msgid "One"
 #~ msgstr "Ena"
+
+#~ msgid "Two"
+#~ msgstr "Dve"
 
 #~ msgid "Eenie"
 #~ msgstr "Am"
@@ -2535,6 +3355,9 @@ msgstr ""
 
 #~ msgid "Mynie"
 #~ msgstr "Pet"
+
+#~ msgid "Moe"
+#~ msgstr "Podgan"
 
 #~ msgid "Catcha"
 #~ msgstr "Vija"
@@ -2555,7 +3378,7 @@ msgstr ""
 #~ msgstr "Vzorec gumba"
 
 #~ msgid "Sample Check Button"
-#~ msgstr "Vzorec izbirnega bumba"
+#~ msgstr "Vzorec izbirnega gumba"
 
 #~ msgid "Sample Text Entry Field"
 #~ msgstr "Vzorec vnosa besedila"
@@ -2583,9 +3406,6 @@ msgstr ""
 #~ "Napaka pri name¹èanju teme:\n"
 #~ "'%s'\n"
 #~ "%s"
-
-#~ msgid "Select a theme to install"
-#~ msgstr "Izberite temo za namestitev"
 
 #~ msgid "Available Themes"
 #~ msgstr "Teme na voljo"
@@ -2625,11 +3445,158 @@ msgstr ""
 #~ msgid "Unknown file format"
 #~ msgstr "Neznan datoteèni format"
 
+#~ msgid "Select which desktop theme to use"
+#~ msgstr "Izberi katera tema namizja naj se uporabi"
+
+#~ msgid "Theme Selector"
+#~ msgstr "Izbirnik tem"
+
+#~ msgid "Applications"
+#~ msgstr "Programi"
+
+#~ msgid "Sets the default feel of GNOME applications"
+#~ msgstr "Nastavi privzet izgled in obna¹anje programov GNOME"
+
+#~ msgid "Dialogs"
+#~ msgstr "Dialogi"
+
+#~ msgid "MDI"
+#~ msgstr "MDI (veèdokumetni vmesnik)"
+
+#~ msgid "Can detach and move toolbars"
+#~ msgstr "Lahko odklopim in premikam orodne vrstice"
+
+#~ msgid "Toolbars have relieved border"
+#~ msgstr "Orodne vrstice imajo viden rob"
+
+#~ msgid "Toolbar buttons have relieved border"
+#~ msgstr "Gumbi orodne vrstice imajo viden rob"
+
+#~ msgid "Toolbars have line separators"
+#~ msgstr "Orodne vrstice imajo èrte loènice"
+
+#~ msgid "Toolbars have text labels"
+#~ msgstr "Orodne vrstice imajo besedila"
+
+#~ msgid "Can detach and move menus"
+#~ msgstr "Lahko odklopim in premikam menuje"
+
+#~ msgid "Menus have relieved border"
+#~ msgstr "Menuji imajo viden rob"
+
+#~ msgid "Submenus can be torn off"
+#~ msgstr "Podmenuji se lahko odtrgajo"
+
+#~ msgid "Menu items have icons"
+#~ msgstr "Menuji imajo ikone"
+
+#~ msgid "Statusbar is interactive when possible"
+#~ msgstr "Kadar je mo¾no naj bo vrstica stanja interaktivna"
+
+#~ msgid "Statusbar progress meter is on the right"
+#~ msgstr "Merilnik napredka v vrstici stanja je na desni"
+
+#~ msgid "Menu Options"
+#~ msgstr "Mo¾nosti menuja"
+
+#~ msgid "Statusbar Options"
+#~ msgstr "Mo¾nosti vrstice stanja"
+
+#~ msgid "Toolbar Options"
+#~ msgstr "Mo¾nosti orodne vrstice"
+
+#~ msgid "Dialog buttons"
+#~ msgstr "Gumbi dialogov"
+
+#~ msgid "Spread buttons out"
+#~ msgstr "razpr¹i gumbe"
+
+#~ msgid "Put buttons on edges"
+#~ msgstr "postavi gumbe na robove"
+
+#~ msgid "Left-justify buttons"
+#~ msgstr "poravnaj gumbe levo"
+
+#~ msgid "Right-justify buttons"
+#~ msgstr "poravnaj gumbe desno"
+
+#~ msgid "Dialog buttons have icons"
+#~ msgstr "Gumbi dialogov imajo ikone"
+
+#~ msgid "Use statusbar instead of dialog when possible"
+#~ msgstr "Kjer je mogoèe uporabi vrstico stanja namesto dialoga"
+
+#~ msgid "Dialog position"
+#~ msgstr "Mesto dialogov"
+
+#~ msgid "Let window manager decide"
+#~ msgstr "naj doloèi upravljalnik oken"
+
+#~ msgid "At the mouse pointer"
+#~ msgstr "kjer je mi¹kin kazalec"
+
+#~ msgid "Dialog hints"
+#~ msgstr "Namigi dialogov"
+
+#~ msgid "Dialogs are like other windows"
+#~ msgstr "dialogi so kot druga okna"
+
+#~ msgid "Dialogs are treated specially by window manager"
+#~ msgstr "dialogi so s strani upravljalnika oken obravnavani posebej"
+
+#~ msgid "Place dialogs over application window when possible"
+#~ msgstr "Kadar je mo¾no, postavi dialoge preko oken aplikacij"
+
+#~ msgid "Dialog Layout"
+#~ msgstr "Postavitev dialogov"
+
+#~ msgid "Dialog Behavior"
+#~ msgstr "Obna¹anje dialoga"
+
+#~ msgid "Default MDI Mode"
+#~ msgstr "Privzet veèdokumentni naèin"
+
+#~ msgid "Notebook"
+#~ msgstr "uhlji notesnika"
+
+#~ msgid "Toplevel"
+#~ msgstr "na vrhu"
+
+#~ msgid "Modal"
+#~ msgstr "modalni"
+
+#~ msgid "MDI notebook tab position"
+#~ msgstr "Mesto uhljev veèdokumentnega notesnika"
+
+#~ msgid "Left"
+#~ msgstr "levo"
+
+#~ msgid "Right"
+#~ msgstr "desno"
+
+#~ msgid "Top"
+#~ msgstr "na vrhu"
+
+#~ msgid "Bottom"
+#~ msgstr "na dnou"
+
+#~ msgid "GNOME MDI Options"
+#~ msgstr "Mo¾nosti veèdokumentnega vmesnika GNOME"
+
+#~ msgid "Look and Feel"
+#~ msgstr "Izgled in obna¹anje"
+
+#~ msgid "Look and Feel Properties"
+#~ msgstr "Lastnosti izgleda in obna¹anja"
+
 #~ msgid "Error initializing the `url-properties' capplet."
 #~ msgstr "Napaka pri inicializaciji 'url-properties' capplet-a."
 
 #~ msgid "Protocol"
 #~ msgstr "Protokol"
+
+#~ msgid "Command"
+#~ msgstr "Ukaz"
 
 #~ msgid "handler:"
 #~ msgstr "upravljalnik:"
@@ -2640,14 +3607,32 @@ msgstr ""
 #~ msgid "Netscape (new window)"
 #~ msgstr "Netscape (novo okno)"
 
-#~ msgid "Help browser"
-#~ msgstr "Brskalnik po pomoèi"
-
 #~ msgid "Help browser (new window)"
 #~ msgstr "Brskalnik po pomoèi (novo okno)"
 
 #~ msgid "Set"
 #~ msgstr "Nastavi"
+
+#~ msgid "Configure which programs are used to display URLs"
+#~ msgstr "Nastavi kateri programi naj se uporabijo za prikazovanje URLjev"
+
+#~ msgid "URL Handlers"
+#~ msgstr "Upravljalniki URLjev"
+
+#~ msgid "Enlightenment"
+#~ msgstr "Enlightment"
+
+#~ msgid "Ice WM"
+#~ msgstr "Ice WM"
+
+#~ msgid "Scwm"
+#~ msgstr "Scwm"
+
+#~ msgid "Window Maker"
+#~ msgstr "Window maker"
+
+#~ msgid "twm"
+#~ msgstr "twm"
 
 #~ msgid ""
 #~ "Starting %s\n"
@@ -2663,7 +3648,7 @@ msgstr ""
 #~ msgstr "Po¾eni nastavitveno orodje za %s"
 
 #~ msgid " (Not found)"
-#~ msgstr " (ni najden)"
+#~ msgstr " (Ni najden)"
 
 #~ msgid ""
 #~ "wm-properties-capplet: Unable to initialize window manager.\n"
@@ -2742,15 +3727,6 @@ msgstr ""
 #~ msgid "Add New Window Manager"
 #~ msgstr "Dodaj nov upravljalnik oken"
 
-#~ msgid "Cancel"
-#~ msgstr "Preklièi"
-
-#~ msgid "Command:"
-#~ msgstr "Ukaz:"
-
-#~ msgid "Configuration Command:"
-#~ msgstr "Ukaz za nastavitve:"
-
 #~ msgid "Window manager is session managed"
 #~ msgstr "Upravljalnik oken je upravljan s sejo"
 
@@ -2766,6 +3742,12 @@ msgstr ""
 #~ msgid "You cannot delete the current Window Manager"
 #~ msgstr "Ne morete zbrisati trenutnega Upravljalnika oken"
 
+#~ msgid "Edit..."
+#~ msgstr "Uredi..."
+
+#~ msgid "Delete"
+#~ msgstr "Zbri¹i"
+
 #~ msgid ""
 #~ "an initialization error occurred while starting 'wm-properties-capplet'.\n"
 #~ "aborting...\n"
@@ -2773,152 +3755,20 @@ msgstr ""
 #~ "napaka pri inicializaciji ob zagonu 'wm-properties-capplet'.\n"
 #~ "prekinjam...\n"
 
-#~ msgid "Color 1"
-#~ msgstr "Barva 1"
+#~ msgid "Choose a window manager"
+#~ msgstr "Izberi upravljalnika oken"
 
-#~ msgid "Color 2"
-#~ msgstr "Barva 2"
+#~ msgid "Window Manager"
+#~ msgstr "Upravljalnik oken"
 
-#~ msgid ""
-#~ "Solid Color\n"
-#~ "Vertical Gradient\n"
-#~ "Horizontal Gradient\n"
-#~ msgstr ""
-#~ "polno\n"
-#~ "navpièni preliv\n"
-#~ "vodoravni preliv\n"
+#~ msgid "Try"
+#~ msgstr "Poskusi"
 
-#~ msgid ""
-#~ "Tiled\n"
-#~ "Centered\n"
-#~ "Scaled (keep aspect ratio)\n"
-#~ "Stretched (change aspect ratio)\n"
-#~ "Embossed\n"
-#~ msgstr ""
-#~ "Tlakovano\n"
-#~ "Centrirano\n"
-#~ "Poveèano (ohrani razmerja)\n"
-#~ "Raztegnjeno (spremeni razmerja)\n"
-#~ "Reliefno\n"
+#~ msgid "Revert"
+#~ msgstr "Razveljavi"
 
-#~ msgid "(None)\n"
-#~ msgstr "(Brez)\n"
-
-#~ msgid ""
-#~ "In order to run \"%s\" with root's privileges, additional information is "
-#~ "required."
-#~ msgstr ""
-#~ "Èe ¾elite pognati \"%s\" s privilegiji administratorja potrebujete "
-#~ "dodatnepodatke."
-
-#~ msgid "Message"
-#~ msgstr "Sporoèilo"
-
-#~ msgid "Prompt"
-#~ msgstr "Pozivnik"
-
-#~ msgid "Vertical"
-#~ msgstr "Navpièno"
-
-#~ msgid "Scaled"
-#~ msgstr "Raztegnjeno"
-
-#~ msgid "Disable background selection"
-#~ msgstr "Izkljuèi izbiranje ozadja"
-
-#~ msgid "Auto-repeat"
-#~ msgstr "Samodejno-ponavljaj"
-
-#~ msgid "Repeat delay"
-#~ msgstr "Premor med ponavljanji"
-
-#~ msgid "Click on keypress"
-#~ msgstr "Klik ob pritisku tipke"
-
-#~ msgid "Menu Options"
-#~ msgstr "Mo¾nosti menuja"
-
-#~ msgid "Can detach and move menus"
-#~ msgstr "Lahko odklopim in premikam menuje"
-
-#~ msgid "Statusbar Options"
-#~ msgstr "Mo¾nosti vrstice stanja"
-
-#~ msgid "Toolbar Options"
-#~ msgstr "Mo¾nosti orodne vrstice"
-
-#~ msgid "Can detach and move toolbars"
-#~ msgstr "Lahko odklopim in premikam orodne vrstice"
-
-#~ msgid "Dialog Layout"
-#~ msgstr "Postavitev dialogov"
-
-#~ msgid ""
-#~ "Default value\n"
-#~ "Spread buttons out\n"
-#~ "Put buttons on edges\n"
-#~ "Left-justify buttons\n"
-#~ "Right-justify buttons\n"
-#~ msgstr ""
-#~ "Privzeta vrednost\n"
-#~ "Razpr¹i gumbe\n"
-#~ "Postavi gumbe na robove\n"
-#~ "Poravnaj gumbe levo\n"
-#~ "Poravnaj gumbe desno\n"
-
-#~ msgid "Dialog Behavior"
-#~ msgstr "Obna¹anje dialoga"
-
-#~ msgid "Dialog position:"
-#~ msgstr "Mesto dialoga:"
-
-#~ msgid ""
-#~ "Let window manager decide\n"
-#~ "Center of the screen\n"
-#~ "At the mouse pointer\n"
-#~ msgstr ""
-#~ "Naj se odloèi uporabljalnik oken\n"
-#~ "Sredi¹èe zaslona\n"
-#~ "Pri mi¹kinem kazalcu\n"
-
-#~ msgid ""
-#~ "Dialogs are like other windows\n"
-#~ "Dialogs are treated specially by the window manager\n"
-#~ msgstr ""
-#~ "Dialogi so kot druga okna\n"
-#~ "Dialogi so obravnavani posebej s strani upravljalnika oken\n"
-
-#~ msgid "window3"
-#~ msgstr "okno3"
-
-#~ msgid "GNOME MDI Options"
-#~ msgstr "Mo¾nosti GNOME MDI"
-
-#~ msgid "Default MDI Mode:"
-#~ msgstr "Privzet veèdokumentni naèin:"
-
-#~ msgid "MDI notebook tab position:"
-#~ msgstr "Mesto uhljev MDI notesnika:"
-
-#~ msgid ""
-#~ "Notebook\n"
-#~ "Toplevel\n"
-#~ "Modal\n"
-#~ msgstr ""
-#~ "Notesnik\n"
-#~ "Na vrhu\n"
-#~ "Modalni\n"
-
-#~ msgid ""
-#~ "Left\n"
-#~ "Right\n"
-#~ "Top\n"
-#~ "Bottom\n"
-#~ msgstr ""
-#~ "Levo\n"
-#~ "Desno\n"
-#~ "Zgoraj\n"
-#~ "Spodaj\n"
+#~ msgid "Help with '%s' settings"
+#~ msgstr "Pomoè o nastavitvah '%s'"
 
 #~ msgid "id of the capplet -- assigned by the control-center"
 #~ msgstr "id cappleta -- doloèen s starani kontrolnega centra"
@@ -2944,200 +3794,8 @@ msgstr ""
 #~ msgid "IOR"
 #~ msgstr "IOR"
 
-#~ msgid "Initialize session settings"
-#~ msgstr "Inicializiraj nastavitve seje"
-
 #~ msgid "Ignore default action.  Used for custom init-session cases"
 #~ msgstr "Prezri privzeto dejanje. Uporabno za prikrojeno inicializacijo sej"
-
-#~ msgid "Get an XML description of the capplet's state"
-#~ msgstr "Dobi XML opis stanja nastavitvenega vstavka"
-
-#~ msgid "DO_GET"
-#~ msgstr "DO_GET"
-
-#~ msgid "Read an XML description of the capplet's state and apply it"
-#~ msgstr "Preberi XML opis stanja nastavitvenega vstavka in ga udejani"
-
-#~ msgid "DO_SET"
-#~ msgstr "DO_SET"
-
-#~ msgid "Help with the GNOME control-center."
-#~ msgstr "Pomoè o Kontrolnem centru GNOME."
-
-#~ msgid "About"
-#~ msgstr "O"
-
-#~ msgid "About the GNOME control-center."
-#~ msgstr "O Kontrolnem centru GNOME."
-
-#~ msgid "Up"
-#~ msgstr "Gor"
-
-#~ msgid "Parent Group"
-#~ msgstr "Skupina star¹a"
-
-#~ msgid "Preferences"
-#~ msgstr "Nastavitve"
-
-#~ msgid "Control Center Preferences"
-#~ msgstr "Nastavitve kontrolnega centera"
-
-#~ msgid "Control Center"
-#~ msgstr "Kontrolni center"
-
-#~ msgid "Set background image."
-#~ msgstr "Nastavi sliko ozadja."
-
-#~ msgid "IMAGE-FILE"
-#~ msgstr "SLIKOVNA-DATOTEKA"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting "
-#~ "'background-properties-capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "napaka pri inicializaciji ob zagonu 'background-properties-capplet'.\n"
-#~ "prekinjam...\n"
-
-#~ msgid "Set parameters from saved state and exit"
-#~ msgstr "Nastavi parametre iz shranjene stanja in konèaj"
-
-#~ msgid "IMAGE"
-#~ msgstr "SLIKA"
-
-#~ msgid "Sets the wallpaper to the value specified"
-#~ msgstr "Nastavi tapete na doloèeno vrednost"
-
-#~ msgid "COLOR"
-#~ msgstr "BARVA"
-
-#~ msgid "Specifies the background color"
-#~ msgstr "Doloèa barvo ozadja"
-
-#~ msgid "Specifies end background color for gradient"
-#~ msgstr "Doloèa konèno barvo preliva v ozadju"
-
-#~ msgid "Gradient orientation: vertical or horizontal"
-#~ msgstr "Smer preliva: navpièna ali vodoravna"
-
-#~ msgid "MODE"
-#~ msgstr "NAÈIN"
-
-#~ msgid "Display wallpaper: tiled, centered, scaled or ratio"
-#~ msgstr ""
-#~ "Poka¾i tapete: tlakovano, centrirano, raztegnjeno ali ohrani razmerje"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'bell-properties-capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "napaka pri inicializaciji ob zagonu 'bell-properties-capplet'.\n"
-#~ "prekinjam...\n"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting "
-#~ "'keyboard-properties-capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "napaka pri inicializaciji ob zagonu 'keyboard-properties-capplet'.\n"
-#~ "prekinjam...\n"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'mouse-properties-capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "napaka pri inicializaciji ob zagonu 'mouse-properties-capplet'.\n"
-#~ "prekinjam...\n"
-
-#~ msgid "Random Settings"
-#~ msgstr "Nakljuène Nastavitve"
-
-#~ msgid "%s Settings..."
-#~ msgstr "%s Nastavitve..."
-
-#~ msgid "Author:"
-#~ msgstr "Avtor:"
-
-#~ msgid "Author: UNKNOWN"
-#~ msgstr "Avtor: NEZNAN"
-
-#~ msgid "RANDOM SCREENSAVER"
-#~ msgstr "NAKLJUÈNI OHRANJEVALNIK ZASLONA"
-
-#~ msgid ""
-#~ "Pressing this button will popup a dialogbox that will help you setup the "
-#~ "current screensaver."
-#~ msgstr ""
-#~ "Pritisk tega gumba bo priklical dialog, ki bo pomagal pri nastavitvi "
-#~ "ohranjevalnika zaslona."
-
-#~ msgid "Start After "
-#~ msgstr "Po¾eni po "
-
-#~ msgid " Normal"
-#~ msgstr " Obièajna"
-
-#~ msgid "Screen Saver Demo"
-#~ msgstr "Demonstracija ohranjevalnika zaslona"
-
-#~ msgid ""
-#~ "an initialization error occurred while starting 'sound-properties-capplet'."
-#~ msgstr "napaka pri inicializaciji ob zagonu 'sound-properties-capplet'."
-
-#~ msgid "Select sound file"
-#~ msgstr "Izberi zvoèno datoteko"
-
-#~ msgid ""
-#~ "This copy of the GNOME control center was not compiled with sound support"
-#~ msgstr ""
-#~ "Ta kopija GNOME kontrolnega centra ni bila prevedena s podporo za zvok"
-
-#~ msgid "The sound file for this event does not exist."
-#~ msgstr "Zvoèna datoteka za ta dogodek ne obstaja."
-
-#~ msgid ""
-#~ "The sound file for this event does not exist.\n"
-#~ "You may want to install the gnome-audio package\n"
-#~ "for a set of default sounds."
-#~ msgstr ""
-#~ "Zvoèna datoteka za ta dogodek ne obstaja.\n"
-#~ "Morda bi ¾eleli namestiti gnome-audio paket\n"
-#~ "za zbirko privzetih zvokov."
-
-#~ msgid "Put buttons on edges"
-#~ msgstr "Daj gumbe na robove"
-
-#~ msgid "Left-justify buttons"
-#~ msgstr "Poravnaj gumbe levo"
-
-#~ msgid "Right-justify buttons"
-#~ msgstr "Poravnaj gumbe desno"
-
-#~ msgid "Toplevel"
-#~ msgstr "Na vrhu"
-
-#~ msgid "Modal"
-#~ msgstr "Modalni"
-
-#~ msgid "cannot find widget for %s\n"
-#~ msgstr "ne najdem gradnika za %s\n"
-
-#~ msgid ""
-#~ "Unknown type.\n"
-#~ "\tWidget %s is not supported\n"
-#~ msgstr ""
-#~ "Neznan tip.\n"
-#~ "\tGradnik %s ni podprt\n"
-
-#~ msgid "Try"
-#~ msgstr "Poskusi"
-
-#~ msgid "Revert"
-#~ msgstr "Razveljavi"
-
-#~ msgid "Help"
-#~ msgstr "Pomoè"
 
 #~ msgid "Sorry, no help is available for these settings."
 #~ msgstr "Oprostite, pri teh nastavitvah pomoè ni na voljo."
@@ -3145,8 +3803,17 @@ msgstr ""
 #~ msgid "capplet-command to be run."
 #~ msgstr "capplet-ukaz, ki naj se po¾ene."
 
-#~ msgid "CAPPLET"
-#~ msgstr "CAPPLET"
+#~ msgid "Help with the GNOME control-center."
+#~ msgstr "Pomoè o Kontrolnem centru GNOME."
+
+#~ msgid "Help with the current configuration page."
+#~ msgstr "Pomoè o tej strani nastavitev."
+
+#~ msgid "About"
+#~ msgstr "O"
+
+#~ msgid "About the GNOME control-center."
+#~ msgstr "O Kontrolnem centru GNOME."
 
 #~ msgid "Warning:"
 #~ msgstr "Opozorilo:"
@@ -3161,58 +3828,714 @@ msgstr ""
 #~ "Sledeèi moduli so bili dele¾ni sprememb, ki niso bile uveljavljene. Èejih "
 #~ "¾elite urediti, prosim dvakrat kliknite na ustrezen vpis."
 
-#: Gnome.directory.in:3
-msgid "Control Center"
-msgstr "Kontrolni center"
+#~ msgid "Operating System:"
+#~ msgstr "Operacijski sistem:"
 
-#: Gnome.directory.in:4
-msgid "Control Center Menu"
-msgstr "Menu kontrolnega centra"
+#~ msgid "Distribution Version:"
+#~ msgstr "Razlièica distribucije:"
 
-#: control-center/gnomecc.desktop.in:4
-msgid "The GNOME configuration tool"
-msgstr "Nastavitveno orodje GNOME"
+#~ msgid "Processor Type:"
+#~ msgstr "Tip procesorja:"
 
-#: capplets/sound/sound-properties.desktop.in:3
-msgid "Sound"
-msgstr "Zvok"
+#~ msgid "User Name:"
+#~ msgstr "Uporabni¹ko ime:"
 
-#: capplets/sound/sound-properties.desktop.in:4
-msgid "Configure GNOME's use of sound"
-msgstr "Nastavi GNOME-ovo uporabo zvoka."
+#~ msgid "Host Name:"
+#~ msgstr "Ime gostitelja:"
 
-#: capplets/screensaver/screensaver-properties.desktop.in:4
-msgid "Configure the settings of the screensaver"
-msgstr "Nastavi ohranjevalnik zaslona"
+#~ msgid "Unknown"
+#~ msgstr "Neznan"
 
-#: capplets/mouse/mouse-properties.desktop.in:3
-msgid "Mouse"
-msgstr "Mi¹ka"
+#~ msgid "Enable"
+#~ msgstr "Vkljuèi"
 
-#: capplets/mouse/mouse-properties.desktop.in:4
-msgid "Mouse Properties"
-msgstr "Lastnosti mi¹ke"
+#~ msgid "Mime Type: "
+#~ msgstr "Tip Mime: "
 
-#: capplets/keyboard/keyboard-properties.desktop.in:3
-msgid "Keyboard"
-msgstr "Tipkovnica"
+#~ msgid "First Regular Expression: "
+#~ msgstr "Prvi regularni izraz: "
 
-#: capplets/keyboard/keyboard-properties.desktop.in:4
-msgid "Keyboard Properties"
-msgstr "Lastnosti Tipkovnice"
+#~ msgid "Second Regular Expression: "
+#~ msgstr "Drugi regularni izraz: "
 
-#: capplets/background/background-properties.desktop.in:3
-msgid "Background"
-msgstr "Ozadje"
+#~ msgid "Mime Type Actions"
+#~ msgstr "Dejanja za tip Mime"
 
-#: capplets/background/background-properties.desktop.in:4
-msgid "Configuration of the desktop's background"
-msgstr "Nastavitev ozadja namizja"
+#~ msgid "Example: emacs %f"
+#~ msgstr "Primer: emacs %f"
 
-#: capplets/desktop-links/gnome-hint-properties.desktop.in:3
-msgid "Startup Hint"
-msgstr "Zaèetni namig"
+#~ msgid "Open"
+#~ msgstr "Odpri"
 
-#: capplets/desktop-links/gnome-hint-properties.desktop.in:4
-msgid "Options for the startup hint dialog"
-msgstr "Mo¾nosti za zaèetni dialog z namigi"
+#~ msgid "View"
+#~ msgstr "Pogled"
+
+#~ msgid "Set actions for %s"
+#~ msgstr "Nastavi dejanja za %s"
+
+#~ msgid ""
+#~ "You must add either a regular-expression or\n"
+#~ "a file-name extension"
+#~ msgstr ""
+#~ "Dodati morate ali regularni izraz ali\n"
+#~ "pripono datoteke"
+
+#~ msgid ""
+#~ "Please put your mime-type in the format:\n"
+#~ "CATEGORY/TYPE\n"
+#~ "\n"
+#~ "For Example:\n"
+#~ "image/png"
+#~ msgstr ""
+#~ "Prosim, podajte va¹ tip mime v formatu:\n"
+#~ "KATEGORIJA/TIP\n"
+#~ "\n"
+#~ "Na Primer:\n"
+#~ "image/png"
+
+#~ msgid "This mime-type already exists"
+#~ msgstr "Ta tip mime ¾e obstaja"
+
+#~ msgid ""
+#~ "We are unable to create the directory\n"
+#~ "~/.gnome/mime-info\n"
+#~ "\n"
+#~ "We will not be able to save the state."
+#~ msgstr ""
+#~ "Ne morem ustvariti imenika\n"
+#~ "~/.gnome/mime-info\n"
+#~ "\n"
+#~ "Stanja ne bo mogoèe shraniti."
+
+#~ msgid ""
+#~ "We are unable to access the directory\n"
+#~ "~/.gnome/mime-info\n"
+#~ "\n"
+#~ "We will not be able to save the state."
+#~ msgstr ""
+#~ "Ne morem dostopati do imenika\n"
+#~ "~/.gnome/mime-info\n"
+#~ "\n"
+#~ "Stanja ne bo mogoèe shraniti."
+
+#~ msgid ""
+#~ "Cannot create the file\n"
+#~ "~/.gnome/mime-info/user.mime\n"
+#~ "\n"
+#~ "We will not be able to save the state"
+#~ msgstr ""
+#~ "Ne morem ustvariti datoteke\n"
+#~ "~/.gnome/mime-info/user.mime\n"
+#~ "\n"
+#~ "Stanja ne bo mogoèe shraniti"
+
+#~ msgid ""
+#~ "Cannot create the file\n"
+#~ "~/.gnome/mime-info/user.keys\n"
+#~ "\n"
+#~ "We will not be able to save the state"
+#~ msgstr ""
+#~ "Ne morem ustvariti datoteke\n"
+#~ "~/.gnome/mime-info/user.keys\n"
+#~ "\n"
+#~ "Stanja ne bo mogoèe shraniti"
+
+#~ msgid ""
+#~ "No help is available/installed for these settings. Please make sure you\n"
+#~ "have the Control Center documentation installed on your system."
+#~ msgstr ""
+#~ "Pomoè za te nastavitve ni na voljo/ni name¹èena. Prosim preprièajte se,\n"
+#~ "da imate na sistemu name¹eno dokumentacijo Kontrolnega centra."
+
+#~ msgid ""
+#~ "Add a new Mime Type\n"
+#~ "For example:  image/tiff; text/x-scheme"
+#~ msgstr ""
+#~ "Dodaj nov tip Mime\n"
+#~ "Na primer:  image/tiff; text/x-scheme"
+
+#~ msgid "Mime Type:"
+#~ msgstr "Tip Mime:"
+
+#~ msgid "Regular Expressions"
+#~ msgstr "Regularni Izrazi"
+
+#~ msgid ""
+#~ "You can set up two regular expressions here to identify the Mime Type\n"
+#~ "by.  These fields are optional."
+#~ msgstr ""
+#~ "Lahko nastavite dva regularna izraza po katerih bo tip Mime prepoznan\n"
+#~ "Ta polja niso obvezna"
+
+#~ msgid "Session Chooser"
+#~ msgstr "Izbirnik seje"
+
+#~ msgid "Start Session"
+#~ msgstr "Prièni sejo"
+
+#~ msgid "Order: "
+#~ msgstr "Vrstni red: "
+
+#~ msgid "This button sets the start order of the selected programs.\n"
+#~ msgstr "Ta gumb nastavi vrstni red poganjanja programov.\n"
+
+#~ msgid ""
+#~ "This button sets the restart style of the selected programs:\n"
+#~ "Normal programs are unaffected by logouts but can die;\n"
+#~ "Respawn programs are never allowed to die;\n"
+#~ "Trash programs are discarded on logout and can die;\n"
+#~ "Settings programs are always started on every login."
+#~ msgstr ""
+#~ "Ta gumb nastavi slog ponovnega zagona izbranih programov:\n"
+#~ "Obièajni programi niso odvisni od odjave a lahko umrejo;\n"
+#~ "Programom pognanim venomer znova ni dovoljeno umreti;\n"
+#~ "Programi smeti so zavr¾eni pri odjavi in lahko umrejo;\n"
+#~ "Nastavitveni programi se vedno za¾enejo pri vsaki prijavi."
+
+#~ msgid ""
+#~ "This button produces a key to the program states below:\n"
+#~ "Inactive programs are waiting to start or have finished;\n"
+#~ "Starting programs are being given time to get running;\n"
+#~ "Running programs are normal members of the session;\n"
+#~ "Saving programs are saving their session details;\n"
+#~ "Programs which make no contact have Unknown states.\n"
+#~ msgstr ""
+#~ "Ta gumb pve kljuè sledeèih stanj programa:\n"
+#~ "Neaktivni programi èakajo na zaèetek ali so ¾e konèali;\n"
+#~ "Zaganjajoèim programom je dan èas, da zaènejo teèi;\n"
+#~ "Programi v teku so obièajni èlani seje;\n"
+#~ "Shranjujoèi programi shranjujejo podrobnosti njihovih sej;\n"
+#~ "Programi, ki ne naredijo kontakta imajo Neznana stanja.\n"
+
+#~ msgid "This column gives the command used to start a program."
+#~ msgstr "Ta stolpec ka¾e ukaz, ki naj se uporabi za zagon programa."
+
+#~ msgid "Order"
+#~ msgstr "Vrstni red"
+
+#~ msgid "Program"
+#~ msgstr "Program"
+
+#~ msgid "Inactive"
+#~ msgstr "Nedejaven"
+
+#~ msgid "Waiting to start or already finished."
+#~ msgstr "Èaka na zaèetek ali pa je ¾e konèal."
+
+#~ msgid "Started but has not yet reported state."
+#~ msgstr "Pognan, a ¹e ni sporoèil stanja."
+
+#~ msgid "Running"
+#~ msgstr "Teèe"
+
+#~ msgid "A normal member of the session."
+#~ msgstr "Obièajen èlan seje."
+
+#~ msgid "Saving"
+#~ msgstr "Shranjujem"
+
+#~ msgid "Saving session details."
+#~ msgstr "Shranjujem podrobnosti seje."
+
+#~ msgid "State not reported within timeout."
+#~ msgstr "Stanje ni bilo sporoèeno znotraj èasovne omejitve."
+
+#~ msgid "Unaffected by logouts but can die."
+#~ msgstr "Neodvisen od odjave, a lahko umre."
+
+#~ msgid "Respawn"
+#~ msgstr "Pognan venomer znova"
+
+#~ msgid "Never allowed to die."
+#~ msgstr "Ne sme umreti."
+
+#~ msgid "Trash"
+#~ msgstr "Smeti"
+
+#~ msgid "Discarded on logout and can die."
+#~ msgstr "Zavr¾e se ob odjavi in lahko umre."
+
+#~ msgid "Always started on every login."
+#~ msgstr "Vedno se za¾ene pri vsaki prijavi."
+
+#~ msgid "Remove Program"
+#~ msgstr "Odstrani Program"
+
+#~ msgid "Show splash screen on login"
+#~ msgstr "Ob prijavi ka¾i prijavni zaslon"
+
+#~ msgid "Prompt on logout"
+#~ msgstr "Potrdi odjavo"
+
+#~ msgid "Automatically save changes to session"
+#~ msgstr "Samodejno shrani spremembe seje"
+
+#~ msgid "Non-session-managed Startup Programs"
+#~ msgstr "Zaèetni programi, ki niso del seje"
+
+#~ msgid "Priority"
+#~ msgstr "Prioriteta"
+
+#~ msgid "Browse Currently Running Programs..."
+#~ msgstr "Brskaj po trenutno pognanih programih..."
+
+#~ msgid "Only display warnings."
+#~ msgstr "Ka¾i le opozorila."
+
+#~ msgid ""
+#~ "Programs with smaller values are started before programs with higher "
+#~ "values. The default value should be OK"
+#~ msgstr ""
+#~ "Programi z manj¹imi vrednostmi so pognani pred programi z veèjimi. "
+#~ "Privzeta vrednost bi morala ustrezati"
+
+#~ msgid "The startup command cannot be empty"
+#~ msgstr "Zagonski ukaz ne more biti prazen"
+
+#~ msgid "Add Startup Program"
+#~ msgstr "Dodaj zaèetni program"
+
+#~ msgid "Edit Startup Program"
+#~ msgstr "Uredi zaèetni program"
+
+#~ msgid ""
+#~ "We are unable to create the directory\n"
+#~ "~/.gnome/mime-info.\n"
+#~ "\n"
+#~ "We will not be able to save the state."
+#~ msgstr ""
+#~ "Ne morem ustvariti imenika\n"
+#~ "~/.gnome/mime-info.\n"
+#~ "\n"
+#~ "Stanja ne bo mogoèe shraniti."
+
+#~ msgid ""
+#~ "We are unable to access the directory\n"
+#~ "~/.gnome/mime-info.\n"
+#~ "\n"
+#~ "We will not be able to save the state."
+#~ msgstr ""
+#~ "Ne morem dostopati do imenika\n"
+#~ "~/.gnome/mime-info.\n"
+#~ "\n"
+#~ "Stanja ne bo mogoèe shraniti."
+
+#~ msgid "window1"
+#~ msgstr "okno1"
+
+#~ msgid "Effect"
+#~ msgstr "Uèinek"
+
+#~ msgid "Color 1"
+#~ msgstr "Barva 1"
+
+#~ msgid "Color 2"
+#~ msgstr "Barva 2"
+
+#~ msgid ""
+#~ "Solid Color\n"
+#~ "Vertical Gradient\n"
+#~ "Horizontal Gradient\n"
+#~ msgstr ""
+#~ "Polna barva\n"
+#~ "Navpièni preliv\n"
+#~ "Vodoravni preliv\n"
+
+#~ msgid ""
+#~ "Tiled\n"
+#~ "Centered\n"
+#~ "Scaled (keep aspect ratio)\n"
+#~ "Stretched (change aspect ratio)\n"
+#~ "Embossed\n"
+#~ msgstr ""
+#~ "Tlakovano\n"
+#~ "Centrirano\n"
+#~ "Poveèano (ohrani razmerja)\n"
+#~ "Raztegnjeno (spremeni razmerja)\n"
+#~ "Reliefno\n"
+
+#~ msgid "Adjust wallpaper's opacity"
+#~ msgstr "Nastavi prosojnost tapete"
+
+#~ msgid "Apply changes automatically"
+#~ msgstr "Samodejno uveljavi spremembe"
+
+#~ msgid "window2"
+#~ msgstr "okno2"
+
+#~ msgid "....a"
+#~ msgstr "....a"
+
+#~ msgid "...a"
+#~ msgstr "...a"
+
+#~ msgid "..a"
+#~ msgstr "..a"
+
+#~ msgid ".a"
+#~ msgstr ".a"
+
+#~ msgid "a....a"
+#~ msgstr "a....a"
+
+#~ msgid "a...a"
+#~ msgstr "a...a"
+
+#~ msgid "a..a"
+#~ msgstr "a..a"
+
+#~ msgid "a.a"
+#~ msgstr "a.a"
+
+#~ msgid "Type here to test setting"
+#~ msgstr "Tu tipkajte za preizkus nastavitev"
+
+#~ msgid "Choose randomly from those checked off"
+#~ msgstr "Izbiraj nakljuèno med tistimi, ki so izbrani"
+
+#~ msgid "Choose randomly among all screensavers"
+#~ msgstr "Izbiraj nakljuèno med vsemi ohranjevalniki"
+
+#~ msgid "Demo Next"
+#~ msgstr "Demonstracija naslednjega"
+
+#~ msgid "Demo Previous"
+#~ msgstr "Demonstracija prej¹njega"
+
+#~ msgid "Security"
+#~ msgstr "Varnost"
+
+#~ msgid "Be verbose"
+#~ msgstr "Bodi zgovoren"
+
+#~ msgid "Effects"
+#~ msgstr "Uèinki"
+
+#~ msgid "Install colormap"
+#~ msgstr "Nastavi barve"
+
+#~ msgid "Fade to black when activating screensaver"
+#~ msgstr "Prelij v èrno preden se po¾ene ohranjvalnik"
+
+#~ msgid "Fade desktop back when deactivating screensaver"
+#~ msgstr "Prelij v namizje ob ustavitvi ohranjevalnika"
+
+#~ msgid "Fade Duration"
+#~ msgstr "Trajanje prelitja"
+
+#~ msgid "Fade Smoothness"
+#~ msgstr "Gladkost prelitja"
+
+#~ msgid "Smooth"
+#~ msgstr "Gladko"
+
+#~ msgid "Jerky"
+#~ msgstr "Preskakujoèe"
+
+#~ msgid "Advanced Properties"
+#~ msgstr "Napredne nastavitve"
+
+#~ msgid "Many"
+#~ msgstr "Veliko"
+
+#~ msgid "window4"
+#~ msgstr "okno4"
+
+#~ msgid "Menu bars are detachable"
+#~ msgstr "Menujske vrstice se lahko odklopijo"
+
+#~ msgid "Status Bar"
+#~ msgstr "Vrstica stanja"
+
+#~ msgid "Progress bar is on the left"
+#~ msgstr "Merilnik napredka je na levi"
+
+#~ msgid "Tool Bars"
+#~ msgstr "Orodne vrstice"
+
+#~ msgid "Tool bar buttons pop up on mouse over"
+#~ msgstr "Gumbi orodne vrstice se dvignejo ob prehodu mi¹ke"
+
+#~ msgid "Tool bars are detachable"
+#~ msgstr "Orodne vrstice se lahko odklopijo"
+
+#~ msgid "Tool bar buttons are icons only"
+#~ msgstr "Gumbi orodne vrstice so le ikone"
+
+#~ msgid "Tool bar buttons are text below icons"
+#~ msgstr "Gumbi orodne vrstice so besedilo pod ikonami"
+
+#~ msgid "Dialogs open"
+#~ msgstr "Odpri dialoge"
+
+#~ msgid "Wherever the Window Manager places them"
+#~ msgstr "Kjer jih postavi upravljalnik oken"
+
+#~ msgid "Like any other window"
+#~ msgstr "Kot ostala okna"
+
+#~ msgid "Specially by the window manager"
+#~ msgstr "posebej s strani upravljalnika oken"
+
+#~ msgid "Default  (Spread out - big)"
+#~ msgstr "Privzeto (Razpr¹eni - na veliko)"
+
+#~ msgid "Spread out (big)"
+#~ msgstr "Razpr¹eni (na veliko)"
+
+#~ msgid "Left aligned"
+#~ msgstr "Poravnani levo"
+
+#~ msgid "Right aligned"
+#~ msgstr "Poravnani desno"
+
+#~ msgid "Multiple Documents"
+#~ msgstr "Veè dokumentov"
+
+#~ msgid "Seperate windows"
+#~ msgstr "Loèena okna"
+
+#~ msgid "The same window"
+#~ msgstr "Isto okno"
+
+#~ msgid "When opening Multiple documents, use"
+#~ msgstr "Ko se odpira veè dokumentov, uporabi"
+
+#~ msgid "When using Notebook tabs, place the tabs on the"
+#~ msgstr "Ko se uporabljajo uhlji notesnika, postavi uhlje"
+
+#~ msgid "Miscellaneous"
+#~ msgstr "Razno"
+
+#~ msgid "Settings will not take effect until applications restart"
+#~ msgstr "Nastavitve ne bodo uèinkovale dokler se progami ne po¾enejo znova"
+
+#~ msgid "Cancel"
+#~ msgstr "Preklièi"
+
+#~ msgid "HTML"
+#~ msgstr "HTML"
+
+#~ msgid "Icon List"
+#~ msgstr "Seznam ikon"
+
+#~ msgid "Tree"
+#~ msgstr "Drevo"
+
+#~ msgid "Got error %d.\n"
+#~ msgstr "Dobil napako %d.\n"
+
+#~ msgid "Password for %s"
+#~ msgstr "Geslo za %s"
+
+#~ msgid "Consistency checking is not turned on."
+#~ msgstr "Preverjanje konsistence je vklopljeno."
+
+#~ msgid "Block is fine."
+#~ msgstr "Blok je v redu."
+
+#~ msgid "Block freed twice."
+#~ msgstr "Blok je bil spro¹èen dvakrat."
+
+#~ msgid "userhelper must be setuid root\n"
+#~ msgstr ""
+#~ "prorgam 'userhelper' mora biti imeti pravice do izvajanja kot root(setuid "
+#~ "root)\n"
+
+#~ msgid "PAM returned = %d\n"
+#~ msgstr "PAM je vrnil = %d\n"
+
+#~ msgid "about to authenticate \"%s\"\n"
+#~ msgstr "avtentificiral bom \"%s\"\n"
+
+#~ msgid "about to exec \"%s\"\n"
+#~ msgstr "izvedel bom \"%s\"\n"
+
+#~ msgid "Pipe error.\n"
+#~ msgstr "Napaka cevi.\n"
+
+#~ msgid "Cannot fork().\n"
+#~ msgstr "Ne morem razvejiti s fork().\n"
+
+#~ msgid "dup2() error.\n"
+#~ msgstr "Napaka dup2().\n"
+
+#~ msgid "execl() error, errno=%d\n"
+#~ msgstr "napaka execl(), ¹t. napake=%d\n"
+
+#~ msgid "Information updated."
+#~ msgstr "Podatek osve¾en."
+
+#~ msgid ""
+#~ "The password you typed is invalid.\n"
+#~ "Please try again."
+#~ msgstr ""
+#~ "Geslo, ki ste ga vpisali je napaèno.\n"
+#~ "Prosim poskusite znova."
+
+#~ msgid ""
+#~ "One or more of the changed fields is invalid.\n"
+#~ "This is probably due to either colons or commas in one of the fields.\n"
+#~ "Please remove those and try again."
+#~ msgstr ""
+#~ "Eno ali veè spremenjenih polj ni veljavnih.\n"
+#~ "To je verjetno zaradi stolpcev ali vrstic v enem od polj.\n"
+#~ "Prosim odstranite jih in poskusite znova."
+
+#~ msgid "Password resetting error."
+#~ msgstr "Napaka ob ponastavljanju gesla."
+
+#~ msgid ""
+#~ "Some systems files are locked.\n"
+#~ "Please try again in a few moments."
+#~ msgstr ""
+#~ "Nekatere datoteke sistema so zaklenjene.\n"
+#~ "Prosim poskusite znova èez nekaj èasa."
+
+#~ msgid "Unknown user."
+#~ msgstr "Neznan uporabnik."
+
+#~ msgid "Insufficient rights."
+#~ msgstr "Ni ustreznih pravic."
+
+#~ msgid "Invalid call to sub process."
+#~ msgstr "Neveljaven klic v podproces."
+
+#~ msgid ""
+#~ "Your current shell is not listed in /etc/shells.\n"
+#~ "You are not allowed to change your shell.\n"
+#~ "Consult your system administrator."
+#~ msgstr ""
+#~ "Va¹a trenutna lupina ni v seznamu v /etc/shells.\n"
+#~ "Nimate dovoljenja, da bi spremenili svojo lupino.\n"
+#~ "Posvetujte se z administratorjem sistema."
+
+#~ msgid "Out of memory."
+#~ msgstr "Zmanjkalo je pomnilnika."
+
+#~ msgid "The exec() call failed."
+#~ msgstr "Klic exec() ni uspel."
+
+#~ msgid "Failed to find selected program."
+#~ msgstr "Nisem uspel najti izbranega programa."
+
+#~ msgid "Unknown error."
+#~ msgstr "Neznana napaka."
+
+#~ msgid "Unknown exit code."
+#~ msgstr "Neznana izhodna koda."
+
+#~ msgid "Input"
+#~ msgstr "Vhod"
+
+#~ msgid "Need %d responses.\n"
+#~ msgstr "Potrebuje se %d odgovorov.\n"
+
+#~ msgid ""
+#~ "In order to run \"%s\" with root's privileges, additional information is "
+#~ "required."
+#~ msgstr ""
+#~ "Èe ¾elite pognati \"%s\" s privilegiji administratorja potrebujete "
+#~ "dodatnepodatke."
+
+#~ msgid "Error"
+#~ msgstr "Napaka"
+
+#~ msgid "You want %d response(s) from %d entry fields!?!?!\n"
+#~ msgstr "®elite %d odgovorov iz %d vhodnih polj!?!?!\n"
+
+#~ msgid "Message"
+#~ msgstr "Sporoèilo"
+
+#~ msgid "Disable background selection"
+#~ msgstr "Izkljuèi izbiranje ozadja"
+
+#~ msgid "Auto-repeat"
+#~ msgstr "Samodejno-ponavljaj"
+
+#~ msgid ""
+#~ "Default value\n"
+#~ "Spread buttons out\n"
+#~ "Put buttons on edges\n"
+#~ "Left-justify buttons\n"
+#~ "Right-justify buttons\n"
+#~ msgstr ""
+#~ "Privzeta vrednost\n"
+#~ "Razpr¹i gumbe\n"
+#~ "Postavi gumbe na robove\n"
+#~ "Poravnaj gumbe levo\n"
+#~ "Poravnaj gumbe desno\n"
+
+#~ msgid ""
+#~ "Let window manager decide\n"
+#~ "Center of the screen\n"
+#~ "At the mouse pointer\n"
+#~ msgstr ""
+#~ "Naj se odloèi uporabljalnik oken\n"
+#~ "Sredi¹èe zaslona\n"
+#~ "Pri mi¹kinem kazalcu\n"
+
+#~ msgid "window3"
+#~ msgstr "okno3"
+
+#~ msgid ""
+#~ "Notebook\n"
+#~ "Toplevel\n"
+#~ "Modal\n"
+#~ msgstr ""
+#~ "Notesnik\n"
+#~ "Na vrhu\n"
+#~ "Modalni\n"
+
+#~ msgid ""
+#~ "Left\n"
+#~ "Right\n"
+#~ "Top\n"
+#~ "Bottom\n"
+#~ msgstr ""
+#~ "Levo\n"
+#~ "Desno\n"
+#~ "Zgoraj\n"
+#~ "Spodaj\n"
+
+#~ msgid "Get an XML description of the capplet's state"
+#~ msgstr "Dobi XML opis stanja nastavitvenega vstavka"
+
+#~ msgid "DO_GET"
+#~ msgstr "DO_GET"
+
+#~ msgid "Read an XML description of the capplet's state and apply it"
+#~ msgstr "Preberi XML opis stanja nastavitvenega vstavka in ga udejani"
+
+#~ msgid "DO_SET"
+#~ msgstr "DO_SET"
+
+#~ msgid "Up"
+#~ msgstr "Gor"
+
+#~ msgid "Parent Group"
+#~ msgstr "Skupina star¹a"
+
+#~ msgid "Preferences"
+#~ msgstr "Nastavitve"
+
+#~ msgid "Control Center Preferences"
+#~ msgstr "Nastavitve kontrolnega centera"
+
+#~ msgid ""
+#~ "an initialization error occurred while starting 'bell-properties-"
+#~ "capplet'.\n"
+#~ "aborting...\n"
+#~ msgstr ""
+#~ "napaka pri inicializaciji ob zagonu 'bell-properties-capplet'.\n"
+#~ "prekinjam...\n"
+
+#~ msgid "cannot find widget for %s\n"
+#~ msgstr "ne najdem gradnika za %s\n"
+
+#~ msgid ""
+#~ "Unknown type.\n"
+#~ "\tWidget %s is not supported\n"
+#~ msgstr ""
+#~ "Neznan tip.\n"
+#~ "\tGradnik %s ni podprt\n"
