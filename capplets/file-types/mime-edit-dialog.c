@@ -288,7 +288,7 @@ mime_edit_dialog_set_prop (GObject *object, guint prop_id, const GValue *value, 
 				mime_edit_dialog->p->model);
 			setup_add_dialog (mime_edit_dialog);
 			gtk_window_set_title (GTK_WINDOW (mime_edit_dialog->p->dialog_win),
-				(_("Add file type")));
+				(_("Add File Type")));
 			gtk_widget_show_all (mime_edit_dialog->p->dialog_win);
 		}
 
@@ -363,16 +363,17 @@ mime_edit_dialog_finalize (GObject *object)
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
-GObject *
+GtkWidget *
 mime_edit_dialog_new (GtkTreeModel *model, MimeTypeInfo *info) 
 {
-	return g_object_new (mime_edit_dialog_get_type (),
+	GObject *res = g_object_new (mime_edit_dialog_get_type (),
 			     "model", model,
 			     "mime-type-info", info,
 			     NULL);
+	return GTK_WIDGET (res);
 }
 
-GObject *
+GtkWidget *
 mime_add_dialog_new (GtkTreeModel *model, GtkWindow *parent,
 		     char const *file_name) 
 {
@@ -408,7 +409,7 @@ mime_add_dialog_new (GtkTreeModel *model, GtkWindow *parent,
 		}
 	}
 
-	return dialog;
+	return GTK_WIDGET (dialog);
 }
 
 static void
@@ -812,14 +813,14 @@ validate_data (MimeEditDialog *dialog)
 		if (strchr (mime_type, ' ') || !strchr (mime_type, '/')) {
 			err_dialog = gtk_message_dialog_new (
 				GTK_WINDOW (dialog->p->dialog_win),
-				GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR,
+				GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_ERROR,
 				GTK_BUTTONS_CANCEL,
 				_("Please enter a valid MIME type.  It should be of the form "
 				  "class/type and may not contain any spaces."));
 		} else if (dialog->p->is_add && gnome_vfs_mime_type_is_known (mime_type)) {
 			err_dialog = gtk_message_dialog_new (
 				GTK_WINDOW (dialog->p->dialog_win),
-				GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION,
+				GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_ERROR,
 				GTK_BUTTONS_OK_CANCEL,
 				_("A MIME type with that name already exists, overwrite ?."));
 		}

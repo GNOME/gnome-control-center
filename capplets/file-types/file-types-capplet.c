@@ -48,7 +48,7 @@ add_mime_cb (GtkButton *button, GladeXML *dialog)
 {
 	GtkTreeView     *treeview;
 	GtkTreeModel    *model;
-	GObject         *add_dialog;
+	GtkWidget	*add_dialog;
 
 	treeview = GTK_TREE_VIEW (WID ("mime_types_tree"));
 	model = gtk_tree_view_get_model (treeview);
@@ -63,7 +63,7 @@ add_service_cb (GtkButton *button, GladeXML *dialog)
 {
 	GtkTreeView     *treeview;
 	GtkTreeModel    *model;
-	GObject         *add_dialog;
+	GtkWidget	*add_dialog;
 
 	treeview = GTK_TREE_VIEW (WID ("mime_types_tree"));
 	model = gtk_tree_view_get_model (treeview);
@@ -71,7 +71,7 @@ add_service_cb (GtkButton *button, GladeXML *dialog)
 	add_dialog = service_add_dialog_new (model);
 }
 
-static GObject *
+static GtkWidget *
 launch_edit_dialog (GtkTreeModel *model, GtkTreeIter *iter) 
 {
 	ModelEntry *entry;
@@ -211,11 +211,13 @@ create_dialog (void)
 
 	/* Icon/description column */
 	column = gtk_tree_view_column_new ();
+	gtk_tree_view_column_set_resizable (column, TRUE);
+	gtk_tree_view_column_set_title (column, _("Description"));
 
 	renderer = gtk_cell_renderer_pixbuf_new ();
 	gtk_tree_view_column_pack_start (column, renderer, FALSE);
-	gtk_tree_view_column_set_attributes
-		(column, renderer, "pixbuf", MODEL_COLUMN_ICON, NULL);
+	gtk_tree_view_column_set_attributes 
+		(column, renderer, "pixbuf", MODEL_COLUMN_ICON, NULL); 
 
 	/* Description column */
 	renderer = gtk_cell_renderer_text_new ();
@@ -226,16 +228,20 @@ create_dialog (void)
 		"search_column", MODEL_COLUMN_DESCRIPTION,
 		NULL);
 
-	gtk_tree_view_column_set_title (column, _("Description"));
 	gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
 	gtk_tree_view_set_expander_column (GTK_TREE_VIEW (treeview), column);
 
 	/* Extensions column */
+	column = gtk_tree_view_column_new ();
+	gtk_tree_view_column_set_resizable (column, TRUE);
+	gtk_tree_view_column_set_title (column, _("Extensions"));
+
 	renderer = gtk_cell_renderer_text_new ();
-	gtk_tree_view_insert_column_with_attributes
-		(GTK_TREE_VIEW (treeview), -1, _("Extensions"), renderer,
-		 "text", MODEL_COLUMN_FILE_EXT,
-		 NULL);
+	gtk_tree_view_column_pack_start (column, renderer, TRUE);
+	gtk_tree_view_column_set_attributes 
+		(column, renderer, "text", MODEL_COLUMN_FILE_EXT, NULL);
+
+	gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
 
 	gtk_widget_set_sensitive (WID ("edit_button"), FALSE);
 	gtk_widget_set_sensitive (WID ("remove_button"), FALSE);
@@ -271,8 +277,7 @@ main (int argc, char **argv)
 	char const   *mime_type = NULL;
 	char const   *file_name = NULL;
 	GtkTreeModel *model;
-	MimeTypeInfo *info = NULL;
-	GObject      *mime_dialog;
+	GtkWidget    *mime_dialog;
 	GnomeProgram *program;
 	poptContext   popt_ctxt = 0;
 
@@ -299,18 +304,23 @@ main (int argc, char **argv)
 
 	if (mime_type == NULL) {
 		GladeXML *dialog = create_dialog ();
-		gtk_widget_show_all (WID ("main_dialog"));
+		gtk_dialog_set_default_response (GTK_DIALOG (WID ("main_dialog")), GTK_RESPONSE_CLOSE);
+		mime_dialog = WID ("main_dialog");
 	} else {
+		MimeTypeInfo *info = NULL;
+
 		model = GTK_TREE_MODEL (mime_types_model_new (FALSE));
 		if (strcmp (GNOME_VFS_MIME_TYPE_UNKNOWN, mime_type)) {
 			info = mime_type_info_new (mime_type, model);
 			mime_dialog = mime_edit_dialog_new (model, info);
-		} else {
+		} else
 			mime_dialog = mime_add_dialog_new (model, NULL, file_name);
-		}
-		g_signal_connect (mime_dialog, "done", (GCallback) dialog_done_cb, info);
+		g_signal_connect (G_OBJECT (mime_dialog),
+			"done", (GCallback) dialog_done_cb, info);
 	}
 
+        capplet_set_icon (mime_dialog, "gnome-ccmime.png");
+	gtk_widget_show_all (mime_dialog);
 	gtk_main ();
 
 	return 0;

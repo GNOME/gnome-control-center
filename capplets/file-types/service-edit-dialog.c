@@ -222,7 +222,7 @@ service_edit_dialog_set_prop (GObject *object, guint prop_id, const GValue *valu
 			dialog->p->info = service_info_new (NULL, NULL);
 			setup_add_dialog (dialog);
 			gtk_window_set_title (GTK_WINDOW (dialog->p->dialog_win),
-				(_("Add service")));
+				(_("Add Service")));
 			gtk_widget_show_all (dialog->p->dialog_win);
 		}
 
@@ -301,22 +301,24 @@ service_edit_dialog_finalize (GObject *object)
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
-GObject *
+GtkWidget *
 service_edit_dialog_new (GtkTreeModel *model, ServiceInfo *info) 
 {
-	return g_object_new (service_edit_dialog_get_type (),
+	GObject *res = g_object_new (service_edit_dialog_get_type (),
 			     "model", model,
 			     "service-info", info,
 			     NULL);
+	return GTK_WIDGET (res);
 }
 
-GObject *
+GtkWidget *
 service_add_dialog_new (GtkTreeModel *model) 
 {
-	return g_object_new (service_edit_dialog_get_type (),
+	GObject *res = g_object_new (service_edit_dialog_get_type (),
 			     "model", model,
 			     "is-add", TRUE,
 			     NULL);
+	return GTK_WIDGET (res);
 }
 
 static void

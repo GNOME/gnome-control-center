@@ -52,12 +52,12 @@ struct _MimeEditDialogClass
 	void (*done) (MimeEditDialog *dialog, gboolean ok);
 };
 
-GType mime_edit_dialog_get_type         (void);
+GType mime_edit_dialog_get_type	(void);
 
-GObject *mime_edit_dialog_new           (GtkTreeModel *model,
-					 MimeTypeInfo *info);
-GObject *mime_add_dialog_new            (GtkTreeModel *model, GtkWindow *parent,
-					 char const *file_name);
+GtkWidget *mime_edit_dialog_new	(GtkTreeModel *model,
+				 MimeTypeInfo *info);
+GtkWidget *mime_add_dialog_new	(GtkTreeModel *model, GtkWindow *parent,
+				 char const *file_name);
 
 void mime_edit_dialog_get_app (GladeXML *glade, char const *mime_type,
 			       GnomeVFSMimeApplication **current);
