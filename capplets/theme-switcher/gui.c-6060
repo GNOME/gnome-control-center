@@ -188,12 +188,10 @@ make_main(void)
   gtk_container_set_border_width(GTK_CONTAINER(capplet_widget), 5);
 
   box = gtk_vbox_new(FALSE, GNOME_PAD);
-  hbox = gtk_hbox_new(TRUE, GNOME_PAD);
   frame = gtk_frame_new (_("Available Themes"));
   hbox2 = gtk_hbox_new(FALSE, 0);
   gtk_container_set_border_width (GTK_CONTAINER (hbox2), GNOME_PAD_SMALL);
-  gtk_box_pack_start(GTK_BOX(hbox), frame, TRUE, TRUE, 0);
-  gtk_box_pack_start(GTK_BOX(box), hbox, TRUE, TRUE, 0);
+  gtk_box_pack_start(GTK_BOX(box), frame, TRUE, TRUE, GNOME_PAD_SMALL);
   gtk_container_add (GTK_CONTAINER (frame), hbox2);
 
   /* List of available themes
@@ -233,7 +231,7 @@ make_main(void)
   /* Font selector.
    */
   frame = gtk_frame_new (_("User Font"));
-  gtk_box_pack_start(GTK_BOX(hbox), frame, TRUE, TRUE, 0);
+  gtk_box_pack_start(GTK_BOX(box), frame, TRUE, TRUE, 0);
   font_sel = gnome_font_picker_new ();
   gnome_font_picker_set_mode (GNOME_FONT_PICKER (font_sel),
 			      GNOME_FONT_PICKER_MODE_FONT_INFO);
