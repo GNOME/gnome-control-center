@@ -1022,7 +1022,8 @@ nautilus_mime_type_capplet_show_new_extension_window (void)
  */
 static void
 add_or_update_application (GtkWidget *list, const char *name, const char *command,
-		     	   gboolean multiple, gboolean uri, gboolean update)
+		     	   gboolean multiple, gboolean expects_uris, 
+			   gboolean update)
 {
 	GnomeVFSMimeApplication app, *original;
 	const char *mime_type;
@@ -1042,7 +1043,9 @@ add_or_update_application (GtkWidget *list, const char *name, const char *comman
 	app.name = (char *)name;
 	app.command = (char *)command;
 	app.can_open_multiple_files = multiple;
-	app.can_open_uris = uri;
+	app.expects_uris = expects_uris;
+	/* FIXME: We should be getting this information */
+	app.supported_uri_schemes = NULL;
 	app.requires_terminal = FALSE;
 
 	if (update) {
@@ -1172,6 +1175,7 @@ show_new_application_window (GtkWidget *button, GtkWidget *list)
 	gtk_table_attach_defaults ( GTK_TABLE (table), command_entry, 1, 2, 1, 2);
 
 	/* Open Behavior frame */
+	/* FIXME: Need to add expected uri schemes */
 	behavior_frame = gtk_frame_new (_("Open Behavior"));
 	gtk_table_attach_defaults ( GTK_TABLE (table), behavior_frame, 0, 2, 2, 3);
 	
@@ -1181,9 +1185,10 @@ show_new_application_window (GtkWidget *button, GtkWidget *list)
 	multiple_check_box = gtk_check_button_new_with_label (_("Can open multiple files"));
 	gtk_box_pack_start (GTK_BOX (frame_vbox), multiple_check_box, FALSE, FALSE, 0);
 
-	uri_check_box = gtk_check_button_new_with_label (_("Can open from URI"));
+	uri_check_box = gtk_check_button_new_with_label (_("Expects URIs as arguments"));
 	gtk_box_pack_start (GTK_BOX (frame_vbox), uri_check_box, FALSE, FALSE, 0);
 		
+	
 	gtk_widget_show_all (GNOME_DIALOG (dialog)->vbox);
 
 	/* Set focus to text entry widget */
@@ -1201,6 +1206,7 @@ show_new_application_window (GtkWidget *button, GtkWidget *list)
 				add_or_update_application (list,
 							   gtk_entry_get_text (GTK_ENTRY (app_entry)),
 						     	   gtk_entry_get_text (GTK_ENTRY (command_entry)),
+							   
 		        			     	   gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (multiple_check_box)),
 		        			     	   gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (uri_check_box)),
 		        			     	   FALSE);				
@@ -1290,7 +1296,8 @@ show_edit_application_window (GtkWidget *button, GtkWidget *list)
 
 	uri_check_box = gtk_check_button_new_with_label (_("Can open from URI"));
 	gtk_box_pack_start (GTK_BOX (frame_vbox), uri_check_box, FALSE, FALSE, 0);
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (uri_check_box), application->can_open_uris);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (uri_check_box), application->expects_uris);
+
 
 	gtk_widget_show_all (GNOME_DIALOG (dialog)->vbox);
 
