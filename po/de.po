@@ -9,10 +9,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: control-center 2.4.x\n"
+"Project-Id-Version: control-center 2.3.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-07-19 13:21+0200\n"
-"PO-Revision-Date: 2003-07-19 13:21+0200\n"
+"POT-Creation-Date: 2003-07-25 19:28+0200\n"
+"PO-Revision-Date: 2003-07-25 19:28+0200\n"
 "Last-Translator: Christian Neumair <chris@gnome-de.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -70,6 +70,38 @@ msgstr "Unterstützung für Hilfstechnologien"
 #: capplets/accessibility/at-properties/at-properties.desktop.in.h:2
 msgid "Enable support for GNOME assistive technologies at login"
 msgstr "Unterstützung für GNOME-Hilfstechnologien bei der Anmeldung aktivieren"
+
+#: capplets/accessibility/at-properties/main.c:59
+msgid ""
+"<i>No Assistive Technology is available on your system.  The 'gok' package "
+"must be installed in order to get on-screen keyboard support, and the "
+"'gnopernicus' package must be installed for screenreading and magnifying "
+"capabilities.</i>"
+msgstr ""
+"<i>Auf Ihrem System ist keine Unterstützung für Hilfstechnologien verfügbar. "
+"Installieren Sie das Paket »gok«, um eine Bildschimrtastatur zu erhalten "
+"sowie das Paket »gnopernicus«, um über Bildschirmlese und -"
+"vergrößerungsfunktionen zu verfügen.</i>"
+
+#: capplets/accessibility/at-properties/main.c:62
+msgid ""
+"<i>Not all available assistive technologies are installed on your system.  "
+"The 'gok' package must be installed in order to get on-screen keyboard "
+"support.</i>"
+msgstr ""
+"<i>Auf Ihrem System ist nicht die gesamte Unterstützung für "
+"Hilfstechnologien verfügbar. Installieren Sie das Paket »gok«, um eine "
+"Bildschimrtastatur zu erhalten.</i>"
+
+#: capplets/accessibility/at-properties/main.c:65
+msgid ""
+"<i>Not all available assistive technologies are installed on your system.  "
+"The 'gnopernicus' package must be installed for screenreading and magnifying "
+"capabilities.</i>"
+msgstr ""
+"<i>Auf Ihrem System ist nicht die gesamte Unterstützung für "
+"Hilfstechnologien verfügbar. Installieren Sie das Paket »gnopernicus«, um "
+"über Bildschirmlese und -vergrößerungsfunktionen zu verfügen.</i>"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:238
 #, c-format
@@ -355,9 +387,9 @@ msgstr "Kei_n Bild"
 
 #: capplets/background/background-properties-capplet.c:559
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:851
+#: capplets/default-applications/gnome-default-applications-properties.c:852
 #: capplets/keyboard/gnome-keyboard-properties.c:220
-#: capplets/mouse/gnome-mouse-properties.c:716
+#: capplets/mouse/gnome-mouse-properties.c:714
 #: capplets/sound/sound-properties-capplet.c:212
 msgid "Retrieve and store legacy settings"
 msgstr "Übernommene Einstellungen finden und speichern"
@@ -2929,17 +2961,29 @@ msgstr "Einträge im Nautilus-Kontextmenü für Schriften"
 msgid "Set as Application Font"
 msgstr "Als Anwendungsschrift verwenden"
 
-#: vfs-methods/themus/Themus_Component.server.in.in.h:1
-msgid "Apply theme..."
-msgstr "Thema anwenden..."
+#: vfs-methods/themus/apply-font.glade.h:1
+msgid " "
+msgstr " "
 
-#: vfs-methods/themus/Themus_Component.server.in.in.h:2
-msgid "Themus component"
-msgstr "Themus-Komponente"
+#: vfs-methods/themus/apply-font.glade.h:2
+msgid "<span weight=\"bold\" size=\"larger\">Apply new font?</span>"
+msgstr "<span weight=\"bold\" size=\"larger\">Neue Schrift anwenden?</span>"
 
-#: vfs-methods/themus/Themus_Component.server.in.in.h:3
-msgid "Themus component apply theme operations"
-msgstr "Themus-Anwendekomponente für Themenoperationen"
+#: vfs-methods/themus/apply-font.glade.h:3
+msgid "Do _not apply font"
+msgstr "Schrift _nicht anwenden"
+
+#: vfs-methods/themus/apply-font.glade.h:4
+msgid ""
+"The theme you have selected suggests a new font. A preview of the font is "
+"shown below."
+msgstr ""
+"Das von Ihnen gewählte Thema empfiehlt eine Schrift. Unterhalb wird eine "
+"Vorschau auf die Schrift angezeigt."
+
+#: vfs-methods/themus/apply-font.glade.h:5
+msgid "_Apply font"
+msgstr "Schrift an_wenden"
 
 #: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
 msgid "Theme Properties content view component"
@@ -2968,6 +3012,11 @@ msgstr "Symbol-Thema"
 #: vfs-methods/themus/themus-properties-view.c:217
 msgid "URI currently displayed"
 msgstr "Momentan angezeigte Adresse"
+
+#. translators: you may want to include non-western chars here
+#: vfs-methods/themus/themus-theme-applier.c:83
+msgid "ABCDEFG"
+msgstr "ABCDEFG"
 
 #: vfs-methods/themus/themus.schemas.in.h:1
 msgid "If set to true, then installed themes will be thumbnailed."
@@ -3006,3 +3055,12 @@ msgstr "Miniatur-Vorschaubilder installierter Themen anzeigen?"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Miniatur-Vorschaubilder von Themen anzeigen?"
+
+#~ msgid "Apply theme..."
+#~ msgstr "Thema anwenden..."
+
+#~ msgid "Themus component"
+#~ msgstr "Themus-Komponente"
+
+#~ msgid "Themus component apply theme operations"
+#~ msgstr "Themus-Anwendekomponente für Themenoperationen"
