@@ -132,9 +132,10 @@ populate_extension_list (const char *mime_type, GtkCList *list)
 
 	for (element = extensions; element != NULL; element = element->next) {
 		extension[0] = (char *)element->data;
-		if (strcmp (extension[0], "") != 0) {
+		if (strlen (element->data) > 0) {
 			row = gtk_clist_append (list, extension);
-			gtk_clist_set_row_data (list, row, GINT_TO_POINTER (FALSE));
+			/* Set to deletable */
+			gtk_clist_set_row_data (list, row, GINT_TO_POINTER (TRUE));
 		}
 	}
 
@@ -148,18 +149,40 @@ void
 nautilus_mime_type_capplet_add_extension (const char *extension)
 {
 	gchar *title[1];
+	gchar *token, *search_string;
 	gint rownumber;
 	const char *mime_type;
-	
-	title[0] = g_strdup (extension);
 
+	/* Check for empty string */
+	if (strlen (extension) <= 0) {
+		return;
+	}
+
+	/* Check for starting space in string */
+	if (extension[0] == ' ') {
+		return;
+	}
+	
+	/* Copy only contiguous part of string.  No spaces allowed. */	
+	search_string = g_strdup (extension);
+	token = strtok (search_string, " ");
+
+	if (token == NULL) {		
+		title[0] = g_strdup (extension);
+	} else if (strlen (token) <= 0) {
+		return;
+	}else {
+		title[0] = g_strdup (token);		
+	}
+	g_free (search_string);
+	
 	rownumber = gtk_clist_append (GTK_CLIST (extension_list), title);
 	gtk_clist_set_row_data (GTK_CLIST (extension_list), rownumber,
 				GINT_TO_POINTER (FALSE));
 
 	mime_type = get_selected_item_mime_type ();
 	g_assert (mime_type != NULL);
-	gnome_vfs_mime_add_extension_to_mime_type (mime_type, extension);
+	gnome_vfs_mime_add_extension (mime_type, extension);
 }
 
 static void
@@ -174,6 +197,7 @@ remove_extension_clicked (GtkWidget *widget, gpointer data)
         gint row;
 	gchar *text;
 	gchar *store;
+	const char *mime_type;
 	
 	text = (gchar *)g_malloc (sizeof (gchar) * 1024);
 	gtk_clist_freeze (GTK_CLIST (extension_list));
@@ -181,24 +205,15 @@ remove_extension_clicked (GtkWidget *widget, gpointer data)
 	gtk_clist_get_text (GTK_CLIST (extension_list), row, 0, &text);
 	store = g_strdup (text);
 	gtk_clist_remove (GTK_CLIST (extension_list), row);
-
 	gtk_clist_thaw (GTK_CLIST (extension_list));
 
-	/*
-	GList *tmp;
 
-	for (tmp = main_win->tmp_ext[0]; tmp; tmp = tmp->next) {
-	        GList *found;
-
-		if (strcmp (tmp->data, store) == 0) {
-		        found = tmp;
-
-			main_win->tmp_ext[0] = g_list_remove_link (main_win->tmp_ext[0], found);
-			g_list_free_1 (found);
-			break;
-		}
+	mime_type = get_selected_item_mime_type ();
+	if (mime_type != NULL) {
+		gnome_vfs_mime_remove_extension (mime_type, store);
 	}
-	*/
+	
+	g_free (store);
 }
 
 static void

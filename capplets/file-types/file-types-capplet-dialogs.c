@@ -605,7 +605,10 @@ nautilus_mime_type_capplet_show_new_extension_window (void)
         gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), hbox, FALSE, FALSE, 0);	
 	
         gtk_widget_show_all (GNOME_DIALOG (dialog)->vbox);
-        
+
+	/* Set focus to text entry widget */
+	gtk_window_set_focus (GTK_WINDOW (dialog), mime_entry);
+
         switch (gnome_dialog_run (GNOME_DIALOG (dialog))) {
 	        case 0:
 			nautilus_mime_type_capplet_add_extension (gtk_entry_get_text 
