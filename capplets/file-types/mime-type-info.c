@@ -32,6 +32,8 @@
 #include <bonobo.h>
 #include <libgnomevfs/gnome-vfs-application-registry.h>
 
+#include "libuuid/uuid.h"
+
 #include "mime-type-info.h"
 #include "mime-types-model.h"
 
@@ -93,6 +95,7 @@ mime_type_info_load (GtkTreeModel *model, GtkTreeIter *iter)
 	MimeTypeInfo      *info;
 	Bonobo_ServerInfo *component_info;
 	GValue             mime_type;
+	gchar             *tmp;
 
 	if (mime_type_table == NULL)
 		mime_type_table = g_hash_table_new (g_str_hash, g_str_equal);
@@ -118,11 +121,15 @@ mime_type_info_load (GtkTreeModel *model, GtkTreeIter *iter)
 	info->print_line      = g_strdup (gnome_vfs_mime_get_value (info->mime_type, "print-line"));
 	info->default_action  = gnome_vfs_mime_get_default_application (info->mime_type);
 
-	if (info->default_action != NULL && !strncmp (info->default_action->id, "custom-", strlen ("custom-"))) {
+	tmp = g_strdup_printf ("Custom %s", info->mime_type);
+
+	if (info->default_action != NULL && !strcmp (info->default_action->name, tmp)) {
 		info->custom_line = g_strdup (info->default_action->command);
 		gnome_vfs_mime_application_free (info->default_action);
 		info->default_action = NULL;
 	}
+
+	g_free (tmp);
 
 	component_info = gnome_vfs_mime_get_default_component (info->mime_type);
 
@@ -140,8 +147,11 @@ mime_type_info_load (GtkTreeModel *model, GtkTreeIter *iter)
 void
 mime_type_info_save (const MimeTypeInfo *info)
 {
-	gchar *tmp, *tmp1;
-	gchar *appid;
+	gchar                   *tmp, *tmp1;
+	gchar                   *appid;
+	uuid_t                   app_uuid;
+	gchar                    app_uuid_str[100];
+	GnomeVFSMimeApplication  app;
 
 	gnome_vfs_mime_set_description (info->mime_type, info->description);
 	gnome_vfs_mime_set_icon (info->mime_type, info->icon_name);
@@ -152,15 +162,22 @@ mime_type_info_save (const MimeTypeInfo *info)
 		gnome_vfs_mime_set_default_application (info->mime_type, info->default_action->id);
 	}
 	else if (info->custom_line != NULL && *info->custom_line != '\0') {
-		tmp = g_strdup (info->mime_type);
-		for (tmp1 = tmp; *tmp1 != '\0'; tmp1++)
-			if (*tmp1 == '/') *tmp1 = '-';
-		appid = g_strconcat ("custom-", tmp, NULL);
-		g_free (tmp);
+		uuid_generate (app_uuid);
+		uuid_unparse (app_uuid, app_uuid_str);
 
-		gnome_vfs_application_registry_set_value (appid, "command", info->custom_line);
+		app.id = app_uuid_str;
+		app.name = g_strdup_printf ("Custom %s", info->mime_type);
+		app.command = info->custom_line;
+		app.can_open_multiple_files = FALSE;
+		app.expects_uris = FALSE;
+		app.supported_uri_schemes = NULL;
+		app.requires_terminal = FALSE;
 
-		gnome_vfs_mime_set_default_application (info->mime_type, appid);
+		gnome_vfs_application_registry_save_mime_application (&app);
+		gnome_vfs_application_registry_sync ();
+
+		gnome_vfs_mime_set_default_application (info->mime_type, app.id);
+		g_free (app.name);
 	}
 
 	tmp = form_extensions_string (info, " ", NULL);

@@ -1,6 +1,9 @@
 2002-01-11  Bradford Hovinen  <hovinen@ximian.com>
 
 	* mime-type-info.c (mime_type_info_free): Remove from dirty list
+	(mime_type_info_save): Use libuuid to generate a unique ID for the
+	custom app
+	(mime_type_info_load): Check for custom line based on name
 
 	* mime-edit-dialog.c (populate_application_list): Don't check
 	default action id if default action is NULL
