@@ -63,7 +63,6 @@ capplet_new (CappletDir *dir, gchar *desktop_path)
 
 	entry = g_hash_table_lookup (capplet_hash, desktop_path);
 	if (entry) {
-		g_print ("hash hit!!\n");
 		return entry;
 	}
 
@@ -104,7 +103,6 @@ capplet_dir_new (CappletDir *dir, gchar *dir_path)
 
 	entry = g_hash_table_lookup (capplet_hash, dir_path);
 	if (entry) {
-		g_print ("hash hit!\n");
 		return entry;
 	}
 
@@ -349,8 +347,6 @@ start_capplet_through_root_manager (GnomeDesktopEntry *gde)
 
 	g_free (gde->exec[1]);
 	gde->exec[1] = oldexec;
-
-	g_print ("trying: %s\n", cmdline);
 
 	fprintf (output, "%s\n", cmdline);
 	fflush (output);

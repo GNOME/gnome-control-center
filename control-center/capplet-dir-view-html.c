@@ -99,8 +99,6 @@ handle_link_cb (GtkHTML *html, const gchar *url, CappletDirView *view)
 {
 	CappletDirEntry *entry;
 
-	g_print ("activating: %s\n", url);
-
 	entry = capplet_lookup (url);
 	if (entry)
 		capplet_dir_entry_activate (entry, view);
@@ -203,10 +201,11 @@ html_write_row (GtkHTML *html, GtkHTMLStream *stream, GSList *list, int the_max)
 	char *s;
 	GSList *item;
 	
-	s = "<tr><td><img src=\"" ART_DIR "/blank.png\" height=\"1\" width=\"8\"></td>";
-	gtk_html_write (html, stream, s, strlen (s));
-
 	g_return_val_if_fail (list != NULL, NULL);
+
+	s = g_strdup_printf ("<tr><td colspan=\"%i\"><img src=\"" ART_DIR "/blank.png\" height=\"16\" width=\"100%%\"></td></tr><tr><td><img src=\"" ART_DIR "/blank.png\" height=\"1\" width=\"8\"></td>", the_max * 2 + 1);
+	gtk_html_write (html, stream, s, strlen (s));
+	g_free (s);
 
 	i = 0;
 	for (item = list; item; item = item->next) {
@@ -244,9 +243,8 @@ html_write_row (GtkHTML *html, GtkHTMLStream *stream, GSList *list, int the_max)
 		}
 	}
 
-	s = g_strdup_printf ("</tr><tr><td colspan=\"%i\"><img src=\"" ART_DIR "/blank.png\" height=\"16\" width=\"100%%\"></td></tr>\n", the_max * 2 + 1);
+	s = "tr>\n";
 	gtk_html_write (html, stream, s, strlen (s));
-	g_free (s);
 
 	return item;
 }
@@ -288,6 +286,10 @@ html_populate (CappletDirView *view)
 		item = html_write_row (data->main, stream, item, data->icon_cols);
 	}
 
+	s = g_strdup_printf ("<tr><td colspan=\"%i\"><img src=\"" ART_DIR "/blank.png\" height=\"16\" width=\"100%%\"></td></tr>", data->icon_cols * 2 + 1);
+	gtk_html_write (data->main, stream, s, strlen (s));
+	g_free (s);
+
 	s =
 "    </table>\n"
 "  </body>\n"
@@ -311,7 +313,6 @@ main_allocate_cb (GtkWidget *widget, GtkAllocation *allocation, CappletDirView *
 		html_populate (view);
 	       	data->only_update_main = FALSE;	
 	}
-	g_print ("Cols %i Width %i\n", new_cols, allocation->width);
 }
 
 static GtkWidget *
@@ -379,6 +380,10 @@ html_create (CappletDirView *view)
 
 	gtk_signal_connect (GTK_OBJECT (data->main), "size_allocate",
 			    GTK_SIGNAL_FUNC (main_allocate_cb), view);
+
+	gtk_html_allow_selection (data->top, FALSE);
+	gtk_html_allow_selection (data->sidebar, FALSE);
+	gtk_html_allow_selection (data->main, FALSE);
 
 	gtk_widget_show_all (vbox);
 	return vbox;

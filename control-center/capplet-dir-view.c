@@ -92,8 +92,6 @@ capplet_dir_view_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		g_assert (!view->changing_layout);
 		view->changing_layout = TRUE;
 
-		g_print ("layout: %p, %d\n", view, layout);
-
 		if (view->impl && view->impl->clean)
 			view->impl->clean (view);
 
@@ -101,23 +99,18 @@ capplet_dir_view_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		view->impl = capplet_dir_view_impl[layout];
 
 		if (view->impl && view->impl->create) {
-			g_print ("1.  %p\n", view->view);
 			view->view = view->impl->create (view);
 
-			g_print ("2.  %p\n", view->view);
 			gnome_app_set_contents (view->app, view->view);
 
-			g_print ("3.  %p\n", view->view);
 			if (view->capplet_dir && view->impl->populate)
 				view->impl->populate (view);
 
-			g_print ("4.  %p\n", view->view);
 #if 0			
 			gtk_signal_connect (GTK_OBJECT (view->view), "destroy",
 					    GTK_SIGNAL_FUNC (gtk_widget_destroyed),
 					    &view->view);
 #endif
-			g_print ("5.  %p\n\n\n\n", view->view);
 			gtk_widget_show (view->view);
 		}
 
@@ -287,6 +280,9 @@ about_menu_cb (GtkWidget *widget, CappletDirView *view)
 		"Bradford Hovinen <hovinen@ximian.com>",
 		"Jacob Berkman <jacob@ximian.com>",
 		"Johnathan Blandford <jrb@redhat.com>",
+		"Jakub Steiner <jimmac@ximian.com>",
+		"Richard Hestilow <hestilow@ximian.com>",
+		"Chema Celorio <chema@ximian.com>",
 		NULL
 	};
 
@@ -300,7 +296,7 @@ about_menu_cb (GtkWidget *widget, CappletDirView *view)
 		(_("GNOME Control Center"), VERSION,
 		 _("Desktop properties manager."),
 		 (const gchar **) authors,
-		 "Copyright (C) 2000, 20001 Ximian, Inc.\n"
+		 "Copyright (C) 2000, 2001 Ximian, Inc.\n"
 		 "Copyright (C) 1999 Red Hat Software, Inc.",
 		 NULL);
 
@@ -345,22 +341,9 @@ capplet_dir_view_new (void)
 	gtk_signal_connect (GTK_OBJECT (view->app), "destroy",
 			    GTK_SIGNAL_FUNC (destroy), view);
 
-	gtk_signal_connect (GTK_OBJECT (xml), "destroy",
-			    GTK_SIGNAL_FUNC (print_somthing), "glade xml");
-	gtk_signal_connect (GTK_OBJECT (view->app), "destroy",
-			    GTK_SIGNAL_FUNC (print_somthing), "main window");
-	gtk_signal_connect (GTK_OBJECT (view), "destroy",
-			    GTK_SIGNAL_FUNC (print_somthing), "capplet dir view");
-
 	glade_xml_signal_connect_data (xml, "close_cb", close_cb, view);
-	glade_xml_signal_connect_data (xml, "exit_cb", exit_cb, view);
 
-	glade_xml_signal_connect_data (xml, "prefs_menu_cb", prefs_menu_cb, view);
 	glade_xml_signal_connect_data (xml, "about_menu_cb", about_menu_cb, view);
-	glade_xml_signal_connect_data (xml, "back_button_cb", back_button_cb, view);
-
-	glade_xml_signal_connect_data (xml, "rootm_button_cb", rootm_button_cb, view);
-
 	gtk_object_unref (GTK_OBJECT (xml));
 	
 	gtk_object_set (GTK_OBJECT (view), "layout", prefs->layout, NULL);
