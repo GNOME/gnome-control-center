@@ -37,13 +37,13 @@
 #include "applier.h"
 
 static Applier *applier;
-static Preferences *prefs;
+static BGPreferences *prefs;
 
 static void
 background_callback (GConfEntry *entry) 
 {
-	preferences_merge_entry (prefs, entry);
-	applier_apply_prefs (applier, PREFERENCES (prefs));
+	bg_preferences_merge_entry (prefs, entry);
+	applier_apply_prefs (applier, prefs);
 }
 
 void
@@ -51,8 +51,8 @@ gnome_settings_background_init (GConfEngine *engine)
 {
 	applier = APPLIER (applier_new (APPLIER_ROOT));
 
-	prefs = preferences_new ();
-	preferences_load (PREFERENCES (prefs));
+	prefs = BG_PREFERENCES (bg_preferences_new ());
+	bg_preferences_load (prefs);
 
 	gnome_settings_daemon_register_callback ("/desktop/gnome/peripherals/keyboard", background_callback);
 }
@@ -60,5 +60,5 @@ gnome_settings_background_init (GConfEngine *engine)
 void
 gnome_settings_background_load (GConfEngine *engine)
 {
-	applier_apply_prefs (applier, PREFERENCES (prefs));
+	applier_apply_prefs (applier, prefs);
 }

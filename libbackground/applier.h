@@ -56,17 +56,17 @@ struct _ApplierClass
 	GObjectClass klass;
 };
 
-guint        applier_get_type             (void);
+guint      applier_get_type             (void);
 
-GObject     *applier_new                  (ApplierType        type);
+GObject   *applier_new                  (ApplierType          type);
 
-void         applier_apply_prefs          (Applier           *applier,
-					   const Preferences *prefs);
+void       applier_apply_prefs          (Applier             *applier,
+					   const BGPreferences *prefs);
 
-gboolean     applier_render_color_p       (const Applier     *applier,
-					   const Preferences *prefs);
+gboolean   applier_render_color_p       (const Applier       *applier,
+					   const BGPreferences *prefs);
 
-GtkWidget   *applier_get_preview_widget   (Applier           *applier);
-GdkPixbuf   *applier_get_wallpaper_pixbuf (Applier           *applier);
+GtkWidget *applier_get_preview_widget   (Applier             *applier);
+GdkPixbuf *applier_get_wallpaper_pixbuf (Applier             *applier);
 
 #endif /* __APPLIER_H */

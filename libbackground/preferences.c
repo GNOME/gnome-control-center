@@ -34,41 +34,42 @@
 
 static GObjectClass *parent_class;
 
-static void      preferences_init             (Preferences               *prefs,
-					       PreferencesClass          *class);
-static void      preferences_class_init       (PreferencesClass          *class);
+static void      bg_preferences_init       (BGPreferences      *prefs,
+					    BGPreferencesClass *class);
+static void      bg_preferences_class_init (BGPreferencesClass *class);
 
-static void      preferences_finalize         (GObject                   *object);
+static void      bg_preferences_finalize   (GObject            *object);
 
-static GdkColor *read_color_from_string       (const gchar               *string);
+static GdkColor *read_color_from_string    (const gchar        *string);
 
 GType
-preferences_get_type (void)
+bg_preferences_get_type (void)
 {
-	static GType preferences_type = 0;
+	static GType bg_preferences_type = 0;
 
-	if (!preferences_type) {
-		GTypeInfo preferences_info = {
-			sizeof (PreferencesClass),
+	if (!bg_preferences_type) {
+		GTypeInfo bg_preferences_info = {
+			sizeof (BGPreferencesClass),
 			NULL,
 			NULL,
-			(GClassInitFunc) preferences_class_init,
+			(GClassInitFunc) bg_preferences_class_init,
 			NULL,
 			NULL,
-			sizeof (Preferences),
+			sizeof (BGPreferences),
 			0,
-			(GInstanceInitFunc) preferences_init,
+			(GInstanceInitFunc) bg_preferences_init,
 		};
 
-		preferences_type = 
-			g_type_register_static (G_TYPE_OBJECT, "Preferences", &preferences_info, 0);
+		bg_preferences_type = 
+			g_type_register_static (G_TYPE_OBJECT, "BGPreferences", &bg_preferences_info, 0);
 	}
 
-	return preferences_type;
+	return bg_preferences_type;
 }
 
 static void
-preferences_init (Preferences *prefs, PreferencesClass *class)
+bg_preferences_init (BGPreferences      *prefs,
+		     BGPreferencesClass *class)
 {
 	prefs->frozen             = FALSE;
 
@@ -89,40 +90,40 @@ preferences_init (Preferences *prefs, PreferencesClass *class)
 }
 
 static void
-preferences_class_init (PreferencesClass *class) 
+bg_preferences_class_init (BGPreferencesClass *class) 
 {
 	GObjectClass *object_class;
 
 	object_class = (GObjectClass *) class;
-	object_class->finalize = preferences_finalize;
+	object_class->finalize = bg_preferences_finalize;
 
 	parent_class = 
 		G_OBJECT_CLASS (g_type_class_ref (G_TYPE_OBJECT));
 }
 
 GObject *
-preferences_new (void) 
+bg_preferences_new (void) 
 {
 	GObject *object;
 
-	object = g_object_new (preferences_get_type (), NULL);
-	PREFERENCES (object)->enabled = TRUE;
+	object = g_object_new (bg_preferences_get_type (), NULL);
+	BG_PREFERENCES (object)->enabled = TRUE;
 
 	return object;
 }
 
 GObject *
-preferences_clone (const Preferences *prefs)
+bg_preferences_clone (const BGPreferences *prefs)
 {
 	GObject *object;
-	Preferences *new_prefs;
+	BGPreferences *new_prefs;
 
 	g_return_val_if_fail (prefs != NULL, NULL);
-	g_return_val_if_fail (IS_PREFERENCES (prefs), NULL);
+	g_return_val_if_fail (IS_BG_PREFERENCES (prefs), NULL);
 
-	object = preferences_new ();
+	object = bg_preferences_new ();
 
-	new_prefs = PREFERENCES (object);
+	new_prefs = BG_PREFERENCES (object);
 
 	new_prefs->enabled            = prefs->enabled;
 	new_prefs->gradient_enabled   = prefs->gradient_enabled;
@@ -146,14 +147,14 @@ preferences_clone (const Preferences *prefs)
 }
 
 static void
-preferences_finalize (GObject *object) 
+bg_preferences_finalize (GObject *object) 
 {
-	Preferences *prefs;
+	BGPreferences *prefs;
 
 	g_return_if_fail (object != NULL);
-	g_return_if_fail (IS_PREFERENCES (object));
+	g_return_if_fail (IS_BG_PREFERENCES (object));
 
-	prefs = PREFERENCES (object);
+	prefs = BG_PREFERENCES (object);
 
 	g_free (prefs->wallpaper_filename);
 	g_free (prefs->wallpaper_sel_path);
@@ -162,13 +163,13 @@ preferences_finalize (GObject *object)
 }
 
 void
-preferences_load (Preferences *prefs)
+bg_preferences_load (BGPreferences *prefs)
 {
 	GConfClient *client;
 	GError      *error = NULL;
 
 	g_return_if_fail (prefs != NULL);
-	g_return_if_fail (IS_PREFERENCES (prefs));
+	g_return_if_fail (IS_BG_PREFERENCES (prefs));
 
 	client = gconf_client_get_default ();
 
@@ -191,18 +192,18 @@ preferences_load (Preferences *prefs)
 }
 
 /* Parse the event name given (the event being notification of a property having
- * changed and apply that change to the preferences structure. Eliminates the
+ * changed and apply that change to the bg_preferences structure. Eliminates the
  * need to reload the structure entirely on every event notification
  */
 
 void
-preferences_merge_entry (Preferences      *prefs,
-			 const GConfEntry *entry)
+bg_preferences_merge_entry (BGPreferences    *prefs,
+			    const GConfEntry *entry)
 {
 	const GConfValue *value = gconf_entry_get_value (entry);
 
 	g_return_if_fail (prefs != NULL);
-	g_return_if_fail (IS_PREFERENCES (prefs));
+	g_return_if_fail (IS_BG_PREFERENCES (prefs));
 
 	if (!strcmp (entry->key, "/desktop/gnome/background/wallpaper_type")) {
 		prefs->wallpaper_type = gconf_value_get_int (value);

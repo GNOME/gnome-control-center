@@ -110,13 +110,13 @@ get_legacy_settings (void)
  */
 
 static gboolean
-real_realize_cb (Preferences *prefs) 
+real_realize_cb (BGPreferences *prefs) 
 {
 	GtkWidget *color_frame;
 	Applier   *applier;
 
 	g_return_val_if_fail (prefs != NULL, TRUE);
-	g_return_val_if_fail (IS_PREFERENCES (prefs), TRUE);
+	g_return_val_if_fail (IS_BG_PREFERENCES (prefs), TRUE);
 
 	if (G_OBJECT (prefs)->ref_count == 0)
 		return FALSE;
@@ -132,14 +132,14 @@ real_realize_cb (Preferences *prefs)
 }
 
 static gboolean
-realize_2_cb (Preferences *prefs) 
+realize_2_cb (BGPreferences *prefs) 
 {
 	gtk_idle_add ((GtkFunction) real_realize_cb, prefs);
 	return FALSE;
 }
 
 static void
-realize_cb (GtkWidget *widget, Preferences *prefs)
+realize_cb (GtkWidget *widget, BGPreferences *prefs)
 {
 	gtk_timeout_add (100, (GtkFunction) realize_2_cb, prefs);
 }
@@ -153,20 +153,20 @@ realize_cb (GtkWidget *widget, Preferences *prefs)
  */
 
 static void
-peditor_value_changed (GConfPropertyEditor *peditor, const gchar *key, const GConfValue *value, Preferences *prefs) 
+peditor_value_changed (GConfPropertyEditor *peditor, const gchar *key, const GConfValue *value, BGPreferences *prefs) 
 {
 	GConfEntry *entry;
 	Applier *applier;
 	GtkWidget *color_frame;
 
 	entry = gconf_entry_new (key, value);
-	preferences_merge_entry (prefs, entry);
+	bg_preferences_merge_entry (prefs, entry);
 	gconf_entry_free (entry);
 
 	applier = g_object_get_data (G_OBJECT (prefs), "applier");
 
 	if (GTK_WIDGET_REALIZED (applier_get_preview_widget (applier)))
-		applier_apply_prefs (applier, PREFERENCES (prefs));
+		applier_apply_prefs (applier, BG_PREFERENCES (prefs));
 
 	if (!strcmp (key, "/desktop/gnome/background/wallpaper-enabled") ||
 	    !strcmp (key, "/desktop/gnome/background/wallpaper-filename") ||
@@ -193,8 +193,8 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset, Applier *applier)
 	gconf_client_set_bool (client, "/desktop/gnome/background/enabled", TRUE, NULL);
 
 	/* Load preferences */
-	prefs = preferences_new ();
-	preferences_load (PREFERENCES (prefs));
+	prefs = bg_preferences_new ();
+	bg_preferences_load (BG_PREFERENCES (prefs));
 
 	/* We need to be able to retrieve the applier and the color frame in
 	   callbacks */
@@ -229,7 +229,7 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset, Applier *applier)
 
 	/* Make sure preferences get applied to the preview */
 	if (GTK_WIDGET_REALIZED (applier_get_preview_widget (applier)))
-		applier_apply_prefs (applier, PREFERENCES (prefs));
+		applier_apply_prefs (applier, BG_PREFERENCES (prefs));
 	else
 		g_signal_connect_after (G_OBJECT (applier_get_preview_widget (applier)), "realize",
 					(GCallback) realize_cb, prefs);

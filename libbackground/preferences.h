@@ -21,19 +21,19 @@
  * 02111-1307, USA.
  */
 
-#ifndef __PREFERENCES_H
-#define __PREFERENCES_H
+#ifndef __BGPREFERENCES_H
+#define __BGPREFERENCES_H
 
 #include <glib-object.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gconf/gconf-client.h>
 
-#define PREFERENCES(obj)          G_TYPE_CHECK_INSTANCE_CAST (obj, preferences_get_type (), Preferences)
-#define PREFERENCES_CLASS(klass)  G_TYPE_CHECK_CLASS_CAST (klass, preferences_get_type (), PreferencesClass)
-#define IS_PREFERENCES(obj)       G_TYPE_CHECK_INSTANCE_TYPE (obj, preferences_get_type ())
+#define BG_PREFERENCES(obj)          G_TYPE_CHECK_INSTANCE_CAST (obj, bg_preferences_get_type (), BGPreferences)
+#define BG_PREFERENCES_CLASS(klass)  G_TYPE_CHECK_CLASS_CAST (klass, bg_preferences_get_type (), BGPreferencesClass)
+#define IS_BG_PREFERENCES(obj)       G_TYPE_CHECK_INSTANCE_TYPE (obj, bg_preferences_get_type ())
 
-typedef struct _Preferences Preferences;
-typedef struct _PreferencesClass PreferencesClass;
+typedef struct _BGPreferences BGPreferences;
+typedef struct _BGPreferencesClass BGPreferencesClass;
 
 typedef enum _orientation_t {
 	ORIENTATION_SOLID, ORIENTATION_HORIZ, ORIENTATION_VERT
@@ -44,7 +44,7 @@ typedef enum _wallpaper_type_t {
 	WPTYPE_STRETCHED, WPTYPE_EMBOSSED
 } wallpaper_type_t;
 
-struct _Preferences
+struct _BGPreferences
 {
 	GObject           object;
 
@@ -70,19 +70,19 @@ struct _Preferences
 	gint              opacity;
 };
 
-struct _PreferencesClass
+struct _BGPreferencesClass
 {
 	GObjectClass klass;
 };
 
-GType        preferences_get_type              (void);
+GType    bg_preferences_get_type    (void);
 
-GObject     *preferences_new                   (void);
-GObject     *preferences_clone                 (const Preferences     *prefs);
+GObject *bg_preferences_new         (void);
+GObject *bg_preferences_clone       (const BGPreferences   *prefs);
 
-void         preferences_load                  (Preferences           *prefs);
+void     bg_preferences_load        (BGPreferences         *prefs);
 
-void         preferences_merge_entry           (Preferences           *prefs,
-						const GConfEntry      *entry);
+void     bg_preferences_merge_entry (BGPreferences         *prefs,
+				     const GConfEntry      *entry);
 
 #endif /* __PREFERENCES_H */

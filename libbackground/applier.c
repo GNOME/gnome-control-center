@@ -53,8 +53,8 @@ struct _ApplierPrivate
 						    * -- this is not used for
 						    * actual rendering; it is
 						    * returned if requested */
-	Preferences        *last_prefs;            /* A cache of the last
-						    * preferences structure to
+	BGPreferences      *last_prefs;            /* A cache of the last
+						    * bg_preferences structure to
 						    * be applied */
 
 	GdkPixbuf          *wallpaper_pixbuf;      /* The "raw" wallpaper pixbuf */
@@ -124,17 +124,17 @@ static void applier_dispose          (GObject           *object);
 static void applier_finalize         (GObject           *object);
 
 static void run_render_pipeline      (Applier           *applier, 
-				      const Preferences *prefs);
+				      const BGPreferences *prefs);
 static void draw_disabled_message    (GtkWidget         *widget);
 
 static void render_background        (Applier           *applier,
-				      const Preferences *prefs);
+				      const BGPreferences *prefs);
 static void render_wallpaper         (Applier           *applier,
-				      const Preferences *prefs);
+				      const BGPreferences *prefs);
 static void render_to_screen         (Applier           *applier,
-				      const Preferences *prefs);
+				      const BGPreferences *prefs);
 static void create_pixmap            (Applier           *applier,
-				      const Preferences *prefs);
+				      const BGPreferences *prefs);
 static void get_geometry             (wallpaper_type_t   wallpaper_type,
 				      GdkPixbuf         *pixbuf,
 				      GdkRectangle      *field_geom,
@@ -159,12 +159,12 @@ static void fill_gradient            (GdkPixbuf         *pixbuf,
 				      orientation_t      orientation);
 
 static gboolean need_wallpaper_load_p  (const Applier     *applier,
-					const Preferences *prefs);
+					const BGPreferences *prefs);
 static gboolean need_root_pixmap_p     (const Applier     *applier,
-					const Preferences *prefs);
+					const BGPreferences *prefs);
 static gboolean wallpaper_full_cover_p (const Applier     *applier,
-					const Preferences *prefs);
-static gboolean render_small_pixmap_p  (const Preferences *prefs);
+					const BGPreferences *prefs);
+static gboolean render_small_pixmap_p  (const BGPreferences *prefs);
 
 static GdkPixmap *make_root_pixmap   (gint               width,
 				      gint               height);
@@ -355,7 +355,7 @@ applier_new (ApplierType type)
 
 void
 applier_apply_prefs (Applier           *applier, 
-		     const Preferences *prefs)
+		     const BGPreferences *prefs)
 {
 	g_return_if_fail (applier != NULL);
 	g_return_if_fail (IS_APPLIER (applier));
@@ -395,19 +395,19 @@ applier_apply_prefs (Applier           *applier,
 	if (applier->p->last_prefs != NULL)
 		g_object_unref (G_OBJECT (applier->p->last_prefs));
 
-	applier->p->last_prefs = PREFERENCES (preferences_clone (prefs));
+	applier->p->last_prefs = BG_PREFERENCES (bg_preferences_clone (prefs));
 
 	if (applier->p->type == APPLIER_PREVIEW && applier->p->preview_widget != NULL)
 		gtk_widget_queue_draw (applier->p->preview_widget);
 }
 
 gboolean
-applier_render_color_p (const Applier *applier, const Preferences *prefs) 
+applier_render_color_p (const Applier *applier, const BGPreferences *prefs) 
 {
 	g_return_val_if_fail (applier != NULL, FALSE);
 	g_return_val_if_fail (IS_APPLIER (applier), FALSE);
 	g_return_val_if_fail (prefs != NULL, FALSE);
-	g_return_val_if_fail (IS_PREFERENCES (prefs), FALSE);
+	g_return_val_if_fail (IS_BG_PREFERENCES (prefs), FALSE);
 
 	return prefs->enabled && !wallpaper_full_cover_p (applier, prefs);
 }
@@ -536,12 +536,12 @@ draw_disabled_message (GtkWidget *widget)
 }
 
 static void
-run_render_pipeline (Applier *applier, const Preferences *prefs)
+run_render_pipeline (Applier *applier, const BGPreferences *prefs)
 {
 	g_return_if_fail (applier != NULL);
 	g_return_if_fail (IS_APPLIER (applier));
 	g_return_if_fail (prefs != NULL);
-	g_return_if_fail (IS_PREFERENCES (prefs));
+	g_return_if_fail (IS_BG_PREFERENCES (prefs));
 
 	g_assert (applier->p->pixbuf == NULL);
 
@@ -578,12 +578,12 @@ run_render_pipeline (Applier *applier, const Preferences *prefs)
  */
 
 static void
-render_background (Applier *applier, const Preferences *prefs) 
+render_background (Applier *applier, const BGPreferences *prefs) 
 {
 	g_return_if_fail (applier != NULL);
 	g_return_if_fail (IS_APPLIER (applier));
 	g_return_if_fail (prefs != NULL);
-	g_return_if_fail (IS_PREFERENCES (prefs));
+	g_return_if_fail (IS_BG_PREFERENCES (prefs));
 
 	if (prefs->gradient_enabled && !wallpaper_full_cover_p (applier, prefs)) {
 		applier->p->grad_geom.x = applier->p->render_geom.width;
@@ -629,7 +629,7 @@ render_background (Applier *applier, const Preferences *prefs)
  */
 
 static void
-render_wallpaper (Applier *applier, const Preferences *prefs) 
+render_wallpaper (Applier *applier, const BGPreferences *prefs) 
 {
 	GdkRectangle  src_geom;
 	GdkRectangle  dest_geom;
@@ -642,7 +642,7 @@ render_wallpaper (Applier *applier, const Preferences *prefs)
 	g_return_if_fail (applier != NULL);
 	g_return_if_fail (IS_APPLIER (applier));
 	g_return_if_fail (prefs != NULL);
-	g_return_if_fail (IS_PREFERENCES (prefs));
+	g_return_if_fail (IS_BG_PREFERENCES (prefs));
 
 	if (prefs->wallpaper_enabled) {
 		if (applier->p->wallpaper_pixbuf == NULL)
@@ -728,14 +728,14 @@ render_wallpaper (Applier *applier, const Preferences *prefs)
  */
 
 static void
-render_to_screen (Applier *applier, const Preferences *prefs) 
+render_to_screen (Applier *applier, const BGPreferences *prefs) 
 {
 	GdkGC *gc;
 
 	g_return_if_fail (applier != NULL);
 	g_return_if_fail (IS_APPLIER (applier));
 	g_return_if_fail (prefs != NULL);
-	g_return_if_fail (IS_PREFERENCES (prefs));
+	g_return_if_fail (IS_BG_PREFERENCES (prefs));
 
 	gc = gdk_gc_new (GDK_ROOT_PARENT ());
 
@@ -795,14 +795,14 @@ render_to_screen (Applier *applier, const Preferences *prefs)
  */
 
 static void
-create_pixmap (Applier *applier, const Preferences *prefs) 
+create_pixmap (Applier *applier, const BGPreferences *prefs) 
 {
 	gint width, height;
 
 	g_return_if_fail (applier != NULL);
 	g_return_if_fail (IS_APPLIER (applier));
 	g_return_if_fail (prefs != NULL);
-	g_return_if_fail (IS_PREFERENCES (prefs));
+	g_return_if_fail (IS_BG_PREFERENCES (prefs));
 
 	switch (applier->p->type) {
 	case APPLIER_ROOT:
@@ -1187,7 +1187,7 @@ fill_gradient (GdkPixbuf     *pixbuf,
  */
 
 static gboolean
-need_wallpaper_load_p (const Applier *applier, const Preferences *prefs)
+need_wallpaper_load_p (const Applier *applier, const BGPreferences *prefs)
 {
 	if (applier->p->last_prefs == NULL)
 		return TRUE;
@@ -1204,7 +1204,7 @@ need_wallpaper_load_p (const Applier *applier, const Preferences *prefs)
 /* Return TRUE iff we need to create a new root pixmap */
 
 static gboolean
-need_root_pixmap_p (const Applier *applier, const Preferences *prefs) 
+need_root_pixmap_p (const Applier *applier, const BGPreferences *prefs) 
 {
 	if (applier->p->last_prefs == NULL)
 		return TRUE;
@@ -1222,10 +1222,10 @@ need_root_pixmap_p (const Applier *applier, const Preferences *prefs)
 /* Return TRUE iff the colors are equal */
 
 /* Return TRUE iff the wallpaper completely covers the colors in the given
- * preferences structure, assuming we have already loaded the wallpaper pixbuf */
+ * bg_preferences structure, assuming we have already loaded the wallpaper pixbuf */
 
 static gboolean
-wallpaper_full_cover_p (const Applier *applier, const Preferences *prefs) 
+wallpaper_full_cover_p (const Applier *applier, const BGPreferences *prefs) 
 {
 	gint swidth, sheight;
 	gint pwidth, pheight;
@@ -1270,7 +1270,7 @@ wallpaper_full_cover_p (const Applier *applier, const Preferences *prefs)
 /* Return TRUE if we can optimize the rendering by using a small thin pixmap */
 
 static gboolean
-render_small_pixmap_p (const Preferences *prefs) 
+render_small_pixmap_p (const BGPreferences *prefs) 
 {
 	return prefs->gradient_enabled && !prefs->wallpaper_enabled;
 }
