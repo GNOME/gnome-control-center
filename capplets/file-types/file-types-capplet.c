@@ -288,12 +288,10 @@ main (int argc, char **argv)
 
 	if (popt_ctxt) {
 		const gchar **startup_files = poptGetArgs (popt_ctxt);
-		mime_type = startup_files [0];
-		if (mime_type != NULL) {
-		    puts (mime_type);
-			file_name = startup_files [1];
-			if (file_name)
-			    puts (file_name);
+		if (startup_files != NULL) {
+			mime_type = startup_files [0];
+			if (mime_type != NULL)
+				file_name = startup_files [1];
 		}
 	}
 
