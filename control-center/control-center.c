@@ -9,19 +9,19 @@
 #include <bonobo/bonobo-main.h>
 #include <libnautilus/nautilus-view.h>
 #include <gnome.h>
+
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 #include <gdk/gdkx.h>
+
+#include <gconf/gconf-client.h>
 #include "gnomecc-event-box.h"
+#include "gnomecc-rounded-rect.h"
 
-#define PAD 5 /*when scrolling keep a few pixels above or below if possible */
-static gboolean use_nautilus = FALSE;
-
-typedef struct ControlCenter_ ControlCenter;
-
+typedef struct _ControlCenter ControlCenter;
 typedef void (*ControlCenterStatusCallback) (ControlCenter *cc, const gchar *status, void *data);
 
-struct ControlCenter_ {
+struct _ControlCenter {
 	GtkWidget *widget; /* widget to embed. */
 
 	GnomeCanvas *canvas;
@@ -35,8 +35,6 @@ struct ControlCenter_ {
 	gboolean firstlayout;
 	ControlCenterEntry *selected;
 	int last_x;
-	int click_count;
-
 	int line_count;
 
 	ControlCenterStatusCallback status_cb;
@@ -71,6 +69,35 @@ typedef struct {
 
 	int line_count;
 } CategoryInfo;
+
+#define PAD 5 /*when scrolling keep a few pixels above or below if possible */
+
+static gboolean use_nautilus = FALSE;
+static struct poptOption cap_options[] = {
+	{"use-nautilus", '\0', POPT_ARG_NONE, &use_nautilus, 0,
+	 N_("Use nautilus if it is running."), NULL},
+	{NULL, '\0', 0, NULL, 0}
+};
+
+static gboolean
+single_click_activates (void)
+{
+	static gboolean needs_init = TRUE;
+	static gboolean use_single_click = FALSE;
+	if (needs_init)  {
+		GConfClient *client = gconf_client_get_default ();
+		char *policy = gconf_client_get_string (client, "/apps/nautilus/preferences/click_policy", NULL);
+		g_object_unref (G_OBJECT (client));
+
+		if (policy != NULL) {
+			use_single_click = (0 == g_ascii_strcasecmp (policy, "single"));
+			g_free (policy);
+		}
+		needs_init = FALSE;
+	}
+
+	return	use_single_click;
+}
 
 static guchar
 lighten_component (guchar cur_value)
@@ -406,20 +433,26 @@ setup_entry (ControlCenterEntry *entry)
 {
 	if (entry) {
 		EntryInfo *ei = entry->user_data;
-		GdkColor *color;
 		GtkWidget *widget = GTK_WIDGET (ei->cc->canvas);
+		GtkStateType state;
 
 		if (ei->pixbuf) {
 			gnome_canvas_item_show_hide (ei->highlight_pixbuf, ei->highlighted);
 			gnome_canvas_item_show_hide (ei->pixbuf, !ei->highlighted);
 		}
+		if (!ei->selected)
+			state = GTK_STATE_NORMAL;
+		else if (gtk_window_has_toplevel_focus (GTK_WINDOW (gtk_widget_get_toplevel (widget))))
+			state = GTK_STATE_SELECTED;
+		else
+			state = GTK_STATE_ACTIVE;
 		gnome_canvas_item_show_hide (ei->selection, ei->selected);
-		color = ei->selected
-			? &widget->style->text[GTK_STATE_SELECTED]
-			: &widget->style->text[GTK_STATE_NORMAL];
+		g_object_set (ei->selection,
+			"fill_color_gdk", &widget->style->base [state],
+			NULL);
 		g_object_set (ei->text,
-			      "fill_color_gdk", color,
-			      NULL);
+			"fill_color_gdk", &widget->style->text [state],
+			NULL);
 
 		if (ei->cc->status_cb) {
 			if (ei->selected) {
@@ -564,8 +597,6 @@ select_entry (ControlCenter *cc, ControlCenterEntry *entry)
 	gnome_canvas_item_i2c_affine (GNOME_CANVAS_ITEM (ei->group), affine);
 	pos = gtk_layout_get_vadjustment (GTK_LAYOUT (ei->cover->canvas));
 
-	g_warning ("\ny\t= %g .. %g\nitem\t= %g .. %g", pos->value, pos->value+pos->page_size, affine[5], affine[5]+ei->height);
-
 	if (affine[5] < pos->value)
 		gtk_adjustment_set_value (pos, MAX (affine[5] - PAD, 0));
 	else if ((affine[5] + ei->height) > (pos->value+pos->page_size))
@@ -599,8 +630,12 @@ cover_event (GnomeCanvasItem *item, GdkEvent *event, ControlCenterEntry *entry)
 		setup_entry (entry);
 		return TRUE;
 	case GDK_BUTTON_PRESS:
-		select_entry (cc, entry);
-		set_x (cc);
+		if (single_click_activates ()) {
+			activate_entry (entry);
+		} else {
+			select_entry (cc, entry);
+			set_x (cc);
+		}
 		return TRUE;
 	case GDK_2BUTTON_PRESS:
 		activate_entry (entry);
@@ -881,7 +916,7 @@ rebuild_canvas (ControlCenter *cc, ControlCenterInformation *info)
 				NULL));
 			ei->selection = gnome_canvas_item_new (
 				ei->group,
-				gnome_canvas_rect_get_type(),
+				GNOMECC_TYPE_ROUNDED_RECT,
 				NULL);
 
 			if (cc->info->categories[i]->entries[j]->title) {
@@ -1096,7 +1131,6 @@ create_control_center ()
 	cc->info = NULL;
 	cc->selected = NULL;
 	cc->last_x = -1;
-	cc->click_count = 0;
 	cc->status_cb = NULL;
 	cc->status_data = NULL;
 	cc->current_status = NULL;
@@ -1147,31 +1181,12 @@ change_status (ControlCenter *cc, const gchar *status, void *data)
 	gnome_appbar_set_status (bar, status);
 }
 
-
-static struct poptOption cap_options[] = {
-	{"use-nautilus", '\0', POPT_ARG_NONE, &use_nautilus, 0,
-	 N_("Use nautilus if it is running."), NULL},
-	{NULL, '\0', 0, NULL, 0}
-};
-#if 0
-static GnomeUIInfo file_menu[] = {
-	GNOMEUIINFO_MENU_CLOSE_ITEM (gnome_cc_die, NULL),
-	GNOMEUIINFO_END
-};
-
-static GnomeUIInfo help_menu[] = {
-	GNOMEUIINFO_HELP("gnomecc"),
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_MENU_ABOUT_ITEM (gnome_cc_about, NULL),
-	GNOMEUIINFO_END
-};
-
-static GnomeUIInfo menus[] = {
-	GNOMEUIINFO_MENU_FILE_TREE(file_menu),
-	GNOMEUIINFO_MENU_HELP_TREE(help_menu),
-	GNOMEUIINFO_END
-};
-#endif
+static void
+cb_focus_changed (ControlCenter *cc)
+{
+	if (cc->selected)
+		setup_entry (cc->selected);
+}
 
 static GtkWindow *
 create_window (const gchar *appname,
@@ -1184,13 +1199,14 @@ create_window (const gchar *appname,
 	ControlCenterInformation *info;
 
 	client = gnome_master_client ();
-	g_signal_connect (G_OBJECT (client), "save_yourself",
-			  G_CALLBACK (gnome_cc_save_yourself), (void *) appname);
-	g_signal_connect (G_OBJECT (client), "die",
-			  G_CALLBACK (gnome_cc_die), NULL);
+	g_signal_connect (G_OBJECT (client),
+		"save_yourself",
+		G_CALLBACK (gnome_cc_save_yourself), (void *) appname);
+	g_signal_connect (G_OBJECT (client),
+		"die",
+		G_CALLBACK (gnome_cc_die), NULL);
 
 	info = control_center_get_categories (uri);
-
 	window = gnome_app_new ("gnomecc", info->title);
 	gnome_window_icon_set_from_file (GTK_WINDOW (window),
 					 PIXMAP_DIR "/control-center.png");
@@ -1205,13 +1221,12 @@ create_window (const gchar *appname,
 
 	gnome_app_set_contents (GNOME_APP (window), cc->widget);
 
-#if 0
-	gnome_app_create_menus (GNOME_APP (window), menus);
-#endif
-
 	gtk_widget_show_all (window);
 
 	g_object_weak_ref (G_OBJECT (window), (GWeakNotify) gnome_cc_die, NULL);
+	g_signal_connect_swapped (G_OBJECT (window),
+		"notify::has-toplevel-focus",
+		G_CALLBACK (cb_focus_changed), cc);
 
 	return GTK_WINDOW (window);
 }
