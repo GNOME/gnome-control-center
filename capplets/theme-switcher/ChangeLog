@@ -1,5 +1,17 @@
 2003-01-06  Seth Nickell  <snickell@stanford.edu>
 
+	* gnome-theme-manager.c: (load_meta_themes):
+	* theme-properties.glade:
+
+	Removed #if 0'd code for hard-coding minimuum height
+	of the tree view. Use glade properties to set minimuum
+	height to a more reasonable value. Its hard to find
+	items when you only see two in the scroll-view at
+	any given time, and many people do not think to
+	resize windows (nor should they have to :-)
+	
+2003-01-06  Seth Nickell  <snickell@stanford.edu>
+
 	* gnome-theme-manager.c: (add_custom_row_to_meta_theme):
 
 	Don't mark internal string for translation so we don't

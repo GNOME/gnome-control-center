@@ -445,13 +445,6 @@ load_meta_themes (GtkTreeView *tree_view,
     end_of_loop:
       if (i == MAX_ELEMENTS_BEFORE_SCROLLING)
 	{
-#if 0
-	  //	  GtkRequisition rectangle;
-
-	  //	  gtk_widget_size_request (GTK_WIDGET (tree_view), &rectangle);
-	  //	  gtk_widget_set_usize (swindow, -1, rectangle.height);
-	  //	  g_print ("calling size_request: %d\n", rectangle.height);
-#endif
 	  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (swindow),
 					  GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
 	}
