@@ -1,0 +1,76 @@
+<gconfschemafile>
+  <schemalist>
+    <schema>
+      <key>/schemas/desktop/gnome/peripherals/keyboard/xkb/overrideSettings</key>
+
+      <applyto>/desktop/gnome/peripherals/keyboard/xkb/overrideSettings</applyto>
+
+      <owner>gnome</owner>    
+
+      <type>bool</type>
+
+      <default>false</default>
+
+      <locale name="C">
+        <short>XKB settings should be overridden</short>
+        <long>XKB settings should be overridden</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/desktop/gnome/peripherals/keyboard/xkb/model</key>
+
+      <applyto>/desktop/gnome/peripherals/keyboard/xkb/model</applyto>
+
+      <owner>gnome</owner>    
+
+      <type>string</type>
+
+      <default>pc105</default>
+
+      <locale name="C">
+        <short>XKB keyboard model</short>
+        <long>XKB keyboard model</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/desktop/gnome/peripherals/keyboard/xkb/layouts</key>
+
+      <applyto>/desktop/gnome/peripherals/keyboard/xkb/layouts</applyto>
+
+      <owner>gnome</owner>    
+
+      <type>list</type>
+
+      <list_type>string</list_type>
+
+      <default>[us]</default>
+
+      <locale name="C">
+        <short>XKB keyboard layout</short>
+        <long>XKB keyboard layout</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/desktop/gnome/peripherals/keyboard/xkb/options</key>
+
+      <applyto>/desktop/gnome/peripherals/keyboard/xkb/options</applyto>
+
+      <owner>gnome</owner>    
+
+      <type>list</type>
+
+      <list_type>string</list_type>
+
+      <default>[]</default>
+
+      <locale name="C">
+        <short>XKB options</short>
+        <long>XKB options</long>
+      </locale>
+    </schema>
+
+  </schemalist>
+</gconfschemafile>
