@@ -243,8 +243,17 @@ wm_list_init (void)
         }
 
         if (!current_wm) {
+                name = gnome_config_get_string ("default.wm/Default/WM");
+
+                if (name) {
+                        current_wm = wm_list_find_exec (window_managers, name);
+                        g_free (name);
+                }
+        }
+
+        if (!current_wm) {
                 gchar *wmfile, *prefix;
-                
+
                 wmfile = gnome_unconditional_datadir_file ("default.wm");
                 prefix = g_strconcat ("=", wmfile, "=/Default/WM", NULL);
                 name = gnome_config_get_string (prefix);
