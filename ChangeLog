@@ -1,3 +1,11 @@
+1999-06-03  James Henstridge  <james@daa.com.au>
+
+	* capplets/screensaver-properties/screensaver-properties-capplet.c:
+	When setting the dpms settings for the X server, use
+	gnome_config_get_int to retrieve the user setting rather than
+	gnome_config_get_string.  Before, it was adding together two
+	pointers, multiplying the value by 60 and casting it as an int :)
+
 1999-05-04  Tuomas Kuosmanen  <tigert@gimp.org>
 
 	* capplets/bell-properties/bell-properties.desktop: Icon for keyboard
