@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 2.2.0.1\n"
-"POT-Creation-Date: 2003-02-10 16:06+0100\n"
-"PO-Revision-Date: 2003-02-10 15:58+0100\n"
+"POT-Creation-Date: 2003-05-03 17:19+0200\n"
+"PO-Revision-Date: 2003-05-03 17:17+0200\n"
 "Last-Translator: Christophe Merlet (RedFox) <redfox@redfoxcenter.org>\n"
 "Language-Team: Gnome French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -47,7 +47,7 @@ msgstr "Clavier"
 msgid "Set your keyboard accessibility preferences"
 msgstr "Règle les paramètres d'accessibilité de votre clavier"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.c:57
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.c:60
 msgid ""
 "This system does not seem to have the XKB extension.  The keyboard "
 "accessibility features will not operate without it."
@@ -293,9 +293,9 @@ msgstr "_Sélectionnez une image :"
 
 #: capplets/background/background-properties-capplet.c:567
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:712
+#: capplets/default-applications/gnome-default-applications-properties.c:724
 #: capplets/keyboard/gnome-keyboard-properties.c:290
-#: capplets/mouse/gnome-mouse-properties.c:712
+#: capplets/mouse/gnome-mouse-properties.c:716
 #: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
 msgstr "Récupérer et enregistrer une configuration antérieure"
@@ -554,7 +554,7 @@ msgstr ""
 "Fonction de rappel devant être émise lorsque les données de l'objet "
 "d'éditeur de paramètres doivent être libérées"
 
-#: capplets/common/gconf-property-editor.c:1484
+#: capplets/common/gconf-property-editor.c:1486
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -567,7 +567,7 @@ msgstr ""
 "Veuillez vous assurer que le fichier existe et essayez de nouveau ou alors "
 "choisissez une autre image d'arrière-plan."
 
-#: capplets/common/gconf-property-editor.c:1492
+#: capplets/common/gconf-property-editor.c:1494
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -580,7 +580,7 @@ msgstr ""
 "\n"
 "Veuillez sélectionner une autre image."
 
-#: capplets/common/gconf-property-editor.c:1583
+#: capplets/common/gconf-property-editor.c:1585
 msgid "Please select an image."
 msgstr "Veuillez sélectionner une image."
 
@@ -807,7 +807,7 @@ msgid "Minimizing and Maximizing"
 msgstr "Maximisation et minimisation"
 
 #: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
-#: capplets/windows/gnome-window-properties.c:649
+#: capplets/windows/gnome-window-properties.c:650
 msgid "Meta"
 msgstr "Meta"
 
@@ -1011,8 +1011,8 @@ msgid "Structure containing information on the MIME category"
 msgstr "Structure comprenant l'information de la catégorie MIME"
 
 #: capplets/file-types/mime-category-edit-dialog.c:344
-#: capplets/file-types/mime-edit-dialog.c:488
-#: capplets/file-types/mime-edit-dialog.c:592
+#: capplets/file-types/mime-edit-dialog.c:491
+#: capplets/file-types/mime-edit-dialog.c:595
 #: capplets/file-types/service-edit-dialog.c:358
 #: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
@@ -1047,16 +1047,16 @@ msgid "Add File Type"
 msgstr "Ajouter un type de fichier"
 
 #: capplets/file-types/mime-edit-dialog.c:434
-#: capplets/file-types/mime-type-info.c:673
+#: capplets/file-types/mime-type-info.c:674
 msgid "Misc"
 msgstr "Divers"
 
-#: capplets/file-types/mime-edit-dialog.c:483
-#: capplets/file-types/mime-edit-dialog.c:542
+#: capplets/file-types/mime-edit-dialog.c:486
+#: capplets/file-types/mime-edit-dialog.c:545
 msgid "None"
 msgstr "Aucun"
 
-#: capplets/file-types/mime-edit-dialog.c:852
+#: capplets/file-types/mime-edit-dialog.c:855
 msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
@@ -1064,27 +1064,32 @@ msgstr ""
 "Veuillez saisir un type MIME valide. Il doit être de la forme class/type et "
 "ne doit pas contenir d'espace."
 
-#: capplets/file-types/mime-edit-dialog.c:859
+#: capplets/file-types/mime-edit-dialog.c:862
 msgid "A MIME type with that name already exists, overwrite ?."
 msgstr "Un type MIME avec ce nom existe déjà, l'écraser ?"
 
-#: capplets/file-types/mime-edit-dialog.c:924
+#: capplets/file-types/mime-edit-dialog.c:927
 msgid "Category"
 msgstr "Catégorie"
 
-#: capplets/file-types/mime-edit-dialog.c:929
+#: capplets/file-types/mime-edit-dialog.c:932
 msgid "Choose a file category"
 msgstr "Choisissez une catégorie de fichiers"
 
-#: capplets/file-types/mime-type-info.c:667
+#: capplets/file-types/mime-type-info.c:602
+#, c-format
+msgid "View as %s"
+msgstr "Voir en tant que %s"
+
+#: capplets/file-types/mime-type-info.c:668
 msgid "Images"
 msgstr "Images"
 
-#: capplets/file-types/mime-type-info.c:669
+#: capplets/file-types/mime-type-info.c:670
 msgid "Video"
 msgstr "Vidéo"
 
-#: capplets/file-types/mime-type-info.c:671
+#: capplets/file-types/mime-type-info.c:672
 msgid "Audio"
 msgstr "Audio"
 
@@ -1093,7 +1098,7 @@ msgstr "Audio"
 msgid "Model for categories only"
 msgstr "Modèle pour catégories"
 
-#: capplets/file-types/mime-types-model.c:421
+#: capplets/file-types/mime-types-model.c:422
 msgid "Internet Services"
 msgstr "Services Internet"
 
@@ -1502,7 +1507,7 @@ msgstr "silence"
 msgid "Set your keyboard preferences"
 msgstr "Règle les paramètres de votre clavier"
 
-#: capplets/mouse/gnome-mouse-properties.c:437
+#: capplets/mouse/gnome-mouse-properties.c:439
 #, c-format
 msgid ""
 "<b>Unknown Cursor</b>\n"
@@ -1511,7 +1516,7 @@ msgstr ""
 "<b>Curseur inconnu</b>\n"
 "%s"
 
-#: capplets/mouse/gnome-mouse-properties.c:538
+#: capplets/mouse/gnome-mouse-properties.c:541
 msgid ""
 "<b>Default Cursor - Current</b>\n"
 "The default cursor that ships with X"
@@ -1519,7 +1524,7 @@ msgstr ""
 "<b>Curseur par défaut - Courant</b>\n"
 "Le curseur par défaut livré avec X Window"
 
-#: capplets/mouse/gnome-mouse-properties.c:541
+#: capplets/mouse/gnome-mouse-properties.c:544
 msgid ""
 "<b>Default Cursor</b>\n"
 "The default cursor that ships with X"
@@ -1527,7 +1532,7 @@ msgstr ""
 "<b>Curseur par défaut</b>\n"
 "Le curseur par défaut livré avec X Window"
 
-#: capplets/mouse/gnome-mouse-properties.c:559
+#: capplets/mouse/gnome-mouse-properties.c:562
 msgid ""
 "<b>White Cursor - Current</b>\n"
 "The default cursor inverted"
@@ -1535,7 +1540,7 @@ msgstr ""
 "<b>Curseur blanc - Courant</b>\n"
 "Le curseur par défaut inversé"
 
-#: capplets/mouse/gnome-mouse-properties.c:562
+#: capplets/mouse/gnome-mouse-properties.c:565
 msgid ""
 "<b>White Cursor</b>\n"
 "The default cursor inverted"
@@ -1543,7 +1548,7 @@ msgstr ""
 "<b>Curseur blanc</b>\n"
 "Le curseur par défaut inversé"
 
-#: capplets/mouse/gnome-mouse-properties.c:580
+#: capplets/mouse/gnome-mouse-properties.c:583
 msgid ""
 "<b>Large Cursor - Current</b>\n"
 "Large version of normal cursor"
@@ -1551,7 +1556,7 @@ msgstr ""
 "<b>Grand curseur - Courant</b>\n"
 "Version agrandie du curseur par défaut"
 
-#: capplets/mouse/gnome-mouse-properties.c:583
+#: capplets/mouse/gnome-mouse-properties.c:586
 msgid ""
 "<b>Large Cursor</b>\n"
 "Large version of normal cursor"
@@ -1559,7 +1564,7 @@ msgstr ""
 "<b>Grand curseur</b>\n"
 "Version agrandie du curseur par défaut"
 
-#: capplets/mouse/gnome-mouse-properties.c:601
+#: capplets/mouse/gnome-mouse-properties.c:604
 msgid ""
 "<b>Large White Cursor - Current</b>\n"
 "Large version of white cursor"
@@ -1567,7 +1572,7 @@ msgstr ""
 "<b>Grand curseur blanc - Courant</b>\n"
 "Version agrandie du curseur blanc"
 
-#: capplets/mouse/gnome-mouse-properties.c:604
+#: capplets/mouse/gnome-mouse-properties.c:607
 msgid ""
 "<b>Large White Cursor</b>\n"
 "Large version of white cursor"
@@ -1780,7 +1785,7 @@ msgstr "Proxy HTTP _sécurisé :"
 msgid "_Username:"
 msgstr "_Identifiant :"
 
-#: capplets/sound/sound-properties-capplet.c:180
+#: capplets/sound/sound-properties-capplet.c:175
 msgid "Sound preferences"
 msgstr "Préférences du son"
 
@@ -1965,7 +1970,7 @@ msgid "_Location of new theme:"
 msgstr "_Emplacement du nouveau thème :"
 
 #: capplets/theme-switcher/gnome-theme-details.c:372
-#: capplets/theme-switcher/gnome-theme-manager.c:609
+#: capplets/theme-switcher/gnome-theme-manager.c:610
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -1979,13 +1984,13 @@ msgstr ""
 msgid "Theme name must be present"
 msgstr "Le nom du thème doit être indiqué"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:665
-#: capplets/theme-switcher/gnome-theme-manager.c:725
+#: capplets/theme-switcher/gnome-theme-manager.c:666
+#: capplets/theme-switcher/gnome-theme-manager.c:726
 msgid "Custom theme"
 msgstr "Thème personnalisé"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:665
-#: capplets/theme-switcher/gnome-theme-manager.c:725
+#: capplets/theme-switcher/gnome-theme-manager.c:666
+#: capplets/theme-switcher/gnome-theme-manager.c:726
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr ""
 "Vous pouvez enregistrer ce thème en cliquant sur le bouton « Enregistrer le "
@@ -2134,19 +2139,19 @@ msgstr ""
 "\n"
 "%s"
 
-#: capplets/windows/gnome-window-properties.c:624
+#: capplets/windows/gnome-window-properties.c:625
 msgid "Control"
 msgstr "Contrôle"
 
-#: capplets/windows/gnome-window-properties.c:629
+#: capplets/windows/gnome-window-properties.c:630
 msgid "Alt"
 msgstr "Alt"
 
-#: capplets/windows/gnome-window-properties.c:635
+#: capplets/windows/gnome-window-properties.c:636
 msgid "Hyper"
 msgstr "Hyper"
 
-#: capplets/windows/gnome-window-properties.c:642
+#: capplets/windows/gnome-window-properties.c:643
 msgid "Super (or \"Windows logo\")"
 msgstr "Super (ou « logo fenêtre »)"
 
@@ -2375,11 +2380,11 @@ msgid "Can't find an hbox, using a normal file selection"
 msgstr ""
 "Impossible de trouver une hbox, utilisation d'un sélecteur de fichier normal"
 
-#: libsounds/sound-view.c:122
+#: libsounds/sound-view.c:128
 msgid "The sound file for this event does not exist."
 msgstr "Le fichier son défini pour cet événement n'existe pas."
 
-#: libsounds/sound-view.c:124
+#: libsounds/sound-view.c:130
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -2389,23 +2394,23 @@ msgstr ""
 "Vous devriez installer le paquet gnome-audio afin de\n"
 "disposer d'un jeu de sons par défaut."
 
-#: libsounds/sound-view.c:216
+#: libsounds/sound-view.c:222
 msgid "Event"
 msgstr "Événement"
 
-#: libsounds/sound-view.c:223
+#: libsounds/sound-view.c:229
 msgid "File to play"
 msgstr "Fichier à jouer"
 
-#: libsounds/sound-view.c:238
+#: libsounds/sound-view.c:244
 msgid "_Sounds"
 msgstr "_Sons"
 
-#: libsounds/sound-view.c:252
+#: libsounds/sound-view.c:258
 msgid "_Play"
 msgstr "_Jouer"
 
-#: libsounds/sound-view.c:258
+#: libsounds/sound-view.c:264
 msgid "Select sound file"
 msgstr "Sélectionnez le fichier son"
 
@@ -2416,11 +2421,11 @@ msgstr ""
 "Le gestionnaire de fenêtres « %s » n'a pas enregistré d'outil de "
 "configuration\n"
 
-#: libwindow-settings/metacity-window-manager.c:374
+#: libwindow-settings/metacity-window-manager.c:378
 msgid "Maximize"
 msgstr "Agrandir"
 
-#: libwindow-settings/metacity-window-manager.c:375
+#: libwindow-settings/metacity-window-manager.c:379
 msgid "Roll up"
 msgstr "Replier"
 
