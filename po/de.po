@@ -1,5 +1,6 @@
 # German translation of gnome-control-center.
 # Copyright (C) 1998-2002 Free Software Foundation, Inc.
+# Christian Neumair <chris@gnome-de.org>, 2002.
 # Christian Meyer <chrisime@gnome.org>, 2000, 2001, 2002.
 # Karl Eichwalder <ke@suse.de>, 1999, 2000.
 # Matthias Warkus <mawa@iname.com>, 1999.
@@ -8,9 +9,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: control-center 2.0.x\n"
-"POT-Creation-Date: 2002-12-02 13:43+0100\n"
-"PO-Revision-Date: 2002-12-02 13:43+0100\n"
+"Project-Id-Version: control-center 2.2.x\n"
+"POT-Creation-Date: 2002-12-08 05:08+0100\n"
+"PO-Revision-Date: 2002-12-08 05:08+0100\n"
 "Last-Translator: Christian Neumair <chris@gnome-de.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -58,6 +59,7 @@ msgstr ""
 #: capplets/file-types/file-types-properties.glade.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: capplets/network/gnome-network-preferences.glade.h:2
+#: capplets/theme-switcher/theme-properties.glade.h:1
 #: capplets/theme-switcher/theme-install.glade.h:1
 msgid "*"
 msgstr "*"
@@ -112,11 +114,11 @@ msgstr "_Ignorieren von Tasten aktivieren"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
 msgid "Enable Slo_w Keys"
-msgstr "Tastatur_verzögerung aktivieren"
+msgstr "Tasten_verzögerung aktivieren"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
 msgid "Enable _Mouse Keys"
-msgstr "Tastatur-_Maus aktivieren"
+msgstr "Tastatur_maus aktivieren"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
 msgid "Enable _Sticky Keys"
@@ -246,7 +248,7 @@ msgstr "Sekunden"
 #. solid
 #: capplets/background/background-properties-capplet.c:228
 msgid "C_olor:"
-msgstr "F_arbe:"
+msgstr "_Farbe:"
 
 #. horiz
 #: capplets/background/background-properties-capplet.c:232
@@ -268,27 +270,27 @@ msgstr "_Untere Farbe:"
 
 #: capplets/background/background-properties-capplet.c:398
 msgid "_Wallpaper"
-msgstr "_Hintergrundbild"
+msgstr "_Tapezieren"
 
 #: capplets/background/background-properties-capplet.c:398
 msgid "C_entered"
-msgstr "Z_entriert"
+msgstr "_Zentrieren"
 
 #: capplets/background/background-properties-capplet.c:398
 msgid "_Scaled"
-msgstr "_Skaliert"
+msgstr "Ska_lieren"
 
 #: capplets/background/background-properties-capplet.c:398
 msgid "Stretc_hed"
-msgstr "Gestrec_kt"
+msgstr "St_recken"
 
 #: capplets/background/background-properties-capplet.c:398
 msgid "_No Picture"
-msgstr "_Keine Grafik"
+msgstr "_Kein Bild"
 
 #: capplets/background/background-properties-capplet.c:433
 msgid "Select _picture:"
-msgstr "_Grafik wählen:"
+msgstr "Wählen Sie ein _Bild:"
 
 #: capplets/background/background-properties-capplet.c:567
 #: capplets/common/capplet-util.c:243
@@ -302,7 +304,7 @@ msgstr "Übernommene Einstellungen finden und speichern"
 #: capplets/background/background-properties-capplet.c:593
 #: capplets/background/background-properties.glade.h:2
 msgid "Background Preferences"
-msgstr "Hintergrund-Eigenschaften"
+msgstr "Hintergrund-Einstellungen"
 
 #: capplets/background/background-properties.glade.h:1
 msgid "A preview of the background picture."
@@ -322,11 +324,11 @@ msgstr "Horizontaler Verlauf"
 
 #: capplets/background/background-properties.glade.h:6
 msgid "Pick a color"
-msgstr "Wählen Sie eine Farbe aus"
+msgstr "Wählen Sie eine Farbe"
 
 #: capplets/background/background-properties.glade.h:7
 msgid "Picture Options:"
-msgstr "Grafikoptionen:"
+msgstr "Bildoptionen:"
 
 #: capplets/background/background-properties.glade.h:8
 #: libbackground/preview-file-selection.c:212
@@ -352,8 +354,8 @@ msgstr "Name des Hintergrundbildes."
 #: capplets/background/background-properties.glade.h:13
 msgid "To set the background picture, drop an image or click to browse."
 msgstr ""
-"Um ein Hintergrundbild zu setzen, lassen Sie ein Bild fallen oder \"Auswählen"
-"\" klicken."
+"Legen Sie hier ein Bild ab oder klicken Sie auf »Auswählen«, um das "
+"Hintergrundbild festzulegen."
 
 #: capplets/background/background-properties.glade.h:14
 msgid "Vertical gradient"
@@ -365,9 +367,9 @@ msgid ""
 "into the window to set the \n"
 "background picture."
 msgstr ""
-"Sie können Grafiken in dieses\n"
-"Fenster ziehen um sie als\n"
-"Hintergrundbild zu verwenden."
+"Sie können eine Bilddatei in dieses\n"
+"Fenster ziehen und dort ablegen,\n"
+"um sie als Hintergrundbild zu verwenden."
 
 #: capplets/background/background.desktop.in.h:1
 msgid "Background"
@@ -539,10 +541,12 @@ msgstr "Objektdaten des Eigenschafteneditors"
 msgid "Custom data required by the specific property editor"
 msgstr "Vom spezifischen Eigenschafteneditor benötigte individuelle Daten"
 
+# CHECK
 #: capplets/common/gconf-property-editor.c:226
 msgid "Property editor data freeing callback"
 msgstr "Eigenschafteneditor-Daten-Freimachungs-Rückruf"
 
+# CHECK
 #: capplets/common/gconf-property-editor.c:227
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr ""
@@ -571,13 +575,13 @@ msgid ""
 "Please select a different picture instead."
 msgstr ""
 "Datei »%s« konnte nicht geöffnet werden.\n"
-"Möglicherweise ist es ein noch nicht unterstützter Grafiktyp.\n"
+"Möglicherweise ist es ein noch nicht unterstützter Bildtyp.\n"
 "\n"
-"Bitte wählen Sie eine andere Grafik."
+"Bitte wählen Sie ein anderes Bild."
 
 #: capplets/common/gconf-property-editor.c:1583
 msgid "Please select an image."
-msgstr "Bitte wählen Sie eine Grafik."
+msgstr "Bitte wählen Sie ein Bild."
 
 #: capplets/default-applications/default-applications.desktop.in.h:1
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:19
@@ -622,7 +626,7 @@ msgstr "B_efehl:"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:9
 msgid "Custom Editor Properties"
-msgstr "Benutzerdef. Editoreigenschaften"
+msgstr "Benutzerdefinierte Editoreigenschaften"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:10
 msgid "Default Help Browser"
@@ -715,7 +719,7 @@ msgstr "_Name:"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:32
 msgid "_Properties..."
-msgstr "_Eigenschaften..."
+msgstr "Ei_genschaften..."
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:33
 msgid "_Select a Help Browser:"
@@ -1179,11 +1183,11 @@ msgstr "Bester _Kontrast"
 
 #: capplets/font/font-properties.glade.h:3
 msgid "De_tails..."
-msgstr "Detai_ls..."
+msgstr "De_tails..."
 
 #: capplets/font/font-properties.glade.h:4
 msgid "Font Preferences"
-msgstr "Schrift-Eigenschaften"
+msgstr "Schrift-Einstellungen"
 
 #: capplets/font/font-properties.glade.h:5
 msgid "Font Rendering"
@@ -1191,15 +1195,15 @@ msgstr "Schriftwiedergabe"
 
 #: capplets/font/font-properties.glade.h:6
 msgid "Font Rendering Details"
-msgstr "Schriftwiedergabe-Details"
+msgstr "Details zur Schriftwiedergabe"
 
 #: capplets/font/font-properties.glade.h:7
 msgid "G_rayscale"
-msgstr "G_raustufen"
+msgstr "_Graustufen"
 
 #: capplets/font/font-properties.glade.h:8
 msgid "Hinting:"
-msgstr "Andeuten:"
+msgstr "Hinting:"
 
 #: capplets/font/font-properties.glade.h:9
 msgid "N_one"
@@ -1207,15 +1211,15 @@ msgstr "_Deaktivieren"
 
 #: capplets/font/font-properties.glade.h:10
 msgid "Resolution (_dots per inch):"
-msgstr "Auflösung (_Punkte pro Inch):"
+msgstr "Auflösung (in _Punkt pro Inch):"
 
 #: capplets/font/font-properties.glade.h:11
 msgid "Set the font for applications"
-msgstr "Schrift für Anwendungen setzen"
+msgstr "Die in Anwendungen verwendete Schrift festlegen"
 
 #: capplets/font/font-properties.glade.h:12
 msgid "Set the font for the icons on the desktop"
-msgstr "Schrift für Icons auf dem Desktop setzen"
+msgstr "Die Schrift für Icons auf dem Desktop festlegen"
 
 #: capplets/font/font-properties.glade.h:13
 msgid "Set the monospace font for terminals and similar applications"
@@ -1224,19 +1228,19 @@ msgstr ""
 
 #: capplets/font/font-properties.glade.h:14
 msgid "Smoothing:"
-msgstr "Glättung"
+msgstr "Kantenglättung:"
 
 #: capplets/font/font-properties.glade.h:15
 msgid "Sub_pixel (LCDs)"
-msgstr "Sub_pixel (LCDs)"
+msgstr "_Subpixel (LCDs)"
 
 #: capplets/font/font-properties.glade.h:16
 msgid "Sub_pixel smoothing (LCDs)"
-msgstr "Sub_pixel-Glättung (LCDs)"
+msgstr "Glättung der Sub_pixel (LCDs)"
 
 #: capplets/font/font-properties.glade.h:17
 msgid "Subpixel order:"
-msgstr "Subpixel-Reihenfolge:"
+msgstr "Reihenfolge der Subpixel:"
 
 #: capplets/font/font-properties.glade.h:18
 msgid "VB_GR"
@@ -1256,7 +1260,7 @@ msgstr "_Desktop-Schrift:"
 
 #: capplets/font/font-properties.glade.h:22
 msgid "_Full"
-msgstr "_Voll"
+msgstr "S_tark"
 
 #: capplets/font/font-properties.glade.h:23
 msgid "_Medium"
@@ -1268,7 +1272,7 @@ msgstr "_Schwarz-Weiß"
 
 #: capplets/font/font-properties.glade.h:25
 msgid "_None"
-msgstr "_Deaktivieren"
+msgstr "Dea_ktivieren"
 
 #: capplets/font/font-properties.glade.h:26
 msgid "_RGB"
@@ -1276,7 +1280,7 @@ msgstr "_RGB"
 
 #: capplets/font/font-properties.glade.h:27
 msgid "_Slight"
-msgstr "_Gering"
+msgstr "Geri_ng"
 
 #: capplets/font/font-properties.glade.h:28
 msgid "_Terminal font:"
@@ -1309,7 +1313,7 @@ msgid "The type of accelerator."
 msgstr "Der Typ der Tastenkombination."
 
 #: capplets/keybindings/eggcellrendererkeys.c:219
-#: capplets/keybindings/gnome-keybinding-properties.c:181
+#: capplets/keybindings/gnome-keybinding-properties.c:202
 #: libbackground/applier.c:588
 msgid "Disabled"
 msgstr "Deaktiviert"
@@ -1325,43 +1329,48 @@ msgstr ""
 msgid "Type a new accelerator"
 msgstr "Eine neue Tastenkombination eingeben"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:448
+#: capplets/keybindings/gnome-keybinding-properties.c:538
 msgid "<Unknown Action>"
 msgstr "<Unbekannte AKtion>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:467
+#: capplets/keybindings/gnome-keybinding-properties.c:557
 msgid "Desktop"
 msgstr "Desktop"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:471
+#: capplets/keybindings/gnome-keybinding-properties.c:561
 msgid "Window Management"
 msgstr "Fensterverwaltung"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:593
+#: capplets/keybindings/gnome-keybinding-properties.c:696
 #, c-format
-msgid "That accelerator key is already in use by: %s\n"
-msgstr "Diese Tastenkombination wird bereits von %s verwendet\n"
+msgid ""
+"The shortcut \"%s\" is already used for:\n"
+" \"%s\"\n"
+msgstr ""
+"Die Tastenkomination »%s« wird bereits für\n"
+" »%s«\n"
+"verwendet.\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:620
+#: capplets/keybindings/gnome-keybinding-properties.c:727
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 "Fehler beim Speichern der neuen Tastenkombination in der Konfigurations-"
 "Datenbank: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:771
+#: capplets/keybindings/gnome-keybinding-properties.c:878
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
 msgstr ""
-"Keyboard-Themen konnten nicht gefunden werden. Das bedeutet, dass GTK+ nicht "
+"Tastaturthemen konnten nicht gefunden werden. Dies bedeutet, dass GTK+ nicht "
 "richtig installiert wurde."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:793
+#: capplets/keybindings/gnome-keybinding-properties.c:900
 msgid "Action"
 msgstr "Aktion"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:811
+#: capplets/keybindings/gnome-keybinding-properties.c:919
 msgid "Shortcut"
 msgstr "Tastenkombination"
 
@@ -1409,19 +1418,19 @@ msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:2
 msgid "<small><i>Fast</i></small>"
-msgstr "<small><i>Schnell</i></small>"
+msgstr "<small><i>Hoch</i></small>"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:3
 msgid "<small><i>Long</i></small>"
-msgstr "<small><i>Lang</i></small>"
+msgstr "<small><i>Hoch</i></small>"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:4
 msgid "<small><i>Short</i></small>"
-msgstr "<small><i>Kurz</i></small>"
+msgstr "<small><i>Gering</i></small>"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:5
 msgid "<small><i>Slow</i></small>"
-msgstr "<small><i>Langsam</i></small>"
+msgstr "<small><i>Gering</i></small>"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "Bee_p"
@@ -1445,11 +1454,11 @@ msgstr "Tastaturglocke"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Keyboard Preferences"
-msgstr "Tastatur-Eigenschaften"
+msgstr "Tastatur-Einstellungen"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Keyboard _repeats when key is held down"
-msgstr "Taste wird _wiederholt ausgelöst wenn sie heruntergedrückt ist"
+msgstr "Taste _wiederholt auslösen, wenn sie heruntergedrückt wird"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Keypress Click"
@@ -1465,7 +1474,7 @@ msgstr "_Barrierefreiheit..."
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "_Blinks in text boxes and fields"
-msgstr "_Blinkender Cursor in Textboxen und -feldern"
+msgstr "B_linkender Cursor in Textboxen und -feldern"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:20
 msgid "_Delay:"
@@ -1473,7 +1482,7 @@ msgstr "_Verzögerung:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:21
 msgid "_Off"
-msgstr "A_us"
+msgstr "_Deaktivieren"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid "_Speed:"
@@ -1493,7 +1502,7 @@ msgstr "leise"
 
 #: capplets/keyboard/keyboard.desktop.in.h:2
 msgid "Set your keyboard preferences"
-msgstr "Tastatur-Eigenschaften festlegen"
+msgstr "Die Tastatur-Einstellungen festlegen"
 
 #: capplets/mouse/gnome-mouse-properties.c:476
 #, c-format
@@ -1573,8 +1582,8 @@ msgid ""
 "<b>Note:</b> You will need to logout and log back in for this setting to "
 "take effect."
 msgstr ""
-"<b>Hinweis:</b> Sie müssen sich neu anmelden damit diese Einstellung aktiv "
-"wird."
+"<b>Hinweis:</b> Sie müssen sich neu anmelden, damit diese Einstellung "
+"wirksam wird."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:2
 msgid "<i>Fast</i>"
@@ -1586,11 +1595,11 @@ msgstr "<i>Hoch</i>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:4
 msgid "<i>Large</i>"
-msgstr "<i>Groß</i>"
+msgstr "<i>Hoch</i>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:5
 msgid "<i>Low</i>"
-msgstr "<i>Niedrig</i>"
+msgstr "<i>Gering</i>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:6
 msgid "<i>Slow</i>"
@@ -1598,14 +1607,14 @@ msgstr "<i>Gering</i>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:7
 msgid "<i>Small</i>"
-msgstr "<i>Klein</i>"
+msgstr "<i>Gering</i>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid ""
 "Animates a quick marker around the cursor when the Control key has been "
 "pressed and released."
 msgstr ""
-"Animiert eine schnelle Markierung um den Cursor, wenn die Steuerungs-Taste "
+"Animiert eine schnelle Markierung um den Cursor, wenn die Steuerung-Taste "
 "gedrückt und losgelassen wurde."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:9
@@ -1622,18 +1631,18 @@ msgstr "Cursor"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:12
 msgid "Double-click Delay"
-msgstr "Verzögerung beim Doppelklick"
+msgstr "Verzögerung bei Doppelklick"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:13
 msgid "Drag and Drop"
-msgstr "Drag and Drop"
+msgstr "Ziehen und Ablegen"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:14
 msgid ""
 "Left-handed mouse mode switches the left and right buttons on the mouse."
 msgstr ""
-"Mauseinstellung für Linkshänder mit vertauschter rechter und linker "
-"Maustaste."
+"Im Maus-Modus für Linkshänder werden die rechte und linke Maustaste "
+"vertauscht."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:15
 msgid "Locate Pointer"
@@ -1644,8 +1653,8 @@ msgid ""
 "Maximum time allowed between clicks when double-clicking.   Use the box on "
 "the right to test."
 msgstr ""
-"Maximaler Zeitraum zwischen den Klicks eines Doppelklicks.  Zum Testen "
-"rechtes Feld verwenden."
+"Der maximaler Zeitraum zwischen zwei Klicks, damit diese als Doppelklick "
+"erkannt werden. Sie können die Einstellung im rechten Feld ausprobieren."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:17
 msgid "Motion"
@@ -1653,21 +1662,21 @@ msgstr "Bewegung"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:18
 msgid "Mouse Orientation"
-msgstr "Maus-Orientierung"
+msgstr "Ausrichtung der Maus"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "Mouse Preferences"
-msgstr "Maus-Eigenschaften"
+msgstr "Maus-Einstellungen"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:20
 msgid "Set the distance you need to move your cursor before dragging an item."
 msgstr ""
-"Stellt die Distanz, die der Cursor bewegt werden muss, um ein Objekt zu "
-"verschieben, ein."
+"Legt die Distanz fest, die der Cursor bewegt werden muss, um ein Objekt zu "
+"verschieben."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:21
 msgid "Set the speed of your pointing device."
-msgstr "Geschwindigkeit des Mauszeigers anpassen."
+msgstr "Hier können Sie die Geschwindigkeit des Mauszeigers anpassen."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:22
 msgid "Speed"
@@ -1679,7 +1688,7 @@ msgstr "_Beschleunigung:"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:24
 msgid "_Delay (sec):"
-msgstr "_Verzögerung (Sek.):"
+msgstr "_Verzögerung (in Sekunden):"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:25
 msgid "_Left-handed mouse"
@@ -1691,7 +1700,7 @@ msgstr "_Empfindlichkeit:"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:27
 msgid "_Show position of cursor when the Control key is pressed"
-msgstr "Die Cursor-Position _zeigen wenn »Strg« gedrückt wird"
+msgstr "Die Cursor-Position _hervorheben, wenn »Strg« gedrückt wird"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:28
 msgid "_Threshold:"
@@ -1707,7 +1716,7 @@ msgstr "Netzwerk-Proxy"
 
 #: capplets/network/gnome-network-preferences.desktop.in.h:2
 msgid "Network proxy preferences"
-msgstr "Eigenschaften des Netzwerk-Proxys"
+msgstr "Einstellungen des Netzwerk-Proxys"
 
 #: capplets/network/gnome-network-preferences.glade.h:1
 msgid "      "
@@ -1775,7 +1784,7 @@ msgstr "_Benutzername:"
 
 #: capplets/sound/sound-properties-capplet.c:180
 msgid "Sound preferences"
-msgstr "Audio-Eigenschaften"
+msgstr "Audio-Einstellungen"
 
 #: capplets/sound/sound-properties.glade.h:1
 msgid "E_nable sound server startup"
@@ -1791,7 +1800,7 @@ msgstr "Klangereignisse"
 
 #: capplets/sound/sound-properties.glade.h:4
 msgid "Sound Preferences"
-msgstr "Audio-Eigenschaften"
+msgstr "Audio-Einstellungen"
 
 #: capplets/sound/sound-properties.glade.h:5
 msgid "_Sounds for events"
@@ -1856,38 +1865,50 @@ msgid "Select themes for various parts of the desktop"
 msgstr "Themen für verschiedenste Teile des Desktops festlegen"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
-#: capplets/theme-switcher/theme-properties.glade.h:6
 msgid "Theme"
 msgstr "Thema"
 
-#: capplets/theme-switcher/theme-properties.glade.h:1
+#: capplets/theme-switcher/theme-properties.glade.h:2
+msgid "<span size=\"larger\" weight=\"bold\">Save theme to disk</span>"
+msgstr ""
+"<span size=\"larger\" weight=\"bold\">Thema auf der Platte speichern</span>"
+
+#: capplets/theme-switcher/theme-properties.glade.h:3
 msgid "Apply _Background"
 msgstr "_Hintergrund anwenden"
 
-#: capplets/theme-switcher/theme-properties.glade.h:2
+#: capplets/theme-switcher/theme-properties.glade.h:4
 msgid "Apply _Font"
 msgstr "_Schrift anwenden"
 
-#: capplets/theme-switcher/theme-properties.glade.h:3
+#: capplets/theme-switcher/theme-properties.glade.h:5
 msgid "Controls"
 msgstr "Fensterinhalt"
 
-#: capplets/theme-switcher/theme-properties.glade.h:4
+#: capplets/theme-switcher/theme-properties.glade.h:6
 msgid "Icons"
 msgstr "Icons"
 
-#: capplets/theme-switcher/theme-properties.glade.h:5
+#: capplets/theme-switcher/theme-properties.glade.h:7
 msgid "New themes can also be installed by dragging them into the window."
 msgstr ""
-"Neue Themen können installiert werden, indem Sie diese in dieses Fenster "
-"ziehen."
+"Sie können neue Themen installieren, indem Sie diese in dieses Fenster "
+"ziehen und dort ablegen."
+
+#: capplets/theme-switcher/theme-properties.glade.h:8
+msgid "Short _Description:"
+msgstr "Kurz_beschreibung:"
+
+#: capplets/theme-switcher/theme-properties.glade.h:9
+msgid "Theme Details"
+msgstr "Details zum Thema"
 
 # CHECK
-#: capplets/theme-switcher/theme-properties.glade.h:7
+#: capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Theme Preferences"
 msgstr "Themen-Einstellungen"
 
-#: capplets/theme-switcher/theme-properties.glade.h:8
+#: capplets/theme-switcher/theme-properties.glade.h:11
 msgid ""
 "This theme suggests a\n"
 "background:"
@@ -1895,7 +1916,7 @@ msgstr ""
 "Dieses Thema empfiehlt\n"
 "einen dazu passenden Hintergrund:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:10
+#: capplets/theme-switcher/theme-properties.glade.h:13
 msgid ""
 "This theme suggests a\n"
 "font and background"
@@ -1903,7 +1924,7 @@ msgstr ""
 "Dieses Thema empfiehlt eine\n"
 "dazu passende Schrift und einen Hintergrund:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:12
+#: capplets/theme-switcher/theme-properties.glade.h:15
 msgid ""
 "This theme suggests a\n"
 "font:"
@@ -1911,21 +1932,29 @@ msgstr ""
 "Dieses Thema empfiehlt\n"
 "eine dazu passende Schrift:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:14
+#: capplets/theme-switcher/theme-properties.glade.h:17
 msgid "Window Border"
 msgstr "Fensterrahmen"
 
-#: capplets/theme-switcher/theme-properties.glade.h:15
+#: capplets/theme-switcher/theme-properties.glade.h:18
+msgid "_Details..."
+msgstr "_Details..."
+
+#: capplets/theme-switcher/theme-properties.glade.h:19
 msgid "_Go to theme folder"
 msgstr "_Themenverzeichnis öffnen"
 
-#: capplets/theme-switcher/theme-properties.glade.h:16
-msgid "_Install New Theme..."
-msgstr "Neues Thema _installieren..."
+#: capplets/theme-switcher/theme-properties.glade.h:20
+msgid "_Install theme..."
+msgstr "Thema _installieren..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:17
-msgid "_Save Theme"
+#: capplets/theme-switcher/theme-properties.glade.h:21
+msgid "_Save theme"
 msgstr "Thema _speichern"
+
+#: capplets/theme-switcher/theme-properties.glade.h:22
+msgid "_Theme name:"
+msgstr "Name des _Themas:"
 
 #: capplets/theme-switcher/theme-install.glade.h:2
 msgid "Install new theme"
@@ -1939,22 +1968,30 @@ msgstr "_Installieren"
 msgid "_Location of new theme:"
 msgstr "_Adresse des neuen Themas:"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:640
-msgid "Current modified"
-msgstr "Aktuell geändert"
-
-#: capplets/theme-switcher/gnome-theme-manager.c:659
+#: capplets/theme-switcher/gnome-theme-details.c:319
+#: capplets/theme-switcher/gnome-theme-manager.c:463
 msgid ""
 "No themes could be found on your system.  This probably means that your "
-"\"Theme Preferences\" dialog was improperly installed."
+"\"Theme Preferences\" dialog was improperly installed, or you haven't "
+"installed the \"gnome-themes\" package."
 msgstr ""
-"Es konnten keine Themen auf Ihrem Rechner gefunden werden. Dies bedeutet "
-"vermutlich, dass der »Themen-Einstellungen«-Dialog nicht korrekt installiert "
-"wurde."
+"Es konnten keine Themen auf diesem Rechner gefunden werden. Dies bedeutet "
+"vermutlich, dass der Dialog »Themen-Einstellungen« oder das Paket »gnome-"
+"themes« nicht korrekt installiert wurde."
+
+#: capplets/theme-switcher/gnome-theme-manager.c:513
+msgid "Custom theme"
+msgstr "Benutzerdefiniertes Thema"
+
+#: capplets/theme-switcher/gnome-theme-manager.c:513
+msgid "You can save this theme by pressing the Save Theme button."
+msgstr ""
+"Sie können dieses Thema speichern, indem Sie den »Thema speichern«-Knopf "
+"anklicken."
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
-msgstr "Aussehen von Werkzeug- und Menüleisten in Anwendungen anpassen."
+msgstr "Das Aussehen von Werkzeug- und Menüleisten in Anwendungen anpassen"
 
 #: capplets/ui-properties/behavior.desktop.in.h:2
 msgid "Menus & Toolbars"
@@ -1986,7 +2023,7 @@ msgstr "Nur Icons"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:5
 msgid "Menu and Toolbar Preferences"
-msgstr "Menü- und Werkzeugleisten-Einstellungen"
+msgstr "Einstellungen der Menüs und Werkzeugleisten"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:6
 msgid "Menus"
@@ -2067,7 +2104,7 @@ msgstr "Ö_ffnen"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:25
 msgid "_Paste"
-msgstr "_Einfügen"
+msgstr "E_infügen"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:26
 msgid "_Print"
@@ -2116,7 +2153,7 @@ msgstr ""
 
 #: capplets/windows/gnome-window-properties.glade.h:2
 msgid "Window Preferences"
-msgstr "Fenster-Eigenschaften"
+msgstr "Fenster-Einstellungen"
 
 #: capplets/windows/gnome-window-properties.glade.h:3
 msgid "_Double-click titlebar to perform this action:"
@@ -2136,7 +2173,7 @@ msgstr "Fenster _aktivieren, wenn sich die Maus darüber befindet"
 
 #: capplets/windows/window-properties.desktop.in.h:1
 msgid "Window Properties"
-msgstr "Fenster-Eigenschaften"
+msgstr "Fenster-Einstellungen"
 
 #: capplets/windows/window-properties.desktop.in.h:2
 msgid "Windows"
@@ -2422,7 +2459,7 @@ msgstr "DPI"
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:3
 msgid "Hinting"
-msgstr "Andeuten"
+msgstr "Hinting"
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:4
 msgid "RGBA Order"
@@ -2463,7 +2500,7 @@ msgid ""
 "\" - no hinting, \"slight\", \"medium\", and \"full\" - as much hinting as "
 "possible; may cause distortion of letter forms."
 msgstr ""
-"Der beim Darstellen von Schriften zu verwendende Grad der Andeutung. "
-"Mögliche Werte sind »none« (kein Andeuten), »slight« (leichtes Andeuten), "
-"»medium (mittleres Andeuten) und »full« (so stark andeuten wie möglich; "
-"führt möglicherweise zu einem verformten Schriftbild)"
+"Der beim Darstellen von Schriften zu verwendende Grad des Hintings. Mögliche "
+"Werte sind »none« (kein Hinting), »slight« (leichtes Hinting), »medium "
+"(mittleres Hinting) und »full« (so starkes Hinting wie möglich; führt "
+"möglicherweise zu einem verformten Schriftbild)"
