@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-center 2.5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-17 15:34+0100\n"
+"POT-Creation-Date: 2004-02-13 09:32-0500\n"
 "PO-Revision-Date: 2004-01-17 14:42+0100\n"
 "Last-Translator: Christophe Merlet (RedFox) <redfox@redfoxcenter.org>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
@@ -277,7 +277,7 @@ msgstr ""
 "modificateur de touche en séquence."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "S_peed:"
 msgstr "_Vitesse :"
 
@@ -306,7 +306,7 @@ msgid "_Only accept keys held for:"
 msgstr "_N'accepter que les touches enfoncées pendant au moins :"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:33
 msgid "_Type to test settings:"
 msgstr "_Saisissez pour tester les réglages :"
 
@@ -388,7 +388,7 @@ msgstr "_Aucune image"
 
 #: capplets/background/background-properties-capplet.c:559
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:730
+#: capplets/default-applications/gnome-default-applications-properties.c:723
 #: capplets/keyboard/gnome-keyboard-properties.c:224
 #: capplets/mouse/gnome-mouse-properties.c:812
 #: capplets/sound/sound-properties-capplet.c:212
@@ -452,13 +452,40 @@ msgstr ""
 "Vous pouvez glisser des images sur la fenêtre pour définir l'arrière-plan."
 
 #: capplets/background/background.desktop.in.h:1
-msgid "Desktop Wallpaper"
-msgstr "Papier peint du bureau"
+#, fuzzy
+msgid "Change your Desktop Background settings"
+msgstr "Personnalise l'arrière-plan de votre bureau"
 
 #: capplets/background/background.desktop.in.h:2
-#: capplets/background/gnome-wp-capplet.c:1146
-msgid "Desktop Wallpaper Preferences"
-msgstr "Préférences du papier peint du bureau"
+#, fuzzy
+msgid "Desktop Background"
+msgstr "Arrière-plan"
+
+#: capplets/background/gnome-background-properties.glade.h:1
+msgid "<b>Desktop _Wallpaper</b>"
+msgstr "<b>_Papier peint du bureau</b>"
+
+#: capplets/background/gnome-background-properties.glade.h:2
+#, fuzzy
+msgid "<b>_Desktop Colors</b>"
+msgstr "<b>_Couleurs du bureau</b> "
+
+#: capplets/background/gnome-background-properties.glade.h:3
+#, fuzzy
+msgid "Desktop Background Preferences"
+msgstr "Préférences de l'arrière-plan"
+
+#: capplets/background/gnome-background-properties.glade.h:4
+msgid "Zgjidh një ngjyrë"
+msgstr ""
+
+#: capplets/background/gnome-background-properties.glade.h:5
+msgid "_Add Wallpaper"
+msgstr "A_jouter un papier peint"
+
+#: capplets/background/gnome-background-properties.glade.h:6
+msgid "_Style:"
+msgstr "_Style :"
 
 #: capplets/background/gnome-wp-capplet.c:72
 #: capplets/common/capplet-util.c:340
@@ -466,52 +493,35 @@ msgstr "Préférences du papier peint du bureau"
 msgid "There was an error displaying help: %s"
 msgstr "Il y a eu une erreur lors de l'affichage de l'aide : %s"
 
-#: capplets/background/gnome-wp-capplet.c:169
+#: capplets/background/gnome-wp-capplet.c:171
 msgid "Add Wallpapers"
 msgstr "Ajuter des papiers peints"
 
-#: capplets/background/gnome-wp-capplet.c:1191
-msgid "<b>Desktop _Wallpaper</b>"
-msgstr "<b>_Papier peint du bureau</b>"
-
-#: capplets/background/gnome-wp-capplet.c:1276
-msgid "_Style:"
-msgstr "_Style :"
-
-#: capplets/background/gnome-wp-capplet.c:1303
+#: capplets/background/gnome-wp-capplet.c:1265
 msgid "Centered"
 msgstr "Centré"
 
-#: capplets/background/gnome-wp-capplet.c:1325
+#: capplets/background/gnome-wp-capplet.c:1287
 msgid "Fill Screen"
 msgstr "Remplir l'écran"
 
-#: capplets/background/gnome-wp-capplet.c:1345
+#: capplets/background/gnome-wp-capplet.c:1307
 msgid "Scaled"
 msgstr "Redimensionné"
 
-#: capplets/background/gnome-wp-capplet.c:1365
+#: capplets/background/gnome-wp-capplet.c:1327
 msgid "Tiled"
 msgstr "Mosaïque"
 
-#: capplets/background/gnome-wp-capplet.c:1402
-msgid "_Add Wallpaper"
-msgstr "A_jouter un papier peint"
-
-#. The Wallpaper Background Colors Section
-#: capplets/background/gnome-wp-capplet.c:1433
-msgid "<b>_Desktop Colors</b> "
-msgstr "<b>_Couleurs du bureau</b> "
-
-#: capplets/background/gnome-wp-capplet.c:1465
+#: capplets/background/gnome-wp-capplet.c:1359
 msgid "Solid Color"
 msgstr "Couleur unie"
 
-#: capplets/background/gnome-wp-capplet.c:1481
+#: capplets/background/gnome-wp-capplet.c:1375
 msgid "Horizontal Gradient"
 msgstr "Dégradé horizontal"
 
-#: capplets/background/gnome-wp-capplet.c:1497
+#: capplets/background/gnome-wp-capplet.c:1391
 msgid "Vertical Gradient"
 msgstr "Dégradé vertical"
 
@@ -729,35 +739,45 @@ msgstr "Applications préférées"
 msgid "Select your default applications"
 msgstr "Sélectionne vos applications par défaut"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:39
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:9
 msgid "Epiphany"
 msgstr "Epiphany"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:40
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:10
 msgid "Galeon"
 msgstr "Galeon"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:41
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:11
 msgid "Encompass"
 msgstr "Encompass"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:42
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:12
+msgid "Firebird/FireFox"
+msgstr ""
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:13
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:14
 msgid "Mozilla/Netscape 6"
 msgstr "Mozilla/Netscape 6"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:43
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:15
 msgid "Netscape Communicator"
 msgstr "Netscape Communicator"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:44
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:16
 msgid "Konqueror"
 msgstr "Konqueror"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:45
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:17
+#, fuzzy
+msgid "W3M Text Browser"
+msgstr "Navigateur texte Lynx"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:18
 msgid "Lynx Text Browser"
 msgstr "Navigateur texte Lynx"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:46
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:19
 msgid "Links Text Browser"
 msgstr "Navigateur texte Links"
 
@@ -765,44 +785,44 @@ msgstr "Navigateur texte Links"
 #. * there is only one (the first entry in this list) Evolution entry
 #. * in the list shown to the user
 #.
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:55
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:56
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:34
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:35
 msgid "Evolution Mail Reader"
 msgstr "Lecteur de courrier Evolution"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:57
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:36
 msgid "Balsa"
 msgstr "Balsa"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:58
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:37
 msgid "KMail"
 msgstr "KMail"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:59
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:38
 msgid "Mozilla Mail"
 msgstr "Mozilla Mail"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:60
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:39
 msgid "Mutt"
 msgstr "Mutt"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:66
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:50
 msgid "Gnome Terminal"
 msgstr "Terminal Gnome"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:67
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:51
 msgid "Standard XTerminal"
 msgstr "XTerminal standard"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:68
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:52
 msgid "NXterm"
 msgstr "NXterm"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:69
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:53
 msgid "RXVT"
 msgstr "RXVT"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:70
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:54
 msgid "ETerm"
 msgstr "ETerm"
 
@@ -1310,8 +1330,8 @@ msgid "Structure containing information on the MIME category"
 msgstr "Structure comprenant l'information de la catégorie MIME"
 
 #: capplets/file-types/mime-category-edit-dialog.c:344
-#: capplets/file-types/mime-edit-dialog.c:491
-#: capplets/file-types/mime-edit-dialog.c:596
+#: capplets/file-types/mime-edit-dialog.c:489
+#: capplets/file-types/mime-edit-dialog.c:594
 #: capplets/file-types/service-edit-dialog.c:358
 #: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
@@ -1345,18 +1365,18 @@ msgstr "Vrai si ce dialogue sert à ajouter un type MIME"
 msgid "Add File Type"
 msgstr "Ajouter un type de fichier"
 
-#: capplets/file-types/mime-edit-dialog.c:434
-#: capplets/file-types/mime-type-info.c:674
+#: capplets/file-types/mime-edit-dialog.c:432
+#: capplets/file-types/mime-type-info.c:763
 msgid "Misc"
 msgstr "Divers"
 
-#: capplets/file-types/mime-edit-dialog.c:486
-#: capplets/file-types/mime-edit-dialog.c:547
+#: capplets/file-types/mime-edit-dialog.c:484
+#: capplets/file-types/mime-edit-dialog.c:545
 msgid "None"
 msgstr "Aucun"
 
-#: capplets/file-types/mime-edit-dialog.c:852
-#: capplets/file-types/mime-edit-dialog.c:866
+#: capplets/file-types/mime-edit-dialog.c:850
+#: capplets/file-types/mime-edit-dialog.c:864
 msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
@@ -1364,32 +1384,33 @@ msgstr ""
 "Veuillez saisir un type MIME valide. Il doit être de la forme class/type et "
 "ne doit pas contenir d'espace."
 
-#: capplets/file-types/mime-edit-dialog.c:859
-msgid "A MIME type with that name already exists, overwrite ?."
+#: capplets/file-types/mime-edit-dialog.c:857
+#, fuzzy
+msgid "A MIME type with that name already exists, overwrite?"
 msgstr "Un type MIME avec ce nom existe déjà, l'écraser ?"
 
-#: capplets/file-types/mime-edit-dialog.c:931
+#: capplets/file-types/mime-edit-dialog.c:929
 msgid "Category"
 msgstr "Catégorie"
 
-#: capplets/file-types/mime-edit-dialog.c:936
+#: capplets/file-types/mime-edit-dialog.c:934
 msgid "Choose a file category"
 msgstr "Choisissez une catégorie de fichiers"
 
-#: capplets/file-types/mime-type-info.c:602
+#: capplets/file-types/mime-type-info.c:691
 #, c-format
 msgid "View as %s"
 msgstr "Voir en tant que %s"
 
-#: capplets/file-types/mime-type-info.c:668
+#: capplets/file-types/mime-type-info.c:757
 msgid "Images"
 msgstr "Images"
 
-#: capplets/file-types/mime-type-info.c:670
+#: capplets/file-types/mime-type-info.c:759
 msgid "Video"
 msgstr "Vidéo"
 
-#: capplets/file-types/mime-type-info.c:672
+#: capplets/file-types/mime-type-info.c:761
 msgid "Audio"
 msgstr "Audio"
 
@@ -1680,7 +1701,7 @@ msgstr "Le type de l'accélération."
 
 #: capplets/keybindings/eggcellrendererkeys.c:240
 #: capplets/keybindings/gnome-keybinding-properties.c:235
-#: libbackground/applier.c:588 typing-break/drwright.c:448
+#: libbackground/applier.c:588 typing-break/drwright.c:464
 msgid "Disabled"
 msgstr "Désactivé"
 
@@ -1823,20 +1844,22 @@ msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Lent</i></small>"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:10
-msgid "Advanced Layout Options"
-msgstr "Options avancées d'agencement"
+#, fuzzy
+msgid "A_vailable layouts:"
+msgstr "Langues disponibles"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#, fuzzy
+msgid "A_vailable options:"
+msgstr "Langues disponibles"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "All_ow postponing of breaks"
 msgstr "_Autoriser le report des pauses"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Check if breaks are allowed to be postponed"
 msgstr "Vérifier si il est autorisé de reporter les pauses"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
-msgid "Core Layout Configuration"
-msgstr "Configuration principal de l'agencement"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Cursor _blinks in text boxes and fields"
@@ -1863,10 +1886,16 @@ msgid "Keyboard _model:"
 msgstr "_Modèle du clavier :"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:21
-msgid "Layout _options:"
+#, fuzzy
+msgid "Layout Options"
 msgstr "_Options de l'agencement :"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#, fuzzy
+msgid "Layouts"
+msgstr "Agencement"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
@@ -1875,186 +1904,51 @@ msgstr ""
 "causer par une utilisation répétitive du clavier"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:24
+#, fuzzy
+msgid "Reset to de_faults"
+msgstr "_Réinitialiser aux valeurs par défaut"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
 msgid "Typing Break"
 msgstr "Pause de saisie"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "_Accessibility..."
 msgstr "_Accessibilité..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
 msgid "_Break interval lasts:"
 msgstr "Intervalle de _pause se termine :"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
 msgid "_Delay:"
 msgstr "_Délai :"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
-msgid "_Layouts:"
-msgstr "_Agencements :"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
-msgid "_Reset to defaults"
-msgstr "_Réinitialiser aux valeurs par défaut"
-
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:30
+#, fuzzy
+msgid "_Selected layouts:"
+msgstr "_Sélectionnez un éditeur :"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
+#, fuzzy
+msgid "_Selected options:"
+msgstr "_Options de l'image :"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:32
 msgid "_Speed:"
 msgstr "_Vitesse :"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:32
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:34
 msgid "_Work interval lasts:"
 msgstr "Intervalle de _travail se termine :"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:33
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:35
 msgid "minutes"
 msgstr "minutes"
 
 #: capplets/keyboard/keyboard.desktop.in.h:2
 msgid "Set your keyboard preferences"
 msgstr "Règle les paramètres de votre clavier"
-
-#: capplets/localization/gnome-localization-properties.c:184
-msgid "Show"
-msgstr "Afficher"
-
-#: capplets/localization/gnome-localization-properties.c:195
-#: capplets/localization/gnome-localization-properties.glade.h:25
-msgid "Language"
-msgstr "Langue"
-
-#: capplets/localization/gnome-localization-properties.glade.h:1
-msgid "$1,234.56"
-msgstr "$1,234.56"
-
-#: capplets/localization/gnome-localization-properties.glade.h:2
-msgid "1/2/03"
-msgstr "1/2/03"
-
-#: capplets/localization/gnome-localization-properties.glade.h:3
-msgid "12:34 AM"
-msgstr "12:34 AM"
-
-#: capplets/localization/gnome-localization-properties.glade.h:4
-msgid "4:56 PM"
-msgstr "4:56 PM"
-
-#: capplets/localization/gnome-localization-properties.glade.h:5
-msgid "<b>Dates</b>"
-msgstr "<b>Dates</b>"
-
-#: capplets/localization/gnome-localization-properties.glade.h:6
-msgid "<b>Languages in use:</b>"
-msgstr "<b>Langues utilisé :</b>"
-
-#: capplets/localization/gnome-localization-properties.glade.h:7
-msgid "<b>Numbers</b>"
-msgstr "<b>Nombres</b>"
-
-#: capplets/localization/gnome-localization-properties.glade.h:8
-msgid "<b>Times</b>"
-msgstr "<b>Heures</b>"
-
-#: capplets/localization/gnome-localization-properties.glade.h:9
-msgid "Available Languages"
-msgstr "Langues disponibles"
-
-#: capplets/localization/gnome-localization-properties.glade.h:10
-msgid "C_hange languages in use..."
-msgstr "_Modifier la langue utilisée..."
-
-#: capplets/localization/gnome-localization-properties.glade.h:11
-msgid ""
-"Changes will not take effect for the\n"
-"desktop's bars and menus before\n"
-"next time you log in. Changes take\n"
-"effect in applications next time you\n"
-"run them."
-msgstr ""
-"Les modifications ne prendront pas effet pour\n"
-"les barres et menus du bureau avant que vous\n"
-"ne vous reconnectiez. Les modifications prendront\n"
-"effet dans les applications la prochaine fois\n"
-"que vous les lancerez."
-
-#: capplets/localization/gnome-localization-properties.glade.h:16
-msgid "Customize _dates..."
-msgstr "_Dates personnalisées..."
-
-#: capplets/localization/gnome-localization-properties.glade.h:17
-msgid "Customize _numbers..."
-msgstr "_Nombres personnalisés..."
-
-#: capplets/localization/gnome-localization-properties.glade.h:18
-msgid "Customize _times..."
-msgstr "_Heures personnalisées..."
-
-#: capplets/localization/gnome-localization-properties.glade.h:19
-msgid ""
-"Drag languages to set the preferred\n"
-"order of use; If there exists a\n"
-"translation in the first language it will\n"
-"be used, otherwise the next will be tried"
-msgstr ""
-"Glissez les langues pour définir l'ordre\n"
-"préféré d'utilisation ; Si il existe une\n"
-"traduction dans la première langue sélectionné\n"
-"elle sera utilisée, sinon la prochaine\n"
-"sera essayée"
-
-#: capplets/localization/gnome-localization-properties.glade.h:23
-msgid "Formats"
-msgstr "Formats"
-
-#: capplets/localization/gnome-localization-properties.glade.h:24
-msgid "Jan 2, 2003"
-msgstr "Jan 2, 2003"
-
-#: capplets/localization/gnome-localization-properties.glade.h:26
-msgid "Language and Culture Preferences"
-msgstr "Préférences des langues et cultures"
-
-#: capplets/localization/gnome-localization-properties.glade.h:27
-msgid "Measurement _Units:"
-msgstr "_Unités de mesure :"
-
-#: capplets/localization/gnome-localization-properties.glade.h:28
-msgid "Select the items that appear in the Languages list:"
-msgstr "Sélectionnez les éléments qui apparaitront dans la liste des langues :"
-
-#: capplets/localization/gnome-localization-properties.glade.h:29
-msgid "Show _all regions"
-msgstr "Afficher _toutes les régions"
-
-#: capplets/localization/gnome-localization-properties.glade.h:30
-msgid "Thursday, January 2, 2003"
-msgstr "Thursday, January 2, 2003"
-
-#: capplets/localization/gnome-localization-properties.glade.h:31
-msgid ""
-"Your preferred language differs\n"
-"from that of your currently\n"
-"selected date, time, and number\n"
-"formats. You can change your\n"
-"formats in the Formats tab."
-msgstr ""
-"Votre langue préféré diffère des\n"
-"formats de date, heure et nombres\n"
-"actuellement sélectionnés. Vous\n"
-"pouvez changez de formats dans\n"
-"l'onglet Formats."
-
-#: capplets/localization/gnome-localization-properties.glade.h:36
-msgid "_Region:"
-msgstr "_Région :"
-
-#: capplets/localization/localization.desktop.in.h:1
-msgid "Language and Culture"
-msgstr "Langue et culture"
-
-#: capplets/localization/localization.desktop.in.h:2
-msgid "Set your language and culture preferences"
-msgstr "Défini vos préférences de langue et culture"
 
 #: capplets/mouse/gnome-mouse-properties.c:496
 msgid "Unknown Cursor"
@@ -2398,7 +2292,7 @@ msgid "Two"
 msgstr "Deux"
 
 #: capplets/theme-switcher/gnome-theme-details.c:372
-#: capplets/theme-switcher/gnome-theme-manager.c:589
+#: capplets/theme-switcher/gnome-theme-manager.c:609
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -2425,19 +2319,25 @@ msgstr ""
 "%s est le chemin où les fichiers de thème seront installés. Cela ne peut pas "
 "être sélectionné comme emplacement source"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:645
-#: capplets/theme-switcher/gnome-theme-manager.c:705
+#: capplets/theme-switcher/gnome-theme-manager.c:301
+msgid ""
+"The gnome-theme-manager does not know how to change the themes on the "
+"current window manager."
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-manager.c:665
+#: capplets/theme-switcher/gnome-theme-manager.c:725
 msgid "Custom theme"
 msgstr "Thème personnalisé"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:645
-#: capplets/theme-switcher/gnome-theme-manager.c:705
+#: capplets/theme-switcher/gnome-theme-manager.c:665
+#: capplets/theme-switcher/gnome-theme-manager.c:725
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr ""
 "Vous pouvez enregistrer ce thème en cliquant sur le bouton « Enregistrer le "
 "thème »"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:1398
+#: capplets/theme-switcher/gnome-theme-manager.c:1418
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -2919,17 +2819,13 @@ msgid ""
 "X server version data:\n"
 "%s\n"
 "%d\n"
-"%s"
-msgstr ""
-"Erreur lors de l'activation de la configuration XKB.\n"
-"Probablement une erreur interne du serveur X.\n"
-"\n"
-"Donnée de version du serveur X :\n"
 "%s\n"
-"%d\n"
-"%s"
+"If you report this situation as a bug, please include:\n"
+"- The result of <b>xprop -root | grep XKB</b>\n"
+"- The result of <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b>"
+msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:67
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:71
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -3025,11 +2921,11 @@ msgstr ""
 msgid "Preview"
 msgstr "Prévisualisation"
 
-#: libsounds/sound-view.c:130
+#: libsounds/sound-view.c:121 libsounds/sound-view.c:146
 msgid "The sound file for this event does not exist."
 msgstr "Le fichier son défini pour cet événement n'existe pas."
 
-#: libsounds/sound-view.c:132
+#: libsounds/sound-view.c:148
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -3039,32 +2935,32 @@ msgstr ""
 "Vous devriez installer le paquet gnome-audio afin de\n"
 "disposer d'un jeu de sons par défaut."
 
-#: libsounds/sound-view.c:176
+#: libsounds/sound-view.c:192
 #, c-format
 msgid "The file %s is not a valid wav file"
 msgstr "Le fichier %s n'est pas un fichier wave valide"
 
-#: libsounds/sound-view.c:241
+#: libsounds/sound-view.c:257
 msgid "Event"
 msgstr "Événement"
 
-#: libsounds/sound-view.c:250
+#: libsounds/sound-view.c:266
 msgid "Sound File"
 msgstr "Fichier son"
 
-#: libsounds/sound-view.c:266
+#: libsounds/sound-view.c:282
 msgid "_Sounds:"
 msgstr "_Sons :"
 
-#: libsounds/sound-view.c:280
+#: libsounds/sound-view.c:296
 msgid "Sound _file:"
 msgstr "_Fichier son :"
 
-#: libsounds/sound-view.c:284
+#: libsounds/sound-view.c:300
 msgid "Select Sound File"
 msgstr "Sélectionnez le fichier son"
 
-#: libsounds/sound-view.c:307
+#: libsounds/sound-view.c:323
 msgid "_Play"
 msgstr "_Jouer"
 
@@ -3195,7 +3091,8 @@ msgstr ""
 "système"
 
 #: typing-break/drw-break-window.c:189
-msgid "Postpone break"
+#, fuzzy
+msgid "_Postpone break"
 msgstr "Reporter la pause"
 
 #: typing-break/drw-break-window.c:227
@@ -3215,18 +3112,18 @@ msgstr "/À _propos"
 msgid "/_Take a Break"
 msgstr "/_Faites une pause"
 
-#: typing-break/drwright.c:466
+#: typing-break/drwright.c:482
 #, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
 msgstr[0] "%d minute avant la prochaine pause"
 msgstr[1] "%d minutes avant la prochaine pause"
 
-#: typing-break/drwright.c:470
+#: typing-break/drwright.c:486
 msgid "Less than one minute until the next break"
 msgstr "Moins d'une minute avant la prochaine pause"
 
-#: typing-break/drwright.c:565
+#: typing-break/drwright.c:581
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
@@ -3235,23 +3132,23 @@ msgstr ""
 "Impossible d'afficher la boîte de dialogue de propriétés de fin de pause "
 "avec l'erreur suivante : %s"
 
-#: typing-break/drwright.c:605
+#: typing-break/drwright.c:621
 msgid "About GNOME Typing Monitor"
 msgstr "À propos du moniteur de saisie GNOME"
 
-#: typing-break/drwright.c:629
+#: typing-break/drwright.c:645
 msgid "A computer break reminder."
 msgstr "Une alarme de pause informatique."
 
-#: typing-break/drwright.c:630
+#: typing-break/drwright.c:646
 msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
 msgstr "Écrit par Richard Hult &lt;richard@imendio.com&gt;"
 
-#: typing-break/drwright.c:631
+#: typing-break/drwright.c:647
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Rendu joli par Anders Carlsson"
 
-#: typing-break/drwright.c:804
+#: typing-break/drwright.c:820
 msgid "Break reminder"
 msgstr "Alarme de pause"
 
@@ -3436,7 +3333,7 @@ msgstr ""
 msgid "_Apply font"
 msgstr "A_ppliquer la police"
 
-#: vfs-methods/themus/theme-method.c:519
+#: vfs-methods/themus/theme-method.c:520
 msgid "Themes"
 msgstr "Thèmes"
 
@@ -3689,11 +3586,148 @@ msgstr "Augmenter le volume"
 msgid "Volume up's shortcut."
 msgstr "Raccourci pour augmenter le volume."
 
-#~ msgid "Background"
-#~ msgstr "Arrière-plan"
+#~ msgid "Desktop Wallpaper"
+#~ msgstr "Papier peint du bureau"
 
-#~ msgid "Customize your desktop background"
-#~ msgstr "Personnalise l'arrière-plan de votre bureau"
+#~ msgid "Desktop Wallpaper Preferences"
+#~ msgstr "Préférences du papier peint du bureau"
+
+#~ msgid "Advanced Layout Options"
+#~ msgstr "Options avancées d'agencement"
+
+#~ msgid "Core Layout Configuration"
+#~ msgstr "Configuration principal de l'agencement"
+
+#~ msgid "_Layouts:"
+#~ msgstr "_Agencements :"
+
+#~ msgid "Show"
+#~ msgstr "Afficher"
+
+#~ msgid "Language"
+#~ msgstr "Langue"
+
+#~ msgid "$1,234.56"
+#~ msgstr "$1,234.56"
+
+#~ msgid "1/2/03"
+#~ msgstr "1/2/03"
+
+#~ msgid "12:34 AM"
+#~ msgstr "12:34 AM"
+
+#~ msgid "4:56 PM"
+#~ msgstr "4:56 PM"
+
+#~ msgid "<b>Dates</b>"
+#~ msgstr "<b>Dates</b>"
+
+#~ msgid "<b>Languages in use:</b>"
+#~ msgstr "<b>Langues utilisé :</b>"
+
+#~ msgid "<b>Numbers</b>"
+#~ msgstr "<b>Nombres</b>"
+
+#~ msgid "<b>Times</b>"
+#~ msgstr "<b>Heures</b>"
+
+#~ msgid "C_hange languages in use..."
+#~ msgstr "_Modifier la langue utilisée..."
+
+#~ msgid ""
+#~ "Changes will not take effect for the\n"
+#~ "desktop's bars and menus before\n"
+#~ "next time you log in. Changes take\n"
+#~ "effect in applications next time you\n"
+#~ "run them."
+#~ msgstr ""
+#~ "Les modifications ne prendront pas effet pour\n"
+#~ "les barres et menus du bureau avant que vous\n"
+#~ "ne vous reconnectiez. Les modifications prendront\n"
+#~ "effet dans les applications la prochaine fois\n"
+#~ "que vous les lancerez."
+
+#~ msgid "Customize _dates..."
+#~ msgstr "_Dates personnalisées..."
+
+#~ msgid "Customize _numbers..."
+#~ msgstr "_Nombres personnalisés..."
+
+#~ msgid "Customize _times..."
+#~ msgstr "_Heures personnalisées..."
+
+#~ msgid ""
+#~ "Drag languages to set the preferred\n"
+#~ "order of use; If there exists a\n"
+#~ "translation in the first language it will\n"
+#~ "be used, otherwise the next will be tried"
+#~ msgstr ""
+#~ "Glissez les langues pour définir l'ordre\n"
+#~ "préféré d'utilisation ; Si il existe une\n"
+#~ "traduction dans la première langue sélectionné\n"
+#~ "elle sera utilisée, sinon la prochaine\n"
+#~ "sera essayée"
+
+#~ msgid "Formats"
+#~ msgstr "Formats"
+
+#~ msgid "Jan 2, 2003"
+#~ msgstr "Jan 2, 2003"
+
+#~ msgid "Language and Culture Preferences"
+#~ msgstr "Préférences des langues et cultures"
+
+#~ msgid "Measurement _Units:"
+#~ msgstr "_Unités de mesure :"
+
+#~ msgid "Select the items that appear in the Languages list:"
+#~ msgstr ""
+#~ "Sélectionnez les éléments qui apparaitront dans la liste des langues :"
+
+#~ msgid "Show _all regions"
+#~ msgstr "Afficher _toutes les régions"
+
+#~ msgid "Thursday, January 2, 2003"
+#~ msgstr "Thursday, January 2, 2003"
+
+#~ msgid ""
+#~ "Your preferred language differs\n"
+#~ "from that of your currently\n"
+#~ "selected date, time, and number\n"
+#~ "formats. You can change your\n"
+#~ "formats in the Formats tab."
+#~ msgstr ""
+#~ "Votre langue préféré diffère des\n"
+#~ "formats de date, heure et nombres\n"
+#~ "actuellement sélectionnés. Vous\n"
+#~ "pouvez changez de formats dans\n"
+#~ "l'onglet Formats."
+
+#~ msgid "_Region:"
+#~ msgstr "_Région :"
+
+#~ msgid "Language and Culture"
+#~ msgstr "Langue et culture"
+
+#~ msgid "Set your language and culture preferences"
+#~ msgstr "Défini vos préférences de langue et culture"
+
+#~ msgid ""
+#~ "Error activating XKB configuration.\n"
+#~ "Probably internal X server problem.\n"
+#~ "\n"
+#~ "X server version data:\n"
+#~ "%s\n"
+#~ "%d\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Erreur lors de l'activation de la configuration XKB.\n"
+#~ "Probablement une erreur interne du serveur X.\n"
+#~ "\n"
+#~ "Donnée de version du serveur X :\n"
+#~ "%s\n"
+#~ "%d\n"
+#~ "%s"
 
 #~ msgid "_Ignore system configuration"
 #~ msgstr "_Ignorer la configuration du système"

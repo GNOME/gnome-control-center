@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-center HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-15 22:09+0900\n"
+"POT-Creation-Date: 2004-02-13 09:32-0500\n"
 "PO-Revision-Date: 2004-01-15 19:29+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
@@ -270,7 +270,7 @@ msgstr ""
 "数同時に押下されたものとみなして操作を実行します。"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "S_peed:"
 msgstr "速度(_P):"
 
@@ -299,7 +299,7 @@ msgid "_Only accept keys held for:"
 msgstr "キー押下と認識するまでの時間(_O):"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:33
 msgid "_Type to test settings:"
 msgstr "設定内容の確認(_T):"
 
@@ -381,7 +381,7 @@ msgstr "画像なし(_N)"
 
 #: capplets/background/background-properties-capplet.c:559
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:730
+#: capplets/default-applications/gnome-default-applications-properties.c:723
 #: capplets/keyboard/gnome-keyboard-properties.c:224
 #: capplets/mouse/gnome-mouse-properties.c:812
 #: capplets/sound/sound-properties-capplet.c:212
@@ -446,13 +446,39 @@ msgstr ""
 "ができます。"
 
 #: capplets/background/background.desktop.in.h:1
-msgid "Desktop Wallpaper"
-msgstr "デスクトップの壁紙"
+msgid "Change your Desktop Background settings"
+msgstr ""
 
 #: capplets/background/background.desktop.in.h:2
-#: capplets/background/gnome-wp-capplet.c:1146
-msgid "Desktop Wallpaper Preferences"
-msgstr "デスクトップの壁紙を設定します"
+#, fuzzy
+msgid "Desktop Background"
+msgstr "背景の適用(_B)"
+
+#: capplets/background/gnome-background-properties.glade.h:1
+msgid "<b>Desktop _Wallpaper</b>"
+msgstr "<b>デスクトップの壁紙(_W)</b>"
+
+#: capplets/background/gnome-background-properties.glade.h:2
+#, fuzzy
+msgid "<b>_Desktop Colors</b>"
+msgstr "<b>デスクトップの色(_D)</b> "
+
+#: capplets/background/gnome-background-properties.glade.h:3
+#, fuzzy
+msgid "Desktop Background Preferences"
+msgstr "背景の設定"
+
+#: capplets/background/gnome-background-properties.glade.h:4
+msgid "Zgjidh një ngjyrë"
+msgstr ""
+
+#: capplets/background/gnome-background-properties.glade.h:5
+msgid "_Add Wallpaper"
+msgstr "壁紙の追加(_A)"
+
+#: capplets/background/gnome-background-properties.glade.h:6
+msgid "_Style:"
+msgstr "スタイル(_S):"
 
 #: capplets/background/gnome-wp-capplet.c:72
 #: capplets/common/capplet-util.c:340
@@ -460,52 +486,35 @@ msgstr "デスクトップの壁紙を設定します"
 msgid "There was an error displaying help: %s"
 msgstr "次のヘルプを表示する際にエラーが発生しました: %s"
 
-#: capplets/background/gnome-wp-capplet.c:169
+#: capplets/background/gnome-wp-capplet.c:171
 msgid "Add Wallpapers"
 msgstr "壁紙の追加"
 
-#: capplets/background/gnome-wp-capplet.c:1191
-msgid "<b>Desktop _Wallpaper</b>"
-msgstr "<b>デスクトップの壁紙(_W)</b>"
-
-#: capplets/background/gnome-wp-capplet.c:1276
-msgid "_Style:"
-msgstr "スタイル(_S):"
-
-#: capplets/background/gnome-wp-capplet.c:1303
+#: capplets/background/gnome-wp-capplet.c:1265
 msgid "Centered"
 msgstr "中央"
 
-#: capplets/background/gnome-wp-capplet.c:1325
+#: capplets/background/gnome-wp-capplet.c:1287
 msgid "Fill Screen"
 msgstr "フルスクリーン"
 
-#: capplets/background/gnome-wp-capplet.c:1345
+#: capplets/background/gnome-wp-capplet.c:1307
 msgid "Scaled"
 msgstr "サイズ変更"
 
-#: capplets/background/gnome-wp-capplet.c:1365
+#: capplets/background/gnome-wp-capplet.c:1327
 msgid "Tiled"
 msgstr "サイズ均等"
 
-#: capplets/background/gnome-wp-capplet.c:1402
-msgid "_Add Wallpaper"
-msgstr "壁紙の追加(_A)"
-
-#. The Wallpaper Background Colors Section
-#: capplets/background/gnome-wp-capplet.c:1433
-msgid "<b>_Desktop Colors</b> "
-msgstr "<b>デスクトップの色(_D)</b> "
-
-#: capplets/background/gnome-wp-capplet.c:1465
+#: capplets/background/gnome-wp-capplet.c:1359
 msgid "Solid Color"
 msgstr "単色"
 
-#: capplets/background/gnome-wp-capplet.c:1481
+#: capplets/background/gnome-wp-capplet.c:1375
 msgid "Horizontal Gradient"
 msgstr "水平方向にグラデーション"
 
-#: capplets/background/gnome-wp-capplet.c:1497
+#: capplets/background/gnome-wp-capplet.c:1391
 msgid "Vertical Gradient"
 msgstr "垂直方向にグラデーション"
 
@@ -714,35 +723,45 @@ msgstr "お気に入りのアプリ"
 msgid "Select your default applications"
 msgstr "デフォルトで使用するアプリを設定します"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:39
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:9
 msgid "Epiphany"
 msgstr "Epiphany"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:40
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:10
 msgid "Galeon"
 msgstr "Galeon"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:41
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:11
 msgid "Encompass"
 msgstr "Encompass"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:42
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:12
+msgid "Firebird/FireFox"
+msgstr ""
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:13
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:14
 msgid "Mozilla/Netscape 6"
 msgstr "Mozilla/Netscape 6"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:43
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:15
 msgid "Netscape Communicator"
 msgstr "Netscape Communicator"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:44
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:16
 msgid "Konqueror"
 msgstr "Konqueror"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:45
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:17
+#, fuzzy
+msgid "W3M Text Browser"
+msgstr "Lynx テキスト・ブラウザ"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:18
 msgid "Lynx Text Browser"
 msgstr "Lynx テキスト・ブラウザ"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:46
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:19
 msgid "Links Text Browser"
 msgstr "Links テキスト・ブラウザ"
 
@@ -750,44 +769,44 @@ msgstr "Links テキスト・ブラウザ"
 #. * there is only one (the first entry in this list) Evolution entry
 #. * in the list shown to the user
 #.
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:55
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:56
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:34
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:35
 msgid "Evolution Mail Reader"
 msgstr "Evolution メール・リーダ"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:57
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:36
 msgid "Balsa"
 msgstr "Balsa"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:58
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:37
 msgid "KMail"
 msgstr "KMail"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:59
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:38
 msgid "Mozilla Mail"
 msgstr "Mozilla メール"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:60
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:39
 msgid "Mutt"
 msgstr "Mutt"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:66
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:50
 msgid "Gnome Terminal"
 msgstr "GNOME 端末"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:67
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:51
 msgid "Standard XTerminal"
 msgstr "標準 X 端末"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:68
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:52
 msgid "NXterm"
 msgstr "NXterm"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:69
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:53
 msgid "RXVT"
 msgstr "RXVT"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:70
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:54
 msgid "ETerm"
 msgstr "ETerm"
 
@@ -1285,8 +1304,8 @@ msgid "Structure containing information on the MIME category"
 msgstr "MIME 型カテゴリの情報を格納する構造体です"
 
 #: capplets/file-types/mime-category-edit-dialog.c:344
-#: capplets/file-types/mime-edit-dialog.c:491
-#: capplets/file-types/mime-edit-dialog.c:596
+#: capplets/file-types/mime-edit-dialog.c:489
+#: capplets/file-types/mime-edit-dialog.c:594
 #: capplets/file-types/service-edit-dialog.c:358
 #: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
@@ -1320,18 +1339,18 @@ msgstr "追加する MIME 型のダイアログの場合は TRUE にします"
 msgid "Add File Type"
 msgstr "ファイルの種類の追加"
 
-#: capplets/file-types/mime-edit-dialog.c:434
-#: capplets/file-types/mime-type-info.c:674
+#: capplets/file-types/mime-edit-dialog.c:432
+#: capplets/file-types/mime-type-info.c:763
 msgid "Misc"
 msgstr "その他"
 
-#: capplets/file-types/mime-edit-dialog.c:486
-#: capplets/file-types/mime-edit-dialog.c:547
+#: capplets/file-types/mime-edit-dialog.c:484
+#: capplets/file-types/mime-edit-dialog.c:545
 msgid "None"
 msgstr "なし"
 
-#: capplets/file-types/mime-edit-dialog.c:852
-#: capplets/file-types/mime-edit-dialog.c:866
+#: capplets/file-types/mime-edit-dialog.c:850
+#: capplets/file-types/mime-edit-dialog.c:864
 msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
@@ -1339,32 +1358,33 @@ msgstr ""
 "正しい MIME 型を入力して下さい。余計な空白を含めないでクラス/種類の形態にして"
 "下さい。"
 
-#: capplets/file-types/mime-edit-dialog.c:859
-msgid "A MIME type with that name already exists, overwrite ?."
+#: capplets/file-types/mime-edit-dialog.c:857
+#, fuzzy
+msgid "A MIME type with that name already exists, overwrite?"
 msgstr "その名前のMIME 型は既に存在します。上書きしますか？"
 
-#: capplets/file-types/mime-edit-dialog.c:931
+#: capplets/file-types/mime-edit-dialog.c:929
 msgid "Category"
 msgstr "カテゴリ"
 
-#: capplets/file-types/mime-edit-dialog.c:936
+#: capplets/file-types/mime-edit-dialog.c:934
 msgid "Choose a file category"
 msgstr "ファイルのカテゴリの選択"
 
-#: capplets/file-types/mime-type-info.c:602
+#: capplets/file-types/mime-type-info.c:691
 #, c-format
 msgid "View as %s"
 msgstr "%s として表示"
 
-#: capplets/file-types/mime-type-info.c:668
+#: capplets/file-types/mime-type-info.c:757
 msgid "Images"
 msgstr "画像"
 
-#: capplets/file-types/mime-type-info.c:670
+#: capplets/file-types/mime-type-info.c:759
 msgid "Video"
 msgstr "ビデオ"
 
-#: capplets/file-types/mime-type-info.c:672
+#: capplets/file-types/mime-type-info.c:761
 msgid "Audio"
 msgstr "オーディオ"
 
@@ -1644,7 +1664,7 @@ msgstr "アクセラレータの種類です"
 
 #: capplets/keybindings/eggcellrendererkeys.c:240
 #: capplets/keybindings/gnome-keybinding-properties.c:235
-#: libbackground/applier.c:588 typing-break/drwright.c:448
+#: libbackground/applier.c:588 typing-break/drwright.c:464
 msgid "Disabled"
 msgstr "無効"
 
@@ -1779,20 +1799,22 @@ msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>遅い</i></small>"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:10
-msgid "Advanced Layout Options"
-msgstr "拡張レイアウトのオプション"
+#, fuzzy
+msgid "A_vailable layouts:"
+msgstr "利用可能な言語"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#, fuzzy
+msgid "A_vailable options:"
+msgstr "利用可能な言語"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "All_ow postponing of breaks"
 msgstr "一休みの延長を許可する(_O)"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Check if breaks are allowed to be postponed"
 msgstr "一休みの延長を可能にする場合は有効にして下さい"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
-msgid "Core Layout Configuration"
-msgstr "コア・レイアウトの設定"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Cursor _blinks in text boxes and fields"
@@ -1819,193 +1841,67 @@ msgid "Keyboard _model:"
 msgstr "キーボードの型式(_M):"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:21
-msgid "Layout _options:"
+#, fuzzy
+msgid "Layout Options"
 msgstr "レイアウトのオプション(_O):"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#, fuzzy
+msgid "Layouts"
+msgstr "レイアウト"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
 msgstr "キー入力のリピート防止のため一休み中はスクリーンをロックします"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:24
+#, fuzzy
+msgid "Reset to de_faults"
+msgstr "デフォルト値にリセット(_R)"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
 msgid "Typing Break"
 msgstr "一休み"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "_Accessibility..."
 msgstr "アクセシビリティ(_A)..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
 msgid "_Break interval lasts:"
 msgstr "一休みする時間(_B):"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
 msgid "_Delay:"
 msgstr "間隔(_D):"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
-msgid "_Layouts:"
-msgstr "レイアウト(_L):"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
-msgid "_Reset to defaults"
-msgstr "デフォルト値にリセット(_R)"
-
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:30
+#, fuzzy
+msgid "_Selected layouts:"
+msgstr "エディタの選択(_S):"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
+#, fuzzy
+msgid "_Selected options:"
+msgstr "画像のオプション(_O):"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:32
 msgid "_Speed:"
 msgstr "速度(_S):"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:32
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:34
 msgid "_Work interval lasts:"
 msgstr "一休みの警告を出すまでの時間(_W):"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:33
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:35
 msgid "minutes"
 msgstr "分"
 
 #: capplets/keyboard/keyboard.desktop.in.h:2
 msgid "Set your keyboard preferences"
 msgstr "キーボードの設定を行います"
-
-#: capplets/localization/gnome-localization-properties.c:184
-msgid "Show"
-msgstr "表示"
-
-#: capplets/localization/gnome-localization-properties.c:195
-#: capplets/localization/gnome-localization-properties.glade.h:25
-msgid "Language"
-msgstr "言語"
-
-#: capplets/localization/gnome-localization-properties.glade.h:1
-msgid "$1,234.56"
-msgstr "123,456円"
-
-#: capplets/localization/gnome-localization-properties.glade.h:2
-msgid "1/2/03"
-msgstr "2001/02/03"
-
-#: capplets/localization/gnome-localization-properties.glade.h:3
-msgid "12:34 AM"
-msgstr "午前 12:34"
-
-#: capplets/localization/gnome-localization-properties.glade.h:4
-msgid "4:56 PM"
-msgstr "午後 4:56"
-
-#: capplets/localization/gnome-localization-properties.glade.h:5
-msgid "<b>Dates</b>"
-msgstr "<b>日付</b>"
-
-#: capplets/localization/gnome-localization-properties.glade.h:6
-msgid "<b>Languages in use:</b>"
-msgstr "<b>使用する言語の一覧</b>"
-
-#: capplets/localization/gnome-localization-properties.glade.h:7
-msgid "<b>Numbers</b>"
-msgstr "<b>数値</b>"
-
-#: capplets/localization/gnome-localization-properties.glade.h:8
-msgid "<b>Times</b>"
-msgstr "<b>時刻</b>"
-
-#: capplets/localization/gnome-localization-properties.glade.h:9
-msgid "Available Languages"
-msgstr "利用可能な言語"
-
-#: capplets/localization/gnome-localization-properties.glade.h:10
-msgid "C_hange languages in use..."
-msgstr "使用する言語の変更(_H)..."
-
-#: capplets/localization/gnome-localization-properties.glade.h:11
-msgid ""
-"Changes will not take effect for the\n"
-"desktop's bars and menus before\n"
-"next time you log in. Changes take\n"
-"effect in applications next time you\n"
-"run them."
-msgstr ""
-"次回ログインするまで、デスクトップのバーや\n"
-"メニューに対する変更は反映されません。\n"
-"また、アプリケーションに対する変更は\n"
-"一旦終了して再起動する必要があります。"
-
-#: capplets/localization/gnome-localization-properties.glade.h:16
-msgid "Customize _dates..."
-msgstr "日付のカスタマイズ(_D)..."
-
-#: capplets/localization/gnome-localization-properties.glade.h:17
-msgid "Customize _numbers..."
-msgstr "数値のカスタマイズ(_N)..."
-
-#: capplets/localization/gnome-localization-properties.glade.h:18
-msgid "Customize _times..."
-msgstr "時刻のカスタマイズ(_T)..."
-
-#: capplets/localization/gnome-localization-properties.glade.h:19
-msgid ""
-"Drag languages to set the preferred\n"
-"order of use; If there exists a\n"
-"translation in the first language it will\n"
-"be used, otherwise the next will be tried"
-msgstr ""
-"言語をドラッグしてセットすると、\n"
-"お好みの順番で利用できるようになります;\n"
-"例えば、一番先頭の言語の翻訳が提供されていれば、\n"
-"その言語を利用することになります。\n"
-"それ以外は、同様に次の言語に従います。"
-
-#: capplets/localization/gnome-localization-properties.glade.h:23
-msgid "Formats"
-msgstr "書式"
-
-#: capplets/localization/gnome-localization-properties.glade.h:24
-msgid "Jan 2, 2003"
-msgstr "2003 年 1月 2日"
-
-#: capplets/localization/gnome-localization-properties.glade.h:26
-msgid "Language and Culture Preferences"
-msgstr "言語と文化の設定"
-
-#: capplets/localization/gnome-localization-properties.glade.h:27
-msgid "Measurement _Units:"
-msgstr "大きさの単位(_U):"
-
-#: capplets/localization/gnome-localization-properties.glade.h:28
-msgid "Select the items that appear in the Languages list:"
-msgstr "一覧に表示する言語を選択して下さい:"
-
-#: capplets/localization/gnome-localization-properties.glade.h:29
-msgid "Show _all regions"
-msgstr "全ての地域を表示する(_A)"
-
-#: capplets/localization/gnome-localization-properties.glade.h:30
-msgid "Thursday, January 2, 2003"
-msgstr "2003年 1月 2日 木曜日"
-
-#: capplets/localization/gnome-localization-properties.glade.h:31
-msgid ""
-"Your preferred language differs\n"
-"from that of your currently\n"
-"selected date, time, and number\n"
-"formats. You can change your\n"
-"formats in the Formats tab."
-msgstr ""
-"お好みの言語が、現在選択している\n"
-"日付、時刻、数値の書式の言語と異なっています。\n"
-"[書式] タブでそれらの書式を変更できます。"
-
-#: capplets/localization/gnome-localization-properties.glade.h:36
-msgid "_Region:"
-msgstr "地域(_R):"
-
-#: capplets/localization/localization.desktop.in.h:1
-msgid "Language and Culture"
-msgstr "言語と文化"
-
-#: capplets/localization/localization.desktop.in.h:2
-msgid "Set your language and culture preferences"
-msgstr "お好みの言語とその環境を設定します"
 
 #: capplets/mouse/gnome-mouse-properties.c:496
 msgid "Unknown Cursor"
@@ -2349,7 +2245,7 @@ msgid "Two"
 msgstr "弐"
 
 #: capplets/theme-switcher/gnome-theme-details.c:372
-#: capplets/theme-switcher/gnome-theme-manager.c:589
+#: capplets/theme-switcher/gnome-theme-manager.c:609
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -2376,19 +2272,25 @@ msgstr ""
 "%s はテーマ・ファイルをインストールするパス名です。これはソースを格納するもの"
 "として選択することはできません。"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:645
-#: capplets/theme-switcher/gnome-theme-manager.c:705
+#: capplets/theme-switcher/gnome-theme-manager.c:301
+msgid ""
+"The gnome-theme-manager does not know how to change the themes on the "
+"current window manager."
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-manager.c:665
+#: capplets/theme-switcher/gnome-theme-manager.c:725
 msgid "Custom theme"
 msgstr "カスタム・テーマ"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:645
-#: capplets/theme-switcher/gnome-theme-manager.c:705
+#: capplets/theme-switcher/gnome-theme-manager.c:665
+#: capplets/theme-switcher/gnome-theme-manager.c:725
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr ""
 "[テーマの保存] をクリックすると\n"
 "このテーマを保存できます。"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:1398
+#: capplets/theme-switcher/gnome-theme-manager.c:1418
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -2863,17 +2765,13 @@ msgid ""
 "X server version data:\n"
 "%s\n"
 "%d\n"
-"%s"
-msgstr ""
-"XKB 設定を有効にする際にエラーが発生しました。\n"
-"おそらく X サーバ内部の問題と思われます。\n"
-"\n"
-"X サーバのバージョン情報:\n"
 "%s\n"
-"%d\n"
-"%s"
+"If you report this situation as a bug, please include:\n"
+"- The result of <b>xprop -root | grep XKB</b>\n"
+"- The result of <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b>"
+msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:67
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:71
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2968,11 +2866,11 @@ msgstr "hboxが見つからないので、通常のファイル選択を利用�
 msgid "Preview"
 msgstr "プレビュー"
 
-#: libsounds/sound-view.c:130
+#: libsounds/sound-view.c:121 libsounds/sound-view.c:146
 msgid "The sound file for this event does not exist."
 msgstr "このイベントに対する効果音ファイルが存在しません。"
 
-#: libsounds/sound-view.c:132
+#: libsounds/sound-view.c:148
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -2982,32 +2880,32 @@ msgstr ""
 "デフォルトの効果音を利用するために gnome-audio パッケージを\n"
 "インストールする必要があるかもしれません。"
 
-#: libsounds/sound-view.c:176
+#: libsounds/sound-view.c:192
 #, c-format
 msgid "The file %s is not a valid wav file"
 msgstr "ファイル %s は正しい WAV ファイルではありません"
 
-#: libsounds/sound-view.c:241
+#: libsounds/sound-view.c:257
 msgid "Event"
 msgstr "イベント"
 
-#: libsounds/sound-view.c:250
+#: libsounds/sound-view.c:266
 msgid "Sound File"
 msgstr "ファイル"
 
-#: libsounds/sound-view.c:266
+#: libsounds/sound-view.c:282
 msgid "_Sounds:"
 msgstr "効果音(_S)"
 
-#: libsounds/sound-view.c:280
+#: libsounds/sound-view.c:296
 msgid "Sound _file:"
 msgstr "効果音のファイル(_F):"
 
-#: libsounds/sound-view.c:284
+#: libsounds/sound-view.c:300
 msgid "Select Sound File"
 msgstr "効果音のファイルの選択"
 
-#: libsounds/sound-view.c:302
+#: libsounds/sound-view.c:323
 msgid "_Play"
 msgstr "演奏(_P)"
 
@@ -3125,7 +3023,8 @@ msgid "XKB settings in gconf will be overridden from the system ASAP"
 msgstr "XKB 設定 (システム設定) をすぐに上書きする必要があるかどうか"
 
 #: typing-break/drw-break-window.c:189
-msgid "Postpone break"
+#, fuzzy
+msgid "_Postpone break"
 msgstr "中断を延長する"
 
 #: typing-break/drw-break-window.c:227
@@ -3145,18 +3044,18 @@ msgstr "/情報(_A)"
 msgid "/_Take a Break"
 msgstr "/一休みする(_T)"
 
-#: typing-break/drwright.c:466
+#: typing-break/drwright.c:482
 #, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
 msgstr[0] "次の一休みまで %d 分あります"
 msgstr[1] "次の一休みまで %d 分あります"
 
-#: typing-break/drwright.c:470
+#: typing-break/drwright.c:486
 msgid "Less than one minute until the next break"
 msgstr "次の一休みまで 1 分を切りました"
 
-#: typing-break/drwright.c:565
+#: typing-break/drwright.c:581
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
@@ -3164,23 +3063,23 @@ msgid ""
 msgstr ""
 "次のエラーにより \"キー入力の一休み設定ダイアログ\" を開けませんでした: %s"
 
-#: typing-break/drwright.c:605
+#: typing-break/drwright.c:621
 msgid "About GNOME Typing Monitor"
 msgstr "GNOME 一休み催促ツールについて"
 
-#: typing-break/drwright.c:629
+#: typing-break/drwright.c:645
 msgid "A computer break reminder."
 msgstr "コンピュータの一休み催促ツールです。"
 
-#: typing-break/drwright.c:630
+#: typing-break/drwright.c:646
 msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
 msgstr "作者: Richard Hult &lt;richard@imendio.com&gt;"
 
-#: typing-break/drwright.c:631
+#: typing-break/drwright.c:647
 msgid "Eye candy added by Anders Carlsson"
 msgstr "目玉のキャンディの提供: Anders Carlsson"
 
-#: typing-break/drwright.c:804
+#: typing-break/drwright.c:820
 msgid "Break reminder"
 msgstr "一休み催促ツール"
 
@@ -3362,7 +3261,7 @@ msgstr ""
 msgid "_Apply font"
 msgstr "フォントの適用(_A)"
 
-#: vfs-methods/themus/theme-method.c:519
+#: vfs-methods/themus/theme-method.c:520
 msgid "Themes"
 msgstr "Themus"
 
@@ -3616,3 +3515,142 @@ msgstr "音量を上げる"
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
 msgid "Volume up's shortcut."
 msgstr "音量を上げる機能のショートカットです。"
+
+#~ msgid "Desktop Wallpaper"
+#~ msgstr "デスクトップの壁紙"
+
+#~ msgid "Desktop Wallpaper Preferences"
+#~ msgstr "デスクトップの壁紙を設定します"
+
+#~ msgid "Advanced Layout Options"
+#~ msgstr "拡張レイアウトのオプション"
+
+#~ msgid "Core Layout Configuration"
+#~ msgstr "コア・レイアウトの設定"
+
+#~ msgid "_Layouts:"
+#~ msgstr "レイアウト(_L):"
+
+#~ msgid "Show"
+#~ msgstr "表示"
+
+#~ msgid "Language"
+#~ msgstr "言語"
+
+#~ msgid "$1,234.56"
+#~ msgstr "123,456円"
+
+#~ msgid "1/2/03"
+#~ msgstr "2001/02/03"
+
+#~ msgid "12:34 AM"
+#~ msgstr "午前 12:34"
+
+#~ msgid "4:56 PM"
+#~ msgstr "午後 4:56"
+
+#~ msgid "<b>Dates</b>"
+#~ msgstr "<b>日付</b>"
+
+#~ msgid "<b>Languages in use:</b>"
+#~ msgstr "<b>使用する言語の一覧</b>"
+
+#~ msgid "<b>Numbers</b>"
+#~ msgstr "<b>数値</b>"
+
+#~ msgid "<b>Times</b>"
+#~ msgstr "<b>時刻</b>"
+
+#~ msgid "C_hange languages in use..."
+#~ msgstr "使用する言語の変更(_H)..."
+
+#~ msgid ""
+#~ "Changes will not take effect for the\n"
+#~ "desktop's bars and menus before\n"
+#~ "next time you log in. Changes take\n"
+#~ "effect in applications next time you\n"
+#~ "run them."
+#~ msgstr ""
+#~ "次回ログインするまで、デスクトップのバーや\n"
+#~ "メニューに対する変更は反映されません。\n"
+#~ "また、アプリケーションに対する変更は\n"
+#~ "一旦終了して再起動する必要があります。"
+
+#~ msgid "Customize _dates..."
+#~ msgstr "日付のカスタマイズ(_D)..."
+
+#~ msgid "Customize _numbers..."
+#~ msgstr "数値のカスタマイズ(_N)..."
+
+#~ msgid "Customize _times..."
+#~ msgstr "時刻のカスタマイズ(_T)..."
+
+#~ msgid ""
+#~ "Drag languages to set the preferred\n"
+#~ "order of use; If there exists a\n"
+#~ "translation in the first language it will\n"
+#~ "be used, otherwise the next will be tried"
+#~ msgstr ""
+#~ "言語をドラッグしてセットすると、\n"
+#~ "お好みの順番で利用できるようになります;\n"
+#~ "例えば、一番先頭の言語の翻訳が提供されていれば、\n"
+#~ "その言語を利用することになります。\n"
+#~ "それ以外は、同様に次の言語に従います。"
+
+#~ msgid "Formats"
+#~ msgstr "書式"
+
+#~ msgid "Jan 2, 2003"
+#~ msgstr "2003 年 1月 2日"
+
+#~ msgid "Language and Culture Preferences"
+#~ msgstr "言語と文化の設定"
+
+#~ msgid "Measurement _Units:"
+#~ msgstr "大きさの単位(_U):"
+
+#~ msgid "Select the items that appear in the Languages list:"
+#~ msgstr "一覧に表示する言語を選択して下さい:"
+
+#~ msgid "Show _all regions"
+#~ msgstr "全ての地域を表示する(_A)"
+
+#~ msgid "Thursday, January 2, 2003"
+#~ msgstr "2003年 1月 2日 木曜日"
+
+#~ msgid ""
+#~ "Your preferred language differs\n"
+#~ "from that of your currently\n"
+#~ "selected date, time, and number\n"
+#~ "formats. You can change your\n"
+#~ "formats in the Formats tab."
+#~ msgstr ""
+#~ "お好みの言語が、現在選択している\n"
+#~ "日付、時刻、数値の書式の言語と異なっています。\n"
+#~ "[書式] タブでそれらの書式を変更できます。"
+
+#~ msgid "_Region:"
+#~ msgstr "地域(_R):"
+
+#~ msgid "Language and Culture"
+#~ msgstr "言語と文化"
+
+#~ msgid "Set your language and culture preferences"
+#~ msgstr "お好みの言語とその環境を設定します"
+
+#~ msgid ""
+#~ "Error activating XKB configuration.\n"
+#~ "Probably internal X server problem.\n"
+#~ "\n"
+#~ "X server version data:\n"
+#~ "%s\n"
+#~ "%d\n"
+#~ "%s"
+#~ msgstr ""
+#~ "XKB 設定を有効にする際にエラーが発生しました。\n"
+#~ "おそらく X サーバ内部の問題と思われます。\n"
+#~ "\n"
+#~ "X サーバのバージョン情報:\n"
+#~ "%s\n"
+#~ "%d\n"
+#~ "%s"

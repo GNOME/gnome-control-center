@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-08-23 14:02+0200\n"
+"POT-Creation-Date: 2004-02-13 09:32-0500\n"
 "PO-Revision-Date: 2002-06-09 20:17+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -73,8 +73,8 @@ msgid ""
 "capabilities."
 msgstr ""
 "Na vašem sistemu ni na voljo nobena pomožna tehnologija.  Za podporo "
-"zaslonski tipkovnici mora biti nameščen paket 'gok', za branje zaslona in povevanje "
-"pa 'gnopernicus'"
+"zaslonski tipkovnici mora biti nameščen paket 'gok', za branje zaslona in "
+"povevanje pa 'gnopernicus'"
 
 #: capplets/accessibility/at-properties/main.c:62
 msgid ""
@@ -90,26 +90,26 @@ msgid ""
 "'gnopernicus' package must be installed for screenreading and magnifying "
 "capabilities."
 msgstr ""
-"Na vašem sistemu niso nameščene vse pomožne tehnologije.  Za podporo branja"
-"zaslona in povečevalu mora biti nameščen paket 'gnopernicus'"
+"Na vašem sistemu niso nameščene vse pomožne tehnologije.  Za podporo "
+"branjazaslona in povečevalu mora biti nameščen paket 'gnopernicus'"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:236
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:241
 #, c-format
 msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr "Ob zaganjanju dialoga nastavitev miške se je zgodila napaka: %s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:332
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:390
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:337
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:395
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Nisem mogel uvoziti nastavitev AccessX iz datoteke '%s'"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:463
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:468
 msgid "Import Feature Settings File"
 msgstr "_Uvozi datoteko nastavitev možnosti"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Tipkovnica"
@@ -118,7 +118,7 @@ msgstr "Tipkovnica"
 msgid "Set your keyboard accessibility preferences"
 msgstr "Nastavitve dostopnosti tipkovnice"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.c:60
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.c:58
 msgid ""
 "This system does not seem to have the XKB extension.  The keyboard "
 "accessibility features will not operate without it."
@@ -261,7 +261,7 @@ msgstr ""
 "Izvedi več hkratnih pritiskov tipk s pritiskom spremenilnik tipk v zaporedju."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "S_peed:"
 msgstr "_Hitrost:"
 
@@ -290,7 +290,7 @@ msgid "_Only accept keys held for:"
 msgstr "_Sprejmi le tipke, držane:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:33
 msgid "_Type to test settings:"
 msgstr "_Tipkajte tu za preizkus nastavitev:"
 
@@ -318,8 +318,10 @@ msgstr "milisekund"
 msgid "pixels/second"
 msgstr "pikslov/sekundo"
 
+#. set the timeout value  label with correct value of timeout
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
 #: capplets/mouse/gnome-mouse-properties.c:133
+#: capplets/mouse/gnome-mouse-properties.c:578
 #: capplets/mouse/gnome-mouse-properties.glade.h:27
 #: capplets/windows/gnome-window-properties.glade.h:7
 msgid "seconds"
@@ -370,9 +372,9 @@ msgstr "B_rez slike"
 
 #: capplets/background/background-properties-capplet.c:559
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:730
-#: capplets/keyboard/gnome-keyboard-properties.c:218
-#: capplets/mouse/gnome-mouse-properties.c:806
+#: capplets/default-applications/gnome-default-applications-properties.c:723
+#: capplets/keyboard/gnome-keyboard-properties.c:224
+#: capplets/mouse/gnome-mouse-properties.c:812
 #: capplets/sound/sound-properties-capplet.c:212
 msgid "Retrieve and store legacy settings"
 msgstr "Prenesi in shrani zapuščene nastavitve"
@@ -428,36 +430,94 @@ msgstr "Navpični preliv"
 
 #: capplets/background/background-properties.glade.h:13
 msgid "You can drag image files into the window to set the background picture."
-msgstr ""
-"Za nastavitev slike ozadja lahko v okno povlečete slikovne datoteke."
-
-#: capplets/background/background-properties.glade.h:14
-msgid "radiobutton1"
-msgstr "Radijski gumb 1"
-
-#: capplets/background/background-properties.glade.h:15
-msgid "radiobutton2"
-msgstr "Radijski gumb 2"
-
-#: capplets/background/background-properties.glade.h:16
-msgid "radiobutton3"
-msgstr "Radijski gumb 3"
-
-#: capplets/background/background-properties.glade.h:17
-msgid "radiobutton4"
-msgstr "Radijski gumb 4"
-
-#: capplets/background/background-properties.glade.h:18
-msgid "radiobutton5"
-msgstr "Radijski gumb 5"
+msgstr "Za nastavitev slike ozadja lahko v okno povlečete slikovne datoteke."
 
 #: capplets/background/background.desktop.in.h:1
-msgid "Background"
-msgstr "Ozadje"
+#, fuzzy
+msgid "Change your Desktop Background settings"
+msgstr "Prilagodite ozadje vašega namizja"
 
 #: capplets/background/background.desktop.in.h:2
-msgid "Customize your desktop background"
-msgstr "Prilagodite ozadje vašega namizja"
+#, fuzzy
+msgid "Desktop Background"
+msgstr "Ozadje"
+
+#: capplets/background/gnome-background-properties.glade.h:1
+msgid "<b>Desktop _Wallpaper</b>"
+msgstr ""
+
+#: capplets/background/gnome-background-properties.glade.h:2
+msgid "<b>_Desktop Colors</b>"
+msgstr ""
+
+#: capplets/background/gnome-background-properties.glade.h:3
+#, fuzzy
+msgid "Desktop Background Preferences"
+msgstr "Nastavitve ozadja"
+
+#: capplets/background/gnome-background-properties.glade.h:4
+msgid "Zgjidh një ngjyrë"
+msgstr ""
+
+#: capplets/background/gnome-background-properties.glade.h:5
+#, fuzzy
+msgid "_Add Wallpaper"
+msgstr "_Tapeta"
+
+#: capplets/background/gnome-background-properties.glade.h:6
+#, fuzzy
+msgid "_Style:"
+msgstr "Slog:"
+
+#: capplets/background/gnome-wp-capplet.c:72
+#: capplets/common/capplet-util.c:340
+#, c-format
+msgid "There was an error displaying help: %s"
+msgstr "Ob prikazovanju pomoči se je zgodila napaka: %s"
+
+#: capplets/background/gnome-wp-capplet.c:171
+#, fuzzy
+msgid "Add Wallpapers"
+msgstr "_Tapeta"
+
+#: capplets/background/gnome-wp-capplet.c:1265
+#, fuzzy
+msgid "Centered"
+msgstr "Na _sredini"
+
+#: capplets/background/gnome-wp-capplet.c:1287
+#, fuzzy
+msgid "Fill Screen"
+msgstr "Zaslon"
+
+#: capplets/background/gnome-wp-capplet.c:1307
+#, fuzzy
+msgid "Scaled"
+msgstr "Po_večano"
+
+#: capplets/background/gnome-wp-capplet.c:1327
+msgid "Tiled"
+msgstr "Tlakovano"
+
+#: capplets/background/gnome-wp-capplet.c:1359
+#, fuzzy
+msgid "Solid Color"
+msgstr "Barva polnjenja"
+
+#: capplets/background/gnome-wp-capplet.c:1375
+#, fuzzy
+msgid "Horizontal Gradient"
+msgstr "Vodoravni preliv"
+
+#: capplets/background/gnome-wp-capplet.c:1391
+#, fuzzy
+msgid "Vertical Gradient"
+msgstr "Navpični preliv"
+
+#: capplets/background/gnome-wp-info.c:46
+#, fuzzy
+msgid "No Wallpaper"
+msgstr "_Tapeta"
 
 #: capplets/common/activate-settings-daemon.c:18
 msgid ""
@@ -480,11 +540,6 @@ msgstr "Nisem mogel naložiti komplet ikon za nastavitvene vstavke '%s'\n"
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "Le uveljavi nastavitve in končaj"
-
-#: capplets/common/capplet-util.c:340
-#, c-format
-msgid "There was an error displaying help: %s"
-msgstr "Ob prikazovanju pomoči se je zgodila napaka: %s"
 
 #: capplets/common/file-transfer-dialog.c:95
 #, c-format
@@ -668,39 +723,45 @@ msgstr "Zaželeni programi"
 msgid "Select your default applications"
 msgstr "Izberi vaše privzete programe"
 
-#: capplets/default-applications/gnome-default-applications-properties.c:108
-msgid "Please specify a name and a command for this editor."
-msgstr "Prosim, navedite ime in ukaz za ta urejevalnik."
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:39
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:9
 msgid "Epiphany"
 msgstr "Epiphany"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:40
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:10
 msgid "Galeon"
 msgstr "Galeon"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:41
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:11
 msgid "Encompass"
 msgstr "Encompass"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:42
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:12
+msgid "Firebird/FireFox"
+msgstr ""
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:13
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:14
 msgid "Mozilla/Netscape 6"
 msgstr "Mozilla/Netscape 6"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:43
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:15
 msgid "Netscape Communicator"
 msgstr "Netscape Communicator"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:44
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:16
 msgid "Konqueror"
 msgstr "Konqueror"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:45
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:17
+#, fuzzy
+msgid "W3M Text Browser"
+msgstr "Besedilni brskalnik Lynx"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:18
 msgid "Lynx Text Browser"
 msgstr "Besedilni brskalnik Lynx"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:46
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:19
 msgid "Links Text Browser"
 msgstr "Besedilni brskalnik Links"
 
@@ -708,46 +769,50 @@ msgstr "Besedilni brskalnik Links"
 #. * there is only one (the first entry in this list) Evolution entry
 #. * in the list shown to the user
 #.
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:55
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:56
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:34
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:35
 msgid "Evolution Mail Reader"
 msgstr "Bralnik pošte Evolution"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:57
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:36
 msgid "Balsa"
 msgstr "Balsa"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:58
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:37
 msgid "KMail"
 msgstr "KMail"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:59
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:38
 msgid "Mozilla Mail"
 msgstr "Mozilla Mail"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:60
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:39
 msgid "Mutt"
 msgstr "Mutt"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:66
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:50
 msgid "Gnome Terminal"
 msgstr "Terminal Gnome"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:67
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:51
 msgid "Standard XTerminal"
 msgstr "Običajni terminal X (xterm)"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:68
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:52
 msgid "NXterm"
 msgstr "NXterm"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:69
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:53
 msgid "RXVT"
 msgstr "RXVT"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:70
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:54
 msgid "ETerm"
 msgstr "ETerm"
+
+#: capplets/default-applications/gnome-default-applications-properties.c:108
+msgid "Please specify a name and a command for this editor."
+msgstr "Prosim, navedite ime in ukaz za ta urejevalnik."
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:2
 msgid "Add..."
@@ -865,7 +930,7 @@ msgid "Window Manager"
 msgstr "Upravljalnik oken"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:30
-#: capplets/file-types/file-types-properties.glade.h:22
+#: capplets/file-types/file-types-properties.glade.h:23
 msgid "_Name:"
 msgstr "_Ime:"
 
@@ -889,19 +954,19 @@ msgstr "_Izberite spletni brskalnik:"
 msgid "_Select an Editor:"
 msgstr "_Izberite urejevalnik:"
 
-#: capplets/desktop-links/Accessibility.directory.in.in.h:1
+#: capplets/desktop-links/Accessibility.directory.in.h:1
 msgid "Accessibility"
 msgstr "Dostopnost"
 
-#: capplets/desktop-links/Accessibility.directory.in.in.h:2
+#: capplets/desktop-links/Accessibility.directory.in.h:2
 msgid "Accessibility Settings"
 msgstr "Nastavitve dostopnosti"
 
-#: capplets/desktop-links/Advanced.directory.in.in.h:1
+#: capplets/desktop-links/Advanced.directory.in.h:1
 msgid "Advanced"
 msgstr "Napredno"
 
-#: capplets/desktop-links/Advanced.directory.in.in.h:2
+#: capplets/desktop-links/Advanced.directory.in.h:2
 msgid "Advanced Settings"
 msgstr "Napredne nastavitve"
 
@@ -991,7 +1056,7 @@ msgid "Associate sounds with window manager events"
 msgstr "Poveži zvoke z dogodki upravljalnika zaslona"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
-#: capplets/sound/sound.desktop.in.h:2
+#: capplets/sound/gnome-settings-sound.desktop.in.h:2
 msgid "Sound"
 msgstr "Zvok"
 
@@ -1024,72 +1089,81 @@ msgstr "Ločljivost zaslona"
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: capplets/display/main.c:376
+#: capplets/display/main.c:377
 msgid "_Resolution:"
 msgstr "_Ločljivost:"
 
-#: capplets/display/main.c:395
+#: capplets/display/main.c:396
 msgid "Re_fresh rate:"
 msgstr "_Hitrost osveževanja"
 
-#: capplets/display/main.c:416
+#: capplets/display/main.c:417
 msgid "Default Settings"
 msgstr "Privzete nastavitve"
 
-#: capplets/display/main.c:418
+#: capplets/display/main.c:419
+#, c-format
 msgid "Screen %d Settings\n"
 msgstr "Nastavitve zaslona %d\n"
 
-#: capplets/display/main.c:443
+#: capplets/display/main.c:444
 msgid "Screen Resolution Preferences"
 msgstr "Nastavitve ločljivosti zaslona"
 
-#: capplets/display/main.c:475
-#, c-format
-msgid "Make default for this _computer (%s) only"
+#: capplets/display/main.c:476
+#, fuzzy, c-format
+msgid "_Make default for this computer (%s) only"
 msgstr "Imej za privzeto le na tem _računalniku (%s)"
 
-#: capplets/display/main.c:493
+#: capplets/display/main.c:494
 msgid "Options"
 msgstr "Možnosti"
 
-#: capplets/display/main.c:514
-#, c-format
+#: capplets/display/main.c:515
+#, fuzzy, c-format
 msgid ""
+"Testing the new settings. If you don't respond in %d second the previous "
+"settings will be restored."
+msgid_plural ""
 "Testing the new settings. If you don't respond in %d seconds the previous "
 "settings will be restored."
-msgstr ""
-"Preizkušam nove nastavitve. Če ne odgovorite v %d sekundah, bodo povrnjene prejšnje."
+msgstr[0] ""
+"Preizkušam nove nastavitve. Če ne odgovorite v %d sekundah, bodo povrnjene "
+"prejšnje."
+msgstr[1] ""
+"Preizkušam nove nastavitve. Če ne odgovorite v %d sekundah, bodo povrnjene "
+"prejšnje."
 
-#: capplets/display/main.c:563
+#: capplets/display/main.c:564
 msgid "Do you want to keep this resolution?"
 msgstr "Želite ohraniti to ločljivost?"
 
-#: capplets/display/main.c:588
+#: capplets/display/main.c:589
 msgid "Use _previous resolution"
 msgstr "Uporabi _prejšnjo ločljivost"
 
-#: capplets/display/main.c:588
+#: capplets/display/main.c:589
 msgid "_Keep resolution"
 msgstr "_Ohrani resolucijo"
 
-#: capplets/display/main.c:739
+#: capplets/display/main.c:740
 msgid ""
 "The XServer does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
 msgstr ""
-"Strežnik X ne podpira razširitve XRandR.  Spreminjanje ločljivosti med delovanjem zato ni mogoče."
+"Strežnik X ne podpira razširitve XRandR.  Spreminjanje ločljivosti med "
+"delovanjem zato ni mogoče."
 
-#: capplets/display/main.c:747
+#: capplets/display/main.c:748
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
 msgstr ""
-"Različica razširitve XRandR je nekompatibilna s tem programom. "
-"Spreminjanje ločljivosti med delovanjem zato ni mogoče."
+"Različica razširitve XRandR je nekompatibilna s tem programom. Spreminjanje "
+"ločljivosti med delovanjem zato ni mogoče."
 
 #: capplets/file-types/file-types-capplet.c:196
-#: vfs-methods/themus/themus-properties-view.c:165
+#: vfs-methods/themus/themus-properties-view.c:163
 msgid "Description"
 msgstr "Opis"
 
@@ -1098,7 +1172,7 @@ msgid "Extensions"
 msgstr "Razširitve"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
-#: capplets/file-types/file-types-properties.glade.h:10
+#: capplets/file-types/file-types-properties.glade.h:11
 msgid "File Types and Programs"
 msgstr "Vrste datotek in programi"
 
@@ -1121,83 +1195,88 @@ msgid "Add _Service..."
 msgstr "Dodaj _storitev..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
+#, fuzzy
+msgid "Browse icons"
+msgstr "sekund"
+
+#: capplets/file-types/file-types-properties.glade.h:6
 msgid "C_hoose..."
 msgstr "_Izberi..."
 
-#: capplets/file-types/file-types-properties.glade.h:6
+#: capplets/file-types/file-types-properties.glade.h:7
 msgid "Cate_gory:"
 msgstr "Kate_gorija:"
 
-#: capplets/file-types/file-types-properties.glade.h:7
+#: capplets/file-types/file-types-properties.glade.h:8
 msgid "D_efault action:"
 msgstr "P_rivzeto dejanje:"
 
-#: capplets/file-types/file-types-properties.glade.h:8
+#: capplets/file-types/file-types-properties.glade.h:9
 msgid "Default _action:"
 msgstr "Privzeto _dejanje:"
 
-#: capplets/file-types/file-types-properties.glade.h:9
+#: capplets/file-types/file-types-properties.glade.h:10
 #: capplets/file-types/mime-edit-dialog.c:208
 msgid "Edit file type"
 msgstr "Uredi vrsto datoteke"
 
-#: capplets/file-types/file-types-properties.glade.h:11
+#: capplets/file-types/file-types-properties.glade.h:12
 msgid "Filename extensions:"
 msgstr "Pripone datotek:"
 
-#: capplets/file-types/file-types-properties.glade.h:12
+#: capplets/file-types/file-types-properties.glade.h:13
 msgid "Look at content"
 msgstr "Poglej vsebino"
 
-#: capplets/file-types/file-types-properties.glade.h:13
+#: capplets/file-types/file-types-properties.glade.h:14
 msgid "P_rogram:"
 msgstr "_Program:"
 
-#: capplets/file-types/file-types-properties.glade.h:14
+#: capplets/file-types/file-types-properties.glade.h:15
 msgid "Program to Run"
 msgstr "Program, ki naj se požene"
 
-#: capplets/file-types/file-types-properties.glade.h:15
+#: capplets/file-types/file-types-properties.glade.h:16
 msgid "Run a program"
 msgstr "Poženi program"
 
-#: capplets/file-types/file-types-properties.glade.h:16
+#: capplets/file-types/file-types-properties.glade.h:17
 msgid "Run in _Terminal"
 msgstr "Poženi v _terminalu"
 
-#: capplets/file-types/file-types-properties.glade.h:17
+#: capplets/file-types/file-types-properties.glade.h:18
 msgid "Use parent category _defaults"
 msgstr "Uporabi _privzete nastavitve starševske kategorije"
 
-#: capplets/file-types/file-types-properties.glade.h:18
+#: capplets/file-types/file-types-properties.glade.h:19
 msgid "_Add:"
 msgstr "_Dodaj:"
 
-#: capplets/file-types/file-types-properties.glade.h:19
+#: capplets/file-types/file-types-properties.glade.h:20
 msgid "_Description:"
 msgstr "_Opis:"
 
-#: capplets/file-types/file-types-properties.glade.h:20
+#: capplets/file-types/file-types-properties.glade.h:21
 msgid "_Edit..."
 msgstr "_Uredi..."
 
-#: capplets/file-types/file-types-properties.glade.h:21
+#: capplets/file-types/file-types-properties.glade.h:22
 msgid "_MIME type:"
 msgstr "Vrsta _MIME:"
 
-#: capplets/file-types/file-types-properties.glade.h:23
+#: capplets/file-types/file-types-properties.glade.h:24
 msgid "_Program to run:"
 msgstr "_Program, ki naj se požene:"
 
-#: capplets/file-types/file-types-properties.glade.h:24
+#: capplets/file-types/file-types-properties.glade.h:25
 msgid "_Protocol:"
 msgstr "_Protokol:"
 
-#: capplets/file-types/file-types-properties.glade.h:25
+#: capplets/file-types/file-types-properties.glade.h:26
 msgid "_Remove"
 msgstr "_Odstrani"
 
-#: capplets/file-types/file-types-properties.glade.h:26
+#: capplets/file-types/file-types-properties.glade.h:27
 msgid "_Viewer component:"
 msgstr "Komponenta po_gleda:"
 
@@ -1235,8 +1314,8 @@ msgid "Structure containing information on the MIME category"
 msgstr "Struktura, ki vsebuje podatke o kategoriji MIME"
 
 #: capplets/file-types/mime-category-edit-dialog.c:344
-#: capplets/file-types/mime-edit-dialog.c:491
-#: capplets/file-types/mime-edit-dialog.c:596
+#: capplets/file-types/mime-edit-dialog.c:489
+#: capplets/file-types/mime-edit-dialog.c:594
 #: capplets/file-types/service-edit-dialog.c:358
 #: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
@@ -1270,18 +1349,18 @@ msgstr "Resnično, če je ta dialog za dodajanje vrst MIME"
 msgid "Add File Type"
 msgstr "Dodaj vrsto datotek"
 
-#: capplets/file-types/mime-edit-dialog.c:434
-#: capplets/file-types/mime-type-info.c:674
+#: capplets/file-types/mime-edit-dialog.c:432
+#: capplets/file-types/mime-type-info.c:763
 msgid "Misc"
 msgstr "Razno"
 
-#: capplets/file-types/mime-edit-dialog.c:486
-#: capplets/file-types/mime-edit-dialog.c:547
+#: capplets/file-types/mime-edit-dialog.c:484
+#: capplets/file-types/mime-edit-dialog.c:545
 msgid "None"
 msgstr "Brez"
 
-#: capplets/file-types/mime-edit-dialog.c:852
-#: capplets/file-types/mime-edit-dialog.c:866
+#: capplets/file-types/mime-edit-dialog.c:850
+#: capplets/file-types/mime-edit-dialog.c:864
 msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
@@ -1289,32 +1368,33 @@ msgstr ""
 "Prosim, vpišite veljavno vrsto MIME.  Mora biti oblike razred/vrsta in ne "
 "sme vsebovati presledkov."
 
-#: capplets/file-types/mime-edit-dialog.c:859
-msgid "A MIME type with that name already exists, overwrite ?."
+#: capplets/file-types/mime-edit-dialog.c:857
+#, fuzzy
+msgid "A MIME type with that name already exists, overwrite?"
 msgstr "Vrsta MIME s takšnim imenom že obstaja, prepišem ?."
 
-#: capplets/file-types/mime-edit-dialog.c:931
+#: capplets/file-types/mime-edit-dialog.c:929
 msgid "Category"
 msgstr "Kategorija"
 
-#: capplets/file-types/mime-edit-dialog.c:936
+#: capplets/file-types/mime-edit-dialog.c:934
 msgid "Choose a file category"
 msgstr "Izberite kategorijo datotek"
 
-#: capplets/file-types/mime-type-info.c:602
+#: capplets/file-types/mime-type-info.c:691
 #, c-format
 msgid "View as %s"
 msgstr "Glej kot %s"
 
-#: capplets/file-types/mime-type-info.c:668
+#: capplets/file-types/mime-type-info.c:757
 msgid "Images"
 msgstr "Slike"
 
-#: capplets/file-types/mime-type-info.c:670
+#: capplets/file-types/mime-type-info.c:759
 msgid "Video"
 msgstr "Video"
 
-#: capplets/file-types/mime-type-info.c:672
+#: capplets/file-types/mime-type-info.c:761
 msgid "Audio"
 msgstr "Zvok"
 
@@ -1408,72 +1488,77 @@ msgid "<b>Font Rendering</b>"
 msgstr "<b>Izrisovanje pisav</b>"
 
 #: capplets/font/font-properties.glade.h:3
+#, fuzzy
+msgid "<b>Hinting</b>:"
+msgstr "Namigi:"
+
+#: capplets/font/font-properties.glade.h:4
+#, fuzzy
+msgid "<b>Smoothing</b>:"
+msgstr "Glajenje:"
+
+#: capplets/font/font-properties.glade.h:5
+#, fuzzy
+msgid "<b>Subpixel order</b>:"
+msgstr "Vrstni red podpikslov:"
+
+#: capplets/font/font-properties.glade.h:6
 msgid "Best _shapes"
 msgstr "Najboljše _oblike"
 
-#: capplets/font/font-properties.glade.h:4
+#: capplets/font/font-properties.glade.h:7
 msgid "Best co_ntrast"
 msgstr "Najboljši _kontrast"
 
-#: capplets/font/font-properties.glade.h:5
+#: capplets/font/font-properties.glade.h:8
 msgid "De_tails..."
 msgstr "_Podrobnosti..."
 
-#: capplets/font/font-properties.glade.h:6
+#: capplets/font/font-properties.glade.h:9
 msgid "Font Preferences"
 msgstr "Nastavitve pisave"
 
-#: capplets/font/font-properties.glade.h:7
+#: capplets/font/font-properties.glade.h:10
 msgid "Font Rendering Details"
 msgstr "Podrobnosti izrisovanja pisav"
 
-#: capplets/font/font-properties.glade.h:8
+#: capplets/font/font-properties.glade.h:11
 msgid "G_rayscale"
 msgstr "_Sivine"
 
-#: capplets/font/font-properties.glade.h:9
-msgid "Go to font folder"
+#: capplets/font/font-properties.glade.h:12
+#, fuzzy
+msgid "Go _to font folder"
 msgstr "Pojdi v mapo pisav"
 
-#: capplets/font/font-properties.glade.h:10
-msgid "Hinting:"
-msgstr "Namigi:"
-
-#: capplets/font/font-properties.glade.h:11
+#: capplets/font/font-properties.glade.h:13
 msgid "N_one"
 msgstr "_Brez"
 
-#: capplets/font/font-properties.glade.h:12
-msgid "Resolution (_dots per inch):"
-msgstr "Resolucija (_pik na palec):"
+#: capplets/font/font-properties.glade.h:14
+#, fuzzy
+msgid "R_esolution :"
+msgstr "_Ločljivost:"
 
-#: capplets/font/font-properties.glade.h:13
+#: capplets/font/font-properties.glade.h:15
 msgid "Set the font for applications"
 msgstr "Nastavi pisavo za programe"
 
-#: capplets/font/font-properties.glade.h:14
+#: capplets/font/font-properties.glade.h:16
 msgid "Set the font for the icons on the desktop"
 msgstr "Nastavi pisavo za ikone na namizju"
 
-#: capplets/font/font-properties.glade.h:15
+#: capplets/font/font-properties.glade.h:17
 msgid "Set the monospace font for terminals and similar applications"
 msgstr "Nastavi enakokoračno pisavo za terminale in podobne programe"
 
-#: capplets/font/font-properties.glade.h:16
-msgid "Smoothing:"
-msgstr "Glajenje:"
-
-#: capplets/font/font-properties.glade.h:17
+#: capplets/font/font-properties.glade.h:18
 msgid "Sub_pixel (LCDs)"
 msgstr "Pod_piksel (LCDji)"
 
-#: capplets/font/font-properties.glade.h:18
+#: capplets/font/font-properties.glade.h:19
 msgid "Sub_pixel smoothing (LCDs)"
 msgstr "Podpikselsko glajenje (LCDji)"
-
-#: capplets/font/font-properties.glade.h:19
-msgid "Subpixel order:"
-msgstr "Vrstni red podpikslov:"
 
 #: capplets/font/font-properties.glade.h:20
 msgid "VB_GR"
@@ -1532,56 +1617,97 @@ msgstr "_VRGB"
 msgid "_Window title font:"
 msgstr "Pisava naziva _okna:"
 
-#: capplets/keybindings/eggcellrendererkeys.c:160
+#: capplets/font/font-properties.glade.h:34
+#, fuzzy
+msgid "dots per inch"
+msgstr "Resolucija (_pik na palec):"
+
+#: capplets/font/main.c:506 capplets/font/main.c:513
+msgid "Font may be too large"
+msgstr ""
+
+#: capplets/font/main.c:507
+#, c-format
+msgid ""
+"The font selected is %d point large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a size "
+"smaller than %d."
+msgid_plural ""
+"The font selected is %d points large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a size "
+"smaller than %d."
+msgstr[0] ""
+msgstr[1] ""
+
+#: capplets/font/main.c:514
+#, c-format
+msgid ""
+"The font selected is %d point large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a smaller "
+"sized font."
+msgid_plural ""
+"The font selected is %d points large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a smaller "
+"sized font."
+msgstr[0] ""
+msgstr[1] ""
+
 #: capplets/keybindings/eggcellrendererkeys.c:161
+#: capplets/keybindings/eggcellrendererkeys.c:162
 msgid "Accelerator key"
 msgstr "Pospeševalna tipka"
 
-#: capplets/keybindings/eggcellrendererkeys.c:170
 #: capplets/keybindings/eggcellrendererkeys.c:171
+#: capplets/keybindings/eggcellrendererkeys.c:172
 msgid "Accelerator modifiers"
 msgstr "Pospeševalni spremenilniki"
 
 #: capplets/keybindings/eggcellrendererkeys.c:180
+#: capplets/keybindings/eggcellrendererkeys.c:181
+#, fuzzy
+msgid "Accelerator keycode"
+msgstr "Pospeševalna tipka"
+
+#: capplets/keybindings/eggcellrendererkeys.c:191
 msgid "Accel Mode"
 msgstr "Način pospeš."
 
-#: capplets/keybindings/eggcellrendererkeys.c:181
+#: capplets/keybindings/eggcellrendererkeys.c:192
 msgid "The type of accelerator."
 msgstr "Vrsta pospečevalnika"
 
-#: capplets/keybindings/eggcellrendererkeys.c:219
-#: capplets/keybindings/gnome-keybinding-properties.c:204
-#: libbackground/applier.c:588 typing-break/drwright.c:439
+#: capplets/keybindings/eggcellrendererkeys.c:240
+#: capplets/keybindings/gnome-keybinding-properties.c:235
+#: libbackground/applier.c:588 typing-break/drwright.c:464
 msgid "Disabled"
 msgstr "Izključeno"
 
-#: capplets/keybindings/eggcellrendererkeys.c:330
-#: capplets/keybindings/eggcellrendererkeys.c:563
+#: capplets/keybindings/eggcellrendererkeys.c:359
+#: capplets/keybindings/eggcellrendererkeys.c:599
 msgid "Type a new accelerator, or press Backspace to clear"
 msgstr "Vpišite nov pospeševalnik ali pritisnite povratnico za izbris"
 
-#: capplets/keybindings/eggcellrendererkeys.c:566
+#: capplets/keybindings/eggcellrendererkeys.c:602
 msgid "Type a new accelerator"
 msgstr "Vpišite nov pospeševalnik"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:172
+#: capplets/keybindings/gnome-keybinding-properties.c:202
 msgid "GNOME Default"
 msgstr "Privzeto GNOME"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:540
+#: capplets/keybindings/gnome-keybinding-properties.c:577
 msgid "<Unknown Action>"
 msgstr "<Neznano dejanje>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:559
+#: capplets/keybindings/gnome-keybinding-properties.c:596
 msgid "Desktop"
 msgstr "Namizje"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:563
+#: capplets/keybindings/gnome-keybinding-properties.c:600
 msgid "Window Management"
 msgstr "Upravljanje oken"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:698
+#: capplets/keybindings/gnome-keybinding-properties.c:737
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1590,14 +1716,21 @@ msgstr ""
 "Bližnjica \"%s\" je že v uporabi za:\n"
 " \"%s\"\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:729
+#: capplets/keybindings/gnome-keybinding-properties.c:768
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 "Napaka ob nastavljanju novega pospeševalnika v nastavitveni zbirki podatkov: "
 "%s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:880
+#: capplets/keybindings/gnome-keybinding-properties.c:818
+#, fuzzy, c-format
+msgid "Error unsetting accelerator in configuration database: %s\n"
+msgstr ""
+"Napaka ob nastavljanju novega pospeševalnika v nastavitveni zbirki podatkov: "
+"%s\n"
+
+#: capplets/keybindings/gnome-keybinding-properties.c:967
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1605,11 +1738,11 @@ msgstr ""
 "Nisem našel teme tipkovnice  To pomeni, da je bila vaša namestitev GTK+ "
 "nepopolna."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:902
+#: capplets/keybindings/gnome-keybinding-properties.c:989
 msgid "Action"
 msgstr "Dejanje"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:921
+#: capplets/keybindings/gnome-keybinding-properties.c:1013
 msgid "Shortcut"
 msgstr "Bližnjica"
 
@@ -1634,18 +1767,18 @@ msgstr "_Bližnjice urejanja besedila:"
 msgid "Assign shortcut keys to commands"
 msgstr "Ukazom določi tipkovne bližnjice"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:104
+#: capplets/keyboard/gnome-keyboard-properties.c:106
 #, c-format
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr ""
 "Ob zaganjanju nastavitvenega vstavka tipkovnice se je zgodila napaka : %s"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:195
+#: capplets/keyboard/gnome-keyboard-properties.c:201
 msgid "_Accessibility"
 msgstr "_Dostopnost"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:214
-#: capplets/keyboard/gnome-keyboard-properties.c:216
+#: capplets/keyboard/gnome-keyboard-properties.c:220
+#: capplets/keyboard/gnome-keyboard-properties.c:222
 #: capplets/sound/sound-properties-capplet.c:208
 #: capplets/sound/sound-properties-capplet.c:210
 msgid ""
@@ -1654,7 +1787,7 @@ msgstr ""
 "Le uveljavi nastavitve in končaj (le za kompatibilnost; sedaj stvar "
 "obravnava daemon)"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:220
+#: capplets/keyboard/gnome-keyboard-properties.c:226
 msgid "Start the page with the typing break settings showing"
 msgstr "Poženi stran, ki kaže nastavitve premora tipkanja"
 
@@ -1687,65 +1820,105 @@ msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Počasi</i></small>"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+msgid "A_vailable layouts:"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#, fuzzy
+msgid "A_vailable options:"
+msgstr "Možnosti _slike:"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "All_ow postponing of breaks"
 msgstr "Dovoli _odlašanje premorv"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Check if breaks are allowed to be postponed"
 msgstr "Označeno, če je dovoljeno odlašati premore"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Cursor _blinks in text boxes and fields"
 msgstr "Kazalec _utripaa v poljih in besedilih"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
 msgid "Duration of the break when typing is disallowed"
 msgstr "Trajanje premora med katerim je tipkanje onemogočeno"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "Duration of work before forcing a break"
 msgstr "Trajanje dela preden se uveljavi premor"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
 msgid "Key presses _repeat when key is held down"
 msgstr "Ponavljanje p_ritiskov tipk, ko je tipka neprestano pritisnjena"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "Keyboard Preferences"
 msgstr "Nastavitv tipkovnice"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
+#, fuzzy
+msgid "Keyboard _model:"
+msgstr "Tipkovničin zvonec"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#, fuzzy
+msgid "Layout Options"
+msgstr "Možnosti"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#, fuzzy
+msgid "Layouts"
+msgstr "Postavitev"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
 msgstr ""
-"Zakleni zaslon po določenem času s čimer se zmanjša možnost poškod zaradi predolge uporabe tipkovnice."
+"Zakleni zaslon po določenem času s čimer se zmanjša možnost poškod zaradi "
+"predolge uporabe tipkovnice."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
+#, fuzzy
+msgid "Reset to de_faults"
+msgstr "Uporabi _privzete nastavitve kategorije"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
 msgid "Typing Break"
 msgstr "Premor tipkanja"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "_Accessibility..."
 msgstr "_Dostopnost..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
 msgid "_Break interval lasts:"
 msgstr "_Trajanje premora:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
 msgid "_Delay:"
 msgstr "_Premor:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:30
+#, fuzzy
+msgid "_Selected layouts:"
+msgstr "_Izberite urejevalnik:"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
+#, fuzzy
+msgid "_Selected options:"
+msgstr "Možnosti _slike:"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:32
 msgid "_Speed:"
 msgstr "_Hitrost:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:34
 msgid "_Work interval lasts:"
 msgstr "Trajanje _dela:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:35
 msgid "minutes"
 msgstr "minut"
 
@@ -1755,69 +1928,65 @@ msgstr "Nastavitve tipkovnice"
 
 #: capplets/mouse/gnome-mouse-properties.c:496
 msgid "Unknown Cursor"
-msgstr ""
-"Neznan kazalec"
+msgstr "Neznan kazalec"
 
-#: capplets/mouse/gnome-mouse-properties.c:602
+#: capplets/mouse/gnome-mouse-properties.c:613
 msgid "Default Cursor - Current"
 msgstr "Privzet kazalec - trenutni"
 
-#: capplets/mouse/gnome-mouse-properties.c:602
-#: capplets/mouse/gnome-mouse-properties.c:605
+#: capplets/mouse/gnome-mouse-properties.c:613
+#: capplets/mouse/gnome-mouse-properties.c:616
 msgid "The default cursor that ships with X"
 msgstr "Privzet kazalec, ki pride s strežnikom X"
 
-#: capplets/mouse/gnome-mouse-properties.c:605
+#: capplets/mouse/gnome-mouse-properties.c:616
 msgid "Default Cursor"
 msgstr "Privzet kazalec"
 
-#: capplets/mouse/gnome-mouse-properties.c:623
+#: capplets/mouse/gnome-mouse-properties.c:634
 msgid "White Cursor - Current"
 msgstr "Bel kazalec - trenutni"
 
-#: capplets/mouse/gnome-mouse-properties.c:623
-#: capplets/mouse/gnome-mouse-properties.c:626
+#: capplets/mouse/gnome-mouse-properties.c:634
+#: capplets/mouse/gnome-mouse-properties.c:637
 msgid "The default cursor inverted"
-msgstr ""
-"Invertiran privzet kazalec"
+msgstr "Invertiran privzet kazalec"
 
-#: capplets/mouse/gnome-mouse-properties.c:626
+#: capplets/mouse/gnome-mouse-properties.c:637
 msgid "White Cursor"
 msgstr "Bel kazalec"
 
-#: capplets/mouse/gnome-mouse-properties.c:645
+#: capplets/mouse/gnome-mouse-properties.c:656
 msgid "Large Cursor - Current"
 msgstr "Velik kazalec - trenutni"
 
-#: capplets/mouse/gnome-mouse-properties.c:645
-#: capplets/mouse/gnome-mouse-properties.c:648
+#: capplets/mouse/gnome-mouse-properties.c:656
+#: capplets/mouse/gnome-mouse-properties.c:659
 msgid "Large version of normal cursor"
-msgstr ""
-"Velika različica običajnega kazalca"
+msgstr "Velika različica običajnega kazalca"
 
-#: capplets/mouse/gnome-mouse-properties.c:648
+#: capplets/mouse/gnome-mouse-properties.c:659
 msgid "Large Cursor"
 msgstr "Velik kazalec"
 
-#: capplets/mouse/gnome-mouse-properties.c:667
+#: capplets/mouse/gnome-mouse-properties.c:678
 msgid "Large White Cursor - Current"
-msgstr ""
-"Velik bel kazalec - trenutni"
+msgstr "Velik bel kazalec - trenutni"
 
-#: capplets/mouse/gnome-mouse-properties.c:667
-#: capplets/mouse/gnome-mouse-properties.c:670
+#: capplets/mouse/gnome-mouse-properties.c:678
+#: capplets/mouse/gnome-mouse-properties.c:681
 msgid "Large version of white cursor"
 msgstr "Velika različica belega kazalca"
 
-#: capplets/mouse/gnome-mouse-properties.c:670
+#: capplets/mouse/gnome-mouse-properties.c:681
 msgid "Large White Cursor"
 msgstr "Velik bel kazalec"
 
-#: capplets/mouse/gnome-mouse-properties.c:747
+#: capplets/mouse/gnome-mouse-properties.c:753
 msgid "Cursor Size"
 msgstr "Velikost kazalca"
 
-#: capplets/mouse/gnome-mouse-properties.c:756
+#: capplets/mouse/gnome-mouse-properties.c:762
 msgid "Cursor Theme"
 msgstr "Teme kazalca"
 
@@ -1848,7 +2017,6 @@ msgid ""
 msgstr ""
 "<i><small><b>Opomba:</b> Spremembe teh nastavitev ne bodo učinkovale dokler "
 "se naslednjič ne prijavite.</small></i>"
-
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid "<i>Fast</i>"
@@ -1922,11 +2090,11 @@ msgstr "_Prag:"
 msgid "_Timeout:"
 msgstr "_Časovna omejitev:"
 
-#: capplets/mouse/mouse.desktop.in.h:1
+#: capplets/mouse/gnome-settings-mouse.desktop.in.h:1
 msgid "Mouse"
 msgstr "Miška"
 
-#: capplets/mouse/mouse.desktop.in.h:2
+#: capplets/mouse/gnome-settings-mouse.desktop.in.h:2
 msgid "Set your mouse preferences"
 msgstr "Nastavi lastnosti miške"
 
@@ -2002,6 +2170,10 @@ msgstr "Posrednik varnega HTTP (HTTPS):"
 msgid "_Username:"
 msgstr "_Uporabniško ime:"
 
+#: capplets/sound/gnome-settings-sound.desktop.in.h:1
+msgid "Enable sound and associate sounds with events"
+msgstr "Vklopi zvoke in poveži zvoke z dogodki"
+
 #: capplets/sound/sound-properties-capplet.c:239
 msgid "Sound preferences"
 msgstr "Nastavitve zvoka"
@@ -2045,10 +2217,6 @@ msgstr "_Zvoki ob dogodkih"
 #: capplets/sound/sound-properties.glade.h:10
 msgid "_Visual feedback:"
 msgstr "_Vizualna naznanitev:"
-
-#: capplets/sound/sound.desktop.in.h:1
-msgid "Enable sound and associate sounds with events"
-msgstr "Vklopi zvoke in poveži zvoke z dogodki"
 
 #: capplets/theme-switcher/control/control.c:18
 msgid "Eenie Meenie Mynie Moe Catcha Tiger By Its Toe"
@@ -2100,7 +2268,7 @@ msgid "Two"
 msgstr "Dve"
 
 #: capplets/theme-switcher/gnome-theme-details.c:372
-#: capplets/theme-switcher/gnome-theme-manager.c:589
+#: capplets/theme-switcher/gnome-theme-manager.c:609
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -2110,17 +2278,38 @@ msgstr ""
 "vaš dialog \"Nastavitve teme\" nepravilno nameščen ali pa niste namestili "
 "paketa \"gnome-themes\"."
 
-#: capplets/theme-switcher/gnome-theme-manager.c:645
-#: capplets/theme-switcher/gnome-theme-manager.c:705
+#: capplets/theme-switcher/gnome-theme-installer.c:127
+msgid "No theme file location specified to install"
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-installer.c:146
+msgid "The theme file location specified to install is invalid"
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-installer.c:173
+#, c-format
+msgid ""
+"%s is the path where the theme files will be installed. This can not be "
+"selected as the source location"
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-manager.c:301
+msgid ""
+"The gnome-theme-manager does not know how to change the themes on the "
+"current window manager."
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-manager.c:665
+#: capplets/theme-switcher/gnome-theme-manager.c:725
 msgid "Custom theme"
 msgstr "Prikrojena tema"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:645
-#: capplets/theme-switcher/gnome-theme-manager.c:705
+#: capplets/theme-switcher/gnome-theme-manager.c:665
+#: capplets/theme-switcher/gnome-theme-manager.c:725
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "To temo lahko shranete, če pritisnete gumb \"Shrani temo\"."
 
-#: capplets/theme-switcher/gnome-theme-manager.c:1398
+#: capplets/theme-switcher/gnome-theme-manager.c:1418
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -2129,7 +2318,7 @@ msgstr ""
 "Privzete sheme tem niso bile najdene na vašem sistemu.  To verjetno pomeni, "
 "da na vašem sistemu nimate nameščenega upravljalnika oken metacity ali, da "
 "je gconf napačno nastavljen."
- 
+
 #: capplets/theme-switcher/gnome-theme-save.c:72
 msgid "Theme name must be present"
 msgstr "Tema mora biti prisotna"
@@ -2188,75 +2377,74 @@ msgid "Save Theme"
 msgstr "Shrani temo"
 
 #: capplets/theme-switcher/theme-properties.glade.h:9
+#, fuzzy
+msgid "Select theme for the desktop"
+msgstr "Izberi pisave za namizje"
+
+#: capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Short _description:"
 msgstr "Kratek _opis:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:10
+#: capplets/theme-switcher/theme-properties.glade.h:11
 msgid "Theme Details"
 msgstr "Podrobnosti teme"
 
-#: capplets/theme-switcher/theme-properties.glade.h:11
+#: capplets/theme-switcher/theme-properties.glade.h:12
 msgid "Theme Preferences"
 msgstr "Nastavitve teme"
 
-#: capplets/theme-switcher/theme-properties.glade.h:12
+#: capplets/theme-switcher/theme-properties.glade.h:13
 msgid "Theme _Details"
 msgstr "_Podrobnosti teme"
 
-#: capplets/theme-switcher/theme-properties.glade.h:13
-msgid "This theme does not suggest any particular font or background."
-msgstr ""
-"Ta tema ne predlaga določene pisave ali ozadja"
-
 #: capplets/theme-switcher/theme-properties.glade.h:14
-msgid "This theme suggests a background:"
-msgstr ""
-"Ta tema predlaga ozadje:"
+msgid "This theme does not suggest any particular font or background."
+msgstr "Ta tema ne predlaga določene pisave ali ozadja"
 
 #: capplets/theme-switcher/theme-properties.glade.h:15
-msgid "This theme suggests a font and a background:"
-msgstr ""
-"Ta tema predlaga pisavo in ozadje:"
+msgid "This theme suggests a background:"
+msgstr "Ta tema predlaga ozadje:"
 
 #: capplets/theme-switcher/theme-properties.glade.h:16
+msgid "This theme suggests a font and a background:"
+msgstr "Ta tema predlaga pisavo in ozadje:"
+
+#: capplets/theme-switcher/theme-properties.glade.h:17
 msgid "This theme suggests a font:"
 msgstr "Ta tema predlaga pisavo:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:17
+#: capplets/theme-switcher/theme-properties.glade.h:18
 msgid "Window Border"
 msgstr "Rob okna"
 
-#: capplets/theme-switcher/theme-properties.glade.h:18
+#: capplets/theme-switcher/theme-properties.glade.h:19
 msgid "_Go To Theme Folder"
 msgstr "_Pojdi v mapo tem"
 
-#: capplets/theme-switcher/theme-properties.glade.h:19
+#: capplets/theme-switcher/theme-properties.glade.h:20
 msgid "_Install Theme..."
 msgstr "_Namesti temo..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:20
+#: capplets/theme-switcher/theme-properties.glade.h:21
 msgid "_Save Theme..."
 msgstr "_Shrani temo..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:21
+#: capplets/theme-switcher/theme-properties.glade.h:22
 msgid "_Theme name:"
 msgstr "Ime _teme:"
 
-#: capplets/ui-properties/behavior.desktop.in.h:1
+#: capplets/theme-switcher/theme-properties.glade.h:23
+#, fuzzy
+msgid "theme selection tree"
+msgstr "Izbirnik tem Gtk+"
+
+#: capplets/ui-properties/gnome-ui-properties.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
 msgstr "Prikroji izgled orodjarn in menujskih vrstic v programih"
 
-#: capplets/ui-properties/behavior.desktop.in.h:2
+#: capplets/ui-properties/gnome-ui-properties.desktop.in.h:2
 msgid "Menus & Toolbars"
 msgstr "Menuji in orodjarne"
-
-#: capplets/ui-properties/behavior.desktop.in.in.h:1
-msgid "Behavior"
-msgstr "Obnašanje"
-
-#: capplets/ui-properties/behavior.desktop.in.in.h:2
-msgid "Sets the default behavior of GNOME applications"
-msgstr "Nastavi privzeto obnašanje programov GNOME"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:2
 msgid "<b>Behavior and Appearance</b>"
@@ -2411,7 +2599,7 @@ msgstr "Lastnosti oken"
 msgid "Windows"
 msgstr "Okna"
 
-#: control-center/capplet-dir-view-list.c:324
+#: control-center/capplet-dir-view-list.c:319
 #, c-format
 msgid "GNOME Control Center: %s"
 msgstr "Kontrolni center GNOME: %s"
@@ -2481,6 +2669,54 @@ msgstr "Uporabi lupino tudi kadar nautilus teče."
 msgid "Could not initialize Bonobo"
 msgstr "Nisem mogel inicializirati bonoba"
 
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:325
+#, fuzzy
+msgid "There was an error displaying help:"
+msgstr "Ob prikazovanju pomoči se je zgodila napaka: %s"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
+msgid "Slow Keys Alert"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+msgid ""
+"You just held down the Shift key for 8 seconds.  This is the shortcut for "
+"the Slow Keys feature, which affects the way your keyboard works."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
+#, fuzzy
+msgid "Do you want to activate Slow Keys?"
+msgstr "Želite ohraniti to ločljivost?"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
+#, fuzzy
+msgid "Do you want to deactivate Sticky Keys ?"
+msgstr "Želite ohraniti to ločljivost?"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:424
+msgid "Sticky Keys Alert"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:425
+msgid ""
+"You just pressed the Shift key 5 times in a row.  This is the shortcut for "
+"the Sticky Keys feature, which affects the way your keyboard works."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
+msgid ""
+"You just pressed two keys at once, or pressed the Shift key 5 times in a "
+"row.  This turns off the Sticky Keys feature, which affects the way your "
+"keyboard works."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
+#, fuzzy
+msgid "Do you want to activate Sticky Keys?"
+msgstr "Želite ohraniti to ločljivost?"
+
 #: gnome-settings-daemon/gnome-settings-font.c:102
 #, c-format
 msgid ""
@@ -2490,37 +2726,37 @@ msgstr ""
 "Nisem uspel ustvariti imenik \"%s\".\n"
 "To je potrebno za spreminjanje kazalcev."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:165
+#: gnome-settings-daemon/gnome-settings-keybindings.c:162
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "Tipkovnična povezava (%s) ima nastavljenih več različnih dejanj\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:178
+#: gnome-settings-daemon/gnome-settings-keybindings.c:175
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "Tipkovnična povezava (%s) ima nastavljenih več različnih dejanj\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:184
+#: gnome-settings-daemon/gnome-settings-keybindings.c:181
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "Tipkovnična povezava (%s) ni popolna\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:212
+#: gnome-settings-daemon/gnome-settings-keybindings.c:209
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "Tipkovnična povezava (%s) je neveljavna\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:248
+#: gnome-settings-daemon/gnome-settings-keybindings.c:245
 #, c-format
 msgid "It seems that another application already has access to key '%d'."
 msgstr "Zdi se, da ima dostop do tipke '%d' že drug program."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:317
+#: gnome-settings-daemon/gnome-settings-keybindings.c:314
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "Tipkovnična povezava (%s) je že v uporabi\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:393
+#: gnome-settings-daemon/gnome-settings-keybindings.c:390
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2528,6 +2764,29 @@ msgid ""
 msgstr ""
 "Napaka ob poskusu zagona (%s),\n"
 "ki je povezan s tipko (%s)"
+
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:61
+#, c-format
+msgid ""
+"Error activating XKB configuration.\n"
+"Probably internal X server problem.\n"
+"\n"
+"X server version data:\n"
+"%s\n"
+"%d\n"
+"%s\n"
+"If you report this situation as a bug, please include:\n"
+"- The result of <b>xprop -root | grep XKB</b>\n"
+"- The result of <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b>"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:71
+msgid ""
+"You are using XFree 4.3.0.\n"
+"There are known problems with complex XKB configurations.\n"
+"Try using simpler configuration or taking more fresh version of XFree "
+"software."
+msgstr ""
 
 #: gnome-settings-daemon/gnome-settings-screensaver.c:92
 #, c-format
@@ -2558,7 +2817,7 @@ msgstr "Nisem mogel naložiti zvočne datoteke %s kot vzorca %s"
 msgid "Cannot determine user's home directory"
 msgstr "Ne morem ugotoviti uporabnikovega domačega imenika"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:202
+#: gnome-settings-daemon/gnome-settings-xsettings.c:204
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr ""
@@ -2612,11 +2871,11 @@ msgstr "Ne najdem hbox, uporabljam običajno izbiro datotek"
 msgid "Preview"
 msgstr "Predogled"
 
-#: libsounds/sound-view.c:130
+#: libsounds/sound-view.c:121 libsounds/sound-view.c:146
 msgid "The sound file for this event does not exist."
 msgstr "Zvočna datoteka za ta dogodek ne obstaja."
 
-#: libsounds/sound-view.c:132
+#: libsounds/sound-view.c:148
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -2626,32 +2885,32 @@ msgstr ""
 "Morda bi želeli namestiti gnome-audio paket\n"
 "za zbirko privzetih zvokov."
 
-#: libsounds/sound-view.c:176
+#: libsounds/sound-view.c:192
 #, c-format
 msgid "The file %s is not a valid wav file"
 msgstr "Datoteka %s ni veljavna datoteka wav"
 
-#: libsounds/sound-view.c:241
+#: libsounds/sound-view.c:257
 msgid "Event"
 msgstr "Dogodek"
 
-#: libsounds/sound-view.c:250
+#: libsounds/sound-view.c:266
 msgid "Sound File"
 msgstr "Zvočna datoteka"
 
-#: libsounds/sound-view.c:266
+#: libsounds/sound-view.c:282
 msgid "_Sounds:"
 msgstr "_Zvoki:"
 
-#: libsounds/sound-view.c:280
+#: libsounds/sound-view.c:296
 msgid "Sound _file:"
 msgstr "Zvočna _datoteka:"
 
-#: libsounds/sound-view.c:284
+#: libsounds/sound-view.c:300
 msgid "Select Sound File"
 msgstr "Izberi zvočno datoteko"
 
-#: libsounds/sound-view.c:302
+#: libsounds/sound-view.c:323
 msgid "_Play"
 msgstr "_Predvajaj"
 
@@ -2749,41 +3008,65 @@ msgstr ""
 "\" - brez namigovanj, \"slight\", \"medium\", and \"full\" - kolikor veliko "
 "namigov je možno; lahko povzroči popačenje oblik črk."
 
-#: typing-break/drw-break-window.c:260
-msgid "Postpone break"
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:1
+msgid ""
+"Very soon, XKB settings in gconf will be overridden (from the system "
+"configuration)"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
+#, fuzzy
+msgid "XKB keyboard layout"
+msgstr "Tipkovnične bližnjice"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
+#, fuzzy
+msgid "XKB keyboard model"
+msgstr "Tipkovničin zvonec"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
+#, fuzzy
+msgid "XKB options"
+msgstr "Možnosti"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
+msgid "XKB settings in gconf will be overridden from the system ASAP"
+msgstr ""
+
+#: typing-break/drw-break-window.c:189
+#, fuzzy
+msgid "_Postpone break"
 msgstr "Preloži premor"
 
-#: typing-break/drw-break-window.c:298
+#: typing-break/drw-break-window.c:227
 msgid "Take a break!"
 msgstr "Vzemi oddih!"
 
 #. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
-#: typing-break/drwright.c:133
+#: typing-break/drwright.c:135
 msgid "/_Preferences"
 msgstr "/_Nastavitve"
 
-#: typing-break/drwright.c:134
+#: typing-break/drwright.c:136
 msgid "/_About"
 msgstr "/_O programu"
 
-#: typing-break/drwright.c:136
+#: typing-break/drwright.c:138
 msgid "/_Take a Break"
 msgstr "/_Vzemi oddih"
 
-#: typing-break/drwright.c:457
-#, c-format
-msgid "%d minutes until the next break"
-msgstr "%d minut do naslednjega premora"
+#: typing-break/drwright.c:482
+#, fuzzy, c-format
+msgid "%d minute until the next break"
+msgid_plural "%d minutes until the next break"
+msgstr[0] "%d minut do naslednjega premora"
+msgstr[1] "%d minut do naslednjega premora"
 
-#: typing-break/drwright.c:460
-msgid "One minute until the next break"
-msgstr "Ena minuta do naslednjega premora"
-
-#: typing-break/drwright.c:462
+#: typing-break/drwright.c:486
 msgid "Less than one minute until the next break"
 msgstr "Manj kot minuta do naslednjega premora"
 
-#: typing-break/drwright.c:576
+#: typing-break/drwright.c:581
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
@@ -2791,23 +3074,23 @@ msgid ""
 msgstr ""
 "Nisem mogel prikazati dialoga premora tipkanja zaradi sledeče napake: %s"
 
-#: typing-break/drwright.c:616
+#: typing-break/drwright.c:621
 msgid "About GNOME Typing Monitor"
 msgstr "O Nadzorniku tipkanja GNOME"
 
-#: typing-break/drwright.c:640
+#: typing-break/drwright.c:645
 msgid "A computer break reminder."
 msgstr "Opomnilnik na premor."
 
-#: typing-break/drwright.c:641
+#: typing-break/drwright.c:646
 msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
 msgstr "Napisal Richard hult &lt;richard@imendio.com&gt;"
 
-#: typing-break/drwright.c:642
+#: typing-break/drwright.c:647
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Paše za oči dodal Anders Carlsson"
 
-#: typing-break/drwright.c:801
+#: typing-break/drwright.c:820
 msgid "Break reminder"
 msgstr "Opomnilnik na premor"
 
@@ -2822,9 +3105,9 @@ msgid ""
 "right-clicking on your panel and choose 'Add to panel -> Utilities -> "
 "Notification area'."
 msgstr ""
-"Nadzornik tipkanja uporablja področje opozoril za prikaz podatkov. "
-"Zdi se, da na vašem pultu nimate področja opozoril. Lahko ga dodate "
-"z desnim klikom na vaš pult in 'Dodaj pultu -> Pripomočki -> Področje opozoril'."
+"Nadzornik tipkanja uporablja področje opozoril za prikaz podatkov. Zdi se, "
+"da na vašem pultu nimate področja opozoril. Lahko ga dodate z desnim klikom "
+"na vaš pult in 'Dodaj pultu -> Pripomočki -> Področje opozoril'."
 
 #: vfs-methods/fontilus/font-view.c:101
 msgid "The quick brown fox jumps over the lazy dog. 0123456789"
@@ -2864,7 +3147,8 @@ msgstr "Predmeti kontekstnega menuja pisave"
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:1
 msgid "If set to true, then OpenType fonts will be thumbnailed."
-msgstr "Če je nastavljeno na resnično, bodo pisave OpenType prikazane v sličicah"
+msgstr ""
+"Če je nastavljeno na resnično, bodo pisave OpenType prikazane v sličicah"
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:2
 msgid "If set to true, then PCF fonts will be thumbnailed."
@@ -2872,7 +3156,8 @@ msgstr "Če je nastavljeno na resnično, bodo pisave PCF prikazane v sličicah"
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:3
 msgid "If set to true, then TrueType fonts will be thumbnailed."
-msgstr "Če je nastavljeno na resnično, bodo pisave TrueType prikazane v sličicah"
+msgstr ""
+"Če je nastavljeno na resnično, bodo pisave TrueType prikazane v sličicah"
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:4
 msgid "If set to true, then Type1 fonts will be thumbnailed."
@@ -2881,45 +3166,36 @@ msgstr "Če je nastavljeno na resnično, bodo pisave Type1 prikazane v sličicah
 #: vfs-methods/fontilus/fontilus.schemas.in.h:5
 msgid ""
 "Set this key to the command used to create thumbnails for OpenType fonts."
-msgstr ""
-"Ukaz za ustvaritev sličic pisav OpenType."
+msgstr "Ukaz za ustvaritev sličic pisav OpenType."
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:6
 msgid "Set this key to the command used to create thumbnails for PCF fonts."
-msgstr ""
-"Ukaz za ustvaritev sličic pisav PCF."
+msgstr "Ukaz za ustvaritev sličic pisav PCF."
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:7
 msgid ""
 "Set this key to the command used to create thumbnails for TrueType fonts."
-msgstr ""
-"Ukaz za ustvaritev sličic pisav TrueType."
+msgstr "Ukaz za ustvaritev sličic pisav TrueType."
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:8
 msgid "Set this key to the command used to create thumbnails for Type1 fonts."
-msgstr ""
-"Ukaz za ustvaritev sličic pisav Type1."
+msgstr "Ukaz za ustvaritev sličic pisav Type1."
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:9
 msgid "Thumbnail command for OpenType fonts"
-msgstr ""
-"Ukaz za ustvaritev sličic pisav OpenType."
-
+msgstr "Ukaz za ustvaritev sličic pisav OpenType."
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:10
 msgid "Thumbnail command for PCF fonts"
-msgstr ""
-"Ukaz za ustvaritev sličic pisav PCF."
+msgstr "Ukaz za ustvaritev sličic pisav PCF."
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:11
 msgid "Thumbnail command for TrueType fonts"
-msgstr ""
-"Ukaz za ustvaritev sličic pisav TrueType."
+msgstr "Ukaz za ustvaritev sličic pisav TrueType."
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:12
 msgid "Thumbnail command for Type1 fonts"
-msgstr ""
-"Ukaz za ustvaritev sličic pisav Type1."
+msgstr "Ukaz za ustvaritev sličic pisav Type1."
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:13
 msgid "Whether to thumbnail OpenType fonts"
@@ -2957,6 +3233,14 @@ msgstr "Vnosi za nautilusov kontekstni menu za pisave"
 msgid "Set as Application Font"
 msgstr "Nastavi za pisavo programa"
 
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
+msgid "Theme Properties content view component"
+msgstr "Pogled komponetne lastnosti teme"
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
+msgid "Themus Theme Properties view"
+msgstr "Pogled lastnosti teme Themus"
+
 #: vfs-methods/themus/apply-font.glade.h:1
 msgid " "
 msgstr " "
@@ -2974,37 +3258,30 @@ msgid ""
 "The theme you have selected suggests a new font. A preview of the font is "
 "shown below."
 msgstr ""
-"Tema, ki ste jo izbrali predlaga novo pisavo. Njen predogled je prikazan spodaj."
+"Tema, ki ste jo izbrali predlaga novo pisavo. Njen predogled je prikazan "
+"spodaj."
 
 #: vfs-methods/themus/apply-font.glade.h:5
 msgid "_Apply font"
 msgstr "_Uveljavi pisavo"
 
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
-msgid "Theme Properties content view component"
-msgstr "Pogled komponetne lastnosti teme"
-
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
-msgid "Themus Theme Properties view"
-msgstr "Pogled lastnosti teme Themus"
-
-#: vfs-methods/themus/theme-method.c:514
+#: vfs-methods/themus/theme-method.c:520
 msgid "Themes"
 msgstr "Teme"
 
-#: vfs-methods/themus/themus-properties-view.c:170
+#: vfs-methods/themus/themus-properties-view.c:168
 msgid "Control theme"
 msgstr "Prikroji temo"
 
-#: vfs-methods/themus/themus-properties-view.c:174
+#: vfs-methods/themus/themus-properties-view.c:172
 msgid "Window border theme"
 msgstr "Tema robu okna"
 
-#: vfs-methods/themus/themus-properties-view.c:178
+#: vfs-methods/themus/themus-properties-view.c:176
 msgid "Icon theme"
 msgstr "Tema ikon"
 
-#: vfs-methods/themus/themus-properties-view.c:217
+#: vfs-methods/themus/themus-properties-view.c:215
 msgid "URI currently displayed"
 msgstr "Trenutno prikazan URI"
 
@@ -3024,24 +3301,19 @@ msgstr "Če je nastavljeno, bodo teme predstavljene kot sličice"
 #: vfs-methods/themus/themus.schemas.in.h:3
 msgid ""
 "Set this key to the command used to create thumbnails for installed themes."
-msgstr ""
-"Ukaz uporabljen za ustvarjanje sličic nameščenih tem."
+msgstr "Ukaz uporabljen za ustvarjanje sličic nameščenih tem."
 
 #: vfs-methods/themus/themus.schemas.in.h:4
 msgid "Set this key to the command used to create thumbnails for themes."
-msgstr ""
-"Ukaz uporabljen za ustvarjanje sličic tem."
+msgstr "Ukaz uporabljen za ustvarjanje sličic tem."
 
 #: vfs-methods/themus/themus.schemas.in.h:5
 msgid "Thumbnail command for installed themes"
-msgstr ""
-"Ukaz uporabljen za ustvarjanje sličic nameščenih tem."
-
+msgstr "Ukaz uporabljen za ustvarjanje sličic nameščenih tem."
 
 #: vfs-methods/themus/themus.schemas.in.h:6
 msgid "Thumbnail command for themes"
-msgstr ""
-"Ukaz uporabljen za ustvarjanje sličic tem."
+msgstr "Ukaz uporabljen za ustvarjanje sličic tem."
 
 #: vfs-methods/themus/themus.schemas.in.h:7
 msgid "Whether to thumbnail installed themes"
@@ -3051,14 +3323,243 @@ msgstr "Ali naj se prikažejo sličice nameščenih tem"
 msgid "Whether to thumbnail themes"
 msgstr "Ali naj se prikažejo sličice tem"
 
+#: gnome-settings-daemon/actions/acme.glade.h:1
+#, fuzzy
+msgid "Volume"
+msgstr "_Glasnost:"
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:113
+#, c-format
+msgid ""
+"Couldn't execute command: %s\n"
+"Verify that this command exists."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:129
+msgid ""
+"Couldn't put the machine to sleep.\n"
+"Verify that the machine is correctly configured."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:139
+#, c-format
+msgid "Permissions on the file %s are broken\n"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:900
+msgid ""
+"Couldn't load the Glade file.\n"
+"Make sure that this daemon is properly installed."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:1
+msgid "Brightness down"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:2
+msgid "Brightness down's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:3
+msgid "Brightness up"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
+msgid "Brightness up's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
+#, fuzzy
+msgid "E-mail"
+msgstr "E-pošta"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:6
+msgid "E-mail's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
+#, fuzzy
+msgid "Eject"
+msgstr "Dogodek"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
+#, fuzzy
+msgid "Eject's shortcut."
+msgstr "Bližnjice _namizja"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
+#, fuzzy
+msgid "Home Folder"
+msgstr "_Pojdi v mapo tem"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
+#, fuzzy
+msgid "Launch Help Browser"
+msgstr "Brskalnik po pomoči"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
+msgid "Launch Help Browser's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
+#, fuzzy
+msgid "Launch Web Browser"
+msgstr "Spletni brskalnik"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
+msgid "Launch Web Browser's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
+#, fuzzy
+msgid "Lock Screen"
+msgstr "Zaslon"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
+msgid "Lock Screen's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
+#, fuzzy
+msgid "Log Out"
+msgstr "Postavitev"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
+msgid "Log Out's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
+msgid "My Home Folder's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
+msgid "Next track key's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
+#, fuzzy
+msgid "Pause"
+msgstr "_Prilepi"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
+#, fuzzy
+msgid "Pause key's shortcut."
+msgstr "Nastavi tipkovnične povezave"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
+msgid "Play (or Play/Pause)"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
+msgid "Play (or Play/Pause) key's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
+#, fuzzy
+msgid "Previous track key's shortcut."
+msgstr "Nastavi tipkovnične povezave"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
+msgid "Search"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
+#, fuzzy
+msgid "Search's shortcut."
+msgstr "Bližnjica"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
+msgid "Skip to Next track"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
+msgid "Skip to Previous track"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
+#, fuzzy
+msgid "Sleep"
+msgstr "Hitrost"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
+#, fuzzy
+msgid "Sleep's shortcut."
+msgstr "Bližnjica"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
+msgid "Stop playback key"
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
+msgid "Stop playback key's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
+#, fuzzy
+msgid "Volume down"
+msgstr "_Glasnost:"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
+msgid "Volume down's shortcut."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
+#, fuzzy
+msgid "Volume mute"
+msgstr "_Glasnost:"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
+#, fuzzy
+msgid "Volume mute's shortcut"
+msgstr "Nastavi tipkovnične povezave"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
+#, fuzzy
+msgid "Volume step"
+msgstr "_Glasnost:"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:38
+msgid "Volume step as percentage of volume."
+msgstr ""
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:39
+#, fuzzy
+msgid "Volume up"
+msgstr "_Glasnost:"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
+msgid "Volume up's shortcut."
+msgstr ""
+
+#~ msgid "radiobutton1"
+#~ msgstr "Radijski gumb 1"
+
+#~ msgid "radiobutton2"
+#~ msgstr "Radijski gumb 2"
+
+#~ msgid "radiobutton3"
+#~ msgstr "Radijski gumb 3"
+
+#~ msgid "radiobutton4"
+#~ msgstr "Radijski gumb 4"
+
+#~ msgid "radiobutton5"
+#~ msgstr "Radijski gumb 5"
+
+#~ msgid "Behavior"
+#~ msgstr "Obnašanje"
+
+#~ msgid "Sets the default behavior of GNOME applications"
+#~ msgstr "Nastavi privzeto obnašanje programov GNOME"
+
+#~ msgid "One minute until the next break"
+#~ msgstr "Ena minuta do naslednjega premora"
+
 #~ msgid "Select CDE AccessX file"
 #~ msgstr "Izberi datoteko CDE AccessX"
 
 #~ msgid "_Repeat Keys"
 #~ msgstr "_Ponavljajoče se tipke"
-
-#~ msgid "_Wallpaper"
-#~ msgstr "_Tapeta"
 
 #~ msgid "A preview of the background picture."
 #~ msgstr "Predogled slike ozadja"
@@ -3075,9 +3576,6 @@ msgstr "Ali naj se prikažejo sličice tem"
 #~ msgid "Default Help Browser"
 #~ msgstr "Privzet brskalnik po pomoči"
 
-#~ msgid "Help Browser"
-#~ msgstr "Brskalnik po pomoči"
-
 #~ msgid "Bee_p"
 #~ msgstr "_Pisk"
 
@@ -3087,17 +3585,11 @@ msgstr "Ali naj se prikažejo sličice tem"
 #~ msgid "Clic_k on keypress"
 #~ msgstr "_Klik ob pritisku tipke"
 
-#~ msgid "Keyboard Bell"
-#~ msgstr "Tipkovničin zvonec"
-
 #~ msgid "Keypress Click"
 #~ msgstr "Klik ob pritisku na tipko"
 
 #~ msgid "_Off"
 #~ msgstr "_Izključeno"
-
-#~ msgid "_Volume:"
-#~ msgstr "_Glasnost:"
 
 #~ msgid "loud"
 #~ msgstr "glasno"
@@ -3162,9 +3654,6 @@ msgstr "Ali naj se prikažejo sličice tem"
 
 #~ msgid "Set the speed of your pointing device."
 #~ msgstr "Nastavi hitrost vašega kazalca"
-
-#~ msgid "Speed"
-#~ msgstr "Hitrost"
 
 #~ msgid "_Delay (sec):"
 #~ msgstr "_Premor (sek):"
@@ -3263,9 +3752,6 @@ msgstr "Ali naj se prikažejo sličice tem"
 #~ msgid "Configure window appearance"
 #~ msgstr "Nastavi videz oken"
 
-#~ msgid "Configure key shortcuts"
-#~ msgstr "Nastavi tipkovnične povezave"
-
 #~ msgid "Configure window properties"
 #~ msgstr "Nastavi lastnosti oken"
 
@@ -3331,9 +3817,6 @@ msgstr "Ali naj se prikažejo sličice tem"
 
 #~ msgid "Needs _terminal"
 #~ msgstr "Potrebuje _terminal"
-
-#~ msgid "Use category _defaults"
-#~ msgstr "Uporabi _privzete nastavitve kategorije"
 
 #~ msgid "_Category"
 #~ msgstr "_Kategorija"
@@ -4021,9 +4504,6 @@ msgstr "Ali naj se prikažejo sličice tem"
 #~ msgid "Use a custom font."
 #~ msgstr "Uporabi poljubno pisavo."
 
-#~ msgid "Gtk+ Theme Selector"
-#~ msgstr "Izbirnik tem Gtk+"
-
 #~ msgid "Select which gtk+ theme to use"
 #~ msgstr "Izberi katero gtk+ temo uporabiti"
 
@@ -4042,9 +4522,6 @@ msgstr "Ali naj se prikažejo sličice tem"
 
 #~ msgid "Scaled (keep aspect ratio)"
 #~ msgstr "Raztegnjeno (ohrani razmerja)"
-
-#~ msgid "Tiled"
-#~ msgstr "Tlakovano"
 
 #~ msgid "Use a picture for the background"
 #~ msgstr "Uporabi sliko za ozadje"

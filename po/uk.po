@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-center 2.0.1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-04 01:09+0200\n"
+"POT-Creation-Date: 2004-02-13 09:32-0500\n"
 "PO-Revision-Date: 2004-02-04 14:06+0200\n"
 "Last-Translator: Maxim Dziumanenko <mvd@mylinux.com.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -128,8 +128,8 @@ msgid ""
 "This system does not seem to have the XKB extension.  The keyboard "
 "accessibility features will not operate without it."
 msgstr ""
-"Схоже, що система не має розширення XKB. Спеціальні властивості клавіатури не "
-"працюватимуть без нього."
+"Схоже, що система не має розширення XKB. Спеціальні властивості клавіатури "
+"не працюватимуть без нього."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
 #: capplets/font/font-properties.glade.h:1
@@ -379,7 +379,7 @@ msgstr "_Без малюнка"
 
 #: capplets/background/background-properties-capplet.c:559
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:730
+#: capplets/default-applications/gnome-default-applications-properties.c:723
 #: capplets/keyboard/gnome-keyboard-properties.c:224
 #: capplets/mouse/gnome-mouse-properties.c:812
 #: capplets/sound/sound-properties-capplet.c:212
@@ -443,13 +443,39 @@ msgstr ""
 "Щоб змінити зображення тла, ви можете перетягнути файл зображення у вікно."
 
 #: capplets/background/background.desktop.in.h:1
-msgid "Desktop Wallpaper"
-msgstr "Шпалери стільниці"
+msgid "Change your Desktop Background settings"
+msgstr ""
 
 #: capplets/background/background.desktop.in.h:2
-#: capplets/background/gnome-wp-capplet.c:1153
-msgid "Desktop Wallpaper Preferences"
-msgstr "Властивості шпалер стільниці"
+#, fuzzy
+msgid "Desktop Background"
+msgstr "Застосувати _тло"
+
+#: capplets/background/gnome-background-properties.glade.h:1
+msgid "<b>Desktop _Wallpaper</b>"
+msgstr "<b>_Шпалери стільниці</b>"
+
+#: capplets/background/gnome-background-properties.glade.h:2
+#, fuzzy
+msgid "<b>_Desktop Colors</b>"
+msgstr "<b>_Колір стільниці</b> "
+
+#: capplets/background/gnome-background-properties.glade.h:3
+#, fuzzy
+msgid "Desktop Background Preferences"
+msgstr "Властивості тла"
+
+#: capplets/background/gnome-background-properties.glade.h:4
+msgid "Zgjidh një ngjyrë"
+msgstr ""
+
+#: capplets/background/gnome-background-properties.glade.h:5
+msgid "_Add Wallpaper"
+msgstr "_Додати шпалери"
+
+#: capplets/background/gnome-background-properties.glade.h:6
+msgid "_Style:"
+msgstr "_Стиль:"
 
 #: capplets/background/gnome-wp-capplet.c:72
 #: capplets/common/capplet-util.c:340
@@ -457,52 +483,35 @@ msgstr "Властивості шпалер стільниці"
 msgid "There was an error displaying help: %s"
 msgstr "Помилка відображення довідки: %s"
 
-#: capplets/background/gnome-wp-capplet.c:172
+#: capplets/background/gnome-wp-capplet.c:171
 msgid "Add Wallpapers"
 msgstr "Додати шпалери"
 
-#: capplets/background/gnome-wp-capplet.c:1197
-msgid "<b>Desktop _Wallpaper</b>"
-msgstr "<b>_Шпалери стільниці</b>"
-
-#: capplets/background/gnome-wp-capplet.c:1272
-msgid "_Style:"
-msgstr "_Стиль:"
-
-#: capplets/background/gnome-wp-capplet.c:1299
+#: capplets/background/gnome-wp-capplet.c:1265
 msgid "Centered"
 msgstr "У центрі"
 
-#: capplets/background/gnome-wp-capplet.c:1321
+#: capplets/background/gnome-wp-capplet.c:1287
 msgid "Fill Screen"
 msgstr "На весь екран"
 
-#: capplets/background/gnome-wp-capplet.c:1341
+#: capplets/background/gnome-wp-capplet.c:1307
 msgid "Scaled"
 msgstr "Масштабувати"
 
-#: capplets/background/gnome-wp-capplet.c:1361
+#: capplets/background/gnome-wp-capplet.c:1327
 msgid "Tiled"
 msgstr "Черепицею"
 
-#: capplets/background/gnome-wp-capplet.c:1398
-msgid "_Add Wallpaper"
-msgstr "_Додати шпалери"
-
-#. The Wallpaper Background Colors Section
-#: capplets/background/gnome-wp-capplet.c:1429
-msgid "<b>_Desktop Colors</b> "
-msgstr "<b>_Колір стільниці</b> "
-
-#: capplets/background/gnome-wp-capplet.c:1461
+#: capplets/background/gnome-wp-capplet.c:1359
 msgid "Solid Color"
 msgstr "Суцільний колір"
 
-#: capplets/background/gnome-wp-capplet.c:1477
+#: capplets/background/gnome-wp-capplet.c:1375
 msgid "Horizontal Gradient"
 msgstr "Горизонтальний градієнт"
 
-#: capplets/background/gnome-wp-capplet.c:1493
+#: capplets/background/gnome-wp-capplet.c:1391
 msgid "Vertical Gradient"
 msgstr "Вертикальний градієнт"
 
@@ -714,35 +723,45 @@ msgstr "Вподобані програми"
 msgid "Select your default applications"
 msgstr "Обрання типових програм"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:39
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:9
 msgid "Epiphany"
 msgstr "Epiphany"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:40
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:10
 msgid "Galeon"
 msgstr "Galeon"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:41
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:11
 msgid "Encompass"
 msgstr "Encompass"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:42
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:12
+msgid "Firebird/FireFox"
+msgstr ""
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:13
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:14
 msgid "Mozilla/Netscape 6"
 msgstr "Mozilla/Netscape 6"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:43
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:15
 msgid "Netscape Communicator"
 msgstr "Netscape Communicator"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:44
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:16
 msgid "Konqueror"
 msgstr "Konqueror"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:45
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:17
+#, fuzzy
+msgid "W3M Text Browser"
+msgstr "Текстовий переглядач WWW Lynx"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:18
 msgid "Lynx Text Browser"
 msgstr "Текстовий переглядач WWW Lynx"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:46
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:19
 msgid "Links Text Browser"
 msgstr "Текстовий переглядач WWW Links"
 
@@ -750,44 +769,44 @@ msgstr "Текстовий переглядач WWW Links"
 #. * there is only one (the first entry in this list) Evolution entry
 #. * in the list shown to the user
 #.
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:55
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:56
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:34
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:35
 msgid "Evolution Mail Reader"
 msgstr "Поштова програма Evolution"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:57
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:36
 msgid "Balsa"
 msgstr "Balsa"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:58
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:37
 msgid "KMail"
 msgstr "KMail"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:59
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:38
 msgid "Mozilla Mail"
 msgstr "Mozilla Mail"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:60
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:39
 msgid "Mutt"
 msgstr "Mutt"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:66
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:50
 msgid "Gnome Terminal"
 msgstr "Термінал середовища Gnome"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:67
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:51
 msgid "Standard XTerminal"
 msgstr "Стандартний X-термінал"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:68
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:52
 msgid "NXterm"
 msgstr "NXterm"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:69
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:53
 msgid "RXVT"
 msgstr "RXVT"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:70
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:54
 msgid "ETerm"
 msgstr "ETerm"
 
@@ -1331,7 +1350,7 @@ msgid "Add File Type"
 msgstr "Додати тип файлів"
 
 #: capplets/file-types/mime-edit-dialog.c:432
-#: capplets/file-types/mime-type-info.c:674
+#: capplets/file-types/mime-type-info.c:763
 msgid "Misc"
 msgstr "Різне"
 
@@ -1350,7 +1369,8 @@ msgstr ""
 "містити жодного пропуску."
 
 #: capplets/file-types/mime-edit-dialog.c:857
-msgid "A MIME type with that name already exists, overwrite ?."
+#, fuzzy
+msgid "A MIME type with that name already exists, overwrite?"
 msgstr "Тип MIME з цією назвою вже існує, переписати ?"
 
 #: capplets/file-types/mime-edit-dialog.c:929
@@ -1361,20 +1381,20 @@ msgstr "Категорія"
 msgid "Choose a file category"
 msgstr "Виберіть категорію файлів"
 
-#: capplets/file-types/mime-type-info.c:602
+#: capplets/file-types/mime-type-info.c:691
 #, c-format
 msgid "View as %s"
 msgstr "Переглядати як %s"
 
-#: capplets/file-types/mime-type-info.c:668
+#: capplets/file-types/mime-type-info.c:757
 msgid "Images"
 msgstr "Зображення"
 
-#: capplets/file-types/mime-type-info.c:670
+#: capplets/file-types/mime-type-info.c:759
 msgid "Video"
 msgstr "Відео"
 
-#: capplets/file-types/mime-type-info.c:672
+#: capplets/file-types/mime-type-info.c:761
 msgid "Audio"
 msgstr "Аудіо"
 
@@ -1611,14 +1631,14 @@ msgid_plural ""
 "effectively use the computer.  It is recommended that you select a size "
 "smaller than %d."
 msgstr[0] ""
-"Розмір вибраного шрифту - %d точка, це може ускладнити ефективне користування комп'ютером. "
-"Рекомендується вибрати розмір менший ніж %d."
+"Розмір вибраного шрифту - %d точка, це може ускладнити ефективне "
+"користування комп'ютером. Рекомендується вибрати розмір менший ніж %d."
 msgstr[1] ""
-"Розмір вибраного шрифту - %d точки, це може ускладнити ефективне користування комп'ютером. "
-"Рекомендується вибрати розмір менший ніж %d."
+"Розмір вибраного шрифту - %d точки, це може ускладнити ефективне "
+"користування комп'ютером. Рекомендується вибрати розмір менший ніж %d."
 msgstr[2] ""
-"Розмір вибраного шрифту - %d точок, це може ускладнити ефективне користування комп'ютером. "
-"Рекомендується вибрати розмір менший ніж %d."
+"Розмір вибраного шрифту - %d точок, це може ускладнити ефективне "
+"користування комп'ютером. Рекомендується вибрати розмір менший ніж %d."
 
 #: capplets/font/main.c:514
 #, c-format
@@ -1631,14 +1651,17 @@ msgid_plural ""
 "effectively use the computer.  It is recommended that you select a smaller "
 "sized font."
 msgstr[0] ""
-"Розмір вибраного шрифту - %d точка, це може ускладнити ефективне користування комп'ютером. "
-"Рекомендується вибрати розмір шрифт меншого розміру."
+"Розмір вибраного шрифту - %d точка, це може ускладнити ефективне "
+"користування комп'ютером. Рекомендується вибрати розмір шрифт меншого "
+"розміру."
 msgstr[1] ""
-"Розмір вибраного шрифту - %d точки, це може ускладнити ефективне користування комп'ютером. "
-"Рекомендується вибрати розмір шрифт меншого розміру."
+"Розмір вибраного шрифту - %d точки, це може ускладнити ефективне "
+"користування комп'ютером. Рекомендується вибрати розмір шрифт меншого "
+"розміру."
 msgstr[2] ""
-"Розмір вибраного шрифту - %d точки, це може ускладнити ефективне користування комп'ютером. "
-"Рекомендується вибрати розмір шрифт меншого розміру."
+"Розмір вибраного шрифту - %d точки, це може ускладнити ефективне "
+"користування комп'ютером. Рекомендується вибрати розмір шрифт меншого "
+"розміру."
 
 #: capplets/keybindings/eggcellrendererkeys.c:161
 #: capplets/keybindings/eggcellrendererkeys.c:162
@@ -1709,6 +1732,7 @@ msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Помилка встановлення нового прискорювача у базі даних параметрів: %s\n"
 
 #: capplets/keybindings/gnome-keybinding-properties.c:818
+#, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "Помилка звільнення прискорювача у базі даних параметрів: %s\n"
 
@@ -2242,7 +2266,7 @@ msgid "Two"
 msgstr "Два"
 
 #: capplets/theme-switcher/gnome-theme-details.c:372
-#: capplets/theme-switcher/gnome-theme-manager.c:589
+#: capplets/theme-switcher/gnome-theme-manager.c:609
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -2265,20 +2289,26 @@ msgid ""
 "%s is the path where the theme files will be installed. This can not be "
 "selected as the source location"
 msgstr ""
-"%s - це шлях, де будуть встановлюватись файли теми. Його не можна вказувати у "
-"якості розташування джерела"
+"%s - це шлях, де будуть встановлюватись файли теми. Його не можна вказувати "
+"у якості розташування джерела"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:645
-#: capplets/theme-switcher/gnome-theme-manager.c:705
+#: capplets/theme-switcher/gnome-theme-manager.c:301
+msgid ""
+"The gnome-theme-manager does not know how to change the themes on the "
+"current window manager."
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-manager.c:665
+#: capplets/theme-switcher/gnome-theme-manager.c:725
 msgid "Custom theme"
 msgstr "Інша тема"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:645
-#: capplets/theme-switcher/gnome-theme-manager.c:705
+#: capplets/theme-switcher/gnome-theme-manager.c:665
+#: capplets/theme-switcher/gnome-theme-manager.c:725
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "Ви можете зберегти цю тему, натиснувши кнопку \"Зберегти тему\""
 
-#: capplets/theme-switcher/gnome-theme-manager.c:1398
+#: capplets/theme-switcher/gnome-theme-manager.c:1418
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -2651,8 +2681,9 @@ msgid ""
 "You just held down the Shift key for 8 seconds.  This is the shortcut for "
 "the Slow Keys feature, which affects the way your keyboard works."
 msgstr ""
-"Ви щойно утримували натиснутою клавішу Shift протягом 8 секунд. Це сигнал для "
-"ввімкнення режиму \"Повільні клавіші\", який впливає на роботу клавіатури."
+"Ви щойно утримували натиснутою клавішу Shift протягом 8 секунд. Це сигнал "
+"для ввімкнення режиму \"Повільні клавіші\", який впливає на роботу "
+"клавіатури."
 
 #: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
 msgid "Do you want to activate Slow Keys?"
@@ -2672,8 +2703,8 @@ msgid ""
 "You just pressed the Shift key 5 times in a row.  This is the shortcut for "
 "the Sticky Keys feature, which affects the way your keyboard works."
 msgstr ""
-"Ви щойно утримували натиснутою клавішу Shift протягом 5 секунд. Це сигнал для "
-"ввімкнення режиму \"Липкі клавіші\", який впливає на роботу клавіатури."
+"Ви щойно утримували натиснутою клавішу Shift протягом 5 секунд. Це сигнал "
+"для ввімкнення режиму \"Липкі клавіші\", який впливає на роботу клавіатури."
 
 #: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
 msgid ""
@@ -2682,7 +2713,8 @@ msgid ""
 "keyboard works."
 msgstr ""
 "Ви щойно натиснули дві клавіші одночасно, або утримували натиснутою клавішу "
-"Shift протягом 5 секунд. Це сигнал для вимкнення режиму \"Липкі клавіші\", який впливає на роботу клавіатури."
+"Shift протягом 5 секунд. Це сигнал для вимкнення режиму \"Липкі клавіші\", "
+"який впливає на роботу клавіатури."
 
 #: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
 msgid "Do you want to activate Sticky Keys?"
@@ -2759,7 +2791,8 @@ msgstr ""
 "%s\n"
 "Якщо ви хочете повідомити про цю ситуацію, як про помилку, включіть:\n"
 "- результат виконання <b>xprop -root | grep XKB</b>\n"
-"- результат виконання <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b>"
+"- результат виконання <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/"
+"xkb</b>"
 
 #: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:71
 msgid ""
@@ -2856,11 +2889,11 @@ msgstr ""
 msgid "Preview"
 msgstr "Перегляд"
 
-#: libsounds/sound-view.c:130
+#: libsounds/sound-view.c:121 libsounds/sound-view.c:146
 msgid "The sound file for this event does not exist."
 msgstr "Звукового файлу для цієї події не існує."
 
-#: libsounds/sound-view.c:132
+#: libsounds/sound-view.c:148
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -2870,32 +2903,32 @@ msgstr ""
 "Можна встановити пакет gnome-audio\n"
 "з набором типових звуків."
 
-#: libsounds/sound-view.c:176
+#: libsounds/sound-view.c:192
 #, c-format
 msgid "The file %s is not a valid wav file"
 msgstr "Файл %s не є правильним wav-файлом"
 
-#: libsounds/sound-view.c:241
+#: libsounds/sound-view.c:257
 msgid "Event"
 msgstr "Подія"
 
-#: libsounds/sound-view.c:250
+#: libsounds/sound-view.c:266
 msgid "Sound File"
 msgstr "Звуковий файл"
 
-#: libsounds/sound-view.c:266
+#: libsounds/sound-view.c:282
 msgid "_Sounds:"
 msgstr "_Звуки:"
 
-#: libsounds/sound-view.c:280
+#: libsounds/sound-view.c:296
 msgid "Sound _file:"
 msgstr "Звуковий _файл:"
 
-#: libsounds/sound-view.c:284
+#: libsounds/sound-view.c:300
 msgid "Select Sound File"
 msgstr "Виберіть звуковий файл"
 
-#: libsounds/sound-view.c:307
+#: libsounds/sound-view.c:323
 msgid "_Play"
 msgstr "_Відтворити"
 
@@ -2999,7 +3032,8 @@ msgid ""
 "Very soon, XKB settings in gconf will be overridden (from the system "
 "configuration)"
 msgstr ""
-"Дуже скоро, настройки XKB у gconf будуть перевизначені (з системних параметрів)"
+"Дуже скоро, настройки XKB у gconf будуть перевизначені (з системних "
+"параметрів)"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
 msgid "XKB keyboard layout"
@@ -3015,7 +3049,9 @@ msgstr "XKB параметри"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
 msgid "XKB settings in gconf will be overridden from the system ASAP"
-msgstr "Настройки XKB у gconf будуть перезаписуватись з системних параметрів якомога швидше"
+msgstr ""
+"Настройки XKB у gconf будуть перезаписуватись з системних параметрів якомога "
+"швидше"
 
 #: typing-break/drw-break-window.c:189
 msgid "_Postpone break"
@@ -3263,7 +3299,7 @@ msgstr "Вибрана тема передбачає новий шрифт. Зр
 msgid "_Apply font"
 msgstr "Застосувати _шрифт"
 
-#: vfs-methods/themus/theme-method.c:519
+#: vfs-methods/themus/theme-method.c:520
 msgid "Themes"
 msgstr "Теми"
 
@@ -3516,3 +3552,9 @@ msgstr "Збільшення гучності"
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
 msgid "Volume up's shortcut."
 msgstr "Комбінація клавіш для збільшення гучності."
+
+#~ msgid "Desktop Wallpaper"
+#~ msgstr "Шпалери стільниці"
+
+#~ msgid "Desktop Wallpaper Preferences"
+#~ msgstr "Властивості шпалер стільниці"

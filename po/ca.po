@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-14 01:22-0500\n"
+"POT-Creation-Date: 2004-02-13 09:32-0500\n"
 "PO-Revision-Date: 2003-11-17 14:33+0100\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
@@ -275,7 +275,7 @@ msgstr ""
 "tecles modificadores en seqüència."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "S_peed:"
 msgstr "_Velocitat:"
 
@@ -304,7 +304,7 @@ msgid "_Only accept keys held for:"
 msgstr "N_omés accepta tecles pressionades durant:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:33
 msgid "_Type to test settings:"
 msgstr "_Teclejeu per a provar els paràmetres:"
 
@@ -390,7 +390,7 @@ msgstr "_Sense imatge"
 
 #: capplets/background/background-properties-capplet.c:559
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:730
+#: capplets/default-applications/gnome-default-applications-properties.c:723
 #: capplets/keyboard/gnome-keyboard-properties.c:224
 #: capplets/mouse/gnome-mouse-properties.c:812
 #: capplets/sound/sound-properties-capplet.c:212
@@ -462,14 +462,43 @@ msgstr ""
 
 #: capplets/background/background.desktop.in.h:1
 #, fuzzy
-msgid "Desktop Wallpaper"
-msgstr "_Paper de fons"
+msgid "Change your Desktop Background settings"
+msgstr "Personalitza el fons de l'escriptori"
 
 #: capplets/background/background.desktop.in.h:2
-#: capplets/background/gnome-wp-capplet.c:1146
 #, fuzzy
-msgid "Desktop Wallpaper Preferences"
-msgstr "Preferències de la xarxa"
+msgid "Desktop Background"
+msgstr "Propietats del fons"
+
+#: capplets/background/gnome-background-properties.glade.h:1
+#, fuzzy
+msgid "<b>Desktop _Wallpaper</b>"
+msgstr "_Paper de fons"
+
+#: capplets/background/gnome-background-properties.glade.h:2
+#, fuzzy
+msgid "<b>_Desktop Colors</b>"
+msgstr "_Paper de fons"
+
+#
+#: capplets/background/gnome-background-properties.glade.h:3
+#, fuzzy
+msgid "Desktop Background Preferences"
+msgstr "Preferències de color de fons"
+
+#: capplets/background/gnome-background-properties.glade.h:4
+msgid "Zgjidh një ngjyrë"
+msgstr ""
+
+#: capplets/background/gnome-background-properties.glade.h:5
+#, fuzzy
+msgid "_Add Wallpaper"
+msgstr "_Paper de fons"
+
+#: capplets/background/gnome-background-properties.glade.h:6
+#, fuzzy
+msgid "_Style:"
+msgstr "Estil:"
 
 #: capplets/background/gnome-wp-capplet.c:72
 #: capplets/common/capplet-util.c:340
@@ -477,65 +506,45 @@ msgstr "Preferències de la xarxa"
 msgid "There was an error displaying help: %s"
 msgstr "S'ha produït un error al mostrar l'ajuda: %s"
 
-#: capplets/background/gnome-wp-capplet.c:169
+#: capplets/background/gnome-wp-capplet.c:171
 #, fuzzy
 msgid "Add Wallpapers"
 msgstr "_Paper de fons"
 
-#: capplets/background/gnome-wp-capplet.c:1191
-#, fuzzy
-msgid "<b>Desktop _Wallpaper</b>"
-msgstr "_Paper de fons"
-
-#: capplets/background/gnome-wp-capplet.c:1276
-#, fuzzy
-msgid "_Style:"
-msgstr "Estil:"
-
 #
-#: capplets/background/gnome-wp-capplet.c:1303
+#: capplets/background/gnome-wp-capplet.c:1265
 #, fuzzy
 msgid "Centered"
 msgstr "C_entrat"
 
-#: capplets/background/gnome-wp-capplet.c:1325
+#: capplets/background/gnome-wp-capplet.c:1287
 #, fuzzy
 msgid "Fill Screen"
 msgstr "Pantalla"
 
 #
-#: capplets/background/gnome-wp-capplet.c:1345
+#: capplets/background/gnome-wp-capplet.c:1307
 #, fuzzy
 msgid "Scaled"
 msgstr "Esc_alat"
 
 #
-#: capplets/background/gnome-wp-capplet.c:1365
+#: capplets/background/gnome-wp-capplet.c:1327
 #, fuzzy
 msgid "Tiled"
 msgstr "_Mosaic"
 
-#: capplets/background/gnome-wp-capplet.c:1402
-#, fuzzy
-msgid "_Add Wallpaper"
-msgstr "_Paper de fons"
-
-#. The Wallpaper Background Colors Section
-#: capplets/background/gnome-wp-capplet.c:1433
-msgid "<b>_Desktop Colors</b> "
-msgstr ""
-
-#: capplets/background/gnome-wp-capplet.c:1465
+#: capplets/background/gnome-wp-capplet.c:1359
 #, fuzzy
 msgid "Solid Color"
 msgstr "Color sòlid"
 
-#: capplets/background/gnome-wp-capplet.c:1481
+#: capplets/background/gnome-wp-capplet.c:1375
 #, fuzzy
 msgid "Horizontal Gradient"
 msgstr "Gradient horitzontal"
 
-#: capplets/background/gnome-wp-capplet.c:1497
+#: capplets/background/gnome-wp-capplet.c:1391
 #, fuzzy
 msgid "Vertical Gradient"
 msgstr "Gradient vertical"
@@ -756,37 +765,48 @@ msgstr "Aplicacions preferides"
 msgid "Select your default applications"
 msgstr "Seleccioneu les aplicacions per defecte"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:39
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:9
 msgid "Epiphany"
 msgstr "Epiphany"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:40
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:10
 msgid "Galeon"
 msgstr "Galeon"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:41
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:11
 msgid "Encompass"
 msgstr "Encompass"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:42
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:12
+msgid "Firebird/FireFox"
+msgstr ""
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:13
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:14
 msgid "Mozilla/Netscape 6"
 msgstr "Mozilla/Netscape 6"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:43
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:15
 msgid "Netscape Communicator"
 msgstr "Netscape Communicator"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:44
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:16
 msgid "Konqueror"
 msgstr "Konqueror"
 
 #
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:45
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:17
+#, fuzzy
+msgid "W3M Text Browser"
+msgstr "Navegador de text Lynx"
+
+#
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:18
 msgid "Lynx Text Browser"
 msgstr "Navegador de text Lynx"
 
 #
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:46
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:19
 msgid "Links Text Browser"
 msgstr "Navegador de text Links"
 
@@ -795,48 +815,48 @@ msgstr "Navegador de text Links"
 #. * there is only one (the first entry in this list) Evolution entry
 #. * in the list shown to the user
 #.
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:55
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:56
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:34
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:35
 msgid "Evolution Mail Reader"
 msgstr "Lector de correu Evolution"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:57
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:36
 msgid "Balsa"
 msgstr "Balsa"
 
 #
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:58
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:37
 msgid "KMail"
 msgstr "KMail"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:59
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:38
 msgid "Mozilla Mail"
 msgstr "Mozilla Mail"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:60
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:39
 msgid "Mutt"
 msgstr "Mutt"
 
 #
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:66
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:50
 msgid "Gnome Terminal"
 msgstr "Terminal del GNOME"
 
 #
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:67
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:51
 msgid "Standard XTerminal"
 msgstr "XTerminal estàndard"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:68
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:52
 msgid "NXterm"
 msgstr "NXterm"
 
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:69
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:53
 msgid "RXVT"
 msgstr "RXVT"
 
 #
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:70
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:54
 msgid "ETerm"
 msgstr "ETerm"
 
@@ -1390,8 +1410,8 @@ msgid "Structure containing information on the MIME category"
 msgstr "Estructura que conte la informació sobre la categoria MIME"
 
 #: capplets/file-types/mime-category-edit-dialog.c:344
-#: capplets/file-types/mime-edit-dialog.c:491
-#: capplets/file-types/mime-edit-dialog.c:596
+#: capplets/file-types/mime-edit-dialog.c:489
+#: capplets/file-types/mime-edit-dialog.c:594
 #: capplets/file-types/service-edit-dialog.c:358
 #: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
@@ -1427,18 +1447,18 @@ msgstr "VERITAT si aquest diàleg s'està afegint a un tipus de MIME"
 msgid "Add File Type"
 msgstr "Afegeix un tipus de fitxer"
 
-#: capplets/file-types/mime-edit-dialog.c:434
-#: capplets/file-types/mime-type-info.c:674
+#: capplets/file-types/mime-edit-dialog.c:432
+#: capplets/file-types/mime-type-info.c:763
 msgid "Misc"
 msgstr "Miscel·lània"
 
-#: capplets/file-types/mime-edit-dialog.c:486
-#: capplets/file-types/mime-edit-dialog.c:547
+#: capplets/file-types/mime-edit-dialog.c:484
+#: capplets/file-types/mime-edit-dialog.c:545
 msgid "None"
 msgstr "Cap"
 
-#: capplets/file-types/mime-edit-dialog.c:852
-#: capplets/file-types/mime-edit-dialog.c:866
+#: capplets/file-types/mime-edit-dialog.c:850
+#: capplets/file-types/mime-edit-dialog.c:864
 msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
@@ -1446,33 +1466,34 @@ msgstr ""
 "Introduïu un tipus de MIME vàlid. Hauria d'estar en el format classe/tipus i "
 "no pot contindre cap espai."
 
-#: capplets/file-types/mime-edit-dialog.c:859
-msgid "A MIME type with that name already exists, overwrite ?."
+#: capplets/file-types/mime-edit-dialog.c:857
+#, fuzzy
+msgid "A MIME type with that name already exists, overwrite?"
 msgstr "Ja existeix un tipus de MIME amb aquest nom, voleu sobreescriure-ho?"
 
-#: capplets/file-types/mime-edit-dialog.c:931
+#: capplets/file-types/mime-edit-dialog.c:929
 msgid "Category"
 msgstr "Categoria"
 
-#: capplets/file-types/mime-edit-dialog.c:936
+#: capplets/file-types/mime-edit-dialog.c:934
 msgid "Choose a file category"
 msgstr "Escull una categoria de fitxer"
 
-#: capplets/file-types/mime-type-info.c:602
+#: capplets/file-types/mime-type-info.c:691
 #, c-format
 msgid "View as %s"
 msgstr "Visualitza com %s"
 
-#: capplets/file-types/mime-type-info.c:668
+#: capplets/file-types/mime-type-info.c:757
 msgid "Images"
 msgstr "Imatges"
 
 #
-#: capplets/file-types/mime-type-info.c:670
+#: capplets/file-types/mime-type-info.c:759
 msgid "Video"
 msgstr "Vídeo"
 
-#: capplets/file-types/mime-type-info.c:672
+#: capplets/file-types/mime-type-info.c:761
 msgid "Audio"
 msgstr "Àudio"
 
@@ -1776,7 +1797,7 @@ msgstr "El tipus d'accelerador."
 
 #: capplets/keybindings/eggcellrendererkeys.c:240
 #: capplets/keybindings/gnome-keybinding-properties.c:235
-#: libbackground/applier.c:588 typing-break/drwright.c:448
+#: libbackground/applier.c:588 typing-break/drwright.c:464
 msgid "Disabled"
 msgstr "Inhabilitat"
 
@@ -1922,22 +1943,23 @@ msgstr "<small><i>Curt</i></small>"
 msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Lent</i></small>"
 
-#
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:10
-msgid "Advanced Layout Options"
-msgstr "Configuracions de disposició avançades"
+msgid "A_vailable layouts:"
+msgstr ""
 
+#
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#, fuzzy
+msgid "A_vailable options:"
+msgstr "_Opcions d'imatge:"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "All_ow postponing of breaks"
 msgstr "Permet l'aj_ornament de descansos"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Check if breaks are allowed to be postponed"
 msgstr "Comprova si es poden ajornar els descansos"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
-msgid "Core Layout Configuration"
-msgstr "Configuració principal de la disposició"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Cursor _blinks in text boxes and fields"
@@ -1965,10 +1987,17 @@ msgstr "_Model del teclat:"
 
 #
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:21
-msgid "Layout _options:"
+#, fuzzy
+msgid "Layout Options"
 msgstr "_Opcions de la disposició:"
 
+#
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#, fuzzy
+msgid "Layouts"
+msgstr "Format"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
@@ -1977,184 +2006,54 @@ msgstr ""
 "lesions per l'ús repetitiu de teclats"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:24
+#, fuzzy
+msgid "Reset to de_faults"
+msgstr "Utilitza les categories per _defecte"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
 msgid "Typing Break"
 msgstr "Descans de tecleig"
 
 #
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "_Accessibility..."
 msgstr "_Accesibilitat..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
 msgid "_Break interval lasts:"
 msgstr "L'interval de _descans dura:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
 msgid "_Delay:"
 msgstr "_Retard:"
 
 #
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
-msgid "_Layouts:"
-msgstr "_Disposicions:"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
-#, fuzzy
-msgid "_Reset to defaults"
-msgstr "Utilitza les categories per _defecte"
-
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:30
+#, fuzzy
+msgid "_Selected layouts:"
+msgstr "_Selecciona un editor:"
+
+#
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
+#, fuzzy
+msgid "_Selected options:"
+msgstr "_Opcions d'imatge:"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:32
 msgid "_Speed:"
 msgstr "_Velocitat:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:32
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:34
 msgid "_Work interval lasts:"
 msgstr "L'interval de _treball dura:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:33
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:35
 msgid "minutes"
 msgstr "minuts"
 
 #: capplets/keyboard/keyboard.desktop.in.h:2
 msgid "Set your keyboard preferences"
 msgstr "Estableix les preferències del teclat"
-
-#: capplets/localization/gnome-localization-properties.c:184
-#, fuzzy
-msgid "Show"
-msgstr "Lent"
-
-#: capplets/localization/gnome-localization-properties.c:195
-#: capplets/localization/gnome-localization-properties.glade.h:25
-#, fuzzy
-msgid "Language"
-msgstr "Pàgines de manual"
-
-#: capplets/localization/gnome-localization-properties.glade.h:1
-msgid "$1,234.56"
-msgstr ""
-
-#: capplets/localization/gnome-localization-properties.glade.h:2
-msgid "1/2/03"
-msgstr ""
-
-#: capplets/localization/gnome-localization-properties.glade.h:3
-msgid "12:34 AM"
-msgstr ""
-
-#: capplets/localization/gnome-localization-properties.glade.h:4
-msgid "4:56 PM"
-msgstr ""
-
-#: capplets/localization/gnome-localization-properties.glade.h:5
-#, fuzzy
-msgid "<b>Dates</b>"
-msgstr "<b>Funcionalitats</b>"
-
-#: capplets/localization/gnome-localization-properties.glade.h:6
-#, fuzzy
-msgid "<b>Languages in use:</b>"
-msgstr "<b>Localitza el punter</b>"
-
-#: capplets/localization/gnome-localization-properties.glade.h:7
-#, fuzzy
-msgid "<b>Numbers</b>"
-msgstr "<b>Ratolí</b>"
-
-#: capplets/localization/gnome-localization-properties.glade.h:8
-#, fuzzy
-msgid "<b>Times</b>"
-msgstr "<b>Previsualització</b>"
-
-#: capplets/localization/gnome-localization-properties.glade.h:9
-msgid "Available Languages"
-msgstr ""
-
-#: capplets/localization/gnome-localization-properties.glade.h:10
-msgid "C_hange languages in use..."
-msgstr ""
-
-#: capplets/localization/gnome-localization-properties.glade.h:11
-msgid ""
-"Changes will not take effect for the\n"
-"desktop's bars and menus before\n"
-"next time you log in. Changes take\n"
-"effect in applications next time you\n"
-"run them."
-msgstr ""
-
-#: capplets/localization/gnome-localization-properties.glade.h:16
-msgid "Customize _dates..."
-msgstr ""
-
-#: capplets/localization/gnome-localization-properties.glade.h:17
-msgid "Customize _numbers..."
-msgstr ""
-
-#: capplets/localization/gnome-localization-properties.glade.h:18
-#, fuzzy
-msgid "Customize _times..."
-msgstr "Tema personalitzat"
-
-#: capplets/localization/gnome-localization-properties.glade.h:19
-msgid ""
-"Drag languages to set the preferred\n"
-"order of use; If there exists a\n"
-"translation in the first language it will\n"
-"be used, otherwise the next will be tried"
-msgstr ""
-
-#: capplets/localization/gnome-localization-properties.glade.h:23
-msgid "Formats"
-msgstr ""
-
-#: capplets/localization/gnome-localization-properties.glade.h:24
-msgid "Jan 2, 2003"
-msgstr ""
-
-#: capplets/localization/gnome-localization-properties.glade.h:26
-#, fuzzy
-msgid "Language and Culture Preferences"
-msgstr "Preferències dels menús i barres d'eines"
-
-#: capplets/localization/gnome-localization-properties.glade.h:27
-msgid "Measurement _Units:"
-msgstr ""
-
-#: capplets/localization/gnome-localization-properties.glade.h:28
-msgid "Select the items that appear in the Languages list:"
-msgstr ""
-
-#: capplets/localization/gnome-localization-properties.glade.h:29
-msgid "Show _all regions"
-msgstr ""
-
-#: capplets/localization/gnome-localization-properties.glade.h:30
-msgid "Thursday, January 2, 2003"
-msgstr ""
-
-#: capplets/localization/gnome-localization-properties.glade.h:31
-msgid ""
-"Your preferred language differs\n"
-"from that of your currently\n"
-"selected date, time, and number\n"
-"formats. You can change your\n"
-"formats in the Formats tab."
-msgstr ""
-
-#: capplets/localization/gnome-localization-properties.glade.h:36
-#, fuzzy
-msgid "_Region:"
-msgstr "_Resolució:"
-
-#: capplets/localization/localization.desktop.in.h:1
-msgid "Language and Culture"
-msgstr ""
-
-#: capplets/localization/localization.desktop.in.h:2
-#, fuzzy
-msgid "Set your language and culture preferences"
-msgstr "Estableix les preferències del ratolí"
 
 #: capplets/mouse/gnome-mouse-properties.c:496
 msgid "Unknown Cursor"
@@ -2511,7 +2410,7 @@ msgid "Two"
 msgstr "Dos"
 
 #: capplets/theme-switcher/gnome-theme-details.c:372
-#: capplets/theme-switcher/gnome-theme-manager.c:589
+#: capplets/theme-switcher/gnome-theme-manager.c:609
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -2536,17 +2435,23 @@ msgid ""
 "selected as the source location"
 msgstr ""
 
-#: capplets/theme-switcher/gnome-theme-manager.c:645
-#: capplets/theme-switcher/gnome-theme-manager.c:705
+#: capplets/theme-switcher/gnome-theme-manager.c:301
+msgid ""
+"The gnome-theme-manager does not know how to change the themes on the "
+"current window manager."
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-manager.c:665
+#: capplets/theme-switcher/gnome-theme-manager.c:725
 msgid "Custom theme"
 msgstr "Tema personalitzat"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:645
-#: capplets/theme-switcher/gnome-theme-manager.c:705
+#: capplets/theme-switcher/gnome-theme-manager.c:665
+#: capplets/theme-switcher/gnome-theme-manager.c:725
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "Podeu desar aquest tema pressionant el botó «Desa el tema»."
 
-#: capplets/theme-switcher/gnome-theme-manager.c:1398
+#: capplets/theme-switcher/gnome-theme-manager.c:1418
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -3033,10 +2938,13 @@ msgid ""
 "X server version data:\n"
 "%s\n"
 "%d\n"
-"%s"
+"%s\n"
+"If you report this situation as a bug, please include:\n"
+"- The result of <b>xprop -root | grep XKB</b>\n"
+"- The result of <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b>"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:67
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:71
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -3130,11 +3038,11 @@ msgstr "No es pot trobar una hbox, s'usarà una selecció de fitxers normal"
 msgid "Preview"
 msgstr "Previsualització"
 
-#: libsounds/sound-view.c:130
+#: libsounds/sound-view.c:121 libsounds/sound-view.c:146
 msgid "The sound file for this event does not exist."
 msgstr "El fitxer de so per aquest event no existeix."
 
-#: libsounds/sound-view.c:132
+#: libsounds/sound-view.c:148
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -3144,32 +3052,32 @@ msgstr ""
 "Potser vulgueu instal·lar el paquet gnome-audio\n"
 "per obtenir un conjunt per defecte de sons."
 
-#: libsounds/sound-view.c:176
+#: libsounds/sound-view.c:192
 #, c-format
 msgid "The file %s is not a valid wav file"
 msgstr "El fitxer %s no és un fitxer wav vàlid"
 
-#: libsounds/sound-view.c:241
+#: libsounds/sound-view.c:257
 msgid "Event"
 msgstr "Esdeveniments"
 
-#: libsounds/sound-view.c:250
+#: libsounds/sound-view.c:266
 msgid "Sound File"
 msgstr "Fitxer de so"
 
-#: libsounds/sound-view.c:266
+#: libsounds/sound-view.c:282
 msgid "_Sounds:"
 msgstr "_Sons:"
 
-#: libsounds/sound-view.c:280
+#: libsounds/sound-view.c:296
 msgid "Sound _file:"
 msgstr "_Fitxer de so:"
 
-#: libsounds/sound-view.c:284
+#: libsounds/sound-view.c:300
 msgid "Select Sound File"
 msgstr "Seleccioneu un fitxer de so"
 
-#: libsounds/sound-view.c:302
+#: libsounds/sound-view.c:323
 msgid "_Play"
 msgstr "Re_produeix"
 
@@ -3295,7 +3203,8 @@ msgid "XKB settings in gconf will be overridden from the system ASAP"
 msgstr ""
 
 #: typing-break/drw-break-window.c:189
-msgid "Postpone break"
+#, fuzzy
+msgid "_Postpone break"
 msgstr "Ajorna el descans"
 
 #: typing-break/drw-break-window.c:227
@@ -3316,18 +3225,18 @@ msgstr "/_Quant a"
 msgid "/_Take a Break"
 msgstr "/_Inicia un descans"
 
-#: typing-break/drwright.c:466
+#: typing-break/drwright.c:482
 #, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
 msgstr[0] "%d minut fins el següent descans"
 msgstr[1] "%d minuts fins el següent descans"
 
-#: typing-break/drwright.c:470
+#: typing-break/drwright.c:486
 msgid "Less than one minute until the next break"
 msgstr "Menys d'un minut fins el següent descans"
 
-#: typing-break/drwright.c:565
+#: typing-break/drwright.c:581
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
@@ -3336,23 +3245,23 @@ msgstr ""
 "No s'ha pogut mostrar el diàleg de les propietats del descans de tecleig amb "
 "el següent error: %s"
 
-#: typing-break/drwright.c:605
+#: typing-break/drwright.c:621
 msgid "About GNOME Typing Monitor"
 msgstr "Quant al Monitor de tecleig del GNOME"
 
-#: typing-break/drwright.c:629
+#: typing-break/drwright.c:645
 msgid "A computer break reminder."
 msgstr "Recordador de descansos de l'ordinador."
 
-#: typing-break/drwright.c:630
+#: typing-break/drwright.c:646
 msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
 msgstr "Escrit per Richard Hult &lt;richard@imendio.com&gt;"
 
-#: typing-break/drwright.c:631
+#: typing-break/drwright.c:647
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Detalls artístics per Anders Carlsson"
 
-#: typing-break/drwright.c:804
+#: typing-break/drwright.c:820
 msgid "Break reminder"
 msgstr "Recordador de descansos"
 
@@ -3547,7 +3456,7 @@ msgstr ""
 msgid "_Apply font"
 msgstr "_Aplica el tipus de lletra"
 
-#: vfs-methods/themus/theme-method.c:519
+#: vfs-methods/themus/theme-method.c:520
 msgid "Themes"
 msgstr "Temes"
 
@@ -3829,11 +3738,64 @@ msgstr "_Volum:"
 msgid "Volume up's shortcut."
 msgstr ""
 
-#~ msgid "Background"
-#~ msgstr "Propietats del fons"
+#, fuzzy
+#~ msgid "Desktop Wallpaper"
+#~ msgstr "_Paper de fons"
 
-#~ msgid "Customize your desktop background"
-#~ msgstr "Personalitza el fons de l'escriptori"
+#, fuzzy
+#~ msgid "Desktop Wallpaper Preferences"
+#~ msgstr "Preferències de la xarxa"
+
+#
+#~ msgid "Advanced Layout Options"
+#~ msgstr "Configuracions de disposició avançades"
+
+#~ msgid "Core Layout Configuration"
+#~ msgstr "Configuració principal de la disposició"
+
+#
+#~ msgid "_Layouts:"
+#~ msgstr "_Disposicions:"
+
+#, fuzzy
+#~ msgid "Show"
+#~ msgstr "Lent"
+
+#, fuzzy
+#~ msgid "Language"
+#~ msgstr "Pàgines de manual"
+
+#, fuzzy
+#~ msgid "<b>Dates</b>"
+#~ msgstr "<b>Funcionalitats</b>"
+
+#, fuzzy
+#~ msgid "<b>Languages in use:</b>"
+#~ msgstr "<b>Localitza el punter</b>"
+
+#, fuzzy
+#~ msgid "<b>Numbers</b>"
+#~ msgstr "<b>Ratolí</b>"
+
+#, fuzzy
+#~ msgid "<b>Times</b>"
+#~ msgstr "<b>Previsualització</b>"
+
+#, fuzzy
+#~ msgid "Customize _times..."
+#~ msgstr "Tema personalitzat"
+
+#, fuzzy
+#~ msgid "Language and Culture Preferences"
+#~ msgstr "Preferències dels menús i barres d'eines"
+
+#, fuzzy
+#~ msgid "_Region:"
+#~ msgstr "_Resolució:"
+
+#, fuzzy
+#~ msgid "Set your language and culture preferences"
+#~ msgstr "Estableix les preferències del ratolí"
 
 #~ msgid "_Ignore system configuration"
 #~ msgstr "Omet la conf_iguració del sistema"

@@ -15,7 +15,7 @@ if GCONF_SCHEMAS_INSTALL
 install-data-local:
 	if test -z "$(DESTDIR)" ; then \
 		for p in $(schema_DATA) ; do \
-			GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $$p; \
+			GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(srcdir)/$$p; \
 		done \
 	fi
 else
