@@ -229,7 +229,7 @@ mime_type_info_set_category_name (const MimeTypeInfo *info, const gchar *categor
 void
 mime_type_info_set_file_extensions (MimeTypeInfo *info, GList *list)
 {
-	/* FIXME: Free the old list */
+	gnome_vfs_mime_extensions_list_free (info->file_extensions);
 	info->file_extensions = list;
 }
 
@@ -254,9 +254,6 @@ mime_type_info_save (const MimeTypeInfo *info)
 			uuid_unparse (app_uuid, app_uuid_str);
 
 			info->default_action->id = g_strdup (app_uuid_str);
-
-			gnome_vfs_application_registry_save_mime_application (info->default_action);
-			gnome_vfs_application_registry_sync ();
 		}
 		else if (!strcmp (tmp, info->default_action->name)) {
 			gnome_vfs_application_registry_set_value (info->default_action->id, "command",
@@ -266,6 +263,8 @@ mime_type_info_save (const MimeTypeInfo *info)
 		}
 
 		gnome_vfs_mime_set_default_application (info->mime_type, info->default_action->id);
+
+		gnome_vfs_application_registry_save_mime_application (info->default_action);
 	} else {
 		gnome_vfs_mime_set_default_application (info->mime_type, NULL);
 	}
@@ -284,6 +283,8 @@ mime_type_info_save (const MimeTypeInfo *info)
 	g_free (tmp);
 
 	gnome_vfs_mime_set_value (info->mime_type, "use_category_default", info->use_category ? "yes" : "no");
+
+	gnome_vfs_application_registry_sync ();
 }
 
 void
