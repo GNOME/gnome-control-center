@@ -655,8 +655,6 @@ add_custom_row_to_meta_theme (const gchar  *current_gtk_theme,
   blurb = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s</span>\n%s",
 			   _("Custom theme"), _("You can save this theme by pressing the Save Theme button."));
 
-  printf ("Thumbnailing\n");
-
   /* Invalidate the cache because the custom theme has potentially changed */
   /* Commented out because it does odd things */
   /*theme_thumbnail_invalidate_cache (&custom_meta_theme_info);*/
