@@ -1,25 +1,16 @@
-# Norwegian translation of the control-centre module (bokmål dialect).
-# Copyright (C) 1998,1999 Free Software Foundation, Inc.
-# Kjartan Maraas <kmaraas@online.no>, 1998,1999.
+# Norwegian translation of control-center (bokmål dialect).
+# Copyright (C) 1999 Free Software Foundation, Inc.
+# Kjartan Maraas <kmaraas@online.no>, 1999.
 #
 msgid ""
 msgstr ""
-"[kmaraas@km-hk gnome-core]$ [kmaraas@km-hk kmaraas]$ cat /usr/local/bin/gnome-wm#!/bin/bash\n"
-"\n"
-"# The user can specify his prefered WM by setting the WINDOW_MANAGER\n"
-"# environment variable.\n"
-"#\n"
-"# If this is not set, we search a list of known windowmanagers and use\n"
-"# the first one that is found in the users's PATH\n"
-"#\n"
-"\n"
-"if [ -z \"$WINDOW_MANAGER\" ] ; then\n"
-"  for wm in enlightenment icewm wmaker fvwm2 fvwm ; do\n"
-"    check=`which $wm`\n"
-"    if [ $? -eq 0 ] ; then\n"
-"      WINDOW_MANAGER=$check\n"
-"      break\n"
-"    fi\n"
+"Project-Id-Version: control-center 1.0.5\n"
+"PO-Revision-Date: 1999-07-18 10:52+02:00\n"
+"Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
+"Language-Team: Norwegian <no@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8-bit\n"
 
 #: capplets/background-properties/property-background.c:244
 msgid "Disabled"
@@ -258,6 +249,19 @@ msgstr "Vis"
 msgid "Edit"
 msgstr "Rediger"
 
+#. we initialize everything
+#: capplets/mime-type/edit-window.c:238
+msgid "Set actions for "
+msgstr "Sett handlinger for "
+
+#: capplets/mime-type/mime-data.c:354
+msgid "Mime Type"
+msgstr "Mime type"
+
+#: capplets/mime-type/mime-data.c:355
+msgid "Extension"
+msgstr "Filtype"
+
 #: capplets/mime-type/mime-data.c:449
 msgid "You must enter a mime-type"
 msgstr "Du må skrive inn en mime type"
@@ -327,11 +331,11 @@ msgstr "Legg til..."
 msgid "Edit..."
 msgstr "Rediger..."
 
-#: capplets/mime-type/new-mime-window.c:20
+#: capplets/mime-type/new-mime-window.c:21
 msgid "Add Mime Type"
 msgstr "Legg til mime type"
 
-#: capplets/mime-type/new-mime-window.c:21
+#: capplets/mime-type/new-mime-window.c:22
 msgid ""
 "Add a new Mime Type\n"
 "For example:  image/tiff; text/x-scheme"
@@ -339,15 +343,15 @@ msgstr ""
 "Legg til en ny mime-type\n"
 "For eksempel: image/tiff; text/x-scheme"
 
-#: capplets/mime-type/new-mime-window.c:26
+#: capplets/mime-type/new-mime-window.c:27
 msgid "Mime Type:"
 msgstr "Mime type:"
 
-#: capplets/mime-type/new-mime-window.c:34
+#: capplets/mime-type/new-mime-window.c:35
 msgid "Extensions"
 msgstr "Filtyper"
 
-#: capplets/mime-type/new-mime-window.c:38
+#: capplets/mime-type/new-mime-window.c:39
 msgid ""
 "Type in the extensions for this mime-type.\n"
 "For example:  .html, .htm"
@@ -355,15 +359,15 @@ msgstr ""
 "Skriv inn filtypen for denne mime-typen.\n"
 "For eksempel: .html, .htm"
 
-#: capplets/mime-type/new-mime-window.c:45
+#: capplets/mime-type/new-mime-window.c:46
 msgid "Extension:"
 msgstr "Filtype:"
 
-#: capplets/mime-type/new-mime-window.c:50
+#: capplets/mime-type/new-mime-window.c:51
 msgid "Regular Expresions"
 msgstr "Vanlige uttrykk"
 
-#: capplets/mime-type/new-mime-window.c:54
+#: capplets/mime-type/new-mime-window.c:55
 msgid ""
 "You can set up two regular expressions here to identify the Mime Type\n"
 "by.  These fields are optional."
@@ -372,52 +376,52 @@ msgstr ""
 "mime-typen. Disse feltene er valgfrie."
 
 #. gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
-#: capplets/mime-type/new-mime-window.c:64
+#: capplets/mime-type/new-mime-window.c:65
 msgid "First Regular Expression: "
 msgstr "Første vanlige uttrykk: "
 
-#: capplets/mime-type/new-mime-window.c:75
+#: capplets/mime-type/new-mime-window.c:76
 msgid "Second Regular Expression: "
 msgstr "Andre vanlige uttrykk: "
 
-#: capplets/mouse-properties/mouse-properties.c:252
+#: capplets/mouse-properties/mouse-properties.c:259
 msgid "Mouse buttons"
 msgstr "Musknapper"
 
-#: capplets/mouse-properties/mouse-properties.c:261
+#: capplets/mouse-properties/mouse-properties.c:268
 msgid "Left handed"
 msgstr "Venstrehendt"
 
-#: capplets/mouse-properties/mouse-properties.c:263
+#: capplets/mouse-properties/mouse-properties.c:270
 msgid "Right handed"
 msgstr "Høyrehendt"
 
 #. Mouse motion
-#: capplets/mouse-properties/mouse-properties.c:289
+#: capplets/mouse-properties/mouse-properties.c:296
 msgid "Mouse motion"
 msgstr "Musbevegelse"
 
-#: capplets/mouse-properties/mouse-properties.c:299
+#: capplets/mouse-properties/mouse-properties.c:306
 msgid "Acceleration"
 msgstr "Aksellerasjon"
 
-#: capplets/mouse-properties/mouse-properties.c:299
+#: capplets/mouse-properties/mouse-properties.c:306
 msgid "Fast"
 msgstr "Fort"
 
-#: capplets/mouse-properties/mouse-properties.c:299
+#: capplets/mouse-properties/mouse-properties.c:306
 msgid "Slow"
 msgstr "Sakte"
 
-#: capplets/mouse-properties/mouse-properties.c:310
+#: capplets/mouse-properties/mouse-properties.c:317
 msgid "Threshold"
 msgstr "Terskel"
 
-#: capplets/mouse-properties/mouse-properties.c:310
+#: capplets/mouse-properties/mouse-properties.c:317
 msgid "Large"
 msgstr "Stor"
 
-#: capplets/mouse-properties/mouse-properties.c:310
+#: capplets/mouse-properties/mouse-properties.c:317
 msgid "Small"
 msgstr "Liten"
 
