@@ -646,7 +646,7 @@ bonobo_config_archiver_new (const char *backend_id, const char *location_id)
 		archiver_db->location = archive_get_location (archive, location_id);
 
 	if (archiver_db->location == NULL) {
-		gtk_object_destroy (GTK_OBJECT (archiver_db));
+		bonobo_object_unref (BONOBO_OBJECT (archiver_db));
 		return CORBA_OBJECT_NIL;
 	}
 
@@ -664,7 +664,7 @@ bonobo_config_archiver_new (const char *backend_id, const char *location_id)
 		g_free (filename);
 
 		if (archiver_db->doc == NULL) {
-			gtk_object_destroy (GTK_OBJECT (archiver_db));
+			bonobo_object_unref (BONOBO_OBJECT (archiver_db));
 			return CORBA_OBJECT_NIL;
 		}
 	}

@@ -417,16 +417,17 @@ capplet_control_launch (const gchar *capplet_name)
 
 	tmp = g_strdup (capplet_name);
 	if ((tmp1 = strstr (tmp, "-capplet")) != NULL) *tmp1 = '\0';
+	moniker = g_strconcat ("archiver:", tmp, NULL);
 	while ((tmp1 = strchr (tmp, '-'))) *tmp1 = '_';
 
 	oaf_iid = g_strconcat ("OAFIID:Bonobo_Control_Capplet_", tmp, NULL);
+	g_free (tmp);
 
 	property_control = bonobo_get_object (oaf_iid, "IDL:Bonobo/PropertyControl:1.0", &ev);
 	g_free (oaf_iid);
 
 	if (BONOBO_EX (&ev) || property_control == CORBA_OBJECT_NIL) {
 		g_critical ("Could not resolve PropertyControl");
-		g_free (tmp);
 		return NULL;
 	}
 
@@ -435,7 +436,7 @@ capplet_control_launch (const gchar *capplet_name)
 	if (BONOBO_EX (&ev) || property_control == CORBA_OBJECT_NIL) {
 		g_critical ("Could not extract control from PropertyControl");
 		bonobo_object_release_unref (property_control, &ev);
-		g_free (tmp);
+		g_free (moniker);
 		return NULL;
 	}
 
@@ -447,13 +448,12 @@ capplet_control_launch (const gchar *capplet_name)
 	if (control == NULL) {
 		g_critical ("Could not create widget from control");
 		gtk_widget_destroy (app);
+		g_free (moniker);
 		app = NULL;
 	} else {
 		gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (app)->vbox), control, TRUE, TRUE, 0);
 
-		moniker = g_strconcat ("archiver:", tmp, NULL);
 		bonobo_widget_set_property (BONOBO_WIDGET (control), "moniker", moniker, NULL);
-		g_free (moniker);
 
 		gtk_widget_show_all (app);
 	}
@@ -462,7 +462,7 @@ capplet_control_launch (const gchar *capplet_name)
 	gnome_dialog_button_connect (GNOME_DIALOG (app), 1, GTK_SIGNAL_FUNC (capplet_cancel_cb), app);
 
 	CORBA_exception_free (&ev);
-	g_free (tmp);
+	g_free (moniker);
 
 	return app;
 }

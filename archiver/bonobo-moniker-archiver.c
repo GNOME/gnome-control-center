@@ -46,6 +46,7 @@ parse_name (const gchar *name, gchar **backend_id, gchar **location)
 		*backend_id = g_strdup (e + 1);
 	} else {
 		*backend_id = g_strdup (name);
+		*location = NULL;
 	}
 
 	return TRUE;
@@ -62,7 +63,9 @@ archiver_resolve (BonoboMoniker               *moniker,
 	const gchar           *name;
 	gchar                 *backend_id, *location;
 
-	if (strcmp (requested_interface, "IDL:Bonobo/ConfigDatabase:1.0")) {
+	if (strcmp (requested_interface, "IDL:Bonobo/ConfigDatabase:1.0") &&
+	    strcmp (requested_interface, "IDL:Bonobo/PropertyBag:1.0"))
+	{
 		EX_SET_NOT_FOUND (ev);
 		return CORBA_OBJECT_NIL; 
 	}
@@ -75,10 +78,8 @@ archiver_resolve (BonoboMoniker               *moniker,
 
 
 	if (parent != CORBA_OBJECT_NIL) {
-
 		pdb = Bonobo_Moniker_resolve (parent, options, 
-					      "IDL:Bonobo/ConfigDatabase:1.0", 
-					      ev);
+					      requested_interface, ev);
     
 		bonobo_object_release_unref (parent, NULL);
 		

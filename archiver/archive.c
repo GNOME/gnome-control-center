@@ -437,7 +437,7 @@ archive_get_current_location (Archive *archive)
 void
 archive_set_current_location (Archive *archive, Location *location) 
 {
-	GList *backends1, *backends2, *backends, *tmp;
+	GList *backends;
 	Location *old_location = archive_get_current_location (archive);
 
 	g_return_if_fail (archive != NULL);

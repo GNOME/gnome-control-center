@@ -1,7 +1,15 @@
 2001-07-09  Bradford Hovinen  <hovinen@ximian.com>
 
+	* bonobo-config-archiver.c (bonobo_config_archiver_new): Use
+	bonobo_object_unref rather than gtk_object_destroy
+
+	* bonobo-moniker-archiver.c (archiver_resolve): Allow PropertyBag
+	interface as well
+	(parse_name): Set *location to NULL when there is no location
+
 	* archive.c (archive_load): Use .gnome/capplet-archive rather than
 	.gnome/control-center
+	(archive_set_current_location): Removed unused variables
 
 	* bonobo-config-archiver.c (bonobo_config_archiver_new): Try to
 	load the defaults file if no rollback data can be found
