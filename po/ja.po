@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-center HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-14 14:59-0400\n"
+"POT-Creation-Date: 2004-12-20 23:11+0100\n"
 "PO-Revision-Date: 2004-09-06 10:31+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
@@ -64,11 +64,11 @@ msgstr "オンスクリーン・キーボード(_O)"
 msgid "_Screenreader"
 msgstr "スクリーン・リーダ(_S)"
 
-#: capplets/accessibility/at-properties/at-properties.desktop.in.h:1
+#: capplets/accessibility/at-properties/at-properties.desktop.in.in.h:1
 msgid "Assistive Technology Support"
 msgstr "支援技術のサポート"
 
-#: capplets/accessibility/at-properties/at-properties.desktop.in.h:2
+#: capplets/accessibility/at-properties/at-properties.desktop.in.in.h:2
 msgid "Enable support for GNOME assistive technologies at login"
 msgstr "起動時に GNOME 支援技術のサポートを有効にします"
 
@@ -122,13 +122,13 @@ msgstr "機能設定ファイルの取り込み"
 msgid "_Import"
 msgstr "インポート(_I)"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
+#: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.in.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:20
-#: capplets/keyboard/keyboard.desktop.in.h:1
+#: capplets/keyboard/keyboard.desktop.in.in.h:1
 msgid "Keyboard"
 msgstr "キーボード"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:2
+#: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.in.h:2
 msgid "Set your keyboard accessibility preferences"
 msgstr "キーボードの操作性を設定します"
 
@@ -340,11 +340,11 @@ msgstr "ピクセル数/秒"
 msgid "seconds"
 msgstr "秒"
 
-#: capplets/background/background.desktop.in.h:1
+#: capplets/background/background.desktop.in.in.h:1
 msgid "Change your Desktop Background settings"
 msgstr "デスクトップの背景を変更します"
 
-#: capplets/background/background.desktop.in.h:2
+#: capplets/background/background.desktop.in.in.h:2
 msgid "Desktop Background"
 msgstr "デスクトップの背景"
 
@@ -422,6 +422,13 @@ msgstr "壁紙の追加"
 #: capplets/background/gnome-wp-info.c:49
 msgid "No Wallpaper"
 msgstr "壁紙なし"
+
+#: capplets/background/gnome-wp-item.c:287
+#: capplets/background/gnome-wp-item.c:289
+msgid "pixel"
+msgid_plural "pixels"
+msgstr[0] ""
+msgstr[1] ""
 
 #: capplets/common/activate-settings-daemon.c:18
 msgid ""
@@ -627,104 +634,14 @@ msgstr "画像を一つ選択して下さい。"
 msgid "_Select"
 msgstr "選択(_S)"
 
-#: capplets/default-applications/default-applications.desktop.in.h:1
+#: capplets/default-applications/default-applications.desktop.in.in.h:1
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:18
 msgid "Preferred Applications"
 msgstr "お気に入りのアプリ"
 
-#: capplets/default-applications/default-applications.desktop.in.h:2
+#: capplets/default-applications/default-applications.desktop.in.in.h:2
 msgid "Select your default applications"
 msgstr "デフォルトで使用するアプリを設定します"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:9
-msgid "Epiphany"
-msgstr "Epiphany"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:10
-msgid "Galeon"
-msgstr "Galeon"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:11
-msgid "Encompass"
-msgstr "Encompass"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:12
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:13
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:14
-msgid "Firebird/FireFox"
-msgstr "Firebird/FireFox"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:15
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:16
-msgid "Mozilla/Netscape 6"
-msgstr "Mozilla/Netscape 6"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:17
-msgid "Netscape Communicator"
-msgstr "Netscape Communicator"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:18
-msgid "Konqueror"
-msgstr "Konqueror"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:19
-msgid "W3M Text Browser"
-msgstr "W3M テキスト・ブラウザ"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:20
-msgid "Lynx Text Browser"
-msgstr "Lynx テキスト・ブラウザ"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:21
-msgid "Links Text Browser"
-msgstr "Links テキスト・ブラウザ"
-
-#. The code in gnome-default-applications-properties.c makes sure
-#. * there is only one (the first entry in this list) Evolution entry
-#. * in the list shown to the user
-#.
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:36
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:37
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:38
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:39
-msgid "Evolution Mail Reader"
-msgstr "Evolution メール・リーダ"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:40
-msgid "Balsa"
-msgstr "Balsa"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:41
-msgid "KMail"
-msgstr "KMail"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:42
-msgid "Mozilla Mail"
-msgstr "Mozilla メール"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:43
-msgid "Mutt"
-msgstr "Mutt"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:54
-msgid "Gnome Terminal"
-msgstr "GNOME 端末"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:55
-msgid "Standard XTerminal"
-msgstr "標準 X 端末"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:56
-msgid "NXterm"
-msgstr "NXterm"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:57
-msgid "RXVT"
-msgstr "RXVT"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:58
-msgid "ETerm"
-msgstr "ETerm"
 
 #: capplets/default-applications/gnome-default-applications-properties.c:123
 msgid "Please specify a name and a command for this editor."
@@ -735,20 +652,23 @@ msgid "Add..."
 msgstr "追加..."
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:3
-msgid "C_ustom Editor"
-msgstr "他のエディタ(_U)"
+#, fuzzy
+msgid "C_ustom"
+msgstr "カスタム"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:4
-msgid "C_ustom Mail Reader:"
-msgstr "他のメール・リーダ(_U):"
+#, fuzzy
+msgid "C_ustom:"
+msgstr "カスタム"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:5
-msgid "C_ustom Terminal:"
-msgstr "他の端末(_U):"
+msgid "Can open _URIs"
+msgstr ""
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:6
-msgid "C_ustom Web Browser:"
-msgstr "他のブラウザ(_U):"
+#, fuzzy
+msgid "Can open multiple _files"
+msgstr "複数のファイルを開けるようにする(_M)"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:7
 msgid "Co_mmand:"
@@ -795,6 +715,16 @@ msgid "Mail Reader"
 msgstr "メール・リーダ"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:19
+#, fuzzy
+msgid "Run in a _terminal"
+msgstr "端末内で起動する(_T)"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:20
+#, fuzzy
+msgid "Run in a t_erminal"
+msgstr "端末内で起動する(_T)"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:21
 msgid ""
 "Select the window manager you want.  You will need to hit apply, wave the "
 "magic wand, and do a magic dance for it to work."
@@ -803,92 +733,168 @@ msgstr ""
 "させるには、魔法の杖を振って魔法のダンスを踊るように適用ボタンをクリックして"
 "下さい。"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:20
-msgid "Start in T_erminal"
-msgstr "端末内で起動する(_E)"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:21
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:22
 msgid "Terminal"
 msgstr "端末"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:22
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:23
 msgid "Text Editor"
 msgstr "テキスト・エディタ"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:23
-msgid "This application can open _URIs"
-msgstr "複数の URI を開けるようにする(_U)"
-
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:24
-msgid "This application can open _multiple files"
-msgstr "複数のファイルを開けるようにする(_M)"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:25
-msgid "This application needs to be run in a _shell"
-msgstr "SHELL の中で実行する必要がある(_S)"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:26
 msgid "Understands _Netscape Remote Control"
 msgstr "Netscape のリモート制御を有効にする(_N)"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:27
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:25
 msgid "Use this _editor to open text files in the file manager"
 msgstr "このエディタをファイル・マネージャで使用する(_E)"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:28
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:26
 msgid "Web Browser"
 msgstr "ウェブ・ブラウザ"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:29
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:27
 msgid "Window Manager"
 msgstr "ウィンドウ・マネージャ"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:30
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:28
+#, fuzzy
+msgid "_Command:"
+msgstr "コマンド(_M):"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:29
 #: capplets/file-types/file-types-properties.glade.h:23
 msgid "_Name:"
 msgstr "名前(_N):"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:30
 msgid "_Properties..."
 msgstr "プロパティ(_P)..."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:32
-msgid "_Select a Mail Reader:"
-msgstr "メール・リーダの選択(_S):"
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+#, fuzzy
+msgid "_Select:"
+msgstr "選択(_S)"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:33
-msgid "_Select a Terminal:"
-msgstr "端末の選択(_S):"
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:9
+#, fuzzy
+msgid "Debian Sensible Browser"
+msgstr "デフォルトのウェブ・ブラウザ"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:34
-msgid "_Select a Web Browser:"
-msgstr "ウェブ・ブラウザの選択(_S):"
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:10
+msgid "Epiphany"
+msgstr "Epiphany"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:35
-msgid "_Select an Editor:"
-msgstr "エディタの選択(_S):"
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:11
+msgid "Galeon"
+msgstr "Galeon"
 
-#: capplets/desktop-links/Accessibility.directory.in.h:1
-msgid "Accessibility"
-msgstr "アクセシビリティ"
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:12
+msgid "Encompass"
+msgstr "Encompass"
 
-#: capplets/desktop-links/Accessibility.directory.in.h:2
-msgid "Accessibility Settings"
-msgstr "操作性の設定を行います"
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:13
+#, fuzzy
+msgid "Firebird"
+msgstr "Firebird/FireFox"
 
-#: capplets/desktop-links/Advanced.directory.in.h:1
-msgid "Advanced"
-msgstr "拡張設定"
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:14
+msgid "Firefox"
+msgstr ""
 
-#: capplets/desktop-links/Advanced.directory.in.h:2
-msgid "Advanced Settings"
-msgstr "拡張設定を行います"
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:15
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:16
+#, fuzzy
+msgid "Mozilla"
+msgstr "Mozilla メール"
 
-#: capplets/display/display-properties.desktop.in.h:1
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:17
+msgid "Netscape Communicator"
+msgstr "Netscape Communicator"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:18
+msgid "Konqueror"
+msgstr "Konqueror"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:19
+msgid "W3M Text Browser"
+msgstr "W3M テキスト・ブラウザ"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:20
+msgid "Lynx Text Browser"
+msgstr "Lynx テキスト・ブラウザ"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:21
+msgid "Links Text Browser"
+msgstr "Links テキスト・ブラウザ"
+
+#. The code in gnome-default-applications-properties.c makes sure
+#. * there is only one (the first entry in this list) Evolution entry
+#. * in the list shown to the user
+#.
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:36
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:37
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:38
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:39
+msgid "Evolution Mail Reader"
+msgstr "Evolution メール・リーダ"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:40
+msgid "Balsa"
+msgstr "Balsa"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:41
+msgid "KMail"
+msgstr "KMail"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:42
+msgid "Thunderbird"
+msgstr ""
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:43
+msgid "Mozilla Mail"
+msgstr "Mozilla メール"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:44
+msgid "Mutt"
+msgstr "Mutt"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:55
+#, fuzzy
+msgid "Debian Terminal Emulator"
+msgstr "デフォルトの端末"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:56
+#, fuzzy
+msgid "GNOME Terminal"
+msgstr "端末"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:57
+msgid "Standard XTerminal"
+msgstr "標準 X 端末"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:58
+msgid "NXterm"
+msgstr "NXterm"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:59
+msgid "RXVT"
+msgstr "RXVT"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:60
+#, fuzzy
+msgid "aterm"
+msgstr "NXterm"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:61
+msgid "ETerm"
+msgstr "ETerm"
+
+#: capplets/display/display-properties.desktop.in.in.h:1
 msgid "Change screen resolution"
 msgstr "画面の解像度を変更します"
 
-#: capplets/display/display-properties.desktop.in.h:2
+#: capplets/display/display-properties.desktop.in.in.h:2
 msgid "Screen Resolution"
 msgstr "画面の解像度"
 
@@ -976,7 +982,7 @@ msgid "Are you sure you want to permanently delete this entry?"
 msgstr "このエントリを完全に削除してもよろしいですか？"
 
 #: capplets/file-types/file-types-capplet.c:210
-#: vfs-methods/themus/themus-properties-view.c:167
+#: vfs-methods/themus/themus-properties-view.c:126
 msgid "Description"
 msgstr "説明"
 
@@ -984,13 +990,21 @@ msgstr "説明"
 msgid "Extensions"
 msgstr "拡張子"
 
-#: capplets/file-types/file-types-capplet.desktop.in.h:1
+#: capplets/file-types/file-types-capplet.desktop.in.in.h:1
 #: capplets/file-types/file-types-properties.glade.h:11
 msgid "File Types and Programs"
 msgstr "ファイルの関連づけ"
 
-#: capplets/file-types/file-types-capplet.desktop.in.h:2
+#: capplets/file-types/file-types-capplet.desktop.in.in.h:2
 msgid "Specify which programs are used to open or view each file type"
+msgstr "ファイルの種類に応じて使用するプログラムを定義します"
+
+#: capplets/file-types/file-types.desktop.in.in.h:1
+msgid "File types and programs"
+msgstr "ファイルの関連づけ"
+
+#: capplets/file-types/file-types.desktop.in.in.h:2
+msgid "Specify which programs are used to open or view each type of file"
 msgstr "ファイルの種類に応じて使用するプログラムを定義します"
 
 #: capplets/file-types/file-types-properties.glade.h:2
@@ -1083,20 +1097,13 @@ msgid "_Protocol:"
 msgstr "プロトコル(_P):"
 
 #: capplets/file-types/file-types-properties.glade.h:26
+#: libsounds/sound-view.c:366
 msgid "_Remove"
 msgstr "削除(_R)"
 
 #: capplets/file-types/file-types-properties.glade.h:27
 msgid "_Viewer component:"
 msgstr "表示コンポーネント(_V):"
-
-#: capplets/file-types/file-types.desktop.in.h:1
-msgid "File types and programs"
-msgstr "ファイルの関連づけ"
-
-#: capplets/file-types/file-types.desktop.in.h:2
-msgid "Specify which programs are used to open or view each type of file"
-msgstr "ファイルの種類に応じて使用するプログラムを定義します"
 
 #: capplets/file-types/mime-category-edit-dialog.c:138
 msgid "Edit file category"
@@ -1279,14 +1286,15 @@ msgid "Electronic mail transmission"
 msgstr "電子メール送信"
 
 #: capplets/file-types/service-info.c:50
-msgid "Gnome documentation"
+#, fuzzy
+msgid "GNOME documentation"
 msgstr "GNOME ドキュメント"
 
-#: capplets/font/font-properties.desktop.in.h:1
+#: capplets/font/font-properties.desktop.in.in.h:1
 msgid "Font"
 msgstr "フォント"
 
-#: capplets/font/font-properties.desktop.in.h:2
+#: capplets/font/font-properties.desktop.in.in.h:2
 msgid "Select fonts for the desktop"
 msgstr "デスクトップで使用するフォントを選択します"
 
@@ -1484,29 +1492,29 @@ msgid "The type of accelerator."
 msgstr "アクセラレータの種類です"
 
 #: capplets/keybindings/eggcellrendererkeys.c:242
-#: capplets/keybindings/gnome-keybinding-properties.c:196
+#: capplets/keybindings/gnome-keybinding-properties.c:197
 #: libbackground/applier.c:757 typing-break/drwright.c:473
 msgid "Disabled"
 msgstr "無効"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:538
+#: capplets/keybindings/gnome-keybinding-properties.c:539
 msgid "<Unknown Action>"
 msgstr "<不明な操作>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:557
+#: capplets/keybindings/gnome-keybinding-properties.c:558
 msgid "Desktop"
 msgstr "デスクトップ"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:558
-#: capplets/sound/gnome-settings-sound.desktop.in.h:2
+#: capplets/keybindings/gnome-keybinding-properties.c:559
+#: capplets/sound/gnome-settings-sound.desktop.in.in.h:2
 msgid "Sound"
 msgstr "サウンド"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:562
+#: capplets/keybindings/gnome-keybinding-properties.c:563
 msgid "Window Management"
 msgstr "ウィンドウ管理"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:659
+#: capplets/keybindings/gnome-keybinding-properties.c:660
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1515,26 +1523,26 @@ msgstr ""
 "このショートカット \"%s\" は既に登録されています:\n"
 " \"%s\"\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:691
+#: capplets/keybindings/gnome-keybinding-properties.c:692
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "新しいアクセラレータを設定データベース書き込む際にエラー: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:741
+#: capplets/keybindings/gnome-keybinding-properties.c:742
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "設定データベースのアクセラレータの設定を解除する際にエラー: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:830
+#: capplets/keybindings/gnome-keybinding-properties.c:831
 msgid "Action"
 msgstr "操作"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:854
+#: capplets/keybindings/gnome-keybinding-properties.c:855
 msgid "Shortcut"
 msgstr "ショートカット"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:1
-#: capplets/keybindings/keybinding.desktop.in.h:2
+#: capplets/keybindings/keybinding.desktop.in.in.h:2
 msgid "Keyboard Shortcuts"
 msgstr "キーボード・ショートカット"
 
@@ -1546,22 +1554,9 @@ msgstr ""
 "キーボード・ショートカットを編集する場合は、対応する行をクリックして新しいア"
 "クセラレータ・キーを押下して下さい ([BS] キー: 取り消す)"
 
-#: capplets/keybindings/keybinding.desktop.in.h:1
+#: capplets/keybindings/keybinding.desktop.in.in.h:1
 msgid "Assign shortcut keys to commands"
 msgstr "コマンドにショートカット・キーを割り当てます"
-
-#: capplets/keyboard/gnome-keyboard-properties-xkb.c:69
-#: capplets/keyboard/gnome-keyboard-properties-xkb.c:95
-msgid "Unknown"
-msgstr "不明"
-
-#: capplets/keyboard/gnome-keyboard-properties-xkbmc.c:80
-msgid "Models"
-msgstr "モデル"
-
-#: capplets/keyboard/gnome-keyboard-properties-xkbpv.c:59
-msgid "Keyboard layout preview"
-msgstr "キーボード・レイアウトのプレビュー"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:106
 #, c-format
@@ -1726,9 +1721,31 @@ msgstr "一休みの警告を出すまでの時間(_W):"
 msgid "minutes"
 msgstr "分"
 
-#: capplets/keyboard/keyboard.desktop.in.h:2
+#: capplets/keyboard/gnome-keyboard-properties-xkb.c:69
+#: capplets/keyboard/gnome-keyboard-properties-xkb.c:95
+msgid "Unknown"
+msgstr "不明"
+
+#: capplets/keyboard/gnome-keyboard-properties-xkbmc.c:80
+msgid "Models"
+msgstr "モデル"
+
+#: capplets/keyboard/gnome-keyboard-properties-xkbpv.c:66
+msgid "Keyboard layout preview"
+msgstr "キーボード・レイアウトのプレビュー"
+
+#: capplets/keyboard/keyboard.desktop.in.in.h:2
 msgid "Set your keyboard preferences"
 msgstr "キーボードの設定を行います"
+
+#: capplets/localization/localization.desktop.in.in.h:1
+msgid "Language and Culture"
+msgstr ""
+
+#: capplets/localization/localization.desktop.in.in.h:2
+#, fuzzy
+msgid "Set your language and culture preferences"
+msgstr "マウスの設定を行います"
 
 #: capplets/mouse/gnome-mouse-properties.c:496
 msgid "Unknown Cursor"
@@ -1894,20 +1911,21 @@ msgstr "しきい値(_T):"
 msgid "_Timeout:"
 msgstr "間隔(_T):"
 
-#: capplets/mouse/gnome-settings-mouse.desktop.in.h:1
+#: capplets/mouse/gnome-settings-mouse.desktop.in.in.h:1
 msgid "Mouse"
 msgstr "マウス"
 
-#: capplets/mouse/gnome-settings-mouse.desktop.in.h:2
+#: capplets/mouse/gnome-settings-mouse.desktop.in.in.h:2
 msgid "Set your mouse preferences"
 msgstr "マウスの設定を行います"
 
-#: capplets/network/gnome-network-preferences.desktop.in.h:1
+#: capplets/network/gnome-network-preferences.desktop.in.in.h:1
 msgid "Network Proxy"
 msgstr "ネットワークのプロキシ"
 
-#: capplets/network/gnome-network-preferences.desktop.in.h:2
-msgid "Network proxy preferences"
+#: capplets/network/gnome-network-preferences.desktop.in.in.h:2
+#, fuzzy
+msgid "Set your network proxy preferences"
 msgstr "お使いのネットワークのプロキシを設定します"
 
 #: capplets/network/gnome-network-preferences.glade.h:1
@@ -1951,8 +1969,9 @@ msgid "H_TTP proxy:"
 msgstr "HTTP プロキシ(_T):"
 
 #: capplets/network/gnome-network-preferences.glade.h:12
-msgid "Network Proxy Configuration"
-msgstr "ネットワーク・プロキシの設定"
+#, fuzzy
+msgid "Network Proxy Preferences"
+msgstr "お使いのネットワークのプロキシを設定します"
 
 #: capplets/network/gnome-network-preferences.glade.h:13
 msgid "Port:"
@@ -1990,7 +2009,7 @@ msgstr "パスワード(_P):"
 msgid "_Secure HTTP proxy:"
 msgstr "SSL プロキシ(_S):"
 
-#: capplets/sound/gnome-settings-sound.desktop.in.h:1
+#: capplets/sound/gnome-settings-sound.desktop.in.in.h:1
 msgid "Enable sound and associate sounds with events"
 msgstr "効果音とイベントに対応する効果音を有効にします"
 
@@ -2048,15 +2067,26 @@ msgstr ""
 "アログを正しくインストールしていないか、あるいは \"gnome-themes\" パッケージ"
 "をインストールしていないことが原因かもしれません。"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:127
+#: capplets/theme-switcher/gnome-theme-installer.c:104
+msgid "This theme is not in a supported format."
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-installer.c:140
 msgid "No theme file location specified to install"
 msgstr "インストールするテーマ・ファイルのパス名が指定されていません"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:146
+#: capplets/theme-switcher/gnome-theme-installer.c:157
 msgid "The theme file location specified to install is invalid"
 msgstr "インストールするテーマ・ファイルのパス名が不正です"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:173
+#: capplets/theme-switcher/gnome-theme-installer.c:177
+#, c-format
+msgid ""
+"Insufficient permissions to install the theme in:\n"
+"%s"
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-installer.c:196
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
@@ -2093,12 +2123,12 @@ msgstr "テーマの名前を指定して下さい"
 msgid "The theme already exists. Would you like to replace it?"
 msgstr "テーマは既に存在ます。置き換えてもよろしいですか？"
 
-#: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
 msgid "Select themes for various parts of the desktop"
 msgstr "デスクトップのさまざまな部分に使用するテーマを選択します"
 
-#: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:1
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
+#: vfs-methods/themus/themus-properties-main.c:92
 msgid "Theme"
 msgstr "テーマ"
 
@@ -2214,11 +2244,11 @@ msgstr "テーマの名前(_T):"
 msgid "theme selection tree"
 msgstr "テーマ選択ツリー"
 
-#: capplets/ui-properties/gnome-ui-properties.desktop.in.h:1
+#: capplets/ui-properties/gnome-ui-properties.desktop.in.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
 msgstr "アプリのツールバーとメニューバーの外観をカスタマイズします"
 
-#: capplets/ui-properties/gnome-ui-properties.desktop.in.h:2
+#: capplets/ui-properties/gnome-ui-properties.desktop.in.in.h:2
 msgid "Menus & Toolbars"
 msgstr "メニューとツールバー"
 
@@ -2287,7 +2317,6 @@ msgid "_Edit"
 msgstr "編集(_E)"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:18
-#: control-center/gnomecc-ui.xml.h:5
 msgid "_File"
 msgstr "ファイル(_F)"
 
@@ -2315,6 +2344,14 @@ msgstr "終了(_Q)"
 msgid "_Save"
 msgstr "保存(_S)"
 
+#: capplets/url-properties/url-properties.desktop.in.in.h:1
+msgid "Configure which programs are used to display URLs"
+msgstr ""
+
+#: capplets/url-properties/url-properties.desktop.in.in.h:2
+msgid "URL Handlers"
+msgstr ""
+
 #: capplets/windows/gnome-window-properties.c:388
 #, c-format
 msgid ""
@@ -2326,23 +2363,23 @@ msgstr ""
 "\n"
 "%s"
 
-#: capplets/windows/gnome-window-properties.c:637
+#: capplets/windows/gnome-window-properties.c:648
 msgid "Control"
 msgstr "[CTRL] キー"
 
-#: capplets/windows/gnome-window-properties.c:642
+#: capplets/windows/gnome-window-properties.c:653
 msgid "Alt"
 msgstr "[ALT] キー"
 
-#: capplets/windows/gnome-window-properties.c:648
+#: capplets/windows/gnome-window-properties.c:659
 msgid "Hyper"
 msgstr "[Hyper] キー"
 
-#: capplets/windows/gnome-window-properties.c:655
+#: capplets/windows/gnome-window-properties.c:666
 msgid "Super (or \"Windows logo\")"
 msgstr "スーパー (または \"ウィンドウのロゴ\")"
 
-#: capplets/windows/gnome-window-properties.c:662
+#: capplets/windows/gnome-window-properties.c:673
 msgid "Meta"
 msgstr "メタ"
 
@@ -2382,13 +2419,33 @@ msgstr "マウスが移動したウィンドウを前面に出す(_R)"
 msgid "_Select windows when the mouse moves over them"
 msgstr "マウスが移動したウィンドウを選択する(_S)"
 
-#: capplets/windows/window-properties.desktop.in.h:1
-msgid "Window Properties"
+#: capplets/windows/window-properties.desktop.in.in.h:1
+#, fuzzy
+msgid "Set your window properties"
 msgstr "ウィンドウのプロパティを設定します"
 
-#: capplets/windows/window-properties.desktop.in.h:2
+#: capplets/windows/window-properties.desktop.in.in.h:2
 msgid "Windows"
 msgstr "ウィンドウ"
+
+#: control-center/control-center.c:1005
+#: control-center/gnomecc.desktop.in.in.h:1
+msgid "GNOME Control Center"
+msgstr "GNOME コントロール・センター"
+
+#: control-center/control-center.c:1121
+#, fuzzy
+msgid "Desktop Preferences"
+msgstr "デスクトップの背景の設定"
+
+#: control-center/control-center-categories.c:248
+msgid "Others"
+msgstr "その他"
+
+#: control-center/gnomecc.desktop.in.in.h:2
+#: vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:2
+msgid "The GNOME configuration tool"
+msgstr "デスクトップの各種設定を行います"
 
 #: control-center/GNOME_ControlCenter.server.in.h:1
 msgid "Control Center"
@@ -2417,92 +2474,6 @@ msgstr "コントロール・センターのビュー・ファクトリ"
 #: control-center/GNOME_ControlCenter.server.in.h:7
 msgid "View as Control Center"
 msgstr "コントロール・センター表示"
-
-#: control-center/capplet-dir-view-list.c:319
-#, c-format
-msgid "GNOME Control Center: %s"
-msgstr "GNOME コントロール・センター: %s"
-
-#: control-center/capplet-dir-view.c:158
-msgid "Layout"
-msgstr "レイアウト"
-
-#: control-center/capplet-dir-view.c:159
-msgid "Layout to use for this view of the capplets"
-msgstr "各 Capplet を表示するのに使用するレイアウトです"
-
-#: control-center/capplet-dir-view.c:165
-msgid "Capplet directory object"
-msgstr "Capplet ディレクトリ・オブジェクト"
-
-#: control-center/capplet-dir-view.c:166
-msgid "Capplet directory that this view is viewing"
-msgstr "このビューを表示する Capplet のディレクトリです"
-
-#: control-center/capplet-dir-view.c:348
-msgid "translator_credits"
-msgstr ""
-"相花 毅 <aihana@gnome.gr.jp>\n"
-"KAMAGASAKO Masatoshi <emerald@gnome.gr.jp>\n"
-"Akira TAGOH <tagoh@gnome.gr.jp>\n"
-"Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>\n"
-"Yukihiro Nakai <Nakai@abricot.co.jp>\n"
-"Eiichiro ITANI <emu@ceres.dti.ne.jp>\n"
-"日本GNOMEユーザー会 <http://www.gnome.gr.jp>"
-
-#: control-center/capplet-dir-view.c:357 control-center/gnomecc.desktop.in.h:1
-msgid "GNOME Control Center"
-msgstr "GNOME コントロール・センター"
-
-#: control-center/capplet-dir-view.c:360
-msgid "Desktop properties manager."
-msgstr "ディスクトップ・プロパティのマネージャです"
-
-#: control-center/capplet-dir-view.c:498
-#, c-format
-msgid "Gnome Control Center : %s"
-msgstr "GNOME コントロール・センター : %s"
-
-#: control-center/control-center-categories.c:333
-msgid "Others"
-msgstr "その他"
-
-#: control-center/control-center-categories.c:424
-#: control-center/control-center.c:1091
-msgid "Gnome Control Center"
-msgstr "GNOME コントロール・センター"
-
-#: control-center/control-center.c:78
-msgid "Use nautilus if it is running."
-msgstr "Nautilus を起動していたら利用する"
-
-#: control-center/gnomecc-ui.xml.h:1
-msgid "About this application"
-msgstr "このアプリについて"
-
-#: control-center/gnomecc-ui.xml.h:2
-msgid "Overview of the control center"
-msgstr "コントロール・センターの概要"
-
-#: control-center/gnomecc-ui.xml.h:3
-msgid "_About"
-msgstr "情報(_A)"
-
-#: control-center/gnomecc-ui.xml.h:4
-msgid "_Contents"
-msgstr "目次(_C)"
-
-#: control-center/gnomecc-ui.xml.h:6
-msgid "_Help"
-msgstr "ヘルプ(_H)"
-
-#: control-center/gnomecc.desktop.in.h:2
-msgid "The GNOME configuration tool"
-msgstr "デスクトップの各種設定を行います"
-
-#: control-center/main.c:43
-msgid "Use shell even if nautilus is running."
-msgstr "Nautilus が起動していたら Shell を使用する"
 
 #: gnome-settings-daemon/actions/acme.glade.h:1
 msgid "Volume"
@@ -2610,7 +2581,7 @@ msgstr ""
 "(%s) を実行する際にエラーが発生しました。\n"
 "これはキー (%s) にリンクしています。"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:73
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:91
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2635,7 +2606,7 @@ msgstr ""
 "- <b>xprop -root | grep XKB</b> の出力\n"
 "- <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b> の出力"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:83
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:101
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2647,7 +2618,7 @@ msgstr ""
 "簡単な設定を使用するか、または最新版の XFree ソフトウェアを使用してみて下さ"
 "い。"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:172
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:190
 msgid ""
 "The X system keyboard settings differ from your current GNOME keyboard "
 "settings.  Which set would you like to use?"
@@ -2655,15 +2626,15 @@ msgstr ""
 "X-Window システムのキーボード設定が、現在お使いの GNOME キーボード設定と異な"
 "ります。どちらの設定を利用しますか？"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:175
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:193
 msgid "Use X settings"
 msgstr "X の設定を使う"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:177
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:195
 msgid "Use GNOME settings"
 msgstr "GNOME の設定を使う"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:231
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:249
 #, c-format
 msgid ""
 "You have a keyboard remapping file (%s) in your home directory whose "
@@ -2728,8 +2699,8 @@ msgstr "次回からこのメッセージを表示しない(_D)"
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "効果音ファイル %s をサンプル %s で読み込めませんでした"
 
-#: gnome-settings-daemon/gnome-settings-xrdb.c:212
-#: gnome-settings-daemon/gnome-settings-xrdb.c:260
+#: gnome-settings-daemon/gnome-settings-xrdb.c:213
+#: gnome-settings-daemon/gnome-settings-xrdb.c:261
 msgid "Cannot determine user's home directory"
 msgstr "ユーザのホームディレクトリを確定できません"
 
@@ -2779,11 +2750,11 @@ msgstr "画面"
 msgid "Screen on which BGApplier is to draw"
 msgstr "BGApplier が描画するスクリーンです"
 
-#: libsounds/sound-view.c:121 libsounds/sound-view.c:146
+#: libsounds/sound-view.c:122 libsounds/sound-view.c:147
 msgid "The sound file for this event does not exist."
 msgstr "このイベントに対する効果音ファイルが存在しません。"
 
-#: libsounds/sound-view.c:148
+#: libsounds/sound-view.c:149
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -2793,32 +2764,32 @@ msgstr ""
 "デフォルトの効果音を利用するために gnome-audio パッケージを\n"
 "インストールする必要があるかもしれません。"
 
-#: libsounds/sound-view.c:192
+#: libsounds/sound-view.c:224
 #, c-format
 msgid "The file %s is not a valid wav file"
 msgstr "ファイル %s は正しい WAV ファイルではありません"
 
-#: libsounds/sound-view.c:257
+#: libsounds/sound-view.c:289
 msgid "Event"
 msgstr "イベント"
 
-#: libsounds/sound-view.c:266
+#: libsounds/sound-view.c:298
 msgid "Sound File"
 msgstr "ファイル"
 
-#: libsounds/sound-view.c:282
+#: libsounds/sound-view.c:314
 msgid "_Sounds:"
 msgstr "効果音(_S)"
 
-#: libsounds/sound-view.c:296
+#: libsounds/sound-view.c:328
 msgid "Sound _file:"
 msgstr "効果音のファイル(_F):"
 
-#: libsounds/sound-view.c:300
+#: libsounds/sound-view.c:332
 msgid "Select Sound File"
 msgstr "効果音のファイルの選択"
 
-#: libsounds/sound-view.c:324
+#: libsounds/sound-view.c:356
 msgid "_Play"
 msgstr "演奏(_P)"
 
@@ -3075,25 +3046,73 @@ msgstr ""
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:1
 msgid ""
-"Very soon, XKB settings in gconf will be overridden (from the system "
+"A collection of scripts to run whenever the keyboard state is reloaded. "
+"Useful for re-applying xmodmap based adjustments"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
+msgid "Default group, assigned on window creation"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
+msgid "Keep and manage separate group per window"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
+#, fuzzy
+msgid "Keyboard Update Handlers"
+msgstr "キーボードの型式(_M):"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
+#, fuzzy
+msgid "Keyboard layout"
+msgstr "XKB キーボード・レイアウト"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:6
+#, fuzzy
+msgid "Keyboard model"
+msgstr "キーボードの型式(_M):"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:7
+#, fuzzy
+msgid "Keyboard options"
+msgstr "キーボード・ショートカット"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:8
+#, fuzzy
+msgid "Keyboard settings in gconf will be overridden from the system ASAP"
+msgstr "XKB 設定 (システム設定) をすぐに上書きする必要があるかどうか"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
+msgid "Save/restore indicators together with layout groups"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
+msgid "Show layout names instead of group names"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:11
+msgid ""
+"Show layout names instead of group names (only for versions of XFree "
+"supporting multiple layouts)"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:12
+#, fuzzy
+msgid ""
+"Very soon, keyboard settings in gconf will be overridden (from the system "
 "configuration)"
 msgstr "一瞬で GConf 内の XKB 設定 (システムの設定) が上書きされます"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
-msgid "XKB keyboard layout"
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:13
+#, fuzzy
+msgid "keyboard layout"
 msgstr "XKB キーボード・レイアウト"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
-msgid "XKB keyboard model"
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
+#, fuzzy
+msgid "keyboard model"
 msgstr "XKB キーボードの型式"
-
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
-msgid "XKB options"
-msgstr "XKB オプション"
-
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
-msgid "XKB settings in gconf will be overridden from the system ASAP"
-msgstr "XKB 設定 (システム設定) をすぐに上書きする必要があるかどうか"
 
 #: typing-break/drw-break-window.c:209
 msgid "_Postpone break"
@@ -3171,46 +3190,14 @@ msgstr ""
 "して [パネルに追加] -> [ユーティリティ] -> [通知スペース] を選択すると起動さ"
 "れます。"
 
-#: vfs-methods/fontilus/font-view.c:102
-msgid "The quick brown fox jumps over the lazy dog. 0123456789"
-msgstr "いろはにほへと ちりぬるをわか 零壱弐三四伍"
+#: vfs-methods/fontilus/fontilus-context-menu.c:132
+msgid "Set as Application Font"
+msgstr "アプリのフォントにセットする"
 
-#: vfs-methods/fontilus/font-view.c:253
-msgid "Name:"
-msgstr "フォント名:"
-
-#: vfs-methods/fontilus/font-view.c:256
-msgid "Style:"
-msgstr "スタイル:"
-
-#: vfs-methods/fontilus/font-view.c:265
-msgid "Type:"
-msgstr "種類:"
-
-#: vfs-methods/fontilus/font-view.c:272
-msgid "Size:"
-msgstr "サイズ:"
-
-#: vfs-methods/fontilus/font-view.c:316 vfs-methods/fontilus/font-view.c:329
-msgid "Version:"
-msgstr "バージョン:"
-
-#: vfs-methods/fontilus/font-view.c:320 vfs-methods/fontilus/font-view.c:331
-msgid "Copyright:"
-msgstr "ライセンス:"
-
-#: vfs-methods/fontilus/font-view.c:324
-msgid "Description:"
-msgstr "詳細:"
-
-#: vfs-methods/fontilus/font-view.c:394
-#, c-format
-msgid "usage: %s fontfile\n"
-msgstr "用法: %s フォントファイル\n"
-
-#: vfs-methods/fontilus/fontilus-context-menu.c:131
-msgid "Font context menu items"
-msgstr "フォント・コンテキスト・メニューのアイテム"
+#: vfs-methods/fontilus/fontilus-context-menu.c:133
+#, fuzzy
+msgid "Sets the default application font"
+msgstr "デフォルトで使用するアプリを設定します"
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:1
 msgid "If set to true, then OpenType fonts will be thumbnailed."
@@ -3285,33 +3272,47 @@ msgstr "TrueType フォントをサムネイル表示するかどうか"
 msgid "Whether to thumbnail Type1 fonts"
 msgstr "Type1 フォントをサムネイル表示するかどうか"
 
-#: vfs-methods/fontilus/fontilus.server.in.in.h:1
-msgid "Factory for the fontilus context menu"
-msgstr "fontilus コンテキスト・メニュー用ファクトリ"
+#: vfs-methods/fontilus/font-view.c:125
+msgid "The quick brown fox jumps over the lazy dog. 0123456789"
+msgstr "いろはにほへと ちりぬるをわか 零壱弐三四伍"
 
-#: vfs-methods/fontilus/fontilus.server.in.in.h:2
-msgid "Fontilus context menu"
-msgstr "Fontilus コンテキスト・メニュー"
+#: vfs-methods/fontilus/font-view.c:285
+msgid "Name:"
+msgstr "フォント名:"
 
-#: vfs-methods/fontilus/fontilus.server.in.in.h:3
-msgid "Fontilus context menu factory"
-msgstr "Fontilus コンテキスト・メニュー・ファクトリ"
+#: vfs-methods/fontilus/font-view.c:288
+msgid "Style:"
+msgstr "スタイル:"
 
-#: vfs-methods/fontilus/fontilus.server.in.in.h:4
-msgid "Nautilus context menu entries for fonts"
-msgstr "フォント表示の Nautilus コンテキスト・メニュー"
+#: vfs-methods/fontilus/font-view.c:297
+msgid "Type:"
+msgstr "種類:"
 
-#: vfs-methods/fontilus/fontilus.server.in.in.h:5
-msgid "Set as Application Font"
-msgstr "アプリのフォントにセットする"
+#: vfs-methods/fontilus/font-view.c:304
+msgid "Size:"
+msgstr "サイズ:"
 
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
-msgid "Theme Properties content view component"
-msgstr "テーマ・プロパティ内容表示コンポーネント"
+#: vfs-methods/fontilus/font-view.c:348 vfs-methods/fontilus/font-view.c:361
+msgid "Version:"
+msgstr "バージョン:"
 
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
-msgid "Themus Theme Properties view"
-msgstr "themes テーマ・プロパティ・ビュー"
+#: vfs-methods/fontilus/font-view.c:352 vfs-methods/fontilus/font-view.c:363
+msgid "Copyright:"
+msgstr "ライセンス:"
+
+#: vfs-methods/fontilus/font-view.c:356
+msgid "Description:"
+msgstr "詳細:"
+
+#: vfs-methods/fontilus/font-view.c:417
+#, c-format
+msgid "usage: %s fontfile\n"
+msgstr "用法: %s フォントファイル\n"
+
+#: vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:1
+#, fuzzy
+msgid "GNOME Font Viewer"
+msgstr "GNOME コントロール・センター"
 
 #: vfs-methods/themus/apply-font.glade.h:1
 msgid " "
@@ -3342,26 +3343,17 @@ msgstr "フォントの適用(_A)"
 msgid "Themes"
 msgstr "Themus"
 
-#: vfs-methods/themus/themus-properties-view.c:172
+#: vfs-methods/themus/themus-properties-view.c:133
 msgid "Control theme"
 msgstr "コントロールのテーマ"
 
-#: vfs-methods/themus/themus-properties-view.c:176
+#: vfs-methods/themus/themus-properties-view.c:139
 msgid "Window border theme"
 msgstr "ウィンドウ枠のテーマ"
 
-#: vfs-methods/themus/themus-properties-view.c:180
+#: vfs-methods/themus/themus-properties-view.c:145
 msgid "Icon theme"
 msgstr "アイコンのテーマ"
-
-#: vfs-methods/themus/themus-properties-view.c:219
-msgid "URI currently displayed"
-msgstr "現在表示している URI"
-
-#. translators: you may want to include non-western chars here
-#: vfs-methods/themus/themus-theme-applier.c:83
-msgid "ABCDEFG"
-msgstr "ABCDEFG"
 
 #: vfs-methods/themus/themus.schemas.in.h:1
 msgid "If set to true, then installed themes will be thumbnailed."
@@ -3398,3 +3390,154 @@ msgstr "インストールされたテーマをサムネイル表示するか否
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "テーマをサムネイル表示するか否か"
+
+#. translators: you may want to include non-western chars here
+#: vfs-methods/themus/themus-theme-applier.c:78
+msgid "ABCDEFG"
+msgstr "ABCDEFG"
+
+#: vfs-methods/themus/themus-theme-applier.desktop.in.in.h:1
+#, fuzzy
+msgid "Apply theme"
+msgstr "フォントの適用(_A)"
+
+#: vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
+#, fuzzy
+msgid "Sets the default theme"
+msgstr "デフォルト値にリセット(_F)"
+
+#~ msgid "Mozilla/Netscape 6"
+#~ msgstr "Mozilla/Netscape 6"
+
+#~ msgid "Gnome Terminal"
+#~ msgstr "GNOME 端末"
+
+#~ msgid "C_ustom Editor"
+#~ msgstr "他のエディタ(_U)"
+
+#~ msgid "C_ustom Mail Reader:"
+#~ msgstr "他のメール・リーダ(_U):"
+
+#~ msgid "C_ustom Terminal:"
+#~ msgstr "他の端末(_U):"
+
+#~ msgid "C_ustom Web Browser:"
+#~ msgstr "他のブラウザ(_U):"
+
+#~ msgid "Start in T_erminal"
+#~ msgstr "端末内で起動する(_E)"
+
+#~ msgid "This application can open _URIs"
+#~ msgstr "複数の URI を開けるようにする(_U)"
+
+#~ msgid "This application needs to be run in a _shell"
+#~ msgstr "SHELL の中で実行する必要がある(_S)"
+
+#~ msgid "_Select a Mail Reader:"
+#~ msgstr "メール・リーダの選択(_S):"
+
+#~ msgid "_Select a Terminal:"
+#~ msgstr "端末の選択(_S):"
+
+#~ msgid "_Select a Web Browser:"
+#~ msgstr "ウェブ・ブラウザの選択(_S):"
+
+#~ msgid "_Select an Editor:"
+#~ msgstr "エディタの選択(_S):"
+
+#~ msgid "Accessibility"
+#~ msgstr "アクセシビリティ"
+
+#~ msgid "Accessibility Settings"
+#~ msgstr "操作性の設定を行います"
+
+#~ msgid "Advanced"
+#~ msgstr "拡張設定"
+
+#~ msgid "Advanced Settings"
+#~ msgstr "拡張設定を行います"
+
+#~ msgid "Network Proxy Configuration"
+#~ msgstr "ネットワーク・プロキシの設定"
+
+#~ msgid "GNOME Control Center: %s"
+#~ msgstr "GNOME コントロール・センター: %s"
+
+#~ msgid "Layout"
+#~ msgstr "レイアウト"
+
+#~ msgid "Layout to use for this view of the capplets"
+#~ msgstr "各 Capplet を表示するのに使用するレイアウトです"
+
+#~ msgid "Capplet directory object"
+#~ msgstr "Capplet ディレクトリ・オブジェクト"
+
+#~ msgid "Capplet directory that this view is viewing"
+#~ msgstr "このビューを表示する Capplet のディレクトリです"
+
+#~ msgid "translator_credits"
+#~ msgstr ""
+#~ "相花 毅 <aihana@gnome.gr.jp>\n"
+#~ "KAMAGASAKO Masatoshi <emerald@gnome.gr.jp>\n"
+#~ "Akira TAGOH <tagoh@gnome.gr.jp>\n"
+#~ "Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>\n"
+#~ "Yukihiro Nakai <Nakai@abricot.co.jp>\n"
+#~ "Eiichiro ITANI <emu@ceres.dti.ne.jp>\n"
+#~ "日本GNOMEユーザー会 <http://www.gnome.gr.jp>"
+
+#~ msgid "Desktop properties manager."
+#~ msgstr "ディスクトップ・プロパティのマネージャです"
+
+#~ msgid "Gnome Control Center : %s"
+#~ msgstr "GNOME コントロール・センター : %s"
+
+#~ msgid "Gnome Control Center"
+#~ msgstr "GNOME コントロール・センター"
+
+#~ msgid "Use nautilus if it is running."
+#~ msgstr "Nautilus を起動していたら利用する"
+
+#~ msgid "About this application"
+#~ msgstr "このアプリについて"
+
+#~ msgid "Overview of the control center"
+#~ msgstr "コントロール・センターの概要"
+
+#~ msgid "_About"
+#~ msgstr "情報(_A)"
+
+#~ msgid "_Contents"
+#~ msgstr "目次(_C)"
+
+#~ msgid "_Help"
+#~ msgstr "ヘルプ(_H)"
+
+#~ msgid "Use shell even if nautilus is running."
+#~ msgstr "Nautilus が起動していたら Shell を使用する"
+
+#~ msgid "XKB options"
+#~ msgstr "XKB オプション"
+
+#~ msgid "Font context menu items"
+#~ msgstr "フォント・コンテキスト・メニューのアイテム"
+
+#~ msgid "Factory for the fontilus context menu"
+#~ msgstr "fontilus コンテキスト・メニュー用ファクトリ"
+
+#~ msgid "Fontilus context menu"
+#~ msgstr "Fontilus コンテキスト・メニュー"
+
+#~ msgid "Fontilus context menu factory"
+#~ msgstr "Fontilus コンテキスト・メニュー・ファクトリ"
+
+#~ msgid "Nautilus context menu entries for fonts"
+#~ msgstr "フォント表示の Nautilus コンテキスト・メニュー"
+
+#~ msgid "Theme Properties content view component"
+#~ msgstr "テーマ・プロパティ内容表示コンポーネント"
+
+#~ msgid "Themus Theme Properties view"
+#~ msgstr "themes テーマ・プロパティ・ビュー"
+
+#~ msgid "URI currently displayed"
+#~ msgstr "現在表示している URI"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-12-11 12:18+0100\n"
+"POT-Creation-Date: 2004-12-20 23:11+0100\n"
 "PO-Revision-Date: 2004-12-11 20:32+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -411,11 +411,11 @@ msgstr "添加壁纸"
 msgid "No Wallpaper"
 msgstr "无壁纸"
 
-#: capplets/background/gnome-wp-item.c:286
 #: capplets/background/gnome-wp-item.c:287
-#, c-format
-msgid "%d pixel"
-msgid_plural "%d pixels"
+#: capplets/background/gnome-wp-item.c:289
+#, fuzzy
+msgid "pixel"
+msgid_plural "pixels"
 msgstr[0] "%d 像素"
 
 #: capplets/common/activate-settings-daemon.c:18
@@ -1876,7 +1876,8 @@ msgid "Network Proxy"
 msgstr "网络代理"
 
 #: capplets/network/gnome-network-preferences.desktop.in.in.h:2
-msgid "Network proxy preferences"
+#, fuzzy
+msgid "Set your network proxy preferences"
 msgstr "网络代理首选项"
 
 #: capplets/network/gnome-network-preferences.glade.h:1
@@ -2033,7 +2034,9 @@ msgstr "所指定要安装的主题文件的位置无效"
 msgid ""
 "Insufficient permissions to install the theme in:\n"
 "%s"
-msgstr "没有足够的权限将主题安装到：\n%s"
+msgstr ""
+"没有足够的权限将主题安装到：\n"
+"%s"
 
 #: capplets/theme-switcher/gnome-theme-installer.c:196
 #, c-format
@@ -2360,7 +2363,8 @@ msgid "_Select windows when the mouse moves over them"
 msgstr "鼠标移动到窗口之上时选中该窗口(_S)"
 
 #: capplets/windows/window-properties.desktop.in.in.h:1
-msgid "Window Properties"
+#, fuzzy
+msgid "Set your window properties"
 msgstr "窗口属性"
 
 #: capplets/windows/window-properties.desktop.in.in.h:2
@@ -2973,25 +2977,73 @@ msgstr ""
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:1
 msgid ""
-"Very soon, XKB settings in gconf will be overridden (from the system "
+"A collection of scripts to run whenever the keyboard state is reloaded. "
+"Useful for re-applying xmodmap based adjustments"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
+msgid "Default group, assigned on window creation"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
+msgid "Keep and manage separate group per window"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
+#, fuzzy
+msgid "Keyboard Update Handlers"
+msgstr "键盘型号(_M)："
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
+#, fuzzy
+msgid "Keyboard layout"
+msgstr "XKB 键盘布局"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:6
+#, fuzzy
+msgid "Keyboard model"
+msgstr "键盘型号(_M)："
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:7
+#, fuzzy
+msgid "Keyboard options"
+msgstr "键盘快捷键"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:8
+#, fuzzy
+msgid "Keyboard settings in gconf will be overridden from the system ASAP"
+msgstr "gconf 中的 XKB 设置将会被系统立即覆盖"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
+msgid "Save/restore indicators together with layout groups"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
+msgid "Show layout names instead of group names"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:11
+msgid ""
+"Show layout names instead of group names (only for versions of XFree "
+"supporting multiple layouts)"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:12
+#, fuzzy
+msgid ""
+"Very soon, keyboard settings in gconf will be overridden (from the system "
 "configuration)"
 msgstr "gconf 中的 XKB 设置将会被立即覆盖(来自系统配置)"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
-msgid "XKB keyboard layout"
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:13
+#, fuzzy
+msgid "keyboard layout"
 msgstr "XKB 键盘布局"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
-msgid "XKB keyboard model"
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
+#, fuzzy
+msgid "keyboard model"
 msgstr "XKB 键盘型号"
-
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
-msgid "XKB options"
-msgstr "XKB 选项"
-
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
-msgid "XKB settings in gconf will be overridden from the system ASAP"
-msgstr "gconf 中的 XKB 设置将会被系统立即覆盖"
 
 #: typing-break/drw-break-window.c:209
 msgid "_Postpone break"
@@ -3264,3 +3316,5 @@ msgstr "应用主题"
 msgid "Sets the default theme"
 msgstr "设定默认主题"
 
+#~ msgid "XKB options"
+#~ msgstr "XKB 选项"

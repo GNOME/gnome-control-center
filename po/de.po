@@ -14,14 +14,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-12-19 17:17+0100\n"
+"POT-Creation-Date: 2004-12-20 23:11+0100\n"
 "PO-Revision-Date: 2004-12-19 18:08+0100\n"
 "Last-Translator: Hendrik Brandt <heb@gnome-de.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
 msgid "<b>Applications</b>"
@@ -945,13 +945,19 @@ msgid "Options"
 msgstr "Optionen"
 
 #: capplets/display/main.c:580
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
 "settings will be restored."
+msgid_plural ""
 "Testing the new settings. If you don't respond in %d seconds the previous "
 "settings will be restored."
-msgstr ""
+msgstr[0] ""
+"Die neuen Einstellungen werden getestet. Falls Sie nicht innerhalb von %d "
+"Sekunde reagieren, werden die vorherigen Einstellungen wiederhergestellt.Die "
+"neuen Einstellungen werden getestet. Falls Sie nicht innerhalb von %d "
+"Sekunden reagieren, werden die vorherigen Einstellungen wiederhergestellt."
+msgstr[1] ""
 "Die neuen Einstellungen werden getestet. Falls Sie nicht innerhalb von %d "
 "Sekunde reagieren, werden die vorherigen Einstellungen wiederhergestellt.Die "
 "neuen Einstellungen werden getestet. Falls Sie nicht innerhalb von %d "
@@ -1455,38 +1461,50 @@ msgid "Font may be too large"
 msgstr "Schrift möglicherweise zu groß"
 
 #: capplets/font/main.c:507
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "The font selected is %d point large, and may make it difficult to "
 "effectively use the computer.  It is recommended that you select a size "
 "smaller than %d."
+msgid_plural ""
 "The font selected is %d points large, and may make it difficult to "
 "effectively use the computer.  It is recommended that you select a size "
 "smaller than %d."
-msgstr ""
+msgstr[0] ""
 "Die gewählte Schrift ist %d Punkt groß und erschwert möglicherweise die "
 "effiziente Bedienung des Computers. Empfehlenswert wäre eine Schriftgröße "
-"von weniger als %d Punkt."
+"von weniger als %d Punkt.Die gewählte Schrift ist %d Punkt groß und "
+"erschwert möglicherweise die effiziente Bedienung des Computers. "
+"Empfehlenswert wäre eine Schriftgröße von weniger als %d Punkt."
+msgstr[1] ""
 "Die gewählte Schrift ist %d Punkt groß und erschwert möglicherweise die "
 "effiziente Bedienung des Computers. Empfehlenswert wäre eine Schriftgröße "
-"von weniger als %d Punkt."
+"von weniger als %d Punkt.Die gewählte Schrift ist %d Punkt groß und "
+"erschwert möglicherweise die effiziente Bedienung des Computers. "
+"Empfehlenswert wäre eine Schriftgröße von weniger als %d Punkt."
 
 #: capplets/font/main.c:514
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "The font selected is %d point large, and may make it difficult to "
 "effectively use the computer.  It is recommended that you select a smaller "
 "sized font."
+msgid_plural ""
 "The font selected is %d points large, and may make it difficult to "
 "effectively use the computer.  It is recommended that you select a smaller "
 "sized font."
-msgstr ""
+msgstr[0] ""
 "Die gewählte Schrift ist %d Punkt groß und erschwert möglicherweise die "
 "effiziente Bedienung des Computers. Eine geringere Schriftgröße wäre "
-"empfehlenswert."
+"empfehlenswert.Die gewählte Schrift ist %d Punkt groß und erschwert "
+"möglicherweise die effiziente Bedienung des Computers. Eine geringere "
+"Schriftgröße wäre empfehlenswert."
+msgstr[1] ""
 "Die gewählte Schrift ist %d Punkt groß und erschwert möglicherweise die "
 "effiziente Bedienung des Computers. Eine geringere Schriftgröße wäre "
-"empfehlenswert."
+"empfehlenswert.Die gewählte Schrift ist %d Punkt groß und erschwert "
+"möglicherweise die effiziente Bedienung des Computers. Eine geringere "
+"Schriftgröße wäre empfehlenswert."
 
 #: capplets/keybindings/eggcellrendererkeys.c:21
 msgid "New accelerator..."
@@ -3096,8 +3114,9 @@ msgid ""
 "A collection of scripts to run whenever the keyboard state is reloaded. "
 "Useful for re-applying xmodmap based adjustments"
 msgstr ""
-"Eine Sammlung von Skripten, die jedesmal ausgeführt wenn der Tastaturstatus neu geladen wird. "
-"Nützlich um auf xmodmap basierende Einstellungen neu anzuwenden"
+"Eine Sammlung von Skripten, die jedesmal ausgeführt wenn der Tastaturstatus "
+"neu geladen wird. Nützlich um auf xmodmap basierende Einstellungen neu "
+"anzuwenden"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
 msgid "Default group, assigned on window creation"
@@ -3125,11 +3144,15 @@ msgstr "Tastaturoptionen"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:8
 msgid "Keyboard settings in gconf will be overridden from the system ASAP"
-msgstr "Tastatureinstellungen in GConf werden vom System so schnell wie möglich überschrieben"
+msgstr ""
+"Tastatureinstellungen in GConf werden vom System so schnell wie möglich "
+"überschrieben"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
 msgid "Save/restore indicators together with layout groups"
-msgstr "Speichern und Wiederherstellen von Indikatoren zusammen mit den Belegungsgruppen"
+msgstr ""
+"Speichern und Wiederherstellen von Indikatoren zusammen mit den "
+"Belegungsgruppen"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
 msgid "Show layout names instead of group names"
@@ -3140,8 +3163,8 @@ msgid ""
 "Show layout names instead of group names (only for versions of XFree "
 "supporting multiple layouts)"
 msgstr ""
-"Name der Tastaturbelegungen anstatt der Gruppennamen anzeigen (verfügbar nur bei XFree-Versionen "
-"die unterschiedliche Tastaturbelegungen unterstützen)"
+"Name der Tastaturbelegungen anstatt der Gruppennamen anzeigen (verfügbar nur "
+"bei XFree-Versionen die unterschiedliche Tastaturbelegungen unterstützen)"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:12
 msgid ""
@@ -3452,4 +3475,3 @@ msgstr "Thema an_wenden"
 #: vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
 msgid "Sets the default theme"
 msgstr "Legt das Standardthema fest"
-

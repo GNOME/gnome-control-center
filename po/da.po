@@ -24,7 +24,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-30 12:22+0100\n"
+"POT-Creation-Date: 2004-12-20 23:11+0100\n"
 "PO-Revision-Date: 2004-11-30 12:24+0100\n"
 "Last-Translator: Martin Willemoes Hansen <mwh@sysrq.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
@@ -433,6 +433,13 @@ msgstr "Tilføj baggrund"
 #: capplets/background/gnome-wp-info.c:49
 msgid "No Wallpaper"
 msgstr "Ingen baggrund"
+
+#: capplets/background/gnome-wp-item.c:287
+#: capplets/background/gnome-wp-item.c:289
+msgid "pixel"
+msgid_plural "pixels"
+msgstr[0] ""
+msgstr[1] ""
 
 #: capplets/common/activate-settings-daemon.c:18
 msgid ""
@@ -1939,7 +1946,8 @@ msgid "Network Proxy"
 msgstr "Netværksproxy"
 
 #: capplets/network/gnome-network-preferences.desktop.in.in.h:2
-msgid "Network proxy preferences"
+#, fuzzy
+msgid "Set your network proxy preferences"
 msgstr "Indstillinger for netværksproxy"
 
 #: capplets/network/gnome-network-preferences.glade.h:1
@@ -1983,7 +1991,8 @@ msgid "H_TTP proxy:"
 msgstr "H_TTP-proxy:"
 
 #: capplets/network/gnome-network-preferences.glade.h:12
-msgid "Network Proxy Configuration"
+#, fuzzy
+msgid "Network Proxy Preferences"
 msgstr "Indstillinger for netværksproxy"
 
 #: capplets/network/gnome-network-preferences.glade.h:13
@@ -2429,8 +2438,9 @@ msgid "_Select windows when the mouse moves over them"
 msgstr "_Vælg vinduer når musen bevæger sig over dem"
 
 #: capplets/windows/window-properties.desktop.in.in.h:1
-msgid "Window Properties"
-msgstr "Vinduesindstillinger"
+#, fuzzy
+msgid "Set your window properties"
+msgstr "Konfigurér egenskaber for bestemte vinduer"
 
 #: capplets/windows/window-properties.desktop.in.in.h:2
 msgid "Windows"
@@ -3056,29 +3066,77 @@ msgstr ""
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:1
 msgid ""
-"Very soon, XKB settings in gconf will be overridden (from the system "
+"A collection of scripts to run whenever the keyboard state is reloaded. "
+"Useful for re-applying xmodmap based adjustments"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
+msgid "Default group, assigned on window creation"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
+msgid "Keep and manage separate group per window"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
+#, fuzzy
+msgid "Keyboard Update Handlers"
+msgstr "Tastaturbip _aktiveret"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
+#, fuzzy
+msgid "Keyboard layout"
+msgstr "XKB-tastaturlayout"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:6
+#, fuzzy
+msgid "Keyboard model"
+msgstr "Tastatur_model:"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:7
+#, fuzzy
+msgid "Keyboard options"
+msgstr "Indstillinger for tastatur"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:8
+#, fuzzy
+msgid "Keyboard settings in gconf will be overridden from the system ASAP"
+msgstr ""
+"XKB-indstillinger i GConf vil blive overskrevet af systemet så snart som "
+"muligt"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
+msgid "Save/restore indicators together with layout groups"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
+msgid "Show layout names instead of group names"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:11
+msgid ""
+"Show layout names instead of group names (only for versions of XFree "
+"supporting multiple layouts)"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:12
+#, fuzzy
+msgid ""
+"Very soon, keyboard settings in gconf will be overridden (from the system "
 "configuration)"
 msgstr ""
 "Meget snart vil XKB-indstillinger i GConf blive overskrevet (fra systemets "
 "konfiguration)"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
-msgid "XKB keyboard layout"
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:13
+#, fuzzy
+msgid "keyboard layout"
 msgstr "XKB-tastaturlayout"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
-msgid "XKB keyboard model"
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
+#, fuzzy
+msgid "keyboard model"
 msgstr "XKB-tastaturmodel"
-
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
-msgid "XKB options"
-msgstr "XKB-indstillinger"
-
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
-msgid "XKB settings in gconf will be overridden from the system ASAP"
-msgstr ""
-"XKB-indstillinger i GConf vil blive overskrevet af systemet så snart som "
-"muligt"
 
 #: typing-break/drw-break-window.c:209
 msgid "_Postpone break"
@@ -3243,39 +3301,39 @@ msgstr "Opret miniaturer for TrueType-skrifttyper"
 msgid "Whether to thumbnail Type1 fonts"
 msgstr "Opret miniaturer for Type1-skrifttyper"
 
-#: vfs-methods/fontilus/font-view.c:126
+#: vfs-methods/fontilus/font-view.c:125
 msgid "The quick brown fox jumps over the lazy dog. 0123456789"
 msgstr "Cølibatisk havfrue på brynjeklædt wc med plexiglas i zoo - 0123456789."
 
-#: vfs-methods/fontilus/font-view.c:286
+#: vfs-methods/fontilus/font-view.c:285
 msgid "Name:"
 msgstr "Navn:"
 
-#: vfs-methods/fontilus/font-view.c:289
+#: vfs-methods/fontilus/font-view.c:288
 msgid "Style:"
 msgstr "Stil: "
 
-#: vfs-methods/fontilus/font-view.c:298
+#: vfs-methods/fontilus/font-view.c:297
 msgid "Type:"
 msgstr "Type:"
 
-#: vfs-methods/fontilus/font-view.c:305
+#: vfs-methods/fontilus/font-view.c:304
 msgid "Size:"
 msgstr "Størrelse:"
 
-#: vfs-methods/fontilus/font-view.c:349 vfs-methods/fontilus/font-view.c:362
+#: vfs-methods/fontilus/font-view.c:348 vfs-methods/fontilus/font-view.c:361
 msgid "Version:"
 msgstr "Udgave:"
 
-#: vfs-methods/fontilus/font-view.c:353 vfs-methods/fontilus/font-view.c:364
+#: vfs-methods/fontilus/font-view.c:352 vfs-methods/fontilus/font-view.c:363
 msgid "Copyright:"
 msgstr "Copyright:"
 
-#: vfs-methods/fontilus/font-view.c:357
+#: vfs-methods/fontilus/font-view.c:356
 msgid "Description:"
 msgstr "Beskrivning:"
 
-#: vfs-methods/fontilus/font-view.c:418
+#: vfs-methods/fontilus/font-view.c:417
 #, c-format
 msgid "usage: %s fontfile\n"
 msgstr "brug: %s skriftfil\n"
@@ -3375,6 +3433,15 @@ msgstr "Anvend tema"
 #: vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
 msgid "Sets the default theme"
 msgstr "Sætter standardtemaet"
+
+#~ msgid "Network Proxy Configuration"
+#~ msgstr "Indstillinger for netværksproxy"
+
+#~ msgid "Window Properties"
+#~ msgstr "Vinduesindstillinger"
+
+#~ msgid "XKB options"
+#~ msgstr "XKB-indstillinger"
 
 #~ msgid "Mozilla/Netscape 6"
 #~ msgstr "Mozilla/Netscape 6"
@@ -4423,9 +4490,6 @@ msgstr "Sætter standardtemaet"
 #~ msgid "Key_press makes sound"
 #~ msgstr "Udsend lyd ved taste_tryk"
 
-#~ msgid "Keyboard bell _enabled"
-#~ msgstr "Tastaturbip _aktiveret"
-
 #~ msgid "Keyboard bell _off"
 #~ msgstr "Tastaturbip _fra"
 
@@ -4523,9 +4587,6 @@ msgstr "Sætter standardtemaet"
 #~ msgid "Configure window appearance"
 #~ msgstr "Konfigurér vinduesudseendet"
 
-#~ msgid "Configure window properties"
-#~ msgstr "Konfigurér egenskaber for bestemte vinduer"
-
 #~ msgid "Configure window manager configuration properties"
 #~ msgstr "Konfigurér måden vindueshåndteringsindstillinger indstilles på"
 
@@ -4574,9 +4635,6 @@ msgstr "Sætter standardtemaet"
 
 #~ msgid "Associate keyboard shortcuts with panel actions"
 #~ msgstr "Bind tastaturgenveje til panelhandlinger"
-
-#~ msgid "Keyboard Properties"
-#~ msgstr "Indstillinger for tastatur"
 
 #~ msgid "Configure GNOME's use of sound"
 #~ msgstr "Konfigurér brugen af lyd i Gnome"

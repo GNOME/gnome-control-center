@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-14 14:59-0400\n"
+"POT-Creation-Date: 2004-12-20 23:11+0100\n"
 "PO-Revision-Date: 2004-03-10 16:54+0100\n"
 "Last-Translator: Sanlig Badral <badral@openmn.org>\n"
 "Language-Team: Mongolian <openmn-core@lists.sf.net>\n"
@@ -62,11 +62,11 @@ msgstr "_Дэлгэц дээрх гар"
 msgid "_Screenreader"
 msgstr "_Дэлгэц уншигч"
 
-#: capplets/accessibility/at-properties/at-properties.desktop.in.h:1
+#: capplets/accessibility/at-properties/at-properties.desktop.in.in.h:1
 msgid "Assistive Technology Support"
 msgstr "Туслах технолгийн дэмжилт"
 
-#: capplets/accessibility/at-properties/at-properties.desktop.in.h:2
+#: capplets/accessibility/at-properties/at-properties.desktop.in.in.h:2
 msgid "Enable support for GNOME assistive technologies at login"
 msgstr "Нэвтрэлтэд ГНОМЕ-н туслах технолгуудын дэмжилтийг нээх"
 
@@ -117,13 +117,13 @@ msgstr "Ажиллагааны тохируулгыг _импортлох"
 msgid "_Import"
 msgstr "_Оруулж ирэх"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
+#: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.in.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:20
-#: capplets/keyboard/keyboard.desktop.in.h:1
+#: capplets/keyboard/keyboard.desktop.in.in.h:1
 msgid "Keyboard"
 msgstr "Гар"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:2
+#: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.in.h:2
 msgid "Set your keyboard accessibility preferences"
 msgstr "Гарын хялбар хандалтын тохируулга хийх"
 
@@ -336,11 +336,11 @@ msgstr "Цэгүүд/Секунд"
 msgid "seconds"
 msgstr "Секундүүд"
 
-#: capplets/background/background.desktop.in.h:1
+#: capplets/background/background.desktop.in.in.h:1
 msgid "Change your Desktop Background settings"
 msgstr "Ажлын тавцанын дэвсгэрийн тохиргоог өөрчилөх"
 
-#: capplets/background/background.desktop.in.h:2
+#: capplets/background/background.desktop.in.in.h:2
 msgid "Desktop Background"
 msgstr "Ажлын тавцангийн дэвсгэр"
 
@@ -419,6 +419,13 @@ msgstr "Туурга цаас нэмэх"
 #: capplets/background/gnome-wp-info.c:49
 msgid "No Wallpaper"
 msgstr "Туурга цаасгүй"
+
+#: capplets/background/gnome-wp-item.c:287
+#: capplets/background/gnome-wp-item.c:289
+msgid "pixel"
+msgid_plural "pixels"
+msgstr[0] ""
+msgstr[1] ""
 
 #: capplets/common/activate-settings-daemon.c:18
 msgid ""
@@ -628,104 +635,14 @@ msgstr "Та нэгэн зураг сонгоно уу."
 msgid "_Select"
 msgstr "_Сонгох"
 
-#: capplets/default-applications/default-applications.desktop.in.h:1
+#: capplets/default-applications/default-applications.desktop.in.in.h:1
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:18
 msgid "Preferred Applications"
 msgstr "Эрхэмлэсэн х.программууд"
 
-#: capplets/default-applications/default-applications.desktop.in.h:2
+#: capplets/default-applications/default-applications.desktop.in.in.h:2
 msgid "Select your default applications"
 msgstr "Та өөрийн стандарт х.программыг сонгоно уу"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:9
-msgid "Epiphany"
-msgstr "Эпифани"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:10
-msgid "Galeon"
-msgstr "Галеон"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:11
-msgid "Encompass"
-msgstr "Энкомпасс"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:12
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:13
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:14
-msgid "Firebird/FireFox"
-msgstr "Файрбөрд/ФайрФокс"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:15
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:16
-msgid "Mozilla/Netscape 6"
-msgstr "Мозилла/Нэтскапе 6"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:17
-msgid "Netscape Communicator"
-msgstr "Нэтскапе Коммуникатор"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:18
-msgid "Konqueror"
-msgstr "Конкюрор"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:19
-msgid "W3M Text Browser"
-msgstr "W3M текст хөтөч"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:20
-msgid "Lynx Text Browser"
-msgstr "Линкс Текст хөтлөгч"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:21
-msgid "Links Text Browser"
-msgstr "Зүүн текст хөтлөгч"
-
-#. The code in gnome-default-applications-properties.c makes sure
-#. * there is only one (the first entry in this list) Evolution entry
-#. * in the list shown to the user
-#.
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:36
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:37
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:38
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:39
-msgid "Evolution Mail Reader"
-msgstr "Эволушон Майл Реадер"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:40
-msgid "Balsa"
-msgstr "Балса"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:41
-msgid "KMail"
-msgstr "КМайл"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:42
-msgid "Mozilla Mail"
-msgstr "Мозилла Майл"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:43
-msgid "Mutt"
-msgstr "Мутт"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:54
-msgid "Gnome Terminal"
-msgstr "ГномеТерминал"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:55
-msgid "Standard XTerminal"
-msgstr "Стандарт КСТерминал"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:56
-msgid "NXterm"
-msgstr "НКСтерм"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:57
-msgid "RXVT"
-msgstr "РКСВТ"
-
-#: capplets/default-applications/gnome-default-applications-properties-structs.c:58
-msgid "ETerm"
-msgstr "ЭТерм"
 
 #: capplets/default-applications/gnome-default-applications-properties.c:123
 msgid "Please specify a name and a command for this editor."
@@ -736,20 +653,23 @@ msgid "Add..."
 msgstr "Нэмэх..."
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:3
-msgid "C_ustom Editor"
-msgstr "Х_эрэглэгч тод. боловсруулагч"
+#, fuzzy
+msgid "C_ustom"
+msgstr "Хэвшмэл"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:4
-msgid "C_ustom Mail Reader:"
-msgstr "Х_эрэглэгч тод. майл уншигч:"
+#, fuzzy
+msgid "C_ustom:"
+msgstr "Хэвшмэл"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:5
-msgid "C_ustom Terminal:"
-msgstr "Х_эрэглэгч тод. Терминал:"
+msgid "Can open _URIs"
+msgstr ""
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:6
-msgid "C_ustom Web Browser:"
-msgstr "Х_эрэглэгч тод. Вэб хөтлөгч:"
+#, fuzzy
+msgid "Can open multiple _files"
+msgstr "Энэ х.программ _олон файл нээж чадна"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:7
 msgid "Co_mmand:"
@@ -796,6 +716,16 @@ msgid "Mail Reader"
 msgstr "Майл уншигч"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:19
+#, fuzzy
+msgid "Run in a _terminal"
+msgstr "_Терминалд ажиллуулах"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:20
+#, fuzzy
+msgid "Run in a t_erminal"
+msgstr "_Терминалд ажиллуулах"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:21
 msgid ""
 "Select the window manager you want.  You will need to hit apply, wave the "
 "magic wand, and do a magic dance for it to work."
@@ -803,92 +733,168 @@ msgstr ""
 "Та хүссэн цонхны менежерээ сонгоно уу. Та »Хэрэглэх« -г дарах ба "
 "ажиллахадхамгийн сайн нь гэж итгэх хэрэгтэй."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:20
-msgid "Start in T_erminal"
-msgstr "_Терминалд ажиллуулах"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:21
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:22
 msgid "Terminal"
 msgstr "Терминал"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:22
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:23
 msgid "Text Editor"
 msgstr "Текст боловсруулагч"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:23
-msgid "This application can open _URIs"
-msgstr "Энэ х.программ _URI -ууд нээж болно"
-
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:24
-msgid "This application can open _multiple files"
-msgstr "Энэ х.программ _олон файл нээж чадна"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:25
-msgid "This application needs to be run in a _shell"
-msgstr "Энэ х.программ _тушаалын мөрөнд (shell) ажиллах ёстой"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:26
 msgid "Understands _Netscape Remote Control"
 msgstr "»_Netscape Remote Control« ойлгох"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:27
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:25
 msgid "Use this _editor to open text files in the file manager"
 msgstr "Энэ _боловсруулагчийг файл менежер дотор текст файл нээхэд хэрэглэх"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:28
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:26
 msgid "Web Browser"
 msgstr "Вэб хөтлөгч"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:29
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:27
 msgid "Window Manager"
 msgstr "Цонхны менежер"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:30
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:28
+#, fuzzy
+msgid "_Command:"
+msgstr "Т_ушаал:"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:29
 #: capplets/file-types/file-types-properties.glade.h:23
 msgid "_Name:"
 msgstr "_Нэр:"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:30
 msgid "_Properties..."
 msgstr "_Онцлогууд..."
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:32
-msgid "_Select a Mail Reader:"
-msgstr "Майл уншигч _сонгох:"
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+#, fuzzy
+msgid "_Select:"
+msgstr "_Сонгох"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:33
-msgid "_Select a Terminal:"
-msgstr "Терминал _сонгох:"
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:9
+#, fuzzy
+msgid "Debian Sensible Browser"
+msgstr "Стандарт вэб хөтлөгч"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:34
-msgid "_Select a Web Browser:"
-msgstr "Вэб хөтлөгч _сонгох:"
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:10
+msgid "Epiphany"
+msgstr "Эпифани"
 
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:35
-msgid "_Select an Editor:"
-msgstr "Боловсруулагч _сонгох:"
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:11
+msgid "Galeon"
+msgstr "Галеон"
 
-#: capplets/desktop-links/Accessibility.directory.in.h:1
-msgid "Accessibility"
-msgstr "Хялбарчилал"
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:12
+msgid "Encompass"
+msgstr "Энкомпасс"
 
-#: capplets/desktop-links/Accessibility.directory.in.h:2
-msgid "Accessibility Settings"
-msgstr "Хялбарчилалын тохируулга"
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:13
+#, fuzzy
+msgid "Firebird"
+msgstr "Файрбөрд/ФайрФокс"
 
-#: capplets/desktop-links/Advanced.directory.in.h:1
-msgid "Advanced"
-msgstr "Өргөтгөсөн"
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:14
+msgid "Firefox"
+msgstr ""
 
-#: capplets/desktop-links/Advanced.directory.in.h:2
-msgid "Advanced Settings"
-msgstr "Өргөтгөсөн тохируулга"
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:15
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:16
+#, fuzzy
+msgid "Mozilla"
+msgstr "Мозилла Майл"
 
-#: capplets/display/display-properties.desktop.in.h:1
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:17
+msgid "Netscape Communicator"
+msgstr "Нэтскапе Коммуникатор"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:18
+msgid "Konqueror"
+msgstr "Конкюрор"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:19
+msgid "W3M Text Browser"
+msgstr "W3M текст хөтөч"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:20
+msgid "Lynx Text Browser"
+msgstr "Линкс Текст хөтлөгч"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:21
+msgid "Links Text Browser"
+msgstr "Зүүн текст хөтлөгч"
+
+#. The code in gnome-default-applications-properties.c makes sure
+#. * there is only one (the first entry in this list) Evolution entry
+#. * in the list shown to the user
+#.
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:36
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:37
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:38
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:39
+msgid "Evolution Mail Reader"
+msgstr "Эволушон Майл Реадер"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:40
+msgid "Balsa"
+msgstr "Балса"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:41
+msgid "KMail"
+msgstr "КМайл"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:42
+msgid "Thunderbird"
+msgstr ""
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:43
+msgid "Mozilla Mail"
+msgstr "Мозилла Майл"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:44
+msgid "Mutt"
+msgstr "Мутт"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:55
+#, fuzzy
+msgid "Debian Terminal Emulator"
+msgstr "Стандарт терминал"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:56
+#, fuzzy
+msgid "GNOME Terminal"
+msgstr "Терминал"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:57
+msgid "Standard XTerminal"
+msgstr "Стандарт КСТерминал"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:58
+msgid "NXterm"
+msgstr "НКСтерм"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:59
+msgid "RXVT"
+msgstr "РКСВТ"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:60
+#, fuzzy
+msgid "aterm"
+msgstr "НКСтерм"
+
+#: capplets/default-applications/gnome-default-applications-properties-structs.c:61
+msgid "ETerm"
+msgstr "ЭТерм"
+
+#: capplets/display/display-properties.desktop.in.in.h:1
 msgid "Change screen resolution"
 msgstr "Дэлгэцийн нарийвчилал өөрчилөх"
 
-#: capplets/display/display-properties.desktop.in.h:2
+#: capplets/display/display-properties.desktop.in.in.h:2
 msgid "Screen Resolution"
 msgstr "Дэлгэцийн нарийвчилал"
 
@@ -983,7 +989,7 @@ msgid "Are you sure you want to permanently delete this entry?"
 msgstr "Та энэ объектыг бүрмөсөн устгахдаа итгэлтэй байна уу?"
 
 #: capplets/file-types/file-types-capplet.c:210
-#: vfs-methods/themus/themus-properties-view.c:167
+#: vfs-methods/themus/themus-properties-view.c:126
 msgid "Description"
 msgstr "Тодорхойлолт"
 
@@ -991,16 +997,26 @@ msgstr "Тодорхойлолт"
 msgid "Extensions"
 msgstr "Өргөтгөл"
 
-#: capplets/file-types/file-types-capplet.desktop.in.h:1
+#: capplets/file-types/file-types-capplet.desktop.in.in.h:1
 #: capplets/file-types/file-types-properties.glade.h:11
 msgid "File Types and Programs"
 msgstr "Файлын төрөл ба программууд"
 
-#: capplets/file-types/file-types-capplet.desktop.in.h:2
+#: capplets/file-types/file-types-capplet.desktop.in.in.h:2
 msgid "Specify which programs are used to open or view each file type"
 msgstr ""
 "Та ямар программ тухайн төрлийн файлуудыг нээх эсвэл харахад хэрэглэхээ "
 "сонгоно уу."
+
+#: capplets/file-types/file-types.desktop.in.in.h:1
+msgid "File types and programs"
+msgstr "Файлын төрөл ба программууд"
+
+#: capplets/file-types/file-types.desktop.in.in.h:2
+msgid "Specify which programs are used to open or view each type of file"
+msgstr ""
+"Энд та тухайн файлын төрөлийг харах эсвэл нээхэд ямар программ хэрэглэхээ "
+"тогтооно уу"
 
 #: capplets/file-types/file-types-properties.glade.h:2
 msgid "Actions"
@@ -1092,22 +1108,13 @@ msgid "_Protocol:"
 msgstr "_Протоколл:"
 
 #: capplets/file-types/file-types-properties.glade.h:26
+#: libsounds/sound-view.c:366
 msgid "_Remove"
 msgstr "_Устгах"
 
 #: capplets/file-types/file-types-properties.glade.h:27
 msgid "_Viewer component:"
 msgstr "_Харагч бүрэлдхүүн:"
-
-#: capplets/file-types/file-types.desktop.in.h:1
-msgid "File types and programs"
-msgstr "Файлын төрөл ба программууд"
-
-#: capplets/file-types/file-types.desktop.in.h:2
-msgid "Specify which programs are used to open or view each type of file"
-msgstr ""
-"Энд та тухайн файлын төрөлийг харах эсвэл нээхэд ямар программ хэрэглэхээ "
-"тогтооно уу"
 
 #: capplets/file-types/mime-category-edit-dialog.c:138
 msgid "Edit file category"
@@ -1291,14 +1298,15 @@ msgid "Electronic mail transmission"
 msgstr "Электрон мэдээ дамжуулал (Э-Захиа)"
 
 #: capplets/file-types/service-info.c:50
-msgid "Gnome documentation"
+#, fuzzy
+msgid "GNOME documentation"
 msgstr "GNOME-баримтжуулалт"
 
-#: capplets/font/font-properties.desktop.in.h:1
+#: capplets/font/font-properties.desktop.in.in.h:1
 msgid "Font"
 msgstr "Бичиг"
 
-#: capplets/font/font-properties.desktop.in.h:2
+#: capplets/font/font-properties.desktop.in.in.h:2
 msgid "Select fonts for the desktop"
 msgstr "Ажлын тавцанын бичгийг сонгох"
 
@@ -1517,29 +1525,29 @@ msgid "The type of accelerator."
 msgstr "Товчилуурын хослолын төрөл"
 
 #: capplets/keybindings/eggcellrendererkeys.c:242
-#: capplets/keybindings/gnome-keybinding-properties.c:196
+#: capplets/keybindings/gnome-keybinding-properties.c:197
 #: libbackground/applier.c:757 typing-break/drwright.c:473
 msgid "Disabled"
 msgstr "Хаагдсан"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:538
+#: capplets/keybindings/gnome-keybinding-properties.c:539
 msgid "<Unknown Action>"
 msgstr "<Тодорхойгүй үйлдэл>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:557
+#: capplets/keybindings/gnome-keybinding-properties.c:558
 msgid "Desktop"
 msgstr "Ажлын тавцан"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:558
-#: capplets/sound/gnome-settings-sound.desktop.in.h:2
+#: capplets/keybindings/gnome-keybinding-properties.c:559
+#: capplets/sound/gnome-settings-sound.desktop.in.in.h:2
 msgid "Sound"
 msgstr "Аудио"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:562
+#: capplets/keybindings/gnome-keybinding-properties.c:563
 msgid "Window Management"
 msgstr "Цонхны зохион байгуулалт"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:659
+#: capplets/keybindings/gnome-keybinding-properties.c:660
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1549,29 +1557,29 @@ msgstr ""
 " »%s« -д\n"
 "хэрэглэгджээ.\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:691
+#: capplets/keybindings/gnome-keybinding-properties.c:692
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 "Тохируулгын өгөгдлийн баазад шинэ товчилуурын хослолыг хадгалах үед алдаа "
 "гарлаа: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:741
+#: capplets/keybindings/gnome-keybinding-properties.c:742
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr ""
 "Тохируулгын өгөгдлийн баазаас товчилуурын хослолыг устгах үедгарлаа: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:830
+#: capplets/keybindings/gnome-keybinding-properties.c:831
 msgid "Action"
 msgstr "Үйлдэл"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:854
+#: capplets/keybindings/gnome-keybinding-properties.c:855
 msgid "Shortcut"
 msgstr "Товчилуурын хослол"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:1
-#: capplets/keybindings/keybinding.desktop.in.h:2
+#: capplets/keybindings/keybinding.desktop.in.in.h:2
 msgid "Keyboard Shortcuts"
 msgstr "Товчилуурын хослол"
 
@@ -1584,25 +1592,9 @@ msgstr ""
 "Та шинэ товчилуурын хослол өгнө үү, устгахын тулд Backspace-товчилуурыг "
 "дарна уу"
 
-#: capplets/keybindings/keybinding.desktop.in.h:1
+#: capplets/keybindings/keybinding.desktop.in.in.h:1
 msgid "Assign shortcut keys to commands"
 msgstr "Тушаалуудад товчилуурын хослол оноох"
-
-#: capplets/keyboard/gnome-keyboard-properties-xkb.c:69
-#: capplets/keyboard/gnome-keyboard-properties-xkb.c:95
-#, fuzzy
-msgid "Unknown"
-msgstr "Тодорхойгүй түүчээ"
-
-#: capplets/keyboard/gnome-keyboard-properties-xkbmc.c:80
-#, fuzzy
-msgid "Models"
-msgstr "Модел"
-
-#: capplets/keyboard/gnome-keyboard-properties-xkbpv.c:59
-#, fuzzy
-msgid "Keyboard layout preview"
-msgstr "XKB гарын байрлал"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:106
 #, c-format
@@ -1773,9 +1765,34 @@ msgstr "_Ажлын интервал үргэлжилэх:"
 msgid "minutes"
 msgstr "Минут"
 
-#: capplets/keyboard/keyboard.desktop.in.h:2
+#: capplets/keyboard/gnome-keyboard-properties-xkb.c:69
+#: capplets/keyboard/gnome-keyboard-properties-xkb.c:95
+#, fuzzy
+msgid "Unknown"
+msgstr "Тодорхойгүй түүчээ"
+
+#: capplets/keyboard/gnome-keyboard-properties-xkbmc.c:80
+#, fuzzy
+msgid "Models"
+msgstr "Модел"
+
+#: capplets/keyboard/gnome-keyboard-properties-xkbpv.c:66
+#, fuzzy
+msgid "Keyboard layout preview"
+msgstr "XKB гарын байрлал"
+
+#: capplets/keyboard/keyboard.desktop.in.in.h:2
 msgid "Set your keyboard preferences"
 msgstr "Өөрийн гарын тохируулга тогтоох"
+
+#: capplets/localization/localization.desktop.in.in.h:1
+msgid "Language and Culture"
+msgstr ""
+
+#: capplets/localization/localization.desktop.in.in.h:2
+#, fuzzy
+msgid "Set your language and culture preferences"
+msgstr "Хулганы тохируулга хийх"
 
 #: capplets/mouse/gnome-mouse-properties.c:496
 msgid "Unknown Cursor"
@@ -1941,20 +1958,21 @@ msgstr "_Хязгаар:"
 msgid "_Timeout:"
 msgstr "_Завсар:"
 
-#: capplets/mouse/gnome-settings-mouse.desktop.in.h:1
+#: capplets/mouse/gnome-settings-mouse.desktop.in.in.h:1
 msgid "Mouse"
 msgstr "Хулгана"
 
-#: capplets/mouse/gnome-settings-mouse.desktop.in.h:2
+#: capplets/mouse/gnome-settings-mouse.desktop.in.in.h:2
 msgid "Set your mouse preferences"
 msgstr "Хулганы тохируулга хийх"
 
-#: capplets/network/gnome-network-preferences.desktop.in.h:1
+#: capplets/network/gnome-network-preferences.desktop.in.in.h:1
 msgid "Network Proxy"
 msgstr "Сүлжээ-итгэмжилэгч"
 
-#: capplets/network/gnome-network-preferences.desktop.in.h:2
-msgid "Network proxy preferences"
+#: capplets/network/gnome-network-preferences.desktop.in.in.h:2
+#, fuzzy
+msgid "Set your network proxy preferences"
 msgstr "Сүлжээ-итгэмжилэгчийн тохируулга"
 
 #: capplets/network/gnome-network-preferences.glade.h:1
@@ -2000,8 +2018,9 @@ msgid "H_TTP proxy:"
 msgstr "_HTTP-итгэмжилэгч:"
 
 #: capplets/network/gnome-network-preferences.glade.h:12
-msgid "Network Proxy Configuration"
-msgstr "Сүлжээний итгэмжилэгчийн тохируулга"
+#, fuzzy
+msgid "Network Proxy Preferences"
+msgstr "Сүлжээ-итгэмжилэгчийн тохируулга"
 
 #: capplets/network/gnome-network-preferences.glade.h:13
 msgid "Port:"
@@ -2042,7 +2061,7 @@ msgstr "_Нууц үг:"
 msgid "_Secure HTTP proxy:"
 msgstr "_Найдвартай HTTP-итгэмжилэгч:"
 
-#: capplets/sound/gnome-settings-sound.desktop.in.h:1
+#: capplets/sound/gnome-settings-sound.desktop.in.in.h:1
 msgid "Enable sound and associate sounds with events"
 msgstr "Чимээг идэвхижүүлж үйлдлүүдтэй холбох"
 
@@ -2099,15 +2118,26 @@ msgstr ""
 "Таны системд загвар олдсонгүй. Энэ нь магад таны »Загвар тохируулга« эсвэл "
 "»gnome-themes« пакет зөв суугаагүй гэсэн үг."
 
-#: capplets/theme-switcher/gnome-theme-installer.c:127
+#: capplets/theme-switcher/gnome-theme-installer.c:104
+msgid "This theme is not in a supported format."
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-installer.c:140
 msgid "No theme file location specified to install"
 msgstr "Суулгах хэлбэр файлын байрлал алга"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:146
+#: capplets/theme-switcher/gnome-theme-installer.c:157
 msgid "The theme file location specified to install is invalid"
 msgstr "Суулгах хэлбэр файлын байрлал хүчингүй"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:173
+#: capplets/theme-switcher/gnome-theme-installer.c:177
+#, c-format
+msgid ""
+"Insufficient permissions to install the theme in:\n"
+"%s"
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-installer.c:196
 #, c-format
 msgid ""
 "%s is the path where the theme files will be installed. This can not be "
@@ -2142,12 +2172,12 @@ msgid "The theme already exists. Would you like to replace it?"
 msgstr ""
 
 # CHECK
-#: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
 msgid "Select themes for various parts of the desktop"
 msgstr "Ажлын тавцанын янз бүрийн хэсгүүдийн хувьд загвар тогтоох"
 
-#: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:1
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
+#: vfs-methods/themus/themus-properties-main.c:92
 msgid "Theme"
 msgstr "Загвар"
 
@@ -2261,11 +2291,11 @@ msgstr "Хэл_бэрийн нэр:"
 msgid "theme selection tree"
 msgstr "Загвар сонголтын мод"
 
-#: capplets/ui-properties/gnome-ui-properties.desktop.in.h:1
+#: capplets/ui-properties/gnome-ui-properties.desktop.in.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
 msgstr "Х.программийн багажны ба цэсний самбарын харагдалтыг тохируулах"
 
-#: capplets/ui-properties/gnome-ui-properties.desktop.in.h:2
+#: capplets/ui-properties/gnome-ui-properties.desktop.in.in.h:2
 msgid "Menus & Toolbars"
 msgstr "Цэс ба багажны самбар"
 
@@ -2334,7 +2364,6 @@ msgid "_Edit"
 msgstr "_Боловсруулах"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:18
-#: control-center/gnomecc-ui.xml.h:5
 msgid "_File"
 msgstr "_Файл"
 
@@ -2362,6 +2391,14 @@ msgstr "_Дуусгах"
 msgid "_Save"
 msgstr "Ха_дгалах"
 
+#: capplets/url-properties/url-properties.desktop.in.in.h:1
+msgid "Configure which programs are used to display URLs"
+msgstr ""
+
+#: capplets/url-properties/url-properties.desktop.in.in.h:2
+msgid "URL Handlers"
+msgstr ""
+
 #: capplets/windows/gnome-window-properties.c:388
 #, c-format
 msgid ""
@@ -2374,23 +2411,23 @@ msgstr ""
 "\n"
 "%s"
 
-#: capplets/windows/gnome-window-properties.c:637
+#: capplets/windows/gnome-window-properties.c:648
 msgid "Control"
 msgstr "Контрол"
 
-#: capplets/windows/gnome-window-properties.c:642
+#: capplets/windows/gnome-window-properties.c:653
 msgid "Alt"
 msgstr "Alt"
 
-#: capplets/windows/gnome-window-properties.c:648
+#: capplets/windows/gnome-window-properties.c:659
 msgid "Hyper"
 msgstr "Hyper"
 
-#: capplets/windows/gnome-window-properties.c:655
+#: capplets/windows/gnome-window-properties.c:666
 msgid "Super (or \"Windows logo\")"
 msgstr "Супер (Виндовс-товчилуур)"
 
-#: capplets/windows/gnome-window-properties.c:662
+#: capplets/windows/gnome-window-properties.c:673
 msgid "Meta"
 msgstr "Мита"
 
@@ -2433,13 +2470,34 @@ msgstr "Идэвхижсэн цонх тодорхой хугацааны дар
 msgid "_Select windows when the mouse moves over them"
 msgstr "Хулганыг цонхон дээгүүр хөдөлгөхөд түүнийг _идэвхижүүлэх"
 
-#: capplets/windows/window-properties.desktop.in.h:1
-msgid "Window Properties"
+#: capplets/windows/window-properties.desktop.in.in.h:1
+#, fuzzy
+msgid "Set your window properties"
 msgstr "Цонхны тохируулга"
 
-#: capplets/windows/window-properties.desktop.in.h:2
+#: capplets/windows/window-properties.desktop.in.in.h:2
 msgid "Windows"
 msgstr "Цонх"
+
+#: control-center/control-center.c:1005
+#: control-center/gnomecc.desktop.in.in.h:1
+msgid "GNOME Control Center"
+msgstr "GNOME-удирдах төв"
+
+#: control-center/control-center.c:1121
+#, fuzzy
+msgid "Desktop Preferences"
+msgstr "Ажлын тавцангийн дэвсгэрийн тохируулгууд"
+
+#: control-center/control-center-categories.c:248
+#, fuzzy
+msgid "Others"
+msgstr "Шүүлтүүр"
+
+#: control-center/gnomecc.desktop.in.in.h:2
+#: vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:2
+msgid "The GNOME configuration tool"
+msgstr "GNOME-тохируулгын хэрэгсэл"
 
 #: control-center/GNOME_ControlCenter.server.in.h:1
 #, fuzzy
@@ -2474,90 +2532,6 @@ msgstr "Удирдах төвийн цэс"
 #, fuzzy
 msgid "View as Control Center"
 msgstr "GNOME-удирдах төв : %s"
-
-#: control-center/capplet-dir-view-list.c:319
-#, c-format
-msgid "GNOME Control Center: %s"
-msgstr "GNOME-Удирдах төв: %s"
-
-#: control-center/capplet-dir-view.c:158
-msgid "Layout"
-msgstr "Үзэмж"
-
-#: control-center/capplet-dir-view.c:159
-msgid "Layout to use for this view of the capplets"
-msgstr "Энэ Capplets -ын харагдалтад хэрэглэх үзэмж"
-
-# CHECK
-#: control-center/capplet-dir-view.c:165
-msgid "Capplet directory object"
-msgstr "Лавлах объектын тохируулга диалог"
-
-# CHECK
-#: control-center/capplet-dir-view.c:166
-msgid "Capplet directory that this view is viewing"
-msgstr "Тохируулга диалог-Лавлахыг энэ харагдалтаар харах"
-
-#: control-center/capplet-dir-view.c:348
-msgid "translator_credits"
-msgstr "Санлигийн Бадрал<badral@chinggis.com>"
-
-#: control-center/capplet-dir-view.c:357 control-center/gnomecc.desktop.in.h:1
-msgid "GNOME Control Center"
-msgstr "GNOME-удирдах төв"
-
-#: control-center/capplet-dir-view.c:360
-msgid "Desktop properties manager."
-msgstr "Ажлын тавцанын онцлог зохион байгуулагч."
-
-#: control-center/capplet-dir-view.c:498
-#, c-format
-msgid "Gnome Control Center : %s"
-msgstr "GNOME-удирдах төв : %s"
-
-#: control-center/control-center-categories.c:333
-#, fuzzy
-msgid "Others"
-msgstr "Шүүлтүүр"
-
-#: control-center/control-center-categories.c:424
-#: control-center/control-center.c:1091
-#, fuzzy
-msgid "Gnome Control Center"
-msgstr "GNOME-удирдах төв : %s"
-
-#: control-center/control-center.c:78
-#, fuzzy
-msgid "Use nautilus if it is running."
-msgstr "Nautilus ажиллаж байгаа ч Shell хэрэглэх."
-
-#: control-center/gnomecc-ui.xml.h:1
-msgid "About this application"
-msgstr "Энэ программын тухай"
-
-#: control-center/gnomecc-ui.xml.h:2
-msgid "Overview of the control center"
-msgstr "Удирдах төвийн тойм"
-
-#: control-center/gnomecc-ui.xml.h:3
-msgid "_About"
-msgstr "_Тухай"
-
-#: control-center/gnomecc-ui.xml.h:4
-msgid "_Contents"
-msgstr "А_гуулга"
-
-#: control-center/gnomecc-ui.xml.h:6
-msgid "_Help"
-msgstr "_Тусламж"
-
-#: control-center/gnomecc.desktop.in.h:2
-msgid "The GNOME configuration tool"
-msgstr "GNOME-тохируулгын хэрэгсэл"
-
-#: control-center/main.c:43
-msgid "Use shell even if nautilus is running."
-msgstr "Nautilus ажиллаж байгаа ч Shell хэрэглэх."
 
 #: gnome-settings-daemon/actions/acme.glade.h:1
 msgid "Volume"
@@ -2664,7 +2638,7 @@ msgstr ""
 "(%s) -г ажиллуулж байхад алдаа ба\n"
 "тэр нь товчилуур (%s) -т холбогдсон"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:73
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:91
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2689,7 +2663,7 @@ msgstr ""
 "- <b>xprop -root | grep XKB</b>-н үр дүн\n"
 "- <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b>-н үр дүн"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:83
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:101
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2701,22 +2675,22 @@ msgstr ""
 "Энгийн тохиргоо эсвэл хэрэглэх эсвэл XFree-н илүү шинэ хувилбар хэрэглэхийг "
 "оролдоно уу."
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:172
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:190
 msgid ""
 "The X system keyboard settings differ from your current GNOME keyboard "
 "settings.  Which set would you like to use?"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:175
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:193
 #, fuzzy
 msgid "Use X settings"
 msgstr "%d дэлгэцийн тохиргоо\n"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:177
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:195
 msgid "Use GNOME settings"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:231
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:249
 #, fuzzy, c-format
 msgid ""
 "You have a keyboard remapping file (%s) in your home directory whose "
@@ -2780,8 +2754,8 @@ msgstr "_Энэ мэдээг дахин бүү харуул"
 msgid "Couldn't load sound file %s as sample %s"
 msgstr " %s дууны файл %s жишээгээр ачаалагдсангүй"
 
-#: gnome-settings-daemon/gnome-settings-xrdb.c:212
-#: gnome-settings-daemon/gnome-settings-xrdb.c:260
+#: gnome-settings-daemon/gnome-settings-xrdb.c:213
+#: gnome-settings-daemon/gnome-settings-xrdb.c:261
 msgid "Cannot determine user's home directory"
 msgstr "Хэрэглэгийн гэр лавлахыг илрүүлж чадсангүй"
 
@@ -2830,11 +2804,11 @@ msgstr "Дэлгэц"
 msgid "Screen on which BGApplier is to draw"
 msgstr "BGApplier зурагдах ёстой дэлгэц"
 
-#: libsounds/sound-view.c:121 libsounds/sound-view.c:146
+#: libsounds/sound-view.c:122 libsounds/sound-view.c:147
 msgid "The sound file for this event does not exist."
 msgstr "Энэ үйлдийн хувьд тогтоосон дууны файл алга."
 
-#: libsounds/sound-view.c:148
+#: libsounds/sound-view.c:149
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -2844,32 +2818,32 @@ msgstr ""
 "Та стандарт дуугаар авахыг хүсэж байвал \n"
 "»gnome-audio« пакетыг суулгана уу."
 
-#: libsounds/sound-view.c:192
+#: libsounds/sound-view.c:224
 #, c-format
 msgid "The file %s is not a valid wav file"
 msgstr "%s файл хүчингүй wav файл байна"
 
-#: libsounds/sound-view.c:257
+#: libsounds/sound-view.c:289
 msgid "Event"
 msgstr "Үйлдэл"
 
-#: libsounds/sound-view.c:266
+#: libsounds/sound-view.c:298
 msgid "Sound File"
 msgstr "Аудио файл"
 
-#: libsounds/sound-view.c:282
+#: libsounds/sound-view.c:314
 msgid "_Sounds:"
 msgstr "_Дуунууд:"
 
-#: libsounds/sound-view.c:296
+#: libsounds/sound-view.c:328
 msgid "Sound _file:"
 msgstr "Дууны _файл:"
 
-#: libsounds/sound-view.c:300
+#: libsounds/sound-view.c:332
 msgid "Select Sound File"
 msgstr "Дууны файл сонгоно уу"
 
-#: libsounds/sound-view.c:324
+#: libsounds/sound-view.c:356
 msgid "_Play"
 msgstr "_Тоглуулах"
 
@@ -3143,25 +3117,73 @@ msgstr ""
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:1
 msgid ""
-"Very soon, XKB settings in gconf will be overridden (from the system "
+"A collection of scripts to run whenever the keyboard state is reloaded. "
+"Useful for re-applying xmodmap based adjustments"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
+msgid "Default group, assigned on window creation"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
+msgid "Keep and manage separate group per window"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
+#, fuzzy
+msgid "Keyboard Update Handlers"
+msgstr "Гарын _загвар:"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
+#, fuzzy
+msgid "Keyboard layout"
+msgstr "XKB гарын байрлал"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:6
+#, fuzzy
+msgid "Keyboard model"
+msgstr "Гарын _загвар:"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:7
+#, fuzzy
+msgid "Keyboard options"
+msgstr "Товчилуурын хослол"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:8
+#, fuzzy
+msgid "Keyboard settings in gconf will be overridden from the system ASAP"
+msgstr "ASAP системээс gconf дахь XKB тохиргоог дарах уу"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
+msgid "Save/restore indicators together with layout groups"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
+msgid "Show layout names instead of group names"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:11
+msgid ""
+"Show layout names instead of group names (only for versions of XFree "
+"supporting multiple layouts)"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:12
+#, fuzzy
+msgid ""
+"Very soon, keyboard settings in gconf will be overridden (from the system "
 "configuration)"
 msgstr "Тун удахгүй XKB тохиргоо gconf руу орж ирнэ (системийн тохиргооноос)"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
-msgid "XKB keyboard layout"
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:13
+#, fuzzy
+msgid "keyboard layout"
 msgstr "XKB гарын байрлал"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
-msgid "XKB keyboard model"
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
+#, fuzzy
+msgid "keyboard model"
 msgstr "XKB гарын загвар"
-
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
-msgid "XKB options"
-msgstr "XKB сонголтууд"
-
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
-msgid "XKB settings in gconf will be overridden from the system ASAP"
-msgstr "ASAP системээс gconf дахь XKB тохиргоог дарах уу"
 
 #: typing-break/drw-break-window.c:209
 msgid "_Postpone break"
@@ -3239,46 +3261,14 @@ msgstr ""
 "дээр очиж хулганы баруун товшуураар »Самбар луу нэмэх -> Хэрэгсэл -> "
 "Сонордуулга муж« -г сонгож нэмж болно."
 
-#: vfs-methods/fontilus/font-view.c:102
-msgid "The quick brown fox jumps over the lazy dog. 0123456789"
-msgstr "Чихний чимэг болсон аялгуу сайхан монгол хэл. 0123456789"
+#: vfs-methods/fontilus/fontilus-context-menu.c:132
+msgid "Set as Application Font"
+msgstr "Хэрэглээний бичгээр хэрэглэх"
 
-#: vfs-methods/fontilus/font-view.c:253
-msgid "Name:"
-msgstr "Нэр:"
-
-#: vfs-methods/fontilus/font-view.c:256
-msgid "Style:"
-msgstr "Загвар:"
-
-#: vfs-methods/fontilus/font-view.c:265
-msgid "Type:"
-msgstr "Төрөл:"
-
-#: vfs-methods/fontilus/font-view.c:272
-msgid "Size:"
-msgstr "Хэмжээ:"
-
-#: vfs-methods/fontilus/font-view.c:316 vfs-methods/fontilus/font-view.c:329
-msgid "Version:"
-msgstr "Хувилбар:"
-
-#: vfs-methods/fontilus/font-view.c:320 vfs-methods/fontilus/font-view.c:331
-msgid "Copyright:"
-msgstr "Зохиогчийн эрх:"
-
-#: vfs-methods/fontilus/font-view.c:324
-msgid "Description:"
-msgstr "Тодорхойлолт:"
-
-#: vfs-methods/fontilus/font-view.c:394
-#, c-format
-msgid "usage: %s fontfile\n"
-msgstr ""
-
-#: vfs-methods/fontilus/fontilus-context-menu.c:131
-msgid "Font context menu items"
-msgstr "Бичгийн хам цэсийн элементүүд"
+#: vfs-methods/fontilus/fontilus-context-menu.c:133
+#, fuzzy
+msgid "Sets the default application font"
+msgstr "Та өөрийн стандарт х.программыг сонгоно уу"
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:1
 msgid "If set to true, then OpenType fonts will be thumbnailed."
@@ -3353,33 +3343,47 @@ msgstr "TrueType-бичгүүдийг бяцхан зураг загварээр
 msgid "Whether to thumbnail Type1 fonts"
 msgstr "Type1-бичгүүдийг бяцхан зураг загварээр харуулах эсэх?"
 
-#: vfs-methods/fontilus/fontilus.server.in.in.h:1
-msgid "Factory for the fontilus context menu"
-msgstr "Fontilus -д зориулсан хам цэсийн үйлдвэр"
+#: vfs-methods/fontilus/font-view.c:125
+msgid "The quick brown fox jumps over the lazy dog. 0123456789"
+msgstr "Чихний чимэг болсон аялгуу сайхан монгол хэл. 0123456789"
 
-#: vfs-methods/fontilus/fontilus.server.in.in.h:2
-msgid "Fontilus context menu"
-msgstr "Fontilus-хам цэс"
+#: vfs-methods/fontilus/font-view.c:285
+msgid "Name:"
+msgstr "Нэр:"
 
-#: vfs-methods/fontilus/fontilus.server.in.in.h:3
-msgid "Fontilus context menu factory"
-msgstr "Fontilus-хам цэсийн үйлдвэр"
+#: vfs-methods/fontilus/font-view.c:288
+msgid "Style:"
+msgstr "Загвар:"
 
-#: vfs-methods/fontilus/fontilus.server.in.in.h:4
-msgid "Nautilus context menu entries for fonts"
-msgstr "Nautilus-хам цэсийн бичлэгүүдийн бичгүүд"
+#: vfs-methods/fontilus/font-view.c:297
+msgid "Type:"
+msgstr "Төрөл:"
 
-#: vfs-methods/fontilus/fontilus.server.in.in.h:5
-msgid "Set as Application Font"
-msgstr "Хэрэглээний бичгээр хэрэглэх"
+#: vfs-methods/fontilus/font-view.c:304
+msgid "Size:"
+msgstr "Хэмжээ:"
 
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
-msgid "Theme Properties content view component"
-msgstr "Агуулга харуулалтын бүрэлдэхүүний загварын шинж чанар"
+#: vfs-methods/fontilus/font-view.c:348 vfs-methods/fontilus/font-view.c:361
+msgid "Version:"
+msgstr "Хувилбар:"
 
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
-msgid "Themus Theme Properties view"
-msgstr "Загварийн тодруулга харуулах Themus загвар"
+#: vfs-methods/fontilus/font-view.c:352 vfs-methods/fontilus/font-view.c:363
+msgid "Copyright:"
+msgstr "Зохиогчийн эрх:"
+
+#: vfs-methods/fontilus/font-view.c:356
+msgid "Description:"
+msgstr "Тодорхойлолт:"
+
+#: vfs-methods/fontilus/font-view.c:417
+#, c-format
+msgid "usage: %s fontfile\n"
+msgstr ""
+
+#: vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:1
+#, fuzzy
+msgid "GNOME Font Viewer"
+msgstr "GNOME-удирдах төв"
 
 #: vfs-methods/themus/apply-font.glade.h:1
 msgid " "
@@ -3409,26 +3413,17 @@ msgstr "_Бичгийг хэрэглэх"
 msgid "Themes"
 msgstr "Загвар"
 
-#: vfs-methods/themus/themus-properties-view.c:172
+#: vfs-methods/themus/themus-properties-view.c:133
 msgid "Control theme"
 msgstr "Цонхны агуулгын загвар"
 
-#: vfs-methods/themus/themus-properties-view.c:176
+#: vfs-methods/themus/themus-properties-view.c:139
 msgid "Window border theme"
 msgstr "Цонхны хүрээний загвар"
 
-#: vfs-methods/themus/themus-properties-view.c:180
+#: vfs-methods/themus/themus-properties-view.c:145
 msgid "Icon theme"
 msgstr "Эмблемийн загвар"
-
-#: vfs-methods/themus/themus-properties-view.c:219
-msgid "URI currently displayed"
-msgstr "Одоогоор URI харагдаж байна"
-
-#. translators: you may want to include non-western chars here
-#: vfs-methods/themus/themus-theme-applier.c:83
-msgid "ABCDEFG"
-msgstr "СБЖЭӨҮЯ"
 
 #: vfs-methods/themus/themus.schemas.in.h:1
 msgid "If set to true, then installed themes will be thumbnailed."
@@ -3463,6 +3458,154 @@ msgstr "Суулгасан загваруудыг мини харах эсэх"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Загваруудыг мини харах эсэх"
+
+#. translators: you may want to include non-western chars here
+#: vfs-methods/themus/themus-theme-applier.c:78
+msgid "ABCDEFG"
+msgstr "СБЖЭӨҮЯ"
+
+#: vfs-methods/themus/themus-theme-applier.desktop.in.in.h:1
+#, fuzzy
+msgid "Apply theme"
+msgstr "_Бичгийг хэрэглэх"
+
+#: vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
+#, fuzzy
+msgid "Sets the default theme"
+msgstr "_Стандартыг сэргээх"
+
+#~ msgid "Mozilla/Netscape 6"
+#~ msgstr "Мозилла/Нэтскапе 6"
+
+#~ msgid "Gnome Terminal"
+#~ msgstr "ГномеТерминал"
+
+#~ msgid "C_ustom Editor"
+#~ msgstr "Х_эрэглэгч тод. боловсруулагч"
+
+#~ msgid "C_ustom Mail Reader:"
+#~ msgstr "Х_эрэглэгч тод. майл уншигч:"
+
+#~ msgid "C_ustom Terminal:"
+#~ msgstr "Х_эрэглэгч тод. Терминал:"
+
+#~ msgid "C_ustom Web Browser:"
+#~ msgstr "Х_эрэглэгч тод. Вэб хөтлөгч:"
+
+#~ msgid "Start in T_erminal"
+#~ msgstr "_Терминалд ажиллуулах"
+
+#~ msgid "This application can open _URIs"
+#~ msgstr "Энэ х.программ _URI -ууд нээж болно"
+
+#~ msgid "This application needs to be run in a _shell"
+#~ msgstr "Энэ х.программ _тушаалын мөрөнд (shell) ажиллах ёстой"
+
+#~ msgid "_Select a Mail Reader:"
+#~ msgstr "Майл уншигч _сонгох:"
+
+#~ msgid "_Select a Terminal:"
+#~ msgstr "Терминал _сонгох:"
+
+#~ msgid "_Select a Web Browser:"
+#~ msgstr "Вэб хөтлөгч _сонгох:"
+
+#~ msgid "_Select an Editor:"
+#~ msgstr "Боловсруулагч _сонгох:"
+
+#~ msgid "Accessibility"
+#~ msgstr "Хялбарчилал"
+
+#~ msgid "Accessibility Settings"
+#~ msgstr "Хялбарчилалын тохируулга"
+
+#~ msgid "Advanced"
+#~ msgstr "Өргөтгөсөн"
+
+#~ msgid "Advanced Settings"
+#~ msgstr "Өргөтгөсөн тохируулга"
+
+#~ msgid "Network Proxy Configuration"
+#~ msgstr "Сүлжээний итгэмжилэгчийн тохируулга"
+
+#~ msgid "GNOME Control Center: %s"
+#~ msgstr "GNOME-Удирдах төв: %s"
+
+#~ msgid "Layout"
+#~ msgstr "Үзэмж"
+
+#~ msgid "Layout to use for this view of the capplets"
+#~ msgstr "Энэ Capplets -ын харагдалтад хэрэглэх үзэмж"
+
+# CHECK
+#~ msgid "Capplet directory object"
+#~ msgstr "Лавлах объектын тохируулга диалог"
+
+# CHECK
+#~ msgid "Capplet directory that this view is viewing"
+#~ msgstr "Тохируулга диалог-Лавлахыг энэ харагдалтаар харах"
+
+#~ msgid "translator_credits"
+#~ msgstr "Санлигийн Бадрал<badral@chinggis.com>"
+
+#~ msgid "Desktop properties manager."
+#~ msgstr "Ажлын тавцанын онцлог зохион байгуулагч."
+
+#~ msgid "Gnome Control Center : %s"
+#~ msgstr "GNOME-удирдах төв : %s"
+
+#, fuzzy
+#~ msgid "Gnome Control Center"
+#~ msgstr "GNOME-удирдах төв : %s"
+
+#, fuzzy
+#~ msgid "Use nautilus if it is running."
+#~ msgstr "Nautilus ажиллаж байгаа ч Shell хэрэглэх."
+
+#~ msgid "About this application"
+#~ msgstr "Энэ программын тухай"
+
+#~ msgid "Overview of the control center"
+#~ msgstr "Удирдах төвийн тойм"
+
+#~ msgid "_About"
+#~ msgstr "_Тухай"
+
+#~ msgid "_Contents"
+#~ msgstr "А_гуулга"
+
+#~ msgid "_Help"
+#~ msgstr "_Тусламж"
+
+#~ msgid "Use shell even if nautilus is running."
+#~ msgstr "Nautilus ажиллаж байгаа ч Shell хэрэглэх."
+
+#~ msgid "XKB options"
+#~ msgstr "XKB сонголтууд"
+
+#~ msgid "Font context menu items"
+#~ msgstr "Бичгийн хам цэсийн элементүүд"
+
+#~ msgid "Factory for the fontilus context menu"
+#~ msgstr "Fontilus -д зориулсан хам цэсийн үйлдвэр"
+
+#~ msgid "Fontilus context menu"
+#~ msgstr "Fontilus-хам цэс"
+
+#~ msgid "Fontilus context menu factory"
+#~ msgstr "Fontilus-хам цэсийн үйлдвэр"
+
+#~ msgid "Nautilus context menu entries for fonts"
+#~ msgstr "Nautilus-хам цэсийн бичлэгүүдийн бичгүүд"
+
+#~ msgid "Theme Properties content view component"
+#~ msgstr "Агуулга харуулалтын бүрэлдэхүүний загварын шинж чанар"
+
+#~ msgid "Themus Theme Properties view"
+#~ msgstr "Загварийн тодруулга харуулах Themus загвар"
+
+#~ msgid "URI currently displayed"
+#~ msgstr "Одоогоор URI харагдаж байна"
 
 #~ msgid "GNOME Default"
 #~ msgstr "ГНОМЕ стандарт"

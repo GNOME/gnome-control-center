@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-29 22:46+0200\n"
+"POT-Creation-Date: 2004-12-20 23:11+0100\n"
 "PO-Revision-Date: 2004-11-27 17:02+0200\n"
 "Last-Translator: Zuza Software Foundation <info@translate.org.za>\n"
 "Language-Team: Northern Sotho <translate-discuss-nso@lists.sourceforge.net>\n"
@@ -429,6 +429,13 @@ msgstr "Oketša Pampiri ya leboteng"
 msgid "No Wallpaper"
 msgstr "Ga go na Pampiri ya leboteng"
 
+#: capplets/background/gnome-wp-item.c:287
+#: capplets/background/gnome-wp-item.c:289
+msgid "pixel"
+msgid_plural "pixels"
+msgstr[0] ""
+msgstr[1] ""
+
 #: capplets/common/activate-settings-daemon.c:18
 msgid ""
 "Unable to start the settings manager 'gnome-settings-daemon'.\n"
@@ -794,7 +801,8 @@ msgid "Encompass"
 msgstr "Fihlelela"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:13
-msgid "Firebird/FireFox"
+#, fuzzy
+msgid "Firebird"
 msgstr "Firebird/FireFox"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:14
@@ -803,8 +811,9 @@ msgstr "Firefox"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:15
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:16
-msgid "Mozilla/Netscape 6"
-msgstr "Mozilla/Netscape 6"
+#, fuzzy
+msgid "Mozilla"
+msgstr "Poso ya Mozilla"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:17
 msgid "Netscape Communicator"
@@ -1952,7 +1961,8 @@ msgid "Network Proxy"
 msgstr "Kemedi ya Neteweke"
 
 #: capplets/network/gnome-network-preferences.desktop.in.in.h:2
-msgid "Network proxy preferences"
+#, fuzzy
+msgid "Set your network proxy preferences"
 msgstr "Tše ratwago tša kemedi ya neteweke"
 
 #: capplets/network/gnome-network-preferences.glade.h:1
@@ -1996,8 +2006,9 @@ msgid "H_TTP proxy:"
 msgstr "K_emedi ya PFSK:"
 
 #: capplets/network/gnome-network-preferences.glade.h:12
-msgid "Network Proxy Configuration"
-msgstr "Go Fetola Sebopego ga Kemedi ya Neteweke"
+#, fuzzy
+msgid "Network Proxy Preferences"
+msgstr "Tše ratwago tša kemedi ya neteweke"
 
 #: capplets/network/gnome-network-preferences.glade.h:13
 msgid "Port:"
@@ -2445,7 +2456,8 @@ msgid "_Select windows when the mouse moves over them"
 msgstr "_Kgetha mafesetere ge legotlwana le sepela ka godimo ga wona"
 
 #: capplets/windows/window-properties.desktop.in.in.h:1
-msgid "Window Properties"
+#, fuzzy
+msgid "Set your window properties"
 msgstr "Dipharologantšho tša Lefesetere"
 
 #: capplets/windows/window-properties.desktop.in.in.h:2
@@ -3093,28 +3105,76 @@ msgstr ""
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:1
 msgid ""
-"Very soon, XKB settings in gconf will be overridden (from the system "
+"A collection of scripts to run whenever the keyboard state is reloaded. "
+"Useful for re-applying xmodmap based adjustments"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
+msgid "Default group, assigned on window creation"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
+msgid "Keep and manage separate group per window"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
+#, fuzzy
+msgid "Keyboard Update Handlers"
+msgstr "Mohlala wa _boroto ya dinotlelo:"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
+#, fuzzy
+msgid "Keyboard layout"
+msgstr "Go bea ga boroto ya dinotlelo ya XKB"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:6
+#, fuzzy
+msgid "Keyboard model"
+msgstr "Mohlala wa _boroto ya dinotlelo:"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:7
+#, fuzzy
+msgid "Keyboard options"
+msgstr "Dikgaoletšo tša Boroto ya Dinotlelo"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:8
+#, fuzzy
+msgid "Keyboard settings in gconf will be overridden from the system ASAP"
+msgstr ""
+"Dipeakanyo tša XKB go gconf di tla beelwa ka thoko tshepedišong ya ASAP"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
+msgid "Save/restore indicators together with layout groups"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
+msgid "Show layout names instead of group names"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:11
+msgid ""
+"Show layout names instead of group names (only for versions of XFree "
+"supporting multiple layouts)"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:12
+#, fuzzy
+msgid ""
+"Very soon, keyboard settings in gconf will be overridden (from the system "
 "configuration)"
 msgstr ""
 "Kgauswinyane, dipeakanyo tša XKB go gconf di tla beelwa ka thoko (go "
 "fetolweng sebopego ga tshepedišo)"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
-msgid "XKB keyboard layout"
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:13
+#, fuzzy
+msgid "keyboard layout"
 msgstr "Go bea ga boroto ya dinotlelo ya XKB"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
-msgid "XKB keyboard model"
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
+#, fuzzy
+msgid "keyboard model"
 msgstr "Mohlala wa boroto ya dinotlelo ya XKB"
-
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
-msgid "XKB options"
-msgstr "Dikgetho tša XKB"
-
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
-msgid "XKB settings in gconf will be overridden from the system ASAP"
-msgstr ""
-"Dipeakanyo tša XKB go gconf di tla beelwa ka thoko tshepedišong ya ASAP"
 
 #: typing-break/drw-break-window.c:209
 msgid "_Postpone break"
@@ -3283,39 +3343,39 @@ msgstr "Ge eba go swanetše go khutsofatšwe difonto tša Mohuta wa Therešo"
 msgid "Whether to thumbnail Type1 fonts"
 msgstr "Ge eba go swanetše go khutsofatšwe difonto tša Mohuta wa 1"
 
-#: vfs-methods/fontilus/font-view.c:126
+#: vfs-methods/fontilus/font-view.c:125
 msgid "The quick brown fox jumps over the lazy dog. 0123456789"
 msgstr "Phukubjwe e tsotho ya lebelo e fofela mpsha e tšwafago. 0123456789"
 
-#: vfs-methods/fontilus/font-view.c:286
+#: vfs-methods/fontilus/font-view.c:285
 msgid "Name:"
 msgstr "Leina:"
 
-#: vfs-methods/fontilus/font-view.c:289
+#: vfs-methods/fontilus/font-view.c:288
 msgid "Style:"
 msgstr "Setaele:"
 
-#: vfs-methods/fontilus/font-view.c:298
+#: vfs-methods/fontilus/font-view.c:297
 msgid "Type:"
 msgstr "Mohuta:"
 
-#: vfs-methods/fontilus/font-view.c:305
+#: vfs-methods/fontilus/font-view.c:304
 msgid "Size:"
 msgstr "Boglo:"
 
-#: vfs-methods/fontilus/font-view.c:349 vfs-methods/fontilus/font-view.c:362
+#: vfs-methods/fontilus/font-view.c:348 vfs-methods/fontilus/font-view.c:361
 msgid "Version:"
 msgstr "Kgatišo:"
 
-#: vfs-methods/fontilus/font-view.c:353 vfs-methods/fontilus/font-view.c:364
+#: vfs-methods/fontilus/font-view.c:352 vfs-methods/fontilus/font-view.c:363
 msgid "Copyright:"
 msgstr "Tokelo ya ngwalollo:"
 
-#: vfs-methods/fontilus/font-view.c:357
+#: vfs-methods/fontilus/font-view.c:356
 msgid "Description:"
 msgstr "Tlhaloso:"
 
-#: vfs-methods/fontilus/font-view.c:418
+#: vfs-methods/fontilus/font-view.c:417
 #, c-format
 msgid "usage: %s fontfile\n"
 msgstr "tirišo: %s faele ya fonto\n"
@@ -3419,6 +3479,15 @@ msgstr "_Diriša fonto"
 #, fuzzy
 msgid "Sets the default theme"
 msgstr "Beakanya di_tlhaelelo ka leswa"
+
+#~ msgid "Mozilla/Netscape 6"
+#~ msgstr "Mozilla/Netscape 6"
+
+#~ msgid "Network Proxy Configuration"
+#~ msgstr "Go Fetola Sebopego ga Kemedi ya Neteweke"
+
+#~ msgid "XKB options"
+#~ msgstr "Dikgetho tša XKB"
 
 #~ msgid "Gnome Terminal"
 #~ msgstr "Kgokagano ya Dithapo ya Gnome"

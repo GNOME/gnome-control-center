@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-center CVS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-12-05 22:46+0100\n"
+"POT-Creation-Date: 2004-12-20 23:11+0100\n"
 "PO-Revision-Date: 2004-12-06 01:22+0100\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
@@ -435,6 +435,13 @@ msgstr "Achtergrond toevoegen"
 #: capplets/background/gnome-wp-info.c:49
 msgid "No Wallpaper"
 msgstr "Geen achtergrond"
+
+#: capplets/background/gnome-wp-item.c:287
+#: capplets/background/gnome-wp-item.c:289
+msgid "pixel"
+msgid_plural "pixels"
+msgstr[0] ""
+msgstr[1] ""
 
 #: capplets/common/activate-settings-daemon.c:18
 msgid ""
@@ -1953,7 +1960,8 @@ msgid "Network Proxy"
 msgstr "Netwerk-proxy"
 
 #: capplets/network/gnome-network-preferences.desktop.in.in.h:2
-msgid "Network proxy preferences"
+#, fuzzy
+msgid "Set your network proxy preferences"
 msgstr "Netwerkproxy-voorkeuren"
 
 #: capplets/network/gnome-network-preferences.glade.h:1
@@ -2112,8 +2120,8 @@ msgid ""
 "Insufficient permissions to install the theme in:\n"
 "%s"
 msgstr ""
-"Rechten ontoereikend om het thema te installeren in:\n "
-"%s"
+"Rechten ontoereikend om het thema te installeren in:\n"
+" %s"
 
 #: capplets/theme-switcher/gnome-theme-installer.c:196
 #, c-format
@@ -2448,7 +2456,8 @@ msgid "_Select windows when the mouse moves over them"
 msgstr "Vensters _selecteren wanneer de muis eroverheen beweegt"
 
 #: capplets/windows/window-properties.desktop.in.in.h:1
-msgid "Window Properties"
+#, fuzzy
+msgid "Set your window properties"
 msgstr "Venstereigenschappen"
 
 #: capplets/windows/window-properties.desktop.in.in.h:2
@@ -3085,29 +3094,77 @@ msgstr ""
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:1
 msgid ""
-"Very soon, XKB settings in gconf will be overridden (from the system "
+"A collection of scripts to run whenever the keyboard state is reloaded. "
+"Useful for re-applying xmodmap based adjustments"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
+msgid "Default group, assigned on window creation"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
+msgid "Keep and manage separate group per window"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
+#, fuzzy
+msgid "Keyboard Update Handlers"
+msgstr "Toetsenbord_model:"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
+#, fuzzy
+msgid "Keyboard layout"
+msgstr "XKB-toetsenbordindeling"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:6
+#, fuzzy
+msgid "Keyboard model"
+msgstr "Toetsenbord_model:"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:7
+#, fuzzy
+msgid "Keyboard options"
+msgstr "Sneltoetsen"
+
+# ASAP zeer binnenkort
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:8
+#, fuzzy
+msgid "Keyboard settings in gconf will be overridden from the system ASAP"
+msgstr ""
+"XKB-instellingen in gconf zullen z.s.m. worden tenietgedaan door het systeem"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
+msgid "Save/restore indicators together with layout groups"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
+msgid "Show layout names instead of group names"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:11
+msgid ""
+"Show layout names instead of group names (only for versions of XFree "
+"supporting multiple layouts)"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:12
+#, fuzzy
+msgid ""
+"Very soon, keyboard settings in gconf will be overridden (from the system "
 "configuration)"
 msgstr ""
 "Zeer binnenkort worden XKB instellingen in gconf tenietgedaan (vanuit de "
 "systeemconfiguratie)"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
-msgid "XKB keyboard layout"
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:13
+#, fuzzy
+msgid "keyboard layout"
 msgstr "XKB-toetsenbordindeling"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
-msgid "XKB keyboard model"
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
+#, fuzzy
+msgid "keyboard model"
 msgstr "XKB-toetsenbordmodel"
-
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
-msgid "XKB options"
-msgstr "XKB-opties"
-
-# ASAP zeer binnenkort
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
-msgid "XKB settings in gconf will be overridden from the system ASAP"
-msgstr ""
-"XKB-instellingen in gconf zullen z.s.m. worden tenietgedaan door het systeem"
 
 #: typing-break/drw-break-window.c:209
 msgid "_Postpone break"
@@ -3269,39 +3326,39 @@ msgstr "Of TrueType-lettertypes een miniatuur moeten krijgen"
 msgid "Whether to thumbnail Type1 fonts"
 msgstr "Of Type1-lettertypes een miniatuur moeten krijgen"
 
-#: vfs-methods/fontilus/font-view.c:126
+#: vfs-methods/fontilus/font-view.c:125
 msgid "The quick brown fox jumps over the lazy dog. 0123456789"
 msgstr "Pa's wijze lynx bezag vroom het fikse aquaduct. 0123456789"
 
-#: vfs-methods/fontilus/font-view.c:286
+#: vfs-methods/fontilus/font-view.c:285
 msgid "Name:"
 msgstr "Naam:"
 
-#: vfs-methods/fontilus/font-view.c:289
+#: vfs-methods/fontilus/font-view.c:288
 msgid "Style:"
 msgstr "Stijl:"
 
-#: vfs-methods/fontilus/font-view.c:298
+#: vfs-methods/fontilus/font-view.c:297
 msgid "Type:"
 msgstr "Type:"
 
-#: vfs-methods/fontilus/font-view.c:305
+#: vfs-methods/fontilus/font-view.c:304
 msgid "Size:"
 msgstr "Grootte:"
 
-#: vfs-methods/fontilus/font-view.c:349 vfs-methods/fontilus/font-view.c:362
+#: vfs-methods/fontilus/font-view.c:348 vfs-methods/fontilus/font-view.c:361
 msgid "Version:"
 msgstr "Versie:"
 
-#: vfs-methods/fontilus/font-view.c:353 vfs-methods/fontilus/font-view.c:364
+#: vfs-methods/fontilus/font-view.c:352 vfs-methods/fontilus/font-view.c:363
 msgid "Copyright:"
 msgstr "Copyright:"
 
-#: vfs-methods/fontilus/font-view.c:357
+#: vfs-methods/fontilus/font-view.c:356
 msgid "Description:"
 msgstr "Beschrijving:"
 
-#: vfs-methods/fontilus/font-view.c:418
+#: vfs-methods/fontilus/font-view.c:417
 #, c-format
 msgid "usage: %s fontfile\n"
 msgstr "gebruik: %s lettertypebestand\n"
@@ -3399,6 +3456,9 @@ msgstr "Thema toepassen"
 #: vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
 msgid "Sets the default theme"
 msgstr "Stelt het standaardthema in"
+
+#~ msgid "XKB options"
+#~ msgstr "XKB-opties"
 
 #~ msgid "Mozilla/Netscape 6"
 #~ msgstr "Mozilla/Netscape 6"

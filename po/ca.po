@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.7.90\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-12-14 15:37+0100\n"
+"POT-Creation-Date: 2004-12-20 23:11+0100\n"
 "PO-Revision-Date: 2004-09-11 13:44+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
@@ -2032,7 +2032,8 @@ msgid "Network Proxy"
 msgstr "Servidor intermediari de xarxa"
 
 #: capplets/network/gnome-network-preferences.desktop.in.in.h:2
-msgid "Network proxy preferences"
+#, fuzzy
+msgid "Set your network proxy preferences"
 msgstr "Preferències del servidor intermediari de xarxa"
 
 #: capplets/network/gnome-network-preferences.glade.h:1
@@ -2544,8 +2545,9 @@ msgstr "_Selecciona les finestres quan el ratolí pasa per damunt"
 
 #
 #: capplets/windows/window-properties.desktop.in.in.h:1
-msgid "Window Properties"
-msgstr "Propietats de les finestres"
+#, fuzzy
+msgid "Set your window properties"
+msgstr "Configura les propietats de finestra"
 
 #
 #: capplets/windows/window-properties.desktop.in.in.h:2
@@ -3196,29 +3198,78 @@ msgstr ""
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:1
 msgid ""
-"Very soon, XKB settings in gconf will be overridden (from the system "
+"A collection of scripts to run whenever the keyboard state is reloaded. "
+"Useful for re-applying xmodmap based adjustments"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
+msgid "Default group, assigned on window creation"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
+msgid "Keep and manage separate group per window"
+msgstr ""
+
+#
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
+#, fuzzy
+msgid "Keyboard Update Handlers"
+msgstr "Timbre de teclat h_abilitat"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
+#, fuzzy
+msgid "Keyboard layout"
+msgstr "Disposició de teclat XKB"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:6
+#, fuzzy
+msgid "Keyboard model"
+msgstr "_Model del teclat:"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:7
+#, fuzzy
+msgid "Keyboard options"
+msgstr "Propietats de Teclat"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:8
+#, fuzzy
+msgid "Keyboard settings in gconf will be overridden from the system ASAP"
+msgstr ""
+"Els paràmetres d'XKB del gconf es sobreescriuran amb els del sistema només "
+"siga possible"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
+msgid "Save/restore indicators together with layout groups"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
+msgid "Show layout names instead of group names"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:11
+msgid ""
+"Show layout names instead of group names (only for versions of XFree "
+"supporting multiple layouts)"
+msgstr ""
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:12
+#, fuzzy
+msgid ""
+"Very soon, keyboard settings in gconf will be overridden (from the system "
 "configuration)"
 msgstr ""
 "Molt prompte, els paràmetres d'XKB emmagatzemats en gconf es sobreescriuran "
 "(des de la configuració del sistema)"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
-msgid "XKB keyboard layout"
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:13
+#, fuzzy
+msgid "keyboard layout"
 msgstr "Disposició de teclat XKB"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
-msgid "XKB keyboard model"
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
+#, fuzzy
+msgid "keyboard model"
 msgstr "Model de teclat XKB"
-
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
-msgid "XKB options"
-msgstr "Opcions d'XKB"
-
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
-msgid "XKB settings in gconf will be overridden from the system ASAP"
-msgstr ""
-"Els paràmetres d'XKB del gconf es sobreescriuran amb els del sistema només "
-"siga possible"
 
 #: typing-break/drw-break-window.c:209
 msgid "_Postpone break"
@@ -3525,6 +3576,13 @@ msgstr "Aplica el tema"
 #: vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
 msgid "Sets the default theme"
 msgstr "Estableix el tema per defecte"
+
+#
+#~ msgid "Window Properties"
+#~ msgstr "Propietats de les finestres"
+
+#~ msgid "XKB options"
+#~ msgstr "Opcions d'XKB"
 
 #~ msgid "Mozilla/Netscape 6"
 #~ msgstr "Mozilla/Netscape 6"
@@ -4299,10 +4357,6 @@ msgstr "Estableix el tema per defecte"
 #~ msgstr "La _pressió d'una tecla produeix un so"
 
 #
-#~ msgid "Keyboard bell _enabled"
-#~ msgstr "Timbre de teclat h_abilitat"
-
-#
 #~ msgid "Keyboard bell _off"
 #~ msgstr "Timbre de teclat des_habilitat"
 
@@ -4402,10 +4456,6 @@ msgstr "Estableix el tema per defecte"
 #~ msgid "Configure window appearance"
 #~ msgstr "Configura l'aparença de finestra"
 
-#
-#~ msgid "Configure window properties"
-#~ msgstr "Configura les propietats de finestra"
-
 #~ msgid "Configure window manager configuration properties"
 #~ msgstr "Configura les propietats de configuració del gestor de finestres"
 
@@ -4444,9 +4494,6 @@ msgstr "Estableix el tema per defecte"
 
 #~ msgid "Associate keyboard shortcuts with panel actions"
 #~ msgstr "Associa dreceres de teclat amb accions de quadre"
-
-#~ msgid "Keyboard Properties"
-#~ msgstr "Propietats de Teclat"
 
 #~ msgid "Configure GNOME's use of sound"
 #~ msgstr "Configura els sons del GNOME"
