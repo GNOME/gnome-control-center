@@ -121,7 +121,7 @@ filter (GdkXEvent *xevent,
 					   group,
 					   &keyval,
 					   NULL, NULL, NULL);
-      if (keyval == GDK_Control_L)
+      if (keyval == GDK_Control_L || keyval == GDK_Control_R)
 	{
 	  if (xev->type == KeyPress)
 	    {
@@ -157,37 +157,41 @@ set_locate_pointer (gboolean locate_pointer)
   GdkKeymapKey *keys;
   int n_keys;
   gboolean has_entries;
+  static const guint keyvals[] = { GDK_Control_L, GDK_Control_R };
+  unsigned j;
 
-  has_entries = gdk_keymap_get_entries_for_keyval (gdk_keymap_get_default (),
-						   GDK_Control_L,
-						   &keys,
-						   &n_keys);
-  if (has_entries)
+  for (j = 0 ; j < G_N_ELEMENTS (keyvals) ; j++) {
+    has_entries = gdk_keymap_get_entries_for_keyval (gdk_keymap_get_default (),
+							   keyvals[j],
+							   &keys,
+							   &n_keys);
+    if (has_entries)
     {
       gint i;
 
       for (i = 0; i < n_keys; i++)
-	{
-	  if (locate_pointer)
-	    XGrabKey (gdk_x11_get_default_xdisplay (),
+      {
+	     if (locate_pointer)
+	       XGrabKey (gdk_x11_get_default_xdisplay (),
 		      keys[i].keycode,
 		      AnyModifier,
 		      GDK_ROOT_WINDOW (),
 		      False,
 		      GrabModeAsync,
 		      GrabModeSync);
-	  else
-	    XUngrabKey (gdk_x11_get_default_xdisplay (),
-			keys[i].keycode,
-			AnyModifier,
-			GDK_ROOT_WINDOW ());
-	}
-      g_free (keys);
-      if (locate_pointer)
-	gdk_window_add_filter (gdk_get_default_root_window (), filter, NULL);
-      else
-	gdk_window_remove_filter (gdk_get_default_root_window (), filter, NULL);
+	     else
+	       XUngrabKey (gdk_x11_get_default_xdisplay (),
+		      keys[i].keycode,
+		      AnyModifier,
+		      GDK_ROOT_WINDOW ());
+     }
+     g_free (keys);
+     if (locate_pointer)
+	    gdk_window_add_filter (gdk_get_default_root_window (), filter, NULL);
+    else
+	    gdk_window_remove_filter (gdk_get_default_root_window (), filter, NULL);
     }
+  }
 }
 
 static void
