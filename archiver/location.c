@@ -480,7 +480,7 @@ location_store (Location *location, gchar *backend_id, FILE *input,
 
 		xmlFreeDoc (doc);
 	} else {
-		g_critical ("No data to store");
+		g_error ("No data to store");
 	}
 }
 
