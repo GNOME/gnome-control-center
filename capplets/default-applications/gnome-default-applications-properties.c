@@ -39,19 +39,28 @@
 #include "capplet-util.h"
 #include "gconf-property-editor.h"
 
-#define DEFAULT_APPS_KEY_BROWSER_NEEDS_TERM "/desktop/gnome/url-handlers/unknown/need-terminal"
-#define DEFAULT_APPS_KEY_BROWSER_EXEC       "/desktop/gnome/url-handlers/unknown/command"
 
-#define DEFAULT_APPS_KEY_HELP_VIEWER_NEEDS_TERM "/desktop/gnome/applications/help_viewer/needs_term"
-#define DEFAULT_APPS_KEY_HELP_VIEWER_ACCEPTS_URLS "/desktop/gnome/applications/help_viewer/accepts_urls"
-#define DEFAULT_APPS_KEY_HELP_VIEWER_EXEC "/desktop/gnome/applications/help_viewer/exec"
+#define DEFAULT_APPS_KEY_BROWSER_PATH "/desktop/gnome/url-handlers/unknown"
+#define DEFAULT_APPS_KEY_BROWSER_NEEDS_TERM DEFAULT_APPS_KEY_BROWSER_PATH"/needs_terminal"
+#define DEFAULT_APPS_KEY_BROWSER_EXEC       DEFAULT_APPS_KEY_BROWSER_PATH"/command"
 
-#define DEFAULT_APPS_KEY_TERMINAL_EXEC_ARG "/desktop/gnome/applications/terminal/exec_arg"
-#define DEFAULT_APPS_KEY_TERMINAL_EXEC "/desktop/gnome/applications/terminal/exec"
+#define DEFAULT_APPS_KEY_MAILER_PATH "/desktop/gnome/url-handlers/mailto"
+#define DEFAULT_APPS_KEY_MAILER_NEEDS_TERM DEFAULT_APPS_KEY_MAILER_PATH"/needs_terminal"
+#define DEFAULT_APPS_KEY_MAILER_EXEC       DEFAULT_APPS_KEY_MAILER_PATH"/command"
+
+#define DEFAULT_APPS_KEY_HELP_VIEWER_PATH "/desktop/gnome/applications/help_viewer"
+#define DEFAULT_APPS_KEY_HELP_VIEWER_NEEDS_TERM DEFAULT_APPS_KEY_HELP_VIEWER_PATH"/needs_term"
+#define DEFAULT_APPS_KEY_HELP_VIEWER_ACCEPTS_URLS DEFAULT_APPS_KEY_HELP_VIEWER_PATH"/accepts_urls"
+#define DEFAULT_APPS_KEY_HELP_VIEWER_EXEC DEFAULT_APPS_KEY_HELP_VIEWER_PATH"/exec"
+
+#define DEFAULT_APPS_KEY_TERMINAL_PATH "/desktop/gnome/applications/terminal"
+#define DEFAULT_APPS_KEY_TERMINAL_EXEC_ARG DEFAULT_APPS_KEY_TERMINAL_PATH"/exec_arg"
+#define DEFAULT_APPS_KEY_TERMINAL_EXEC DEFAULT_APPS_KEY_TERMINAL_PATH"/exec"
 
 #define MIME_APPLICATION_ID "gnome-default-applications-editor"
 
 typedef struct _BrowserDescription BrowserDescription;
+typedef struct _MailerDescription MailerDescription;
 typedef struct _HelpViewDescription HelpViewDescription;
 typedef struct _TerminalDesciption TerminalDescription;
 
@@ -159,6 +168,8 @@ on_text_default_viewer_toggle (GtkWidget *toggle, GladeXML *dialog)
 static void
 generic_guard (GtkWidget *toggle, GtkWidget *widget)
 {
+
+	gtk_toggle_button_set_inconsistent (GTK_TOGGLE_BUTTON (toggle), FALSE);
 	gtk_widget_set_sensitive (widget, GTK_TOGGLE_BUTTON (toggle)->active);
 
 	if (GTK_TOGGLE_BUTTON (toggle)->active) {
@@ -189,6 +200,13 @@ initialize_default_applications (void)
                 if (browsers) {
 			possible_browsers[i].in_path = TRUE;
 			g_free(browsers);
+		}
+        }
+        for (i = 0; i < G_N_ELEMENTS (possible_mailers); i++ ) {
+		gchar *mailers = g_find_program_in_path (possible_mailers[i].executable_name);
+                if (mailers) {
+			possible_mailers[i].in_path = TRUE;
+			g_free(mailers);
 		}
         }
         for (i = 0; i < G_N_ELEMENTS (possible_help_viewers); i++ ) {
@@ -333,6 +351,11 @@ setup_peditors (GConfClient *client,
 	gconf_peditor_new_string  (changeset, DEFAULT_APPS_KEY_BROWSER_EXEC,
 				   WID ("web_custom_command_entry"), NULL);
 
+	gconf_peditor_new_boolean (changeset, DEFAULT_APPS_KEY_MAILER_NEEDS_TERM,
+				   WID ("mail_custom_terminal_toggle"), NULL);
+	gconf_peditor_new_string  (changeset, DEFAULT_APPS_KEY_MAILER_EXEC,
+				   WID ("mail_custom_command_entry"), NULL);
+
 	gconf_peditor_new_boolean (changeset, DEFAULT_APPS_KEY_HELP_VIEWER_NEEDS_TERM,
 				   WID ("help_custom_terminal_toggle"), NULL);
 	gconf_peditor_new_boolean (changeset, DEFAULT_APPS_KEY_HELP_VIEWER_ACCEPTS_URLS,
@@ -379,9 +402,47 @@ read_browser (GConfClient *client,
 			return;
 		}
         }
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("web_select_radio")), TRUE);
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("web_custom_radio")), TRUE);
+	gtk_toggle_button_set_inconsistent (GTK_TOGGLE_BUTTON (WID ("web_select_radio")), TRUE);
+	gtk_toggle_button_set_inconsistent (GTK_TOGGLE_BUTTON (WID ("web_custom_radio")), TRUE);
 	g_free (browser);
+}
+
+static void
+read_mailer (GConfClient *client,
+	     GladeXML    *dialog)
+{
+	GError *error = NULL;
+	gchar *mailer;
+	gboolean needs_term;
+	gint i;
+
+	needs_term = gconf_client_get_bool (client, DEFAULT_APPS_KEY_MAILER_NEEDS_TERM, &error);
+	if (error) {
+		/* hp will shoot me -- I'll do this later. */
+		return;
+	}
+	mailer = gconf_client_get_string (client, DEFAULT_APPS_KEY_MAILER_EXEC, &error);
+	if (error) {
+		return;
+	}
+
+	for (i = 0; i < G_N_ELEMENTS (possible_mailers); i++ ) {
+		if (possible_mailers[i].in_path == FALSE)
+			continue;
+		
+		if (mailer && strcmp (mailer, possible_mailers[i].command) == 0 &&
+		    needs_term == possible_mailers[i].needs_term) {
+			gtk_entry_set_text (GTK_ENTRY (WID ("mail_select_combo_entry")),
+					    _(possible_mailers[i].name));
+			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("mail_custom_radio")), TRUE);
+			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("mail_select_radio")), TRUE);
+			g_free (mailer);
+			return;
+		}
+        }
+	gtk_toggle_button_set_inconsistent (GTK_TOGGLE_BUTTON (WID ("mail_select_radio")), TRUE);
+	gtk_toggle_button_set_inconsistent (GTK_TOGGLE_BUTTON (WID ("mail_custom_radio")), TRUE);
+	g_free (mailer);
 
 	
 }
@@ -404,6 +465,23 @@ browser_setup_custom (GtkWidget *entry,
 	}
 }
 
+static void
+mailer_setup_custom (GtkWidget *entry,
+		     GladeXML  *dialog)
+{
+	gint i;
+	const gchar *mailer = gtk_entry_get_text (GTK_ENTRY (entry));
+
+	for (i = 0; i < G_N_ELEMENTS (possible_mailers); i++ ) {
+		if (! strcmp (_(possible_mailers[i].name), mailer)) {
+		        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("mail_custom_terminal_toggle")),
+						      possible_mailers[i].needs_term);
+			gtk_entry_set_text (GTK_ENTRY (WID ("mail_custom_command_entry")),
+					    possible_mailers[i].command);
+			return;
+		}
+	}
+}
 
 static void
 read_help_viewer (GConfClient *client,
@@ -539,11 +617,11 @@ value_changed_cb (GConfClient *client,
 		  GladeXML    *dialog)
 {
 	g_return_if_fail (key != NULL);
-
-	if (strncmp (key, "/desktop/gnome/applications/editor", strlen ("/desktop/gnome/applications/editor")) == 0) {
-	} else if (strncmp (key, "/desktop/gnome/applications/browser/exec", strlen ("/desktop/gnome/applications/browser/exec")) == 0) {
-	} else if (strncmp (key, "/desktop/gnome/applications/help_viewer", strlen ("/desktop/gnome/applications/help_viewer")) == 0) {
-	} else if (strncmp (key, "/desktop/gnome/applications/terminal", strlen ("/desktop/gnome/applications/terminal")) == 0) {
+	if (strncmp (key, DEFAULT_APPS_KEY_MAILER_PATH, strlen (DEFAULT_APPS_KEY_MAILER_PATH)) == 0) {
+		gconf_client_set_bool (client, DEFAULT_APPS_KEY_MAILER_PATH"/enabled", TRUE, NULL);
+	} else if (strncmp (key, DEFAULT_APPS_KEY_BROWSER_PATH, strlen (DEFAULT_APPS_KEY_BROWSER_PATH)) == 0) {
+	} else if (strncmp (key, DEFAULT_APPS_KEY_HELP_VIEWER_PATH, strlen (DEFAULT_APPS_KEY_HELP_VIEWER_PATH)) == 0) {
+	} else if (strncmp (key, DEFAULT_APPS_KEY_TERMINAL_PATH, strlen (DEFAULT_APPS_KEY_TERMINAL_PATH)) == 0) {
 	}
 }
 
@@ -625,14 +703,46 @@ create_dialog (GConfClient *client)
 			  "changed", (GCallback) browser_setup_custom,
 			  dialog);
 	g_signal_connect (G_OBJECT (WID ("web_select_radio")),
-			  "toggled", (GCallback) generic_guard,
+			  "clicked", (GCallback) generic_guard,
 			  WID ("web_select_combo"));
 	g_signal_connect (G_OBJECT (WID ("web_custom_radio")),
-			  "toggled", (GCallback) generic_guard,
+			  "clicked", (GCallback) generic_guard,
 			  WID ("web_custom_vbox"));
 
 	read_browser (client, dialog);
 
+
+	/* Mail readers page */
+	for (i = 0; i < G_N_ELEMENTS (possible_mailers); i++ ) {
+		if (possible_mailers[i].in_path)
+			strings = g_list_append (strings, _(possible_mailers[i].name));
+	}
+	if (strings) {
+		/* We have default browsers */
+		gtk_combo_set_popdown_strings (GTK_COMBO(WID ("mail_select_combo")), strings);
+		g_list_free (strings);
+		strings = NULL;
+	} else {
+		/* No default browsers */
+		gtk_widget_set_sensitive (WID ("mail_select_radio"), FALSE);
+	}
+
+	/* Source of command string */
+	g_object_set_data (G_OBJECT (WID ("mail_select_radio")), "entry", WID ("mail_select_combo_entry"));
+	/* Source of command string */
+	g_object_set_data (G_OBJECT (WID ("mail_custom_radio")), "entry", WID ("mail_custom_command_entry"));
+
+	g_signal_connect (G_OBJECT (WID ("mail_select_combo_entry")),
+			  "changed", (GCallback) mailer_setup_custom,
+			  dialog);
+	g_signal_connect (G_OBJECT (WID ("mail_select_radio")),
+			  "clicked", (GCallback) generic_guard,
+			  WID ("mail_select_combo"));
+	g_signal_connect (G_OBJECT (WID ("mail_custom_radio")),
+			  "clicked", (GCallback) generic_guard,
+			  WID ("mail_custom_vbox"));
+
+	read_mailer (client, dialog);
 	/* Help page */
 	
 	for (i = 0; i < G_N_ELEMENTS (possible_help_viewers); i++ ) {

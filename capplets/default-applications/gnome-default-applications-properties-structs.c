@@ -8,6 +8,15 @@ struct _BrowserDescription
 	gboolean in_path;
 };
 
+struct _MailerDescription
+{
+	gchar *name;	
+        gchar *executable_name;
+	gchar *command;
+        gboolean needs_term;
+	gboolean in_path;
+};
+
 struct _HelpViewDescription
 {
 	gchar *name;
@@ -27,13 +36,24 @@ struct _TerminalDesciption
 
 BrowserDescription possible_browsers[] =
 {
-        { "Lynx Text Browser",		"lynx",      "lynx %s",      TRUE,  FALSE, FALSE },
-        { "Links Text Browser" , 	"links",     "links %s",     TRUE,  FALSE, FALSE },
-        { "Netscape Communicator", 	"netscape",  "netscape %s",  FALSE, TRUE,  FALSE },
-        { "Mozilla/Netscape 6", 	"mozilla",   "mozilla %s",   FALSE, TRUE,  FALSE },
+        { "Epiphany", 			"epiphany",    "epiphany %s",    FALSE, FALSE, FALSE },
         { "Galeon", 			"galeon",    "galeon %s",    FALSE, FALSE, FALSE },
         { "Encompass", 			"encompass", "encompass %s", FALSE, FALSE, FALSE },
-        { "Konqueror", 			"konqueror", "konqueror %s", FALSE, FALSE, FALSE }
+        { "Mozilla/Netscape 6", 	"mozilla",   "mozilla %s",   FALSE, TRUE,  FALSE },
+        { "Netscape Communicator", 	"netscape",  "netscape %s",  FALSE, TRUE,  FALSE },
+        { "Konqueror", 			"konqueror", "konqueror %s", FALSE, FALSE, FALSE },
+        { "Lynx Text Browser",		"lynx",      "lynx %s",      TRUE,  FALSE, FALSE },
+        { "Links Text Browser" , 	"links",     "links %s",     TRUE,  FALSE, FALSE }
+};
+
+MailerDescription possible_mailers[] =
+{
+        { "Evolution Mail Reader",		"evolution",      "evolution %s",      FALSE,  FALSE, },
+        { "Evolution Mail Reader for GNOME2",		"evolution-1.3",      "evolution-1.3 %s",      FALSE,  FALSE, },
+	{ "Balsa",        "balsa",    "balsa --compose=%s", FALSE, FALSE },
+	{ "Mozilla Mail", "mozilla",  "mozilla -mail %s",   FALSE, FALSE},
+        { "Mutt" , 	  "mutt",     "mutt %s",            TRUE, FALSE },
+
 };
 
 HelpViewDescription possible_help_viewers[] = 
