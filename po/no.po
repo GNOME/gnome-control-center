@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.5.8\n"
-"POT-Creation-Date: 2002-05-22 00:28+0200\n"
-"PO-Revision-Date: 2002-05-22 00:30+0200\n"
+"POT-Creation-Date: 2002-05-27 13:28+0200\n"
+"PO-Revision-Date: 2002-05-27 13:29+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -226,16 +226,16 @@ msgstr "I_ngen bilde"
 msgid "_Picture"
 msgstr "_Bilde"
 
-#: capplets/background/background-properties-capplet.c:566
+#: capplets/background/background-properties-capplet.c:558
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:719
+#: capplets/default-applications/gnome-default-applications-properties.c:712
 #: capplets/keyboard/gnome-keyboard-properties.c:367
-#: capplets/mouse/gnome-mouse-properties.c:735
-#: capplets/sound/sound-properties-capplet.c:156
+#: capplets/mouse/gnome-mouse-properties.c:727
+#: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
 msgstr "Hent og lagre gamle innstillinger"
 
-#: capplets/background/background-properties-capplet.c:591
+#: capplets/background/background-properties-capplet.c:584
 #: capplets/background/background-properties.glade.h:2
 msgid "Background Preferences"
 msgstr "Brukervalg for bakgrunn"
@@ -354,6 +354,11 @@ msgstr ""
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "Bare aktiver innstillingene og avslutt"
+
+#: capplets/common/capplet-util.c:315
+#, c-format
+msgid "There was an error displaying help: %s"
+msgstr "Det oppsto en feil under visning av hjelp: %s"
 
 #: capplets/common/file-transfer-dialog.c:95
 #, c-format
@@ -924,25 +929,25 @@ msgid "Source Code"
 msgstr "Kildekode"
 
 #: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:753
+#: capplets/file-types/mime-type-info.c:724
 msgid "Audio"
 msgstr "Lyd"
 
 #: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:749
+#: capplets/file-types/mime-type-info.c:720
 msgid "Images"
 msgstr "Bilder"
 
 #: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:751
+#: capplets/file-types/mime-type-info.c:722
 msgid "Video"
 msgstr "Video"
 
-#: capplets/file-types/file-types-capplet.c:231
+#: capplets/file-types/file-types-capplet.c:222
 msgid "Description"
 msgstr "Beskrivelse"
 
-#: capplets/file-types/file-types-capplet.c:238
+#: capplets/file-types/file-types-capplet.c:229
 #: capplets/mime-type/new-mime-window.c:39
 msgid "Extensions"
 msgstr "Filtyper"
@@ -1230,39 +1235,47 @@ msgid "Font"
 msgstr "Skrift"
 
 #: capplets/font/font-properties.glade.h:1
-msgid "File Manager Font"
-msgstr "Skrift for filhåndterer"
+msgid "Font Preferences"
+msgstr "Brukervalg for skrift"
 
 #: capplets/font/font-properties.glade.h:2
-msgid "Font Properties"
-msgstr "Egenskaper for skrift"
+msgid "Set the font for applications"
+msgstr "Sett skrift for applikasjoner"
 
 #: capplets/font/font-properties.glade.h:3
-msgid "Standard Desktop Font"
-msgstr "Forvalgt skrift for skrivebordet"
+msgid "Set the font for the icons on the desktop"
+msgstr "Sett skrift for ikoner på skrivebordet"
 
-#: capplets/keybindings/eggcellrendererkeys.c:156
-#: capplets/keybindings/eggcellrendererkeys.c:157
+#: capplets/font/font-properties.glade.h:4
+msgid "Standard _application font:"
+msgstr "Forvalgt skrift for _applikasjoner:"
+
+#: capplets/font/font-properties.glade.h:5
+msgid "_Desktop font:"
+msgstr "S_krift for skrivebord:"
+
+#: capplets/keybindings/eggcellrendererkeys.c:158
+#: capplets/keybindings/eggcellrendererkeys.c:159
 msgid "Accelerator modifiers"
 msgstr "Endringstaster for aksellerator"
 
-#: capplets/keybindings/eggcellrendererkeys.c:165
-#: capplets/keybindings/eggcellrendererkeys.c:166
+#: capplets/keybindings/eggcellrendererkeys.c:167
+#: capplets/keybindings/eggcellrendererkeys.c:168
 msgid "Accelerator key"
 msgstr "Hurtigtast"
 
-#: capplets/keybindings/eggcellrendererkeys.c:203
+#: capplets/keybindings/eggcellrendererkeys.c:206
 #: capplets/keybindings/gnome-keybinding-properties.c:306
 #: libbackground/applier.c:525
 msgid "Disabled"
 msgstr "Slått av"
 
-#: capplets/keybindings/eggcellrendererkeys.c:306
-#: capplets/keybindings/eggcellrendererkeys.c:503
+#: capplets/keybindings/eggcellrendererkeys.c:309
+#: capplets/keybindings/eggcellrendererkeys.c:506
 msgid "Type a new accelerator, or press Backspace to clear"
 msgstr "Skriv inn en ny aksellerator, eller trykk slett for å tømme"
 
-#: capplets/keybindings/eggcellrendererkeys.c:506
+#: capplets/keybindings/eggcellrendererkeys.c:509
 msgid "Type a new accelerator"
 msgstr "Skriv inn en ny aksellerator"
 
@@ -1278,12 +1291,12 @@ msgstr "Skrivebord"
 msgid "Window Management"
 msgstr "Vindushåndtering"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:698
+#: capplets/keybindings/gnome-keybinding-properties.c:699
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Feil under setting av ny snarvei i konfigurasjonsdatabasen: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:839
+#: capplets/keybindings/gnome-keybinding-properties.c:840
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1291,11 +1304,11 @@ msgstr ""
 "Kan ikke finne tastaturtema. Dette betyr at din GTK+-installasjon ikke er "
 "komplett."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:864
+#: capplets/keybindings/gnome-keybinding-properties.c:865
 msgid "Action"
 msgstr "Handling"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:876
+#: capplets/keybindings/gnome-keybinding-properties.c:877
 msgid "Shortcut"
 msgstr "Snarvei"
 
@@ -1334,8 +1347,8 @@ msgstr "_Tilgjengelighet"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:363
 #: capplets/keyboard/gnome-keyboard-properties.c:365
-#: capplets/sound/sound-properties-capplet.c:152
-#: capplets/sound/sound-properties-capplet.c:154
+#: capplets/sound/sound-properties-capplet.c:145
+#: capplets/sound/sound-properties-capplet.c:147
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
@@ -1912,7 +1925,7 @@ msgstr "P_lassering"
 msgid "_Use HTTP proxy"
 msgstr "Br_uk HTTP-proxy"
 
-#: capplets/sound/sound-properties-capplet.c:186
+#: capplets/sound/sound-properties-capplet.c:180
 msgid "Sound preferences"
 msgstr "Brukervalg for lyd"
 
@@ -2052,7 +2065,8 @@ msgstr "En forhåndsvisning av menylinjens utseende med disse instillingene."
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:2
 msgid "A preview of what a toolbar looks like with these settings."
-msgstr "En forhåndsvisning av verkyøylinjens utseende med disse innstillingene."
+msgstr ""
+"En forhåndsvisning av verkyøylinjens utseende med disse innstillingene."
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:3
 msgid "Icons Only"
@@ -2591,6 +2605,12 @@ msgstr "S_pill"
 #: libsounds/sound-view.c:257
 msgid "Select sound file"
 msgstr "Velg lydfil"
+
+#~ msgid "File Manager Font"
+#~ msgstr "Skrift for filhåndterer"
+
+#~ msgid "Font Properties"
+#~ msgstr "Egenskaper for skrift"
 
 #~ msgid "Accepts Line _Number"
 #~ msgstr "Godtar linje_nummer"
