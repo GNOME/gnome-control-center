@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.3.1\n"
-"POT-Creation-Date: 2003-05-13 22:30+0800\n"
+"POT-Creation-Date: 2003-05-16 05:42+0800\n"
 "PO-Revision-Date: 2003-05-15 09:13+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -62,19 +62,19 @@ msgstr "*"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
 msgid "<b>Enable Bo_unce Keys</b>"
-msgstr "<b>啟用篩選鍵(_U)<b>"
+msgstr "<b>啟用篩選鍵<b>(_U)"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
 msgid "<b>Enable Slo_w Keys</b>"
-msgstr "<b>啟用遲緩按鍵(_W)</b>"
+msgstr "<b>啟用遲緩按鍵</b>(_W)"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
 msgid "<b>Enable _Mouse Keys</b>"
-msgstr "<b>啟用滑鼠控制鍵(_M)</b>"
+msgstr "<b>啟用滑鼠控制鍵</b>(_M)"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
 msgid "<b>Enable _Repeat Keys</b>"
-msgstr "<b>啟用自動重複按鍵(_R)</b>"
+msgstr "<b>啟用自動重複按鍵</b>(_R)"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
 msgid "<b>Enable _Sticky Keys</b>"
@@ -913,6 +913,7 @@ msgid ""
 msgstr "系統中的 XRandR 擴展功能和本程式的不兼容，因此不可能即時切換解析度。"
 
 #: capplets/file-types/file-types-capplet.c:196
+#: vfs-methods/themus/themus-properties-view.c:165
 msgid "Description"
 msgstr "說明"
 
@@ -1247,9 +1248,8 @@ msgid "G_rayscale"
 msgstr "灰階(_R)"
 
 #: capplets/font/font-properties.glade.h:8
-#, fuzzy
 msgid "Go to font folder"
-msgstr "開啟佈景主題資料夾(_G)"
+msgstr "前往字型資料夾"
 
 #: capplets/font/font-properties.glade.h:9
 msgid "Hinting:"
@@ -1378,7 +1378,7 @@ msgstr "請輸入新的捷徑鍵"
 
 #: capplets/keybindings/gnome-keybinding-properties.c:172
 msgid "GNOME Default"
-msgstr ""
+msgstr "GNOME 預設設定"
 
 #: capplets/keybindings/gnome-keybinding-properties.c:540
 msgid "<Unknown Action>"
@@ -1744,7 +1744,7 @@ msgid "Set your mouse preferences"
 msgstr "修改滑鼠偏好設定"
 
 #: capplets/network/gnome-network-preferences.desktop.in.h:1
-msgid "Network proxy"
+msgid "Network Proxy"
 msgstr "網路代理伺服器"
 
 #: capplets/network/gnome-network-preferences.desktop.in.h:2
@@ -1757,19 +1757,19 @@ msgstr "      "
 
 #: capplets/network/gnome-network-preferences.glade.h:3
 msgid "<b>_Automatic proxy configuration</b>"
-msgstr "<b>自動設定代理伺服器(_A)</b>"
+msgstr "<b>自動設定代理伺服器</b>(_A)"
 
 #: capplets/network/gnome-network-preferences.glade.h:4
 msgid "<b>_Direct internet connection</b>"
-msgstr "<b>直接連線至網際網路(_D)</b>"
+msgstr "<b>直接連線至網際網路</b>(_D)"
 
 #: capplets/network/gnome-network-preferences.glade.h:5
 msgid "<b>_Manual proxy configuration</b>"
-msgstr "<b>自選代理伺服器(_M)</b>"
+msgstr "<b>自選代理伺服器</b>(_M)"
 
 #: capplets/network/gnome-network-preferences.glade.h:6
 msgid "<b>_Use authentication</b>"
-msgstr "<b>需要認證(_U)</b>"
+msgstr "<b>需要認證</b>(_U)"
 
 #: capplets/network/gnome-network-preferences.glade.h:7
 msgid "Autoconfiguration _URL:"
@@ -1893,7 +1893,7 @@ msgid "Two"
 msgstr "二"
 
 #: capplets/theme-switcher/gnome-theme-details.c:372
-#: capplets/theme-switcher/gnome-theme-manager.c:626
+#: capplets/theme-switcher/gnome-theme-manager.c:590
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -1902,22 +1902,24 @@ msgstr ""
 "系統中找不到任何佈景主題。這可能表示「佈景主題偏好設定」並未完全安裝好，或是"
 "您並未安裝“gnome-themes”套件。"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:682
-#: capplets/theme-switcher/gnome-theme-manager.c:742
+#: capplets/theme-switcher/gnome-theme-manager.c:646
+#: capplets/theme-switcher/gnome-theme-manager.c:706
 msgid "Custom theme"
 msgstr "自選佈景主題"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:682
-#: capplets/theme-switcher/gnome-theme-manager.c:742
+#: capplets/theme-switcher/gnome-theme-manager.c:646
+#: capplets/theme-switcher/gnome-theme-manager.c:706
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "您可按下「儲存佈景主題」按鈕來儲存這個佈景主題。"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:1435
+#: capplets/theme-switcher/gnome-theme-manager.c:1399
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
 "configured incorrectly."
 msgstr ""
+"在系統中找不到預設定佈景主題 schemas。這即是表示 metacity 可能仍未安裝，或是"
+"gconf 設定有錯誤。"
 
 #: capplets/theme-switcher/gnome-theme-save.c:72
 msgid "Theme name must be present"
@@ -1928,6 +1930,7 @@ msgid "Select themes for various parts of the desktop"
 msgstr "選取佈景主題，供桌面不同的部份使用"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:1
 msgid "Theme"
 msgstr "佈景主題"
 
@@ -1988,7 +1991,6 @@ msgstr ""
 "指定的背景："
 
 #: capplets/theme-switcher/theme-properties.glade.h:13
-#, fuzzy
 msgid ""
 "This theme suggests a\n"
 "font and background:"
@@ -2361,7 +2363,7 @@ msgstr "無法載入音效檔 %s 作為音效樣本 %s"
 #: gnome-settings-daemon/gnome-settings-xrdb.c:212
 #: gnome-settings-daemon/gnome-settings-xrdb.c:259
 msgid "Cannot determine user's home directory"
-msgstr ""
+msgstr "無法決定用戶的個人目錄所在"
 
 #: gnome-settings-daemon/gnome-settings-xsettings.c:179
 #, c-format
@@ -2535,6 +2537,79 @@ msgstr ""
 "“none”(不使用 hinting)、“slight”、“medium”及“full”(完整 hinting；可能會令字體"
 "變型)。"
 
+#: vfs-methods/themus/theme-method.c:513
+msgid "Themes"
+msgstr "佈景主題"
+
+#: vfs-methods/themus/themus-properties-view.c:170
+msgid "Control theme"
+msgstr "界面主題"
+
+#: vfs-methods/themus/themus-properties-view.c:174
+msgid "Window border theme"
+msgstr "視窗邊框主題"
+
+#: vfs-methods/themus/themus-properties-view.c:178
+msgid "Icon theme"
+msgstr "圖示主題"
+
+#: vfs-methods/themus/themus-properties-view.c:217
+msgid "URI currently displayed"
+msgstr "目前顯示的 URI"
+
+#: vfs-methods/themus/themus.schemas.in.h:1
+msgid "If set to true, then installed themes will be thumbnailed."
+msgstr "如選用本選項，則會為已安裝的佈景主題製作縮圖。"
+
+#: vfs-methods/themus/themus.schemas.in.h:2
+msgid "If set to true, then themes will be thumbnailed."
+msgstr "如選用本選項，則會為佈景主題製作縮圖。"
+
+#: vfs-methods/themus/themus.schemas.in.h:3
+msgid ""
+"Set this key to the command used to create thumbnails for installed themes."
+msgstr "本設定鍵的內容是為已安裝的佈景主題製作縮圖所用的指令。"
+
+#: vfs-methods/themus/themus.schemas.in.h:4
+msgid "Set this key to the command used to create thumbnails for themes."
+msgstr "本設定鍵的內容是為佈景主題製作縮圖所用的指令。"
+
+#: vfs-methods/themus/themus.schemas.in.h:5
+msgid "Thumbnail command for installed themes"
+msgstr "為已安裝的佈景主題製作縮圖所用的指令"
+
+#: vfs-methods/themus/themus.schemas.in.h:6
+msgid "Thumbnail command for themes"
+msgstr "為佈景主題製作縮圖所用的指令"
+
+#: vfs-methods/themus/themus.schemas.in.h:7
+msgid "Whether to thumbnail installed themes"
+msgstr "是否為已安裝的佈景主題製作縮圖"
+
+#: vfs-methods/themus/themus.schemas.in.h:8
+msgid "Whether to thumbnail themes"
+msgstr "是否為佈景主題製作縮圖"
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
+msgid "Theme Properties content view component"
+msgstr "Themus 屬性內容顯示模式元件"
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
+msgid "Themus Theme Properties view"
+msgstr "Themus 佈景屬性顯示模式"
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:1
+msgid "Apply theme..."
+msgstr "套用佈景主題..."
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:2
+msgid "Themus component"
+msgstr "Themus 元件"
+
+#: vfs-methods/themus/Themus_Component.server.in.in.h:3
+msgid "Themus component apply theme operations"
+msgstr "Themus 元件的套用佈景主題操作程序"
+
 #~ msgid "_Repeat Keys"
 #~ msgstr "按鍵自動重複(_R)"
 
@@ -2639,9 +2714,6 @@ msgstr ""
 
 #~ msgid "Keyboard Properties"
 #~ msgstr "鍵盤屬性"
-
-#~ msgid "Mouse Properties"
-#~ msgstr "滑鼠屬性"
 
 #~ msgid "Configure GNOME's use of sound"
 #~ msgstr "設定 GNOME 使用的音效"
@@ -2831,9 +2903,6 @@ msgstr ""
 
 #~ msgid "_Sound"
 #~ msgstr "音效(_S)"
-
-#~ msgid "Themes"
-#~ msgstr "佈景主題"
 
 #~ msgid "_Program to execute"
 #~ msgstr "執行的程式(_P)"
