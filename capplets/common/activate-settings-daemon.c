@@ -1,3 +1,7 @@
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <libbonobo.h>
 #include <gtk/gtk.h>
 
@@ -11,7 +15,7 @@ static void popup_error_message ()
   GtkWidget *dialog;
 
   dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_NO_SEPARATOR, GTK_MESSAGE_WARNING,
-				   GTK_BUTTONS_OK, "Unable to start the settings manager 'gnome2-settings-daemon'.\n"
+				   GTK_BUTTONS_OK, _("Unable to start the settings manager 'gnome2-settings-daemon'.\n"
 				   "Without the GNOME settings manager running, some preferences may not take effect. This could"
 				   "indicate a problem with Bonobo, or a non-GNOME (e.g. KDE) settings manager may already"
 				   "be active and conflicting with the GNOME settings manager.");
