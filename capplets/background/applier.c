@@ -1158,6 +1158,8 @@ is_nautilus_running (void)
 	if (data != NULL) {
 		nautilus_xid = *(Window *) data;
 		XFree (data);
+	} else {
+		return FALSE;
 	}
 
 	if (actual_type != XA_WINDOW) return FALSE;

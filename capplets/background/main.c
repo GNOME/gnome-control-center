@@ -91,7 +91,7 @@ do_set_xml (void)
 {
 	Preferences *prefs;
 	xmlDocPtr doc;
-	char *buffer;
+	char *buffer = NULL;
 	int len = 0;
 
 	while (!feof (stdin)) {
