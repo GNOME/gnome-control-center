@@ -349,11 +349,13 @@ applier_apply_prefs (Applier *applier, Preferences *prefs,
 			gdk_pixbuf_new_from_file (prefs->wallpaper_filename);
 
 		if (!applier->private->wallpaper_pixbuf) {
-#warning FIXME: should be a dialog
 			g_warning (_("Could not load pixbuf \"%s\"; disabling wallpaper."),
 				   prefs->wallpaper_filename);
 			new_prefs->wallpaper_enabled = FALSE;
 		}
+	}
+	else if (applier->private->wallpaper_pixbuf == NULL) {
+		new_prefs->wallpaper_enabled = FALSE;
 	}
 
 	if (do_preview) {
