@@ -213,13 +213,8 @@ property_change_cb (BonoboListener     *listener,
 	if (!strcmp (event_name, "Bonobo/Property:change:wallpaper_type")
 	    || !strcmp (event_name, "Bonobo/Property:change:wallpaper_filename")
 	    || !strcmp (event_name, "Bonobo/Property:change:wallpaper_enabled"))
-	{
-		gtk_widget_set_sensitive (
-			WID ("color_frame"),
-			preferences_need_color_opts (
-				prefs,
-				applier_get_wallpaper_pixbuf (applier)));
-	}
+		gtk_widget_set_sensitive
+			(WID ("color_frame"), applier_render_color_p (applier));
 }
 
 static gboolean
@@ -237,11 +232,7 @@ real_realize_cb (Preferences *prefs)
 
 	applier_apply_prefs (applier, prefs, FALSE, TRUE);
 
-	gtk_widget_set_sensitive (
-		WID ("color_frame"),
-		preferences_need_color_opts (
-			prefs,
-			applier_get_wallpaper_pixbuf (applier)));
+	gtk_widget_set_sensitive (WID ("color_frame"), applier_render_color_p (applier));
 
 	return FALSE;
 }

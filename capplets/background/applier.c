@@ -410,9 +410,14 @@ applier_apply_prefs (Applier           *applier,
 }
 
 gboolean
-applier_render_gradient_p (Applier *applier) 
+applier_render_color_p (Applier *applier) 
 {
-	return render_gradient_p (applier->private->preview_renderer, applier->private->preview_prefs);
+	return !(applier->private->preview_prefs->wallpaper_enabled &&
+		 !applier->private->preview_prefs->adjust_opacity &&
+		 ((applier->private->preview_prefs->wallpaper_type == WPTYPE_TILED ||
+		   applier->private->preview_prefs->wallpaper_type == WPTYPE_SCALED) ||
+		  (applier->private->preview_renderer->wwidth >= applier->private->preview_renderer->width &&
+		   applier->private->preview_renderer->wheight >= applier->private->preview_renderer->height)));
 }
 
 GtkWidget *

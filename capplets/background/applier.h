@@ -61,7 +61,7 @@ void         applier_apply_prefs          (Applier           *applier,
 					   gboolean           do_root,
 					   gboolean           do_preview);
 
-gboolean     applier_render_gradient_p    (Applier           *applier);
+gboolean     applier_render_color_p       (Applier           *applier);
 
 GtkWidget   *applier_get_preview_widget   (Applier           *applier);
 GdkPixbuf   *applier_get_wallpaper_pixbuf (Applier           *applier);

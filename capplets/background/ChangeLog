@@ -1,3 +1,15 @@
+2001-09-14  Bradford Hovinen  <hovinen@ximian.com>
+
+	* background-properties-capplet.c (property_change_cb): Use
+	applier_render_color_p
+	(real_realize_cb): Ditto
+
+	* applier.c (applier_render_color_p): Renamed from
+	applier_render_gradient_p; check both solid color and gradient
+
+	* preferences.c (preferences_need_color_opts): Removed; use
+	applier_render_color_p instead
+
 2001-09-13  Bradford Hovinen  <hovinen@ximian.com>
 
 	* preferences.c (preferences_load_from_bonobo_db):

@@ -432,50 +432,6 @@ bonobo_color_to_gdk (const Bonobo_Config_Color *color)
 	return ret;
 }
 
-/* It'd be nice if we could just get the pixbuf the applier uses, for
- * efficiency's sake */
-gboolean
-preferences_need_color_opts (Preferences *prefs, GdkPixbuf *wallpaper_pixbuf)
-{
-	int s_width, s_height;
-	int p_width, p_height;
-	
-	g_return_val_if_fail (prefs != NULL, TRUE);
-
-	if (!(prefs->wallpaper_enabled && prefs->wallpaper_filename))
-		return TRUE;
-
-	if (!wallpaper_pixbuf)
-		return TRUE;
-
-	p_width = gdk_pixbuf_get_width (wallpaper_pixbuf);
-	p_height = gdk_pixbuf_get_height (wallpaper_pixbuf);
-	
-	s_width = gdk_screen_width ();
-	s_height = gdk_screen_height ();
-
-	switch (prefs->wallpaper_type)
-	{
-		case WPTYPE_CENTERED:
-			if (p_width >= s_width && p_height >= s_height)
-				return FALSE;
-			else
-				return TRUE;
-			break;
-		case WPTYPE_SCALED_ASPECT:
-			if (s_width == p_width && s_height == p_height)
-				return FALSE;
-			else if (((double) s_width / (double) s_height)
-				 == ((double) p_width / (double) p_height))
-				return FALSE;
-			else
-				return TRUE;
-			break;
-		default:
-			return FALSE;
-	}
-}
-
 static gulong
 local_bonobo_property_bag_client_get_value_gulong (Bonobo_PropertyBag  pb,
 						   const gchar        *propname,
