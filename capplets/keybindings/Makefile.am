@@ -4,7 +4,9 @@ gnome_keybinding_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
 gnome_keybinding_properties_SOURCES = 	\
 	gnome-keybinding-properties.c	\
 	eggcellrendererkeys.c		\
-	eggcellrendererkeys.h
+	eggcellrendererkeys.h		\
+	eggaccelerators.c		\
+	eggaccelerators.h
 
 @INTLTOOL_DESKTOP_RULE@
 
