@@ -91,8 +91,12 @@ server_DATA     = $(server_in_files:.server.in=.server)
 $(server_in_files): $(server_in_files).in
 	sed -e "s|\@LIBEXECDIR\@|$(libexecdir)|" $< > $@
 
+# Do not ship
+dist-hook :
+	-rm -f $(distdir)/GNOME_SettingsDaemon.server.in $(distdir)/GNOME_SettingsDaemon.server
+
 @INTLTOOL_SERVER_RULE@
 
-CLEANFILES = $(BUILT_SOURCES)
+CLEANFILES = $(BUILT_SOURCES) $(server_in_files)
 
 EXTRA_DIST = $(server_in_files)	GNOME_SettingsDaemon.server.in.in
