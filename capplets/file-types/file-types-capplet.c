@@ -750,12 +750,6 @@ init_mime_capplet (const char *scroll_to_mime_type)
 
 	}
 
-	
-	/* FIXME bugzilla.eazel.com 2765: this call generates a 
-	   Gtk-WARNING **: gtk_signal_disconnect_by_data(): could not find handler containing data (0x80FA6F8)
-	   I think it is a bug in the control-center...
-	*/
-
 	/* Yes, show all widgets */
 	gtk_widget_show_all (capplet);
 
@@ -1453,9 +1447,7 @@ update_mime_list_action (const char *mime_string)
 	GnomeVFSMimeAction *action;
 	GnomeVFSMimeApplication *default_app;
 	OAF_ServerInfo *default_component;
-	const char *action_icon_name;
 	char *text, *tmp_text;
-	char *action_icon_path;
 	int row;
 	
 	pixbuf = NULL;
@@ -1470,19 +1462,8 @@ update_mime_list_action (const char *mime_string)
 				/* Get the default application */
 				default_app = gnome_vfs_mime_get_default_application (mime_string);
 				g_free (text);
-				text = g_strdup (default_app->name);
-				action_icon_name = gnome_vfs_mime_get_icon (mime_string);			
-				if (action_icon_name != NULL) {
-					/* Get custom icon */
-					action_icon_path = gnome_pixmap_file (action_icon_name);
-					if (action_icon_path != NULL) {
-						pixbuf = gdk_pixbuf_new_from_file (action_icon_path);
-						g_free (action_icon_path);
-					}
-				} else {
-					/* Use default icon */
-					pixbuf = gdk_pixbuf_new_from_file (DEFAULT_ACTION_ICON);
-				}
+				text = g_strdup (default_app->name);							
+				pixbuf = capplet_get_icon_pixbuf (mime_string, TRUE);
 				gnome_vfs_mime_application_free (default_app);
 				break;
 
@@ -1702,7 +1683,6 @@ column_clicked (GtkCList *clist, gint column, gpointer user_data)
 	 * that the sort type is descending the first time.
 	 */
 	 if (!sort_column_clicked [column]) {
-	 	 g_message ("Setting flag");
 		clist->sort_type = GTK_SORT_DESCENDING;
 		sort_column_clicked [column] = TRUE;
 	}
