@@ -1,3 +1,13 @@
+2002-02-14  Richard Hestilow  <hestilow@ximian.com>
+
+	* capplet-util.c (apply_cb): Explicitly call apply_settings_cb here.
+	(changed_cb): Remove this function.
+	(get_moniker_cb, create_control_cb): Adjust to use gconf.
+	(add_listener_cb): Remove.
+	(capplet_init): Do not add a timeout for add_listener_cb.
+
+	* capplet-util.h: Define CAPPLET_CONFIG_PREFIX.
+	
 2001-10-18  Bradford Hovinen  <hovinen@ximian.com>
 
 	* Bonobo_Control_Capplet_generic.oaf.in: Update listener name

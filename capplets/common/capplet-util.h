@@ -27,6 +27,8 @@
 #include <gnome.h>
 #include <bonobo.h>
 
+#define CAPPLET_CONFIG_PREFIX "/apps/gnome-control-center-1.6/"
+
 /* FIXME: We should really have a single bonobo-conf.h header */
 
 #include <bonobo-conf/bonobo-config-database.h>

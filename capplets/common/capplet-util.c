@@ -63,23 +63,10 @@ apply_cb (BonoboPropertyControl *pc, Bonobo_PropertyControl_Action action)
 		Bonobo_ConfigDatabase_sync (db, &ev);
 
 		CORBA_exception_free (&ev);
+
+		if (apply_settings_cb != NULL)
+			apply_settings_cb (db);
 	}
-}
-
-/* changed_cb
- *
- * Callback issued when a setting in the ConfigDatabase changes.
- */
-
-static void
-changed_cb (BonoboListener        *listener,
-	    gchar                 *event_name,
-	    CORBA_any             *any,
-	    CORBA_Environment     *ev,
-	    Bonobo_ConfigDatabase  db) 
-{
-	if (apply_settings_cb != NULL)
-		apply_settings_cb (db);
 }
 
 /* get_moniker_cb
@@ -130,12 +117,10 @@ set_moniker_cb (BonoboPropertyBag *bag,
 
 	if (arg_id != 1) return;
 
-	moniker = BONOBO_ARG_GET_STRING (arg);
-	full_moniker = g_strconcat (moniker, "#config:/main", NULL);
+	full_moniker = BONOBO_ARG_GET_STRING (arg);
 
 	pf = BONOBO_PROPERTY_FRAME (bonobo_control_get_widget (control));
 	bonobo_property_frame_set_moniker (pf, full_moniker);
-	g_free (full_moniker);
 
 	if (pf->proxy->bag == CORBA_OBJECT_NIL) {
 		bonobo_exception_set (ev, ex_Bonobo_Property_InvalidValue);
@@ -153,7 +138,7 @@ set_moniker_cb (BonoboPropertyBag *bag,
 		need_setup_cb = FALSE;
 	}
 
-	db = bonobo_get_object (moniker, "IDL:Bonobo/ConfigDatabase:1.0", ev);
+	db = bonobo_get_object ("config:", "IDL:Bonobo/ConfigDatabase:1.0", ev);
 
 	if (BONOBO_EX (ev) || db == CORBA_OBJECT_NIL)
 		g_critical ("Could not resolve configuration moniker; will not be able to apply settings");
@@ -215,7 +200,7 @@ get_control_cb (BonoboPropertyControl *property_control, gint page_number)
  */
 
 static BonoboObject *
-create_control_cb (BonoboGenericFactory *factory, const gchar *component_id, gchar *default_moniker) 
+create_control_cb (BonoboGenericFactory *factory, const gchar *component_id, gpointer data) 
 {
 	BonoboObject                  *obj;
 	BonoboPropertyControl         *property_control;
@@ -274,18 +259,7 @@ get_factory_name (const gchar *binary)
 static gchar *
 get_default_moniker (const gchar *binary) 
 {
-	gchar *s, *tmp, *tmp1, *res;
-
-	s = g_strdup (binary);
-	tmp = strrchr (s, '/');
-	if (tmp == NULL) tmp = s;
-	else tmp++;
-	if ((tmp1 = strstr (tmp, "-control")) != NULL) *tmp1 = '\0';
-	if ((tmp1 = strstr (tmp, "-capplet")) != NULL) *tmp1 = '\0';
-
-	res = g_strconcat ("archive:user-archive#archiverdb:", tmp, NULL);
-	g_free (s);
-	return res;
+	return g_strdup ("config:");
 }
 
 /* get_property_name
@@ -412,39 +386,6 @@ legacy_is_modified (Bonobo_ConfigDatabase db, const gchar *filename)
 	return ret;
 }
 
-static int
-add_listener_cb (Bonobo_ConfigDatabase db) 
-{
-	Bonobo_EventSource             es;
-	CORBA_Environment              ev;
-
-	CORBA_exception_init (&ev);
-
-	/* We do this manually so that we have access to the resulting listener object */
-	es = Bonobo_Unknown_queryInterface (db, "IDL:Bonobo/EventSource:1.0", &ev);
-
-	if (BONOBO_EX (&ev) || es == CORBA_OBJECT_NIL) {
-		g_critical ("Cannot get event source interface (%s)",
-			    bonobo_exception_get_text (&ev));
-	} else {
-		listener = bonobo_listener_new ((BonoboListenerCallbackFn) changed_cb, db);
-		listener_id = Bonobo_EventSource_addListenerWithMask (es, BONOBO_OBJREF (listener),
-								      "Bonobo/ConfigDatabase:sync", &ev);
-
-		if (BONOBO_EX (&ev) || listener_id == 0) {
-			g_critical ("Could not add the listener to the event source (%s)",
-				    bonobo_exception_get_text (&ev));
-		}
-
-		bonobo_object_release_unref (es, NULL);
-		bonobo_running_context_auto_exit_unref (BONOBO_OBJECT (listener));
-	}
-
-	CORBA_exception_free (&ev);
-
-	return FALSE;
-}
-
 /* capplet_init -- see documentation in capplet-util.h
  */
 
@@ -535,8 +476,6 @@ capplet_init (int                      argc,
 			(factory_iid, (GnomeFactoryCallback) create_control_cb, default_moniker);
 		g_free (factory_iid);
 		bonobo_running_context_auto_exit_unref (BONOBO_OBJECT (factory));
-
-		gtk_idle_add ((GtkFunction) add_listener_cb, db);
 
 		bonobo_main ();
 
