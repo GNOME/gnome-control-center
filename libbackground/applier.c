@@ -307,11 +307,13 @@ bg_applier_set_prop (GObject *object, guint prop_id, const GValue *value, GParam
 		break;
 
 	case PROP_PREVIEW_WIDTH:
-		bg_applier->p->render_geom.width = g_value_get_uint (value);
+		if (bg_applier->p->type == BG_APPLIER_PREVIEW)
+			bg_applier->p->render_geom.width = g_value_get_uint (value);
 		break;
 
 	case PROP_PREVIEW_HEIGHT:
-		bg_applier->p->render_geom.height = g_value_get_uint (value);
+		if (bg_applier->p->type == BG_APPLIER_PREVIEW)
+			bg_applier->p->render_geom.height = g_value_get_uint (value);
 		break;
 		
 	default:
