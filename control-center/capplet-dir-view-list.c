@@ -318,8 +318,7 @@ list_populate (CappletDirView *view)
 					CAPPLET_DIR_ENTRY (list->data)->label);
 		gnome_icon_list_insert (data->gil, i++,
 					CAPPLET_DIR_ENTRY (list->data)->icon,
-					"Hi");
-//					CAPPLET_DIR_ENTRY (list->data)->label);
+					CAPPLET_DIR_ENTRY (list->data)->label);
 #endif
 	}
 	gnome_icon_list_thaw (data->gil);
@@ -450,7 +449,7 @@ list_create (CappletDirView *view)
 
 	gtk_box_pack_start (GTK_BOX (vbox), darea, FALSE, FALSE, 0);
 		
-	hbox = gtk_hbox_new (FALSE, 0);
+	hbox = gtk_hpaned_new ();
 	
 	data->sidebar_model = gtk_list_store_new (4,
 		GDK_TYPE_PIXBUF, G_TYPE_STRING, GDK_TYPE_PIXBUF,
@@ -478,7 +477,7 @@ list_create (CappletDirView *view)
 					GTK_POLICY_NEVER,
 					GTK_POLICY_AUTOMATIC);
 	gtk_container_add (GTK_CONTAINER (sw), w);
-	gtk_box_pack_start (GTK_BOX (hbox), sw, FALSE, FALSE, 0);
+	gtk_paned_add1 (GTK_PANED (hbox), sw);
 			
 	sw = gtk_scrolled_window_new (NULL, NULL);
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
@@ -487,7 +486,7 @@ list_create (CappletDirView *view)
 
 	adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (sw));		
 
-	data->gil = w = gnome_icon_list_new (72, 0);
+	data->gil = w = gnome_icon_list_new (72, NULL, 0);
 	
 	title = g_concat_dir_and_file (ART_DIR, "title.png");
 	data->header_logo = gdk_pixbuf_new_from_file (title, NULL);
@@ -514,7 +513,7 @@ list_create (CappletDirView *view)
 			    view);
 
 	gtk_container_add (GTK_CONTAINER (sw), w);
-	gtk_box_pack_start (GTK_BOX (hbox), sw, TRUE, TRUE, 0);
+	gtk_paned_add2 (GTK_PANED (hbox), sw);
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, TRUE, TRUE, 0);
 	gtk_widget_show_all (vbox);
 	
