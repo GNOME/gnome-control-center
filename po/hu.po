@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.0\n"
-"POT-Creation-Date: 1999-04-07 22:40+0200\n"
+"POT-Creation-Date: 1999-04-13 20:16+0200\n"
 "Last-Translator: Shooby Ban <bansz@szif.hu>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -58,7 +58,7 @@ msgstr "Nem találtam hbox-t, normál fájlkiválasztót használok"
 
 #: capplets/background-properties/property-background.c:888
 #: capplets/screensaver-properties/screensaver-dialog.c:25
-#: capplets/theme-switcher/gui.c:225 capplets/theme-switcher/gui.c:281
+#: capplets/theme-switcher/gui.c:225 capplets/theme-switcher/gui.c:297
 msgid "Preview"
 msgstr "Elõnézet"
 
@@ -164,11 +164,11 @@ msgstr "Hossz (ms)"
 msgid "Test"
 msgstr "Teszt"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:193
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:226
 msgid "Gnome editor"
 msgstr "Gnome alapértelmezett szövegszerkesztõ"
 
-#: capplets/gnome-edit-properties/gnome-edit-properties.c:204
+#: capplets/gnome-edit-properties/gnome-edit-properties.c:237
 msgid "Run In Terminal"
 msgstr "Terminálban fusson"
 
@@ -227,7 +227,8 @@ msgstr "Második reguláris kifejezés: "
 
 #. Actions box
 #: capplets/mime-type/edit-window.c:148
-msgid "Mime-Type Actions"
+#, fuzzy
+msgid "Mime Type Actions"
 msgstr "Mime-típus akciók"
 
 #: capplets/mime-type/edit-window.c:154
@@ -244,7 +245,6 @@ msgid "View"
 msgstr "Megtekint"
 
 #: capplets/mime-type/edit-window.c:185
-#: capplets/wm-properties/wm-properties-capplet.c:1000
 msgid "Edit"
 msgstr "Szerkeszt"
 
@@ -432,8 +432,8 @@ msgid "Enable"
 msgstr "Engedélyez"
 
 #: capplets/sound-properties/sound-properties.c:255
-msgid "GNOME sound support"
-msgstr "GNOME hang támogatás"
+msgid "Enable sound server startup"
+msgstr ""
 
 #: capplets/sound-properties/sound-properties.c:263
 msgid "Sounds for events"
@@ -460,11 +460,11 @@ msgid ""
 "This copy of the GNOME control center was not compiled with sound support"
 msgstr "Nem lett hangtámogatással fordítva ez a control-center."
 
-#: capplets/sound-properties/sound-properties.c:757
+#: capplets/sound-properties/sound-properties.c:760
 msgid "The sound file for this event does not exist."
 msgstr "A hangfájl ehhez az eseményhez nem létezik."
 
-#: capplets/sound-properties/sound-properties.c:759
+#: capplets/sound-properties/sound-properties.c:762
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -474,7 +474,7 @@ msgstr ""
 "A gnome-audio csomagot fel kell \n"
 "telepítened ahhoz, hogy az alapértelmezett hangokat halld."
 
-#: capplets/sound-properties/sound-properties.c:765
+#: capplets/sound-properties/sound-properties.c:768
 msgid "Close"
 msgstr "Bezár"
 
@@ -519,7 +519,7 @@ msgstr ""
 msgid "User Font"
 msgstr "Felhasználói betûtípus"
 
-#: capplets/theme-switcher/gui.c:255
+#: capplets/theme-switcher/gui.c:271
 msgid "Use custom font."
 msgstr "Beállított betûtípust használj."
 
@@ -700,7 +700,7 @@ msgstr "Beállít"
 msgid "Remove"
 msgstr "Töröl"
 
-#: capplets/wm-properties/wm-properties-capplet.c:128
+#: capplets/wm-properties/wm-properties-capplet.c:139
 #, c-format
 msgid ""
 "Starting %s\n"
@@ -709,23 +709,23 @@ msgstr ""
 "Indítom %s-t\n"
 "(%d másodperc telt el az elõzõ mûvelet óta)"
 
-#: capplets/wm-properties/wm-properties-capplet.c:290
+#: capplets/wm-properties/wm-properties-capplet.c:301
 msgid " (Current)"
 msgstr " (jelenlegi)"
 
-#: capplets/wm-properties/wm-properties-capplet.c:292
+#: capplets/wm-properties/wm-properties-capplet.c:303
 msgid "Run Configuration Tool for "
 msgstr "Konfigurációs eszköz indítása: "
 
-#: capplets/wm-properties/wm-properties-capplet.c:304
+#: capplets/wm-properties/wm-properties-capplet.c:315
 msgid " (Not found)"
 msgstr " (Nem találtam)"
 
-#: capplets/wm-properties/wm-properties-capplet.c:385
+#: capplets/wm-properties/wm-properties-capplet.c:396
 msgid "Previous window manager did not die\n"
 msgstr "Az elõzõ ablakkezelõ nem halt meg\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:418
+#: capplets/wm-properties/wm-properties-capplet.c:429
 #, c-format
 msgid ""
 "Could not start '%s'.\n"
@@ -734,7 +734,7 @@ msgstr ""
 "Nem tudom indítani '%s'-t.\n"
 "Visszatérek az elõzõ ablakkezelõhöz, '%s'-höz.\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:449
+#: capplets/wm-properties/wm-properties-capplet.c:460
 msgid ""
 "Could not start fallback window manager.\n"
 "Please run a window manager manually. You can\n"
@@ -746,68 +746,74 @@ msgstr ""
 "Megteheted ezt a 'Program futtatása' menüpont\n"
 "segítségével\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:673
-#: capplets/wm-properties/wm-properties-capplet.c:829
+#: capplets/wm-properties/wm-properties-capplet.c:684
+#: capplets/wm-properties/wm-properties-capplet.c:840
 msgid "Add New Window Manager"
 msgstr "Új ablak hozzáadása"
 
 #: capplets/e-conf/e-conf.c:1333
-#: capplets/wm-properties/wm-properties-capplet.c:674
-#: capplets/wm-properties/wm-properties-capplet.c:782
-#: capplets/wm-properties/wm-properties-capplet.c:789
-#: capplets/wm-properties/wm-properties-capplet.c:929
+#: capplets/wm-properties/wm-properties-capplet.c:685
+#: capplets/wm-properties/wm-properties-capplet.c:793
+#: capplets/wm-properties/wm-properties-capplet.c:800
+#: capplets/wm-properties/wm-properties-capplet.c:940
 #: control-center/capplet-manager.c:180
 msgid "OK"
 msgstr ""
 
 #: capplets/e-conf/e-conf.c:1336 capplets/e-conf/e-conf_filesel.c:611
-#: capplets/wm-properties/wm-properties-capplet.c:674
+#: capplets/wm-properties/wm-properties-capplet.c:685
 #: control-center/capplet-manager.c:185
 msgid "Cancel"
 msgstr "Mégsem"
 
-#: capplets/wm-properties/wm-properties-capplet.c:685
+#: capplets/wm-properties/wm-properties-capplet.c:696
 msgid "Name:"
 msgstr "Név:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:698
+#: capplets/wm-properties/wm-properties-capplet.c:709
 msgid "Command:"
 msgstr "Parancs:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:711
+#: capplets/wm-properties/wm-properties-capplet.c:722
 msgid "Configuration Command:"
 msgstr "Konfigurációs parancs:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:730
+#: capplets/wm-properties/wm-properties-capplet.c:741
 msgid "Window manager is session managed"
 msgstr "Az ablakkezelõ folyamatvezérelt"
 
-#: capplets/wm-properties/wm-properties-capplet.c:780
+#: capplets/wm-properties/wm-properties-capplet.c:791
 msgid "Name cannot be empty"
 msgstr "Nem lehet a név üres"
 
-#: capplets/wm-properties/wm-properties-capplet.c:787
+#: capplets/wm-properties/wm-properties-capplet.c:798
 msgid "Command cannot be empty"
 msgstr "Nem lehet a parancs üres"
 
-#: capplets/wm-properties/wm-properties-capplet.c:873
+#: capplets/wm-properties/wm-properties-capplet.c:884
 msgid "Edit Window Manager"
 msgstr "Ablakkezelõ szerkesztése"
 
-#: capplets/wm-properties/wm-properties-capplet.c:928
+#: capplets/wm-properties/wm-properties-capplet.c:939
 msgid "You cannot delete the current Window Manager"
 msgstr "Nem törölheted a futó ablakkezelõt"
 
-#: capplets/wm-properties/wm-properties-capplet.c:995
-msgid "Add"
-msgstr "Hozzáad"
+#: capplets/wm-properties/wm-properties-capplet.c:1006
+#, fuzzy
+msgid "Add..."
+msgstr "Új hozzáadása"
+
+#: capplets/e-conf/e-conf.c:3743
+#: capplets/wm-properties/wm-properties-capplet.c:1011
+msgid "Edit..."
+msgstr "Szerkeszt..."
 
 #: capplets/e-conf/e-conf.c:3733 capplets/e-conf/e-conf.c:4393
-#: capplets/wm-properties/wm-properties-capplet.c:1005
+#: capplets/wm-properties/wm-properties-capplet.c:1016
 msgid "Delete"
 msgstr "Töröl"
 
-#: capplets/wm-properties/wm-properties-capplet.c:1040
+#: capplets/wm-properties/wm-properties-capplet.c:1051
 msgid ""
 "an initialization error occurred while starting 'wm-properties-capplet'.\n"
 "aborting...\n"
@@ -1546,10 +1552,6 @@ msgstr ""
 msgid "Remove this background bookmark from the list"
 msgstr ""
 
-#: capplets/e-conf/e-conf.c:3743
-msgid "Edit..."
-msgstr "Szerkeszt..."
-
 #: capplets/e-conf/e-conf.c:3750
 msgid "Edit the settings for this background bookmark"
 msgstr ""
@@ -1793,3 +1795,9 @@ msgstr ""
 #: control-center/main.c:162
 msgid "Control Center"
 msgstr "Vezérlõpult"
+
+#~ msgid "GNOME sound support"
+#~ msgstr "GNOME hang támogatás"
+
+#~ msgid "Add"
+#~ msgstr "Hozzáad"
