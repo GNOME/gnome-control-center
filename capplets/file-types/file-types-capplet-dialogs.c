@@ -129,11 +129,12 @@ application_button_toggled_callback (GtkToggleButton *button, gpointer user_data
 }
 
 static void
-populate_default_applications_box (GtkWidget *box, const char *mime_type)
+populate_default_applications_list (GtkWidget *list, const char *mime_type)
 {
 	GList *short_list, *app_list, *list_element;
 	GnomeVFSMimeApplication *application;
-	GtkWidget *button;
+	GtkWidget *button, *list_item;
+	GtkWidget *hbox, *label;
 
 	/* Get the application short list */
 	short_list = gnome_vfs_mime_get_short_list_applications (mime_type);
@@ -144,9 +145,21 @@ populate_default_applications_box (GtkWidget *box, const char *mime_type)
 		for (list_element = app_list; list_element != NULL; list_element = list_element->next) {
 			application = list_element->data;
 
+			/* Create list item */
+			list_item = gtk_list_item_new ();
+			
 			/* Create check button */
-			button = gtk_check_button_new_with_label (application->name);
-			gtk_box_pack_start (GTK_BOX (box), button, FALSE, FALSE, 0);
+			hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
+			gtk_container_add (GTK_CONTAINER (list_item), hbox);
+			
+			button = gtk_check_button_new ();
+			gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);	
+
+			label = gtk_label_new (application->name);
+			gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);	
+			
+			/* Add list item to list */
+			gtk_container_add (GTK_CONTAINER (list), list_item);
 
 			/* Save ID and mime type*/
 			gtk_object_set_data_full (GTK_OBJECT (button), "application_id", g_strdup (application->id), g_free);
@@ -236,7 +249,7 @@ populate_default_components_box (GtkWidget *box, const char *mime_type)
 	OAF_ServerInfo *info;
 	gchar *component_name;
 	GtkWidget *button;
-
+		
 	/* Get short list of components */
 	short_component_list = gnome_vfs_mime_get_short_list_components (mime_type);
 		
@@ -249,7 +262,7 @@ populate_default_components_box (GtkWidget *box, const char *mime_type)
 			component_name = name_from_oaf_server_info (info);
 			button = gtk_check_button_new_with_label (component_name);
 			gtk_box_pack_start (GTK_BOX (box), button, FALSE, FALSE, 0);
-			
+
 			/* Save IID and mime type*/
 			gtk_object_set_data_full (GTK_OBJECT (button), "component_iid", g_strdup (info->iid), g_free);
 			gtk_object_set_data_full (GTK_OBJECT (button), "mime_type", g_strdup (mime_type), g_free);
@@ -282,9 +295,9 @@ populate_default_components_box (GtkWidget *box, const char *mime_type)
 static void
 initialize_edit_applications_dialog (const char *mime_type)
 {
-	GtkWidget *main_vbox, *vbox, *hbox;
+	GtkWidget *main_vbox, *hbox;
 	GtkWidget *scroller, *label;
-	GtkWidget *button;
+	GtkWidget *button, *list;
 	char *label_text;
 	
 	edit_application_details = g_new0 (edit_dialog_details, 1);
@@ -323,8 +336,10 @@ initialize_edit_applications_dialog (const char *mime_type)
 					GTK_POLICY_NEVER,
 					GTK_POLICY_AUTOMATIC);
 
-	vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
-	gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (scroller), vbox);
+	list = gtk_list_new ();
+	//gtk_container_add (GTK_CONTAINER (scroller), list);
+	gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (scroller), list);
+	gtk_list_set_selection_mode (GTK_LIST (list), GTK_SELECTION_BROWSE);
 
 	/* Add edit buttons */
 	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
@@ -341,7 +356,7 @@ initialize_edit_applications_dialog (const char *mime_type)
 	button = gtk_button_new_with_label (_("Delete Application"));
 	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 
-	populate_default_applications_box (vbox, mime_type);
+	populate_default_applications_list (list, mime_type);
 
 	gtk_widget_show_all (main_vbox);
 }
@@ -642,13 +657,20 @@ nautilus_mime_type_capplet_show_new_extension_window (void)
 	}        
 }
 
+/* add_new_application
+ *
+ * Create a new GnomeVFSMimeApplication and register
+ * it with the mime database.
+ */
 static void
-add_new_application (const char *name, const char *id, const char *command)
+add_new_application (const char *name, const char *id, const char *command,
+		     gboolean multiple, gboolean uri)
 {
 	GnomeVFSMimeApplication *app;
 	const char *mime_type;
-	
-	if ((strlen (id) <= 0) || (strlen (command) <= 0)) {
+
+	/* Check for empty strings.  Command can be empty. */
+	if ((strlen (name) <= 0) || (strlen (id) <= 0)) {
 		return;
 	}
 
@@ -660,31 +682,32 @@ add_new_application (const char *name, const char *id, const char *command)
 	app->id = g_strdup (id);
 	app->name = g_strdup (name);
 	app->command = g_strdup (command);
-	app->can_open_multiple_files = FALSE;
-	app->can_open_uris = FALSE;
+	app->can_open_multiple_files = multiple;
+	app->can_open_uris = uri;
 	app->requires_terminal = FALSE;
 
-
-	gnome_vfs_mime_application_free (app);
+	gnome_vfs_mime_define_application (mime_type, app);
+	gnome_vfs_mime_add_application_to_short_list (mime_type, app->id);
 }
 
 static void
 show_new_application_window (void)
 {
-        GtkWidget *app_entry, *command_entry;
+        GtkWidget *app_entry, *id_entry, *command_entry;
 	GtkWidget *dialog;
 	GtkWidget *label;
 	GtkWidget *behavior_frame, *frame_vbox;
-	GtkWidget *check_box;
+	GtkWidget *multiple_check_box, *uri_check_box;
 	GtkWidget *table;	
         dialog = gnome_dialog_new (_("New Application"), GNOME_STOCK_BUTTON_OK, GNOME_STOCK_BUTTON_CANCEL, NULL);	
 
 	/* Create table */
-	table = gtk_table_new (3, 2, FALSE);
+	table = gtk_table_new (4, 2, FALSE);
 	gtk_container_add (GTK_CONTAINER (GNOME_DIALOG (dialog)->vbox), table);	
 	gtk_table_set_row_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
 	gtk_table_set_col_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
 
+	/* Application Name label and entry */
 	label = gtk_label_new (_("Application Name:"));
 	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
 	gtk_table_attach_defaults ( GTK_TABLE (table), label, 0, 1, 0, 1);
@@ -692,25 +715,34 @@ show_new_application_window (void)
 	app_entry = gtk_entry_new ();
 	gtk_table_attach_defaults ( GTK_TABLE (table), app_entry, 1, 2, 0, 1);
 
-	label = gtk_label_new (_("Application Command:"));
+	/* Application ID label and entry */
+	label = gtk_label_new (_("Application ID:"));
 	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
 	gtk_table_attach_defaults ( GTK_TABLE (table), label, 0, 1, 1, 2);
 
+	id_entry = gtk_entry_new ();
+	gtk_table_attach_defaults ( GTK_TABLE (table), id_entry, 1, 2, 1, 2);
+
+	/* Application Command label and entry */
+	label = gtk_label_new (_("Application Command:"));
+	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
+	gtk_table_attach_defaults ( GTK_TABLE (table), label, 0, 1, 2, 3);
+
 	command_entry = gtk_entry_new ();
-	gtk_table_attach_defaults ( GTK_TABLE (table), command_entry, 1, 2, 1, 2);
+	gtk_table_attach_defaults ( GTK_TABLE (table), command_entry, 1, 2, 2, 3);
 
         /* Open Behavior frame */
 	behavior_frame = gtk_frame_new (_("Open Behavior"));
-	gtk_table_attach_defaults ( GTK_TABLE (table), behavior_frame, 0, 2, 2, 3);
+	gtk_table_attach_defaults ( GTK_TABLE (table), behavior_frame, 0, 2, 3, 4);
 	
 	frame_vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
 	gtk_container_add (GTK_CONTAINER (behavior_frame), frame_vbox);
 
-	check_box = gtk_check_button_new_with_label (_("Can open multiple files"));
-	gtk_box_pack_start (GTK_BOX (frame_vbox), check_box, FALSE, FALSE, 0);
+	multiple_check_box = gtk_check_button_new_with_label (_("Can open multiple files"));
+	gtk_box_pack_start (GTK_BOX (frame_vbox), multiple_check_box, FALSE, FALSE, 0);
 
-	check_box = gtk_check_button_new_with_label (_("Can open from URI"));
-	gtk_box_pack_start (GTK_BOX (frame_vbox), check_box, FALSE, FALSE, 0);
+	uri_check_box = gtk_check_button_new_with_label (_("Can open from URI"));
+	gtk_box_pack_start (GTK_BOX (frame_vbox), uri_check_box, FALSE, FALSE, 0);
 		
 
         gtk_widget_show_all (GNOME_DIALOG (dialog)->vbox);
@@ -721,10 +753,11 @@ show_new_application_window (void)
         switch (gnome_dialog_run (GNOME_DIALOG (dialog))) {
 	        case 0:
 			add_new_application (gtk_entry_get_text (GTK_ENTRY (app_entry)),
-					     gtk_entry_get_text (GTK_ENTRY (app_entry)),
-					     gtk_entry_get_text (GTK_ENTRY (command_entry)));
-	        	
-	        
+					     gtk_entry_get_text (GTK_ENTRY (id_entry)),
+					     gtk_entry_get_text (GTK_ENTRY (command_entry)),
+	        			     gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (multiple_check_box)),
+	        			     gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (uri_check_box)));
+	        			     	        
 	        case 1:
 	                gtk_widget_destroy (dialog);
 	                break;
@@ -737,20 +770,21 @@ show_new_application_window (void)
 static void
 show_edit_application_window (void)
 {
-        GtkWidget *app_entry, *command_entry;
+       GtkWidget *app_entry, *id_entry, *command_entry;
 	GtkWidget *dialog;
 	GtkWidget *label;
 	GtkWidget *behavior_frame, *frame_vbox;
-	GtkWidget *check_box;
+	GtkWidget *multiple_check_box, *uri_check_box;
 	GtkWidget *table;	
-        dialog = gnome_dialog_new (_("Edit Application"), GNOME_STOCK_BUTTON_OK, GNOME_STOCK_BUTTON_CANCEL, NULL);	
+        dialog = gnome_dialog_new (_("New Application"), GNOME_STOCK_BUTTON_OK, GNOME_STOCK_BUTTON_CANCEL, NULL);	
 
 	/* Create table */
-	table = gtk_table_new (3, 2, FALSE);
+	table = gtk_table_new (4, 2, FALSE);
 	gtk_container_add (GTK_CONTAINER (GNOME_DIALOG (dialog)->vbox), table);	
 	gtk_table_set_row_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
 	gtk_table_set_col_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
 
+	/* Application Name label and entry */
 	label = gtk_label_new (_("Application Name:"));
 	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
 	gtk_table_attach_defaults ( GTK_TABLE (table), label, 0, 1, 0, 1);
@@ -758,25 +792,34 @@ show_edit_application_window (void)
 	app_entry = gtk_entry_new ();
 	gtk_table_attach_defaults ( GTK_TABLE (table), app_entry, 1, 2, 0, 1);
 
-	label = gtk_label_new (_("Application Command:"));
+	/* Application ID label and entry */
+	label = gtk_label_new (_("Application ID:"));
 	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
 	gtk_table_attach_defaults ( GTK_TABLE (table), label, 0, 1, 1, 2);
 
+	id_entry = gtk_entry_new ();
+	gtk_table_attach_defaults ( GTK_TABLE (table), id_entry, 1, 2, 1, 2);
+
+	/* Application Command label and entry */
+	label = gtk_label_new (_("Application Command:"));
+	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
+	gtk_table_attach_defaults ( GTK_TABLE (table), label, 0, 1, 2, 3);
+
 	command_entry = gtk_entry_new ();
-	gtk_table_attach_defaults ( GTK_TABLE (table), command_entry, 1, 2, 1, 2);
+	gtk_table_attach_defaults ( GTK_TABLE (table), command_entry, 1, 2, 2, 3);
 
         /* Open Behavior frame */
 	behavior_frame = gtk_frame_new (_("Open Behavior"));
-	gtk_table_attach_defaults ( GTK_TABLE (table), behavior_frame, 0, 2, 2, 3);
+	gtk_table_attach_defaults ( GTK_TABLE (table), behavior_frame, 0, 2, 3, 4);
 	
 	frame_vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
 	gtk_container_add (GTK_CONTAINER (behavior_frame), frame_vbox);
 
-	check_box = gtk_check_button_new_with_label (_("Can open multiple files"));
-	gtk_box_pack_start (GTK_BOX (frame_vbox), check_box, FALSE, FALSE, 0);
+	multiple_check_box = gtk_check_button_new_with_label (_("Can open multiple files"));
+	gtk_box_pack_start (GTK_BOX (frame_vbox), multiple_check_box, FALSE, FALSE, 0);
 
-	check_box = gtk_check_button_new_with_label (_("Can open from URI"));
-	gtk_box_pack_start (GTK_BOX (frame_vbox), check_box, FALSE, FALSE, 0);
+	uri_check_box = gtk_check_button_new_with_label (_("Can open from URI"));
+	gtk_box_pack_start (GTK_BOX (frame_vbox), uri_check_box, FALSE, FALSE, 0);
 		
 
         gtk_widget_show_all (GNOME_DIALOG (dialog)->vbox);
@@ -787,10 +830,11 @@ show_edit_application_window (void)
         switch (gnome_dialog_run (GNOME_DIALOG (dialog))) {
 	        case 0:
 			add_new_application (gtk_entry_get_text (GTK_ENTRY (app_entry)),
-					     gtk_entry_get_text (GTK_ENTRY (app_entry)),
-					     gtk_entry_get_text (GTK_ENTRY (command_entry)));
-	        	
-	        
+					     gtk_entry_get_text (GTK_ENTRY (id_entry)),
+					     gtk_entry_get_text (GTK_ENTRY (command_entry)),
+	        			     gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (multiple_check_box)),
+	        			     gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (uri_check_box)));
+	        			     	        
 	        case 1:
 	                gtk_widget_destroy (dialog);
 	                break;
