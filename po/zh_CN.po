@@ -7,43 +7,69 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center\n"
-"POT-Creation-Date: 2002-02-12 00:27-0600\n"
-"PO-Revision-Date: 2001-12-11 23:14+0800\n"
+"POT-Creation-Date: 2002-02-10 20:25+0800\n"
+"PO-Revision-Date: 2002-03-04 23:37+0800\n"
 "Last-Translator: He Qiangqiang <carton@263.net>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=gb2312\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: capplets/background/background.desktop.in.h:1
 msgid "Background"
-msgstr "±³¾°"
+msgstr "èƒŒæ™¯"
 
 #: capplets/background/background.desktop.in.h:2
 msgid "Configuration of the desktop's background"
-msgstr "×ÀÃæ±³¾°ÅäÖÃ"
+msgstr "æ¡Œé¢èƒŒæ™¯é…ç½®"
 
-#: capplets/background/background-properties-capplet.c:291
+#: capplets/background/background-properties-capplet.c:462
+#, c-format
+msgid ""
+"Couldn't find the file '%s'.\n"
+"\n"
+"Please make sure it exists and try again, or choose a different background "
+"picture."
+msgstr ""
+"æ‰¾ä¸åˆ°æ–‡ä»¶â€œ%sâ€ã€‚\n"
+"\n"
+"è¯·ç¡®å®šè¯¥æ–‡ä»¶å­˜åœ¨åé‡è¯•ï¼Œæˆ–é€‰æ‹©å¦ä¸€èƒŒæ™¯å›¾ç‰‡ã€‚"
+
+#: capplets/background/background-properties-capplet.c:487
+#, c-format
+msgid ""
+"I don't know how to open the file '%s'.\n"
+"Perhaps its a kind of picture that is not yet supported.\n"
+"\n"
+"Please select a different picture instead."
+msgstr ""
+"ä¸çŸ¥é“æ€æ ·æ‰“å¼€æ–‡ä»¶â€œ%sâ€ã€‚\n"
+"å¯èƒ½æ˜¯æœªæ”¯æŒçš„å›¾ç‰‡ç±»å‹ã€‚\n"
+"\n"
+"è¯·é€‰æ‹©å…¶ä»–å›¾ç‰‡ã€‚"
+
+#: capplets/background/background-properties-capplet.c:794
 #: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:575
-#: capplets/keyboard/gnome-keyboard-properties.c:319
-#: capplets/mouse/gnome-mouse-properties.c:493
-#: capplets/sound/sound-properties-capplet.c:139
+#: capplets/default-applications/gnome-default-applications-properties.c:615
+#: capplets/keyboard/gnome-keyboard-properties.c:279
+#: capplets/mouse/gnome-mouse-properties.c:494
+#: capplets/sound/sound-properties-capplet.c:143
 #, fuzzy
 msgid "Retrieve and store legacy settings"
-msgstr "È¡µÃ²¢±£´æÔ­ÓĞµÄÉèÖÃ"
+msgstr "å–å¾—å¹¶ä¿å­˜åŸæœ‰çš„è®¾ç½®"
 
-#: capplets/background/background-properties-capplet.c:315
-msgid "Background properties"
-msgstr "×ÀÃæÊôĞÔ"
+#: capplets/background/background-properties-capplet.c:830
+msgid "Background Properties"
+msgstr "èƒŒæ™¯å±æ€§"
 
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
-msgstr "Ó¦ÓÃÉèÖÃ²¢ÍË³ö"
+msgstr "åº”ç”¨è®¾ç½®å¹¶é€€å‡º"
 
 #: capplets/common/gconf-property-editor.c:144
+#, fuzzy
 msgid "Key"
-msgstr ""
+msgstr "é”®"
 
 #: capplets/common/gconf-property-editor.c:145
 msgid "GConf key to which this property editor is attached"
@@ -51,11 +77,11 @@ msgstr ""
 
 #: capplets/common/gconf-property-editor.c:151
 msgid "Callback"
-msgstr ""
+msgstr "å›è°ƒ"
 
 #: capplets/common/gconf-property-editor.c:152
 msgid "Issue this callback when the value associated with key gets changed"
-msgstr ""
+msgstr "å½“å’Œé”®å…³è”çš„å€¼æ”¹å˜æ—¶æ‰§è¡Œè¯¥å›è°ƒ"
 
 #: capplets/common/gconf-property-editor.c:157
 msgid "Change set"
@@ -68,111 +94,110 @@ msgstr ""
 
 #: capplets/common/gconf-property-editor.c:163
 msgid "Conversion to widget callback"
-msgstr ""
+msgstr "è½¬æ¢åˆ°éƒ¨ä»¶æ—¶çš„å›è°ƒ"
 
 #: capplets/common/gconf-property-editor.c:164
 msgid ""
 "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr ""
+"å½“æ•°æ®ä» GConf è½¬æ¢åˆ°éƒ¨ä»¶æ—¶ä½¿ç”¨çš„å›è°ƒ"
 
 #: capplets/common/gconf-property-editor.c:169
 msgid "Conversion from widget callback"
-msgstr ""
+msgstr "ä»éƒ¨ä»¶è½¬æ¢æ—¶çš„å›è°ƒ"
 
 #: capplets/common/gconf-property-editor.c:170
 msgid ""
 "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr ""
+"å½“æ•°æ®ä»éƒ¨ä»¶è½¬æ¢åˆ° GConf æ—¶ä½¿ç”¨çš„å›è°ƒ"
 
 #: capplets/common/gconf-property-editor.c:175
 msgid "UI Control"
-msgstr ""
+msgstr "ç”¨æˆ·ç•Œé¢æ§ä»¶"
 
 #: capplets/common/gconf-property-editor.c:176
 msgid "Object that controls the property (normally a widget)"
-msgstr ""
+msgstr "æ§åˆ¶å±æ€§çš„å¯¹è±¡(é€šå¸¸æ—¶éƒ¨ä»¶)"
 
 #: capplets/default-applications/default-applications.desktop.in.h:1
 msgid "Choose the applications used by default"
-msgstr "Ñ¡ÔñÄ¬ÈÏÔËĞĞµÄÓ¦ÓÃ³ÌĞò"
+msgstr "é€‰æ‹©é»˜è®¤è¿è¡Œçš„åº”ç”¨ç¨‹åº"
 
 #: capplets/default-applications/default-applications.desktop.in.h:2
 msgid "Default Applications"
-msgstr "Ä¬ÈÏÓ¦ÓÃ³ÌĞò"
+msgstr "é»˜è®¤åº”ç”¨ç¨‹åº"
 
 #: capplets/desktop-links/Advanced.directory.in.in.h:1
 msgid "Advanced"
-msgstr ""
+msgstr "é«˜çº§"
 
 #: capplets/desktop-links/Advanced.directory.in.in.h:2
-#, fuzzy
 msgid "Advanced Settings"
-msgstr "Ö÷ÒªÉèÖÃ"
+msgstr "é«˜çº§è®¾ç½®"
 
 #: capplets/desktop-links/cd.desktop.in.in.h:1
-#, fuzzy
 msgid "CD Properties"
-msgstr "%s ÊôĞÔ"
+msgstr "CD å±æ€§"
 
 #: capplets/desktop-links/cd.desktop.in.in.h:2
-#, fuzzy
 msgid "Configure handling of CD devices"
-msgstr "ÅäÖÃÆÁÄ»±£»¤³ÌĞòÉèÖÃ"
+msgstr "é…ç½®CDè®¾å¤‡å¤„ç†"
 
 #: capplets/desktop-links/legacy-applications.desktop.in.in.h:1
 #, fuzzy
 msgid "Legacy Applications"
-msgstr "Ä¬ÈÏÓ¦ÓÃ³ÌĞò"
+msgstr "æ—©æœŸåº”ç”¨ç¨‹åº"
 
 #: capplets/desktop-links/legacy-applications.desktop.in.in.h:2
+#, fuzzy
 msgid "Legacy applications settings (grdb)"
-msgstr ""
+msgstr "æ—©æœŸåº”ç”¨ç¨‹åºè®¾ç½®(grdb)"
 
 #: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
 msgid "Appearance"
-msgstr ""
+msgstr "å¤–è§‚"
 
 #: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:2
 msgid "Configure window appearance"
-msgstr ""
+msgstr "é…ç½®çª—å£å¤–è§‚"
 
 #: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:1
+#, fuzzy
 msgid "Configure key shortcuts"
-msgstr ""
+msgstr "é…ç½®é”®å¿«æ·æ–¹å¼"
 
 #: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:2
-#, fuzzy
 msgid "Shortcuts"
-msgstr "¶Ì"
+msgstr "å¿«æ·æ–¹å¼"
 
 #: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:1
 msgid "Configure window focusing"
-msgstr ""
+msgstr "é…ç½®çª—å£ç„¦ç‚¹è¡Œä¸º"
 
 #: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:2
 msgid "Focus behavior"
-msgstr ""
+msgstr "ç„¦ç‚¹è¡Œä¸º"
 
 #: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
-#, fuzzy
 msgid "Configure window properties"
-msgstr "×ÀÃæÊôĞÔ"
+msgstr "é…ç½®çª—å£å±æ€§"
 
 #: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:2
 msgid "Matched Windows"
-msgstr ""
+msgstr "åŒ¹é…çš„çª—å£"
 
 #: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:1
 msgid "Configure window minimization and maximization"
-msgstr ""
+msgstr "é…ç½®çª—å£æœ€å¤§æœ€å°åŒ–"
 
 #: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:2
 msgid "Minimizing and Maximizing"
-msgstr ""
+msgstr "æœ€å¤§æœ€å°åŒ–"
 
 #: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
 msgid "Configure window manager configuration properties"
-msgstr ""
+msgstr "é…ç½®çª—å£ç®¡ç†å™¨å±æ€§"
 
 #: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:2
 msgid "Meta"
@@ -180,53 +205,52 @@ msgstr ""
 
 #: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
 msgid "Configure miscellaneous window features"
-msgstr ""
+msgstr "é…ç½®å…¶ä»–çª—å£ç‰¹æ€§"
 
 #: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
 msgid "Miscellaneous"
-msgstr ""
+msgstr "æ‚é¡¹"
 
 #: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:1
 msgid "Configure window move/resize"
-msgstr ""
+msgstr "é…ç½®çª—å£ç§»åŠ¨å’Œå¤§å°æ”¹å˜"
 
 #: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:2
 msgid "Moving and Resizing"
-msgstr ""
+msgstr "ç§»åŠ¨å’Œæ”¹å˜å¤§å°"
 
 #: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:1
 msgid "Configure window placement"
-msgstr ""
+msgstr "é…ç½®çª—å£ä½ç½®"
 
 #: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:2
 msgid "Placement"
-msgstr ""
+msgstr "å®šä½"
 
 #: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:1
-#, fuzzy
 msgid "Control Center Menu"
-msgstr "GNOME ¿ØÖÆÖĞĞÄ"
+msgstr "æ§åˆ¶ä¸­å¿ƒèœå•"
 
 #: capplets/desktop-links/Sawfish/Sawfish.directory.in.in.h:2
 msgid "Sawfish window manager"
-msgstr ""
+msgstr "Sawfish çª—å£ç®¡ç†å™¨"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
 msgid "Enable window manager sound events"
-msgstr ""
+msgstr "å¯ç”¨çª—å£ç®¡ç†å™¨çš„å£°éŸ³äº‹ä»¶"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
 #: capplets/sound/sound.desktop.in.h:2
 msgid "Sound"
-msgstr "ÒôĞ§"
+msgstr "éŸ³æ•ˆ"
 
 #: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:1
 msgid "Configure workspaces"
-msgstr ""
+msgstr "é…ç½®å·¥ä½œåŒº"
 
 #: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:2
 msgid "Workspaces"
-msgstr ""
+msgstr "å·¥ä½œåŒº"
 
 #: capplets/desktop-links/session.desktop.in.in.h:1
 msgid "Configure which non-session aware programs are started up"
@@ -234,7 +258,7 @@ msgstr ""
 
 #: capplets/desktop-links/session.desktop.in.in.h:2
 msgid "Startup Programs"
-msgstr ""
+msgstr "å¯åŠ¨ç¨‹åº"
 
 #.
 #. * Translatable strings file
@@ -243,130 +267,129 @@ msgstr ""
 #.
 #: capplets/file-types/category-names.h:7
 msgid "Documents"
-msgstr ""
+msgstr "æ–‡æ¡£"
 
 #: capplets/file-types/category-names.h:8
 msgid "Word Processor"
-msgstr ""
+msgstr "å­—å¤„ç†å™¨"
 
 #: capplets/file-types/category-names.h:9
 msgid "Published Materials"
-msgstr ""
+msgstr "å‡ºç‰ˆææ–™"
 
 #: capplets/file-types/category-names.h:10
 msgid "Spreadsheet"
-msgstr ""
+msgstr "ç”µå­è¡¨æ ¼"
 
 #: capplets/file-types/category-names.h:11
 msgid "Presentation"
-msgstr ""
+msgstr "æ¼”ç¤ºæ–‡ç¨¿"
 
 #: capplets/file-types/category-names.h:12
 msgid "Diagram"
-msgstr ""
+msgstr "å›¾è¡¨"
 
 #: capplets/file-types/category-names.h:13
 msgid "TeX"
-msgstr ""
+msgstr "TeX"
 
 #: capplets/file-types/category-names.h:14
 msgid "Vector Graphics"
-msgstr ""
+msgstr "çŸ¢é‡å›¾å½¢"
 
 #: capplets/file-types/category-names.h:15
+#, fuzzy
 msgid "World Wide Web"
-msgstr ""
+msgstr "World Wide Web"
 
 #: capplets/file-types/category-names.h:16
-#, fuzzy
 msgid "Plain Text"
-msgstr "GL ĞÇÇò"
+msgstr "çº¯æ–‡æœ¬"
 
 #: capplets/file-types/category-names.h:17
 msgid "Extended Markup Language (XML)"
-msgstr ""
+msgstr "æ‰©å±•æ ‡è®°è¯­è¨€ (XML)"
 
 #: capplets/file-types/category-names.h:18
-#, fuzzy
 msgid "Information"
-msgstr "ÅäÖÃ"
+msgstr "ä¿¡æ¯"
 
 #: capplets/file-types/category-names.h:19
 msgid "Financial"
-msgstr ""
+msgstr "ç†è´¢"
 
 #: capplets/file-types/category-names.h:20
 msgid "Calendar"
-msgstr ""
+msgstr "æ—¥å†"
 
 #: capplets/file-types/category-names.h:21
 msgid "Contacts"
-msgstr ""
+msgstr "è”ç³»äºº"
 
 #: capplets/file-types/category-names.h:22
 msgid "Packages"
-msgstr ""
+msgstr "è½¯ä»¶åŒ…"
 
 #: capplets/file-types/category-names.h:23
 msgid "Software Development"
-msgstr ""
+msgstr "è½¯ä»¶å¼€å‘"
 
 #: capplets/file-types/category-names.h:24
 msgid "Source Code"
-msgstr ""
+msgstr "æºç "
 
 #: capplets/file-types/category-names.h:25
 msgid "Audio"
-msgstr ""
+msgstr "éŸ³é¢‘"
 
 #: capplets/file-types/category-names.h:26
 msgid "Images"
-msgstr ""
+msgstr "å›¾åƒ"
 
 #: capplets/file-types/category-names.h:27
-#, fuzzy
 msgid "Video"
-msgstr "¿í"
+msgstr "è§†é¢‘"
 
 #: capplets/file-types/file-types-capplet.c:212
 msgid "Description"
-msgstr "ÃèÊö"
+msgstr "æè¿°"
 
 #: capplets/file-types/file-types-capplet.c:219
+#, fuzzy
 msgid "Extensions"
-msgstr ""
+msgstr "æ‰©å±•å"
 
 #: capplets/file-types/file-types.desktop.in.h:1
+#, fuzzy
 msgid "File Types and Programs"
-msgstr ""
+msgstr "æ–‡ä»¶ç±»å‹å’Œç›¸å…³ç¨‹åº"
 
 #: capplets/file-types/file-types.desktop.in.h:2
 msgid "Specify which programs are used to open or view each file type"
-msgstr ""
+msgstr "æŒ‡å®šç”¨äºæ‰“å¼€æˆ–æŸ¥çœ‹æ¯ä¸€ç§æ–‡ä»¶ç±»å‹çš„ç¨‹åº"
 
 #: capplets/file-types/mime-category-edit-dialog.c:137
 msgid "Edit file category"
-msgstr ""
+msgstr "ç¼–è¾‘æ–‡ä»¶ç±»å‹"
 
 #: capplets/file-types/mime-category-edit-dialog.c:171
 #: capplets/file-types/mime-edit-dialog.c:204
 #: capplets/file-types/service-edit-dialog.c:166
 #: capplets/file-types/service-edit-dialog.c:167
-#, fuzzy
 msgid "Model"
-msgstr "¶à"
+msgstr ""
 
 #: capplets/file-types/mime-category-edit-dialog.c:172
 msgid "GtkTreeModel that contains the category data"
-msgstr ""
+msgstr "åŒ…å«ç±»åˆ«æ•°æ®çš„ GtkTreeModel"
 
 #: capplets/file-types/mime-category-edit-dialog.c:177
 msgid "MIME category info"
-msgstr ""
+msgstr "MIME ç±»åˆ«ä¿¡æ¯"
 
 #: capplets/file-types/mime-category-edit-dialog.c:178
 msgid "Structure containing information on the MIME category"
-msgstr ""
+msgstr "åŒ…å« MIME ç±»åˆ«ä¿¡æ¯çš„ç»“æ„"
 
 #: capplets/file-types/mime-category-edit-dialog.c:343
 #: capplets/file-types/mime-edit-dialog.c:392
@@ -374,15 +397,16 @@ msgstr ""
 #: capplets/file-types/service-edit-dialog.c:351
 #: capplets/file-types/service-edit-dialog.c:397
 msgid "Custom"
-msgstr "×Ô¶¨Òå"
+msgstr "è‡ªå®šä¹‰"
 
 #: capplets/file-types/mime-edit-dialog.c:164
+#, fuzzy
 msgid "Extension"
-msgstr ""
+msgstr "æ‰©å±•"
 
 #: capplets/file-types/mime-edit-dialog.c:167
 msgid "Edit file type"
-msgstr ""
+msgstr "ç¼–è¾‘æ–‡ä»¶ç±»å‹"
 
 #: capplets/file-types/mime-edit-dialog.c:205
 msgid "Underlying model to notify when Ok is clicked"
@@ -390,43 +414,43 @@ msgstr ""
 
 #: capplets/file-types/mime-edit-dialog.c:212
 msgid "MIME type information"
-msgstr ""
+msgstr "MIME ç±»å‹ä¿¡æ¯"
 
 #: capplets/file-types/mime-edit-dialog.c:213
 msgid "Structure with data on the MIME type"
-msgstr ""
+msgstr "å«æœ‰æœ‰å…³ MIME ç±»å‹æ•°æ®çš„ç»“æ„"
 
 #: capplets/file-types/mime-edit-dialog.c:219
 msgid "Is add dialog"
-msgstr ""
+msgstr "æ˜¯æ·»åŠ å¯¹è¯æ¡†"
 
 #: capplets/file-types/mime-edit-dialog.c:220
 msgid "True if this dialog is for adding a MIME type"
-msgstr ""
+msgstr "å¦‚æœæ­¤å¯¹è¯æ¡†ç”¨äºæ·»åŠ ä¸€ä¸ª MIME ç±»å‹åˆ™ä¸ºçœŸ"
 
 #: capplets/file-types/mime-edit-dialog.c:387
 #: capplets/file-types/mime-edit-dialog.c:442
-#, fuzzy
 msgid "None"
-msgstr "³¤"
+msgstr "æ— "
 
 #: capplets/file-types/mime-edit-dialog.c:673
 msgid ""
 "Invalid MIME type. Please enter a valid MIME type, or leave the field blank "
 "to have one generated for you."
 msgstr ""
+"æ— æ•ˆçš„ MIME ç±»å‹ã€‚è¯·è¾“å…¥æœ‰æ•ˆçš„ MIME ç±»å‹ï¼Œæˆ–è®©è¯¥å­—æ®µä¸ºç©ºä»¥ä¸ºæ‚¨è‡ªåŠ¨ç”Ÿæˆä¸€ä¸ªã€‚"
 
 #: capplets/file-types/mime-edit-dialog.c:684
 msgid "There already exists a MIME type of that name."
-msgstr ""
+msgstr "å·²å­˜åœ¨åŒåçš„ MIME ç±»å‹ã€‚"
 
 #: capplets/file-types/mime-edit-dialog.c:748
 msgid "Category"
-msgstr ""
+msgstr "ç±»åˆ«"
 
 #: capplets/file-types/mime-edit-dialog.c:753
 msgid "Choose a file category"
-msgstr ""
+msgstr "é€‰æ‹©æ–‡ä»¶ç±»åˆ«"
 
 #: capplets/file-types/mime-types-model.c:167
 #: capplets/file-types/mime-types-model.c:168
@@ -434,121 +458,107 @@ msgid "Model for categories only"
 msgstr ""
 
 #: capplets/file-types/mime-types-model.c:420
-#, fuzzy
 msgid "Internet Services"
-msgstr "¸ÉÉæ"
+msgstr "Internet æœåŠ¡"
 
 #: capplets/file-types/service-edit-dialog.c:133
 msgid "Edit service information"
-msgstr ""
+msgstr "ç¼–è¾‘æœåŠ¡ä¿¡æ¯"
 
 #: capplets/file-types/service-edit-dialog.c:174
 msgid "Service info"
-msgstr ""
+msgstr "æœåŠ¡ä¿¡æ¯"
 
 #: capplets/file-types/service-edit-dialog.c:175
 msgid "Structure containing service information"
-msgstr ""
+msgstr "åŒ…å«æœåŠ¡ä¿¡æ¯çš„ç»“æ„"
 
 #: capplets/file-types/service-edit-dialog.c:181
 msgid "Is add"
-msgstr ""
+msgstr "æ˜¯æ·»åŠ "
 
 #: capplets/file-types/service-edit-dialog.c:182
 msgid "TRUE if this is an add service dialog"
-msgstr ""
+msgstr "å¦‚æœæ­¤å¯¹è¯æ¡†ç”¨äºæ·»åŠ æœåŠ¡åˆ™ä¸ºçœŸ"
 
 #: capplets/file-types/service-edit-dialog.c:489
-#, fuzzy
 msgid "Please enter a protocol name."
-msgstr "ÇëÔÚÏÂÃæÊäÈëÃüÁîĞĞ¡£"
+msgstr "è¯·è¾“å…¥åè®®åã€‚"
 
 #: capplets/file-types/service-edit-dialog.c:502
 msgid ""
 "Invalid protocol name. Please enter a protocol name without any spaces or "
 "punctuation."
-msgstr ""
+msgstr "æ— æ•ˆçš„åè®®åã€‚è¯·è¾“å…¥ä¸åŒ…å«ä»»ä½•ç©ºæ ¼å’Œæ ‡ç‚¹çš„åè®®åã€‚"
 
 #: capplets/file-types/service-edit-dialog.c:515
 msgid "There is already a protocol by that name."
-msgstr ""
+msgstr "å·²å­˜åœ¨åŒåçš„åè®®ã€‚"
 
 #: capplets/file-types/service-info.c:44
 msgid "Unknown service types"
-msgstr ""
+msgstr "æœªçŸ¥æœåŠ¡ç±»å‹"
 
 #: capplets/file-types/service-info.c:45
 msgid "World wide web"
-msgstr ""
+msgstr "World wide web"
 
 #: capplets/file-types/service-info.c:46
 msgid "File transfer protocol"
-msgstr ""
+msgstr "æ–‡ä»¶ä¼ è¾“åè®®"
 
 #: capplets/file-types/service-info.c:47
-#, fuzzy
 msgid "Detailed documentation"
-msgstr "Ä¬ÈÏÎ»ÖÃ"
+msgstr "è¯¦ç»†æ–‡æ¡£"
 
 #: capplets/file-types/service-info.c:48
 msgid "Manual pages"
-msgstr ""
+msgstr "ç”¨æˆ·æ‰‹å†Œé¡µ"
 
 #: capplets/file-types/service-info.c:49
 msgid "Electronic mail transmission"
-msgstr ""
+msgstr "ç”µå­é‚®ä»¶ä¼ è¾“"
 
-#: capplets/font/font-properties.desktop.in.h:1
-#, fuzzy
-msgid "Font"
-msgstr "É­ÁÖ"
-
-#: capplets/font/font-properties.desktop.in.h:2
-msgid "Select which font to use"
-msgstr ""
-
-#: capplets/keyboard/gnome-keyboard-properties.c:315
-#: capplets/keyboard/gnome-keyboard-properties.c:317
-#: capplets/sound/sound-properties-capplet.c:135
-#: capplets/sound/sound-properties-capplet.c:137
+#: capplets/keyboard/gnome-keyboard-properties.c:275
+#: capplets/keyboard/gnome-keyboard-properties.c:277
+#: capplets/sound/sound-properties-capplet.c:139
+#: capplets/sound/sound-properties-capplet.c:141
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
-msgstr ""
+msgstr "åº”ç”¨è®¾ç½®å¹¶é€€å‡º (ä»…ä¸ºå…¼å®¹ï¼Œç°åœ¨å·²ç”±å®ˆæŠ¤è¿›ç¨‹å¤„ç†)"
 
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
-msgstr "¼üÅÌ"
+msgstr "é”®ç›˜"
 
 #: capplets/keyboard/keyboard.desktop.in.h:2
 msgid "Keyboard Properties"
-msgstr "¼üÅÌÊôĞÔ"
+msgstr "é”®ç›˜å±æ€§"
 
-#: capplets/mouse/gnome-mouse-properties.c:518
+#: capplets/mouse/gnome-mouse-properties.c:519
 #: capplets/mouse/mouse.desktop.in.h:2
 msgid "Mouse Properties"
-msgstr "Êó±êÊôĞÔ"
+msgstr "é¼ æ ‡å±æ€§"
 
 #: capplets/mouse/mouse.desktop.in.h:1
 msgid "Mouse"
-msgstr "Êó±ê"
+msgstr "é¼ æ ‡"
 
 #: capplets/screensaver/screensaver.desktop.in.h:1
-#, fuzzy
 msgid "Configure the settings of the screensaver"
-msgstr "´ËÆÁÄ»±£»¤³ÌĞòÃ»ÓĞ¿ÉÉèÖÃµÄÑ¡Ïî¡£"
+msgstr "é…ç½®æ­¤å±å¹•ä¿æŠ¤ç¨‹åº"
 
 #: capplets/screensaver/screensaver.desktop.in.h:2
 msgid "Screensaver"
-msgstr "ÆÁÄ»±£»¤³ÌĞò"
+msgstr "å±å¹•ä¿æŠ¤ç¨‹åº"
 
 #: capplets/sound/sound.desktop.in.h:1
 msgid "Configure GNOME's use of sound"
-msgstr "ÅäÖÃ GNOME ËùÓÃµÄÒôĞ§"
+msgstr "é…ç½® GNOME æ‰€ç”¨çš„éŸ³æ•ˆ"
 
-#: capplets/sound/sound-properties-capplet.c:167
-#, fuzzy
+#: capplets/sound/sound-properties-capplet.c:171
 msgid "Sound properties"
-msgstr "×ÀÃæÊôĞÔ"
+msgstr "éŸ³é¢‘å±æ€§"
 
 #. just 8 short names that will serve as samples for titles in demo
 #: capplets/theme-switcher/control/control.c:19
@@ -572,143 +582,142 @@ msgid "Meenie"
 msgstr ""
 
 #: capplets/theme-switcher/control/control.c:20
-#, fuzzy
 msgid "Moe"
-msgstr "Êó±ê"
+msgstr ""
 
 #: capplets/theme-switcher/control/control.c:20
-#, fuzzy
 msgid "Tiger"
-msgstr "Èı½ÇĞÎ"
+msgstr ""
 
 #: capplets/theme-switcher/control/control.c:20
-#, fuzzy
 msgid "Toe"
-msgstr "¶ş"
+msgstr ""
 
 #: capplets/theme-switcher/control/control.c:38
 msgid "Selected themes from above will be tested by previewing here."
-msgstr ""
+msgstr "åœ¨ä¸Šæ–¹é€‰ä¸­çš„ä¸»é¢˜å°†åœ¨è¿™é‡Œæµ‹è¯•å’Œé¢„è§ˆã€‚"
 
 #. column one
 #: capplets/theme-switcher/control/control.c:43
 msgid "Sample Button"
-msgstr ""
+msgstr "ç¤ºä¾‹æŒ‰é’®"
 
 #: capplets/theme-switcher/control/control.c:47
+#, fuzzy
 msgid "Sample Check Button"
-msgstr ""
+msgstr "ç¤ºä¾‹å¤é€‰æŒ‰é’®"
 
 #: capplets/theme-switcher/control/control.c:53
 msgid "Sample Text Entry Field"
-msgstr ""
+msgstr "ç¤ºä¾‹æ–‡æœ¬è¾“å…¥æ¡†"
 
 #: capplets/theme-switcher/control/control.c:64
 msgid "Submenu"
-msgstr ""
+msgstr "å­èœå•"
 
 #: capplets/theme-switcher/control/control.c:69
 msgid "Item 1"
-msgstr ""
+msgstr "é¡¹ç›® 1"
 
 #: capplets/theme-switcher/control/control.c:71
 msgid "Another item"
-msgstr ""
+msgstr "å¦ä¸€ä¸ªé¡¹ç›®"
 
 #: capplets/theme-switcher/control/control.c:75
 msgid "Radio Button 1"
-msgstr ""
+msgstr "å•é€‰æŒ‰é’® 1"
 
 #: capplets/theme-switcher/control/control.c:81
 msgid "Radio Button 2"
-msgstr ""
+msgstr "å•é€‰æŒ‰é’® 2"
 
 #: capplets/theme-switcher/control/control.c:102
 msgid "One"
-msgstr ""
+msgstr "ä¸€"
 
 #: capplets/theme-switcher/control/control.c:108
 msgid "Two"
-msgstr "¶ş"
+msgstr "äºŒ"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
 msgid "Gtk+ Theme Selector"
-msgstr ""
+msgstr "Gtk+ ä¸»é¢˜é€‰æ‹©"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
 msgid "Select which gtk+ theme to use"
-msgstr ""
+msgstr "é€‰æ‹©è¦ä½¿ç”¨çš„ gtk+ ä¸»é¢˜"
 
-#: capplets/theme-switcher/main.c:217
-#, fuzzy
+#: capplets/theme-switcher/main.c:213
 msgid "Select a theme to install"
-msgstr "Ñ¡ÔñÒ»¸öÖÕ¶Ë"
+msgstr "é€‰æ‹©è¦å®‰è£…çš„ä¸»é¢˜"
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Sets the default behavior of GNOME applications"
-msgstr ""
+msgstr "è®¾ç½® GNOME åº”ç”¨ç¨‹åºçš„é»˜è®¤è¡Œä¸º"
 
 #: capplets/ui-properties/behavior.desktop.in.h:2
 msgid "Toolbars & Menus"
-msgstr ""
+msgstr "å·¥å…·æ¡å’Œèœå•"
 
 #: control-center/capplet-dir-view.c:146
 msgid "Layout"
-msgstr ""
+msgstr "å¸ƒå±€"
 
 #: control-center/capplet-dir-view.c:147
+#, fuzzy
 msgid "Layout to use for this view of the capplets"
-msgstr ""
+msgstr "è¯¥è®¾ç½®å·¥å…·è§†å›¾ä½¿ç”¨çš„å¸ƒå±€"
 
 #: control-center/capplet-dir-view.c:153
 msgid "Capplet directory object"
-msgstr ""
+msgstr "è®¾ç½®å·¥å…·ç›®å½•å¯¹è±¡"
 
 #: control-center/capplet-dir-view.c:154
+#, fuzzy
 msgid "Capplet directory that this view is viewing"
-msgstr ""
+msgstr "è¯¥è§†å›¾æ­£åœ¨æŸ¥çœ‹çš„è®¾ç½®å·¥å…·æ‰€åœ¨ç›®å½•"
 
 #: control-center/capplet-dir-view.c:308 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
-msgstr "GNOME ¿ØÖÆÖĞĞÄ"
+msgstr "GNOME æ§åˆ¶ä¸­å¿ƒ"
 
 #: control-center/capplet-dir-view.c:311
 msgid "Desktop properties manager."
-msgstr "×ÀÃæÊôĞÔ¹ÜÀíÆ÷¡£"
+msgstr "æ¡Œé¢å±æ€§ç®¡ç†å™¨ã€‚"
 
 #: control-center/capplet-dir-view.c:445
 #, c-format
 msgid "Gnome Control Center : %s"
-msgstr "Gnome ¿ØÖÆÖĞĞÄ£º%s"
+msgstr "Gnome æ§åˆ¶ä¸­å¿ƒï¼š%s"
 
 #: control-center/capplet-dir-view.c:488
 msgid ""
 "No help is available/installed. Please make sure you\n"
 "have the GNOME User's Guide installed on your system."
 msgstr ""
-"ÎŞ¿ÉÓÃ°ïÖú»òÎ´°²×°°ïÖú¡£ÇëÈ·¶¨Äú\n"
-"ÒÑÔÚÏµÍ³ÖĞ°²×° GNOME ÓÃ»§Ö¸ÄÏ¡£"
+"æ— å¯ç”¨å¸®åŠ©æˆ–æœªå®‰è£…å¸®åŠ©ã€‚è¯·ç¡®å®šæ‚¨\n"
+"å·²åœ¨ç³»ç»Ÿä¸­å®‰è£… GNOME ç”¨æˆ·æŒ‡å—ã€‚"
 
 #: control-center/capplet-dir-view.c:491
 msgid "Close"
-msgstr "¹Ø±Õ"
+msgstr "å…³é—­"
 
 #: control-center/capplet-dir-view-list.c:325
-#, fuzzy, c-format
+#, c-format
 msgid "GNOME Control Center: %s"
-msgstr "GNOME ¿ØÖÆÖĞĞÄ£º"
+msgstr "GNOME æ§åˆ¶ä¸­å¿ƒï¼š%s"
 
 #: control-center/gnomecc.desktop.in.h:2
 msgid "The GNOME configuration tool"
-msgstr "GNOME ÅäÖÃ¹¤¾ß"
+msgstr "GNOME é…ç½®å·¥å…·"
 
 #: control-center/main.c:44
 msgid "Use shell even if nautilus is running."
-msgstr ""
+msgstr "å³ä½¿ nautilus æ­£åœ¨è¿è¡Œä»ä½¿ç”¨ shellã€‚"
 
 #: libbackground/applier.c:239
 msgid "Type"
-msgstr ""
+msgstr "ç±»å‹"
 
 #: libbackground/applier.c:240
 msgid ""
@@ -716,1169 +725,11 @@ msgid ""
 "for preview"
 msgstr ""
 
-#: libbackground/applier.c:399
+#: libbackground/applier.c:402
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
-msgstr ""
+msgstr "æ— æ³•åŠ è½½ pixbuf \"%s\"; ç¦ç”¨å¢™çº¸ã€‚"
 
-#: libbackground/applier.c:522
+#: libbackground/applier.c:475
 msgid "Disabled"
-msgstr ""
-
-#: libsounds/sound-view.c:99
-msgid "The sound file for this event does not exist."
-msgstr ""
-
-#: libsounds/sound-view.c:101
-msgid ""
-"The sound file for this event does not exist.\n"
-"You may want to install the gnome-audio package\n"
-"for a set of default sounds."
-msgstr ""
-
-#: libsounds/sound-view.c:154
-msgid "Event"
-msgstr ""
-
-#: libsounds/sound-view.c:154
-msgid "File to Play"
-msgstr ""
-
-#: libsounds/sound-view.c:187
-#, fuzzy
-msgid "Play"
-msgstr "Âö³å"
-
-#: libsounds/sound-view.c:193
-#, fuzzy
-msgid "Select sound file"
-msgstr "Ñ¡ÔñÒ»¸ö²é¿´Æ÷"
-
-#~ msgid "Main"
-#~ msgstr "Ö÷Òª"
-
-#~ msgid "Main Settings"
-#~ msgstr "Ö÷ÒªÉèÖÃ"
-
-#, fuzzy
-#~ msgid "Global panel properties"
-#~ msgstr "È«¾Ö¹éµµÑ¡Ïî"
-
-#, fuzzy
-#~ msgid "Panel"
-#~ msgstr "GL ĞÇÇò"
-
-#~ msgid "Default location"
-#~ msgstr "Ä¬ÈÏÎ»ÖÃ"
-
-#~ msgid "Store XML data in the archive"
-#~ msgstr "ÔÚ¹éµµÎÄ¼şÖĞ±£´æ XML Êı¾İ"
-
-#~ msgid "Roll back the configuration to a given point"
-#~ msgstr "½«ÅäÖÃ×´Ì¬»Ø¹öµ½Ö¸¶¨µã"
-
-#, fuzzy
-#~ msgid "Change the location profile to the given one"
-#~ msgstr "ĞÂ½¨Î»ÖÃµÄ¸¸Î»ÖÃ"
-
-#~ msgid "Push configuration data out to client machines (UNIMPLEMENTED)"
-#~ msgstr "½«ÅäÖÃÊı¾İÍÆÏò¿Í»§»ú(Î´ÊµÏÖ)"
-
-#~ msgid "Rename a location to a new name"
-#~ msgstr "½«Î»ÖÃÖØÃüÃû"
-
-#~ msgid "Add a new location to the archive"
-#~ msgstr "ÔÚ¹éµµÎÄ¼şÌí¼ÓĞÂÎ»ÖÃ"
-
-#~ msgid "Remove a location from the archive"
-#~ msgstr "ÔÚ¹éµµÎÄ¼şÉ¾³ıÒ»¸öÎ»ÖÃ"
-
-#~ msgid "Add a given backend to the given location"
-#~ msgstr "Ìí¼ÓÖ¸¶¨ºó¶Ëµ½Ö¸¶¨Î»ÖÃ"
-
-#~ msgid "Remove the given backend from the given location"
-#~ msgstr "´ÓÖ¸¶¨Î»ÖÃÖĞÉ¾³ıÖ¸¶¨ºó¶Ë"
-
-#~ msgid "Perform garbage collection on the given location"
-#~ msgstr "ÔÚÖ¸¶¨Î»ÖÃÖ´ĞĞÀ¬»øÊÕ¼¯"
-
-#~ msgid "Use the global repository"
-#~ msgstr "Ê¹ÓÃÈ«¾Ö²Ö¿â"
-
-#, fuzzy
-#~ msgid "LOCATION"
-#~ msgstr "LOCATION"
-
-#~ msgid "Backend being used for this operation"
-#~ msgstr "´Ë²Ù×÷Ê¹ÓÃµÄºó¶Ë"
-
-#~ msgid "BACKEND_ID"
-#~ msgstr "BACKEND_ID"
-
-#, fuzzy
-#~ msgid "Store only the differences with the parent location's config"
-#~ msgstr "Ö»±£´æÓë¸¸Î»ÖÃÅäÖÃµÄ²îÒì"
-
-#~ msgid "Store only those settings set in the previous config"
-#~ msgstr "Ö»±£´æÔÚÇ°Ò»ÅäÖÃÖĞÉèÖÃµÄÖµ"
-
-#~ msgid "Date to which to roll back"
-#~ msgstr "»Ø¹öµ½ÈÕÆÚ"
-
-#~ msgid "DATE"
-#~ msgstr "ÈÕÆÚ"
-
-#~ msgid "Roll back all configuration items"
-#~ msgstr "»Ø¹öÈ«²¿ÅäÖÃÏî"
-
-#~ msgid "Roll back to the revision REVISION_ID"
-#~ msgstr "»Ø¹öµ½°æ±¾ REVISION_ID"
-
-#~ msgid "REVISION_ID"
-#~ msgstr "REVISION_ID"
-
-#~ msgid "Roll back to the last known revision"
-#~ msgstr "»Ø¹öµ½ÒÑÖª×î½üµÄĞŞ¶©°æ±¾"
-
-#~ msgid "Roll back by STEPS revisions"
-#~ msgstr "»Ø¹ö STEPS °æ±¾"
-
-#, fuzzy
-#~ msgid "STEPS"
-#~ msgstr "STEPS"
-
-#~ msgid "Don't run the backend, just dump the output"
-#~ msgstr "²»ÔËĞĞºó¶Ë£¬Ö±½ÓdumpÊä³ö"
-
-#~ msgid "Parent location for the new location"
-#~ msgstr "ĞÂ½¨Î»ÖÃµÄ¸¸Î»ÖÃ"
-
-#, fuzzy
-#~ msgid "PARENT"
-#~ msgstr "PARENT"
-
-#, fuzzy
-#~ msgid "New name to assign to the location"
-#~ msgstr "ĞÂ½¨Î»ÖÃµÄ¸¸Î»ÖÃ"
-
-#~ msgid "NEW_NAME"
-#~ msgstr "NEW_NAME"
-
-#~ msgid "Add/remove this backend to/from the master backend list"
-#~ msgstr "´ÓÖ÷ºó¶ËÁĞ±íÖĞÌí¼Ó/É¾³ı´Ëºó¶Ë"
-
-#~ msgid "Full containment"
-#~ msgstr "È«²¿°üº¬"
-
-#~ msgid "Partial containment"
-#~ msgstr "²¿·Ö°üº¬"
-
-#~ msgid "Archiver commands"
-#~ msgstr "¹éµµÃüÁî"
-
-#~ msgid "Options for storing data"
-#~ msgstr "±£´æÊı¾İÑ¡Ïî"
-
-#~ msgid "Options for rolling back"
-#~ msgstr "»Ø¹öÑ¡Ïî"
-
-#~ msgid "Options for adding or renaming locations"
-#~ msgstr "Ìí¼Ó/ÖØÃüÃûÎ»ÖÃÑ¡Ïî"
-
-#~ msgid "Options for adding and removing backends"
-#~ msgstr "Ìí¼Ó/É¾³ıºó¶ËÑ¡Ïî"
-
-#~ msgid "Gnome Default Editor"
-#~ msgstr "Gnome Ä¬ÈÏ±à¼­Æ÷"
-
-#~ msgid "Select an Editor"
-#~ msgstr "Ñ¡ÔñÒ»¸ö±à¼­Æ÷"
-
-#~ msgid "With this option, you can select a predefined Editor as your default"
-#~ msgstr "Ê¹ÓÃ´ËÑ¡Ïî£¬Äú¿ÉÒÔÑ¡ÔñÒ»¸öÔ¤¶¨ÒåµÄ±à¼­Æ÷×÷ÎªÄ¬ÈÏ±à¼­Æ÷"
-
-#~ msgid "Custom Editor"
-#~ msgstr "×Ô¶¨Òå±à¼­Æ÷"
-
-#~ msgid "With this option you can create your own default editor"
-#~ msgstr "Ê¹ÓÃ´ËÑ¡Ïî£¬Äú¿ÉÒÔ´´½¨Äú×Ô¼ºµÄÄ¬ÈÏ±à¼­Æ÷"
-
-#~ msgid "Start in Terminal"
-#~ msgstr "ÔÚÖÕ¶ËÖĞÔËĞĞ"
-
-#~ msgid "Does this editor need to start in an xterm?"
-#~ msgstr "´Ë±à¼­Æ÷ĞèÒª´Ó xterm ÖĞÔËĞĞÂğ£¿"
-
-#~ msgid "Accepts Line Number"
-#~ msgstr "½ÓÊÜĞĞºÅ"
-
-#~ msgid "Does this editor accept line numbers from the command line?"
-#~ msgstr "´Ë±à¼­Æ÷ÔÊĞí´ÓÃüÁîĞĞÊäÈëÒª¶¨Î»µÄĞĞºÅÂğ£¿"
-
-#~ msgid "Command:"
-#~ msgstr "ÃüÁî:"
-
-#~ msgid "Please enter the command line used to start this editor"
-#~ msgstr "ÇëÊäÈëÓÃÓÚÔËĞĞ´Ë±à¼­Æ÷µÄÃüÁîĞĞ"
-
-#~ msgid "Text Editor"
-#~ msgstr "ÎÄ±¾±à¼­Æ÷"
-
-#~ msgid "Gnome Default Web Browser"
-#~ msgstr "Gnome Ä¬ÈÏ Web ä¯ÀÀÆ÷"
-
-#~ msgid "Select a Web Browser"
-#~ msgstr "Ñ¡ÔñÒ»¸ö Web ä¯ÀÀÆ÷"
-
-#~ msgid ""
-#~ "With this option, you can select a predefined Web Browser as your default"
-#~ msgstr "Ê¹ÓÃ´ËÑ¡Ïî£¬Äú¿ÉÒÔÑ¡ÔñÒ»¸öÔ¤¶¨ÒåµÄ Web ä¯ÀÀÆ÷×÷ÎªÄ¬ÈÏä¯ÀÀÆ÷"
-
-#~ msgid "Custom Web Browser"
-#~ msgstr "×Ô¶¨Òå Web ä¯ÀÀÆ÷"
-
-#~ msgid "With this option you can create your own default web browser"
-#~ msgstr "Ê¹ÓÃ´ËÑ¡Ïî£¬Äú¿ÉÒÔ´´½¨Äú×Ô¼ºµÄÄ¬ÈÏ Web ä¯ÀÀÆ÷"
-
-#~ msgid "Does this web browser need to display in an xterm?"
-#~ msgstr "´Ë Web ä¯ÀÀÆ÷ĞèÒªÔÚÒ»¸ö xterm ÖĞÏÔÊ¾Âğ£¿"
-
-#~ msgid "Understands Netscape Remote Control"
-#~ msgstr "Ê¶±ğ Netscape Ô¶³Ì¿ØÖÆ"
-
-#~ msgid ""
-#~ "Does this web browser support the netscape remote control protocol?  If "
-#~ "in doubt, and this web browser isn't Netscape or Mozilla, it probably "
-#~ "doesn't."
-#~ msgstr ""
-#~ "´Ë web ä¯ÀÀÆ÷Ö§³Ö Netscape Ô¶³Ì¿ØÖÆĞ­ÒéÂğ£¿Èç¹û²»Çå³ş£¬¶ø´Ë web ä¯ÀÀÆ÷ÓÖ²»"
-#~ "ÊÇ Netscape »ò Mozilla£¬ËüºÜ¿ÉÄÜ²»Ö§³Ö¸ÃĞ­Òé¡£"
-
-#~ msgid "Please enter the command line used to start this web browser"
-#~ msgstr "ÇëÊäÈëÓÃÓÚÔËĞĞ´Ë web ä¯ÀÀÆ÷µÄÃüÁîĞĞ"
-
-#~ msgid "Web Browser"
-#~ msgstr "Web ä¯ÀÀÆ÷"
-
-#~ msgid "Default Help Viewer"
-#~ msgstr "Ä¬ÈÏ°ïÖú²é¿´Æ÷"
-
-#~ msgid "Select a Viewer"
-#~ msgstr "Ñ¡ÔñÒ»¸ö²é¿´Æ÷"
-
-#~ msgid "With this option you can select a predefined help viewer."
-#~ msgstr "Ê¹ÓÃ´ËÑ¡Ïî£¬Äú¿ÉÒÔÑ¡ÔñÒ»¸öÔ¤¶¨ÒåµÄ°ïÖú²é¿´Æ÷¡£"
-
-#~ msgid "Custom Help Viewer"
-#~ msgstr "×Ô¶¨Òå°ïÖú²é¿´Æ÷"
-
-#~ msgid "With this option you can create your own help viewer"
-#~ msgstr "Ê¹ÓÃ´ËÑ¡Ïî£¬Äú¿ÉÒÔ´´½¨Äú×Ô¼ºµÄ°ïÖú²é¿´Æ÷"
-
-#~ msgid "Does this help viewer need an xterm for display?"
-#~ msgstr "´Ë°ïÖú²é¿´Æ÷ĞèÒªÔÚÒ»¸ö xterm ÖĞÏÔÊ¾Âğ£¿"
-
-#~ msgid "Accepts URLs"
-#~ msgstr "½ÓÊÜ URL"
-
-#~ msgid "Does this help viewer allow URLs for help?"
-#~ msgstr "´Ë°ïÖú²é¿´Æ÷ÔÊĞí URL Âğ?"
-
-#~ msgid "Please enter the command line used to start this help viewer"
-#~ msgstr "ÇëÊäÈëÓÃÓÚÔËĞĞ´Ë°ïÖú²é¿´Æ÷µÄÃüÁîĞĞ"
-
-#~ msgid "Help Viewer"
-#~ msgstr "°ïÖú²é¿´Æ÷"
-
-#~ msgid "Default Terminal"
-#~ msgstr "Ä¬ÈÏÖÕ¶Ë"
-
-#~ msgid "With this option you can select a predefined terminal."
-#~ msgstr "Ê¹ÓÃ´ËÑ¡Ïî£¬Äú¿ÉÒÔÑ¡ÔñÒ»¸öÔ¤¶¨ÒåµÄÖÕ¶Ë¡£"
-
-#~ msgid "Custom Terminal"
-#~ msgstr "×Ô¶¨ÒåÖÕ¶Ë"
-
-#~ msgid "With this option you can create your own terminal"
-#~ msgstr "Ê¹ÓÃ´ËÑ¡Ïî£¬Äú¿ÉÒÔ´´½¨Äú×Ô¼ºµÄÖÕ¶Ë"
-
-#~ msgid "Exec Flag:"
-#~ msgstr "Ö´ĞĞ±êÖ¾£º"
-
-#~ msgid ""
-#~ "Please enter the flag used by this terminal to specify the command to run "
-#~ "on startup.  For example, in 'xterm' this would be '-e'."
-#~ msgstr ""
-#~ "ÇëÊäÈë´ËÖÕ¶ËÒªÔÚÆô¶¯Ê±Ö´ĞĞÒ»¸öÃüÁîËùĞèÒªµÄ±êÖ¾¡£ÀıÈç£¬ÔÚ'xterm' ÖĞ£¬ ´Ë±ê"
-#~ "Ö¾Îª'-e'¡£"
-
-#~ msgid "Please enter the command line used to start this terminal"
-#~ msgstr "ÇëÊäÈëÓÃÓÚÔËĞĞ´ËÖÕ¶ËµÄÃüÁîĞĞ"
-
-#~ msgid "Terminal"
-#~ msgstr "ÖÕ¶Ë"
-
-#~ msgid "Couldn't find pixmap file: %s"
-#~ msgstr "ÎŞ·¨²éÕÒÎ»Í¼ÎÄ¼ş¡°%s¡±"
-
-#~ msgid "Couldn't create pixmap from file: %s"
-#~ msgstr "ÎŞ·¨´ÓÎÄ¼ş¡°%s¡±´´½¨Î»Í¼"
-
-#, fuzzy
-#~ msgid "Rollback the capplet given"
-#~ msgstr "½«ÅäÖÃ×´Ì¬»Ø¹öµ½Ö¸¶¨µã"
-
-#, fuzzy
-#~ msgid "Options for the rollback GUI"
-#~ msgstr "»Ø¹öÑ¡Ïî"
-
-#, fuzzy
-#~ msgid "Current time"
-#~ msgstr "¾ÓÖĞÏÔÊ¾¡£"
-
-#, fuzzy
-#~ msgid "Rollback"
-#~ msgstr "ÑÒÊ¯"
-
-#~ msgid "Custom screensaver. No description available"
-#~ msgstr "×Ô¶¨ÒåÆÁÄ»±£»¤³ÌĞò¡£ÎŞ¿ÉÓÃÃèÊö"
-
-#~ msgid "About %s\n"
-#~ msgstr "¹ØÓÚ %s\n"
-
-#~ msgid "Name:"
-#~ msgstr "Ãû£º"
-
-#~ msgid "Settings"
-#~ msgstr "ÉèÖÃ"
-
-#~ msgid "Demo"
-#~ msgstr "ÑİÊ¾"
-
-#~ msgid ""
-#~ "Cannot find the data to configure this screensaver. Please edit the "
-#~ "command line below."
-#~ msgstr "ÎŞ·¨ÕÒµ½ÅäÖÃ´ËÆÁÄ»±£»¤³ÌĞòĞèÒªµÄÊı¾İ¡£Çë±à¼­ÏÂÃæµÄÃüÁîĞĞ¡£"
-
-#~ msgid "3d clock"
-#~ msgstr "ÈıÎ¬Ê±ÖÓ"
-
-#~ msgid "Fast"
-#~ msgstr "¿ìËÙ"
-
-#~ msgid "High"
-#~ msgstr "¸ß"
-
-#~ msgid "Large"
-#~ msgstr "´ó"
-
-#~ msgid "Low"
-#~ msgstr "µÍ"
-
-#~ msgid "Size:"
-#~ msgstr "´óĞ¡£º"
-
-#~ msgid "Slow"
-#~ msgstr "Âı"
-
-#~ msgid "Small"
-#~ msgstr "Ğ¡"
-
-#~ msgid "Twist speed:"
-#~ msgstr "Å¤×ªËÙ¶È£º"
-
-#~ msgid "Twist:"
-#~ msgstr "Å¤×ª³Ì¶È:"
-
-#~ msgid "Wobble:"
-#~ msgstr "°Ú¶¯£º"
-
-#~ msgid "Ant"
-#~ msgstr "ÂìÒÏ"
-
-#~ msgid "Four Sided cells"
-#~ msgstr "ËÄ±ßĞÎ¸ñ"
-
-#~ msgid "Full Color"
-#~ msgstr "È«É«"
-
-#~ msgid "Many"
-#~ msgstr "ºÜ¶à"
-
-#~ msgid "Monochrome"
-#~ msgstr "µ¥É«"
-
-#~ msgid "Nine Sided cells"
-#~ msgstr "¾Å±ßĞÎ¸ñ"
-
-#~ msgid "Number of colours"
-#~ msgstr "ÑÕÉ«Êı"
-
-#~ msgid "Random"
-#~ msgstr "Ëæ»ú"
-
-#~ msgid "Random size upto"
-#~ msgstr "Ëæ»ú´óĞ¡£¬×î´óÎª"
-
-#~ msgid "Randomize"
-#~ msgstr "Ëæ»ú»¯"
-
-#~ msgid "Sharp turns"
-#~ msgstr "¼±×ªÍä"
-
-#~ msgid "Six Sided cells"
-#~ msgstr "Áù±ßĞÎ¸ñ"
-
-#~ msgid "Specific"
-#~ msgstr "Ö¸¶¨"
-
-#, fuzzy
-#~ msgid "Specific size of"
-#~ msgstr "Ö¸¶¨´óĞ¡"
-
-#~ msgid "Speed"
-#~ msgstr "ËÙ¶È"
-
-#~ msgid "Three Sided cells"
-#~ msgstr "Èı½ÇĞÎ¸ñ"
-
-#~ msgid "Timeout"
-#~ msgstr "³¬Ê±"
-
-#, fuzzy
-#~ msgid "Truchet lines"
-#~ msgstr "Truchet Ïß"
-
-#~ msgid "Twelve Sided cells"
-#~ msgstr "Ê®¶ş±ß¸ñ"
-
-#~ msgid "number of Ants"
-#~ msgstr "ÂìÒÏµÄÊıÄ¿"
-
-#, fuzzy
-#~ msgid ""
-#~ "This is xfishtank writ large: a GL animation of a number of sharks, "
-#~ "dolphins, and whales. The swimming motions are great. Originally written "
-#~ "by Mark Kilgard."
-#~ msgstr ""
-#~ "ÕâÊÇ¸ö´óĞÍµÄ xfishtank£ºÊÇÒ»Ğ©öèÓã¡¢º£ëàºÍ¾¨ÓãµÄ GL ¶¯»­¡£ËüÃÇµÄÓÎ¶¯×ËÌ¬¶¼"
-#~ "ºÜ°ô¡£×î³õÓÉ Mark Kilgard ±àĞ´¡£"
-
-#~ msgid "Attraction (balls)"
-#~ msgstr "Ğ¡Çò¼äµÄÎüÒıÁ¦"
-
-#~ msgid "Balls"
-#~ msgstr "Ğ¡Çò"
-
-#~ msgid "Color Contrast"
-#~ msgstr "ÑÕÉ«¶Ô±È¶È"
-
-#~ msgid "Length of Trail"
-#~ msgstr "¹ì¼£µÄ³¤¶È"
-
-#~ msgid "Lines"
-#~ msgstr "Ïß"
-
-#~ msgid "Long"
-#~ msgstr "³¤"
-
-#~ msgid "Number of Colors"
-#~ msgstr "ÑÕÉ«Êı"
-
-#~ msgid "Polygons"
-#~ msgstr "¶à±ßĞÎ"
-
-#~ msgid "Threshold of repulsion"
-#~ msgstr "ÅÅ³âµÄÁÙ½ç¾àÀë"
-
-#~ msgid "BlitSpin"
-#~ msgstr "BlitSpin"
-
-#~ msgid "Display screensaver in monochrome."
-#~ msgstr "µ¥É«ÏÔÊ¾ÆÁÄ»±£»¤³ÌĞò¡£"
-
-#~ msgid "Faster"
-#~ msgstr "¿ì"
-
-#~ msgid "Slower"
-#~ msgstr "Âı"
-
-#~ msgid "Speed of rotation."
-#~ msgstr "Ğı×ªËÙ¶È¡£"
-
-#~ msgid "Speed of the 90 degree rotation."
-#~ msgstr "90¶ÈĞı×ªµÄËÙ¶È¡£"
-
-#~ msgid "Colors:"
-#~ msgstr "ÑÕÉ«£º"
-
-#~ msgid "Number of Colors."
-#~ msgstr "ÑÕÉ«Êı¡£"
-
-#~ msgid "Number of bubbles to use."
-#~ msgstr "Ê¹ÓÃµÄÅİÄ­Êı¡£"
-
-#~ msgid "Speed of Motion."
-#~ msgstr "ÔË¶¯ËÙ¶È¡£"
-
-#, fuzzy
-#~ msgid "Use red/blue 3d seperation."
-#~ msgstr "Ê¹ÓÃºì/À¶ÈıÎ¬¼ä¸ô"
-
-#, fuzzy
-#~ msgid ""
-#~ "Draws random color-cycling inter-braided concentric circles. Written by "
-#~ "John Neil."
-#~ msgstr "»æÖÆËæ»úµÄÑÕÉ«Ğı×ª±ä»¯¶øÇÒ½»Ö¯ÔÚÒ»ÆğµÄÍ¬ĞÄÔ²¡£ÓÉ John Neil ±àĞ´¡£"
-
-#, fuzzy
-#~ msgid ""
-#~ "BSOD stands for ``Blue Screen of Death.'' The finest in personal computer "
-#~ "emulation, this hack simulates popular screen savers from a number of "
-#~ "less robust operating systems. Written by Jamie Zawinski."
-#~ msgstr ""
-#~ "BSOD ´ú±í ¡°Blue Screen of Death¡±(À¶ÆÁËÀ»ú×´Ì¬)¡£´Ë±£»¤³ÌĞòÊÇ×öµÃ×îºÃµÄ·ÂÕæ"
-#~ "³ÌĞòÖ®Ò»£¬»á·ÂÕæÒ»Ğ©½Ï²»ÎÈ¶¨µÄ²Ù×÷ÏµÍ³µÄËÀ»ú»­Ãæ¡£ÓÉ Jamie Zawinski ±àĞ´¡£"
-
-#~ msgid "Bubble3D"
-#~ msgstr "ÈıÎ¬ÅİÄ­"
-
-#, fuzzy
-#~ msgid ""
-#~ "Draws a stream of rising, undulating 3D bubbles, rising toward the top of "
-#~ "the screen, with nice specular reflections. Written by Richard Jones."
-#~ msgstr ""
-#~ "»æÖÆÒ»´®¸¡Éı¡¢²¨¶¯µÄÈıÎ¬ÅİÄ­, ÏòÆÁÄ»¶¥¶Ë¸¡¶¯£¬»¹´øÓĞÆ¯ÁÁµÄ·´Éä¹âÔó¡£ÓÉ "
-#~ "Richard Jones ±àĞ´¡£"
-
-#~ msgid "Bubbles"
-#~ msgstr "ÅİÄ­"
-
-#~ msgid "Bubbles exist in three dimensions."
-#~ msgstr "ÅİÄ­´æÔÚÓÚÈıÎ¬¿Õ¼ä¡£"
-
-#~ msgid "Don't hide bubbles when they pop."
-#~ msgstr "ÅİÄ­±¬ÆÆÊ±²»ÒªÒş²Ø¡£"
-
-#~ msgid "Draw circles instead of pixmap bubbles."
-#~ msgstr "ÓÃÔ²È¦´úÌæÅİÄ­Î»Í¼¡£"
-
-#, fuzzy
-#~ msgid ""
-#~ "This simulates the kind of bubble formation that happens when water boils:"
-#~ "small bubbles appear, and as they get closer to each other, they combine "
-#~ "to form larger bubbles, which eventually pop. Written by James Macnicol."
-#~ msgstr ""
-#~ "´ËÆÁÄ»±£»¤³ÌĞòÄ£Äâ·ĞË®ÖĞÅİÄ­ĞÎ³ÉµÄÇé¿ö£º×î³õÊÇĞ¡ÅİÄ­³öÏÖ£¬µ±ËüÃÇ¿¿½üÊ±¾Í»á"
-#~ "ºÏ²¢³É´óÅİÄ­£¬×îºó»á±¬ÆÆ¡£ÓÉ James Macnicol ±àĞ´¡£"
-
-#, fuzzy
-#~ msgid ""
-#~ "This draws Escher's ``Impossible Cage,'' a 3d analog of a moebius strip, "
-#~ "and rotates it in three dimensions. Written by Marcelo Vianna."
-#~ msgstr ""
-#~ "´ËÆÁÄ»±£»¤³ÌĞò»æÖÆ Escher µÄ ¡°Impossible Cage¡±£¬Ò»¸öÄ«±ÈÎÚË¹´øµÄÈıÎ¬·ÂÕæ£¬"
-#~ "ÔÚÈıÎ¬¿Õ¼äÖĞĞı×ª¡£ÓÉ Marcelo Vianna ±àÖÆ¡£"
-
-#, fuzzy
-#~ msgid ""
-#~ "Generates self-similar linear fractals, including the classic ``C "
-#~ "Curve.'' Written by Rick Campbell."
-#~ msgstr "Éú³É×ÔÏàËÆµÄÏßĞÔ·ÖĞÎ£¬°üÀ¨¾­µäµÄ¡°C Curve¡±¡£ÓÉ Rick Campbell ±àÖÆ¡£"
-
-#~ msgid "Compass"
-#~ msgstr "Ö¸ÄÏÕë"
-
-#~ msgid "Don't use double bufferinge"
-#~ msgstr "²»Ê¹ÓÃË«ÖØ»º³åÇø"
-
-#, fuzzy
-#~ msgid ""
-#~ "This draws a compass, with all elements spinning about randomly, for that "
-#~ "``lost and nauseous'' feeling. Written by Jamie Zawinski."
-#~ msgstr ""
-#~ "´ËÆÁÄ»±£»¤³ÌĞò»æÖÆÒ»¸öÖ¸ÄÏÕë£¬ËüËùÓĞµÄÖ¸Õë¶¼ÔÚËæ»ú×ª¶¯£¬ÒÔ´ïµ½¡°ÃÔÊ§·½ÏòÍ·"
-#~ "ÔÎÄ¿Ñ£¡±µÄ¸Ğ¾õ¡£ÓÉ Jamie Zawinski ±àÖÆ¡£"
-
-#~ msgid "Use double buffering"
-#~ msgstr "Ê¹ÓÃË«ÖØ»º³åÇø"
-
-#~ msgid "Coral"
-#~ msgstr "Éºº÷"
-
-#~ msgid "Denser"
-#~ msgstr "ÃÜ¶È"
-
-#~ msgid "Density"
-#~ msgstr "ÃÜ¶È"
-
-#, fuzzy
-#~ msgid "Number of seeds"
-#~ msgstr "µãÊıÄ¿"
-
-#, fuzzy
-#~ msgid "Seeds"
-#~ msgstr "µã"
-
-#, fuzzy
-#~ msgid ""
-#~ "Simulates coral growth, albeit somewhat slowly. This image doesn't really "
-#~ "do it justice. Written by Frederick Roeber."
-#~ msgstr ""
-#~ "Ä£ÄâÉºº÷Éú³¤£¬ËäÈ»ÓĞµãÂı¡£Õâ¸öÍ¼Ïñ²¢²»ÄÜÍêÈ«·´Ó³ÕæÊµÇé¿ö¡£ÓÉ Frederick "
-#~ "Roeber ±àÖÆ¡£"
-
-#~ msgid "Critical"
-#~ msgstr "ÑÏÖØ"
-
-#~ msgid "Cell"
-#~ msgstr "¸ñ×Ó"
-
-#, fuzzy
-#~ msgid "Center image."
-#~ msgstr "¾ÓÖĞÏÔÊ¾¡£"
-
-#~ msgid "Crystal"
-#~ msgstr "Ë®¾§"
-
-#, fuzzy
-#~ msgid "Have at maximum size"
-#~ msgstr "ÓĞ×î´ó³ß´ç"
-
-#~ msgid "Number of polygons to use."
-#~ msgstr "Ê¹ÓÃµÄ¶à±ßĞÎÊıÄ¿¡£"
-
-#, fuzzy
-#~ msgid ""
-#~ "A hack similar to `greynetic', but less frenetic. The first "
-#~ "implementation was by Stephen Linhart; then Ozymandias G. Desiderata "
-#~ "wrote a Java applet clone. That clone was discovered by Jamie Zawinski, "
-#~ "and ported to C for inclusion here."
-#~ msgstr ""
-#~ "ÀàËÆ `greynetic'£¬µ«Ã»ÄÇÃ´·è¿ñ¡£×î³õÓÉ Stephen Linhart ÊµÏÖ£»ºóÀ´ "
-#~ "Ozymandias G. Desiderata ±àĞ´ÁË Java applet ¿ËÂ¡°æ¡£Jamie Zawinski ·¢ÏÖ´Ë"
-#~ "°æ±¾£¬²¢½«ËüÒÆÖ²µ½ C ÓïÑÔ£¬ÒÔ±ã°üº¬µ½ÆÁ±£³ÌĞòÖĞ¡£"
-
-#~ msgid "Less"
-#~ msgstr "ÉÙ"
-
-#~ msgid "Number of iterations."
-#~ msgstr "µü´ú´ÎÊı¡£"
-
-#~ msgid "DecayScreen"
-#~ msgstr "ÈÛ»¯µÄÆÁÄ»"
-
-#~ msgid "Time between redraws:"
-#~ msgstr "ÖØĞÂ»æÖÆÊ±ÑÓÊ±£º"
-
-#~ msgid "Use color when drawing."
-#~ msgstr "»æÍ¼Ê±Ê¹ÓÃÑÕÉ«¡£"
-
-#~ msgid "Number to use."
-#~ msgstr "Ê¹ÓÃµÄÊıÄ¿¡£"
-
-#~ msgid "Distort"
-#~ msgstr "·Å´ó¾µ"
-
-#, fuzzy
-#~ msgid ""
-#~ "This hack grabs an image of the screen, and then lets a transparent lens "
-#~ "wander around the screen, magnifying whatever is underneath. Written by "
-#~ "Jonas Munsin."
-#~ msgstr ""
-#~ "´Ë³ÌĞò»áß¢È¡ÆÁÄ»Í¼Ïñ£¬È»ºóÈÃÒ»¸ö·Å´ó¾µÔÚÆÁÄ»ÉÏËÄ´¦ÒÆ¶¯£¬·Å´óÈÎºÎÔÚÏÂÃæµÄ²¿"
-#~ "·İ¡£ÓÉ Jonas Munsin ±àĞ´¡£"
-
-#~ msgid "Number of pixels to use."
-#~ msgstr "Ê¹ÓÃµÄÏñËØÊı¡£"
-
-#~ msgid "Seconds"
-#~ msgstr "Ãë"
-
-#, fuzzy
-#~ msgid "Time finished product is shown."
-#~ msgstr "Íê³É»­ÃæµÄÏÔÊ¾Ê±¼ä¡£"
-
-#~ msgid "Number"
-#~ msgstr "Êı×Ö"
-
-#~ msgid "Speed of Motion"
-#~ msgstr "ÒÆ¶¯ËÙ¶È"
-
-#~ msgid "Bitmap for flag"
-#~ msgstr "ÆìÖÄµÄÎ»Í¼"
-
-#~ msgid "Flag"
-#~ msgstr "ÆìÖÄ"
-
-#~ msgid "Random size up to"
-#~ msgstr "Ëæ»ú´óĞ¡£¬×î´óÎª"
-
-#~ msgid "Text for flag"
-#~ msgstr "ÆìÖÄµÄÎÄ×Ö"
-
-#, fuzzy
-#~ msgid "Another iterative fractal generator. Written by Scott Draves."
-#~ msgstr "ÓÖÒ»¸öµü´ú·ÖĞÎÉú³É³ÌĞò¡£ÓÉ Scott Draves ±àÖÆ¡£"
-
-#~ msgid "Flame"
-#~ msgstr "»ğÑæ"
-
-#~ msgid "Iterations:"
-#~ msgstr "µü´ú´ÎÊı"
-
-#~ msgid "Number of fractals to generate."
-#~ msgstr "Òª²úÉúµÄ·ÖĞÎÊıÄ¿¡£"
-
-#~ msgid "Pixels per fractal."
-#~ msgstr "Ã¿¸ö·ÖĞÎµÄÏñËØÊı¡£"
-
-#~ msgid "Delay between redraws."
-#~ msgstr "ÖØĞÂ»æÖÆÊ±ÑÓÊ±¡£"
-
-#~ msgid "Number of trees to use."
-#~ msgstr "Ê¹ÓÃµÄÊ÷×´Í¼ÊıÄ¿¡£"
-
-#, fuzzy
-#~ msgid ""
-#~ "This draws fractal trees. Written by Peter Baumung. Everybody loves "
-#~ "fractals, right?"
-#~ msgstr ""
-#~ "´ËÆÁÄ»±£»¤³ÌĞò»æÖÆ·ÖĞÎÊ÷¡£ÓÉ Peter Baumung ±àĞ´¡£´ó¼Ò¶¼Ï²»¶·ÖĞÎ£¬¶Ô°É£¿"
-
-#~ msgid "Galaxy"
-#~ msgstr "ĞÇÏµ"
-
-#~ msgid "Gears"
-#~ msgstr "³İÂÖ"
-
-#~ msgid "GLText"
-#~ msgstr "GL ÎÄ×Ö"
-
-#~ msgid "Goban"
-#~ msgstr "Î§Æå"
-
-#, fuzzy
-#~ msgid ""
-#~ "Replays historical games of go (aka wei-chi and baduk) on the screen. By "
-#~ "Scott Draves. You can find it at <http://www.draves.org/goban/>."
-#~ msgstr ""
-#~ "ÔÚÆÁÄ»ÉÏÏÔÊ¾Î§Æå¸´ÅÌ¹ı³Ì¡£ÓÉ Scott Draves ±àÖÆ¡£Äú¿ÉÒÔÔÚ <http://www."
-#~ "draves.org/goban/> ÕÒµ½Ëü¡£"
-
-#~ msgid "Have transparent bubbles."
-#~ msgstr "Ê¹ÓÃÍ¸Ã÷ÅİÄ­¡£"
-
-#~ msgid "Number of planets to use."
-#~ msgstr "Ê¹ÓÃµÄĞĞĞÇÊıÄ¿¡£"
-
-#~ msgid "Objects should leave trails behind them."
-#~ msgstr "ÎïÌåÓ¦ÁôÏÂ¹ì¼£¡£"
-
-#~ msgid "Orbit should decay."
-#~ msgstr "¹ì¼£»áÖğ½¥ÏûÊ§¡£"
-
-#, fuzzy
-#~ msgid ""
-#~ "This draws random colored and stippled rectangles. Written by Jamie "
-#~ "Zawinski."
-#~ msgstr "ÕâÆÁÄ»±£»¤³ÌĞòËæ»ú»æÖÆ²ÊÉ«µã»æ¾ØĞÎ¡£ÓÉ Jamie Zawinski ±àÖÆ¡£"
-
-#~ msgid "Animate circles."
-#~ msgstr "ÔË¶¯Ô²È¦"
-
-#~ msgid "Cycle through colormap."
-#~ msgstr "Ñ­»·Ê¹ÓÃÑÕÉ«¡£"
-
-#~ msgid "Number of circles to use."
-#~ msgstr "Ê¹ÓÃµÄÔ²È¦ÊıÄ¿¡£"
-
-#~ msgid "Helix"
-#~ msgstr "ÂİĞı"
-
-#, fuzzy
-#~ msgid ""
-#~ "This repeatedly generates spirally string-art-ish patterns. Written by "
-#~ "Jamie Zawinski."
-#~ msgstr "ÕâÆÁÄ»±£»¤³ÌĞòËæ»ú»æÖÆ²ÊÉ«µã»æ¾ØĞÎ¡£ÓÉ Jamie Zawinski ±àÖÆ¡£"
-
-#~ msgid "Time between redraws."
-#~ msgstr "ÖØĞÂ»æÖÆÊ±ÑÓÊ±¡£"
-
-#~ msgid "Closer"
-#~ msgstr "½ü"
-
-#~ msgid "Distance from center of cube"
-#~ msgstr "ÖÁÁ¢·½ÌåÖĞĞÄµÄ¾àÀë"
-
-#~ msgid "Farther"
-#~ msgstr "Ô¶"
-
-#~ msgid "Jigsaw"
-#~ msgstr "Æ´Í¼"
-
-#~ msgid "Kaleidescope"
-#~ msgstr "Íò»¨Í²"
-
-#~ msgid "Number of segments."
-#~ msgstr "ËéÆ¬µÄÊıÄ¿¡£"
-
-#~ msgid "Number of trails."
-#~ msgstr "¹ì¼£µÄÊıÄ¿¡£"
-
-#~ msgid "Laser"
-#~ msgstr "¼¤¹â"
-
-#~ msgid "Shorter"
-#~ msgstr "¶Ì"
-
-#~ msgid "Lightning"
-#~ msgstr "ÉÁµç"
-
-#~ msgid "Larger"
-#~ msgstr "´ó"
-
-#~ msgid "Size of object."
-#~ msgstr "ÎïÌåµÄ´óĞ¡¡£"
-
-#~ msgid "Smaller"
-#~ msgstr "Ğ¡"
-
-#~ msgid "Number of points."
-#~ msgstr "µãµÄÊıÄ¿¡£"
-
-#~ msgid "Delay between drawing the maze and starting the solution."
-#~ msgstr "ÃÔ¹¬»æÖÆÍê³ÉºÍ¿ªÊ¼ÕÒ³öÃÔ¹¬³ö¿ÚÖ®¼äµÄÑÓÊ±¡£"
-
-#~ msgid "Delay between each step in the maze."
-#~ msgstr "×ßÃ¿²½ÃÔ¹¬µÄÑÓÊ±¡£"
-
-#~ msgid "Delay between finishing the maze and starting a new one."
-#~ msgstr "ÕÒµ½ÃÔ¹¬³ö¿ÚºÍ¿ªÊ¼»æ»­ĞÂÃÔ¹¬Ö®¼äµÄÑÓÊ±¡£"
-
-#~ msgid "Maze"
-#~ msgstr "ÃÔ¹¬"
-
-#, fuzzy
-#~ msgid ""
-#~ "Another M. C. Escher hack by Marcelo Vianna, this one draws ``Moebius "
-#~ "Strip II,'' a GL image of ants walking along the surface of a moebius "
-#~ "strip."
-#~ msgstr ""
-#~ "ÓÉ Marcelo Vianna ±àÖÆµÄÓÖÒ»¸ö M. C. Escher ³ÌĞò£¬ÕâÒ»¸ö»æÖÆ¡°Ä«±ÈÎÚË¹´ø "
-#~ "II¡±£¬Ò»¸öÔÚÄ«±ÈÎÚË¹´ø±íÃæÅÀĞĞµÄÂìÒÏµÄ GL Í¼Ïñ¡£"
-
-#~ msgid "Moebius"
-#~ msgstr "Ä«±ÈÎÚË¹´ø"
-
-#, fuzzy
-#~ msgid ""
-#~ "Draws several different representations of molecules. Some common "
-#~ "molecules are built in, and it can also read PDB (Protein Data Base) "
-#~ "files as input. Written by Jamie Zawinski."
-#~ msgstr ""
-#~ "»æÖÆ¼¸ÖÖ²»Í¬µÄ·Ö×Ó±íÊ¾·½·¨¡£ÄÚº¬Ò»Ğ©³£¼ûµÄ·Ö×ÓÍ¼Ïñ£¬»¹¿ÉÒÔ´Ó PDB (µ°°×ÖÊÊı"
-#~ "¾İ¿â) ÎÄ¼şÖĞ¶ÁÈ¡ÊäÈë¡£ÓÉ Jamie Zawinski ±àÖÆ¡£"
-
-#~ msgid "Molecule"
-#~ msgstr "·Ö×Ó"
-
-#~ msgid "Morph3D"
-#~ msgstr "ÈıÎ¬±äĞÎ"
-
-#, fuzzy
-#~ msgid ""
-#~ "Generates random 3d plots that look vaguely mountainous. Written by "
-#~ "Pascal Pensa."
-#~ msgstr "Éú³ÉËæ»úµÄÈıÎ¬Í¼ĞÎ£¬¿´ÆğÀ´½üËÆÓÚÉ½Âö¡£  ÓÉ Pascal Pensa ±àÖÆ¡£"
-
-#~ msgid "Mountain"
-#~ msgstr "É½Âö"
-
-#~ msgid "Use XOR drawing function."
-#~ msgstr "Ê¹ÓÃ XOR »æÍ¼¡£"
-
-#~ msgid "Noseguy"
-#~ msgstr "´ó±Ç×ÓÏÈÉú"
-
-#~ msgid "Time to fade away."
-#~ msgstr "ÍÊÉ«µÄÊ±¼ä¡£"
-
-#~ msgid "Time to show each picture."
-#~ msgstr "Ã¿·ùÍ¼ÏÔÊ¾µÄÊ±¼ä¡£"
-
-#, fuzzy
-#~ msgid ""
-#~ "If you've ever been in the same room with a Windows NT machine, you've "
-#~ "probably seen this GL hack. This version is by Marcelo Vianna."
-#~ msgstr ""
-#~ "Èç¹ûÄúÔø¾­ºÍÒ»Ì¨ Windows NT ¼ÆËã»ú´ôÔÚÒ»¸ö·¿¼äÖĞ£¬ÄãºÜ¿ÉÄÜ¼û¹ıÕâ¸ö GL ³Ì"
-#~ "Ğò¡£ÕâÒ»°æ±¾ÓÉ Marcelo Vianna ±àĞ´¡£"
-
-#~ msgid "Pipes"
-#~ msgstr "¹ÜµÀ"
-
-#~ msgid "Pulsar"
-#~ msgstr "Âö³å"
-
-#~ msgid "Frequency of missile launch"
-#~ msgstr "·¢ÉäÅÚµ¯µÄÆµÂÊ"
-
-#~ msgid "Number of particles"
-#~ msgstr "ËéÆ¬µÄÊıÄ¿"
-
-#~ msgid "Particles on screen"
-#~ msgstr "ÆÁÄ»ÉÏµÄËéÆ¬ÊıÄ¿"
-
-#~ msgid "Pyro"
-#~ msgstr "ÑÌ»¨"
-
-#, fuzzy
-#~ msgid ""
-#~ "Pyro draws exploding fireworks. Blah blah blah. Written by Jamie Zawinski."
-#~ msgstr "»æÖÆ±¬Õ¨µÄÑÌ»¨¡£±À¡«¡«Å¾¡£ÓÉ Jamie Zawinski ±àÖÆ¡£"
-
-#~ msgid "Color contrast"
-#~ msgstr "ÑÕÉ«¶Ô±È¶È"
-
-#~ msgid "Length"
-#~ msgstr "³¤¶È"
-
-#~ msgid "Number of points:"
-#~ msgstr "µãÊı£º"
-
-#~ msgid "Number of trails:"
-#~ msgstr "¹ì¼£µÄÊıÄ¿£º"
-
-#~ msgid "Solid Trails"
-#~ msgstr "µ¥É«¹ì¼£"
-
-#~ msgid "Trails attract each other"
-#~ msgstr "¹ì¼£»á»¥ÏàÎüÒı"
-
-#~ msgid "Transparent Trails"
-#~ msgstr "Í¸Ã÷¹ì¼£"
-
-#~ msgid "Width"
-#~ msgstr "¿í¶È"
-
-#~ msgid "XOR Trails"
-#~ msgstr "XOR ¹ì¼£"
-
-#~ msgid "RD-Bomb"
-#~ msgstr "RD-Õ¨µ¯"
-
-#~ msgid "Ripples (oily)"
-#~ msgstr "²¨ÎÆ(ÓÍ)"
-
-#~ msgid "Rocks"
-#~ msgstr "ÑÒÊ¯"
-
-#~ msgid "Delay before next redraw"
-#~ msgstr "ÖØ»æÇ°µÄÑÓÊ±"
-
-#~ msgid "Number of Iterations"
-#~ msgstr "µü´ú´ÎÊı"
-
-#~ msgid "Offset"
-#~ msgstr "Î»ÒÆ"
-
-#~ msgid "Speed to clear the screen"
-#~ msgstr "Çå³ıÆÁÄ»µÄËÙ¶È"
-
-#~ msgid "With X-axis Symmetry"
-#~ msgstr "X Öá¶Ô³Æ"
-
-#~ msgid "With Y-axis Symmetry"
-#~ msgstr "Y Öá¶Ô³Æ"
-
-#~ msgid "RotZoomer"
-#~ msgstr "Ğı×ª·Å´ó"
-
-#~ msgid "SlideScreen"
-#~ msgstr "ÆÁÄ»Æ´Í¼"
-
-#~ msgid "Sonar"
-#~ msgstr "ÉùÄÉ"
-
-#, fuzzy
-#~ msgid ""
-#~ "Draws a spotlight scanning across a black screen, illumnating the "
-#~ "underlying desktop when it passes. Written by Rick Schultz."
-#~ msgstr ""
-#~ "»æÖÆÒ»¸öÔÚºÚÉ«ÆÁÄ»ÉÏÀ´»ØÉ¨ÃèµÄ¾Û¹âµÆ¹âÈ¦£¬ÕÕÁÁËüËù¾­¹ıµÄ×ÀÃæ¡£ÓÉ Rick "
-#~ "Schultz ±àÖÆ¡£"
-
-#~ msgid "Spotlight"
-#~ msgstr "¾Û¹âµÆ"
-
-#~ msgid "SSystem"
-#~ msgstr "Ì«ÑôÏµ"
-
-#~ msgid "Stairs"
-#~ msgstr "Â¥Ìİ"
-
-#~ msgid "Change to display in monochrome."
-#~ msgstr "µ¥É«ÏÔÊ¾¡£"
-
-#~ msgid "Duration of current shape."
-#~ msgstr "µ±Ç°ĞÎ×´µÄ³ÖĞøÊ±¼ä¡£"
-
-#~ msgid "Starfish"
-#~ msgstr "º£ĞÇ"
-
-#~ msgid "StarWars"
-#~ msgstr "ĞÇÇò´óÕ½"
-
-#~ msgid "Strange"
-#~ msgstr "ÆæÒìÎüÒı×Ó"
-
-#~ msgid "Superquadrics"
-#~ msgstr "³¬¶ş´ÎÇúÃæ"
-
-#~ msgid "Swirl"
-#~ msgstr "äöÎĞ"
-
-#~ msgid "Vines"
-#~ msgstr "ÌÙÂû"
-
-#, fuzzy
-#~ msgid ""
-#~ "Draws a colorful random-walk, in various forms. Written by Rick Campbell."
-#~ msgstr "»æÖÆ¸÷ÖÖĞÎ×´µÄ²ÊÉ«¡°Ëæ»úĞĞ×ß¡±Í¼ĞÎ£¬ÓÉ Rick Campbell ±àÖÆ¡£"
-
-#~ msgid "Wander"
-#~ msgstr "Âş²½"
-
-#~ msgid "WebCollage"
-#~ msgstr "Web Æ´Ìù»­"
-
-#~ msgid "Worm"
-#~ msgstr "Èä³æ"
-
-#~ msgid "XaoS"
-#~ msgstr "XaoS"
-
-#~ msgid "XDaliClock"
-#~ msgstr "Êı×ÖÊ±ÖÓ"
-
-#~ msgid "Xearth"
-#~ msgstr "µØÇò"
-
-#~ msgid "Xflame"
-#~ msgstr "»ğÑæ"
-
-#~ msgid "Xmountains"
-#~ msgstr "·ÖĞÎÉ½Âö"
-
-#~ msgid "Xsnow"
-#~ msgstr "ÏÂÑ©"
-
-#~ msgid "XSpiroGraph"
-#~ msgstr "XSpiroGraph"
-
-#~ msgid "XTeeVee"
-#~ msgstr "µçÊÓ¹ÊÕÏ"
-
-#, fuzzy
-#~ msgid ""
-#~ "XTeeVee simulates various television problems, including static, loss of "
-#~ "vertical hold, and a test pattern. By Greg Knauss."
-#~ msgstr ""
-#~ "XTeeVee Ä£Äâ¸÷ÖÖµçÊÓ¹ÊÕÏ£¬°üÀ¨¾²Ö¹»­Ãæ¡¢´¹Ö±²»Í¬²½¡¢²âÊÔÍ¼°¸µÈ¡£×÷Õß£º"
-#~ "Greg Knauss¡£"
-
-#~ msgid "Zoom (Fatbits)"
-#~ msgstr "Ëõ·Å (Fatbits)"
-
-#~ msgid "Add a new screensaver"
-#~ msgstr "Ìí¼ÓÆÁÄ»±£»¤³ÌĞò"
-
-#~ msgid "Select the screensaver to run from the list below:"
-#~ msgstr "ÔÚÏÂÃæµÄÁĞ±íÖĞÑ¡ÔñÒªÔËĞĞµÄÆÁÄ»±£»¤³ÌĞò£º"
-
-#~ msgid "New screensaver"
-#~ msgstr "ĞÂ½¨ÆÁÄ»±£»¤³ÌĞò"
-
-#~ msgid "GNOME Control Center:"
-#~ msgstr "GNOME ¿ØÖÆÖĞĞÄ£º"
-
-#, fuzzy
-#~ msgid "Enable sound server startup"
-#~ msgstr "Æô¶¯Ê±ÔËĞĞÉùÒô·şÎñÆ÷"
-
-#~ msgid "General"
-#~ msgstr "³£¹æ"
-
-#~ msgid "Sound Events"
-#~ msgstr "ÊÂ¼şÒôĞ§"
-
-#~ msgid "Sounds for events"
-#~ msgstr "ÊÂ¼şÒôĞ§"
-
-#~ msgid "Options for the startup hint dialog"
-#~ msgstr "Æô¶¯Ê±ÌáÊ¾¶Ô»°¿òÑ¡Ïî"
-
-#~ msgid "Startup Hint"
-#~ msgstr "Æô¶¯ÌáÊ¾"
-
-#~ msgid "Bell"
-#~ msgstr "ÉùÏì"
-
-#~ msgid "Click volume"
-#~ msgstr "¼üÅÌ»÷¼üÒôÁ¿"
-
-#~ msgid "Delay before repeat:"
-#~ msgstr "ÖØ¸´Ç°ÑÓÊ±£º"
-
-#~ msgid "Duration (ms)"
-#~ msgstr "³ÖĞøÊ±¼ä(ºÁÃë)"
-
-#, fuzzy
-#~ msgid "Enable Keyboard Click"
-#~ msgstr "ÆôÓÃ¼üÅÌµã»÷"
-
-#~ msgid "Enable Keyboard Repeat"
-#~ msgstr "ÆôÓÃ¼üÅÌÖØ¸´"
-
-#~ msgid "Key repeat rate:"
-#~ msgstr "¼üÅÌÖØ¸´ËÙ¶È£º"
-
-#~ msgid "Medium"
-#~ msgstr "ÖĞ"
-
-#~ msgid "Pitch (Hz)"
-#~ msgstr "Òôµ÷(Hz)"
-
-#~ msgid "Test"
-#~ msgstr "²âÊÔ"
-
-#~ msgid "Very fast"
-#~ msgstr "·Ç³£¿ìËÙ"
-
-#~ msgid "Very long"
-#~ msgstr "·Ç³£³¤"
-
-#~ msgid "Volume"
-#~ msgstr "ÒôÁ¿"
-
-#~ msgid "Left handed"
-#~ msgstr "×óÊÖÏ°¹ß"
-
-#~ msgid "Mouse Configuration"
-#~ msgstr "Êó±êÅäÖÃ"
-
-#~ msgid "Mouse speed:"
-#~ msgstr "Êó±êËÙ¶È£º"
-
-#~ msgid "My mouse is:"
-#~ msgstr "ÎÒµÄÊó±êÊÇ£º"
-
-#~ msgid "Right handed"
-#~ msgstr "ÓÒÊÖÏ°¹ß"
-
-#~ msgid "Sensitivity:"
-#~ msgstr "Ãô¸Ğ¶È£º"
-
-#~ msgid "Run the capplet CAPPLET"
-#~ msgstr "ÔËĞĞ capplet CAPPLET"
+msgstr "ç¦ç”¨"
