@@ -233,13 +233,11 @@ make_pixmap (const char *filename)
 	frame = gtk_frame_new (NULL);
 	gtk_widget_set_usize (frame, width, height);
 
-	gtk_widget_push_visual (gdk_rgb_get_visual ());
 	gtk_widget_push_colormap (gdk_rgb_get_cmap ());
 	
 	canvas = gnome_canvas_new_aa ();
 	
 	gtk_widget_pop_colormap ();
-	gtk_widget_pop_visual ();
 
 	gnome_canvas_set_scroll_region (GNOME_CANVAS (canvas), 0, 0, width, height);
 	gnome_canvas_item_new (GNOME_CANVAS_GROUP (GNOME_CANVAS (canvas)->root),
