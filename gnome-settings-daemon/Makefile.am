@@ -6,6 +6,8 @@ gnome2_settings_daemon_SOURCES =	\
 	factory.c			\
 	gnome-settings-daemon.h		\
 	gnome-settings-daemon.c		\
+	gnome-settings-font.h		\
+	gnome-settings-font.c		\
 	gnome-settings-mouse.h		\
 	gnome-settings-mouse.c		\
 	gnome-settings-keyboard.h	\
