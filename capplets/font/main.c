@@ -504,12 +504,16 @@ application_font_to_gconf (GConfPropertyEditor *peditor,
 		if (danger_level > MAX_FONT_POINT_WITHOUT_WARNING) {
 			warning_label = g_strdup_printf ("<span weight=\"bold\" size=\"larger\">%s</span>\n\n%s",
 							 _("Font may be too large"),
-							 _("The font selected is %d points large, and may make it difficult to effectively use the computer.  It is recommended that you select a size smaller than %d."));
+							 ngettext ("The font selected is %d point large, and may make it difficult to effectively use the computer.  It is recommended that you select a size smaller than %d.",
+								   "The font selected is %d points large, and may make it difficult to effectively use the computer.  It is recommended that you select a size smaller than %d.",
+								   danger_level));
 			warning_label2 = g_strdup_printf (warning_label, danger_level, MAX_FONT_POINT_WITHOUT_WARNING);
 		} else {
 			warning_label = g_strdup_printf ("<span weight=\"bold\" size=\"larger\">%s</span>\n\n%s",
 							 _("Font may be too large"),
-							 _("The font selected is %d points large, and may make it difficult to effectively use the computer.  It is recommended that you select a smaller sized font."));
+							 ngettext ("The font selected is %d point large, and may make it difficult to effectively use the computer.  It is recommended that you select a smaller sized font.",
+								   "The font selected is %d points large, and may make it difficult to effectively use the computer.  It is recommended that you select a smaller sized font.",
+								   danger_level));
 			warning_label2 = g_strdup_printf (warning_label, danger_level);
 		}
 		gtk_label_set_markup (GTK_LABEL (WID ("font_size_warning_label")), warning_label2);

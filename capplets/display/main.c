@@ -512,7 +512,7 @@ struct TimeoutData {
 char *
 timeout_string (int time)
 {
-  return g_strdup_printf (_("Testing the new settings. If you don't respond in %d seconds the previous settings will be restored."), time);
+  return g_strdup_printf (ngettext ("Testing the new settings. If you don't respond in %d second the previous settings will be restored.", "Testing the new settings. If you don't respond in %d seconds the previous settings will be restored.", time), time);
 }
 
 gboolean
