@@ -108,7 +108,7 @@
 	<columns>2</columns>
 	<homogeneous>False</homogeneous>
 	<row_spacing>0</row_spacing>
-	<column_spacing>0</column_spacing>
+	<column_spacing>12</column_spacing>
 	<child>
 	  <padding>0</padding>
 	  <expand>False</expand>
@@ -174,13 +174,13 @@
 	</widget>
 
 	<widget>
-	  <class>GtkPixmap</class>
-	  <name>mouse_left_pixmap</name>
-	  <xalign>0.5</xalign>
-	  <yalign>0.5</yalign>
-	  <xpad>0</xpad>
-	  <ypad>0</ypad>
-	  <build_insensitive>True</build_insensitive>
+	  <class>Custom</class>
+	  <name>pixmap_left</name>
+	  <creation_function>mouse_capplet_create_image_widget</creation_function>
+	  <string1>mouse-left.png</string1>
+	  <int1>0</int1>
+	  <int2>0</int2>
+	  <last_modification_time>Fri, 07 Sep 2001 21:24:35 GMT</last_modification_time>
 	  <child>
 	    <left_attach>0</left_attach>
 	    <right_attach>1</right_attach>
@@ -188,7 +188,7 @@
 	    <bottom_attach>1</bottom_attach>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
-	    <xexpand>True</xexpand>
+	    <xexpand>False</xexpand>
 	    <yexpand>False</yexpand>
 	    <xshrink>False</xshrink>
 	    <yshrink>False</yshrink>
@@ -198,13 +198,13 @@
 	</widget>
 
 	<widget>
-	  <class>GtkPixmap</class>
-	  <name>mouse_right_pixmap</name>
-	  <xalign>0.5</xalign>
-	  <yalign>0.5</yalign>
-	  <xpad>0</xpad>
-	  <ypad>0</ypad>
-	  <build_insensitive>True</build_insensitive>
+	  <class>Custom</class>
+	  <name>custom2</name>
+	  <creation_function>mouse_capplet_create_image_widget</creation_function>
+	  <string1>mouse-right.png</string1>
+	  <int1>0</int1>
+	  <int2>0</int2>
+	  <last_modification_time>Fri, 07 Sep 2001 21:39:40 GMT</last_modification_time>
 	  <child>
 	    <left_attach>1</left_attach>
 	    <right_attach>2</right_attach>
@@ -212,7 +212,7 @@
 	    <bottom_attach>1</bottom_attach>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
-	    <xexpand>True</xexpand>
+	    <xexpand>False</xexpand>
 	    <yexpand>False</yexpand>
 	    <xshrink>False</xshrink>
 	    <yshrink>False</yshrink>

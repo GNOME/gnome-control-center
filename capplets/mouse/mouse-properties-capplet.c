@@ -95,7 +95,6 @@ apply_settings (Bonobo_ConfigDatabase db)
  *
  * Load the given pixmap and put it in the given widget. FIXME: Should this be in libcommon?
  */
-
 static void
 set_pixmap_file (GtkWidget *widget, const gchar *filename)
 {
@@ -117,6 +116,87 @@ set_pixmap_file (GtkWidget *widget, const gchar *filename)
 	}
 }
 
+
+static GtkWidget *
+mouse_capplet_create_image_widget_canvas (gchar *filename)
+{
+	GtkWidget *canvas;
+	GdkPixbuf *pixbuf;
+	double width, height;
+	gchar *filename_dup;
+
+	filename_dup = g_strdup (filename);
+	pixbuf = gdk_pixbuf_new_from_file (filename_dup);
+
+	if (!pixbuf) {
+		g_warning ("Pixmap %s not found.", filename_dup);
+		g_free (filename_dup);
+		return NULL;
+	}
+		
+	width  = gdk_pixbuf_get_width  (pixbuf);
+	height = gdk_pixbuf_get_height (pixbuf);
+
+	canvas = gnome_canvas_new_aa();
+	GTK_OBJECT_UNSET_FLAGS (GTK_WIDGET (canvas), GTK_CAN_FOCUS);
+	gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS(canvas)),
+			       gnome_canvas_pixbuf_get_type (),
+			       "pixbuf", pixbuf,
+			       NULL);
+	gtk_widget_set_usize (canvas, width, height);
+
+	gdk_pixbuf_unref (pixbuf);
+	gtk_widget_show (canvas);
+	g_free (filename_dup);
+
+	return canvas;
+}
+
+GtkWidget *
+mouse_capplet_create_image_widget (gchar *name,
+							gchar *string1, gchar *string2,
+							gint int1, gint int2)
+{
+	GtkWidget *canvas, *alignment;
+	gchar *full_path;
+
+	if (!string1)
+		return NULL;
+
+	full_path = g_strdup_printf ("%s/%s", GNOMECC_PIXMAPS_DIR, string1);
+	canvas = mouse_capplet_create_image_widget_canvas (full_path);
+	g_free (full_path);
+	
+	g_return_val_if_fail (canvas != NULL, NULL);
+	
+	alignment = gtk_widget_new (gtk_alignment_get_type(),
+						   "child", canvas,
+						   "xalign", (double) 0,
+						   "yalign", (double) 0,
+						   "xscale", (double) 0,
+						   "yscale", (double) 0,
+						   NULL);
+	
+	gtk_widget_show (alignment);
+
+	return alignment;
+}
+
+
+/**
+ * xst_fool_the_linker:
+ * @void: 
+ * 
+ * We need to keep the symbol for the create image widget function
+ * so that libglade can find it to create the icons.
+ **/
+void capplet_fool_the_linker (void);
+void
+capplet_fool_the_linker (void)
+{
+	mouse_capplet_create_image_widget (NULL, NULL, NULL, 0, 0);
+}
+
 /* create_dialog
  *
  * Create the dialog box and return it as a GtkWidget
@@ -131,9 +211,6 @@ create_dialog (void)
 	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/mouse-properties.glade", "prefs_widget");
 	widget = glade_xml_get_widget (dialog, "prefs_widget");
 	gtk_object_set_data (GTK_OBJECT (widget), "glade-data", dialog);
-
-	set_pixmap_file (WID ("mouse_left_pixmap"), GNOMECC_PIXMAPS_DIR "/mouse-left.png");
-	set_pixmap_file (WID ("mouse_right_pixmap"), GNOMECC_PIXMAPS_DIR "/mouse-right.png");
 
 	gtk_signal_connect_object (GTK_OBJECT (widget), "destroy",
 				   GTK_SIGNAL_FUNC (gtk_object_destroy),
