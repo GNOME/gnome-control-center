@@ -53,16 +53,13 @@ CappletDirView *(*get_view_cb) (CappletDir *dir, CappletDirView *launcher);
 
 /* nice global table for capplet lookup */
 GHashTable *capplet_hash = NULL;
-static GtkIconTheme *icon_theme = NULL;
 
 static GdkPixbuf * 
 find_icon (GnomeDesktopItem *dentry) 
 {
 	GdkPixbuf *res;
 	char const *icon;
-
-	if (icon_theme == NULL)
-		icon_theme = gtk_icon_theme_new ();
+	GtkIconTheme *icon_theme = gtk_icon_theme_get_default ();
 
 	icon = gnome_desktop_item_get_string (dentry, GNOME_DESKTOP_ITEM_ICON);
 
