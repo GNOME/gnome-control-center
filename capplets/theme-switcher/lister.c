@@ -19,8 +19,8 @@ edit_file_to_use(gchar *file, gchar *theme)
     {
       fprintf(fout, "# -- THEME AUTO-WRITTEN DO NOT EDIT\n");
       fprintf(fout, "include \"%s\"\n\n", theme);
-      cp(tmp, file);
       fclose(fout);
+      cp(tmp, file);
       return;
     }
   while (fgets(buf, sizeof(buf), fin))
@@ -58,7 +58,7 @@ edit_file_to_use(gchar *file, gchar *theme)
 }
 
 void 
-set_tmp_rc()
+set_tmp_rc(void)
 {
   gchar s[4096], *home;
   

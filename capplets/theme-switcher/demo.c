@@ -1,13 +1,13 @@
 #include "da.h"
+#include <errno.h>
 
 GtkWidget *plug;
 
-gint pid;
 void
 send_socket()
 {
   gchar buffer[256];
-  
+
   g_snprintf(buffer, sizeof(buffer), "%11x ", 
 	     GDK_WINDOW_XWINDOW (preview_socket->window));
   write(prog_fd, buffer, strlen(buffer));
@@ -17,25 +17,28 @@ void
 send_reread()
 {
   gchar buffer[256];
-  
+
   g_snprintf(buffer, sizeof(buffer), "R ");
   write(prog_fd, buffer, strlen(buffer));
-  fsync(prog_fd);
 }
 
-void
+static void
 demo_data_in(gpointer data, gint source, GdkInputCondition condition)
 {
   gchar buf[256];
   
-  read(0, buf, 2);
-  if (gtk_rc_reparse_all ())
-    gtk_widget_reset_rc_styles(plug);
+  if (read(source, buf, 2) == 0)
+    gtk_main_quit();		/* Parent exited */
+  else {
+    if (gtk_rc_reparse_all ())
+      gtk_widget_reset_rc_styles(plug);
+  }
 }
 
 #define NUM 50
 
-void demo_main(int argc, char **argv)
+static void
+demo_main(int argc, char **argv, gint in_fd)
 {
   gchar buf[256];
   XID window;
@@ -54,7 +57,10 @@ void demo_main(int argc, char **argv)
   gchar *home_dir;
   gint i;
 
-  read(0, buf, 12);
+  if (read(in_fd, buf, 12) <= 0)
+    g_error ("Error reading socket descriptor from parent: %s",
+	     g_strerror (errno));
+  
   buf[12] = 0;
   sscanf(buf, "%x", &window);
 
@@ -149,7 +155,7 @@ void demo_main(int argc, char **argv)
 
   gtk_container_add (GTK_CONTAINER (scrolled_window), widget);
   
-  gdk_input_add_full(0, GDK_INPUT_READ, demo_data_in, NULL, NULL);
+  gdk_input_add_full(in_fd, GDK_INPUT_READ, demo_data_in, NULL, NULL);
   gtk_widget_show_all (plug);
   
   gtk_main ();
@@ -159,15 +165,14 @@ void
 do_demo(int argc, char **argv)
 {
   gint toProg[2];
+  gint pid;
   
   pipe(toProg);
   
   if (!(pid = fork()))
     {
       close(toProg[1]);
-      dup2(toProg[0], 0);   /* Make stdin the in pipe */
-      close(toProg[0]);
-      demo_main(argc, argv);
+      demo_main(argc, argv, toProg[0]);
     }
   else if (pid > 0)
     {

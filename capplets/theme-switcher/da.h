@@ -78,26 +78,24 @@ void
 click_revert(GtkWidget *widget, gpointer data);
 void
 edit_file_to_use(gchar *file, gchar *theme);
+void 
+set_tmp_rc(void);
 void
 use_theme(gchar *theme);
 void
 test_theme(gchar *theme);
 void
 click_update(GtkWidget *widget, gpointer data);
-void
+gchar *
 install_theme(gchar *file);
+void
+do_demo(int argc, char **argv);
+void
+send_socket(void);
+void
+send_reread(void);
 
 
-extern GtkWidget *readme_display;
-extern gchar     *readme_current;
-extern GtkWidget *icon_display;
-extern GtkWidget *icon_current;
-extern GtkWidget *current_theme;
-extern GtkWidget *current_global_theme;
-extern GtkWidget *initial_theme;
-extern GtkWidget *last_theme;
-extern GtkWidget *system_list;
 extern GtkWidget *preview_socket;
-extern GtkWidget *auto_preview;
 extern gint       prog_fd;
 extern gchar      gtkrc_tmp[1024];

@@ -1,3 +1,52 @@
+Fri Mar 12 02:21:55 1999  Owen Taylor  <otaylor@redhat.com>
+
+	* capplets/theme-switcher/gui.c (browse_dialog_close):
+	Add an error dialog if installing a theme fails.
+
+	* capplets/theme-switcher/install.c (install_theme): Add
+	a return value indicating success or failure.
+
+	* capplets/theme-switcher/install.c (install_theme): 
+	Fixed reversed arguments for installing ungipped tarballs
+
+Fri Mar 12 01:12:15 1999  Owen Taylor  <otaylor@redhat.com>
+
+	[ Patch from Patrik Nordebo <isildur@a39.ryd.student.liu.se> ]
+
+	* capplets/theme-switcher/install.c (install_theme): Removed
+	useless call to wait(). Install themes in .themes,
+	not .gtk/themes.
+
+Fri Mar 12 01:06:53 1999  Owen Taylor  <otaylor@redhat.com>
+
+	* capplets/theme-switcher/lister.c (edit_file_to_use): Fixed
+	reversed lines that were causing initial creation
+	not to work properly.
+
+	* capplets/theme-switcher/demo.c (send_reread): You
+	can't fsync() a pipe...
+
+	* capplets/theme-switcher/gui.c: Don't select list
+	items before they are added to the list ... removed
+	hack that sort of worked around this.
+	
+	* capplets/theme-switcher/gui.c (make_main): Major
+	un-rasterization. (Sort of a shame, this was some
+	of the funniest code I've ever seen.)
+
+	* capplets/theme-switcher/gui.c (install_theme_callback):
+	Removed non-functional transient-for code.
+
+	* capplets/theme-switcher/demo.c (demo_data_in): Removed
+	brutal, unreliable kill -9 in favor of noticing when
+	the IPC pipe closes.
+
+	* capplets/theme-switcher/demo.c (demo_main): Solved
+	problem where dup2() was going astray by not using it.
+
+	* capplets/theme-switcher/gui.c (update_theme_entries): Fix
+	cut-and-paste typo.
+
 1999-03-10  Jonathan Blandford  <jrb@redhat.com>
 
 	* capplets/Makefile.am (always_built_SUBDIRS): mime-type capplet.

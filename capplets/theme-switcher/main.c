@@ -1,4 +1,5 @@
 #include <config.h>
+#include "capplet-widget.h"
 #include "da.h"
 
 #define THEME_SWITCHER_VERSION "0.1"
