@@ -1,3 +1,8 @@
+2002-03-07  Lauris Kaplinski  <lauris@ximian.com>
+
+	* gnome-settings-keyboard.c (apply_settings): Use correct GConf keys,
+	click volume is of type float, not int
+
 2002-03-10  Seth Nickell  <snickell@stanford.edu>
 
 	* GNOME_SettingsDaemon.server.in:
@@ -20,6 +25,7 @@
 	register it with bonobo-activation. Still has a main loop that can
 	be run normally to launch the settings daemon.
 	
+>>>>>>> 1.26
 2002-03-06  Miles Lane  <miles@megapathdsl.net>
 
 	* gnome-settings-daemon.c -- Correct the gnome_program_init()

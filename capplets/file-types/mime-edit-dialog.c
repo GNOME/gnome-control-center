@@ -624,6 +624,8 @@ store_data (MimeEditDialog *dialog)
 		if (!mime_type_info_using_custom_app (dialog->p->info)) {
 			gnome_vfs_mime_application_free (dialog->p->info->default_action);
 			dialog->p->info->default_action = g_new0 (GnomeVFSMimeApplication, 1);
+		} else if (!dialog->p->info->default_action) {
+			dialog->p->info->default_action = g_new0 (GnomeVFSMimeApplication, 1);
 		}
 
 		g_free (dialog->p->info->default_action->command);

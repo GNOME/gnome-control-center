@@ -1,3 +1,11 @@
+2002-03-07  Lauris Kaplinski  <lauris@ximian.com>
+
+	* gnome-default-applications-properties.c (generic_guard): Set focus
+	and emit signal here, instead of mnemonic handler
+	(create_dialog): Set data on radio widgets, to be used for focus/entry
+	tracking. Do not connect mnemonic_activate signals, as these are
+	handled by toggles already.
+
 2002-02-27  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* gnome-default-applications-properties.c: s/PACKAGE/GETTEXT_PACKAGE/g

@@ -43,8 +43,9 @@ apply_settings (void)
 	GConfClient *client;
 
 	gboolean repeat, click;
-	int rate, delay, volume;
+	int rate, delay;
 	int bell_volume, bell_pitch, bell_duration;
+	double volume;
 
 #ifdef HAVE_X11_EXTENSIONS_XF86MISC_H
 	XF86MiscKbdSettings kbdsettings;
@@ -54,14 +55,14 @@ apply_settings (void)
 
 	client = gconf_client_get_default ();
 
-	repeat        = gconf_client_get_bool (client, "/gnome/desktop/peripherals/keyboard/repeat",        NULL);
-	click         = gconf_client_get_bool (client, "/gnome/desktop/peripherals/keyboard/click",         NULL);
-	rate          = gconf_client_get_int  (client, "/gnome/desktop/peripherals/keyboard/rate",          NULL);
-	delay         = gconf_client_get_int  (client, "/gnome/desktop/peripherals/keyboard/delay",         NULL);
-	volume        = gconf_client_get_int  (client, "/gnome/desktop/peripherals/keyboard/click_volume",  NULL);
-	bell_volume   = gconf_client_get_int  (client, "/gnome/desktop/peripherals/keyboard/bell_volume",   NULL);
-	bell_pitch    = gconf_client_get_int  (client, "/gnome/desktop/peripherals/keyboard/bell_pitch",    NULL);
-	bell_duration = gconf_client_get_int  (client, "/gnome/desktop/peripherals/keyboard/bell_duration", NULL);
+	repeat        = gconf_client_get_bool  (client, "/desktop/gnome/peripherals/keyboard/repeat",        NULL);
+	click         = gconf_client_get_bool  (client, "/desktop/gnome/peripherals/keyboard/click",         NULL);
+	rate          = gconf_client_get_int   (client, "/desktop/gnome/peripherals/keyboard/rate",          NULL);
+	delay         = gconf_client_get_int   (client, "/desktop/gnome/peripherals/keyboard/delay",         NULL);
+	volume        = gconf_client_get_float (client, "/desktop/gnome/peripherals/keyboard/click_volume",  NULL);
+	bell_volume   = gconf_client_get_int   (client, "/desktop/gnome/peripherals/keyboard/bell_volume",   NULL);
+	bell_pitch    = gconf_client_get_int   (client, "/desktop/gnome/peripherals/keyboard/bell_pitch",    NULL);
+	bell_duration = gconf_client_get_int   (client, "/desktop/gnome/peripherals/keyboard/bell_duration", NULL);
 
         if (repeat) {
 		XAutoRepeatOn (GDK_DISPLAY ());

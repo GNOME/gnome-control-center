@@ -50,9 +50,23 @@ static void
 generic_guard (GtkWidget *toggle,
 	       GtkWidget *widget)
 {
+	GtkWidget *w;
+
 	gtk_widget_set_sensitive (widget, GTK_TOGGLE_BUTTON (toggle)->active);
+
+	if (GTK_TOGGLE_BUTTON (toggle)->active) {
+		w = g_object_get_data (G_OBJECT (toggle), "entry");
+		if (w && GTK_WIDGET_REALIZED (w)) gtk_widget_grab_focus (w);
+		if (w && GTK_IS_ENTRY (w)) {
+			gchar *text;
+			text = g_strdup (gtk_entry_get_text (GTK_ENTRY (w)));
+			gtk_entry_set_text (GTK_ENTRY (w), text);
+			g_free (text);
+		}
+	}
 }
 
+#if 0
 static gboolean
 mnemonic_activate (GtkWidget *toggle,
 		   gboolean   group_cycling,
@@ -69,6 +83,7 @@ mnemonic_activate (GtkWidget *toggle,
 	}
 	return FALSE;
 }
+#endif
 
 static void
 initialize_default_applications (void)
@@ -416,7 +431,6 @@ dialog_response (GtkDialog *widget,
 	};
 }
 
-
 static GladeXML *
 create_dialog (GConfClient *client)
 {
@@ -439,22 +453,31 @@ create_dialog (GConfClient *client)
 		strings = NULL;
 	}
 
+	/* Source of command string */
+	g_object_set_data (G_OBJECT (WID ("text_select_radio")), "entry", WID ("text_select_combo_entry"));
+	/* Source of command string */
+	g_object_set_data (G_OBJECT (WID ("text_custom_radio")), "entry", WID ("text_custom_command_entry"));
 
+#if 0
 	g_signal_connect (G_OBJECT (WID ("text_select_radio")),
 			  "mnemonic_activate", (GCallback) mnemonic_activate,
 			  WID ("text_select_combo_entry"));
+#endif
 	g_signal_connect (G_OBJECT (WID ("text_select_combo_entry")),
 			  "changed", (GCallback) text_setup_custom,
 			  dialog);
 	g_signal_connect (G_OBJECT (WID ("text_select_radio")),
 			  "toggled", (GCallback) generic_guard,
 			  WID ("text_select_combo"));
+#if 0
 	g_signal_connect (G_OBJECT (WID ("text_custom_radio")),
 			  "mnemonic_activate", (GCallback) mnemonic_activate,
 			  WID ("text_custom_command_entry"));
+#endif
 	g_signal_connect (G_OBJECT (WID ("text_custom_radio")),
 			  "toggled", (GCallback) generic_guard,
 			  WID ("text_custom_vbox"));
+
 	read_editor (client, dialog);
 
 	/* Web page */
@@ -468,19 +491,27 @@ create_dialog (GConfClient *client)
 		strings = NULL;
 	}
 
+	/* Source of command string */
+	g_object_set_data (G_OBJECT (WID ("web_select_radio")), "entry", WID ("web_select_combo_entry"));
+	/* Source of command string */
+	g_object_set_data (G_OBJECT (WID ("web_custom_radio")), "entry", WID ("web_custom_command_entry"));
 
+#if 0
 	g_signal_connect (G_OBJECT (WID ("web_select_radio")),
 			  "mnemonic_activate", (GCallback) mnemonic_activate,
 			  WID ("web_select_combo_entry"));
+#endif
 	g_signal_connect (G_OBJECT (WID ("web_select_combo_entry")),
 			  "changed", (GCallback) browser_setup_custom,
 			  dialog);
 	g_signal_connect (G_OBJECT (WID ("web_select_radio")),
 			  "toggled", (GCallback) generic_guard,
 			  WID ("web_select_combo"));
+#if 0
 	g_signal_connect (G_OBJECT (WID ("web_custom_radio")),
 			  "mnemonic_activate", (GCallback) mnemonic_activate,
 			  WID ("web_custom_command_entry"));
+#endif
 	g_signal_connect (G_OBJECT (WID ("web_custom_radio")),
 			  "toggled", (GCallback) generic_guard,
 			  WID ("web_custom_vbox"));
@@ -499,19 +530,27 @@ create_dialog (GConfClient *client)
 		strings = NULL;
 	}
 
+	/* Source of command string */
+	g_object_set_data (G_OBJECT (WID ("help_select_radio")), "entry", WID ("help_select_combo_entry"));
+	/* Source of command string */
+	g_object_set_data (G_OBJECT (WID ("help_custom_radio")), "entry", WID ("help_custom_command_entry"));
 
+#if 0
 	g_signal_connect (G_OBJECT (WID ("help_select_radio")),
 			  "mnemonic_activate", (GCallback) mnemonic_activate,
 			  WID ("help_select_combo_entry"));
+#endif
 	g_signal_connect (G_OBJECT (WID ("help_select_combo_entry")),
 			  "changed", (GCallback) help_setup_custom,
 			  dialog);
 	g_signal_connect (G_OBJECT (WID ("help_select_radio")),
 			  "toggled", (GCallback) generic_guard,
 			  WID ("help_select_combo"));
+#if 0
 	g_signal_connect (G_OBJECT (WID ("help_custom_radio")),
 			  "mnemonic_activate", (GCallback) mnemonic_activate,
 			  WID ("help_custom_command_entry"));
+#endif
 	g_signal_connect (G_OBJECT (WID ("help_custom_radio")),
 			  "toggled", (GCallback) generic_guard,
 			  WID ("help_custom_vbox"));
@@ -530,19 +569,27 @@ create_dialog (GConfClient *client)
 		strings = NULL;
 	}
 
+	/* Source of command string */
+	g_object_set_data (G_OBJECT (WID ("terminal_select_radio")), "entry", WID ("terminal_select_combo_entry"));
+	/* Source of command string */
+	g_object_set_data (G_OBJECT (WID ("terminal_custom_radio")), "entry", WID ("terminal_custom_command_entry"));
 
+#if 0
 	g_signal_connect (G_OBJECT (WID ("terminal_select_radio")),
 			  "mnemonic_activate", (GCallback) mnemonic_activate,
 			  WID ("terminal_select_combo_entry"));
+#endif
 	g_signal_connect (G_OBJECT (WID ("terminal_select_combo_entry")),
 			  "changed", (GCallback) terminal_setup_custom,
 			  dialog);
 	g_signal_connect (G_OBJECT (WID ("terminal_select_radio")),
 			  "toggled", (GCallback) generic_guard,
 			  WID ("terminal_select_combo"));
+#if 0
 	g_signal_connect (G_OBJECT (WID ("terminal_custom_radio")),
 			  "mnemonic_activate", (GCallback) mnemonic_activate,
 			  WID ("terminal_custom_command_entry"));
+#endif
 	g_signal_connect (G_OBJECT (WID ("terminal_custom_radio")),
 			  "toggled", (GCallback) generic_guard,
 			  WID ("terminal_custom_table"));

@@ -1,3 +1,10 @@
+2002-03-08  Lauris Kaplinski  <lauris@ximian.com>
+
+	* mime-type-info.c (mime_type_info_using_custom_app): Return TRUE
+	if default_action does not exist (it is better than crash)
+
+	* mime-edit-dialog.c (store_data): Create default_action if there is none
+
 2002-02-27  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* file-types-applet.c: s/PACKAGE/GETTEXT_PACKAGE/g

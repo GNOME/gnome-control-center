@@ -201,7 +201,7 @@ mime_type_info_using_custom_app (const MimeTypeInfo *info)
 	gchar *tmp;
 	gboolean ret;
 
-	if (info->default_action->name == NULL)
+	if (!info->default_action || !info->default_action->name)
 		return TRUE;
 
 	tmp = g_strdup_printf ("Custom %s", info->mime_type);
