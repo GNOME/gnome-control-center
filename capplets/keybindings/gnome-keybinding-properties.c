@@ -659,6 +659,7 @@ accel_edited_callback (GtkCellRendererText *cell,
                        const char          *path_string,
                        guint                keyval,
                        GdkModifierType      mask,
+		       guint                keycode,
                        gpointer             data)
 {
   GtkTreeView *view = (GtkTreeView *)data;
