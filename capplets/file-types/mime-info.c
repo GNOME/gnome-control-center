@@ -296,6 +296,7 @@ load_mime_type_info_from (char *filename)
 
 	fclose (mime_file);
 }
+
 void
 set_mime_key_value (gchar *mime_type, gchar *key, gchar *value)
 {

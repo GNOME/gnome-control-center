@@ -32,10 +32,8 @@
 #include <dirent.h>
 #include <regex.h>
 #include <ctype.h>
-#include "edit-window.h"
 #include "mime-data.h"
 #include "mime-info.h"
-#include "new-mime-window.h"
 #include <sys/stat.h>
 #include <unistd.h>
 #include <errno.h>
@@ -284,72 +282,26 @@ mime_load_from_dir (const char *mime_info_dir, gboolean system_dir)
 static int
 add_mime_vals_to_clist (gchar *mime_type, gpointer mi, gpointer cl)
 {
-        /* we also finalize the MimeInfo structure here, now that we're done
-         * loading it */
-	static gchar *text[1];        
+	static gchar *text[2];        
+	const char *description;
         gint row;
 
-        /*
-	GList *list;        
-        GString *extension;        
-        extension = g_string_new ("");
-        for (list = ((MimeInfo *) mi)->ext[0];list; list=list->next) {
-                g_string_append (extension, (gchar *) list->data);
-                if (list->next != NULL)
-                        g_string_append (extension, ", ");
-        }
-        
-        if (strcmp (extension->str, "") != 0 && ((MimeInfo *)mi)->user_ext[0]) {
-                g_string_append (extension, ", ");
-	}
-	
-        for (list = ((MimeInfo *) mi)->user_ext[0]; list; list=list->next) {
-                g_string_append (extension, (gchar *) list->data);
-                if (list->next != NULL)
-                        g_string_append (extension, ", ");
-        }
-        
-        ((MimeInfo *) mi)->ext_readable[0] = extension->str;
-        g_string_free (extension, FALSE);
-        
-        extension = g_string_new ("");
-        for (list = ((MimeInfo *) mi)->ext[1];list; list=list->next) {
-                g_string_append (extension, (gchar *) list->data);
-                if (list->next)
-                        g_string_append (extension, ", ");
-        }
-        
-        if (strcmp (extension->str, "") != 0 && ((MimeInfo *)mi)->user_ext[1]) {
-                g_string_append (extension, ", ");
-	}
-	
-        for (list = ((MimeInfo *) mi)->user_ext[1]; list; list=list->next) {
-                g_string_append (extension, (gchar *) list->data);
-                if (list->next != NULL)
-                        g_string_append (extension, ", ");
-        }
-        ((MimeInfo *) mi)->ext_readable[1] = extension->str;
-        g_string_free (extension, FALSE);
+	/* Add mime type to first column */
+	text[0] = ((MimeInfo *) mi)->mime_type;
 
-        if (((MimeInfo *) mi)->ext[0] || ((MimeInfo *) mi)->user_ext[0]) {
-                extension = g_string_new ((((MimeInfo *) mi)->ext_readable[0]));
-                
-                if (((MimeInfo *) mi)->ext[1] || ((MimeInfo *) mi)->user_ext[1]) {
-                        g_string_append (extension, ", ");
-                        g_string_append (extension, (((MimeInfo *) mi)->ext_readable[1]));
-                }
-        } else if (((MimeInfo *) mi)->ext[1] || ((MimeInfo *) mi)->user_ext[1]) {        
-                extension = g_string_new ((((MimeInfo *) mi)->ext_readable[1]));
+	/* Add description to second column */
+	description = gnome_vfs_mime_description (mime_type);	
+	if (description != NULL && strlen (description) > 0) {
+		text[1] = g_strdup (description);
 	} else {
-		extension = g_string_new ("");
+		text[1] = g_strdup ("");
 	}
-	*/
 	
-        text[0] = ((MimeInfo *) mi)->mime_type;
-
         row = gtk_clist_insert (GTK_CLIST (cl), 1, text);
         gtk_clist_set_row_data (GTK_CLIST (cl), row, mi);
-        //g_string_free (extension, TRUE);
+
+	g_free (text[1]);
+	
         return row;
 }
 
@@ -364,7 +316,7 @@ selected_row_callback (GtkWidget *widget, gint row, gint column, GdkEvent *event
         mi = (MimeInfo *) gtk_clist_get_row_data (GTK_CLIST (widget),row);
 
 	/* Update info on selection */
-        nautilus_mime_type_capplet_update_info (mi->mime_type);
+        nautilus_mime_type_capplet_update_info (mi);
         
         if (g_hash_table_lookup (user_mime_types, mi->mime_type)) {
                 gtk_widget_set_sensitive (delete_button, TRUE);

@@ -12,12 +12,8 @@ nautilus_mime_type_capplet_SOURCES =\
 	nautilus-mime-type-capplet-dialogs.c\
 	mime-data.h \
 	mime-data.c \
-	edit-window.c \
-	edit-window.h \
 	mime-info.c \
-	mime-info.h \
-	new-mime-window.h \
-	new-mime-window.c
+	mime-info.h
 
 nautilus_mime_type_capplet_LDADD =\
 			$(CAPPLET_LIBDIR) \

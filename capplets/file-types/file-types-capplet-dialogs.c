@@ -2,8 +2,6 @@
 
 /* nautilus-mime-type-capplet-dialog.c
  *
- * Copyright (C) 1998 Redhat Software Inc. 
- * Copyright (C) 2000  Free Software Foundaton
  * Copyright (C) 2000  Eazel, Inc.
  *
  * This program is free software; you can redistribute it and/or
@@ -27,11 +25,13 @@
 
 #include <config.h>
 
+#include <capplet-widget.h>
 #include <gnome.h>
 #include <gtk/gtk.h>
 #include <libgnomevfs/gnome-vfs-mime-handlers.h>
 #include <libgnomevfs/gnome-vfs-mime-info.h>
 
+#include "nautilus-mime-type-capplet.h"
 #include "nautilus-mime-type-capplet-dialogs.h"
 
 /* gtk_window_set_default_width (and some other functions) use a
@@ -57,10 +57,10 @@ typedef struct {
 /* Global variables */
 static edit_dialog_details *edit_application_details = NULL;
 static edit_dialog_details *edit_component_details = NULL;
-
+extern GtkWidget *capplet;
 
 static void
-edit_application_dialog_destroy (GtkWidget *widget, gpointer data)
+edit_applications_dialog_destroy (GtkWidget *widget, gpointer data)
 {
 	g_free (edit_application_details);
 	edit_application_details = NULL;
@@ -73,88 +73,97 @@ edit_component_dialog_destroy (GtkWidget *widget, gpointer data)
 	edit_component_details = NULL;
 }
 
-static void
-populate_default_applications_list (GtkWidget *list, const char *mime_type)
+static gboolean 
+application_is_in_list (const char *search_id, GList *application_list)
 {
-	GList *app_list, *copy_list;
+	GList *list_element;
 	GnomeVFSMimeApplication *application;
-	gboolean has_none, found_match;
-	char *mime_copy;
-	gchar *component_name[1];
 
-	has_none = TRUE;
-	found_match = FALSE;
-
-	mime_copy = g_strdup (mime_type);
-
-	/* Get the application short list */
-	app_list = gnome_vfs_mime_get_all_applications (mime_type);
-	for (copy_list = app_list; copy_list != NULL; copy_list = copy_list->next) {
-		has_none = FALSE;
-
-		application = copy_list->data;
-		
-		component_name[0] = g_strdup (application->name);
-		gtk_clist_append (GTK_CLIST (list), component_name);
-		g_free (component_name[0]);
+	if (application_list == NULL || search_id == NULL) {
+		return FALSE;
 	}
 
-	if (app_list != NULL) {
-		gnome_vfs_mime_application_list_free (app_list);
-		app_list = NULL;
+	/* Traverse the list looking for a match */
+	for (list_element = application_list; list_element != NULL; list_element = list_element->next) {
+		application = list_element->data;
+
+		if (strcmp (search_id, application->id) == 0) {
+			return TRUE;			
+		}
+	}
+	
+	return FALSE;
+}
+
+
+/*
+ * application_button_toggled_callback
+ *
+ * Check state of button.  Based on state, determine whether to add or remove
+ * application from short list.
+ */
+static void 
+application_button_toggled_callback (GtkToggleButton *button, gpointer user_data) 
+{
+	const char *id;
+	const char *mime_type;
+
+	id = gtk_object_get_data (GTK_OBJECT (button), "application_id");
+	mime_type = gtk_object_get_data (GTK_OBJECT (button), "mime_type");
+
+	if (id == NULL || mime_type == NULL) {
+		return;
 	}
 
-	/* Add a "None" item */
-	if (has_none) {
-			component_name[0] = g_strdup (_("None"));
-			gtk_clist_append (GTK_CLIST (list), component_name);
-			g_free (component_name[0]);
+	if (gtk_toggle_button_get_active (button)) {
+		/* Add to preferred list */
+		gnome_vfs_mime_add_application_to_short_list (mime_type, id);
+
+	} else {
+		/* Remove from preferred list */
+		gnome_vfs_mime_remove_application_from_short_list (mime_type, id);
 	}
 }
 
 static void
-populate_preferred_applications_list (GtkWidget *list, const char *mime_type)
+populate_default_applications_box (GtkWidget *box, const char *mime_type)
 {
-	GList *app_list, *copy_list;
-	GnomeVFSMimeApplication *default_app, *application;
-	gboolean has_none, found_match;
-	char *mime_copy;
-	gchar *app_name[1];
-
-	has_none = TRUE;
-	found_match = FALSE;
-
-	mime_copy = g_strdup (mime_type);
-
-	/* Get the default application */
-	default_app = gnome_vfs_mime_get_default_application (mime_type);
+	GList *short_list, *app_list, *list_element;
+	GnomeVFSMimeApplication *application;
+	GtkWidget *button;
 
 	/* Get the application short list */
-	app_list = gnome_vfs_mime_get_short_list_applications (mime_type);
+	short_list = gnome_vfs_mime_get_short_list_applications (mime_type);
+
+	/* Get the list of all applications */
+	app_list = gnome_vfs_mime_get_all_applications (mime_type);
 	if (app_list != NULL) {
-		for (copy_list = app_list; copy_list != NULL; copy_list = copy_list->next) {
-			has_none = FALSE;
+		for (list_element = app_list; list_element != NULL; list_element = list_element->next) {
+			application = list_element->data;
 
-			application = copy_list->data;
+			/* Create check button */
+			button = gtk_check_button_new_with_label (application->name);
+			gtk_box_pack_start (GTK_BOX (box), button, FALSE, FALSE, 0);
+
+			/* Save ID and mime type*/
+			gtk_object_set_data_full (GTK_OBJECT (button), "application_id", g_strdup (application->id), g_free);
+			gtk_object_set_data_full (GTK_OBJECT (button), "mime_type", g_strdup (mime_type), g_free);
 			
-			/* Store copy of application name in item; free when item destroyed. */
-			//gtk_object_set_data_full (GTK_OBJECT (menu_item),
-			//			  "application",
-			//			  g_strdup (application->name),
-			//			  g_free);
+			/* Check and see if component is in preferred list */
+			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button),
+						      application_is_in_list (application->id, short_list));
 
-			app_name[0] = g_strdup (application->name);
-			gtk_clist_append (GTK_CLIST (list), app_name);
-			g_free (app_name[0]);
+			/* Connect to toggled signal */
+			gtk_signal_connect (GTK_OBJECT (button), "toggled", 
+					    GTK_SIGNAL_FUNC (application_button_toggled_callback), NULL);
 		}
-		gnome_vfs_mime_application_list_free (app_list);
-	}
 
-	/* Add a "None" item */
-	if (has_none && default_app == NULL) {
-			app_name[0] = g_strdup (_("None"));
-			gtk_clist_append (GTK_CLIST (list), app_name);
-			g_free (app_name[0]);
+		gnome_vfs_mime_application_list_free (app_list);
+		
+	}
+	
+	if (short_list != NULL) {
+		gnome_vfs_mime_application_list_free (short_list);
 	}
 }
 
@@ -237,8 +246,6 @@ populate_default_components_box (GtkWidget *box, const char *mime_type)
 			component_name = name_from_oaf_server_info (info);
 			button = gtk_check_button_new_with_label (component_name);
 			gtk_box_pack_start (GTK_BOX (box), button, FALSE, FALSE, 0);
-			gtk_signal_connect (GTK_OBJECT (button), "toggled", 
-					    GTK_SIGNAL_FUNC (component_button_toggled_callback), NULL);
 			
 			/* Save IID and mime type*/
 			gtk_object_set_data_full (GTK_OBJECT (button), "component_iid", g_strdup (info->iid), g_free);
@@ -247,6 +254,10 @@ populate_default_components_box (GtkWidget *box, const char *mime_type)
 			/* Check and see if component is in preferred list */
 			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button),
 						      component_is_in_list (component_name, short_component_list));
+
+			/* Connect to toggled signal */
+			gtk_signal_connect (GTK_OBJECT (button), "toggled", 
+					    GTK_SIGNAL_FUNC (component_button_toggled_callback), NULL);
 
 			g_free (component_name);
 		}
@@ -258,45 +269,6 @@ populate_default_components_box (GtkWidget *box, const char *mime_type)
 	}	
 }
 
-#if 0
-static void
-populate_preferred_components_list (GtkWidget *list, const char *mime_type)
-{
-	GList *component_list, *copy_list;
-	OAF_ServerInfo *info;
-	gboolean has_none, found_match;
-	char *mime_copy;
-	gchar *component_name[1];
-
-	has_none = TRUE;
-	found_match = FALSE;
-
-	mime_copy = g_strdup (mime_type);
-
-	/* Get the component short list */
-	component_list = gnome_vfs_mime_get_short_list_components (mime_type);
-	if (component_list != NULL) {
-		for (copy_list = component_list; copy_list != NULL; copy_list = copy_list->next) {
-			has_none = FALSE;
-
-			info = copy_list->data;
-
-			component_name[0] = name_from_oaf_server_info (info);
-			gtk_clist_append (GTK_CLIST (list), component_name);
-			g_free (component_name[0]);
-		}
-		gnome_vfs_mime_component_list_free (component_list);
-	}
-	
-	/* Add a "None" item */
-	if (has_none) {
-			component_name[0] = g_strdup (_("None"));
-			gtk_clist_append (GTK_CLIST (list), component_name);
-			g_free (component_name[0]);
-	}
-}
-#endif
-
 
 /*
  *  initialize_edit_applications_dialog
@@ -307,71 +279,54 @@ populate_preferred_components_list (GtkWidget *list, const char *mime_type)
 static void
 initialize_edit_applications_dialog (const char *mime_type)
 {
-	GtkWidget *align, *main_vbox, *hbox1, *hbox2;
-	GtkWidget *button_hbox;
-	GtkWidget *button;
-	GtkWidget *fixed;
+	GtkWidget *main_vbox, *vbox;
+	GtkWidget *scroller, *label;
+	char *label_text;
 	
-	gchar *preferred_title[1] = {_("Preferred Applications")};
-	gchar *default_title[1] = {_("Default Applications")};
-
 	edit_application_details = g_new0 (edit_dialog_details, 1);
+
 	edit_application_details->window = gnome_dialog_new (_("Edit Applications List"),
 					     GNOME_STOCK_BUTTON_OK,
 					     GNOME_STOCK_BUTTON_CANCEL,
 					     NULL);
 
+	gtk_container_set_border_width (GTK_CONTAINER (edit_application_details->window), GNOME_PAD);
+  	gtk_window_set_policy (GTK_WINDOW (edit_application_details->window), FALSE, TRUE, FALSE);
+	gtk_window_set_default_size (GTK_WINDOW (edit_application_details->window), 
+				     NO_DEFAULT_MAGIC_NUMBER,
+				     PROGRAM_CHOOSER_DEFAULT_HEIGHT);
+
 	gtk_signal_connect (GTK_OBJECT (edit_application_details->window),
 			    "destroy",
-			    edit_application_dialog_destroy,
+			    edit_applications_dialog_destroy,
 			    NULL);
 
 	/* Main vertical box */
 	main_vbox = GNOME_DIALOG (edit_application_details->window)->vbox;			    
 
-	align = gtk_alignment_new (0.5, 0.5, 0.0, 0.0);
-	gtk_box_pack_start (GTK_BOX (main_vbox), align, FALSE, FALSE, 0);
-
-	hbox1 = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
-	gtk_box_pack_start (GTK_BOX (main_vbox), hbox1, FALSE, FALSE, 0);
-
-	hbox2 = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
-	gtk_box_pack_start (GTK_BOX (main_vbox), hbox2, FALSE, FALSE, 0);
-
-	/* Preferred application list */	
-	edit_application_details->preferred_list = gtk_clist_new_with_titles (1, preferred_title);
-	gtk_clist_column_titles_passive (GTK_CLIST (edit_application_details->preferred_list));
-	gtk_clist_set_auto_sort (GTK_CLIST (edit_application_details->preferred_list), TRUE);
-	gtk_box_pack_start (GTK_BOX (hbox1), edit_application_details->preferred_list, TRUE, TRUE, 0);
-	gtk_widget_set_usize (edit_application_details->preferred_list, 250, 200);
+	/* Add label */
+	label_text = g_strdup_printf (_("Select applications to appear in menu for mime type \"%s\""), mime_type);
+	label = gtk_label_new (label_text);
+	g_free (label_text);
+	gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
+	gtk_box_pack_start (GTK_BOX (main_vbox), label, FALSE, FALSE, 0);
 	
-	/* Default application list */	
-	edit_application_details->default_list = gtk_clist_new_with_titles (1, default_title);
-	gtk_clist_column_titles_passive (GTK_CLIST (edit_application_details->default_list));
-	gtk_clist_set_auto_sort (GTK_CLIST (edit_application_details->default_list), TRUE);
-	gtk_box_pack_start (GTK_BOX (hbox1), edit_application_details->default_list, TRUE, TRUE, 0);
-	gtk_widget_set_usize (edit_application_details->default_list, 250, 200);
+	/* Add scrolling list of check buttons */
+	scroller = gtk_scrolled_window_new (NULL, NULL);
+	gtk_box_pack_start_defaults (GTK_BOX (main_vbox), scroller);
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scroller),
+					GTK_POLICY_NEVER,
+					GTK_POLICY_AUTOMATIC);
 
-	button_hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
-	gtk_box_pack_start (GTK_BOX (main_vbox), button_hbox, FALSE, FALSE, 0);
-        fixed = gtk_fixed_new ();
-	gtk_container_add (GTK_CONTAINER (button_hbox), fixed);
+	vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
+	gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (scroller), vbox);
 
-	button = gtk_button_new_with_label (_("Remove Application"));
-	gtk_fixed_put (GTK_FIXED (fixed), button, 80, 0);
-
-	button = gtk_button_new_with_label (_("Add To Preferred"));
-	gtk_fixed_put (GTK_FIXED (fixed), button, 260, 0);
-
-	button = gtk_button_new_with_label (_("Add New Application..."));
-	gtk_fixed_put (GTK_FIXED (fixed), button, 380, 0);
-
-	/* Populate Lists */
-	populate_preferred_applications_list (edit_application_details->preferred_list, mime_type);
-	populate_default_applications_list (edit_application_details->default_list, mime_type);
+	populate_default_applications_box (vbox, mime_type);
 
 	gtk_widget_show_all (main_vbox);
 }
+
 
 
 /*
@@ -447,8 +402,11 @@ show_edit_applications_dialog (const char *mime_type)
 	
 	switch(gnome_dialog_run (GNOME_DIALOG (edit_application_details->window))) {
 		case 0:
-			/* Apply changed here */
-			/* Fall through */
+			nautilus_mime_type_capplet_update_application_info (mime_type);
+			/* Delete the dialog so the lists are repopulated on next lauch */
+			gtk_widget_destroy (edit_application_details->window);
+			break;
+			
 		case 1:
 			/* Delete the dialog so the lists are repopulated on next lauch */
 			gtk_widget_destroy (edit_application_details->window);
@@ -472,8 +430,11 @@ show_edit_components_dialog (const char *mime_type)
 
 	switch(gnome_dialog_run (GNOME_DIALOG (edit_component_details->window))) {
 		case 0:
-			/* Apply changed here */
-			/* Fall through */
+			nautilus_mime_type_capplet_update_component_info (mime_type);
+			/* Delete the dialog so the lists are repopulated on next lauch */
+			gtk_widget_destroy (edit_component_details->window);			
+			break;
+			
 		case 1:
 			/* Delete the dialog so the lists are repopulated on next lauch */
 			gtk_widget_destroy (edit_component_details->window);
@@ -564,4 +525,100 @@ name_from_oaf_server_info (OAF_ServerInfo *server)
 
 			
         return g_strdup(view_as_name);
+}
+
+void
+nautilus_mime_type_capplet_show_new_mime_window (void)
+{
+	GtkWidget *dialog;
+        GtkWidget *mime_entry;
+	GtkWidget *label;
+	GtkWidget *frame;
+	GtkWidget *ext_entry;
+	GtkWidget *hbox;
+	GtkWidget *vbox;
+	
+        dialog = gnome_dialog_new (_("Add Mime Type"), GNOME_STOCK_BUTTON_OK, GNOME_STOCK_BUTTON_CANCEL, NULL);
+	label = gtk_label_new (_("Add a new Mime Type\nFor example:  image/tiff; text/x-scheme"));
+	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
+	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
+	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+        gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), hbox, FALSE, FALSE, 0);
+	label = gtk_label_new (_("Mime Type:"));
+	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
+	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
+	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+	mime_entry = gtk_entry_new ();
+        gtk_box_pack_start (GTK_BOX (hbox), mime_entry, TRUE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), hbox, FALSE, FALSE, 0);
+	
+	frame = gtk_frame_new (_("Extensions"));
+        gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), frame, FALSE, FALSE, 0);
+	vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
+	gtk_container_set_border_width (GTK_CONTAINER (vbox), GNOME_PAD_SMALL);
+	label = gtk_label_new (_("Type in the extensions for this mime-type.\nFor example:  .html, .htm"));
+	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
+	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
+	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+	gtk_container_add (GTK_CONTAINER (frame), vbox);
+	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
+	gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_("Extension:")), FALSE, FALSE, 0);
+	ext_entry = gtk_entry_new ();
+	gtk_box_pack_start (GTK_BOX (hbox), ext_entry, TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+	
+	
+        gtk_widget_show_all (GNOME_DIALOG (dialog)->vbox);
+        switch (gnome_dialog_run (GNOME_DIALOG (dialog))) {
+        case 0:
+		capplet_widget_state_changed (CAPPLET_WIDGET (capplet),
+					      TRUE);
+                add_new_mime_type (gtk_entry_get_text (GTK_ENTRY (mime_entry)),
+				   gtk_entry_get_text (GTK_ENTRY (ext_entry)));
+        case 1:
+                gtk_widget_destroy (dialog);
+        default:;
+        }
+}
+
+void
+nautilus_mime_type_capplet_show_new_extension_window (void)
+{
+        GtkWidget *mime_entry;
+	GtkWidget *label;
+	GtkWidget *hbox;
+	GtkWidget *dialog;
+	
+        dialog = gnome_dialog_new (_("Add New Extension"), GNOME_STOCK_BUTTON_OK, GNOME_STOCK_BUTTON_CANCEL, NULL);
+	label = gtk_label_new (_("Type in the extensions for this mime-type.\nFor example:  .html, .htm"));
+	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
+	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
+	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+        gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), hbox, FALSE, FALSE, 0);
+	label = gtk_label_new (_("Extension:"));
+	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
+	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
+	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+	mime_entry = gtk_entry_new ();
+        gtk_box_pack_start (GTK_BOX (hbox), mime_entry, TRUE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), hbox, FALSE, FALSE, 0);	
+	
+        gtk_widget_show_all (GNOME_DIALOG (dialog)->vbox);
+        
+        switch (gnome_dialog_run (GNOME_DIALOG (dialog))) {
+	        case 0:
+			capplet_widget_state_changed (CAPPLET_WIDGET (capplet),
+						      TRUE);
+
+			nautilus_mime_type_capplet_add_extension (gtk_entry_get_text 
+							         (GTK_ENTRY (mime_entry)));
+
+	        case 1:
+	                gtk_widget_destroy (dialog);
+	                break;
+	                
+	        default:
+	        	break;
+	}        
 }
