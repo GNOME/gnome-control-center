@@ -61,12 +61,11 @@
 
 /* Copy a setting from the legacy gnome-config settings to the ConfigDatabase */
 
-#define COPY_FROM_LEGACY(type, key, legacy_type, legacy_key)                    \
-	val_##type = gnome_config_get_##legacy_type##_with_default              \
-                (legacy_key, &def);                                             \
-                                                                                \
-	if (!def)                                                               \
-		bonobo_config_set_##type (db, key, val_##type, NULL);           \
+#define COPY_FROM_LEGACY(type, key, legacy_type, legacy_key)                           \
+	val_##type = gnome_config_get_##legacy_type##_with_default (legacy_key, &def); \
+                                                                                       \
+	if (!def)                                                                      \
+		bonobo_config_set_##type (db, key, val_##type, NULL);                  \
 
 /* Create a property editor */
 
