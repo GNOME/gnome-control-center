@@ -15,17 +15,14 @@
 
   <child internal-child="vbox">
     <widget class="GtkVBox" id="dialog-vbox2">
-      <property name="border_width">2</property>
       <property name="visible">True</property>
       <property name="homogeneous">False</property>
       <property name="spacing">0</property>
 
       <child internal-child="action_area">
 	<widget class="GtkHButtonBox" id="dialog-action_area2">
-	  <property name="border_width">5</property>
 	  <property name="visible">True</property>
 	  <property name="layout_style">GTK_BUTTONBOX_END</property>
-	  <property name="spacing">10</property>
 
 	  <child>
 	    <widget class="GtkButton" id="helpbutton2">
@@ -182,7 +179,7 @@
 		  <property name="visible">True</property>
 		  <property name="max_saved">10</property>
 		  <property name="directory_entry">False</property>
-		  <property name="modal">False</property>
+		  <property name="modal">True</property>
 
 		  <child internal-child="entry">
 		    <widget class="GtkEntry" id="install_theme_combo_entry">
