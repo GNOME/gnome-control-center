@@ -33,7 +33,7 @@
 #  include <X11/XKBlib.h>
 #  include <X11/extensions/XKBstr.h>
 
-#define CONFIG_ROOT "/desktop/gnome/accesibility/keyboard"
+#define CONFIG_ROOT "/desktop/gnome/accessibility/keyboard"
 
 #ifdef DEBUG_ACCESSIBILITY
 #define d(str)		fprintf (stderr, str)
