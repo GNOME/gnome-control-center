@@ -253,7 +253,6 @@ command_exists (char *command)
 	GList *screensaver_dir_list;
 	GList *node;
 	char *program, *fullpath;
-	static char **path_dirs;
 	int i;
 	gboolean ret;
 

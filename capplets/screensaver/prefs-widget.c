@@ -171,7 +171,7 @@ static void
 prefs_widget_init (PrefsWidget *prefs)
 {
 	GtkWidget *table, *frame, *vbox, *vbox1, *hbox, *label;
-	GtkWidget *hbuttonbox, *scrolled_window, *button, *table1;
+	GtkWidget *scrolled_window, *button, *table1;
 	GtkObject *adjustment;
 	GSList *no_screensavers_group = NULL;
 	GtkWidget *viewport;
@@ -1588,7 +1588,8 @@ set_pixmap (GtkCList *clist, Screensaver *saver, gint row, SelectionMode mode)
 
 	if (mode == SM_CHOOSE_FROM_LIST && saver->enabled) {
 		if (!checked_pixmap) {
-			pixbuf = gdk_pixbuf_new_from_xpm_data (checked_xpm);
+			pixbuf = gdk_pixbuf_new_from_xpm_data 
+				((const char **) checked_xpm);
 			gdk_pixbuf_render_pixmap_and_mask
 				(pixbuf, &checked_pixmap,
 				 &checked_bitmap, 1);
@@ -1601,7 +1602,8 @@ set_pixmap (GtkCList *clist, Screensaver *saver, gint row, SelectionMode mode)
 	}
 	else if (mode == SM_CHOOSE_FROM_LIST && !saver->enabled) {
 		if (!unchecked_pixmap) {
-			pixbuf = gdk_pixbuf_new_from_xpm_data (unchecked_xpm);
+			pixbuf = gdk_pixbuf_new_from_xpm_data
+				((const char **) unchecked_xpm);
 			gdk_pixbuf_render_pixmap_and_mask
 				(pixbuf, &unchecked_pixmap,
 				 &unchecked_bitmap, 1);
@@ -1615,7 +1617,7 @@ set_pixmap (GtkCList *clist, Screensaver *saver, gint row, SelectionMode mode)
 	else if (mode == SM_CHOOSE_RANDOMLY) {
 		if (!checked_disabled_pixmap) {
 			pixbuf = gdk_pixbuf_new_from_xpm_data
-				(checked_disabled_xpm);
+				((const char **) checked_disabled_xpm);
 			gdk_pixbuf_render_pixmap_and_mask
 				(pixbuf, &checked_disabled_pixmap,
 				 &checked_disabled_bitmap, 1);
@@ -1628,7 +1630,7 @@ set_pixmap (GtkCList *clist, Screensaver *saver, gint row, SelectionMode mode)
 	} else {
 		if (!unchecked_disabled_pixmap) {
 			pixbuf = gdk_pixbuf_new_from_xpm_data
-				(unchecked_disabled_xpm);
+				((const char **) unchecked_disabled_xpm);
 			gdk_pixbuf_render_pixmap_and_mask
 				(pixbuf, &unchecked_disabled_pixmap,
 				 &unchecked_disabled_bitmap, 1);

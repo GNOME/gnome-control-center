@@ -451,7 +451,7 @@ write_boolean (xmlNodePtr argument_data, GTree *widget_db)
 	PrefsDialogWidgetSet *set;
 	char *id;
 
-	if (!(id = xmlGetProp (argument_data, "id"))) return;
+	if (!(id = xmlGetProp (argument_data, "id"))) return NULL;
 	set = g_tree_lookup (widget_db, id);
 
 	if (!set || !set->enabled) return NULL;
@@ -470,10 +470,10 @@ write_number (xmlNodePtr argument_data, GTree *widget_db)
 	GtkAdjustment *adjustment = NULL;
 	gfloat value = 0.0;
 	gchar *to_cli_expr;
-	char *id, *arg, *arg_str, *ret_str;
+	char *id, *arg, *ret_str;
 	char *pos;
 
-	if (!(id = xmlGetProp (argument_data, "id"))) return;
+	if (!(id = xmlGetProp (argument_data, "id"))) return NULL;
 	set = g_tree_lookup (widget_db, id);
 
 	if (!set || !set->enabled) return NULL;
@@ -525,7 +525,7 @@ write_select (xmlNodePtr argument_data, GTree *widget_db)
 	GList *menu_item;
 	char *id;
 
-	if (!(id = xmlGetProp (argument_data, "id"))) return;
+	if (!(id = xmlGetProp (argument_data, "id"))) return NULL;
 	set = g_tree_lookup (widget_db, id);
 
 	if (!set || !set->enabled) return NULL;
@@ -555,7 +555,7 @@ write_string (xmlNodePtr argument_data, GTree *widget_db)
 	char *id, *arg, *ret_str;
 	char *pos;
 
-	if (!(id = xmlGetProp (argument_data, "id"))) return;
+	if (!(id = xmlGetProp (argument_data, "id"))) return NULL;
 	set = g_tree_lookup (widget_db, id);
 
 	if (!set || !set->enabled) return NULL;
@@ -571,7 +571,7 @@ write_string (xmlNodePtr argument_data, GTree *widget_db)
 	if (!pos) return arg;
 	*pos = '\0';
 
-	ret_str = g_strdup_printf ("%s\"%s\"%s", arg, (int) str, pos + 1);
+	ret_str = g_strdup_printf ("%s\"%s\"%s", arg, str, pos + 1);
 	g_free (arg);
 
 	return ret_str;
@@ -648,7 +648,6 @@ write_command_line (gchar *name, xmlNodePtr argument_data, GTree *widget_db)
 static GScanner *
 read_command_line (char *command_line) 
 {
-	int i;
 	GScanner *cli_db;
 	static GScannerConfig config;
 	char *arg, *value, *argpos, *valpos, *endpos;
@@ -741,7 +740,6 @@ static xmlDocPtr
 get_argument_data (Screensaver *saver) 
 {
 	xmlDocPtr doc;
-	xmlNodePtr root_node;
 	gchar *file_name;
 	gchar *lang;
 
@@ -1279,7 +1277,7 @@ place_entry (ScreensaverPrefsDialog *dialog, GtkTable *table,
 static void
 populate_table (ScreensaverPrefsDialog *dialog, GtkTable *table) 
 {
-	char *id, *type, *same_as;
+	char *id, *same_as;
 	PrefsDialogWidgetSet *set, *set1;
 	xmlNodePtr node;
 	gint row = 0;
@@ -1433,8 +1431,8 @@ arg_is_set (xmlNodePtr argument_data, GScanner *cli_db)
 {
 	char *test;
 
-	g_return_if_fail (argument_data != NULL);
-	g_return_if_fail (cli_db != NULL);
+	g_return_val_if_fail (argument_data != NULL, 0);
+	g_return_val_if_fail (cli_db != NULL, 0);
 
 	test = xmlGetProp (argument_data, "test");
 
@@ -1536,7 +1534,6 @@ read_select (GTree *widget_db, xmlNodePtr argument_data,
 	PrefsDialogWidgetSet *set;
 	xmlNodePtr node;
 	GtkWidget *menu;
-	GList *menu_item_node;
 	gint found, max_found = -1;
 	int set_idx = 0, i = 0;
 	char *id;

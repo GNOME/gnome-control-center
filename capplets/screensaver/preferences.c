@@ -332,7 +332,7 @@ preferences_write_xml (Preferences *prefs)
 	if (prefs->unfade)
 		xmlNewChild (node, NULL, "unfade", NULL);
 
-	tmp = g_strdup_printf ("%d", prefs->fade_seconds);
+	tmp = g_strdup_printf ("%d", (int) prefs->fade_seconds);
 	xmlNewChild (node, NULL, "fade-seconds", tmp);
 	g_free (tmp);
 
@@ -368,15 +368,15 @@ preferences_write_xml (Preferences *prefs)
 	if (prefs->power_management)
 		xmlNewChild (node, NULL, "use-dpms", NULL);
 
-	tmp = g_strdup_printf ("%d", prefs->standby_time);
+	tmp = g_strdup_printf ("%d", (int) prefs->standby_time);
 	xmlNewChild (node, NULL, "standby-time", tmp);
 	g_free (tmp);
 
-	tmp = g_strdup_printf ("%d", prefs->suspend_time);
+	tmp = g_strdup_printf ("%d", (int) prefs->suspend_time);
 	xmlNewChild (node, NULL, "suspend-time", tmp);
 	g_free (tmp);
 
-	tmp = g_strdup_printf ("%d", prefs->power_down_time);
+	tmp = g_strdup_printf ("%d", (int) prefs->power_down_time);
 	xmlNewChild (node, NULL, "shutdown-time", tmp);
 	g_free (tmp);
 

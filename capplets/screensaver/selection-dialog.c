@@ -175,7 +175,6 @@ place_screensaver_list (SelectionDialog *dialog)
 {
 	GtkWidget *item;
 	GList *item_list_head = NULL, *item_list_tail = NULL, *node;
-	gchar *label;
 	saver_entry_t *entry;
 
 	for (node = known_savers; node; node = node->next) {
@@ -253,7 +252,7 @@ get_known_savers (void)
         struct dirent *child_dir;
         struct stat filedata;
 	gchar *fullpath;
-	saver_entry_t *entry;
+	saver_entry_t *entry = NULL;
 	char *tmp, *name;
 
 	if (known_savers) return known_savers;
@@ -307,4 +306,6 @@ get_known_savers (void)
         closedir (parent_dir);
 
 	list_head = g_list_sort (list_head, node_compare);
+
+	return list_head;
 }

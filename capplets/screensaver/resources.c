@@ -26,6 +26,8 @@
 # include "config.h"
 #endif
 
+#include <ctype.h>
+
 #include <X11/Intrinsic.h>
 #include <X11/Shell.h>
 #include <gdk/gdkprivate.h>

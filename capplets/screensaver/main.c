@@ -48,8 +48,6 @@ static PrefsWidget *prefs_widget;
 
 static CappletWidget *capplet;
 
-static gboolean do_get, do_set;
-
 static void 
 state_changed_cb (GtkWidget *widget) 
 {
@@ -200,10 +198,9 @@ do_get_xml (void)
 static void
 do_set_xml (void) 
 {
-	Preferences *prefs;
 	xmlDocPtr doc;
 	Preferences *old_prefs, *new_prefs;
-	char *buffer;
+	char *buffer = NULL;
 	int len = 0;
 
 	while (!feof (stdin)) {
