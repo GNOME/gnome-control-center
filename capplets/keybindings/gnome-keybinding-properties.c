@@ -748,7 +748,9 @@ setup_dialog (GladeXML *dialog)
 
   renderer = (GtkCellRenderer *) g_object_new (EGG_TYPE_CELL_RENDERER_KEYS,
 					       "editable", TRUE,
+					       "accel_mode", EGG_CELL_RENDERER_KEYS_MODE_X,
 					       NULL);
+
   g_signal_connect (G_OBJECT (renderer),
 		    "keys_edited",
                     G_CALLBACK (accel_edited_callback),
