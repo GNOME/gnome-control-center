@@ -505,17 +505,33 @@ restart_failure (WMResult reason)
 static void
 show_restart_info (void)
 {
-        GtkWidget *dialog = gnome_message_box_new (
-          _("Your current window manager has been changed. In order for\n"
-            "this change to be saved, you will need to save your current\n"
-            "session. This can be done either selecting \"Save Current Session\"\n"
-            "under \"Settings\" in the main menu, or by turning on\n"
-            "\"Save Current Setup\" when you log out.\n"),
-                GNOME_MESSAGE_BOX_INFO, "OK", NULL);
+        gchar *save_session;
+        GtkWidget *dialog;
 
-        gtk_window_set_title (GTK_WINDOW (dialog), "Window Manager");
-        
-        gnome_dialog_run (GNOME_DIALOG (dialog));
+        save_session = gnome_is_program_in_path ("save-session");
+        if (save_session) {
+                dialog = gnome_message_box_new (
+                        _("Your current window manager has been changed. In order for\n"
+                          "this change to be saved, you will need to save your current\n"
+                          "session. You can do so immediately by selecting the \"Save session\n"
+                          "now\" below, or you can save your session later.  This can be\n"
+                          "done either selecting \"Save Current Session\" under \"Settings\"\n"
+                          "in the main menu, or by turning on \"Save Current Setup\" when\n"
+                          "you log out.\n"),
+                        GNOME_MESSAGE_BOX_INFO, "Save Session Later", "Save Session Now", NULL);
+        } else {
+                dialog = gnome_message_box_new (
+                        _("Your current window manager has been changed. In order for\n"
+                          "this change to be saved, you will need to save your current\n"
+                          "session. This can be done by either selecting \"Save Current Session\"\n"
+                          "under \"Settings\" in the main menu, or by turning on\n"
+                          "\"Save Current Setup\" when you log out.\n"),
+                        GNOME_MESSAGE_BOX_INFO, GNOME_STOCK_BUTTON_CLOSE, NULL);
+        }
+        if ((gnome_dialog_run_and_close (GNOME_DIALOG (dialog)) == 1) && save_session) {
+                system (save_session);
+        }
+        g_free (save_session);
 }
 
 static void 
