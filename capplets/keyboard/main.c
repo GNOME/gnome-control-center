@@ -30,6 +30,7 @@
 #include <libgnomeui/gnome-window-icon.h>
 #include <tree.h>
 #include <parser.h>
+#include <fcntl.h>
 
 #include <glade/glade.h>
 
@@ -142,23 +143,24 @@ static void
 do_set_xml (gboolean apply_settings) 
 {
 	xmlDocPtr doc;
-	char *buffer = NULL;
-	int len = 0;
-	int bytes_read = 0;
+	char buffer[16384];
+	GString *doc_str;
+	int t = 0;
 
 	fflush (stdin);
 
-	do {
-		if (!len) buffer = g_new (char, 4097);
-		else buffer = g_renew (char, buffer, len + 4097);
-		bytes_read = read (fileno (stdin), buffer + len, 4096);
-		buffer[len + bytes_read] = '\0';
-		len += 4096;
-	} while (bytes_read == 4096);
+	fcntl (fileno (stdin), F_SETFL, 0);
 
-	if (len >= 4096 && len > 0) {
-		doc = xmlParseMemory (buffer, len - 4096 + bytes_read);
-		g_free (buffer);
+	doc_str = g_string_new ("");
+
+	while ((t = read (fileno (stdin), buffer, sizeof (buffer) - 1)) != 0) {
+		buffer[t] = '\0';
+		g_string_append (doc_str, buffer);
+	}
+
+	if (doc_str->len > 0) {
+		doc = xmlParseDoc (doc_str->str);
+		g_string_free (doc_str, TRUE);
 
 		if (doc != NULL) {
 			prefs = preferences_read_xml (doc);

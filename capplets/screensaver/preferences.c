@@ -177,9 +177,6 @@ preferences_new (void)
 static gint
 clone_cb (gchar *key, gchar *value, Preferences *new_prefs) 
 {
-	if (!strcmp (key, "programs"))
-		g_log (G_LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "Programs value is:\n%s", value);
-
 	g_tree_insert (new_prefs->config_db, key, g_strdup (value));
 	return 0;
 }
