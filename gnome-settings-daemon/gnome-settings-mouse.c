@@ -170,26 +170,41 @@ set_locate_pointer (gboolean locate_pointer)
       gint i;
 
       for (i = 0; i < n_keys; i++)
-      {
-	     if (locate_pointer)
-	       XGrabKey (gdk_x11_get_default_xdisplay (),
-		      keys[i].keycode,
-		      AnyModifier,
-		      GDK_ROOT_WINDOW (),
-		      False,
-		      GrabModeAsync,
-		      GrabModeSync);
-	     else
-	       XUngrabKey (gdk_x11_get_default_xdisplay (),
-		      keys[i].keycode,
-		      AnyModifier,
-		      GDK_ROOT_WINDOW ());
-     }
-     g_free (keys);
-     if (locate_pointer)
-	    gdk_window_add_filter (gdk_get_default_root_window (), filter, NULL);
-    else
-	    gdk_window_remove_filter (gdk_get_default_root_window (), filter, NULL);
+	{
+	  if (locate_pointer) 
+	    {
+	      XGrabKey (gdk_x11_get_default_xdisplay (),
+			keys[i].keycode,
+			0,
+			GDK_ROOT_WINDOW (),
+			False,
+			GrabModeAsync,
+			GrabModeSync);
+	      XGrabKey (gdk_x11_get_default_xdisplay (),
+			keys[i].keycode,
+			LockMask,
+			GDK_ROOT_WINDOW (),
+			False,
+			GrabModeAsync,
+			GrabModeSync);
+	    }
+	  else 
+	    {
+	      XUngrabKey (gdk_x11_get_default_xdisplay (),
+			  keys[i].keycode,
+			  LockMask,
+			  GDK_ROOT_WINDOW ());
+	      XUngrabKey (gdk_x11_get_default_xdisplay (),
+			  keys[i].keycode,
+			  0,
+			  GDK_ROOT_WINDOW ());
+	    }
+	}
+      g_free (keys);
+      if (locate_pointer)
+	gdk_window_add_filter (gdk_get_default_root_window (), filter, NULL);
+      else
+	gdk_window_remove_filter (gdk_get_default_root_window (), filter, NULL);
     }
   }
 }
