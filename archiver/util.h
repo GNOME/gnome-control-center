@@ -1,7 +1,7 @@
 /* -*- mode: c; style: linux -*- */
 
 /* util.h
- * Copyright (C) 2000 Helix Code, Inc.
+ * Copyright (C) 2000-2001 Ximian, Inc.
  *
  * Written by Bradford Hovinen (hovinen@helixcode.com)
  *
