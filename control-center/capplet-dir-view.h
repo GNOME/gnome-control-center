@@ -56,9 +56,9 @@ struct _CappletDirViewImpl
 	
 typedef enum _CappletDirViewLayout {
 	LAYOUT_NONE,
-	LAYOUT_ICON_LIST,
+	LAYOUT_ICON_LIST
 #ifdef USE_HTML
-	LAYOUT_HTML
+	, LAYOUT_HTML
 #endif
 } CappletDirViewLayout;
 
