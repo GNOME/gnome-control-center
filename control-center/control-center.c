@@ -68,6 +68,8 @@ typedef struct {
 
 #define PAD 5 /*when scrolling keep a few pixels above or below if possible */
 
+#define d(stuff)
+
 static gboolean
 single_click_activates (void)
 {
@@ -181,7 +183,7 @@ gnome_canvas_item_move_absolute (GnomeCanvasItem *item, double dx, double dy)
 static void
 relayout_canvas (ControlCenter *cc)
 {
-	int count, i, j, line, line_i;
+	int count, i, j, line, line_col, col;
 	int vert_pos, category_vert_pos, category_horiz_pos;
 	gboolean keep_going;
 	double max_width, height, max_text_height, max_icon_height;
@@ -195,27 +197,29 @@ relayout_canvas (ControlCenter *cc)
 	/* Do this in several iterations to keep things straight
 	 * 0) walk down each column to decide when to wrap */
 start_again :
+	d (fprintf (stderr, "START------------->\n"));
 	count = cc->info->n_categories;
 	cc->line_count = 0;
 	keep_going = TRUE;
-	for (i = 0 ; keep_going; i++) {
+	for (col = 0 ; keep_going; col++) {
+		d (fprintf (stderr, "\tcol[%d]\n", col));
 		keep_going = FALSE;
 
 		max_width = 0.;
 		/* 0.1) Find the maximum width for this column */
 		for (line = 0 ; line < breaks->len ; ) {
-			line_i = i + g_array_index (breaks, int, line);
+			line_col = col + g_array_index (breaks, int, line);
 			line++;
-			if (line < breaks->len && line_i >= g_array_index (breaks, int, line))
-				break;
+			if (line < breaks->len && line_col >= g_array_index (breaks, int, line))
+				continue;
 
 			/* 0.2) check the nth row within a category */
 			for (j = 0; j < count; j++) {
 				ControlCenterCategory *cat = cc->info->categories[j];
 				PangoLayout *layout;
-				if (line_i >= cat->n_entries)
+				if (line_col >= cat->n_entries)
 					continue;
-				ei = cat->entries[line_i]->user_data;
+				ei = cat->entries[line_col]->user_data;
 				if (ei == NULL)
 					continue;
 				keep_going = TRUE;
@@ -244,16 +248,17 @@ start_again :
 
 		/* 0.3) Now go back and assign the max width */
 		for (line = 0 ; line < breaks->len ; ) {
-			line_i = i + g_array_index (breaks, int, line);
+			line_col = col + g_array_index (breaks, int, line);
+			d (fprintf (stderr, "col[%d] line[%d] == %g\n", col, line, max_width));
 			line++;
-			if (line < breaks->len && line_i >= g_array_index (breaks, int, line))
-				break;
+			if (line < breaks->len && line_col >= g_array_index (breaks, int, line))
+				continue;
 
 			for (j = 0; j < count; j++) {
 				ControlCenterCategory *cat = cc->info->categories[j];
-				if (line_i >= cat->n_entries)
+				if (line_col >= cat->n_entries)
 					continue;
-				ei = cat->entries[line_i]->user_data;
+				ei = cat->entries[line_col]->user_data;
 				if (ei != NULL) {
 					ei->width = max_width;
 					pango_layout_set_width (GNOME_CANVAS_TEXT (ei->text)->layout,
@@ -350,7 +355,7 @@ start_again :
 			ei->height = height;
 			gnome_canvas_item_set (ei->selection,
 				"x2", (double) ei->width + 2 * PAD,
-				"y2", (double) ei->text_height,
+				"y2", (double) ei->text_height + 1, /* expand it down slightly */
 				NULL);
 			gnome_canvas_item_set (ei->cover,
 				"x2", (double) ei->width,
