@@ -1,3 +1,23 @@
+1999-02-01  Chris Lahey  <clahey@umich.edu>
+
+	* capplets/gnome-edit-properties/gnome-edit-properties.desktop,
+	capplets/gnome-edit-properties/gnome-edit-properties.c,
+	capplets/gnome-edit-properties/Makefile.am,
+	capplets/gnome-edit-properties/.cvsignore: Added
+	gnome-edit-properties/ directory.  This adds a capplet to set
+	which editor you wish to be invoked when you run the gnome-edit
+	application.
+
+	* capplets/desktop-links/Environment.directory: Added this file.
+	This adds another category of capplet to the control-center.
+
+	* capplets/desktop-links/Makefile.am (ccenterdir): Added
+	installation of Environment.directory.
+
+	* capplets/Makefile.am (always_built_SUBDIRS): Added gnome-edit-properties.
+
+	* configure.in: Added capplets/gnome-edit-properties/Makefile.
+
 1999-02-01  Elliot Lee  <sopwith@redhat.com>
 
 	* Revert session management changes until further discussion.
