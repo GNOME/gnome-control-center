@@ -2,6 +2,8 @@
 
 	* capplet-dir.c (capplet_control_launch): Use GnomeDialog rather
 	than BonoboWindow
+	(capplet_control_launch): Use bonobo_widget_set_property for simplicity
+	(capplet_control_launch): Eliminate goto statement with an if...else clause
 
 	* main.c (main): Connect destroy signal on capplet window to
 	gtk_main_quit
