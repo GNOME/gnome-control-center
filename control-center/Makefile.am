@@ -20,12 +20,11 @@ INCLUDES = 			\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\
 	-DGLADEDIR=\""$(datadir)/control-center-data"\"	\
 	-I$(top_srcdir)/intl -I$(top_builddir)/intl	\
-	-I$(includedir) $(GNOME_INCLUDEDIR)		\
 	-DVERSION=\""$(VERSION)"\"			\
 	-DSETTINGS_DIR=\""$(datadir)/control-center"\"	\
-	$(LIBGLADE_CFLAGS)				\
 	-DPIXMAPS_DIR=\""$(appicondir)"\"		\
-	-DGNOME_SBINDIR=\""$(sbindir)"\"
+	-DGNOME_SBINDIR=\""$(sbindir)"\"		\
+	$(GNOEMCC_CFLAGS)
 
 bin_PROGRAMS = gnomecc
 
@@ -39,12 +38,7 @@ gnomecc_SOURCES = \
 	capplet-dir-view-list.c
 
 gnomecc_LDADD = \
-	$(GNOME_LIBDIR)					\
-	$(GNOME_CAPPLET_LIBS)				\
-	$(INTLLIBS)					\
-	$(LIBGLADE_LIBS)				\
-	-lgdk_pixbuf -lgnomecanvaspixbuf		\
-	-lgtkhtml -lgnomeprint				\
-	-lpspell -lstdc++
+	$(GNOMECC_LIBS)					\
+	$(INTLLIBS)
 
 EXTRA_DIST = gnomecc.desktop $(appicon_DATA) $(splash_DATA) $(glade_DATA)
