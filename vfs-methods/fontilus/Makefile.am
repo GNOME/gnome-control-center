@@ -17,4 +17,5 @@ thumbnailer_LDADD = $(THUMBNAILER_LIBS)
 thumbnailer_SOURCES = ftstream-vfs.c thumbnailer.c
 
 EXTRA_DIST = \
-  font-method.conf
+  font-method.conf \
+  font-method.directory

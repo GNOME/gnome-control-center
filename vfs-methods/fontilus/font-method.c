@@ -14,6 +14,8 @@
 #include <libgnomevfs/gnome-vfs-cancellable-ops.h>
 #include <libgnomevfs/gnome-vfs-module.h>
 
+#define FONT_METHOD_DIRECTORY "/home/james/cvs/gnome2/fontilus/src/font-method.directory"
+
 /* this is from gnome-vfs-monitor-private.h */
 void gnome_vfs_monitor_callback (GnomeVFSMethodHandle *method_handle,
                                  GnomeVFSURI *info_uri,
@@ -242,6 +244,7 @@ typedef struct _FontListHandle FontListHandle;
 struct _FontListHandle {
     gint font;
     GnomeVFSFileInfoOptions options;
+    gboolean seen_dotdirectory;
 };
 
 static GnomeVFSResult
@@ -274,6 +277,7 @@ do_open_directory(GnomeVFSMethod *method,
     handle = g_new0(FontListHandle, 1);
     handle->font = 0;
     handle->options = options;
+    handle->seen_dotdirectory = FALSE;
     *method_handle = (GnomeVFSMethodHandle *)handle;
     result = GNOME_VFS_OK;
 
@@ -310,6 +314,19 @@ do_read_directory(GnomeVFSMethod *method,
     G_LOCK(font_list);
     if (!font_list) {
 	result = GNOME_VFS_ERROR_INTERNAL;
+	goto end;
+    }
+
+    /* list the .directory file */
+    if (!handle->seen_dotdirectory) {
+	g_free(file_info->name);
+	file_info->name = g_strdup(".directory");
+	file_info->type = GNOME_VFS_FILE_TYPE_REGULAR;
+	file_info->valid_fields |= GNOME_VFS_FILE_INFO_FIELDS_TYPE;
+	file_info->mime_type = g_strdup("application/x-gnome-app-info");
+	file_info->valid_fields |= GNOME_VFS_FILE_INFO_FIELDS_MIME_TYPE;
+	handle->seen_dotdirectory = TRUE;
+	result = GNOME_VFS_OK;
 	goto end;
     }
 
@@ -370,6 +387,17 @@ do_open(GnomeVFSMethod *method,
 	goto end;
     }
 
+    /* handle the .directory file */
+    if (!strcmp(path, "/.directory")) {
+	GnomeVFSURI *uri;
+
+	uri = gnome_vfs_uri_new(FONT_METHOD_DIRECTORY);
+	result = gnome_vfs_open_uri_cancellable(
+		(GnomeVFSHandle **)method_handle, uri, mode, context);
+	gnome_vfs_uri_unref(uri);
+	goto end;
+    }
+
     G_LOCK(font_list);
     font = g_hash_table_lookup(font_hash, &path[1]);
     if (font) {
@@ -408,8 +436,6 @@ do_create(GnomeVFSMethod *method,
     GnomeVFSResult result;
     GnomeVFSURI *new_uri;
 
-    g_message("font-method: do_create");
-
     new_uri = create_local_uri(uri);
     if (!new_uri)
 	return gnome_vfs_result_from_errno();
@@ -427,8 +453,6 @@ do_close(GnomeVFSMethod *method,
 	 GnomeVFSMethodHandle *method_handle,
 	 GnomeVFSContext *context)
 {
-    g_message("font-method: do_close");
-
     return gnome_vfs_close_cancellable((GnomeVFSHandle *)method_handle,
 				       context);
 }
@@ -524,6 +548,16 @@ do_get_file_info(GnomeVFSMethod *method,
 	file_info->valid_fields |= GNOME_VFS_FILE_INFO_FIELDS_MIME_TYPE;
 
 	result = GNOME_VFS_OK;
+    } else if (!strcmp(path, "/.directory")) {
+	g_free(file_info->name);
+	file_info->name = g_strdup(".directory");
+	file_info->type = GNOME_VFS_FILE_TYPE_REGULAR;
+	file_info->valid_fields |= GNOME_VFS_FILE_INFO_FIELDS_TYPE;
+	g_free(file_info->mime_type);
+	file_info->mime_type = g_strdup("application/x-gnome-app-info");
+	file_info->valid_fields |= GNOME_VFS_FILE_INFO_FIELDS_MIME_TYPE;
+
+	result = GNOME_VFS_OK;
     } else {
 	FcPattern *font;
 
@@ -561,6 +595,8 @@ do_is_local(GnomeVFSMethod *method,
 
     /* root directory */
     if (!strcmp(path, "")) { /* base dir */
+	result = TRUE;
+    } else if (!strcmp(path, "/.directory")) {
 	result = TRUE;
     } else {
 	FcPattern *font;

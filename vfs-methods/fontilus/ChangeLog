@@ -1,4 +1,10 @@
 2002-12-01  James Henstridge  <james@daa.com.au>
 
+	* src/font-method.c (do_read_directory): include ".directory" in
+	the directory listing.
+	(do_open): handle "/.directory".
+	(do_get_file_info): handle "/.directory".
+	(do_is_local): handle "/.directory".
+
 	* src/Makefile.am: install font-method.conf
 
