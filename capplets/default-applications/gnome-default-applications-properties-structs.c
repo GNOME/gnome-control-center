@@ -52,7 +52,7 @@ struct _TerminalDesciption {
 };
 TerminalDescription possible_terminals[] = { 
         { N_("Debian Terminal Emulator"),	"x-terminal-emulator",	"-e", FALSE },
-        { N_("Gnome Terminal"),		"gnome-terminal",	"-x", FALSE },
+        { N_("GNOME Terminal"),		"gnome-terminal",	"-x", FALSE },
         { N_("Standard XTerminal"),	"xterm",		"-e", FALSE },
         { N_("NXterm"),			"nxterm",		"-e", FALSE },
         { N_("RXVT"),			"rxvt",			"-e", FALSE },

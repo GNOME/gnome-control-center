@@ -421,7 +421,7 @@ load_information_to_information (GnomeVFSURI *base_uri, FullLoadInformation *inf
 	}
 
 	if (!information->title || !information->title[0])
-		information->title = _("Gnome Control Center");
+		information->title = _("GNOME Control Center");
 
 	return information;
 }

@@ -1088,7 +1088,7 @@ gnome_cc_about (void)
 	if (about) {
 		gdk_window_raise (about->window);
 	} else {
-		gtk_widget_show (about = gnome_about_new (_("Gnome Control Center"),
+		gtk_widget_show (about = gnome_about_new (_("GNOME Control Center"),
 						  VERSION,
 						  "Copyright 2002, Ximian, Inc.",
 						  NULL,

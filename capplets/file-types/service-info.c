@@ -47,7 +47,7 @@ const gchar *url_descriptions[][2] = {
 	{ "info",    N_("Detailed documentation") },
 	{ "man",     N_("Manual pages") },
 	{ "mailto",  N_("Electronic mail transmission") },
-	{ "ghelp",   N_("Gnome documentation") },
+	{ "ghelp",   N_("GNOME documentation") },
 	{ NULL,      NULL }
 };
 
