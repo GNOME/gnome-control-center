@@ -37,7 +37,6 @@
 /* Needed only for the sound capplet */
 
 #include <stdlib.h>
-#include <esd.h>
 #include <sys/types.h>
 
 /* Capplet-specific prototypes */
