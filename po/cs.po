@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-12 03:55+0200\n"
-"PO-Revision-Date: 2004-05-12 13:25+0200\n"
+"POT-Creation-Date: 2004-05-13 04:06+0200\n"
+"PO-Revision-Date: 2004-05-13 16:13+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -957,7 +957,9 @@ msgstr "Po_nechat rozlišení"
 msgid ""
 "The X Server does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
-msgstr "X server nepodporuje rozšíření XRandR. Změny rozlišení displeje za běhu nejsou možné."
+msgstr ""
+"X server nepodporuje rozšíření XRandR. Změny rozlišení displeje za běhu "
+"nejsou možné."
 
 #: capplets/display/main.c:811
 msgid ""
@@ -2524,7 +2526,7 @@ msgstr ""
 "Chyba při pokusu o spuštění (%s),\n"
 "což je svázáno s klávesou (%s)"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:65
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:70
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2549,7 +2551,7 @@ msgstr ""
 "- Výsledek <b>xprop -root | grep XKB</b>\n"
 "- Výsledek <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b>"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:75
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:80
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2560,15 +2562,21 @@ msgstr ""
 "Jsou známy problémy se složitými nastaveními XKB.\n"
 "Zkuste použít jednodušší nastavení nebo novější verzi software XFree."
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:138
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:163
 msgid ""
-"System-wide XKB configuration has changed. You may want to adjust your local "
-"configuration as well."
-msgstr ""
-"Systémové nastavení XKB bylo změměno. Možná budete chtít také upravit své "
-"místní nastavení."
+"The X system keyboard settings differ from your current GNOME keyboard "
+"settings.  Which set would you like to use?"
+msgstr "Systémové nastavení klávesnice v X se liší od vašeho momentálního nastavení klávesnice v GNOME. Které nastavení chcete používat?"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:187
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:166
+msgid "Use X settings"
+msgstr "Používat nastavení X"
+
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:168
+msgid "Use GNOME settings"
+msgstr "Používat nastavení GNOME"
+
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:220
 #, c-format
 msgid ""
 "You have a keyboard remapping file (%s) in your home directory whose "
