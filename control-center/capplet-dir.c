@@ -86,7 +86,7 @@ find_icon (const char *icon, GnomeDesktopItem *dentry)
 	} else {
 		icon_file = gnome_program_locate_file
 			(gnome_program_get (), GNOME_FILE_DOMAIN_APP_PIXMAP,
-			 "control-center.png", TRUE, NULL);
+			 "control-center2.png", TRUE, NULL);
 	}
 
 	if (!icon_file) { /* if icon_file still NULL */
@@ -196,7 +196,7 @@ capplet_dir_new (CappletDir *dir, gchar *dir_path)
 		if (!entry->icon)
 			entry->icon = gnome_program_locate_file
 				(gnome_program_get (), GNOME_FILE_DOMAIN_APP_PIXMAP,
-				 "control-center.png", TRUE, NULL);
+				 "control-center2.png", TRUE, NULL);
 
 		entry->pb = gdk_pixbuf_new_from_file (entry->icon, NULL);
 	} else {
