@@ -330,7 +330,7 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 	 */
 	/* Left-handed toggle */
 	peditor = gconf_peditor_new_boolean
-		(changeset, "/desktop/gnome/peripherals/mouse/left_handed", WID ("left_handed_toggle"));
+		(changeset, "/desktop/gnome/peripherals/mouse/left_handed", WID ("left_handed_toggle"), NULL);
 	g_signal_connect (peditor, "value-changed", (GCallback) left_handed_toggle_cb, WID ("orientation_image"));
 
 	/* Make sure the image gets initialized correctly */
@@ -341,30 +341,27 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 	/* Double-click time */
 	g_signal_connect (WID ("double_click_darea"), "expose_event", (GCallback) drawing_area_expose_event, changeset);
 
-	peditor = gconf_peditor_new_numeric_range
-		(changeset, DOUBLE_CLICK_KEY, WID ("delay_scale"));
-	g_object_set (peditor,
-		      "conv-to-widget-cb", double_click_from_gconf,
-		      "conv-from-widget-cb", double_click_to_gconf,
-		      NULL);
+	gconf_peditor_new_numeric_range
+		(changeset, DOUBLE_CLICK_KEY, WID ("delay_scale"),
+		 "conv-to-widget-cb", double_click_from_gconf,
+		 "conv-from-widget-cb", double_click_to_gconf,
+		 NULL);
 
-	peditor = gconf_peditor_new_numeric_range
-		(changeset, "/desktop/gnome/peripherals/mouse/motion_acceleration", WID ("accel_scale"));
-	g_object_set (peditor,
-		      "conv-to-widget-cb", motion_acceleration_from_gconf,
-		      "conv-from-widget-cb", motion_acceleration_to_gconf,
-		      NULL);
+	gconf_peditor_new_numeric_range
+		(changeset, "/desktop/gnome/peripherals/mouse/motion_acceleration", WID ("accel_scale"),
+		 "conv-to-widget-cb", motion_acceleration_from_gconf,
+		 "conv-from-widget-cb", motion_acceleration_to_gconf,
+		 NULL);
 
 	gconf_peditor_new_numeric_range
 		(changeset, "/desktop/gnome/peripherals/mouse/motion_threshold",
-		 WID ("sensitivity_scale"));
+		 WID ("sensitivity_scale"), NULL);
 
-	peditor = gconf_peditor_new_numeric_range
-		(changeset, "/desktop/gnome/peripherals/mouse/drag_threshold", WID ("drag_threshold_scale"));
-	g_object_set (peditor,
-		      "conv-to-widget-cb", threshold_from_gconf,
-		      "conv-from-widget-cb", gconf_value_float_to_int,
-		      NULL);
+	gconf_peditor_new_numeric_range
+		(changeset, "/desktop/gnome/peripherals/mouse/drag_threshold", WID ("drag_threshold_scale"),
+		 "conv-to-widget-cb", threshold_from_gconf,
+		 "conv-from-widget-cb", gconf_value_float_to_int,
+		 NULL);
 }
 
 /* Construct the dialog */

@@ -177,32 +177,36 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 {
 	GObject *peditor;
 
-	peditor = gconf_peditor_new_boolean (changeset, "/gnome/desktop/peripherals/keyboard/repeat", WID ("repeat_toggle"));
+	peditor = gconf_peditor_new_boolean
+		(changeset, "/gnome/desktop/peripherals/keyboard/repeat", WID ("repeat_toggle"), NULL);
 	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("repeat_table"));
 
-	peditor = gconf_peditor_new_select_menu (changeset, "/gnome/desktop/peripherals/keyboard/delay", WID ("delay_menu"));
+	gconf_peditor_new_select_menu
+		(changeset, "/gnome/desktop/peripherals/keyboard/delay", WID ("delay_menu"),
+		 "conv-to-widget-cb", delay_to_widget,
+		 "conv-from-widget-cb", delay_from_widget,
+		 NULL);
 
-	g_object_set (peditor,
-		      "conv-to-widget-cb", delay_to_widget,
-		      "conv-from-widget-cb", delay_from_widget,
-		      NULL);
+	gconf_peditor_new_select_menu
+		(changeset, "/gnome/desktop/peripherals/keyboard/rate", WID ("repeat_menu"),
+		 "conv-to-widget-cb", rate_to_widget,
+		 "conv-from-widget-cb", rate_from_widget,
+		 NULL);
 
-	peditor = gconf_peditor_new_select_menu (changeset, "/gnome/desktop/peripherals/keyboard/rate", WID ("repeat_menu"));
-
-	g_object_set (peditor,
-		      "conv-to-widget-cb", rate_to_widget,
-		      "conv-from-widget-cb", rate_from_widget,
-		      NULL);
-
-	peditor = gconf_peditor_new_boolean (changeset, "/gnome/desktop/peripherals/keyboard/click", WID ("click_toggle"));
+	peditor = gconf_peditor_new_boolean
+		(changeset, "/gnome/desktop/peripherals/keyboard/click", WID ("click_toggle"), NULL);
 	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("click_hbox"));
 
-	gconf_peditor_new_numeric_range (changeset, "/gnome/desktop/peripherals/keyboard/volume", WID ("click_volume_entry"));
+	gconf_peditor_new_numeric_range
+		(changeset, "/gnome/desktop/peripherals/keyboard/volume", WID ("click_volume_entry"), NULL);
 
 	/* Bell properties */
-	gconf_peditor_new_numeric_range (changeset, "/gnome/desktop/peripherals/keyboard/bell_volume", WID ("bell_volume_range"));
-	gconf_peditor_new_numeric_range (changeset, "/gnome/desktop/peripherals/keyboard/bell_pitch", WID ("bell_pitch_range"));
-	gconf_peditor_new_numeric_range (changeset, "/gnome/desktop/peripherals/keyboard/bell_duration", WID ("bell_duration_range"));
+	gconf_peditor_new_numeric_range
+		(changeset, "/gnome/desktop/peripherals/keyboard/bell_volume", WID ("bell_volume_range"), NULL);
+	gconf_peditor_new_numeric_range
+		(changeset, "/gnome/desktop/peripherals/keyboard/bell_pitch", WID ("bell_pitch_range"), NULL);
+	gconf_peditor_new_numeric_range
+		(changeset, "/gnome/desktop/peripherals/keyboard/bell_duration", WID ("bell_duration_range"), NULL);
 
 	g_signal_connect (G_OBJECT (WID ("bell_test_button")), "clicked", (GCallback) bell_cb, changeset);
 }

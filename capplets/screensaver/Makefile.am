@@ -1,7 +1,5 @@
 SUBDIRS = screensavers
 
-cappletname = screensaver
-cappletgroup =
 bin_PROGRAMS = gnome-screensaver-properties
 
 gnome_screensaver_properties_LDADD = @OLD_CAPPLET_LIBS@ -lXt
@@ -20,20 +18,21 @@ gnome_screensaver_properties_SOURCES = \
 	gnome-startup.c	gnome-startup.h \
 	XScreenSaver_ad.h
 
+@INTLTOOL_DESKTOP_RULE@
+
+pixmapsdir = $(GNOMECC_PIXMAPS_DIR)
 pixmaps_DATA = no-hack.png blank-screen.png checked.xpm unchecked.xpm
 
-@INTLTOOL_DESKTOP_RULE@
+Gladedir   = $(GNOMECC_GLADE_DIR)
+Glade_DATA = screensaver-properties.glade
+
+iconsdir   = $(GNOMECC_ICONS_DIR)
+icons_DATA = screensaver-capplet.png
 
 desktopdir = $(GNOMECC_DESKTOP_DIR)
 desktop_DATA = screensaver.desktop
 
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS) @OLD_CAPPLET_CFLAGS@
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
-EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST) $(pixmaps_DATA)
-iconsdir   = $(GNOMECC_ICONS_DIR)
-Gladedir   = $(GNOMECC_GLADE_DIR)
-pixmapsdir = $(GNOMECC_PIXMAPS_DIR)
-Glade_DATA = $(cappletname)-properties.glade
-icons_DATA = $(cappletname)-capplet.png
-desktop    = $(cappletname).desktop
+EXTRA_DIST = $(Glade_DATA) $(icons_DATA) $(desktop_DATA) $(pixmaps_DATA)
 

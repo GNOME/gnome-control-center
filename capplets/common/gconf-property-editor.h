@@ -60,25 +60,39 @@ const gchar *gconf_property_editor_get_key (GConfPropertyEditor  *peditor);
 
 GObject *gconf_peditor_new_boolean      (GConfChangeSet          *changeset,
 					 gchar                   *key,
-					 GtkWidget               *checkbox);
+					 GtkWidget               *checkbox,
+					 gchar                   *first_property_name,
+					 ...);
 GObject *gconf_peditor_new_string       (GConfChangeSet          *changeset,
 					 gchar                   *key,
-					 GtkWidget               *entry);
+					 GtkWidget               *entry,
+					 gchar                   *first_property_name,
+					 ...);
 GObject *gconf_peditor_new_filename     (GConfChangeSet          *changeset,
 					 gchar                   *key,
-					 GtkWidget               *file_entry);
+					 GtkWidget               *file_entry,
+					 gchar                   *first_property_name,
+					 ...);
 GObject *gconf_peditor_new_color        (GConfChangeSet          *changeset,
 					 gchar                   *key,
-					 GtkWidget               *color_entry);
+					 GtkWidget               *color_entry,
+					 gchar                   *first_property_name,
+					 ...);
 GObject *gconf_peditor_new_select_menu  (GConfChangeSet          *changeset,
 					 gchar                   *key,
-					 GtkWidget               *option_menu);
+					 GtkWidget               *option_menu,
+					 gchar                   *first_property_name,
+					 ...);
 GObject *gconf_peditor_new_select_radio (GConfChangeSet          *changeset,
 					 gchar                   *key,
-					 GSList                  *radio_group);
+					 GSList                  *radio_group,
+					 gchar                   *first_property_name,
+					 ...);
 GObject *gconf_peditor_new_numeric_range (GConfChangeSet          *changeset,
 					  gchar                   *key,
-					  GtkWidget               *range);
+					  GtkWidget               *range,
+					  gchar                   *first_property_name,
+					  ...);
 
 void gconf_peditor_widget_set_guard     (GConfPropertyEditor     *peditor,
 					 GtkWidget               *widget);

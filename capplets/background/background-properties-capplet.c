@@ -202,27 +202,27 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset, BGApplier *bg_applier
 	g_object_set_data (prefs, "applier", bg_applier);
 
 	peditor = gconf_peditor_new_select_menu
-		(changeset, "/desktop/gnome/background/orientation", WID ("color_option"));
+		(changeset, "/desktop/gnome/background/orientation", WID ("color_option"), NULL);
 	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
 
 	peditor = gconf_peditor_new_color
-		(changeset, "/desktop/gnome/background/color1", WID ("colorpicker1"));
+		(changeset, "/desktop/gnome/background/color1", WID ("colorpicker1"), NULL);
 	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
 
 	peditor = gconf_peditor_new_color
-		(changeset, "/desktop/gnome/background/color2", WID ("colorpicker2"));
+		(changeset, "/desktop/gnome/background/color2", WID ("colorpicker2"), NULL);
 	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
 
 	peditor = gconf_peditor_new_filename
-		(changeset, "/desktop/gnome/background/wallpaper-filename", WID ("image_fileentry"));
+		(changeset, "/desktop/gnome/background/wallpaper-filename", WID ("image_fileentry"), NULL);
 	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
 
 	peditor = gconf_peditor_new_select_menu
-		(changeset, "/desktop/gnome/background/wallpaper-type", WID ("image_option"));
+		(changeset, "/desktop/gnome/background/wallpaper-type", WID ("image_option"), NULL);
 	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
 
 	peditor = gconf_peditor_new_boolean
-		(changeset, "/desktop/gnome/background/wallpaper-enabled", WID ("picture_enabled_check"));
+		(changeset, "/desktop/gnome/background/wallpaper-enabled", WID ("picture_enabled_check"), NULL);
 	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, prefs);
 
 	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("picture_frame"));
