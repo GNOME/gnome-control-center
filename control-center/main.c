@@ -37,6 +37,14 @@
 #include "capplet-dir.h"
 #include "capplet-dir-view.h"
 
+static gint use_shell = 0;
+
+static struct poptOption cap_options[] = {
+	{"use-shell", '\0', POPT_ARG_NONE, &use_shell, 0,
+	 N_("Use shell even if nautilus is running."), NULL},
+	{NULL, '\0', 0, NULL, 0}
+};
+
 static gboolean
 is_nautilus_running (void)
 {
@@ -114,9 +122,10 @@ main (int argc, char **argv)
 	gnome_program_init ("control-center", VERSION, LIBGNOMEUI_MODULE,
 			    argc, argv,
 			    GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
+			    GNOME_PARAM_POPT_TABLE, cap_options,
 			    NULL);
 
-	if (is_nautilus_running ())
+	if (!use_shell && is_nautilus_running ())
 		execlp ("nautilus", "nautilus", "preferences:///", NULL);
 	
 	gnomecc_init ();
