@@ -261,7 +261,6 @@ peditor_boolean_widget_changed (GConfPropertyEditor *peditor, GtkToggleButton *t
 	gconf_change_set_set_bool (peditor->p->changeset, peditor->p->key, gtk_toggle_button_get_active (tb));
 	gconf_change_set_check_value (peditor->p->changeset, peditor->p->key, &value);
 	g_signal_emit (peditor, peditor_signals[VALUE_CHANGED], 0, peditor->p->key, value);
-	gconf_value_free (value);
 }
 
 GObject *
@@ -313,7 +312,6 @@ peditor_string_widget_changed (GConfPropertyEditor *peditor, GtkEntry *entry)
 	gconf_change_set_set_string (peditor->p->changeset, peditor->p->key, gtk_entry_get_text (entry));
 	gconf_change_set_check_value (peditor->p->changeset, peditor->p->key, &value);
 	g_signal_emit (peditor, peditor_signals[VALUE_CHANGED], 0, peditor->p->key, value);
-	gconf_value_free (value);
 }
 
 GObject *
@@ -356,19 +354,19 @@ peditor_color_value_changed (GConfEngine *engine, guint cnxn_id, GConfEntry *ent
 {
 	GnomeColorPicker *cp;
 	GConfValue *value;
-	GdkColor *color;
+	GdkColor color;
 	guint16 r, g, b, a;
 
 	cp = g_object_get_data (G_OBJECT (peditor), "cp");
 	value = gconf_entry_get_value (entry);
 
 	if (value != NULL) {
-		gdk_color_parse (gconf_value_get_string (value), color);
+		gdk_color_parse (gconf_value_get_string (value), &color);
 		gnome_color_picker_get_i16 (cp, &r, &g, &b, &a);
 
-		if (r != color->red || g != color->green || b != color->blue) {
+		if (r != color.red || g != color.green || b != color.blue) {
 			gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
-			gnome_color_picker_set_i16 (cp, color->red, color->green, color->blue, 65535);
+			gnome_color_picker_set_i16 (cp, color.red, color.green, color.blue, 65535);
 		}
 	}
 }
@@ -386,7 +384,6 @@ peditor_color_widget_changed (GConfPropertyEditor *peditor, GnomeColorPicker *cp
 
 	gconf_change_set_check_value (peditor->p->changeset, peditor->p->key, &value);
 	g_signal_emit (peditor, peditor_signals[VALUE_CHANGED], 0, peditor->p->key, value);
-	gconf_value_free (value);
 }
 
 GObject *
@@ -449,7 +446,6 @@ peditor_select_menu_widget_changed (GConfPropertyEditor *peditor, GtkMenuItem *i
 
 	gconf_change_set_check_value (peditor->p->changeset, peditor->p->key, &value);
 	g_signal_emit (peditor, peditor_signals[VALUE_CHANGED], 0, peditor->p->key, value);
-	gconf_value_free (value);
 }
 
 GObject *
@@ -513,7 +509,6 @@ peditor_select_radio_widget_changed (GConfPropertyEditor *peditor, GtkToggleButt
 
 	gconf_change_set_check_value (peditor->p->changeset, peditor->p->key, &value);
 	g_signal_emit (peditor, peditor_signals[VALUE_CHANGED], 0, peditor->p->key, value);
-	gconf_value_free (value);
 }
 
 GObject *

@@ -1,3 +1,13 @@
+2001-12-17  Bradford Hovinen  <hovinen@ximian.com>
+
+	* gconf-property-editor.c (peditor_color_value_changed): Use a
+	local stack variable for the color rather than a pointer. Duh.
+
+2001-12-08  Bradford Hovinen  <hovinen@ximian.com>
+
+	* gconf-property-editor.c (peditor_*_widget_changed): Don't call
+	gconf_value_free
+
 2001-12-07  Bradford Hovinen  <hovinen@ximian.com>
 
 	* gconf-property-editor.c (gconf_property_editor_class_init): Use
