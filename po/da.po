@@ -25,8 +25,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2002-03-19 20:53+0100\n"
-"PO-Revision-Date: 2002-03-19 20:53+0100\n"
+"POT-Creation-Date: 2002-03-22 23:00+0100\n"
+"PO-Revision-Date: 2002-03-22 23:07+0100\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -41,160 +41,258 @@ msgstr "Baggrund"
 msgid "Configuration of the desktop's background"
 msgstr "Konfigurér skrivebordsbaggrunden"
 
-#: capplets/background/background-properties-capplet.c:260
-msgid "Please select a background image"
-msgstr "Vælg venligst et baggrundsbillede"
+#. solid
+#: capplets/background/background-properties-capplet.c:222
+msgid "C_olor"
+msgstr "_Farver:"
 
-#: capplets/background/background-properties-capplet.c:314
+#. horiz
+#: capplets/background/background-properties-capplet.c:226
+msgid "_Left Color"
+msgstr "_Venstre farve"
+
+#: capplets/background/background-properties-capplet.c:227
+msgid "_Right Color"
+msgstr "_Højre farve"
+
+#. vert
+#: capplets/background/background-properties-capplet.c:230
+msgid "_Top Color"
+msgstr "_Øverste farve"
+
+#: capplets/background/background-properties-capplet.c:231
+msgid "_Bottom Color"
+msgstr "_Nederste farve"
+
+#: capplets/background/background-properties-capplet.c:392
+msgid "_Wallpaper"
+msgstr "_Baggrundsbillede"
+
+#: capplets/background/background-properties-capplet.c:392
+msgid "C_entered"
+msgstr "C_entreret"
+
+#: capplets/background/background-properties-capplet.c:392
+msgid "_Scaled"
+msgstr "_Skaleret"
+
+#: capplets/background/background-properties-capplet.c:392
+msgid "S_tretched"
+msgstr "S_trakt"
+
+#: capplets/background/background-properties-capplet.c:392
+msgid "_No Picture"
+msgstr "_Intet billede"
+
+#: capplets/background/background-properties-capplet.c:515
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:622
-#: capplets/keyboard/gnome-keyboard-properties.c:320
-#: capplets/mouse/gnome-mouse-properties.c:681
+#: capplets/keyboard/gnome-keyboard-properties.c:322
+#: capplets/mouse/gnome-mouse-properties.c:691
 #: capplets/sound/sound-properties-capplet.c:140
 msgid "Retrieve and store legacy settings"
 msgstr "Indhent og gem gamle indstillinger"
 
-#: capplets/background/background-properties-capplet.c:339
+#: capplets/background/background-properties-capplet.c:540
 msgid "Background properties"
 msgstr "Indstillinger for baggrund"
 
 #: capplets/background/background-properties.glade.h:1
-msgid "Background colors"
-msgstr "Baggrundsfarver"
+msgid "Background Properties"
+msgstr "Indstillinger for baggrunden"
 
 #: capplets/background/background-properties.glade.h:2
-msgid "Background picture"
-msgstr "Baggrundsbillede"
+msgid "Border the picture with a:"
+msgstr "Omgiv billedet med en:"
 
 #: capplets/background/background-properties.glade.h:3
-#: libbackground/preferences.c:49
-msgid "Centered"
-msgstr "Centreret"
+msgid "E-Mail"
+msgstr "Epost"
 
 #: capplets/background/background-properties.glade.h:4
 msgid "Horizontal gradient"
 msgstr "Vandret farveovergang"
 
 #: capplets/background/background-properties.glade.h:5
-msgid "Image:"
-msgstr "Billede:"
-
-#: capplets/background/background-properties.glade.h:6
 msgid "Pick a color"
 msgstr "Vælg en farve"
 
-# '(keep aspect ratio)' giver sig selv
+#: capplets/background/background-properties.glade.h:6
+msgid "Picture Options:"
+msgstr "Billedindstillinger:"
+
 #: capplets/background/background-properties.glade.h:7
-msgid "Scaled (keep aspect ratio)"
-msgstr "Skaleret"
+msgid "Picture:"
+msgstr "Billede:"
 
 #: capplets/background/background-properties.glade.h:8
+msgid "Primary Color"
+msgstr "Første farve"
+
+#: capplets/background/background-properties.glade.h:9
+msgid "Secondary Color"
+msgstr "Anden farve"
+
+#: capplets/background/background-properties.glade.h:10
 msgid "Solid color"
 msgstr "Ensfarvet"
 
-#: capplets/background/background-properties.glade.h:9
-#: libbackground/preferences.c:51
-msgid "Stretched"
-msgstr "Udstrakt"
-
-#: capplets/background/background-properties.glade.h:10
-msgid "Style:"
-msgstr "Stil: "
-
 #: capplets/background/background-properties.glade.h:11
-#: libbackground/preferences.c:48
-msgid "Tiled"
-msgstr "Side-om-side"
-
-#: capplets/background/background-properties.glade.h:12
-msgid "Use a picture for the background"
-msgstr "Benyt et billede til baggrunden"
-
-#: capplets/background/background-properties.glade.h:13
 msgid "Vertical gradient"
 msgstr "Lodret farveovergang"
+
+#: capplets/background/background-properties.glade.h:12
+msgid ""
+"You can drag image files\n"
+"into the window to set the \n"
+"background picture."
+msgstr ""
+"Du kan trække billedfiler\n"
+"ind i vinduet for at angive\n"
+"baggrundsbilledet."
+
+#: capplets/background/background-properties.glade.h:15
+msgid "radiobutton1"
+msgstr "radioknap1"
+
+#: capplets/background/background-properties.glade.h:16
+msgid "radiobutton2"
+msgstr "radioknap2"
+
+#: capplets/background/background-properties.glade.h:17
+msgid "radiobutton3"
+msgstr "radioknap3"
+
+#: capplets/background/background-properties.glade.h:18
+msgid "radiobutton4"
+msgstr "radioknap4"
+
+#: capplets/background/background-properties.glade.h:19
+msgid "radiobutton5"
+msgstr "radioknap5"
 
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "Anvend indstillingerne og afslut"
 
-#: capplets/common/gconf-property-editor.c:169
+#: capplets/common/gconf-property-editor.c:172
 msgid "Key"
 msgstr "Nøgle"
 
-#: capplets/common/gconf-property-editor.c:170
+#: capplets/common/gconf-property-editor.c:173
 msgid "GConf key to which this property editor is attached"
 msgstr "GConf-nøgle som dette egenskabsredigeringsprogram er tilknyttet til"
 
-#: capplets/common/gconf-property-editor.c:176
+#: capplets/common/gconf-property-editor.c:179
 msgid "Callback"
 msgstr "Tilbagekald"
 
-#: capplets/common/gconf-property-editor.c:177
+#: capplets/common/gconf-property-editor.c:180
 msgid "Issue this callback when the value associated with key gets changed"
 msgstr ""
 "Udfør dette tilbagekald når værdien der er associeret med nøglen, ændres"
 
 # RETMIG: find ud af hvad dette er
-#: capplets/common/gconf-property-editor.c:182
+#: capplets/common/gconf-property-editor.c:185
 msgid "Change set"
 msgstr "Skiftesæt"
 
-#: capplets/common/gconf-property-editor.c:183
+#: capplets/common/gconf-property-editor.c:186
 msgid ""
 "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
 "GConf-skiftesæt som indeholder data der skal videresendes til GConf-klienten "
 "ved anvendelse"
 
-#: capplets/common/gconf-property-editor.c:188
+#: capplets/common/gconf-property-editor.c:191
 msgid "Conversion to widget callback"
 msgstr "Konvertering til kontrol-tilbagekald"
 
-#: capplets/common/gconf-property-editor.c:189
+#: capplets/common/gconf-property-editor.c:192
 msgid ""
 "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr ""
 "Tilbagekald som bliver udført når data skal konverteres fra GConf til "
 "kontrollen"
 
-#: capplets/common/gconf-property-editor.c:194
+#: capplets/common/gconf-property-editor.c:197
 msgid "Conversion from widget callback"
 msgstr "Konvertering fra kontrol-tilbagekald"
 
-#: capplets/common/gconf-property-editor.c:195
+#: capplets/common/gconf-property-editor.c:198
 msgid ""
 "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr ""
 "Tilbagekald som bliver udført når data skal konverteres til GConf fra "
 "kontrollen"
 
-#: capplets/common/gconf-property-editor.c:200
+#: capplets/common/gconf-property-editor.c:203
 msgid "UI Control"
 msgstr "Grænsefladekontrol"
 
-#: capplets/common/gconf-property-editor.c:201
+#: capplets/common/gconf-property-editor.c:204
 msgid "Object that controls the property (normally a widget)"
 msgstr "Objekt der kontrollerer egenskaben (normalt en kontrol)"
 
-#: capplets/common/gconf-property-editor.c:216
+#: capplets/common/gconf-property-editor.c:219
 msgid "Property editor object data"
 msgstr "Objektdata for egenskabsredigering"
 
-#: capplets/common/gconf-property-editor.c:217
+#: capplets/common/gconf-property-editor.c:220
 msgid "Custom data required by the specific property editor"
 msgstr ""
 "Brugerdefinerede data som behøves af den specifikke egenskabsredigering"
 
-#: capplets/common/gconf-property-editor.c:223
+#: capplets/common/gconf-property-editor.c:226
 msgid "Property editor data freeing callback"
 msgstr "Datafrigørelsestilbagekald for egenskabsredigering"
 
-#: capplets/common/gconf-property-editor.c:224
+#: capplets/common/gconf-property-editor.c:227
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr ""
 "Tilbagekald som bliver udført når objektdata for egenskabsredigeringen skal "
 "frigøres"
+
+#: capplets/common/gconf-property-editor.c:1304
+#, c-format
+msgid ""
+"Couldn't find the file '%s'.\n"
+"\n"
+"Please make sure it exists and try again, or choose a different background "
+"picture."
+msgstr ""
+"Kunne ikke finde filen '%s'.\n"
+"\n"
+"Sikr dig at den eksisterer og prøv igen, eller vælg et andet "
+"baggrundsbillede."
+
+#: capplets/common/gconf-property-editor.c:1312
+#, c-format
+msgid ""
+"I don't know how to open the file '%s'.\n"
+"Perhaps it's a kind of picture that is not yet supported.\n"
+"\n"
+"Please select a different picture instead."
+msgstr ""
+"Det vides ikke hvordan filen '%s' skal åbnes.\n"
+"Måske er det en form for billede som endnu ikke er understøttet.\n"
+"\n"
+"Vælg venligst et andet billede i stedet for."
+
+#: capplets/common/gconf-property-editor.c:1396
+msgid "Please select an image."
+msgstr "Vælg venligst et billede."
+
+#: capplets/common/activate-settings-daemon.c:18
+msgid ""
+"Unable to start the settings manager 'gnome2-settings-daemon'.\n"
+"Without the GNOME settings manager running, some preferences may not take "
+"effect. This couldindicate a problem with Bonobo, or a non-GNOME (e.g. KDE) "
+"settings manager may alreadybe active and conflicting with the GNOME "
+"settings manager."
+msgstr ""
+"Kunne ikke starte konfigurationsshåndteringen 'gnome2-settings-daemon'.\n"
+"Når den ikke kører, træder nogle indstillinger måske ikke i kraft. Dette kan indikere et problem med Bonoboeller at en anden konfigurationshåndtering som ikke er relateret til Gnome, måske er aktiv og forårsager en konflik med Gnomes."
 
 #: capplets/default-applications/default-applications.desktop.in.h:1
 msgid "Choose the applications used by default"
@@ -714,7 +812,7 @@ msgid "True if this dialog is for adding a MIME type"
 msgstr "TRUE hvis dette vindue er til alt tilføje en MIME-type"
 
 #: capplets/file-types/mime-edit-dialog.c:387
-#: capplets/file-types/mime-edit-dialog.c:442 libbackground/preferences.c:53
+#: capplets/file-types/mime-edit-dialog.c:442
 msgid "None"
 msgstr "Ingen"
 
@@ -852,7 +950,7 @@ msgstr "Genvejstast"
 
 #: capplets/keybindings/eggcellrendererkeys.c:199
 #: capplets/keybindings/gnome-keybinding-properties.c:54
-#: libbackground/applier.c:515
+#: libbackground/applier.c:469
 msgid "Disabled"
 msgstr "Deaktiveret"
 
@@ -893,8 +991,8 @@ msgstr "Tastebinding"
 msgid "Keybinding Properties"
 msgstr "Indstillinger for tastaturbindinger"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:316
 #: capplets/keyboard/gnome-keyboard-properties.c:318
+#: capplets/keyboard/gnome-keyboard-properties.c:320
 #: capplets/sound/sound-properties-capplet.c:136
 #: capplets/sound/sound-properties-capplet.c:138
 msgid ""
@@ -1039,7 +1137,7 @@ msgstr "_Lydstyrke:"
 msgid "Keyboard"
 msgstr "Tastatur"
 
-#: capplets/mouse/gnome-mouse-properties.c:410
+#: capplets/mouse/gnome-mouse-properties.c:420
 #, c-format
 msgid ""
 "<b>Unknown Cursor</b>\n"
@@ -1048,7 +1146,7 @@ msgstr ""
 "<b>Ukendt markør</b>\n"
 "%s"
 
-#: capplets/mouse/gnome-mouse-properties.c:508
+#: capplets/mouse/gnome-mouse-properties.c:518
 msgid ""
 "<b>Default Cursor - Current</b>\n"
 "The default cursor that ships with X"
@@ -1056,7 +1154,7 @@ msgstr ""
 "<b>Standardmarkør - nuværende</b>\n"
 "Den standardmarkør der følger med X"
 
-#: capplets/mouse/gnome-mouse-properties.c:511
+#: capplets/mouse/gnome-mouse-properties.c:521
 msgid ""
 "<b>Default Cursor</b>\n"
 "The default cursor that ships with X"
@@ -1064,7 +1162,7 @@ msgstr ""
 "<b>Standardmarkør</b>\n"
 "Den standardmarkør der følger med X"
 
-#: capplets/mouse/gnome-mouse-properties.c:529
+#: capplets/mouse/gnome-mouse-properties.c:539
 msgid ""
 "<b>White Cursor - Current</b>\n"
 "The default cursor inverted"
@@ -1072,7 +1170,7 @@ msgstr ""
 "<b>Hvid markør - nuværende</b>\n"
 "Inverteret standardmarkør"
 
-#: capplets/mouse/gnome-mouse-properties.c:532
+#: capplets/mouse/gnome-mouse-properties.c:542
 msgid ""
 "<b>White Cursor</b>\n"
 "The default cursor inverted"
@@ -1080,7 +1178,7 @@ msgstr ""
 "<b>Hvid markør</b>\n"
 "Inverteret standardmarkør"
 
-#: capplets/mouse/gnome-mouse-properties.c:550
+#: capplets/mouse/gnome-mouse-properties.c:560
 msgid ""
 "<b>Large Cursor - Current</b>\n"
 "Large version of normal cursor"
@@ -1088,7 +1186,7 @@ msgstr ""
 "<b>Stor markør - nuværende</b>\n"
 "Stor udgave af den normale markør"
 
-#: capplets/mouse/gnome-mouse-properties.c:553
+#: capplets/mouse/gnome-mouse-properties.c:563
 msgid ""
 "<b>Large Cursor</b>\n"
 "Large version of normal cursor"
@@ -1096,7 +1194,7 @@ msgstr ""
 "<b>Stor markør</b>\n"
 "Stor udgave af den normale markør"
 
-#: capplets/mouse/gnome-mouse-properties.c:571
+#: capplets/mouse/gnome-mouse-properties.c:581
 msgid ""
 "<b>Large White Cursor - Current</b>\n"
 "Large version of white cursor"
@@ -1104,7 +1202,7 @@ msgstr ""
 "<b>Stor hvid markør - nuværende</b>\n"
 "Stor udgave af den hvide markør"
 
-#: capplets/mouse/gnome-mouse-properties.c:574
+#: capplets/mouse/gnome-mouse-properties.c:584
 msgid ""
 "<b>Large White Cursor</b>\n"
 "Large version of white cursor"
@@ -1112,7 +1210,7 @@ msgstr ""
 "<b>Stor hvid markør</b>\n"
 "Stor udgave af den hvide markør"
 
-#: capplets/mouse/gnome-mouse-properties.c:708
+#: capplets/mouse/gnome-mouse-properties.c:718
 #: capplets/mouse/gnome-mouse-properties.glade.h:18
 #: capplets/mouse/mouse.desktop.in.h:2
 msgid "Mouse Properties"
@@ -1547,36 +1645,16 @@ msgstr ""
 "Type af bg_applier: BG_APPLIER_ROOT for rodvinduet eller BG_APPLIER_PREVIEW "
 "for eksempel"
 
-#: libbackground/applier.c:395
+#: libbackground/applier.c:401
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "Kunne ikke indlæse billedet '%s'; deaktiverer baggrundsbillede."
 
-#: libbackground/preferences.c:50
-msgid "Scaled"
-msgstr "Skaleret"
-
-#: libbackground/preferences.c:52
-msgid "Embossed"
-msgstr "Indgraveret"
-
-#: libbackground/preferences.c:58
-msgid "Solid"
-msgstr "Ensfarvet"
-
-#: libbackground/preferences.c:59
-msgid "Horizontal Gradient"
-msgstr "Vandret farveovergang"
-
-#: libbackground/preferences.c:60
-msgid "Vertical Gradient"
-msgstr "Lodret farveovergang"
-
-#: libbackground/preview-file-selection.c:186
+#: libbackground/preview-file-selection.c:193
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Kunne ikke finde en hbox, bruger en almindelig filvælger"
 
-#: libbackground/preview-file-selection.c:191
+#: libbackground/preview-file-selection.c:198
 msgid "Preview"
 msgstr "Eksempel"
 
@@ -1609,6 +1687,40 @@ msgstr "Spil"
 #: libsounds/sound-view.c:244
 msgid "Select sound file"
 msgstr "Vælg en lydfil"
+
+#~ msgid "Background colors"
+#~ msgstr "Baggrundsfarver"
+
+#~ msgid "Background picture"
+#~ msgstr "Baggrundsbillede"
+
+#~ msgid "Image:"
+#~ msgstr "Billede:"
+
+# '(keep aspect ratio)' giver sig selv
+#~ msgid "Scaled (keep aspect ratio)"
+#~ msgstr "Skaleret"
+
+#~ msgid "Style:"
+#~ msgstr "Stil: "
+
+#~ msgid "Tiled"
+#~ msgstr "Side-om-side"
+
+#~ msgid "Use a picture for the background"
+#~ msgstr "Benyt et billede til baggrunden"
+
+#~ msgid "Embossed"
+#~ msgstr "Indgraveret"
+
+#~ msgid "Solid"
+#~ msgstr "Ensfarvet"
+
+#~ msgid "Horizontal Gradient"
+#~ msgstr "Vandret farveovergang"
+
+#~ msgid "Vertical Gradient"
+#~ msgstr "Lodret farveovergang"
 
 #~ msgid "Use a custom font."
 #~ msgstr "Benyt en selvvalgt skrifttype."
@@ -1659,31 +1771,6 @@ msgstr "Vælg en lydfil"
 
 #~ msgid "Startup Programs"
 #~ msgstr "Opstartsprogrammer"
-
-#~ msgid ""
-#~ "Couldn't find the file '%s'.\n"
-#~ "\n"
-#~ "Please make sure it exists and try again, or choose a different "
-#~ "background picture."
-#~ msgstr ""
-#~ "Kunne ikke finde filen '%s'.\n"
-#~ "\n"
-#~ "Sikr dig at den eksisterer og prøv igen, eller vælg et andet "
-#~ "baggrundsbillede."
-
-#~ msgid ""
-#~ "I don't know how to open the file '%s'.\n"
-#~ "Perhaps its a kind of picture that is not yet supported.\n"
-#~ "\n"
-#~ "Please select a different picture instead."
-#~ msgstr ""
-#~ "Det vides ikke hvordan filen '%s' skal åbnes.\n"
-#~ "Måske er det en form for billede som endnu ikke er understøttet.\n"
-#~ "\n"
-#~ "Vælg venligst et andet billede i stedet for."
-
-#~ msgid "Main"
-#~ msgstr "Hoved"
 
 #~ msgid "Main Settings"
 #~ msgstr "Hovedindstillinger"
@@ -1806,9 +1893,6 @@ msgstr "Vælg en lydfil"
 
 #~ msgid "Options for adding and removing backends"
 #~ msgstr "Tilvalg til at tilføje eller fjerne bagender"
-
-#~ msgid "Wallpaper Selection"
-#~ msgstr "Billedvælger"
 
 #~ msgid "Gnome Default Editor"
 #~ msgstr "Forvalgt redigeringsprogram til Gnome"
@@ -1987,9 +2071,6 @@ msgstr "Vælg en lydfil"
 #~ msgid "Four Sided cells"
 #~ msgstr "Firesidede celler"
 
-#~ msgid "Full Color"
-#~ msgstr "Fuld farve"
-
 #~ msgid "Many"
 #~ msgstr "Mange"
 
@@ -2166,9 +2247,6 @@ msgstr "Vælg en lydfil"
 
 #~ msgid "Bouboule"
 #~ msgstr "Bouboule"
-
-#~ msgid "Colors:"
-#~ msgstr "Farver:"
 
 #~ msgid "Count:"
 #~ msgstr "Antal:"
