@@ -1,4 +1,4 @@
-Applicationsdir = $(datadir)/control-center
+Applicationsdir = $(datadir)/control-center/capplets
 Applications_DATA = \
 	rollback.desktop
 
