@@ -36,6 +36,8 @@
 #include <esd.h>
 #include <sys/types.h>
 
+#define CP CAPPLET_CONFIG_PREFIX "sound-properties/"
+
 /* Capplet-specific prototypes */
 
 static SoundProperties *props = NULL;
@@ -55,8 +57,8 @@ apply_settings (Bonobo_ConfigDatabase db)
 	gboolean enable_esd;
 	gboolean event_sounds;
 
-	enable_esd = bonobo_config_get_boolean (db, "/main/enable_esd", NULL);
-	event_sounds = bonobo_config_get_boolean (db, "/main/event_sounds", NULL);
+	enable_esd = bonobo_config_get_boolean (db, CP "enable_esd", NULL);
+	event_sounds = bonobo_config_get_boolean (db, CP "event_sounds", NULL);
 
         if (enable_esd && gnome_sound_connection < 0)
                 start_esd ();
@@ -232,8 +234,8 @@ get_legacy_settings (Bonobo_ConfigDatabase db)
 {
 	gboolean val_boolean, def;
 
-	COPY_FROM_LEGACY (boolean, "/main/enable_esd", bool, "/sound/system/settings/start_esd=false");
-	COPY_FROM_LEGACY (boolean, "/main/event_sounds", bool, "/sound/system/settings/event_sounds=false");
+	COPY_FROM_LEGACY (boolean, CP "enable_esd", bool, "/sound/system/settings/start_esd=false");
+	COPY_FROM_LEGACY (boolean, CP "event_sounds", bool, "/sound/system/settings/event_sounds=false");
 }
 
 int
