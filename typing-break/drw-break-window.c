@@ -1,7 +1,7 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
  * Copyright (C) 2002 CodeFactory AB
- * Copyright (C) 2002 Richard Hult <rhult@codefactory.se>
+ * Copyright (C) 2002 Richard Hult <richard@imendio.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -25,16 +25,18 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 #include <gconf/gconf-client.h>
+#include <libgnome/gnome-i18n.h>
+#include "drwright.h"
 #include "drw-break-window.h"
-#include "drw-intl.h"
+
 
 struct _DrwBreakWindowPriv {
 	GtkWidget *clock_label;
 	GtkWidget *break_label;
 	GtkWidget *image;
 
-	GtkWidget *unlock_entry;
-	GtkWidget *unlock_button;
+	GtkWidget *postpone_entry;
+	GtkWidget *postpone_button;
 	
 	GTimer    *timer;
 
@@ -42,10 +44,10 @@ struct _DrwBreakWindowPriv {
 	
 	gchar     *break_text;
 	guint      clock_timeout_id;
-	guint      unlock_timeout_id;
+	guint      postpone_timeout_id;
 };
 
-#define UNLOCK_CANCEL 30*1000
+#define POSTPONE_CANCEL 30*1000
 
 /* Signals */
 enum {
@@ -63,7 +65,7 @@ static GdkPixbuf *  create_tile_pixbuf             (GdkPixbuf           *dest_pi
 						    guint                alpha,
 						    GdkColor            *bg_color);
 static gboolean     clock_timeout_cb               (DrwBreakWindow      *window);
-static void         unlock_clicked_cb              (GtkWidget           *button,
+static void         postpone_clicked_cb              (GtkWidget           *button,
 						    GtkWidget           *window);
 static gboolean     label_expose_event_cb          (GtkLabel            *label,
 						    GdkEventExpose      *event,
@@ -146,20 +148,20 @@ drw_break_window_init (DrwBreakWindow *window)
 	GdkColor            color;
 	GtkWidget          *outer_vbox;
 	GtkWidget          *button_box;
-	gboolean            allow_unlock;
+	gboolean            allow_postpone;
 
         priv = g_new0 (DrwBreakWindowPriv, 1);
         window->priv = priv;
 
 	priv->break_time = 60 * gconf_client_get_int (gconf_client_get_default (),
-						      "/desktop/gnome/typing_break/break_time",
+						      GCONF_PATH "/break_time",
 						      NULL);
 	
-	allow_unlock = gconf_client_get_bool (gconf_client_get_default (),
-					      "/desktop/gnome/typing_break/allow_unlock",
+	allow_postpone = gconf_client_get_bool (gconf_client_get_default (),
+					      GCONF_PATH "/allow_postpone",
 					      NULL);
 
-	GTK_WINDOW (window)->type = GTK_WINDOW_POPUP;	
+	GTK_WINDOW (window)->type = GTK_WINDOW_POPUP;
 
 	gtk_window_set_default_size (GTK_WINDOW (window),
 				     gdk_screen_width (),
@@ -249,26 +251,26 @@ drw_break_window_init (DrwBreakWindow *window)
 
 	gtk_box_pack_start (GTK_BOX (outer_vbox), align, TRUE, TRUE, 0);
 
-	if (allow_unlock) {
+	if (allow_postpone) {
 		button_box = gtk_hbox_new (FALSE, 0);
 		gtk_widget_show (button_box);
 		
 		gtk_container_set_border_width (GTK_CONTAINER (button_box), 12);
 		
-		priv->unlock_button = gtk_button_new_with_label (_("Postpone break"));
-		gtk_widget_show (priv->unlock_button);
-		
-		g_signal_connect (priv->unlock_button,
+		priv->postpone_button = gtk_button_new_with_label (_("Postpone break"));
+		gtk_widget_show (priv->postpone_button);
+
+		g_signal_connect (priv->postpone_button,
 				  "clicked",
-				  G_CALLBACK (unlock_clicked_cb),
+				  G_CALLBACK (postpone_clicked_cb),
 				  window);
 		
-		gtk_box_pack_end (GTK_BOX (button_box), priv->unlock_button, FALSE, TRUE, 0);
+		gtk_box_pack_end (GTK_BOX (button_box), priv->postpone_button, FALSE, TRUE, 0);
 
-		priv->unlock_entry = gtk_entry_new ();
-		gtk_entry_set_has_frame (GTK_ENTRY (priv->unlock_entry), FALSE);
+		priv->postpone_entry = gtk_entry_new ();
+		gtk_entry_set_has_frame (GTK_ENTRY (priv->postpone_entry), FALSE);
 
-		gtk_box_pack_end (GTK_BOX (button_box), priv->unlock_entry, FALSE, TRUE, 4);
+		gtk_box_pack_end (GTK_BOX (button_box), priv->postpone_entry, FALSE, TRUE, 4);
 		
 		gtk_box_pack_end (GTK_BOX (outer_vbox), button_box, FALSE, TRUE, 0);
 	}
@@ -347,8 +349,8 @@ drw_break_window_finalize (GObject *object)
 		g_source_remove (priv->clock_timeout_id);
 	}
 
-	if (priv->unlock_timeout_id != 0) {
-		g_source_remove (priv->unlock_timeout_id);
+	if (priv->postpone_timeout_id != 0) {
+		g_source_remove (priv->postpone_timeout_id);
 	}
 	
 	g_free (priv);
@@ -473,7 +475,7 @@ clock_timeout_cb (DrwBreakWindow *window)
 }
 
 static void
-unlock_entry_activate_cb (GtkWidget      *entry,
+postpone_entry_activate_cb (GtkWidget      *entry,
 			  DrwBreakWindow *window)
 {
 	const gchar *str;
@@ -482,12 +484,11 @@ unlock_entry_activate_cb (GtkWidget      *entry,
 	str = gtk_entry_get_text (GTK_ENTRY (entry));
 
 	phrase = gconf_client_get_string (gconf_client_get_default (),
-					  "/desktop/gnome/typing_break/unlock_phrase",
+					  GCONF_PATH "/unlock_phrase",
 					  NULL);
 	
 	if (!strcmp (str, phrase)) {
 		g_signal_emit (window, signals[POSTPONE], 0, NULL);
-		//gtk_widget_destroy (GTK_WIDGET (window));
 		return;
 	}
 
@@ -516,22 +517,22 @@ grab_on_window (GdkWindow *window,
 }
 
 static gboolean
-unlock_cancel_cb (DrwBreakWindow *window)
+postpone_cancel_cb (DrwBreakWindow *window)
 {
 	DrwBreakWindowPriv *priv;
 
 	priv = window->priv;
 
-	gtk_entry_set_text (GTK_ENTRY (priv->unlock_entry), "");
-	gtk_widget_hide (priv->unlock_entry);
+	gtk_entry_set_text (GTK_ENTRY (priv->postpone_entry), "");
+	gtk_widget_hide (priv->postpone_entry);
 
-	priv->unlock_timeout_id = 0;
+	priv->postpone_timeout_id = 0;
 	
 	return FALSE;
 }
 
 static gboolean
-unlock_entry_key_press_event_cb (GtkEntry       *entry,
+postpone_entry_key_press_event_cb (GtkEntry       *entry,
 				 GdkEventKey    *event,
 				 DrwBreakWindow *window)
 {
@@ -540,62 +541,61 @@ unlock_entry_key_press_event_cb (GtkEntry       *entry,
 	priv = window->priv;
 
 	if (event->keyval == GDK_Escape) {
-		if (priv->unlock_timeout_id) {
-			g_source_remove (priv->unlock_timeout_id);
+		if (priv->postpone_timeout_id) {
+			g_source_remove (priv->postpone_timeout_id);
 		}
 		
-		unlock_cancel_cb (window);
+		postpone_cancel_cb (window);
 
 		return TRUE;
 	}
 	
-	g_source_remove (priv->unlock_timeout_id);
+	g_source_remove (priv->postpone_timeout_id);
 	
-	priv->unlock_timeout_id = g_timeout_add (UNLOCK_CANCEL, (GSourceFunc) unlock_cancel_cb, window);
+	priv->postpone_timeout_id = g_timeout_add (POSTPONE_CANCEL, (GSourceFunc) postpone_cancel_cb, window);
 
 	return FALSE;
 }
 
 static void
-unlock_clicked_cb (GtkWidget *button,
+postpone_clicked_cb (GtkWidget *button,
 		   GtkWidget *window)
 {
 	DrwBreakWindow     *bw = DRW_BREAK_WINDOW (window);
 	DrwBreakWindowPriv *priv = bw->priv;
 	gchar              *phrase;
 	
-	phrase = gconf_client_get_string (gconf_client_get_default (),
-					  "/desktop/gnome/typing_break/unlock_phrase",
-					  NULL);
+	/* Disable the phrase for now. */
+	phrase = NULL; /*gconf_client_get_string (gconf_client_get_default (),
+					  GCONF_PATH "/unlock_phrase",
+					  NULL);*/
 
 	if (!phrase || !phrase[0]) {
 		g_signal_emit (window, signals[POSTPONE], 0, NULL);
-
-		//gtk_widget_destroy (window);
 		return;
 	}
 
-	if (GTK_WIDGET_VISIBLE (priv->unlock_entry)) {
-		gtk_widget_activate (priv->unlock_entry);
+	if (GTK_WIDGET_VISIBLE (priv->postpone_entry)) {
+		gtk_widget_activate (priv->postpone_entry);
 		return;
 	}
 	
-	gtk_widget_show (priv->unlock_entry);
+	gtk_widget_show (priv->postpone_entry);
 
-	priv->unlock_timeout_id = g_timeout_add (UNLOCK_CANCEL, (GSourceFunc) unlock_cancel_cb, bw);
+	priv->postpone_timeout_id = g_timeout_add (POSTPONE_CANCEL, (GSourceFunc) postpone_cancel_cb, bw);
 	
-	grab_on_window (priv->unlock_entry->window,  gtk_get_current_event_time ());
+	grab_on_window (priv->postpone_entry->window,  gtk_get_current_event_time ());
 	
-	gtk_widget_grab_focus (priv->unlock_entry);
+	gtk_widget_grab_focus (priv->postpone_entry);
 
-	g_signal_connect (priv->unlock_entry,
+	g_signal_connect (priv->postpone_entry,
 			  "activate",
-			  G_CALLBACK (unlock_entry_activate_cb),
+			  G_CALLBACK (postpone_entry_activate_cb),
 			  bw);
 
-	g_signal_connect (priv->unlock_entry,
+	g_signal_connect (priv->postpone_entry,
 			  "key_press_event",
-			  G_CALLBACK (unlock_entry_key_press_event_cb),
+			  G_CALLBACK (postpone_entry_key_press_event_cb),
 			  bw);
 }
 

@@ -1,7 +1,7 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
  * Copyright (C) 2002 CodeFactory AB
- * Copyright (C) 2002-2003 Richard Hult <rhult@codefactory.se>
+ * Copyright (C) 2002-2003 Richard Hult <richard@imendio.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -28,9 +28,9 @@
 #include <gtk/gtk.h>
 #include <libgnomeui/gnome-stock-icons.h>
 #include <libgnomeui/gnome-client.h>
+#include <libgnome/gnome-i18n.h>
 #include <gconf/gconf-client.h>
 #include "drwright.h"
-#include "drw-intl.h"
 #include "drw-break-window.h"
 #include "drw-monitor.h"
 #include "eggtrayicon.h"
@@ -107,18 +107,22 @@ static void     break_window_done_cb     (GtkWidget      *window,
 					  DrWright       *dr);
 static void     break_window_postpone_cb (GtkWidget      *window,
 					  DrWright       *dr);
+#if 0
 static void     popup_enabled_cb         (gpointer        callback_data,
 					  guint           action,
 					  GtkWidget      *widget);
+#endif
 static void     popup_break_cb           (gpointer        callback_data,
 					  guint           action,
 					  GtkWidget      *widget);
 static void     popup_preferences_cb     (gpointer        callback_data,
 					  guint           action,
 					  GtkWidget      *widget);
+#if 0
 static void     popup_quit_cb            (gpointer        callback_data,
 					  guint           action,
 					  GtkWidget      *widget);
+#endif
 static void     popup_about_cb           (gpointer        callback_data,
 					  guint           action,
 					  GtkWidget      *widget);
@@ -130,17 +134,17 @@ static void     init_tray_icon           (DrWright       *dr);
 #define GIF_CB(x) ((GtkItemFactoryCallback)(x))
 
 static GtkItemFactoryEntry popup_items[] = {
-	{ N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
-	{ N_("/_Take a Break"), NULL, GIF_CB (popup_break_cb),       POPUP_ITEM_BREAK,   "<Item>",       NULL },
-	{ "/sep1",              NULL, 0,                             0,                  "<Separator>",  NULL },
+/*	{ N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },*/
 	{ N_("/_Preferences"),  NULL, GIF_CB (popup_preferences_cb), 0,                  "<StockItem>",  GTK_STOCK_PREFERENCES },
 	{ N_("/_About"),        NULL, GIF_CB (popup_about_cb),       0,                  "<StockItem>",  GNOME_STOCK_ABOUT },
-	{ "/sep2",              NULL, 0,                             0,                  "<Separator>",  NULL },
-	{ N_("/_Remove Icon"),  "",   GIF_CB (popup_quit_cb),        0,                  "<StockItem>",  GTK_STOCK_REMOVE },
+	{ "/sep1",              NULL, 0,                             0,                  "<Separator>",  NULL },
+	{ N_("/_Take a Break"), NULL, GIF_CB (popup_break_cb),       POPUP_ITEM_BREAK,   "<Item>",       NULL }
+/*	{ "/sep2",              NULL, 0,                             0,                  "<Separator>",  NULL },
+	{ N_("/_Remove Icon"),  "",   GIF_CB (popup_quit_cb),        0,                  "<StockItem>",  GTK_STOCK_REMOVE }*/
 };
 
 GConfClient *client = NULL;
-gboolean debug;
+extern gboolean debug;
 
 static void
 setup_debug_values (DrWright *dr)
@@ -448,11 +452,11 @@ update_tooltip (DrWright *dr)
 	switch (dr->state) {
 	case STATE_WARN_TYPE:
 	case STATE_WARN_IDLE:
-		min = ceil ((dr->warn_time - elapsed_time) / 60.0);
+		min = floor (0.5 + (dr->warn_time - elapsed_time) / 60.0);
 		break;
 		
 	default:
-		min = ceil ((dr->type_time - elapsed_time) / 60.0);
+		min = floor (0.5 + (dr->type_time - elapsed_time) / 60.0);
 		break;
 	}
 
@@ -491,7 +495,7 @@ gconf_notify_cb (GConfClient *client,
 	DrWright  *dr = user_data;
 	GtkWidget *item;
 	
-	if (!strcmp (entry->key, "/desktop/gnome/typing_break/type_time")) {
+	if (!strcmp (entry->key, GCONF_PATH "/type_time")) {
 		if (entry->value->type == GCONF_VALUE_INT) {
 			dr->type_time = 60 * gconf_value_get_int (entry->value);
 			dr->warn_time = MIN (dr->type_time / 10, 5*60);
@@ -499,20 +503,20 @@ gconf_notify_cb (GConfClient *client,
 			dr->state = STATE_START;
 		}
 	}
-/*	else if (!strcmp (entry->key, "/desktop/gnome/typing_break/warn_time")) {
+/*	else if (!strcmp (entry->key, GCONF_PATH "/warn_time")) {
 		if (entry->value->type == GCONF_VALUE_INT) {
 			dr->warn_time = 60 * gconf_value_get_int (entry->value);
 			dr->state = STATE_START;
 		}
 	}
 */
-	else if (!strcmp (entry->key, "/desktop/gnome/typing_break/break_time")) {
+	else if (!strcmp (entry->key, GCONF_PATH "/break_time")) {
 		if (entry->value->type == GCONF_VALUE_INT) {
 			dr->break_time = 60 * gconf_value_get_int (entry->value);
 			dr->state = STATE_START;
 		}
 	}
-	else if (!strcmp (entry->key, "/desktop/gnome/typing_break/enabled")) {
+	else if (!strcmp (entry->key, GCONF_PATH "/enabled")) {
 		if (entry->value->type == GCONF_VALUE_BOOL) {
 			dr->enabled = gconf_value_get_bool (entry->value);
 			dr->state = STATE_START;
@@ -528,6 +532,7 @@ gconf_notify_cb (GConfClient *client,
 	maybe_change_state (dr);
 }
 
+#if 0
 static void
 popup_enabled_cb (gpointer   callback_data,
 		  guint      action,
@@ -542,10 +547,11 @@ popup_enabled_cb (gpointer   callback_data,
 
 	enabled = gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM (item));
 
-	gconf_client_set_bool (client, "/desktop/gnome/typing_break/enabled",
+	gconf_client_set_bool (client, GCONF_PATH "/enabled",
 			       enabled,
 			       NULL);
 }
+#endif
 
 static void
 popup_break_cb (gpointer   callback_data,
@@ -568,6 +574,7 @@ popup_preferences_cb (gpointer   callback_data,
 	/* Bring up gnome-keyboard-properties on the right page */
 }
 
+#if 0
 static void
 popup_quit_cb (gpointer   callback_data,
 	       guint      action,
@@ -585,10 +592,18 @@ popup_quit_cb (gpointer   callback_data,
 	dialog = gtk_message_dialog_new (NULL,
 					 0,
 					 GTK_MESSAGE_QUESTION,
-					 GTK_BUTTONS_YES_NO,
+					 GTK_BUTTONS_NONE,
 					 str);
 
 	g_free (str);
+
+	gtk_dialog_add_button (GTK_DIALOG (dialog),
+			       _("Don't Quit"),
+			       GTK_RESPONSE_NO);
+	
+	gtk_dialog_add_button (GTK_DIALOG (dialog),
+			       _("Quit"),
+			       GTK_RESPONSE_YES);
 	
 	g_object_set (GTK_MESSAGE_DIALOG (dialog)->label,
 		      "use-markup", TRUE,
@@ -607,6 +622,7 @@ popup_quit_cb (gpointer   callback_data,
 		gtk_main_quit ();
 	}
 }
+#endif
 
 static void
 popup_about_cb (gpointer   callback_data,
@@ -626,7 +642,10 @@ popup_about_cb (gpointer   callback_data,
 	
 	about_window = gtk_dialog_new ();
 
-	g_object_add_weak_pointer (G_OBJECT (about_window), (gpointer *) &about_window);
+	g_signal_connect (about_window,
+			  "destroy",
+                          G_CALLBACK (gtk_widget_destroyed),
+			  &about_window);
 	
 	gtk_dialog_add_button (GTK_DIALOG (about_window),
 			       GTK_STOCK_OK, GTK_RESPONSE_OK);
@@ -658,7 +677,7 @@ popup_about_cb (gpointer   callback_data,
 				  "<span size=\"small\">%s</span>\n"
 				  "<span size=\"small\">%s</span>\n",
 				  _("A computer break reminder."),
-				  _("Written by Richard Hult &lt;rhult@codefactory.se&gt;"),
+				  _("Written by Richard Hult &lt;richard@imendio.com&gt;"),
 				  _("Eye candy added by Anders Carlsson"));
 	gtk_label_set_markup (GTK_LABEL (label), markup);
 	g_free (markup);
@@ -863,32 +882,32 @@ drwright_new (void)
         dr = g_new0 (DrWright, 1);
 
 	client = gconf_client_get_default ();
-
+	
 	gconf_client_add_dir (client,
-			     "/apps/drwright",
+			      GCONF_PATH,
 			      GCONF_CLIENT_PRELOAD_NONE,
 			      NULL);
 
-	gconf_client_notify_add (client, "/apps/drwright",
+	gconf_client_notify_add (client, GCONF_PATH,
 				 gconf_notify_cb,
 				 dr,
 				 NULL,
 				 NULL);
 	
 	dr->type_time = 60 * gconf_client_get_int (
-		client, "/desktop/gnome/typing_break/type_time", NULL);
+		client, GCONF_PATH "/type_time", NULL);
 	
 /*	dr->warn_time = 60 * gconf_client_get_int (
-		client, "/desktop/gnome/typing_break/warn_time", NULL);
+		client, GCONF_PATH /warn_time", NULL);
 */
 	dr->warn_time = MIN (dr->type_time / 10, 60*5);
 	
 	dr->break_time = 60 * gconf_client_get_int (
-		client, "/desktop/gnome/typing_break/break_time", NULL);
+		client, GCONF_PATH "/break_time", NULL);
 
 	dr->enabled = gconf_client_get_bool (
 		client,
-		"/desktop/gnome/typing_break/enabled",
+		GCONF_PATH "/enabled",
 		NULL);
 
 	if (debug) {
@@ -908,8 +927,8 @@ drwright_new (void)
 				       popup_items,
 				       dr);
 
-	item = gtk_item_factory_get_widget_by_action (dr->popup_factory, POPUP_ITEM_ENABLED);
-	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (item), dr->enabled);
+	/*item = gtk_item_factory_get_widget_by_action (dr->popup_factory, POPUP_ITEM_ENABLED);
+	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (item), dr->enabled);*/
 
 	item = gtk_item_factory_get_widget_by_action (dr->popup_factory, POPUP_ITEM_BREAK);
 	gtk_widget_set_sensitive (item, dr->enabled);

@@ -13,7 +13,6 @@ gnome_typing_monitor_SOURCES =			\
 	drw-break-window.h			\
 	drw-monitor.c				\
 	drw-monitor.h				\
-	drw-intl.h				\
 	eggtrayicon.c				\
 	eggtrayicon.h				\
 	drw-selection.c				\
