@@ -52,7 +52,8 @@ typedef enum _orientation_t {
 
 typedef enum _wallpaper_type_t {
 	WPTYPE_TILED = 0, WPTYPE_CENTERED, WPTYPE_SCALED,
-	WPTYPE_STRETCHED, WPTYPE_EMBOSSED, WPTYPE_NONE
+	WPTYPE_STRETCHED, WPTYPE_EMBOSSED, WPTYPE_NONE,
+	WPTYPE_UNSET
 } wallpaper_type_t;
 
 struct _BGPreferences
