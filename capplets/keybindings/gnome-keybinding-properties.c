@@ -689,7 +689,7 @@ accel_edited_callback (GtkCellRendererText *cell,
 				       GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL,
 				       GTK_MESSAGE_WARNING,
 				       GTK_BUTTONS_OK,
-				       "Error setting new accelerator in configuration database: %s\n",
+				       _("Error setting new accelerator in configuration database: %s\n"),
 				       err->message);
       gtk_dialog_run (GTK_DIALOG (dialog));
 
