@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
-"POT-Creation-Date: 2002-07-18 02:28+0800\n"
+"POT-Creation-Date: 2002-07-31 01:45+0800\n"
 "PO-Revision-Date: 2002-03-18 00:54+0800\n"
 "Last-Translator: Khairulanuar Abd Majid <khairul@ikhlas.com>\n"
 "Language-Team: Projek Gabai <gabai-penyumbang@lists.sourceforge.org>\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:225
-#: capplets/keyboard/gnome-keyboard-properties.c:143
+#: capplets/keyboard/gnome-keyboard-properties.c:144
 #, c-format
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Terdapat ralat melancarkan caplet papan kekunci: %s"
@@ -231,7 +231,7 @@ msgstr "_Pilih gambar:"
 #: capplets/background/background-properties-capplet.c:561
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
-#: capplets/keyboard/gnome-keyboard-properties.c:277
+#: capplets/keyboard/gnome-keyboard-properties.c:278
 #: capplets/mouse/gnome-mouse-properties.c:752
 #: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
@@ -324,6 +324,11 @@ msgid ""
 "settings manager may already be active and conflicting with the GNOME "
 "settings manager."
 msgstr ""
+"Gagal memulakan pengurus tetapan 'gnome-setting-daemon'.\n"
+"Tanpa pengurus tetapan GNOME terlaksana, setengah keutamaan tak dapat "
+"bertindak. Ini menunjukkan masalah dengan Bonobo, atau pengurus tetapan "
+"bukan-GNOME (ie. KDE) sudah tersedia aktif dan konflik dengan pengurus "
+"tetapan GNOME."
 
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
@@ -700,11 +705,11 @@ msgstr "Penampilan"
 
 #: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:2
 msgid "Select themes and fonts for your windows"
-msgstr ""
+msgstr "Pilih tema dan font bagi tetingkap anda"
 
 #: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:1
 msgid "Customize shortcut keys for your windows"
-msgstr ""
+msgstr "Personalisasi kekunci pintasan bagi tetingkap anda"
 
 #: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:2
 msgid "Shortcuts"
@@ -720,7 +725,7 @@ msgstr "Kelakuan fokus"
 
 #: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
 msgid "Configure matched windows to have particular characteristics"
-msgstr "KOnfigurasikan tetingkap sepadan supaya mempunyai sifat tertentu"
+msgstr "Konfigurasikan tetingkap sepadan supaya mempunyai sifat tertentu"
 
 #: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:2
 msgid "Matched Windows"
@@ -740,7 +745,7 @@ msgstr "Meta"
 
 #: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:2
 msgid "Select your Sawfish user level"
-msgstr ""
+msgstr "Pilih tahap pengguna Sawfish anda"
 
 #: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
 msgid "Miscellaneous"
@@ -760,7 +765,7 @@ msgstr "Pindah dan Ubahsaiz"
 
 #: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:1
 msgid "Configure positioning of windows on the desktop"
-msgstr ""
+msgstr "Konfigurasi penempatan tetingkap pada desktop"
 
 #: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:2
 msgid "Placement"
@@ -870,17 +875,17 @@ msgid "Source Code"
 msgstr "Kod Sumber"
 
 #: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:673
+#: capplets/file-types/mime-type-info.c:668
 msgid "Audio"
 msgstr "Audio"
 
 #: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:669
+#: capplets/file-types/mime-type-info.c:664
 msgid "Images"
 msgstr "Imej"
 
 #: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:671
+#: capplets/file-types/mime-type-info.c:666
 msgid "Video"
 msgstr "Video"
 
@@ -1059,7 +1064,7 @@ msgid "Add File Type"
 msgstr "Tambah jenis fail"
 
 #: capplets/file-types/mime-edit-dialog.c:435
-#: capplets/file-types/mime-type-info.c:675
+#: capplets/file-types/mime-type-info.c:670
 msgid "Misc"
 msgstr "Lain-lain"
 
@@ -1073,10 +1078,12 @@ msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
 msgstr ""
+"Sila masukkkan jenis MIME yang sah. Ia patut dalam bentuk kelas/jenis dan "
+"tak boleh mengandungi ruang."
 
 #: capplets/file-types/mime-edit-dialog.c:854
 msgid "A MIME type with that name already exists, overwrite ?."
-msgstr ""
+msgstr "Jenis MIME dengan nama itu sudah ada, Tindih?."
 
 #: capplets/file-types/mime-edit-dialog.c:919
 msgid "Category"
@@ -1171,24 +1178,113 @@ msgid "Select fonts for the desktop"
 msgstr "Pilih font bagi desktop"
 
 #: capplets/font/font-properties.glade.h:1
+msgid "Best _shapes"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:2
+msgid "Best co_ntrast"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:3
+msgid "De_tails..."
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:4
 msgid "Font Preferences"
 msgstr "Keutamaan Font"
 
-#: capplets/font/font-properties.glade.h:2
+#: capplets/font/font-properties.glade.h:5
+#, fuzzy
+msgid "Font Rendering"
+msgstr "Keutamaan Font"
+
+#: capplets/font/font-properties.glade.h:6
+msgid "Font Rendering Details"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:7
+msgid "G_rayscale"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:8
+msgid "Hinting:"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:9
+msgid "N_one"
+msgstr "_Tiada"
+
+#: capplets/font/font-properties.glade.h:10
+msgid "Resolution (_dots per inch):"
+msgstr "Resolusi (_dot per inci):"
+
+#: capplets/font/font-properties.glade.h:11
 msgid "Set the font for applications"
 msgstr "Tetapkan font bagi aplikasi"
 
-#: capplets/font/font-properties.glade.h:3
+#: capplets/font/font-properties.glade.h:12
 msgid "Set the font for the icons on the desktop"
 msgstr "Tetapkan font bagi ikon pada dekstop"
 
-#: capplets/font/font-properties.glade.h:4
+#: capplets/font/font-properties.glade.h:13
+msgid "Smoothing:"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:14
+msgid "Sub_pixel (LCDs)"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:15
+msgid "Sub_pixel smoothing (LCDs)"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:16
+msgid "Subpixel order:"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:17
+msgid "VB_GR"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:18
 msgid "_Application font:"
 msgstr "Font _Aplikasi:"
 
-#: capplets/font/font-properties.glade.h:5
+#: capplets/font/font-properties.glade.h:19
+msgid "_BGR"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:20
 msgid "_Desktop font:"
 msgstr "Font _desktop:"
+
+#: capplets/font/font-properties.glade.h:21
+msgid "_Full"
+msgstr "_Penuh"
+
+#: capplets/font/font-properties.glade.h:22
+msgid "_Medium"
+msgstr "_Sederhana"
+
+#: capplets/font/font-properties.glade.h:23
+msgid "_Monochrome"
+msgstr "_Monokrom"
+
+#: capplets/font/font-properties.glade.h:24
+msgid "_None"
+msgstr "_Tiada"
+
+#: capplets/font/font-properties.glade.h:25
+msgid "_RGB"
+msgstr "_RGB"
+
+#: capplets/font/font-properties.glade.h:26
+msgid "_Slight"
+msgstr ""
+
+#: capplets/font/font-properties.glade.h:27
+msgid "_VRGB"
+msgstr "_VRGB"
 
 #: capplets/keybindings/eggcellrendererkeys.c:158
 #: capplets/keybindings/eggcellrendererkeys.c:159
@@ -1202,7 +1298,7 @@ msgstr "Kekunci pemecut"
 
 #: capplets/keybindings/eggcellrendererkeys.c:206
 #: capplets/keybindings/gnome-keybinding-properties.c:173
-#: libbackground/applier.c:521
+#: libbackground/applier.c:588
 msgid "Disabled"
 msgstr "Dimatikan"
 
@@ -1265,14 +1361,14 @@ msgstr "Pintasan _Desktop:"
 
 #: capplets/keybindings/keybinding.desktop.in.h:1
 msgid "Assign shortcut keys to commands"
-msgstr ""
+msgstr "Umpuk kekunci pintasan pada arahan"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:256
+#: capplets/keyboard/gnome-keyboard-properties.c:257
 msgid "_Accessibility"
 msgstr "Keboleh_capaikan"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:273
-#: capplets/keyboard/gnome-keyboard-properties.c:275
+#: capplets/keyboard/gnome-keyboard-properties.c:274
+#: capplets/keyboard/gnome-keyboard-properties.c:276
 #: capplets/sound/sound-properties-capplet.c:145
 #: capplets/sound/sound-properties-capplet.c:147
 msgid ""
@@ -1335,7 +1431,7 @@ msgstr "_Sela:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:17
 msgid "_Off"
-msgstr ""
+msgstr "_Off"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid "_Speed:"
@@ -1346,9 +1442,8 @@ msgid "_Volume:"
 msgstr "_Volum:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:20
-#, fuzzy
 msgid "faster"
-msgstr "Pantas"
+msgstr "lebih pantas"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:21
 #, fuzzy
@@ -1528,7 +1623,7 @@ msgstr "Keutamaan Tetikus"
 #: capplets/mouse/gnome-mouse-properties.glade.h:20
 msgid "Set the distance you need to move your cursor before dragging an item."
 msgstr ""
-"Tetapkan jarak yang diperlukan untuk menggerakkan kurson sebelum mengheret "
+"Tetapkan jarak yang diperlukan untuk menggerakkan kursor sebelum mengheret "
 "sesuatu item."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:21
@@ -1662,7 +1757,6 @@ msgid "Submenu"
 msgstr "Submenu"
 
 #: capplets/theme-switcher/control/control.c:74
-#: capplets/ui-properties/gnome-ui-properties.glade.h:4
 msgid "Item 1"
 msgstr "Item 1"
 
@@ -1732,7 +1826,7 @@ msgstr "_Lokasi bagi tema baru:"
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
-msgstr ""
+msgstr "Personalisasi penampilan toolbar dan bar menu pada aplikasi"
 
 #: capplets/ui-properties/behavior.desktop.in.h:2
 msgid "Menus & Toolbars"
@@ -1755,100 +1849,108 @@ msgid "A preview of what a toolbar looks like with these settings."
 msgstr "Prebiu bagaimana toolbar menu dilihat dengan tetapan ini."
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:3
+msgid "C_ut"
+msgstr "_Potong"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:4
+msgid "Edit Menu"
+msgstr "Edit Menu"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:5
 msgid "Icons Only"
 msgstr "Ikon Sahaja"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:5
-msgid "Item 2"
-msgstr "Item 2"
-
 #: capplets/ui-properties/gnome-ui-properties.glade.h:6
-msgid "Item 3"
-msgstr "Item 3"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:7
-msgid "Menu Item 1"
-msgstr "Item Menu 1"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:8
-msgid "Menu Item 2"
-msgstr "Item Menu 2"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:9
-msgid "Menu Item 3"
-msgstr "Item Menu 3"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:10
-msgid "Menu Item 4"
-msgstr "Item Menu 4"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:11
-msgid "Menu Item 5"
-msgstr "Item Menu 5"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:12
 msgid "Menu and Toolbar Preferences"
 msgstr "Keutamaan Menu dan Toolbar"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:13
+#: capplets/ui-properties/gnome-ui-properties.glade.h:7
 msgid "Menus"
 msgstr "Menu"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:14
+#: capplets/ui-properties/gnome-ui-properties.glade.h:8
 msgid "New File"
 msgstr "Fail Baru"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:15
+#: capplets/ui-properties/gnome-ui-properties.glade.h:9
 msgid "Open File"
 msgstr "Buka Fail"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:16
+#: capplets/ui-properties/gnome-ui-properties.glade.h:10
 msgid "Priority Text Beside Icons"
 msgstr "Prioriti Teks Sebelah Ikon"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:17
+#: capplets/ui-properties/gnome-ui-properties.glade.h:11
 msgid "Sample menubar:"
 msgstr "Bar Menu contoh:"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:18
+#: capplets/ui-properties/gnome-ui-properties.glade.h:12
 msgid "Sample toolbar:"
 msgstr "Toolbar contoh:"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:19
+#: capplets/ui-properties/gnome-ui-properties.glade.h:13
 msgid "Save File"
 msgstr "Simpan Fail"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:20
+#: capplets/ui-properties/gnome-ui-properties.glade.h:14
 msgid "Select the toolbar style."
 msgstr "Pilih gaya toolbar."
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:21
+#: capplets/ui-properties/gnome-ui-properties.glade.h:15
 msgid "Text Below Icons"
 msgstr "Teks Dibawah Ikon"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:22
+#: capplets/ui-properties/gnome-ui-properties.glade.h:16
 msgid "Text Only"
 msgstr "Teks Sahaja"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:23
+#: capplets/ui-properties/gnome-ui-properties.glade.h:17
 msgid "Toolbar"
 msgstr "Toolbar"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:24
+#: capplets/ui-properties/gnome-ui-properties.glade.h:18
 msgid "Toolbars can be _detached and moved around"
 msgstr "Toolbar boleh di_pisahkan dan dipindahkan"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:25
+#: capplets/ui-properties/gnome-ui-properties.glade.h:19
 msgid "_Button Labels: "
 msgstr "Label _Butang: "
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:26
+#: capplets/ui-properties/gnome-ui-properties.glade.h:20
+msgid "_Copy"
+msgstr ""
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:21
 msgid "_Menu"
 msgstr "_Menu"
 
+#: capplets/ui-properties/gnome-ui-properties.glade.h:22
+msgid "_New"
+msgstr "Ba_ru"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:23
+msgid "_Open"
+msgstr "_Buka"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:24
+msgid "_Paste"
+msgstr "_Tepek"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:25
+msgid "_Print"
+msgstr "_Cetak"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:26
+msgid "_Quit"
+msgstr "_Keluar"
+
 #: capplets/ui-properties/gnome-ui-properties.glade.h:27
+msgid "_Save"
+msgstr "_Simpan"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:28
 msgid "_Show icons in menus"
-msgstr ""
+msgstr "_Papar ikon pada menu"
 
 #: capplets/windows/gnome-window-properties.c:282
 #: capplets/windows/gnome-window-properties.glade.h:6
@@ -1927,7 +2029,7 @@ msgstr "Perihal aplikasi ini"
 
 #: control-center/gnomecc-ui.xml.h:2
 msgid "Overview of the control center"
-msgstr ""
+msgstr "Gambaran pusat kawalan"
 
 #: control-center/gnomecc-ui.xml.h:3
 msgid "_About..."
@@ -1963,31 +2065,33 @@ msgid ""
 "Cannot create the directory \"%s\".\n"
 "This is needed to allow changing cursors."
 msgstr ""
+"Tak dapat mencipta direktori \"%s\".\n"
+"Ini diperlukan untuk membolehkan penukaran kursor."
 
 #: gnome-settings-daemon/gnome-settings-keybindings.c:106
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
-msgstr ""
+msgstr "Ikatan Kekunci (%s) imempunyai aksi yang ditakrifkan beberapa kali\n"
 
 #: gnome-settings-daemon/gnome-settings-keybindings.c:119
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
-msgstr ""
+msgstr "Ikatan Kekunci (%s) mempunyai ikatan ditakrifkan banyak kali\n"
 
 #: gnome-settings-daemon/gnome-settings-keybindings.c:125
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
-msgstr ""
+msgstr "Ikatan kekunci (%s) tidak selesai\n"
 
 #: gnome-settings-daemon/gnome-settings-keybindings.c:153
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
-msgstr ""
+msgstr "Ikatan Kekunci (%s) tidak sah\n"
 
 #: gnome-settings-daemon/gnome-settings-keybindings.c:241
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
-msgstr ""
+msgstr "Ikatan Kekunci (%s) telah digunakan\n"
 
 #: gnome-settings-daemon/gnome-settings-keybindings.c:292
 #, c-format
@@ -2017,17 +2121,17 @@ msgstr "_Jangan papar mesej ini lagi"
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Tak dapat memuatkan fail bunyi %s sebagai contoh %s"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:150
+#: gnome-settings-daemon/gnome-settings-xsettings.c:166
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr ""
 "Kekunci GConf %s ditetapkan ke jenis %s tapi ia menjangkakan jenis %s\n"
 
-#: libbackground/applier.c:239
+#: libbackground/applier.c:254
 msgid "Type"
 msgstr "Jenis"
 
-#: libbackground/applier.c:240
+#: libbackground/applier.c:255
 msgid ""
 "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
 "for preview"
@@ -2035,21 +2139,29 @@ msgstr ""
 "Jenis bg_applier: BG_APPLIER_ROOT pada tetingkap root atau "
 "BG_APPLIER_PREVIEW untuk prebiu"
 
-#: libbackground/applier.c:247
+#: libbackground/applier.c:262
 msgid "Preview Width"
 msgstr "Lebar Prebiu"
 
-#: libbackground/applier.c:248
+#: libbackground/applier.c:263
 msgid "Width if applier is a preview: Defaults to 64."
 msgstr "Lebar jika penerap adalah prebiu: Default ke 64."
 
-#: libbackground/applier.c:255
+#: libbackground/applier.c:270
 msgid "Preview Height"
 msgstr "Tinggi Prebiu"
 
-#: libbackground/applier.c:256
+#: libbackground/applier.c:271
 msgid "Height if applier is a preview: Defaults to 48."
 msgstr "Tinggi jika penerap adalah prebiu: Default ke 48."
+
+#: libbackground/applier.c:279
+msgid "Screen"
+msgstr "Skrin"
+
+#: libbackground/applier.c:280
+msgid "Screen on which BGApplier is to draw"
+msgstr "Skrin dimana BGAplier akan lukis"
 
 #: libbackground/preview-file-selection.c:193
 msgid "Can't find an hbox, using a normal file selection"
@@ -2103,6 +2215,8 @@ msgid ""
 "wm-properties-capplet: Unable to initialize window manager.\n"
 "\tAnother window manager is already running and could not be killed\n"
 msgstr ""
+"wm-properties-caplet: Tak dapat menginitialisasi pengurus tetingkap.\n"
+"\tPengurus tetingkap lain sudah dilaksana dan tak dpaat dibunuh.\n"
 
 #: libwindow-settings/gnome-wm-manager.c:326
 #, c-format
@@ -2110,6 +2224,8 @@ msgid ""
 "wm-properties-capplet: Unable to initialize window manager.\n"
 "\t'%s' didn't start\n"
 msgstr ""
+"wm-properties-capplet: Tak dapat menginitialisasi pengurus tetingkap.\n"
+"\t'%s' tidak bermula\n"
 
 #: libwindow-settings/gnome-wm-manager.c:375
 msgid "Previous window manager did not die\n"
@@ -2135,6 +2251,27 @@ msgstr ""
 #: libwindow-settings/gnome-wm-manager.c:464
 msgid "OK"
 msgstr "OK"
+
+#~ msgid "Item 2"
+#~ msgstr "Item 2"
+
+#~ msgid "Item 3"
+#~ msgstr "Item 3"
+
+#~ msgid "Menu Item 1"
+#~ msgstr "Item Menu 1"
+
+#~ msgid "Menu Item 2"
+#~ msgstr "Item Menu 2"
+
+#~ msgid "Menu Item 3"
+#~ msgstr "Item Menu 3"
+
+#~ msgid "Menu Item 4"
+#~ msgstr "Item Menu 4"
+
+#~ msgid "Menu Item 5"
+#~ msgstr "Item Menu 5"
 
 #~ msgid "_Add..."
 #~ msgstr "_Tambah..."
@@ -2168,9 +2305,6 @@ msgstr "OK"
 
 #~ msgid "Long"
 #~ msgstr "Lama"
-
-#~ msgid "Medium"
-#~ msgstr "Sederhana"
 
 #~ msgid "Repeat s_peed:"
 #~ msgstr "Kelajuan Ulangan"
@@ -2362,20 +2496,12 @@ msgstr "OK"
 #~ msgstr "Buang"
 
 #, fuzzy
-#~ msgid "Open"
-#~ msgstr "Buka Fail"
-
-#, fuzzy
 #~ msgid "Select a file..."
 #~ msgstr "Pilih fail bunyi"
 
 #, fuzzy
 #~ msgid "View"
 #~ msgstr "Video"
-
-#, fuzzy
-#~ msgid "Edit"
-#~ msgstr "Edit..."
 
 #, fuzzy
 #~ msgid "Mime Type"
@@ -2556,10 +2682,7 @@ msgstr "OK"
 #~ msgstr "Tetapkan ke Default"
 
 #~ msgid "Keybinding"
-#~ msgstr "Pengikatan Kekunci"
+#~ msgstr "Ikatan Kekunci"
 
 #~ msgid "Keybinding Properties"
-#~ msgstr "Ciri-ciri Pengikatan Kekunci"
-
-#~ msgid "Screensaver"
-#~ msgstr "Screensaver"
+#~ msgstr "Ciri-ciri Ikatan Kekunci"
