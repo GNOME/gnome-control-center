@@ -12,10 +12,6 @@
 
 #define LABEL_DATA "gnome-keybinding-properties-label"
 
-/* FIXME: We currnetly leak the KeyEntry structures in the Model every time it
- * changes
- */
-
 enum
 {
   DESCRIPTION_COLUMN,
@@ -42,7 +38,7 @@ create_dialog (void)
 
   dialog = glade_xml_new ("gnome-keybinding-properties.glade", "gnome-keybinding-dialog", NULL);
   if (dialog == NULL)
-    dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gnome-mouse-properties.glade", "gnome-keybinding-dialog", NULL);
+    dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gnome-keybinding-properties.glade", "gnome-keybinding-dialog", NULL);
 
   return dialog;
 }
