@@ -231,7 +231,7 @@ get_legacy_settings (void)
 struct test_data_t 
 {
 	gint *timeout_id;
-	GtkWidget *darea;
+	GtkWidget *image;
 };
 
 /* Timeout for the double click test */
@@ -240,7 +240,7 @@ static gboolean
 test_maybe_timeout (struct test_data_t *data)
 {
 	double_click_state = DOUBLE_CLICK_TEST_OFF;
-	gtk_widget_queue_draw (data->darea);
+	gtk_image_set_from_pixbuf (GTK_IMAGE (data->image), double_click_off_pixbuf);
 
 	*data->timeout_id = 0;
 
@@ -281,14 +281,14 @@ event_box_button_press_event (GtkWidget   *widget,
 	switch (double_click_state) {
 	case DOUBLE_CLICK_TEST_OFF:
 		double_click_state = DOUBLE_CLICK_TEST_MAYBE;
-		data.darea = widget;
+		data.image = image;
 		data.timeout_id = &test_maybe_timeout_id;
 		test_maybe_timeout_id = gtk_timeout_add (double_click_time, (GtkFunction) test_maybe_timeout, &data);
 		break;
 	case DOUBLE_CLICK_TEST_MAYBE:
 		if (event->time - double_click_timestamp < double_click_time) {
 			double_click_state = DOUBLE_CLICK_TEST_ON;
-			data.darea = widget;
+			data.image = image;
 			data.timeout_id = &test_on_timeout_id;
 			test_on_timeout_id = gtk_timeout_add (2500, (GtkFunction) test_maybe_timeout, &data);
 		}
