@@ -259,11 +259,13 @@ click_preview(GtkWidget *widget, gpointer data)
 {
   gchar *rc;
 
-  if (current_theme == last_theme)
-    return;
+  if (current_theme == last_theme) {
+	  return;
+  }
   last_theme = current_theme;
-  if (!current_theme) 
-    return;
+  if (!current_theme) {
+	  return;
+  }
   rc = (gchar *)gtk_object_get_data(GTK_OBJECT(current_theme), "rc");
   test_theme(rc);
   send_reread();
@@ -324,10 +326,12 @@ click_revert(GtkWidget *widget, gpointer data)
 
   if ((current_global_theme == initial_theme) || (!current_global_theme))
     return;
+  last_theme = current_global_theme;
   widget = initial_theme;
   if (!widget) 
     return;
 
+  current_theme = widget;
   current_global_theme = widget;
   rc = (gchar *)gtk_object_get_data(GTK_OBJECT(widget), "rc");
   dir = (gchar *)gtk_object_get_data(GTK_OBJECT(widget), "dir");
@@ -343,7 +347,12 @@ click_revert(GtkWidget *widget, gpointer data)
   gdk_flush();
   /* system(cmd); */
   gdk_error_warnings = 1;
+  ignore_change = TRUE;
   gtk_list_select_child (GTK_LIST (theme_list), initial_theme);
+  ignore_change = FALSE;
+  rc = (gchar *)gtk_object_get_data(GTK_OBJECT(current_theme), "rc");
+  test_theme(rc);
+  send_reread();
 }
 static void
 click_entry(GtkWidget *widget, gpointer data)
@@ -357,7 +366,6 @@ click_entry(GtkWidget *widget, gpointer data)
   readme = (gchar *)gtk_object_get_data(GTK_OBJECT(widget), "readme");
 
   /* Load in the README file */
-  
   if (readme_current)
     {
       g_free(readme_current);
@@ -387,10 +395,9 @@ click_entry(GtkWidget *widget, gpointer data)
 	capplet_widget_state_changed(CAPPLET_WIDGET (capplet_widget), TRUE);
       else
 	capplet_widget_state_changed(CAPPLET_WIDGET (capplet_widget), FALSE);
-      
+    }      
       if (GTK_TOGGLE_BUTTON (auto_preview)->active)
 	click_preview (widget,NULL);
-    }
 }
 
 static void
