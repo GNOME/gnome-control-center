@@ -77,7 +77,7 @@ fill_models_list (GladeXML * chooserDialog)
 {
   GtkWidget* modelsList = CWID( "models_list" );
   GtkCellRenderer* renderer = gtk_cell_renderer_text_new ();
-  GtkTreeViewColumn* descriptionCol = gtk_tree_view_column_new_with_attributes (  _("Model"),
+  GtkTreeViewColumn* descriptionCol = gtk_tree_view_column_new_with_attributes (  _("Models"),
                                                                                   renderer,
                                                                                   "text", 0,
                                                                                   NULL);
