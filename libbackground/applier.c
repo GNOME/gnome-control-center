@@ -216,6 +216,13 @@ applier_class_init (ApplierClass *class)
 	GObjectClass *object_class;
 	GdkVisual *visual;
 
+	object_class = G_OBJECT_CLASS (class);
+
+	object_class->dispose = applier_dispose;
+	object_class->finalize = applier_finalize;
+	object_class->set_property = applier_set_prop;
+	object_class->get_property = applier_get_prop;
+
 	g_object_class_install_property
 		(object_class, PROP_TYPE,
 		 g_param_spec_int ("type",
@@ -223,12 +230,6 @@ applier_class_init (ApplierClass *class)
 				   _("Type of applier: APPLIER_ROOT for root window or APPLIER_PREVIEW for preview"),
 				   0, 1, 0,
 				   G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
-
-	object_class = G_OBJECT_CLASS (class);
-	object_class->dispose = applier_dispose;
-	object_class->finalize = applier_finalize;
-	object_class->set_property = applier_set_prop;
-	object_class->get_property = applier_get_prop;
 
 	parent_class = 
 		G_OBJECT_CLASS (g_type_class_ref (G_TYPE_OBJECT));
