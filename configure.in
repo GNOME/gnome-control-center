@@ -140,6 +140,22 @@ else
    AC_MSG_RESULT(no)
 fi
 
+dnl ==============
+dnl gswitchit
+dnl ==============
+dnl Make sure the new cvs virtual include has been checked out
+AC_MSG_CHECKING([for inclusion of libgswitchit])
+if test ! -d "$srcdir/libgswitchit"; then 
+    AC_MSG_RESULT(no)
+    AC_MSG_ERROR([Your checkout of gnome-control-center is out of date.
+    The 'libgswitchit' module has been virtually included into 
+    gnome-control-center by CVS as a subdirectory.  Please check
+    out again (this can be done on top of your existing checkout])
+else
+   AC_MSG_RESULT(yes)
+fi
+AM_CONDITIONAL(INCLUDE_GSWITCHIT_DEVEL, false)	dnl pull devel from applet
+
 dnl ==============================================
 dnl themus and fontilust dependencies
 dnl ==============================================
@@ -301,6 +317,9 @@ AC_SUBST(GNOME_DESKTOP_LIBS)
 AC_SUBST(METACITY_CFLAGS)
 AC_SUBST(METACITY_LIBS)
 
+AC_SUBST(LIBXKLAVIER_CFLAGS)
+AC_SUBST(LIBXKLAVIER_LIBS)
+
 dnl ==============================================
 dnl End: Define the main variables
 dnl ==============================================
@@ -372,6 +391,7 @@ control-center/Makefile
 libbackground/Makefile
 libwindow-settings/Makefile
 libwindow-settings/gnome-window-settings-2.0.pc
+libgswitchit/Makefile
 capplets/Makefile
 capplets/common/Makefile
 capplets/background/Makefile

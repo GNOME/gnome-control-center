@@ -88,5 +88,4 @@ server_DATA     = $(server_in_files:.server.in=.server)
 
 CLEANFILES = $(BUILT_SOURCES)
 
-EXTRA_DIST =						\
-	$(server_in_files)				\
+EXTRA_DIST = $(server_in_files)	
