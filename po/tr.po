@@ -1,21 +1,21 @@
 # Turkish translations for GNOME control-center messages.
-# Copyright (C) YEAR Free Software Foundation, Inc.
-# Fatih Demir <kabalak@gmx.net>, 2000
+# Copyright (C) 2001 Free Software Foundation, Inc.
+# Fatih Demir <kabalak@gmx.net>, 2000.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: control-center-1.2.4\n"
-"POT-Creation-Date: 2001-02-26 12:08-0500\n"
+"Project-Id-Version: control-center 1.4.0\n"
+"POT-Creation-Date: 2001-03-25 13:18+0200\n"
 "PO-Revision-Date: 2001-03-17 15:59+0200\n"
-"Last-Translator: Nilgün Belma Bugüner <nilgun@technologist.com>\n"
-"Language-Team: Turkish <tr@li.org>\n"
+"Last-Translator: Görkem Çetin <gorkem@gelecek.com.tr>\n"
+"Language-Team: Gnome-Turk <gnome-turk@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-9\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: capplets/background-properties/app-background.c:15
 msgid "Set background image."
-msgstr "Artalan resmi belirtilir."
+msgstr "Arkaplan resmi tanýmlar."
 
 #: capplets/background-properties/app-background.c:15
 msgid "IMAGE-FILE"
@@ -64,11 +64,13 @@ msgid "Wallpaper Selection"
 msgstr "Duvar Kaðýdý Seçimi"
 
 #: capplets/background-properties/property-background.c:573
+#: capplets/file-types/file-types-icon-entry.c:258
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Bir hbox bulunamadý, normal dosya seçimi kullanýlýyor"
 
 #: capplets/background-properties/property-background.c:578
 #: capplets/background-properties/property-background.c:1090
+#: capplets/file-types/file-types-icon-entry.c:264
 #: capplets/keyboard-properties/keyboard-properties.c:354
 #: capplets/screensaver-properties/screensaver-dialog.c:25
 #: capplets/theme-switcher/gui.c:230 capplets/theme-switcher/gui.c:302
@@ -83,7 +85,11 @@ msgstr "Duvar Kaðýdý"
 msgid " Browse... "
 msgstr " Gözat... "
 
+#. Add default action to fourth column
 #: capplets/background-properties/property-background.c:643
+#: capplets/file-types/file-types-capplet.c:1387
+#: capplets/file-types/file-types-capplet.c:1587
+#: capplets/file-types/file-types-capplet.c:1713
 msgid "none"
 msgstr "yok"
 
@@ -129,7 +135,6 @@ msgstr ""
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:182
 #: capplets/keyboard-properties/keyboard-properties.c:99
 #: capplets/keyboard-properties/keyboard-properties.c:424
-#: capplets/mime-type/mime-type-capplet.c:81
 #: capplets/mouse-properties/mouse-properties.c:114
 #: capplets/screensaver-properties/callbacks.c:804
 #: capplets/sound-properties/sound-properties.c:695
@@ -144,7 +149,7 @@ msgstr "Kapat"
 
 #: capplets/background-properties/property-background.c:1102
 msgid "Use GNOME to set background"
-msgstr "Artalaný ayarlamak için GNOME kullan"
+msgstr "Arkaplaný ayarlamak için GNOME kullan"
 
 #: capplets/background-properties/property-background.c:1152
 msgid "Set parameters from saved state and exit"
@@ -165,11 +170,11 @@ msgstr "RENK"
 
 #: capplets/background-properties/property-background.c:1154
 msgid "Specifies the background color"
-msgstr "Artalan rengini belirler"
+msgstr "Arkaplan rengini belirler"
 
 #: capplets/background-properties/property-background.c:1155
 msgid "Specifies end background color for gradient"
-msgstr "Renk geçiþinin son artalan rengi belirtilir"
+msgstr "Renk geçiþinin son arkaplan rengi belirtilir"
 
 #: capplets/background-properties/property-background.c:1156
 msgid "ORIENT"
@@ -181,11 +186,11 @@ msgstr "Renk geçiþ yönü: dikey ya da yatay"
 
 #: capplets/background-properties/property-background.c:1157
 msgid "Use a solid fill for the background"
-msgstr "Artalanda tek dolgu rengi kullan"
+msgstr "Arkaplanda tek dolgu rengi kullan"
 
 #: capplets/background-properties/property-background.c:1158
 msgid "Use a gradient fill for the background"
-msgstr "Artalanda geçiþli renkler kullan"
+msgstr "Arkaplanda geçiþli renkler kullan"
 
 #: capplets/background-properties/property-background.c:1159
 msgid "MODE"
@@ -195,6 +200,241 @@ msgstr "KÝP"
 msgid "Display wallpaper: tiled, centered, scaled or ratio"
 msgstr "Duvar kaðýdý: döþeli, ortalanmýþ, orantýlý ya da kaplý"
 
+#: capplets/file-types/file-types-capplet-dialogs.c:387
+msgid "Edit Applications List"
+msgstr "Uygulamalar Listesini Düzenle"
+
+#. Add label
+#: capplets/file-types/file-types-capplet-dialogs.c:409
+#, c-format
+msgid "Select applications to appear in menu for MIME type \"%s\""
+msgstr "\"%s\" MIME türü için menüde gösterilecek uygulamalarý seçin"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:433
+msgid "Add Application..."
+msgstr "Uygulama Ekle..."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:440
+msgid "Edit Application..."
+msgstr "Uygulama Düzenle..."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:446
+msgid "Delete Application"
+msgstr "Uygulama Sil"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:480
+msgid "Edit Components List"
+msgstr "Bileþenler Listesini Düzenle"
+
+#. Add label
+#: capplets/file-types/file-types-capplet-dialogs.c:500
+#, c-format
+msgid "Select views to appear in menu for MIME type \"%s\""
+msgstr "\"%s\" MIME türünün gösterileceði izleme þeklini seçin."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:720
+msgid ""
+"The MIME type entered contained upper case characters. Upper case characters "
+"were changed to lower case for you."
+msgstr ""
+"Girdiðiniz MIME türü büyük harfler içeriyor. Bu karakterler küçük harfe "
+"dönüþtürülecektir."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:723
+msgid "Add New MIME Type"
+msgstr "Yeni Mime Türü Ekle"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:769
+msgid "Add MIME Type"
+msgstr "Mime Türü Ekle"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:773
+msgid "New MIME type (e.g. image/x-thumper):"
+msgstr "Yeni MIME türü (örn. image/x-thumper):"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:780
+msgid "Description (e.g. Thumper image):"
+msgstr "Açýklama (örn: Thumper resmi):"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:947
+msgid "File Extensions "
+msgstr "Dosya Uzantýlarý "
+
+#: capplets/file-types/file-types-capplet-dialogs.c:967
+#: capplets/wm-properties/wm-properties-capplet.c:1088
+msgid "Add..."
+msgstr "Ekle..."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:972
+msgid "    Remove    "
+msgstr "   Kaldýr     "
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1041
+msgid "Add New Extension"
+msgstr "Yeni Uzantý Ekle"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1045
+msgid ""
+"Type in the extensions for this mime-type (without dot).\n"
+"You can enter several extensions seperated by a space,\n"
+"for example: html htm"
+msgstr ""
+"Bu Mime türü için geçerli uzantýlarý girin.\n"
+"Aralarýnda boþluk kalacak þekilde birden fazla uzantý\n"
+"yazabilirsiniz (örnek. html htm)"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1052
+msgid "Extension:"
+msgstr "Uzantý:"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1194
+msgid "You must enter a name."
+msgstr "Bir isim girmelisiniz."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1197
+msgid "You must enter a command."
+msgstr "Bir komut girmelisiniz."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1207
+#, c-format
+msgid ""
+"\"%s\" does not exist or is not executable.\n"
+"Check your spelling and make sure you have\n"
+"the right permissions to execute this file."
+msgstr ""
+"\"%s\" bulunamadý ya da çalýþtýrýlabilir deðil.\n"
+"Yazdýklarýnýzý yeniden gözden geçirin, ya da \n"
+"verilen uygulamanýn çalýþtýrma izinleri\n"
+"bulunduðuna emin olun."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1213
+#, c-format
+msgid ""
+"The command \"%s\" cannot be found.\n"
+"You must use a command that can work from any command line."
+msgstr ""
+"\"%s\" komutu bulunamadý.\n"
+"Herhangi bir komut satýrýndan çalýþabilrn komutlar kullanmalýsýnýz."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1225
+msgid "Bad Application Name"
+msgstr "Hatalý Uygulama Adý"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1226
+msgid "Bad Application Command"
+msgstr "Hatalý Uygulama Komutu"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1258
+msgid "Add Application"
+msgstr "Uygulama Ekle"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1259
+msgid "Edit Application"
+msgstr "Uygulama Düzenle"
+
+#. Application Name label and entry
+#: capplets/file-types/file-types-capplet-dialogs.c:1271
+msgid "Application Name:"
+msgstr "Uygulama Adý:"
+
+#. Application Command label and entry
+#: capplets/file-types/file-types-capplet-dialogs.c:1282
+msgid "Application Command:"
+msgstr "Uygulama Komutu:"
+
+#. Open Behavior frame
+#: capplets/file-types/file-types-capplet-dialogs.c:1293
+msgid "Open Behavior"
+msgstr "Davranýþlar Penceresini Aç"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1299
+msgid "Can open multiple files"
+msgstr "Birden fazla dosya açýlabilir"
+
+#. FIXME bugzilla.eazel.com 6066: This needs to be three options now: "yes", "no", and "use uris for non-file locations"
+#: capplets/file-types/file-types-capplet-dialogs.c:1307
+msgid "Can open from URI"
+msgstr "URI'den açýlabilir"
+
+#: capplets/file-types/file-types-capplet.c:735
+#: capplets/file-types/file-types-capplet.c:1877
+msgid "MIME Type"
+msgstr "MIME Türü"
+
+#: capplets/file-types/file-types-capplet.c:742
+msgid "Change Icon"
+msgstr "Simgeyi Deðiþtir"
+
+#: capplets/file-types/file-types-capplet.c:749
+msgid "Change File Extensions"
+msgstr "Dosya Uzantýlarý Deðiþtir"
+
+#: capplets/file-types/file-types-capplet.c:757
+msgid "Default Action:"
+msgstr "Öntanýmlý Eylem:"
+
+#: capplets/file-types/file-types-capplet.c:769
+msgid "Use Viewer"
+msgstr "Ýzleyici Kullan"
+
+#: capplets/file-types/file-types-capplet.c:775
+msgid "Open With Application"
+msgstr "Uygulama ile Aç"
+
+#: capplets/file-types/file-types-capplet.c:786
+msgid "Edit List"
+msgstr "Listeyi Düzenle"
+
+#: capplets/file-types/file-types-capplet.c:811
+msgid "Add New MIME Type..."
+msgstr "Yeni MIME Türü Ekle..."
+
+#: capplets/file-types/file-types-capplet.c:817
+msgid "Delete This MIME Type"
+msgstr "Bu MIME Türünü Sil"
+
+#: capplets/file-types/file-types-capplet.c:828
+msgid "Revert to System Defaults"
+msgstr "Sistem Deðerlerine Dön"
+
+#: capplets/file-types/file-types-capplet.c:1069
+#: capplets/file-types/file-types-capplet.c:1213
+msgid "None"
+msgstr "Hiçbiri"
+
+#: capplets/file-types/file-types-capplet.c:1318
+msgid ""
+"Reverting to system settings will lose any changes\n"
+"you have ever made to File Types and Programs.\n"
+"Revert anyway?"
+msgstr ""
+"Sistemdeki öntanýmlý ayarlara geri dönmeniz halinde\n"
+"þimdiye kadar yaptýðýnýz tüm deðiþiklikler silinecektir.\n"
+"Devam etmek istiyor musunuz?"
+
+#: capplets/file-types/file-types-capplet.c:1428
+#: capplets/file-types/file-types-capplet.c:1614
+#: capplets/file-types/file-types-capplet.c:1757
+#, c-format
+msgid "View as %s"
+msgstr "%s olarak görüntüle"
+
+#: capplets/file-types/file-types-capplet.c:1876
+msgid "Description"
+msgstr "Açýklama"
+
+#: capplets/file-types/file-types-capplet.c:1878
+msgid "Extension"
+msgstr "Uzantý"
+
+#: capplets/file-types/file-types-capplet.c:1879
+msgid "Default Action"
+msgstr "Öntanýmlý Eylem"
+
+#: capplets/file-types/file-types-icon-entry.c:381
+msgid "Select an icon"
+msgstr "Bir simge seçin"
+
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:238
 msgid "Gnome editor"
 msgstr "Gnome düzenleyici"
@@ -203,221 +443,67 @@ msgstr "Gnome düzenleyici"
 msgid "Run In Terminal"
 msgstr "Terminalde Çalýþtýr"
 
-#: capplets/mime-type/edit-window.c:250
-#: capplets/mime-type/new-mime-window.c:35
-msgid "Extensions"
-msgstr "Uzantýlar"
+#: capplets/keyboard-properties/keyboard-properties.c:262
+msgid "Keyboard bell"
+msgstr "Klavye zili"
 
-#. icon box
-#: capplets/mime-type/edit-window.c:264
-msgid "Select an icon..."
-msgstr "Bir simge seçin..."
+#: capplets/keyboard-properties/keyboard-properties.c:270
+msgid "Volume"
+msgstr "Ses yüksekliði"
 
-#: capplets/mime-type/edit-window.c:274
-msgid "Mime Type: "
-msgstr "Mime Türü: "
+#: capplets/keyboard-properties/keyboard-properties.c:273
+msgid "Pitch (Hz)"
+msgstr "Frekans (Hz)"
 
-#: capplets/mime-type/edit-window.c:304
-msgid "Add"
-msgstr "Ekle"
+#: capplets/keyboard-properties/keyboard-properties.c:276
+msgid "Duration (ms)"
+msgstr "Süre (ms)"
 
-#: capplets/mime-type/edit-window.c:312
-#: capplets/url-properties/url-properties.c:148
-msgid "Remove"
-msgstr "Kaldýr"
+#: capplets/keyboard-properties/keyboard-properties.c:288
+msgid "Test"
+msgstr "Dene"
 
-#. gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
-#: capplets/mime-type/edit-window.c:339
-#: capplets/mime-type/new-mime-window.c:65
-msgid "First Regular Expression: "
-msgstr "Birinci Düzenli Ýfade: "
+#: capplets/keyboard-properties/keyboard-properties.c:306
+msgid "Keyboard repeat rate"
+msgstr "Klavye tekrarlama hýzý"
 
-#: capplets/mime-type/edit-window.c:347
-#: capplets/mime-type/new-mime-window.c:76
-msgid "Second Regular Expression: "
-msgstr "Ýkinci Düzenli Ýfade: "
+#: capplets/keyboard-properties/keyboard-properties.c:316
+msgid "Enable auto-repeat"
+msgstr "Otomatik tekrarlamayý aç"
 
-#. Actions box
-#: capplets/mime-type/edit-window.c:354
-msgid "Mime Type Actions"
-msgstr "Mime Türü Eylemleri"
+#: capplets/keyboard-properties/keyboard-properties.c:325
+msgid "Repeat rate"
+msgstr "Tekrarlama hýzý"
 
-#: capplets/mime-type/edit-window.c:361
-#, c-format
-msgid "Example: emacs %f"
-msgstr "Örnek: emacs %f"
+#: capplets/keyboard-properties/keyboard-properties.c:328
+msgid "Repeat Delay"
+msgstr "Tekrarlama Gecikmesi"
 
-#: capplets/mime-type/edit-window.c:366
-msgid "Open"
-msgstr "Aç"
+#: capplets/keyboard-properties/keyboard-properties.c:330
+msgid "Keyboard click"
+msgstr "Klavye týklamasý"
 
-#: capplets/mime-type/edit-window.c:372 capplets/mime-type/edit-window.c:388
-#: capplets/mime-type/edit-window.c:403
-msgid "Select a file..."
-msgstr "Bir dosya seç..."
+#: capplets/keyboard-properties/keyboard-properties.c:339
+msgid "Click on keypress"
+msgstr "Tuþ seslerini aç"
 
-#: capplets/mime-type/edit-window.c:381
-msgid "View"
-msgstr "Göster"
+#: capplets/keyboard-properties/keyboard-properties.c:348
+msgid "Click volume"
+msgstr "Týklama sesi"
 
-#: capplets/mime-type/edit-window.c:397
-msgid "Edit"
-msgstr "Düzenle"
+#: capplets/keyboard-properties/keyboard-properties.c:359
+msgid "Test settings"
+msgstr "Ayarlarý dene"
 
-#. we initialize everything
-#: capplets/mime-type/edit-window.c:446
-#, c-format
-msgid "Set actions for %s"
-msgstr "%s için eylemleri belirle"
-
-#: capplets/mime-type/mime-data.c:380
-msgid "Mime Type"
-msgstr "Mime Türü"
-
-#: capplets/mime-type/mime-data.c:381
-msgid "Extension"
-msgstr "Uzantý"
-
-#: capplets/mime-type/mime-data.c:488
-msgid "You must enter a mime-type"
-msgstr "Bir mime türü girmelisiniz"
-
-#: capplets/mime-type/mime-data.c:493
+#: capplets/keyboard-properties/keyboard-properties.c:466
 msgid ""
-"You must add either a regular-expression or\n"
-"a file-name extension"
+"an initialization error occurred while starting "
+"'keyboard-properties-capplet'.\n"
+"aborting...\n"
 msgstr ""
-"Ya bir düzenli ifade, ya da bir dosya ismi\n"
-"uzantýsý eklemek zorundasýnýz"
-
-#: capplets/mime-type/mime-data.c:497
-msgid ""
-"Please put your mime-type in the format:\n"
-"CATEGORY/TYPE\n"
-"\n"
-"For Example:\n"
-"image/png"
-msgstr ""
-"Lütfen mime türünü aþaðýdaki biçimde belirtin:\n"
-"KATEGORÝ/TÜR\n"
-"\n"
-"Örnek: \n"
-"image/png"
-
-#: capplets/mime-type/mime-data.c:502
-msgid "This mime-type already exists"
-msgstr "Bu mime-türü zaten var"
-
-#: capplets/mime-type/mime-data.c:583 capplets/mime-type/mime-info.c:425
-msgid ""
-"We are unable to create the directory\n"
-"~/.gnome/mime-info\n"
-"\n"
-"We will not be able to save the state."
-msgstr ""
-"~/.gnome/mime-info\n"
-"dizini oluþturulamadý\n"
-"\n"
-"Son durum kaydedilemeyecek."
-
-#: capplets/mime-type/mime-data.c:589 capplets/mime-type/mime-info.c:431
-msgid ""
-"We are unable to access the directory\n"
-"~/.gnome/mime-info\n"
-"\n"
-"We will not be able to save the state."
-msgstr ""
-"~/.gnome/mime-info\n"
-"dizinine eriþilemedi.\n"
-"\n"
-"Son durum kaydedilemeyecek."
-
-#: capplets/mime-type/mime-data.c:600
-msgid ""
-"Cannot create the file\n"
-"~/.gnome/mime-info/user.mime\n"
-"\n"
-"We will not be able to save the state"
-msgstr ""
-"~/.gnome/mime-info/user.mime\n"
-"dosyasý oluþturulamadý\n"
-"\n"
-"Son durum kaydedilemeyecek."
-
-#: capplets/mime-type/mime-info.c:442
-msgid ""
-"Cannot create the file\n"
-"~/.gnome/mime-info/user.keys\n"
-"\n"
-"We will not be able to save the state"
-msgstr ""
-"~/.gnome/mime-info/user.keys\n"
-"dosyasý oluþturulamadý\n"
-"\n"
-"Son durum kaydedilemeyecek."
-
-#: capplets/mime-type/mime-type-capplet.c:79
-msgid ""
-"No help is available/installed for these settings. Please make sure you\n"
-"have the Control Center documentation installed on your system."
-msgstr ""
-"Bu ayarlar için hiç bir yardým bulunmuyor. Lütfen Denetim Masasý\n"
-"belgelerini sisteminize yüklediðinizden emin olun."
-
-#: capplets/mime-type/mime-type-capplet.c:95
-#: capplets/wm-properties/wm-properties-capplet.c:1098
-msgid "Delete"
-msgstr "Sil"
-
-#: capplets/mime-type/mime-type-capplet.c:105
-#: capplets/wm-properties/wm-properties-capplet.c:1088
-msgid "Add..."
-msgstr "Ekle..."
-
-#: capplets/mime-type/mime-type-capplet.c:109
-#: capplets/wm-properties/wm-properties-capplet.c:1093
-msgid "Edit..."
-msgstr "Düzenle..."
-
-#: capplets/mime-type/new-mime-window.c:21
-msgid "Add Mime Type"
-msgstr "Mime Türü Ekle"
-
-#: capplets/mime-type/new-mime-window.c:22
-msgid ""
-"Add a new Mime Type\n"
-"For example:  image/tiff; text/x-scheme"
-msgstr ""
-"Yeni bir Mime Türü ekleyin\n"
-"Örneðin:  image/tiff; text/x-scheme"
-
-#: capplets/mime-type/new-mime-window.c:27
-msgid "Mime Type:"
-msgstr "Mime Türü:"
-
-#: capplets/mime-type/new-mime-window.c:39
-msgid ""
-"Type in the extensions for this mime-type.\n"
-"For example:  .html, .htm"
-msgstr ""
-"Bu Mime türü için geçerli uzantýlarý girin.\n"
-"Örneðin: .html .htm"
-
-#: capplets/mime-type/new-mime-window.c:46
-msgid "Extension:"
-msgstr "Uzantý:"
-
-#: capplets/mime-type/new-mime-window.c:51
-msgid "Regular Expressions"
-msgstr "Düzenli Ýfadeler"
-
-#: capplets/mime-type/new-mime-window.c:55
-msgid ""
-"You can set up two regular expressions here to identify the Mime Type\n"
-"by.  These fields are optional."
-msgstr ""
-"Mime Türünü tanýmlamak için burada iki düzenli ifade belirtmelisiniz.\n"
-"Bu alanlara veri girmek isteðe baðlýdýr."
+"'keyboard-properties-capplet'\n"
+"baþlatýlýrken bir hata oluþtu.\n"
+"çýkýlýyor...\n"
 
 #: capplets/mouse-properties/mouse-properties.c:267
 msgid "Mouse buttons"
@@ -492,7 +578,7 @@ msgstr "Ayarlar..."
 #. we need to special case random
 #: capplets/screensaver-properties/callbacks.c:491
 msgid "Random Settings"
-msgstr "Rasgele Ayarlarý"
+msgstr "Rasgele Ayarlar"
 
 #: capplets/screensaver-properties/callbacks.c:501
 #, c-format
@@ -568,70 +654,9 @@ msgstr " dakika sonra monitör kapatýlýr."
 msgid "Screen Saver Demo"
 msgstr "Ekran Koruyucusu Demosu"
 
-#: capplets/keyboard-properties/keyboard-properties.c:262
-msgid "Keyboard bell"
-msgstr "Klavye çaný"
-
-#: capplets/keyboard-properties/keyboard-properties.c:270
-msgid "Volume"
-msgstr "Ses yüksekliði"
-
-#: capplets/keyboard-properties/keyboard-properties.c:273
-msgid "Pitch (Hz)"
-msgstr "Frekans (Hz)"
-
-#: capplets/keyboard-properties/keyboard-properties.c:276
-msgid "Duration (ms)"
-msgstr "Süre (ms)"
-
-#: capplets/keyboard-properties/keyboard-properties.c:288
-msgid "Test"
-msgstr "Dene"
-
-#: capplets/keyboard-properties/keyboard-properties.c:306
-msgid "Keyboard repeat rate"
-msgstr "Klavye tekrarlama hýzý"
-
-#: capplets/keyboard-properties/keyboard-properties.c:316
-msgid "Enable auto-repeat"
-msgstr "Otomatik tekrarlamayý aç"
-
-#: capplets/keyboard-properties/keyboard-properties.c:325
-msgid "Repeat rate"
-msgstr "Tekrarlama hýzý"
-
-#: capplets/keyboard-properties/keyboard-properties.c:328
-msgid "Repeat Delay"
-msgstr "Tekrarlama Gecikmesi"
-
-#: capplets/keyboard-properties/keyboard-properties.c:330
-msgid "Keyboard click"
-msgstr "Klavye týklamasý"
-
-#: capplets/keyboard-properties/keyboard-properties.c:339
-msgid "Click on keypress"
-msgstr "Tuþ seslerini aç"
-
-#: capplets/keyboard-properties/keyboard-properties.c:348
-msgid "Click volume"
-msgstr "Týklama sesi"
-
-#: capplets/keyboard-properties/keyboard-properties.c:359
-msgid "Test settings"
-msgstr "Ayarlarý dene"
-
-#: capplets/keyboard-properties/keyboard-properties.c:466
-msgid ""
-"an initialization error occurred while starting "
-"'keyboard-properties-capplet'.\n"
-"aborting...\n"
-msgstr ""
-"'keyboard-properties-capplet'\n"
-"baþlatýlýrken bir hata oluþtu.\n"
-"çýkýlýyor...\n"
-
 #: capplets/sound-properties/sound-properties.c:97
-msgid "an initialization error occurred while starting 'sound-properties-capplet'."
+msgid ""
+"an initialization error occurred while starting 'sound-properties-capplet'."
 msgstr "'sound-properties-capplet' baþlarken bir hata oluþtu."
 
 #: capplets/sound-properties/sound-properties.c:188
@@ -671,8 +696,9 @@ msgid "Sound Events"
 msgstr "Sesli Eylemler"
 
 #: capplets/sound-properties/sound-properties.c:355
-msgid "This copy of the GNOME control center was not compiled with sound support"
-msgstr "Bu Gnome Denetim Masasý ses desteði olmadan derlenmiþ."
+msgid ""
+"This copy of the GNOME control center was not compiled with sound support"
+msgstr "Bu GNOME Denetim Masasý ses desteði olmadan derlenmiþ."
 
 #: capplets/sound-properties/sound-properties.c:748
 msgid "The sound file for this event does not exist."
@@ -1000,7 +1026,7 @@ msgstr "Alt"
 
 #: capplets/ui-properties/ui-properties.c:277
 msgid "GNOME MDI Options"
-msgstr "Gnome MDI Seçenekleri"
+msgstr "GNOME MDI Seçenekleri"
 
 #: capplets/url-properties/url-properties.c:51
 msgid "Error initializing the `url-properties' capplet."
@@ -1038,6 +1064,10 @@ msgstr "Yardým tarayýcýsý (yeni pencerede)"
 #: capplets/url-properties/url-properties.c:140
 msgid "Set"
 msgstr "Uygula"
+
+#: capplets/url-properties/url-properties.c:148
+msgid "Remove"
+msgstr "Kaldýr"
 
 #: capplets/wm-properties/wm-properties-capplet.c:142
 #, c-format
@@ -1188,6 +1218,14 @@ msgstr "Pencere Yöneticisini Düzenle"
 msgid "You cannot delete the current Window Manager"
 msgstr "Mevcut Pencere Yöneticisi silinemez"
 
+#: capplets/wm-properties/wm-properties-capplet.c:1093
+msgid "Edit..."
+msgstr "Düzenle..."
+
+#: capplets/wm-properties/wm-properties-capplet.c:1098
+msgid "Delete"
+msgstr "Sil"
+
 #: capplets/wm-properties/wm-properties-capplet.c:1134
 msgid ""
 "an initialization error occurred while starting 'wm-properties-capplet'.\n"
@@ -1198,7 +1236,7 @@ msgstr ""
 
 #: control-center/callbacks.c:102
 msgid "GNOME Control Center"
-msgstr "Gnome Denetim Masasý"
+msgstr "GNOME Denetim Masasý"
 
 #: control-center/callbacks.c:105
 msgid "Desktop Properties manager."
@@ -1257,8 +1295,8 @@ msgstr "Oturum ayarlarýný baþlat"
 #: control-center/capplet-widget-libs.c:51
 msgid "Ignore default action.  Used for custom init-session cases"
 msgstr ""
-"Öntanýmlý eylem yoksayýlýyor. Özel oturum baþlatma durumlarý için "
-"kullanýlmýþtýr"
+"Öntanýmlý eylemi gözardý et. Özel oturum baþlatma durumlarý için "
+"kullanýlýr"
 
 #: control-center/capplet-widget.c:272
 msgid "Sorry, no help is available for these settings."
@@ -1278,7 +1316,7 @@ msgstr "Denetim masasý yardýmý"
 
 #: control-center/main.c:36
 msgid "Help with the GNOME control-center."
-msgstr "Gnome denetim masasýnda yardým."
+msgstr "GNOME denetim masasýnda yardým."
 
 #: control-center/main.c:38
 msgid "Help with the current configuration page."
@@ -1290,7 +1328,7 @@ msgstr "Hakkýnda"
 
 #: control-center/main.c:41
 msgid "About the GNOME control-center."
-msgstr "Gnome denetim masasý hakkýnda."
+msgstr "GNOME denetim masasý hakkýnda."
 
 #. we create the widgets
 #: control-center/main.c:69
@@ -1341,4 +1379,3 @@ msgstr "Makina Adý:"
 #: control-center/splash.c:178
 msgid "Unknown"
 msgstr "Bilinmeyen"
-
