@@ -83,6 +83,8 @@ EXTRA_DIST = \
   theme-method.conf \
   themus.schemas.in \
   Themus_Properties_View.server.in.in \
+  themus.applications \
+  themus.keys \
   ChangeLog
 
 DISTCLEANFILES = \
