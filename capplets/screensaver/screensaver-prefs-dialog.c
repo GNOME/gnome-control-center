@@ -341,7 +341,9 @@ screensaver_prefs_dialog_destroy (ScreensaverPrefsDialog *dialog)
 static void
 free_set_cb (gchar *key, PrefsDialogWidgetSet *set, gpointer data) 
 {
-	g_list_free (set->widgets);
+	if (!set->alias)
+		g_list_free (set->widgets);
+
 	g_free (set);
 }
 
@@ -377,6 +379,8 @@ set_widgets_sensitive (GTree *widget_db,
 		while (isspace (*str)) str++;
 		set = g_tree_lookup (widget_db, str);
 		if (!set) continue;
+
+		set->enabled = s;
 
 		for (node = set->widgets; node; node = node->next)
 			gtk_widget_set_sensitive (GTK_WIDGET (node->data), s);
@@ -450,7 +454,7 @@ write_boolean (xmlNodePtr argument_data, GTree *widget_db)
 	if (!(id = xmlGetProp (argument_data, "id"))) return;
 	set = g_tree_lookup (widget_db, id);
 
-	if (!set || !GTK_WIDGET_IS_SENSITIVE (set->value_widget)) return NULL;
+	if (!set || !set->enabled) return NULL;
 
 	if (gtk_toggle_button_get_active 
 	    (GTK_TOGGLE_BUTTON (set->value_widget)))
@@ -472,7 +476,7 @@ write_number (xmlNodePtr argument_data, GTree *widget_db)
 	if (!(id = xmlGetProp (argument_data, "id"))) return;
 	set = g_tree_lookup (widget_db, id);
 
-	if (!set || !GTK_WIDGET_IS_SENSITIVE (set->value_widget)) return NULL;
+	if (!set || !set->enabled) return NULL;
 
 	if (GTK_IS_RANGE (set->value_widget))
 		adjustment = gtk_range_get_adjustment 
@@ -524,7 +528,7 @@ write_select (xmlNodePtr argument_data, GTree *widget_db)
 	if (!(id = xmlGetProp (argument_data, "id"))) return;
 	set = g_tree_lookup (widget_db, id);
 
-	if (!set || !GTK_WIDGET_IS_SENSITIVE (set->value_widget)) return NULL;
+	if (!set || !set->enabled) return NULL;
 	menu = gtk_option_menu_get_menu (GTK_OPTION_MENU (set->value_widget));
 	menu_item = GTK_MENU_SHELL (menu)->children;
 	active = gtk_menu_get_active (GTK_MENU (menu));
@@ -554,7 +558,7 @@ write_string (xmlNodePtr argument_data, GTree *widget_db)
 	if (!(id = xmlGetProp (argument_data, "id"))) return;
 	set = g_tree_lookup (widget_db, id);
 
-	if (!set || !GTK_WIDGET_IS_SENSITIVE (set->value_widget)) return NULL;
+	if (!set || !set->enabled) return NULL;
 
 	str = gtk_entry_get_text (GTK_ENTRY (set->value_widget));
 	arg = xmlGetProp (argument_data, "arg");
@@ -690,7 +694,9 @@ read_command_line (char *command_line)
 						while (isspace (*endpos)) 
 							endpos++;
 					}
-				} else if (*valpos != '-') {
+				} else if (*valpos != '-' || 
+					   isdigit(valpos[1])) 
+				{
 					endpos = strchr (valpos, ' ');
 					if (endpos) *endpos = '\0';
 					value = g_strdup (valpos);
@@ -804,6 +810,8 @@ get_spinbutton (xmlNodePtr node, GtkWidget **widget)
 	spinbutton = gtk_spin_button_new (adjustment, 1.0, 0);
 	
 	set = g_new0 (PrefsDialogWidgetSet, 1);
+	set->alias = FALSE;
+	set->enabled = TRUE;
 	set->value_widget = spinbutton;
 
 	if (label_str) {
@@ -847,6 +855,8 @@ get_check_button (ScreensaverPrefsDialog *dialog, xmlNodePtr node,
 	checkbutton = gtk_check_button_new_with_label (label);
 
 	set = g_new0 (PrefsDialogWidgetSet, 1);
+	set->alias = FALSE;
+	set->enabled = TRUE;
 	set->widgets = g_list_append (NULL, checkbutton);
 	set->value_widget = checkbutton;
 
@@ -880,6 +890,8 @@ get_select_widget (ScreensaverPrefsDialog *dialog, xmlNodePtr select_data,
 	menu = gtk_menu_new ();
 	
 	set = g_new0 (PrefsDialogWidgetSet, 1);
+	set->alias = FALSE;
+	set->enabled = TRUE;
 	set->value_widget = option_menu;
 
 	gtk_object_set_data (GTK_OBJECT (option_menu), "dialog", dialog);
@@ -952,6 +964,8 @@ get_file_entry (ScreensaverPrefsDialog *dialog, xmlNodePtr node,
 						   default_str);
 
 	set = g_new0 (PrefsDialogWidgetSet, 1);
+	set->alias = FALSE;
+	set->enabled = TRUE;
 	set->value_widget = 
 		gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (entry));
 
@@ -998,15 +1012,17 @@ get_entry (ScreensaverPrefsDialog *dialog, xmlNodePtr node,
 		gtk_entry_set_text (GTK_ENTRY (entry), default_str);
 
 	set = g_new0 (PrefsDialogWidgetSet, 1);
+	set->alias = FALSE;
+	set->enabled = TRUE;
 	set->value_widget = entry;
 
 	if (label_str) {
 		hbox = gtk_hbox_new (FALSE, 5);
 		label = gtk_label_new (label_str);
 		gtk_misc_set_alignment (GTK_MISC (label), 1.0, 0.5);
-		gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
+		gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, TRUE, 0);
 		gtk_box_pack_start (GTK_BOX (hbox), entry, 
-				    FALSE, TRUE, 0);
+				    TRUE, TRUE, 0);
 
 		set->widgets = g_list_append (NULL, hbox);
 		g_list_append (set->widgets, label);
@@ -1058,6 +1074,8 @@ place_number (GtkTable *table, xmlNodePtr node, gint *row)
 			return NULL;
 
 		set = g_new0 (PrefsDialogWidgetSet, 1);
+		set->alias = FALSE;
+		set->enabled = TRUE;
 		label = gtk_label_new (label_str);
 		gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
 		gtk_table_attach (table, label, 0, 3, *row, *row + 1,
@@ -1150,10 +1168,10 @@ place_hgroup (ScreensaverPrefsDialog *dialog,
 	      GtkTable *table, GTree *widget_db, 
 	      xmlNodePtr hgroup_data, gint *row) 
 {
-	PrefsDialogWidgetSet *set;
+	PrefsDialogWidgetSet *set, *set1;
 	GtkWidget *hbox, *widget;
 	xmlNodePtr node;
-	gchar *id;
+	gchar *id, *same_as;
 
 	g_return_if_fail (table != NULL);
 	g_return_if_fail (GTK_IS_TABLE (table));
@@ -1166,6 +1184,20 @@ place_hgroup (ScreensaverPrefsDialog *dialog,
 	for (node = hgroup_data->childs; node; node = node->next) {
 		id = xmlGetProp (node, "id");
 		if (!id) continue;
+
+		same_as = xmlGetProp (node, "same-as");
+
+		if (same_as != NULL && *same_as != '\0') {
+			set1 = g_tree_lookup (dialog->widget_db, same_as);
+			if (set1 == NULL) continue;
+			set = g_new0 (PrefsDialogWidgetSet, 1);
+			set->alias = TRUE;
+			set->enabled = TRUE;
+			set->value_widget = set1->value_widget;
+			set->widgets = set1->widgets;
+			g_tree_insert (dialog->widget_db, id, set);
+			continue;
+		}
 
 		if (!strcmp (node->name, "number"))
 			set = get_spinbutton (node, &widget);
@@ -1247,8 +1279,8 @@ place_entry (ScreensaverPrefsDialog *dialog, GtkTable *table,
 static void
 populate_table (ScreensaverPrefsDialog *dialog, GtkTable *table) 
 {
-	char *id, *type;
-	PrefsDialogWidgetSet *set;
+	char *id, *type, *same_as;
+	PrefsDialogWidgetSet *set, *set1;
 	xmlNodePtr node;
 	gint row = 0;
 
@@ -1264,6 +1296,20 @@ populate_table (ScreensaverPrefsDialog *dialog, GtkTable *table)
 		if (!id && strcmp (node->name, "hgroup")) continue;
 
 		set = NULL;
+
+		same_as = xmlGetProp (node, "same-as");
+
+		if (same_as != NULL && *same_as != '\0') {
+			set1 = g_tree_lookup (dialog->widget_db, same_as);
+			if (set1 == NULL) continue;
+			set = g_new0 (PrefsDialogWidgetSet, 1);
+			set->alias = TRUE;
+			set->enabled = TRUE;
+			set->value_widget = set1->value_widget;
+			set->widgets = set1->widgets;
+			g_tree_insert (dialog->widget_db, id, set);
+			continue;
+		}
 
 		if (!strcmp (node->name, "number"))
 			set = place_number (table, node, &row);
@@ -1415,7 +1461,8 @@ read_boolean (GTree *widget_db, xmlNodePtr argument_data, GScanner *cli_db)
 	if (!(id = xmlGetProp (argument_data, "id"))) return;
 	set = g_tree_lookup (widget_db, id);
 
-	if (!set || !set->value_widget) return;
+	if (!set || !set->value_widget || (set->alias && !set->enabled))
+		return;
 
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (set->value_widget), 
 				      found >= 0);
@@ -1450,12 +1497,17 @@ read_number (GTree *widget_db, xmlNodePtr argument_data, GScanner *cli_db)
 	args = g_strsplit (arg_line, " ", -1);
 
 	arg = g_scanner_scope_lookup_symbol (cli_db, 0, args[0] + 1);
-	if (!arg || arg == (char *) 1) return;
+
+	if (!arg || arg == (char *) 1)
+		arg = xmlGetProp (argument_data, "default");
+	if (!arg)
+		return;
 
 	if (!(id = xmlGetProp (argument_data, "id"))) return;
 	set = g_tree_lookup (widget_db, id);
 
-	if (!set || !set->value_widget) return;
+	if (!set || !set->value_widget || (set->alias && !set->enabled))
+		return;
 
 	from_cli_conv = xmlGetProp (argument_data, "from-cli-conv");
 
@@ -1496,7 +1548,8 @@ read_select (GTree *widget_db, xmlNodePtr argument_data,
 	if (!(id = xmlGetProp (argument_data, "id"))) return;
 	set = g_tree_lookup (widget_db, id);
 
-	if (!set || !set->value_widget) return;
+	if (!set || !set->value_widget || (set->alias && !set->enabled))
+		return;
 
 	menu = gtk_option_menu_get_menu 
 		(GTK_OPTION_MENU (set->value_widget));
@@ -1568,12 +1621,17 @@ read_string (GTree *widget_db, xmlNodePtr argument_data, GScanner *cli_db,
 	args = g_strsplit (arg_line, " ", -1);
 
 	arg = g_scanner_scope_lookup_symbol (cli_db, 0, args[0] + 1);
-	if (!arg || arg == (char *) 1) return;
+
+	if (!arg || arg == (char *) 1)
+		arg = xmlGetProp (argument_data, "default");
+	if (!arg)
+		return;
 
 	if (!(id = xmlGetProp (argument_data, "id"))) return;
 	set = g_tree_lookup (widget_db, id);
 
-	if (!set || !set->value_widget) return;
+	if (!set || !set->value_widget || (set->alias && !set->enabled))
+		return;
 
 	gtk_entry_set_text (GTK_ENTRY (set->value_widget), arg);
 

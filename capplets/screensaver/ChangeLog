@@ -1,11 +1,60 @@
 2000-10-07  Bradford Hovinen  <hovinen@helixcode.com>
 
+	* screensaver-prefs-dialog.c (set_widgets_sensitive): Set
+ 	set->enabled
+	(write_boolean):
+	(write_number):
+	(write_select):
+	(write_string): Write only if the enabled flag is set
+	(get_spinbutton):
+	(get_check_button):
+	(get_select_widget):
+	(get_file_entry):
+	(get_entry):
+	(place_number):
+	(place_hgroup):
+	(populate_table): Set set->enabled
+	(read_boolean):
+	(read_number):
+	(read_select):
+	(read_string): Don't set the value if the set is an alias and not
+ 	enabled
+	(read_number):
+	(read_string): Set value to default if not supplied
+	(read_command_line): Accept argument as negative number if it is a
+ 	-<digit>
+
+	* screensaver-prefs-dialog.h (struct _PrefsDialogWidgetSet): Add
+ 	member enabled - TRUE iff the widget is enabled
+
+	* screensaver-prefs-dialog.c (free_set_cb): Don't try to free the
+ 	widgets if the set is an alias
+	(get_spinbutton): 
+	(get_check_button): 
+	(get_select_widget): 
+	(get_file_entry): 
+	(get_entry): 
+	(place_number): 
+	(place_hgroup): 
+	(populate_table): Set set->alias
+
+	* screensaver-prefs-dialog.h (struct _PrefsDialogWidgetSet): Add
+ 	member alias - TRUE means don't try to free widgets
+
+	* screensaver-prefs-dialog.c (get_entry): Have entry expand, not label
+
+	* screensavers/flag.xml: Enable selection for text and bitmap,
+	Set neg_size same-as to pos_size
+
 	* screensaver-prefs-dialog.c (write_command_line): Support files
 	(place_entry): Allow getting a file entry or a string entry
 	(populate_table): Support files
 	(get_file_entry): Implement. Return a set for a GnomeFileEntry
 	(read_string): Support files
 	(place_screensaver_properties): Support files
+	(populate_table): 
+	(place_hgroup): Add feature to allow multiple widget definitions
+ 	to share the same widget
 
 2000-09-24  Bradford Hovinen  <hovinen@helixcode.com>
 

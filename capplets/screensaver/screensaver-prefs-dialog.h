@@ -44,6 +44,8 @@ struct _PrefsDialogWidgetSet
 {
 	GList       *widgets;
 	GtkWidget   *value_widget;
+	gboolean     alias;
+	gboolean     enabled;
 };
 
 struct _ScreensaverPrefsDialog 
