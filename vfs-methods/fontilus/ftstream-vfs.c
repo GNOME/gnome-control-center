@@ -81,10 +81,10 @@ vfs_stream_open(FT_Stream stream,
 
 /* load a typeface from a URI */
 FT_Error
-FT_New_URI_Face(FT_Library           library,
-		const gchar*         uri,
-		FT_Long              face_index,
-		FT_Face             *aface)
+FT_New_Face_From_URI(FT_Library           library,
+		     const gchar*         uri,
+		     FT_Long              face_index,
+		     FT_Face             *aface)
 {
     FT_Open_Args args;
     FT_Stream stream;

@@ -11,10 +11,10 @@
 #define FONT_SIZE 64
 #define PAD_PIXELS 4
 
-FT_Error FT_New_URI_Face(FT_Library library,
-			 const gchar *uri,
-			 FT_Long face_index,
-			 FT_Face *aface);
+FT_Error FT_New_Face_From_URI(FT_Library library,
+			      const gchar *uri,
+			      FT_Long face_index,
+			      FT_Face *aface);
 
 static void
 draw_bitmap(GdkPixbuf *pixbuf, FT_Bitmap *bitmap, gint off_x, gint off_y)
@@ -196,7 +196,7 @@ main(int argc, char **argv)
 	return 1;
     }
 
-    error = FT_New_URI_Face(library, argv[1], 0, &face);
+    error = FT_New_Face_From_URI(library, argv[1], 0, &face);
     if (error) {
 	g_printerr("could not load face '%s'\n", argv[1]);
 	return 1;
