@@ -1,3 +1,12 @@
+2002-05-16  jacob berkman  <jacob@ximian.com>
+
+	* Makefile.am:
+	* gnome-settings-default-editor.[ch]: keep text/plain and text*
+	using the same mime type (#78037)
+
+	* gnome-settings-daemon.c (gnome_settings_daemon_new): load editor
+	and keyboard settings (bugs #78037 and #78016)
+
 Tue May 14 14:50:34 2002  Jonathan Blandford  <jrb@redhat.com>
 
 	* gnome-settings-*.c: Remove all debug print statements, #76085

@@ -40,6 +40,8 @@
 #include <X11/XKBlib.h>
 #endif
 
+#include <string.h>
+
 #ifdef HAVE_X11_EXTENSIONS_XF86MISC_H
 static gboolean
 xfree86_set_keyboard_autorepeat_rate (int delay, int rate)
@@ -82,6 +84,7 @@ apply_settings (void)
 	gboolean repeat, click;
 	int rate, delay;
 	int click_volume, bell_volume, bell_pitch, bell_duration;
+	const char *volume_string;
 
 	XKeyboardControl kbdcontrol;
 
@@ -92,9 +95,14 @@ apply_settings (void)
 	rate          = gconf_client_get_int   (client, "/desktop/gnome/peripherals/keyboard/rate",          NULL);
 	delay         = gconf_client_get_int   (client, "/desktop/gnome/peripherals/keyboard/delay",         NULL);
 	click_volume  = gconf_client_get_int   (client, "/desktop/gnome/peripherals/keyboard/click_volume",  NULL);
+#if 0
 	bell_volume   = gconf_client_get_int   (client, "/desktop/gnome/peripherals/keyboard/bell_volume",   NULL);
+#endif
 	bell_pitch    = gconf_client_get_int   (client, "/desktop/gnome/peripherals/keyboard/bell_pitch",    NULL);
 	bell_duration = gconf_client_get_int   (client, "/desktop/gnome/peripherals/keyboard/bell_duration", NULL);
+
+	volume_string = gconf_client_get_string (client, "/desktop/gnome/peripherals/keyboard/bell_mode", NULL);
+	bell_volume   = (volume_string && !strcmp (volume_string, "on")) ? 50 : 0;
 
 	gdk_error_trap_push ();
         if (repeat) {
@@ -126,7 +134,8 @@ apply_settings (void)
 	kbdcontrol.bell_percent = bell_volume;
 	kbdcontrol.bell_pitch = bell_pitch;
 	kbdcontrol.bell_duration = bell_duration;
-	XChangeKeyboardControl (GDK_DISPLAY (), KBKeyClickPercent, 
+	XChangeKeyboardControl (GDK_DISPLAY (), 
+				KBKeyClickPercent | KBBellPercent | KBBellPitch | KBBellDuration,				
 				&kbdcontrol);
 
 	XSync (GDK_DISPLAY (), FALSE);
