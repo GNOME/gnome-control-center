@@ -317,7 +317,7 @@ read_meta_theme (GnomeVFSURI *meta_theme_uri)
   meta_theme_info->name = gnome_vfs_uri_extract_short_name (common_theme_dir_uri);
   gnome_vfs_uri_unref (common_theme_dir_uri);
 
-  str = gnome_desktop_item_get_string (meta_theme_ditem, GNOME_DESKTOP_ITEM_NAME);
+  str = gnome_desktop_item_get_localestring (meta_theme_ditem, GNOME_DESKTOP_ITEM_NAME);
   if (str == NULL)
     {
       gnome_theme_meta_info_free (meta_theme_info);
@@ -325,7 +325,7 @@ read_meta_theme (GnomeVFSURI *meta_theme_uri)
     }
   meta_theme_info->readable_name = g_strdup (str);
 
-  str = gnome_desktop_item_get_string (meta_theme_ditem, GNOME_DESKTOP_ITEM_COMMENT);
+  str = gnome_desktop_item_get_localestring (meta_theme_ditem, GNOME_DESKTOP_ITEM_COMMENT);
   if (str != NULL)
     meta_theme_info->comment = g_strdup (str);
 
