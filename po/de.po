@@ -1,26 +1,26 @@
-# German messages for control-center.
-# Copyright (C) 1998 Free Software Foundation, Inc.
+# German translation for control-center.
+# Copyright (C) 1998-2001 Free Software Foundation, Inc.
 # Kai Lahmann <kl@linuxfaqs.de>, 2000.
 # Karl Eichwalder <ke@suse.de>, 1999, 2000.
 # Matthias Warkus <mawa@iname.com>, 1999.
 # Karsten Weiss <karsten@addx.au.s.shuttle.de>, 1999.
 # Carsten Schaar <nhadcasc@fs-maphy.uni-hannover.de>, 1998.
-# Christian Meyer <cm@ggtt.de>, 2000.
+# Christian Meyer <chrisime@gnome.org>, 2000, 2001.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: control-center 1.2.x\n"
-"POT-Creation-Date: 2001-02-14 20:16-0500\n"
-"PO-Revision-Date: 2001-02-15 20:01+01:00\n"
-"Last-Translator: Christian Meyer <cm@ggtt.de>\n"
+"Project-Id-Version: control-center 1.3.x\n"
+"POT-Creation-Date: 2001-03-08 18:12+0100\n"
+"PO-Revision-Date: 2001-03-08 18:11+0100\n"
+"Last-Translator: Christian Meyer <chrisime@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: capplets/background-properties/app-background.c:15
 msgid "Set background image."
-msgstr "Das Hintergrundbild setzen."
+msgstr "Das Hintergrundbild festlegen."
 
 #: capplets/background-properties/app-background.c:15
 msgid "IMAGE-FILE"
@@ -32,7 +32,7 @@ msgid ""
 "'background-properties-capplet'.\n"
 "aborting...\n"
 msgstr ""
-"Initialisierungsfehler beim Starten von »background-properties-capplet«.\n"
+"Initialisierungsfehler beim Starten von `background-properties-capplet'.\n"
 "Abbruch...\n"
 
 #: capplets/background-properties/property-background.c:116
@@ -68,11 +68,13 @@ msgid "Wallpaper Selection"
 msgstr "Hintergrundbild auswählen"
 
 #: capplets/background-properties/property-background.c:573
+#: capplets/file-types/file-types-icon-entry.c:258
 msgid "Can't find an hbox, using a normal file selection"
-msgstr "hbox wurde nicht gefunden, normaler Dateiwähler wird benutzt"
+msgstr "hbox wurde nicht gefunden, normaler Dateiwähler wird verwendet"
 
 #: capplets/background-properties/property-background.c:578
 #: capplets/background-properties/property-background.c:1090
+#: capplets/file-types/file-types-icon-entry.c:264
 #: capplets/keyboard-properties/keyboard-properties.c:354
 #: capplets/screensaver-properties/screensaver-dialog.c:25
 #: capplets/theme-switcher/gui.c:230 capplets/theme-switcher/gui.c:302
@@ -87,7 +89,11 @@ msgstr "Hintergrund"
 msgid " Browse... "
 msgstr " Auswählen... "
 
+#. Add default action to fourth column
 #: capplets/background-properties/property-background.c:643
+#: capplets/file-types/file-types-capplet.c:1387
+#: capplets/file-types/file-types-capplet.c:1587
+#: capplets/file-types/file-types-capplet.c:1713
 msgid "none"
 msgstr "nichts"
 
@@ -109,7 +115,7 @@ msgstr "Zentriert"
 
 #: capplets/background-properties/property-background.c:733
 msgid "Tiled"
-msgstr "Gefliest"
+msgstr "Gekachelt"
 
 #: capplets/background-properties/property-background.c:831
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:180
@@ -120,7 +126,7 @@ msgstr "Gefliest"
 #: capplets/sound-properties/sound-properties.c:693
 #: capplets/theme-switcher/gui.c:367
 #: capplets/ui-properties/ui-properties.c:516
-#: capplets/url-properties/url-properties.c:256
+#: capplets/url-properties/url-properties.c:272
 #: capplets/wm-properties/wm-properties-capplet.c:649
 msgid ""
 "No help is available/installed for these settings. Please make sure you\n"
@@ -134,22 +140,21 @@ msgstr ""
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:182
 #: capplets/keyboard-properties/keyboard-properties.c:99
 #: capplets/keyboard-properties/keyboard-properties.c:424
-#: capplets/mime-type/mime-type-capplet.c:81
 #: capplets/mouse-properties/mouse-properties.c:114
 #: capplets/screensaver-properties/callbacks.c:804
 #: capplets/sound-properties/sound-properties.c:695
 #: capplets/sound-properties/sound-properties.c:756
 #: capplets/theme-switcher/gui.c:369
 #: capplets/ui-properties/ui-properties.c:518
-#: capplets/url-properties/url-properties.c:258
+#: capplets/url-properties/url-properties.c:274
 #: capplets/wm-properties/wm-properties-capplet.c:651
-#: control-center/capplet-widget.c:263
+#: control-center/capplet-widget.c:273
 msgid "Close"
 msgstr "Schließen"
 
 #: capplets/background-properties/property-background.c:1102
 msgid "Use GNOME to set background"
-msgstr "GNOME benutzen, um den Hintergrund einzustellen"
+msgstr "GNOME verwenden, um den Hintergrund festzulegen"
 
 #: capplets/background-properties/property-background.c:1152
 msgid "Set parameters from saved state and exit"
@@ -186,11 +191,11 @@ msgstr "Farbverlaufrichtung: vertikal oder horizontal"
 
 #: capplets/background-properties/property-background.c:1157
 msgid "Use a solid fill for the background"
-msgstr "Einen einfarbigen Hintergrund benutzen"
+msgstr "Einen einfarbigen Hintergrund verwenden"
 
 #: capplets/background-properties/property-background.c:1158
 msgid "Use a gradient fill for the background"
-msgstr "Einen Farbverlauf als Hintergrund benutzen"
+msgstr "Einen Farbverlauf als Hintergrund verwenden"
 
 #: capplets/background-properties/property-background.c:1159
 msgid "MODE"
@@ -198,7 +203,7 @@ msgstr "MODUS"
 
 #: capplets/background-properties/property-background.c:1159
 msgid "Display wallpaper: tiled, centered, scaled or ratio"
-msgstr "Hintergrund anzeigen: gefliest, zentriert, skaliert oder maßstäblich"
+msgstr "Hintergrund anzeigen: gekachelt, zentriert, skaliert oder maßstäblich"
 
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:238
 msgid "Gnome editor"
@@ -208,222 +213,242 @@ msgstr "GNOME-Editor"
 msgid "Run In Terminal"
 msgstr "Im Terminal ausführen"
 
-#: capplets/mime-type/edit-window.c:250
-#: capplets/mime-type/new-mime-window.c:35
-msgid "Extensions"
-msgstr "Suffixe"
+#: capplets/file-types/file-types-capplet-dialogs.c:387
+msgid "Edit Applications List"
+msgstr "Anwendungsliste bearbeiten"
 
-#. icon box
-#: capplets/mime-type/edit-window.c:264
-msgid "Select an icon..."
-msgstr "Ein Icon auswählen..."
-
-#: capplets/mime-type/edit-window.c:274
-msgid "Mime Type: "
-msgstr "Mime-Typ: "
-
-#: capplets/mime-type/edit-window.c:304
-msgid "Add"
-msgstr "Hinzufügen"
-
-#: capplets/mime-type/edit-window.c:312
-#: capplets/url-properties/url-properties.c:138
-msgid "Remove"
-msgstr "Löschen"
-
-#. gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
-#: capplets/mime-type/edit-window.c:339
-#: capplets/mime-type/new-mime-window.c:65
-msgid "First Regular Expression: "
-msgstr "Erster regulärer Ausdruck: "
-
-#: capplets/mime-type/edit-window.c:347
-#: capplets/mime-type/new-mime-window.c:76
-msgid "Second Regular Expression: "
-msgstr "Zweiter regulärer Ausdruck: "
-
-#. Actions box
-#: capplets/mime-type/edit-window.c:354
-msgid "Mime Type Actions"
-msgstr "Mime-Typ-Aktionen"
-
-#: capplets/mime-type/edit-window.c:361
+#. Add label
+#: capplets/file-types/file-types-capplet-dialogs.c:409
 #, c-format
-msgid "Example: emacs %f"
-msgstr "Beispiel: emacs %f"
+msgid "Select applications to appear in menu for MIME type \"%s\""
+msgstr ""
+"Wählen Sie die Anwendungen, die im Menü für MIME-Typ \"%s\" erscheinen sollen"
 
-#: capplets/mime-type/edit-window.c:366
-msgid "Open"
-msgstr "Öffnen"
+#: capplets/file-types/file-types-capplet-dialogs.c:433
+msgid "Add Application..."
+msgstr "Anwendung hinzufügen..."
 
-#: capplets/mime-type/edit-window.c:372 capplets/mime-type/edit-window.c:388
-#: capplets/mime-type/edit-window.c:403
-msgid "Select a file..."
-msgstr "Eine Datei auswählen..."
+#: capplets/file-types/file-types-capplet-dialogs.c:440
+msgid "Edit Application..."
+msgstr "Anwendung bearbeiten..."
 
-#: capplets/mime-type/edit-window.c:381
-msgid "View"
-msgstr "Anzeigen"
+#: capplets/file-types/file-types-capplet-dialogs.c:446
+msgid "Delete Application"
+msgstr "Anwendung löschen"
 
-#: capplets/mime-type/edit-window.c:397
-msgid "Edit"
-msgstr "Bearbeiten"
+#: capplets/file-types/file-types-capplet-dialogs.c:480
+msgid "Edit Components List"
+msgstr "Komponenrenliste bearbeiten"
 
-#. we initialize everything
-#: capplets/mime-type/edit-window.c:446
+#. Add label
+#: capplets/file-types/file-types-capplet-dialogs.c:500
 #, c-format
-msgid "Set actions for %s"
-msgstr "Aktionen für %s einstellen"
-
-#: capplets/mime-type/mime-data.c:380
-msgid "Mime Type"
-msgstr "Mime-Typ"
-
-#: capplets/mime-type/mime-data.c:381
-msgid "Extension"
-msgstr "Suffixe"
-
-#: capplets/mime-type/mime-data.c:488
-msgid "You must enter a mime-type"
-msgstr "Sie müssen einen Mime-Typ angeben."
-
-#: capplets/mime-type/mime-data.c:493
-msgid ""
-"You must add either a regular-expression or\n"
-"a file-name extension"
+msgid "Select views to appear in menu for MIME type \"%s\""
 msgstr ""
-"Sie müssen entweder einen regulären Ausdruck\n"
-"oder ein Dateisuffix hinzufügen."
+"Wählen Sie die Ansichten, die im Menü für MIME-Typ \"%s\" erscheinen sollen"
 
-#: capplets/mime-type/mime-data.c:497
+#: capplets/file-types/file-types-capplet-dialogs.c:720
 msgid ""
-"Please put your mime-type in the format:\n"
-"CATEGORY/TYPE\n"
-"\n"
-"For Example:\n"
-"image/png"
+"The MIME type entered contained upper case characters. Upper case characters "
+"were changed to lower case for you."
 msgstr ""
-"Bitte geben Sie Ihren Mime-Typ in diesem Format an:\n"
-"KATEGORIE/TYP\n"
-"\n"
-"Zum Beispiel:\n"
-"image/png"
+"Der eingegebene MIME-Typ enhält Großbuchstaben. Diese wurden für Sie in "
+"Kleinbuchstaben geändert."
 
-#: capplets/mime-type/mime-data.c:502
-msgid "This mime-type already exists"
-msgstr "Dieser Mime-Typ existiert bereits."
+#: capplets/file-types/file-types-capplet-dialogs.c:723
+msgid "Add New MIME Type"
+msgstr "Neuer MIME-Typ hinzufügen"
 
-#: capplets/mime-type/mime-data.c:583 capplets/mime-type/mime-info.c:425
-msgid ""
-"We are unable to create the directory\n"
-"~/.gnome/mime-info\n"
-"\n"
-"We will not be able to save the state."
-msgstr ""
-"Das Verzeichnis ~/.gnome/mime-info\n"
-"kann nicht angelegt werden.\n"
-"\n"
-"Wir werden den Status nicht speichern können."
+#: capplets/file-types/file-types-capplet-dialogs.c:769
+msgid "Add MIME Type"
+msgstr "MIME-Typ hinzufügen"
 
-#: capplets/mime-type/mime-data.c:589 capplets/mime-type/mime-info.c:431
-msgid ""
-"We are unable to access the directory\n"
-"~/.gnome/mime-info\n"
-"\n"
-"We will not be able to save the state."
-msgstr ""
-"Auf das Verzeichnis ~/.gnome/mime-info\n"
-"kann nicht zugegriffen werden.\n"
-"\n"
-"Wir werden den Status nicht speichern können"
+#: capplets/file-types/file-types-capplet-dialogs.c:773
+msgid "New MIME type (e.g. image/x-thumper):"
+msgstr "Neuer MIME-Typ (z.B. image/x-thumper):"
 
-#: capplets/mime-type/mime-data.c:600
-msgid ""
-"Cannot create the file\n"
-"~/.gnome/mime-info/user.mime\n"
-"\n"
-"We will not be able to save the state"
-msgstr ""
-"Die Datei ~/.gnome/mime-info/user.mime\n"
-"kann nicht erstellt werden.\n"
-"\n"
-"Wir werden den Status nicht speichern können."
+#: capplets/file-types/file-types-capplet-dialogs.c:780
+msgid "Description (e.g. Thumper image):"
+msgstr "Beschreibung (z.B. Thumper-Bild)"
 
-#: capplets/mime-type/mime-info.c:442
-msgid ""
-"Cannot create the file\n"
-"~/.gnome/mime-info/user.keys\n"
-"\n"
-"We will not be able to save the state"
-msgstr ""
-"Die Datei ~/.gnome/mime-info/user.keys\n"
-"kann nicht erstellt werden.\n"
-"\n"
-"Wir werden den Status nicht speichern können."
+#: capplets/file-types/file-types-capplet-dialogs.c:947
+msgid "File Extensions "
+msgstr "Dateisuffixe"
 
-#: capplets/mime-type/mime-type-capplet.c:79
-msgid ""
-"No help is available/installed for these settings. Please make sure you\n"
-"have the Control Center documentation installed on your system."
-msgstr ""
-"Für diese Einstellungen ist keine Hilfe verfügbar bzw. installiert. Bitte stellen\n"
-"Sie sicher, dass die Dokumentation zum Kontrollzentrum auf Ihrem System installiert ist."
-
-#: capplets/mime-type/mime-type-capplet.c:95
-#: capplets/wm-properties/wm-properties-capplet.c:1098
-msgid "Delete"
-msgstr "Entfernen"
-
-#: capplets/mime-type/mime-type-capplet.c:105
+#: capplets/file-types/file-types-capplet-dialogs.c:967
 #: capplets/wm-properties/wm-properties-capplet.c:1088
 msgid "Add..."
 msgstr "Hinzufügen..."
 
-#: capplets/mime-type/mime-type-capplet.c:109
-#: capplets/wm-properties/wm-properties-capplet.c:1093
-msgid "Edit..."
-msgstr "Bearbeiten..."
+#: capplets/file-types/file-types-capplet-dialogs.c:972
+msgid "    Remove    "
+msgstr "    Löschen    "
 
-#: capplets/mime-type/new-mime-window.c:21
-msgid "Add Mime Type"
-msgstr "Mime-Typ hinzufügen"
+#: capplets/file-types/file-types-capplet-dialogs.c:1041
+msgid "Add New Extension"
+msgstr "Neue Suffixe hinzufügen"
 
-#: capplets/mime-type/new-mime-window.c:22
+#: capplets/file-types/file-types-capplet-dialogs.c:1045
 msgid ""
-"Add a new Mime Type\n"
-"For example:  image/tiff; text/x-scheme"
+"Type in the extensions for this mime-type (without dot).\n"
+"You can enter several extensions seperated by a space,\n"
+"for example: html htm"
 msgstr ""
-"Einen neuen Mime-Typen hinzufügen\n"
-"Zum Beispiel:  image/tiff; text/x-scheme"
+"Geben Sie die Suffixe für diesen MIME-Typen an (ohne Punkt).\n"
+"Sie können mehrer Suffixe angeben, die durch einen Abstand getrennt sind,zum "
+"Beispiel: html htm"
 
-#: capplets/mime-type/new-mime-window.c:27
-msgid "Mime Type:"
-msgstr "Mime-Typ:"
-
-#: capplets/mime-type/new-mime-window.c:39
-msgid ""
-"Type in the extensions for this mime-type.\n"
-"For example:  .html, .htm"
-msgstr ""
-"Geben Sie die Suffixe für diesen Mime-Typen an.\n"
-"Zum Beispiel:  .html, .htm"
-
-#: capplets/mime-type/new-mime-window.c:46
+#: capplets/file-types/file-types-capplet-dialogs.c:1052
 msgid "Extension:"
 msgstr "Suffix:"
 
-#: capplets/mime-type/new-mime-window.c:51
-msgid "Regular Expressions"
-msgstr "Reguläre Ausdrücke"
+#: capplets/file-types/file-types-capplet-dialogs.c:1194
+msgid "You must enter a name."
+msgstr "Sie müssen einen Namen eingeben."
 
-#: capplets/mime-type/new-mime-window.c:55
+#: capplets/file-types/file-types-capplet-dialogs.c:1197
+msgid "You must enter a command."
+msgstr "Sie müssen ein Kommando angeben."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1207
+#, c-format
 msgid ""
-"You can set up two regular expressions here to identify the Mime Type\n"
-"by.  These fields are optional."
+"\"%s\" does not exist or is not executable.\n"
+"Check your spelling and make sure you have\n"
+"the right permissions to execute this file."
 msgstr ""
-"Sie können zwei reguläre Ausdrücke angeben, um den Mime-Typ zu "
-"identifizieren.  \n"
-"Diese Felder sind optional."
+"\"%s\" existiert nicht oder ist nicht ausführbar.\n"
+"Überprüfen Sie Ihre Eingabe und stellen Sie sicher,\n"
+"dass Sie die notwendigen Rechte für diese Datei haben."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1213
+#, c-format
+msgid ""
+"The command \"%s\" cannot be found.\n"
+"You must use a command that can work from any command line."
+msgstr ""
+"Der Befehl \"%s\" kann nicht gefunden werden.\n"
+"Sie müssen einen Befehl verwenden der von jeder Kommandozeile aus ausführbar "
+"ist."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1225
+msgid "Bad Application Name"
+msgstr "Falscher Anwendungsname"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1226
+msgid "Bad Application Command"
+msgstr "Falscher Konfigurationsbefehl"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1258
+msgid "Add Application"
+msgstr "Anwendung hinzufügen"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1259
+msgid "Edit Application"
+msgstr "Anwendung bearbeiten"
+
+#. Application Name label and entry
+#: capplets/file-types/file-types-capplet-dialogs.c:1271
+msgid "Application Name:"
+msgstr "Anwendungsname:"
+
+#. Application Command label and entry
+#: capplets/file-types/file-types-capplet-dialogs.c:1282
+msgid "Application Command:"
+msgstr "Anwendungsbefehl:"
+
+#. Open Behavior frame
+#: capplets/file-types/file-types-capplet-dialogs.c:1293
+msgid "Open Behavior"
+msgstr "Verhalten beim Öffnen"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1299
+msgid "Can open multiple files"
+msgstr "Mehere Dateien können geöffnet werden"
+
+#. FIXME bugzilla.eazel.com 6066: This needs to be three options now: "yes", "no", and "use uris for non-file locations"
+#: capplets/file-types/file-types-capplet-dialogs.c:1307
+msgid "Can open from URI"
+msgstr "URI kann geöffnet werden"
+
+#: capplets/file-types/file-types-capplet.c:735
+#: capplets/file-types/file-types-capplet.c:1877
+msgid "MIME Type"
+msgstr "MIME-Typ"
+
+#: capplets/file-types/file-types-capplet.c:742
+msgid "Change Icon"
+msgstr "Icon ändern"
+
+#: capplets/file-types/file-types-capplet.c:749
+msgid "Change File Extensions"
+msgstr "Daetisuffixe ändern"
+
+#: capplets/file-types/file-types-capplet.c:757
+msgid "Default Action:"
+msgstr "Voreingestellte Aktion:"
+
+#: capplets/file-types/file-types-capplet.c:769
+msgid "Use Viewer"
+msgstr "Betrachter verwenden"
+
+#: capplets/file-types/file-types-capplet.c:775
+msgid "Open With Application"
+msgstr "Mit Anwendung starten"
+
+#: capplets/file-types/file-types-capplet.c:786
+msgid "Edit List"
+msgstr "Liste bearbeiten"
+
+#: capplets/file-types/file-types-capplet.c:811
+msgid "Add New MIME Type..."
+msgstr "Neuer MIME-Typ hinzufügen..."
+
+#: capplets/file-types/file-types-capplet.c:817
+msgid "Delete This MIME Type"
+msgstr "Diesen MIME-Typ löschen"
+
+#: capplets/file-types/file-types-capplet.c:828
+msgid "Revert to System Defaults"
+msgstr "Zurückkehren zu voreingestellten System"
+
+#: capplets/file-types/file-types-capplet.c:1069
+#: capplets/file-types/file-types-capplet.c:1213
+msgid "None"
+msgstr "Nichts"
+
+#: capplets/file-types/file-types-capplet.c:1318
+msgid ""
+"Reverting to system settings will lose any changes\n"
+"you have ever made to File Types and Programs.\n"
+"Revert anyway?"
+msgstr ""
+"Zurückkehren zu Systemvorgaben löscht alle\n"
+"Veränderungen die Sie bei den Dateitypen und Programmen\n"
+"vorgenommen haben. Trotzdem zurückkehren?"
+
+#: capplets/file-types/file-types-capplet.c:1428
+#: capplets/file-types/file-types-capplet.c:1614
+#: capplets/file-types/file-types-capplet.c:1757
+#, c-format
+msgid "View as %s"
+msgstr "Betrachten als %s"
+
+#: capplets/file-types/file-types-capplet.c:1876
+msgid "Description"
+msgstr "Beschreibung"
+
+#: capplets/file-types/file-types-capplet.c:1878
+msgid "Extension"
+msgstr "Suffix"
+
+#: capplets/file-types/file-types-capplet.c:1879
+msgid "Default Action"
+msgstr "Voreingestellte Aktion"
+
+#: capplets/file-types/file-types-icon-entry.c:381
+msgid "Select an icon"
+msgstr "Ein Icon auswählen"
 
 #: capplets/mouse-properties/mouse-properties.c:267
 msgid "Mouse buttons"
@@ -471,7 +496,7 @@ msgid ""
 "an initialization error occurred while starting 'mouse-properties-capplet'.\n"
 "aborting...\n"
 msgstr ""
-"Initialisierungsfehler beim Starten von »mouse-properties-capplet«.\n"
+"Initialisierungsfehler beim Starten von `mouse-properties-capplet'.\n"
 "Abbruch...\n"
 
 #: capplets/screensaver-properties/callbacks.c:102
@@ -480,7 +505,7 @@ msgstr "Benötigt Passwort"
 
 #: capplets/screensaver-properties/callbacks.c:154
 msgid "Use power management."
-msgstr "Stromsparmodi benutzen."
+msgstr "Stromsparmodi verwenden."
 
 #: capplets/screensaver-properties/callbacks.c:309
 msgid "No Screensaver"
@@ -507,7 +532,7 @@ msgstr "%s-Einstellungen..."
 
 #: capplets/screensaver-properties/screensaver-dialog.c:46
 msgid "About:"
-msgstr "Info zu:"
+msgstr "Über:"
 
 #: capplets/screensaver-properties/screensaver-dialog.c:51
 msgid "Author:"
@@ -632,13 +657,13 @@ msgid ""
 "'keyboard-properties-capplet'.\n"
 "aborting...\n"
 msgstr ""
-"Initialisierungsfehler beim Starten von »keyboard-properties-capplet«.\n"
+"Initialisierungsfehler beim Starten von `keyboard-properties-capplet'.\n"
 "Abbruch...\n"
 
 #: capplets/sound-properties/sound-properties.c:97
 msgid ""
 "an initialization error occurred while starting 'sound-properties-capplet'."
-msgstr "Initialisierungsfehler beim Starten von »sound-properties-capplet«."
+msgstr "Initialisierungsfehler beim Starten von `sound-properties-capplet'."
 
 #: capplets/sound-properties/sound-properties.c:188
 msgid "Event"
@@ -674,12 +699,14 @@ msgstr "Abspielen"
 
 #: capplets/sound-properties/sound-properties.c:336
 msgid "Sound Events"
-msgstr "Klangereignisse"
+msgstr "Audioereignisse"
 
 #: capplets/sound-properties/sound-properties.c:355
 msgid ""
 "This copy of the GNOME control center was not compiled with sound support"
-msgstr "Diese Kopie des GNOME-Kontrollzentrums wurde ohne Soundunterstützung compiliert."
+msgstr ""
+"Diese Kopie des GNOME-Kontrollzentrums wurde ohne Audiounterstützung "
+"compiliert."
 
 #: capplets/sound-properties/sound-properties.c:748
 msgid "The sound file for this event does not exist."
@@ -693,7 +720,7 @@ msgid ""
 msgstr ""
 "Die Audiodatei für dieses Ereignis existiert nicht.\n"
 "Sie können das Paket gnome-audio installieren, um\n"
-"über einige Standardklänge zur Verfügung zu haben."
+"einige voreingestellte Klänge zur Verfügung zu haben."
 
 #: capplets/theme-switcher/demo.c:50
 msgid "One"
@@ -739,7 +766,7 @@ msgstr "um"
 #: capplets/theme-switcher/demo.c:114
 msgid "Selected themes from above will be tested by previewing here."
 msgstr ""
-"Oben ausgewählte Themen können hier in einer Vorschau begutachtet werden."
+"Oben ausgewählte Themen können hier in einer Vorschau angesehen werden."
 
 #. column one
 #: capplets/theme-switcher/demo.c:119
@@ -964,7 +991,7 @@ msgstr "Dialoge über Anwendungsfenster platzieren (wenn möglich)"
 
 #: capplets/ui-properties/ui-properties.c:243
 msgid "Dialog Layout"
-msgstr "Dialoglayout"
+msgstr "Dialog-Layout"
 
 #: capplets/ui-properties/ui-properties.c:244
 msgid "Dialog Behavior"
@@ -1008,11 +1035,11 @@ msgstr "Unten"
 
 #: capplets/ui-properties/ui-properties.c:277
 msgid "GNOME MDI Options"
-msgstr "GNOME-MDI-Optionen"
+msgstr "GNOME MDI-Optionen"
 
 #: capplets/url-properties/url-properties.c:51
 msgid "Error initializing the `url-properties' capplet."
-msgstr "Initialisierungsfehler beim Capplet »url-properties«."
+msgstr "Initialisierungsfehler beim Capplet `url-properties'."
 
 #: capplets/url-properties/url-properties.c:76
 msgid "Protocol"
@@ -1022,30 +1049,34 @@ msgstr "Protokoll"
 msgid "Command"
 msgstr "Befehl"
 
-#: capplets/url-properties/url-properties.c:92
+#: capplets/url-properties/url-properties.c:93
 msgid "handler:"
 msgstr "Handler:"
 
 #. set some commonly used handlers
-#: capplets/url-properties/url-properties.c:102
+#: capplets/url-properties/url-properties.c:103
 msgid "Netscape"
 msgstr "Netscape"
 
-#: capplets/url-properties/url-properties.c:107
+#: capplets/url-properties/url-properties.c:108
 msgid "Netscape (new window)"
 msgstr "Netscape (neues Fenster)"
 
-#: capplets/url-properties/url-properties.c:113
+#: capplets/url-properties/url-properties.c:121
 msgid "Help browser"
 msgstr "Hilfebrowser"
 
-#: capplets/url-properties/url-properties.c:118
+#: capplets/url-properties/url-properties.c:127
 msgid "Help browser (new window)"
 msgstr "Hilfebrowser (neues Fenster)"
 
-#: capplets/url-properties/url-properties.c:130
+#: capplets/url-properties/url-properties.c:140
 msgid "Set"
-msgstr "Festsetzen"
+msgstr "Festlegen"
+
+#: capplets/url-properties/url-properties.c:148
+msgid "Remove"
+msgstr "Löschen"
 
 #: capplets/wm-properties/wm-properties-capplet.c:142
 #, c-format
@@ -1077,8 +1108,8 @@ msgid ""
 "\tAnother window manager is already running and could not be killed\n"
 msgstr ""
 "wm-properties-capplet: Fenstermanager kann nicht initialisiert werden.\n"
-"           Ein anderer Fenstermanager scheint bereits zu laufen und konnte "
-"nicht getötet werden.\n"
+"Ein anderer Fenstermanager scheint bereits zu laufen und konnte nicht "
+"getötet werden.\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:360
 #, c-format
@@ -1087,7 +1118,7 @@ msgid ""
 "\t'%s' didn't start\n"
 msgstr ""
 "wm-properties-capplet: Fenstermanager konnte nicht initialisiert werden.\n"
-"           '%s' startete nicht.\n"
+"\t'%s' startete nicht.\n"
 
 #: capplets/wm-properties/wm-properties-capplet.c:413
 msgid "Previous window manager did not die\n"
@@ -1203,21 +1234,29 @@ msgstr "Fenstermanager bearbeiten"
 msgid "You cannot delete the current Window Manager"
 msgstr "Sie können den aktuellen Fenstermanager nicht löschen"
 
+#: capplets/wm-properties/wm-properties-capplet.c:1093
+msgid "Edit..."
+msgstr "Bearbeiten..."
+
+#: capplets/wm-properties/wm-properties-capplet.c:1098
+msgid "Delete"
+msgstr "Entfernen"
+
 #: capplets/wm-properties/wm-properties-capplet.c:1134
 msgid ""
 "an initialization error occurred while starting 'wm-properties-capplet'.\n"
 "aborting...\n"
 msgstr ""
-"Initialisierungsfehler beim Starten von »wm-properties-capplet«.\n"
+"Initialisierungsfehler beim Starten von `wm-properties-capplet'.\n"
 "Abbruch...\n"
 
 #: control-center/callbacks.c:102
 msgid "GNOME Control Center"
-msgstr "GNOME-Kontrollzentrum"
+msgstr "GNOME Kontrollzentrum"
 
 #: control-center/callbacks.c:105
 msgid "Desktop Properties manager."
-msgstr "Desktopeigenschaften-Verwaltung"
+msgstr "Verwaltung für Desktopeigenschaften."
 
 # Besser: "Testen" oder "Probe" oder "Versuchen" oder "Ausprobieren"? -ke-
 # I thought we decided to take: "Ausprobieren".
@@ -1238,7 +1277,7 @@ msgstr "Hilfe zu den `%s'-Einstellungen"
 
 #: control-center/capplet-widget-libs.c:46
 msgid "id of the capplet -- assigned by the control-center"
-msgstr "Kennung des Capplets -- vergeben durch das Kontrollzentrum"
+msgstr "Kennung des Konfigurationsmoduls -- vergeben durch das Kontrollzentrum"
 
 #: control-center/capplet-widget-libs.c:46
 msgid "ID"
@@ -1275,19 +1314,20 @@ msgstr "Sitzungseinstellungen initialisieren"
 #: control-center/capplet-widget-libs.c:51
 msgid "Ignore default action.  Used for custom init-session cases"
 msgstr ""
-"Standardaktion ignorieren (selbstgestrickte Initialisierung für Sitzung)"
+"Voreingestellte Aktion ignorieren (selbstgestrickte Initialisierung für "
+"Sitzung)"
 
-#: control-center/capplet-widget.c:262
+#: control-center/capplet-widget.c:272
 msgid "Sorry, no help is available for these settings."
-msgstr "Pardon, für diese Einstellungen ist keine Hilfe verfügbar."
+msgstr "Sorry, für diese Einstellungen ist keine Hilfe verfügbar."
 
-#: control-center/corba-glue.c:75
+#: control-center/corba-glue.c:77
 msgid "capplet-command to be run."
-msgstr "Auszuführender Capplet-Befehl."
+msgstr "Auszuführender Befehl für Konfigurationsmodul."
 
-#: control-center/corba-glue.c:75
+#: control-center/corba-glue.c:77
 msgid "CAPPLET"
-msgstr "CAPPLET"
+msgstr "KONFIGURATIONSMODUL"
 
 #: control-center/main.c:36
 msgid "Help on control-center"
@@ -1295,7 +1335,7 @@ msgstr "Hilfe zum Kontrollzentrum"
 
 #: control-center/main.c:36
 msgid "Help with the GNOME control-center."
-msgstr "Hilfe zum GNOME-Kontrollzentrum."
+msgstr "Hilfe zum GNOME Kontrollzentrum."
 
 #: control-center/main.c:38
 msgid "Help with the current configuration page."
@@ -1307,7 +1347,7 @@ msgstr "Info..."
 
 #: control-center/main.c:41
 msgid "About the GNOME control-center."
-msgstr "Info zum GNOME-Kontrollzentrum."
+msgstr "Über das GNOME Kontrollzentrum."
 
 #. we create the widgets
 #: control-center/main.c:69
@@ -1358,164 +1398,3 @@ msgstr "Rechnername:"
 #: control-center/splash.c:178
 msgid "Unknown"
 msgstr "Unbekannt"
-
-#~ msgid "Session"
-#~ msgstr "Sitzung"
-
-#~ msgid "Session Chooser"
-#~ msgstr "Sitzungswähler"
-
-#~ msgid "Start Session"
-#~ msgstr "Sitzung starten"
-
-#~ msgid "Cancel Login"
-#~ msgstr "Anmeldung abbrechen"
-
-#~ msgid "Order: "
-#~ msgstr "Reihenfolge: "
-
-#~ msgid "Style: "
-#~ msgstr "Stil: "
-
-#~ msgid "This button sets the start order of the selected programs.\n"
-#~ msgstr ""
-#~ "Dieser Knopf stellt die Startreihenfolge der ausgewählten Programme ein.\n"
-
-#~ msgid ""
-#~ "This button sets the restart style of the selected programs:\n"
-#~ "Normal programs are unaffected by logouts but can die;\n"
-#~ "Respawn programs are never allowed to die;\n"
-#~ "Trash programs are discarded on logout and can die;\n"
-#~ "Settings programs are always started on every login."
-#~ msgstr ""
-#~ "Dieser Knopf stellt den Startstil der ausgewählten Programme ein:\n"
-#~ "Normale Programme sind bei Abmeldung nicht betroffen, können jedoch "
-#~ "sterben;\n"
-#~ "Neustart-Programme dürfen nicht sterben;\n"
-#~ "Müll-Programme werden beim Abmelden geschrottet und können sterben;\n"
-#~ "Einstellungsprogramme werden bei jeder Anmeldung gestartet."
-
-#~ msgid ""
-#~ "This button produces a key to the program states below:\n"
-#~ "Inactive programs are waiting to start or have finished;\n"
-#~ "Starting programs are being given time to get running;\n"
-#~ "Running programs are normal members of the session;\n"
-#~ "Saving programs are saving their session details;\n"
-#~ "Programs which make no contact have Unknown states.\n"
-#~ msgstr ""
-#~ "Dieser Knopf liefert eine Legende der Programmzustände unten:\n"
-#~ "Inaktive Programme warten auf den Start oder sind beendet;\n"
-#~ "Startende Programme haben ein bisschen Zeit, um zu starten;\n"
-#~ "Laufende Programme sind normale Mitglieder der Sitzung;\n"
-#~ "Speichernde Programme speichern ihre Sitzungsdetails;\n"
-#~ "Programme ohne Verbindung haben einen Unbekannten Status.\n"
-
-#~ msgid "This column gives the command used to start a program."
-#~ msgstr ""
-#~ "Diese Spalte zeigt das Kommando, mit dem ein Programm gestartet wird."
-
-#~ msgid "Order"
-#~ msgstr "Reihenfolge"
-
-#~ msgid "Style"
-#~ msgstr "Stil"
-
-#~ msgid "State"
-#~ msgstr "Status"
-
-#~ msgid "Program"
-#~ msgstr "Programm"
-
-#~ msgid "Inactive"
-#~ msgstr "Inaktiv"
-
-#~ msgid "Waiting to start or already finished."
-#~ msgstr "Wartet auf Start oder ist bereits beendet."
-
-#~ msgid "Starting"
-#~ msgstr "Startet"
-
-#~ msgid "Started but has not yet reported state."
-#~ msgstr "Läuft, aber hat noch keinen Bericht abgegeben."
-
-#~ msgid "Running"
-#~ msgstr "Läuft"
-
-#~ msgid "A normal member of the session."
-#~ msgstr "Ein normales Mitglied der Sitzung."
-
-#~ msgid "Saving"
-#~ msgstr "Speichert"
-
-#~ msgid "Saving session details."
-#~ msgstr "Sitzungsdetails werden gespeichert."
-
-#~ msgid "State not reported within timeout."
-#~ msgstr "Status vor Auszeit nicht bekanntgegeben."
-
-#~ msgid "Normal"
-#~ msgstr "Normal"
-
-#~ msgid "Unaffected by logouts but can die."
-#~ msgstr "Von Abmeldung nicht betroffen, kann jedoch sterben."
-
-#~ msgid "Respawn"
-#~ msgstr "Neustart"
-
-#~ msgid "Never allowed to die."
-#~ msgstr "Darf niemals sterben."
-
-#~ msgid "Trash"
-#~ msgstr "Müll"
-
-#~ msgid "Discarded on logout and can die."
-#~ msgstr "Bei der Abmeldung verwerfen und sterben lassen."
-
-#~ msgid "Always started on every login."
-#~ msgstr "Bei jeder Anmeldung gestartet."
-
-#~ msgid "Remove Program"
-#~ msgstr "Programm entfernen"
-
-#~ msgid "Options"
-#~ msgstr "Optionen"
-
-#~ msgid "Show splash screen on login"
-#~ msgstr "Splash-Screen bei der Anmeldung zeigen"
-
-#~ msgid "Prompt on logout"
-#~ msgstr "Beim Abmelden nachfragen"
-
-#~ msgid "Automatically save changes to session"
-#~ msgstr "Automatisch die Änderungen an der Sitzung speichern"
-
-#~ msgid "Non-session-managed Startup Programs"
-#~ msgstr "Nicht in der Sitzung verwaltete Startprogramme"
-
-#~ msgid "Priority"
-#~ msgstr "Priorität"
-
-#~ msgid "Browse Currently Running Programs..."
-#~ msgstr "Momentan laufende Programme auswählen..."
-
-#~ msgid "Only display warnings."
-#~ msgstr "Nur Warnungen anzeigen."
-
-#~ msgid "Startup Command"
-#~ msgstr "Startbefehl"
-
-#~ msgid ""
-#~ "Programs with smaller values are started before programs with higher values. "
-#~ "The default value should be OK"
-#~ msgstr ""
-#~ "Programme mit kleineren Werten werden vor den Programmen mit höheren Werten "
-#~ "gestartet. Der voreingestellte Wert sollte in Ordnung sein."
-
-#~ msgid "The startup command cannot be empty"
-#~ msgstr "Der Startbefehl darf nicht leer sein"
-
-#~ msgid "Add Startup Program"
-#~ msgstr "Startprogramm hinzufügen"
-
-#~ msgid "Edit Startup Program"
-#~ msgstr "Startprogramm bearbeiten"
