@@ -218,7 +218,6 @@ real_quit_cb (pair_t *pair)
 	CORBA_Environment ev;
 	Bonobo_EventSource_ListenerId id;
 	Bonobo_ConfigDatabase db;
-
 	DEBUG_MSG ("Enter");
 	CORBA_exception_init (&ev);
 	db = (Bonobo_ConfigDatabase) pair->a;
@@ -228,7 +227,6 @@ real_quit_cb (pair_t *pair)
 	bonobo_object_release_unref (db, &ev);
 	CORBA_exception_free (&ev);
 	DEBUG_MSG ("Exit");
-
 	gtk_main_quit ();
 
 	return FALSE;
@@ -443,9 +441,7 @@ legacy_is_modified (Bonobo_ConfigDatabase db, const gchar *filename)
 	CORBA_exception_free (&ev);
 	g_free (realfile);
 	legacy_tm = localtime (&stbuf.st_mtime);
-	g_print ("%i\n", legacy_tm->tm_isdst);
 	legacy_val = mktime (legacy_tm);
-	g_print ("Legacy %i vs db %i\n", legacy_val, log_val);
 	return (legacy_val > log_val);
 }
 
@@ -514,26 +510,29 @@ capplet_init (int                      argc,
 			if (legacy_is_modified (db, legacy_files[i]))
 			{
 				needs_legacy = TRUE; 
-				g_print ("Needs legacy!\n");
 				break;
 			}
 		}
 	}
 	
 	if ((apply_only || init_session) && apply_fn != NULL) {
+		if (needs_legacy)
+		{
+			get_legacy_fn (db);
+			Bonobo_ConfigDatabase_sync (db, &ev);
+		}
+
 		apply_fn (db);
 	}
 	else if (get_legacy && get_legacy_fn != NULL) {
 		setup_session_mgmt (argv[0]);
 		get_legacy_fn (db);
 		Bonobo_ConfigDatabase_sync (db, &ev);
-		g_print ("synced okay\n");
 	} else {
 		setup_session_mgmt (argv[0]);
 
 		if (needs_legacy)
 		{
-			g_print ("needs legacy\n");
 			get_legacy_fn (db);
 			Bonobo_ConfigDatabase_sync (db, &ev);
 		}
