@@ -98,8 +98,6 @@ static void add_ext_cb                   (MimeEditDialog *dialog);
 static void remove_ext_cb                (MimeEditDialog *dialog);
 static void choose_cat_cb                (MimeEditDialog *dialog);
 static void default_action_changed_cb    (MimeEditDialog *dialog);
-static void use_category_defaults_toggled_cb (MimeEditDialog  *dialog,
-					      GtkToggleButton *tb);
 static void response_cb                  (MimeEditDialog *dialog,
 					  gint            response_id);
 
@@ -202,8 +200,6 @@ mime_edit_dialog_init (MimeEditDialog *dialog, MimeEditDialogClass *class)
 	g_signal_connect_swapped (G_OBJECT (WID ("remove_ext_button")), "clicked", (GCallback) remove_ext_cb, dialog);
 	g_signal_connect_swapped (G_OBJECT (WID ("choose_button")), "clicked", (GCallback) choose_cat_cb, dialog);
 	g_signal_connect_swapped (G_OBJECT (WID ("default_action_select")), "changed", (GCallback) default_action_changed_cb, dialog);
-	g_signal_connect_swapped (G_OBJECT (WID ("use_category_defaults_toggle")), "toggled",
-				  (GCallback) use_category_defaults_toggled_cb, dialog);
 
 	g_signal_connect_swapped (G_OBJECT (dialog->p->dialog_win), "response", (GCallback) response_cb, dialog);
 
@@ -442,7 +438,6 @@ fill_dialog (MimeEditDialog *dialog)
 		mime_type_info_get_category_name (dialog->p->info));
 
 	dialog->p->use_cat_dfl = dialog->p->info->use_category;
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("use_category_defaults_toggle")), dialog->p->use_cat_dfl);
 	update_sensitivity (dialog);
 
 	gnome_icon_entry_set_filename (GNOME_ICON_ENTRY (WID ("icon_entry")), mime_type_info_get_icon_path (dialog->p->info));
@@ -771,9 +766,6 @@ store_data (MimeEditDialog *dialog)
 		dialog->p->info->small_icon_pixbuf = NULL;
 	}
 
-	dialog->p->info->use_category =
-		gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (WID ("use_category_defaults_toggle")));
-
 	option_menu = GTK_OPTION_MENU (WID ("component_select"));
 	menu_shell = GTK_MENU_SHELL (gtk_option_menu_get_menu (option_menu));
 	idx = gtk_option_menu_get_history (option_menu);
@@ -936,13 +928,6 @@ default_action_changed_cb (MimeEditDialog *dialog)
 
 	dialog->p->custom_action = (id == g_list_length (menu->children) - 1);
 
-	update_sensitivity (dialog);
-}
-
-static void
-use_category_defaults_toggled_cb (MimeEditDialog *dialog, GtkToggleButton *tb)
-{
-	dialog->p->use_cat_dfl = gtk_toggle_button_get_active (tb);
 	update_sensitivity (dialog);
 }
 

@@ -85,8 +85,10 @@ launch_edit_dialog (GtkTreeModel *model, GtkTreeIter *iter)
 	case MODEL_ENTRY_SERVICE:
 		return service_edit_dialog_new (model, SERVICE_INFO (entry));
 
+#if 0
 	case MODEL_ENTRY_CATEGORY:
 		return mime_category_edit_dialog_new (model, MIME_CATEGORY_INFO (entry));
+#endif
 
 	default:
 		return NULL;
