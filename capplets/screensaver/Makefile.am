@@ -17,9 +17,10 @@ screensaver_properties_capplet_SOURCES = \
 	daemon.c					daemon.h\
 	rc-parse.c				rc-parse.h\
 	resources.c				resources.h\
-	XScreenSaver_ad.h
+	XScreenSaver_ad.h                        
 
-pixmaps_DATA = no-hack.png blank-screen.png
+pixmaps_DATA = no-hack.png blank-screen.png checked.xpm unchecked.xpm
+
 
 ##
 ## You should not need to modify anything below this line
