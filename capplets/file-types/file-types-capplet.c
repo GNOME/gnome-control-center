@@ -1088,7 +1088,7 @@ delete_mime_clicked (GtkWidget *widget, gpointer data)
 static void
 add_mime_clicked (GtkWidget *widget, gpointer data)
 {
-	char *text[4];
+	char *text[4], *tmp_text;
 	const char *description;
 	char *extensions, *mime_string, *filename;
         gint row;
@@ -1124,7 +1124,7 @@ add_mime_clicked (GtkWidget *widget, gpointer data)
 		}
 
 		/* Add default action to fourth column */
-		text[3] = g_strdup(_("None"));
+		text[3] = g_strdup(_("none"));
 
 		/* Insert item into list */
 		row = gtk_clist_insert (GTK_CLIST (mime_list), 1, text);
@@ -1159,8 +1159,10 @@ add_mime_clicked (GtkWidget *widget, gpointer data)
 				case GNOME_VFS_MIME_ACTION_TYPE_COMPONENT:
 					/* Get the default component */
 					default_component = gnome_vfs_mime_get_default_component (mime_string);
-					g_free (text[3]);
-					text[3] = name_from_oaf_server_info (default_component);
+					g_free (text[3]);					
+					tmp_text = name_from_oaf_server_info (default_component);
+					text[3] = g_strdup_printf (_("View as %s"), tmp_text);
+					g_free (tmp_text);
 					filename = gnome_vfs_icon_path_from_filename ("nautilus/gnome-library.png");
 					pixbuf = gdk_pixbuf_new_from_file (filename);
 					g_free (filename);
@@ -1303,14 +1305,14 @@ update_mime_list_action (const char *mime_string)
 	GnomeVFSMimeApplication *default_app;
 	OAF_ServerInfo *default_component;
 	const char *action_icon_name;
-	char *text;
+	char *text, *tmp_text;
 	char *action_icon_path;
 	int row;
 	
 	pixbuf = NULL;
 	row = GPOINTER_TO_INT (GTK_CLIST (mime_list)->selection->data);
 
-	text = g_strdup(_("None"));
+	text = g_strdup(_("none"));
 
 	action = gnome_vfs_mime_get_default_action (mime_string);
 	if (action != NULL) {
@@ -1339,7 +1341,9 @@ update_mime_list_action (const char *mime_string)
 				/* Get the default component */
 				default_component = gnome_vfs_mime_get_default_component (mime_string);
 				g_free (text);
-				text = name_from_oaf_server_info (default_component);
+				tmp_text = name_from_oaf_server_info (default_component);
+				text = g_strdup_printf (_("View as %s"), tmp_text);
+				g_free (tmp_text);
 				pixbuf = gdk_pixbuf_new_from_file ("/gnome/share/pixmaps/nautilus/gnome-library.png");
 				CORBA_free (default_component);
 				break;
@@ -1395,7 +1399,7 @@ capplet_get_icon_pixbuf (const char *mime_string, gboolean is_executable)
 static void
 populate_mime_list (GList *type_list, GtkCList *clist)
 {
-	char *text[4];        
+	char *text[4], *tmp_text;        
 	const char *description;
 	char *extensions, *mime_string;
         gint row;
@@ -1432,7 +1436,7 @@ populate_mime_list (GList *type_list, GtkCList *clist)
 		}
 		
 		/* Add default action to fourth column */
-		text[3] = g_strdup(_("None"));
+		text[3] = g_strdup(_("none"));
 		
 		/* Insert item into list */
 		row = gtk_clist_insert (GTK_CLIST (clist), 1, text);
@@ -1466,8 +1470,10 @@ populate_mime_list (GList *type_list, GtkCList *clist)
 			case GNOME_VFS_MIME_ACTION_TYPE_COMPONENT:
 				/* Get the default component */
 				default_component = gnome_vfs_mime_get_default_component (mime_string);
-				g_free (text[3]);
-				text[3] = name_from_oaf_server_info (default_component);
+				g_free (text[3]);								
+				tmp_text = name_from_oaf_server_info (default_component);
+				text[3] = g_strdup_printf (_("View as %s"), tmp_text);
+				g_free (tmp_text);
 				pixbuf = gdk_pixbuf_new_from_file ("/gnome/share/pixmaps/nautilus/gnome-library.png");
 				CORBA_free (default_component);
 				break;
@@ -1519,7 +1525,7 @@ create_mime_list_and_scroller (void)
         titles[0] = _("Description");
         titles[1] = _("Mime Type");
         titles[2] = _("Extension");
-        titles[3] = _("Action");
+        titles[3] = _("Default Action");
         
         window = gtk_scrolled_window_new (NULL, NULL);
         gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (window),
