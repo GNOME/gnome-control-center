@@ -5,11 +5,10 @@
 # Karsten Weiss <karsten@addx.au.s.shuttle.de>, 1999.
 # Carsten Schaar <nhadcasc@fs-maphy.uni-hannover.de>, 1998.
 #
-#: control-center/main.c:36
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.51\n"
-"POT-Creation-Date: 2000-03-29 20:20+0200\n"
+"POT-Creation-Date: 2000-03-29 17:55-0500\n"
 "PO-Revision-Date: 2000-03-29 20:25+02:00\n"
 "Last-Translator: Matthias Warkus <mawa@iname.com>\n"
 "Language-Team: German <de@li.org>\n"
@@ -42,6 +41,18 @@ msgstr "Deaktiviert"
 msgid "Color"
 msgstr "Farben"
 
+#: capplets/background-properties/property-background.c:619
+msgid "Solid"
+msgstr ""
+
+#: capplets/background-properties/property-background.c:625
+msgid "Horizontal Gradient"
+msgstr ""
+
+#: capplets/background-properties/property-background.c:631
+msgid "Vertical Gradient"
+msgstr ""
+
 #: capplets/background-properties/property-background.c:667
 msgid "Primary Color"
 msgstr "Primärfarbe"
@@ -60,9 +71,9 @@ msgstr "Kann keine hbox finden, benutze normalen Dateiwähler"
 
 #: capplets/background-properties/property-background.c:866
 #: capplets/background-properties/property-background.c:1306
-#: capplets/keyboard-properties/keyboard-properties.c:265
+#: capplets/keyboard-properties/keyboard-properties.c:342
 #: capplets/screensaver-properties/screensaver-dialog.c:25
-#: capplets/theme-switcher/gui.c:226 capplets/theme-switcher/gui.c:298
+#: capplets/theme-switcher/gui.c:224 capplets/theme-switcher/gui.c:296
 msgid "Preview"
 msgstr "Vorschau"
 
@@ -97,12 +108,13 @@ msgstr "Gefliest"
 #: capplets/background-properties/property-background.c:1104
 #: capplets/bell-properties/bell-properties.c:61
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:179
-#: capplets/keyboard-properties/keyboard-properties.c:81
+#: capplets/keyboard-properties/keyboard-properties.c:91
+#: capplets/keyboard-properties/keyboard-properties.c:410
 #: capplets/mouse-properties/mouse-properties.c:111
 #: capplets/screensaver-properties/callbacks.c:802
 #: capplets/session-properties/session-properties.c:318
 #: capplets/sound-properties/sound-properties.c:690
-#: capplets/theme-switcher/gui.c:362
+#: capplets/theme-switcher/gui.c:360
 #: capplets/ui-properties/ui-properties.c:515
 #: capplets/wm-properties/wm-properties-capplet.c:643
 msgid ""
@@ -117,13 +129,14 @@ msgstr ""
 #: capplets/background-properties/property-background.c:1106
 #: capplets/bell-properties/bell-properties.c:63
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:181
-#: capplets/keyboard-properties/keyboard-properties.c:83
+#: capplets/keyboard-properties/keyboard-properties.c:93
+#: capplets/keyboard-properties/keyboard-properties.c:412
 #: capplets/mouse-properties/mouse-properties.c:113
 #: capplets/screensaver-properties/callbacks.c:804
 #: capplets/session-properties/session-properties.c:320
 #: capplets/sound-properties/sound-properties.c:692
 #: capplets/sound-properties/sound-properties.c:753
-#: capplets/theme-switcher/gui.c:364
+#: capplets/theme-switcher/gui.c:362
 #: capplets/ui-properties/ui-properties.c:517
 #: capplets/wm-properties/wm-properties-capplet.c:645
 #: control-center/callbacks.c:77 control-center/capplet-widget.c:263
@@ -188,18 +201,22 @@ msgid "Keyboard Bell"
 msgstr "Tastaturglocke"
 
 #: capplets/bell-properties/bell-properties.c:189
+#: capplets/keyboard-properties/keyboard-properties.c:258
 msgid "Volume"
 msgstr "Lautstärke"
 
 #: capplets/bell-properties/bell-properties.c:192
+#: capplets/keyboard-properties/keyboard-properties.c:261
 msgid "Pitch (Hz)"
 msgstr "Tonhöhe (Hz)"
 
 #: capplets/bell-properties/bell-properties.c:195
+#: capplets/keyboard-properties/keyboard-properties.c:264
 msgid "Duration (ms)"
 msgstr "Dauer (ms)"
 
 #: capplets/bell-properties/bell-properties.c:219
+#: capplets/keyboard-properties/keyboard-properties.c:276
 msgid "Test"
 msgstr "Testen"
 
@@ -219,39 +236,45 @@ msgstr "Gnome-Editor"
 msgid "Run In Terminal"
 msgstr "Im Terminal ausführen"
 
-#: capplets/keyboard-properties/keyboard-properties.c:216
-msgid "Auto-repeat"
-msgstr "Tastenwiederholung"
+#: capplets/keyboard-properties/keyboard-properties.c:250
+#, fuzzy
+msgid "Keyboard bell"
+msgstr "Tastaturglocke"
 
-#: capplets/keyboard-properties/keyboard-properties.c:227
+#: capplets/keyboard-properties/keyboard-properties.c:294
+#, fuzzy
+msgid "Keyboard repeat rate"
+msgstr "Geschwindigkeit"
+
+#: capplets/keyboard-properties/keyboard-properties.c:304
 msgid "Enable auto-repeat"
 msgstr "Tastenwiederholung aktivieren"
 
-#: capplets/keyboard-properties/keyboard-properties.c:237
+#: capplets/keyboard-properties/keyboard-properties.c:313
 msgid "Repeat rate"
 msgstr "Geschwindigkeit"
 
-#: capplets/keyboard-properties/keyboard-properties.c:240
+#: capplets/keyboard-properties/keyboard-properties.c:316
 msgid "Repeat Delay"
 msgstr "Verzögerung"
 
-#: capplets/keyboard-properties/keyboard-properties.c:242
+#: capplets/keyboard-properties/keyboard-properties.c:318
 msgid "Keyboard click"
 msgstr "Tastaturklick"
 
-#: capplets/keyboard-properties/keyboard-properties.c:253
+#: capplets/keyboard-properties/keyboard-properties.c:327
 msgid "Click on keypress"
 msgstr "Tastaturklick aktivieren"
 
-#: capplets/keyboard-properties/keyboard-properties.c:263
+#: capplets/keyboard-properties/keyboard-properties.c:336
 msgid "Click volume"
 msgstr "Klick Lautstärke"
 
-#: capplets/keyboard-properties/keyboard-properties.c:273
+#: capplets/keyboard-properties/keyboard-properties.c:347
 msgid "Test settings"
 msgstr "Einstellungen testen"
 
-#: capplets/keyboard-properties/keyboard-properties.c:315
+#: capplets/keyboard-properties/keyboard-properties.c:453
 msgid ""
 "an initialization error occurred while starting "
 "'keyboard-properties-capplet'.\n"
@@ -980,11 +1003,11 @@ msgstr ""
 msgid "Select a theme to install"
 msgstr "Ein Thema zum Installieren auswählen"
 
-#: capplets/theme-switcher/gui.c:192
+#: capplets/theme-switcher/gui.c:191
 msgid "Available Themes"
 msgstr "Verfügbare Themen"
 
-#: capplets/theme-switcher/gui.c:217
+#: capplets/theme-switcher/gui.c:215
 msgid ""
 "Auto\n"
 "Preview"
@@ -992,7 +1015,7 @@ msgstr ""
 "Auto\n"
 "Vorschau"
 
-#: capplets/theme-switcher/gui.c:229
+#: capplets/theme-switcher/gui.c:227
 msgid ""
 "Install new\n"
 "theme..."
@@ -1002,17 +1025,17 @@ msgstr ""
 
 #. Font selector.
 #.
-#: capplets/theme-switcher/gui.c:235
+#: capplets/theme-switcher/gui.c:233
 msgid "User Font"
 msgstr "Eigene Schriftart"
 
 #. FIXME - should really get this from X somehow
 #. for now we just assume default gtk font
-#: capplets/theme-switcher/gui.c:253
+#: capplets/theme-switcher/gui.c:251
 msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
 msgstr "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-iso8859-1"
 
-#: capplets/theme-switcher/gui.c:272
+#: capplets/theme-switcher/gui.c:270
 msgid "Use custom font."
 msgstr "Eigene Schriftart verwenden."
 
@@ -1530,3 +1553,6 @@ msgstr ""
 #: control-center/main.c:194
 msgid "Control Center"
 msgstr "Kontrollzentrum"
+
+#~ msgid "Auto-repeat"
+#~ msgstr "Tastenwiederholung"
