@@ -547,6 +547,8 @@ bonobo_config_archiver_destroy (GtkObject *object)
 
 	DEBUG_MSG ("Enter");
 
+	gtk_object_ref (object);
+
 	CORBA_exception_init (&ev);
 
 	if (archiver_db->moniker != NULL) {
@@ -588,6 +590,8 @@ bonobo_config_archiver_destroy (GtkObject *object)
 		bonobo_object_release_unref (archiver_db->archive, NULL);
 	
 	parent_class->destroy (object);
+
+	gtk_object_unref (object);
 
 	DEBUG_MSG ("Exit");
 }
