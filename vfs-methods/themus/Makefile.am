@@ -2,6 +2,7 @@ INCLUDES = $(THEME_METHOD_CFLAGS) \
   $(THEMUS_THUMBNAILER_CFLAGS) \
   $(THEMUS_COMPONENT_CFLAGS) \
   -I$(top_srcdir)/capplets/common \
+  -DGNOMECC_GLADE_DIR=\"$(GNOMECC_GLADE_DIR)\" \
   -DDIRECTORY_DIR=\"$(vfsdirectorydir)\" \
   -DDATA_DIR=\"$(datadir)/themus\"
 
@@ -39,7 +40,8 @@ libthemus_theme_properties_view_la_SOURCES = \
 	themus-properties-view.h \
 	themus-properties-main.c
 
-pkgdata_DATA = apply-font.glade
+Gladedir   = $(GNOMECC_GLADE_DIR)
+Glade_DATA = apply-font.glade
 
 @INTLTOOL_DIRECTORY_RULE@
 
@@ -78,6 +80,7 @@ install-data-local:
 @INTLTOOL_SCHEMAS_RULE@
 
 EXTRA_DIST = \
+  $(Glade_DATA) \
   apply-font.glade \
   theme-method.directory.in \
   theme-method.conf \

@@ -69,7 +69,7 @@ int main (int argc, char* argv[])
 		if (theme->application_font)
 		{
 			glade_init ();
-			font_xml = glade_xml_new (DATA_DIR "/apply-font.glade",
+			font_xml = glade_xml_new (GNOMECC_GLADE_DIR "/apply-font.glade",
 								NULL, NULL);
 			if (font_xml)
 			{
