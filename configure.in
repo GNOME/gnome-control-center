@@ -87,9 +87,6 @@ GNOMECC_CAPPLETS_LIBS="${CAPPLET_LIBS} ${COMMON_LIBS}"
 GNOMECC_CAPPLETS_CLEANFILES="\$(desktop) \$(desktop).in"
 GNOMECC_CAPPLETS_EXTRA_DIST="ChangeLog \$(desktop).in.in \$(cappletname)-capplet.png \$(cappletname)-properties.glade \$(pixmaps_DATA)"
 
-VFS_CAPPLET_CFLAGS="${VFS_CFLAGS} ${EXTRA_CFLAGS}"
-VFS_CAPPLET_LIBS="${VFS_LIBS} ${EXTRA_LIBS}"
-
 AC_SUBST(GNOMECC_CAPPLETS_EXTRA_DIST)
 AC_SUBST(GNOMECC_CAPPLETS_CLEANFILES)
 AC_SUBST(GNOMECC_CAPPLETS_CFLAGS)
@@ -154,6 +151,8 @@ dnl =======================================
 dnl End: Variables for config_archiverConf.sh.in
 dnl =======================================
 
+dnl Honor ACLOCAL_FLAGS for --enable-maintainer-mode
+ACLOCAL="$ACLOCAL $ACLOCAL_FLAGS"
 
 AC_OUTPUT([
 control-center.spec
