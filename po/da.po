@@ -1,12 +1,12 @@
 # Danish translation for the gnome control-center.
 # Copyright (C) 1998,1999 Free Software Foundation, Inc.
-# Kenneth Christiansen <kenneth@ripen.dk>, 1998, 1999.
+# Kenneth Christiansen <kenneth@ripen.dk>, 1998-2000
 # Birger Langkjer <birger.langkjer@image.dk>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Gnome kontrolcenter 1.0.6\n"
-"POT-Creation-Date: 2000-03-30 22:40+0200\n"
+"POT-Creation-Date: 2000-04-25 17:49+0200\n"
 "PO-Revision-Date: 2000-03-30 23:06+02:00\n"
 "Last-Translator: Kenneth Christiansen <kenneth@ripen.dk>\n"
 "Language-Team: danish <sslug-locale@sslug.dk>\n"
@@ -713,7 +713,9 @@ msgstr "Gemmer"
 msgid "Saving session details."
 msgstr "Gemmer sessionsdetaljer"
 
-#: capplets/session-properties/gsm-client-row.c:43
+#. This is about the only case where we'll put Unknown instead
+#. of simply not showing the info.
+#: capplets/session-properties/gsm-client-row.c:43 control-center/splash.c:168
 msgid "Unknown"
 msgstr "Ukendt"
 
@@ -1295,7 +1297,7 @@ msgstr ""
 #: capplets/wm-properties/wm-properties-capplet.c:860
 #: capplets/wm-properties/wm-properties-capplet.c:867
 #: capplets/wm-properties/wm-properties-capplet.c:1013
-#: control-center/capplet-manager.c:172
+#: control-center/capplet-manager.c:187
 msgid "OK"
 msgstr "Ok"
 
@@ -1344,7 +1346,7 @@ msgid "Add New Window Manager"
 msgstr "Tilføj ny vindueshåndtering"
 
 #: capplets/wm-properties/wm-properties-capplet.c:752
-#: control-center/capplet-manager.c:177
+#: control-center/capplet-manager.c:192
 msgid "Cancel"
 msgstr "Annullér"
 
@@ -1405,16 +1407,16 @@ msgstr "GNOME kontrolcenter"
 msgid "Desktop Properties manager."
 msgstr "Egenskaber for skrivebord."
 
-#: control-center/capplet-manager.c:162
+#: control-center/capplet-manager.c:177
 msgid "Try"
 msgstr "Prøv"
 
-#: control-center/capplet-manager.c:167
+#: control-center/capplet-manager.c:182
 msgid "Revert"
 msgstr "Forkast"
 
 #. set the help item
-#: control-center/capplet-manager.c:190
+#: control-center/capplet-manager.c:205
 #, c-format
 msgid "Help with '%s' settings"
 msgstr "Hjælp med '%s' indstillinger"
@@ -1472,37 +1474,37 @@ msgstr "kapplet-kommando som skal udføres."
 msgid "CAPPLET"
 msgstr "CAPPLET"
 
-#: control-center/main.c:34
+#: control-center/main.c:35
 msgid "Help on control-center"
 msgstr "Hjælp til kontrolcentret"
 
-#: control-center/main.c:34
+#: control-center/main.c:35
 msgid "Help with the GNOME control-center."
 msgstr "GNOME kontrolcenterets hjælp."
 
-#: control-center/main.c:36
+#: control-center/main.c:37
 msgid "Help with the current configuration page."
 msgstr "Hjælp med nuværende konfigurationsside."
 
-#: control-center/main.c:39
+#: control-center/main.c:40
 msgid "About"
 msgstr "Om..."
 
-#: control-center/main.c:39
+#: control-center/main.c:40
 msgid "About the GNOME control-center."
 msgstr "Om GNOME kontrolcentret."
 
 #. we create the widgets
-#: control-center/main.c:66
+#: control-center/main.c:68
 msgid "Warning:"
 msgstr "Advarsel:"
 
-#: control-center/main.c:66
+#: control-center/main.c:68
 msgid "Discard all changes"
 msgstr "Forkast alle ændringer"
 
 #. ...labels, etc
-#: control-center/main.c:75
+#: control-center/main.c:77
 msgid ""
 "The following modules have had changes made, but not committed.  If you "
 "would like to edit them, please double click on the appropriate entry."
@@ -1511,19 +1513,27 @@ msgstr ""
 "du vil redigere dem, dobbeltklik venligst på det pågældende element."
 
 #. create the app
-#: control-center/main.c:194
+#: control-center/main.c:196 control-center/splash.c:237
 msgid "Control Center"
 msgstr "Kontrolcenter"
 
-#~ msgid "Keyboard Bell"
-#~ msgstr "Tastatur-klik"
+#: control-center/splash.c:48
+msgid "Operating System:"
+msgstr "Styresystem:"
 
-#~ msgid ""
-#~ "an initialization error occurred while starting 'bell-properties-capplet'.\n"
-#~ "aborting...\n"
-#~ msgstr ""
-#~ "en opstartsfejl opstod under start af 'bell-properties-capplet'.\n"
-#~ "afbryder...\n"
+#: control-center/splash.c:49
+msgid "Distribution Version:"
+msgstr "Distributions-version:"
 
-#~ msgid "Auto-repeat"
-#~ msgstr "Auto-gentag"
+#: control-center/splash.c:50
+msgid "Processor Type:"
+msgstr "Processor-type:"
+
+#: control-center/splash.c:51
+msgid "User Name:"
+msgstr "Brugernavn:"
+
+#: control-center/splash.c:52
+msgid "Host Name:"
+msgstr "Værtsnavn:"
+
