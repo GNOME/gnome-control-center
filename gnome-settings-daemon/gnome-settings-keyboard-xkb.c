@@ -53,21 +53,25 @@ activation_error (void)
 						"The XFree86 Project, Inc"))
 	    && (release / 100000 == 403);
 
-	GtkWidget *msg = gtk_message_dialog_new (NULL,
-						 0,
-						 GTK_MESSAGE_ERROR,
-						 GTK_BUTTONS_CLOSE,
-						 _
-						 ("Error activating XKB configuration.\n"
-						  "Probably internal X server problem.\n\nX server version data:\n%s\n%d\n%s"),
-						 vendor,
-						 release,
-						 badXFree430Release ?
-						 _
-						 ("You are using XFree 4.3.0.\n"
-						  "There are known problems with complex XKB configurations.\n"
-						  "Try using simpler configuration or taking more fresh version of XFree software.")
-						 : "");
+	GtkWidget *msg = gtk_message_dialog_new_with_markup (NULL,
+							     0,
+							     GTK_MESSAGE_ERROR,
+							     GTK_BUTTONS_CLOSE,
+							     _
+							     ("Error activating XKB configuration.\n"
+							      "Probably internal X server problem.\n\nX server version data:\n%s\n%d\n%s\n"
+							      "If you report this situation as a bug, please include:\n"
+							      "- The result of <b>xprop -root | grep XKB</b>\n"
+							      "- The result of <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b>"),
+							     vendor,
+							     release,
+							     badXFree430Release
+							     ?
+							     _
+							     ("You are using XFree 4.3.0.\n"
+							      "There are known problems with complex XKB configurations.\n"
+							      "Try using simpler configuration or taking more fresh version of XFree software.")
+							     : "");
 	g_signal_connect (msg, "response",
 			  G_CALLBACK (gtk_widget_destroy), NULL);
 	gtk_widget_show (msg);
