@@ -432,7 +432,7 @@ capplet_control_launch (const gchar *capplet_name)
 
 		value = bonobo_arg_new (BONOBO_ARG_STRING);
 		BONOBO_ARG_SET_STRING (value, moniker);
-		bonobo_widget_set_property (BONOBO_WIDGET (control), "moniker", value);
+		bonobo_widget_set_property (BONOBO_WIDGET (control), "moniker", value, NULL);
 		bonobo_arg_release (value);
 
 		gtk_widget_show_all (app);
