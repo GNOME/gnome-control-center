@@ -448,6 +448,7 @@ dialog_button_clicked_cb (GtkDialog *dialog, gint response_id, GConfChangeSet *c
 {
 	switch (response_id) {
 	case GTK_RESPONSE_CLOSE:
+	case GTK_RESPONSE_DELETE_EVENT:
 		gtk_main_quit ();
 		break;
 	}

@@ -1,7 +1,7 @@
-bin_PROGRAMS = gnome2-background-properties
+bin_PROGRAMS = gnome-background-properties
 
-gnome2_background_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(top_builddir)/libbackground/libbackground.la
-gnome2_background_properties_SOURCES = background-properties-capplet.c
+gnome_background_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(top_builddir)/libbackground/libbackground.la
+gnome_background_properties_SOURCES = background-properties-capplet.c
 
 @INTLTOOL_DESKTOP_RULE@
 
