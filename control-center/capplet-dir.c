@@ -199,7 +199,6 @@ capplet_dir_entry_shutdown (CappletDirEntry *entry)
 static gint
 capplet_reset_cb (Capplet *capplet) 
 {
-	g_message ("%s: Enter", __FUNCTION__);
 	capplet->launching = FALSE;
 	return FALSE;
 }
@@ -210,10 +209,8 @@ capplet_activate (Capplet *capplet)
 	GnomeDesktopEntry *entry;
 
 	if (capplet->launching) {
-		g_message ("Capplet already running");
 		return;
 	} else {
-		g_message ("Capplet not already running; launching");
 		capplet->launching = TRUE;
 		gtk_idle_add ((GtkFunction) capplet_reset_cb, capplet);
 	}
