@@ -268,8 +268,21 @@ show_install_dialog (GtkWidget *button, gpointer data)
 static void
 show_manage_themes (GtkWidget *button, gpointer data)
 {
-	gchar *command = g_strdup_printf ("nautilus --no-desktop %s/.themes",
-					  g_get_home_dir ());
+	gchar *path, *command;
+	GnomeVFSURI *uri;
+
+	path = g_strdup_printf ("%s/.themes", g_get_home_dir ());
+	uri = gnome_vfs_uri_new (path);
+
+	if (!gnome_vfs_uri_exists (uri)) {
+		/* Create the directory */
+		gnome_vfs_make_directory_for_uri (uri, 775);
+	}
+	gnome_vfs_uri_unref (uri);
+
+	command = g_strdup_printf ("nautilus --no-desktop %s", path);
+	g_free (path);
+
 	g_spawn_command_line_async (command, NULL);
 	g_free (command);
 }
