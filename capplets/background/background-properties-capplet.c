@@ -298,7 +298,11 @@ setup_dialog (GtkWidget *widget, Bonobo_PropertyBag bag)
 						 NULL, NULL, prefs);
 
 	applier = gtk_object_get_data (GTK_OBJECT (widget), "applier");
-	gtk_signal_connect_after (GTK_OBJECT (applier_get_preview_widget (applier)), "realize", realize_cb, prefs);
+
+	if (GTK_WIDGET_REALIZED (applier_get_preview_widget (applier)))
+		applier_apply_prefs (applier, PREFERENCES (prefs), FALSE, TRUE);
+	else
+		gtk_signal_connect_after (GTK_OBJECT (applier_get_preview_widget (applier)), "realize", realize_cb, prefs);
 
 	gtk_signal_connect_object (GTK_OBJECT (widget), "destroy",
 				   GTK_SIGNAL_FUNC (gtk_object_destroy), prefs);
