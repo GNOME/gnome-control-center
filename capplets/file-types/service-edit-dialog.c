@@ -396,7 +396,7 @@ populate_app_list (ServiceEditDialog *dialog)
 			found_idx = i;
 
 		item = gtk_menu_item_new_with_label (app->name);
-		g_object_set_data_full (G_OBJECT (item), "app", app, (GDestroyNotify) gnome_vfs_mime_application_free);
+		g_object_set_data_full (G_OBJECT (item), "app", gnome_vfs_mime_application_copy (app), (GDestroyNotify) gnome_vfs_mime_application_free);
 		gtk_widget_show (item);
 		gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
 
