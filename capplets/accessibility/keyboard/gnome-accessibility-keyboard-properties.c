@@ -42,7 +42,7 @@ dialog_response (GtkWidget *widget,
 
 		/* TODO : get this written */
 		gnome_help_display_desktop (NULL,
-			"accessibility-keyboard",
+			"control-center-manual",
 			"accessibility-keyboard.xml",
 			"CONFIGURATION", &error);
 		if (error) {
