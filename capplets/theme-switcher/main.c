@@ -12,6 +12,7 @@ main(int argc, char **argv)
   gint child_pid;
   char *create_rc_error;
 
+	setlocale(LC_ALL, "");
   bindtextdomain (PACKAGE, GNOMELOCALEDIR);
   textdomain (PACKAGE);
 

@@ -132,6 +132,7 @@ main (int argc, char **argv)
 {
         int init_results;
 
+				setlocale(LC_ALL, "");
         bindtextdomain (PACKAGE, GNOMELOCALEDIR);
         textdomain (PACKAGE);
 
