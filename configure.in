@@ -35,9 +35,6 @@ AC_SUBST(XML_CFLAGS)
 
 AM_PATH_LIBGLADE(,,"gnome")
 
-AC_SUBST(CFLAGS)
-AC_SUBST(LDFLAGS)
-
 AC_CHECK_HEADERS(dlfcn.h dl.h)
 AC_CHECK_LIB(dl, dlopen, DL_LIB="-ldl",[
 AC_CHECK_LIB(dld, shl_load, DL_LIB="-ldld",[
@@ -77,6 +74,11 @@ echo "ftp://ftp.enlightenment.org/pub/enlightenment/"
 echo "ftp://www.rasterman.com/pub/enlightenment/"
 echo "ftp://ftp.labs.redhat.com/pub/imlib/"
 AC_MSG_ERROR([Fatal Error: no Imlib detected.])])
+
+CFLAGS="-O2 -g -Wall $CFLAGS"
+
+AC_SUBST(CFLAGS)
+AC_SUBST(LDFLAGS)
 
 AC_OUTPUT([
 control-center.spec
