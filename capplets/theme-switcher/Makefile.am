@@ -42,4 +42,4 @@ INCLUDES   = 				\
 	-DGLADEDIR=\""$(gladedir)"\"
 
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
-EXTRA_DIST = $(Desktop_in_files) $(glade_DATA) gnome-theme-save-data.c $(pixmap_DATA)
+EXTRA_DIST = $(Desktop_in_files) $(glade_DATA) gnome-theme-save-data.c $(pixmap_DATA) $(desktop_icons_DATA)
