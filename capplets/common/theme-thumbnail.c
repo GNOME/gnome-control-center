@@ -459,7 +459,6 @@ generate_theme_thumbnail (GnomeThemeMetaInfo *meta_theme_info,
   GdkPixbuf *pixbuf = NULL;
   gint i, rowstride;
   char *pixels;
-  gboolean write_bytes;
 
   g_return_val_if_fail (async_data.set == FALSE, NULL);
 
@@ -472,8 +471,11 @@ generate_theme_thumbnail (GnomeThemeMetaInfo *meta_theme_info,
 	return pixbuf;
     }
 
+  if (!pipe_to_factory_fd[1] || !pipe_from_factory_fd[0])
+    return NULL;
+
   pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, ICON_SIZE_WIDTH, ICON_SIZE_HEIGHT);
-  write_bytes = write (pipe_to_factory_fd[1], meta_theme_info->gtk_theme_name, strlen (meta_theme_info->gtk_theme_name) + 1);
+  write (pipe_to_factory_fd[1], meta_theme_info->gtk_theme_name, strlen (meta_theme_info->gtk_theme_name) + 1);
   write (pipe_to_factory_fd[1], meta_theme_info->metacity_theme_name, strlen (meta_theme_info->metacity_theme_name) + 1);
   write (pipe_to_factory_fd[1], meta_theme_info->icon_theme_name, strlen (meta_theme_info->icon_theme_name) + 1);
   if (meta_theme_info->application_font == NULL)
@@ -494,6 +496,20 @@ generate_theme_thumbnail (GnomeThemeMetaInfo *meta_theme_info,
 	  bytes_read = read (pipe_from_factory_fd[0], pixels + (rowstride)*i + j, ICON_SIZE_WIDTH * gdk_pixbuf_get_n_channels (pixbuf) - j);
 	  if (bytes_read > 0)
 	    j += bytes_read;
+	  else if (bytes_read == 0)
+	    {
+	      g_warning ("Received EOF while reading thumbnail for gtk: '%s', metacity '%s', icon: '%s', font: '%s'\n",
+			 meta_theme_info->gtk_theme_name,
+			 meta_theme_info->metacity_theme_name,
+			 meta_theme_info->icon_theme_name,
+			 meta_theme_info->application_font ? meta_theme_info->application_font : "Sans 10");
+	      g_object_unref (pixbuf);
+	      close (pipe_to_factory_fd[1]);
+	      pipe_to_factory_fd[1] = 0;
+	      close (pipe_from_factory_fd[0]);
+	      pipe_from_factory_fd[0] = 0;
+	      return NULL;
+	    }
 	}
       while (j < ICON_SIZE_WIDTH * gdk_pixbuf_get_n_channels (pixbuf));
     }
@@ -519,6 +535,14 @@ generate_theme_thumbnail_async (GnomeThemeMetaInfo *meta_theme_info,
   if (pixbuf != NULL)
     {
       (* func) (pixbuf, user_data);
+      if (destroy)
+	(* destroy) (user_data);
+      return;
+    }
+
+  if (!pipe_to_factory_fd[1] || !pipe_from_factory_fd[0])
+    {
+      (* func) (NULL, user_data);
       if (destroy)
 	(* destroy) (user_data);
       return;
@@ -565,7 +589,9 @@ theme_thumbnail_factory_init (int argc, char *argv[])
       gtk_init (&argc, &argv);
 
       close (pipe_to_factory_fd[1]);
+      pipe_to_factory_fd[1] = 0;
       close (pipe_from_factory_fd[0]);
+      pipe_from_factory_fd[0] = 0;
 
       data.status = READY_FOR_THEME;
       data.control_theme_name = g_byte_array_new ();

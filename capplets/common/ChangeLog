@@ -1,3 +1,17 @@
+2003-07-02  Mark McLoughlin  <mark@skynet.ie>
+
+	Handle crashes of the thumbnailer child process a
+	little more gracefully.
+
+	* theme-thumbnail.c:
+	(generate_theme_thumbnail): if we get an EOF from
+	the child close the pipe, return NULL and return
+	NULL from any subsequent calls.
+	(generate_theme_thumbnail_async): return NULL if
+	the pipe has been closed.
+	(theme_thumbnail_factory_init): set pipe descriptos
+	to zero after closing them.
+
 2003-06-24  Jody Goldberg <jody@gnome.org>
 
 	* Release 2.3.3
