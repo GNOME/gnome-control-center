@@ -348,7 +348,7 @@ keybindings_filter (GdkXEvent *gdk_xevent,
 
   if(xevent->type != KeyPress)
           return GDK_FILTER_CONTINUE;
-        
+
   keycode = xevent->xkey.keycode;
   state = xevent->xkey.state;
   

@@ -23,6 +23,7 @@
 
 #include "config.h"
 
+#include <libgnome/gnome-i18n.h>
 #include <gdk/gdk.h>
 #include <gdk/gdkx.h>
 #include <gconf/gconf-client.h>
@@ -43,8 +44,13 @@
 #define d(str)		do { } while (0)
 #endif
 
-static gboolean we_are_changing_xkb_state = FALSE;
 static int xkbEventBase;
+static GtkWidget *ax_slowkeys_dialog = NULL;
+static GtkWidget *ax_slowkeys_dialog_hbox = NULL;
+static GtkWidget *ax_stickykeys_dialog = NULL;
+static GtkWidget *ax_stickykeys_dialog_hbox = NULL;
+static gboolean  stickykeys_shortcut_val;
+static gboolean  slowkeys_shortcut_val;
 
 static gboolean
 xkb_enabled (void)
@@ -106,9 +112,11 @@ set_int (GConfClient *client, GConfChangeSet *cs,
 	 char const *key, int val)
 {
 	gconf_change_set_set_int (cs, key, val);
+#ifdef DEBUG_ACCESSIBILITY	
 		if (val != gconf_client_get_int (client, key, NULL)) {
 			g_warning ("%s changed", key);
 		}
+#endif
 	return val != gconf_client_get_int (client, key, NULL);
 }
 
@@ -116,12 +124,16 @@ static gboolean
 set_bool (GConfClient *client, GConfChangeSet *cs,
 	  gboolean in_gconf, char const *key, int val)
 {
-	if (in_gconf || val) {
-		gconf_change_set_set_bool (cs, key, val ? TRUE : FALSE);
-		if (val != gconf_client_get_bool (client, key, NULL)) {
-			g_warning ("%s changed", key);
+	gboolean bval = (val != 0);
+	if (in_gconf || bval) {
+		gconf_change_set_set_bool (cs, key, bval ? TRUE : FALSE);
+#ifdef DEBUG_ACCESSIBILITY
+		if (bval != gconf_client_get_bool (client, key, NULL)) {
+			d ("%s changed", key);
+			return TRUE;
 		}
-		return val != gconf_client_get_bool (client, key, NULL);
+#endif
+		return (bval != gconf_client_get_bool (client, key, NULL));
 	}
 	return FALSE;
 }
@@ -156,12 +168,6 @@ set_server_from_gconf (GConfEntry *ignored)
 		d ("No XKB present\n");
 		return;
 	}
-
-	if (we_are_changing_xkb_state) {
-		d ("We changed gconf accessibility state\n");
-		return;
-	} else
-		d ("Someone changed gconf accessibility state\n");
 
 	/* general */
 	enable_accessX = gconf_client_get_bool (client, CONFIG_ROOT "/enable", NULL);
@@ -260,12 +266,7 @@ set_server_from_gconf (GConfEntry *ignored)
 	fprintf (stderr, "CHANGE to : 0x%x\n", desc->ctrls->enabled_ctrls);
 	fprintf (stderr, "CHANGE to : 0x%x (2)\n", desc->ctrls->ax_options);
 	*/
-	/* guard against reloading gconf when the X server notices that the XKB
-	 * state has changed and calls us.
-	 */
-	g_return_if_fail (!we_are_changing_xkb_state);
 
-	we_are_changing_xkb_state = TRUE;
 	gdk_error_trap_push ();
 	XkbSetControls (GDK_DISPLAY (),
 			XkbSlowKeysMask		|
@@ -280,7 +281,151 @@ set_server_from_gconf (GConfEntry *ignored)
 			desc);
 	XSync (GDK_DISPLAY (), FALSE);
 	gdk_error_trap_pop ();
-	we_are_changing_xkb_state = FALSE;
+}
+
+static gboolean
+ax_response_callback (gint response_id, guint revert_controls_mask, gboolean enabled)
+{
+	GConfClient *client = gconf_client_get_default ();
+	GError *err = NULL;
+	gboolean success;
+
+	switch (response_id)
+	{
+	    case GTK_RESPONSE_REJECT:
+	    case GTK_RESPONSE_CANCEL:
+		    /* we're reverting, so we invert sense of 'enabled' flag */
+		    d ("cancelling AccessX request");
+		    if (revert_controls_mask == XkbStickyKeysMask)
+		    {
+			    success = gconf_client_set_bool (client, CONFIG_ROOT "/stickykeys_enable", !enabled, &err);
+			    if (err != NULL) 
+				    g_error_free (err);
+		    }
+		    if (revert_controls_mask == XkbSlowKeysMask)
+		    {
+			    success = gconf_client_set_bool (client, CONFIG_ROOT "/slowkeys_enable", !enabled, &err);
+			    if (err != NULL)
+				    g_error_free (err);
+		    }
+		    gconf_client_suggest_sync (client, NULL);
+		    set_server_from_gconf (NULL);
+		    break;
+	    case GTK_RESPONSE_HELP:
+		    gnome_help_display_desktop (NULL,
+						"user-guide",
+						"wgoscustaccess.xml",
+						"goscustaccess-6",
+						&err);
+		    if (err != NULL) {
+			    GtkWidget *error_dialog = gtk_message_dialog_new (NULL,
+									      0,
+									      GTK_MESSAGE_ERROR,
+									      GTK_BUTTONS_CLOSE,
+									      _("There was an error displaying help:"), 
+									      err->message);
+			    g_signal_connect (G_OBJECT (error_dialog),
+					      "response",
+					      G_CALLBACK (gtk_widget_destroy), NULL);
+			    gtk_window_set_resizable (GTK_WINDOW (error_dialog), FALSE);
+			    gtk_widget_show (error_dialog);
+			    g_error_free (err);
+		    }
+		    return FALSE;
+	    default:
+		    break;
+	}
+	return TRUE;
+}
+
+static void
+ax_stickykeys_response (GtkDialog *dialog, gint response_id, gpointer data)
+{
+	gboolean *enabled = data;
+	if (ax_response_callback (response_id, XkbStickyKeysMask, *enabled))
+	{
+		gtk_widget_destroy (ax_stickykeys_dialog);
+		ax_stickykeys_dialog = NULL;
+	}
+}
+
+static void
+ax_slowkeys_response (GtkDialog *dialog, gint response_id, gpointer data)
+{
+	gboolean *enabled = data;
+	if (ax_response_callback (response_id, XkbSlowKeysMask, *enabled))
+	{
+		gtk_widget_destroy (ax_slowkeys_dialog);
+		ax_slowkeys_dialog = NULL;
+	}
+}
+
+static GtkWidget*
+warning_dialog_post (GtkWidget *dialog, GtkWidget **hbox, GCallback response, 
+		     gboolean *enabled, gchar *title, gchar *user_action_string, gchar *query)
+{
+	GtkWidget *label;
+	gchar *label_markup_string = g_strconcat ("<big>", query, "</big>\n\n", user_action_string, NULL);
+
+	if (!dialog)
+	{
+		dialog = gtk_dialog_new_with_buttons (title, NULL, 0, 
+						      GTK_STOCK_CANCEL,
+						      GTK_RESPONSE_REJECT,
+						      GTK_STOCK_HELP,
+						      GTK_RESPONSE_HELP,
+						      GTK_STOCK_OK,
+						      GTK_RESPONSE_OK,
+						      NULL);
+		g_signal_connect (G_OBJECT (dialog),
+				  "response",
+				  G_CALLBACK (response),
+				  enabled);
+	}
+	else
+	{
+		gtk_widget_destroy (*hbox);
+	}
+	*hbox = gtk_hbox_new (FALSE, 10);
+	gtk_container_add (GTK_CONTAINER (*hbox), gtk_image_new_from_stock (GTK_STOCK_DIALOG_WARNING, GTK_ICON_SIZE_DIALOG));
+	label = gtk_label_new (NULL);
+	gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+	gtk_label_set_markup (GTK_LABEL (label), label_markup_string);
+	g_free (label_markup_string);
+	gtk_container_add (GTK_CONTAINER (*hbox), label);
+	gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox), *hbox);
+	gtk_widget_show_all (dialog);
+
+	return dialog;
+}
+
+static void
+ax_slowkeys_warning_dialog_post (gboolean enabled)
+{
+	slowkeys_shortcut_val = enabled;
+	ax_stickykeys_dialog = warning_dialog_post (ax_slowkeys_dialog,
+						    &ax_slowkeys_dialog_hbox,
+						    (GCallback) ax_slowkeys_response,
+						    &slowkeys_shortcut_val,
+						    _("Slow Keys Alert"),
+						    _("You just held down the Shift key for 8 seconds.  This is the shortcut for the Slow Keys feature, which affects the way your keyboard works."),
+						    enabled ? _("Do you want to activate Slow Keys?") : 
+						    _("Do you want to deactivate Sticky Keys ?"));
+}
+
+static void
+ax_stickykeys_warning_dialog_post (gboolean enabled)
+{
+	stickykeys_shortcut_val = enabled;
+	ax_stickykeys_dialog = warning_dialog_post (ax_stickykeys_dialog,
+						    &ax_stickykeys_dialog_hbox,
+						    (GCallback) ax_stickykeys_response,
+						    &stickykeys_shortcut_val,
+						    _("Sticky Keys Alert"),
+						    enabled ? _("You just pressed the Shift key 5 times in a row.  This is the shortcut for the Sticky Keys feature, which affects the way your keyboard works.") : 
+						    _("You just pressed two keys at once, or pressed the Shift key 5 times in a row.  This turns off the Sticky Keys feature, which affects the way your keyboard works.");
+						    enabled ? _("Do you want to activate Sticky Keys?") : 
+						    _("Do you want to deactivate Sticky Keys ?"));
 }
 
 static void
@@ -290,7 +435,7 @@ set_gconf_from_server (GConfEntry *ignored)
 	GConfClient	*client = gconf_client_get_default ();
 	GConfChangeSet *cs = gconf_change_set_new ();
 	XkbDescRec	*desc = get_xkb_desc_rec ();
-	gboolean changed = FALSE;
+	gboolean changed = FALSE, slowkeys_changed, stickykeys_changed;
 
 	if (!desc) {
 		d ("No XKB present\n");
@@ -298,15 +443,9 @@ set_gconf_from_server (GConfEntry *ignored)
 	}
 
 	/*
-	fprintf (stderr, "changed to : 0x%x\n", desc->ctrls->enabled_ctrls);
-	fprintf (stderr, "changed to : 0x%x (2)\n", desc->ctrls->ax_options);
+  	  fprintf (stderr, "changed to : 0x%x\n", desc->ctrls->enabled_ctrls);
+	  fprintf (stderr, "changed to : 0x%x (2)\n", desc->ctrls->ax_options);
 	*/
-
-	/* guard against reloading the server when gconf notices that the state
-	 * has changed and calls us.
-	 */
-	g_return_if_fail (!we_are_changing_xkb_state);
-	we_are_changing_xkb_state = TRUE;
 
 	/* always toggle this irrespective of the state */
 	changed |= set_bool (client, cs, TRUE, CONFIG_ROOT "/enable",
@@ -342,8 +481,8 @@ set_gconf_from_server (GConfEntry *ignored)
 	changed |= set_int (client, cs, CONFIG_ROOT "/mousekeys_init_delay",
 		desc->ctrls->mk_delay);
 
-	changed |= set_bool (client, cs, in_gconf, CONFIG_ROOT "/slowkeys_enable",
-		desc->ctrls->enabled_ctrls & XkbSlowKeysMask);
+	slowkeys_changed = set_bool (client, cs, in_gconf, CONFIG_ROOT "/slowkeys_enable",
+				     desc->ctrls->enabled_ctrls & XkbSlowKeysMask);
 	changed |= set_bool (client, cs, TRUE, CONFIG_ROOT "/slowkeys_beep_press",
 		desc->ctrls->ax_options & XkbAX_SKPressFBMask);
 	changed |= set_bool (client, cs, TRUE, CONFIG_ROOT "/slowkeys_beep_accept",
@@ -353,8 +492,8 @@ set_gconf_from_server (GConfEntry *ignored)
 	changed |= set_int (client, cs, CONFIG_ROOT "/slowkeys_delay",
 		desc->ctrls->slow_keys_delay);
 
-	changed |= set_bool (client, cs, in_gconf, CONFIG_ROOT "/stickykeys_enable",
-		desc->ctrls->enabled_ctrls & XkbStickyKeysMask);
+	stickykeys_changed = set_bool (client, cs, in_gconf, CONFIG_ROOT "/stickykeys_enable",
+				       desc->ctrls->enabled_ctrls & XkbStickyKeysMask);  
 	changed |= set_bool (client, cs, TRUE, CONFIG_ROOT "/stickykeys_two_key_off",
 		desc->ctrls->ax_options & XkbAX_TwoKeysMask);
 	changed |= set_bool (client, cs, TRUE, CONFIG_ROOT "/stickykeys_modifier_beep",
@@ -363,12 +502,34 @@ set_gconf_from_server (GConfEntry *ignored)
 	changed |= set_bool (client, cs, in_gconf, CONFIG_ROOT "/togglekeys_enable",
 		desc->ctrls->ax_options & XkbAX_IndicatorFBMask);
 
+	if (!changed && stickykeys_changed^slowkeys_changed)
+	{
+		/* 
+		 * sticky or slowkeys has changed, singly, without our intervention.
+		 * 99% chance this is due to a keyboard shortcut being used.
+		 * we need to detect via this hack until we get 
+		 *  XkbAXN_AXKWarning notifications working (probable XKB bug),
+		 *  at which time we can directly intercept such shortcuts instead.
+		 * See cb_xkb_event_filter () below.
+		 */
+
+                /* sanity check: are keyboard shortcuts available? */
+		if (desc->ctrls->enabled_ctrls & XkbAccessXKeysMask) 
+		{
+			if (slowkeys_changed)
+				ax_slowkeys_warning_dialog_post (desc->ctrls->enabled_ctrls & XkbSlowKeysMask);	
+			else
+				ax_stickykeys_warning_dialog_post (desc->ctrls->enabled_ctrls & XkbStickyKeysMask);
+		}
+	}
+
+	changed |= (stickykeys_changed | slowkeys_changed);
+
 	if (changed) {
 	gconf_client_commit_change_set (client, cs, FALSE, NULL);
 	gconf_client_suggest_sync (client, NULL);
 	}
 	gconf_change_set_unref (cs);
-	we_are_changing_xkb_state = FALSE;
 }
 
 static GdkFilterReturn 
@@ -376,13 +537,22 @@ cb_xkb_event_filter (GdkXEvent *xevent, GdkEvent *ignored1, gpointer ignored2)
 {
 	XEvent   *xev   = (XEvent *) xevent;
 	XkbEvent *xkbEv = (XkbEvent *) xevent;
+
 	if (xev->xany.type == (xkbEventBase + XkbEventCode) &&
 	    xkbEv->any.xkb_type == XkbControlsNotify) {
-		if (!we_are_changing_xkb_state) {
-			d ("Someone changed XKB state\n");
-			set_gconf_from_server (NULL);
-		} else
-			d ("We changed XKB state\n");
+		d ("Someone changed XKB state\n");
+		set_gconf_from_server (NULL);
+	}
+	else if (xev->xany.type == (xkbEventBase + XkbEventCode) &&
+		 xkbEv->any.xkb_type == XkbAccessXNotify) {
+		if (xkbEv->accessx.detail == XkbAXN_AXKWarning) {
+			d ("About to turn on an AccessX feature from the keyboard!");
+			/* 
+			 * TODO: when XkbAXN_AXKWarnings start working, we need to 
+			 * invoke ax_keys_warning_dialog_run here instead of in
+			 * set_gconf_from_server().
+			 */
+		}
 	}
 
 	return GDK_FILTER_CONTINUE;
@@ -392,6 +562,10 @@ void
 gnome_settings_accessibility_keyboard_load (GConfClient *client)
 {
 	static gboolean has_filter = FALSE;
+	guint event_mask = XkbControlsNotifyMask;
+#ifdef DEBUG_ACCESSIBILITY	
+	event_mask = XkbControlsNotifyMask | XkbAccessXNotifyMask); /* make default when AXN_AXKWarning works */
+#endif
 	if (!xkb_enabled ())
 		return;
 
@@ -404,12 +578,15 @@ gnome_settings_accessibility_keyboard_load (GConfClient *client)
 
 	gdk_error_trap_push ();
 	XkbSelectEvents (GDK_DISPLAY (),
-		XkbUseCoreKbd, XkbControlsNotifyMask, XkbControlsNotifyMask);
+			 XkbUseCoreKbd,
+			 event_mask,
+			 event_mask);
 
 	XSync (GDK_DISPLAY (), FALSE);
 	gdk_error_trap_pop ();
 
-	gdk_window_add_filter (NULL, &cb_xkb_event_filter, NULL);
+	gdk_window_add_filter (NULL, 
+			       &cb_xkb_event_filter, NULL);
 }
 
 

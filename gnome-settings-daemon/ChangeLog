@@ -1,3 +1,27 @@
+2004-01-10  Bill Haneman <billh@gnome.org>
+
+	* gnome-settings-accessibility-keyboard.c:
+	Removed we_are_changing_xkb_state flag and related logic, since it
+	didn't work anyway (due to async processing).
+	(set_bool): Fix a logic error that resulted in set_bool always
+	returning TRUE.
+	(ax_warning_dialog_post): New, creates/posts a warning dialog (below).
+	(ax_stickykeys_warning_dialog_post, ax_slowkeys_warning_dialog_post):
+	New functions, display warning dialog to user alerting them
+	when an AccessX feature (StickyKeys or SlowKeys) is turned on via
+	a keyboard shorcut.  See bug #105093.
+	(ax_slowkeys_response, ax_stickykeys_response, ax_response_callback):
+	New, these callbacks either dismiss the dialog, post help, or
+	revert the XKB change and dismiss the dialog(s).
+	(set_gconf_from_server):
+	Invoke dialog above if the Xkb setting for SlowKeys or StickyKeys
+	has changed in isolation, independent of the gconf setting.  This
+	indicates that a keyboard shortcut has been invoked.
+	
+	* ../po/POTFILES.in:
+	Added gnome-settings-accessibility-keyboard.c, since we now
+	have translatable strings in the warning dialog (above).
+	
 2004-01-09  Jody Goldberg <jody@gnome.org>
 
 	* Makefile.am : simplify and generate the file at the last possible
