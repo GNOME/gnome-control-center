@@ -125,7 +125,7 @@ bell_cb (GtkWidget *widget, Bonobo_PropertyBag bag)
 }
 
 static GtkWidget*
-create_dialog (Bonobo_PropertyBag bag)
+create_dialog (void)
 {
 	GladeXML *dialog;
 	GtkWidget *widget, *pixmap;
@@ -140,9 +140,6 @@ create_dialog (Bonobo_PropertyBag bag)
 	gtk_box_pack_start (GTK_BOX (WID ("bell_test_holder")), pixmap,
 			    TRUE, TRUE, 0);
 	gtk_widget_show_all (WID ("bell_test_button"));
-
-	gtk_signal_connect (GTK_OBJECT (WID ("bell_test_button")),
-			    "clicked", bell_cb, bag);
 
 	gtk_signal_connect_object (GTK_OBJECT (widget), "destroy",
 				   GTK_SIGNAL_FUNC (gtk_object_destroy),
@@ -183,6 +180,9 @@ setup_dialog (GtkWidget *widget, Bonobo_PropertyBag bag)
 
 	ed = BONOBO_PEDITOR (bonobo_peditor_range_construct (WID ("bell_duration_range")));
 	bonobo_peditor_set_property (ed, bag, "bell_duration", TC_ulong, NULL);
+
+	gtk_signal_connect (GTK_OBJECT (WID ("bell_test_button")),
+		    "clicked", bell_cb, bag);
 }
 
 static void
