@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.2.0\n"
-"POT-Creation-Date: 2001-01-21 02:38+0100\n"
+"POT-Creation-Date: 2001-01-25 02:20+0100\n"
 "PO-Revision-Date: 2000-06-13 05:46+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -28,7 +28,7 @@ msgstr ""
 #: capplets/session-properties/session-properties.c:345
 #: capplets/theme-switcher/gui.c:368
 #: capplets/wm-properties/wm-properties-capplet.c:646
-#: new-control-center/capplet-dir-view.c:495
+#: new-control-center/capplet-dir-view.c:522
 msgid "Close"
 msgstr "Zapri"
 
@@ -556,7 +556,7 @@ msgstr "Majhen"
 
 #: capplets/new-screensaver-properties/preferences.c:502
 msgid "Custom screensaver. No description available"
-msgstr "Ohranjevalnik zaslona po meri. Opis ni dostopen"
+msgstr "Nestandarden ohranjevalnik zaslona. Opis ni dostopen"
 
 #: capplets/new-screensaver-properties/prefs-widget.c:185
 msgid "Selection"
@@ -1748,7 +1748,7 @@ msgstr "Izberite ohranjevalnik, ki naj se po¾ene iz spodnjega seznama:"
 
 #: capplets/new-screensaver-properties/selection-dialog.c:194
 msgid "Custom"
-msgstr "Po meri"
+msgstr "Poljuben"
 
 #: capplets/new-screensaver-properties/selection-dialog.c:220
 msgid "New screensaver"
@@ -2431,7 +2431,6 @@ msgstr ""
 #: capplets/wm-properties/wm-properties-capplet.c:859
 #: capplets/wm-properties/wm-properties-capplet.c:866
 #: capplets/wm-properties/wm-properties-capplet.c:1012
-#: root-manager/userdialogs.c:193
 msgid "OK"
 msgstr "V redu"
 
@@ -2520,15 +2519,15 @@ msgstr ""
 "napaka pri inicializaciji ob zagonu 'wm-properties-capplet'.\n"
 "prekinjam...\n"
 
-#: new-control-center/capplet-dir-view.c:289
+#: new-control-center/capplet-dir-view.c:321
 msgid "GNOME Control Center"
 msgstr "Kontrolni center GNOME"
 
-#: new-control-center/capplet-dir-view.c:290
+#: new-control-center/capplet-dir-view.c:322
 msgid "Desktop properties manager."
 msgstr "Upravljalnik lastnosti namizja."
 
-#: new-control-center/capplet-dir-view.c:492
+#: new-control-center/capplet-dir-view.c:519
 msgid ""
 "No help is available/installed. Please make sure you\n"
 "have the GNOME User's Guide installed on your system."
@@ -2589,77 +2588,83 @@ msgstr "Seznam ikon"
 msgid "Tree"
 msgstr "Drevo"
 
-#: root-manager/root-manager.c:107
+#: root-manager/root-manager.c:110
 #, c-format
 msgid "Got error %d.\n"
 msgstr "Dobil napako %d.\n"
 
-#: root-manager/root-manager.c:203
+#: root-manager/root-manager.c:206
 #, c-format
 msgid "Password for %s"
 msgstr "Geslo za %s"
 
-#: root-manager/root-manager.c:398
+#: root-manager/root-manager.c:401
 msgid "Consistency checking is not turned on."
 msgstr "Preverjanje konsistence je vklopljeno."
 
-#: root-manager/root-manager.c:400
+#: root-manager/root-manager.c:403
 msgid "Block is fine."
 msgstr "Blok je v redu."
 
-#: root-manager/root-manager.c:402
+#: root-manager/root-manager.c:405
 msgid "Block freed twice."
 msgstr "Blok je bil spro¹èen dvakrat."
 
-#: root-manager/root-manager.c:404
+#: root-manager/root-manager.c:407
 msgid "Memory before the block was clobbered."
 msgstr ""
 
-#: root-manager/root-manager.c:406
+#: root-manager/root-manager.c:409
 msgid "Memory after the block was clobbered."
 msgstr ""
 
-#: root-manager/root-manager.c:437
+#: root-manager/root-manager.c:440
 msgid "userhelper must be setuid root\n"
-msgstr "prorgam 'userhelper' mora biti imeti pravice do izvajanja kot root(setuid root)\n"
+msgstr ""
+"prorgam 'userhelper' mora biti imeti pravice do izvajanja kot root(setuid "
+"root)\n"
 
-#: root-manager/root-manager.c:548
+#: root-manager/root-manager.c:445 root-manager/root-manager.c:451
+msgid "Usage: root-helper fd\n"
+msgstr "Uporaba: root-helper fd\n"
+
+#: root-manager/root-manager.c:555
 #, c-format
 msgid "PAM returned = %d\n"
 msgstr "PAM je vrnil = %d\n"
 
-#: root-manager/root-manager.c:549
+#: root-manager/root-manager.c:556
 #, c-format
 msgid "about to authenticate \"%s\"\n"
 msgstr "avtentificiral bom \"%s\"\n"
 
-#: root-manager/root-manager.c:625 root-manager/root-manager.c:693
+#: root-manager/root-manager.c:633 root-manager/root-manager.c:701
 #, c-format
 msgid "about to exec \"%s\"\n"
 msgstr "izvedel bom \"%s\"\n"
 
-#: root-manager/root-manager-wrap.c:49
+#: root-manager/root-manager-wrap.c:56
 msgid "Pipe error.\n"
 msgstr "Napaka cevi.\n"
 
-#: root-manager/root-manager-wrap.c:55
+#: root-manager/root-manager-wrap.c:62
 msgid "Cannot fork().\n"
 msgstr "Ne morem razvejiti s fork().\n"
 
-#: root-manager/root-manager-wrap.c:76 root-manager/root-manager-wrap.c:86
+#: root-manager/root-manager-wrap.c:83 root-manager/root-manager-wrap.c:93
 msgid "dup2() error.\n"
 msgstr "Napaka dup2().\n"
 
-#: root-manager/root-manager-wrap.c:116
+#: root-manager/root-manager-wrap.c:123
 #, c-format
 msgid "execl() error, errno=%d\n"
 msgstr "napaka execl(), ¹t. napake=%d\n"
 
-#: root-manager/root-manager-wrap.c:145
+#: root-manager/root-manager-wrap.c:152
 msgid "Information updated."
 msgstr "Podatek osve¾en."
 
-#: root-manager/root-manager-wrap.c:148
+#: root-manager/root-manager-wrap.c:155
 msgid ""
 "The password you typed is invalid.\n"
 "Please try again."
@@ -2667,7 +2672,7 @@ msgstr ""
 "Geslo, ki ste ga vpisali je napaèno.\n"
 "Prosim poskusite znova."
 
-#: root-manager/root-manager-wrap.c:151
+#: root-manager/root-manager-wrap.c:158
 msgid ""
 "One or more of the changed fields is invalid.\n"
 "This is probably due to either colons or commas in one of the fields.\n"
@@ -2677,11 +2682,11 @@ msgstr ""
 "To je verjetno zaradi stolpcev ali vrstic v enem od polj.\n"
 "Prosim odstranite jih in poskusite znova."
 
-#: root-manager/root-manager-wrap.c:154
+#: root-manager/root-manager-wrap.c:161
 msgid "Password resetting error."
 msgstr "Napaka ob ponastavljanju gesla."
 
-#: root-manager/root-manager-wrap.c:157
+#: root-manager/root-manager-wrap.c:164
 msgid ""
 "Some systems files are locked.\n"
 "Please try again in a few moments."
@@ -2689,19 +2694,19 @@ msgstr ""
 "Nekatere datoteke sistema so zaklenjene.\n"
 "Prosim poskusite znova èez nekaj èasa."
 
-#: root-manager/root-manager-wrap.c:160
+#: root-manager/root-manager-wrap.c:167
 msgid "Unknown user."
 msgstr "Neznan uporabnik."
 
-#: root-manager/root-manager-wrap.c:163
+#: root-manager/root-manager-wrap.c:170
 msgid "Insufficient rights."
 msgstr "Ni ustreznih pravic."
 
-#: root-manager/root-manager-wrap.c:166
+#: root-manager/root-manager-wrap.c:173
 msgid "Invalid call to sub process."
 msgstr "Neveljaven klic v podproces."
 
-#: root-manager/root-manager-wrap.c:169
+#: root-manager/root-manager-wrap.c:176
 msgid ""
 "Your current shell is not listed in /etc/shells.\n"
 "You are not allowed to change your shell.\n"
@@ -2712,61 +2717,68 @@ msgstr ""
 "Posvetujte se z administratorjem sistema."
 
 #. well, this is unlikely to work either, but at least we tried...
-#: root-manager/root-manager-wrap.c:173
+#: root-manager/root-manager-wrap.c:180
 msgid "Out of memory."
 msgstr "Zmanjkalo je pomnilnika."
 
-#: root-manager/root-manager-wrap.c:176
+#: root-manager/root-manager-wrap.c:183
 msgid "The exec() call failed."
 msgstr "Klic exec() ni uspel."
 
-#: root-manager/root-manager-wrap.c:179
+#: root-manager/root-manager-wrap.c:186
 msgid "Failed to find selected program."
 msgstr "Nisem uspel najti izbranega programa."
 
-#: root-manager/root-manager-wrap.c:182
+#: root-manager/root-manager-wrap.c:189
 msgid "Unknown error."
 msgstr "Neznana napaka."
 
-#: root-manager/root-manager-wrap.c:185
+#: root-manager/root-manager-wrap.c:192
 msgid "Unknown exit code."
 msgstr "Neznana izhodna koda."
 
-#: root-manager/root-manager-wrap.c:241
+#: root-manager/root-manager-wrap.c:280
 msgid "Input"
 msgstr "Vhod"
 
-#: root-manager/root-manager-wrap.c:350
+#: root-manager/root-manager-wrap.c:386
 #, c-format
 msgid "Need %d responses.\n"
 msgstr "Potrebuje se %d odgovorov.\n"
 
-#: root-manager/root-manager-wrap.c:375
-#, c-format
+#: root-manager/root-manager-wrap.c:411
 msgid ""
-"In order to run \"%s\" with root's privileges, additional information is "
-"required."
+"In order to make changes to your system, you\n"
+"must enter the administrator (root) password."
 msgstr ""
-"Èe ¾elite pognati \"%s\" s privilegiji administratorja potrebujete dodatne"
-"podatke."
+"Èe ¾elite spreminjati va¹ sistem morate\n"
+"vnesti geslo administratora (root)."
 
-#: root-manager/root-manager-wrap.c:388 root-manager/userdialogs.c:81
+#: root-manager/root-manager-wrap.c:425
 msgid "Error"
 msgstr "Napaka"
 
-#: root-manager/root-manager-wrap.c:402
+#: root-manager/root-manager-wrap.c:439
 #, c-format
 msgid "You want %d response(s) from %d entry fields!?!?!\n"
 msgstr "®elite %d odgovorov iz %d vhodnih polj!?!?!\n"
 
-#: root-manager/userdialogs.c:35
-msgid "Message"
-msgstr "Sporoèilo"
+#: root-manager/root-manager-wrap.c:445
+msgid "Run Unprivileged"
+msgstr "Po¾eni nepriviligirano"
 
-#: root-manager/userdialogs.c:124 root-manager/userdialogs.c:126
-#: root-manager/userdialogs.c:185
-msgid "Prompt"
-msgstr "Pozivnik"
+#~ msgid ""
+#~ "In order to run \"%s\" with root's privileges, additional information is "
+#~ "required."
+#~ msgstr ""
+#~ "Èe ¾elite pognati \"%s\" s privilegiji administratorja potrebujete "
+#~ "dodatnepodatke."
+
+#~ msgid "Message"
+#~ msgstr "Sporoèilo"
+
+#~ msgid "Prompt"
+#~ msgstr "Pozivnik"
 
 #~ msgid "Gradient"
 #~ msgstr "Preliv"
@@ -2908,7 +2920,7 @@ msgstr "Pozivnik"
 #~ msgstr "Inicializiraj nastavitve seje"
 
 #~ msgid "Ignore default action.  Used for custom init-session cases"
-#~ msgstr "Prezri privzeto dejanje. Uporabno za inicializacijo sej po meri"
+#~ msgstr "Prezri privzeto dejanje. Uporabno za prikrojeno inicializacijo sej"
 
 #~ msgid "Get an XML description of the capplet's state"
 #~ msgstr "Dobi XML opis stanja nastavitvenega vstavka"
