@@ -584,7 +584,7 @@ setup_dialog (GladeXML *dialog)
   metacity_titlebar_load_sensitivity (client, dialog);
 
   widget = WID ("font_dialog");
-  capplet_set_icon (widget, "font-capplet.png");
+  capplet_set_icon (widget, "gnome-settings-font");
 
 #ifdef HAVE_XFT2
   setup_font_pair (WID ("monochrome_radio"),    WID ("monochrome_sample"),    ANTIALIAS_NONE,      HINT_FULL);
