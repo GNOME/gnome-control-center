@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-10-14 13:48+0200\n"
-"PO-Revision-Date: 2003-10-14 14:21+0200\n"
+"POT-Creation-Date: 2003-10-22 05:33+0200\n"
+"PO-Revision-Date: 2003-10-22 05:35+0200\n"
 "Last-Translator: Veljko M. Stanojevic <veljko@vms.homelinux.net>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -681,10 +681,6 @@ msgstr "Омиљени програми"
 msgid "Select your default applications"
 msgstr "Одаберите ваше основне програме"
 
-#: capplets/default-applications/gnome-default-applications-properties.c:108
-msgid "Please specify a name and a command for this editor."
-msgstr "Наведите име и наредбу за овај уређивач."
-
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:39
 msgid "Epiphany"
 msgstr "Спознаја"
@@ -761,6 +757,10 @@ msgstr "RXVT"
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:70
 msgid "ETerm"
 msgstr "ETerm"
+
+#: capplets/default-applications/gnome-default-applications-properties.c:108
+msgid "Please specify a name and a command for this editor."
+msgstr "Наведите име и наредбу за овај уређивач."
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:2
 msgid "Add..."
@@ -1547,6 +1547,28 @@ msgstr "_VRGB"
 #: capplets/font/font-properties.glade.h:33
 msgid "_Window title font:"
 msgstr "Фонт за назив _прозора:"
+
+#: capplets/font/main.c:494 capplets/font/main.c:499
+msgid "Font may be too large"
+msgstr "Фонтови су можда превелики"
+
+# bug: plural-forms on "%d points"
+#: capplets/font/main.c:495
+#, c-format
+msgid ""
+"The font selected is %d points large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a size "
+"smaller than %d."
+msgstr "Изабрани фонт је величине %d тачака, и можда ће отежати употребу овог рачунара. Препоручује се да користите величину мању од %d."
+
+# bug: plural-forms
+#: capplets/font/main.c:500
+#, c-format
+msgid ""
+"The font selected is %d points large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a smaller "
+"sized font."
+msgstr "Изабрани фонт је величине %d тачака, и можда ће отежати употребу овог рачунара. Препоручује се да користите фонт мање величине."
 
 #: capplets/keybindings/eggcellrendererkeys.c:160
 #: capplets/keybindings/eggcellrendererkeys.c:161
@@ -2720,28 +2742,40 @@ msgstr "RGBA след"
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:5
 msgid ""
 "Resolution used for converting font sizes to pixel sizes, in dots per inch"
-msgstr "Резолуција која се користи за претварање величине слова у тачке, у тачкама по инчу"
+msgstr ""
+"Резолуција која се користи за претварање величине слова у тачке, у тачкама "
+"по инчу"
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:6
 msgid ""
 "The order of subpixel elements on an LCD screen; only used when antialiasing "
 "is set to \"rgba\". Possible values are: \"rgb\" - red on left, most common. "
 "\"bgr\" - blue on left. \"vrgb\" - red on top. \"vbgr\" - red on bottom."
-msgstr "След под-пиксел елемената на LCD екрану; користи се само када је омекшање постављено на „rgba“. Могуће вредности су: „rgb“ — црвена лево (најуобичајеније), „bgr“ — плава лево, „vrgb“ — црвена на врху и „vbgr“ — црвена на дну."
+msgstr ""
+"След под-пиксел елемената на LCD екрану; користи се само када је омекшање "
+"постављено на „rgba“. Могуће вредности су: „rgb“ — црвена лево "
+"(најуобичајеније), „bgr“ — плава лево, „vrgb“ — црвена на врху и „vbgr“ — "
+"црвена на дну."
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:7
 msgid ""
 "The type of antialiasing to use when rendering fonts. Possible values are: "
 "\"none\" - no antialiasing. \"grayscale\" - standard grayscale antialiasing. "
 "\"rgba\" - subpixel antialiasing. (LCD screens only)."
-msgstr "Врста омекшања која се користи при приказу слова. Могуће вредности су: „ништа“ — без омекшања, „сиве нијансе“ — уобичајено омекшање кроз сиве нијансе, „rgba“ — под-пиксел омекшање (само за LCD екране)."
+msgstr ""
+"Врста омекшања која се користи при приказу слова. Могуће вредности су: "
+"„ништа“ — без омекшања, „сиве нијансе“ — уобичајено омекшање кроз сиве "
+"нијансе, „rgba“ — под-пиксел омекшање (само за LCD екране)."
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:8
 msgid ""
 "The type of hinting to use when rendering fonts. Possible values are: \"none"
 "\" - no hinting, \"slight\", \"medium\", and \"full\" - as much hinting as "
 "possible; may cause distortion of letter forms."
-msgstr "Врсте наговештаја које се користе при приказу слова. Могуће вредности су: „без“ (без наговештаја), „мало“, „средње“, и „потпуно“ (колико год је могуће); може изазвати деформацију облика слова."
+msgstr ""
+"Врсте наговештаја које се користе при приказу слова. Могуће вредности су: "
+"„без“ (без наговештаја), „мало“, „средње“, и „потпуно“ (колико год је "
+"могуће); може изазвати деформацију облика слова."
 
 #: typing-break/drw-break-window.c:189
 msgid "Postpone break"
@@ -2822,7 +2856,8 @@ msgstr ""
 
 #: vfs-methods/fontilus/font-view.c:101
 msgid "The quick brown fox jumps over the lazy dog. 0123456789"
-msgstr "Ајшо, лепото и чежњо, за љубав срца мога дођи у Хаџиће на кафу. 0123456789"
+msgstr ""
+"Ајшо, лепото и чежњо, за љубав срца мога дођи у Хаџиће на кафу. 0123456789"
 
 #: vfs-methods/fontilus/font-view.c:252
 msgid "Name:"
@@ -2858,7 +2893,8 @@ msgstr "Ставке у приручном менију фонтова"
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:1
 msgid "If set to true, then OpenType fonts will be thumbnailed."
-msgstr "Ако је постављено, онда ће се за ОпенТајп фонтове користити умањени приказ."
+msgstr ""
+"Ако је постављено, онда ће се за ОпенТајп фонтове користити умањени приказ."
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:2
 msgid "If set to true, then PCF fonts will be thumbnailed."
@@ -2867,8 +2903,7 @@ msgstr "Ако је постављено, онда ће се за ПЦФ фон�
 #: vfs-methods/fontilus/fontilus.schemas.in.h:3
 msgid "If set to true, then TrueType fonts will be thumbnailed."
 msgstr ""
-"Ако је постављено, онда ће се за ТруТајп фонтове користити умањени "
-"приказ"
+"Ако је постављено, онда ће се за ТруТајп фонтове користити умањени приказ"
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:4
 msgid "If set to true, then Type1 fonts will be thumbnailed."
@@ -2953,6 +2988,14 @@ msgstr "Наутилусови уноси у приручном менију з�
 msgid "Set as Application Font"
 msgstr "Намести као фонт апликације"
 
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
+msgid "Theme Properties content view component"
+msgstr "Компонента помоћног прегледа особина тема"
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
+msgid "Themus Theme Properties view"
+msgstr "Темус преглед особина тема"
+
 #: vfs-methods/themus/apply-font.glade.h:1
 msgid " "
 msgstr " "
@@ -2975,14 +3018,6 @@ msgstr ""
 #: vfs-methods/themus/apply-font.glade.h:5
 msgid "_Apply font"
 msgstr "_Примени фонт"
-
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
-msgid "Theme Properties content view component"
-msgstr "Компонента помоћног прегледа особина тема"
-
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
-msgid "Themus Theme Properties view"
-msgstr "Темус преглед особина тема"
 
 #: vfs-methods/themus/theme-method.c:514
 msgid "Themes"
@@ -3012,8 +3047,7 @@ msgstr "АБВГДЂЕЖЗ"
 #: vfs-methods/themus/themus.schemas.in.h:1
 msgid "If set to true, then installed themes will be thumbnailed."
 msgstr ""
-"Ако је постављено, онда ће се за инсталиране теме користити умањени "
-"приказ"
+"Ако је постављено, онда ће се за инсталиране теме користити умањени приказ"
 
 #: vfs-methods/themus/themus.schemas.in.h:2
 msgid "If set to true, then themes will be thumbnailed."
