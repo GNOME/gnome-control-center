@@ -694,6 +694,7 @@ accel_edited_callback (GtkCellRendererText   *cell,
 		       guint		      keycode,
                        gpointer               data)
 {
+  GConfClient *client;
   GtkTreeView *view = (GtkTreeView *)data;
   GtkTreeModel *model;
   GtkTreePath *path = gtk_tree_path_new_from_string (path_string);
@@ -756,12 +757,14 @@ accel_edited_callback (GtkCellRendererText   *cell,
 
   str = binding_name (keyval, keycode, mask, FALSE);
 
-  gconf_client_set_string (gconf_client_get_default(),
+  client = gconf_client_get_default();
+  gconf_client_set_string (client,
                            key_entry->gconf_key,
                            str,
                            &err);
   g_free (str);
-  
+  g_object_unref (G_OBJECT (client));
+
   if (err != NULL)
     {
       GtkWidget *dialog;
@@ -785,6 +788,7 @@ accel_cleared_callback (GtkCellRendererText *cell,
 			const char          *path_string,
 			gpointer             data)
 {
+  GConfClient *client;
   GtkTreeView *view = (GtkTreeView *) data;
   GtkTreePath *path = gtk_tree_path_new_from_string (path_string);
   KeyEntry *key_entry;
@@ -804,10 +808,13 @@ accel_cleared_callback (GtkCellRendererText *cell,
     return;
 
   /* Unset the key */
-  gconf_client_set_string (gconf_client_get_default(),
+  client = gconf_client_get_default();
+  gconf_client_set_string (client,
 			   key_entry->gconf_key,
 			   "disabled",
 			   &err);
+  g_object_unref (G_OBJECT (client));
+
   if (err != NULL)
     {
       GtkWidget *dialog;
