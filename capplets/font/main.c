@@ -164,6 +164,8 @@ open_pattern (FcPattern   *pattern,
 	int screen = gdk_x11_get_default_screen ();
 	
 	res_pattern = XftFontMatch (xdisplay, screen, pattern, &result);
+	if (res_pattern == NULL)
+		return NULL;
 	
 	FcPatternDel (res_pattern, FC_HINTING);
 	FcPatternAddBool (res_pattern, FC_HINTING, hinting != HINT_NONE);
