@@ -391,7 +391,7 @@ init_mime_capplet (void)
 	gtk_signal_connect (GTK_OBJECT (delete_button), "clicked", delete_mime_clicked, NULL);
 
 	/* Set up top right area. */
-	frame = gtk_frame_new ("Default Action:");
+	frame = gtk_frame_new (_("Default Action:"));
 	gtk_table_attach_defaults ( GTK_TABLE (table), frame, 1, 2, 0, 1);
 
 	vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
@@ -425,7 +425,7 @@ init_mime_capplet (void)
 	gtk_signal_connect (GTK_OBJECT (button), "clicked", edit_default_clicked, mime_list);
 
 	/* Set up bottom right area. */
-	frame = gtk_frame_new ("Extensions:");
+	frame = gtk_frame_new (_("Extensions:"));
 	gtk_table_attach_defaults ( GTK_TABLE (table), frame, 1, 2, 1, 2);
 
 	extensions_table = gtk_table_new (2, 2, FALSE);
@@ -515,7 +515,7 @@ nautilus_mime_type_capplet_update_info (const char *mime_type) {
 	if (description != NULL && strlen (description) > 0) {
 		gtk_entry_set_text (GTK_ENTRY (description_entry), description);
 	} else {
-		gtk_entry_set_text (GTK_ENTRY (description_entry), "No Description");
+		gtk_entry_set_text (GTK_ENTRY (description_entry), _("No Description"));
 	}
 
 	gtk_editable_set_editable (GTK_EDITABLE (description_entry), FALSE);
