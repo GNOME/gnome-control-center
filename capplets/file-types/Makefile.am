@@ -1,34 +1,25 @@
 SUBDIRS = libuuid
 
-cappletname = file-types
-cappletgroup = "Advanced/"
-bin_PROGRAMS = file-types-capplet
+bin_PROGRAMS = gnome-file-types-properties
 
-file_types_capplet_LDADD = $(VFS_CAPPLET_LIBS) libuuid/libuuid.a
+gnome_file_types_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(VFS_CAPPLET_LIBS) libuuid/libuuid.a
 
-file_types_capplet_SOURCES =		\
-	file-types-capplet.h 		\
-	file-types-capplet-dialogs.h 	\
-	file-types-icon-entry.h		\
-	file-types-capplet.c		\
-	file-types-capplet-dialogs.c 	\
-	file-types-icon-entry.c
+gnome_file_types_properties_SOURCES =			\
+	file-types-capplet.c				\
+	mime-types-model.c	mime-types-model.h	\
+	mime-type-info.c	mime-type-info.h	\
+	mime-edit-dialog.c	mime-edit-dialog.h	\
+	service-info.c		service-info.h		\
+	service-edit-dialog.c	service-edit-dialog.h
 
-pixmap_DATA = 
-
-##
-## You should not need to modify anything below this line
-##
 @INTLTOOL_DESKTOP_RULE@
-@GNOMECC_CAPPLETS_DESKTOP_IN_RULE@
+
+Gladedir   = $(GNOMECC_DATA_DIR)/interfaces
+Glade_DATA = file-types-properties.glade
+
+desktopdir = $(GNOMECC_DATA_DIR)/capplets/Advanced
+desktop_DATA = file-types.desktop
 
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS) $(VFS_CAPPLET_CFLAGS)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
-EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST)
-iconsdir   = $(GNOMECC_ICONS_DIR)
-Gladedir   = $(GNOMECC_GLADE_DIR)
-pixmapdir  = $(GNOMECC_PIXMAPS_DIR)
-Glade_DATA = $(cappletname)-properties.glade
-icons_DATA = $(cappletname)-capplet.png
-desktop    = $(cappletname).desktop
-all-local: $(desktop)
+EXTRA_DIST = $(Glade_DATA) $(desktop_DATA)
