@@ -92,14 +92,18 @@ which are used in the control center.
 %ifarch alpha
    CFLAGS="$RPM_OPT_FLAGS" ./configure --host=alpha-redhat-linux --prefix=%prefix 
 %else
-   CFLAGS="$RPM_OPT_FLAGS" ./configure --prefix=%prefix 
+   CFLAGS="$RPM_OPT_FLAGS" ./configure --prefix=%prefix --sysconfdir=/etc
 %endif
-make
+if [ ! -z "$SMP" ]; then
+	make -j$SMP MAKE="make -j$SMP"
+else
+	make
+fi
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
-make prefix=$RPM_BUILD_ROOT%{prefix} install
+mkdir -p $RPM_BUILD_ROOT/etc
+make sysconfdir=$RPM_BUILD_ROOT/etc prefix=$RPM_BUILD_ROOT%{prefix} install
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -114,7 +118,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS COPYING ChangeLog NEWS README
 %{prefix}/bin/*
 %{prefix}/lib/lib*.so.*
-%{prefix}/etc/CORBA/servers/*
+/etc/CORBA/servers/*
 %{prefix}/share/control-center
 %{prefix}/share/pixmaps/*
 %{prefix}/share/locale/*/*/*
