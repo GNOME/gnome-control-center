@@ -1,4 +1,4 @@
-SUBDIRS = po libsounds libbackground libwindow-settings libgswitchit gnome-settings-daemon capplets control-center vfs-methods idl schemas $(TYPING_BREAK)
+SUBDIRS = po libsounds libbackground libwindow-settings libgswitchit libkbdraw gnome-settings-daemon capplets control-center vfs-methods idl schemas $(TYPING_BREAK)
 
 #I removed the root-manager for now
 #
