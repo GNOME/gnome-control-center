@@ -12,6 +12,53 @@ enum
   INVALID_THEME_NAME,
 };
 
+/* taken from gnome-desktop-item.c */
+static char *
+escape_string_and_dup (const char *s)
+{
+  char *return_value, *p;
+  const char *q;
+  int len = 0;
+
+  if (s == NULL)
+    return g_strdup("");
+	
+  q = s;
+  while (*q)
+    {
+      len++;
+      if (strchr ("\n\r\t\\", *q) != NULL)
+	len++;
+      q++;
+    }
+  return_value = p = (char *) g_malloc (len + 1);
+  do
+    {
+      switch (*s)
+	{
+	case '\t':
+	  *p++ = '\\';
+	  *p++ = 't';
+	  break;
+	case '\n':
+	  *p++ = '\\';
+	  *p++ = 'n';
+	  break;
+	case '\r':
+	  *p++ = '\\';
+	  *p++ = 'r';
+	  break;
+	case '\\':
+	  *p++ = '\\';
+	  *p++ = '\\';
+	  break;
+	default:
+	  *p++ = *s;
+	}
+    }
+  while (*s++);
+  return return_value;
+}
 
 static gboolean
 check_theme_name (const gchar  *theme_name,
@@ -126,6 +173,7 @@ save_dialog_response (GtkWidget *save_dialog,
 {
   GnomeThemeMetaInfo *meta_theme_info;
   char *theme_description = NULL;
+  char *theme_name = NULL;
   GError *error = NULL;
 
   if (response_id == GTK_RESPONSE_OK)
@@ -134,21 +182,21 @@ save_dialog_response (GtkWidget *save_dialog,
       GtkWidget *entry;
       GtkWidget *text_view;
       GtkTextBuffer *buffer;
-      const char *theme_name;
       GtkTextIter start_iter;
       GtkTextIter end_iter;
-
+      gchar *buffer_text;
       
       dialog = gnome_theme_manager_get_theme_dialog ();
       entry = WID ("save_dialog_entry");
-      theme_name = gtk_entry_get_text (GTK_ENTRY (entry));
+      theme_name = escape_string_and_dup (gtk_entry_get_text (GTK_ENTRY (entry)));
       
       text_view = WID ("save_dialog_textview");
       buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));
       gtk_text_buffer_get_start_iter (buffer, &start_iter);
       gtk_text_buffer_get_end_iter (buffer, &end_iter);
-      theme_description = gtk_text_buffer_get_text (buffer, &start_iter, &end_iter, FALSE);
-      
+      buffer_text = gtk_text_buffer_get_text (buffer, &start_iter, &end_iter, FALSE);
+      theme_description = escape_string_and_dup (buffer_text);
+      g_free (buffer_text);
       meta_theme_info = (GnomeThemeMetaInfo *) g_object_get_data (G_OBJECT (save_dialog), "meta-theme-info");
       if (! save_theme_to_disk (meta_theme_info, theme_name, theme_description, &error))
 	{
@@ -159,6 +207,7 @@ save_dialog_response (GtkWidget *save_dialog,
  out:
   g_clear_error (&error);
   gtk_widget_hide (save_dialog);
+  g_free (theme_name);
   g_free (theme_description);
 }
 
