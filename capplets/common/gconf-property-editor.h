@@ -64,7 +64,8 @@ struct _GConfPropertyEditorClass
 
 GType gconf_property_editor_get_type    (void);
 
-const gchar *gconf_property_editor_get_key (GConfPropertyEditor  *peditor);
+const gchar *gconf_property_editor_get_key        (GConfPropertyEditor  *peditor);
+GObject     *gconf_property_editor_get_ui_control (GConfPropertyEditor  *peditor);
 
 GObject *gconf_peditor_new_boolean      (GConfChangeSet          *changeset,
 					 gchar                   *key,

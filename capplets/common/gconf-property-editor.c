@@ -393,6 +393,12 @@ gconf_property_editor_get_key (GConfPropertyEditor *peditor)
 	return peditor->p->key;
 }
 
+GObject *
+gconf_property_editor_get_ui_control (GConfPropertyEditor  *peditor)
+{
+	return peditor->p->ui_control;
+}
+
 static void
 peditor_set_gconf_value (GConfPropertyEditor *peditor,
 			 const gchar         *key,
