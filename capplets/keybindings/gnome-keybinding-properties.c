@@ -661,29 +661,29 @@ static gboolean
 cb_check_for_uniqueness (GtkTreeModel *model,
 			 GtkTreePath  *path,
 			 GtkTreeIter  *iter,
-			 gpointer      user_data)
+			 KeyEntry *new_key)
 {
-  KeyEntry *key_entry;
-  KeyEntry *tmp_key_entry;
+  KeyEntry *element;
 
-  key_entry = (KeyEntry *)user_data;
-  gtk_tree_model_get (key_entry->model, iter,
-		      KEYENTRY_COLUMN, &tmp_key_entry,
+  gtk_tree_model_get (new_key->model, iter,
+		      KEYENTRY_COLUMN, &element,
 		      -1);
 
-  if (tmp_key_entry != NULL &&
-      strcmp (key_entry->gconf_key, tmp_key_entry->gconf_key) != 0 &&
-      ((key_entry->keyval == tmp_key_entry->keyval &&
-	key_entry->mask   == tmp_key_entry->mask) ||
-       key_entry->keycode == tmp_key_entry->keycode))
-      /* be sure we don't claim a key is a dup of itself */
-    {
-      key_entry->editable = FALSE;
-      key_entry->gconf_key = tmp_key_entry->gconf_key;
-      key_entry->description = tmp_key_entry->description;
-      return TRUE;
-    }
-  return FALSE;
+  /* no conflict for : blanks, different modifiers, or ourselves */
+  if (element == NULL || new_key->mask != element->mask ||
+      !strcmp (new_key->gconf_key, element->gconf_key))
+    return FALSE;
+
+  if (new_key->keyval != 0) {
+      if (new_key->keyval != element->keyval)
+	  return FALSE;
+  } else if (element->keyval != 0 || new_key->keycode != element->keycode)
+    return FALSE;
+
+  new_key->editable = FALSE;
+  new_key->gconf_key = element->gconf_key;
+  new_key->description = element->description;
+  return TRUE;
 }
 
 static void
@@ -723,7 +723,9 @@ accel_edited_callback (GtkCellRendererText   *cell,
   tmp_key.editable = TRUE; /* kludge to stuff in a return flag */
 
   if (keyval != 0 || keycode != 0) /* any number of keys can be disabled */
-    gtk_tree_model_foreach (model, cb_check_for_uniqueness, &tmp_key);
+    gtk_tree_model_foreach (model,
+      (GtkTreeModelForeachFunc) cb_check_for_uniqueness,
+      &tmp_key);
 
   /* flag to see if the new accelerator was in use by something */
   if (!tmp_key.editable)
