@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center\n"
-"POT-Creation-Date: 2002-07-08 11:59+0200\n"
-"PO-Revision-Date: 2002-07-08 12:03+0200\n"
+"POT-Creation-Date: 2002-07-15 12:55+0200\n"
+"PO-Revision-Date: 2002-07-15 13:11+0200\n"
 "Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -39,7 +39,7 @@ msgid "Keyboard"
 msgstr "Klawiatura"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-msgid "Keyboard Accessibility Properties"
+msgid "Set your keyboard accessibility preferences"
 msgstr "Ustawienia dostępności klawiatury"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
@@ -264,6 +264,10 @@ msgid "Background Preview"
 msgstr "Podgląd tła"
 
 #: capplets/background/background-properties.glade.h:1
+msgid "Background _Style:"
+msgstr "_Styl tła:"
+
+#: capplets/background/background-properties.glade.h:1
 msgid "Horizontal gradient"
 msgstr "Poziomy gradient"
 
@@ -274,10 +278,6 @@ msgstr "Wybór koloru"
 #: capplets/background/background-properties.glade.h:1
 msgid "Picture Options:"
 msgstr "Opcje obrazu:"
-
-#: capplets/background/background-properties.glade.h:1
-msgid "Picture bor_der:"
-msgstr "_Krawędź obrazu:"
 
 #: capplets/background/background-properties.glade.h:1
 #: libbackground/preview-file-selection.c:1
@@ -323,8 +323,8 @@ msgid "Background"
 msgstr "Tło"
 
 #: capplets/background/background.desktop.in.h:1
-msgid "Change the desktop background"
-msgstr "Konfiguracja tła biurka"
+msgid "Customize your desktop background"
+msgstr "Ustawienia wyglądu tła biurka"
 
 #: capplets/common/activate-settings-daemon.c:1
 msgid ""
@@ -517,13 +517,13 @@ msgid "Please select an image."
 msgstr "Wybór obrazu tła"
 
 #: capplets/default-applications/default-applications.desktop.in.h:1
-msgid "Choose the applications used by default"
-msgstr "Ustawienia domyślnych aplikacji do pełnienia różnych funkcji"
-
-#: capplets/default-applications/default-applications.desktop.in.h:1
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:1
 msgid "Preferred Applications"
 msgstr "Preferowane aplikacje"
+
+#: capplets/default-applications/default-applications.desktop.in.h:1
+msgid "Select your default applications"
+msgstr "Wybór domyślnych aplikacji"
 
 #: capplets/default-applications/gnome-default-applications-properties.c:1
 msgid "Please specify a name and a command for this editor."
@@ -532,7 +532,7 @@ msgstr "Wprowadź nazwę edytora i uruchamiające go polecenie."
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: capplets/network/gnome-network-preferences.glade.h:1
-#: capplets/theme-switcher/theme-properties.glade.h:1
+#: capplets/theme-switcher/theme-install.glade.h:1
 msgid "*"
 msgstr "*"
 
@@ -708,76 +708,77 @@ msgid "Appearance"
 msgstr "Wygląd"
 
 #: capplets/desktop-links/Sawfish/appearance-properties.desktop.in.h:1
-msgid "Configure window appearance"
-msgstr "Konfiguruje wygląd okien"
+msgid "Select themes and fonts for your windows"
+msgstr "Wybór motywów i czcionek używanych przy wyświetlaniu okien"
 
 #: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:1
-msgid "Configure key shortcuts"
-msgstr "Konfiguruje skróty klawiszowe"
+msgid "Customize shortcut keys for your windows"
+msgstr "Konfiguracja skrótow klawiszowych powiązanych z oknami"
 
 #: capplets/desktop-links/Sawfish/bindings-properties.desktop.in.h:1
 msgid "Shortcuts"
 msgstr "Skróty"
 
 #: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:1
-msgid "Configure window focusing"
-msgstr "Konfiguruje sposób aktywacji okien"
+msgid "Configure how to give focus to windows"
+msgstr "Konfiguracja sposobu aktywacji okien"
 
 #: capplets/desktop-links/Sawfish/focus-properties.desktop.in.h:1
 msgid "Focus behavior"
 msgstr "Aktywacja"
 
 #: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
-msgid "Configure window properties"
-msgstr "Konfiguruje właściwości okien"
+msgid "Configure matched windows to have particular characteristics"
+msgstr "Konfiguracja charakterystyk skojarzonych ze sobą okien"
 
 #: capplets/desktop-links/Sawfish/match-properties.desktop.in.h:1
 msgid "Matched Windows"
 msgstr "Dopasowywanie okien"
 
 #: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:1
-msgid "Configure window minimization and maximization"
-msgstr "Konfiguruje minimalizację i maksymalizację okien"
+msgid "Configure how to minimize, maximize, and restore windows"
+msgstr ""
+"Konfiguracja sposobu minimalizacji, maksymalizacji i przywracania okien"
 
 #: capplets/desktop-links/Sawfish/maximize-properties.desktop.in.h:1
 msgid "Minimizing and Maximizing"
 msgstr "Minimalizacja i maksymalizacja"
 
 #: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
-msgid "Configure window manager configuration properties"
-msgstr "Konfiguracja menedżera okien"
-
-#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
 msgid "Meta"
 msgstr "Meta"
 
-#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
-msgid "Configure miscellaneous window features"
-msgstr "Konfiguruje różne ustawienia dotyczące okien"
+#: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
+msgid "Select your Sawfish user level"
+msgstr "Wybór poziomu zaawansowania użytkownika programu Sawfish"
 
 #: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
 msgid "Miscellaneous"
 msgstr "Różne"
 
+#: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:1
+msgid "Select miscellaneous window options"
+msgstr "Konfiguracja ustawień dotyczących okien"
+
 #: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:1
-msgid "Configure window move/resize"
-msgstr "Konfiguruje sposób przenoszenia i zmiany rozmiaru okien"
+msgid "Configure how windows move and resize"
+msgstr "Konfiguracja sposobu przenoszenia i zmiany rozmiaru okien"
 
 #: capplets/desktop-links/Sawfish/move-properties.desktop.in.h:1
 msgid "Moving and Resizing"
 msgstr "Przenoszenie i zmiana rozmiaru"
 
 #: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:1
-msgid "Configure window placement"
-msgstr "Konfiguruje sposób rozmieszczania okien"
+msgid "Configure positioning of windows on the desktop"
+msgstr "Konfiguracja rozmieszczania okien na biurku"
 
 #: capplets/desktop-links/Sawfish/placement-properties.desktop.in.h:1
 msgid "Placement"
 msgstr "Rozmieszczanie"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
-msgid "Enable window manager sound events"
-msgstr "Wykorzystanie dźwięku przez menedżera okien"
+msgid "Associate sounds with window manager events"
+msgstr "Powiązania dźwięków ze zdarzeniami menedżera okien"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:1
@@ -786,8 +787,8 @@ msgid "Sound"
 msgstr "Dźwięk"
 
 #: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:1
-msgid "Configure workspaces"
-msgstr "Konfiguruje obszary robocze"
+msgid "Configure your workspaces and viewports"
+msgstr "Konfiguracja obszarów roboczych i obszarów wyświetlania"
 
 #: capplets/desktop-links/Sawfish/workspace-properties.desktop.in.h:1
 msgid "Workspaces"
@@ -903,12 +904,12 @@ msgid "Extensions"
 msgstr "Rozszerzenia"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
+#: capplets/file-types/file-types-properties.glade.h:1
 #: capplets/file-types/file-types.desktop.in.h:1
 msgid "File Types and Programs"
 msgstr "Typy plików i programy"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
-#: capplets/file-types/file-types.desktop.in.h:1
 msgid "Specify which programs are used to open or view each file type"
 msgstr ""
 "Konfiguracja programów używanych do otwierania i wyświetlania różnych typów "
@@ -936,11 +937,7 @@ msgid "Edit file type"
 msgstr "Modyfikacja typu pliku"
 
 #: capplets/file-types/file-types-properties.glade.h:1
-msgid "File types and Internet Services"
-msgstr "Typy plików i usługi internetowe"
-
-#: capplets/file-types/file-types-properties.glade.h:1
-msgid "Filename extensions"
+msgid "Filename Extensions"
 msgstr "Rozszerzenia nazw plików"
 
 #: capplets/file-types/file-types-properties.glade.h:1
@@ -948,11 +945,7 @@ msgid "Look at content"
 msgstr "Sprawdzanie zawartości"
 
 #: capplets/file-types/file-types-properties.glade.h:1
-msgid "Needs _terminal"
-msgstr "Wymaga _terminala"
-
-#: capplets/file-types/file-types-properties.glade.h:1
-msgid "Program to run"
+msgid "Program to Run"
 msgstr "Uruchamiany program"
 
 #: capplets/file-types/file-types-properties.glade.h:1
@@ -960,20 +953,20 @@ msgid "Run a program"
 msgstr "Uruchomienie programu"
 
 #: capplets/file-types/file-types-properties.glade.h:1
-msgid "Use category _defaults"
-msgstr "Użycie wartości _domyślnych dla kategorii"
+msgid "Run in _Terminal"
+msgstr "Uruchamianie w t_erminalu"
 
 #: capplets/file-types/file-types-properties.glade.h:1
 msgid "Use parent category _defaults"
 msgstr "Użycie wartości domyślnych dla kategorii _nadrzędnej"
 
 #: capplets/file-types/file-types-properties.glade.h:1
-msgid "Viewing component"
+msgid "Viewer Component"
 msgstr "Komponent przeglądarki"
 
 #: capplets/file-types/file-types-properties.glade.h:1
-msgid "_Add"
-msgstr "_Dodaj"
+msgid "_Add..."
+msgstr "_Dodaj..."
 
 #: capplets/file-types/file-types-properties.glade.h:1
 msgid "_Category"
@@ -982,6 +975,10 @@ msgstr "_Kategoria"
 #: capplets/file-types/file-types-properties.glade.h:1
 msgid "_Choose..."
 msgstr "_Wybierz..."
+
+#: capplets/file-types/file-types-properties.glade.h:1
+msgid "_Delete"
+msgstr "_Usuń"
 
 #: capplets/file-types/file-types-properties.glade.h:1
 msgid "_Description"
@@ -1004,16 +1001,16 @@ msgid "_Program"
 msgstr "_Program"
 
 #: capplets/file-types/file-types-properties.glade.h:1
-msgid "_Program to run"
+msgid "_Program to Run"
 msgstr "U_ruchamiany program"
 
 #: capplets/file-types/file-types-properties.glade.h:1
-msgid "_Protocol name"
+msgid "_Protocol"
 msgstr "Nazwa pr_otokołu"
 
-#: capplets/file-types/file-types-properties.glade.h:1
-msgid "_Remove"
-msgstr "_Usuń"
+#: capplets/file-types/file-types.desktop.in.h:1
+msgid "Associate applications with file types"
+msgstr "Powiązania aplikacji z typami plików"
 
 #: capplets/file-types/mime-category-edit-dialog.c:1
 msgid "Edit file category"
@@ -1071,7 +1068,7 @@ msgid "True if this dialog is for adding a MIME type"
 msgstr "Określa, czy okno służy do dodawania typu MIME"
 
 #: capplets/file-types/mime-edit-dialog.c:1
-msgid "Add file type"
+msgid "Add File Type"
 msgstr "Nowy typ pliku"
 
 #: capplets/file-types/mime-edit-dialog.c:1
@@ -1134,7 +1131,7 @@ msgid "TRUE if this is an add service dialog"
 msgstr "Określa, czy okno służy do dodawania usługi"
 
 #: capplets/file-types/service-edit-dialog.c:1
-msgid "Add service"
+msgid "Add Service"
 msgstr "Nowa usługa"
 
 #: capplets/file-types/service-edit-dialog.c:1
@@ -1182,12 +1179,12 @@ msgid "Gnome documentation"
 msgstr "Dokumentacja GNOME"
 
 #: capplets/font/font-properties.desktop.in.h:1
-msgid "Change the default fonts used by the desktop and applications"
-msgstr "Ustawienia domyślnych czcionek, używanych na biurku i w aplikacjach."
-
-#: capplets/font/font-properties.desktop.in.h:1
 msgid "Font"
 msgstr "Czcionki"
+
+#: capplets/font/font-properties.desktop.in.h:1
+msgid "Select fonts for the desktop"
+msgstr "Wybór czcionek używanych w środowisku"
 
 #: capplets/font/font-properties.glade.h:1
 msgid "Font Preferences"
@@ -1227,12 +1224,9 @@ msgstr "Nieaktywny"
 
 #: capplets/keybindings/eggcellrendererkeys.c:1
 #: capplets/keybindings/eggcellrendererkeys.c:1
-msgid "Type a new accelerator, or press Backspace to clear"
-msgstr "Podaj nowy akcelerator lub przyciśnij Backspace, aby go wyczyścić"
-
 #: capplets/keybindings/eggcellrendererkeys.c:1
-msgid "Type a new accelerator"
-msgstr "Podaj nowy akcelerator"
+msgid "Type a new shortcut"
+msgstr "Podaj nowy skrót"
 
 #: capplets/keybindings/gnome-keybinding-properties.c:1
 msgid "<Unknown Action>"
@@ -1279,24 +1273,16 @@ msgid "Keyboard Shortcuts"
 msgstr "Skróty klawiszowe"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:1
-msgid "Keyboard _Navigation scheme for use in applications:"
-msgstr "Schemat _nawigacji przy użyciu klawiatury, używany w aplikacjach:"
-
-#: capplets/keybindings/gnome-keybinding-properties.glade.h:1
-msgid ""
-"To assign a shortcut to an action, click in the shortcut column and press "
-"the key combination you want to associate with it."
-msgstr ""
-"Aby przypisać skrót klawiszowy do czynności, kliknij element kolumny "
-"skrótów, a następnie przyciśnij wybraną kombinację klawiszy."
-
-#: capplets/keybindings/gnome-keybinding-properties.glade.h:1
 msgid "_Desktop shortcuts:"
 msgstr "_Skróty klawiszowe środowiska:"
 
+#: capplets/keybindings/gnome-keybinding-properties.glade.h:1
+msgid "_Text editing shortcuts:"
+msgstr "Skróty klawiszowe _redagowania tekstu:"
+
 #: capplets/keybindings/keybinding.desktop.in.h:1
-msgid "Associate keyboard shortcuts with panel actions"
-msgstr "Powiązania skrótów klawiszowych z akcjami panelu"
+msgid "Assign shortcut keys to commands"
+msgstr "Powiązania skrótów klawiszowych z poleceniami"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:1
 msgid "_Accessibility"
@@ -1447,7 +1433,7 @@ msgid "_Volume:"
 msgstr "_Głośność:"
 
 #: capplets/keyboard/keyboard.desktop.in.h:1
-msgid "Keyboard Properties"
+msgid "Set your keyboard preferences"
 msgstr "Ustawienia klawiatury"
 
 #: capplets/mouse/gnome-mouse-properties.c:1
@@ -1657,21 +1643,21 @@ msgid "Mouse"
 msgstr "Mysz"
 
 #: capplets/mouse/mouse.desktop.in.h:1
-msgid "Mouse Properties"
+msgid "Set your mouse preferences"
 msgstr "Ustawienia myszy"
 
 #: capplets/network/gnome-network-preferences.desktop.in.h:1
-msgid "Network"
-msgstr "Sieć"
+msgid "Network Proxy"
+msgstr "Pośrednik sieciowy"
 
 #: capplets/network/gnome-network-preferences.desktop.in.h:1
 #: capplets/network/gnome-network-preferences.glade.h:1
-msgid "Network Preferences"
-msgstr "Ustawienia sieci"
+msgid "Network Proxy Preferences"
+msgstr "Ustawienia pośrednika sieciowego"
 
 #: capplets/network/gnome-network-preferences.glade.h:1
-msgid "HTTP Proxy Settings"
-msgstr "Ustawienia serwera pośredniczącego"
+msgid "Network Preferences"
+msgstr "Ustawienia sieci"
 
 #: capplets/network/gnome-network-preferences.glade.h:1
 msgid "P_ort:"
@@ -1682,7 +1668,7 @@ msgid "Pass_word:"
 msgstr "Ha_sło:"
 
 #: capplets/network/gnome-network-preferences.glade.h:1
-msgid "Pro_xy requires a username and password"
+msgid "Pro_xy requires username and password"
 msgstr "Pośrednik _wymaga nazwy użytkownika i hasła"
 
 #: capplets/network/gnome-network-preferences.glade.h:1
@@ -1706,6 +1692,10 @@ msgid "E_nable sound server startup"
 msgstr "_Uruchamianie serwera dźwięku"
 
 #: capplets/sound/sound-properties.glade.h:1
+msgid "Sound Preferences"
+msgstr "Ustawienia dźwięku"
+
+#: capplets/sound/sound-properties.glade.h:1
 msgid "Sound _Events"
 msgstr "_Dźwięki zdarzeń"
 
@@ -1718,8 +1708,8 @@ msgid "_Sounds for events"
 msgstr "_Powiązanie dźwięków ze zdarzeniami"
 
 #: capplets/sound/sound.desktop.in.h:1
-msgid "Configure GNOME's use of sound"
-msgstr "Konfiguracja wykorzystania dźwięku przez GNOME"
+msgid "Enable sound and associate sounds with events"
+msgstr "Wykorzystanie dźwięku i powiązania dźwięków ze zdarzeniami"
 
 #: capplets/theme-switcher/control/control.c:1
 msgid "Eenie Meenie Mynie Moe Catcha Tiger By Its Toe"
@@ -1772,20 +1762,12 @@ msgid "Two"
 msgstr "Dwa"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
-msgid "Change the appearance of buttons, scrollbars, etc"
-msgstr "Zmiana wyglądu przycisków, pasków przewijania, itp."
+msgid "Select themes for various parts of the desktop"
+msgstr "Wybór motywów różnych części środowiska"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
 msgid "Theme"
 msgstr "Motyw"
-
-#: capplets/theme-switcher/theme-properties.glade.h:1
-msgid "Gtk+ Theme Preferences"
-msgstr "Ustawienia motywu GTK+"
-
-#: capplets/theme-switcher/theme-properties.glade.h:1
-msgid "Install new theme"
-msgstr "Instalacja nowego motywu"
 
 #: capplets/theme-switcher/theme-properties.glade.h:1
 msgid "Installed Themes"
@@ -1800,24 +1782,32 @@ msgid "New themes can also be installed by dragging them into the window."
 msgstr "Nowe motywy można również instalować przeciągając je do tego okna."
 
 #: capplets/theme-switcher/theme-properties.glade.h:1
+msgid "Theme Preferences"
+msgstr "Ustawienia motywu"
+
+#: capplets/theme-switcher/theme-properties.glade.h:1
 msgid "_Go to theme folder"
 msgstr "_Przejdź do folderu z motywem"
 
 #: capplets/theme-switcher/theme-properties.glade.h:1
+msgid "_Install New Theme..."
+msgstr "Za_instaluj nowy motyw..."
+
+#: capplets/theme-switcher/theme-install.glade.h:1
+msgid "Install new theme"
+msgstr "Instalacja nowego motywu"
+
+#: capplets/theme-switcher/theme-install.glade.h:1
 msgid "_Install"
 msgstr "Za_instaluj"
 
-#: capplets/theme-switcher/theme-properties.glade.h:1
-msgid "_Install new theme..."
-msgstr "Za_instaluj nowy motyw..."
-
-#: capplets/theme-switcher/theme-properties.glade.h:1
+#: capplets/theme-switcher/theme-install.glade.h:1
 msgid "_Location of new theme:"
 msgstr "P_ołożenie nowego motywu:"
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
-msgid "Change how toolbars and menus are displayed"
-msgstr "Ustawienia wyglądu pasków narzędziowych i menu"
+msgid "Customize the appearance of toolbars and menubars in applications"
+msgstr "Dopasowanie wyglądu pasków narzędziowych i pasków menu w aplikacjach"
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Toolbars & Menus"
@@ -1936,6 +1926,7 @@ msgid "_Toolbars have: "
 msgstr "_Zawartość pasków narzędziowych: "
 
 #: capplets/windows/gnome-window-properties.c:1
+#: capplets/windows/gnome-window-properties.glade.h:1
 msgid "Window Preferences"
 msgstr "Preferencje okna"
 
@@ -1959,7 +1950,6 @@ msgstr "Wygląd krawędzi okna"
 msgid "Window Manager:"
 msgstr "Menedżer okien:"
 
-#: capplets/windows/gnome-window-properties.glade.h:1
 #: capplets/windows/window-properties.desktop.in.h:1
 msgid "Window Properties"
 msgstr "Ustawienia okien"
