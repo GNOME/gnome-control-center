@@ -1,3 +1,9 @@
+2001-10-13  Bradford Hovinen  <hovinen@ximian.com>
+
+	* lister.c (edit_file_to_use): Be paranoid about what we have read
+	from the input file -- make sure the string is always
+	NULL-terminated
+
 2001-09-29  Richard Hestilow  <hestilow@ximian.com>
 
 	* gui.c (sort_alpha): Use g_strcasecmp, not strcmp.

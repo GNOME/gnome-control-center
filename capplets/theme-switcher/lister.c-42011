@@ -40,6 +40,7 @@ edit_file_to_use(gchar *file, gchar *theme, gchar *font)
     }
   while (fgets(buf, sizeof(buf), fin))
     { 
+      buf[sizeof(buf)-1] = '\0';  /* Be paranoid */
       if (!strcmp(MARK_STRING, buf))
 	hastheme += 1;
     }
@@ -56,6 +57,7 @@ edit_file_to_use(gchar *file, gchar *theme, gchar *font)
       nextline = 0;
       while (fgets(buf, sizeof(buf), fin))
 	{
+	  buf[sizeof(buf)-1] = '\0';  /* Be paranoid */
 	  if (nextline == 1)
 	    nextline = 0;
 	  else if (!strcmp(MARK_STRING, buf))
@@ -72,6 +74,7 @@ edit_file_to_use(gchar *file, gchar *theme, gchar *font)
       nextline = 0;
       while (fgets(buf, sizeof(buf), fin))
 	{
+	  buf[sizeof(buf)-1] = '\0';  /* Be paranoid */
 	  if (!strcmp(MARK_STRING, buf))
 	    {
 	      if (nextline == 0)
