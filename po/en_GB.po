@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-centre CVS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-21 21:37+0000\n"
-"PO-Revision-Date: 2004-11-21 21:37+0100\n"
+"POT-Creation-Date: 2004-12-13 21:35+0000\n"
+"PO-Revision-Date: 2004-12-13 21:36+0100\n"
 "Last-Translator: David Lodge <dave@cirt.net>\n"
 "Language-Team: English/GB <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -57,11 +57,11 @@ msgstr "_On-screen keyboard"
 msgid "_Screenreader"
 msgstr "_Screenreader"
 
-#: capplets/accessibility/at-properties/at-properties.desktop.in.h:1
+#: capplets/accessibility/at-properties/at-properties.desktop.in.in.h:1
 msgid "Assistive Technology Support"
 msgstr "Assistive Technology Support"
 
-#: capplets/accessibility/at-properties/at-properties.desktop.in.h:2
+#: capplets/accessibility/at-properties/at-properties.desktop.in.in.h:2
 msgid "Enable support for GNOME assistive technologies at login"
 msgstr "Enable support for GNOME assistive technologies at login"
 
@@ -96,13 +96,13 @@ msgstr "Import Feature Settings File"
 msgid "_Import"
 msgstr "_Import"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
+#: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.in.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:20
-#: capplets/keyboard/keyboard.desktop.in.h:1
+#: capplets/keyboard/keyboard.desktop.in.in.h:1
 msgid "Keyboard"
 msgstr "Keyboard"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:2
+#: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.in.h:2
 msgid "Set your keyboard accessibility preferences"
 msgstr "Set your keyboard accessibility preferences"
 
@@ -299,11 +299,11 @@ msgstr "pixels/second"
 msgid "seconds"
 msgstr "seconds"
 
-#: capplets/background/background.desktop.in.h:1
+#: capplets/background/background.desktop.in.in.h:1
 msgid "Change your Desktop Background settings"
 msgstr "Change your Desktop Background settings"
 
-#: capplets/background/background.desktop.in.h:2
+#: capplets/background/background.desktop.in.in.h:2
 msgid "Desktop Background"
 msgstr "Desktop Background"
 
@@ -381,6 +381,13 @@ msgstr "Add Wallpaper"
 #: capplets/background/gnome-wp-info.c:49
 msgid "No Wallpaper"
 msgstr "No Wallpaper"
+
+#: capplets/background/gnome-wp-item.c:287
+#: capplets/background/gnome-wp-item.c:289
+msgid "pixel"
+msgid_plural "pixels"
+msgstr[0] "pixel"
+msgstr[1] "pixels"
 
 #: capplets/common/activate-settings-daemon.c:18
 msgid ""
@@ -574,14 +581,135 @@ msgstr "Please select an image."
 msgid "_Select"
 msgstr "_Select"
 
-#: capplets/default-applications/default-applications.desktop.in.h:1
+#: capplets/default-applications/default-applications.desktop.in.in.h:1
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:18
 msgid "Preferred Applications"
 msgstr "Preferred Applications"
 
-#: capplets/default-applications/default-applications.desktop.in.h:2
+#: capplets/default-applications/default-applications.desktop.in.in.h:2
 msgid "Select your default applications"
 msgstr "Select your default applications"
+
+#: capplets/default-applications/gnome-default-applications-properties.c:123
+msgid "Please specify a name and a command for this editor."
+msgstr "Please specify a name and a command for this editor."
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:2
+msgid "Add..."
+msgstr "Add..."
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:3
+msgid "C_ustom"
+msgstr "C_ustom"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:4
+msgid "C_ustom:"
+msgstr "C_ustom:"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:5
+msgid "Can open _URIs"
+msgstr "Can open _URIs"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:6
+msgid "Can open multiple _files"
+msgstr "Can open multiple _files"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:7
+msgid "Co_mmand:"
+msgstr "Co_mmand:"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:8
+msgid "Custom Editor Properties"
+msgstr "Custom Editor Properties"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:9
+msgid "Default Mail Reader"
+msgstr "Default Mail Reader"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:10
+msgid "Default Terminal"
+msgstr "Default Terminal"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:11
+msgid "Default Text Editor"
+msgstr "Default Text Editor"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:12
+msgid "Default Web Browser"
+msgstr "Default Web Browser"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:13
+msgid "Default Window Manager"
+msgstr "Default Window Manager"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:14
+msgid "Delete"
+msgstr "Delete"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:15
+msgid "E_xec Flag:"
+msgstr "E_xec Flag:"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:16
+msgid "Edit..."
+msgstr "Edit..."
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:17
+msgid "Mail Reader"
+msgstr "Mail Reader"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:19
+msgid "Run in a _terminal"
+msgstr "Run in a _terminal"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:20
+msgid "Run in a t_erminal"
+msgstr "Run in a t_erminal"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:21
+msgid "Select the window manager you want.  You will need to hit apply, wave the magic wand, and do a magic dance for it to work."
+msgstr "Select the window manager you want.  You will need to hit apply, wave the magic wand, and do a magic dance for it to work."
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:22
+msgid "Terminal"
+msgstr "Terminal"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:23
+msgid "Text Editor"
+msgstr "Text Editor"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:24
+msgid "Understands _Netscape Remote Control"
+msgstr "Understands _Netscape Remote Control"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:25
+msgid "Use this _editor to open text files in the file manager"
+msgstr "Use this _editor to open text files in the file manager"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:26
+msgid "Web Browser"
+msgstr "Web Browser"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:27
+msgid "Window Manager"
+msgstr "Window Manager"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:28
+msgid "_Command:"
+msgstr "_Command:"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:29
+#: capplets/file-types/file-types-properties.glade.h:23
+msgid "_Name:"
+msgstr "_Name:"
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:30
+msgid "_Properties..."
+msgstr "_Properties..."
+
+#: capplets/default-applications/gnome-default-applications-properties.glade.h:31
+msgid "_Select:"
+msgstr "_Select:"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:9
 msgid "Debian Sensible Browser"
@@ -600,8 +728,8 @@ msgid "Encompass"
 msgstr "Encompass"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:13
-msgid "Firebird/FireFox"
-msgstr "Firebird/FireFox"
+msgid "Firebird"
+msgstr "Firebird"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:14
 msgid "Firefox"
@@ -609,8 +737,8 @@ msgstr "Firefox"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:15
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:16
-msgid "Mozilla/Netscape 6"
-msgstr "Mozilla/Netscape 6"
+msgid "Mozilla"
+msgstr "Mozilla"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:17
 msgid "Netscape Communicator"
@@ -689,148 +817,11 @@ msgstr "aterm"
 msgid "ETerm"
 msgstr "ETerm"
 
-#: capplets/default-applications/gnome-default-applications-properties.c:123
-msgid "Please specify a name and a command for this editor."
-msgstr "Please specify a name and a command for this editor."
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:2
-msgid "Add..."
-msgstr "Add..."
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:3
-msgid "C_ustom Editor"
-msgstr "C_ustom Editor"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:4
-msgid "C_ustom Mail Reader:"
-msgstr "C_ustom Mail Reader:"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:5
-msgid "C_ustom Terminal:"
-msgstr "C_ustom Terminal:"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:6
-msgid "C_ustom Web Browser:"
-msgstr "C_ustom Web Browser:"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:7
-msgid "Co_mmand:"
-msgstr "Co_mmand:"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:8
-msgid "Custom Editor Properties"
-msgstr "Custom Editor Properties"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:9
-msgid "Default Mail Reader"
-msgstr "Default Mail Reader"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:10
-msgid "Default Terminal"
-msgstr "Default Terminal"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:11
-msgid "Default Text Editor"
-msgstr "Default Text Editor"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:12
-msgid "Default Web Browser"
-msgstr "Default Web Browser"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:13
-msgid "Default Window Manager"
-msgstr "Default Window Manager"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:14
-msgid "Delete"
-msgstr "Delete"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:15
-msgid "E_xec Flag:"
-msgstr "E_xec Flag:"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:16
-msgid "Edit..."
-msgstr "Edit..."
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:17
-msgid "Mail Reader"
-msgstr "Mail Reader"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:19
-msgid "Select the window manager you want.  You will need to hit apply, wave the magic wand, and do a magic dance for it to work."
-msgstr "Select the window manager you want.  You will need to hit apply, wave the magic wand, and do a magic dance for it to work."
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:20
-msgid "Start in T_erminal"
-msgstr "Start in T_erminal"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:21
-msgid "Terminal"
-msgstr "Terminal"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:22
-msgid "Text Editor"
-msgstr "Text Editor"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:23
-msgid "This application can open _URIs"
-msgstr "This application can open _URIs"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:24
-msgid "This application can open _multiple files"
-msgstr "This application can open _multiple files"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:25
-msgid "This application needs to be run in a _shell"
-msgstr "This application needs to be run in a _shell"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:26
-msgid "Understands _Netscape Remote Control"
-msgstr "Understands _Netscape Remote Control"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:27
-msgid "Use this _editor to open text files in the file manager"
-msgstr "Use this _editor to open text files in the file manager"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:28
-msgid "Web Browser"
-msgstr "Web Browser"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:29
-msgid "Window Manager"
-msgstr "Window Manager"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:30
-#: capplets/file-types/file-types-properties.glade.h:23
-msgid "_Name:"
-msgstr "_Name:"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:31
-msgid "_Properties..."
-msgstr "_Properties..."
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:32
-msgid "_Select a Mail Reader:"
-msgstr "_Select a Mail Reader:"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:33
-msgid "_Select a Terminal:"
-msgstr "_Select a Terminal:"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:34
-msgid "_Select a Web Browser:"
-msgstr "_Select a Web Browser:"
-
-#: capplets/default-applications/gnome-default-applications-properties.glade.h:35
-msgid "_Select an Editor:"
-msgstr "_Select an Editor:"
-
-#: capplets/display/display-properties.desktop.in.h:1
+#: capplets/display/display-properties.desktop.in.in.h:1
 msgid "Change screen resolution"
 msgstr "Change screen resolution"
 
-#: capplets/display/display-properties.desktop.in.h:2
+#: capplets/display/display-properties.desktop.in.in.h:2
 msgid "Screen Resolution"
 msgstr "Screen Resolution"
 
@@ -905,7 +896,7 @@ msgid "Are you sure you want to permanently delete this entry?"
 msgstr "Are you sure you want to permanently delete this entry?"
 
 #: capplets/file-types/file-types-capplet.c:210
-#: vfs-methods/themus/themus-properties-view.c:167
+#: vfs-methods/themus/themus-properties-view.c:126
 msgid "Description"
 msgstr "Description"
 
@@ -913,14 +904,22 @@ msgstr "Description"
 msgid "Extensions"
 msgstr "Extensions"
 
-#: capplets/file-types/file-types-capplet.desktop.in.h:1
+#: capplets/file-types/file-types-capplet.desktop.in.in.h:1
 #: capplets/file-types/file-types-properties.glade.h:11
 msgid "File Types and Programs"
 msgstr "File Types and Programs"
 
-#: capplets/file-types/file-types-capplet.desktop.in.h:2
+#: capplets/file-types/file-types-capplet.desktop.in.in.h:2
 msgid "Specify which programs are used to open or view each file type"
 msgstr "Specify which programs are used to open or view each file type"
+
+#: capplets/file-types/file-types.desktop.in.in.h:1
+msgid "File types and programs"
+msgstr "File types and programs"
+
+#: capplets/file-types/file-types.desktop.in.in.h:2
+msgid "Specify which programs are used to open or view each type of file"
+msgstr "Specify which programs are used to open or view each type of file"
 
 #: capplets/file-types/file-types-properties.glade.h:2
 msgid "Actions"
@@ -1019,14 +1018,6 @@ msgstr "_Remove"
 #: capplets/file-types/file-types-properties.glade.h:27
 msgid "_Viewer component:"
 msgstr "_Viewer component:"
-
-#: capplets/file-types/file-types.desktop.in.h:1
-msgid "File types and programs"
-msgstr "File types and programs"
-
-#: capplets/file-types/file-types.desktop.in.h:2
-msgid "Specify which programs are used to open or view each type of file"
-msgstr "Specify which programs are used to open or view each type of file"
 
 #: capplets/file-types/mime-category-edit-dialog.c:138
 msgid "Edit file category"
@@ -1204,11 +1195,11 @@ msgstr "Electronic mail transmission"
 msgid "GNOME documentation"
 msgstr "GNOME documentation"
 
-#: capplets/font/font-properties.desktop.in.h:1
+#: capplets/font/font-properties.desktop.in.in.h:1
 msgid "Font"
 msgstr "Font"
 
-#: capplets/font/font-properties.desktop.in.h:2
+#: capplets/font/font-properties.desktop.in.in.h:2
 msgid "Select fonts for the desktop"
 msgstr "Select fonts for the desktop"
 
@@ -1407,7 +1398,7 @@ msgid "Desktop"
 msgstr "Desktop"
 
 #: capplets/keybindings/gnome-keybinding-properties.c:559
-#: capplets/sound/gnome-settings-sound.desktop.in.h:2
+#: capplets/sound/gnome-settings-sound.desktop.in.in.h:2
 msgid "Sound"
 msgstr "Sound"
 
@@ -1443,7 +1434,7 @@ msgid "Shortcut"
 msgstr "Shortcut"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:1
-#: capplets/keybindings/keybinding.desktop.in.h:2
+#: capplets/keybindings/keybinding.desktop.in.in.h:2
 msgid "Keyboard Shortcuts"
 msgstr "Keyboard Shortcuts"
 
@@ -1451,22 +1442,9 @@ msgstr "Keyboard Shortcuts"
 msgid "To edit a shortcut key, click on the corresponding row and type a new accelerator, or press backspace to clear."
 msgstr "To edit a shortcut key, click on the corresponding row and type a new accelerator, or press backspace to clear."
 
-#: capplets/keybindings/keybinding.desktop.in.h:1
+#: capplets/keybindings/keybinding.desktop.in.in.h:1
 msgid "Assign shortcut keys to commands"
 msgstr "Assign shortcut keys to commands"
-
-#: capplets/keyboard/gnome-keyboard-properties-xkb.c:69
-#: capplets/keyboard/gnome-keyboard-properties-xkb.c:95
-msgid "Unknown"
-msgstr "Unknown"
-
-#: capplets/keyboard/gnome-keyboard-properties-xkbmc.c:80
-msgid "Models"
-msgstr "Models"
-
-#: capplets/keyboard/gnome-keyboard-properties-xkbpv.c:66
-msgid "Keyboard layout preview"
-msgstr "Keyboard layout preview"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:106
 #, c-format
@@ -1628,9 +1606,30 @@ msgstr "_Work interval lasts:"
 msgid "minutes"
 msgstr "minutes"
 
-#: capplets/keyboard/keyboard.desktop.in.h:2
+#: capplets/keyboard/gnome-keyboard-properties-xkb.c:69
+#: capplets/keyboard/gnome-keyboard-properties-xkb.c:95
+msgid "Unknown"
+msgstr "Unknown"
+
+#: capplets/keyboard/gnome-keyboard-properties-xkbmc.c:80
+msgid "Models"
+msgstr "Models"
+
+#: capplets/keyboard/gnome-keyboard-properties-xkbpv.c:66
+msgid "Keyboard layout preview"
+msgstr "Keyboard layout preview"
+
+#: capplets/keyboard/keyboard.desktop.in.in.h:2
 msgid "Set your keyboard preferences"
 msgstr "Set your keyboard preferences"
+
+#: capplets/localization/localization.desktop.in.in.h:1
+msgid "Language and Culture"
+msgstr "Language and Culture"
+
+#: capplets/localization/localization.desktop.in.in.h:2
+msgid "Set your language and culture preferences"
+msgstr "Set your language and culture preferences"
 
 #: capplets/mouse/gnome-mouse-properties.c:496
 msgid "Unknown Cursor"
@@ -1792,19 +1791,19 @@ msgstr "_Threshold:"
 msgid "_Timeout:"
 msgstr "_Timeout:"
 
-#: capplets/mouse/gnome-settings-mouse.desktop.in.h:1
+#: capplets/mouse/gnome-settings-mouse.desktop.in.in.h:1
 msgid "Mouse"
 msgstr "Mouse"
 
-#: capplets/mouse/gnome-settings-mouse.desktop.in.h:2
+#: capplets/mouse/gnome-settings-mouse.desktop.in.in.h:2
 msgid "Set your mouse preferences"
 msgstr "Set your mouse preferences"
 
-#: capplets/network/gnome-network-preferences.desktop.in.h:1
+#: capplets/network/gnome-network-preferences.desktop.in.in.h:1
 msgid "Network Proxy"
 msgstr "Network Proxy"
 
-#: capplets/network/gnome-network-preferences.desktop.in.h:2
+#: capplets/network/gnome-network-preferences.desktop.in.in.h:2
 msgid "Network proxy preferences"
 msgstr "Network proxy preferences"
 
@@ -1849,8 +1848,8 @@ msgid "H_TTP proxy:"
 msgstr "H_TTP proxy:"
 
 #: capplets/network/gnome-network-preferences.glade.h:12
-msgid "Network Proxy Configuration"
-msgstr "Network Proxy Configuration"
+msgid "Network Proxy Preferences"
+msgstr "Network Proxy Preferences"
 
 #: capplets/network/gnome-network-preferences.glade.h:13
 msgid "Port:"
@@ -1888,7 +1887,7 @@ msgstr "_Password:"
 msgid "_Secure HTTP proxy:"
 msgstr "_Secure HTTP proxy:"
 
-#: capplets/sound/gnome-settings-sound.desktop.in.h:1
+#: capplets/sound/gnome-settings-sound.desktop.in.in.h:1
 msgid "Enable sound and associate sounds with events"
 msgstr "Enable sound and associate sounds with events"
 
@@ -1986,12 +1985,12 @@ msgstr "Theme name must be present"
 msgid "The theme already exists. Would you like to replace it?"
 msgstr "The theme already exists. Would you like to replace it?"
 
-#: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
 msgid "Select themes for various parts of the desktop"
 msgstr "Select themes for various parts of the desktop"
 
-#: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:1
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
+#: vfs-methods/themus/themus-properties-main.c:92
 msgid "Theme"
 msgstr "Theme"
 
@@ -2103,11 +2102,11 @@ msgstr "_Theme name:"
 msgid "theme selection tree"
 msgstr "theme selection tree"
 
-#: capplets/ui-properties/gnome-ui-properties.desktop.in.h:1
+#: capplets/ui-properties/gnome-ui-properties.desktop.in.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
 msgstr "Customise the appearance of toolbars and menubars in applications"
 
-#: capplets/ui-properties/gnome-ui-properties.desktop.in.h:2
+#: capplets/ui-properties/gnome-ui-properties.desktop.in.in.h:2
 msgid "Menus & Toolbars"
 msgstr "Menus & Toolbars"
 
@@ -2203,6 +2202,14 @@ msgstr "_Quit"
 msgid "_Save"
 msgstr "_Save"
 
+#: capplets/url-properties/url-properties.desktop.in.in.h:1
+msgid "Configure which programs are used to display URLs"
+msgstr "Configure which programs are used to display URLs"
+
+#: capplets/url-properties/url-properties.desktop.in.in.h:2
+msgid "URL Handlers"
+msgstr "URL Handlers"
+
 #: capplets/windows/gnome-window-properties.c:388
 #, c-format
 msgid ""
@@ -2270,13 +2277,31 @@ msgstr "_Raise selected windows after an interval"
 msgid "_Select windows when the mouse moves over them"
 msgstr "_Select windows when the mouse moves over them"
 
-#: capplets/windows/window-properties.desktop.in.h:1
+#: capplets/windows/window-properties.desktop.in.in.h:1
 msgid "Window Properties"
 msgstr "Window Properties"
 
-#: capplets/windows/window-properties.desktop.in.h:2
+#: capplets/windows/window-properties.desktop.in.in.h:2
 msgid "Windows"
 msgstr "Windows"
+
+#: control-center/control-center.c:1005
+#: control-center/gnomecc.desktop.in.in.h:1
+msgid "GNOME Control Center"
+msgstr "GNOME Control Centre"
+
+#: control-center/control-center.c:1121
+msgid "Desktop Preferences"
+msgstr "Desktop Preferences"
+
+#: control-center/control-center-categories.c:248
+msgid "Others"
+msgstr "Others"
+
+#: control-center/gnomecc.desktop.in.in.h:2
+#: vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:2
+msgid "The GNOME configuration tool"
+msgstr "The GNOME configuration tool"
 
 #: control-center/GNOME_ControlCenter.server.in.h:1
 msgid "Control Center"
@@ -2305,24 +2330,6 @@ msgstr "Control Centre view factory"
 #: control-center/GNOME_ControlCenter.server.in.h:7
 msgid "View as Control Center"
 msgstr "View as Control Centre"
-
-#: control-center/control-center-categories.c:248
-msgid "Others"
-msgstr "Others"
-
-#: control-center/control-center.c:1005
-#: control-center/gnomecc.desktop.in.h:1
-msgid "GNOME Control Center"
-msgstr "GNOME Control Centre"
-
-#: control-center/control-center.c:1121
-msgid "Desktop Preferences"
-msgstr "Desktop Preferences"
-
-#: control-center/gnomecc.desktop.in.h:2
-#: vfs-methods/fontilus/gnome-font-viewer.desktop.in.h:2
-msgid "The GNOME configuration tool"
-msgstr "The GNOME configuration tool"
 
 #: gnome-settings-daemon/actions/acme.glade.h:1
 msgid "Volume"
@@ -2416,7 +2423,7 @@ msgstr ""
 "Error while trying to run (%s)\n"
 "which is linked to the key (%s)"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:73
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:91
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2441,7 +2448,7 @@ msgstr ""
 "- The result of <b>xprop -root | grep XKB</b>\n"
 "- The result of <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b>"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:83
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:101
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2451,19 +2458,19 @@ msgstr ""
 "There are known problems with complex XKB configurations.\n"
 "Try using simpler configuration or a newer version of the XFree software."
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:172
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:190
 msgid "The X system keyboard settings differ from your current GNOME keyboard settings.  Which set would you like to use?"
 msgstr "The X system keyboard settings differ from your current GNOME keyboard settings.  Which set would you like to use?"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:175
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:193
 msgid "Use X settings"
 msgstr "Use X settings"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:177
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:195
 msgid "Use GNOME settings"
 msgstr "Use GNOME settings"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:231
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:249
 #, c-format
 msgid "You have a keyboard remapping file (%s) in your home directory whose contents will now be ignored. You can use the keyboard preferences to restore them."
 msgstr "You have a keyboard remapping file (%s) in your home directory whose contents will now be ignored. You can use the keyboard preferences to restore them."
@@ -2926,48 +2933,13 @@ msgstr "The typing monitor is already running."
 msgid "The typing monitor uses the notification area to display information. You don't seem to have a notification area on your panel. You can add it by right-clicking on your panel and choose 'Add to panel -> Utilities -> Notification area'."
 msgstr "The typing monitor uses the notification area to display information. You don't seem to have a notification area on your panel. You can add it by right-clicking on your panel and choose 'Add to panel -> Utilities -> Notification area'."
 
-#: vfs-methods/fontilus/font-view.c:102
-msgid "The quick brown fox jumps over the lazy dog. 0123456789"
-msgstr "The quick brown fox jumps over the lazy dog. 0123456789"
+#: vfs-methods/fontilus/fontilus-context-menu.c:132
+msgid "Set as Application Font"
+msgstr "Set as Application Font"
 
-#: vfs-methods/fontilus/font-view.c:253
-msgid "Name:"
-msgstr "Name:"
-
-#: vfs-methods/fontilus/font-view.c:256
-msgid "Style:"
-msgstr "Style:"
-
-#: vfs-methods/fontilus/font-view.c:265
-msgid "Type:"
-msgstr "Type:"
-
-#: vfs-methods/fontilus/font-view.c:272
-msgid "Size:"
-msgstr "Size:"
-
-#: vfs-methods/fontilus/font-view.c:316
-#: vfs-methods/fontilus/font-view.c:329
-msgid "Version:"
-msgstr "Version:"
-
-#: vfs-methods/fontilus/font-view.c:320
-#: vfs-methods/fontilus/font-view.c:331
-msgid "Copyright:"
-msgstr "Copyright:"
-
-#: vfs-methods/fontilus/font-view.c:324
-msgid "Description:"
-msgstr "Description:"
-
-#: vfs-methods/fontilus/font-view.c:394
-#, c-format
-msgid "usage: %s fontfile\n"
-msgstr "usage: %s fontfile\n"
-
-#: vfs-methods/fontilus/fontilus-context-menu.c:131
-msgid "Font context menu items"
-msgstr "Font context menu items"
+#: vfs-methods/fontilus/fontilus-context-menu.c:133
+msgid "Sets the default application font"
+msgstr "Sets the default application font"
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:1
 msgid "If set to true, then OpenType fonts will be thumbnailed."
@@ -3033,37 +3005,48 @@ msgstr "Whether to thumbnail TrueType fonts"
 msgid "Whether to thumbnail Type1 fonts"
 msgstr "Whether to thumbnail Type1 fonts"
 
-#: vfs-methods/fontilus/fontilus.server.in.in.h:1
-msgid "Factory for the fontilus context menu"
-msgstr "Factory for the fontilus context menu"
+#: vfs-methods/fontilus/font-view.c:125
+msgid "The quick brown fox jumps over the lazy dog. 0123456789"
+msgstr "The quick brown fox jumps over the lazy dog. 0123456789"
 
-#: vfs-methods/fontilus/fontilus.server.in.in.h:2
-msgid "Fontilus context menu"
-msgstr "Fontilus context menu"
+#: vfs-methods/fontilus/font-view.c:285
+msgid "Name:"
+msgstr "Name:"
 
-#: vfs-methods/fontilus/fontilus.server.in.in.h:3
-msgid "Fontilus context menu factory"
-msgstr "Fontilus context menu factory"
+#: vfs-methods/fontilus/font-view.c:288
+msgid "Style:"
+msgstr "Style:"
 
-#: vfs-methods/fontilus/fontilus.server.in.in.h:4
-msgid "Nautilus context menu entries for fonts"
-msgstr "Nautilus context menu entries for fonts"
+#: vfs-methods/fontilus/font-view.c:297
+msgid "Type:"
+msgstr "Type:"
 
-#: vfs-methods/fontilus/fontilus.server.in.in.h:5
-msgid "Set as Application Font"
-msgstr "Set as Application Font"
+#: vfs-methods/fontilus/font-view.c:304
+msgid "Size:"
+msgstr "Size:"
 
-#: vfs-methods/fontilus/gnome-font-viewer.desktop.in.h:1
+#: vfs-methods/fontilus/font-view.c:348
+#: vfs-methods/fontilus/font-view.c:361
+msgid "Version:"
+msgstr "Version:"
+
+#: vfs-methods/fontilus/font-view.c:352
+#: vfs-methods/fontilus/font-view.c:363
+msgid "Copyright:"
+msgstr "Copyright:"
+
+#: vfs-methods/fontilus/font-view.c:356
+msgid "Description:"
+msgstr "Description:"
+
+#: vfs-methods/fontilus/font-view.c:417
+#, c-format
+msgid "usage: %s fontfile\n"
+msgstr "usage: %s fontfile\n"
+
+#: vfs-methods/fontilus/gnome-font-viewer.desktop.in.in.h:1
 msgid "GNOME Font Viewer"
 msgstr "GNOME Font Viewer"
-
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
-msgid "Theme Properties content view component"
-msgstr "Theme Properties content view component"
-
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
-msgid "Themus Theme Properties view"
-msgstr "Themus Theme Properties view"
 
 #: vfs-methods/themus/apply-font.glade.h:1
 msgid " "
@@ -3089,26 +3072,17 @@ msgstr "_Apply font"
 msgid "Themes"
 msgstr "Themes"
 
-#: vfs-methods/themus/themus-properties-view.c:172
+#: vfs-methods/themus/themus-properties-view.c:133
 msgid "Control theme"
 msgstr "Control theme"
 
-#: vfs-methods/themus/themus-properties-view.c:176
+#: vfs-methods/themus/themus-properties-view.c:139
 msgid "Window border theme"
 msgstr "Window border theme"
 
-#: vfs-methods/themus/themus-properties-view.c:180
+#: vfs-methods/themus/themus-properties-view.c:145
 msgid "Icon theme"
 msgstr "Icon theme"
-
-#: vfs-methods/themus/themus-properties-view.c:219
-msgid "URI currently displayed"
-msgstr "URI currently displayed"
-
-#. translators: you may want to include non-western chars here
-#: vfs-methods/themus/themus-theme-applier.c:83
-msgid "ABCDEFG"
-msgstr "ABCDEFG"
 
 #: vfs-methods/themus/themus.schemas.in.h:1
 msgid "If set to true, then installed themes will be thumbnailed."
@@ -3141,4 +3115,17 @@ msgstr "Whether to thumbnail installed themes"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Whether to thumbnail themes"
+
+#. translators: you may want to include non-western chars here
+#: vfs-methods/themus/themus-theme-applier.c:78
+msgid "ABCDEFG"
+msgstr "ABCDEFG"
+
+#: vfs-methods/themus/themus-theme-applier.desktop.in.in.h:1
+msgid "Apply theme"
+msgstr "Apply theme"
+
+#: vfs-methods/themus/themus-theme-applier.desktop.in.in.h:2
+msgid "Sets the default theme"
+msgstr "Sets the default theme"
 
