@@ -166,7 +166,9 @@ setup_dialog (GladeXML       *dialog,
 	gconf_peditor_new_boolean
 		(changeset, "/desktop/gnome/typing_break/allow_postpone", WID ("break_postponement_toggle"), NULL);
 	g_signal_connect (G_OBJECT (WID ("keyboard_dialog")), "response", (GCallback) dialog_response, changeset);
-        
+	
+	gtk_label_set_use_markup (GTK_LABEL (GTK_BIN (WID ("break_enabled_toggle"))->child), TRUE);
+	
         setup_xkb_tabs(dialog,changeset);
 }
 

@@ -1,3 +1,11 @@
+2004-01-11  Richard Hult  <richard@imendio.com>
+
+	* gnome-keyboard-properties.glade:
+	* gnome-keyboard-properties.c (setup_dialog): Enable markup for
+	the break enabled toggle with code instead of with a custom child
+	for the toggle since that doesn't work with new libglade. Fixes
+	bug #131122.
+
 2003-12-30  Jody Goldberg <jody@gnome.org>
 
 	* Release 2.5.1.1
