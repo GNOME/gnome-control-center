@@ -36,6 +36,43 @@
 #ifdef HAVE_X11_EXTENSIONS_XF86MISC_H
 #  include <X11/extensions/xf86misc.h>
 #endif
+#ifdef HAVE_X11_EXTENSIONS_XKB_H
+#include <X11/XKBlib.h>
+#endif
+
+#ifdef HAVE_X11_EXTENSIONS_XF86MISC_H
+static gboolean
+xfree86_set_keyboard_autorepeat_rate (int delay, int rate)
+{
+	gboolean res = FALSE;
+	int event_base_return, error_base_return;
+
+	if (XF86MiscQueryExtension (GDK_DISPLAY (),
+				    &event_base_return,
+				    &error_base_return) == True)
+	{
+		/* load the current settings */
+		XF86MiscKbdSettings kbdsettings;
+		XF86MiscGetKbdSettings (GDK_DISPLAY (), &kbdsettings);
+
+		/* assign the new values */
+		kbdsettings.delay = delay;
+		kbdsettings.rate = rate;
+		XF86MiscSetKbdSettings (GDK_DISPLAY (), &kbdsettings);
+		res = TRUE;
+	}
+
+	return res;
+}
+#endif /* HAVE_X11_EXTENSIONS_XF86MISC_H */
+#ifdef HAVE_X11_EXTENSIONS_XKB_H
+static gboolean
+xkb_set_keyboard_autorepeat_rate (int delay, int rate)
+{
+	return XkbSetAutoRepeatRate (GDK_DISPLAY (), XkbUseCoreKbd,
+				     delay, 1000/rate);
+}
+#endif
 
 static void
 apply_settings (void)
@@ -47,7 +84,6 @@ apply_settings (void)
 	int click_volume, bell_volume, bell_pitch, bell_duration;
 
 	XKeyboardControl kbdcontrol;
-        int event_base_return, error_base_return;
 
 	client = gconf_client_get_default ();
 
@@ -62,27 +98,24 @@ apply_settings (void)
 
 	gdk_error_trap_push ();
         if (repeat) {
-		XAutoRepeatOn (GDK_DISPLAY ());
-#ifdef HAVE_X11_EXTENSIONS_XF86MISC_H
-		if (XF86MiscQueryExtension (GDK_DISPLAY (),
-					    &event_base_return,
-					    &error_base_return) == True)
-		{
-			/* load the current settings */
-			XF86MiscKbdSettings kbdsettings;
-                        XF86MiscGetKbdSettings (GDK_DISPLAY (), &kbdsettings);
+		gboolean rate_set = FALSE;
 
-			/* assign the new values */
-                        kbdsettings.rate = rate;
-                        kbdsettings.delay = delay;
-                        XF86MiscSetKbdSettings (GDK_DISPLAY (), &kbdsettings);
-                } else {
-                        XAutoRepeatOff (GDK_DISPLAY ());
-                }
+		XAutoRepeatOn (GDK_DISPLAY ());
+		/* Use XKB in preference */
+#if defined (HAVE_X11_EXTENSIONS_XKB_H)
+		rate_set = xkb_set_keyboard_autorepeat_rate (delay, rate);
 #endif
-	} else {
+#ifdef HAVE_X11_EXTENSIONS_XF86MISC_H
+		if (!rate_set)
+			rate_set = xfree86_set_keyboard_autorepeat_rate (delay, rate);
+#endif
+		if (!rate_set) {
+			g_warning ("Neither XKeyboard not Xfree86's keyboard extensions are available,\n"
+				   "no way to support keyboard autorepeat settings");
+			XAutoRepeatOff (GDK_DISPLAY ());
+		}
+	} else
 		XAutoRepeatOff (GDK_DISPLAY ());
-	}
 
 	/* as percentage from 0..100 inclusive */
 	if (click_volume < 0)
