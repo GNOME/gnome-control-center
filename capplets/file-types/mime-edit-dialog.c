@@ -409,7 +409,7 @@ populate_component_list (MimeEditDialog *dialog)
 	GtkWidget         *menu_item;
 	GtkOptionMenu     *component_select;
 	gchar             *component_name;
-	Bonobo_ServerInfo *info;
+	Bonobo_ServerInfo *info, *default_component;
 	int                found_idx = -1, i;
 
 	menu = GTK_MENU (gtk_menu_new ());
@@ -419,10 +419,14 @@ populate_component_list (MimeEditDialog *dialog)
 	/* FIXME: We are leaking the whole list here, but this will be the case until I know of an easy way to duplicate
 	 * Bonobo_ServerInfo structures */
 
+	default_component = dialog->p->info->default_component;
 	for (tmp = component_list, i = 0; tmp != NULL; tmp = tmp->next, i++) {
 		info = tmp->data;
 
-		if (!strcmp (info->iid, dialog->p->info->default_component->iid))
+		g_return_if_fail (info != NULL);
+
+		if (default_component != NULL &&
+		    !strcmp (info->iid, default_component->iid))
 			found_idx = i;
 
 		component_name = mime_type_get_pretty_name_for_server (info);
