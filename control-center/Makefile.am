@@ -1,4 +1,4 @@
-appicondir = $(datadir)/control-center/icons
+appicondir = $(datadir)/control-center-2/icons
 appicon_DATA = control-center.png
 
 splashdir = $(datadir)/pixmaps/gnomecc
@@ -13,7 +13,7 @@ sys_in_files = gnomecc.desktop.in
 sys_DATA = $(sys_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
-gladedir = $(datadir)/control-center/interfaces
+gladedir = $(datadir)/control-center-2/interfaces
 glade_DATA = \
 	gnomecc.glade	\
 	gnome-lockscreen.png	\
@@ -24,9 +24,9 @@ glade_DATA = \
 
 INCLUDES = 							\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 		\
-	-DGLADEDIR=\""$(datadir)/control-center/interfaces"\"	\
+	-DGLADEDIR=\""$(datadir)/control-center-2/interfaces"\"	\
 	-DVERSION=\""$(VERSION)"\"				\
-	-DSETTINGS_DIR=\""$(datadir)/control-center/capplets"\"	\
+	-DSETTINGS_DIR=\""$(datadir)/control-center-2/capplets"\"	\
 	-DPIXMAPS_DIR=\""$(appicondir)"\"			\
 	-DART_DIR=\""$(splashdir)"\"				\
 	-DGNOME_SBINDIR=\""$(sbindir)"\"			\
@@ -50,7 +50,7 @@ gnome2_control_center_LDADD = \
 EXTRA_DIST = gnomecc.desktop.in $(appicon_DATA) $(splash_DATA) $(glade_DATA) Gnome.directory.in.in
 
 paneldir        = $(datadir)/gnome/apps/Settings
-ccenterdir      = $(datadir)/control-center/capplets
+ccenterdir      = $(datadir)/control-center-2/capplets
 ccenter_DATA = Gnome.directory
 groups = Gnome
 groups_files = $(groups:=.directory)
@@ -64,8 +64,8 @@ $(groups_files): %.directory: %.directory.in
 	$(top_builddir)/intltool-merge -d $(top_srcdir)/po $< $@
 
 install-data-local:
-	$(mkinstalldirs) $(DESTDIR)$(datadir)/control-center/capplets
-	$(INSTALL_DATA) Gnome.directory $(DESTDIR)$(datadir)/control-center/capplets/.directory
+	$(mkinstalldirs) $(DESTDIR)$(datadir)/control-center-2/capplets
+	$(INSTALL_DATA) Gnome.directory $(DESTDIR)$(datadir)/control-center-2/capplets/.directory
 
 
 

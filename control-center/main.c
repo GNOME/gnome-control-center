@@ -44,7 +44,9 @@ main (int argc, char **argv)
         textdomain (PACKAGE);
 
 	gnome_program_init ("control-center", VERSION, LIBGNOMEUI_MODULE,
-			    argc, argv, NULL);
+			    argc, argv,
+			    GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
+			    NULL);
 
 	gconf_init (argc, argv, NULL);
 
