@@ -43,7 +43,7 @@ static xmlNodePtr subtract_xml_node  (xmlNodePtr node1,
 static gboolean compare_xml_nodes    (xmlNodePtr node1, xmlNodePtr node2);
 
 /**
- * location_load_rollback_data
+ * location_client_load_rollback_data
  * @location:
  * @date:
  * @steps:
@@ -69,7 +69,6 @@ location_client_load_rollback_data (ConfigArchiver_Location  location,
 	ConfigArchiver_Location parent = CORBA_OBJECT_NIL;
 	CORBA_Environment my_ev;
 
-
 	g_return_val_if_fail (location != CORBA_OBJECT_NIL, NULL);
 
 	if (opt_ev == NULL) {
@@ -85,7 +84,7 @@ location_client_load_rollback_data (ConfigArchiver_Location  location,
 	filename = ConfigArchiver_Location_getRollbackFilename
 		(location, time_g, steps, backend_id, parent_chain, opt_ev);
 
-	if (filename != NULL)
+	if (!BONOBO_EX (opt_ev) && filename != NULL)
 		doc = xmlParseFile (filename);
 	else if (parent_chain)
 		type = ConfigArchiver_Location_contains (location, backend_id, opt_ev);

@@ -36,7 +36,6 @@
 #define IS_ARCHIVE(obj)       GTK_CHECK_TYPE (obj, archive_get_type ())
 
 typedef struct _ArchiveClass ArchiveClass;
-typedef void (*LocationCB) (Archive *, Location *, gpointer);
 
 struct _Archive
 {
@@ -89,9 +88,7 @@ gboolean      archive_is_global               (Archive                       *ar
 
 BackendList  *archive_get_backend_list        (Archive                       *archive);
 
-void          archive_foreach_child_location  (Archive                       *archive,
-					       LocationCB                     callback,
-					       Location                      *parent,
-					       gpointer                       data);
+GList        *archive_get_child_locations     (Archive                       *archive,
+					       Location                      *parent);
 
 #endif /* __ARCHIVE */

@@ -970,8 +970,6 @@ dump_log (ConfigLog *config_log)
 	GList *first;
 	FILE  *input, *output;
 
-	DEBUG_MSG ("Enter");
-
 	g_return_if_fail (config_log != NULL);
 	g_return_if_fail (IS_CONFIG_LOG (config_log));
 	g_return_if_fail (config_log->p->location != NULL);
@@ -1010,8 +1008,6 @@ dump_log (ConfigLog *config_log)
 
 	if (config_log->p->filename)
 		rename (filename_out, config_log->p->filename);
-
-	DEBUG_MSG ("Exit");
 }
 
 /* Return TRUE if the config log has entries made by actual configuration

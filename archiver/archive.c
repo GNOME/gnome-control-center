@@ -35,16 +35,6 @@
 #include "archive.h"
 #include "util.h"
 
-typedef struct _foreach_t foreach_t;
-
-struct _foreach_t 
-{
-	Archive     *archive;
-	LocationCB   callback;
-	Location    *parent;
-	gpointer     user_data;
-};
-
 static GtkObjectClass *parent_class;
 
 enum {
@@ -77,7 +67,16 @@ impl_ConfigArchiver_Archive_getLocation (PortableServer_Servant  servant,
 					 const CORBA_char       *locid,
 					 CORBA_Environment      *ev) 
 {
-	return CORBA_Object_duplicate (BONOBO_OBJREF (archive_get_location (ARCHIVE_FROM_SERVANT (servant), locid)), ev);
+	Location *loc;
+
+	loc = archive_get_location (ARCHIVE_FROM_SERVANT (servant), locid);
+
+	if (loc == NULL) {
+		bonobo_exception_set (ev, ex_ConfigArchiver_Archive_LocationNotFound);
+		return CORBA_OBJECT_NIL;
+	} else {
+		return CORBA_Object_duplicate (BONOBO_OBJREF (loc), ev);
+	}
 }
 
 static ConfigArchiver_Location
@@ -90,15 +89,9 @@ impl_ConfigArchiver_Archive_createLocation (PortableServer_Servant         serva
 	Location *loc;
 
 	loc = archive_create_location (ARCHIVE_FROM_SERVANT (servant), locid, label,
-				       LOCATION (bonobo_object_from_servant (parent_ref)));
+				       LOCATION (bonobo_object_from_servant (parent_ref->servant)));
 
 	return bonobo_object_dup_ref (BONOBO_OBJREF (loc), ev);
-}
-
-static void
-build_list_cb (Archive *archive, Location *location, GList **list) 
-{
-	*list = g_list_prepend (*list, bonobo_object_dup_ref (BONOBO_OBJREF (location), NULL));
 }
 
 static ConfigArchiver_LocationSeq *
@@ -109,7 +102,7 @@ impl_ConfigArchiver_Archive_getChildLocations (PortableServer_Servant   servant,
 	ConfigArchiver_LocationSeq *ret;
 	Archive *archive;
 	Location *location;
-	GList *locs = NULL, *tmp;
+	GList *locs, *tmp;
 	guint i = 0;
 
 	archive = ARCHIVE_FROM_SERVANT (servant);
@@ -119,14 +112,14 @@ impl_ConfigArchiver_Archive_getChildLocations (PortableServer_Servant   servant,
 	else
 		location = LOCATION (bonobo_object_from_servant (location_ref->servant));
 
-	archive_foreach_child_location (archive, (LocationCB) build_list_cb, location, &locs);
+	locs = archive_get_child_locations (archive, location);
 
 	ret = ConfigArchiver_LocationSeq__alloc ();
 	ret->_length = g_list_length (locs);
 	ret->_buffer = CORBA_sequence_ConfigArchiver_Location_allocbuf (ret->_length);
 
 	for (tmp = locs; tmp != NULL; tmp = tmp->next)
-		ret->_buffer[i++] = tmp->data;
+		ret->_buffer[i++] = CORBA_Object_duplicate (BONOBO_OBJREF (tmp->data), ev);
 
 	g_list_free (locs);
 	return ret;
@@ -171,7 +164,7 @@ impl_ConfigArchiver_Archive__set_currentLocation (PortableServer_Servant   serva
 	location = LOCATION (bonobo_object_from_servant (location_ref->servant));
 
 	if (location == NULL)
-		/* bonobo_exception_set (ev, ex_ConfigArchiver_Archive_LocationNotFound) */;
+		bonobo_exception_set (ev, ex_ConfigArchiver_Archive_LocationNotFound);
 	else
 		archive_set_current_location (archive, location);
 }
@@ -398,8 +391,6 @@ archive_destroy (GtkObject *object)
 		bonobo_object_unref (BONOBO_OBJECT (archive->backend_list));
 
 	GTK_OBJECT_CLASS (parent_class)->destroy (GTK_OBJECT (archive));
-
-	DEBUG_MSG ("Exit");
 }
 
 /**
@@ -415,14 +406,12 @@ Location *
 archive_get_location (Archive       *archive,
 		      const gchar   *locid) 
 {
-	Location *loc_obj;
+	BonoboObject *loc_obj;
 	gchar *tmp;
 
 	g_return_val_if_fail (archive != NULL, NULL);
 	g_return_val_if_fail (IS_ARCHIVE (archive), NULL);
 	g_return_val_if_fail (locid != NULL, NULL);
-
-	DEBUG_MSG ("Enter: %s", locid);
 
 	/* Stupid borken glib... */
 	tmp = g_strdup (locid);
@@ -430,7 +419,7 @@ archive_get_location (Archive       *archive,
 	g_free (tmp);
 
 	if (loc_obj == NULL) {
-		loc_obj = LOCATION (location_open (archive, locid));
+		loc_obj = location_open (archive, locid);
 
 		if (loc_obj == NULL)
 			return NULL;
@@ -438,10 +427,10 @@ archive_get_location (Archive       *archive,
 			g_tree_insert (archive->locations, 
 				       g_strdup (locid), loc_obj);
 	} else {
-		bonobo_object_ref (BONOBO_OBJECT (loc_obj));
+		bonobo_object_ref (loc_obj);
 	}
 
-	return loc_obj;
+	return LOCATION (loc_obj);
 }
 
 /**
@@ -621,17 +610,16 @@ archive_get_current_location_id (Archive *archive)
 				archive_get_location (archive, archive->current_location_id);
 
 			if (current_location == NULL) {
-				loc = LOCATION
-					(location_new (archive,
-						       archive->current_location_id,
-						       _("Default location"),
-						       NULL));
+				loc = archive_create_location (archive, archive->current_location_id,
+							       _("Default location"), NULL);
 				if (archive->is_global &&
 				    location_store_full_snapshot (loc) < 0)
 				{
 					location_delete (loc);
 					return NULL;
 				}
+
+				bonobo_object_unref (BONOBO_OBJECT (loc));
 			} else {
 				bonobo_object_unref (BONOBO_OBJECT (current_location));
 			}
@@ -695,17 +683,6 @@ archive_get_backend_list (Archive *archive)
 	return archive->backend_list;
 }
 
-static gint
-foreach_cb (gchar *key, Location *value, foreach_t *data) 
-{
-	if (location_get_parent (value) == data->parent)
-		data->callback (data->archive, value, data->user_data);
-
-	bonobo_object_unref (BONOBO_OBJECT (value));
-
-	return 0;
-}
-
 /**
  * archive_foreach_child_location:
  * @archive:
@@ -719,26 +696,46 @@ foreach_cb (gchar *key, Location *value, foreach_t *data)
  * NULL. Terminate the iteration if any child returns a nonzero value
  **/
 
-void
-archive_foreach_child_location (Archive *archive, LocationCB callback,
-				Location *parent, gpointer data)
+static gint
+foreach_build_list_cb (gchar *key, Location *value, GList **node) 
 {
-	foreach_t f_data;
+	*node = g_list_prepend (*node, value);
+	return 0;
+}
 
-	g_return_if_fail (archive != NULL);
-	g_return_if_fail (IS_ARCHIVE (archive));
+GList *
+archive_get_child_locations (Archive *archive,
+			     Location *parent)
+{
+	GList *list = NULL, *node, *tmp;
+	Location *loc;
+
+	g_return_val_if_fail (archive != NULL, NULL);
+	g_return_val_if_fail (IS_ARCHIVE (archive), NULL);
 
 	load_all_locations (archive);
 
-	f_data.archive = archive;
-	f_data.callback = callback;
-	f_data.parent = parent;
-	f_data.user_data = data;
-
 	g_tree_traverse (archive->locations,
-			 (GTraverseFunc) foreach_cb,
+			 (GTraverseFunc) foreach_build_list_cb,
 			 G_IN_ORDER,
-			 &f_data);
+			 &list);
+
+	node = list;
+
+	while (node != NULL) {
+		loc = node->data;
+		tmp = node->next;
+
+		if (location_get_parent (loc) != parent) {
+			list = g_list_remove_link (list, node);
+			g_list_free_1 (node);
+			bonobo_object_unref (BONOBO_OBJECT (loc));
+		}
+
+		node = tmp;
+	}
+
+	return list;
 }
 
 /* Load and register all the locations for this archive */

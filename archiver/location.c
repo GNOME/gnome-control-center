@@ -160,8 +160,14 @@ impl_ConfigArchiver_Location_getRollbackFilename (PortableServer_Servant  servan
 		timeb_p = NULL;
 
 	filename = location_get_rollback_filename (LOCATION_FROM_SERVANT (servant), timeb_p, steps, backendId, parentChain);
-	ret = CORBA_string_dup (filename);
-	g_free (filename);
+
+	if (filename != NULL) {
+		ret = CORBA_string_dup (filename);
+		g_free (filename);
+	} else {
+		ret = NULL;
+		bonobo_exception_set (ev, ex_ConfigArchiver_Location_RollbackDataNotFound);
+	}
 
 	return ret;
 }
@@ -580,9 +586,9 @@ location_destroy (GtkObject *object)
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (IS_LOCATION (object));
 
-	DEBUG_MSG ("Enter");
-
 	location = LOCATION (object);
+
+	DEBUG_MSG ("Enter: %s", location->p->locid);
 
 	save_metadata (location);
 
@@ -597,8 +603,6 @@ location_destroy (GtkObject *object)
 	bonobo_object_unref (BONOBO_OBJECT (location->p->archive));
 
 	GTK_OBJECT_CLASS (parent_class)->destroy (object);
-
-	DEBUG_MSG ("Exit");
 }
 
 static void
@@ -818,6 +822,9 @@ location_get_rollback_filename (Location        *location,
 
 	if (id != -1)
 		return g_strdup_printf ("%s/%08x.xml", location->p->fullpath, id);
+	else if (parent_chain && location->p->parent != NULL)
+		return location_get_rollback_filename
+			(location->p->parent, date, steps, backend_id, parent_chain);
 	else
 		return NULL;
 }

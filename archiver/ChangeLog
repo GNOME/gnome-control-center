@@ -1,3 +1,53 @@
+2001-08-21  Bradford Hovinen  <hovinen@ximian.com>
+
+	* archive.c (archive_get_current_location_id): Use
+	archive_create_location rather than location_new
+	(archive_get_current_location_id): Unref the location once we have
+	created it
+
+	* archiver-client.c (location_client_load_rollback_data): Don't
+	try to parse the XML file if there was an exception
+
+	* bonobo-config-archiver.c (bonobo_config_archiver_new): Make sure
+	to release_unref location and archive if aborting
+	(bonobo_config_archiver_new): Reinitialize exception structure
+	after we have succeeded
+
+	* location.c (location_get_rollback_filename): Recurse on parent
+	location if parent_chain is set to TRUE
+
+	* archive.c (impl_ConfigArchiver_Archive_getLocation): Set the
+	LocationNotFound exception if the location returned was NULL
+
+	* location.c (impl_ConfigArchiver_Location_getRollbackFilename): Don't try 
+
+	* archive.c (impl_ConfigArchiver_Archive_getLocation): Don't try
+	to CORBA_Object_duplicate the result if it is NULL
+	(archive_get_location): Don't try to cast the result of
+	location_open before we know whether it is non-NULL
+	(impl_ConfigArchiver_Archive_createLocation): Call
+	bonobo_object_from_servant on parent_ref->servant
+
+	* location.c (location_destroy): Remove debugging message; make
+	remaining debugging message more enlightening
+
+	* archive.c (archive_get_child_locations): Rename from
+	archive_foreach_child_location; rewrite to return a GList of child
+	locations
+	(impl_ConfigArchiver_Archive_getChildLocations): Use
+	archive_get_child_locations
+	(archive_destroy): Remove debugging message
+
+	* bonobo-moniker-archiver.c (archive_resolve): Remove debugging
+	messages
+
+	* archive.c (archive_get_location): Remove debugging messages
+
+	* config-log.c (dump_log): Remove debugging messages
+
+	* archive.c (archive_foreach_child_location): Build a list first
+	and then traverse it to avoid screwing up the tree traversal
+
 2001-08-20  Richard Hestilow  <hestilow@ximian.com>
 
 	* Makefile.am: Add dependency on CORBA_SOURCE to archiver-client.c.

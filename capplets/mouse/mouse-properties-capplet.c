@@ -56,8 +56,11 @@ apply_settings (Bonobo_ConfigDatabase db)
         int nbuttons, num, max, den;
 	ulong accel, threshold;
         gboolean rtol;
+	CORBA_Environment ev;
 
-        rtol = bonobo_config_get_ulong (db, "/main/right-to-left", NULL);
+	CORBA_exception_init (&ev);
+
+        rtol = bonobo_config_get_ulong (db, "/main/right-to-left", &ev);
 
         nbuttons = XGetPointerMapping (GDK_DISPLAY (), buttons, MAX_BUTTONS);
         max = MIN (nbuttons, 3);
@@ -66,7 +69,9 @@ apply_settings (Bonobo_ConfigDatabase db)
 
         XSetPointerMapping (GDK_DISPLAY (), buttons, nbuttons);
 
-        accel = bonobo_config_get_ulong (db, "/main/acceleration", NULL);
+	CORBA_exception_init (&ev);
+
+        accel = bonobo_config_get_ulong (db, "/main/acceleration", &ev);
 
         if (accel < MAX_ACCEL) {
                 num = 1;
@@ -76,10 +81,14 @@ apply_settings (Bonobo_ConfigDatabase db)
                 den = 1;
         }
 
-        threshold = MAX_THRESH - bonobo_config_get_ulong (db, "/main/threshold", NULL);
+	CORBA_exception_init (&ev);
+
+        threshold = MAX_THRESH - bonobo_config_get_ulong (db, "/main/threshold", &ev);
 
         XChangePointerControl (GDK_DISPLAY (), True, True,
                                num, den, threshold);
+
+	CORBA_exception_free (&ev);
 }
 
 /* set_pixmap_file

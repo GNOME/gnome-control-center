@@ -76,8 +76,6 @@ archive_resolve (BonoboMoniker               *moniker,
 
 	Bonobo_Unknown ret;
 
-	DEBUG_MSG ("Enter");
-
 	if (strcmp (requested_interface, "IDL:ConfigArchiver/Archive:1.0")) {
 		EX_SET_NOT_FOUND (ev);
 		return CORBA_OBJECT_NIL;
@@ -86,8 +84,6 @@ archive_resolve (BonoboMoniker               *moniker,
 	name = bonobo_moniker_get_name (moniker);
 
 	if (!strcmp (name, "global-archive")) {
-		DEBUG_MSG ("Global archive requested");
-
 		if (global_archive == NULL) {
 			global_archive = ARCHIVE (archive_load (TRUE));
 			gtk_signal_connect (GTK_OBJECT (global_archive), "destroy", GTK_SIGNAL_FUNC (archive_destroy_cb), NULL);
@@ -120,8 +116,6 @@ archive_resolve (BonoboMoniker               *moniker,
 		EX_SET_NOT_FOUND (ev);
 		ret = CORBA_OBJECT_NIL;
 	}
-
-	DEBUG_MSG ("Exit");
 
 	return ret;
 }
@@ -160,10 +154,10 @@ archiverdb_resolve (BonoboMoniker               *moniker,
 
 	db = bonobo_config_archiver_new (parent, options, backend_id, locid, ev);
 
-	bonobo_object_release_unref (parent, NULL);
-
 	if (db == CORBA_OBJECT_NIL || BONOBO_EX (ev))
 		EX_SET_NOT_FOUND (ev);
+
+	bonobo_object_release_unref (parent, NULL);
 
 	g_free (backend_id);
 	g_free (locid);

@@ -57,6 +57,8 @@ module ConfigArchiver {
 	};
 
 	interface Location : Bonobo::Unknown {
+		exception RollbackDataNotFound {};
+
 		readonly attribute Location         parent;
 		readonly attribute string           path;
 		readonly attribute StringSeq        backendList;
@@ -70,7 +72,8 @@ module ConfigArchiver {
 		string             getRollbackFilename      (in Time              time,
 							     in long              steps,
 							     in string            backendId,
-							     in boolean           parentChain);
+							     in boolean           parentChain)
+			raises (RollbackDataNotFound);
 
 		void               rollbackBackends         (in Time              time,
 							     in long              steps,
@@ -95,6 +98,8 @@ module ConfigArchiver {
 	typedef sequence<Location> LocationSeq;
 
 	interface Archive : Bonobo::Unknown {
+		exception LocationNotFound {};
+
 		readonly attribute string      prefix;
 		readonly attribute boolean     isGlobal;
 		readonly attribute BackendList backendList;
@@ -102,7 +107,9 @@ module ConfigArchiver {
 		attribute Location             currentLocation;
 		attribute string               currentLocationId;
 
-		Location           getLocation              (in string              locid);
+		Location           getLocation              (in string              locid)
+			raises (LocationNotFound);
+
 		Location           createLocation           (in string              locid,
 							     in string              label,
 							     in Location            parent);

@@ -677,6 +677,7 @@ bonobo_config_archiver_new (Bonobo_Moniker               parent,
 		archiver_db->location = ConfigArchiver_Archive_getLocation (archiver_db->archive, location_id, ev);
 
 	if (archiver_db->location == CORBA_OBJECT_NIL) {
+		bonobo_object_release_unref (archiver_db->archive, NULL);
 		bonobo_object_unref (BONOBO_OBJECT (archiver_db));
 		return CORBA_OBJECT_NIL;
 	}
@@ -687,7 +688,7 @@ bonobo_config_archiver_new (Bonobo_Moniker               parent,
 	archiver_db->doc = location_client_load_rollback_data
 		(archiver_db->location, NULL, 0, archiver_db->backend_id, TRUE, ev);
 
-	if (archiver_db->doc == NULL) {
+	if (BONOBO_EX (ev) || archiver_db->doc == NULL) {
 		gchar *filename;
 
 		filename = g_strconcat (DEFAULTS_DIR, "/", archiver_db->backend_id, ".xml", NULL);
@@ -695,9 +696,13 @@ bonobo_config_archiver_new (Bonobo_Moniker               parent,
 		g_free (filename);
 
 		if (archiver_db->doc == NULL) {
+			bonobo_object_release_unref (archiver_db->location, NULL);
+			bonobo_object_release_unref (archiver_db->archive, NULL);
 			bonobo_object_unref (BONOBO_OBJECT (archiver_db));
 			return CORBA_OBJECT_NIL;
 		}
+
+		CORBA_exception_init (ev);
 	}
 
 	if (archiver_db->doc->root == NULL)
