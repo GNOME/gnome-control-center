@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.3.0\n"
-"POT-Creation-Date: 2001-07-25 05:03-0500\n"
-"PO-Revision-Date: 2001-07-20 21:10+0200\n"
+"POT-Creation-Date: 2001-07-25 21:13+0200\n"
+"PO-Revision-Date: 2001-07-25 21:13+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -138,12 +138,14 @@ msgid "Add/remove this backend to/from the master backend list"
 msgstr "Legg til/fjern dette undersystemet til/fra listen over undersystemer"
 
 #: archiver/main.c:144
+#, fuzzy
 msgid "Full containment"
-msgstr ""
+msgstr "Fullt innhold"
 
 #: archiver/main.c:146
+#, fuzzy
 msgid "Partial containment"
-msgstr ""
+msgstr "Delvis innhold"
 
 #: archiver/main.c:313
 msgid "Global archiver options"
@@ -199,7 +201,6 @@ msgid "Centered"
 msgstr "Sentrert."
 
 #: capplets/background/background-properties.glade.h:4
-#, fuzzy
 msgid "Horizontal gradient"
 msgstr "Horisontal gradient"
 
@@ -239,191 +240,240 @@ msgstr "Flislagt"
 msgid "Vertical gradient"
 msgstr "Vertikal gradient"
 
+#: capplets/background/prefs-widget.c:362
+msgid "(None)"
+msgstr "(Ingen)"
+
+#: capplets/background/prefs-widget.c:611
+msgid "Wallpaper Selection"
+msgstr "Valg av bakgrunn"
+
+#: capplets/background/prefs-widget.c:618
+msgid "Can't find an hbox, using a normal file selection"
+msgstr "Kan ikke finne en hbox, bruker vanlig filvalg"
+
+#: capplets/background/prefs-widget.c:624
+#: capplets/screensaver/screensaver-properties.glade.h:11
+msgid "Preview"
+msgstr "Forhåndsvisning"
+
+#: capplets/common/capplet-util.c:487
+msgid "Just apply settings and quit"
+msgstr "Bare aktiver innstillingene og avslutt"
+
+#: capplets/common/capplet-util.c:489
+msgid "Initialize the session"
+msgstr "Initier sesjonen"
+
+#: capplets/common/capplet-util.c:491
+msgid "Retrieve and store legacy settings"
+msgstr "Hent og lagre gamle innstillinger"
+
+#: capplets/common/capplet-util.c:500
+msgid "Capplet options"
+msgstr "Alternativer for capplet"
+
 #: capplets/default-applications/default-applications.desktop.in.in.h:1
 msgid "Choose the applications used by default"
-msgstr ""
+msgstr "Velg applikasjonene som brukes som standard"
 
 #: capplets/default-applications/default-applications.desktop.in.in.h:2
-#, fuzzy
 msgid "Default Applications"
-msgstr "Standard lokasjon"
+msgstr "Standard applikasjoner"
 
 #: capplets/default-applications/interface.c:108
 msgid "Gnome Default Editor"
-msgstr ""
+msgstr "Standard redigeringsprogram for GNOME"
 
 #: capplets/default-applications/interface.c:125
 msgid "Select an Editor"
-msgstr ""
+msgstr "Velg et redigeringsprogram"
 
 #: capplets/default-applications/interface.c:134
 msgid "With this option, you can select a predefined Editor as your default"
-msgstr ""
+msgstr "Her kan du velge et forhåndsdefinert redigeringsprogram som standard"
 
 #: capplets/default-applications/interface.c:154
-#, fuzzy
 msgid "Custom Editor"
-msgstr "Egendefinert"
+msgstr "Egendefinert redigerer"
 
 #: capplets/default-applications/interface.c:163
 msgid "With this option you can create your own default editor"
-msgstr ""
+msgstr "Her kan du velge ditt eget standard redigeringsprogram"
 
 #: capplets/default-applications/interface.c:174
 #: capplets/default-applications/interface.c:305
 #: capplets/default-applications/interface.c:436
 msgid "Start in Terminal"
-msgstr ""
+msgstr "Start i terminal"
 
 #: capplets/default-applications/interface.c:182
 msgid "Does this editor need to start in an xterm?"
-msgstr ""
+msgstr "Må redigeringsprogrammet startes i et terminalvindu?"
 
 #: capplets/default-applications/interface.c:184
 msgid "Accepts Line Number"
-msgstr ""
+msgstr "Aksepterer linjenummer"
 
 #: capplets/default-applications/interface.c:192
 msgid "Does this editor accept line numbers from the command line?"
-msgstr ""
+msgstr "Tar dette redigeringsprogrammet imot linjenummer fra kommandolinjen?"
 
 #: capplets/default-applications/interface.c:203
 #: capplets/default-applications/interface.c:334
 #: capplets/default-applications/interface.c:465
 #: capplets/default-applications/interface.c:576
 msgid "Command:"
-msgstr ""
+msgstr "Kommando:"
 
 #: capplets/default-applications/interface.c:221
-#, fuzzy
 msgid "Please enter the command line used to start this editor"
-msgstr "Vennligst skriv inn en kommandolinje under."
+msgstr ""
+"Vennligst skriv inn kommandolinjen som brukes for å starte dette "
+"redigeringsprogrammet"
 
 #: capplets/default-applications/interface.c:232
 msgid "Text Editor"
-msgstr ""
+msgstr "Teksteditor"
 
 #: capplets/default-applications/interface.c:239
 msgid "Gnome Default Web Browser"
-msgstr ""
+msgstr "Forvalgt nettleser for GNOME"
 
 #: capplets/default-applications/interface.c:256
 msgid "Select a Web Browser"
-msgstr ""
+msgstr "Velg en nettleser"
 
 #: capplets/default-applications/interface.c:265
 msgid ""
 "With this option, you can select a predefined Web Browser as your default"
-msgstr ""
+msgstr "Her kan du sette forvalgt nettleser"
 
 #: capplets/default-applications/interface.c:285
 msgid "Custom Web Browser"
-msgstr ""
+msgstr "Egendefinert nettleser"
 
 #: capplets/default-applications/interface.c:294
 msgid "With this option you can create your own default web browser"
-msgstr ""
+msgstr "Her har du sette din egen forvalgte nettleser"
 
 #: capplets/default-applications/interface.c:313
 msgid "Does this web browser need to display in an xterm?"
-msgstr ""
+msgstr "Må denne nettleseren vises i et terminalvindu?"
 
 #: capplets/default-applications/interface.c:315
 msgid "Understands Netscape Remote Control"
-msgstr ""
+msgstr "Forstår Netscape Remote Control"
 
 #: capplets/default-applications/interface.c:323
 msgid ""
 "Does this web browser support the netscape remote control protocol?  If in "
 "doubt, and this web browser isn't Netscape or Mozilla, it probably doesn't."
 msgstr ""
+"Støtter denne nettleseren protokollen Netscape Remote Control? Hvis du er i "
+"tvil, og nettleseren er en annen enn Netscape eller Mozilla, så gjør den det "
+"sannsynligvis ikke."
 
 #: capplets/default-applications/interface.c:352
-#, fuzzy
 msgid "Please enter the command line used to start this web browser"
-msgstr "Vennligst skriv inn en kommandolinje under."
+msgstr ""
+"Vennligst skriv inn kommandolinjen som brukes for å starte denne nettleseren"
 
 #: capplets/default-applications/interface.c:363
-#, fuzzy
 msgid "Web Browser"
-msgstr "Bla gjennom..."
+msgstr "Nettleser"
 
 #: capplets/default-applications/interface.c:370
 #: capplets/default-applications/interface.c:501
 msgid "Default Help Viewer"
-msgstr ""
+msgstr "Standard hjelp-leser"
 
 #: capplets/default-applications/interface.c:387
 msgid "Select a Viewer"
-msgstr ""
+msgstr "Velg et visningsprogram"
 
 #: capplets/default-applications/interface.c:396
 msgid "With this option you can select a predefined help viewer."
-msgstr ""
+msgstr "Her kan du sette forvalgt hjelp-leser."
 
 #: capplets/default-applications/interface.c:416
 msgid "Custom Help Viewer"
-msgstr ""
+msgstr "Egendefinert hjelp-leser"
 
 #: capplets/default-applications/interface.c:425
 msgid "With this option you can create your own help viewer"
-msgstr ""
+msgstr "Her kan du sette en egendefinert hjelp-leser"
 
 #: capplets/default-applications/interface.c:444
 msgid "Does this help viewer need an xterm for display?"
-msgstr ""
+msgstr "Må denne hjelp-leseren vises i et terminalvindu?"
 
 #: capplets/default-applications/interface.c:446
 msgid "Accepts URLs"
-msgstr ""
+msgstr "Godtar URLer"
 
 #: capplets/default-applications/interface.c:454
 msgid "Does this help viewer allow URLs for help?"
-msgstr ""
+msgstr "Godtar denne hjelp-leseren URLer for hjelp?"
 
 #: capplets/default-applications/interface.c:483
-#, fuzzy
 msgid "Please enter the command line used to start this help viewer"
-msgstr "Vennligst skriv inn en kommandolinje under."
+msgstr ""
+"Vennligst skriv inn kommandolinjen som brukes for å starte denne hjelp-"
+"leseren"
 
 #: capplets/default-applications/interface.c:494
 msgid "Help Viewer"
-msgstr ""
+msgstr "Hjelp-leser"
 
 #: capplets/default-applications/interface.c:518
 msgid "Select a Terminal"
-msgstr ""
+msgstr "Velg en terminal"
 
 #: capplets/default-applications/interface.c:527
 msgid "With this option you can select a predefined terminal."
-msgstr ""
+msgstr "Her kan du sette forvalgt terminal."
 
 #: capplets/default-applications/interface.c:547
 msgid "Custom Terminal"
-msgstr ""
+msgstr "Egendefinert terminal"
 
 #: capplets/default-applications/interface.c:556
 msgid "With this option you can create your own terminal"
-msgstr ""
+msgstr "Her kan du sette en egendefinert terminal"
 
 #: capplets/default-applications/interface.c:586
 msgid "Exec Flag:"
-msgstr ""
+msgstr "Exec-flagg:"
 
 #: capplets/default-applications/interface.c:604
 msgid ""
 "Please enter the flag used by this terminal to specify the command to run on "
 "startup.  For example, in 'xterm' this would be '-e'."
 msgstr ""
+"Vennligst skriv inn flagget som brukes av denne terminalen for å spesifisere "
+"kommandoen som skal kjøres ved oppstart. I 'xterm' vil dette være '-e', for "
+"eksempel."
 
 #: capplets/default-applications/interface.c:614
-#, fuzzy
 msgid "Please enter the command line used to start this terminal"
-msgstr "Vennligst skriv inn en kommandolinje under."
+msgstr ""
+"Vennligst skriv inn kommandolinjen som brukes for å starte denne terminalen"
 
 #: capplets/default-applications/interface.c:625
 msgid "Terminal"
-msgstr ""
+msgstr "Terminal"
+
+#: capplets/default-applications/support.c:100
+#: capplets/default-applications/support.c:138
+#, c-format
+msgid "Couldn't find pixmap file: %s"
+msgstr "Kunne ikke finne pixmap-fil: %s"
+
+#: capplets/default-applications/support.c:116
+#, c-format
+msgid "Couldn't create pixmap from file: %s"
+msgstr "Kunne ikke opprette pixmap fra fil: %s"
 
 #: capplets/keyboard/keyboard-properties.glade.h:9
 #: capplets/keyboard/keyboard.desktop.in.in.h:1
@@ -544,6 +594,14 @@ msgstr "Høyrehendt"
 msgid "Sensitivity:"
 msgstr "Følsomhet:"
 
+#: capplets/rollback/main.c:37
+msgid "Operate on global backends"
+msgstr "Arbeid på globale undersystemer"
+
+#: capplets/rollback/main.c:50
+msgid "Options for the rollback GUI"
+msgstr "Alternativer for GUI for gjenoppretting"
+
 #: capplets/screensaver/preferences.c:508
 msgid "Custom screensaver. No description available"
 msgstr "Egendefinert skjermsparer. Ingen beskrivelse tilgjengelig"
@@ -627,16 +685,18 @@ msgid "Disable screensaver"
 msgstr "Slå av skjermsparer"
 
 #: capplets/screensaver/screensaver-properties.glade.h:6
+#, fuzzy
 msgid ""
 "Draws quasiperiodic tilings; think of the implications on modern formica "
 "technology. Written by Time Korlove. In April 1997, Sir Roger Penrose, a "
 "British math professor who has worked with Stephen Hawking on such topics as "
-"relatvity, black holes, and whether time has a beginning, files a "
-"copyright-infringement lawsuit against Kimberly-Clark Corporation, wchih "
-"Penrose said copied a pattern he created ( apattern demonstrating that \"a "
-"nonrepeating pattern could exist in nature\") for its Kleenex quilted toilet "
-"paper. "
+"relatvity, black holes, and whether time has a beginning, files a copyright-"
+"infringement lawsuit against Kimberly-Clark Corporation, wchih Penrose said "
+"copied a pattern he created ( apattern demonstrating that \"a nonrepeating "
+"pattern could exist in nature\") for its Kleenex quilted toilet paper. "
 msgstr ""
+"Tegner kvasiperiodiske fliser; tenk på implikasjonene av moderne formica-"
+"teknologi. Skrevet av Time Korlove. I april 1997"
 
 #: capplets/screensaver/screensaver-properties.glade.h:7
 msgid "Enable _power management"
@@ -653,10 +713,6 @@ msgstr "Gå i dvalemodus etter"
 #: capplets/screensaver/screensaver-properties.glade.h:10
 msgid "One screensaver all the time"
 msgstr "En skjermsparer hele tiden"
-
-#: capplets/screensaver/screensaver-properties.glade.h:11
-msgid "Preview"
-msgstr "Forhåndsvisning"
 
 #: capplets/screensaver/screensaver-properties.glade.h:12
 msgid "R_equire password to unlock screen"
@@ -1352,9 +1408,9 @@ msgid "Desktop properties manager."
 msgstr "Håndtering av egenskaper for skrivebord."
 
 #: control-center/capplet-dir-view.c:408
-#, fuzzy, c-format
+#, c-format
 msgid "Gnome Control Center : %s"
-msgstr "Kontrollsenter"
+msgstr "GNOME Kontrollsenter: %s"
 
 #: control-center/capplet-dir-view.c:456
 msgid ""
@@ -1367,6 +1423,10 @@ msgstr ""
 #: control-center/capplet-dir-view.c:459
 msgid "Close"
 msgstr "Lukk"
+
+#: control-center/capplet-dir-view-html.c:150
+msgid "GNOME Control Center:"
+msgstr "GNOME Kontrollsenter:"
 
 #: control-center/gnomecc.desktop.in.h:2
 msgid "The GNOME configuration tool"
@@ -1408,6 +1468,22 @@ msgstr "Nytt kontrollsenter"
 msgid "Put control panels in the control center's window"
 msgstr "Plasser kontrollpaneler i kontrollsenterets vindu"
 
+#: control-center/main.c:46
+msgid "Configuraiton"
+msgstr "Konfigurasjon"
+
+#: control-center/main.c:72
+msgid "Run the capplet CAPPLET"
+msgstr "Kjør cappleten CAPPLET"
+
+#: control-center/main.c:72
+msgid "CAPPLET"
+msgstr "CAPPLET"
+
+#: control-center/main.c:80
+msgid "GNOME Control Center options"
+msgstr "Val for GNOME kontrollsenter"
+
 #: capplets/desktop-links/gnome-hint-properties.desktop.in.h:1
 msgid "Options for the startup hint dialog"
 msgstr "Alternativer for dialogen for hint ved oppstart"
@@ -1415,6 +1491,12 @@ msgstr "Alternativer for dialogen for hint ved oppstart"
 #: capplets/desktop-links/gnome-hint-properties.desktop.in.h:2
 msgid "Startup Hint"
 msgstr "Hint ved oppstart"
+
+#~ msgid "Set background image."
+#~ msgstr "Sett bakgrunnsbilde."
+
+#~ msgid "IMAGE-FILE"
+#~ msgstr "BILDE-FIL"
 
 #~ msgid "Control Center Menu"
 #~ msgstr "Kontrollsenter-meny"
@@ -1482,8 +1564,8 @@ msgstr "Hint ved oppstart"
 #~ msgid "Workspaces"
 #~ msgstr "Arbeidsområder"
 
-#~ msgid "(None)"
-#~ msgstr "(Ingen)"
+#~ msgid "Control Center"
+#~ msgstr "Kontrollsenter"
 
 #~ msgid "Adjust wallpaper's transparency"
 #~ msgstr "Juster bakgrunnens gjennomsiktighet"
@@ -1523,12 +1605,6 @@ msgstr "Hint ved oppstart"
 
 #~ msgid "Wallpaper"
 #~ msgstr "Bakgrunn"
-
-#~ msgid "Wallpaper Selection"
-#~ msgstr "Valg av bakgrunn"
-
-#~ msgid "Can't find an hbox, using a normal file selection"
-#~ msgstr "Kan ikke finne en hbox, bruker vanlig filvalg"
 
 #~ msgid "HTML"
 #~ msgstr "HTML"
@@ -1622,12 +1698,6 @@ msgstr "Hint ved oppstart"
 
 #~ msgid "Sound Events"
 #~ msgstr "Lydhendelser"
-
-#~ msgid "GNOME Control Center options"
-#~ msgstr "Val for GNOME kontrollsenter"
-
-#~ msgid "Configuraiton"
-#~ msgstr "Konfigurasjon"
 
 #~ msgid "Got error %d.\n"
 #~ msgstr "Mottok feil %d.\n"
