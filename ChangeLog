@@ -1,5 +1,14 @@
 2000-08-18  Bradford Hovinen  <hovinen@helixcode.com>
 
+	* capplets/bell-properties/Makefile.am (INCLUDES): 
+	(bell_properties_capplet_LDADD): Added XML cflags/libs
+
+	* capplets/bell-properties/bell-properties.c (do_get_xml): 
+	(do_set_xml): Implement.
+	(main): Call above functions on --get and --set
+	(read_from_xml): 
+	(write_to_xml): Implement
+
 	* configure.in: Check for putenv and setenv and set appropriate
 	macros in config.h
 
