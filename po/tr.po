@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 1.5.0\n"
-"POT-Creation-Date: 2002-08-06 09:32-0400\n"
+"POT-Creation-Date: 2002-08-21 10:05-0400\n"
 "PO-Revision-Date: 2002-06-25 00:23+0300\n"
 "Last-Translator: Görkem Çetin <gorkem@gelecek.com.tr>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-Generator: KBabel 0.9.6\n"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:225
-#: capplets/keyboard/gnome-keyboard-properties.c:143
+#: capplets/keyboard/gnome-keyboard-properties.c:159
 #, fuzzy, c-format
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Yardım dosyasının görüntülenmesinde bir hata oluştu: %s"
@@ -31,7 +31,7 @@ msgid "Select CDE AccessX file"
 msgstr "CDE AccessX dosyasını seçin"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Klavye"
@@ -244,7 +244,7 @@ msgstr "_Bir Düzenleyici Seçin:"
 #: capplets/background/background-properties-capplet.c:561
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
-#: capplets/keyboard/gnome-keyboard-properties.c:277
+#: capplets/keyboard/gnome-keyboard-properties.c:293
 #: capplets/mouse/gnome-mouse-properties.c:752
 #: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
@@ -768,7 +768,7 @@ msgid "Associate sounds with window manager events"
 msgstr "Pencere yöneticisi ses olaylarını etkinleştir"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
 #: capplets/sound/sound.desktop.in.h:2
 msgid "Sound"
 msgstr "Ses"
@@ -789,98 +789,6 @@ msgstr "Özel Uygulamalar"
 #: capplets/desktop-links/legacy-applications.desktop.in.in.h:2
 msgid "Legacy applications settings (grdb)"
 msgstr "Özel uygulama ayarları (grdb)"
-
-#.
-#. * Translatable strings file
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/file-types/category-names.h:7
-msgid "Documents"
-msgstr "Belgeler"
-
-#: capplets/file-types/category-names.h:8
-msgid "Word Processor"
-msgstr "Kelime İşlemci"
-
-#: capplets/file-types/category-names.h:9
-msgid "Published Materials"
-msgstr "Basılı Yayınlar"
-
-#: capplets/file-types/category-names.h:10
-msgid "Spreadsheet"
-msgstr "Hesap tablosu"
-
-#: capplets/file-types/category-names.h:11
-msgid "Presentation"
-msgstr "Sunum"
-
-#: capplets/file-types/category-names.h:12
-msgid "Diagram"
-msgstr "Diagram"
-
-#: capplets/file-types/category-names.h:13
-msgid "TeX"
-msgstr "TeX"
-
-#: capplets/file-types/category-names.h:14
-msgid "Vector Graphics"
-msgstr "Vektör Grafik"
-
-#: capplets/file-types/category-names.h:15
-msgid "World Wide Web"
-msgstr "WWW"
-
-#: capplets/file-types/category-names.h:16
-msgid "Plain Text"
-msgstr "Düz Metin"
-
-#: capplets/file-types/category-names.h:17
-msgid "Extended Markup Language (XML)"
-msgstr "XML"
-
-#: capplets/file-types/category-names.h:18
-msgid "Information"
-msgstr "Bilgi"
-
-#: capplets/file-types/category-names.h:19
-msgid "Financial"
-msgstr "Finans"
-
-#: capplets/file-types/category-names.h:20
-msgid "Calendar"
-msgstr "Takvim"
-
-#: capplets/file-types/category-names.h:21
-msgid "Contacts"
-msgstr "Bağlantılar"
-
-#: capplets/file-types/category-names.h:22
-msgid "Packages"
-msgstr "Paketler"
-
-#: capplets/file-types/category-names.h:23
-msgid "Software Development"
-msgstr "Yazılım Geliştirme"
-
-#: capplets/file-types/category-names.h:24
-msgid "Source Code"
-msgstr "Kaynak Kodu"
-
-#: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:671
-msgid "Audio"
-msgstr "Ses"
-
-#: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:667
-msgid "Images"
-msgstr "Resimler"
-
-#: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:669
-msgid "Video"
-msgstr "Video"
 
 #: capplets/file-types/file-types-capplet.c:214
 msgid "Description"
@@ -905,11 +813,13 @@ msgid "Actions"
 msgstr "Eylemler"
 
 #: capplets/file-types/file-types-properties.glade.h:3
-msgid "Add _file type..."
+#, fuzzy
+msgid "Add _File Type..."
 msgstr "_Dosya türü ekle..."
 
 #: capplets/file-types/file-types-properties.glade.h:4
-msgid "Add _service..."
+#, fuzzy
+msgid "Add _Service..."
 msgstr "Servis _ekle..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
@@ -1093,6 +1003,18 @@ msgstr "Kategori"
 msgid "Choose a file category"
 msgstr "Bir dosya kategorisi seçin"
 
+#: capplets/file-types/mime-type-info.c:667
+msgid "Images"
+msgstr "Resimler"
+
+#: capplets/file-types/mime-type-info.c:669
+msgid "Video"
+msgstr "Video"
+
+#: capplets/file-types/mime-type-info.c:671
+msgid "Audio"
+msgstr "Ses"
+
 #: capplets/file-types/mime-types-model.c:167
 #: capplets/file-types/mime-types-model.c:168
 msgid "Model for categories only"
@@ -1212,7 +1134,7 @@ msgid "Accelerator key"
 msgstr ""
 
 #: capplets/keybindings/eggcellrendererkeys.c:206
-#: capplets/keybindings/gnome-keybinding-properties.c:173
+#: capplets/keybindings/gnome-keybinding-properties.c:179
 #: libbackground/applier.c:521
 msgid "Disabled"
 msgstr "Kapalı"
@@ -1224,34 +1146,34 @@ msgstr "Kapalı"
 msgid "Type a new shortcut"
 msgstr "Yeni bir hızlandırıcı girin"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:440
+#: capplets/keybindings/gnome-keybinding-properties.c:446
 msgid "<Unknown Action>"
 msgstr "<Bilinmeyen Eylem>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:459
+#: capplets/keybindings/gnome-keybinding-properties.c:465
 msgid "Desktop"
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:463
+#: capplets/keybindings/gnome-keybinding-properties.c:469
 msgid "Window Management"
 msgstr "Pencere Yönetimi"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:560
+#: capplets/keybindings/gnome-keybinding-properties.c:566
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:711
+#: capplets/keybindings/gnome-keybinding-properties.c:717
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:733
+#: capplets/keybindings/gnome-keybinding-properties.c:739
 msgid "Action"
 msgstr "Eylem"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:749
+#: capplets/keybindings/gnome-keybinding-properties.c:755
 msgid "Shortcut"
 msgstr "Kısayol"
 
@@ -1277,12 +1199,12 @@ msgstr "Masaüstü _kısayolları:"
 msgid "Assign shortcut keys to commands"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.c:256
+#: capplets/keyboard/gnome-keyboard-properties.c:272
 msgid "_Accessibility"
 msgstr "E_rişilebilirlik"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:273
-#: capplets/keyboard/gnome-keyboard-properties.c:275
+#: capplets/keyboard/gnome-keyboard-properties.c:289
+#: capplets/keyboard/gnome-keyboard-properties.c:291
 #: capplets/sound/sound-properties-capplet.c:145
 #: capplets/sound/sound-properties-capplet.c:147
 msgid ""
@@ -1290,87 +1212,98 @@ msgid ""
 msgstr "Ayarları uygula ve çık"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:2
-msgid "Bee_p"
+msgid "<small><i>Fast</i></small>"
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+msgid "<small><i>Long</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+msgid "<small><i>Short</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+msgid "<small><i>Slow</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+msgid "Bee_p"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
 #, fuzzy
 msgid "C_ustom:"
 msgstr "Özel"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "Clic_k on keypress"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 #, fuzzy
 msgid "Cursor Blinks"
 msgstr "İmleçler"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "Keyboard Bell"
 msgstr "Klavye Zili"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Keyboard Preferences"
 msgstr "Klavye Tercihleri"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Keyboard _repeats when key is held down"
 msgstr "Tuş basılı bırakıldığında klavye tekrar etsin."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Keypress Click"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
 #, fuzzy
 msgid "Repeat Keys"
 msgstr "Tekrarlama Sıklığı"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 #, fuzzy
 msgid "S_peed:"
 msgstr "Hız"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid "_Accessibility..."
 msgstr "_Erişilebilirlik..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
 #, fuzzy
 msgid "_Blinks in text boxes and fields"
 msgstr "İmleç, _metin bölgesinde yanıp sönsün: "
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
 #, fuzzy
 msgid "_Delay:"
 msgstr "_Gecikme (sn):"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
 msgid "_Off"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
 #, fuzzy
 msgid "_Speed:"
 msgstr "Hız"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "_Volume:"
 msgstr "_Ses:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
-#, fuzzy
-msgid "faster"
-msgstr "Hızlı"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
 #, fuzzy
 msgid "loud"
 msgstr "Ses"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "quiet"
 msgstr ""
 
@@ -2056,7 +1989,7 @@ msgstr ""
 msgid "_Do not show this message again"
 msgstr "_Bu mesajı yeniden gösterme"
 
-#: gnome-settings-daemon/gnome-settings-sound.c:125
+#: gnome-settings-daemon/gnome-settings-sound.c:128
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr ""
@@ -2173,6 +2106,64 @@ msgstr ""
 #: libwindow-settings/gnome-wm-manager.c:464
 msgid "OK"
 msgstr "Tamam"
+
+#~ msgid "Documents"
+#~ msgstr "Belgeler"
+
+#~ msgid "Word Processor"
+#~ msgstr "Kelime İşlemci"
+
+#~ msgid "Published Materials"
+#~ msgstr "Basılı Yayınlar"
+
+#~ msgid "Spreadsheet"
+#~ msgstr "Hesap tablosu"
+
+#~ msgid "Presentation"
+#~ msgstr "Sunum"
+
+#~ msgid "Diagram"
+#~ msgstr "Diagram"
+
+#~ msgid "TeX"
+#~ msgstr "TeX"
+
+#~ msgid "Vector Graphics"
+#~ msgstr "Vektör Grafik"
+
+#~ msgid "World Wide Web"
+#~ msgstr "WWW"
+
+#~ msgid "Plain Text"
+#~ msgstr "Düz Metin"
+
+#~ msgid "Extended Markup Language (XML)"
+#~ msgstr "XML"
+
+#~ msgid "Information"
+#~ msgstr "Bilgi"
+
+#~ msgid "Financial"
+#~ msgstr "Finans"
+
+#~ msgid "Calendar"
+#~ msgstr "Takvim"
+
+#~ msgid "Contacts"
+#~ msgstr "Bağlantılar"
+
+#~ msgid "Packages"
+#~ msgstr "Paketler"
+
+#~ msgid "Software Development"
+#~ msgstr "Yazılım Geliştirme"
+
+#~ msgid "Source Code"
+#~ msgstr "Kaynak Kodu"
+
+#, fuzzy
+#~ msgid "faster"
+#~ msgstr "Hızlı"
 
 #~ msgid "<b>Test</b>"
 #~ msgstr "<b>Deneme</b>"

@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 2.0.2\n"
-"POT-Creation-Date: 2002-08-07 22:15+0200\n"
+"POT-Creation-Date: 2002-08-21 10:05-0400\n"
 "PO-Revision-Date: 2002-08-07 21:50+0200\n"
 "Last-Translator: Christophe Merlet (RedFox) <christophe@merlet.net>\n"
 "Language-Team: Gnome French Team <gnomefr@traduc.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:225
-#: capplets/keyboard/gnome-keyboard-properties.c:143
+#: capplets/keyboard/gnome-keyboard-properties.c:159
 #, c-format
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Il y a eu une erreur lors du lancement de la capplet clavier : %s"
@@ -35,7 +35,7 @@ msgid "Select CDE AccessX file"
 msgstr "Sélectionnez le fichier CDE AccessX"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Clavier"
@@ -248,7 +248,7 @@ msgstr "_Sélectionnez une image :"
 #: capplets/background/background-properties-capplet.c:561
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
-#: capplets/keyboard/gnome-keyboard-properties.c:277
+#: capplets/keyboard/gnome-keyboard-properties.c:293
 #: capplets/mouse/gnome-mouse-properties.c:752
 #: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
@@ -800,7 +800,7 @@ msgid "Associate sounds with window manager events"
 msgstr "Associe des sons avec les événements du gestionnaire de fenêtres"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
 #: capplets/sound/sound.desktop.in.h:2
 msgid "Sound"
 msgstr "Son"
@@ -820,98 +820,6 @@ msgstr "Applications antérieures ou non-conforme à GNOME"
 #: capplets/desktop-links/legacy-applications.desktop.in.in.h:2
 msgid "Legacy applications settings (grdb)"
 msgstr "Paramètres des applications antérieures à GNOME"
-
-#.
-#. * Translatable strings file
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/file-types/category-names.h:7
-msgid "Documents"
-msgstr "Documents"
-
-#: capplets/file-types/category-names.h:8
-msgid "Word Processor"
-msgstr "Traitement de texte"
-
-#: capplets/file-types/category-names.h:9
-msgid "Published Materials"
-msgstr "Support de publication"
-
-#: capplets/file-types/category-names.h:10
-msgid "Spreadsheet"
-msgstr "Tableur"
-
-#: capplets/file-types/category-names.h:11
-msgid "Presentation"
-msgstr "Présentation"
-
-#: capplets/file-types/category-names.h:12
-msgid "Diagram"
-msgstr "Diagramme"
-
-#: capplets/file-types/category-names.h:13
-msgid "TeX"
-msgstr "TeX"
-
-#: capplets/file-types/category-names.h:14
-msgid "Vector Graphics"
-msgstr "Graphiques vectoriels"
-
-#: capplets/file-types/category-names.h:15
-msgid "World Wide Web"
-msgstr "World Wide Web"
-
-#: capplets/file-types/category-names.h:16
-msgid "Plain Text"
-msgstr "Texte brut"
-
-#: capplets/file-types/category-names.h:17
-msgid "Extended Markup Language (XML)"
-msgstr "Langage de marquage étendu (XML)"
-
-#: capplets/file-types/category-names.h:18
-msgid "Information"
-msgstr "Information"
-
-#: capplets/file-types/category-names.h:19
-msgid "Financial"
-msgstr "Finance"
-
-#: capplets/file-types/category-names.h:20
-msgid "Calendar"
-msgstr "Calendrier"
-
-#: capplets/file-types/category-names.h:21
-msgid "Contacts"
-msgstr "Contacts"
-
-#: capplets/file-types/category-names.h:22
-msgid "Packages"
-msgstr "Archives"
-
-#: capplets/file-types/category-names.h:23
-msgid "Software Development"
-msgstr "Développement logiciel"
-
-#: capplets/file-types/category-names.h:24
-msgid "Source Code"
-msgstr "Code source"
-
-#: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:671
-msgid "Audio"
-msgstr "Audio"
-
-#: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:667
-msgid "Images"
-msgstr "Images"
-
-#: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:669
-msgid "Video"
-msgstr "Vidéo"
 
 #: capplets/file-types/file-types-capplet.c:214
 msgid "Description"
@@ -938,11 +846,13 @@ msgid "Actions"
 msgstr "Actions"
 
 #: capplets/file-types/file-types-properties.glade.h:3
-msgid "Add _file type..."
+#, fuzzy
+msgid "Add _File Type..."
 msgstr "Ajouter un type de _fichier..."
 
 #: capplets/file-types/file-types-properties.glade.h:4
-msgid "Add _service..."
+#, fuzzy
+msgid "Add _Service..."
 msgstr "Ajouter un _service..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
@@ -1119,6 +1029,18 @@ msgstr "Catégorie"
 msgid "Choose a file category"
 msgstr "Choisisser une catégorie de fichier"
 
+#: capplets/file-types/mime-type-info.c:667
+msgid "Images"
+msgstr "Images"
+
+#: capplets/file-types/mime-type-info.c:669
+msgid "Video"
+msgstr "Vidéo"
+
+#: capplets/file-types/mime-type-info.c:671
+msgid "Audio"
+msgstr "Audio"
+
 #: capplets/file-types/mime-types-model.c:167
 #: capplets/file-types/mime-types-model.c:168
 msgid "Model for categories only"
@@ -1235,7 +1157,7 @@ msgid "Accelerator key"
 msgstr "Touche d'accélération"
 
 #: capplets/keybindings/eggcellrendererkeys.c:206
-#: capplets/keybindings/gnome-keybinding-properties.c:173
+#: capplets/keybindings/gnome-keybinding-properties.c:179
 #: libbackground/applier.c:521
 msgid "Disabled"
 msgstr "Désactivé"
@@ -1246,26 +1168,26 @@ msgstr "Désactivé"
 msgid "Type a new shortcut"
 msgstr "Saisissez un nouveau raccourci"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:440
+#: capplets/keybindings/gnome-keybinding-properties.c:446
 msgid "<Unknown Action>"
 msgstr "<Action Inconnu>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:459
+#: capplets/keybindings/gnome-keybinding-properties.c:465
 msgid "Desktop"
 msgstr "Bureau"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:463
+#: capplets/keybindings/gnome-keybinding-properties.c:469
 msgid "Window Management"
 msgstr "Gestion des fenêtres"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:560
+#: capplets/keybindings/gnome-keybinding-properties.c:566
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 "Erreur lors de la définition du nouvel accélérateur dans la base de données "
 "de configuration : %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:711
+#: capplets/keybindings/gnome-keybinding-properties.c:717
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1273,11 +1195,11 @@ msgstr ""
 "Impossible de trouver un seul thème de clavier.  Cela veut dire que votre "
 "installation de GT+ est vraisemblablement incomplète."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:733
+#: capplets/keybindings/gnome-keybinding-properties.c:739
 msgid "Action"
 msgstr "Action"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:749
+#: capplets/keybindings/gnome-keybinding-properties.c:755
 msgid "Shortcut"
 msgstr "Raccourci"
 
@@ -1302,12 +1224,12 @@ msgstr "Raccourcis d'édition de _texte :"
 msgid "Assign shortcut keys to commands"
 msgstr "Affecte des raccourcis claviers aux commandes"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:256
+#: capplets/keyboard/gnome-keyboard-properties.c:272
 msgid "_Accessibility"
 msgstr "A_ccessibilité"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:273
-#: capplets/keyboard/gnome-keyboard-properties.c:275
+#: capplets/keyboard/gnome-keyboard-properties.c:289
+#: capplets/keyboard/gnome-keyboard-properties.c:291
 #: capplets/sound/sound-properties-capplet.c:145
 #: capplets/sound/sound-properties-capplet.c:147
 msgid ""
@@ -1317,78 +1239,90 @@ msgstr ""
 "maintenant géré par un daemon)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:2
+msgid "<small><i>Fast</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+msgid "<small><i>Long</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+msgid "<small><i>Short</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+msgid "<small><i>Slow</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "Bee_p"
 msgstr "_Bip"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "C_ustom:"
 msgstr "_Personnalisé :"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "Clic_k on keypress"
 msgstr "_Clique au pressage de touche"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "Cursor Blinks"
 msgstr "Curseurs clignotants"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "Keyboard Bell"
 msgstr "Clique du clavier"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Keyboard Preferences"
 msgstr "Propriétés du clavier"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Keyboard _repeats when key is held down"
 msgstr "_Répétition lorsque une touche est maintenue enfoncée"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Keypress Click"
 msgstr "Clique au pressage de touche"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
 msgid "Repeat Keys"
 msgstr "Touches de répétition"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "S_peed:"
 msgstr "_Vitesse :"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid "_Accessibility..."
 msgstr "_Accessibilité..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "_Blinks in text boxes and fields"
 msgstr "_Clignotement dans les champs et boîtes de texte"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
 msgid "_Delay:"
 msgstr "_Délai :"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
 msgid "_Off"
 msgstr "_Off"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid "_Speed:"
 msgstr "_Vitesse :"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "_Volume:"
 msgstr "_Volume :"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
-msgid "faster"
-msgstr "plus rapide"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid "loud"
 msgstr "faible"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "quiet"
 msgstr "silence"
 
@@ -2070,7 +2004,7 @@ msgstr ""
 msgid "_Do not show this message again"
 msgstr "_Ne plus jamais afficher ce message"
 
-#: gnome-settings-daemon/gnome-settings-sound.c:125
+#: gnome-settings-daemon/gnome-settings-sound.c:128
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Impossible de charger le fichier %s comme échantillon %s"
@@ -2204,6 +2138,63 @@ msgstr ""
 #: libwindow-settings/gnome-wm-manager.c:464
 msgid "OK"
 msgstr "Valider"
+
+#~ msgid "Documents"
+#~ msgstr "Documents"
+
+#~ msgid "Word Processor"
+#~ msgstr "Traitement de texte"
+
+#~ msgid "Published Materials"
+#~ msgstr "Support de publication"
+
+#~ msgid "Spreadsheet"
+#~ msgstr "Tableur"
+
+#~ msgid "Presentation"
+#~ msgstr "Présentation"
+
+#~ msgid "Diagram"
+#~ msgstr "Diagramme"
+
+#~ msgid "TeX"
+#~ msgstr "TeX"
+
+#~ msgid "Vector Graphics"
+#~ msgstr "Graphiques vectoriels"
+
+#~ msgid "World Wide Web"
+#~ msgstr "World Wide Web"
+
+#~ msgid "Plain Text"
+#~ msgstr "Texte brut"
+
+#~ msgid "Extended Markup Language (XML)"
+#~ msgstr "Langage de marquage étendu (XML)"
+
+#~ msgid "Information"
+#~ msgstr "Information"
+
+#~ msgid "Financial"
+#~ msgstr "Finance"
+
+#~ msgid "Calendar"
+#~ msgstr "Calendrier"
+
+#~ msgid "Contacts"
+#~ msgstr "Contacts"
+
+#~ msgid "Packages"
+#~ msgstr "Archives"
+
+#~ msgid "Software Development"
+#~ msgstr "Développement logiciel"
+
+#~ msgid "Source Code"
+#~ msgstr "Code source"
+
+#~ msgid "faster"
+#~ msgstr "plus rapide"
 
 #~ msgid "<b>Test</b>"
 #~ msgstr "<b>Test</b>"

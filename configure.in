@@ -1,7 +1,7 @@
 AC_INIT(control-center)
 
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(control-center, 2.0.2)
+AM_INIT_AUTOMAKE(control-center, 2.0.1.1)
 
 AM_MAINTAINER_MODE
 
@@ -196,7 +196,6 @@ dnl End: Variables for config_archiverConf.sh.in
 dnl =======================================
 
 AC_OUTPUT([
-control-center.spec
 Makefile
 po/Makefile.in
 idl/Makefile
@@ -224,4 +223,8 @@ capplets/accessibility/keyboard/Makefile
 capplets/network/Makefile
 capplets/windows/Makefile
 schemas/Makefile
-libsounds/Makefile])
+libsounds/Makefile
+control-center.spec
+])
+dnl due to a bug in intltool we need to expand something from the root last
+dnl make sure that control-center.spec is listed last

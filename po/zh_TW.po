@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 1.99.10\n"
-"POT-Creation-Date: 2002-08-06 09:32-0400\n"
+"POT-Creation-Date: 2002-08-21 10:05-0400\n"
 "PO-Revision-Date: 2002-06-13 00:51+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:225
-#: capplets/keyboard/gnome-keyboard-properties.c:143
+#: capplets/keyboard/gnome-keyboard-properties.c:159
 #, fuzzy, c-format
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "顯示說明文件時發生錯誤：%s"
@@ -35,7 +35,7 @@ msgid "Select CDE AccessX file"
 msgstr "選擇 CDE AccessX 檔案"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "鍵盤"
@@ -247,7 +247,7 @@ msgstr "請選擇編輯器(_S)："
 #: capplets/background/background-properties-capplet.c:561
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
-#: capplets/keyboard/gnome-keyboard-properties.c:277
+#: capplets/keyboard/gnome-keyboard-properties.c:293
 #: capplets/mouse/gnome-mouse-properties.c:752
 #: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
@@ -785,7 +785,7 @@ msgid "Associate sounds with window manager events"
 msgstr "啟用視窗管理程式事件音效"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
 #: capplets/sound/sound.desktop.in.h:2
 msgid "Sound"
 msgstr "音效"
@@ -806,98 +806,6 @@ msgstr "舊式軟體"
 #: capplets/desktop-links/legacy-applications.desktop.in.in.h:2
 msgid "Legacy applications settings (grdb)"
 msgstr "舊式軟體設定（grdb）"
-
-#.
-#. * Translatable strings file
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/file-types/category-names.h:7
-msgid "Documents"
-msgstr "文件"
-
-#: capplets/file-types/category-names.h:8
-msgid "Word Processor"
-msgstr "文書處理器"
-
-#: capplets/file-types/category-names.h:9
-msgid "Published Materials"
-msgstr "出版文件"
-
-#: capplets/file-types/category-names.h:10
-msgid "Spreadsheet"
-msgstr "試算表"
-
-#: capplets/file-types/category-names.h:11
-msgid "Presentation"
-msgstr "簡報"
-
-#: capplets/file-types/category-names.h:12
-msgid "Diagram"
-msgstr "圖表"
-
-#: capplets/file-types/category-names.h:13
-msgid "TeX"
-msgstr "TeX"
-
-#: capplets/file-types/category-names.h:14
-msgid "Vector Graphics"
-msgstr "向量圖像"
-
-#: capplets/file-types/category-names.h:15
-msgid "World Wide Web"
-msgstr "互聯網"
-
-#: capplets/file-types/category-names.h:16
-msgid "Plain Text"
-msgstr "純文字"
-
-#: capplets/file-types/category-names.h:17
-msgid "Extended Markup Language (XML)"
-msgstr "XML"
-
-#: capplets/file-types/category-names.h:18
-msgid "Information"
-msgstr "資訊"
-
-#: capplets/file-types/category-names.h:19
-msgid "Financial"
-msgstr "財務"
-
-#: capplets/file-types/category-names.h:20
-msgid "Calendar"
-msgstr "行事曆"
-
-#: capplets/file-types/category-names.h:21
-msgid "Contacts"
-msgstr "連絡人"
-
-#: capplets/file-types/category-names.h:22
-msgid "Packages"
-msgstr "套件"
-
-#: capplets/file-types/category-names.h:23
-msgid "Software Development"
-msgstr "軟體開發"
-
-#: capplets/file-types/category-names.h:24
-msgid "Source Code"
-msgstr "源代碼"
-
-#: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:671
-msgid "Audio"
-msgstr "音效"
-
-#: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:667
-msgid "Images"
-msgstr "圖像"
-
-#: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:669
-msgid "Video"
-msgstr "視像"
 
 #: capplets/file-types/file-types-capplet.c:214
 msgid "Description"
@@ -922,11 +830,13 @@ msgid "Actions"
 msgstr "處理方式"
 
 #: capplets/file-types/file-types-properties.glade.h:3
-msgid "Add _file type..."
+#, fuzzy
+msgid "Add _File Type..."
 msgstr "新增檔案類型(_F)..."
 
 #: capplets/file-types/file-types-properties.glade.h:4
-msgid "Add _service..."
+#, fuzzy
+msgid "Add _Service..."
 msgstr "新增網絡服務(_S)..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
@@ -1109,6 +1019,18 @@ msgstr "分類"
 msgid "Choose a file category"
 msgstr "請選擇檔案分類"
 
+#: capplets/file-types/mime-type-info.c:667
+msgid "Images"
+msgstr "圖像"
+
+#: capplets/file-types/mime-type-info.c:669
+msgid "Video"
+msgstr "視像"
+
+#: capplets/file-types/mime-type-info.c:671
+msgid "Audio"
+msgstr "音效"
+
 #: capplets/file-types/mime-types-model.c:167
 #: capplets/file-types/mime-types-model.c:168
 msgid "Model for categories only"
@@ -1226,7 +1148,7 @@ msgid "Accelerator key"
 msgstr "快速鍵"
 
 #: capplets/keybindings/eggcellrendererkeys.c:206
-#: capplets/keybindings/gnome-keybinding-properties.c:173
+#: capplets/keybindings/gnome-keybinding-properties.c:179
 #: libbackground/applier.c:521
 msgid "Disabled"
 msgstr "已停用"
@@ -1238,34 +1160,34 @@ msgstr "已停用"
 msgid "Type a new shortcut"
 msgstr "請輸入新的快速鍵"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:440
+#: capplets/keybindings/gnome-keybinding-properties.c:446
 msgid "<Unknown Action>"
 msgstr "<行動設定不詳>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:459
+#: capplets/keybindings/gnome-keybinding-properties.c:465
 msgid "Desktop"
 msgstr "桌面"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:463
+#: capplets/keybindings/gnome-keybinding-properties.c:469
 msgid "Window Management"
 msgstr "視窗管理"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:560
+#: capplets/keybindings/gnome-keybinding-properties.c:566
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "在組態資料庫中設定新的快速鍵時出現錯誤：%s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:711
+#: capplets/keybindings/gnome-keybinding-properties.c:717
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:733
+#: capplets/keybindings/gnome-keybinding-properties.c:739
 msgid "Action"
 msgstr "行動"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:749
+#: capplets/keybindings/gnome-keybinding-properties.c:755
 msgid "Shortcut"
 msgstr "捷徑鍵"
 
@@ -1291,12 +1213,12 @@ msgstr "桌面捷徑鍵(_D)："
 msgid "Assign shortcut keys to commands"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.c:256
+#: capplets/keyboard/gnome-keyboard-properties.c:272
 msgid "_Accessibility"
 msgstr "輔助技術(_A)"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:273
-#: capplets/keyboard/gnome-keyboard-properties.c:275
+#: capplets/keyboard/gnome-keyboard-properties.c:289
+#: capplets/keyboard/gnome-keyboard-properties.c:291
 #: capplets/sound/sound-properties-capplet.c:145
 #: capplets/sound/sound-properties-capplet.c:147
 msgid ""
@@ -1304,88 +1226,99 @@ msgid ""
 msgstr "套用設定並離開（現在已經由伺服程式處理，此選擇只為提供兼容性而設）"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:2
-msgid "Bee_p"
+msgid "<small><i>Fast</i></small>"
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+msgid "<small><i>Long</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+msgid "<small><i>Short</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+msgid "<small><i>Slow</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+msgid "Bee_p"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
 #, fuzzy
 msgid "C_ustom:"
 msgstr "自訂"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "Clic_k on keypress"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 #, fuzzy
 msgid "Cursor Blinks"
 msgstr "鼠標"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "Keyboard Bell"
 msgstr "鍵盤聲響"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Keyboard Preferences"
 msgstr "鍵盤偏好設定"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Keyboard _repeats when key is held down"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 #, fuzzy
 msgid "Keypress Click"
 msgstr "鍵盤敲擊聲"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
 #, fuzzy
 msgid "Repeat Keys"
 msgstr "重複速率"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 #, fuzzy
 msgid "S_peed:"
 msgstr "速度"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid "_Accessibility..."
 msgstr "輔助技術(_A)..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
 #, fuzzy
 msgid "_Blinks in text boxes and fields"
 msgstr "文字輸入欄中的游標會閃爍(_B)"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
 #, fuzzy
 msgid "_Delay:"
 msgstr "延遲時間[秒](_D)："
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
 msgid "_Off"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
 #, fuzzy
 msgid "_Speed:"
 msgstr "速度"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "_Volume:"
 msgstr "音量(_V)："
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
-#, fuzzy
-msgid "faster"
-msgstr "快"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
 #, fuzzy
 msgid "loud"
 msgstr "音效"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "quiet"
 msgstr ""
 
@@ -2072,7 +2005,7 @@ msgstr ""
 msgid "_Do not show this message again"
 msgstr "不再顯示此訊息(_D)"
 
-#: gnome-settings-daemon/gnome-settings-sound.c:125
+#: gnome-settings-daemon/gnome-settings-sound.c:128
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr ""
@@ -2199,6 +2132,64 @@ msgstr ""
 #: libwindow-settings/gnome-wm-manager.c:464
 msgid "OK"
 msgstr "確定"
+
+#~ msgid "Documents"
+#~ msgstr "文件"
+
+#~ msgid "Word Processor"
+#~ msgstr "文書處理器"
+
+#~ msgid "Published Materials"
+#~ msgstr "出版文件"
+
+#~ msgid "Spreadsheet"
+#~ msgstr "試算表"
+
+#~ msgid "Presentation"
+#~ msgstr "簡報"
+
+#~ msgid "Diagram"
+#~ msgstr "圖表"
+
+#~ msgid "TeX"
+#~ msgstr "TeX"
+
+#~ msgid "Vector Graphics"
+#~ msgstr "向量圖像"
+
+#~ msgid "World Wide Web"
+#~ msgstr "互聯網"
+
+#~ msgid "Plain Text"
+#~ msgstr "純文字"
+
+#~ msgid "Extended Markup Language (XML)"
+#~ msgstr "XML"
+
+#~ msgid "Information"
+#~ msgstr "資訊"
+
+#~ msgid "Financial"
+#~ msgstr "財務"
+
+#~ msgid "Calendar"
+#~ msgstr "行事曆"
+
+#~ msgid "Contacts"
+#~ msgstr "連絡人"
+
+#~ msgid "Packages"
+#~ msgstr "套件"
+
+#~ msgid "Software Development"
+#~ msgstr "軟體開發"
+
+#~ msgid "Source Code"
+#~ msgstr "源代碼"
+
+#, fuzzy
+#~ msgid "faster"
+#~ msgstr "快"
 
 #~ msgid "<b>Test</b>"
 #~ msgstr "<b>測試</b>"

@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2002-08-06 09:32-0400\n"
+"POT-Creation-Date: 2002-08-21 10:05-0400\n"
 "PO-Revision-Date: 2002-06-09 20:17+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:225
-#: capplets/keyboard/gnome-keyboard-properties.c:143
+#: capplets/keyboard/gnome-keyboard-properties.c:159
 #, c-format
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr ""
@@ -29,7 +29,7 @@ msgid "Select CDE AccessX file"
 msgstr "Izberi datoteko CDE AccessX"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Tipkovnica"
@@ -241,7 +241,7 @@ msgstr "Izberi _sliko:"
 #: capplets/background/background-properties-capplet.c:561
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
-#: capplets/keyboard/gnome-keyboard-properties.c:277
+#: capplets/keyboard/gnome-keyboard-properties.c:293
 #: capplets/mouse/gnome-mouse-properties.c:752
 #: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
@@ -791,7 +791,7 @@ msgid "Associate sounds with window manager events"
 msgstr "Vklopi zvočne dogodke upravljalnika oken"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
 #: capplets/sound/sound.desktop.in.h:2
 msgid "Sound"
 msgstr "Zvok"
@@ -812,98 +812,6 @@ msgstr "Starejši programi"
 #: capplets/desktop-links/legacy-applications.desktop.in.in.h:2
 msgid "Legacy applications settings (grdb)"
 msgstr "Nastavitev starejših programov (grdb)"
-
-#.
-#. * Translatable strings file
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/file-types/category-names.h:7
-msgid "Documents"
-msgstr "Dokumenti"
-
-#: capplets/file-types/category-names.h:8
-msgid "Word Processor"
-msgstr "Urejevalnik besedila"
-
-#: capplets/file-types/category-names.h:9
-msgid "Published Materials"
-msgstr "Objavljeni materiali"
-
-#: capplets/file-types/category-names.h:10
-msgid "Spreadsheet"
-msgstr "Preglednica"
-
-#: capplets/file-types/category-names.h:11
-msgid "Presentation"
-msgstr "Predstavitev"
-
-#: capplets/file-types/category-names.h:12
-msgid "Diagram"
-msgstr "Diagram"
-
-#: capplets/file-types/category-names.h:13
-msgid "TeX"
-msgstr "TeX"
-
-#: capplets/file-types/category-names.h:14
-msgid "Vector Graphics"
-msgstr "Vektorska grafika"
-
-#: capplets/file-types/category-names.h:15
-msgid "World Wide Web"
-msgstr "Svetovni splet"
-
-#: capplets/file-types/category-names.h:16
-msgid "Plain Text"
-msgstr "Navadno besedilo"
-
-#: capplets/file-types/category-names.h:17
-msgid "Extended Markup Language (XML)"
-msgstr "Razširjen označevalni jezik (XML)"
-
-#: capplets/file-types/category-names.h:18
-msgid "Information"
-msgstr "Podatki"
-
-#: capplets/file-types/category-names.h:19
-msgid "Financial"
-msgstr "Finance"
-
-#: capplets/file-types/category-names.h:20
-msgid "Calendar"
-msgstr "Koledar"
-
-#: capplets/file-types/category-names.h:21
-msgid "Contacts"
-msgstr "Stiki"
-
-#: capplets/file-types/category-names.h:22
-msgid "Packages"
-msgstr "Paketi"
-
-#: capplets/file-types/category-names.h:23
-msgid "Software Development"
-msgstr "Razvoj programja"
-
-#: capplets/file-types/category-names.h:24
-msgid "Source Code"
-msgstr "Izvorna koda"
-
-#: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:671
-msgid "Audio"
-msgstr "Zvok"
-
-#: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:667
-msgid "Images"
-msgstr "Slike"
-
-#: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:669
-msgid "Video"
-msgstr "Video"
 
 #: capplets/file-types/file-types-capplet.c:214
 msgid "Description"
@@ -930,11 +838,13 @@ msgid "Actions"
 msgstr "Dejanja"
 
 #: capplets/file-types/file-types-properties.glade.h:3
-msgid "Add _file type..."
+#, fuzzy
+msgid "Add _File Type..."
 msgstr "Dodaj _vrsto datoteke..."
 
 #: capplets/file-types/file-types-properties.glade.h:4
-msgid "Add _service..."
+#, fuzzy
+msgid "Add _Service..."
 msgstr "Dodaj _storitev..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
@@ -1119,6 +1029,18 @@ msgstr "Kategorija"
 msgid "Choose a file category"
 msgstr "Izberite kategorijo datotek"
 
+#: capplets/file-types/mime-type-info.c:667
+msgid "Images"
+msgstr "Slike"
+
+#: capplets/file-types/mime-type-info.c:669
+msgid "Video"
+msgstr "Video"
+
+#: capplets/file-types/mime-type-info.c:671
+msgid "Audio"
+msgstr "Zvok"
+
 #: capplets/file-types/mime-types-model.c:167
 #: capplets/file-types/mime-types-model.c:168
 msgid "Model for categories only"
@@ -1238,7 +1160,7 @@ msgid "Accelerator key"
 msgstr "Pospeševalna tipka"
 
 #: capplets/keybindings/eggcellrendererkeys.c:206
-#: capplets/keybindings/gnome-keybinding-properties.c:173
+#: capplets/keybindings/gnome-keybinding-properties.c:179
 #: libbackground/applier.c:521
 msgid "Disabled"
 msgstr "Izključeno"
@@ -1250,26 +1172,26 @@ msgstr "Izključeno"
 msgid "Type a new shortcut"
 msgstr "Vpišite nov pospeševalnik"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:440
+#: capplets/keybindings/gnome-keybinding-properties.c:446
 msgid "<Unknown Action>"
 msgstr "<Neznano dejanje>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:459
+#: capplets/keybindings/gnome-keybinding-properties.c:465
 msgid "Desktop"
 msgstr "Namizje"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:463
+#: capplets/keybindings/gnome-keybinding-properties.c:469
 msgid "Window Management"
 msgstr "Upravljanje oken"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:560
+#: capplets/keybindings/gnome-keybinding-properties.c:566
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 "Napaka ob nastavljanju novega pospeševalnika v nastavitveni zbirki podatkov: "
 "%s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:711
+#: capplets/keybindings/gnome-keybinding-properties.c:717
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1277,11 +1199,11 @@ msgstr ""
 "Nisem našel teme tipkovnice  To pomeni, da je bila vaša namestitev GTK+ "
 "nepopolna."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:733
+#: capplets/keybindings/gnome-keybinding-properties.c:739
 msgid "Action"
 msgstr "Dejanje"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:749
+#: capplets/keybindings/gnome-keybinding-properties.c:755
 msgid "Shortcut"
 msgstr "Bližnjica"
 
@@ -1307,12 +1229,12 @@ msgstr "Bližnjice _namizja"
 msgid "Assign shortcut keys to commands"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.c:256
+#: capplets/keyboard/gnome-keyboard-properties.c:272
 msgid "_Accessibility"
 msgstr "_Dostopnost"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:273
-#: capplets/keyboard/gnome-keyboard-properties.c:275
+#: capplets/keyboard/gnome-keyboard-properties.c:289
+#: capplets/keyboard/gnome-keyboard-properties.c:291
 #: capplets/sound/sound-properties-capplet.c:145
 #: capplets/sound/sound-properties-capplet.c:147
 msgid ""
@@ -1322,87 +1244,98 @@ msgstr ""
 "obravnava daemon)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:2
-msgid "Bee_p"
+msgid "<small><i>Fast</i></small>"
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+msgid "<small><i>Long</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+msgid "<small><i>Short</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+msgid "<small><i>Slow</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+msgid "Bee_p"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
 #, fuzzy
 msgid "C_ustom:"
 msgstr "Prikrojeno"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "Clic_k on keypress"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 #, fuzzy
 msgid "Cursor Blinks"
 msgstr "Kazalci"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "Keyboard Bell"
 msgstr "Tipkovničin zvonec"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Keyboard Preferences"
 msgstr "Nastavitv tipkovnice"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Keyboard _repeats when key is held down"
 msgstr "Tipkovnica _ponavlja, ko je tipka pritisnjena"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Keypress Click"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
 #, fuzzy
 msgid "Repeat Keys"
 msgstr "Hitrost ponavljanja"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 #, fuzzy
 msgid "S_peed:"
 msgstr "Hitrost"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid "_Accessibility..."
 msgstr "_Dostopnost..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
 #, fuzzy
 msgid "_Blinks in text boxes and fields"
 msgstr "Kazalec _utripa v poljih besedil"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
 #, fuzzy
 msgid "_Delay:"
 msgstr "_Premor (sek):"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
 msgid "_Off"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
 #, fuzzy
 msgid "_Speed:"
 msgstr "Hitrost"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "_Volume:"
 msgstr "_Glasnost:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
-#, fuzzy
-msgid "faster"
-msgstr "Hitro"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
 #, fuzzy
 msgid "loud"
 msgstr "Zvok"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "quiet"
 msgstr ""
 
@@ -2094,7 +2027,7 @@ msgstr ""
 msgid "_Do not show this message again"
 msgstr "_Ne kaži več tega sporočila"
 
-#: gnome-settings-daemon/gnome-settings-sound.c:125
+#: gnome-settings-daemon/gnome-settings-sound.c:128
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "Nisem mogel naložiti zvočne datoteke %s kot vzorca %s"
@@ -2225,6 +2158,64 @@ msgstr ""
 #: libwindow-settings/gnome-wm-manager.c:464
 msgid "OK"
 msgstr "V redu"
+
+#~ msgid "Documents"
+#~ msgstr "Dokumenti"
+
+#~ msgid "Word Processor"
+#~ msgstr "Urejevalnik besedila"
+
+#~ msgid "Published Materials"
+#~ msgstr "Objavljeni materiali"
+
+#~ msgid "Spreadsheet"
+#~ msgstr "Preglednica"
+
+#~ msgid "Presentation"
+#~ msgstr "Predstavitev"
+
+#~ msgid "Diagram"
+#~ msgstr "Diagram"
+
+#~ msgid "TeX"
+#~ msgstr "TeX"
+
+#~ msgid "Vector Graphics"
+#~ msgstr "Vektorska grafika"
+
+#~ msgid "World Wide Web"
+#~ msgstr "Svetovni splet"
+
+#~ msgid "Plain Text"
+#~ msgstr "Navadno besedilo"
+
+#~ msgid "Extended Markup Language (XML)"
+#~ msgstr "Razširjen označevalni jezik (XML)"
+
+#~ msgid "Information"
+#~ msgstr "Podatki"
+
+#~ msgid "Financial"
+#~ msgstr "Finance"
+
+#~ msgid "Calendar"
+#~ msgstr "Koledar"
+
+#~ msgid "Contacts"
+#~ msgstr "Stiki"
+
+#~ msgid "Packages"
+#~ msgstr "Paketi"
+
+#~ msgid "Software Development"
+#~ msgstr "Razvoj programja"
+
+#~ msgid "Source Code"
+#~ msgstr "Izvorna koda"
+
+#, fuzzy
+#~ msgid "faster"
+#~ msgstr "Hitro"
 
 #~ msgid "Picture bor_der:"
 #~ msgstr "Ro_b slike:"

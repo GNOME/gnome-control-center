@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.5\n"
-"POT-Creation-Date: 2002-08-06 09:32-0400\n"
+"POT-Creation-Date: 2002-08-21 10:05-0400\n"
 "PO-Revision-Date: 2000-10-11 13:47+02:00\n"
 "Last-Translator: David Sauer <davids@penguin.cz>\n"
 "Language-Team: czech <cs@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8-bit\n"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:225
-#: capplets/keyboard/gnome-keyboard-properties.c:143
+#: capplets/keyboard/gnome-keyboard-properties.c:159
 #, fuzzy, c-format
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Stala se chyba pøi ukazování nápovìdy: %s"
@@ -31,7 +31,7 @@ msgid "Select CDE AccessX file"
 msgstr "Výbìr souboru se zvukem"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Klávesnice"
@@ -246,7 +246,7 @@ msgstr "Výbìr ikony..."
 #: capplets/background/background-properties-capplet.c:561
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
-#: capplets/keyboard/gnome-keyboard-properties.c:277
+#: capplets/keyboard/gnome-keyboard-properties.c:293
 #: capplets/mouse/gnome-mouse-properties.c:752
 #: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
@@ -785,7 +785,7 @@ msgid "Associate sounds with window manager events"
 msgstr "Nastavení zvukových událostí správce oken"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
 #: capplets/sound/sound.desktop.in.h:2
 msgid "Sound"
 msgstr "Zvuk"
@@ -807,98 +807,6 @@ msgstr "Standardní nastavení Gtk"
 #: capplets/desktop-links/legacy-applications.desktop.in.in.h:2
 msgid "Legacy applications settings (grdb)"
 msgstr ""
-
-#.
-#. * Translatable strings file
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/file-types/category-names.h:7
-msgid "Documents"
-msgstr "Dokumenty"
-
-#: capplets/file-types/category-names.h:8
-msgid "Word Processor"
-msgstr ""
-
-#: capplets/file-types/category-names.h:9
-msgid "Published Materials"
-msgstr "Publikované materiály"
-
-#: capplets/file-types/category-names.h:10
-msgid "Spreadsheet"
-msgstr "Tabulka"
-
-#: capplets/file-types/category-names.h:11
-msgid "Presentation"
-msgstr "Presentace"
-
-#: capplets/file-types/category-names.h:12
-msgid "Diagram"
-msgstr "Diagram"
-
-#: capplets/file-types/category-names.h:13
-msgid "TeX"
-msgstr "TeX"
-
-#: capplets/file-types/category-names.h:14
-msgid "Vector Graphics"
-msgstr "Vektorová grafika"
-
-#: capplets/file-types/category-names.h:15
-msgid "World Wide Web"
-msgstr ""
-
-#: capplets/file-types/category-names.h:16
-msgid "Plain Text"
-msgstr "Normální text"
-
-#: capplets/file-types/category-names.h:17
-msgid "Extended Markup Language (XML)"
-msgstr ""
-
-#: capplets/file-types/category-names.h:18
-msgid "Information"
-msgstr "Informace"
-
-#: capplets/file-types/category-names.h:19
-msgid "Financial"
-msgstr "Finanèní"
-
-#: capplets/file-types/category-names.h:20
-msgid "Calendar"
-msgstr "Kalendáø"
-
-#: capplets/file-types/category-names.h:21
-msgid "Contacts"
-msgstr "Kontakty"
-
-#: capplets/file-types/category-names.h:22
-msgid "Packages"
-msgstr "Balíèky"
-
-#: capplets/file-types/category-names.h:23
-msgid "Software Development"
-msgstr "Vývoj softwaru"
-
-#: capplets/file-types/category-names.h:24
-msgid "Source Code"
-msgstr "Zdrojový kód"
-
-#: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:671
-msgid "Audio"
-msgstr "Audio"
-
-#: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:667
-msgid "Images"
-msgstr "Obrázky"
-
-#: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:669
-msgid "Video"
-msgstr "Video"
 
 #: capplets/file-types/file-types-capplet.c:214
 msgid "Description"
@@ -923,11 +831,13 @@ msgid "Actions"
 msgstr "Akce"
 
 #: capplets/file-types/file-types-properties.glade.h:3
-msgid "Add _file type..."
+#, fuzzy
+msgid "Add _File Type..."
 msgstr "Pøidat typ _souboru"
 
 #: capplets/file-types/file-types-properties.glade.h:4
-msgid "Add _service..."
+#, fuzzy
+msgid "Add _Service..."
 msgstr "Pøidat _slu¾bu..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
@@ -1110,6 +1020,18 @@ msgstr "Kategorie"
 msgid "Choose a file category"
 msgstr ""
 
+#: capplets/file-types/mime-type-info.c:667
+msgid "Images"
+msgstr "Obrázky"
+
+#: capplets/file-types/mime-type-info.c:669
+msgid "Video"
+msgstr "Video"
+
+#: capplets/file-types/mime-type-info.c:671
+msgid "Audio"
+msgstr "Audio"
+
 #: capplets/file-types/mime-types-model.c:167
 #: capplets/file-types/mime-types-model.c:168
 msgid "Model for categories only"
@@ -1227,7 +1149,7 @@ msgid "Accelerator key"
 msgstr "Klávesa zkratky"
 
 #: capplets/keybindings/eggcellrendererkeys.c:206
-#: capplets/keybindings/gnome-keybinding-properties.c:173
+#: capplets/keybindings/gnome-keybinding-properties.c:179
 #: libbackground/applier.c:521
 msgid "Disabled"
 msgstr "Zakázán"
@@ -1239,34 +1161,34 @@ msgstr "Zakázán"
 msgid "Type a new shortcut"
 msgstr "Napi¹te novou zkratku"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:440
+#: capplets/keybindings/gnome-keybinding-properties.c:446
 msgid "<Unknown Action>"
 msgstr "<Neznámá akce>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:459
+#: capplets/keybindings/gnome-keybinding-properties.c:465
 msgid "Desktop"
 msgstr "Plocha"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:463
+#: capplets/keybindings/gnome-keybinding-properties.c:469
 msgid "Window Management"
 msgstr "Správa oken"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:560
+#: capplets/keybindings/gnome-keybinding-properties.c:566
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:711
+#: capplets/keybindings/gnome-keybinding-properties.c:717
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:733
+#: capplets/keybindings/gnome-keybinding-properties.c:739
 msgid "Action"
 msgstr "Akce"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:749
+#: capplets/keybindings/gnome-keybinding-properties.c:755
 msgid "Shortcut"
 msgstr "Zkratka"
 
@@ -1292,13 +1214,13 @@ msgstr "Zkratky _plochy:"
 msgid "Assign shortcut keys to commands"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.c:256
+#: capplets/keyboard/gnome-keyboard-properties.c:272
 #, fuzzy
 msgid "_Accessibility"
 msgstr "Náhodné nastavení"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:273
-#: capplets/keyboard/gnome-keyboard-properties.c:275
+#: capplets/keyboard/gnome-keyboard-properties.c:289
+#: capplets/keyboard/gnome-keyboard-properties.c:291
 #: capplets/sound/sound-properties-capplet.c:145
 #: capplets/sound/sound-properties-capplet.c:147
 msgid ""
@@ -1306,90 +1228,101 @@ msgid ""
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:2
-msgid "Bee_p"
+msgid "<small><i>Fast</i></small>"
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+msgid "<small><i>Long</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+msgid "<small><i>Short</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+msgid "<small><i>Slow</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+msgid "Bee_p"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
 #, fuzzy
 msgid "C_ustom:"
 msgstr "Vlastní"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 #, fuzzy
 msgid "Clic_k on keypress"
 msgstr "Pípnutí pøi stisku"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 #, fuzzy
 msgid "Cursor Blinks"
 msgstr "Kursory"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "Keyboard Bell"
 msgstr "Zvonek klávesnice"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Keyboard Preferences"
 msgstr "Vlastnosti klávesnice"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Keyboard _repeats when key is held down"
 msgstr "Znak se _zopakuje kdy¾ je klávesa stlaèena"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 #, fuzzy
 msgid "Keypress Click"
 msgstr "Pípání kláves"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
 #, fuzzy
 msgid "Repeat Keys"
 msgstr "Prodleva opakování"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 #, fuzzy
 msgid "S_peed:"
 msgstr "Rychlost"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 #, fuzzy
 msgid "_Accessibility..."
 msgstr "Náhodné nastavení"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
 #, fuzzy
 msgid "_Blinks in text boxes and fields"
 msgstr "Kursor _bliká v textových polích"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
 #, fuzzy
 msgid "_Delay:"
 msgstr "_Zpo¾dìní (vteøin):"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
 msgid "_Off"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
 #, fuzzy
 msgid "_Speed:"
 msgstr "Rychlost"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "_Volume:"
 msgstr "_Hlasitost:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
-#, fuzzy
-msgid "faster"
-msgstr "Rychle"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
 #, fuzzy
 msgid "loud"
 msgstr "Zvuk"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "quiet"
 msgstr ""
 
@@ -2069,7 +2002,7 @@ msgstr ""
 msgid "_Do not show this message again"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-sound.c:125
+#: gnome-settings-daemon/gnome-settings-sound.c:128
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr ""
@@ -2197,6 +2130,55 @@ msgstr ""
 #: libwindow-settings/gnome-wm-manager.c:464
 msgid "OK"
 msgstr "Budi¾"
+
+#~ msgid "Documents"
+#~ msgstr "Dokumenty"
+
+#~ msgid "Published Materials"
+#~ msgstr "Publikované materiály"
+
+#~ msgid "Spreadsheet"
+#~ msgstr "Tabulka"
+
+#~ msgid "Presentation"
+#~ msgstr "Presentace"
+
+#~ msgid "Diagram"
+#~ msgstr "Diagram"
+
+#~ msgid "TeX"
+#~ msgstr "TeX"
+
+#~ msgid "Vector Graphics"
+#~ msgstr "Vektorová grafika"
+
+#~ msgid "Plain Text"
+#~ msgstr "Normální text"
+
+#~ msgid "Information"
+#~ msgstr "Informace"
+
+#~ msgid "Financial"
+#~ msgstr "Finanèní"
+
+#~ msgid "Calendar"
+#~ msgstr "Kalendáø"
+
+#~ msgid "Contacts"
+#~ msgstr "Kontakty"
+
+#~ msgid "Packages"
+#~ msgstr "Balíèky"
+
+#~ msgid "Software Development"
+#~ msgstr "Vývoj softwaru"
+
+#~ msgid "Source Code"
+#~ msgstr "Zdrojový kód"
+
+#, fuzzy
+#~ msgid "faster"
+#~ msgstr "Rychle"
 
 #~ msgid "<b>Test</b>"
 #~ msgstr "<b>Test</b>"

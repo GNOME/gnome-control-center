@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 1.5.5\n"
-"POT-Creation-Date: 2002-08-06 09:32-0400\n"
+"POT-Creation-Date: 2002-08-21 10:05-0400\n"
 "PO-Revision-Date: Mon Dec 20 1999 21:34:11+0200\n"
 "Last-Translator: Vladimir Vuksan <vuksan@veus.hr>\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "X-Generator: KTranslator v 0.5.0\n"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:225
-#: capplets/keyboard/gnome-keyboard-properties.c:143
+#: capplets/keyboard/gnome-keyboard-properties.c:159
 #, c-format
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr ""
@@ -31,7 +31,7 @@ msgid "Select CDE AccessX file"
 msgstr "Izaberi datoteku sa zvukom"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr ""
@@ -249,7 +249,7 @@ msgstr "Izaberi ikonu..."
 #: capplets/background/background-properties-capplet.c:561
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
-#: capplets/keyboard/gnome-keyboard-properties.c:277
+#: capplets/keyboard/gnome-keyboard-properties.c:293
 #: capplets/mouse/gnome-mouse-properties.c:752
 #: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
@@ -808,7 +808,7 @@ msgid "Associate sounds with window manager events"
 msgstr "Ukljuèi ¹tednju energije"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
 #: capplets/sound/sound.desktop.in.h:2
 #, fuzzy
 msgid "Sound"
@@ -830,101 +830,6 @@ msgstr ""
 #: capplets/desktop-links/legacy-applications.desktop.in.in.h:2
 msgid "Legacy applications settings (grdb)"
 msgstr ""
-
-#.
-#. * Translatable strings file
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/file-types/category-names.h:7
-msgid "Documents"
-msgstr ""
-
-#: capplets/file-types/category-names.h:8
-msgid "Word Processor"
-msgstr ""
-
-#: capplets/file-types/category-names.h:9
-msgid "Published Materials"
-msgstr ""
-
-#: capplets/file-types/category-names.h:10
-msgid "Spreadsheet"
-msgstr ""
-
-#: capplets/file-types/category-names.h:11
-msgid "Presentation"
-msgstr ""
-
-#: capplets/file-types/category-names.h:12
-msgid "Diagram"
-msgstr ""
-
-#: capplets/file-types/category-names.h:13
-msgid "TeX"
-msgstr ""
-
-#: capplets/file-types/category-names.h:14
-msgid "Vector Graphics"
-msgstr ""
-
-#: capplets/file-types/category-names.h:15
-msgid "World Wide Web"
-msgstr ""
-
-#: capplets/file-types/category-names.h:16
-msgid "Plain Text"
-msgstr ""
-
-#: capplets/file-types/category-names.h:17
-msgid "Extended Markup Language (XML)"
-msgstr ""
-
-#: capplets/file-types/category-names.h:18
-#, fuzzy
-msgid "Information"
-msgstr "Pokret mi¹a"
-
-#: capplets/file-types/category-names.h:19
-msgid "Financial"
-msgstr ""
-
-#: capplets/file-types/category-names.h:20
-msgid "Calendar"
-msgstr ""
-
-#: capplets/file-types/category-names.h:21
-msgid "Contacts"
-msgstr ""
-
-#: capplets/file-types/category-names.h:22
-msgid "Packages"
-msgstr ""
-
-#: capplets/file-types/category-names.h:23
-msgid "Software Development"
-msgstr ""
-
-#: capplets/file-types/category-names.h:24
-msgid "Source Code"
-msgstr ""
-
-#: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:671
-msgid "Audio"
-msgstr ""
-
-#: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:667
-#, fuzzy
-msgid "Images"
-msgstr "Veliko"
-
-#: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:669
-#, fuzzy
-msgid "Video"
-msgstr "Pogled"
 
 #: capplets/file-types/file-types-capplet.c:214
 #, fuzzy
@@ -952,12 +857,12 @@ msgstr "Postavke"
 
 #: capplets/file-types/file-types-properties.glade.h:3
 #, fuzzy
-msgid "Add _file type..."
+msgid "Add _File Type..."
 msgstr "Dodaj mime tip"
 
 #: capplets/file-types/file-types-properties.glade.h:4
 #, fuzzy
-msgid "Add _service..."
+msgid "Add _Service..."
 msgstr "Dodavanje..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
@@ -1149,6 +1054,20 @@ msgstr ""
 msgid "Choose a file category"
 msgstr ""
 
+#: capplets/file-types/mime-type-info.c:667
+#, fuzzy
+msgid "Images"
+msgstr "Veliko"
+
+#: capplets/file-types/mime-type-info.c:669
+#, fuzzy
+msgid "Video"
+msgstr "Pogled"
+
+#: capplets/file-types/mime-type-info.c:671
+msgid "Audio"
+msgstr ""
+
 #: capplets/file-types/mime-types-model.c:167
 #: capplets/file-types/mime-types-model.c:168
 msgid "Model for categories only"
@@ -1272,7 +1191,7 @@ msgid "Accelerator key"
 msgstr "Ubrzanje"
 
 #: capplets/keybindings/eggcellrendererkeys.c:206
-#: capplets/keybindings/gnome-keybinding-properties.c:173
+#: capplets/keybindings/gnome-keybinding-properties.c:179
 #: libbackground/applier.c:521
 msgid "Disabled"
 msgstr "Onemoguæen"
@@ -1283,37 +1202,37 @@ msgstr "Onemoguæen"
 msgid "Type a new shortcut"
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:440
+#: capplets/keybindings/gnome-keybinding-properties.c:446
 #, fuzzy
 msgid "<Unknown Action>"
 msgstr "Nepoznat"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:459
+#: capplets/keybindings/gnome-keybinding-properties.c:465
 msgid "Desktop"
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:463
+#: capplets/keybindings/gnome-keybinding-properties.c:469
 #, fuzzy
 msgid "Window Management"
 msgstr "Izbor pozadinske slike"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:560
+#: capplets/keybindings/gnome-keybinding-properties.c:566
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:711
+#: capplets/keybindings/gnome-keybinding-properties.c:717
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:733
+#: capplets/keybindings/gnome-keybinding-properties.c:739
 #, fuzzy
 msgid "Action"
 msgstr "Postavke"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:749
+#: capplets/keybindings/gnome-keybinding-properties.c:755
 #, fuzzy
 msgid "Shortcut"
 msgstr "Sporo"
@@ -1342,13 +1261,13 @@ msgstr "Sporo"
 msgid "Assign shortcut keys to commands"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.c:256
+#: capplets/keyboard/gnome-keyboard-properties.c:272
 #, fuzzy
 msgid "_Accessibility"
 msgstr "Postavke"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:273
-#: capplets/keyboard/gnome-keyboard-properties.c:275
+#: capplets/keyboard/gnome-keyboard-properties.c:289
+#: capplets/keyboard/gnome-keyboard-properties.c:291
 #: capplets/sound/sound-properties-capplet.c:145
 #: capplets/sound/sound-properties-capplet.c:147
 msgid ""
@@ -1356,87 +1275,98 @@ msgid ""
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:2
-msgid "Bee_p"
+msgid "<small><i>Fast</i></small>"
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+msgid "<small><i>Long</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+msgid "<small><i>Short</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+msgid "<small><i>Slow</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+msgid "Bee_p"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
 #, fuzzy
 msgid "C_ustom:"
 msgstr "Pokreni u terminalu"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "Clic_k on keypress"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 #, fuzzy
 msgid "Cursor Blinks"
 msgstr "Boja"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "Keyboard Bell"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 #, fuzzy
 msgid "Keyboard Preferences"
 msgstr "Izabire boju pozadine"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Keyboard _repeats when key is held down"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Keypress Click"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
 #, fuzzy
 msgid "Repeat Keys"
 msgstr "Razmak ponavljanja"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "S_peed:"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 #, fuzzy
 msgid "_Accessibility..."
 msgstr "Postavke"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "_Blinks in text boxes and fields"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
 #, fuzzy
 msgid "_Delay:"
 msgstr "Sviraj"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
 msgid "_Off"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid "_Speed:"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 #, fuzzy
 msgid "_Volume:"
 msgstr "Jakost glasa"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
-#, fuzzy
-msgid "faster"
-msgstr "Brzo"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
 #, fuzzy
 msgid "loud"
 msgstr "Izaberi ikonu..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "quiet"
 msgstr ""
 
@@ -2129,7 +2059,7 @@ msgstr ""
 msgid "_Do not show this message again"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-sound.c:125
+#: gnome-settings-daemon/gnome-settings-sound.c:128
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr ""
@@ -2248,6 +2178,14 @@ msgstr ""
 #: libwindow-settings/gnome-wm-manager.c:464
 msgid "OK"
 msgstr "U redu"
+
+#, fuzzy
+#~ msgid "Information"
+#~ msgstr "Pokret mi¹a"
+
+#, fuzzy
+#~ msgid "faster"
+#~ msgstr "Brzo"
 
 #, fuzzy
 #~ msgid "Configure window appearance"

@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.99.10\n"
-"POT-Creation-Date: 2002-08-06 09:32-0400\n"
+"POT-Creation-Date: 2002-08-21 10:05-0400\n"
 "PO-Revision-Date: 2002-07-21 20:53+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: Korean <gnome-kr-translation@lists.sourceforge.net>\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:225
-#: capplets/keyboard/gnome-keyboard-properties.c:143
+#: capplets/keyboard/gnome-keyboard-properties.c:159
 #, c-format
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "키보드 애플릿을 시작하는 데 오류가 발생했습니다: %s"
@@ -28,7 +28,7 @@ msgid "Select CDE AccessX file"
 msgstr "CDE AccessX 파일 선택"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "키보드"
@@ -236,7 +236,7 @@ msgstr "그림 선택(_P):"
 #: capplets/background/background-properties-capplet.c:561
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
-#: capplets/keyboard/gnome-keyboard-properties.c:277
+#: capplets/keyboard/gnome-keyboard-properties.c:293
 #: capplets/mouse/gnome-mouse-properties.c:752
 #: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
@@ -770,7 +770,7 @@ msgid "Associate sounds with window manager events"
 msgstr "창 관리자 이벤트에 사운드를 연결합니다"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
 #: capplets/sound/sound.desktop.in.h:2
 msgid "Sound"
 msgstr "소리"
@@ -790,98 +790,6 @@ msgstr "기존 응용프로그램"
 #: capplets/desktop-links/legacy-applications.desktop.in.in.h:2
 msgid "Legacy applications settings (grdb)"
 msgstr "기존 응용프로그램 설정(grdb)"
-
-#.
-#. * Translatable strings file
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/file-types/category-names.h:7
-msgid "Documents"
-msgstr "문서"
-
-#: capplets/file-types/category-names.h:8
-msgid "Word Processor"
-msgstr "워드 프로세서"
-
-#: capplets/file-types/category-names.h:9
-msgid "Published Materials"
-msgstr "출판물"
-
-#: capplets/file-types/category-names.h:10
-msgid "Spreadsheet"
-msgstr "스프레드시트"
-
-#: capplets/file-types/category-names.h:11
-msgid "Presentation"
-msgstr "프레젠테이션"
-
-#: capplets/file-types/category-names.h:12
-msgid "Diagram"
-msgstr "다이아그램"
-
-#: capplets/file-types/category-names.h:13
-msgid "TeX"
-msgstr "TeX"
-
-#: capplets/file-types/category-names.h:14
-msgid "Vector Graphics"
-msgstr "벡터 그래픽"
-
-#: capplets/file-types/category-names.h:15
-msgid "World Wide Web"
-msgstr "웹 문서"
-
-#: capplets/file-types/category-names.h:16
-msgid "Plain Text"
-msgstr "일반 텍스트"
-
-#: capplets/file-types/category-names.h:17
-msgid "Extended Markup Language (XML)"
-msgstr "확장 마크업 언어 (XML)"
-
-#: capplets/file-types/category-names.h:18
-msgid "Information"
-msgstr "정보"
-
-#: capplets/file-types/category-names.h:19
-msgid "Financial"
-msgstr "재정"
-
-#: capplets/file-types/category-names.h:20
-msgid "Calendar"
-msgstr "달력"
-
-#: capplets/file-types/category-names.h:21
-msgid "Contacts"
-msgstr "연락처"
-
-#: capplets/file-types/category-names.h:22
-msgid "Packages"
-msgstr "꾸러미"
-
-#: capplets/file-types/category-names.h:23
-msgid "Software Development"
-msgstr "소프트웨어 개발"
-
-#: capplets/file-types/category-names.h:24
-msgid "Source Code"
-msgstr "소스 코드"
-
-#: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:671
-msgid "Audio"
-msgstr "오디오"
-
-#: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:667
-msgid "Images"
-msgstr "그림"
-
-#: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:669
-msgid "Video"
-msgstr "비디오"
 
 #: capplets/file-types/file-types-capplet.c:214
 msgid "Description"
@@ -906,11 +814,13 @@ msgid "Actions"
 msgstr "동작"
 
 #: capplets/file-types/file-types-properties.glade.h:3
-msgid "Add _file type..."
+#, fuzzy
+msgid "Add _File Type..."
 msgstr "파일 형식 추가(_F)..."
 
 #: capplets/file-types/file-types-properties.glade.h:4
-msgid "Add _service..."
+#, fuzzy
+msgid "Add _Service..."
 msgstr "서비스 추가(_S)..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
@@ -1087,6 +997,18 @@ msgstr "범주"
 msgid "Choose a file category"
 msgstr "파일 분류 선택"
 
+#: capplets/file-types/mime-type-info.c:667
+msgid "Images"
+msgstr "그림"
+
+#: capplets/file-types/mime-type-info.c:669
+msgid "Video"
+msgstr "비디오"
+
+#: capplets/file-types/mime-type-info.c:671
+msgid "Audio"
+msgstr "오디오"
+
 #: capplets/file-types/mime-types-model.c:167
 #: capplets/file-types/mime-types-model.c:168
 msgid "Model for categories only"
@@ -1202,7 +1124,7 @@ msgid "Accelerator key"
 msgstr "단축 키"
 
 #: capplets/keybindings/eggcellrendererkeys.c:206
-#: capplets/keybindings/gnome-keybinding-properties.c:173
+#: capplets/keybindings/gnome-keybinding-properties.c:179
 #: libbackground/applier.c:521
 msgid "Disabled"
 msgstr "사용 않음"
@@ -1213,34 +1135,34 @@ msgstr "사용 않음"
 msgid "Type a new shortcut"
 msgstr "새 단축 키를 타이프하십시오"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:440
+#: capplets/keybindings/gnome-keybinding-properties.c:446
 msgid "<Unknown Action>"
 msgstr "<알 수 없는 동작>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:459
+#: capplets/keybindings/gnome-keybinding-properties.c:465
 msgid "Desktop"
 msgstr "바탕 화면"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:463
+#: capplets/keybindings/gnome-keybinding-properties.c:469
 msgid "Window Management"
 msgstr "창 관리자"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:560
+#: capplets/keybindings/gnome-keybinding-properties.c:566
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "설정 데이터 베이스에서 새로운 단축글쇠 설정 오류: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:711
+#: capplets/keybindings/gnome-keybinding-properties.c:717
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
 msgstr "키보드 테마를 찾을 수 없습니다.  GTK+ 설치가 불완전하기 때문입니다."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:733
+#: capplets/keybindings/gnome-keybinding-properties.c:739
 msgid "Action"
 msgstr "동작"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:749
+#: capplets/keybindings/gnome-keybinding-properties.c:755
 msgid "Shortcut"
 msgstr "바로 가기"
 
@@ -1265,12 +1187,12 @@ msgstr "텍스트 편집 단축키(_T):"
 msgid "Assign shortcut keys to commands"
 msgstr "명령어에 단축 키를 지정합니다"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:256
+#: capplets/keyboard/gnome-keyboard-properties.c:272
 msgid "_Accessibility"
 msgstr "접근성 기능(_A)"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:273
-#: capplets/keyboard/gnome-keyboard-properties.c:275
+#: capplets/keyboard/gnome-keyboard-properties.c:289
+#: capplets/keyboard/gnome-keyboard-properties.c:291
 #: capplets/sound/sound-properties-capplet.c:145
 #: capplets/sound/sound-properties-capplet.c:147
 msgid ""
@@ -1278,78 +1200,90 @@ msgid ""
 msgstr "설정을 적용하고 마칩니다 (호환성; 이제 데몬이 처리합니다)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:2
+msgid "<small><i>Fast</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+msgid "<small><i>Long</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+msgid "<small><i>Short</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+msgid "<small><i>Slow</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "Bee_p"
 msgstr "삑소리(_P)"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "C_ustom:"
 msgstr "사용자 설정(_U):"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "Clic_k on keypress"
 msgstr "키 누를 때 딸깍 소리(_K)"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "Cursor Blinks"
 msgstr "커서 깜박임"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "Keyboard Bell"
 msgstr "키보드 삑소리"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Keyboard Preferences"
 msgstr "키보드 등록 정보"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Keyboard _repeats when key is held down"
 msgstr "키를 누르고 있을 때 키보드 반복(_R)"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Keypress Click"
 msgstr "키 누름 딸깍 소리"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
 msgid "Repeat Keys"
 msgstr "반복 키"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "S_peed:"
 msgstr "속도(_P):"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid "_Accessibility..."
 msgstr "접근성 기능(_A)..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "_Blinks in text boxes and fields"
 msgstr "텍스트 상자와 필드에서 깜박이기(_B)"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
 msgid "_Delay:"
 msgstr "지연 시간(_D):"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
 msgid "_Off"
 msgstr "끄기(_O)"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid "_Speed:"
 msgstr "속도(_S):"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "_Volume:"
 msgstr "볼륨(_V):"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
-msgid "faster"
-msgstr "빠르게"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid "loud"
 msgstr "크게"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "quiet"
 msgstr "조용히"
 
@@ -2018,7 +1952,7 @@ msgstr ""
 msgid "_Do not show this message again"
 msgstr "이 메세지를 다시 표시하지 않기(_D)"
 
-#: gnome-settings-daemon/gnome-settings-sound.c:125
+#: gnome-settings-daemon/gnome-settings-sound.c:128
 #, c-format
 msgid "Couldn't load sound file %s as sample %s"
 msgstr "사운드 파일 %s을(를) 샘플 %s(으)로 읽어들일 수 없습니다"
@@ -2148,3 +2082,60 @@ msgstr ""
 #: libwindow-settings/gnome-wm-manager.c:464
 msgid "OK"
 msgstr "확인"
+
+#~ msgid "Documents"
+#~ msgstr "문서"
+
+#~ msgid "Word Processor"
+#~ msgstr "워드 프로세서"
+
+#~ msgid "Published Materials"
+#~ msgstr "출판물"
+
+#~ msgid "Spreadsheet"
+#~ msgstr "스프레드시트"
+
+#~ msgid "Presentation"
+#~ msgstr "프레젠테이션"
+
+#~ msgid "Diagram"
+#~ msgstr "다이아그램"
+
+#~ msgid "TeX"
+#~ msgstr "TeX"
+
+#~ msgid "Vector Graphics"
+#~ msgstr "벡터 그래픽"
+
+#~ msgid "World Wide Web"
+#~ msgstr "웹 문서"
+
+#~ msgid "Plain Text"
+#~ msgstr "일반 텍스트"
+
+#~ msgid "Extended Markup Language (XML)"
+#~ msgstr "확장 마크업 언어 (XML)"
+
+#~ msgid "Information"
+#~ msgstr "정보"
+
+#~ msgid "Financial"
+#~ msgstr "재정"
+
+#~ msgid "Calendar"
+#~ msgstr "달력"
+
+#~ msgid "Contacts"
+#~ msgstr "연락처"
+
+#~ msgid "Packages"
+#~ msgstr "꾸러미"
+
+#~ msgid "Software Development"
+#~ msgstr "소프트웨어 개발"
+
+#~ msgid "Source Code"
+#~ msgstr "소스 코드"
+
+#~ msgid "faster"
+#~ msgstr "빠르게"

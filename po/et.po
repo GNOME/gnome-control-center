@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 2.0.0\n"
-"POT-Creation-Date: 2002-08-15 00:06+0300\n"
+"POT-Creation-Date: 2002-08-21 10:05-0400\n"
 "PO-Revision-Date: 2002-08-15 00:10+0300\n"
 "Last-Translator: Tõivo Leedjärv <toivo@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:225
-#: capplets/keyboard/gnome-keyboard-properties.c:143
+#: capplets/keyboard/gnome-keyboard-properties.c:159
 #, c-format
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Klaviatuuri häälestuse käivitamisel tekkis viga : %s"
@@ -30,7 +30,7 @@ msgid "Select CDE AccessX file"
 msgstr "Vali CDE AccessX fail"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Klaviatuur"
@@ -241,7 +241,7 @@ msgstr "_Vali pilt:"
 #: capplets/background/background-properties-capplet.c:561
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
-#: capplets/keyboard/gnome-keyboard-properties.c:277
+#: capplets/keyboard/gnome-keyboard-properties.c:293
 #: capplets/mouse/gnome-mouse-properties.c:752
 #: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
@@ -770,7 +770,7 @@ msgid "Associate sounds with window manager events"
 msgstr "Seosta helid aknahalduri sündmustega"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
 #: capplets/sound/sound.desktop.in.h:2
 msgid "Sound"
 msgstr "Heli"
@@ -790,98 +790,6 @@ msgstr "Pärandrakendused"
 #: capplets/desktop-links/legacy-applications.desktop.in.in.h:2
 msgid "Legacy applications settings (grdb)"
 msgstr ""
-
-#.
-#. * Translatable strings file
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/file-types/category-names.h:7
-msgid "Documents"
-msgstr "Dokumendid"
-
-#: capplets/file-types/category-names.h:8
-msgid "Word Processor"
-msgstr "Tekstiprotsessor"
-
-#: capplets/file-types/category-names.h:9
-msgid "Published Materials"
-msgstr "Avaldatud materjalid"
-
-#: capplets/file-types/category-names.h:10
-msgid "Spreadsheet"
-msgstr "Arvutustabel"
-
-#: capplets/file-types/category-names.h:11
-msgid "Presentation"
-msgstr "Presentatsioon"
-
-#: capplets/file-types/category-names.h:12
-msgid "Diagram"
-msgstr "Diagramm"
-
-#: capplets/file-types/category-names.h:13
-msgid "TeX"
-msgstr "TeX"
-
-#: capplets/file-types/category-names.h:14
-msgid "Vector Graphics"
-msgstr "Vektorgraafika"
-
-#: capplets/file-types/category-names.h:15
-msgid "World Wide Web"
-msgstr "Ülemaailmne Võrgend (WWW)"
-
-#: capplets/file-types/category-names.h:16
-msgid "Plain Text"
-msgstr "Lihttekst"
-
-#: capplets/file-types/category-names.h:17
-msgid "Extended Markup Language (XML)"
-msgstr "Laiendatav märgistuskeel (XML)"
-
-#: capplets/file-types/category-names.h:18
-msgid "Information"
-msgstr "Informatsioon"
-
-#: capplets/file-types/category-names.h:19
-msgid "Financial"
-msgstr "Finants"
-
-#: capplets/file-types/category-names.h:20
-msgid "Calendar"
-msgstr "Kalender"
-
-#: capplets/file-types/category-names.h:21
-msgid "Contacts"
-msgstr "Kontaktid"
-
-#: capplets/file-types/category-names.h:22
-msgid "Packages"
-msgstr "Paketid"
-
-#: capplets/file-types/category-names.h:23
-msgid "Software Development"
-msgstr "Tarkvaraarendus"
-
-#: capplets/file-types/category-names.h:24
-msgid "Source Code"
-msgstr "Lähtekood"
-
-#: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:671
-msgid "Audio"
-msgstr "Heli"
-
-#: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:667
-msgid "Images"
-msgstr "Pildid"
-
-#: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:669
-msgid "Video"
-msgstr "Video"
 
 #: capplets/file-types/file-types-capplet.c:214
 msgid "Description"
@@ -908,11 +816,13 @@ msgid "Actions"
 msgstr "Tegevused"
 
 #: capplets/file-types/file-types-properties.glade.h:3
-msgid "Add _file type..."
+#, fuzzy
+msgid "Add _File Type..."
 msgstr "_Lisa failitüüp..."
 
 #: capplets/file-types/file-types-properties.glade.h:4
-msgid "Add _service..."
+#, fuzzy
+msgid "Add _Service..."
 msgstr "Lisa _teenus..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
@@ -1089,6 +999,18 @@ msgstr "Kategooria"
 msgid "Choose a file category"
 msgstr "Vali faili kategooria"
 
+#: capplets/file-types/mime-type-info.c:667
+msgid "Images"
+msgstr "Pildid"
+
+#: capplets/file-types/mime-type-info.c:669
+msgid "Video"
+msgstr "Video"
+
+#: capplets/file-types/mime-type-info.c:671
+msgid "Audio"
+msgstr "Heli"
+
 #: capplets/file-types/mime-types-model.c:167
 #: capplets/file-types/mime-types-model.c:168
 msgid "Model for categories only"
@@ -1205,7 +1127,7 @@ msgid "Accelerator key"
 msgstr "Kiirklahv"
 
 #: capplets/keybindings/eggcellrendererkeys.c:206
-#: capplets/keybindings/gnome-keybinding-properties.c:173
+#: capplets/keybindings/gnome-keybinding-properties.c:179
 #: libbackground/applier.c:521
 msgid "Disabled"
 msgstr "Välja lülitatud"
@@ -1216,34 +1138,34 @@ msgstr "Välja lülitatud"
 msgid "Type a new shortcut"
 msgstr "Sisesta uus kiirklahv"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:440
+#: capplets/keybindings/gnome-keybinding-properties.c:446
 msgid "<Unknown Action>"
 msgstr "<tundmatu tegevus>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:459
+#: capplets/keybindings/gnome-keybinding-properties.c:465
 msgid "Desktop"
 msgstr "Töölaud"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:463
+#: capplets/keybindings/gnome-keybinding-properties.c:469
 msgid "Window Management"
 msgstr "Akende haldus"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:560
+#: capplets/keybindings/gnome-keybinding-properties.c:566
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:711
+#: capplets/keybindings/gnome-keybinding-properties.c:717
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:733
+#: capplets/keybindings/gnome-keybinding-properties.c:739
 msgid "Action"
 msgstr "Tegevus"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:749
+#: capplets/keybindings/gnome-keybinding-properties.c:755
 msgid "Shortcut"
 msgstr "Kiirklahv"
 
@@ -1268,12 +1190,12 @@ msgstr "_Teksti redigeerimise kiirklahvid:"
 msgid "Assign shortcut keys to commands"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.c:256
+#: capplets/keyboard/gnome-keyboard-properties.c:272
 msgid "_Accessibility"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.c:273
-#: capplets/keyboard/gnome-keyboard-properties.c:275
+#: capplets/keyboard/gnome-keyboard-properties.c:289
+#: capplets/keyboard/gnome-keyboard-properties.c:291
 #: capplets/sound/sound-properties-capplet.c:145
 #: capplets/sound/sound-properties-capplet.c:147
 msgid ""
@@ -1281,78 +1203,90 @@ msgid ""
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:2
-msgid "Bee_p"
+msgid "<small><i>Fast</i></small>"
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:3
-msgid "C_ustom:"
-msgstr "_Oma:"
+msgid "<small><i>Long</i></small>"
+msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:4
-msgid "Clic_k on keypress"
+msgid "<small><i>Short</i></small>"
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+msgid "<small><i>Slow</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+msgid "Bee_p"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
+msgid "C_ustom:"
+msgstr "_Oma:"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
+msgid "Clic_k on keypress"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "Cursor Blinks"
 msgstr "Kursor vilgub"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "Keyboard Bell"
 msgstr "Klaviatuuri kell"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Keyboard Preferences"
 msgstr "Klaviatuuri häälestus"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Keyboard _repeats when key is held down"
 msgstr "Klaviatuur k_ordab kui klahvi hoitakse all"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Keypress Click"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
 msgid "Repeat Keys"
 msgstr "Klahvide kordamine"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "S_peed:"
 msgstr "_Kiirus:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid "_Accessibility..."
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "_Blinks in text boxes and fields"
 msgstr "K_ursor vilgub tekstiväljades"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
 msgid "_Delay:"
 msgstr "_Viivitus:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
 msgid "_Off"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid "_Speed:"
 msgstr "_Kiirus:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "_Volume:"
 msgstr "_Helitugevus:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
-msgid "faster"
-msgstr "kiirem"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid "loud"
 msgstr "valju"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "quiet"
 msgstr "vaikne"
 
@@ -2128,3 +2062,60 @@ msgstr ""
 #: libwindow-settings/gnome-wm-manager.c:464
 msgid "OK"
 msgstr ""
+
+#~ msgid "Documents"
+#~ msgstr "Dokumendid"
+
+#~ msgid "Word Processor"
+#~ msgstr "Tekstiprotsessor"
+
+#~ msgid "Published Materials"
+#~ msgstr "Avaldatud materjalid"
+
+#~ msgid "Spreadsheet"
+#~ msgstr "Arvutustabel"
+
+#~ msgid "Presentation"
+#~ msgstr "Presentatsioon"
+
+#~ msgid "Diagram"
+#~ msgstr "Diagramm"
+
+#~ msgid "TeX"
+#~ msgstr "TeX"
+
+#~ msgid "Vector Graphics"
+#~ msgstr "Vektorgraafika"
+
+#~ msgid "World Wide Web"
+#~ msgstr "Ülemaailmne Võrgend (WWW)"
+
+#~ msgid "Plain Text"
+#~ msgstr "Lihttekst"
+
+#~ msgid "Extended Markup Language (XML)"
+#~ msgstr "Laiendatav märgistuskeel (XML)"
+
+#~ msgid "Information"
+#~ msgstr "Informatsioon"
+
+#~ msgid "Financial"
+#~ msgstr "Finants"
+
+#~ msgid "Calendar"
+#~ msgstr "Kalender"
+
+#~ msgid "Contacts"
+#~ msgstr "Kontaktid"
+
+#~ msgid "Packages"
+#~ msgstr "Paketid"
+
+#~ msgid "Software Development"
+#~ msgstr "Tarkvaraarendus"
+
+#~ msgid "Source Code"
+#~ msgstr "Lähtekood"
+
+#~ msgid "faster"
+#~ msgstr "kiirem"

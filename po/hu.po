@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.0\n"
-"POT-Creation-Date: 2002-08-09 12:05+0200\n"
+"POT-Creation-Date: 2002-08-21 10:05-0400\n"
 "PO-Revision-Date: 2002-08-13 14:14+0200\n"
 "Last-Translator: DOMA Peter <zelin@pointernet.hu>\n"
 "Language-Team: Hungarian <hu@gnome.hu>\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:225
-#: capplets/keyboard/gnome-keyboard-properties.c:143
+#: capplets/keyboard/gnome-keyboard-properties.c:159
 #, c-format
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Hiba történt a billentyűzet capplet indításakor: %s"
@@ -28,7 +28,7 @@ msgid "Select CDE AccessX file"
 msgstr "Válassz ki egy CDE AccessX fájlt"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Billentyűzet"
@@ -239,7 +239,7 @@ msgstr "Válassz ki egy _képet:"
 #: capplets/background/background-properties-capplet.c:561
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
-#: capplets/keyboard/gnome-keyboard-properties.c:277
+#: capplets/keyboard/gnome-keyboard-properties.c:293
 #: capplets/mouse/gnome-mouse-properties.c:752
 #: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
@@ -775,7 +775,7 @@ msgid "Associate sounds with window manager events"
 msgstr "Hangok hozzárendelése az ablakkezelő eseményeihez"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
 #: capplets/sound/sound.desktop.in.h:2
 msgid "Sound"
 msgstr "Hang"
@@ -795,98 +795,6 @@ msgstr "Örökölt Alkalmazások"
 #: capplets/desktop-links/legacy-applications.desktop.in.in.h:2
 msgid "Legacy applications settings (grdb)"
 msgstr "Örökölt Alkalmazás beállítások (grdb)"
-
-#.
-#. * Translatable strings file
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/file-types/category-names.h:7
-msgid "Documents"
-msgstr "Dokumentumok"
-
-#: capplets/file-types/category-names.h:8
-msgid "Word Processor"
-msgstr "Szövegszerkesztő"
-
-#: capplets/file-types/category-names.h:9
-msgid "Published Materials"
-msgstr "Publikált anyagok"
-
-#: capplets/file-types/category-names.h:10
-msgid "Spreadsheet"
-msgstr "Munkafüzet"
-
-#: capplets/file-types/category-names.h:11
-msgid "Presentation"
-msgstr "Bemutató"
-
-#: capplets/file-types/category-names.h:12
-msgid "Diagram"
-msgstr "Diagramm"
-
-#: capplets/file-types/category-names.h:13
-msgid "TeX"
-msgstr "TeX"
-
-#: capplets/file-types/category-names.h:14
-msgid "Vector Graphics"
-msgstr "Vektorgrafika"
-
-#: capplets/file-types/category-names.h:15
-msgid "World Wide Web"
-msgstr "World Wide Web"
-
-#: capplets/file-types/category-names.h:16
-msgid "Plain Text"
-msgstr "Sima szöveg"
-
-#: capplets/file-types/category-names.h:17
-msgid "Extended Markup Language (XML)"
-msgstr "Extended Markup Language (XML)"
-
-#: capplets/file-types/category-names.h:18
-msgid "Information"
-msgstr "Információ"
-
-#: capplets/file-types/category-names.h:19
-msgid "Financial"
-msgstr "Pénzügyi"
-
-#: capplets/file-types/category-names.h:20
-msgid "Calendar"
-msgstr "Naptár"
-
-#: capplets/file-types/category-names.h:21
-msgid "Contacts"
-msgstr "Névjegykártyák"
-
-#: capplets/file-types/category-names.h:22
-msgid "Packages"
-msgstr "Csomagok"
-
-#: capplets/file-types/category-names.h:23
-msgid "Software Development"
-msgstr "Szoftverfejlesztés"
-
-#: capplets/file-types/category-names.h:24
-msgid "Source Code"
-msgstr "Forráskód"
-
-#: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:671
-msgid "Audio"
-msgstr "Hang"
-
-#: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:667
-msgid "Images"
-msgstr "Képek"
-
-#: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:669
-msgid "Video"
-msgstr "Videó"
 
 #: capplets/file-types/file-types-capplet.c:214
 msgid "Description"
@@ -913,11 +821,13 @@ msgid "Actions"
 msgstr "Akció"
 
 #: capplets/file-types/file-types-properties.glade.h:3
-msgid "Add _file type..."
+#, fuzzy
+msgid "Add _File Type..."
 msgstr "_Fájltípus hozzáadása..."
 
 #: capplets/file-types/file-types-properties.glade.h:4
-msgid "Add _service..."
+#, fuzzy
+msgid "Add _Service..."
 msgstr "_Szolgáltatás hozzáadása..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
@@ -1094,6 +1004,18 @@ msgstr "Kategória"
 msgid "Choose a file category"
 msgstr "Válassz ki egy fájlkategóriát"
 
+#: capplets/file-types/mime-type-info.c:667
+msgid "Images"
+msgstr "Képek"
+
+#: capplets/file-types/mime-type-info.c:669
+msgid "Video"
+msgstr "Videó"
+
+#: capplets/file-types/mime-type-info.c:671
+msgid "Audio"
+msgstr "Hang"
+
 #: capplets/file-types/mime-types-model.c:167
 #: capplets/file-types/mime-types-model.c:168
 msgid "Model for categories only"
@@ -1210,7 +1132,7 @@ msgid "Accelerator key"
 msgstr "Gyorsbillentyű"
 
 #: capplets/keybindings/eggcellrendererkeys.c:206
-#: capplets/keybindings/gnome-keybinding-properties.c:173
+#: capplets/keybindings/gnome-keybinding-properties.c:179
 #: libbackground/applier.c:521
 msgid "Disabled"
 msgstr "Tiltott"
@@ -1221,35 +1143,35 @@ msgstr "Tiltott"
 msgid "Type a new shortcut"
 msgstr "Nyomd le az új gyorsbillentyűt"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:440
+#: capplets/keybindings/gnome-keybinding-properties.c:446
 msgid "<Unknown Action>"
 msgstr "<Ismeretlen művelet>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:459
+#: capplets/keybindings/gnome-keybinding-properties.c:465
 msgid "Desktop"
 msgstr "Asztal"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:463
+#: capplets/keybindings/gnome-keybinding-properties.c:469
 msgid "Window Management"
 msgstr "Ablakkezelés"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:560
+#: capplets/keybindings/gnome-keybinding-properties.c:566
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 "Hiba történt a %s gyorsbillentyű beállításakor a konfigurációs adatbázisban\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:711
+#: capplets/keybindings/gnome-keybinding-properties.c:717
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
 msgstr "Nem találok billentyűtémákat. A GTK+ helytelenül lett telepítve."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:733
+#: capplets/keybindings/gnome-keybinding-properties.c:739
 msgid "Action"
 msgstr "Esemény"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:749
+#: capplets/keybindings/gnome-keybinding-properties.c:755
 msgid "Shortcut"
 msgstr "Gyorsbillentyű"
 
@@ -1274,12 +1196,12 @@ msgstr "Szövegszerkesztő gyorsbillentyűk:"
 msgid "Assign shortcut keys to commands"
 msgstr "Gyorsbillentyűk parancsokhoz rendelése"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:256
+#: capplets/keyboard/gnome-keyboard-properties.c:272
 msgid "_Accessibility"
 msgstr "_Kisegítő lehetőségek"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:273
-#: capplets/keyboard/gnome-keyboard-properties.c:275
+#: capplets/keyboard/gnome-keyboard-properties.c:289
+#: capplets/keyboard/gnome-keyboard-properties.c:291
 #: capplets/sound/sound-properties-capplet.c:145
 #: capplets/sound/sound-properties-capplet.c:147
 msgid ""
@@ -1289,78 +1211,90 @@ msgstr ""
 "egy daemonn kezeli)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:2
+msgid "<small><i>Fast</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+msgid "<small><i>Long</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+msgid "<small><i>Short</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+msgid "<small><i>Slow</i></small>"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "Bee_p"
 msgstr "_Csengetés"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:3
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
 msgid "C_ustom:"
 msgstr "_Egyéni:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:4
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "Clic_k on keypress"
 msgstr "_Kattintás billentyűleütéskor"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:5
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "Cursor Blinks"
 msgstr "Villogó kurzor"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:7
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "Keyboard Bell"
 msgstr "Billentyűzet hang"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Keyboard Preferences"
 msgstr "Billentyűzet beállításai"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Keyboard _repeats when key is held down"
 msgstr "Billentyű _ismétlése nyomva tartáskor"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Keypress Click"
 msgstr "Csengetés Billentyűlenyomáskor"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
 msgid "Repeat Keys"
 msgstr "Billentyűk ismétlése"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "S_peed:"
 msgstr "_Sebesség:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 msgid "_Accessibility..."
 msgstr "_Kisegítő lehetőségek..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "_Blinks in text boxes and fields"
 msgstr "_Villogjon a szövegdobozokban és a beviteli mezőkben"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
 msgid "_Delay:"
 msgstr "_Késleltetés:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
 msgid "_Off"
 msgstr "_Ki"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid "_Speed:"
 msgstr "_Sebesség:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "_Volume:"
 msgstr "_Hangerő:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
-msgid "faster"
-msgstr "gyorsabb"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid "loud"
 msgstr "hangos"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "quiet"
 msgstr "csendes"
 
@@ -2157,6 +2091,63 @@ msgstr ""
 #: libwindow-settings/gnome-wm-manager.c:464
 msgid "OK"
 msgstr "OK"
+
+#~ msgid "Documents"
+#~ msgstr "Dokumentumok"
+
+#~ msgid "Word Processor"
+#~ msgstr "Szövegszerkesztő"
+
+#~ msgid "Published Materials"
+#~ msgstr "Publikált anyagok"
+
+#~ msgid "Spreadsheet"
+#~ msgstr "Munkafüzet"
+
+#~ msgid "Presentation"
+#~ msgstr "Bemutató"
+
+#~ msgid "Diagram"
+#~ msgstr "Diagramm"
+
+#~ msgid "TeX"
+#~ msgstr "TeX"
+
+#~ msgid "Vector Graphics"
+#~ msgstr "Vektorgrafika"
+
+#~ msgid "World Wide Web"
+#~ msgstr "World Wide Web"
+
+#~ msgid "Plain Text"
+#~ msgstr "Sima szöveg"
+
+#~ msgid "Extended Markup Language (XML)"
+#~ msgstr "Extended Markup Language (XML)"
+
+#~ msgid "Information"
+#~ msgstr "Információ"
+
+#~ msgid "Financial"
+#~ msgstr "Pénzügyi"
+
+#~ msgid "Calendar"
+#~ msgstr "Naptár"
+
+#~ msgid "Contacts"
+#~ msgstr "Névjegykártyák"
+
+#~ msgid "Packages"
+#~ msgstr "Csomagok"
+
+#~ msgid "Software Development"
+#~ msgstr "Szoftverfejlesztés"
+
+#~ msgid "Source Code"
+#~ msgstr "Forráskód"
+
+#~ msgid "faster"
+#~ msgstr "gyorsabb"
 
 #~ msgid "<b>Test</b>"
 #~ msgstr "<b>Teszt</b>"
