@@ -1,10 +1,13 @@
+confexecdir = $(libdir)
+confexec_DATA = ximian_archiverConf.sh
+
 Locationmetadir = $(datadir)/hcm/default
 Locationmeta_DATA = default-user.xml default-global.xml
 
 gladedir = $(prefix)/share/hcm/glade
 glade_DATA = rollback-location-management.glade
 
-includedir = $(prefix)/include/helix-archiver
+includedir = $(prefix)/include/ximian-archiver
 
 INCLUDES = 			\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\
@@ -16,10 +19,10 @@ INCLUDES = 			\
 	$(GNOME_XML_CFLAGS)				\
 	$(LIBGLADE_CFLAGS)
 
-bin_PROGRAMS = helix-archiver helix-config-manager
-lib_LIBRARIES = libhelix_archiver.a
+bin_PROGRAMS = ximian-archiver
+lib_LTLIBRARIES = libximian_archiver.la
 
-libhelix_archiver_a_SOURCES = \
+libximian_archiver_la_SOURCES = \
 	archive.c	archive.h			\
 	location.c	location.h			\
 	config-log.c	config-log.h			\
@@ -29,31 +32,30 @@ libhelix_archiver_a_SOURCES = \
 include_HEADERS = \
 	archive.h location.h config-log.h backend-list.h util.h
 
-helix_archiver_SOURCES = \
+ximian_archiver_SOURCES = \
 	main.c
 
-helix_archiver_LDADD = \
+ximian_archiver_LDADD = \
 	$(GNOME_LIBDIR)							\
 	$(GNOMEUI_LIBS)							\
 	$(INTLLIBS)							\
 	$(GNOME_XML_LIB)						\
-	libhelix_archiver.a
-
-helix_config_manager_SOURCES = \
-	config-manager.c						\
-	config-manager-dialog.c		config-manager-dialog.h		\
-	create-location-dialog.c	create-location-dialog.h	\
-	rollback-widget.c		rollback-widget.h		\
-	location-list.c			location-list.h
-
-helix_config_manager_LDADD = \
-	$(GNOME_LIBDIR)							\
-	$(GNOMEUI_LIBS)							\
-	$(INTLLIBS)							\
-	$(GNOME_XML_LIB)						\
-	$(LIBGLADE_LIBS)						\
-	libhelix_archiver.a
+	libximian_archiver.la
 
 EXTRA_DIST = \
 	$(Locationmeta_DATA) \
-	$(glade_DATA)
+	$(glade_DATA) \
+	ximian_archiverConf.sh.in
+
+#
+# Create the ximian_archiverConf.sh file from the sh.in file
+#
+ximian_archiverConf.sh: ximian_archiverConf.sh.in Makefile
+	sed -e 's?\@GNOME_LIBDIR\@?$(GNOME_LIBDIR) -L$(prefix)/lib?' \
+	    -e 's?\@GNOMEUI_LIBS\@?$(GNOMEUI_LIBS)?g' \
+	    -e 's?\@GNOME_INCLUDEDIR\@?$(GNOME_INCLUDEDIR) -I$(prefix)/include?g' \
+	    -e 's?\@ORB_LIBS\@?$(ORB_LIBS)?g' \
+	    < $(srcdir)/ximian_archiverConf.sh.in > ximian_archiverConf.tmp \
+	  && mv ximian_archiverConf.tmp ximian_archiverConf.sh
+
+
