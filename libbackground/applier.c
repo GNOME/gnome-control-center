@@ -214,7 +214,6 @@ static void
 bg_applier_class_init (BGApplierClass *class) 
 {
 	GObjectClass *object_class;
-	GdkVisual *visual;
 
 	object_class = G_OBJECT_CLASS (class);
 
@@ -497,7 +496,6 @@ draw_disabled_message (GtkWidget *widget)
 	PangoRectangle  extents;
 	GdkGC          *gc;
 	gint            x, y, w, h;
-	gint            height, width;
 	const char     *disabled_string = _("Disabled");
 
 	g_return_if_fail (widget != NULL);
