@@ -79,7 +79,7 @@ gint double_click_state = DOUBLE_CLICK_TEST_OFF;
  * have a few routines to convert from whatever the gconf key is to our range.
  */
 static GConfValue *
-double_click_from_gconf (const GConfValue *value)
+double_click_from_gconf (GConfPropertyEditor *peditor, const GConfValue *value)
 {
 	GConfValue *new_value;
 
@@ -89,7 +89,7 @@ double_click_from_gconf (const GConfValue *value)
 }
 
 static GConfValue *
-double_click_to_gconf (const GConfValue *value)
+double_click_to_gconf (GConfPropertyEditor *peditor, const GConfValue *value)
 {
 	GConfValue *new_value;
 
@@ -99,7 +99,8 @@ double_click_to_gconf (const GConfValue *value)
 }
 
 static GConfValue *
-motion_acceleration_from_gconf (const GConfValue *value)
+motion_acceleration_from_gconf (GConfPropertyEditor *peditor, 
+				const GConfValue *value)
 {
 	GConfValue *new_value;
 	gfloat motion_acceleration;
@@ -116,7 +117,8 @@ motion_acceleration_from_gconf (const GConfValue *value)
 }
 
 static GConfValue *
-motion_acceleration_to_gconf (const GConfValue *value)
+motion_acceleration_to_gconf (GConfPropertyEditor *peditor, 
+			      const GConfValue *value)
 {
 	GConfValue *new_value;
 	gfloat motion_acceleration;
@@ -133,13 +135,21 @@ motion_acceleration_to_gconf (const GConfValue *value)
 }
 
 static GConfValue *
-threshold_from_gconf (const GConfValue *value)
+threshold_from_gconf (GConfPropertyEditor *peditor, 
+		      const GConfValue *value)
 {
 	GConfValue *new_value;
 
 	new_value = gconf_value_new (GCONF_VALUE_FLOAT);
 	gconf_value_set_float (new_value, CLAMP (gconf_value_get_int (value), 1, 10));
 	return new_value;
+}
+
+static GConfValue *
+threshold_to_gconf (GConfPropertyEditor *peditor, 
+		    const GConfValue *value)
+{
+	return gconf_value_float_to_int (value);
 }
 
 /* Retrieve legacy settings */
@@ -584,7 +594,7 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 	gtk_tree_view_append_column (GTK_TREE_VIEW (tree_view), column);
 	
 	gconf_peditor_new_boolean
-		(changeset, "/desktop/gnome/peripherals/mouse/locate_pointer_id", WID ("locate_pointer_toggle"), NULL);
+		(changeset, "/desktop/gnome/peripherals/mouse/locate_pointer", WID ("locate_pointer_toggle"), NULL);
 	/* Motion page */
 	/* speed */
 	gconf_peditor_new_numeric_range
@@ -602,14 +612,14 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 	gconf_peditor_new_numeric_range
 		(changeset, "/desktop/gnome/peripherals/mouse/motion_threshold", WID ("sensitivity_scale"),
 		 "conv-to-widget-cb", threshold_from_gconf,
-		 "conv-from-widget-cb", gconf_value_float_to_int,
+		 "conv-from-widget-cb", threshold_to_gconf,
 		 NULL);
 
 	/* DnD threshold */
 	gconf_peditor_new_numeric_range
 		(changeset, "/desktop/gnome/peripherals/mouse/drag_threshold", WID ("drag_threshold_scale"),
 		 "conv-to-widget-cb", threshold_from_gconf,
-		 "conv-from-widget-cb", gconf_value_float_to_int,
+		 "conv-from-widget-cb", threshold_to_gconf,
 		 NULL);
 
 	/* listen to cursors changing */

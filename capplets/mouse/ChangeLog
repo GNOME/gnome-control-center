@@ -1,3 +1,12 @@
+2002-03-21  Dave Camp  <dave@ximian.com>
+
+	* gnome-mouse-properties.c (*_{to|from}_gconf): Add the peditor 
+	arguments.
+	(setup_dialog): Use locate_pointer instead of locate_pointer_id.
+	(threshold_to_gconf): New function.
+	(setup_dialog): Use threshold_to_gconf for motion_threshold and
+	drag_threshold.
+
 2002-03-11  Richard Hestilow  <hestilow@ximian.com>
 
 	* gnome-mouse-properties.c (drawing_area_button_press_event):
