@@ -1,7 +1,7 @@
 confexecdir = $(libdir)
 confexec_DATA = config_archiverConf.sh
 
-Locationmetadir = $(datadir)/control-center-data/archiver
+Locationmetadir = $(datadir)/control-center/archiver
 Locationmeta_DATA = default-user.xml default-global.xml
 
 includedir = $(prefix)/include/config-archiver

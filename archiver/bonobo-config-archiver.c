@@ -531,7 +531,10 @@ bonobo_config_archiver_class_init (BonoboConfigDatabaseClass *class)
 static void
 bonobo_config_archiver_init (BonoboConfigArchiver *archiver_db)
 {
-	archiver_db->dir = g_new0 (DirData, 1);	
+	archiver_db->dir = g_new0 (DirData, 1);
+
+	/* This will always be writeable */
+	BONOBO_CONFIG_DATABASE (archiver_db)->writeable = TRUE;
 }
 
 BONOBO_X_TYPE_FUNC (BonoboConfigArchiver, PARENT_TYPE, bonobo_config_archiver);

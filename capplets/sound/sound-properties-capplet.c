@@ -144,9 +144,16 @@ static void
 get_legacy_settings (Bonobo_ConfigDatabase db) 
 {
 	gboolean val_boolean, def;
+	CORBA_Environment ev;
+
+	CORBA_exception_init (&ev);
 
 	COPY_FROM_LEGACY (boolean, "enable_esd", bool, "/sound/system/settings/start_esd=false");
 	COPY_FROM_LEGACY (boolean, "event_sounds", bool, "/sound/system/settings/event_sounds=false");
+
+	Bonobo_ConfigDatabase_sync (db, &ev);
+
+	CORBA_exception_free (&ev);
 }
 
 /* start_esd

@@ -74,7 +74,6 @@ archiver_resolve (BonoboMoniker               *moniker,
 
 	name = bonobo_moniker_get_name (moniker);
 
-
 	if (parent != CORBA_OBJECT_NIL) {
 		pdb = Bonobo_Moniker_resolve (parent, options, 
 					      "IDL:Bonobo/ConfigDatabase:1.0", ev);
@@ -83,7 +82,6 @@ archiver_resolve (BonoboMoniker               *moniker,
 		
 		if (BONOBO_EX (ev) || pdb == CORBA_OBJECT_NIL)
 			return CORBA_OBJECT_NIL;
-
 	}
 
 	if (parse_name (name, &backend_id, &location) < 0) {
