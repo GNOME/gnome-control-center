@@ -701,7 +701,6 @@ accel_edited_callback (GtkCellRendererText   *cell,
   KeyEntry *key_entry, tmp_key;
   GError *err = NULL;
   char *str;
-  guint32 c;
 
   model = gtk_tree_view_get_model (view);
   gtk_tree_model_get_iter (model, &iter, path);
@@ -754,29 +753,6 @@ accel_edited_callback (GtkCellRendererText   *cell,
 					      key_entry->keyval, key_entry->keycode, key_entry->mask);
       return;
     }
-
-  /* see if a user really wants to lose an alphanumeric key to a binding */
-  if (keyval != 0 && 
-      (mask == 0 || mask == EGG_VIRTUAL_SHIFT_MASK) && /* only unmodified */
-       (c = gdk_keyval_to_unicode (keyval)) != 0)
-    {
-      char *name = egg_virtual_accelerator_name (keyval, keycode, mask);
-      GtkWidget *dialog =
-        gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (view))),
-                                GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL,
-                                GTK_MESSAGE_WARNING,
-				GTK_BUTTONS_YES_NO,
-                                _("The '%s' key types something.  Are you sure you want to lose it to a keybinding ?"),
-                                name);
-      g_free (name);
-      gtk_dialog_run (GTK_DIALOG (dialog));
-      gtk_widget_destroy (dialog);
-
-      /* set it back to its previous value. */
-      egg_cell_renderer_keys_set_accelerator (EGG_CELL_RENDERER_KEYS (cell),
-					      key_entry->keyval, key_entry->keycode, key_entry->mask);
-      return;
-  }
 
   str = binding_name (keyval, keycode, mask, FALSE);
 
