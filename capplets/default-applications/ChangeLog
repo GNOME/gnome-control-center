@@ -2,6 +2,14 @@
 
 	* gnome-default-applications-properties.c (setup_peditors): Fix typo
 	(read_help_viewer): Rename accepts_lineno to accepts_urls to avoid confusion
+	(generic_guard): Set entry to empty string initially to force 'changed'
+	signal on single-item combos too
+	(read_editor): Use #defined key names to avoid future typos
+	(setup_peditors): Ditto
+	(read_browser): Ditto
+	(read_help_viewer): Ditto
+	(read_terminal): Ditto
+	(create_dialog): Unsensitize combos, if defaults list is empty
 
 2002-03-07  Lauris Kaplinski  <lauris@ximian.com>
 

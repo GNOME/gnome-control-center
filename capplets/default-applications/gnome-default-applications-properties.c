@@ -36,54 +36,48 @@
 #include "capplet-util.h"
 #include "gconf-property-editor.h"
 
+#define DEFAULT_APPS_KEY_EDITOR_NEEDS_TERM "/desktop/gnome/applications/editor/needs_term"
+#define DEFAULT_APPS_KEY_EDITOR_ACCEPTS_LINENO "/desktop/gnome/applications/editor/accepts_lineno"
+#define DEFAULT_APPS_KEY_EDITOR_EXEC "/desktop/gnome/applications/editor/exec"
+#define DEFAULT_APPS_KEY_BROWSER_NEEDS_TERM "/desktop/gnome/applications/browser/needs_term"
+#define DEFAULT_APPS_KEY_BROWSER_NREMOTE "/desktop/gnome/applications/browser/nremote"
+#define DEFAULT_APPS_KEY_BROWSER_EXEC "/desktop/gnome/applications/browser/exec"
+#define DEFAULT_APPS_KEY_HELP_VIEWER_NEEDS_TERM "/desktop/gnome/applications/help_viewer/needs_term"
+#define DEFAULT_APPS_KEY_HELP_VIEWER_ACCEPTS_URLS "/desktop/gnome/applications/help_viewer/accepts_urls"
+#define DEFAULT_APPS_KEY_HELP_VIEWER_EXEC "/desktop/gnome/applications/help_viewer/exec"
+#define DEFAULT_APPS_KEY_TERMINAL_EXEC_ARG "/desktop/gnome/applications/terminal/exec_arg"
+#define DEFAULT_APPS_KEY_TERMINAL_EXEC "/desktop/gnome/applications/terminal/exec"
 
 typedef struct _BrowserDescription BrowserDescription;
 typedef struct _EditorDescription EditorDescription;
 typedef struct _HelpViewDescription HelpViewDescription;
 typedef struct _TerminalDesciption TerminalDescription;
+
 /* All defined below */
 #include "gnome-default-applications-properties-structs.c"
 
 static GConfClient *client = NULL;
 
 static void
-generic_guard (GtkWidget *toggle,
-	       GtkWidget *widget)
+generic_guard (GtkWidget *toggle, GtkWidget *widget)
 {
-	GtkWidget *w;
-
 	gtk_widget_set_sensitive (widget, GTK_TOGGLE_BUTTON (toggle)->active);
 
 	if (GTK_TOGGLE_BUTTON (toggle)->active) {
-		w = g_object_get_data (G_OBJECT (toggle), "entry");
-		if (w && GTK_WIDGET_REALIZED (w)) gtk_widget_grab_focus (w);
-		if (w && GTK_IS_ENTRY (w)) {
+		GtkWidget *e;
+		/* Get entry associated with us */
+		e = g_object_get_data (G_OBJECT (toggle), "entry");
+		if (e && GTK_WIDGET_REALIZED (e)) gtk_widget_grab_focus (e);
+		if (e && GTK_IS_ENTRY (e)) {
 			gchar *text;
-			text = g_strdup (gtk_entry_get_text (GTK_ENTRY (w)));
-			gtk_entry_set_text (GTK_ENTRY (w), text);
+			text = g_strdup (gtk_entry_get_text (GTK_ENTRY (e)));
+			/* fixme: This is not nice, but it is the only way to force combo to emit 'changed' */
+			gtk_entry_set_text (GTK_ENTRY (e), "");
+			gtk_entry_set_text (GTK_ENTRY (e), text);
 			g_free (text);
 		}
 	}
 }
-
-#if 0
-static gboolean
-mnemonic_activate (GtkWidget *toggle,
-		   gboolean   group_cycling,
-		   GtkWidget *widget)
-{
-	if (! group_cycling) {
-		gtk_widget_grab_focus (widget);
-		if (GTK_IS_ENTRY (widget)) {
-			/* sorta evil hack, but it triggers a callback and is pretty harmless */
-			gchar *text = g_strdup (gtk_entry_get_text (GTK_ENTRY (widget)));
-			gtk_entry_set_text (GTK_ENTRY (widget), text);
-			g_free (text);
-		}
-	}
-	return FALSE;
-}
-#endif
 
 static void
 initialize_default_applications (void)
@@ -118,16 +112,16 @@ read_editor (GConfClient *client,
 	gboolean accepts_lineno;
 	gint i;
 
-	needs_term = gconf_client_get_bool (client, "/desktop/gnome/applications/editor/needs_term", &error);
+	needs_term = gconf_client_get_bool (client, DEFAULT_APPS_KEY_EDITOR_NEEDS_TERM, &error);
 	if (error) {
 		/* hp will shoot me -- I'll do this later. */
 		return;
 	}
-	accepts_lineno = gconf_client_get_bool (client, "/desktop/gnome/applications/editor/accepts_lineno", &error);
+	accepts_lineno = gconf_client_get_bool (client, DEFAULT_APPS_KEY_EDITOR_ACCEPTS_LINENO, &error);
 	if (error) {
 		return;
 	}
-	editor = gconf_client_get_string (client, "/desktop/gnome/applications/editor/exec",&error);
+	editor = gconf_client_get_string (client, DEFAULT_APPS_KEY_EDITOR_EXEC, &error);
 	if (error) {
 		return;
 	}
@@ -172,37 +166,36 @@ text_setup_custom (GtkWidget *entry,
 	}
 }
 
-
 static void 
 setup_peditors (GConfClient *client,
 		GladeXML    *dialog)
 {
         GConfChangeSet *changeset = NULL;
 	
-	gconf_peditor_new_boolean (changeset, "/desktop/gnome/applications/editor/needs_term", 
+	gconf_peditor_new_boolean (changeset, DEFAULT_APPS_KEY_EDITOR_NEEDS_TERM,
 				   WID ("text_custom_terminal_toggle"), NULL);
-	gconf_peditor_new_boolean (changeset, "/desktop/gnome/applications/editor/accepts_lineno",
+	gconf_peditor_new_boolean (changeset, DEFAULT_APPS_KEY_EDITOR_ACCEPTS_LINENO,
 				   WID ("text_custom_line_toggle"), NULL);
-	gconf_peditor_new_string  (changeset, "/desktop/gnome/applications/editor/exec",
+	gconf_peditor_new_string  (changeset, DEFAULT_APPS_KEY_EDITOR_EXEC,
 				   WID ("text_custom_command_entry"), NULL);
 
-	gconf_peditor_new_boolean (changeset, "/desktop/gnome/applications/browser/needs_term", 
+	gconf_peditor_new_boolean (changeset, DEFAULT_APPS_KEY_BROWSER_NEEDS_TERM,
 				   WID ("web_custom_terminal_toggle"), NULL);
-	gconf_peditor_new_boolean (changeset, "/desktop/gnome/applications/browser/nremote", 
+	gconf_peditor_new_boolean (changeset, DEFAULT_APPS_KEY_BROWSER_NREMOTE,
 				   WID ("web_custom_remote_toggle"), NULL);
-	gconf_peditor_new_string  (changeset, "/desktop/gnome/applications/browser/exec",
+	gconf_peditor_new_string  (changeset, DEFAULT_APPS_KEY_BROWSER_EXEC,
 				   WID ("web_custom_command_entry"), NULL);
 
-	gconf_peditor_new_boolean (changeset, "/desktop/gnome/applications/help_viewer/needs_term", 
+	gconf_peditor_new_boolean (changeset, DEFAULT_APPS_KEY_HELP_VIEWER_NEEDS_TERM,
 				   WID ("help_custom_terminal_toggle"), NULL);
-	gconf_peditor_new_boolean (changeset, "/desktop/gnome/applications/help_viewer/accepts_urls",
+	gconf_peditor_new_boolean (changeset, DEFAULT_APPS_KEY_HELP_VIEWER_ACCEPTS_URLS,
 				   WID ("help_custom_url_toggle"), NULL);
-	gconf_peditor_new_string  (changeset, "/desktop/gnome/applications/help_viewer/exec",
+	gconf_peditor_new_string  (changeset, DEFAULT_APPS_KEY_HELP_VIEWER_EXEC,
 				   WID ("help_custom_command_entry"), NULL);
 
-	gconf_peditor_new_string  (changeset, "/desktop/gnome/applications/terminal/exec",
+	gconf_peditor_new_string  (changeset, DEFAULT_APPS_KEY_TERMINAL_EXEC,
 				   WID ("terminal_custom_command_entry"), NULL);
-	gconf_peditor_new_string  (changeset, "/desktop/gnome/applications/terminal/exec_arg",
+	gconf_peditor_new_string  (changeset, DEFAULT_APPS_KEY_TERMINAL_EXEC_ARG,
 				   WID ("terminal_custom_exec_entry"), NULL);
 }
 
@@ -216,16 +209,16 @@ read_browser (GConfClient *client,
 	gboolean nremote;
 	gint i;
 
-	needs_term = gconf_client_get_bool (client, "/desktop/gnome/applications/browser/needs_term", &error);
+	needs_term = gconf_client_get_bool (client, DEFAULT_APPS_KEY_BROWSER_NEEDS_TERM, &error);
 	if (error) {
 		/* hp will shoot me -- I'll do this later. */
 		return;
 	}
-	nremote = gconf_client_get_bool (client, "/desktop/gnome/applications/browser/nremote", &error);
+	nremote = gconf_client_get_bool (client, DEFAULT_APPS_KEY_BROWSER_NREMOTE, &error);
 	if (error) {
 		return;
 	}
-	browser = gconf_client_get_string (client, "/desktop/gnome/applications/browser/exec",&error);
+	browser = gconf_client_get_string (client, DEFAULT_APPS_KEY_BROWSER_EXEC, &error);
 	if (error) {
 		return;
 	}
@@ -283,16 +276,16 @@ read_help_viewer (GConfClient *client,
 	gboolean accepts_urls;
 	gint i;
 
-	needs_term = gconf_client_get_bool (client, "/desktop/gnome/applications/help_viewer/needs_term", &error);
+	needs_term = gconf_client_get_bool (client, DEFAULT_APPS_KEY_HELP_VIEWER_NEEDS_TERM, &error);
 	if (error) {
 		/* hp will shoot me -- I'll do this later. */
 		return;
 	}
-	accepts_urls = gconf_client_get_bool (client, "/desktop/gnome/applications/help_viewer/accepts_urls", &error);
+	accepts_urls = gconf_client_get_bool (client, DEFAULT_APPS_KEY_HELP_VIEWER_ACCEPTS_URLS, &error);
 	if (error) {
 		return;
 	}
-	help_viewer = gconf_client_get_string (client, "/desktop/gnome/applications/help_viewer/exec",&error);
+	help_viewer = gconf_client_get_string (client, DEFAULT_APPS_KEY_HELP_VIEWER_EXEC, &error);
 	if (error) {
 		return;
 	}
@@ -351,11 +344,11 @@ read_terminal (GConfClient *client,
 	gchar *exec_arg;
 	gint i;
 
-	exec = gconf_client_get_string (client, "/desktop/gnome/applications/terminal/exec",&error);
+	exec = gconf_client_get_string (client, DEFAULT_APPS_KEY_TERMINAL_EXEC, &error);
 	if (error) {
 		return;
 	}
-	exec_arg = gconf_client_get_string (client, "/desktop/gnome/applications/terminal/exec_arg",&error);
+	exec_arg = gconf_client_get_string (client, DEFAULT_APPS_KEY_TERMINAL_EXEC_ARG, &error);
 	if (error) {
 		exec_arg = NULL;
 	}
@@ -441,16 +434,21 @@ create_dialog (GConfClient *client)
 				"default_applications_dialog",
 				NULL);
 	
+	setup_peditors (client, dialog);
 
-	/* Text page */
+	/* Editors page */
 	for (i = 0; i < G_N_ELEMENTS (possible_editors); i++ ) {
 		if (possible_editors[i].in_path)
 			strings = g_list_append (strings, _(possible_editors[i].name));
 	}
 	if (strings) {
+		/* We have default editors */
 		gtk_combo_set_popdown_strings (GTK_COMBO(WID ("text_select_combo")), strings);
 		g_list_free (strings);
 		strings = NULL;
+	} else {
+		/* No default editors */
+		gtk_widget_set_sensitive (WID ("text_select_radio"), FALSE);
 	}
 
 	/* Source of command string */
@@ -458,37 +456,31 @@ create_dialog (GConfClient *client)
 	/* Source of command string */
 	g_object_set_data (G_OBJECT (WID ("text_custom_radio")), "entry", WID ("text_custom_command_entry"));
 
-#if 0
-	g_signal_connect (G_OBJECT (WID ("text_select_radio")),
-			  "mnemonic_activate", (GCallback) mnemonic_activate,
-			  WID ("text_select_combo_entry"));
-#endif
 	g_signal_connect (G_OBJECT (WID ("text_select_combo_entry")),
 			  "changed", (GCallback) text_setup_custom,
 			  dialog);
 	g_signal_connect (G_OBJECT (WID ("text_select_radio")),
 			  "toggled", (GCallback) generic_guard,
 			  WID ("text_select_combo"));
-#if 0
-	g_signal_connect (G_OBJECT (WID ("text_custom_radio")),
-			  "mnemonic_activate", (GCallback) mnemonic_activate,
-			  WID ("text_custom_command_entry"));
-#endif
 	g_signal_connect (G_OBJECT (WID ("text_custom_radio")),
 			  "toggled", (GCallback) generic_guard,
 			  WID ("text_custom_vbox"));
 
 	read_editor (client, dialog);
 
-	/* Web page */
+	/* Web browsers page */
 	for (i = 0; i < G_N_ELEMENTS (possible_browsers); i++ ) {
 		if (possible_browsers[i].in_path)
 			strings = g_list_append (strings, _(possible_browsers[i].name));
 	}
 	if (strings) {
+		/* We have default browsers */
 		gtk_combo_set_popdown_strings (GTK_COMBO(WID ("web_select_combo")), strings);
 		g_list_free (strings);
 		strings = NULL;
+	} else {
+		/* No default browsers */
+		gtk_widget_set_sensitive (WID ("web_select_radio"), FALSE);
 	}
 
 	/* Source of command string */
@@ -496,26 +488,16 @@ create_dialog (GConfClient *client)
 	/* Source of command string */
 	g_object_set_data (G_OBJECT (WID ("web_custom_radio")), "entry", WID ("web_custom_command_entry"));
 
-#if 0
-	g_signal_connect (G_OBJECT (WID ("web_select_radio")),
-			  "mnemonic_activate", (GCallback) mnemonic_activate,
-			  WID ("web_select_combo_entry"));
-#endif
 	g_signal_connect (G_OBJECT (WID ("web_select_combo_entry")),
 			  "changed", (GCallback) browser_setup_custom,
 			  dialog);
 	g_signal_connect (G_OBJECT (WID ("web_select_radio")),
 			  "toggled", (GCallback) generic_guard,
 			  WID ("web_select_combo"));
-#if 0
-	g_signal_connect (G_OBJECT (WID ("web_custom_radio")),
-			  "mnemonic_activate", (GCallback) mnemonic_activate,
-			  WID ("web_custom_command_entry"));
-#endif
 	g_signal_connect (G_OBJECT (WID ("web_custom_radio")),
 			  "toggled", (GCallback) generic_guard,
 			  WID ("web_custom_vbox"));
-	setup_peditors (client, dialog);
+
 	read_browser (client, dialog);
 
 	/* Help page */
@@ -525,9 +507,13 @@ create_dialog (GConfClient *client)
 			strings = g_list_append (strings, _(possible_help_viewers[i].name));
 	}
 	if (strings) {
+		/* We have default help viewers */
 		gtk_combo_set_popdown_strings (GTK_COMBO(WID ("help_select_combo")), strings);
 		g_list_free (strings);
 		strings = NULL;
+	} else {
+		/* No default help viewers */
+		gtk_widget_set_sensitive (WID ("help_select_radio"), FALSE);
 	}
 
 	/* Source of command string */
@@ -535,22 +521,12 @@ create_dialog (GConfClient *client)
 	/* Source of command string */
 	g_object_set_data (G_OBJECT (WID ("help_custom_radio")), "entry", WID ("help_custom_command_entry"));
 
-#if 0
-	g_signal_connect (G_OBJECT (WID ("help_select_radio")),
-			  "mnemonic_activate", (GCallback) mnemonic_activate,
-			  WID ("help_select_combo_entry"));
-#endif
 	g_signal_connect (G_OBJECT (WID ("help_select_combo_entry")),
 			  "changed", (GCallback) help_setup_custom,
 			  dialog);
 	g_signal_connect (G_OBJECT (WID ("help_select_radio")),
 			  "toggled", (GCallback) generic_guard,
 			  WID ("help_select_combo"));
-#if 0
-	g_signal_connect (G_OBJECT (WID ("help_custom_radio")),
-			  "mnemonic_activate", (GCallback) mnemonic_activate,
-			  WID ("help_custom_command_entry"));
-#endif
 	g_signal_connect (G_OBJECT (WID ("help_custom_radio")),
 			  "toggled", (GCallback) generic_guard,
 			  WID ("help_custom_vbox"));
@@ -564,9 +540,13 @@ create_dialog (GConfClient *client)
 			strings = g_list_append (strings, _(possible_terminals[i].name));
 	}
 	if (strings) {
+		/* We have default terminals */
 		gtk_combo_set_popdown_strings (GTK_COMBO (WID ("terminal_select_combo")), strings);
 		g_list_free (strings);
 		strings = NULL;
+	} else {
+		/* No default terminals */
+		gtk_widget_set_sensitive (WID ("terminal_select_radio"), FALSE);
 	}
 
 	/* Source of command string */
@@ -574,22 +554,12 @@ create_dialog (GConfClient *client)
 	/* Source of command string */
 	g_object_set_data (G_OBJECT (WID ("terminal_custom_radio")), "entry", WID ("terminal_custom_command_entry"));
 
-#if 0
-	g_signal_connect (G_OBJECT (WID ("terminal_select_radio")),
-			  "mnemonic_activate", (GCallback) mnemonic_activate,
-			  WID ("terminal_select_combo_entry"));
-#endif
 	g_signal_connect (G_OBJECT (WID ("terminal_select_combo_entry")),
 			  "changed", (GCallback) terminal_setup_custom,
 			  dialog);
 	g_signal_connect (G_OBJECT (WID ("terminal_select_radio")),
 			  "toggled", (GCallback) generic_guard,
 			  WID ("terminal_select_combo"));
-#if 0
-	g_signal_connect (G_OBJECT (WID ("terminal_custom_radio")),
-			  "mnemonic_activate", (GCallback) mnemonic_activate,
-			  WID ("terminal_custom_command_entry"));
-#endif
 	g_signal_connect (G_OBJECT (WID ("terminal_custom_radio")),
 			  "toggled", (GCallback) generic_guard,
 			  WID ("terminal_custom_table"));
