@@ -631,6 +631,15 @@ validate_data (MimeEditDialog *dialog)
 
 			return FALSE;
 		}
+		else if (dialog->p->is_add && (gnome_vfs_mime_type_is_known (tmp) || get_mime_type_info (tmp) != NULL)) {
+			err_dialog = gnome_error_dialog_parented
+				(_("There already exists a MIME type of that name."),
+				 GTK_WINDOW (dialog->p->dialog_win));
+
+			gtk_window_set_modal (GTK_WINDOW (err_dialog), TRUE);
+
+			return FALSE;
+		}
 	}
 
 	return TRUE;

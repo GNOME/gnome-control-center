@@ -1,5 +1,23 @@
 2002-01-27  Bradford Hovinen  <hovinen@ximian.com>
 
+	* service-edit-dialog.c (validate_data): Call get_service_info to
+	handle case where the service was created and not yet committed
+
+	* mime-type-info.c (get_mime_type_info, get_mime_type_info_int):
+	Implement
+
+	* mime-edit-dialog.c (validate_data): Check if the MIME type is
+	already known and we are adding a new type
+
+	* service-edit-dialog.c (service_edit_dialog_init): Change dialog
+	title
+
+	* file-types-capplet.c (edit_count_cb): Rename from count_cb
+	(selection_changed_cb): Initialize count
+	(selection_changed_cb): Iterate on remove_count_cb and use that to
+	set the sensitivity of the remove button
+	(create_dialog): Desensitize the remove button
+
 	* model-entry.c (model_entry_insert_child): Set the parent field
 	(model_entry_remove_child): Reset the parent field
 	(model_entry_remove_child): Set up the path before removing the

@@ -128,7 +128,7 @@ service_edit_dialog_init (ServiceEditDialog *dialog, ServiceEditDialogClass *cla
 	gtk_size_group_add_widget (size_group, WID ("protocol_label"));
 
 	dialog->p->dialog_win = gtk_dialog_new_with_buttons
-		(_("Edit file type"), NULL, -1,
+		(_("Edit service information"), NULL, -1,
 		 GTK_STOCK_OK,     GTK_RESPONSE_OK,
 		 GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 		 NULL);
@@ -466,7 +466,7 @@ validate_data (ServiceEditDialog *dialog)
 
 		if (dialog->p->is_add) {
 			dir = g_strconcat ("/desktop/gnome/url-handlers/", tmp, NULL);
-			if (gconf_client_dir_exists (gconf_client_get_default (), dir, NULL)) {
+			if (get_service_info (tmp) || gconf_client_dir_exists (gconf_client_get_default (), dir, NULL)) {
 				err_dialog = gnome_error_dialog_parented
 					(_("There is already a protocol by that name."),
 					 GTK_WINDOW (dialog->p->dialog_win));

@@ -62,6 +62,8 @@ void         service_info_free            (ServiceInfo       *info);
 const GList *get_apps_for_service_type    (gchar             *protocol);
 ModelEntry  *get_services_category_entry  (GtkTreeModel      *model);
 
+ServiceInfo *get_service_info             (const gchar       *protocol);
+
 G_END_DECLS
 
 #endif /* __SERVICE_INFO_H */

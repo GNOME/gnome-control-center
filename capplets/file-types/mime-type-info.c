@@ -460,6 +460,38 @@ mime_type_get_pretty_name_for_server (Bonobo_ServerInfo *server)
         return g_strdup_printf ("View as %s", view_as_name);
 }
 
+static MimeTypeInfo *
+get_mime_type_info_int (ModelEntry *entry, const gchar *mime_type) 
+{
+	ModelEntry *tmp;
+	MimeTypeInfo *ret;
+
+	switch (entry->type) {
+	case MODEL_ENTRY_MIME_TYPE:
+		if (!strcmp (MIME_TYPE_INFO (entry)->mime_type, mime_type))
+			return MIME_TYPE_INFO (entry);
+
+		return NULL;
+
+	case MODEL_ENTRY_CATEGORY:
+	case MODEL_ENTRY_NONE:
+		for (tmp = entry->first_child; tmp != NULL; tmp = tmp->next)
+			if ((ret = get_mime_type_info_int (tmp, mime_type)) != NULL)
+				return ret;
+
+		return NULL;
+
+	default:
+		return NULL;
+	}
+}
+
+MimeTypeInfo *
+get_mime_type_info (const gchar *mime_type)
+{
+	return get_mime_type_info_int (get_model_entries (NULL), mime_type);
+}
+
 
 
 static const gchar *

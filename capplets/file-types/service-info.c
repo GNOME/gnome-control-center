@@ -225,6 +225,18 @@ get_services_category_entry (GtkTreeModel *model)
 	return entry;
 }
 
+ServiceInfo *
+get_service_info (const gchar *protocol)
+{
+	ModelEntry *tmp;
+
+	for (tmp = get_services_category_entry (NULL)->first_child; tmp != NULL; tmp = tmp->next)
+		if (tmp->type == MODEL_ENTRY_SERVICE && !strcmp (SERVICE_INFO (tmp)->protocol, protocol))
+			break;
+
+	return SERVICE_INFO (tmp);
+}
+
 
 
 static gchar *
