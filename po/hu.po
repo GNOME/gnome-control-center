@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.0\n"
-"POT-Creation-Date: 1999-08-02 12:18-0400\n"
+"POT-Creation-Date: 1999-08-16 11:59-0400\n"
 "Last-Translator: Shooby Ban <bansz@szif.hu>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -19,6 +19,16 @@ msgstr ""
 #: capplets/background-properties/app-background.c:13
 msgid "IMAGE-FILE"
 msgstr ""
+
+#: capplets/background-properties/app-background.c:34
+#, fuzzy
+msgid ""
+"an initialization error occurred while starting "
+"'background-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"a wm-properties-capplet futtatása közben hiba történt,\n"
+"kilépek....\n"
 
 #: capplets/background-properties/property-background.c:244
 msgid "Disabled"
@@ -63,6 +73,7 @@ msgid "Can't find an hbox, using a normal file selection"
 msgstr "Nem találtam hbox-t, normál fájlkiválasztót használok"
 
 #: capplets/background-properties/property-background.c:888
+#: capplets/keyboard-properties/keyboard-properties.c:257
 #: capplets/screensaver-properties/screensaver-dialog.c:25
 #: capplets/theme-switcher/gui.c:225 capplets/theme-switcher/gui.c:297
 msgid "Preview"
@@ -96,56 +107,56 @@ msgstr "Középre helyezett"
 msgid "Tiled"
 msgstr "Csempézett"
 
-#: capplets/background-properties/property-background.c:1351
+#: capplets/background-properties/property-background.c:1353
 msgid "Disable background selection"
 msgstr "Háttérválasztás tiltása"
 
-#: capplets/background-properties/property-background.c:1480
+#: capplets/background-properties/property-background.c:1482
 msgid "Set parameters from saved state and exit"
 msgstr "Állítsd be a paramétereket az elmentett állapotból és lépj ki"
 
-#: capplets/background-properties/property-background.c:1481
+#: capplets/background-properties/property-background.c:1483
 msgid "IMAGE"
 msgstr ""
 
-#: capplets/background-properties/property-background.c:1481
+#: capplets/background-properties/property-background.c:1483
 msgid "Sets the wallpaper to the value specified"
 msgstr "Beállítja a háttérképet a kiválasztottra"
 
-#: capplets/background-properties/property-background.c:1482
-#: capplets/background-properties/property-background.c:1483
+#: capplets/background-properties/property-background.c:1484
+#: capplets/background-properties/property-background.c:1485
 msgid "COLOR"
 msgstr ""
 
-#: capplets/background-properties/property-background.c:1482
+#: capplets/background-properties/property-background.c:1484
 msgid "Specifies the background color"
 msgstr "Beállítja a háttérszínt"
 
-#: capplets/background-properties/property-background.c:1483
+#: capplets/background-properties/property-background.c:1485
 msgid "Specifies end background color for gradient"
 msgstr "Megadja a háttérgradiens végszinét"
 
-#: capplets/background-properties/property-background.c:1484
+#: capplets/background-properties/property-background.c:1486
 msgid "ORIENT"
 msgstr ""
 
-#: capplets/background-properties/property-background.c:1484
+#: capplets/background-properties/property-background.c:1486
 msgid "Gradient orientation: vertical or horizontal"
 msgstr "Gradiens elhelyezkedés: függõleges vagy vizszintes"
 
-#: capplets/background-properties/property-background.c:1485
+#: capplets/background-properties/property-background.c:1487
 msgid "Use a solid fill for the background"
 msgstr "Használj egyszínû feltöltést a háttérhez"
 
-#: capplets/background-properties/property-background.c:1486
+#: capplets/background-properties/property-background.c:1488
 msgid "Use a gradient fill for the background"
 msgstr "Használj gradiens feltöltést a háttérhez"
 
-#: capplets/background-properties/property-background.c:1487
+#: capplets/background-properties/property-background.c:1489
 msgid "MODE"
 msgstr ""
 
-#: capplets/background-properties/property-background.c:1487
+#: capplets/background-properties/property-background.c:1489
 msgid "Display wallpaper: tiled, centered, scaled or ratio"
 msgstr "Háttérkép berakása. tapétázott, középre helyezett, skálázott..."
 
@@ -169,6 +180,15 @@ msgstr "Hossz (ms)"
 msgid "Test"
 msgstr "Teszt"
 
+#: capplets/bell-properties/bell-properties.c:239
+#, fuzzy
+msgid ""
+"an initialization error occurred while starting 'bell-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"a wm-properties-capplet futtatása közben hiba történt,\n"
+"kilépek....\n"
+
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:229
 msgid "Gnome editor"
 msgstr "Gnome alapértelmezett szövegszerkesztõ"
@@ -177,37 +197,47 @@ msgstr "Gnome alapértelmezett szövegszerkesztõ"
 msgid "Run In Terminal"
 msgstr "Terminálban fusson"
 
-#: capplets/keyboard-properties/keyboard-properties.c:210
+#: capplets/keyboard-properties/keyboard-properties.c:208
 msgid "Auto-repeat"
 msgstr "Automatikus újrajátszás"
 
-#: capplets/keyboard-properties/keyboard-properties.c:221
+#: capplets/keyboard-properties/keyboard-properties.c:219
 msgid "Enable auto-repeat"
 msgstr "Ismétlés engedélyezése"
 
-#: capplets/keyboard-properties/keyboard-properties.c:231
+#: capplets/keyboard-properties/keyboard-properties.c:229
 msgid "Repeat rate"
 msgstr "Ismétlés gyorsassága"
 
-#: capplets/keyboard-properties/keyboard-properties.c:234
+#: capplets/keyboard-properties/keyboard-properties.c:232
 msgid "Repeat Delay"
 msgstr "Ismétlési várakozás"
 
-#: capplets/keyboard-properties/keyboard-properties.c:236
+#: capplets/keyboard-properties/keyboard-properties.c:234
 msgid "Keyboard click"
 msgstr "Billentyûhang"
 
-#: capplets/keyboard-properties/keyboard-properties.c:247
+#: capplets/keyboard-properties/keyboard-properties.c:245
 msgid "Click on keypress"
 msgstr "Billentyûleütés hang"
 
-#: capplets/keyboard-properties/keyboard-properties.c:257
+#: capplets/keyboard-properties/keyboard-properties.c:255
 msgid "Click volume"
 msgstr "Hangerõ"
 
-#: capplets/keyboard-properties/keyboard-properties.c:264
+#: capplets/keyboard-properties/keyboard-properties.c:265
 msgid "Test settings"
 msgstr "Beállítások kipróbálása"
+
+#: capplets/keyboard-properties/keyboard-properties.c:307
+#, fuzzy
+msgid ""
+"an initialization error occurred while starting "
+"'keyboard-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"a wm-properties-capplet futtatása közben hiba történt,\n"
+"kilépek....\n"
 
 #. icon box
 #: capplets/mime-type/edit-window.c:105
@@ -262,7 +292,8 @@ msgstr "Szerkeszt"
 
 #. we initialize everything
 #: capplets/mime-type/edit-window.c:238
-msgid "Set actions for "
+#, c-format
+msgid "Set actions for %s"
 msgstr ""
 
 #: capplets/mime-type/mime-data.c:354
@@ -305,6 +336,32 @@ msgstr ""
 msgid "This mime-type already exists"
 msgstr "Ez a mime típus már létezik"
 
+#: capplets/mime-type/mime-data.c:544 capplets/mime-type/mime-info.c:423
+#, fuzzy
+msgid ""
+"We are unable to create the directory\n"
+"~/.gnome/mime-info\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+"Nem tudom létrehozni a fájlt\n"
+"~/.gnome/mime-info/user.mime\n"
+"\n"
+"Nem tudjuk elmenteni az állást"
+
+#: capplets/mime-type/mime-data.c:550 capplets/mime-type/mime-info.c:429
+#, fuzzy
+msgid ""
+"We are unable to access the directory\n"
+"~/.gnome/mime-info\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+"Nem tudom létrehozni a fájlt\n"
+"~/.gnome/mime-info/user.mime\n"
+"\n"
+"Nem tudjuk elmenteni az állást"
+
 #: capplets/mime-type/mime-data.c:561
 msgid ""
 "Cannot create the file\n"
@@ -331,19 +388,19 @@ msgstr ""
 
 #: capplets/mime-type/mime-type-capplet.c:77
 #: capplets/session-properties/session-properties.c:203
-#: capplets/wm-properties/wm-properties-capplet.c:1016
+#: capplets/wm-properties/wm-properties-capplet.c:1041
 msgid "Delete"
 msgstr "Töröl"
 
 #: capplets/mime-type/mime-type-capplet.c:87
 #: capplets/session-properties/session-properties.c:193
-#: capplets/wm-properties/wm-properties-capplet.c:1006
+#: capplets/wm-properties/wm-properties-capplet.c:1031
 msgid "Add..."
 msgstr "Hozzáadás..."
 
 #: capplets/mime-type/mime-type-capplet.c:91
 #: capplets/session-properties/session-properties.c:198
-#: capplets/wm-properties/wm-properties-capplet.c:1011
+#: capplets/wm-properties/wm-properties-capplet.c:1036
 msgid "Edit..."
 msgstr "Szerkeszt..."
 
@@ -433,33 +490,42 @@ msgstr "Hosszú"
 msgid "Small"
 msgstr "Rövid"
 
-#: capplets/screensaver-properties/callbacks.c:101
+#: capplets/mouse-properties/mouse-properties.c:341
+#, fuzzy
+msgid ""
+"an initialization error occurred while starting 'mouse-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"a wm-properties-capplet futtatása közben hiba történt,\n"
+"kilépek....\n"
+
+#: capplets/screensaver-properties/callbacks.c:102
 msgid "Require Password"
 msgstr "Jelszót kér"
 
-#: capplets/screensaver-properties/callbacks.c:153
+#: capplets/screensaver-properties/callbacks.c:154
 msgid "Use power management."
 msgstr "Energiagazdálkodás használata."
 
-#: capplets/screensaver-properties/callbacks.c:314
+#: capplets/screensaver-properties/callbacks.c:309
 msgid "No Screensaver"
 msgstr "Nincs képernyõvédõ"
 
-#: capplets/screensaver-properties/callbacks.c:319
+#: capplets/screensaver-properties/callbacks.c:314
 msgid "Random Screensaver"
 msgstr "Véletlenszerû képernyõvédõ"
 
-#: capplets/screensaver-properties/callbacks.c:494
+#: capplets/screensaver-properties/callbacks.c:484
 #: capplets/screensaver-properties/screensaver-properties-capplet.c:54
 msgid "Settings..."
 msgstr "Beállítások..."
 
 #. we need to special case random
-#: capplets/screensaver-properties/callbacks.c:502
+#: capplets/screensaver-properties/callbacks.c:492
 msgid "Random Settings"
 msgstr "Véletlenségi beállítások"
 
-#: capplets/screensaver-properties/callbacks.c:512
+#: capplets/screensaver-properties/callbacks.c:502
 #, c-format
 msgid "%s Settings..."
 msgstr "%s beállítások..."
@@ -580,19 +646,19 @@ msgstr ""
 msgid "This column gives the command used to start a program."
 msgstr "Ez az oszlop a program indításához szükséges parancsot adja meg."
 
-#: capplets/session-properties/gsm-client-list.c:132
+#: capplets/session-properties/gsm-client-list.c:135
 msgid "Order"
 msgstr "Sorrend"
 
-#: capplets/session-properties/gsm-client-list.c:132
+#: capplets/session-properties/gsm-client-list.c:136
 msgid "Style"
 msgstr "Stílus"
 
-#: capplets/session-properties/gsm-client-list.c:132
+#: capplets/session-properties/gsm-client-list.c:137
 msgid "State"
 msgstr "Állapot"
 
-#: capplets/session-properties/gsm-client-list.c:132
+#: capplets/session-properties/gsm-client-list.c:138
 msgid "Program"
 msgstr ""
 
@@ -669,6 +735,11 @@ msgstr "Minden belépéskor elindul."
 msgid "Remove Program"
 msgstr "Töröl"
 
+#. frame for options
+#: capplets/session-properties/session-properties.c:138
+msgid "Options"
+msgstr ""
+
 #: capplets/session-properties/session-properties.c:149
 msgid "Prompt on logout"
 msgstr ""
@@ -677,7 +748,13 @@ msgstr ""
 msgid "Automatically save changes to session"
 msgstr ""
 
+#. frame for manually started programs
+#: capplets/session-properties/session-properties.c:166
+msgid "Non-session-managed Startup Programs"
+msgstr ""
+
 #: capplets/session-properties/session-properties.c:183
+#: capplets/session-properties/startup-programs.c:304
 #, fuzzy
 msgid "Priority"
 msgstr "Prioritás:"
@@ -694,6 +771,20 @@ msgstr ""
 #: capplets/session-properties/session-properties.c:379
 msgid "Only display warnings."
 msgstr "Csak a figyelmeztetéseket mutasd."
+
+#: capplets/session-properties/session-properties.c:405
+#, fuzzy
+msgid ""
+"an initialization error occurred while starting 'session-properties-capplet'."
+msgstr ""
+"a wm-properties-capplet futtatása közben hiba történt,\n"
+"kilépek....\n"
+
+#: capplets/session-properties/startup-programs.c:288
+#: capplets/session-properties/startup-programs.c:295
+#, fuzzy
+msgid "Startup Command"
+msgstr "Parancs"
 
 #: capplets/session-properties/startup-programs.c:319
 msgid ""
@@ -714,56 +805,64 @@ msgstr ""
 msgid "Edit Startup Program"
 msgstr ""
 
-#: capplets/sound-properties/sound-properties.c:191
+#: capplets/sound-properties/sound-properties.c:94
+#, fuzzy
+msgid ""
+"an initialization error occurred while starting 'sound-properties-capplet'."
+msgstr ""
+"a wm-properties-capplet futtatása közben hiba történt,\n"
+"kilépek....\n"
+
+#: capplets/sound-properties/sound-properties.c:184
 msgid "Category"
 msgstr "Kategória"
 
-#: capplets/sound-properties/sound-properties.c:192
+#: capplets/sound-properties/sound-properties.c:185
 msgid "Event"
 msgstr "Esemény"
 
-#: capplets/sound-properties/sound-properties.c:193
+#: capplets/sound-properties/sound-properties.c:186
 msgid "File to Play"
 msgstr "Lejátszandó fájl"
 
-#: capplets/sound-properties/sound-properties.c:248
+#: capplets/sound-properties/sound-properties.c:240
 msgid "Enable"
 msgstr "Engedélyez"
 
-#: capplets/sound-properties/sound-properties.c:255
+#: capplets/sound-properties/sound-properties.c:247
 msgid "Enable sound server startup"
 msgstr "Hangszerver elindításának engedélyezése"
 
-#: capplets/sound-properties/sound-properties.c:263
+#: capplets/sound-properties/sound-properties.c:255
 msgid "Sounds for events"
 msgstr "Hangok az eseményekhez"
 
-#: capplets/sound-properties/sound-properties.c:284
+#: capplets/sound-properties/sound-properties.c:276
 msgid "General"
 msgstr "Alap"
 
-#: capplets/sound-properties/sound-properties.c:291
+#: capplets/sound-properties/sound-properties.c:283
 msgid "Select sound file"
 msgstr "Válassz ki egy hangot"
 
-#: capplets/sound-properties/sound-properties.c:328
+#: capplets/sound-properties/sound-properties.c:320
 msgid "Play"
 msgstr "Lejátsz"
 
-#: capplets/sound-properties/sound-properties.c:335
+#: capplets/sound-properties/sound-properties.c:327
 msgid "Sound Events"
 msgstr "Hang események"
 
-#: capplets/sound-properties/sound-properties.c:354
+#: capplets/sound-properties/sound-properties.c:346
 msgid ""
 "This copy of the GNOME control center was not compiled with sound support"
 msgstr "Nem lett hangtámogatással fordítva ez a control-center."
 
-#: capplets/sound-properties/sound-properties.c:760
+#: capplets/sound-properties/sound-properties.c:732
 msgid "The sound file for this event does not exist."
 msgstr "A hangfájl ehhez az eseményhez nem létezik."
 
-#: capplets/sound-properties/sound-properties.c:762
+#: capplets/sound-properties/sound-properties.c:734
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -773,7 +872,7 @@ msgstr ""
 "A gnome-audio csomagot fel kell \n"
 "telepítened ahhoz, hogy az alapértelmezett hangokat halld."
 
-#: capplets/sound-properties/sound-properties.c:768
+#: capplets/sound-properties/sound-properties.c:740
 msgid "Close"
 msgstr "Bezár"
 
@@ -822,6 +921,7 @@ msgstr "Cinegére..."
 msgid "Selected themes from above will be tested by previewing here."
 msgstr "A kiválasztott témák tesztelhetõk itt."
 
+#. column one
 #: capplets/theme-switcher/demo.c:119
 msgid "Sample Button"
 msgstr "Mintagomb"
@@ -834,18 +934,25 @@ msgstr "Minta kijelölõgomb"
 msgid "Sample Text Entry Field"
 msgstr "Minta szövegbeviteli mezõ"
 
-#. column two
-#: capplets/theme-switcher/demo.c:135
+#: capplets/theme-switcher/demo.c:139
+msgid "Submenu"
+msgstr ""
+
+#: capplets/theme-switcher/demo.c:146
+msgid "Item 1"
+msgstr ""
+
+#: capplets/theme-switcher/demo.c:149
+msgid "Another item"
+msgstr ""
+
+#: capplets/theme-switcher/demo.c:154
 msgid "Radio Button 1"
 msgstr "Rádiógomb 1"
 
-#: capplets/theme-switcher/demo.c:141
+#: capplets/theme-switcher/demo.c:160
 msgid "Radio Button 2"
 msgstr "Rádiógomb 2"
-
-#: capplets/theme-switcher/demo.c:147
-msgid "Radio Button 3"
-msgstr "Rádiógomb 3"
 
 #: capplets/theme-switcher/gui.c:83
 #, c-format
@@ -888,6 +995,12 @@ msgstr ""
 msgid "User Font"
 msgstr "Felhasználói betûtípus"
 
+#. FIXME - should really get this from X somehow
+#. for now we just assume default gtk font
+#: capplets/theme-switcher/gui.c:252
+msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
+msgstr ""
+
 #: capplets/theme-switcher/gui.c:271
 msgid "Use custom font."
 msgstr "Beállított betûtípust használj."
@@ -910,148 +1023,180 @@ msgid "Unknown file format"
 msgstr ""
 
 #: capplets/ui-properties/ui-properties.c:53
-msgid "Default Gtk setting"
-msgstr "Alap GTK beállítások"
-
-#: capplets/ui-properties/ui-properties.c:54
-msgid "Spread buttons out"
-msgstr "Szórd ki a gombokat"
-
-#: capplets/ui-properties/ui-properties.c:55
-msgid "Put buttons on edges"
-msgstr "Rakd a gombokat az élekre"
-
-#: capplets/ui-properties/ui-properties.c:56
-msgid "Left-justify buttons"
-msgstr "Igazítsd a gombokat balra"
-
-#: capplets/ui-properties/ui-properties.c:57
-msgid "Right-justify buttons"
-msgstr "Igazítsd a gombokat jobbra"
-
-#: capplets/ui-properties/ui-properties.c:63
-msgid "Let window manager decide"
-msgstr "Majd az ablakkezelõ eldönti"
-
-#: capplets/ui-properties/ui-properties.c:64
-msgid "Center of the screen"
-msgstr "A képernyõ közepére"
-
-#: capplets/ui-properties/ui-properties.c:65
-msgid "At the mouse pointer"
-msgstr "Az egérhez"
-
-#: capplets/ui-properties/ui-properties.c:71
-msgid "Dialogs are like other windows"
-msgstr "A párbeszédablakok olyanok, mint más ablak"
-
-#: capplets/ui-properties/ui-properties.c:72
-msgid "Dialogs are treated specially by window manager"
-msgstr "A párbeszédablakokat az ablakkezelõ lekezeli"
-
-#: capplets/ui-properties/ui-properties.c:79
-msgid "Notebook"
-msgstr "Notesz"
-
-#: capplets/ui-properties/ui-properties.c:80
-msgid "Toplevel"
-msgstr "Felsõ szint"
-
-#: capplets/ui-properties/ui-properties.c:81
-msgid "Modal"
-msgstr "Egyeduralkodó"
-
-#: capplets/ui-properties/ui-properties.c:87
-msgid "Left"
-msgstr "Jobb"
-
-#: capplets/ui-properties/ui-properties.c:88
-msgid "Right"
-msgstr "Bal"
-
-#: capplets/ui-properties/ui-properties.c:89
-msgid "Top"
-msgstr "Fent"
-
-#: capplets/ui-properties/ui-properties.c:90
-msgid "Bottom"
-msgstr "Lent"
-
-#: capplets/ui-properties/ui-properties.c:206
-msgid "Dialog buttons"
-msgstr "Párbeszédablak gombok"
-
-#: capplets/ui-properties/ui-properties.c:211
-msgid "Dialog position"
-msgstr "Párbeszédablak pozíció"
-
-#: capplets/ui-properties/ui-properties.c:216
-msgid "Dialog hints"
-msgstr "Párbeszédablak hintszövegek"
-
-#: capplets/ui-properties/ui-properties.c:223
-msgid "Use statusbar instead of dialog when possible"
-msgstr "Állapotsor használata párbeszédablak helyett, ha lehet"
-
-#: capplets/ui-properties/ui-properties.c:233
-msgid "Place dialogs over application window when possible"
-msgstr "A párbeszédablakokat az alkalmazások fölé tedd, ha lehet"
-
-#: capplets/ui-properties/ui-properties.c:251
 msgid "Can detach and move toolbars"
 msgstr "Le lehessen szedni az eszközsort"
 
-#: capplets/ui-properties/ui-properties.c:260
-msgid "Can detach and move menubars"
-msgstr "Lehessen a menüt mozgatni"
-
-#: capplets/ui-properties/ui-properties.c:269
-msgid "Menus can be torn off"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.c:279
-msgid "Menubars have relieved border"
-msgstr "A menünek kerete legyen"
-
-#: capplets/ui-properties/ui-properties.c:288
+#: capplets/ui-properties/ui-properties.c:58
 msgid "Toolbars have relieved border"
 msgstr "Az eszközsornak kerete legyen"
 
-#: capplets/ui-properties/ui-properties.c:297
+#: capplets/ui-properties/ui-properties.c:63
 msgid "Toolbar buttons have relieved border"
 msgstr "Az eszközsor gomboknak kerete legyen"
 
-#: capplets/ui-properties/ui-properties.c:306
+#: capplets/ui-properties/ui-properties.c:68
 msgid "Toolbars have line separators"
 msgstr "Az eszközsorban elválasztó vonalak legyenek"
 
-#: capplets/ui-properties/ui-properties.c:315
+#: capplets/ui-properties/ui-properties.c:73
 msgid "Toolbars have text labels"
 msgstr "Feliratos eszközsor gombok legyenek"
 
-#: capplets/ui-properties/ui-properties.c:324
-msgid "Statusbar is interactive when possible"
-msgstr "Az állapotsor interaktív legyen, ha lehet"
+#: capplets/ui-properties/ui-properties.c:102
+#, fuzzy
+msgid "Can detach and move menus"
+msgstr "Lehessen a menüt mozgatni"
 
-#: capplets/ui-properties/ui-properties.c:333
-msgid "Statusbar progress meter on right"
-msgstr "Állapotsor folyamatjelzõ sáv jobb oldalon legyen"
+#: capplets/ui-properties/ui-properties.c:107
+#, fuzzy
+msgid "Menus have relieved border"
+msgstr "A menünek kerete legyen"
 
-#: capplets/ui-properties/ui-properties.c:344
-msgid "Dialog buttons have icons"
-msgstr "Párbeszédablak gombokon ikonok legyenek"
+#: capplets/ui-properties/ui-properties.c:111
+msgid "Submenus can be torn off"
+msgstr ""
 
-#: capplets/ui-properties/ui-properties.c:356
+#: capplets/ui-properties/ui-properties.c:115
 msgid "Menu items have icons"
 msgstr "A menüelemeken ikonok legyenek"
 
-#: capplets/ui-properties/ui-properties.c:375
-msgid "Default MDI mode"
+#: capplets/ui-properties/ui-properties.c:138
+msgid "Statusbar is interactive when possible"
+msgstr "Az állapotsor interaktív legyen, ha lehet"
+
+#: capplets/ui-properties/ui-properties.c:143
+#, fuzzy
+msgid "Statusbar progress meter is on the right"
+msgstr "Állapotsor folyamatjelzõ sáv jobb oldalon legyen"
+
+#: capplets/ui-properties/ui-properties.c:160
+#, fuzzy
+msgid "Menu Options"
+msgstr "Mime-típus akciók"
+
+#: capplets/ui-properties/ui-properties.c:161
+msgid "Statusbar Options"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:162
+msgid "Toolbar Options"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:168
+msgid "Dialog buttons"
+msgstr "Párbeszédablak gombok"
+
+#: capplets/ui-properties/ui-properties.c:169
+#, fuzzy
+msgid "Default value"
 msgstr "Alap MDI mód"
 
-#: capplets/ui-properties/ui-properties.c:380
+#: capplets/ui-properties/ui-properties.c:170
+msgid "Spread buttons out"
+msgstr "Szórd ki a gombokat"
+
+#: capplets/ui-properties/ui-properties.c:171
+msgid "Put buttons on edges"
+msgstr "Rakd a gombokat az élekre"
+
+#: capplets/ui-properties/ui-properties.c:172
+msgid "Left-justify buttons"
+msgstr "Igazítsd a gombokat balra"
+
+#: capplets/ui-properties/ui-properties.c:173
+msgid "Right-justify buttons"
+msgstr "Igazítsd a gombokat jobbra"
+
+#: capplets/ui-properties/ui-properties.c:178
+msgid "Dialog buttons have icons"
+msgstr "Párbeszédablak gombokon ikonok legyenek"
+
+#: capplets/ui-properties/ui-properties.c:183
+msgid "Use statusbar instead of dialog when possible"
+msgstr "Állapotsor használata párbeszédablak helyett, ha lehet"
+
+#: capplets/ui-properties/ui-properties.c:205
+msgid "Dialog position"
+msgstr "Párbeszédablak pozíció"
+
+#: capplets/ui-properties/ui-properties.c:206
+msgid "Let window manager decide"
+msgstr "Majd az ablakkezelõ eldönti"
+
+#: capplets/ui-properties/ui-properties.c:207
+msgid "Center of the screen"
+msgstr "A képernyõ közepére"
+
+#: capplets/ui-properties/ui-properties.c:208
+msgid "At the mouse pointer"
+msgstr "Az egérhez"
+
+#: capplets/ui-properties/ui-properties.c:213
+msgid "Dialog hints"
+msgstr "Párbeszédablak hintszövegek"
+
+#: capplets/ui-properties/ui-properties.c:214
+msgid "Dialogs are like other windows"
+msgstr "A párbeszédablakok olyanok, mint más ablak"
+
+#: capplets/ui-properties/ui-properties.c:215
+msgid "Dialogs are treated specially by window manager"
+msgstr "A párbeszédablakokat az ablakkezelõ lekezeli"
+
+#: capplets/ui-properties/ui-properties.c:220
+msgid "Place dialogs over application window when possible"
+msgstr "A párbeszédablakokat az alkalmazások fölé tedd, ha lehet"
+
+#: capplets/ui-properties/ui-properties.c:241
+#, fuzzy
+msgid "Dialog Layout"
+msgstr "Párbeszédablak gombok"
+
+#: capplets/ui-properties/ui-properties.c:242
+#, fuzzy
+msgid "Dialog Behavior"
+msgstr "Párbeszédablak hintszövegek"
+
+#: capplets/ui-properties/ui-properties.c:248
+#, fuzzy
+msgid "Default MDI Mode"
+msgstr "Alap MDI mód"
+
+#: capplets/ui-properties/ui-properties.c:249
+msgid "Notebook"
+msgstr "Notesz"
+
+#: capplets/ui-properties/ui-properties.c:250
+msgid "Toplevel"
+msgstr "Felsõ szint"
+
+#: capplets/ui-properties/ui-properties.c:251
+msgid "Modal"
+msgstr "Egyeduralkodó"
+
+#: capplets/ui-properties/ui-properties.c:256
 msgid "MDI notebook tab position"
 msgstr "MDI noteszfül pozíciója"
+
+#: capplets/ui-properties/ui-properties.c:257
+msgid "Left"
+msgstr "Jobb"
+
+#: capplets/ui-properties/ui-properties.c:258
+msgid "Right"
+msgstr "Bal"
+
+#: capplets/ui-properties/ui-properties.c:259
+msgid "Top"
+msgstr "Fent"
+
+#: capplets/ui-properties/ui-properties.c:260
+msgid "Bottom"
+msgstr "Lent"
+
+#: capplets/ui-properties/ui-properties.c:275
+msgid "GNOME MDI Options"
+msgstr ""
 
 #: capplets/url-properties/url-properties.c:48
 msgid "Error initializing the `url-properties' capplet."
@@ -1090,7 +1235,7 @@ msgstr "Beállít"
 msgid "Remove"
 msgstr "Töröl"
 
-#: capplets/wm-properties/wm-properties-capplet.c:139
+#: capplets/wm-properties/wm-properties-capplet.c:140
 #, c-format
 msgid ""
 "Starting %s\n"
@@ -1100,22 +1245,37 @@ msgstr ""
 "(%d másodperc telt el az elõzõ mûvelet óta)"
 
 #: capplets/wm-properties/wm-properties-capplet.c:301
-msgid " (Current)"
+#, fuzzy, c-format
+msgid "%s (Current)"
 msgstr " (jelenlegi)"
 
-#: capplets/wm-properties/wm-properties-capplet.c:303
-msgid "Run Configuration Tool for "
+#: capplets/wm-properties/wm-properties-capplet.c:304
+#, fuzzy, c-format
+msgid "Run Configuration Tool for %s"
 msgstr "Konfigurációs eszköz indítása: "
 
 #: capplets/wm-properties/wm-properties-capplet.c:315
 msgid " (Not found)"
 msgstr " (Nem találtam)"
 
-#: capplets/wm-properties/wm-properties-capplet.c:396
+#: capplets/wm-properties/wm-properties-capplet.c:354
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\tAnother window manager is already running and could not be killed\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:358
+#, c-format
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\t'%s' didn't start\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:407
 msgid "Previous window manager did not die\n"
 msgstr "Az elõzõ ablakkezelõ nem halt meg\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:429
+#: capplets/wm-properties/wm-properties-capplet.c:440
 #, c-format
 msgid ""
 "Could not start '%s'.\n"
@@ -1124,7 +1284,7 @@ msgstr ""
 "Nem tudom indítani '%s'-t.\n"
 "Visszatérek az elõzõ ablakkezelõhöz, '%s'-höz.\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:460
+#: capplets/wm-properties/wm-properties-capplet.c:471
 msgid ""
 "Could not start fallback window manager.\n"
 "Please run a window manager manually. You can\n"
@@ -1136,57 +1296,57 @@ msgstr ""
 "Megteheted ezt a 'Program futtatása' menüpont\n"
 "segítségével\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:684
-#: capplets/wm-properties/wm-properties-capplet.c:840
+#: capplets/wm-properties/wm-properties-capplet.c:703
 msgid "Add New Window Manager"
 msgstr "Új ablak hozzáadása"
 
-#: capplets/wm-properties/wm-properties-capplet.c:685
-#: capplets/wm-properties/wm-properties-capplet.c:793
-#: capplets/wm-properties/wm-properties-capplet.c:800
-#: capplets/wm-properties/wm-properties-capplet.c:940
+#: capplets/wm-properties/wm-properties-capplet.c:704
+#: capplets/wm-properties/wm-properties-capplet.c:812
+#: capplets/wm-properties/wm-properties-capplet.c:819
+#: capplets/wm-properties/wm-properties-capplet.c:964
 #: control-center/capplet-manager.c:180
 msgid "OK"
 msgstr ""
 
-#: capplets/wm-properties/wm-properties-capplet.c:685
+#: capplets/wm-properties/wm-properties-capplet.c:704
 #: control-center/capplet-manager.c:185
 msgid "Cancel"
 msgstr "Mégsem"
 
-#: capplets/wm-properties/wm-properties-capplet.c:696
+#: capplets/wm-properties/wm-properties-capplet.c:715
 msgid "Name:"
 msgstr "Név:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:709
+#: capplets/wm-properties/wm-properties-capplet.c:728
 msgid "Command:"
 msgstr "Parancs:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:722
+#: capplets/wm-properties/wm-properties-capplet.c:741
 msgid "Configuration Command:"
 msgstr "Konfigurációs parancs:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:741
+#: capplets/wm-properties/wm-properties-capplet.c:760
 msgid "Window manager is session managed"
 msgstr "Az ablakkezelõ folyamatvezérelt"
 
-#: capplets/wm-properties/wm-properties-capplet.c:791
+#: capplets/wm-properties/wm-properties-capplet.c:810
 msgid "Name cannot be empty"
 msgstr "Nem lehet a név üres"
 
-#: capplets/wm-properties/wm-properties-capplet.c:798
+#: capplets/wm-properties/wm-properties-capplet.c:817
 msgid "Command cannot be empty"
 msgstr "Nem lehet a parancs üres"
 
-#: capplets/wm-properties/wm-properties-capplet.c:884
+#: capplets/wm-properties/wm-properties-capplet.c:866
+#: capplets/wm-properties/wm-properties-capplet.c:908
 msgid "Edit Window Manager"
 msgstr "Ablakkezelõ szerkesztése"
 
-#: capplets/wm-properties/wm-properties-capplet.c:939
+#: capplets/wm-properties/wm-properties-capplet.c:963
 msgid "You cannot delete the current Window Manager"
 msgstr "Nem törölheted a futó ablakkezelõt"
 
-#: capplets/wm-properties/wm-properties-capplet.c:1051
+#: capplets/wm-properties/wm-properties-capplet.c:1076
 msgid ""
 "an initialization error occurred while starting 'wm-properties-capplet'.\n"
 "aborting...\n"
@@ -1194,11 +1354,11 @@ msgstr ""
 "a wm-properties-capplet futtatása közben hiba történt,\n"
 "kilépek....\n"
 
-#: control-center/callbacks.c:79
+#: control-center/callbacks.c:85
 msgid "GNOME Control Center"
 msgstr "GNOME vezérlõpult"
 
-#: control-center/callbacks.c:82
+#: control-center/callbacks.c:88
 msgid "Desktop Properties manager."
 msgstr "Lapkezelõ beállítáó"
 
@@ -1285,9 +1445,15 @@ msgstr ""
 "szerkeszteni õket, duplán kattints a megfelelõ bejegyzésre."
 
 #. create the app
-#: control-center/main.c:184
+#: control-center/main.c:187
 msgid "Control Center"
 msgstr "Vezérlõpult"
+
+#~ msgid "Radio Button 3"
+#~ msgstr "Rádiógomb 3"
+
+#~ msgid "Default Gtk setting"
+#~ msgstr "Alap GTK beállítások"
 
 #~ msgid "Session"
 #~ msgstr "Folyamat"

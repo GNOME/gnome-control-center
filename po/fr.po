@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center VERSION\n"
-"POT-Creation-Date: 1999-08-13 10:25+0200\n"
+"POT-Creation-Date: 1999-08-16 11:59-0400\n"
 "PO-Revision-Date: 1998-02-28 19:34+0100\n"
 "Last-Translator: Vincent Renardias <vincent@ldsol.com>\n"
 "Language-Team: Gnome French Team <gnomefr@gnomefr.traduc.org>\n"
@@ -22,6 +22,16 @@ msgstr "Changer l'image de fond."
 #: capplets/background-properties/app-background.c:13
 msgid "IMAGE-FILE"
 msgstr "FICHIER-IMAGE"
+
+#: capplets/background-properties/app-background.c:34
+#, fuzzy
+msgid ""
+"an initialization error occurred while starting "
+"'background-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"Une erreur d'initialisation a eu lieu lors du démarrage\n"
+"de 'wm-properties-capplet'. Abandon...\n"
 
 #: capplets/background-properties/property-background.c:244
 msgid "Disabled"
@@ -176,6 +186,15 @@ msgstr "Durée (ms)"
 msgid "Test"
 msgstr "Test"
 
+#: capplets/bell-properties/bell-properties.c:239
+#, fuzzy
+msgid ""
+"an initialization error occurred while starting 'bell-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"Une erreur d'initialisation a eu lieu lors du démarrage\n"
+"de 'wm-properties-capplet'. Abandon...\n"
+
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:229
 msgid "Gnome editor"
 msgstr "Editeur Gnome"
@@ -215,6 +234,16 @@ msgstr "Volume des clics"
 #: capplets/keyboard-properties/keyboard-properties.c:265
 msgid "Test settings"
 msgstr "Test du paramètrage"
+
+#: capplets/keyboard-properties/keyboard-properties.c:307
+#, fuzzy
+msgid ""
+"an initialization error occurred while starting "
+"'keyboard-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"Une erreur d'initialisation a eu lieu lors du démarrage\n"
+"de 'wm-properties-capplet'. Abandon...\n"
 
 #. icon box
 #: capplets/mime-type/edit-window.c:105
@@ -311,6 +340,32 @@ msgstr ""
 msgid "This mime-type already exists"
 msgstr "Ce type MIME existe déjà"
 
+#: capplets/mime-type/mime-data.c:544 capplets/mime-type/mime-info.c:423
+#, fuzzy
+msgid ""
+"We are unable to create the directory\n"
+"~/.gnome/mime-info\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+"Impossible de créer le fichier\n"
+"~/.gnome/mime-info/user.mime\n"
+"\n"
+"L'état ne pourra pas être sauvegardé"
+
+#: capplets/mime-type/mime-data.c:550 capplets/mime-type/mime-info.c:429
+#, fuzzy
+msgid ""
+"We are unable to access the directory\n"
+"~/.gnome/mime-info\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+"Impossible de créer le fichier\n"
+"~/.gnome/mime-info/user.mime\n"
+"\n"
+"L'état ne pourra pas être sauvegardé"
+
 #: capplets/mime-type/mime-data.c:561
 msgid ""
 "Cannot create the file\n"
@@ -337,19 +392,19 @@ msgstr ""
 
 #: capplets/mime-type/mime-type-capplet.c:77
 #: capplets/session-properties/session-properties.c:203
-#: capplets/wm-properties/wm-properties-capplet.c:1042
+#: capplets/wm-properties/wm-properties-capplet.c:1041
 msgid "Delete"
 msgstr "Effacer"
 
 #: capplets/mime-type/mime-type-capplet.c:87
 #: capplets/session-properties/session-properties.c:193
-#: capplets/wm-properties/wm-properties-capplet.c:1032
+#: capplets/wm-properties/wm-properties-capplet.c:1031
 msgid "Add..."
 msgstr "Ajouter..."
 
 #: capplets/mime-type/mime-type-capplet.c:91
 #: capplets/session-properties/session-properties.c:198
-#: capplets/wm-properties/wm-properties-capplet.c:1037
+#: capplets/wm-properties/wm-properties-capplet.c:1036
 msgid "Edit..."
 msgstr "Editer..."
 
@@ -437,6 +492,15 @@ msgstr "Importante"
 #: capplets/mouse-properties/mouse-properties.c:317
 msgid "Small"
 msgstr "Faible"
+
+#: capplets/mouse-properties/mouse-properties.c:341
+#, fuzzy
+msgid ""
+"an initialization error occurred while starting 'mouse-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"Une erreur d'initialisation a eu lieu lors du démarrage\n"
+"de 'wm-properties-capplet'. Abandon...\n"
 
 #: capplets/screensaver-properties/callbacks.c:102
 msgid "Require Password"
@@ -676,6 +740,12 @@ msgstr "Toujours démarré à chaque nouvelle session."
 msgid "Remove Program"
 msgstr "Enlever Programme"
 
+#. frame for options
+#: capplets/session-properties/session-properties.c:138
+#, fuzzy
+msgid "Options"
+msgstr "Options des menus"
+
 #: capplets/session-properties/session-properties.c:149
 msgid "Prompt on logout"
 msgstr "Confirmer la fin de session"
@@ -684,7 +754,14 @@ msgstr "Confirmer la fin de session"
 msgid "Automatically save changes to session"
 msgstr "Enregistrer automatiquement les changements à la session"
 
+#. frame for manually started programs
+#: capplets/session-properties/session-properties.c:166
+#, fuzzy
+msgid "Non-session-managed Startup Programs"
+msgstr "Ajouter un programme de démarrage"
+
 #: capplets/session-properties/session-properties.c:183
+#: capplets/session-properties/startup-programs.c:304
 msgid "Priority"
 msgstr "Priorité"
 
@@ -701,12 +778,27 @@ msgstr "Voir les programmes en cours d'exécution..."
 msgid "Only display warnings."
 msgstr "Afficher seulement les avertissements."
 
+#: capplets/session-properties/session-properties.c:405
+#, fuzzy
+msgid ""
+"an initialization error occurred while starting 'session-properties-capplet'."
+msgstr ""
+"Une erreur d'initialisation a eu lieu lors du démarrage\n"
+"de 'wm-properties-capplet'. Abandon...\n"
+
+#: capplets/session-properties/startup-programs.c:288
+#: capplets/session-properties/startup-programs.c:295
+#, fuzzy
+msgid "Startup Command"
+msgstr "Commande d'impression :"
+
 #: capplets/session-properties/startup-programs.c:319
 msgid ""
 "Programs with smaller values are started before programs with higher values. "
 "The default value should be OK"
-msgstr "Les programmes avec des valeurs plus petites sont démarrées avant ceux "
-"ayant des valeurs plus élevées. La valeur par défaut devrait convenir."
+msgstr ""
+"Les programmes avec des valeurs plus petites sont démarrées avant ceux ayant "
+"des valeurs plus élevées. La valeur par défaut devrait convenir."
 
 #: capplets/session-properties/startup-programs.c:338
 msgid "The startup command cannot be empty"
@@ -719,6 +811,14 @@ msgstr "Ajouter un programme de démarrage"
 #: capplets/session-properties/startup-programs.c:396
 msgid "Edit Startup Program"
 msgstr "Éditer le programme de démarrage"
+
+#: capplets/sound-properties/sound-properties.c:94
+#, fuzzy
+msgid ""
+"an initialization error occurred while starting 'sound-properties-capplet'."
+msgstr ""
+"Une erreur d'initialisation a eu lieu lors du démarrage\n"
+"de 'wm-properties-capplet'. Abandon...\n"
 
 #: capplets/sound-properties/sound-properties.c:184
 msgid "Category"
@@ -904,6 +1004,12 @@ msgstr ""
 msgid "User Font"
 msgstr "Police utilisateur"
 
+#. FIXME - should really get this from X somehow
+#. for now we just assume default gtk font
+#: capplets/theme-switcher/gui.c:252
+msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
+msgstr ""
+
 #: capplets/theme-switcher/gui.c:271
 msgid "Use custom font."
 msgstr "Utiliser une police personnalisée"
@@ -1058,34 +1164,43 @@ msgid "Dialog Behavior"
 msgstr "Comportement de la boîte de dialogue"
 
 #: capplets/ui-properties/ui-properties.c:248
+#, fuzzy
+msgid "Default MDI Mode"
+msgstr "Valeur par défaut"
+
+#: capplets/ui-properties/ui-properties.c:249
 msgid "Notebook"
 msgstr "Carnet"
 
-#: capplets/ui-properties/ui-properties.c:249
+#: capplets/ui-properties/ui-properties.c:250
 msgid "Toplevel"
 msgstr "1er niveau"
 
-#: capplets/ui-properties/ui-properties.c:250
+#: capplets/ui-properties/ui-properties.c:251
 msgid "Modal"
 msgstr "Modal"
 
-#: capplets/ui-properties/ui-properties.c:255
+#: capplets/ui-properties/ui-properties.c:256
+msgid "MDI notebook tab position"
+msgstr "Position des onglets des carnets MDI"
+
+#: capplets/ui-properties/ui-properties.c:257
 msgid "Left"
 msgstr "Gauche"
 
-#: capplets/ui-properties/ui-properties.c:256
+#: capplets/ui-properties/ui-properties.c:258
 msgid "Right"
 msgstr "Droite"
 
-#: capplets/ui-properties/ui-properties.c:257
+#: capplets/ui-properties/ui-properties.c:259
 msgid "Top"
 msgstr "Haut"
 
-#: capplets/ui-properties/ui-properties.c:258
+#: capplets/ui-properties/ui-properties.c:260
 msgid "Bottom"
 msgstr "Bas"
 
-#: capplets/ui-properties/ui-properties.c:273
+#: capplets/ui-properties/ui-properties.c:275
 msgid "GNOME MDI Options"
 msgstr "Options GNOME MDI"
 
@@ -1135,23 +1250,38 @@ msgstr ""
 "Démarrage de %s\n"
 "(%d secondes avant expiration du temps imparti)"
 
-#: capplets/wm-properties/wm-properties-capplet.c:302
-msgid " (Current)"
+#: capplets/wm-properties/wm-properties-capplet.c:301
+#, fuzzy, c-format
+msgid "%s (Current)"
 msgstr " (En cours)"
 
 #: capplets/wm-properties/wm-properties-capplet.c:304
-msgid "Run Configuration Tool for "
+#, fuzzy, c-format
+msgid "Run Configuration Tool for %s"
 msgstr "Lancer l'outil de configuration pour "
 
-#: capplets/wm-properties/wm-properties-capplet.c:316
+#: capplets/wm-properties/wm-properties-capplet.c:315
 msgid " (Not found)"
 msgstr " (non trouvé)"
 
-#: capplets/wm-properties/wm-properties-capplet.c:408
+#: capplets/wm-properties/wm-properties-capplet.c:354
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\tAnother window manager is already running and could not be killed\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:358
+#, c-format
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\t'%s' didn't start\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:407
 msgid "Previous window manager did not die\n"
 msgstr "Le gestionnaire de fenêtre précédent fonctionne toujours\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:441
+#: capplets/wm-properties/wm-properties-capplet.c:440
 #, c-format
 msgid ""
 "Could not start '%s'.\n"
@@ -1160,7 +1290,7 @@ msgstr ""
 "N'a pas pu démarrer '%s'.\n"
 "Retourne au gestionnaire de fenêtres prédédent '%s'\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:472
+#: capplets/wm-properties/wm-properties-capplet.c:471
 msgid ""
 "Could not start fallback window manager.\n"
 "Please run a window manager manually. You can\n"
@@ -1172,57 +1302,57 @@ msgstr ""
 "Vous pouvez le faire en sélectionnant \"Exécuter...\"\n"
 "dans le menu GNOME\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:704
+#: capplets/wm-properties/wm-properties-capplet.c:703
 msgid "Add New Window Manager"
 msgstr "Ajouter un nouveau gestionnaire de fenêtres"
 
-#: capplets/wm-properties/wm-properties-capplet.c:705
-#: capplets/wm-properties/wm-properties-capplet.c:813
-#: capplets/wm-properties/wm-properties-capplet.c:820
-#: capplets/wm-properties/wm-properties-capplet.c:965
+#: capplets/wm-properties/wm-properties-capplet.c:704
+#: capplets/wm-properties/wm-properties-capplet.c:812
+#: capplets/wm-properties/wm-properties-capplet.c:819
+#: capplets/wm-properties/wm-properties-capplet.c:964
 #: control-center/capplet-manager.c:180
 msgid "OK"
 msgstr "OK"
 
-#: capplets/wm-properties/wm-properties-capplet.c:705
+#: capplets/wm-properties/wm-properties-capplet.c:704
 #: control-center/capplet-manager.c:185
 msgid "Cancel"
 msgstr "Annuler"
 
-#: capplets/wm-properties/wm-properties-capplet.c:716
+#: capplets/wm-properties/wm-properties-capplet.c:715
 msgid "Name:"
 msgstr "Nom :"
 
-#: capplets/wm-properties/wm-properties-capplet.c:729
+#: capplets/wm-properties/wm-properties-capplet.c:728
 msgid "Command:"
 msgstr "Commande :"
 
-#: capplets/wm-properties/wm-properties-capplet.c:742
+#: capplets/wm-properties/wm-properties-capplet.c:741
 msgid "Configuration Command:"
 msgstr "Commande de configuration :"
 
-#: capplets/wm-properties/wm-properties-capplet.c:761
+#: capplets/wm-properties/wm-properties-capplet.c:760
 msgid "Window manager is session managed"
 msgstr "Le gestionnaire de fenêtres est géré par la session"
 
-#: capplets/wm-properties/wm-properties-capplet.c:811
+#: capplets/wm-properties/wm-properties-capplet.c:810
 msgid "Name cannot be empty"
 msgstr "Le champs du nom ne doit pas être vide"
 
-#: capplets/wm-properties/wm-properties-capplet.c:818
+#: capplets/wm-properties/wm-properties-capplet.c:817
 msgid "Command cannot be empty"
 msgstr "La champs de la commande ne peut pas être vide"
 
-#: capplets/wm-properties/wm-properties-capplet.c:867
-#: capplets/wm-properties/wm-properties-capplet.c:909
+#: capplets/wm-properties/wm-properties-capplet.c:866
+#: capplets/wm-properties/wm-properties-capplet.c:908
 msgid "Edit Window Manager"
 msgstr "Editer le gestionnaire de fenêtres"
 
-#: capplets/wm-properties/wm-properties-capplet.c:964
+#: capplets/wm-properties/wm-properties-capplet.c:963
 msgid "You cannot delete the current Window Manager"
 msgstr "Vous ne pouvez pas supprimer le gestionnaire de fenêtres actuel"
 
-#: capplets/wm-properties/wm-properties-capplet.c:1077
+#: capplets/wm-properties/wm-properties-capplet.c:1076
 msgid ""
 "an initialization error occurred while starting 'wm-properties-capplet'.\n"
 "aborting...\n"
@@ -1330,9 +1460,6 @@ msgstr "Centre de Contrôle"
 
 #~ msgid "Default Gtk setting"
 #~ msgstr "Paramètres Gtk par défaut"
-
-#~ msgid "MDI notebook tab position"
-#~ msgstr "Position des onglets des carnets MDI"
 
 #~ msgid "Run command"
 #~ msgstr "Exécuter une commande"
@@ -2001,9 +2128,6 @@ msgstr "Centre de Contrôle"
 
 #~ msgid "Saved Image Settings"
 #~ msgstr "Paramètres de l'image enregistrés"
-
-#~ msgid "Print Command:"
-#~ msgstr "Commande d'impression :"
 
 #~ msgid "Print"
 #~ msgstr "Imprimer"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.5\n"
-"POT-Creation-Date: 1999-08-02 12:18-0400\n"
+"POT-Creation-Date: 1999-08-16 11:59-0400\n"
 "PO-Revision-Date: 1998-11-21 00:05+0100\n"
 "Last-Translator: Pablo Saratxaga <srtxg@chanae.alphanet.ch>\n"
 "Language-Team: \n"
@@ -38,6 +38,16 @@ msgstr "Definir la imágen de fondo."
 #: capplets/background-properties/app-background.c:13
 msgid "IMAGE-FILE"
 msgstr "ARCHIVO-IMÁGEN"
+
+#: capplets/background-properties/app-background.c:34
+#, fuzzy
+msgid ""
+"an initialization error occurred while starting "
+"'background-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"ocurrió un error de inicialización al lanzar 'wm-properties-capplet'.\n"
+"abortando...\n"
 
 #: capplets/background-properties/property-background.c:244
 msgid "Disabled"
@@ -82,6 +92,7 @@ msgid "Can't find an hbox, using a normal file selection"
 msgstr "No puedo encontrar una hbox, usando una selección de archivos normal"
 
 #: capplets/background-properties/property-background.c:888
+#: capplets/keyboard-properties/keyboard-properties.c:257
 #: capplets/screensaver-properties/screensaver-dialog.c:25
 #: capplets/theme-switcher/gui.c:225 capplets/theme-switcher/gui.c:297
 msgid "Preview"
@@ -115,56 +126,56 @@ msgstr "Centrado"
 msgid "Tiled"
 msgstr "Mosaico"
 
-#: capplets/background-properties/property-background.c:1351
+#: capplets/background-properties/property-background.c:1353
 msgid "Disable background selection"
 msgstr "Desactivar la selección del tapiz de fondo"
 
-#: capplets/background-properties/property-background.c:1480
+#: capplets/background-properties/property-background.c:1482
 msgid "Set parameters from saved state and exit"
 msgstr "Usa los parámetros que se tenían guardados y terminar"
 
-#: capplets/background-properties/property-background.c:1481
+#: capplets/background-properties/property-background.c:1483
 msgid "IMAGE"
 msgstr "IMÁGEN"
 
-#: capplets/background-properties/property-background.c:1481
+#: capplets/background-properties/property-background.c:1483
 msgid "Sets the wallpaper to the value specified"
 msgstr "Ajusta el fondo al valor indicado"
 
-#: capplets/background-properties/property-background.c:1482
-#: capplets/background-properties/property-background.c:1483
+#: capplets/background-properties/property-background.c:1484
+#: capplets/background-properties/property-background.c:1485
 msgid "COLOR"
 msgstr "COLOR"
 
-#: capplets/background-properties/property-background.c:1482
+#: capplets/background-properties/property-background.c:1484
 msgid "Specifies the background color"
 msgstr "Indica el color de fondo"
 
-#: capplets/background-properties/property-background.c:1483
+#: capplets/background-properties/property-background.c:1485
 msgid "Specifies end background color for gradient"
 msgstr "Indica el color de fondo final para el gradiente"
 
-#: capplets/background-properties/property-background.c:1484
+#: capplets/background-properties/property-background.c:1486
 msgid "ORIENT"
 msgstr "ORIENT"
 
-#: capplets/background-properties/property-background.c:1484
+#: capplets/background-properties/property-background.c:1486
 msgid "Gradient orientation: vertical or horizontal"
 msgstr "Orientación del gradiente: vertical u horizontal"
 
-#: capplets/background-properties/property-background.c:1485
+#: capplets/background-properties/property-background.c:1487
 msgid "Use a solid fill for the background"
 msgstr "Usar un color unido para el fondo"
 
-#: capplets/background-properties/property-background.c:1486
+#: capplets/background-properties/property-background.c:1488
 msgid "Use a gradient fill for the background"
 msgstr "Usa un gradiente de colores para el fondo"
 
-#: capplets/background-properties/property-background.c:1487
+#: capplets/background-properties/property-background.c:1489
 msgid "MODE"
 msgstr "MODO"
 
-#: capplets/background-properties/property-background.c:1487
+#: capplets/background-properties/property-background.c:1489
 msgid "Display wallpaper: tiled, centered, scaled or ratio"
 msgstr "Imágen de fondo: mosaico, centrada, redimensionada o racio"
 
@@ -188,6 +199,15 @@ msgstr "Duración (ms)"
 msgid "Test"
 msgstr "Prueba"
 
+#: capplets/bell-properties/bell-properties.c:239
+#, fuzzy
+msgid ""
+"an initialization error occurred while starting 'bell-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"ocurrió un error de inicialización al lanzar 'wm-properties-capplet'.\n"
+"abortando...\n"
+
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:229
 msgid "Gnome editor"
 msgstr "Editor de Gnome"
@@ -196,37 +216,47 @@ msgstr "Editor de Gnome"
 msgid "Run In Terminal"
 msgstr "Lanzar en un terminal"
 
-#: capplets/keyboard-properties/keyboard-properties.c:210
+#: capplets/keyboard-properties/keyboard-properties.c:208
 msgid "Auto-repeat"
 msgstr "Auto-repetición"
 
-#: capplets/keyboard-properties/keyboard-properties.c:221
+#: capplets/keyboard-properties/keyboard-properties.c:219
 msgid "Enable auto-repeat"
 msgstr "Activar auto-repetición"
 
-#: capplets/keyboard-properties/keyboard-properties.c:231
+#: capplets/keyboard-properties/keyboard-properties.c:229
 msgid "Repeat rate"
 msgstr "Velocidad de repetición"
 
-#: capplets/keyboard-properties/keyboard-properties.c:234
+#: capplets/keyboard-properties/keyboard-properties.c:232
 msgid "Repeat Delay"
 msgstr "Tiempo antes de repetición"
 
-#: capplets/keyboard-properties/keyboard-properties.c:236
+#: capplets/keyboard-properties/keyboard-properties.c:234
 msgid "Keyboard click"
 msgstr "Clic del teclado"
 
-#: capplets/keyboard-properties/keyboard-properties.c:247
+#: capplets/keyboard-properties/keyboard-properties.c:245
 msgid "Click on keypress"
 msgstr "Clic al teclear"
 
-#: capplets/keyboard-properties/keyboard-properties.c:257
+#: capplets/keyboard-properties/keyboard-properties.c:255
 msgid "Click volume"
 msgstr "Volúmen del clic"
 
-#: capplets/keyboard-properties/keyboard-properties.c:264
+#: capplets/keyboard-properties/keyboard-properties.c:265
 msgid "Test settings"
 msgstr "Probar la configuración"
+
+#: capplets/keyboard-properties/keyboard-properties.c:307
+#, fuzzy
+msgid ""
+"an initialization error occurred while starting "
+"'keyboard-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"ocurrió un error de inicialización al lanzar 'wm-properties-capplet'.\n"
+"abortando...\n"
 
 #. icon box
 #: capplets/mime-type/edit-window.c:105
@@ -281,7 +311,8 @@ msgstr "Editar"
 
 #. we initialize everything
 #: capplets/mime-type/edit-window.c:238
-msgid "Set actions for "
+#, fuzzy, c-format
+msgid "Set actions for %s"
 msgstr "Definir las acciones para "
 
 #: capplets/mime-type/mime-data.c:354
@@ -322,6 +353,32 @@ msgstr ""
 msgid "This mime-type already exists"
 msgstr "Este tipo mime ya existe"
 
+#: capplets/mime-type/mime-data.c:544 capplets/mime-type/mime-info.c:423
+#, fuzzy
+msgid ""
+"We are unable to create the directory\n"
+"~/.gnome/mime-info\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+"No puedo crear el archivo\n"
+"~/.gnome/mime-info/user.mime\n"
+"\n"
+"No será posible guardar el estado actual"
+
+#: capplets/mime-type/mime-data.c:550 capplets/mime-type/mime-info.c:429
+#, fuzzy
+msgid ""
+"We are unable to access the directory\n"
+"~/.gnome/mime-info\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+"No puedo crear el archivo\n"
+"~/.gnome/mime-info/user.mime\n"
+"\n"
+"No será posible guardar el estado actual"
+
 #: capplets/mime-type/mime-data.c:561
 msgid ""
 "Cannot create the file\n"
@@ -348,19 +405,19 @@ msgstr ""
 
 #: capplets/mime-type/mime-type-capplet.c:77
 #: capplets/session-properties/session-properties.c:203
-#: capplets/wm-properties/wm-properties-capplet.c:1016
+#: capplets/wm-properties/wm-properties-capplet.c:1041
 msgid "Delete"
 msgstr "Borrar"
 
 #: capplets/mime-type/mime-type-capplet.c:87
 #: capplets/session-properties/session-properties.c:193
-#: capplets/wm-properties/wm-properties-capplet.c:1006
+#: capplets/wm-properties/wm-properties-capplet.c:1031
 msgid "Add..."
 msgstr "Añadir..."
 
 #: capplets/mime-type/mime-type-capplet.c:91
 #: capplets/session-properties/session-properties.c:198
-#: capplets/wm-properties/wm-properties-capplet.c:1011
+#: capplets/wm-properties/wm-properties-capplet.c:1036
 msgid "Edit..."
 msgstr "Editar..."
 
@@ -450,33 +507,42 @@ msgstr "Grande"
 msgid "Small"
 msgstr "Pequeño"
 
-#: capplets/screensaver-properties/callbacks.c:101
+#: capplets/mouse-properties/mouse-properties.c:341
+#, fuzzy
+msgid ""
+"an initialization error occurred while starting 'mouse-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"ocurrió un error de inicialización al lanzar 'wm-properties-capplet'.\n"
+"abortando...\n"
+
+#: capplets/screensaver-properties/callbacks.c:102
 msgid "Require Password"
 msgstr "Requiere Contraseña"
 
-#: capplets/screensaver-properties/callbacks.c:153
+#: capplets/screensaver-properties/callbacks.c:154
 msgid "Use power management."
 msgstr "Usar gestión de energía."
 
-#: capplets/screensaver-properties/callbacks.c:314
+#: capplets/screensaver-properties/callbacks.c:309
 msgid "No Screensaver"
 msgstr "Ningún salvapantalla"
 
-#: capplets/screensaver-properties/callbacks.c:319
+#: capplets/screensaver-properties/callbacks.c:314
 msgid "Random Screensaver"
 msgstr "Salvapantalla al azar"
 
-#: capplets/screensaver-properties/callbacks.c:494
+#: capplets/screensaver-properties/callbacks.c:484
 #: capplets/screensaver-properties/screensaver-properties-capplet.c:54
 msgid "Settings..."
 msgstr "Propiedades..."
 
 #. we need to special case random
-#: capplets/screensaver-properties/callbacks.c:502
+#: capplets/screensaver-properties/callbacks.c:492
 msgid "Random Settings"
 msgstr "Parámetros al azar"
 
-#: capplets/screensaver-properties/callbacks.c:512
+#: capplets/screensaver-properties/callbacks.c:502
 #, c-format
 msgid "%s Settings..."
 msgstr "Propiedades %s..."
@@ -598,19 +664,19 @@ msgstr ""
 msgid "This column gives the command used to start a program."
 msgstr "Esta columna indica el comando a usar para iniciar un programa."
 
-#: capplets/session-properties/gsm-client-list.c:132
+#: capplets/session-properties/gsm-client-list.c:135
 msgid "Order"
 msgstr "Orden"
 
-#: capplets/session-properties/gsm-client-list.c:132
+#: capplets/session-properties/gsm-client-list.c:136
 msgid "Style"
 msgstr "Estilo"
 
-#: capplets/session-properties/gsm-client-list.c:132
+#: capplets/session-properties/gsm-client-list.c:137
 msgid "State"
 msgstr "Estado"
 
-#: capplets/session-properties/gsm-client-list.c:132
+#: capplets/session-properties/gsm-client-list.c:138
 msgid "Program"
 msgstr "Programa"
 
@@ -686,6 +752,11 @@ msgstr "Siempre iniciado en cada sesión."
 msgid "Remove Program"
 msgstr "Quitar programa"
 
+#. frame for options
+#: capplets/session-properties/session-properties.c:138
+msgid "Options"
+msgstr ""
+
 #: capplets/session-properties/session-properties.c:149
 msgid "Prompt on logout"
 msgstr "Preguntar al salir de la sesión"
@@ -694,7 +765,14 @@ msgstr "Preguntar al salir de la sesión"
 msgid "Automatically save changes to session"
 msgstr "Guardar automáticamente los cambios de la sesión"
 
+#. frame for manually started programs
+#: capplets/session-properties/session-properties.c:166
+#, fuzzy
+msgid "Non-session-managed Startup Programs"
+msgstr "Añadir programa de inicio"
+
 #: capplets/session-properties/session-properties.c:183
+#: capplets/session-properties/startup-programs.c:304
 msgid "Priority"
 msgstr "Prioridad"
 
@@ -711,14 +789,28 @@ msgstr "Lista de programas ejecutándose actualmente..."
 msgid "Only display warnings."
 msgstr "Solo mostrar las advertencias."
 
+#: capplets/session-properties/session-properties.c:405
+#, fuzzy
+msgid ""
+"an initialization error occurred while starting 'session-properties-capplet'."
+msgstr ""
+"ocurrió un error de inicialización al lanzar 'wm-properties-capplet'.\n"
+"abortando...\n"
+
+#: capplets/session-properties/startup-programs.c:288
+#: capplets/session-properties/startup-programs.c:295
+#, fuzzy
+msgid "Startup Command"
+msgstr "Comando"
+
 #: capplets/session-properties/startup-programs.c:319
 msgid ""
 "Programs with smaller values are started before programs with higher values. "
 "The default value should be OK"
 msgstr ""
-"Los programas con valores más pequeños serán lanzados antes que aquellos "
-"con valores más grandes. El valor por omisión debería ser funcionar en "
-"la mayoría de los casos"
+"Los programas con valores más pequeños serán lanzados antes que aquellos con "
+"valores más grandes. El valor por omisión debería ser funcionar en la "
+"mayoría de los casos"
 
 #: capplets/session-properties/startup-programs.c:338
 msgid "The startup command cannot be empty"
@@ -732,58 +824,66 @@ msgstr "Añadir programa de inicio"
 msgid "Edit Startup Program"
 msgstr "Editar programa de inicio"
 
-#: capplets/sound-properties/sound-properties.c:191
+#: capplets/sound-properties/sound-properties.c:94
+#, fuzzy
+msgid ""
+"an initialization error occurred while starting 'sound-properties-capplet'."
+msgstr ""
+"ocurrió un error de inicialización al lanzar 'wm-properties-capplet'.\n"
+"abortando...\n"
+
+#: capplets/sound-properties/sound-properties.c:184
 msgid "Category"
 msgstr "Categoría"
 
-#: capplets/sound-properties/sound-properties.c:192
+#: capplets/sound-properties/sound-properties.c:185
 msgid "Event"
 msgstr "Evento"
 
-#: capplets/sound-properties/sound-properties.c:193
+#: capplets/sound-properties/sound-properties.c:186
 msgid "File to Play"
 msgstr "Archivo a tocar"
 
-#: capplets/sound-properties/sound-properties.c:248
+#: capplets/sound-properties/sound-properties.c:240
 msgid "Enable"
 msgstr "Activar"
 
-#: capplets/sound-properties/sound-properties.c:255
+#: capplets/sound-properties/sound-properties.c:247
 msgid "Enable sound server startup"
 msgstr "Activar el lanzamiento del servidor de sonido"
 
-#: capplets/sound-properties/sound-properties.c:263
+#: capplets/sound-properties/sound-properties.c:255
 msgid "Sounds for events"
 msgstr "Sonidos para los eventos"
 
-#: capplets/sound-properties/sound-properties.c:284
+#: capplets/sound-properties/sound-properties.c:276
 msgid "General"
 msgstr "General"
 
-#: capplets/sound-properties/sound-properties.c:291
+#: capplets/sound-properties/sound-properties.c:283
 msgid "Select sound file"
 msgstr "Seleccionar archivo de sonido"
 
-#: capplets/sound-properties/sound-properties.c:328
+#: capplets/sound-properties/sound-properties.c:320
 msgid "Play"
 msgstr "Tocar"
 
-#: capplets/sound-properties/sound-properties.c:335
+#: capplets/sound-properties/sound-properties.c:327
 msgid "Sound Events"
 msgstr "Eventos de sonido"
 
-#: capplets/sound-properties/sound-properties.c:354
+#: capplets/sound-properties/sound-properties.c:346
 msgid ""
 "This copy of the GNOME control center was not compiled with sound support"
 msgstr ""
 "Esta copia del centro de control de GNOME fué compilada sin soporte para el "
 "sonido"
 
-#: capplets/sound-properties/sound-properties.c:760
+#: capplets/sound-properties/sound-properties.c:732
 msgid "The sound file for this event does not exist."
 msgstr "El archivo de sonido para este evento no existe."
 
-#: capplets/sound-properties/sound-properties.c:762
+#: capplets/sound-properties/sound-properties.c:734
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -793,7 +893,7 @@ msgstr ""
 "Quizás desee instalar el paquete gnome-audio para\n"
 "un conjunto de sonidos de base."
 
-#: capplets/sound-properties/sound-properties.c:768
+#: capplets/sound-properties/sound-properties.c:740
 msgid "Close"
 msgstr "Cerrar"
 
@@ -842,6 +942,7 @@ msgstr "Guitarra"
 msgid "Selected themes from above will be tested by previewing here."
 msgstr "Los temas seleccionados serán previsualizados aquí."
 
+#. column one
 #: capplets/theme-switcher/demo.c:119
 msgid "Sample Button"
 msgstr "Botón de ejemplo"
@@ -854,18 +955,25 @@ msgstr "Ejemplo de botón de opción"
 msgid "Sample Text Entry Field"
 msgstr "Ejemplo de campo de entrada de texto"
 
-#. column two
-#: capplets/theme-switcher/demo.c:135
+#: capplets/theme-switcher/demo.c:139
+msgid "Submenu"
+msgstr ""
+
+#: capplets/theme-switcher/demo.c:146
+msgid "Item 1"
+msgstr ""
+
+#: capplets/theme-switcher/demo.c:149
+msgid "Another item"
+msgstr ""
+
+#: capplets/theme-switcher/demo.c:154
 msgid "Radio Button 1"
 msgstr "Botón de radio 1"
 
-#: capplets/theme-switcher/demo.c:141
+#: capplets/theme-switcher/demo.c:160
 msgid "Radio Button 2"
 msgstr "Botón de radio 2"
-
-#: capplets/theme-switcher/demo.c:147
-msgid "Radio Button 3"
-msgstr "Botón de radio 3"
 
 #: capplets/theme-switcher/gui.c:83
 #, c-format
@@ -908,6 +1016,12 @@ msgstr ""
 msgid "User Font"
 msgstr "Fuente del Usuario"
 
+#. FIXME - should really get this from X somehow
+#. for now we just assume default gtk font
+#: capplets/theme-switcher/gui.c:252
+msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
+msgstr ""
+
 #: capplets/theme-switcher/gui.c:271
 msgid "Use custom font."
 msgstr "Usar una fuente personalizada."
@@ -930,153 +1044,183 @@ msgid "Unknown file format"
 msgstr "Formato de archivo desconocido"
 
 #: capplets/ui-properties/ui-properties.c:53
-msgid "Default Gtk setting"
-msgstr "Configuración de Gtk por omisión"
+msgid "Can detach and move toolbars"
+msgstr "Barras de íconos desprendibles y desplazables"
 
-#: capplets/ui-properties/ui-properties.c:54
+#: capplets/ui-properties/ui-properties.c:58
+msgid "Toolbars have relieved border"
+msgstr "Barras de íconos con bordes en relieve"
+
+#: capplets/ui-properties/ui-properties.c:63
+msgid "Toolbar buttons have relieved border"
+msgstr "Botones de la barra de íconos con bordes en relieve"
+
+#: capplets/ui-properties/ui-properties.c:68
+msgid "Toolbars have line separators"
+msgstr "Barras de íconos con líneas de separación"
+
+#: capplets/ui-properties/ui-properties.c:73
+msgid "Toolbars have text labels"
+msgstr "Barras de íconos con textos"
+
+#: capplets/ui-properties/ui-properties.c:102
+#, fuzzy
+msgid "Can detach and move menus"
+msgstr "Barras de menúes desprendibles y desplazables"
+
+#: capplets/ui-properties/ui-properties.c:107
+#, fuzzy
+msgid "Menus have relieved border"
+msgstr "Barras de menúes con bordes en relieve"
+
+#: capplets/ui-properties/ui-properties.c:111
+msgid "Submenus can be torn off"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:115
+msgid "Menu items have icons"
+msgstr "Menúes con íconos"
+
+#: capplets/ui-properties/ui-properties.c:138
+msgid "Statusbar is interactive when possible"
+msgstr "Barra de estado interactiva siempre que sea posible"
+
+#: capplets/ui-properties/ui-properties.c:143
+#, fuzzy
+msgid "Statusbar progress meter is on the right"
+msgstr "Barra de estado con barra de progresión a la derecha"
+
+#: capplets/ui-properties/ui-properties.c:160
+#, fuzzy
+msgid "Menu Options"
+msgstr "Acciones asociadas al tipo MIME"
+
+#: capplets/ui-properties/ui-properties.c:161
+msgid "Statusbar Options"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:162
+msgid "Toolbar Options"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:168
+msgid "Dialog buttons"
+msgstr "Botones de diálogo"
+
+#: capplets/ui-properties/ui-properties.c:169
+#, fuzzy
+msgid "Default value"
+msgstr "Modo MDI por omisión"
+
+#: capplets/ui-properties/ui-properties.c:170
 msgid "Spread buttons out"
 msgstr "Espaciar los botones"
 
-#: capplets/ui-properties/ui-properties.c:55
+#: capplets/ui-properties/ui-properties.c:171
 msgid "Put buttons on edges"
 msgstr "Poner los botones sobre los lados"
 
-#: capplets/ui-properties/ui-properties.c:56
+#: capplets/ui-properties/ui-properties.c:172
 msgid "Left-justify buttons"
 msgstr "Justificar los botones a la izquierda"
 
-#: capplets/ui-properties/ui-properties.c:57
+#: capplets/ui-properties/ui-properties.c:173
 msgid "Right-justify buttons"
 msgstr "Justificar los botones a la derecha"
 
-#: capplets/ui-properties/ui-properties.c:63
+#: capplets/ui-properties/ui-properties.c:178
+msgid "Dialog buttons have icons"
+msgstr "Botones de diálogo con íconos"
+
+#: capplets/ui-properties/ui-properties.c:183
+msgid "Use statusbar instead of dialog when possible"
+msgstr "Usar barra de estado en vez del diálogo siempre que sea posible"
+
+#: capplets/ui-properties/ui-properties.c:205
+msgid "Dialog position"
+msgstr "Posición de las ventanas de diálogo"
+
+#: capplets/ui-properties/ui-properties.c:206
 msgid "Let window manager decide"
 msgstr "Dejar que el gestor de ventanas decida"
 
-#: capplets/ui-properties/ui-properties.c:64
+#: capplets/ui-properties/ui-properties.c:207
 msgid "Center of the screen"
 msgstr "Al centro de la pantalla"
 
-#: capplets/ui-properties/ui-properties.c:65
+#: capplets/ui-properties/ui-properties.c:208
 msgid "At the mouse pointer"
 msgstr "A la posición del ratón"
 
-#: capplets/ui-properties/ui-properties.c:71
+#: capplets/ui-properties/ui-properties.c:213
+msgid "Dialog hints"
+msgstr "Tratamiento"
+
+#: capplets/ui-properties/ui-properties.c:214
 msgid "Dialogs are like other windows"
 msgstr "Las ventanas de diálogo son como las demás ventanas"
 
-#: capplets/ui-properties/ui-properties.c:72
+#: capplets/ui-properties/ui-properties.c:215
 msgid "Dialogs are treated specially by window manager"
 msgstr ""
 "Las ventanas de diálogo son tratadas de manera especial por el gestor de "
 "ventanas"
 
-#: capplets/ui-properties/ui-properties.c:79
-msgid "Notebook"
-msgstr "Bloc de notas"
-
-#: capplets/ui-properties/ui-properties.c:80
-msgid "Toplevel"
-msgstr "Primer plano"
-
-#: capplets/ui-properties/ui-properties.c:81
-msgid "Modal"
-msgstr "Modal"
-
-#: capplets/ui-properties/ui-properties.c:87
-msgid "Left"
-msgstr "Izquierda"
-
-#: capplets/ui-properties/ui-properties.c:88
-msgid "Right"
-msgstr "Derecha"
-
-#: capplets/ui-properties/ui-properties.c:89
-msgid "Top"
-msgstr "Arriba"
-
-#: capplets/ui-properties/ui-properties.c:90
-msgid "Bottom"
-msgstr "Abajo"
-
-#: capplets/ui-properties/ui-properties.c:206
-msgid "Dialog buttons"
-msgstr "Botones de diálogo"
-
-#: capplets/ui-properties/ui-properties.c:211
-msgid "Dialog position"
-msgstr "Posición de las ventanas de diálogo"
-
-#: capplets/ui-properties/ui-properties.c:216
-msgid "Dialog hints"
-msgstr "Tratamiento"
-
-#: capplets/ui-properties/ui-properties.c:223
-msgid "Use statusbar instead of dialog when possible"
-msgstr "Usar barra de estado en vez del diálogo siempre que sea posible"
-
-#: capplets/ui-properties/ui-properties.c:233
+#: capplets/ui-properties/ui-properties.c:220
 msgid "Place dialogs over application window when possible"
 msgstr ""
 "Poner las ventanas de diálogo encima de las aplicaciones siempre que posible"
 
-#: capplets/ui-properties/ui-properties.c:251
-msgid "Can detach and move toolbars"
-msgstr "Barras de íconos desprendibles y desplazables"
-
-#: capplets/ui-properties/ui-properties.c:260
-msgid "Can detach and move menubars"
-msgstr "Barras de menúes desprendibles y desplazables"
-
-#: capplets/ui-properties/ui-properties.c:269
-# torn ??
+#: capplets/ui-properties/ui-properties.c:241
 #, fuzzy
-msgid "Menus can be torn off"
-msgstr ""
+msgid "Dialog Layout"
+msgstr "Botones de diálogo"
 
-#: capplets/ui-properties/ui-properties.c:279
-msgid "Menubars have relieved border"
-msgstr "Barras de menúes con bordes en relieve"
+#: capplets/ui-properties/ui-properties.c:242
+#, fuzzy
+msgid "Dialog Behavior"
+msgstr "Tratamiento"
 
-#: capplets/ui-properties/ui-properties.c:288
-msgid "Toolbars have relieved border"
-msgstr "Barras de íconos con bordes en relieve"
-
-#: capplets/ui-properties/ui-properties.c:297
-msgid "Toolbar buttons have relieved border"
-msgstr "Botones de la barra de íconos con bordes en relieve"
-
-#: capplets/ui-properties/ui-properties.c:306
-msgid "Toolbars have line separators"
-msgstr "Barras de íconos con líneas de separación"
-
-#: capplets/ui-properties/ui-properties.c:315
-msgid "Toolbars have text labels"
-msgstr "Barras de íconos con textos"
-
-#: capplets/ui-properties/ui-properties.c:324
-msgid "Statusbar is interactive when possible"
-msgstr "Barra de estado interactiva siempre que sea posible"
-
-#: capplets/ui-properties/ui-properties.c:333
-msgid "Statusbar progress meter on right"
-msgstr "Barra de estado con barra de progresión a la derecha"
-
-#: capplets/ui-properties/ui-properties.c:344
-msgid "Dialog buttons have icons"
-msgstr "Botones de diálogo con íconos"
-
-#: capplets/ui-properties/ui-properties.c:356
-msgid "Menu items have icons"
-msgstr "Menúes con íconos"
-
-#: capplets/ui-properties/ui-properties.c:375
-msgid "Default MDI mode"
+#: capplets/ui-properties/ui-properties.c:248
+#, fuzzy
+msgid "Default MDI Mode"
 msgstr "Modo MDI por omisión"
 
-#: capplets/ui-properties/ui-properties.c:380
+#: capplets/ui-properties/ui-properties.c:249
+msgid "Notebook"
+msgstr "Bloc de notas"
+
+#: capplets/ui-properties/ui-properties.c:250
+msgid "Toplevel"
+msgstr "Primer plano"
+
+#: capplets/ui-properties/ui-properties.c:251
+msgid "Modal"
+msgstr "Modal"
+
+#: capplets/ui-properties/ui-properties.c:256
 msgid "MDI notebook tab position"
 msgstr "Posición de la etiqueta del bloc de notas MDI"
+
+#: capplets/ui-properties/ui-properties.c:257
+msgid "Left"
+msgstr "Izquierda"
+
+#: capplets/ui-properties/ui-properties.c:258
+msgid "Right"
+msgstr "Derecha"
+
+#: capplets/ui-properties/ui-properties.c:259
+msgid "Top"
+msgstr "Arriba"
+
+#: capplets/ui-properties/ui-properties.c:260
+msgid "Bottom"
+msgstr "Abajo"
+
+#: capplets/ui-properties/ui-properties.c:275
+msgid "GNOME MDI Options"
+msgstr ""
 
 #: capplets/url-properties/url-properties.c:48
 msgid "Error initializing the `url-properties' capplet."
@@ -1115,7 +1259,7 @@ msgstr "Definir"
 msgid "Remove"
 msgstr "Quitar"
 
-#: capplets/wm-properties/wm-properties-capplet.c:139
+#: capplets/wm-properties/wm-properties-capplet.c:140
 #, c-format
 msgid ""
 "Starting %s\n"
@@ -1125,22 +1269,37 @@ msgstr ""
 "(quedan %d segundos antes de la expiración de la operación)"
 
 #: capplets/wm-properties/wm-properties-capplet.c:301
-msgid " (Current)"
+#, fuzzy, c-format
+msgid "%s (Current)"
 msgstr " (Actual)"
 
-#: capplets/wm-properties/wm-properties-capplet.c:303
-msgid "Run Configuration Tool for "
+#: capplets/wm-properties/wm-properties-capplet.c:304
+#, fuzzy, c-format
+msgid "Run Configuration Tool for %s"
 msgstr "Lanzar la herramienta de configuración de"
 
 #: capplets/wm-properties/wm-properties-capplet.c:315
 msgid " (Not found)"
 msgstr " (No se encontró)"
 
-#: capplets/wm-properties/wm-properties-capplet.c:396
+#: capplets/wm-properties/wm-properties-capplet.c:354
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\tAnother window manager is already running and could not be killed\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:358
+#, c-format
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\t'%s' didn't start\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:407
 msgid "Previous window manager did not die\n"
 msgstr "El gestor de ventanas precedente no murió\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:429
+#: capplets/wm-properties/wm-properties-capplet.c:440
 #, c-format
 msgid ""
 "Could not start '%s'.\n"
@@ -1149,7 +1308,7 @@ msgstr ""
 "No pude iniciar a '%s'.\n"
 "Volviendo al precedente gestor de ventanas ('%s')\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:460
+#: capplets/wm-properties/wm-properties-capplet.c:471
 msgid ""
 "Could not start fallback window manager.\n"
 "Please run a window manager manually. You can\n"
@@ -1161,57 +1320,57 @@ msgstr ""
 "seleccionando \"Ejecutar...\" en el menú con\n"
 "el logotipo de Gnome en forma de pié\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:684
-#: capplets/wm-properties/wm-properties-capplet.c:840
+#: capplets/wm-properties/wm-properties-capplet.c:703
 msgid "Add New Window Manager"
 msgstr "Añadir un nuevo gestor de ventanas"
 
-#: capplets/wm-properties/wm-properties-capplet.c:685
-#: capplets/wm-properties/wm-properties-capplet.c:793
-#: capplets/wm-properties/wm-properties-capplet.c:800
-#: capplets/wm-properties/wm-properties-capplet.c:940
+#: capplets/wm-properties/wm-properties-capplet.c:704
+#: capplets/wm-properties/wm-properties-capplet.c:812
+#: capplets/wm-properties/wm-properties-capplet.c:819
+#: capplets/wm-properties/wm-properties-capplet.c:964
 #: control-center/capplet-manager.c:180
 msgid "OK"
 msgstr "Aceptar"
 
-#: capplets/wm-properties/wm-properties-capplet.c:685
+#: capplets/wm-properties/wm-properties-capplet.c:704
 #: control-center/capplet-manager.c:185
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: capplets/wm-properties/wm-properties-capplet.c:696
+#: capplets/wm-properties/wm-properties-capplet.c:715
 msgid "Name:"
 msgstr "Nombre:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:709
+#: capplets/wm-properties/wm-properties-capplet.c:728
 msgid "Command:"
 msgstr "Comando:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:722
+#: capplets/wm-properties/wm-properties-capplet.c:741
 msgid "Configuration Command:"
 msgstr "Comando para la configuración:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:741
+#: capplets/wm-properties/wm-properties-capplet.c:760
 msgid "Window manager is session managed"
 msgstr "El gestor de ventanas es manejado por el gestor de sesiones"
 
-#: capplets/wm-properties/wm-properties-capplet.c:791
+#: capplets/wm-properties/wm-properties-capplet.c:810
 msgid "Name cannot be empty"
 msgstr "El nombre no puede quedar en blanco"
 
-#: capplets/wm-properties/wm-properties-capplet.c:798
+#: capplets/wm-properties/wm-properties-capplet.c:817
 msgid "Command cannot be empty"
 msgstr "El comando no puede quedar en blanco"
 
-#: capplets/wm-properties/wm-properties-capplet.c:884
+#: capplets/wm-properties/wm-properties-capplet.c:866
+#: capplets/wm-properties/wm-properties-capplet.c:908
 msgid "Edit Window Manager"
 msgstr "Editar Gestor de Ventanas"
 
-#: capplets/wm-properties/wm-properties-capplet.c:939
+#: capplets/wm-properties/wm-properties-capplet.c:963
 msgid "You cannot delete the current Window Manager"
 msgstr "No puede borrar el gestor de ventanas en uso"
 
-#: capplets/wm-properties/wm-properties-capplet.c:1051
+#: capplets/wm-properties/wm-properties-capplet.c:1076
 msgid ""
 "an initialization error occurred while starting 'wm-properties-capplet'.\n"
 "aborting...\n"
@@ -1219,11 +1378,11 @@ msgstr ""
 "ocurrió un error de inicialización al lanzar 'wm-properties-capplet'.\n"
 "abortando...\n"
 
-#: control-center/callbacks.c:79
+#: control-center/callbacks.c:85
 msgid "GNOME Control Center"
 msgstr "Centro de Control de Gnome"
 
-#: control-center/callbacks.c:82
+#: control-center/callbacks.c:88
 msgid "Desktop Properties manager."
 msgstr "Gestor de propiedades del escritorio."
 
@@ -1312,7 +1471,12 @@ msgstr ""
 "editarlos por favor haga un doble-clic en la entrada apropriada."
 
 #. create the app
-#: control-center/main.c:184
+#: control-center/main.c:187
 msgid "Control Center"
 msgstr "Centro de Control"
 
+#~ msgid "Radio Button 3"
+#~ msgstr "Botón de radio 3"
+
+#~ msgid "Default Gtk setting"
+#~ msgstr "Configuración de Gtk por omisión"

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-core 1.04\n"
-"POT-Creation-Date: 1999-08-02 12:18-0400\n"
+"POT-Creation-Date: 1999-08-16 11:59-0400\n"
 "PO-Revision-Date: 1999-06-20 17:20+09:00\n"
 "Last-Translator: Eiichiro ITANI <emu@ceres.dti.ne.jp>\n"
 "Language-Team: <gnome@lists.hypercore.co.jp>\n"
@@ -22,6 +22,16 @@ msgstr ""
 #, fuzzy
 msgid "IMAGE-FILE"
 msgstr "²èÁü"
+
+#: capplets/background-properties/app-background.c:34
+#, fuzzy
+msgid ""
+"an initialization error occurred while starting "
+"'background-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"'wm-properties-capplet'¤Îµ¯Æ°¤Ë½é´ü²½¥¨¥é¡¼¤¬È¯À¸¤·¤Þ¤·¤¿¡£\n"
+"Ää»ßÃæ...\n"
 
 #: capplets/background-properties/property-background.c:244
 #, fuzzy
@@ -67,6 +77,7 @@ msgid "Can't find an hbox, using a normal file selection"
 msgstr ""
 
 #: capplets/background-properties/property-background.c:888
+#: capplets/keyboard-properties/keyboard-properties.c:257
 #: capplets/screensaver-properties/screensaver-dialog.c:25
 #: capplets/theme-switcher/gui.c:225 capplets/theme-switcher/gui.c:297
 msgid "Preview"
@@ -100,56 +111,56 @@ msgstr "Ãæ±û¤ËÇÛÃÖ"
 msgid "Tiled"
 msgstr "¥¿¥¤¥ë¾õ¤ËÇÛÃÖ"
 
-#: capplets/background-properties/property-background.c:1351
+#: capplets/background-properties/property-background.c:1353
 msgid "Disable background selection"
 msgstr "ÇØ·ÊÁªÂò¤òÌµ¸ú¤Ë¤¹¤ë"
 
-#: capplets/background-properties/property-background.c:1480
+#: capplets/background-properties/property-background.c:1482
 msgid "Set parameters from saved state and exit"
 msgstr "ÊÝÂ¸¤·¤¿¾õÂÖ¤«¤é¥Ñ¥é¥á¡¼¥¿¤òºÆ¸½¤·¤Æ½ªÎ»"
 
-#: capplets/background-properties/property-background.c:1481
+#: capplets/background-properties/property-background.c:1483
 msgid "IMAGE"
 msgstr "²èÁü"
 
-#: capplets/background-properties/property-background.c:1481
+#: capplets/background-properties/property-background.c:1483
 msgid "Sets the wallpaper to the value specified"
 msgstr "»ØÄê¤·¤¿ÃÍ¤ØÊÉ»æ¤òÀßÄê¤¹¤ë"
 
-#: capplets/background-properties/property-background.c:1482
-#: capplets/background-properties/property-background.c:1483
+#: capplets/background-properties/property-background.c:1484
+#: capplets/background-properties/property-background.c:1485
 msgid "COLOR"
 msgstr "¿§"
 
-#: capplets/background-properties/property-background.c:1482
+#: capplets/background-properties/property-background.c:1484
 msgid "Specifies the background color"
 msgstr "ÇØ·Ê¿§¤ò»ØÄê¤¹¤ë"
 
-#: capplets/background-properties/property-background.c:1483
+#: capplets/background-properties/property-background.c:1485
 msgid "Specifies end background color for gradient"
 msgstr "¥°¥é¥Ç¡¼¥·¥ç¥ó¤ÎÂè2ÇØ·Ê¿§¤ò»ØÄê¤¹¤ë"
 
-#: capplets/background-properties/property-background.c:1484
+#: capplets/background-properties/property-background.c:1486
 msgid "ORIENT"
 msgstr "Êý¸þ"
 
-#: capplets/background-properties/property-background.c:1484
+#: capplets/background-properties/property-background.c:1486
 msgid "Gradient orientation: vertical or horizontal"
 msgstr "¥°¥é¥Ç¡¼¥·¥ç¥óÊý¸þ: ¿âÄ¾¤â¤·¤¯¤Ï¿åÊ¿Êý¸þ"
 
-#: capplets/background-properties/property-background.c:1485
+#: capplets/background-properties/property-background.c:1487
 msgid "Use a solid fill for the background"
 msgstr "ÇØ·Ê¤òÃ±¿§¤ÇÅÉ¤ê¤Ä¤Ö¤¹"
 
-#: capplets/background-properties/property-background.c:1486
+#: capplets/background-properties/property-background.c:1488
 msgid "Use a gradient fill for the background"
 msgstr "ÇØ·Ê¤ò¥°¥é¥Ç¡¼¥·¥ç¥ó¤ÇÅÉ¤ê¤Ä¤Ö¤¹"
 
-#: capplets/background-properties/property-background.c:1487
+#: capplets/background-properties/property-background.c:1489
 msgid "MODE"
 msgstr "¥â¡¼¥É"
 
-#: capplets/background-properties/property-background.c:1487
+#: capplets/background-properties/property-background.c:1489
 msgid "Display wallpaper: tiled, centered, scaled or ratio"
 msgstr "ÊÉ»æ¤òÉ½¼¨: ¥¿¥¤¥ë¾õ¡¢Ãæ±û´ó¤»¡¢²èÌÌ¥µ¥¤¥º¡¢¥¢¥¹¥Ú¥¯¥È"
 
@@ -173,6 +184,15 @@ msgstr "Ä¹¤µ (ms)"
 msgid "Test"
 msgstr "»î¹Ô"
 
+#: capplets/bell-properties/bell-properties.c:239
+#, fuzzy
+msgid ""
+"an initialization error occurred while starting 'bell-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"'wm-properties-capplet'¤Îµ¯Æ°¤Ë½é´ü²½¥¨¥é¡¼¤¬È¯À¸¤·¤Þ¤·¤¿¡£\n"
+"Ää»ßÃæ...\n"
+
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:229
 msgid "Gnome editor"
 msgstr "Gnome¥¨¥Ç¥£¥¿"
@@ -181,37 +201,47 @@ msgstr "Gnome¥¨¥Ç¥£¥¿"
 msgid "Run In Terminal"
 msgstr "Ã¼ËöÆâ¤ÇÆ°¤«¤¹"
 
-#: capplets/keyboard-properties/keyboard-properties.c:210
+#: capplets/keyboard-properties/keyboard-properties.c:208
 msgid "Auto-repeat"
 msgstr "¥ê¥Ô¡¼¥È"
 
-#: capplets/keyboard-properties/keyboard-properties.c:221
+#: capplets/keyboard-properties/keyboard-properties.c:219
 msgid "Enable auto-repeat"
 msgstr "¼«Æ°Åª¤Ë¥ê¥Ô¡¼¥È¤¹¤ë"
 
-#: capplets/keyboard-properties/keyboard-properties.c:231
+#: capplets/keyboard-properties/keyboard-properties.c:229
 msgid "Repeat rate"
 msgstr "¥ê¥Ô¡¼¥È²ó¿ô"
 
-#: capplets/keyboard-properties/keyboard-properties.c:234
+#: capplets/keyboard-properties/keyboard-properties.c:232
 msgid "Repeat Delay"
 msgstr "¥ê¥Ô¡¼¥È¤Þ¤Ç¤Î´Ö³Ö"
 
-#: capplets/keyboard-properties/keyboard-properties.c:236
+#: capplets/keyboard-properties/keyboard-properties.c:234
 msgid "Keyboard click"
 msgstr "¥­¡¼¥Ü¡¼¥É¤Î¥¯¥ê¥Ã¥¯²»"
 
-#: capplets/keyboard-properties/keyboard-properties.c:247
+#: capplets/keyboard-properties/keyboard-properties.c:245
 msgid "Click on keypress"
 msgstr "¥­¡¼¤ò²¡¤¹¤È¥¯¥ê¥Ã¥¯²»¤ò½Ð¤¹"
 
-#: capplets/keyboard-properties/keyboard-properties.c:257
+#: capplets/keyboard-properties/keyboard-properties.c:255
 msgid "Click volume"
 msgstr "¥¯¥ê¥Ã¥¯²»¤ÎÂç¤­¤µ"
 
-#: capplets/keyboard-properties/keyboard-properties.c:264
+#: capplets/keyboard-properties/keyboard-properties.c:265
 msgid "Test settings"
 msgstr "ÀßÄê¤Î¥Æ¥¹¥È"
+
+#: capplets/keyboard-properties/keyboard-properties.c:307
+#, fuzzy
+msgid ""
+"an initialization error occurred while starting "
+"'keyboard-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"'wm-properties-capplet'¤Îµ¯Æ°¤Ë½é´ü²½¥¨¥é¡¼¤¬È¯À¸¤·¤Þ¤·¤¿¡£\n"
+"Ää»ßÃæ...\n"
 
 #. icon box
 #: capplets/mime-type/edit-window.c:105
@@ -266,7 +296,8 @@ msgstr "ÊÔ½¸"
 
 #. we initialize everything
 #: capplets/mime-type/edit-window.c:238
-msgid "Set actions for "
+#, c-format
+msgid "Set actions for %s"
 msgstr ""
 
 #: capplets/mime-type/mime-data.c:354
@@ -309,6 +340,32 @@ msgstr ""
 msgid "This mime-type already exists"
 msgstr "¤³¤ÎMIME·¿¤Ï¤¹¤Ç¤Ë¤¢¤ê¤Þ¤¹"
 
+#: capplets/mime-type/mime-data.c:544 capplets/mime-type/mime-info.c:423
+#, fuzzy
+msgid ""
+"We are unable to create the directory\n"
+"~/.gnome/mime-info\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+"~/.gnome/mime-info/user.mime\n"
+"¥Õ¥¡¥¤¥ë¤òºîÀ®¤Ç¤­¤Þ¤»¤ó¡£\n"
+"\n"
+"¾õÂÖ¤òÊÝÂ¸¤¹¤ë¤³¤È¤¬½ÐÍè¤Þ¤»¤ó"
+
+#: capplets/mime-type/mime-data.c:550 capplets/mime-type/mime-info.c:429
+#, fuzzy
+msgid ""
+"We are unable to access the directory\n"
+"~/.gnome/mime-info\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+"~/.gnome/mime-info/user.mime\n"
+"¥Õ¥¡¥¤¥ë¤òºîÀ®¤Ç¤­¤Þ¤»¤ó¡£\n"
+"\n"
+"¾õÂÖ¤òÊÝÂ¸¤¹¤ë¤³¤È¤¬½ÐÍè¤Þ¤»¤ó"
+
 #: capplets/mime-type/mime-data.c:561
 msgid ""
 "Cannot create the file\n"
@@ -335,19 +392,19 @@ msgstr ""
 
 #: capplets/mime-type/mime-type-capplet.c:77
 #: capplets/session-properties/session-properties.c:203
-#: capplets/wm-properties/wm-properties-capplet.c:1016
+#: capplets/wm-properties/wm-properties-capplet.c:1041
 msgid "Delete"
 msgstr "ºï½ü"
 
 #: capplets/mime-type/mime-type-capplet.c:87
 #: capplets/session-properties/session-properties.c:193
-#: capplets/wm-properties/wm-properties-capplet.c:1006
+#: capplets/wm-properties/wm-properties-capplet.c:1031
 msgid "Add..."
 msgstr "ÄÉ²Ã..."
 
 #: capplets/mime-type/mime-type-capplet.c:91
 #: capplets/session-properties/session-properties.c:198
-#: capplets/wm-properties/wm-properties-capplet.c:1011
+#: capplets/wm-properties/wm-properties-capplet.c:1036
 msgid "Edit..."
 msgstr "ÊÔ½¸..."
 
@@ -437,33 +494,42 @@ msgstr "Ä¹¤¤"
 msgid "Small"
 msgstr "Ã»¤¤"
 
-#: capplets/screensaver-properties/callbacks.c:101
+#: capplets/mouse-properties/mouse-properties.c:341
+#, fuzzy
+msgid ""
+"an initialization error occurred while starting 'mouse-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"'wm-properties-capplet'¤Îµ¯Æ°¤Ë½é´ü²½¥¨¥é¡¼¤¬È¯À¸¤·¤Þ¤·¤¿¡£\n"
+"Ää»ßÃæ...\n"
+
+#: capplets/screensaver-properties/callbacks.c:102
 msgid "Require Password"
 msgstr "¥Ñ¥¹¥ï¡¼¥É¤òÍ×µá¤¹¤ë"
 
-#: capplets/screensaver-properties/callbacks.c:153
+#: capplets/screensaver-properties/callbacks.c:154
 msgid "Use power management."
 msgstr "¥Ñ¥ï¡¼¥Þ¥Í¥¸¥á¥ó¥È¤ò»ÈÍÑ¡£"
 
-#: capplets/screensaver-properties/callbacks.c:314
+#: capplets/screensaver-properties/callbacks.c:309
 msgid "No Screensaver"
 msgstr "¥¹¥¯¥ê¡¼¥ó¥»¡¼¥Ð¡¼¤Ê¤·"
 
-#: capplets/screensaver-properties/callbacks.c:319
+#: capplets/screensaver-properties/callbacks.c:314
 msgid "Random Screensaver"
 msgstr "¥é¥ó¥À¥à¥¹¥¯¥ê¡¼¥ó¥»¡¼¥Ð¡¼"
 
-#: capplets/screensaver-properties/callbacks.c:494
+#: capplets/screensaver-properties/callbacks.c:484
 #: capplets/screensaver-properties/screensaver-properties-capplet.c:54
 msgid "Settings..."
 msgstr "ÀßÄê..."
 
 #. we need to special case random
-#: capplets/screensaver-properties/callbacks.c:502
+#: capplets/screensaver-properties/callbacks.c:492
 msgid "Random Settings"
 msgstr "¥é¥ó¥À¥àÀßÄê"
 
-#: capplets/screensaver-properties/callbacks.c:512
+#: capplets/screensaver-properties/callbacks.c:502
 #, c-format
 msgid "%s Settings..."
 msgstr "%s ÀßÄê..."
@@ -584,19 +650,19 @@ msgstr ""
 msgid "This column gives the command used to start a program."
 msgstr "¤³¤Î¥«¥é¥à¤Ï¥×¥í¥°¥é¥à¤òµ¯Æ°¤¹¤ë¤¿¤á¤ÎÌ¿Îá¤òÉ½¼¨¤·¤Þ¤¹¡£"
 
-#: capplets/session-properties/gsm-client-list.c:132
+#: capplets/session-properties/gsm-client-list.c:135
 msgid "Order"
 msgstr "½çÈÖ"
 
-#: capplets/session-properties/gsm-client-list.c:132
+#: capplets/session-properties/gsm-client-list.c:136
 msgid "Style"
 msgstr "¥¹¥¿¥¤¥ë"
 
-#: capplets/session-properties/gsm-client-list.c:132
+#: capplets/session-properties/gsm-client-list.c:137
 msgid "State"
 msgstr "¾õÂÖ"
 
-#: capplets/session-properties/gsm-client-list.c:132
+#: capplets/session-properties/gsm-client-list.c:138
 msgid "Program"
 msgstr "¥×¥í¥°¥é¥à"
 
@@ -673,6 +739,11 @@ msgstr "¥í¥°¥¤¥ó¤ÎÅÙ¤Ëµ¯Æ°¤µ¤ì¤Þ¤¹¡£"
 msgid "Remove Program"
 msgstr "¥×¥í¥°¥é¥à"
 
+#. frame for options
+#: capplets/session-properties/session-properties.c:138
+msgid "Options"
+msgstr ""
+
 #: capplets/session-properties/session-properties.c:149
 msgid "Prompt on logout"
 msgstr ""
@@ -681,7 +752,13 @@ msgstr ""
 msgid "Automatically save changes to session"
 msgstr ""
 
+#. frame for manually started programs
+#: capplets/session-properties/session-properties.c:166
+msgid "Non-session-managed Startup Programs"
+msgstr ""
+
 #: capplets/session-properties/session-properties.c:183
+#: capplets/session-properties/startup-programs.c:304
 #, fuzzy
 msgid "Priority"
 msgstr "Í¥ÀèÅÙ:"
@@ -698,6 +775,20 @@ msgstr ""
 #: capplets/session-properties/session-properties.c:379
 msgid "Only display warnings."
 msgstr "·Ù¹ð¤Î¤ßÉ½¼¨¤¹¤ë¡£"
+
+#: capplets/session-properties/session-properties.c:405
+#, fuzzy
+msgid ""
+"an initialization error occurred while starting 'session-properties-capplet'."
+msgstr ""
+"'wm-properties-capplet'¤Îµ¯Æ°¤Ë½é´ü²½¥¨¥é¡¼¤¬È¯À¸¤·¤Þ¤·¤¿¡£\n"
+"Ää»ßÃæ...\n"
+
+#: capplets/session-properties/startup-programs.c:288
+#: capplets/session-properties/startup-programs.c:295
+#, fuzzy
+msgid "Startup Command"
+msgstr "¥³¥Þ¥ó¥É"
 
 #: capplets/session-properties/startup-programs.c:319
 msgid ""
@@ -718,56 +809,64 @@ msgstr ""
 msgid "Edit Startup Program"
 msgstr ""
 
-#: capplets/sound-properties/sound-properties.c:191
+#: capplets/sound-properties/sound-properties.c:94
+#, fuzzy
+msgid ""
+"an initialization error occurred while starting 'sound-properties-capplet'."
+msgstr ""
+"'wm-properties-capplet'¤Îµ¯Æ°¤Ë½é´ü²½¥¨¥é¡¼¤¬È¯À¸¤·¤Þ¤·¤¿¡£\n"
+"Ää»ßÃæ...\n"
+
+#: capplets/sound-properties/sound-properties.c:184
 msgid "Category"
 msgstr "¥«¥Æ¥´¥ê¡¼"
 
-#: capplets/sound-properties/sound-properties.c:192
+#: capplets/sound-properties/sound-properties.c:185
 msgid "Event"
 msgstr "¥¤¥Ù¥ó¥È"
 
-#: capplets/sound-properties/sound-properties.c:193
+#: capplets/sound-properties/sound-properties.c:186
 msgid "File to Play"
 msgstr "ÌÄ¤é¤¹¥Õ¥¡¥¤¥ë"
 
-#: capplets/sound-properties/sound-properties.c:248
+#: capplets/sound-properties/sound-properties.c:240
 msgid "Enable"
 msgstr "Í­¸ú"
 
-#: capplets/sound-properties/sound-properties.c:255
+#: capplets/sound-properties/sound-properties.c:247
 msgid "Enable sound server startup"
 msgstr "µ¯Æ°»þ¤Ë²»¥µ¡¼¥Ð¡¼¤ò»È¤¦"
 
-#: capplets/sound-properties/sound-properties.c:263
+#: capplets/sound-properties/sound-properties.c:255
 msgid "Sounds for events"
 msgstr "¥¤¥Ù¥ó¥È¤ËÂÐ¤·¤Æ¸ú²Ì²»¤òÌÄ¤é¤¹"
 
-#: capplets/sound-properties/sound-properties.c:284
+#: capplets/sound-properties/sound-properties.c:276
 msgid "General"
 msgstr "°ìÈÌ"
 
-#: capplets/sound-properties/sound-properties.c:291
+#: capplets/sound-properties/sound-properties.c:283
 msgid "Select sound file"
 msgstr "²»¸»¥Õ¥¡¥¤¥ë¤ÎÁªÂò"
 
-#: capplets/sound-properties/sound-properties.c:328
+#: capplets/sound-properties/sound-properties.c:320
 msgid "Play"
 msgstr "ÌÄ¤é¤¹"
 
-#: capplets/sound-properties/sound-properties.c:335
+#: capplets/sound-properties/sound-properties.c:327
 msgid "Sound Events"
 msgstr "¥µ¥¦¥ó¥É¥¤¥Ù¥ó¥È"
 
-#: capplets/sound-properties/sound-properties.c:354
+#: capplets/sound-properties/sound-properties.c:346
 msgid ""
 "This copy of the GNOME control center was not compiled with sound support"
 msgstr "¤³¤ÎGNOME¥³¥ó¥È¥í¡¼¥ë¥»¥ó¥¿¡¼¤Ë¤Ï²»¤Î¥µ¥Ý¡¼¥È¤¬ÁÈ¤ß¹þ¤Þ¤ì¤Æ¤¤¤Þ¤»¤ó"
 
-#: capplets/sound-properties/sound-properties.c:760
+#: capplets/sound-properties/sound-properties.c:732
 msgid "The sound file for this event does not exist."
 msgstr "¤³¤Î¥¤¥Ù¥ó¥ÈÍÑ¤Î²»¥Õ¥¡¥¤¥ë¤ÏÂ¸ºß¤·¤Þ¤»¤ó¡£"
 
-#: capplets/sound-properties/sound-properties.c:762
+#: capplets/sound-properties/sound-properties.c:734
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -777,7 +876,7 @@ msgstr ""
 "É¸½à¤Î²»¸»¥»¥Ã¥È¤ò gnome-audio ¥Ñ¥Ã¥±¡¼¥¸¤«¤é\n"
 "¥¤¥ó¥¹¥È¡¼¥ë¤¹¤ë¤Î¤âÎÉ¤¤¤Ç¤·¤ç¤¦¡£"
 
-#: capplets/sound-properties/sound-properties.c:768
+#: capplets/sound-properties/sound-properties.c:740
 msgid "Close"
 msgstr "ÊÄ¤¸¤ë"
 
@@ -826,6 +925,7 @@ msgstr ""
 msgid "Selected themes from above will be tested by previewing here."
 msgstr "¾å¤ÇÁªÂò¤·¤¿¥Æ¡¼¥Þ¤Ï¤³¤³¤Æ»î¤¹¤³¤È¤¬½ÐÍè¤Þ¤¹¡£"
 
+#. column one
 #: capplets/theme-switcher/demo.c:119
 msgid "Sample Button"
 msgstr "¥µ¥ó¥×¥ëButton"
@@ -838,17 +938,24 @@ msgstr "¥µ¥ó¥×¥ë¥Á¥§¥Ã¥¯¥Ü¥¿¥ó"
 msgid "Sample Text Entry Field"
 msgstr "Sample ¥Æ¥­¥¹¥È¥¨¥ó¥È¥ê Field"
 
-#. column two
-#: capplets/theme-switcher/demo.c:135
+#: capplets/theme-switcher/demo.c:139
+msgid "Submenu"
+msgstr ""
+
+#: capplets/theme-switcher/demo.c:146
+msgid "Item 1"
+msgstr ""
+
+#: capplets/theme-switcher/demo.c:149
+msgid "Another item"
+msgstr ""
+
+#: capplets/theme-switcher/demo.c:154
 msgid "Radio Button 1"
 msgstr "¥é¥¸¥ª¥Ü¥¿¥ó1"
 
-#: capplets/theme-switcher/demo.c:141
+#: capplets/theme-switcher/demo.c:160
 msgid "Radio Button 2"
-msgstr ""
-
-#: capplets/theme-switcher/demo.c:147
-msgid "Radio Button 3"
 msgstr ""
 
 #: capplets/theme-switcher/gui.c:83
@@ -892,6 +999,12 @@ msgstr ""
 msgid "User Font"
 msgstr "¥æ¡¼¥¶¡¼¥Õ¥©¥ó¥È"
 
+#. FIXME - should really get this from X somehow
+#. for now we just assume default gtk font
+#: capplets/theme-switcher/gui.c:252
+msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
+msgstr ""
+
 #: capplets/theme-switcher/gui.c:271
 msgid "Use custom font."
 msgstr "ÆÃÊÌ¤Ê¥Õ¥©¥ó¥È¤ò»È¤¦¡£"
@@ -914,148 +1027,181 @@ msgid "Unknown file format"
 msgstr ""
 
 #: capplets/ui-properties/ui-properties.c:53
-msgid "Default Gtk setting"
-msgstr "É¸½àGtkÀßÄê"
-
-#: capplets/ui-properties/ui-properties.c:54
-msgid "Spread buttons out"
-msgstr "¥Ü¥¿¥ó¤ò³È¤²¤ë"
-
-#: capplets/ui-properties/ui-properties.c:55
-msgid "Put buttons on edges"
-msgstr "¥Ü¥¿¥ó¤ò³Ñ¤Ë¤ª¤¯"
-
-#: capplets/ui-properties/ui-properties.c:56
-msgid "Left-justify buttons"
-msgstr "¥Ü¥¿¥ó¤òº¸´ó¤»¤¹¤ë"
-
-#: capplets/ui-properties/ui-properties.c:57
-msgid "Right-justify buttons"
-msgstr "¥Ü¥¿¥ó¤ò±¦´ó¤»¤¹¤ë"
-
-#: capplets/ui-properties/ui-properties.c:63
-msgid "Let window manager decide"
-msgstr "¥¦¥£¥ó¥É¥¦¥Þ¥Í¡¼¥¸¥ã¤ËÇ¤¤»¤ë"
-
-#: capplets/ui-properties/ui-properties.c:64
-msgid "Center of the screen"
-msgstr "²èÌÌÃæ±û"
-
-#: capplets/ui-properties/ui-properties.c:65
-msgid "At the mouse pointer"
-msgstr "¥Þ¥¦¥¹¥Ý¥¤¥ó¥¿¾ì½ê"
-
-#: capplets/ui-properties/ui-properties.c:71
-msgid "Dialogs are like other windows"
-msgstr "Â¾¤Î¥¦¥£¥ó¥É¥¦¤ÈÆ±¤¸¤è¤¦¤Ë°·¤¦"
-
-#: capplets/ui-properties/ui-properties.c:72
-msgid "Dialogs are treated specially by window manager"
-msgstr "¥À¥¤¥¢¥í¥°¤ÏÆÃÊÌ¤Ë¥¦¥£¥ó¥É¥¦¥Þ¥Í¡¼¥¸¥ãÂ¦¤Ç°·¤¦"
-
-#: capplets/ui-properties/ui-properties.c:79
-msgid "Notebook"
-msgstr "¥Î¡¼¥È¥Ö¥Ã¥¯"
-
-#: capplets/ui-properties/ui-properties.c:80
-msgid "Toplevel"
-msgstr "¥È¥Ã¥×¥ì¥Ù¥ë"
-
-#: capplets/ui-properties/ui-properties.c:81
-msgid "Modal"
-msgstr "¥â¡¼¥À¥ë"
-
-#: capplets/ui-properties/ui-properties.c:87
-msgid "Left"
-msgstr "º¸Â¦"
-
-#: capplets/ui-properties/ui-properties.c:88
-msgid "Right"
-msgstr "±¦Â¦"
-
-#: capplets/ui-properties/ui-properties.c:89
-msgid "Top"
-msgstr "¾åÉô"
-
-#: capplets/ui-properties/ui-properties.c:90
-msgid "Bottom"
-msgstr "²¼Éô"
-
-#: capplets/ui-properties/ui-properties.c:206
-msgid "Dialog buttons"
-msgstr "¥À¥¤¥¢¥í¥°¡¦¥Ü¥¿¥ó"
-
-#: capplets/ui-properties/ui-properties.c:211
-msgid "Dialog position"
-msgstr "¥À¥¤¥¢¥í¥°É½¼¨°ÌÃÖ"
-
-#: capplets/ui-properties/ui-properties.c:216
-msgid "Dialog hints"
-msgstr "¥À¥¤¥¢¥í¥°¡¦¥Ò¥ó¥È"
-
-#: capplets/ui-properties/ui-properties.c:223
-msgid "Use statusbar instead of dialog when possible"
-msgstr "²ÄÇ½¤Ê¤é¥À¥¤¥¢¥í¥°¤Î¤«¤ï¤ê¤Ë¥¹¥Æ¡¼¥¿¥¹¥Ð¡¼¤òÍøÍÑ¤¹¤ë"
-
-#: capplets/ui-properties/ui-properties.c:233
-msgid "Place dialogs over application window when possible"
-msgstr "²ÄÇ½¤Ê¤é¥¢¥×¥ê¥±¡¼¥·¥ç¥ó¥¦¥£¥ó¥É¥¦¤Î¾å¤Ë¥À¥¤¥¢¥í¥°¤òÇÛÃÖ¤¹¤ë"
-
-#: capplets/ui-properties/ui-properties.c:251
 msgid "Can detach and move toolbars"
 msgstr "¥Ä¡¼¥ë¥Ð¡¼¤Î¼è¤ê³°¤·¤ä°ÜÆ°¤òµö²Ä¤¹¤ë"
 
-#: capplets/ui-properties/ui-properties.c:260
-msgid "Can detach and move menubars"
-msgstr "¥á¥Ë¥å¡¼¥Ð¡¼¤Î¼è¤ê³°¤·¤ä°ÜÆ°¤òµö²Ä¤¹¤ë"
-
-#: capplets/ui-properties/ui-properties.c:269
-msgid "Menus can be torn off"
-msgstr "¥á¥Ë¥å¡¼¤ÎÀÚ¤êÎ¥¤·¤òµö²Ä¤¹¤ë"
-
-#: capplets/ui-properties/ui-properties.c:279
-msgid "Menubars have relieved border"
-msgstr "¥á¥Ë¥å¡¼¥Ð¡¼¤ËÏÈ¤ò¤Ä¤±¤ë"
-
-#: capplets/ui-properties/ui-properties.c:288
+#: capplets/ui-properties/ui-properties.c:58
 msgid "Toolbars have relieved border"
 msgstr "¥Ä¡¼¥ë¥Ð¡¼¤ËÏÈ¤ò¤Ä¤±¤ë"
 
-#: capplets/ui-properties/ui-properties.c:297
+#: capplets/ui-properties/ui-properties.c:63
 msgid "Toolbar buttons have relieved border"
 msgstr "¥Ä¡¼¥ë¥Ð¡¼¤Î¥Ü¥¿¥ó¤ËÏÈ¤ò¤Ä¤±¤ë"
 
-#: capplets/ui-properties/ui-properties.c:306
+#: capplets/ui-properties/ui-properties.c:68
 msgid "Toolbars have line separators"
 msgstr "¥Ä¡¼¥ë¥Ð¡¼¤ËÀþ¤Ë¤è¤ë¶èÀÚ¤ê¤ò¤Ä¤±¤ë"
 
-#: capplets/ui-properties/ui-properties.c:315
+#: capplets/ui-properties/ui-properties.c:73
 msgid "Toolbars have text labels"
 msgstr "¥Ä¡¼¥ë¥Ð¡¼¤ËÊ¸»ú¥é¥Ù¥ë¤ò¤Ä¤±¤ë"
 
-#: capplets/ui-properties/ui-properties.c:324
-msgid "Statusbar is interactive when possible"
-msgstr "²ÄÇ½¤Ê¤é¥¹¥Æ¡¼¥¿¡¼¥¹¥Ð¡¼¤ò¥¤¥ó¥¿¥é¥¯¥Æ¥£¥Ö¤Ë"
+#: capplets/ui-properties/ui-properties.c:102
+#, fuzzy
+msgid "Can detach and move menus"
+msgstr "¥á¥Ë¥å¡¼¥Ð¡¼¤Î¼è¤ê³°¤·¤ä°ÜÆ°¤òµö²Ä¤¹¤ë"
 
-#: capplets/ui-properties/ui-properties.c:333
-msgid "Statusbar progress meter on right"
-msgstr "¥¹¥Æ¡¼¥¿¥¹¥Ð¡¼¤Î¿ÊÄ½¥á¡¼¥¿¡¼¤Ï±¦¤Ë"
+#: capplets/ui-properties/ui-properties.c:107
+#, fuzzy
+msgid "Menus have relieved border"
+msgstr "¥á¥Ë¥å¡¼¥Ð¡¼¤ËÏÈ¤ò¤Ä¤±¤ë"
 
-#: capplets/ui-properties/ui-properties.c:344
-msgid "Dialog buttons have icons"
-msgstr "¥À¥¤¥¢¥í¥°¥Ü¥¿¥ó¤Ë¥¢¥¤¥³¥ó¤ò¤Ä¤±¤ë"
+#: capplets/ui-properties/ui-properties.c:111
+#, fuzzy
+msgid "Submenus can be torn off"
+msgstr "¥á¥Ë¥å¡¼¤ÎÀÚ¤êÎ¥¤·¤òµö²Ä¤¹¤ë"
 
-#: capplets/ui-properties/ui-properties.c:356
+#: capplets/ui-properties/ui-properties.c:115
 msgid "Menu items have icons"
 msgstr "¥á¥Ë¥å¡¼¥¢¥¤¥Æ¥à¤Ë¥¢¥¤¥³¥ó¤ò¤Ä¤±¤ë"
 
-#: capplets/ui-properties/ui-properties.c:375
-msgid "Default MDI mode"
+#: capplets/ui-properties/ui-properties.c:138
+msgid "Statusbar is interactive when possible"
+msgstr "²ÄÇ½¤Ê¤é¥¹¥Æ¡¼¥¿¡¼¥¹¥Ð¡¼¤ò¥¤¥ó¥¿¥é¥¯¥Æ¥£¥Ö¤Ë"
+
+#: capplets/ui-properties/ui-properties.c:143
+#, fuzzy
+msgid "Statusbar progress meter is on the right"
+msgstr "¥¹¥Æ¡¼¥¿¥¹¥Ð¡¼¤Î¿ÊÄ½¥á¡¼¥¿¡¼¤Ï±¦¤Ë"
+
+#: capplets/ui-properties/ui-properties.c:160
+#, fuzzy
+msgid "Menu Options"
+msgstr "MIME·¿¤Ë¤è¤ëÆ°ºî"
+
+#: capplets/ui-properties/ui-properties.c:161
+msgid "Statusbar Options"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:162
+msgid "Toolbar Options"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:168
+msgid "Dialog buttons"
+msgstr "¥À¥¤¥¢¥í¥°¡¦¥Ü¥¿¥ó"
+
+#: capplets/ui-properties/ui-properties.c:169
+#, fuzzy
+msgid "Default value"
 msgstr "É¸½àMDI¥â¡¼¥É"
 
-#: capplets/ui-properties/ui-properties.c:380
+#: capplets/ui-properties/ui-properties.c:170
+msgid "Spread buttons out"
+msgstr "¥Ü¥¿¥ó¤ò³È¤²¤ë"
+
+#: capplets/ui-properties/ui-properties.c:171
+msgid "Put buttons on edges"
+msgstr "¥Ü¥¿¥ó¤ò³Ñ¤Ë¤ª¤¯"
+
+#: capplets/ui-properties/ui-properties.c:172
+msgid "Left-justify buttons"
+msgstr "¥Ü¥¿¥ó¤òº¸´ó¤»¤¹¤ë"
+
+#: capplets/ui-properties/ui-properties.c:173
+msgid "Right-justify buttons"
+msgstr "¥Ü¥¿¥ó¤ò±¦´ó¤»¤¹¤ë"
+
+#: capplets/ui-properties/ui-properties.c:178
+msgid "Dialog buttons have icons"
+msgstr "¥À¥¤¥¢¥í¥°¥Ü¥¿¥ó¤Ë¥¢¥¤¥³¥ó¤ò¤Ä¤±¤ë"
+
+#: capplets/ui-properties/ui-properties.c:183
+msgid "Use statusbar instead of dialog when possible"
+msgstr "²ÄÇ½¤Ê¤é¥À¥¤¥¢¥í¥°¤Î¤«¤ï¤ê¤Ë¥¹¥Æ¡¼¥¿¥¹¥Ð¡¼¤òÍøÍÑ¤¹¤ë"
+
+#: capplets/ui-properties/ui-properties.c:205
+msgid "Dialog position"
+msgstr "¥À¥¤¥¢¥í¥°É½¼¨°ÌÃÖ"
+
+#: capplets/ui-properties/ui-properties.c:206
+msgid "Let window manager decide"
+msgstr "¥¦¥£¥ó¥É¥¦¥Þ¥Í¡¼¥¸¥ã¤ËÇ¤¤»¤ë"
+
+#: capplets/ui-properties/ui-properties.c:207
+msgid "Center of the screen"
+msgstr "²èÌÌÃæ±û"
+
+#: capplets/ui-properties/ui-properties.c:208
+msgid "At the mouse pointer"
+msgstr "¥Þ¥¦¥¹¥Ý¥¤¥ó¥¿¾ì½ê"
+
+#: capplets/ui-properties/ui-properties.c:213
+msgid "Dialog hints"
+msgstr "¥À¥¤¥¢¥í¥°¡¦¥Ò¥ó¥È"
+
+#: capplets/ui-properties/ui-properties.c:214
+msgid "Dialogs are like other windows"
+msgstr "Â¾¤Î¥¦¥£¥ó¥É¥¦¤ÈÆ±¤¸¤è¤¦¤Ë°·¤¦"
+
+#: capplets/ui-properties/ui-properties.c:215
+msgid "Dialogs are treated specially by window manager"
+msgstr "¥À¥¤¥¢¥í¥°¤ÏÆÃÊÌ¤Ë¥¦¥£¥ó¥É¥¦¥Þ¥Í¡¼¥¸¥ãÂ¦¤Ç°·¤¦"
+
+#: capplets/ui-properties/ui-properties.c:220
+msgid "Place dialogs over application window when possible"
+msgstr "²ÄÇ½¤Ê¤é¥¢¥×¥ê¥±¡¼¥·¥ç¥ó¥¦¥£¥ó¥É¥¦¤Î¾å¤Ë¥À¥¤¥¢¥í¥°¤òÇÛÃÖ¤¹¤ë"
+
+#: capplets/ui-properties/ui-properties.c:241
+#, fuzzy
+msgid "Dialog Layout"
+msgstr "¥À¥¤¥¢¥í¥°¡¦¥Ü¥¿¥ó"
+
+#: capplets/ui-properties/ui-properties.c:242
+#, fuzzy
+msgid "Dialog Behavior"
+msgstr "¥À¥¤¥¢¥í¥°¡¦¥Ò¥ó¥È"
+
+#: capplets/ui-properties/ui-properties.c:248
+#, fuzzy
+msgid "Default MDI Mode"
+msgstr "É¸½àMDI¥â¡¼¥É"
+
+#: capplets/ui-properties/ui-properties.c:249
+msgid "Notebook"
+msgstr "¥Î¡¼¥È¥Ö¥Ã¥¯"
+
+#: capplets/ui-properties/ui-properties.c:250
+msgid "Toplevel"
+msgstr "¥È¥Ã¥×¥ì¥Ù¥ë"
+
+#: capplets/ui-properties/ui-properties.c:251
+msgid "Modal"
+msgstr "¥â¡¼¥À¥ë"
+
+#: capplets/ui-properties/ui-properties.c:256
 msgid "MDI notebook tab position"
 msgstr "MDI¥Î¡¼¥È¥Ö¥Ã¥¯¥¿¥Ö¤Î°ÌÃÖ"
+
+#: capplets/ui-properties/ui-properties.c:257
+msgid "Left"
+msgstr "º¸Â¦"
+
+#: capplets/ui-properties/ui-properties.c:258
+msgid "Right"
+msgstr "±¦Â¦"
+
+#: capplets/ui-properties/ui-properties.c:259
+msgid "Top"
+msgstr "¾åÉô"
+
+#: capplets/ui-properties/ui-properties.c:260
+msgid "Bottom"
+msgstr "²¼Éô"
+
+#: capplets/ui-properties/ui-properties.c:275
+msgid "GNOME MDI Options"
+msgstr ""
 
 #: capplets/url-properties/url-properties.c:48
 msgid "Error initializing the `url-properties' capplet."
@@ -1094,7 +1240,7 @@ msgstr "ÀßÄê"
 msgid "Remove"
 msgstr "ºï½ü"
 
-#: capplets/wm-properties/wm-properties-capplet.c:139
+#: capplets/wm-properties/wm-properties-capplet.c:140
 #, c-format
 msgid ""
 "Starting %s\n"
@@ -1104,22 +1250,37 @@ msgstr ""
 "(Ì¿Îá¤Î¥¿¥¤¥à¥¢¥¦¥È¤Þ¤Ç¤Ë %d ÉÃ¤¢¤ê¤Þ¤¹)"
 
 #: capplets/wm-properties/wm-properties-capplet.c:301
-msgid " (Current)"
+#, fuzzy, c-format
+msgid "%s (Current)"
 msgstr " (¸½ºß)"
 
-#: capplets/wm-properties/wm-properties-capplet.c:303
-msgid "Run Configuration Tool for "
+#: capplets/wm-properties/wm-properties-capplet.c:304
+#, fuzzy, c-format
+msgid "Run Configuration Tool for %s"
 msgstr "¼¡¤ÎÀßÄê¥Ä¡¼¥ë¤ò¼Â¹Ô "
 
 #: capplets/wm-properties/wm-properties-capplet.c:315
 msgid " (Not found)"
 msgstr " (¸«¤Ä¤«¤é¤º)"
 
-#: capplets/wm-properties/wm-properties-capplet.c:396
+#: capplets/wm-properties/wm-properties-capplet.c:354
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\tAnother window manager is already running and could not be killed\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:358
+#, c-format
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\t'%s' didn't start\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:407
 msgid "Previous window manager did not die\n"
 msgstr "Á°¤Î¥¦¥£¥ó¥É¥¦¥Þ¥Í¡¼¥¸¥ã¤¬»à¤Ë¤Þ¤»¤ó\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:429
+#: capplets/wm-properties/wm-properties-capplet.c:440
 #, c-format
 msgid ""
 "Could not start '%s'.\n"
@@ -1129,7 +1290,7 @@ msgstr ""
 "Á°¤Î¥¦¥¤¥ó¥É¥¦¥Þ¥Í¡¼¥¸¥ã¡¼'%s'¤ËÌá¤·¤Þ¤¹\n"
 "\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:460
+#: capplets/wm-properties/wm-properties-capplet.c:471
 msgid ""
 "Could not start fallback window manager.\n"
 "Please run a window manager manually. You can\n"
@@ -1141,57 +1302,57 @@ msgstr ""
 "²¼¤Î¥á¥Ë¥å¡¼¤Î\"¥×¥í¥°¥é¥à¼Â¹Ô\"¤«¤éÁªÂò¤·¤Æ¤â\n"
 "¼Â¹Ô¤Ç¤­¤Þ¤¹¡£\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:684
-#: capplets/wm-properties/wm-properties-capplet.c:840
+#: capplets/wm-properties/wm-properties-capplet.c:703
 msgid "Add New Window Manager"
 msgstr "¿·¤·¤¤¥¦¥¤¥ó¥É¥¦¥Þ¥Í¡¼¥¸¥ã¤ÎÄÉ²Ã"
 
-#: capplets/wm-properties/wm-properties-capplet.c:685
-#: capplets/wm-properties/wm-properties-capplet.c:793
-#: capplets/wm-properties/wm-properties-capplet.c:800
-#: capplets/wm-properties/wm-properties-capplet.c:940
+#: capplets/wm-properties/wm-properties-capplet.c:704
+#: capplets/wm-properties/wm-properties-capplet.c:812
+#: capplets/wm-properties/wm-properties-capplet.c:819
+#: capplets/wm-properties/wm-properties-capplet.c:964
 #: control-center/capplet-manager.c:180
 msgid "OK"
 msgstr "Å¬ÍÑ"
 
-#: capplets/wm-properties/wm-properties-capplet.c:685
+#: capplets/wm-properties/wm-properties-capplet.c:704
 #: control-center/capplet-manager.c:185
 msgid "Cancel"
 msgstr "¥­¥ã¥ó¥»¥ë"
 
-#: capplets/wm-properties/wm-properties-capplet.c:696
+#: capplets/wm-properties/wm-properties-capplet.c:715
 msgid "Name:"
 msgstr "Ì¾Á°:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:709
+#: capplets/wm-properties/wm-properties-capplet.c:728
 msgid "Command:"
 msgstr "¥³¥Þ¥ó¥É:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:722
+#: capplets/wm-properties/wm-properties-capplet.c:741
 msgid "Configuration Command:"
 msgstr "ÀßÄê¥³¥Þ¥ó¥É:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:741
+#: capplets/wm-properties/wm-properties-capplet.c:760
 msgid "Window manager is session managed"
 msgstr "¥¦¥¤¥ó¥É¥¦¥Þ¥Í¡¼¥¸¥ã¤ò¥»¥Ã¥·¥ç¥ó¥Þ¥Í¡¼¥¸¥ã¤Ç´ÉÍý¤¹¤ë"
 
-#: capplets/wm-properties/wm-properties-capplet.c:791
+#: capplets/wm-properties/wm-properties-capplet.c:810
 msgid "Name cannot be empty"
 msgstr "Ì¾Á°¤ò»ØÄê¤·¤Æ²¼¤µ¤¤"
 
-#: capplets/wm-properties/wm-properties-capplet.c:798
+#: capplets/wm-properties/wm-properties-capplet.c:817
 msgid "Command cannot be empty"
 msgstr "¥³¥Þ¥ó¥É¤ò»ØÄê¤·¤Æ²¼¤µ¤¤"
 
-#: capplets/wm-properties/wm-properties-capplet.c:884
+#: capplets/wm-properties/wm-properties-capplet.c:866
+#: capplets/wm-properties/wm-properties-capplet.c:908
 msgid "Edit Window Manager"
 msgstr "¥¦¥£¥ó¥É¥¦¥Þ¥Í¡¼¥¸¥ã¤Î¥¨¥Ç¥£¥Ã¥È"
 
-#: capplets/wm-properties/wm-properties-capplet.c:939
+#: capplets/wm-properties/wm-properties-capplet.c:963
 msgid "You cannot delete the current Window Manager"
 msgstr "»ÈÍÑÃæ¤Î¥¦¥¤¥ó¥É¥¦¥Þ¥Í¡¼¥¸¥ã¤Ïºï½ü¤Ç¤­¤Þ¤»¤ó"
 
-#: capplets/wm-properties/wm-properties-capplet.c:1051
+#: capplets/wm-properties/wm-properties-capplet.c:1076
 msgid ""
 "an initialization error occurred while starting 'wm-properties-capplet'.\n"
 "aborting...\n"
@@ -1199,11 +1360,11 @@ msgstr ""
 "'wm-properties-capplet'¤Îµ¯Æ°¤Ë½é´ü²½¥¨¥é¡¼¤¬È¯À¸¤·¤Þ¤·¤¿¡£\n"
 "Ää»ßÃæ...\n"
 
-#: control-center/callbacks.c:79
+#: control-center/callbacks.c:85
 msgid "GNOME Control Center"
 msgstr "GNOME¥³¥ó¥È¥í¡¼¥ë¥»¥ó¥¿¡¼"
 
-#: control-center/callbacks.c:82
+#: control-center/callbacks.c:88
 msgid "Desktop Properties manager."
 msgstr "¥Ç¥¹¥¯¥È¥Ã¥×¥×¥í¥Ñ¥Æ¥£¤Î¥Þ¥Í¡¼¥¸¥ã¤Ç¤¹¡£"
 
@@ -1290,9 +1451,12 @@ msgstr ""
 "ë¹àÌÜ¤ò¥À¥Ö¥ë¥¯¥ê¥Ã¥¯¤·¤Æ²¼¤µ¤¤¡£"
 
 #. create the app
-#: control-center/main.c:184
+#: control-center/main.c:187
 msgid "Control Center"
 msgstr "GNOME¥³¥ó¥È¥í¡¼¥ë¥»¥ó¥¿¡¼"
+
+#~ msgid "Default Gtk setting"
+#~ msgstr "É¸½àGtkÀßÄê"
 
 #~ msgid "Program:"
 #~ msgstr "¥×¥í¥°¥é¥à:"

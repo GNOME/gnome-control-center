@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.5\n"
-"POT-Creation-Date: 1999-08-13 10:41+0900\n"
+"POT-Creation-Date: 1999-08-16 11:59-0400\n"
 "PO-Revision-Date: 1999-08-13 12:20:27+0900\n"
 "Last-Translator: Sung-Hyun Nam <namsh@lgic.co.kr>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -20,6 +20,16 @@ msgstr "배경 그림 정하기"
 #: capplets/background-properties/app-background.c:13
 msgid "IMAGE-FILE"
 msgstr "<그림-파일>"
+
+#: capplets/background-properties/app-background.c:34
+#, fuzzy
+msgid ""
+"an initialization error occurred while starting "
+"'background-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"'wm-properties-capplet'을 시작할 때 초기화 애러.\n"
+"중지...\n"
 
 #: capplets/background-properties/property-background.c:244
 msgid "Disabled"
@@ -173,6 +183,15 @@ msgstr "길이 (천분의 일초)"
 msgid "Test"
 msgstr "테스트"
 
+#: capplets/bell-properties/bell-properties.c:239
+#, fuzzy
+msgid ""
+"an initialization error occurred while starting 'bell-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"'wm-properties-capplet'을 시작할 때 초기화 애러.\n"
+"중지...\n"
+
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:229
 msgid "Gnome editor"
 msgstr "그놈 편집기"
@@ -212,6 +231,16 @@ msgstr "누를때 소리 크기"
 #: capplets/keyboard-properties/keyboard-properties.c:265
 msgid "Test settings"
 msgstr "설정 테스트"
+
+#: capplets/keyboard-properties/keyboard-properties.c:307
+#, fuzzy
+msgid ""
+"an initialization error occurred while starting "
+"'keyboard-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"'wm-properties-capplet'을 시작할 때 초기화 애러.\n"
+"중지...\n"
 
 #. icon box
 #: capplets/mime-type/edit-window.c:105
@@ -308,6 +337,32 @@ msgstr ""
 msgid "This mime-type already exists"
 msgstr "이 MIME 타입은 이미 존재합니다"
 
+#: capplets/mime-type/mime-data.c:544 capplets/mime-type/mime-info.c:423
+#, fuzzy
+msgid ""
+"We are unable to create the directory\n"
+"~/.gnome/mime-info\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+"다음 파일을 만들 수 없습니다\n"
+"~/.gnome/mime-info/user.mime\n"
+"\n"
+"현재 상태를 저장할 수 없을 것입니다"
+
+#: capplets/mime-type/mime-data.c:550 capplets/mime-type/mime-info.c:429
+#, fuzzy
+msgid ""
+"We are unable to access the directory\n"
+"~/.gnome/mime-info\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+"다음 파일을 만들 수 없습니다\n"
+"~/.gnome/mime-info/user.mime\n"
+"\n"
+"현재 상태를 저장할 수 없을 것입니다"
+
 #: capplets/mime-type/mime-data.c:561
 msgid ""
 "Cannot create the file\n"
@@ -334,19 +389,19 @@ msgstr ""
 
 #: capplets/mime-type/mime-type-capplet.c:77
 #: capplets/session-properties/session-properties.c:203
-#: capplets/wm-properties/wm-properties-capplet.c:1042
+#: capplets/wm-properties/wm-properties-capplet.c:1041
 msgid "Delete"
 msgstr "지우기"
 
 #: capplets/mime-type/mime-type-capplet.c:87
 #: capplets/session-properties/session-properties.c:193
-#: capplets/wm-properties/wm-properties-capplet.c:1032
+#: capplets/wm-properties/wm-properties-capplet.c:1031
 msgid "Add..."
 msgstr "추가..."
 
 #: capplets/mime-type/mime-type-capplet.c:91
 #: capplets/session-properties/session-properties.c:198
-#: capplets/wm-properties/wm-properties-capplet.c:1037
+#: capplets/wm-properties/wm-properties-capplet.c:1036
 msgid "Edit..."
 msgstr "편집..."
 
@@ -434,6 +489,15 @@ msgstr "크게"
 #: capplets/mouse-properties/mouse-properties.c:317
 msgid "Small"
 msgstr "작게"
+
+#: capplets/mouse-properties/mouse-properties.c:341
+#, fuzzy
+msgid ""
+"an initialization error occurred while starting 'mouse-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"'wm-properties-capplet'을 시작할 때 초기화 애러.\n"
+"중지...\n"
 
 #: capplets/screensaver-properties/callbacks.c:102
 msgid "Require Password"
@@ -668,6 +732,12 @@ msgstr "매 로긴 시에 항상 시작하기."
 msgid "Remove Program"
 msgstr "프로그램 삭제"
 
+#. frame for options
+#: capplets/session-properties/session-properties.c:138
+#, fuzzy
+msgid "Options"
+msgstr "메뉴 선택사항"
+
 #: capplets/session-properties/session-properties.c:149
 msgid "Prompt on logout"
 msgstr "로그아웃할 때 물어보기"
@@ -676,7 +746,14 @@ msgstr "로그아웃할 때 물어보기"
 msgid "Automatically save changes to session"
 msgstr "자동으로 세션의 변경사항을 저장하기"
 
+#. frame for manually started programs
+#: capplets/session-properties/session-properties.c:166
+#, fuzzy
+msgid "Non-session-managed Startup Programs"
+msgstr "시작 프로그램 추가"
+
 #: capplets/session-properties/session-properties.c:183
+#: capplets/session-properties/startup-programs.c:304
 msgid "Priority"
 msgstr "우선순위"
 
@@ -692,6 +769,20 @@ msgstr "현재 실행중인 프로그램 보기..."
 #: capplets/session-properties/session-properties.c:379
 msgid "Only display warnings."
 msgstr "경고만 표시."
+
+#: capplets/session-properties/session-properties.c:405
+#, fuzzy
+msgid ""
+"an initialization error occurred while starting 'session-properties-capplet'."
+msgstr ""
+"'wm-properties-capplet'을 시작할 때 초기화 애러.\n"
+"중지...\n"
+
+#: capplets/session-properties/startup-programs.c:288
+#: capplets/session-properties/startup-programs.c:295
+#, fuzzy
+msgid "Startup Command"
+msgstr "명령어"
 
 # (FIXME) "The default value should be OK" ? 
 #: capplets/session-properties/startup-programs.c:319
@@ -713,6 +804,14 @@ msgstr "시작 프로그램 추가"
 #: capplets/session-properties/startup-programs.c:396
 msgid "Edit Startup Program"
 msgstr "시작 프로그램 편집"
+
+#: capplets/sound-properties/sound-properties.c:94
+#, fuzzy
+msgid ""
+"an initialization error occurred while starting 'sound-properties-capplet'."
+msgstr ""
+"'wm-properties-capplet'을 시작할 때 초기화 애러.\n"
+"중지...\n"
 
 #: capplets/sound-properties/sound-properties.c:184
 msgid "Category"
@@ -897,6 +996,12 @@ msgstr ""
 msgid "User Font"
 msgstr "사용자 폰트"
 
+#. FIXME - should really get this from X somehow
+#. for now we just assume default gtk font
+#: capplets/theme-switcher/gui.c:252
+msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
+msgstr ""
+
 #: capplets/theme-switcher/gui.c:271
 msgid "Use custom font."
 msgstr "따로 설정한 폰트 사용."
@@ -1047,34 +1152,43 @@ msgid "Dialog Behavior"
 msgstr "대화창 동작"
 
 #: capplets/ui-properties/ui-properties.c:248
+#, fuzzy
+msgid "Default MDI Mode"
+msgstr "기본값"
+
+#: capplets/ui-properties/ui-properties.c:249
 msgid "Notebook"
 msgstr "노트북"
 
-#: capplets/ui-properties/ui-properties.c:249
+#: capplets/ui-properties/ui-properties.c:250
 msgid "Toplevel"
 msgstr "별도의 창"
 
-#: capplets/ui-properties/ui-properties.c:250
+#: capplets/ui-properties/ui-properties.c:251
 msgid "Modal"
 msgstr "모달"
 
-#: capplets/ui-properties/ui-properties.c:255
+#: capplets/ui-properties/ui-properties.c:256
+msgid "MDI notebook tab position"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:257
 msgid "Left"
 msgstr "왼쪽"
 
-#: capplets/ui-properties/ui-properties.c:256
+#: capplets/ui-properties/ui-properties.c:258
 msgid "Right"
 msgstr "오른쪽"
 
-#: capplets/ui-properties/ui-properties.c:257
+#: capplets/ui-properties/ui-properties.c:259
 msgid "Top"
 msgstr "위"
 
-#: capplets/ui-properties/ui-properties.c:258
+#: capplets/ui-properties/ui-properties.c:260
 msgid "Bottom"
 msgstr "아래"
 
-#: capplets/ui-properties/ui-properties.c:273
+#: capplets/ui-properties/ui-properties.c:275
 msgid "GNOME MDI Options"
 msgstr "그놈 MDI 선택사항"
 
@@ -1124,23 +1238,38 @@ msgstr ""
 "%s 시작\n"
 "(제한시간이 %d초 남았습니다)"
 
-#: capplets/wm-properties/wm-properties-capplet.c:302
-msgid " (Current)"
+#: capplets/wm-properties/wm-properties-capplet.c:301
+#, fuzzy, c-format
+msgid "%s (Current)"
 msgstr " (현재)"
 
 #: capplets/wm-properties/wm-properties-capplet.c:304
-msgid "Run Configuration Tool for "
+#, fuzzy, c-format
+msgid "Run Configuration Tool for %s"
 msgstr "설정 도구 시작: "
 
-#: capplets/wm-properties/wm-properties-capplet.c:316
+#: capplets/wm-properties/wm-properties-capplet.c:315
 msgid " (Not found)"
 msgstr " (찾을 수 없음)"
 
-#: capplets/wm-properties/wm-properties-capplet.c:408
+#: capplets/wm-properties/wm-properties-capplet.c:354
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\tAnother window manager is already running and could not be killed\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:358
+#, c-format
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\t'%s' didn't start\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:407
 msgid "Previous window manager did not die\n"
 msgstr "이전의 창 관리자가 죽지 않았습니다\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:441
+#: capplets/wm-properties/wm-properties-capplet.c:440
 #, c-format
 msgid ""
 "Could not start '%s'.\n"
@@ -1149,7 +1278,7 @@ msgstr ""
 "'%s'를 시작할 수 없습니다.\n"
 "다시 이전 창관리자 '%s'에게 돌아갑니다.\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:472
+#: capplets/wm-properties/wm-properties-capplet.c:471
 msgid ""
 "Could not start fallback window manager.\n"
 "Please run a window manager manually. You can\n"
@@ -1161,57 +1290,57 @@ msgstr ""
 "메뉴에서 \"Run Program\"을 선택하면\n"
 "수동으로 실행할 수 있습니다.\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:704
+#: capplets/wm-properties/wm-properties-capplet.c:703
 msgid "Add New Window Manager"
 msgstr "새 창 관리자 시작"
 
-#: capplets/wm-properties/wm-properties-capplet.c:705
-#: capplets/wm-properties/wm-properties-capplet.c:813
-#: capplets/wm-properties/wm-properties-capplet.c:820
-#: capplets/wm-properties/wm-properties-capplet.c:965
+#: capplets/wm-properties/wm-properties-capplet.c:704
+#: capplets/wm-properties/wm-properties-capplet.c:812
+#: capplets/wm-properties/wm-properties-capplet.c:819
+#: capplets/wm-properties/wm-properties-capplet.c:964
 #: control-center/capplet-manager.c:180
 msgid "OK"
 msgstr "확인"
 
-#: capplets/wm-properties/wm-properties-capplet.c:705
+#: capplets/wm-properties/wm-properties-capplet.c:704
 #: control-center/capplet-manager.c:185
 msgid "Cancel"
 msgstr "취소"
 
-#: capplets/wm-properties/wm-properties-capplet.c:716
+#: capplets/wm-properties/wm-properties-capplet.c:715
 msgid "Name:"
 msgstr "이름:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:729
+#: capplets/wm-properties/wm-properties-capplet.c:728
 msgid "Command:"
 msgstr "명령어:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:742
+#: capplets/wm-properties/wm-properties-capplet.c:741
 msgid "Configuration Command:"
 msgstr "설정 명령어:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:761
+#: capplets/wm-properties/wm-properties-capplet.c:760
 msgid "Window manager is session managed"
 msgstr "창 관리자가 세션 관리됩니다."
 
-#: capplets/wm-properties/wm-properties-capplet.c:811
+#: capplets/wm-properties/wm-properties-capplet.c:810
 msgid "Name cannot be empty"
 msgstr "이름은 비어있으면 안 됩니다"
 
-#: capplets/wm-properties/wm-properties-capplet.c:818
+#: capplets/wm-properties/wm-properties-capplet.c:817
 msgid "Command cannot be empty"
 msgstr "명령어는 비어있으면 안 됩니다"
 
-#: capplets/wm-properties/wm-properties-capplet.c:867
-#: capplets/wm-properties/wm-properties-capplet.c:909
+#: capplets/wm-properties/wm-properties-capplet.c:866
+#: capplets/wm-properties/wm-properties-capplet.c:908
 msgid "Edit Window Manager"
 msgstr "창 관리자 편집"
 
-#: capplets/wm-properties/wm-properties-capplet.c:964
+#: capplets/wm-properties/wm-properties-capplet.c:963
 msgid "You cannot delete the current Window Manager"
 msgstr "현재 창관리자를 지울 수 없습니다"
 
-#: capplets/wm-properties/wm-properties-capplet.c:1077
+#: capplets/wm-properties/wm-properties-capplet.c:1076
 msgid ""
 "an initialization error occurred while starting 'wm-properties-capplet'.\n"
 "aborting...\n"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.5\n"
-"POT-Creation-Date: 1999-08-05 08:43+0200\n"
+"POT-Creation-Date: 1999-08-16 11:59-0400\n"
 "PO-Revision-Date: 1999-08-05 18:32+0100\n"
 "Last-Translator: Richard Hult <rhult@hem2.passagen.se>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -20,6 +20,16 @@ msgstr "Ställ in bakgrundsbild."
 #: capplets/background-properties/app-background.c:13
 msgid "IMAGE-FILE"
 msgstr "IMAGE-FILE"
+
+#: capplets/background-properties/app-background.c:34
+#, fuzzy
+msgid ""
+"an initialization error occurred while starting "
+"'background-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"ett fel uppstod vid start av 'wm-properties-capplet'.\n"
+"avbryter...\n"
 
 #: capplets/background-properties/property-background.c:244
 msgid "Disabled"
@@ -171,6 +181,15 @@ msgstr "Längd (ms)"
 msgid "Test"
 msgstr "Test"
 
+#: capplets/bell-properties/bell-properties.c:239
+#, fuzzy
+msgid ""
+"an initialization error occurred while starting 'bell-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"ett fel uppstod vid start av 'wm-properties-capplet'.\n"
+"avbryter...\n"
+
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:229
 msgid "Gnome editor"
 msgstr "Gnome-editor"
@@ -210,6 +229,16 @@ msgstr "Klickvolym"
 #: capplets/keyboard-properties/keyboard-properties.c:265
 msgid "Test settings"
 msgstr "Prova inställningar"
+
+#: capplets/keyboard-properties/keyboard-properties.c:307
+#, fuzzy
+msgid ""
+"an initialization error occurred while starting "
+"'keyboard-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"ett fel uppstod vid start av 'wm-properties-capplet'.\n"
+"avbryter...\n"
 
 #. icon box
 #: capplets/mime-type/edit-window.c:105
@@ -264,7 +293,8 @@ msgstr "Redigera"
 
 #. we initialize everything
 #: capplets/mime-type/edit-window.c:238
-msgid "Set actions for "
+#, fuzzy, c-format
+msgid "Set actions for %s"
 msgstr "Sätt händelser för "
 
 #: capplets/mime-type/mime-data.c:354
@@ -303,6 +333,32 @@ msgstr ""
 msgid "This mime-type already exists"
 msgstr "Mime-typen finns redan"
 
+#: capplets/mime-type/mime-data.c:544 capplets/mime-type/mime-info.c:423
+#, fuzzy
+msgid ""
+"We are unable to create the directory\n"
+"~/.gnome/mime-info\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+"Kan inte skapa filen\n"
+"~/.gnome/mime-info/user.mime\n"
+"\n"
+"Inställningarna kommer inte att kunna sparas"
+
+#: capplets/mime-type/mime-data.c:550 capplets/mime-type/mime-info.c:429
+#, fuzzy
+msgid ""
+"We are unable to access the directory\n"
+"~/.gnome/mime-info\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+"Kan inte skapa filen\n"
+"~/.gnome/mime-info/user.mime\n"
+"\n"
+"Inställningarna kommer inte att kunna sparas"
+
 #: capplets/mime-type/mime-data.c:561
 msgid ""
 "Cannot create the file\n"
@@ -329,19 +385,19 @@ msgstr ""
 
 #: capplets/mime-type/mime-type-capplet.c:77
 #: capplets/session-properties/session-properties.c:203
-#: capplets/wm-properties/wm-properties-capplet.c:1042
+#: capplets/wm-properties/wm-properties-capplet.c:1041
 msgid "Delete"
 msgstr "Radera"
 
 #: capplets/mime-type/mime-type-capplet.c:87
 #: capplets/session-properties/session-properties.c:193
-#: capplets/wm-properties/wm-properties-capplet.c:1032
+#: capplets/wm-properties/wm-properties-capplet.c:1031
 msgid "Add..."
 msgstr "Lägg till..."
 
 #: capplets/mime-type/mime-type-capplet.c:91
 #: capplets/session-properties/session-properties.c:198
-#: capplets/wm-properties/wm-properties-capplet.c:1037
+#: capplets/wm-properties/wm-properties-capplet.c:1036
 msgid "Edit..."
 msgstr "Redigera..."
 
@@ -429,6 +485,15 @@ msgstr "Stor"
 #: capplets/mouse-properties/mouse-properties.c:317
 msgid "Small"
 msgstr "Liten"
+
+#: capplets/mouse-properties/mouse-properties.c:341
+#, fuzzy
+msgid ""
+"an initialization error occurred while starting 'mouse-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"ett fel uppstod vid start av 'wm-properties-capplet'.\n"
+"avbryter...\n"
 
 #: capplets/screensaver-properties/callbacks.c:102
 msgid "Require Password"
@@ -665,6 +730,11 @@ msgstr "Startas alltid vid inloggning."
 msgid "Remove Program"
 msgstr "Ta bort program"
 
+#. frame for options
+#: capplets/session-properties/session-properties.c:138
+msgid "Options"
+msgstr ""
+
 #: capplets/session-properties/session-properties.c:149
 msgid "Prompt on logout"
 msgstr "Fråga innan utloggning"
@@ -673,7 +743,14 @@ msgstr "Fråga innan utloggning"
 msgid "Automatically save changes to session"
 msgstr "Spara ändringar till session automatiskt"
 
+#. frame for manually started programs
+#: capplets/session-properties/session-properties.c:166
+#, fuzzy
+msgid "Non-session-managed Startup Programs"
+msgstr "Lägg till autostart-program"
+
 #: capplets/session-properties/session-properties.c:183
+#: capplets/session-properties/startup-programs.c:304
 msgid "Priority"
 msgstr "Prioritet"
 
@@ -689,6 +766,20 @@ msgstr "Visa aktuella program..."
 #: capplets/session-properties/session-properties.c:379
 msgid "Only display warnings."
 msgstr "Visa bara varningar."
+
+#: capplets/session-properties/session-properties.c:405
+#, fuzzy
+msgid ""
+"an initialization error occurred while starting 'session-properties-capplet'."
+msgstr ""
+"ett fel uppstod vid start av 'wm-properties-capplet'.\n"
+"avbryter...\n"
+
+#: capplets/session-properties/startup-programs.c:288
+#: capplets/session-properties/startup-programs.c:295
+#, fuzzy
+msgid "Startup Command"
+msgstr "Kommando"
 
 #: capplets/session-properties/startup-programs.c:319
 msgid ""
@@ -709,6 +800,14 @@ msgstr "Lägg till autostart-program"
 #: capplets/session-properties/startup-programs.c:396
 msgid "Edit Startup Program"
 msgstr "Redigera autostart-program"
+
+#: capplets/sound-properties/sound-properties.c:94
+#, fuzzy
+msgid ""
+"an initialization error occurred while starting 'sound-properties-capplet'."
+msgstr ""
+"ett fel uppstod vid start av 'wm-properties-capplet'.\n"
+"avbryter...\n"
 
 #: capplets/sound-properties/sound-properties.c:184
 msgid "Category"
@@ -892,6 +991,12 @@ msgstr ""
 msgid "User Font"
 msgstr "Typsnitt"
 
+#. FIXME - should really get this from X somehow
+#. for now we just assume default gtk font
+#: capplets/theme-switcher/gui.c:252
+msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
+msgstr ""
+
 #: capplets/theme-switcher/gui.c:271
 msgid "Use custom font."
 msgstr "Använd valfritt typsnitt."
@@ -913,149 +1018,182 @@ msgstr "Kommando '%s' kunde inte köras"
 msgid "Unknown file format"
 msgstr "Okänt filformat"
 
-#: capplets/ui-properties/ui-properties.c:46
-msgid "Default Gtk setting"
-msgstr "Standard Gtk-inställning"
-
-#: capplets/ui-properties/ui-properties.c:47
-msgid "Spread buttons out"
-msgstr "Sprid ut knapparna"
-
-#: capplets/ui-properties/ui-properties.c:48
-msgid "Put buttons on edges"
-msgstr "Placera knapparna på kanterna"
-
-#: capplets/ui-properties/ui-properties.c:49
-msgid "Left-justify buttons"
-msgstr "Vänsterjustera knapparna"
-
-#: capplets/ui-properties/ui-properties.c:50
-msgid "Right-justify buttons"
-msgstr "Högerjustera knapparna"
-
-#: capplets/ui-properties/ui-properties.c:56
-msgid "Let window manager decide"
-msgstr "Låt fönsterhanteraren bestämma"
-
-#: capplets/ui-properties/ui-properties.c:57
-msgid "Center of the screen"
-msgstr "Mitten på skärmen"
-
-#: capplets/ui-properties/ui-properties.c:58
-msgid "At the mouse pointer"
-msgstr "Vid musmarkören"
-
-#: capplets/ui-properties/ui-properties.c:64
-msgid "Dialogs are like other windows"
-msgstr "Dialogrutor är som vanliga fönster"
-
-#: capplets/ui-properties/ui-properties.c:65
-msgid "Dialogs are treated specially by window manager"
-msgstr "Dialogrutor särbehandlas av fönsterhanteraren"
-
-#: capplets/ui-properties/ui-properties.c:72
-msgid "Notebook"
-msgstr "Anteckningsbok"
-
-#: capplets/ui-properties/ui-properties.c:73
-msgid "Toplevel"
-msgstr "Fönster"
-
-#: capplets/ui-properties/ui-properties.c:74
-msgid "Modal"
-msgstr "Modal"
-
-#: capplets/ui-properties/ui-properties.c:80
-msgid "Left"
-msgstr "Vänster"
-
-#: capplets/ui-properties/ui-properties.c:81
-msgid "Right"
-msgstr "Höger"
-
-#: capplets/ui-properties/ui-properties.c:82
-msgid "Top"
-msgstr "Överst"
-
-#: capplets/ui-properties/ui-properties.c:83
-msgid "Bottom"
-msgstr "Nederst"
-
-#: capplets/ui-properties/ui-properties.c:201
-msgid "Dialog buttons"
-msgstr "Knappar i dialogrutan"
-
-#: capplets/ui-properties/ui-properties.c:206
-msgid "Dialog position"
-msgstr "Dialogrutansposition"
-
-#: capplets/ui-properties/ui-properties.c:211
-msgid "Dialog hints"
-msgstr "Tips för dialogrutans placering"
-
-#: capplets/ui-properties/ui-properties.c:218
-msgid "Use statusbar instead of dialog when possible"
-msgstr "Använd statuslisten istället för dialogrutor när det är möjligt"
-
-#: capplets/ui-properties/ui-properties.c:228
-msgid "Place dialogs over application window when possible"
-msgstr "Placera dialogrutor över programfönstret när det är möjligt"
-
-#: capplets/ui-properties/ui-properties.c:245
+#: capplets/ui-properties/ui-properties.c:53
 msgid "Can detach and move toolbars"
 msgstr "Kan ta loss och flytta verktygsfält"
 
-#: capplets/ui-properties/ui-properties.c:254
-msgid "Can detach and move menubars"
-msgstr "Kan ta loss och flytta menyrader"
-
-#: capplets/ui-properties/ui-properties.c:263
-msgid "Menus can be torn off"
-msgstr "Kan slita loss menyer"
-
-#: capplets/ui-properties/ui-properties.c:273
-msgid "Menubars have relieved border"
-msgstr "Menyrader har upphöjd ram"
-
-#: capplets/ui-properties/ui-properties.c:282
+#: capplets/ui-properties/ui-properties.c:58
 msgid "Toolbars have relieved border"
 msgstr "Verktygsfält har upphöjd ram"
 
-#: capplets/ui-properties/ui-properties.c:291
+#: capplets/ui-properties/ui-properties.c:63
 msgid "Toolbar buttons have relieved border"
 msgstr "Knappar på verktygsfält har upphöjd ram"
 
-#: capplets/ui-properties/ui-properties.c:300
+#: capplets/ui-properties/ui-properties.c:68
 msgid "Toolbars have line separators"
 msgstr "Verktygsfält har linje-delare"
 
-#: capplets/ui-properties/ui-properties.c:309
+#: capplets/ui-properties/ui-properties.c:73
 msgid "Toolbars have text labels"
 msgstr "Verktygsfält har text"
 
-#: capplets/ui-properties/ui-properties.c:318
-msgid "Statusbar is interactive when possible"
-msgstr "Statuslisten är inaktiv när det är möjligt"
+#: capplets/ui-properties/ui-properties.c:102
+#, fuzzy
+msgid "Can detach and move menus"
+msgstr "Kan ta loss och flytta menyrader"
 
-#: capplets/ui-properties/ui-properties.c:327
-msgid "Statusbar progress meter on right"
-msgstr "Visa mätare till höger"
+#: capplets/ui-properties/ui-properties.c:107
+#, fuzzy
+msgid "Menus have relieved border"
+msgstr "Menyrader har upphöjd ram"
 
-#: capplets/ui-properties/ui-properties.c:338
-msgid "Dialog buttons have icons"
-msgstr "Dialogruteknappar har ikoner"
+#: capplets/ui-properties/ui-properties.c:111
+#, fuzzy
+msgid "Submenus can be torn off"
+msgstr "Kan slita loss menyer"
 
-#: capplets/ui-properties/ui-properties.c:350
+#: capplets/ui-properties/ui-properties.c:115
 msgid "Menu items have icons"
 msgstr "Menyval har ikoner"
 
-#: capplets/ui-properties/ui-properties.c:368
-msgid "Default MDI mode"
+#: capplets/ui-properties/ui-properties.c:138
+msgid "Statusbar is interactive when possible"
+msgstr "Statuslisten är inaktiv när det är möjligt"
+
+#: capplets/ui-properties/ui-properties.c:143
+#, fuzzy
+msgid "Statusbar progress meter is on the right"
+msgstr "Visa mätare till höger"
+
+#: capplets/ui-properties/ui-properties.c:160
+#, fuzzy
+msgid "Menu Options"
+msgstr "Mime-typ-händelser"
+
+#: capplets/ui-properties/ui-properties.c:161
+msgid "Statusbar Options"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:162
+msgid "Toolbar Options"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.c:168
+msgid "Dialog buttons"
+msgstr "Knappar i dialogrutan"
+
+#: capplets/ui-properties/ui-properties.c:169
+#, fuzzy
+msgid "Default value"
 msgstr "Standard MDI-läge"
 
-#: capplets/ui-properties/ui-properties.c:373
+#: capplets/ui-properties/ui-properties.c:170
+msgid "Spread buttons out"
+msgstr "Sprid ut knapparna"
+
+#: capplets/ui-properties/ui-properties.c:171
+msgid "Put buttons on edges"
+msgstr "Placera knapparna på kanterna"
+
+#: capplets/ui-properties/ui-properties.c:172
+msgid "Left-justify buttons"
+msgstr "Vänsterjustera knapparna"
+
+#: capplets/ui-properties/ui-properties.c:173
+msgid "Right-justify buttons"
+msgstr "Högerjustera knapparna"
+
+#: capplets/ui-properties/ui-properties.c:178
+msgid "Dialog buttons have icons"
+msgstr "Dialogruteknappar har ikoner"
+
+#: capplets/ui-properties/ui-properties.c:183
+msgid "Use statusbar instead of dialog when possible"
+msgstr "Använd statuslisten istället för dialogrutor när det är möjligt"
+
+#: capplets/ui-properties/ui-properties.c:205
+msgid "Dialog position"
+msgstr "Dialogrutansposition"
+
+#: capplets/ui-properties/ui-properties.c:206
+msgid "Let window manager decide"
+msgstr "Låt fönsterhanteraren bestämma"
+
+#: capplets/ui-properties/ui-properties.c:207
+msgid "Center of the screen"
+msgstr "Mitten på skärmen"
+
+#: capplets/ui-properties/ui-properties.c:208
+msgid "At the mouse pointer"
+msgstr "Vid musmarkören"
+
+#: capplets/ui-properties/ui-properties.c:213
+msgid "Dialog hints"
+msgstr "Tips för dialogrutans placering"
+
+#: capplets/ui-properties/ui-properties.c:214
+msgid "Dialogs are like other windows"
+msgstr "Dialogrutor är som vanliga fönster"
+
+#: capplets/ui-properties/ui-properties.c:215
+msgid "Dialogs are treated specially by window manager"
+msgstr "Dialogrutor särbehandlas av fönsterhanteraren"
+
+#: capplets/ui-properties/ui-properties.c:220
+msgid "Place dialogs over application window when possible"
+msgstr "Placera dialogrutor över programfönstret när det är möjligt"
+
+#: capplets/ui-properties/ui-properties.c:241
+#, fuzzy
+msgid "Dialog Layout"
+msgstr "Knappar i dialogrutan"
+
+#: capplets/ui-properties/ui-properties.c:242
+#, fuzzy
+msgid "Dialog Behavior"
+msgstr "Tips för dialogrutans placering"
+
+#: capplets/ui-properties/ui-properties.c:248
+#, fuzzy
+msgid "Default MDI Mode"
+msgstr "Standard MDI-läge"
+
+#: capplets/ui-properties/ui-properties.c:249
+msgid "Notebook"
+msgstr "Anteckningsbok"
+
+#: capplets/ui-properties/ui-properties.c:250
+msgid "Toplevel"
+msgstr "Fönster"
+
+#: capplets/ui-properties/ui-properties.c:251
+msgid "Modal"
+msgstr "Modal"
+
+#: capplets/ui-properties/ui-properties.c:256
 msgid "MDI notebook tab position"
 msgstr "Flik-position på MDI-anteckningsbok"
+
+#: capplets/ui-properties/ui-properties.c:257
+msgid "Left"
+msgstr "Vänster"
+
+#: capplets/ui-properties/ui-properties.c:258
+msgid "Right"
+msgstr "Höger"
+
+#: capplets/ui-properties/ui-properties.c:259
+msgid "Top"
+msgstr "Överst"
+
+#: capplets/ui-properties/ui-properties.c:260
+msgid "Bottom"
+msgstr "Nederst"
+
+#: capplets/ui-properties/ui-properties.c:275
+msgid "GNOME MDI Options"
+msgstr ""
 
 #: capplets/url-properties/url-properties.c:48
 msgid "Error initializing the `url-properties' capplet."
@@ -1103,23 +1241,38 @@ msgstr ""
 "startar %s\n"
 "(%d sekunder kvar innan kommandot får time-out)"
 
-#: capplets/wm-properties/wm-properties-capplet.c:302
-msgid " (Current)"
+#: capplets/wm-properties/wm-properties-capplet.c:301
+#, fuzzy, c-format
+msgid "%s (Current)"
 msgstr " (Aktuell)"
 
 #: capplets/wm-properties/wm-properties-capplet.c:304
-msgid "Run Configuration Tool for "
+#, fuzzy, c-format
+msgid "Run Configuration Tool for %s"
 msgstr "Kör konfigurationsverktyg för "
 
-#: capplets/wm-properties/wm-properties-capplet.c:316
+#: capplets/wm-properties/wm-properties-capplet.c:315
 msgid " (Not found)"
 msgstr " (Hittas inte)"
 
-#: capplets/wm-properties/wm-properties-capplet.c:408
+#: capplets/wm-properties/wm-properties-capplet.c:354
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\tAnother window manager is already running and could not be killed\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:358
+#, c-format
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\t'%s' didn't start\n"
+msgstr ""
+
+#: capplets/wm-properties/wm-properties-capplet.c:407
 msgid "Previous window manager did not die\n"
 msgstr "Föregående fönsterhanterare avslutades inte\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:441
+#: capplets/wm-properties/wm-properties-capplet.c:440
 #, c-format
 msgid ""
 "Could not start '%s'.\n"
@@ -1128,7 +1281,7 @@ msgstr ""
 "Kunde inte starta '%s'.\n"
 "Använder föregående fönsterhanterare '%s'\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:472
+#: capplets/wm-properties/wm-properties-capplet.c:471
 msgid ""
 "Could not start fallback window manager.\n"
 "Please run a window manager manually. You can\n"
@@ -1140,57 +1293,57 @@ msgstr ""
 "göra det genom att välja \"Kör program\" i\n"
 "fot-menyn\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:704
+#: capplets/wm-properties/wm-properties-capplet.c:703
 msgid "Add New Window Manager"
 msgstr "Lägg till ny fönsterhanterare"
 
-#: capplets/wm-properties/wm-properties-capplet.c:705
-#: capplets/wm-properties/wm-properties-capplet.c:813
-#: capplets/wm-properties/wm-properties-capplet.c:820
-#: capplets/wm-properties/wm-properties-capplet.c:965
+#: capplets/wm-properties/wm-properties-capplet.c:704
+#: capplets/wm-properties/wm-properties-capplet.c:812
+#: capplets/wm-properties/wm-properties-capplet.c:819
+#: capplets/wm-properties/wm-properties-capplet.c:964
 #: control-center/capplet-manager.c:180
 msgid "OK"
 msgstr "OK"
 
-#: capplets/wm-properties/wm-properties-capplet.c:705
+#: capplets/wm-properties/wm-properties-capplet.c:704
 #: control-center/capplet-manager.c:185
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: capplets/wm-properties/wm-properties-capplet.c:716
+#: capplets/wm-properties/wm-properties-capplet.c:715
 msgid "Name:"
 msgstr "Namn:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:729
+#: capplets/wm-properties/wm-properties-capplet.c:728
 msgid "Command:"
 msgstr "Kommando:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:742
+#: capplets/wm-properties/wm-properties-capplet.c:741
 msgid "Configuration Command:"
 msgstr "Kommando för konfiguration:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:761
+#: capplets/wm-properties/wm-properties-capplet.c:760
 msgid "Window manager is session managed"
 msgstr "Fönsterhanterare använder sessionshantering"
 
-#: capplets/wm-properties/wm-properties-capplet.c:811
+#: capplets/wm-properties/wm-properties-capplet.c:810
 msgid "Name cannot be empty"
 msgstr "Du måste skriva in ett namn"
 
-#: capplets/wm-properties/wm-properties-capplet.c:818
+#: capplets/wm-properties/wm-properties-capplet.c:817
 msgid "Command cannot be empty"
 msgstr "Du måste skriva in ett kommando"
 
-#: capplets/wm-properties/wm-properties-capplet.c:867
-#: capplets/wm-properties/wm-properties-capplet.c:909
+#: capplets/wm-properties/wm-properties-capplet.c:866
+#: capplets/wm-properties/wm-properties-capplet.c:908
 msgid "Edit Window Manager"
 msgstr "Redigera fönsterhanterare"
 
-#: capplets/wm-properties/wm-properties-capplet.c:964
+#: capplets/wm-properties/wm-properties-capplet.c:963
 msgid "You cannot delete the current Window Manager"
 msgstr "Du kan inte ta bort den aktuella fönsterhanteraren"
 
-#: capplets/wm-properties/wm-properties-capplet.c:1077
+#: capplets/wm-properties/wm-properties-capplet.c:1076
 msgid ""
 "an initialization error occurred while starting 'wm-properties-capplet'.\n"
 "aborting...\n"
@@ -1198,11 +1351,11 @@ msgstr ""
 "ett fel uppstod vid start av 'wm-properties-capplet'.\n"
 "avbryter...\n"
 
-#: control-center/callbacks.c:79
+#: control-center/callbacks.c:85
 msgid "GNOME Control Center"
 msgstr "GNOME kontrollpanel"
 
-#: control-center/callbacks.c:82
+#: control-center/callbacks.c:88
 msgid "Desktop Properties manager."
 msgstr "Egenskaper för skrivbordet."
 
@@ -1289,6 +1442,9 @@ msgstr ""
 "vill ändra dem, dubbelklicka på aktuellt val."
 
 #. create the app
-#: control-center/main.c:184
+#: control-center/main.c:187
 msgid "Control Center"
 msgstr "Kontrollpanelen"
+
+#~ msgid "Default Gtk setting"
+#~ msgstr "Standard Gtk-inställning"
