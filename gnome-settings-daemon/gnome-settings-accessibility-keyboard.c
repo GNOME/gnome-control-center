@@ -404,14 +404,14 @@ static void
 ax_slowkeys_warning_dialog_post (gboolean enabled)
 {
 	slowkeys_shortcut_val = enabled;
-	ax_stickykeys_dialog = warning_dialog_post (ax_slowkeys_dialog,
-						    &ax_slowkeys_dialog_hbox,
-						    (GCallback) ax_slowkeys_response,
-						    &slowkeys_shortcut_val,
-						    _("Slow Keys Alert"),
-						    _("You just held down the Shift key for 8 seconds.  This is the shortcut for the Slow Keys feature, which affects the way your keyboard works."),
-						    enabled ? _("Do you want to activate Slow Keys?") : 
-						    _("Do you want to deactivate Slow Keys?"));
+	ax_slowkeys_dialog = warning_dialog_post (ax_slowkeys_dialog,
+						  &ax_slowkeys_dialog_hbox,
+						  (GCallback) ax_slowkeys_response,
+						  &slowkeys_shortcut_val,
+						  _("Slow Keys Alert"),
+						  _("You just held down the Shift key for 8 seconds.  This is the shortcut for the Slow Keys feature, which affects the way your keyboard works."),
+						  enabled ? _("Do you want to activate Slow Keys?") : 
+						  _("Do you want to deactivate Slow Keys?"));
 }
 
 static void
