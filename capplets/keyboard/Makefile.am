@@ -11,6 +11,9 @@ Glade_DATA = keyboard-properties.glade
 iconsdir   = $(GNOMECC_ICONS_DIR)
 icons_DATA = keyboard-capplet.png
 
+desktopdir = $(GNOMECC_DESKTOP_DIR)
+desktop_DATA = keyboard.desktop
+
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
 EXTRA_DIST = $(Glade_DATA) $(icons_DATA)

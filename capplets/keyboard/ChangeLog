@@ -1,5 +1,9 @@
 2001-12-20  Bradford Hovinen  <hovinen@ximian.com>
 
+	* keyboard-properties.c (dialog_button_clicked_cb): Update
+	(main): Use a GtkDialog rather than a GnomeDialog; don't place a
+	weak ref on gtk_main_quit
+
 	* Makefile.am: Update
 
 	* keyboard.desktop.in.in (Exec): Update

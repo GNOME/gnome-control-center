@@ -19,6 +19,9 @@ Glade_DATA = mouse-properties.glade
 iconsdir   = $(GNOMECC_ICONS_DIR)
 icons_DATA = mouse-capplet.png
 
+desktopdir = $(GNOMECC_DESKTOP_DIR)
+desktop_DATA = mouse.desktop
+
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
 EXTRA_DIST = $(Glade_DATA) $(icons_DATA) $(pixmap_DATA)

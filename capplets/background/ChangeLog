@@ -1,6 +1,9 @@
 2001-12-20  Bradford Hovinen  <hovinen@ximian.com>
 
 	* background-properties-capplet.c: Update
+	(main): Use a GtkDialog rather than a GnomeDialog
+	(main): Don't put weak ref on gtk_main_quit
+	(dialog_button_clicked_cb): Update
 
 	* Makefile.am: Update
 

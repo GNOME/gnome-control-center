@@ -11,6 +11,9 @@ Glade_DATA = background-properties.glade
 iconsdir   = $(GNOMECC_ICONS_DIR)
 icons_DATA = background-capplet.png
 
+desktopdir = $(GNOMECC_DESKTOP_DIR)
+desktop_DATA = background.desktop
+
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS) -I$(top_srcdir)/libbackground
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
 EXTRA_DIST = $(Glade_DATA) $(icons_DATA)

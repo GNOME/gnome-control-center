@@ -390,12 +390,17 @@ create_dialog (void)
 /* Callback issued when a button is clicked on the dialog */
 
 static void
-dialog_button_clicked_cb (GnomeDialog *dialog, gint button_number, GConfChangeSet *changeset) 
+dialog_button_clicked_cb (GnomeDialog *dialog, gint response_id, GConfChangeSet *changeset) 
 {
-	if (button_number == 0)
+	switch (response_id) {
+	case GTK_RESPONSE_APPLY:
 		gconf_client_commit_change_set (gconf_client_get_default (), changeset, TRUE, NULL);
-	else if (button_number == 1)
-		gnome_dialog_close (dialog);
+		break;
+
+	case GTK_RESPONSE_CLOSE:
+		gtk_main_quit ();
+		break;
+	}
 }
 
 int
@@ -433,10 +438,14 @@ main (int argc, char **argv)
 		load_pixbufs ();
 		setup_dialog (dialog, changeset);
 
-		dialog_win = gnome_dialog_new (_("Mouse properties"), GTK_STOCK_APPLY, GTK_STOCK_CLOSE, NULL);
-		g_signal_connect (G_OBJECT (dialog_win), "clicked", (GCallback) dialog_button_clicked_cb, changeset);
-		g_object_weak_ref (G_OBJECT (dialog_win), (GWeakNotify) gtk_main_quit, NULL);
-		gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog_win)->vbox), WID ("prefs_widget"), TRUE, TRUE, GNOME_PAD_SMALL);
+		dialog_win = gtk_dialog_new_with_buttons
+			(_("Keyboard properties"), NULL, -1,
+			 GTK_STOCK_APPLY, GTK_RESPONSE_APPLY,
+			 GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+			 NULL);
+
+		g_signal_connect (G_OBJECT (dialog_win), "response", (GCallback) dialog_button_clicked_cb, changeset);
+		gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog_win)->vbox), WID ("prefs_widget"), TRUE, TRUE, GNOME_PAD_SMALL);
 		gtk_widget_show_all (dialog_win);
 
 		gtk_main ();
