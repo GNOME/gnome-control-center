@@ -5,10 +5,8 @@ AM_INIT_AUTOMAKE(control-center, 1.99.3)
 
 AM_MAINTAINER_MODE
 
-GNOME_COMMON_INIT
 AC_PROG_INTLTOOL
-GNOME_PLATFORM_GNOME_2(yes, force)
-GNOME_COMPILE_WARNINGS(maximum)
+GNOME_COMPILE_WARNINGS
 
 AC_ISC_POSIX
 AC_PROG_CC
@@ -153,9 +151,6 @@ AC_SUBST(CONFIG_ARCHIVER_INCLUDEDIR)
 dnl =======================================
 dnl End: Variables for config_archiverConf.sh.in
 dnl =======================================
-
-dnl Honor ACLOCAL_FLAGS for --enable-maintainer-mode
-ACLOCAL="$ACLOCAL $ACLOCAL_FLAGS"
 
 AC_OUTPUT([
 control-center.spec
