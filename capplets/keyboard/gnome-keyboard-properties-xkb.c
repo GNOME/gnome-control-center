@@ -40,6 +40,8 @@
 
 #include "gnome-keyboard-properties-xkb.h"
 
+static GSwitchItXkbConfig initialConfig;
+
 char *
 xci_desc_to_utf8 (XklConfigItem * ci)
 {
@@ -116,6 +118,7 @@ model_to_widget (GConfPropertyEditor * peditor, GConfValue * value)
 static void
 cleanup_xkb_tabs (GladeXML * dialog)
 {
+  GSwitchItXkbConfigTerm (&initialConfig);
   XklConfigFreeRegistry ();
   XklConfigTerm ();
   XklTerm ();
@@ -188,6 +191,8 @@ update_model (GConfClient * client,
 void
 setup_xkb_tabs (GladeXML * dialog, GConfChangeSet * changeset)
 {
+  GConfClient *confClient = gconf_client_get_default ();
+
   XklInit (GDK_DISPLAY ());
   XklConfigInit ();
   XklConfigLoadRegistry ();
@@ -223,6 +228,10 @@ setup_xkb_tabs (GladeXML * dialog, GConfChangeSet * changeset)
 			   (GConfClientNotifyFunc)
 			   update_model, dialog, NULL, NULL);
 
+  GSwitchItXkbConfigInit (&initialConfig, confClient);
+  g_object_unref (confClient);
+  GSwitchItXkbConfigLoadInitial (&initialConfig);
+
   enable_disable_restoring (dialog);
 }
 
@@ -237,7 +246,7 @@ enable_disable_restoring (GladeXML * dialog)
   g_object_unref (confClient);
   GSwitchItXkbConfigLoad (&gswic);
 
-  enable = !GSwitchItXkbConfigEqualsToInitial (&gswic);
+  enable = !GSwitchItXkbConfigEquals (&gswic, &initialConfig);
 
   GSwitchItXkbConfigTerm (&gswic);
   gtk_widget_set_sensitive (WID ("xkb_reset_to_defaults"), enable);
