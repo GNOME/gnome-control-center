@@ -372,7 +372,7 @@ main (int argc, char **argv)
         bindtextdomain (PACKAGE, GNOMELOCALEDIR);
         textdomain (PACKAGE);
 
-        switch (gnome_capplet_init ("gnome-browser-properties", VERSION, argc,
+        switch (gnome_capplet_init ("default-application-properties", VERSION, argc,
                                     argv, NULL, 0, NULL)) {
                 
         case -1:
