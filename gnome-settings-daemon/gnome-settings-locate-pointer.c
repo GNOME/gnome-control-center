@@ -216,5 +216,5 @@ gnome_settings_locate_pointer (void)
   stage = STAGE_ONE;
   setup_window ();
   gdk_window_show (window);
-  locate_pointer_id = gtk_timeout_add (125, locate_pointer_timeout, NULL);
+  locate_pointer_id = gtk_timeout_add (100, locate_pointer_timeout, NULL);
 }
