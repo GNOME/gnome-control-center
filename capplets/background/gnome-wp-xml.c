@@ -130,6 +130,7 @@ static void gnome_wp_xml_load_xml (GnomeWPCapplet * capplet,
   xmlDoc * wplist;
   xmlNode * root, * list, * wpa;
   GdkColor color1, color2;
+  GnomeWPItem * item;
 
   wplist = xmlParseFile (filename);
 
@@ -184,6 +185,14 @@ static void gnome_wp_xml_load_xml (GnomeWPCapplet * capplet,
 	} else {
 	  g_warning ("Unknown Tag: %s\n", wpa->name);
 	}
+      }
+
+      /* Make sure we don't already have this one */
+      item = g_hash_table_lookup (capplet->wphash, wp->filename);
+
+      if (item != NULL) {
+	gnome_wp_item_free (wp);
+	continue;
       }
 
       /* Verify the colors and alloc some GdkColors here */
