@@ -1,6 +1,6 @@
+#include <config.h>
 #include <gnome.h>
 #include <glade/glade.h>
-#include <config.h>
 
 #include "gconf-property-editor.h"
 
@@ -51,6 +51,10 @@ setup_dialog (void)
 int
 main (int argc, char **argv)
 {
+	bindtextdomain (PACKAGE, GNOMELOCALEDIR);
+	bind_textdomain_codeset (PACKAGE, "UTF-8");
+	textdomain (PACKAGE);
+
 	gnome_program_init ("gnome2-font-properties", VERSION,
 			    LIBGNOMEUI_MODULE, argc, argv, NULL);
 

@@ -1,8 +1,9 @@
+#include <config.h>
+
 #include <gnome.h>
 #include <bonobo.h>
 #include <glade/glade.h>
 #include <gconf/gconf-client.h>
-#include <config.h>
 
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -243,6 +244,10 @@ setup_list (void)
 int
 main (int argc, char **argv)
 {
+	bindtextdomain (PACKAGE, GNOMELOCALEDIR);
+	bind_textdomain_codeset (PACKAGE, "UTF-8");
+	textdomain (PACKAGE);
+
 	gnome_program_init ("gtk-theme-selector", VERSION,
 			    LIBGNOMEUI_MODULE, argc, argv, NULL);
 
