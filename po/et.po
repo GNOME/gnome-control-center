@@ -1,13 +1,13 @@
 # GNOME Control Center Estonian tranlation
 # Copyright (C) 1999-2002 Free Software Foundation, Inc.
 # Lauris Kaplinski <lauris@ariman.ee>, 1999.
-# Tõivo Leedjärv <toivo@linux.ee>, 2002.
+# Tõivo Leedjärv <toivo@linux.ee>, 2002, 2003.
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: control-center 2.1.3\n"
-"POT-Creation-Date: 2003-01-10 10:20-0500\n"
-"PO-Revision-Date: 2002-11-26 01:45+0200\n"
+"Project-Id-Version: control-center 2.2.0\n"
+"POT-Creation-Date: 2003-01-26 19:02+0200\n"
+"PO-Revision-Date: 2003-01-26 19:15+0200\n"
 "Last-Translator: Tõivo Leedjärv <toivo@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -383,6 +383,11 @@ msgstr "Rakenda sätted ja lõpeta"
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Abiinfo kuvamisel tekkis viga: %s"
+
+#: capplets/common/capplet-stock-icons.c:94
+#, c-format
+msgid "Unable to load capplet stock icon '%s'\n"
+msgstr ""
 
 #: capplets/common/file-transfer-dialog.c:95
 #, c-format
@@ -945,7 +950,6 @@ msgid "File types and programs"
 msgstr "Failitüübid ja programmid"
 
 #: capplets/file-types/file-types.desktop.in.h:2
-#, fuzzy
 msgid "Specify which programs are used to open or view each type of file"
 msgstr ""
 "Määra, milliseid programme kasutatakse erinevate failitüüpide avamiseks või "
@@ -1186,29 +1190,28 @@ msgid "Set the font for the icons on the desktop"
 msgstr "Määra töölaua ikoonide kirjatüüp"
 
 #: capplets/font/font-properties.glade.h:13
-#, fuzzy
 msgid "Set the monospace font for terminals and similar applications"
-msgstr "Määra rakenduste kasutatav kirjatüüp"
+msgstr "Määra terminalides ja sarnastes rakendustes kasutatav kirjatüüp"
 
 #: capplets/font/font-properties.glade.h:14
 msgid "Smoothing:"
-msgstr ""
+msgstr "Silumine:"
 
 #: capplets/font/font-properties.glade.h:15
 msgid "Sub_pixel (LCDs)"
-msgstr ""
+msgstr "Alam_piksel (LCDd)"
 
 #: capplets/font/font-properties.glade.h:16
 msgid "Sub_pixel smoothing (LCDs)"
-msgstr ""
+msgstr "Alam_piksli silumine (LCDd)"
 
 #: capplets/font/font-properties.glade.h:17
 msgid "Subpixel order:"
-msgstr ""
+msgstr "Alampiksli järjekord:"
 
 #: capplets/font/font-properties.glade.h:18
 msgid "VB_GR"
-msgstr ""
+msgstr "VS_RP"
 
 #: capplets/font/font-properties.glade.h:19
 msgid "_Application font:"
@@ -1216,7 +1219,7 @@ msgstr "_Rakenduste kirjatüüp:"
 
 #: capplets/font/font-properties.glade.h:20
 msgid "_BGR"
-msgstr ""
+msgstr "_SRP"
 
 #: capplets/font/font-properties.glade.h:21
 msgid "_Desktop font:"
@@ -1224,16 +1227,15 @@ msgstr "_Töölaua kirjatüüp:"
 
 #: capplets/font/font-properties.glade.h:22
 msgid "_Full"
-msgstr ""
+msgstr "_Täielik"
 
 #: capplets/font/font-properties.glade.h:23
-#, fuzzy
 msgid "_Medium"
-msgstr "_Menüü"
+msgstr "_Keskmine"
 
 #: capplets/font/font-properties.glade.h:24
 msgid "_Monochrome"
-msgstr ""
+msgstr "_Monokroom"
 
 #: capplets/font/font-properties.glade.h:25
 msgid "_None"
@@ -1241,20 +1243,19 @@ msgstr "_Ei ole"
 
 #: capplets/font/font-properties.glade.h:26
 msgid "_RGB"
-msgstr ""
+msgstr "_PRS"
 
 #: capplets/font/font-properties.glade.h:27
 msgid "_Slight"
-msgstr ""
+msgstr "_Veidi"
 
 #: capplets/font/font-properties.glade.h:28
-#, fuzzy
 msgid "_Terminal font:"
-msgstr "Terminal"
+msgstr "_Terminali kirjatüüp:"
 
 #: capplets/font/font-properties.glade.h:29
 msgid "_VRGB"
-msgstr ""
+msgstr "_VPRS"
 
 #: capplets/font/font-properties.glade.h:30
 msgid "_Window title font:"
@@ -1695,7 +1696,6 @@ msgid "HTTP Proxy Details"
 msgstr ""
 
 #: capplets/network/gnome-network-preferences.glade.h:9
-#, fuzzy
 msgid "Network Proxy Configuration"
 msgstr "Võrguproksi häälestus"
 
@@ -1712,23 +1712,20 @@ msgid "_Details"
 msgstr ""
 
 #: capplets/network/gnome-network-preferences.glade.h:13
-#, fuzzy
 msgid "_FTP proxy:"
-msgstr "_Kasuta HTTP proksit"
+msgstr "_FTP proksi:"
 
 #: capplets/network/gnome-network-preferences.glade.h:14
-#, fuzzy
 msgid "_HTTP proxy:"
-msgstr "_Kasuta HTTP proksit"
+msgstr "_HTTP proksi:"
 
 #: capplets/network/gnome-network-preferences.glade.h:15
 msgid "_Password:"
 msgstr "_Parool:"
 
 #: capplets/network/gnome-network-preferences.glade.h:16
-#, fuzzy
 msgid "_Secure HTTP proxy:"
-msgstr "_Kasuta HTTP proksit"
+msgstr "_Turvalise HTTP proksi:"
 
 #: capplets/network/gnome-network-preferences.glade.h:17
 msgid "_Username:"
@@ -1824,19 +1821,16 @@ msgid "<span size=\"larger\" weight=\"bold\">Save theme to disk</span>"
 msgstr ""
 
 #: capplets/theme-switcher/theme-properties.glade.h:3
-#, fuzzy
 msgid "Apply _Background"
-msgstr "Taust"
+msgstr "Rakenda _taust"
 
 #: capplets/theme-switcher/theme-properties.glade.h:4
-#, fuzzy
 msgid "Apply _Font"
-msgstr "Rakenda kohe"
+msgstr "Rakenda _kirjatüüp"
 
 #: capplets/theme-switcher/theme-properties.glade.h:5
-#, fuzzy
 msgid "Controls"
-msgstr "Kontaktid"
+msgstr "Vidinad"
 
 #: capplets/theme-switcher/theme-properties.glade.h:6
 msgid "Icons"
@@ -1847,44 +1841,46 @@ msgid "New themes can also be installed by dragging them into the window."
 msgstr "Uusi teemasid saab ka installida neid siia aknasse tirides."
 
 #: capplets/theme-switcher/theme-properties.glade.h:8
-#, fuzzy
 msgid "Short _Description:"
-msgstr "K_irjeldus:"
+msgstr "Lühik_irjeldus:"
 
 #: capplets/theme-switcher/theme-properties.glade.h:9
 msgid "Theme Details"
-msgstr ""
+msgstr " "
 
 #: capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Theme Preferences"
 msgstr "Teema häälestus"
 
 #: capplets/theme-switcher/theme-properties.glade.h:11
-#, fuzzy
 msgid ""
 "This theme suggests a\n"
 "background:"
-msgstr "Kohanda oma töölaua taust"
+msgstr ""
+"See teema soovitab\n"
+"tausta:"
 
 #: capplets/theme-switcher/theme-properties.glade.h:13
 msgid ""
 "This theme suggests a\n"
 "font and background"
 msgstr ""
+"See teema soovitab\n"
+"kirjatüüpi ja tausta"
 
 #: capplets/theme-switcher/theme-properties.glade.h:15
 msgid ""
 "This theme suggests a\n"
 "font:"
 msgstr ""
+"See teema soovitab\n"
+"kirjatüüpi:"
 
 #: capplets/theme-switcher/theme-properties.glade.h:17
-#, fuzzy
 msgid "Window Border"
-msgstr "Akna äärise välimus"
+msgstr "Akna ääris"
 
 #: capplets/theme-switcher/theme-properties.glade.h:18
-#, fuzzy
 msgid "_Details..."
 msgstr "_Omadused..."
 
@@ -1893,19 +1889,16 @@ msgid "_Go to theme folder"
 msgstr "_Ava teemade kataloog"
 
 #: capplets/theme-switcher/theme-properties.glade.h:20
-#, fuzzy
 msgid "_Install theme..."
-msgstr "_Lisa uus teema..."
+msgstr "_Lisa teema..."
 
 #: capplets/theme-switcher/theme-properties.glade.h:21
-#, fuzzy
 msgid "_Save theme"
-msgstr "Teema"
+msgstr "_Salvesta teema"
 
 #: capplets/theme-switcher/theme-properties.glade.h:22
-#, fuzzy
 msgid "_Theme name:"
-msgstr "Kasutaja_nimi:"
+msgstr "_Teema nimi:"
 
 #: capplets/theme-switcher/theme-install.glade.h:2
 msgid "Install new theme"
@@ -1919,22 +1912,25 @@ msgstr "_Lisa"
 msgid "_Location of new theme:"
 msgstr "Uue teema _asukoht:"
 
-#: capplets/theme-switcher/gnome-theme-details.c:329
-#: capplets/theme-switcher/gnome-theme-manager.c:606
+#: capplets/theme-switcher/gnome-theme-details.c:372
+#: capplets/theme-switcher/gnome-theme-manager.c:609
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
 "installed the \"gnome-themes\" package."
 msgstr ""
 
-#: capplets/theme-switcher/gnome-theme-manager.c:662
-#: capplets/theme-switcher/gnome-theme-manager.c:722
-#, fuzzy
-msgid "Custom theme"
-msgstr "Kursori teema"
+#: capplets/theme-switcher/gnome-theme-save.c:72
+msgid "Theme name must be present"
+msgstr ""
 
-#: capplets/theme-switcher/gnome-theme-manager.c:662
-#: capplets/theme-switcher/gnome-theme-manager.c:722
+#: capplets/theme-switcher/gnome-theme-manager.c:665
+#: capplets/theme-switcher/gnome-theme-manager.c:725
+msgid "Custom theme"
+msgstr "Oma teema"
+
+#: capplets/theme-switcher/gnome-theme-manager.c:665
+#: capplets/theme-switcher/gnome-theme-manager.c:725
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr ""
 
@@ -2084,9 +2080,8 @@ msgid "Alt"
 msgstr ""
 
 #: capplets/windows/gnome-window-properties.c:635
-#, fuzzy
 msgid "Hyper"
-msgstr "Tüüp"
+msgstr ""
 
 #: capplets/windows/gnome-window-properties.c:642
 msgid "Super (or \"Windows logo\")"
@@ -2149,7 +2144,7 @@ msgstr ""
 msgid "translator_credits"
 msgstr ""
 "Tõlge eesti keelde:\n"
-"       Tõivo Leedjärv <toivo@linux.ee>, 2002."
+"       Tõivo Leedjärv <toivo@linux.ee>, 2002, 2003."
 
 #: control-center/capplet-dir-view.c:357 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
@@ -2340,11 +2335,11 @@ msgstr "Vali helifail"
 msgid "Window manager \"%s\" has not registered a configuration tool\n"
 msgstr ""
 
-#: libwindow-settings/metacity-window-manager.c:373
+#: libwindow-settings/metacity-window-manager.c:374
 msgid "Maximize"
 msgstr ""
 
-#: libwindow-settings/metacity-window-manager.c:374
+#: libwindow-settings/metacity-window-manager.c:375
 msgid "Roll up"
 msgstr ""
 
