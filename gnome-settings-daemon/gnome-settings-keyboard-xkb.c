@@ -45,6 +45,8 @@
 
 static GSwitchItConfig currentConfig;
 static GSwitchItKbdConfig currentKbdConfig;
+
+/* never terminated */
 static GSwitchItKbdConfig initialSysKbdConfig;
 
 static gboolean initedOk;
@@ -143,9 +145,7 @@ apply_xkb_settings (void)
 
 	if (currentKbdConfig.overrideSettings) {
 		/* initialization - from the system settings */
-		GSwitchItKbdConfigLoadFromXInitial (&currentKbdConfig);
-		currentKbdConfig.overrideSettings = FALSE;
-		GSwitchItKbdConfigSaveToGConf (&currentKbdConfig);
+		GSwitchItKbdConfigSaveToGConf (&initialSysKbdConfig);
 	} else {
 		GSwitchItKbdConfigLoadFromXCurrent (&currentSysKbdConfig);
 		/* Activate - only if different! */
@@ -181,7 +181,6 @@ gnome_settings_keyboard_xkb_sysconfig_changed_response (GtkDialog * dialog,
 		break;
 	}
 	gtk_widget_destroy (GTK_WIDGET (dialog));
-	GSwitchItKbdConfigTerm (&initialSysKbdConfig);
 }
 
 static void
@@ -199,6 +198,7 @@ gnome_settings_keyboard_xkb_analyze_sysconfig (void)
 	g_object_unref (confClient);
 	GSwitchItKbdConfigLoadFromGConfBackup (&backupGConfKbdConfig);
 	GSwitchItKbdConfigLoadFromXInitial (&initialSysKbdConfig);
+	initialSysKbdConfig.overrideSettings = FALSE;
 
 	isConfigChanged = g_slist_length (backupGConfKbdConfig.layouts) &&
 	    !GSwitchItKbdConfigEquals (&initialSysKbdConfig, &backupGConfKbdConfig);
