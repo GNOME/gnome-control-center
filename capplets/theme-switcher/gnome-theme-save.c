@@ -93,6 +93,21 @@ setup_directory_structure (const gchar  *theme_name,
   uri = gnome_vfs_uri_new (dir);
   if (!gnome_vfs_uri_exists (uri))
     gnome_vfs_make_directory_for_uri (uri, 0775);
+  else {
+	GtkDialog *dialog;
+	gint response;
+	  
+	dialog = gtk_message_dialog_new (NULL,
+			 GTK_DIALOG_MODAL,
+			 GTK_MESSAGE_QUESTION,
+	  		 GTK_BUTTONS_OK_CANCEL,
+	  		 _("The theme already exists. Would you like to replace it ?"));
+	response = gtk_dialog_run(dialog);
+	gtk_widget_destroy(dialog);
+	if (response == GTK_RESPONSE_CANCEL) 
+		return FALSE;
+  }
+	  
   gnome_vfs_uri_unref (uri);
   g_free (dir);
 
@@ -294,4 +309,3 @@ gnome_theme_save_show_dialog (GtkWidget          *parent,
   gtk_window_set_transient_for (GTK_WINDOW (save_dialog), GTK_WINDOW (parent));
   gtk_widget_show (save_dialog);
 }
-
