@@ -5,7 +5,7 @@ Desktop_in_files = gnome-hint-properties.desktop.in
 Desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop) 
 @XML_I18N_MERGE_DESKTOP_RULE@
 
-SUBDIRS = Sawfish
+SUBDIRS = 
 
 EXTRA_DIST = \
 	$(Desktop_in_files) 	
