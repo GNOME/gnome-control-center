@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.6\n"
-"POT-Creation-Date: 1999-08-12 23:47+0200\n"
-"PO-Revision-Date: 1999-08-12 23:50+02:00\n"
+"POT-Creation-Date: 1999-08-16 22:44+0200\n"
+"PO-Revision-Date: 1999-08-16 22:56+02:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -20,6 +20,16 @@ msgstr "Sett bakgrunnsbilde."
 #: capplets/background-properties/app-background.c:13
 msgid "IMAGE-FILE"
 msgstr "IMAGE-FILE"
+
+#: capplets/background-properties/app-background.c:34
+msgid ""
+"an initialization error occurred while starting "
+"'background-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"en initialiseringsfeil oppstod under start av "
+"'background-properties-capplet'.\n"
+"avbryter...\n"
 
 #: capplets/background-properties/property-background.c:244
 msgid "Disabled"
@@ -171,6 +181,14 @@ msgstr "Varighet (ms)"
 msgid "Test"
 msgstr "Test"
 
+#: capplets/bell-properties/bell-properties.c:239
+msgid ""
+"an initialization error occurred while starting 'bell-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"en initialiseringsfeil oppstod under start av 'bell-properties-capplet'.\n"
+"avbryter...\n"
+
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:229
 msgid "Gnome editor"
 msgstr "Gnome editor"
@@ -210,6 +228,16 @@ msgstr "Klikkvolum"
 #: capplets/keyboard-properties/keyboard-properties.c:265
 msgid "Test settings"
 msgstr "Testinnstillinger"
+
+#: capplets/keyboard-properties/keyboard-properties.c:307
+msgid ""
+"an initialization error occurred while starting "
+"'keyboard-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"en initialiseringsfeil oppstod under start av "
+"'keyboard-properties-capplet'.\n"
+"avbryter...\n"
 
 #. icon box
 #: capplets/mime-type/edit-window.c:105
@@ -306,6 +334,30 @@ msgstr ""
 msgid "This mime-type already exists"
 msgstr "Denne mime-typen eksisterer allerede"
 
+#: capplets/mime-type/mime-data.c:544 capplets/mime-type/mime-info.c:423
+msgid ""
+"We are unable to create the directory\n"
+"~/.gnome/mime-info\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+"Kan ikke opprette katalogen\n"
+"~/.gnome/mime-info\n"
+"\n"
+"Ute av stand til å lagre status"
+
+#: capplets/mime-type/mime-data.c:550 capplets/mime-type/mime-info.c:429
+msgid ""
+"We are unable to access the directory\n"
+"~/.gnome/mime-info\n"
+"\n"
+"We will not be able to save the state."
+msgstr ""
+"Kan ikke aksessere katalogen\n"
+"~/.gnome/mime-info\n"
+"\n"
+"Ute av stand til å lagre status"
+
 #: capplets/mime-type/mime-data.c:561
 msgid ""
 "Cannot create the file\n"
@@ -332,19 +384,19 @@ msgstr ""
 
 #: capplets/mime-type/mime-type-capplet.c:77
 #: capplets/session-properties/session-properties.c:203
-#: capplets/wm-properties/wm-properties-capplet.c:1042
+#: capplets/wm-properties/wm-properties-capplet.c:1041
 msgid "Delete"
 msgstr "Slett"
 
 #: capplets/mime-type/mime-type-capplet.c:87
 #: capplets/session-properties/session-properties.c:193
-#: capplets/wm-properties/wm-properties-capplet.c:1032
+#: capplets/wm-properties/wm-properties-capplet.c:1031
 msgid "Add..."
 msgstr "Legg til..."
 
 #: capplets/mime-type/mime-type-capplet.c:91
 #: capplets/session-properties/session-properties.c:198
-#: capplets/wm-properties/wm-properties-capplet.c:1037
+#: capplets/wm-properties/wm-properties-capplet.c:1036
 msgid "Edit..."
 msgstr "Rediger..."
 
@@ -432,6 +484,14 @@ msgstr "Stor"
 #: capplets/mouse-properties/mouse-properties.c:317
 msgid "Small"
 msgstr "Liten"
+
+#: capplets/mouse-properties/mouse-properties.c:341
+msgid ""
+"an initialization error occurred while starting 'mouse-properties-capplet'.\n"
+"aborting...\n"
+msgstr ""
+"en initialiseringsfeil oppstod under start av 'mouse-properties-capplet'.\n"
+"avbryter...\n"
 
 #: capplets/screensaver-properties/callbacks.c:102
 msgid "Require Password"
@@ -668,6 +728,11 @@ msgstr "Alltid startet ved innlogging."
 msgid "Remove Program"
 msgstr "Fjern program"
 
+#. frame for options
+#: capplets/session-properties/session-properties.c:138
+msgid "Options"
+msgstr "Alternativer"
+
 #: capplets/session-properties/session-properties.c:149
 msgid "Prompt on logout"
 msgstr "Spør ved avslutting"
@@ -676,7 +741,13 @@ msgstr "Spør ved avslutting"
 msgid "Automatically save changes to session"
 msgstr "Lagre endringer til sesjonen automatisk"
 
+#. frame for manually started programs
+#: capplets/session-properties/session-properties.c:166
+msgid "Non-session-managed Startup Programs"
+msgstr "Ikke-sesjonshåndtert program i oppstart"
+
 #: capplets/session-properties/session-properties.c:183
+#: capplets/session-properties/startup-programs.c:304
 msgid "Priority"
 msgstr "Prioritet"
 
@@ -692,6 +763,17 @@ msgstr "Se på nåværende kjørende programmer..."
 #: capplets/session-properties/session-properties.c:379
 msgid "Only display warnings."
 msgstr "Bare vis advarsler."
+
+#: capplets/session-properties/session-properties.c:405
+msgid ""
+"an initialization error occurred while starting 'session-properties-capplet'."
+msgstr ""
+"en initialiseringsfeil oppstod under start av 'session-properties-capplet'."
+
+#: capplets/session-properties/startup-programs.c:288
+#: capplets/session-properties/startup-programs.c:295
+msgid "Startup Command"
+msgstr "Oppstartskommando"
 
 #: capplets/session-properties/startup-programs.c:319
 msgid ""
@@ -712,6 +794,12 @@ msgstr "Legg til program for oppstart"
 #: capplets/session-properties/startup-programs.c:396
 msgid "Edit Startup Program"
 msgstr "Rediger program for oppstart"
+
+#: capplets/sound-properties/sound-properties.c:94
+msgid ""
+"an initialization error occurred while starting 'sound-properties-capplet'."
+msgstr ""
+"en initialiseringsfeil oppstod under start av 'sound-properties-capplet'."
 
 #: capplets/sound-properties/sound-properties.c:184
 msgid "Category"
@@ -895,6 +983,12 @@ msgstr ""
 msgid "User Font"
 msgstr "Brukerskrifttype"
 
+#. FIXME - should really get this from X somehow
+#. for now we just assume default gtk font
+#: capplets/theme-switcher/gui.c:252
+msgid "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
+msgstr "-adobe-helvetica-medium-r-normal--*-120-*-*-*-*-*-*"
+
 #: capplets/theme-switcher/gui.c:271
 msgid "Use custom font."
 msgstr "Bruk egendefinert skrifttype."
@@ -1045,34 +1139,42 @@ msgid "Dialog Behavior"
 msgstr "Dialogoppførsel"
 
 #: capplets/ui-properties/ui-properties.c:248
+msgid "Default MDI Mode"
+msgstr "Standard MDI-modus"
+
+#: capplets/ui-properties/ui-properties.c:249
 msgid "Notebook"
 msgstr "Notisblokk"
 
-#: capplets/ui-properties/ui-properties.c:249
+#: capplets/ui-properties/ui-properties.c:250
 msgid "Toplevel"
 msgstr "Toppnivå"
 
-#: capplets/ui-properties/ui-properties.c:250
+#: capplets/ui-properties/ui-properties.c:251
 msgid "Modal"
 msgstr "Modal"
 
-#: capplets/ui-properties/ui-properties.c:255
+#: capplets/ui-properties/ui-properties.c:256
+msgid "MDI notebook tab position"
+msgstr "Arkfaneposisjon for MDI-notisblokk"
+
+#: capplets/ui-properties/ui-properties.c:257
 msgid "Left"
 msgstr "Venstre"
 
-#: capplets/ui-properties/ui-properties.c:256
+#: capplets/ui-properties/ui-properties.c:258
 msgid "Right"
 msgstr "Høyre"
 
-#: capplets/ui-properties/ui-properties.c:257
+#: capplets/ui-properties/ui-properties.c:259
 msgid "Top"
 msgstr "Øverst"
 
-#: capplets/ui-properties/ui-properties.c:258
+#: capplets/ui-properties/ui-properties.c:260
 msgid "Bottom"
 msgstr "Nederst"
 
-#: capplets/ui-properties/ui-properties.c:273
+#: capplets/ui-properties/ui-properties.c:275
 msgid "GNOME MDI Options"
 msgstr "Alternativer for GNOME MDI"
 
@@ -1122,23 +1224,42 @@ msgstr ""
 "Starter %s\n"
 "(%d sekunder igjen før tidsavbrudd)"
 
-#: capplets/wm-properties/wm-properties-capplet.c:302
-msgid " (Current)"
-msgstr " (Aktiv)"
+#: capplets/wm-properties/wm-properties-capplet.c:301
+#, c-format
+msgid "%s (Current)"
+msgstr "%s (Aktiv)"
 
 #: capplets/wm-properties/wm-properties-capplet.c:304
-msgid "Run Configuration Tool for "
-msgstr "Kjør kofigurasjonsverktøy for "
+#, c-format
+msgid "Run Configuration Tool for %s"
+msgstr "Kjør kofigurasjonsverktøy for %s"
 
-#: capplets/wm-properties/wm-properties-capplet.c:316
+#: capplets/wm-properties/wm-properties-capplet.c:315
 msgid " (Not found)"
 msgstr " (Ikke funnet)"
 
-#: capplets/wm-properties/wm-properties-capplet.c:408
+#: capplets/wm-properties/wm-properties-capplet.c:354
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\tAnother window manager is already running and could not be killed\n"
+msgstr ""
+"wm-properties-capplet: Kunne ikke initialisere vindushåndtereren.\n"
+"\tEn annen vindushåndterer kjører allerede og kunne ikke drepes\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:358
+#, c-format
+msgid ""
+"wm-properties-capplet: Unable to initialize window manager.\n"
+"\t'%s' didn't start\n"
+msgstr ""
+"wm-properties-capplet: Kunne ikke initialisere vindushåndtereren.\n"
+"\t'%s' startet ikke\n"
+
+#: capplets/wm-properties/wm-properties-capplet.c:407
 msgid "Previous window manager did not die\n"
 msgstr "Forrige vindusbehandler døde ikke\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:441
+#: capplets/wm-properties/wm-properties-capplet.c:440
 #, c-format
 msgid ""
 "Could not start '%s'.\n"
@@ -1147,7 +1268,7 @@ msgstr ""
 "Kunne ikke starte '%s'.\n"
 "Faller tilbake til forrige vindusbehandler '%s'\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:472
+#: capplets/wm-properties/wm-properties-capplet.c:471
 msgid ""
 "Could not start fallback window manager.\n"
 "Please run a window manager manually. You can\n"
@@ -1159,57 +1280,57 @@ msgstr ""
 "gjøre dette ved å velge \"Kjør program\" i fra\n"
 "fot menyen\n"
 
-#: capplets/wm-properties/wm-properties-capplet.c:704
+#: capplets/wm-properties/wm-properties-capplet.c:703
 msgid "Add New Window Manager"
 msgstr "Legg til ny vindusbehandler"
 
-#: capplets/wm-properties/wm-properties-capplet.c:705
-#: capplets/wm-properties/wm-properties-capplet.c:813
-#: capplets/wm-properties/wm-properties-capplet.c:820
-#: capplets/wm-properties/wm-properties-capplet.c:965
+#: capplets/wm-properties/wm-properties-capplet.c:704
+#: capplets/wm-properties/wm-properties-capplet.c:812
+#: capplets/wm-properties/wm-properties-capplet.c:819
+#: capplets/wm-properties/wm-properties-capplet.c:964
 #: control-center/capplet-manager.c:180
 msgid "OK"
 msgstr "OK"
 
-#: capplets/wm-properties/wm-properties-capplet.c:705
+#: capplets/wm-properties/wm-properties-capplet.c:704
 #: control-center/capplet-manager.c:185
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: capplets/wm-properties/wm-properties-capplet.c:716
+#: capplets/wm-properties/wm-properties-capplet.c:715
 msgid "Name:"
 msgstr "Navn:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:729
+#: capplets/wm-properties/wm-properties-capplet.c:728
 msgid "Command:"
 msgstr "Kommando:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:742
+#: capplets/wm-properties/wm-properties-capplet.c:741
 msgid "Configuration Command:"
 msgstr "Konfigurasjonskommando:"
 
-#: capplets/wm-properties/wm-properties-capplet.c:761
+#: capplets/wm-properties/wm-properties-capplet.c:760
 msgid "Window manager is session managed"
 msgstr "Vindusbehandleren er sesjonsstyrt"
 
-#: capplets/wm-properties/wm-properties-capplet.c:811
+#: capplets/wm-properties/wm-properties-capplet.c:810
 msgid "Name cannot be empty"
 msgstr "Navnet kan ikke være tomt"
 
-#: capplets/wm-properties/wm-properties-capplet.c:818
+#: capplets/wm-properties/wm-properties-capplet.c:817
 msgid "Command cannot be empty"
 msgstr "Kommandofeltet kan ikke være tomt"
 
-#: capplets/wm-properties/wm-properties-capplet.c:867
-#: capplets/wm-properties/wm-properties-capplet.c:909
+#: capplets/wm-properties/wm-properties-capplet.c:866
+#: capplets/wm-properties/wm-properties-capplet.c:908
 msgid "Edit Window Manager"
 msgstr "Rediger vindusbehandler"
 
-#: capplets/wm-properties/wm-properties-capplet.c:964
+#: capplets/wm-properties/wm-properties-capplet.c:963
 msgid "You cannot delete the current Window Manager"
 msgstr "Du kan ikke slette aktiv vindusbehandler"
 
-#: capplets/wm-properties/wm-properties-capplet.c:1077
+#: capplets/wm-properties/wm-properties-capplet.c:1076
 msgid ""
 "an initialization error occurred while starting 'wm-properties-capplet'.\n"
 "aborting...\n"
