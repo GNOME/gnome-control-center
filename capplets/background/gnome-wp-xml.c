@@ -284,7 +284,7 @@ void gnome_wp_xml_load_list (GnomeWPCapplet * capplet) {
   for (i = 0; xdgdirs && xdgdirs[i]; i++) {
     gchar * datadir;
 
-    datadir = g_build_filename (xdgdirs[i], "gnome-wallpaper-properties",
+    datadir = g_build_filename (xdgdirs[i], "gnome-background-properties",
 				NULL);
     if (g_file_test (datadir, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR)) {
       gnome_vfs_directory_list_load (&list, datadir,
