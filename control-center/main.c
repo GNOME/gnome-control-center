@@ -33,22 +33,6 @@
 #include "capplet-dir.h"
 #include "capplet-dir-view.h"
 
-static gint 
-real_launch_control (gchar *capplet)
-{
-	GtkWidget *app;
-	if ((app = capplet_control_launch (capplet, _("Configuration"))) == NULL)
-	{
-		gtk_main_quit ();
-		return FALSE;
-	}
-
-	gtk_signal_connect (GTK_OBJECT (app), "destroy",
-			    GTK_SIGNAL_FUNC (gtk_main_quit), NULL);
-
-	return FALSE;
-}
-
 int
 main (int argc, char **argv) 
 {
@@ -58,34 +42,24 @@ main (int argc, char **argv)
 	CappletDir *dir;
 
 	static gchar *capplet = NULL;
-	static struct poptOption gnomecc_options[] = {
-		{ "run-capplet", '\0', POPT_ARG_STRING, &capplet, 0,
-		  N_("Run the capplet CAPPLET"), N_("CAPPLET") },
-		{ NULL, '\0', 0, NULL, 0, NULL, NULL }
-	};
 
         bindtextdomain (PACKAGE, GNOMELOCALEDIR);
 	bind_textdomain_codeset (PACKAGE, "UTF-8");
         textdomain (PACKAGE);
 
 	gnome_program_init ("control-center", VERSION, LIBGNOMEUI_MODULE,
-			    argc, argv,
-			    GNOME_PARAM_POPT_TABLE, gnomecc_options);
+			    argc, argv, NULL);
 
 	gconf_init (argc, argv, NULL);
 
-	if (capplet == NULL) {
-		gnomecc_init ();
-		dir = get_root_capplet_dir ();
-		if (!dir)
-			return -1;
-		entry  = CAPPLET_DIR_ENTRY (dir);
-		if (!entry)
-			return -1;
-		capplet_dir_entry_activate (entry, NULL);
-	} else {
-		gtk_idle_add ((GtkFunction) real_launch_control, capplet);
-	}
+	gnomecc_init ();
+	dir = get_root_capplet_dir ();
+	if (dir == NULL)
+		return -1;
+	entry  = CAPPLET_DIR_ENTRY (dir);
+	if (entry == NULL)
+		return -1;
+	capplet_dir_entry_activate (entry, NULL);
 
 	gtk_main ();
 

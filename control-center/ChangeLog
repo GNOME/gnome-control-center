@@ -1,3 +1,11 @@
+2001-12-17  Bradford Hovinen  <hovinen@ximian.com>
+
+	* main.c (main): Remove support for launching capplets
+	(real_launch_control): Remove
+
+	* capplet-dir.c: Remove bonobo capplet utility functions
+	(capplet_activate): Don't use capplet_control_launch
+
 2001-12-13  Richard Hestilow  <hestilow@ximian.com>
 	
 	* capplet-dir-view-list.c: Remove all g_print statements.
