@@ -32,9 +32,17 @@
 
 /* Print a debugging message */
 
-#define DEBUG_MSG(str, ...) \
+#ifdef G_HAVE_ISO_VARARGS
+#  define DEBUG_MSG(str, ...) \
               g_log (G_LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "(%d:%s) " str, \
 		     getpid (), G_GNUC_FUNCTION, __VA_ARGS__)
+#elif defined(G_HAVE_GNUC_VARARGS)
+#  define DEBUG_MSG(str, args...) \
+              g_log (G_LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "(%d:%s) " str, \
+		     getpid (), G_GNUC_FUNCTION, args)
+#else
+#  define DEBUG_MSG(str, args...)
+#endif
 
 /* Retrieve a widget from the Glade object */
 
