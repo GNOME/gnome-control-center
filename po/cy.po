@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-13 09:32-0500\n"
+"POT-Creation-Date: 2004-03-10 17:20-0500\n"
 "PO-Revision-Date: 2003-08-27 00:31+0100\n"
 "Last-Translator: Dafydd Harries <daf@parnassus.ath.cx>\n"
 "Language-Team: Cymraeg <gnome-cy@www.linux.org.uk>\n"
@@ -115,14 +115,18 @@ msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr "Roedd gwall wrth lansio'r deialog hoffterau llygoden: %s"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:337
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:395
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:396
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Methu mewnforio gosodiadau AccessX o'r ffeil '%s'"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:468
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:433
 msgid "Import Feature Settings File"
 msgstr "Mewnforio Ffeil Gosodiadau Nodweddion"
+
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:437
+msgid "_Import"
+msgstr ""
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:18
@@ -343,113 +347,6 @@ msgstr "picseli yr eiliad"
 msgid "seconds"
 msgstr "eiliadau"
 
-#. solid
-#: capplets/background/background-properties-capplet.c:228
-msgid "Co_lor:"
-msgstr "_Lliw:"
-
-#. horiz
-#: capplets/background/background-properties-capplet.c:232
-msgid "_Left color:"
-msgstr "Lliw _chwith:"
-
-#: capplets/background/background-properties-capplet.c:233
-msgid "_Right color:"
-msgstr "Lliw _de:"
-
-#. vert
-#: capplets/background/background-properties-capplet.c:236
-msgid "Top co_lor:"
-msgstr "Lliw _pen:"
-
-#: capplets/background/background-properties-capplet.c:237
-msgid "_Bottom color:"
-msgstr "Lliw _gwaelod:"
-
-#: capplets/background/background-properties-capplet.c:398
-msgid "_Tile"
-msgstr "_Teilio"
-
-#: capplets/background/background-properties-capplet.c:398
-msgid "C_enter"
-msgstr "C_anoli"
-
-#: capplets/background/background-properties-capplet.c:398
-msgid "Sc_ale"
-msgstr "G_raddio"
-
-#: capplets/background/background-properties-capplet.c:398
-msgid "_Stretch"
-msgstr "_Ymestyn"
-
-#: capplets/background/background-properties-capplet.c:398
-msgid "_No Picture"
-msgstr "_Heb Lun"
-
-#: capplets/background/background-properties-capplet.c:559
-#: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:723
-#: capplets/keyboard/gnome-keyboard-properties.c:224
-#: capplets/mouse/gnome-mouse-properties.c:812
-#: capplets/sound/sound-properties-capplet.c:212
-msgid "Retrieve and store legacy settings"
-msgstr "Nol a chadw'r hen osodiadau"
-
-#: capplets/background/background-properties-capplet.c:585
-#: capplets/background/background-properties.glade.h:2
-msgid "Background Preferences"
-msgstr "Hoffterau Cefndir"
-
-#: capplets/background/background-properties.glade.h:1
-msgid "Bac_kground style:"
-msgstr "_Arddull y cefndir:"
-
-#: capplets/background/background-properties.glade.h:3
-msgid "E-Mail"
-msgstr "Ebost"
-
-#: capplets/background/background-properties.glade.h:4
-msgid "Horizontal gradient"
-msgstr "Graddfa ar led"
-
-#: capplets/background/background-properties.glade.h:5
-msgid "Pick a color"
-msgstr "Dewisiwch liw"
-
-#: capplets/background/background-properties.glade.h:6
-msgid "Picture _options:"
-msgstr "_Opsiynnau llun:"
-
-#: capplets/background/background-properties.glade.h:7
-msgid "Primary Color"
-msgstr "Prif Liw"
-
-#: capplets/background/background-properties.glade.h:8
-msgid "Secondary Color"
-msgstr "Ail Liw"
-
-#: capplets/background/background-properties.glade.h:9
-msgid "Select _picture:"
-msgstr "Dewisiwch _lun:"
-
-#: capplets/background/background-properties.glade.h:10
-msgid "Solid color"
-msgstr "Lliw unffurf"
-
-#: capplets/background/background-properties.glade.h:11
-msgid "To set the background picture, drop an image or click to browse."
-msgstr "I osod llun y cefndir, gollyngwch ddelwedd yma, neu cliciwch i bori."
-
-#: capplets/background/background-properties.glade.h:12
-msgid "Vertical gradient"
-msgstr "Graddfa fertigol"
-
-#: capplets/background/background-properties.glade.h:13
-msgid "You can drag image files into the window to set the background picture."
-msgstr ""
-"Gallwch lusgo ffeiliau delwedd i mewn i'r ffenestr er mwyn gosod llun y "
-"cefndir."
-
 #: capplets/background/background.desktop.in.h:1
 #, fuzzy
 msgid "Change your Desktop Background settings"
@@ -476,8 +373,8 @@ msgid "Desktop Background Preferences"
 msgstr "Hoffterau Cefndir"
 
 #: capplets/background/gnome-background-properties.glade.h:4
-msgid "Zgjidh një ngjyrë"
-msgstr ""
+msgid "Pick a color"
+msgstr "Dewisiwch liw"
 
 #: capplets/background/gnome-background-properties.glade.h:5
 msgid "_Add Wallpaper"
@@ -490,50 +387,52 @@ msgstr "Arddull:"
 
 #: capplets/background/gnome-wp-capplet.c:72
 #: capplets/common/capplet-util.c:340
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:326
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Gwall wrth ddangos cymorth:%s"
 
-#: capplets/background/gnome-wp-capplet.c:171
-msgid "Add Wallpapers"
-msgstr ""
-
-#: capplets/background/gnome-wp-capplet.c:1265
+#: capplets/background/gnome-wp-capplet.c:1284
 #, fuzzy
 msgid "Centered"
 msgstr "C_anoli"
 
-#: capplets/background/gnome-wp-capplet.c:1287
+#: capplets/background/gnome-wp-capplet.c:1306
 #, fuzzy
 msgid "Fill Screen"
 msgstr "Sgrîn"
 
-#: capplets/background/gnome-wp-capplet.c:1307
+#: capplets/background/gnome-wp-capplet.c:1326
 #, fuzzy
 msgid "Scaled"
 msgstr "G_raddio"
 
-#: capplets/background/gnome-wp-capplet.c:1327
+#: capplets/background/gnome-wp-capplet.c:1346
 #, fuzzy
 msgid "Tiled"
 msgstr "_Teilio"
 
-#: capplets/background/gnome-wp-capplet.c:1359
+#: capplets/background/gnome-wp-capplet.c:1378
 #, fuzzy
 msgid "Solid Color"
 msgstr "Lliw unffurf"
 
-#: capplets/background/gnome-wp-capplet.c:1375
+#: capplets/background/gnome-wp-capplet.c:1394
 #, fuzzy
 msgid "Horizontal Gradient"
 msgstr "Graddfa ar led"
 
-#: capplets/background/gnome-wp-capplet.c:1391
+#: capplets/background/gnome-wp-capplet.c:1410
 #, fuzzy
 msgid "Vertical Gradient"
 msgstr "Graddfa fertigol"
 
-#: capplets/background/gnome-wp-info.c:46
+#: capplets/background/gnome-wp-capplet.c:1447
+#: capplets/background/gnome-wp-capplet.c:1458
+msgid "Add Wallpapers"
+msgstr ""
+
+#: capplets/background/gnome-wp-info.c:49
 msgid "No Wallpaper"
 msgstr ""
 
@@ -559,6 +458,14 @@ msgstr "Methu llwytho'r eicon stoc capplet '%s'\n"
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "Cymhwyso'r gosodiadau a terfynu"
+
+#: capplets/common/capplet-util.c:243
+#: capplets/default-applications/gnome-default-applications-properties.c:723
+#: capplets/keyboard/gnome-keyboard-properties.c:224
+#: capplets/mouse/gnome-mouse-properties.c:812
+#: capplets/sound/sound-properties-capplet.c:212
+msgid "Retrieve and store legacy settings"
+msgstr "Nol a chadw'r hen osodiadau"
 
 #: capplets/common/file-transfer-dialog.c:95
 #, c-format
@@ -630,77 +537,77 @@ msgstr "Cysylltu..."
 msgid "Downloading..."
 msgstr "Lawrlwytho..."
 
-#: capplets/common/gconf-property-editor.c:172
+#: capplets/common/gconf-property-editor.c:170
 msgid "Key"
 msgstr "Allwedd"
 
-#: capplets/common/gconf-property-editor.c:173
+#: capplets/common/gconf-property-editor.c:171
 msgid "GConf key to which this property editor is attached"
 msgstr "Allwedd GConf sy'n cyfateb i'r golygydd priodwedd yma"
 
-#: capplets/common/gconf-property-editor.c:179
+#: capplets/common/gconf-property-editor.c:177
 msgid "Callback"
 msgstr "Adalwad"
 
-#: capplets/common/gconf-property-editor.c:180
+#: capplets/common/gconf-property-editor.c:178
 msgid "Issue this callback when the value associated with key gets changed"
 msgstr "Galw'r adalwad yma pan newidir gwerth cysylltiedig yr allwedd"
 
-#: capplets/common/gconf-property-editor.c:185
+#: capplets/common/gconf-property-editor.c:183
 msgid "Change set"
 msgstr "Newid set"
 
-#: capplets/common/gconf-property-editor.c:186
+#: capplets/common/gconf-property-editor.c:184
 msgid ""
 "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
 "Set newid GConf yn cynnwys data i'w anfon ymlaen i'r cleient gconf wrth "
 "gymhwyso"
 
-#: capplets/common/gconf-property-editor.c:191
+#: capplets/common/gconf-property-editor.c:189
 msgid "Conversion to widget callback"
 msgstr "Trosi i adalwad celfigyn"
 
-#: capplets/common/gconf-property-editor.c:192
+#: capplets/common/gconf-property-editor.c:190
 msgid ""
 "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr "Yr adalwad i'w alw pan fo data i'w trosi o GConf i'r teclyn"
 
-#: capplets/common/gconf-property-editor.c:197
+#: capplets/common/gconf-property-editor.c:195
 msgid "Conversion from widget callback"
 msgstr "Trosi o adalwad teclyn"
 
-#: capplets/common/gconf-property-editor.c:198
+#: capplets/common/gconf-property-editor.c:196
 msgid ""
 "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr "Adalwad i alw pan fo data i'w trosi i GConf o'r teclyn"
 
-#: capplets/common/gconf-property-editor.c:203
+#: capplets/common/gconf-property-editor.c:201
 msgid "UI Control"
 msgstr "Rheolydd RhD (UI)"
 
-#: capplets/common/gconf-property-editor.c:204
+#: capplets/common/gconf-property-editor.c:202
 msgid "Object that controls the property (normally a widget)"
 msgstr "Gwrthrych sy'n rheoli'r briodwedd (celfigyn gan amlaf)"
 
-#: capplets/common/gconf-property-editor.c:219
+#: capplets/common/gconf-property-editor.c:217
 msgid "Property editor object data"
 msgstr "Data gwrthrychol golygydd priodweddau"
 
-#: capplets/common/gconf-property-editor.c:220
+#: capplets/common/gconf-property-editor.c:218
 msgid "Custom data required by the specific property editor"
 msgstr "Data addasol sy'n angenrhaid gan y golygydd priodweddau penodol"
 
-#: capplets/common/gconf-property-editor.c:226
+#: capplets/common/gconf-property-editor.c:224
 msgid "Property editor data freeing callback"
 msgstr "Adalwad rhyddhau data golygydd priodweddau"
 
-#: capplets/common/gconf-property-editor.c:227
+#: capplets/common/gconf-property-editor.c:225
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr ""
 "Adalwad i'w alw pan fo data gwrthrychol golygydd priodweddau i'w rhyddhau"
 
-#: capplets/common/gconf-property-editor.c:1541
+#: capplets/common/gconf-property-editor.c:1538
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -713,7 +620,7 @@ msgstr ""
 "Gwiriwch ei bod yn bodoli a ceisiwch eto, neu dewiswch llun cefndir arall os "
 "gwelwch yn dda."
 
-#: capplets/common/gconf-property-editor.c:1549
+#: capplets/common/gconf-property-editor.c:1546
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -726,9 +633,14 @@ msgstr ""
 "\n"
 "Dewiswch lun gwahanol yn ei le, os gwelwch yn dda."
 
-#: capplets/common/gconf-property-editor.c:1640
+#: capplets/common/gconf-property-editor.c:1665
 msgid "Please select an image."
 msgstr "Dewisiwch ddelwedd."
+
+#: capplets/common/gconf-property-editor.c:1670
+#, fuzzy
+msgid "_Select"
+msgstr "_gwrthodwyd"
 
 #: capplets/default-applications/default-applications.desktop.in.h:1
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:18
@@ -1101,42 +1013,42 @@ msgstr "Newid cydraniad y sgrîn"
 msgid "Screen Resolution"
 msgstr "Cydraniad y Sgrîn"
 
-#: capplets/display/main.c:274
+#: capplets/display/main.c:279
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: capplets/display/main.c:377
+#: capplets/display/main.c:382
 msgid "_Resolution:"
 msgstr "_Cydraniad:"
 
-#: capplets/display/main.c:396
+#: capplets/display/main.c:401
 msgid "Re_fresh rate:"
 msgstr "Cyfradd _adnewyddu:"
 
-#: capplets/display/main.c:417
+#: capplets/display/main.c:422
 msgid "Default Settings"
 msgstr "Gosodiadau Rhagosodedig"
 
-#: capplets/display/main.c:419
+#: capplets/display/main.c:424
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "Gosodiadau Sgrîn %d\n"
 
-#: capplets/display/main.c:444
+#: capplets/display/main.c:450
 msgid "Screen Resolution Preferences"
 msgstr "Hoffterau Cydraniad y Sgrîn"
 
-#: capplets/display/main.c:476
+#: capplets/display/main.c:487
 #, fuzzy, c-format
 msgid "_Make default for this computer (%s) only"
 msgstr "Gwneud yn rhagosodiad ar gyfer y _cyfririfadur hwn (%s) yn unig"
 
-#: capplets/display/main.c:494
+#: capplets/display/main.c:505
 msgid "Options"
 msgstr "Opsiynnau"
 
-#: capplets/display/main.c:515
+#: capplets/display/main.c:526
 #, fuzzy, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
@@ -1151,19 +1063,19 @@ msgstr[1] ""
 "Profi'r gosodiadau newydd. Os nad ycyh chi'n ymateb o fewn %d eiliad caiff y "
 "gosodiadau blaenorol eu adfer."
 
-#: capplets/display/main.c:564
+#: capplets/display/main.c:575
 msgid "Do you want to keep this resolution?"
 msgstr "A hoffech gadw'r cyfranniad yma?"
 
-#: capplets/display/main.c:589
+#: capplets/display/main.c:600
 msgid "Use _previous resolution"
 msgstr "Defnyddio'r cydraniad _blaenorol"
 
-#: capplets/display/main.c:589
+#: capplets/display/main.c:600
 msgid "_Keep resolution"
 msgstr "_Cadw'r cydraniad"
 
-#: capplets/display/main.c:740
+#: capplets/display/main.c:749
 msgid ""
 "The XServer does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
@@ -1171,7 +1083,7 @@ msgstr ""
 "Nid yw'r gweinydd X yn cynnal yr estyniad XRandR. Nid yw'n bosib newid y "
 "cydraniad tra mae'r gweinydd X yn rhedeg."
 
-#: capplets/display/main.c:748
+#: capplets/display/main.c:757
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
@@ -1179,12 +1091,16 @@ msgstr ""
 "Mae fersiwn yr estyniad XRandR yn anghytunol gyda'r rhaglen hwn. Nid yw'n "
 "bosib newid y cydrandiad tra mae'r gweinydd X yn rhedef."
 
-#: capplets/file-types/file-types-capplet.c:196
+#: capplets/file-types/file-types-capplet.c:158
+msgid "Are you sure you want to permanently delete this entry?"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet.c:210
 #: vfs-methods/themus/themus-properties-view.c:163
 msgid "Description"
 msgstr "Disgrifiad"
 
-#: capplets/file-types/file-types-capplet.c:218
+#: capplets/file-types/file-types-capplet.c:232
 msgid "Extensions"
 msgstr "Estyniadau"
 
@@ -1691,7 +1607,7 @@ msgstr "Y math o gyflymydd."
 
 #: capplets/keybindings/eggcellrendererkeys.c:240
 #: capplets/keybindings/gnome-keybinding-properties.c:235
-#: libbackground/applier.c:588 typing-break/drwright.c:464
+#: libbackground/applier.c:588 typing-break/drwright.c:473
 msgid "Disabled"
 msgstr "Analluogwyd"
 
@@ -1720,7 +1636,7 @@ msgstr "Penbwrdd"
 msgid "Window Management"
 msgstr "Rheoli Ffenestri"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:737
+#: capplets/keybindings/gnome-keybinding-properties.c:736
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1729,17 +1645,17 @@ msgstr ""
 "Defnyddir y byrlwybr \"%s\" eisioes ar gyfer:\n"
 " \"%s\"\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:768
+#: capplets/keybindings/gnome-keybinding-properties.c:766
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Gwall tra'n gosod cyflymydd newydd yn y cronfa cyfluniad: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:818
+#: capplets/keybindings/gnome-keybinding-properties.c:812
 #, fuzzy, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "Gwall tra'n gosod cyflymydd newydd yn y cronfa cyfluniad: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:967
+#: capplets/keybindings/gnome-keybinding-properties.c:960
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1747,11 +1663,11 @@ msgstr ""
 "Methu canfod unrhyw themau bysellfwrdd. Golyga hyn fod eich gosodiad GTK+ "
 "wedi ei osod yn anghyflawn."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:989
+#: capplets/keybindings/gnome-keybinding-properties.c:982
 msgid "Action"
 msgstr "Gweithred"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:1013
+#: capplets/keybindings/gnome-keybinding-properties.c:1006
 msgid "Shortcut"
 msgstr "Byrlwybr"
 
@@ -2276,7 +2192,7 @@ msgid "Two"
 msgstr "Dau"
 
 #: capplets/theme-switcher/gnome-theme-details.c:372
-#: capplets/theme-switcher/gnome-theme-manager.c:609
+#: capplets/theme-switcher/gnome-theme-manager.c:600
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -2301,23 +2217,17 @@ msgid ""
 "selected as the source location"
 msgstr ""
 
-#: capplets/theme-switcher/gnome-theme-manager.c:301
-msgid ""
-"The gnome-theme-manager does not know how to change the themes on the "
-"current window manager."
-msgstr ""
-
-#: capplets/theme-switcher/gnome-theme-manager.c:665
-#: capplets/theme-switcher/gnome-theme-manager.c:725
+#: capplets/theme-switcher/gnome-theme-manager.c:656
+#: capplets/theme-switcher/gnome-theme-manager.c:716
 msgid "Custom theme"
 msgstr "Thema Addasiedig"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:665
-#: capplets/theme-switcher/gnome-theme-manager.c:725
+#: capplets/theme-switcher/gnome-theme-manager.c:656
+#: capplets/theme-switcher/gnome-theme-manager.c:716
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "Gallwch gadw'r thema yma drwy glicio'r botwm Cadw Thema."
 
-#: capplets/theme-switcher/gnome-theme-manager.c:1418
+#: capplets/theme-switcher/gnome-theme-manager.c:1409
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -2682,52 +2592,51 @@ msgstr "Defnyddio plisgyn, er rheda nautilus"
 msgid "Could not initialize Bonobo"
 msgstr "Methu ymgychwyn Bonobo"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:325
-#, fuzzy
-msgid "There was an error displaying help:"
-msgstr "Gwall wrth ddangos cymorth:%s"
-
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
 msgid "Slow Keys Alert"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
 msgid ""
 "You just held down the Shift key for 8 seconds.  This is the shortcut for "
 "the Slow Keys feature, which affects the way your keyboard works."
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
 #, fuzzy
 msgid "Do you want to activate Slow Keys?"
 msgstr "A hoffech gadw'r cyfranniad yma?"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:414
 #, fuzzy
-msgid "Do you want to deactivate Sticky Keys?"
+msgid "Do you want to deactivate Slow Keys?"
 msgstr "A hoffech gadw'r cyfranniad yma?"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:424
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:425
 msgid "Sticky Keys Alert"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:425
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
 msgid ""
 "You just pressed the Shift key 5 times in a row.  This is the shortcut for "
 "the Sticky Keys feature, which affects the way your keyboard works."
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
 msgid ""
 "You just pressed two keys at once, or pressed the Shift key 5 times in a "
 "row.  This turns off the Sticky Keys feature, which affects the way your "
 "keyboard works."
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
 #, fuzzy
 msgid "Do you want to activate Sticky Keys?"
+msgstr "A hoffech gadw'r cyfranniad yma?"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:429
+#, fuzzy
+msgid "Do you want to deactivate Sticky Keys?"
 msgstr "A hoffech gadw'r cyfranniad yma?"
 
 #: gnome-settings-daemon/gnome-settings-font.c:102
@@ -2778,7 +2687,7 @@ msgstr ""
 "Gwall tra'n ceisio gweithredu (%s)\n"
 "sy'n rhwym i'r bysell (%s)"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:61
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:65
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2793,12 +2702,20 @@ msgid ""
 "- The result of <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b>"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:71
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:75
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
 "Try using simpler configuration or taking more fresh version of XFree "
 "software."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:151
+#, c-format
+msgid ""
+"You have a keyboard remapping file (%s) in your home directory whose "
+"contents will now be ignored. You can use the keyboard preferences to "
+"restore them."
 msgstr ""
 
 #: gnome-settings-daemon/gnome-settings-screensaver.c:92
@@ -2875,14 +2792,6 @@ msgstr "Sgrîn"
 msgid "Screen on which BGApplier is to draw"
 msgstr "Sgrîn y dylai BGApplier ddarlunio arno"
 
-#: libbackground/preview-file-selection.c:207
-msgid "Can't find an hbox, using a normal file selection"
-msgstr "Methwyd canfod hbox, yn defnyddio dewisiad ffeil arferol"
-
-#: libbackground/preview-file-selection.c:212
-msgid "Preview"
-msgstr "Rhagolwg"
-
 #: libsounds/sound-view.c:121 libsounds/sound-view.c:146
 msgid "The sound file for this event does not exist."
 msgstr "Nid yw'r ffeil sain i'r digwyddiad yma'n bodoli."
@@ -2922,7 +2831,7 @@ msgstr "_Ffeil sain:"
 msgid "Select Sound File"
 msgstr "Dewiswch Ffeil Sain"
 
-#: libsounds/sound-view.c:323
+#: libsounds/sound-view.c:324
 msgid "_Play"
 msgstr "_Chwarae"
 
@@ -3044,40 +2953,40 @@ msgstr "Opsiynnau"
 msgid "XKB settings in gconf will be overridden from the system ASAP"
 msgstr ""
 
-#: typing-break/drw-break-window.c:189
+#: typing-break/drw-break-window.c:191
 #, fuzzy
 msgid "_Postpone break"
 msgstr "Gohirio'r saib"
 
-#: typing-break/drw-break-window.c:227
+#: typing-break/drw-break-window.c:239
 msgid "Take a break!"
 msgstr "Cymerwch saib!"
 
 #. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
-#: typing-break/drwright.c:135
+#: typing-break/drwright.c:136
 msgid "/_Preferences"
 msgstr "/_Hoffterau"
 
-#: typing-break/drwright.c:136
+#: typing-break/drwright.c:137
 msgid "/_About"
 msgstr "/_Ynghylch"
 
-#: typing-break/drwright.c:138
+#: typing-break/drwright.c:139
 msgid "/_Take a Break"
 msgstr "/_Cymryd Saib"
 
-#: typing-break/drwright.c:482
+#: typing-break/drwright.c:491
 #, fuzzy, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
 msgstr[0] "%d munud tan y saib nesaf"
 msgstr[1] "%d munud tan y saib nesaf"
 
-#: typing-break/drwright.c:486
+#: typing-break/drwright.c:495
 msgid "Less than one minute until the next break"
 msgstr "Llai nag un munud tan y saib nesaf"
 
-#: typing-break/drwright.c:581
+#: typing-break/drwright.c:590
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
@@ -3085,31 +2994,31 @@ msgid ""
 msgstr ""
 "Methwyd codi'r deialog hoffterau gorffwys teipio gyda'r gwall canlynol: %s "
 
-#: typing-break/drwright.c:621
+#: typing-break/drwright.c:638
 msgid "About GNOME Typing Monitor"
 msgstr "Ynghylch Monitr Teipio GNOME"
 
-#: typing-break/drwright.c:645
+#: typing-break/drwright.c:662
 msgid "A computer break reminder."
 msgstr "Atgoffäwr seibiau cyfrifiadur."
 
-#: typing-break/drwright.c:646
+#: typing-break/drwright.c:663
 msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
 msgstr "Ysgrifennwyd gan Richard Hult &lt;richard@imendio.com&gt;"
 
-#: typing-break/drwright.c:647
+#: typing-break/drwright.c:664
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Ychwanegwyd melysion gweledol gan Anders Carlsson"
 
-#: typing-break/drwright.c:820
+#: typing-break/drwright.c:839
 msgid "Break reminder"
 msgstr "Atgoffäwr seibiau"
 
-#: typing-break/main.c:94
+#: typing-break/main.c:93
 msgid "The typing monitor is already running."
 msgstr "Mae'r arsylwr teipio wedi ei weithredu eisioes."
 
-#: typing-break/main.c:107
+#: typing-break/main.c:106
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
@@ -3549,6 +3458,86 @@ msgstr "_Lefel Sain:"
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
 msgid "Volume up's shortcut."
 msgstr ""
+
+#~ msgid "Co_lor:"
+#~ msgstr "_Lliw:"
+
+#~ msgid "_Left color:"
+#~ msgstr "Lliw _chwith:"
+
+#~ msgid "_Right color:"
+#~ msgstr "Lliw _de:"
+
+#~ msgid "Top co_lor:"
+#~ msgstr "Lliw _pen:"
+
+#~ msgid "_Bottom color:"
+#~ msgstr "Lliw _gwaelod:"
+
+#~ msgid "_Tile"
+#~ msgstr "_Teilio"
+
+#~ msgid "C_enter"
+#~ msgstr "C_anoli"
+
+#~ msgid "Sc_ale"
+#~ msgstr "G_raddio"
+
+#~ msgid "_Stretch"
+#~ msgstr "_Ymestyn"
+
+#~ msgid "_No Picture"
+#~ msgstr "_Heb Lun"
+
+#~ msgid "Background Preferences"
+#~ msgstr "Hoffterau Cefndir"
+
+#~ msgid "Bac_kground style:"
+#~ msgstr "_Arddull y cefndir:"
+
+#~ msgid "E-Mail"
+#~ msgstr "Ebost"
+
+#~ msgid "Horizontal gradient"
+#~ msgstr "Graddfa ar led"
+
+#~ msgid "Picture _options:"
+#~ msgstr "_Opsiynnau llun:"
+
+#~ msgid "Primary Color"
+#~ msgstr "Prif Liw"
+
+#~ msgid "Secondary Color"
+#~ msgstr "Ail Liw"
+
+#~ msgid "Select _picture:"
+#~ msgstr "Dewisiwch _lun:"
+
+#~ msgid "Solid color"
+#~ msgstr "Lliw unffurf"
+
+#~ msgid "To set the background picture, drop an image or click to browse."
+#~ msgstr ""
+#~ "I osod llun y cefndir, gollyngwch ddelwedd yma, neu cliciwch i bori."
+
+#~ msgid "Vertical gradient"
+#~ msgstr "Graddfa fertigol"
+
+#~ msgid ""
+#~ "You can drag image files into the window to set the background picture."
+#~ msgstr ""
+#~ "Gallwch lusgo ffeiliau delwedd i mewn i'r ffenestr er mwyn gosod llun y "
+#~ "cefndir."
+
+#, fuzzy
+#~ msgid "There was an error displaying help:"
+#~ msgstr "Gwall wrth ddangos cymorth:%s"
+
+#~ msgid "Can't find an hbox, using a normal file selection"
+#~ msgstr "Methwyd canfod hbox, yn defnyddio dewisiad ffeil arferol"
+
+#~ msgid "Preview"
+#~ msgstr "Rhagolwg"
 
 #, fuzzy
 #~ msgid "Desktop Wallpaper Preferences"

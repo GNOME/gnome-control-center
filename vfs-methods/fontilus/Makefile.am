@@ -62,4 +62,5 @@ EXTRA_DIST = \
   fontilus.mime \
   fontilus.applications \
   fontilus.server.in.in \
+  fontilus.schemas	\
   fontilus.schemas.in

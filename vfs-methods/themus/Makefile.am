@@ -88,7 +88,8 @@ EXTRA_DIST = \
   apply-font.glade \
   theme-method.directory.in \
   theme-method.conf \
-  themus.schemas.in \
+  $(schemas_DATA)	\
+  $(schemas_in_files)	\
   Themus_Properties_View.server.in.in \
   themus.applications \
   themus.keys \

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glib HEAD \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-13 09:32-0500\n"
+"POT-Creation-Date: 2004-03-10 17:20-0500\n"
 "PO-Revision-Date: 2004-0-3008 21:46+0000\n"
 "Last-Translator: Alastair McKinstry <mckinstry@debian.org>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -92,13 +92,17 @@ msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr ""
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:337
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:395
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:396
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr ""
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:468
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:433
 msgid "Import Feature Settings File"
+msgstr ""
+
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:437
+msgid "_Import"
 msgstr ""
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
@@ -312,113 +316,6 @@ msgstr "pixels/soicind"
 msgid "seconds"
 msgstr "soicind"
 
-#. solid
-#: capplets/background/background-properties-capplet.c:228
-msgid "Co_lor:"
-msgstr "Dá_th:"
-
-#. horiz
-#: capplets/background/background-properties-capplet.c:232
-msgid "_Left color:"
-msgstr "Dáth ar an C_lé:"
-
-#: capplets/background/background-properties-capplet.c:233
-msgid "_Right color:"
-msgstr "Dáth ar an D_heis:"
-
-#. vert
-#: capplets/background/background-properties-capplet.c:236
-msgid "Top co_lor:"
-msgstr "Dáth a_r Barr:"
-
-#: capplets/background/background-properties-capplet.c:237
-msgid "_Bottom color:"
-msgstr "Dáth ar an _Bún:"
-
-#: capplets/background/background-properties-capplet.c:398
-msgid "_Tile"
-msgstr "_Leac"
-
-#: capplets/background/background-properties-capplet.c:398
-msgid "C_enter"
-msgstr "an Lá_r"
-
-#: capplets/background/background-properties-capplet.c:398
-msgid "Sc_ale"
-msgstr ""
-
-#: capplets/background/background-properties-capplet.c:398
-msgid "_Stretch"
-msgstr "_Tarraingt"
-
-#: capplets/background/background-properties-capplet.c:398
-msgid "_No Picture"
-msgstr "_Níl aon Pictiúr"
-
-#: capplets/background/background-properties-capplet.c:559
-#: capplets/common/capplet-util.c:243
-#: capplets/default-applications/gnome-default-applications-properties.c:723
-#: capplets/keyboard/gnome-keyboard-properties.c:224
-#: capplets/mouse/gnome-mouse-properties.c:812
-#: capplets/sound/sound-properties-capplet.c:212
-msgid "Retrieve and store legacy settings"
-msgstr ""
-
-#: capplets/background/background-properties-capplet.c:585
-#: capplets/background/background-properties.glade.h:2
-msgid "Background Preferences"
-msgstr "Tosaíocht le haighaidh an Cúlra"
-
-#: capplets/background/background-properties.glade.h:1
-msgid "Bac_kground style:"
-msgstr "Stíl an C_úlra:"
-
-#: capplets/background/background-properties.glade.h:3
-msgid "E-Mail"
-msgstr "R-Phoist"
-
-#: capplets/background/background-properties.glade.h:4
-msgid "Horizontal gradient"
-msgstr "Grádán Cothromanach"
-
-#: capplets/background/background-properties.glade.h:5
-msgid "Pick a color"
-msgstr "Pioc Dáth amhain"
-
-#: capplets/background/background-properties.glade.h:6
-msgid "Picture _options:"
-msgstr "R_ogha ag an Pictiúr:"
-
-#: capplets/background/background-properties.glade.h:7
-msgid "Primary Color"
-msgstr "An Dáth Príomhúil"
-
-#: capplets/background/background-properties.glade.h:8
-msgid "Secondary Color"
-msgstr "An Dáth Tánaisteach"
-
-#: capplets/background/background-properties.glade.h:9
-msgid "Select _picture:"
-msgstr "Roghnaigh _pictiúr:"
-
-#: capplets/background/background-properties.glade.h:10
-msgid "Solid color"
-msgstr "Dáth cruanach"
-
-#: capplets/background/background-properties.glade.h:11
-msgid "To set the background picture, drop an image or click to browse."
-msgstr ""
-
-#: capplets/background/background-properties.glade.h:12
-msgid "Vertical gradient"
-msgstr "Grádán Ingearach"
-
-#: capplets/background/background-properties.glade.h:13
-msgid "You can drag image files into the window to set the background picture."
-msgstr ""
-"Tá tú in an comhad íomha a streacháil isteach sa fhuinneog, chun chuir mar "
-"cúlra"
-
 #: capplets/background/background.desktop.in.h:1
 msgid "Change your Desktop Background settings"
 msgstr ""
@@ -440,8 +337,8 @@ msgid "Desktop Background Preferences"
 msgstr "Tosaíocht le haighaidh an Cúlra"
 
 #: capplets/background/gnome-background-properties.glade.h:4
-msgid "Zgjidh një ngjyrë"
-msgstr ""
+msgid "Pick a color"
+msgstr "Pioc Dáth amhain"
 
 #: capplets/background/gnome-background-properties.glade.h:5
 msgid "_Add Wallpaper"
@@ -453,43 +350,45 @@ msgstr "_Stíl:"
 
 #: capplets/background/gnome-wp-capplet.c:72
 #: capplets/common/capplet-util.c:340
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:326
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Bhí earraid ag taispeáin cabhair: %s"
 
-#: capplets/background/gnome-wp-capplet.c:171
-msgid "Add Wallpapers"
-msgstr "Suimigh Paipéir balla"
-
-#: capplets/background/gnome-wp-capplet.c:1265
+#: capplets/background/gnome-wp-capplet.c:1284
 msgid "Centered"
 msgstr "Sa Lár"
 
-#: capplets/background/gnome-wp-capplet.c:1287
+#: capplets/background/gnome-wp-capplet.c:1306
 msgid "Fill Screen"
 msgstr ""
 
-#: capplets/background/gnome-wp-capplet.c:1307
+#: capplets/background/gnome-wp-capplet.c:1326
 msgid "Scaled"
 msgstr ""
 
-#: capplets/background/gnome-wp-capplet.c:1327
+#: capplets/background/gnome-wp-capplet.c:1346
 msgid "Tiled"
 msgstr ""
 
-#: capplets/background/gnome-wp-capplet.c:1359
+#: capplets/background/gnome-wp-capplet.c:1378
 msgid "Solid Color"
 msgstr "Dáth cruanach"
 
-#: capplets/background/gnome-wp-capplet.c:1375
+#: capplets/background/gnome-wp-capplet.c:1394
 msgid "Horizontal Gradient"
 msgstr "Grádán Cothromanach"
 
-#: capplets/background/gnome-wp-capplet.c:1391
+#: capplets/background/gnome-wp-capplet.c:1410
 msgid "Vertical Gradient"
 msgstr "Grádán Ingearach"
 
-#: capplets/background/gnome-wp-info.c:46
+#: capplets/background/gnome-wp-capplet.c:1447
+#: capplets/background/gnome-wp-capplet.c:1458
+msgid "Add Wallpapers"
+msgstr "Suimigh Paipéir balla"
+
+#: capplets/background/gnome-wp-info.c:49
 msgid "No Wallpaper"
 msgstr "Paipiar balla"
 
@@ -509,6 +408,14 @@ msgstr ""
 
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
+msgstr ""
+
+#: capplets/common/capplet-util.c:243
+#: capplets/default-applications/gnome-default-applications-properties.c:723
+#: capplets/keyboard/gnome-keyboard-properties.c:224
+#: capplets/mouse/gnome-mouse-properties.c:812
+#: capplets/sound/sound-properties-capplet.c:212
+msgid "Retrieve and store legacy settings"
 msgstr ""
 
 #: capplets/common/file-transfer-dialog.c:95
@@ -581,74 +488,74 @@ msgstr ""
 msgid "Downloading..."
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:172
+#: capplets/common/gconf-property-editor.c:170
 msgid "Key"
 msgstr "Cnaipe"
 
-#: capplets/common/gconf-property-editor.c:173
+#: capplets/common/gconf-property-editor.c:171
 msgid "GConf key to which this property editor is attached"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:179
+#: capplets/common/gconf-property-editor.c:177
 msgid "Callback"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:180
+#: capplets/common/gconf-property-editor.c:178
 msgid "Issue this callback when the value associated with key gets changed"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:185
+#: capplets/common/gconf-property-editor.c:183
 msgid "Change set"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:186
+#: capplets/common/gconf-property-editor.c:184
 msgid ""
 "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:191
+#: capplets/common/gconf-property-editor.c:189
 msgid "Conversion to widget callback"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:192
+#: capplets/common/gconf-property-editor.c:190
 msgid ""
 "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:197
+#: capplets/common/gconf-property-editor.c:195
 msgid "Conversion from widget callback"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:198
+#: capplets/common/gconf-property-editor.c:196
 msgid ""
 "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:203
+#: capplets/common/gconf-property-editor.c:201
 msgid "UI Control"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:204
+#: capplets/common/gconf-property-editor.c:202
 msgid "Object that controls the property (normally a widget)"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:219
+#: capplets/common/gconf-property-editor.c:217
 msgid "Property editor object data"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:220
+#: capplets/common/gconf-property-editor.c:218
 msgid "Custom data required by the specific property editor"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:226
+#: capplets/common/gconf-property-editor.c:224
 msgid "Property editor data freeing callback"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:227
+#: capplets/common/gconf-property-editor.c:225
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:1541
+#: capplets/common/gconf-property-editor.c:1538
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -657,7 +564,7 @@ msgid ""
 "picture."
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:1549
+#: capplets/common/gconf-property-editor.c:1546
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -666,9 +573,14 @@ msgid ""
 "Please select a different picture instead."
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:1640
+#: capplets/common/gconf-property-editor.c:1665
 msgid "Please select an image."
 msgstr ""
+
+#: capplets/common/gconf-property-editor.c:1670
+#, fuzzy
+msgid "_Select"
+msgstr "Dealaigh"
 
 #: capplets/default-applications/default-applications.desktop.in.h:1
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:18
@@ -1035,42 +947,42 @@ msgstr ""
 msgid "Screen Resolution"
 msgstr ""
 
-#: capplets/display/main.c:274
+#: capplets/display/main.c:279
 #, c-format
 msgid "%d Hz"
 msgstr "%d Hz"
 
-#: capplets/display/main.c:377
+#: capplets/display/main.c:382
 msgid "_Resolution:"
 msgstr ""
 
-#: capplets/display/main.c:396
+#: capplets/display/main.c:401
 msgid "Re_fresh rate:"
 msgstr ""
 
-#: capplets/display/main.c:417
+#: capplets/display/main.c:422
 msgid "Default Settings"
 msgstr "Roghnachais Loicéad"
 
-#: capplets/display/main.c:419
+#: capplets/display/main.c:424
 #, c-format
 msgid "Screen %d Settings\n"
 msgstr "Roghnachais Scáileáin %d\n"
 
-#: capplets/display/main.c:444
+#: capplets/display/main.c:450
 msgid "Screen Resolution Preferences"
 msgstr ""
 
-#: capplets/display/main.c:476
+#: capplets/display/main.c:487
 #, c-format
 msgid "_Make default for this computer (%s) only"
 msgstr ""
 
-#: capplets/display/main.c:494
+#: capplets/display/main.c:505
 msgid "Options"
 msgstr "Roghanna"
 
-#: capplets/display/main.c:515
+#: capplets/display/main.c:526
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
@@ -1081,36 +993,40 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: capplets/display/main.c:564
+#: capplets/display/main.c:575
 msgid "Do you want to keep this resolution?"
 msgstr ""
 
-#: capplets/display/main.c:589
+#: capplets/display/main.c:600
 msgid "Use _previous resolution"
 msgstr ""
 
-#: capplets/display/main.c:589
+#: capplets/display/main.c:600
 msgid "_Keep resolution"
 msgstr ""
 
-#: capplets/display/main.c:740
+#: capplets/display/main.c:749
 msgid ""
 "The XServer does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
 msgstr ""
 
-#: capplets/display/main.c:748
+#: capplets/display/main.c:757
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
 msgstr ""
 
-#: capplets/file-types/file-types-capplet.c:196
+#: capplets/file-types/file-types-capplet.c:158
+msgid "Are you sure you want to permanently delete this entry?"
+msgstr ""
+
+#: capplets/file-types/file-types-capplet.c:210
 #: vfs-methods/themus/themus-properties-view.c:163
 msgid "Description"
 msgstr "Tuarascail"
 
-#: capplets/file-types/file-types-capplet.c:218
+#: capplets/file-types/file-types-capplet.c:232
 msgid "Extensions"
 msgstr ""
 
@@ -1604,7 +1520,7 @@ msgstr ""
 
 #: capplets/keybindings/eggcellrendererkeys.c:240
 #: capplets/keybindings/gnome-keybinding-properties.c:235
-#: libbackground/applier.c:588 typing-break/drwright.c:464
+#: libbackground/applier.c:588 typing-break/drwright.c:473
 msgid "Disabled"
 msgstr "Míchumasach"
 
@@ -1633,34 +1549,34 @@ msgstr "Deasc"
 msgid "Window Management"
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:737
+#: capplets/keybindings/gnome-keybinding-properties.c:736
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
 " \"%s\"\n"
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:768
+#: capplets/keybindings/gnome-keybinding-properties.c:766
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:818
+#: capplets/keybindings/gnome-keybinding-properties.c:812
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:967
+#: capplets/keybindings/gnome-keybinding-properties.c:960
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:989
+#: capplets/keybindings/gnome-keybinding-properties.c:982
 msgid "Action"
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:1013
+#: capplets/keybindings/gnome-keybinding-properties.c:1006
 msgid "Shortcut"
 msgstr ""
 
@@ -2172,7 +2088,7 @@ msgid "Two"
 msgstr "Do"
 
 #: capplets/theme-switcher/gnome-theme-details.c:372
-#: capplets/theme-switcher/gnome-theme-manager.c:609
+#: capplets/theme-switcher/gnome-theme-manager.c:600
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
@@ -2194,23 +2110,17 @@ msgid ""
 "selected as the source location"
 msgstr ""
 
-#: capplets/theme-switcher/gnome-theme-manager.c:301
-msgid ""
-"The gnome-theme-manager does not know how to change the themes on the "
-"current window manager."
-msgstr ""
-
-#: capplets/theme-switcher/gnome-theme-manager.c:665
-#: capplets/theme-switcher/gnome-theme-manager.c:725
+#: capplets/theme-switcher/gnome-theme-manager.c:656
+#: capplets/theme-switcher/gnome-theme-manager.c:716
 msgid "Custom theme"
 msgstr ""
 
-#: capplets/theme-switcher/gnome-theme-manager.c:665
-#: capplets/theme-switcher/gnome-theme-manager.c:725
+#: capplets/theme-switcher/gnome-theme-manager.c:656
+#: capplets/theme-switcher/gnome-theme-manager.c:716
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr ""
 
-#: capplets/theme-switcher/gnome-theme-manager.c:1418
+#: capplets/theme-switcher/gnome-theme-manager.c:1409
 msgid ""
 "The default theme schemas could not be found on your system.  This means "
 "that you probably don't have metacity installed, or that your gconf is "
@@ -2565,48 +2475,47 @@ msgstr ""
 msgid "Could not initialize Bonobo"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:325
-msgid "There was an error displaying help:"
-msgstr "Bhí earraid ag taispeáin cabhair:"
-
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
 msgid "Slow Keys Alert"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
 msgid ""
 "You just held down the Shift key for 8 seconds.  This is the shortcut for "
 "the Slow Keys feature, which affects the way your keyboard works."
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
 msgid "Do you want to activate Slow Keys?"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
-msgid "Do you want to deactivate Sticky Keys?"
-msgstr ""
-
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:424
-msgid "Sticky Keys Alert"
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:414
+msgid "Do you want to deactivate Slow Keys?"
 msgstr ""
 
 #: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:425
+msgid "Sticky Keys Alert"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
 msgid ""
 "You just pressed the Shift key 5 times in a row.  This is the shortcut for "
 "the Sticky Keys feature, which affects the way your keyboard works."
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
 msgid ""
 "You just pressed two keys at once, or pressed the Shift key 5 times in a "
 "row.  This turns off the Sticky Keys feature, which affects the way your "
 "keyboard works."
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
 msgid "Do you want to activate Sticky Keys?"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:429
+msgid "Do you want to deactivate Sticky Keys?"
 msgstr ""
 
 #: gnome-settings-daemon/gnome-settings-font.c:102
@@ -2632,7 +2541,7 @@ msgid "Key Binding (%s) is incomplete\n"
 msgstr ""
 
 #: gnome-settings-daemon/gnome-settings-keybindings.c:209
-#,  c-format
+#, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr ""
 
@@ -2653,7 +2562,7 @@ msgid ""
 "which is linked to the key (%s)"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:61
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:65
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2668,12 +2577,20 @@ msgid ""
 "- The result of <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b>"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:71
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:75
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
 "Try using simpler configuration or taking more fresh version of XFree "
 "software."
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:151
+#, c-format
+msgid ""
+"You have a keyboard remapping file (%s) in your home directory whose "
+"contents will now be ignored. You can use the keyboard preferences to "
+"restore them."
 msgstr ""
 
 #: gnome-settings-daemon/gnome-settings-screensaver.c:92
@@ -2743,14 +2660,6 @@ msgstr "Scáthlán"
 msgid "Screen on which BGApplier is to draw"
 msgstr ""
 
-#: libbackground/preview-file-selection.c:207
-msgid "Can't find an hbox, using a normal file selection"
-msgstr ""
-
-#: libbackground/preview-file-selection.c:212
-msgid "Preview"
-msgstr "Reámhtaispeántas"
-
 #: libsounds/sound-view.c:121 libsounds/sound-view.c:146
 msgid "The sound file for this event does not exist."
 msgstr ""
@@ -2787,7 +2696,7 @@ msgstr "_Comhad Glóir:"
 msgid "Select Sound File"
 msgstr "Roghnaigh Comhad Glóir"
 
-#: libsounds/sound-view.c:323
+#: libsounds/sound-view.c:324
 msgid "_Play"
 msgstr "_Cas"
 
@@ -2893,70 +2802,70 @@ msgstr "Roghnachais XKB"
 msgid "XKB settings in gconf will be overridden from the system ASAP"
 msgstr ""
 
-#: typing-break/drw-break-window.c:189
+#: typing-break/drw-break-window.c:191
 msgid "_Postpone break"
 msgstr ""
 
-#: typing-break/drw-break-window.c:227
+#: typing-break/drw-break-window.c:239
 msgid "Take a break!"
 msgstr "Tóg Sos!"
 
 #. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
-#: typing-break/drwright.c:135
+#: typing-break/drwright.c:136
 msgid "/_Preferences"
 msgstr "/_Roghnachais"
 
-#: typing-break/drwright.c:136
+#: typing-break/drwright.c:137
 msgid "/_About"
 msgstr "/_Faoi"
 
-#: typing-break/drwright.c:138
+#: typing-break/drwright.c:139
 msgid "/_Take a Break"
 msgstr "/_Tóg Sos"
 
-#: typing-break/drwright.c:482
+#: typing-break/drwright.c:491
 #, fuzzy, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
 msgstr[0] "%d nóiméad go dtí an sos eile"
 msgstr[1] "%d nóiméad go dtí an sos eile"
 
-#: typing-break/drwright.c:486
+#: typing-break/drwright.c:495
 msgid "Less than one minute until the next break"
 msgstr "Níos lúide do nóiméad go dtí an sos"
 
-#: typing-break/drwright.c:581
+#: typing-break/drwright.c:590
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
 "error: %s"
 msgstr ""
 
-#: typing-break/drwright.c:621
+#: typing-break/drwright.c:638
 msgid "About GNOME Typing Monitor"
 msgstr ""
 
-#: typing-break/drwright.c:645
+#: typing-break/drwright.c:662
 msgid "A computer break reminder."
 msgstr ""
 
-#: typing-break/drwright.c:646
+#: typing-break/drwright.c:663
 msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
 msgstr ""
 
-#: typing-break/drwright.c:647
+#: typing-break/drwright.c:664
 msgid "Eye candy added by Anders Carlsson"
 msgstr ""
 
-#: typing-break/drwright.c:820
+#: typing-break/drwright.c:839
 msgid "Break reminder"
 msgstr ""
 
-#: typing-break/main.c:94
+#: typing-break/main.c:93
 msgid "The typing monitor is already running."
 msgstr ""
 
-#: typing-break/main.c:107
+#: typing-break/main.c:106
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
@@ -3246,7 +3155,7 @@ msgstr "Fillteán Baile"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
 msgid "Launch Help Browser"
-msgstr "Tosaigh Brabhslaí Cabhair" 
+msgstr "Tosaigh Brabhslaí Cabhair"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
 msgid "Launch Help Browser's shortcut."
@@ -3368,105 +3277,159 @@ msgstr ""
 msgid "Volume up's shortcut."
 msgstr ""
 
-msgid "Desktop Wallpaper"
-msgstr "Paipiar balla"
+#~ msgid "Co_lor:"
+#~ msgstr "Dá_th:"
 
-msgid "Desktop Wallpaper Preferences"
-msgstr "Roghnachais na Paipéir balla"
+#~ msgid "_Left color:"
+#~ msgstr "Dáth ar an C_lé:"
 
-msgid "Language"
-msgstr "Teanga"
+#~ msgid "_Right color:"
+#~ msgstr "Dáth ar an D_heis:"
 
-msgid "$1,234.56"
-msgstr "€1,234.56"
+#~ msgid "Top co_lor:"
+#~ msgstr "Dáth a_r Barr:"
 
-msgid "1/2/03"
-msgstr "2004-02-21"
+#~ msgid "_Bottom color:"
+#~ msgstr "Dáth ar an _Bún:"
 
-msgid "12:34 AM"
-msgstr "12:34 RN"
+#~ msgid "_Tile"
+#~ msgstr "_Leac"
 
-msgid "4:56 PM"
-msgstr "4:45 IN"
+#~ msgid "C_enter"
+#~ msgstr "an Lá_r"
 
-msgid "<b>Dates</b>"
-msgstr "<b>Dátaí</b>"
+#~ msgid "_Stretch"
+#~ msgstr "_Tarraingt"
 
-msgid "<b>Numbers</b>"
-msgstr "<b>Uimhireacha</b>"
+#~ msgid "_No Picture"
+#~ msgstr "_Níl aon Pictiúr"
 
-msgid "Jan 2, 2003"
-msgstr "2 Ean 2004"
+#~ msgid "Background Preferences"
+#~ msgstr "Tosaíocht le haighaidh an Cúlra"
 
-msgid "Thursday, January 2, 2003"
-msgstr "Céadaoin, 2 Éanair, 2004"
+#~ msgid "Bac_kground style:"
+#~ msgstr "Stíl an C_úlra:"
 
-msgid "radiobutton1"
-msgstr "Cnaipe Raidió a 1"
+#~ msgid "E-Mail"
+#~ msgstr "R-Phoist"
 
-msgid "radiobutton2"
-msgstr "Cnaipe Raidió a 2"
+#~ msgid "Horizontal gradient"
+#~ msgstr "Grádán Cothromanach"
 
-msgid "radiobutton3"
-msgstr "Cnaipe Raidió a 2"
+#~ msgid "Picture _options:"
+#~ msgstr "R_ogha ag an Pictiúr:"
 
-msgid "radiobutton4"
-msgstr "Cnaipe Raidió a 2"
+#~ msgid "Primary Color"
+#~ msgstr "An Dáth Príomhúil"
 
-msgid "radiobutton5"
-msgstr "Cnaipe Raidió a 2"
+#~ msgid "Secondary Color"
+#~ msgstr "An Dáth Tánaisteach"
 
-msgid "One minute until the next break"
-msgstr "%d nóiméad go dtí an sos eile"
+#~ msgid "Select _picture:"
+#~ msgstr "Roghnaigh _pictiúr:"
 
-msgid "Select CDE AccessX file"
-msgstr "Pioc comhad AccessX do CDE"
+#~ msgid "Solid color"
+#~ msgstr "Dáth cruanach"
 
-msgid "A preview of the background picture."
-msgstr ""
+#~ msgid "Vertical gradient"
+#~ msgstr "Grádán Ingearach"
 
-msgid "Background Preview"
-msgstr ""
+#~ msgid ""
+#~ "You can drag image files into the window to set the background picture."
+#~ msgstr ""
+#~ "Tá tú in an comhad íomha a streacháil isteach sa fhuinneog, chun chuir "
+#~ "mar cúlra"
 
-msgid "The background picture's file name."
-msgstr ""
+#~ msgid "There was an error displaying help:"
+#~ msgstr "Bhí earraid ag taispeáin cabhair:"
 
-msgid "_Select a Help Browser:"
-msgstr "_Roghnaigh Brabhsálaí Cabhair:"
+#~ msgid "Preview"
+#~ msgstr "Reámhtaispeántas"
 
-msgid "Menus"
-msgstr "Cláranna"
+#~ msgid "Desktop Wallpaper"
+#~ msgstr "Paipiar balla"
+
+#~ msgid "Desktop Wallpaper Preferences"
+#~ msgstr "Roghnachais na Paipéir balla"
+
+#~ msgid "Language"
+#~ msgstr "Teanga"
+
+#~ msgid "$1,234.56"
+#~ msgstr "€1,234.56"
+
+#~ msgid "1/2/03"
+#~ msgstr "2004-02-21"
+
+#~ msgid "12:34 AM"
+#~ msgstr "12:34 RN"
+
+#~ msgid "4:56 PM"
+#~ msgstr "4:45 IN"
+
+#~ msgid "<b>Dates</b>"
+#~ msgstr "<b>Dátaí</b>"
+
+#~ msgid "<b>Numbers</b>"
+#~ msgstr "<b>Uimhireacha</b>"
+
+#~ msgid "Jan 2, 2003"
+#~ msgstr "2 Ean 2004"
+
+#~ msgid "Thursday, January 2, 2003"
+#~ msgstr "Céadaoin, 2 Éanair, 2004"
+
+#~ msgid "radiobutton1"
+#~ msgstr "Cnaipe Raidió a 1"
+
+#~ msgid "radiobutton2"
+#~ msgstr "Cnaipe Raidió a 2"
+
+#~ msgid "radiobutton3"
+#~ msgstr "Cnaipe Raidió a 2"
+
+#~ msgid "radiobutton4"
+#~ msgstr "Cnaipe Raidió a 2"
+
+#~ msgid "radiobutton5"
+#~ msgstr "Cnaipe Raidió a 2"
+
+#~ msgid "One minute until the next break"
+#~ msgstr "%d nóiméad go dtí an sos eile"
+
+#~ msgid "Select CDE AccessX file"
+#~ msgstr "Pioc comhad AccessX do CDE"
+
+#~ msgid "_Select a Help Browser:"
+#~ msgstr "_Roghnaigh Brabhsálaí Cabhair:"
+
+#~ msgid "Menus"
+#~ msgstr "Cláranna"
 
 #, fuzzy
-msgid "Toolbar"
-msgstr "Róghchlaranna & Uirlischláranna"
+#~ msgid "Toolbar"
+#~ msgstr "Róghchlaranna & Uirlischláranna"
 
-msgid "File to play"
-msgstr "Comhad chun casach"
+#~ msgid "File to play"
+#~ msgstr "Comhad chun casach"
 
-msgid "Quit"
-msgstr "Ealu as"
+#~ msgid "Quit"
+#~ msgstr "Ealu as"
 
-msgid "C_ustom:"
-msgstr "_Saincheaptha:"
-
-#, fuzzy
-msgid "Clic_k on keypress"
-msgstr "Cniog ar eochair"
+#~ msgid "C_ustom:"
+#~ msgstr "_Saincheaptha:"
 
 #, fuzzy
-msgid "Repeat Keys"
-msgstr "Moill atriallach"
+#~ msgid "Clic_k on keypress"
+#~ msgstr "Cniog ar eochair"
 
 #, fuzzy
-msgid "_Off"
-msgstr "Tuairim"
+#~ msgid "Repeat Keys"
+#~ msgstr "Moill atriallach"
 
-msgid "loud"
-msgstr "Glóir"
+#, fuzzy
+#~ msgid "_Off"
+#~ msgstr "Tuairim"
 
-msgid "_Location of new theme:"
-msgstr ""
-
-msgid "_Details..."
-msgstr ""
+#~ msgid "loud"
+#~ msgstr "Glóir"
