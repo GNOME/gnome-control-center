@@ -17,7 +17,7 @@ url_properties_LDADD = ../../control-center/libcapplet.la \
 EXTRA_DIST = \
 	url-properties.desktop
 
-sysdir = $(datadir)/Documents/control-center
+sysdir = $(datadir)/control-center/Documents
 sys_DATA = url-properties.desktop
 
 install-data-local:
