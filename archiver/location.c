@@ -519,8 +519,8 @@ location_store (Location *location, gchar *backend_id, FILE *input,
 	int t = 0;
 	GString *doc_str;
 
-	g_return_if_fail (location != NULL);
-	g_return_if_fail (IS_LOCATION (location));
+	g_return_val_if_fail (location != NULL, -2);
+	g_return_val_if_fail (IS_LOCATION (location), -2);
 
 	fflush (input);
 
@@ -889,7 +889,6 @@ location_load_rollback_data (Location *location, struct tm *date,
 ContainmentType
 location_contains (Location *location, gchar *backend_id) 
 {
-	BackendNote *note;
 	BackendList *list;
 
 	g_return_val_if_fail (location != NULL, FALSE);
@@ -903,7 +902,7 @@ location_contains (Location *location, gchar *backend_id)
 		else
 			return CONTAIN_NONE;
 	} else {
-		note = find_note (location, backend_id);
+		const BackendNote *note = find_note (location, backend_id);
 
 		if (note != NULL)
 			return note->type;
@@ -1191,8 +1190,8 @@ location_store_full_snapshot (Location *location)
 	GList *c;
 	BackendNote *note;
 
-	g_return_if_fail (location != NULL);
-	g_return_if_fail (IS_LOCATION (location));
+	g_return_val_if_fail (location != NULL, -1);
+	g_return_val_if_fail (IS_LOCATION (location), -1);
 
 	for (c = location->p->contains_list; c; c = c->next) {
 		note = c->data;
