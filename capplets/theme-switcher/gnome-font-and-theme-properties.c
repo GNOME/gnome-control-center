@@ -169,6 +169,13 @@ theme_key_changed (GConfClient *client,
   read_themes ((GladeXML *)user_data);
 }
 
+
+static void
+theme_changed_func (gpointer data)
+{
+	g_print ("boo\n");
+}
+
 static void
 setup_dialog (GladeXML *dialog)
 {
@@ -198,6 +205,7 @@ setup_dialog (GladeXML *dialog)
   g_signal_connect (G_OBJECT (selection), "changed", (GCallback) theme_selection_changed, NULL);
 
   read_themes (dialog);
+  theme_common_register_theme_change (theme_changed_func, dialog);
 
   peditor = gconf_peditor_new_font (NULL, GTK_FONT_KEY,
 		  		    WID ("application_font"),
