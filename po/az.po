@@ -7,10 +7,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-control-center.HEAD\n"
+"Project-Id-Version: gnome-control-center.HEAD.az\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-27 20:02+0100\n"
-"PO-Revision-Date: 2004-01-14 20:15+0200\n"
+"POT-Creation-Date: 2004-02-01 15:22+0100\n"
+"PO-Revision-Date: 2004-02-01 23:23+0200\n"
 "Last-Translator: Mətin Əmirov <metin@karegen.com>\n"
 "Language-Team: Azerbaijani Turkish <gnome@azitt.com>\n"
 "MIME-Version: 1.0\n"
@@ -269,7 +269,7 @@ msgstr ""
 "əməliyyatını həyata keçirin."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "S_peed:"
 msgstr "_Sür'ət:"
 
@@ -298,7 +298,7 @@ msgid "_Only accept keys held for:"
 msgstr "_Yalnız bu vaxt müddətincə basılı tutulan düymələri qəbul et:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:33
 msgid "_Type to test settings:"
 msgstr "Qurğuları sınama _taxtası:"
 
@@ -381,7 +381,7 @@ msgstr "_Rəsmsiz"
 #: capplets/background/background-properties-capplet.c:559
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:730
-#: capplets/keyboard/gnome-keyboard-properties.c:222
+#: capplets/keyboard/gnome-keyboard-properties.c:224
 #: capplets/mouse/gnome-mouse-properties.c:812
 #: capplets/sound/sound-properties-capplet.c:212
 msgid "Retrieve and store legacy settings"
@@ -443,12 +443,72 @@ msgstr ""
 "bilərsiniz."
 
 #: capplets/background/background.desktop.in.h:1
-msgid "Background"
-msgstr "Arxa Plan"
+msgid "Desktop Wallpaper"
+msgstr "Masa Üstü Divar Kağızı"
 
 #: capplets/background/background.desktop.in.h:2
-msgid "Customize your desktop background"
-msgstr "Masa üstü arxa planınızı xüsusiləşdirin"
+#: capplets/background/gnome-wp-capplet.c:1146
+msgid "Desktop Wallpaper Preferences"
+msgstr "Masa Üstü Divar Kağızı Seçimləri"
+
+#: capplets/background/gnome-wp-capplet.c:72
+#: capplets/common/capplet-util.c:340
+#, c-format
+msgid "There was an error displaying help: %s"
+msgstr "Yardımın göstərilməsi sırasında xəta oldu: %s"
+
+#: capplets/background/gnome-wp-capplet.c:169
+msgid "Add Wallpapers"
+msgstr "Divar Kağızları Əlavə Et"
+
+#: capplets/background/gnome-wp-capplet.c:1188
+msgid "<b>Desktop _Wallpaper</b>"
+msgstr "<b>Masa Üstü _Divar Kağızı</b>"
+
+#: capplets/background/gnome-wp-capplet.c:1273
+msgid "_Style:"
+msgstr "_Tərz:"
+
+#: capplets/background/gnome-wp-capplet.c:1300
+msgid "Centered"
+msgstr "Ortalanmış"
+
+#: capplets/background/gnome-wp-capplet.c:1322
+msgid "Fill Screen"
+msgstr "Ekranı Doldur"
+
+#: capplets/background/gnome-wp-capplet.c:1342
+msgid "Scaled"
+msgstr "Miqyaslandırılmış"
+
+#: capplets/background/gnome-wp-capplet.c:1362
+msgid "Tiled"
+msgstr "Döşənmiş"
+
+#: capplets/background/gnome-wp-capplet.c:1399
+msgid "_Add Wallpaper"
+msgstr "Divar Kağızı Ə_lavə Et"
+
+#. The Wallpaper Background Colors Section
+#: capplets/background/gnome-wp-capplet.c:1430
+msgid "<b>_Desktop Colors</b> "
+msgstr "<b>_Masa Üstü Rəngləri</b> "
+
+#: capplets/background/gnome-wp-capplet.c:1462
+msgid "Solid Color"
+msgstr "Tək Rəng"
+
+#: capplets/background/gnome-wp-capplet.c:1478
+msgid "Horizontal Gradient"
+msgstr "Üfüqi Qradient"
+
+#: capplets/background/gnome-wp-capplet.c:1494
+msgid "Vertical Gradient"
+msgstr "Şaquli Qradient"
+
+#: capplets/background/gnome-wp-info.c:46
+msgid "No Wallpaper"
+msgstr "Divar Kağızı İşlətmə"
 
 #: capplets/common/activate-settings-daemon.c:18
 msgid ""
@@ -460,7 +520,7 @@ msgid ""
 msgstr ""
 "Qurğu idarəçisi 'gnome-settings-daemon' başladıla bilmədi.\n"
 "Gnome qurğu idarəçisi işləməzsə, bə'zi seçimlər fəal olmaya bilər. Buna, "
-"Bonobo'dakı bir problem, ya da Gnome qurğu idarəçisi ilə toqquşan diqər "
+"Bonobodakı bir problem, ya da Gnome qurğu idarəçisi ilə toqquşan diqər "
 "tə'minatlar səbəb ola bilər."
 
 #: capplets/common/capplet-stock-icons.c:94
@@ -471,11 +531,6 @@ msgstr "Kapplet timsalı '%s' yüklənə bilmədi\n"
 #: capplets/common/capplet-util.c:239 capplets/common/capplet-util.c:241
 msgid "Just apply settings and quit"
 msgstr "Təkcə qurğuları əlavə et və çıx"
-
-#: capplets/common/capplet-util.c:340
-#, c-format
-msgid "There was an error displaying help: %s"
-msgstr "Yardımın göstərilməsi sırasında xəta oldu: %s"
 
 #: capplets/common/file-transfer-dialog.c:95
 #, c-format
@@ -1040,9 +1095,15 @@ msgstr "Seçənəklər"
 #: capplets/display/main.c:515
 #, c-format
 msgid ""
+"Testing the new settings. If you don't respond in %d second the previous "
+"settings will be restored."
+msgid_plural ""
 "Testing the new settings. If you don't respond in %d seconds the previous "
 "settings will be restored."
-msgstr ""
+msgstr[0] ""
+"Yeni qurğular sınanır. %d saniyə içində sizdən cavab alınmazsa, "
+"əvvəlki qurğular istifadə ediləcəkdir."
+msgstr[1] ""
 "Yeni qurğular sınanır. Əgər %d saniyə içində sizdən cavab alına bilməzsə "
 "əvvəlki qurğular istifadə ediləcək."
 
@@ -1075,7 +1136,7 @@ msgstr ""
 "dəyişmələri təəssüf ki mövcud deyil."
 
 #: capplets/file-types/file-types-capplet.c:196
-#: vfs-methods/themus/themus-properties-view.c:165
+#: vfs-methods/themus/themus-properties-view.c:163
 msgid "Description"
 msgstr "İzah"
 
@@ -1225,8 +1286,8 @@ msgid "Structure containing information on the MIME category"
 msgstr "MIME kateqoriyası haqqında mə'lumat daxil edən qurğu"
 
 #: capplets/file-types/mime-category-edit-dialog.c:344
-#: capplets/file-types/mime-edit-dialog.c:491
-#: capplets/file-types/mime-edit-dialog.c:596
+#: capplets/file-types/mime-edit-dialog.c:489
+#: capplets/file-types/mime-edit-dialog.c:594
 #: capplets/file-types/service-edit-dialog.c:358
 #: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
@@ -1260,18 +1321,18 @@ msgstr "Bu dialoq MIME növü əlavə etmək üçündürsə true"
 msgid "Add File Type"
 msgstr "Fayl Növünü Əlavə Et"
 
-#: capplets/file-types/mime-edit-dialog.c:434
+#: capplets/file-types/mime-edit-dialog.c:432
 #: capplets/file-types/mime-type-info.c:674
 msgid "Misc"
 msgstr "Müxtə'lif"
 
-#: capplets/file-types/mime-edit-dialog.c:486
-#: capplets/file-types/mime-edit-dialog.c:547
+#: capplets/file-types/mime-edit-dialog.c:484
+#: capplets/file-types/mime-edit-dialog.c:545
 msgid "None"
 msgstr "Yoxdur"
 
-#: capplets/file-types/mime-edit-dialog.c:852
-#: capplets/file-types/mime-edit-dialog.c:866
+#: capplets/file-types/mime-edit-dialog.c:850
+#: capplets/file-types/mime-edit-dialog.c:864
 msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
@@ -1279,15 +1340,15 @@ msgstr ""
 "Xahiş edirik, hökmlü bir MIME növü daxil edin. O class/type formunda "
 "olmalıdır və heç bir boşluq daxil etməməlidir."
 
-#: capplets/file-types/mime-edit-dialog.c:859
+#: capplets/file-types/mime-edit-dialog.c:857
 msgid "A MIME type with that name already exists, overwrite ?."
 msgstr "O ad altında onsuzda bir MIME növü mövcuddur, üstündən yazılsın?"
 
-#: capplets/file-types/mime-edit-dialog.c:931
+#: capplets/file-types/mime-edit-dialog.c:929
 msgid "Category"
 msgstr "Kateqoriya"
 
-#: capplets/file-types/mime-edit-dialog.c:936
+#: capplets/file-types/mime-edit-dialog.c:934
 msgid "Choose a file category"
 msgstr "Bir fayl kateqoriyası seçin"
 
@@ -1528,29 +1589,45 @@ msgstr "_Pəncərə başlığının yazı növü:"
 msgid "dots per inch"
 msgstr "inç başına nöqtə"
 
-#: capplets/font/main.c:506 capplets/font/main.c:511
+#: capplets/font/main.c:506 capplets/font/main.c:513
 msgid "Font may be too large"
 msgstr "Yazı növü çox geniş ola bilər"
 
 #: capplets/font/main.c:507
 #, c-format
 msgid ""
+"The font selected is %d point large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a size "
+"smaller than %d."
+msgid_plural ""
 "The font selected is %d points large, and may make it difficult to "
 "effectively use the computer.  It is recommended that you select a size "
 "smaller than %d."
-msgstr ""
-"Seçilən yazı növü %d nöqtə böyükdür, və kompüteri rahat işlətməyinizə "
-"mane ola bilər. Məsləhət edilir ki %d-dən daha kiçik böyüklüktə yazı növü seçəsiniz."
+msgstr[0] ""
+"Seçilən yazı növü %d nöqtə böyükdür, və kompüteri rahat işlətmənizə mane "
+"ola bilər. Məsləhət edilir ki %d-dən daha kiçik böyüklüktə yazı növü "
+"seçəsiniz."
+msgstr[1] ""
+"Seçilən yazı növü %d nöqtə böyükdür, və kompüteri rahat işlətməyinizə mane "
+"ola bilər. Məsləhət edilir ki %d-dən daha kiçik böyüklüktə yazı növü "
+"seçəsiniz."
 
-#: capplets/font/main.c:512
+#: capplets/font/main.c:514
 #, c-format
 msgid ""
+"The font selected is %d point large, and may make it difficult to "
+"effectively use the computer.  It is recommended that you select a smaller "
+"sized font."
+msgid_plural ""
 "The font selected is %d points large, and may make it difficult to "
 "effectively use the computer.  It is recommended that you select a smaller "
 "sized font."
-msgstr ""
-"Seçilən yazı növü %d nöqtə böyükdür, və kompüteri rahat işlətməyinizə "
-"mane ola bilər. Məsləhət edilir ki daha kiçik böyüklüktə yazı növü seçəsiniz."
+msgstr[0] ""
+"Seçilən yazı növü %d nöqtə böyükdür, və kompüteri rahat işlətmənizə mane "
+"ola bilər. Məsləhət edilir ki daha kiçik böyüklüktə yazı növü seçəsiniz."
+msgstr[1] ""
+"Seçilən yazı növü %d nöqtə böyükdür, və kompüteri rahat işlətməyinizə mane "
+"ola bilər. Məsləhət edilir ki daha kiçik böyüklüktə yazı növü seçəsiniz."
 
 #: capplets/keybindings/eggcellrendererkeys.c:161
 #: capplets/keybindings/eggcellrendererkeys.c:162
@@ -1576,7 +1653,7 @@ msgid "The type of accelerator."
 msgstr "Yüksəldicinin növü."
 
 #: capplets/keybindings/eggcellrendererkeys.c:240
-#: capplets/keybindings/gnome-keybinding-properties.c:207
+#: capplets/keybindings/gnome-keybinding-properties.c:235
 #: libbackground/applier.c:588 typing-break/drwright.c:448
 msgid "Disabled"
 msgstr "Bağlı"
@@ -1590,23 +1667,23 @@ msgstr "Yeni sür'ətləndiricini basın ya da mövcud olanı Backspace-ə bası
 msgid "Type a new accelerator"
 msgstr "Yeni yüksəldici yazın"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:174
+#: capplets/keybindings/gnome-keybinding-properties.c:202
 msgid "GNOME Default"
 msgstr "GNOME Ön Qurğulusu"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:549
+#: capplets/keybindings/gnome-keybinding-properties.c:577
 msgid "<Unknown Action>"
 msgstr "<Namə'lum Gedişat>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:568
+#: capplets/keybindings/gnome-keybinding-properties.c:596
 msgid "Desktop"
 msgstr "Masa Üstü"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:572
+#: capplets/keybindings/gnome-keybinding-properties.c:600
 msgid "Window Management"
 msgstr "Pəncərə İdarəsi"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:709
+#: capplets/keybindings/gnome-keybinding-properties.c:737
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1615,17 +1692,17 @@ msgstr ""
 "\"%s\" qısa yolu hazırda bu gedişat üçün istifadə edilir:\n"
 " \"%s\"\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:740
+#: capplets/keybindings/gnome-keybinding-properties.c:768
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Quğu databeyzində yeni sür'ətləndirici tə'yin etmə xətası: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:790
+#: capplets/keybindings/gnome-keybinding-properties.c:818
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "Quğu databeyzindən sür'ətləndirici silmə xətası: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:939
+#: capplets/keybindings/gnome-keybinding-properties.c:967
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1633,11 +1710,11 @@ msgstr ""
 "Heç bir klaviatura örtüyü tapılmadı. Bu, GTK+ qurulumunuz tam yerinə "
 "gətirilməyib deməkdir."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:961
+#: capplets/keybindings/gnome-keybinding-properties.c:989
 msgid "Action"
 msgstr "Gedişat"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:985
+#: capplets/keybindings/gnome-keybinding-properties.c:1013
 msgid "Shortcut"
 msgstr "Qısa yol"
 
@@ -1667,18 +1744,18 @@ msgstr "Əmrlərə qısa yol düymələri tə'yin edin"
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "başlarkən xəta yarandı: %s"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:199
+#: capplets/keyboard/gnome-keyboard-properties.c:201
 msgid "_Accessibility"
 msgstr "_Yetişmə Qabiliyyəti"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:218
 #: capplets/keyboard/gnome-keyboard-properties.c:220
+#: capplets/keyboard/gnome-keyboard-properties.c:222
 #: capplets/sound/sound-properties-capplet.c:208
 #: capplets/sound/sound-properties-capplet.c:210
 msgid "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "Yalnızca qurğuları tədbiq et və çıx"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:224
+#: capplets/keyboard/gnome-keyboard-properties.c:226
 msgid "Start the page with the typing break settings showing"
 msgstr "Səhifəyə başlarkən yazma fasiləsi qurğularını göstər"
 
@@ -1711,20 +1788,20 @@ msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Yavaş</i></small>"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:10
-msgid "Advanced Layout Options"
-msgstr "Ətraflı Düzülüş Qurğuları"
+msgid "A_vailable layouts:"
+msgstr "_Mövcud düzülüşlər:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+msgid "A_vailable options:"
+msgstr "Mö_vcud seçimlər:"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "All_ow postponing of breaks"
 msgstr "Fasilələrin _gecikdirilməsinə icazə ver"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Check if breaks are allowed to be postponed"
 msgstr "Fasilələrin tə'xirə salma icazələrinin olduğunu yoxlayın"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
-msgid "Core Layout Configuration"
-msgstr "Əsas Düzülüş Qurğuları"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Cursor _blinks in text boxes and fields"
@@ -1751,10 +1828,14 @@ msgid "Keyboard _model:"
 msgstr "Klaviatura _modeli:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:21
-msgid "Layout _options:"
-msgstr "Düzülüş _qurğuları:"
+msgid "Layout Options"
+msgstr "Düzülüş Seçimləri"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+msgid "Layouts"
+msgstr "Düzülüşlər"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
@@ -1763,44 +1844,188 @@ msgstr ""
 "üçün müəyyən bir vaxt sonra ekranı qıfılla"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:24
+msgid "Reset to de_faults"
+msgstr "Ön _qurğulara sıfırla"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
 msgid "Typing Break"
 msgstr "Yazma Fasiləsi"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "_Accessibility..."
 msgstr "_Yetişmə Qabiliyyəti..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
 msgid "_Break interval lasts:"
 msgstr "_Fasilənin sürəkliyi:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
 msgid "_Delay:"
 msgstr "_Gecikmə:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
-msgid "_Ignore system configuration"
-msgstr "_Sistem qurğularını nəzərə alma"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
-msgid "_Layouts:"
-msgstr "_Düzülüşlər:"
-
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:30
+msgid "_Selected layouts:"
+msgstr "_Seçili düzülüşlər:"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
+msgid "_Selected options:"
+msgstr "_Seçili qurğular:"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:32
 msgid "_Speed:"
 msgstr "_Sür'ət:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:32
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:34
 msgid "_Work interval lasts:"
 msgstr "_İşin sürəkliyi:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:33
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:35
 msgid "minutes"
 msgstr "dəqiqə"
 
 #: capplets/keyboard/keyboard.desktop.in.h:2
 msgid "Set your keyboard preferences"
-msgstr "Klaviatura qurğularınızı seçin"
+msgstr "Klaviatura seçimlərinizi seçin"
+
+#: capplets/localization/gnome-localization-properties.c:184
+msgid "Show"
+msgstr "Göstər"
+
+#: capplets/localization/gnome-localization-properties.c:195
+#: capplets/localization/gnome-localization-properties.glade.h:25
+msgid "Language"
+msgstr "Dil"
+
+#: capplets/localization/gnome-localization-properties.glade.h:1
+msgid "$1,234.56"
+msgstr "$1,234.56"
+
+#: capplets/localization/gnome-localization-properties.glade.h:2
+msgid "1/2/03"
+msgstr "1/2/03"
+
+#: capplets/localization/gnome-localization-properties.glade.h:3
+msgid "12:34 AM"
+msgstr "12:34 GƏ"
+
+#: capplets/localization/gnome-localization-properties.glade.h:4
+msgid "4:56 PM"
+msgstr "4:56 GS"
+
+#: capplets/localization/gnome-localization-properties.glade.h:5
+msgid "<b>Dates</b>"
+msgstr "<b>Tarix</b>"
+
+#: capplets/localization/gnome-localization-properties.glade.h:6
+msgid "<b>Languages in use:</b>"
+msgstr "<b>İstifadədəki dillər:</b>"
+
+#: capplets/localization/gnome-localization-properties.glade.h:7
+msgid "<b>Numbers</b>"
+msgstr "<b>Rəqəmlər</b>"
+
+#: capplets/localization/gnome-localization-properties.glade.h:8
+msgid "<b>Times</b>"
+msgstr "<b>Saat</b>"
+
+#: capplets/localization/gnome-localization-properties.glade.h:9
+msgid "Available Languages"
+msgstr "Mövcud Dillər"
+
+#: capplets/localization/gnome-localization-properties.glade.h:10
+msgid "C_hange languages in use..."
+msgstr "İstifadədəki dilləri _dəyişdir..."
+
+#: capplets/localization/gnome-localization-properties.glade.h:11
+msgid ""
+"Changes will not take effect for the\n"
+"desktop's bars and menus before\n"
+"next time you log in. Changes take\n"
+"effect in applications next time you\n"
+"run them."
+msgstr ""
+"Masa üstündəki çubuq və menyularda\n"
+"dəyiçikliklər növbəti girişinizdə fəal\n"
+"olacaqdır. Proqramlardakı dəyişikliklər\n"
+"onları bir sonrakı dəfə başlatdığınızda\n"
+"fəal olacaqdır."
+
+#: capplets/localization/gnome-localization-properties.glade.h:16
+msgid "Customize _dates..."
+msgstr "Tarixi _xüsusiləşdir..."
+
+#: capplets/localization/gnome-localization-properties.glade.h:17
+msgid "Customize _numbers..."
+msgstr "Rəqəmləri _xüsusiləşdir..."
+
+#: capplets/localization/gnome-localization-properties.glade.h:18
+msgid "Customize _times..."
+msgstr "Saadı _xüsusiləşdir..."
+
+#: capplets/localization/gnome-localization-properties.glade.h:19
+msgid ""
+"Drag languages to set the preferred\n"
+"order of use; If there exists a\n"
+"translation in the first language it will\n"
+"be used, otherwise the next will be tried"
+msgstr ""
+"İstədiyiniz sıranı seçmək üçün\n"
+"dilləri tutub daşıyın, əgər birinci dildə\n"
+"tərcümə mövcuddursa o işlədiləcək,\n"
+"əks halda bir sonrakı işlədiləcəkdir"
+
+#: capplets/localization/gnome-localization-properties.glade.h:23
+msgid "Formats"
+msgstr "Formatlar"
+
+#: capplets/localization/gnome-localization-properties.glade.h:24
+msgid "Jan 2, 2003"
+msgstr "Yan 2, 2003"
+
+#: capplets/localization/gnome-localization-properties.glade.h:26
+msgid "Language and Culture Preferences"
+msgstr "Dil və Mədəniyyət Seçimləri"
+
+#: capplets/localization/gnome-localization-properties.glade.h:27
+msgid "Measurement _Units:"
+msgstr "Ölçü _Vahidləri:"
+
+#: capplets/localization/gnome-localization-properties.glade.h:28
+msgid "Select the items that appear in the Languages list:"
+msgstr "Dillər siyahısında göstəriləcək üzvləri seçin:"
+
+#: capplets/localization/gnome-localization-properties.glade.h:29
+msgid "Show _all regions"
+msgstr "_Bütün bölgələri göstər"
+
+#: capplets/localization/gnome-localization-properties.glade.h:30
+msgid "Thursday, January 2, 2003"
+msgstr "Cümə, Yanvar 2, 2003"
+
+#: capplets/localization/gnome-localization-properties.glade.h:31
+msgid ""
+"Your preferred language differs\n"
+"from that of your currently\n"
+"selected date, time, and number\n"
+"formats. You can change your\n"
+"formats in the Formats tab."
+msgstr ""
+"Seçdiyiniz dil, hazırda seçili olan\n"
+"tarix, saat və rəqəm formatlarından\n"
+"fərqlidir. Formatlarınızı Formatlar\n"
+"səkməsindən dəyişdirə bilərsiniz."
+
+#: capplets/localization/gnome-localization-properties.glade.h:36
+msgid "_Region:"
+msgstr "_Bölgə:"
+
+#: capplets/localization/localization.desktop.in.h:1
+msgid "Language and Culture"
+msgstr "Dil və Mədəniyyət"
+
+#: capplets/localization/localization.desktop.in.h:2
+msgid "Set your language and culture preferences"
+msgstr "Dil və mədəniyyət qurğularınızı seçin"
 
 #: capplets/mouse/gnome-mouse-properties.c:496
 msgid "Unknown Cursor"
@@ -1808,16 +2033,16 @@ msgstr "Namə'lum Kursor"
 
 #: capplets/mouse/gnome-mouse-properties.c:613
 msgid "Default Cursor - Current"
-msgstr "Əsas Kursor - Hazırkı"
+msgstr "Ön Qurğulu Kursor - Hazırkı"
 
 #: capplets/mouse/gnome-mouse-properties.c:613
 #: capplets/mouse/gnome-mouse-properties.c:616
 msgid "The default cursor that ships with X"
-msgstr "X ilə birlikdə gələn əsas kursor"
+msgstr "X ilə birlikdə gələn ön qurğulu kursor"
 
 #: capplets/mouse/gnome-mouse-properties.c:616
 msgid "Default Cursor"
-msgstr "Əsas Kursor"
+msgstr "Ön Qurğulu Kursor"
 
 #: capplets/mouse/gnome-mouse-properties.c:634
 msgid "White Cursor - Current"
@@ -1826,11 +2051,11 @@ msgstr "Ağ Kursor - Hazırkı"
 #: capplets/mouse/gnome-mouse-properties.c:634
 #: capplets/mouse/gnome-mouse-properties.c:637
 msgid "The default cursor inverted"
-msgstr "Əsas kursorun çevrilmiş vəziyyəti"
+msgstr "Ön qurğulu kursorun çevrilmiş vəziyyəti"
 
 #: capplets/mouse/gnome-mouse-properties.c:637
 msgid "White Cursor"
-msgstr "Ağ  Kursor"
+msgstr "Ağ Kursor"
 
 #: capplets/mouse/gnome-mouse-properties.c:656
 msgid "Large Cursor - Current"
@@ -1839,7 +2064,7 @@ msgstr "Geniş Kursor - Hazırkı"
 #: capplets/mouse/gnome-mouse-properties.c:656
 #: capplets/mouse/gnome-mouse-properties.c:659
 msgid "Large version of normal cursor"
-msgstr "Əsas kursorun geniş forması"
+msgstr "Ön qurğulu kursorun geniş forması"
 
 #: capplets/mouse/gnome-mouse-properties.c:659
 msgid "Large Cursor"
@@ -1872,11 +2097,11 @@ msgstr "<b>Cüt Tıqlama Gecikməsi </b>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:3
 msgid "<b>Drag and Drop</b>"
-msgstr "<b>Daşı və Burax Əməliyyatı</b>"
+msgstr "<b>Daşı və Burax</b>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:4
 msgid "<b>Locate Pointer</b>"
-msgstr "<b>Oxun Yerini Göstər</b>"
+msgstr "<b>Oxun Yerinin Göstərilməsi</b>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:5
 msgid "<b>Mouse Orientation</b>"
@@ -1891,8 +2116,8 @@ msgid ""
 "<i><small><b>Note:</b> Changes to this setting will not take effect until "
 "you next log in.</small></i>"
 msgstr ""
-"<i><small><b>Qeyd:</b> Bu qurğudakı dəyişikliklər növbəti girişinizdə "
-"fəal olacaqdır.</small></i>"
+"<i><small><b>Qeyd:</b> Bu qurğudakı dəyişikliklər növbəti girişinizdə fəal "
+"olacaqdır.</small></i>"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid "<i>Fast</i>"
@@ -1928,7 +2153,7 @@ msgstr "Kursorlar"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:16
 msgid "Highlight the _pointer when you press Ctrl"
-msgstr "Ctrl düyməsinə basılanda _oxun yerini göstər"
+msgstr "Ctrl düyməsinə basıldığında _oxun yerini göstər"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:17
 msgid "Motion"
@@ -1936,11 +2161,11 @@ msgstr "Hərəkət"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:18
 msgid "Mouse Preferences"
-msgstr "Siçan Qurğuları"
+msgstr "Siçan Seçimləri"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:19
 msgid "_Acceleration:"
-msgstr "_Sürətləndirmə:"
+msgstr "_Sür'ətləndirmə:"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:20
 msgid "_Large"
@@ -1972,7 +2197,7 @@ msgstr "Siçan"
 
 #: capplets/mouse/gnome-settings-mouse.desktop.in.h:2
 msgid "Set your mouse preferences"
-msgstr "Siçanınızın qurğularınızı seçin"
+msgstr "Siçanınızın qurğularını seçin"
 
 #: capplets/network/gnome-network-preferences.desktop.in.h:1
 msgid "Network Proxy"
@@ -2168,8 +2393,8 @@ msgid ""
 "%s is the path where the theme files will be installed. This can not be "
 "selected as the source location"
 msgstr ""
-"%s mövqeyinə örtük faylları qurulacaqdır ona görə də mənbə qovluğu olaraq "
-"bu qovluq seçilə bilməz"
+"%s mövqeyinə örtük faylları qurulacaqdır ona görə də mənbə qovluğu olaraq bu "
+"qovluq seçilə bilməz"
 
 #: capplets/theme-switcher/gnome-theme-manager.c:645
 #: capplets/theme-switcher/gnome-theme-manager.c:705
@@ -2248,56 +2473,64 @@ msgid "Save Theme"
 msgstr "Örtüyü Qeyd Et"
 
 #: capplets/theme-switcher/theme-properties.glade.h:9
+msgid "Select theme for the desktop"
+msgstr "Masa üstü örtüyünü seçin"
+
+#: capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Short _description:"
 msgstr "_Qısa izahat:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:10
+#: capplets/theme-switcher/theme-properties.glade.h:11
 msgid "Theme Details"
 msgstr "Örtük Təfərruatları"
 
-#: capplets/theme-switcher/theme-properties.glade.h:11
-msgid "Theme Preferences"
-msgstr "Örtük Qurğuları"
-
 #: capplets/theme-switcher/theme-properties.glade.h:12
+msgid "Theme Preferences"
+msgstr "Örtük Seçimləri"
+
+#: capplets/theme-switcher/theme-properties.glade.h:13
 msgid "Theme _Details"
 msgstr "Örtük _Təfərruatları"
 
-#: capplets/theme-switcher/theme-properties.glade.h:13
+#: capplets/theme-switcher/theme-properties.glade.h:14
 msgid "This theme does not suggest any particular font or background."
 msgstr "Bu örtüyün məsləhər etdiyi xüsusi bir yazı növü ya da arxa plan yoxdur."
 
-#: capplets/theme-switcher/theme-properties.glade.h:14
+#: capplets/theme-switcher/theme-properties.glade.h:15
 msgid "This theme suggests a background:"
 msgstr "Bu örtük arxa plan məsləhət edir:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:15
+#: capplets/theme-switcher/theme-properties.glade.h:16
 msgid "This theme suggests a font and a background:"
 msgstr "Bu örtük yazı növü və arxa plan məsləhət edir:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:16
+#: capplets/theme-switcher/theme-properties.glade.h:17
 msgid "This theme suggests a font:"
 msgstr "Bu örtük yazı növü məsləhət edir:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:17
+#: capplets/theme-switcher/theme-properties.glade.h:18
 msgid "Window Border"
 msgstr "Pəncərə Kənarı"
 
-#: capplets/theme-switcher/theme-properties.glade.h:18
+#: capplets/theme-switcher/theme-properties.glade.h:19
 msgid "_Go To Theme Folder"
 msgstr "Örtük Qovluğuna _Get"
 
-#: capplets/theme-switcher/theme-properties.glade.h:19
+#: capplets/theme-switcher/theme-properties.glade.h:20
 msgid "_Install Theme..."
 msgstr "Ö_rtük Qur..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:20
+#: capplets/theme-switcher/theme-properties.glade.h:21
 msgid "_Save Theme..."
 msgstr "Örtüyü _Qeyd Et..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:21
+#: capplets/theme-switcher/theme-properties.glade.h:22
 msgid "_Theme name:"
 msgstr "Örtük _adı:"
+
+#: capplets/theme-switcher/theme-properties.glade.h:23
+msgid "theme selection tree"
+msgstr "örtük seçki budağı"
 
 #: capplets/ui-properties/gnome-ui-properties.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
@@ -2305,7 +2538,7 @@ msgstr "Proqramlardakı vasitə və menyu çubuqlarının görünüşünü xüsu
 
 #: capplets/ui-properties/gnome-ui-properties.desktop.in.h:2
 msgid "Menus & Toolbars"
-msgstr "Menyular və Vasitə Çubuqları"
+msgstr "Menyular & Vasitə Çubuqları"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:2
 msgid "<b>Behavior and Appearance</b>"
@@ -2321,11 +2554,11 @@ msgstr "Kə_s"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:5
 msgid "Icons only"
-msgstr "Yalnız timsallar"
+msgstr "Təkcə timsallar"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:6
 msgid "Menu and Toolbar Preferences"
-msgstr "Menyu və Vasitə Çubuğu Qurğuları"
+msgstr "Menyu və Vasitə Çubuğu Seçimləri"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:7
 msgid "New File"
@@ -2353,11 +2586,11 @@ msgstr "Mətn timsalların yanında"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:13
 msgid "Text only"
-msgstr "Yalnız mətn"
+msgstr "Təkcə mətn"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:14
 msgid "Toolbar _button labels: "
-msgstr "Vasitə çubuğu _düymələrinin görünüşü:"
+msgstr "Vasitə çubuğu _düymələrinin görünüşü: "
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:15
 msgid "_Copy"
@@ -2390,7 +2623,7 @@ msgstr "_Yapışdır"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:22
 msgid "_Print"
-msgstr "_Çap Et"
+msgstr "Ç_ap Et"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:23
 msgid "_Quit"
@@ -2413,11 +2646,11 @@ msgstr ""
 
 #: capplets/windows/gnome-window-properties.c:625
 msgid "Control"
-msgstr "Control düyməsi"
+msgstr "Control"
 
 #: capplets/windows/gnome-window-properties.c:630
 msgid "Alt"
-msgstr "Alt düyməsi"
+msgstr "Alt"
 
 #: capplets/windows/gnome-window-properties.c:636
 msgid "Hyper"
@@ -2425,7 +2658,7 @@ msgstr "Hyper"
 
 #: capplets/windows/gnome-window-properties.c:643
 msgid "Super (or \"Windows logo\")"
-msgstr "Windows düyməsi"
+msgstr "Windows"
 
 #: capplets/windows/gnome-window-properties.glade.h:1
 msgid "To _move a window, press-and-hold this key then grab the window:"
@@ -2433,7 +2666,7 @@ msgstr "Pəncərəni _daşımaq üçün bu düyməni basılı tutaraq pəncərə
 
 #: capplets/windows/gnome-window-properties.glade.h:2
 msgid "Window Preferences"
-msgstr "Pəncərə Qurğuları"
+msgstr "Pəncərə Seçimləri"
 
 #: capplets/windows/gnome-window-properties.glade.h:3
 msgid "_Double-click titlebar to perform this action:"
@@ -2441,7 +2674,7 @@ msgstr "_Başlıq çubuğuna cüt tıqlandığında bu gedişatı yerinə gətir
 
 #: capplets/windows/gnome-window-properties.glade.h:4
 msgid "_Interval before raising:"
-msgstr "_Yüksəlmə arasındakı vaxt:"
+msgstr "_Qabağa gətirmədən əvvəlki vaxt:"
 
 #: capplets/windows/gnome-window-properties.glade.h:5
 msgid "_Raise selected windows after an interval"
@@ -2453,7 +2686,7 @@ msgstr "_Siçanın oxu pəncərələrin üstünə gələndə onları seç"
 
 #: capplets/windows/window-properties.desktop.in.h:1
 msgid "Window Properties"
-msgstr "Pəncərə Xüsusiyyətləri"
+msgstr "Pəncərə Xassələri"
 
 #: capplets/windows/window-properties.desktop.in.h:2
 msgid "Windows"
@@ -2531,6 +2764,58 @@ msgstr "Nautilus fəaliyyətdədirsə belə qabığı işlət"
 msgid "Could not initialize Bonobo"
 msgstr "Bonobo başladıla bilmir"
 
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:325
+msgid "There was an error displaying help:"
+msgstr "Yardımın göstərilməsi sırasında xəta oldu:"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
+msgid "Slow Keys Alert"
+msgstr "Yavaş Düymələr Xəbərdarlığı"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+msgid ""
+"You just held down the Shift key for 8 seconds.  This is the shortcut for "
+"the Slow Keys feature, which affects the way your keyboard works."
+msgstr ""
+"Az öncə Shift düyməsinə basıb 8 saniyə saxladınız.  Bu Yavaş Düymələr "
+"xassəsini fəallaşdırar, bu da klaviaturanızın işləmə tərzini dəyişdirər."
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
+msgid "Do you want to activate Slow Keys?"
+msgstr "Yavaş Düymələri fəallaşdırmaq istəyirsiniz?"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
+msgid "Do you want to deactivate Sticky Keys ?"
+msgstr "Yapışqan Düymələri qeyri-fəallaşdırmaq istəyirsiniz?"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:424
+msgid "Sticky Keys Alert"
+msgstr "Yapışqan Düymələr Xəbərdarlığı"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:425
+msgid ""
+"You just pressed the Shift key 5 times in a row.  This is the shortcut for "
+"the Sticky Keys feature, which affects the way your keyboard works."
+msgstr ""
+"Az öncə Shift düyməsinə arxa arxaya 5 dəfə basdınız.  "
+"Bu Yapışqan Düymələr xassəsini fəallaşdırar, bu da klaviaturanızın "
+"işləmə tərzini dəyişdirər."
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
+msgid ""
+"You just pressed two keys at once, or pressed the Shift key 5 times in a "
+"row.  This turns off the Sticky Keys feature, which affects the way your "
+"keyboard works."
+msgstr ""
+"Az öncə iki düyməyə bərabər ya da Shift düyməsinə arxa arxaya 5 dəfə "
+"basdınız.  Bu Yapışqan Düymələr xassəsini fəallaşdırar, bu da klaviaturanızın "
+"işləmə tərzini dəyişdirər."
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
+msgid "Do you want to activate Sticky Keys?"
+msgstr "Yapışqan Düymələri fəallaşdırmaq istəyirsiniz?"
+
 #: gnome-settings-daemon/gnome-settings-font.c:102
 #, c-format
 msgid ""
@@ -2540,37 +2825,37 @@ msgstr ""
 "\"%s\" qovluğu yaradıla bilmir.\n"
 "Bu kursorların dəyişdirilə bilməsi üçün məcburidir."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:165
+#: gnome-settings-daemon/gnome-settings-keybindings.c:162
 #, c-format
 msgid "Key Binding (%s) has its action defined multiple times\n"
 msgstr "(%s) düymə bağının gedişatı birdən çox dəfə tə'yin edilib\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:178
+#: gnome-settings-daemon/gnome-settings-keybindings.c:175
 #, c-format
 msgid "Key Binding (%s) has its binding defined multiple times\n"
 msgstr "(%s) düymə bağının bağı birdən çox dəfə tə'yin edilib\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:184
+#: gnome-settings-daemon/gnome-settings-keybindings.c:181
 #, c-format
 msgid "Key Binding (%s) is incomplete\n"
 msgstr "(%s) düymə bağı tamamlanmayıb\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:212
+#: gnome-settings-daemon/gnome-settings-keybindings.c:209
 #, c-format
 msgid "Key Binding (%s) is invalid\n"
 msgstr "(%s) düymə bağı hökmsüzdür\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:248
+#: gnome-settings-daemon/gnome-settings-keybindings.c:245
 #, c-format
 msgid "It seems that another application already has access to key '%d'."
 msgstr "Görünən odur ki, '%d' düyməsinə başqa bir tə'minat bağ qurub."
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:317
+#: gnome-settings-daemon/gnome-settings-keybindings.c:314
 #, c-format
 msgid "Key Binding (%s) is already in use\n"
 msgstr "(%s) düymə bağı hazırda istifadədədir\n"
 
-#: gnome-settings-daemon/gnome-settings-keybindings.c:393
+#: gnome-settings-daemon/gnome-settings-keybindings.c:390
 #, c-format
 msgid ""
 "Error while trying to run (%s)\n"
@@ -2579,7 +2864,7 @@ msgstr ""
 "(%2$s) düyməsinə bağlı olan\n"
 "(%1$s) icra edilməyə çalışırkən xəta yarandı"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:60
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:61
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2588,17 +2873,24 @@ msgid ""
 "X server version data:\n"
 "%s\n"
 "%d\n"
-"%s"
+"%s\n"
+"If you report this situation as a bug, please include:\n"
+"- The result of <b>xprop -root | grep XKB</b>\n"
+"- The result of <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b>"
 msgstr ""
 "XKB qurğularını fəallaşdırma xətası.\n"
-"Çox güman ki daxili X vericisi xətasıdır.\n"
+"Deyəsən daxili X vericisi problemidir.\n"
 "\n"
-"X vericisi buraxılış mə'lumatı:\n"
+"X vericisi mə'lumatı:\n"
 "%s\n"
 "%d\n"
-"%s"
+"%s\n"
+"Əgər bu vəziyyəti xəta olaraq raport etmək istəsəniz:\n"
+"- <b>xprop -root | grep XKB</b> əmrinin nəticəsini və\n"
+"- <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b>\n"
+"   əmrinin nəticəsini də yollayın."
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:66
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:71
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2730,7 +3022,7 @@ msgstr "Səs _faylı:"
 msgid "Select Sound File"
 msgstr "Səs Faylını Seç"
 
-#: libsounds/sound-view.c:302
+#: libsounds/sound-view.c:307
 msgid "_Play"
 msgstr "_Çal"
 
@@ -2827,20 +3119,26 @@ msgstr ""
 "səbəb ola bilər."
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:1
+msgid ""
+"Very soon, XKB settings in gconf will be overridden (from the system "
+"configuration)"
+msgstr "Çox yaxında, gconf-dakı XKB qurğuları sisteminizdəkilərlə əvəz ediləcəkdir."
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
 msgid "XKB keyboard layout"
 msgstr "XKB klaviatura düzülüşü"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
 msgid "XKB keyboard model"
 msgstr "XKB klaviatura modeli"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
 msgid "XKB options"
 msgstr "XKB seçimləri"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
-msgid "XKB settings should be overridden"
-msgstr "XKB seçimlərinin üstündən yazılmalıdır"
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
+msgid "XKB settings in gconf will be overridden from the system ASAP"
+msgstr "Gconf-dakı XKB qurğuları tezliklə sisteminkilərlə əvəz ediləcəkdir"
 
 #: typing-break/drw-break-window.c:189
 msgid "Postpone break"
@@ -3077,23 +3375,23 @@ msgstr ""
 msgid "_Apply font"
 msgstr "Yazı növünü _Tətbiq Et"
 
-#: vfs-methods/themus/theme-method.c:514
+#: vfs-methods/themus/theme-method.c:519
 msgid "Themes"
 msgstr "Örtüklər"
 
-#: vfs-methods/themus/themus-properties-view.c:170
+#: vfs-methods/themus/themus-properties-view.c:168
 msgid "Control theme"
 msgstr "Sınama örtüyü"
 
-#: vfs-methods/themus/themus-properties-view.c:174
+#: vfs-methods/themus/themus-properties-view.c:172
 msgid "Window border theme"
 msgstr "Pəncərə kənarı örtüyü"
 
-#: vfs-methods/themus/themus-properties-view.c:178
+#: vfs-methods/themus/themus-properties-view.c:176
 msgid "Icon theme"
 msgstr "Timsal örtüyü"
 
-#: vfs-methods/themus/themus-properties-view.c:217
+#: vfs-methods/themus/themus-properties-view.c:215
 msgid "URI currently displayed"
 msgstr "Hazırda göstərilən URI"
 
@@ -3135,4 +3433,198 @@ msgstr "Quraşdırılmış örtüklərin nümaişlərinin göstərilməsi"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Örtüklərin nümaişlərinin göstərilməsi"
+
+#: gnome-settings-daemon/actions/acme.glade.h:1
+msgid "Volume"
+msgstr "Səs"
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:113
+#, c-format
+msgid ""
+"Couldn't execute command: %s\n"
+"Verify that this command exists."
+msgstr ""
+"Əmr icra edilə bilmədi: %s\n"
+"Bu əmrin mövcud olduğunu yoxlayın."
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:129
+msgid ""
+"Couldn't put the machine to sleep.\n"
+"Verify that the machine is correctly configured."
+msgstr ""
+"Sistem yuxu vəziyyətinə keçirilə bilmədi.\n"
+"Sistemin düzgün quraşdırıldığını yoxlayın."
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:139
+#, c-format
+msgid "Permissions on the file %s are broken\n"
+msgstr "%s faylının səlahiyyətləri hökmsüzdür\n"
+
+#: gnome-settings-daemon/gnome-settings-multimedia-keys.c:900
+msgid ""
+"Couldn't load the Glade file.\n"
+"Make sure that this daemon is properly installed."
+msgstr ""
+"Glade faylı yüklənə biləmdi.\n"
+"Bu demonun düzgün qurulduğunu yoxlayın."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:1
+msgid "Brightness down"
+msgstr "Parlaqlığı azalt"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:2
+msgid "Brightness down's shortcut."
+msgstr "Parlaqlığı azaltma qısa yolu."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:3
+msgid "Brightness up"
+msgstr "Parlaqlığı artır"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:4
+msgid "Brightness up's shortcut."
+msgstr "Parlaqlığı artırma qısa yolu."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:5
+msgid "E-mail"
+msgstr "E-poçt"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:6
+msgid "E-mail's shortcut."
+msgstr "E-poçt qısa yolu."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:7
+msgid "Eject"
+msgstr "Çıxart"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:8
+msgid "Eject's shortcut."
+msgstr "Çıxartma qısa yolu."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:9
+msgid "Home Folder"
+msgstr "Ev Qovluğu"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:10
+msgid "Launch Help Browser"
+msgstr "Yardım Səyyahını Başlat"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:11
+msgid "Launch Help Browser's shortcut."
+msgstr "Yardım Səyyahını Başlatma qısa yolu."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:12
+msgid "Launch Web Browser"
+msgstr "Veb Səyyahını Başlat"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:13
+msgid "Launch Web Browser's shortcut."
+msgstr "Veb Səyyahını Başlatma qısa yolu."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:14
+msgid "Lock Screen"
+msgstr "Ekranı Qıfılla"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:15
+msgid "Lock Screen's shortcut."
+msgstr "Ekranı Qıfıllama qısa yolu."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:16
+msgid "Log Out"
+msgstr "Hesabdan Çıx"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:17
+msgid "Log Out's shortcut."
+msgstr "Hesabdan Çıxış qısa yolu."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:18
+msgid "My Home Folder's shortcut."
+msgstr "Ev Qovluğunun qısa yolu."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
+msgid "Next track key's shortcut."
+msgstr "Növbəti mahnı qısa yolu."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
+msgid "Pause"
+msgstr "Fasilə ver"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:21
+msgid "Pause key's shortcut."
+msgstr "Fasilə vermə qısa yolu."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
+msgid "Play (or Play/Pause)"
+msgstr "Çal (ya da Çal/Fasilə ver)"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
+msgid "Play (or Play/Pause) key's shortcut."
+msgstr "Çal (ya da Çal/Fasilə ver) düyməsinin qısa yolu."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
+msgid "Previous track key's shortcut."
+msgstr "Əvvəlki mahnı qısa yolu."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
+msgid "Search"
+msgstr "Axtar"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
+msgid "Search's shortcut."
+msgstr "Axtarış qısa yolu."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
+msgid "Skip to Next track"
+msgstr "Nüvbəti mahnıya keç"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
+msgid "Skip to Previous track"
+msgstr "Əvvəlki mahnıya keç"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
+msgid "Sleep"
+msgstr "Yuxu vəziyyətinə sal"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
+msgid "Sleep's shortcut."
+msgstr "Yuxu vəziyyətinə salma qəsa yolu"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
+msgid "Stop playback key"
+msgstr "Çalğını dayandırma düyməsi"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
+msgid "Stop playback key's shortcut."
+msgstr "Çalğını dayandırma düyməsinin qısa yolu."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
+msgid "Volume down"
+msgstr "Səsi azalt"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:34
+msgid "Volume down's shortcut."
+msgstr "Səsi azaltma qısa yolu"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
+msgid "Volume mute"
+msgstr "Səsi bağla"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
+msgid "Volume mute's shortcut"
+msgstr "Səsi bağlama qısa yolu"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
+msgid "Volume step"
+msgstr "Səs addımı"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:38
+msgid "Volume step as percentage of volume."
+msgstr "Səs həcmi faizi olaraq səs addımı."
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:39
+msgid "Volume up"
+msgstr "Səsi artır"
+
+#: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
+msgid "Volume up's shortcut."
+msgstr "Səsi artırma qısa yolu."
 
