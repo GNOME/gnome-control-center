@@ -24,8 +24,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2002-02-12 00:27-0600\n"
-"PO-Revision-Date: 2002-02-02 19:04+0100\n"
+"POT-Creation-Date: 2002-02-23 13:58+0100\n"
+"PO-Revision-Date: 2002-02-23 14:01+0100\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -40,17 +40,16 @@ msgstr "Baggrund"
 msgid "Configuration of the desktop's background"
 msgstr "Konfigurér skrivebordsbaggrunden"
 
-#: capplets/background/background-properties-capplet.c:291
+#: capplets/background/background-properties-capplet.c:289
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:575
 #: capplets/keyboard/gnome-keyboard-properties.c:319
-#: capplets/mouse/gnome-mouse-properties.c:493
+#: capplets/mouse/gnome-mouse-properties.c:678
 #: capplets/sound/sound-properties-capplet.c:139
 msgid "Retrieve and store legacy settings"
 msgstr "Indhent og gem gamle indstillinger"
 
-#: capplets/background/background-properties-capplet.c:315
-#, fuzzy
+#: capplets/background/background-properties-capplet.c:312
 msgid "Background properties"
 msgstr "Indstillinger for baggrund"
 
@@ -58,62 +57,62 @@ msgstr "Indstillinger for baggrund"
 msgid "Just apply settings and quit"
 msgstr "Anvend indstillingerne og afslut"
 
-#: capplets/common/gconf-property-editor.c:144
+#: capplets/common/gconf-property-editor.c:145
 msgid "Key"
 msgstr "Nøgle"
 
-#: capplets/common/gconf-property-editor.c:145
+#: capplets/common/gconf-property-editor.c:146
 msgid "GConf key to which this property editor is attached"
 msgstr "GConf-nøgle som dette egenskabsredigeringsprogram er tilknyttet til"
 
-#: capplets/common/gconf-property-editor.c:151
+#: capplets/common/gconf-property-editor.c:152
 msgid "Callback"
 msgstr "Tilbagekald"
 
-#: capplets/common/gconf-property-editor.c:152
+#: capplets/common/gconf-property-editor.c:153
 msgid "Issue this callback when the value associated with key gets changed"
 msgstr ""
 "Udfør dette tilbagekald når værdien der er associeret med nøglen, ændres"
 
 # RETMIG: find ud af hvad dette er
-#: capplets/common/gconf-property-editor.c:157
+#: capplets/common/gconf-property-editor.c:158
 msgid "Change set"
 msgstr "Skiftesæt"
 
-#: capplets/common/gconf-property-editor.c:158
+#: capplets/common/gconf-property-editor.c:159
 msgid ""
 "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
 "GConf-skiftesæt som indeholder data der skal videresendes til GConf-klienten "
 "ved anvendelse"
 
-#: capplets/common/gconf-property-editor.c:163
+#: capplets/common/gconf-property-editor.c:164
 msgid "Conversion to widget callback"
 msgstr "Konvertering til kontrol-tilbagekald"
 
-#: capplets/common/gconf-property-editor.c:164
+#: capplets/common/gconf-property-editor.c:165
 msgid ""
 "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr ""
 "Tilbagekald som bliver udført når data skal konverteres fra GConf til "
 "kontrollen"
 
-#: capplets/common/gconf-property-editor.c:169
+#: capplets/common/gconf-property-editor.c:170
 msgid "Conversion from widget callback"
 msgstr "Konvertering fra kontrol-tilbagekald"
 
-#: capplets/common/gconf-property-editor.c:170
+#: capplets/common/gconf-property-editor.c:171
 msgid ""
 "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr ""
 "Tilbagekald som bliver udført når data skal konverteres til GConf fra "
 "kontrollen"
 
-#: capplets/common/gconf-property-editor.c:175
+#: capplets/common/gconf-property-editor.c:176
 msgid "UI Control"
 msgstr "Grænsefladekontrol"
 
-#: capplets/common/gconf-property-editor.c:176
+#: capplets/common/gconf-property-editor.c:177
 msgid "Object that controls the property (normally a widget)"
 msgstr "Objekt der kontrollerer egenskaben (normalt en kontrol)"
 
@@ -122,8 +121,8 @@ msgid "Choose the applications used by default"
 msgstr "Vælg de programmer der bruges automatisk"
 
 #: capplets/default-applications/default-applications.desktop.in.h:2
-msgid "Default Applications"
-msgstr "Forvalgte programmer"
+msgid "Preferred Applications"
+msgstr "Foretrukne programmer"
 
 #: capplets/desktop-links/Advanced.directory.in.in.h:1
 msgid "Advanced"
@@ -247,14 +246,6 @@ msgstr "Konfigurér arbejds- og visningsområder"
 msgid "Workspaces"
 msgstr "Arbejdsområder"
 
-#: capplets/desktop-links/session.desktop.in.in.h:1
-msgid "Configure which non-session aware programs are started up"
-msgstr "Konfigurér hvilke ikke-sessionshåndterede programmer bliver startet op"
-
-#: capplets/desktop-links/session.desktop.in.in.h:2
-msgid "Startup Programs"
-msgstr "Opstartsprogrammer"
-
 #.
 #. * Translatable strings file
 #. * Add this file to your project's POTFILES.in.
@@ -333,14 +324,17 @@ msgid "Source Code"
 msgstr "Kildekode"
 
 #: capplets/file-types/category-names.h:25
+#: capplets/file-types/mime-type-info.c:745
 msgid "Audio"
 msgstr "Lyd"
 
 #: capplets/file-types/category-names.h:26
+#: capplets/file-types/mime-type-info.c:741
 msgid "Images"
 msgstr "Billeder"
 
 #: capplets/file-types/category-names.h:27
+#: capplets/file-types/mime-type-info.c:743
 msgid "Video"
 msgstr "Video"
 
@@ -451,7 +445,7 @@ msgstr "Vælg en filkategori"
 msgid "Model for categories only"
 msgstr "Model til kategorier kun"
 
-#: capplets/file-types/mime-types-model.c:420
+#: capplets/file-types/mime-types-model.c:421
 msgid "Internet Services"
 msgstr "Internettjenester"
 
@@ -517,14 +511,12 @@ msgid "Electronic mail transmission"
 msgstr "Epost-overførsel"
 
 #: capplets/font/font-properties.desktop.in.h:1
-#, fuzzy
 msgid "Font"
-msgstr "Skov"
+msgstr "Skrifttype"
 
 #: capplets/font/font-properties.desktop.in.h:2
-#, fuzzy
 msgid "Select which font to use"
-msgstr "Vælg hvilket Gtk+-tema der skal bruges"
+msgstr "Vælg hvilken skrifttype der skal bruges"
 
 #: capplets/keyboard/gnome-keyboard-properties.c:315
 #: capplets/keyboard/gnome-keyboard-properties.c:317
@@ -544,7 +536,80 @@ msgstr "Tastatur"
 msgid "Keyboard Properties"
 msgstr "Indstillinger for tastatur"
 
-#: capplets/mouse/gnome-mouse-properties.c:518
+#: capplets/mouse/gnome-mouse-properties.c:407
+#, c-format
+msgid ""
+"<b>Unknown Cursor</b>\n"
+"%s"
+msgstr ""
+"<b>Ukendt markør</b>\n"
+"%s"
+
+#: capplets/mouse/gnome-mouse-properties.c:505
+msgid ""
+"<b>Default Cursor - Current</b>\n"
+"The default cursor that ships with X"
+msgstr ""
+"<b>Standardmarkør - nuværende</b>\n"
+"Den standardmarkør der følger med X"
+
+#: capplets/mouse/gnome-mouse-properties.c:508
+msgid ""
+"<b>Default Cursor</b>\n"
+"The default cursor that ships with X"
+msgstr ""
+"<b>Standardmarkør</b>\n"
+"Den standardmarkør der følger med X"
+
+#: capplets/mouse/gnome-mouse-properties.c:526
+msgid ""
+"<b>White Cursor - Current</b>\n"
+"The default cursor inverted"
+msgstr ""
+"<b>Hvid markør - nuværende</b>\n"
+"Inverteret standardmarkør"
+
+#: capplets/mouse/gnome-mouse-properties.c:529
+msgid ""
+"<b>White Cursor</b>\n"
+"The default cursor inverted"
+msgstr ""
+"<b>Hvid markør</b>\n"
+"Inverteret standardmarkør"
+
+#: capplets/mouse/gnome-mouse-properties.c:547
+msgid ""
+"<b>Large Cursor - Current</b>\n"
+"Large version of normal cursor"
+msgstr ""
+"<b>Stor markør - nuværende</b>\n"
+"Stor udgave af den normale markør"
+
+#: capplets/mouse/gnome-mouse-properties.c:550
+msgid ""
+"<b>Large Cursor</b>\n"
+"Large version of normal cursor"
+msgstr ""
+"<b>Stor markør</b>\n"
+"Stor udgave af den normale markør"
+
+#: capplets/mouse/gnome-mouse-properties.c:568
+msgid ""
+"<b>Large White Cursor - Current</b>\n"
+"Large version of white cursor"
+msgstr ""
+"<b>Stor hvid markør - nuværende</b>\n"
+"Stor udgave af den hvide markør"
+
+#: capplets/mouse/gnome-mouse-properties.c:571
+msgid ""
+"<b>Large White Cursor</b>\n"
+"Large version of white cursor"
+msgstr ""
+"<b>Stor hvid markør</b>\n"
+"Stor udgave af den hvide markør"
+
+#: capplets/mouse/gnome-mouse-properties.c:703
 #: capplets/mouse/mouse.desktop.in.h:2
 msgid "Mouse Properties"
 msgstr "Indstillinger for mus"
@@ -656,7 +721,7 @@ msgstr "Gtk+-temavælger"
 msgid "Select which gtk+ theme to use"
 msgstr "Vælg hvilket Gtk+-tema der skal bruges"
 
-#: capplets/theme-switcher/main.c:217
+#: capplets/theme-switcher/main.c:218
 msgid "Select a theme to install"
 msgstr "Vælg et tema der skal installeres"
 
@@ -668,36 +733,36 @@ msgstr "Konfigurér standardopførslen for Gnome-programmer"
 msgid "Toolbars & Menus"
 msgstr "Værktøjslinjer og menuer"
 
-#: control-center/capplet-dir-view.c:146
+#: control-center/capplet-dir-view.c:148
 msgid "Layout"
 msgstr "Layout"
 
-#: control-center/capplet-dir-view.c:147
+#: control-center/capplet-dir-view.c:149
 msgid "Layout to use for this view of the capplets"
 msgstr "Layout der skal bruges for denne visning af kontrolcenterprogrammerne"
 
-#: control-center/capplet-dir-view.c:153
+#: control-center/capplet-dir-view.c:155
 msgid "Capplet directory object"
 msgstr "Mappeobjekt for kontrolcenterprogram"
 
-#: control-center/capplet-dir-view.c:154
+#: control-center/capplet-dir-view.c:156
 msgid "Capplet directory that this view is viewing"
 msgstr "Mappe for kontrolcenterprogram som denne visning viser"
 
-#: control-center/capplet-dir-view.c:308 control-center/gnomecc.desktop.in.h:1
+#: control-center/capplet-dir-view.c:313 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
 msgstr "Kontrolcenter"
 
-#: control-center/capplet-dir-view.c:311
+#: control-center/capplet-dir-view.c:316
 msgid "Desktop properties manager."
 msgstr "Håndtering af skrivebordsindstillinger"
 
-#: control-center/capplet-dir-view.c:445
+#: control-center/capplet-dir-view.c:450
 #, c-format
 msgid "Gnome Control Center : %s"
 msgstr "Kontrolcenter: %s"
 
-#: control-center/capplet-dir-view.c:488
+#: control-center/capplet-dir-view.c:503
 msgid ""
 "No help is available/installed. Please make sure you\n"
 "have the GNOME User's Guide installed on your system."
@@ -705,7 +770,7 @@ msgstr ""
 "Ingen hjælp tilgængelig/installeret. Sørg venligst for\n"
 "at du har Gnomes brugervejledning installeret på systemet."
 
-#: control-center/capplet-dir-view.c:491
+#: control-center/capplet-dir-view.c:506
 msgid "Close"
 msgstr "Luk"
 
@@ -718,15 +783,15 @@ msgstr "Kontrolcenter: %s"
 msgid "The GNOME configuration tool"
 msgstr "Et centralt opsætningsværktøj til Gnome"
 
-#: control-center/main.c:44
+#: control-center/main.c:43
 msgid "Use shell even if nautilus is running."
-msgstr ""
+msgstr "Brug skal også selvom Nautilus kører"
 
-#: libbackground/applier.c:239
+#: libbackground/applier.c:235
 msgid "Type"
 msgstr "Type"
 
-#: libbackground/applier.c:240
+#: libbackground/applier.c:236
 msgid ""
 "Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW "
 "for preview"
@@ -734,20 +799,20 @@ msgstr ""
 "Type af bg_applier: BG_APPLIER_ROOT for rodvinduet eller BG_APPLIER_PREVIEW "
 "for eksempel"
 
-#: libbackground/applier.c:399
+#: libbackground/applier.c:395
 #, c-format
 msgid "Could not load pixbuf \"%s\"; disabling wallpaper."
 msgstr "Kunne ikke indlæse billedet '%s'; deaktiverer baggrundsbillede."
 
-#: libbackground/applier.c:522
+#: libbackground/applier.c:515
 msgid "Disabled"
 msgstr "Deaktiveret"
 
-#: libsounds/sound-view.c:99
+#: libsounds/sound-view.c:104
 msgid "The sound file for this event does not exist."
 msgstr "Lydfilen for denne hændelse eksisterer ikke."
 
-#: libsounds/sound-view.c:101
+#: libsounds/sound-view.c:106
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -757,21 +822,28 @@ msgstr ""
 "Du kan evt. installere gnome-audio-pakken\n"
 "for et sæt standardlyde."
 
-#: libsounds/sound-view.c:154
+#: libsounds/sound-view.c:160
 msgid "Event"
 msgstr "Hændelse"
 
-#: libsounds/sound-view.c:154
+#: libsounds/sound-view.c:160
 msgid "File to Play"
 msgstr "Fil at afspille"
 
-#: libsounds/sound-view.c:187
+#: libsounds/sound-view.c:193
 msgid "Play"
 msgstr "Spil"
 
-#: libsounds/sound-view.c:193
+#: libsounds/sound-view.c:199
 msgid "Select sound file"
 msgstr "Vælg en lydfil"
+
+#~ msgid "Configure which non-session aware programs are started up"
+#~ msgstr ""
+#~ "Konfigurér hvilke ikke-sessionshåndterede programmer bliver startet op"
+
+#~ msgid "Startup Programs"
+#~ msgstr "Opstartsprogrammer"
 
 #~ msgid ""
 #~ "Couldn't find the file '%s'.\n"
