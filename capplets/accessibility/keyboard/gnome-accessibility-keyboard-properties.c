@@ -109,6 +109,7 @@ main (int argc, char **argv)
 	g_signal_connect (G_OBJECT (dialog),
 		"response",
 		G_CALLBACK (dialog_response), changeset);
+	capplet_set_icon (dialog, "accessibility-keyboard-capplet.png");
 	gtk_widget_show_all (dialog);
 	gtk_main ();
 
