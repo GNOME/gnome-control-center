@@ -5,11 +5,12 @@
 <requires lib="gnome"/>
 
 <widget class="GtkDialog" id="install_dialog">
-  <property name="title" translatable="yes">Install new theme</property>
+  <property name="border_width">5</property>
+  <property name="title" translatable="yes">Theme Installation</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_NONE</property>
   <property name="modal">False</property>
-  <property name="resizable">True</property>
+  <property name="resizable">False</property>
   <property name="destroy_with_parent">False</property>
   <property name="has_separator">False</property>
 
@@ -17,7 +18,7 @@
     <widget class="GtkVBox" id="dialog-vbox2">
       <property name="visible">True</property>
       <property name="homogeneous">False</property>
-      <property name="spacing">0</property>
+      <property name="spacing">2</property>
 
       <child internal-child="action_area">
 	<widget class="GtkHButtonBox" id="dialog-action_area2">
@@ -124,10 +125,10 @@
 
       <child>
 	<widget class="GtkHBox" id="hbox6">
-	  <property name="border_width">16</property>
+	  <property name="border_width">5</property>
 	  <property name="visible">True</property>
 	  <property name="homogeneous">False</property>
-	  <property name="spacing">16</property>
+	  <property name="spacing">12</property>
 
 	  <child>
 	    <widget class="GtkImage" id="image3">
@@ -135,7 +136,7 @@
 	      <property name="stock">gtk-dialog-question</property>
 	      <property name="icon_size">6</property>
 	      <property name="xalign">0.5</property>
-	      <property name="yalign">0.5</property>
+	      <property name="yalign">0</property>
 	      <property name="xpad">0</property>
 	      <property name="ypad">0</property>
 	    </widget>
@@ -150,14 +151,14 @@
 	    <widget class="GtkVBox" id="vbox3">
 	      <property name="visible">True</property>
 	      <property name="homogeneous">False</property>
-	      <property name="spacing">16</property>
+	      <property name="spacing">6</property>
 
 	      <child>
 		<widget class="GtkLabel" id="label8">
 		  <property name="visible">True</property>
-		  <property name="label" translatable="yes">_Location of new theme:</property>
-		  <property name="use_underline">True</property>
-		  <property name="use_markup">False</property>
+		  <property name="label" translatable="yes">&lt;span size=&quot;larger&quot; weight=&quot;bold&quot;&gt;Install a Theme&lt;/span&gt;</property>
+		  <property name="use_underline">False</property>
+		  <property name="use_markup">True</property>
 		  <property name="justify">GTK_JUSTIFY_LEFT</property>
 		  <property name="wrap">False</property>
 		  <property name="selectable">False</property>
@@ -175,24 +176,59 @@
 	      </child>
 
 	      <child>
-		<widget class="GnomeFileEntry" id="install_theme_picker">
+		<widget class="GtkHBox" id="hbox7">
 		  <property name="visible">True</property>
-		  <property name="max_saved">10</property>
-		  <property name="directory_entry">False</property>
-		  <property name="modal">True</property>
+		  <property name="homogeneous">False</property>
+		  <property name="spacing">12</property>
 
-		  <child internal-child="entry">
-		    <widget class="GtkEntry" id="install_theme_combo_entry">
+		  <child>
+		    <widget class="GtkLabel" id="label9">
 		      <property name="visible">True</property>
-		      <property name="can_focus">True</property>
-		      <property name="editable">True</property>
-		      <property name="visibility">True</property>
-		      <property name="max_length">0</property>
-		      <property name="text" translatable="yes"></property>
-		      <property name="has_frame">True</property>
-		      <property name="invisible_char" translatable="yes">*</property>
-		      <property name="activates_default">False</property>
+		      <property name="label" translatable="yes">_Location:</property>
+		      <property name="use_underline">True</property>
+		      <property name="use_markup">False</property>
+		      <property name="justify">GTK_JUSTIFY_LEFT</property>
+		      <property name="wrap">False</property>
+		      <property name="selectable">False</property>
+		      <property name="xalign">0.5</property>
+		      <property name="yalign">0.5</property>
+		      <property name="xpad">0</property>
+		      <property name="ypad">0</property>
+		      <property name="mnemonic_widget">install_theme_combo_entry</property>
 		    </widget>
+		    <packing>
+		      <property name="padding">0</property>
+		      <property name="expand">False</property>
+		      <property name="fill">False</property>
+		    </packing>
+		  </child>
+
+		  <child>
+		    <widget class="GnomeFileEntry" id="install_theme_picker">
+		      <property name="visible">True</property>
+		      <property name="max_saved">10</property>
+		      <property name="directory_entry">False</property>
+		      <property name="modal">True</property>
+
+		      <child internal-child="entry">
+			<widget class="GtkEntry" id="install_theme_combo_entry">
+			  <property name="visible">True</property>
+			  <property name="can_focus">True</property>
+			  <property name="editable">True</property>
+			  <property name="visibility">True</property>
+			  <property name="max_length">0</property>
+			  <property name="text" translatable="yes"></property>
+			  <property name="has_frame">True</property>
+			  <property name="invisible_char" translatable="yes">*</property>
+			  <property name="activates_default">False</property>
+			</widget>
+		      </child>
+		    </widget>
+		    <packing>
+		      <property name="padding">0</property>
+		      <property name="expand">True</property>
+		      <property name="fill">True</property>
+		    </packing>
 		  </child>
 		</widget>
 		<packing>
