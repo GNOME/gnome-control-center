@@ -35,7 +35,9 @@ typedef struct {
 	GtkHTML *top;
 	GtkHTML *sidebar;
 	GtkHTML *main;
-	CappletDir *root_dir; 
+	CappletDir *root_dir;
+       	int icon_cols;
+       	gboolean only_update_main;	
 } HtmlViewData;
 
 static void
@@ -194,13 +196,12 @@ sidebar_populate (CappletDirView *view)
 
 /* Write a row of up to 4 items and return a pointer to the next 4 */
 static GSList*
-html_write_row (GtkHTML *html, GtkHTMLStream *stream, GSList *list)
+html_write_row (GtkHTML *html, GtkHTMLStream *stream, GSList *list, int the_max)
 {
 	CappletDirEntry *entry;
 	int i;
 	char *s;
 	GSList *item;
-	int the_max = 3;
 	
 	s = "<tr><td><img src=\"" ART_DIR "/blank.png\" height=\"1\" width=\"8\"></td>";
 	gtk_html_write (html, stream, s, strlen (s));
@@ -263,8 +264,11 @@ html_populate (CappletDirView *view)
 	if (!data->root_dir)
 		data->root_dir = view->capplet_dir;
 
-	header_populate (view);
-	sidebar_populate (view);
+	if (!data->only_update_main)
+	{
+		header_populate (view);
+		sidebar_populate (view);
+	}
 
 	stream = gtk_html_begin (data->main);
 
@@ -281,7 +285,7 @@ html_populate (CappletDirView *view)
 
 	for (item = view->capplet_dir->entries; item; )
 	{
-		item = html_write_row (data->main, stream, item);
+		item = html_write_row (data->main, stream, item, data->icon_cols);
 	}
 
 	s =
@@ -293,6 +297,21 @@ html_populate (CappletDirView *view)
 	gtk_html_end (data->main, stream, GTK_HTML_STREAM_OK);
 //	gtk_widget_set_usize (GTK_WIDGET (data->main), html_engine_calc_min_width (data->main->engine), 0);
 //	g_print ("%i\n", html_engine_calc_min_width (data->main->engine));
+}
+
+static void
+main_allocate_cb (GtkWidget *widget, GtkAllocation *allocation, CappletDirView *view)
+{
+	int new_cols = allocation->width / 64 - 1;
+	HtmlViewData *data = view->view_data;
+	if (new_cols != data->icon_cols)
+	{
+		data->icon_cols = new_cols;
+	       	data->only_update_main = TRUE;	
+		html_populate (view);
+	       	data->only_update_main = FALSE;	
+	}
+	g_print ("Cols %i Width %i\n", new_cols, allocation->width);
 }
 
 static GtkWidget *
@@ -307,6 +326,8 @@ html_create (CappletDirView *view)
 	view->view_data = data;
 
 	data->root_dir = NULL;
+	data->icon_cols = 3;
+	data->only_update_main = FALSE;	
 
 	vbox = gtk_vbox_new (FALSE, 0);
 	/* top widget */
@@ -355,6 +376,9 @@ html_create (CappletDirView *view)
 	
 	gtk_signal_connect (GTK_OBJECT (data->main), "link_clicked",
 			    GTK_SIGNAL_FUNC (handle_link_cb), view);
+
+	gtk_signal_connect (GTK_OBJECT (data->main), "size_allocate",
+			    GTK_SIGNAL_FUNC (main_allocate_cb), view);
 
 	gtk_widget_show_all (vbox);
 	return vbox;
