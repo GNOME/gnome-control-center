@@ -321,7 +321,10 @@ fill_dialog (ServiceEditDialog *dialog)
 	gtk_entry_set_text (GTK_ENTRY (WID ("description_entry")), service_info_get_description (dialog->p->info));
 
 	if (dialog->p->info->protocol != NULL) {
+#if 0
+		/* this causes the validate check later to fail */
 		if (strcmp (dialog->p->info->protocol, "unknown"))
+#endif
 			gtk_entry_set_text (GTK_ENTRY (WID ("protocol_entry")), dialog->p->info->protocol);
 
 		gtk_widget_set_sensitive (WID ("protocol_entry"), FALSE);
@@ -487,9 +490,8 @@ validate_data (ServiceEditDialog *dialog)
 						     0, GTK_MESSAGE_ERROR,
 						     GTK_BUTTONS_OK,
 						     _("Please enter a protocol name."));
-
-		gtk_window_set_modal (GTK_WINDOW (err_dialog), TRUE);
-
+		gtk_dialog_run (GTK_DIALOG (err_dialog));
+		gtk_widget_destroy (err_dialog);
 		return FALSE;
 	} else {
 		for (tmp1 = tmp; *tmp1 != '\0' && isalnum (*tmp1); tmp1++);
@@ -501,20 +503,22 @@ validate_data (ServiceEditDialog *dialog)
 							GTK_BUTTONS_OK,
 							_("Invalid protocol name. Please enter a protocol name without any spaces or punctuation."));
 
-			gtk_window_set_modal (GTK_WINDOW (err_dialog), TRUE);
-
+			gtk_dialog_run (GTK_DIALOG (err_dialog));
+			gtk_widget_destroy (err_dialog);
 			return FALSE;
 		}
 
 		if (dialog->p->is_add) {
 			dir = g_strconcat ("/desktop/gnome/url-handlers/", tmp, NULL);
 			if (get_service_info (tmp) || gconf_client_dir_exists (gconf_client_get_default (), dir, NULL)) {
-				gtk_message_dialog_new (GTK_WINDOW (dialog->p->dialog_win),
-							0, GTK_MESSAGE_ERROR,
-							GTK_BUTTONS_OK,
-							_("There is already a protocol by that name."));
-
-				gtk_window_set_modal (GTK_WINDOW (err_dialog), TRUE);
+				err_dialog = 
+					gtk_message_dialog_new (GTK_WINDOW (dialog->p->dialog_win),
+								0, GTK_MESSAGE_ERROR,
+								GTK_BUTTONS_OK,
+								_("There is already a protocol by that name."));
+				
+				gtk_dialog_run (GTK_DIALOG (err_dialog));
+				gtk_widget_destroy (err_dialog);
 
 				return FALSE;
 			}
