@@ -58,6 +58,9 @@ static int idx2Select = -1;
 static int maxSelectedLayouts = -1;
 static int defaultGroup = -1;
 
+static GtkCellRenderer *textRenderer;
+static GtkCellRenderer *toggleRenderer;
+
 void
 clear_xkb_elements_list (GSList * list)
 {
@@ -232,29 +235,36 @@ xkb_layout_chooser_enable_disable_buttons (GladeXML * chooserDialog)
                                       GTK_RESPONSE_OK, nSelectedAvailableLayouts > 0);
 }
 
+void xkb_layouts_enable_disable_default (GladeXML * dialog,
+                                         gboolean enable)
+{
+  GValue val = {0};
+  g_value_init (&val, G_TYPE_BOOLEAN);
+  g_value_set_boolean (&val, enable);
+  g_object_set_property (G_OBJECT (toggleRenderer), "activatable", &val);
+}
+
 void
 xkb_layouts_prepare_selected_tree (GladeXML * dialog, GConfChangeSet * changeset)
 {
   GtkListStore *listStore =
     gtk_list_store_new (3, G_TYPE_STRING, G_TYPE_BOOLEAN, G_TYPE_STRING);
   GtkWidget *treeView = WID ("xkb_layouts_selected");
-  GtkCellRenderer *textRenderer =
-    GTK_CELL_RENDERER (gtk_cell_renderer_text_new ());
-  GtkCellRenderer *toggleRenderer =
-    GTK_CELL_RENDERER (gtk_cell_renderer_toggle_new ());
+  GtkTreeViewColumn * descColumn, * defColumn;
+  GtkTreeSelection *selection;
 
-  GtkTreeViewColumn *descColumn = gtk_tree_view_column_new_with_attributes (_("Layout"),
-									textRenderer,
-									"text",
-									SLT_COL_DESCRIPTION,
-									NULL);
-  GtkTreeViewColumn *defColumn = gtk_tree_view_column_new_with_attributes (_("Default"),
-									toggleRenderer,
-									"active",
-									SLT_COL_DEFAULT,
-									NULL);
-  GtkTreeSelection *selection =
-    gtk_tree_view_get_selection (GTK_TREE_VIEW (treeView));
+  textRenderer = GTK_CELL_RENDERER (gtk_cell_renderer_text_new ());
+  toggleRenderer = GTK_CELL_RENDERER (gtk_cell_renderer_toggle_new ());
+
+  descColumn = gtk_tree_view_column_new_with_attributes (_("Layout"),
+                                                         textRenderer,
+                                                         "text", SLT_COL_DESCRIPTION,
+                                                         NULL);
+  defColumn = gtk_tree_view_column_new_with_attributes (_("Default"),
+                                                        toggleRenderer,
+                                                        "active", SLT_COL_DEFAULT,
+                                                        NULL);
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeView));
 
   gtk_tree_view_set_model (GTK_TREE_VIEW (treeView),
 			   GTK_TREE_MODEL (listStore));

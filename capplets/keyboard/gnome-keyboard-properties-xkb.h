@@ -69,6 +69,9 @@ extern void choose_model (GladeXML * dialog);
 
 extern void xkb_layout_choose (GladeXML * dialog);
 
+extern void xkb_layouts_enable_disable_default (GladeXML * dialog, 
+                                                gboolean enable);
+
 #define xkb_layouts_get_selected_list() \
         gconf_client_get_list (gconf_client_get_default (), \
                                       GSWITCHIT_KBD_CONFIG_KEY_LAYOUTS, \

@@ -127,6 +127,15 @@ update_model (GConfClient * client,
   enable_disable_restoring (dialog);
 }
 
+static void
+chk_separate_group_per_window_toggled (GConfPropertyEditor *peditor, 
+                                       const gchar *key, 
+                                       const GConfValue *value, 
+                                       GladeXML* dialog)
+{
+  xkb_layouts_enable_disable_default (dialog, value && gconf_value_get_bool (value));
+}
+
 void
 setup_xkb_tabs (GladeXML * dialog, GConfChangeSet * changeset)
 {
@@ -147,7 +156,7 @@ setup_xkb_tabs (GladeXML * dialog, GConfChangeSet * changeset)
     (changeset, (gchar *) GSWITCHIT_CONFIG_KEY_GROUP_PER_WINDOW, 
 	WID ("chk_separate_group_per_window"), NULL);
 
-  /*g_signal_connect (peditor, "value-changed", (GCallback) left_handed_toggle_cb, WID ("orientation_image"));*/
+  g_signal_connect (peditor, "value-changed", (GCallback)chk_separate_group_per_window_toggled , dialog);
 
 /* tab 2 */
   /*fill_available_layouts_tree (dialog);*/
@@ -182,6 +191,10 @@ setup_xkb_tabs (GladeXML * dialog, GConfChangeSet * changeset)
   GSwitchItKbdConfigLoadInitial (&initialConfig);
 
   enable_disable_restoring (dialog);
+  xkb_layouts_enable_disable_default (dialog, 
+                                      gconf_client_get_bool (xkbGConfClient, 
+                                                             GSWITCHIT_CONFIG_KEY_GROUP_PER_WINDOW, 
+                                                             NULL));
 }
 
 void
