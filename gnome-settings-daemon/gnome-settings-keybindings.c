@@ -150,7 +150,7 @@ bindings_get_entry (char *subdir)
       binding_list = g_slist_append (binding_list, new_binding);
   else
     {
-      g_warning (_("Binding (%s) is invalid\n"), gconf_key);
+      g_warning (_("Key Binding (%s) is invalid\n"), gconf_key);
       g_free (new_binding->binding_str);
       g_free (new_binding->action);
       return FALSE;
