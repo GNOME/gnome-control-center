@@ -111,6 +111,17 @@ GNOME_SETTINGS_DAEMON_LIBS="$GNOME_SETTINGS_DAEMON_LIBS $x_libs"
 AC_PATH_PROG(GCONFTOOL, gconftool-2)
 
 dnl
+dnl Check for XCursor support.  If it exists, then we compile the
+dnl mouse capplet with support for it turned on
+dnl
+have_xcursor=no
+AC_CHECK_HEADER(X11/Xcursor/Xcursor.h, have_xcursor=yes
+				       AC_DEFINE(HAVE_XCURSOR, 1, Have the Xcursor extension),
+				       :, [#include <X11/Xlib.h>])
+AM_CONDITIONAL(HAVE_XCURSOR, [test $have_xcursor=yes])
+
+
+dnl
 dnl Check for gtk+ with multihead support
 dnl
 AC_MSG_CHECKING([for gtk+ multihead support])

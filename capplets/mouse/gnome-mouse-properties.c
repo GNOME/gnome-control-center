@@ -23,9 +23,7 @@
  * 02111-1307, USA.
  */
 
-#ifdef HAVE_CONFIG_H
-#  include <config.h>
-#endif
+#include <config.h>
 
 #include <string.h>
 #include <gnome.h>
@@ -98,9 +96,16 @@ enum
  * define the macro */
 
 #define DOUBLE_CLICK_KEY "/desktop/gnome/peripherals/mouse/double_click"
-#define CURSOR_FONT_KEY "/desktop/gnome/peripherals/mouse/cursor_font"
+#define CURSOR_FONT_KEY  "/desktop/gnome/peripherals/mouse/cursor_font"
+#define CURSOR_SIZE_KEY  "/desktop/gnome/peripherals/mouse/cursor_size"
 
 GConfClient *client;
+
+#ifdef HAVE_XCURSOR
+static gboolean server_supports_xcursor = TRUE;
+#else
+static gboolean server_supports_xcursor = FALSE;
+#endif
 
 /* State in testing the double-click speed. Global for a great deal of
  * convenience
@@ -233,6 +238,60 @@ drag_threshold_from_gconf (GConfPropertyEditor *peditor,
 	new_value = gconf_value_new (GCONF_VALUE_FLOAT);
 
 	gconf_value_set_float (new_value, CLAMP (gconf_value_get_int (value), 1, 10));
+
+	return new_value;
+}
+
+static GConfValue *
+cursor_size_to_widget (GConfPropertyEditor *peditor, const GConfValue *value)
+{
+	GConfValue *new_value;
+	gint widget_val;
+
+	widget_val = gconf_value_get_int (value);
+
+	new_value = gconf_value_new (GCONF_VALUE_INT);
+	switch (widget_val) {
+	case 12:
+		gconf_value_set_int (new_value, 0);
+		break;
+	case 24:
+		gconf_value_set_int (new_value, 1);
+		break;
+	case 36:
+		gconf_value_set_int (new_value, 2);
+		break;
+	default:
+		gconf_value_set_int (new_value, -1);
+		break;
+	}
+
+	return new_value;
+}
+
+static GConfValue *
+cursor_size_from_widget (GConfPropertyEditor *peditor, const GConfValue *value)
+{
+	GConfValue *new_value;
+	gint radio_val;
+
+	radio_val = gconf_value_get_int (value);
+
+	new_value = gconf_value_new (GCONF_VALUE_INT);
+	switch (radio_val) {
+	case 0:
+		gconf_value_set_int (new_value, 12);
+		break;
+	case 1:
+		gconf_value_set_int (new_value, 24);
+		break;
+	case 2:
+		gconf_value_set_int (new_value, 36);
+		break;
+	default:
+		g_assert_not_reached ();
+		break;
+	}
 
 	return new_value;
 }
@@ -514,6 +573,9 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 	tree_view = WID ("cursor_tree");
 	cursor_font = read_cursor_font ();
 
+
+					
+	
 	model = (GtkTreeModel *) gtk_list_store_new (N_COLUMNS, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_STRING);
 	gtk_tree_view_set_model (GTK_TREE_VIEW (tree_view), model);
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree_view));
@@ -619,7 +681,16 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 	
 	gconf_peditor_new_boolean
 		(changeset, "/desktop/gnome/peripherals/mouse/locate_pointer", WID ("locate_pointer_toggle"), NULL);
-	/* Motion page */
+
+	gconf_peditor_new_select_radio (changeset,
+					CURSOR_SIZE_KEY,
+					gtk_radio_button_get_group (GTK_RADIO_BUTTON (WID ("cursor_size_small_radio"))),
+					"conv-to-widget-cb", cursor_size_to_widget,
+					"conv-from-widget-cb", cursor_size_from_widget,
+					NULL);
+					
+
+        /* Motion page */
 	/* speed */
 	gconf_peditor_new_numeric_range
 		(changeset, DOUBLE_CLICK_KEY, WID ("delay_scale"),
@@ -659,16 +730,35 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 static GladeXML *
 create_dialog (void) 
 {
-	GtkWidget    *widget;
 	GladeXML     *dialog;
 	GtkSizeGroup *size_group;
+	gchar        *text;
 
 	/* register the custom type */
 	(void) mouse_capplet_check_button_get_type ();
 
 	dialog = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gnome-mouse-properties.glade", "mouse_properties_dialog", NULL);
-	widget = glade_xml_get_widget (dialog, "prefs_widget");
 
+	if (server_supports_xcursor) {
+		gtk_widget_hide (WID ("cursor_font_vbox"));
+		gtk_widget_show (WID ("cursor_size_vbox"));
+		text = g_strdup_printf ("<b>%s</b>", _("Cursor Size"));
+		gtk_label_set_markup (GTK_LABEL (WID ("cursor_category_label")), text);
+		g_free (text);
+		gtk_box_set_child_packing (GTK_BOX (WID ("cursors_vbox")),
+					   WID ("cursor_appearance_vbox"),
+					   FALSE, TRUE, 0, GTK_PACK_START);
+	} else {
+		gtk_widget_hide (WID ("cursor_size_vbox"));
+		gtk_widget_show (WID ("cursor_font_vbox"));
+		text = g_strdup_printf ("<b>%s</b>", _("Cursor Theme"));
+		gtk_label_set_markup (GTK_LABEL (WID ("cursor_category_label")), text);
+		g_free (text);
+		gtk_box_set_child_packing (GTK_BOX (WID ("cursors_vbox")),
+					   WID ("cursor_appearance_vbox"),
+					   TRUE, TRUE, 0, GTK_PACK_START);
+	}
+	
 	size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 	gtk_size_group_add_widget (size_group, WID ("acceleration_label"));
 	gtk_size_group_add_widget (size_group, WID ("sensitivity_label"));
@@ -744,7 +834,7 @@ main (int argc, char **argv)
 				  G_CALLBACK (dialog_response_cb), changeset);
 
 		capplet_set_icon (dialog_win, "mouse-capplet.png");
-		gtk_widget_show_all (dialog_win);
+		gtk_widget_show (dialog_win);
 
 		gtk_main ();
 	}
