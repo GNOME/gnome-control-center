@@ -8,6 +8,20 @@
 #include <libgnomevfs/gnome-vfs.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
+const gchar *
+get_ft_error(FT_Error error)
+{
+#undef __FTERRORS_H__
+#define FT_ERRORDEF(e,v,s) case e: return s;
+#define FT_ERROR_START_LIST
+#define FT_ERROR_END_LIST
+    switch (error) {
+#include FT_ERRORS_H
+    default:
+	return "unknown";
+    }
+}
+
 #define FONT_SIZE 64
 #define PAD_PIXELS 4
 
@@ -61,12 +75,24 @@ draw_char(GdkPixbuf *pixbuf, FT_Face face, gchar character,
 	  gint *pen_x, gint *pen_y)
 {
     FT_Error error;
+    FT_UInt glyph_index;
     FT_GlyphSlot slot;
 
     slot = face->glyph;
-    error = FT_Load_Char(face, character, FT_LOAD_RENDER);
+
+    glyph_index = FT_Get_Char_Index(face, character);
+
+    error = FT_Load_Glyph(face, glyph_index, FT_LOAD_DEFAULT);
     if (error) {
-	g_printerr("could not load character '%c'\n", character);
+	g_printerr("could not load character '%c': %s\n", character,
+		   get_ft_error(error));
+	return;
+    }
+
+    error = FT_Render_Glyph(slot, ft_render_mode_normal);
+    if (error) {
+	g_printerr("could not render glyph for '%c': %s\n", character,
+		   get_ft_error(error));
 	return;
     }
 
@@ -192,20 +218,34 @@ main(int argc, char **argv)
 
     error = FT_Init_FreeType(&library);
     if (error) {
-	g_printerr("could not initialise freetype\n");
+	g_printerr("could not initialise freetype: %s\n", get_ft_error(error));
 	return 1;
     }
 
     error = FT_New_Face_From_URI(library, argv[1], 0, &face);
     if (error) {
-	g_printerr("could not load face '%s'\n", argv[1]);
+	g_printerr("could not load face '%s': %s\n", argv[1],
+		   get_ft_error(error));
 	return 1;
     }
 
     error = FT_Set_Pixel_Sizes(face, 0, FONT_SIZE);
     if (error) {
-	g_printerr("could not set pixel size\n");
+	g_printerr("could not set pixel size: %s\n", get_ft_error(error));
 	/* return 1; */
+    }
+
+    for (i = 0; i < face->num_charmaps; i++) {
+	if (face->charmaps[i]->encoding == ft_encoding_latin_1 ||
+	    face->charmaps[i]->encoding == ft_encoding_unicode ||
+	    face->charmaps[i]->encoding == ft_encoding_apple_roman) {
+	    error = FT_Set_Charmap(face, face->charmaps[i]);
+	    if (error) {
+		g_printerr("could not set charmap: %s\n", get_ft_error(error));
+		/* return 1; */
+	    }
+	    break;
+	}
     }
 
     pixbuf = gdk_pixbuf_new(GDK_COLORSPACE_RGB, FALSE, 8,
@@ -231,12 +271,13 @@ main(int argc, char **argv)
     /* freeing the face causes a crash I haven't tracked down yet */
     error = FT_Done_Face(face);
     if (error) {
-	g_printerr("could not unload face\n");
+	g_printerr("could not unload face: %s\n", get_ft_error(error));
 	return 1;
     }
     error = FT_Done_FreeType(library);
     if (error) {
-	g_printerr("could not finalise freetype library\n");
+	g_printerr("could not finalise freetype library: %s\n",
+		   get_ft_error(error));
 	return 1;
     }
 

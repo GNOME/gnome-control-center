@@ -27,7 +27,6 @@ vfs_stream_close(FT_Stream stream)
 {
     GnomeVFSHandle *handle = (GnomeVFSHandle *)stream->descriptor.pointer;
 
-    g_message("closing vfs stream");
     if (!handle)
 	return;
     gnome_vfs_close(handle);
@@ -87,17 +86,9 @@ FT_New_Face_From_URI(FT_Library           library,
 		     FT_Long              face_index,
 		     FT_Face             *aface)
 {
-    gchar *local_file;
     FT_Open_Args args;
     FT_Stream stream;
     FT_Error error;
-
-    local_file = gnome_vfs_get_local_path_from_uri(uri);
-    if (local_file) {
-	error = FT_New_Face(library, local_file, face_index, aface);
-	g_free(local_file);
-	return error;
-    }
 
     if ((stream = calloc(1, sizeof(*stream))) == NULL)
 	return FT_Err_Out_Of_Memory;
