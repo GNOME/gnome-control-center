@@ -34,6 +34,9 @@
 
 #include "capplet-util.h"
 #include "gconf-property-editor.h"
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <dirent.h>
 
 enum
 {
@@ -46,6 +49,7 @@ enum
 {
 	COLUMN_PIXBUF,
 	COLUMN_TEXT,
+	COLUMN_FONT_PATH,
 	N_COLUMNS
 };
 
@@ -53,7 +57,7 @@ enum
  * define the macro */
 
 #define DOUBLE_CLICK_KEY "/desktop/gnome/peripherals/mouse/double_click"
-
+#define CURSOR_FONT_KEY "/desktop/gnome/peripherals/mouse/cursor_font"
 /* Write-once data; global for convenience. Set only by load_pixbufs */
 
 GdkPixbuf *left_handed_pixbuf;
@@ -318,13 +322,128 @@ load_pixbufs (void)
 	called = TRUE;
 }
 
-/* Set up the property editors in the dialog. */
+static gchar *
+read_cursor_font (void)
+{
+	DIR *dir;
+	gchar *dir_name;
+	struct dirent *file_dirent;
 
+	dir_name = g_build_path (G_DIR_SEPARATOR_S, g_get_home_dir (), ".gnome/share/cursor-fonts", NULL);
+	if (! g_file_test (dir_name, G_FILE_TEST_EXISTS))
+		return NULL;
+
+	dir = opendir (dir_name);
+  
+	while ((file_dirent = readdir (dir)) != NULL) {
+		struct stat st;
+		gchar *link_name;
+
+		link_name = g_build_filename (dir_name, file_dirent->d_name, NULL);
+		if (lstat (link_name, &st)) {
+			g_free (link_name);
+			continue;
+		}
+	  
+		if (S_ISLNK (st.st_mode)) {
+			gint length;
+			gchar target[256];
+
+			length = readlink (link_name, target, 255);
+			if (length > 0) {
+				gchar *retval;
+				target[length] = '\0';
+				retval = g_strdup (target);
+				g_free (link_name);
+				return retval;
+			}
+			
+		}
+		g_free (link_name);
+	}
+	
+	return NULL;
+}
+
+static void
+cursor_font_changed (GConfClient *client,
+		     guint        cnxn_id,
+		     GConfEntry  *entry,
+		     gpointer     user_data)
+{
+	GtkTreeView *tree_view;
+	gchar *cursor_font;
+	gchar *cursor_text;
+	GtkTreeIter iter;
+	GtkTreeModel *model;
+	GtkTreeSelection *selection;
+
+	tree_view = GTK_TREE_VIEW (user_data);
+	selection = gtk_tree_view_get_selection (tree_view);
+	model = gtk_tree_view_get_model (tree_view);
+
+	cursor_font = gconf_client_get_string (client, CURSOR_FONT_KEY, NULL);
+	gtk_tree_model_get_iter_root (model, &iter);
+
+	do {
+		gchar *temp_cursor_font;
+		gtk_tree_model_get (model, &iter,
+				    COLUMN_FONT_PATH, &temp_cursor_font,
+				    -1);
+		if ((temp_cursor_font == NULL && cursor_font == NULL) ||
+		    ((temp_cursor_font != NULL && cursor_font != NULL) &&
+		     (!strcmp (cursor_font, temp_cursor_font)))) {
+			if (!gtk_tree_selection_iter_is_selected (selection, &iter))
+				gtk_tree_selection_select_iter (selection, &iter);
+			g_free (temp_cursor_font);
+			g_free (cursor_font);
+			return;
+		}
+		g_free (temp_cursor_font);
+	} while (gtk_tree_model_iter_next (model, &iter));
+
+	/* we didn't find it; we add it to the end. */
+	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+	cursor_text = g_strdup_printf (_("<b>Unknown Cursor</b>\n%s"), cursor_font);
+	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+			    COLUMN_TEXT, cursor_text,
+			    COLUMN_FONT_PATH, cursor_font,
+			    -1);
+	gtk_tree_selection_select_iter (selection, &iter);
+
+	g_free (cursor_font);
+	g_free (cursor_text);
+}
+
+static void
+cursor_changed (GtkTreeSelection *selection,
+		gpointer          data)
+{
+	GtkTreeModel *model = NULL;
+	GtkTreeIter iter;
+	gchar *cursor_font = NULL;
+
+	if (! gtk_tree_selection_get_selected (selection, &model, &iter))
+		return;
+
+	gtk_tree_model_get (model, &iter,
+			    COLUMN_FONT_PATH, &cursor_font,
+			    -1);
+	if (cursor_font != NULL)
+		gconf_client_set_string (gconf_client_get_default (),
+					 CURSOR_FONT_KEY, cursor_font, NULL);
+	else
+		gconf_client_unset (gconf_client_get_default (),
+				    CURSOR_FONT_KEY, NULL);
+}
+
+/* Set up the property editors in the dialog. */
 static void
 setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 {
 	GObject           *peditor;
 	GtkWidget         *tree_view;
+	GtkTreeSelection  *selection;
 	GtkTreeModel      *model;
 	GtkCellRenderer   *renderer;
 	GtkTreeViewColumn *column;
@@ -332,10 +451,15 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 	GConfValue        *value;
 	gchar             *filename;
 	GdkPixbuf         *pixbuf;
-	GnomeProgram *program;
+	GnomeProgram      *program;
+	gchar             *cursor_font;
+	gchar             *font_path;
+	gchar             *cursor_string;
+	gboolean           found_default;
 
 	program = gnome_program_get ();
-
+	found_default = FALSE;
+	
 	/* Buttons page */
 	/* Left-handed toggle */
 	peditor = gconf_peditor_new_boolean
@@ -352,8 +476,13 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 
 	/* Cursors page */
 	tree_view = WID ("cursor_tree");
-	model = (GtkTreeModel *) gtk_list_store_new (N_COLUMNS, GDK_TYPE_PIXBUF, G_TYPE_STRING);
+	cursor_font = read_cursor_font ();
+
+	model = (GtkTreeModel *) gtk_list_store_new (N_COLUMNS, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_STRING);
 	gtk_tree_view_set_model (GTK_TREE_VIEW (tree_view), model);
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree_view));
+	gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
+	g_signal_connect (G_OBJECT (selection), "changed", G_CALLBACK (cursor_changed), NULL);
 	column = gtk_tree_view_column_new ();
 	renderer = gtk_cell_renderer_pixbuf_new ();
 	gtk_tree_view_column_pack_start (column, renderer, FALSE);
@@ -366,43 +495,90 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 					     "markup", COLUMN_TEXT,
 					     NULL);
 
+	/* Default cursor */
 	filename = gnome_program_locate_file (program, GNOME_FILE_DOMAIN_APP_PIXMAP, "mouse-cursor-normal.png", TRUE, NULL);
 	pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
 	g_free (filename);
+
 	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+	if (cursor_font == NULL) {
+		cursor_string = _("<b>Default Cursor - Current</b>\nThe default cursor that ships with X");
+		found_default = TRUE;
+	} else {
+		cursor_string = _("<b>Default Cursor</b>\nThe default cursor that ships with X");
+	}
+
 	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
 			    COLUMN_PIXBUF, pixbuf,
-			    COLUMN_TEXT, "<b>Default Cursor</b>\nThe default cursor that ships with X",
+			    COLUMN_TEXT, cursor_string,
+			    COLUMN_FONT_PATH, NULL,
 			    -1);
 
+
+	/* Inverted cursor */
 	filename = gnome_program_locate_file (program, GNOME_FILE_DOMAIN_APP_PIXMAP, "mouse-cursor-white.png", TRUE, NULL);
 	pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
 	g_free (filename);
+	font_path = gnome_program_locate_file (program, GNOME_FILE_DOMAIN_DATADIR, "gnome/cursor-fonts/cursor-white.pcf.gz", FALSE, NULL);
+
 	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+	if (cursor_font && ! strcmp (cursor_font, font_path)) {
+		cursor_string = _("<b>White Cursor - Current</b>\nThe default cursor inverted");
+		found_default = TRUE;
+	} else {
+		cursor_string = _("<b>White Cursor</b>\nThe default cursor inverted");
+	}
+
 	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
 			    COLUMN_PIXBUF, pixbuf,
-			    COLUMN_TEXT, "<b>White Cursor</b>\nThe default cursor inverted",
+			    COLUMN_TEXT, cursor_string,
+			    COLUMN_FONT_PATH, font_path,
 			    -1);
-
+	g_free (font_path);
+	
+	/* Large cursor */
 	filename = gnome_program_locate_file (program, GNOME_FILE_DOMAIN_APP_PIXMAP, "mouse-cursor-normal-large.png", TRUE, NULL);
 	pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
 	g_free (filename);
+	font_path = gnome_program_locate_file (program, GNOME_FILE_DOMAIN_DATADIR, "gnome/cursor-fonts/cursor-large.pcf.gz", FALSE, NULL);
+
 	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+	if (cursor_font && ! strcmp (cursor_font, font_path)) {
+		cursor_string = _("<b>Large Cursor - Current</b>\nLarge version of normal cursor");
+		found_default = TRUE;
+	} else {
+		cursor_string = _("<b>Large Cursor</b>\nLarge version of normal cursor");
+	}
+
 	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
 			    COLUMN_PIXBUF, pixbuf,
-			    COLUMN_TEXT, "<b>Large Cursor</b>\nLarge version of normal cursor",
+			    COLUMN_TEXT, cursor_string,
+			    COLUMN_FONT_PATH, font_path,
 			    -1);
+	g_free (font_path);
 
+	/* Large inverted cursor */
 	filename = gnome_program_locate_file (program, GNOME_FILE_DOMAIN_APP_PIXMAP, "mouse-cursor-white-large.png", TRUE, NULL);
 	pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
 	g_free (filename);
+	font_path = gnome_program_locate_file (program, GNOME_FILE_DOMAIN_DATADIR, "gnome/cursor-fonts/cursor-large-white.pcf.gz", FALSE, NULL);
+
 	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+	if (cursor_font && ! strcmp (cursor_font, font_path)) {
+		cursor_string = _("<b>Large White Cursor - Current</b>\nLarge version of white cursor");
+		found_default = TRUE;
+	} else {
+		cursor_string = _("<b>Large White Cursor</b>\nLarge version of white cursor");
+	}
+
 	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
 			    COLUMN_PIXBUF, pixbuf,
-			    COLUMN_TEXT, "<b>Large White Cursor</b>\nLarge version of white cursor",
+			    COLUMN_TEXT, cursor_string,
+			    COLUMN_FONT_PATH, font_path,
 			    -1);
+	g_free (font_path);
+
 	gtk_tree_view_append_column (GTK_TREE_VIEW (tree_view), column);
-	
 	
 	gconf_peditor_new_boolean
 		(changeset, "/desktop/gnome/peripherals/mouse/locate_pointer_id", WID ("locate_pointer_toggle"), NULL);
@@ -432,6 +608,15 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 		 "conv-to-widget-cb", threshold_from_gconf,
 		 "conv-from-widget-cb", gconf_value_float_to_int,
 		 NULL);
+
+	/* listen to cursors changing */
+        gconf_client_notify_add (gconf_client_get_default (),
+				 CURSOR_FONT_KEY, /* dir or key to listen to */
+				 cursor_font_changed,
+				 tree_view, NULL, NULL);
+
+	/* and set it up initially... */
+	cursor_font_changed (gconf_client_get_default (), 0, NULL, tree_view);
 }
 
 /* Construct the dialog */

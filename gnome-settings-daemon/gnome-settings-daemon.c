@@ -36,6 +36,7 @@
 #include "gnome-settings-daemon.h"
 
 #include "gnome-settings-xsettings.h"
+#include "gnome-settings-font.h"
 #include "gnome-settings-mouse.h"
 #include "gnome-settings-keyboard.h"
 #include "gnome-settings-background.h"
@@ -168,6 +169,7 @@ main (int argc, char **argv)
    */
   client = gconf_client_get_default ();
   gnome_settings_xsettings_init (client);
+  gnome_settings_font_init (client);
   gnome_settings_mouse_init (client);
   gnome_settings_keyboard_init (client);
   gnome_settings_background_init (client);
@@ -200,6 +202,7 @@ main (int argc, char **argv)
   
   gdk_window_add_filter (NULL, manager_event_filter, NULL);
   gnome_settings_xsettings_load (client);
+  gnome_settings_font_load (client);
   gnome_settings_mouse_load (client);
   gnome_settings_sound_load (client);
   gnome_settings_background_load (client);
