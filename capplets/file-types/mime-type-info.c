@@ -47,25 +47,26 @@ static void    get_icon_pixbuf        (MimeTypeInfo       *info,
 				       const gchar        *icon_path,
 				       gboolean            want_large);
 
-static MimeCategoryInfo *get_category (const gchar        *category_name);
+static MimeCategoryInfo *get_category (const gchar        *category_name,
+				       GtkTreeModel       *model);
 
 
 
 void
-load_all_mime_types (void) 
+load_all_mime_types (GtkTreeModel *model) 
 {
 	GList *list, *tmp;
 
 	list = gnome_vfs_get_registered_mime_types ();
 
 	for (tmp = list; tmp != NULL; tmp = tmp->next)
-		mime_type_info_new (tmp->data);
+		mime_type_info_new (tmp->data, model);
 
 	g_list_free (list);
 }
 
 MimeTypeInfo *
-mime_type_info_new (const gchar *mime_type)
+mime_type_info_new (const gchar *mime_type, GtkTreeModel *model)
 {
 	MimeTypeInfo      *info;
 
@@ -75,9 +76,9 @@ mime_type_info_new (const gchar *mime_type)
 	if (mime_type != NULL) {
 		info->mime_type = g_strdup (mime_type);
 
-		mime_type_info_set_category_name (info, get_category_name (mime_type));
+		mime_type_info_set_category_name (info, get_category_name (mime_type), model);
 	} else {
-		info->entry.parent = get_model_entries ();
+		info->entry.parent = get_model_entries (model);
 	}
 
 	return info;
@@ -222,16 +223,16 @@ mime_type_info_get_category_name (const MimeTypeInfo *info)
 }
 
 void
-mime_type_info_set_category_name (const MimeTypeInfo *info, const gchar *category_name) 
+mime_type_info_set_category_name (const MimeTypeInfo *info, const gchar *category_name, GtkTreeModel *model) 
 {
 	if (MODEL_ENTRY (info)->parent != NULL)
-		model_entry_remove_child (MODEL_ENTRY (info)->parent, MODEL_ENTRY (info));
+		model_entry_remove_child (MODEL_ENTRY (info)->parent, MODEL_ENTRY (info), model);
 
 	if (category_name != NULL) {
-		MODEL_ENTRY (info)->parent = MODEL_ENTRY (get_category (category_name));
+		MODEL_ENTRY (info)->parent = MODEL_ENTRY (get_category (category_name, model));
 
 		if (MODEL_ENTRY (info)->parent != NULL)
-			model_entry_insert_child (MODEL_ENTRY (info)->parent, MODEL_ENTRY (info));
+			model_entry_insert_child (MODEL_ENTRY (info)->parent, MODEL_ENTRY (info), model);
 	} else {
 		MODEL_ENTRY (info)->parent = NULL;
 	}
@@ -312,7 +313,7 @@ mime_type_info_free (MimeTypeInfo *info)
 }
 
 MimeCategoryInfo *
-mime_category_info_new (MimeCategoryInfo *parent, const gchar *name) 
+mime_category_info_new (MimeCategoryInfo *parent, const gchar *name, GtkTreeModel *model) 
 {
 	MimeCategoryInfo      *info;
 
@@ -324,9 +325,7 @@ mime_category_info_new (MimeCategoryInfo *parent, const gchar *name)
 	if (parent != NULL)
 		MODEL_ENTRY (info)->parent = MODEL_ENTRY (parent);
 	else
-		MODEL_ENTRY (info)->parent = get_model_entries ();
-
-	model_entry_insert_child (MODEL_ENTRY (info)->parent, MODEL_ENTRY (info));
+		MODEL_ENTRY (info)->parent = get_model_entries (model);
 
 	return info;
 }
@@ -567,7 +566,7 @@ get_icon_pixbuf (MimeTypeInfo *info, const gchar *icon_path, gboolean want_large
 }
 
 static MimeCategoryInfo *
-get_category (const gchar *category_name)
+get_category (const gchar *category_name, GtkTreeModel *model)
 {
 	ModelEntry *current, *child;
 	gchar **categories;
@@ -578,7 +577,7 @@ get_category (const gchar *category_name)
 
 	categories = g_strsplit (category_name, "/", -1);
 
-	current = get_model_entries ();
+	current = get_model_entries (model);
 
 	for (i = 0; categories[i] != NULL; i++) {
 		for (child = current->first_child; child != NULL; child = child->next) {
@@ -589,8 +588,10 @@ get_category (const gchar *category_name)
 				break;
 		}
 
-		if (child == NULL)
-			child = MODEL_ENTRY (mime_category_info_new (MIME_CATEGORY_INFO (current), categories[i]));
+		if (child == NULL) {
+			child = MODEL_ENTRY (mime_category_info_new (MIME_CATEGORY_INFO (current), categories[i], model));
+			model_entry_insert_child (MODEL_ENTRY (child)->parent, MODEL_ENTRY (child), model);
+		}
 
 		current = child;
 	}

@@ -49,17 +49,18 @@ struct _ServiceInfo {
 	gboolean                 need_terminal;
 };
 
-void         load_all_services            (void);
+void         load_all_services            (GtkTreeModel      *model);
 
-ServiceInfo *service_info_new             (const gchar       *protocol);
+ServiceInfo *service_info_new             (const gchar       *protocol,
+					   GtkTreeModel      *model);
 void         service_info_load_all        (ServiceInfo       *info);
 const gchar *service_info_get_description (ServiceInfo       *info);
 void         service_info_save            (const ServiceInfo *info);
 void         service_info_delete          (const ServiceInfo *info);
 void         service_info_free            (ServiceInfo       *info);
 
-const GList *get_apps_for_service_type    (gchar *protocol);
-ModelEntry  *get_services_category_entry  (void);
+const GList *get_apps_for_service_type    (gchar             *protocol);
+ModelEntry  *get_services_category_entry  (GtkTreeModel      *model);
 
 G_END_DECLS
 

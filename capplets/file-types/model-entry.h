@@ -47,7 +47,7 @@ struct _ModelEntry
 	struct _ModelEntry *first_child;
 };
 
-ModelEntry *get_model_entries         (void);
+ModelEntry *get_model_entries         (GtkTreeModel *model);
 
 ModelEntry *model_entry_get_nth_child (ModelEntry *entry,
 			               gint        n,
@@ -57,9 +57,11 @@ gint        model_entry_get_index     (ModelEntry *parent,
 				       ModelEntry *child);
 
 void        model_entry_insert_child  (ModelEntry *entry,
-				       ModelEntry *child);
+				       ModelEntry *child,
+				       GtkTreeModel *model);
 void        model_entry_remove_child  (ModelEntry *entry,
-				       ModelEntry *child);
+				       ModelEntry *child,
+				       GtkTreeModel *model);
 
 void        model_entry_save          (ModelEntry *entry);
 void        model_entry_delete        (ModelEntry *entry);

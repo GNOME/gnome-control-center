@@ -1,3 +1,31 @@
+2002-01-27  Bradford Hovinen  <hovinen@ximian.com>
+
+	* service-info.c (load_all_services): Accept model
+	(get_services_category_entry): Accept model
+	(service_info_new): Accept model
+	(get_services_category_entry): Set the parent pointer
+
+	* model-entry.c (get_model_entries): Accept model
+
+	* mime-type-info.c (mime_type_info_new, load_all_mime_types):
+	Accept model
+
+	* mime-edit-dialog.c (store_data): Don't perform notification
+
+	* model-entry.c (model_entry_insert_child) 
+	(model_entry_remove_child): Perform notification here
+
+	* mime-type-info.c (mime_type_info_set_category_name): Accept
+	model for notification purposes
+	(get_category): Ditto; notify the model that the new category has
+	been created
+
+	* mime-types-model.c (mime_types_model_iter_parent): Make the
+	iterator invalid if the parent is the root node
+
+	* mime-edit-dialog.c (collect_filename_extensions): Return NULL if
+	there are no nodes in the tree at all
+
 2002-01-26  Bradford Hovinen  <hovinen@ximian.com>
 
 	* service-edit-dialog.c (response_cb): Free the structure if the

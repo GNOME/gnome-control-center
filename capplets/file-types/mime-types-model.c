@@ -331,7 +331,7 @@ mime_types_model_get_iter (GtkTreeModel *tree_model, GtkTreeIter *iter, GtkTreeP
 	g_return_val_if_fail (depth > 0, FALSE);
 
 	parent.stamp = model->p->stamp;
-	parent.user_data = get_model_entries ();
+	parent.user_data = get_model_entries (tree_model);
 
 	if (!gtk_tree_model_iter_nth_child (tree_model, iter, &parent, indices[0]))
 		return FALSE;
@@ -502,7 +502,7 @@ mime_types_model_iter_children (GtkTreeModel *tree_model, GtkTreeIter *iter, Gtk
 		entry = NULL;
 
 	if (entry == NULL)
-		iter->user_data = get_model_entries ();
+		iter->user_data = get_model_entries (tree_model);
 	else
 		iter->user_data = entry->first_child;
 
@@ -526,7 +526,7 @@ mime_types_model_iter_has_child (GtkTreeModel *tree_model, GtkTreeIter *iter)
 	entry = iter->user_data;
 
 	if (entry == NULL)
-		return get_model_entries ()->first_child != NULL;
+		return get_model_entries (tree_model)->first_child != NULL;
 	else if (!model->p->category_only || IS_CATEGORY (entry->first_child))
 		return entry->first_child != NULL;
 	else {
@@ -556,7 +556,7 @@ mime_types_model_iter_n_children (GtkTreeModel *tree_model, GtkTreeIter *iter)
 		entry = NULL;
 
 	if (entry == NULL)
-		entry = get_model_entries ();
+		entry = get_model_entries (tree_model);
 
 	if (model->p->category_only) {
 		for (tmp = entry->first_child; tmp != NULL; tmp = tmp->next) {
@@ -588,7 +588,7 @@ mime_types_model_iter_nth_child (GtkTreeModel *tree_model, GtkTreeIter *iter, Gt
 		entry = NULL;
 
 	if (entry == NULL)
-		iter->user_data = model_entry_get_nth_child (get_model_entries (), n, model->p->category_only);
+		iter->user_data = model_entry_get_nth_child (get_model_entries (tree_model), n, model->p->category_only);
 	else
 		iter->user_data = model_entry_get_nth_child (entry, n, model->p->category_only);
 
@@ -607,8 +607,10 @@ mime_types_model_iter_parent (GtkTreeModel *tree_model, GtkTreeIter *iter, GtkTr
 	model = MIME_TYPES_MODEL (tree_model);
 	entry = iter->user_data;
 
-	if (entry != NULL)
+	if (entry != NULL && entry->parent->type != MODEL_ENTRY_NONE)
 		iter->user_data = entry->parent;
+	else
+		iter->user_data = NULL;
 
 	return iter->user_data != NULL;
 }

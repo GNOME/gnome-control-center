@@ -145,7 +145,6 @@ remove_cb (GtkButton *button, GladeXML *dialog)
 	GtkTreeModel      *model;
 	GtkTreeSelection  *selection;
 	GtkTreeIter        iter;
-	GtkTreePath       *path;
 	ModelEntry        *entry;
 
 	treeview = GTK_TREE_VIEW (WID ("mime_types_tree"));
@@ -154,11 +153,8 @@ remove_cb (GtkButton *button, GladeXML *dialog)
 
 	entry = MODEL_ENTRY_FROM_ITER (&iter);
 
-	path = gtk_tree_model_get_path (model, &iter);
-	model_entry_remove_child (entry->parent, entry);
+	model_entry_remove_child (entry->parent, entry, model);
 	model_entry_append_to_delete_list (entry);
-	gtk_tree_model_row_deleted (model, path);
-	gtk_tree_path_free (path);
 
 	selection_changed_cb (selection, dialog);
 }

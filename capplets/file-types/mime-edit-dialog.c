@@ -234,7 +234,7 @@ mime_edit_dialog_set_prop (GObject *object, guint prop_id, const GValue *value, 
 		mime_edit_dialog->p->is_add = g_value_get_boolean (value);
 
 		if (mime_edit_dialog->p->is_add) {
-			mime_edit_dialog->p->info = mime_type_info_new (NULL);
+			mime_edit_dialog->p->info = mime_type_info_new (NULL, NULL);
 			setup_add_dialog (mime_edit_dialog);
 			gtk_widget_show_all (mime_edit_dialog->p->dialog_win);
 		}
@@ -497,7 +497,8 @@ collect_filename_extensions (MimeEditDialog *dialog)
 	GValue value;
 	GList *ret = NULL;
 
-	gtk_tree_model_get_iter_root (GTK_TREE_MODEL (dialog->p->ext_store), &iter);
+	if (!gtk_tree_model_get_iter_root (GTK_TREE_MODEL (dialog->p->ext_store), &iter))
+		return NULL;
 
 	value.g_type = G_TYPE_INVALID;
 
@@ -532,7 +533,6 @@ store_data (MimeEditDialog *dialog)
 
 	GtkTreeIter    iter;
 	GtkTreePath   *path;
-	GtkTreePath   *old_path = NULL;
 
 	g_free (dialog->p->info->description);
 	dialog->p->info->description = g_strdup (gtk_entry_get_text (GTK_ENTRY (WID ("description_entry"))));
@@ -565,21 +565,6 @@ store_data (MimeEditDialog *dialog)
 		dialog->p->info->small_icon_pixbuf = NULL;
 	}
 
-	tmp = mime_type_info_get_category_name (dialog->p->info);
-	tmp1 = gtk_entry_get_text (GTK_ENTRY (WID ("category_entry")));
-	if (strcmp (tmp, tmp1)) {
-		cat_changed = TRUE;
-
-		if (!dialog->p->is_add) {
-			mime_types_model_construct_iter (MIME_TYPES_MODEL (dialog->p->model),
-							 MODEL_ENTRY (dialog->p->info), &iter);
-			old_path = gtk_tree_model_get_path (dialog->p->model, &iter);
-		}
-
-		mime_type_info_set_category_name (dialog->p->info, tmp1);
-	}
-	g_free (tmp);
-
 	option_menu = GTK_OPTION_MENU (WID ("component_select"));
 	menu_shell = GTK_MENU_SHELL (gtk_option_menu_get_menu (option_menu));
 	idx = gtk_option_menu_get_history (option_menu);
@@ -608,21 +593,19 @@ store_data (MimeEditDialog *dialog)
 	ext_list = collect_filename_extensions (dialog);
 	mime_type_info_set_file_extensions (dialog->p->info, ext_list);
 
+	tmp = mime_type_info_get_category_name (dialog->p->info);
+	tmp1 = gtk_entry_get_text (GTK_ENTRY (WID ("category_entry")));
+	if (strcmp (tmp, tmp1)) {
+		cat_changed = TRUE;
+		mime_type_info_set_category_name (dialog->p->info, tmp1, dialog->p->model);
+	}
+	g_free (tmp);
+
 	model_entry_append_to_dirty_list (MODEL_ENTRY (dialog->p->info));
 
-	mime_types_model_construct_iter (MIME_TYPES_MODEL (dialog->p->model),
-					 MODEL_ENTRY (dialog->p->info), &iter);
-
-	if (cat_changed) {
-		if (old_path != NULL) {
-			gtk_tree_model_row_deleted (dialog->p->model, old_path);
-			gtk_tree_path_free (old_path);
-		}
-
-		path = gtk_tree_model_get_path (dialog->p->model, &iter);
-		gtk_tree_model_row_inserted (dialog->p->model, path, &iter);
-		gtk_tree_path_free (path);
-	} else {
+	if (!cat_changed) {
+		mime_types_model_construct_iter (MIME_TYPES_MODEL (dialog->p->model),
+						 MODEL_ENTRY (dialog->p->info), &iter);
 		path = gtk_tree_model_get_path (dialog->p->model, &iter);
 		gtk_tree_model_row_changed (dialog->p->model, path, &iter);
 		gtk_tree_path_free (path);

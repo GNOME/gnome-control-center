@@ -65,7 +65,7 @@ static const gchar *get_protocol_name           (const gchar       *key);
 
 
 void
-load_all_services (void) 
+load_all_services (GtkTreeModel *model) 
 {
 	GSList       *url_list;
 	GSList       *tmp;
@@ -81,8 +81,8 @@ load_all_services (void)
 		if (protocol_name == NULL)
 			continue;
 
-		info = service_info_new (protocol_name);
-		model_entry_insert_child (get_services_category_entry (), MODEL_ENTRY (info));
+		info = service_info_new (protocol_name, model);
+		model_entry_insert_child (get_services_category_entry (model), MODEL_ENTRY (info), model);
 
 		g_free (tmp->data);
 	}
@@ -91,7 +91,7 @@ load_all_services (void)
 }
 
 ServiceInfo *
-service_info_new (const gchar *protocol)
+service_info_new (const gchar *protocol, GtkTreeModel *model)
 {
 	ServiceInfo *info;
 
@@ -101,7 +101,7 @@ service_info_new (const gchar *protocol)
 		info->protocol = g_strdup (protocol);
 
 	info->entry.type = MODEL_ENTRY_SERVICE;
-	info->entry.parent = MODEL_ENTRY (get_services_category_entry ());
+	info->entry.parent = MODEL_ENTRY (get_services_category_entry (model));
 
 	return info;
 }
@@ -210,15 +210,16 @@ get_apps_for_service_type (gchar *protocol)
 }
 
 ModelEntry *
-get_services_category_entry (void) 
+get_services_category_entry (GtkTreeModel *model) 
 {
 	static ModelEntry *entry = NULL;
 
 	if (entry == NULL) {
 		entry = g_new0 (ModelEntry, 1);
 		entry->type = MODEL_ENTRY_SERVICES_CATEGORY;
+		entry->parent = get_model_entries (model);
 
-		model_entry_insert_child (get_model_entries (), entry);
+		model_entry_insert_child (get_model_entries (model), entry, model);
 	}
 
 	return entry;

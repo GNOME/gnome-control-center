@@ -69,9 +69,10 @@ struct _MimeCategoryInfo
 	gboolean                 needs_terminal;
 };
 
-void          load_all_mime_types                  (void);
+void          load_all_mime_types                  (GtkTreeModel       *model);
 
-MimeTypeInfo *mime_type_info_new                   (const gchar        *mime_type);
+MimeTypeInfo *mime_type_info_new                   (const gchar        *mime_type,
+						    GtkTreeModel       *model);
 
 void          mime_type_info_load_all              (MimeTypeInfo       *info);
 const gchar  *mime_type_info_get_description       (MimeTypeInfo       *info);
@@ -87,12 +88,14 @@ gchar        *mime_type_info_get_file_extensions_pretty_string
 gchar        *mime_type_info_get_category_name     (const MimeTypeInfo *info);
 
 void          mime_type_info_set_category_name     (const MimeTypeInfo *info,
-						    const gchar        *category_name);
+						    const gchar        *category_name,
+						    GtkTreeModel       *model);
 void          mime_type_info_set_file_extensions   (MimeTypeInfo       *info,
 						    GList              *list);
 
 MimeCategoryInfo *mime_category_info_new           (MimeCategoryInfo   *parent,
-						    const gchar        *name);
+						    const gchar        *name,
+						    GtkTreeModel       *model);
 void          mime_category_info_load_all          (MimeCategoryInfo   *category);
 void          mime_category_info_save              (MimeCategoryInfo   *category);
 GList        *mime_category_info_find_apps         (MimeCategoryInfo   *info);

@@ -201,7 +201,7 @@ service_edit_dialog_set_prop (GObject *object, guint prop_id, const GValue *valu
 		break;
 
 	case PROP_INFO:
-		if (g_value_get_pointer (value) != NULL) {
+		if (!dialog->p->is_add && g_value_get_pointer (value) != NULL) {
 			dialog->p->info = g_value_get_pointer (value);
 			fill_dialog (dialog);
 			gtk_widget_show_all (dialog->p->dialog_win);
@@ -213,7 +213,7 @@ service_edit_dialog_set_prop (GObject *object, guint prop_id, const GValue *valu
 		dialog->p->is_add = g_value_get_boolean (value);
 
 		if (dialog->p->is_add) {
-			dialog->p->info = service_info_new (NULL);
+			dialog->p->info = service_info_new (NULL, NULL);
 			setup_add_dialog (dialog);
 			gtk_widget_show_all (dialog->p->dialog_win);
 		}
@@ -421,15 +421,13 @@ store_data (ServiceEditDialog *dialog)
 
 	model_entry_append_to_dirty_list (MODEL_ENTRY (dialog->p->info));
 
-	mime_types_model_construct_iter (MIME_TYPES_MODEL (dialog->p->model),
-					 MODEL_ENTRY (dialog->p->info), &iter);
-
 	if (dialog->p->is_add) {
-		model_entry_insert_child (get_services_category_entry (), MODEL_ENTRY (dialog->p->info));
-		path = gtk_tree_model_get_path (dialog->p->model, &iter);
-		gtk_tree_model_row_inserted (dialog->p->model, path, &iter);
-		gtk_tree_path_free (path);
+		model_entry_insert_child (get_services_category_entry (dialog->p->model),
+					  MODEL_ENTRY (dialog->p->info),
+					  dialog->p->model);
 	} else {
+		mime_types_model_construct_iter (MIME_TYPES_MODEL (dialog->p->model),
+						 MODEL_ENTRY (dialog->p->info), &iter);
 		path = gtk_tree_model_get_path (dialog->p->model, &iter);
 		gtk_tree_model_row_changed (dialog->p->model, path, &iter);
 		gtk_tree_path_free (path);

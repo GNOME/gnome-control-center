@@ -29,6 +29,7 @@
 #include "model-entry.h"
 #include "mime-type-info.h"
 #include "service-info.h"
+#include "mime-types-model.h"
 
 /* List of MimeTypeInfo structures that have data to be committed */
 
@@ -36,7 +37,7 @@ static GList *dirty_list = NULL;
 static GList *delete_list = NULL;
 
 ModelEntry *
-get_model_entries (void)
+get_model_entries (GtkTreeModel *model)
 {
 	static ModelEntry *root;
 
@@ -44,8 +45,8 @@ get_model_entries (void)
 		root = g_new0 (ModelEntry, 1);
 		root->type = MODEL_ENTRY_NONE;
 
-		load_all_mime_types ();
-		load_all_services ();
+		load_all_mime_types (model);
+		load_all_services (model);
 	}
 
 	return root;
@@ -92,14 +93,18 @@ model_entry_get_index (ModelEntry *parent, ModelEntry *child)
 }
 
 void
-model_entry_insert_child (ModelEntry *entry, ModelEntry *child)
+model_entry_insert_child (ModelEntry *entry, ModelEntry *child, GtkTreeModel *model)
 {
 	ModelEntry *tmp;
+	GtkTreePath *path;
+	GtkTreeIter iter;
 
 	g_return_if_fail (entry != NULL);
 	g_return_if_fail (entry->type == MODEL_ENTRY_CATEGORY || entry->type == MODEL_ENTRY_SERVICES_CATEGORY ||
 			  entry->type == MODEL_ENTRY_NONE);
 	g_return_if_fail (child != NULL);
+	g_return_if_fail (model != NULL);
+	g_return_if_fail (IS_MIME_TYPES_MODEL (model));
 
 	if (entry->first_child == NULL) {
 		entry->first_child = child;
@@ -107,17 +112,26 @@ model_entry_insert_child (ModelEntry *entry, ModelEntry *child)
 		for (tmp = entry->first_child; tmp->next != NULL; tmp = tmp->next);
 		tmp->next = child;
 	}
+
+	mime_types_model_construct_iter (MIME_TYPES_MODEL (model), child, &iter);
+	path = gtk_tree_model_get_path (model, &iter);
+	gtk_tree_model_row_inserted (model, path, &iter);
+	gtk_tree_path_free (path);
 }
 
 void
-model_entry_remove_child (ModelEntry *entry, ModelEntry *child)
+model_entry_remove_child (ModelEntry *entry, ModelEntry *child, GtkTreeModel *model)
 {
 	ModelEntry *tmp;
+	GtkTreePath *path;
+	GtkTreeIter iter;
 
 	g_return_if_fail (entry != NULL);
 	g_return_if_fail (entry->type == MODEL_ENTRY_CATEGORY || entry->type == MODEL_ENTRY_SERVICES_CATEGORY ||
 			  entry->type == MODEL_ENTRY_NONE);
 	g_return_if_fail (child != NULL);
+	g_return_if_fail (model != NULL);
+	g_return_if_fail (IS_MIME_TYPES_MODEL (model));
 
 	if (entry->first_child == NULL) {
 		return;
@@ -128,6 +142,11 @@ model_entry_remove_child (ModelEntry *entry, ModelEntry *child)
 		for (tmp = entry->first_child; tmp->next != NULL && tmp->next != child; tmp = tmp->next);
 		tmp->next = child->next;
 	}
+
+	mime_types_model_construct_iter (MIME_TYPES_MODEL (model), child, &iter);
+	path = gtk_tree_model_get_path (model, &iter);
+	gtk_tree_model_row_deleted (model, path);
+	gtk_tree_path_free (path);
 }
 
 void
