@@ -21,11 +21,6 @@ int main (int argc, char *argv [])
   gnome_program_init ("gnome2-settings-daemon", VERSION, LIBGNOMEUI_MODULE,
 		      argc, argv, NULL);
   
-  session = gnome_master_client ();
-  gnome_client_set_restart_command (session, 2, restart_argv);
-  gnome_client_set_restart_style (session, GNOME_RESTART_IMMEDIATELY);
-  gnome_client_set_priority      (session, 5);
-
   if (!bonobo_init (&argc, argv)) {
     g_error (_("Could not initialize Bonobo"));
   }
@@ -41,6 +36,11 @@ int main (int argc, char *argv [])
     g_warning ("Encountered problems registering the settings daemon with bonobo-activation. "
 	       "Clients may not detect that the settings daemon is already running.");
   }
+
+  session = gnome_master_client ();
+  gnome_client_set_restart_command (session, 2, restart_argv);
+  gnome_client_set_restart_style (session, GNOME_RESTART_IMMEDIATELY);
+  gnome_client_set_priority      (session, 5);
 
   gtk_main();
 
