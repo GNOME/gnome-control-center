@@ -124,13 +124,25 @@ apply_cb (BonoboPropertyControl *pc, Bonobo_PropertyControl_Action action)
 		CORBA_exception_init (&ev);
 
 		pf = gtk_object_get_data (GTK_OBJECT (pc), "property-frame");
-		db = gtk_object_get_data (GTK_OBJECT (pc), "config-database");
+		db = gtk_object_get_data (GTK_OBJECT (pf), "config-database");
 		bonobo_pbproxy_update (pf->proxy);
-		apply_settings (db);
 		Bonobo_ConfigDatabase_sync (db, &ev);
 
 		CORBA_exception_free (&ev);
 	}
+}
+
+/* changed_cb
+ *
+ * Callback issued when a setting in the ConfigDatabase changes. Does not vary
+ * from capplet to capplet.
+ */
+
+static void
+changed_cb (BonoboListener *listener, gchar *event_name, CORBA_any *any,
+	    CORBA_Environment *ev, Bonobo_ConfigDatabase db) 
+{
+	apply_settings (db);
 }
 
 /* get_legacy_settings
@@ -138,8 +150,7 @@ apply_cb (BonoboPropertyControl *pc, Bonobo_PropertyControl_Action action)
  * Retrieve older gnome_config -style settings and store them in the
  * configuration database. This function is written per-capplet.
  *
- * In most cases, it's best to use the COPY_FROM_LEGACY macro defined above.
- */
+ * In most cases, it's best to use the COPY_FROM_LEGACY macro defined above.  */
 
 static void
 get_legacy_settings (Bonobo_ConfigDatabase db) 
@@ -223,6 +234,7 @@ set_moniker_cb (BonoboPropertyBag *bag, BonoboArg *arg, guint arg_id,
 	BonoboPropertyFrame *pf;
 	Bonobo_PropertyBag proxy;
 	GladeXML *dialog;
+	Bonobo_ConfigDatabase db;
 
 	if (arg_id != 1) return;
 
@@ -233,6 +245,13 @@ set_moniker_cb (BonoboPropertyBag *bag, BonoboArg *arg, guint arg_id,
 	bonobo_property_frame_set_moniker (pf, full_moniker);
 	proxy = BONOBO_OBJREF (pf->proxy);
 	dialog = gtk_object_get_data (GTK_OBJECT (control), "dialog");
+
+	db = bonobo_get_object (moniker, "IDL:Bonobo/ConfigDatabase:1.0", ev);
+
+	if (BONOBO_EX (ev) || db == CORBA_OBJECT_NIL)
+		g_critical ("Could not resolve configuration moniker; will not be able to save settings");
+
+	gtk_object_set_data (GTK_OBJECT (pf), "config-database", db);
 
 	/* Begin per-capplet part */
 
@@ -336,7 +355,10 @@ create_control_cb (BonoboGenericFactory *factory, Bonobo_ConfigDatabase db)
 		((BonoboPropertyControlGetControlFn) create_dialog_cb, 1, NULL);
 	gtk_signal_connect (GTK_OBJECT (property_control), "action",
 			    GTK_SIGNAL_FUNC (apply_cb), NULL);
-	gtk_object_set_data (GTK_OBJECT (property_control), "config-database", db);
+
+	bonobo_event_source_client_add_listener
+		(db, (BonoboListenerCallbackFn) changed_cb,
+		 "Bonobo/ConfigDatabase:change", &ev, db);
 
 	CORBA_exception_free (&ev);
 

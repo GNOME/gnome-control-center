@@ -1,3 +1,14 @@
+2001-07-13  Bradford Hovinen  <hovinen@ximian.com>
+
+	* sound-properties-capplet.c (set_moniker_cb): Resolve
+	configuration database and store in property frame
+	(apply_cb): Retrieve configuration database from property frame
+	(create_control_cb): Don't store config database in property
+	control
+	(create_control_cb): Add listener for property change in config
+	database
+	(changed_cb): Implement
+
 2001-07-12  Bradford Hovinen  <hovinen@ximian.com>
 
 	* sound-properties-capplet.c (apply_settings): Disable launch of
