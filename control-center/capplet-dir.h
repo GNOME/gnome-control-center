@@ -30,11 +30,14 @@
 #define CAPPLET_DIR(obj) ((CappletDir *) obj)
 #define CAPPLET(obj) ((Capplet *) obj)
 
+#define IS_CAPPLET(obj) (((CappletDirEntry *) obj)->type == TYPE_CAPPLET)
+#define IS_CAPPLET_DIR(obj) (((CappletDirEntry *) obj)->type == TYPE_CAPPLET_DIR)
+
 typedef struct _CappletDirEntry CappletDirEntry;
 typedef struct _CappletDir CappletDir;
 typedef struct _Capplet Capplet;
 
-typedef struct _CappletDirWindow CappletDirWindow;
+typedef struct _CappletDirView CappletDirView;
 
 typedef enum {
 	TYPE_CAPPLET, TYPE_CAPPLET_DIR
@@ -46,6 +49,7 @@ struct _CappletDirEntry
 	GnomeDesktopEntry *entry;
 	gchar *label;
 	gchar *icon;
+	CappletDir *dir;
 };
 
 struct _CappletDir
@@ -53,7 +57,7 @@ struct _CappletDir
 	CappletDirEntry entry;
 	gchar *path;
 	CappletDirEntry **entries;
-	CappletDirWindow *window;
+	CappletDirView *view;
 };
 
 struct _Capplet
@@ -61,14 +65,22 @@ struct _Capplet
 	CappletDirEntry entry;
 };
 
-CappletDirEntry *capplet_new                (gchar *desktop_path);
-CappletDirEntry *capplet_dir_new            (gchar *dir_path);
+CappletDirEntry *capplet_new                (CappletDir *dir,
+					     gchar *desktop_path);
+CappletDirEntry *capplet_dir_new            (CappletDir *dir, gchar *dir_path);
 
 void             capplet_dir_entry_destroy  (CappletDirEntry *entry);
 
-void             capplet_dir_entry_activate (CappletDirEntry *entry);
+void             capplet_dir_entry_activate (CappletDirEntry *entry,
+					     CappletDirView *launcher);
 void             capplet_dir_entry_shutdown (CappletDirEntry *entry);
 
-void             control_center_init        (int *argc, char **argv);
+void             capplet_dir_load           (CappletDir *dir);
+
+void             capplet_dir_init           (CappletDirView *(*cb) 
+					     (CappletDir *,
+					      CappletDirView *));
+
+CappletDir      *get_root_capplet_dir       (void);
 
 #endif /* __CAPPLET_DIR_H */

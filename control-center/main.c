@@ -26,8 +26,10 @@
 #endif
 
 #include <gnome.h>
+#include <glade/glade.h>
 
 #include "capplet-dir.h"
+#include "capplet-dir-view.h"
 
 int
 main (int argc, char **argv) 
@@ -38,13 +40,11 @@ main (int argc, char **argv)
         textdomain (PACKAGE);
 
 	gnome_init ("control-center", VERSION, argc, argv);
+	glade_gnome_init ();
+	gnomecc_init ();
 
-	main_dir = capplet_dir_new (SETTINGS_DIR);
-
-	if (!main_dir)
-		g_error ("Could not find directory of control panels");
-
-	capplet_dir_entry_activate (main_dir);
+	capplet_dir_entry_activate 
+		(CAPPLET_DIR_ENTRY (get_root_capplet_dir ()), NULL);
 
 	gtk_main ();
 

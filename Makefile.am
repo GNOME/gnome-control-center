@@ -1,8 +1,8 @@
 
-always_built_SUBDIRS = control-center capplets idl
+always_built_SUBDIRS = new-control-center libcapplet capplets idl
 
-SUBDIRS = intl po \
-	 $(always_built_SUBDIRS)
+SUBDIRS = intl \
+	 $(always_built_SUBDIRS) po
 
 #DIST_SUBDIRS = intl po macros $(always_built_SUBDIRS)
 

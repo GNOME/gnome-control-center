@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.6\n"
-"POT-Creation-Date: 2000-05-20 22:20+0000\n"
+"POT-Creation-Date: 2000-08-04 10:01-0400\n"
 "PO-Revision-Date: 1999-10-05 06:05-0400\n"
 "Last-Translator: Sergey Panov <sipan@mit.edu>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -71,8 +71,6 @@ msgid "Can't find an hbox, using a normal file selection"
 msgstr "Не найден hbox, используется обычный выбор файлов"
 
 #: capplets/background-properties/property-background.c:889
-#: capplets/keyboard-properties/keyboard-properties.c:265
-#: capplets/screensaver-properties/screensaver-dialog.c:25
 #: capplets/theme-switcher/gui.c:226 capplets/theme-switcher/gui.c:298
 msgid "Preview"
 msgstr "Посмотреть"
@@ -108,9 +106,7 @@ msgstr "Мозаика"
 #: capplets/background-properties/property-background.c:1135
 #: capplets/bell-properties/bell-properties.c:61
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:179
-#: capplets/keyboard-properties/keyboard-properties.c:81
 #: capplets/mouse-properties/mouse-properties.c:111
-#: capplets/screensaver-properties/callbacks.c:802
 #: capplets/session-properties/session-properties.c:300
 #: capplets/sound-properties/sound-properties.c:690
 #: capplets/theme-switcher/gui.c:362
@@ -126,16 +122,13 @@ msgstr ""
 #: capplets/background-properties/property-background.c:1137
 #: capplets/bell-properties/bell-properties.c:63
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:181
-#: capplets/keyboard-properties/keyboard-properties.c:83
 #: capplets/mouse-properties/mouse-properties.c:113
-#: capplets/screensaver-properties/callbacks.c:804
 #: capplets/session-properties/session-properties.c:302
 #: capplets/sound-properties/sound-properties.c:692
 #: capplets/sound-properties/sound-properties.c:753
 #: capplets/theme-switcher/gui.c:364
 #: capplets/ui-properties/ui-properties.c:516
 #: capplets/wm-properties/wm-properties-capplet.c:641
-#: control-center/callbacks.c:75 control-center/capplet-widget.c:263
 msgid "Close"
 msgstr "Закрыть"
 
@@ -227,47 +220,6 @@ msgstr "Редактор GNOME"
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:248
 msgid "Run In Terminal"
 msgstr "Запускать в терминале"
-
-#: capplets/keyboard-properties/keyboard-properties.c:216
-msgid "Auto-repeat"
-msgstr "Авто-повтор"
-
-#: capplets/keyboard-properties/keyboard-properties.c:227
-msgid "Enable auto-repeat"
-msgstr "Включить авто-повтор"
-
-#: capplets/keyboard-properties/keyboard-properties.c:237
-msgid "Repeat rate"
-msgstr "Скорость повтора"
-
-#: capplets/keyboard-properties/keyboard-properties.c:240
-msgid "Repeat Delay"
-msgstr "Задержка повтора"
-
-#: capplets/keyboard-properties/keyboard-properties.c:242
-msgid "Keyboard click"
-msgstr "Щелчки клавиш"
-
-#: capplets/keyboard-properties/keyboard-properties.c:253
-msgid "Click on keypress"
-msgstr "Щелкать при нажатии"
-
-#: capplets/keyboard-properties/keyboard-properties.c:263
-msgid "Click volume"
-msgstr "Громкость щелчка"
-
-#: capplets/keyboard-properties/keyboard-properties.c:273
-msgid "Test settings"
-msgstr "Проверка установок"
-
-#: capplets/keyboard-properties/keyboard-properties.c:315
-msgid ""
-"an initialization error occurred while starting "
-"'keyboard-properties-capplet'.\n"
-"aborting...\n"
-msgstr ""
-"ошибка инициализации при запуске 'keyboard-properties-capplet'.\n"
-"исполнение прервано ...\n"
 
 #. icon box
 #: capplets/mime-type/edit-window.c:261
@@ -413,8 +365,7 @@ msgid ""
 "We will not be able to save the state."
 msgstr ""
 "Невозможно создать каталог\n"
-"~/.gnome/mime-info\n"
-"\n"
+"~/.gnome/mime-info"
 
 #: capplets/mime-type/mime-info.c:429
 msgid ""
@@ -551,106 +502,6 @@ msgstr ""
 "ошибка инициализации при запуске 'mouse-properties-capplet'.\n"
 "исполнение прервано ...\n"
 
-#: capplets/screensaver-properties/callbacks.c:102
-msgid "Require Password"
-msgstr "Запрашивать пароль"
-
-#: capplets/screensaver-properties/callbacks.c:154
-msgid "Use power management."
-msgstr "Использовать энергосбережение."
-
-#: capplets/screensaver-properties/callbacks.c:309
-msgid "No Screensaver"
-msgstr "Нет хранителя экрана"
-
-#: capplets/screensaver-properties/callbacks.c:314
-msgid "Random Screensaver"
-msgstr "Случайный хранитель экрана"
-
-#: capplets/screensaver-properties/callbacks.c:483
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:54
-msgid "Settings..."
-msgstr "Свойства..."
-
-#. we need to special case random
-#: capplets/screensaver-properties/callbacks.c:491
-msgid "Random Settings"
-msgstr "Случайные параметры"
-
-#: capplets/screensaver-properties/callbacks.c:501
-#, c-format
-msgid "%s Settings..."
-msgstr "Настройка %s"
-
-#: capplets/screensaver-properties/screensaver-dialog.c:46
-msgid "About:"
-msgstr "О программе:"
-
-#: capplets/screensaver-properties/screensaver-dialog.c:51
-msgid "Author:"
-msgstr "Автор:"
-
-#: capplets/screensaver-properties/screensaver-dialog.c:61
-msgid "Author: UNKNOWN"
-msgstr "Автор: НЕИЗВЕСТНЫЙ"
-
-#: capplets/screensaver-properties/screensaver-dialog.c:78
-#: capplets/session-properties/gsm-client-row.c:59
-msgid "Settings"
-msgstr "Свойства"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:36
-msgid "RANDOM SCREENSAVER"
-msgstr "СЛУЧАЙНЫЙ ХРАНИТЕЛЬ"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:47
-msgid "Screen Saver"
-msgstr "Хранитель экрана"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:59
-msgid ""
-"Pressing this button will popup a dialogbox that will help you setup the "
-"current screensaver."
-msgstr ""
-"Нажатие этой кнопки вызовет диалог для настройки выбранного хранителя экрана."
-
-#. set up the initial frame, and get a vbox in which to pack things.
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:86
-msgid "Screen Saver Settings"
-msgstr "Настройки хранителя экрана"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:94
-msgid "Start After "
-msgstr "Начинать через "
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:100
-msgid " Minutes."
-msgstr " минут."
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:115
-msgid "Priority:"
-msgstr "Приоритет:"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:122
-msgid "Low "
-msgstr "Низкий "
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:124
-msgid " Normal"
-msgstr " Нормальный"
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:135
-msgid "Shutdown monitor "
-msgstr "Выключать монитор через "
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:137
-msgid " minutes after screen saver has started."
-msgstr " минут после начала работы хранителя экрана."
-
-#: capplets/screensaver-properties/screensaver-properties-capplet.c:150
-msgid "Screen Saver Demo"
-msgstr "Демонстрация хранителя экрана"
-
 #: capplets/session-properties/gsm-client-editor.c:100
 msgid "Order: "
 msgstr "Порядок: "
@@ -776,6 +627,10 @@ msgstr "Выбрасываемая"
 #: capplets/session-properties/gsm-client-row.c:57
 msgid "Discarded on logout and can die."
 msgstr "Выкидывается при окончании работы и \"смертна\"."
+
+#: capplets/session-properties/gsm-client-row.c:59
+msgid "Settings"
+msgstr "Свойства"
 
 #: capplets/session-properties/gsm-client-row.c:60
 msgid "Always started on every login."
@@ -1323,7 +1178,6 @@ msgstr ""
 #: capplets/wm-properties/wm-properties-capplet.c:854
 #: capplets/wm-properties/wm-properties-capplet.c:861
 #: capplets/wm-properties/wm-properties-capplet.c:1007
-#: control-center/capplet-manager.c:181
 msgid "OK"
 msgstr "OK"
 
@@ -1370,7 +1224,6 @@ msgid "Add New Window Manager"
 msgstr "Добавить новый диспетчер окон"
 
 #: capplets/wm-properties/wm-properties-capplet.c:746
-#: control-center/capplet-manager.c:186
 msgid "Cancel"
 msgstr "Отменить"
 
@@ -1415,109 +1268,183 @@ msgstr ""
 "ошибка инициализации при запуске 'wm-properties-capplet'.\n"
 "исполнение прервано ...\n"
 
-#: control-center/callbacks.c:73
-msgid ""
-"No help is available/installed. Please make sure you\n"
-"have the GNOME User's Guide installed on your system."
-msgstr ""
-"Справочная информация не доступна. Проверьте пожалуйста что\n"
-"Руководство пользователя GNOME установлено на вашей системе."
+#~ msgid "Auto-repeat"
+#~ msgstr "Авто-повтор"
 
-#: control-center/callbacks.c:95
-msgid "GNOME Control Center"
-msgstr "Центр управления GNOME"
+#~ msgid "Enable auto-repeat"
+#~ msgstr "Включить авто-повтор"
 
-#: control-center/callbacks.c:98
-msgid "Desktop Properties manager."
-msgstr "Диспетчер свойств рабочего стола."
+#~ msgid "Repeat rate"
+#~ msgstr "Скорость повтора"
 
-#: control-center/capplet-manager.c:171
-msgid "Try"
-msgstr "Попробовать"
+#~ msgid "Repeat Delay"
+#~ msgstr "Задержка повтора"
 
-#: control-center/capplet-manager.c:176
-msgid "Revert"
-msgstr "Вернуть"
+#~ msgid "Keyboard click"
+#~ msgstr "Щелчки клавиш"
 
-#: control-center/capplet-manager.c:189 control-center/main.c:31
-msgid "Help"
-msgstr "Справка"
+#~ msgid "Click on keypress"
+#~ msgstr "Щелкать при нажатии"
 
-#: control-center/capplet-widget-libs.c:46
-msgid "id of the capplet -- assigned by the control-center"
-msgstr "идентификатор капплет -- выдается центром управления"
+#~ msgid "Click volume"
+#~ msgstr "Громкость щелчка"
 
-#: control-center/capplet-widget-libs.c:46
-msgid "ID"
-msgstr "ИД"
+#~ msgid "Test settings"
+#~ msgstr "Проверка установок"
 
-#: control-center/capplet-widget-libs.c:47
-msgid "Multi-capplet id."
-msgstr "Мульти-капплет идентификатор"
+#~ msgid ""
+#~ "an initialization error occurred while starting "
+#~ "'keyboard-properties-capplet'.\n"
+#~ "aborting...\n"
+#~ msgstr ""
+#~ "ошибка инициализации при запуске 'keyboard-properties-capplet'.\n"
+#~ "исполнение прервано ...\n"
 
-#: control-center/capplet-widget-libs.c:47
-msgid "CAPID"
-msgstr "КАПИД"
+#~ msgid "Require Password"
+#~ msgstr "Запрашивать пароль"
 
-#: control-center/capplet-widget-libs.c:48
-msgid "X ID of the socket it's plugged into"
-msgstr "X ИД используемой розетки "
+#~ msgid "Use power management."
+#~ msgstr "Использовать энергосбережение."
 
-#: control-center/capplet-widget-libs.c:48
-msgid "XID"
-msgstr "XИД"
+#~ msgid "No Screensaver"
+#~ msgstr "Нет хранителя экрана"
 
-#: control-center/capplet-widget-libs.c:49
-msgid "IOR of the control-center"
-msgstr "IOR центра управления"
+#~ msgid "Random Screensaver"
+#~ msgstr "Случайный хранитель экрана"
 
-#: control-center/capplet-widget-libs.c:49
-msgid "IOR"
-msgstr "IOR"
+#~ msgid "Settings..."
+#~ msgstr "Свойства..."
 
-#: control-center/capplet-widget-libs.c:50
-msgid "Initialize session settings"
-msgstr "Инициализировать свойства сеанса"
+#~ msgid "Random Settings"
+#~ msgstr "Случайные параметры"
 
-#: control-center/capplet-widget-libs.c:51
-msgid "Ignore default action.  Used for custom init-session cases"
-msgstr "Проигнорировать обычные действия. Для специальных случаев"
+#~ msgid "%s Settings..."
+#~ msgstr "Настройка %s"
 
-#: control-center/capplet-widget.c:262
-msgid "Sorry, no help is available for these settings."
-msgstr "К сожалению информация о этих настройках отсутствует."
+#~ msgid "About:"
+#~ msgstr "О программе:"
 
-#: control-center/corba-glue.c:75
-msgid "capplet-command to be run."
-msgstr "исполнить капплет-команду."
+#~ msgid "Author:"
+#~ msgstr "Автор:"
 
-#: control-center/corba-glue.c:75
-msgid "CAPPLET"
-msgstr "КАППЛЕТ"
+#~ msgid "Author: UNKNOWN"
+#~ msgstr "Автор: НЕИЗВЕСТНЫЙ"
 
-#: control-center/main.c:31
-msgid "Help with the GNOME control-center."
-msgstr "Справка по центру управления GNOME"
+#~ msgid "RANDOM SCREENSAVER"
+#~ msgstr "СЛУЧАЙНЫЙ ХРАНИТЕЛЬ"
 
-#. we create the widgets
-#: control-center/main.c:59
-msgid "Warning:"
-msgstr "Предупреждение:"
+#~ msgid "Screen Saver"
+#~ msgstr "Хранитель экрана"
 
-#: control-center/main.c:59
-msgid "Discard all changes"
-msgstr "Забыть все изменения"
+#~ msgid ""
+#~ "Pressing this button will popup a dialogbox that will help you setup the "
+#~ "current screensaver."
+#~ msgstr ""
+#~ "Нажатие этой кнопки вызовет диалог для настройки выбранного хранителя экрана."
 
-#. ...labels, etc
-#: control-center/main.c:68
-msgid ""
-"The following modules have had changes made, but not committed.  If you "
-"would like to edit them, please double click on the appropriate entry."
-msgstr ""
-"Следующие модули были изменены но изменения еще не активизированы. Для "
-"работы с этими модулями нужен двойной щелчок на соответствующем элементе."
+#~ msgid "Screen Saver Settings"
+#~ msgstr "Настройки хранителя экрана"
 
-#. create the app
-#: control-center/main.c:186
-msgid "Control Center"
-msgstr "Центр управления GNOME"
+#~ msgid "Start After "
+#~ msgstr "Начинать через "
+
+#~ msgid " Minutes."
+#~ msgstr " минут."
+
+#~ msgid "Priority:"
+#~ msgstr "Приоритет:"
+
+#~ msgid "Low "
+#~ msgstr "Низкий "
+
+#~ msgid " Normal"
+#~ msgstr " Нормальный"
+
+#~ msgid "Shutdown monitor "
+#~ msgstr "Выключать монитор через "
+
+#~ msgid " minutes after screen saver has started."
+#~ msgstr " минут после начала работы хранителя экрана."
+
+#~ msgid "Screen Saver Demo"
+#~ msgstr "Демонстрация хранителя экрана"
+
+#~ msgid ""
+#~ "No help is available/installed. Please make sure you\n"
+#~ "have the GNOME User's Guide installed on your system."
+#~ msgstr ""
+#~ "Справочная информация не доступна. Проверьте пожалуйста что\n"
+#~ "Руководство пользователя GNOME установлено на вашей системе."
+
+#~ msgid "GNOME Control Center"
+#~ msgstr "Центр управления GNOME"
+
+#~ msgid "Desktop Properties manager."
+#~ msgstr "Диспетчер свойств рабочего стола."
+
+#~ msgid "Try"
+#~ msgstr "Попробовать"
+
+#~ msgid "Revert"
+#~ msgstr "Вернуть"
+
+#~ msgid "Help"
+#~ msgstr "Справка"
+
+#~ msgid "id of the capplet -- assigned by the control-center"
+#~ msgstr "идентификатор капплет -- выдается центром управления"
+
+#~ msgid "ID"
+#~ msgstr "ИД"
+
+#~ msgid "Multi-capplet id."
+#~ msgstr "Мульти-капплет идентификатор"
+
+#~ msgid "CAPID"
+#~ msgstr "КАПИД"
+
+#~ msgid "X ID of the socket it's plugged into"
+#~ msgstr "X ИД используемой розетки "
+
+#~ msgid "XID"
+#~ msgstr "XИД"
+
+#~ msgid "IOR of the control-center"
+#~ msgstr "IOR центра управления"
+
+#~ msgid "IOR"
+#~ msgstr "IOR"
+
+#~ msgid "Initialize session settings"
+#~ msgstr "Инициализировать свойства сеанса"
+
+#~ msgid "Ignore default action.  Used for custom init-session cases"
+#~ msgstr "Проигнорировать обычные действия. Для специальных случаев"
+
+#~ msgid "Sorry, no help is available for these settings."
+#~ msgstr "К сожалению информация о этих настройках отсутствует."
+
+#~ msgid "capplet-command to be run."
+#~ msgstr "исполнить капплет-команду."
+
+#~ msgid "CAPPLET"
+#~ msgstr "КАППЛЕТ"
+
+#~ msgid "Help with the GNOME control-center."
+#~ msgstr "Справка по центру управления GNOME"
+
+#~ msgid "Warning:"
+#~ msgstr "Предупреждение:"
+
+#~ msgid "Discard all changes"
+#~ msgstr "Забыть все изменения"
+
+#~ msgid ""
+#~ "The following modules have had changes made, but not committed.  If you "
+#~ "would like to edit them, please double click on the appropriate entry."
+#~ msgstr ""
+#~ "Следующие модули были изменены но изменения еще не активизированы. Для "
+#~ "работы с этими модулями нужен двойной щелчок на соответствующем элементе."
+
+#~ msgid "Control Center"
+#~ msgstr "Центр управления GNOME"

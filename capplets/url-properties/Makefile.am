@@ -1,6 +1,6 @@
 INCLUDES = -I. -I$(srcdir) 				\
 	-I$(top_srcdir)/intl -I$(top_builddir)/intl	\
-	-I$(srcdir)/../../control-center		\
+	-I$(srcdir)/../../libcapplet		\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
 	-I$(includedir) $(GNOME_INCLUDEDIR)		\
 	-DGNOMESYSCONFDIR=\""$(sysconfdir)"\"
@@ -9,9 +9,9 @@ bin_PROGRAMS = url-properties
 
 url_properties_SOURCES = url-properties.c
 
-url_properties_LDADD = ../../control-center/libcapplet.la \
+url_properties_LDADD = ../../libcapplet/libcapplet.la \
 		     $(GNOME_LIBS) $(ORBIT_LIBS) \
-		     $(GNOMEUI_LIBS) $(INTLLIBS)
+		     $(GNOMEUI_LIBS) $(GNOME_LIBDIR) $(INTLLIBS)
 
 
 EXTRA_DIST = \

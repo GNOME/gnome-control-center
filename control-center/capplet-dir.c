@@ -2,8 +2,10 @@
 
 /* capplet-dir.c
  * Copyright (C) 2000 Helix Code, Inc.
+ * Copyright (C) 1998 Red Hat Software, Inc.
  *
- * Written by Bradford Hovinen (hovinen@helixcode.com)
+ * Written by Bradford Hovinen <hovinen@helixcode.com>,
+ *            Jonathan Blandford <jrb@redhat.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,20 +33,23 @@
 #include <errno.h>
 
 #include "capplet-dir.h"
-#include "capplet-dir-window.h"
+#include "capplet-dir-view.h"
 
 static void capplet_activate     (Capplet *capplet);
-static void capplet_dir_activate (CappletDir *capplet_dir);
+static void capplet_dir_activate (CappletDir *capplet_dir,
+				  CappletDirView *launcher);
 
 static void capplet_shutdown     (Capplet *capplet);
 static void capplet_dir_shutdown (CappletDir *capplet_dir);
 
-static CappletDirEntry **read_entries (gchar *path);
+static CappletDirEntry **read_entries (CappletDir *dir);
 
 static void start_capplet_through_root_manager (GnomeDesktopEntry *gde);
 
+CappletDirView *(*get_view_cb) (CappletDir *dir, CappletDirView *launcher);
+
 CappletDirEntry *
-capplet_new (gchar *desktop_path) 
+capplet_new (CappletDir *dir, gchar *desktop_path) 
 {
 	Capplet *capplet;
 	CappletDirEntry *entry;
@@ -58,6 +63,7 @@ capplet_new (gchar *desktop_path)
 	entry->entry = gnome_desktop_entry_load (desktop_path);
 	entry->label = entry->entry->name;
 	entry->icon = entry->entry->icon;
+	entry->dir = dir;
 
 	/* Don't continue if this is just the control center again */
 	if (!strcmp (entry->entry->exec[0], "gnomecc")) {
@@ -72,7 +78,7 @@ capplet_new (gchar *desktop_path)
 }
 
 CappletDirEntry *
-capplet_dir_new (gchar *dir_path) 
+capplet_dir_new (CappletDir *dir, gchar *dir_path) 
 {
 	CappletDir *capplet_dir;
 	CappletDirEntry *entry;
@@ -87,6 +93,7 @@ capplet_dir_new (gchar *dir_path)
 
 	entry->type = TYPE_CAPPLET_DIR;
 	entry->entry = gnome_desktop_entry_load (desktop_path);
+	entry->dir = dir;
 
 	g_free (desktop_path);
 
@@ -122,14 +129,15 @@ capplet_dir_entry_destroy (CappletDirEntry *entry)
 }
 
 void 
-capplet_dir_entry_activate (CappletDirEntry *entry)
+capplet_dir_entry_activate (CappletDirEntry *entry, 
+			    CappletDirView *launcher)
 {
 	g_return_if_fail (entry != NULL);
 
 	if (entry->type == TYPE_CAPPLET)
 		capplet_activate (CAPPLET (entry));
 	else if (entry->type == TYPE_CAPPLET_DIR)
-		capplet_dir_activate (CAPPLET_DIR (entry));
+		capplet_dir_activate (CAPPLET_DIR (entry), launcher);
 	else
 		g_assert_not_reached ();
 }
@@ -158,11 +166,21 @@ capplet_activate (Capplet *capplet)
 		gnome_desktop_entry_launch (entry);
 }
 
-static void
-capplet_dir_activate (CappletDir *capplet_dir) 
+void
+capplet_dir_load (CappletDir *capplet_dir) 
 {
-	capplet_dir->entries = read_entries (capplet_dir->path);
-	capplet_dir->window = capplet_dir_window_new (capplet_dir);
+	if (capplet_dir->entries) return;
+	capplet_dir->entries = read_entries (capplet_dir);
+}
+
+static void
+capplet_dir_activate (CappletDir *capplet_dir, CappletDirView *launcher) 
+{
+	capplet_dir_load (capplet_dir);
+	capplet_dir->view = get_view_cb (capplet_dir, launcher);
+
+	capplet_dir_view_load_dir (capplet_dir->view, capplet_dir);
+	gtk_widget_show_all (GTK_WIDGET (capplet_dir->view));
 }
 
 static void
@@ -176,19 +194,28 @@ capplet_dir_shutdown (CappletDir *capplet_dir)
 {
 	int i;
 
-	if (capplet_dir->window)
-		capplet_dir_window_destroy (capplet_dir->window);
+	if (capplet_dir->view)
+		gtk_object_unref (GTK_OBJECT (capplet_dir->view));
 
 	if (capplet_dir->entries) {
 		for (i = 0; capplet_dir->entries[i]; i++)
-			capplet_dir_entry_destroy 
+			capplet_dir_entry_destroy
 				(capplet_dir->entries[i]);
 		g_free (capplet_dir->entries);
 	}
 }
 
+static gint 
+node_compare (gconstpointer a, gconstpointer b) 
+{
+	return strcmp (CAPPLET_DIR_ENTRY (a)->entry->name, 
+		       CAPPLET_DIR_ENTRY (b)->entry->name);
+}
+
+/* Adapted from the original control center... */
+
 static CappletDirEntry **
-read_entries (gchar *path) 
+read_entries (CappletDir *dir) 
 {
         DIR *parent_dir;
         struct dirent *child_dir;
@@ -199,7 +226,7 @@ read_entries (gchar *path)
 	CappletDirEntry **entry_array;
 	int i;
 
-        parent_dir = opendir (path);
+        parent_dir = opendir (dir->path);
         if (parent_dir == NULL)
                 return NULL;
 
@@ -208,7 +235,7 @@ read_entries (gchar *path)
         while ((child_dir = readdir (parent_dir)) != NULL) {
                 if (child_dir->d_name[0] != '.') {
                         /* we check to see if it is interesting. */
-			fullpath = g_concat_dir_and_file (path,
+			fullpath = g_concat_dir_and_file (dir->path,
 							  child_dir->d_name);
 
                         if (stat (fullpath, &filedata) != -1) {
@@ -217,7 +244,8 @@ read_entries (gchar *path)
 				entry = NULL;
 
                                 if (S_ISDIR (filedata.st_mode)) {
-					entry = capplet_dir_new (fullpath);
+					entry = capplet_dir_new 
+						(dir, fullpath);
 				} else {
 					test = rindex(child_dir->d_name, '.');
 
@@ -225,7 +253,8 @@ read_entries (gchar *path)
 					    !strcmp (".desktop", test)) 
                                         /* it's a .desktop file --
 					 * it's interesting for sure! */
-						entry = capplet_new (fullpath);
+						entry = capplet_new
+							(dir, fullpath);
                                 }
 
 				if (entry) {
@@ -243,6 +272,8 @@ read_entries (gchar *path)
         }
         
         closedir (parent_dir);
+
+	list_head = g_list_sort (list_head, node_compare);
 
 	/* Allocate the array and copy the list contents over */
 	entry_array = g_new0 (CappletDirEntry *, 
@@ -289,4 +320,25 @@ start_capplet_through_root_manager (GnomeDesktopEntry *gde)
 	cmdline = g_strjoinv (" ", gde->exec + 1);
 	fprintf (output, "%s\n", cmdline);
 	g_free (cmdline);
+}
+
+void 
+capplet_dir_init (CappletDirView *(*cb) (CappletDir *, CappletDirView *)) 
+{
+	get_view_cb = cb;
+}
+
+CappletDir *
+get_root_capplet_dir (void)
+{
+	static CappletDir *root_dir = NULL;
+
+	if (root_dir == NULL) {
+		root_dir = CAPPLET_DIR (capplet_dir_new (NULL, SETTINGS_DIR));
+
+		if (!root_dir)
+			g_error ("Could not find directory of control panels");
+	}
+
+	return root_dir;
 }

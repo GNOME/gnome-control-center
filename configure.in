@@ -1,7 +1,7 @@
-AC_INIT(control-center)
+AC_INIT(new-control-center)
 
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(control-center, 1.0.51)
+AM_INIT_AUTOMAKE(control-center, 1.3.0)
 
 AM_MAINTAINER_MODE
 
@@ -11,7 +11,10 @@ dnl
 gnome_cv_use_gnome=yes
 
 
-AM_PATH_GNOME
+AM_ACLOCAL_INCLUDE(macros)
+GNOME_INIT
+GNOME_COMPILE_WARNINGS
+
 AC_ISC_POSIX
 AC_PROG_CC
 AC_STDC_HEADERS
@@ -20,12 +23,17 @@ AM_PROG_LIBTOOL
 AM_PROG_LEX
 AC_PROG_YACC
 
-
 dnl utility conditional
 AM_CONDITIONAL(FALSE, test "x" = "y")
 
 ALL_LINGUAS="ca cs da de el en_GB es et fi fr ga gl hr hu it ja ko lt nl no pl pt pt_BR ro ru sl sv tr uk zh_CN.GB2312 zh_TW.Big5"
 AM_GNOME_GETTEXT
+
+GNOME_XML_CHECK
+XML_CFLAGS=`gnome-config --cflags xml`
+AC_SUBST(XML_CFLAGS)
+
+AM_PATH_LIBGLADE(,,"gnome")
 
 AC_SUBST(CFLAGS)
 AC_SUBST(LDFLAGS)
@@ -45,9 +53,6 @@ dnl keyboard-properties-capplet
 AC_CHECK_HEADERS(X11/extensions/xf86misc.h, XF86MISC_LIBS="-lXxf86misc")
 AC_SUBST(XF86MISC_LIBS)
 
-AM_PATH_ORBIT(0.5.1, , AC_MSG_ERROR([You must have ORBit installed.]))
-AM_PATH_OAF(0.1.0, , AC_MSG_ERROR([You must have OAF installed.]))
-AM_PATH_GCONF(0.1.0, , AC_MSG_ERROR([You must have GConf installed.]), gconf-gtk)
 AM_PATH_LIBGLADE(,AC_MSG_ERROR([You must have LibGlade installed.]), gnome)
 
 dnl esd-manager
@@ -75,15 +80,15 @@ AC_OUTPUT([
 control-center.spec
 Makefile
 po/Makefile.in
-control-center/Makefile
+new-control-center/Makefile
+libcapplet/Makefile
 capplets/Makefile
 capplets/mouse-properties/Makefile
 capplets/mime-type/Makefile
-capplets/keyboard-properties/Makefile
 capplets/desktop-links/Makefile
 capplets/background-properties/Makefile
-capplets/screensaver-properties/Makefile
-capplets/screensaver-properties/screensaver-desktops/Makefile
+capplets/new-screensaver-properties/Makefile
+capplets/new-screensaver-properties/screensavers/Makefile
 capplets/session-properties/Makefile
 capplets/sound-properties/Makefile
 capplets/bell-properties/Makefile

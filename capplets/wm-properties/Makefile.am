@@ -1,6 +1,6 @@
 INCLUDES = -I. -I$(srcdir) 				\
 	-I$(top_srcdir)/intl -I$(top_builddir)/intl	\
-	-I$(srcdir)/../../control-center		\
+	-I$(srcdir)/../../libcapplet		\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
 	-I$(includedir) $(GNOME_INCLUDEDIR) $(IMLIB_CFLAGS)
 
@@ -14,8 +14,8 @@ wm_properties_capplet_SOURCES = \
 	wm-exec.c
 
 wm_properties_capplet_LDADD = \
-../../control-center/libcapplet.la \
-$(GNOME_LIBS) $(ORBIT_LIBS) $(GNOMEUI_LIBS) $(INTLLIBS) \
+../../libcapplet/libcapplet.la \
+$(GNOME_LIBS) $(ORBIT_LIBS) $(GNOMEUI_LIBS) $(GNOME_LIBDIR) $(INTLLIBS) \
 $(IMLIB_LIBS)
 
 EXTRA_DIST = wm-properties.desktop 
