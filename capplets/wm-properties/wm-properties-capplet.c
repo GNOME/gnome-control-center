@@ -615,7 +615,7 @@ restart (gboolean force)
                                               1, (char **)twm_argv, NULL,
                                               NULL, NULL, 0, NULL,
                                               NULL, NULL, 0, 0};
-        const WindowManager twm_fallback = {(GnomeDesktopEntry*)&twm_dentry, "twm", "twm", 0, 0, 1, 0};
+        WindowManager twm_fallback = {(GnomeDesktopEntry*)&twm_dentry, "twm", "twm", 0, 0, 1, 0};
 
         if(selected_wm) {
                 last_try_was_twm = FALSE;
