@@ -181,6 +181,10 @@ setup_xkb_tabs (GladeXML * dialog, GConfChangeSet * changeset)
 	     (gchar *) GSWITCHIT_CONFIG_XKB_KEY_OVERRIDE_SETTINGS,
 	     WID ("xkb_use_custom_config"), NULL);
 
+	gtk_widget_set_sensitive (WID ("xkb_models_box"), FALSE);
+	gtk_widget_set_sensitive (WID ("xkb_layouts_box"), FALSE);
+	gtk_widget_set_sensitive (WID ("xkb_options_box"), FALSE);
+
 	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor),
 					WID ("xkb_models_box"));
 	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor),
