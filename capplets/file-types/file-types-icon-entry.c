@@ -514,7 +514,7 @@ drag_data_get  (GtkWidget          *widget,
 					      TRUE);
 
 	if(!file) {
-		/*FIXME: cancel the drag*/
+		/* FIXME bugzilla.eazel.com 2789: cancel the drag*/
 		return;
 	}
 
