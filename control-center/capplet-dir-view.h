@@ -29,10 +29,11 @@
 #include "capplet-dir.h"
 #include "preferences.h"
 
-#define CAPPLET_DIR_VIEW_TYPE          (capplet_dir_view_get_type ())
-#define CAPPLET_DIR_VIEW(obj)          (GTK_CHECK_CAST (obj, CAPPLET_DIR_VIEW_TYPE, CappletDirView))
-#define CAPPLET_DIR_VIEW_CLASS(klass)  (GTK_CHECK_CLASS_CAST (klass, CAPPLET_DIR_VIEW_TYPE, CappletDirViewClass))
-#define IS_CAPPLET_DIR_VIEW(obj)       (GTK_CHECK_TYPE (obj, CAPPLET_DIR_VIEW_TYPE))
+G_BEGIN_DECLS
+
+#define CAPPLET_DIR_VIEW(obj)          G_TYPE_CHECK_INSTANCE_CAST (obj, capplet_dir_view_get_type (), CappletDirView)
+#define CAPPLET_DIR_VIEW_CLASS(klass)  G_TYPE_CHECK_CLASS_CAST (klass, capplet_dir_view_get_type (), CappletDirViewClass)
+#define IS_CAPPLET_DIR_VIEW(obj)       G_TYPE_CHECK_INSTANCE_TYPE (obj, capplet_dir_view_get_type ())
 #define CAPPLET_DIR_VIEW_W(obj)        (CAPPLET_DIR_VIEW (obj)->app)
 
 typedef struct _CappletDirViewClass CappletDirViewClass;
@@ -56,7 +57,7 @@ struct _CappletDirViewImpl
 
 struct _CappletDirView 
 {
-	GtkObject object;
+	GObject parent;
 	GnomeApp *app;
 
 	CappletDir *capplet_dir;
@@ -75,19 +76,20 @@ struct _CappletDirView
 
 struct _CappletDirViewClass 
 {
-	GtkObjectClass parent;
+	GObjectClass parent;
 };
 
-guint capplet_dir_view_get_type (void);
+GType           capplet_dir_view_get_type           (void);
 
-CappletDirView *capplet_dir_view_new (void);
-void capplet_dir_view_destroy   (CappletDirView *view);
+CappletDirView *capplet_dir_view_new                (void);
+void            capplet_dir_view_destroy            (CappletDirView *view);
 
-void capplet_dir_view_load_dir  (CappletDirView *view, CappletDir *dir);
-void capplet_dir_view_show      (CappletDirView *view);
+void            capplet_dir_view_load_dir           (CappletDirView *view,
+						     CappletDir     *dir);
+void            capplet_dir_view_show               (CappletDirView *view);
 
-void capplet_dir_views_set_authenticated (gboolean authed);
+void            capplet_dir_views_set_authenticated (gboolean        authed);
 
-void gnomecc_init (void);
+void            gnomecc_init                        (void);
 
 #endif /* __CAPPLET_DIR_VIEW */

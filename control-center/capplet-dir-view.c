@@ -40,54 +40,147 @@ CappletDirViewImpl *capplet_dir_view_impl[] = {
 	&capplet_dir_view_tree,
 };
 
-static GtkObjectClass *parent_class;
+static GObjectClass *parent_class;
 
 static GnomeCCPreferences *prefs;
 
 enum {
-	ARG_0,
-	ARG_CAPPLET_DIR,
-	ARG_LAYOUT
+	PROP_0,
+	PROP_CAPPLET_DIR,
+	PROP_LAYOUT
 };
 
 static GList *window_list;
 static gboolean authed;
 
+static void capplet_dir_view_init        (CappletDirView      *capplet_dir_view,
+					  CappletDirViewClass *class);
+static void capplet_dir_view_class_init  (CappletDirViewClass *class);
+static void capplet_dir_view_base_init   (CappletDirViewClass *class);
+
+static void capplet_dir_view_set_prop    (GObject        *object, 
+					  guint           prop_id,
+					  const GValue   *value, 
+					  GParamSpec     *pspec);
+static void capplet_dir_view_get_prop    (GObject        *object,
+					  guint           prop_id,
+					  GValue         *value,
+					  GParamSpec     *pspec);
+
+static void capplet_dir_view_finalize    (GObject        *object);
+
+static void close_cb                     (GtkWidget      *widget,
+					  CappletDirView *view);
+static void about_menu_cb                (GtkWidget      *widget,
+					  CappletDirView *view);
+
+GType
+capplet_dir_view_get_type (void) 
+{
+	static GtkType capplet_dir_view_type = 0;
+
+	if (!capplet_dir_view_type) {
+		static const GTypeInfo capplet_dir_view_info = {
+			sizeof (CappletDirViewClass),
+			NULL, /* base_init */
+			NULL, /* base_finalize */
+			(GClassInitFunc) capplet_dir_view_class_init,
+			NULL, /* class_finalize */
+			NULL, /* class_data */
+			sizeof (CappletDirView),
+			0 /* n_preallocs */,
+			(GInstanceInitFunc) capplet_dir_view_init
+		};
+
+		capplet_dir_view_type = 
+			g_type_register_static (G_TYPE_OBJECT,
+						"CappletDirView",
+						&capplet_dir_view_info,
+						0);
+	}
+
+	return capplet_dir_view_type;
+}
+
 static void
-capplet_dir_view_update_authenticated (CappletDirView *view, gpointer null)
+capplet_dir_view_init (CappletDirView *view, CappletDirViewClass *class) 
+{
+	GladeXML *xml;
+
+	xml = glade_xml_new (GLADEDIR"/gnomecc.glade", "main_window", NULL);
+
+	if (xml == NULL) {
+		g_critical ("Could not load XML file " GLADEDIR "/gnomecc.glade");
+		return;
+	}
+
+	window_list = g_list_prepend (window_list, view);
+
+	view->app = GNOME_APP (glade_xml_get_widget (xml, "main_window"));
+
+	gnome_window_icon_set_from_file (GTK_WINDOW (view->app), 
+					 PIXMAPS_DIR "/control-center.png");
+
+	g_signal_connect_swapped (G_OBJECT (view->app), "destroy",
+				  (GCallback) g_object_unref, view);
+
+	glade_xml_signal_connect_data (xml, "close_cb", (GCallback) close_cb, view);
+	glade_xml_signal_connect_data (xml, "about_menu_cb", (GCallback) about_menu_cb, view);
+
+	g_object_unref (G_OBJECT (xml));
+}
+
+static void
+capplet_dir_view_class_init (CappletDirViewClass *klass) 
+{
+	GObjectClass *object_class;
+
+	object_class = G_OBJECT_CLASS (klass);
+
+	object_class->finalize = capplet_dir_view_finalize;
+	object_class->set_property = capplet_dir_view_set_prop;
+	object_class->get_property = capplet_dir_view_get_prop;
+
+	g_object_class_install_property
+		(object_class, PROP_LAYOUT,
+		 g_param_spec_int ("layout",
+				   _("Layout"),
+				   _("Layout to use for this view of the capplets"),
+				   0, sizeof (capplet_dir_view_impl) / sizeof (CappletDirViewImpl *), 0,
+				   G_PARAM_WRITABLE));
+	g_object_class_install_property
+		(object_class, PROP_CAPPLET_DIR,
+		 g_param_spec_pointer ("capplet-dir",
+				       _("Capplet directory object"),
+				       _("Capplet directory that this view is viewing"),
+				       G_PARAM_WRITABLE));
+
+	parent_class = G_OBJECT_CLASS (g_type_class_ref (G_TYPE_OBJECT));
+}
+
+static void
+capplet_dir_view_base_init (CappletDirViewClass *klass) 
 {
 }
 
-void
-capplet_dir_views_set_authenticated (gboolean amiauthedornot)
-{
-	authed = amiauthedornot;
-	g_list_foreach (window_list, (GFunc)capplet_dir_view_update_authenticated, NULL);
-}
-
 static void
-capplet_dir_view_init (CappletDirView *view) 
-{
-	/* nothing to do here */
-}
-
-static void
-capplet_dir_view_set_arg (GtkObject *object, GtkArg *arg, guint arg_id) 
+capplet_dir_view_set_prop (GObject *object, guint prop_id, const GValue *value, GParamSpec *pspec) 
 {
 	CappletDirView *view;
 	CappletDirViewLayout layout;
 
 	view = CAPPLET_DIR_VIEW (object);
 
-	switch (arg_id) {
-	case ARG_CAPPLET_DIR:
-		capplet_dir_view_load_dir (view, GTK_VALUE_POINTER (*arg));
+	switch (prop_id) {
+	case PROP_CAPPLET_DIR:
+		capplet_dir_view_load_dir (view, g_value_get_pointer (value));
 		break;
-	case ARG_LAYOUT:
+
+	case PROP_LAYOUT:
 #ifdef USE_HTML
-		layout = CLAMP (GTK_VALUE_UINT (*arg), 0, LAYOUT_HTML);
+		layout = CLAMP (g_value_get_int (value), 0, LAYOUT_HTML);
 #else
-		layout = CLAMP (GTK_VALUE_UINT (*arg), 0, LAYOUT_TREE);
+		layout = CLAMP (g_value_get_int (value), 0, LAYOUT_TREE);
 #endif
 
 		if (layout == view->layout)
@@ -110,102 +203,91 @@ capplet_dir_view_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 			if (view->capplet_dir && view->impl->populate)
 				view->impl->populate (view);
 
-#if 0			
-			gtk_signal_connect (GTK_OBJECT (view->view), "destroy",
-					    GTK_SIGNAL_FUNC (gtk_widget_destroyed),
-					    &view->view);
-#endif
 			gtk_widget_show (view->view);
 		}
 
 		view->changing_layout = FALSE;
 		break;
+
 	default:
+		g_warning ("Bad argument set");
 		break;
 	}
 }
 
 static void 
-capplet_dir_view_get_arg (GtkObject *object, GtkArg *arg, guint arg_id) 
+capplet_dir_view_get_prop (GObject *object, guint prop_id, GValue *value, GParamSpec *pspec) 
 {
 	CappletDirView *view;
 
 	view = CAPPLET_DIR_VIEW (object);
 
-	switch (arg_id) {
-	case ARG_CAPPLET_DIR:
-		GTK_VALUE_POINTER (*arg) = view->capplet_dir;
+	switch (prop_id) {
+	case PROP_CAPPLET_DIR:
+		g_value_set_pointer (value, view->capplet_dir);
 		break;
-	case ARG_LAYOUT:
-		GTK_VALUE_UINT (*arg) = view->layout;
+
+	case PROP_LAYOUT:
+		g_value_set_uint (value, view->layout);
 		break;
+
 	default:
-		arg->type = GTK_TYPE_INVALID;
+		g_warning ("Bad argument get");
 		break;
 	}
 }
 
-static void
-capplet_dir_view_class_init (CappletDirViewClass *klass) 
+static void 
+capplet_dir_view_finalize (GObject *object) 
 {
-	GtkObjectClass *object_class;
+	CappletDirView *view;
 
-	parent_class = object_class = GTK_OBJECT_CLASS (klass);
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (IS_CAPPLET_DIR_VIEW (object));
 
-	object_class->destroy = 
-		(void (*) (GtkObject *)) capplet_dir_view_destroy;
-	object_class->set_arg = capplet_dir_view_set_arg;
-	object_class->get_arg = capplet_dir_view_get_arg;
+	view = CAPPLET_DIR_VIEW (object);
 
-	gtk_object_add_arg_type ("CappletDirView::layout",
-				 GTK_TYPE_UINT,
-				 GTK_ARG_READWRITE,
-				 ARG_LAYOUT);
+	view->capplet_dir->view = NULL;
 
-	gtk_object_add_arg_type ("CappletDirView::capplet_dir",
-				 GTK_TYPE_POINTER,
-				 GTK_ARG_READWRITE,
-				 ARG_CAPPLET_DIR);
+	window_list = g_list_remove (window_list, view);
+
+	if (g_list_length (window_list) == 0) 
+		gtk_main_quit ();
+
+	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
-guint
-capplet_dir_view_get_type (void) 
+void
+capplet_dir_view_update_authenticated (CappletDirView *view, gpointer null)
 {
-	static GtkType capplet_dir_view_type = 0;
+}
 
-	if (!capplet_dir_view_type) {
-		static const GTypeInfo capplet_dir_view_info = {
-			sizeof (CappletDirViewClass),
-			NULL, /* base_init */
-			NULL, /* base_finalize */
-			(GClassInitFunc) capplet_dir_view_class_init,
-			NULL, /* class_finalize */
-			NULL, /* class_data */
-			sizeof (CappletDirView),
-			0 /* n_preallocs */,
-			(GInstanceInitFunc) capplet_dir_view_init
-		};
+CappletDirView *
+capplet_dir_view_new (void) 
+{
+	GObject *view;
 
-		capplet_dir_view_type = 
-			g_type_register_static (gtk_object_get_type (),
-					 "CappletDirView",
-					 &capplet_dir_view_info,
-					 0);
-	}
+	view = g_object_new (capplet_dir_view_get_type (),
+			     "layout", prefs->layout,
+			     NULL);
 
-	return capplet_dir_view_type;
+	capplet_dir_view_update_authenticated
+		(CAPPLET_DIR_VIEW (view), NULL);
+
+	return CAPPLET_DIR_VIEW (view);
+}
+
+void
+capplet_dir_views_set_authenticated (gboolean amiauthedornot)
+{
+	authed = amiauthedornot;
+	g_list_foreach (window_list, (GFunc)capplet_dir_view_update_authenticated, NULL);
 }
 
 static void
 print_somthing (GtkObject *o, char *s)
 {
 	g_print ("somthing destroyed: %s\n", s);
-}
-
-static void
-destroy (GtkObject *o, GtkObject *o2)
-{
-	gtk_object_destroy (o2);
 }
 
 static void 
@@ -215,9 +297,38 @@ close_cb (GtkWidget *widget, CappletDirView *view)
 }
 
 static void
-exit_cb (GtkWidget *w, gpointer data)
+about_menu_cb (GtkWidget *widget, CappletDirView *view)
 {
-	gtk_main_quit ();
+	static GtkWidget *about = NULL;
+	static gchar *authors[] = {
+		"Bradford Hovinen <hovinen@ximian.com>",
+		"Jacob Berkman <jacob@ximian.com>",
+		"Jonathan Blandford <jrb@redhat.com>",
+		"Jakub Steiner <jimmac@ximian.com>",
+		"Richard Hestilow <hestilow@ximian.com>",
+		"Chema Celorio <chema@ximian.com>",
+		NULL
+	};
+
+	if (about != NULL) {
+		gdk_window_show (about->window);
+		gdk_window_raise (about->window);
+		return;
+	}
+
+	about = gnome_about_new
+		(_("GNOME Control Center"), VERSION,
+		 "Copyright (C) 2000, 2001 Ximian, Inc.\n"
+		 "Copyright (C) 1999 Red Hat Software, Inc.",
+		 _("Desktop properties manager."),
+		 (const gchar **) authors,
+		 NULL, NULL, NULL);
+
+	g_signal_connect (G_OBJECT (about), "destroy",
+			  (GCallback) gtk_widget_destroyed, 
+			  &about);
+
+	gtk_widget_show (about);
 }
 
 static void
@@ -284,41 +395,6 @@ prefs_menu_cb (GtkWidget *widget, CappletDirView *view)
 	gnomecc_preferences_get_config_dialog (prefs);
 }
 
-static void
-about_menu_cb (GtkWidget *widget, CappletDirView *view)
-{
-	static GtkWidget *about = NULL;
-	static gchar *authors[] = {
-		"Bradford Hovinen <hovinen@ximian.com>",
-		"Jacob Berkman <jacob@ximian.com>",
-		"Jonathan Blandford <jrb@redhat.com>",
-		"Jakub Steiner <jimmac@ximian.com>",
-		"Richard Hestilow <hestilow@ximian.com>",
-		"Chema Celorio <chema@ximian.com>",
-		NULL
-	};
-
-	if (about) {
-		gdk_window_show (about->window);
-		gdk_window_raise (about->window);
-		return;
-	}
-
-	about = gnome_about_new
-		(_("GNOME Control Center"), VERSION,
-		 "Copyright (C) 2000, 2001 Ximian, Inc.\n"
-		 "Copyright (C) 1999 Red Hat Software, Inc.",
-		 _("Desktop properties manager."),
-		 (const gchar **) authors,
-		 NULL, NULL, NULL);
-
-	gtk_signal_connect (GTK_OBJECT (about), "destroy",
-			    GTK_SIGNAL_FUNC (gtk_widget_destroyed), 
-			    &about);
-
-	gtk_widget_show (about);
-}
-
 static void 
 back_button_cb (GtkWidget *widget, CappletDirView *view)
 {
@@ -331,57 +407,6 @@ static void
 rootm_button_cb (GtkWidget *w, CappletDirView *view)
 {
 	gdk_beep ();
-}
-
-CappletDirView *
-capplet_dir_view_new (void) 
-{
-	GladeXML *xml;
-	CappletDirView *view;
-
-	xml = glade_xml_new (GLADEDIR"/gnomecc.glade", "main_window", NULL);
-	if (!xml)
-		return NULL;
-
-
-	view = CAPPLET_DIR_VIEW (gtk_type_new (CAPPLET_DIR_VIEW_TYPE));
-
-	window_list = g_list_append (window_list, view);
-
-	view->app = GNOME_APP (glade_xml_get_widget (xml, "main_window"));
-
-	gnome_window_icon_set_from_file (GTK_WINDOW (view->app), 
-					 PIXMAPS_DIR "/control-center.png");
-
-	gtk_signal_connect (GTK_OBJECT (view->app), "destroy",
-			    GTK_SIGNAL_FUNC (destroy), view);
-
-	glade_xml_signal_connect_data (xml, "close_cb", GTK_SIGNAL_FUNC (close_cb), view);
-
-	glade_xml_signal_connect_data (xml, "about_menu_cb", GTK_SIGNAL_FUNC (about_menu_cb), view);
-	g_object_unref (G_OBJECT (xml));
-	
-	gtk_object_set (GTK_OBJECT (view), "layout", prefs->layout, NULL);
-
-	capplet_dir_view_update_authenticated (view, NULL);
-
-	return view;
-}
-
-void 
-capplet_dir_view_destroy (CappletDirView *view) 
-{
-	g_return_if_fail (view != NULL);
-	g_return_if_fail (IS_CAPPLET_DIR_VIEW (view));
-
-	view->capplet_dir->view = NULL;
-
-	window_list = g_list_remove (window_list, view);
-
-	if (g_list_length (window_list) == 0) 
-		gtk_main_quit ();
-
-	/* GTK_OBJECT_CLASS (parent_class)->destroy (GTK_OBJECT (view)); */
 }
 
 static void
@@ -523,8 +548,8 @@ gnomecc_init (void)
 	prefs = gnomecc_preferences_new ();
 	gnomecc_preferences_load (prefs);
 
-	gtk_signal_connect (GTK_OBJECT (prefs), "changed",
-			    prefs_changed_cb, NULL);
+	g_signal_connect (G_OBJECT (prefs), "changed",
+			  (GCallback) prefs_changed_cb, NULL);
 
 	capplet_dir_init (get_capplet_dir_view);
 }
