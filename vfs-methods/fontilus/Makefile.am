@@ -42,6 +42,11 @@ server_DATA = fontilus.server
 fontilus.server.in: fontilus.server.in.in
 	sed -e "s|\@LIBEXECDIR\@|$(libexecdir)|" $< > $@
 
+desktopdir = $(datadir)/applications
+desktop_in_files = gnome-font-viewer.desktop.in
+desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
+@INTLTOOL_DESKTOP_RULE@
+
 if GCONF_SCHEMAS_INSTALL
 install-data-local:
 	if test -z "$(DESTDIR)"; then \
@@ -63,4 +68,5 @@ EXTRA_DIST = \
   fontilus.applications \
   fontilus.server.in.in \
   fontilus.schemas	\
-  fontilus.schemas.in
+  fontilus.schemas.in \
+  gnome-font-viewer.desktop.in
