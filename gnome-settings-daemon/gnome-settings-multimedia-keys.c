@@ -845,7 +845,7 @@ acme_filter_events (GdkXEvent *xevent, GdkEvent *event, gpointer data)
 	keycode = xev->xkey.keycode;
 	state = xev->xkey.state;
 
-	for (i = 0; i < HANDLED_KEYS; i++)
+	for (i = 0; i < PLAY_KEY; i++)
 	{
 		if (keys[i].key == NULL)
 			continue;
@@ -854,12 +854,6 @@ acme_filter_events (GdkXEvent *xevent, GdkEvent *event, gpointer data)
 				(state & USED_MODS) == keys[i].key->state)
 		{
 			switch (keys[i].key_type) {
-			case PLAY_KEY:
-			case PAUSE_KEY:
-			case STOP_KEY:
-			case PREVIOUS_KEY:
-			case NEXT_KEY:
-				return GDK_FILTER_CONTINUE;
 			case VOLUME_DOWN_KEY:
 			case VOLUME_UP_KEY:
 #ifdef USE_FBLEVEL
