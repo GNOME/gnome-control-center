@@ -5,10 +5,6 @@ cappletname=keyboard
 Gladedir = $(datadir)/control-center-data
 Glade_DATA = $(cappletname)-properties.glade
 
-EXTRA_DIST = \
-  $(Glade_DATA) \
-  $(GNOMECC_CAPPLETS_EXTRA_DIST)
-
 INCLUDES = \
      -DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\
 	@GNOMECC_CAPPLETS_CFLAGS@
@@ -39,3 +35,8 @@ install-data-local:
 install-data-am: install-data-local
 
 all-local: $(desktop)
+
+EXTRA_DIST =					\
+  $(Glade_DATA)					\
+  $(GNOMECC_CAPPLETS_EXTRA_DIST)		\
+  $(icons_DATA)
