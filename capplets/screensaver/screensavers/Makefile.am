@@ -25,6 +25,8 @@ screensavers_msgs = \
 
 EXTRA_DIST = $(Screensavers_DATA) $(screensavers_msgs) README
 
+noinst_DATA = $(screensavers_msgs)
+
 noinst_PROGRAMS = extract-labels
 
 extract_labels_SOURCES = extract-labels.c
