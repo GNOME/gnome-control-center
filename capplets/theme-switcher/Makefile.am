@@ -31,5 +31,4 @@ sysdir = $(datadir)/control-center/Desktop
 sys_DATA = theme-selector.desktop
 
 install-data-local:
-	$(mkinstalldirs) $(datadir)/gnome/apps/control-center/Desktop
-	$(INSTALL_DATA) $(srcdir)/theme-selector.desktop $(datadir)/gnome/apps/control-center/Desktop/theme-selector.desktop
+	$(INSTALL_DATA) $(srcdir)/theme-selector.desktop $(datadir)/gnome/apps/Settings/theme-selector.desktop

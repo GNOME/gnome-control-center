@@ -24,3 +24,6 @@ SUBDIRS=wm-desktops
 
 sysdir = $(datadir)/control-center/Desktop
 sys_DATA = wm-properties.desktop
+
+Setdir = $(datadir)/gnome/apps/Settings
+Set_DATA = wm-properties.desktop

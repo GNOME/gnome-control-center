@@ -21,5 +21,4 @@ sysdir = $(datadir)/control-center
 sys_DATA = url-properties.desktop
 
 install-data-local:
-	$(mkinstalldirs) $(datadir)/gnome/apps/control-center/
-	$(INSTALL_DATA) $(srcdir)/url-properties.desktop $(datadir)/gnome/apps/control-center/url-properties.desktop
+	$(INSTALL_DATA) $(srcdir)/url-properties.desktop $(datadir)/gnome/apps/Settings/url-properties.desktop
