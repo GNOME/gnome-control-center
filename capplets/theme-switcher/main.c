@@ -1,5 +1,6 @@
 #include "da.h"
-#include "confdefs.h"
+
+#define THEME_SWITCHER_VERSION "0.1"
 
 int
 main(int argc, char **argv)
@@ -8,7 +9,8 @@ main(int argc, char **argv)
 
   set_tmp_rc();
   do_demo(argc, argv);
-  gnome_capplet_init ("theme-switcher-capplet", VERSION, argc, argv, NULL, 0, NULL);
+  gnome_capplet_init ("theme-switcher-capplet",
+		      THEME_SWITCHER_VERSION, argc, argv, NULL, 0, NULL);
   
   w = make_main();
   gtk_widget_show_all(w);
