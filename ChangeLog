@@ -1,3 +1,18 @@
+1999-09-09  Jonathan Blandford  <jrb@redhat.com>
+
+	* capplets/screensaver-properties/parser.c
+	(get_screensaver_widget): Missed a NULL at the end of a
+	g_strconcat.  I wonder how this worked before.  Thanks to Morten
+	Welinder <terra@diku.dk> for pointing this out.
+
+1999-08-31  Iain Holmes  <iain@webtribe.net>
+
+	* capplets/mime-type/mime-data.c: A change is now updated in the main
+	clist.
+
+	* capplets/mime-type/edit-window.c: Ability to edit the extensions for
+	a mime-type.
+
 1999-09-07    <jrb@redhat.com>
 
 	* capplets/mime-type/mime-type-capplet.c: Patch added from Iain
