@@ -16,7 +16,7 @@ url_properties_LDADD = ../../control-center/libcapplet.la \
 
 EXTRA_DIST =					\
 	url-properties.desktop.in		\
-	url-properties.desktop.in
+	url-properties.desktop
 
 sysdir = $(datadir)/control-center/Documents
 sys_in_files = url-properties.desktop.in

@@ -26,7 +26,7 @@ theme_selector_capplet_LDADD = ../../control-center/libcapplet.la \
 
 EXTRA_DIST =					\
 	theme-selector.desktop.in		\
-	theme-selector.desktop.in
+	theme-selector.desktop
 
 sysdir = $(datadir)/control-center/Desktop
 sys_in_files = theme-selector.desktop.in
