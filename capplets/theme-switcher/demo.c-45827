@@ -40,6 +40,7 @@ void demo_main(int argc, char **argv)
   gchar buf[256];
   XID window;
   GtkWidget *widget, *table, *hbox;
+  GtkWidget *scrolled_window;
   GSList *group;
   gchar *titles[2] = {"One","Two"};
   gchar *row1[2] = {"Eenie", "Meenie"};
@@ -101,9 +102,13 @@ void demo_main(int argc, char **argv)
   gtk_table_attach (GTK_TABLE (table), hbox, 1, 2, 3, 4, GTK_EXPAND | GTK_FILL, 0, 0, 0);
 
   /* column three */
+  scrolled_window = gtk_scrolled_window_new (NULL, NULL);
+  gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW (scrolled_window), 
+				 GTK_POLICY_AUTOMATIC, GTK_POLICY_ALWAYS);
+
+  gtk_table_attach (GTK_TABLE (table), scrolled_window, 2, 3, 1, 4, GTK_EXPAND | GTK_FILL, 0, GNOME_PAD_SMALL, 0);
+
   widget = gtk_clist_new_with_titles (2, titles);
-  //  gtk_clist_set_border(GTK_CLIST(widget), GTK_SHADOW_OUT);
-  gtk_clist_set_policy(GTK_CLIST(widget), GTK_POLICY_ALWAYS, GTK_POLICY_AUTOMATIC);
   gtk_clist_set_column_width (GTK_CLIST(widget), 0, 45);
   gtk_clist_set_column_width (GTK_CLIST(widget), 1, 45);
   gtk_clist_append (GTK_CLIST(widget), row1);
@@ -111,8 +116,9 @@ void demo_main(int argc, char **argv)
   gtk_clist_append (GTK_CLIST(widget), row3);
   gtk_clist_append (GTK_CLIST(widget), row4);
   gtk_widget_set_usize (widget, 160, -1);
-  gtk_table_attach (GTK_TABLE (table), widget, 2, 3, 1, 4, GTK_EXPAND | GTK_FILL, 0, GNOME_PAD_SMALL, 0);
 
+  gtk_container_add (GTK_CONTAINER (scrolled_window), widget);
+  
   gdk_input_add_full(0, GDK_INPUT_READ, demo_data_in, NULL, NULL);
   gtk_widget_show_all (plug);
   

@@ -1,4 +1,5 @@
 #include "da.h"
+#include "confdefs.h"
 
 int
 main(int argc, char **argv)
