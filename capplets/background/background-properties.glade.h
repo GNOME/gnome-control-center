@@ -20,3 +20,4 @@ gchar *s = N_("Centered");
 gchar *s = N_("Scaled (keep aspect)");
 gchar *s = N_("Scaled");
 gchar *s = N_("Disable background selection");
+gchar *s = N_("Apply changes automatically");

@@ -74,20 +74,23 @@ struct _Renderer
 
 	Preferences      *prefs;
 
-	gint              x;          /* Geometry relative to pixmap */
+	gint              x;         /* Geometry relative to pixmap */
 	gint              y;
 	gint              width;
 	gint              height;
 
-	gint              wx;         /* Geometry of wallpaper as rendered */
+	gint              srcx;      /* Geometry relative to pixbuf */
+	gint              srcy;      /* (used when the wallpaper is too big) */
+
+	gint              wx;        /* Geometry of wallpaper as rendered */
 	gint              wy;
 	gint              wwidth;
 	gint              wheight;
 
-	gint              pwidth;     /* Geometry of unscaled wallpaper */
+	gint              pwidth;    /* Geometry of unscaled wallpaper */
 	gint              pheight;
 
-	gint              gwidth;     /* Geometry of gradient-only pixmap */
+	gint              gwidth;    /* Geometry of gradient-only pixmap */
 	gint              gheight;
 
 	guchar           *gradient_data;
@@ -135,7 +138,8 @@ static void get_geometry             (wallpaper_type_t wallpaper_type,
 				      int dwidth, int dheight,
 				      int vwidth, int vheight,
 				      int *xoffset, int *yoffset, 
-				      int *rwidth, int *rheight);
+				      int *rwidth, int *rheight,
+				      int *srcx, int *srcy);
 static void render_tiled_image       (Pixmap pixmap, GC xgc,
 				      GdkPixbuf *pixbuf,
 				      gint x, gint y, 
@@ -715,7 +719,8 @@ renderer_render_wallpaper (Renderer *renderer)
 			      renderer->width, renderer->height,
 			      root_width, root_height,
 			      &renderer->wx, &renderer->wy,
-			      &renderer->wwidth, &renderer->wheight);
+			      &renderer->wwidth, &renderer->wheight,
+			      &renderer->srcx, &renderer->srcy);
 
 		if (renderer->wwidth != renderer->pwidth ||
 		    renderer->wheight != renderer->pheight) 
@@ -841,10 +846,11 @@ renderer_render_to_screen (Renderer *renderer)
 		gdk_pixbuf_xlib_render_to_drawable
 			(renderer->pixbuf,
 			 renderer->pixmap, xgc,
-			 0, 0, 
-			 renderer->x + renderer->wx, 
-			 renderer->y + renderer->wy,
-			 renderer->wwidth, renderer->wheight,
+			 renderer->srcx, renderer->srcy, 
+			 renderer->x + MAX (renderer->wx, 0), 
+			 renderer->y + MAX (renderer->wy, 0),
+			 MIN (renderer->width, renderer->wwidth), 
+			 MIN (renderer->height, renderer->wheight),
 			 GDK_RGB_DITHER_NORMAL, 0, 0);
 	} else {
 		if (renderer->is_root) {
@@ -948,7 +954,8 @@ get_geometry (wallpaper_type_t wallpaper_type, GdkPixbuf *pixbuf,
 	      int dwidth, int dheight,
 	      int vwidth, int vheight,
 	      int *xoffset, int *yoffset, 
-	      int *rwidth, int *rheight) 
+	      int *rwidth, int *rheight,
+	      int *srcx, int *srcy) 
 {
 	gdouble asp, factor;
 	gint st = 0;
@@ -966,12 +973,35 @@ get_geometry (wallpaper_type_t wallpaper_type, GdkPixbuf *pixbuf,
 
 		*rwidth = gdk_pixbuf_get_width (pixbuf) * factor;
 
+		/* wallpaper_type could be WPTYPE_TILED too */
+		if (vwidth < gdk_pixbuf_get_width (pixbuf) &&
+		    wallpaper_type == WPTYPE_CENTERED)
+			*srcx = (gdk_pixbuf_get_width (pixbuf) - vwidth) *
+				factor / 2;
+		else
+			*srcx = 0;
+
 		if (dheight != vheight)
 			factor = (gdouble) dheight / (gdouble) vheight;
 		else
 			factor = 1.0;
 
 		*rheight = gdk_pixbuf_get_height (pixbuf) * factor;
+
+		/* wallpaper_type could be WPTYPE_TILED too */
+		if (vheight < gdk_pixbuf_get_height (pixbuf) &&
+		    wallpaper_type == WPTYPE_CENTERED)
+			*srcy = (gdk_pixbuf_get_height (pixbuf) - vheight) *
+				factor / 2;
+		else
+			*srcy = 0;
+
+		/* wallpaper_type could be WPTYPE_TILED too */
+		if (wallpaper_type == WPTYPE_CENTERED) {
+			*xoffset = (dwidth - *rwidth) >> 1;
+			*yoffset = (dheight - *rheight) >> 1;
+		}
+
 		break;
 
 	case WPTYPE_SCALED_ASPECT:
@@ -994,22 +1024,21 @@ get_geometry (wallpaper_type_t wallpaper_type, GdkPixbuf *pixbuf,
 			*xoffset = 0;
 			*yoffset = (dheight - *rheight) >> 1;
 		}
+
+		*srcx = *srcy = 0;
+
 		break;
 
 	case WPTYPE_SCALED:
 		*rwidth = dwidth;
 		*rheight = dheight;
 		*xoffset = *yoffset = 0;
+		*srcx = *srcy = 0;
 		break;
 
 	default:
 		g_error ("Bad wallpaper type");
 		break;
-	}
-
-	if (wallpaper_type == WPTYPE_CENTERED) {
-		*xoffset = (dwidth - *rwidth) >> 1;
-		*yoffset = (dheight - *rheight) >> 1;
 	}
 }
 

@@ -216,6 +216,9 @@ preferences_load (Preferences *prefs)
 		gnome_config_get_string 
 		("/Background/Default/wallpapers_dir=./");
 
+	prefs->auto_apply =
+		gnome_config_get_bool ("/Background/Default/autoApply=true");
+
 	if (!g_strcasecmp (prefs->wallpaper_filename, "none")) {
 		g_free(prefs->wallpaper_filename);
 		prefs->wallpaper_filename = NULL;
@@ -260,6 +263,9 @@ preferences_save (Preferences *prefs)
 	gnome_config_set_int ("/Background/Default/wallpaperAlign", 
 			      prefs->wallpaper_type);
 
+	gnome_config_set_bool ("/Background/Default/autoApply", 
+			       prefs->auto_apply);
+
 	gnome_config_sync ();
 }
 
@@ -271,9 +277,10 @@ preferences_changed (Preferences *prefs)
 	if (prefs->timeout_id)
 		gtk_timeout_remove (prefs->timeout_id);
 
-	prefs->timeout_id = gtk_timeout_add (1000, 
-					     (GtkFunction) apply_timeout_cb,
-					     prefs);
+	if (prefs->auto_apply)
+		prefs->timeout_id = 
+			gtk_timeout_add (5000, (GtkFunction) apply_timeout_cb,
+					 prefs);
 
 	applier_apply_prefs (applier, prefs, FALSE, TRUE);
 }
@@ -370,6 +377,8 @@ preferences_read_xml (xmlDocPtr xml_doc)
 		else if (!strcmp (node->name, "wallpaper-sel-path"))
 			prefs->wallpaper_sel_path = 
 				g_strdup (xmlNodeGetContent (node));
+		else if (!strcmp (node->name, "auto-apply"))
+			prefs->auto_apply = TRUE;
 	}
 
 	return prefs;
@@ -418,6 +427,9 @@ preferences_write_xml (Preferences *prefs)
 		     prefs->wallpaper_filename);
 	xmlNewChild (node, NULL, "wallpaper-sel-path", 
 		     prefs->wallpaper_sel_path);
+
+	if (prefs->auto_apply)
+		xmlNewChild (node, NULL, "auto-apply", NULL);
 
 	xmlDocSetRootElement (doc, node);
 

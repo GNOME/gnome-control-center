@@ -85,6 +85,8 @@ static void scaled_select_toggled_cb        (GtkToggleButton *tb,
 					     PrefsWidget *prefs_widget);
 static void disable_toggled_cb              (GtkToggleButton *tb, 
 					     PrefsWidget *prefs_widget);
+static void auto_apply_toggled_cb           (GtkToggleButton *tb, 
+					     PrefsWidget *prefs_widget);
 
 static void set_gradient_controls_sensitive   (PrefsWidget *prefs_widget,
 					       gboolean s);
@@ -182,6 +184,10 @@ prefs_widget_init (PrefsWidget *prefs_widget)
 	glade_xml_signal_connect_data (prefs_widget->dialog_data,
 				       "disable_toggled_cb",
 				       disable_toggled_cb,
+				       prefs_widget);
+	glade_xml_signal_connect_data (prefs_widget->dialog_data,
+				       "auto_apply_toggled_cb",
+				       auto_apply_toggled_cb,
 				       prefs_widget);
 }
 
@@ -374,6 +380,15 @@ read_preferences (PrefsWidget *prefs_widget, Preferences *prefs)
 		set_background_controls_sensitive (prefs_widget, FALSE);
 	}
 
+	if (prefs->auto_apply)
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
+					      (WID ("auto_apply")),
+					      TRUE);
+	else
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
+					      (WID ("auto_apply")),
+					      FALSE);
+
 	preferences_apply_preview (prefs);
 }
 
@@ -502,6 +517,12 @@ wallpaper_entry_changed_cb (GtkEntry *e, PrefsWidget *prefs_widget)
 		gnome_file_entry_get_full_path 
 		(GNOME_FILE_ENTRY (WID ("wallpaper_entry")), TRUE);
 
+	if (!g_file_test (prefs_widget->prefs->wallpaper_filename,
+			  G_FILE_TEST_ISFILE)) {
+		g_free (prefs_widget->prefs->wallpaper_filename);
+		prefs_widget->prefs->wallpaper_filename = NULL;
+	}
+
 	if (prefs_widget->prefs->wallpaper_filename &&
 	    strlen (prefs_widget->prefs->wallpaper_filename) &&
 	    g_strcasecmp (prefs_widget->prefs->wallpaper_filename, "none")) 
@@ -597,6 +618,23 @@ disable_toggled_cb (GtkToggleButton *tb, PrefsWidget *prefs_widget)
 
 	set_background_controls_sensitive (prefs_widget, 
 					   prefs_widget->prefs->enabled);
+
+	preferences_changed (prefs_widget->prefs);
+	capplet_widget_state_changed (CAPPLET_WIDGET (prefs_widget), TRUE);
+}
+
+static void
+auto_apply_toggled_cb (GtkToggleButton *tb, PrefsWidget *prefs_widget)
+{
+	g_return_if_fail (prefs_widget != NULL);
+	g_return_if_fail (IS_PREFS_WIDGET (prefs_widget));
+	g_return_if_fail (prefs_widget->prefs != NULL);
+	g_return_if_fail (IS_PREFERENCES (prefs_widget->prefs));
+
+	if (gtk_toggle_button_get_active (tb))
+		prefs_widget->prefs->auto_apply = TRUE;
+	else
+		prefs_widget->prefs->auto_apply = FALSE;
 
 	preferences_changed (prefs_widget->prefs);
 	capplet_widget_state_changed (CAPPLET_WIDGET (prefs_widget), TRUE);

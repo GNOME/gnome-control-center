@@ -29,7 +29,7 @@
     <class>GtkTable</class>
     <name>prefs_widget</name>
     <border_width>5</border_width>
-    <rows>3</rows>
+    <rows>4</rows>
     <columns>2</columns>
     <homogeneous>False</homogeneous>
     <row_spacing>5</row_spacing>
@@ -520,6 +520,34 @@
       <widget>
 	<class>Placeholder</class>
       </widget>
+    </widget>
+
+    <widget>
+      <class>GtkCheckButton</class>
+      <name>auto_apply</name>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>toggled</name>
+	<handler>auto_apply_toggled_cb</handler>
+	<last_modification_time>Sun, 17 Dec 2000 21:35:44 GMT</last_modification_time>
+      </signal>
+      <label>Apply changes automatically</label>
+      <active>False</active>
+      <draw_indicator>True</draw_indicator>
+      <child>
+	<left_attach>0</left_attach>
+	<right_attach>2</right_attach>
+	<top_attach>3</top_attach>
+	<bottom_attach>4</bottom_attach>
+	<xpad>0</xpad>
+	<ypad>0</ypad>
+	<xexpand>False</xexpand>
+	<yexpand>False</yexpand>
+	<xshrink>False</xshrink>
+	<yshrink>False</yshrink>
+	<xfill>True</xfill>
+	<yfill>False</yfill>
+      </child>
     </widget>
   </widget>
 </widget>

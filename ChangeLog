@@ -1,5 +1,31 @@
 2000-12-17  Bradford Hovinen  <hovinen@helixcode.com>
 
+	* capplets/new-background-properties/preferences.c
+	(preferences_changed): Increased delay before autoapply
+
+	* capplets/new-background-properties/prefs-widget.c
+	(auto_apply_toggled_cb): Implement
+	(read_preferences): 
+	(prefs_widget_init): Support auto_apply
+
+	* capplets/new-background-properties/preferences.h (struct
+	_Preferences): Add auto_apply 
+	* capplets/new-background-properties/preferences.c
+	(preferences_write_xml):
+	(preferences_read_xml):
+	(preferences_load):
+	(preferences_save): Support auto_apply
+ 	
+	* capplets/new-background-properties/applier.c (struct _Renderer):
+	Added srcx, srcy to clip wallpaper when it is too big
+	(get_geometry): Set srcx and srcy
+	(renderer_render_to_screen): Tweak rendering geometry to stay
+	within the wallpaper area on the drawable
+
+	* capplets/new-background-properties/prefs-widget.c
+	(wallpaper_entry_changed_cb): Make sure the file specified is
+	actually a file
+
 	* capplets/new-background-properties/main.c (do_set_xml): Default
 	NULL for buffer
 
