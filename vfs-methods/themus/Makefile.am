@@ -2,7 +2,8 @@ INCLUDES = $(THEME_METHOD_CFLAGS) \
   $(THEMUS_THUMBNAILER_CFLAGS) \
   $(THEMUS_COMPONENT_CFLAGS) \
   -I$(top_srcdir)/capplets/common \
-  -DDIRECTORY_DIR=\"$(vfsdirectorydir)\"
+  -DDIRECTORY_DIR=\"$(vfsdirectorydir)\" \
+  -DDATA_DIR=\"$(datadir)/themus\"
 
 AM_CFLAGS = -g
 
@@ -37,6 +38,8 @@ libthemus_theme_properties_view_la_SOURCES = \
 	themus-properties-view.c \
 	themus-properties-view.h \
 	themus-properties-main.c
+
+pkgdata_DATA = apply-font.glade
 
 @INTLTOOL_DIRECTORY_RULE@
 
@@ -75,6 +78,7 @@ install-data-local:
 @INTLTOOL_SCHEMAS_RULE@
 
 EXTRA_DIST = \
+  apply-font.glade \
   theme-method.directory.in \
   theme-method.conf \
   themus.schemas.in \

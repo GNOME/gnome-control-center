@@ -24,6 +24,7 @@
 #include <gnome-theme-info.h>
 #include <gnome-theme-apply.h>
 #include <gconf/gconf-client.h>
+#include <glade/glade.h>
 
 #include <stdlib.h>
 
@@ -36,9 +37,13 @@ int main (int argc, char* argv[])
 	GnomeThemeMetaInfo *theme;
 	GConfClient *client;
 	GnomeProgram *program;
+	GladeXML *font_xml;
+	GtkWidget *font_dialog;
+	GtkWidget *font_sample;
+	gboolean apply_font = FALSE;
 	poptContext ctx;
 	gchar **args;
-
+	
 	program = gnome_program_init ("ThemeApplier", "0.3.0", LIBGNOMEUI_MODULE, argc, 
 		argv, GNOME_PARAM_NONE);
 	
@@ -60,13 +65,40 @@ int main (int argc, char* argv[])
 		gnome_vfs_uri_unref (uri);
 		
 		g_assert (theme != NULL);
-		
-		gnome_meta_theme_set (theme);
+
 		if (theme->application_font)
+		{
+			glade_init ();
+			font_xml = glade_xml_new (DATA_DIR "/apply-font.glade",
+								NULL, NULL);
+			if (font_xml)
+			{
+				font_dialog = glade_xml_get_widget (font_xml, "ApplyFontAlert");
+				font_sample = glade_xml_get_widget (font_xml, "font_sample");
+				gtk_label_set_markup (GTK_LABEL (font_sample), g_strconcat (
+							"<span font_desc=\"",
+							theme->application_font,
+							"\">",
+			/* translators: you may want to include non-western chars here */
+							_("ABCDEFG"),
+							"</span>",
+							NULL));
+						
+				if (gtk_dialog_run (GTK_DIALOG(font_dialog)) == GTK_RESPONSE_OK)
+					apply_font = TRUE;
+			}
+			/* if installation is borked, recover and apply the font */
+			else apply_font = TRUE;
+		}
+
+		gnome_meta_theme_set (theme);
+			
+		if (apply_font)
 		{
 			client = gconf_client_get_default ();
 			gconf_client_set_string (client, FONT_KEY, theme->application_font, NULL);
 		}
+		
 		return 0;
 	}
 	else return 1;
