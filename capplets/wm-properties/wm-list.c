@@ -10,7 +10,10 @@
 #include <unistd.h>
 #include <ctype.h>
 #include <libgnome/libgnome.h>
+#include <gconf/gconf-client.h>
 #include "wm-properties.h"
+
+#define CONFIG_PREFIX "/desktop/gnome/applications/window_manager"
 
 /* Current list of window managers */
 GList *window_managers = NULL;
@@ -187,6 +190,7 @@ wm_list_read_dir (gchar *directory, gboolean is_user)
                 wm = g_new (WindowManager, 1);
 
                 wm->dentry = gnome_desktop_item_new_from_file (tmp_list->data, GNOME_DESKTOP_ITEM_TYPE_APPLICATION, NULL);
+		gnome_desktop_item_set_entry_type (wm->dentry, GNOME_DESKTOP_ITEM_TYPE_APPLICATION);
 
                 if (!wm->dentry) {
                         g_free (wm);
@@ -242,7 +246,8 @@ wm_list_init (void)
 {
         gchar *tempdir;
         gchar *name;
-        
+	GConfClient *client;
+	
         tempdir = gnome_unconditional_datadir_file ("gnome/wm-properties/");
         wm_list_read_dir (tempdir, FALSE);
         g_free (tempdir);
@@ -251,14 +256,15 @@ wm_list_init (void)
         wm_list_read_dir (tempdir, TRUE);
         g_free (tempdir);
 
-        name = gnome_config_get_string ("wm-properties/Config/Config/Current");
+	client = gconf_client_get_default ();
+	name = gconf_client_get_string (client, CONFIG_PREFIX "/current", NULL);
         if (name) {
                 current_wm = wm_list_find (window_managers, name);
                 g_free (name);
         }
 
         if (!current_wm) {
-                name = gnome_config_get_string ("default.wm/Default/WM");
+		name = gconf_client_get_string (client, CONFIG_PREFIX "/default", NULL);
 
                 if (name) {
                         current_wm = wm_list_find_exec (window_managers, name);
@@ -287,6 +293,8 @@ wm_list_init (void)
 
         if(current_wm)
                 current_wm_save = wm_list_find (window_managers_save, gnome_desktop_item_get_string (current_wm->dentry, GNOME_DESKTOP_ITEM_NAME));
+
+	g_object_unref (G_OBJECT (client));
 }
 
 void
@@ -345,8 +353,14 @@ wm_list_save (void)
         /* Save the current window manager
          */
         if(current_wm)
-                gnome_config_set_string ("wm-properties/Config/Config/Current",
-                                         gnome_desktop_item_get_string (current_wm->dentry, GNOME_DESKTOP_ITEM_NAME));
+	{
+		GConfClient *client = gconf_client_get_default ();
+		gconf_client_set_string (client, CONFIG_PREFIX "/current",
+                                         gnome_desktop_item_get_string (current_wm->dentry, GNOME_DESKTOP_ITEM_EXEC),
+					 NULL);
+		g_object_unref (G_OBJECT (client));
+	}
+
         gnome_config_sync ();
 }
 
@@ -434,6 +448,7 @@ wm_read_from_xml (xmlNodePtr wm_node)
         wm->dentry = gnome_desktop_item_new_from_file
                 (xmlGetProp (wm_node, "desktop-entry"),
 		 GNOME_DESKTOP_ITEM_TYPE_APPLICATION, NULL);
+	gnome_desktop_item_set_entry_type (wm->dentry, GNOME_DESKTOP_ITEM_TYPE_APPLICATION);
 
         for (node = wm_node->children; node; node = node->next) {
                 if (!strcmp (node->name, "config-exec"))

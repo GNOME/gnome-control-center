@@ -12,7 +12,6 @@
 #include <ctype.h>
 #include <libxml/parser.h>
 #include "wm-properties.h"
-#include "capplet-widget.h"
 #include "gnome.h"
 
 #ifdef HAVE_XIMIAN_ARCHIVER
@@ -130,6 +129,13 @@ gboolean restart_pending = FALSE;
  */
 gboolean in_fill = FALSE;
 
+static gint cap_session_init = 0;
+static struct poptOption cap_options[] = {
+	{"init-session-settings", '\0', POPT_ARG_NONE, &cap_session_init, 0,
+	 N_("Initialize session settings"), NULL},
+	{NULL, '\0', 0, NULL, 0}
+};
+
 #ifdef HAVE_XIMIAN_ARCHIVER
 
 static void
@@ -149,6 +155,34 @@ store_archive_data (void)
 }
 
 #endif /* HAVE_XIMIAN_ARCHIVER */
+
+static void
+response_cb (GtkDialog *dialog, gint response_id, gpointer data)
+{
+	int old_state = state;
+	
+	switch (response_id)
+	{
+	case GTK_RESPONSE_NONE:
+	case GTK_RESPONSE_CLOSE:
+		gtk_main_quit ();
+		break;
+	case GTK_RESPONSE_APPLY:
+		state = STATE_TRY;
+		restart(FALSE);
+		wm_list_set_current (selected_wm);
+                wm_list_save ();
+                update_session ();
+		break;
+	}
+}
+
+static void
+state_changed (void)
+{
+  gtk_dialog_set_response_sensitive (GTK_DIALOG (capplet), GTK_RESPONSE_APPLY,
+		  		     TRUE);
+}
 
 static GtkWidget *
 left_aligned_button (gchar *label)
@@ -615,6 +649,7 @@ restart (gboolean force)
         GnomeDesktopItem *twm_dentry = gnome_desktop_item_new ();
         WindowManager twm_fallback = {twm_dentry, "twm", "twm", 0, 0, 1, 0};
 
+	gnome_desktop_item_set_entry_type (twm_dentry, GNOME_DESKTOP_ITEM_TYPE_APPLICATION);
 	gnome_desktop_item_set_string (twm_dentry,
 				       GNOME_DESKTOP_ITEM_NAME, "twm");
 	gnome_desktop_item_set_string (twm_dentry,
@@ -964,7 +999,7 @@ edit_dialog (void)
         if (selected_wm->is_user && (result == 0)) {
                 get_dialog_contents (dialog, selected_wm);
                 update_gui();
-                capplet_widget_state_changed (CAPPLET_WIDGET (capplet), TRUE);
+		state_changed ();
         }
 
         gtk_widget_destroy (dialog->dialog);
@@ -985,6 +1020,7 @@ add_dialog (void)
         if (result == 0) {
                 wm = g_new0 (WindowManager, 1);
                 wm->dentry = gnome_desktop_item_new ();
+		gnome_desktop_item_set_entry_type (wm->dentry, GNOME_DESKTOP_ITEM_TYPE_APPLICATION);
                 get_dialog_contents (dialog, wm);
 
                 wm->is_user = TRUE;
@@ -993,8 +1029,8 @@ add_dialog (void)
 
                 selected_wm = wm;
                 update_gui();
-                
-                capplet_widget_state_changed (CAPPLET_WIDGET (capplet), TRUE);
+               
+		state_changed ();
         }
 
         gtk_widget_destroy (dialog->dialog);
@@ -1017,7 +1053,7 @@ select_row (GtkCList   *the_clist,
                 
                 if (wm != selected_wm) {
                         selected_wm = wm;
-                        capplet_widget_state_changed (CAPPLET_WIDGET (capplet), TRUE);
+			state_changed ();
                 }
         }
 }
@@ -1040,7 +1076,7 @@ delete (void)
         wm_list_delete (selected_wm);
         selected_wm = current_wm;
         update_gui();
-        capplet_widget_state_changed (CAPPLET_WIDGET (capplet), TRUE);
+	state_changed ();
 }
 
 
@@ -1072,7 +1108,14 @@ wm_setup (void)
         GtkWidget *scrolled_window;
         GtkWidget *label;
 
-        capplet = capplet_widget_new ();
+	capplet = gtk_dialog_new_with_buttons (_("Window Manager Selector"), 
+					 NULL,
+		  			 -1,
+					 GTK_STOCK_HELP, GTK_RESPONSE_HELP,
+					 GTK_STOCK_APPLY, GTK_RESPONSE_APPLY,
+					 GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+					 NULL);
+	gtk_dialog_set_response_sensitive (GTK_DIALOG (capplet), GTK_RESPONSE_APPLY, FALSE);
         gtk_widget_set_usize (capplet, 360, 200);
 
         vbox = gtk_vbox_new (FALSE, 0);
@@ -1130,7 +1173,8 @@ wm_setup (void)
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, TRUE, TRUE, 0);
 	gtk_box_pack_end (GTK_BOX (vbox), bottom, FALSE, FALSE, 0);
 
-        gtk_container_add (GTK_CONTAINER (capplet), vbox);
+	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (capplet)->vbox), vbox,
+			    TRUE, TRUE, 0);
 
         gtk_widget_show_all (capplet);
 
@@ -1169,21 +1213,14 @@ static void do_set_xml (void)
 int
 main (int argc, char **argv)
 {
-        gint init_results;
-
         bindtextdomain (PACKAGE, GNOMELOCALEDIR);
         textdomain (PACKAGE);
 
         argv0 = g_strdup (argv[0]);
-	init_results = gnome_capplet_init("wm-properties", VERSION,
-					  argc, argv, NULL, 0, NULL);
-        
-	if (init_results < 0) {
-                g_warning (_("an initialization error occurred while "
-                             "starting 'wm-properties-capplet'.\n"
-                             "aborting...\n"));
-                exit (1);
-	}
+  	gnome_program_init ("wm-properties", VERSION,
+			    LIBGNOMEUI_MODULE, argc, argv,
+			    GNOME_PARAM_POPT_TABLE, &cap_options,
+			    NULL);
 
         /* Read in the list of window managers, and the current
          * window manager
@@ -1191,41 +1228,20 @@ main (int argc, char **argv)
         wm_list_init();
         selected_wm = wm_list_get_current();
 
-	if (init_results == 0) {
+	if (!cap_session_init)
+	{
                 init_session();
                 wm_setup();
-                gtk_signal_connect(GTK_OBJECT(capplet), "destroy", 
-                                   GTK_SIGNAL_FUNC(destroy_callback), NULL);
-                gtk_signal_connect (GTK_OBJECT (capplet), "help", 
-                                    GTK_SIGNAL_FUNC (help_callback), NULL);
-                gtk_signal_connect (GTK_OBJECT (capplet), "try", 
-                                    GTK_SIGNAL_FUNC (try_callback), NULL);
-                gtk_signal_connect (GTK_OBJECT (capplet), "revert", 
-                                    GTK_SIGNAL_FUNC (revert_callback), NULL);
-                gtk_signal_connect (GTK_OBJECT (capplet), "cancel", 
-                                    GTK_SIGNAL_FUNC (cancel_callback), NULL);
-                gtk_signal_connect (GTK_OBJECT (capplet), "ok", 
-                                    GTK_SIGNAL_FUNC (ok_callback), NULL);
+		g_signal_connect (G_OBJECT (capplet), "response",
+				  response_cb, NULL);
         
-	        capplet_gtk_main ();
+	        gtk_main ();
 
                 if (restart_pending) {
                         quit_pending = TRUE;
                         gtk_main();
                 }
-
-                if (state == STATE_OK) {
-                        wm_list_save ();
-                        update_session ();
-                }
-                
         } 
-        else if (init_results == 3) {
-                do_get_xml ();
-        }
-        else if (init_results == 4) {
-                do_set_xml ();
-        }
         else {
                 if (selected_wm && 
                     !selected_wm->session_managed && 
