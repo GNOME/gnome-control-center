@@ -18,6 +18,7 @@ static GtkWidget *last_theme = NULL;
 static GtkWidget *font_sel;
 static GtkWidget *font_cbox;
 static gboolean initial_preview;
+/* If this is TRUE, then we use the custom font */
 static gboolean initial_font_cbox;
 static gchar *initial_font;
 static void
@@ -417,7 +418,6 @@ static void
 click_revert(GtkWidget *widget, gpointer data)
 {
   gchar *rc;
-  gchar *dir;
 
   widget = initial_theme;
   if (!widget)
@@ -427,11 +427,10 @@ click_revert(GtkWidget *widget, gpointer data)
     return;
   
   rc = (gchar *)gtk_object_get_data(GTK_OBJECT(widget), "rc");
-  dir = (gchar *)gtk_object_get_data(GTK_OBJECT(widget), "dir");
     
   if ((current_global_theme != initial_theme) ||
 	(initial_font_cbox != GTK_TOGGLE_BUTTON (font_cbox)->active) ||
-	(strcmp (initial_font,
+	(GTK_TOGGLE_BUTTON (font_cbox)->active && strcmp (initial_font,
 		 gnome_font_picker_get_font_name (GNOME_FONT_PICKER (font_sel)))))
     {
       
@@ -564,7 +563,10 @@ update_theme_entries(GtkWidget *disp_list)
       item = gtk_list_item_new_with_label(te[i].name);
       gtk_widget_show(item);
       if (strcmp (d_theme, te[i].name) == 0)
-	initial_theme = item;
+	{
+	  current_global_theme = item;
+	  initial_theme = item;
+	}
       if (current_name && (strcmp (current_name, te[i].name) == 0))
 	{
 	  current_theme = item;
