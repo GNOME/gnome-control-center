@@ -267,6 +267,7 @@ main (int argc, char **argv)
 	{
 		outside_location = TRUE;
 		do_set_xml (FALSE);
+		if (prefs == NULL) return -1;
 		preferences_freeze (prefs);
 	} else {
 		outside_location = FALSE;

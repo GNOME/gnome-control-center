@@ -1,5 +1,9 @@
 2001-06-21  Bradford Hovinen  <hovinen@ximian.com>
 
+	* capplets/new-*/main.c (main): Abort if prefs structure is NULL
+	when editing outside the current location. Fixes crash when bad
+	XML data are supplied.
+
 	* capplets/new-*/main.c (do_set_xml): Fix to use correct
 	termination condition and g_string API
 
