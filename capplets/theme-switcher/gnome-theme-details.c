@@ -285,7 +285,7 @@ gnome_theme_details_init (void)
   widget = WID ("icon_install_button");
   g_signal_connect_swapped (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_installer_run), parent);
   widget = WID ("icon_manage_button");
-  g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_manager_show_manage_themes), dialog);
+  g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_manager_icon_show_manage_themes), dialog);
 
 
   g_signal_connect (G_OBJECT (parent), "response", G_CALLBACK (cb_dialog_response), NULL);
@@ -522,7 +522,8 @@ gnome_theme_details_update_from_gconf (void)
 
   tree_view = WID ("window_theme_treeview");
   wm_settings.flags = GNOME_WM_SETTING_THEME;
-  gnome_window_manager_get_settings (window_manager, &wm_settings);
+  if (window_manager)
+    gnome_window_manager_get_settings (window_manager, &wm_settings);
   update_list_something (tree_view, wm_settings.theme);
 
   tree_view = WID ("icon_theme_treeview");

@@ -51,6 +51,8 @@ gint      gnome_theme_manager_tree_sort_func            (GtkTreeModel     *model
 							 gpointer          user_data);
 void      gnome_theme_manager_show_manage_themes        (GtkWidget        *button,
 							 gpointer          data);
+void      gnome_theme_manager_icon_show_manage_themes        (GtkWidget        *button,
+							 gpointer          data);
 void      gnome_theme_manager_window_show_manage_themes (GtkWidget        *button,
 							 gpointer          data);
 gboolean  gnome_theme_manager_drag_motion_cb            (GtkWidget        *widget,

@@ -337,7 +337,8 @@ meta_theme_set (GnomeThemeMetaInfo *meta_theme_info)
   /* Set the wm key */
   wm_settings.flags = GNOME_WM_SETTING_THEME;
   wm_settings.theme = meta_theme_info->metacity_theme_name;
-  gnome_window_manager_change_settings (window_manager, &wm_settings);
+  if (window_manager)
+    gnome_window_manager_change_settings (window_manager, &wm_settings);
 
   /* set the icon theme */
   old_key = gconf_client_get_string (client, ICON_THEME_KEY, NULL);
@@ -418,7 +419,7 @@ update_themes_from_disk (GladeXML *dialog)
     gnome_window_manager_get_settings (window_manager, &wm_settings);
     current_window_theme = g_strdup (wm_settings.theme);
   } else {
-    current_window_theme = NULL;
+    current_window_theme = g_strdup ("");
   }
 
   /* FIXME: What do we really do when there is no theme?  Ask Havoc here. */
@@ -595,8 +596,12 @@ update_settings_from_gconf (void)
   current_icon_theme = gconf_client_get_string (client, ICON_THEME_KEY, NULL);
   window_manager = gnome_wm_manager_get_current (gdk_display_get_default_screen (gdk_display_get_default ()));
   wm_settings.flags = GNOME_WM_SETTING_THEME;
-  gnome_window_manager_get_settings (window_manager, &wm_settings);
-  current_window_theme = g_strdup (wm_settings.theme);
+  if (window_manager) {
+    gnome_window_manager_get_settings (window_manager, &wm_settings);
+    current_window_theme = g_strdup (wm_settings.theme);
+  } else
+    current_window_theme = g_strdup ("");
+
   custom_theme_found = TRUE;
 
   /* Walk the tree looking for the current one. */
@@ -809,28 +814,16 @@ setup_dialog (GladeXML *dialog)
 			   (GConfClientNotifyFunc) &icon_key_changed,
 			   dialog, NULL, NULL);
 
-  g_signal_connect (G_OBJECT (window_manager), "settings_changed", (GCallback) window_settings_changed, dialog);
+  if (window_manager)
+    g_signal_connect (G_OBJECT (window_manager),
+		      "settings_changed",
+		      (GCallback) window_settings_changed, dialog);
+
   update_themes_from_disk (dialog);
   gtk_widget_grab_focus (WID ("meta_theme_treeview"));
   gnome_theme_info_register_theme_change (theme_changed_func, dialog);
 
-  /* gtk themes */
-  widget = WID ("control_install_button");
-  g_signal_connect_swapped (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_installer_run), parent);
-  widget = WID ("control_manage_button");
-  g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_manager_show_manage_themes), dialog);
 
-  /* window manager themes */
-  widget = WID ("window_install_button");
-  g_signal_connect_swapped (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_installer_run), parent);
-  widget = WID ("window_manage_button");
-  g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_manager_window_show_manage_themes), dialog);
-
-  /* icon themes */
-  widget = WID ("icon_install_button");
-  g_signal_connect_swapped (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_installer_run), parent);
-  widget = WID ("icon_manage_button");
-  g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_manager_show_manage_themes), dialog);
 
   widget = WID ("meta_theme_save_button");
   g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_save_clicked), NULL);
@@ -915,6 +908,29 @@ gnome_theme_manager_show_manage_themes (GtkWidget *button, gpointer data)
 	GnomeVFSURI *uri;
 
 	path = g_strdup_printf ("%s/.themes", g_get_home_dir ());
+	uri = gnome_vfs_uri_new (path);
+
+	if (!gnome_vfs_uri_exists (uri)) {
+		/* Create the directory */
+		gnome_vfs_make_directory_for_uri (uri, 0775);
+	}
+	gnome_vfs_uri_unref (uri);
+
+	command = g_strdup_printf ("nautilus --no-desktop %s", path);
+	g_free (path);
+
+	g_spawn_command_line_async (command, NULL);
+	g_free (command);
+}
+
+/* Starts nautilus on the icon themes directory*/
+void
+gnome_theme_manager_icon_show_manage_themes (GtkWidget *button, gpointer data)
+{
+	gchar *path, *command;
+	GnomeVFSURI *uri;
+
+	path = g_strdup_printf ("%s/.icons", g_get_home_dir ());
 	uri = gnome_vfs_uri_new (path);
 
 	if (!gnome_vfs_uri_exists (uri)) {
