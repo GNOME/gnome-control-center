@@ -1,5 +1,11 @@
 2002-12-05  James Henstridge  <james@daa.com.au>
 
+	* src/font-view.c (draw_text): move text drawing into separate
+	function.
+	(create_text_pixmap): handle bitmap fonts by drawing the test
+	string at the correct size(s).
+	(add_face_info): display some information about the font.
+
 	* src/font-view.c (main): change so that it renders the text at a
 	number of different sizes, like fontcarton did.  Need to show some
 	info about the font too ...

@@ -4,6 +4,11 @@
 #include <X11/Xft/Xft.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
+#include <libgnomevfs/gnome-vfs.h>
+
+#ifndef _
+#  define _(s) (s)
+#endif
 
 FT_Error FT_New_Face_From_URI(FT_Library library,
 			      const gchar *uri,
@@ -14,10 +19,33 @@ FT_Error FT_New_Face_From_URI(FT_Library library,
 #define FONTAREA_WIDTH 500
 #define FONTAREA_HEIGHT 236
 
+static void
+draw_text(Display *xdisplay, XftDraw *draw, FT_Face face, gint pixel_size,
+	  XftColor *colour, const gchar *text, gint textlen, gint *pos_y)
+{
+    FcPattern *pattern;
+    XftFont *font;
+
+    pattern = FcPatternBuild(NULL,
+			     FC_FT_FACE, FcTypeFTFace, face,
+			     FC_PIXEL_SIZE, FcTypeDouble, (double)pixel_size,
+			     NULL);
+    font = XftFontOpenPattern(xdisplay, pattern);
+    FcPatternDestroy(pattern);
+    if (!font) {
+	g_printerr("could not load Xft face\n");
+	goto end;
+    }
+    XftDrawString8(draw, colour, font, 5, *pos_y + font->ascent,
+		   (gchar *)text, textlen);
+    XftFontClose(xdisplay, font);
+ end:
+    *pos_y += pixel_size;
+}
+
 static GdkPixmap *
 create_text_pixmap(GtkWidget *drawing_area, FT_Face face)
 {
-    static const gint sizes[] = { 8, 10, 12, 18, 24, 36, 48, 72 };
     gint i, pos_y, textlen;
     GdkPixmap *pixmap;
     gchar *text;
@@ -29,7 +57,7 @@ create_text_pixmap(GtkWidget *drawing_area, FT_Face face)
     XftDraw *draw;
     XftColor colour;
 
-    text = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    text = _("ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789");
     textlen = strlen(text);
 
     /* create pixmap */
@@ -52,28 +80,78 @@ create_text_pixmap(GtkWidget *drawing_area, FT_Face face)
     XftColorAllocName(xdisplay, xvisual, xcolormap, "black", &colour);
 
     pos_y = 4;
-    for (i = 0; i < G_N_ELEMENTS(sizes); i++) {
-	FcPattern *pattern;
-	XftFont *font;
-
-	pattern = FcPatternBuild(NULL,
-				 FC_FT_FACE, FcTypeFTFace, face,
-				 FC_PIXEL_SIZE, FcTypeDouble, (double)sizes[i],
-				 NULL);
-	font = XftFontOpenPattern(xdisplay, pattern);
-	FcPatternDestroy(pattern);
-	if (!font) {
-	    g_printerr("could not load Xft face\n");
-	    goto endloop;
+    /* bitmap fonts */
+    if (face->num_fixed_sizes > 0) {
+	for (i = 0; i < face->num_fixed_sizes; i++) {
+	    draw_text(xdisplay, draw, face, face->available_sizes[i].width,
+		      &colour, text, textlen, &pos_y);
 	}
-	XftDrawString8(draw, &colour, font, 5, pos_y + font->ascent,
-		       text, textlen);
-	XftFontClose(xdisplay, font);
-    endloop:
-	pos_y += sizes[i];
+    } else {
+	static const gint sizes[] = { 8, 10, 12, 18, 24, 36, 48, 72 };
+
+	for (i = 0; i < G_N_ELEMENTS(sizes); i++) {
+	    draw_text(xdisplay, draw, face, sizes[i],
+		      &colour, text, textlen, &pos_y);
+	}
     }
 
     return pixmap;
+}
+
+static void
+add_row(GtkWidget *table, gint *row_p, const gchar *name, const gchar *value)
+{
+    gchar *bold_name;
+    GtkWidget *name_w, *value_w;
+
+    bold_name = g_strconcat("<b>", name, "</b>", NULL);
+    name_w = gtk_label_new(bold_name);
+    g_free(bold_name);
+    gtk_misc_set_alignment(GTK_MISC(name_w), 1.0, 0.5);
+    gtk_label_set_use_markup(GTK_LABEL(name_w), TRUE);
+
+    value_w = gtk_label_new(value);
+    gtk_misc_set_alignment(GTK_MISC(value_w), 0.0, 0.5);
+    gtk_label_set_selectable(GTK_LABEL(value_w), TRUE);
+
+    gtk_table_attach(GTK_TABLE(table), name_w, 0, 1, *row_p, *row_p + 1,
+		     GTK_FILL, GTK_FILL, 0, 0);
+    gtk_table_attach(GTK_TABLE(table), value_w, 1, 2, *row_p, *row_p + 1,
+		     GTK_FILL|GTK_EXPAND, GTK_FILL, 0, 0);
+
+    (*row_p)++;
+}
+
+static void
+add_face_info(GtkWidget *table, gint *row_p, const gchar *uri, FT_Face face)
+{
+    gchar *filename;
+    GnomeVFSFileInfo *file_info;
+
+    add_row(table, row_p, _("Name:"), face->family_name);
+
+    if (face->style_name)
+	add_row(table, row_p, _("Style:"), face->style_name);
+
+    filename = gnome_vfs_get_local_path_from_uri(uri);
+    add_row(table, row_p, _("Location:"), filename ? filename : uri);
+    g_free(filename);
+
+    file_info = gnome_vfs_file_info_new();
+    if (gnome_vfs_get_file_info
+	(uri, file_info, GNOME_VFS_FILE_INFO_GET_MIME_TYPE) == GNOME_VFS_OK) {
+
+	if ((file_info->valid_fields&GNOME_VFS_FILE_INFO_FIELDS_MIME_TYPE) !=0)
+	    add_row(table, row_p, _("Type:"), file_info->mime_type);
+
+	if ((file_info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_SIZE) != 0) {
+	    gchar *size;
+	    size = gnome_vfs_format_file_size_for_display(file_info->size);
+	    add_row(table, row_p, _("Size:"), size);
+	    g_free(size);
+	}
+    }
+    gnome_vfs_file_info_unref(file_info);
 }
 
 static gboolean
@@ -95,8 +173,8 @@ main(int argc, char **argv)
     FT_Library library;
     FT_Face face;
     gchar *title;
-    GtkWidget *window;
-    GtkWidget *drawing_area;
+    gint row;
+    GtkWidget *window, *vbox, *table, *drawing_area;
     GdkPixmap *pixmap;
     GdkColor white = { 0, 0xffff, 0xffff, 0xffff };
 
@@ -137,10 +215,22 @@ main(int argc, char **argv)
     g_free(title);
     gtk_window_set_resizable(GTK_WINDOW(window), FALSE);
 
+    vbox = gtk_vbox_new(FALSE, 0);
+    gtk_container_add(GTK_CONTAINER(window), vbox);
+
+    table = gtk_table_new(1, 2, FALSE);
+    gtk_container_set_border_width(GTK_CONTAINER(table), 5);
+    gtk_box_pack_start(GTK_BOX(vbox), table, TRUE, TRUE, 0);
+
+    row = 0;
+    add_face_info(table, &row, argv[1], face);
+
+    gtk_table_set_col_spacings(GTK_TABLE(table), 4);
+    gtk_table_set_row_spacings(GTK_TABLE(table), 2);
+
     drawing_area = gtk_drawing_area_new();
     gtk_widget_modify_bg(drawing_area, GTK_STATE_NORMAL, &white);
-    gtk_widget_set_double_buffered(drawing_area, FALSE);
-    gtk_container_add(GTK_CONTAINER(window), drawing_area);
+    gtk_box_pack_start(GTK_BOX(vbox), drawing_area, FALSE, FALSE, 0);
 
     pixmap = create_text_pixmap(drawing_area, face);
 
