@@ -336,7 +336,7 @@ foreach $key (keys %savers)
 		{
 			unless (-d $outdir)
 			{
-				unless (mkdir $outdir)
+				unless (mkdir $outdir, 0775)
 				{
 					die "Cannot create directory $outdir";
 				}
