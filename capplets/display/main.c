@@ -151,6 +151,11 @@ apply_config (struct DisplayInfo *info)
 	}
     }
   
+  /* xscreensaver should handle this itself, but does not currently so we hack
+   * it.  Ignore failures in case xscreensaver is not installed */
+  if (changed)
+   g_spawn_command_line_async ("xscreensaver-command -restart", NULL);
+
   return changed;
 }
 
