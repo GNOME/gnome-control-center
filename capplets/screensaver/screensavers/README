@@ -85,5 +85,25 @@ given option is selected, the ids listed for all other <option>'s will
 be disabled before the ids listed for the selected <option> are
 enabled.
 
+4. Boolean and arithmetic expressions
+
+These are used in two places: the "test" attribute and two other
+attributes used to perform basic arithmetic manipulation on arguments
+before writing them to the command line. The syntax is similar to most 
+programming languages, with `=' being the equality test. The words
+`and', `or', and `not' are used as boolean connectives. Identifiers
+are interpreted as the values associated with arguments on the command 
+line if they are present; arguments without values are given the
+boolean value true. Identifiers not present on the command line are
+interpreted as literal strings.
+
+The attributes "from-cli-conv" and "to-cli-conv", when placed in a
+<number> element, convert values from those present on the command
+line to those in the dialog and vice versa, respectively. They are
+arithmetic expressions interpreted in the normal way, with the literal 
+"var" replaced by the value to be converted. This can be used, for
+example, when converting the value of the "-delay" argument to a more
+meaningful value for speed.
+
 Copyright (C) 2000 Helix Code, Inc.
 Written by Bradford Hovinen <hovinen@helixcode.com>
