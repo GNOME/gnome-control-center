@@ -31,11 +31,14 @@ main(int argc, char **argv)
   send_socket();
   
   gtk_main();
+  /* This doesn't work any more -- why? */
+#if 0
   /* Pause here until our child exits and the socket can be safely
    * destroyed
    */
   if (child_pid > 0)
     waitpid(child_pid, NULL, 0);
-  
+#endif
+
   return 0;
 }
