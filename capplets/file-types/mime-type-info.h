@@ -84,14 +84,12 @@ const GList  *mime_type_info_get_file_extensions   (MimeTypeInfo       *info);
 const gchar  *mime_type_info_get_icon_path         (MimeTypeInfo       *info);
 gboolean      mime_type_info_get_use_category      (MimeTypeInfo       *info);
 
-void          mime_type_info_save                  (const MimeTypeInfo *info);
+void          mime_type_info_save                  (MimeTypeInfo       *info);
 void          mime_type_info_free                  (MimeTypeInfo       *info);
 
 gchar        *mime_type_info_get_file_extensions_pretty_string
                                                    (MimeTypeInfo *info);
 gchar        *mime_type_info_get_category_name     (const MimeTypeInfo *info);
-
-gboolean      mime_type_info_using_custom_app      (const MimeTypeInfo *info);
 
 void          mime_type_info_set_category_name     (const MimeTypeInfo *info,
 						    const gchar        *category_name,
@@ -105,7 +103,6 @@ MimeCategoryInfo *mime_category_info_new           (MimeCategoryInfo   *parent,
 						    const gchar        *description,
 						    GtkTreeModel       *model);
 void          mime_category_info_load_all          (MimeCategoryInfo   *category);
-gboolean      mime_category_info_using_custom_app  (const MimeCategoryInfo *category);
 void          mime_category_info_save              (MimeCategoryInfo   *category);
 
 GList        *mime_category_info_find_apps         (MimeCategoryInfo   *info);

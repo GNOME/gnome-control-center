@@ -33,6 +33,7 @@
 #include "mime-types-model.h"
 #include "mime-type-info.h"
 #include "mime-category-edit-dialog.h"
+#include "mime-edit-dialog.h"
 
 #define WID(x) (glade_xml_get_widget (dialog->p->dialog_xml, x))
 
@@ -399,40 +400,11 @@ update_subcategories (ModelEntry *entry, MimeCategoryInfo *category)
 static void
 store_data (MimeCategoryEditDialog *dialog)
 {
-	GtkOptionMenu *option_menu;
-	GtkMenuShell  *menu_shell;
-	GObject       *menu_item;
-	gint           idx;
-
-	GnomeVFSMimeApplication *app;
-
-	option_menu = GTK_OPTION_MENU (WID ("default_action_select"));
-	menu_shell = GTK_MENU_SHELL (gtk_option_menu_get_menu (option_menu));
-	idx = gtk_option_menu_get_history (option_menu);
-	menu_item = (g_list_nth (menu_shell->children, idx))->data;
-
-	app = g_object_get_data (menu_item, "app");
-	if (app != NULL) {
-		gnome_vfs_mime_application_free (dialog->p->info->default_action);
-		dialog->p->info->default_action = gnome_vfs_mime_application_copy (app);
-	} else {
-		if (!mime_category_info_using_custom_app (dialog->p->info)) {
-			gnome_vfs_mime_application_free (dialog->p->info->default_action);
-			dialog->p->info->default_action = g_new0 (GnomeVFSMimeApplication, 1);
-		}
-
-		g_free (dialog->p->info->default_action->command);
-		dialog->p->info->default_action->command
-			= g_strdup (gtk_entry_get_text (GTK_ENTRY
-							(gnome_file_entry_gtk_entry
-							 (GNOME_FILE_ENTRY (WID ("program_entry"))))));
-		dialog->p->info->default_action->requires_terminal
-			= gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (WID ("needs_terminal_toggle")));
-	}
-
-	dialog->p->info->use_parent_category =
-		gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (WID ("use_category_toggle")));
-
+	mime_edit_dialog_get_app (dialog->p->dialog_xml,
+		dialog->p->info->description,
+		&(dialog->p->info->default_action));
+	dialog->p->info->use_parent_category = gtk_toggle_button_get_active (
+		GTK_TOGGLE_BUTTON (WID ("use_category_toggle")));
 	model_entry_save (MODEL_ENTRY (dialog->p->info));
 	update_subcategories (MODEL_ENTRY (dialog->p->info), dialog->p->info);
 }

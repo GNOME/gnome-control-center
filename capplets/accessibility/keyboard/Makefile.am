@@ -4,6 +4,9 @@ libaccessibility_keyboard_a_SOURCES =		\
     accessibility-keyboard.c			\
     accessibility-keyboard.h
 
+# in case we need to forward port the sun accessX extension
+#    AccessXcomm.c
+
 bin_PROGRAMS = gnome-accessibility-keyboard-properties
 
 gnome_accessibility_keyboard_properties_SOURCES = gnome-accessibility-keyboard-properties.c
@@ -21,7 +24,7 @@ pixmap_DATA = \
 	accessibility-keyboard-bouncekey.png
 
 Gladedir   = $(GNOMECC_GLADE_DIR)
-Glade_DATA = gnome-accessibility-keyboard-properties.glade2
+Glade_DATA = gnome-accessibility-keyboard-properties.glade
 
 iconsdir   = $(GNOMECC_ICONS_DIR)
 icons_DATA = accessibility-keyboard-capplet.png

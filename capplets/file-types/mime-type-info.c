@@ -194,22 +194,6 @@ mime_type_info_get_category_name (const MimeTypeInfo *info)
 	return mime_category_info_get_full_description (MIME_CATEGORY_INFO (info->entry.parent));
 }
 
-gboolean
-mime_type_info_using_custom_app (const MimeTypeInfo *info)
-{
-	gchar *tmp;
-	gboolean ret;
-
-	if (!info->default_action || !info->default_action->name)
-		return TRUE;
-
-	tmp = g_strdup_printf ("Custom %s", info->mime_type);
-	ret = !strcmp (tmp, info->default_action->name);
-	g_free (tmp);
-
-	return ret;
-}
-
 void
 mime_type_info_set_category_name (const MimeTypeInfo *info, const gchar *category_name, const gchar *category_desc, GtkTreeModel *model) 
 {
@@ -234,42 +218,33 @@ mime_type_info_set_file_extensions (MimeTypeInfo *info, GList *list)
 }
 
 void
-mime_type_info_save (const MimeTypeInfo *info)
+mime_type_info_save (MimeTypeInfo *info)
 {
 	gchar  *tmp;
-	uuid_t  app_uuid;
-	gchar   app_uuid_str[100];
 
 	gnome_vfs_mime_freeze ();
 	gnome_vfs_mime_set_description (info->mime_type, info->description);
 	gnome_vfs_mime_set_icon (info->mime_type, info->icon_name);
 
-	if (info->default_action != NULL &&
-	    info->default_action->command != NULL &&
-	    info->default_action->command [0] != '\0') {
-		tmp = g_strdup_printf ("Custom %s", info->mime_type);
-
-		if (info->default_action->name == NULL)
-			info->default_action->name = tmp;
-
-		if (info->default_action->id == NULL) {
-			uuid_generate (app_uuid);
-			uuid_unparse (app_uuid, app_uuid_str);
-
-			info->default_action->id = g_strdup (app_uuid_str);
-		} else if (!strcmp (tmp, info->default_action->name)) {
-			gnome_vfs_application_registry_set_value (info->default_action->id, "command",
-								  info->default_action->command);
-			gnome_vfs_application_registry_set_bool_value (info->default_action->id, "requires_terminal",
-								       info->default_action->requires_terminal);
+	/* Be really anal about validating this action */
+	if (info->default_action != NULL) {
+		if ( info->default_action->command == NULL ||
+		    *info->default_action->command == '\0' ||
+		     info->default_action->id == NULL ||
+		    *info->default_action->id == '\0') {
+			g_warning ("Invalid application");
+			gnome_vfs_mime_application_free (info->default_action);
+			info->default_action = NULL;
 		}
-
-		gnome_vfs_mime_set_default_application (info->mime_type, info->default_action->id);
-
-		gnome_vfs_application_registry_save_mime_application (info->default_action);
-	} else {
-		gnome_vfs_mime_set_default_application (info->mime_type, NULL);
 	}
+
+	if (info->default_action != NULL) {
+		gnome_vfs_mime_set_default_application (info->mime_type,
+			info->default_action->id);
+		gnome_vfs_mime_add_application_to_short_list (info->mime_type,
+			info->default_action->id);
+	} else
+		gnome_vfs_mime_set_default_application (info->mime_type, NULL);
 
 	tmp = form_extensions_string (info, " ", NULL);
 	gnome_vfs_mime_set_extensions_list (info->mime_type, tmp);
@@ -383,24 +358,6 @@ mime_category_info_load_all (MimeCategoryInfo *category)
 	g_free (tmp1);
 }
 
-gboolean
-mime_category_info_using_custom_app (const MimeCategoryInfo *category)
-{
-	gchar *tmp;
-	gboolean ret;
-
-	if (category == NULL ||
-	    category->default_action == NULL ||
-	    category->default_action->name == NULL)
-		return TRUE;
-
-	tmp = g_strdup_printf ("Custom %s", category->name);
-	ret = !strcmp (tmp, category->default_action->name);
-	g_free (tmp);
-
-	return ret;
-}
-
 static void
 set_subcategory_ids (ModelEntry *entry, MimeCategoryInfo *category, gchar *app_id) 
 {
@@ -427,54 +384,36 @@ set_subcategory_ids (ModelEntry *entry, MimeCategoryInfo *category, gchar *app_i
 void
 mime_category_info_save (MimeCategoryInfo *category) 
 {
-	gchar   *tmp, *tmp1, *tmp2;
-	uuid_t   app_uuid;
-	gchar    app_uuid_str[100];
+	gchar   *key, *basename;
 	gboolean set_ids;
 
-	tmp1 = get_gconf_base_name (category);
-
-	tmp = g_strconcat (tmp1, "/default-action-id", NULL);
-
-	if (category->default_action != NULL &&
-	    category->default_action->command != NULL &&
-	    *category->default_action->command != '\0')
-	{
-		tmp2 = g_strdup_printf ("Custom %s", category->name);
-
-		if (category->default_action->name == NULL)
-			category->default_action->name = tmp2;
-
-		if (category->default_action->id == NULL) {
-			uuid_generate (app_uuid);
-			uuid_unparse (app_uuid, app_uuid_str);
-
-			category->default_action->id = g_strdup (app_uuid_str);
-
-			gnome_vfs_application_registry_save_mime_application (category->default_action);
-			gnome_vfs_application_registry_sync ();
+	/* Be really anal about validating this action */
+	if (category->default_action != NULL) {
+		if ( category->default_action->command == NULL ||
+		    *category->default_action->command == '\0' ||
+		     category->default_action->id == NULL ||
+		    *category->default_action->id == '\0') {
+			g_warning ("Invalid application");
+			gnome_vfs_mime_application_free (category->default_action);
+			category->default_action = NULL;
 		}
-		else if (!strcmp (tmp, category->default_action->name)) {
-			gnome_vfs_application_registry_set_value (category->default_action->id, "command",
-								  category->default_action->command);
-			gnome_vfs_application_registry_set_bool_value (category->default_action->id, "requires_terminal",
-								       category->default_action->requires_terminal);
-		}
-
-		gconf_client_set_string (gconf_client_get_default (),
-					 tmp, category->default_action->id, NULL);
-		set_ids = TRUE;
-	} else {
-		gconf_client_unset (gconf_client_get_default (), tmp, NULL);
-		set_ids = FALSE;
 	}
 
-	g_free (tmp);
+	basename = get_gconf_base_name (category);
+	key = g_strconcat (basename, "/default-action-id", NULL);
+	if (category->default_action != NULL) {
+		gconf_client_set_string (gconf_client_get_default (),
+					 key, category->default_action->id, NULL);
+		set_ids = TRUE;
+	} else
+		gconf_client_unset (gconf_client_get_default (), key, NULL);
+	g_free (key);
 
-	tmp = g_strconcat (tmp1, "/use-parent-category", NULL);
-	gconf_client_set_bool (gconf_client_get_default (), tmp, category->use_parent_category, NULL);
-	g_free (tmp);
-	g_free (tmp1);
+	key = g_strconcat (basename, "/use-parent-category", NULL);
+	gconf_client_set_bool (gconf_client_get_default (), key,
+		category->use_parent_category, NULL);
+	g_free (key);
+	g_free (basename);
 
 	if (set_ids)
 		set_subcategory_ids (MODEL_ENTRY (category), category, category->default_action->id);
@@ -570,10 +509,8 @@ reduce_supported_app_list (ModelEntry *entry, GList *list, gboolean top)
 GList *
 mime_category_info_find_apps (MimeCategoryInfo *info)
 {
-	GList *ret;
-
-	ret = find_possible_supported_apps (MODEL_ENTRY (info), TRUE);
-	return reduce_supported_app_list (MODEL_ENTRY (info), ret, TRUE);
+	return reduce_supported_app_list (MODEL_ENTRY (info), 
+		find_possible_supported_apps (MODEL_ENTRY (info), TRUE), TRUE);
 }
 
 gchar *

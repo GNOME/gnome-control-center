@@ -235,7 +235,11 @@ static void
 accessibility_button_clicked (GtkWidget *widget,
 			      gpointer   data)
 {
-	g_spawn_command_line_async ("gnome-accessibility-keyboard-properties", NULL);
+	GError *err = NULL;
+	if (!g_spawn_command_line_async ("gnome-accessibility-keyboard-properties", NULL))
+		capplet_error_dialog (GTK_WINDOW (gtk_widget_get_toplevel (widget)), 
+			_("There was an error launching the keyboard capplet : %s"),
+			err);
 }
 
 static void

@@ -27,6 +27,6 @@
 #include <gconf/gconf-changeset.h>
 #include <gtk/gtkwidget.h>
 
-GtkWidget *setup_accessX_dialog (GConfChangeSet *changeset, gboolean as_dialog);
+GtkWidget *setup_accessX_dialog (GConfChangeSet *changeset);
 
 #endif /* GNOME_ACCESSIBILITY_KEYBOARD_H */

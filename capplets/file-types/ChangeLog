@@ -1,12 +1,56 @@
-2002-06-17  Jody Goldberg <jody@gnome.org>
-
-	* Release 2.0.0
-
 2002-06-15  Jody Goldberg <jody@gnome.org>
 
+	http://bugzilla.gnome.org/show_bug.cgi?id=85397
+	http://bugzilla.gnome.org/show_bug.cgi?id=84545
 	* mime-types-model.c (mime_types_model_get_value) :
 	  gtk_tree_view_search_equal_func does not like NULL.
 	(IS_CATEGORY) : check for NULL.
+	* file-types-capplet.c (create_dialog) : search the description not
+	  the mime type.
+
+2002-06-08  Jody Goldberg <jody@gnome.org>
+
+	* mime-types-model.c (IS_CATEGORY) : test for null in case we are
+	  stupid.
+
+2002-06-07  Jody Goldberg <jody@gnome.org>
+
+	* file-types-capplet.c (dialog_done_cb) : no need to save things
+	  again.  The only caller had already done that.
+
+	* mime-type-info.c (mime_type_info_save) : Don't mess with the
+	  application here, it should already be setup.  However, be really
+	  really anal about verifying it because I do not trust the
+	  surrounding code or know it well enough to trust it.  Make sure that
+	  the assigned app is on the short list of associated apps.
+
+	* mime-category-edit-dialog.c (store_data) : Use
+	  mime_edit_dialog_get_app.
+	* mime-edit-dialog.c (store_data) : Use it here too.
+	(mime_edit_dialog_get_app) : new.  split some duplicated code out of
+	  the type and category dialogs and move it here.  Then make it
+	  readable and less stupid about creating copies of existing
+	  applications.  While we're at it have it handle the creation of new
+	  applications, merging commands with existing applications and other
+	  useful stuff.
+
+2002-06-07  Jody Goldberg <jody@gnome.org>
+
+	* mime-category-edit-dialog.c (store_data) : clarify and remove the
+	  custom flag.
+
+	* mime-type-info.c (mime_category_info_using_custom_app) : delete.
+	(mime_type_info_using_custom_app) : delete.
+
+	* mime-edit-dialog.c (validate_data) : correct the warning about
+	  invalid type, we would _not_ create one for the user :-(
+	  Allow a user to optionally overwrite an existing mime type.
+	  This is useful when editing.
+	* mime-edit-dialog.c (store_data) : clarify and remove the custom flag.
+
+2002-06-17  Jody Goldberg <jody@gnome.org>
+
+	* Release 2.0.0
 
 2002-06-05  Jody Goldberg <jody@gnome.org>
 

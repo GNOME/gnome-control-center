@@ -602,6 +602,102 @@ collect_filename_extensions (MimeEditDialog *dialog)
 	return ret;
 }
 
+/**
+ * mime_edit_dialog_get_app : 
+ * @glade :
+ * @mime_type : a fall back in case we can't generate a meaningful application name.
+ * @current :
+ *
+ * A utility routine for looking up applications.  it should handle life cycle
+ * and hopefully merge in existing copies of custom applications.
+ **/
+void
+mime_edit_dialog_get_app (GladeXML *glade, char const *mime_type,
+			  GnomeVFSMimeApplication **current)
+{
+	GtkWidget *menu = glade_xml_get_widget (glade, "default_action_select");
+	gint       idx = gtk_option_menu_get_history (GTK_OPTION_MENU (menu));
+	GtkWidget *shell = gtk_option_menu_get_menu (GTK_OPTION_MENU (menu));
+	GObject   *item = (g_list_nth (GTK_MENU_SHELL (shell)->children, idx))->data;
+
+	GnomeVFSMimeApplication *res, *app = g_object_get_data (item, "app");
+
+	if (app == NULL) {
+		char *cmd = gnome_file_entry_get_full_path (
+			GNOME_FILE_ENTRY (glade_xml_get_widget (glade, "program_entry")), FALSE);
+		gboolean requires_terminal = gtk_toggle_button_get_active (
+			GTK_TOGGLE_BUTTON (glade_xml_get_widget (glade, "needs_terminal_toggle")));
+		char *base_cmd;
+
+		GList *ptr, *app_list = NULL;
+		
+		/* I have no idea what semantics people want, but I'll be anal
+		 * and avoid NULL
+		 */
+		if (cmd != NULL)
+			cmd = g_strdup ("");
+		base_cmd = g_path_get_basename  (cmd);
+		if (base_cmd == NULL);
+			base_cmd = g_strdup ("");
+
+		app_list = gnome_vfs_application_registry_get_applications (NULL);
+		for (ptr = app_list; ptr != NULL ; ptr = ptr->next) {
+			char const *app_cmd = gnome_vfs_application_registry_peek_value (ptr->data,
+				GNOME_VFS_APPLICATION_REGISTRY_COMMAND);
+
+			/* Look for a matching application (with or without path) */
+			if (app_cmd != NULL &&
+			    (!strcmp (cmd, app_cmd) || !strcmp (base_cmd, app_cmd))) {
+				gboolean ok, app_req = gnome_vfs_application_registry_get_bool_value (ptr->data,
+					GNOME_VFS_APPLICATION_REGISTRY_REQUIRES_TERMINAL, &ok);
+				if (ok && app_req == requires_terminal)
+					break;
+			}
+		}
+
+		/* No existing application, lets create one */
+		if (ptr == NULL) {
+			res = g_new0 (GnomeVFSMimeApplication, 1);
+			res->command = cmd;
+			res->requires_terminal = requires_terminal;
+
+			res->name = base_cmd;
+			if (res->name != NULL && *res->name) {
+				/* Can we use the app name as the id ?
+				 * We know that there are no apps with the same
+				 * command, so if the id is taken we are screwed
+				 */
+				if (gnome_vfs_application_registry_get_mime_application (res->name) == NULL)
+					res->id = g_strdup (res->name);
+			} else { /* fail safe to ensure a name */
+				g_free (res->name);
+				res->name = g_strdup_printf ("Custom %s", mime_type);
+			}
+
+			/* If there is no id yet, make up a unique string */
+			if (res->id == NULL) {
+				uuid_t  app_uuid;
+				gchar   app_uuid_str[100];
+				uuid_generate (app_uuid);
+				uuid_unparse (app_uuid, app_uuid_str);
+				res->id = g_strdup (app_uuid_str);
+			}
+
+			gnome_vfs_application_registry_save_mime_application (res);
+		} else {
+			g_free (cmd);
+			g_free (base_cmd);
+			res = gnome_vfs_application_registry_get_mime_application (ptr->data);
+		}
+
+		g_list_free (app_list);
+	} else
+		res = gnome_vfs_mime_application_copy (app);
+
+	gnome_vfs_mime_application_free (*current);
+	*current = res;
+}
+
 static void
 store_data (MimeEditDialog *dialog) 
 {
@@ -617,8 +713,6 @@ store_data (MimeEditDialog *dialog)
 
 	uuid_t         mime_uuid;
 	gchar          mime_uuid_str[100];
-
-	GnomeVFSMimeApplication *app;
 
 	GtkTreeIter    iter;
 	GtkTreePath   *path;
@@ -665,31 +759,9 @@ store_data (MimeEditDialog *dialog)
 	CORBA_free (dialog->p->info->default_component);
 	dialog->p->info->default_component = g_object_get_data (menu_item, "component");
 
-	option_menu = GTK_OPTION_MENU (WID ("default_action_select"));
-	menu_shell = GTK_MENU_SHELL (gtk_option_menu_get_menu (option_menu));
-	idx = gtk_option_menu_get_history (option_menu);
-	menu_item = (g_list_nth (menu_shell->children, idx))->data;
-
-	app = g_object_get_data (menu_item, "app");
-	if (app != NULL) {
-		gnome_vfs_mime_application_free (dialog->p->info->default_action);
-		dialog->p->info->default_action = gnome_vfs_mime_application_copy (app);
-	} else {
-		if (!mime_type_info_using_custom_app (dialog->p->info)) {
-			gnome_vfs_mime_application_free (dialog->p->info->default_action);
-			dialog->p->info->default_action = g_new0 (GnomeVFSMimeApplication, 1);
-		} else if (!dialog->p->info->default_action) {
-			dialog->p->info->default_action = g_new0 (GnomeVFSMimeApplication, 1);
-		}
-
-		g_free (dialog->p->info->default_action->command);
-		dialog->p->info->default_action->command
-			= g_strdup (gtk_entry_get_text (GTK_ENTRY
-							(gnome_file_entry_gtk_entry
-							 (GNOME_FILE_ENTRY (WID ("program_entry"))))));
-		dialog->p->info->default_action->requires_terminal
-			= gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (WID ("needs_terminal_toggle")));
-	}
+	mime_edit_dialog_get_app (dialog->p->dialog_xml,
+		dialog->p->info->mime_type,
+		&(dialog->p->info->default_action));
 
 	ext_list = collect_filename_extensions (dialog);
 	mime_type_info_set_file_extensions (dialog->p->info, ext_list);
@@ -716,30 +788,33 @@ store_data (MimeEditDialog *dialog)
 static gboolean
 validate_data (MimeEditDialog *dialog) 
 {
-	const gchar *tmp;
-	const gchar *mesg = NULL;
+	const gchar *mime_type;
+	GtkWidget *err_dialog = NULL;
 
-	tmp = gtk_entry_get_text (GTK_ENTRY (WID ("mime_type_entry")));
+	mime_type = gtk_entry_get_text (GTK_ENTRY (WID ("mime_type_entry")));
 
-	if (tmp != NULL && *tmp != '\0') {
-		if (strchr (tmp, ' ') || !strchr (tmp, '/')) {
-			mesg = _("Invalid MIME type. Please enter a valid MIME type, or "
-				 "leave the field blank to have one generated for you.");
-		} else if (dialog->p->is_add && (gnome_vfs_mime_type_is_known (tmp) ||
-						 get_mime_type_info (tmp) != NULL)) {
-			mesg = _("There already exists a MIME type of that name.");
+	if (mime_type != NULL && *mime_type != '\0') {
+		if (strchr (mime_type, ' ') || !strchr (mime_type, '/')) {
+			err_dialog = gtk_message_dialog_new (
+				GTK_WINDOW (dialog->p->dialog_win),
+				GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR,
+				GTK_BUTTONS_CANCEL,
+				_("Please enter a valid MIME type.  It should be of the form "
+				  "class/type and may not contain any spaces."));
+		} else if (dialog->p->is_add && (gnome_vfs_mime_type_is_known (mime_type) ||
+						 get_mime_type_info (mime_type) != NULL)) {
+			err_dialog = gtk_message_dialog_new (
+				GTK_WINDOW (dialog->p->dialog_win),
+				GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION,
+				GTK_BUTTONS_OK_CANCEL,
+				_("A MIME type with that name already exists, overwrite ?."));
 		}
 	}
 
-	if (mesg != NULL) {
-		GtkWidget *err_dialog = gtk_message_dialog_new (
-			GTK_WINDOW (dialog->p->dialog_win),
-			GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR,
-			GTK_BUTTONS_OK,
-			mesg);
-		gtk_dialog_run (GTK_DIALOG (err_dialog));
+	if (err_dialog) {
+		int res = gtk_dialog_run (GTK_DIALOG (err_dialog));
 		gtk_object_destroy (GTK_OBJECT (err_dialog));
-		return FALSE;
+		return res != GTK_RESPONSE_CANCEL;
 	}
 	return TRUE;
 }

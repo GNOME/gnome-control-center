@@ -219,6 +219,9 @@ create_dialog (void)
 	gtk_tree_view_column_pack_start (column, renderer, FALSE);
 	gtk_tree_view_column_set_attributes
 		(column, renderer, "text", MODEL_COLUMN_DESCRIPTION, NULL);
+	g_object_set (G_OBJECT (treeview), 
+		"search_column", MODEL_COLUMN_DESCRIPTION,
+		NULL);
 
 	gtk_tree_view_column_set_title (column, _("Description"));
 	gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
@@ -255,9 +258,6 @@ create_dialog (void)
 static void
 dialog_done_cb (MimeEditDialog *dialog, gboolean done, MimeTypeInfo *info) 
 {
-	if (done)
-		mime_type_info_save (info);
-
 	gtk_main_quit ();
 }
 

@@ -34,6 +34,7 @@ gnome_settings_daemon_SOURCES =	\
 	xsettings-manager.h		\
 	gnome-settings-keybindings.c    \
 	gnome-settings-keybindings.h    \
+	$(AccessX_files)		\
 	$(CORBA_GENERATED)
 
 gnome_settings_daemon_LDADD = \
@@ -41,6 +42,12 @@ gnome_settings_daemon_LDADD = \
 	$(top_builddir)/libbackground/libbackground.la	\
 	$(top_builddir)/libsounds/libsounds.a		\
 	$(XF86MISC_LIBS)
+
+#AccessX_files = \
+#	AccessXcomm.c		\
+#	extutil.h		\
+#	AccessXproto.h		\
+#	AccessXlibint.h
 
 CORBA_GENERATED_HEADER_FILES = GNOME_SettingsDaemon.h
 

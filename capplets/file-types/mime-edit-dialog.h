@@ -58,6 +58,9 @@ GObject *mime_edit_dialog_new           (GtkTreeModel *model,
 					 MimeTypeInfo *info);
 GObject *mime_add_dialog_new            (GtkTreeModel *model, GtkWindow *parent);
 
+void mime_edit_dialog_get_app (GladeXML *glade, char const *mime_type,
+			       GnomeVFSMimeApplication **current);
+
 G_END_DECLS
 
 #endif /* __MIME_EDIT_DIALOG_H */

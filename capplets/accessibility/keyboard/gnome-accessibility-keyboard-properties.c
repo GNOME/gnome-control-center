@@ -37,19 +37,11 @@ dialog_response (GtkWidget *widget,
 		 gint       response_id,
 		 GConfChangeSet *changeset)
 {
-	if (response_id == GTK_RESPONSE_HELP) {
-		GError *error = NULL;
-
-		/* TODO : get this written */
-		gnome_help_display_desktop (NULL,
-			"control-center-manual",
+	if (response_id == GTK_RESPONSE_HELP)
+		capplet_help (GTK_WINDOW (widget),
 			"accessibility-keyboard.xml",
-			"CONFIGURATION", &error);
-		if (error) {
-			g_warning ("help error: %s\n", error->message);
-			g_error_free (error);
-		}
-	} else
+			"CONFIGURATION");
+	else
 		gtk_main_quit ();
 }
 
@@ -69,7 +61,7 @@ main (int argc, char **argv)
 	activate_settings_daemon ();
 	
 	changeset = NULL;
-	dialog = setup_accessX_dialog (changeset, TRUE);
+	dialog = setup_accessX_dialog (changeset);
 	g_signal_connect (G_OBJECT (dialog),
 		"response",
 		G_CALLBACK (dialog_response), changeset);
