@@ -1,5 +1,18 @@
 2001-07-17  Bradford Hovinen  <hovinen@ximian.com>
 
+	* capplet-util.c (capplet_init): Support --init-session-settings
+	for compatibility reasons
+	(setup_session_mgmt): Implement. Make sure capplet runs the next
+	time the user logs in
+	(capplet_init): Call setup_session_mgmt for --get-legacy and
+	standard execution
+	(get_property_name): Implement. Return the property name
+	associated with the capplet
+	(set_moniker_cb): Use GTK_BIN (pf)->child rather than
+	bonobo_control_get_widget
+	(get_control_cb): Quit the program when the control or the widget
+	are destroyed
+
 	* Makefile.am (INCLUDES): Removed -DGLADE_DATADIR
 
 	* capplet-util.c (create_dialog_cb): Use create_widget_cb rather

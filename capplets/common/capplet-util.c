@@ -25,6 +25,8 @@
 #  include <config.h>
 #endif
 
+#include <ctype.h>
+
 #include "capplet-util.h"
 
 static CreateDialogFn          create_dialog_cb = NULL;
@@ -119,20 +121,7 @@ set_moniker_cb (BonoboPropertyBag *bag, BonoboArg *arg, guint arg_id,
 	gtk_object_set_data (GTK_OBJECT (pf), "config-database", db);
 
 	if (setup_cb != NULL)
-		setup_cb (bonobo_control_get_widget (control), proxy);
-}
-
-/* close_cb
- *
- * Callback issued when the dialog is destroyed. Just resets the control pointer
- * to NULL so that the program does not think the dialog exists when it does
- * not.
- */
-
-static void
-close_cb (void)
-{
-	control = NULL;
+		setup_cb (GTK_BIN (pf)->child, proxy);
 }
 
 /* get_control_cb
@@ -175,9 +164,9 @@ get_control_cb (BonoboPropertyControl *property_control, gint page_number)
 		bonobo_control_set_automerge (control, TRUE);
 
 		gtk_signal_connect (GTK_OBJECT (widget), "destroy",
-				    GTK_SIGNAL_FUNC (close_cb), NULL);
+				    GTK_SIGNAL_FUNC (gtk_main_quit), NULL);
 		gtk_signal_connect (GTK_OBJECT (control), "destroy",
-				    GTK_SIGNAL_FUNC (close_cb), NULL);
+				    GTK_SIGNAL_FUNC (gtk_main_quit), NULL);
 	} else {
 		return NULL;
 	}
@@ -249,6 +238,72 @@ get_default_moniker (const gchar *binary)
 	return res;
 }
 
+/* get_property_name
+ *
+ * Get the property name associated with this capplet
+ */
+
+static gchar *
+get_property_name (const gchar *binary) 
+{
+	gchar *tmp, *tmp1, *res;
+
+	tmp = g_strdup (binary);
+	if ((tmp1 = strstr (tmp, "-capplet")) != NULL) *tmp1 = '\0';
+
+	for (tmp1 = tmp; *tmp1 != '\0'; tmp1++) {
+		*tmp1 = toupper (*tmp1);
+		if (*tmp1 == '-') *tmp1 = '_';
+	}
+
+	res = g_strconcat ("GNOME_", tmp, NULL);
+	g_free (tmp);
+	return res;
+}
+
+/* setup_session_mgmt
+ *
+ * Make sure the capplet launches and applies its settings next time the user
+ * logs in
+ */
+
+static void
+setup_session_mgmt (const gchar *binary_name) 
+{
+	GnomeClient *client;
+	GnomeClientFlags flags;
+	gint token;
+	gchar *restart_args[3];
+	gchar *prop_name;
+
+	g_return_if_fail (binary_name != NULL);
+
+	client = gnome_master_client ();
+	flags = gnome_client_get_flags (client);
+
+	if (flags & GNOME_CLIENT_IS_CONNECTED) {
+		prop_name = get_property_name (binary_name);
+		token = gnome_startup_acquire_token
+			(prop_name, gnome_client_get_id (client));
+		g_free (prop_name);
+
+		if (token) {
+			gnome_client_set_priority (client, 20);
+			gnome_client_set_restart_style
+				(client, GNOME_RESTART_ANYWAY);
+			restart_args[0] = g_strdup (binary_name);
+			restart_args[1] = "--init-session-settings";
+			restart_args[2] = NULL;
+			gnome_client_set_restart_command
+				(client, 2, restart_args);
+			g_free (restart_args[0]);
+		} else {
+			gnome_client_set_restart_style
+				(client, GNOME_RESTART_NEVER);
+		}
+	}
+}
+
 /* capplet_init -- see documentation in capplet-util.h
  */
 
@@ -268,10 +323,13 @@ capplet_init (int                      argc,
 	gchar                 *default_moniker;
 
 	static gboolean apply_only;
+	static gboolean init_session;
 	static gboolean get_legacy;
 	static struct poptOption cap_options[] = {
 		{ "apply", '\0', POPT_ARG_NONE, &apply_only, 0,
 		  N_("Just apply settings and quit"), NULL },
+		{ "init-session-settings", '\0', POPT_ARG_NONE, &init_session, 0,
+		  N_("Initialize the session"), NULL },
 		{ "get-legacy", '\0', POPT_ARG_NONE, &get_legacy, 0,
 		  N_("Retrieve and store legacy settings"), NULL },
 		{ NULL, '\0', 0, NULL, 0, NULL, NULL }
@@ -299,13 +357,15 @@ capplet_init (int                      argc,
 		exit (-1);
 	}
 
-	if (apply_only && apply_fn != NULL) {
+	if ((apply_only || init_session) && apply_fn != NULL) {
 		apply_fn (db);
 	}
 	else if (get_legacy && get_legacy_fn != NULL) {
+		setup_session_mgmt (argv[0]);
 		get_legacy_fn (db);
 		Bonobo_ConfigDatabase_sync (db, &ev);
 	} else {
+		setup_session_mgmt (argv[0]);
 		create_dialog_cb = create_dialog_fn;
 		apply_settings_cb = apply_fn;
 		setup_cb = setup_fn;
