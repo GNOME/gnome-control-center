@@ -170,6 +170,8 @@ make_main(void)
   socket = gtk_socket_new();
   gtk_container_add(GTK_CONTAINER(evbox), socket);
   update_theme_entries(l2);
+  gtk_signal_connect (GTK_OBJECT (w), "help",
+		      GTK_SIGNAL_FUNC (click_help), NULL);
   gtk_signal_connect (GTK_OBJECT (w), "try",
 		      GTK_SIGNAL_FUNC (click_try), NULL);
   gtk_signal_connect (GTK_OBJECT (w), "ok",
@@ -215,6 +217,18 @@ click_preview(GtkWidget *widget, gpointer data)
   send_reread();
 }
 
+void
+click_help(GtkWidget *widget, gpointer data)
+{
+  gchar *tmp;
+
+  tmp = gnome_help_file_find_file ("users-guide", "gccdesktop.html#GCCTHEME");
+  if (tmp) {
+    gnome_help_goto(0, tmp);
+    g_free(tmp);
+  }
+
+}
 void
 click_try(GtkWidget *widget, gpointer data)
 {

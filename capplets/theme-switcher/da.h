@@ -71,6 +71,8 @@ click_preview(GtkWidget *widget, gpointer data);
 void
 click_try(GtkWidget *widget, gpointer data);
 void
+click_help(GtkWidget *widget, gpointer data);
+void
 click_ok(GtkWidget *widget, gpointer data);
 void
 click_revert(GtkWidget *widget, gpointer data);

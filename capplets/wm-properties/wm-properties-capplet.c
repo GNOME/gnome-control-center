@@ -13,6 +13,7 @@
 /* prototypes */
 static void restart         (gboolean force);
 static void try_callback    (void);
+static void help_callback     (void);
 static void ok_callback     (void);
 static void revert_callback (void);
 static void cancel_callback (void);
@@ -517,6 +518,18 @@ try_callback (void)
 }
 
 static void
+help_callback (void)
+{
+  gchar *tmp;
+
+  tmp = gnome_help_file_find_file ("users-guide", "gccdesktop.html#GCCWM");
+  if (tmp) {
+    gnome_help_goto(0, tmp);
+    g_free(tmp);
+  }
+}
+
+static void
 ok_callback (void)
 {
         switch (state) {
@@ -1002,6 +1015,8 @@ main (int argc, char **argv)
                 wm_setup();
                 gtk_signal_connect(GTK_OBJECT(capplet), "destroy", 
                                    GTK_SIGNAL_FUNC(destroy_callback), NULL);
+                gtk_signal_connect (GTK_OBJECT (capplet), "help", 
+                                    GTK_SIGNAL_FUNC (help_callback), NULL);
                 gtk_signal_connect (GTK_OBJECT (capplet), "try", 
                                     GTK_SIGNAL_FUNC (try_callback), NULL);
                 gtk_signal_connect (GTK_OBJECT (capplet), "revert", 
