@@ -3,25 +3,27 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: control-center 1.99.10\n"
-"POT-Creation-Date: 2002-06-17 18:03-0400\n"
-"PO-Revision-Date: 2002-06-10 12:12+0900\n"
+"Project-Id-Version: control-center 2.0.0\n"
+"POT-Creation-Date: 2002-06-25 16:28+0900\n"
+"PO-Revision-Date: 2002-06-25 16:33+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: Korean <gnome-kr-translation@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:262
-msgid "_Enable keyboard accessibility"
-msgstr "키보드 접근성 기능 사용(_E)"
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:236
+#: capplets/keyboard/gnome-keyboard-properties.c:241
+#, c-format
+msgid "There was an error launching the keyboard capplet : %s"
+msgstr "키보드 애플릿을 시작하는 데 오류가 발생했습니다: %s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:329
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:302
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "AccessX 설정사항을 '%s' 파일에서 가져 올 수 없습니다"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:441
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:414
 msgid "Select CDE AccessX file"
 msgstr "CDE AccessX 파일 선택"
 
@@ -35,57 +37,61 @@ msgstr "키보드"
 msgid "Keyboard Accessibility Properties"
 msgstr "키보드 접근성 기능 등록 정보"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:1
-msgid "<b>Test</b>"
-msgstr "<b>테스트</b>"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:2
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:1
 msgid "B_eep when modifier is pressed"
 msgstr "변경 키를 눌렀을 때 삑 소리 내기(_E)"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:3
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:2
 msgid "Beep when an LED is turned on and two beeps when one is turned off."
 msgstr "LED가 켜질 때 삑 소리를 내고, LED가 꺼질 때 삑 소리 두번."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:4
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:3
+msgid "Beep when key is re_jected"
+msgstr "키가 거부되었을 때 삑소리(_J)"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
 msgid "Beep when:"
 msgstr "삑소리 내기:"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:5
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
 msgid "Enable Slo_w Keys"
 msgstr "Slow 키 사용(_W)"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:6
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:6
 msgid "Enable _Bounce Keys"
 msgstr "Bounce 키 사용(_B)"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:7
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
 msgid "Enable _Mouse Keys"
 msgstr "Mouse 키 사용(_M)"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:8
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
 msgid "Enable _Sticky Keys"
 msgstr "Sticky 키 사용(_M)"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:9
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:9
 msgid "Enable _Toggle Keys"
 msgstr "Toggle 키 사용(_T)"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:10
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
+msgid "General"
+msgstr "일반"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:11
 msgid ""
 "Ignore all subsequent presses of the SAME key if they happen within a user "
 "selectable period of time."
 msgstr "지정한 시간 내에 같은 키가 연속해서 눌릴 경우 무시합니다."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:11
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:12
 msgid "Keyboard Accessibility Configuration (AccessX)"
 msgstr "키보드 접근성 기능 설정 (AccessX)"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:12
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:13
 msgid "Ma_ximum pointer speed :"
 msgstr "최대 포인터 속도(_X):"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:13
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:14
 msgid ""
 "Only accept keys after they have been pressed and held for a user adjustable "
 "amount of time."
@@ -93,53 +99,57 @@ msgstr ""
 "키를 누른 후에 사용자가 설정한 만큼의 시간동안 누르고 있어야 그 키를 받아들입"
 "니다."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:14
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
 msgid ""
 "Perform multiple simultaneous key press operations by pressing modifier keys "
 "in sequence."
 msgstr "변경 키를 눌러서 차례대로 누른 키가 동시에 눌려진 것처럼 처리합니다."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:15
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
+msgid "Repeat Key Preferences"
+msgstr "반복 키 기본 설정"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:17
 msgid "Start mo_ving this long after keypress :"
 msgstr "키를 누름 뒤에 이 만큼 지나면 움직이기 시작(_V):"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:16
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:18
+msgid "Testing Area"
+msgstr "테스트 영역"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:19
 msgid "Time to _accelerate to max speed :"
 msgstr "최대 속도로 가속할 시간(_A) :"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:17
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:20
+msgid "Toggle and Repeat Keys"
+msgstr "토글 및 반복 키"
+
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:21
 msgid "Turn the numeric keypad into a mouse control pad."
 msgstr "숫자 키 패드를 마우스 컨트롤 패드로 만듭니다."
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:18
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:22
 msgid "_Beep when enabling/disabling keyboard accessibility features"
 msgstr "키보드 접근성 기능을 사용/해제할 때 삑소리 내기(_B)"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:19
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:23
 msgid "_Disable if unused for "
 msgstr "이 만큼의 시간동안 사용되지 않으면 끄기(_D): "
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:20
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:24
 msgid "_Ignore keypresses within  :"
 msgstr "다음 시간 내에 키 누름 무시(_I) :"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:21
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:25
 msgid "_Import CDE AccessX file"
 msgstr "CDE AccessX 파일 가져 오기(_I)"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:22
-msgid "_Keyboard"
-msgstr "키보드(_K)"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:23
-msgid "_Misc"
-msgstr "기타(_M)"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:24
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:26
 msgid "_Only accept keypress after :"
 msgstr "이 만큼 지난 뒤에 키 누름 받아들이기(_O) :"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:25
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:27
 msgid ""
 "_Turn off Sticky Keys when\n"
 "two keys pressed simultaneously"
@@ -147,56 +157,52 @@ msgstr ""
 "두 키를 동시에 눌렀을 때\n"
 "StickyKeys 끄기(_T)"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:27
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
 msgid "key is _accepted"
 msgstr "키를 받아들일 때(_A)"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:28
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:30
 msgid "key is _pressed"
 msgstr "키가 눌러졌을 때(_P)"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:29
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
 msgid "key is _rejected"
 msgstr "키가 거부되었을 때(_R)"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:30
-msgid "key is re_jected"
-msgstr "키가 거부되었을 때(_J)"
-
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:31
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
 msgid "msecs"
 msgstr "천분의일초"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:32
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
 msgid "pixels/sec"
 msgstr "픽셀/초"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:33
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
 msgid "seconds"
 msgstr "초"
 
 #. solid
 #: capplets/background/background-properties-capplet.c:228
-msgid "C_olor"
-msgstr "색(_O)"
+msgid "C_olor:"
+msgstr "색(_O):"
 
 #. horiz
 #: capplets/background/background-properties-capplet.c:232
-msgid "_Left Color"
-msgstr "왼쪽 색(_L)"
+msgid "_Left Color:"
+msgstr "왼쪽 색(_L):"
 
 #: capplets/background/background-properties-capplet.c:233
-msgid "_Right Color"
-msgstr "왼쪽 색(_R)"
+msgid "_Right Color:"
+msgstr "왼쪽 색(_R):"
 
 #. vert
 #: capplets/background/background-properties-capplet.c:236
-msgid "_Top Color"
-msgstr "위쪽 색(_T)"
+msgid "_Top Color:"
+msgstr "위쪽 색(_T):"
 
 #: capplets/background/background-properties-capplet.c:237
-msgid "_Bottom Color"
-msgstr "아래쪽 색(_B)"
+msgid "_Bottom Color:"
+msgstr "아래쪽 색(_B):"
 
 #: capplets/background/background-properties-capplet.c:398
 msgid "_Wallpaper"
@@ -219,13 +225,13 @@ msgid "_No Picture"
 msgstr "그림 없음(_N)"
 
 #: capplets/background/background-properties-capplet.c:433
-msgid "_Picture"
-msgstr "그림(_P)"
+msgid "Select _picture:"
+msgstr "그림 선택(_P):"
 
 #: capplets/background/background-properties-capplet.c:558
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
-#: capplets/keyboard/gnome-keyboard-properties.c:359
+#: capplets/keyboard/gnome-keyboard-properties.c:363
 #: capplets/mouse/gnome-mouse-properties.c:727
 #: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
@@ -245,20 +251,20 @@ msgid "Background Preview"
 msgstr "배경 미리보기"
 
 #: capplets/background/background-properties.glade.h:4
-msgid "Bor_der the picture with a:"
-msgstr "그림의 테두리를 다음으로 두릅니다(_D):"
-
-#: capplets/background/background-properties.glade.h:5
 msgid "Horizontal gradient"
 msgstr "가로 방향 그라데이션"
 
-#: capplets/background/background-properties.glade.h:6
+#: capplets/background/background-properties.glade.h:5
 msgid "Pick a color"
 msgstr "색을 고르십시오"
 
-#: capplets/background/background-properties.glade.h:7
+#: capplets/background/background-properties.glade.h:6
 msgid "Picture Options:"
 msgstr "그림 옵션:"
+
+#: capplets/background/background-properties.glade.h:7
+msgid "Picture bor_der:"
+msgstr "그림 테두리(_D):"
 
 #: capplets/background/background-properties.glade.h:8
 #: libbackground/preview-file-selection.c:198
@@ -324,7 +330,7 @@ msgstr ""
 msgid "Just apply settings and quit"
 msgstr "설정을 적용하고 마칩니다"
 
-#: capplets/common/capplet-util.c:315
+#: capplets/common/capplet-util.c:339
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "도움말을 표시하는 데 오류가 발생했습니다: %s"
@@ -858,25 +864,25 @@ msgid "Source Code"
 msgstr "소스 코드"
 
 #: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:727
+#: capplets/file-types/mime-type-info.c:664
 msgid "Audio"
 msgstr "오디오"
 
 #: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:723
+#: capplets/file-types/mime-type-info.c:660
 msgid "Images"
 msgstr "그림"
 
 #: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:725
+#: capplets/file-types/mime-type-info.c:662
 msgid "Video"
 msgstr "비디오"
 
-#: capplets/file-types/file-types-capplet.c:223
+#: capplets/file-types/file-types-capplet.c:226
 msgid "Description"
 msgstr "설명"
 
-#: capplets/file-types/file-types-capplet.c:230
+#: capplets/file-types/file-types-capplet.c:233
 msgid "Extensions"
 msgstr "확장자"
 
@@ -991,30 +997,30 @@ msgstr "프로토콜 이름(_P)"
 msgid "_Remove"
 msgstr "삭제(_R)"
 
-#: capplets/file-types/mime-category-edit-dialog.c:137
+#: capplets/file-types/mime-category-edit-dialog.c:138
 msgid "Edit file category"
 msgstr "파일 범주 편집"
 
-#: capplets/file-types/mime-category-edit-dialog.c:171
+#: capplets/file-types/mime-category-edit-dialog.c:172
 #: capplets/file-types/mime-edit-dialog.c:230
 #: capplets/file-types/service-edit-dialog.c:170
 #: capplets/file-types/service-edit-dialog.c:171
 msgid "Model"
 msgstr "모델"
 
-#: capplets/file-types/mime-category-edit-dialog.c:172
+#: capplets/file-types/mime-category-edit-dialog.c:173
 msgid "GtkTreeModel that contains the category data"
 msgstr "범주 데이터를 포함하는 GtkTreeModel"
 
-#: capplets/file-types/mime-category-edit-dialog.c:177
+#: capplets/file-types/mime-category-edit-dialog.c:178
 msgid "MIME category info"
 msgstr "MIME 범주 정보"
 
-#: capplets/file-types/mime-category-edit-dialog.c:178
+#: capplets/file-types/mime-category-edit-dialog.c:179
 msgid "Structure containing information on the MIME category"
 msgstr "MIME 범주에 정보를 포함하는 구조"
 
-#: capplets/file-types/mime-category-edit-dialog.c:343
+#: capplets/file-types/mime-category-edit-dialog.c:344
 #: capplets/file-types/mime-edit-dialog.c:442
 #: capplets/file-types/mime-edit-dialog.c:546
 #: capplets/file-types/service-edit-dialog.c:358
@@ -1055,27 +1061,25 @@ msgstr "파일 형식 추가"
 msgid "None"
 msgstr "없음"
 
-#: capplets/file-types/mime-edit-dialog.c:726
+#: capplets/file-types/mime-edit-dialog.c:802
 msgid ""
-"Invalid MIME type. Please enter a valid MIME type, or leave the field blank "
-"to have one generated for you."
-msgstr ""
-"잘못된 MIME 타입. 올바른 MIME 타입을 입력하십시오. 아니면 빈 칸으로 남겨 두"
-"면 자동으로 만들어 드릴 것입니다."
+"Please enter a valid MIME type.  It should be of the form class/type and may "
+"not contain any spaces."
+msgstr "올바른 MIME 타입을 입력하십시오.  MIME 타입은 \"클래스/타입\"의 형태가 되어야 하고 공백이 들어가면 안 됩니다."
 
-#: capplets/file-types/mime-edit-dialog.c:730
-msgid "There already exists a MIME type of that name."
-msgstr "이미 그 이름의 MIME 타입이 존재합니다."
+#: capplets/file-types/mime-edit-dialog.c:810
+msgid "A MIME type with that name already exists, overwrite ?."
+msgstr "그 이름의 MIME 타입이 이미 존재합니다, 덮어쓸까요 ?"
 
-#: capplets/file-types/mime-edit-dialog.c:800
+#: capplets/file-types/mime-edit-dialog.c:875
 msgid "Category"
 msgstr "범주"
 
-#: capplets/file-types/mime-edit-dialog.c:805
+#: capplets/file-types/mime-edit-dialog.c:880
 msgid "Choose a file category"
 msgstr "파일 분류 선택"
 
-#: capplets/file-types/mime-type-info.c:729
+#: capplets/file-types/mime-type-info.c:666
 msgid "Misc"
 msgstr "기타"
 
@@ -1194,7 +1198,7 @@ msgid "Accelerator key"
 msgstr "단축 키"
 
 #: capplets/keybindings/eggcellrendererkeys.c:206
-#: capplets/keybindings/gnome-keybinding-properties.c:306
+#: capplets/keybindings/gnome-keybinding-properties.c:165
 #: libbackground/applier.c:521
 msgid "Disabled"
 msgstr "사용 않음"
@@ -1208,34 +1212,34 @@ msgstr "새 단축 키를 타이프하거나, 지우려면 백스페이스를 �
 msgid "Type a new accelerator"
 msgstr "새 단축 키를 타이프하세요"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:573
+#: capplets/keybindings/gnome-keybinding-properties.c:432
 msgid "<Unknown Action>"
 msgstr "<알 수 없는 동작>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:598
+#: capplets/keybindings/gnome-keybinding-properties.c:457
 msgid "Desktop"
 msgstr "바탕 화면"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:602
+#: capplets/keybindings/gnome-keybinding-properties.c:461
 msgid "Window Management"
 msgstr "창 관리자"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:699
+#: capplets/keybindings/gnome-keybinding-properties.c:558
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "설정 데이터 베이스에서 새로운 단축글쇠 설정 오류: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:851
+#: capplets/keybindings/gnome-keybinding-properties.c:710
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
 msgstr "키보드 테마를 찾을 수 없습니다.  GTK+ 설치가 불완전하기 때문입니다."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:876
+#: capplets/keybindings/gnome-keybinding-properties.c:735
 msgid "Action"
 msgstr "동작"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:888
+#: capplets/keybindings/gnome-keybinding-properties.c:747
 msgid "Shortcut"
 msgstr "바로 가기"
 
@@ -1268,12 +1272,12 @@ msgstr "바탕 화면 바로 가기(_D):"
 msgid "Associate keyboard shortcuts with panel actions"
 msgstr "키보드 바로 가기를 패널 동작에 연결시키기"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:338
+#: capplets/keyboard/gnome-keyboard-properties.c:342
 msgid "_Accessibility"
 msgstr "접근성 기능(_A)"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:355
-#: capplets/keyboard/gnome-keyboard-properties.c:357
+#: capplets/keyboard/gnome-keyboard-properties.c:359
+#: capplets/keyboard/gnome-keyboard-properties.c:361
 #: capplets/sound/sound-properties-capplet.c:145
 #: capplets/sound/sound-properties-capplet.c:147
 msgid ""
@@ -1949,21 +1953,21 @@ msgstr "capplet 디렉토리 객체"
 msgid "Capplet directory that this view is viewing"
 msgstr "이 뷰가 보여주는 capplet 디렉토리"
 
-#: control-center/capplet-dir-view.c:335
+#: control-center/capplet-dir-view.c:348
 msgid "translator_credits"
 msgstr ""
 "Young-Ho Cha <ganadist@chollian.net>, 2002\n"
 "Changwoo Ryu <cwryu@debian.org>, 2002"
 
-#: control-center/capplet-dir-view.c:344 control-center/gnomecc.desktop.in.h:1
+#: control-center/capplet-dir-view.c:357 control-center/gnomecc.desktop.in.h:1
 msgid "GNOME Control Center"
 msgstr "그놈 제어판"
 
-#: control-center/capplet-dir-view.c:347
+#: control-center/capplet-dir-view.c:360
 msgid "Desktop properties manager."
 msgstr "바탕 화면 등록 정보 관리자."
 
-#: control-center/capplet-dir-view.c:485
+#: control-center/capplet-dir-view.c:498
 #, c-format
 msgid "Gnome Control Center : %s"
 msgstr "그놈 제어판 : %s"
