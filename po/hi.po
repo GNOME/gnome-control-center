@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-11-12 15:42-0500\n"
+"POT-Creation-Date: 2003-12-30 13:00-0500\n"
 "PO-Revision-Date: 2003-08-18 18:08+0530\n"
 "Last-Translator: Ravishankar Shrivastava <raviratlami@yahoo.com>\n"
 "Language-Team: Gnome Hindi Team <indlinux-hindi-gnome@lists.sourceforge."
@@ -104,7 +104,7 @@ msgid "Import Feature Settings File"
 msgstr "विशेषता सेटिंग आयात करे"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "कुंजी पटल (कीबोर्ड)"
@@ -258,7 +258,7 @@ msgstr ""
 "माडीफायर कुंजी को तरतीब से दबाने पर बहुसंख्य एक ही समय में कुंजी दबाने की क्रिया संपादित करें"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "S_peed:"
 msgstr "गति (_p):"
 
@@ -287,7 +287,7 @@ msgid "_Only accept keys held for:"
 msgstr "सिर्फ उन्हीं कुंजियों को स्वीकार करें जो देर तक दबाकर रखे जाते हैं  (_O)"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "_Type to test settings:"
 msgstr "सेटिंग्स की जांच करने टाइप करें  (_T)"
 
@@ -315,8 +315,10 @@ msgstr "मिल्लिसेकेण्ड"
 msgid "pixels/second"
 msgstr "पिक्सल / सेकण्ड"
 
+#. set the timeout value  label with correct value of timeout
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
 #: capplets/mouse/gnome-mouse-properties.c:133
+#: capplets/mouse/gnome-mouse-properties.c:578
 #: capplets/mouse/gnome-mouse-properties.glade.h:27
 #: capplets/windows/gnome-window-properties.glade.h:7
 msgid "seconds"
@@ -368,8 +370,8 @@ msgstr "कोई चित्र नहीं  (_N)"
 #: capplets/background/background-properties-capplet.c:559
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:730
-#: capplets/keyboard/gnome-keyboard-properties.c:218
-#: capplets/mouse/gnome-mouse-properties.c:806
+#: capplets/keyboard/gnome-keyboard-properties.c:222
+#: capplets/mouse/gnome-mouse-properties.c:812
 #: capplets/sound/sound-properties-capplet.c:212
 msgid "Retrieve and store legacy settings"
 msgstr "लीजेसी ( legacy) सेटिंग्स पुनः प्राप्त कर भण्डारित करें"
@@ -432,26 +434,6 @@ msgstr "लंबवत ग्रेडिएंट"
 #: capplets/background/background-properties.glade.h:13
 msgid "You can drag image files into the window to set the background picture."
 msgstr "पार्श्व चित्र तय करने हेतु आप चित्र फाइल को घसीट कर खिड़की पर छोड़ सकते हैं"
-
-#: capplets/background/background-properties.glade.h:14
-msgid "radiobutton1"
-msgstr "रेडियो बटन 1"
-
-#: capplets/background/background-properties.glade.h:15
-msgid "radiobutton2"
-msgstr "रेडियो बटन 2"
-
-#: capplets/background/background-properties.glade.h:16
-msgid "radiobutton3"
-msgstr "रेडियो बटन 1"
-
-#: capplets/background/background-properties.glade.h:17
-msgid "radiobutton4"
-msgstr "रेडियो बटन 1"
-
-#: capplets/background/background-properties.glade.h:18
-msgid "radiobutton5"
-msgstr "रेडियो बटन 1"
 
 #: capplets/background/background.desktop.in.h:1
 msgid "Background"
@@ -882,21 +864,21 @@ msgstr "वेब ब्राउजर चुनें  (_S)"
 msgid "_Select an Editor:"
 msgstr "संशोधक चुनें  (_S)"
 
-#: capplets/desktop-links/Accessibility.directory.in.in.h:1
+#: capplets/desktop-links/Accessibility.directory.in.h:1
 msgid "Accessibility"
 msgstr "सुगमता"
 
-#: capplets/desktop-links/Accessibility.directory.in.in.h:2
+#: capplets/desktop-links/Accessibility.directory.in.h:2
 msgid "Accessibility Settings"
 msgstr "सुगमता सेटिंग्स"
 
 # #-#-#-#-#  gnome-desktop.gnome-2-2.hi.po (gnome-desktop VERSION)  #-#-#-#-#
 # libgnome-desktop/gnome-ditem-edit.c:776
-#: capplets/desktop-links/Advanced.directory.in.in.h:1
+#: capplets/desktop-links/Advanced.directory.in.h:1
 msgid "Advanced"
 msgstr "उन्नत"
 
-#: capplets/desktop-links/Advanced.directory.in.in.h:2
+#: capplets/desktop-links/Advanced.directory.in.h:2
 msgid "Advanced Settings"
 msgstr "उन्नत सेटिंग"
 
@@ -989,7 +971,7 @@ msgstr "खिड़की प्रबंधक के साथ ध्वन�
 # 48x48/emblems/emblem-sound.icon.in.h:1
 # 48x48/emblems/emblem-sound.icon.in.h:1
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
-#: capplets/sound/sound.desktop.in.h:2
+#: capplets/sound/gnome-settings-sound.desktop.in.h:2
 msgid "Sound"
 msgstr "ध्वनि"
 
@@ -1044,8 +1026,8 @@ msgid "Screen Resolution Preferences"
 msgstr "सक्रीन रेसोल्युशन वरीयताएं"
 
 #: capplets/display/main.c:476
-#, c-format
-msgid "Make default for this _computer (%s) only"
+#, fuzzy, c-format
+msgid "_Make default for this computer (%s) only"
 msgstr "केवल इस कम्प्यूटर (%s) के लिए डिफॉल्ट बनाएं (_c)"
 
 #: capplets/display/main.c:494
@@ -1572,60 +1554,66 @@ msgid ""
 "sized font."
 msgstr ""
 
-#: capplets/keybindings/eggcellrendererkeys.c:160
 #: capplets/keybindings/eggcellrendererkeys.c:161
+#: capplets/keybindings/eggcellrendererkeys.c:162
 msgid "Accelerator key"
 msgstr "फुर्ती कुंजी"
 
-#: capplets/keybindings/eggcellrendererkeys.c:170
 #: capplets/keybindings/eggcellrendererkeys.c:171
+#: capplets/keybindings/eggcellrendererkeys.c:172
 msgid "Accelerator modifiers"
 msgstr "फुर्ती बदलने वाला"
 
 #: capplets/keybindings/eggcellrendererkeys.c:180
+#: capplets/keybindings/eggcellrendererkeys.c:181
+#, fuzzy
+msgid "Accelerator keycode"
+msgstr "फुर्ती कुंजी"
+
+#: capplets/keybindings/eggcellrendererkeys.c:191
 msgid "Accel Mode"
 msgstr "फुर्ती मोड (Accel Mode)"
 
-#: capplets/keybindings/eggcellrendererkeys.c:181
+#: capplets/keybindings/eggcellrendererkeys.c:192
 msgid "The type of accelerator."
 msgstr "फुर्ती प्रकार"
 
 # #-#-#-#-#  gnome-applets.gnome-2-2.hi.po (gnome-applets 2.x)  #-#-#-#-#
 # gtk/gtkinputdialog.c:238
-#: capplets/keybindings/eggcellrendererkeys.c:219
-#: capplets/keybindings/gnome-keybinding-properties.c:204
+#: capplets/keybindings/eggcellrendererkeys.c:240
+#: capplets/keybindings/gnome-keybinding-properties.c:207
 #: libbackground/applier.c:588 typing-break/drwright.c:448
 msgid "Disabled"
 msgstr "अक्षम"
 
-#: capplets/keybindings/eggcellrendererkeys.c:330
-#: capplets/keybindings/eggcellrendererkeys.c:563
+#: capplets/keybindings/eggcellrendererkeys.c:359
+#: capplets/keybindings/eggcellrendererkeys.c:599
 msgid "Type a new accelerator, or press Backspace to clear"
 msgstr "नया फुर्ती टाइप करें या साफ करने हेतु बैक स्पेस दबाएं"
 
-#: capplets/keybindings/eggcellrendererkeys.c:566
+#: capplets/keybindings/eggcellrendererkeys.c:602
 msgid "Type a new accelerator"
 msgstr "नया फुर्ती टाइप करें"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:172
+#: capplets/keybindings/gnome-keybinding-properties.c:174
 msgid "GNOME Default"
 msgstr "गनोम डिफॉल्ट"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:540
+#: capplets/keybindings/gnome-keybinding-properties.c:549
 msgid "<Unknown Action>"
 msgstr "<अज्ञात क्रिया>"
 
 # #-#-#-#-#  gnome-panel.gnome-2-2.hi.po (gnome-panel 2.2)  #-#-#-#-#
 # gnome-session/splash.c:72
-#: capplets/keybindings/gnome-keybinding-properties.c:559
+#: capplets/keybindings/gnome-keybinding-properties.c:568
 msgid "Desktop"
 msgstr "डेस्कटॉप"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:563
+#: capplets/keybindings/gnome-keybinding-properties.c:572
 msgid "Window Management"
 msgstr "खिड़की प्रबंधन"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:698
+#: capplets/keybindings/gnome-keybinding-properties.c:709
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1634,12 +1622,17 @@ msgstr ""
 "यह शार्टकट \"%s\" पहले से ही :\n"
 " \"%s\" के लिए प्रयुक्त है\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:729
+#: capplets/keybindings/gnome-keybinding-properties.c:740
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "कानफिगुरेशन डाटाबेस में नई फुर्ती तय करने में त्रुटि  %s  हुई.\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:880
+#: capplets/keybindings/gnome-keybinding-properties.c:790
+#, fuzzy, c-format
+msgid "Error unsetting accelerator in configuration database: %s\n"
+msgstr "कानफिगुरेशन डाटाबेस में नई फुर्ती तय करने में त्रुटि  %s  हुई.\n"
+
+#: capplets/keybindings/gnome-keybinding-properties.c:939
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1649,11 +1642,11 @@ msgstr ""
 
 # #-#-#-#-#  gnome-session.gnome-2-2.hi.po (gnome-session VERSION)  #-#-#-#-#
 # gnome-session/logout.c:266
-#: capplets/keybindings/gnome-keybinding-properties.c:902
+#: capplets/keybindings/gnome-keybinding-properties.c:961
 msgid "Action"
 msgstr "कार्य"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:921
+#: capplets/keybindings/gnome-keybinding-properties.c:985
 msgid "Shortcut"
 msgstr "छोटा रास्ता (शार्टकट)"
 
@@ -1678,24 +1671,24 @@ msgstr "पाठ्य संशोधक शार्टकट  (_T)"
 msgid "Assign shortcut keys to commands"
 msgstr "कमांड के लिए शार्टकट कुंजी नियत करें"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:104
+#: capplets/keyboard/gnome-keyboard-properties.c:106
 #, c-format
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "कुंजीपटल केप्लेट चालू करने में त्रुटि हुई : %s"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:195
+#: capplets/keyboard/gnome-keyboard-properties.c:199
 msgid "_Accessibility"
 msgstr "सुगमता  (_A)"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:214
-#: capplets/keyboard/gnome-keyboard-properties.c:216
+#: capplets/keyboard/gnome-keyboard-properties.c:218
+#: capplets/keyboard/gnome-keyboard-properties.c:220
 #: capplets/sound/sound-properties-capplet.c:208
 #: capplets/sound/sound-properties-capplet.c:210
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "सेटिंग संप्रयोजित करें और बाहर हों ( उपयुक्तता डेमन द्वारा प्रबन्ध किया जाएगा)"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:220
+#: capplets/keyboard/gnome-keyboard-properties.c:224
 msgid "Start the page with the typing break settings showing"
 msgstr ""
 
@@ -1728,64 +1721,94 @@ msgid "<small><i>Slow</i></small>"
 msgstr "<थोड़ा><i>धीमा</i></थोड़ा>"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#, fuzzy
+msgid "Advanced Layout Options"
+msgstr "उन्नत सेटिंग"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "All_ow postponing of breaks"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Check if breaks are allowed to be postponed"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#, fuzzy
+msgid "Core Layout Configuration"
+msgstr "नेटवर्क प्राक्सी कानफिगुरेशन"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Cursor _blinks in text boxes and fields"
 msgstr "शब्द बाक्स और फील्ड में ब्लिंक करें  (_b)"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
 msgid "Duration of the break when typing is disallowed"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "Duration of work before forcing a break"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
 msgid "Key presses _repeat when key is held down"
 msgstr "जब कुंजी दबाया रखा जाए तो कुंजी पटल दोहराए (_r)"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "Keyboard Preferences"
 msgstr "कुंजी पटल वरीयताएं"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
+#, fuzzy
+msgid "Keyboard _model:"
+msgstr "कुंजी पटल घंटी"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#, fuzzy
+msgid "Layout _options:"
+msgstr "चित्र विकल्प (_o):"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid "Typing Break"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "_Accessibility..."
 msgstr "सुगमता (एक्सेसिबिलिटी).... (_A)"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
 msgid "_Break interval lasts:"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "_Delay:"
 msgstr "देरीः  (_D)"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
+#, fuzzy
+msgid "_Ignore system configuration"
+msgstr "नेटवर्क प्राक्सी कानफिगुरेशन"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
+#, fuzzy
+msgid "_Layouts:"
+msgstr "लगाने का तरीका (लेआउट)"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:30
 msgid "_Speed:"
 msgstr "गतिः  (_S)"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:32
 msgid "_Work interval lasts:"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:33
 msgid "minutes"
 msgstr "मिनेटें"
 
@@ -1797,63 +1820,63 @@ msgstr "कुंजी पटल की वरीयताएं तय कर�
 msgid "Unknown Cursor"
 msgstr "अज्ञात कर्सर"
 
-#: capplets/mouse/gnome-mouse-properties.c:602
+#: capplets/mouse/gnome-mouse-properties.c:613
 msgid "Default Cursor - Current"
 msgstr "डिफॉल्ट कर्सर - वर्तमान"
 
-#: capplets/mouse/gnome-mouse-properties.c:602
-#: capplets/mouse/gnome-mouse-properties.c:605
+#: capplets/mouse/gnome-mouse-properties.c:613
+#: capplets/mouse/gnome-mouse-properties.c:616
 msgid "The default cursor that ships with X"
 msgstr "डिफाल्ट कर्सर जो  X के साथ आता है"
 
-#: capplets/mouse/gnome-mouse-properties.c:605
+#: capplets/mouse/gnome-mouse-properties.c:616
 msgid "Default Cursor"
 msgstr "डिफाल्ट कर्सर्स"
 
-#: capplets/mouse/gnome-mouse-properties.c:623
+#: capplets/mouse/gnome-mouse-properties.c:634
 msgid "White Cursor - Current"
 msgstr "सफेद कर्सर्स वर्तमान"
 
-#: capplets/mouse/gnome-mouse-properties.c:623
-#: capplets/mouse/gnome-mouse-properties.c:626
+#: capplets/mouse/gnome-mouse-properties.c:634
+#: capplets/mouse/gnome-mouse-properties.c:637
 msgid "The default cursor inverted"
 msgstr "डिफाल्ट कर्सर उल्टा किया हुआ"
 
-#: capplets/mouse/gnome-mouse-properties.c:626
+#: capplets/mouse/gnome-mouse-properties.c:637
 msgid "White Cursor"
 msgstr "सफेद कर्सर्स"
 
-#: capplets/mouse/gnome-mouse-properties.c:645
+#: capplets/mouse/gnome-mouse-properties.c:656
 msgid "Large Cursor - Current"
 msgstr "बडा कर्सर्स वर्तमान"
 
-#: capplets/mouse/gnome-mouse-properties.c:645
-#: capplets/mouse/gnome-mouse-properties.c:648
+#: capplets/mouse/gnome-mouse-properties.c:656
+#: capplets/mouse/gnome-mouse-properties.c:659
 msgid "Large version of normal cursor"
 msgstr "सामान्य कर्सर का बड़ा रूप"
 
-#: capplets/mouse/gnome-mouse-properties.c:648
+#: capplets/mouse/gnome-mouse-properties.c:659
 msgid "Large Cursor"
 msgstr "बडा कर्सर्स"
 
-#: capplets/mouse/gnome-mouse-properties.c:667
+#: capplets/mouse/gnome-mouse-properties.c:678
 msgid "Large White Cursor - Current"
 msgstr "बड़ा सफेद कर्सर -वर्तमान"
 
-#: capplets/mouse/gnome-mouse-properties.c:667
-#: capplets/mouse/gnome-mouse-properties.c:670
+#: capplets/mouse/gnome-mouse-properties.c:678
+#: capplets/mouse/gnome-mouse-properties.c:681
 msgid "Large version of white cursor"
 msgstr "सफेद कर्सर का बड़ा रूप"
 
-#: capplets/mouse/gnome-mouse-properties.c:670
+#: capplets/mouse/gnome-mouse-properties.c:681
 msgid "Large White Cursor"
 msgstr "बडा सफेद कर्सर"
 
-#: capplets/mouse/gnome-mouse-properties.c:747
+#: capplets/mouse/gnome-mouse-properties.c:753
 msgid "Cursor Size"
 msgstr "कर्सर आकार"
 
-#: capplets/mouse/gnome-mouse-properties.c:756
+#: capplets/mouse/gnome-mouse-properties.c:762
 msgid "Cursor Theme"
 msgstr "कर्सर थीम"
 
@@ -1957,11 +1980,11 @@ msgstr "देहली (थ्रेशोल्ड)  (_T)"
 msgid "_Timeout:"
 msgstr "टाइमआउट (_T):"
 
-#: capplets/mouse/mouse.desktop.in.h:1
+#: capplets/mouse/gnome-settings-mouse.desktop.in.h:1
 msgid "Mouse"
 msgstr "माउस"
 
-#: capplets/mouse/mouse.desktop.in.h:2
+#: capplets/mouse/gnome-settings-mouse.desktop.in.h:2
 msgid "Set your mouse preferences"
 msgstr "अपने माउस की वरीयताएं तय करें"
 
@@ -2039,6 +2062,10 @@ msgstr "सुरक्षित एचटीटीपी (HTTP) प्राक
 msgid "_Username:"
 msgstr "उपयोगकर्ता का नाम: (_U) "
 
+#: capplets/sound/gnome-settings-sound.desktop.in.h:1
+msgid "Enable sound and associate sounds with events"
+msgstr "ध्वनि एवम् धटनाओं के साथ संयुक्त  ध्वनियां सक्षम करें"
+
 #: capplets/sound/sound-properties-capplet.c:239
 msgid "Sound preferences"
 msgstr "ध्वनि वरीयताएं"
@@ -2082,10 +2109,6 @@ msgstr "ध्वनि हेतु घटनाएं  (_S)"
 #: capplets/sound/sound-properties.glade.h:10
 msgid "_Visual feedback:"
 msgstr "दृष्टिगत जानकारी देना (_V):"
-
-#: capplets/sound/sound.desktop.in.h:1
-msgid "Enable sound and associate sounds with events"
-msgstr "ध्वनि एवम् धटनाओं के साथ संयुक्त  ध्वनियां सक्षम करें"
 
 #: capplets/theme-switcher/control/control.c:18
 msgid "Eenie Meenie Mynie Moe Catcha Tiger By Its Toe"
@@ -2145,6 +2168,21 @@ msgid ""
 msgstr ""
 "आपके पद्धति में कोई थीम नहीं मिला. शायद इसका मतलब है कि \"थीम वरीयताएं \" वार्ता गलत "
 "संस्थापित हैं, या आपने \" गनोम थीम्स (gnome-themes)\" पैकेज संस्थापित नहीं किया है."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:127
+msgid "No theme file location specified to install"
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-installer.c:146
+msgid "The theme file location specified to install is invalid"
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-installer.c:173
+#, c-format
+msgid ""
+"%s is the path where the theme files will be installed. This can not be "
+"selected as the source location"
+msgstr ""
 
 #: capplets/theme-switcher/gnome-theme-manager.c:645
 #: capplets/theme-switcher/gnome-theme-manager.c:705
@@ -2272,21 +2310,13 @@ msgstr "थीम संचित करें  (_S)"
 msgid "_Theme name:"
 msgstr "थीम नामः  (_T)"
 
-#: capplets/ui-properties/behavior.desktop.in.h:1
+#: capplets/ui-properties/gnome-ui-properties.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
 msgstr "अनुप्रयोगों के टूलबार और मेनूबार की दिखावट विशिष्ट बनाएं"
 
-#: capplets/ui-properties/behavior.desktop.in.h:2
+#: capplets/ui-properties/gnome-ui-properties.desktop.in.h:2
 msgid "Menus & Toolbars"
 msgstr "मेनू एवम् टूलबार"
-
-#: capplets/ui-properties/behavior.desktop.in.in.h:1
-msgid "Behavior"
-msgstr "व्यवहार"
-
-#: capplets/ui-properties/behavior.desktop.in.in.h:2
-msgid "Sets the default behavior of GNOME applications"
-msgstr "गनोम अनुप्रयोगों के डिफाल्ट आचरण तय करे"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:2
 msgid "<b>Behavior and Appearance</b>"
@@ -2463,7 +2493,7 @@ msgstr "खिड़की गुण-स्वभाव"
 msgid "Windows"
 msgstr "खिड़कियां (विंडोस)"
 
-#: control-center/capplet-dir-view-list.c:324
+#: control-center/capplet-dir-view-list.c:319
 #, c-format
 msgid "GNOME Control Center: %s"
 msgstr "गनोम कंट्रोल सेंटर: %s"
@@ -2594,6 +2624,26 @@ msgstr ""
 " (%s) को चलाने की कोशिश में त्रुटि हुई\n"
 " जो कुंजी (%s) से संयुक्त है"
 
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:60
+#, c-format
+msgid ""
+"Error activating XKB configuration.\n"
+"Probably internal X server problem.\n"
+"\n"
+"X server version data:\n"
+"%s\n"
+"%d\n"
+"%s"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:66
+msgid ""
+"You are using XFree 4.3.0.\n"
+"There are known problems with complex XKB configurations.\n"
+"Try using simpler configuration or taking more fresh version of XFree "
+"software."
+msgstr ""
+
 #: gnome-settings-daemon/gnome-settings-screensaver.c:92
 #, c-format
 msgid ""
@@ -2623,7 +2673,7 @@ msgstr "ध्वनि फाइल %s को नमूना %s  की तर
 msgid "Cannot determine user's home directory"
 msgstr ""
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:202
+#: gnome-settings-daemon/gnome-settings-xsettings.c:204
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "जीकान्फ कुंजी %s पर तय  प्रकार %s है परंतु वांछित प्रकार थाः %s\n"
@@ -2816,6 +2866,25 @@ msgid ""
 msgstr ""
 "फोन्ट रेंडर करते समय सूचना के प्रकार. संभावित मूल्य हैं : \"कुछ नहीं\" - कोई सूचना नहीं, \"कम"
 "\", \"सामान्य\", और \"पूरा\" - समस्त सूचनाएं संभव ;  अक्षर आकृतियों को विकृत कर सकते हैं."
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:1
+#, fuzzy
+msgid "XKB keyboard layout"
+msgstr "कीबोर्ड शार्टकट"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
+#, fuzzy
+msgid "XKB keyboard model"
+msgstr "कुंजी पटल घंटी"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
+#, fuzzy
+msgid "XKB options"
+msgstr "विकल्प"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
+msgid "XKB settings should be overridden"
+msgstr ""
 
 #: typing-break/drw-break-window.c:189
 msgid "Postpone break"
@@ -3100,6 +3169,27 @@ msgstr ""
 msgid "Whether to thumbnail themes"
 msgstr ""
 
+#~ msgid "radiobutton1"
+#~ msgstr "रेडियो बटन 1"
+
+#~ msgid "radiobutton2"
+#~ msgstr "रेडियो बटन 2"
+
+#~ msgid "radiobutton3"
+#~ msgstr "रेडियो बटन 1"
+
+#~ msgid "radiobutton4"
+#~ msgstr "रेडियो बटन 1"
+
+#~ msgid "radiobutton5"
+#~ msgstr "रेडियो बटन 1"
+
+#~ msgid "Behavior"
+#~ msgstr "व्यवहार"
+
+#~ msgid "Sets the default behavior of GNOME applications"
+#~ msgstr "गनोम अनुप्रयोगों के डिफाल्ट आचरण तय करे"
+
 #~ msgid "Select CDE AccessX file"
 #~ msgstr "एक्सेस एक्स (AccessX ) फाइल चुनें"
 
@@ -3135,9 +3225,6 @@ msgstr ""
 
 #~ msgid "Clic_k on keypress"
 #~ msgstr "कुंजी दबाने पर क्लिक हो  (_k)"
-
-#~ msgid "Keyboard Bell"
-#~ msgstr "कुंजी पटल घंटी"
 
 #~ msgid "Keypress Click"
 #~ msgstr "कुंजी दबाव  क्लिक"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.mk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-11-12 15:42-0500\n"
+"POT-Creation-Date: 2003-12-30 13:00-0500\n"
 "PO-Revision-Date: 2003-08-30 16:35+0200\n"
 "Last-Translator: Arangel Angov <ufo@linux.net.mk>\n"
 "Language-Team: Macedonian <lug@lists.linux.net.mk>\n"
@@ -120,7 +120,7 @@ msgid "Import Feature Settings File"
 msgstr "_Увези подесувања на карактеристики..."
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Тастатура"
@@ -272,7 +272,7 @@ msgstr ""
 "менувачки копчиња во серија."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "S_peed:"
 msgstr "Б_рзина:"
 
@@ -301,7 +301,7 @@ msgid "_Only accept keys held for:"
 msgstr "Прифати _само копчиња притиснати за:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "_Type to test settings:"
 msgstr "_Куцај да провериш подесувања:"
 
@@ -329,8 +329,10 @@ msgstr "милисекунди"
 msgid "pixels/second"
 msgstr "пиксели/секунда"
 
+#. set the timeout value  label with correct value of timeout
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
 #: capplets/mouse/gnome-mouse-properties.c:133
+#: capplets/mouse/gnome-mouse-properties.c:578
 #: capplets/mouse/gnome-mouse-properties.glade.h:27
 #: capplets/windows/gnome-window-properties.glade.h:7
 msgid "seconds"
@@ -382,8 +384,8 @@ msgstr "_Нема Слика"
 #: capplets/background/background-properties-capplet.c:559
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:730
-#: capplets/keyboard/gnome-keyboard-properties.c:218
-#: capplets/mouse/gnome-mouse-properties.c:806
+#: capplets/keyboard/gnome-keyboard-properties.c:222
+#: capplets/mouse/gnome-mouse-properties.c:812
 #: capplets/sound/sound-properties-capplet.c:212
 msgid "Retrieve and store legacy settings"
 msgstr "Поврати и зачувај ненативни подесувања"
@@ -442,26 +444,6 @@ msgid "You can drag image files into the window to set the background picture."
 msgstr ""
 "Можеш да влечеш датотеки со слики во прозорец за да ја наместиш позадинска "
 "слика."
-
-#: capplets/background/background-properties.glade.h:14
-msgid "radiobutton1"
-msgstr "радио копче 1"
-
-#: capplets/background/background-properties.glade.h:15
-msgid "radiobutton2"
-msgstr "радио копче 2"
-
-#: capplets/background/background-properties.glade.h:16
-msgid "radiobutton3"
-msgstr "радио копче 3"
-
-#: capplets/background/background-properties.glade.h:17
-msgid "radiobutton4"
-msgstr "радио копче 4"
-
-#: capplets/background/background-properties.glade.h:18
-msgid "radiobutton5"
-msgstr "радио копче 5"
 
 #: capplets/background/background.desktop.in.h:1
 msgid "Background"
@@ -904,19 +886,19 @@ msgstr "_Избери веб прелистувач:"
 msgid "_Select an Editor:"
 msgstr "_Избери уредувач:"
 
-#: capplets/desktop-links/Accessibility.directory.in.in.h:1
+#: capplets/desktop-links/Accessibility.directory.in.h:1
 msgid "Accessibility"
 msgstr "Пристапност"
 
-#: capplets/desktop-links/Accessibility.directory.in.in.h:2
+#: capplets/desktop-links/Accessibility.directory.in.h:2
 msgid "Accessibility Settings"
 msgstr "Подесувања на пристапноста"
 
-#: capplets/desktop-links/Advanced.directory.in.in.h:1
+#: capplets/desktop-links/Advanced.directory.in.h:1
 msgid "Advanced"
 msgstr "Напредно"
 
-#: capplets/desktop-links/Advanced.directory.in.in.h:2
+#: capplets/desktop-links/Advanced.directory.in.h:2
 msgid "Advanced Settings"
 msgstr "Напредни подесувања"
 
@@ -1006,7 +988,7 @@ msgid "Associate sounds with window manager events"
 msgstr "Асоцирај звуци со настаните од менаџерот за прозорци"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
-#: capplets/sound/sound.desktop.in.h:2
+#: capplets/sound/gnome-settings-sound.desktop.in.h:2
 msgid "Sound"
 msgstr "Звук"
 
@@ -1061,8 +1043,8 @@ msgid "Screen Resolution Preferences"
 msgstr "Подесувања на резолуцијата на екранот"
 
 #: capplets/display/main.c:476
-#, c-format
-msgid "Make default for this _computer (%s) only"
+#, fuzzy, c-format
+msgid "_Make default for this computer (%s) only"
 msgstr "Направи стандардно само за овој_компјутер (%s)"
 
 #: capplets/display/main.c:494
@@ -1584,56 +1566,62 @@ msgid ""
 "sized font."
 msgstr ""
 
-#: capplets/keybindings/eggcellrendererkeys.c:160
 #: capplets/keybindings/eggcellrendererkeys.c:161
+#: capplets/keybindings/eggcellrendererkeys.c:162
 msgid "Accelerator key"
 msgstr "Копче за забрзување"
 
-#: capplets/keybindings/eggcellrendererkeys.c:170
 #: capplets/keybindings/eggcellrendererkeys.c:171
+#: capplets/keybindings/eggcellrendererkeys.c:172
 msgid "Accelerator modifiers"
 msgstr "Модификатори на забрзување"
 
 #: capplets/keybindings/eggcellrendererkeys.c:180
+#: capplets/keybindings/eggcellrendererkeys.c:181
+#, fuzzy
+msgid "Accelerator keycode"
+msgstr "Копче за забрзување"
+
+#: capplets/keybindings/eggcellrendererkeys.c:191
 msgid "Accel Mode"
 msgstr "Забрзан режим"
 
-#: capplets/keybindings/eggcellrendererkeys.c:181
+#: capplets/keybindings/eggcellrendererkeys.c:192
 msgid "The type of accelerator."
 msgstr "Тип на забрзувач."
 
-#: capplets/keybindings/eggcellrendererkeys.c:219
-#: capplets/keybindings/gnome-keybinding-properties.c:204
+#: capplets/keybindings/eggcellrendererkeys.c:240
+#: capplets/keybindings/gnome-keybinding-properties.c:207
 #: libbackground/applier.c:588 typing-break/drwright.c:448
 msgid "Disabled"
 msgstr "Оневозможено"
 
-#: capplets/keybindings/eggcellrendererkeys.c:330
-#: capplets/keybindings/eggcellrendererkeys.c:563
+#: capplets/keybindings/eggcellrendererkeys.c:359
+#: capplets/keybindings/eggcellrendererkeys.c:599
 msgid "Type a new accelerator, or press Backspace to clear"
 msgstr "Искуцај нов забрзувач, или притисни Backspace за бришење."
 
-#: capplets/keybindings/eggcellrendererkeys.c:566
+#: capplets/keybindings/eggcellrendererkeys.c:602
 msgid "Type a new accelerator"
 msgstr "Искуцај нов забрзувач"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:172
+#: capplets/keybindings/gnome-keybinding-properties.c:174
 msgid "GNOME Default"
 msgstr "GNOME стандардно"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:540
+#: capplets/keybindings/gnome-keybinding-properties.c:549
 msgid "<Unknown Action>"
 msgstr "<Непозната Акција>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:559
+#: capplets/keybindings/gnome-keybinding-properties.c:568
 msgid "Desktop"
 msgstr "Десктоп"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:563
+#: capplets/keybindings/gnome-keybinding-properties.c:572
 msgid "Window Management"
 msgstr "Менаџмент на прозорци"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:698
+#: capplets/keybindings/gnome-keybinding-properties.c:709
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1642,14 +1630,21 @@ msgstr ""
 "Кратенката \"%s\" веќе се користи за \n"
 " \"%s\"\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:729
+#: capplets/keybindings/gnome-keybinding-properties.c:740
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 "Грешка при подесување на новиот забрзувач во базата за конфигурирање на "
 "податоци%s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:880
+#: capplets/keybindings/gnome-keybinding-properties.c:790
+#, fuzzy, c-format
+msgid "Error unsetting accelerator in configuration database: %s\n"
+msgstr ""
+"Грешка при подесување на новиот забрзувач во базата за конфигурирање на "
+"податоци%s\n"
+
+#: capplets/keybindings/gnome-keybinding-properties.c:939
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1657,11 +1652,11 @@ msgstr ""
 "Не може да се пронајдат теми за тастатурата. Ова значи дека вашата GTK+ "
 "инсталација не е комплетно инсталирана."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:902
+#: capplets/keybindings/gnome-keybinding-properties.c:961
 msgid "Action"
 msgstr "Акција"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:921
+#: capplets/keybindings/gnome-keybinding-properties.c:985
 msgid "Shortcut"
 msgstr "Кратенка"
 
@@ -1686,17 +1681,17 @@ msgstr "_Кратенки за уредување на текст:"
 msgid "Assign shortcut keys to commands"
 msgstr "Додели кратенки на копчињата за команди"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:104
+#: capplets/keyboard/gnome-keyboard-properties.c:106
 #, c-format
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Настана грешка при стартување на capplet за тастатурата: %s"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:195
+#: capplets/keyboard/gnome-keyboard-properties.c:199
 msgid "_Accessibility"
 msgstr "_Пристапност"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:214
-#: capplets/keyboard/gnome-keyboard-properties.c:216
+#: capplets/keyboard/gnome-keyboard-properties.c:218
+#: capplets/keyboard/gnome-keyboard-properties.c:220
 #: capplets/sound/sound-properties-capplet.c:208
 #: capplets/sound/sound-properties-capplet.c:210
 msgid ""
@@ -1705,7 +1700,7 @@ msgstr ""
 "Само примени ги подесувањата и излези (само компатибилност; сега се управува "
 "од демон)"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:220
+#: capplets/keyboard/gnome-keyboard-properties.c:224
 msgid "Start the page with the typing break settings showing"
 msgstr "Почни ја страницата со прикажани подесувања за куцачката пауза"
 
@@ -1738,64 +1733,94 @@ msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Бавно</i></small>"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#, fuzzy
+msgid "Advanced Layout Options"
+msgstr "Напредни подесувања"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "All_ow postponing of breaks"
 msgstr "Д_озволи одложување на паузи"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Check if breaks are allowed to be postponed"
 msgstr "Провери дали на паузите им е дозволено да бидат одложени"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#, fuzzy
+msgid "Core Layout Configuration"
+msgstr "Конфигурација на мрежен прокси"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Cursor _blinks in text boxes and fields"
 msgstr "_Курсорот трепка во кутии со текст и полиња"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
 msgid "Duration of the break when typing is disallowed"
 msgstr "Недозволено е траењето на паузата додека куцате"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "Duration of work before forcing a break"
 msgstr "Траењето на работата пред форсирањето на паузата"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
 msgid "Key presses _repeat when key is held down"
 msgstr "Притисокот на копче се повторува копчето е задржано повеќе"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "Keyboard Preferences"
 msgstr "Параметри на тастатура"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
+#, fuzzy
+msgid "Keyboard _model:"
+msgstr "Ѕвонче на тастатурата"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#, fuzzy
+msgid "Layout _options:"
+msgstr "Опции на слика:"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid "Typing Break"
 msgstr "Пауза при куцање"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "_Accessibility..."
 msgstr "_Пристапност..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
 msgid "_Break interval lasts:"
 msgstr "_Интервалот на пауза трае:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "_Delay:"
 msgstr "_Одложување:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
+#, fuzzy
+msgid "_Ignore system configuration"
+msgstr "Конфигурација на мрежен прокси"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
+#, fuzzy
+msgid "_Layouts:"
+msgstr "Изглед"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:30
 msgid "_Speed:"
 msgstr "_Брзина:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:32
 msgid "_Work interval lasts:"
 msgstr "_Интервалот на работа трае:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:33
 msgid "minutes"
 msgstr "минути"
 
@@ -1807,63 +1832,63 @@ msgstr "Подесете ги вашите параметри за тастат�
 msgid "Unknown Cursor"
 msgstr "Непознат курсор"
 
-#: capplets/mouse/gnome-mouse-properties.c:602
+#: capplets/mouse/gnome-mouse-properties.c:613
 msgid "Default Cursor - Current"
 msgstr "Стандарден курсор - тековен"
 
-#: capplets/mouse/gnome-mouse-properties.c:602
-#: capplets/mouse/gnome-mouse-properties.c:605
+#: capplets/mouse/gnome-mouse-properties.c:613
+#: capplets/mouse/gnome-mouse-properties.c:616
 msgid "The default cursor that ships with X"
 msgstr "Стандардниот курсор кој доаѓа со X"
 
-#: capplets/mouse/gnome-mouse-properties.c:605
+#: capplets/mouse/gnome-mouse-properties.c:616
 msgid "Default Cursor"
 msgstr "Стандарден веб прелистувач"
 
-#: capplets/mouse/gnome-mouse-properties.c:623
+#: capplets/mouse/gnome-mouse-properties.c:634
 msgid "White Cursor - Current"
 msgstr "Бел курсор - тековен"
 
-#: capplets/mouse/gnome-mouse-properties.c:623
-#: capplets/mouse/gnome-mouse-properties.c:626
+#: capplets/mouse/gnome-mouse-properties.c:634
+#: capplets/mouse/gnome-mouse-properties.c:637
 msgid "The default cursor inverted"
 msgstr "Стандардниот курсор свртен наопаку"
 
-#: capplets/mouse/gnome-mouse-properties.c:626
+#: capplets/mouse/gnome-mouse-properties.c:637
 msgid "White Cursor"
 msgstr "Бел курсор"
 
-#: capplets/mouse/gnome-mouse-properties.c:645
+#: capplets/mouse/gnome-mouse-properties.c:656
 msgid "Large Cursor - Current"
 msgstr "Голем курсор - тековен"
 
-#: capplets/mouse/gnome-mouse-properties.c:645
-#: capplets/mouse/gnome-mouse-properties.c:648
+#: capplets/mouse/gnome-mouse-properties.c:656
+#: capplets/mouse/gnome-mouse-properties.c:659
 msgid "Large version of normal cursor"
 msgstr "Голема верзија на нормалниот курсор"
 
-#: capplets/mouse/gnome-mouse-properties.c:648
+#: capplets/mouse/gnome-mouse-properties.c:659
 msgid "Large Cursor"
 msgstr "Големи курсори"
 
-#: capplets/mouse/gnome-mouse-properties.c:667
+#: capplets/mouse/gnome-mouse-properties.c:678
 msgid "Large White Cursor - Current"
 msgstr "Голема верзија на белиот курсор - тековен"
 
-#: capplets/mouse/gnome-mouse-properties.c:667
-#: capplets/mouse/gnome-mouse-properties.c:670
+#: capplets/mouse/gnome-mouse-properties.c:678
+#: capplets/mouse/gnome-mouse-properties.c:681
 msgid "Large version of white cursor"
 msgstr "Голема верзија на белиот курсор"
 
-#: capplets/mouse/gnome-mouse-properties.c:670
+#: capplets/mouse/gnome-mouse-properties.c:681
 msgid "Large White Cursor"
 msgstr "Голем бел курсор"
 
-#: capplets/mouse/gnome-mouse-properties.c:747
+#: capplets/mouse/gnome-mouse-properties.c:753
 msgid "Cursor Size"
 msgstr "Големина на курсорот"
 
-#: capplets/mouse/gnome-mouse-properties.c:756
+#: capplets/mouse/gnome-mouse-properties.c:762
 msgid "Cursor Theme"
 msgstr "Теми за курсор"
 
@@ -1967,11 +1992,11 @@ msgstr "_Threshold:"
 msgid "_Timeout:"
 msgstr "_Тајмаут:"
 
-#: capplets/mouse/mouse.desktop.in.h:1
+#: capplets/mouse/gnome-settings-mouse.desktop.in.h:1
 msgid "Mouse"
 msgstr "Глушец"
 
-#: capplets/mouse/mouse.desktop.in.h:2
+#: capplets/mouse/gnome-settings-mouse.desktop.in.h:2
 msgid "Set your mouse preferences"
 msgstr "Подесете ги параметрите за глушецот"
 
@@ -2047,6 +2072,10 @@ msgstr "_Безбеден HTTP прокси:"
 msgid "_Username:"
 msgstr "_Корисничко име:"
 
+#: capplets/sound/gnome-settings-sound.desktop.in.h:1
+msgid "Enable sound and associate sounds with events"
+msgstr "Вклучи звуци и асоцирај звуци со настани"
+
 #: capplets/sound/sound-properties-capplet.c:239
 msgid "Sound preferences"
 msgstr "Параметри за звук"
@@ -2090,10 +2119,6 @@ msgstr "_Звуци за настани"
 #: capplets/sound/sound-properties.glade.h:10
 msgid "_Visual feedback:"
 msgstr "_Визуелна повратна информација:"
-
-#: capplets/sound/sound.desktop.in.h:1
-msgid "Enable sound and associate sounds with events"
-msgstr "Вклучи звуци и асоцирај звуци со настани"
 
 #: capplets/theme-switcher/control/control.c:18
 msgid "Eenie Meenie Mynie Moe Catcha Tiger By Its Toe"
@@ -2154,6 +2179,21 @@ msgstr ""
 "Не се најдени теми на вашиот компјутер. Ова значи дека вашиот дијалог за "
 "\"Параметри на теми\" не е правилно инсталирани, или не сте го инсталирале "
 "\"gnome-themes\" пакетот."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:127
+msgid "No theme file location specified to install"
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-installer.c:146
+msgid "The theme file location specified to install is invalid"
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-installer.c:173
+#, c-format
+msgid ""
+"%s is the path where the theme files will be installed. This can not be "
+"selected as the source location"
+msgstr ""
 
 #: capplets/theme-switcher/gnome-theme-manager.c:645
 #: capplets/theme-switcher/gnome-theme-manager.c:705
@@ -2285,21 +2325,13 @@ msgstr "_Сними тема..."
 msgid "_Theme name:"
 msgstr "_Име на тема:"
 
-#: capplets/ui-properties/behavior.desktop.in.h:1
+#: capplets/ui-properties/gnome-ui-properties.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
 msgstr "Прилагоди го изгледот на лентите со алатки и мени во апликациите"
 
-#: capplets/ui-properties/behavior.desktop.in.h:2
+#: capplets/ui-properties/gnome-ui-properties.desktop.in.h:2
 msgid "Menus & Toolbars"
 msgstr "Мени & ленти со алатки"
-
-#: capplets/ui-properties/behavior.desktop.in.in.h:1
-msgid "Behavior"
-msgstr "Однесување"
-
-#: capplets/ui-properties/behavior.desktop.in.in.h:2
-msgid "Sets the default behavior of GNOME applications"
-msgstr "Го подесува стандардното однесување на GNOME апликации"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:2
 msgid "<b>Behavior and Appearance</b>"
@@ -2456,7 +2488,7 @@ msgstr "Својства на прозорецот"
 msgid "Windows"
 msgstr "Прозорци"
 
-#: control-center/capplet-dir-view-list.c:324
+#: control-center/capplet-dir-view-list.c:319
 #, c-format
 msgid "GNOME Control Center: %s"
 msgstr "GNOME Control Center: %s"
@@ -2585,6 +2617,26 @@ msgstr ""
 "Грешка при обидување да се вклучи (%s)\n"
 "кое е поврзано со копчето (%s)"
 
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:60
+#, c-format
+msgid ""
+"Error activating XKB configuration.\n"
+"Probably internal X server problem.\n"
+"\n"
+"X server version data:\n"
+"%s\n"
+"%d\n"
+"%s"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:66
+msgid ""
+"You are using XFree 4.3.0.\n"
+"There are known problems with complex XKB configurations.\n"
+"Try using simpler configuration or taking more fresh version of XFree "
+"software."
+msgstr ""
+
 #: gnome-settings-daemon/gnome-settings-screensaver.c:92
 #, c-format
 msgid ""
@@ -2614,7 +2666,7 @@ msgstr "Не може да се вчита звучната датотека %s 
 msgid "Cannot determine user's home directory"
 msgstr "Не може да се утврди домашниот директориум на корисникот"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:202
+#: gnome-settings-daemon/gnome-settings-xsettings.c:204
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "GConf копчето %s подесено на тип %s но очекуваниот тип е %s\n"
@@ -2805,6 +2857,25 @@ msgstr ""
 "Типот на помош за користење кога се рендерираат фонтови. Можни вредности се: "
 "\"none \" - без помош, \"slight\", \"medium\", и \"full\" - колку што може "
 "повеќе помош; може да предизвика дисторзија на формите на писмо."
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:1
+#, fuzzy
+msgid "XKB keyboard layout"
+msgstr "Кратенки за тастатурата"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
+#, fuzzy
+msgid "XKB keyboard model"
+msgstr "Ѕвонче на тастатурата"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
+#, fuzzy
+msgid "XKB options"
+msgstr "Опции"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
+msgid "XKB settings should be overridden"
+msgstr ""
 
 #: typing-break/drw-break-window.c:189
 msgid "Postpone break"
@@ -3107,6 +3178,27 @@ msgstr "Каде да има мал приказ на инсталираните
 msgid "Whether to thumbnail themes"
 msgstr "Каде да има мал приказ на темите"
 
+#~ msgid "radiobutton1"
+#~ msgstr "радио копче 1"
+
+#~ msgid "radiobutton2"
+#~ msgstr "радио копче 2"
+
+#~ msgid "radiobutton3"
+#~ msgstr "радио копче 3"
+
+#~ msgid "radiobutton4"
+#~ msgstr "радио копче 4"
+
+#~ msgid "radiobutton5"
+#~ msgstr "радио копче 5"
+
+#~ msgid "Behavior"
+#~ msgstr "Однесување"
+
+#~ msgid "Sets the default behavior of GNOME applications"
+#~ msgstr "Го подесува стандардното однесување на GNOME апликации"
+
 #~ msgid "One minute until the next break"
 #~ msgstr "Една минута до следната пауза"
 
@@ -3212,9 +3304,6 @@ msgstr "Каде да има мал приказ на темите"
 
 #~ msgid "Clic_k on keypress"
 #~ msgstr "Кли_кни на притисок на копче"
-
-#~ msgid "Keyboard Bell"
-#~ msgstr "Ѕвонче на тастатурата"
 
 #~ msgid "Keypress Click"
 #~ msgstr "Клик на притисок на тастатура"

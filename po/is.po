@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gnome Control Center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-11-12 15:42-0500\n"
+"POT-Creation-Date: 2003-12-30 13:00-0500\n"
 "PO-Revision-Date: 2003-08-20 16:54-0100\n"
 "Last-Translator: Samuel Jon Gunnarsson <sammi@techattack.nu>\n"
 "Language-Team: Icelandic <gnome@techattack.nu>\n"
@@ -111,7 +111,7 @@ msgid "Import Feature Settings File"
 msgstr "Flytja inn þáttastillingarskrá"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Lyklaborð"
@@ -263,7 +263,7 @@ msgstr ""
 "röð."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "S_peed:"
 msgstr "H_raði:"
 
@@ -292,7 +292,7 @@ msgid "_Only accept keys held for:"
 msgstr "Sam_þykkja aðeins lykla sem haldið er í:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "_Type to test settings:"
 msgstr "Vélrita til að _prófa stillingar:"
 
@@ -320,8 +320,10 @@ msgstr "millisekúndur"
 msgid "pixels/second"
 msgstr "pixlar/sekúndu"
 
+#. set the timeout value  label with correct value of timeout
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
 #: capplets/mouse/gnome-mouse-properties.c:133
+#: capplets/mouse/gnome-mouse-properties.c:578
 #: capplets/mouse/gnome-mouse-properties.glade.h:27
 #: capplets/windows/gnome-window-properties.glade.h:7
 msgid "seconds"
@@ -373,8 +375,8 @@ msgstr "E_ngin mynd"
 #: capplets/background/background-properties-capplet.c:559
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:730
-#: capplets/keyboard/gnome-keyboard-properties.c:218
-#: capplets/mouse/gnome-mouse-properties.c:806
+#: capplets/keyboard/gnome-keyboard-properties.c:222
+#: capplets/mouse/gnome-mouse-properties.c:812
 #: capplets/sound/sound-properties-capplet.c:212
 msgid "Retrieve and store legacy settings"
 msgstr "Sækja og geyma legacy-stillingar"
@@ -433,26 +435,6 @@ msgstr "Lóðréttur stigill"
 msgid "You can drag image files into the window to set the background picture."
 msgstr ""
 "Þú getur dregið myndaskrár inn í gluggann til að skilgreina bakgrunnsmynd."
-
-#: capplets/background/background-properties.glade.h:14
-msgid "radiobutton1"
-msgstr "einvalsreitur1"
-
-#: capplets/background/background-properties.glade.h:15
-msgid "radiobutton2"
-msgstr "einvalsreitur2"
-
-#: capplets/background/background-properties.glade.h:16
-msgid "radiobutton3"
-msgstr "einvalsreitur3"
-
-#: capplets/background/background-properties.glade.h:17
-msgid "radiobutton4"
-msgstr "einvalsreitur4"
-
-#: capplets/background/background-properties.glade.h:18
-msgid "radiobutton5"
-msgstr "einvalsreitur5"
 
 #: capplets/background/background.desktop.in.h:1
 msgid "Background"
@@ -885,19 +867,19 @@ msgstr "_Veldu vafra:"
 msgid "_Select an Editor:"
 msgstr "_Veldu textaritil"
 
-#: capplets/desktop-links/Accessibility.directory.in.in.h:1
+#: capplets/desktop-links/Accessibility.directory.in.h:1
 msgid "Accessibility"
 msgstr "Aðgengi"
 
-#: capplets/desktop-links/Accessibility.directory.in.in.h:2
+#: capplets/desktop-links/Accessibility.directory.in.h:2
 msgid "Accessibility Settings"
 msgstr "Aðgengisstillingar"
 
-#: capplets/desktop-links/Advanced.directory.in.in.h:1
+#: capplets/desktop-links/Advanced.directory.in.h:1
 msgid "Advanced"
 msgstr "Háþróað"
 
-#: capplets/desktop-links/Advanced.directory.in.in.h:2
+#: capplets/desktop-links/Advanced.directory.in.h:2
 msgid "Advanced Settings"
 msgstr "Háþróaðar stillingar"
 
@@ -987,7 +969,7 @@ msgid "Associate sounds with window manager events"
 msgstr "Tengja hljóð við gluggastjóraatvik"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
-#: capplets/sound/sound.desktop.in.h:2
+#: capplets/sound/gnome-settings-sound.desktop.in.h:2
 msgid "Sound"
 msgstr "Hljóð"
 
@@ -1043,8 +1025,8 @@ msgid "Screen Resolution Preferences"
 msgstr "Stillingar fyrir skjáupplausn"
 
 #: capplets/display/main.c:476
-#, c-format
-msgid "Make default for this _computer (%s) only"
+#, fuzzy, c-format
+msgid "_Make default for this computer (%s) only"
 msgstr "Einungis sjálfgefið fyrir _tölvu (%s)"
 
 #: capplets/display/main.c:494
@@ -1565,57 +1547,63 @@ msgid ""
 "sized font."
 msgstr ""
 
-#: capplets/keybindings/eggcellrendererkeys.c:160
 #: capplets/keybindings/eggcellrendererkeys.c:161
+#: capplets/keybindings/eggcellrendererkeys.c:162
 msgid "Accelerator key"
 msgstr "Flýtilykill"
 
-#: capplets/keybindings/eggcellrendererkeys.c:170
 #: capplets/keybindings/eggcellrendererkeys.c:171
+#: capplets/keybindings/eggcellrendererkeys.c:172
 msgid "Accelerator modifiers"
 msgstr "Breytulyklar flýtilykla"
 
 #: capplets/keybindings/eggcellrendererkeys.c:180
+#: capplets/keybindings/eggcellrendererkeys.c:181
+#, fuzzy
+msgid "Accelerator keycode"
+msgstr "Flýtilykill"
+
+#: capplets/keybindings/eggcellrendererkeys.c:191
 msgid "Accel Mode"
 msgstr "Flýtihamur"
 
-#: capplets/keybindings/eggcellrendererkeys.c:181
+#: capplets/keybindings/eggcellrendererkeys.c:192
 msgid "The type of accelerator."
 msgstr "Tegund flýtilykils."
 
-#: capplets/keybindings/eggcellrendererkeys.c:219
-#: capplets/keybindings/gnome-keybinding-properties.c:204
+#: capplets/keybindings/eggcellrendererkeys.c:240
+#: capplets/keybindings/gnome-keybinding-properties.c:207
 #: libbackground/applier.c:588 typing-break/drwright.c:448
 msgid "Disabled"
 msgstr "Óvirkt"
 
-#: capplets/keybindings/eggcellrendererkeys.c:330
-#: capplets/keybindings/eggcellrendererkeys.c:563
+#: capplets/keybindings/eggcellrendererkeys.c:359
+#: capplets/keybindings/eggcellrendererkeys.c:599
 msgid "Type a new accelerator, or press Backspace to clear"
 msgstr ""
 "Sláðu á nýjan flýtilykil, eða ýttu á \"til baka\"-lykilinn til að hreinsa"
 
-#: capplets/keybindings/eggcellrendererkeys.c:566
+#: capplets/keybindings/eggcellrendererkeys.c:602
 msgid "Type a new accelerator"
 msgstr "Sláðu á nýjan flýtilykil"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:172
+#: capplets/keybindings/gnome-keybinding-properties.c:174
 msgid "GNOME Default"
 msgstr "GNOME-sjálfgefið"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:540
+#: capplets/keybindings/gnome-keybinding-properties.c:549
 msgid "<Unknown Action>"
 msgstr "<Óþekkt aðgerð>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:559
+#: capplets/keybindings/gnome-keybinding-properties.c:568
 msgid "Desktop"
 msgstr "Skjáborð"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:563
+#: capplets/keybindings/gnome-keybinding-properties.c:572
 msgid "Window Management"
 msgstr "Gluggastjórnun"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:698
+#: capplets/keybindings/gnome-keybinding-properties.c:709
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1624,12 +1612,17 @@ msgstr ""
 "Flýtivísunin \"%s\" er þegar notuð fyrir:\n"
 "\"%s\"\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:729
+#: capplets/keybindings/gnome-keybinding-properties.c:740
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Villa við skilgreiningu nýs flýtilykils í stillingagrunni: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:880
+#: capplets/keybindings/gnome-keybinding-properties.c:790
+#, fuzzy, c-format
+msgid "Error unsetting accelerator in configuration database: %s\n"
+msgstr "Villa við skilgreiningu nýs flýtilykils í stillingagrunni: %s\n"
+
+#: capplets/keybindings/gnome-keybinding-properties.c:939
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1637,11 +1630,11 @@ msgstr ""
 "Mér tókst ekki að finna nein lyklaborðsþemu. Þetta þýðir að uppsetning á GTK"
 "+ er ófullkomin."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:902
+#: capplets/keybindings/gnome-keybinding-properties.c:961
 msgid "Action"
 msgstr "Aðgerð"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:921
+#: capplets/keybindings/gnome-keybinding-properties.c:985
 msgid "Shortcut"
 msgstr "Flýtivísun"
 
@@ -1666,24 +1659,24 @@ msgstr "Flýtivísanir fyrir _textaritun:"
 msgid "Assign shortcut keys to commands"
 msgstr "Tengja flýtilykla við skipanir"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:104
+#: capplets/keyboard/gnome-keyboard-properties.c:106
 #, c-format
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Það kom upp villa við ræsingu lyklaborðs-cappletsins : %s"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:195
+#: capplets/keyboard/gnome-keyboard-properties.c:199
 msgid "_Accessibility"
 msgstr "_Aðgengi"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:214
-#: capplets/keyboard/gnome-keyboard-properties.c:216
+#: capplets/keyboard/gnome-keyboard-properties.c:218
+#: capplets/keyboard/gnome-keyboard-properties.c:220
 #: capplets/sound/sound-properties-capplet.c:208
 #: capplets/sound/sound-properties-capplet.c:210
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "Nota stillingar og hætta (aðeins samhæfing; nú í umsjón púka)"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:220
+#: capplets/keyboard/gnome-keyboard-properties.c:224
 msgid "Start the page with the typing break settings showing"
 msgstr ""
 
@@ -1716,34 +1709,54 @@ msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Hægt</i></small>"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#, fuzzy
+msgid "Advanced Layout Options"
+msgstr "Háþróaðar stillingar"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "All_ow postponing of breaks"
 msgstr "Leyf_a frestun hlés"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Check if breaks are allowed to be postponed"
 msgstr "Athuga hvort frestun hléa er leyfð"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#, fuzzy
+msgid "Core Layout Configuration"
+msgstr "Netselsstillingar"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Cursor _blinks in text boxes and fields"
 msgstr "Bendill _blikkar í textarömmum og dálkum"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
 msgid "Duration of the break when typing is disallowed"
 msgstr "Lengd hlés þegar vélritun er ekki leyfð"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "Duration of work before forcing a break"
 msgstr "Vinnutími fyrir skylduhlé"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
 msgid "Key presses _repeat when key is held down"
 msgstr "Innsláttur endurtekinn þegar lykli er haldið niðri"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "Keyboard Preferences"
 msgstr "Lyklaborðsstillingar"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
+#, fuzzy
+msgid "Keyboard _model:"
+msgstr "Lyklaborð"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#, fuzzy
+msgid "Layout _options:"
+msgstr "Myndavalk_ostir:"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
@@ -1751,31 +1764,41 @@ msgstr ""
 "Læsa skjá eftir ákveðinn tíma til að hindra skemmdir vegna einhæfrar "
 "lyklaborðsnotkunar."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid "Typing Break"
 msgstr "Innsláttarhlé"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "_Accessibility..."
 msgstr "_Aðgengi..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
 msgid "_Break interval lasts:"
 msgstr "Tími hlés _varir:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "_Delay:"
 msgstr "Hi_k:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
+#, fuzzy
+msgid "_Ignore system configuration"
+msgstr "Netselsstillingar"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
+#, fuzzy
+msgid "_Layouts:"
+msgstr "Umbrot"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:30
 msgid "_Speed:"
 msgstr "_Hraði:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:32
 msgid "_Work interval lasts:"
 msgstr "_Vinnutími varir:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:33
 msgid "minutes"
 msgstr "mínútur"
 
@@ -1787,63 +1810,63 @@ msgstr "Stilltu lyklaborðið"
 msgid "Unknown Cursor"
 msgstr "Óþekktur bendill"
 
-#: capplets/mouse/gnome-mouse-properties.c:602
+#: capplets/mouse/gnome-mouse-properties.c:613
 msgid "Default Cursor - Current"
 msgstr "Sjálfgefin bendill - núverandi"
 
-#: capplets/mouse/gnome-mouse-properties.c:602
-#: capplets/mouse/gnome-mouse-properties.c:605
+#: capplets/mouse/gnome-mouse-properties.c:613
+#: capplets/mouse/gnome-mouse-properties.c:616
 msgid "The default cursor that ships with X"
 msgstr "Sjálfgefinn bendill sem kemur með X"
 
-#: capplets/mouse/gnome-mouse-properties.c:605
+#: capplets/mouse/gnome-mouse-properties.c:616
 msgid "Default Cursor"
 msgstr "Sjálfgefin bendill"
 
-#: capplets/mouse/gnome-mouse-properties.c:623
+#: capplets/mouse/gnome-mouse-properties.c:634
 msgid "White Cursor - Current"
 msgstr "Hvítur bendill - núverandi"
 
-#: capplets/mouse/gnome-mouse-properties.c:623
-#: capplets/mouse/gnome-mouse-properties.c:626
+#: capplets/mouse/gnome-mouse-properties.c:634
+#: capplets/mouse/gnome-mouse-properties.c:637
 msgid "The default cursor inverted"
 msgstr "Hverfður sjálfgefinn bendill"
 
-#: capplets/mouse/gnome-mouse-properties.c:626
+#: capplets/mouse/gnome-mouse-properties.c:637
 msgid "White Cursor"
 msgstr "Hvítur bendill"
 
-#: capplets/mouse/gnome-mouse-properties.c:645
+#: capplets/mouse/gnome-mouse-properties.c:656
 msgid "Large Cursor - Current"
 msgstr "Stór bendill - núverandi"
 
-#: capplets/mouse/gnome-mouse-properties.c:645
-#: capplets/mouse/gnome-mouse-properties.c:648
+#: capplets/mouse/gnome-mouse-properties.c:656
+#: capplets/mouse/gnome-mouse-properties.c:659
 msgid "Large version of normal cursor"
 msgstr "Stór útgáfa af venjulegum bendli"
 
-#: capplets/mouse/gnome-mouse-properties.c:648
+#: capplets/mouse/gnome-mouse-properties.c:659
 msgid "Large Cursor"
 msgstr "Stór bendill"
 
-#: capplets/mouse/gnome-mouse-properties.c:667
+#: capplets/mouse/gnome-mouse-properties.c:678
 msgid "Large White Cursor - Current"
 msgstr "Stór hvítur bendill - Núverandi"
 
-#: capplets/mouse/gnome-mouse-properties.c:667
-#: capplets/mouse/gnome-mouse-properties.c:670
+#: capplets/mouse/gnome-mouse-properties.c:678
+#: capplets/mouse/gnome-mouse-properties.c:681
 msgid "Large version of white cursor"
 msgstr "Stór útgáfa af hvítum bendli"
 
-#: capplets/mouse/gnome-mouse-properties.c:670
+#: capplets/mouse/gnome-mouse-properties.c:681
 msgid "Large White Cursor"
 msgstr "Stór hvítur bendill"
 
-#: capplets/mouse/gnome-mouse-properties.c:747
+#: capplets/mouse/gnome-mouse-properties.c:753
 msgid "Cursor Size"
 msgstr "Stærð bendils"
 
-#: capplets/mouse/gnome-mouse-properties.c:756
+#: capplets/mouse/gnome-mouse-properties.c:762
 msgid "Cursor Theme"
 msgstr "Bendla_þema:"
 
@@ -1947,11 +1970,11 @@ msgstr "_Þröskuldur:"
 msgid "_Timeout:"
 msgstr "_Tímamörk:"
 
-#: capplets/mouse/mouse.desktop.in.h:1
+#: capplets/mouse/gnome-settings-mouse.desktop.in.h:1
 msgid "Mouse"
 msgstr "Mús"
 
-#: capplets/mouse/mouse.desktop.in.h:2
+#: capplets/mouse/gnome-settings-mouse.desktop.in.h:2
 msgid "Set your mouse preferences"
 msgstr "Stilltu músina"
 
@@ -2027,6 +2050,10 @@ msgstr "Ö_ruggt HTTP sel:"
 msgid "_Username:"
 msgstr "N_otandanafn:"
 
+#: capplets/sound/gnome-settings-sound.desktop.in.h:1
+msgid "Enable sound and associate sounds with events"
+msgstr "Virkja hljóð og tengja hljóð við atvik"
+
 #: capplets/sound/sound-properties-capplet.c:239
 msgid "Sound preferences"
 msgstr "Hljóðstillingar"
@@ -2070,10 +2097,6 @@ msgstr "H_ljóð fyrir atvik"
 #: capplets/sound/sound-properties.glade.h:10
 msgid "_Visual feedback:"
 msgstr "M_yndræn svörun:"
-
-#: capplets/sound/sound.desktop.in.h:1
-msgid "Enable sound and associate sounds with events"
-msgstr "Virkja hljóð og tengja hljóð við atvik"
 
 #: capplets/theme-switcher/control/control.c:18
 msgid "Eenie Meenie Mynie Moe Catcha Tiger By Its Toe"
@@ -2134,6 +2157,21 @@ msgstr ""
 "Engin þemu fundust í kerfinu. Þetta þýðir líklega að \"Þemastillingar\"-"
 "valglugginn var ekki rétt uppsettur, eða að þú hefur ekki sett upp \"gnome-"
 "themes\" pakkann."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:127
+msgid "No theme file location specified to install"
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-installer.c:146
+msgid "The theme file location specified to install is invalid"
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-installer.c:173
+#, c-format
+msgid ""
+"%s is the path where the theme files will be installed. This can not be "
+"selected as the source location"
+msgstr ""
 
 #: capplets/theme-switcher/gnome-theme-manager.c:645
 #: capplets/theme-switcher/gnome-theme-manager.c:705
@@ -2264,21 +2302,13 @@ msgstr "_Vista þema..."
 msgid "_Theme name:"
 msgstr "_Nafn þema:"
 
-#: capplets/ui-properties/behavior.desktop.in.h:1
+#: capplets/ui-properties/gnome-ui-properties.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
 msgstr "Breyta útliti tækjastiku og valmynda í forritum."
 
-#: capplets/ui-properties/behavior.desktop.in.h:2
+#: capplets/ui-properties/gnome-ui-properties.desktop.in.h:2
 msgid "Menus & Toolbars"
 msgstr "Valblöð og tækjastikur"
-
-#: capplets/ui-properties/behavior.desktop.in.in.h:1
-msgid "Behavior"
-msgstr "Hegðun"
-
-#: capplets/ui-properties/behavior.desktop.in.in.h:2
-msgid "Sets the default behavior of GNOME applications"
-msgstr "Skilgreinir sjálfgefna hegðun GNOME-forrita."
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:2
 msgid "<b>Behavior and Appearance</b>"
@@ -2433,7 +2463,7 @@ msgstr "Eiginleikar glugga"
 msgid "Windows"
 msgstr "Gluggar"
 
-#: control-center/capplet-dir-view-list.c:324
+#: control-center/capplet-dir-view-list.c:319
 #, c-format
 msgid "GNOME Control Center: %s"
 msgstr "GNOME stjórnstöð: %s"
@@ -2551,6 +2581,26 @@ msgstr ""
 "Villa við keyrslu (%s)\n"
 "sem er tengt við lykilinn (%s)"
 
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:60
+#, c-format
+msgid ""
+"Error activating XKB configuration.\n"
+"Probably internal X server problem.\n"
+"\n"
+"X server version data:\n"
+"%s\n"
+"%d\n"
+"%s"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:66
+msgid ""
+"You are using XFree 4.3.0.\n"
+"There are known problems with complex XKB configurations.\n"
+"Try using simpler configuration or taking more fresh version of XFree "
+"software."
+msgstr ""
+
 #: gnome-settings-daemon/gnome-settings-screensaver.c:92
 #, c-format
 msgid ""
@@ -2580,7 +2630,7 @@ msgstr "Mér tókst ekki að hlaða inn hljóðskrána %s sem dæmi %s"
 msgid "Cannot determine user's home directory"
 msgstr "Tekst ekki að ákvarða heimasvæði notanda"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:202
+#: gnome-settings-daemon/gnome-settings-xsettings.c:204
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr "GConf lykill %s stilltur á gerð %s en ætluð gerð hans var %s\n"
@@ -2765,6 +2815,25 @@ msgstr ""
 "Tegund núansa notuð þegar letur er málað. Möguleg gildi eru: \"enginn\" - "
 "enginn núans. \"eilítið\", \"miðlungs\", og \"fullur\" - eins mikill núans "
 "og mögulegt er; getur valdið afbökun leturforma."
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:1
+#, fuzzy
+msgid "XKB keyboard layout"
+msgstr "Flýtilyklar"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
+#, fuzzy
+msgid "XKB keyboard model"
+msgstr "Lyklaborð"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
+#, fuzzy
+msgid "XKB options"
+msgstr "Valkostir"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
+msgid "XKB settings should be overridden"
+msgstr ""
 
 #: typing-break/drw-break-window.c:189
 msgid "Postpone break"
@@ -3061,6 +3130,27 @@ msgstr "Á að smámynda uppsett þemu"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Á að smámynda þemu"
+
+#~ msgid "radiobutton1"
+#~ msgstr "einvalsreitur1"
+
+#~ msgid "radiobutton2"
+#~ msgstr "einvalsreitur2"
+
+#~ msgid "radiobutton3"
+#~ msgstr "einvalsreitur3"
+
+#~ msgid "radiobutton4"
+#~ msgstr "einvalsreitur4"
+
+#~ msgid "radiobutton5"
+#~ msgstr "einvalsreitur5"
+
+#~ msgid "Behavior"
+#~ msgstr "Hegðun"
+
+#~ msgid "Sets the default behavior of GNOME applications"
+#~ msgstr "Skilgreinir sjálfgefna hegðun GNOME-forrita."
 
 #~ msgid "One minute until the next break"
 #~ msgstr "Ein mínúta fram að næsta hléi"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-center 2.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-12 11:57-0500\n"
+"POT-Creation-Date: 2003-12-30 13:00-0500\n"
 "PO-Revision-Date: 2003-12-12 11:54-0500\n"
 "Last-Translator: Evandro Fernandes Giovanini <evandrofg@ig.com.br>\n"
 "Language-Team: Brazilian Portuguese <gnome-l10n-br@listas.cipsga.org.br>\n"
@@ -885,19 +885,19 @@ msgstr "_Selecione um Navegador Web:"
 msgid "_Select an Editor:"
 msgstr "_Selecionar um Editor:"
 
-#: capplets/desktop-links/Accessibility.directory.in.in.h:1
+#: capplets/desktop-links/Accessibility.directory.in.h:1
 msgid "Accessibility"
 msgstr "Acessibilidade"
 
-#: capplets/desktop-links/Accessibility.directory.in.in.h:2
+#: capplets/desktop-links/Accessibility.directory.in.h:2
 msgid "Accessibility Settings"
 msgstr "Configurações de Acessibilidade"
 
-#: capplets/desktop-links/Advanced.directory.in.in.h:1
+#: capplets/desktop-links/Advanced.directory.in.h:1
 msgid "Advanced"
 msgstr "Avançado"
 
-#: capplets/desktop-links/Advanced.directory.in.in.h:2
+#: capplets/desktop-links/Advanced.directory.in.h:2
 msgid "Advanced Settings"
 msgstr "Configurações Avançadas"
 
@@ -989,7 +989,7 @@ msgid "Associate sounds with window manager events"
 msgstr "Associar sons a eventos do gerenciador de janelas"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
-#: capplets/sound/sound.desktop.in.h:2
+#: capplets/sound/gnome-settings-sound.desktop.in.h:2
 msgid "Sound"
 msgstr "Som"
 
@@ -1985,11 +1985,11 @@ msgstr "_Limiar:"
 msgid "_Timeout:"
 msgstr "_Tempo limite:"
 
-#: capplets/mouse/mouse.desktop.in.h:1
+#: capplets/mouse/gnome-settings-mouse.desktop.in.h:1
 msgid "Mouse"
 msgstr "Mouse"
 
-#: capplets/mouse/mouse.desktop.in.h:2
+#: capplets/mouse/gnome-settings-mouse.desktop.in.h:2
 msgid "Set your mouse preferences"
 msgstr "Definir suas preferências de mouse"
 
@@ -2065,6 +2065,10 @@ msgstr "Proxy HTTP _Seguro:"
 msgid "_Username:"
 msgstr "Nome de _Usuário:"
 
+#: capplets/sound/gnome-settings-sound.desktop.in.h:1
+msgid "Enable sound and associate sounds with events"
+msgstr "Ativar o som e associar os sons aos eventos"
+
 #: capplets/sound/sound-properties-capplet.c:239
 msgid "Sound preferences"
 msgstr "Preferências de Som"
@@ -2108,10 +2112,6 @@ msgstr "_Som para eventos"
 #: capplets/sound/sound-properties.glade.h:10
 msgid "_Visual feedback:"
 msgstr "Resposta _visual:"
-
-#: capplets/sound/sound.desktop.in.h:1
-msgid "Enable sound and associate sounds with events"
-msgstr "Ativar o som e associar os sons aos eventos"
 
 #: capplets/theme-switcher/control/control.c:18
 msgid "Eenie Meenie Mynie Moe Catcha Tiger By Its Toe"
@@ -2173,6 +2173,21 @@ msgstr ""
 "Não foi possível encontrar temas no seu sistema. Isso pode significar que "
 "seu diálogo \"Preferência de Temas\" foi instalado de maneira imprópria, ou "
 "que o pacote \"gnome-themes\" não está instalado."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:127
+msgid "No theme file location specified to install"
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-installer.c:146
+msgid "The theme file location specified to install is invalid"
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-installer.c:173
+#, c-format
+msgid ""
+"%s is the path where the theme files will be installed. This can not be "
+"selected as the source location"
+msgstr ""
 
 #: capplets/theme-switcher/gnome-theme-manager.c:645
 #: capplets/theme-switcher/gnome-theme-manager.c:705
@@ -2304,22 +2319,14 @@ msgstr "_Salvar Tema..."
 msgid "_Theme name:"
 msgstr "Nome do _tema:"
 
-#: capplets/ui-properties/behavior.desktop.in.h:1
+#: capplets/ui-properties/gnome-ui-properties.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
 msgstr ""
 "Personalizar a aparência das barras de ferramentas e de menu das aplicações"
 
-#: capplets/ui-properties/behavior.desktop.in.h:2
+#: capplets/ui-properties/gnome-ui-properties.desktop.in.h:2
 msgid "Menus & Toolbars"
 msgstr "Menus e Barras de Ferramentas"
-
-#: capplets/ui-properties/behavior.desktop.in.in.h:1
-msgid "Behavior"
-msgstr "Comportamento"
-
-#: capplets/ui-properties/behavior.desktop.in.in.h:2
-msgid "Sets the default behavior of GNOME applications"
-msgstr "Define o comportamento padrão das aplicações do GNOME"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:2
 msgid "<b>Behavior and Appearance</b>"
@@ -2476,7 +2483,7 @@ msgstr "Propriedades de Janela"
 msgid "Windows"
 msgstr "Janelas"
 
-#: control-center/capplet-dir-view-list.c:324
+#: control-center/capplet-dir-view-list.c:319
 #, c-format
 msgid "GNOME Control Center: %s"
 msgstr "Central de Controle GNOME: %s"
@@ -3164,3 +3171,9 @@ msgstr "Se os temas instalados devem ser miniaturizados"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Se os temas devem ser miniaturizados"
+
+#~ msgid "Behavior"
+#~ msgstr "Comportamento"
+
+#~ msgid "Sets the default behavior of GNOME applications"
+#~ msgstr "Define o comportamento padrão das aplicações do GNOME"

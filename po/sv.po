@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-11-12 15:42-0500\n"
+"POT-Creation-Date: 2003-12-30 13:00-0500\n"
 "PO-Revision-Date: 2003-10-19 11:55+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -116,7 +116,7 @@ msgid "Import Feature Settings File"
 msgstr "Importera funktionsinställningsfil"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Tangentbord"
@@ -269,7 +269,7 @@ msgstr ""
 "tangenter samtidigt."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "S_peed:"
 msgstr "Hasti_ghet:"
 
@@ -299,7 +299,7 @@ msgid "_Only accept keys held for:"
 msgstr "_Godtag endast tangenttryckningar som hålls under:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "_Type to test settings:"
 msgstr "_Skriv för att testa inställningar:"
 
@@ -327,8 +327,10 @@ msgstr "millisekunder"
 msgid "pixels/second"
 msgstr "bildpunkter/sekund"
 
+#. set the timeout value  label with correct value of timeout
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
 #: capplets/mouse/gnome-mouse-properties.c:133
+#: capplets/mouse/gnome-mouse-properties.c:578
 #: capplets/mouse/gnome-mouse-properties.glade.h:27
 #: capplets/windows/gnome-window-properties.glade.h:7
 msgid "seconds"
@@ -380,8 +382,8 @@ msgstr "I_ngen bild"
 #: capplets/background/background-properties-capplet.c:559
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:730
-#: capplets/keyboard/gnome-keyboard-properties.c:218
-#: capplets/mouse/gnome-mouse-properties.c:806
+#: capplets/keyboard/gnome-keyboard-properties.c:222
+#: capplets/mouse/gnome-mouse-properties.c:812
 #: capplets/sound/sound-properties-capplet.c:212
 msgid "Retrieve and store legacy settings"
 msgstr "Hämta och lagra föråldrade inställningar"
@@ -439,26 +441,6 @@ msgstr "Lodrät toning"
 #: capplets/background/background-properties.glade.h:13
 msgid "You can drag image files into the window to set the background picture."
 msgstr "Du kan dra bildfiler till fönstret för att ställa in bakgrundsbilden."
-
-#: capplets/background/background-properties.glade.h:14
-msgid "radiobutton1"
-msgstr "radioknapp1"
-
-#: capplets/background/background-properties.glade.h:15
-msgid "radiobutton2"
-msgstr "radioknapp2"
-
-#: capplets/background/background-properties.glade.h:16
-msgid "radiobutton3"
-msgstr "radioknapp3"
-
-#: capplets/background/background-properties.glade.h:17
-msgid "radiobutton4"
-msgstr "radioknapp4"
-
-#: capplets/background/background-properties.glade.h:18
-msgid "radiobutton5"
-msgstr "radioknapp5"
 
 #: capplets/background/background.desktop.in.h:1
 msgid "Background"
@@ -894,19 +876,19 @@ msgstr "_Välj en webbläsare:"
 msgid "_Select an Editor:"
 msgstr "_Välj en textredigerare:"
 
-#: capplets/desktop-links/Accessibility.directory.in.in.h:1
+#: capplets/desktop-links/Accessibility.directory.in.h:1
 msgid "Accessibility"
 msgstr "Tillgänglighet"
 
-#: capplets/desktop-links/Accessibility.directory.in.in.h:2
+#: capplets/desktop-links/Accessibility.directory.in.h:2
 msgid "Accessibility Settings"
 msgstr "Tillgänglighetsinställningar"
 
-#: capplets/desktop-links/Advanced.directory.in.in.h:1
+#: capplets/desktop-links/Advanced.directory.in.h:1
 msgid "Advanced"
 msgstr "Avancerat"
 
-#: capplets/desktop-links/Advanced.directory.in.in.h:2
+#: capplets/desktop-links/Advanced.directory.in.h:2
 msgid "Advanced Settings"
 msgstr "Avancerade inställningar"
 
@@ -997,7 +979,7 @@ msgid "Associate sounds with window manager events"
 msgstr "Associera ljud med fönsterhanterarhändelser"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
-#: capplets/sound/sound.desktop.in.h:2
+#: capplets/sound/gnome-settings-sound.desktop.in.h:2
 msgid "Sound"
 msgstr "Ljud"
 
@@ -1052,8 +1034,8 @@ msgid "Screen Resolution Preferences"
 msgstr "Inställningar för skärmupplösning"
 
 #: capplets/display/main.c:476
-#, c-format
-msgid "Make default for this _computer (%s) only"
+#, fuzzy, c-format
+msgid "_Make default for this computer (%s) only"
 msgstr "Gör till standard endast för denna _dator (%s)"
 
 #: capplets/display/main.c:494
@@ -1584,56 +1566,62 @@ msgstr ""
 "effektivt använda datorn. Det rekommenderas att du väljer ett mindre "
 "typsnitt."
 
-#: capplets/keybindings/eggcellrendererkeys.c:160
 #: capplets/keybindings/eggcellrendererkeys.c:161
+#: capplets/keybindings/eggcellrendererkeys.c:162
 msgid "Accelerator key"
 msgstr "Snabbtangent"
 
-#: capplets/keybindings/eggcellrendererkeys.c:170
 #: capplets/keybindings/eggcellrendererkeys.c:171
+#: capplets/keybindings/eggcellrendererkeys.c:172
 msgid "Accelerator modifiers"
 msgstr "Snabbtangentsmodifierare"
 
 #: capplets/keybindings/eggcellrendererkeys.c:180
+#: capplets/keybindings/eggcellrendererkeys.c:181
+#, fuzzy
+msgid "Accelerator keycode"
+msgstr "Snabbtangent"
+
+#: capplets/keybindings/eggcellrendererkeys.c:191
 msgid "Accel Mode"
 msgstr "Snabbtangentsläge"
 
-#: capplets/keybindings/eggcellrendererkeys.c:181
+#: capplets/keybindings/eggcellrendererkeys.c:192
 msgid "The type of accelerator."
 msgstr "Typen av snabbtangent."
 
-#: capplets/keybindings/eggcellrendererkeys.c:219
-#: capplets/keybindings/gnome-keybinding-properties.c:204
+#: capplets/keybindings/eggcellrendererkeys.c:240
+#: capplets/keybindings/gnome-keybinding-properties.c:207
 #: libbackground/applier.c:588 typing-break/drwright.c:448
 msgid "Disabled"
 msgstr "Inaktiverad"
 
-#: capplets/keybindings/eggcellrendererkeys.c:330
-#: capplets/keybindings/eggcellrendererkeys.c:563
+#: capplets/keybindings/eggcellrendererkeys.c:359
+#: capplets/keybindings/eggcellrendererkeys.c:599
 msgid "Type a new accelerator, or press Backspace to clear"
 msgstr "Tryck en ny snabbtangent, eller tryck backsteg för att tömma"
 
-#: capplets/keybindings/eggcellrendererkeys.c:566
+#: capplets/keybindings/eggcellrendererkeys.c:602
 msgid "Type a new accelerator"
 msgstr "Tryck en ny snabbtangent"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:172
+#: capplets/keybindings/gnome-keybinding-properties.c:174
 msgid "GNOME Default"
 msgstr "GNOME-standard"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:540
+#: capplets/keybindings/gnome-keybinding-properties.c:549
 msgid "<Unknown Action>"
 msgstr "<Okänd åtgärd>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:559
+#: capplets/keybindings/gnome-keybinding-properties.c:568
 msgid "Desktop"
 msgstr "Skrivbord"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:563
+#: capplets/keybindings/gnome-keybinding-properties.c:572
 msgid "Window Management"
 msgstr "Fönsterhantering"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:698
+#: capplets/keybindings/gnome-keybinding-properties.c:709
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1642,12 +1630,17 @@ msgstr ""
 "Genvägen \"%s\" används redan för:\n"
 " \"%s\"\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:729
+#: capplets/keybindings/gnome-keybinding-properties.c:740
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Fel vid inställning av ny snabbtangent i konfigurationsdatabasen: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:880
+#: capplets/keybindings/gnome-keybinding-properties.c:790
+#, fuzzy, c-format
+msgid "Error unsetting accelerator in configuration database: %s\n"
+msgstr "Fel vid inställning av ny snabbtangent i konfigurationsdatabasen: %s\n"
+
+#: capplets/keybindings/gnome-keybinding-properties.c:939
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1655,11 +1648,11 @@ msgstr ""
 "Kan inte hitta några tangentbordsteman. Detta betyder att din GTK+-"
 "installation inte har installerats korrekt."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:902
+#: capplets/keybindings/gnome-keybinding-properties.c:961
 msgid "Action"
 msgstr "Åtgärd"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:921
+#: capplets/keybindings/gnome-keybinding-properties.c:985
 msgid "Shortcut"
 msgstr "Genväg"
 
@@ -1684,19 +1677,19 @@ msgstr "_Textredigeringsgenvägar:"
 msgid "Assign shortcut keys to commands"
 msgstr "Associera snabbtangenter med kommandon"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:104
+#: capplets/keyboard/gnome-keyboard-properties.c:106
 #, c-format
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr ""
 "Ett fel inträffade vid visande av kontrollpanelsprogrammet för tangentbord: %"
 "s"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:195
+#: capplets/keyboard/gnome-keyboard-properties.c:199
 msgid "_Accessibility"
 msgstr "_Tillgänglighet"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:214
-#: capplets/keyboard/gnome-keyboard-properties.c:216
+#: capplets/keyboard/gnome-keyboard-properties.c:218
+#: capplets/keyboard/gnome-keyboard-properties.c:220
 #: capplets/sound/sound-properties-capplet.c:208
 #: capplets/sound/sound-properties-capplet.c:210
 msgid ""
@@ -1705,7 +1698,7 @@ msgstr ""
 "Verkställ bara ändringar och avsluta (endast för kompatibilitet; hanteras nu "
 "av demon)"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:220
+#: capplets/keyboard/gnome-keyboard-properties.c:224
 msgid "Start the page with the typing break settings showing"
 msgstr "Starta sidan utan att inställningarna för skrivandepaus visas"
 
@@ -1738,34 +1731,54 @@ msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Långsam</i></small>"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#, fuzzy
+msgid "Advanced Layout Options"
+msgstr "Avancerade inställningar"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "All_ow postponing of breaks"
 msgstr "Till_åt uppskjutning av pauser"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Check if breaks are allowed to be postponed"
 msgstr "Kryssa i om pauser ska tillåtas att avbrytas"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#, fuzzy
+msgid "Core Layout Configuration"
+msgstr "Konfiguration av nätverksproxyserver"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Cursor _blinks in text boxes and fields"
 msgstr "Markören _blinkar i textrutor och textfält"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
 msgid "Duration of the break when typing is disallowed"
 msgstr "Längd på paus när skrivande inte tillåts"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "Duration of work before forcing a break"
 msgstr "Längd på arbete innan paus"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
 msgid "Key presses _repeat when key is held down"
 msgstr "Tangenttryckningar _upprepar då tangent hålls ned"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "Keyboard Preferences"
 msgstr "Tangentbordsinställningar"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
+#, fuzzy
+msgid "Keyboard _model:"
+msgstr "Tangentbordssignal"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#, fuzzy
+msgid "Layout _options:"
+msgstr "Bild_alternativ:"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
@@ -1773,31 +1786,41 @@ msgstr ""
 "Lås skärmen efter en viss tid för att förhindra förslitningsskador från "
 "tangentbordsanvändning"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid "Typing Break"
 msgstr "Paus i skrivande"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "_Accessibility..."
 msgstr "_Tillgänglighet..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
 msgid "_Break interval lasts:"
 msgstr "_Pausen varar:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "_Delay:"
 msgstr "_Fördröjning:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
+#, fuzzy
+msgid "_Ignore system configuration"
+msgstr "_Manuell konfiguration av proxyserver"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
+#, fuzzy
+msgid "_Layouts:"
+msgstr "Layout"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:30
 msgid "_Speed:"
 msgstr "_Hastighet:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:32
 msgid "_Work interval lasts:"
 msgstr "_Arbetsintervallet varar:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:33
 msgid "minutes"
 msgstr "minuter"
 
@@ -1809,63 +1832,63 @@ msgstr "Ställ in dina tangentbordsinställningar"
 msgid "Unknown Cursor"
 msgstr "Okänd muspekare"
 
-#: capplets/mouse/gnome-mouse-properties.c:602
+#: capplets/mouse/gnome-mouse-properties.c:613
 msgid "Default Cursor - Current"
 msgstr "Standardmuspekare - aktuell"
 
-#: capplets/mouse/gnome-mouse-properties.c:602
-#: capplets/mouse/gnome-mouse-properties.c:605
+#: capplets/mouse/gnome-mouse-properties.c:613
+#: capplets/mouse/gnome-mouse-properties.c:616
 msgid "The default cursor that ships with X"
 msgstr "Standardmuspekaren som kommer med X"
 
-#: capplets/mouse/gnome-mouse-properties.c:605
+#: capplets/mouse/gnome-mouse-properties.c:616
 msgid "Default Cursor"
 msgstr "Standardmuspekare"
 
-#: capplets/mouse/gnome-mouse-properties.c:623
+#: capplets/mouse/gnome-mouse-properties.c:634
 msgid "White Cursor - Current"
 msgstr "Vit muspekare - aktuell"
 
-#: capplets/mouse/gnome-mouse-properties.c:623
-#: capplets/mouse/gnome-mouse-properties.c:626
+#: capplets/mouse/gnome-mouse-properties.c:634
+#: capplets/mouse/gnome-mouse-properties.c:637
 msgid "The default cursor inverted"
 msgstr "Inverterad standardmuspekare"
 
-#: capplets/mouse/gnome-mouse-properties.c:626
+#: capplets/mouse/gnome-mouse-properties.c:637
 msgid "White Cursor"
 msgstr "Vit muspekare"
 
-#: capplets/mouse/gnome-mouse-properties.c:645
+#: capplets/mouse/gnome-mouse-properties.c:656
 msgid "Large Cursor - Current"
 msgstr "Stor muspekare - aktuell"
 
-#: capplets/mouse/gnome-mouse-properties.c:645
-#: capplets/mouse/gnome-mouse-properties.c:648
+#: capplets/mouse/gnome-mouse-properties.c:656
+#: capplets/mouse/gnome-mouse-properties.c:659
 msgid "Large version of normal cursor"
 msgstr "Stor version av den vanliga muspekaren"
 
-#: capplets/mouse/gnome-mouse-properties.c:648
+#: capplets/mouse/gnome-mouse-properties.c:659
 msgid "Large Cursor"
 msgstr "Stor muspekare"
 
-#: capplets/mouse/gnome-mouse-properties.c:667
+#: capplets/mouse/gnome-mouse-properties.c:678
 msgid "Large White Cursor - Current"
 msgstr "Stor vit muspekare - Aktuell"
 
-#: capplets/mouse/gnome-mouse-properties.c:667
-#: capplets/mouse/gnome-mouse-properties.c:670
+#: capplets/mouse/gnome-mouse-properties.c:678
+#: capplets/mouse/gnome-mouse-properties.c:681
 msgid "Large version of white cursor"
 msgstr "Stor version av den vita muspekaren"
 
-#: capplets/mouse/gnome-mouse-properties.c:670
+#: capplets/mouse/gnome-mouse-properties.c:681
 msgid "Large White Cursor"
 msgstr "Stor vit muspekare"
 
-#: capplets/mouse/gnome-mouse-properties.c:747
+#: capplets/mouse/gnome-mouse-properties.c:753
 msgid "Cursor Size"
 msgstr "Muspekarstorlek"
 
-#: capplets/mouse/gnome-mouse-properties.c:756
+#: capplets/mouse/gnome-mouse-properties.c:762
 msgid "Cursor Theme"
 msgstr "Muspekartema"
 
@@ -1969,11 +1992,11 @@ msgstr "_Tröskel:"
 msgid "_Timeout:"
 msgstr "_Tidsgräns:"
 
-#: capplets/mouse/mouse.desktop.in.h:1
+#: capplets/mouse/gnome-settings-mouse.desktop.in.h:1
 msgid "Mouse"
 msgstr "Mus"
 
-#: capplets/mouse/mouse.desktop.in.h:2
+#: capplets/mouse/gnome-settings-mouse.desktop.in.h:2
 msgid "Set your mouse preferences"
 msgstr "Ställ in dina musinställningar"
 
@@ -2049,6 +2072,10 @@ msgstr "_Proxyserver för säker HTTP:"
 msgid "_Username:"
 msgstr "_Användarnamn:"
 
+#: capplets/sound/gnome-settings-sound.desktop.in.h:1
+msgid "Enable sound and associate sounds with events"
+msgstr "Aktivera ljud och associera ljud med händelser"
+
 #: capplets/sound/sound-properties-capplet.c:239
 msgid "Sound preferences"
 msgstr "Ljudegenskaper"
@@ -2092,10 +2119,6 @@ msgstr "_Ljud för händelser"
 #: capplets/sound/sound-properties.glade.h:10
 msgid "_Visual feedback:"
 msgstr "_Visuell återkoppling:"
-
-#: capplets/sound/sound.desktop.in.h:1
-msgid "Enable sound and associate sounds with events"
-msgstr "Aktivera ljud och associera ljud med händelser"
 
 #: capplets/theme-switcher/control/control.c:18
 msgid "Eenie Meenie Mynie Moe Catcha Tiger By Its Toe"
@@ -2156,6 +2179,21 @@ msgstr ""
 "Inga teman kunde hittas på ditt system. Detta betyder troligtvis att din "
 "\"Temainställningar\"-dialog inte installerades korrekt, eller att du inte "
 "har installerat paketet \"gnome-themes\"."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:127
+msgid "No theme file location specified to install"
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-installer.c:146
+msgid "The theme file location specified to install is invalid"
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-installer.c:173
+#, c-format
+msgid ""
+"%s is the path where the theme files will be installed. This can not be "
+"selected as the source location"
+msgstr ""
 
 #: capplets/theme-switcher/gnome-theme-manager.c:645
 #: capplets/theme-switcher/gnome-theme-manager.c:705
@@ -2286,21 +2324,13 @@ msgstr "_Spara tema..."
 msgid "_Theme name:"
 msgstr "_Temanamn:"
 
-#: capplets/ui-properties/behavior.desktop.in.h:1
+#: capplets/ui-properties/gnome-ui-properties.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
 msgstr "Anpassa utseendet på verktygsrader och menyrader i program"
 
-#: capplets/ui-properties/behavior.desktop.in.h:2
+#: capplets/ui-properties/gnome-ui-properties.desktop.in.h:2
 msgid "Menus & Toolbars"
 msgstr "Menyer och verktygsrader"
-
-#: capplets/ui-properties/behavior.desktop.in.in.h:1
-msgid "Behavior"
-msgstr "Beteende"
-
-#: capplets/ui-properties/behavior.desktop.in.in.h:2
-msgid "Sets the default behavior of GNOME applications"
-msgstr "Ställ in standardbeteende för GNOME-program"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:2
 msgid "<b>Behavior and Appearance</b>"
@@ -2456,7 +2486,7 @@ msgstr "Fönsteregenskaper"
 msgid "Windows"
 msgstr "Fönster"
 
-#: control-center/capplet-dir-view-list.c:324
+#: control-center/capplet-dir-view-list.c:319
 #, c-format
 msgid "GNOME Control Center: %s"
 msgstr "GNOME-kontrollpanelen: %s"
@@ -2578,6 +2608,26 @@ msgstr ""
 "Fel vid försök att köra (%s)\n"
 "som är länkad till tangenten (%s)"
 
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:60
+#, c-format
+msgid ""
+"Error activating XKB configuration.\n"
+"Probably internal X server problem.\n"
+"\n"
+"X server version data:\n"
+"%s\n"
+"%d\n"
+"%s"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:66
+msgid ""
+"You are using XFree 4.3.0.\n"
+"There are known problems with complex XKB configurations.\n"
+"Try using simpler configuration or taking more fresh version of XFree "
+"software."
+msgstr ""
+
 #: gnome-settings-daemon/gnome-settings-screensaver.c:92
 #, c-format
 msgid ""
@@ -2607,7 +2657,7 @@ msgstr "Kunde inte läsa in ljudfilen %s som prov %s"
 msgid "Cannot determine user's home directory"
 msgstr "Kan inte avgöra användarens hemkatalog"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:202
+#: gnome-settings-daemon/gnome-settings-xsettings.c:204
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr ""
@@ -2800,6 +2850,25 @@ msgstr ""
 "Typen av hintning att använda vid rendering av typsnitt. Möjliga värden är: "
 "\"none\" - ingen hintning, \"slight\", \"medium\" och \"full\" - så mycket "
 "hintning som möjligt; kan orsaka förvrängning av bokstavsformer."
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:1
+#, fuzzy
+msgid "XKB keyboard layout"
+msgstr "Tangentbordsgenvägar"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
+#, fuzzy
+msgid "XKB keyboard model"
+msgstr "Tangentbordssignal"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
+#, fuzzy
+msgid "XKB options"
+msgstr "Alternativ"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
+msgid "XKB settings should be overridden"
+msgstr ""
 
 #: typing-break/drw-break-window.c:189
 msgid "Postpone break"
@@ -3106,6 +3175,27 @@ msgstr "Huruvida det ska skapas miniatyrbilder för installerade teman"
 msgid "Whether to thumbnail themes"
 msgstr "Huruvida det ska skapas miniatyrbilder för teman"
 
+#~ msgid "radiobutton1"
+#~ msgstr "radioknapp1"
+
+#~ msgid "radiobutton2"
+#~ msgstr "radioknapp2"
+
+#~ msgid "radiobutton3"
+#~ msgstr "radioknapp3"
+
+#~ msgid "radiobutton4"
+#~ msgstr "radioknapp4"
+
+#~ msgid "radiobutton5"
+#~ msgstr "radioknapp5"
+
+#~ msgid "Behavior"
+#~ msgstr "Beteende"
+
+#~ msgid "Sets the default behavior of GNOME applications"
+#~ msgstr "Ställ in standardbeteende för GNOME-program"
+
 #~ msgid "One minute until the next break"
 #~ msgstr "En minut till nästa paus"
 
@@ -3338,9 +3428,6 @@ msgstr "Huruvida det ska skapas miniatyrbilder för teman"
 
 #~ msgid "Clic_k on keypress"
 #~ msgstr "_Klicka vid tangenttryckning"
-
-#~ msgid "Keyboard Bell"
-#~ msgstr "Tangentbordssignal"
 
 #~ msgid "Keypress Click"
 #~ msgstr "Tangentklick"
@@ -3609,9 +3696,6 @@ msgstr "Huruvida det ska skapas miniatyrbilder för teman"
 
 #~ msgid "_Direct internet connection"
 #~ msgstr "_Direkt Internetanslutning"
-
-#~ msgid "_Manual proxy configuration"
-#~ msgstr "_Manuell konfiguration av proxyserver"
 
 #~ msgid "_Use authentication"
 #~ msgstr "_Använd autentisering"

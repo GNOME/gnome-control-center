@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-11-20 20:58+0100\n"
+"POT-Creation-Date: 2003-12-30 13:00-0500\n"
 "PO-Revision-Date: 2003-11-20 20:58+0100\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
@@ -450,26 +450,6 @@ msgstr "Lodret farveovergang"
 #: capplets/background/background-properties.glade.h:13
 msgid "You can drag image files into the window to set the background picture."
 msgstr "Du kan trække billedfiler ind i vinduet for at vælge baggrundsbillede."
-
-#: capplets/background/background-properties.glade.h:14
-msgid "radiobutton1"
-msgstr ""
-
-#: capplets/background/background-properties.glade.h:15
-msgid "radiobutton2"
-msgstr ""
-
-#: capplets/background/background-properties.glade.h:16
-msgid "radiobutton3"
-msgstr ""
-
-#: capplets/background/background-properties.glade.h:17
-msgid "radiobutton4"
-msgstr ""
-
-#: capplets/background/background-properties.glade.h:18
-msgid "radiobutton5"
-msgstr ""
 
 #: capplets/background/background.desktop.in.h:1
 msgid "Background"
@@ -914,19 +894,19 @@ msgstr "_Vælg et netsurfningsprogram:"
 msgid "_Select an Editor:"
 msgstr "_Vælg et redigeringsprogram:"
 
-#: capplets/desktop-links/Accessibility.directory.in.in.h:1
+#: capplets/desktop-links/Accessibility.directory.in.h:1
 msgid "Accessibility"
 msgstr "Tilgængelighed"
 
-#: capplets/desktop-links/Accessibility.directory.in.in.h:2
+#: capplets/desktop-links/Accessibility.directory.in.h:2
 msgid "Accessibility Settings"
 msgstr "Indstilliger for tilgængelighed"
 
-#: capplets/desktop-links/Advanced.directory.in.in.h:1
+#: capplets/desktop-links/Advanced.directory.in.h:1
 msgid "Advanced"
 msgstr "Avanceret"
 
-#: capplets/desktop-links/Advanced.directory.in.in.h:2
+#: capplets/desktop-links/Advanced.directory.in.h:2
 msgid "Advanced Settings"
 msgstr "Avancerede indstillinger"
 
@@ -1017,7 +997,7 @@ msgid "Associate sounds with window manager events"
 msgstr "Associér lyde med vindueshændelser"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
-#: capplets/sound/sound.desktop.in.h:2
+#: capplets/sound/gnome-settings-sound.desktop.in.h:2
 msgid "Sound"
 msgstr "Lyd"
 
@@ -1072,8 +1052,8 @@ msgid "Screen Resolution Preferences"
 msgstr "Indstillinger for skærmopløsning"
 
 #: capplets/display/main.c:476
-#, c-format
-msgid "Make default for this _computer (%s) only"
+#, fuzzy, c-format
+msgid "_Make default for this computer (%s) only"
 msgstr "Gør til forvalg for denne _maskine (%s) kun"
 
 #: capplets/display/main.c:494
@@ -2010,11 +1990,11 @@ msgstr "_Tærskel:"
 msgid "_Timeout:"
 msgstr "_Tid:"
 
-#: capplets/mouse/mouse.desktop.in.h:1
+#: capplets/mouse/gnome-settings-mouse.desktop.in.h:1
 msgid "Mouse"
 msgstr "Mus"
 
-#: capplets/mouse/mouse.desktop.in.h:2
+#: capplets/mouse/gnome-settings-mouse.desktop.in.h:2
 msgid "Set your mouse preferences"
 msgstr "Vælg indstillinger for mus"
 
@@ -2090,6 +2070,10 @@ msgstr "_Sikker HTTP-mellemvært:"
 msgid "_Username:"
 msgstr "_Brugernavn:"
 
+#: capplets/sound/gnome-settings-sound.desktop.in.h:1
+msgid "Enable sound and associate sounds with events"
+msgstr "Aktivér lyd og associér lyde med hændelser"
+
 #: capplets/sound/sound-properties-capplet.c:239
 msgid "Sound preferences"
 msgstr "Lydindstillinger"
@@ -2133,10 +2117,6 @@ msgstr "_Lyde for hændelser"
 #: capplets/sound/sound-properties.glade.h:10
 msgid "_Visual feedback:"
 msgstr "_Visuelt feedback:"
-
-#: capplets/sound/sound.desktop.in.h:1
-msgid "Enable sound and associate sounds with events"
-msgstr "Aktivér lyd og associér lyde med hændelser"
 
 #: capplets/theme-switcher/control/control.c:18
 msgid "Eenie Meenie Mynie Moe Catcha Tiger By Its Toe"
@@ -2198,6 +2178,21 @@ msgstr ""
 "Ingen temaer blev fundet på systemet. Dette betyder sandsynligvis at "
 "\"Temaindstillinger\"-vinduet blev installeret forkert eller at \"gnome-"
 "themes\" pakken ikke er installeret."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:127
+msgid "No theme file location specified to install"
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-installer.c:146
+msgid "The theme file location specified to install is invalid"
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-installer.c:173
+#, c-format
+msgid ""
+"%s is the path where the theme files will be installed. This can not be "
+"selected as the source location"
+msgstr ""
 
 #: capplets/theme-switcher/gnome-theme-manager.c:645
 #: capplets/theme-switcher/gnome-theme-manager.c:705
@@ -2328,21 +2323,13 @@ msgstr "_Gem tema..."
 msgid "_Theme name:"
 msgstr "_Temanavn:"
 
-#: capplets/ui-properties/behavior.desktop.in.h:1
+#: capplets/ui-properties/gnome-ui-properties.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
 msgstr "Tilpas udseendet af værktøjslinjer og menulinjer i programmer"
 
-#: capplets/ui-properties/behavior.desktop.in.h:2
+#: capplets/ui-properties/gnome-ui-properties.desktop.in.h:2
 msgid "Menus & Toolbars"
 msgstr "Menuer og værktøjslinjer"
-
-#: capplets/ui-properties/behavior.desktop.in.in.h:1
-msgid "Behavior"
-msgstr "Opførsel"
-
-#: capplets/ui-properties/behavior.desktop.in.in.h:2
-msgid "Sets the default behavior of GNOME applications"
-msgstr "Konfigurér standardopførslen for Gnome-programmer"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:2
 msgid "<b>Behavior and Appearance</b>"
@@ -2496,7 +2483,7 @@ msgstr "Vinduesindstillinger"
 msgid "Windows"
 msgstr "Vinduer"
 
-#: control-center/capplet-dir-view-list.c:324
+#: control-center/capplet-dir-view-list.c:319
 #, c-format
 msgid "GNOME Control Center: %s"
 msgstr "Kontrolcenter: %s"
@@ -2614,6 +2601,26 @@ msgid ""
 msgstr ""
 "Fejl ved forsøg på kørsel af %s\n"
 "som er kædet til nøglen %s"
+
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:60
+#, c-format
+msgid ""
+"Error activating XKB configuration.\n"
+"Probably internal X server problem.\n"
+"\n"
+"X server version data:\n"
+"%s\n"
+"%d\n"
+"%s"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:66
+msgid ""
+"You are using XFree 4.3.0.\n"
+"There are known problems with complex XKB configurations.\n"
+"Try using simpler configuration or taking more fresh version of XFree "
+"software."
+msgstr ""
 
 #: gnome-settings-daemon/gnome-settings-screensaver.c:92
 #, c-format
@@ -2834,6 +2841,25 @@ msgstr ""
 "Den grad af hint der bruges ved optegning af skrifttyper. Mulige værdier er: "
 "\"ingen\" - ingen hint, \"slight\", \"medium\", \"full\" - så meget som "
 "muligt; kan forårsage deformering af bogstavformerne."
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:1
+#, fuzzy
+msgid "XKB keyboard layout"
+msgstr "Tastaturgenveje"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
+#, fuzzy
+msgid "XKB keyboard model"
+msgstr "Tastatur_model:"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
+#, fuzzy
+msgid "XKB options"
+msgstr "Indstillinger"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
+msgid "XKB settings should be overridden"
+msgstr ""
 
 #: typing-break/drw-break-window.c:189
 msgid "Postpone break"
@@ -3141,6 +3167,12 @@ msgstr "Generér miniaturer for installerede temaer"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Generér miniaturer for temaer"
+
+#~ msgid "Behavior"
+#~ msgstr "Opførsel"
+
+#~ msgid "Sets the default behavior of GNOME applications"
+#~ msgstr "Konfigurér standardopførslen for Gnome-programmer"
 
 #~ msgid "One minute until the next break"
 #~ msgstr "Et minut til næste pause"

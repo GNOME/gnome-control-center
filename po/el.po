@@ -36,7 +36,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: el\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-11-12 15:42-0500\n"
+"POT-Creation-Date: 2003-12-30 13:00-0500\n"
 "PO-Revision-Date: 2003-11-12 14:14+0200\n"
 "Last-Translator: Kostas Papadimas <pkst@gnome.org>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
@@ -144,7 +144,7 @@ msgid "Import Feature Settings File"
 msgstr "Εισαγωγή Αρχείου Ρυθμίσεων Χαρακτηριστικών"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Πληκτρολόγιο"
@@ -298,7 +298,7 @@ msgstr ""
 "πλήκτρων modifier σε σειρά."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:29
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "S_peed:"
 msgstr "Τα_χύτητα:"
 
@@ -327,7 +327,7 @@ msgid "_Only accept keys held for:"
 msgstr "_Να γίνεται αποδοχή πλήκτρων που πατήθηκαν για:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "_Type to test settings:"
 msgstr "_Πληκτρολογήστε για να δοκιμάσετε τις ρυθμίσεις:"
 
@@ -355,8 +355,10 @@ msgstr "χιλιοστά δευτερολέπτου"
 msgid "pixels/second"
 msgstr "εικονοστοιχεία/δευτερόλεπτο"
 
+#. set the timeout value  label with correct value of timeout
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
 #: capplets/mouse/gnome-mouse-properties.c:133
+#: capplets/mouse/gnome-mouse-properties.c:578
 #: capplets/mouse/gnome-mouse-properties.glade.h:27
 #: capplets/windows/gnome-window-properties.glade.h:7
 msgid "seconds"
@@ -409,8 +411,8 @@ msgstr "_Χωρίς Εικόνα"
 #: capplets/background/background-properties-capplet.c:559
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:730
-#: capplets/keyboard/gnome-keyboard-properties.c:218
-#: capplets/mouse/gnome-mouse-properties.c:806
+#: capplets/keyboard/gnome-keyboard-properties.c:222
+#: capplets/mouse/gnome-mouse-properties.c:812
 #: capplets/sound/sound-properties-capplet.c:212
 msgid "Retrieve and store legacy settings"
 msgstr "Ανάσυρση και αποθήκευση ρυθμίσεων legacy "
@@ -471,30 +473,6 @@ msgid "You can drag image files into the window to set the background picture."
 msgstr ""
 "Μπορείτε να σύρετε αρχεία εικόνας στο παράθυρο για να ορίσετε την εικόνα "
 "παρασκηνίου."
-
-# FIX?? (next 2)
-#: capplets/background/background-properties.glade.h:14
-msgid "radiobutton1"
-msgstr "Ραδιοπλήκτρο 1"
-
-#: capplets/background/background-properties.glade.h:15
-msgid "radiobutton2"
-msgstr "Ραδιοπλήκτρο 2"
-
-# FIX?? (next 2)
-#: capplets/background/background-properties.glade.h:16
-msgid "radiobutton3"
-msgstr "Ραδιοπλήκτρο3"
-
-# FIX?? (next 2)
-#: capplets/background/background-properties.glade.h:17
-msgid "radiobutton4"
-msgstr "Ραδιοπλήκτρο4"
-
-# FIX?? (next 2)
-#: capplets/background/background-properties.glade.h:18
-msgid "radiobutton5"
-msgstr "Ραδιοπλήκτρο5"
 
 #: capplets/background/background.desktop.in.h:1
 msgid "Background"
@@ -941,19 +919,19 @@ msgstr "_Επιλογή Φυλλομετρητή Ιστοσελίδων:"
 msgid "_Select an Editor:"
 msgstr "_Επιλογή Κειμενογράφου:"
 
-#: capplets/desktop-links/Accessibility.directory.in.in.h:1
+#: capplets/desktop-links/Accessibility.directory.in.h:1
 msgid "Accessibility"
 msgstr "Προσβασιμότητα"
 
-#: capplets/desktop-links/Accessibility.directory.in.in.h:2
+#: capplets/desktop-links/Accessibility.directory.in.h:2
 msgid "Accessibility Settings"
 msgstr "Ρυθμίσεις Προσβασιμότητας"
 
-#: capplets/desktop-links/Advanced.directory.in.in.h:1
+#: capplets/desktop-links/Advanced.directory.in.h:1
 msgid "Advanced"
 msgstr "Για προχωρημένους"
 
-#: capplets/desktop-links/Advanced.directory.in.in.h:2
+#: capplets/desktop-links/Advanced.directory.in.h:2
 msgid "Advanced Settings"
 msgstr "Προχωρημένες Ρυθμίσεις"
 
@@ -1047,7 +1025,7 @@ msgid "Associate sounds with window manager events"
 msgstr "Αντιστοίχιση ήχων με συμβάντα του διαχειριστή παραθύρων"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
-#: capplets/sound/sound.desktop.in.h:2
+#: capplets/sound/gnome-settings-sound.desktop.in.h:2
 msgid "Sound"
 msgstr "Ήχος"
 
@@ -1102,8 +1080,8 @@ msgid "Screen Resolution Preferences"
 msgstr "Προτιμήσεις Ανάλυσης Οθόνης"
 
 #: capplets/display/main.c:476
-#, c-format
-msgid "Make default for this _computer (%s) only"
+#, fuzzy, c-format
+msgid "_Make default for this computer (%s) only"
 msgstr "Να γίνει προεπιλεγμένο μόνο για αυτό τον υ_πολογιστή (%s)"
 
 #: capplets/display/main.c:494
@@ -1624,56 +1602,62 @@ msgstr ""
 "δύσκολο να χρησιμοποιηθεί αποτελεσματικά από τον υπολογιστή. Συνίσταται να "
 "επιλέξετε ενα μικρότερο μέγεθος γραμμματοσειράς."
 
-#: capplets/keybindings/eggcellrendererkeys.c:160
 #: capplets/keybindings/eggcellrendererkeys.c:161
+#: capplets/keybindings/eggcellrendererkeys.c:162
 msgid "Accelerator key"
 msgstr "Πλήκτρο επιτάχυνσης"
 
-#: capplets/keybindings/eggcellrendererkeys.c:170
 #: capplets/keybindings/eggcellrendererkeys.c:171
+#: capplets/keybindings/eggcellrendererkeys.c:172
 msgid "Accelerator modifiers"
 msgstr "Modifiers συντόμευσης"
 
 #: capplets/keybindings/eggcellrendererkeys.c:180
+#: capplets/keybindings/eggcellrendererkeys.c:181
+#, fuzzy
+msgid "Accelerator keycode"
+msgstr "Πλήκτρο επιτάχυνσης"
+
+#: capplets/keybindings/eggcellrendererkeys.c:191
 msgid "Accel Mode"
 msgstr "Accel Mode"
 
-#: capplets/keybindings/eggcellrendererkeys.c:181
+#: capplets/keybindings/eggcellrendererkeys.c:192
 msgid "The type of accelerator."
 msgstr "Το είδος της συντόμευσης"
 
-#: capplets/keybindings/eggcellrendererkeys.c:219
-#: capplets/keybindings/gnome-keybinding-properties.c:204
+#: capplets/keybindings/eggcellrendererkeys.c:240
+#: capplets/keybindings/gnome-keybinding-properties.c:207
 #: libbackground/applier.c:588 typing-break/drwright.c:448
 msgid "Disabled"
 msgstr "Ανενεργό"
 
-#: capplets/keybindings/eggcellrendererkeys.c:330
-#: capplets/keybindings/eggcellrendererkeys.c:563
+#: capplets/keybindings/eggcellrendererkeys.c:359
+#: capplets/keybindings/eggcellrendererkeys.c:599
 msgid "Type a new accelerator, or press Backspace to clear"
 msgstr "Πληκτρολογήστε μια νέα συντόμευση η πατήστε Backspace για εκκαθάριση"
 
-#: capplets/keybindings/eggcellrendererkeys.c:566
+#: capplets/keybindings/eggcellrendererkeys.c:602
 msgid "Type a new accelerator"
 msgstr "Πληκτρολογήστε νέα συντόμευση"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:172
+#: capplets/keybindings/gnome-keybinding-properties.c:174
 msgid "GNOME Default"
 msgstr "Προεπιλογή GNOME"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:540
+#: capplets/keybindings/gnome-keybinding-properties.c:549
 msgid "<Unknown Action>"
 msgstr "<Άγνωστη Ενέργεια>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:559
+#: capplets/keybindings/gnome-keybinding-properties.c:568
 msgid "Desktop"
 msgstr "Επιφάνεια εργασίας"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:563
+#: capplets/keybindings/gnome-keybinding-properties.c:572
 msgid "Window Management"
 msgstr "Διαχείριση παραθύρων"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:698
+#: capplets/keybindings/gnome-keybinding-properties.c:709
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1682,13 +1666,19 @@ msgstr ""
 "Η συντόμευση \"%s\" χρησιμοποιείται ήδη για:\n"
 " \"%s\"\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:729
+#: capplets/keybindings/gnome-keybinding-properties.c:740
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr ""
 "Σφάλμα κατά τη ρύθμιση νέας συντόμευσης στη βάση δεδομένων ρυθμίσεων : %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:880
+#: capplets/keybindings/gnome-keybinding-properties.c:790
+#, fuzzy, c-format
+msgid "Error unsetting accelerator in configuration database: %s\n"
+msgstr ""
+"Σφάλμα κατά τη ρύθμιση νέας συντόμευσης στη βάση δεδομένων ρυθμίσεων : %s\n"
+
+#: capplets/keybindings/gnome-keybinding-properties.c:939
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1696,11 +1686,11 @@ msgstr ""
 "Αδυναμία εύρεσης θεμάτων πληκτρολογίου. Αυτό σημαίνει ότι δεν έγινε "
 "ολοκληρωμένη εγκατάσταση του GTK+."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:902
+#: capplets/keybindings/gnome-keybinding-properties.c:961
 msgid "Action"
 msgstr "Ενέργεια"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:921
+#: capplets/keybindings/gnome-keybinding-properties.c:985
 msgid "Shortcut"
 msgstr "Συντόμευση"
 
@@ -1725,17 +1715,17 @@ msgstr "Συντομεύσεις επεξεργα_σίας κειμένου:"
 msgid "Assign shortcut keys to commands"
 msgstr "Ορισμός πλήκτρων συντόμευσης σε εντολές"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:104
+#: capplets/keyboard/gnome-keyboard-properties.c:106
 #, c-format
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "Σφάλμα εκκίνησης capplet πληκτρολογίου : %s"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:195
+#: capplets/keyboard/gnome-keyboard-properties.c:199
 msgid "_Accessibility"
 msgstr "_Προσβασιμότητα"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:214
-#: capplets/keyboard/gnome-keyboard-properties.c:216
+#: capplets/keyboard/gnome-keyboard-properties.c:218
+#: capplets/keyboard/gnome-keyboard-properties.c:220
 #: capplets/sound/sound-properties-capplet.c:208
 #: capplets/sound/sound-properties-capplet.c:210
 msgid ""
@@ -1744,7 +1734,7 @@ msgstr ""
 "Εφαρμογή μόνο των ρυθμίσεων και έξοδος (συμβατότητα μόνο; now handled by "
 "daemon)"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:220
+#: capplets/keyboard/gnome-keyboard-properties.c:224
 msgid "Start the page with the typing break settings showing"
 msgstr ""
 "Εκκίνηση της σελίδας με τις ρυθμίζεις διαλείμματος πληκτρολόγησης να "
@@ -1779,34 +1769,54 @@ msgid "<small><i>Slow</i></small>"
 msgstr "<small><i>Αργό</i></small>"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+#, fuzzy
+msgid "Advanced Layout Options"
+msgstr "Προχωρημένες Ρυθμίσεις"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 msgid "All_ow postponing of breaks"
 msgstr "Να επι_τρέπεται η αναβολή διαλειμμάτων"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Check if breaks are allowed to be postponed"
 msgstr "έλεγος για τον αν θα επιτρέπεται η αναβολή διαλειμμάτων"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#, fuzzy
+msgid "Core Layout Configuration"
+msgstr "Ρύθμιση Διαμεσολαβητή Δικτύου"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Cursor _blinks in text boxes and fields"
 msgstr "_Αναβόσβήνει σε πεδία και κουτιά κειμένου"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
 msgid "Duration of the break when typing is disallowed"
 msgstr "Διάρκεια του διαλείμματος όταν απαγορεύεται η πληκτρολόγηση"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "Duration of work before forcing a break"
 msgstr "Διάρκεια εργασίας πριν την επιβολή διαλείμματος"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
 msgid "Key presses _repeat when key is held down"
 msgstr "Επανάληψη _πληκτρολογίου κατά το κράτημα ενός πλήκτρου"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "Keyboard Preferences"
 msgstr "Προτιμήσεις Πληκτρολογίου"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
+#, fuzzy
+msgid "Keyboard _model:"
+msgstr "Πληκτρολόγιο"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#, fuzzy
+msgid "Layout _options:"
+msgstr "Επιλογές ει_κόνας:"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid ""
 "Lock screen after a certain duration to help prevent repetitive keyboard use "
 "injuries"
@@ -1814,31 +1824,41 @@ msgstr ""
 "Κλείδωμα οθόνης μετά από μια συγκεκριμένη διάρκεια για την αποφυγή του "
 "συνδρόμου του καρπιαίου σωλήνα"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid "Typing Break"
 msgstr "Διάλειμμα Πληκτρολόγησης"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid "_Accessibility..."
 msgstr "_Προσβασιμότητα..."
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
 msgid "_Break interval lasts:"
 msgstr "Το διά_λειμμα διαρκεί:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
 msgid "_Delay:"
 msgstr "Καθυ_στέρηση:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
+#, fuzzy
+msgid "_Ignore system configuration"
+msgstr "Ρύθμιση Διαμεσολαβητή Δικτύου"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
+#, fuzzy
+msgid "_Layouts:"
+msgstr "Διάταξη"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:30
 msgid "_Speed:"
 msgstr "Τα_χύτητα:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:32
 msgid "_Work interval lasts:"
 msgstr "Η ερ_γασία διαρκεί:"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:33
 msgid "minutes"
 msgstr "λεπτά"
 
@@ -1850,63 +1870,63 @@ msgstr "Καθορισμός των προτιμήσεων πληκτρολογ�
 msgid "Unknown Cursor"
 msgstr "Άγνωστος Δρομέας"
 
-#: capplets/mouse/gnome-mouse-properties.c:602
+#: capplets/mouse/gnome-mouse-properties.c:613
 msgid "Default Cursor - Current"
 msgstr "Προεπιλεγμένος Δρομέας - Τρέχων"
 
-#: capplets/mouse/gnome-mouse-properties.c:602
-#: capplets/mouse/gnome-mouse-properties.c:605
+#: capplets/mouse/gnome-mouse-properties.c:613
+#: capplets/mouse/gnome-mouse-properties.c:616
 msgid "The default cursor that ships with X"
 msgstr "Ο προεπιλεγμένος δρομέας που έρχεται με το X"
 
-#: capplets/mouse/gnome-mouse-properties.c:605
+#: capplets/mouse/gnome-mouse-properties.c:616
 msgid "Default Cursor"
 msgstr "Προεπιλεγμένος Δρομέας"
 
-#: capplets/mouse/gnome-mouse-properties.c:623
+#: capplets/mouse/gnome-mouse-properties.c:634
 msgid "White Cursor - Current"
 msgstr "Λευκός Δρομέας - Τρέχων"
 
-#: capplets/mouse/gnome-mouse-properties.c:623
-#: capplets/mouse/gnome-mouse-properties.c:626
+#: capplets/mouse/gnome-mouse-properties.c:634
+#: capplets/mouse/gnome-mouse-properties.c:637
 msgid "The default cursor inverted"
 msgstr "Ο προεπιλεγμένος δρομέας αντεστραμένος"
 
-#: capplets/mouse/gnome-mouse-properties.c:626
+#: capplets/mouse/gnome-mouse-properties.c:637
 msgid "White Cursor"
 msgstr "Λευκός Δρομέας"
 
-#: capplets/mouse/gnome-mouse-properties.c:645
+#: capplets/mouse/gnome-mouse-properties.c:656
 msgid "Large Cursor - Current"
 msgstr "Μεγάλος Δρομέας - Τρέχων"
 
-#: capplets/mouse/gnome-mouse-properties.c:645
-#: capplets/mouse/gnome-mouse-properties.c:648
+#: capplets/mouse/gnome-mouse-properties.c:656
+#: capplets/mouse/gnome-mouse-properties.c:659
 msgid "Large version of normal cursor"
 msgstr "Μεγάλη έκδοση του κανονικού δρομέα"
 
-#: capplets/mouse/gnome-mouse-properties.c:648
+#: capplets/mouse/gnome-mouse-properties.c:659
 msgid "Large Cursor"
 msgstr "Μεγάλος Δρομέας"
 
-#: capplets/mouse/gnome-mouse-properties.c:667
+#: capplets/mouse/gnome-mouse-properties.c:678
 msgid "Large White Cursor - Current"
 msgstr "Μεγάλος Λευκός Δρομέας - Τρέχων"
 
-#: capplets/mouse/gnome-mouse-properties.c:667
-#: capplets/mouse/gnome-mouse-properties.c:670
+#: capplets/mouse/gnome-mouse-properties.c:678
+#: capplets/mouse/gnome-mouse-properties.c:681
 msgid "Large version of white cursor"
 msgstr "Μεγάλη έκδοση του λευκού δρομέα"
 
-#: capplets/mouse/gnome-mouse-properties.c:670
+#: capplets/mouse/gnome-mouse-properties.c:681
 msgid "Large White Cursor"
 msgstr "Μεγάλος Λευκός Δρομέας"
 
-#: capplets/mouse/gnome-mouse-properties.c:747
+#: capplets/mouse/gnome-mouse-properties.c:753
 msgid "Cursor Size"
 msgstr "Μέγεθος δρομέα"
 
-#: capplets/mouse/gnome-mouse-properties.c:756
+#: capplets/mouse/gnome-mouse-properties.c:762
 msgid "Cursor Theme"
 msgstr "Θέμα Δρομέα"
 
@@ -2010,11 +2030,11 @@ msgstr "_Κατώφλι:"
 msgid "_Timeout:"
 msgstr "_Διάρκεια:"
 
-#: capplets/mouse/mouse.desktop.in.h:1
+#: capplets/mouse/gnome-settings-mouse.desktop.in.h:1
 msgid "Mouse"
 msgstr "Ποντίκι"
 
-#: capplets/mouse/mouse.desktop.in.h:2
+#: capplets/mouse/gnome-settings-mouse.desktop.in.h:2
 msgid "Set your mouse preferences"
 msgstr "Καθορισμός προτιμήσεων ποντικιού"
 
@@ -2090,6 +2110,10 @@ msgstr "_Ασφαλής διαμεσολαβητής HTTP:"
 msgid "_Username:"
 msgstr "_Όνομα χρήστη:"
 
+#: capplets/sound/gnome-settings-sound.desktop.in.h:1
+msgid "Enable sound and associate sounds with events"
+msgstr "Ενεργοποίηση ήχων και αντιστοίχιση ήχων με συμβάντα"
+
 #: capplets/sound/sound-properties-capplet.c:239
 msgid "Sound preferences"
 msgstr "Προτιμήσεις ήχου"
@@ -2133,10 +2157,6 @@ msgstr "_Ήχοι για συμβάντα"
 #: capplets/sound/sound-properties.glade.h:10
 msgid "_Visual feedback:"
 msgstr "Ο_πτική ανάδραση:"
-
-#: capplets/sound/sound.desktop.in.h:1
-msgid "Enable sound and associate sounds with events"
-msgstr "Ενεργοποίηση ήχων και αντιστοίχιση ήχων με συμβάντα"
 
 #: capplets/theme-switcher/control/control.c:18
 msgid "Eenie Meenie Mynie Moe Catcha Tiger By Its Toe"
@@ -2200,6 +2220,21 @@ msgstr ""
 "Δε βρέθηκαν θέματα στο σύστημα σας. Αυτό πιθανόν να σημαίνει ότι ο διάλογος "
 "\"Προτιμήσεις Θέματος\" δεν εγκαταστάθηκε σωστά, ή ότι δεν έχετε "
 "εγκαταστήσει το πακέτο \"gnome-themes\"."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:127
+msgid "No theme file location specified to install"
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-installer.c:146
+msgid "The theme file location specified to install is invalid"
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-installer.c:173
+#, c-format
+msgid ""
+"%s is the path where the theme files will be installed. This can not be "
+"selected as the source location"
+msgstr ""
 
 #: capplets/theme-switcher/gnome-theme-manager.c:645
 #: capplets/theme-switcher/gnome-theme-manager.c:705
@@ -2336,21 +2371,13 @@ msgstr "Απο_θήκευση θέματος..."
 msgid "_Theme name:"
 msgstr "Όνομα _θέματος: "
 
-#: capplets/ui-properties/behavior.desktop.in.h:1
+#: capplets/ui-properties/gnome-ui-properties.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
 msgstr "Προσαρμογή της εμφάνισης των εργαλειοθήκων και των μενού σε εφαρμογές"
 
-#: capplets/ui-properties/behavior.desktop.in.h:2
+#: capplets/ui-properties/gnome-ui-properties.desktop.in.h:2
 msgid "Menus & Toolbars"
 msgstr "Μενού & Εργαλειοθήκες"
-
-#: capplets/ui-properties/behavior.desktop.in.in.h:1
-msgid "Behavior"
-msgstr "Συμπεριφορά"
-
-#: capplets/ui-properties/behavior.desktop.in.in.h:2
-msgid "Sets the default behavior of GNOME applications"
-msgstr "Καθορίζει την προεπιλεγμένη συμπεριφορά των εφαρμογών του  GNOME"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:2
 msgid "<b>Behavior and Appearance</b>"
@@ -2508,7 +2535,7 @@ msgstr "Ιδιότητες Παραθύρων"
 msgid "Windows"
 msgstr "Παράθυρα"
 
-#: control-center/capplet-dir-view-list.c:324
+#: control-center/capplet-dir-view-list.c:319
 #, c-format
 msgid "GNOME Control Center: %s"
 msgstr "Κέντρο Ελέγχου GNOME: %s"
@@ -2630,6 +2657,26 @@ msgstr ""
 "Σφάλμα κατα την προσπάθεια εκτέλεσης (%s)\n"
 "που συνδέεται με το κλειδί  (%s)"
 
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:60
+#, c-format
+msgid ""
+"Error activating XKB configuration.\n"
+"Probably internal X server problem.\n"
+"\n"
+"X server version data:\n"
+"%s\n"
+"%d\n"
+"%s"
+msgstr ""
+
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:66
+msgid ""
+"You are using XFree 4.3.0.\n"
+"There are known problems with complex XKB configurations.\n"
+"Try using simpler configuration or taking more fresh version of XFree "
+"software."
+msgstr ""
+
 #: gnome-settings-daemon/gnome-settings-screensaver.c:92
 #, c-format
 msgid ""
@@ -2660,7 +2707,7 @@ msgstr "Αδυναμία φόρτωσης αρχείου ήχου %s ώς δεί
 msgid "Cannot determine user's home directory"
 msgstr "Δεν είναι δυνατός ο εντοπισμός του αρχικού καταλόγου χρήστη"
 
-#: gnome-settings-daemon/gnome-settings-xsettings.c:202
+#: gnome-settings-daemon/gnome-settings-xsettings.c:204
 #, c-format
 msgid "GConf key %s set to type %s but its expected type was %s\n"
 msgstr ""
@@ -2854,6 +2901,25 @@ msgstr ""
 "πιθανές τιμές είναι:  \"καμμία\" - όχι hinting, \"ελαφρύ\", \"μέτριο\", and "
 "\"πλήρες\" - όσον το δυνατόν περισσότερο; μπορεί να προκαλέσει παραμόρφωση "
 "της φόρμας των γραμμάτων."
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:1
+#, fuzzy
+msgid "XKB keyboard layout"
+msgstr "Συντομεύσεις Πληκτρολογίου"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
+#, fuzzy
+msgid "XKB keyboard model"
+msgstr "Πληκτρολόγιο"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
+#, fuzzy
+msgid "XKB options"
+msgstr "Επιλογές"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
+msgid "XKB settings should be overridden"
+msgstr ""
 
 #: typing-break/drw-break-window.c:189
 msgid "Postpone break"
@@ -3166,6 +3232,31 @@ msgstr "Αν θα γίνεται προεπισκόπηση εγκατεστημ
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Αν θα γίνεται προεπισκόπηση θεμάτων"
+
+# FIX?? (next 2)
+#~ msgid "radiobutton1"
+#~ msgstr "Ραδιοπλήκτρο 1"
+
+#~ msgid "radiobutton2"
+#~ msgstr "Ραδιοπλήκτρο 2"
+
+# FIX?? (next 2)
+#~ msgid "radiobutton3"
+#~ msgstr "Ραδιοπλήκτρο3"
+
+# FIX?? (next 2)
+#~ msgid "radiobutton4"
+#~ msgstr "Ραδιοπλήκτρο4"
+
+# FIX?? (next 2)
+#~ msgid "radiobutton5"
+#~ msgstr "Ραδιοπλήκτρο5"
+
+#~ msgid "Behavior"
+#~ msgstr "Συμπεριφορά"
+
+#~ msgid "Sets the default behavior of GNOME applications"
+#~ msgstr "Καθορίζει την προεπιλεγμένη συμπεριφορά των εφαρμογών του  GNOME"
 
 #~ msgid "One minute until the next break"
 #~ msgstr "Ένα λεπτό μέχρι το επόμενο διάλειμμα"

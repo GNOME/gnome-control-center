@@ -7,16 +7,17 @@
 # 
 msgid ""
 msgstr ""
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-04 17:40+0200\n"
+"POT-Creation-Date: 2003-12-30 13:00-0500\n"
 "PO-Revision-Date: 2003-12-04 17:39+0200\n"
 "Last-Translator: Žygimantas Beručka <uid0@tuxfamily.org>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%"
+"100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
 msgid "<b>Applications</b>"
@@ -877,19 +878,19 @@ msgstr "_Pasirink web naršyklę:"
 msgid "_Select an Editor:"
 msgstr "_Pasirink redaktorių:"
 
-#: capplets/desktop-links/Accessibility.directory.in.in.h:1
+#: capplets/desktop-links/Accessibility.directory.in.h:1
 msgid "Accessibility"
 msgstr "Prieinamumas"
 
-#: capplets/desktop-links/Accessibility.directory.in.in.h:2
+#: capplets/desktop-links/Accessibility.directory.in.h:2
 msgid "Accessibility Settings"
 msgstr "Prieinamumo nustatymai"
 
-#: capplets/desktop-links/Advanced.directory.in.in.h:1
+#: capplets/desktop-links/Advanced.directory.in.h:1
 msgid "Advanced"
 msgstr "Papildoma"
 
-#: capplets/desktop-links/Advanced.directory.in.in.h:2
+#: capplets/desktop-links/Advanced.directory.in.h:2
 msgid "Advanced Settings"
 msgstr "Papildomos nuostatos"
 
@@ -979,7 +980,7 @@ msgid "Associate sounds with window manager events"
 msgstr "Susieti garsus su langų tvarkyklės įvykiais"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
-#: capplets/sound/sound.desktop.in.h:2
+#: capplets/sound/gnome-settings-sound.desktop.in.h:2
 msgid "Sound"
 msgstr "Garsas"
 
@@ -1034,8 +1035,8 @@ msgid "Screen Resolution Preferences"
 msgstr "Ekrano raiškos parinktys"
 
 #: capplets/display/main.c:476
-#, c-format
-msgid "Make default for this _computer (%s) only"
+#, fuzzy, c-format
+msgid "_Make default for this computer (%s) only"
 msgstr "Padaryti įprastu tik šiam _kompiuteriui (%s)"
 
 #: capplets/display/main.c:494
@@ -1966,11 +1967,11 @@ msgstr "_Slenkstis:"
 msgid "_Timeout:"
 msgstr "_Trukmė:"
 
-#: capplets/mouse/mouse.desktop.in.h:1
+#: capplets/mouse/gnome-settings-mouse.desktop.in.h:1
 msgid "Mouse"
 msgstr "Pelė"
 
-#: capplets/mouse/mouse.desktop.in.h:2
+#: capplets/mouse/gnome-settings-mouse.desktop.in.h:2
 msgid "Set your mouse preferences"
 msgstr "Nustatyti pelės parinktis"
 
@@ -2046,6 +2047,10 @@ msgstr "_Saugi HTTP tarpinė stotis:"
 msgid "_Username:"
 msgstr "Vartotojo _vardas:"
 
+#: capplets/sound/gnome-settings-sound.desktop.in.h:1
+msgid "Enable sound and associate sounds with events"
+msgstr "Leisti garsą ir susieti garsus su įvykiais"
+
 #: capplets/sound/sound-properties-capplet.c:239
 msgid "Sound preferences"
 msgstr "Garso parinktys"
@@ -2089,10 +2094,6 @@ msgstr "Garsai įv_ykiams"
 #: capplets/sound/sound-properties.glade.h:10
 msgid "_Visual feedback:"
 msgstr "_Vaizdinis skambutis:"
-
-#: capplets/sound/sound.desktop.in.h:1
-msgid "Enable sound and associate sounds with events"
-msgstr "Leisti garsą ir susieti garsus su įvykiais"
 
 #: capplets/theme-switcher/control/control.c:18
 msgid "Eenie Meenie Mynie Moe Catcha Tiger By Its Toe"
@@ -2152,6 +2153,21 @@ msgid ""
 msgstr ""
 "Nerasta nė viena tema. Tai tikriausiai reiškia, kad neteisingai įdiegtas "
 "\"Temos parinkčių\" dialogas, arba nėra įdiegtas \"gnome-themes\" paketas."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:127
+msgid "No theme file location specified to install"
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-installer.c:146
+msgid "The theme file location specified to install is invalid"
+msgstr ""
+
+#: capplets/theme-switcher/gnome-theme-installer.c:173
+#, c-format
+msgid ""
+"%s is the path where the theme files will be installed. This can not be "
+"selected as the source location"
+msgstr ""
 
 #: capplets/theme-switcher/gnome-theme-manager.c:645
 #: capplets/theme-switcher/gnome-theme-manager.c:705
@@ -2282,21 +2298,13 @@ msgstr "_Išsaugoti temą..."
 msgid "_Theme name:"
 msgstr "_Temos pavadinimas:"
 
-#: capplets/ui-properties/behavior.desktop.in.h:1
+#: capplets/ui-properties/gnome-ui-properties.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
 msgstr "Nustatyti meniu ir įrankių juostos išvaizdą programose"
 
-#: capplets/ui-properties/behavior.desktop.in.h:2
+#: capplets/ui-properties/gnome-ui-properties.desktop.in.h:2
 msgid "Menus & Toolbars"
 msgstr "Meniu ir įrankių juostos"
-
-#: capplets/ui-properties/behavior.desktop.in.in.h:1
-msgid "Behavior"
-msgstr "Elgsena"
-
-#: capplets/ui-properties/behavior.desktop.in.in.h:2
-msgid "Sets the default behavior of GNOME applications"
-msgstr "Nustato įprastą GNOME programų elgseną"
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:2
 msgid "<b>Behavior and Appearance</b>"
@@ -2453,7 +2461,7 @@ msgstr "Langų savybės"
 msgid "Windows"
 msgstr "Langai"
 
-#: control-center/capplet-dir-view-list.c:324
+#: control-center/capplet-dir-view-list.c:319
 #, c-format
 msgid "GNOME Control Center: %s"
 msgstr "GNOME valdymo centras: %s"
@@ -3144,6 +3152,12 @@ msgstr "Ar rodyti įdiegtų temų sumažintus paveiksliukus"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Ar rodyti mažus temų paveiksliukus"
+
+#~ msgid "Behavior"
+#~ msgstr "Elgsena"
+
+#~ msgid "Sets the default behavior of GNOME applications"
+#~ msgstr "Nustato įprastą GNOME programų elgseną"
 
 #~ msgid "radiobutton1"
 #~ msgstr "radiobutton1"
