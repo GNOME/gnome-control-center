@@ -20,9 +20,7 @@ desktop_files = $(capplets:=.desktop)
 desktop_in_files = $(desktop_files:.desktop=.desktop.in)
 desktop_in_in_files = $(desktop_files:.desktop=.desktop.in.in)
 
-cappletgroup = Advanced
-
-desktopfilesdir = $(GNOMECC_DESKTOP_DIR)/$(cappletgroup)
+desktopfilesdir = $(GNOMECC_DESKTOP_DIR)
 desktopfiles_DATA = $(desktop_files)
 
 CLEANFILES = $(desktop_files) $(desktop_in_files)
@@ -34,7 +32,7 @@ $(desktop_in_files): %.desktop.in: %.desktop.in.in
 $(desktop_files): %.desktop: %.desktop.in
 	$(top_builddir)/intltool-merge -d $(top_srcdir)/po $< $@
 
-all-local: $(desktop_files)
+all-local: $(desktop_files) $(groups_files)
 
 
 
@@ -50,7 +48,7 @@ groups_files = $(groups:=.directory)
 groups_in_files = $(groups_files:.directory=.directory.in)
 groups_in_in_files = $(groups_files:.directory=.directory.in.in)
 
-Gnomeccdir = $(GNOMECC_DESKTOP_DIR)/$(groups)
+Gnomeccdir = $(datadir)/gnome/vfolders
 Gnomecc_DATA = $(groups_files)
 
 $(groups_in_files): %.directory.in: %.directory.in.in
@@ -58,10 +56,3 @@ $(groups_in_files): %.directory.in: %.directory.in.in
 
 $(groups_files): %.directory: %.directory.in
 	$(top_builddir)/intltool-merge -d $(top_srcdir)/po $< $@
-
-## We need to install this ourselves cause we change the name of the
-## file to .directory. 
-install-data-local:
-	$(mkinstalldirs) $(DESTDIR)$(Gnomeccdirp)
-	$(INSTALL_DATA) $(groups).directory $(DESTDIR)$(Gnomeccdir)/.directory
-

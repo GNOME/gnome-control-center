@@ -11,6 +11,9 @@ Glade_DATA = background-properties.glade
 iconsdir   = $(GNOMECC_ICONS_DIR)
 icons_DATA = background-capplet.png
 
+desktop_iconsdir = $(datadir)/pixmaps
+desktop_icons_DATA = background-capplet.png
+
 desktopdir = $(GNOMECC_DESKTOP_DIR)
 Desktop_in_files = background.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)

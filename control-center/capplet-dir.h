@@ -27,6 +27,7 @@
 #include <gnome.h>
 #include <libgnome/gnome-desktop-item.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
+#include <libgnomevfs/gnome-vfs.h>
 
 #define CAPPLET_DIR_ENTRY(obj) ((CappletDirEntry *) obj)
 #define CAPPLET_DIR(obj) ((CappletDir *) obj)
@@ -53,7 +54,7 @@ struct _CappletDirEntry
 	gchar **exec;
 	gchar *label;
 	gchar *icon;
-	gchar *path;
+        GnomeVFSURI *uri;
 	GdkPixbuf *pb;
 	CappletDir *dir;	
 };

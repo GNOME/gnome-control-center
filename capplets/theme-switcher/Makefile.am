@@ -9,7 +9,7 @@ gtk2_theme_selector_capplet_LDFLAGS = -export-dynamic
 
 @INTLTOOL_DESKTOP_RULE@
 
-desktopdir = $(GNOMECC_DESKTOP_DIR)/Advanced
+desktopdir = $(GNOMECC_DESKTOP_DIR)
 Desktop_in_files = gtk-theme-selector.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 

@@ -54,6 +54,47 @@ CappletDirView *(*get_view_cb) (CappletDir *dir, CappletDirView *launcher);
 /* nice global table for capplet lookup */
 GHashTable *capplet_hash = NULL;
 
+static char * 
+find_icon (const char *icon, GnomeDesktopItem *dentry) 
+{
+        char *icon_file = strdup (icon);
+
+	if (icon_file[0] == 0) {
+		g_free(icon_file);
+		icon_file = NULL;
+	}
+	
+	if (icon_file) {
+		if (icon_file[0] != '/')
+		{
+			gchar *old = icon_file;
+			icon_file = g_concat_dir_and_file (PIXMAPS_DIR, old);
+			g_free (old);
+		}
+		if (!g_file_exists (icon_file) || g_file_test(icon_file, G_FILE_TEST_IS_DIR))
+		{
+			const gchar *icon;
+			g_free (icon_file);
+			icon = gnome_desktop_item_get_string (dentry, GNOME_DESKTOP_ITEM_ICON);
+			if (icon)
+				icon_file = gnome_pixmap_file (icon);
+	
+			if (!icon_file)
+				icon_file = gnome_pixmap_file ("gnome-unknown.png");
+		}
+	} else {
+		icon_file = gnome_program_locate_file
+			(gnome_program_get (), GNOME_FILE_DOMAIN_APP_PIXMAP,
+			 "control-center.png", TRUE, NULL);
+	}
+
+	if (!icon_file) { /* if icon_file still NULL */
+		icon_file = gnome_pixmap_file ("gnome-unknown.png");
+	}
+
+	return icon_file;
+}
+
 CappletDirEntry *
 capplet_new (CappletDir *dir, gchar *desktop_path) 
 {
@@ -70,9 +111,9 @@ capplet_new (CappletDir *dir, gchar *desktop_path)
 		return entry;
 	}
 
-	dentry = gnome_desktop_item_new_from_file (desktop_path,
-						   GNOME_DESKTOP_ITEM_TYPE_NULL,
-						   NULL);
+	dentry = gnome_desktop_item_new_from_uri (desktop_path,
+						  GNOME_DESKTOP_ITEM_TYPE_NULL,
+						  NULL);
 	if (dentry == NULL)
 		return NULL;
 
@@ -98,43 +139,9 @@ capplet_new (CappletDir *dir, gchar *desktop_path)
 
 	entry->label = g_strdup (gnome_desktop_item_get_string (dentry,
 			GNOME_DESKTOP_ITEM_NAME));
-	entry->icon = g_strdup (gnome_desktop_item_get_string (dentry, GNOME_DESKTOP_ITEM_ICON));
-
-	if (entry->icon[0] == 0) {
-		g_free(entry->icon);
-		entry->icon = NULL;
-	}
-	
-	if (entry->icon) {
-		if (entry->icon[0] != '/')
-		{
-			gchar *old = entry->icon;
-			entry->icon = g_concat_dir_and_file (PIXMAPS_DIR, old);
-			g_free (old);
-		}
-		if (!g_file_exists (entry->icon) || g_file_test(entry->icon, G_FILE_TEST_IS_DIR))
-		{
-			const gchar *icon;
-			g_free (entry->icon);
-			icon = gnome_desktop_item_get_string (dentry, GNOME_DESKTOP_ITEM_ICON);
-			if (icon)
-				entry->icon = gnome_pixmap_file (icon);
-	
-			if (!entry->icon)
-				entry->icon = gnome_pixmap_file ("gnome-unknown.png");
-		}
-	} else {
-		entry->icon = gnome_program_locate_file
-			(gnome_program_get (), GNOME_FILE_DOMAIN_APP_PIXMAP,
-			 "control-center.png", TRUE, NULL);
-	}
-
-	if (!entry->icon) { /* if entry->icon still NULL */
-		entry->icon = gnome_pixmap_file ("gnome-unknown.png");
-	}
-
+	entry->icon = find_icon (gnome_desktop_item_get_string (dentry, GNOME_DESKTOP_ITEM_ICON), dentry);
 	entry->pb = gdk_pixbuf_new_from_file (entry->icon, NULL);
-	entry->path = g_strdup (gnome_desktop_item_get_location (dentry));
+	entry->uri = gnome_vfs_uri_new (desktop_path);
 	entry->exec = vec;
 	entry->dir = dir;
 
@@ -144,40 +151,46 @@ capplet_new (CappletDir *dir, gchar *desktop_path)
 }
 
 CappletDirEntry *
-capplet_dir_new (CappletDir *dir, gchar *dir_path) 
+capplet_dir_new (CappletDir *dir, gchar *dir_path)
 {
 	CappletDir *capplet_dir;
 	CappletDirEntry *entry;
-	gchar *desktop_path;
+	GnomeVFSURI *desktop_uri;
+	GnomeVFSURI *dir_uri;
+	char *desktop_uri_string;
 
 	g_return_val_if_fail (dir_path != NULL, NULL);
+
+	dir_uri = gnome_vfs_uri_new (dir_path);
 
 	entry = g_hash_table_lookup (capplet_hash, dir_path);
 	if (entry) {
 		return entry;
 	}
 
-	desktop_path = g_concat_dir_and_file (dir_path, ".directory");
+	desktop_uri = gnome_vfs_uri_append_file_name (dir_uri, ".directory");
+	desktop_uri_string = gnome_vfs_uri_to_string (desktop_uri, GNOME_VFS_URI_HIDE_NONE);
 
 	capplet_dir = g_new0 (CappletDir, 1);
 	entry = CAPPLET_DIR_ENTRY (capplet_dir);
 
 	entry->type = TYPE_CAPPLET_DIR;
-	entry->entry = gnome_desktop_item_new_from_file (desktop_path,
+	entry->entry = gnome_desktop_item_new_from_uri (desktop_uri_string,
 			GNOME_DESKTOP_ITEM_TYPE_NULL,
 			NULL);
 	entry->dir = dir;
-	entry->path = g_strdup (dir_path);
+	entry->uri = dir_uri;
 
-	g_free (desktop_path);
+	gnome_vfs_uri_unref (desktop_uri);
+	g_free (desktop_uri_string);
 
 	if (entry->entry) {
 		entry->label = g_strdup (gnome_desktop_item_get_string (
 				entry->entry,
 				GNOME_DESKTOP_ITEM_NAME));
-		entry->icon = g_strdup (gnome_desktop_item_get_string (
-				entry->entry,
-				GNOME_DESKTOP_ITEM_ICON));
+		entry->icon = find_icon (gnome_desktop_item_get_string (entry->entry,
+									GNOME_DESKTOP_ITEM_ICON),
+					 entry->entry);
 
 		if (!entry->icon)
 			entry->icon = gnome_program_locate_file
@@ -193,7 +206,7 @@ capplet_dir_new (CappletDir *dir, gchar *dir_path)
 
 	entry->dir = dir;
 
-	g_hash_table_insert (capplet_hash, entry->path, entry);
+	g_hash_table_insert (capplet_hash, dir_path, entry);
 
 	capplet_dir_load (CAPPLET_DIR (entry));
 
@@ -217,7 +230,7 @@ capplet_dir_entry_destroy (CappletDirEntry *entry)
 
 	g_free (entry->label);
 	g_free (entry->icon);
-	g_free (entry->path);
+	gnome_vfs_uri_unref (entry->uri);
 	g_strfreev (entry->exec);
 	gnome_desktop_item_unref (entry->entry);
 	g_free (entry);
@@ -323,48 +336,47 @@ node_compare (gconstpointer a, gconstpointer b)
 static GSList *
 read_entries (CappletDir *dir) 
 {
-        DIR *parent_dir;
-        struct dirent *child_dir;
-        struct stat filedata;
 	GSList *list = NULL;
 	CappletDirEntry *entry;
 	gchar *fullpath, *test;
+	GnomeVFSURI *fulluri;
+	GnomeVFSDirectoryHandle *parent_dir;
+	GnomeVFSResult result;
 
-        parent_dir = opendir (CAPPLET_DIR_ENTRY (dir)->path);
-        if (parent_dir == NULL)
-                return NULL;
+	GnomeVFSFileInfo *child = gnome_vfs_file_info_new ();
 
-        while ( (child_dir = readdir (parent_dir)) ) {
-                if (child_dir->d_name[0] == '.')
-			continue;
+	result = gnome_vfs_directory_open_from_uri (&parent_dir, CAPPLET_DIR_ENTRY (dir)->uri,
+						    GNOME_VFS_FILE_INFO_DEFAULT);
 
-		/* we check to see if it is interesting. */
-		fullpath = g_concat_dir_and_file (CAPPLET_DIR_ENTRY (dir)->path, child_dir->d_name);
-		
-		if (stat (fullpath, &filedata) == -1) {
-			g_free (fullpath);
-			continue;
-		}
+	if (result != GNOME_VFS_OK)
+	        return NULL;
+	
+	while ( gnome_vfs_directory_read_next (parent_dir, child) == GNOME_VFS_OK ) {
+      	        if (child->name[0] == '.')
+	                continue;
+		 
+		fulluri = gnome_vfs_uri_append_path (CAPPLET_DIR_ENTRY (dir)->uri, child->name);
+		fullpath = gnome_vfs_uri_to_string (fulluri, GNOME_VFS_URI_HIDE_NONE);
 
 		entry = NULL;
-		
-		if (S_ISDIR (filedata.st_mode)) {
-			entry = capplet_dir_new (dir, fullpath);
+
+		if (child->type == GNOME_VFS_FILE_TYPE_DIRECTORY) {
+		        entry = capplet_dir_new (dir, fullpath);
 		} else {
-			test = rindex(child_dir->d_name, '.');
+			test = rindex(child->name, '.');
 
 			/* if it's a .desktop file, it's interesting for sure! */
 			if (test && !strcmp (".desktop", test))
 				entry = capplet_new (dir, fullpath);
 		}
-		
+
 		if (entry)
 			list = g_slist_prepend (list, entry);
 		
 		g_free (fullpath);
         }
         
-        closedir (parent_dir);
+	gnome_vfs_directory_close (parent_dir);
 
 	list = g_slist_sort (list, node_compare);
 
@@ -439,12 +451,12 @@ get_root_capplet_dir (void)
 	if (root_dir == NULL) {
 		CappletDirEntry *entry;
 
-		entry = capplet_dir_new (NULL, SETTINGS_DIR);
+		entry = capplet_dir_new (NULL, "preferences:///");
 
 		if (entry)
 			root_dir = CAPPLET_DIR (entry);
 		if (!root_dir)
-			g_warning ("Could not find directory of control panels [%s]", SETTINGS_DIR);
+			g_warning ("Could not find directory of control panels [%s]", "preferences:///");
 	}
 
 	return root_dir;

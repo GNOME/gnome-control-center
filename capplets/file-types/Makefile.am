@@ -19,7 +19,7 @@ gnome2_file_types_properties_SOURCES =					\
 Gladedir   = $(GNOMECC_GLADE_DIR)
 Glade_DATA = file-types-properties.glade
 
-desktopdir = $(GNOMECC_DESKTOP_DIR)/Advanced
+desktopdir = $(GNOMECC_DESKTOP_DIR)
 Desktop_in_files = file-types.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 

@@ -28,3 +28,6 @@ gnome2_settings_daemon_LDADD = \
 	$(top_builddir)/libsounds/libsounds.a		\
 	$(XF86MISC_LIBS)
 
+
+
+

@@ -6,7 +6,7 @@ gnome2_ui_properties_SOURCES = \
 
 @INTLTOOL_DESKTOP_RULE@
 
-desktopdir = $(GNOMECC_DESKTOP_DIR)/Advanced
+desktopdir = $(GNOMECC_DESKTOP_DIR)
 Desktop_in_files = behavior.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 Gladedir   = $(GNOMECC_GLADE_DIR)

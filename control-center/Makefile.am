@@ -47,24 +47,8 @@ gnome2_control_center_LDADD = \
 	@GNOMECC_LIBS@ \
 	-lgnome-desktop-2
 
-EXTRA_DIST = gnomecc.desktop.in $(appicon_DATA) $(splash_DATA) $(glade_DATA) Gnome.directory.in.in
+EXTRA_DIST = gnomecc.desktop.in $(appicon_DATA) $(splash_DATA) $(glade_DATA)
 
 paneldir        = $(datadir)/gnome/apps/Settings
-ccenterdir      = $(datadir)/control-center-2/capplets
-ccenter_DATA = Gnome.directory
-groups = Gnome
-groups_files = $(groups:=.directory)
-groups_in_files = $(groups_files:.directory=.directory.in)
 
-
-$(groups_in_files): %.directory.in: %.directory.in.in
-	    sed s#Icon=#Icon=$(GNOMECC_ICONS_DIR)/control-center.png# < $< > $@
-
-$(groups_files): %.directory: %.directory.in
-	$(top_builddir)/intltool-merge -d $(top_srcdir)/po $< $@
-
-install-data-local:
-	$(mkinstalldirs) $(DESTDIR)$(datadir)/control-center-2/capplets
-	$(INSTALL_DATA) Gnome.directory $(DESTDIR)$(datadir)/control-center-2/capplets/.directory
-
-CLEANFILES=Gnome.directory Gnome.directory.in gnomecc.desktop
+CLEANFILES=gnomecc.desktop
