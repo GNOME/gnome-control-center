@@ -56,7 +56,6 @@ static gboolean authed;
 static void capplet_dir_view_init        (CappletDirView      *capplet_dir_view,
 					  CappletDirViewClass *class);
 static void capplet_dir_view_class_init  (CappletDirViewClass *class);
-static void capplet_dir_view_base_init   (CappletDirViewClass *class);
 
 static void capplet_dir_view_set_prop    (GObject        *object, 
 					  guint           prop_id,
@@ -156,11 +155,6 @@ capplet_dir_view_class_init (CappletDirViewClass *klass)
 				       G_PARAM_WRITABLE));
 
 	parent_class = G_OBJECT_CLASS (g_type_class_ref (G_TYPE_OBJECT));
-}
-
-static void
-capplet_dir_view_base_init (CappletDirViewClass *klass) 
-{
 }
 
 static void
@@ -284,12 +278,6 @@ capplet_dir_views_set_authenticated (gboolean amiauthedornot)
 	g_list_foreach (window_list, (GFunc)capplet_dir_view_update_authenticated, NULL);
 }
 
-static void
-print_somthing (GtkObject *o, char *s)
-{
-	g_print ("somthing destroyed: %s\n", s);
-}
-
 static void 
 close_cb (GtkWidget *widget, CappletDirView *view)
 {
@@ -331,6 +319,8 @@ about_menu_cb (GtkWidget *widget, CappletDirView *view)
 	gtk_widget_show (about);
 }
 
+#if 0
+
 static void
 menu_cb (GtkWidget *w, CappletDirView *view, CappletDirViewLayout layout)
 {
@@ -340,6 +330,8 @@ menu_cb (GtkWidget *w, CappletDirView *view, CappletDirViewLayout layout)
 	gtk_object_set (GTK_OBJECT (view), "layout", layout, NULL);
 }
 
+#endif
+
 #ifdef USE_HTML
 static void
 html_menu_cb (GtkWidget *w, CappletDirView *view)
@@ -347,6 +339,8 @@ html_menu_cb (GtkWidget *w, CappletDirView *view)
 	menu_cb (w, view, LAYOUT_HTML);
 }
 #endif
+
+#if 0
 
 static void
 icon_menu_cb (GtkWidget *w, CappletDirView *view)
@@ -369,6 +363,8 @@ button_cb (GtkWidget *w, CappletDirView *view, CappletDirViewLayout layout)
 	gtk_object_set (GTK_OBJECT (view), "layout", layout, NULL);
 }
 
+#endif
+
 #ifdef USE_HTML
 static void
 html_toggle_cb (GtkWidget *w, CappletDirView *view)
@@ -376,6 +372,8 @@ html_toggle_cb (GtkWidget *w, CappletDirView *view)
 	button_cb (w, view, LAYOUT_HTML);
 }
 #endif
+
+#if 0
 
 static void
 list_toggle_cb (GtkWidget *w, CappletDirView *view)
@@ -409,6 +407,8 @@ rootm_button_cb (GtkWidget *w, CappletDirView *view)
 	gdk_beep ();
 }
 
+#endif
+
 static void
 option_menu_activate (GtkWidget *w, CappletDirEntry *entry)
 {
@@ -425,9 +425,6 @@ void
 capplet_dir_view_load_dir (CappletDirView *view, CappletDir *dir) 
 {
 	GtkWidget *menu, *menuitem, *w, *hbox;
-	GdkPixbuf *pb, *scaled;
-	GdkPixmap *pixmap;
-	GdkBitmap *bitmap;
 	CappletDirEntry *entry;
 	int parents = 0;
 	gchar *title;
@@ -477,13 +474,11 @@ capplet_dir_view_load_dir (CappletDirView *view, CappletDir *dir)
 	gtk_widget_show_all (menu);
 }
 
-
+#if 0
 
 static void 
 help_cb (GtkWidget *widget, CappletDirView *view)
 {
-	gchar *tmp;
-
 	if (!gnome_help_display ("users-guide", "gcc.html",
 				 NULL))
 	{
@@ -499,6 +494,7 @@ help_cb (GtkWidget *widget, CappletDirView *view)
 	}
 }
 
+#endif
 
 #if 0
 static void 
@@ -518,7 +514,6 @@ static void
 prefs_changed_cb (GnomeCCPreferences *prefs) 
 {
 	GList *node;
-	CappletDirView *view;
 
 	for (node = window_list; node; node = node->next)
 		gtk_object_set (GTK_OBJECT (node->data), "layout", prefs->layout, NULL);

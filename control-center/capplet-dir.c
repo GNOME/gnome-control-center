@@ -250,22 +250,13 @@ capplet_activate (Capplet *capplet)
 
 	entry = CAPPLET_DIR_ENTRY (capplet);
 
-#warning FIXME: this should probably be root-manager-helper
-#if 0
-	if (!strncmp (entry->exec[0], "root-manager", strlen ("root-manager"))) {
-		start_capplet_through_root_manager (entry->entry);
+	if (capplet->launching) {
+		return;
 	} else {
-#endif
-		if (capplet->launching) {
-			return;
-		} else {
-			capplet->launching = TRUE;
-			gtk_timeout_add (1000, (GtkFunction) capplet_reset_cb, capplet);
-			gnome_desktop_item_launch (entry->entry, NULL, 0, NULL);
-		}
-#if 0
+		capplet->launching = TRUE;
+		gtk_timeout_add (1000, (GtkFunction) capplet_reset_cb, capplet);
+		gnome_desktop_item_launch (entry->entry, NULL, 0, NULL);
 	}
-#endif
 }
 
 void

@@ -136,8 +136,6 @@ gnomecc_preferences_copy (GnomeCCPreferences *new, GnomeCCPreferences *old)
 void 
 gnomecc_preferences_load (GnomeCCPreferences *prefs) 
 {
-	GConfEngine *engine;
-
 	g_return_if_fail (prefs != NULL);
 
 #if 0
@@ -267,8 +265,9 @@ prefs_dialog_cancel_cb (GtkWidget *widget, GladeXML *data)
 static void
 set_single_window_controls_sensitive (GladeXML *data, gboolean s) 
 {
-	GtkWidget *widget;
 #if 0
+	GtkWidget *widget;
+
 	widget = glade_xml_get_widget (prefs_dialog_data, "single_widget");
 	gtk_widget_set_sensitive (widget, s);
 	widget = glade_xml_get_widget (prefs_dialog_data, "multiple_widget");
@@ -287,8 +286,6 @@ tree_widget_toggled_cb (GtkWidget *widget)
 GtkWidget *
 gnomecc_preferences_get_config_dialog (GnomeCCPreferences *prefs) 
 {
-	GtkWidget *widget;
-
 	if (prefs_dialog_data) return prefs_dialog;
 
 	old_prefs = gnomecc_preferences_clone (prefs);

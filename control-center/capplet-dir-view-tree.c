@@ -64,7 +64,6 @@ populate_tree_branch (CappletDir *dir, GtkCTree *ctree, GtkCTreeNode *parent)
 		gdk_pixbuf_unref (pixbuf);
 		gdk_pixbuf_unref (scaled);
 
-#warning Should an array be created instead of passing &entry->label ?
 		current = gtk_ctree_insert_node 
 			(ctree, parent, NULL,
 			 &entry->label, 10,
@@ -121,7 +120,6 @@ tree_event_cb (GtkCTree *ctree, GdkEventButton *event,
 static GtkWidget *
 tree_create (CappletDirView *view) 
 {
-	GtkAdjustment *adjustment;
 	GtkWidget *w, *sw;
 	
 	sw = gtk_scrolled_window_new (NULL, NULL);

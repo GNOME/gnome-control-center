@@ -82,6 +82,8 @@ list_clean (CappletDirView *view)
 	g_free (data);
 }
 
+#if 0
+
 /*
  * Creates a 24-bits RGB value from a GdkColor
  */
@@ -134,6 +136,8 @@ flatten_alpha (GdkPixbuf *image, GnomeCanvas *canvas)
 	return item;
 }
 
+#endif
+
 static gpointer
 real_slist_nth_data (GSList *list, guint n, guint type)
 {
@@ -147,6 +151,8 @@ real_slist_nth_data (GSList *list, guint n, guint type)
 			return list->data;
 		i++;
 	}
+
+	return NULL;
 }
 
 static void
@@ -171,7 +177,7 @@ sidebar_select_cb (GtkTreeSelection *sel, CappletDirView *view)
 	if (data->ignore_selection)
 		return;
 
-	gtk_tree_selection_selected_foreach (sel, sidebar_dummy_foreach, &dir);
+	gtk_tree_selection_selected_foreach (sel, (GtkTreeSelectionForeachFunc) sidebar_dummy_foreach, &dir);
 	data->current = dir;
 	capplet_dir_entry_activate (CAPPLET_DIR_ENTRY (dir), view);
 }
@@ -275,8 +281,6 @@ list_populate (CappletDirView *view)
 {
 	GSList *list;
 	int i;
-	GnomeCanvasItem *item;
-	GtkTreeIter iter;
 	ListViewData *data = view->view_data;
 
 	g_return_if_fail (GNOME_IS_ICON_LIST (data->gil));
@@ -427,10 +431,8 @@ list_create (CappletDirView *view)
 	GtkAdjustment *adjustment;
 	GtkWidget *w, *sw, *vbox, *hbox;
 	GtkWidget *darea;
-	GSList *list;
 	ListViewData *data;
 	gchar *title;
-	int i;
 	GtkCellRenderer *renderer;
 	GtkTreeSelection *sel;
 
@@ -440,7 +442,7 @@ list_create (CappletDirView *view)
 	darea = data->header =  gtk_drawing_area_new ();
 	gtk_widget_set_usize (darea, 48, 48);
 	gtk_signal_connect (GTK_OBJECT (darea), "expose_event",
-			    header_expose_cb, view);
+			    (GCallback) header_expose_cb, view);
 
 	gtk_box_pack_start (GTK_BOX (vbox), darea, FALSE, FALSE, 0);
 		
@@ -464,7 +466,7 @@ list_create (CappletDirView *view)
 
 	sel = gtk_tree_view_get_selection (GTK_TREE_VIEW (w));
 	gtk_tree_selection_set_mode (sel, GTK_SELECTION_BROWSE);
-	g_signal_connect (G_OBJECT (sel), "changed", sidebar_select_cb, view);
+	g_signal_connect (G_OBJECT (sel), "changed", (GCallback) sidebar_select_cb, view);
 
 	sw = gtk_scrolled_window_new (NULL, NULL);
 	gtk_widget_set_usize (sw, 200, -1);
@@ -481,7 +483,8 @@ list_create (CappletDirView *view)
 
 	adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (sw));		
 
-	data->gil = w = gnome_icon_list_new (72, NULL, 0);
+	w = gnome_icon_list_new (72, NULL, 0);
+	data->gil = GNOME_ICON_LIST (w);
 	
 	title = g_concat_dir_and_file (ART_DIR, "title.png");
 	data->header_logo = gdk_pixbuf_new_from_file (title, NULL);

@@ -36,12 +36,8 @@
 int
 main (int argc, char **argv) 
 {
-	CORBA_ORB orb;
-
 	CappletDirEntry *entry;
 	CappletDir *dir;
-
-	static gchar *capplet = NULL;
 
         bindtextdomain (PACKAGE, GNOMELOCALEDIR);
 	bind_textdomain_codeset (PACKAGE, "UTF-8");
