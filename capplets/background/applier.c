@@ -95,6 +95,7 @@ struct _Renderer
 
 	guchar           *gradient_data;
 	GdkPixbuf        *wallpaper_pixbuf;  /* Alias only */
+	GdkPixbuf        *prescaled_pixbuf;  /* For tiled on preview */
 	GdkPixbuf        *pixbuf;
 	Pixmap            pixmap;
 };
@@ -731,6 +732,18 @@ renderer_render_wallpaper (Renderer *renderer)
 			      &renderer->wwidth, &renderer->wheight,
 			      &renderer->srcx, &renderer->srcy);
 
+		if (renderer->prefs->wallpaper_type == WPTYPE_TILED &&
+		    renderer->wwidth != renderer->pwidth &&
+		    renderer->wheight != renderer->pheight)
+			renderer->prescaled_pixbuf =
+				gdk_pixbuf_scale_simple
+				(renderer->wallpaper_pixbuf,
+				 renderer->wwidth,
+				 renderer->wheight,
+				 GDK_INTERP_BILINEAR);
+		else
+			renderer->prescaled_pixbuf = NULL;
+
 		if (renderer->prefs->adjust_opacity) {
 			guint alpha_value;
 			guint32 colorv;
@@ -756,6 +769,20 @@ renderer_render_wallpaper (Renderer *renderer)
 						 renderer->wx, renderer->wy,
 						 scalex, scaley,
 						 GDK_INTERP_BILINEAR,
+						 alpha_value);
+				else if (renderer->wwidth != 
+					 renderer->pwidth &&
+					 renderer->wheight != 
+					 renderer->pheight)
+					tile_composite
+						(renderer->prescaled_pixbuf,
+						 renderer->pixbuf,
+						 renderer->wx, renderer->wy,
+						 renderer->wwidth, 
+						 renderer->wheight,
+						 renderer->width,
+						 renderer->height,
+						 1.0, 1.0,
 						 alpha_value);
 				else
 					tile_composite
@@ -810,12 +837,20 @@ renderer_render_wallpaper (Renderer *renderer)
 				if (renderer->pixbuf != NULL)
 					gdk_pixbuf_unref (renderer->pixbuf);
 
-				renderer->pixbuf =
-					gdk_pixbuf_scale_simple
-					(renderer->wallpaper_pixbuf,
-					 renderer->wwidth,
-					 renderer->wheight,
-					 GDK_INTERP_BILINEAR);
+				if (renderer->prescaled_pixbuf !=
+				    renderer->wallpaper_pixbuf)
+				{
+					renderer->pixbuf =
+						gdk_pixbuf_scale_simple
+						(renderer->wallpaper_pixbuf,
+						 renderer->wwidth,
+						 renderer->wheight,
+						 GDK_INTERP_BILINEAR);
+				} else {
+					renderer->pixbuf =
+						renderer->prescaled_pixbuf;
+					gdk_pixbuf_ref (renderer->pixbuf);
+				}
 			}
 		} else {
 			if (render_gradient_p (renderer, renderer->prefs)) {
@@ -834,6 +869,9 @@ renderer_render_wallpaper (Renderer *renderer)
 				gdk_pixbuf_ref (renderer->pixbuf);
 			}
 		}
+
+		if (renderer->prescaled_pixbuf != NULL)
+			gdk_pixbuf_unref (renderer->prescaled_pixbuf);
 	}
 }
 
