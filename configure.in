@@ -68,14 +68,6 @@ fi
 dnl session-properties
 AM_CONDITIONAL(SESSION, test "$GNOME_HAVE_SM" = true)
 
-AM_PATH_IMLIB(1.8.2, , [
-echo "ERROR: Needs a system with Imlib 1.8.2 or higher"
-echo "You can obtain it from:"
-echo "ftp://ftp.enlightenment.org/pub/enlightenment/"
-echo "ftp://www.rasterman.com/pub/enlightenment/"
-echo "ftp://ftp.labs.redhat.com/pub/imlib/"
-AC_MSG_ERROR([Fatal Error: no Imlib detected.])])
-
 CFLAGS="-O2 -g -Wall $CFLAGS"
 AC_SUBST(CFLAGS)
 
@@ -99,15 +91,46 @@ dnl ==============================================
 
 
 dnl ==============================================
+dnl Check for --enable-bonobo-conf option
+dnl ==============================================
+
+AC_ARG_ENABLE(bonobo-conf,[     --enable-bonobo-conf    Enable bonobo-conf support in the capplets],[
+PKG_BONOBO_CHECK="bonobo bonobox"
+PKG_BONOBO_CONF_CHECK="bonobo bonobo_conf >= 0.8"
+bonobo_conf_enable=yes
+libcommon_enable=yes
+LIBCOMMON_DIR=common
+moniker_enable=yes
+AC_DEFINE(HAVE_BONOBO)
+],[
+PKG_BONOBO_CHECK=
+PKG_BONOBO_CONF_CHECK=
+bonobo_conf_enable=
+libcommon_enable=
+LIBCOMMON_DIR=
+moniker_enable=
+])
+
+AC_SUBST(LIBCOMMON_DIR)
+
+AM_CONDITIONAL(BONOBO_CONF_ENABLE, test "x$bonobo_conf_enable" = "xyes")
+AM_CONDITIONAL(LIBCOMMON_ENABLE, test "x$libcommon_enable" = "xyes")
+AM_CONDITIONAL(MONIKER_ENABLE, test "x$moniker_enable" = "xyes")
+
+dnl ==============================================
 dnl Check that we meet the  dependencies
 dnl ==============================================
-capplet_modules="libcapplet >= 1.4.0 libglade-gnome gdk_pixbuf bonobo_conf >= 0.7 gdk_pixbuf_xlib gal > 0.8 $ARCHIVER_MODULE"
-PKG_CHECK_MODULES(CAPPLET, $capplet_modules)
-PKG_CHECK_MODULES(GNOMECC, gnomeui libglade xml gdk_pixbuf gnomecanvaspixbuf bonobo bonobox gtkhtml >= 0.9)
+capplet_modules="libcapplet >= 1.4.0 libglade-gnome gdk_pixbuf gdk_pixbuf_xlib gal > 0.8"
+PKG_CHECK_MODULES(CAPPLET, $capplet_modules $PKG_BONOBO_CONF_CHECK)
+PKG_CHECK_MODULES(GNOMECC, gnomeui libglade xml gdk_pixbuf gnomecanvaspixbuf $PKG_BONOBO_CHECK gtkhtml >= 0.9)
 PKG_CHECK_MODULES(RMHELPER, gnomeui gnomecanvaspixbuf)
-PKG_CHECK_MODULES(ARCHIVER, bonobo bonobo_conf xml)
-PKG_CHECK_MODULES(MONIKER, bonobo bonobo_conf xml)
+PKG_CHECK_MODULES(ARCHIVER, $PKG_BONOBO_CONF_CHECK xml)
 PKG_CHECK_MODULES(CONFIG_ARCHIVER, gnome xml)
+
+if test "x$moniker_enable" = "xyes"; then
+PKG_CHECK_MODULES(MONIKER, $PKG_BONOBO_CONF_CHECK xml)
+fi
+
 dnl ==============================================
 dnl End: Check that we meet the  dependencies
 dnl ==============================================
@@ -116,8 +139,19 @@ dnl ==============================================
 dnl ==============================================
 dnl Define the main variables
 dnl ==============================================
-GNOMECC_CAPPLETS_CFLAGS="${CAPPLET_CFLAGS} -I\$(top_srcdir)/intl -I\$(top_srcdir)/ -DG_LOG_DOMAIN=\"\\\"\$(cappletname)-properties\\\"\" -DGLADE_DATADIR=\"\\\"${datadir}/control-center\\\"\" -DGNOMELOCALEDIR=\"\\\"${datadir}/locale\\\"\" -I\$(top_srcdir)/capplets/common "
-GNOMECC_CAPPLETS_LIBS="${CAPPLET_LIBS} \$(top_builddir)/capplets/common/libcommon.a"
+if test "x$libcommon_enable" = "xyes"; then
+COMMON_CFLAGS="-I\$(top_srcdir)/capplets/common"
+COMMON_LIBS="\$(top_builddir)/capplets/common/libcommon.a"
+else
+COMMON_CFLAGS=
+COMMON_LIBS=
+fi
+
+EXTRA_CFLAGS="-I\$(top_srcdir)/intl -I\$(top_srcdir)/ -DG_LOG_DOMAIN=\"\\\"\$(cappletname)-properties\\\"\" -DGNOMELOCALEDIR=\"\\\"${datadir}/locale\\\"\""
+
+GNOMECC_CAPPLETS_CFLAGS="${CAPPLET_CFLAGS} ${EXTRA_CFLAGS} ${COMMON_CFLAGS}"
+GNOMECC_CAPPLETS_LIBS="${CAPPLET_LIBS} ${COMMON_LIBS}"
+
 GNOMECC_CAPPLETS_CLEANFILES="\$(desktop) \$(desktop).in"
 GNOMECC_CAPPLETS_EXTRA_DIST="ChangeLog \$(desktop).in.in \$(cappletname)-capplet.png \$(cappletname)-properties.glade \$(pixmaps_DATA)"
 
@@ -151,19 +185,13 @@ dnl End: Define the directories
 dnl ==============================================
 
 
-
-dnl Here is the new sed line that adds the full path to the Exec line :
-dnl	sed -e \"s#Icon=.\*#Icon=$(GNOMECC_ICONS_DIR)/${cappletname}-capplet.png#\" -e \"s#Exec=.\*#Exec=gnomecc --run-capplet ${bin_PROGRAMS}#\" < $< \> ${cappletname}.desktop.in\
-dnl
-dnl Chema
-
 dnl ==============================================
 dnl Macro for the common code
 dnl ==============================================
 AC_DEFUN(AC_PROG_GNOMECC_CAPPLETS,
 [
 GNOMECC_CAPPLETS_DESKTOP_IN_RULE='$(desktop).in: \%.desktop.in: \%.desktop.in.in\
-	sed -e \"s#Icon=.\*#Icon=$(GNOMECC_ICONS_DIR)/${cappletname}-capplet.png#\" < $< \> ${cappletname}.desktop.in\
+	sed -e \"s#@DESKTOP_EXEC_LINE@#$(DESKTOP_EXEC_LINE)#\" -e \"s#Icon=.\*#Icon=$(GNOMECC_ICONS_DIR)/${cappletname}-capplet.png#\" < $< \> ${cappletname}.desktop.in\
 \
 install-data-local:\
 	$(mkinstalldirs) $(datadir)/control-center/capplets/$(cappletgroup)\
@@ -172,9 +200,15 @@ install-data-am: install-data-local'
 GNOMECC_CAPPLETS_OAF_FILE_IN_RULE='$(oaffile): \%.oaf: \%.oaf.in\
 	sed -e "s#REPLACEME_PLIZ#$(bindir)/$(bin_PROGRAMS)#" < $< > ${oaffile}'
 AC_DIVERT_PUSH(AC_DIVERSION_SED)dnl
+
+
+
+
+
 s%@GNOMECC_CAPPLETS_DESKTOP_IN_RULE@%[$]GNOMECC_CAPPLETS_DESKTOP_IN_RULE%g
 s%@GNOMECC_CAPPLETS_OAF_FILE_IN_RULE@%[$]GNOMECC_CAPPLETS_OAF_FILE_IN_RULE%g
 AC_DIVERT_POP()dnl
+
 # Redirect the config.log output again, so that the ltconfig log is not
 # clobbered by the next message.
 exec 5>>./config.log

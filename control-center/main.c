@@ -37,6 +37,8 @@
 #include "capplet-dir.h"
 #include "capplet-dir-view.h"
 
+#ifdef HAVE_BONOBO
+
 static gint 
 real_launch_control (gchar *capplet)
 {
@@ -53,6 +55,8 @@ real_launch_control (gchar *capplet)
 	return FALSE;
 }
 
+#endif
+
 int
 main (int argc, char **argv) 
 {
@@ -60,8 +64,10 @@ main (int argc, char **argv)
 
 	static gchar *capplet = NULL;
 	static struct poptOption gnomecc_options[] = {
+#ifdef HAVE_BONOBO
 		{ "run-capplet", '\0', POPT_ARG_STRING, &capplet, 0,
 		  N_("Run the capplet CAPPLET"), N_("CAPPLET") },
+#endif
 		{ NULL, '\0', 0, NULL, 0, NULL, NULL }
 	};
 
@@ -80,7 +86,9 @@ main (int argc, char **argv)
 	gconf_init (argc, argv, NULL);
 #endif
 
+#ifdef HAVE_BONOBO
 	if (capplet == NULL) {
+#endif
 		CappletDirEntry *entry;
 		CappletDir *dir;
 
@@ -92,9 +100,11 @@ main (int argc, char **argv)
 		if (!entry)
 			return -1;
 		capplet_dir_entry_activate (entry, NULL);
+#ifdef HAVE_BONOBO
 	} else {
 		gtk_idle_add ((GtkFunction) real_launch_control, capplet);
 	}
+#endif
 
 	bonobo_main ();
 

@@ -1,13 +1,32 @@
 cappletname = mouse
+cappletgroup =
 bin_PROGRAMS = mouse-properties-capplet
 
 mouse_properties_capplet_LDADD = $(GNOMECC_CAPPLETS_LIBS)
-mouse_properties_capplet_SOURCES = \
-	main.c\
-	prefs-widget.c		prefs-widget.h \
+
+bonobo_sources =				\
+	mouse-properties-capplet.c
+
+legacy_sources =				\
+	main.c					\
+	prefs-widget.c		prefs-widget.h	\
 	preferences.c		preferences.h
 
-pixmaps_DATA = mouse-left.png mouse-right.png
+if BONOBO_CONF_ENABLE
+DESKTOP_EXEC_LINE = gnomecc --run-capplet mouse-properties
+mouse_properties_capplet_SOURCES = $(bonobo_sources)
+else
+DESKTOP_EXEC_LINE = mouse-properties-capplet
+mouse_properties_capplet_SOURCES = $(legacy_sources)
+endif
+
+pixmap_DATA = mouse-left.png mouse-right.png
+
+defaultsdir= $(datadir)/control-center/defaults
+defaults_DATA = mouse-properties.xml
+
+oafdir = $(datadir)/oaf
+oaf_DATA = Bonobo_Control_Capplet_mouse_properties.oaf
 
 ##
 ## You should not need to modify anything below this line
@@ -17,12 +36,11 @@ pixmaps_DATA = mouse-left.png mouse-right.png
 
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
-EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST) mouse-left.png mouse-right.png
+EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST) $(oaf_DATA) $(defaults_DATA) $(bonobo_sources) $(legacy_sources)
 iconsdir   = $(GNOMECC_ICONS_DIR)
 Gladedir   = $(GNOMECC_GLADE_DIR)
-pixmapsdir = $(GNOMECC_PIXMAPS_DIR)
+pixmapdir  = $(GNOMECC_PIXMAPS_DIR)
 Glade_DATA = $(cappletname)-properties.glade
 icons_DATA = $(cappletname)-capplet.png
 desktop    = $(cappletname).desktop
 all-local: $(desktop)
-

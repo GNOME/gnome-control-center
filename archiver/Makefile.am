@@ -20,7 +20,14 @@ INCLUDES = 			\
 	@ARCHIVER_CFLAGS@							\
 	@MONIKER_CFLAGS@
 
-bin_PROGRAMS = bonobo-moniker-archiver config-archiver
+if MONIKER_ENABLE
+BONOBO_MONIKER_ARCHIVER_BIN=bonobo-moniker-archiver
+else
+BONOBO_MONIKER_ARCHIVER_BIN=
+endif
+
+bin_PROGRAMS = $(BONOBO_MONIKER_ARCHIVER_BIN) config-archiver
+
 lib_LTLIBRARIES = libconfig_archiver.la
 
 libconfig_archiver_la_SOURCES = \

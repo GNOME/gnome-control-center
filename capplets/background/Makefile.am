@@ -3,11 +3,24 @@ cappletgroup =
 bin_PROGRAMS = background-properties-capplet
 
 background_properties_capplet_LDADD = $(GNOMECC_CAPPLETS_LIBS)
-background_properties_capplet_SOURCES = \
-	main.c\
-	applier.c			applier.h
-#	prefs-widget.c		prefs-widget.h \
-#preferences.c		preferences.h \
+
+bonobo_sources =				\
+	background-properties-capplet.c		\
+	applier.c applier.h
+
+legacy_sources =				\
+	main.c					\
+	applier.c		applier.h	\
+	prefs-widget.c		prefs-widget.h	\
+	preferences.c		preferences.h
+
+if BONOBO_CONF_ENABLE
+DESKTOP_EXEC_LINE = gnomecc --run-capplet background-properties
+background_properties_capplet_SOURCES = $(bonobo_sources)
+else
+DESKTOP_EXEC_LINE = background-properties-capplet
+background_properties_capplet_SOURCES = $(legacy_sources)
+endif
 
 pixmap_DATA = 
 
@@ -27,7 +40,7 @@ oaffile = $(oaf_DATA)
 
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
-EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST) $(defaults_DATA) $(oaf_DATA).in
+EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST) $(defaults_DATA) $(oaf_DATA).in $(bonobo_sources) $(legacy_sources)
 iconsdir   = $(GNOMECC_ICONS_DIR)
 Gladedir   = $(GNOMECC_GLADE_DIR)
 pixmapdir  = $(GNOMECC_PIXMAPS_DIR)

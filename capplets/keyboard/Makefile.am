@@ -4,10 +4,21 @@ bin_PROGRAMS = keyboard-properties
 
 keyboard_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS) $(XF86MISC_LIBS)
 
-keyboard_properties_SOURCES = \
-	main.c \
-	bonobo-property-editor-range.c \
-	bonobo-property-editor-range.h 
+bonobo_sources =				\
+	keyboard-properties.c
+
+legacy_sources =				\
+	main.c					\
+	prefs-widget.c		prefs-widget.h	\
+	preferences.c		preferences.h
+
+if BONOBO_CONF_ENABLE
+DESKTOP_EXEC_LINE = gnomecc --run-capplet keyboard-properties
+keyboard_properties_SOURCES = $(bonobo_sources)
+else
+DESKTOP_EXEC_LINE = keyboard-properties
+keyboard_properties_SOURCES = $(legacy_sources)
+endif
 
 ## this is not generic
 
@@ -29,7 +40,7 @@ oaf_DATA = Bonobo_Control_Capplet_keyboard_properties.oaf
 
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
-EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST) $(defaults_DATA) $(oaf_DATA).in
+EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST) $(defaults_DATA) $(oaf_DATA).in $(bonobo_sources) $(legacy_sources)
 iconsdir   = $(GNOMECC_ICONS_DIR)
 Gladedir   = $(GNOMECC_GLADE_DIR)
 pixmapdir  = $(GNOMECC_PIXMAPS_DIR)

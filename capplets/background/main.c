@@ -1,10 +1,10 @@
 /* -*- mode: c; style: linux -*- */
 
 /* main.c
- * Copyright (C) 2000-2001 Ximian, Inc.
+ * Copyright (C) 2000 Helix Code, Inc.
  *
- * Written by: Bradford Hovinen <hovinen@ximian.com>
- *             Richard Hestilow <hestilow@ximian.com>
+ * Written by Bradford Hovinen (hovinen@helixcode.com)
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2, or (at your option)
@@ -25,253 +25,289 @@
 #  include <config.h>
 #endif
 
+#include <gtk/gtk.h>
 #include <gnome.h>
-#include <bonobo.h>
+#include <libgnomeui/gnome-window-icon.h>
+#include <tree.h>
+#include <parser.h>
+#include <fcntl.h>
 
 #include <glade/glade.h>
-#include <gtk/gtksignal.h>
-#include "capplet-util.h"
-#include "applier.h"
+
+#include <capplet-widget.h>
+
+#ifdef HAVE_XIMIAN_ARCHIVER
+#  include <ximian-archiver/archive.h>
+#  include <ximian-archiver/location.h>
+#endif /* HAVE_XIMIAN_ARCHIVER */
+
+#include "preferences.h"
+#include "prefs-widget.h"
+
+static Preferences *prefs;
+static Preferences *old_prefs;
+static PrefsWidget *prefs_widget;
+
+static guint ok_handler_id;
+static guint cancel_handler_id;
+
+#ifdef HAVE_XIMIAN_ARCHIVER
+
+static Archive *archive;
+static gboolean outside_location;
 
 static void
-bonobo_config_set_filename (Bonobo_ConfigDatabase db,
-			    const char *key,
-			    const char *value,
-			    CORBA_Environment *opt_ev);
-
-static Applier *applier = NULL;
-
-/* Popt option for compat reasons */
-static gchar *background_image = NULL;
-
-const struct poptOption options [] = {
-	{ "background-image", 'b', POPT_ARG_STRING, &background_image, 0,
-	  N_("Set background image."), N_("IMAGE-FILE") },
-	{NULL, '\0', 0, NULL, 0}
-};
-
-static void
-apply_settings (Bonobo_ConfigDatabase db)
+store_archive_data (void) 
 {
-	CORBA_Environment ev;
-	
-	CORBA_exception_init (&ev);
-	if (!applier)
-		applier = APPLIER (applier_new ());
+	Location *location;
+	xmlDocPtr xml_doc;
 
-	/* HAckity hackty */
-	if (background_image)
-	{
-		bonobo_config_set_filename (db, "/main/wallpaper_filename", background_image, NULL);
-		Bonobo_ConfigDatabase_sync (db, &ev);
+	if (capplet_get_location () == NULL)
+		location = archive_get_current_location (archive);
+	else
+		location = archive_get_location (archive,
+						 capplet_get_location ());
+
+	xml_doc = preferences_write_xml (prefs);
+	location_store_xml (location, "background-properties-capplet",
+			    xml_doc, STORE_MASK_PREVIOUS);
+	xmlFreeDoc (xml_doc);
+	archive_close (archive);
+}
+
+#endif /* HAVE_XIMIAN_ARCHIVER */
+
+static void
+ok_cb (GtkWidget *widget) 
+{
+#ifdef HAVE_XIMIAN_ARCHIVER
+	if (!outside_location) {
+		preferences_save (prefs);
+		preferences_apply_now (prefs);
+	}
+#else /* !HAVE_XIMIAN_ARCHIVER */
+	preferences_save (prefs);
+	preferences_apply_now (prefs);
+#endif /* HAVE_XIMIAN_ARCHIVER */
+
+	gtk_signal_disconnect (GTK_OBJECT (prefs_widget), ok_handler_id);
+	gtk_signal_disconnect (GTK_OBJECT (prefs_widget), cancel_handler_id);
+	gtk_object_destroy (GTK_OBJECT (prefs_widget));
+#ifdef HAVE_XIMIAN_ARCHIVER
+	store_archive_data ();
+#endif /* HAVE_XIMIAN_ARCHIVER */
+}
+
+static void
+cancel_cb (GtkWidget *widget) 
+{
+#ifdef HAVE_XIMIAN_ARCHIVER
+	if (!outside_location) {
+		preferences_save (old_prefs);
+		preferences_apply_now (old_prefs);
+	}
+#else /* !HAVE_XIMIAN_ARCHIVER */
+	preferences_save (prefs);
+	preferences_apply_now (prefs);
+#endif /* HAVE_XIMIAN_ARCHIVER */
+
+	gtk_signal_disconnect (GTK_OBJECT (prefs_widget), ok_handler_id);
+	gtk_signal_disconnect (GTK_OBJECT (prefs_widget), cancel_handler_id);
+	gtk_object_destroy (GTK_OBJECT (prefs_widget));
+}
+
+static void 
+setup_capplet_widget (void)
+{
+	preferences_freeze (prefs);
+
+	prefs_widget = PREFS_WIDGET (prefs_widget_new (prefs));
+
+	ok_handler_id =
+		gtk_signal_connect (GTK_OBJECT (prefs_widget), "ok", 
+				    GTK_SIGNAL_FUNC (ok_cb), NULL);
+	cancel_handler_id =
+		gtk_signal_connect (GTK_OBJECT (prefs_widget), "cancel", 
+				    GTK_SIGNAL_FUNC (cancel_cb), NULL);		
+
+	gtk_widget_show_all (GTK_WIDGET (prefs_widget));
+
+	preferences_thaw (prefs);
+}
+
+#ifdef HAVE_XIMIAN_ARCHIVER
+
+static void
+do_get_xml (void) 
+{
+	Preferences *prefs;
+	xmlDocPtr doc;
+
+	prefs = PREFERENCES (preferences_new ());
+	preferences_load (prefs);
+	doc = preferences_write_xml (prefs);
+	xmlDocDump (stdout, doc);
+	gtk_object_destroy (GTK_OBJECT (prefs));
+}
+
+static void
+do_set_xml (gboolean apply_settings) 
+{
+	xmlDocPtr doc;
+	char buffer[16384];
+	GString *doc_str;
+	int t = 0;
+
+	fflush (stdin);
+
+	fcntl (fileno (stdin), F_SETFL, 0);
+
+	doc_str = g_string_new ("");
+
+	while ((t = read (fileno (stdin), buffer, sizeof (buffer) - 1)) != 0) {
+		buffer[t] = '\0';
+		g_string_append (doc_str, buffer);
 	}
 
-	applier_apply_prefs (applier, CORBA_OBJECT_NIL, db, &ev, TRUE, FALSE);
-	CORBA_exception_free (&ev);
-}
+	if (doc_str->len > 0) {
+		doc = xmlParseDoc (doc_str->str);
+		g_string_free (doc_str, TRUE);
 
-static CORBA_any*
-gdk_color_to_bonobo (const gchar *colorstr)
-{
-	GdkColor tmp;
-	CORBA_Environment ev;
-	DynamicAny_DynAny dyn;
-	CORBA_any *any;
-	
-	g_return_val_if_fail (colorstr != NULL, NULL);
+		if (doc != NULL) {
+			prefs = preferences_read_xml (doc);
 
-	CORBA_exception_init (&ev);
-	
-	gdk_color_parse (colorstr, &tmp);
-	
-	dyn = CORBA_ORB_create_dyn_struct (bonobo_orb (),
-					   TC_Bonobo_Config_Color, &ev);
+			if (prefs != NULL) {
+				if (apply_settings) {
+					preferences_save (prefs);
+					preferences_apply_now (prefs);
+				}
 
-	DynamicAny_DynAny_insert_double (dyn, ((double)tmp.red)/65535, &ev);
-	DynamicAny_DynAny_next (dyn, &ev);
-	DynamicAny_DynAny_insert_double (dyn, ((double)tmp.green)/65535, &ev);
-	DynamicAny_DynAny_next (dyn, &ev);
-	DynamicAny_DynAny_insert_double (dyn, ((double)tmp.blue)/65535, &ev);
-	DynamicAny_DynAny_next (dyn, &ev);
-	DynamicAny_DynAny_insert_double (dyn, 0, &ev);
+				return;
+			}
+			else if (prefs != NULL) {
+				return;
+			}
 
-	any = DynamicAny_DynAny_to_any (dyn, &ev);
-
-	CORBA_Object_release ((CORBA_Object) dyn, &ev);
-	CORBA_exception_free (&ev);
-
-	return any;
-}
-
-static void
-copy_color_from_legacy (Bonobo_ConfigDatabase db,
-			const gchar *key, const gchar *legacy_key)
-{
-	gboolean def;
-	gchar *val_string;
-       
-	g_return_if_fail (key != NULL);
-	g_return_if_fail (legacy_key != NULL);
-
-	val_string = gnome_config_get_string_with_default (legacy_key, &def);
-
-	if (!def)
-	{
-		CORBA_any *color = gdk_color_to_bonobo (val_string);
-		bonobo_config_set_value (db, key, color, NULL);
-		bonobo_arg_release (color);
-	}
-	
-	g_free (val_string);
-}
-
-static void
-bonobo_config_set_filename (Bonobo_ConfigDatabase db,
-			    const char *key,
-			    const char *value,
-			    CORBA_Environment *opt_ev)
-{
-	CORBA_any *any;
-	
-	any = bonobo_arg_new (TC_Bonobo_Config_FileName);
-	*((CORBA_char **)(any->_value)) = CORBA_string_dup ((value)?(value):"");
-	bonobo_config_set_value (db, key, any, opt_ev);
-	bonobo_arg_release (any);	
-}
-
-static void
-get_legacy_settings (Bonobo_ConfigDatabase db) 
-{
-	gboolean val_boolean, def;
-	gchar *val_string, *val_filename;
-	int val_ulong, val_long;
-
-	COPY_FROM_LEGACY (filename, "/main/wallpaper_filename", string, "/Background/Default/wallpaper=none");
-	COPY_FROM_LEGACY (ulong, "/main/wallpaper_type", int, "/Background/Default/wallpaperAlign=0");
-	copy_color_from_legacy (db, "/main/color1", "/Background/Default/color1");
-	copy_color_from_legacy (db, "/main/color2", "/Background/Default/color2");
-
-	/* Code to deal with new enum - messy */
-	val_ulong = -1;
-	val_string = gnome_config_get_string_with_default ("/Background/Default/simple=solid", &def);
-	if (!def)
-	{
-		if (!strcmp (val_string, "solid"))
-			val_ulong = 0;
-		else
-		{
-			g_free (val_string);
-			val_string = gnome_config_get_string_with_default ("/Background/Default/gradient=vertical", &def);
-			if (!def)
-				val_ulong = !strcmp (val_string, "vertical");
+			xmlFreeDoc (doc);
 		}
-	}
-	
-	g_free (val_string);
-	
-	if (val_ulong != -1)
-		bonobo_config_set_ulong (db, "/main/orientation", val_ulong, NULL);
-	
-	val_boolean = gnome_config_get_bool_with_default ("/Background/Default/adjustOpacity=true", &def);
-	if (!def && val_boolean)
-	{
-		COPY_FROM_LEGACY (long, "/main/opacity", int, "/Background/Default/opacity=100");
-	}
-}
-
-static void
-property_change_cb (BonoboListener *listener,
-		    char *event_name,
-		    CORBA_any *any,
-		    CORBA_Environment *ev,
-		    Bonobo_PropertyBag pb)
-{
-	applier_apply_prefs (applier, pb, CORBA_OBJECT_NIL, ev, FALSE, TRUE);
-}
-
-static void
-realize_cb (GtkWidget *widget, Bonobo_PropertyBag bag)
-{
-	CORBA_Environment ev;
-
-	CORBA_exception_init (&ev);
-	applier_apply_prefs (applier, bag, CORBA_OBJECT_NIL, &ev, FALSE, TRUE);
-	CORBA_exception_free (&ev);
-}
-
-#define CUSTOM_CREATE_PEDITOR(type, corba_type, key, widget)                                              \
-        {                                                                              \
-		BonoboPEditor *ed = BONOBO_PEDITOR                                     \
-			(bonobo_peditor_##type##_construct (WID (widget)));            \
-		bonobo_peditor_set_property (ed, bag, key, TC_##corba_type, NULL);           \
+	} else {
+		g_critical ("No data to apply");
 	}
 
-
-static void
-setup_dialog (GtkWidget *widget, Bonobo_PropertyBag bag)
-{
-	BonoboPEditor *ed;
-	GladeXML *dialog;
-
-	dialog = gtk_object_get_data (GTK_OBJECT (widget), "glade-data");
-	ed = BONOBO_PEDITOR (bonobo_peditor_option_construct (0, WID ("color_option")));
-	bonobo_peditor_set_property (ed, bag, "orientation", TC_ulong, NULL);
-
-	CUSTOM_CREATE_PEDITOR (color, Bonobo_Config_Color, "color1", "colorpicker1");	
-	CUSTOM_CREATE_PEDITOR (color, Bonobo_Config_Color, "color2", "colorpicker2");	
-	CUSTOM_CREATE_PEDITOR (filename, Bonobo_Config_FileName, "wallpaper_filename", "image_fileentry");	
-
-	ed = BONOBO_PEDITOR (bonobo_peditor_option_construct (0, WID ("image_option")));
-	bonobo_peditor_set_property (ed, bag, "wallpaper_type", TC_ulong, NULL);
-
-	CUSTOM_CREATE_PEDITOR (int_range, long, "opacity", "opacity_spin");	
-	gtk_widget_hide (WID ("opacity_spin"));
-	gtk_widget_hide (WID ("opacity_label"));
-
-	bonobo_event_source_client_add_listener (bag, property_change_cb,
-						 NULL, NULL, bag);
-
-	gtk_signal_connect_after (GTK_OBJECT (applier_class_get_preview_widget ()), "realize", realize_cb, bag);
+	return;
 }
 
-static GtkWidget*
-create_dialog (void) 
+#endif /* HAVE_XIMIAN_ARCHIVER */
+
+static void
+do_restore_from_defaults (void) 
 {
-	GtkWidget *holder;
-	GtkWidget *widget;
-	GladeXML *dialog;
-
-	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/background-properties.glade", "prefs_widget");
-	widget = glade_xml_get_widget (dialog, "prefs_widget");
-	gtk_object_set_data (GTK_OBJECT (widget), "glade-data", dialog);
-
-	applier = APPLIER (applier_new ());
-
-	/* Minor GUI addition */
-	holder = WID ("preview_holder");
-	gtk_box_pack_start (GTK_BOX (holder),
-			    applier_class_get_preview_widget (),
-			    TRUE, TRUE, 0);
-	gtk_widget_show_all (holder);
-
-	gtk_signal_connect_object (GTK_OBJECT (widget), "destroy",
-				   GTK_SIGNAL_FUNC (gtk_object_destroy),
-			   	   GTK_OBJECT (dialog));
-
-	return widget;
+	prefs = PREFERENCES (preferences_new ());
+	preferences_save (prefs);
+	preferences_apply_now (prefs);
 }
 
 int
-main (int argc, char **argv) 
+main (int argc, char **argv)
 {
-	const gchar* legacy_files[] = { "Background", NULL };
-	
-	glade_gnome_init ();
-	gnomelib_register_popt_table (options, "background options");
+	GnomeClient *client;
+	GnomeClientFlags flags;
+	gint token, res;
+	gchar *restart_args[3];
 
-	capplet_init (argc, argv, legacy_files, apply_settings, create_dialog, setup_dialog, get_legacy_settings);
+	bindtextdomain (PACKAGE, GNOMELOCALEDIR);
+	textdomain (PACKAGE);
+
+	glade_gnome_init ();
+	res = gnome_capplet_init ("background-properties-capplet",
+				  VERSION, argc, argv, NULL,
+				  0, NULL);
+
+	if (res < 0) {
+		g_error ("Could not initialize the capplet.");
+	}
+	else if (res == 3) {
+#ifdef HAVE_XIMIAN_ARCHIVER
+		do_get_xml ();
+#endif /* HAVE_XIMIAN_ARCHIVER */
+		return 0;
+	}
+	else if (res == 4) {
+#ifdef HAVE_XIMIAN_ARCHIVER
+		do_set_xml (TRUE);
+#endif /* HAVE_XIMIAN_ARCHIVER */
+		return 0;
+	}
+	else if (res == 5) {
+		do_restore_from_defaults ();
+		return 0;
+	}
+
+	client = gnome_master_client ();
+	flags = gnome_client_get_flags (client);
+
+	if (flags & GNOME_CLIENT_IS_CONNECTED) {
+		token = gnome_startup_acquire_token
+			("GNOME_BACKGROUND_PROPERTIES",
+			 gnome_client_get_id (client));
+
+		if (token) {
+			gnome_client_set_priority (client, 20);
+			gnome_client_set_restart_style (client,
+							GNOME_RESTART_ANYWAY);
+			restart_args[0] = argv[0];
+			restart_args[1] = "--init-session-settings";
+			restart_args[2] = NULL;
+			gnome_client_set_restart_command (client, 2,
+							  restart_args);
+		} else {
+			gnome_client_set_restart_style (client,
+							GNOME_RESTART_NEVER);
+		}
+	} else {
+		token = 1;
+	}
 
 	gnome_window_icon_set_default_from_file
 		(GNOMECC_ICONS_DIR"/gnome-ccbackground.png");
+
+#ifdef HAVE_XIMIAN_ARCHIVER
+	archive = ARCHIVE (archive_load (FALSE));
+
+	if (capplet_get_location () != NULL &&
+	    strcmp (capplet_get_location (),
+		    archive_get_current_location_id (archive)))
+	{
+		outside_location = TRUE;
+		do_set_xml (FALSE);
+		if (prefs == NULL) return -1;
+		preferences_freeze (prefs);
+	} else {
+		outside_location = FALSE;
+		prefs = PREFERENCES (preferences_new ());
+		preferences_load (prefs);
+	}
+
+	if (!outside_location && (token || res == 1)) {
+		preferences_apply_now (prefs);
+	}
+
+#else /* !HAVE_XIMIAN_ARCHIVER */
+
+	prefs = PREFERENCES (preferences_new ());
+	preferences_load (prefs);
+
+	if (token || res == 1)
+		preferences_apply_now (prefs);
+
+#endif /* HAVE_XIMIAN_ARCHIVER */
+
+	if (!res) {
+		old_prefs = PREFERENCES (preferences_clone (prefs));
+		setup_capplet_widget ();
+
+		capplet_gtk_main ();
+	}
+
 	return 0;
 }

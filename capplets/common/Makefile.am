@@ -11,4 +11,5 @@ INCLUDES = \
 noinst_LIBRARIES = libcommon.a
 
 libcommon_a_SOURCES = \
-	capplet-util.c		capplet-util.h
+	capplet-util.c			capplet-util.h			\
+	bonobo-property-editor-range.c	bonobo-property-editor-range.h
