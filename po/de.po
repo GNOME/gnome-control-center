@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 2.0.x\n"
-"POT-Creation-Date: 2002-11-23 21:17-0500\n"
-"PO-Revision-Date: 2002-11-14 21:15+0100\n"
+"POT-Creation-Date: 2002-12-02 13:43+0100\n"
+"PO-Revision-Date: 2002-12-02 13:43+0100\n"
 "Last-Translator: Christian Neumair <chris@gnome-de.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -239,6 +239,7 @@ msgid "pixels/second"
 msgstr "Pixel/Sekunde"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:42
+#: capplets/windows/gnome-window-properties.glade.h:7
 msgid "seconds"
 msgstr "Sekunden"
 
@@ -798,7 +799,7 @@ msgid "Minimizing and Maximizing"
 msgstr "Minimieren und Maximieren"
 
 #: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
-#: capplets/windows/gnome-window-properties.c:600
+#: capplets/windows/gnome-window-properties.c:649
 msgid "Meta"
 msgstr "Meta"
 
@@ -1855,80 +1856,74 @@ msgid "Select themes for various parts of the desktop"
 msgstr "Themen für verschiedenste Teile des Desktops festlegen"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
-#: capplets/theme-switcher/theme-properties.glade.h:4
+#: capplets/theme-switcher/theme-properties.glade.h:6
 msgid "Theme"
 msgstr "Thema"
 
 #: capplets/theme-switcher/theme-properties.glade.h:1
+msgid "Apply _Background"
+msgstr "_Hintergrund anwenden"
+
+#: capplets/theme-switcher/theme-properties.glade.h:2
+msgid "Apply _Font"
+msgstr "_Schrift anwenden"
+
+#: capplets/theme-switcher/theme-properties.glade.h:3
 msgid "Controls"
 msgstr "Fensterinhalt"
 
-#: capplets/theme-switcher/theme-properties.glade.h:2
+#: capplets/theme-switcher/theme-properties.glade.h:4
 msgid "Icons"
 msgstr "Icons"
 
-#: capplets/theme-switcher/theme-properties.glade.h:3
+#: capplets/theme-switcher/theme-properties.glade.h:5
 msgid "New themes can also be installed by dragging them into the window."
 msgstr ""
 "Neue Themen können installiert werden, indem Sie diese in dieses Fenster "
 "ziehen."
 
 # CHECK
-#: capplets/theme-switcher/theme-properties.glade.h:5
+#: capplets/theme-switcher/theme-properties.glade.h:7
 msgid "Theme Preferences"
 msgstr "Themen-Einstellungen"
 
-#: capplets/theme-switcher/theme-properties.glade.h:6
-#, fuzzy
-msgid ""
-"This theme suggests a matching\n"
-"background:"
-msgstr "Dieses Thema empfiehlt einen dazu passenden Hintergrund:"
-
 #: capplets/theme-switcher/theme-properties.glade.h:8
-#, fuzzy
 msgid ""
-"This theme suggests a matching\n"
-"font and background"
+"This theme suggests a\n"
+"background:"
 msgstr ""
-"Dieses Thema empfiehlt eine dazu passende Schrift und einen Hintergrund:"
+"Dieses Thema empfiehlt\n"
+"einen dazu passenden Hintergrund:"
 
 #: capplets/theme-switcher/theme-properties.glade.h:10
-msgid "This theme suggests a matching font:"
-msgstr "Dieses Thema empfiehlt eine dazu passende Schrift:"
-
-#: capplets/theme-switcher/theme-properties.glade.h:11
-#, fuzzy
-msgid "Use _Background"
-msgstr "Hintergrund"
+msgid ""
+"This theme suggests a\n"
+"font and background"
+msgstr ""
+"Dieses Thema empfiehlt eine\n"
+"dazu passende Schrift und einen Hintergrund:"
 
 #: capplets/theme-switcher/theme-properties.glade.h:12
-#, fuzzy
-msgid "Use _Font"
-msgstr "Schrift"
-
-#: capplets/theme-switcher/theme-properties.glade.h:13
-msgid "Use _Font "
+msgid ""
+"This theme suggests a\n"
+"font:"
 msgstr ""
+"Dieses Thema empfiehlt\n"
+"eine dazu passende Schrift:"
 
 #: capplets/theme-switcher/theme-properties.glade.h:14
-#, fuzzy
-msgid "Use _background"
-msgstr "Hintergrund"
-
-#: capplets/theme-switcher/theme-properties.glade.h:15
 msgid "Window Border"
 msgstr "Fensterrahmen"
 
-#: capplets/theme-switcher/theme-properties.glade.h:16
+#: capplets/theme-switcher/theme-properties.glade.h:15
 msgid "_Go to theme folder"
 msgstr "_Themenverzeichnis öffnen"
 
-#: capplets/theme-switcher/theme-properties.glade.h:17
+#: capplets/theme-switcher/theme-properties.glade.h:16
 msgid "_Install New Theme..."
 msgstr "Neues Thema _installieren..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:18
+#: capplets/theme-switcher/theme-properties.glade.h:17
 msgid "_Save Theme"
 msgstr "Thema _speichern"
 
@@ -1944,11 +1939,11 @@ msgstr "_Installieren"
 msgid "_Location of new theme:"
 msgstr "_Adresse des neuen Themas:"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:615
+#: capplets/theme-switcher/gnome-theme-manager.c:640
 msgid "Current modified"
 msgstr "Aktuell geändert"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:634
+#: capplets/theme-switcher/gnome-theme-manager.c:659
 msgid ""
 "No themes could be found on your system.  This probably means that your "
 "\"Theme Preferences\" dialog was improperly installed."
@@ -2086,7 +2081,7 @@ msgstr "_Beenden"
 msgid "_Save"
 msgstr "_Speichern"
 
-#: capplets/windows/gnome-window-properties.c:352
+#: capplets/windows/gnome-window-properties.c:378
 #, c-format
 msgid ""
 "<b>Cannot start the preferences application for your window manager</b>\n"
@@ -2098,46 +2093,46 @@ msgstr ""
 "\n"
 "%s"
 
-#: capplets/windows/gnome-window-properties.c:575
+#: capplets/windows/gnome-window-properties.c:624
 msgid "Control"
 msgstr "Strg"
 
-#: capplets/windows/gnome-window-properties.c:580
+#: capplets/windows/gnome-window-properties.c:629
 msgid "Alt"
 msgstr "Alt"
 
-#: capplets/windows/gnome-window-properties.c:586
+#: capplets/windows/gnome-window-properties.c:635
 msgid "Hyper"
 msgstr "Hyper"
 
-#: capplets/windows/gnome-window-properties.c:593
-msgid "Super"
-msgstr "Super"
+#: capplets/windows/gnome-window-properties.c:642
+msgid "Super (or \"Windows logo\")"
+msgstr "Super (oder »Windows-Taste«)"
 
 #: capplets/windows/gnome-window-properties.glade.h:1
-msgid "To _move windows, click while holding down:"
+msgid "To _move a window, press-and-hold this key then grab the window:"
 msgstr ""
-"Zum _Verschieben von Fenstern folgende Taste beim Klicken gedrückt halten:"
+"Zum _Verschieben eines Fensters folgende Taste beim Klicken gedrückt halten:"
 
 #: capplets/windows/gnome-window-properties.glade.h:2
 msgid "Window Preferences"
 msgstr "Fenster-Eigenschaften"
 
 #: capplets/windows/gnome-window-properties.glade.h:3
-msgid "_Double-click window titles to:"
-msgstr "Beim _Doppelklick auf Titelleisten:"
+msgid "_Double-click titlebar to perform this action:"
+msgstr "_Doppelklick auf Titelleisten, um diese Aktion auszuführen:"
 
 #: capplets/windows/gnome-window-properties.glade.h:4
-msgid "_Raise selected windows after a short time"
-msgstr "Aktiviertes Fenster nach einer bestimmten Zeit an_heben"
+msgid "_Interval before raising:"
+msgstr "_Verzögerung vor dem Anheben:"
 
 #: capplets/windows/gnome-window-properties.glade.h:5
-msgid "_Select windows when the mouse moves over them"
-msgstr "Fenster _aktivieren, wenn sich die Maus darüber befindet"
+msgid "_Raise selected windows after an interval"
+msgstr "Aktivierte Fenster nach einer bestimmten Zeit an_heben"
 
 #: capplets/windows/gnome-window-properties.glade.h:6
-msgid "_Tenths of a second before raising the window:"
-msgstr "Zeit bis zum Anheben des Fensters in _Zehntelsekunden:"
+msgid "_Select windows when the mouse moves over them"
+msgstr "Fenster _aktivieren, wenn sich die Maus darüber befindet"
 
 #: capplets/windows/window-properties.desktop.in.h:1
 msgid "Window Properties"
@@ -2388,3 +2383,87 @@ msgstr "Maximieren"
 #: libwindow-settings/metacity-window-manager.c:374
 msgid "Roll up"
 msgstr "Einrollen"
+
+#: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
+msgid ""
+"If true, the mime handlers for text/plain and text/* will be kept in sync"
+msgstr ""
+"Sollen MIME-Handler für »text/plain« und »text/*« syncron gehalten werden?"
+
+#: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:2
+msgid "Sync text/plain and text/* handlers"
+msgstr "»text/plain« und »text/*«-Handler syncronisieren"
+
+#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:1
+msgid "Display a dialog when there are errors running XScreenSaver"
+msgstr ""
+"Soll ein Dialog angezeigt werden, wenn beim Ausführen von XScreenSaver ein "
+"Fehler auftritt?"
+
+#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:2
+msgid "Run XScreenSaver at login"
+msgstr "XScreenSaver beim Anmelden starten"
+
+#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:3
+msgid "Show Startup Errors"
+msgstr "Start-Fehler anzeigen"
+
+#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:4
+msgid "Start XScreenSaver"
+msgstr "XScreenSaver starten"
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:1
+msgid "Antialising"
+msgstr "Kantenglättung"
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:2
+msgid "DPI"
+msgstr "DPI"
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:3
+msgid "Hinting"
+msgstr "Andeuten"
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:4
+msgid "RGBA Order"
+msgstr "RGBA-Reihenfolge"
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:5
+msgid ""
+"Resolution used for converting font sizes to pixel sizes, in dots per inch"
+msgstr ""
+"Die zum Konvertieren von Schrift- in Pixel-Größen verwendete Auflösung (in "
+"Punkt pro Zoll)"
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:6
+msgid ""
+"The order of elements subpixel elements on an LCD screen; only used when "
+"antialising is set to \"rgba\". Possible values are: \"rgb\" - red on left, "
+"most common. \"bgr\" - blue on left. \"vrgb\" - red on top. \"vbgr\" - red "
+"on bottom."
+msgstr ""
+"Die Reihenfolge der Subpixel-Elemente auf einem LCD-Bildschirm; wird nur "
+"ausgewertet, falls der Schlüssel »antialiasing« (Kantenglättung) auf »rgba« "
+"gesetzt wurde. Mögliche Werte sind »rbg« (Rot ist links, weit verbreitet), "
+"»bgr« (Blau ist links), »vrgb« (Rot ist oben) und »vbgr« (Rot ist unten)."
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:7
+msgid ""
+"The type of antialiasing to use when rendering fonts. Possible values are: "
+"\"none\" - no antialiasing. \"grayscale\" - standard grayscale antialising. "
+"\"rgba\" - subpixel antialising. (LCD screens only)."
+msgstr ""
+"Der beim Darstellen von Schriften zu verwendende Kantenglättungstyp. "
+"Mögliche Werte sind »none« (keine Kantenglättung), »grayscale« (Standard-"
+"Kantenglättung mit Graustufen) und »rgba« (Subpixel-Kantenglättung)."
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:8
+msgid ""
+"The type of hinting to use when rendering fonts. Possible values are: \"none"
+"\" - no hinting, \"slight\", \"medium\", and \"full\" - as much hinting as "
+"possible; may cause distortion of letter forms."
+msgstr ""
+"Der beim Darstellen von Schriften zu verwendende Grad der Andeutung. "
+"Mögliche Werte sind »none« (kein Andeuten), »slight« (leichtes Andeuten), "
+"»medium (mittleres Andeuten) und »full« (so stark andeuten wie möglich; "
+"führt möglicherweise zu einem verformten Schriftbild)"
