@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.99.7\n"
-"POT-Creation-Date: 2002-04-25 09:37+0200\n"
+"POT-Creation-Date: 2002-04-29 14:47-0500\n"
 "PO-Revision-Date: 2002-04-25 09:37+0200\n"
 "Last-Translator: Christophe Merlet (RedFox) <christophe@merlet.net>\n"
 "Language-Team: Gnome French Team <gnomefr@traduc.org>\n"
@@ -191,7 +191,8 @@ msgid "Background"
 msgstr "Arrière-plan"
 
 #: capplets/background/background.desktop.in.h:2
-msgid "Configuration of the desktop's background"
+#, fuzzy
+msgid "Change the desktop background"
 msgstr "Configuration des propriétés de l'arrière-plan"
 
 #. solid
@@ -668,7 +669,7 @@ msgid "Configure miscellaneous window features"
 msgstr "Configurer diverses caractéristiques des fenêtres"
 
 #: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
-#: capplets/ui-properties/ui-properties.glade.h:45
+#: capplets/ui-properties/ui-properties.glade.h:19
 msgid "Miscellaneous"
 msgstr "Divers"
 
@@ -1049,11 +1050,11 @@ msgstr "VRAI si cela est un dialogue d'ajout de service"
 msgid "Add service"
 msgstr "Ajouter un service"
 
-#: capplets/file-types/service-edit-dialog.c:503
+#: capplets/file-types/service-edit-dialog.c:497
 msgid "Please enter a protocol name."
 msgstr "Veullez entrer un nom de protocole."
 
-#: capplets/file-types/service-edit-dialog.c:515
+#: capplets/file-types/service-edit-dialog.c:509
 msgid ""
 "Invalid protocol name. Please enter a protocol name without any spaces or "
 "punctuation."
@@ -1061,7 +1062,7 @@ msgstr ""
 "Nom de protocole invalide.  Veuillez entrer un nom de protocole sans espace "
 "ni ponctuation."
 
-#: capplets/file-types/service-edit-dialog.c:529
+#: capplets/file-types/service-edit-dialog.c:523
 msgid "There is already a protocol by that name."
 msgstr "Il y a déjà un protocole du même nom."
 
@@ -1094,24 +1095,26 @@ msgid "Gnome documentation"
 msgstr "Documentation GNOME"
 
 #: capplets/font/font-properties.desktop.in.h:1
+msgid "Change the default fonts used by the desktop and applications"
+msgstr ""
+
+#: capplets/font/font-properties.desktop.in.h:2
 msgid "Font"
 msgstr "Police"
 
-#: capplets/font/font-properties.desktop.in.h:2
-msgid "Select which font to use"
-msgstr "Sélectionner quel police doit être utilisée"
-
 #: capplets/font/font-properties.glade.h:1
-msgid "Font properties"
-msgstr "Paramètre de la police"
+#, fuzzy
+msgid "File Manager Font"
+msgstr "Protocole de transfert de fichier FTP"
 
 #: capplets/font/font-properties.glade.h:2
-msgid "Font settings only apply to new programs."
-msgstr "Les paramètres de polices ne s'appliquent qu'aux nouveaux programmes."
+#, fuzzy
+msgid "Font Properties"
+msgstr "Paramètre de la police"
 
 #: capplets/font/font-properties.glade.h:3
-msgid "Use a custom font."
-msgstr "Utiliser une police personnalisée."
+msgid "Standard Desktop Font"
+msgstr ""
 
 #: capplets/keybindings/eggcellrendererkeys.c:152
 #: capplets/keybindings/eggcellrendererkeys.c:153
@@ -1140,11 +1143,11 @@ msgstr ""
 msgid "Type a new accelerator"
 msgstr "Entrer un nouvel accélérateur"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:315
+#: capplets/keybindings/gnome-keybinding-properties.c:316
 msgid "<Unknown Action>"
 msgstr "<Action Inconnu>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:573
+#: capplets/keybindings/gnome-keybinding-properties.c:574
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1152,11 +1155,11 @@ msgstr ""
 "Impossible de trouver un seul thème de clavier.  Cela veut dire que votre "
 "installation de GT+ est vraisemblablement incomplète."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:594
+#: capplets/keybindings/gnome-keybinding-properties.c:595
 msgid "_Action"
 msgstr "_Action"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:606
+#: capplets/keybindings/gnome-keybinding-properties.c:607
 msgid "_Shortcut"
 msgstr "_Raccourci"
 
@@ -1826,31 +1829,27 @@ msgid "Two"
 msgstr "Deux"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
-#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
-msgid "Gtk+ Theme Selector"
-msgstr "Sélecteur de thème GTK+"
+msgid "Change the appearance of buttons, scrollbars, etc"
+msgstr ""
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
-#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
-msgid "Select which gtk+ theme to use"
-msgstr "Sélectionner le thème GTK+ à utiliser"
-
-#: capplets/theme-switcher/gtk-theme-selector.glade.h:1
-msgid "Gtk+ Theme"
+#, fuzzy
+msgid "Theme"
 msgstr "Thème GTK+"
 
-#: capplets/theme-switcher/gtk-theme-selector.glade.h:2
-msgid "Install new theme..."
-msgstr "Installer un nouveau thème..."
+#: capplets/theme-switcher/theme-properties.glade.h:1
+#, fuzzy
+msgid "Theme Properties"
+msgstr "Propriétés du CD"
 
-#: capplets/theme-switcher/main.c:211
-msgid "Select a theme to install"
-msgstr "Sélectionnez un thème à installer"
+#: capplets/theme-switcher/theme-properties.glade.h:2
+#, fuzzy
+msgid "Themes"
+msgstr "Thème GTK+"
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
-#: capplets/ui-properties/behavior.desktop.in.in.h:2
-msgid "Sets the default behavior of GNOME applications"
-msgstr "Règle le comportement des applications GNOME"
+msgid "Change how toolbars and menus are displayed"
+msgstr ""
 
 #: capplets/ui-properties/behavior.desktop.in.h:2
 msgid "Toolbars & Menus"
@@ -1859,6 +1858,10 @@ msgstr "Barres d'outils et Menus"
 #: capplets/ui-properties/behavior.desktop.in.in.h:1
 msgid "Behavior"
 msgstr "Comportement"
+
+#: capplets/ui-properties/behavior.desktop.in.in.h:2
+msgid "Sets the default behavior of GNOME applications"
+msgstr "Règle le comportement des applications GNOME"
 
 #: capplets/ui-properties/gnome2-ui-properties.glade.h:1
 msgid "Icons and Text"
@@ -1897,7 +1900,7 @@ msgid "Menu items have _icons"
 msgstr "Les éléments des menus ont des _icônes"
 
 #: capplets/ui-properties/gnome2-ui-properties.glade.h:11
-#: capplets/ui-properties/ui-properties.glade.h:8
+#: capplets/ui-properties/ui-properties.glade.h:17
 msgid "Menus"
 msgstr "Menus"
 
@@ -1949,173 +1952,195 @@ msgstr "_Menu"
 msgid "_Toolbars have: "
 msgstr "Les _barres d'outils ont : "
 
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/ui-properties/ui-properties.glade.h:7
-msgid "window4"
-msgstr "window4"
+#: capplets/ui-properties/ui-properties.glade.h:1
+msgid "At the center of the screen"
+msgstr "Au centre de l'écran"
 
-#: capplets/ui-properties/ui-properties.glade.h:9
-msgid "Menu bars are detachable"
-msgstr "Les barre de menus sont détachables"
+#: capplets/ui-properties/ui-properties.glade.h:2
+msgid "At the mouse pointer"
+msgstr "Au pointeur de la souris"
 
-#: capplets/ui-properties/ui-properties.glade.h:10
-msgid "Menu bars have a border"
-msgstr "Les barres de menus ont des bords en relief"
+#: capplets/ui-properties/ui-properties.glade.h:3
+msgid "Bottom"
+msgstr "Bas"
 
-#: capplets/ui-properties/ui-properties.glade.h:11
-msgid "Menus can be torn off"
-msgstr "Les menus peuvent être séparés"
+#: capplets/ui-properties/ui-properties.glade.h:4
+msgid "Default  (Spread out - big)"
+msgstr ""
 
-#: capplets/ui-properties/ui-properties.glade.h:12
-msgid "Menu items have icons"
-msgstr "Les éléments des menus ont des _icônes"
+#: capplets/ui-properties/ui-properties.glade.h:5
+#, fuzzy
+msgid "Dialog Buttons"
+msgstr "Les boîtes de dialogue s'ouvrent"
 
-#: capplets/ui-properties/ui-properties.glade.h:13
-msgid "Status Bar"
-msgstr "Barre d'état"
-
-#: capplets/ui-properties/ui-properties.glade.h:14
-msgid "Use status bar instead of dialog when possible"
-msgstr "Utiliser la barre d'état à la place des boîtes de dialogue si possible"
-
-#: capplets/ui-properties/ui-properties.glade.h:15
-msgid "Status bar is interactive when possible"
-msgstr "La barre d'état est interactive si possible"
-
-#: capplets/ui-properties/ui-properties.glade.h:16
-msgid "Progress bar is on the left"
-msgstr "La barre de progression va vers la gauche"
-
-#: capplets/ui-properties/ui-properties.glade.h:17
-msgid "Progress bar is on the right"
-msgstr "La barre de progression va vers la droite"
-
-#: capplets/ui-properties/ui-properties.glade.h:18
-msgid "Tool Bars"
-msgstr "Barre d'outils"
-
-#: capplets/ui-properties/ui-properties.glade.h:19
-msgid "Tool bars have a border"
-msgstr "Les barres de menus ont des bords en relief"
-
-#: capplets/ui-properties/ui-properties.glade.h:20
-msgid "Tool bar buttons pop up on mouse over"
-msgstr "Les boutons des barres d'outils réagissent au passage de la souris"
-
-#: capplets/ui-properties/ui-properties.glade.h:21
-msgid "Tool bars have line separators"
-msgstr "Les barres d'outils ont des lignes de séparation"
-
-#: capplets/ui-properties/ui-properties.glade.h:22
-msgid "Tool bars are detachable"
-msgstr "Les barres d'outils sont détachables"
-
-#: capplets/ui-properties/ui-properties.glade.h:23
-msgid "Tool bar buttons are icons only"
+#: capplets/ui-properties/ui-properties.glade.h:6
+#, fuzzy
+msgid "Dialog buttons have icons"
 msgstr "Les boutons des barres d'outils ont seulement des icônes"
 
-#: capplets/ui-properties/ui-properties.glade.h:24
-msgid "Tool bar buttons are text below icons"
-msgstr "Les boutons des barres d'outils ont des étiquettes sous les icônes"
-
-#: capplets/ui-properties/ui-properties.glade.h:25
-msgid "Interface"
-msgstr "Interface"
-
-#: capplets/ui-properties/ui-properties.glade.h:26
+#: capplets/ui-properties/ui-properties.glade.h:7
 msgid "Dialogs"
 msgstr "Boîtes de dialogues"
 
-#: capplets/ui-properties/ui-properties.glade.h:27
+#: capplets/ui-properties/ui-properties.glade.h:8
+msgid "Dialogs are treated"
+msgstr "Les boîtes de dialogue sont traitées"
+
+#: capplets/ui-properties/ui-properties.glade.h:9
+msgid "Dialogs open"
+msgstr "Les boîtes de dialogue s'ouvrent"
+
+#: capplets/ui-properties/ui-properties.glade.h:10
+msgid "Interface"
+msgstr "Interface"
+
+#: capplets/ui-properties/ui-properties.glade.h:11
+msgid "Left"
+msgstr "Gauche"
+
+#: capplets/ui-properties/ui-properties.glade.h:12
+msgid "Left aligned"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:13
+msgid "Like any other window"
+msgstr "Comme les autres fenêtres"
+
+#: capplets/ui-properties/ui-properties.glade.h:14
+msgid "Menu bars are detachable"
+msgstr "Les barre de menus sont détachables"
+
+#: capplets/ui-properties/ui-properties.glade.h:15
+msgid "Menu bars have a border"
+msgstr "Les barres de menus ont des bords en relief"
+
+#: capplets/ui-properties/ui-properties.glade.h:16
+msgid "Menu items have icons"
+msgstr "Les éléments des menus ont des _icônes"
+
+#: capplets/ui-properties/ui-properties.glade.h:18
+msgid "Menus can be torn off"
+msgstr "Les menus peuvent être séparés"
+
+#: capplets/ui-properties/ui-properties.glade.h:20
+msgid "Multiple Documents"
+msgstr "Documents multiples"
+
+#: capplets/ui-properties/ui-properties.glade.h:21
+msgid "Notebook tabs"
+msgstr "Onglets de carnet"
+
+#: capplets/ui-properties/ui-properties.glade.h:22
 msgid "Place dialogs over application window when possible"
 msgstr ""
 "Placer les boîtes de dialogue par dessus la fenêtre de l'application si "
 "possible"
 
-#: capplets/ui-properties/ui-properties.glade.h:28
-msgid "Dialogs open"
-msgstr "Les boîtes de dialogue s'ouvrent"
+#: capplets/ui-properties/ui-properties.glade.h:23
+msgid "Progress bar is on the left"
+msgstr "La barre de progression va vers la gauche"
 
-#: capplets/ui-properties/ui-properties.glade.h:29
-msgid "Wherever the Window Manager places them"
-msgstr "Là où les place le gestionnaire de fenêtre"
+#: capplets/ui-properties/ui-properties.glade.h:24
+msgid "Progress bar is on the right"
+msgstr "La barre de progression va vers la droite"
 
-#: capplets/ui-properties/ui-properties.glade.h:30
-msgid "At the center of the screen"
-msgstr "Au centre de l'écran"
-
-#: capplets/ui-properties/ui-properties.glade.h:31
-msgid "At the mouse pointer"
-msgstr "Au pointeur de la souris"
-
-#: capplets/ui-properties/ui-properties.glade.h:32
-msgid "Dialogs are treated"
-msgstr "Les boîtes de dialogue sont traitées"
-
-#: capplets/ui-properties/ui-properties.glade.h:33
-msgid "Like any other window"
-msgstr "Comme les autres fenêtres"
-
-#: capplets/ui-properties/ui-properties.glade.h:34
-msgid "Specially by the window manager"
-msgstr "Spécialement par le gestionnaire de fenêtres"
-
-#: capplets/ui-properties/ui-properties.glade.h:35
-msgid "Multiple Documents"
-msgstr "Documents multiples"
-
-#: capplets/ui-properties/ui-properties.glade.h:36
-msgid "Notebook tabs"
-msgstr "Onglets de carnet"
-
-#: capplets/ui-properties/ui-properties.glade.h:37
-msgid "Seperate windows"
-msgstr "Fenêtres séparées"
-
-#: capplets/ui-properties/ui-properties.glade.h:38
-msgid "The same window"
-msgstr "La même fenêtre"
-
-#: capplets/ui-properties/ui-properties.glade.h:39
-msgid "Left"
-msgstr "Gauche"
-
-#: capplets/ui-properties/ui-properties.glade.h:40
+#: capplets/ui-properties/ui-properties.glade.h:25
 msgid "Right"
 msgstr "Droite"
 
+#: capplets/ui-properties/ui-properties.glade.h:26
+msgid "Right aligned"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:27
+msgid "Seperate windows"
+msgstr "Fenêtres séparées"
+
+#: capplets/ui-properties/ui-properties.glade.h:28
+msgid "Settings will not take effect until applications restart"
+msgstr "Les réglages ne prendront effet que lorsque l'application redémarrera."
+
+#: capplets/ui-properties/ui-properties.glade.h:29
+msgid "Specially by the window manager"
+msgstr "Spécialement par le gestionnaire de fenêtres"
+
+#: capplets/ui-properties/ui-properties.glade.h:30
+#, fuzzy
+msgid "Spread out"
+msgstr "Tableur"
+
+#: capplets/ui-properties/ui-properties.glade.h:31
+msgid "Spread out (big)"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:32
+msgid "Status Bar"
+msgstr "Barre d'état"
+
+#: capplets/ui-properties/ui-properties.glade.h:33
+msgid "Status bar is interactive when possible"
+msgstr "La barre d'état est interactive si possible"
+
+#: capplets/ui-properties/ui-properties.glade.h:34
+msgid "The same window"
+msgstr "La même fenêtre"
+
+#: capplets/ui-properties/ui-properties.glade.h:35
+msgid "Tool Bars"
+msgstr "Barre d'outils"
+
+#: capplets/ui-properties/ui-properties.glade.h:36
+msgid "Tool bar buttons are icons only"
+msgstr "Les boutons des barres d'outils ont seulement des icônes"
+
+#: capplets/ui-properties/ui-properties.glade.h:37
+msgid "Tool bar buttons are text below icons"
+msgstr "Les boutons des barres d'outils ont des étiquettes sous les icônes"
+
+#: capplets/ui-properties/ui-properties.glade.h:38
+msgid "Tool bar buttons pop up on mouse over"
+msgstr "Les boutons des barres d'outils réagissent au passage de la souris"
+
+#: capplets/ui-properties/ui-properties.glade.h:39
+msgid "Tool bars are detachable"
+msgstr "Les barres d'outils sont détachables"
+
+#: capplets/ui-properties/ui-properties.glade.h:40
+msgid "Tool bars have a border"
+msgstr "Les barres de menus ont des bords en relief"
+
 #: capplets/ui-properties/ui-properties.glade.h:41
+msgid "Tool bars have line separators"
+msgstr "Les barres d'outils ont des lignes de séparation"
+
+#: capplets/ui-properties/ui-properties.glade.h:42
 msgid "Top"
 msgstr "Haut"
 
-#: capplets/ui-properties/ui-properties.glade.h:42
-msgid "Bottom"
-msgstr "Bas"
-
 #: capplets/ui-properties/ui-properties.glade.h:43
+msgid "Use status bar instead of dialog when possible"
+msgstr "Utiliser la barre d'état à la place des boîtes de dialogue si possible"
+
+#: capplets/ui-properties/ui-properties.glade.h:44
 msgid "When opening Multiple documents, use"
 msgstr "Quand on ouvre plusieurs documents, utiliser"
 
-#: capplets/ui-properties/ui-properties.glade.h:44
+#: capplets/ui-properties/ui-properties.glade.h:45
 msgid "When using Notebook tabs, place the tabs on the"
 msgstr "Quand on utilise des onglets de carnet, placer les onglets sur"
 
 #: capplets/ui-properties/ui-properties.glade.h:46
-msgid "Settings will not take effect until applications restart"
-msgstr "Les réglages ne prendront effet que lorsque l'application redémarrera."
+msgid "Wherever the Window Manager places them"
+msgstr "Là où les place le gestionnaire de fenêtre"
 
-#: capplets/url-properties/url.desktop.in.in.h:1
 #: capplets/url-properties/url-properties.desktop.in.h:1
+#: capplets/url-properties/url.desktop.in.in.h:1
 msgid "Configure which programs are used to display URLs"
 msgstr ""
 
-#: capplets/url-properties/url.desktop.in.in.h:2
 #: capplets/url-properties/url-properties.c:66
 #: capplets/url-properties/url-properties.desktop.in.h:2
+#: capplets/url-properties/url.desktop.in.in.h:2
 msgid "URL Handlers"
 msgstr "Gestionnaires d'URL"
 
@@ -2344,8 +2369,8 @@ msgstr "Sélecteur de gestionnaire de fenêtres"
 msgid "HTTP Proxy Settings"
 msgstr "Réglages du proxy HTTP"
 
-#: capplets/network/gnome-network-preferences.glade.h:3
 #: capplets/network/gnome-network-preferences.desktop.in.h:2
+#: capplets/network/gnome-network-preferences.glade.h:3
 msgid "Network Preferences"
 msgstr "Préférences du réseau"
 
@@ -2479,11 +2504,11 @@ msgstr ""
 msgid "Preview"
 msgstr "Prévisualisation"
 
-#: libsounds/sound-view.c:116
+#: libsounds/sound-view.c:120
 msgid "The sound file for this event does not exist."
 msgstr "Le fichier son défini pour cet événement n'existe pas."
 
-#: libsounds/sound-view.c:118
+#: libsounds/sound-view.c:122
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -2493,22 +2518,47 @@ msgstr ""
 "Vous devriez installer le paquetage gnome-audio pour\n"
 "pouvoir disposer d'un jeu de sons par défaut."
 
-#: libsounds/sound-view.c:210
+#: libsounds/sound-view.c:214
 msgid "Event"
 msgstr "Événement"
 
-#: libsounds/sound-view.c:217
+#: libsounds/sound-view.c:221
 msgid "File to play"
 msgstr "Fichier à jouer"
 
-#: libsounds/sound-view.c:232
+#: libsounds/sound-view.c:236
 msgid "_Sounds"
 msgstr "_Sons"
 
-#: libsounds/sound-view.c:245
+#: libsounds/sound-view.c:249
 msgid "_Play"
 msgstr "_Jouer"
 
-#: libsounds/sound-view.c:251
+#: libsounds/sound-view.c:255
 msgid "Select sound file"
 msgstr "Sélectionnez le fichier son"
+
+#~ msgid "Select which font to use"
+#~ msgstr "Sélectionner quel police doit être utilisée"
+
+#~ msgid "Font settings only apply to new programs."
+#~ msgstr ""
+#~ "Les paramètres de polices ne s'appliquent qu'aux nouveaux programmes."
+
+#~ msgid "Use a custom font."
+#~ msgstr "Utiliser une police personnalisée."
+
+#~ msgid "Gtk+ Theme Selector"
+#~ msgstr "Sélecteur de thème GTK+"
+
+#~ msgid "Select which gtk+ theme to use"
+#~ msgstr "Sélectionner le thème GTK+ à utiliser"
+
+#~ msgid "Install new theme..."
+#~ msgstr "Installer un nouveau thème..."
+
+#~ msgid "Select a theme to install"
+#~ msgstr "Sélectionnez un thème à installer"
+
+#~ msgid "window4"
+#~ msgstr "window4"

@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.99.2\n"
-"POT-Creation-Date: 2002-04-26 12:42+0900\n"
+"POT-Creation-Date: 2002-04-29 14:47-0500\n"
 "PO-Revision-Date: 2002-04-26 12:47+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: Korean <gnome-kr-translation@lists.sourceforge.net>\n"
@@ -35,8 +35,8 @@ msgid "Keyboard Accessibility Properties"
 msgstr "키보드 접근 기능 등록 정보"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:1
-msgid "<b>Test</b>"
-msgstr "<b>테스트</b>"
+msgid "&lt;b&gt;Test&lt;/b&gt;"
+msgstr ""
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:2
 msgid "B_eep when modifier is pressed"
@@ -180,7 +180,8 @@ msgid "Background"
 msgstr "배경"
 
 #: capplets/background/background.desktop.in.h:2
-msgid "Configuration of the desktop's background"
+#, fuzzy
+msgid "Change the desktop background"
 msgstr "바탕 화면의 배경을 설정합니다"
 
 #. solid
@@ -645,7 +646,7 @@ msgid "Configure miscellaneous window features"
 msgstr "기타 창 기능 설정"
 
 #: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
-#: capplets/ui-properties/ui-properties.glade.h:45
+#: capplets/ui-properties/ui-properties.glade.h:19
 msgid "Miscellaneous"
 msgstr "기타"
 
@@ -1024,18 +1025,18 @@ msgstr "서비스 추가 대화 상자이면 참"
 msgid "Add service"
 msgstr "서비스 추가"
 
-#: capplets/file-types/service-edit-dialog.c:503
+#: capplets/file-types/service-edit-dialog.c:497
 msgid "Please enter a protocol name."
 msgstr "프로토콜 이름을 입력하십시오."
 
-#: capplets/file-types/service-edit-dialog.c:515
+#: capplets/file-types/service-edit-dialog.c:509
 msgid ""
 "Invalid protocol name. Please enter a protocol name without any spaces or "
 "punctuation."
 msgstr ""
 "잘못된 프로토콜 이름입니다. 공백이나 구두점 없이 프로토콜 이름을 입력하십시오"
 
-#: capplets/file-types/service-edit-dialog.c:529
+#: capplets/file-types/service-edit-dialog.c:523
 msgid "There is already a protocol by that name."
 msgstr "그러한 프로토콜은 이미 있습니다"
 
@@ -1068,24 +1069,26 @@ msgid "Gnome documentation"
 msgstr "그놈 문서"
 
 #: capplets/font/font-properties.desktop.in.h:1
+msgid "Change the default fonts used by the desktop and applications"
+msgstr ""
+
+#: capplets/font/font-properties.desktop.in.h:2
 msgid "Font"
 msgstr "글꼴"
 
-#: capplets/font/font-properties.desktop.in.h:2
-msgid "Select which font to use"
-msgstr "어떤 글꼴을 사용할 지 선택합니다"
-
 #: capplets/font/font-properties.glade.h:1
-msgid "Font properties"
-msgstr "글꼴 등록 정보"
+#, fuzzy
+msgid "File Manager Font"
+msgstr "파일 전송 프로토콜"
 
 #: capplets/font/font-properties.glade.h:2
-msgid "Font settings only apply to new programs."
-msgstr "글꼴 설정은 새로 시작하는 프로그램에만 적용됩니다."
+#, fuzzy
+msgid "Font Properties"
+msgstr "글꼴 등록 정보"
 
 #: capplets/font/font-properties.glade.h:3
-msgid "Use a custom font."
-msgstr "사용자 설정 글꼴 사용하기."
+msgid "Standard Desktop Font"
+msgstr ""
 
 #: capplets/keybindings/eggcellrendererkeys.c:152
 #: capplets/keybindings/eggcellrendererkeys.c:153
@@ -1112,21 +1115,21 @@ msgstr "새 단축 키를 타이프하거나, 지우려면 백스페이스를 �
 msgid "Type a new accelerator"
 msgstr "새 단축 키를 타이프하세요"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:315
+#: capplets/keybindings/gnome-keybinding-properties.c:316
 msgid "<Unknown Action>"
 msgstr "<알 수 없는 동작>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:573
+#: capplets/keybindings/gnome-keybinding-properties.c:574
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
 msgstr "키보드 테마를 찾을 수 없습니다.  GTK+ 설치가 불완전하기 때문입니다."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:594
+#: capplets/keybindings/gnome-keybinding-properties.c:595
 msgid "_Action"
 msgstr "동작(_A)"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:606
+#: capplets/keybindings/gnome-keybinding-properties.c:607
 msgid "_Shortcut"
 msgstr "바로 가기(_S)"
 
@@ -1168,8 +1171,9 @@ msgid ""
 msgstr "설정을 적용하고 마칩니다 (호환성; 이제 데몬이 처리합니다)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:1
+#, fuzzy
 msgid ""
-"<b>Tip:</b> You can configure the keyboards accessibility "
+"&lt;b&gt;Tip:&lt;/b&gt; You can configure the keyboards accessibility "
 "features by bringing up the 'Accessibility Settings' property dialog, or "
 "pressing the button on the right."
 msgstr ""
@@ -1177,20 +1181,20 @@ msgstr ""
 "나, 오른 쪽의 버튼을 눌러서 설정할 수 있습니다"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:2
-msgid "<i>fast</i>"
-msgstr "<i>빠르게</i>"
+msgid "&lt;i&gt;fast&lt;/i&gt;"
+msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:3
-msgid "<i>loud</i>"
-msgstr "<i>크게</i>"
+msgid "&lt;i&gt;loud&lt;/i&gt;"
+msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:4
-msgid "<i>quiet</i>"
-msgstr "<i>조용히</i>"
+msgid "&lt;i&gt;quiet&lt;/i&gt;"
+msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:5
-msgid "<i>slow</i>"
-msgstr "<i>느리게</i>"
+msgid "&lt;i&gt;slow&lt;/i&gt;"
+msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 #: capplets/network/gnome-network-preferences.glade.h:1
@@ -1267,8 +1271,9 @@ msgid "Slow"
 msgstr "느리게"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:25
+#, fuzzy
 msgid ""
-"The keyboard bell is the <i>beep</i> sound heard when the system "
+"The keyboard bell is the &lt;i&gt;beep&lt;/i&gt; sound heard when the system "
 "wants to get your attention.  You can select a custom sound file to play "
 "instead of the traditional beeping noise."
 msgstr ""
@@ -1595,35 +1600,36 @@ msgid "Mouse Properties"
 msgstr "마우스 등록 정보"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:1
+#, fuzzy
 msgid ""
-"<b>Note:</b> You will need to logout and log back in for this "
+"&lt;b&gt;Note:&lt;/b&gt; You will need to logout and log back in for this "
 "setting to take effect."
 msgstr ""
 "<b>알림:</b> 이 설정 사항을 적용하려면 로그아웃하고 다시 로그인해야 합니다."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:2
-msgid "<i>Fast</i>"
-msgstr "<i>빠르게</i>"
+msgid "&lt;i&gt;Fast&lt;/i&gt;"
+msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:3
-msgid "<i>High</i>"
-msgstr "<i>높게</i>"
+msgid "&lt;i&gt;High&lt;/i&gt;"
+msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:4
-msgid "<i>Large</i>"
-msgstr "<i>크게</i>"
+msgid "&lt;i&gt;Large&lt;/i&gt;"
+msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:5
-msgid "<i>Low</i>"
-msgstr "<i>낮게</i>"
+msgid "&lt;i&gt;Low&lt;/i&gt;"
+msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:6
-msgid "<i>Slow</i>"
-msgstr "<i>느리게</i>"
+msgid "&lt;i&gt;Slow&lt;/i&gt;"
+msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:7
-msgid "<i>Small</i>"
-msgstr "<i>작게</i>"
+msgid "&lt;i&gt;Small&lt;/i&gt;"
+msgstr ""
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:8
 msgid ""
@@ -1792,26 +1798,23 @@ msgid "Two"
 msgstr "둘"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
-#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
-msgid "Gtk+ Theme Selector"
-msgstr "Gtk+ 테마 선택기"
+msgid "Change the appearance of buttons, scrollbars, etc"
+msgstr ""
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
-#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
-msgid "Select which gtk+ theme to use"
-msgstr "사용할 gtk+ 테마를 선택합니다"
-
-#: capplets/theme-switcher/gtk-theme-selector.glade.h:1
-msgid "Gtk+ Theme"
+#, fuzzy
+msgid "Theme"
 msgstr "GTK+ 테마"
 
-#: capplets/theme-switcher/gtk-theme-selector.glade.h:2
-msgid "Install new theme..."
-msgstr "새 테마 설치..."
+#: capplets/theme-switcher/theme-properties.glade.h:1
+#, fuzzy
+msgid "Theme Properties"
+msgstr "CD 등록 정보"
 
-#: capplets/theme-switcher/main.c:211
-msgid "Select a theme to install"
-msgstr "설치할 테마 선택"
+#: capplets/theme-switcher/theme-properties.glade.h:2
+#, fuzzy
+msgid "Themes"
+msgstr "GTK+ 테마"
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Change how toolbars and menus are displayed"
@@ -1866,7 +1869,7 @@ msgid "Menu items have _icons"
 msgstr "메뉴 항목에 아이콘 사용(_I)"
 
 #: capplets/ui-properties/gnome2-ui-properties.glade.h:11
-#: capplets/ui-properties/ui-properties.glade.h:8
+#: capplets/ui-properties/ui-properties.glade.h:17
 msgid "Menus"
 msgstr "메뉴"
 
@@ -1918,162 +1921,184 @@ msgstr "메뉴(_M)"
 msgid "_Toolbars have: "
 msgstr "도구막대에 들어갈 것들(_T): "
 
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/ui-properties/ui-properties.glade.h:7
-msgid "window4"
-msgstr "창4"
-
-#: capplets/ui-properties/ui-properties.glade.h:9
-msgid "Menu bars are detachable"
-msgstr "메뉴 모음을 분리할 수 있음"
-
-#: capplets/ui-properties/ui-properties.glade.h:10
-msgid "Menu bars have a border"
-msgstr "메뉴 모음에 테두리 사용"
-
-#: capplets/ui-properties/ui-properties.glade.h:11
-msgid "Menus can be torn off"
-msgstr "메뉴를 분리할 수 있음"
-
-#: capplets/ui-properties/ui-properties.glade.h:12
-msgid "Menu items have icons"
-msgstr "메뉴 항목에 아이콘 사용"
-
-#: capplets/ui-properties/ui-properties.glade.h:13
-msgid "Status Bar"
-msgstr "상태 표시줄"
-
-#: capplets/ui-properties/ui-properties.glade.h:14
-msgid "Use status bar instead of dialog when possible"
-msgstr "가능한한 대화 상자 대신에 상태 표시줄 사용"
-
-#: capplets/ui-properties/ui-properties.glade.h:15
-msgid "Status bar is interactive when possible"
-msgstr "가능한한 상태 표시줄을 대화형으로"
-
-#: capplets/ui-properties/ui-properties.glade.h:16
-msgid "Progress bar is on the left"
-msgstr "진행률 표시줄을 왼쪽에 놓기"
-
-#: capplets/ui-properties/ui-properties.glade.h:17
-msgid "Progress bar is on the right"
-msgstr "진행률 표시줄을 오른쪽에 놓기"
-
-#: capplets/ui-properties/ui-properties.glade.h:18
-msgid "Tool Bars"
-msgstr "도구 모음"
-
-#: capplets/ui-properties/ui-properties.glade.h:19
-msgid "Tool bars have a border"
-msgstr "도구 모음에 테두리 사용"
-
-#: capplets/ui-properties/ui-properties.glade.h:20
-msgid "Tool bar buttons pop up on mouse over"
-msgstr "마우스를 위에 놓으면 도구 모음 버튼이 나타나도록"
-
-#: capplets/ui-properties/ui-properties.glade.h:21
-msgid "Tool bars have line separators"
-msgstr "도구 모음에 줄 구분 사용"
-
-#: capplets/ui-properties/ui-properties.glade.h:22
-msgid "Tool bars are detachable"
-msgstr "도구 모음을 분리할 수 있음"
-
-#: capplets/ui-properties/ui-properties.glade.h:23
-msgid "Tool bar buttons are icons only"
-msgstr "도구 모음 버튼에 아이콘만 사용"
-
-#: capplets/ui-properties/ui-properties.glade.h:24
-msgid "Tool bar buttons are text below icons"
-msgstr "도구 모음 버튼에 아이콘과 그 밑에 텍스트 사용"
-
-#: capplets/ui-properties/ui-properties.glade.h:25
-msgid "Interface"
-msgstr "인터페이스"
-
-#: capplets/ui-properties/ui-properties.glade.h:26
-msgid "Dialogs"
-msgstr "대화 상자"
-
-#: capplets/ui-properties/ui-properties.glade.h:27
-msgid "Place dialogs over application window when possible"
-msgstr "가능한한 프로그램 윈도우 위에 대화 상자 나타내기"
-
-#: capplets/ui-properties/ui-properties.glade.h:28
-msgid "Dialogs open"
-msgstr "대화 상자 열기"
-
-#: capplets/ui-properties/ui-properties.glade.h:29
-msgid "Wherever the Window Manager places them"
-msgstr "창 관라지가 놓는 곳에"
-
-#: capplets/ui-properties/ui-properties.glade.h:30
+#: capplets/ui-properties/ui-properties.glade.h:1
 msgid "At the center of the screen"
 msgstr "화면의 중앙에"
 
-#: capplets/ui-properties/ui-properties.glade.h:31
+#: capplets/ui-properties/ui-properties.glade.h:2
 msgid "At the mouse pointer"
 msgstr "마우스가 가리키는 곳에"
 
-#: capplets/ui-properties/ui-properties.glade.h:32
-msgid "Dialogs are treated"
-msgstr "대화 상자 취급"
-
-#: capplets/ui-properties/ui-properties.glade.h:33
-msgid "Like any other window"
-msgstr "다른 창과 마찬가지로"
-
-#: capplets/ui-properties/ui-properties.glade.h:34
-msgid "Specially by the window manager"
-msgstr "창 관리자가 특별 관리"
-
-#: capplets/ui-properties/ui-properties.glade.h:35
-msgid "Multiple Documents"
-msgstr "다중 문서"
-
-#: capplets/ui-properties/ui-properties.glade.h:36
-msgid "Notebook tabs"
-msgstr "노트북 탭"
-
-#: capplets/ui-properties/ui-properties.glade.h:37
-msgid "Seperate windows"
-msgstr "별도 창"
-
-#: capplets/ui-properties/ui-properties.glade.h:38
-msgid "The same window"
-msgstr "같은 창"
-
-#: capplets/ui-properties/ui-properties.glade.h:39
-msgid "Left"
-msgstr "왼쪽"
-
-#: capplets/ui-properties/ui-properties.glade.h:40
-msgid "Right"
-msgstr "오른쪽"
-
-#: capplets/ui-properties/ui-properties.glade.h:41
-msgid "Top"
-msgstr "위"
-
-#: capplets/ui-properties/ui-properties.glade.h:42
+#: capplets/ui-properties/ui-properties.glade.h:3
 msgid "Bottom"
 msgstr "아래"
 
+#: capplets/ui-properties/ui-properties.glade.h:4
+msgid "Default  (Spread out - big)"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:5
+#, fuzzy
+msgid "Dialog Buttons"
+msgstr "대화 상자 열기"
+
+#: capplets/ui-properties/ui-properties.glade.h:6
+#, fuzzy
+msgid "Dialog buttons have icons"
+msgstr "도구 모음 버튼에 아이콘만 사용"
+
+#: capplets/ui-properties/ui-properties.glade.h:7
+msgid "Dialogs"
+msgstr "대화 상자"
+
+#: capplets/ui-properties/ui-properties.glade.h:8
+msgid "Dialogs are treated"
+msgstr "대화 상자 취급"
+
+#: capplets/ui-properties/ui-properties.glade.h:9
+msgid "Dialogs open"
+msgstr "대화 상자 열기"
+
+#: capplets/ui-properties/ui-properties.glade.h:10
+msgid "Interface"
+msgstr "인터페이스"
+
+#: capplets/ui-properties/ui-properties.glade.h:11
+msgid "Left"
+msgstr "왼쪽"
+
+#: capplets/ui-properties/ui-properties.glade.h:12
+msgid "Left aligned"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:13
+msgid "Like any other window"
+msgstr "다른 창과 마찬가지로"
+
+#: capplets/ui-properties/ui-properties.glade.h:14
+msgid "Menu bars are detachable"
+msgstr "메뉴 모음을 분리할 수 있음"
+
+#: capplets/ui-properties/ui-properties.glade.h:15
+msgid "Menu bars have a border"
+msgstr "메뉴 모음에 테두리 사용"
+
+#: capplets/ui-properties/ui-properties.glade.h:16
+msgid "Menu items have icons"
+msgstr "메뉴 항목에 아이콘 사용"
+
+#: capplets/ui-properties/ui-properties.glade.h:18
+msgid "Menus can be torn off"
+msgstr "메뉴를 분리할 수 있음"
+
+#: capplets/ui-properties/ui-properties.glade.h:20
+msgid "Multiple Documents"
+msgstr "다중 문서"
+
+#: capplets/ui-properties/ui-properties.glade.h:21
+msgid "Notebook tabs"
+msgstr "노트북 탭"
+
+#: capplets/ui-properties/ui-properties.glade.h:22
+msgid "Place dialogs over application window when possible"
+msgstr "가능한한 프로그램 윈도우 위에 대화 상자 나타내기"
+
+#: capplets/ui-properties/ui-properties.glade.h:23
+msgid "Progress bar is on the left"
+msgstr "진행률 표시줄을 왼쪽에 놓기"
+
+#: capplets/ui-properties/ui-properties.glade.h:24
+msgid "Progress bar is on the right"
+msgstr "진행률 표시줄을 오른쪽에 놓기"
+
+#: capplets/ui-properties/ui-properties.glade.h:25
+msgid "Right"
+msgstr "오른쪽"
+
+#: capplets/ui-properties/ui-properties.glade.h:26
+msgid "Right aligned"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:27
+msgid "Seperate windows"
+msgstr "별도 창"
+
+#: capplets/ui-properties/ui-properties.glade.h:28
+msgid "Settings will not take effect until applications restart"
+msgstr "설정 사항은 프로그램을 재시작해야 적용될 것입니다"
+
+#: capplets/ui-properties/ui-properties.glade.h:29
+msgid "Specially by the window manager"
+msgstr "창 관리자가 특별 관리"
+
+#: capplets/ui-properties/ui-properties.glade.h:30
+#, fuzzy
+msgid "Spread out"
+msgstr "스프레드시트"
+
+#: capplets/ui-properties/ui-properties.glade.h:31
+msgid "Spread out (big)"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:32
+msgid "Status Bar"
+msgstr "상태 표시줄"
+
+#: capplets/ui-properties/ui-properties.glade.h:33
+msgid "Status bar is interactive when possible"
+msgstr "가능한한 상태 표시줄을 대화형으로"
+
+#: capplets/ui-properties/ui-properties.glade.h:34
+msgid "The same window"
+msgstr "같은 창"
+
+#: capplets/ui-properties/ui-properties.glade.h:35
+msgid "Tool Bars"
+msgstr "도구 모음"
+
+#: capplets/ui-properties/ui-properties.glade.h:36
+msgid "Tool bar buttons are icons only"
+msgstr "도구 모음 버튼에 아이콘만 사용"
+
+#: capplets/ui-properties/ui-properties.glade.h:37
+msgid "Tool bar buttons are text below icons"
+msgstr "도구 모음 버튼에 아이콘과 그 밑에 텍스트 사용"
+
+#: capplets/ui-properties/ui-properties.glade.h:38
+msgid "Tool bar buttons pop up on mouse over"
+msgstr "마우스를 위에 놓으면 도구 모음 버튼이 나타나도록"
+
+#: capplets/ui-properties/ui-properties.glade.h:39
+msgid "Tool bars are detachable"
+msgstr "도구 모음을 분리할 수 있음"
+
+#: capplets/ui-properties/ui-properties.glade.h:40
+msgid "Tool bars have a border"
+msgstr "도구 모음에 테두리 사용"
+
+#: capplets/ui-properties/ui-properties.glade.h:41
+msgid "Tool bars have line separators"
+msgstr "도구 모음에 줄 구분 사용"
+
+#: capplets/ui-properties/ui-properties.glade.h:42
+msgid "Top"
+msgstr "위"
+
 #: capplets/ui-properties/ui-properties.glade.h:43
+msgid "Use status bar instead of dialog when possible"
+msgstr "가능한한 대화 상자 대신에 상태 표시줄 사용"
+
+#: capplets/ui-properties/ui-properties.glade.h:44
 msgid "When opening Multiple documents, use"
 msgstr "다중 문서를 열 때, 다음 사용: "
 
-#: capplets/ui-properties/ui-properties.glade.h:44
+#: capplets/ui-properties/ui-properties.glade.h:45
 msgid "When using Notebook tabs, place the tabs on the"
 msgstr "노트북 탭을 사용할 때, 탭의 위치는: "
 
 #: capplets/ui-properties/ui-properties.glade.h:46
-msgid "Settings will not take effect until applications restart"
-msgstr "설정 사항은 프로그램을 재시작해야 적용될 것입니다"
+msgid "Wherever the Window Manager places them"
+msgstr "창 관라지가 놓는 곳에"
 
 #: capplets/url-properties/url-properties.desktop.in.h:1
 #: capplets/url-properties/url.desktop.in.in.h:1
@@ -2440,11 +2465,11 @@ msgstr "hbox를 찾을 수 없어, 보통 파일 선택 대화상자를 사용�
 msgid "Preview"
 msgstr "미리 보기"
 
-#: libsounds/sound-view.c:116
+#: libsounds/sound-view.c:120
 msgid "The sound file for this event does not exist."
 msgstr "이 상황에 대한 사운드 파일이 존재하지 않습니다."
 
-#: libsounds/sound-view.c:118
+#: libsounds/sound-view.c:122
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -2454,22 +2479,79 @@ msgstr ""
 "기본 사운드 파일을 설치하려면 gnome-audio 패키지를\n"
 "설치해야 합니다."
 
-#: libsounds/sound-view.c:210
+#: libsounds/sound-view.c:214
 msgid "Event"
 msgstr "상황"
 
-#: libsounds/sound-view.c:217
+#: libsounds/sound-view.c:221
 msgid "File to play"
 msgstr "연주할 파일"
 
-#: libsounds/sound-view.c:232
+#: libsounds/sound-view.c:236
 msgid "_Sounds"
 msgstr "사운드(_S)"
 
-#: libsounds/sound-view.c:245
+#: libsounds/sound-view.c:249
 msgid "_Play"
 msgstr "재생(_P)"
 
-#: libsounds/sound-view.c:251
+#: libsounds/sound-view.c:255
 msgid "Select sound file"
 msgstr "소리 파일 선택"
+
+#~ msgid "<b>Test</b>"
+#~ msgstr "<b>테스트</b>"
+
+#~ msgid "Select which font to use"
+#~ msgstr "어떤 글꼴을 사용할 지 선택합니다"
+
+#~ msgid "Font settings only apply to new programs."
+#~ msgstr "글꼴 설정은 새로 시작하는 프로그램에만 적용됩니다."
+
+#~ msgid "Use a custom font."
+#~ msgstr "사용자 설정 글꼴 사용하기."
+
+#~ msgid "<i>fast</i>"
+#~ msgstr "<i>빠르게</i>"
+
+#~ msgid "<i>loud</i>"
+#~ msgstr "<i>크게</i>"
+
+#~ msgid "<i>quiet</i>"
+#~ msgstr "<i>조용히</i>"
+
+#~ msgid "<i>slow</i>"
+#~ msgstr "<i>느리게</i>"
+
+#~ msgid "<i>Fast</i>"
+#~ msgstr "<i>빠르게</i>"
+
+#~ msgid "<i>High</i>"
+#~ msgstr "<i>높게</i>"
+
+#~ msgid "<i>Large</i>"
+#~ msgstr "<i>크게</i>"
+
+#~ msgid "<i>Low</i>"
+#~ msgstr "<i>낮게</i>"
+
+#~ msgid "<i>Slow</i>"
+#~ msgstr "<i>느리게</i>"
+
+#~ msgid "<i>Small</i>"
+#~ msgstr "<i>작게</i>"
+
+#~ msgid "Gtk+ Theme Selector"
+#~ msgstr "Gtk+ 테마 선택기"
+
+#~ msgid "Select which gtk+ theme to use"
+#~ msgstr "사용할 gtk+ 테마를 선택합니다"
+
+#~ msgid "Install new theme..."
+#~ msgstr "새 테마 설치..."
+
+#~ msgid "Select a theme to install"
+#~ msgstr "설치할 테마 선택"
+
+#~ msgid "window4"
+#~ msgstr "창4"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.6\n"
-"POT-Creation-Date: 2002-04-21 15:46-0500\n"
+"POT-Creation-Date: 2002-04-29 14:47-0500\n"
 "PO-Revision-Date: 2002-04-19 18:12+0200\n"
 "Last-Translator: Yuriy Syrota <yuri@renome.rovno.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -129,7 +129,7 @@ msgid "_Import CDE AccessX file"
 msgstr "Вибрати файл CDE AccessX"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:22
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:33
 #, fuzzy
 msgid "_Keyboard"
 msgstr "Клавіатура"
@@ -181,7 +181,8 @@ msgid "Background"
 msgstr "Тло"
 
 #: capplets/background/background.desktop.in.h:2
-msgid "Configuration of the desktop's background"
+#, fuzzy
+msgid "Change the desktop background"
 msgstr "Конфіґурація тла стільниці"
 
 #. solid
@@ -393,7 +394,7 @@ msgstr ""
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:1384
+#: capplets/common/gconf-property-editor.c:1479
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -402,7 +403,7 @@ msgid ""
 "picture."
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:1392
+#: capplets/common/gconf-property-editor.c:1487
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -411,7 +412,7 @@ msgid ""
 "Please select a different picture instead."
 msgstr ""
 
-#: capplets/common/gconf-property-editor.c:1476
+#: capplets/common/gconf-property-editor.c:1571
 msgid "Please select an image."
 msgstr "Виберіть, будь ласка, малюнок."
 
@@ -638,7 +639,7 @@ msgid "Configure miscellaneous window features"
 msgstr ""
 
 #: capplets/desktop-links/Sawfish/misc-properties.desktop.in.h:2
-#: capplets/ui-properties/ui-properties.glade.h:45
+#: capplets/ui-properties/ui-properties.glade.h:19
 msgid "Miscellaneous"
 msgstr ""
 
@@ -784,11 +785,11 @@ msgstr "Зображення"
 msgid "Video"
 msgstr "Відео"
 
-#: capplets/file-types/file-types-capplet.c:222
+#: capplets/file-types/file-types-capplet.c:231
 msgid "Description"
 msgstr "Опис"
 
-#: capplets/file-types/file-types-capplet.c:229
+#: capplets/file-types/file-types-capplet.c:238
 #: capplets/mime-type/new-mime-window.c:39
 msgid "Extensions"
 msgstr "Розширення"
@@ -895,7 +896,7 @@ msgid "_Program"
 msgstr ""
 
 #: capplets/file-types/file-types-properties.glade.h:23
-msgid "_Program to execute"
+msgid "_Program to run"
 msgstr ""
 
 #: capplets/file-types/file-types-properties.glade.h:24
@@ -913,8 +914,8 @@ msgstr "Виправити файлову категорію"
 
 #: capplets/file-types/mime-category-edit-dialog.c:171
 #: capplets/file-types/mime-edit-dialog.c:204
-#: capplets/file-types/service-edit-dialog.c:166
-#: capplets/file-types/service-edit-dialog.c:167
+#: capplets/file-types/service-edit-dialog.c:170
+#: capplets/file-types/service-edit-dialog.c:171
 msgid "Model"
 msgstr "Модель"
 
@@ -931,10 +932,10 @@ msgid "Structure containing information on the MIME category"
 msgstr "Структура, що містить інформацію про категорію MIME"
 
 #: capplets/file-types/mime-category-edit-dialog.c:343
-#: capplets/file-types/mime-edit-dialog.c:409
-#: capplets/file-types/mime-edit-dialog.c:513
-#: capplets/file-types/service-edit-dialog.c:354
-#: capplets/file-types/service-edit-dialog.c:400
+#: capplets/file-types/mime-edit-dialog.c:411
+#: capplets/file-types/mime-edit-dialog.c:515
+#: capplets/file-types/service-edit-dialog.c:358
+#: capplets/file-types/service-edit-dialog.c:407
 msgid "Custom"
 msgstr ""
 
@@ -963,12 +964,17 @@ msgstr ""
 msgid "True if this dialog is for adding a MIME type"
 msgstr ""
 
-#: capplets/file-types/mime-edit-dialog.c:404
-#: capplets/file-types/mime-edit-dialog.c:463
+#: capplets/file-types/mime-edit-dialog.c:268
+#, fuzzy
+msgid "Add file type"
+msgstr "Виправити тип файла"
+
+#: capplets/file-types/mime-edit-dialog.c:406
+#: capplets/file-types/mime-edit-dialog.c:465
 msgid "None"
 msgstr "Немає"
 
-#: capplets/file-types/mime-edit-dialog.c:696
+#: capplets/file-types/mime-edit-dialog.c:695
 msgid ""
 "Invalid MIME type. Please enter a valid MIME type, or leave the field blank "
 "to have one generated for you."
@@ -976,15 +982,15 @@ msgstr ""
 "Невірний тип MIME. Будь ласка, введіть тип MIME, або залишіть поле порожнім "
 "для його автоматичної ґенерації."
 
-#: capplets/file-types/mime-edit-dialog.c:703
+#: capplets/file-types/mime-edit-dialog.c:699
 msgid "There already exists a MIME type of that name."
 msgstr "Тип MIME з такою назвою вже існує."
 
-#: capplets/file-types/mime-edit-dialog.c:768
+#: capplets/file-types/mime-edit-dialog.c:769
 msgid "Category"
 msgstr "Категорія"
 
-#: capplets/file-types/mime-edit-dialog.c:773
+#: capplets/file-types/mime-edit-dialog.c:774
 msgid "Choose a file category"
 msgstr "Виберіть файлову категорію"
 
@@ -997,31 +1003,35 @@ msgstr "Модель лише для категорій"
 msgid "Internet Services"
 msgstr "Послуги Інтернет"
 
-#: capplets/file-types/service-edit-dialog.c:133
+#: capplets/file-types/service-edit-dialog.c:135
 msgid "Edit service information"
 msgstr "Виправити інформацію про послугу"
 
-#: capplets/file-types/service-edit-dialog.c:174
+#: capplets/file-types/service-edit-dialog.c:178
 msgid "Service info"
 msgstr "Інформація про послугу"
 
-#: capplets/file-types/service-edit-dialog.c:175
+#: capplets/file-types/service-edit-dialog.c:179
 msgid "Structure containing service information"
 msgstr "Структура, що містить інформацію про послугу"
 
-#: capplets/file-types/service-edit-dialog.c:181
+#: capplets/file-types/service-edit-dialog.c:185
 msgid "Is add"
 msgstr ""
 
-#: capplets/file-types/service-edit-dialog.c:182
+#: capplets/file-types/service-edit-dialog.c:186
 msgid "TRUE if this is an add service dialog"
 msgstr ""
 
-#: capplets/file-types/service-edit-dialog.c:492
+#: capplets/file-types/service-edit-dialog.c:225
+msgid "Add service"
+msgstr ""
+
+#: capplets/file-types/service-edit-dialog.c:497
 msgid "Please enter a protocol name."
 msgstr "Введіть, будь ласка, назву протоколу"
 
-#: capplets/file-types/service-edit-dialog.c:504
+#: capplets/file-types/service-edit-dialog.c:509
 msgid ""
 "Invalid protocol name. Please enter a protocol name without any spaces or "
 "punctuation."
@@ -1029,7 +1039,7 @@ msgstr ""
 "Неправильна назва протоколу. Будь ласка, введіть назву протоколу без "
 "пропусків і знаків пунктуації."
 
-#: capplets/file-types/service-edit-dialog.c:518
+#: capplets/file-types/service-edit-dialog.c:523
 msgid "There is already a protocol by that name."
 msgstr "Вже є протокол з вказаною назвою."
 
@@ -1062,24 +1072,25 @@ msgid "Gnome documentation"
 msgstr "Документація GNOME"
 
 #: capplets/font/font-properties.desktop.in.h:1
+msgid "Change the default fonts used by the desktop and applications"
+msgstr ""
+
+#: capplets/font/font-properties.desktop.in.h:2
 msgid "Font"
 msgstr "Шрифт"
 
-#: capplets/font/font-properties.desktop.in.h:2
-msgid "Select which font to use"
-msgstr "Виберіть шрифт, що використовуватметься"
-
 #: capplets/font/font-properties.glade.h:1
 #, fuzzy
-msgid "Font properties"
-msgstr "Властивості компакт-диска"
+msgid "File Manager Font"
+msgstr "Протокол передачі даних"
 
 #: capplets/font/font-properties.glade.h:2
-msgid "Font settings only apply to new programs."
-msgstr ""
+#, fuzzy
+msgid "Font Properties"
+msgstr "Властивості компакт-диска"
 
 #: capplets/font/font-properties.glade.h:3
-msgid "Use a custom font."
+msgid "Standard Desktop Font"
 msgstr ""
 
 #: capplets/keybindings/eggcellrendererkeys.c:152
@@ -1107,21 +1118,21 @@ msgstr "Введіть нову комбінацію, чи натисніть Ba
 msgid "Type a new accelerator"
 msgstr "Введіть нову комбінацію"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:315
+#: capplets/keybindings/gnome-keybinding-properties.c:316
 msgid "<Unknown Action>"
 msgstr "<Невідома дія>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:573
+#: capplets/keybindings/gnome-keybinding-properties.c:574
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
 msgstr ""
 
-#: capplets/keybindings/gnome-keybinding-properties.c:594
+#: capplets/keybindings/gnome-keybinding-properties.c:595
 msgid "_Action"
 msgstr "_Дія"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:606
+#: capplets/keybindings/gnome-keybinding-properties.c:607
 msgid "_Shortcut"
 msgstr ""
 
@@ -1185,6 +1196,7 @@ msgid "&lt;i&gt;slow&lt;/i&gt;"
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:6
+#: capplets/network/gnome-network-preferences.glade.h:1
 msgid "*"
 msgstr ""
 
@@ -1193,86 +1205,115 @@ msgid "Cursor"
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:9
-msgid "Key_press makes sound"
+msgid "Fast"
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+msgid "Key_press makes sound"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
 #, fuzzy
 msgid "Keyboard Bell"
 msgstr "Клавіатура"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 #: capplets/keyboard/keyboard.desktop.in.h:2
 msgid "Keyboard Properties"
 msgstr "Властивості клавіатури"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 msgid "Keyboard _repeats when key is held down"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Keyboard bell _enabled"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
 #, fuzzy
 msgid "Keyboard bell _off"
 msgstr "Клавіатура"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
 msgid "Keyclick Volume"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
-msgid "Repeat Rate"
-msgstr ""
-
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:17
-msgid "Repeat s_peed:"
+msgid "Long"
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:18
-msgid "Set the speed the cursor blinks in text fields."
+msgid "Medium"
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:19
-msgid "Set the volume of the clicking sound made when pressing a key"
+msgid "Repeat Rate"
 msgstr ""
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:20
+msgid "Repeat s_peed:"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+msgid "Set the speed the cursor blinks in text fields."
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+msgid "Set the volume of the clicking sound made when pressing a key"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
+#, fuzzy
+msgid "Short"
+msgstr "Комбінації клавіш"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
+msgid "Slow"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
 msgid ""
 "The keyboard bell is the &lt;i&gt;beep&lt;/i&gt; sound heard when the system "
 "wants to get your attention.  You can select a custom sound file to play "
 "instead of the traditional beeping noise."
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
+msgid "Very fast"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
+msgid "Very long"
+msgstr ""
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
 #, fuzzy
 msgid "_Accessibility..."
 msgstr "_Спеціальні можливості"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
 msgid "_Blink speed:"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:30
 msgid "_Cursor blinks in text fields"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
 msgid "_Custom keyboard bell:"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:32
 msgid "_Delay before repeating:"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:34
 #, fuzzy
 msgid "_Sound"
 msgstr "_Звуки"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:35
 msgid "_Volume:"
 msgstr ""
 
@@ -1717,32 +1758,27 @@ msgid "Two"
 msgstr "Два"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:1
-#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:1
-msgid "Gtk+ Theme Selector"
-msgstr "Вібір теми GTK+"
-
-#: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
-#: capplets/theme-switcher/gtk-theme-selector.desktop.in.in.h:2
-msgid "Select which gtk+ theme to use"
-msgstr "Виберіть тему GTK+"
-
-#: capplets/theme-switcher/gtk-theme-selector.glade.h:1
-#, fuzzy
-msgid "Gtk+ Theme"
-msgstr "Вібір теми GTK+"
-
-#: capplets/theme-switcher/gtk-theme-selector.glade.h:2
-msgid "Install new theme..."
+msgid "Change the appearance of buttons, scrollbars, etc"
 msgstr ""
 
-#: capplets/theme-switcher/main.c:211
-msgid "Select a theme to install"
-msgstr "Виберіть тему, що встановлюватиметься"
+#: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
+#, fuzzy
+msgid "Theme"
+msgstr "Вібір теми GTK+"
+
+#: capplets/theme-switcher/theme-properties.glade.h:1
+#, fuzzy
+msgid "Theme Properties"
+msgstr "Властивості компакт-диска"
+
+#: capplets/theme-switcher/theme-properties.glade.h:2
+#, fuzzy
+msgid "Themes"
+msgstr "Вібір теми GTK+"
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
-#: capplets/ui-properties/behavior.desktop.in.in.h:2
-msgid "Sets the default behavior of GNOME applications"
-msgstr "Встановити типову поведінку додатків GNOME"
+msgid "Change how toolbars and menus are displayed"
+msgstr ""
 
 #: capplets/ui-properties/behavior.desktop.in.h:2
 msgid "Toolbars & Menus"
@@ -1751,6 +1787,10 @@ msgstr "Пенали і меню"
 #: capplets/ui-properties/behavior.desktop.in.in.h:1
 msgid "Behavior"
 msgstr ""
+
+#: capplets/ui-properties/behavior.desktop.in.in.h:2
+msgid "Sets the default behavior of GNOME applications"
+msgstr "Встановити типову поведінку додатків GNOME"
 
 #: capplets/ui-properties/gnome2-ui-properties.glade.h:1
 msgid "Icons and Text"
@@ -1792,7 +1832,7 @@ msgid "Menu items have _icons"
 msgstr ""
 
 #: capplets/ui-properties/gnome2-ui-properties.glade.h:11
-#: capplets/ui-properties/ui-properties.glade.h:8
+#: capplets/ui-properties/ui-properties.glade.h:17
 #, fuzzy
 msgid "Menus"
 msgstr "Миша"
@@ -1850,164 +1890,185 @@ msgstr ""
 msgid "_Toolbars have: "
 msgstr "Пенали і меню"
 
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: capplets/ui-properties/ui-properties.glade.h:7
-msgid "window4"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.glade.h:9
-msgid "Menu bars are detachable"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.glade.h:10
-msgid "Menu bars have a border"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.glade.h:11
-msgid "Menus can be torn off"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.glade.h:12
-msgid "Menu items have icons"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.glade.h:13
-msgid "Status Bar"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.glade.h:14
-msgid "Use status bar instead of dialog when possible"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.glade.h:15
-msgid "Status bar is interactive when possible"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.glade.h:16
-msgid "Progress bar is on the left"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.glade.h:17
-msgid "Progress bar is on the right"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.glade.h:18
-msgid "Tool Bars"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.glade.h:19
-msgid "Tool bars have a border"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.glade.h:20
-msgid "Tool bar buttons pop up on mouse over"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.glade.h:21
-msgid "Tool bars have line separators"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.glade.h:22
-msgid "Tool bars are detachable"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.glade.h:23
-msgid "Tool bar buttons are icons only"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.glade.h:24
-msgid "Tool bar buttons are text below icons"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.glade.h:25
-msgid "Interface"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.glade.h:26
-msgid "Dialogs"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.glade.h:27
-msgid "Place dialogs over application window when possible"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.glade.h:28
-msgid "Dialogs open"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.glade.h:29
-msgid "Wherever the Window Manager places them"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.glade.h:30
+#: capplets/ui-properties/ui-properties.glade.h:1
 msgid "At the center of the screen"
 msgstr ""
 
-#: capplets/ui-properties/ui-properties.glade.h:31
+#: capplets/ui-properties/ui-properties.glade.h:2
 msgid "At the mouse pointer"
 msgstr ""
 
-#: capplets/ui-properties/ui-properties.glade.h:32
-msgid "Dialogs are treated"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.glade.h:33
-msgid "Like any other window"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.glade.h:34
-msgid "Specially by the window manager"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.glade.h:35
-#, fuzzy
-msgid "Multiple Documents"
-msgstr "Документи"
-
-#: capplets/ui-properties/ui-properties.glade.h:36
-msgid "Notebook tabs"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.glade.h:37
-msgid "Seperate windows"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.glade.h:38
-msgid "The same window"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.glade.h:39
-msgid "Left"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.glade.h:40
-msgid "Right"
-msgstr ""
-
-#: capplets/ui-properties/ui-properties.glade.h:41
-#, fuzzy
-msgid "Top"
-msgstr "Два"
-
-#: capplets/ui-properties/ui-properties.glade.h:42
+#: capplets/ui-properties/ui-properties.glade.h:3
 #, fuzzy
 msgid "Bottom"
 msgstr "Колір в_низу"
 
+#: capplets/ui-properties/ui-properties.glade.h:4
+msgid "Default  (Spread out - big)"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:5
+#, fuzzy
+msgid "Dialog Buttons"
+msgstr "Приклад кнопки"
+
+#: capplets/ui-properties/ui-properties.glade.h:6
+msgid "Dialog buttons have icons"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:7
+msgid "Dialogs"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:8
+msgid "Dialogs are treated"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:9
+msgid "Dialogs open"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:10
+msgid "Interface"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:11
+msgid "Left"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:12
+msgid "Left aligned"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:13
+msgid "Like any other window"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:14
+msgid "Menu bars are detachable"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:15
+msgid "Menu bars have a border"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:16
+msgid "Menu items have icons"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:18
+msgid "Menus can be torn off"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:20
+#, fuzzy
+msgid "Multiple Documents"
+msgstr "Документи"
+
+#: capplets/ui-properties/ui-properties.glade.h:21
+msgid "Notebook tabs"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:22
+msgid "Place dialogs over application window when possible"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:23
+msgid "Progress bar is on the left"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:24
+msgid "Progress bar is on the right"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:25
+msgid "Right"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:26
+msgid "Right aligned"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:27
+msgid "Seperate windows"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:28
+msgid "Settings will not take effect until applications restart"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:29
+msgid "Specially by the window manager"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:30
+#, fuzzy
+msgid "Spread out"
+msgstr "Електронна таблиця"
+
+#: capplets/ui-properties/ui-properties.glade.h:31
+msgid "Spread out (big)"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:32
+msgid "Status Bar"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:33
+msgid "Status bar is interactive when possible"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:34
+msgid "The same window"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:35
+msgid "Tool Bars"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:36
+msgid "Tool bar buttons are icons only"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:37
+msgid "Tool bar buttons are text below icons"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:38
+msgid "Tool bar buttons pop up on mouse over"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:39
+msgid "Tool bars are detachable"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:40
+msgid "Tool bars have a border"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:41
+msgid "Tool bars have line separators"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:42
+#, fuzzy
+msgid "Top"
+msgstr "Два"
+
 #: capplets/ui-properties/ui-properties.glade.h:43
-msgid "When opening Multiple documents, use"
+msgid "Use status bar instead of dialog when possible"
 msgstr ""
 
 #: capplets/ui-properties/ui-properties.glade.h:44
+msgid "When opening Multiple documents, use"
+msgstr ""
+
+#: capplets/ui-properties/ui-properties.glade.h:45
 msgid "When using Notebook tabs, place the tabs on the"
 msgstr ""
 
 #: capplets/ui-properties/ui-properties.glade.h:46
-msgid "Settings will not take effect until applications restart"
+msgid "Wherever the Window Manager places them"
 msgstr ""
 
 #: capplets/url-properties/url-properties.desktop.in.h:1
@@ -2213,6 +2274,45 @@ msgstr ""
 msgid "Window Manager Selector"
 msgstr ""
 
+#: capplets/network/gnome-network-preferences.glade.h:2
+msgid "HTTP Proxy Settings"
+msgstr ""
+
+#: capplets/network/gnome-network-preferences.desktop.in.h:2
+#: capplets/network/gnome-network-preferences.glade.h:3
+#, fuzzy
+msgid "Network Preferences"
+msgstr "Звукові властивості"
+
+#: capplets/network/gnome-network-preferences.glade.h:4
+msgid "P_ort:"
+msgstr ""
+
+#: capplets/network/gnome-network-preferences.glade.h:5
+msgid "Pass_word:"
+msgstr ""
+
+#: capplets/network/gnome-network-preferences.glade.h:6
+msgid "Pro_xy requires a username and password"
+msgstr ""
+
+#: capplets/network/gnome-network-preferences.glade.h:7
+msgid "User_name:"
+msgstr ""
+
+#: capplets/network/gnome-network-preferences.glade.h:8
+#, fuzzy
+msgid "_Location:"
+msgstr "_Дія"
+
+#: capplets/network/gnome-network-preferences.glade.h:9
+msgid "_Use HTTP proxy"
+msgstr ""
+
+#: capplets/network/gnome-network-preferences.desktop.in.h:1
+msgid "Network"
+msgstr ""
+
 #: control-center/capplet-dir-view.c:153
 msgid "Layout"
 msgstr ""
@@ -2316,11 +2416,11 @@ msgstr ""
 msgid "Preview"
 msgstr "Перегляд"
 
-#: libsounds/sound-view.c:116
+#: libsounds/sound-view.c:120
 msgid "The sound file for this event does not exist."
 msgstr "Звукового файлу для цієї події не існує."
 
-#: libsounds/sound-view.c:118
+#: libsounds/sound-view.c:122
 msgid ""
 "The sound file for this event does not exist.\n"
 "You may want to install the gnome-audio package\n"
@@ -2330,22 +2430,34 @@ msgstr ""
 "Можна встановити пакет gnome-audio\n"
 "для набору типових звуків."
 
-#: libsounds/sound-view.c:210
+#: libsounds/sound-view.c:214
 msgid "Event"
 msgstr "Подія"
 
-#: libsounds/sound-view.c:217
+#: libsounds/sound-view.c:221
 msgid "File to play"
 msgstr "Файл для відтворення"
 
-#: libsounds/sound-view.c:232
+#: libsounds/sound-view.c:236
 msgid "_Sounds"
 msgstr "_Звуки"
 
-#: libsounds/sound-view.c:245
+#: libsounds/sound-view.c:249
 msgid "_Play"
 msgstr "_Відтворити"
 
-#: libsounds/sound-view.c:251
+#: libsounds/sound-view.c:255
 msgid "Select sound file"
 msgstr "Виберіть звуковий файл"
+
+#~ msgid "Select which font to use"
+#~ msgstr "Виберіть шрифт, що використовуватметься"
+
+#~ msgid "Gtk+ Theme Selector"
+#~ msgstr "Вібір теми GTK+"
+
+#~ msgid "Select which gtk+ theme to use"
+#~ msgstr "Виберіть тему GTK+"
+
+#~ msgid "Select a theme to install"
+#~ msgstr "Виберіть тему, що встановлюватиметься"
