@@ -1,5 +1,12 @@
 2005-02-06  Rodney Dawes  <dobey@novell.com>
 
+	* gnome-wp-capplet.c (wallpaper_properties_init): Force using the gtk+
+	backend for the file chooser since we don't support vfs yet
+
+	Fixes #154978
+
+2005-02-06  Rodney Dawes  <dobey@novell.com>
+
 	* gnome-wp-capplet.c (gnome_wp_color_changed): Change the API to use
 	the boolean argument to specify if we want to update gconf or not
 	Always get the colors for both primary and secondary and update the

@@ -1257,14 +1257,15 @@ static void wallpaper_properties_init (poptContext ctx) {
 		    G_CALLBACK (gnome_wp_props_wp_selected), capplet);
 
   /* Create the file chooser dialog stuff here */
-  capplet->filesel = gtk_file_chooser_dialog_new (_("Add Wallpaper"),
-						  GTK_WINDOW (capplet->window),
-						  GTK_FILE_CHOOSER_ACTION_OPEN,
-						  GTK_STOCK_CANCEL,
-						  GTK_RESPONSE_CANCEL,
-						  GTK_STOCK_OPEN,
-						  GTK_RESPONSE_OK,
-						  NULL);
+  capplet->filesel = gtk_file_chooser_dialog_new_with_backend (_("Add Wallpaper"),
+							       GTK_WINDOW (capplet->window),
+							       GTK_FILE_CHOOSER_ACTION_OPEN,
+							       "gtk+",
+							       GTK_STOCK_CANCEL,
+							       GTK_RESPONSE_CANCEL,
+							       GTK_STOCK_OPEN,
+							       GTK_RESPONSE_OK,
+							       NULL);
   gtk_file_chooser_set_select_multiple (GTK_FILE_CHOOSER (capplet->filesel),
 					TRUE);
 
