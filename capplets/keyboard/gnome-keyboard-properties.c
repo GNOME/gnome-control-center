@@ -249,7 +249,7 @@ main (int argc, char **argv)
 		dialog = create_dialog ();
 		setup_dialog (dialog, changeset);
 		if (switch_to_typing_break_page) {
-			gtk_notebook_set_current_page (GTK_NOTEBOOK (WID ("keyboard_notebook")), 1);
+			gtk_notebook_set_current_page (GTK_NOTEBOOK (WID ("keyboard_notebook")), 3);
 		}
 		capplet_set_icon (WID ("keyboard_dialog"),
 				  "keyboard-capplet.png");
