@@ -478,6 +478,14 @@ pb_get_fn (BonoboPropertyBag *bag, BonoboArg *arg,
 
 	log = CONFIG_LOG (config_log_open (archiver_db->location));
 	id = config_log_get_rollback_id_by_steps (log, 0, archiver_db->real_name);
+	if (id < 0)
+	{
+		gtk_object_destroy (GTK_OBJECT (log));
+		BONOBO_ARG_SET_GENERAL (arg, 0,
+				TC_ulonglong, CORBA_unsigned_long_long, NULL);
+		return;
+	}
+
 	mod = config_log_get_date_for_id (log, id);
 	val = mktime (mod);
 	g_print ("%i\n", mod->tm_hour);
