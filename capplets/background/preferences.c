@@ -326,10 +326,12 @@ preferences_changed (Preferences *prefs)
 		if (prefs->timeout_id)
 			gtk_timeout_remove (prefs->timeout_id);
 
+#if 0
 		if (prefs->auto_apply)
 			prefs->timeout_id = 
 				gtk_timeout_add
 				(2000, (GtkFunction) apply_timeout_cb, prefs);
+#endif
 	}
 
 	applier_apply_prefs (applier, prefs, FALSE, TRUE);

@@ -1,3 +1,14 @@
+2001-07-19  Bradford Hovinen  <hovinen@ximian.com>
+
+	* applier.c (get_geometry): Use vwidth and vheight rather than
+	dwidth and dheight when computing aspect ratio
+	(get_geometry): Adjust rwidth and rheight according to above change
+
+	* preferences.c (preferences_changed): Disable auto-apply
+
+	* background-properties.glade: Remove apply automatically check
+	button; change "More Solid" to "More Opaque"
+
 2001-07-17  Chema Celorio  <chema@celorio.com>
 
 	* start

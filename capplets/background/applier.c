@@ -1126,21 +1126,21 @@ get_geometry (wallpaper_type_t wallpaper_type, GdkPixbuf *pixbuf,
 		break;
 
 	case WPTYPE_SCALED_ASPECT:
-		asp = (gdouble) gdk_pixbuf_get_width (pixbuf) / dwidth;
+		asp = (gdouble) gdk_pixbuf_get_width (pixbuf) / vwidth;
 
-		if (asp < (gdouble) gdk_pixbuf_get_height (pixbuf) / dheight) {
+		if (asp < (gdouble) gdk_pixbuf_get_height (pixbuf) / vheight) {
 			asp = (gdouble) 
-				gdk_pixbuf_get_height (pixbuf) / dheight;
+				gdk_pixbuf_get_height (pixbuf) / vheight;
 			st = 1;
 		}
 
 		if (st) {
-			*rwidth = gdk_pixbuf_get_width (pixbuf) / asp;
+			*rwidth = gdk_pixbuf_get_width (pixbuf) / asp / vwidth * dwidth;
 			*rheight = dheight;
 			*xoffset = (dwidth - *rwidth) >> 1;
 			*yoffset = 0;
 		} else {
-			*rheight = gdk_pixbuf_get_height (pixbuf) / asp;
+			*rheight = gdk_pixbuf_get_height (pixbuf) / asp / vheight * dheight;
 			*rwidth = dwidth;
 			*xoffset = 0;
 			*yoffset = (dheight - *rheight) >> 1;
