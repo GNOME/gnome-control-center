@@ -139,13 +139,17 @@ apply_cb (void)
 }
 
 void
+call_apply (GtkWidget *widget, gpointer data)
+{
+  apply_cb ();
+}
+
+
+void
 response_cb (GtkDialog *dialog, gint r, gpointer data)
 {
 	switch (r)
 	{
-	case RESPONSE_APPLY:
-		apply_cb ();
-		break;
 	case RESPONSE_CLOSE:
 		gtk_main_quit ();
 		break;
@@ -244,7 +248,7 @@ main (int argc, char **argv)
 
 	xml = glade_xml_new (GNOMECC_DATA_DIR "/interfaces/gtk-theme-selector.glade", NULL, NULL);
 	setup_list ();
-
+	
 	auto_preview = gconf_client_get_bool (gconf_client_get_default (), "/apps/gtk-theme-selector/auto", NULL);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (glade_xml_get_widget (xml, "check1")), auto_preview);
 			

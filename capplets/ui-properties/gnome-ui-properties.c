@@ -75,9 +75,6 @@ dialog_button_clicked_cb (GtkDialog *dialog, gint response_id, GConfChangeSet *c
 {
   switch (response_id)
     {
-    case RESPONSE_APPLY:
-      gconf_client_commit_change_set (gconf_client_get_default (), changeset, TRUE, NULL);
-      break;
     case RESPONSE_CLOSE:
     case GTK_RESPONSE_DELETE_EVENT:
     default:
@@ -125,7 +122,7 @@ int
 main (int argc, char **argv)
 {
   GConfClient    *client;
-  GConfChangeSet *changeset;
+  GConfChangeSet *changeset = NULL;
   GladeXML       *dialog;
 
   bindtextdomain (PACKAGE, GNOMELOCALEDIR);
@@ -137,15 +134,12 @@ main (int argc, char **argv)
 		      NULL);
 
   client = gconf_client_get_default ();
-  changeset = gconf_change_set_new ();
   gconf_client_add_dir (client, "/desktop/gnome/interface", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 
   dialog = create_dialog ();
   setup_dialog (dialog, changeset);
 
   gtk_main ();
-
-  gconf_change_set_unref (changeset);
 
   return 0;
 }

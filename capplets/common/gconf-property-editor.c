@@ -409,6 +409,7 @@ peditor_string_value_changed (GConfClient         *client,
 			      GConfPropertyEditor *peditor) 
 {
 	GConfValue *value, *value_wid;
+	const char *entry_current_text;
 
 	if (peditor->p->changeset != NULL)
 		gconf_change_set_remove (peditor->p->changeset, peditor->p->key);
@@ -417,7 +418,10 @@ peditor_string_value_changed (GConfClient         *client,
 
 	if (value != NULL) {
 		value_wid = peditor->p->conv_to_widget_cb (value);
-		gtk_entry_set_text (GTK_ENTRY (peditor->p->ui_control), gconf_value_get_string (value));
+		entry_current_text = gtk_entry_get_text (GTK_ENTRY (peditor->p->ui_control));
+		if (strcmp (entry_current_text, gconf_value_get_string (value)) != 0) {
+		  gtk_entry_set_text (GTK_ENTRY (peditor->p->ui_control), gconf_value_get_string (value_wid));
+		}
 		gconf_value_free (value_wid);
 	}
 }
@@ -426,13 +430,17 @@ static void
 peditor_string_widget_changed (GConfPropertyEditor *peditor,
 			       GtkEntry            *entry)
 {
-	GConfValue *value, *value_wid;
-
+	  GConfValue *value, *value_wid;
+	  
 	if (!peditor->p->inited) return;
+
 	value_wid = gconf_value_new (GCONF_VALUE_STRING);
+
 	gconf_value_set_string (value_wid, gtk_entry_get_text (entry));
 	value = peditor->p->conv_from_widget_cb (value_wid);
+
 	peditor_set_gconf_value (peditor, peditor->p->key, value);
+
 	g_signal_emit (peditor, peditor_signals[VALUE_CHANGED], 0, peditor->p->key, value);
 	gconf_value_free (value_wid);
 	gconf_value_free (value);

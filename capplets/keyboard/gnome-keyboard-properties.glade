@@ -24,19 +24,6 @@
             <property name="layout_style">GTK_BUTTONBOX_END</property>
             <property name="spacing">8</property>
             <property name="visible">yes</property>
-
-            <child>
-              <widget class="GtkButton" id="button1">
-                <property name="can_default">yes</property>
-                <property name="can_focus">yes</property>
-                <property name="visible">yes</property>
-                <property name="label" translatable="yes">gtk-apply</property>
-                <property name="use_stock">yes</property>
-                <property name="response_id">1</property>
-                <property name="use_underline">yes</property>
-              </widget>
-            </child>
-
             <child>
               <widget class="GtkButton" id="button3">
                 <property name="can_default">yes</property>
@@ -519,7 +506,8 @@
                                         <property name="value_pos">GTK_POS_TOP</property>
                                         <property name="digits">1</property>
                                         <property name="visible">yes</property>
-                                        <property name="adjustment">100 100 2500 200 200 200</property>
+					<property name="update_policy">GTK_UPDATE_DISCONTINUOUS</property>
+                                        <property name="adjustment">1000 100 2500 200 200 0</property>
                                       </widget>
                                       <packing>
                                         <property name="padding">0</property>
@@ -741,9 +729,10 @@
                                         <property name="can_focus">yes</property>
                                         <property name="draw_value">no</property>
                                         <property name="value_pos">GTK_POS_TOP</property>
+					<property name="update_policy">GTK_UPDATE_DISCONTINUOUS</property>
                                         <property name="digits">1</property>
                                         <property name="visible">yes</property>
-                                        <property name="adjustment">0 -100 100 20 20 20</property>
+                                        <property name="adjustment">0 -100 100 20 20 0</property>
                                       </widget>
                                       <packing>
                                         <property name="padding">0</property>

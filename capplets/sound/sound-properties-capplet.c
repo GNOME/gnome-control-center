@@ -83,10 +83,10 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 {
 	GObject *peditor;
 
-	peditor = gconf_peditor_new_boolean (changeset, "/desktop/gnome/sound/enable_esd", WID ("enable_toggle"), NULL);
+	peditor = gconf_peditor_new_boolean (NULL, "/desktop/gnome/sound/enable_esd", WID ("enable_toggle"), NULL);
 	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("events_toggle"));
 	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("events_vbox"));
-	peditor = gconf_peditor_new_boolean (changeset, "/desktop/gnome/sound/event_sounds", WID ("events_toggle"), NULL);
+	peditor = gconf_peditor_new_boolean (NULL, "/desktop/gnome/sound/event_sounds", WID ("events_toggle"), NULL);
 }
 
 /* get_legacy_settings
@@ -114,10 +114,6 @@ static void
 dialog_button_clicked_cb (GtkDialog *dialog, gint response_id, GConfChangeSet *changeset) 
 {
 	switch (response_id) {
-	case GTK_RESPONSE_APPLY:
-		gconf_client_commit_change_set (gconf_client_get_default (), changeset, TRUE, NULL);
-		break;
-
 	case GTK_RESPONSE_CLOSE:
 		gtk_main_quit ();
 		break;
@@ -169,7 +165,6 @@ main (int argc, char **argv)
 
 		dialog_win = gtk_dialog_new_with_buttons
 			(_("Sound properties"), NULL, -1,
-			 GTK_STOCK_APPLY, GTK_RESPONSE_APPLY,
 			 GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
 			 NULL);
 

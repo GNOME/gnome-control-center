@@ -84,6 +84,7 @@ rate_from_widget (GConfValue *value)
 
 	new_value = gconf_value_new (GCONF_VALUE_INT);
 	gconf_value_set_int (new_value, rates[gconf_value_get_int (value)]);
+
 	return new_value;
 }
 
@@ -156,6 +157,31 @@ bell_to_widget (GConfValue *value)
 	return new_value;
 }
 
+
+static GConfValue *
+blink_from_widget (GConfValue *value) 
+{
+	GConfValue *new_value;
+
+	new_value = gconf_value_new (GCONF_VALUE_INT);
+	gconf_value_set_int (new_value, 2600 - (int) gconf_value_get_float (value));
+
+	return new_value;
+}
+
+static GConfValue *
+blink_to_widget (GConfValue *value) 
+{
+	GConfValue *new_value;
+	gint current_rate;
+
+	current_rate = gconf_value_get_int (value);
+	new_value = gconf_value_new (GCONF_VALUE_FLOAT);
+	gconf_value_set_float (new_value, CLAMP (2600 - current_rate, 100, 2500));
+
+	return new_value;
+}
+
 static void
 bell_guard (GtkWidget *toggle,
 	    GladeXML  *dialog)
@@ -181,9 +207,6 @@ dialog_response (GtkWidget *widget,
 {
 	switch (response_id)
 	{
-	case RESPONSE_APPLY:
-		gconf_client_commit_change_set (gconf_client_get_default (), changeset, TRUE, NULL);
-		break;
 	case RESPONSE_CLOSE:
 	case GTK_RESPONSE_DELETE_EVENT:
 	default:
@@ -220,13 +243,13 @@ setup_dialog (GladeXML       *dialog,
 	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("repeat_table"));
 
 	gconf_peditor_new_select_menu
-		(changeset, "/gnome/desktop/peripherals/keyboard/delay", WID ("repeat_delay_omenu"),
+		(changeset, "/desktop/gnome/peripherals/keyboard/delay", WID ("repeat_delay_omenu"),
 		 "conv-to-widget-cb", delay_to_widget,
 		 "conv-from-widget-cb", delay_from_widget,
 		 NULL);
 
 	gconf_peditor_new_select_menu
-		(changeset, "/gnome/desktop/peripherals/keyboard/rate", WID ("repeat_speed_omenu"),
+		(changeset, "/desktop/gnome/peripherals/keyboard/rate", WID ("repeat_speed_omenu"),
 		 "conv-to-widget-cb", rate_to_widget,
 		 "conv-from-widget-cb", rate_from_widget,
 		 NULL);
@@ -235,14 +258,17 @@ setup_dialog (GladeXML       *dialog,
 		(changeset, "/desktop/gnome/interface/cursor_blink", WID ("cursor_toggle"), NULL);
 	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("cursor_hbox"));
 	gconf_peditor_new_numeric_range
-		(changeset, "/desktop/gnome/interface/cursor_blink_time", WID ("cursor_blink_time_scale"), NULL);
+		(changeset, "/desktop/gnome/interface/cursor_blink_time", WID ("cursor_blink_time_scale"),
+		 "conv-to-widget-cb", blink_to_widget,
+		 "conv-from-widget-cb", blink_from_widget,
+		 NULL);
 
 
 	peditor = gconf_peditor_new_boolean
 		(changeset, "/desktop/gnome/peripherals/keyboard/click", WID ("volume_toggle"), NULL);
 	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("volume_hbox"));
 	gconf_peditor_new_numeric_range
-		(changeset, "/desktop/gnome/peripherals/keyboard/clickvolume", WID ("volume_scale"), NULL);
+		(changeset, "/desktop/gnome/peripherals/keyboard/click_volume", WID ("volume_scale"), NULL);
 	
 	g_signal_connect (G_OBJECT (WID ("bell_custom_radio")), "toggled", (GCallback) bell_guard, dialog);
 	peditor = gconf_peditor_new_select_radio
@@ -310,13 +336,12 @@ main (int argc, char **argv)
 	if (get_legacy) {
 		get_legacy_settings ();
 	} else {
-		changeset = gconf_change_set_new ();
+		changeset = NULL;
 		dialog = create_dialog ();
 		setup_dialog (dialog, changeset);
 
 		gtk_widget_show_all (WID ("keyboard_dialog"));
 		gtk_main ();
-		gconf_change_set_unref (changeset);
 	}
 
 	return 0;

@@ -41,6 +41,8 @@ static void      bg_preferences_class_init (BGPreferencesClass *class);
 static void      bg_preferences_finalize   (GObject            *object);
 
 static GdkColor *read_color_from_string    (const gchar        *string);
+static orientation_t read_orientation_from_string  (gchar *string);
+static wallpaper_type_t read_wptype_from_string (gchar *string);
 
 GType
 bg_preferences_get_type (void)
@@ -173,22 +175,30 @@ bg_preferences_load (BGPreferences *prefs)
 
 	client = gconf_client_get_default ();
 
-	prefs->enabled = gconf_client_get_bool (client, "/desktop/gnome/background/enabled", &error);
-	prefs->wallpaper_type = gconf_client_get_int (client, "/desktop/gnome/background/wallpaper-type", &error);
-	prefs->wallpaper_filename = gconf_client_get_string (client, "/desktop/gnome/background/wallpaper-filename", &error);
-	prefs->wallpaper_enabled = gconf_client_get_bool (client, "/desktop/gnome/background/wallpaper-enabled", &error);
-	prefs->color1 = read_color_from_string (gconf_client_get_string (client, "/desktop/gnome/background/color1", &error));
-	prefs->color2 = read_color_from_string (gconf_client_get_string (client, "/desktop/gnome/background/color2", &error));
-	prefs->opacity = gconf_client_get_int (client, "/desktop/gnome/background/opacity", &error);
+	prefs->enabled = gconf_client_get_bool (client, BG_PREFERENCES_DRAW_BACKGROUND, &error);
+	prefs->wallpaper_filename = gconf_client_get_string (client, BG_PREFERENCES_PICTURE_FILENAME, &error);
+
+	prefs->color1 = read_color_from_string (gconf_client_get_string (client, BG_PREFERENCES_PRIMARY_COLOR, &error));
+	prefs->color2 = read_color_from_string (gconf_client_get_string (client, BG_PREFERENCES_SECONDARY_COLOR, &error));
+
+	prefs->opacity = gconf_client_get_int (client, BG_PREFERENCES_PICTURE_OPACITY, &error);
 	if (prefs->opacity >= 100 || prefs->opacity < 0)
 		prefs->adjust_opacity = FALSE;
 
-	prefs->orientation = gconf_client_get_int (client, "/desktop/gnome/background/orientation", &error);
-
+	prefs->orientation = read_orientation_from_string (gconf_client_get_string (client, BG_PREFERENCES_COLOR_SHADING_TYPE, &error));
 	if (prefs->orientation == ORIENTATION_SOLID)
 		prefs->gradient_enabled = FALSE;
 	else
 		prefs->gradient_enabled = TRUE;
+
+	prefs->wallpaper_type = read_wptype_from_string (gconf_client_get_string (client, BG_PREFERENCES_PICTURE_OPTIONS, &error));
+
+	if (prefs->wallpaper_type == -1) {
+	  prefs->wallpaper_enabled = FALSE;
+	  prefs->wallpaper_type = WPTYPE_CENTERED;
+	} else {
+	  prefs->wallpaper_enabled = TRUE;
+	}
 }
 
 /* Parse the event name given (the event being notification of a property having
@@ -205,10 +215,17 @@ bg_preferences_merge_entry (BGPreferences    *prefs,
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_BG_PREFERENCES (prefs));
 
-	if (!strcmp (entry->key, "/desktop/gnome/background/wallpaper_type")) {
-		prefs->wallpaper_type = gconf_value_get_int (value);
+	if (!strcmp (entry->key, BG_PREFERENCES_PICTURE_OPTIONS)) {
+  	        prefs->wallpaper_type = read_wptype_from_string (g_strdup (gconf_value_get_string (value)));
+		if (prefs->wallpaper_type == -1) {
+		  prefs->wallpaper_enabled = FALSE;
+		  prefs->wallpaper_type = WPTYPE_CENTERED;
+		} else {
+		  prefs->wallpaper_enabled = TRUE;
+		}
+		  
 	}
-	else if (!strcmp (entry->key, "/desktop/gnome/background/wallpaper-filename")) {
+	else if (!strcmp (entry->key, BG_PREFERENCES_PICTURE_FILENAME)) {
 		prefs->wallpaper_filename = g_strdup (gconf_value_get_string (value));
 
 		if (prefs->wallpaper_filename != NULL &&
@@ -218,27 +235,27 @@ bg_preferences_merge_entry (BGPreferences    *prefs,
 		else
 			prefs->wallpaper_enabled = FALSE;
 	}
-	else if (!strcmp (entry->key, "/desktop/gnome/background/color1")) {
+	else if (!strcmp (entry->key, BG_PREFERENCES_PRIMARY_COLOR)) {
 		prefs->color1 = read_color_from_string (gconf_value_get_string (value));
 	}
-	else if (!strcmp (entry->key, "/desktop/gnome/background/color2")) {
+	else if (!strcmp (entry->key, BG_PREFERENCES_SECONDARY_COLOR)) {
 		prefs->color2 = read_color_from_string (gconf_value_get_string (value));
 	}
-	else if (!strcmp (entry->key, "/desktop/gnome/background/opacity")) {
+	else if (!strcmp (entry->key, BG_PREFERENCES_PICTURE_OPACITY)) {
 		prefs->opacity = gconf_value_get_int (value);
 
 		if (prefs->opacity >= 100)
 			prefs->adjust_opacity = FALSE;
 	}
-	else if (!strcmp (entry->key, "/desktop/gnome/background/orientation")) {
-		prefs->orientation = gconf_value_get_int (value);
+	else if (!strcmp (entry->key, BG_PREFERENCES_COLOR_SHADING_TYPE)) {
+		prefs->orientation = read_orientation_from_string (g_strdup (gconf_value_get_string (value)));
 
 		if (prefs->orientation == ORIENTATION_SOLID)
 			prefs->gradient_enabled = FALSE;
 		else
 			prefs->gradient_enabled = TRUE;
 	}
-	else if (!strcmp (entry->key, "/desktop/gnome/background/wallpaper-enabled")) {
+	else if (!strcmp (entry->key, BG_PREFERENCES_DRAW_BACKGROUND)) {
 		if (gconf_value_get_bool (value) &&
 				(prefs->wallpaper_filename != NULL) &&
 		    strcmp (prefs->wallpaper_filename, "") != 0 &&
@@ -246,12 +263,49 @@ bg_preferences_merge_entry (BGPreferences    *prefs,
 			prefs->wallpaper_enabled = TRUE;
 		else
 			prefs->wallpaper_enabled = FALSE;
-	}
-	else if (!strcmp (entry->key, "/desktop/gnome/background/wallpaper-type")) {
-		prefs->wallpaper_type = gconf_value_get_int (value);
 	} else {
-		g_warning ("%s: Unknown property: %s", G_GNUC_FUNCTION, entry->key);
+		g_warning ("%s: Unknown property: %s", __FUNCTION__, entry->key);
 	}
+}
+
+static wallpaper_type_t
+read_wptype_from_string (gchar *string)
+{
+        wallpaper_type_t type = -1;
+      
+	if (string) {
+		if (!strncmp (string, "wallpaper", sizeof ("wallpaper"))) {
+			type =  WPTYPE_TILED;
+		} else if (!strncmp (string, "centered", sizeof ("centered"))) {
+			type =  WPTYPE_CENTERED;
+		} else if (!strncmp (string, "scaled", sizeof ("scaled"))) {
+			type =  WPTYPE_SCALED;
+		} else if (!strncmp (string, "stretched", sizeof ("stretched"))) {
+			type =  WPTYPE_STRETCHED;
+		} else if (!strncmp (string, "embossed", sizeof ("embossed"))) {
+			type =  WPTYPE_EMBOSSED;
+		}
+		g_free (string);
+	}
+
+	return type;
+}
+
+static orientation_t
+read_orientation_from_string (gchar *string)
+{
+        orientation_t type = ORIENTATION_SOLID;
+
+	if (string) {
+		if (!strncmp (string, "vertical-gradient", sizeof ("vertical-gradient"))) {
+			type = ORIENTATION_VERT;
+		} else if (!strncmp (string, "horizontal-gradient", sizeof ("horizontal-gradient"))) {
+			type = ORIENTATION_HORIZ;
+		}
+		g_free (string);
+	}
+	   
+	return type;
 }
 
 static GdkColor *
@@ -267,7 +321,10 @@ read_color_from_string (const gchar *string)
 		rgb = ((color->red >> 8) << 16) ||
 			((color->green >> 8) << 8) ||
 			(color->blue >> 8);
+#if 0
+		/* fixme: I am not sure, but this can be accomplished otherwise */
 		color->pixel = gdk_rgb_xpixel_from_rgb (rgb);
+#endif
 	}
 
 	return color;

@@ -117,10 +117,6 @@ read_editor (GConfClient *client,
 		return;
 	}
 
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("text_custom_terminal_toggle")), needs_term);
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("text_custom_line_toggle")), accepts_lineno);
-	gtk_entry_set_text (GTK_ENTRY (WID ("text_custom_command_entry")), editor);
-
 	for (i = 0; i < G_N_ELEMENTS (possible_editors); i++ ) {
 		if (possible_editors[i].in_path == FALSE)
 			continue;
@@ -139,21 +135,6 @@ read_editor (GConfClient *client,
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("text_select_radio")), TRUE);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("text_custom_radio")), TRUE);
 	g_free (editor);
-}
-
-static void
-write_editor (GladeXML *dialog)
-{
-	const gchar *command = gtk_entry_get_text (GTK_ENTRY (WID ("text_custom_command_entry")));
-	gboolean needs_term = GTK_TOGGLE_BUTTON (WID ("text_custom_terminal_toggle"))->active;
-	gboolean accepts_lineno = GTK_TOGGLE_BUTTON (WID ("text_custom_line_toggle"))->active;
-		 
-	gconf_client_set_bool (client, "/desktop/gnome/applications/editor/needs_term",
-			       needs_term, NULL);
-	gconf_client_set_bool (client, "/desktop/gnome/applications/editor/accepts_lineno",
-			       accepts_lineno, NULL);
-	gconf_client_set_string (client, "/desktop/gnome/applications/editor/exec",
-				 command, NULL);
 }
 
 static void
@@ -176,6 +157,39 @@ text_setup_custom (GtkWidget *entry,
 	}
 }
 
+
+static void 
+setup_peditors (GConfClient *client,
+		GladeXML    *dialog)
+{
+        GConfChangeSet *changeset = NULL;
+	
+	gconf_peditor_new_boolean (changeset, "/desktop/gnome/applications/editor/needs_term", 
+				   WID ("text_custom_terminal_toggle"), NULL);
+	gconf_peditor_new_boolean (changeset, "/desktop/gnome/applications/accepts_lineo",
+				   WID ("text_custom_line_toggle"), NULL);
+	gconf_peditor_new_string  (changeset, "/desktop/gnome/applications/editor/exec",
+				   WID ("text_custom_command_entry"), NULL);
+
+	gconf_peditor_new_boolean (changeset, "/desktop/gnome/applications/browser/needs_term", 
+				   WID ("web_custom_terminal_toggle"), NULL);
+	gconf_peditor_new_boolean (changeset, "/desktop/gnome/applications/browser/nremote", 
+				   WID ("web_custom_remote_toggle"), NULL);
+	gconf_peditor_new_string  (changeset, "/desktop/gnome/applications/browser/exec",
+				   WID ("web_custom_command_entry"), NULL);
+
+	gconf_peditor_new_boolean (changeset, "/desktop/gnome/applications/help_viewer/needs_term", 
+				   WID ("help_custom_terminal_toggle"), NULL);
+	gconf_peditor_new_boolean (changeset, "/desktop/gnome/applications/help_viewer/accepts_lineno", 
+				   WID ("help_custom_url_toggle"), NULL);
+	gconf_peditor_new_string  (changeset, "/desktop/gnome/applications/help_viewer/exec",
+				   WID ("help_custom_command_entry"), NULL);
+
+	gconf_peditor_new_string  (changeset, "/desktop/gnome/applications/terminal/exec",
+				   WID ("terminal_custom_command_entry"), NULL);
+	gconf_peditor_new_string  (changeset, "/desktop/gnome/applications/terminal/exec_arg",
+				   WID ("terminal_custom_exec_entry"), NULL);
+}
 
 static void
 read_browser (GConfClient *client,
@@ -201,10 +215,6 @@ read_browser (GConfClient *client,
 		return;
 	}
 
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("web_custom_terminal_toggle")), needs_term);
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("web_custom_remote_toggle")), nremote);
-	gtk_entry_set_text (GTK_ENTRY (WID ("web_custom_command_entry")), browser);
-
 	for (i = 0; i < G_N_ELEMENTS (possible_browsers); i++ ) {
 		if (possible_browsers[i].in_path == FALSE)
 			continue;
@@ -228,17 +238,6 @@ read_browser (GConfClient *client,
 }
 
 static void
-write_browser (GladeXML *dialog)
-{
-	gconf_client_set_bool (client, "/desktop/gnome/applications/browser/needs_term",
-			       GTK_TOGGLE_BUTTON (WID ("web_custom_terminal_toggle"))->active, NULL);
-	gconf_client_set_bool (client, "/desktop/gnome/applications/browser/nremote",
-			       GTK_TOGGLE_BUTTON (WID ("web_custom_remote_toggle"))->active, NULL);
-	gconf_client_set_string (client, "/desktop/gnome/applications/browser/exec",
-				 gtk_entry_get_text (GTK_ENTRY (WID ("web_custom_command_entry"))), NULL);
-}
-
-static void
 browser_setup_custom (GtkWidget *entry,
 		      GladeXML  *dialog)
 {
@@ -247,7 +246,7 @@ browser_setup_custom (GtkWidget *entry,
 
 	for (i = 0; i < G_N_ELEMENTS (possible_browsers); i++ ) {
 		if (! strcmp (_(possible_browsers[i].name), browser)) {
-			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("web_custom_terminal_toggle")),
+		        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("web_custom_terminal_toggle")),
 						      possible_browsers[i].needs_term);
 			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("web_custom_remote_toggle")),
 						      possible_browsers[i].nremote);
@@ -305,17 +304,6 @@ read_help_viewer (GConfClient *client,
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("help_select_radio")), TRUE);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("help_custom_radio")), TRUE);
 	g_free (help_viewer);
-}
-
-static void
-write_help_viewer (GladeXML *dialog)
-{
-	gconf_client_set_bool (client, "/desktop/gnome/applications/help_viewer/needs_term",
-			       GTK_TOGGLE_BUTTON (WID ("help_custom_terminal_toggle"))->active, NULL);
-	gconf_client_set_bool (client, "/desktop/gnome/applications/help_viewer/accepts_lineno",
-			       GTK_TOGGLE_BUTTON (WID ("help_custom_url_toggle"))->active, NULL);
-	gconf_client_set_string (client, "/desktop/gnome/applications/help_viewer/exec",
-				 gtk_entry_get_text (GTK_ENTRY (WID ("help_custom_command_entry"))), NULL);
 }
 
 static void
@@ -380,15 +368,6 @@ read_terminal (GConfClient *client,
 }
 
 static void
-write_terminal (GladeXML *dialog)
-{
-	gconf_client_set_string (client, "/desktop/gnome/applications/terminal/exec",
-				 gtk_entry_get_text (GTK_ENTRY (WID ("terminal_custom_command_entry"))), NULL);
-	gconf_client_set_string (client, "/desktop/gnome/applications/terminal/exec_arg",
-				 gtk_entry_get_text (GTK_ENTRY (WID ("terminal_custom_exec_entry"))), NULL);
-}
-
-static void
 terminal_setup_custom (GtkWidget *entry,
 		       GladeXML  *dialog)
 {
@@ -413,13 +392,9 @@ value_changed_cb (GConfClient *client,
 	g_return_if_fail (key != NULL);
 
 	if (strncmp (key, "/desktop/gnome/applications/editor", strlen ("/desktop/gnome/applications/editor")) == 0) {
-		read_editor (client, dialog);
-	} else if (strncmp (key, "/desktop/gnome/applications/browser", strlen ("/desktop/gnome/applications/browser")) == 0) {
-		read_browser (client, dialog);
+	} else if (strncmp (key, "/desktop/gnome/applications/browser/exec", strlen ("/desktop/gnome/applications/browser/exec")) == 0) {
 	} else if (strncmp (key, "/desktop/gnome/applications/help_viewer", strlen ("/desktop/gnome/applications/help_viewer")) == 0) {
-		read_help_viewer (client, dialog);
 	} else if (strncmp (key, "/desktop/gnome/applications/terminal", strlen ("/desktop/gnome/applications/terminal")) == 0) {
-		read_terminal (client, dialog);
 	}
 }
 
@@ -431,11 +406,6 @@ dialog_response (GtkDialog *widget,
 
 	switch (response_id) {
 	case 1: /* Apply */
-		write_editor (dialog);
-		write_browser (dialog);
-		write_help_viewer (dialog);
-		write_terminal (dialog);
-		
 		break;
 	case 2:  /* Close */
 	case -4: /* keyboard esc or WM close */
@@ -445,7 +415,6 @@ dialog_response (GtkDialog *widget,
 		g_assert_not_reached ();
 	};
 }
-
 
 
 static GladeXML *
@@ -515,6 +484,7 @@ create_dialog (GConfClient *client)
 	g_signal_connect (G_OBJECT (WID ("web_custom_radio")),
 			  "toggled", (GCallback) generic_guard,
 			  WID ("web_custom_vbox"));
+	setup_peditors (client, dialog);
 	read_browser (client, dialog);
 
 	/* Help page */

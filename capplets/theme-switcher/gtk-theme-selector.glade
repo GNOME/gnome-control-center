@@ -35,6 +35,8 @@
 		      <widget class="GtkTreeView" id="tree1">
 		        <property name="headers_visible">no</property>
 		        <property name="visible">yes</property>
+
+			<signal name="cursor_changed" handler="call_apply" />
 		      </widget>
 		    </child>
 		  </widget>
@@ -116,17 +118,8 @@
 
     <child internal-child="action_area">
       <widget class="GtkHButtonBox" id="buttonbox1">
-        <child>	   
-          <widget class="GtkButton" id="button1">
-            <property name="label">gtk-apply</property>
-            <property name="use_stock">yes</property>
-            <property name="use_underline">yes</property>
-            <property name="response_id">1</property>
-            <property name="visible">yes</property>
-          </widget>
-        </child>
 	<child>
-          <widget class="GtkButton" id="button2">
+          <widget class="GtkButton" id="button1">
             <property name="label">gtk-close</property>
             <property name="use_stock">yes</property>
             <property name="use_underline">yes</property>

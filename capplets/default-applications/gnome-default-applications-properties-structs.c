@@ -66,8 +66,9 @@ BrowserDescription possible_browsers[] =
 
 HelpViewDescription possible_help_viewers[] = 
 { 
-        { "Gnome Help Browser", "yelp", FALSE, TRUE, FALSE },
-        { "Nautilus", "nautilus",       FALSE, TRUE, FALSE }
+        { "Yelp Gnome Help Browser", "yelp",  FALSE, TRUE, FALSE },
+        { "Gnome Help Browser", "gnome-help", FALSE, TRUE, FALSE },
+        { "Nautilus", "nautilus",             FALSE, TRUE, FALSE }
 };
 
 TerminalDescription possible_terminals[] = 

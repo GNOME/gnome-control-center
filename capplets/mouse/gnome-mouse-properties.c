@@ -421,8 +421,10 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 		 NULL);
 
 	gconf_peditor_new_numeric_range
-		(changeset, "/desktop/gnome/peripherals/mouse/motion_threshold",
-		 WID ("sensitivity_scale"), NULL);
+		(changeset, "/desktop/gnome/peripherals/mouse/motion_threshold", WID ("sensitivity_scale"),
+		 "conv-to-widget-cb", threshold_from_gconf,
+		 "conv-from-widget-cb", gconf_value_float_to_int,
+		 NULL);
 
 	/* DnD threshold */
 	gconf_peditor_new_numeric_range
@@ -470,11 +472,8 @@ static void
 dialog_button_clicked_cb (GtkDialog *dialog, gint response_id, GConfChangeSet *changeset) 
 {
 	switch (response_id) {
-	case GTK_RESPONSE_APPLY:
-		gconf_client_commit_change_set (gconf_client_get_default (), changeset, TRUE, NULL);
-		break;
-
 	case GTK_RESPONSE_CLOSE:
+	default:
 		gtk_main_quit ();
 		break;
 	}
@@ -510,14 +509,13 @@ main (int argc, char **argv)
 	if (get_legacy) {
 		get_legacy_settings ();
 	} else {
-		changeset = gconf_change_set_new ();
+		changeset = NULL;
 		dialog = create_dialog ();
 		load_pixbufs ();
 		setup_dialog (dialog, changeset);
 
 		dialog_win = gtk_dialog_new_with_buttons
 			(_("Mouse Properties"), NULL, -1,
-			 GTK_STOCK_APPLY, GTK_RESPONSE_APPLY,
 			 GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
 			 NULL);
 
@@ -526,7 +524,6 @@ main (int argc, char **argv)
 		gtk_widget_show_all (dialog_win);
 
 		gtk_main ();
-		gconf_change_set_unref (changeset);
 	}
 
 	return 0;
