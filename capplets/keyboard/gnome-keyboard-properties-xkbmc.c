@@ -90,23 +90,25 @@ fill_models_list (GladeXML * chooserDialog)
   XklConfigEnumModels ((ConfigItemProcessFunc)
 		       add_model_to_list, modelsList);
 
-  if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (listStore), &iter))
+  if (currentModelName != NULL)
   {
-    do
+    if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (listStore), &iter))
     {
-      gtk_tree_model_get (GTK_TREE_MODEL (listStore), &iter, 
-                          1, &modelName, -1);
-      if (currentModelName != NULL &&
-          !g_ascii_strcasecmp(modelName, currentModelName))
+      do
       {
-        gtk_tree_selection_select_iter (gtk_tree_view_get_selection (GTK_TREE_VIEW (modelsList)), &iter);
-        path = gtk_tree_model_get_path (GTK_TREE_MODEL (listStore), &iter);
-        gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (modelsList),
-                                      path, NULL, TRUE, 0.5, 0);
-        gtk_tree_path_free (path);
-      }
-      g_free (modelName);
-    } while (gtk_tree_model_iter_next (GTK_TREE_MODEL (listStore), &iter));
+        gtk_tree_model_get (GTK_TREE_MODEL (listStore), &iter, 
+                            1, &modelName, -1);
+        if (!g_ascii_strcasecmp(modelName, currentModelName))
+        {
+          gtk_tree_selection_select_iter (gtk_tree_view_get_selection (GTK_TREE_VIEW (modelsList)), &iter);
+          path = gtk_tree_model_get_path (GTK_TREE_MODEL (listStore), &iter);
+          gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (modelsList),
+                                        path, NULL, TRUE, 0.5, 0);
+          gtk_tree_path_free (path);
+        }
+        g_free (modelName);
+      } while (gtk_tree_model_iter_next (GTK_TREE_MODEL (listStore), &iter));
+    }
   }
 
   g_signal_connect (G_OBJECT (gtk_tree_view_get_selection (GTK_TREE_VIEW (modelsList))), 
