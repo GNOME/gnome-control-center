@@ -19,8 +19,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2002-05-28 18:50+0200\n"
-"PO-Revision-Date: 2002-05-28 18:51+0200\n"
+"POT-Creation-Date: 2002-05-30 23:54+0200\n"
+"PO-Revision-Date: 2002-05-31 00:11+0200\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -29,7 +29,7 @@ msgstr ""
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:262
 msgid "_Enable keyboard accessibility"
-msgstr "_Aktivér tastaturtilgang"
+msgstr "_Aktivér tastaturtilgængelighed"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:329
 #, c-format
@@ -72,7 +72,7 @@ msgstr "Aktivér _langsomme taster"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:6
 msgid "Enable _Bounce Keys"
-msgstr "Aktivér _hoppende taster"
+msgstr "Aktivér _rystetaster"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade2.h:7
 msgid "Enable _Mouse Keys"
@@ -217,9 +217,10 @@ msgstr "_Øverste farve"
 msgid "_Bottom Color"
 msgstr "_Nederste farve"
 
+# betyder at billedet skal anbringes side-om-side med sig selv
 #: capplets/background/background-properties-capplet.c:398
 msgid "_Wallpaper"
-msgstr "_Baggrundsbillede"
+msgstr "_Tapetseret"
 
 #: capplets/background/background-properties-capplet.c:398
 msgid "C_entered"
@@ -244,11 +245,11 @@ msgstr "_Billede:"
 #: capplets/background/background-properties-capplet.c:558
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
-#: capplets/keyboard/gnome-keyboard-properties.c:367
+#: capplets/keyboard/gnome-keyboard-properties.c:359
 #: capplets/mouse/gnome-mouse-properties.c:727
 #: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
-msgstr "Indhent og gem gamle indstillinger"
+msgstr "Fremskaf og gem gamle indstillinger"
 
 #: capplets/background/background-properties-capplet.c:584
 #: capplets/background/background-properties.glade.h:2
@@ -302,13 +303,11 @@ msgstr "Ensfarvet"
 
 #: capplets/background/background-properties.glade.h:13
 msgid "The background picture's file name."
-msgstr "Baggrundsbilledets filnavn"
+msgstr "Baggrundsbilledets filnavn."
 
 #: capplets/background/background-properties.glade.h:14
 msgid "To set the background picture, drop an image or click to browse."
-msgstr ""
-"For at få et baggrundsbillede: slip et billede eller klik for et se efter "
-"filer"
+msgstr "Slip et billede eller klik for at se efter en fil for at få et baggrundsbillede."
 
 #: capplets/background/background-properties.glade.h:15
 msgid "Vertical gradient"
@@ -321,8 +320,8 @@ msgid ""
 "background picture."
 msgstr ""
 "Du kan trække billedfiler\n"
-"ind i vinduet for at angive\n"
-"baggrundsbilledet."
+"ind i vinduet for at vælge\n"
+"baggrundsbillede."
 
 #: capplets/background/background-properties.glade.h:19
 msgid "radiobutton1"
@@ -947,17 +946,17 @@ msgid "Source Code"
 msgstr "Kildekode"
 
 #: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:724
+#: capplets/file-types/mime-type-info.c:726
 msgid "Audio"
 msgstr "Lyd"
 
 #: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:720
+#: capplets/file-types/mime-type-info.c:722
 msgid "Images"
 msgstr "Billeder"
 
 #: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:722
+#: capplets/file-types/mime-type-info.c:724
 msgid "Video"
 msgstr "Video"
 
@@ -979,8 +978,7 @@ msgstr "Filtypeassocieringer"
 #: capplets/file-types/file-types.desktop.in.h:2
 msgid "Specify which programs are used to open or view each file type"
 msgstr ""
-"Angiv hvilke programmer der bruges til at åbne eller vise forskellige "
-"filtyper"
+"Vælg hvilke programmer der bruges til at åbne eller vise forskellige filtyper"
 
 #: capplets/file-types/file-types-properties.glade.h:1
 msgid "Actions"
@@ -1169,6 +1167,10 @@ msgstr "Kategori"
 msgid "Choose a file category"
 msgstr "Vælg en filkategori"
 
+#: capplets/file-types/mime-type-info.c:728
+msgid "Misc"
+msgstr "Diverse"
+
 #: capplets/file-types/mime-types-model.c:167
 #: capplets/file-types/mime-types-model.c:168
 msgid "Model for categories only"
@@ -1249,8 +1251,7 @@ msgstr "Gnome-dokumentation"
 
 #: capplets/font/font-properties.desktop.in.h:1
 msgid "Change the default fonts used by the desktop and applications"
-msgstr ""
-"Skift de standardskrifttyper der bruges af skrivebordet og programmerne"
+msgstr "Skift de standardskrifttyper der bruges af skrivebordet og programmerne"
 
 #: capplets/font/font-properties.desktop.in.h:2
 msgid "Font"
@@ -1262,11 +1263,11 @@ msgstr "Indstillinger for skrifttype"
 
 #: capplets/font/font-properties.glade.h:2
 msgid "Set the font for applications"
-msgstr "Angiv standardskrifttypen for programmer"
+msgstr "Vælg standardskrifttypen for programmer"
 
 #: capplets/font/font-properties.glade.h:3
 msgid "Set the font for the icons on the desktop"
-msgstr "Angiv skrifttypen for ikoner på skrivebordet"
+msgstr "Vælg skrifttypen for ikoner på skrivebordet"
 
 #: capplets/font/font-properties.glade.h:4
 msgid "Standard _application font:"
@@ -1295,7 +1296,7 @@ msgstr "Deaktiveret"
 #: capplets/keybindings/eggcellrendererkeys.c:309
 #: capplets/keybindings/eggcellrendererkeys.c:506
 msgid "Type a new accelerator, or press Backspace to clear"
-msgstr "Indtast en ny genvej eller tryk på slet tilbage for at rydde"
+msgstr "Tast en ny genvej eller tryk på slet tilbage for at rydde"
 
 #: capplets/keybindings/eggcellrendererkeys.c:509
 msgid "Type a new accelerator"
@@ -1318,7 +1319,7 @@ msgstr "Vindueshåndtering"
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Fejl ved anbringelse af ny genvej i konfigurationsdatabasen: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:840
+#: capplets/keybindings/gnome-keybinding-properties.c:851
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1326,17 +1327,17 @@ msgstr ""
 "Kunne ikke finde nogen tastaturtemaer. Dette betyder at Gtk+-installationen "
 "er ufuldstændig."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:865
+#: capplets/keybindings/gnome-keybinding-properties.c:876
 msgid "Action"
 msgstr "Handling"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:877
+#: capplets/keybindings/gnome-keybinding-properties.c:888
 msgid "Shortcut"
 msgstr "Genvej"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:1
 msgid "Click for a list of keyboard navigation schemes."
-msgstr "Klik for en liste over tastaturnavigationsmåder"
+msgstr "Klik for en liste over tastaturnavigationsmetoder"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:2
 #: capplets/keybindings/keybinding.desktop.in.h:2
@@ -1345,15 +1346,13 @@ msgstr "Tastaturgenveje"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:3
 msgid "Keyboard _Navigation scheme for use in applications:"
-msgstr "Tastatur_navigeringsmåde som skal bruges i programmer:"
+msgstr "Tastatur_navigeringsmetode som bruges i programmer:"
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:4
 msgid ""
 "To assign a shortcut to an action, click in the shortcut column and press "
 "the key combination you want to associate with it."
-msgstr ""
-"For at tildele en genveje til en handling: klik i genvejskolonnen og tryk "
-"den tastekombination du ønsker at associere den med."
+msgstr "Klik i genvejskolonnen og tryk den tastekombination du ønsker at associere en handling med."
 
 #: capplets/keybindings/gnome-keybinding-properties.glade.h:5
 msgid "_Desktop shortcuts:"
@@ -1363,12 +1362,12 @@ msgstr "_Skrivebordsgenveje:"
 msgid "Associate keyboard shortcuts with panel actions"
 msgstr "Bind tastaturgenveje til panelhandlinger"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:346
+#: capplets/keyboard/gnome-keyboard-properties.c:338
 msgid "_Accessibility"
 msgstr "_Tilgængelighed"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:363
-#: capplets/keyboard/gnome-keyboard-properties.c:365
+#: capplets/keyboard/gnome-keyboard-properties.c:355
+#: capplets/keyboard/gnome-keyboard-properties.c:357
 #: capplets/sound/sound-properties-capplet.c:145
 #: capplets/sound/sound-properties-capplet.c:147
 msgid ""
@@ -1407,7 +1406,7 @@ msgstr "Hurtig"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:10
 msgid "Key_press makes sound"
-msgstr "Taste_tryk genererer lyd"
+msgstr "Udsend lyd ved taste_tryk"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Keyboard Bell"
@@ -1419,7 +1418,7 @@ msgstr "Indstillinger for tastatur"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "Keyboard _repeats when key is held down"
-msgstr "Tastatur _gentager sig når en tast holdes ned"
+msgstr "_Gentag tegn når en tast holdes ned"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:15
 msgid "Keyboard bell _enabled"
@@ -1443,7 +1442,7 @@ msgstr "Mellem"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:20
 msgid "Repeat Rate"
-msgstr "Gentagelsesgrad"
+msgstr "Gentagelseshastighed"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:21
 msgid "Repeat s_peed:"
@@ -1451,12 +1450,12 @@ msgstr "Gentagelses_hastighed:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:22
 msgid "Set the speed the cursor blinks in text fields."
-msgstr "Angiv hastigheden af markørblink i tekstfelter"
+msgstr "Vælg hastigheden af markørblink i tekstfelter."
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:23
 msgid "Set the volume of the clicking sound made when pressing a key"
 msgstr ""
-"Angiv lydstyrken af den klikkende lyd der bliver genereret ved tryk på taster"
+"Vælg lydstyrken for den klikkende lyd der bliver genereret ved tastetryk."
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:24
 msgid "Short"
@@ -1505,7 +1504,7 @@ msgstr "_Brugerdefineret tastaturbip:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:34
 msgid "_Delay before repeating:"
-msgstr "_Ventetid før gentagelse:"
+msgstr "_Pause før gentagelse:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:35
 msgid "_Volume:"
@@ -1836,7 +1835,7 @@ msgstr "Træk og slip"
 #: capplets/mouse/gnome-mouse-properties.glade.h:14
 msgid ""
 "Left-handed mouse mode switches the left and right buttons on the mouse."
-msgstr "Venstrehåndstilstand ombytter højre og venstre knapper på musen."
+msgstr "Venstrehåndstilstand ombytter højre og venstre knap på musen."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:15
 msgid "Locate Pointer"
@@ -1846,9 +1845,7 @@ msgstr "Lokalisér markør"
 msgid ""
 "Maximum time allowed between clicks when double-clicking.   Use the box on "
 "the right to test."
-msgstr ""
-"Makimalt tilladt tid mellem klik ved dobbeltklik. Brug boksen til højre for "
-"at teste værdien."
+msgstr "Makimalt tilladt tid mellem klik ved dobbeltklik. Brug boksen til højre til at teste værdien."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:17
 msgid "Motion"
@@ -1864,11 +1861,11 @@ msgstr "Indstillinger for mus"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:20
 msgid "Set the distance you need to move your cursor before dragging an item."
-msgstr "Angiv den afstand markøren skal flyttes før et element bliver trukket."
+msgstr "Vælg den afstand markøren skal flyttes før et element bliver trukket."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:21
 msgid "Set the speed of your pointing device."
-msgstr "Angiv hastigheden for pegeenheden."
+msgstr "Vælg hastigheden for pegeenheden."
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:22
 msgid "Speed"
@@ -1888,7 +1885,7 @@ msgstr "_Venstrehåndet mus"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:26
 msgid "_Sensitivity:"
-msgstr "_Følsomhed"
+msgstr "_Følsomhed:"
 
 #: capplets/mouse/gnome-mouse-properties.glade.h:27
 msgid "_Show position of cursor when the Control key is pressed"
