@@ -42,10 +42,10 @@
 
 #include "applier.h"
 
-#define MONITOR_CONTENTS_X 0
-#define MONITOR_CONTENTS_Y 0
-#define MONITOR_CONTENTS_WIDTH 51
-#define MONITOR_CONTENTS_HEIGHT 38
+#define MONITOR_CONTENTS_X 20
+#define MONITOR_CONTENTS_Y 10
+#define MONITOR_CONTENTS_WIDTH 157
+#define MONITOR_CONTENTS_HEIGHT 111
 
 enum {
 	PROP_0,
@@ -390,27 +390,21 @@ bg_applier_apply_prefs (BGApplier           *bg_applier,
 		bg_applier->p->wallpaper_pixbuf = NULL;
 
 		if (new_prefs->wallpaper_enabled) {
-		        if (new_prefs->wallpaper_filename == NULL) {
-			        new_prefs->wallpaper_enabled = FALSE;
-			} else {
-			        g_return_if_fail (new_prefs->wallpaper_filename != NULL);
+			g_return_if_fail (new_prefs->wallpaper_filename != NULL);
 
-				bg_applier->p->wallpaper_pixbuf = 
-				  gdk_pixbuf_new_from_file (new_prefs->wallpaper_filename, NULL);
+			bg_applier->p->wallpaper_pixbuf = 
+				gdk_pixbuf_new_from_file (new_prefs->wallpaper_filename, NULL);
 
-				if (bg_applier->p->wallpaper_pixbuf == NULL) {
-				        g_warning (_("Could not load pixbuf \"%s\"; disabling wallpaper."),
-						   new_prefs->wallpaper_filename);
-					new_prefs->wallpaper_enabled = FALSE;
-				
-				}
-				else
-				{
-					if (bg_applier->p->timeout)
+			if (bg_applier->p->wallpaper_pixbuf == NULL) {
+				g_warning (_("Could not load pixbuf \"%s\"; disabling wallpaper."),
+					   new_prefs->wallpaper_filename);
+				new_prefs->wallpaper_enabled = FALSE;
+			}
+			else
+			{
+				if (bg_applier->p->timeout)
 						g_source_remove (bg_applier->p->timeout);
-					bg_applier->p->timeout = g_timeout_add (30000, (GSourceFunc) cleanup_cb, bg_applier);
-
-				}
+				bg_applier->p->timeout = g_timeout_add (30000, (GSourceFunc) cleanup_cb, bg_applier);
 			}
 		}
 	}
@@ -443,15 +437,68 @@ bg_applier_render_color_p (const BGApplier *bg_applier, const BGPreferences *pre
 GtkWidget *
 bg_applier_get_preview_widget (BGApplier *bg_applier) 
 {
-  if (bg_applier->p->preview_widget == NULL) {
-    GdkPixmap *pixmap;
+	GdkPixbuf *pixbuf;
+	GdkPixmap *pixmap;
+	GdkBitmap *mask;
+	GdkVisual *visual;
+	GdkColormap *colormap;
+	gchar *filename;
+	GdkGC *gc;
 
-    /* fixme: What to do here? gdk does not export root_parent publicly (Lauris) */
-    pixmap = gdk_pixmap_new (GDK_ROOT_PARENT(), 51, 38, -1);
-    bg_applier->p->preview_widget = gtk_image_new_from_pixmap (pixmap, NULL);
-  }
+	g_return_val_if_fail (bg_applier != NULL, NULL);
+	g_return_val_if_fail (IS_BG_APPLIER (bg_applier), NULL);
 
-  return bg_applier->p->preview_widget;
+	if (bg_applier->p->type != BG_APPLIER_PREVIEW)
+		return NULL;
+
+	if (bg_applier->p->preview_widget != NULL)
+		return bg_applier->p->preview_widget;
+
+	filename = gnome_pixmap_file ("monitor.png");
+	visual = gdk_window_get_visual (GDK_ROOT_PARENT ());
+	colormap = gdk_window_get_colormap (GDK_ROOT_PARENT ());
+
+	gtk_widget_push_visual (visual);
+	gtk_widget_push_colormap (colormap);
+
+	pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
+
+	if (pixbuf == NULL) return NULL;
+
+	pixmap = gdk_pixmap_new (GDK_ROOT_PARENT (),
+				 gdk_pixbuf_get_width (pixbuf),
+				 gdk_pixbuf_get_height (pixbuf),
+				 visual->depth);
+	mask = gdk_pixmap_new (GDK_ROOT_PARENT (),
+			       gdk_pixbuf_get_width (pixbuf),
+			       gdk_pixbuf_get_height (pixbuf),
+			       1);
+
+	gc = gdk_gc_new (GDK_ROOT_PARENT ());
+
+	gdk_pixbuf_render_threshold_alpha (pixbuf, mask,
+					   0, 0, 0, 0,
+					   gdk_pixbuf_get_width (pixbuf),
+					   gdk_pixbuf_get_height (pixbuf),
+					   1);
+
+	gdk_gc_set_clip_mask (gc, mask);
+
+	gdk_pixbuf_render_to_drawable (pixbuf, pixmap, gc,
+				       0, 0, 0, 0,
+				       gdk_pixbuf_get_width (pixbuf),
+				       gdk_pixbuf_get_height (pixbuf),
+				       GDK_RGB_DITHER_MAX, 0, 0);
+
+	bg_applier->p->preview_widget = gtk_pixmap_new (pixmap, mask);
+	gtk_widget_show (bg_applier->p->preview_widget);
+	g_object_unref (G_OBJECT (pixbuf));
+	g_free (filename);
+
+	gtk_widget_pop_visual ();
+	gtk_widget_pop_colormap ();
+
+	return bg_applier->p->preview_widget;
 }
 
 GdkPixbuf *
@@ -473,8 +520,6 @@ draw_disabled_message (GtkWidget *widget)
 	GdkGC          *gc;
 	gint            x, y, w, h;
 	const char     *disabled_string = _("Disabled");
-
-	printf ("disabled\n");
 
 	g_return_if_fail (widget != NULL);
 	g_return_if_fail (GTK_IS_IMAGE (widget));
@@ -806,8 +851,7 @@ create_pixmap (BGApplier *bg_applier, const BGPreferences *prefs)
 		if (!GTK_WIDGET_REALIZED (bg_applier->p->preview_widget))
 			gtk_widget_realize (bg_applier->p->preview_widget);
 
-		g_assert (gtk_image_get_storage_type (GTK_IMAGE(bg_applier->p->preview_widget)) == GTK_IMAGE_PIXMAP);
-		gtk_image_get_pixmap (GTK_IMAGE (bg_applier->p->preview_widget), &bg_applier->p->pixmap, NULL);
+		bg_applier->p->pixmap = GTK_PIXMAP (bg_applier->p->preview_widget)->pixmap;
 		bg_applier->p->pixmap_is_set = TRUE;
 		break;
 	}
@@ -918,8 +962,6 @@ get_geometry (wallpaper_type_t  wallpaper_type,
 		src_geom->width = pwidth;
 		src_geom->height = pheight;
 		break;
-	case WPTYPE_EMBOSSED:
-	        g_warning ("Embossing is not yet supported");
 	default:
 		g_error ("Bad wallpaper type");
 		break;
