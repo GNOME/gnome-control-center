@@ -1,5 +1,9 @@
 2001-12-17  Bradford Hovinen  <hovinen@ximian.com>
 
+	* preferences.c (preferences_merge_entry): Eliminate name; use
+	entry->key on the warning
+	(preferences_merge_entry): Use correct keys
+
 	* applier.c (applier_get_preview_widget): Make sure the pixmap is
 	masked correctly
 	(applier_apply_prefs): s/gtk_object_destroy/g_object_unref/

@@ -199,7 +199,6 @@ void
 preferences_merge_entry (Preferences      *prefs,
 			 const GConfEntry *entry)
 {
-	const gchar *name;
 	const GConfValue *value = gconf_entry_get_value (entry);
 
 	g_return_if_fail (prefs != NULL);
@@ -208,7 +207,7 @@ preferences_merge_entry (Preferences      *prefs,
 	if (!strcmp (entry->key, "/background-properties/wallpaper_type")) {
 		prefs->wallpaper_type = gconf_value_get_int (value);
 	}
-	else if (!strcmp (entry->key, "/background-properties/wallpaper_filename")) {
+	else if (!strcmp (entry->key, "/background-properties/wallpaper-filename")) {
 		prefs->wallpaper_filename = g_strdup (gconf_value_get_string (value));
 
 		if (prefs->wallpaper_filename != NULL &&
@@ -238,10 +237,13 @@ preferences_merge_entry (Preferences      *prefs,
 		else
 			prefs->gradient_enabled = TRUE;
 	}
-	else if (!strcmp (entry->key, "/background-properties/wallpaper_enabled")) {
+	else if (!strcmp (entry->key, "/background-properties/wallpaper-enabled")) {
 		prefs->wallpaper_enabled = gconf_value_get_bool (value);
+	}
+	else if (!strcmp (entry->key, "/background-properties/wallpaper-type")) {
+		prefs->wallpaper_type = gconf_value_get_int (value);
 	} else {
-		g_warning ("%s: Unknown property: %s", __FUNCTION__, name);
+		g_warning ("%s: Unknown property: %s", __FUNCTION__, entry->key);
 	}
 }
 
