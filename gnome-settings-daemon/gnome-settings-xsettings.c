@@ -129,6 +129,8 @@ static TranslationEntry translations [] = {
       GCONF_VALUE_STRING,	translate_string_string },
   { "/desktop/gnome/interface/file_chooser_backend",	"Gtk/FileChooserBackend",
       GCONF_VALUE_STRING,	translate_string_string },
+  { "/desktop/gnome/interface/menus_have_icons",	"Gtk/MenuImages",
+      GCONF_VALUE_BOOL,		translate_bool_int },
 };
 
 static TranslationEntry*
