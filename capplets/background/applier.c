@@ -1208,7 +1208,7 @@ set_root_pixmap (Pixmap pixmap)
 	gint format;
 	guchar *data_esetroot;
 
-	XGrabServer (GDK_DISPLAY ());
+/*  	XGrabServer (GDK_DISPLAY ()); */
 
 	XGetWindowProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (),
 			    gdk_atom_intern ("ESETROOT_PMAP_ID", FALSE),
@@ -1217,9 +1217,14 @@ set_root_pixmap (Pixmap pixmap)
 			    &data_esetroot);
 
 	if (type == XA_PIXMAP) {
-		if (format == 32 && nitems == 4)
-			XKillClient(GDK_DISPLAY (), 
-				    *((Pixmap *) data_esetroot));
+		if (format == 32 && nitems == 1) {
+			Pixmap old_pixmap;
+
+			old_pixmap = *((Pixmap *) data_esetroot);
+
+			if (old_pixmap != pixmap)
+				XKillClient(GDK_DISPLAY (), old_pixmap);
+		}
 
 		XFree (data_esetroot);
 	}
@@ -1244,7 +1249,7 @@ set_root_pixmap (Pixmap pixmap)
 	}
 
 	XClearWindow (GDK_DISPLAY (), GDK_ROOT_WINDOW ());
-	XUngrabServer (GDK_DISPLAY ());
+/*  	XUngrabServer (GDK_DISPLAY ()); */
 	XFlush(GDK_DISPLAY ());
 }
 
