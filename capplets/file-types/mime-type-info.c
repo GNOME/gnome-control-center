@@ -411,11 +411,10 @@ mime_category_info_save (MimeCategoryInfo *category)
 
 	basename = get_gconf_base_name (category);
 	key = g_strconcat (basename, "/default-action-id", NULL);
-	if (category->default_action != NULL) {
+	if ((set_ids = (category->default_action != NULL)))
 		gconf_client_set_string (gconf_client_get_default (),
 					 key, category->default_action->id, NULL);
-		set_ids = TRUE;
-	} else
+	else
 		gconf_client_unset (gconf_client_get_default (), key, NULL);
 	g_free (key);
 
