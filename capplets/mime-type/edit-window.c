@@ -1,3 +1,4 @@
+#include <config.h>
 #include "edit-window.h"
 #include "mime-data.h"
 #include "mime-info.h"
@@ -244,8 +245,10 @@ initialize_main_win ()
 	GtkWidget *frame, *table, *label;
 	GtkWidget *button;
 	GString *extension;
-	gchar *title[2] = {"Extensions"};
-
+	gchar *title[1]; 
+	
+	title[0] = _("Extensions");
+	
 	main_win = g_new (edit_window, 1);
 	main_win->window = gnome_dialog_new ("",
 					     GNOME_STOCK_BUTTON_OK,
@@ -278,7 +281,7 @@ initialize_main_win ()
 	gtk_box_pack_start (GTK_BOX (vbox), vbox2, FALSE, FALSE, 0);
 
 	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
-	main_win->ext_clist = gtk_clist_new_with_titles (1, title);
+	main_win->ext_clist = gtk_clist_new_with_titles (1, (title));
 	gtk_clist_column_titles_passive (GTK_CLIST (main_win->ext_clist));
 	gtk_clist_set_auto_sort (GTK_CLIST (main_win->ext_clist), TRUE);
 
