@@ -11,14 +11,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.3.5\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=l10n\n"
-"POT-Creation-Date: 2003-08-14 19:52+0800\n"
+"POT-Creation-Date: 2003-08-27 15:02-0400\n"
 "PO-Revision-Date: 2003-08-14 20:24+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=l10n\n"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:1
 msgid "<b>Applications</b>"
@@ -657,6 +657,10 @@ msgstr "首選應用程式"
 msgid "Select your default applications"
 msgstr "選取預設使用的應用程式"
 
+#: capplets/default-applications/gnome-default-applications-properties.c:108
+msgid "Please specify a name and a command for this editor."
+msgstr "請指定該編輯器的名稱及執行時的指令。"
+
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:39
 msgid "Epiphany"
 msgstr "Epiphany"
@@ -733,10 +737,6 @@ msgstr "RXVT"
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:70
 msgid "ETerm"
 msgstr "ETerm"
-
-#: capplets/default-applications/gnome-default-applications-properties.c:108
-msgid "Please specify a name and a command for this editor."
-msgstr "請指定該編輯器的名稱及執行時的指令。"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:2
 msgid "Add..."
@@ -1507,29 +1507,6 @@ msgstr "_VRGB"
 msgid "_Window title font:"
 msgstr "視窗標題字型(_W)："
 
-#: capplets/font/main.c:494 capplets/font/main.c:499
-msgid "Font may be too large"
-msgstr "字型可能過大"
-
-#: capplets/font/main.c:495
-#, c-format
-msgid ""
-"The font selected is %d points large, and may make it difficult to "
-"effectively use the computer.  It is recommended that you select a size "
-"smaller than %d."
-msgstr ""
-"您選取的字型大小為 %d 點，可能會在使用電腦時造成不便。建議您選取小於 %d 點的"
-"字型。"
-
-#: capplets/font/main.c:500
-#, c-format
-msgid ""
-"The font selected is %d points large, and may make it difficult to "
-"effectively use the computer.  It is recommended that you select a smaller "
-"sized font."
-msgstr ""
-"您選取的字型大小為 %d 點，可能會在使用電腦時造成不便。建議您選取較小的字型。"
-
 #: capplets/keybindings/eggcellrendererkeys.c:160
 #: capplets/keybindings/eggcellrendererkeys.c:161
 msgid "Accelerator key"
@@ -1550,7 +1527,7 @@ msgstr "捷徑鍵的類型。"
 
 #: capplets/keybindings/eggcellrendererkeys.c:219
 #: capplets/keybindings/gnome-keybinding-properties.c:204
-#: libbackground/applier.c:588 typing-break/drwright.c:439
+#: libbackground/applier.c:588 typing-break/drwright.c:448
 msgid "Disabled"
 msgstr "暫停使用"
 
@@ -2730,64 +2707,64 @@ msgstr ""
 "“none”(不使用 hinting)、“slight”、“medium”及“full”(完整 hinting；可能會令字體"
 "變型)。"
 
-#: typing-break/drw-break-window.c:260
+#: typing-break/drw-break-window.c:189
 msgid "Postpone break"
 msgstr "放棄休息"
 
-#: typing-break/drw-break-window.c:298
+#: typing-break/drw-break-window.c:227
 msgid "Take a break!"
 msgstr "請休息一下！"
 
 #. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
-#: typing-break/drwright.c:133
+#: typing-break/drwright.c:135
 msgid "/_Preferences"
 msgstr "/偏好設定(_P)"
 
-#: typing-break/drwright.c:134
+#: typing-break/drwright.c:136
 msgid "/_About"
 msgstr "/關於(_A)"
 
-#: typing-break/drwright.c:136
+#: typing-break/drwright.c:138
 msgid "/_Take a Break"
 msgstr "/立刻休息(_T)"
 
-#: typing-break/drwright.c:457
+#: typing-break/drwright.c:466
 #, c-format
 msgid "%d minutes until the next break"
 msgstr "距離休息時間還有 %d 分鐘"
 
-#: typing-break/drwright.c:460
+#: typing-break/drwright.c:469
 msgid "One minute until the next break"
 msgstr "距離休息時間還有 1 分鐘"
 
-#: typing-break/drwright.c:462
+#: typing-break/drwright.c:471
 msgid "Less than one minute until the next break"
 msgstr "距離休息時間少於 1 分鐘"
 
-#: typing-break/drwright.c:576
+#: typing-break/drwright.c:566
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
 "error: %s"
 msgstr ""
 
-#: typing-break/drwright.c:616
+#: typing-break/drwright.c:606
 msgid "About GNOME Typing Monitor"
 msgstr "關於 GNOME 休息提示小程式"
 
-#: typing-break/drwright.c:640
+#: typing-break/drwright.c:630
 msgid "A computer break reminder."
 msgstr "在使用電腦時發出休息提示的小工具。"
 
-#: typing-break/drwright.c:641
+#: typing-break/drwright.c:631
 msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
 msgstr "由 Richard Hult &lt;richard@imendio.com&gt; 編寫"
 
-#: typing-break/drwright.c:642
+#: typing-break/drwright.c:632
 msgid "Eye candy added by Anders Carlsson"
 msgstr "由 Anders Carlsson 加入視覺效果"
 
-#: typing-break/drwright.c:801
+#: typing-break/drwright.c:805
 msgid "Break reminder"
 msgstr "休息提示"
 
@@ -2927,14 +2904,6 @@ msgstr "每個字型在 Nautilus 中的快顯選單項目"
 msgid "Set as Application Font"
 msgstr "指定為應用程式字型"
 
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
-msgid "Theme Properties content view component"
-msgstr "Themus 屬性內容顯示模式元件"
-
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
-msgid "Themus Theme Properties view"
-msgstr "Themus 佈景屬性顯示模式"
-
 #: vfs-methods/themus/apply-font.glade.h:1
 msgid " "
 msgstr " "
@@ -2956,6 +2925,14 @@ msgstr "您選取的佈景主題建議使用一款新的字型。您可以在下
 #: vfs-methods/themus/apply-font.glade.h:5
 msgid "_Apply font"
 msgstr "套用字型(_A)"
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
+msgid "Theme Properties content view component"
+msgstr "Themus 屬性內容顯示模式元件"
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
+msgid "Themus Theme Properties view"
+msgstr "Themus 佈景屬性顯示模式"
 
 #: vfs-methods/themus/theme-method.c:514
 msgid "Themes"
@@ -3014,6 +2991,25 @@ msgstr "是否為已安裝的佈景主題製作縮圖"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "是否為佈景主題製作縮圖"
+
+#~ msgid "Font may be too large"
+#~ msgstr "字型可能過大"
+
+#~ msgid ""
+#~ "The font selected is %d points large, and may make it difficult to "
+#~ "effectively use the computer.  It is recommended that you select a size "
+#~ "smaller than %d."
+#~ msgstr ""
+#~ "您選取的字型大小為 %d 點，可能會在使用電腦時造成不便。建議您選取小於 %d 點"
+#~ "的字型。"
+
+#~ msgid ""
+#~ "The font selected is %d points large, and may make it difficult to "
+#~ "effectively use the computer.  It is recommended that you select a "
+#~ "smaller sized font."
+#~ msgstr ""
+#~ "您選取的字型大小為 %d 點，可能會在使用電腦時造成不便。建議您選取較小的字"
+#~ "型。"
 
 #~ msgid "Acce_pts URLs"
 #~ msgstr "可接受 URL(_P)"

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"POT-Creation-Date: 2003-08-11 04:05+0200\n"
+"POT-Creation-Date: 2003-08-27 15:02-0400\n"
 "PO-Revision-Date: 2003-08-11 20:49-0600\n"
 "Last-Translator: Paisa Seeluangsawat <paisa@.colorado.edu>\n"
 "Language-Team: Thai <L10n@opentle.org>\n"
@@ -92,18 +92,18 @@ msgstr ""
 "ระบบช่วยเหลือผู้พิการถูกติดตั้งไม่ครบ  โปรดติดตั้ง gnopernicus "
 "ถ้าจะใช้แว่นขยายหรือการอ่านข้อความจากหน้าจอ"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:238
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:236
 #, c-format
 msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr "เกิดข้อผิดพลาดขณะเรียกหน้าต่างตั้งค่าของเมาส์: %s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:334
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:392
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:332
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:390
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "ไม่สามารถอ่านค่าติดตั้งของ AccessX จากแฟ้ม '%s'"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:465
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:463
 msgid "Import Feature Settings File"
 msgstr ""
 
@@ -312,6 +312,7 @@ msgid "pixels/second"
 msgstr "พิกเซล/วินาที"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:43
+#: capplets/mouse/gnome-mouse-properties.c:133
 #: capplets/mouse/gnome-mouse-properties.glade.h:27
 #: capplets/windows/gnome-window-properties.glade.h:7
 msgid "seconds"
@@ -363,8 +364,8 @@ msgstr "ไม่ใช้รูป (_N)"
 #: capplets/background/background-properties-capplet.c:559
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:730
-#: capplets/keyboard/gnome-keyboard-properties.c:222
-#: capplets/mouse/gnome-mouse-properties.c:808
+#: capplets/keyboard/gnome-keyboard-properties.c:218
+#: capplets/mouse/gnome-mouse-properties.c:806
 #: capplets/sound/sound-properties-capplet.c:212
 msgid "Retrieve and store legacy settings"
 msgstr "อ่านค่าที่ตั้งใว้ในรุ่นก่อน"
@@ -1526,7 +1527,7 @@ msgstr ""
 
 #: capplets/keybindings/eggcellrendererkeys.c:219
 #: capplets/keybindings/gnome-keybinding-properties.c:204
-#: libbackground/applier.c:588 typing-break/drwright.c:439
+#: libbackground/applier.c:588 typing-break/drwright.c:448
 msgid "Disabled"
 msgstr "ไม่ใช้"
 
@@ -1610,19 +1611,19 @@ msgstr ""
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.c:199
+#: capplets/keyboard/gnome-keyboard-properties.c:195
 msgid "_Accessibility"
 msgstr "ระบบช่วยเหลือผู้พิการ (_A)"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:218
-#: capplets/keyboard/gnome-keyboard-properties.c:220
+#: capplets/keyboard/gnome-keyboard-properties.c:214
+#: capplets/keyboard/gnome-keyboard-properties.c:216
 #: capplets/sound/sound-properties-capplet.c:208
 #: capplets/sound/sound-properties-capplet.c:210
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr ""
 
-#: capplets/keyboard/gnome-keyboard-properties.c:224
+#: capplets/keyboard/gnome-keyboard-properties.c:220
 msgid "Start the page with the typing break settings showing"
 msgstr ""
 
@@ -1722,67 +1723,67 @@ msgstr "นาที"
 msgid "Set your keyboard preferences"
 msgstr "ตั้งค่าสำหรับแป้นพิมพ์"
 
-#: capplets/mouse/gnome-mouse-properties.c:498
+#: capplets/mouse/gnome-mouse-properties.c:496
 msgid "Unknown Cursor"
 msgstr "ตัวชี้ที่ไม่รู้จัก"
 
-#: capplets/mouse/gnome-mouse-properties.c:603
+#: capplets/mouse/gnome-mouse-properties.c:602
 msgid "Default Cursor - Current"
 msgstr "ตัวชี้ปริยาย - ใช้อยู่"
 
-#: capplets/mouse/gnome-mouse-properties.c:603
-#: capplets/mouse/gnome-mouse-properties.c:606
+#: capplets/mouse/gnome-mouse-properties.c:602
+#: capplets/mouse/gnome-mouse-properties.c:605
 msgid "The default cursor that ships with X"
 msgstr "ตัวชี้ปริยายซึ่งมากับ X"
 
-#: capplets/mouse/gnome-mouse-properties.c:606
+#: capplets/mouse/gnome-mouse-properties.c:605
 msgid "Default Cursor"
 msgstr "ตัวชี้ปริยาย"
 
-#: capplets/mouse/gnome-mouse-properties.c:624
+#: capplets/mouse/gnome-mouse-properties.c:623
 msgid "White Cursor - Current"
 msgstr "ตัวชี้ขาว - ใช้อยู่"
 
-#: capplets/mouse/gnome-mouse-properties.c:624
-#: capplets/mouse/gnome-mouse-properties.c:627
+#: capplets/mouse/gnome-mouse-properties.c:623
+#: capplets/mouse/gnome-mouse-properties.c:626
 msgid "The default cursor inverted"
 msgstr "ตัวชี้ปริยายแต่กลับสี"
 
-#: capplets/mouse/gnome-mouse-properties.c:627
+#: capplets/mouse/gnome-mouse-properties.c:626
 msgid "White Cursor"
 msgstr "ตัวชี้ขาว"
 
-#: capplets/mouse/gnome-mouse-properties.c:646
+#: capplets/mouse/gnome-mouse-properties.c:645
 msgid "Large Cursor - Current"
 msgstr "ตัวชี้ใหญ่ - ใช้อยู่"
 
-#: capplets/mouse/gnome-mouse-properties.c:646
-#: capplets/mouse/gnome-mouse-properties.c:649
+#: capplets/mouse/gnome-mouse-properties.c:645
+#: capplets/mouse/gnome-mouse-properties.c:648
 msgid "Large version of normal cursor"
 msgstr "ตัวชี้ปริยายเอามาขยายใหญ่"
 
-#: capplets/mouse/gnome-mouse-properties.c:649
+#: capplets/mouse/gnome-mouse-properties.c:648
 msgid "Large Cursor"
 msgstr "ตัวชี้ใหญ่"
 
-#: capplets/mouse/gnome-mouse-properties.c:668
+#: capplets/mouse/gnome-mouse-properties.c:667
 msgid "Large White Cursor - Current"
 msgstr "ตัวชี้ขาวใหญ่ - ใช้อยู่"
 
-#: capplets/mouse/gnome-mouse-properties.c:668
-#: capplets/mouse/gnome-mouse-properties.c:671
+#: capplets/mouse/gnome-mouse-properties.c:667
+#: capplets/mouse/gnome-mouse-properties.c:670
 msgid "Large version of white cursor"
 msgstr "ตัวชี้ขาวเอามาขยายใหญ่"
 
-#: capplets/mouse/gnome-mouse-properties.c:671
+#: capplets/mouse/gnome-mouse-properties.c:670
 msgid "Large White Cursor"
 msgstr "ตัวชี้ขาวใหญ่"
 
-#: capplets/mouse/gnome-mouse-properties.c:749
+#: capplets/mouse/gnome-mouse-properties.c:747
 msgid "Cursor Size"
 msgstr "ขนาดตัวชี้"
 
-#: capplets/mouse/gnome-mouse-properties.c:758
+#: capplets/mouse/gnome-mouse-properties.c:756
 msgid "Cursor Theme"
 msgstr "ชุดรูปแบบตัวชี้"
 
@@ -2697,64 +2698,64 @@ msgid ""
 "possible; may cause distortion of letter forms."
 msgstr ""
 
-#: typing-break/drw-break-window.c:260
+#: typing-break/drw-break-window.c:189
 msgid "Postpone break"
 msgstr "ผลัดเวลาพัก"
 
-#: typing-break/drw-break-window.c:298
+#: typing-break/drw-break-window.c:227
 msgid "Take a break!"
 msgstr "พักหน่อยละกัน"
 
 #. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
-#: typing-break/drwright.c:133
+#: typing-break/drwright.c:135
 msgid "/_Preferences"
 msgstr "/ปรับแต่ง (_P)"
 
-#: typing-break/drwright.c:134
+#: typing-break/drwright.c:136
 msgid "/_About"
 msgstr "/เกี่ยวกับ (_A)"
 
-#: typing-break/drwright.c:136
+#: typing-break/drwright.c:138
 msgid "/_Take a Break"
 msgstr "/พักพิมพ์ (_T)"
 
-#: typing-break/drwright.c:457
+#: typing-break/drwright.c:466
 #, c-format
 msgid "%d minutes until the next break"
 msgstr "อีก %d นาทีถึงช่วงพักต่อไป"
 
-#: typing-break/drwright.c:460
+#: typing-break/drwright.c:469
 msgid "One minute until the next break"
 msgstr "อีก 1 นาทีถึงช่วงพักต่อไป"
 
-#: typing-break/drwright.c:462
+#: typing-break/drwright.c:471
 msgid "Less than one minute until the next break"
 msgstr "อีกไม่ถึง 1 นาทีถึงช่วงพักต่อไป"
 
-#: typing-break/drwright.c:576
+#: typing-break/drwright.c:566
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
 "error: %s"
 msgstr "แสดงหน้าต่างปรับแต่งการพักพิมพ์ไม่สำเร็จ  เกิดข้อผิดพลาดดังนี้: %s"
 
-#: typing-break/drwright.c:616
+#: typing-break/drwright.c:606
 msgid "About GNOME Typing Monitor"
 msgstr "เกี่ยวกับตัวควบคุมการพิมพ์ของ GNOME"
 
-#: typing-break/drwright.c:640
+#: typing-break/drwright.c:630
 msgid "A computer break reminder."
 msgstr "ตัวเตือนเวลาพักพิมพ์"
 
-#: typing-break/drwright.c:641
+#: typing-break/drwright.c:631
 msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
 msgstr "เขียนโดย Richard Hult &lt;richard@imendio.com&gt;"
 
-#: typing-break/drwright.c:642
+#: typing-break/drwright.c:632
 msgid "Eye candy added by Anders Carlsson"
 msgstr "ตกแต่งโดย by Anders Carlsson"
 
-#: typing-break/drwright.c:801
+#: typing-break/drwright.c:805
 msgid "Break reminder"
 msgstr "ตัวเตือนเวลาพัก"
 

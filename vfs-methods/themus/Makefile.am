@@ -72,7 +72,7 @@ install-data-local:
 	if test -z "$(DESTDIR)"; then \
 	  GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule themus.schemas; \
 	fi
-	
+
 @INTLTOOL_KEYS_RULE@
 @INTLTOOL_SERVER_RULE@  
 @INTLTOOL_SCHEMAS_RULE@
