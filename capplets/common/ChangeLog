@@ -1,3 +1,27 @@
+2001-07-26  Bradford Hovinen  <hovinen@ximian.com>
+
+	* capplet-util.c (capplet_init): Don't sync the database if
+	retrieving legacy setings before creating the factory
+	(create_control_cb): Create the config database ourselves
+	(pf_destroy_cb): Remove evil hackery
+	(get_control_cb): Ditto
+	(create_control_cb): Support multiple property control objects --
+	use a GtkObject called ref_obj to make sure the program quits when
+	there are no such objects left
+	(capplet_init): Pass default_moniker to factory callback;
+	release_unref the db ourselves
+	(get_control_cb): Support multiple controls; soak in global
+	control and widget variables
+	(legacy_is_modified): Remember to unref the property bag
+	(quit_cb): Allow being called more than once
+	(quit_cb): Unref ref_obj here
+	(create_control_cb): Eliminate second signal connection
+	(real_quit_cb): Free the pair structure
+	(all_done_cb): Implement. Just add gtk_main_quit to the idle
+	handler list
+	(create_control_cb): Connect destroy signal of ref_obj to
+	all_done_cb
+
 2001-07-24  Richard Hestilow  <hestilow@ximian.com>
 
 	* capplet-util.c (get_control_cb): Set control data on PropertyFrame
