@@ -1,3 +1,23 @@
+2001-10-05  Richard Hestilow  <hestilow@ximian.com>
+
+	* Makefile.am (SUBDIRS): Add subdir intro_page.
+	(INCLUDES): Define INTRO_DIR.
+
+	* capplet-dir-view-html.c:
+	(HtmlViewData): Remove only_update_main, add dont_show_main
+	and showing_intro.
+	(html_view_intro_page): Added.
+	(handle_link_cb): Special-case intro-page and launch: urls.
+	(header_populate): Add a link to the intro page. There should
+	be a better UI for this.
+	(sidebar_populate): Finally fix the half-chopped arrow thing.
+	Also, only show the arrow if the intro page is not showing.
+	(html_populate): Skip main population if we're showing the intro.
+	(parse_node_recursively): Added. A poor-man's XSLT.
+	(load_intro_page): Added.
+	(main_allocate_cb): Show the intro page.
+	(html_create): Add a link_clicked hanlder to the header.
+
 2001-09-28  Carlos Perelló Marín <carlos@gnome-db.org>
 
  	* capplet-dir-view-html.c: Now we use utf-8 strings

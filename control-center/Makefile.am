@@ -1,3 +1,5 @@
+SUBDIRS = intro_page
+
 appicondir = $(datadir)/control-center/icons
 appicon_DATA = control-center.png
 
@@ -30,6 +32,7 @@ INCLUDES = 							\
 	-DSETTINGS_DIR=\""$(datadir)/control-center/capplets"\"	\
 	-DPIXMAPS_DIR=\""$(appicondir)"\"			\
 	-DART_DIR=\""$(splashdir)"\"				\
+	-DINTRO_DIR=\""$(datadir)/control-center/intro_page"\"	\
 	-DGNOME_SBINDIR=\""$(sbindir)"\"			\
 	@GNOMECC_CFLAGS@
 

@@ -30,7 +30,12 @@
 #include <fcntl.h>
 #include <errno.h>
 
+#include <gnome-xml/parser.h>
+#include <gnome-xml/xmlmemory.h>
+
 #include "capplet-dir-view.h"
+
+#define INTRO_FILE INTRO_DIR"/intro.xml"
 
 typedef struct {
 	GtkHTML *top;
@@ -38,8 +43,11 @@ typedef struct {
 	GtkHTML *main;
 	CappletDir *root_dir;
        	int icon_cols;
-       	gboolean only_update_main;	
+       	gboolean dont_update_main;	
+       	gboolean showing_intro;	
 } HtmlViewData;
+
+static void html_view_intro_page (HtmlViewData *data);
 
 static void
 html_clear (CappletDirView *view)
@@ -99,10 +107,31 @@ static void
 handle_link_cb (GtkHTML *html, const gchar *url, CappletDirView *view)
 {
 	CappletDirEntry *entry;
+	const gchar *launch = "launch:";
+	int llen = strlen (launch);
 
-	entry = capplet_lookup (url);
-	if (entry)
-		capplet_dir_entry_activate (entry, view);
+	if (!strcmp (url, "!INTRO_PAGE!"))
+	{
+		html_view_intro_page (view->view_data);
+		sidebar_populate (view);
+	}
+	else if ((strlen (url) > llen) && !strncmp (url, launch, llen))
+	{
+		const gchar *the_rest = url + llen;
+		if (!strcmp (the_rest, "bug-buddy"))
+		{
+			char *argv[] = { "bug-buddy" };
+			gnome_execute_async (NULL, 1, argv);
+		}
+		else
+			gnome_url_show (the_rest);
+	}
+	else
+	{
+		entry = capplet_lookup (url);
+		if (entry)
+			capplet_dir_entry_activate (entry, view);
+	}
 }
 
 static void
@@ -151,7 +180,7 @@ header_populate (CappletDirView *view)
 "<head>"
 "</head>"
 "<body background=\"" ART_DIR "/bcg_top.png\" marginheight=\"0\" marginwidth=\"0\">"
-"<table border=\"0\" width=\"100%%\" cellspacing=\"0\" cellpadding=\"0\"><tr valign=\"center\"><td width=\"48\"><img src=\"" ART_DIR "/title.png\" alt=\"\" width=\"48\" height=\"48\"></td>"
+"<table border=\"0\" width=\"100%%\" cellspacing=\"0\" cellpadding=\"0\"><tr valign=\"center\"><td width=\"48\"><a href=\"!INTRO_PAGE!\"><img src=\"" ART_DIR "/title.png\" alt=\"\" width=\"48\" height=\"48\" border=\"0\"></a></td>"
 "<td><b><font face=\"Trebuchet MS CE,Trebuchet MS, Verdana CE, Verdana, Sans-Serif CE, Sans-Serif\" color=\"white\" size=\"+2\">%s&nbsp;&nbsp;&nbsp;</font></b><font face=\"Trebuchet MS CE,Trebuchet MS, Verdana CE, Verdana, Sans-Serif CE, Sans-Serif\" color=\"white\" align=\"left\" valign=\"center\">%s</font></td></tr></table>"
 "</body></html>", utf_title, utf_path);
 	g_free (utf_title);
@@ -208,7 +237,7 @@ sidebar_populate (CappletDirView *view)
 "<body bgcolor=\"#d9d9d9\" marginheight=\"0\" marginwidth=\"0\">"
 "<table border=\"0\" width=\"100%%\" cellspacing=\"1\" cellpadding=\"4\">"
 "<tr><td colspan=\"3\">&nbsp;</td></tr>"
-"<tr valign=\"center\"><td width=\"48\"><a href=\"%s\"><img src=\"%s\" alt=\"\" border=\"0\" align=\"center\"/></a></td><td><a href=\"%s\"><b>%s</b></a></td><td width=\"8\"><img src=\"%s\" alt=\"\" border=\"0\" align=\"right\"></tr>", CAPPLET_DIR_ENTRY (data->root_dir)->path, CAPPLET_DIR_ENTRY (data->root_dir)->icon, CAPPLET_DIR_ENTRY (data->root_dir)->path, utfs, (data->root_dir == view->capplet_dir) ? ART_DIR "/active.png" : ART_DIR "/blank.png");
+"<tr valign=\"center\"><td width=\"48\"><a href=\"%s\"><img src=\"%s\" alt=\"\" border=\"0\" align=\"center\"/></a></td><td><a href=\"%s\"><b>%s</b></a></td><td width=\"8\"><img src=\"%s\" alt=\"\" border=\"0\" align=\"center\"></tr>", CAPPLET_DIR_ENTRY (data->root_dir)->path, CAPPLET_DIR_ENTRY (data->root_dir)->icon, CAPPLET_DIR_ENTRY (data->root_dir)->path, utfs, (data->root_dir == view->capplet_dir && !data->showing_intro) ? ART_DIR "/active.png" : ART_DIR "/blank.png");
 	g_free (utfs);
 	gtk_html_write (data->sidebar, stream, s, strlen (s));
 	g_free (s);
@@ -222,7 +251,7 @@ sidebar_populate (CappletDirView *view)
 
 		utfs = e_utf8_from_locale_string (entry->label);
 		
-		s = g_strdup_printf ("<tr valign=\"center\"><td width=\"48\"><a href=\"%s\"><img src=\"%s\" alt=\"\" border=\"0\" align=\"center\"/></a></td><td><a href=\"%s\"><b>%s</b></a></td><td width=\"8\"><img src=\"%s\" alt=\"\" border=\"0\" align=\"center\"></tr>", entry->path, entry->icon, entry->path, utfs, (CAPPLET_DIR (entry) == view->capplet_dir) ? ART_DIR "/active.png" : ART_DIR "/blank.png");
+		s = g_strdup_printf ("<tr valign=\"center\"><td width=\"48\"><a href=\"%s\"><img src=\"%s\" alt=\"\" border=\"0\" align=\"center\"/></a></td><td><a href=\"%s\"><b>%s</b></a></td><td width=\"8\"><img src=\"%s\" alt=\"\" border=\"0\" align=\"center\"></tr>", entry->path, entry->icon, entry->path, utfs, (CAPPLET_DIR (entry) == view->capplet_dir && !data->showing_intro) ? ART_DIR "/active.png" : ART_DIR "/blank.png");
 		g_free (utfs);
 		gtk_html_write (data->sidebar, stream, s, strlen (s));
 		g_free (s);
@@ -301,15 +330,17 @@ html_populate (CappletDirView *view)
 	char *s;
 
 	data = view->view_data;
-
 	if (!data->root_dir)
 		data->root_dir = view->capplet_dir;
 
-	if (!data->only_update_main)
-	{
-		header_populate (view);
-		sidebar_populate (view);
-	}
+	if (!data->dont_update_main)
+		data->showing_intro = FALSE;
+
+	header_populate (view);
+	sidebar_populate (view);
+	
+	if (data->dont_update_main)
+		return;
 
 	stream = gtk_html_begin (data->main);
 
@@ -345,6 +376,116 @@ html_populate (CappletDirView *view)
 }
 
 static void
+parse_node_recursively (xmlNodePtr node, gchar *root_dir)
+{
+	g_return_if_fail (node != NULL);
+	g_return_if_fail (root_dir != NULL);
+	
+	while (node)
+	{
+		if (!strcmp (node->name, "task"))
+		{
+			gboolean valid = TRUE;
+			xmlChar *dentry = xmlGetProp (node, "href");
+			if (dentry)
+			{
+				gchar *filename = g_concat_dir_and_file (root_dir, dentry);
+				if (g_file_exists (filename))
+					xmlSetProp (node, "href", filename);
+				else
+					valid = FALSE;
+	
+				g_free (filename);
+				g_free (dentry);
+			}
+			else
+				valid = FALSE;
+			
+			if (valid)
+				xmlNodeSetName (node, "a");
+			else
+			{
+				/* RemoveNode not implemented, turn to plan b */
+				xmlNodeSetName (node, "invalid");
+				if (node->childs)
+				{
+					xmlFreeNodeList (node->childs);
+					node->childs = NULL;
+				}
+				xmlNodeSetContent (node, "");
+			}
+		}
+		if (!strcmp (node->name, "img"))
+		{
+			xmlChar *src = xmlGetProp (node, "src");
+			
+			if (src && (src[0] != '/'))
+			{
+				gchar *filename = g_concat_dir_and_file (ART_DIR, src);
+				xmlSetProp (node, "src", filename);
+				g_free (filename);
+			}
+
+			xmlFree (src);
+		}
+		else if (node->childs)
+		{
+			parse_node_recursively (node->childs, root_dir);
+		}
+
+		node = node->next;
+	}
+}
+
+static xmlChar*
+load_intro_page (int *len)
+{
+	xmlDocPtr doc;
+	xmlNodePtr node;
+	gchar *root_dir;
+	xmlChar *ret;
+	
+	g_return_val_if_fail (len != NULL, NULL);
+	
+	doc = xmlParseFile (INTRO_FILE);
+	if (!doc)
+		return NULL;
+	
+	node = xmlDocGetRootElement (doc);
+	if (!node)
+	{
+		xmlFreeDoc (doc);
+		return NULL;
+	}
+
+	root_dir = (get_root_capplet_dir ())->entry.path;
+	
+	parse_node_recursively (node, root_dir);
+	xmlDocDumpMemory (doc, &ret, len);
+	return ret;
+}
+
+static void
+html_view_intro_page (HtmlViewData *data)
+{
+	GtkHTMLStream *stream;
+	xmlChar *s;
+	int len;
+
+	s = load_intro_page (&len);
+	
+	stream = gtk_html_begin (data->main);
+
+	gtk_html_write (data->main, stream, s, len);
+
+	gtk_html_end (data->main, stream, GTK_HTML_STREAM_OK);
+
+	xmlFree (s);
+
+	data->showing_intro = TRUE;
+}
+
+static void
 main_allocate_cb (GtkWidget *widget, GtkAllocation *allocation, CappletDirView *view)
 {
 	int new_cols = allocation->width / 64 - 1;
@@ -352,9 +493,11 @@ main_allocate_cb (GtkWidget *widget, GtkAllocation *allocation, CappletDirView *
 	if (new_cols != data->icon_cols)
 	{
 		data->icon_cols = new_cols;
-	       	data->only_update_main = TRUE;	
+		html_view_intro_page (data);
+		
+		data->dont_update_main = TRUE;
 		html_populate (view);
-	       	data->only_update_main = FALSE;	
+		data->dont_update_main = FALSE;
 	}
 }
 
@@ -371,7 +514,8 @@ html_create (CappletDirView *view)
 
 	data->root_dir = NULL;
 	data->icon_cols = 3;
-	data->only_update_main = FALSE;	
+	data->dont_update_main = FALSE;	
+	data->showing_intro = TRUE;	
 
 	vbox = gtk_vbox_new (FALSE, 0);
 	/* top widget */
@@ -421,6 +565,9 @@ html_create (CappletDirView *view)
 	gtk_signal_connect (GTK_OBJECT (data->main), "url_requested",
 			    GTK_SIGNAL_FUNC (handle_url_cb), view);
 
+	gtk_signal_connect (GTK_OBJECT (data->top), "link_clicked",
+			    GTK_SIGNAL_FUNC (handle_link_cb), view);
+	
 	gtk_signal_connect (GTK_OBJECT (data->sidebar), "link_clicked",
 			    GTK_SIGNAL_FUNC (handle_link_cb), view);
 	
