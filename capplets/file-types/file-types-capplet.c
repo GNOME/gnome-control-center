@@ -1504,6 +1504,53 @@ populate_mime_list (GList *type_list, GtkCList *clist)
 	}
 }
 
+static gint
+sort_case_insensitive (GtkCList *clist, gpointer ptr1, gpointer ptr2)
+{
+	const char *text1 = NULL;
+	const char *text2 = NULL;
+	
+	GtkCListRow *row1 = (GtkCListRow *) ptr1;
+	GtkCListRow *row2 = (GtkCListRow *) ptr2;
+	
+	switch (row1->cell[clist->sort_column].type) {
+		case GTK_CELL_TEXT:
+			text1 = GTK_CELL_TEXT (row1->cell[clist->sort_column])->text;
+			break;
+		
+		case GTK_CELL_PIXTEXT:
+			text1 = GTK_CELL_PIXTEXT (row1->cell[clist->sort_column])->text;
+			break;
+		
+		default:
+			break;
+	}
+	
+	switch (row2->cell[clist->sort_column].type) {
+		case GTK_CELL_TEXT:
+			text2 = GTK_CELL_TEXT (row2->cell[clist->sort_column])->text;
+			break;
+			
+		case GTK_CELL_PIXTEXT:
+			text2 = GTK_CELL_PIXTEXT (row2->cell[clist->sort_column])->text;
+			break;
+	
+		default:
+			break;
+	}
+	
+	if (text2 == NULL) {
+		return (text1 != NULL);
+	}
+	
+	if (text1 == NULL) {
+		return -1;
+	}
+	
+	return strcasecmp (text1, text2);
+}
+
+
 static void
 column_clicked (GtkCList *clist, gint column, gpointer user_data)
 {
@@ -1512,10 +1559,11 @@ column_clicked (GtkCList *clist, gint column, gpointer user_data)
 	/* Toggle sort type */
 	if (clist->sort_type == GTK_SORT_ASCENDING) {
 		gtk_clist_set_sort_type (clist, GTK_SORT_DESCENDING);
+
 	} else {
 		gtk_clist_set_sort_type (clist, GTK_SORT_ASCENDING);
 	}
-  
+	
 	gtk_clist_sort (clist);
 }
 
@@ -1539,7 +1587,7 @@ create_mime_list_and_scroller (void)
                                         GTK_POLICY_AUTOMATIC);
 	mime_list = gtk_clist_new_with_titles (TOTAL_COLUMNS, titles);
         gtk_clist_set_selection_mode (GTK_CLIST (mime_list), GTK_SELECTION_BROWSE);
-        gtk_clist_set_auto_sort (GTK_CLIST (mime_list), TRUE);
+        gtk_clist_set_compare_func (GTK_CLIST (mime_list), (GtkCListCompareFunc) sort_case_insensitive);
 
 	type_list = gnome_vfs_get_registered_mime_types ();
 	populate_mime_list (type_list, GTK_CLIST (mime_list));
