@@ -86,7 +86,7 @@ sample_size_request (GtkWidget      *darea,
 
 static void
 sample_expose (GtkWidget      *darea,
-	       GdkEventExpose  expose)
+	       GdkEventExpose *expose)
 {
 	GdkPixbuf *pixbuf = g_object_get_data (G_OBJECT (darea), "sample-pixbuf");
 	int width = gdk_pixbuf_get_width (pixbuf);

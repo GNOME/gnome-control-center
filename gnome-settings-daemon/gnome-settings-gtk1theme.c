@@ -151,7 +151,7 @@ apply_settings (void)
 	gchar *theme_filename;
 	gchar *rc_filename;
 	gchar *current_contents;
-	gint current_length;
+	gsize current_length;
 	gchar *new_contents;
 	GError *err = NULL;
 
