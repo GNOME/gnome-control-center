@@ -47,15 +47,45 @@ void demo_main(int argc, char **argv)
   gchar *row2[2] = {"Mynie", "Moe"};
   gchar *row3[2] = {"Catcha", "Tiger"};
   gchar *row4[2] = {"By Its", "Toe"};
+  gchar **rc_files;
+  gchar **new_rc_files;
+  gint rc_file_count;
+  gint new_count;
+  gchar *home_dir;
+  gint i;
 
   read(0, buf, 12);
   buf[12] = 0;
   sscanf(buf, "%x", &window);
 
   fcntl(0, F_SETFL, O_NONBLOCK);
+
+  /* Strip out ~/.gtkrc from the set of initial default files.
+   * to suppress reading of the previous rc file.
+   */
+
+  rc_files = gtk_rc_get_default_files();
+  for (rc_file_count = 0; rc_files[rc_file_count]; rc_file_count++)
+    /* Nothing */;
+
+  new_rc_files = g_new (gchar *, rc_file_count + 2);
+
+  home_dir = g_get_home_dir();
+  new_count = 0;
+  
+  for (i = 0; i<rc_file_count; i++)
+    {
+      if (strncmp (rc_files[i], home_dir, strlen (home_dir)) != 0)
+	new_rc_files[new_count++] = g_strdup (rc_files[i]);
+    }
+  new_rc_files[new_count++] = g_strdup (gtkrc_tmp);
+  new_rc_files[new_count] = NULL;
+
+  gtk_rc_set_default_files (new_rc_files);
+  g_strfreev (new_rc_files);
+
   
   gtk_init (&argc, &argv);
-  gtk_rc_parse(gtkrc_tmp);  
   
   plug = gtk_plug_new(window);
 

@@ -20,7 +20,7 @@ install_theme(gchar *file)
     g_snprintf(th, sizeof(th), "%s/", theme_dir);
   else
     {
-      home = getenv("HOME");
+      home = g_get_home_dir();
       if (!home)
 	{
 	  g_free(theme_dir);

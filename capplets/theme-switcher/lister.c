@@ -1,4 +1,6 @@
 #include "da.h"
+#include <sys/types.h>
+#include <utime.h>
 
 void
 edit_file_to_use(gchar *file, gchar *theme)
@@ -60,10 +62,10 @@ set_tmp_rc()
 {
   gchar s[4096], *home;
   
-  home = getenv("HOME");
+  home = g_get_home_dir ();
   if (!home)
     return;
-  g_snprintf(s, sizeof(s), "%s/.gnome/gtkrc", home);
+  g_snprintf(s, sizeof(s), "%s/.gtkrc", home);
   srand(time(NULL));
   g_snprintf(gtkrc_tmp, sizeof(gtkrc_tmp), "/tmp/%i-gtkrc-%i", time(NULL), rand());
   cp(s, gtkrc_tmp);
@@ -74,17 +76,31 @@ use_theme(gchar *theme)
 {
   gchar s[4096], *home;
   
-  home = getenv("HOME");
+  home = g_get_home_dir ();
   if (!home)
     return;
-  g_snprintf(s, sizeof(s), "%s/.gnome/gtkrc", home);
+  g_snprintf(s, sizeof(s), "%s/.gtkrc", home);
   edit_file_to_use(s, theme);
 }
 
 void
 test_theme(gchar *theme)
 {
+  static time_t last_written_time = 0;
+  time_t current_time = time (NULL);
+  struct utimbuf buf;
+
   edit_file_to_use(gtkrc_tmp, theme);
+
+  if (last_written_time >= current_time)
+    {
+      current_time = last_written_time + 1;
+      buf.actime = current_time;
+      buf.modtime = current_time;
+      utime (gtkrc_tmp, &buf);
+    }
+
+  last_written_time = current_time;
 }
 
 void
@@ -150,7 +166,7 @@ list_user_themes(gint *number)
   gchar *theme_dir = NULL;
   ThemeEntry *list  = NULL;
   
-  home = getenv("HOME");
+  home = g_get_home_dir ();
   if (!home)
     return NULL;
 

@@ -1,3 +1,15 @@
+Mon Feb 22 22:23:34 1999  Owen Taylor  <otaylor@redhat.com>
+
+	* capplets/theme-switcher/lister.c: Use g_get_home_dir()
+	 instead of getenv ("HOME")
+
+	* capplets/theme-switcher/demo.c (demo_main): Strip
+	 out ~/.gtkrc from the default file set so we don't
+	 get a merge of the current theme and the new one.
+
+	* capplets/theme-switcher/lister.c (use_theme): Modify
+	 .gtkrc instead of .gnome/gtkrc.
+
 1999-02-23  Nuno Ferreira  <nmrf@rnl.ist.utl.pt>
 
 	* capplets/session-properties/session-properties.desktop,
