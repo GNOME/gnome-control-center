@@ -1,5 +1,8 @@
 2001-12-17  Bradford Hovinen  <hovinen@ximian.com>
 
+	* applier.c (set_root_pixmap): Set the pixmap_id correctly if
+	pixmap is NULL or -1.
+
 	* preferences.c (preferences_merge_entry): Eliminate name; use
 	entry->key on the warning
 	(preferences_merge_entry): Use correct keys
