@@ -4,10 +4,11 @@
  *
  * Author:
  *   Dietmar Maurer (dietmar@ximian.com)
- *   Bradford Hovinen  <hovinen@ximian.com>
+ *   Bradford Hovinen <hovinen@ximian.com>
  *
- * Copyright 2000 Ximian, Inc.
+ * Copyright 2000, 2001 Ximian, Inc.
  */
+
 #include <config.h>
 #include <stdlib.h>
 #include <sys/types.h>
@@ -618,6 +619,8 @@ bonobo_config_archiver_new (const char *backend_id, const char *location_id)
 	gchar                 *real_name;
 	Archive               *archive;
 
+	static GtkObject      *ref_obj = NULL;
+
 	g_return_val_if_fail (backend_id != NULL, NULL);
 
 	CORBA_exception_init (&ev);
@@ -697,6 +700,16 @@ bonobo_config_archiver_new (const char *backend_id, const char *location_id)
 	db = CORBA_Object_duplicate (BONOBO_OBJREF (archiver_db), NULL);
 
 	bonobo_url_register ("BONOBO_CONF:ARCHIVER", real_name, NULL, db, &ev);
+
+	if (ref_obj == NULL) {
+		ref_obj = gtk_object_new (gtk_object_get_type (), NULL);
+		gtk_signal_connect (ref_obj, "destroy", GTK_SIGNAL_FUNC (gtk_main_quit), NULL);
+	} else {
+		gtk_object_ref (ref_obj);
+	}
+
+	gtk_signal_connect_object (GTK_OBJECT (archiver_db), "destroy",
+				   GTK_SIGNAL_FUNC (gtk_object_unref), ref_obj);
 
 	return db;
 }
