@@ -42,6 +42,53 @@
 #endif
 
 static gboolean we_are_changing_xkb_state = FALSE;
+static int xkbEventBase;
+
+static gboolean
+xkb_enabled (void)
+{
+	static gboolean initialized = 0;
+	static gboolean have_xkb = 0;
+
+	int opcode, errorBase, major, minor;
+
+	if (initialized)
+		return have_xkb;
+
+	gdk_error_trap_push ();
+	have_xkb = XkbQueryExtension (GDK_DISPLAY (),
+				      &opcode, &xkbEventBase, &errorBase, &major, &minor)
+		&& XkbUseExtension (GDK_DISPLAY (), &major, &minor);
+	XSync (GDK_DISPLAY (), FALSE);
+	gdk_error_trap_pop ();
+
+	return have_xkb;
+}
+
+static XkbDescRec *
+get_xkb_desc_rec (void)
+{
+	XkbDescRec	*desc;
+	Status		 status;
+
+	if (!xkb_enabled ())
+		return NULL;
+
+	gdk_error_trap_push ();
+	desc = XkbGetMap (GDK_DISPLAY (), XkbAllMapComponentsMask, XkbUseCoreKbd);
+	if (desc != NULL) {
+		desc->ctrls = NULL;
+		status = XkbGetControls (GDK_DISPLAY (), XkbAllControlsMask, desc);
+	}
+	XSync (GDK_DISPLAY (), FALSE);
+	gdk_error_trap_pop ();
+
+	g_return_val_if_fail (status == Success, NULL);
+	g_return_val_if_fail (desc != NULL, NULL);
+	g_return_val_if_fail (desc->ctrls != NULL, NULL);
+
+	return desc;
+}
 
 static int
 get_int (GConfClient *client, char const *key)
@@ -75,24 +122,16 @@ set_bool (GConfClient *client, char const *key, int val)
 static void
 set_server_from_gconf (GConfEntry *ignored)
 {
-	unsigned long	 which;
-	gint32 		 enabled, enable_mask;
-	XkbDescRec	*desc;
 	GConfClient	*client = gconf_client_get_default ();
-	Status		 status;
+	XkbDescRec	*desc;
+	gint32 		 enabled, enable_mask;
+	unsigned long	 which;
 
-	gdk_error_trap_push ();
-	desc = XkbGetMap (GDK_DISPLAY (), XkbAllMapComponentsMask, XkbUseCoreKbd);
-	if (desc != NULL) {
-		desc->ctrls = NULL;
-		status = XkbGetControls (GDK_DISPLAY (), XkbAllControlsMask, desc);
-		XSync (GDK_DISPLAY (), FALSE);
+	desc = get_xkb_desc_rec ();
+	if (!desc) {
+		d ("No XKB present\n");
+		return;
 	}
-	gdk_error_trap_pop ();
-
-	g_return_if_fail (desc != NULL);
-	g_return_if_fail (desc->ctrls != NULL);
-	g_return_if_fail (status == Success);
 
 	if (we_are_changing_xkb_state) {
 		d ("We changed gconf accessibility state\n");
@@ -191,20 +230,14 @@ set_server_from_gconf (GConfEntry *ignored)
 static void
 set_gconf_from_server (GConfEntry *ignored)
 {
-	XkbDescRec	*desc;
 	GConfClient	*client = gconf_client_get_default ();
-	Status		 status;
+	XkbDescRec	*desc;
 
-	gdk_error_trap_push ();
-	desc = XkbGetMap (GDK_DISPLAY (), XkbAllMapComponentsMask, XkbUseCoreKbd);
-	desc->ctrls = NULL;
-	status = XkbGetControls (GDK_DISPLAY (), XkbAllControlsMask, desc);
-	XSync (GDK_DISPLAY (), FALSE);
-	gdk_error_trap_pop ();
-
-	g_return_if_fail (status != Success);
-	g_return_if_fail (desc != NULL);
-	g_return_if_fail (desc->ctrls != NULL);
+	desc = get_xkb_desc_rec ();
+	if (!desc) {
+		d ("No XKB present\n");
+		return;
+	}
 
 	desc->ctrls->ax_options = XkbAX_LatchToLockMask;
 
@@ -264,7 +297,6 @@ set_gconf_from_server (GConfEntry *ignored)
 	we_are_changing_xkb_state = FALSE;
 }
 
-static int xkbEventBase;
 static GdkFilterReturn 
 cb_xkb_event_filter (GdkXEvent *xevent, GdkEvent *event, gpointer user)
 {
@@ -293,14 +325,10 @@ cb_xkb_event_filter (GdkXEvent *xevent, GdkEvent *event, gpointer user)
 void
 gnome_settings_accessibility_keyboard_init (GConfClient *client)
 {
-	int opcode, errorBase, major, minor;
+	if (!xkb_enabled ())
+		return;
 
 	gdk_error_trap_push ();
-
-	if (!XkbQueryExtension (GDK_DISPLAY (),
-		&opcode, &xkbEventBase, &errorBase, &major, &minor) ||
-	    !XkbUseExtension (GDK_DISPLAY (), &major, &minor))
-		return;
 	XkbSelectEvents (GDK_DISPLAY (),
 		XkbUseCoreKbd, XkbAllEventsMask, XkbAllEventsMask);
 
