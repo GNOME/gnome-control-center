@@ -1,3 +1,23 @@
+2001-08-13  Richard Hestilow  <hestilow@ximian.com>
+ 
+ 	* applier.c (applier_apply_prefs): Only draw disabled message
+ 	if do_preview. Actually, the user will never see this because
+ 	the correct behavior (which is done) is to assume if they're
+ 	running capplet, prefs->enable should be TRUE. This is because
+ 	we are only honoring enable as a hacker-only setting.
+ 	(output_compat_prefs): Output the correct "Enable" setting.
+ 
+ 	* background-properties-capplet.c (get_legacy_settings): Support
+ 	the "Enabled" flag. 
+ 
+ 	* preferences.c (preferences_new_from_bonobo_db): Import the
+ 	"enabled" flag. Note that this is not bothered with in the _pbag
+ 	function, because that's from the Proxy settings, which is only
+ 	used for the GUI capplet, which always sets enabled to True, because
+ 	this is a hacker-only option. Got it?
+
+	* background-properties.xml: Add "enabled".
+
 2001-07-31  Chema Celorio  <chema@celorio.com>
 
 	* Makefile.am (cappletname): add DISTDIR to install-data-local
