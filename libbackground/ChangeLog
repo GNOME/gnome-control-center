@@ -1,5 +1,8 @@
 2001-12-07  Bradford Hovinen  <hovinen@ximian.com>
 
+	* preferences.c (read_color_from_string): Check if string is
+	non-NULL
+
 	* applier.c (applier_class_init): Initialize object_class properly
 	before using it; install property after {get|set}_property are set
 	(applier_get_preview_widget): Construct the GC before using it

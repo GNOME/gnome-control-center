@@ -253,11 +253,13 @@ read_color_from_string (const gchar *string)
 
 	color = g_new0 (GdkColor, 1);
 
-	gdk_color_parse (string, color);
-	rgb = ((color->red >> 8) << 16) ||
-		((color->green >> 8) << 8) ||
-		(color->blue >> 8);
-	color->pixel = gdk_rgb_xpixel_from_rgb (rgb);
+	if (string != NULL) {
+		gdk_color_parse (string, color);
+		rgb = ((color->red >> 8) << 16) ||
+			((color->green >> 8) << 8) ||
+			(color->blue >> 8);
+		color->pixel = gdk_rgb_xpixel_from_rgb (rgb);
+	}
 
 	return color;
 }
