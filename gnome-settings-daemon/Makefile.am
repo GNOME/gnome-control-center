@@ -1,7 +1,7 @@
 INCLUDES=$(GNOME_SETTINGS_DAEMON_CFLAGS) -I$(top_srcdir)/libbackground
 
 gnome_settings_daemon_SOURCES =		\
-	gnome-settings-daemon.h		\
+		gnome-settings-daemon.h		\
 	gnome-settings-daemon.c		\
 	gnome-settings-mouse.h		\
 	gnome-settings-mouse.c		\
