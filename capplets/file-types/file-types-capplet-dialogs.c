@@ -29,6 +29,7 @@
 #include <gnome.h>
 #include <gtk/gtk.h>
 #include <libgnomevfs/gnome-vfs-mime-handlers.h>
+#include <libgnomevfs/gnome-vfs-application-registry.h>
 #include <libgnomevfs/gnome-vfs-mime-info.h>
 
 #include "nautilus-mime-type-capplet.h"
@@ -666,28 +667,32 @@ static void
 add_new_application (const char *name, const char *command,
 		     gboolean multiple, gboolean uri)
 {
-	GnomeVFSMimeApplication *app;
+	GnomeVFSMimeApplication app;
 	const char *mime_type;
 
 	/* Check for empty strings.  Command can be empty. */
-	if ((strlen (name) <= 0)) {
+	if (name[0] == '\0') {
 		return;
 	}
 
 	mime_type = nautilus_mime_type_capplet_get_selected_item_mime_type ();
-	g_assert (mime_type);
+	g_assert (mime_type != NULL);
 
-	app = g_new0 (GnomeVFSMimeApplication, 1);
+	/* It's ok to cast, we don't modify the application
+	 * structure and thus the name/command, this should really
+	 * use the application registry explicitly */
+	app.id = (char *)name;
+	app.name = (char *)name;
+	app.command = (char *)command;
+	app.can_open_multiple_files = multiple;
+	app.can_open_uris = uri;
+	app.requires_terminal = FALSE;
 
-	app->id = g_strdup (name);
-	app->name = g_strdup (name);
-	app->command = g_strdup (command);
-	app->can_open_multiple_files = multiple;
-	app->can_open_uris = uri;
-	app->requires_terminal = FALSE;
+	gnome_vfs_application_registry_save_mime_application (&app);
+	gnome_vfs_application_registry_add_mime_type (name, mime_type);
+	gnome_vfs_application_registry_sync ();
 
-	gnome_vfs_mime_define_application (mime_type, app);
-	gnome_vfs_mime_add_application_to_short_list (mime_type, app->id);
+	gnome_vfs_mime_add_application_to_short_list (mime_type, app.id);
 }
 
 static void
