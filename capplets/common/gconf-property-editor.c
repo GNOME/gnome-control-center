@@ -692,6 +692,8 @@ peditor_select_radio_widget_changed (GConfPropertyEditor *peditor,
 	GConfValue *value, *value_wid;
 
 	if (!peditor->p->inited) return;
+	if (!tb->active) return;
+
 	value_wid = gconf_value_new (GCONF_VALUE_INT);
 	group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (peditor->p->ui_control));
 	gconf_value_set_int (value_wid, g_slist_index (group, tb));
