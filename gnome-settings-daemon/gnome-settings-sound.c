@@ -73,6 +73,8 @@ start_esd (void)
         }
 }
 
+static gboolean set_standby = FALSE;
+
 /* stop_esd
  *
  * Stop the Enlightenment Sound Daemon. 
@@ -82,6 +84,7 @@ stop_esd (void)
 {
 	/* Can't think of a way to do this reliably, so we fake it for now */
 	esd_standby (gnome_sound_connection_get ());
+	set_standby = TRUE;
 }
 
 /* reload_foreach_cb
@@ -146,12 +149,20 @@ apply_settings (void)
 	event_sounds      = gconf_client_get_bool (client, "/desktop/gnome/sound/event_sounds", NULL);
 	event_changed_new = gconf_client_get_int  (client, "/desktop/gnome/sound/event_changed", NULL);
 
-	if (enable_esd && gnome_sound_connection_get () < 0)
-		start_esd ();
-	else if (!enable_esd)
+	if (enable_esd) {
+		if (gnome_sound_connection_get () < 0) 
+			start_esd ();
+
+		else if (set_standby) {
+			esd_resume (gnome_sound_connection_get ());
+			set_standby = FALSE;
+		}
+
+	} else if (!enable_esd && !set_standby)
 		stop_esd ();
 
-	if (!inited || event_changed_old != event_changed_new)
+	if ((enable_esd && event_sounds) &&
+	    (!inited || event_changed_old != event_changed_new))
 	{
 		SoundProperties *props;
 		
@@ -164,7 +175,7 @@ apply_settings (void)
 		gtk_object_destroy (GTK_OBJECT (props));
 	}
 
-	g_object_unref (G_OBJECT (client));
+	g_object_unref (client);
 }
 
 void
