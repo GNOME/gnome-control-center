@@ -32,41 +32,41 @@
 
 #include "preferences.h"
 
-#define APPLIER(obj)          G_TYPE_CHECK_INSTANCE_CAST (obj, applier_get_type (), Applier)
-#define APPLIER_CLASS(klass)  G_TYPE_CHECK_CLASS_CAST (klass, applier_get_type (), ApplierClass)
-#define IS_APPLIER(obj)       G_TYPE_CHECK_INSTANCE_TYPE (obj, applier_get_type ())
+#define BG_APPLIER(obj)          G_TYPE_CHECK_INSTANCE_CAST (obj, bg_applier_get_type (), BGApplier)
+#define BG_APPLIER_CLASS(klass)  G_TYPE_CHECK_CLASS_CAST (klass, bg_applier_get_type (), BGApplierClass)
+#define IS_BG_APPLIER(obj)       G_TYPE_CHECK_INSTANCE_TYPE (obj, bg_applier_get_type ())
 
-typedef struct _Applier Applier;
-typedef struct _ApplierClass ApplierClass;
+typedef struct _BGApplier BGApplier;
+typedef struct _BGApplierClass BGApplierClass;
 
-typedef struct _ApplierPrivate ApplierPrivate;
+typedef struct _BGApplierPrivate BGApplierPrivate;
 
-typedef enum _ApplierType {
-	APPLIER_ROOT, APPLIER_PREVIEW
-} ApplierType;
+typedef enum _BGApplierType {
+	BG_APPLIER_ROOT, BG_APPLIER_PREVIEW
+} BGApplierType;
 
-struct _Applier
+struct _BGApplier
 {
 	GObject           object;
-	ApplierPrivate   *p;
+	BGApplierPrivate *p;
 };
 
-struct _ApplierClass
+struct _BGApplierClass
 {
 	GObjectClass klass;
 };
 
-guint      applier_get_type             (void);
+guint      bg_applier_get_type             (void);
 
-GObject   *applier_new                  (ApplierType          type);
+GObject   *bg_applier_new                  (BGApplierType          type);
 
-void       applier_apply_prefs          (Applier             *applier,
-					   const BGPreferences *prefs);
+void       bg_applier_apply_prefs          (BGApplier             *bg_applier,
+					    const BGPreferences *prefs);
 
-gboolean   applier_render_color_p       (const Applier       *applier,
-					   const BGPreferences *prefs);
+gboolean   bg_applier_render_color_p       (const BGApplier       *bg_applier,
+					    const BGPreferences *prefs);
 
-GtkWidget *applier_get_preview_widget   (Applier             *applier);
-GdkPixbuf *applier_get_wallpaper_pixbuf (Applier             *applier);
+GtkWidget *bg_applier_get_preview_widget   (BGApplier             *bg_applier);
+GdkPixbuf *bg_applier_get_wallpaper_pixbuf (BGApplier             *bg_applier);
 
 #endif /* __APPLIER_H */

@@ -36,20 +36,20 @@
 #include "preferences.h"
 #include "applier.h"
 
-static Applier *applier;
+static BGApplier *bg_applier;
 static BGPreferences *prefs;
 
 static void
 background_callback (GConfEntry *entry) 
 {
 	bg_preferences_merge_entry (prefs, entry);
-	applier_apply_prefs (applier, prefs);
+	bg_applier_apply_prefs (bg_applier, prefs);
 }
 
 void
 gnome_settings_background_init (GConfEngine *engine)
 {
-	applier = APPLIER (applier_new (APPLIER_ROOT));
+	bg_applier = BG_APPLIER (bg_applier_new (BG_APPLIER_ROOT));
 
 	prefs = BG_PREFERENCES (bg_preferences_new ());
 	bg_preferences_load (prefs);
@@ -60,5 +60,5 @@ gnome_settings_background_init (GConfEngine *engine)
 void
 gnome_settings_background_load (GConfEngine *engine)
 {
-	applier_apply_prefs (applier, prefs);
+	bg_applier_apply_prefs (bg_applier, prefs);
 }

@@ -47,7 +47,7 @@ enum {
 	PROP_TYPE
 };
 
-struct _ApplierPrivate 
+struct _BGApplierPrivate 
 {
 	GtkWidget          *preview_widget;        /* The widget for previewing
 						    * -- this is not used for
@@ -63,7 +63,7 @@ struct _ApplierPrivate
 						    * running, in which case we
 						    * block the renderer */
 
-	ApplierType         type;                  /* Whether we render to the
+	BGApplierType         type;                  /* Whether we render to the
 						    * root or the preview */
 
 	/* Where on the pixmap we should render the background image. Should
@@ -106,34 +106,34 @@ struct _ApplierPrivate
 
 static GObjectClass *parent_class;
 
-static void applier_init             (Applier           *prefs,
-				      ApplierClass      *class);
-static void applier_class_init       (ApplierClass      *class);
-static void applier_base_init        (ApplierClass      *class);
+static void bg_applier_init          (BGApplier           *prefs,
+				      BGApplierClass      *class);
+static void bg_applier_class_init    (BGApplierClass      *class);
+static void bg_applier_base_init     (BGApplierClass      *class);
 
-static void applier_set_prop         (GObject           *object, 
+static void bg_applier_set_prop      (GObject           *object, 
 				      guint              prop_id,
 				      const GValue      *value,
 				      GParamSpec        *pspec);
-static void applier_get_prop         (GObject           *object, 
+static void bg_applier_get_prop      (GObject           *object, 
 				      guint              prop_id,
 				      GValue            *value,
 				      GParamSpec        *pspec);
 
-static void applier_dispose          (GObject           *object);
-static void applier_finalize         (GObject           *object);
+static void bg_applier_dispose       (GObject           *object);
+static void bg_applier_finalize      (GObject           *object);
 
-static void run_render_pipeline      (Applier           *applier, 
+static void run_render_pipeline      (BGApplier           *bg_applier, 
 				      const BGPreferences *prefs);
 static void draw_disabled_message    (GtkWidget         *widget);
 
-static void render_background        (Applier           *applier,
+static void render_background        (BGApplier           *bg_applier,
 				      const BGPreferences *prefs);
-static void render_wallpaper         (Applier           *applier,
+static void render_wallpaper         (BGApplier           *bg_applier,
 				      const BGPreferences *prefs);
-static void render_to_screen         (Applier           *applier,
+static void render_to_screen         (BGApplier           *bg_applier,
 				      const BGPreferences *prefs);
-static void create_pixmap            (Applier           *applier,
+static void create_pixmap            (BGApplier           *bg_applier,
 				      const BGPreferences *prefs);
 static void get_geometry             (wallpaper_type_t   wallpaper_type,
 				      GdkPixbuf         *pixbuf,
@@ -158,11 +158,11 @@ static void fill_gradient            (GdkPixbuf         *pixbuf,
 				      GdkColor          *c2,
 				      orientation_t      orientation);
 
-static gboolean need_wallpaper_load_p  (const Applier     *applier,
+static gboolean need_wallpaper_load_p  (const BGApplier     *bg_applier,
 					const BGPreferences *prefs);
-static gboolean need_root_pixmap_p     (const Applier     *applier,
+static gboolean need_root_pixmap_p     (const BGApplier     *bg_applier,
 					const BGPreferences *prefs);
-static gboolean wallpaper_full_cover_p (const Applier     *applier,
+static gboolean wallpaper_full_cover_p (const BGApplier     *bg_applier,
 					const BGPreferences *prefs);
 static gboolean render_small_pixmap_p  (const BGPreferences *prefs);
 
@@ -173,61 +173,61 @@ static void set_root_pixmap          (GdkPixmap         *pixmap);
 static gboolean is_nautilus_running  (void);
 
 guint
-applier_get_type (void)
+bg_applier_get_type (void)
 {
-	static guint applier_type = 0;
+	static guint bg_applier_type = 0;
 
-	if (!applier_type) {
-		static GTypeInfo applier_info = {
-			sizeof (ApplierClass),
-			(GBaseInitFunc) applier_base_init,
+	if (!bg_applier_type) {
+		static GTypeInfo bg_applier_info = {
+			sizeof (BGApplierClass),
+			(GBaseInitFunc) bg_applier_base_init,
 			NULL, /* GBaseFinalizeFunc */
-			(GClassInitFunc) applier_class_init,
+			(GClassInitFunc) bg_applier_class_init,
 			NULL, /* GClassFinalizeFunc */
 			NULL, /* user-supplied data */
-			sizeof (Applier),
+			sizeof (BGApplier),
 			0, /* n_preallocs */
-			(GInstanceInitFunc) applier_init,
+			(GInstanceInitFunc) bg_applier_init,
 			NULL
 		};
 
-		applier_type = 
+		bg_applier_type = 
 			g_type_register_static (G_TYPE_OBJECT, 
-						"Applier",
-						&applier_info, 0);
+						"BGApplier",
+						&bg_applier_info, 0);
 	}
 
-	return applier_type;
+	return bg_applier_type;
 }
 
 static void
-applier_init (Applier *applier, ApplierClass *class)
+bg_applier_init (BGApplier *bg_applier, BGApplierClass *class)
 {
-	applier->p                   = g_new0 (ApplierPrivate, 1);
-	applier->p->last_prefs       = NULL;
-	applier->p->pixbuf           = NULL;
-	applier->p->wallpaper_pixbuf = NULL;
-	applier->p->nautilus_running = is_nautilus_running ();
+	bg_applier->p                   = g_new0 (BGApplierPrivate, 1);
+	bg_applier->p->last_prefs       = NULL;
+	bg_applier->p->pixbuf           = NULL;
+	bg_applier->p->wallpaper_pixbuf = NULL;
+	bg_applier->p->nautilus_running = is_nautilus_running ();
 }
 
 static void
-applier_class_init (ApplierClass *class) 
+bg_applier_class_init (BGApplierClass *class) 
 {
 	GObjectClass *object_class;
 	GdkVisual *visual;
 
 	object_class = G_OBJECT_CLASS (class);
 
-	object_class->dispose = applier_dispose;
-	object_class->finalize = applier_finalize;
-	object_class->set_property = applier_set_prop;
-	object_class->get_property = applier_get_prop;
+	object_class->dispose = bg_applier_dispose;
+	object_class->finalize = bg_applier_finalize;
+	object_class->set_property = bg_applier_set_prop;
+	object_class->get_property = bg_applier_get_prop;
 
 	g_object_class_install_property
 		(object_class, PROP_TYPE,
 		 g_param_spec_int ("type",
 				   _("Type"),
-				   _("Type of applier: APPLIER_ROOT for root window or APPLIER_PREVIEW for preview"),
+				   _("Type of bg_applier: BG_APPLIER_ROOT for root window or BG_APPLIER_PREVIEW for preview"),
 				   0, 1, 0,
 				   G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
@@ -236,43 +236,43 @@ applier_class_init (ApplierClass *class)
 }
 
 static void
-applier_base_init (ApplierClass *class) 
+bg_applier_base_init (BGApplierClass *class) 
 {
 }
 
 static void
-applier_set_prop (GObject *object, guint prop_id, const GValue *value, GParamSpec *pspec) 
+bg_applier_set_prop (GObject *object, guint prop_id, const GValue *value, GParamSpec *pspec) 
 {
-	Applier *applier;
+	BGApplier *bg_applier;
 
 	g_return_if_fail (object != NULL);
-	g_return_if_fail (IS_APPLIER (object));
+	g_return_if_fail (IS_BG_APPLIER (object));
 
-	applier = APPLIER (object);
+	bg_applier = BG_APPLIER (object);
 
 	switch (prop_id) {
 	case PROP_TYPE:
-		applier->p->type = g_value_get_int (value);
+		bg_applier->p->type = g_value_get_int (value);
 
-		switch (applier->p->type) {
-		case APPLIER_ROOT:
-			applier->p->render_geom.x = 0;
-			applier->p->render_geom.y = 0;
-			applier->p->render_geom.width = gdk_screen_width ();
-			applier->p->render_geom.height = gdk_screen_height ();
-			applier->p->pixmap = NULL;
-			applier->p->pixmap_is_set = FALSE;
+		switch (bg_applier->p->type) {
+		case BG_APPLIER_ROOT:
+			bg_applier->p->render_geom.x = 0;
+			bg_applier->p->render_geom.y = 0;
+			bg_applier->p->render_geom.width = gdk_screen_width ();
+			bg_applier->p->render_geom.height = gdk_screen_height ();
+			bg_applier->p->pixmap = NULL;
+			bg_applier->p->pixmap_is_set = FALSE;
 			break;
 
-		case APPLIER_PREVIEW:
-			applier->p->render_geom.x = MONITOR_CONTENTS_X;
-			applier->p->render_geom.y = MONITOR_CONTENTS_Y;
-			applier->p->render_geom.width = MONITOR_CONTENTS_WIDTH;
-			applier->p->render_geom.height = MONITOR_CONTENTS_HEIGHT;
+		case BG_APPLIER_PREVIEW:
+			bg_applier->p->render_geom.x = MONITOR_CONTENTS_X;
+			bg_applier->p->render_geom.y = MONITOR_CONTENTS_Y;
+			bg_applier->p->render_geom.width = MONITOR_CONTENTS_WIDTH;
+			bg_applier->p->render_geom.height = MONITOR_CONTENTS_HEIGHT;
 			break;
 
 		default:
-			g_critical ("Bad applier type: %d", applier->p->type);
+			g_critical ("Bad bg_applier type: %d", bg_applier->p->type);
 			break;
 		}
 
@@ -285,18 +285,18 @@ applier_set_prop (GObject *object, guint prop_id, const GValue *value, GParamSpe
 }
 
 static void
-applier_get_prop (GObject *object, guint prop_id, GValue *value, GParamSpec *pspec) 
+bg_applier_get_prop (GObject *object, guint prop_id, GValue *value, GParamSpec *pspec) 
 {
-	Applier *applier;
+	BGApplier *bg_applier;
 
 	g_return_if_fail (object != NULL);
-	g_return_if_fail (IS_APPLIER (object));
+	g_return_if_fail (IS_BG_APPLIER (object));
 
-	applier = APPLIER (object);
+	bg_applier = BG_APPLIER (object);
 
 	switch (prop_id) {
 	case PROP_TYPE:
-		g_value_set_int (value, applier->p->type);
+		g_value_set_int (value, bg_applier->p->type);
 		break;
 
 	default:
@@ -306,47 +306,47 @@ applier_get_prop (GObject *object, guint prop_id, GValue *value, GParamSpec *psp
 }
 
 static void
-applier_dispose (GObject *object) 
+bg_applier_dispose (GObject *object) 
 {
-	Applier *applier;
+	BGApplier *bg_applier;
 
 	g_return_if_fail (object != NULL);
-	g_return_if_fail (IS_APPLIER (object));
+	g_return_if_fail (IS_BG_APPLIER (object));
 
-	applier = APPLIER (object);
+	bg_applier = BG_APPLIER (object);
 
-	g_assert (applier->p->pixbuf == NULL);
+	g_assert (bg_applier->p->pixbuf == NULL);
 
-	if (applier->p->last_prefs != NULL)
-		g_object_unref (G_OBJECT (applier->p->last_prefs));
+	if (bg_applier->p->last_prefs != NULL)
+		g_object_unref (G_OBJECT (bg_applier->p->last_prefs));
 
-	if (applier->p->wallpaper_pixbuf != NULL)
-		gdk_pixbuf_unref (applier->p->wallpaper_pixbuf);
+	if (bg_applier->p->wallpaper_pixbuf != NULL)
+		gdk_pixbuf_unref (bg_applier->p->wallpaper_pixbuf);
 
 	parent_class->dispose (object);
 }
 
 static void
-applier_finalize (GObject *object) 
+bg_applier_finalize (GObject *object) 
 {
-	Applier *applier;
+	BGApplier *bg_applier;
 
 	g_return_if_fail (object != NULL);
-	g_return_if_fail (IS_APPLIER (object));
+	g_return_if_fail (IS_BG_APPLIER (object));
 
-	applier = APPLIER (object);
+	bg_applier = BG_APPLIER (object);
 
-	g_free (applier->p);
+	g_free (bg_applier->p);
 
 	parent_class->finalize (object);
 }
 
 GObject *
-applier_new (ApplierType type) 
+bg_applier_new (BGApplierType type) 
 {
 	GObject *object;
 
-	object = g_object_new (applier_get_type (),
+	object = g_object_new (bg_applier_get_type (),
 			       "type", type,
 			       NULL);
 
@@ -354,66 +354,66 @@ applier_new (ApplierType type)
 }
 
 void
-applier_apply_prefs (Applier           *applier, 
+bg_applier_apply_prefs (BGApplier           *bg_applier, 
 		     const BGPreferences *prefs)
 {
-	g_return_if_fail (applier != NULL);
-	g_return_if_fail (IS_APPLIER (applier));
+	g_return_if_fail (bg_applier != NULL);
+	g_return_if_fail (IS_BG_APPLIER (bg_applier));
 
-	if (applier->p->type == APPLIER_ROOT && applier->p->nautilus_running)
+	if (bg_applier->p->type == BG_APPLIER_ROOT && bg_applier->p->nautilus_running)
 		set_root_pixmap ((GdkPixmap *) -1);
 
 	if (!prefs->enabled) {
-		if (applier->p->type == APPLIER_PREVIEW)
-			draw_disabled_message (applier_get_preview_widget (applier));
+		if (bg_applier->p->type == BG_APPLIER_PREVIEW)
+			draw_disabled_message (bg_applier_get_preview_widget (bg_applier));
 		return;
 	}
 
-	if (need_wallpaper_load_p (applier, prefs)) {
-		if (applier->p->wallpaper_pixbuf != NULL)
-			gdk_pixbuf_unref (applier->p->wallpaper_pixbuf);
+	if (need_wallpaper_load_p (bg_applier, prefs)) {
+		if (bg_applier->p->wallpaper_pixbuf != NULL)
+			gdk_pixbuf_unref (bg_applier->p->wallpaper_pixbuf);
 
-		applier->p->wallpaper_pixbuf = NULL;
+		bg_applier->p->wallpaper_pixbuf = NULL;
 
 		if (prefs->wallpaper_enabled) {
 			g_return_if_fail (prefs->wallpaper_filename != NULL);
 
-			applier->p->wallpaper_pixbuf = 
+			bg_applier->p->wallpaper_pixbuf = 
 				gdk_pixbuf_new_from_file (prefs->wallpaper_filename, NULL);
 
-			if (applier->p->wallpaper_pixbuf == NULL)
+			if (bg_applier->p->wallpaper_pixbuf == NULL)
 				g_warning (_("Could not load pixbuf \"%s\"; disabling wallpaper."),
 					   prefs->wallpaper_filename);
 		}
 	}
 
-	if (applier->p->type == APPLIER_ROOT)
+	if (bg_applier->p->type == BG_APPLIER_ROOT)
 		nice (20);
 
-	run_render_pipeline (applier, prefs);
+	run_render_pipeline (bg_applier, prefs);
 
-	if (applier->p->last_prefs != NULL)
-		g_object_unref (G_OBJECT (applier->p->last_prefs));
+	if (bg_applier->p->last_prefs != NULL)
+		g_object_unref (G_OBJECT (bg_applier->p->last_prefs));
 
-	applier->p->last_prefs = BG_PREFERENCES (bg_preferences_clone (prefs));
+	bg_applier->p->last_prefs = BG_PREFERENCES (bg_preferences_clone (prefs));
 
-	if (applier->p->type == APPLIER_PREVIEW && applier->p->preview_widget != NULL)
-		gtk_widget_queue_draw (applier->p->preview_widget);
+	if (bg_applier->p->type == BG_APPLIER_PREVIEW && bg_applier->p->preview_widget != NULL)
+		gtk_widget_queue_draw (bg_applier->p->preview_widget);
 }
 
 gboolean
-applier_render_color_p (const Applier *applier, const BGPreferences *prefs) 
+bg_applier_render_color_p (const BGApplier *bg_applier, const BGPreferences *prefs) 
 {
-	g_return_val_if_fail (applier != NULL, FALSE);
-	g_return_val_if_fail (IS_APPLIER (applier), FALSE);
+	g_return_val_if_fail (bg_applier != NULL, FALSE);
+	g_return_val_if_fail (IS_BG_APPLIER (bg_applier), FALSE);
 	g_return_val_if_fail (prefs != NULL, FALSE);
 	g_return_val_if_fail (IS_BG_PREFERENCES (prefs), FALSE);
 
-	return prefs->enabled && !wallpaper_full_cover_p (applier, prefs);
+	return prefs->enabled && !wallpaper_full_cover_p (bg_applier, prefs);
 }
 
 GtkWidget *
-applier_get_preview_widget (Applier *applier) 
+bg_applier_get_preview_widget (BGApplier *bg_applier) 
 {
 	GdkPixbuf *pixbuf;
 	GdkPixmap *pixmap;
@@ -423,14 +423,14 @@ applier_get_preview_widget (Applier *applier)
 	gchar *filename;
 	GdkGC *gc;
 
-	g_return_val_if_fail (applier != NULL, NULL);
-	g_return_val_if_fail (IS_APPLIER (applier), NULL);
+	g_return_val_if_fail (bg_applier != NULL, NULL);
+	g_return_val_if_fail (IS_BG_APPLIER (bg_applier), NULL);
 
-	if (applier->p->type != APPLIER_PREVIEW)
+	if (bg_applier->p->type != BG_APPLIER_PREVIEW)
 		return NULL;
 
-	if (applier->p->preview_widget != NULL)
-		return applier->p->preview_widget;
+	if (bg_applier->p->preview_widget != NULL)
+		return bg_applier->p->preview_widget;
 
 	filename = gnome_pixmap_file ("monitor.png");
 	visual = gdk_window_get_visual (GDK_ROOT_PARENT ());
@@ -468,24 +468,24 @@ applier_get_preview_widget (Applier *applier)
 				       gdk_pixbuf_get_height (pixbuf),
 				       GDK_RGB_DITHER_MAX, 0, 0);
 
-	applier->p->preview_widget = gtk_pixmap_new (pixmap, mask);
-	gtk_widget_show (applier->p->preview_widget);
+	bg_applier->p->preview_widget = gtk_pixmap_new (pixmap, mask);
+	gtk_widget_show (bg_applier->p->preview_widget);
 	gdk_pixbuf_unref (pixbuf);
 	g_free (filename);
 
 	gtk_widget_pop_visual ();
 	gtk_widget_pop_colormap ();
 
-	return applier->p->preview_widget;
+	return bg_applier->p->preview_widget;
 }
 
 GdkPixbuf *
-applier_get_wallpaper_pixbuf (Applier *applier)
+bg_applier_get_wallpaper_pixbuf (BGApplier *bg_applier)
 {
-	g_return_val_if_fail (applier != NULL, NULL);
-	g_return_val_if_fail (IS_APPLIER (applier), NULL);
+	g_return_val_if_fail (bg_applier != NULL, NULL);
+	g_return_val_if_fail (IS_BG_APPLIER (bg_applier), NULL);
 
-	return applier->p->wallpaper_pixbuf;
+	return bg_applier->p->wallpaper_pixbuf;
 }
 
 static void
@@ -536,34 +536,34 @@ draw_disabled_message (GtkWidget *widget)
 }
 
 static void
-run_render_pipeline (Applier *applier, const BGPreferences *prefs)
+run_render_pipeline (BGApplier *bg_applier, const BGPreferences *prefs)
 {
-	g_return_if_fail (applier != NULL);
-	g_return_if_fail (IS_APPLIER (applier));
+	g_return_if_fail (bg_applier != NULL);
+	g_return_if_fail (IS_BG_APPLIER (bg_applier));
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_BG_PREFERENCES (prefs));
 
-	g_assert (applier->p->pixbuf == NULL);
+	g_assert (bg_applier->p->pixbuf == NULL);
 
-	/* Initialize applier->p->render_geom */
-	applier->p->pixbuf_render_geom.x = applier->p->render_geom.x;
-	applier->p->pixbuf_render_geom.y = applier->p->render_geom.y;
-	applier->p->pixbuf_render_geom.width = applier->p->render_geom.width;
-	applier->p->pixbuf_render_geom.height = applier->p->render_geom.height;
-	applier->p->pixbuf_xlate.x = 0;
-	applier->p->pixbuf_xlate.y = 0;
+	/* Initialize bg_applier->p->render_geom */
+	bg_applier->p->pixbuf_render_geom.x = bg_applier->p->render_geom.x;
+	bg_applier->p->pixbuf_render_geom.y = bg_applier->p->render_geom.y;
+	bg_applier->p->pixbuf_render_geom.width = bg_applier->p->render_geom.width;
+	bg_applier->p->pixbuf_render_geom.height = bg_applier->p->render_geom.height;
+	bg_applier->p->pixbuf_xlate.x = 0;
+	bg_applier->p->pixbuf_xlate.y = 0;
 
-	render_background (applier, prefs);
+	render_background (bg_applier, prefs);
 
-	if (need_root_pixmap_p (applier, prefs))
-		create_pixmap (applier, prefs);
+	if (need_root_pixmap_p (bg_applier, prefs))
+		create_pixmap (bg_applier, prefs);
 
-	render_wallpaper (applier, prefs);
-	render_to_screen (applier, prefs);
+	render_wallpaper (bg_applier, prefs);
+	render_to_screen (bg_applier, prefs);
 
-	if (applier->p->pixbuf != NULL) {
-		gdk_pixbuf_unref (applier->p->pixbuf);
-		applier->p->pixbuf = NULL;
+	if (bg_applier->p->pixbuf != NULL) {
+		gdk_pixbuf_unref (bg_applier->p->pixbuf);
+		bg_applier->p->pixbuf = NULL;
 	}
 }
 
@@ -571,43 +571,43 @@ run_render_pipeline (Applier *applier, const BGPreferences *prefs)
  *
  * Preconditions:
  *   1. prefs is valid
- *   2. The old applier->p->pixbuf, if it existed, has been destroyed
+ *   2. The old bg_applier->p->pixbuf, if it existed, has been destroyed
  *
  * Postconditions (assuming gradient is enabled):
- *   1. applier->p->pixbuf contains a newly rendered gradient
+ *   1. bg_applier->p->pixbuf contains a newly rendered gradient
  */
 
 static void
-render_background (Applier *applier, const BGPreferences *prefs) 
+render_background (BGApplier *bg_applier, const BGPreferences *prefs) 
 {
-	g_return_if_fail (applier != NULL);
-	g_return_if_fail (IS_APPLIER (applier));
+	g_return_if_fail (bg_applier != NULL);
+	g_return_if_fail (IS_BG_APPLIER (bg_applier));
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_BG_PREFERENCES (prefs));
 
-	if (prefs->gradient_enabled && !wallpaper_full_cover_p (applier, prefs)) {
-		applier->p->grad_geom.x = applier->p->render_geom.width;
-		applier->p->grad_geom.y = applier->p->render_geom.height;
+	if (prefs->gradient_enabled && !wallpaper_full_cover_p (bg_applier, prefs)) {
+		bg_applier->p->grad_geom.x = bg_applier->p->render_geom.width;
+		bg_applier->p->grad_geom.y = bg_applier->p->render_geom.height;
 
-		if (applier->p->type == APPLIER_ROOT && !prefs->wallpaper_enabled) {
+		if (bg_applier->p->type == BG_APPLIER_ROOT && !prefs->wallpaper_enabled) {
 			if (prefs->orientation == ORIENTATION_HORIZ)
-				applier->p->grad_geom.y = 32;
+				bg_applier->p->grad_geom.y = 32;
 			else
-				applier->p->grad_geom.x = 32;
+				bg_applier->p->grad_geom.x = 32;
 		}
 
-		applier->p->pixbuf = 
+		bg_applier->p->pixbuf = 
 			gdk_pixbuf_new (GDK_COLORSPACE_RGB, 
 					FALSE, 8, 
-					applier->p->grad_geom.x, 
-					applier->p->grad_geom.y);
+					bg_applier->p->grad_geom.x, 
+					bg_applier->p->grad_geom.y);
 
-		fill_gradient (applier->p->pixbuf,
+		fill_gradient (bg_applier->p->pixbuf,
 			       prefs->color1, prefs->color2, 
 			       prefs->orientation);
 
-		applier->p->pixbuf_render_geom.width = applier->p->grad_geom.x;
-		applier->p->pixbuf_render_geom.height = applier->p->grad_geom.y;
+		bg_applier->p->pixbuf_render_geom.width = bg_applier->p->grad_geom.x;
+		bg_applier->p->pixbuf_render_geom.height = bg_applier->p->grad_geom.y;
 	}
 }
 
@@ -615,21 +615,21 @@ render_background (Applier *applier, const BGPreferences *prefs)
  *
  * Preconditions:
  *   1. The wallpaper pixbuf has been loaded and is in
- *      applier->p->wallpaper_pixbuf.
- *   2. The structure applier->p->render_geom is filled out properly as
+ *      bg_applier->p->wallpaper_pixbuf.
+ *   2. The structure bg_applier->p->render_geom is filled out properly as
  *      described in the documentation above (this should be invariant).
  *   3. The various fields in prefs are valid
  *
  * Postconditions (assuming wallpaper is enabled):
- *   1. applier->p->pixbuf contains the pixbuf-in-progress with the wallpaper
+ *   1. bg_applier->p->pixbuf contains the pixbuf-in-progress with the wallpaper
  *      correctly rendered.
- *   2. applier->p->pixbuf_render_geom has been modified, if necessary,
+ *   2. bg_applier->p->pixbuf_render_geom has been modified, if necessary,
  *      according to the requirements of the wallpaper; it should be set by
- *      default to be the same as applier->p->render_geom.
+ *      default to be the same as bg_applier->p->render_geom.
  */
 
 static void
-render_wallpaper (Applier *applier, const BGPreferences *prefs) 
+render_wallpaper (BGApplier *bg_applier, const BGPreferences *prefs) 
 {
 	GdkRectangle  src_geom;
 	GdkRectangle  dest_geom;
@@ -639,13 +639,13 @@ render_wallpaper (Applier *applier, const BGPreferences *prefs)
 	gint          tmp1, tmp2;
 	gint          pwidth, pheight;
 
-	g_return_if_fail (applier != NULL);
-	g_return_if_fail (IS_APPLIER (applier));
+	g_return_if_fail (bg_applier != NULL);
+	g_return_if_fail (IS_BG_APPLIER (bg_applier));
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_BG_PREFERENCES (prefs));
 
 	if (prefs->wallpaper_enabled) {
-		if (applier->p->wallpaper_pixbuf == NULL)
+		if (bg_applier->p->wallpaper_pixbuf == NULL)
 			return;
 
 		gdk_window_get_size (GDK_ROOT_PARENT (), &tmp1, &tmp2);
@@ -653,31 +653,31 @@ render_wallpaper (Applier *applier, const BGPreferences *prefs)
 		virtual_geom.width = tmp1;
 		virtual_geom.height = tmp2;
 
-		pwidth = gdk_pixbuf_get_width (applier->p->wallpaper_pixbuf);
-		pheight = gdk_pixbuf_get_height (applier->p->wallpaper_pixbuf);
+		pwidth = gdk_pixbuf_get_width (bg_applier->p->wallpaper_pixbuf);
+		pheight = gdk_pixbuf_get_height (bg_applier->p->wallpaper_pixbuf);
 
 		get_geometry (prefs->wallpaper_type,
-			      applier->p->wallpaper_pixbuf,
-			      &(applier->p->render_geom),
+			      bg_applier->p->wallpaper_pixbuf,
+			      &(bg_applier->p->render_geom),
 			      &virtual_geom, &dest_geom, &src_geom);
 
-		/* Modify applier->p->pixbuf_render_geom if necessary */
-		if (applier->p->pixbuf == NULL) {   /* This means we didn't render a gradient */
-			applier->p->pixbuf_render_geom.x = dest_geom.x + applier->p->render_geom.x;
-			applier->p->pixbuf_render_geom.y = dest_geom.y + applier->p->render_geom.y;
-			applier->p->pixbuf_render_geom.width = dest_geom.width;
-			applier->p->pixbuf_render_geom.height = dest_geom.height;
+		/* Modify bg_applier->p->pixbuf_render_geom if necessary */
+		if (bg_applier->p->pixbuf == NULL) {   /* This means we didn't render a gradient */
+			bg_applier->p->pixbuf_render_geom.x = dest_geom.x + bg_applier->p->render_geom.x;
+			bg_applier->p->pixbuf_render_geom.y = dest_geom.y + bg_applier->p->render_geom.y;
+			bg_applier->p->pixbuf_render_geom.width = dest_geom.width;
+			bg_applier->p->pixbuf_render_geom.height = dest_geom.height;
 		}
 
 		if (prefs->wallpaper_type == WPTYPE_TILED) {
 			if (dest_geom.width != pwidth || dest_geom.height != pheight) {
 				prescaled_pixbuf = gdk_pixbuf_scale_simple
-					(applier->p->wallpaper_pixbuf,
-					 pwidth * applier->p->render_geom.width / virtual_geom.width,
-					 pheight * applier->p->render_geom.height / virtual_geom.height,
+					(bg_applier->p->wallpaper_pixbuf,
+					 pwidth * bg_applier->p->render_geom.width / virtual_geom.width,
+					 pheight * bg_applier->p->render_geom.height / virtual_geom.height,
 					 GDK_INTERP_BILINEAR);
 			} else {
-				prescaled_pixbuf = applier->p->wallpaper_pixbuf;
+				prescaled_pixbuf = bg_applier->p->wallpaper_pixbuf;
 				gdk_pixbuf_ref (prescaled_pixbuf);
 			}
 		}
@@ -691,19 +691,19 @@ render_wallpaper (Applier *applier, const BGPreferences *prefs)
 		}
 
 		if (prefs->wallpaper_type == WPTYPE_TILED)
-			applier->p->pixbuf = tile_pixbuf (applier->p->pixbuf,
+			bg_applier->p->pixbuf = tile_pixbuf (bg_applier->p->pixbuf,
 							  prescaled_pixbuf,
-							  &(applier->p->render_geom),
+							  &(bg_applier->p->render_geom),
 							  alpha, prefs->color1);
 		else
-			applier->p->pixbuf = place_pixbuf (applier->p->pixbuf,
-							   applier->p->wallpaper_pixbuf,
+			bg_applier->p->pixbuf = place_pixbuf (bg_applier->p->pixbuf,
+							   bg_applier->p->wallpaper_pixbuf,
 							   &dest_geom, &src_geom,
 							   alpha, prefs->color1);
 
-		if (applier->p->pixbuf == applier->p->wallpaper_pixbuf) {
-			applier->p->pixbuf_xlate.x = src_geom.x;
-			applier->p->pixbuf_xlate.y = src_geom.y;
+		if (bg_applier->p->pixbuf == bg_applier->p->wallpaper_pixbuf) {
+			bg_applier->p->pixbuf_xlate.x = src_geom.x;
+			bg_applier->p->pixbuf_xlate.y = src_geom.y;
 		}
 
 		if (prescaled_pixbuf != NULL)
@@ -715,11 +715,11 @@ render_wallpaper (Applier *applier, const BGPreferences *prefs)
  *
  * Preconditions:
  *   1. We have already rendered the gradient and wallpaper, and
- *      applier->p->pixbuf is a valid GdkPixbuf containing that rendered data.
- *   2. The structure applier->p->pixbuf_render_geom contains the coordonites on
+ *      bg_applier->p->pixbuf is a valid GdkPixbuf containing that rendered data.
+ *   2. The structure bg_applier->p->pixbuf_render_geom contains the coordonites on
  *      the destination visual to which we should render the contents of
- *      applier->p->pixbuf
- *   3. The structure applier->p->render_geom contains the total area that the
+ *      bg_applier->p->pixbuf
+ *   3. The structure bg_applier->p->render_geom contains the total area that the
  *      background should cover (i.e. the whole desktop if we are rendering to
  *      the root window, or the region inside the monitor if we are rendering to
  *      the preview).
@@ -728,104 +728,104 @@ render_wallpaper (Applier *applier, const BGPreferences *prefs)
  */
 
 static void
-render_to_screen (Applier *applier, const BGPreferences *prefs) 
+render_to_screen (BGApplier *bg_applier, const BGPreferences *prefs) 
 {
 	GdkGC *gc;
 
-	g_return_if_fail (applier != NULL);
-	g_return_if_fail (IS_APPLIER (applier));
+	g_return_if_fail (bg_applier != NULL);
+	g_return_if_fail (IS_BG_APPLIER (bg_applier));
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_BG_PREFERENCES (prefs));
 
 	gc = gdk_gc_new (GDK_ROOT_PARENT ());
 
-	if (applier->p->pixbuf != NULL) {
-		if (applier->p->pixbuf_render_geom.x != 0 ||
-		    applier->p->pixbuf_render_geom.y != 0 ||
-		    applier->p->pixbuf_render_geom.width != applier->p->render_geom.width ||
-		    applier->p->pixbuf_render_geom.height != applier->p->render_geom.height)
+	if (bg_applier->p->pixbuf != NULL) {
+		if (bg_applier->p->pixbuf_render_geom.x != 0 ||
+		    bg_applier->p->pixbuf_render_geom.y != 0 ||
+		    bg_applier->p->pixbuf_render_geom.width != bg_applier->p->render_geom.width ||
+		    bg_applier->p->pixbuf_render_geom.height != bg_applier->p->render_geom.height)
 		{
 			gdk_color_alloc (gdk_window_get_colormap (GDK_ROOT_PARENT ()), prefs->color1);
 			gdk_gc_set_foreground (gc, prefs->color1);
-			gdk_draw_rectangle (applier->p->pixmap, gc, TRUE,
-					    applier->p->render_geom.x,
-					    applier->p->render_geom.y, 
-					    applier->p->render_geom.width,
-					    applier->p->render_geom.height);
+			gdk_draw_rectangle (bg_applier->p->pixmap, gc, TRUE,
+					    bg_applier->p->render_geom.x,
+					    bg_applier->p->render_geom.y, 
+					    bg_applier->p->render_geom.width,
+					    bg_applier->p->render_geom.height);
 		}
 
 		gdk_pixbuf_render_to_drawable
-			(applier->p->pixbuf,
-			 applier->p->pixmap, gc,
-			 applier->p->pixbuf_xlate.x,
-			 applier->p->pixbuf_xlate.y,
-			 applier->p->pixbuf_render_geom.x,
-			 applier->p->pixbuf_render_geom.y,
-			 applier->p->pixbuf_render_geom.width,
-			 applier->p->pixbuf_render_geom.height,
+			(bg_applier->p->pixbuf,
+			 bg_applier->p->pixmap, gc,
+			 bg_applier->p->pixbuf_xlate.x,
+			 bg_applier->p->pixbuf_xlate.y,
+			 bg_applier->p->pixbuf_render_geom.x,
+			 bg_applier->p->pixbuf_render_geom.y,
+			 bg_applier->p->pixbuf_render_geom.width,
+			 bg_applier->p->pixbuf_render_geom.height,
 			 GDK_RGB_DITHER_MAX, 0, 0);
 	} else {
-		if (applier->p->type == APPLIER_ROOT) {
+		if (bg_applier->p->type == BG_APPLIER_ROOT) {
 			gdk_color_alloc (gdk_window_get_colormap (GDK_ROOT_PARENT()), prefs->color1);
 			gdk_window_set_background (GDK_ROOT_PARENT (), prefs->color1);
 			gdk_window_clear (GDK_ROOT_PARENT ());
 		}
-		else if (applier->p->type == APPLIER_PREVIEW) {
-			gdk_color_alloc (gdk_window_get_colormap (applier->p->preview_widget->window), prefs->color1);
+		else if (bg_applier->p->type == BG_APPLIER_PREVIEW) {
+			gdk_color_alloc (gdk_window_get_colormap (bg_applier->p->preview_widget->window), prefs->color1);
 			gdk_gc_set_foreground (gc, prefs->color1);
-			gdk_draw_rectangle (applier->p->pixmap, gc, TRUE,
-					    applier->p->render_geom.x,
-					    applier->p->render_geom.y, 
-					    applier->p->render_geom.width,
-					    applier->p->render_geom.height);
+			gdk_draw_rectangle (bg_applier->p->pixmap, gc, TRUE,
+					    bg_applier->p->render_geom.x,
+					    bg_applier->p->render_geom.y, 
+					    bg_applier->p->render_geom.width,
+					    bg_applier->p->render_geom.height);
 		}
 	}
 
-	if (applier->p->type == APPLIER_ROOT && !applier->p->pixmap_is_set &&
+	if (bg_applier->p->type == BG_APPLIER_ROOT && !bg_applier->p->pixmap_is_set &&
 	    (prefs->wallpaper_enabled || prefs->gradient_enabled))
-		set_root_pixmap (applier->p->pixmap);
-	else if (applier->p->type == APPLIER_ROOT && !applier->p->pixmap_is_set)
+		set_root_pixmap (bg_applier->p->pixmap);
+	else if (bg_applier->p->type == BG_APPLIER_ROOT && !bg_applier->p->pixmap_is_set)
 		set_root_pixmap (NULL);
 
 	gdk_gc_destroy (gc);
 }
 
 /* Create a pixmap that will replace the current root pixmap. This function has
- * no effect if the applier is for the preview window
+ * no effect if the bg_applier is for the preview window
  */
 
 static void
-create_pixmap (Applier *applier, const BGPreferences *prefs) 
+create_pixmap (BGApplier *bg_applier, const BGPreferences *prefs) 
 {
 	gint width, height;
 
-	g_return_if_fail (applier != NULL);
-	g_return_if_fail (IS_APPLIER (applier));
+	g_return_if_fail (bg_applier != NULL);
+	g_return_if_fail (IS_BG_APPLIER (bg_applier));
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_BG_PREFERENCES (prefs));
 
-	switch (applier->p->type) {
-	case APPLIER_ROOT:
+	switch (bg_applier->p->type) {
+	case BG_APPLIER_ROOT:
 		if (prefs->gradient_enabled && !prefs->wallpaper_enabled) {
-			width = applier->p->grad_geom.x;
-			height = applier->p->grad_geom.y;
+			width = bg_applier->p->grad_geom.x;
+			height = bg_applier->p->grad_geom.y;
 		} else {
-			width = applier->p->render_geom.width;
-			height = applier->p->render_geom.height;
+			width = bg_applier->p->render_geom.width;
+			height = bg_applier->p->render_geom.height;
 		}
 
-		applier->p->pixmap = make_root_pixmap (width, height);
-		applier->p->pixmap_is_set = FALSE;
+		bg_applier->p->pixmap = make_root_pixmap (width, height);
+		bg_applier->p->pixmap_is_set = FALSE;
 		break;
 
-	case APPLIER_PREVIEW:
-		applier_get_preview_widget (applier);
+	case BG_APPLIER_PREVIEW:
+		bg_applier_get_preview_widget (bg_applier);
 
-		if (!GTK_WIDGET_REALIZED (applier->p->preview_widget))
-			gtk_widget_realize (applier->p->preview_widget);
+		if (!GTK_WIDGET_REALIZED (bg_applier->p->preview_widget))
+			gtk_widget_realize (bg_applier->p->preview_widget);
 
-		applier->p->pixmap = GTK_PIXMAP (applier->p->preview_widget)->pixmap;
-		applier->p->pixmap_is_set = TRUE;
+		bg_applier->p->pixmap = GTK_PIXMAP (bg_applier->p->preview_widget)->pixmap;
+		bg_applier->p->pixmap_is_set = TRUE;
 		break;
 	}
 }
@@ -1187,15 +1187,15 @@ fill_gradient (GdkPixbuf     *pixbuf,
  */
 
 static gboolean
-need_wallpaper_load_p (const Applier *applier, const BGPreferences *prefs)
+need_wallpaper_load_p (const BGApplier *bg_applier, const BGPreferences *prefs)
 {
-	if (applier->p->last_prefs == NULL)
+	if (bg_applier->p->last_prefs == NULL)
 		return TRUE;
-	else if (applier->p->last_prefs->wallpaper_enabled != prefs->wallpaper_enabled)
+	else if (bg_applier->p->last_prefs->wallpaper_enabled != prefs->wallpaper_enabled)
 		return TRUE;
-	else if (!applier->p->last_prefs->wallpaper_enabled && !prefs->wallpaper_enabled)
+	else if (!bg_applier->p->last_prefs->wallpaper_enabled && !prefs->wallpaper_enabled)
 		return FALSE;
-	else if (strcmp (applier->p->last_prefs->wallpaper_filename, prefs->wallpaper_filename))
+	else if (strcmp (bg_applier->p->last_prefs->wallpaper_filename, prefs->wallpaper_filename))
 		return TRUE;
 	else
 		return FALSE;
@@ -1204,16 +1204,16 @@ need_wallpaper_load_p (const Applier *applier, const BGPreferences *prefs)
 /* Return TRUE iff we need to create a new root pixmap */
 
 static gboolean
-need_root_pixmap_p (const Applier *applier, const BGPreferences *prefs) 
+need_root_pixmap_p (const BGApplier *bg_applier, const BGPreferences *prefs) 
 {
-	if (applier->p->last_prefs == NULL)
+	if (bg_applier->p->last_prefs == NULL)
 		return TRUE;
-	else if (render_small_pixmap_p (applier->p->last_prefs) != render_small_pixmap_p (prefs))
+	else if (render_small_pixmap_p (bg_applier->p->last_prefs) != render_small_pixmap_p (prefs))
 		return TRUE;
-	else if (!render_small_pixmap_p (applier->p->last_prefs) &&
+	else if (!render_small_pixmap_p (bg_applier->p->last_prefs) &&
 		 !render_small_pixmap_p (prefs))
 		return FALSE;
-	else if (applier->p->last_prefs->orientation != prefs->orientation)
+	else if (bg_applier->p->last_prefs->orientation != prefs->orientation)
 		return TRUE;
 	else
 		return FALSE;
@@ -1225,7 +1225,7 @@ need_root_pixmap_p (const Applier *applier, const BGPreferences *prefs)
  * bg_preferences structure, assuming we have already loaded the wallpaper pixbuf */
 
 static gboolean
-wallpaper_full_cover_p (const Applier *applier, const BGPreferences *prefs) 
+wallpaper_full_cover_p (const BGApplier *bg_applier, const BGPreferences *prefs) 
 {
 	gint swidth, sheight;
 	gint pwidth, pheight;
@@ -1233,11 +1233,11 @@ wallpaper_full_cover_p (const Applier *applier, const BGPreferences *prefs)
 
 	/* We can't make this determination until the wallpaper is loaded, if
 	 * wallpaper is enabled */
-	g_return_val_if_fail (!prefs->wallpaper_enabled || applier->p->wallpaper_pixbuf != NULL, TRUE);
+	g_return_val_if_fail (!prefs->wallpaper_enabled || bg_applier->p->wallpaper_pixbuf != NULL, TRUE);
 
 	if (!prefs->wallpaper_enabled)
 		return FALSE;
-	else if (gdk_pixbuf_get_has_alpha (applier->p->wallpaper_pixbuf))
+	else if (gdk_pixbuf_get_has_alpha (bg_applier->p->wallpaper_pixbuf))
 		return FALSE;
 	else if (prefs->wallpaper_type == WPTYPE_TILED)
 		return TRUE;
@@ -1245,8 +1245,8 @@ wallpaper_full_cover_p (const Applier *applier, const BGPreferences *prefs)
 		return TRUE;
 
 	gdk_window_get_size (GDK_ROOT_PARENT (), &swidth, &sheight);
-	pwidth = gdk_pixbuf_get_width (applier->p->wallpaper_pixbuf);
-	pheight = gdk_pixbuf_get_height (applier->p->wallpaper_pixbuf);
+	pwidth = gdk_pixbuf_get_width (bg_applier->p->wallpaper_pixbuf);
+	pheight = gdk_pixbuf_get_height (bg_applier->p->wallpaper_pixbuf);
 
 	if (prefs->wallpaper_type == WPTYPE_CENTERED) {
 		if (pwidth >= swidth && pheight >= sheight)

@@ -41,11 +41,11 @@
 static void
 get_legacy_settings (void) 
 {
-	int val_int;
-	char *val_string;
-	gboolean val_boolean;
-	gboolean def;
-	gchar *val_filename;
+	int          val_int;
+	char        *val_string;
+	gboolean     val_boolean;
+	gboolean     def;
+	gchar       *val_filename;
 
 	GConfClient *client;
 
@@ -113,7 +113,7 @@ static gboolean
 real_realize_cb (BGPreferences *prefs) 
 {
 	GtkWidget *color_frame;
-	Applier   *applier;
+	BGApplier *bg_applier;
 
 	g_return_val_if_fail (prefs != NULL, TRUE);
 	g_return_val_if_fail (IS_BG_PREFERENCES (prefs), TRUE);
@@ -121,12 +121,12 @@ real_realize_cb (BGPreferences *prefs)
 	if (G_OBJECT (prefs)->ref_count == 0)
 		return FALSE;
 
-	applier = g_object_get_data (G_OBJECT (prefs), "applier");
+	bg_applier = g_object_get_data (G_OBJECT (prefs), "applier");
 	color_frame = g_object_get_data (G_OBJECT (prefs), "color-frame");
 
-	applier_apply_prefs (applier, prefs);
+	bg_applier_apply_prefs (bg_applier, prefs);
 
-	gtk_widget_set_sensitive (color_frame, applier_render_color_p (applier, prefs));
+	gtk_widget_set_sensitive (color_frame, bg_applier_render_color_p (bg_applier, prefs));
 
 	return FALSE;
 }
@@ -156,24 +156,24 @@ static void
 peditor_value_changed (GConfPropertyEditor *peditor, const gchar *key, const GConfValue *value, BGPreferences *prefs) 
 {
 	GConfEntry *entry;
-	Applier *applier;
+	BGApplier *bg_applier;
 	GtkWidget *color_frame;
 
 	entry = gconf_entry_new (key, value);
 	bg_preferences_merge_entry (prefs, entry);
 	gconf_entry_free (entry);
 
-	applier = g_object_get_data (G_OBJECT (prefs), "applier");
+	bg_applier = g_object_get_data (G_OBJECT (prefs), "applier");
 
-	if (GTK_WIDGET_REALIZED (applier_get_preview_widget (applier)))
-		applier_apply_prefs (applier, BG_PREFERENCES (prefs));
+	if (GTK_WIDGET_REALIZED (bg_applier_get_preview_widget (bg_applier)))
+		bg_applier_apply_prefs (bg_applier, BG_PREFERENCES (prefs));
 
 	if (!strcmp (key, "/desktop/gnome/background/wallpaper-enabled") ||
 	    !strcmp (key, "/desktop/gnome/background/wallpaper-filename") ||
 	    !strcmp (key, "/desktop/gnome/background/wallpaper-type"))
 	{
 		color_frame = g_object_get_data (G_OBJECT (prefs), "color-frame");
-		gtk_widget_set_sensitive (color_frame, applier_render_color_p (applier, prefs));
+		gtk_widget_set_sensitive (color_frame, bg_applier_render_color_p (bg_applier, prefs));
 	}
 }
 
@@ -182,11 +182,11 @@ peditor_value_changed (GConfPropertyEditor *peditor, const gchar *key, const GCo
  */
 
 static void
-setup_dialog (GladeXML *dialog, GConfChangeSet *changeset, Applier *applier)
+setup_dialog (GladeXML *dialog, GConfChangeSet *changeset, BGApplier *bg_applier)
 {
-	GObject                       *prefs;
-	GObject                       *peditor;
-	GConfClient                   *client;
+	GObject     *prefs;
+	GObject     *peditor;
+	GConfClient *client;
 
 	/* Override the enabled setting to make sure background is enabled */
 	client = gconf_client_get_default ();
@@ -199,7 +199,7 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset, Applier *applier)
 	/* We need to be able to retrieve the applier and the color frame in
 	   callbacks */
 	g_object_set_data (prefs, "color-frame", WID ("color_frame"));
-	g_object_set_data (prefs, "applier", applier);
+	g_object_set_data (prefs, "applier", bg_applier);
 
 	peditor = gconf_peditor_new_select_menu
 		(changeset, "/desktop/gnome/background/orientation", WID ("color_option"));
@@ -228,10 +228,10 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset, Applier *applier)
 	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("picture_frame"));
 
 	/* Make sure preferences get applied to the preview */
-	if (GTK_WIDGET_REALIZED (applier_get_preview_widget (applier)))
-		applier_apply_prefs (applier, BG_PREFERENCES (prefs));
+	if (GTK_WIDGET_REALIZED (bg_applier_get_preview_widget (bg_applier)))
+		bg_applier_apply_prefs (bg_applier, BG_PREFERENCES (prefs));
 	else
-		g_signal_connect_after (G_OBJECT (applier_get_preview_widget (applier)), "realize",
+		g_signal_connect_after (G_OBJECT (bg_applier_get_preview_widget (bg_applier)), "realize",
 					(GCallback) realize_cb, prefs);
 
 	/* Make sure the preferences object gets destroyed when the dialog is
@@ -242,7 +242,7 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset, Applier *applier)
 /* Construct the dialog */
 
 static GladeXML *
-create_dialog (Applier *applier) 
+create_dialog (BGApplier *bg_applier) 
 {
 	GtkWidget *holder;
 	GtkWidget *widget;
@@ -254,7 +254,7 @@ create_dialog (Applier *applier)
 
 	/* Minor GUI addition */
 	holder = WID ("prefs_widget");
-	gtk_box_pack_start (GTK_BOX (holder), applier_get_preview_widget (applier), TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (holder), bg_applier_get_preview_widget (bg_applier), TRUE, TRUE, 0);
 	gtk_widget_show_all (holder);
 
 	g_object_weak_ref (G_OBJECT (widget), (GWeakNotify) g_object_unref, dialog);
@@ -280,7 +280,7 @@ main (int argc, char **argv)
 	GConfChangeSet *changeset;
 	GladeXML       *dialog;
 	GtkWidget      *dialog_win;
-	GObject        *applier;
+	GObject        *bg_applier;
 
 	static gboolean get_legacy;
 	static struct poptOption cap_options[] = {
@@ -306,13 +306,13 @@ main (int argc, char **argv)
 		get_legacy_settings ();
 	} else {
 		changeset = gconf_change_set_new ();
-		applier = applier_new (APPLIER_PREVIEW);
-		dialog = create_dialog (APPLIER (applier));
-		setup_dialog (dialog, changeset, APPLIER (applier));
+		bg_applier = bg_applier_new (BG_APPLIER_PREVIEW);
+		dialog = create_dialog (BG_APPLIER (bg_applier));
+		setup_dialog (dialog, changeset, BG_APPLIER (bg_applier));
 
 		dialog_win = gnome_dialog_new (_("Background properties"), GTK_STOCK_APPLY, GTK_STOCK_CLOSE, NULL);
 		g_signal_connect (G_OBJECT (dialog_win), "clicked", (GCallback) dialog_button_clicked_cb, changeset);
-		g_object_weak_ref (G_OBJECT (dialog_win), (GWeakNotify) g_object_unref, applier);
+		g_object_weak_ref (G_OBJECT (dialog_win), (GWeakNotify) g_object_unref, bg_applier);
 		g_object_weak_ref (G_OBJECT (dialog_win), (GWeakNotify) gtk_main_quit, NULL);
 		gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog_win)->vbox), WID ("prefs_widget"), TRUE, TRUE, GNOME_PAD_SMALL);
 		gtk_widget_show_all (dialog_win);
