@@ -533,7 +533,7 @@ static gint sort_alpha(const void *a, const void *b)
   A = a;
   B = b;
   
-  return strcmp(A->name, B->name);
+  return g_strcasecmp(A->name, B->name);
 }
 
 static void

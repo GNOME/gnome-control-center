@@ -1,5 +1,10 @@
 2001-09-29  Richard Hestilow  <hestilow@ximian.com>
 
+	* gui.c (sort_alpha): Use g_strcasecmp, not strcmp.
+	Fixes bug #13539.
+
+2001-09-29  Richard Hestilow  <hestilow@ximian.com>
+
 	* lister.c: (list_themes, list_system_themes, list_user_themes):
 	Return a GList of ThemeEntry*, and remove extraneous number argument.
 	Also, use g_strdup_printf instead of g_snprintf.
