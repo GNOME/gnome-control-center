@@ -54,6 +54,71 @@ CappletDirView *(*get_view_cb) (CappletDir *dir, CappletDirView *launcher);
 /* nice global table for capplet lookup */
 GHashTable *capplet_hash = NULL;
 
+/********************************************************************
+ *
+ * Stolen from nautilus to keep control center and nautilus in sync
+ */
+static gboolean
+eel_str_has_suffix (const char *haystack, const char *needle)
+{
+	const char *h, *n;
+
+	if (needle == NULL) {
+		return TRUE;
+	}
+	if (haystack == NULL) {
+		return needle[0] == '\0';
+	}
+		
+	/* Eat one character at a time. */
+	h = haystack + strlen(haystack);
+	n = needle + strlen(needle);
+	do {
+		if (n == needle) {
+			return TRUE;
+		}
+		if (h == haystack) {
+			return FALSE;
+		}
+	} while (*--h == *--n);
+	return FALSE;
+}
+static char *   
+eel_str_strip_trailing_str (const char *source, const char *remove_this)
+{
+	const char *end;
+	if (source == NULL) {
+		return NULL;
+	}
+	if (remove_this == NULL) {
+		return g_strdup (source);
+	}
+	end = source + strlen (source);
+	if (strcmp (end - strlen (remove_this), remove_this) != 0) {
+		return g_strdup (source);
+	}
+	else {
+		return g_strndup (source, strlen (source) - strlen(remove_this));
+	}
+	
+}
+static char *
+nautilus_remove_icon_file_name_suffix (const char *icon_name)
+{
+	guint i;
+	const char *suffix;
+	static const char *icon_file_name_suffixes[] = { ".svg", ".svgz", ".png", ".jpg", ".xpm" };
+
+	for (i = 0; i < G_N_ELEMENTS (icon_file_name_suffixes); i++) {
+		suffix = icon_file_name_suffixes[i];
+		if (eel_str_has_suffix (icon_name, suffix)) {
+			return eel_str_strip_trailing_str (icon_name, suffix);
+		}
+	}
+	return g_strdup (icon_name);
+}
+/********************************************************************/
+
 static GdkPixbuf * 
 find_icon (GnomeDesktopItem *dentry) 
 {
@@ -68,7 +133,9 @@ find_icon (GnomeDesktopItem *dentry)
 	else if (g_path_is_absolute (icon))
 		res = gdk_pixbuf_new_from_file (icon, NULL);
 	else  {
-		res = gtk_icon_theme_load_icon (icon_theme, icon, 48, 0, NULL);
+		char *no_suffix = nautilus_remove_icon_file_name_suffix (icon);
+		res = gtk_icon_theme_load_icon (icon_theme, no_suffix, 48, 0, NULL);
+		g_free (no_suffix);
 		if (res == NULL) {
 			char *path = g_build_filename (GNOMECC_ICONS_DIR, icon, NULL);
 			res = gdk_pixbuf_new_from_file (path, NULL);

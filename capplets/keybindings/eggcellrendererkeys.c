@@ -424,6 +424,14 @@ grab_key_callback (GtkWidget    *widget,
                                         EGG_VIRTUAL_SCROLL_LOCK_MASK,
                                         &ignored_modifiers);
   
+  /* http://bugzilla.gnome.org/show_bug.cgi?id=139605
+   * mouse keys should effect keybindings */
+  ignored_modifiers |=	GDK_BUTTON1_MASK |
+			GDK_BUTTON2_MASK |
+			GDK_BUTTON3_MASK |
+			GDK_BUTTON4_MASK |
+			GDK_BUTTON5_MASK;
+
   /* filter consumed/ignored modifiers */
 
   if (keys->accel_mode == EGG_CELL_RENDERER_KEYS_MODE_GTK)
