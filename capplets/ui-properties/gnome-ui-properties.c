@@ -164,13 +164,11 @@ set_have_icons (GladeXML *dialog, gboolean value)
 {
   static char *menu_item_names[] = 
     {
-      "File Menu",
       "menu_item_1",
       "menu_item_2",
       "menu_item_3",
       "menu_item_4",
       "menu_item_5",
-      "edit1",
       "cut1",
       "copy1",
       "paste1",
