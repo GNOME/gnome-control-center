@@ -5,12 +5,21 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.0.5\n"
-"PO-Revision-Date: 1999-07-18 10:52+02:00\n"
+"POT-Creation-Date: 1999-07-30 02:18+0200\n"
+"PO-Revision-Date: 1999-07-30 02:19+02:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8-bit\n"
+
+#: capplets/background-properties/app-background.c:13
+msgid "Set background image."
+msgstr "Sett bakgrunnsbilde."
+
+#: capplets/background-properties/app-background.c:13
+msgid "IMAGE-FILE"
+msgstr "IMAGE-FILE"
 
 #: capplets/background-properties/property-background.c:244
 msgid "Disabled"
@@ -214,12 +223,15 @@ msgstr "Mime type: "
 msgid "Extension: "
 msgstr "Etternavn: "
 
+#. gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
 #: capplets/mime-type/edit-window.c:133
-msgid "First Regular Expresion: "
+#: capplets/mime-type/new-mime-window.c:65
+msgid "First Regular Expression: "
 msgstr "Første vanlige uttrykk: "
 
 #: capplets/mime-type/edit-window.c:141
-msgid "Second Regular Expresion: "
+#: capplets/mime-type/new-mime-window.c:76
+msgid "Second Regular Expression: "
 msgstr "Andre vanlige uttrykk: "
 
 #. Actions box
@@ -364,7 +376,7 @@ msgid "Extension:"
 msgstr "Filtype:"
 
 #: capplets/mime-type/new-mime-window.c:51
-msgid "Regular Expresions"
+msgid "Regular Expressions"
 msgstr "Vanlige uttrykk"
 
 #: capplets/mime-type/new-mime-window.c:55
@@ -374,15 +386,6 @@ msgid ""
 msgstr ""
 "Du kan sette opp to vanlige uttrykk her til bruk for identifisering av\n"
 "mime-typen. Disse feltene er valgfrie."
-
-#. gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
-#: capplets/mime-type/new-mime-window.c:65
-msgid "First Regular Expression: "
-msgstr "Første vanlige uttrykk: "
-
-#: capplets/mime-type/new-mime-window.c:76
-msgid "Second Regular Expression: "
-msgstr "Andre vanlige uttrykk: "
 
 #: capplets/mouse-properties/mouse-properties.c:259
 msgid "Mouse buttons"
@@ -656,6 +659,10 @@ msgstr "Forkast ved utlogging og kan dø."
 msgid "Always started on every login."
 msgstr "Alltid startet ved innlogging."
 
+#: capplets/session-properties/gsm-protocol.c:503
+msgid "Remove Program"
+msgstr "Fjern program"
+
 #: capplets/session-properties/session-properties.c:147
 msgid "Program:"
 msgstr "Program:"
@@ -744,51 +751,6 @@ msgstr ""
 msgid "Close"
 msgstr "Lukk"
 
-#: capplets/theme-switcher/gui.c:83
-#, c-format
-msgid ""
-"Error installing theme:\n"
-"'%s'\n"
-"%s"
-msgstr ""
-"Feil under installasjon av tema:\n"
-"'%s'\n"
-"%s"
-
-#: capplets/theme-switcher/gui.c:114
-msgid "Select a theme to install"
-msgstr "Velg et tema for installasjon"
-
-#: capplets/theme-switcher/gui.c:191
-msgid "Available Themes"
-msgstr "Tilgjengelige temaer"
-
-#: capplets/theme-switcher/gui.c:216
-msgid ""
-"Auto\n"
-"Preview"
-msgstr ""
-"Automatisk\n"
-"Forhåndsvisning"
-
-#: capplets/theme-switcher/gui.c:228
-msgid ""
-"Install new\n"
-"theme..."
-msgstr ""
-"Installer nytt\n"
-"tema..."
-
-#. Font selector.
-#.
-#: capplets/theme-switcher/gui.c:234
-msgid "User Font"
-msgstr "Brukerskrifttype"
-
-#: capplets/theme-switcher/gui.c:271
-msgid "Use custom font."
-msgstr "Bruk egendefinert skrifttype."
-
 #: capplets/theme-switcher/demo.c:50
 msgid "One"
 msgstr "En"
@@ -858,6 +820,68 @@ msgstr "Radioknapp 2"
 #: capplets/theme-switcher/demo.c:147
 msgid "Radio Button 3"
 msgstr "Radioknapp 3"
+
+#: capplets/theme-switcher/gui.c:83
+#, c-format
+msgid ""
+"Error installing theme:\n"
+"'%s'\n"
+"%s"
+msgstr ""
+"Feil under installasjon av tema:\n"
+"'%s'\n"
+"%s"
+
+#: capplets/theme-switcher/gui.c:114
+msgid "Select a theme to install"
+msgstr "Velg et tema for installasjon"
+
+#: capplets/theme-switcher/gui.c:191
+msgid "Available Themes"
+msgstr "Tilgjengelige temaer"
+
+#: capplets/theme-switcher/gui.c:216
+msgid ""
+"Auto\n"
+"Preview"
+msgstr ""
+"Automatisk\n"
+"Forhåndsvisning"
+
+#: capplets/theme-switcher/gui.c:228
+msgid ""
+"Install new\n"
+"theme..."
+msgstr ""
+"Installer nytt\n"
+"tema..."
+
+#. Font selector.
+#.
+#: capplets/theme-switcher/gui.c:234
+msgid "User Font"
+msgstr "Brukerskrifttype"
+
+#: capplets/theme-switcher/gui.c:271
+msgid "Use custom font."
+msgstr "Bruk egendefinert skrifttype."
+
+#: capplets/theme-switcher/install.c:26
+msgid "Home directory doesn't exist!\n"
+msgstr "Hjemmekatalogen eksisterer ikke!\n"
+
+#: capplets/theme-switcher/install.c:36
+msgid "Theme does not exist"
+msgstr "Temaet eksisterer ikke"
+
+#: capplets/theme-switcher/install.c:68
+#, c-format
+msgid "Command '%s' failed"
+msgstr "Kommandoen '%s' feilet"
+
+#: capplets/theme-switcher/install.c:73
+msgid "Unknown file format"
+msgstr "Ukjent filformat"
 
 #: capplets/ui-properties/ui-properties.c:53
 msgid "Default Gtk setting"
@@ -1164,7 +1188,7 @@ msgstr "Prøv"
 msgid "Revert"
 msgstr "Forkast"
 
-#: control-center/capplet-manager.c:188 control-center/main.c:30
+#: control-center/capplet-manager.c:188 control-center/main.c:31
 msgid "Help"
 msgstr "Hjelp"
 
@@ -1217,21 +1241,21 @@ msgstr "capplet-kommando som skal kjøres."
 msgid "CAPPLET"
 msgstr "CAPPLET"
 
-#: control-center/main.c:30
+#: control-center/main.c:31
 msgid "Help with the GNOME control-center."
 msgstr "Hjelp for GNOME kontrollsenter."
 
 #. we create the widgets
-#: control-center/main.c:58
+#: control-center/main.c:59
 msgid "Warning:"
 msgstr "Advarsel:"
 
-#: control-center/main.c:58
+#: control-center/main.c:59
 msgid "Discard all changes"
 msgstr "Forkast alle endringer"
 
 #. ...labels, etc
-#: control-center/main.c:67
+#: control-center/main.c:68
 msgid ""
 "The following modules have had changes made, but not committed.  If you "
 "would like to edit them, please double click on the appropriate entry."
@@ -1240,6 +1264,6 @@ msgstr ""
 "ønsker å redigere dem, vær snill å dobbeltklikk på den riktige oppføringen"
 
 #. create the app
-#: control-center/main.c:162
+#: control-center/main.c:184
 msgid "Control Center"
 msgstr "Kontrollsenter"
