@@ -27,6 +27,7 @@ bin_PROGRAMS = ui-properties-capplet
 
 ui_properties_capplet_SOURCES = \
 	prefs-widget.c prefs-widget.h \
+	prefs-widget-app.c prefs-widget-app.h \
 	preferences.c preferences.h \
 	main.c
 

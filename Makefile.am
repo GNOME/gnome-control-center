@@ -1,4 +1,4 @@
-SUBDIRS = intl po capplets root-manager new-control-center
+SUBDIRS = intl po capplets root-manager new-control-center archiver
 
 EXTRA_DIST = control-center.spec.in
 

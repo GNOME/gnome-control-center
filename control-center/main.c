@@ -28,21 +28,41 @@
 #include <gnome.h>
 #include <glade/glade.h>
 
+#include <bonobo.h>
+
 #include "capplet-dir.h"
 #include "capplet-dir-view.h"
 
 int
 main (int argc, char **argv) 
 {
+	CORBA_ORB orb;
+
+	static gchar *capplet = NULL;
+	static struct poptOption gnomecc_options[] = {
+		{ "run-capplet", '\0', POPT_ARG_STRING, &capplet, 0,
+		  N_("Run the capplet CAPPLET"), N_("CAPPLET") },
+		{ NULL, '\0', 0, NULL, 0, NULL, NULL }
+	};
+
         bindtextdomain (PACKAGE, GNOMELOCALEDIR);
         textdomain (PACKAGE);
 
+	gnomelib_register_popt_table (gnomecc_options, _("GNOME Control Center options"));
 	gnome_init ("control-center", VERSION, argc, argv);
 	glade_gnome_init ();
-	gnomecc_init ();
 
-	capplet_dir_entry_activate 
-		(CAPPLET_DIR_ENTRY (get_root_capplet_dir ()), NULL);
+	orb = oaf_init (argc, argv);
+	if (bonobo_init (orb, CORBA_OBJECT_NIL, CORBA_OBJECT_NIL) == FALSE)
+		g_error ("Cannot initialize bonobo");
+
+	if (capplet == NULL) {
+		gnomecc_init ();
+		capplet_dir_entry_activate 
+			(CAPPLET_DIR_ENTRY (get_root_capplet_dir ()), NULL);
+	} else {
+		
+	}
 
 	gtk_main ();
 

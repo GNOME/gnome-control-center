@@ -26,6 +26,7 @@
 #include <config.h>
 
 #include <glib.h>
+#include <bonobo.h>
 
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -56,7 +57,6 @@ capplet_new (CappletDir *dir, gchar *desktop_path)
 {
 	Capplet *capplet;
 	CappletDirEntry *entry;
-	GdkPixbuf *pb;
 	GnomeDesktopEntry *dentry;
 
 	g_return_val_if_fail (desktop_path != NULL, NULL);
@@ -140,7 +140,7 @@ capplet_dir_new (CappletDir *dir, gchar *dir_path)
 
 	g_hash_table_insert (capplet_hash, entry->path, entry);
 
-	capplet_dir_load (entry);
+	capplet_dir_load (CAPPLET_DIR (entry));
 
 	return entry;
 }
@@ -239,7 +239,7 @@ capplet_dir_shutdown (CappletDir *capplet_dir)
 	if (capplet_dir->view)
 		gtk_object_unref (GTK_OBJECT (capplet_dir->view));
 
-	g_slist_foreach (capplet_dir->entries, cde_destroy, NULL);
+	g_slist_foreach (capplet_dir->entries, (GFunc) cde_destroy, NULL);
 
 	g_slist_free (capplet_dir->entries);
 }
@@ -262,8 +262,6 @@ read_entries (CappletDir *dir)
 	GSList *list = NULL;
 	CappletDirEntry *entry;
 	gchar *fullpath, *test;
-	CappletDirEntry **entry_array;
-	int i;
 
         parent_dir = opendir (CAPPLET_DIR_ENTRY (dir)->path);
         if (parent_dir == NULL)
@@ -379,4 +377,69 @@ get_root_capplet_dir (void)
 	}
 
 	return root_dir;
+}
+
+static void
+capplet_ok_cb (GtkWidget *widget, GtkWidget *app) 
+{
+}
+
+static void
+capplet_cancel_cb (GtkWidget *widget, GtkWidget *app) 
+{
+}
+
+void
+capplet_launch (const gchar *capplet_name)
+{
+	gchar *oaf_iid, *moniker;
+	gchar *tmp, *tmp1;
+
+	GtkWidget *app, *control, *box, *buttons, *ok_button, *cancel_button;
+	BonoboUIContainer *uic;
+	BonoboControlFrame *frame;
+	Bonobo_PropertyBag bag;
+	CORBA_Environment ev;
+	CORBA_any value;
+
+	g_return_if_fail (capplet_name != NULL);
+
+	CORBA_exception_init (&ev);
+
+	tmp = g_strdup (capplet_name);
+	if ((tmp1 = strstr (tmp, "-capplet")) != NULL) *tmp1 = '\0';
+
+	oaf_iid = g_strconcat ("OAFIID:Bonobo_Control_Capplet_", tmp, NULL);
+	moniker = g_strconcat ("archiver:", tmp, NULL);
+
+	/* FIXME: Use a human-readable capplet name here */
+	app = bonobo_window_new (tmp, _("Capplet"));
+	uic = bonobo_ui_container_new ();
+	bonobo_ui_container_set_win (uic, BONOBO_WINDOW (app));
+
+	box = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
+	bonobo_window_set_contents (BONOBO_WINDOW (app), box);
+
+	control = bonobo_widget_new_control (oaf_iid, BONOBO_OBJREF (uic));
+	gtk_box_pack_start (GTK_BOX (box), control, TRUE, TRUE, 0);
+
+	buttons = gtk_hbutton_box_new ();
+	ok_button = gtk_button_new_with_label (_("Ok"));
+	gtk_signal_connect (GTK_OBJECT (ok_button), "clicked",
+			    (GtkSignalFunc) capplet_ok_cb, app);
+	gtk_box_pack_start (GTK_BOX (buttons), ok_button, TRUE, FALSE, 0);
+	cancel_button = gtk_button_new_with_label (_("Cancel"));
+	gtk_signal_connect (GTK_OBJECT (ok_button), "clicked",
+			    (GtkSignalFunc) capplet_cancel_cb, app);
+	gtk_box_pack_start (GTK_BOX (buttons), cancel_button, TRUE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (box), buttons, TRUE, FALSE, 0);
+
+	frame = bonobo_widget_get_control_frame (BONOBO_WIDGET (control));
+	bag = bonobo_control_frame_get_control_property_bag (frame, &ev);
+
+/*  	BONOBO_ARG_SET_STRING (&value, moniker); */
+/*  	Bonobo_PropertyBag_setValue (bag, "moniker", &value, &ev); */
+
+	CORBA_exception_free (&ev);
+	g_free (tmp);
 }

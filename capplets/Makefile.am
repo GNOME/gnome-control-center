@@ -7,3 +7,16 @@ always_built_SUBDIRS = desktop-links  \
 
 SUBDIRS = $(always_built_SUBDIRS)
 
+INCLUDES = \
+        -DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\
+	-DGNOME_ICONDIR=\""${prefix}/share/pixmaps"\"	\
+	-DGLADE_DATADIR=\""$(Gladedir)"\"		\
+	$(CAPPLET_CFLAGS)				\
+	-I$(top_srcdir)					\
+	-I$(top_srcdir)/intl
+
+bin_PROGRAMS = sound-properties-capplet
+
+sound_properties_capplet_SOURCES = sound-properties-capplet.c
+
+sound_properties_capplet_LDADD = $(CAPPLET_LIBS)

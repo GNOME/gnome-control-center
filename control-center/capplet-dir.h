@@ -90,4 +90,6 @@ void             capplet_dir_init           (CappletDirView *(*cb)
 
 CappletDir      *get_root_capplet_dir       (void);
 
+void             capplet_launch             (const gchar *capplet_name);
+
 #endif /* __CAPPLET_DIR_H */
