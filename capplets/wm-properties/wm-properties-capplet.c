@@ -581,12 +581,16 @@ restart (gboolean force)
         WindowManager *current_wm = wm_list_get_current(), *mywm;
         static gboolean last_try_was_twm = FALSE;
         const char *twm_argv[] = {"twm", NULL};
-        const GnomeDesktopEntry twm_dentry = {"twm", "twm",
-                                              1, (char **)twm_argv, NULL,
+        GnomeDesktopEntry twm_dentry = {"twm", "twm",
+                                              1, NULL, NULL,
                                               NULL, NULL, 0, NULL,
                                               NULL, NULL, 0, 0};
-        const WindowManager twm_fallback = {(GnomeDesktopEntry*)&twm_dentry, "twm", "twm", 0, 0, 1, 0};
+        const WindowManager twm_fallback = {NULL, "twm", "twm", 0, 0, 1, 0};
 
+        twm_dentry.exec = twm_argv;
+        twm_fallback.dentry = &twm_dentry;
+   
+   
         if(selected_wm) {
                 last_try_was_twm = FALSE;
                 mywm = selected_wm;
