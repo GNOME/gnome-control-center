@@ -1,33 +1,29 @@
-Applicationsdir = $(datadir)/control-center/capplets
-Applications_in_files = background-properties.desktop.in
-Applications_DATA = $(Applications_in_files:.desktop.in=.desktop)
+SUBDIRS =
+
+cappletname = background
+bin_PROGRAMS = background-properties
+
+background_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
+background_properties_SOURCES = \
+	main.c\
+	prefs-widget.c		prefs-widget.h \
+	preferences.c		preferences.h \
+	applier.c
+
+##
+## You should not need to modify anything below this line
+##
 @XML_I18N_MERGE_DESKTOP_RULE@
+@GNOMECC_CAPPLETS_DESKTOP_IN_RULE@
 
-pApplicationsdir = $(datadir)/gnome/apps/Settings/Desktop
-pApplications_DATA = $(Applications_DATA)
+INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
+CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
+EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST)
+iconsdir   = $(GNOMECC_ICONS_DIR)
+Gladedir   = $(GNOMECC_GLADE_DIR)
+pixmapdir  = $(GNOMECC_PIXMAPS_DIR)
+Glade_DATA = $(cappletname)-properties.glade
+icons_DATA = $(cappletname)-capplet.png
+desktop    = $(cappletname).desktop
+all-local: $(desktop)
 
-Gladedir = $(datadir)/control-center-data
-Glade_DATA = \
-	background-properties.glade
-
-EXTRA_DIST = $(Applications_in_files) $(Glade_DATA)
-
-INCLUDES = \
-        -DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
-	-DGNOME_ICONDIR=\""${prefix}/share/pixmaps"\"	\
-	-DG_LOG_DOMAIN=\"background-properties\"	\
-	-DGLADE_DATADIR=\""$(Gladedir)"\"		\
-	@BG_CAPPLET_CFLAGS@				\
-	-I$(top_srcdir)/				\
-	-I$(top_srcdir)/intl
-
-bin_PROGRAMS = background-properties-capplet
-
-background_properties_capplet_SOURCES = \
-	prefs-widget.c prefs-widget.h 			\
-	preferences.c preferences.h 			\
-	applier.c applier.h 				\
-	main.c
-
-background_properties_capplet_LDADD = \
-	@BG_CAPPLET_LIBS@

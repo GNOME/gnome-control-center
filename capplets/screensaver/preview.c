@@ -232,7 +232,7 @@ show_screensaver_timeout (void)
 	}
 	else if (ret > 0) {
 		pixbuf = gdk_pixbuf_new_from_file 
-			(GNOME_ICONDIR "/no-hack.png");
+			(GNOMECC_PIXMAPS_DIR "/no-hack.png");
 		gdk_pixbuf_render_to_drawable
 			(pixbuf, (GdkDrawable *) preview_window->window,
 			 preview_window->style->fg_gc[0], 0, 0, 0, 0,

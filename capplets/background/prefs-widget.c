@@ -123,8 +123,13 @@ prefs_widget_init (PrefsWidget *prefs_widget)
 	int i;
 
 	prefs_widget->dialog_data = 
-		glade_xml_new (GLADE_DATADIR "/background-properties.glade",
-			       "prefs_widget");
+		glade_xml_new (GNOMECC_GLADE_DIR "/background-properties.glade",
+					"prefs_widget");
+	if (prefs_widget->dialog_data == NULL) {
+		g_warning ("Could not load \"%s\"\n",
+				 GNOMECC_GLADE_DIR "/background-properties.glade");
+		return;
+	}
 
 	widget = glade_xml_get_widget (prefs_widget->dialog_data, 
 				       "prefs_widget");

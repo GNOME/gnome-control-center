@@ -95,7 +95,7 @@ prefs_widget_init (PrefsWidget *prefs_widget)
 	GtkAdjustment *adjustment;
 
 	prefs_widget->dialog_data = 
-		glade_xml_new (GLADE_DATADIR "/keyboard-properties.glade",
+		glade_xml_new (GNOMECC_GLADE_DIR "/keyboard-properties.glade",
 			       "prefs_widget");
 
 	glade_xml_signal_connect_data

@@ -1,29 +1,32 @@
-INCLUDES = -I. -I$(srcdir) 				\
-	-I$(top_srcdir)/intl -I$(top_builddir)/intl	\
-	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
-	-I$(includedir) $(GNOME_INCLUDEDIR)		\
-	-DGNOMESYSCONFDIR=\""$(sysconfdir)"\"		\
-	@CAPPLET_CFLAGS@
+SUBDIRS = 
 
-bin_PROGRAMS = default-application-properties-capplet
+cappletname = default-applications
+bin_PROGRAMS = default-applications-properties
 
-default_application_properties_capplet_SOURCES =	\
-	default-application-properties.c		\
-	interface.c interface.h				\
-	callbacks.c callbacks.h				\
-	support.c support.h				\
+default_applications_properties_LDADD = $(GNOMECC_CAPPLETS_LIBS)
+default_applications_properties_SOURCES = \
+	default-application-properties.c \
+	interface.c		interface.h \
+	callbacks.c		callbacks.h \
+	support.c			support.h	\
 	defaults.h
 
-default_application_properties_capplet_LDADD = @CAPPLET_LIBS@ 
+pixmap_DATA =
 
-EXTRA_DIST =						\
-	default-application-properties.desktop.in	\
-	default-application-properties.desktop
-
-sysdir = $(datadir)/control-center/capplets/
-sys_in_files = default-application-properties.desktop.in
-sys_DATA = $(sys_in_files:.desktop.in=.desktop)
+##
+## You should not need to modify anything below this line
+##
 @XML_I18N_MERGE_DESKTOP_RULE@
+@GNOMECC_CAPPLETS_DESKTOP_IN_RULE@
 
-install-data-local:
-	$(INSTALL_DATA) $(srcdir)/default-application-properties.desktop $(DESTDIR)$(datadir)/gnome/apps/Settings/default-application-properties.desktop
+INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS) -DGNOMESYSCONFDIR=\""$(sysconfdir)"\"
+CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
+EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST)
+iconsdir   = $(GNOMECC_ICONS_DIR)
+Gladedir   = $(GNOMECC_GLADE_DIR)
+pixmapdir  = $(GNOMECC_PIXMAPS_DIR)
+Glade_DATA = $(cappletname)-properties.glade
+icons_DATA = $(cappletname)-capplet.png
+desktop    = $(cappletname).desktop
+all-local: $(desktop)
+

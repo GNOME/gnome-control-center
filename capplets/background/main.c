@@ -269,7 +269,7 @@ main (int argc, char **argv)
 	}
 
 	gnome_window_icon_set_default_from_file
-		(GNOME_ICONDIR"/gnome-ccbackground.png");
+		(GNOMECC_ICONS_DIR"/gnome-ccbackground.png");
 
 #ifdef HAVE_XIMIAN_ARCHIVER
 	archive = ARCHIVE (archive_load (FALSE));

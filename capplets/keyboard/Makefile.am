@@ -1,3 +1,5 @@
+SUBDIRS =
+
 cappletname = keyboard
 bin_PROGRAMS = keyboard-properties
 
@@ -18,7 +20,8 @@ CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
 EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST)
 iconsdir   = $(GNOMECC_ICONS_DIR)
 Gladedir   = $(GNOMECC_GLADE_DIR)
+pixmapdir  = $(GNOMECC_PIXMAPS_DIR)
 Glade_DATA = $(cappletname)-properties.glade
 icons_DATA = $(cappletname)-capplet.png
-desktop = $(cappletname).desktop
+desktop    = $(cappletname).desktop
 all-local: $(desktop)

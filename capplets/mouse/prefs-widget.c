@@ -97,7 +97,7 @@ prefs_widget_init (PrefsWidget *prefs_widget)
 	GtkAdjustment *adjustment;
 
 	prefs_widget->dialog_data = 
-		glade_xml_new (GLADE_DATADIR "/mouse-properties.glade",
+		glade_xml_new (GNOMECC_GLADE_DIR "/mouse-properties.glade",
 			       "prefs_widget");
 
 	widget = glade_xml_get_widget (prefs_widget->dialog_data, 

@@ -374,7 +374,7 @@ main (int argc, char **argv)
 	}
 
 	gnome_window_icon_set_default_from_file
-		(GNOME_ICONDIR"/gnome-ccscreensaver.png");
+		(GNOMECC_ICONS_DIR"/gnome-ccscreensaver.png");
 
 	init_resource_database (argc, argv);
 #ifdef HAVE_XIMIAN_ARCHIVER
