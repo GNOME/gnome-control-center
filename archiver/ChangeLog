@@ -1,8 +1,22 @@
+2001-08-23  Bradford Hovinen  <hovinen@ximian.com>
+
+	* config-log.c (do_unload): Make sure we don't try to do this if
+	we are marked deleted
+	(config_log_delete): Call do_unload to eliminate memory leaks
+
+	* location.c (location_delete): Set the deleted flag
+
+	* config-log.c (dump_log): Don't try to dump the log if we are
+	deleted
+
+	* location.c (save_metadata): Don't try to save metadata if we are
+	deleted
+
 2001-08-22  Hans Petter Jansson  <hpj@ximian.com>
 
 	* archiver-client.h: Fixed include path, libxml -> gnome-xml. It's
-	consistent with the includes in archiver-client.c, and it stops the build
-	breaking here.
+	consistent with the includes in archiver-client.c, and it stops
+	the build breaking here.
 
 2001-08-21  Bradford Hovinen  <hovinen@ximian.com>
 

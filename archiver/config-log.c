@@ -282,11 +282,10 @@ config_log_delete (ConfigLog *config_log)
 	g_return_if_fail (config_log != NULL);
 	g_return_if_fail (IS_CONFIG_LOG (config_log));
 
-	if (config_log->p->file_stream != NULL)
-		fclose (config_log->p->file_stream);
-
 	if (config_log->p->filename != NULL)
 		unlink (config_log->p->filename);
+
+	do_unload (config_log, FALSE);
 
 	config_log->p->deleted = TRUE;
 	gtk_object_destroy (GTK_OBJECT (config_log));
@@ -890,6 +889,8 @@ do_unload (ConfigLog *config_log, gboolean write_log)
 	g_return_if_fail (config_log != NULL);
 	g_return_if_fail (IS_CONFIG_LOG (config_log));
 
+	if (config_log->p->deleted) return;
+
 	if (write_log) dump_log (config_log);
 
 	if (config_log->p->file_stream) {
@@ -975,6 +976,8 @@ dump_log (ConfigLog *config_log)
 	g_return_if_fail (config_log->p->location != NULL);
 	g_return_if_fail (IS_LOCATION (config_log->p->location));
 	g_return_if_fail (location_get_path (config_log->p->location) != NULL);
+
+	if (config_log->p->deleted) return;
 
 	filename_out = g_concat_dir_and_file (location_get_path
 					      (config_log->p->location),

@@ -72,6 +72,7 @@ struct _LocationPrivate
 	GList           *contains_list;      /* List of BackendNotes */
 	gboolean         is_new;
 	gboolean         contains_list_dirty;
+	gboolean         deleted;
 
 	ConfigLog       *config_log;
 };
@@ -712,6 +713,8 @@ location_delete (Location *location)
 	if (rmdir (location->p->fullpath) == -1)
 		g_warning ("%s: Could not remove directory: %s\n",
 			   __FUNCTION__, g_strerror (errno));
+
+	location->p->deleted = TRUE;
 }
 
 /**
@@ -1592,7 +1595,7 @@ save_metadata (Location *location)
 {
 	gchar *metadata_filename;
 
-	if (!location->p->is_new && !location->p->contains_list_dirty)
+	if (location->p->deleted || (!location->p->is_new && !location->p->contains_list_dirty))
 		return;
 
 	location->p->is_new = FALSE;
