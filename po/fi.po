@@ -13,8 +13,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 1.99.0\n"
-"POT-Creation-Date: 2002-11-30 22:11+0200\n"
-"PO-Revision-Date: 2002-11-30 23:04+0200\n"
+"POT-Creation-Date: 2002-12-11 21:32+0200\n"
+"PO-Revision-Date: 2002-12-11 23:39+0200\n"
 "Last-Translator: Pauli Virtanen <pauli.virtanen@hut.fi>\n"
 "Language-Team: Gnome Finnish Translation Team <gnome-fi-laatu@lists."
 "sourceforge.net>\n"
@@ -60,6 +60,7 @@ msgstr ""
 #: capplets/file-types/file-types-properties.glade.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: capplets/network/gnome-network-preferences.glade.h:2
+#: capplets/theme-switcher/theme-properties.glade.h:1
 #: capplets/theme-switcher/theme-install.glade.h:1
 msgid "*"
 msgstr "*"
@@ -75,8 +76,8 @@ msgstr "Piippaa kun painallus _jää huomiotta"
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:4
 msgid "Beep when _features turned on or off from keyboard"
 msgstr ""
-"kun näppäimistön esteettömyysominaisuudet otetaan käyttöön tai \"\n"
-"#~ \"poistetaan käytöstä"
+"Piippaa, kun _ominaisuuksia otetaan käyttöön tai poistetaan\n"
+"käytöstä näppäimistön avulla"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:5
 msgid "Beep when _modifier is pressed"
@@ -100,7 +101,7 @@ msgstr "Aloita _liike, kun painalluksesta on kulunut:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:10
 msgid "Disa_ble if two keys pressed together"
-msgstr "Poista käytöstä jos kahta näppäintä painetaan samalla"
+msgstr "Poi_sta käytöstä jos kahta näppäintä painetaan samalla"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:11
 msgid "E_nable Toggle Keys"
@@ -120,7 +121,7 @@ msgstr "Käytä _hiirinäppäimiä"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:15
 msgid "Enable _Sticky Keys"
-msgstr "Käytä _tarttuvia näppäimiä"
+msgstr "Kä_ytä tarttuvia näppäimiä"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:16
 msgid "Features"
@@ -196,7 +197,7 @@ msgstr "_Poista käytöstä jos käyttämättömänä:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:31
 msgid "_Enable keyboard accessibility features"
-msgstr "_Käytä esteetöntä näppäimistöä"
+msgstr "_Käytä näppäimistön esteettömyysominaisuuksia"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:32
 msgid "_Import Feature Settings..."
@@ -204,7 +205,7 @@ msgstr "_Tuo ominaisuuksien asetukset..."
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:33
 msgid "_Only accept keys held for:"
-msgstr "_Hyväksy vain näppäilyt, jotka kestävät pidempään kuin:"
+msgstr "Hy_väksy vain näppäilyt, jotka kestävät pidempään kuin:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:34
 msgid "_Repeat Keys"
@@ -212,7 +213,7 @@ msgstr "Näppäinten _toisto"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:35
 msgid "_Type to test settings:"
-msgstr "_Kokeile asetuksia kirjoittamalla:"
+msgstr "Kokeile _asetuksia kirjoittamalla:"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:36
 msgid "_accepted"
@@ -239,6 +240,7 @@ msgid "pixels/second"
 msgstr "kuvapistettä/s"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:42
+#: capplets/windows/gnome-window-properties.glade.h:7
 msgid "seconds"
 msgstr "sekuntia"
 
@@ -788,7 +790,7 @@ msgid "Minimizing and Maximizing"
 msgstr "Pienennys ja suurennus"
 
 #: capplets/desktop-links/Sawfish/meta-properties.desktop.in.h:1
-#: capplets/windows/gnome-window-properties.c:600
+#: capplets/windows/gnome-window-properties.c:649
 msgid "Meta"
 msgstr "Asetusohjelma"
 
@@ -1290,7 +1292,7 @@ msgid "The type of accelerator."
 msgstr "Pikanäppäimen tyyppi."
 
 #: capplets/keybindings/eggcellrendererkeys.c:219
-#: capplets/keybindings/gnome-keybinding-properties.c:181
+#: capplets/keybindings/gnome-keybinding-properties.c:202
 #: libbackground/applier.c:588
 msgid "Disabled"
 msgstr "Ei käytössä"
@@ -1304,29 +1306,33 @@ msgstr "Näppäile uusi pikanäppäin tai tyhjennä painamalla askelpalautinta."
 msgid "Type a new accelerator"
 msgstr "Näppäile uusi pikanäppäin"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:448
+#: capplets/keybindings/gnome-keybinding-properties.c:538
 msgid "<Unknown Action>"
 msgstr "<Tuntematon toiminto>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:467
+#: capplets/keybindings/gnome-keybinding-properties.c:557
 msgid "Desktop"
 msgstr "Työpöytä"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:471
+#: capplets/keybindings/gnome-keybinding-properties.c:561
 msgid "Window Management"
 msgstr "Ikkunointi"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:593
+#: capplets/keybindings/gnome-keybinding-properties.c:696
 #, c-format
-msgid "That accelerator key is already in use by: %s\n"
-msgstr "Tätä pikanäppäintä käyttää jo: %s\n"
+msgid ""
+"The shortcut \"%s\" is already used for:\n"
+" \"%s\"\n"
+msgstr ""
+" \"%2$s\"\n"
+"on jo kytketty pikanäppäimeen \"%1$s\".\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:620
+#: capplets/keybindings/gnome-keybinding-properties.c:727
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Virhe uuden pikanäppäimen asetustietokantaan asettamisessa: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:771
+#: capplets/keybindings/gnome-keybinding-properties.c:878
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1334,11 +1340,11 @@ msgstr ""
 "Näppäimistöteemoja ei löytynyt. Tämä merkitsee, että GTK+ on asennettu "
 "puutteellisesti."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:793
+#: capplets/keybindings/gnome-keybinding-properties.c:900
 msgid "Action"
 msgstr "Toiminto"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:811
+#: capplets/keybindings/gnome-keybinding-properties.c:919
 msgid "Shortcut"
 msgstr "Pikanäppäin"
 
@@ -1828,35 +1834,46 @@ msgid "Select themes for various parts of the desktop"
 msgstr "Valitse työpöydän eri osien teemat"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
-#: capplets/theme-switcher/theme-properties.glade.h:6
 msgid "Theme"
 msgstr "Teema"
 
-#: capplets/theme-switcher/theme-properties.glade.h:1
+#: capplets/theme-switcher/theme-properties.glade.h:2
+msgid "<span size=\"larger\" weight=\"bold\">Save theme to disk</span>"
+msgstr "<span size=\"larger\" weight=\"bold\">Tallenna teema levylle</span>"
+
+#: capplets/theme-switcher/theme-properties.glade.h:3
 msgid "Apply _Background"
 msgstr "Käytä _taustaa"
 
-#: capplets/theme-switcher/theme-properties.glade.h:2
+#: capplets/theme-switcher/theme-properties.glade.h:4
 msgid "Apply _Font"
 msgstr "Käytä _kirjasinta"
 
-#: capplets/theme-switcher/theme-properties.glade.h:3
+#: capplets/theme-switcher/theme-properties.glade.h:5
 msgid "Controls"
 msgstr "Säätimet"
 
-#: capplets/theme-switcher/theme-properties.glade.h:4
+#: capplets/theme-switcher/theme-properties.glade.h:6
 msgid "Icons"
 msgstr "Kuvakkeet"
 
-#: capplets/theme-switcher/theme-properties.glade.h:5
+#: capplets/theme-switcher/theme-properties.glade.h:7
 msgid "New themes can also be installed by dragging them into the window."
 msgstr "Uusia teemoja voi asentaa myös pudottamalla ne tähän ikkunaan."
 
-#: capplets/theme-switcher/theme-properties.glade.h:7
+#: capplets/theme-switcher/theme-properties.glade.h:8
+msgid "Short _Description:"
+msgstr "Lyhyt _kuvaus:"
+
+#: capplets/theme-switcher/theme-properties.glade.h:9
+msgid "Theme Details"
+msgstr "Teeman lisätiedot"
+
+#: capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Theme Preferences"
 msgstr "Teema-asetukset"
 
-#: capplets/theme-switcher/theme-properties.glade.h:8
+#: capplets/theme-switcher/theme-properties.glade.h:11
 msgid ""
 "This theme suggests a\n"
 "background:"
@@ -1864,7 +1881,7 @@ msgstr ""
 "Tämä teema ehdottaa\n"
 "taustaa:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:10
+#: capplets/theme-switcher/theme-properties.glade.h:13
 msgid ""
 "This theme suggests a\n"
 "font and background"
@@ -1872,7 +1889,7 @@ msgstr ""
 "Tämä teema ehdottaa\n"
 "kirjasinta ja taustaa"
 
-#: capplets/theme-switcher/theme-properties.glade.h:12
+#: capplets/theme-switcher/theme-properties.glade.h:15
 msgid ""
 "This theme suggests a\n"
 "font:"
@@ -1880,21 +1897,29 @@ msgstr ""
 "Tämä teema ehdottaa\n"
 "kirjasinta:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:14
+#: capplets/theme-switcher/theme-properties.glade.h:17
 msgid "Window Border"
 msgstr "Ikkunoiden reunat"
 
-#: capplets/theme-switcher/theme-properties.glade.h:15
+#: capplets/theme-switcher/theme-properties.glade.h:18
+msgid "_Details..."
+msgstr "_Lisää..."
+
+#: capplets/theme-switcher/theme-properties.glade.h:19
 msgid "_Go to theme folder"
 msgstr "_Siirry teemahakemistoon"
 
-#: capplets/theme-switcher/theme-properties.glade.h:16
-msgid "_Install New Theme..."
-msgstr "_Asenna uusi teema..."
+#: capplets/theme-switcher/theme-properties.glade.h:20
+msgid "_Install theme..."
+msgstr "_Asenna teema..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:17
-msgid "_Save Theme"
+#: capplets/theme-switcher/theme-properties.glade.h:21
+msgid "_Save theme"
 msgstr "_Tallenna teema"
+
+#: capplets/theme-switcher/theme-properties.glade.h:22
+msgid "_Theme name:"
+msgstr "Teeman _nimi:"
 
 #: capplets/theme-switcher/theme-install.glade.h:2
 msgid "Install new theme"
@@ -1908,17 +1933,25 @@ msgstr "_Asenna"
 msgid "_Location of new theme:"
 msgstr "Uuden teeman si_jainti:"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:640
-msgid "Current modified"
-msgstr "Nykyistä muutettu"
-
-#: capplets/theme-switcher/gnome-theme-manager.c:659
+#: capplets/theme-switcher/gnome-theme-details.c:319
+#: capplets/theme-switcher/gnome-theme-manager.c:463
 msgid ""
 "No themes could be found on your system.  This probably means that your "
-"\"Theme Preferences\" dialog was improperly installed."
+"\"Theme Preferences\" dialog was improperly installed, or you haven't "
+"installed the \"gnome-themes\" package."
 msgstr ""
 "Järjestelmästäsi ei löytynyt teemoja. Tämä tarkoittanee, että teemojen "
-"asetusikkuna on asennettu väärin."
+"asetusikkuna on asennettu väärin, tai että \"gnome-themes\"-pakettia ei ole "
+"asennettu."
+
+#: capplets/theme-switcher/gnome-theme-manager.c:513
+msgid "Custom theme"
+msgstr "Muu teema"
+
+#: capplets/theme-switcher/gnome-theme-manager.c:513
+msgid "You can save this theme by pressing the Save Theme button."
+msgstr ""
+"Voit tallentaa tämän teeman napsauttamalla \"Tallenna teema\"-painiketta."
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
@@ -2049,7 +2082,7 @@ msgstr "_Lopeta"
 msgid "_Save"
 msgstr "_Tallenna"
 
-#: capplets/windows/gnome-window-properties.c:352
+#: capplets/windows/gnome-window-properties.c:378
 #, c-format
 msgid ""
 "<b>Cannot start the preferences application for your window manager</b>\n"
@@ -2060,45 +2093,45 @@ msgstr ""
 "\n"
 "%s"
 
-#: capplets/windows/gnome-window-properties.c:575
+#: capplets/windows/gnome-window-properties.c:624
 msgid "Control"
 msgstr "Control"
 
-#: capplets/windows/gnome-window-properties.c:580
+#: capplets/windows/gnome-window-properties.c:629
 msgid "Alt"
 msgstr "Alt"
 
-#: capplets/windows/gnome-window-properties.c:586
+#: capplets/windows/gnome-window-properties.c:635
 msgid "Hyper"
 msgstr "Hyper"
 
-#: capplets/windows/gnome-window-properties.c:593
-msgid "Super"
-msgstr "Super"
+#: capplets/windows/gnome-window-properties.c:642
+msgid "Super (or \"Windows logo\")"
+msgstr "Super (tai \"Windows-logo\")"
 
 #: capplets/windows/gnome-window-properties.glade.h:1
-msgid "To _move windows, click while holding down:"
-msgstr "_Siirrä ikkunoita napsauttamalla, kun painettuna on:"
+msgid "To _move a window, press-and-hold this key then grab the window:"
+msgstr "Siirrä ikkunoita _hiirellä tarttumalla, kun painettuna on:"
 
 #: capplets/windows/gnome-window-properties.glade.h:2
 msgid "Window Preferences"
 msgstr "Ikkuna-asetukset"
 
 #: capplets/windows/gnome-window-properties.glade.h:3
-msgid "_Double-click window titles to:"
-msgstr "Ikkunoiden _otsikkoja kaksoisnapsauttamalla:"
+msgid "_Double-click titlebar to perform this action:"
+msgstr "Ikkunan _otsikkoa kaksoisnapsauttamalla käynnistyy tämä komento:"
 
 #: capplets/windows/gnome-window-properties.glade.h:4
-msgid "_Raise selected windows after a short time"
-msgstr "_Nosta valitut ikkunat lyhyen ajan kuluttua"
+msgid "_Interval before raising:"
+msgstr "_Viive ennen nostoa:"
 
 #: capplets/windows/gnome-window-properties.glade.h:5
-msgid "_Select windows when the mouse moves over them"
-msgstr "_Valitse ikkunat, kun hiiri liikkuu niiden päälle"
+msgid "_Raise selected windows after an interval"
+msgstr "_Nosta valitut ikkunat tietyn ajan kuluttua"
 
 #: capplets/windows/gnome-window-properties.glade.h:6
-msgid "_Tenths of a second before raising the window:"
-msgstr "_Sekunnin kymmenyksiä ennen ikkunan nostoa:"
+msgid "_Select windows when the mouse moves over them"
+msgstr "_Valitse ikkunat, kun hiiri liikkuu niiden päälle"
 
 #: capplets/windows/window-properties.desktop.in.h:1
 msgid "Window Properties"
@@ -2335,5 +2368,105 @@ msgstr "Suurenna"
 
 #: libwindow-settings/metacity-window-manager.c:374
 msgid "Roll up"
-msgstr "Vain otsikkopalkki"
+msgstr "Rullaa"
 
+#: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
+msgid ""
+"If true, the mime handlers for text/plain and text/* will be kept in sync"
+msgstr "Jos tosi, pysyvät mime-tyyppien text/plain ja text/* käsittelimet samoina"
+
+#: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:2
+msgid "Sync text/plain and text/* handlers"
+msgstr "Pidä tyyppien text/plain ja text/* käsittelimet samoina"
+
+#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:1
+msgid "Display a dialog when there are errors running XScreenSaver"
+msgstr "Näytä ikkuna, kun XScreenSaverin suorittamisessa on ongelmia."
+
+#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:2
+msgid "Run XScreenSaver at login"
+msgstr "Käynnistä XSCreenSaver sisään kirjauduttaessa"
+
+#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:3
+msgid "Show Startup Errors"
+msgstr "Näytä käynnistysvirheet"
+
+#: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:4
+msgid "Start XScreenSaver"
+msgstr "Käynnistä XScreenSaver"
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:1
+msgid "Antialising"
+msgstr "Pehmennys"
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:2
+msgid "DPI"
+msgstr "DPI"
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:3
+msgid "Hinting"
+msgstr "Ohjeistus"
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:4
+msgid "RGBA Order"
+msgstr "RGBA-järjestys"
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:5
+msgid ""
+"Resolution used for converting font sizes to pixel sizes, in dots per inch"
+msgstr ""
+"Resoluutio (pisteinä tuumaa kohden), jolla kirjasinlajien koot muuntuvat "
+"pikseliko'oiksi."
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:6
+msgid ""
+"The order of elements subpixel elements on an LCD screen; only used when "
+"antialising is set to \"rgba\". Possible values are: \"rgb\" - red on left, "
+"most common. \"bgr\" - blue on left. \"vrgb\" - red on top. \"vbgr\" - red "
+"on bottom."
+msgstr ""
+"Järjestys, jossa kuvapisteiden osat ovat LCD-näytöllä. Tämä vaikuttaa vain "
+"kuin pehmennys on asetettu \"rgba\":ksi. Mahdollisia arvoja ovat: yleisin "
+"\"rgb\", punainen vasemmalla; \"bgr\", sininen vasemmalla; \"vrgb\", "
+"punainen ylhäällä; \"vbgr\", punainen alhaalla."
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:7
+msgid ""
+"The type of antialiasing to use when rendering fonts. Possible values are: "
+"\"none\" - no antialiasing. \"grayscale\" - standard grayscale antialising. "
+"\"rgba\" - subpixel antialising. (LCD screens only)."
+msgstr ""
+"Kirjasinten piirtämisjäljen pehmennystapa. Mahdollisia arvoja ovat: \"none"
+"\", ei mikään; \"grayscale\", tavallinen harmaasävypehmennys; \"rgba\", "
+"osapikselipehmennys, joka toimii vain LCD-näytöillä."
+
+#: schemas/desktop_gnome_font_rendering.schemas.in.h:8
+msgid ""
+"The type of hinting to use when rendering fonts. Possible values are: \"none"
+"\" - no hinting, \"slight\", \"medium\", and \"full\" - as much hinting as "
+"possible; may cause distortion of letter forms."
+msgstr ""
+"Kirjasinten piirtämisessä käytettävä ohjeistustyyppi. Mahdollisia arvoja "
+"ovat \"none\", ei ohjeistusta; \"slight\"; \"medium\" ja \"full\", "
+"mahdollisimman paljon, mikä voi aiheuttaa kirjainten muotojen vääristymistä."
+
+#~ msgid "That accelerator key is already in use by: %s\n"
+#~ msgstr "Tätä pikanäppäintä käyttää jo: %s\n"
+
+#~ msgid "Current modified"
+#~ msgstr "Nykyistä muutettu"
+
+#~ msgid "Super"
+#~ msgstr "Super"
+
+#~ msgid "To _move windows, click while holding down:"
+#~ msgstr "_Siirrä ikkunoita napsauttamalla, kun painettuna on:"
+
+#~ msgid "_Tenths of a second before raising the window:"
+#~ msgstr "_Sekunnin kymmenyksiä ennen ikkunan nostoa:"
+
+#~ msgid "Use _Font "
+#~ msgstr "Käytä _kirjasinta"
+
+#~ msgid "Use _background"
+#~ msgstr "Käytä _taustaa"
