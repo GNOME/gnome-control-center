@@ -77,8 +77,11 @@ apply_cb (BonoboPropertyControl *pc, Bonobo_PropertyControl_Action action)
  */
 
 static void
-changed_cb (BonoboListener *listener, gchar *event_name, CORBA_any *any,
-	    CORBA_Environment *ev, Bonobo_ConfigDatabase db) 
+changed_cb (BonoboListener        *listener,
+	    gchar                 *event_name,
+	    CORBA_any             *any,
+	    CORBA_Environment     *ev,
+	    Bonobo_ConfigDatabase  db) 
 {
 	if (apply_settings_cb != NULL)
 		apply_settings_cb (db);
@@ -117,14 +120,17 @@ pf_destroy_cb (BonoboPropertyFrame *pf, Bonobo_ConfigDatabase db)
  */
 
 static void
-set_moniker_cb (BonoboPropertyBag *bag, BonoboArg *arg, guint arg_id,
-		CORBA_Environment *ev, BonoboControl *control) 
+set_moniker_cb (BonoboPropertyBag *bag, 
+		BonoboArg         *arg,
+		guint              arg_id,
+		CORBA_Environment *ev,
+		BonoboControl     *control) 
 {
-	gchar *moniker;
-	gchar *full_moniker;
-	BonoboPropertyFrame *pf;
-	Bonobo_PropertyBag proxy;
-	Bonobo_ConfigDatabase db;
+	gchar                 *moniker;
+	gchar                 *full_moniker;
+	BonoboPropertyFrame   *pf;
+	Bonobo_PropertyBag     proxy;
+	Bonobo_ConfigDatabase  db;
 
 	if (arg_id != 1) return;
 
@@ -133,6 +139,7 @@ set_moniker_cb (BonoboPropertyBag *bag, BonoboArg *arg, guint arg_id,
 
 	pf = BONOBO_PROPERTY_FRAME (bonobo_control_get_widget (control));
 	bonobo_property_frame_set_moniker (pf, full_moniker);
+	g_free (full_moniker);
 
 	if (pf->proxy->bag == CORBA_OBJECT_NIL) {
 		bonobo_exception_set (ev, ex_Bonobo_Property_InvalidValue);
@@ -143,8 +150,11 @@ set_moniker_cb (BonoboPropertyBag *bag, BonoboArg *arg, guint arg_id,
 
 	db = gtk_object_get_data (GTK_OBJECT (pf), "config-database");
 
-	if (db != CORBA_OBJECT_NIL)
+	if (db != CORBA_OBJECT_NIL) {
+		gtk_signal_disconnect_by_func (GTK_OBJECT (pf),
+					       GTK_SIGNAL_FUNC (pf_destroy_cb), db);
 		bonobo_object_release_unref (db, ev);
+	}
 
 	db = bonobo_get_object (moniker, "IDL:Bonobo/ConfigDatabase:1.0", ev);
 
@@ -422,7 +432,7 @@ legacy_is_modified (Bonobo_ConfigDatabase db, const gchar *filename)
 	g_return_val_if_fail (db != CORBA_OBJECT_NIL, FALSE);
 
 	CORBA_exception_init (&ev);
-	
+
 	pb = Bonobo_Unknown_queryInterface (db, "IDL:Bonobo/PropertyBag:1.0", &ev);
 	if (BONOBO_EX (&ev)) {
 		CORBA_exception_free (&ev);
