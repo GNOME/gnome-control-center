@@ -890,7 +890,8 @@ setup_dialog (GladeXML *dialog)
   widget = WID ("gnome-keybinding-dialog");
   filename = gnome_program_locate_file (NULL, GNOME_FILE_DOMAIN_APP_PIXMAP, "keyboard-shortcut.png", TRUE, NULL);
   icon_pixbuf = gdk_pixbuf_new_from_file ("keyboard-shortcut.png", NULL);
-  gtk_window_set_icon (GTK_WINDOW (widget), icon_pixbuf);
+  if (icon_pixbuf != NULL)
+    gtk_window_set_icon (GTK_WINDOW (widget), icon_pixbuf);
   g_free (filename);
   g_object_unref (icon_pixbuf);
   gtk_widget_show (widget);
