@@ -21,8 +21,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-13 09:32-0500\n"
-"PO-Revision-Date: 2004-02-01 23:44+0100\n"
+"POT-Creation-Date: 2004-02-23 20:48+0100\n"
+"PO-Revision-Date: 2004-02-23 20:48+0100\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -116,14 +116,18 @@ msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr "Der opstod en fejl ved kørsel af museindstillingsvinduet: %s"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:337
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:395
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:396
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Kunne ikke importere AccessX-indstillinger fra filen '%s'"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:468
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:433
 msgid "Import Feature Settings File"
 msgstr "Importér fil med facilitetsindstillinger"
+
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:437
+msgid "_Import"
+msgstr "_Importér"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:18
@@ -178,8 +182,9 @@ msgid "<b>Enable _Repeat Keys</b>"
 msgstr "<b>Aktivér _gentagende taster</b>"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:7
+#, fuzzy
 msgid "<b>Enable _Sticky Keys</b>"
-msgstr "<b>Aktivér _klæbrige taster</b>"
+msgstr "<b>Aktivér _rystetaster</b>"
 
 #: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.glade.h:8
 msgid "<b>Features</b>"
@@ -345,49 +350,49 @@ msgid "seconds"
 msgstr "sekunder"
 
 #. solid
-#: capplets/background/background-properties-capplet.c:228
+#: capplets/background/background-properties-capplet.c:227
 msgid "Co_lor:"
 msgstr "_Farver:"
 
 #. horiz
-#: capplets/background/background-properties-capplet.c:232
+#: capplets/background/background-properties-capplet.c:231
 msgid "_Left color:"
 msgstr "_Venstre farve:"
 
-#: capplets/background/background-properties-capplet.c:233
+#: capplets/background/background-properties-capplet.c:232
 msgid "_Right color:"
 msgstr "_Højre farve:"
 
 #. vert
-#: capplets/background/background-properties-capplet.c:236
+#: capplets/background/background-properties-capplet.c:235
 msgid "Top co_lor:"
 msgstr "_Øverste farve:"
 
-#: capplets/background/background-properties-capplet.c:237
+#: capplets/background/background-properties-capplet.c:236
 msgid "_Bottom color:"
 msgstr "_Nederste farve:"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "_Tile"
 msgstr "_Tapetseret"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "C_enter"
 msgstr "C_entreret"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "Sc_ale"
 msgstr "_Skaleret"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "_Stretch"
 msgstr "St_rakt"
 
-#: capplets/background/background-properties-capplet.c:398
+#: capplets/background/background-properties-capplet.c:397
 msgid "_No Picture"
 msgstr "_Intet billede"
 
-#: capplets/background/background-properties-capplet.c:559
+#: capplets/background/background-properties-capplet.c:558
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:723
 #: capplets/keyboard/gnome-keyboard-properties.c:224
@@ -396,7 +401,7 @@ msgstr "_Intet billede"
 msgid "Retrieve and store legacy settings"
 msgstr "Fremskaf og gem gamle indstillinger"
 
-#: capplets/background/background-properties-capplet.c:585
+#: capplets/background/background-properties-capplet.c:584
 #: capplets/background/background-properties.glade.h:2
 msgid "Background Preferences"
 msgstr "Indstillinger for baggrunden"
@@ -414,6 +419,7 @@ msgid "Horizontal gradient"
 msgstr "Vandret farveovergang"
 
 #: capplets/background/background-properties.glade.h:5
+#: capplets/background/gnome-background-properties.glade.h:4
 msgid "Pick a color"
 msgstr "Vælg en farve"
 
@@ -452,32 +458,24 @@ msgid "You can drag image files into the window to set the background picture."
 msgstr "Du kan trække billedfiler ind i vinduet for at vælge baggrundsbillede."
 
 #: capplets/background/background.desktop.in.h:1
-#, fuzzy
 msgid "Change your Desktop Background settings"
-msgstr "Tilpas skrivebordsbaggrunden"
+msgstr "Ændr indstillingerne for din skrivebordsbaggrund"
 
 #: capplets/background/background.desktop.in.h:2
-#, fuzzy
 msgid "Desktop Background"
-msgstr "Anvend _baggrund"
+msgstr "Skrivebordsbaggrund"
 
 #: capplets/background/gnome-background-properties.glade.h:1
 msgid "<b>Desktop _Wallpaper</b>"
 msgstr "<b>Skrivebords_baggrunde</b>"
 
 #: capplets/background/gnome-background-properties.glade.h:2
-#, fuzzy
 msgid "<b>_Desktop Colors</b>"
 msgstr "<b>_Skrivebordsfarver</b> "
 
 #: capplets/background/gnome-background-properties.glade.h:3
-#, fuzzy
 msgid "Desktop Background Preferences"
-msgstr "Indstillinger for baggrunden"
-
-#: capplets/background/gnome-background-properties.glade.h:4
-msgid "Zgjidh një ngjyrë"
-msgstr ""
+msgstr "Indstillinger for skrivebordsbaggrund"
 
 #: capplets/background/gnome-background-properties.glade.h:5
 msgid "_Add Wallpaper"
@@ -489,6 +487,7 @@ msgstr "_Stil:"
 
 #: capplets/background/gnome-wp-capplet.c:72
 #: capplets/common/capplet-util.c:340
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:326
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Der opstod en fejl ved visningen af hjælp: %s"
@@ -622,85 +621,85 @@ msgstr "Tilkobler..."
 msgid "Downloading..."
 msgstr "Henter..."
 
-#: capplets/common/gconf-property-editor.c:172
+#: capplets/common/gconf-property-editor.c:170
 msgid "Key"
 msgstr "Nøgle"
 
-#: capplets/common/gconf-property-editor.c:173
+#: capplets/common/gconf-property-editor.c:171
 msgid "GConf key to which this property editor is attached"
 msgstr "GConf-nøgle som dette egenskabsredigeringsprogram er tilknyttet til"
 
-#: capplets/common/gconf-property-editor.c:179
+#: capplets/common/gconf-property-editor.c:177
 msgid "Callback"
 msgstr "Tilbagekald"
 
-#: capplets/common/gconf-property-editor.c:180
+#: capplets/common/gconf-property-editor.c:178
 msgid "Issue this callback when the value associated with key gets changed"
 msgstr ""
 "Udfør dette tilbagekald når værdien der er associeret med nøglen, ændres"
 
 # RETMIG: find ud af hvad dette er
-#: capplets/common/gconf-property-editor.c:185
+#: capplets/common/gconf-property-editor.c:183
 msgid "Change set"
 msgstr "Skiftesæt"
 
-#: capplets/common/gconf-property-editor.c:186
+#: capplets/common/gconf-property-editor.c:184
 msgid ""
 "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
 "GConf-skiftesæt som indeholder data der skal videresendes til GConf-klienten "
 "ved anvendelse"
 
-#: capplets/common/gconf-property-editor.c:191
+#: capplets/common/gconf-property-editor.c:189
 msgid "Conversion to widget callback"
 msgstr "Konvertering til kontrol-tilbagekald"
 
-#: capplets/common/gconf-property-editor.c:192
+#: capplets/common/gconf-property-editor.c:190
 msgid ""
 "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr ""
 "Tilbagekald som bliver udført når data skal konverteres fra GConf til "
 "kontrollen"
 
-#: capplets/common/gconf-property-editor.c:197
+#: capplets/common/gconf-property-editor.c:195
 msgid "Conversion from widget callback"
 msgstr "Konvertering fra kontrol-tilbagekald"
 
-#: capplets/common/gconf-property-editor.c:198
+#: capplets/common/gconf-property-editor.c:196
 msgid ""
 "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr ""
 "Tilbagekald som bliver udført når data skal konverteres til GConf fra "
 "kontrollen"
 
-#: capplets/common/gconf-property-editor.c:203
+#: capplets/common/gconf-property-editor.c:201
 msgid "UI Control"
 msgstr "Grænsefladekontrol"
 
-#: capplets/common/gconf-property-editor.c:204
+#: capplets/common/gconf-property-editor.c:202
 msgid "Object that controls the property (normally a widget)"
 msgstr "Objekt der kontrollerer egenskaben (normalt en kontrol)"
 
-#: capplets/common/gconf-property-editor.c:219
+#: capplets/common/gconf-property-editor.c:217
 msgid "Property editor object data"
 msgstr "Objektdata for egenskabsredigering"
 
-#: capplets/common/gconf-property-editor.c:220
+#: capplets/common/gconf-property-editor.c:218
 msgid "Custom data required by the specific property editor"
 msgstr ""
 "Brugerdefinerede data som behøves af den specifikke egenskabsredigering"
 
-#: capplets/common/gconf-property-editor.c:226
+#: capplets/common/gconf-property-editor.c:224
 msgid "Property editor data freeing callback"
 msgstr "Datafrigørelsestilbagekald for egenskabsredigering"
 
-#: capplets/common/gconf-property-editor.c:227
+#: capplets/common/gconf-property-editor.c:225
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr ""
 "Tilbagekald som bliver udført når objektdata for egenskabsredigeringen skal "
 "frigøres"
 
-#: capplets/common/gconf-property-editor.c:1541
+#: capplets/common/gconf-property-editor.c:1538
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -713,7 +712,7 @@ msgstr ""
 "Sikr dig at den eksisterer og prøv igen, eller vælg et andet "
 "baggrundsbillede."
 
-#: capplets/common/gconf-property-editor.c:1549
+#: capplets/common/gconf-property-editor.c:1546
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -726,9 +725,13 @@ msgstr ""
 "\n"
 "Vælg venligst et andet billede i stedet for."
 
-#: capplets/common/gconf-property-editor.c:1640
+#: capplets/common/gconf-property-editor.c:1665
 msgid "Please select an image."
 msgstr "Vælg venligst et billede."
+
+#: capplets/common/gconf-property-editor.c:1670
+msgid "_Select"
+msgstr "_Vælg"
 
 #: capplets/default-applications/default-applications.desktop.in.h:1
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:18
@@ -753,7 +756,7 @@ msgstr "Encompass"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:12
 msgid "Firebird/FireFox"
-msgstr ""
+msgstr "Firebird/FireFox"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:13
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:14
@@ -769,9 +772,8 @@ msgid "Konqueror"
 msgstr "Konqueror"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:17
-#, fuzzy
 msgid "W3M Text Browser"
-msgstr "Lynx - tekstsurfningsprogram"
+msgstr "W3M - tekstsurfningsprogram"
 
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:18
 msgid "Lynx Text Browser"
@@ -1122,20 +1124,20 @@ msgstr "Forvalgte indstillinger"
 msgid "Screen %d Settings\n"
 msgstr "Indstillinger for skærm %d\n"
 
-#: capplets/display/main.c:444
+#: capplets/display/main.c:445
 msgid "Screen Resolution Preferences"
 msgstr "Indstillinger for skærmopløsning"
 
-#: capplets/display/main.c:476
+#: capplets/display/main.c:482
 #, c-format
 msgid "_Make default for this computer (%s) only"
 msgstr "Gør til forvalg for denne _maskine (%s) kun"
 
-#: capplets/display/main.c:494
+#: capplets/display/main.c:500
 msgid "Options"
 msgstr "Indstillinger"
 
-#: capplets/display/main.c:515
+#: capplets/display/main.c:521
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
@@ -1150,19 +1152,19 @@ msgstr[1] ""
 "Tester de nye indstillinger. Hvis du ikke svarer inden for %d sekunder, vil "
 "de foregående indstillinger blive gendannet."
 
-#: capplets/display/main.c:564
+#: capplets/display/main.c:570
 msgid "Do you want to keep this resolution?"
 msgstr "Vil du beholde denne opløsning?"
 
-#: capplets/display/main.c:589
+#: capplets/display/main.c:595
 msgid "Use _previous resolution"
 msgstr "Benyt _foregående opløsning"
 
-#: capplets/display/main.c:589
+#: capplets/display/main.c:595
 msgid "_Keep resolution"
 msgstr "_Behold opløsning"
 
-#: capplets/display/main.c:740
+#: capplets/display/main.c:746
 msgid ""
 "The XServer does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
@@ -1170,7 +1172,7 @@ msgstr ""
 "X-serveren understøtter ikke XRandR-udvidelsen. Skift af opløsning under "
 "kørsel er ikke muligt."
 
-#: capplets/display/main.c:748
+#: capplets/display/main.c:754
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
@@ -1178,12 +1180,16 @@ msgstr ""
 "Versionen af XRandR-udvidelsen kan ikke bruges med dette program. Skift af "
 "opløsning under kørsel er ikke muligt."
 
-#: capplets/file-types/file-types-capplet.c:196
+#: capplets/file-types/file-types-capplet.c:158
+msgid "Are you sure you want to permanently delete this entry?"
+msgstr "Er du sikker på at du ønsker at slette dete element permanent?"
+
+#: capplets/file-types/file-types-capplet.c:210
 #: vfs-methods/themus/themus-properties-view.c:163
 msgid "Description"
 msgstr "Beskrivelse"
 
-#: capplets/file-types/file-types-capplet.c:218
+#: capplets/file-types/file-types-capplet.c:232
 msgid "Extensions"
 msgstr "Endelser"
 
@@ -1382,9 +1388,8 @@ msgstr ""
 "ikke indeholde mellemrum."
 
 #: capplets/file-types/mime-edit-dialog.c:857
-#, fuzzy
 msgid "A MIME type with that name already exists, overwrite?"
-msgstr "En MIME-type med det navn eksisterer allerede, overskriv den?"
+msgstr "En MIME-type med det navn eksisterer allerede, overskriv?"
 
 #: capplets/file-types/mime-edit-dialog.c:929
 msgid "Category"
@@ -1694,7 +1699,7 @@ msgstr "Genvejstypen."
 
 #: capplets/keybindings/eggcellrendererkeys.c:240
 #: capplets/keybindings/gnome-keybinding-properties.c:235
-#: libbackground/applier.c:588 typing-break/drwright.c:464
+#: libbackground/applier.c:588 typing-break/drwright.c:473
 msgid "Disabled"
 msgstr "Deaktiveret"
 
@@ -1723,7 +1728,7 @@ msgstr "Skrivebord"
 msgid "Window Management"
 msgstr "Vindueshåndtering"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:737
+#: capplets/keybindings/gnome-keybinding-properties.c:736
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1732,17 +1737,17 @@ msgstr ""
 "Genvejstasten \"%s\" bliver allerede benyttet til:\n"
 " \"%s\"\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:768
+#: capplets/keybindings/gnome-keybinding-properties.c:766
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Fejl ved anbringelse af ny genvej i konfigurationsdatabasen: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:818
+#: capplets/keybindings/gnome-keybinding-properties.c:812
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr "Fejl ved fjernelse af genvej i konfigurationsdatabasen: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:967
+#: capplets/keybindings/gnome-keybinding-properties.c:960
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1750,11 +1755,11 @@ msgstr ""
 "Kunne ikke finde nogen tastaturtemaer. Dette betyder at Gtk+-installationen "
 "er ufuldstændig."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:989
+#: capplets/keybindings/gnome-keybinding-properties.c:982
 msgid "Action"
 msgstr "Handling"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:1013
+#: capplets/keybindings/gnome-keybinding-properties.c:1006
 msgid "Shortcut"
 msgstr "Genvej"
 
@@ -2285,11 +2290,11 @@ msgstr ""
 
 #: capplets/theme-switcher/gnome-theme-installer.c:127
 msgid "No theme file location specified to install"
-msgstr ""
+msgstr "Ingen temafilplacering angivet til installering"
 
 #: capplets/theme-switcher/gnome-theme-installer.c:146
 msgid "The theme file location specified to install is invalid"
-msgstr ""
+msgstr "Ingen temafilplacering angivet til installering var ugyldig"
 
 #: capplets/theme-switcher/gnome-theme-installer.c:173
 #, c-format
@@ -2297,12 +2302,16 @@ msgid ""
 "%s is the path where the theme files will be installed. This can not be "
 "selected as the source location"
 msgstr ""
+"%s er den sti hvor temafilerne vil blive installeret. Dette kan ikke vælges "
+"som kildeplaceringen"
 
 #: capplets/theme-switcher/gnome-theme-manager.c:301
 msgid ""
 "The gnome-theme-manager does not know how to change the themes on the "
 "current window manager."
 msgstr ""
+"Temahåndtering ved ikke hvordan temaerne for den aktuelle vindueshåndtering "
+"skiftes."
 
 #: capplets/theme-switcher/gnome-theme-manager.c:665
 #: capplets/theme-switcher/gnome-theme-manager.c:725
@@ -2439,7 +2448,7 @@ msgstr "_Temanavn:"
 
 #: capplets/theme-switcher/theme-properties.glade.h:23
 msgid "theme selection tree"
-msgstr ""
+msgstr "temavælgertræ"
 
 #: capplets/ui-properties/gnome-ui-properties.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
@@ -2671,52 +2680,55 @@ msgstr "Benyt skal også selvom Nautilus kører"
 msgid "Could not initialize Bonobo"
 msgstr "Kunne ikke klargøre Bonobo"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:325
-msgid "There was an error displaying help:"
-msgstr "Der opstod en fejl ved visningen af hjælp:"
-
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:410
-msgid "Slow Keys Alert"
-msgstr ""
-
 #: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:411
+msgid "Slow Keys Alert"
+msgstr "Langsomme taster"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
 msgid ""
 "You just held down the Shift key for 8 seconds.  This is the shortcut for "
 "the Slow Keys feature, which affects the way your keyboard works."
 msgstr ""
-
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:412
-#, fuzzy
-msgid "Do you want to activate Slow Keys?"
-msgstr "Vil du beholde denne opløsning?"
+"Du holdt lige skiftetasten trykket nede i 8 sekunder. Dette er en genvej til "
+"langsomme taster-faciliteten som påvirker den måde dit tastatur virker på."
 
 #: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:413
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
-#, fuzzy
-msgid "Do you want to deactivate Sticky Keys?"
-msgstr "Vil du beholde denne opløsning?"
+msgid "Do you want to activate Slow Keys?"
+msgstr "Vil du aktivere langsomme taster?"
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:424
-msgid "Sticky Keys Alert"
-msgstr ""
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:414
+msgid "Do you want to deactivate Slow Keys?"
+msgstr "Vil du deaktivere langsomme taster?"
 
 #: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:425
+msgid "Sticky Keys Alert"
+msgstr "Blivende taster"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
 msgid ""
 "You just pressed the Shift key 5 times in a row.  This is the shortcut for "
 "the Sticky Keys feature, which affects the way your keyboard works."
 msgstr ""
+"Du trykkede lige på skiftetasten 5 gange i træk. Dette er genvejen til "
+"blivende taster-faciliteten som påvirker den måde dit tastatur virker på."
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:426
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
 msgid ""
 "You just pressed two keys at once, or pressed the Shift key 5 times in a "
 "row.  This turns off the Sticky Keys feature, which affects the way your "
 "keyboard works."
 msgstr ""
+"Du trykkede lige på to taster på samme tid eller på skiftetasten 5 gange i "
+"træk. Dette deaktiverer blivende taster-faciliteten som påvirker den måde "
+"dit tastatur virker på."
 
-#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:427
-#, fuzzy
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:428
 msgid "Do you want to activate Sticky Keys?"
-msgstr "Vil du beholde denne opløsning?"
+msgstr "Vil du aktivere blivende taster?"
+
+#: gnome-settings-daemon/gnome-settings-accessibility-keyboard.c:429
+msgid "Do you want to deactivate Sticky Keys?"
+msgstr "Vil du deaktivere blivende taster?"
 
 #: gnome-settings-daemon/gnome-settings-font.c:102
 #, c-format
@@ -2781,6 +2793,16 @@ msgid ""
 "- The result of <b>xprop -root | grep XKB</b>\n"
 "- The result of <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b>"
 msgstr ""
+"Fejl ved aktivering af XKB-konfiguration.\n"
+"Sandsynligvis et internt X-serverproblem.\n"
+"\n"
+"X-server-versionsdata:\n"
+"%s\n"
+"%d\n"
+"%s\n"
+"Hvis du rapporterer dette som en fejl, så medtag:\n"
+"- Data fra <b>xprop -root | grep XKB</b>\n"
+"- Data fra <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</b>"
 
 #: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:71
 msgid ""
@@ -2789,6 +2811,9 @@ msgid ""
 "Try using simpler configuration or taking more fresh version of XFree "
 "software."
 msgstr ""
+"Du bruger XFree 4.3.0.\n"
+"Der er kendte problemer med komplekse XKB-konfigurationer.\n"
+"Prøv en simplere konfiguration eller en nyere udgave af XFree."
 
 #: gnome-settings-daemon/gnome-settings-screensaver.c:92
 #, c-format
@@ -2863,14 +2888,6 @@ msgstr "Skærm"
 #: libbackground/applier.c:280
 msgid "Screen on which BGApplier is to draw"
 msgstr "Skærm som anvenderen skal tegne på"
-
-#: libbackground/preview-file-selection.c:207
-msgid "Can't find an hbox, using a normal file selection"
-msgstr "Kunne ikke finde en hbox, bruger en almindelig filvælger"
-
-#: libbackground/preview-file-selection.c:212
-msgid "Preview"
-msgstr "Eksempel"
 
 #: libsounds/sound-view.c:121 libsounds/sound-view.c:146
 msgid "The sound file for this event does not exist."
@@ -3015,6 +3032,8 @@ msgid ""
 "Very soon, XKB settings in gconf will be overridden (from the system "
 "configuration)"
 msgstr ""
+"Meget snart vil XKB-indstillinger i GConf blive overskrevet (fra systemets "
+"konfiguration)"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
 msgid "XKB keyboard layout"
@@ -3034,40 +3053,39 @@ msgstr ""
 "XKB-indstillinger i GConf vil blive overskrevet af systemet så snart som "
 "muligt"
 
-#: typing-break/drw-break-window.c:189
-#, fuzzy
+#: typing-break/drw-break-window.c:191
 msgid "_Postpone break"
-msgstr "Udsæt pause"
+msgstr "_Udsæt pause"
 
-#: typing-break/drw-break-window.c:227
+#: typing-break/drw-break-window.c:239
 msgid "Take a break!"
 msgstr "Tag en pause!"
 
 #. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
-#: typing-break/drwright.c:135
+#: typing-break/drwright.c:136
 msgid "/_Preferences"
 msgstr "/_Indstillinger"
 
-#: typing-break/drwright.c:136
+#: typing-break/drwright.c:137
 msgid "/_About"
 msgstr "/_Om"
 
-#: typing-break/drwright.c:138
+#: typing-break/drwright.c:139
 msgid "/_Take a Break"
 msgstr "/_Tag en pause"
 
-#: typing-break/drwright.c:482
+#: typing-break/drwright.c:491
 #, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
 msgstr[0] "%d minut til næste pause"
 msgstr[1] "%d minutter til næste pause"
 
-#: typing-break/drwright.c:486
+#: typing-break/drwright.c:495
 msgid "Less than one minute until the next break"
 msgstr "Mindre end et minut til næste pause"
 
-#: typing-break/drwright.c:581
+#: typing-break/drwright.c:590
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
@@ -3075,31 +3093,31 @@ msgid ""
 msgstr ""
 "Kunne ikke vise vinduet for tastepauseindstillinger med den følgende fejl: %s"
 
-#: typing-break/drwright.c:621
+#: typing-break/drwright.c:638
 msgid "About GNOME Typing Monitor"
 msgstr "Om tasteovervåger"
 
-#: typing-break/drwright.c:645
+#: typing-break/drwright.c:662
 msgid "A computer break reminder."
 msgstr "Et program til at påminde om tastepauser."
 
-#: typing-break/drwright.c:646
+#: typing-break/drwright.c:663
 msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
 msgstr "Skrevet af Richard Hult &lt;richard@imendio.com&gt;"
 
-#: typing-break/drwright.c:647
+#: typing-break/drwright.c:664
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Guf for øjnene tilføjet af Anders Carlsson"
 
-#: typing-break/drwright.c:820
+#: typing-break/drwright.c:839
 msgid "Break reminder"
 msgstr "Pausepåminder"
 
-#: typing-break/main.c:94
+#: typing-break/main.c:93
 msgid "The typing monitor is already running."
 msgstr "Tasteovervågeren kører allerede."
 
-#: typing-break/main.c:107
+#: typing-break/main.c:106
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
@@ -3360,6 +3378,8 @@ msgid ""
 "Couldn't put the machine to sleep.\n"
 "Verify that the machine is correctly configured."
 msgstr ""
+"Kunne ikke sætte maskinen i dvale.\n"
+"Kontrollér at maskinen er konfiguret korrekt."
 
 #: gnome-settings-daemon/gnome-settings-multimedia-keys.c:139
 #, c-format
@@ -3448,7 +3468,7 @@ msgstr "Genvej for at gå til hjemmemappen."
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:19
 msgid "Next track key's shortcut."
-msgstr ""
+msgstr "Genvej for næste spor."
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:20
 msgid "Pause"
@@ -3460,47 +3480,47 @@ msgstr "Genvej for pause."
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:22
 msgid "Play (or Play/Pause)"
-msgstr ""
+msgstr "Afspil (eller afspil/pause)"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:23
 msgid "Play (or Play/Pause) key's shortcut."
-msgstr ""
+msgstr "Genvej for afspil (eller afspil/pause)."
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:24
 msgid "Previous track key's shortcut."
-msgstr ""
+msgstr "Genvej for forrige spor."
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:25
 msgid "Search"
-msgstr ""
+msgstr "Søg"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:26
 msgid "Search's shortcut."
-msgstr ""
+msgstr "Genvej for søg."
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:27
 msgid "Skip to Next track"
-msgstr ""
+msgstr "Spring til næste spor"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:28
 msgid "Skip to Previous track"
-msgstr ""
+msgstr "Spring til forrige spor"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:29
 msgid "Sleep"
-msgstr ""
+msgstr "Dvale"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:30
 msgid "Sleep's shortcut."
-msgstr ""
+msgstr "Genvej for dvale."
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:31
 msgid "Stop playback key"
-msgstr ""
+msgstr "Stop afspilning"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:32
 msgid "Stop playback key's shortcut."
-msgstr ""
+msgstr "Genvej til stop afspilning."
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:33
 msgid "Volume down"
@@ -3512,11 +3532,11 @@ msgstr "Genvej for lydstyrke ned."
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:35
 msgid "Volume mute"
-msgstr ""
+msgstr "Dæmp lyd"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:36
 msgid "Volume mute's shortcut"
-msgstr ""
+msgstr "Genvej for dæmp lyd."
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:37
 msgid "Volume step"
@@ -3524,24 +3544,24 @@ msgstr "Lydstyrkeskridt"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:38
 msgid "Volume step as percentage of volume."
-msgstr ""
+msgstr "Lydstyrkeskridt som procent af lydstyrke."
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:39
 msgid "Volume up"
-msgstr ""
+msgstr "Lydstyrke op"
 
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
 msgid "Volume up's shortcut."
-msgstr ""
+msgstr "Genvej for lydstyrke op."
 
-# betyder at billedet skal anbringes side-om-side med sig selv
-#, fuzzy
-#~ msgid "Desktop Wallpaper"
-#~ msgstr "_Tapetseret"
+#~ msgid "There was an error displaying help:"
+#~ msgstr "Der opstod en fejl ved visningen af hjælp:"
 
-#, fuzzy
-#~ msgid "Desktop Wallpaper Preferences"
-#~ msgstr "Netværksindstillinger"
+#~ msgid "Can't find an hbox, using a normal file selection"
+#~ msgstr "Kunne ikke finde en hbox, bruger en almindelig filvælger"
+
+#~ msgid "Preview"
+#~ msgstr "Eksempel"
 
 #~ msgid "Show"
 #~ msgstr "Vis"
@@ -4103,13 +4123,6 @@ msgstr ""
 #~ msgid "_Import CDE AccessX file"
 #~ msgstr "_Importér CDE AccessX-fil"
 
-#~ msgid ""
-#~ "_Turn off Sticky Keys when\n"
-#~ "two keys pressed simultaneously"
-#~ msgstr ""
-#~ "Slå klæbrige taster _fra\n"
-#~ "når to taster holdes nede samtidigt"
-
 #~ msgid "msecs"
 #~ msgstr "millisek"
 
@@ -4118,9 +4131,6 @@ msgstr ""
 
 #~ msgid "_Category"
 #~ msgstr "_Kategori"
-
-#~ msgid "_Delete"
-#~ msgstr "_Slet"
 
 #~ msgid "_Name"
 #~ msgstr "_Navn"
