@@ -10,11 +10,11 @@
 int
 main (int argc, char *argv[])
 {
-  gtk_init (&argc, &argv);
-  gnome_vfs_init ();
   gboolean monitor_not_added = FALSE;
   GList *themes, *list;
 
+  gtk_init (&argc, &argv);
+  gnome_vfs_init ();
   gnome_theme_init (&monitor_not_added);
   
   themes = gnome_theme_meta_info_find_all ();
