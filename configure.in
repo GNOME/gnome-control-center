@@ -115,7 +115,7 @@ PKG_CHECK_MODULES(ARCHIVER, bonobo bonobo_conf xml)
 PKG_CHECK_MODULES(MONIKER, bonobo bonobo_conf xml)
 PKG_CHECK_MODULES(CONFIG_ARCHIVER, gnome xml)
 
-GNOMECC_CAPPLETS_CFLAGS="${CAPPLET_CFLAGS} -I\$(top_srcdir)/intl -I\$(top_srcdir)/ -DG_LOG_DOMAIN=\"\\\"keyboard-properties\\\"\" -DGLADE_DATADIR=\"\\\"${datadir}/control-center\\\"\""
+GNOMECC_CAPPLETS_CFLAGS="${CAPPLET_CFLAGS} -I\$(top_srcdir)/intl -I\$(top_srcdir)/ -DG_LOG_DOMAIN=\"\\\"keyboard-properties\\\"\" -DGLADE_DATADIR=\"\\\"${datadir}/control-center\\\"\" -DGNOMELOCALEDIR=\"\\\"${datadir}/locale\\\"\"  "
 
 AC_DEFINE_UNQUOTED(GNOMECC_ICONS_DIR, "${datadir}/${PACKAGE}/icons")
 GNOMECC_ICONS_DIR=""${datadir}/${PACKAGE}/icons""
@@ -126,9 +126,47 @@ AC_SUBST(GNOMECC_CAPPLETS_CFLAGS)
 AC_SUBST(CFLAGS)
 AC_SUBST(LDFLAGS)
 
+GNOMECC_CAPPLETS_CLEANFILES="\$(desktop) \$(desktop).in"
+GNOMECC_CAPPLETS_EXTRA_DIST="ChangeLog \$(desktop).in.in \$(desktop).in \$(desktop) \$(cappletname)-capplet.png \$(cappletname)-properties.glade"
+
+AC_SUBST(GNOMECC_CAPPLETS_EXTRA_DIST)
+AC_SUBST(GNOMECC_CAPPLETS_CLEANFILES)
 dnl =======================================
 dnl Variables for config_archiverConf.sh.in
 dnl =======================================
+
+
+
+
+dnl ==============================================
+dnl End : Macro for the common code
+dnl ==============================================
+AC_DEFUN(AC_PROG_GNOMECC_CAPPLETS,
+[
+GNOMECC_CAPPLETS_DESKTOP_IN_RULE='iconsdir = $(GNOMECC_ICONS_DIR) \
+icons_DATA = $(cappletname)-capplet.png \
+Gladedir = $(datadir)/control-center-data \
+Glade_DATA = $(cappletname)-properties.glade \
+\
+$(desktop).in: \%.desktop.in: \%.desktop.in.in\
+	sed s#Icon=.\*#Icon=$(GNOMECC_ICONS_DIR)/${cappletname}-capplet.png# < $< \> ${cappletname}.desktop.in\
+\
+install-data-local:\
+	$(mkinstalldirs) $(datadir)/control-center/capplets\
+	$(INSTALL_DATA) $(srcdir)/$(desktop) $(datadir)/control-center/capplets/$(desktop)\
+install-data-am: install-data-local'
+AC_DIVERT_PUSH(AC_DIVERSION_SED)dnl
+s%@GNOMECC_CAPPLETS_DESKTOP_IN_RULE@%[$]GNOMECC_CAPPLETS_DESKTOP_IN_RULE%g
+AC_DIVERT_POP()dnl
+# Redirect the config.log output again, so that the ltconfig log is not
+# clobbered by the next message.
+exec 5>>./config.log
+])
+AC_PROG_GNOMECC_CAPPLETS
+dnl ==============================================
+dnl End : Macro for the common code
+dnl ==============================================
+
 
 CONFIG_ARCHIVER_LIBDIR='-L${libdir}'
 CONFIG_ARCHIVER_LIBS="$CONFIG_ARCHIVER_LIBS -lconfig_archiver"
@@ -138,9 +176,6 @@ AC_SUBST(CONFIG_ARCHIVER_LIBDIR)
 AC_SUBST(CONFIG_ARCHIVER_LIBS)
 AC_SUBST(CONFIG_ARCHIVER_INCLUDEDIR)
 
-GNOMECC_CAPPLETS_EXTRA_DIST="ChangeLog \$(cappletname)-properties.desktop \$(cappletname)-properties.desktop.in \$(cappletname)-properties.desktop.in.in"
-
-AC_SUBST(GNOMECC_CAPPLETS_EXTRA_DIST)
 
 AC_OUTPUT([
 control-center.spec
