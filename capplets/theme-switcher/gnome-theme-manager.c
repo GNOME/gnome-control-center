@@ -397,8 +397,8 @@ load_meta_themes (GtkTreeView *tree_view,
 	  else if (compare_val == 0)
 	    {
 	      /* We reset the blurb in case it has changed */
-	      blurb = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s</span>\n%s",
-				       list_meta_theme_info->readable_name, list_meta_theme_info->comment);
+	      blurb = g_markup_printf_escaped ("<span size=\"larger\" weight=\"bold\">%s</span>\n%s",
+					       list_meta_theme_info->readable_name, list_meta_theme_info->comment);
 	      pixbuf = default_image;
 
 	      gtk_list_store_set (GTK_LIST_STORE (model), &iter,
@@ -418,8 +418,8 @@ load_meta_themes (GtkTreeView *tree_view,
 	      /* we insert a new item */
 	      GtkTreeIter iter_to_prepend;
 	      gtk_list_store_insert_before (GTK_LIST_STORE (model), &iter_to_prepend, &iter);
-	      blurb = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s</span>\n%s",
-				       list_meta_theme_info->readable_name, list_meta_theme_info->comment);
+	      blurb = g_markup_printf_escaped ("<span size=\"larger\" weight=\"bold\">%s</span>\n%s",
+					       list_meta_theme_info->readable_name, list_meta_theme_info->comment);
 	      pixbuf = default_image;
 
 	      gtk_list_store_set (GTK_LIST_STORE (model), &iter_to_prepend,
@@ -440,8 +440,8 @@ load_meta_themes (GtkTreeView *tree_view,
 	  list_meta_theme_info = list->data;
 	  gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 
-	  blurb = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s</span>\n%s",
-				   list_meta_theme_info->readable_name, list_meta_theme_info->comment);
+	  blurb = g_markup_printf_escaped ("<span size=\"larger\" weight=\"bold\">%s</span>\n%s",
+					   list_meta_theme_info->readable_name, list_meta_theme_info->comment);
 	  pixbuf = NULL;
 	  if (i <= MAX_ELEMENTS_BEFORE_SCROLLING)
 	    pixbuf = generate_theme_thumbnail (list_meta_theme_info, FALSE);
@@ -641,8 +641,8 @@ add_custom_row_to_meta_theme (const gchar  *current_gtk_theme,
     gtk_list_store_prepend (GTK_LIST_STORE (model), &iter);
 
   /* set the values of the Custom theme. */
-  blurb = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s</span>\n%s",
-			   _("Custom theme"), _("You can save this theme by pressing the Save Theme button."));
+  blurb = g_markup_printf_escaped ("<span size=\"larger\" weight=\"bold\">%s</span>\n%s",
+				   _("Custom theme"), _("You can save this theme by pressing the Save Theme button."));
 
   /* Invalidate the cache because the custom theme has potentially changed */
   /* Commented out because it does odd things */
@@ -701,8 +701,8 @@ add_initial_row_to_meta_theme (void)
     gtk_list_store_prepend (GTK_LIST_STORE (model), &iter);
 
   /* set the values of the Custom theme. */
-  blurb = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s</span>\n%s",
-			   _("Custom theme"), _("You can save this theme by pressing the Save Theme button."));
+  blurb = g_markup_printf_escaped ("<span size=\"larger\" weight=\"bold\">%s</span>\n%s",
+				   _("Custom theme"), _("You can save this theme by pressing the Save Theme button."));
 
   /* Invalidate the cache because the custom theme has potentially changed */
   /* Commented out because it does odd things */
