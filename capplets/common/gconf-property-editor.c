@@ -1402,7 +1402,8 @@ peditor_image_clicked_cb (GConfPropertyEditor *peditor, GtkButton *button)
 	GtkWidget *fsel;
 
 	fsel = preview_file_selection_new (_("Please select an image."), TRUE);
-	
+	gtk_window_set_modal (GTK_WINDOW (fsel), TRUE);
+
 	/* need the current filename */
 	if (peditor->p->changeset)
 		gconf_change_set_check_value (peditor->p->changeset, peditor->p->key, &value);
