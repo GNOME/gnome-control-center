@@ -1,5 +1,3 @@
-SUBDIRS =
-
 cappletname = gtk-theme-selector
 cappletgroup = "Advanced/"
 bin_PROGRAMS = gtk-theme-selector-capplet
