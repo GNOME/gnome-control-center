@@ -1,3 +1,4 @@
+#include <config.h>
 #include "gnome-wm-manager.h"
 #include "wm-properties.h"
 
