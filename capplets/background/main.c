@@ -262,10 +262,12 @@ create_dialog (void)
 int
 main (int argc, char **argv) 
 {
+	const gchar* legacy_files[] = { "Background", NULL };
+	
 	glade_gnome_init ();
 	gnomelib_register_popt_table (options, "background options");
 
-	capplet_init (argc, argv, apply_settings, create_dialog, setup_dialog, get_legacy_settings);
+	capplet_init (argc, argv, legacy_files, apply_settings, create_dialog, setup_dialog, get_legacy_settings);
 
 	gnome_window_icon_set_default_from_file
 		(GNOMECC_ICONS_DIR"/gnome-ccbackground.png");

@@ -204,8 +204,11 @@ get_legacy_settings (Bonobo_ConfigDatabase db)
 int
 main (int argc, char **argv) 
 {
+	const gchar* legacy_files[] = { "Desktop", NULL };
+	
 	glade_gnome_init ();
-	capplet_init (argc, argv, apply_settings, create_dialog, setup_dialog, get_legacy_settings);
+	
+	capplet_init (argc, argv, legacy_files, apply_settings, create_dialog, setup_dialog, get_legacy_settings);
 
 	gnome_window_icon_set_default_from_file
 		(GNOMECC_ICONS_DIR"keyboard-capplet.png.png");
