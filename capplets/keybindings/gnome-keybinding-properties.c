@@ -112,6 +112,7 @@ typedef struct
 {
   char *gconf_key;
   guint keyval;
+  guint keycode;
   EggVirtualModifierType mask;
   gboolean editable;
   GtkTreeModel *model;
@@ -122,6 +123,7 @@ typedef struct
 static void  reload_key_entries (gpointer                wm_name,
                                  GladeXML               *dialog);
 static char* binding_name       (guint                   keyval,
+				 guint			 keycode,
                                  EggVirtualModifierType  mask,
                                  gboolean                translate);
 
@@ -195,11 +197,12 @@ create_dialog (void)
 
 static char*
 binding_name (guint                   keyval,
+	      guint		      keycode,
               EggVirtualModifierType  mask,
               gboolean                translate)
 {
-  if (keyval != 0)
-    return egg_virtual_accelerator_name (keyval, mask);
+  if (keyval != 0 || keycode != 0)
+    return egg_virtual_accelerator_name (keyval, keycode, mask);
   else
     return translate ? g_strdup (_("Disabled")) : g_strdup ("disabled");
 }
@@ -207,6 +210,7 @@ binding_name (guint                   keyval,
 static gboolean
 binding_from_string (const char             *str,
                      guint                  *accelerator_key,
+		     guint		    *keycode,
                      EggVirtualModifierType *accelerator_mods)
 {
   g_return_val_if_fail (accelerator_key != NULL, FALSE);
@@ -214,11 +218,12 @@ binding_from_string (const char             *str,
   if (str == NULL || (str && strcmp (str, "disabled") == 0))
     {
       *accelerator_key = 0;
+      *keycode = 0;
       *accelerator_mods = 0;
       return TRUE;
     }
 
-  egg_accelerator_parse_virtual (str, accelerator_key, accelerator_mods);
+  egg_accelerator_parse_virtual (str, accelerator_key, keycode, accelerator_mods);
   
   if (*accelerator_key == 0)
     return FALSE;
@@ -249,6 +254,7 @@ accel_set_func (GtkTreeViewColumn *tree_column,
 		  "editable", FALSE,
 		  "accel_key", key_entry->keyval,
 		  "accel_mask", key_entry->mask,
+		  "keycode", key_entry->keycode,
 		  "style", PANGO_STYLE_ITALIC,
 		  NULL);
   else
@@ -257,6 +263,7 @@ accel_set_func (GtkTreeViewColumn *tree_column,
 		  "editable", TRUE,
 		  "accel_key", key_entry->keyval,
 		  "accel_mask", key_entry->mask,
+		  "keycode", key_entry->keycode,
 		  "style", PANGO_STYLE_NORMAL,
 		  NULL);
 }
@@ -295,7 +302,7 @@ keybinding_key_changed (GConfClient *client,
   key_entry = (KeyEntry *)user_data;
   key_value = gconf_value_get_string (entry->value);
 
-  binding_from_string (key_value, &key_entry->keyval, &key_entry->mask);
+  binding_from_string (key_value, &key_entry->keyval, &key_entry->keycode, &key_entry->mask);
   key_entry->editable = gconf_entry_get_is_writable (entry);
 
   /* update the model */
@@ -329,6 +336,7 @@ keyentry_sort_func (GtkTreeModel *model,
   
   if (key_entry_a != NULL)
     name_a = binding_name (key_entry_a->keyval,
+		    	   key_entry_a->keycode,
                            key_entry_a->mask,
                            TRUE);
   else
@@ -336,6 +344,7 @@ keyentry_sort_func (GtkTreeModel *model,
 
   if (key_entry_b != NULL)
     name_b = binding_name (key_entry_b->keyval,
+		    	   key_entry_b->keycode,
                            key_entry_b->mask,
                            TRUE);
   else
@@ -514,7 +523,7 @@ append_keys_to_tree (GladeXML           *dialog,
 						       key_string,
 						       (GConfClientNotifyFunc) &keybinding_key_changed,
 						       key_entry, NULL, NULL);
-      binding_from_string (key_value, &key_entry->keyval, &key_entry->mask);
+      binding_from_string (key_value, &key_entry->keyval, &key_entry->keycode, &key_entry->mask);
       g_free (key_value);
       key_entry->description = g_strdup (gconf_schema_get_short_desc (schema));
 
@@ -632,6 +641,7 @@ cb_check_for_uniqueness (GtkTreeModel *model,
   if (tmp_key_entry != NULL &&
       key_entry->keyval == tmp_key_entry->keyval &&
       key_entry->mask   == tmp_key_entry->mask &&
+      key_entry->keycode == tmp_key_entry->keycode &&
       /* be sure we don't claim a key is a dup of itself */
       strcmp (key_entry->gconf_key, tmp_key_entry->gconf_key) != 0)
     {
@@ -648,7 +658,7 @@ accel_edited_callback (GtkCellRendererText   *cell,
                        const char            *path_string,
                        guint                  keyval,
                        EggVirtualModifierType mask,
-		       guint                  keycode,
+		       guint		      keycode,
                        gpointer               data)
 {
   GtkTreeView *view = (GtkTreeView *)data;
@@ -674,12 +684,13 @@ accel_edited_callback (GtkCellRendererText   *cell,
 
   tmp_key.model  = model;
   tmp_key.keyval = keyval;
+  tmp_key.keycode = keycode;
   tmp_key.mask   = mask;
   tmp_key.gconf_key = key_entry->gconf_key;
   tmp_key.description = NULL;
   tmp_key.editable = TRUE; /* kludge to stuff in a return flag */
 
-  if (keyval != 0) /* any number of keys can be disabled */
+  if (keyval != 0 || keycode != 0) /* any number of keys can be disabled */
     gtk_tree_model_foreach (model, cb_check_for_uniqueness, &tmp_key);
 
   /* flag to see if the new accelerator was in use by something */
@@ -688,7 +699,7 @@ accel_edited_callback (GtkCellRendererText   *cell,
       GtkWidget *dialog;
       char *name;
 
-      name = egg_virtual_accelerator_name (keyval, mask);
+      name = egg_virtual_accelerator_name (keyval, keycode, mask);
       
       dialog =
         gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (view))),
@@ -705,12 +716,12 @@ accel_edited_callback (GtkCellRendererText   *cell,
 
       /* set it back to its previous value. */
       egg_cell_renderer_keys_set_accelerator (EGG_CELL_RENDERER_KEYS (cell),
-					      key_entry->keyval, key_entry->mask);
+					      key_entry->keyval, key_entry->keycode, key_entry->mask);
       gtk_tree_path_free (path);
       return;
     }
 
-  str = binding_name (keyval, mask, FALSE);
+  str = binding_name (keyval, keycode, mask, FALSE);
 
   gconf_client_set_string (gconf_client_get_default(),
                            key_entry->gconf_key,
@@ -738,6 +749,54 @@ accel_edited_callback (GtkCellRendererText   *cell,
   gtk_tree_path_free (path);
 }
 
+static void
+accel_cleared_callback (GtkCellRendererText *cell,
+			const char          *path_string,
+			gpointer             data)
+{
+  GtkTreeView *view = (GtkTreeView *) data;
+  GtkTreePath *path = gtk_tree_path_new_from_string (path_string);
+  KeyEntry *key_entry;
+  GtkTreeIter iter;
+  GError *err = NULL;
+  GtkTreeModel *model;
+
+  model = get_real_model (view);
+  gtk_tree_model_get_iter (model, &iter, path);
+  gtk_tree_model_get (model, &iter,
+		      KEYENTRY_COLUMN, &key_entry,
+		      -1);
+
+  /* sanity check */
+  if (key_entry == NULL)
+    {
+      gtk_tree_path_free (path);
+      return;
+    }
+
+  /* Unset the key */
+  gconf_client_set_string (gconf_client_get_default(),
+			   key_entry->gconf_key,
+			   "disabled",
+			   &err);
+  if (err != NULL)
+    {
+      GtkWidget *dialog;
+
+      dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (view))),
+				       GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL,
+				       GTK_MESSAGE_WARNING,
+				       GTK_BUTTONS_OK,
+				       _("Error unsetting accelerator in configuration database: %s\n"),
+				       err->message);
+      gtk_dialog_run (GTK_DIALOG (dialog));
+
+      gtk_widget_destroy (dialog);
+      g_error_free (err);
+      key_entry->editable = FALSE;
+    }
+  
+}
 
 static void
 theme_changed_func (gpointer  uri,
@@ -914,8 +973,13 @@ setup_dialog (GladeXML *dialog)
 					       NULL);
 
   g_signal_connect (G_OBJECT (renderer),
-		    "keys_edited",
+		    "accel_edited",
                     G_CALLBACK (accel_edited_callback),
+                    WID ("shortcut_treeview"));
+
+  g_signal_connect (G_OBJECT (renderer),
+		    "accel_cleared",
+                    G_CALLBACK (accel_cleared_callback),
                     WID ("shortcut_treeview"));
 
   column = gtk_tree_view_column_new_with_attributes (_("Shortcut"), renderer, NULL);

@@ -20,6 +20,7 @@
 
 #include "eggaccelerators.h"
 
+#include <stdlib.h>
 #include <string.h>
 #include <gdk/gdkx.h>
 #include <gdk/gdkkeysyms.h>
@@ -175,6 +176,13 @@ is_hyper (const gchar *string)
 	  (string[6] == '>'));
 }
 
+static inline gboolean
+is_keycode (const gchar *string)
+{
+  return ((string[0] == '0') &&
+	  (string[1] == 'x'));
+}
+
 /**
  * egg_accelerator_parse_virtual:
  * @accelerator:      string representing an accelerator
@@ -203,6 +211,7 @@ is_hyper (const gchar *string)
 gboolean
 egg_accelerator_parse_virtual (const gchar            *accelerator,
                                guint                  *accelerator_key,
+			       guint                  *keycode,
                                EggVirtualModifierType *accelerator_mods)
 {
   guint keyval;
@@ -214,6 +223,8 @@ egg_accelerator_parse_virtual (const gchar            *accelerator,
     *accelerator_key = 0;
   if (accelerator_mods)
     *accelerator_mods = 0;
+  if (keycode)
+    *keycode = 0;
 
   g_return_val_if_fail (accelerator != NULL, FALSE);
 
@@ -314,12 +325,37 @@ egg_accelerator_parse_virtual (const gchar            *accelerator,
       else
 	{
           keyval = gdk_keyval_from_name (accelerator);
-          
+
           if (keyval == 0)
-            bad_keyval = TRUE;
-          
+	    {
+	      /* If keyval is 0, than maybe it's a keycode.  Check for 0x## */
+	      if (len >= 4 && is_keycode (accelerator))
+		{
+		  char keystring[5];
+		  gchar *endptr;
+		  gint tmp_keycode;
+
+		  memcpy (keystring, accelerator, 4);
+		  keystring [4] = '\000';
+
+		  tmp_keycode = strtol (keystring, &endptr, 16);
+
+		  if (endptr == NULL || *endptr != '\000')
+		    {
+		      bad_keyval = TRUE;
+		    }
+		  else
+		    {
+		      *keycode = tmp_keycode;
+		      /* 0x00 is an invalid keycode too. */
+		      if (*keycode == 0)
+			bad_keyval = TRUE;
+		    }
+		}
+	    }
+
           accelerator += len;
-          len -= len;              
+          len -= len;
 	}
     }
   
@@ -347,6 +383,7 @@ egg_accelerator_parse_virtual (const gchar            *accelerator,
  */
 gchar*
 egg_virtual_accelerator_name (guint                  accelerator_key,
+			      guint		     keycode,
                               EggVirtualModifierType accelerator_mods)
 {
   static const gchar text_release[] = "<Release>";
@@ -366,9 +403,16 @@ egg_virtual_accelerator_name (guint                  accelerator_key,
 
   accelerator_mods &= EGG_VIRTUAL_MODIFIER_MASK;
 
-  keyval_name = gdk_keyval_name (gdk_keyval_to_lower (accelerator_key));
-  if (!keyval_name)
-    keyval_name = "";
+  if (!accelerator_key)
+    {
+      keyval_name = g_strdup_printf ("0x%02x", keycode);
+    }
+  else
+    {
+      keyval_name = gdk_keyval_name (gdk_keyval_to_lower (accelerator_key));
+      if (!keyval_name)
+        keyval_name = "";
+    }
 
   l = 0;
   if (accelerator_mods & EGG_VIRTUAL_RELEASE_MASK)

@@ -52,6 +52,7 @@ enum {
 
   PROP_ACCEL_KEY,
   PROP_ACCEL_MASK,
+  PROP_KEYCODE,
   PROP_ACCEL_MODE
 };
 
@@ -172,6 +173,16 @@ egg_cell_renderer_keys_class_init (EggCellRendererKeysClass *cell_keys_class)
                                                        GDK_TYPE_MODIFIER_TYPE,
                                                        0,
                                                        G_PARAM_READABLE | G_PARAM_WRITABLE));
+
+  g_object_class_install_property (object_class,
+		  		   PROP_KEYCODE,
+				   g_param_spec_uint ("keycode",
+					   	      _("Accelerator keycode"),
+						      _("Accelerator keycode"),
+						      0,
+						      G_MAXINT,
+						      0,
+						      G_PARAM_READABLE | G_PARAM_WRITABLE));
   
   /* FIXME: Register the enum when moving to GTK+ */
   g_object_class_install_property (object_class,
@@ -184,10 +195,10 @@ egg_cell_renderer_keys_class_init (EggCellRendererKeysClass *cell_keys_class)
 						     0,
 						     G_PARAM_READABLE | G_PARAM_WRITABLE));
   
-  g_signal_new ("keys_edited",
+  g_signal_new ("accel_edited",
                 EGG_TYPE_CELL_RENDERER_KEYS,
                 G_SIGNAL_RUN_LAST,
-                G_STRUCT_OFFSET (EggCellRendererKeysClass, keys_edited),
+                G_STRUCT_OFFSET (EggCellRendererKeysClass, accel_edited),
                 NULL, NULL,
                 marshal_VOID__STRING_UINT_FLAGS_UINT,
                 G_TYPE_NONE, 4,
@@ -195,6 +206,15 @@ egg_cell_renderer_keys_class_init (EggCellRendererKeysClass *cell_keys_class)
                 G_TYPE_UINT,
                 GDK_TYPE_MODIFIER_TYPE,
 		G_TYPE_UINT);
+
+  g_signal_new ("accel_cleared",
+                EGG_TYPE_CELL_RENDERER_KEYS,
+                G_SIGNAL_RUN_LAST,
+                G_STRUCT_OFFSET (EggCellRendererKeysClass, accel_cleared),
+                NULL, NULL,
+                gtk_marshal_VOID__STRING,
+                G_TYPE_NONE, 1,
+		G_TYPE_STRING);
 }
 
 
@@ -213,12 +233,13 @@ egg_cell_renderer_keys_finalize (GObject *object)
 
 static gchar *
 convert_keysym_state_to_string (guint                  keysym,
+				guint		       keycode,
                                 EggVirtualModifierType mask)
 {
-  if (keysym == 0)
+  if (keysym == 0 && keycode == 0)
     return g_strdup (_("Disabled"));
   else
-    return egg_virtual_accelerator_name (keysym, mask);
+    return egg_virtual_accelerator_name (keysym, keycode, mask);
 }
 
 static void
@@ -269,13 +290,21 @@ egg_cell_renderer_keys_set_property  (GObject                  *object,
     case PROP_ACCEL_KEY:
       egg_cell_renderer_keys_set_accelerator (keys,
                                               g_value_get_uint (value),
+					      keys->keycode,
                                               keys->accel_mask);
       break;
 
     case PROP_ACCEL_MASK:
       egg_cell_renderer_keys_set_accelerator (keys,
                                               keys->accel_key,
+					      keys->keycode,
                                               g_value_get_flags (value));
+      break;
+    case PROP_KEYCODE:
+      egg_cell_renderer_keys_set_accelerator (keys,
+		      			      keys->accel_key,
+					      g_value_get_uint (value),
+					      keys->accel_mask);
       break;
 
     case PROP_ACCEL_MODE:
@@ -352,6 +381,7 @@ grab_key_callback (GtkWidget    *widget,
   EggCellRendererKeys *keys;
   char *path;
   gboolean edited;
+  gboolean cleared;
   GdkModifierType consumed_modifiers;  
   guint upper;
   GdkModifierType ignored_modifiers;
@@ -362,6 +392,7 @@ grab_key_callback (GtkWidget    *widget,
     return TRUE;
 
   edited = FALSE;
+  cleared = FALSE;
 
   consumed_modifiers = 0;
   gdk_keymap_translate_keyboard_state (gdk_keymap_get_default (),
@@ -403,10 +434,11 @@ grab_key_callback (GtkWidget    *widget,
     goto out; /* cancel */
 
   /* clear the accelerator on Backspace */
-  if (keys->edit_key != 0 &&
-      accel_mods == 0 &&
-      accel_keyval == GDK_BackSpace)
-    accel_keyval = 0;
+  if (accel_mods == 0 && accel_keyval == GDK_BackSpace)
+    {
+      cleared = TRUE;
+      goto out;
+    }
 
   if (keys->accel_mode == EGG_CELL_RENDERER_KEYS_MODE_GTK)
     {
@@ -422,23 +454,27 @@ grab_key_callback (GtkWidget    *widget,
   
   edited = TRUE;
  out:
-  path = g_strdup (g_object_get_data (G_OBJECT (keys->edit_widget),
-                                      EGG_CELL_RENDERER_TEXT_PATH));
-  
   gdk_keyboard_ungrab (event->time);
   gdk_pointer_ungrab (event->time);
   
+  path = g_strdup (g_object_get_data (G_OBJECT (keys->edit_widget), EGG_CELL_RENDERER_TEXT_PATH));
+
   gtk_cell_editable_editing_done (GTK_CELL_EDITABLE (keys->edit_widget));
   gtk_cell_editable_remove_widget (GTK_CELL_EDITABLE (keys->edit_widget));
   keys->edit_widget = NULL;
   keys->grab_widget = NULL;
   
   if (edited)
-    g_signal_emit_by_name (G_OBJECT (keys), "keys_edited", path,
-                           accel_keyval, accel_mods, event->hardware_keycode);
+    {
+      g_signal_emit_by_name (G_OBJECT (keys), "accel_edited", path,
+			     accel_keyval, accel_mods, event->hardware_keycode);
+    }
+  else if (cleared)
+    {
+      g_signal_emit_by_name (G_OBJECT (keys), "accel_cleared", path);
+    }
 
   g_free (path);
-  
   return TRUE;
 }
 
@@ -583,6 +619,7 @@ egg_cell_renderer_keys_start_editing (GtkCellRenderer      *cell,
 void
 egg_cell_renderer_keys_set_accelerator (EggCellRendererKeys *keys,
                                         guint                keyval,
+					guint		     keycode,
                                         GdkModifierType      mask)
 {
   char *text;
@@ -609,13 +646,21 @@ egg_cell_renderer_keys_set_accelerator (EggCellRendererKeys *keys,
       g_object_notify (G_OBJECT (keys), "accel_mask");
       changed = TRUE;
     }  
+
+  if (keycode != keys->keycode)
+    {
+      keys->keycode = keycode;
+
+      g_object_notify (G_OBJECT (keys), "keycode");
+      changed = TRUE;
+    }
   g_object_thaw_notify (G_OBJECT (keys));
 
   if (changed)
     {
       /* sync string to the key values */
       celltext = GTK_CELL_RENDERER_TEXT (keys);
-      text = convert_keysym_state_to_string (keys->accel_key, keys->accel_mask);
+      text = convert_keysym_state_to_string (keys->accel_key, keys->keycode, keys->accel_mask);
       g_object_set (keys, "text", text, NULL);
       g_free (text);
     }
