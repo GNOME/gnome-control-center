@@ -337,7 +337,7 @@
 		  <property name="justify">GTK_JUSTIFY_CENTER</property>
 		  <property name="wrap">False</property>
 		  <property name="selectable">False</property>
-		  <property name="xalign">0.5</property>
+		  <property name="xalign">1</property>
 		  <property name="yalign">0.5</property>
 		  <property name="xpad">0</property>
 		  <property name="ypad">0</property>
@@ -391,7 +391,7 @@
 		  <property name="justify">GTK_JUSTIFY_CENTER</property>
 		  <property name="wrap">False</property>
 		  <property name="selectable">False</property>
-		  <property name="xalign">0</property>
+		  <property name="xalign">1</property>
 		  <property name="yalign">0.5</property>
 		  <property name="xpad">0</property>
 		  <property name="ypad">0</property>
@@ -451,6 +451,7 @@
 	      <property name="label_xalign">0</property>
 	      <property name="label_yalign">0.5</property>
 	      <property name="shadow_type">GTK_SHADOW_ETCHED_IN</property>
+	      <property name="border_width">4</property>
 
 	      <child>
 		<widget class="GtkTable" id="table1">
@@ -458,15 +459,16 @@
 		  <property name="n_rows">2</property>
 		  <property name="n_columns">3</property>
 		  <property name="homogeneous">False</property>
-		  <property name="row_spacing">0</property>
-		  <property name="column_spacing">4</property>
+		  <property name="row_spacing">3</property>
+		  <property name="column_spacing">6</property>
+		  <property name="border_width">3</property>
 
 		  <child>
 		    <widget class="GtkLabel" id="add_ext_label">
 		      <property name="label" translatable="yes">Add:</property>
 		      <property name="justify">GTK_JUSTIFY_CENTER</property>
 		      <property name="wrap">no</property>
-		      <property name="xalign">0.5</property>
+		      <property name="xalign">1</property>
 		      <property name="yalign">0.5</property>
 		      <property name="xpad">4</property>
 		      <property name="ypad">0</property>
@@ -594,7 +596,7 @@
 	      </child>
 	    </widget>
 	    <packing>
-	      <property name="padding">0</property>
+	      <property name="padding">4</property>
 	      <property name="expand">True</property>
 	      <property name="fill">True</property>
 	    </packing>
@@ -918,7 +920,7 @@
                     <property name="label" translatable="yes">_Description</property>
                     <property name="justify">GTK_JUSTIFY_CENTER</property>
                     <property name="wrap">no</property>
-                    <property name="xalign">0.5</property>
+                    <property name="xalign">1</property>
                     <property name="yalign">0.5</property>
                     <property name="xpad">0</property>
                     <property name="ypad">0</property>
