@@ -1,6 +1,13 @@
 2001-11-09  Bradford Hovinen  <hovinen@ximian.com>
 
+	* bonobo-config-archiver.c (bonobo_config_archiver_new): Don't
+	unref the archive and the location here; they will be unreffed
+	when the archiver_db object is destroyed
+
+	* location.c (location_destroy): Prevent reentrance
+
 	* archive.c (archive_destroy): Don't traverse the tree
+	(archive_destroy): Prevent reentrance
 
 2001-11-02  Bradford Hovinen  <hovinen@ximian.com>
 

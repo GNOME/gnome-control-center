@@ -877,8 +877,6 @@ bonobo_config_archiver_new (Bonobo_Moniker               parent,
 		g_free (filename);
 
 		if (archiver_db->doc == NULL) {
-			bonobo_object_release_unref (archiver_db->location, NULL);
-			bonobo_object_release_unref (archiver_db->archive, NULL);
 			bonobo_object_unref (BONOBO_OBJECT (archiver_db));
 			return CORBA_OBJECT_NIL;
 		}

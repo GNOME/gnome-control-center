@@ -366,6 +366,8 @@ archive_destroy (GtkObject *object)
 
 	DEBUG_MSG ("Enter");
 
+	bonobo_object_ref (object);
+
 	archive = ARCHIVE (object);
 
 	g_tree_destroy (archive->locations);
@@ -377,6 +379,8 @@ archive_destroy (GtkObject *object)
 		bonobo_object_unref (BONOBO_OBJECT (archive->backend_list));
 
 	GTK_OBJECT_CLASS (parent_class)->destroy (GTK_OBJECT (archive));
+
+	bonobo_object_unref (object);
 }
 
 /**

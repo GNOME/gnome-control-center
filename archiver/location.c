@@ -599,6 +599,8 @@ location_destroy (GtkObject *object)
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (IS_LOCATION (object));
 
+	bonobo_object_ref (object);
+
 	location = LOCATION (object);
 
 	DEBUG_MSG ("Enter: %s", location->p->locid);
@@ -616,6 +618,8 @@ location_destroy (GtkObject *object)
 	bonobo_object_unref (BONOBO_OBJECT (location->p->archive));
 
 	GTK_OBJECT_CLASS (parent_class)->destroy (object);
+
+	bonobo_object_unref (object);
 }
 
 static void
