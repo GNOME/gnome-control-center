@@ -1,3 +1,17 @@
+1999-08-27  Elliot Lee  <sopwith@redhat.com>
+
+	* control-center/capplet-widget-libs.c: If we're in a nest of main
+ 	loops (e.g. modal dialogs or something), do bad hacks to make sure
+ 	capplets exit properly.
+
+        /* This gross hack is here because just doing gtk_main_quit()
+           won't exit a modal dialog that has popped up in a capplet,
+           but at the same time just doing exit() won't let some
+           capplets (e.g. wm-properties) do their preference saving in
+           the post-gtk_main() part of main() -ECL */
+
+           Also cleanup the symbol names a little & make stuff static when possible.
+
 1999-08-21  Pablo Saratxaga <srtxg@chanae.alphanet.ch>
 
 	* applets/screensaver-properties/screensaver-desktops/*.desktop
