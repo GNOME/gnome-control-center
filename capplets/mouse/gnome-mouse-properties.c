@@ -495,7 +495,7 @@ cursor_font_changed (GConfClient *client,
 
 	/* we didn't find it; we add it to the end. */
 	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-	cursor_text = g_strdup_printf (_("<b>Unknown Cursor</b>\n%s"), cursor_font);
+	cursor_text = g_strdup_printf ("<b>%s</b>\n%s", _("Unknown Cursor"), cursor_font);
 	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
 			    COLUMN_TEXT, cursor_text,
 			    COLUMN_FONT_PATH, cursor_font,
@@ -600,10 +600,10 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 
 	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 	if (cursor_font == NULL) {
-		cursor_string = _("<b>Default Cursor - Current</b>\nThe default cursor that ships with X");
+		cursor_string = g_strdup_printf ("<b>%s</b>\n%s", _("Default Cursor - Current"), _("The default cursor that ships with X"));
 		found_default = TRUE;
 	} else {
-		cursor_string = _("<b>Default Cursor</b>\nThe default cursor that ships with X");
+		cursor_string = g_strdup_printf ("<b>%s</b>\n%s", _("Default Cursor"), _("The default cursor that ships with X"));
 	}
 
 	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
@@ -611,7 +611,7 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 			    COLUMN_TEXT, cursor_string,
 			    COLUMN_FONT_PATH, NULL,
 			    -1);
-
+	g_free (cursor_string);
 
 	/* Inverted cursor */
 	filename = gnome_program_locate_file (program, GNOME_FILE_DOMAIN_APP_PIXMAP, "mouse-cursor-white.png", TRUE, NULL);
@@ -621,10 +621,10 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 
 	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 	if (cursor_font && ! strcmp (cursor_font, font_path)) {
-		cursor_string = _("<b>White Cursor - Current</b>\nThe default cursor inverted");
+		cursor_string = g_strdup_printf ("<b>%s</b>\n%s", _("White Cursor - Current"), _("The default cursor inverted"));
 		found_default = TRUE;
 	} else {
-		cursor_string = _("<b>White Cursor</b>\nThe default cursor inverted");
+		cursor_string = g_strdup_printf ("<b>%s</b>\n%s", _("White Cursor"), _("The default cursor inverted"));
 	}
 
 	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
@@ -633,7 +633,8 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 			    COLUMN_FONT_PATH, font_path,
 			    -1);
 	g_free (font_path);
-	
+	g_free (cursor_string);
+
 	/* Large cursor */
 	filename = gnome_program_locate_file (program, GNOME_FILE_DOMAIN_APP_PIXMAP, "mouse-cursor-normal-large.png", TRUE, NULL);
 	pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
@@ -642,10 +643,10 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 
 	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 	if (cursor_font && ! strcmp (cursor_font, font_path)) {
-		cursor_string = _("<b>Large Cursor - Current</b>\nLarge version of normal cursor");
+		cursor_string = g_strdup_printf ("<b>%s</b>\n%s", _("Large Cursor - Current"), _("Large version of normal cursor"));
 		found_default = TRUE;
 	} else {
-		cursor_string = _("<b>Large Cursor</b>\nLarge version of normal cursor");
+		cursor_string = g_strdup_printf ("<b>%s</b>\n%s", _("Large Cursor"), _("Large version of normal cursor"));
 	}
 
 	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
@@ -654,6 +655,7 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 			    COLUMN_FONT_PATH, font_path,
 			    -1);
 	g_free (font_path);
+	g_free (cursor_string);
 
 	/* Large inverted cursor */
 	filename = gnome_program_locate_file (program, GNOME_FILE_DOMAIN_APP_PIXMAP, "mouse-cursor-white-large.png", TRUE, NULL);
@@ -663,10 +665,10 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 
 	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 	if (cursor_font && ! strcmp (cursor_font, font_path)) {
-		cursor_string = _("<b>Large White Cursor - Current</b>\nLarge version of white cursor");
+		cursor_string = g_strdup_printf ("<b>%s</b>\n%s", _("Large White Cursor - Current"), _("Large version of white cursor"));
 		found_default = TRUE;
 	} else {
-		cursor_string = _("<b>Large White Cursor</b>\nLarge version of white cursor");
+		cursor_string = g_strdup_printf ("<b>%s</b>\n%s", _("Large White Cursor"), _("Large version of white cursor"));
 	}
 
 	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
@@ -675,8 +677,10 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset)
 			    COLUMN_FONT_PATH, font_path,
 			    -1);
 	g_free (font_path);
+	g_free (cursor_string);
+
 	g_free (cursor_font);
-	
+
 	gtk_tree_view_append_column (GTK_TREE_VIEW (tree_view), column);
 	
 	gconf_peditor_new_boolean
