@@ -1,9 +1,57 @@
-#include <X11/Xlib.h>
+#include <gdk/gdk.h>
 #include <gdk/gdkx.h>
 #include <gconf/gconf.h>
 #include <math.h>
 
 #define MAX_BUTTONS 10
+
+#if 0
+GdkWindow *window = NULL;
+
+static gint
+locate_pointer_expose (GtkWidget *widget,
+		       GdkExposeEvent *event,
+		       gpointer data)
+{
+}
+
+
+static void
+create_window (void)
+{
+	  GdkWindowAttr attributes;
+	  attributes.window_type = GDK_WINDOW_CHILD;
+	  attributes.wclass = GDK_INPUT_OUTPUT;
+	  attributes.visual = gtk_widget_get_visual (GTK_WIDGET (tree_view));
+	  attributes.colormap = gtk_widget_get_colormap (GTK_WIDGET (tree_view));
+	  attributes.event_mask = GDK_VISIBILITY_NOTIFY_MASK | GDK_EXPOSURE_MASK | GDK_POINTER_MOTION_MASK;
+	  window = gdk_window_new (gdk_get_default_root_window (),
+				   &attributes,
+				   GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP);
+	  gdk_window_set_user_data (tree_view->priv->drag_highlight_window, gnome_settings_daemon_get_invisible ());
+	  g_signal_connect (G_OBJECT (gnome_settings_daemon_get_invisible ()),
+			    "expose_event",
+			    locate_pointer_expose,
+			    NULL);
+}
+
+static void
+locate_pointer (void)
+{
+	GtkWidget *window;
+	gint cursor_x, cursor_y;
+
+	window = gtk_window_new (GTK_WINDOW_POPUP);
+	gdk_window_get_pointer (NULL, &cursor_x, &cursor_y, NULL);
+	
+	if (window == NULL)
+		create_window ();
+
+}
+#endif
+
+
+
 
 static void
 set_left_handed (gboolean left_handed)
@@ -12,6 +60,7 @@ set_left_handed (gboolean left_handed)
   gint n_buttons, i;
   gint idx_1 = 0, idx_3 = 1;
 
+  g_print ("daemon: set_left_handed %d\n", left_handed);
   n_buttons = XGetPointerMapping (GDK_DISPLAY (), buttons, MAX_BUTTONS);
 
   for (i = 0; i < n_buttons; i++)
@@ -95,10 +144,13 @@ set_drag_threshold (gint drag_threshold)
 static void
 mouse_callback (GConfEntry *entry)
 {
+	g_print ("daemon: gconf callback %s\n", entry->key);
   if (! strcmp (entry->key, "/desktop/gnome/peripherals/mouse/left_handed"))
     {
       if (entry->value->type == GCONF_VALUE_BOOL)
 	set_left_handed (gconf_value_get_bool (entry->value));
+      else
+	      g_warning ("wrong type!\n");
     }
   else if (! strcmp (entry->key, "/desktop/gnome/peripherals/mouse/motion_acceleration"))
     {
@@ -122,5 +174,4 @@ gnome_settings_mouse_init (GConfEngine *engine)
 void
 gnome_settings_mouse_load (GConfEngine *engine)
 {
-
 }

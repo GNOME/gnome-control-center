@@ -26,6 +26,9 @@ translate_int_int (TranslationEntry *trans,
 {
   g_assert (value->type == trans->gconf_type);
   
+  g_print ("setting %s %d\n", 
+	   trans->xsetting_name,
+	   gconf_value_get_int (value));
   xsettings_manager_set_int (manager, trans->xsetting_name,
                              gconf_value_get_int (value));
 }
@@ -36,13 +39,16 @@ translate_string_string (TranslationEntry *trans,
 {
   g_assert (value->type == trans->gconf_type);
 
+  g_print ("setting %s %s\n", 
+	   trans->xsetting_name,
+	   gconf_value_get_string (value));
   xsettings_manager_set_string (manager,
                                 trans->xsetting_name,
                                 gconf_value_get_string (value));
 }
 
 static TranslationEntry translations [] = {
-  { "/desktop/gnome/double-click-time", "Net/DoubleClickTime", GCONF_VALUE_INT,    
+  { "/desktop/gnome/peripherals/mouse/double_click", "Net/DoubleClickTime", GCONF_VALUE_INT,    
     translate_int_int },
   { "/desktop/gnome/gtk-color-palette", "Gtk/ColorPalette", GCONF_VALUE_STRING,
     translate_string_string },
@@ -135,6 +141,7 @@ xsettings_callback (GConfEntry *entry)
   TranslationEntry *trans;
   trans = find_translation_entry (entry->key);
 
+  g_print ("daemon: notified on %s\n", entry->key);
   if (trans == NULL)
     return;
 
@@ -146,7 +153,7 @@ xsettings_callback (GConfEntry *entry)
 void
 gnome_settings_xsettings_init (GConfEngine *engine)
 {
-  gnome_settings_daemon_register_callback ("/desktop/standard", xsettings_callback);
+  gnome_settings_daemon_register_callback ("/desktop/gnome/peripherals/mouse", xsettings_callback);
   gnome_settings_daemon_register_callback ("/desktop/gtk", xsettings_callback);
 }
 

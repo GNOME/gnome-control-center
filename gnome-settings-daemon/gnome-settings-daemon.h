@@ -25,10 +25,13 @@
 #define GNOME_SETTINGS_XSETTINGS_H
 
 #include <gconf/gconf.h>
+#include <gtk/gtk.h>
+
 
 typedef void (* KeyCallbackFunc) (GConfEntry *entry);
 
-void gnome_settings_daemon_register_callback (const char      *dir,
-					      KeyCallbackFunc  func);
+void       gnome_settings_daemon_register_callback (const char      *dir,
+						    KeyCallbackFunc  func);
+GtkWidget *gnome_settings_daemon_get_invisible     (void);
 
 #endif /* GNOME_SETTINGS_XSETTINGS_H */

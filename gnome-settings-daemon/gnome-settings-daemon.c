@@ -69,6 +69,15 @@ gnome_settings_daemon_register_callback (const char      *dir,
     }
 }
 
+GtkWidget *
+gnome_settings_daemon_get_invisible (void)
+{
+	static GtkWidget *invisible = NULL;
+	if (invisible == NULL)
+		invisible = gtk_invisible_new ();
+	return invisible;
+}
+
 static void
 config_notify (GConfEngine *client,
                guint        cnxn_id,
