@@ -53,20 +53,18 @@ AC_PATH_XTRA
 x_libs="$X_PRE_LIBS $X_LIBS -lX11 $X_EXTRA_LIBS"
 
 AC_CHECK_FUNC(XScreenSaverQueryInfo, [
-  TYPING_BREAK="typing-break"],[
-  AC_MSG_CHECKING([for XScreenSaverQueryInfo in -lXss])
-  save_LDFLAGS=$LDFLAGS
+  TYPING_BREAK="typing-break"], [
   save_LIBS=$LIBS
   LIBS="$LIBS $X_PRE_LIBS $X_LIBS -lXss -lXext -lX11"
-  AC_TRY_LINK([#include <X11/Xlib.h>
-#include <X11/extensions/scrnsaver.h>],[
-XScreenSaverQueryInfo(NULL, 0, NULL);],[
-  AC_MSG_RESULT(yes)
-  TYPING_BREAK="typing-break"
-  SCREENSAVER_LIBS="$X_PRE_LIBS $X_LIBS -lXss -lXext -lX11"],[
-  AC_MSG_RESULT(no)])
-  LIBS=$save_LIBS
-  LDFLAGS=$save_LDFLAGS])
+  AC_CHECK_LIB(Xss, XScreenSaverQueryInfo, [
+    TYPING_BREAK="typing-break"
+    SCREENSAVER_LIBS="$X_PRE_LIBS $X_LIBS -lXss -lXext -lX11"], [
+    LIBS=$save_LIBS
+    LIBS="$LIBS $X_PRE_LIBS $X_LIBS -lXext -lX11"
+    AC_CHECK_LIB(Xext, XScreenSaverQueryInfo, [
+      TYPING_BREAK="typing-break"
+      SCREENSAVER_LIBS="$X_PRE_LIBS $X_LIBS -lXext -lX11"],[])])
+  LIBS=$save_LIBS])
 AC_SUBST(TYPING_BREAK)
 AC_SUBST(SCREENSAVER_LIBS)
 
