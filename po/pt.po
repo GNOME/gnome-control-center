@@ -7,9 +7,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.6\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-17 01:25+0000\n"
-"PO-Revision-Date: 2004-02-17 01:00+0000\n"
+"Report-Msgid-Bugs-To: Duarte Loreto <happyguy_pt@hotmail.com>\n"
+"POT-Creation-Date: 2004-02-28 14:13+0000\n"
+"PO-Revision-Date: 2004-02-28 14:15+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -111,11 +111,11 @@ msgstr "Ocorreu um erro ao iniciar o diálogo de preferências do rato: %s"
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Incapaz de importar definições AccessX do ficheiro '%s'"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:445
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:433
 msgid "Import Feature Settings File"
 msgstr "Importar Ficheiro de Configuração de Funcionalidades"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:449
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:437
 msgid "_Import"
 msgstr "_Importar"
 
@@ -410,6 +410,7 @@ msgid "Horizontal gradient"
 msgstr "Gradiente horizontal"
 
 #: capplets/background/background-properties.glade.h:5
+#: capplets/background/gnome-background-properties.glade.h:4
 msgid "Pick a color"
 msgstr "Seleccione uma cor"
 
@@ -468,10 +469,6 @@ msgstr "<b>_Cores da Área de Trabalho</b>"
 msgid "Desktop Background Preferences"
 msgstr "Preferências do Fundo da Área de Trabalho"
 
-#: capplets/background/gnome-background-properties.glade.h:4
-msgid "Zgjidh një ngjyrë"
-msgstr "Zgjidh një ngjyrë"
-
 #: capplets/background/gnome-background-properties.glade.h:5
 msgid "_Add Wallpaper"
 msgstr "_Adicionar Papel de Parede"
@@ -519,7 +516,7 @@ msgstr "Gradiente Horizontal"
 msgid "Vertical Gradient"
 msgstr "Gradiente Vertical"
 
-#: capplets/background/gnome-wp-info.c:46
+#: capplets/background/gnome-wp-info.c:49
 msgid "No Wallpaper"
 msgstr "Sem Papel de Parede"
 
@@ -712,11 +709,11 @@ msgstr ""
 "\n"
 "Seleccione uma imagem diferente."
 
-#: capplets/common/gconf-property-editor.c:1667
+#: capplets/common/gconf-property-editor.c:1665
 msgid "Please select an image."
 msgstr "Seleccione uma imagem."
 
-#: capplets/common/gconf-property-editor.c:1672
+#: capplets/common/gconf-property-editor.c:1670
 msgid "_Select"
 msgstr "_Seleccionar"
 
@@ -1109,20 +1106,20 @@ msgstr "Definições Por Omissão"
 msgid "Screen %d Settings\n"
 msgstr "Definições do Ecrã %d\n"
 
-#: capplets/display/main.c:444
+#: capplets/display/main.c:445
 msgid "Screen Resolution Preferences"
 msgstr "Preferências de Resolução de Ecrã"
 
-#: capplets/display/main.c:476
+#: capplets/display/main.c:482
 #, c-format
 msgid "_Make default for this computer (%s) only"
 msgstr "Tornar _omissão apenas para este computador (%s)"
 
-#: capplets/display/main.c:494
+#: capplets/display/main.c:500
 msgid "Options"
 msgstr "Opções"
 
-#: capplets/display/main.c:515
+#: capplets/display/main.c:521
 #, c-format
 msgid ""
 "Testing the new settings. If you don't respond in %d second the previous "
@@ -1137,19 +1134,19 @@ msgstr[1] ""
 "A testar as novas definições. Se não responder dentro de %d segundos as "
 "definições anteriores serão repostas."
 
-#: capplets/display/main.c:564
+#: capplets/display/main.c:570
 msgid "Do you want to keep this resolution?"
 msgstr "Deseja manter esta resolução?"
 
-#: capplets/display/main.c:589
+#: capplets/display/main.c:595
 msgid "Use _previous resolution"
 msgstr "Utilizar resolução _anterior"
 
-#: capplets/display/main.c:589
+#: capplets/display/main.c:595
 msgid "_Keep resolution"
 msgstr "_Manter a resolução"
 
-#: capplets/display/main.c:740
+#: capplets/display/main.c:746
 msgid ""
 "The XServer does not support the XRandR extension.  Runtime resolution "
 "changes to the display size are not available."
@@ -1157,7 +1154,7 @@ msgstr ""
 "O Xserver não suporta a extensão XRandR.  Não estarão disponíveis alterações "
 "de resolução de ecrã durante a execução."
 
-#: capplets/display/main.c:748
+#: capplets/display/main.c:754
 msgid ""
 "The version of the XRandR extension is incompatible with this program. "
 "Runtime changes to the display size are not available."
@@ -1165,12 +1162,16 @@ msgstr ""
 "A versão da extensão XRandR é incompatível com esta aplicação. Não estarão "
 "disponíveis alterações de resolução de ecrã durante a execução."
 
-#: capplets/file-types/file-types-capplet.c:196
+#: capplets/file-types/file-types-capplet.c:158
+msgid "Are you sure you want to permanently delete this entry?"
+msgstr "Tem a certeza que deseja remover definitivamente esta entrada?"
+
+#: capplets/file-types/file-types-capplet.c:210
 #: vfs-methods/themus/themus-properties-view.c:163
 msgid "Description"
 msgstr "Descrição"
 
-#: capplets/file-types/file-types-capplet.c:218
+#: capplets/file-types/file-types-capplet.c:232
 msgid "Extensions"
 msgstr "Extensões"
 
@@ -1682,7 +1683,7 @@ msgstr "O tipo de atalho."
 
 #: capplets/keybindings/eggcellrendererkeys.c:240
 #: capplets/keybindings/gnome-keybinding-properties.c:235
-#: libbackground/applier.c:588 typing-break/drwright.c:464
+#: libbackground/applier.c:588 typing-break/drwright.c:473
 msgid "Disabled"
 msgstr "Inactivo"
 
@@ -1711,7 +1712,7 @@ msgstr "Ambiente de Trabalho"
 msgid "Window Management"
 msgstr "Gestão de Janelas"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:737
+#: capplets/keybindings/gnome-keybinding-properties.c:736
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for:\n"
@@ -1720,18 +1721,18 @@ msgstr ""
 "O atalho \"%s\" já está em utilização para:\n"
 " \"%s\"\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:768
+#: capplets/keybindings/gnome-keybinding-properties.c:766
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Erro ao definir novo atalho na base de dados de configuração: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:818
+#: capplets/keybindings/gnome-keybinding-properties.c:812
 #, c-format
 msgid "Error unsetting accelerator in configuration database: %s\n"
 msgstr ""
 "Erro ao remover definição de atalho na base de dados de configuração: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:967
+#: capplets/keybindings/gnome-keybinding-properties.c:960
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1739,11 +1740,11 @@ msgstr ""
 "Incapaz de encontrar temas de teclado.  Isto significa que a sua instalação "
 "do GTK+ está incompleta."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:989
+#: capplets/keybindings/gnome-keybinding-properties.c:982
 msgid "Action"
 msgstr "Acção"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:1013
+#: capplets/keybindings/gnome-keybinding-properties.c:1006
 msgid "Shortcut"
 msgstr "Atalho"
 
@@ -2767,7 +2768,7 @@ msgstr ""
 "Erro ao tentar executar (%s)\n"
 "que está associado à tecla (%s)"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:61
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:65
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
@@ -2793,7 +2794,7 @@ msgstr ""
 "- O resultado de <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/xkb</"
 "b>"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:71
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:75
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2804,6 +2805,17 @@ msgstr ""
 "Existem problemas conhecidos com configurações complexas do XKB.\n"
 "Tente utilizar uma configuração mais simples ou utilizar uma versão mais "
 "recente do XFree."
+
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:151
+#, c-format
+msgid ""
+"You have a keyboard remapping file (%s) in your home directory whose "
+"contents will now be ignored. You can use the keyboard preferences to "
+"restore them."
+msgstr ""
+"Possui na sua pasta pessoal um ficheiro de remapeamento de teclado (%s) "
+"cujo conteúdo será ignorado. Poderá utilizar as preferências de teclado "
+"para repor o mapeamento."
 
 #: gnome-settings-daemon/gnome-settings-screensaver.c:92
 #, c-format
@@ -3044,39 +3056,39 @@ msgstr ""
 "As definições XKB no gconf serão sobrepostas pelas do sistema LOGO QUE "
 "POSSÍVEL"
 
-#: typing-break/drw-break-window.c:189
+#: typing-break/drw-break-window.c:191
 msgid "_Postpone break"
 msgstr "_Adiar intervalo"
 
-#: typing-break/drw-break-window.c:227
+#: typing-break/drw-break-window.c:239
 msgid "Take a break!"
 msgstr "Fazer um intervalo!"
 
 #. { N_("/_Enabled"),      NULL, GIF_CB (popup_enabled_cb),     POPUP_ITEM_ENABLED, "<ToggleItem>", NULL },
-#: typing-break/drwright.c:135
+#: typing-break/drwright.c:136
 msgid "/_Preferences"
 msgstr "/_Preferências"
 
-#: typing-break/drwright.c:136
+#: typing-break/drwright.c:137
 msgid "/_About"
 msgstr "/_Sobre"
 
-#: typing-break/drwright.c:138
+#: typing-break/drwright.c:139
 msgid "/_Take a Break"
 msgstr "/_Fazer um Intervalo"
 
-#: typing-break/drwright.c:482
+#: typing-break/drwright.c:491
 #, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
 msgstr[0] "%d minuto até ao próximo intervalo"
 msgstr[1] "%d minutos até ao próximo intervalo"
 
-#: typing-break/drwright.c:486
+#: typing-break/drwright.c:495
 msgid "Less than one minute until the next break"
 msgstr "Menos de um minuto até ao próximo intervalo"
 
-#: typing-break/drwright.c:581
+#: typing-break/drwright.c:590
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
@@ -3085,23 +3097,23 @@ msgstr ""
 "Incapaz de apresentar o diálogo de propriedades de intervalos de utilização "
 "devido ao seguinte erro: %s"
 
-#: typing-break/drwright.c:621
+#: typing-break/drwright.c:638
 msgid "About GNOME Typing Monitor"
 msgstr "Sobre o Monitor de Utilização GNOME"
 
-#: typing-break/drwright.c:645
+#: typing-break/drwright.c:662
 msgid "A computer break reminder."
 msgstr "Um lembrete de intervalos de utilização."
 
-#: typing-break/drwright.c:646
+#: typing-break/drwright.c:663
 msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
 msgstr "Escrito por Richard Hult &lt;richard@imendio.com&gt;"
 
-#: typing-break/drwright.c:647
+#: typing-break/drwright.c:664
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Arte gráfica adicionada por Anders Carlsson"
 
-#: typing-break/drwright.c:820
+#: typing-break/drwright.c:839
 msgid "Break reminder"
 msgstr "Lembrete de intervalos"
 
@@ -3536,6 +3548,9 @@ msgstr "Aumentar o volume"
 #: schemas/apps_gnome_settings_daemon_keybindings.schemas.in.h:40
 msgid "Volume up's shortcut."
 msgstr "Atalho para aumentar o volume."
+
+#~ msgid "Zgjidh një ngjyrë"
+#~ msgstr "Zgjidh një ngjyrë"
 
 #~ msgid "There was an error displaying help:"
 #~ msgstr "Ocorreu um erro ao apresentar a ajuda:"
