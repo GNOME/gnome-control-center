@@ -1,4 +1,4 @@
-INCLUDES=$(GNOME_SETTINGS_DAEMON_CFLAGS) -I$(top_srcdir)/libbackground -I$(top_srcdir)
+INCLUDES=$(GNOME_SETTINGS_DAEMON_CFLAGS) -I$(top_srcdir)/libbackground -I$(top_srcdir) -DGNOMELOCALEDIR="\"$(datadir)/locale\""
 
 bin_PROGRAMS=gnome-settings-daemon
 

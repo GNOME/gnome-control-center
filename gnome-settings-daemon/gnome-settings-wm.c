@@ -41,7 +41,7 @@ set_workspace_names (GSList *values)
 		unsigned char *str;
 		value = list->data;
 
-		str = gconf_value_get_string (value);
+		str = (unsigned char *)gconf_value_get_string (value);
 		
 		if (!g_utf8_validate (str, -1, NULL)) {
 			continue;

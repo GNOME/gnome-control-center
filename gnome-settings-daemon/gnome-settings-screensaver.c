@@ -24,6 +24,7 @@
 
 #include <config.h>
 
+#include <libgnome/gnome-i18n.h>
 #include "gnome-settings-screensaver.h"
 
 #include <gtk/gtkcheckbutton.h>
@@ -88,9 +89,9 @@ gnome_settings_screensaver_load (GConfClient *client)
 					 0, 
 					 GTK_MESSAGE_ERROR,
 					 GTK_BUTTONS_OK,
-					 "There was an error starting up the screensaver:\n\n"
+					 _("There was an error starting up the screensaver:\n\n"
 					 "%s\n\n"
-					 "Screensaver functionality will not work in this session.",
+					 "Screensaver functionality will not work in this session."),
 					 gerr->message);
 
 	g_signal_connect (dialog, "response",
@@ -98,7 +99,7 @@ gnome_settings_screensaver_load (GConfClient *client)
 			  NULL);
 
 	toggle = gtk_check_button_new_with_mnemonic (
-		"_Do not show this message again");
+		_("_Do not show this message again"));
 	gtk_widget_show (toggle);
 
 	if (gconf_client_key_is_writable (client, SHOW_STARTUP_ERRORS_KEY, NULL))

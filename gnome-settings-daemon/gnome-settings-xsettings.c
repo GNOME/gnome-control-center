@@ -1,5 +1,8 @@
+#include <config.h>
 #include <string.h>
 #include <stdio.h>
+#include <glib.h>
+#include <libgnome/gnome-i18n.h>
 
 #include "gnome-settings-daemon.h"
 #include "gnome-settings-xsettings.h"
@@ -151,7 +154,7 @@ process_value (TranslationEntry *trans,
         }
       else
         {
-          g_warning ("GConf key %s set to type %s but its expected type was %s\n",
+          g_warning (_("GConf key %s set to type %s but its expected type was %s\n"),
                      trans->gconf_key,
                      type_to_string (val->type),
                      type_to_string (trans->gconf_type));

@@ -1,5 +1,7 @@
+#include <config.h>
 #include <gdk/gdkx.h>
 #include <gconf/gconf.h>
+#include <libgnome/gnome-i18n.h>
 #include "gnome-settings-daemon.h"
 #include <dirent.h>
 #include <sys/types.h>
@@ -69,8 +71,8 @@ load_cursor (GConfClient *client)
 				       0,
 				       GTK_MESSAGE_ERROR,
 				       GTK_BUTTONS_CLOSE,
-				       "Cannot create the directory \"%s\".\n"\
-				       "This is needed to allow changing cursors.",
+				       (_("Cannot create the directory \"%s\".\n"\
+				       "This is needed to allow changing cursors.")),
 				       dir_name);
       gtk_dialog_run (GTK_DIALOG (dialog));
       gtk_widget_destroy (dialog);

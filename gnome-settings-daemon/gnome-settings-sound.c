@@ -33,6 +33,7 @@
 #include <sys/types.h>
 
 #include <gconf/gconf-client.h>
+#include <libgnome/gnome-i18n.h>
 #include <libgnome/gnome-sound.h>
 #include <libgnome/gnome-util.h>
 #include <libgnome/gnome-exec.h>
@@ -55,7 +56,7 @@ start_esd (void)
         time_t starttime;
         GnomeClient *client = gnome_master_client ();
 
-	g_print ("Starting esd\n");
+	g_print (_("Starting esd\n"));
         esdpid = gnome_execute_async (NULL, 2, (char **)esd_cmdline);
         g_snprintf (argbuf, sizeof (argbuf), "%d", esdpid);
         tmpargv[0] = "kill"; tmpargv[1] = argbuf; tmpargv[2] = NULL;
@@ -80,7 +81,7 @@ start_esd (void)
 static void
 stop_esd (void) 
 {
-	g_print ("Stopping esd\n");
+	g_print (_("Stopping esd\n"));
 	/* Can't think of a way to do this reliably, so we fake it for now */
 	esd_standby (gnome_sound_connection_get ());
 }
@@ -123,7 +124,7 @@ reload_foreach_cb (SoundEvent *event, gpointer data)
 	sid = gnome_sound_sample_load (key, file);
 	
 	if (sid < 0)
-		g_warning ("Couldn't load sound file %s as sample %s",
+		g_warning (_("Couldn't load sound file %s as sample %s"),
 			   file, key);
 
 	g_free (key);
@@ -155,7 +156,7 @@ apply_settings (void)
 	if (!inited || event_changed_old != event_changed_new)
 	{
 		SoundProperties *props;
-		g_print ("Reloading events\n");
+		g_print (_("Reloading events\n"));
 		
 		inited = TRUE;
 		event_changed_old = event_changed_new;

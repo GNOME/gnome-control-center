@@ -18,6 +18,10 @@ int main (int argc, char *argv [])
   Bonobo_RegistrationResult ret;
   gchar *restart_argv[] = { "gnome-settings-daemon", *argv, 0 };
 
+  bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
+  bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+  textdomain (GETTEXT_PACKAGE);
+
   gnome_program_init ("gnome-settings-daemon", VERSION, LIBGNOMEUI_MODULE,
 		      argc, argv, NULL);
   
