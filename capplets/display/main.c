@@ -12,7 +12,8 @@
 
 #define REVERT_COUNT 20
 
-struct ScreenInfo {
+struct ScreenInfo
+{
   int current_width;
   int current_height;
   SizeID current_size;
@@ -35,6 +36,9 @@ struct DisplayInfo {
   gboolean was_per_computer;
 };
 
+
+static void generate_rate_menu (struct ScreenInfo *screen_info);
+static void generate_resolution_menu(struct ScreenInfo* screen_info);
 
 struct DisplayInfo *
 read_display_info (GdkDisplay *display)
@@ -177,6 +181,9 @@ revert_config (struct DisplayInfo *info)
 					  screen_info->current_rotation,
 					  screen_info->current_rate,
 					  GDK_CURRENT_TIME);
+
+		generate_resolution_menu(screen_info);
+		generate_rate_menu(screen_info);
     }
   return 0;
 }
@@ -238,6 +245,12 @@ show_resolution (int width, int height)
 }
 
 static void
+resolution_changed_callback (GtkWidget *optionmenu, struct ScreenInfo *screen_info)
+{
+  generate_rate_menu(screen_info);
+}
+
+static void
 generate_rate_menu (struct ScreenInfo *screen_info)
 {
   GtkWidget *menu;
@@ -280,16 +293,8 @@ generate_rate_menu (struct ScreenInfo *screen_info)
 }
 
 static void
-resolution_changed_callback (GtkWidget *optionmenu,
-			     struct ScreenInfo *screen_info)
+generate_resolution_menu(struct ScreenInfo* screen_info)
 {
-  generate_rate_menu (screen_info);
-}
-
-static GtkWidget *
-create_resolution_menu (struct ScreenInfo *screen_info)
-{
-  GtkWidget *optionmenu;
   GtkWidget *menu;
   GtkWidget *menuitem;
   int i, item, current_item;
@@ -298,10 +303,8 @@ create_resolution_menu (struct ScreenInfo *screen_info)
   SizeID current_size;
   Rotation rot;
 
-  screen_info->resolution_widget = optionmenu = gtk_option_menu_new ();
-
+  gtk_option_menu_remove_menu(GTK_OPTION_MENU(screen_info->resolution_widget));
   menu = gtk_menu_new ();
-
   current_size = XRRConfigCurrentConfiguration (screen_info->config, &rot);
   
   current_item = 0;
@@ -327,15 +330,21 @@ create_resolution_menu (struct ScreenInfo *screen_info)
 	}
     }
   
-  gtk_option_menu_set_menu (GTK_OPTION_MENU (optionmenu), menu);
-  gtk_option_menu_set_history (GTK_OPTION_MENU (optionmenu),
-			       current_item);
+	gtk_option_menu_set_menu (GTK_OPTION_MENU (screen_info->resolution_widget), menu);
+	gtk_option_menu_set_history (GTK_OPTION_MENU (screen_info->resolution_widget), current_item);
 
-  g_signal_connect (optionmenu, "changed",
-		    G_CALLBACK (resolution_changed_callback), screen_info);
+	g_signal_connect (screen_info->resolution_widget, "changed", G_CALLBACK (resolution_changed_callback), screen_info);
   
-  gtk_widget_show (optionmenu);
-  return optionmenu;
+	gtk_widget_show (screen_info->resolution_widget);
+}
+
+static GtkWidget *
+create_resolution_menu (struct ScreenInfo *screen_info) 
+{
+  screen_info->resolution_widget = gtk_option_menu_new ();
+  generate_resolution_menu (screen_info);
+
+  return screen_info->resolution_widget;
 }
 
 static GtkWidget *
@@ -434,6 +443,8 @@ create_dialog (struct DisplayInfo *info)
   dialog = gtk_dialog_new_with_buttons (_("Screen Resolution Preferences"),
 					NULL,
 					GTK_DIALOG_NO_SEPARATOR,
+ 					"gtk-close",
+ 					GTK_RESPONSE_CLOSE,
 					"gtk-apply",
 					GTK_RESPONSE_APPLY,
 					"gtk-help",
@@ -541,8 +552,7 @@ run_revert_dialog (struct DisplayInfo *info,
   char *str;
 
   dialog = gtk_dialog_new ();
-  gtk_window_set_transient_for (GTK_WINDOW (dialog),
-				GTK_WINDOW (parent));
+  gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (parent));
   gtk_window_set_destroy_with_parent (GTK_WINDOW (dialog), TRUE);
   gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
   gtk_container_set_border_width (GTK_CONTAINER (dialog), 12);
@@ -570,28 +580,12 @@ run_revert_dialog (struct DisplayInfo *info,
   hbox = gtk_hbox_new (FALSE, 6);
   vbox = gtk_vbox_new (FALSE, 6);
 
-  gtk_box_pack_start (GTK_BOX (vbox), label,
-                      TRUE, TRUE, 0);
-			     
-  gtk_box_pack_start (GTK_BOX (vbox), label_sec,
-                      TRUE, TRUE, 0);
-  
-  gtk_box_pack_start (GTK_BOX (hbox), image,
-                      FALSE, FALSE, 0);
-  
-  gtk_box_pack_start (GTK_BOX (hbox), vbox,
-                      TRUE, TRUE, 0);
-
-  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox),
-                      hbox,
-                      FALSE, FALSE, 0);
-
-  gtk_dialog_add_buttons (GTK_DIALOG (dialog),
-			  _("Use _previous resolution"),
-			  GTK_RESPONSE_NO,
-			  _("_Keep resolution"),
-			  GTK_RESPONSE_YES,
-			  NULL);
+  gtk_box_pack_start (GTK_BOX (vbox), label, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (vbox), label_sec, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (hbox), vbox, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), hbox, FALSE, FALSE, 0);
+  gtk_dialog_add_buttons (GTK_DIALOG (dialog),_("Use _previous resolution"), GTK_RESPONSE_NO, _("_Keep resolution"), GTK_RESPONSE_YES, NULL);
   
   gtk_widget_show_all (hbox);
 
@@ -600,10 +594,7 @@ run_revert_dialog (struct DisplayInfo *info,
   timeout_data.dialog = GTK_DIALOG (dialog);
   timeout_data.timed_out = FALSE;
   
-  timeout = g_timeout_add (1000,
-			   save_timeout_callback,
-			   &timeout_data);
-  
+  timeout = g_timeout_add (1000, save_timeout_callback, &timeout_data);
   res = gtk_dialog_run (GTK_DIALOG (dialog));
 
   if (!timeout_data.timed_out)
@@ -686,7 +677,6 @@ static void
 cb_dialog_response (GtkDialog *dialog, gint response_id, struct DisplayInfo *info)
 {
   gboolean save_computer, clear_computer;
-  
   switch (response_id)
     {
     case GTK_RESPONSE_DELETE_EVENT:
@@ -695,9 +685,7 @@ cb_dialog_response (GtkDialog *dialog, gint response_id, struct DisplayInfo *inf
     case GTK_RESPONSE_HELP:
       /* FIXME: This needs to be changed to the right section
        * when the docs have been written. */
-      capplet_help (GTK_WINDOW (dialog),
-		    "wgoscustdesk.xml",
-		    "goscustdesk-38");
+		capplet_help (GTK_WINDOW (dialog), "wgoscustdesk.xml", "goscustdesk-38");
       break;
     case GTK_RESPONSE_APPLY:
       save_computer = info->per_computer_check != NULL && gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (info->per_computer_check));
@@ -715,9 +703,11 @@ cb_dialog_response (GtkDialog *dialog, gint response_id, struct DisplayInfo *inf
       save_to_gconf (info, save_computer, clear_computer);
       gtk_main_quit ();
       break;
+	case GTK_RESPONSE_CLOSE:
+		gtk_main_quit ();
+		break;
     }
 }
-
 
 int
 main (int argc, char *argv[])
@@ -738,45 +728,34 @@ main (int argc, char *argv[])
 		      GNOME_PARAM_APP_DATADIR, GNOMECC_DATA_DIR,
 		      NULL);
 
+
   display = gdk_display_get_default ();
   xdisplay = gdk_x11_display_get_xdisplay (display);
   
   if (!XRRQueryExtension (xdisplay, &event_base, &error_base) ||
       XRRQueryVersion (xdisplay, &major, &minor) == 0)
     {
-      dialog = gtk_message_dialog_new (NULL,
-                                       GTK_DIALOG_MODAL,
-                                       GTK_MESSAGE_ERROR,
-                                       GTK_BUTTONS_OK,
-				       _("The Xserver doesn't support the XRandR extension, runtime resolution changes aren't possible."));
-      gtk_dialog_run (GTK_DIALOG (dialog));
-      gtk_widget_destroy (dialog);
+      GtkWidget *msg_dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, 
+						   _("The XServer does not support the XRandR extenstion.  Runtime resolution changes to the display size are not available."));
+      gtk_dialog_run (GTK_DIALOG (msg_dialog));
+      gtk_widget_destroy (msg_dialog);
       exit (0);
     }
-  
-  if (major != 1 || minor < 1)
+  else if (major != 1 || minor < 1)
     {
-      dialog = gtk_message_dialog_new (NULL,
-                                       GTK_DIALOG_MODAL,
-                                       GTK_MESSAGE_ERROR,
-                                       GTK_BUTTONS_OK,
-				       _("The version of the XRandR extension is incompatible with this program, runtime resolution changes aren't possible."));
-      gtk_dialog_run (GTK_DIALOG (dialog));
-      gtk_widget_destroy (dialog);
+      GtkWidget *msg_dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, 
+						      _("The version of the XRandR extension is incompatible with this program. Runtime changes to the display size are not available."));
+      gtk_dialog_run (GTK_DIALOG (msg_dialog));
+      gtk_widget_destroy (msg_dialog);
       exit (0);
     }
-
-  info = read_display_info (display);
   
+  info = read_display_info (display);
   dialog = create_dialog (info);
 
-  g_signal_connect (G_OBJECT (dialog),
-		    "response",
-		    G_CALLBACK (cb_dialog_response), info);
-
+  gtk_signal_connect (G_OBJECT (dialog), "response", G_CALLBACK (cb_dialog_response), info);
   gtk_widget_show (dialog);
 
   gtk_main ();
-
   return 0;
 }
