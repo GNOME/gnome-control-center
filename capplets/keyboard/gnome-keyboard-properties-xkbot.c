@@ -320,6 +320,8 @@ fill_available_options_tree (GladeXML * dialog)
 				   add_group_to_available_options_tree,
 				   dialog);
 
+	sort_tree_content (treeView);
+
 	g_signal_connect_swapped (G_OBJECT (selection), "changed",
 				  G_CALLBACK
 				  (enable_disable_options_buttons),

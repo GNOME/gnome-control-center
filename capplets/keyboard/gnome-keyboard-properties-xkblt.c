@@ -144,8 +144,7 @@ enable_disable_layouts_buttons (GladeXML * dialog)
 	gtk_widget_set_sensitive (delLayoutBtn,
 				  nSelectedSelectedLayouts > 0);
 
-	if (gtk_tree_selection_get_selected
-	    (sSelection, NULL, &iter)) {
+	if (gtk_tree_selection_get_selected (sSelection, NULL, &iter)) {
 		GtkTreePath *path =
 		    gtk_tree_model_get_path (selectedLayoutsModel,
 					     &iter);
@@ -228,6 +227,21 @@ fill_selected_layouts_tree (GladeXML * dialog)
 }
 
 void
+sort_tree_content (GtkWidget * treeView)
+{
+	GtkTreeModel *treeModel =
+	    gtk_tree_view_get_model (GTK_TREE_VIEW (treeView));
+	GtkTreeModel *sortedTreeModel;
+	/* replace the store with the sorted version */
+	sortedTreeModel = gtk_tree_model_sort_new_with_model (treeModel);
+	gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE
+					      (sortedTreeModel), 0,
+					      GTK_SORT_ASCENDING);
+	gtk_tree_view_set_model (GTK_TREE_VIEW (treeView),
+				 sortedTreeModel);
+}
+
+void
 fill_available_layouts_tree (GladeXML * dialog)
 {
 	GtkTreeStore *treeStore =
@@ -252,6 +266,7 @@ fill_available_layouts_tree (GladeXML * dialog)
 			      add_layout_to_available_layouts_tree,
 			      dialog);
 
+	sort_tree_content (treeView);
 	g_signal_connect_swapped (G_OBJECT (selection), "changed",
 				  G_CALLBACK
 				  (enable_disable_layouts_buttons),
