@@ -151,15 +151,18 @@ get_legacy_settings (Bonobo_ConfigDatabase db)
 {
 	gboolean val_boolean, def;
 
-	COPY_FROM_LEGACY (boolean, "enable_esd", bool, "/sound/system/settings/start_esd=false");
-	COPY_FROM_LEGACY (boolean, "event_sounds", bool, "/sound/system/settings/event_sounds=false");
+	COPY_FROM_LEGACY (boolean, "/main/enable_esd", bool, "/sound/system/settings/start_esd=false");
+	COPY_FROM_LEGACY (boolean, "/main/event_sounds", bool, "/sound/system/settings/event_sounds=false");
 }
 
 int
 main (int argc, char **argv) 
 {
+	const gchar* legacy_files[] = { "sound/system", "sound/events", NULL };
+	
 	glade_gnome_init ();
-	capplet_init (argc, argv, apply_settings, create_dialog, setup_dialog, get_legacy_settings);
+	
+	capplet_init (argc, argv, legacy_files, apply_settings, create_dialog, setup_dialog, get_legacy_settings);
 
 	return 0;
 }
