@@ -33,6 +33,9 @@
 #include "accessibility-keyboard.h"
 
 #ifdef HAVE_X11_EXTENSIONS_XKB_H
+#  ifdef __sun
+#    include <X11/Xlib.h>
+#  endif
 #  include <X11/XKBlib.h>
 #  include <X11/extensions/XKBstr.h>
 #  include <gdk/gdk.h>
