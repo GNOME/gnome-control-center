@@ -9,6 +9,8 @@ GNOME_COMMON_INIT
 GNOME_PLATFORM_GNOME_2(yes, force)
 GNOME_COMPILE_WARNINGS(maximum)
 
+AC_PROG_INTLTOOL
+
 AC_ISC_POSIX
 AC_PROG_CC
 AC_STDC_HEADERS
@@ -36,7 +38,7 @@ dnl Check that we meet the  dependencies
 dnl ==============================================
 COMMON_MODULES="libgnomeui-2.0 libglade-2.0 libbonobo-2.0 libbonoboui-2.0 libglade-2.0 gconf-2.0"
 PKG_CHECK_MODULES(CAPPLET, $COMMON_MODULES bonobo-config-2.0)
-PKG_CHECK_MODULES(GNOMECC, $COMMON_MODULES libxml-2.0)
+PKG_CHECK_MODULES(GNOMECC, $COMMON_MODULES libxml-2.0 gnome-desktop-2.0)
 PKG_CHECK_MODULES(ARCHIVER, libbonobo-2.0 bonobo-config-2.0 libxml-2.0)
 PKG_CHECK_MODULES(CONFIG_ARCHIVER, libbonobo-2.0 libgnome-2.0 libxml-2.0)
 PKG_CHECK_MODULES(MONIKER, libbonobo-2.0 bonobo-config-2.0 libxml-2.0)

@@ -26,7 +26,6 @@
 #endif
 
 #include <gdk-pixbuf/gdk-pixbuf.h>
-#include <libgnome/gnome-defs.h>
 #include <libgnomeui/gnome-window-icon.h>
 #include <glade/glade.h>
 

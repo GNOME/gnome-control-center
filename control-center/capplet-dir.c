@@ -265,7 +265,7 @@ capplet_activate (Capplet *capplet)
 		} else {
 			capplet->launching = TRUE;
 			gtk_timeout_add (1000, (GtkFunction) capplet_reset_cb, capplet);
-			gnome_desktop_item_launch (entry->entry, 0, NULL, NULL);
+			gnome_desktop_item_launch (entry->entry, NULL, 0, NULL);
 		}
 	}
 }
