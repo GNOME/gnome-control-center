@@ -2,6 +2,16 @@
 
 	* 0.5 RELEASE
 
+2001-05-24  Chema Celorio  <chema@celorio.com>
+
+	* Makefile.am (libximian_archiver_la_SOURCES): add config-
+	manger-dialog so that distcheck would pass
+	(SUBDIRS): add the . dir because the capplet depends on
+	the archiver and we need to build the archiver first
+	(libximian_archiver_la_SOURCES): add location-list &
+	create-location-dialog
+	(ximian_archiverConf.sh): change to XIMIAN_ARVHIER_FOO
+
 2001-05-24  Bradford Hovinen  <hovinen@ximian.com>
 
 	* Makefile.am (SUBDIRS): Added location-manager-capplet
