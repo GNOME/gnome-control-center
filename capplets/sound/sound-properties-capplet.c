@@ -85,7 +85,7 @@ props_changed_cb (SoundProperties *p, SoundEvent *event, gpointer data)
 
 static GConfEnumStringPair bell_flash_enums[] = {
 	{ 0, "frame_flash" },
-	{ 1, "fullscreen_flash" },
+	{ 1, "fullscreen" },
 	{ -1, NULL }
 };
 
