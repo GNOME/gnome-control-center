@@ -1,5 +1,23 @@
 2000-08-18  Bradford Hovinen  <hovinen@helixcode.com>
 
+	* capplets/gnome-edit-properties/gnome-edit-properties.c
+	(edit_read): Only do combo box stuff if no_gui flag is not set
+	(edit_read): If no_gui flag set, search through possible_editors
+	manually and set original_info.name that way
+
+	* capplets/gnome-edit-properties/Makefile.am (INCLUDES): 
+	(gnome_edit_properties_capplet_LDADD): Add XML cflags/libs
+
+	* capplets/gnome-edit-properties/gnome-edit-properties.c 
+	(edit_read_from_xml): 
+	(edit_write_to_xml): 
+	(do_get_xml): 
+	(do_set_xml): Implement
+	(main): Call do_get_xml/do_set_xml when --get and --set passed
+
+	* capplets/bell-properties/bell-properties.c (read_from_xml):
+	Check if root node is correct before reading
+
 	* capplets/bell-properties/Makefile.am (INCLUDES): 
 	(bell_properties_capplet_LDADD): Added XML cflags/libs
 
