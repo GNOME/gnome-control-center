@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center 1.5.8\n"
-"POT-Creation-Date: 2002-12-02 22:57+0100\n"
-"PO-Revision-Date: 2002-12-02 22:59+0100\n"
+"POT-Creation-Date: 2002-12-07 21:00+0100\n"
+"PO-Revision-Date: 2002-12-07 21:03+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -51,6 +51,7 @@ msgstr ""
 #: capplets/file-types/file-types-properties.glade.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: capplets/network/gnome-network-preferences.glade.h:2
+#: capplets/theme-switcher/theme-properties.glade.h:1
 #: capplets/theme-switcher/theme-install.glade.h:1
 msgid "*"
 msgstr "*"
@@ -1292,7 +1293,7 @@ msgid "The type of accelerator."
 msgstr "Type aksellerator."
 
 #: capplets/keybindings/eggcellrendererkeys.c:219
-#: capplets/keybindings/gnome-keybinding-properties.c:181
+#: capplets/keybindings/gnome-keybinding-properties.c:202
 #: libbackground/applier.c:588
 msgid "Disabled"
 msgstr "Slått av"
@@ -1306,29 +1307,33 @@ msgstr "Skriv inn en ny aksellerator, eller trykk slett for å tømme"
 msgid "Type a new accelerator"
 msgstr "Skriv inn en ny aksellerator"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:448
+#: capplets/keybindings/gnome-keybinding-properties.c:538
 msgid "<Unknown Action>"
 msgstr "<Ukjent handling>"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:467
+#: capplets/keybindings/gnome-keybinding-properties.c:557
 msgid "Desktop"
 msgstr "Skrivebord"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:471
+#: capplets/keybindings/gnome-keybinding-properties.c:561
 msgid "Window Management"
 msgstr "Vindushåndtering"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:593
+#: capplets/keybindings/gnome-keybinding-properties.c:696
 #, c-format
-msgid "That accelerator key is already in use by: %s\n"
-msgstr "Denne akselleratortasten er allerede i bruk av: %s\n"
+msgid ""
+"The shortcut \"%s\" is already used for:\n"
+" \"%s\"\n"
+msgstr ""
+"Snarveien «%s» er allerede brukt for:\n"
+" «%s»\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:620
+#: capplets/keybindings/gnome-keybinding-properties.c:727
 #, c-format
 msgid "Error setting new accelerator in configuration database: %s\n"
 msgstr "Feil under setting av ny snarvei i konfigurasjonsdatabasen: %s\n"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:771
+#: capplets/keybindings/gnome-keybinding-properties.c:878
 msgid ""
 "Unable to find any keyboard themes.  This means your GTK+ installation has "
 "been incompletely installed."
@@ -1336,11 +1341,11 @@ msgstr ""
 "Kan ikke finne tastaturtema. Dette betyr at din GTK+-installasjon ikke er "
 "komplett."
 
-#: capplets/keybindings/gnome-keybinding-properties.c:793
+#: capplets/keybindings/gnome-keybinding-properties.c:900
 msgid "Action"
 msgstr "Handling"
 
-#: capplets/keybindings/gnome-keybinding-properties.c:811
+#: capplets/keybindings/gnome-keybinding-properties.c:919
 msgid "Shortcut"
 msgstr "Snarvei"
 
@@ -1828,35 +1833,46 @@ msgid "Select themes for various parts of the desktop"
 msgstr "Velg tema for forskjellige deler av skrivebordet"
 
 #: capplets/theme-switcher/gtk-theme-selector.desktop.in.h:2
-#: capplets/theme-switcher/theme-properties.glade.h:6
 msgid "Theme"
 msgstr "Tema"
 
-#: capplets/theme-switcher/theme-properties.glade.h:1
+#: capplets/theme-switcher/theme-properties.glade.h:2
+msgid "<span size=\"larger\" weight=\"bold\">Save theme to disk</span>"
+msgstr "<span size=\"larger\" weight=\"bold\">Lagre tema til disk</span>"
+
+#: capplets/theme-switcher/theme-properties.glade.h:3
 msgid "Apply _Background"
 msgstr "Bruk _bakgrunn"
 
-#: capplets/theme-switcher/theme-properties.glade.h:2
+#: capplets/theme-switcher/theme-properties.glade.h:4
 msgid "Apply _Font"
 msgstr "Bruk _skrift"
 
-#: capplets/theme-switcher/theme-properties.glade.h:3
+#: capplets/theme-switcher/theme-properties.glade.h:5
 msgid "Controls"
 msgstr "Kontroller"
 
-#: capplets/theme-switcher/theme-properties.glade.h:4
+#: capplets/theme-switcher/theme-properties.glade.h:6
 msgid "Icons"
 msgstr "Ikoner"
 
-#: capplets/theme-switcher/theme-properties.glade.h:5
+#: capplets/theme-switcher/theme-properties.glade.h:7
 msgid "New themes can also be installed by dragging them into the window."
 msgstr "Nye tema kan også installeres ved å dra dem inn i vinduet."
 
-#: capplets/theme-switcher/theme-properties.glade.h:7
+#: capplets/theme-switcher/theme-properties.glade.h:8
+msgid "Short _Description:"
+msgstr "Kort _beskrivelse:"
+
+#: capplets/theme-switcher/theme-properties.glade.h:9
+msgid "Theme Details"
+msgstr "Detaljer for tema"
+
+#: capplets/theme-switcher/theme-properties.glade.h:10
 msgid "Theme Preferences"
 msgstr "Brukervalg for tema"
 
-#: capplets/theme-switcher/theme-properties.glade.h:8
+#: capplets/theme-switcher/theme-properties.glade.h:11
 msgid ""
 "This theme suggests a\n"
 "background:"
@@ -1864,7 +1880,7 @@ msgstr ""
 "Dette temaet foreslår en\n"
 "bakgrunn:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:10
+#: capplets/theme-switcher/theme-properties.glade.h:13
 msgid ""
 "This theme suggests a\n"
 "font and background"
@@ -1872,7 +1888,7 @@ msgstr ""
 "Dette temaet foreslår en\n"
 "skrift og en bakgrunn"
 
-#: capplets/theme-switcher/theme-properties.glade.h:12
+#: capplets/theme-switcher/theme-properties.glade.h:15
 msgid ""
 "This theme suggests a\n"
 "font:"
@@ -1880,21 +1896,29 @@ msgstr ""
 "Dette temaet foreslår en\n"
 "skrift:"
 
-#: capplets/theme-switcher/theme-properties.glade.h:14
+#: capplets/theme-switcher/theme-properties.glade.h:17
 msgid "Window Border"
 msgstr "Vinduskant"
 
-#: capplets/theme-switcher/theme-properties.glade.h:15
+#: capplets/theme-switcher/theme-properties.glade.h:18
+msgid "_Details..."
+msgstr "_Detaljer..."
+
+#: capplets/theme-switcher/theme-properties.glade.h:19
 msgid "_Go to theme folder"
 msgstr "_Gå til temamappen"
 
-#: capplets/theme-switcher/theme-properties.glade.h:16
-msgid "_Install New Theme..."
-msgstr "_Installer nytt tema..."
+#: capplets/theme-switcher/theme-properties.glade.h:20
+msgid "_Install theme..."
+msgstr "_Installer tema..."
 
-#: capplets/theme-switcher/theme-properties.glade.h:17
-msgid "_Save Theme"
+#: capplets/theme-switcher/theme-properties.glade.h:21
+msgid "_Save theme"
 msgstr "_Lagre tema"
+
+#: capplets/theme-switcher/theme-properties.glade.h:22
+msgid "_Theme name:"
+msgstr "_Temanavn:"
 
 #: capplets/theme-switcher/theme-install.glade.h:2
 msgid "Install new theme"
@@ -1908,17 +1932,20 @@ msgstr "_Installer"
 msgid "_Location of new theme:"
 msgstr "P_lassering for det nye temaet:"
 
-#: capplets/theme-switcher/gnome-theme-manager.c:640
-msgid "Current modified"
-msgstr "Aktivt tema endret"
-
-#: capplets/theme-switcher/gnome-theme-manager.c:659
+#: capplets/theme-switcher/gnome-theme-manager.c:463
 msgid ""
 "No themes could be found on your system.  This probably means that your "
-"\"Theme Preferences\" dialog was improperly installed."
-msgstr ""
-"Ingen tema ble funnet på ditt system. Dette betyr sannsynligvis at dialogen "
-"«Brukervalg for tema» ikke er korrekt installert."
+"\"Theme Preferences\" dialog was improperly installed, or you haven't "
+"installed the \"gnome-themes\" package."
+msgstr "Ingen tema ble funnet på ditt system. Dette betyr sannsynligvis at dialogen «Brukervalg for tema» ikke er korrekt installert, eller at du ikke har installert pakken «gnome-themes»."
+
+#: capplets/theme-switcher/gnome-theme-manager.c:513
+msgid "Custom theme"
+msgstr "Egendefinert tema"
+
+#: capplets/theme-switcher/gnome-theme-manager.c:513
+msgid "You can save this theme by pressing the Save Theme button."
+msgstr "Du kan lagre dette temaet ved å klikke på «Lagre tema»-knappen."
 
 #: capplets/ui-properties/behavior.desktop.in.h:1
 msgid "Customize the appearance of toolbars and menubars in applications"
@@ -2341,15 +2368,15 @@ msgstr "Rull opp"
 #: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
 msgid ""
 "If true, the mime handlers for text/plain and text/* will be kept in sync"
-msgstr ""
+msgstr "Hvis satt til sann vil MIME-håndtererene for text/plain og text/* holdes synkronisert"
 
 #: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:2
 msgid "Sync text/plain and text/* handlers"
-msgstr ""
+msgstr "Synkroniser håndterere for text/plain og text/*"
 
 #: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:1
 msgid "Display a dialog when there are errors running XScreenSaver"
-msgstr ""
+msgstr "Vis en dialog når det oppstår problemer med å kjøre XScreenSaver"
 
 #: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:2
 msgid "Run XScreenSaver at login"
@@ -2382,7 +2409,9 @@ msgstr "RGBA-rekkefølge"
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:5
 msgid ""
 "Resolution used for converting font sizes to pixel sizes, in dots per inch"
-msgstr "Oppløsning som brukes for å konvertere skriftstørrelser til pikselstørrelser i punkter per tomme"
+msgstr ""
+"Oppløsning som brukes for å konvertere skriftstørrelser til pikselstørrelser "
+"i punkter per tomme"
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:6
 msgid ""
@@ -2405,6 +2434,12 @@ msgid ""
 "\" - no hinting, \"slight\", \"medium\", and \"full\" - as much hinting as "
 "possible; may cause distortion of letter forms."
 msgstr ""
+
+#~ msgid "That accelerator key is already in use by: %s\n"
+#~ msgstr "Denne akselleratortasten er allerede i bruk av: %s\n"
+
+#~ msgid "Current modified"
+#~ msgstr "Aktivt tema endret"
 
 #~ msgid "Super"
 #~ msgstr "Super"
@@ -3261,9 +3296,6 @@ msgstr ""
 
 #~ msgid "_Sound"
 #~ msgstr "_Lyd"
-
-#~ msgid "Theme Properties"
-#~ msgstr "Egenskaper for tema"
 
 #~ msgid "Starting esd\n"
 #~ msgstr "Starter esd\n"
