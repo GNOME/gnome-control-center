@@ -6,10 +6,10 @@
 # Leonid Kanter <leon@asplinux.ru>, 2003
 msgid ""
 msgstr ""
-"Project-Id-Version: ru\n"
+"Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-11-12 15:42-0500\n"
-"PO-Revision-Date: 2003-11-18 13:41+0200\n"
+"POT-Creation-Date: 2003-11-26 02:44+0100\n"
+"PO-Revision-Date: 2003-11-26 12:56+0200\n"
 "Last-Translator: Leonid Kanter <leon@asplinux.ru>\n"
 "Language-Team:  <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -32,8 +32,8 @@ msgid ""
 "<small><i><b>Note:</b> Changes to this setting will not take effect until "
 "you next log in.</i></small>"
 msgstr ""
-"<i><small><b>Примечание:</b> Изменение этого параметра вступит "
-"в силу только после следующей регистрации в системе.</small></i>"
+"<i><small><b>Примечание:</b> Изменение этого параметра вступит в силу только "
+"после следующей регистрации в системе.</small></i>"
 
 #: capplets/accessibility/at-properties/at-enable-dialog.glade.h:4
 msgid "Assistive Technology Preferences"
@@ -98,21 +98,21 @@ msgid ""
 "capabilities."
 msgstr ""
 "В вашей системе установлена поддержка не всех доступных вспомогательных "
-"технологий.  Для поддержки увеличительного стекла и чтения с экрана необходимо "
-"установить пакет 'gnopernicus'."
+"технологий.  Для поддержки увеличительного стекла и чтения с экрана "
+"необходимо установить пакет 'gnopernicus'."
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:241
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:236
 #, c-format
 msgid "There was an error launching the mouse preferences dialog: %s"
 msgstr "Произошла ошибка при запуске диалога настройки мыши: %s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:337
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:395
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:332
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:390
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Невозможно импортировать параметры AccessX из файла \"%s\""
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:468
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:463
 msgid "Import Feature Settings File"
 msgstr "Импорт файла параметров"
 
@@ -126,7 +126,7 @@ msgstr "Клавиатура"
 msgid "Set your keyboard accessibility preferences"
 msgstr "Диалог настройки специальных возможностей клавиатуры"
 
-#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.c:58
+#: capplets/accessibility/keyboard/gnome-accessibility-keyboard-properties.c:60
 msgid ""
 "This system does not seem to have the XKB extension.  The keyboard "
 "accessibility features will not operate without it."
@@ -681,6 +681,10 @@ msgstr "Предпочтительные приложения"
 msgid "Select your default applications"
 msgstr "Диалог выбора исходных приложений-обработчиков"
 
+#: capplets/default-applications/gnome-default-applications-properties.c:108
+msgid "Please specify a name and a command for this editor."
+msgstr "Укажите имя и команду для этого редактора."
+
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:39
 msgid "Epiphany"
 msgstr "Epiphany"
@@ -757,10 +761,6 @@ msgstr "RXVT"
 #: capplets/default-applications/gnome-default-applications-properties-structs.c:70
 msgid "ETerm"
 msgstr "ETerm"
-
-#: capplets/default-applications/gnome-default-applications-properties.c:108
-msgid "Please specify a name and a command for this editor."
-msgstr "Укажите имя и команду для этого редактора."
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:2
 msgid "Add..."
@@ -875,7 +875,7 @@ msgid "Window Manager"
 msgstr "Менеджер окон"
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:30
-#: capplets/file-types/file-types-properties.glade.h:23
+#: capplets/file-types/file-types-properties.glade.h:22
 msgid "_Name:"
 msgstr "Наи_менование:"
 
@@ -1111,7 +1111,7 @@ msgid "Extensions"
 msgstr "Расширения"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
-#: capplets/file-types/file-types-properties.glade.h:11
+#: capplets/file-types/file-types-properties.glade.h:10
 msgid "File Types and Programs"
 msgstr "Типы файлов и программы"
 
@@ -1134,87 +1134,83 @@ msgid "Add _Service..."
 msgstr "Добавить с_ервис..."
 
 #: capplets/file-types/file-types-properties.glade.h:5
-msgid "Browse icons"
-msgstr "Просмотреть значки"
-
-#: capplets/file-types/file-types-properties.glade.h:6
 msgid "C_hoose..."
 msgstr "_Выбрать..."
 
-#: capplets/file-types/file-types-properties.glade.h:7
+#: capplets/file-types/file-types-properties.glade.h:6
 msgid "Cate_gory:"
 msgstr "Кате_гория:"
 
-#: capplets/file-types/file-types-properties.glade.h:8
+#: capplets/file-types/file-types-properties.glade.h:7
 msgid "D_efault action:"
 msgstr "Ис_ходная команда:"
 
-#: capplets/file-types/file-types-properties.glade.h:9
+#: capplets/file-types/file-types-properties.glade.h:8
 msgid "Default _action:"
 msgstr "Ис_ходная команда:"
 
-#: capplets/file-types/file-types-properties.glade.h:10
+#: capplets/file-types/file-types-properties.glade.h:9
 #: capplets/file-types/mime-edit-dialog.c:208
 msgid "Edit file type"
 msgstr "Изменить тип файла"
 
-#: capplets/file-types/file-types-properties.glade.h:12
+#: capplets/file-types/file-types-properties.glade.h:11
 msgid "Filename extensions:"
 msgstr "Расширения имён файлов:"
 
-#: capplets/file-types/file-types-properties.glade.h:13
+#: capplets/file-types/file-types-properties.glade.h:12
 msgid "Look at content"
 msgstr "Смотреть содержимое"
 
-#: capplets/file-types/file-types-properties.glade.h:14
+#: capplets/file-types/file-types-properties.glade.h:13
 msgid "P_rogram:"
 msgstr "_Программа"
 
-#: capplets/file-types/file-types-properties.glade.h:15
+#: capplets/file-types/file-types-properties.glade.h:14
 msgid "Program to Run"
 msgstr "Выполняемая программа"
 
-#: capplets/file-types/file-types-properties.glade.h:16
+#: capplets/file-types/file-types-properties.glade.h:15
 msgid "Run a program"
 msgstr "Выполнить программу"
 
-#: capplets/file-types/file-types-properties.glade.h:17
+#: capplets/file-types/file-types-properties.glade.h:16
 msgid "Run in _Terminal"
 msgstr "Выполнить в т_ерминале"
 
-#: capplets/file-types/file-types-properties.glade.h:18
+#: capplets/file-types/file-types-properties.glade.h:17
 msgid "Use parent category _defaults"
 msgstr "Использовать _умолчания для родительской категории"
 
-#: capplets/file-types/file-types-properties.glade.h:19
+#: capplets/file-types/file-types-properties.glade.h:18
 msgid "_Add:"
 msgstr "Доб_авить:"
 
-#: capplets/file-types/file-types-properties.glade.h:20
+#: capplets/file-types/file-types-properties.glade.h:19
 msgid "_Description:"
 msgstr "_Описание:"
 
-#: capplets/file-types/file-types-properties.glade.h:21
+#: capplets/file-types/file-types-properties.glade.h:20
 msgid "_Edit..."
 msgstr "_Изменить..."
 
-#: capplets/file-types/file-types-properties.glade.h:22
+#: capplets/file-types/file-types-properties.glade.h:21
 msgid "_MIME type:"
 msgstr "Тип _MIME:"
 
-#: capplets/file-types/file-types-properties.glade.h:24
+#: capplets/file-types/file-types-properties.glade.h:23
 msgid "_Program to run:"
 msgstr "Запускаемая _программа:"
 
-#: capplets/file-types/file-types-properties.glade.h:25
+#: capplets/file-types/file-types-properties.glade.h:24
 msgid "_Protocol:"
 msgstr "П_ротокол:"
 
-#: capplets/file-types/file-types-properties.glade.h:26
+#: capplets/file-types/file-types-properties.glade.h:25
 msgid "_Remove"
 msgstr "У_брать"
 
-#: capplets/file-types/file-types-properties.glade.h:27
+#: capplets/file-types/file-types-properties.glade.h:26
 msgid "_Viewer component:"
 msgstr "Компонент про_смотра:"
 
@@ -1425,72 +1421,72 @@ msgid "<b>Font Rendering</b>"
 msgstr "<b>Отрисовка шрифтов</b>"
 
 #: capplets/font/font-properties.glade.h:3
-msgid "<b>Hinting</b>:"
-msgstr "<b>Уточнение</b>:"
-
-#: capplets/font/font-properties.glade.h:4
-msgid "<b>Smoothing</b>:"
-msgstr "<b>Сглаживание</b>:"
-
-#: capplets/font/font-properties.glade.h:5
-msgid "<b>Subpixel order</b>:"
-msgstr "<b>Порядок при субпиксельном сглаживании</b>:"
-
-#: capplets/font/font-properties.glade.h:6
 msgid "Best _shapes"
 msgstr "Наилучшее _начертание"
 
-#: capplets/font/font-properties.glade.h:7
+#: capplets/font/font-properties.glade.h:4
 msgid "Best co_ntrast"
 msgstr "Наилучшая _контрастность"
 
-#: capplets/font/font-properties.glade.h:8
+#: capplets/font/font-properties.glade.h:5
 msgid "De_tails..."
 msgstr "Показать в по_дробностях..."
 
-#: capplets/font/font-properties.glade.h:9
+#: capplets/font/font-properties.glade.h:6
 msgid "Font Preferences"
 msgstr "Настройка шрифтов"
 
-#: capplets/font/font-properties.glade.h:10
+#: capplets/font/font-properties.glade.h:7
 msgid "Font Rendering Details"
 msgstr "Подробности отрисовки шрифтов"
 
-#: capplets/font/font-properties.glade.h:11
+#: capplets/font/font-properties.glade.h:8
 msgid "G_rayscale"
 msgstr "Пол_утона"
 
-#: capplets/font/font-properties.glade.h:12
-msgid "Go _to font folder"
-msgstr "_Перейти в папку шрифтов"
+#: capplets/font/font-properties.glade.h:9
+msgid "Go to font folder"
+msgstr "Перейти в папку шрифтов"
 
-#: capplets/font/font-properties.glade.h:13
+#: capplets/font/font-properties.glade.h:10
+msgid "Hinting:"
+msgstr "Уточнение:"
+
+#: capplets/font/font-properties.glade.h:11
 msgid "N_one"
 msgstr "Н_ет"
 
-#: capplets/font/font-properties.glade.h:14
-msgid "R_esolution :"
-msgstr "_Разрешение:"
+#: capplets/font/font-properties.glade.h:12
+msgid "Resolution (_dots per inch):"
+msgstr "Разрешение (_точек на дюйм):"
 
-#: capplets/font/font-properties.glade.h:15
+#: capplets/font/font-properties.glade.h:13
 msgid "Set the font for applications"
 msgstr "Установите шрифт для приложений"
 
-#: capplets/font/font-properties.glade.h:16
+#: capplets/font/font-properties.glade.h:14
 msgid "Set the font for the icons on the desktop"
 msgstr "Установите шрифт для значков на рабочем столе"
 
-#: capplets/font/font-properties.glade.h:17
+#: capplets/font/font-properties.glade.h:15
 msgid "Set the monospace font for terminals and similar applications"
 msgstr "Установите шрифт для терминалов и подобных приложений"
 
-#: capplets/font/font-properties.glade.h:18
+#: capplets/font/font-properties.glade.h:16
+msgid "Smoothing:"
+msgstr "Сглаживание:"
+
+#: capplets/font/font-properties.glade.h:17
 msgid "Sub_pixel (LCDs)"
 msgstr "С_убпиксельное (ЖК-мониторы)"
 
-#: capplets/font/font-properties.glade.h:19
+#: capplets/font/font-properties.glade.h:18
 msgid "Sub_pixel smoothing (LCDs)"
 msgstr "С_убпиксельное сглаживание (для ЖК-мониторов)"
+
+#: capplets/font/font-properties.glade.h:19
+msgid "Subpixel order:"
+msgstr "Порядок при субпиксельном сглаживании:"
 
 #: capplets/font/font-properties.glade.h:20
 msgid "VB_GR"
@@ -1548,34 +1544,6 @@ msgstr "_VRGB"
 #: capplets/font/font-properties.glade.h:33
 msgid "_Window title font:"
 msgstr "Шрифт за_головка окна:"
-
-#: capplets/font/font-properties.glade.h:34
-msgid "dots per inch"
-msgstr "точек на дюйм"
-
-#: capplets/font/main.c:506 capplets/font/main.c:511
-msgid "Font may be too large"
-msgstr "Фонт может быть слишком большим"
-
-#: capplets/font/main.c:507
-#, c-format
-msgid ""
-"The font selected is %d points large, and may make it difficult to "
-"effectively use the computer.  It is recommended that you select a size "
-"smaller than %d."
-msgstr ""
-"Выбранный шрифт имеет размер %d пунктов, это может затрудинть использование "
-"компьютера. Рекомендуется выбрать выбрать размер шрифта менее %d."
-
-#: capplets/font/main.c:512
-#, c-format
-msgid ""
-"The font selected is %d points large, and may make it difficult to "
-"effectively use the computer.  It is recommended that you select a smaller "
-"sized font."
-msgstr ""
-"Выбранный шрифт имеет размер %d пунктов, это может затрудинть использование "
-"компьютера. Рекомендуется выбрать выбрать размер шрифта меньшего размера."
 
 #: capplets/keybindings/eggcellrendererkeys.c:160
 #: capplets/keybindings/eggcellrendererkeys.c:161
@@ -2808,39 +2776,41 @@ msgstr "/_Сделать перерыв"
 
 #: typing-break/drwright.c:466
 #, c-format
-msgid "%d minute until the next break"
-msgid_plural "%d minutes until the next break"
-msgstr[0] "%d минут до следующего перерыва"
-msgstr[1] ""
+msgid "%d minutes until the next break"
+msgstr "%d минут до следующего перерыва"
 
-#: typing-break/drwright.c:470
+#: typing-break/drwright.c:469
+msgid "One minute until the next break"
+msgstr "Одна минута до следующего перерыва"
+
+#: typing-break/drwright.c:471
 msgid "Less than one minute until the next break"
 msgstr "Менее одной минуты до следующего перерыва"
 
-#: typing-break/drwright.c:565
+#: typing-break/drwright.c:566
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
 "error: %s"
 msgstr "Не удается отобразить диалог настройки перерыва печати. Ошибка: %s"
 
-#: typing-break/drwright.c:605
+#: typing-break/drwright.c:606
 msgid "About GNOME Typing Monitor"
 msgstr "О программе \"Монитор печати\""
 
-#: typing-break/drwright.c:629
+#: typing-break/drwright.c:630
 msgid "A computer break reminder."
 msgstr "Программа напоминания о перерыве"
 
-#: typing-break/drwright.c:630
+#: typing-break/drwright.c:631
 msgid "Written by Richard Hult &lt;richard@imendio.com&gt;"
 msgstr "Автор: Richard Hult &lt;richard@imendio.com&gt;"
 
-#: typing-break/drwright.c:631
+#: typing-break/drwright.c:632
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Дизайн: Anders Carlsson"
 
-#: typing-break/drwright.c:804
+#: typing-break/drwright.c:805
 msgid "Break reminder"
 msgstr "Напоминание о перерыве"
 
@@ -2898,7 +2868,9 @@ msgstr "Элементы контекстного меню шрифтов"
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:1
 msgid "If set to true, then OpenType fonts will be thumbnailed."
-msgstr "Если этот ключ установлен, будут создаваться образцы просмотра шрифтов OpenType."
+msgstr ""
+"Если этот ключ установлен, будут создаваться образцы просмотра шрифтов "
+"OpenType."
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:2
 msgid "If set to true, then PCF fonts will be thumbnailed."
@@ -2906,7 +2878,9 @@ msgstr "Если этот ключ установлен, будут создав
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:3
 msgid "If set to true, then TrueType fonts will be thumbnailed."
-msgstr "Если этот ключ установлен, будут создаваться образцы просмотра шрифтов TrueType."
+msgstr ""
+"Если этот ключ установлен, будут создаваться образцы просмотра шрифтов "
+"TrueType."
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:4
 msgid "If set to true, then Type1 fonts will be thumbnailed."
@@ -2914,19 +2888,27 @@ msgstr "Если этот ключ установлен, будут создав
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:5
 msgid "Set this key to the command used to create thumbnails for OpenType fonts."
-msgstr "Этот ключ соответствует команде, используемой для создания образцов шрифтов OpenType."
+msgstr ""
+"Этот ключ соответствует команде, используемой для создания образцов шрифтов "
+"OpenType."
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:6
 msgid "Set this key to the command used to create thumbnails for PCF fonts."
-msgstr "Этот ключ соответствует команде, используемой для создания образцов шрифтов PCF."
+msgstr ""
+"Этот ключ соответствует команде, используемой для создания образцов шрифтов "
+"PCF."
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:7
 msgid "Set this key to the command used to create thumbnails for TrueType fonts."
-msgstr "Этот ключ соответствует команде, используемой для создания образцов шрифтов TrueType."
+msgstr ""
+"Этот ключ соответствует команде, используемой для создания образцов шрифтов "
+"TrueType."
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:8
 msgid "Set this key to the command used to create thumbnails for Type1 fonts."
-msgstr "Этот ключ соответствует команде, используемой для создания образцов шрифтов Type1."
+msgstr ""
+"Этот ключ соответствует команде, используемой для создания образцов шрифтов "
+"Type1."
 
 #: vfs-methods/fontilus/fontilus.schemas.in.h:9
 msgid "Thumbnail command for OpenType fonts"
@@ -2980,14 +2962,6 @@ msgstr "Элементы контекстного меню Наутилуса д
 msgid "Set as Application Font"
 msgstr "Установить как шрифт приложения"
 
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
-msgid "Theme Properties content view component"
-msgstr "Компонент просмотра свойств темы"
-
-#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
-msgid "Themus Theme Properties view"
-msgstr "Вид параметров темы Themus"
-
 #: vfs-methods/themus/apply-font.glade.h:1
 msgid " "
 msgstr " "
@@ -3009,6 +2983,14 @@ msgstr "Выбранная вами тема подразумевает новы
 #: vfs-methods/themus/apply-font.glade.h:5
 msgid "_Apply font"
 msgstr "_Применить шрифт"
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
+msgid "Theme Properties content view component"
+msgstr "Компонент просмотра свойств темы"
+
+#: vfs-methods/themus/Themus_Properties_View.server.in.in.h:3
+msgid "Themus Theme Properties view"
+msgstr "Вид параметров темы Themus"
 
 #: vfs-methods/themus/theme-method.c:514
 msgid "Themes"
@@ -3074,6 +3056,36 @@ msgstr "Создавать ли миниатюры установленных т
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Создавать ли миниатюры тем"
+
+#~ msgid "Browse icons"
+#~ msgstr "Просмотреть значки"
+
+#~ msgid "<b>Hinting</b>:"
+#~ msgstr "<b>Уточнение</b>:"
+
+#~ msgid "R_esolution :"
+#~ msgstr "_Разрешение:"
+
+#~ msgid "Font may be too large"
+#~ msgstr "Фонт может быть слишком большим"
+
+#~ msgid ""
+#~ "The font selected is %d points large, and may make it difficult to "
+#~ "effectively use the computer.  It is recommended that you select a size "
+#~ "smaller than %d."
+#~ msgstr ""
+#~ "Выбранный шрифт имеет размер %d пунктов, это может затрудинть "
+#~ "использование компьютера. Рекомендуется выбрать выбрать размер шрифта "
+#~ "менее %d."
+
+#~ msgid ""
+#~ "The font selected is %d points large, and may make it difficult to "
+#~ "effectively use the computer.  It is recommended that you select a "
+#~ "smaller sized font."
+#~ msgstr ""
+#~ "Выбранный шрифт имеет размер %d пунктов, это может затрудинть "
+#~ "использование компьютера. Рекомендуется выбрать выбрать размер шрифта "
+#~ "меньшего размера."
 
 #~ msgid "Select CDE AccessX file"
 #~ msgstr "Выберите файл AccessX среды CDE"
