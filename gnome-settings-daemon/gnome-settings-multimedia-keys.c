@@ -650,7 +650,7 @@ do_www_action (Acme *acme, const char *url)
 	}
 
 	if (url == NULL)
-		command = g_strdup_printf (string, "about:blank");
+		command = g_strdup_printf (string, "");
 	else
 		command = g_strdup_printf (string, url);
 
