@@ -1,13 +1,13 @@
-# gnome-core de.po
+# control-center de.po
 # Copyright (C) 1998 Free Software Foundation, Inc.
 # Carsten Schaar <nhadcasc@fs-maphy.uni-hannover.de>, 1998.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: enlightenment-conf 0.12\n"
-"POT-Creation-Date: 1999-06-09 15:59+0200\n"
-"PO-Revision-Date: 1999-05-19 15:47+02:00\n"
-"Last-Translator: Matthias Warkus <mawa@iname.com>\n"
+"Project-Id-Version: control-center 1.0.5\n"
+"POT-Creation-Date: 1999-07-24 00:02+0200\n"
+"PO-Revision-Date: 1999-07-24 00:24+02:00\n"
+"Last-Translator: Karsten Weiss <karsten@addx.au.s.shuttle.de>\n"
 "Language-Team: me and my monkey <mawa@iname.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
@@ -19,12 +19,13 @@ msgstr "Deaktiviert"
 
 #: capplets/background-properties/property-background.c:619
 msgid "Color"
-msgstr "Farbe"
+msgstr "Farben"
 
 #: capplets/background-properties/property-background.c:642
 msgid "Color 1"
 msgstr "Farbe 1"
 
+#. gtk_table_attach_defaults (GTK_TABLE(table), cp1, 0, 1, 1, 2);
 #. gtk_table_attach_defaults (GTK_TABLE(table), gtk_hseparator_new (), 0, 1, 2, 3);
 #: capplets/background-properties/property-background.c:646
 msgid "Color 2"
@@ -32,11 +33,11 @@ msgstr "Farbe 2"
 
 #: capplets/background-properties/property-background.c:655
 msgid "Solid"
-msgstr "Uni"
+msgstr "Einfarbig"
 
 #: capplets/background-properties/property-background.c:657
 msgid "Gradient"
-msgstr "Verlauf"
+msgstr "Farbverlauf"
 
 #: capplets/background-properties/property-background.c:658
 msgid "Vertical"
@@ -48,7 +49,7 @@ msgstr "Horizontal"
 
 #: capplets/background-properties/property-background.c:878
 msgid "Wallpaper Selection"
-msgstr "Hintergrundbild"
+msgstr "Hintergrundbild Auswahl"
 
 #: capplets/background-properties/property-background.c:883
 msgid "Can't find an hbox, using a normal file selection"
@@ -78,7 +79,7 @@ msgstr "Skaliert"
 
 #: capplets/background-properties/property-background.c:1007
 msgid "Scaled (keep aspect)"
-msgstr "Skaliert mit festem Verhältniss"
+msgstr "Skaliert (Seitenverhältnis beibehalten)"
 
 #: capplets/background-properties/property-background.c:1019
 msgid "Centered"
@@ -94,7 +95,7 @@ msgstr "Hintergrundauswahl abschalten"
 
 #: capplets/background-properties/property-background.c:1480
 msgid "Set parameters from saved state and exit"
-msgstr "Parameter einstellen und beenden"
+msgstr "Parameter vom gespeicherten Zustand einstellen und beenden"
 
 #: capplets/background-properties/property-background.c:1481
 msgid "IMAGE"
@@ -102,7 +103,7 @@ msgstr "BILD"
 
 #: capplets/background-properties/property-background.c:1481
 msgid "Sets the wallpaper to the value specified"
-msgstr "Hintergrundbild setzten"
+msgstr "Hintergrundbild setzen"
 
 #: capplets/background-properties/property-background.c:1482
 #: capplets/background-properties/property-background.c:1483
@@ -123,7 +124,7 @@ msgstr "ORIENT"
 
 #: capplets/background-properties/property-background.c:1484
 msgid "Gradient orientation: vertical or horizontal"
-msgstr "Verlaufrichtung: vertikal oder horizontal"
+msgstr "Farbverlaufrichtung: vertikal oder horizontal"
 
 #: capplets/background-properties/property-background.c:1485
 msgid "Use a solid fill for the background"
@@ -159,7 +160,7 @@ msgstr "Dauer (ms)"
 
 #: capplets/bell-properties/bell-properties.c:217
 msgid "Test"
-msgstr "Test"
+msgstr "Testen"
 
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:229
 msgid "Gnome editor"
@@ -171,19 +172,19 @@ msgstr "In Terminal ausführen"
 
 #: capplets/keyboard-properties/keyboard-properties.c:210
 msgid "Auto-repeat"
-msgstr "Tastenwiederholung verwenden"
+msgstr "Tastenwiederholung"
 
 #: capplets/keyboard-properties/keyboard-properties.c:221
 msgid "Enable auto-repeat"
-msgstr "Tastenwiederholung verwenden"
+msgstr "Tastenwiederholung aktivieren"
 
 #: capplets/keyboard-properties/keyboard-properties.c:231
 msgid "Repeat rate"
-msgstr "Wiederholungsrate"
+msgstr "Geschwindigkeit"
 
 #: capplets/keyboard-properties/keyboard-properties.c:234
 msgid "Repeat Delay"
-msgstr "Wiederholungsverzögerung"
+msgstr "Verzögerung"
 
 #: capplets/keyboard-properties/keyboard-properties.c:236
 msgid "Keyboard click"
@@ -191,15 +192,15 @@ msgstr "Tastaturklick"
 
 #: capplets/keyboard-properties/keyboard-properties.c:247
 msgid "Click on keypress"
-msgstr "Tastaturklick verwenden"
+msgstr "Tastaturklick aktivieren"
 
 #: capplets/keyboard-properties/keyboard-properties.c:257
 msgid "Click volume"
-msgstr "Lautstärke"
+msgstr "Klick Lautstärke"
 
 #: capplets/keyboard-properties/keyboard-properties.c:264
 msgid "Test settings"
-msgstr "Testeinstellungen"
+msgstr "Einstellungen testen"
 
 #. icon box
 #: capplets/mime-type/edit-window.c:105
@@ -214,12 +215,15 @@ msgstr "Mime-Typ: "
 msgid "Extension: "
 msgstr "Suffix: "
 
+#. gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
 #: capplets/mime-type/edit-window.c:133
-msgid "First Regular Expresion: "
+#: capplets/mime-type/new-mime-window.c:65
+msgid "First Regular Expression: "
 msgstr "Erster regulärer Ausdruck: "
 
 #: capplets/mime-type/edit-window.c:141
-msgid "Second Regular Expresion: "
+#: capplets/mime-type/new-mime-window.c:76
+msgid "Second Regular Expression: "
 msgstr "Zweiter regulärer Ausdruck: "
 
 #. Actions box
@@ -249,9 +253,22 @@ msgstr "Anzeigen"
 msgid "Edit"
 msgstr "Bearbeiten"
 
+#. we initialize everything
+#: capplets/mime-type/edit-window.c:238
+msgid "Set actions for "
+msgstr "Setze Aktionen für "
+
+#: capplets/mime-type/mime-data.c:354
+msgid "Mime Type"
+msgstr "Mime-Typ"
+
+#: capplets/mime-type/mime-data.c:355
+msgid "Extension"
+msgstr "Suffixe"
+
 #: capplets/mime-type/mime-data.c:449
 msgid "You must enter a mime-type"
-msgstr "Sie müssen einen Mime-Typen angeben"
+msgstr "Sie müssen einen Mime-Typ angeben"
 
 #: capplets/mime-type/mime-data.c:454
 msgid ""
@@ -320,11 +337,11 @@ msgstr "Hinzufügen..."
 msgid "Edit..."
 msgstr "Bearbeiten..."
 
-#: capplets/mime-type/new-mime-window.c:20
+#: capplets/mime-type/new-mime-window.c:21
 msgid "Add Mime Type"
 msgstr "Mime-Typ hinzufügen"
 
-#: capplets/mime-type/new-mime-window.c:21
+#: capplets/mime-type/new-mime-window.c:22
 msgid ""
 "Add a new Mime Type\n"
 "For example:  image/tiff; text/x-scheme"
@@ -332,15 +349,15 @@ msgstr ""
 "Einen neuen Mime-Typen hinzufügen\n"
 "Zum Beispiel:  image/tiff; text/x-scheme"
 
-#: capplets/mime-type/new-mime-window.c:26
+#: capplets/mime-type/new-mime-window.c:27
 msgid "Mime Type:"
 msgstr "Mime-Typ:"
 
-#: capplets/mime-type/new-mime-window.c:34
+#: capplets/mime-type/new-mime-window.c:35
 msgid "Extensions"
 msgstr "Suffixe"
 
-#: capplets/mime-type/new-mime-window.c:38
+#: capplets/mime-type/new-mime-window.c:39
 msgid ""
 "Type in the extensions for this mime-type.\n"
 "For example:  .html, .htm"
@@ -348,15 +365,15 @@ msgstr ""
 "Geben Sie die Suffixe für diesen Mime-Typen an.\n"
 "Zum Beispiel:  .html, .htm"
 
-#: capplets/mime-type/new-mime-window.c:45
+#: capplets/mime-type/new-mime-window.c:46
 msgid "Extension:"
 msgstr "Suffix:"
 
-#: capplets/mime-type/new-mime-window.c:50
-msgid "Regular Expresions"
-msgstr "Rguläre Ausdrücke"
+#: capplets/mime-type/new-mime-window.c:51
+msgid "Regular Expressions"
+msgstr "Reguläre Ausdrücke"
 
-#: capplets/mime-type/new-mime-window.c:54
+#: capplets/mime-type/new-mime-window.c:55
 msgid ""
 "You can set up two regular expressions here to identify the Mime Type\n"
 "by.  These fields are optional."
@@ -365,53 +382,44 @@ msgstr ""
 "identifizieren.\n"
 "Diese Felder sind optional."
 
-#. gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
-#: capplets/mime-type/new-mime-window.c:64
-msgid "First Regular Expression: "
-msgstr "Erster regulärer Ausdruck: "
-
-#: capplets/mime-type/new-mime-window.c:75
-msgid "Second Regular Expression: "
-msgstr "Zweiter regulärer Ausdruck: "
-
-#: capplets/mouse-properties/mouse-properties.c:252
+#: capplets/mouse-properties/mouse-properties.c:259
 msgid "Mouse buttons"
-msgstr "Mausknöpfe"
+msgstr "Maustasten"
 
-#: capplets/mouse-properties/mouse-properties.c:261
+#: capplets/mouse-properties/mouse-properties.c:268
 msgid "Left handed"
-msgstr "Linkshändig"
+msgstr "für Linkshänder"
 
-#: capplets/mouse-properties/mouse-properties.c:263
+#: capplets/mouse-properties/mouse-properties.c:270
 msgid "Right handed"
-msgstr "Rechtshändig"
+msgstr "für Rechtshänder"
 
 #. Mouse motion
-#: capplets/mouse-properties/mouse-properties.c:289
+#: capplets/mouse-properties/mouse-properties.c:296
 msgid "Mouse motion"
 msgstr "Mausbewegung"
 
-#: capplets/mouse-properties/mouse-properties.c:299
+#: capplets/mouse-properties/mouse-properties.c:306
 msgid "Acceleration"
 msgstr "Beschleunigung"
 
-#: capplets/mouse-properties/mouse-properties.c:299
+#: capplets/mouse-properties/mouse-properties.c:306
 msgid "Fast"
 msgstr "Groß"
 
-#: capplets/mouse-properties/mouse-properties.c:299
+#: capplets/mouse-properties/mouse-properties.c:306
 msgid "Slow"
 msgstr "Klein"
 
-#: capplets/mouse-properties/mouse-properties.c:310
+#: capplets/mouse-properties/mouse-properties.c:317
 msgid "Threshold"
-msgstr "Verzögerung"
+msgstr "Schwelle"
 
-#: capplets/mouse-properties/mouse-properties.c:310
+#: capplets/mouse-properties/mouse-properties.c:317
 msgid "Large"
 msgstr "Groß"
 
-#: capplets/mouse-properties/mouse-properties.c:310
+#: capplets/mouse-properties/mouse-properties.c:317
 msgid "Small"
 msgstr "Klein"
 
@@ -526,8 +534,7 @@ msgstr "Stil: "
 
 #: capplets/session-properties/gsm-client-list.c:30
 msgid "This button sets the start order of the selected programs.\n"
-msgstr ""
-"Dieser Knopf stellt die Startreihenfolge der ausgewählten Programme ein.\n"
+msgstr "Dieser Knopf stellt die Startreihenfolge der ausgewählten Programme ein.\n"
 
 #: capplets/session-properties/gsm-client-list.c:31
 msgid ""
@@ -927,7 +934,7 @@ msgstr "Maustasten"
 
 #: capplets/ui-properties/ui-properties.c:211
 msgid "Dialog position"
-msgstr "Position"
+msgstr "Dialogposition"
 
 #: capplets/ui-properties/ui-properties.c:216
 msgid "Dialog hints"
@@ -949,84 +956,92 @@ msgstr "Werkzeugleisten können abgetrennt und verschoben werden"
 msgid "Can detach and move menubars"
 msgstr "Menübalken können abgetrennt und verschoben werden"
 
-#: capplets/ui-properties/ui-properties.c:270
+#: capplets/ui-properties/ui-properties.c:269
+msgid "Menus can be torn off"
+msgstr "Menüs können losgerissen werden"
+
+#: capplets/ui-properties/ui-properties.c:279
 msgid "Menubars have relieved border"
 msgstr "Menübalken haben einen Reliefrand"
 
-#: capplets/ui-properties/ui-properties.c:279
+#: capplets/ui-properties/ui-properties.c:288
 msgid "Toolbars have relieved border"
 msgstr "Werkzeugleisten haben einen Reliefrand"
 
-#: capplets/ui-properties/ui-properties.c:288
+#: capplets/ui-properties/ui-properties.c:297
 msgid "Toolbar buttons have relieved border"
 msgstr "Werkzeugbuttons haben einen Reliefrand"
 
-#: capplets/ui-properties/ui-properties.c:297
+#: capplets/ui-properties/ui-properties.c:306
 msgid "Toolbars have line separators"
 msgstr "Werkzeugleisten haben Trennstriche"
 
-#: capplets/ui-properties/ui-properties.c:306
+#: capplets/ui-properties/ui-properties.c:315
 msgid "Toolbars have text labels"
 msgstr "Werkzeugleisten haben Beschriftungen"
 
-#: capplets/ui-properties/ui-properties.c:315
-msgid "Statusbar is interactive when possible"
-msgstr "Statuszeile ist interaktiv, wenn möglich"
-
 #: capplets/ui-properties/ui-properties.c:324
+msgid "Statusbar is interactive when possible"
+msgstr "Statuszeile ist, wenn möglich, interaktiv"
+
+#: capplets/ui-properties/ui-properties.c:333
 msgid "Statusbar progress meter on right"
 msgstr "Statuszeilen-Ablaufanzeige rechts"
 
-#: capplets/ui-properties/ui-properties.c:335
+#: capplets/ui-properties/ui-properties.c:344
 msgid "Dialog buttons have icons"
 msgstr "Dialogbuttons haben Icons"
 
-#: capplets/ui-properties/ui-properties.c:347
+#: capplets/ui-properties/ui-properties.c:356
 msgid "Menu items have icons"
 msgstr "Menüeinträge haben Icons"
 
-#: capplets/ui-properties/ui-properties.c:366
+#: capplets/ui-properties/ui-properties.c:375
 msgid "Default MDI mode"
 msgstr "Normaler MDI-Modus"
 
-#: capplets/ui-properties/ui-properties.c:371
+#: capplets/ui-properties/ui-properties.c:380
 msgid "MDI notebook tab position"
 msgstr "MDI-Notizbuch-Reiterposition"
 
-#: capplets/url-properties/url-properties.c:69
+#: capplets/url-properties/url-properties.c:48
+msgid "Error initializing the `url-properties' capplet."
+msgstr "Fehler beim Initialisieren des 'Öffnen von URLs' Capplets."
+
+#: capplets/url-properties/url-properties.c:71
 msgid "Protocol"
 msgstr "Protokoll"
 
-#: capplets/url-properties/url-properties.c:69
+#: capplets/url-properties/url-properties.c:71
 msgid "Command"
 msgstr "Befehl"
 
-#: capplets/url-properties/url-properties.c:85
+#: capplets/url-properties/url-properties.c:87
 msgid "handler:"
 msgstr "Handler:"
 
 #. set some commonly used handlers
-#: capplets/url-properties/url-properties.c:95
+#: capplets/url-properties/url-properties.c:97
 msgid "Netscape"
 msgstr "Netscape"
 
-#: capplets/url-properties/url-properties.c:100
+#: capplets/url-properties/url-properties.c:102
 msgid "Netscape (new window)"
 msgstr "Netscape (neues Fenster)"
 
-#: capplets/url-properties/url-properties.c:106
+#: capplets/url-properties/url-properties.c:108
 msgid "Help browser"
 msgstr "Hilfebrowser"
 
-#: capplets/url-properties/url-properties.c:111
+#: capplets/url-properties/url-properties.c:113
 msgid "Help browser (new window)"
 msgstr "Hilfebrowser (neues Fenster)"
 
-#: capplets/url-properties/url-properties.c:123
+#: capplets/url-properties/url-properties.c:125
 msgid "Set"
 msgstr "Festsetzen"
 
-#: capplets/url-properties/url-properties.c:131
+#: capplets/url-properties/url-properties.c:133
 msgid "Remove"
 msgstr "Löschen"
 
@@ -1149,9 +1164,9 @@ msgstr "Übernehmen"
 
 #: control-center/capplet-manager.c:175
 msgid "Revert"
-msgstr "Rückgängi"
+msgstr "Rückgängig"
 
-#: control-center/capplet-manager.c:188 control-center/main.c:30
+#: control-center/capplet-manager.c:188 control-center/main.c:31
 msgid "Help"
 msgstr "Hilfe"
 
@@ -1203,21 +1218,21 @@ msgstr "Auszuführender Capplet-Befehl."
 msgid "CAPPLET"
 msgstr "CAPPLET"
 
-#: control-center/main.c:30
+#: control-center/main.c:31
 msgid "Help with the GNOME control-center."
 msgstr "Hilfe zum GNOME-Kontrollzentrum."
 
 #. we create the widgets
-#: control-center/main.c:58
+#: control-center/main.c:59
 msgid "Warning:"
 msgstr "Warnung:"
 
-#: control-center/main.c:58
+#: control-center/main.c:59
 msgid "Discard all changes"
 msgstr "Alle Änderungen verwerfen"
 
 #. ...labels, etc
-#: control-center/main.c:67
+#: control-center/main.c:68
 msgid ""
 "The following modules have had changes made, but not committed.  If you "
 "would like to edit them, please double click on the appropriate entry."
@@ -1227,6 +1242,6 @@ msgstr ""
 "entsprechenden Eintrag."
 
 #. create the app
-#: control-center/main.c:162
+#: control-center/main.c:184
 msgid "Control Center"
 msgstr "Kontrollzentrum"
