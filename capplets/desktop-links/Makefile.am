@@ -24,8 +24,7 @@ EXTRA_DIST = $(desktop_in_in_files) $(groups_in_in_files) $(pixmaps_DATA)
 $(desktop_in_files): %.desktop.in: %.desktop.in.in
 	    sed s#Icon=#Icon=$(GNOMECC_ICONS_DIR)/# < $< > $@
 
-$(desktop_files): %.desktop: %.desktop.in
-	$(top_builddir)/intltool-merge -d $(top_srcdir)/po $< $@
+@INTLTOOL_DESKTOP_RULE@
 
 all-local: $(desktop_files) $(groups_files)
 
@@ -49,5 +48,4 @@ Gnomecc_DATA = $(groups_files)
 $(groups_in_files): %.directory.in: %.directory.in.in
 	    sed s#Icon=#Icon=$(pixmapsdir)/# < $< > $@
 
-$(groups_files): %.directory: %.directory.in
-	$(top_builddir)/intltool-merge -d $(top_srcdir)/po $< $@
+@INTLTOOL_DIRECTORY_RULE@
