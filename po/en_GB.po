@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-centre CVS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-30 22:05+0000\n"
-"PO-Revision-Date: 2005-01-30 22:09+0100\n"
+"POT-Creation-Date: 2005-02-07 12:07+0000\n"
+"PO-Revision-Date: 2005-02-07 12:21+0100\n"
 "Last-Translator: David Lodge <dave@cirt.net>\n"
 "Language-Team: English/GB <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -551,43 +551,43 @@ msgstr "_Style:"
 msgid "There was an error displaying help: %s"
 msgstr "There was an error displaying help: %s"
 
-#: capplets/background/gnome-wp-capplet.c:1064
-#: capplets/background/gnome-wp-capplet.c:1080
+#: capplets/background/gnome-wp-capplet.c:1061
+#: capplets/background/gnome-wp-capplet.c:1077
 msgid "Centered"
 msgstr "Centred"
 
-#: capplets/background/gnome-wp-capplet.c:1088
-#: capplets/background/gnome-wp-capplet.c:1103
+#: capplets/background/gnome-wp-capplet.c:1085
+#: capplets/background/gnome-wp-capplet.c:1100
 msgid "Fill Screen"
 msgstr "Fill Screen"
 
-#: capplets/background/gnome-wp-capplet.c:1111
-#: capplets/background/gnome-wp-capplet.c:1126
+#: capplets/background/gnome-wp-capplet.c:1108
+#: capplets/background/gnome-wp-capplet.c:1123
 msgid "Scaled"
 msgstr "Scaled"
 
-#: capplets/background/gnome-wp-capplet.c:1134
-#: capplets/background/gnome-wp-capplet.c:1149
+#: capplets/background/gnome-wp-capplet.c:1131
+#: capplets/background/gnome-wp-capplet.c:1146
 msgid "Tiled"
 msgstr "Tiled"
 
-#: capplets/background/gnome-wp-capplet.c:1173
-#: capplets/background/gnome-wp-capplet.c:1182
+#: capplets/background/gnome-wp-capplet.c:1170
+#: capplets/background/gnome-wp-capplet.c:1179
 msgid "Solid Color"
 msgstr "Solid Colour"
 
-#: capplets/background/gnome-wp-capplet.c:1190
-#: capplets/background/gnome-wp-capplet.c:1199
+#: capplets/background/gnome-wp-capplet.c:1187
+#: capplets/background/gnome-wp-capplet.c:1196
 msgid "Horizontal Gradient"
 msgstr "Horizontal Gradient"
 
-#: capplets/background/gnome-wp-capplet.c:1207
-#: capplets/background/gnome-wp-capplet.c:1216
+#: capplets/background/gnome-wp-capplet.c:1204
+#: capplets/background/gnome-wp-capplet.c:1213
 msgid "Vertical Gradient"
 msgstr "Vertical Gradient"
 
 #. Create the file chooser dialog stuff here
-#: capplets/background/gnome-wp-capplet.c:1263
+#: capplets/background/gnome-wp-capplet.c:1260
 msgid "Add Wallpaper"
 msgstr "Add Wallpaper"
 
@@ -2157,23 +2157,89 @@ msgstr "_Sounds for events"
 msgid "_Visual feedback:"
 msgstr "_Visual feedback:"
 
-#: capplets/theme-switcher/gnome-theme-details.c:370
+#: capplets/theme-switcher/gnome-theme-details.c:349
 msgid "No themes could be found on your system.  This probably means that your \"Theme Preferences\" dialog was improperly installed, or you haven't installed the \"gnome-themes\" package."
 msgstr "No themes could be found on your system.  This probably means that your \"Theme Preferences\" dialogue was improperly installed, or you haven't installed the \"gnome-themes\" package."
 
-#: capplets/theme-switcher/gnome-theme-installer.c:103
+#: capplets/theme-switcher/gnome-theme-installer.c:214
 msgid "This theme is not in a supported format."
 msgstr "This theme is not in a supported format."
 
-#: capplets/theme-switcher/gnome-theme-installer.c:139
+#: capplets/theme-switcher/gnome-theme-installer.c:229
+msgid "Failed to create temporal directory"
+msgstr "Failed to create temporal directory"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:246
+msgid ""
+"Can not install theme. \n"
+"There are not bzip2 utility in the system."
+msgstr ""
+"Can not install theme. \n"
+"There are not bzip2 utility in the system."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:260
+#: capplets/theme-switcher/gnome-theme-installer.c:289
+#: capplets/theme-switcher/gnome-theme-installer.c:355
+msgid "Installation Failed"
+msgstr "Installation Failed"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:276
+msgid ""
+"Can not install themes. \n"
+"There are not gzip utility in the system."
+msgstr ""
+"Can not install themes. \n"
+"There are not gzip utility in the system."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:306
+#, c-format
+msgid ""
+"Icon Theme %s correctly installed.\n"
+"You can select it in the theme details."
+msgstr ""
+"Icon Theme %s correctly installed.\n"
+"You can select it in the theme details."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:309
+#, c-format
+msgid "Gnome Theme %s correctly installed"
+msgstr "Gnome Theme %s correctly installed"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:312
+#, c-format
+msgid ""
+"Windows Border Theme %s correctly installed.\n"
+"You can select it in the theme details."
+msgstr ""
+"Windows Border Theme %s correctly installed.\n"
+"You can select it in the theme details."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:315
+#, c-format
+msgid ""
+"Controls Theme %s correctly installed.\n"
+"You can select it in the theme details."
+msgstr ""
+"Controls Theme %s correctly installed.\n"
+"You can select it in the theme details."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:323
+msgid "The theme is a engine. You need to compile the theme."
+msgstr "The theme is a engine. You need to compile the theme."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:335
+msgid "The file format is invalid"
+msgstr "The file format is invalid"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:407
 msgid "No theme file location specified to install"
 msgstr "No theme file location specified to install"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:156
+#: capplets/theme-switcher/gnome-theme-installer.c:424
 msgid "The theme file location specified to install is invalid"
 msgstr "The theme file location specified to install is invalid"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:176
+#: capplets/theme-switcher/gnome-theme-installer.c:444
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
@@ -2182,10 +2248,22 @@ msgstr ""
 "Insufficient permissions to install the theme in:\n"
 "%s"
 
-#: capplets/theme-switcher/gnome-theme-installer.c:216
+#: capplets/theme-switcher/gnome-theme-installer.c:463
+msgid "The file format is invalid."
+msgstr "The file format is invalid."
+
+#: capplets/theme-switcher/gnome-theme-installer.c:490
 #, c-format
 msgid "%s is the path where the theme files will be installed. This can not be selected as the source location"
 msgstr "%s is the path where the theme files will be installed. This can not be selected as the source location"
+
+#: capplets/theme-switcher/gnome-theme-installer.c:543
+msgid ""
+"Cannot install theme.\n"
+"The tar program is not installed on your system."
+msgstr ""
+"Cannot install theme.\n"
+"The tar program is not installed on your system."
 
 #: capplets/theme-switcher/gnome-theme-manager.c:676
 msgid "Custom theme"
@@ -2195,7 +2273,7 @@ msgstr "Custom theme"
 msgid "You can save this theme by pressing the Save Theme button."
 msgstr "You can save this theme by pressing the Save Theme button."
 
-#: capplets/theme-switcher/gnome-theme-manager.c:1454
+#: capplets/theme-switcher/gnome-theme-manager.c:1466
 msgid "The default theme schemas could not be found on your system.  This means that you probably don't have metacity installed, or that your gconf is configured incorrectly."
 msgstr "The default theme schemas could not be found on your system.  This means that you probably don't have metacity installed, or that your gconf is configured incorrectly."
 
@@ -2541,7 +2619,7 @@ msgstr "Control Centre view factory"
 msgid "View as Control Center"
 msgstr "View as Control Centre"
 
-#: control-center/control-center-categories.c:248
+#: control-center/control-center-categories.c:249
 msgid "Others"
 msgstr "Others"
 
@@ -2651,38 +2729,38 @@ msgstr ""
 "Error while trying to run (%s)\n"
 "which is linked to the key (%s)"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:96
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:99
 #, c-format
 msgid ""
 "Error activating XKB configuration.\n"
-"It can have under various circumstances:\n"
+"It can happen under various circumstances:\n"
 "- a bug in libxklavier library\n"
 "- a bug in X server (xkbcomp, xmodmap utilities)\n"
-"- X server with incompatible libxkbfile implemenation\n"
+"- X server with incompatible libxkbfile implementation\n"
 "\n"
 "X server version data:\n"
 "%s\n"
 "%d\n"
 "%s\n"
 "If you report this situation as a bug, please include:\n"
-"- The result of <b>xprop -root | grep XKB</b>\n"
-"- The result of <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/kbd</b>"
+"- The result of %s\n"
+"- The result of %s"
 msgstr ""
 "Error activating XKB configuration.\n"
-"It can have under various circumstances:\n"
+"It can happen under various circumstances:\n"
 "- a bug in libxklavier library\n"
 "- a bug in X server (xkbcomp, xmodmap utilities)\n"
-"- X server with incompatible libxkbfile implemenation\n"
+"- X server with incompatible libxkbfile implementation\n"
 "\n"
 "X server version data:\n"
 "%s\n"
 "%d\n"
 "%s\n"
 "If you report this situation as a bug, please include:\n"
-"- The result of <b>xprop -root | grep XKB</b>\n"
-"- The result of <b>gconftool-2 -R /desktop/gnome/peripherals/keyboard/kbd</b>"
+"- The result of %s\n"
+"- The result of %s"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:110
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:113
 msgid ""
 "You are using XFree 4.3.0.\n"
 "There are known problems with complex XKB configurations.\n"
@@ -2692,22 +2770,21 @@ msgstr ""
 "There are known problems with complex XKB configurations.\n"
 "Try using simpler configuration or a newer version of the XFree software."
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:213
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:226
+msgid "Do _not show this warning again"
+msgstr "Do _not show this warning again"
+
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:237
 msgid "The X system keyboard settings differ from your current GNOME keyboard settings.  Which set would you like to use?"
 msgstr "The X system keyboard settings differ from your current GNOME keyboard settings.  Which set would you like to use?"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:216
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:247
 msgid "Use X settings"
 msgstr "Use X settings"
 
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:218
+#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:249
 msgid "Use GNOME settings"
 msgstr "Use GNOME settings"
-
-#: gnome-settings-daemon/gnome-settings-keyboard-xkb.c:270
-#, c-format
-msgid "You have a keyboard remapping file (%s) in your home directory whose contents will now be ignored. You can use the keyboard preferences to restore them."
-msgstr "You have a keyboard remapping file (%s) in your home directory whose contents will now be ignored. You can use the keyboard preferences to restore them."
 
 #: gnome-settings-daemon/gnome-settings-multimedia-keys.c:126
 #, c-format
@@ -3087,56 +3164,68 @@ msgid "A collection of scripts to run whenever the keyboard state is reloaded. U
 msgstr "A collection of scripts to run whenever the keyboard state is reloaded. Useful for re-applying xmodmap based adjustments"
 
 #: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:2
+msgid "A list of modmap files available in the $HOME directory."
+msgstr "A list of modmap files available in the $HOME directory."
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
 msgid "Default group, assigned on window creation"
 msgstr "Default group, assigned on window creation"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:3
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
 msgid "Keep and manage separate group per window"
 msgstr "Keep and manage separate group per window"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:4
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
 msgid "Keyboard Update Handlers"
 msgstr "Keyboard Update Handlers"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:5
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:6
 msgid "Keyboard layout"
 msgstr "Keyboard layout"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:6
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:7
 msgid "Keyboard model"
 msgstr "Keyboard model"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:7
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:8
 msgid "Keyboard options"
 msgstr "Keyboard options"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:8
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
 msgid "Keyboard settings in gconf will be overridden from the system ASAP"
 msgstr "Keyboard settings in gconf will be overridden from the system ASAP"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:9
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
 msgid "Save/restore indicators together with layout groups"
 msgstr "Save/restore indicators together with layout groups"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:10
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:11
 msgid "Show layout names instead of group names"
 msgstr "Show layout names instead of group names"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:11
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:12
 msgid "Show layout names instead of group names (only for versions of XFree supporting multiple layouts)"
 msgstr "Show layout names instead of group names (only for versions of XFree supporting multiple layouts)"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:12
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:13
+msgid "Suppress the \"X sysconfig changed\" warning message"
+msgstr "Suppress the \"X sysconfig changed\" warning message"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
 msgid "Very soon, keyboard settings in gconf will be overridden (from the system configuration)"
 msgstr "Very soon, keyboard settings in gconf will be overridden (from the system configuration)"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:13
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:15
 msgid "keyboard layout"
 msgstr "keyboard layout"
 
-#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:14
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:16
 msgid "keyboard model"
 msgstr "keyboard model"
+
+#: schemas/desktop_gnome_peripherals_keyboard_xkb.schemas.in.h:17
+msgid "modmap file list"
+msgstr "modmap file list"
 
 #: typing-break/drw-break-window.c:209
 msgid "_Postpone break"
@@ -3191,7 +3280,7 @@ msgstr "Written by Richard Hult &lt;richard@imendio.com&gt;"
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Eye candy added by Anders Carlsson"
 
-#: typing-break/drwright.c:832
+#: typing-break/drwright.c:833
 msgid "Break reminder"
 msgstr "Break reminder"
 
@@ -3200,8 +3289,8 @@ msgid "The typing monitor is already running."
 msgstr "The typing monitor is already running."
 
 #: typing-break/main.c:106
-msgid "The typing monitor uses the notification area to display information. You don't seem to have a notification area on your panel. You can add it by right-clicking on your panel and choose 'Add to panel -> Utilities -> Notification area'."
-msgstr "The typing monitor uses the notification area to display information. You don't seem to have a notification area on your panel. You can add it by right-clicking on your panel and choose 'Add to panel -> Utilities -> Notification area'."
+msgid "The typing monitor uses the notification area to display information. You don't seem to have a notification area on your panel. You can add it by right-clicking on your panel and choosing 'Add to panel', selecting 'Notification area' and clicking 'Add'."
+msgstr "The typing monitor uses the notification area to display information. You don't seem to have a notification area on your panel. You can add it by right-clicking on your panel and choosing 'Add to panel', selecting 'Notification area' and clicking 'Add'."
 
 #: vfs-methods/fontilus/font-view.c:125
 msgid "The quick brown fox jumps over the lazy dog. 0123456789"
