@@ -533,17 +533,19 @@ config_log_write_entry (ConfigLog *config_log, gchar *backend_id,
 	config_log->p->log_data =
 		g_list_prepend (config_log->p->log_data, entry);
 
-	if (config_log->p->socket_owner) {
 #if 0
+	if (config_log->p->socket_owner) {
 		slave_broadcast_data (NULL, config_log);
 #endif
 		dump_log (config_log);
 		if (config_log->p->file_buffer)
 			io_buffer_destroy (config_log->p->file_buffer);
 		do_load (config_log);
+#if 0
 	} else {
 		write_log (config_log->p->socket_buffer, entry);
 	}
+#endif
 
 	return entry->id;
 }

@@ -2,8 +2,10 @@
 
 	* config-log.c (socket_data_cb): Close the socket if we couldn't
 	load the log entry
-	(config_log_destroy): 
+	(config_log_destroy):
 	(config_log_open): Disable socket sync system
+	(config_log_write_entry): Make sure to write log when socket_owner
+	not set
 
 2001-07-27  Bradford Hovinen  <hovinen@ximian.com>
 
