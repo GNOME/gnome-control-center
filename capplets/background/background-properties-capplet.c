@@ -348,7 +348,7 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset, ApplierSet *set)
 	g_object_set_data (G_OBJECT (set->prefs), "color2-label", WID("color2_label"));
 
 	peditor = gconf_peditor_new_select_menu_with_enum
-		(changeset, BG_PREFERENCES_COLOR_SHADING_TYPE, WID ("border_shading"), bg_preferences_orientation_get_type (), NULL);
+		(changeset, BG_PREFERENCES_COLOR_SHADING_TYPE, WID ("border_shading"), bg_preferences_orientation_get_type (), TRUE, NULL);
 	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, set);
 
 	peditor = gconf_peditor_new_color
@@ -363,7 +363,7 @@ setup_dialog (GladeXML *dialog, GConfChangeSet *changeset, ApplierSet *set)
 	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, set);
 	
 	peditor = gconf_peditor_new_select_radio_with_enum
-		(changeset, BG_PREFERENCES_PICTURE_OPTIONS, gtk_radio_button_get_group (GTK_RADIO_BUTTON (WID ("radiobutton1"))), bg_preferences_wptype_get_type (), NULL);
+		(changeset, BG_PREFERENCES_PICTURE_OPTIONS, gtk_radio_button_get_group (GTK_RADIO_BUTTON (WID ("radiobutton1"))), bg_preferences_wptype_get_type (), TRUE, NULL);
 	g_signal_connect (peditor, "value-changed", (GCallback) peditor_value_changed, set);
 
 	/* Make sure preferences get applied to the preview */
