@@ -656,8 +656,18 @@ bonobo_config_archiver_new (const char *backend_id, const char *location_id)
 	archiver_db->doc = location_load_rollback_data
 		(archiver_db->location, NULL, 0, archiver_db->backend_id, TRUE);
 
-	if (archiver_db->doc == NULL)
-		archiver_db->doc = xmlNewDoc ("1.0");
+	if (archiver_db->doc == NULL) {
+		gchar *filename;
+
+		filename = g_strconcat (DEFAULTS_DIR, "/", archiver_db->backend_id, ".xml", NULL);
+		archiver_db->doc = xmlParseFile (filename);
+		g_free (filename);
+
+		if (archiver_db->doc == NULL) {
+			gtk_object_destroy (GTK_OBJECT (archiver_db));
+			return CORBA_OBJECT_NIL;
+		}
+	}
 
 	if (archiver_db->doc->root == NULL)
 		archiver_db->doc->root = 

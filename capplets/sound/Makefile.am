@@ -1,4 +1,4 @@
-Applicationsdir = $(datadir)/control-center/Desktop
+Applicationsdir = $(datadir)/control-center/capplets/Desktop
 Applications_DATA = \
 	sound-properties.desktop
 
@@ -6,9 +6,13 @@ pApplicationsdir = $(datadir)/gnome/apps/Settings/Desktop
 pApplications_DATA = \
 	sound-properties.desktop
 
-Gladedir = $(datadir)/control-center-data
+Gladedir = $(datadir)/control-center/interfaces
 Glade_DATA = \
 	sound-properties.glade
+
+defaultsdir= $(datadir)/control-center/defaults
+defaults_DATA = \
+	sound-properties.xml
 
 oafdir = $(datadir)/oaf
 oaf_DATA = \
@@ -17,7 +21,7 @@ oaf_DATA = \
 glade_msgs = \
 	sound-properties.glade.h
 
-EXTRA_DIST = ChangeLog $(Applications_DATA) $(Glade_DATA) $(glade_msgs) $(oaf_DATA)
+EXTRA_DIST = ChangeLog $(Applications_DATA) $(Glade_DATA) $(glade_msgs) $(oaf_DATA) $(defaults_DATA)
 
 INCLUDES = \
         -DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\

@@ -13,9 +13,10 @@ INCLUDES = 			\
 	-DVERSION=\""$(VERSION)"\"						\
 	-DG_LOG_DOMAIN=\"libconfig-archiver\"					\
 	-DCONFIGDIR=\""/etc"\"							\
-	-DLOCATION_DIR=\""$(datadir)/control-center-data/archiver"\"		\
+	-DLOCATION_DIR=\""$(datadir)/control-center/archiver"\"			\
 	-DGLADE_DIR=\""$(INTERFACES_DIR)"\"					\
 	-DXST_BACKEND_LOCATION=\""$(datadir)/ximian-setup-tools/scripts"\"	\
+	-DDEFAULTS_DIR=\""$(datadir)/control-center/defaults"\"			\
 	@ARCHIVER_CFLAGS@							\
 	@MONIKER_CFLAGS@
 
