@@ -141,10 +141,16 @@ main(int argc, char **argv)
 	theme = gnome_theme_read_meta_theme (uri);
 	gnome_vfs_uri_unref (uri);
 
-	pixbuf = generate_theme_thumbnail (theme, TRUE);
-
-	save_pixbuf(pixbuf, argv[2]);
-	gdk_pixbuf_unref(pixbuf);
+	if (theme) {
+	    pixbuf = generate_theme_thumbnail (theme, TRUE);
+	    
+	    save_pixbuf(pixbuf, argv[2]);
+	    gdk_pixbuf_unref(pixbuf);
+	}
+	else {
+	    g_printerr("usage: gnome-theme-thumbnailer theme output-image\n");
+	    return 1;
+	}
 
 	return 0;
 }
