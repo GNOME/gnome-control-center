@@ -435,9 +435,9 @@ grab_key_callback (GtkWidget    *widget,
   /* filter consumed/ignored modifiers */
 
   if (keys->accel_mode == EGG_CELL_RENDERER_KEYS_MODE_GTK)
-    accel_mods = event->state & ~(consumed_modifiers | ignored_modifiers);
+    accel_mods = event->state & GDK_MODIFIER_MASK & ~(consumed_modifiers | ignored_modifiers);
   else if (keys->accel_mode == EGG_CELL_RENDERER_KEYS_MODE_X)
-    accel_mods = event->state & ~(ignored_modifiers);
+    accel_mods = event->state & GDK_MODIFIER_MASK & ~(ignored_modifiers);
   else
     g_assert_not_reached ();
     
@@ -458,9 +458,6 @@ grab_key_callback (GtkWidget    *widget,
 	  accel_keyval = 0;
 	  accel_mods = 0;
 	}
-
-      /* Remove modifiers like super and hyper, as GTK+ ignores them. */
-      accel_mods = accel_mods & GDK_MODIFIER_MASK;
     }
   
   edited = TRUE;
