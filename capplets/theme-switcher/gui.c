@@ -5,6 +5,7 @@
 
 #include "da.h"
 #include <signal.h>
+#include <gconf/gconf-client.h>
 
 GtkWidget *preview_control;
 
@@ -193,8 +194,8 @@ make_main(void)
   GtkWidget *box, *hbox, *hbox2, *vbox;
   GtkWidget *frame, *button;
   GtkWidget *button_vbox;
-  gboolean default_used;
   BonoboUIContainer *container;
+  GConfClient *client = gconf_client_get_default ();
   
   capplet_widget = gtk_dialog_new_with_buttons (_("Gtk+ Theme Selector"),
 					 NULL, -1,
@@ -238,7 +239,7 @@ make_main(void)
   label = gtk_label_new (_("Auto\nPreview"));
   gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
   auto_preview = gtk_check_button_new ();
-  initial_preview = gnome_config_get_bool ("/theme-switcher-capplet/settings/auto=TRUE");
+  initial_preview = gconf_client_get_bool (client, "/apps/gtk-theme-switcher/auto", NULL);
   gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (auto_preview),
 			       initial_preview);
   gtk_signal_connect (GTK_OBJECT (auto_preview), "toggled", GTK_SIGNAL_FUNC (auto_callback), NULL);
@@ -258,8 +259,7 @@ make_main(void)
   font_sel = gnome_font_picker_new ();
   gnome_font_picker_set_mode (GNOME_FONT_PICKER (font_sel),
 			      GNOME_FONT_PICKER_MODE_FONT_INFO);
-  initial_font = gnome_config_get_string_with_default ("/theme-switcher-capplet/settings/font",&default_used);
-
+  initial_font = gconf_client_get_string (client, "/apps/gtk-theme-switcher/font", NULL);
 
   if (initial_font == NULL) {
 
@@ -291,7 +291,7 @@ make_main(void)
   gtk_container_set_border_width (GTK_CONTAINER (vbox), GNOME_PAD_SMALL);
   gtk_container_add (GTK_CONTAINER (frame), vbox);
   font_cbox = gtk_check_button_new_with_label (_("Use custom font."));
-  initial_font_cbox = gnome_config_get_bool ("/theme-switcher-capplet/settings/use_theme_font=FALSE");
+  initial_font_cbox = gconf_client_get_bool (client, "/apps/gtk-theme-switcher/use_theme_font", NULL);
   gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (font_cbox),
 			       initial_font_cbox);
   gtk_signal_connect (GTK_OBJECT (font_cbox),
@@ -336,7 +336,8 @@ make_main(void)
 		      TRUE, TRUE, 0);
 
   last_theme = NULL;
-  
+ 
+  g_object_unref (G_OBJECT (client));
   return capplet_widget;
 }
 
@@ -405,14 +406,18 @@ click_try(GtkWidget *widget, gpointer data)
 static void
 click_ok(GtkWidget *widget, gpointer data)
 {
+  GConfClient *client = gconf_client_get_default ();
+  
   click_try (widget, data);
-  gnome_config_set_bool ("/theme-switcher-capplet/settings/auto",GTK_TOGGLE_BUTTON (auto_preview)->active);
-  gnome_config_set_string ("/theme-switcher-capplet/settings/theme", current_theme->name);
-  gnome_config_set_bool ("/theme-switcher-capplet/settings/use_theme_font",
-			 GTK_TOGGLE_BUTTON (font_cbox)->active);
-  gnome_config_set_string ("/theme-switcher-capplet/settings/font",
-			   gnome_font_picker_get_font_name (GNOME_FONT_PICKER (font_sel)));
-  gnome_config_sync ();
+
+  gconf_client_set_bool (client, "/apps/gtk-theme-switcher/auto", GTK_TOGGLE_BUTTON (auto_preview)->active, NULL);
+  gconf_client_set_string (client, "/apps/gtk-theme-switcher/theme", current_theme->name, NULL);
+  gconf_client_set_bool (client, "/apps/gtk-theme-switcher/use_theme_font",
+			 GTK_TOGGLE_BUTTON (font_cbox)->active, NULL);
+
+  gconf_client_set_string (client, "/apps/gtk-theme-switcher/font",
+			   gnome_font_picker_get_font_name (GNOME_FONT_PICKER (font_sel)), NULL);
+  g_object_unref (G_OBJECT (client));
 }
 static void
 click_revert(GtkWidget *widget, gpointer data)
@@ -494,11 +499,8 @@ click_entry(GtkWidget *clist, gint row, gint col, GdkEvent *event,
   if (!ignore_change)
     {
       current_theme = gtk_clist_get_row_data (GTK_CLIST (clist), row);
-
-      if (initial_theme)
-	state_changed (TRUE);
-      else
-	state_changed (FALSE);
+      
+      state_changed (TRUE);
       
       if (GTK_TOGGLE_BUTTON (auto_preview)->active)
 	click_preview (NULL,NULL);
@@ -563,8 +565,12 @@ void
 update_theme_entries(GtkWidget *disp_list)
 {
   GList      *themes;
-  gchar *d_theme = gnome_config_get_string ("/theme-switcher-capplet/settings/theme=Default");
+  GConfClient *client = gconf_client_get_default ();
+
+  gchar *d_theme = gconf_client_get_string (client, "/apps/gtk-theme-switcher/theme", NULL);
   gchar *current_name = NULL;
+
+  g_object_unref (G_OBJECT (client));
 
   if (current_theme)
     current_name = g_strdup (current_theme->name);
