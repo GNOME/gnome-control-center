@@ -1,7 +1,8 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * Copyright (C) 2002 CodeFactory AB
+ * Copyright (C) 2003-2004 Imendio HB
  * Copyright (C) 2002-2003 Richard Hult <richard@imendio.com>
+ * Copyright (C) 2002 CodeFactory AB
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -389,6 +390,14 @@ maybe_change_state (DrWright *dr)
 		break;
 		
 	case STATE_BREAK_SETUP:
+		/* Don't allow more than one break window to coexist, can happen
+		 * if a break is manually enforced.
+		 */
+		if (dr->break_window) {
+			dr->state = STATE_BREAK;
+			break;
+		}
+		
 		stop_blinking (dr);
 		gtk_image_set_from_pixbuf (GTK_IMAGE (dr->icon_image), dr->red_bar);
 
@@ -591,6 +600,14 @@ popup_preferences_cb (gpointer   callback_data,
 }
 
 static void
+about_response_cb (GtkWidget *dialog,
+		   gint       response,
+		   gpointer   user_data)
+{
+	gtk_widget_destroy (dialog);
+}
+	
+static void
 popup_about_cb (gpointer   callback_data,
 		guint      action,
 		GtkWidget *widget)
@@ -650,8 +667,10 @@ popup_about_cb (gpointer   callback_data,
 	gtk_box_pack_start (GTK_BOX (vbox), label, TRUE, TRUE, 0);
 	
 	gtk_widget_show_all (about_window);
-	gtk_dialog_run (GTK_DIALOG (about_window));
-	gtk_widget_destroy (about_window);
+
+	g_signal_connect (about_window,
+			  "response", G_CALLBACK (about_response_cb),
+			  NULL);
 }
 
 static void

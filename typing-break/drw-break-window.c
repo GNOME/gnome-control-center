@@ -46,6 +46,7 @@ struct _DrwBreakWindowPriv {
 	gchar     *break_text;
 	guint      clock_timeout_id;
 	guint      postpone_timeout_id;
+	guint      postpone_sensitize_id;
 };
 
 #define POSTPONE_CANCEL 30*1000
@@ -61,8 +62,9 @@ static void         drw_break_window_class_init    (DrwBreakWindowClass *klass);
 static void         drw_break_window_init          (DrwBreakWindow      *window);
 static void         drw_break_window_finalize      (GObject             *object);
 static void         drw_break_window_dispose       (GObject             *object);
+static gboolean     postpone_sensitize_cb          (DrwBreakWindow      *window);
 static gboolean     clock_timeout_cb               (DrwBreakWindow      *window);
-static void         postpone_clicked_cb              (GtkWidget           *button,
+static void         postpone_clicked_cb            (GtkWidget           *button,
 						    GtkWidget           *window);
 static gboolean     label_expose_event_cb          (GtkLabel            *label,
 						    GdkEventExpose      *event,
@@ -189,6 +191,16 @@ drw_break_window_init (DrwBreakWindow *window)
 		priv->postpone_button = gtk_button_new_with_mnemonic (_("_Postpone break"));
 		gtk_widget_show (priv->postpone_button);
 
+		gtk_widget_set_sensitive (priv->postpone_button, FALSE);
+
+		if (priv->postpone_sensitize_id) {
+			g_source_remove (priv->postpone_sensitize_id);
+		}
+		
+		priv->postpone_sensitize_id = g_timeout_add (500,
+							     (GSourceFunc) postpone_sensitize_cb,
+							     window);
+	
 		g_signal_connect (priv->postpone_button,
 				  "clicked",
 				  G_CALLBACK (postpone_clicked_cb),
@@ -281,7 +293,11 @@ drw_break_window_finalize (GObject *object)
 	if (priv->postpone_timeout_id != 0) {
 		g_source_remove (priv->postpone_timeout_id);
 	}
-	
+
+	if (priv->postpone_sensitize_id != 0) {
+		g_source_remove (priv->postpone_sensitize_id);
+	}
+
 	g_free (priv);
 	window->priv = NULL;
 
@@ -308,6 +324,10 @@ drw_break_window_dispose (GObject *object)
 		priv->postpone_timeout_id = 0;
 	}
 
+	if (priv->postpone_sensitize_id != 0) {
+		g_source_remove (priv->postpone_sensitize_id);
+	}
+	
         if (G_OBJECT_CLASS (parent_class)->dispose) {
                 (* G_OBJECT_CLASS (parent_class)->dispose) (object);
         }
@@ -317,6 +337,19 @@ GtkWidget *
 drw_break_window_new (void)
 {
 	return g_object_new (DRW_TYPE_BREAK_WINDOW, NULL);
+}
+
+static gboolean
+postpone_sensitize_cb (DrwBreakWindow *window)
+{
+	DrwBreakWindowPriv *priv;
+
+	priv = window->priv;
+
+	gtk_widget_set_sensitive (priv->postpone_button, TRUE);
+
+	priv->postpone_sensitize_id = 0;
+	return FALSE;
 }
 
 static gboolean
@@ -342,7 +375,6 @@ clock_timeout_cb (DrwBreakWindow *window)
 		priv->clock_timeout_id = 0;
 
 		g_signal_emit (window, signals[DONE], 0, NULL);
-		//gtk_widget_destroy (GTK_WIDGET (window));
 
 		return FALSE;
 	}

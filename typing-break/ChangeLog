@@ -1,3 +1,14 @@
+2004-02-17  Richard Hult  <richard@imendio.com>
+
+	* drw-break-window.c (drw_break_window_init): Don't make the
+	postpone button focused right away, makes the fix for #126179 a
+	lot better.
+
+	* drwright.c: Don't create break window if we already have one,
+	fixes bug #134455. Don't make about box modal, fixes bug #134594.
+
+	* main.c (main): Remove unused variable.
+
 2004-02-13  Jody Goldberg <jody@gnome.org>
 
 	* Release 2.5.3
