@@ -1,5 +1,12 @@
 2002-01-14  Bradford Hovinen  <hovinen@ximian.com>
 
+	* mime-type-info.c (mime_type_info_update): Reparent the iterator
+	if necessary
+	(mime_type_info_update): Don't call reinsert_model_entry
+
+	* mime-types-model.c (insert_mime_type): Implement. Factor from
+	mime_types_model_new
+
 	* mime-category-edit-dialog.c (populate_application_list):
 	Implement. Mostly a copy from the corresponding function in
 	mime-edit-dialog.c

@@ -131,6 +131,40 @@ get_protocol_name (const gchar *key)
 		return NULL;
 }
 
+static void
+insert_mime_type (GtkTreeStore *model, const gchar *mime_type) 
+{
+	gchar        *path_str;
+	const gchar  *description;
+	const gchar  *extensions;
+	GdkPixbuf    *pixbuf;
+
+	GtkTreeIter   iter;
+	GtkTreeIter   child_iter;
+
+	path_str = get_category_path_for_mime_type (mime_type);
+
+	if (path_str != NULL) {
+		description = gnome_vfs_mime_get_description (mime_type);
+		extensions = gnome_vfs_mime_get_extensions_pretty_string (mime_type);
+
+		if (extensions == NULL || *extensions == '\0')
+			return;
+
+		pixbuf = get_icon_pixbuf (gnome_vfs_mime_get_icon (mime_type));
+
+		get_insertion_point (model, path_str, &iter);
+
+		gtk_tree_store_append (model, &child_iter, &iter);
+		gtk_tree_store_set (model, &child_iter,
+				    ICON_COLUMN,        pixbuf,
+				    DESCRIPTION_COLUMN, description,
+				    MIME_TYPE_COLUMN,   mime_type,
+				    EXTENSIONS_COLUMN,  extensions,
+				    -1);
+	}
+}
+
 GtkTreeModel *
 mime_types_model_new (gboolean is_category_select)
 {
@@ -139,11 +173,6 @@ mime_types_model_new (gboolean is_category_select)
 	GList        *tmp;
 	GtkTreeIter   iter;
 	GtkTreeIter   child_iter;
-	gchar        *mime_type;
-	gchar        *path_str;
-	const gchar  *description;
-	const gchar  *extensions;
-	GdkPixbuf    *pixbuf;
 
 	GSList       *url_list;
 	GSList       *tmps;
@@ -161,30 +190,11 @@ mime_types_model_new (gboolean is_category_select)
 		gtk_tree_store_set (model, &iter, DESCRIPTION_COLUMN, categories[i], -1);
 	}
 
-	for (; tmp != NULL; tmp = tmp->next) {
-		mime_type = tmp->data;
-		path_str = get_category_path_for_mime_type (mime_type);
-
-		if (path_str != NULL && !is_category_select) {
-			description = gnome_vfs_mime_get_description (mime_type);
-			extensions = gnome_vfs_mime_get_extensions_pretty_string (mime_type);
-
-			if (extensions == NULL || *extensions == '\0')
-				continue;
-
-			pixbuf = get_icon_pixbuf (gnome_vfs_mime_get_icon (mime_type));
-
-			get_insertion_point (model, path_str, &iter);
-
-			gtk_tree_store_append (model, &child_iter, &iter);
-			gtk_tree_store_set (model, &child_iter,
-					    ICON_COLUMN,        pixbuf,
-					    DESCRIPTION_COLUMN, description,
-					    MIME_TYPE_COLUMN,   mime_type,
-					    EXTENSIONS_COLUMN,  extensions,
-					    -1);
-		}
-	}
+	for (; tmp != NULL; tmp = tmp->next)
+		if (!is_category_select)
+			insert_mime_type (model, tmp->data);
+		else
+			get_category_path_for_mime_type (tmp->data);
 
 	g_list_free (type_list);
 
@@ -220,11 +230,6 @@ mime_types_model_new (gboolean is_category_select)
 	g_slist_free (url_list);
 
 	return GTK_TREE_MODEL (model);
-}
-
-void
-reinsert_model_entry (GtkTreeModel *model, GtkTreeIter  *iter)
-{
 }
 
 GdkPixbuf *

@@ -185,9 +185,6 @@ mime_type_info_save (const MimeTypeInfo *info)
 	tmp = form_extensions_string (info, " ", NULL);
 	gnome_vfs_mime_set_extensions_list (info->mime_type, tmp);
 	g_free (tmp);
-
-	if (strcmp (info->category, get_category_name (info->model, info->iter, FALSE)))
-		reinsert_model_entry (info->model, info->iter);
 }
 
 void
@@ -195,6 +192,17 @@ mime_type_info_update (MimeTypeInfo *info)
 {
 	GdkPixbuf *pixbuf;
 	gchar *tmp;
+	GtkTreeIter parent;
+
+	tmp = get_category_name (info->model, info->iter, FALSE);
+
+	if (strcmp (info->category, tmp)) {
+		gtk_tree_store_remove (GTK_TREE_STORE (info->model), info->iter);
+		get_insertion_point (GTK_TREE_STORE (info->model), info->category, &parent);
+		gtk_tree_store_append (GTK_TREE_STORE (info->model), info->iter, &parent);
+	}
+
+	g_free (tmp);
 
 	pixbuf = get_icon_pixbuf (info->icon_name);
 
