@@ -1,287 +1,443 @@
-/* -*- mode: c; style: linux -*- */
-
-/* mouse-properties-capplet.c
- * Copyright (C) 2001 Ximian, Inc.
- *
- * Written by Bradford Hovinen <hovinen@ximian.com>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2, or (at your option)
- * any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
- * 02111-1307, USA.
- */
-
-#ifdef HAVE_CONFIG_H
-#  include <config.h>
-#endif
-
-#include "capplet-util.h"
-#include "bonobo-property-editor-range.h"
-
+#include <gnome.h>
+#include <gconf/gconf-client.h>
 #include <glade/glade.h>
+#include <math.h>
 
-/* Needed only for the mouse capplet */
-#include <X11/Xlib.h>
-#include <gdk/gdkx.h>
-
-/* Maximum number of mouse buttons we handle.  */
-#define MAX_BUTTONS 10
-
-/* Half the number of acceleration levels we support.  */
-#define MAX_ACCEL 3
-
-/* Maximum threshold we support.  */
-#define MAX_THRESH 7
-
-/* apply_settings
- *
- * Apply the settings of the property bag. This function is per-capplet, though
- * there are some cases where it does not do anything.
- */
-
-static void
-apply_settings (Bonobo_ConfigDatabase db) 
+enum
 {
-        unsigned char buttons[MAX_BUTTONS], i;
-        int nbuttons, num, den, idx_1 = 0, idx_3 = 1;
-	ulong accel, threshold;
-        gboolean rtol;
-	CORBA_Environment ev;
+	DOUBLE_CLICK_TEST_OFF,
+	DOUBLE_CLICK_TEST_MAYBE,
+	DOUBLE_CLICK_TEST_ON,
+};
 
-	CORBA_exception_init (&ev);
+GladeXML *xml;
+GdkPixbuf *left_handed_pixbuf;
+GdkPixbuf *right_handed_pixbuf;
+GdkPixbuf *double_click_on_pixbuf;
+GdkPixbuf *double_click_maybe_pixbuf;
+GdkPixbuf *double_click_off_pixbuf;
+GConfClient *client;
 
-        rtol = bonobo_config_get_ulong (db, "/main/right-to-left", &ev);
+gint double_click_state = DOUBLE_CLICK_TEST_OFF;
+guint32 double_click_timestamp = 0;
+guint test_maybe_timeout_id = 0;
+guint test_on_timeout_id = 0;
 
-        nbuttons = XGetPointerMapping (GDK_DISPLAY (), buttons, MAX_BUTTONS);
+#define LEFT_HANDED_KEY "/desktop/gnome/peripherals/mouse/left_handed"
+#define DOUBLE_CLICK_KEY "/desktop/gnome/peripherals/mouse/double_click"
+#define MOTION_ACCELERATION_KEY "/desktop/gnome/peripherals/mouse/motion_acceleration"
+#define MOTION_THRESHOLD_KEY "/desktop/gnome/peripherals/mouse/motion_threshold"
+#define DRAG_THRESHOLD_KEY "/desktop/gnome/peripherals/mouse/drag_threshold"
 
-        for (i = 0; i < nbuttons; i++) {
-		if (buttons[i] == 1)
-			idx_1 = i;
-		else if (buttons[i] == ((nbuttons < 3) ? 2 : 3))
-			idx_3 = i;
-	}
 
-	if ((rtol && idx_1 < idx_3) || (!rtol && idx_1 > idx_3)) {
-		buttons[idx_1] = ((nbuttons < 3) ? 2 : 3);
-		buttons[idx_3] = 1;
-	}
 
-        XSetPointerMapping (GDK_DISPLAY (), buttons, nbuttons);
-
-	CORBA_exception_init (&ev);
-
-        accel = bonobo_config_get_ulong (db, "/main/acceleration", &ev);
-
-        if (accel < MAX_ACCEL) {
-                num = 1;
-                den = MAX_ACCEL - accel;
-        } else {
-                num = accel - MAX_ACCEL + 1;
-                den = 1;
-        }
-
-	CORBA_exception_init (&ev);
-
-        threshold = MAX_THRESH - bonobo_config_get_ulong (db, "/main/threshold", &ev);
-
-        XChangePointerControl (GDK_DISPLAY (), True, True,
-                               num, den, threshold);
-
-	CORBA_exception_free (&ev);
+/* normalilzation routines */
+/* All of our scales but double_click are on the range 1->10 as a result, we
+ * have a few routines to convert from whatever the gconf key is to our range.
+ */
+static gint
+double_click_from_gconf (gint double_click)
+{
+	/* watch me be lazy */
+	if (double_click < 150)
+		return 100;
+	else if (double_click < 250)
+		return 200;
+	else if (double_click < 350)
+		return 300;
+	else if (double_click < 450)
+		return 400;
+	else if (double_click < 550)
+		return 500;
+	else if (double_click < 650)
+		return 600;
+	else if (double_click < 750)
+		return 700;
+	else if (double_click < 850)
+		return 800;
+	else if (double_click < 950)
+		return 900;
+	else
+		return 1000;
 }
 
-/* set_pixmap_file
- *
- * Load the given pixmap and put it in the given widget. FIXME: Should this be in libcommon?
- */
-static void
-set_pixmap_file (GtkWidget *widget, const gchar *filename)
+static gfloat
+motion_acceleration_from_gconf (gfloat motion_acceleration)
 {
-	GdkPixbuf *pixbuf;
-	GdkPixmap *pixmap;
-	GdkBitmap *mask;
+	motion_acceleration = CLAMP (motion_acceleration, 0.2, 6.0);
+	if (motion_acceleration >=1)
+		return motion_acceleration + 4;
+	return motion_acceleration * 5;
+}
 
-	g_return_if_fail (widget != NULL);
-	g_return_if_fail (GTK_IS_WIDGET (widget));
-	g_return_if_fail (filename != NULL);
-	
-	pixbuf = gdk_pixbuf_new_from_file (filename);
-
-	if (pixbuf) {
-		gdk_pixbuf_render_pixmap_and_mask (pixbuf, &pixmap, &mask, 100);
-		gtk_pixmap_set (GTK_PIXMAP (widget),
-				pixmap, mask);
-		gdk_pixbuf_unref (pixbuf);
-	}
+static gfloat
+motion_acceleration_to_gconf (gfloat motion_acceleration)
+{
+	motion_acceleration = CLAMP (motion_acceleration, 1.0, 10.0);
+	if (motion_acceleration < 5)
+		return motion_acceleration / 5.0;
+	return motion_acceleration - 4;
+}
+static gfloat
+threshold_from_gconf (gfloat drag_threshold)
+{
+	return CLAMP (drag_threshold, 1, 10);
 }
 
 
-static GtkWidget *
-mouse_capplet_create_image_widget_canvas (gchar *filename)
+/* Double Click handling */
+
+static gboolean
+test_maybe_timeout (gpointer data)
 {
-	GtkWidget *canvas;
-	GdkPixbuf *pixbuf;
-	double width, height;
-	gchar *filename_dup;
+	GtkWidget *darea;
+	darea = glade_xml_get_widget (xml, "double_click_darea");
+	double_click_state = DOUBLE_CLICK_TEST_OFF;
+	gtk_widget_queue_draw (darea);
 
-	filename_dup = g_strdup (filename);
-	pixbuf = gdk_pixbuf_new_from_file (filename_dup);
+	*((gint *)data) = 0;
 
-	if (!pixbuf) {
-		g_warning ("Pixmap %s not found.", filename_dup);
-		g_free (filename_dup);
-		return NULL;
+	return FALSE;
+}
+
+static gint
+drawing_area_button_press_event (GtkWidget      *widget,
+				 GdkEventButton *event,
+				 gpointer        data)
+{
+	GtkWidget *scale;
+	GtkWidget *darea;
+	gint double_click_time;
+
+	if (event->type != GDK_BUTTON_PRESS)
+		return FALSE;
+
+	scale = glade_xml_get_widget (xml, "delay_scale");
+	double_click_time = 1000 * gtk_range_get_value (GTK_RANGE (scale));
+	darea = glade_xml_get_widget (xml, "double_click_darea");
+
+	if (test_maybe_timeout_id != 0)
+		gtk_timeout_remove  (test_maybe_timeout_id);
+	if (test_on_timeout_id != 0)
+		gtk_timeout_remove (test_on_timeout_id);
+
+	switch (double_click_state) {
+	case DOUBLE_CLICK_TEST_OFF:
+		double_click_state = DOUBLE_CLICK_TEST_MAYBE;
+		test_maybe_timeout_id = gtk_timeout_add (double_click_time, test_maybe_timeout, &test_maybe_timeout_id);
+		break;
+	case DOUBLE_CLICK_TEST_MAYBE:
+		if (event->time - double_click_timestamp < double_click_time) {
+			double_click_state = DOUBLE_CLICK_TEST_ON;
+			test_on_timeout_id = gtk_timeout_add (2500, test_maybe_timeout, &test_on_timeout_id);
+		}
+		break;
+	case DOUBLE_CLICK_TEST_ON:
+		double_click_state = DOUBLE_CLICK_TEST_OFF;
+		break;
 	}
+
+	double_click_timestamp = event->time;
+	gtk_widget_queue_draw (darea);
+
+	return TRUE;
+}
+
+static gint
+drawing_area_expose_event (GtkWidget      *widget,
+			   GdkEventExpose *event,
+			   gpointer        data)
+{
+	static gboolean first_time = 1;
+	GdkPixbuf *pixbuf;
+
+	if (first_time) {
+		gdk_window_set_events (widget->window, gdk_window_get_events (widget->window) | GDK_BUTTON_PRESS_MASK);
+		g_signal_connect (widget, "button_press_event", (GCallback) drawing_area_button_press_event, NULL);
+		first_time = 0;
+	}
+
+	gdk_draw_rectangle (widget->window,
+			    widget->style->white_gc,
+			    TRUE, 0, 0,
+			    widget->allocation.width,
+			    widget->allocation.height);
+
+	switch (double_click_state) {
+	case DOUBLE_CLICK_TEST_ON:
+		pixbuf = double_click_on_pixbuf;
+		break;
+	case DOUBLE_CLICK_TEST_MAYBE:
+		pixbuf = double_click_maybe_pixbuf;
+		break;
+	case DOUBLE_CLICK_TEST_OFF:
+		pixbuf = double_click_off_pixbuf;
+		break;
+	}
+
+	gdk_pixbuf_render_to_drawable_alpha (pixbuf,
+					     widget->window,
+					     0, 0,
+					     (widget->allocation.width - gdk_pixbuf_get_width (pixbuf))/2,
+					     (widget->allocation.height - gdk_pixbuf_get_height (pixbuf))/2,
+					     -1, -1,
+					     GDK_PIXBUF_ALPHA_FULL,
+					     0,
+					     GDK_RGB_DITHER_NORMAL,
+					     0, 0);
 		
-	width  = gdk_pixbuf_get_width  (pixbuf);
-	height = gdk_pixbuf_get_height (pixbuf);
+	return TRUE;
+}
 
-	canvas = gnome_canvas_new_aa();
-	GTK_OBJECT_UNSET_FLAGS (GTK_WIDGET (canvas), GTK_CAN_FOCUS);
-	gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS(canvas)),
-			       gnome_canvas_pixbuf_get_type (),
-			       "pixbuf", pixbuf,
+
+
+/* capplet->gconf settings */
+
+static void
+left_handed_toggle_callback (GtkWidget *toggle, gpointer data)
+{
+	GtkWidget *image;
+	image = glade_xml_get_widget (xml, "orientation_image");
+	if (GTK_TOGGLE_BUTTON (toggle)->active)
+		g_object_set (G_OBJECT (image),
+			      "pixbuf", left_handed_pixbuf,
+			      NULL);
+	else
+		g_object_set (G_OBJECT (image),
+			      "pixbuf", right_handed_pixbuf,
+			      NULL);
+	gconf_client_set_bool (client, LEFT_HANDED_KEY,
+			       GTK_TOGGLE_BUTTON (toggle)->active,
 			       NULL);
-	gtk_widget_set_usize (canvas, width, height);
-
-	gdk_pixbuf_unref (pixbuf);
-	gtk_widget_show (canvas);
-	g_free (filename_dup);
-
-	return canvas;
 }
 
-GtkWidget *
-mouse_capplet_create_image_widget (gchar *name,
-							gchar *string1, gchar *string2,
-							gint int1, gint int2)
+static void
+double_click_callback (GtkAdjustment *adjustment, gpointer data)
 {
-	GtkWidget *canvas, *alignment;
-	gchar *full_path;
+	gint double_click;
 
-	if (!string1)
-		return NULL;
+	double_click = gtk_adjustment_get_value (adjustment) * 1000;
+	/* we normalize this to avoid loops */
+	if (double_click != double_click_from_gconf (double_click)) {
+		gtk_adjustment_set_value (adjustment, (double_click_from_gconf (double_click))/1000.0);
+		return;
+	}
 
-	full_path = g_strdup_printf ("%s/%s", GNOMECC_PIXMAPS_DIR, string1);
-	canvas = mouse_capplet_create_image_widget_canvas (full_path);
-	g_free (full_path);
-	
-	g_return_val_if_fail (canvas != NULL, NULL);
-	
-	alignment = gtk_widget_new (gtk_alignment_get_type(),
-						   "child", canvas,
-						   "xalign", (double) 0,
-						   "yalign", (double) 0,
-						   "xscale", (double) 0,
-						   "yscale", (double) 0,
-						   NULL);
-	
-	gtk_widget_show (alignment);
-
-	return alignment;
+	gconf_client_set_int (client, DOUBLE_CLICK_KEY,
+			      double_click,
+			      NULL);
 }
 
-
-/**
- * xst_fool_the_linker:
- * @void: 
- * 
- * We need to keep the symbol for the create image widget function
- * so that libglade can find it to create the icons.
- **/
-void capplet_fool_the_linker (void);
-void
-capplet_fool_the_linker (void)
+static void
+threshold_callback (GtkAdjustment *adjustment, gpointer key)
 {
-	mouse_capplet_create_image_widget (NULL, NULL, NULL, 0, 0);
+	gint threshold;
+
+	threshold = (gint) rint (gtk_adjustment_get_value (adjustment));
+	
+	gconf_client_set_int (client, (char *) key,
+			      threshold,
+			      NULL);
 }
 
-/* create_dialog
- *
- * Create the dialog box and return it as a GtkWidget
- */
-
-static GtkWidget *
-create_dialog (void) 
+static void
+acceleration_callback (GtkAdjustment *adjustment, gpointer data)
 {
-	GladeXML *dialog;
+	gfloat acceleration;
+
+	acceleration = gtk_adjustment_get_value (adjustment);
+	gconf_client_set_float (client, MOTION_ACCELERATION_KEY,
+				motion_acceleration_to_gconf (acceleration),
+				NULL);
+}
+
+/* gconf->capplet */
+static void
+gconf_changed_callback (GConfClient *client,
+			guint        cnxn_id,
+			GConfEntry  *entry,
+			gpointer     user_data)
+{
 	GtkWidget *widget;
+	const gchar *key = gconf_entry_get_key (entry);
 
-	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/mouse-properties.glade", "prefs_widget");
-	widget = glade_xml_get_widget (dialog, "prefs_widget");
-	gtk_object_set_data (GTK_OBJECT (widget), "glade-data", dialog);
+	if (! strcmp (key, LEFT_HANDED_KEY)) {
+		gboolean left_handed;
 
-	gtk_signal_connect_object (GTK_OBJECT (widget), "destroy",
-				   GTK_SIGNAL_FUNC (gtk_object_destroy),
-				   GTK_OBJECT (dialog));
+		left_handed = gconf_value_get_bool (gconf_entry_get_value (entry));
+		widget = glade_xml_get_widget (xml, "left_handed_toggle");
+		if (left_handed != GTK_TOGGLE_BUTTON (widget)->active)
+			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), left_handed);
+	} else if (! strcmp (key, DOUBLE_CLICK_KEY)) {
+		int double_click;
 
-	return widget;
+		double_click = gconf_value_get_int (gconf_entry_get_value (entry));
+		double_click = double_click_from_gconf (double_click);
+		widget = glade_xml_get_widget (xml, "delay_scale");
+		if (double_click != (gint) 1000*gtk_range_get_value (GTK_RANGE (widget)))
+			gtk_range_set_value (GTK_RANGE (widget), (gfloat)double_click/1000.0);
+	} else if (! strcmp (key, MOTION_ACCELERATION_KEY)) {
+		gfloat acceleration;
+
+		acceleration = gconf_value_get_float (gconf_entry_get_value (entry));
+		acceleration = motion_acceleration_from_gconf (acceleration);
+		widget = glade_xml_get_widget (xml, "accel_scale");
+		if (ABS (acceleration - gtk_range_get_value (GTK_RANGE (widget))) > 0.001)
+			gtk_range_set_value (GTK_RANGE (widget), acceleration);
+	} else if (! strcmp (key, MOTION_THRESHOLD_KEY)) {
+		int threshold;
+
+		threshold = gconf_value_get_int (gconf_entry_get_value (entry));
+		threshold = threshold_from_gconf (threshold);
+		widget = glade_xml_get_widget (xml, "sensitivity_scale");
+		if (ABS (threshold - gtk_range_get_value (GTK_RANGE (widget))) > 0.001)
+			gtk_range_set_value (GTK_RANGE (widget), (gfloat)threshold);
+	} else if (! strcmp (key, DRAG_THRESHOLD_KEY)) {
+		int threshold;
+
+		threshold = gconf_value_get_int (gconf_entry_get_value (entry));
+		threshold = threshold_from_gconf (threshold);
+		widget = glade_xml_get_widget (xml, "drag_threshold_scale");
+		if (ABS (threshold - gtk_range_get_value (GTK_RANGE (widget))) > 0.001)
+			gtk_range_set_value (GTK_RANGE (widget), (gfloat)threshold);
+	}
 }
 
-/* setup_dialog
- *
- * Set up the property editors for our dialog
- */
-
 static void
-setup_dialog (GtkWidget *widget, Bonobo_PropertyBag bag) 
+setup_dialog (void)
 {
-	GladeXML *dialog;
-	BonoboPEditor *ed;
-	GtkWidget *rbs[3];
+	GtkSizeGroup *size_group;
+	GtkWidget *widget;
+	int double_click;
+	int threshold;
+	gfloat acceleration;
 
-	dialog = gtk_object_get_data (GTK_OBJECT (widget), "glade-data");
+	client = gconf_client_get_default ();
+	gconf_client_add_dir (client, "/desktop/gnome/peripherals/mouse", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+	gconf_client_notify_add (client, "/desktop/gnome/peripherals/mouse",
+				 gconf_changed_callback,
+				 NULL, NULL, NULL);
 
-	rbs[0] = WID ("right_handed_select");
-	rbs[1] = WID ("left_handed_select");
-	rbs[2] = NULL;
-	ed = BONOBO_PEDITOR (bonobo_peditor_option_radio_construct (rbs));
-	bonobo_peditor_set_property (ed, bag, "right-to-left", TC_ulong, NULL);
+	/* Buttons page
+	 */
+	/* Left-handed toggle */
+	left_handed_pixbuf = gdk_pixbuf_new_from_file ("mouse-left.png", NULL);
+	right_handed_pixbuf = gdk_pixbuf_new_from_file ("mouse-right.png", NULL);
+	widget = glade_xml_get_widget (xml, "left_handed_toggle");
+	if (gconf_client_get_bool (client, LEFT_HANDED_KEY, NULL))
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
+	else
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), FALSE);
+	g_signal_connect (widget, "toggled", (GCallback) left_handed_toggle_callback, NULL);
 
-	ed = BONOBO_PEDITOR (bonobo_peditor_range_construct (WID ("acceleration_entry")));
-        bonobo_peditor_set_property (ed, bag, "acceleration", TC_ulong, NULL);
+	widget = glade_xml_get_widget (xml, "orientation_image");
+	if (gconf_client_get_bool (client, LEFT_HANDED_KEY, NULL))
+		g_object_set (G_OBJECT (widget),
+			      "pixbuf", left_handed_pixbuf,
+			      NULL);
+	else
+		g_object_set (G_OBJECT (widget),
+			      "pixbuf", right_handed_pixbuf,
+			      NULL);
 
-	ed = BONOBO_PEDITOR (bonobo_peditor_range_construct (WID ("sensitivity_entry")));
-        bonobo_peditor_set_property (ed, bag, "threshold", TC_ulong, NULL);
-}
+	/* Double-click time */
+	double_click_on_pixbuf = gdk_pixbuf_new_from_file ("double-click-on.png", NULL);
+	double_click_maybe_pixbuf = gdk_pixbuf_new_from_file ("double-click-maybe.png", NULL);
+	double_click_off_pixbuf = gdk_pixbuf_new_from_file ("double-click-off.png", NULL);
+	widget = glade_xml_get_widget (xml, "double_click_darea");
+	g_signal_connect (widget, "expose_event", (GCallback) drawing_area_expose_event, NULL);
 
-/* get_legacy_settings
- *
- * Retrieve older gnome_config -style settings and store them in the
- * configuration database.
- *
- * In most cases, it's best to use the COPY_FROM_LEGACY macro defined in
- * capplets/common/capplet-util.h.
- */
+	double_click = gconf_client_get_int (client, DOUBLE_CLICK_KEY, NULL);
+	double_click = double_click_from_gconf (double_click);
+	widget = glade_xml_get_widget (xml, "delay_scale");
+	gtk_range_set_value (GTK_RANGE (widget), (gfloat)double_click/1000.0);
+	g_signal_connect (G_OBJECT (gtk_range_get_adjustment (GTK_RANGE (widget))),
+			  "value_changed",
+			  (GCallback) double_click_callback,
+			  NULL);
 
-static void
-get_legacy_settings (Bonobo_ConfigDatabase db) 
-{
-	gboolean val_boolean, def;
-	gulong val_ulong;
+	/* Cursors page */
+	widget = glade_xml_get_widget (xml, "main_notebook");
+	gtk_notebook_remove_page (GTK_NOTEBOOK (widget), 1);
 
-	COPY_FROM_LEGACY (boolean, "/main/right-to-left", bool, "/Desktop/Mouse/right-to-left");
-	COPY_FROM_LEGACY (ulong, "/main/acceleration", int, "/Desktop/Mouse/aceleration=4");
-	COPY_FROM_LEGACY (ulong, "/main/threshold", int, "/Desktop/Mouse/threshold=4");
+	/* Motion page */
+	size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
+	gtk_size_group_add_widget (size_group,
+				   glade_xml_get_widget (xml, "acceleration_label"));
+	gtk_size_group_add_widget (size_group,
+				   glade_xml_get_widget (xml, "sensitivity_label"));
+	gtk_size_group_add_widget (size_group,
+				   glade_xml_get_widget (xml, "threshold_label"));
+
+	size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
+	gtk_size_group_add_widget (size_group,
+				   glade_xml_get_widget (xml, "high_label"));
+	gtk_size_group_add_widget (size_group,
+				   glade_xml_get_widget (xml, "fast_label"));
+	gtk_size_group_add_widget (size_group,
+				   glade_xml_get_widget (xml, "large_label"));
+
+	size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
+	gtk_size_group_add_widget (size_group,
+				   glade_xml_get_widget (xml, "low_label"));
+	gtk_size_group_add_widget (size_group,
+				   glade_xml_get_widget (xml, "slow_label"));
+	gtk_size_group_add_widget (size_group,
+				   glade_xml_get_widget (xml, "small_label"));
+
+	widget = glade_xml_get_widget (xml, "accel_scale");
+	acceleration = gconf_client_get_float (client, MOTION_ACCELERATION_KEY, NULL);
+	acceleration = motion_acceleration_from_gconf (acceleration);
+	gtk_range_set_value (GTK_RANGE (widget), acceleration);
+	g_signal_connect (G_OBJECT (gtk_range_get_adjustment (GTK_RANGE (widget))),
+			  "value_changed",
+			  (GCallback) acceleration_callback,
+			  NULL);
+
+	widget = glade_xml_get_widget (xml, "sensitivity_scale");
+	threshold = gconf_client_get_int (client, MOTION_THRESHOLD_KEY, NULL);
+	threshold = threshold_from_gconf (threshold);
+	gtk_range_set_value (GTK_RANGE (widget), threshold);
+	g_signal_connect (G_OBJECT (gtk_range_get_adjustment (GTK_RANGE (widget))),
+			  "value_changed",
+			  (GCallback) threshold_callback,
+			  MOTION_THRESHOLD_KEY);
+
+	widget = glade_xml_get_widget (xml, "drag_threshold_scale");
+	threshold = gconf_client_get_int (client, DRAG_THRESHOLD_KEY, NULL);
+	threshold = threshold_from_gconf (threshold);
+	gtk_range_set_value (GTK_RANGE (widget), threshold);
+	g_signal_connect (G_OBJECT (gtk_range_get_adjustment (GTK_RANGE (widget))),
+			  "value_changed",
+			  (GCallback) threshold_callback,
+			  DRAG_THRESHOLD_KEY);
+
+	/* main dialog */
+	widget = glade_xml_get_widget (xml, "mouse_properties_dialog");
+	g_signal_connect (G_OBJECT (widget),
+			  "destroy",
+			  gtk_main_quit, NULL);
+	widget = glade_xml_get_widget (xml, "close_button");
+	g_signal_connect (G_OBJECT (widget),
+			  "clicked",
+			  gtk_main_quit, NULL);
 }
 
 int
-main (int argc, char **argv) 
+main (int argc, char *argv[])
 {
-	const gchar *legacy_files[] = { "Desktop", NULL };
+	gnome_program_init ("mouse-properties",
+			    "0.1",
+			    gnome_gtk_module_info_get (),
+			    argc, argv,
+			    NULL);
 
-	glade_gnome_init ();
-	capplet_init (argc, argv, legacy_files, apply_settings, create_dialog, setup_dialog, get_legacy_settings);
+	xml = glade_xml_new ("gnome-mouse-properties.glade", NULL, NULL);
+	setup_dialog ();
+	gtk_widget_show_all (glade_xml_get_widget (xml, "mouse_properties_dialog"));
 
+	gtk_main ();
+
+	g_object_unref (G_OBJECT (client));
 	return 0;
 }
