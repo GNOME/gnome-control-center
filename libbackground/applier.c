@@ -274,7 +274,6 @@ bg_applier_class_init (BGApplierClass *class)
 				    1, 65535, MONITOR_CONTENTS_DEFAULT_HEIGHT,
 				    G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
-#ifdef HAVE_GTK_MULTIHEAD
 	g_object_class_install_property
 		(object_class, PROP_SCREEN,
 		 g_param_spec_object ("screen",
@@ -282,7 +281,6 @@ bg_applier_class_init (BGApplierClass *class)
 				      _("Screen on which BGApplier is to draw"),
 				      GDK_TYPE_SCREEN,
 				      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
-#endif
 
 	parent_class = 
 		G_OBJECT_CLASS (g_type_class_ref (G_TYPE_OBJECT));
@@ -354,7 +352,6 @@ bg_applier_set_prop (GObject *object, guint prop_id, const GValue *value, GParam
 			bg_applier->p->render_geom.height = g_value_get_uint (value);
 		break;
 
-#ifdef HAVE_GTK_MULTIHEAD
 	case PROP_SCREEN:
 		if (bg_applier->p->type == BG_APPLIER_ROOT) {
 			if (bg_applier->p->size_changed_cb_id)
@@ -368,7 +365,6 @@ bg_applier_set_prop (GObject *object, guint prop_id, const GValue *value, GParam
 									      G_CALLBACK (size_changed_cb), bg_applier);
 		}
 		break;
-#endif
 		
 	default:
 		g_warning ("Bad property set");
@@ -391,11 +387,9 @@ bg_applier_get_prop (GObject *object, guint prop_id, GValue *value, GParamSpec *
 		g_value_set_int (value, bg_applier->p->type);
 		break;
 
-#ifdef HAVE_GTK_MULTIHEAD
 	case PROP_SCREEN:
 		g_value_set_object (value, bg_applier->p->screen);
 		break;
-#endif
 
 	default:
 		g_warning ("Bad property get");
@@ -482,15 +476,10 @@ bg_applier_new_for_screen (BGApplierType  type,
 
 	g_return_val_if_fail (type == BG_APPLIER_ROOT, NULL);
 
-#ifdef HAVE_GTK_MULTIHEAD
 	object = g_object_new (bg_applier_get_type (),
 			       "type", type,
 			       "screen", screen,
 			       NULL);
-#else
-	object = bg_applier_new (type);
-#endif
-
 	return object;
 }
 
@@ -1607,19 +1596,11 @@ make_root_pixmap (GdkScreen *screen, gint width, gint height)
 	GdkPixmap *gdk_pixmap;
 	int screen_num;
 
-#ifdef HAVE_GTK_MULTIHEAD
 	screen_num = gdk_screen_get_number (screen);
-#else
-	screen_num = DefaultScreen (GDK_DISPLAY ());
-#endif
 
 	gdk_flush ();
 
-#ifdef HAVE_GTK_MULTIHEAD
 	display_name = DisplayString (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()));
-#else
-	display_name = DisplayString (GDK_DISPLAY ());
-#endif
 
 	display = XOpenDisplay (display_name);
 
@@ -1639,13 +1620,8 @@ make_root_pixmap (GdkScreen *screen, gint width, gint height)
 	XCloseDisplay (display);
 
 	gdk_pixmap = gdk_pixmap_foreign_new (result);
-#ifdef HAVE_GTK_MULTIHEAD
 	gdk_drawable_set_colormap (GDK_DRAWABLE (gdk_pixmap),
 				   gdk_drawable_get_colormap (gdk_screen_get_root_window (screen)));
-#else
-	gdk_drawable_set_colormap (GDK_DRAWABLE (gdk_pixmap),
-				   gdk_drawable_get_colormap (gdk_get_default_root_window ()));
-#endif
 
 	return gdk_pixmap;
 }
@@ -1673,22 +1649,14 @@ set_root_pixmap (GdkPixmap *pixmap, GdkScreen *screen)
 	if (is_nautilus_running ())
 		return;
 
-#ifdef HAVE_GTK_MULTIHEAD
 	screen_num = gdk_screen_get_number (screen);
-#else
-	screen_num = DefaultScreen (GDK_DISPLAY ());
-#endif
 
 	if (pixmap != NULL)
 		pixmap_id = GDK_WINDOW_XWINDOW (pixmap);
 	else
 		pixmap_id = 0;
 
-#ifdef HAVE_GTK_MULTIHEAD
 	display = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
-#else
-	display = GDK_DISPLAY ();
-#endif
 
 	XGrabServer (display);
 
