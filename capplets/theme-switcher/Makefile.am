@@ -17,6 +17,8 @@ theme_selector_capplet_SOURCES = \
 	gui.c           \
 	install.c
 
+theme_selector_capplet_LDFLAGS = ../../control-center/libcapplet.la `imlib-config --libs`
+
 theme_selector_capplet_LDADD = ../../control-center/libcapplet.la \
 	$(GNOME_LIBDIR) $(ORB_LIBS) \
 	$(GNOMEUI_LIBS) $(INTLLIBS) \

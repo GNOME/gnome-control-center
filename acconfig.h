@@ -19,3 +19,4 @@
 
 #undef HAVE_DEVGTK
 
+#undef WITH_SYMBOL_UNDERSCORE
