@@ -11,12 +11,12 @@ BrowserDescription possible_browsers[] = {
         { N_("Encompass"), 		"encompass",	"encompass %s",		FALSE, FALSE },
         { N_("Firebird/FireFox"),  "mozilla-firebird",  "mozilla-firebird %s",  FALSE, FALSE },
         { N_("Firebird/FireFox"),  "mozilla-firefox",	"mozilla-firebird %s",  FALSE, FALSE },
-        { N_("Firebird/FireFox"),  	"firefox",	"mozilla-firebird %s",	FALSE, FALSE },
+        { N_("Firebird/FireFox"),  	"firefox",	"mozilla-firefox %s",	FALSE, FALSE },
         { N_("Mozilla/Netscape 6"), 	"mozilla-1.6",	"mozilla-1.6 %s",	FALSE, FALSE },
         { N_("Mozilla/Netscape 6"), 	"mozilla",	"mozilla %s",		FALSE, FALSE },
         { N_("Netscape Communicator"), 	"netscape",	"netscape %s",		FALSE, FALSE },
         { N_("Konqueror"), 		"konqueror",	"konqueror %s",		FALSE, FALSE },
-        { N_("W3M Text Browser"),	"w3n",		"w3m %s",		TRUE,  FALSE },
+        { N_("W3M Text Browser"),	"w3m",		"w3m %s",		TRUE,  FALSE },
         { N_("Lynx Text Browser"),	"lynx",		"lynx %s",		TRUE,  FALSE },
         { N_("Links Text Browser") , 	"links",	"links %s",		TRUE,  FALSE }
 };
