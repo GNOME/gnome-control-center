@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: control-center VERSION\n"
-"POT-Creation-Date: 2001-02-14 20:16-0500\n"
-"PO-Revision-Date: 2001-01-25 16:00+01:00\n"
+"POT-Creation-Date: 2001-03-08 19:08+0000\n"
+"PO-Revision-Date: 2001-03-08 19:52+00:00\n"
 "Last-Translator: Emese Kovacs <emese@gnome.hu>\n"
 "Language-Team: Hungarian <hu@gnome.hu>\n"
 "MIME-Version: 1.0\n"
@@ -63,11 +63,13 @@ msgid "Wallpaper Selection"
 msgstr "Háttérkép kiválasztása"
 
 #: capplets/background-properties/property-background.c:573
+#: capplets/file-types/file-types-icon-entry.c:258
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Nem találtam hbox-t, normál fájlkiválasztót használok"
 
 #: capplets/background-properties/property-background.c:578
 #: capplets/background-properties/property-background.c:1090
+#: capplets/file-types/file-types-icon-entry.c:264
 #: capplets/keyboard-properties/keyboard-properties.c:354
 #: capplets/screensaver-properties/screensaver-dialog.c:25
 #: capplets/theme-switcher/gui.c:230 capplets/theme-switcher/gui.c:302
@@ -82,7 +84,11 @@ msgstr "Háttérkép"
 msgid " Browse... "
 msgstr " Keres... "
 
+#. Add default action to fourth column
 #: capplets/background-properties/property-background.c:643
+#: capplets/file-types/file-types-capplet.c:1387
+#: capplets/file-types/file-types-capplet.c:1587
+#: capplets/file-types/file-types-capplet.c:1713
 msgid "none"
 msgstr "nincs"
 
@@ -115,7 +121,7 @@ msgstr "Csempézett"
 #: capplets/sound-properties/sound-properties.c:693
 #: capplets/theme-switcher/gui.c:367
 #: capplets/ui-properties/ui-properties.c:516
-#: capplets/url-properties/url-properties.c:256
+#: capplets/url-properties/url-properties.c:272
 #: capplets/wm-properties/wm-properties-capplet.c:649
 msgid ""
 "No help is available/installed for these settings. Please make sure you\n"
@@ -128,16 +134,15 @@ msgstr ""
 #: capplets/gnome-edit-properties/gnome-edit-properties.c:182
 #: capplets/keyboard-properties/keyboard-properties.c:99
 #: capplets/keyboard-properties/keyboard-properties.c:424
-#: capplets/mime-type/mime-type-capplet.c:81
 #: capplets/mouse-properties/mouse-properties.c:114
 #: capplets/screensaver-properties/callbacks.c:804
 #: capplets/sound-properties/sound-properties.c:695
 #: capplets/sound-properties/sound-properties.c:756
 #: capplets/theme-switcher/gui.c:369
 #: capplets/ui-properties/ui-properties.c:518
-#: capplets/url-properties/url-properties.c:258
+#: capplets/url-properties/url-properties.c:274
 #: capplets/wm-properties/wm-properties-capplet.c:651
-#: control-center/capplet-widget.c:263
+#: control-center/capplet-widget.c:273
 msgid "Close"
 msgstr "Bezár"
 
@@ -202,221 +207,246 @@ msgstr "A Gnome alapértelmezett szövegszerkesztõje"
 msgid "Run In Terminal"
 msgstr "Terminálban fusson"
 
-#: capplets/mime-type/edit-window.c:250
-#: capplets/mime-type/new-mime-window.c:35
-msgid "Extensions"
+#: capplets/file-types/file-types-capplet.desktop.in.h:1
+msgid "File Types and Programs"
+msgstr "Fájltípusok és programok"
+
+#: capplets/file-types/file-types-capplet.desktop.in.h:2
+msgid "Specify which programs are used to open or view each file type"
+msgstr "Add meg az egyes fájltípusokhoz az azt megnyitó illetve megnézõ programot"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:387
+msgid "Edit Applications List"
+msgstr "Alkalmazáslista szerkesztése"
+
+#. Add label
+#: capplets/file-types/file-types-capplet-dialogs.c:409
+#, c-format
+msgid "Select applications to appear in menu for MIME type \"%s\""
+msgstr "Válaszd ki a \"%s\" MIME-típushoz tartozó menüben megjelenítendõ alkalmazásokat"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:433
+msgid "Add Application..."
+msgstr "Alkalmazás hozzáadása..."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:440
+msgid "Edit Application..."
+msgstr "Alkalmazás szerkesztése..."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:446
+msgid "Delete Application"
+msgstr "Alkalmazás törlése..."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:480
+msgid "Edit Components List"
+msgstr "Komponenslista szerkesztése"
+
+#. Add label
+#: capplets/file-types/file-types-capplet-dialogs.c:500
+#, c-format
+msgid "Select views to appear in menu for MIME type \"%s\""
+msgstr "Válaszd ki a \"%s\" MIME-típushoz tartozó menüben megjelenítendõ nézeteket"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:720
+msgid ""
+"The MIME type entered contained upper case characters. Upper case characters "
+"were changed to lower case for you."
+msgstr "A megadott MIME-típus nagybetûket is tartalmaz. A nagybetûk automatikusan kisbetûkre változtak."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:723
+msgid "Add New MIME Type"
+msgstr "Új MIME-típus hozzáadása"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:769
+msgid "Add MIME Type"
+msgstr "MIME-típus hozzáadása"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:773
+msgid "New MIME type (e.g. image/x-thumper):"
+msgstr "Új MIME-típus (pl. image/x-thumper):"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:780
+msgid "Description (e.g. Thumper image):"
+msgstr "Leírás (pl. Thumper kép):"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:947
+msgid "File Extensions "
 msgstr "Kiterjesztések"
 
-#. icon box
-#: capplets/mime-type/edit-window.c:264
-msgid "Select an icon..."
-msgstr "Válassz ki egy ikont..."
-
-#: capplets/mime-type/edit-window.c:274
-msgid "Mime Type: "
-msgstr "Mime-típus: "
-
-#: capplets/mime-type/edit-window.c:304
-msgid "Add"
-msgstr "Hozzáadás"
-
-#: capplets/mime-type/edit-window.c:312
-#: capplets/url-properties/url-properties.c:138
-msgid "Remove"
-msgstr "Törlés"
-
-#. gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
-#: capplets/mime-type/edit-window.c:339
-#: capplets/mime-type/new-mime-window.c:65
-msgid "First Regular Expression: "
-msgstr "Elsõ reguláris kifejezés: "
-
-#: capplets/mime-type/edit-window.c:347
-#: capplets/mime-type/new-mime-window.c:76
-msgid "Second Regular Expression: "
-msgstr "Második reguláris kifejezés: "
-
-#. Actions box
-#: capplets/mime-type/edit-window.c:354
-msgid "Mime Type Actions"
-msgstr "Mime-típus mûveletek"
-
-#: capplets/mime-type/edit-window.c:361
-#, c-format
-msgid "Example: emacs %f"
-msgstr "Példa: emacs %f"
-
-#: capplets/mime-type/edit-window.c:366
-msgid "Open"
-msgstr "Megnyitás"
-
-#: capplets/mime-type/edit-window.c:372 capplets/mime-type/edit-window.c:388
-#: capplets/mime-type/edit-window.c:403
-msgid "Select a file..."
-msgstr "Fájlkiválasztás..."
-
-#: capplets/mime-type/edit-window.c:381
-msgid "View"
-msgstr "Megtekintés"
-
-#: capplets/mime-type/edit-window.c:397
-msgid "Edit"
-msgstr "Szerkesztés"
-
-#. we initialize everything
-#: capplets/mime-type/edit-window.c:446
-#, c-format
-msgid "Set actions for %s"
-msgstr "Mûvelet beállítása %s típushoz"
-
-#: capplets/mime-type/mime-data.c:380
-msgid "Mime Type"
-msgstr "Mime-típus"
-
-#: capplets/mime-type/mime-data.c:381
-msgid "Extension"
-msgstr "Kiterjesztés"
-
-#: capplets/mime-type/mime-data.c:488
-msgid "You must enter a mime-type"
-msgstr "Egy mime-típust kell megadnod"
-
-#: capplets/mime-type/mime-data.c:493
-msgid ""
-"You must add either a regular-expression or\n"
-"a file-name extension"
-msgstr ""
-"Vagy egy reguláris kifejezést, vagy\n"
-"egy fájlnév-kiterjesztést adj meg"
-
-#: capplets/mime-type/mime-data.c:497
-msgid ""
-"Please put your mime-type in the format:\n"
-"CATEGORY/TYPE\n"
-"\n"
-"For Example:\n"
-"image/png"
-msgstr ""
-"Kérlek a mime-típusodat ebben a formátumban add meg:\n"
-"KATEGÓRIA/TÍPUS\n"
-"\n"
-"Például:\n"
-"image/png"
-
-#: capplets/mime-type/mime-data.c:502
-msgid "This mime-type already exists"
-msgstr "Ez a mime-típus már létezik"
-
-#: capplets/mime-type/mime-data.c:583 capplets/mime-type/mime-info.c:425
-msgid ""
-"We are unable to create the directory\n"
-"~/.gnome/mime-info\n"
-"\n"
-"We will not be able to save the state."
-msgstr ""
-"Nem sikerült létrehozni a könyvtárat:\n"
-"~/.gnome/mime-info\n"
-"\n"
-"Nem lehet elmenteni az állást."
-
-#: capplets/mime-type/mime-data.c:589 capplets/mime-type/mime-info.c:431
-msgid ""
-"We are unable to access the directory\n"
-"~/.gnome/mime-info\n"
-"\n"
-"We will not be able to save the state."
-msgstr ""
-"Nem sikerült elérni a könyvtárat\n"
-"~/.gnome/mime-info\n"
-"\n"
-"Nem lehet elmenteni az állást."
-
-#: capplets/mime-type/mime-data.c:600
-msgid ""
-"Cannot create the file\n"
-"~/.gnome/mime-info/user.mime\n"
-"\n"
-"We will not be able to save the state"
-msgstr ""
-"Nem sikerült létrehozni a fájlt\n"
-"~/.gnome/mime-info/user.mime\n"
-"\n"
-"Nem lehet elmenteni az állást"
-
-#: capplets/mime-type/mime-info.c:442
-msgid ""
-"Cannot create the file\n"
-"~/.gnome/mime-info/user.keys\n"
-"\n"
-"We will not be able to save the state"
-msgstr ""
-"Nem sikerült létrehozni a fájlt\n"
-"~/.gnome/mime-info/user.keys\n"
-"\n"
-"Nem lehet elmenteni az állást"
-
-#: capplets/mime-type/mime-type-capplet.c:79
-msgid ""
-"No help is available/installed for these settings. Please make sure you\n"
-"have the Control Center documentation installed on your system."
-msgstr ""
-"Nincs súgó (vagy nincs telepítve) ezekhez a beállításokhoz. Kérlek gyõzõdj\n"
-"meg arról, hogy telepítetted a Vezérlõpult dokumentációját."
-
-#: capplets/mime-type/mime-type-capplet.c:95
-#: capplets/wm-properties/wm-properties-capplet.c:1098
-msgid "Delete"
-msgstr "Törlés"
-
-#: capplets/mime-type/mime-type-capplet.c:105
+#: capplets/file-types/file-types-capplet-dialogs.c:967
 #: capplets/wm-properties/wm-properties-capplet.c:1088
 msgid "Add..."
 msgstr "Hozzáadás..."
 
-#: capplets/mime-type/mime-type-capplet.c:109
-#: capplets/wm-properties/wm-properties-capplet.c:1093
-msgid "Edit..."
-msgstr "Szerkesztés..."
+#: capplets/file-types/file-types-capplet-dialogs.c:972
+msgid "    Remove    "
+msgstr "    Törlés    "
 
-#: capplets/mime-type/new-mime-window.c:21
-msgid "Add Mime Type"
-msgstr "Mime-típus hozzáadása"
+#: capplets/file-types/file-types-capplet-dialogs.c:1041
+msgid "Add New Extension"
+msgstr "Új kiterjesztés hozzáadása"
 
-#: capplets/mime-type/new-mime-window.c:22
+#: capplets/file-types/file-types-capplet-dialogs.c:1045
 msgid ""
-"Add a new Mime Type\n"
-"For example:  image/tiff; text/x-scheme"
+"Type in the extensions for this mime-type (without dot).\n"
+"You can enter several extensions seperated by a space,\n"
+"for example: html htm"
 msgstr ""
-"Adj meg egy új mime-típust\n"
-"Például: image/tiff; text/x-scheme"
+"Írd be a mime-típus kiterjesztését (pont nélkül).\n"
+"Több kiterjesztést is megadhatsz egyszerre szóközzel\n"
+"elválasztva, például: html htm"
 
-#: capplets/mime-type/new-mime-window.c:27
-msgid "Mime Type:"
-msgstr "Mime-típus:"
-
-#: capplets/mime-type/new-mime-window.c:39
-msgid ""
-"Type in the extensions for this mime-type.\n"
-"For example:  .html, .htm"
-msgstr ""
-"Írd be a mime-típus kiterjesztését.\n"
-"Például: .html, .htm"
-
-#: capplets/mime-type/new-mime-window.c:46
+#: capplets/file-types/file-types-capplet-dialogs.c:1052
 msgid "Extension:"
 msgstr "Kiterjesztés:"
 
-#: capplets/mime-type/new-mime-window.c:51
-msgid "Regular Expressions"
-msgstr "Reguláris kifejezések"
+#: capplets/file-types/file-types-capplet-dialogs.c:1194
+msgid "You must enter a name."
+msgstr "Meg kell adnod egy nevet."
 
-#: capplets/mime-type/new-mime-window.c:55
+#: capplets/file-types/file-types-capplet-dialogs.c:1197
+msgid "You must enter a command."
+msgstr "Meg kell adnod egy parancsot."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1207
+#, c-format
 msgid ""
-"You can set up two regular expressions here to identify the Mime Type\n"
-"by.  These fields are optional."
+"\"%s\" does not exist or is not executable.\n"
+"Check your spelling and make sure you have\n"
+"the right permissions to execute this file."
 msgstr ""
-"Két reguláris kifejezést adhatsz meg itt, a mime-típus meghatározására.\n"
-"Ezeket nem kötelezõ kitölteni."
+"\"%s\" nem létezik vagy nem végrehajtható.\n"
+"Ellenõrizd, hogy helyesen írtad-e az alkalmazás nevét,\n"
+"és hogy van-e jogod a fájl futtatására."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1213
+#, c-format
+msgid ""
+"The command \"%s\" cannot be found.\n"
+"You must use a command that can work from any command line."
+msgstr ""
+"\"%s\" parancs nem található.\n"
+"Olyan parancsot kell megadnod, amely bármilyen parancssorból elindul."
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1225
+msgid "Bad Application Name"
+msgstr "Hibás alkalmazásnév"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1226
+msgid "Bad Application Command"
+msgstr "Hibás alkalmazásparancs"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1258
+msgid "Add Application"
+msgstr "Alkalmazás hozzáadása"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1259
+msgid "Edit Application"
+msgstr "Alkalmazás szerkesztése"
+
+#. Application Name label and entry
+#: capplets/file-types/file-types-capplet-dialogs.c:1271
+msgid "Application Name:"
+msgstr "Alkalmazás neve:"
+
+#. Application Command label and entry
+#: capplets/file-types/file-types-capplet-dialogs.c:1282
+msgid "Application Command:"
+msgstr "Alkalmazásparancs:"
+
+#. Open Behavior frame
+#: capplets/file-types/file-types-capplet-dialogs.c:1293
+msgid "Open Behavior"
+msgstr "Megnyitási viselkedés"
+
+#: capplets/file-types/file-types-capplet-dialogs.c:1299
+msgid "Can open multiple files"
+msgstr "Képes több fájl egyidejû megnyitására"
+
+#. FIXME bugzilla.eazel.com 6066: This needs to be three options now: "yes", "no", and "use uris for non-file locations"
+#: capplets/file-types/file-types-capplet-dialogs.c:1307
+msgid "Can open from URI"
+msgstr "Képes URI megnyitására"
+
+#: capplets/file-types/file-types-capplet.c:735
+#: capplets/file-types/file-types-capplet.c:1877
+msgid "MIME Type"
+msgstr "MIME-típus"
+
+#: capplets/file-types/file-types-capplet.c:742
+msgid "Change Icon"
+msgstr "Ikon megváltoztatása"
+
+#: capplets/file-types/file-types-capplet.c:749
+msgid "Change File Extensions"
+msgstr "Kiterjesztések megváltoztatása"
+
+#: capplets/file-types/file-types-capplet.c:757
+msgid "Default Action:"
+msgstr "Alapértelmezett mûvelet"
+
+#: capplets/file-types/file-types-capplet.c:769
+msgid "Use Viewer"
+msgstr "Nézõke használata"
+
+#: capplets/file-types/file-types-capplet.c:775
+msgid "Open With Application"
+msgstr "Megnyitás alkalmazással"
+
+#: capplets/file-types/file-types-capplet.c:786
+msgid "Edit List"
+msgstr "Lista szerkesztése"
+
+#: capplets/file-types/file-types-capplet.c:811
+msgid "Add New MIME Type..."
+msgstr "Új MIME-típus hozzáadása..."
+
+#: capplets/file-types/file-types-capplet.c:817
+msgid "Delete This MIME Type"
+msgstr "MIME-típus törlése"
+
+#: capplets/file-types/file-types-capplet.c:828
+msgid "Revert to System Defaults"
+msgstr "Alapértelmezett értékek visszaállítása"
+
+#: capplets/file-types/file-types-capplet.c:1069
+#: capplets/file-types/file-types-capplet.c:1213
+msgid "None"
+msgstr "Nincs"
+
+#: capplets/file-types/file-types-capplet.c:1318
+msgid ""
+"Reverting to system settings will lose any changes\n"
+"you have ever made to File Types and Programs.\n"
+"Revert anyway?"
+msgstr ""
+"Az alapértelmezett értékek visszaállításával minden olyan\n"
+"beállítás elvész, amelyet valaha is módosítottál a fájltípusokkal\n"
+"és a hozzájuk társított programokkal kapcsolatban.\n"
+"Szeretnéd visszaállítani az eredeti értékeket?"
+
+#: capplets/file-types/file-types-capplet.c:1428
+#: capplets/file-types/file-types-capplet.c:1614
+#: capplets/file-types/file-types-capplet.c:1757
+#, c-format
+msgid "View as %s"
+msgstr "Nézet mint %s"
+
+#: capplets/file-types/file-types-capplet.c:1876
+msgid "Description"
+msgstr "Leírás"
+
+#: capplets/file-types/file-types-capplet.c:1878
+msgid "Extension"
+msgstr "Kiterjesztés"
+
+#: capplets/file-types/file-types-capplet.c:1879
+msgid "Default Action"
+msgstr "Alapértelmezett mûvelet"
+
+#: capplets/file-types/file-types-icon-entry.c:381
+msgid "Select an icon"
+msgstr "Válassz ki egy ikont"
 
 #: capplets/mouse-properties/mouse-properties.c:267
 msgid "Mouse buttons"
@@ -1014,32 +1044,36 @@ msgstr "Protokoll"
 msgid "Command"
 msgstr "Parancs"
 
-#: capplets/url-properties/url-properties.c:92
+#: capplets/url-properties/url-properties.c:93
 msgid "handler:"
 msgstr "kezelõ:"
 
 #. set some commonly used handlers
-#: capplets/url-properties/url-properties.c:102
+#: capplets/url-properties/url-properties.c:103
 msgid "Netscape"
 msgstr "Netscape"
 
-#: capplets/url-properties/url-properties.c:107
+#: capplets/url-properties/url-properties.c:108
 msgid "Netscape (new window)"
 msgstr "Netscape (új ablak)"
 
 # capplets/url-properties/url-properties.c:113
-#: capplets/url-properties/url-properties.c:113
+#: capplets/url-properties/url-properties.c:121
 msgid "Help browser"
 msgstr "Súgóböngészõ"
 
 # capplets/url-properties/url-properties.c:118
-#: capplets/url-properties/url-properties.c:118
+#: capplets/url-properties/url-properties.c:127
 msgid "Help browser (new window)"
 msgstr "Súgóböngészõ (új ablakban)"
 
-#: capplets/url-properties/url-properties.c:130
+#: capplets/url-properties/url-properties.c:140
 msgid "Set"
 msgstr "Beállítás"
+
+#: capplets/url-properties/url-properties.c:148
+msgid "Remove"
+msgstr "Törlés"
 
 #: capplets/wm-properties/wm-properties-capplet.c:142
 #, c-format
@@ -1193,6 +1227,14 @@ msgstr "Ablakkezelõ szerkesztése"
 msgid "You cannot delete the current Window Manager"
 msgstr "Nem törölheted a futó ablakkezelõt"
 
+#: capplets/wm-properties/wm-properties-capplet.c:1093
+msgid "Edit..."
+msgstr "Szerkesztés..."
+
+#: capplets/wm-properties/wm-properties-capplet.c:1098
+msgid "Delete"
+msgstr "Törlés"
+
 #: capplets/wm-properties/wm-properties-capplet.c:1134
 msgid ""
 "an initialization error occurred while starting 'wm-properties-capplet'.\n"
@@ -1267,15 +1309,15 @@ msgstr ""
 "Az alapértelmezett mûvelet figyelmen kívül hagyása. Egyes init-session "
 "esetekben használatos"
 
-#: control-center/capplet-widget.c:262
+#: control-center/capplet-widget.c:272
 msgid "Sorry, no help is available for these settings."
 msgstr "Sajnálom, nincs súgó ezekrõl a beállításokról."
 
-#: control-center/corba-glue.c:75
+#: control-center/corba-glue.c:77
 msgid "capplet-command to be run."
 msgstr "capplet-parancs futtatáshoz."
 
-#: control-center/corba-glue.c:75
+#: control-center/corba-glue.c:77
 msgid "CAPPLET"
 msgstr "CAPPLET"
 
@@ -1348,6 +1390,130 @@ msgstr "Gépnév:"
 msgid "Unknown"
 msgstr "Ismeretlen"
 
+#~ msgid "Mime Type: "
+#~ msgstr "Mime-típus: "
+
+#~ msgid "Add"
+#~ msgstr "Hozzáadás"
+
+#~ msgid "First Regular Expression: "
+#~ msgstr "Elsõ reguláris kifejezés: "
+
+#~ msgid "Second Regular Expression: "
+#~ msgstr "Második reguláris kifejezés: "
+
+#~ msgid "Mime Type Actions"
+#~ msgstr "Mime-típus mûveletek"
+
+#~ msgid "Example: emacs %f"
+#~ msgstr "Példa: emacs %f"
+
+#~ msgid "Open"
+#~ msgstr "Megnyitás"
+
+#~ msgid "Select a file..."
+#~ msgstr "Fájlkiválasztás..."
+
+#~ msgid "View"
+#~ msgstr "Megtekintés"
+
+#~ msgid "Set actions for %s"
+#~ msgstr "Mûvelet beállítása %s típushoz"
+
+#~ msgid ""
+#~ "You must add either a regular-expression or\n"
+#~ "a file-name extension"
+#~ msgstr ""
+#~ "Vagy egy reguláris kifejezést, vagy\n"
+#~ "egy fájlnév-kiterjesztést adj meg"
+
+#~ msgid ""
+#~ "Please put your mime-type in the format:\n"
+#~ "CATEGORY/TYPE\n"
+#~ "\n"
+#~ "For Example:\n"
+#~ "image/png"
+#~ msgstr ""
+#~ "Kérlek a mime-típusodat ebben a formátumban add meg:\n"
+#~ "KATEGÓRIA/TÍPUS\n"
+#~ "\n"
+#~ "Például:\n"
+#~ "image/png"
+
+#~ msgid "This mime-type already exists"
+#~ msgstr "Ez a mime-típus már létezik"
+
+#~ msgid ""
+#~ "We are unable to create the directory\n"
+#~ "~/.gnome/mime-info\n"
+#~ "\n"
+#~ "We will not be able to save the state."
+#~ msgstr ""
+#~ "Nem sikerült létrehozni a könyvtárat:\n"
+#~ "~/.gnome/mime-info\n"
+#~ "\n"
+#~ "Nem lehet elmenteni az állást."
+
+#~ msgid ""
+#~ "We are unable to access the directory\n"
+#~ "~/.gnome/mime-info\n"
+#~ "\n"
+#~ "We will not be able to save the state."
+#~ msgstr ""
+#~ "Nem sikerült elérni a könyvtárat\n"
+#~ "~/.gnome/mime-info\n"
+#~ "\n"
+#~ "Nem lehet elmenteni az állást."
+
+#~ msgid ""
+#~ "Cannot create the file\n"
+#~ "~/.gnome/mime-info/user.mime\n"
+#~ "\n"
+#~ "We will not be able to save the state"
+#~ msgstr ""
+#~ "Nem sikerült létrehozni a fájlt\n"
+#~ "~/.gnome/mime-info/user.mime\n"
+#~ "\n"
+#~ "Nem lehet elmenteni az állást"
+
+#~ msgid ""
+#~ "Cannot create the file\n"
+#~ "~/.gnome/mime-info/user.keys\n"
+#~ "\n"
+#~ "We will not be able to save the state"
+#~ msgstr ""
+#~ "Nem sikerült létrehozni a fájlt\n"
+#~ "~/.gnome/mime-info/user.keys\n"
+#~ "\n"
+#~ "Nem lehet elmenteni az állást"
+
+#~ msgid ""
+#~ "No help is available/installed for these settings. Please make sure you\n"
+#~ "have the Control Center documentation installed on your system."
+#~ msgstr ""
+#~ "Nincs súgó (vagy nincs telepítve) ezekhez a beállításokhoz. Kérlek gyõzõdj\n"
+#~ "meg arról, hogy telepítetted a Vezérlõpult dokumentációját."
+
+#~ msgid ""
+#~ "Add a new Mime Type\n"
+#~ "For example:  image/tiff; text/x-scheme"
+#~ msgstr ""
+#~ "Adj meg egy új mime-típust\n"
+#~ "Például: image/tiff; text/x-scheme"
+
+#~ msgid "Mime Type:"
+#~ msgstr "Mime-típus:"
+
+#~ msgid "Regular Expressions"
+#~ msgstr "Reguláris kifejezések"
+
+#~ msgid ""
+#~ "You can set up two regular expressions here to identify the Mime Type\n"
+#~ "by.  These fields are optional."
+#~ msgstr ""
+#~ "Két reguláris kifejezést adhatsz meg itt, a mime-típus meghatározására.\n"
+#~ "Ezeket nem kötelezõ kitölteni."
+
 #~ msgid "Session"
 #~ msgstr "Munkafolyamat"
 
@@ -1356,9 +1522,6 @@ msgstr "Ismeretlen"
 
 #~ msgid "Start Session"
 #~ msgstr "Munkafolyamat indítása"
-
-#~ msgid "Cancel Login"
-#~ msgstr "Mégsem lépek be"
 
 #~ msgid "Order: "
 #~ msgstr "Sorrend: "
