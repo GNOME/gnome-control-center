@@ -28,6 +28,9 @@
 #ifdef HAVE_ALSA
 #include "acme-volume-alsa.h"
 #endif
+#ifdef HAVE_GSTREAMER
+#include "acme-volume-gstreamer.h"
+#endif
 #include "acme-volume-dummy.h"
 
 static GObjectClass *parent_class = NULL;
@@ -35,6 +38,8 @@ static GObjectClass *parent_class = NULL;
 static void
 acme_volume_class_init (AcmeVolumeClass *klass)
 {
+	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
 	parent_class = g_type_class_peek_parent (klass);
 };
 
@@ -117,6 +122,10 @@ AcmeVolume *acme_volume_new (void)
 {
 	AcmeVolume *vol;
 
+#ifdef HAVE_GSTREAMER
+	vol = ACME_VOLUME (g_object_new (acme_volume_gstreamer_get_type (), NULL));
+	return vol;
+#endif
 #ifdef HAVE_ALSA
 	vol = ACME_VOLUME  (g_object_new (acme_volume_alsa_get_type (), NULL));
 	if (vol != NULL && ACME_VOLUME_ALSA (vol)->_priv != NULL)

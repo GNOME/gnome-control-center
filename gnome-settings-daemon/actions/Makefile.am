@@ -16,15 +16,21 @@ FB_CFLAGS = -DHAVE_FB
 FB_files = acme-fb-level.c acme-fb-level.h
 endif
 
-INCLUDES = $(GNOME_CFLAGS) -I$(top_srcdir) $(ALSA_CFLAGS) $(OSS_CFLAGS) $(FB_CFLAGS)
+if HAVE_GSTREAMER
+HAVE_GST_CFLAGS = -DHAVE_GSTREAMER
+GST_files = acme-volume-gstreamer.c acme-volume-gstreamer.h
+endif
+
+INCLUDES = $(GNOME_CFLAGS) -I$(top_srcdir) $(ALSA_CFLAGS) $(OSS_CFLAGS) $(FB_CFLAGS) $(HAVE_GST_CFLAGS) $(GST_CFLAGS)
 
 libacme_la_SOURCES = \
 	$(FB_files) $(OSS_files) $(ALSA_files)	\
+	$(GST_files)				\
 	acme-volume.c acme-volume.h		\
 	acme-volume-dummy.c acme-volume-dummy.h
 
 libacme_la_LIBADD = \
-	$(ALSA_LIBS)
+	$(ALSA_LIBS) $(GST_LIBS)
 
 Datadir = $(datadir)/control-center-2.0/interfaces/
 Data_DATA = acme.glade
