@@ -1,3 +1,11 @@
+Wed Jan 03 04:15:04 2001  George Lebl <jirka@5z.com>
+
+	* capplets/background-properties/render-background.c: Do what the
+	  comment says and create a new display connection.  Otherwise all
+	  resources get leaked to the root, and not just the root pixmap
+	  as intended.  Imlib pixmap cache should make leaking all resources
+	  even a more memorable experience.
+
 2000-11-23  Stanislav Brabec  <utx@penguin.cz> 
 
 	* */*/*.desktop, */*/*.directory: Remove trailing dot in english
