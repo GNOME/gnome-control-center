@@ -336,7 +336,7 @@ get_gconf_base_name (MimeCategoryInfo *category)
 	tmp1 = mime_category_info_get_full_name (category);
 
 	for (tmp = tmp1; *tmp != '\0'; tmp++)
-		if (isspace (tmp)) *tmp = '-';
+		if (isspace (*tmp)) *tmp = '-';
 
 	tmp = g_strconcat ("/desktop/gnome/file-types-categories/",
 			   tmp1, "/default-action-id", NULL);
