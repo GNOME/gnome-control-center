@@ -69,6 +69,8 @@ static void store_data                      (ServiceEditDialog *dialog);
 
 static void program_sensitive_cb            (ServiceEditDialog *dialog,
 					     GtkToggleButton   *tb);
+static void program_changed_cb              (ServiceEditDialog *dialog,
+					     GtkOptionMenu     *option_menu);
 
 static void response_cb                     (ServiceEditDialog *dialog,
 					     gint               response_id);
@@ -123,6 +125,7 @@ service_edit_dialog_init (ServiceEditDialog *dialog, ServiceEditDialogClass *cla
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog->p->dialog_win)->vbox), WID ("service_edit_widget"), TRUE, TRUE, 0);
 
 	g_signal_connect_swapped (G_OBJECT (WID ("run_program_toggle")), "toggled", (GCallback) program_sensitive_cb, dialog);
+	g_signal_connect_swapped (G_OBJECT (WID ("program_select")), "changed", (GCallback) program_changed_cb, dialog);
 
 	g_signal_connect_swapped (G_OBJECT (dialog->p->dialog_win), "response", (GCallback) response_cb, dialog);
 }
@@ -278,9 +281,21 @@ populate_app_list (ServiceEditDialog *dialog)
 	GtkMenu       *menu;
 	GtkWidget     *item;
 
-	option_menu = GTK_OPTION_MENU (WID ("program_select"));
+	const GList   *service_apps;
+	GnomeVFSMimeApplication *app;
 
+	option_menu = GTK_OPTION_MENU (WID ("program_select"));
 	menu = GTK_MENU (gtk_menu_new ());
+	service_apps = get_apps_for_service_type (dialog->p->info->protocol);
+
+	while (service_apps != NULL) {
+		app = service_apps->data;
+		item = gtk_menu_item_new_with_label (app->name);
+		g_object_set_data (G_OBJECT (item), "app", app);
+		gtk_widget_show (item);
+		gtk_menu_append (menu, item);
+		service_apps = service_apps->next;
+	}
 
 	item = gtk_menu_item_new_with_label (_("Custom"));
 	gtk_widget_show (item);
@@ -328,6 +343,24 @@ program_sensitive_cb (ServiceEditDialog *dialog, GtkToggleButton *tb)
 	else if (dialog->p->info == NULL || dialog->p->info->protocol == NULL ||
 		 strcmp (dialog->p->info->protocol, "ftp"))
 		gtk_widget_set_sensitive (WID ("program_frame"), FALSE);
+}
+
+static void
+program_changed_cb (ServiceEditDialog *dialog, GtkOptionMenu *option_menu)
+{
+	int id;
+	GtkMenuShell *menu;
+
+	menu = GTK_MENU_SHELL (gtk_option_menu_get_menu (option_menu));
+	id = gtk_option_menu_get_history (option_menu);
+
+	if (id == g_list_length (menu->children) - 1) {
+		gtk_widget_set_sensitive (WID ("program_entry_box"), TRUE);
+		gtk_widget_set_sensitive (WID ("needs_terminal_toggle"), TRUE);
+	} else {
+		gtk_widget_set_sensitive (WID ("program_entry_box"), FALSE);
+		gtk_widget_set_sensitive (WID ("needs_terminal_toggle"), FALSE);
+	}
 }
 
 static void

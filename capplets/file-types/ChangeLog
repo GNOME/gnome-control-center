@@ -1,5 +1,14 @@
 2002-01-11  Bradford Hovinen  <hovinen@ximian.com>
 
+	* service-info.c (get_apps_for_service_type): Implement
+
+	* service-edit-dialog.c (program_changed_cb): Implement
+	(service_edit_dialog_init): Connect program_select changed signal
+	(populate_app_list): Fill app menu with results from
+	get_apps_for_service_type
+
+	* service-info.c (fill_service_apps): Implement
+
 	* service-edit-dialog.c (store_data): Retrieve app info from
 	option menu
 

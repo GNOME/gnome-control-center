@@ -27,14 +27,53 @@
 #endif
 
 #include <gconf/gconf-client.h>
+#include <libgnomevfs/gnome-vfs-application-registry.h>
 
 #include "service-info.h"
 #include "mime-types-model.h"
+
+/* This is a hash table of GLists indexed by protocol name; each entry in each
+ * list is a GnomeVFSMimeApplication that can handle that protocol */
+
+static GHashTable *service_apps = NULL;
 
 static gchar *
 get_key_name (const ServiceInfo *info, gchar *end) 
 {
 	return g_strconcat ("/desktop/gnome/url-handlers/", info->protocol, "/", end, NULL);
+}
+
+static void
+fill_service_apps (void) 
+{
+	GList *apps, *tmp, *tmp1;
+	const gchar *uri_schemes_str;
+	gchar **uri_schemes;
+	int i;
+
+	if (service_apps == NULL)
+		service_apps = g_hash_table_new (g_str_hash, g_str_equal);
+
+	/* FIXME: This currently returns NULL. We need a way to retrieve all
+	   apps in the registry */
+	apps = gnome_vfs_application_registry_get_applications ("*/*");
+
+	for (tmp = apps; tmp != NULL; tmp = tmp->next) {
+		uri_schemes_str = gnome_vfs_application_registry_peek_value (tmp->data, "supported_uri_schemes");
+		uri_schemes = g_strsplit (uri_schemes_str, ",", -1);
+
+		for (i = 0; uri_schemes[i] != NULL; i++) {
+			tmp1 = g_hash_table_lookup (service_apps, uri_schemes[i]);
+			tmp1 = g_list_prepend (tmp1, gnome_vfs_application_registry_get_mime_application (tmp->data));
+			g_hash_table_remove (service_apps, uri_schemes[i]);
+			g_hash_table_insert (service_apps, uri_schemes[i], tmp1);
+		}
+
+		g_strfreev (uri_schemes);
+	}
+
+	g_list_foreach (apps, (GFunc) g_free, NULL);
+	g_list_free (apps);
 }
 
 static void
@@ -182,4 +221,13 @@ service_info_free (ServiceInfo *info)
 	g_free (info->description);
 	gnome_vfs_mime_application_free (info->app);
 	g_free (info->custom_line);
+}
+
+const GList *
+get_apps_for_service_type (gchar *protocol) 
+{
+	if (service_apps == NULL)
+		fill_service_apps ();
+
+	return g_hash_table_lookup (service_apps, protocol);
 }

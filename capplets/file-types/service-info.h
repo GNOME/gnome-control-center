@@ -56,6 +56,8 @@ void         service_info_save   (const ServiceInfo *info);
 void         service_info_update (ServiceInfo       *info);
 void         service_info_free   (ServiceInfo       *info);
 
+const GList *get_apps_for_service_type (gchar *protocol);
+
 G_END_DECLS
 
 #endif /* __SERVICE_INFO_H */
