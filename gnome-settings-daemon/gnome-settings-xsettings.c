@@ -91,6 +91,10 @@ static TranslationEntry translations [] = {
   { "/desktop/gnome/interface/cursor_blink_time",	"Net/CursorBlinkTime",
       GCONF_VALUE_INT,		translate_int_int },
   { "/desktop/gnome/interface/gtk_theme",		"Net/ThemeName",
+      GCONF_VALUE_STRING,	translate_string_string },
+  { "/desktop/gnome/interface/gtk-im-preedit-style",	"Gtk/IMPreeditStyle",
+      GCONF_VALUE_STRING,	translate_string_string },
+  { "/desktop/gnome/interface/gtk-im-status-style",	"Gtk/IMStatusStyle",
       GCONF_VALUE_STRING,	translate_string_string }
 };
 

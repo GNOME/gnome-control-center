@@ -1,3 +1,20 @@
+Tue Sep 24 15:47:29 2002  HideToshi Tajima  <hidetoshi.tajima@sun.com>
+
+	disable/enable preedit/status in GtkIMContextXIM (#59076)
+	
+	* gnome-settings-xsettings.c: added two new xsettings
+	for GTK+ input method preedit and status styles.
+
+	With the other patch for gtk+, the preedit and status styles of
+	GTK+ input method are configurable with associated gconf schemas
+	keys:
+	"/desktop/gnome/interface/gtk-im-preedit-style"
+	"/desktop/gnome/interface/gtk-im-status-style"
+
+	Both are set to "callback" by default, and platform's 
+	packging can have different default by changing
+	libgnome's desktop_gnome_interface.schemas.
+
 2002-09-11  Jody Goldberg <jody@gnome.org>
 
 	* gnome-settings-accessibility-keyboard.c (set_server_from_gconf) :
