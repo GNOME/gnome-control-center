@@ -107,6 +107,7 @@ setup_tree_view (GtkTreeView *tree_view,
   gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (model), 0, details_tree_sort_func, NULL, NULL);
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (model), 0, GTK_SORT_ASCENDING);
   gtk_tree_view_set_model (tree_view, model);
+
   selection = gtk_tree_view_get_selection (tree_view);
   gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
   g_signal_connect (G_OBJECT (selection), "changed", changed_callback, dialog);
@@ -158,6 +159,21 @@ window_theme_selection_changed (GtkTreeSelection *selection,
     gnome_window_manager_change_settings (window_manager, &wm_settings);
   }
 
+}
+
+static void
+gnome_theme_installer_run_cb (GtkWidget *button,
+			      GtkWidget *parent_window)
+{
+  gnome_theme_installer_run (parent_window, NULL, FALSE);
+}
+
+
+static void
+gnome_icon_theme_installer_run_cb (GtkWidget *button,
+			      GtkWidget *parent_window)
+{
+  gnome_theme_installer_run (parent_window, NULL, TRUE);
 }
 
 static void
@@ -267,7 +283,6 @@ update_gconf_key_from_selection (GtkTreeSelection *selection,
   g_object_unref (client);
 }
 
-
 void
 gnome_theme_details_init (void)
 {
@@ -297,19 +312,19 @@ gnome_theme_details_init (void)
 
   /* gtk themes */
   widget = WID ("control_install_button");
-  g_signal_connect_swapped (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_installer_run), parent);
+  g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_installer_run_cb), parent);
   widget = WID ("control_manage_button");
   g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_manager_show_manage_themes), dialog);
 
   /* window manager themes */
   widget = WID ("window_install_button");
-  g_signal_connect_swapped (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_installer_run), parent);
+  g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_icon_theme_installer_run_cb), parent);
   widget = WID ("window_manage_button");
   g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_manager_window_show_manage_themes), dialog);
 
   /* icon themes */
   widget = WID ("icon_install_button");
-  g_signal_connect_swapped (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_installer_run), parent);
+  g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_installer_run_cb), parent);
   widget = WID ("icon_manage_button");
   g_signal_connect (G_OBJECT (widget), "clicked", G_CALLBACK (gnome_theme_manager_icon_show_manage_themes), dialog);
 
@@ -374,6 +389,9 @@ gnome_theme_details_reread_themes_from_disk (void)
   gboolean have_gtk_theme;
   gboolean have_window_theme;
   gboolean have_icon_theme;
+
+  
+  gnome_theme_details_init ();
 
   dialog = gnome_theme_manager_get_theme_dialog ();
   window_manager = gnome_wm_manager_get_current (gdk_display_get_default_screen (gdk_display_get_default ()));
@@ -534,6 +552,8 @@ gnome_theme_details_update_from_gconf (void)
   gchar *theme;
   GnomeWindowManager *window_manager;
   GnomeWMSettings wm_settings;
+
+  gnome_theme_details_init ();
 
   window_manager = gnome_wm_manager_get_current (gdk_display_get_default_screen (gdk_display_get_default ()));
 

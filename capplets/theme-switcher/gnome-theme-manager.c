@@ -1058,6 +1058,15 @@ setup_meta_tree_view (GtkTreeView *tree_view,
   g_signal_connect (G_OBJECT (selection), "changed", changed_callback, dialog);
 }
 
+
+static void
+gnome_meta_theme_installer_run_cb (GtkWidget *button,
+				   GtkWidget *parent_window)
+{
+  gnome_theme_installer_run (parent_window, NULL, FALSE);
+}
+
+
 static void
 gnome_theme_save_clicked (GtkWidget *button,
 			  gpointer   data)
@@ -1124,6 +1133,8 @@ setup_dialog (GladeXML *dialog)
   gtk_size_group_add_widget (size_group, WID ("meta_theme_font2_button"));
   gtk_size_group_add_widget (size_group, WID ("meta_theme_background2_button"));
   g_object_unref (size_group);
+
+  g_signal_connect (G_OBJECT (WID ("meta_theme_install_button")), "clicked", G_CALLBACK (gnome_meta_theme_installer_run_cb), parent);
 
   g_signal_connect (G_OBJECT (WID ("meta_theme_details_button")), "clicked", gnome_theme_details_show, NULL);
 
@@ -1340,7 +1351,7 @@ gnome_theme_manager_drag_data_received_cb (GtkWidget *widget, GdkDragContext *co
 		gnome_vfs_uri_list_unref (uris);
 	}
 
-	gnome_theme_installer_run (widget, filename);
+	gnome_theme_installer_run (widget, filename, FALSE);
 	g_free (filename);
 }
 

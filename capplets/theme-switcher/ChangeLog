@@ -1,3 +1,14 @@
+Thu Jan 16 02:32:39 2003  Jonathan Blandford  <jrb@gnome.org>
+
+	* gnome-theme-details.c (gnome_theme_details_update_from_gconf):
+	make sure we're initted, as this function can be run
+	asynchronously.
+
+	* gnome-theme-manager.c (gnome_meta_theme_installer_run_cb): hook
+	up the installer.
+
+	* gnome-theme-installer.c: Try to handle icon themes.
+
 Wed Jan 15 20:15:31 2003  Jonathan Blandford  <jrb@redhat.com>
 
 	* gnome-theme-manager.c (gnome_theme_manager_tree_sort_func): 

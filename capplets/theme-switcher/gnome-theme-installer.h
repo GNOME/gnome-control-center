@@ -24,6 +24,6 @@
 
 #include <gtk/gtk.h>
 
-void gnome_theme_installer_run (GtkWidget *parent, gchar *filename);
+void gnome_theme_installer_run (GtkWidget *parent, gchar *filename, gboolean icon_theme);
 
 #endif /* GNOME_THEME_INSTALLER_H */
