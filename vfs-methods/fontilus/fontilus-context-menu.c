@@ -90,7 +90,7 @@ handle_event(BonoboListener *listener, const gchar *event_name,
     if (!font_name) goto end;
 
     /* set font */
-    if (!strcmp(event_name, "UseAsApplicationFont")) {
+    if (!strcmp(event_name, "SetAsApplicationFont")) {
 	gchar *curval, *newval;
 
 	curval = gconf_client_get_string(default_client,
