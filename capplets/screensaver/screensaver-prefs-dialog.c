@@ -638,6 +638,7 @@ write_command_line (gchar *name, xmlNodePtr argument_data, GTree *widget_db)
 
 	ret = line->str;
 	g_string_free (line, FALSE);
+	g_log (G_LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "Command line is %s", ret);
 	return ret;
 }
 

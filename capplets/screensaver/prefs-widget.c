@@ -1299,7 +1299,7 @@ one_screensaver_cb (GtkToggleButton *button, PrefsWidget *widget)
 				SCREENSAVER
 				(widget->screensavers->data);
 			select_row (GTK_CLIST (widget->screensaver_list), 0);
-		} else {
+		} else if (widget->screensavers) {
 			widget->selected_saver->enabled = TRUE;
 		}
 	}
