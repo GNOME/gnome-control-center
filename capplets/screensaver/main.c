@@ -39,8 +39,8 @@
 #include <capplet-widget.h>
 
 #ifdef HAVE_XIMIAN_ARCHIVER
-#  include <ximian-archiver/archive.h>
-#  include <ximian-archiver/location.h>
+#  include <bonobo.h>
+#  include <ximian-archiver/archiver-client.h>
 #endif /* HAVE_XIMIAN_ARCHIVER */
 
 #include "preferences.h"
@@ -57,26 +57,37 @@ static CappletWidget *capplet;
 
 #ifdef HAVE_XIMIAN_ARCHIVER
 
-static Archive *archive;
+static ConfigArchiver_Archive archive;
 static gboolean outside_location;
 
 static void
 store_archive_data (void) 
 {
-	Location *location;
+	ConfigArchiver_Location location;
 	xmlDocPtr xml_doc;
+	CORBA_Environment ev;
+
+	CORBA_exception_init (&ev);
 
 	if (capplet_get_location () == NULL)
-		location = archive_get_current_location (archive);
+		location = ConfigArchiver_Archive__get_currentLocation (archive, &ev);
 	else
-		location = archive_get_location (archive,
-						 capplet_get_location ());
+		location = ConfigArchiver_Archive_getLocation
+			(archive, capplet_get_location (), &ev);
+
+	if (BONOBO_EX (&ev) || location == CORBA_OBJECT_NIL) {
+		g_critical ("Could not open location %s", capplet_get_location ());
+		return;
+	}
 
 	xml_doc = preferences_write_xml (prefs);
-	location_store_xml (location, "screensaver-properties-capplet",
-			    xml_doc, STORE_MASK_PREVIOUS);
+	location_client_store_xml (location, "screensaver-properties-capplet",
+				   xml_doc, STORE_MASK_PREVIOUS, &ev);
 	xmlFreeDoc (xml_doc);
-	archive_close (archive);
+	bonobo_object_release_unref (archive, NULL);
+	bonobo_object_release_unref (location, NULL);
+
+	CORBA_exception_free (&ev);
 }
 
 #endif /* HAVE_XIMIAN_ARCHIVER */
@@ -314,6 +325,12 @@ do_restore_from_defaults (void)
 int
 main (int argc, char **argv)
 {
+#ifdef HAVE_XIMIAN_ARCHIVER
+	CORBA_ORB orb;
+	CORBA_Environment ev;
+	CORBA_char *current_location_id = NULL;
+#endif /* HAVE_XIMIAN_ARCHIVER */
+
 	GnomeClient *client;
 	GnomeClientFlags flags;
 	gint token, res;
@@ -348,6 +365,13 @@ main (int argc, char **argv)
 
 	glade_gnome_init ();
 
+#ifdef HAVE_XIMIAN_ARCHIVER
+	CORBA_exception_init (&ev);
+	orb = oaf_init (argc, argv);
+	if (!bonobo_init (orb, CORBA_OBJECT_NIL, CORBA_OBJECT_NIL))
+		g_critical ("Could not initialize Bonobo");
+#endif /* HAVE_XIMIAN_ARCHIVER */
+
 	client = gnome_master_client ();
 	flags = gnome_client_get_flags (client);
 
@@ -378,11 +402,16 @@ main (int argc, char **argv)
 
 	init_resource_database (argc, argv);
 #ifdef HAVE_XIMIAN_ARCHIVER
-	archive = ARCHIVE (archive_load (FALSE));
+	archive = bonobo_get_object ("archive:user-archive", "IDL:ConfigArchiver/Archive:1.0", &ev);
+
+	if (BONOBO_EX (&ev) || archive == CORBA_OBJECT_NIL)
+		g_critical ("Could not resolve archive moniker");
+	else
+		current_location_id = ConfigArchiver_Archive__get_currentLocationId (archive, &ev);
 
 	if (capplet_get_location () != NULL &&
-	    strcmp (capplet_get_location (),
-		    archive_get_current_location_id (archive)))
+	    current_location_id != NULL &&
+	    strcmp (capplet_get_location (), current_location_id))
 	{
 		outside_location = TRUE;
 		do_set_xml (FALSE);
@@ -393,6 +422,9 @@ main (int argc, char **argv)
 		prefs = preferences_new ();
 		preferences_load (prefs);
 	}
+
+	if (current_location_id != NULL)
+		CORBA_free (current_location_id);
 
 	if (!outside_location && token) {
 		if (prefs->selection_mode != SM_DISABLE_SCREENSAVER)
