@@ -1,3 +1,8 @@
+Sun May  5 22:15:18 2002  Jonathan Blandford  <jrb@gnome.org>
+
+	* gnome-keybinding-properties.c (get_wm_name): g_utf8_validate
+	doesn't like the '\000' in strings.
+
 2002-05-06  Anders Carlsson  <andersca@gnu.org>
 
 	* eggcellrendererkeys.c: (grab_key_callback), (ungrab_stuff),
