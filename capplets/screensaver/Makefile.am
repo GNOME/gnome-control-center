@@ -16,7 +16,7 @@ Glade_DATA = \
 
 SUBDIRS = screensavers
 
-EXTRA_DIST = ChangeLog $(Applications_DATA) $(pixmap_DATA) $(Glade_DATA)
+EXTRA_DIST = ChangeLog $(Applications_in_files) $(pixmap_DATA) $(Glade_DATA)
 
 INCLUDES = \
         -DGNOMELOCALEDIR=\""$(datadir)/locale"\" \

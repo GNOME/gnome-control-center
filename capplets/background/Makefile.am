@@ -10,7 +10,7 @@ Gladedir = $(datadir)/control-center-data
 Glade_DATA = \
 	background-properties.glade
 
-EXTRA_DIST = $(Applications_DATA) $(Glade_DATA)
+EXTRA_DIST = $(Applications_in_files) $(Glade_DATA)
 
 INCLUDES = \
         -DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\

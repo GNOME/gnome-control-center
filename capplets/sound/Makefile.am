@@ -18,7 +18,7 @@ oafdir = $(datadir)/oaf
 oaf_DATA = \
 	Bonobo_Control_Capplet_sound_properties.oaf
 
-EXTRA_DIST = ChangeLog $(Applications_DATA) $(Glade_DATA) $(oaf_DATA) $(defaults_DATA)
+EXTRA_DIST = ChangeLog $(Applications_in_files) $(Glade_DATA) $(oaf_DATA) $(defaults_DATA)
 
 INCLUDES = \
         -DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\

@@ -16,7 +16,7 @@ Gladedir = $(datadir)/control-center-data
 Glade_DATA = \
 	mouse-properties.glade
 
-EXTRA_DIST = $(Applications_DATA) $(Glade_DATA) $(pixmap_DATA)
+EXTRA_DIST = $(Applications_in_files) $(Glade_DATA) $(pixmap_DATA)
 
 INCLUDES = \
         -DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\
