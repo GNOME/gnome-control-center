@@ -3,8 +3,9 @@
 /* main.c
  * Copyright (C) 2000-2001 Ximian, Inc.
  *
- * Written by: Bradford Hovinen <hovinen@ximian.com>
+ * Written by: Bradford Hovinen <hovinen@ximian.com>,
  *             Richard Hestilow <hestilow@ximian.com>
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2, or (at your option)
@@ -27,200 +28,111 @@
 
 #include <gnome.h>
 #include <bonobo.h>
-#include <bonobo/bonobo-property-bag-client.h>
+#include <gconf/gconf.h>
 #include <glade/glade.h>
-#include <gtk/gtksignal.h>
 #include "capplet-util.h"
+#include "gconf-property-editor.h"
 #include "applier.h"
 
 static void
-bonobo_config_set_filename (Bonobo_ConfigDatabase db,
-			    const char *key,
-			    const char *value,
-			    CORBA_Environment *opt_ev);
-
-/* Popt option for compat reasons */
-static gchar *background_image = NULL;
-
-const struct poptOption options [] = {
-	{ "background-image", 'b', POPT_ARG_STRING, &background_image, 0,
-	  N_("Set background image."), N_("IMAGE-FILE") },
-	{NULL, '\0', 0, NULL, 0}
-};
-
-static void
-apply_settings (Bonobo_ConfigDatabase db)
+apply_settings ()
 {
-	GtkObject         *prefs;
+	GObject           *prefs;
 	Applier           *applier;
-	CORBA_Environment  ev;
-	
-	CORBA_exception_init (&ev);
 
 	applier = APPLIER (applier_new (APPLIER_ROOT));
 
-	/* Hackity hackty */
-	if (background_image != NULL) {
-		bonobo_config_set_filename (db, "/main/wallpaper_filename", background_image, NULL);
-		Bonobo_ConfigDatabase_sync (db, &ev);
-	}
+	prefs = preferences_new ();
+	preferences_load (PREFERENCES (prefs));
 
-	prefs = preferences_new_from_bonobo_db (db, &ev);
+	applier_apply_prefs (applier, PREFERENCES (prefs));
+	g_object_unref (G_OBJECT (prefs));
 
-	if (BONOBO_EX (&ev) || prefs == NULL) {
-		g_critical ("Could not retrieve configuration from database (%s)", ev._repo_id);
-	} else {
-		applier_apply_prefs (applier, PREFERENCES (prefs));
-		gtk_object_destroy (GTK_OBJECT (prefs));
-	}
-
-	gtk_object_destroy (GTK_OBJECT (applier));
-
-	CORBA_exception_free (&ev);
-}
-
-static CORBA_any*
-gdk_color_to_bonobo (const gchar *colorstr)
-{
-	GdkColor tmp;
-	CORBA_Environment ev;
-	DynamicAny_DynAny dyn;
-	CORBA_any *any;
-	
-	g_return_val_if_fail (colorstr != NULL, NULL);
-
-	CORBA_exception_init (&ev);
-	
-	gdk_color_parse (colorstr, &tmp);
-	
-	dyn = CORBA_ORB_create_dyn_struct (bonobo_orb (),
-					   TC_Bonobo_Config_Color, &ev);
-
-	DynamicAny_DynAny_insert_double (dyn, ((double)tmp.red)/65535, &ev);
-	DynamicAny_DynAny_next (dyn, &ev);
-	DynamicAny_DynAny_insert_double (dyn, ((double)tmp.green)/65535, &ev);
-	DynamicAny_DynAny_next (dyn, &ev);
-	DynamicAny_DynAny_insert_double (dyn, ((double)tmp.blue)/65535, &ev);
-	DynamicAny_DynAny_next (dyn, &ev);
-	DynamicAny_DynAny_insert_double (dyn, 0, &ev);
-
-	any = DynamicAny_DynAny_to_any (dyn, &ev);
-
-	CORBA_Object_release ((CORBA_Object) dyn, &ev);
-	CORBA_exception_free (&ev);
-
-	return any;
+	g_object_unref (G_OBJECT (applier));
 }
 
 static void
-copy_color_from_legacy (Bonobo_ConfigDatabase db,
-			const gchar *key, const gchar *legacy_key)
+get_legacy_settings (void) 
 {
+	int val_int;
+	char *val_string;
+	gboolean val_boolean;
 	gboolean def;
-	gchar *val_string;
-       
-	g_return_if_fail (key != NULL);
-	g_return_if_fail (legacy_key != NULL);
+	gchar *val_filename;
 
-	val_string = gnome_config_get_string_with_default (legacy_key, &def);
-
-	if (!def)
-	{
-		CORBA_any *color = gdk_color_to_bonobo (val_string);
-		bonobo_config_set_value (db, key, color, NULL);
-		bonobo_arg_release (color);
-	}
-	
-	g_free (val_string);
-}
-
-static void
-bonobo_config_set_filename (Bonobo_ConfigDatabase  db,
-			    const char            *key,
-			    const char            *value,
-			    CORBA_Environment     *opt_ev)
-{
-	CORBA_any *any;
-	
-	any = bonobo_arg_new (TC_Bonobo_Config_FileName);
-	*((CORBA_char **)(any->_value)) = CORBA_string_dup ((value)?(value):"");
-	bonobo_config_set_value (db, key, any, opt_ev);
-	bonobo_arg_release (any);	
-}
-
-static void
-get_legacy_settings (Bonobo_ConfigDatabase db) 
-{
-	gboolean val_boolean, def;
-	gchar *val_string, *val_filename;
-	int val_ulong = -1, val_long = -1;
+	GConfEngine *engine;
 
 	static const int wallpaper_types[] = { 0, 1, 3, 2 };
 
-	COPY_FROM_LEGACY (boolean, "/main/enabled", bool, "/Background/Default/Enabled=true");
-	COPY_FROM_LEGACY (filename, "/main/wallpaper_filename", string, "/Background/Default/wallpaper=(none)");
+	engine = gconf_engine_get_default ();
+
+	gconf_engine_set_bool (engine, "/background-properties/enabled",
+			       gnome_config_get_bool ("/Background/Default/Enabled=true"), NULL);
+
+	val_filename = gnome_config_get_string ("/Background/Default/wallpaper=(none)");
+	gconf_engine_set_string (engine, "/background-properties/wallpaper-filename",
+				 val_filename, NULL);
 
 	if (val_filename != NULL && strcmp (val_filename, "(none)"))
-		bonobo_config_set_boolean (db, "/main/wallpaper_enabled", TRUE, NULL);
+		gconf_engine_set_bool (engine, "/background-properties/wallpaper-enabled", TRUE, NULL);
 	else
-		bonobo_config_set_boolean (db, "/main/wallpaper_enabled", FALSE, NULL);
+		gconf_engine_set_bool (engine, "/background-properties/wallpaper-enabled", FALSE, NULL);
 
-	val_ulong = gnome_config_get_int ("/Background/Default/wallpaperAlign=0");
-	bonobo_config_set_ulong (db, "/main/wallpaper_type", wallpaper_types[val_ulong], NULL);
+	g_free (val_filename);
 
-	copy_color_from_legacy (db, "/main/color1", "/Background/Default/color1");
-	copy_color_from_legacy (db, "/main/color2", "/Background/Default/color2");
+	gconf_engine_set_int (engine, "/background-properties/wallpaper-type",
+			      gnome_config_get_int ("/Background/Default/wallpaperAlign=0"), NULL);
+
+	gconf_engine_set_string (engine, "/background-properties/color1",
+				 gnome_config_get_string ("/Background/Default/color1"), NULL);
+	gconf_engine_set_string (engine, "/background-properties/color2",
+				 gnome_config_get_string ("/Background/Default/color2"), NULL);
 
 	/* Code to deal with new enum - messy */
-	val_ulong = -1;
+	val_int = -1;
 	val_string = gnome_config_get_string_with_default ("/Background/Default/simple=solid", &def);
 	if (!def) {
 		if (!strcmp (val_string, "solid")) {
-			val_ulong = ORIENTATION_SOLID;
+			val_int = ORIENTATION_SOLID;
 		} else {
 			g_free (val_string);
 			val_string = gnome_config_get_string_with_default ("/Background/Default/gradient=vertical", &def);
 			if (!def)
-				val_ulong = (!strcmp (val_string, "vertical")) ? ORIENTATION_VERT : ORIENTATION_HORIZ;
+				val_int = (!strcmp (val_string, "vertical")) ? ORIENTATION_VERT : ORIENTATION_HORIZ;
 		}
 	}
 
 	g_free (val_string);
 
-	if (val_ulong != -1)
-		bonobo_config_set_ulong (db, "/main/orientation", val_ulong, NULL);
+	if (val_int != -1)
+		gconf_engine_set_int (engine, "/background-properties/orientation", val_int, NULL);
 
 	val_boolean = gnome_config_get_bool_with_default ("/Background/Default/adjustOpacity=true", &def);
 
 	if (!def && val_boolean)
-		COPY_FROM_LEGACY (long, "/main/opacity", int, "/Background/Default/opacity=100");
+		gconf_engine_set_int (engine, "/background-properties/opacity",
+				      gnome_config_get_int ("/Background/Default/opacity=100"), NULL);
 }
 
 static void
-property_change_cb (BonoboListener     *listener,
-		    char               *event_name,
-		    CORBA_any          *any,
-		    CORBA_Environment  *ev,
-		    Preferences        *prefs)
+property_change_cb (GConfEngine        *engine,
+		    guint               cnxn_id,
+		    GConfEntry         *entry,
+		    Applier            *applier)
 {
 	GladeXML *dialog;
-	Applier  *applier;
+	Preferences *prefs;
+
+	/* FIXME: How do we get the preferences? */
 	
-	g_return_if_fail (prefs != NULL);
-	g_return_if_fail (IS_PREFERENCES (prefs));
+	dialog = g_object_get_data (G_OBJECT (prefs), "glade-data");
 
-	if (GTK_OBJECT_DESTROYED (prefs))
-		return;
-
-	dialog = gtk_object_get_data (GTK_OBJECT (prefs), "glade-data");
-
-	preferences_apply_event (prefs, event_name, any);
-	applier = gtk_object_get_data (GTK_OBJECT (WID ("prefs_widget")), "applier");
+	preferences_merge_entry (prefs, entry);
 	applier_apply_prefs (applier, prefs);
 
-	if (!strcmp (event_name, "Bonobo/Property:change:wallpaper_type")
-	    || !strcmp (event_name, "Bonobo/Property:change:wallpaper_filename")
-	    || !strcmp (event_name, "Bonobo/Property:change:wallpaper_enabled"))
+	if (!strcmp (entry->key, "/background-properties/wallpaper_type")
+	    || !strcmp (entry->key, "/background-properties/wallpaper_filename")
+	    || !strcmp (entry->key, "/background-properties/wallpaper_enabled"))
 		gtk_widget_set_sensitive
 			(WID ("color_frame"), applier_render_color_p (applier, prefs));
 }
@@ -234,11 +146,11 @@ real_realize_cb (Preferences *prefs)
 	g_return_val_if_fail (prefs != NULL, TRUE);
 	g_return_val_if_fail (IS_PREFERENCES (prefs), TRUE);
 
-	if (GTK_OBJECT_DESTROYED (prefs))
+	if (G_OBJECT (prefs)->ref_count == 0)
 		return FALSE;
 
-	dialog = gtk_object_get_data (GTK_OBJECT (prefs), "glade-data");
-	applier = gtk_object_get_data (GTK_OBJECT (WID ("prefs_widget")), "applier");
+	dialog = g_object_get_data (G_OBJECT (prefs), "glade-data");
+	applier = g_object_get_data (G_OBJECT (WID ("prefs_widget")), "applier");
 
 	applier_apply_prefs (applier, prefs);
 
@@ -260,65 +172,56 @@ realize_cb (GtkWidget *widget, Preferences *prefs)
 	gtk_timeout_add (100, (GtkFunction) realize_2_cb, prefs);
 }
 
-#define CUSTOM_CREATE_PEDITOR(type, corba_type, key, widget)                           \
-        {                                                                              \
-		BonoboPEditor *ed = BONOBO_PEDITOR                                     \
-			(bonobo_peditor_##type##_construct (WID (widget)));            \
-		bonobo_peditor_set_property (ed, bag, key, TC_##corba_type, NULL);     \
-	}
-
 static void
-setup_dialog (GtkWidget *widget, Bonobo_PropertyBag bag)
+setup_dialog (GtkWidget *widget, GConfChangeSet *changeset)
 {
 	GladeXML                      *dialog;
 	Applier                       *applier;
-	GtkObject                     *prefs;
+	GObject                       *prefs;
+	GConfEngine                   *engine;
+	GObject                       *peditor;
 
-	CORBA_Environment              ev;
+	dialog = g_object_get_data (G_OBJECT (widget), "glade-data");
+	peditor = gconf_peditor_new_select_menu (changeset, "/background-properties/orientation", WID ("color_option"));
+	peditor = gconf_peditor_new_color (changeset, "/background-properties/color1", WID ("colorpicker1"));
+	peditor = gconf_peditor_new_color (changeset, "/background-properties/color2", WID ("colorpicker2"));
+	peditor = gconf_peditor_new_filename (changeset, "/background-properties/wallpaper-filename", WID ("image_fileentry"));
+	peditor = gconf_peditor_new_select_menu (changeset, "/background-properties/wallpaper-type", WID ("image_option"));
 
-	CORBA_exception_init (&ev);
+#if 0
+	gconf_peditor_new_int_spin (changeset, "/background-properties/opacity", WID ("opacity_spin"));
+#endif
 
-	dialog = gtk_object_get_data (GTK_OBJECT (widget), "glade-data");
-	CUSTOM_CREATE_PEDITOR (option_menu, ulong, "orientation", "color_option");	
+	peditor = gconf_peditor_new_boolean
+		(changeset, "/background-properties/wallpaper-enabled", WID ("picture_enabled_check"));
 
-	CUSTOM_CREATE_PEDITOR (color, Bonobo_Config_Color, "color1", "colorpicker1");	
-	CUSTOM_CREATE_PEDITOR (color, Bonobo_Config_Color, "color2", "colorpicker2");	
-	CUSTOM_CREATE_PEDITOR (filename, Bonobo_Config_FileName, "wallpaper_filename", "image_fileentry");	
-
-	CUSTOM_CREATE_PEDITOR (option_menu, ulong, "wallpaper_type", "image_option");	
-	CUSTOM_CREATE_PEDITOR (int_range, long, "opacity", "opacity_spin");
-
-	CREATE_PEDITOR (boolean, "wallpaper_enabled", "picture_enabled_check");
-
-	bonobo_peditor_set_guard (WID ("picture_frame"), bag, "wallpaper_enabled");
-			
+#if 0
+	gconf_peditor_widget_set_guard (GCONF_PROPERTY_EDITOR (peditor), WID ("picture_frame"),
+					"/background-properties/wallpaper-enabled");
+#endif
+		
 	/* Disable opacity controls */
 	gtk_widget_hide (WID ("opacity_spin"));
 	gtk_widget_hide (WID ("opacity_label"));
 
-	bonobo_property_bag_client_set_value_gboolean (bag, "enabled", TRUE, NULL);
+	engine = gconf_engine_get_default ();
+	gconf_engine_set_bool (engine, "enabled", TRUE, NULL);
 
-	prefs = preferences_new_from_bonobo_pbag (bag, &ev);
+	prefs = preferences_new ();
+	preferences_load (PREFERENCES (prefs));
 
-	if (BONOBO_EX (&ev) || prefs == NULL)
-		g_error ("Could not retrieve configuration from property bag (%s)", ev._repo_id);
+	g_object_set_data (prefs, "glade-data", dialog);
 
-	gtk_object_set_data (prefs, "glade-data", dialog);
-
-	bonobo_event_source_client_add_listener (bag, (BonoboListenerCallbackFn) property_change_cb,
-						 NULL, NULL, prefs);
-
-	applier = gtk_object_get_data (GTK_OBJECT (widget), "applier");
+	applier = g_object_get_data (G_OBJECT (widget), "applier");
 
 	if (GTK_WIDGET_REALIZED (applier_get_preview_widget (applier)))
 		applier_apply_prefs (applier, PREFERENCES (prefs));
 	else
-		gtk_signal_connect_after (GTK_OBJECT (applier_get_preview_widget (applier)), "realize", realize_cb, prefs);
+		g_signal_connect_after (G_OBJECT (applier_get_preview_widget (applier)), "realize",
+					(GCallback) realize_cb, prefs);
 
-	gtk_signal_connect_object (GTK_OBJECT (widget), "destroy",
-				   GTK_SIGNAL_FUNC (gtk_object_destroy), prefs);
-
-	CORBA_exception_free (&ev);
+	g_signal_connect_swapped (G_OBJECT (widget), "destroy",
+				  (GCallback) g_object_unref, prefs);
 }
 
 static GtkWidget*
@@ -329,20 +232,21 @@ create_dialog (void)
 	GladeXML  *dialog;
 	Applier   *applier;
 
-	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/background-properties.glade", "prefs_widget");
+	/* FIXME: What the hell is domain? */
+	dialog = glade_xml_new (GNOMECC_GLADE_DIR "/background-properties.glade", "prefs_widget", NULL);
 	widget = glade_xml_get_widget (dialog, "prefs_widget");
-	gtk_object_set_data (GTK_OBJECT (widget), "glade-data", dialog);
+	g_object_set_data (G_OBJECT (widget), "glade-data", dialog);
 
 	applier = APPLIER (applier_new (APPLIER_PREVIEW));
-	gtk_object_set_data (GTK_OBJECT (widget), "applier", applier);
-	gtk_signal_connect_object (GTK_OBJECT (widget), "destroy", GTK_SIGNAL_FUNC (gtk_object_destroy), GTK_OBJECT (applier));
+	g_object_set_data (G_OBJECT (widget), "applier", applier);
+	g_signal_connect_swapped (G_OBJECT (widget), "destroy", (GCallback) g_object_unref, G_OBJECT (applier));
 
 	/* Minor GUI addition */
 	holder = WID ("preview_holder");
 	gtk_box_pack_start (GTK_BOX (holder), applier_get_preview_widget (applier), TRUE, TRUE, 0);
 	gtk_widget_show_all (holder);
 
-	gtk_signal_connect_object (GTK_OBJECT (widget), "destroy", GTK_SIGNAL_FUNC (gtk_object_destroy), GTK_OBJECT (dialog));
+	g_signal_connect_swapped (G_OBJECT (widget), "destroy", (GCallback) g_object_unref, G_OBJECT (dialog));
 
 	return widget;
 }
@@ -350,12 +254,9 @@ create_dialog (void)
 int
 main (int argc, char **argv) 
 {
-	const gchar* legacy_files[] = { "Background", NULL };
+	glade_init ();
 
-	glade_gnome_init ();
-	gnomelib_register_popt_table (options, "background options");
-
-	capplet_init (argc, argv, legacy_files, apply_settings, create_dialog, setup_dialog, get_legacy_settings);
+	capplet_init (argc, argv, apply_settings, create_dialog, setup_dialog, get_legacy_settings);	
 
 	return 0;
 }

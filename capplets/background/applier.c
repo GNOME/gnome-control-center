@@ -43,11 +43,9 @@
 #define MONITOR_CONTENTS_WIDTH 157
 #define MONITOR_CONTENTS_HEIGHT 111
 
-static gboolean    gdk_pixbuf_xlib_inited = FALSE;
-
 enum {
-	ARG_0,
-	ARG_TYPE
+	PROP_0,
+	PROP_TYPE
 };
 
 struct _ApplierPrivate 
@@ -107,20 +105,24 @@ struct _ApplierPrivate
 						* pixmap */
 };
 
-static GtkObjectClass *parent_class;
+static GObjectClass *parent_class;
 
-static void applier_init             (Applier *prefs);
-static void applier_class_init       (ApplierClass *class);
+static void applier_init             (Applier           *prefs,
+				      ApplierClass      *class);
+static void applier_class_init       (ApplierClass      *class);
+static void applier_base_init        (ApplierClass      *class);
 
-static void applier_set_arg          (GtkObject *object, 
-				      GtkArg *arg, 
-				      guint arg_id);
-static void applier_get_arg          (GtkObject *object, 
-				      GtkArg *arg, 
-				      guint arg_id);
+static void applier_set_prop         (GObject           *object, 
+				      guint              prop_id,
+				      const GValue      *value,
+				      GParamSpec        *pspec);
+static void applier_get_prop         (GObject           *object, 
+				      guint              prop_id,
+				      GValue            *value,
+				      GParamSpec        *pspec);
 
-static void applier_destroy          (GtkObject *object);
-static void applier_finalize         (GtkObject *object);
+static void applier_dispose          (GObject           *object);
+static void applier_finalize         (GObject           *object);
 
 static void run_render_pipeline      (Applier           *applier, 
 				      const Preferences *prefs);
@@ -177,26 +179,30 @@ applier_get_type (void)
 	static guint applier_type = 0;
 
 	if (!applier_type) {
-		GtkTypeInfo applier_info = {
-			"Applier",
-			sizeof (Applier),
+		static GTypeInfo applier_info = {
 			sizeof (ApplierClass),
-			(GtkClassInitFunc) applier_class_init,
-			(GtkObjectInitFunc) applier_init,
-			(GtkArgSetFunc) NULL,
-			(GtkArgGetFunc) NULL
+			(GBaseInitFunc) applier_base_init,
+			NULL, /* GBaseFinalizeFunc */
+			(GClassInitFunc) applier_class_init,
+			NULL, /* GClassFinalizeFunc */
+			NULL, /* user-supplied data */
+			sizeof (Applier),
+			0, /* n_preallocs */
+			(GInstanceInitFunc) applier_init,
+			NULL
 		};
 
 		applier_type = 
-			gtk_type_unique (gtk_object_get_type (), 
-					 &applier_info);
+			g_type_register_static (G_TYPE_OBJECT, 
+						"Applier",
+						&applier_info, 0);
 	}
 
 	return applier_type;
 }
 
 static void
-applier_init (Applier *applier)
+applier_init (Applier *applier, ApplierClass *class)
 {
 	applier->p                   = g_new0 (ApplierPrivate, 1);
 	applier->p->last_prefs       = NULL;
@@ -208,34 +214,34 @@ applier_init (Applier *applier)
 static void
 applier_class_init (ApplierClass *class) 
 {
-	GtkObjectClass *object_class;
+	GObjectClass *object_class;
 	GdkVisual *visual;
 
-	gtk_object_add_arg_type ("Applier::type",
-				 GTK_TYPE_POINTER,
-				 GTK_ARG_READWRITE | GTK_ARG_CONSTRUCT_ONLY,
-				 ARG_TYPE);
+	g_object_class_install_property
+		(object_class, PROP_TYPE,
+		 g_param_spec_int ("type",
+				   _("Type"),
+				   _("Type of applier: APPLIER_ROOT for root window or APPLIER_PREVIEW for preview"),
+				   0, 1, 0,
+				   G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
-	object_class = GTK_OBJECT_CLASS (class);
-	object_class->destroy = applier_destroy;
+	object_class = G_OBJECT_CLASS (class);
+	object_class->dispose = applier_dispose;
 	object_class->finalize = applier_finalize;
-	object_class->set_arg = applier_set_arg;
-	object_class->get_arg = applier_get_arg;
+	object_class->set_property = applier_set_prop;
+	object_class->get_property = applier_get_prop;
 
 	parent_class = 
-		GTK_OBJECT_CLASS (gtk_type_class (gtk_object_get_type ()));
-
-	if (!gdk_pixbuf_xlib_inited) {
-		gdk_pixbuf_xlib_inited = TRUE;
-
-		visual = gdk_window_get_visual (GDK_ROOT_PARENT ());
-
-		gdk_pixbuf_xlib_init_with_depth (GDK_DISPLAY (), gdk_screen, visual->depth);
-	}
+		G_OBJECT_CLASS (g_type_class_ref (G_TYPE_OBJECT));
 }
 
 static void
-applier_set_arg (GtkObject *object, GtkArg *arg, guint arg_id) 
+applier_base_init (ApplierClass *class) 
+{
+}
+
+static void
+applier_set_prop (GObject *object, guint prop_id, const GValue *value, GParamSpec *pspec) 
 {
 	Applier *applier;
 
@@ -244,9 +250,9 @@ applier_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 
 	applier = APPLIER (object);
 
-	switch (arg_id) {
-	case ARG_TYPE:
-		applier->p->type = GTK_VALUE_INT (*arg);
+	switch (prop_id) {
+	case PROP_TYPE:
+		applier->p->type = g_value_get_int (value);
 
 		switch (applier->p->type) {
 		case APPLIER_ROOT:
@@ -273,13 +279,13 @@ applier_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		break;
 
 	default:
-		g_warning ("Bad argument set");
+		g_warning ("Bad property set");
 		break;
 	}
 }
 
 static void
-applier_get_arg (GtkObject *object, GtkArg *arg, guint arg_id) 
+applier_get_prop (GObject *object, guint prop_id, GValue *value, GParamSpec *pspec) 
 {
 	Applier *applier;
 
@@ -288,19 +294,19 @@ applier_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 
 	applier = APPLIER (object);
 
-	switch (arg_id) {
-	case ARG_TYPE:
-		GTK_VALUE_INT (*arg) = applier->p->type;
+	switch (prop_id) {
+	case PROP_TYPE:
+		g_value_set_int (value, applier->p->type);
 		break;
 
 	default:
-		g_warning ("Bad argument get");
+		g_warning ("Bad property get");
 		break;
 	}
 }
 
 static void
-applier_destroy (GtkObject *object) 
+applier_dispose (GObject *object) 
 {
 	Applier *applier;
 
@@ -312,16 +318,16 @@ applier_destroy (GtkObject *object)
 	g_assert (applier->p->pixbuf == NULL);
 
 	if (applier->p->last_prefs != NULL)
-		gtk_object_destroy (GTK_OBJECT (applier->p->last_prefs));
+		g_object_unref (G_OBJECT (applier->p->last_prefs));
 
 	if (applier->p->wallpaper_pixbuf != NULL)
 		gdk_pixbuf_unref (applier->p->wallpaper_pixbuf);
 
-	parent_class->destroy (object);
+	parent_class->dispose (object);
 }
 
 static void
-applier_finalize (GtkObject *object) 
+applier_finalize (GObject *object) 
 {
 	Applier *applier;
 
@@ -335,14 +341,14 @@ applier_finalize (GtkObject *object)
 	parent_class->finalize (object);
 }
 
-GtkObject *
+GObject *
 applier_new (ApplierType type) 
 {
-	GtkObject *object;
+	GObject *object;
 
-	object = gtk_object_new (applier_get_type (),
-				 "type", type,
-				 NULL);
+	object = g_object_new (applier_get_type (),
+			       "type", type,
+			       NULL);
 
 	return object;
 }
@@ -373,7 +379,7 @@ applier_apply_prefs (Applier           *applier,
 			g_return_if_fail (prefs->wallpaper_filename != NULL);
 
 			applier->p->wallpaper_pixbuf = 
-				gdk_pixbuf_new_from_file (prefs->wallpaper_filename);
+				gdk_pixbuf_new_from_file (prefs->wallpaper_filename, NULL);
 
 			if (applier->p->wallpaper_pixbuf == NULL)
 				g_warning (_("Could not load pixbuf \"%s\"; disabling wallpaper."),
@@ -393,8 +399,6 @@ applier_apply_prefs (Applier           *applier,
 
 	if (applier->p->type == APPLIER_PREVIEW && applier->p->preview_widget != NULL)
 		gtk_widget_queue_draw (applier->p->preview_widget);
-	else if (applier->p->type == APPLIER_ROOT)
-		preferences_save (prefs);
 }
 
 gboolean
@@ -412,11 +416,10 @@ GtkWidget *
 applier_get_preview_widget (Applier *applier) 
 {
 	GdkPixbuf *pixbuf;
-	GdkPixmap *pixmap;
+	GdkPixmap *pixmap, *pixmap1;
 	GdkBitmap *mask;
 	GdkVisual *visual;
 	GdkColormap *colormap;
-	Pixmap xpixmap, xmask;
 	gchar *filename;
 	GdkGC *gc;
 
@@ -436,55 +439,22 @@ applier_get_preview_widget (Applier *applier)
 	gtk_widget_push_visual (visual);
 	gtk_widget_push_colormap (colormap);
 
-	pixbuf = gdk_pixbuf_new_from_file (filename);
+	pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
 
 	if (pixbuf == NULL) return NULL;
 
-	gdk_pixbuf_xlib_render_pixmap_and_mask (pixbuf, &xpixmap, &xmask, 1);
+	pixmap = gdk_pixmap_new (GDK_ROOT_PARENT (),
+				 gdk_pixbuf_get_width (pixbuf),
+				 gdk_pixbuf_get_height (pixbuf),
+				 visual->depth);
 
-	if (xpixmap) {
-		pixmap = gdk_pixmap_new (GDK_ROOT_PARENT (),
-					 gdk_pixbuf_get_width (pixbuf),
-					 gdk_pixbuf_get_height (pixbuf),
-					 visual->depth);
-
-		gc = gdk_gc_new (GDK_ROOT_PARENT ());
-
-		XCopyArea (GDK_DISPLAY (), xpixmap,
-			   GDK_WINDOW_XWINDOW (pixmap), 
-			   GDK_GC_XGC (gc), 0, 0,
-			   gdk_pixbuf_get_width (pixbuf),
-			   gdk_pixbuf_get_height (pixbuf),
-			   0, 0);
-
-		XFreePixmap (GDK_DISPLAY (), xpixmap);
-
-		gdk_gc_destroy (gc);
-	} else {
-		pixmap = NULL;
-	}
-
-	if (xmask) {
-		mask = gdk_pixmap_new (GDK_ROOT_PARENT (),
+	gdk_pixbuf_render_to_drawable (pixbuf, pixmap, gc,
+				       0, 0, 0, 0,
 				       gdk_pixbuf_get_width (pixbuf),
 				       gdk_pixbuf_get_height (pixbuf),
-				       1);
+				       GDK_RGB_DITHER_MAX, 0, 0);
 
-		gc = gdk_gc_new (mask);
-
-		XCopyArea (GDK_DISPLAY (), xmask, 
-			   GDK_WINDOW_XWINDOW (mask), 
-			   GDK_GC_XGC (gc), 0, 0,
-			   gdk_pixbuf_get_width (pixbuf),
-			   gdk_pixbuf_get_height (pixbuf),
-			   0, 0);
-
-		XFreePixmap (GDK_DISPLAY (), xmask);
-
-		gdk_gc_destroy (gc);
-	} else {
-		mask = NULL;
-	}
+	gdk_pixbuf_render_pixmap_and_mask (pixbuf, &pixmap1, &mask, 0);
 
 	applier->p->preview_widget = gtk_pixmap_new (pixmap, mask);
 	gtk_widget_show (applier->p->preview_widget);
@@ -493,6 +463,8 @@ applier_get_preview_widget (Applier *applier)
 
 	gtk_widget_pop_visual ();
 	gtk_widget_pop_colormap ();
+
+	gdk_pixmap_unref (pixmap1);
 
 	return applier->p->preview_widget;
 }
@@ -509,13 +481,14 @@ applier_get_wallpaper_pixbuf (Applier *applier)
 static void
 draw_disabled_message (GtkWidget *widget)
 {
-	GdkPixmap  *pixmap;
-	GdkColor    color;
-	GdkFont    *font;
-	GdkGC      *gc;
-	gint        x, y, w, h;
-	gint        height, width;
-	const char *disabled_string = _("Disabled");
+	GdkPixmap      *pixmap;
+	GdkColor        color;
+	PangoLayout    *layout;
+	PangoRectangle  extents;
+	GdkGC          *gc;
+	gint            x, y, w, h;
+	gint            height, width;
+	const char     *disabled_string = _("Disabled");
 
 	g_return_if_fail (widget != NULL);
 	g_return_if_fail (GTK_IS_PIXMAP (widget));
@@ -536,19 +509,20 @@ draw_disabled_message (GtkWidget *widget)
 	gdk_gc_set_foreground (gc, &color);
 	gdk_draw_rectangle (pixmap, gc, TRUE, x, y, w, h);
 
-	font = widget->style->font;
-	width = gdk_string_width (font, disabled_string);
-	height = gdk_string_height (font, disabled_string);
+	layout = gtk_widget_create_pango_layout (widget, disabled_string);
+	pango_layout_get_pixel_extents (layout, &extents, NULL);
 
 	gdk_color_white (gtk_widget_get_colormap (widget), &color);
 	gdk_gc_set_foreground (gc, &color);
-	gdk_draw_string (pixmap, font, gc, 
-			 x + (w - width) / 2, y + (h - height) / 2 +
-			 height / 2,
-			 disabled_string);
+
+	gdk_draw_layout (widget->window,
+			 gc,
+			 x + (w - extents.width) / 2,
+			 y + (h - extents.height) / 2 + extents.height / 2,
+			 layout);
 
 	gdk_gc_unref (gc);
-	gtk_widget_queue_draw (widget);
+	g_object_unref (G_OBJECT (layout));
 }
 
 static void
@@ -1300,7 +1274,7 @@ make_root_pixmap (gint width, gint height)
 	Display *display;
 	Pixmap xpixmap;
 	
-	display = XOpenDisplay (gdk_display_name);
+	display = XOpenDisplay (g_getenv ("DISPLAY"));
 	XSetCloseDownMode (display, RetainPermanent);
 
 	xpixmap = XCreatePixmap (display,
@@ -1323,7 +1297,7 @@ make_root_pixmap (gint width, gint height)
 static void 
 set_root_pixmap (GdkPixmap *pixmap) 
 {
-	GdkAtom type;
+	Atom type;
 	gulong nitems, bytes_after;
 	gint format;
 	guchar *data_esetroot;
@@ -1334,7 +1308,7 @@ set_root_pixmap (GdkPixmap *pixmap)
 	XGrabServer (GDK_DISPLAY ());
 
 	XGetWindowProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (),
-			    gdk_atom_intern ("ESETROOT_PMAP_ID", FALSE),
+			    XInternAtom (GDK_DISPLAY (), "ESETROOT_PMAP_ID", False),
 			    0L, 1L, False, XA_PIXMAP,
 			    &type, &format, &nitems, &bytes_after,
 			    &data_esetroot);
@@ -1356,11 +1330,11 @@ set_root_pixmap (GdkPixmap *pixmap)
 
 	if (pixmap != NULL && pixmap != (GdkPixmap *) -1) {
 		XChangeProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (),
-				 gdk_atom_intern ("ESETROOT_PMAP_ID", FALSE),
+				 XInternAtom (GDK_DISPLAY (), "ESETROOT_PMAP_ID", FALSE),
 				 XA_PIXMAP, 32, PropModeReplace,
 				 (guchar *) &pixmap_id, 1);
 		XChangeProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (),
-				 gdk_atom_intern ("_XROOTPMAP_ID", FALSE),
+				 XInternAtom (GDK_DISPLAY (), "_XROOTPMAP_ID", FALSE),
 				 XA_PIXMAP, 32, PropModeReplace,
 				 (guchar *) &pixmap_id, 1);
 
@@ -1368,9 +1342,9 @@ set_root_pixmap (GdkPixmap *pixmap)
 					    pixmap_id);
 	} else if (pixmap == NULL) {
 		XDeleteProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (),
-				 gdk_atom_intern ("ESETROOT_PMAP_ID", FALSE));
+				 XInternAtom (GDK_DISPLAY (), "ESETROOT_PMAP_ID", FALSE));
 		XDeleteProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (),
-				 gdk_atom_intern ("_XROOTPMAP_ID", FALSE));
+				 XInternAtom (GDK_DISPLAY (), "_XROOTPMAP_ID", FALSE));
 	}
 
 	XClearWindow (GDK_DISPLAY (), GDK_ROOT_WINDOW ());

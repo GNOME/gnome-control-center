@@ -28,89 +28,47 @@
 #include <stdlib.h>
 
 #include <gnome.h>
-#include <gdk-pixbuf/gdk-pixbuf-xlibrgb.h>
 #include <bonobo.h>
 
 #include "preferences.h"
 
-/* Note that there is a really bad bug in Bonobo */
+static GObjectClass *parent_class;
 
-#undef BONOBO_RET_EX
-#define BONOBO_RET_EX(ev)		\
-	G_STMT_START{			\
-		if (BONOBO_EX (ev))	\
-			return;		\
-	}G_STMT_END
-
-/* Copied from bonobo-conf bonobo-config-database.c
- *
- * Note to Dietmar: You should include these functions in
- * bonobo-config-database.c
- */
-
-#define MAKE_GET_SIMPLE(c_type, default, name, corba_tc, extract_fn)          \
-static c_type local_bonobo_config_get_##name  (Bonobo_ConfigDatabase  db,     \
-				               const char            *key,    \
-				               CORBA_Environment     *opt_ev) \
-{                                                                             \
-	CORBA_any *value;                                                     \
-	c_type retval;                                                        \
-	if (!(value = bonobo_config_get_value (db, key, corba_tc, opt_ev)))   \
-		return default;                                               \
-	retval = extract_fn;                                                  \
-	CORBA_free (value);                                                   \
-	return retval;                                                        \
-}
-
-static GtkObjectClass *parent_class;
-
-static void      preferences_init             (Preferences               *prefs);
+static void      preferences_init             (Preferences               *prefs,
+					       PreferencesClass          *class);
 static void      preferences_class_init       (PreferencesClass          *class);
 
-static void      preferences_destroy          (GtkObject                 *object);
+static void      preferences_finalize         (GObject                   *object);
 
 static GdkColor *read_color_from_string       (const gchar               *string);
-static GdkColor *bonobo_color_to_gdk          (const Bonobo_Config_Color *color);
 
-static gulong    local_bonobo_property_bag_client_get_value_gulong   (Bonobo_PropertyBag  pb,
-								      const gchar        *propname,
-								      CORBA_Environment  *ev);
-static GdkColor *local_bonobo_property_bag_client_get_value_color    (Bonobo_PropertyBag  pb,
-								      const gchar        *propname,
-								      CORBA_Environment  *ev);
-static gchar    *local_bonobo_property_bag_client_get_value_filename (Bonobo_PropertyBag  pb,
-								      const gchar        *propname,
-								      CORBA_Environment  *ev);
-
-MAKE_GET_SIMPLE (gchar *, NULL, filename, TC_Bonobo_Config_FileName, g_strdup (((CORBA_char **) value->_value)[0]))
-MAKE_GET_SIMPLE (GdkColor *, NULL, color, TC_Bonobo_Config_Color, bonobo_color_to_gdk ((Bonobo_Config_Color *) value->_value))
-
-guint
+GType
 preferences_get_type (void)
 {
-	static guint preferences_type = 0;
+	static GType preferences_type = 0;
 
 	if (!preferences_type) {
-		GtkTypeInfo preferences_info = {
-			"Preferences",
-			sizeof (Preferences),
+		GTypeInfo preferences_info = {
 			sizeof (PreferencesClass),
-			(GtkClassInitFunc) preferences_class_init,
-			(GtkObjectInitFunc) preferences_init,
-			(GtkArgSetFunc) NULL,
-			(GtkArgGetFunc) NULL
+			NULL,
+			NULL,
+			(GClassInitFunc) preferences_class_init,
+			NULL,
+			NULL,
+			sizeof (Preferences),
+			0,
+			(GInstanceInitFunc) preferences_init,
 		};
 
 		preferences_type = 
-			gtk_type_unique (gtk_object_get_type (), 
-					 &preferences_info);
+			g_type_register_static (G_TYPE_OBJECT, "Preferences", &preferences_info, 0);
 	}
 
 	return preferences_type;
 }
 
 static void
-preferences_init (Preferences *prefs)
+preferences_init (Preferences *prefs, PreferencesClass *class)
 {
 	prefs->frozen             = FALSE;
 
@@ -133,30 +91,30 @@ preferences_init (Preferences *prefs)
 static void
 preferences_class_init (PreferencesClass *class) 
 {
-	GtkObjectClass *object_class;
+	GObjectClass *object_class;
 
-	object_class = (GtkObjectClass *) class;
-	object_class->destroy = preferences_destroy;
+	object_class = (GObjectClass *) class;
+	object_class->finalize = preferences_finalize;
 
 	parent_class = 
-		GTK_OBJECT_CLASS (gtk_type_class (gtk_object_get_type ()));
+		G_OBJECT_CLASS (g_type_class_ref (G_TYPE_OBJECT));
 }
 
-GtkObject *
+GObject *
 preferences_new (void) 
 {
-	GtkObject *object;
+	GObject *object;
 
-	object = gtk_type_new (preferences_get_type ());
+	object = g_object_new (preferences_get_type (), NULL);
 	PREFERENCES (object)->enabled = TRUE;
 
 	return object;
 }
 
-GtkObject *
+GObject *
 preferences_clone (const Preferences *prefs)
 {
-	GtkObject *object;
+	GObject *object;
 	Preferences *new_prefs;
 
 	g_return_val_if_fail (prefs != NULL, NULL);
@@ -188,7 +146,7 @@ preferences_clone (const Preferences *prefs)
 }
 
 static void
-preferences_destroy (GtkObject *object) 
+preferences_finalize (GObject *object) 
 {
 	Preferences *prefs;
 
@@ -200,138 +158,36 @@ preferences_destroy (GtkObject *object)
 	g_free (prefs->wallpaper_filename);
 	g_free (prefs->wallpaper_sel_path);
 
-	parent_class->destroy (object);
-}
-
-GtkObject *
-preferences_new_from_bonobo_pbag (Bonobo_PropertyBag pb, CORBA_Environment *ev)
-{
-	Preferences *prefs;
-
-	g_return_val_if_fail (pb != CORBA_OBJECT_NIL, NULL);
-	g_return_val_if_fail (ev != NULL, NULL);
-
-	prefs = PREFERENCES (preferences_new ());
-	preferences_load_from_bonobo_pbag (prefs, pb, ev);
-
-	if (BONOBO_EX (ev)) {
-		gtk_object_destroy (GTK_OBJECT (prefs));
-		return NULL;
-	}
-
-	return GTK_OBJECT (prefs);
+	parent_class->finalize (object);
 }
 
 void
-preferences_load_from_bonobo_pbag (Preferences        *prefs,
-				   Bonobo_PropertyBag  pb,
-				   CORBA_Environment  *ev) 
+preferences_load (Preferences *prefs)
 {
+	GConfEngine *engine;
+	GError      *error;
+
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));
-	g_return_if_fail (pb != CORBA_OBJECT_NIL);
-	g_return_if_fail (ev != NULL);
 
-	prefs->enabled = bonobo_property_bag_client_get_value_gboolean (pb, "enabled", ev);
+	engine = gconf_engine_get_default ();
 
-	if (BONOBO_EX (ev) && !strcmp (ev->_repo_id, "IDL:Bonobo/PropertyBag/NotFound:1.0")) {
-		prefs->enabled = TRUE;
-		CORBA_exception_init (ev);
-	} else {
-		BONOBO_RET_EX (ev);
-	}
-
-	prefs->wallpaper_type = local_bonobo_property_bag_client_get_value_gulong (pb, "wallpaper_type", ev); BONOBO_RET_EX (ev);
-	prefs->wallpaper_filename = local_bonobo_property_bag_client_get_value_filename (pb, "wallpaper_filename", ev); BONOBO_RET_EX (ev);
-
-	prefs->wallpaper_enabled = bonobo_property_bag_client_get_value_gboolean (pb, "wallpaper_enabled", ev);
-
-	if (BONOBO_EX (ev) && !strcmp (ev->_repo_id, "IDL:Bonobo/PropertyBag/NotFound:1.0")) {
-		prefs->wallpaper_enabled = (prefs->wallpaper_filename != NULL && strcmp (prefs->wallpaper_filename, "(none)"));
-		CORBA_exception_init (ev);
-	} else {
-		BONOBO_RET_EX (ev);
-	}
-
-	prefs->color1 = local_bonobo_property_bag_client_get_value_color (pb, "color1", ev); BONOBO_RET_EX (ev);
-	prefs->color2 = local_bonobo_property_bag_client_get_value_color (pb, "color2", ev); BONOBO_RET_EX (ev);
-
-	prefs->opacity = bonobo_property_bag_client_get_value_glong (pb, "opacity", ev); BONOBO_RET_EX (ev);
+	prefs->enabled = gconf_engine_get_bool (engine, "/background-properties/enabled", &error);
+	prefs->wallpaper_type = gconf_engine_get_int (engine, "/background-properties/wallpaper-type", &error);
+	prefs->wallpaper_filename = gconf_engine_get_string (engine, "/background-properties/wallpaper-filename", &error);
+	prefs->wallpaper_enabled = gconf_engine_get_bool (engine, "/background-properties/wallpaper-enabled", &error);
+	prefs->color1 = read_color_from_string (gconf_engine_get_string (engine, "/background-properties/color1", &error));
+	prefs->color2 = read_color_from_string (gconf_engine_get_string (engine, "/background-properties/color2", &error));
+	prefs->opacity = gconf_engine_get_int (engine, "/background-properties/opacity", &error);
 	if (prefs->opacity >= 100 || prefs->opacity < 0)
 		prefs->adjust_opacity = FALSE;
 
-	prefs->orientation = local_bonobo_property_bag_client_get_value_gulong (pb, "orientation", ev); BONOBO_RET_EX (ev);
+	prefs->orientation = gconf_engine_get_int (engine, "/background-properties/orientation", &error);
 
 	if (prefs->orientation == ORIENTATION_SOLID)
 		prefs->gradient_enabled = FALSE;
 	else
 		prefs->gradient_enabled = TRUE;
-}
-
-GtkObject *
-preferences_new_from_bonobo_db (Bonobo_ConfigDatabase db, CORBA_Environment *ev)
-{
-	Preferences *prefs;
-
-	g_return_val_if_fail (db != CORBA_OBJECT_NIL, NULL);
-	g_return_val_if_fail (ev != NULL, NULL);
-       
-	prefs = PREFERENCES (preferences_new ());
-	preferences_load_from_bonobo_db (prefs, db, ev);
-
-	if (BONOBO_EX (ev)) {
-		gtk_object_destroy (GTK_OBJECT (prefs));
-		return NULL;
-	}
-
-	return GTK_OBJECT (prefs);
-}
-
-void
-preferences_load_from_bonobo_db (Preferences           *prefs,
-				 Bonobo_ConfigDatabase  db,
-				 CORBA_Environment     *ev)
-{
-	g_return_if_fail (prefs != NULL);
-	g_return_if_fail (IS_PREFERENCES (prefs));
-	g_return_if_fail (db != CORBA_OBJECT_NIL);
-	g_return_if_fail (ev != NULL);
-
-	prefs->enabled = bonobo_config_get_boolean (db, "/main/enabled", ev);
-
-	if (BONOBO_EX (ev) && !strcmp (ev->_repo_id, "IDL:Bonobo/ConfigDatabase/NotFound:1.0")) {
-		prefs->enabled = TRUE;
-		CORBA_exception_init (ev);
-	} else {
-		BONOBO_RET_EX (ev);
-	}
-
-	prefs->orientation = bonobo_config_get_ulong (db, "/main/orientation", ev); BONOBO_RET_EX (ev);
-
-	if (prefs->orientation != ORIENTATION_SOLID)
-		prefs->gradient_enabled = TRUE;
-	else
-		prefs->gradient_enabled = FALSE;
-
-	prefs->wallpaper_type = bonobo_config_get_ulong (db, "/main/wallpaper_type", ev); BONOBO_RET_EX (ev);
-	prefs->wallpaper_filename = local_bonobo_config_get_filename (db, "/main/wallpaper_filename", ev); BONOBO_RET_EX (ev);
-
-	prefs->wallpaper_enabled = bonobo_config_get_boolean (db, "/main/wallpaper_enabled", ev);
-
-	if (BONOBO_EX (ev) && !strcmp (ev->_repo_id, "IDL:Bonobo/ConfigDatabase/NotFound:1.0")) {
-		prefs->wallpaper_enabled = (prefs->wallpaper_filename != NULL && strcmp (prefs->wallpaper_filename, "(none)"));
-		CORBA_exception_init (ev);
-	} else {
-		BONOBO_RET_EX (ev);
-	}
-
-	prefs->color1 = local_bonobo_config_get_color (db, "/main/color1", ev); BONOBO_RET_EX (ev);
-	prefs->color2 = local_bonobo_config_get_color (db, "/main/color2", ev); BONOBO_RET_EX (ev);
-
-	prefs->opacity = bonobo_config_get_long (db, "/main/opacity", ev); BONOBO_RET_EX (ev);
-
-	if (prefs->opacity >= 100 || prefs->opacity < 0)
-		prefs->adjust_opacity = FALSE;
 }
 
 /* Parse the event name given (the event being notification of a property having
@@ -340,31 +196,20 @@ preferences_load_from_bonobo_db (Preferences           *prefs,
  */
 
 void
-preferences_apply_event (Preferences     *prefs,
-			 const gchar     *event_name,
-			 const CORBA_any *value) 
+preferences_merge_entry (Preferences      *prefs,
+			 const GConfEntry *entry)
 {
 	const gchar *name;
+	const GConfValue *value = gconf_entry_get_value (entry);
 
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (IS_PREFERENCES (prefs));
-	g_return_if_fail (event_name != NULL);
 
-	if (strncmp (event_name, "Bonobo/Property:change:", strlen ("Bonobo/Property:change:")))
-		return;
-
-	name = event_name + strlen ("Bonobo/Property:change:");
-
-	if (!strcmp (name, "wallpaper_type")) {
-		prefs->wallpaper_type = BONOBO_ARG_GET_GENERAL (value, TC_ulong, CORBA_long, NULL);
+	if (!strcmp (entry->key, "/background-properties/wallpaper_type")) {
+		prefs->wallpaper_type = gconf_value_get_int (value);
 	}
-	else if (!strcmp (name, "wallpaper_filename")) {
-		if (!bonobo_arg_type_is_equal (value->_type, TC_Bonobo_Config_FileName, NULL)) {
-			g_warning ("Filename property not of filename type");
-			return;
-		}
-
-		prefs->wallpaper_filename = g_strdup (*((char **)value->_value));
+	else if (!strcmp (entry->key, "/background-properties/wallpaper_filename")) {
+		prefs->wallpaper_filename = g_strdup (gconf_value_get_string (value));
 
 		if (prefs->wallpaper_filename != NULL &&
 		    strcmp (prefs->wallpaper_filename, "") != 0 &&
@@ -373,75 +218,31 @@ preferences_apply_event (Preferences     *prefs,
 		else
 			prefs->wallpaper_enabled = FALSE;
 	}
-	else if (!strcmp (name, "color1")) {
-		prefs->color1 = bonobo_color_to_gdk ((Bonobo_Config_Color *)value->_value);
+	else if (!strcmp (entry->key, "/background-properties/color1")) {
+		prefs->color1 = read_color_from_string (gconf_value_get_string (value));
 	}
-	else if (!strcmp (name, "color2")) {
-		prefs->color2 = bonobo_color_to_gdk ((Bonobo_Config_Color *)value->_value);
+	else if (!strcmp (entry->key, "/background-properties/color2")) {
+		prefs->color2 = read_color_from_string (gconf_value_get_string (value));
 	}
-	else if (!strcmp (name, "opacity")) {
-		prefs->opacity = BONOBO_ARG_GET_LONG (value);
+	else if (!strcmp (entry->key, "/background-properties/opacity")) {
+		prefs->opacity = gconf_value_get_int (value);
 
 		if (prefs->opacity >= 100)
 			prefs->adjust_opacity = FALSE;
 	}
-	else if (!strcmp (name, "orientation")) {
-		prefs->orientation = BONOBO_ARG_GET_GENERAL (value, TC_ulong, CORBA_long, NULL);
+	else if (!strcmp (entry->key, "/background-properties/orientation")) {
+		prefs->orientation = gconf_value_get_int (value);
 
 		if (prefs->orientation == ORIENTATION_SOLID)
 			prefs->gradient_enabled = FALSE;
 		else
 			prefs->gradient_enabled = TRUE;
 	}
-	else if (!strcmp (name, "wallpaper_enabled")) {
-		prefs->wallpaper_enabled = BONOBO_ARG_GET_BOOLEAN (value);
+	else if (!strcmp (entry->key, "/background-properties/wallpaper_enabled")) {
+		prefs->wallpaper_enabled = gconf_value_get_bool (value);
 	} else {
 		g_warning ("%s: Unknown property: %s", __FUNCTION__, name);
 	}
-}
-
-/**
- * preferences_save:
- * @prefs:
- *
- * Save a preferences structure using the legacy gnome_config API
- **/
-
-void
-preferences_save (const Preferences *prefs)
-{
-	static const gint wallpaper_types[] = { 0, 1, 3, 2 };
-	gchar *color;
-
-	gnome_config_pop_prefix ();
-	gnome_config_set_bool ("/Background/Default/Enabled", prefs->enabled);
-	gnome_config_set_string ("/Background/Default/wallpaper",
-				 (prefs->wallpaper_filename) ? prefs->wallpaper_filename : "none");
-	gnome_config_set_int ("/Background/Default/wallpaperAlign", wallpaper_types[prefs->wallpaper_type]);
-
-	color = g_strdup_printf ("#%02x%02x%02x",
-		prefs->color1->red >> 8,
-		prefs->color1->green >> 8,
-		prefs->color1->blue >> 8);
-	gnome_config_set_string ("/Background/Default/color1", color);
-	g_free (color);
-
-	color = g_strdup_printf ("#%02x%02x%02x",
-		prefs->color2->red >> 8,
-		prefs->color2->green >> 8,
-		prefs->color2->blue >> 8);
-	gnome_config_set_string ("/Background/Default/color2", color);
-	g_free (color);
-
-	gnome_config_set_string ("/Background/Default/simple",
-		       		 (prefs->gradient_enabled) ? "gradient" : "solid");
-	gnome_config_set_string ("/Background/Default/gradient",
-				   (prefs->orientation == ORIENTATION_VERT) ? "vertical" : "horizontal");
-	
-	gnome_config_set_bool ("/Background/Default/adjustOpacity", prefs->adjust_opacity);
-	gnome_config_set_int ("/Background/Default/opacity", prefs->opacity);
-
-	gnome_config_sync ();
 }
 
 static GdkColor *
@@ -456,70 +257,7 @@ read_color_from_string (const gchar *string)
 	rgb = ((color->red >> 8) << 16) ||
 		((color->green >> 8) << 8) ||
 		(color->blue >> 8);
-	color->pixel = xlib_rgb_xpixel_from_rgb (rgb);
+	color->pixel = gdk_rgb_xpixel_from_rgb (rgb);
 
 	return color;
-}
-
-static GdkColor *
-bonobo_color_to_gdk (const Bonobo_Config_Color *color)
-{
-	GdkColor *ret;
-	
-	g_return_val_if_fail (color != NULL, NULL);
-
-	ret = g_new0 (GdkColor, 1);
-	ret->red = color->r * 65535;
-	ret->green = color->g * 65535;
-	ret->blue = color->b * 65535;
-
-	return ret;
-}
-
-static gulong
-local_bonobo_property_bag_client_get_value_gulong (Bonobo_PropertyBag  pb,
-						   const gchar        *propname,
-						   CORBA_Environment  *ev) 
-{
-	BonoboArg *arg;
-	gulong retval;
-
-	arg = bonobo_property_bag_client_get_value_any (pb, propname, ev);
-	if (BONOBO_EX (ev)) return 0;
-	retval = BONOBO_ARG_GET_GENERAL (arg, TC_ulong, CORBA_long, ev);
-	bonobo_arg_release (arg);
-
-	return retval;
-}
-
-static GdkColor *
-local_bonobo_property_bag_client_get_value_color (Bonobo_PropertyBag  pb,
-						  const gchar        *propname,
-						  CORBA_Environment  *ev) 
-{
-	BonoboArg *arg;
-	GdkColor *retval;
-
-	arg = bonobo_property_bag_client_get_value_any (pb, propname, ev);
-	if (BONOBO_EX (ev)) return 0;
-	retval = bonobo_color_to_gdk ((Bonobo_Config_Color *) arg->_value);
-	bonobo_arg_release (arg);
-
-	return retval;
-}
-
-static gchar *
-local_bonobo_property_bag_client_get_value_filename (Bonobo_PropertyBag  pb,
-						     const gchar        *propname,
-						     CORBA_Environment  *ev) 
-{
-	BonoboArg *arg;
-	gchar *retval;
-
-	arg = bonobo_property_bag_client_get_value_any (pb, propname, ev);
-	if (BONOBO_EX (ev)) return 0;
-	retval = g_strdup (((CORBA_char **) arg->_value)[0]);
-	bonobo_arg_release (arg);
-
-	return retval;
 }

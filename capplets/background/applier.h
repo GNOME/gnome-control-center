@@ -32,9 +32,9 @@
 
 #include "preferences.h"
 
-#define APPLIER(obj)          GTK_CHECK_CAST (obj, applier_get_type (), Applier)
-#define APPLIER_CLASS(klass)  GTK_CHECK_CLASS_CAST (klass, applier_get_type (), ApplierClass)
-#define IS_APPLIER(obj)       GTK_CHECK_TYPE (obj, applier_get_type ())
+#define APPLIER(obj)          G_TYPE_CHECK_INSTANCE_CAST (obj, applier_get_type (), Applier)
+#define APPLIER_CLASS(klass)  G_TYPE_CHECK_CLASS_CAST (klass, applier_get_type (), ApplierClass)
+#define IS_APPLIER(obj)       G_TYPE_CHECK_INSTANCE_TYPE (obj, applier_get_type ())
 
 typedef struct _Applier Applier;
 typedef struct _ApplierClass ApplierClass;
@@ -47,18 +47,18 @@ typedef enum _ApplierType {
 
 struct _Applier
 {
-	GtkObject         object;
+	GObject           object;
 	ApplierPrivate   *p;
 };
 
 struct _ApplierClass
 {
-	GtkObjectClass klass;
+	GObjectClass klass;
 };
 
 guint        applier_get_type             (void);
 
-GtkObject   *applier_new                  (ApplierType        type);
+GObject     *applier_new                  (ApplierType        type);
 
 void         applier_apply_prefs          (Applier           *applier,
 					   const Preferences *prefs);

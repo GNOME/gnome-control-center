@@ -24,18 +24,13 @@
 #ifndef __PREFERENCES_H
 #define __PREFERENCES_H
 
-#include <gtk/gtk.h>
+#include <glib-object.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
+#include <gconf/gconf.h>
 
-#ifdef BONOBO_CONF_ENABLE
-#include <bonobo-conf/bonobo-config-database.h>
-#else
-#include <tree.h>
-#endif
-
-#define PREFERENCES(obj)          GTK_CHECK_CAST (obj, preferences_get_type (), Preferences)
-#define PREFERENCES_CLASS(klass)  GTK_CHECK_CLASS_CAST (klass, preferences_get_type (), PreferencesClass)
-#define IS_PREFERENCES(obj)       GTK_CHECK_TYPE (obj, preferences_get_type ())
+#define PREFERENCES(obj)          G_TYPE_CHECK_INSTANCE_CAST (obj, preferences_get_type (), Preferences)
+#define PREFERENCES_CLASS(klass)  G_TYPE_CHECK_CLASS_CAST (klass, preferences_get_type (), PreferencesClass)
+#define IS_PREFERENCES(obj)       G_TYPE_CHECK_INSTANCE_TYPE (obj, preferences_get_type ())
 
 typedef struct _Preferences Preferences;
 typedef struct _PreferencesClass PreferencesClass;
@@ -51,7 +46,7 @@ typedef enum _wallpaper_type_t {
 
 struct _Preferences
 {
-	GtkObject         object;
+	GObject           object;
 
 	gint              frozen;
 	gboolean          auto_apply;
@@ -77,29 +72,17 @@ struct _Preferences
 
 struct _PreferencesClass
 {
-	GtkObjectClass klass;
+	GObjectClass klass;
 };
 
-guint        preferences_get_type              (void);
+GType        preferences_get_type              (void);
 
-GtkObject   *preferences_new                   (void);
-GtkObject   *preferences_clone                 (const Preferences     *prefs);
+GObject     *preferences_new                   (void);
+GObject     *preferences_clone                 (const Preferences     *prefs);
 
-GtkObject   *preferences_new_from_bonobo_pbag  (Bonobo_PropertyBag     pb,
-						CORBA_Environment     *ev);
-GtkObject   *preferences_new_from_bonobo_db    (Bonobo_ConfigDatabase  db,
-						CORBA_Environment     *ev);
-void         preferences_load_from_bonobo_pbag (Preferences           *prefs,
-						Bonobo_ConfigDatabase  db,
-						CORBA_Environment     *ev);
-void         preferences_load_from_bonobo_db   (Preferences           *prefs,
-						Bonobo_ConfigDatabase  db,
-						CORBA_Environment     *ev);
+void         preferences_load                  (Preferences           *prefs);
 
-void         preferences_apply_event           (Preferences           *prefs,
-						const gchar           *event_name,
-						const CORBA_any       *value);
-
-void         preferences_save                  (const Preferences     *prefs);
+void         preferences_merge_entry           (Preferences           *prefs,
+						const GConfEntry      *entry);
 
 #endif /* __PREFERENCES_H */
