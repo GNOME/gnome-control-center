@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-center\n"
 "POT-Creation-Date: 2003-02-21 21:49+0100\n"
-"PO-Revision-Date: 2003-02-21 21:50+0100\n"
+"PO-Revision-Date: 2003-02-27 18:20+0100\n"
 "Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1208,6 +1208,7 @@ msgstr "Ustawia czcionki używane przez ikony i biurko"
 #: capplets/font/font-properties.glade.h:1
 msgid "Set the monospace font for terminals and similar applications"
 msgstr ""
+"Ustawia czcionkę ze stałym odstępem dla terminali i podobnych aplikacji"
 
 #: capplets/font/font-properties.glade.h:1
 msgid "Smoothing:"
@@ -1733,7 +1734,7 @@ msgstr "Port:"
 
 #: capplets/network/gnome-network-preferences.glade.h:1
 msgid "S_ocks host:"
-msgstr ""
+msgstr "S_erwer SOCKS:"
 
 #: capplets/network/gnome-network-preferences.glade.h:1
 msgid "_Details"
@@ -1947,6 +1948,9 @@ msgid ""
 "\"Theme Preferences\" dialog was improperly installed, or you haven't "
 "installed the \"gnome-themes\" package."
 msgstr ""
+"Nie znaleziono motywów w systemie. Oznacza to, że prawdopodobnie "
+"\"Ustawiania motywu\" są niepoprawnie zainstalowane, lub nie zainstalowano "
+"pakietu \"gnome-themes\"."
 
 #: capplets/theme-switcher/gnome-theme-save.c:1
 msgid "Theme name must be present"
@@ -2121,10 +2125,12 @@ msgstr "Super (lub \"klawisz Windows\")"
 #: capplets/windows/gnome-window-properties.glade.h:1
 msgid "To _move a window, press-and-hold this key then grab the window:"
 msgstr ""
+"_Aby przesunąć okno, naciśnij i przytrzymaj poniższy klawisz a następnie "
+"chwyć okno:"
 
 #: capplets/windows/gnome-window-properties.glade.h:1
 msgid "Window Preferences"
-msgstr "Preferencje okna"
+msgstr "Preferencje dotyczące okien"
 
 #: capplets/windows/gnome-window-properties.glade.h:1
 msgid "_Double-click titlebar to perform this action:"
@@ -2132,11 +2138,11 @@ msgstr "Op_eracja po dwukrotnym kliknięciu paska tytułowego:"
 
 #: capplets/windows/gnome-window-properties.glade.h:1
 msgid "_Interval before raising:"
-msgstr ""
+msgstr "Cza_s przed wysunięciem:"
 
 #: capplets/windows/gnome-window-properties.glade.h:1
 msgid "_Raise selected windows after an interval"
-msgstr ""
+msgstr "_Wysunięcie zaznaczonego okna po upływie czasu"
 
 #: capplets/windows/gnome-window-properties.glade.h:1
 msgid "_Select windows when the mouse moves over them"
@@ -2148,7 +2154,7 @@ msgstr "Ustawienia okien"
 
 #: capplets/windows/window-properties.desktop.in.h:1
 msgid "Windows"
-msgstr "Windows"
+msgstr "Okna"
 
 #: control-center/capplet-dir-view-list.c:1
 #, c-format
@@ -2391,18 +2397,22 @@ msgstr "Rozwinięcie"
 msgid ""
 "If true, the mime handlers for text/plain and text/* will be kept in sync"
 msgstr ""
+"Określa, czy ustawienia sposobu obsługi dla typów text/plain i text/* "
+"powinny być ze sobą synchronizowane."
 
 #: schemas/apps_gnome_settings_daemon_default_editor.schemas.in.h:1
 msgid "Sync text/plain and text/* handlers"
-msgstr ""
+msgstr "Uzgadnianie sposobu obsługi text/plain i text/*"
 
 #: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:1
 msgid "Display a dialog when there are errors running XScreenSaver"
 msgstr ""
+"Powoduje wyświetlanie okna dialogowego przy napotkaniu błędów w programie "
+"XScreenSaver"
 
 #: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:1
 msgid "Run XScreenSaver at login"
-msgstr ""
+msgstr "Uruchamianie programu XScreenSaver przy logowaniu"
 
 #: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:1
 msgid "Show Startup Errors"
@@ -2410,11 +2420,11 @@ msgstr "Wyświetlanie błędów przy uruchamianiu"
 
 #: schemas/apps_gnome_settings_daemon_screensaver.schemas.in.h:1
 msgid "Start XScreenSaver"
-msgstr ""
+msgstr "Uruchamianie proramu XScreenSaver"
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:1
 msgid "Antialiasing"
-msgstr ""
+msgstr "Wygładzanie"
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:1
 msgid "DPI"
@@ -2441,6 +2451,10 @@ msgid ""
 "is set to \"rgba\". Possible values are: \"rgb\" - red on left, most common. "
 "\"bgr\" - blue on left. \"vrgb\" - red on top. \"vbgr\" - red on bottom."
 msgstr ""
+"Kolejność składowych piksela na ekranie LCD; używane tylko gdy wygładzanie "
+"jest ustawione na \"rgba\". Możliwe wartości: \"rgb\" - czerwony po lewej, "
+"najpopularnijesze. \"bgr\" - niebieski po lewej. \"vrgb\" - czerwony na "
+"górze. \"vbgr\" - czerwony na dole."
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:1
 msgid ""
@@ -2448,6 +2462,9 @@ msgid ""
 "\"none\" - no antialiasing. \"grayscale\" - standard grayscale antialiasing. "
 "\"rgba\" - subpixel antialiasing. (LCD screens only)."
 msgstr ""
+"Rodzaj wygładzania czcionek. Możliwe wartości: \"brak\" - bez wygładzania. "
+"\"odcienie szarości\" - standardowe wygładzanie odcieniami szarości. "
+"\"rgba\" - wygładzanie składowymi piksela (tylko na ekranach LCD)."
 
 #: schemas/desktop_gnome_font_rendering.schemas.in.h:1
 msgid ""
@@ -2455,6 +2472,9 @@ msgid ""
 "\"none\" - no hinting, \"slight\", \"medium\", and \"full\" - as much "
 "hinting as possible; may cause distortion of letter forms."
 msgstr ""
+"Rodzaj hintingu czcionek. Możliwe wartości: \"brak\" - bez hintingu, "
+"\"lekki\", \"średni\" i \"pełny\" - tak dużo jak to tylko możliwe; może "
+"powodować zniekształcenia liter."
 
 #~ msgid "Beep when enabling/disabling _keyboard accessibility features"
 #~ msgstr "_Sygnał dźwiękowy przy przełączaniu _dostępności klawiatury"
