@@ -162,12 +162,9 @@ setup_xkb_tabs (GladeXML * dialog, GConfChangeSet * changeset)
   xkb_layouts_fill_selected_tree (dialog);
 
 /* tab 3 */
-  xkb_options_fill_available_tree (dialog);
-  xkb_options_prepare_selected_tree (dialog);
-  xkb_options_fill_selected_tree (dialog);
+  xkb_options_load_options (dialog);
 
   xkb_layouts_register_buttons_handlers (dialog);
-  xkb_options_register_buttons_handlers (dialog);
   g_signal_connect (G_OBJECT (WID ("xkb_reset_to_defaults")), "clicked",
 		    G_CALLBACK (reset_to_defaults), dialog);
 

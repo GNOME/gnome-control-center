@@ -4,6 +4,7 @@
  * Copyright (C) 2003 Sergey V. Oudaltsov
  *
  * Written by: Sergey V. Oudaltsov <svu@users.sourceforge.net>
+ *             John Spray <spray_john@users.sourceforge.net>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,332 +40,284 @@
 
 #include "gnome-keyboard-properties-xkb.h"
 
-static GtkTreeIter current1stLevelIter;
-static const char *current1stLevelId;
+static const char *current1stLevelId = NULL;
+static GtkWidget *currentVbox = NULL;
+static GtkWidget *currentNoneRadio = NULL;
+static gboolean currentMultiSelect = FALSE;
+static GSList *currentRadioGroup = NULL;
 
-static gboolean
-can_add_option (GladeXML * dialog)
+#define OPTION_ID_PROP "optionID"
+#define SELCOUNTER_PROP "selectionCounter"
+#define GCONFSTATE_PROP "gconfState"
+#define EXPANDERS_PROP "expandersList"
+
+static GtkWidget *
+xkb_options_get_expander (GtkWidget * option_button)
 {
-  GtkWidget *availableOptionsTree = WID ("xkb_options_available");
-  GtkWidget *selectedOptionsTree = WID ("xkb_options_selected");
-  GtkTreeSelection *aSelection =
-    gtk_tree_view_get_selection (GTK_TREE_VIEW (availableOptionsTree));
-  GtkTreeIter aiter, siter, groupIter;
-  GtkTreeModel *availableOptionsModel, *selectedOptionsModel;
-  GtkTreePath *path, *groupPath;
-  char *selectedOptionId = NULL, *selectedGroupId =
-    NULL, *selectedFullOptionId = NULL;
-  gboolean retval = FALSE, multipleAllowed = TRUE;
-  int depth;
+  return gtk_widget_get_parent (
+           gtk_widget_get_parent (
+           gtk_widget_get_parent (option_button)));
+}
 
-  if (!gtk_tree_selection_get_selected
-      (aSelection, &availableOptionsModel, &aiter))
-    return FALSE;
+static int
+xkb_options_expander_selcounter_get (GtkWidget * expander)
+{
+  return GPOINTER_TO_INT(g_object_get_data (G_OBJECT (expander), SELCOUNTER_PROP));
+}
 
-  path = gtk_tree_model_get_path (availableOptionsModel, &aiter);
-  if (path == NULL)
-    return FALSE;
+static void
+xkb_options_expander_selcounter_add (GtkWidget * expander, int value)
+{
+  g_object_set_data (G_OBJECT (expander), SELCOUNTER_PROP,
+    GINT_TO_POINTER (xkb_options_expander_selcounter_get (expander) + value));
+}
 
-  depth = gtk_tree_path_get_depth (path);
+static void
+xkb_options_expander_highlight (GtkWidget * expander)
+{
+  char * utfGroupName = g_object_get_data (G_OBJECT (expander), "utfGroupName");
+  int counter = xkb_options_expander_selcounter_get (expander);
+  gchar *titlemarkup = g_strconcat (counter > 0 ? "<span weight=\"bold\">" : "<span>", 
+                                    utfGroupName, "</span>", NULL);
+  gtk_expander_set_label (GTK_EXPANDER (expander), titlemarkup);
+  g_free (titlemarkup);
+}
 
-  if (depth != 2)
+/* Add optionname from the backend's selection list if it's not
+   already in there. */
+static void
+xkb_options_select (gchar *optionname)
+{
+  gboolean already_selected = FALSE;
+  GSList *optionsList = xkb_options_get_selected_list ();
+  GSList *option;
+  for (option = optionsList ; option != NULL ; option = option->next)
+    if (!strcmp ((gchar*)option->data, optionname))
+      already_selected = TRUE;
+
+  if (!already_selected)
+    optionsList = g_slist_append (optionsList, g_strdup (optionname));
+  xkb_options_set_selected_list (optionsList);
+
+  clear_xkb_elements_list (optionsList);
+}
+
+/* Remove all occurences of optionname from the backend's selection list */
+static void
+xkb_options_deselect (gchar *optionname)
+{
+  GSList *optionsList = xkb_options_get_selected_list ();
+  GSList *nodetmp;
+  GSList *option = optionsList;
+  while (option != NULL)
     {
-      gtk_tree_path_free (path);
-      return FALSE;
+      gchar *id = (char *) option->data;
+      if (!strcmp(id, optionname))
+        {
+          nodetmp = option->next;
+          g_free (id);
+          optionsList = g_slist_remove_link (optionsList, option);
+          g_slist_free_1 (option);
+          option=nodetmp;
+        }
+      else
+        option = option->next;
     }
+  xkb_options_set_selected_list (optionsList);
+  clear_xkb_elements_list (optionsList);
+}
 
-  if (!gtk_tree_model_iter_parent (availableOptionsModel, &groupIter, &aiter))
+/* Return true if optionname describes a string already in the backend's
+   list of selected options */
+static gboolean
+xkb_options_is_selected (gchar *optionname)
+{
+  gboolean retval = FALSE;
+  GSList *optionsList = xkb_options_get_selected_list ();
+  GSList *option;
+  for (option = optionsList ; option != NULL ; option = option->next)
     {
-      gtk_tree_path_free (path);
-      return FALSE;
+      if (!strcmp ((gchar*)option->data, optionname))
+        retval = TRUE;
     }
-  groupPath = gtk_tree_model_get_path (availableOptionsModel, &groupIter);
-  if (groupPath == NULL)
-    {
-      gtk_tree_path_free (path);
-      return FALSE;
-    }
-
-  gtk_tree_model_get (availableOptionsModel, &groupIter, 2,
-		      &multipleAllowed, -1);
-
-  gtk_tree_model_get (availableOptionsModel, &aiter, 1,
-		      &selectedFullOptionId, -1);
-
-  if (!GSwitchItKbdConfigSplitItems
-      (selectedFullOptionId, &selectedGroupId, &selectedOptionId))
-    {
-      gtk_tree_path_free (groupPath);
-      gtk_tree_path_free (path);
-      return FALSE;
-    }
-  selectedGroupId = g_strdup (selectedGroupId);
-  selectedOptionId = g_strdup (selectedOptionId);
-
-  selectedOptionsModel =
-    gtk_tree_view_get_model (GTK_TREE_VIEW (selectedOptionsTree));
-
-  retval = TRUE;
-
-  if (gtk_tree_model_get_iter_first (selectedOptionsModel, &siter))
-    {
-      do
-	{
-	  char *sid = NULL;
-	  gtk_tree_model_get (selectedOptionsModel, &siter, 1, &sid, -1);
-	  if (multipleAllowed)
-	    {
-	      // look for the _same_ option - and do not allow it twice
-	      if (!g_strcasecmp (sid, selectedFullOptionId))
-		{
-		  retval = FALSE;
-		}
-	    }
-	  else
-	    {
-	      // look for options within same group
-	      char *sgid = NULL, *soid = NULL;
-	      gtk_tree_model_get (selectedOptionsModel, &siter, 1, &sid, -1);
-	      if (GSwitchItKbdConfigSplitItems
-		  (sid, &sgid, &soid)
-		  && !g_strcasecmp (sgid, selectedGroupId))
-		{
-		  retval = FALSE;
-		}
-	    }
-	  g_free (sid);
-	}
-      while (retval && gtk_tree_model_iter_next
-	     (selectedOptionsModel, &siter));
-    }
-
-  g_free (selectedFullOptionId);
-  g_free (selectedGroupId);
-  g_free (selectedOptionId);
-
-  gtk_tree_path_free (groupPath);
-  gtk_tree_path_free (path);
+  clear_xkb_elements_list (optionsList);
   return retval;
 }
 
+/* Update xkb backend to reflect the new UI state */
 static void
-xkb_options_enable_disable_buttons (GladeXML * dialog)
+option_toggled_cb (GtkWidget *checkbutton, gpointer data)
 {
-  GtkWidget *addOptionBtn = WID ("xkb_options_add");
-  GtkWidget *delOptionBtn = WID ("xkb_options_remove");
-  GtkWidget *selectedOptionsTree = WID ("xkb_options_selected");
-
-  GtkTreeSelection *sSelection =
-    gtk_tree_view_get_selection (GTK_TREE_VIEW (selectedOptionsTree));
-  const int nSelectedSelectedOptions =
-    gtk_tree_selection_count_selected_rows (sSelection);
-
-  gtk_widget_set_sensitive (addOptionBtn, can_add_option (dialog));
-  gtk_widget_set_sensitive (delOptionBtn, nSelectedSelectedOptions > 0);
+  gpointer optionID = g_object_get_data (G_OBJECT (checkbutton), OPTION_ID_PROP);
+  if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (checkbutton)))
+      xkb_options_select (optionID);
+  else
+      xkb_options_deselect (optionID);
 }
 
-void
-xkb_options_prepare_selected_tree (GladeXML * dialog)
+/* Update UI state from xkb backend */
+static void
+option_update_cb (GConfClient * client,
+                         guint cnxn_id, GConfEntry * entry, gpointer data)
 {
-  GtkListStore *listStore =
-    gtk_list_store_new (3, G_TYPE_STRING, G_TYPE_STRING,
-			G_TYPE_STRING);
-  GtkWidget *treeView = WID ("xkb_options_selected");
-  GtkCellRenderer *renderer =
-    GTK_CELL_RENDERER (gtk_cell_renderer_text_new ());
-  GtkTreeViewColumn *column = gtk_tree_view_column_new_with_attributes (NULL,
-									renderer,
-									"text",
-									0,
-									NULL);
-  GtkTreeSelection *selection =
-    gtk_tree_view_get_selection (GTK_TREE_VIEW (treeView));
-  gtk_tree_view_set_model (GTK_TREE_VIEW (treeView),
-			   GTK_TREE_MODEL (listStore));
-  gtk_tree_view_append_column (GTK_TREE_VIEW (treeView), column);
-  g_signal_connect_swapped (G_OBJECT (selection), "changed",
-			    G_CALLBACK
-			    (xkb_options_enable_disable_buttons), dialog);
+  GtkToggleButton *toggle = GTK_TOGGLE_BUTTON (data);
+  GtkWidget *expander = xkb_options_get_expander (GTK_WIDGET (toggle));
+  gboolean old_state = gtk_toggle_button_get_active (toggle);
+  gboolean new_state = xkb_options_is_selected (
+                         g_object_get_data (G_OBJECT (toggle), OPTION_ID_PROP));
+  int old_gstate = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (toggle), GCONFSTATE_PROP));
+  int state_diff = new_state - old_gstate;
+
+  if (GTK_WIDGET_TYPE (toggle) == GTK_TYPE_RADIO_BUTTON &&
+      old_state == TRUE && new_state == FALSE)
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (g_object_get_data (G_OBJECT (toggle), "NoneRadio")), TRUE);
+  else
+    gtk_toggle_button_set_active (toggle, new_state);
+
+  g_object_set_data (G_OBJECT (toggle), GCONFSTATE_PROP, GINT_TO_POINTER (new_state));
+  xkb_options_expander_selcounter_add (expander, state_diff);
+  xkb_options_expander_highlight (expander);
 }
 
+/* Add a check_button or radio_button to control a particular option
+   This function makes particular use of the current... variables at
+   the top of this file. */
 static void
-xkb_options_add_selected (GtkWidget * button, GladeXML * dialog)
-{
-  GtkTreeSelection *selection =
-    gtk_tree_view_get_selection (GTK_TREE_VIEW
-				 (WID ("xkb_options_available")));
-  GtkTreeIter selectedIter;
-  GtkTreeModel *model;
-  if (gtk_tree_selection_get_selected (selection, &model, &selectedIter))
-    {
-      gchar *id;
-      GSList *optionsList = xkb_options_get_selected_list ();
-      gtk_tree_model_get (model, &selectedIter, 1, &id, -1);
-      optionsList = g_slist_append (optionsList, id);
-      xkb_options_set_selected_list (optionsList);
-      clear_xkb_elements_list (optionsList);
-    }
-}
-
-static void
-xkb_options_remove_selected (GtkWidget * button, GladeXML * dialog)
-{
-  GtkTreeSelection *selection =
-    gtk_tree_view_get_selection (GTK_TREE_VIEW
-				 (WID ("xkb_options_selected")));
-  GtkTreeIter selectedIter;
-  GtkTreeModel *model;
-  if (gtk_tree_selection_get_selected (selection, &model, &selectedIter))
-    {
-      GSList *optionsList = xkb_options_get_selected_list ();
-      GtkTreePath *path = gtk_tree_model_get_path (model,
-						   &selectedIter);
-      if (path != NULL)
-	{
-	  int *indices = gtk_tree_path_get_indices (path);
-	  char *id = NULL;
-	  GSList *node2Remove = g_slist_nth (optionsList, indices[0]);
-
-	  optionsList = g_slist_remove_link (optionsList, node2Remove);
-
-	  id = (char *) node2Remove->data;
-	  g_slist_free_1 (node2Remove);
-
-	  g_free (id);
-
-	  xkb_options_set_selected_list (optionsList);
-	  gtk_tree_path_free (path);
-	}
-      clear_xkb_elements_list (optionsList);
-    }
-}
-
-static void
-xkb_options_add_option_to_available_tree (const XklConfigItemPtr
+xkb_options_add_option (const XklConfigItemPtr
                                           configItem, GladeXML * dialog)
 {
-  GtkWidget *optionsTree = WID ("xkb_options_available");
-  GtkTreeIter iter;
-  GtkTreeStore *treeStore =
-    GTK_TREE_STORE (gtk_tree_view_get_model (GTK_TREE_VIEW (optionsTree)));
-  const gchar *fullOptionName = GSwitchItKbdConfigMergeItems (current1stLevelId,
-							   configItem->name);
-  char *utfOptionName = xci_desc_to_utf8 (configItem);
+  GtkWidget *option_check;
+  gchar *utfOptionName = xci_desc_to_utf8 (configItem);
+  /* Copy this out because we'll load it into the widget with set_data */
+  gchar *fullOptionName = g_strdup(
+    GSwitchItKbdConfigMergeItems (current1stLevelId, configItem->name));
+  gboolean initial_state;
 
-  gtk_tree_store_append (treeStore, &iter, &current1stLevelIter);
-  gtk_tree_store_set (treeStore, &iter, 0, utfOptionName, 1,
-		      fullOptionName, -1);
+  if (currentMultiSelect)
+    option_check = gtk_check_button_new_with_label (utfOptionName);
+  else
+    {
+      if (currentRadioGroup == NULL)
+        {
+          /* The first radio in a group is to be "Default", meaning none of
+             the below options are to be included in the selected list.
+             This is a HIG-compliant alternative to allowing no
+             selection in the group. */
+          option_check = gtk_radio_button_new_with_label (currentRadioGroup, _("Default"));
+          gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (option_check), TRUE);
+          gtk_box_pack_start_defaults (GTK_BOX (currentVbox), option_check);
+          currentRadioGroup = gtk_radio_button_get_group (GTK_RADIO_BUTTON (option_check));
+          currentNoneRadio = option_check;
+        }
+      option_check = gtk_radio_button_new_with_label (currentRadioGroup, utfOptionName);
+      currentRadioGroup = gtk_radio_button_get_group (GTK_RADIO_BUTTON (option_check));
+      g_object_set_data (G_OBJECT (option_check), "NoneRadio", currentNoneRadio);
+    }
   g_free (utfOptionName);
+
+  initial_state = xkb_options_is_selected (fullOptionName);
+
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (option_check), initial_state);
+
+  g_object_set_data_full (G_OBJECT (option_check), OPTION_ID_PROP, fullOptionName, g_free);
+
+  g_signal_connect (G_OBJECT (option_check), "toggled", G_CALLBACK (option_toggled_cb), NULL);
+
+  gconf_client_notify_add (xkbGConfClient,
+			   GSWITCHIT_KBD_CONFIG_KEY_OPTIONS,
+			   (GConfClientNotifyFunc)
+			   option_update_cb, option_check, NULL, NULL);
+
+  gtk_box_pack_start_defaults (GTK_BOX (currentVbox), option_check);
+
+  xkb_options_expander_selcounter_add (xkb_options_get_expander (option_check), initial_state);
+  g_object_set_data (G_OBJECT (option_check), GCONFSTATE_PROP, GINT_TO_POINTER (initial_state));
 }
 
+/* Add a group of options: create title and layout widgets and then
+   add widgets for all the options in the group. */
 static void
-xkb_options_add_group_to_available_tree (const XklConfigItemPtr
+xkb_options_add_group (const XklConfigItemPtr
                                          configItem,
                                          Bool allowMultipleSelection,
                                          GladeXML * dialog)
 {
-  GtkWidget *optionsTree = WID ("xkb_options_available");
-  GtkTreeStore *treeStore =
-    GTK_TREE_STORE (gtk_tree_view_get_model (GTK_TREE_VIEW (optionsTree)));
-  char *utfGroupName = xci_desc_to_utf8 (configItem);
-
-  gtk_tree_store_append (treeStore, &current1stLevelIter, NULL);
-  gtk_tree_store_set (treeStore, &current1stLevelIter, 0,
-		      utfGroupName, 1, configItem->name, 2,
-		      (gboolean) allowMultipleSelection, -1);
-  g_free (utfGroupName);
+  GSList * expanders_list = g_object_get_data (G_OBJECT (dialog), EXPANDERS_PROP);
 
   current1stLevelId = configItem->name;
 
+  gchar *utfGroupName = xci_desc_to_utf8 (configItem);
+  gchar *titlemarkup = g_strconcat ("<span>", utfGroupName, "</span>", NULL);
+
+  GtkWidget *expander = gtk_expander_new (titlemarkup);
+  g_object_set_data_full (G_OBJECT (expander), "utfGroupName", utfGroupName, g_free);
+
+  g_free (titlemarkup);
+  gtk_expander_set_use_markup (GTK_EXPANDER (expander), TRUE);
+  GtkWidget *align = gtk_alignment_new (0, 0, 1, 1);
+  gtk_alignment_set_padding (GTK_ALIGNMENT (align), 6, 12, 12, 0);
+  GtkWidget *vbox = gtk_vbox_new (TRUE, 6);
+  gtk_container_add (GTK_CONTAINER (align), vbox);
+  gtk_container_add (GTK_CONTAINER (expander), align);
+  currentVbox = vbox;
+
+  currentMultiSelect = (gboolean) allowMultipleSelection;
+  currentRadioGroup = NULL;
+
   XklConfigEnumOptions (configItem->name, (ConfigItemProcessFunc)
-			xkb_options_add_option_to_available_tree, dialog);
+                        xkb_options_add_option, dialog);
+
+  xkb_options_expander_highlight (expander);
+
+  expanders_list = g_slist_append (expanders_list, expander);
+  g_object_set_data (G_OBJECT (dialog), EXPANDERS_PROP, expanders_list);
 }
 
-void
-xkb_options_fill_available_tree (GladeXML * dialog)
+static gint
+xkb_options_expanders_compare (GtkWidget * expander1, GtkWidget * expander2)
 {
-  GtkTreeStore *treeStore =
-    gtk_tree_store_new (3, G_TYPE_STRING, G_TYPE_STRING,
-			G_TYPE_BOOLEAN);
-  GtkWidget *treeView = WID ("xkb_options_available");
-  GtkCellRenderer *renderer =
-    GTK_CELL_RENDERER (gtk_cell_renderer_text_new ());
-  GtkTreeViewColumn *column = gtk_tree_view_column_new_with_attributes (NULL,
-									renderer,
-									"text",
-									0,
-									NULL);
-  GtkTreeSelection *selection =
-    gtk_tree_view_get_selection (GTK_TREE_VIEW (treeView));
+  const gchar *t1 = gtk_expander_get_label (GTK_EXPANDER (expander1));
+  const gchar *t2 = gtk_expander_get_label (GTK_EXPANDER (expander2));
+  return g_utf8_collate (t1, t2);
+}
 
-  gtk_tree_view_set_model (GTK_TREE_VIEW (treeView),
-			   GTK_TREE_MODEL (treeStore));
-  gtk_tree_view_append_column (GTK_TREE_VIEW (treeView), column);
+/* Create widgets to represent the options made available by the backend */
+void
+xkb_options_load_options (GladeXML * dialog)
+{
+  GtkWidget *opts_vbox = WID ("options_vbox");
+  GSList * expanders_list;
+  GtkWidget * expander;
 
+  /* fill the list */
   XklConfigEnumOptionGroups ((GroupProcessFunc)
-			     xkb_options_add_group_to_available_tree, dialog);
+			     xkb_options_add_group, dialog);
+  /* sort it */
+  expanders_list = g_object_get_data (G_OBJECT (dialog), EXPANDERS_PROP);
+  expanders_list = g_slist_sort (expanders_list, (GCompareFunc)xkb_options_expanders_compare);
+  while (expanders_list)
+  {
+    expander = GTK_WIDGET (expanders_list->data);
+    gtk_box_pack_start (GTK_BOX (opts_vbox), expander, FALSE, FALSE, 0);
+    expanders_list = expanders_list->next;
+  }
 
-  sort_tree_content (treeView);
+  /* just cleanup */
+  expanders_list = g_object_get_data (G_OBJECT (dialog), EXPANDERS_PROP);
+  g_object_set_data (G_OBJECT (dialog), EXPANDERS_PROP, NULL);
+  g_slist_free (expanders_list);
 
-  g_signal_connect_swapped (G_OBJECT (selection), "changed",
-			    G_CALLBACK
-			    (xkb_options_enable_disable_buttons), dialog);
+  gtk_widget_show_all (opts_vbox);
 }
 
-void
-xkb_options_fill_selected_tree (GladeXML * dialog)
-{
-  GSList *options = xkb_options_get_selected_list ();
-  GSList *curOption;
-  GtkListStore *listStore =
-    GTK_LIST_STORE (gtk_tree_view_get_model
-		    (GTK_TREE_VIEW (WID ("xkb_options_selected"))));
-  gtk_list_store_clear (listStore);
-
-  for (curOption = options; curOption != NULL; curOption = curOption->next)
-    {
-      GtkTreeIter iter;
-      char *groupName, *optionName;
-      const char *visible = (char *) curOption->data;
-
-      if (GSwitchItKbdConfigSplitItems (visible, &groupName, &optionName))
-	{
-	  XklConfigItem citem;
-	  char *v1, *utfVisible;
-	  g_snprintf (citem.name, sizeof (citem.name), "%s", optionName);
-	  if (XklConfigFindOption (groupName, &citem))
-	    {
-	      visible = citem.description;
-	    }
-	  v1 = g_strdup (visible);
-	  utfVisible =
-	    g_locale_to_utf8 (g_strstrip (v1), -1, NULL, NULL, NULL);
-	  gtk_list_store_append (listStore, &iter);
-	  gtk_list_store_set (listStore, &iter,
-			      0, utfVisible, 1, curOption->data, -1);
-	  g_free (utfVisible);
-	  g_free (v1);
-	}
-
-    }
-
-  clear_xkb_elements_list (options);
-  xkb_options_enable_disable_buttons (dialog);
-}
-
-void
-xkb_options_register_buttons_handlers (GladeXML * dialog)
-{
-  g_signal_connect (G_OBJECT (WID ("xkb_options_add")), "clicked",
-		    G_CALLBACK (xkb_options_add_selected), dialog);
-  g_signal_connect (G_OBJECT (WID ("xkb_options_remove")), "clicked",
-		    G_CALLBACK (xkb_options_remove_selected), dialog);
-}
+/* Respond to a change in the xkb gconf settings */
 static void
-xkb_options_update_list (GConfClient * client,
-                         guint cnxn_id, GConfEntry * entry, GladeXML * dialog)
+xkb_options_update (GConfClient * client,
+                    guint cnxn_id, GConfEntry * entry, GladeXML * dialog)
 {
-  xkb_options_fill_selected_tree (dialog);
+  /* Updating options is handled by gconf notifies for each widget
+     This is here to avoid calling it N_OPTIONS times for each gconf
+     change.*/
   enable_disable_restoring (dialog);
 }
 
@@ -374,5 +327,5 @@ xkb_options_register_gconf_listener (GladeXML * dialog)
   gconf_client_notify_add (xkbGConfClient,
 			   GSWITCHIT_KBD_CONFIG_KEY_OPTIONS,
 			   (GConfClientNotifyFunc)
-			   xkb_options_update_list, dialog, NULL, NULL);
+			   xkb_options_update, dialog, NULL, NULL);
 }
