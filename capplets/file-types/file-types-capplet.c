@@ -513,7 +513,6 @@ nautilus_mime_type_capplet_update_info (const char *mime_type) {
 	/* Update text items */
 	gtk_label_set_text (GTK_LABEL (mime_label), mime_type);
 
-	/* Add description to first column */
 	description = gnome_vfs_mime_get_description (mime_type);	
 	if (description != NULL && strlen (description) > 0) {
 		gtk_entry_set_text (GTK_ENTRY (description_entry), description);
@@ -881,7 +880,117 @@ delete_mime_clicked (GtkWidget *widget, gpointer data)
 static void
 add_mime_clicked (GtkWidget *widget, gpointer data)
 {
-	nautilus_mime_type_capplet_show_new_mime_window ();
+	static gchar *text[3];        
+	const char *description, *action_icon_name, *description_icon_name;
+	char *extensions, *mime_string, *action_icon_path, *description_icon_path;
+        gint row;
+	GdkPixbuf *pixbuf;
+	GdkPixmap *pixmap;
+	GdkBitmap *bitmap;
+	GnomeVFSMimeAction *action;
+	GnomeVFSMimeApplication *default_app;
+	OAF_ServerInfo *default_component;
+	
+	mime_string = nautilus_mime_type_capplet_show_new_mime_window ();
+	if (mime_string != NULL) {
+		/* Add new type to mime list */
+		pixbuf = NULL;
+			
+		/* Add description to first column */
+		description = gnome_vfs_mime_get_description (mime_string);	
+		if (description != NULL && strlen (description) > 0) {
+			text[0] = g_strdup (description);
+		} else {
+			text[0] = g_strdup ("");
+		}
+
+		/* Add mime type to second column */
+		text[1] = mime_string;
+
+		/* Add extension to third columns */
+		extensions = gnome_vfs_mime_get_extensions_pretty_string (mime_string);
+		if (extensions != NULL) {
+			text[2] = extensions;
+		} else {
+			text[2] = "";
+		}
+
+		/* Add default action to fourth column */
+		text[3] = _("None");
+
+		/* Insert item into list */
+		row = gtk_clist_insert (GTK_CLIST (mime_list), 1, text);
+	        gtk_clist_set_row_data (GTK_CLIST (mime_list), row, g_strdup(mime_string));
+
+		/* Set description column icon */
+		description_icon_name = gnome_vfs_mime_get_icon (mime_string);			
+		if (description_icon_name != NULL) {
+			/* Get custom icon */
+			description_icon_path = gnome_pixmap_file (description_icon_name);
+			if (description_icon_path != NULL) {
+				pixbuf = gdk_pixbuf_new_from_file (description_icon_path);
+				g_free (description_icon_path);
+			}
+		} else {
+			/* Use default icon */
+			pixbuf = gdk_pixbuf_new_from_file ("/gnome/share/pixmaps/nautilus/i-regular-24.png");
+		}
+
+		if (pixbuf != NULL) {
+			pixbuf = capplet_gdk_pixbuf_scale_to_fit (pixbuf, 18, 18);
+			gdk_pixbuf_render_pixmap_and_mask (pixbuf, &pixmap, &bitmap, 100);
+			gtk_clist_set_pixtext (GTK_CLIST (mime_list), row, 0, text[0], 5, pixmap, bitmap);
+			gdk_pixbuf_unref (pixbuf);
+		}
+
+		/* Set up action column */
+		pixbuf = NULL;
+		action = gnome_vfs_mime_get_default_action (mime_string);
+		if (action != NULL) {
+			switch (action->action_type) {
+				case GNOME_VFS_MIME_ACTION_TYPE_APPLICATION:
+					/* Get the default application */
+					default_app = gnome_vfs_mime_get_default_application (mime_string);
+					text[3] = default_app->name;
+
+					action_icon_name = gnome_vfs_mime_get_icon (mime_string);			
+					if (action_icon_name != NULL) {
+						/* Get custom icon */
+						action_icon_path = gnome_pixmap_file (action_icon_name);
+						if (action_icon_path != NULL) {
+							pixbuf = gdk_pixbuf_new_from_file (action_icon_path);
+							g_free (action_icon_path);
+						}
+					} else {
+						/* Use default icon */
+						pixbuf = gdk_pixbuf_new_from_file ("/gnome/share/pixmaps/nautilus/i-executable.png");
+					}
+					break;
+
+				case GNOME_VFS_MIME_ACTION_TYPE_COMPONENT:
+					/* Get the default component */
+					default_component = gnome_vfs_mime_get_default_component (mime_string);
+					text[3] = name_from_oaf_server_info (default_component);
+					pixbuf = gdk_pixbuf_new_from_file ("/gnome/share/pixmaps/nautilus/gnome-library.png");
+					break;
+					
+				default:
+					gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (application_button), TRUE);
+					break;
+			}
+		}
+		
+		/* Set column icon */
+		if (pixbuf != NULL) {
+			pixbuf = capplet_gdk_pixbuf_scale_to_fit (pixbuf, 18, 18);
+			gdk_pixbuf_render_pixmap_and_mask (pixbuf, &pixmap, &bitmap, 100);
+			gtk_clist_set_pixtext (GTK_CLIST (mime_list), row, 3, text[3], 5, pixmap, bitmap);
+			gdk_pixbuf_unref (pixbuf);
+		}
+		
+		g_free (text[0]);
+		g_free (extensions);
+	}
 }
 
 static void

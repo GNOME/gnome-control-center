@@ -562,15 +562,20 @@ name_from_oaf_server_info (OAF_ServerInfo *server)
         return g_strdup(view_as_name);
 }
 
-void
+char *
 nautilus_mime_type_capplet_show_new_mime_window (void)
 {
 	GtkWidget *dialog;
         GtkWidget *mime_entry;
 	GtkWidget *label;
-	GtkWidget *ext_entry;
+	GtkWidget *desc_entry;
 	GtkWidget *hbox;
 	GtkWidget *vbox;
+	GnomeVFSResult result;
+	const char *type, *description;
+	char *mime_type;
+
+	mime_type = NULL;
 	
         dialog = gnome_dialog_new (_("Add Mime Type"), GNOME_STOCK_BUTTON_OK, GNOME_STOCK_BUTTON_CANCEL, NULL);
 	label = gtk_label_new (_("Add a new Mime Type\nFor example:  image/tiff; text/x-scheme"));
@@ -598,15 +603,23 @@ nautilus_mime_type_capplet_show_new_mime_window (void)
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
 	gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_("Description:")), FALSE, FALSE, 0);
-	ext_entry = gtk_entry_new ();
-	gtk_box_pack_start (GTK_BOX (hbox), ext_entry, TRUE, TRUE, 0);
+	desc_entry = gtk_entry_new ();
+	gtk_box_pack_start (GTK_BOX (hbox), desc_entry, TRUE, TRUE, 0);
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 	
 	
         gtk_widget_show_all (GNOME_DIALOG (dialog)->vbox);
         switch (gnome_dialog_run (GNOME_DIALOG (dialog))) {
 	        case 0:
+			type = gtk_entry_get_text (GTK_ENTRY (mime_entry));
+			description = gtk_entry_get_text (GTK_ENTRY (desc_entry));
+			
 			/* Add new mime type here */
+			if (strlen (type) > 3) {
+				result = gnome_vfs_mime_set_registered_type_key (type, "description", description);
+				mime_type = g_strdup (type);
+			}
+			/* Fall through to close dialog */
 
 	        case 1:
 	                gtk_widget_destroy (dialog);
@@ -615,6 +628,8 @@ nautilus_mime_type_capplet_show_new_mime_window (void)
 		default:
 			break;
         }
+        
+        return mime_type;
 }
 
 void
