@@ -7,31 +7,31 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.0.0\n"
-"POT-Creation-Date: 2002-07-13 20:33+0200\n"
-"PO-Revision-Date: 2002-07-13 20:56+0200\n"
+"POT-Creation-Date: 2002-07-22 12:38+0200\n"
+"PO-Revision-Date: 2002-07-22 12:46+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <gnome@softcatala.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:236
-#: capplets/keyboard/gnome-keyboard-properties.c:241
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:225
+#: capplets/keyboard/gnome-keyboard-properties.c:143
 #, c-format
 msgid "There was an error launching the keyboard capplet : %s"
 msgstr "S'ha produït un error a l'executar la capplet del teclat: %s"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:302
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:291
 #, c-format
 msgid "Unable to import AccessX settings from file '%s'"
 msgstr "Impossible d'importar els ajustaments d'AccessX des del fitxer «%s»"
 
-#: capplets/accessibility/keyboard/accessibility-keyboard.c:414
+#: capplets/accessibility/keyboard/accessibility-keyboard.c:403
 msgid "Select CDE AccessX file"
 msgstr "Seleccioneu el fitxer AccesX CDE"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.desktop.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 #: capplets/keyboard/keyboard.desktop.in.h:1
 msgid "Keyboard"
 msgstr "Teclat"
@@ -249,8 +249,8 @@ msgstr "Seleccioneu una ima_tge:"
 #: capplets/background/background-properties-capplet.c:561
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:712
-#: capplets/keyboard/gnome-keyboard-properties.c:363
-#: capplets/mouse/gnome-mouse-properties.c:766
+#: capplets/keyboard/gnome-keyboard-properties.c:277
+#: capplets/mouse/gnome-mouse-properties.c:752
 #: capplets/sound/sound-properties-capplet.c:149
 msgid "Retrieve and store legacy settings"
 msgstr "Recupera i desa els paràmetres originals"
@@ -554,6 +554,7 @@ msgid "Please specify a name and a command for this editor."
 msgstr "Si us plau, especifiqueu un nom i una ordre per a aquest editor."
 
 #: capplets/default-applications/gnome-default-applications-properties.glade.h:1
+#: capplets/file-types/file-types-properties.glade.h:1
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:1
 #: capplets/network/gnome-network-preferences.glade.h:1
 #: capplets/theme-switcher/theme-install.glade.h:1
@@ -729,7 +730,6 @@ msgid "_Select an Editor:"
 msgstr "_Selecciona un editor:"
 
 #: capplets/desktop-links/Accessibility.directory.in.in.h:1
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:6
 msgid "Accessibility"
 msgstr "Accesibilitat"
 
@@ -839,7 +839,7 @@ msgid "Associate sounds with window manager events"
 msgstr "Associa sons  amb events del gestor de finestres"
 
 #: capplets/desktop-links/Sawfish/sound-properties.desktop.in.h:2
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:26
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
 #: capplets/sound/sound.desktop.in.h:2
 msgid "Sound"
 msgstr "So"
@@ -942,18 +942,18 @@ msgid "Source Code"
 msgstr "Codi Font"
 
 #: capplets/file-types/category-names.h:25
-#: capplets/file-types/mime-type-info.c:673
+#: capplets/file-types/mime-type-info.c:668
 msgid "Audio"
 msgstr "Audio"
 
 #: capplets/file-types/category-names.h:26
-#: capplets/file-types/mime-type-info.c:669
+#: capplets/file-types/mime-type-info.c:664
 msgid "Images"
 msgstr "Imatges"
 
 #
 #: capplets/file-types/category-names.h:27
-#: capplets/file-types/mime-type-info.c:671
+#: capplets/file-types/mime-type-info.c:666
 msgid "Video"
 msgstr "Video"
 
@@ -966,7 +966,7 @@ msgid "Extensions"
 msgstr "Extensions"
 
 #: capplets/file-types/file-types-capplet.desktop.in.h:1
-#: capplets/file-types/file-types-properties.glade.h:6
+#: capplets/file-types/file-types-properties.glade.h:8
 #: capplets/file-types/file-types.desktop.in.h:2
 msgid "File Types and Programs"
 msgstr "Tipus de fitxers i programes"
@@ -977,110 +977,110 @@ msgstr ""
 "Especifica quins programes s'han d'utilitzar per a visualitzar aquest tipus "
 "de fitxer"
 
-#: capplets/file-types/file-types-properties.glade.h:1
+#: capplets/file-types/file-types-properties.glade.h:2
 msgid "Actions"
 msgstr "Accions"
 
-#: capplets/file-types/file-types-properties.glade.h:2
+#: capplets/file-types/file-types-properties.glade.h:3
 msgid "Add _file type..."
 msgstr "Afegeix un tipus de _fitxer..."
 
-#: capplets/file-types/file-types-properties.glade.h:3
+#: capplets/file-types/file-types-properties.glade.h:4
 msgid "Add _service..."
 msgstr "Afegeix un _servei..."
 
 #
-#: capplets/file-types/file-types-properties.glade.h:4
+#: capplets/file-types/file-types-properties.glade.h:5
+msgid "Add:"
+msgstr "Afegeix:"
+
+#
+#: capplets/file-types/file-types-properties.glade.h:6
 msgid "Default action"
 msgstr "Acció per defecte"
 
-#: capplets/file-types/file-types-properties.glade.h:5
-#: capplets/file-types/mime-edit-dialog.c:192
+#: capplets/file-types/file-types-properties.glade.h:7
+#: capplets/file-types/mime-edit-dialog.c:209
 msgid "Edit file type"
 msgstr "Edita el tipus de fitxer"
 
 #
-#: capplets/file-types/file-types-properties.glade.h:7
+#: capplets/file-types/file-types-properties.glade.h:9
 msgid "Filename Extensions"
 msgstr "Extensions de noms de fitxer"
 
-#: capplets/file-types/file-types-properties.glade.h:8
+#: capplets/file-types/file-types-properties.glade.h:10
 msgid "Look at content"
 msgstr "Visualitza el contingut"
 
-#: capplets/file-types/file-types-properties.glade.h:9
+#: capplets/file-types/file-types-properties.glade.h:11
 msgid "Program to Run"
 msgstr "Programa a executar"
 
-#: capplets/file-types/file-types-properties.glade.h:10
+#: capplets/file-types/file-types-properties.glade.h:12
 msgid "Run a program"
 msgstr "Executa un programa"
 
 #
-#: capplets/file-types/file-types-properties.glade.h:11
+#: capplets/file-types/file-types-properties.glade.h:13
 msgid "Run in _Terminal"
 msgstr "Executa a un _Terminal"
 
-#: capplets/file-types/file-types-properties.glade.h:12
+#: capplets/file-types/file-types-properties.glade.h:14
 msgid "Use parent category _defaults"
 msgstr "Utilitza les categories pare per _defecte"
 
-#: capplets/file-types/file-types-properties.glade.h:13
+#: capplets/file-types/file-types-properties.glade.h:15
 msgid "Viewer Component"
 msgstr "Component de visualització"
 
 #
-#: capplets/file-types/file-types-properties.glade.h:14
-msgid "_Add..."
-msgstr "_Afegeix..."
-
-#
-#: capplets/file-types/file-types-properties.glade.h:15
+#: capplets/file-types/file-types-properties.glade.h:16
 msgid "_Category"
 msgstr "_Categoria"
 
 #
-#: capplets/file-types/file-types-properties.glade.h:16
+#: capplets/file-types/file-types-properties.glade.h:17
 msgid "_Choose..."
 msgstr "Es_cull..."
 
 #
-#: capplets/file-types/file-types-properties.glade.h:17
+#: capplets/file-types/file-types-properties.glade.h:18
 msgid "_Delete"
 msgstr "_Esborra"
 
 #
-#: capplets/file-types/file-types-properties.glade.h:18
+#: capplets/file-types/file-types-properties.glade.h:19
 msgid "_Description"
 msgstr "_Descripció"
 
 #
-#: capplets/file-types/file-types-properties.glade.h:19
+#: capplets/file-types/file-types-properties.glade.h:20
 msgid "_Edit..."
 msgstr "_Edita..."
 
 #
-#: capplets/file-types/file-types-properties.glade.h:20
+#: capplets/file-types/file-types-properties.glade.h:21
 msgid "_MIME Type"
 msgstr "Tipus de _MIME"
 
 #
-#: capplets/file-types/file-types-properties.glade.h:21
+#: capplets/file-types/file-types-properties.glade.h:22
 msgid "_Name"
 msgstr "_Nom"
 
 #
-#: capplets/file-types/file-types-properties.glade.h:22
+#: capplets/file-types/file-types-properties.glade.h:23
 msgid "_Program"
 msgstr "_Programa"
 
 #
-#: capplets/file-types/file-types-properties.glade.h:23
+#: capplets/file-types/file-types-properties.glade.h:24
 msgid "_Program to Run"
 msgstr "_Programa a executar"
 
 #
-#: capplets/file-types/file-types-properties.glade.h:24
+#: capplets/file-types/file-types-properties.glade.h:25
 msgid "_Protocol"
 msgstr "_Protocol"
 
@@ -1094,7 +1094,7 @@ msgstr "Edita la categoria del fitxer"
 
 #
 #: capplets/file-types/mime-category-edit-dialog.c:172
-#: capplets/file-types/mime-edit-dialog.c:229
+#: capplets/file-types/mime-edit-dialog.c:256
 #: capplets/file-types/service-edit-dialog.c:170
 #: capplets/file-types/service-edit-dialog.c:171
 msgid "Model"
@@ -1113,54 +1113,54 @@ msgid "Structure containing information on the MIME category"
 msgstr "Estructura que conte la informació sobre la categoria MIME"
 
 #: capplets/file-types/mime-category-edit-dialog.c:344
-#: capplets/file-types/mime-edit-dialog.c:463
-#: capplets/file-types/mime-edit-dialog.c:567
+#: capplets/file-types/mime-edit-dialog.c:490
+#: capplets/file-types/mime-edit-dialog.c:594
 #: capplets/file-types/service-edit-dialog.c:359
 #: capplets/file-types/service-edit-dialog.c:408
 msgid "Custom"
 msgstr "Personalitzat"
 
 #
-#: capplets/file-types/mime-edit-dialog.c:189
+#: capplets/file-types/mime-edit-dialog.c:206
 msgid "Extension"
 msgstr "Extensió"
 
-#: capplets/file-types/mime-edit-dialog.c:230
+#: capplets/file-types/mime-edit-dialog.c:257
 msgid "Underlying model to notify when Ok is clicked"
 msgstr "El model subjacent al qual notificar quan es fa clic en D'acord"
 
-#: capplets/file-types/mime-edit-dialog.c:237
+#: capplets/file-types/mime-edit-dialog.c:264
 msgid "MIME type information"
 msgstr "Informació de tipus MIME"
 
-#: capplets/file-types/mime-edit-dialog.c:238
+#: capplets/file-types/mime-edit-dialog.c:265
 msgid "Structure with data on the MIME type"
 msgstr "Estructura amb les dades del tipus de MIME"
 
-#: capplets/file-types/mime-edit-dialog.c:244
+#: capplets/file-types/mime-edit-dialog.c:271
 msgid "Is add dialog"
 msgstr "És un diàleg d'addició"
 
-#: capplets/file-types/mime-edit-dialog.c:245
+#: capplets/file-types/mime-edit-dialog.c:272
 msgid "True if this dialog is for adding a MIME type"
 msgstr "VERITAT si aquest diàleg s'està afegint a un tipus de MIME"
 
 #
-#: capplets/file-types/mime-edit-dialog.c:294
+#: capplets/file-types/mime-edit-dialog.c:321
 msgid "Add File Type"
 msgstr "Afegeix un tipus de fitxer"
 
-#: capplets/file-types/mime-edit-dialog.c:408
-#: capplets/file-types/mime-type-info.c:675
+#: capplets/file-types/mime-edit-dialog.c:435
+#: capplets/file-types/mime-type-info.c:670
 msgid "Misc"
 msgstr "Miscel·lània"
 
-#: capplets/file-types/mime-edit-dialog.c:458
-#: capplets/file-types/mime-edit-dialog.c:517
+#: capplets/file-types/mime-edit-dialog.c:485
+#: capplets/file-types/mime-edit-dialog.c:544
 msgid "None"
 msgstr "Cap"
 
-#: capplets/file-types/mime-edit-dialog.c:820
+#: capplets/file-types/mime-edit-dialog.c:847
 msgid ""
 "Please enter a valid MIME type.  It should be of the form class/type and may "
 "not contain any spaces."
@@ -1168,15 +1168,15 @@ msgstr ""
 "Introduïu un tipus de MIME vàlid. Hauria d'estar en el format classe/tipus i "
 "no pot contindre cap espai."
 
-#: capplets/file-types/mime-edit-dialog.c:827
+#: capplets/file-types/mime-edit-dialog.c:854
 msgid "A MIME type with that name already exists, overwrite ?."
 msgstr "Ja existeix un tipus de MIME amb aquest nom, voleu sobreescriure-ho?"
 
-#: capplets/file-types/mime-edit-dialog.c:892
+#: capplets/file-types/mime-edit-dialog.c:919
 msgid "Category"
 msgstr "Categoria"
 
-#: capplets/file-types/mime-edit-dialog.c:897
+#: capplets/file-types/mime-edit-dialog.c:924
 msgid "Choose a file category"
 msgstr "Escull una categoria de fitxer"
 
@@ -1376,12 +1376,12 @@ msgid "Assign shortcut keys to commands"
 msgstr "Assigna dreceres a ordres"
 
 #
-#: capplets/keyboard/gnome-keyboard-properties.c:342
+#: capplets/keyboard/gnome-keyboard-properties.c:256
 msgid "_Accessibility"
 msgstr "_Accesibilitat"
 
-#: capplets/keyboard/gnome-keyboard-properties.c:359
-#: capplets/keyboard/gnome-keyboard-properties.c:361
+#: capplets/keyboard/gnome-keyboard-properties.c:273
+#: capplets/keyboard/gnome-keyboard-properties.c:275
 #: capplets/sound/sound-properties-capplet.c:145
 #: capplets/sound/sound-properties-capplet.c:147
 msgid ""
@@ -1391,155 +1391,89 @@ msgstr ""
 "un dimoni)"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:2
-msgid "<i>fast</i>"
-msgstr "<i>ràpid</i>"
+msgid "Bee_p"
+msgstr "Bee_p"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:3
-msgid "<i>loud</i>"
-msgstr "<i>alt</i>"
+msgid "C_ustom:"
+msgstr "Pe_rsonalitzat:"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:4
-msgid "<i>quiet</i>"
-msgstr "<i>baix</i>"
+msgid "Clic_k on keypress"
+msgstr "Fa «clic_k» en polsar tecles"
 
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:5
-msgid "<i>slow</i>"
-msgstr "<i>lent</i>"
+msgid "Cursor Blinks"
+msgstr "Parpadeig del cursor"
 
-#
 #: capplets/keyboard/gnome-keyboard-properties.glade.h:7
-msgid "Cursor"
-msgstr "Cursor"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
-msgid "Cursor _blinks in text fields"
-msgstr "_Parpadeig del cursor en els camps de text"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
-msgid "Fast"
-msgstr "Ràpid"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
-msgid "Key_press makes sound"
-msgstr "La _pressió d'una tecla produeix un so"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
 msgid "Keyboard Bell"
 msgstr "Timbre de teclat"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:13
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:8
 msgid "Keyboard Preferences"
 msgstr "Preferències del teclat"
 
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:9
 msgid "Keyboard _repeats when key is held down"
 msgstr "El teclat _repeteix quan es manté pressionada la tecla"
 
-#
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
-msgid "Keyboard bell _enabled"
-msgstr "Timbre de teclat h_abilitat"
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:10
+msgid "Keypress Click"
+msgstr "«Click» en polsar tecles"
 
 #
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
-msgid "Keyboard bell _off"
-msgstr "Timbre de teclat des_habilitat"
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:11
+msgid "Repeat Keys"
+msgstr "Repetició de tecles"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:12
+msgid "S_peed:"
+msgstr "_Velocitat:"
 
 #
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
-msgid "Keyclick Volume"
-msgstr "Volum de tecla pressionada"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
-msgid "Long"
-msgstr "Llarg"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
-msgid "Medium"
-msgstr "Mitjà"
-
-#
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
-msgid "Repeat Rate"
-msgstr "Velocitat de repetició"
-
-#
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
-msgid "Repeat s_peed:"
-msgstr "Velocitat de re_petició"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
-msgid "Set the speed the cursor blinks in text fields."
-msgstr "Configura la velocitat de parpadeig del cursor en els camps de text."
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:23
-msgid "Set the volume of the clicking sound made when pressing a key"
-msgstr "Configura el volum del so del clic quan es pressiona una tecla"
-
-#
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:24
-msgid "Short"
-msgstr "Curt"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:25
-msgid "Slow"
-msgstr "Lent"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:27
-msgid ""
-"The keyboard bell is the <i>beep</i> sound heard when the system wants to "
-"get your attention."
-msgstr ""
-"El timbre del teclat és el so <i>beep</i> escoltat quan el sistema vol "
-"cridar-vos l'atenció."
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:28
-msgid "Very Fast"
-msgstr "Molt ràpid"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:29
-msgid "Very Short"
-msgstr "Molt curt"
-
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:30
-msgid ""
-"You can configure the keyboards accessibility features by bringing up the "
-"'Accessibility Settings' property dialog, or pressing the button on the "
-"right."
-msgstr ""
-"Podeu configurar les funcionalitats d'accessibilitat del teclat fent servir "
-"el diàleg «Configuracions d'accessibiliat», o polsant el botó a la dreta."
-
-#
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:31
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:14
 msgid "_Accessibility..."
 msgstr "_Accesibilitat..."
 
-#
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:32
-msgid "_Blink speed:"
-msgstr "Velocitat de parpadei_g:"
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:15
+msgid "_Blinks in text boxes and fields"
+msgstr "_Parpadeja en les caixes i camps de text"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:16
+msgid "_Delay:"
+msgstr "_Retard:"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:17
+msgid "_Off"
+msgstr "_Apagat"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:18
+msgid "_Speed:"
+msgstr "_Velocitat:"
 
 #
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:33
-msgid "_Custom keyboard bell:"
-msgstr "Timbre de te_clat personalitzat:"
-
-#
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:34
-msgid "_Delay before repeating:"
-msgstr "Retar_d abans de repetir:"
-
-#
-#: capplets/keyboard/gnome-keyboard-properties.glade.h:35
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:19
 msgid "_Volume:"
 msgstr "_Volum:"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:20
+msgid "faster"
+msgstr "més ràpid"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:21
+msgid "loud"
+msgstr "alt"
+
+#: capplets/keyboard/gnome-keyboard-properties.glade.h:22
+msgid "quiet"
+msgstr "baix"
 
 #: capplets/keyboard/keyboard.desktop.in.h:2
 msgid "Set your keyboard preferences"
 msgstr "Estableix les preferències del teclat"
 
-#: capplets/mouse/gnome-mouse-properties.c:491
+#: capplets/mouse/gnome-mouse-properties.c:477
 #, c-format
 msgid ""
 "<b>Unknown Cursor</b>\n"
@@ -1548,7 +1482,7 @@ msgstr ""
 "<b>Cursor desconegut</b>\n"
 "%s"
 
-#: capplets/mouse/gnome-mouse-properties.c:592
+#: capplets/mouse/gnome-mouse-properties.c:578
 msgid ""
 "<b>Default Cursor - Current</b>\n"
 "The default cursor that ships with X"
@@ -1556,7 +1490,7 @@ msgstr ""
 "<b>Cursor per defecte - Actual</b>\n"
 "El cursor per defecte que s'envia amb X"
 
-#: capplets/mouse/gnome-mouse-properties.c:595
+#: capplets/mouse/gnome-mouse-properties.c:581
 msgid ""
 "<b>Default Cursor</b>\n"
 "The default cursor that ships with X"
@@ -1564,7 +1498,7 @@ msgstr ""
 "<b>Cursor per defecte</b>\n"
 "El cursor per defecte que s'envia amb X"
 
-#: capplets/mouse/gnome-mouse-properties.c:613
+#: capplets/mouse/gnome-mouse-properties.c:599
 msgid ""
 "<b>White Cursor - Current</b>\n"
 "The default cursor inverted"
@@ -1572,7 +1506,7 @@ msgstr ""
 "<b>Cursor blanc - Actual</b>\n"
 "El cursor per defecte invertit"
 
-#: capplets/mouse/gnome-mouse-properties.c:616
+#: capplets/mouse/gnome-mouse-properties.c:602
 msgid ""
 "<b>White Cursor</b>\n"
 "The default cursor inverted"
@@ -1580,7 +1514,7 @@ msgstr ""
 "<b>Cursor blanc</b>\n"
 "El cursor per defecte invertit"
 
-#: capplets/mouse/gnome-mouse-properties.c:634
+#: capplets/mouse/gnome-mouse-properties.c:620
 msgid ""
 "<b>Large Cursor - Current</b>\n"
 "Large version of normal cursor"
@@ -1588,7 +1522,7 @@ msgstr ""
 "<b>Cursor gran - Actual</b>\n"
 "La versió gran del cursor normal"
 
-#: capplets/mouse/gnome-mouse-properties.c:637
+#: capplets/mouse/gnome-mouse-properties.c:623
 msgid ""
 "<b>Large Cursor</b>\n"
 "Large version of normal cursor"
@@ -1596,7 +1530,7 @@ msgstr ""
 "<b>Cursor gran</b>\n"
 "La versió gran del cursor normal"
 
-#: capplets/mouse/gnome-mouse-properties.c:655
+#: capplets/mouse/gnome-mouse-properties.c:641
 msgid ""
 "<b>Large White Cursor - Current</b>\n"
 "Large version of white cursor"
@@ -1604,7 +1538,7 @@ msgstr ""
 "<b>Cursor blanc gran - Actual</b>\n"
 "La versió gran del cursor blanc"
 
-#: capplets/mouse/gnome-mouse-properties.c:658
+#: capplets/mouse/gnome-mouse-properties.c:644
 msgid ""
 "<b>Large White Cursor</b>\n"
 "Large version of white cursor"
@@ -1848,7 +1782,6 @@ msgid "Submenu"
 msgstr "Submenú"
 
 #: capplets/theme-switcher/control/control.c:74
-#: capplets/ui-properties/gnome-ui-properties.glade.h:4
 msgid "Item 1"
 msgstr "Element 1"
 
@@ -1924,10 +1857,9 @@ msgid "Customize the appearance of toolbars and menubars in applications"
 msgstr ""
 "Personalitza la aparença de les barres d'eines i menús en les aplicacions"
 
-#
 #: capplets/ui-properties/behavior.desktop.in.h:2
-msgid "Toolbars & Menus"
-msgstr "Barra d'eines i menús"
+msgid "Menus & Toolbars"
+msgstr "Menús i barres d'eines"
 
 #
 #: capplets/ui-properties/behavior.desktop.in.in.h:1
@@ -1951,105 +1883,113 @@ msgstr ""
 "configuració."
 
 #: capplets/ui-properties/gnome-ui-properties.glade.h:3
+msgid "C_ut"
+msgstr "Ta_lla"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:4
+msgid "Edit Menu"
+msgstr "Edita el menú"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:5
 msgid "Icons Only"
 msgstr "Només icones"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:5
-msgid "Item 2"
-msgstr "Element 2"
-
 #: capplets/ui-properties/gnome-ui-properties.glade.h:6
-msgid "Item 3"
-msgstr "Element 3"
+msgid "Menu and Toolbar Preferences"
+msgstr "Preferències dels menús i barres d'eines"
 
+#
 #: capplets/ui-properties/gnome-ui-properties.glade.h:7
-msgid "Menu Item 1"
-msgstr "Element 1 del menú"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:8
-msgid "Menu Item 2"
-msgstr "Element 2 del menú"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:9
-msgid "Menu Item 3"
-msgstr "Element 3 del menú"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:10
-msgid "Menu Item 4"
-msgstr "Element 4 del menú"
-
-#: capplets/ui-properties/gnome-ui-properties.glade.h:11
-msgid "Menu Item 5"
-msgstr "Element 5 del menú"
-
-#
-#: capplets/ui-properties/gnome-ui-properties.glade.h:12
-msgid "Menu items can have _icons"
-msgstr "Els elements del menú poden tindre _icones"
-
-#
-#: capplets/ui-properties/gnome-ui-properties.glade.h:13
 msgid "Menus"
 msgstr "Menús"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:14
+#: capplets/ui-properties/gnome-ui-properties.glade.h:8
 msgid "New File"
 msgstr "Nou fitxer"
 
 #
-#: capplets/ui-properties/gnome-ui-properties.glade.h:15
+#: capplets/ui-properties/gnome-ui-properties.glade.h:9
 msgid "Open File"
 msgstr "Obre el Fitxer"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:16
+#: capplets/ui-properties/gnome-ui-properties.glade.h:10
 msgid "Priority Text Beside Icons"
 msgstr "Text prioritari al costat de les icones"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:17
-msgid "Sample Menubar"
-msgstr "Exemple de barra de menú"
+#: capplets/ui-properties/gnome-ui-properties.glade.h:11
+msgid "Sample menubar:"
+msgstr "Exemple de barra de menú:"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:18
-msgid "Sample Toolbar"
-msgstr "Exemple de barra d'eines"
+#: capplets/ui-properties/gnome-ui-properties.glade.h:12
+msgid "Sample toolbar:"
+msgstr "Exemple de barra d'eines:"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:19
+#: capplets/ui-properties/gnome-ui-properties.glade.h:13
 msgid "Save File"
 msgstr "Desa el fitxer"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:20
+#: capplets/ui-properties/gnome-ui-properties.glade.h:14
 msgid "Select the toolbar style."
 msgstr "Seleccioneu l'estil de la barra d'eines."
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:21
+#: capplets/ui-properties/gnome-ui-properties.glade.h:15
 msgid "Text Below Icons"
 msgstr "Text baix les icones"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:22
+#: capplets/ui-properties/gnome-ui-properties.glade.h:16
 msgid "Text Only"
 msgstr "Només text"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:23
+#: capplets/ui-properties/gnome-ui-properties.glade.h:17
 msgid "Toolbar"
 msgstr "Barra d'eines"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:24
-msgid "Toolbar and Menu Preferences"
-msgstr "Preferències de les barres d'eines i menú"
-
 #
-#: capplets/ui-properties/gnome-ui-properties.glade.h:25
+#: capplets/ui-properties/gnome-ui-properties.glade.h:18
 msgid "Toolbars can be _detached and moved around"
 msgstr "La barra d'eines pot estar _separada i movent-se al voltant"
 
-#: capplets/ui-properties/gnome-ui-properties.glade.h:26
+#: capplets/ui-properties/gnome-ui-properties.glade.h:19
+msgid "_Button Labels: "
+msgstr "Etiquetes dels _botons: "
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:20
+msgid "_Copy"
+msgstr "_Còpia"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:21
 msgid "_Menu"
 msgstr "_Menú"
 
 #
+#: capplets/ui-properties/gnome-ui-properties.glade.h:22
+msgid "_New"
+msgstr "_Nou"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:23
+msgid "_Open"
+msgstr "_Obre"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:24
+msgid "_Paste"
+msgstr "Engant_xa"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:25
+msgid "_Print"
+msgstr "Im_primeix"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:26
+msgid "_Quit"
+msgstr "_Surt"
+
+#
 #: capplets/ui-properties/gnome-ui-properties.glade.h:27
-msgid "_Toolbars have: "
-msgstr "La barra d'eines _té: "
+msgid "_Save"
+msgstr "_Desa"
+
+#: capplets/ui-properties/gnome-ui-properties.glade.h:28
+msgid "_Show icons in menus"
+msgstr "_Mostra icones en els menús"
 
 #
 #: capplets/windows/gnome-window-properties.c:282
@@ -2367,6 +2307,132 @@ msgid "OK"
 msgstr "D'acord"
 
 #
+#~ msgid "_Add..."
+#~ msgstr "_Afegeix..."
+
+#~ msgid "<i>fast</i>"
+#~ msgstr "<i>ràpid</i>"
+
+#~ msgid "<i>loud</i>"
+#~ msgstr "<i>alt</i>"
+
+#~ msgid "<i>quiet</i>"
+#~ msgstr "<i>baix</i>"
+
+#~ msgid "<i>slow</i>"
+#~ msgstr "<i>lent</i>"
+
+#
+#~ msgid "Cursor"
+#~ msgstr "Cursor"
+
+#~ msgid "Key_press makes sound"
+#~ msgstr "La _pressió d'una tecla produeix un so"
+
+#
+#~ msgid "Keyboard bell _enabled"
+#~ msgstr "Timbre de teclat h_abilitat"
+
+#
+#~ msgid "Keyboard bell _off"
+#~ msgstr "Timbre de teclat des_habilitat"
+
+#
+#~ msgid "Keyclick Volume"
+#~ msgstr "Volum de tecla pressionada"
+
+#~ msgid "Long"
+#~ msgstr "Llarg"
+
+#~ msgid "Medium"
+#~ msgstr "Mitjà"
+
+#
+#~ msgid "Repeat s_peed:"
+#~ msgstr "Velocitat de re_petició"
+
+#~ msgid "Set the speed the cursor blinks in text fields."
+#~ msgstr ""
+#~ "Configura la velocitat de parpadeig del cursor en els camps de text."
+
+#~ msgid "Set the volume of the clicking sound made when pressing a key"
+#~ msgstr "Configura el volum del so del clic quan es pressiona una tecla"
+
+#
+#~ msgid "Short"
+#~ msgstr "Curt"
+
+#~ msgid "Slow"
+#~ msgstr "Lent"
+
+#~ msgid ""
+#~ "The keyboard bell is the <i>beep</i> sound heard when the system wants to "
+#~ "get your attention."
+#~ msgstr ""
+#~ "El timbre del teclat és el so <i>beep</i> escoltat quan el sistema vol "
+#~ "cridar-vos l'atenció."
+
+#~ msgid "Very Fast"
+#~ msgstr "Molt ràpid"
+
+#~ msgid "Very Short"
+#~ msgstr "Molt curt"
+
+#~ msgid ""
+#~ "You can configure the keyboards accessibility features by bringing up the "
+#~ "'Accessibility Settings' property dialog, or pressing the button on the "
+#~ "right."
+#~ msgstr ""
+#~ "Podeu configurar les funcionalitats d'accessibilitat del teclat fent "
+#~ "servir el diàleg «Configuracions d'accessibiliat», o polsant el botó a la "
+#~ "dreta."
+
+#
+#~ msgid "_Blink speed:"
+#~ msgstr "Velocitat de parpadei_g:"
+
+#
+#~ msgid "_Custom keyboard bell:"
+#~ msgstr "Timbre de te_clat personalitzat:"
+
+#
+#~ msgid "_Delay before repeating:"
+#~ msgstr "Retar_d abans de repetir:"
+
+#
+#~ msgid "Toolbars & Menus"
+#~ msgstr "Barra d'eines i menús"
+
+#~ msgid "Item 2"
+#~ msgstr "Element 2"
+
+#~ msgid "Item 3"
+#~ msgstr "Element 3"
+
+#~ msgid "Menu Item 1"
+#~ msgstr "Element 1 del menú"
+
+#~ msgid "Menu Item 2"
+#~ msgstr "Element 2 del menú"
+
+#~ msgid "Menu Item 3"
+#~ msgstr "Element 3 del menú"
+
+#~ msgid "Menu Item 4"
+#~ msgstr "Element 4 del menú"
+
+#~ msgid "Menu Item 5"
+#~ msgstr "Element 5 del menú"
+
+#
+#~ msgid "Menu items can have _icons"
+#~ msgstr "Els elements del menú poden tindre _icones"
+
+#
+#~ msgid "_Toolbars have: "
+#~ msgstr "La barra d'eines _té: "
+
+#
 #~ msgid "Picture bor_der:"
 #~ msgstr "Ca_ntó de la imatge:"
 
@@ -2542,10 +2608,6 @@ msgstr "D'acord"
 #~ msgstr "Tipus de MIME: "
 
 #
-#~ msgid "Add"
-#~ msgstr "Afegeix"
-
-#
 #~ msgid "Remove"
 #~ msgstr "Elimina"
 
@@ -2561,9 +2623,6 @@ msgstr "D'acord"
 #~ msgid "Example: emacs %f"
 #~ msgstr "Exemple: emacs %f"
 
-#~ msgid "Open"
-#~ msgstr "Obre"
-
 #
 #~ msgid "Select a file..."
 #~ msgstr "Seleccioneu un fitxer..."
@@ -2571,9 +2630,6 @@ msgstr "D'acord"
 #
 #~ msgid "View"
 #~ msgstr "Visualitza"
-
-#~ msgid "Edit"
-#~ msgstr "Edita"
 
 #~ msgid "Set actions for %s"
 #~ msgstr "Defineix les accions per a %s"
