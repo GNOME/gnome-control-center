@@ -1,5 +1,9 @@
 2001-07-31  Bradford Hovinen  <hovinen@ximian.com>
 
+	* config-log.c: Remove socket-based synchronization system
+	entirely. Switch to using standard FILE streams for interfacing
+	with the configuration log
+
 	* archive.c (archive_get_current_location_id): Re-enable caching
 	mechanism
 
