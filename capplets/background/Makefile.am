@@ -16,5 +16,5 @@ desktop_DATA = background.desktop
 
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS) -I$(top_srcdir)/libbackground
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
-EXTRA_DIST = $(Glade_DATA) $(icons_DATA)
+EXTRA_DIST = $(Glade_DATA) $(icons_DATA) $(desktop_DATA)
 

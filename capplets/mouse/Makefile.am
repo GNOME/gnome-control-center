@@ -24,4 +24,4 @@ desktop_DATA = mouse.desktop
 
 INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS)
 CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
-EXTRA_DIST = $(Glade_DATA) $(icons_DATA) $(pixmap_DATA)
+EXTRA_DIST = $(Glade_DATA) $(icons_DATA) $(desktop_DATA) $(pixmap_DATA)

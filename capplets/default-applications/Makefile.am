@@ -1,41 +1,21 @@
-cappletname = default-applications
-cappletgroup =
-bin_PROGRAMS = default-applications-properties
+bin_PROGRAMS = gnome-default-applications-properties
 
-default_applications_properties_LDADD = @OLD_CAPPLET_LIBS@
-default_applications_properties_SOURCES = \
-	default-application-properties.c \
-	interface.c		interface.h \
-	callbacks.c		callbacks.h \
-	support.c			support.h	\
+gnome_default_applications_properties_LDADD = @OLD_CAPPLET_LIBS@
+gnome_default_applications_properties_SOURCES = \
+	default-application-properties.c 	\
+	interface.c		interface.h 	\
+	callbacks.c		callbacks.h 	\
+	support.c		support.h	\
 	defaults.h
 
-pixmap_DATA =
-
-##
-## You should not need to modify anything below this line
-##
 @INTLTOOL_DESKTOP_RULE@
 
-####@###GNOMECC_CAPPLETS_DESKTOP_IN_RULE@
-$(desktop).in: %.desktop.in: %.desktop.in.in
-	sed -e "s#@DESKTOP_EXEC_LINE@#$(DESKTOP_EXEC_LINE)#" -e "s#Icon=.*#Icon=$(GNOMECC_ICONS_DIR)/${cappletname}-capplet.png#" < $< > ${cappletname}.desktop.in
-
-install-data-local:
-	$(mkinstalldirs) $(DESTDIR)$(datadir)/control-center/capplets/$(cappletgroup)
-	$(INSTALL_DATA) $(desktop) $(DESTDIR)$(datadir)/control-center/capplets/$(cappletgroup)$(desktop)
-
-install-data-am: install-data-local
-####@###GNOMECC_CAPPLETS_DESKTOP_IN_RULE@
-
-INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS) @OLD_CAPPLET_CFLAGS@ 
-CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
-EXTRA_DIST = $(GNOMECC_CAPPLETS_EXTRA_DIST)
 iconsdir   = $(GNOMECC_ICONS_DIR)
-Gladedir   = $(GNOMECC_GLADE_DIR)
-pixmapdir  = $(GNOMECC_PIXMAPS_DIR)
-Glade_DATA = $(cappletname)-properties.glade
-icons_DATA = $(cappletname)-capplet.png
-desktop    = $(cappletname).desktop
-all-local: $(desktop)
+icons_DATA = default-applications-capplet.png
 
+desktopdir = $(GNOMECC_DESKTOP_DIR)
+desktop_DATA = default-applications.desktop
+
+INCLUDES   = $(GNOMECC_CAPPLETS_CFLAGS) @OLD_CAPPLET_CFLAGS@
+CLEANFILES = $(GNOMECC_CAPPLETS_CLEANFILES)
+EXTRA_DIST = $(icons_DATA) $(desktop_DATA)
