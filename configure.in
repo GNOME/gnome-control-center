@@ -188,24 +188,24 @@ dnl ==============================================
 dnl ==============================================
 dnl Macro for the common code
 dnl ==============================================
-AC_DEFUN(AC_PROG_GNOMECC_CAPPLETS,
-[
-GNOMECC_CAPPLETS_DESKTOP_IN_RULE='$(desktop).in: \%.desktop.in: \%.desktop.in.in\
-	sed -e \"s#@DESKTOP_EXEC_LINE@#$(DESKTOP_EXEC_LINE)#\" -e \"s#Icon=.\*#Icon=$(GNOMECC_ICONS_DIR)/${cappletname}-capplet.png#\" < $< \> ${cappletname}.desktop.in\
-\
-install-data-local:\
-	$(mkinstalldirs) $(datadir)/control-center/capplets/$(cappletgroup)\
-	$(INSTALL_DATA) $(desktop) $(datadir)/control-center/capplets/$(cappletgroup)$(desktop)\
-install-data-am: install-data-local'
-AC_DIVERT_PUSH(AC_DIVERSION_SED)dnl
-s%@GNOMECC_CAPPLETS_DESKTOP_IN_RULE@%[$]GNOMECC_CAPPLETS_DESKTOP_IN_RULE%g
-AC_DIVERT_POP()dnl
-
-# Redirect the config.log output again, so that the ltconfig log is not
-# clobbered by the next message.
-exec 5>>./config.log
-])
-AC_PROG_GNOMECC_CAPPLETS
+dnl AC_DEFUN(AC_PROG_GNOMECC_CAPLETS,
+dnl [
+dnl GNOMECC_CAPPLETS_DESKTOP_IN_RULE='$(desktop).in: \%.desktop.in: \%.desktop.in.in\
+dnl	sed -e \"s#@DESKTOP_EXEC_LINE@#$(DESKTOP_EXEC_LINE)#\" -e \"s#Icon=.\*#Icon=$(GNOMECC_ICONS_DIR)/${cappletname}-capplet.png#\" < $< \> ${cappletname}.desktop.in\
+dnl d\
+dnl install-data-local:\
+dnl	$(mkinstalldirs) $(datadir)/control-center/capplets/$(cappletgroup)\
+dnl	$(INSTALL_DATA) $(desktop) $(datadir)/control-center/capplets/$(cappletgroup)$(desktop)\
+dnl install-data-am: install-data-local'
+dnl AC_DIVERT_PUSH(AC_DIVERSION_SED)dnl
+dnl s%@GNOMECC_CAPPLETS_DESKTOP_IN_RULE@%[$]GNOMECC_CAPPLETS_DESKTOP_IN_RULE%g
+dnl AC_DIVERT_POP()dnl
+dnl
+dnl # Redirect the config.log output again, so that the ltconfig log is not
+dnl # clobbered by the next message.
+dnl exec 5>>./config.log
+dnl ])
+dnl AC_PROG_GNOMECC_CAPPLETS
 dnl ==============================================
 dnl End : Macro for the common code
 dnl ==============================================
