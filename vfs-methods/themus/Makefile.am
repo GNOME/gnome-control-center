@@ -59,8 +59,6 @@ desktopdir = $(datadir)/applications
 desktop_in_files = themus-theme-applier.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
-CLEANFILES = themus-theme-applier.desktop themus-theme-applier.desktop.in
-
 if GCONF_SCHEMAS_INSTALL
 install-data-local:
 	if test -z "$(DESTDIR)"; then \
