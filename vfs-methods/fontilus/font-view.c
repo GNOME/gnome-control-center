@@ -81,7 +81,7 @@ create_text_pixmap(GtkWidget *drawing_area, FT_Face face)
 
     pos_y = 4;
     /* bitmap fonts */
-    if (face->num_fixed_sizes > 0) {
+    if (!FT_IS_SCALABLE(face)) {
 	for (i = 0; i < face->num_fixed_sizes; i++) {
 	    draw_text(xdisplay, draw, face, face->available_sizes[i].width,
 		      &colour, text, textlen, &pos_y);

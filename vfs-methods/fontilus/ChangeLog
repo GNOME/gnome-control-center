@@ -1,3 +1,10 @@
+2002-12-06  James Henstridge  <james@daa.com.au>
+
+	* src/font-view.c (create_text_pixmap): only display the font at
+	its fixed sizes if it is not scalable.  Before we were ignoring
+	the outlines on fonts such as Lucida Console, which includes both
+	outlines and bitmaps for small sizes.
+
 2002-12-06  Yanko Kaneti  <yaneti@declera.com>
 
 	* Makefile.am (EXTRA_DIST):
