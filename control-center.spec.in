@@ -3,12 +3,12 @@
 %define rel      1
 %define prefix   /usr
 
-Summary: GNOME control center
+Summary: The GNOME control center.
 Name: control-center
 Version: %ver
 Release: %rel
 Copyright: LGPL
-Group: X11/Libraries
+Group: System Environment/Libraries
 Source: ftp://ftp.gnome.org/pub/control-center-%{ver}.tar.gz
 
 BuildRoot: /var/tmp/control-center-%{PACKAGE_VERSION}-root
@@ -23,19 +23,27 @@ Requires: gnome-libs >= 0.99.8
 Requires: ORBit >= 0.3.97
 
 %description
-A Configuration tool for easily setting up your GNOME environment.
+Control-center is a configuration tool for easily
+setting up your GNOME environment.
 
-GNOME is the GNU Network Object Model Environment.  That's a fancy
-name but really GNOME is a nice GUI desktop environment.  It makes
-using your computer easy, powerful, and easy to configure.
+GNOME is the GNU Network Object Model Environment. That's
+a fancy name, but really GNOME is a nice GUI desktop 
+environment. 
+
+It's a powerful, easy to configure environment which
+helps to make your computer easy to use.
 
 %package devel
-Summary: GNOME control-center includes
-Group: X11/Libraries
+Summary: GNOME control-center development files.
+Group: System Environment/Libraries
 Requires: control-center
 
 %description devel
-Capplet development stuff
+If you're interested in developing panels for the GNOME
+control center, you'll want to install this package.
+
+Control-center-devel helps you create the 'capplets'
+which are used in the control center.
 
 %changelog
 
