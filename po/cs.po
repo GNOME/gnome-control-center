@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-18 04:05+0200\n"
-"PO-Revision-Date: 2004-05-18 13:51+0200\n"
+"POT-Creation-Date: 2004-05-19 04:09+0200\n"
+"PO-Revision-Date: 2004-05-19 11:20+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -379,36 +379,43 @@ msgstr "_Styl:"
 msgid "There was an error displaying help: %s"
 msgstr "Při zobrazování nápovědy došlo k chybě: %s"
 
-#: capplets/background/gnome-wp-capplet.c:1281
+#: capplets/background/gnome-wp-capplet.c:1276
+#: capplets/background/gnome-wp-capplet.c:1292
 msgid "Centered"
 msgstr "Na střed"
 
-#: capplets/background/gnome-wp-capplet.c:1303
+#: capplets/background/gnome-wp-capplet.c:1300
+#: capplets/background/gnome-wp-capplet.c:1315
 msgid "Fill Screen"
 msgstr "Vyplnit obrazovku"
 
 #: capplets/background/gnome-wp-capplet.c:1323
+#: capplets/background/gnome-wp-capplet.c:1336
 msgid "Scaled"
 msgstr "Přizpůsobená"
 
-#: capplets/background/gnome-wp-capplet.c:1343
+#: capplets/background/gnome-wp-capplet.c:1344
+#: capplets/background/gnome-wp-capplet.c:1357
 msgid "Tiled"
 msgstr "Tapeta"
 
-#: capplets/background/gnome-wp-capplet.c:1375
+#: capplets/background/gnome-wp-capplet.c:1381
+#: capplets/background/gnome-wp-capplet.c:1390
 msgid "Solid Color"
 msgstr "Plná barva"
 
-#: capplets/background/gnome-wp-capplet.c:1391
+#: capplets/background/gnome-wp-capplet.c:1398
+#: capplets/background/gnome-wp-capplet.c:1407
 msgid "Horizontal Gradient"
 msgstr "Vodorovný přechod"
 
-#: capplets/background/gnome-wp-capplet.c:1407
+#: capplets/background/gnome-wp-capplet.c:1415
+#: capplets/background/gnome-wp-capplet.c:1424
 msgid "Vertical Gradient"
 msgstr "Svislý přechod"
 
 #. Create the file chooser dialog stuff here
-#: capplets/background/gnome-wp-capplet.c:1443
+#: capplets/background/gnome-wp-capplet.c:1460
 msgid "Add Wallpaper"
 msgstr "Přidat tapetu"
 
@@ -1553,7 +1560,9 @@ msgstr "Klávesové zkratky"
 msgid ""
 "To edit a shortcut key, click on the corresponding row and type a new "
 "accelerator, or press backspace to clear."
-msgstr "Zkratku upravíte kliknutím na odpovídající řádek a zadáním nové zkratky nebo jejím vymazáním klávesou Backspace."
+msgstr ""
+"Zkratku upravíte kliknutím na odpovídající řádek a zadáním nové zkratky nebo "
+"jejím vymazáním klávesou Backspace."
 
 #: capplets/keybindings/keybinding.desktop.in.h:1
 msgid "Assign shortcut keys to commands"
@@ -1915,42 +1924,58 @@ msgid "Autoconfiguration _URL:"
 msgstr "_URL s automatickým nastavením:"
 
 #: capplets/network/gnome-network-preferences.glade.h:8
+msgid "FTP proxy port"
+msgstr "Port FTP proxy"
+
+#: capplets/network/gnome-network-preferences.glade.h:9
 msgid "HTTP Proxy Details"
 msgstr "Podrobnosti HTTP Proxy"
 
-#: capplets/network/gnome-network-preferences.glade.h:9
+#: capplets/network/gnome-network-preferences.glade.h:10
+msgid "HTTP proxy port"
+msgstr "Port HTTP proxy"
+
+#: capplets/network/gnome-network-preferences.glade.h:11
 msgid "H_TTP proxy:"
 msgstr "_HTTP proxy:"
 
-#: capplets/network/gnome-network-preferences.glade.h:10
+#: capplets/network/gnome-network-preferences.glade.h:12
 msgid "Network Proxy Configuration"
 msgstr "Nastavení síťové proxy"
 
-#: capplets/network/gnome-network-preferences.glade.h:11
+#: capplets/network/gnome-network-preferences.glade.h:13
 msgid "Port:"
 msgstr "Port:"
 
-#: capplets/network/gnome-network-preferences.glade.h:12
+#: capplets/network/gnome-network-preferences.glade.h:14
 msgid "S_ocks host:"
 msgstr "Počítač _SOCKS:"
 
-#: capplets/network/gnome-network-preferences.glade.h:13
+#: capplets/network/gnome-network-preferences.glade.h:15
+msgid "Secure HTTP proxy port"
+msgstr "Port proxy bezpečného HTTP"
+
+#: capplets/network/gnome-network-preferences.glade.h:16
+msgid "Socks host port"
+msgstr "Port počítače SOCKS"
+
+#: capplets/network/gnome-network-preferences.glade.h:17
 msgid "_Details"
 msgstr "Po_drobnosti"
 
-#: capplets/network/gnome-network-preferences.glade.h:14
+#: capplets/network/gnome-network-preferences.glade.h:18
 msgid "_FTP proxy:"
 msgstr "_FTP proxy:"
 
-#: capplets/network/gnome-network-preferences.glade.h:15
+#: capplets/network/gnome-network-preferences.glade.h:19
 msgid "_Password:"
 msgstr "_Heslo:"
 
-#: capplets/network/gnome-network-preferences.glade.h:16
+#: capplets/network/gnome-network-preferences.glade.h:20
 msgid "_Secure HTTP proxy:"
 msgstr "Proxy _bezpečného HTTP:"
 
-#: capplets/network/gnome-network-preferences.glade.h:17
+#: capplets/network/gnome-network-preferences.glade.h:21
 msgid "_Username:"
 msgstr "_Uživatel:"
 
@@ -2390,16 +2415,16 @@ msgstr "_Obsah"
 msgid "_Help"
 msgstr "_Nápověda"
 
-#: control-center/control-center-categories.c:495
+#: control-center/control-center-categories.c:333
 msgid "Others"
 msgstr "Ostatní"
 
-#: control-center/control-center-categories.c:586
-#: control-center/control-center.c:1046
+#: control-center/control-center-categories.c:424
+#: control-center/control-center.c:1055
 msgid "Gnome Control Center"
 msgstr "Ovládací centrum Gnome"
 
-#: control-center/control-center.c:1144
+#: control-center/control-center.c:1153
 msgid "Use nautilus if it is running."
 msgstr "Použít nautilus, pokud běží."
 
