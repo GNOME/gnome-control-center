@@ -28,6 +28,7 @@
 #include <config.h>
 #include <ctype.h>
 #include <dirent.h>
+#include <math.h>
 #include <regex.h>
 #include <string.h>
 #include <sys/types.h>
@@ -49,26 +50,30 @@
 #define TOTAL_COLUMNS 4
 
 /* Local Prototypes */
-static void	 init_mime_capplet 	  	(void);
-static void 	 populate_application_menu 	(GtkWidget 	*menu, 	 
-						 const char 	*mime_string);
-static void 	 populate_viewer_menu		(GtkWidget 	*menu, 	 
-						 const char 	*mime_string);
-static void	 delete_mime_clicked       	(GtkWidget 	*widget, 
-						 gpointer   	data);
-static void	 add_mime_clicked 	  	(GtkWidget 	*widget, 
-						 gpointer   	data);
-static void	 edit_default_clicked 		(GtkWidget 	*widget, 	
-						 gpointer   	data);
-static GtkWidget *create_mime_list_and_scroller (void);
-static char 	 *pixmap_file 			(const char 	*partial_path);
-static void 	 ok_callback 		  	(void);
-static void	 gtk_widget_make_bold 		(GtkWidget 	*widget);
-static GdkFont 	 *gdk_font_get_bold 		(const GdkFont  *plain_font);
-static void	 gtk_widget_set_font 		(GtkWidget 	*widget, 
-						 GdkFont 	*font);
-static void	 gtk_style_set_font 		(GtkStyle 	*style, 
-						 GdkFont 	*font);
+static void	 init_mime_capplet 	  		(void);
+static void 	 populate_application_menu 		(GtkWidget 	*menu, 	 
+						 	 const char 	*mime_string);
+static void 	 populate_viewer_menu			(GtkWidget 	*menu, 	 
+						 	 const char 	*mime_string);
+static void	 delete_mime_clicked       		(GtkWidget 	*widget, 
+						 	 gpointer   	data);
+static void	 add_mime_clicked 	  		(GtkWidget 	*widget, 
+						 	 gpointer   	data);
+static void	 edit_default_clicked 			(GtkWidget 	*widget, 	
+						 	 gpointer   	data);
+static GtkWidget *create_mime_list_and_scroller 	(void);
+static char 	 *pixmap_file 				(const char 	*partial_path);
+static void 	 ok_callback 		  		(void);
+static void	 gtk_widget_make_bold 			(GtkWidget 	*widget);
+static GdkFont 	 *gdk_font_get_bold 			(const GdkFont  *plain_font);
+static void	 gtk_widget_set_font 			(GtkWidget 	*widget, 
+						 	 GdkFont 	*font);
+static void	 gtk_style_set_font 			(GtkStyle 	*style, 
+						 	 GdkFont 	*font);
+static GdkPixbuf *capplet_gdk_pixbuf_scale_to_fit 	(GdkPixbuf 	*pixbuf, 
+							 int 		max_width, 
+							 int 		max_height);
+
 
 GtkWidget *capplet = NULL;
 GtkWidget *delete_button = NULL;
@@ -959,8 +964,8 @@ static void
 populate_mime_list (GList *type_list, GtkCList *clist)
 {
 	static gchar *text[3];        
-	const char *description, *action_icon_name;
-	char *extensions, *mime_string, *action_icon_path;
+	const char *description, *action_icon_name, *description_icon_name;
+	char *extensions, *mime_string, *action_icon_path, *description_icon_path;
         gint row;
 	GList *element;
 	GdkPixbuf *pixbuf;
@@ -969,6 +974,8 @@ populate_mime_list (GList *type_list, GtkCList *clist)
 	GnomeVFSMimeAction *action;
 	GnomeVFSMimeApplication *default_app;
 	OAF_ServerInfo *default_component;
+
+	//gtk_clist_set_row_height (clist, 20);
 	
 	for (element = type_list; element != NULL; element= element->next) {
 		mime_string = (char *)element->data;
@@ -1002,9 +1009,19 @@ populate_mime_list (GList *type_list, GtkCList *clist)
 			row = gtk_clist_insert (GTK_CLIST (clist), 1, text);
 		        gtk_clist_set_row_data (GTK_CLIST (clist), row, g_strdup(mime_string));
 
-			/* Set column icons */
-			pixbuf = gdk_pixbuf_new_from_file ("/gnome/share/pixmaps/nautilus/i-regular-12.png");
+			/* Set description column icon */
+			description_icon_name = gnome_vfs_mime_get_icon (mime_string);			
+			if (description_icon_name != NULL) {
+				/* Get custom icon */
+				description_icon_path = pixmap_file (description_icon_name);
+				pixbuf = gdk_pixbuf_new_from_file (description_icon_path);				
+			} else {
+				/* Use default icon */
+				pixbuf = gdk_pixbuf_new_from_file ("/gnome/share/pixmaps/nautilus/i-regular-24.png");
+			}
+
 			if (pixbuf != NULL) {
+				pixbuf = capplet_gdk_pixbuf_scale_to_fit (pixbuf, 18, 18);
 				gdk_pixbuf_render_pixmap_and_mask (pixbuf, &pixmap, &bitmap, 100);
 				gtk_clist_set_pixtext (clist, row, 0, text[0], 5, pixmap, bitmap);
 				gdk_pixbuf_unref (pixbuf);
@@ -1040,11 +1057,12 @@ populate_mime_list (GList *type_list, GtkCList *clist)
 				pixbuf = gdk_pixbuf_new_from_file (action_icon_path);				
 			} else {
 				/* Use default icon */
-				pixbuf = gdk_pixbuf_new_from_file ("/gnome/share/pixmaps/nautilus/i-regular-12.png");
+				pixbuf = gdk_pixbuf_new_from_file ("/gnome/share/pixmaps/nautilus/i-regular-24.png");
 			}
 
 			/* Set column icon */
 			if (pixbuf != NULL) {
+				pixbuf = capplet_gdk_pixbuf_scale_to_fit (pixbuf, 18, 18);
 				gdk_pixbuf_render_pixmap_and_mask (pixbuf, &pixmap, &bitmap, 100);
 				gtk_clist_set_pixtext (clist, row, 3, text[3], 5, pixmap, bitmap);
 				gdk_pixbuf_unref (pixbuf);
@@ -1321,4 +1339,39 @@ gdk_font_get_bold (const GdkFont *plain_font)
 	g_free (bold_name);
 
 	return result;
+}
+
+
+/* scale the passed in pixbuf to conform to the passed-in maximum width and height */
+/* utility routine to scale the passed-in pixbuf to be smaller than the maximum allowed size, if necessary */
+static GdkPixbuf *
+capplet_gdk_pixbuf_scale_to_fit (GdkPixbuf *pixbuf, int max_width, int max_height)
+{
+	double scale_factor;
+	double h_scale = 1.0;
+	double v_scale = 1.0;
+
+	int width  = gdk_pixbuf_get_width(pixbuf);
+	int height = gdk_pixbuf_get_height(pixbuf);
+	
+	if (width > max_width) {
+		h_scale = max_width / (double) width;
+	}
+	if (height > max_height) {
+		v_scale = max_height  / (double) height;
+	}
+	scale_factor = MIN (h_scale, v_scale);
+	
+	if (scale_factor < 1.0) {
+		GdkPixbuf *scaled_pixbuf;
+		/* the width and scale factor are always > 0, so it's OK to round by adding here */
+		int scaled_width  = floor(width * scale_factor + .5);
+		int scaled_height = floor(height * scale_factor + .5);
+				
+		scaled_pixbuf = gdk_pixbuf_scale_simple (pixbuf, scaled_width, scaled_height, GDK_INTERP_BILINEAR);	
+		gdk_pixbuf_unref (pixbuf);
+		pixbuf = scaled_pixbuf;
+	}
+	
+	return pixbuf;
 }
