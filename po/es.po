@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-center2 2.1.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-07-21 12:11+0200\n"
-"PO-Revision-Date: 2003-07-21 14:26-0300\n"
+"POT-Creation-Date: 2003-07-31 12:10+0200\n"
+"PO-Revision-Date: 2003-07-31 09:46-0300\n"
 "Last-Translator: Pablo G. del Campo <pablodc@bigfoot.com>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -74,6 +74,37 @@ msgid "Enable support for GNOME assistive technologies at login"
 msgstr ""
 "Activar el soporte para las tecnologías de asistencia de GNOME durante el "
 "inicio"
+
+#: capplets/accessibility/at-properties/main.c:59
+msgid ""
+"<i>No Assistive Technology is available on your system.  The 'gok' package "
+"must be installed in order to get on-screen keyboard support, and the "
+"'gnopernicus' package must be installed for screenreading and magnifying "
+"capabilities.</i>"
+msgstr ""
+"<i>No hay tecnología de asistencia disponible en su sistema. El paquete «gok» "
+"debe estar instalado para tener soporte para el teclado en pantalla, y el paquete "
+"«gnopernicus» debe estar instalado para tener las capacidades de aumento y lectura "
+"de pantalla.</i>"
+
+#: capplets/accessibility/at-properties/main.c:62
+msgid ""
+"<i>Not all available assistive technologies are installed on your system.  "
+"The 'gok' package must be installed in order to get on-screen keyboard "
+"support.</i>"
+msgstr ""
+"<i>No todas las tecnologias de asistencia están instaladas en su sistema. El paquete "
+"«gok» debe estar instalado para tener soporte de teclado en pantalla.</i>"
+
+#: capplets/accessibility/at-properties/main.c:65
+msgid ""
+"<i>Not all available assistive technologies are installed on your system.  "
+"The 'gnopernicus' package must be installed for screenreading and magnifying "
+"capabilities.</i>"
+msgstr ""
+"<i>No todas las tecnologias de asistencia están instaladas en su sistema. El paquete "
+"«gnopernicus» debe estar instalado para tener las capacidades de aumento y lectura de "
+"pantalla.</i>"
 
 #: capplets/accessibility/keyboard/accessibility-keyboard.c:238
 #, c-format
@@ -355,7 +386,7 @@ msgstr "_Sin imagen"
 #: capplets/common/capplet-util.c:243
 #: capplets/default-applications/gnome-default-applications-properties.c:852
 #: capplets/keyboard/gnome-keyboard-properties.c:220
-#: capplets/mouse/gnome-mouse-properties.c:716
+#: capplets/mouse/gnome-mouse-properties.c:714
 #: capplets/sound/sound-properties-capplet.c:212
 msgid "Retrieve and store legacy settings"
 msgstr "Obtener y almacenar opciones heredadas"
@@ -413,7 +444,9 @@ msgstr "Degradado vertical"
 
 #: capplets/background/background-properties.glade.h:13
 msgid "You can drag image files into the window to set the background picture."
-msgstr "Puede arrastrar archivos de imagen a la ventana para establecer la imagen de fondo."
+msgstr ""
+"Puede arrastrar archivos de imagen a la ventana para establecer la imagen de "
+"fondo."
 
 #: capplets/background/background-properties.glade.h:14
 msgid "radiobutton1"
@@ -2900,17 +2933,29 @@ msgstr "Entrada del menú contextual de Nautilus para las tipografías"
 msgid "Set as Application Font"
 msgstr "Establecer como tipografía de la aplicación"
 
-#: vfs-methods/themus/Themus_Component.server.in.in.h:1
-msgid "Apply theme..."
-msgstr "Aplicar el tema..."
+#: vfs-methods/themus/apply-font.glade.h:1
+msgid " "
+msgstr " "
 
-#: vfs-methods/themus/Themus_Component.server.in.in.h:2
-msgid "Themus component"
-msgstr "Componente Themus"
+#: vfs-methods/themus/apply-font.glade.h:2
+msgid "<span weight=\"bold\" size=\"larger\">Apply new font?</span>"
+msgstr "<span weight=\"bold\" size=\"larger\">¿Desea aplicar la tipografía nueva?</span>"
 
-#: vfs-methods/themus/Themus_Component.server.in.in.h:3
-msgid "Themus component apply theme operations"
-msgstr "Componente themus que aplica las operaciones de tema"
+#: vfs-methods/themus/apply-font.glade.h:3
+msgid "Do _not apply font"
+msgstr "_No aplicar la tipografía"
+
+#: vfs-methods/themus/apply-font.glade.h:4
+msgid ""
+"The theme you have selected suggests a new font. A preview of the font is "
+"shown below."
+msgstr ""
+"El tema que ha seleccionado sugiere una tipografía nueva. A continuación se muestra una "
+"vista previa de la tipografía.s"
+
+#: vfs-methods/themus/apply-font.glade.h:5
+msgid "_Apply font"
+msgstr "_Aplicar tipografía"
 
 #: vfs-methods/themus/Themus_Properties_View.server.in.in.h:2
 msgid "Theme Properties content view component"
@@ -2939,6 +2984,11 @@ msgstr "Tema de iconos"
 #: vfs-methods/themus/themus-properties-view.c:217
 msgid "URI currently displayed"
 msgstr "URI actualmente mostrada"
+
+#. translators: you may want to include non-western chars here
+#: vfs-methods/themus/themus-theme-applier.c:83
+msgid "ABCDEFG"
+msgstr "ABCDEFG"
 
 #: vfs-methods/themus/themus.schemas.in.h:1
 msgid "If set to true, then installed themes will be thumbnailed."
@@ -2977,6 +3027,15 @@ msgstr "Define si se deben miniaturizar los temas instalados"
 #: vfs-methods/themus/themus.schemas.in.h:8
 msgid "Whether to thumbnail themes"
 msgstr "Define si hay que miniaturizar los temas"
+
+#~ msgid "Apply theme..."
+#~ msgstr "Aplicar el tema..."
+
+#~ msgid "Themus component"
+#~ msgstr "Componente Themus"
+
+#~ msgid "Themus component apply theme operations"
+#~ msgstr "Componente themus que aplica las operaciones de tema"
 
 #~ msgid "Select CDE AccessX file"
 #~ msgstr "Seleccione un archivo AccessX de CDE"
