@@ -281,7 +281,7 @@ mime_type_info_save (const MimeTypeInfo *info)
 		gnome_vfs_mime_set_default_component (info->mime_type, NULL);
 
 	tmp = mime_type_info_get_category_name (info);
-	gnome_vfs_mime_set_value (info->mime_type, "category", tmp);
+	gnome_vfs_mime_set_value (info->mime_type, "category", tmp + 1);
 	g_free (tmp);
 
 	gnome_vfs_mime_set_value (info->mime_type, "use_category_default", info->use_category ? "yes" : "no");
@@ -880,17 +880,22 @@ static MimeCategoryInfo *
 get_category (const gchar *category_name, const gchar *category_desc, GtkTreeModel *model)
 {
 	ModelEntry *current, *child;
+	gchar **cf = NULL, **df = NULL;
 	gchar **categories = NULL, **desc_categories = NULL;
 	int i;
 
 	if (category_name == NULL && category_desc == NULL)
 		return NULL;
 
-	if (category_name != NULL)
-		categories = g_strsplit (category_name, "/", -1);
+	if (category_name != NULL) {
+		cf = g_strsplit (category_name, "/", -1);
+		categories = (category_name[0] == '/') ? cf : cf;
+	}
 
-	if (category_desc != NULL)
-		desc_categories = g_strsplit (category_desc, "/", -1);
+	if (category_desc != NULL) {
+		df = g_strsplit (category_desc, "/", -1);
+		desc_categories = (category_desc[0] == '/') ? df : df;
+	}
 
 	if (category_name == NULL)
 		categories = desc_categories;
@@ -920,8 +925,8 @@ get_category (const gchar *category_name, const gchar *category_desc, GtkTreeMod
 		current = child;
 	}
 
-	g_strfreev (categories);
-	g_strfreev (desc_categories);
+	g_strfreev (cf);
+	g_strfreev (df);
 
 	return MIME_CATEGORY_INFO (current);
 }

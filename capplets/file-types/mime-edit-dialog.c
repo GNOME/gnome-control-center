@@ -644,6 +644,7 @@ store_data (MimeEditDialog *dialog)
 	tmp1 = gtk_entry_get_text (GTK_ENTRY (WID ("category_entry")));
 	if (strcmp (tmp, tmp1)) {
 		cat_changed = TRUE;
+		if (tmp1[0] == '/') tmp1 += 1;
 		mime_type_info_set_category_name (dialog->p->info, tmp1, tmp1, dialog->p->model);
 	}
 	g_free (tmp);

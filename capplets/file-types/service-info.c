@@ -47,6 +47,7 @@ const gchar *url_descriptions[][2] = {
 	{ "info",    N_("Detailed documentation") },
 	{ "man",     N_("Manual pages") },
 	{ "mailto",  N_("Electronic mail transmission") },
+	{ "ghelp",   N_("Gnome documentation") },
 	{ NULL,      NULL }
 };
 
@@ -65,21 +66,17 @@ static gboolean     get_bool                    (const ServiceInfo *info,
 						 gchar             *end);
 static const gchar *get_protocol_name           (const gchar       *key);
 
-
-
 void
 load_all_services (GtkTreeModel *model) 
 {
-	GSList       *url_list;
-	GSList       *tmp;
+	GSList       *urls;
 	const gchar  *protocol_name;
 	ServiceInfo  *info;
 
-	tmp = url_list = gconf_client_all_dirs
-		(gconf_client_get_default (), "/desktop/gnome/url-handlers", NULL);
+	urls = gconf_client_all_dirs (gconf_client_get_default (), "/desktop/gnome/url-handlers", NULL);
 
-	for (; tmp != NULL; tmp = tmp->next) {
-		protocol_name = get_protocol_name (tmp->data);
+	while (urls) {
+		protocol_name = get_protocol_name (urls->data);
 
 		if (protocol_name == NULL)
 			continue;
@@ -87,10 +84,9 @@ load_all_services (GtkTreeModel *model)
 		info = service_info_new (protocol_name, model);
 		model_entry_insert_child (get_services_category_entry (model), MODEL_ENTRY (info), model);
 
-		g_free (tmp->data);
+		g_free (urls->data);
+		urls = g_slist_remove (urls, urls->data);
 	}
-
-	g_slist_free (url_list);
 }
 
 ServiceInfo *
@@ -159,6 +155,8 @@ service_info_using_custom_app (const ServiceInfo *info)
 {
 	gchar *tmp;
 	gboolean ret;
+
+	if (!info->app) return FALSE;
 
 	if (info->app->name == NULL)
 		return TRUE;

@@ -39,7 +39,7 @@ static GList *delete_list = NULL;
 ModelEntry *
 get_model_entries (GtkTreeModel *model)
 {
-	static ModelEntry *root;
+	static ModelEntry *root = NULL;
 
 	if (root == NULL) {
 		root = g_new0 (ModelEntry, 1);
