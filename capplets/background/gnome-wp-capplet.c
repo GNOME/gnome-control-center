@@ -697,9 +697,13 @@ static void gnome_wp_remove_wallpaper (GtkWidget * widget,
 
 static gboolean gnome_wp_load_stuffs (void * data) {
   GnomeWPCapplet * capplet = (GnomeWPCapplet *) data;
-  gchar * imagepath;
+  gchar * imagepath, * style;
   GnomeWPItem * item;
   GtkTreePath * path;
+
+  style = gconf_client_get_string (capplet->client,
+				   WP_OPTIONS_KEY,
+				   NULL);
 
   gnome_wp_xml_load_list (capplet);
   g_hash_table_foreach (capplet->wphash, (GHFunc) wp_props_load_wallpaper,
@@ -710,8 +714,9 @@ static gboolean gnome_wp_load_stuffs (void * data) {
   imagepath = gconf_client_get_string (capplet->client,
 				       WP_FILE_KEY,
 				       NULL);
+
   item = g_hash_table_lookup (capplet->wphash, imagepath);
-  if (item != NULL) {
+  if (item != NULL && strcmp (style, "none") != 0) {
     if (item->deleted == TRUE) {
       item->deleted = FALSE;
       wp_props_load_wallpaper (item->filename, item, capplet);
@@ -735,7 +740,7 @@ static gboolean gnome_wp_load_stuffs (void * data) {
 				item->scolor->red,
 				item->scolor->green,
 				item->scolor->blue, 65535);
-  } else {
+  } else if (strcmp (style, "none") != 0) {
     GdkColor color1, color2;
 
     item = g_new0 (GnomeWPItem, 1);
@@ -790,7 +795,6 @@ static gboolean gnome_wp_load_stuffs (void * data) {
       gnome_wp_item_free (item);
     }
   }
-  g_free (imagepath);
 
   item = g_hash_table_lookup (capplet->wphash, "(none)");
   if (item == NULL) {
@@ -829,7 +833,18 @@ static gboolean gnome_wp_load_stuffs (void * data) {
       item->deleted = FALSE;
       wp_props_load_wallpaper (item->filename, item, capplet);
     }
+
+    if (!strcmp (style, "none")) {
+      path = gtk_tree_row_reference_get_path (item->rowref);
+      gtk_tree_view_set_cursor (GTK_TREE_VIEW (capplet->treeview), path,
+				NULL, FALSE);
+      gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (capplet->treeview),
+				    path, NULL, TRUE, 0.5, 0.0);
+      gtk_tree_path_free (path);
+    }
   }
+  g_free (imagepath);
+  g_free (style);
 
   return FALSE;
 }
@@ -1150,7 +1165,7 @@ static void wallpaper_properties_init (void) {
 
   capplet->window = gtk_dialog_new ();
   gtk_window_set_title (GTK_WINDOW (capplet->window),
-			_("Desktop Wallpaper Preferences"));
+			_("Desktop Background Preferences"));
   gtk_dialog_set_has_separator (GTK_DIALOG (capplet->window), FALSE);
   gtk_window_set_default_size (GTK_WINDOW (capplet->window), 360, 418);
 
