@@ -1,3 +1,20 @@
+2002-04-18  Jody Goldberg <jody@gnome.org>
+
+	* file-types-capplet-dialogs.c (initialize_edit_applications_dialog) :
+	  Add some accelerators to buttons.
+	(nautilus_mime_type_capplet_show_change_extension_window) : ditto.
+	(run_edit_or_new_application_dialog) : and to checkboxes
+	(create_application_list_item) : simplify.  No need for a label and a
+	  checkbox in an hbox.
+
+	* file-types-properties.glade : Add some accelerators to buttons and
+	  checkboxes.
+
+2002-04-12  Jody Goldberg <jody@gnome.org>
+
+	* mime-type-info.c (mime_type_info_save) : revert part of Lauris's
+	  changes that were stripping off the first character of the category.
+
 Wed Apr 10 18:04:10 2002  Jonathan Blandford  <jrb@gnome.org>
 
 	* file-types.desktop.in (Exec): s/gnome2/gnome

@@ -34,7 +34,6 @@
 #include <libgnomevfs/gnome-vfs-application-registry.h>
 #include <libgnomevfs/gnome-vfs-utils.h>
 #include <gconf/gconf-client.h>
-#include <ctype.h>
 
 #include "libuuid/uuid.h"
 
@@ -281,7 +280,7 @@ mime_type_info_save (const MimeTypeInfo *info)
 		gnome_vfs_mime_set_default_component (info->mime_type, NULL);
 
 	tmp = mime_type_info_get_category_name (info);
-	gnome_vfs_mime_set_value (info->mime_type, "category", tmp + 1);
+	gnome_vfs_mime_set_value (info->mime_type, "category", tmp);
 	g_free (tmp);
 
 	gnome_vfs_mime_set_value (info->mime_type, "use_category_default", info->use_category ? "yes" : "no");
@@ -333,7 +332,8 @@ get_gconf_base_name (MimeCategoryInfo *category)
 	tmp1 = mime_category_info_get_full_name (category);
 
 	for (tmp = tmp1; *tmp != '\0'; tmp++)
-		if (isspace (*tmp) || *tmp == '(' || *tmp == ')') *tmp = '-';
+		if (g_ascii_isspace (*tmp) || *tmp == '(' || *tmp == ')')
+			*tmp = '-';
 
 	tmp = g_strconcat ("/desktop/gnome/file-types-categories/", tmp1, NULL);
 
@@ -887,16 +887,10 @@ get_category (const gchar *category_name, const gchar *category_desc, GtkTreeMod
 	if (category_name == NULL && category_desc == NULL)
 		return NULL;
 
-	if (category_name != NULL) {
-		cf = g_strsplit (category_name, "/", -1);
-		categories = (category_name[0] == '/') ? cf : cf;
-	}
-
-	if (category_desc != NULL) {
-		df = g_strsplit (category_desc, "/", -1);
-		desc_categories = (category_desc[0] == '/') ? df : df;
-	}
-
+	if (category_name != NULL)
+		categories = cf = g_strsplit (category_name, "/", -1);
+	if (category_desc != NULL)
+		desc_categories = df = g_strsplit (category_desc, "/", -1);
 	if (category_name == NULL)
 		categories = desc_categories;
 	else if (category_desc == NULL)

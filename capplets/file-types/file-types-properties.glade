@@ -132,7 +132,8 @@
                   <widget class="GtkButton" id="add_mime_button">
                     <property name="can_default">yes</property>
                     <property name="can_focus">yes</property>
-                    <property name="label" translatable="yes">Add file type...</property>
+                    <property name="label" translatable="yes">Add _file type...</property>
+		    <property name="use_underline">yes</property>
                     <property name="relief">GTK_RELIEF_NORMAL</property>
                     <property name="visible">yes</property>
                   </widget>
@@ -142,7 +143,8 @@
                   <widget class="GtkButton" id="add_service_button">
                     <property name="can_default">yes</property>
                     <property name="can_focus">yes</property>
-                    <property name="label" translatable="yes">Add service...</property>
+                    <property name="label" translatable="yes">Add _service...</property>
+		    <property name="use_underline">yes</property>
                     <property name="relief">GTK_RELIEF_NORMAL</property>
                     <property name="visible">yes</property>
                   </widget>
@@ -152,7 +154,8 @@
                   <widget class="GtkButton" id="edit_button">
                     <property name="can_default">yes</property>
                     <property name="can_focus">yes</property>
-                    <property name="label" translatable="yes">Edit...</property>
+                    <property name="label" translatable="yes">_Edit...</property>
+		    <property name="use_underline">yes</property>
                     <property name="relief">GTK_RELIEF_NORMAL</property>
                     <property name="visible">yes</property>
                   </widget>
@@ -162,7 +165,8 @@
                   <widget class="GtkButton" id="remove_button">
                     <property name="can_default">yes</property>
                     <property name="can_focus">yes</property>
-                    <property name="label" translatable="yes">Remove</property>
+                    <property name="label" translatable="yes">_Remove</property>
+		    <property name="use_underline">yes</property>
                     <property name="relief">GTK_RELIEF_NORMAL</property>
                     <property name="visible">yes</property>
                   </widget>
@@ -266,7 +270,7 @@
 
                 <child>
                   <widget class="GtkLabel" id="description_label">
-                    <property name="label" translatable="yes">Description</property>
+                    <property name="label" translatable="yes">_Description</property>
                     <property name="justify">GTK_JUSTIFY_CENTER</property>
                     <property name="wrap">no</property>
                     <property name="xalign">0.5</property>
@@ -274,6 +278,8 @@
                     <property name="xpad">0</property>
                     <property name="ypad">0</property>
                     <property name="visible">yes</property>
+		    <property name="use_underline">True</property>
+		    <property name="mnemonic_widget">description_entry</property>
                   </widget>
                   <packing>
                     <property name="padding">0</property>
@@ -313,7 +319,7 @@
 
                 <child>
                   <widget class="GtkLabel" id="mime_type_label">
-                    <property name="label" translatable="yes">MIME Type</property>
+                    <property name="label" translatable="yes">_MIME Type</property>
                     <property name="justify">GTK_JUSTIFY_CENTER</property>
                     <property name="wrap">no</property>
                     <property name="xalign">0.5</property>
@@ -321,6 +327,8 @@
                     <property name="xpad">0</property>
                     <property name="ypad">0</property>
                     <property name="visible">yes</property>
+		    <property name="use_underline">True</property>
+		    <property name="mnemonic_widget">mime_type_entry</property>
                   </widget>
                   <packing>
                     <property name="padding">0</property>
@@ -360,7 +368,7 @@
 
                 <child>
                   <widget class="GtkLabel" id="category_label">
-                    <property name="label" translatable="yes">Category</property>
+                    <property name="label" translatable="yes">_Category</property>
                     <property name="justify">GTK_JUSTIFY_CENTER</property>
                     <property name="wrap">no</property>
                     <property name="xalign">0</property>
@@ -368,6 +376,8 @@
                     <property name="xpad">0</property>
                     <property name="ypad">0</property>
                     <property name="visible">yes</property>
+		    <property name="use_underline">True</property>
+		    <property name="mnemonic_widget">category_entry</property>
                   </widget>
                   <packing>
                     <property name="padding">0</property>
@@ -395,7 +405,8 @@
                 <child>
                   <widget class="GtkButton" id="choose_button">
                     <property name="can_focus">yes</property>
-                    <property name="label" translatable="yes">Choose...</property>
+                    <property name="label" translatable="yes">_Choose...</property>
+		    <property name="use_underline">yes</property>
                     <property name="relief">GTK_RELIEF_NORMAL</property>
                     <property name="visible">yes</property>
                   </widget>
@@ -434,7 +445,8 @@
                       <widget class="GtkButton" id="add_ext_button">
                         <property name="can_default">yes</property>
                         <property name="can_focus">yes</property>
-                        <property name="label" translatable="yes">Add</property>
+                        <property name="label" translatable="yes">_Add</property>
+			<property name="use_underline">yes</property>
                         <property name="relief">GTK_RELIEF_NORMAL</property>
                         <property name="visible">yes</property>
                       </widget>
@@ -475,7 +487,8 @@
                       <widget class="GtkButton" id="remove_ext_button">
                         <property name="can_default">yes</property>
                         <property name="can_focus">yes</property>
-                        <property name="label" translatable="yes">Remove</property>
+                        <property name="label" translatable="yes">_Remove</property>
+			<property name="use_underline">yes</property>
                         <property name="relief">GTK_RELIEF_NORMAL</property>
                         <property name="visible">yes</property>
                       </widget>
@@ -572,7 +585,8 @@
                     <child>
                       <widget class="GtkCheckButton" id="use_category_defaults_toggle">
                         <property name="can_focus">yes</property>
-                        <property name="label" translatable="yes">Use category defaults</property>
+                        <property name="label" translatable="yes">Use category _defaults</property>
+			<property name="use_underline">True</property>
                         <property name="active">no</property>
                         <property name="draw_indicator">yes</property>
                         <property name="visible">yes</property>
@@ -692,7 +706,7 @@
 
                         <child>
                           <widget class="GtkLabel" id="program_label">
-                            <property name="label" translatable="yes">Program to execute</property>
+                            <property name="label" translatable="yes">_Program to execute</property>
                             <property name="justify">GTK_JUSTIFY_CENTER</property>
                             <property name="wrap">no</property>
                             <property name="xalign">0</property>
@@ -700,6 +714,8 @@
                             <property name="xpad">0</property>
                             <property name="ypad">0</property>
                             <property name="visible">yes</property>
+			    <property name="use_underline">True</property>
+			    <property name="mnemonic_widget">combo-entry1</property>
                           </widget>
                           <packing>
                             <property name="padding">0</property>
@@ -742,7 +758,8 @@
                     <child>
                       <widget class="GtkCheckButton" id="needs_terminal_toggle">
                         <property name="can_focus">yes</property>
-                        <property name="label" translatable="yes">Needs terminal</property>
+                        <property name="label" translatable="yes">Needs _terminal</property>
+			<property name="use_underline">True</property>
                         <property name="active">no</property>
                         <property name="draw_indicator">yes</property>
                         <property name="visible">yes</property>
@@ -853,7 +870,7 @@
 
                 <child>
                   <widget class="GtkLabel" id="description_label">
-                    <property name="label" translatable="yes">Description</property>
+                    <property name="label" translatable="yes">_Description</property>
                     <property name="justify">GTK_JUSTIFY_CENTER</property>
                     <property name="wrap">no</property>
                     <property name="xalign">0.5</property>
@@ -861,6 +878,8 @@
                     <property name="xpad">0</property>
                     <property name="ypad">0</property>
                     <property name="visible">yes</property>
+		    <property name="use_underline">True</property>
+		    <property name="mnemonic_widget">description_entry</property>
                   </widget>
                   <packing>
                     <property name="padding">0</property>
@@ -900,7 +919,7 @@
 
                 <child>
                   <widget class="GtkLabel" id="protocol_label">
-                    <property name="label" translatable="yes">Protocol name</property>
+                    <property name="label" translatable="yes">_Protocol name</property>
                     <property name="justify">GTK_JUSTIFY_CENTER</property>
                     <property name="wrap">no</property>
                     <property name="xalign">0.5</property>
@@ -908,6 +927,8 @@
                     <property name="xpad">0</property>
                     <property name="ypad">0</property>
                     <property name="visible">yes</property>
+		    <property name="use_underline">True</property>
+		    <property name="mnemonic_widget">protocol_entry</property>
                   </widget>
                   <packing>
                     <property name="padding">0</property>
@@ -1011,7 +1032,7 @@
 
                         <child>
                           <widget class="GtkLabel" id="custom_program_label">
-                            <property name="label" translatable="yes">Program</property>
+                            <property name="label" translatable="yes">_Program</property>
                             <property name="justify">GTK_JUSTIFY_CENTER</property>
                             <property name="wrap">no</property>
                             <property name="xalign">0.5</property>
@@ -1019,6 +1040,8 @@
                             <property name="xpad">0</property>
                             <property name="ypad">0</property>
                             <property name="visible">yes</property>
+			    <property name="use_underline">True</property>
+			    <property name="mnemonic_widget">combo-entry2</property>
                           </widget>
                           <packing>
                             <property name="padding">0</property>
@@ -1061,7 +1084,8 @@
                     <child>
                       <widget class="GtkCheckButton" id="needs_terminal_toggle">
                         <property name="can_focus">yes</property>
-                        <property name="label" translatable="yes">Needs terminal</property>
+                        <property name="label" translatable="yes">Needs _terminal</property>
+			<property name="use_underline">True</property>
                         <property name="active">no</property>
                         <property name="draw_indicator">yes</property>
                         <property name="visible">yes</property>
@@ -1161,7 +1185,7 @@
 
                 <child>
                   <widget class="GtkLabel" id="name_label">
-                    <property name="label" translatable="yes">Name</property>
+                    <property name="label" translatable="yes">_Name</property>
                     <property name="justify">GTK_JUSTIFY_CENTER</property>
                     <property name="wrap">no</property>
                     <property name="xalign">0.5</property>
@@ -1169,6 +1193,8 @@
                     <property name="xpad">0</property>
                     <property name="ypad">0</property>
                     <property name="visible">yes</property>
+		    <property name="use_underline">True</property>
+		    <property name="mnemonic_widget">name_entry</property>
                   </widget>
                   <packing>
                     <property name="padding">0</property>
@@ -1217,7 +1243,8 @@
                     <child>
                       <widget class="GtkCheckButton" id="use_category_toggle">
                         <property name="can_focus">yes</property>
-                        <property name="label" translatable="yes">Use parent category defaults</property>
+                        <property name="label" translatable="yes">Use parent category _defaults</property>
+			<property name="use_underline">True</property>
                         <property name="active">no</property>
                         <property name="draw_indicator">yes</property>
                         <property name="visible">yes</property>
@@ -1287,7 +1314,7 @@
 
                         <child>
                           <widget class="GtkLabel" id="program_label">
-                            <property name="label" translatable="yes">Program to execute</property>
+                            <property name="label" translatable="yes">_Program to execute</property>
                             <property name="justify">GTK_JUSTIFY_CENTER</property>
                             <property name="wrap">no</property>
                             <property name="xalign">0</property>
@@ -1295,6 +1322,8 @@
                             <property name="xpad">0</property>
                             <property name="ypad">0</property>
                             <property name="visible">yes</property>
+			    <property name="use_underline">True</property>
+			    <property name="mnemonic_widget">program_entry</property>
                           </widget>
                           <packing>
                             <property name="padding">0</property>
@@ -1337,7 +1366,8 @@
                     <child>
                       <widget class="GtkCheckButton" id="needs_terminal_toggle">
                         <property name="can_focus">yes</property>
-                        <property name="label" translatable="yes">Needs terminal</property>
+                        <property name="label" translatable="yes">Needs _terminal</property>
+			<property name="use_underline">True</property>
                         <property name="active">no</property>
                         <property name="draw_indicator">yes</property>
                         <property name="visible">yes</property>

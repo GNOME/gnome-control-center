@@ -168,19 +168,11 @@ create_application_list_item (const char *id, const char *name, const char *mime
 			      gboolean user_owned, GList *short_list)
 {
 	GtkWidget *list_item;
-	GtkWidget *hbox, *check_button, *label;
+	GtkWidget *check_button;
 
+	check_button = gtk_check_button_new_with_label (name);
 	list_item = gtk_list_item_new ();
-	
-	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
-	gtk_container_add (GTK_CONTAINER (list_item), hbox);
-	
-	check_button = gtk_check_button_new ();
-	gtk_box_pack_start (GTK_BOX (hbox), check_button, FALSE, FALSE, 0);	
-
-	label = gtk_label_new (name);
-	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);	
-
+	gtk_container_add (GTK_CONTAINER (list_item), check_button);
 	gtk_widget_show_all (list_item);
 	
 	/* Save ID and mime type*/	
@@ -428,20 +420,20 @@ initialize_edit_applications_dialog (const char *mime_type)
 
 	button_holder = g_new (ButtonHolder, 1);
 
-	button = gtk_button_new_with_label (_("Add Application..."));	
+	button = gtk_button_new_with_mnemonic (_("_Add Application..."));	
 	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 	gtk_object_set_data_full (GTK_OBJECT (button), "mime_type", g_strdup (mime_type), g_free);
 	gtk_signal_connect (GTK_OBJECT (button), "clicked", show_new_application_window, list);
 	gtk_widget_set_sensitive (GTK_WIDGET (button), TRUE);
 	button_holder->add_button = button;
 	
-	button = gtk_button_new_with_label (_("Edit Application..."));	
+	button = gtk_button_new_with_mnemonic (_("_Edit Application..."));	
 	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);	
 	gtk_signal_connect (GTK_OBJECT (button), "clicked", show_edit_application_window, list);
 	gtk_widget_set_sensitive (GTK_WIDGET (button), FALSE);
 	button_holder->edit_button = button;
 	
-	button = gtk_button_new_with_label (_("Delete Application"));
+	button = gtk_button_new_with_mnemonic (_("_Delete Application"));
 	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 	gtk_signal_connect (GTK_OBJECT (button), "clicked", delete_selected_application, list);
 	gtk_widget_set_sensitive (GTK_WIDGET (button), FALSE);
@@ -768,19 +760,21 @@ nautilus_mime_type_capplet_show_new_mime_window (void)
 				   GNOME_STOCK_BUTTON_CANCEL, NULL);
 	gnome_dialog_set_default (GNOME_DIALOG (dialog), 1);
 
-	label = gtk_label_new (_("New MIME type (e.g. image/x-thumper):"));
+	label = gtk_label_new_with_mnemonic (_("New _MIME type (e.g. image/x-thumper):"));
 	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
         gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), label, TRUE, TRUE, 0);
 
 	mime_entry = gtk_entry_new ();
         gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), mime_entry, TRUE, TRUE, 0);
+	gtk_label_set_mnemonic_widget (GTK_LABEL (label), mime_entry);
 	
-       	label = gtk_label_new (_("Description (e.g. Thumper image):"));
+       	label = gtk_label_new_with_mnemonic (_("_Description (e.g. Thumper image):"));
 	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
         gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), label, TRUE, TRUE, 0);
 
 	desc_entry = gtk_entry_new ();
         gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), desc_entry, TRUE, TRUE, 0);
+	gtk_label_set_mnemonic_widget (GTK_LABEL (label), desc_entry);
 	
 	/* Set up text entry validation signal */
 	gtk_signal_connect (GTK_OBJECT (mime_entry), "changed", 
@@ -962,18 +956,16 @@ nautilus_mime_type_capplet_show_change_extension_window (const char *mime_type, 
 		vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
 		gtk_box_pack_end (GTK_BOX (hbox), vbox, FALSE, FALSE, 0);
 
-		button = gtk_button_new_with_label (_("Add..."));
+		button = gtk_button_new_with_mnemonic (_("_Add..."));
 		gtk_signal_connect (GTK_OBJECT (button), "clicked", 
 				    add_extension_clicked, list);
 		gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
 
-		button = gtk_button_new_with_label (_("    Remove    "));
+		button = gtk_button_new_with_mnemonic (_("_Remove"));
 		gtk_widget_set_sensitive (button, FALSE);
 		gtk_signal_connect (GTK_OBJECT (button), "clicked", 
 				    remove_extension_clicked, list);
 		gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
-
-		gtk_box_pack_start (GTK_BOX (vbox), gtk_label_new (""), FALSE, FALSE, 0);
 	}
 
 	/* The left list */
@@ -1047,11 +1039,12 @@ nautilus_mime_type_capplet_show_new_extension_window (void)
 	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
 	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
         gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), hbox, FALSE, FALSE, 0);
-	label = gtk_label_new (_("Extension:"));
+	label = gtk_label_new_with_mnemonic (_("_Extension:"));
 	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
 	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
 	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 	mime_entry = gtk_entry_new ();
+	gtk_label_set_mnemonic_widget (GTK_LABEL (label), mime_entry);
         gtk_box_pack_start (GTK_BOX (hbox), mime_entry, TRUE, TRUE, 0);
         gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), hbox, FALSE, FALSE, 0);	
 	
@@ -1266,11 +1259,12 @@ run_edit_or_new_application_dialog (const char *mime_type, GtkWidget *list, Gnom
 	gtk_table_set_col_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);
 
 	/* Application Name label and entry */
-	label = gtk_label_new (_("Application Name:"));
+	label = gtk_label_new_with_mnemonic (_("Application _Name:"));
 	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
 	gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 0, 1);
 
 	app_entry = gtk_entry_new ();
+	gtk_label_set_mnemonic_widget (GTK_LABEL (label), app_entry);
 	gtk_table_attach_defaults ( GTK_TABLE (table), app_entry, 1, 2, 0, 1);
 	if (application != NULL) {
 		gtk_entry_set_text (GTK_ENTRY (app_entry), application->name);
@@ -1294,7 +1288,7 @@ run_edit_or_new_application_dialog (const char *mime_type, GtkWidget *list, Gnom
 	frame_vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
 	gtk_container_add (GTK_CONTAINER (behavior_frame), frame_vbox);
 
-	multiple_check_box = gtk_check_button_new_with_label (_("Can open multiple files"));
+	multiple_check_box = gtk_check_button_new_with_mnemonic (_("Can open _multiple files"));
 	gtk_box_pack_start (GTK_BOX (frame_vbox), multiple_check_box, FALSE, FALSE, 0);
 	initial_toggle_state = application == NULL
 		? FALSE
@@ -1302,7 +1296,7 @@ run_edit_or_new_application_dialog (const char *mime_type, GtkWidget *list, Gnom
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (multiple_check_box), initial_toggle_state);
 
 	/* FIXME bugzilla.eazel.com 6066: This needs to be three options now: "yes", "no", and "use uris for non-file locations" */
-	uri_check_box = gtk_check_button_new_with_label (_("Can open from URI"));
+	uri_check_box = gtk_check_button_new_with_mnemonic (_("Can open from _URI"));
 	gtk_box_pack_start (GTK_BOX (frame_vbox), uri_check_box, FALSE, FALSE, 0);
 	initial_toggle_state = application == NULL
 		? FALSE
