@@ -39,7 +39,7 @@ GnomeWPItem * gnome_wp_item_new (const gchar * filename,
 
   item = g_new0 (GnomeWPItem, 1);
   
-  item->filename = g_strdup (filename);
+  item->filename = gnome_vfs_unescape_string_for_display (filename);
 
   item->fileinfo = gnome_wp_info_new (item->filename, thumbnails);
 
