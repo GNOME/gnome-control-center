@@ -179,6 +179,27 @@ install_dialog_response (GtkWidget *widget, int response_id, gpointer data)
 			return;
                 } 
 		
+		while(TRUE) {
+		  	gchar *file_tmp;
+		  	int len = strlen (base);
+		  
+		  	if (base && len > 7 && !strcmp (base + len - 7, ".tar.gz"))
+		    		file_tmp = g_strdup_printf("gnome-theme-%d.tar.gz", rand ());
+		  	else if (base && len > 8 && !strcmp (base + len - 8, ".tar.bz2"))
+		    		file_tmp = g_strdup_printf("gnome-theme-%d.tar.bz2", rand ());
+		  	else
+		    		return;
+		  
+		  	if (icon_theme)
+		    		path = g_build_filename (g_get_home_dir (), ".icons", file_tmp, NULL);
+		  	else
+		    		path = g_build_filename (g_get_home_dir (), ".themes", file_tmp, NULL);
+		  
+		  	g_free(file_tmp);
+		  	if (!gnome_vfs_uri_exists (gnome_vfs_uri_new (path)))
+		    		break;
+		}
+		
 		/* To avoid the copy of /root/.themes to /root/.themes/.themes
 		 * which causes an infinite loop. The user asks to transfer the all
 		 * contents of a folder, to a folder under itseld. So ignore the
