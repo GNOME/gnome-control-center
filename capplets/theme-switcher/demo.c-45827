@@ -103,7 +103,7 @@ demo_main(int argc, char **argv, gint in_fd)
   gtk_rc_set_default_files (new_rc_files);
   g_strfreev (new_rc_files);
 
-  
+  gtk_set_locale();
   gtk_init (&argc, &argv);
   
   plug = gtk_plug_new(window);
