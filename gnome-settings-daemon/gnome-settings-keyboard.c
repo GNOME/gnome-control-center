@@ -46,9 +46,6 @@ apply_settings (void)
 	int rate, delay;
 	int click_volume, bell_volume, bell_pitch, bell_duration;
 
-#ifdef HAVE_X11_EXTENSIONS_XF86MISC_H
-	XF86MiscKbdSettings kbdsettings;
-#endif
 	XKeyboardControl kbdcontrol;
         int event_base_return, error_base_return;
 
@@ -63,6 +60,7 @@ apply_settings (void)
 	bell_pitch    = gconf_client_get_int   (client, "/desktop/gnome/peripherals/keyboard/bell_pitch",    NULL);
 	bell_duration = gconf_client_get_int   (client, "/desktop/gnome/peripherals/keyboard/bell_duration", NULL);
 
+	gdk_error_trap_push ();
         if (repeat) {
 		XAutoRepeatOn (GDK_DISPLAY ());
 #ifdef HAVE_X11_EXTENSIONS_XF86MISC_H
@@ -70,10 +68,13 @@ apply_settings (void)
 					    &event_base_return,
 					    &error_base_return) == True)
 		{
-			kbdsettings.type = 0;
+			/* load the current settings */
+			XF86MiscKbdSettings kbdsettings;
+                        XF86MiscGetKbdSettings (GDK_DISPLAY (), &kbdsettings);
+
+			/* assign the new values */
                         kbdsettings.rate = rate;
                         kbdsettings.delay = delay;
-			kbdsettings.servnumlock = False;
                         XF86MiscSetKbdSettings (GDK_DISPLAY (), &kbdsettings);
                 } else {
                         XAutoRepeatOff (GDK_DISPLAY ());
@@ -94,6 +95,9 @@ apply_settings (void)
 	kbdcontrol.bell_duration = bell_duration;
 	XChangeKeyboardControl (GDK_DISPLAY (), KBKeyClickPercent, 
 				&kbdcontrol);
+
+	XFlush (GDK_DISPLAY ());
+	gdk_error_trap_pop ();
 }
 
 

@@ -1,6 +1,14 @@
 2002-03-29  Jody Goldberg <jody@gnome.org>
 
 	* gnome-settings-accessibility-keyboard.c (set_server_from_gconf) :
+	  Add a gdk_error_trap just in case.
+
+	* gnome-settings-keyboard.c (apply_settings) : don't init things to
+	  bogus values unless it is ncessary.  Add a gdk_error_trap around the
+	  X settings to avoid causing the server to exit if something goes
+	  wrong.  Be sure to flush before we pop the handler.
+
+	* gnome-settings-accessibility-keyboard.c (set_server_from_gconf) :
 	  fix spelling error in schema.
 
 	* gnome-settings-font.c (load_cursor) : add missing NULL terminator.

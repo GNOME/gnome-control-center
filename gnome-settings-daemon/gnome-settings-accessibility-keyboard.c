@@ -169,10 +169,12 @@ set_server_from_gconf (GConfEntry *ignored)
 		XkbMouseKeysMask | XkbMouseKeysAccelMask |
 		XkbSlowKeysMask | XkbBounceKeysMask;
 
+	gdk_error_trap_push ();
 	we_are_changing_xkb_state = TRUE;
 	XkbSetControls (GDK_DISPLAY (), which, desc);
 	XFlush (GDK_DISPLAY ());
 	we_are_changing_xkb_state = FALSE;
+	gdk_error_trap_pop ();
 }
 
 static void
