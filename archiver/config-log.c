@@ -533,6 +533,7 @@ config_log_write_entry (ConfigLog *config_log, gchar *backend_id,
 	if (config_log->p->socket_owner) {
 		slave_broadcast_data (NULL, config_log);
 		dump_log (config_log);
+		io_buffer_destroy (config_log->p->file_buffer);
 		do_load (config_log);
 	} else {
 		write_log (config_log->p->socket_buffer, entry);
@@ -1352,6 +1353,7 @@ slave_data_cb (GIOChannel *channel, GIOCondition condition,
 		{
 			slave_broadcast_data (slave, slave->config_log);
 			dump_log (slave->config_log);
+			io_buffer_destroy (slave->config_log->p->file_buffer);
 			do_load (slave->config_log);
 		}
 	}
