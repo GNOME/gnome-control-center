@@ -1183,8 +1183,16 @@ gnome_theme_manager_drag_data_received_cb (GtkWidget *widget, GdkDragContext *co
 	uris = gnome_vfs_uri_list_parse ((gchar *) selection_data->data);
 	if (uris != NULL && uris->data != NULL) {
 		GnomeVFSURI *uri = (GnomeVFSURI *) uris->data;
-		filename = gnome_vfs_unescape_string (
-			gnome_vfs_uri_get_path (uri), G_DIR_SEPARATOR_S);
+
+		if (gnome_vfs_uri_is_local (uri))
+			filename = gnome_vfs_unescape_string (
+					gnome_vfs_uri_get_path (uri),
+					G_DIR_SEPARATOR_S);
+		else
+			filename = gnome_vfs_unescape_string (
+					gnome_vfs_uri_to_string (uri, GNOME_VFS_URI_HIDE_NONE),
+					G_DIR_SEPARATOR_S);
+
 		gnome_vfs_uri_list_unref (uris);
 	}
 

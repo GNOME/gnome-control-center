@@ -1,3 +1,12 @@
+2002-11-29  Remi Cohen-Scali  <remi@cohen-scali.com>
+
+	Reviewed by: Jody Goldberg <jody@gnome.org>
+
+	* capplets/theme-switcher/gnome-theme-manager.c (drag_data_received_cb):
+	Add a test to detect is uri is local. If not use full URI instead
+	of just the path in order to be able to download remote tarballs.
+	Fixes #97983.
+
 2003-01-05  Pablo Saratxaga <pablo@mandrakesoft.com>
 
 	* configure.in: Added Amharic (am) and Macedonian (mk) to ALL_LINGUAS
