@@ -33,7 +33,9 @@
 #include "drwright.h"
 #include "drw-break-window.h"
 #include "drw-monitor.h"
+#include "drw-utils.h"
 #include "eggtrayicon.h"
+#include "egg-spawn.h"
 
 #define BLINK_TIMEOUT        200
 #define BLINK_TIMEOUT_MIN    120
@@ -57,7 +59,8 @@ typedef enum {
 struct _DrWright {
 	/* Widgets. */
 	GtkWidget      *break_window;
-
+	GList          *secondary_break_windows;
+	
 	DrwMonitor     *monitor;
 
 	GtkItemFactory *popup_factory;
@@ -96,34 +99,33 @@ struct _DrWright {
 	GtkWidget      *warn_dialog;
 };
 
-static void     activity_detected_cb     (DrwMonitor     *monitor,
-					  DrWright       *drwright);
-static gboolean maybe_change_state       (DrWright       *drwright);
-static gboolean update_tooltip           (DrWright       *drwright);
-static gboolean icon_button_press_cb     (GtkWidget      *widget,
-					  GdkEventButton *event,
-					  DrWright       *drwright);
-static void     break_window_done_cb     (GtkWidget      *window,
-					  DrWright       *dr);
-static void     break_window_postpone_cb (GtkWidget      *window,
-					  DrWright       *dr);
-#if 0
-static void     popup_enabled_cb         (gpointer        callback_data,
-					  guint           action,
-					  GtkWidget      *widget);
-#endif
-static void     popup_break_cb           (gpointer        callback_data,
-					  guint           action,
-					  GtkWidget      *widget);
-static void     popup_preferences_cb     (gpointer        callback_data,
-					  guint           action,
-					  GtkWidget      *widget);
-static void     popup_about_cb           (gpointer        callback_data,
-					  guint           action,
-					  GtkWidget      *widget);
-static gchar *  item_factory_trans_cb    (const gchar    *path,
-					  gpointer        data);
-static void     init_tray_icon           (DrWright       *dr);
+static void     activity_detected_cb           (DrwMonitor     *monitor,
+						DrWright       *drwright);
+static gboolean maybe_change_state             (DrWright       *drwright);
+static gboolean update_tooltip                 (DrWright       *drwright);
+static gboolean icon_button_press_cb           (GtkWidget      *widget,
+						GdkEventButton *event,
+						DrWright       *drwright);
+static void     break_window_done_cb           (GtkWidget      *window,
+						DrWright       *dr);
+static void     break_window_postpone_cb       (GtkWidget      *window,
+						DrWright       *dr);
+static void     break_window_destroy_cb        (GtkWidget      *window,
+						DrWright       *dr);
+static void     popup_break_cb                 (gpointer        callback_data,
+						guint           action,
+						GtkWidget      *widget);
+static void     popup_preferences_cb           (gpointer        callback_data,
+						guint           action,
+						GtkWidget      *widget);
+static void     popup_about_cb                 (gpointer        callback_data,
+						guint           action,
+						GtkWidget      *widget);
+static gchar *  item_factory_trans_cb          (const gchar    *path,
+						gpointer        data);
+static void     init_tray_icon                 (DrWright       *dr);
+static GList *  create_secondary_break_windows (void);
+
 
 
 #define GIF_CB(x) ((GtkItemFactoryCallback)(x))
@@ -390,6 +392,13 @@ maybe_change_state (DrWright *dr)
 				  G_CALLBACK (break_window_postpone_cb),
 				  dr);
 
+		g_signal_connect (dr->break_window,
+				  "destroy",
+				  G_CALLBACK (break_window_destroy_cb),
+				  dr);
+
+		dr->secondary_break_windows = create_secondary_break_windows ();
+
 		gtk_widget_show (dr->break_window);
 
 		dr->state = STATE_BREAK;
@@ -525,27 +534,6 @@ gconf_notify_cb (GConfClient *client,
 	maybe_change_state (dr);
 }
 
-#if 0
-static void
-popup_enabled_cb (gpointer   callback_data,
-		  guint      action,
-		  GtkWidget *widget)
-{
-	DrWright  *dr = callback_data;
-	GtkWidget *item;
-	gboolean   enabled;
-
-	item = gtk_item_factory_get_widget_by_action (dr->popup_factory,
-						      POPUP_ITEM_ENABLED);
-
-	enabled = gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM (item));
-
-	gconf_client_set_bool (client, GCONF_PATH "/enabled",
-			       enabled,
-			       NULL);
-}
-#endif
-
 static void
 popup_break_cb (gpointer   callback_data,
 		guint      action,
@@ -564,10 +552,12 @@ popup_preferences_cb (gpointer   callback_data,
 		      guint      action,
 		      GtkWidget *widget)
 {
-	GError *error = NULL;
+	GdkScreen *screen;
+	GError    *error = NULL;
 
-	/* FIXME: Needs multi-head/screen support */
-	if (!g_spawn_command_line_async ("gnome-keyboard-properties --typing-break", &error)) {
+	screen = gtk_widget_get_screen (widget);
+
+	if (!egg_spawn_command_line_async_on_screen ("gnome-keyboard-properties --typing-break", screen, &error)) {
 		GtkWidget *error_dialog;
 
 		error_dialog = gtk_message_dialog_new (NULL, 0,
@@ -575,12 +565,12 @@ popup_preferences_cb (gpointer   callback_data,
 						       GTK_BUTTONS_CLOSE,
 						       _("Unable to bring up the typing break properties dialog with the following error: %s"),
 						       error->message);
-		g_signal_connect (G_OBJECT (error_dialog),
+		g_signal_connect (error_dialog,
 				  "response",
 				  G_CALLBACK (gtk_widget_destroy), NULL);
 		gtk_window_set_resizable (GTK_WINDOW (error_dialog), FALSE);
 		gtk_widget_show (error_dialog);
-
+		
 		g_error_free (error);
 	}
 }
@@ -753,6 +743,20 @@ break_window_postpone_cb (GtkWidget *window,
 	update_tooltip (dr);
 }
 
+static void
+break_window_destroy_cb (GtkWidget *window,
+			 DrWright  *dr)
+{
+	GList *l;
+
+	for (l = dr->secondary_break_windows; l; l = l->next) {
+		gtk_widget_destroy (l->data);
+	}
+	
+	g_list_free (dr->secondary_break_windows);
+	dr->secondary_break_windows = NULL;
+}
+
 static char *
 item_factory_trans_cb (const gchar *path,
 		       gpointer     data)
@@ -832,6 +836,46 @@ init_tray_icon (DrWright *dr)
 				"expose_event",
 				G_CALLBACK (icon_event_box_expose_event_cb),
 				dr);
+}
+
+static GList *
+create_secondary_break_windows (void)
+{
+	GdkDisplay *display;
+	GdkScreen  *screen;
+	GtkWidget  *window;
+	gint        i;
+	GList      *windows = NULL;
+
+	display = gdk_display_get_default ();
+	
+	for (i = 0; i < gdk_display_get_n_screens (display); i++) {
+		screen = gdk_display_get_screen (display, i);
+		
+		if (screen == gdk_screen_get_default ()) {
+			/* Handled by DrwBreakWindow. */
+			continue;
+		}
+		
+		window = gtk_window_new (GTK_WINDOW_POPUP);
+		
+		windows = g_list_prepend (windows, window);
+		
+		gtk_window_set_screen (GTK_WINDOW (window), screen);
+		
+		gtk_window_set_default_size (GTK_WINDOW (window),
+					     gdk_screen_get_width (screen),
+					     gdk_screen_get_height (screen));
+		
+		gtk_widget_set_app_paintable (GTK_WIDGET (window), TRUE);
+		gtk_widget_realize (GTK_WIDGET (window));
+		
+		drw_setup_background (GTK_WIDGET (window));
+		gtk_window_stick (GTK_WINDOW (window));
+		gtk_widget_show (window);
+	}
+	
+	return windows;
 }
 
 DrWright *

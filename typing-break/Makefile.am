@@ -13,10 +13,14 @@ gnome_typing_monitor_SOURCES =			\
 	drw-break-window.h			\
 	drw-monitor.c				\
 	drw-monitor.h				\
+	drw-utils.c				\
+	drw-utils.h				\
+	drw-selection.c				\
+	drw-selection.h				\
 	eggtrayicon.c				\
 	eggtrayicon.h				\
-	drw-selection.c				\
-	drw-selection.h
+	egg-spawn.c				\
+	egg-spawn.h
 
 gnome_typing_monitor_LDADD = @GNOME_LIBS@ -L/usr/X11R6/lib -lXss
 gnome_typing_monitor_LDFLAGS = -export-dynamic
