@@ -40,10 +40,7 @@
 	  <child>
 	    <widget class="GtkButton" id="closebutton1">
 	      <property name="visible">True</property>
-	      <property name="can_default">True</property>
-	      <property name="has_default">True</property>
 	      <property name="can_focus">True</property>
-	      <property name="has_focus">True</property>
 	      <property name="label">gtk-close</property>
 	      <property name="use_stock">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
@@ -644,7 +641,6 @@
 	  <child>
 	    <widget class="GtkButton" id="closebutton2">
 	      <property name="visible">True</property>
-	      <property name="can_default">True</property>
 	      <property name="can_focus">True</property>
 	      <property name="label">gtk-close</property>
 	      <property name="use_stock">True</property>
@@ -688,7 +684,6 @@
 		  <child>
 		    <widget class="GtkScrolledWindow" id="control_theme_swindow">
 		      <property name="visible">True</property>
-		      <property name="can_focus">True</property>
 		      <property name="hscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
 		      <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
 		      <property name="shadow_type">GTK_SHADOW_IN</property>
@@ -697,7 +692,10 @@
 		      <child>
 			<widget class="GtkTreeView" id="control_theme_treeview">
 			  <property name="visible">True</property>
+			  <property name="can_default">True</property>
+			  <property name="has_default">True</property>
 			  <property name="can_focus">True</property>
+			  <property name="has_focus">True</property>
 			  <property name="headers_visible">False</property>
 			  <property name="rules_hint">False</property>
 			  <property name="reorderable">False</property>
